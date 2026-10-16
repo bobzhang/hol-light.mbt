@@ -35062,12 +35062,12 @@ test "EC/misc matches EC/misc.ml" {
       #|0..0..2..6..19..39..solved at 51
       #|0..0..1..6..17..35..129..331..1214..4872..21242..solved at 21291
       #|EC/misc quotations (57):
-      #|  !x y:A. integral_domain r\n    ==> (ring_pow r x 2 = ring_pow r y 2 <=> x = y \\/ x = ring_neg r y)
+      #|  forall x y:A. integral_domain r\n    ==> (ring_pow r x 2 = ring_pow r y 2 <=> x = y \\/ x = ring_neg r y)
       #|  ~(n <= 2) <=> 3 <= n
       #|  p /\\ q <=> p /\\ ~(p ==> ~q)
       #|  x:A
       #|  UNIONS {{x,y | y | y IN ring_carrier r /\\ ring_pow r y 2 = h x} |x|\n            (x:A) IN ring_carrier r}
-      #|  !(r:A ring) h.\n        integral_domain r /\\ FINITE(ring_carrier r)\n        ==> FINITE {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_pow r y 2 = h x} /\\\n            CARD {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                        ring_pow r y 2 = h x}\n            <= 2 * CARD(ring_carrier r)
+      #|  forall(r:A ring) h.\n        integral_domain r /\\ FINITE(ring_carrier r)\n        ==> FINITE {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_pow r y 2 = h x} /\\\n            CARD {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                        ring_pow r y 2 = h x}\n            <= 2 * CARD(ring_carrier r)
       #|  ~
       #|  \\/
       #|  ~
@@ -35078,12 +35078,12 @@ test "EC/misc matches EC/misc.ml" {
       #|  F
       #|  ( * ):num->num->num
       #|  ~(ring_char r divides NUMERAL n)
-      #|  !(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ P
+      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ P
       #|  prime 3
-      #|  !(f:A ring) P.\n        field f /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 3) /\\ P
+      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 3) /\\ P
       #|  prime 3
-      #|  !(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ ~(ring_char f divides 3) /\\ P
-      #|  !G:A group.\n        FINITE(group_carrier G) /\\ EVEN(CARD(group_carrier G))\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = 2
+      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ ~(ring_char f divides 3) /\\ P
+      #|  forall G:A group.\n        FINITE(group_carrier G) /\\ EVEN(CARD(group_carrier G))\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = 2
       #|  ~p ==> p ==> q
       #|  CARD(group_carrier(G:A group)) < 3 * p
       #|  x:A
@@ -35094,14 +35094,14 @@ test "EC/misc matches EC/misc.ml" {
       #|  d:num
       #|  a:A
       #|  G:A group
-      #|  !G (a:A) p.\n      FINITE(group_carrier G) /\\ CARD(group_carrier G) < 3 * p /\\\n      (!x. x IN group_carrier G /\\ group_inv G x = x ==> x = group_id G) /\\\n      a IN group_carrier G /\\ group_element_order G a = p\n      ==> (group_carrier G) HAS_SIZE p
+      #|  forall G (a:A) p.\n      FINITE(group_carrier G) /\\ CARD(group_carrier G) < 3 * p /\\\n      (forall x. x IN group_carrier G /\\ group_inv G x = x ==> x = group_id G) /\\\n      a IN group_carrier G /\\ group_element_order G a = p\n      ==> (group_carrier G) HAS_SIZE p
       #|  (eq:A->A->bool) ((add:A->A->A) y z) x
       #|  (eq:A->A->bool) ((add:A->A->A) x y) z
       #|  (eq:A->A->bool) x z
       #|  (eq:A->A->bool) y z
       #|  (eq:A->A->bool) x y
-      #|  !P eq add.\n     (!x y. P x /\\ P y /\\ eq x y ==> eq y x) /\\\n     (!x y. P x /\\ P y ==> P(add x y)) /\\\n     (!x y. P x /\\ P y ==> add x y = add y x) /\\\n     (!x y z. P x /\\ P y /\\ P z /\\ (eq x y \\/ eq (add x y) z)\n              ==> add x (add y z) = add (add x y) z) /\\\n     (!x y z. P x /\\ P y /\\ P z /\\\n              ~(eq x y) /\\ ~(eq y z) /\\ ~(eq x z) /\\\n              ~(eq (add x y) z) /\\ ~(eq (add y z) x)\n              ==> add x (add y z) = add (add x y) z)\n     ==> !x y z:A. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
-      #|  !x y:A. P x /\\ P y ==> add y (add x x) = add (add y x) x
+      #|  forall P eq add.\n     (forall x y. P x /\\ P y /\\ eq x y ==> eq y x) /\\\n     (forall x y. P x /\\ P y ==> P(add x y)) /\\\n     (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\ (eq x y \\/ eq (add x y) z)\n              ==> add x (add y z) = add (add x y) z) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\\n              ~(eq x y) /\\ ~(eq y z) /\\ ~(eq x z) /\\\n              ~(eq (add x y) z) /\\ ~(eq (add y z) x)\n              ==> add x (add y z) = add (add x y) z)\n     ==> forall x y z:A. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
+      #|  forall x y:A. P x /\\ P y ==> add y (add x x) = add (add y x) x
       #|  add (add (neg x) (add x y)) (add x y):A
       #|  add (x:A) (add (neg x) (add (add x y) (add x y)))
       #|  (add:A->A->A) x (neg x)
@@ -35114,11 +35114,11 @@ test "EC/misc matches EC/misc.ml" {
       #|  x:A
       #|  \\x y. y:A = x \\/ y = neg x
       #|  p ==> q ==> r /\\ s ==> t <=> r ==> s ==> p /\\ q ==> t
-      #|  !P add neg (id:A).\n        P id /\\\n        (!x. P x ==> P(neg x)) /\\\n        (!x y. P x /\\ P y ==> P(add x y)) /\\\n        (!x. P x ==> add id x = x) /\\\n        (!x. P x ==> add (neg x) x = id) /\\\n        (!x y. P x /\\ P y ==> add x y = add y x) /\\\n        (!x. P x ==> neg(neg x) = x) /\\\n        (!x y. P x /\\ P y ==> neg(add x y) = add (neg x) (neg y)) /\\\n        (!x y. P x /\\ P y ==> add x (add x y) = add (add x x) y) /\\\n        (!x y. P x /\\ P y ==> add (neg x) (add x y) = y) /\\\n        (!x y z u v.\n            P x /\\ P y /\\ P z /\\ P u /\\ P v\n            ==> ~(x = id) /\\ ~(y = id) /\\ ~(z = id) /\\\n                ~(u = id) /\\ ~(v = id) /\\\n                ~(y = x \\/ y = neg x) /\\\n                ~(z = y \\/ z = neg y) /\\\n                ~(z = x \\/ z = neg x) /\\\n                ~(z = u \\/ z = neg u) /\\\n                ~(x = v \\/ x = neg v)\n                ==> add x y = u /\\ add y z = v\n                    ==> add x v = add u z)\n     ==> !x y z. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
+      #|  forall P add neg (id:A).\n        P id /\\\n        (forall x. P x ==> P(neg x)) /\\\n        (forall x y. P x /\\ P y ==> P(add x y)) /\\\n        (forall x. P x ==> add id x = x) /\\\n        (forall x. P x ==> add (neg x) x = id) /\\\n        (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n        (forall x. P x ==> neg(neg x) = x) /\\\n        (forall x y. P x /\\ P y ==> neg(add x y) = add (neg x) (neg y)) /\\\n        (forall x y. P x /\\ P y ==> add x (add x y) = add (add x x) y) /\\\n        (forall x y. P x /\\ P y ==> add (neg x) (add x y) = y) /\\\n        (forall x y z u v.\n            P x /\\ P y /\\ P z /\\ P u /\\ P v\n            ==> ~(x = id) /\\ ~(y = id) /\\ ~(z = id) /\\\n                ~(u = id) /\\ ~(v = id) /\\\n                ~(y = x \\/ y = neg x) /\\\n                ~(z = y \\/ z = neg y) /\\\n                ~(z = x \\/ z = neg x) /\\\n                ~(z = u \\/ z = neg u) /\\\n                ~(x = v \\/ x = neg v)\n                ==> add x y = u /\\ add y z = v\n                    ==> add x v = add u z)\n     ==> forall x y z. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
       #|  abs b:int
       #|  b:int
       #|  n = 0
-      #|  !n a k. (?b. b IN ring_carrier (integer_mod_ring n) /\\\n                ring_pow (integer_mod_ring n) b k = &a) <=>\n           (n = 0 \\/ a < n) /\\\n           (?b. (b EXP k == a) (mod n))
+      #|  forall n a k. (?b. b IN ring_carrier (integer_mod_ring n) /\\\n                ring_pow (integer_mod_ring n) b k = &a) <=>\n           (n = 0 \\/ a < n) /\\\n           (?b. (b EXP k == a) (mod n))
       #|FINITE_QUADRATIC_CURVE =  |- (#!:fun(fun(ring('A),bool),bool) (\r:ring('A). (#!:fun(fun(fun('A,'A),bool),bool) (\h:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#integral_domain:fun(ring('A),bool) r:ring('A))) (#FINITE:fun(fun('A,bool),bool) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A))))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun(prod('A,'A),bool),bool) (#GSPEC:fun(fun(prod('A,'A),bool),fun(prod('A,'A),bool)) (\GEN%PVAR%1745:prod('A,'A). (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. (((#SETSPEC:fun(prod('A,'A),fun(bool,fun(prod('A,'A),bool))) GEN%PVAR%1745:prod('A,'A)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (h:fun('A,'A) x:'A))))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))))))))) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(prod('A,'A),bool),num) (#GSPEC:fun(fun(prod('A,'A),bool),fun(prod('A,'A),bool)) (\GEN%PVAR%1746:prod('A,'A). (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. (((#SETSPEC:fun(prod('A,'A),fun(bool,fun(prod('A,'A),bool))) GEN%PVAR%1746:prod('A,'A)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (h:fun('A,'A) x:'A))))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))))))))) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#CARD:fun(fun('A,bool),num) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))))))))))
       #|FIELD_CHAR_NOT2 =  |- (#!:fun(fun(ring('A),bool),bool) (\f:ring('A). (#!:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool))) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool)))))))
       #|FIELD_CHAR_NOT3 =  |- (#!:fun(fun(ring('A),bool),bool) (\f:ring('A). (#!:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool))) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool)))))))

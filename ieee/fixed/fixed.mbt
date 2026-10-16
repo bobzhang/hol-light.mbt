@@ -201,7 +201,7 @@ pub fn is_lb() -> @kernel.Thm {
 ///|
 /// is_glb
 fn step_14() -> Unit raise {
-  is_glb_c.set(@define.define_(@parser.parse_term("is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (!y'. is_lb(fmt) x y' ==> y' <= y))")))
+  is_glb_c.set(@define.define_(@parser.parse_term("is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (forall y'. is_lb(fmt) x y' ==> y' <= y))")))
 }
 
 ///|
@@ -231,7 +231,7 @@ pub fn is_ub() -> @kernel.Thm {
 ///|
 /// is_lub
 fn step_16() -> Unit raise {
-  is_lub_c.set(@define.define_(@parser.parse_term("is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (!y'. is_ub(fmt) x y' ==> y <= y'))")))
+  is_lub_c.set(@define.define_(@parser.parse_term("is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (forall y'. is_ub(fmt) x y' ==> y <= y'))")))
 }
 
 ///|

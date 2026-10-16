@@ -8685,35 +8685,35 @@ test "Library/matroids matches Library/matroids.ml" {
       #|0..0..1..4..8..19..39..68..127..208..306..579..965..1487..solved at 1890
       #|Library/matroids quotations (416):
       #|  ({}:A->bool,(\\x:A->bool. x))
-      #|  ?m. (!s:A->bool. s SUBSET FST m ==> SND m s SUBSET FST m) /\\\n         (!s:A->bool. s SUBSET FST m ==> s SUBSET SND m s) /\\\n         (!s t. s SUBSET t /\\ t SUBSET FST m ==> SND m s SUBSET SND m t) /\\\n         (!s. s SUBSET FST m ==> SND m (SND m s) = SND m s) /\\\n         (!s x. s SUBSET FST m /\\ x IN SND m s\n                ==> ?s'. FINITE s' /\\ s' SUBSET s /\\ x IN SND m (s')) /\\\n         (!s x y. s SUBSET FST m /\\ x IN FST m /\\\n                  y IN SND m (x INSERT s) /\\ ~(y IN SND m s)\n                  ==> x IN SND m (y INSERT s))
+      #|  ?m. (forall s:A->bool. s SUBSET FST m ==> SND m s SUBSET FST m) /\\\n         (forall s:A->bool. s SUBSET FST m ==> s SUBSET SND m s) /\\\n         (forall s t. s SUBSET t /\\ t SUBSET FST m ==> SND m s SUBSET SND m t) /\\\n         (forall s. s SUBSET FST m ==> SND m (SND m s) = SND m s) /\\\n         (forall s x. s SUBSET FST m /\\ x IN SND m s\n                ==> ?s'. FINITE s' /\\ s' SUBSET s /\\ x IN SND m (s')) /\\\n         (forall s x y. s SUBSET FST m /\\ x IN FST m /\\\n                  y IN SND m (x INSERT s) /\\ ~(y IN SND m s)\n                  ==> x IN SND m (y INSERT s))
       #|  matroid_set:A matroid->A->bool = \\m. FST(dest_matroid m)
       #|  matroid_span = \\m:A matroid. SND(dest_matroid m)
       #|  dest_matroid(m:A matroid)
       #|  m:A matroid
-      #|  !(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN s ==> x IN matroid_span m s
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s SUBSET matroid_span m t <=>\n             s SUBSET matroid_span m t)
-      #|  !(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> matroid_span m s SUBSET matroid_span m t
-      #|  !(m:A matroid). matroid_span m (matroid_set m) = matroid_set m
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             s SUBSET matroid_span m t /\\ t SUBSET matroid_span m s)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_set m <=>\n             matroid_set m SUBSET matroid_span m s)
-      #|  !(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             t SUBSET matroid_span m s)
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s INTER t) SUBSET\n            matroid_span m s INTER matroid_span m t
+      #|  forall(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN s ==> x IN matroid_span m s
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s SUBSET matroid_span m t <=>\n             s SUBSET matroid_span m t)
+      #|  forall(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> matroid_span m s SUBSET matroid_span m t
+      #|  forall(m:A matroid). matroid_span m (matroid_set m) = matroid_set m
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             s SUBSET matroid_span m t /\\ t SUBSET matroid_span m s)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_set m <=>\n             matroid_set m SUBSET matroid_span m s)
+      #|  forall(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             t SUBSET matroid_span m s)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s INTER t) SUBSET\n            matroid_span m s INTER matroid_span m t
       #|  s SUBSET s' /\\ t SUBSET t' ==> s UNION t SUBSET s' UNION t'
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION matroid_span m t)
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION t)
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (s UNION matroid_span m t)
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m s UNION matroid_span m t SUBSET\n            matroid_span m (s UNION t)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION matroid_span m t)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION t)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (s UNION matroid_span m t)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m s UNION matroid_span m t SUBSET\n            matroid_span m (s UNION t)
       #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  !(m:A matroid) a b s.\n        s SUBSET matroid_set m /\\\n        b IN matroid_set m /\\\n        a IN matroid_span m s /\\\n        ~(a IN matroid_span m (s DELETE b))\n        ==> b IN matroid_span m (a INSERT (s DELETE b))
+      #|  forall(m:A matroid) a b s.\n        s SUBSET matroid_set m /\\\n        b IN matroid_set m /\\\n        a IN matroid_span m s /\\\n        ~(a IN matroid_span m (s DELETE b))\n        ==> b IN matroid_span m (a INSERT (s DELETE b))
       #|  s UNION t:A->bool
       #|  t:A->bool
       #|  m:A matroid
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m (s UNION t) = matroid_span m t <=>\n             s SUBSET matroid_span m t)
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m (s UNION t) = matroid_span m t <=>\n             s SUBSET matroid_span m t)
       #|  x INSERT s = {x} UNION s
-      #|  !(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN matroid_set m\n        ==> (matroid_span m (x INSERT s) = matroid_span m s <=>\n             x IN matroid_span m s)
+      #|  forall(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN matroid_set m\n        ==> (matroid_span m (x INSERT s) = matroid_span m s <=>\n             x IN matroid_span m s)
       #|  x IN s ==> (s SUBSET t <=> x IN t /\\ s DELETE x SUBSET t)
-      #|  !(m:A matroid) s x.\n        x IN s /\\ s SUBSET matroid_set m\n        ==> (matroid_span m (s DELETE x) = matroid_span m s <=>\n             x IN matroid_span m (s DELETE x))
-      #|  !(m:A matroid) x y s.\n        s SUBSET matroid_set m /\\\n        x IN matroid_span m s /\\\n        y IN matroid_span m (x INSERT s)\n        ==> y IN matroid_span m s
+      #|  forall(m:A matroid) s x.\n        x IN s /\\ s SUBSET matroid_set m\n        ==> (matroid_span m (s DELETE x) = matroid_span m s <=>\n             x IN matroid_span m (s DELETE x))
+      #|  forall(m:A matroid) x y s.\n        s SUBSET matroid_set m /\\\n        x IN matroid_span m s /\\\n        y IN matroid_span m (x INSERT s)\n        ==> y IN matroid_span m s
       #|  x IN s ==> s SUBSET t ==> x IN t
       #|  t UNION u:A->bool
       #|  u:A->bool
@@ -8723,32 +8723,32 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  t:A->bool
       #|  k:A->bool
       #|  x:A
-      #|  !(m:A matroid) s k.\n        s SUBSET matroid_set m /\\\n        FINITE k /\\ k SUBSET matroid_span m s\n        ==> exists s'. FINITE s' /\\ s' SUBSET s /\\ k SUBSET matroid_span m s'
+      #|  forall(m:A matroid) s k.\n        s SUBSET matroid_set m /\\\n        FINITE k /\\ k SUBSET matroid_span m s\n        ==> exists s'. FINITE s' /\\ s' SUBSET s /\\ k SUBSET matroid_span m s'
       #|  \\s. s SUBSET u /\\ (x:A) IN matroid_span m s
       #|  u:A->bool
       #|  x:A
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s x.\n         s SUBSET matroid_set m /\\\n         x IN matroid_span m s\n         ==> ?t. FINITE t /\\ t SUBSET s /\\ x IN matroid_span m t /\\\n                 !t'. t' PSUBSET t ==> ~(x IN matroid_span m t')
+      #|  forall(m:A matroid) s x.\n         s SUBSET matroid_set m /\\\n         x IN matroid_span m s\n         ==> ?t. FINITE t /\\ t SUBSET s /\\ x IN matroid_span m t /\\\n                 forall t'. t' PSUBSET t ==> ~(x IN matroid_span m t')
       #|  matroid_spanning (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s = matroid_set m
-      #|  matroid_independent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        !x. x IN s ==> ~(x IN matroid_span m (s DELETE x))
+      #|  matroid_independent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        forall x. x IN s ==> ~(x IN matroid_span m (s DELETE x))
       #|  matroid_basis (m:A matroid) s <=>\n        matroid_spanning m s /\\ matroid_independent m s
       #|  matroid_dependent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\ ~matroid_independent m s
-      #|  !(m:A matroid) s. matroid_spanning m s ==> s SUBSET matroid_set m
-      #|  !(m:A matroid) s. matroid_independent m s ==> s SUBSET matroid_set m
-      #|  !(m:A matroid) s. matroid_dependent m s ==> s SUBSET matroid_set m
-      #|  !(m:A matroid) s. matroid_basis m s ==> s SUBSET matroid_set m
-      #|  !(m:A matroid) s.\n        matroid_spanning m s <=>\n        s SUBSET matroid_set m /\\\n        matroid_set m SUBSET matroid_span m s
-      #|  !(m:A matroid).\n        matroid_spanning m (matroid_set m)
-      #|  !(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\ ~matroid_dependent m s
-      #|  !(m:A matroid) s.\n        matroid_dependent m s <=>\n        s SUBSET matroid_set m /\\\n        ?x. x IN s /\\ x IN matroid_span m (s DELETE x)
-      #|  !m:A matroid. matroid_independent m {}
+      #|  forall(m:A matroid) s. matroid_spanning m s ==> s SUBSET matroid_set m
+      #|  forall(m:A matroid) s. matroid_independent m s ==> s SUBSET matroid_set m
+      #|  forall(m:A matroid) s. matroid_dependent m s ==> s SUBSET matroid_set m
+      #|  forall(m:A matroid) s. matroid_basis m s ==> s SUBSET matroid_set m
+      #|  forall(m:A matroid) s.\n        matroid_spanning m s <=>\n        s SUBSET matroid_set m /\\\n        matroid_set m SUBSET matroid_span m s
+      #|  forall(m:A matroid).\n        matroid_spanning m (matroid_set m)
+      #|  forall(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\ ~matroid_dependent m s
+      #|  forall(m:A matroid) s.\n        matroid_dependent m s <=>\n        s SUBSET matroid_set m /\\\n        ?x. x IN s /\\ x IN matroid_span m (s DELETE x)
+      #|  forall m:A matroid. matroid_independent m {}
       #|  t DELETE (x:A)
       #|  s DELETE (x:A)
       #|  m:A matroid
       #|  x:A
       #|  x:A
-      #|  !(m:A matroid) s t.\n        matroid_independent m t /\\ s SUBSET t ==> matroid_independent m s
+      #|  forall(m:A matroid) s t.\n        matroid_independent m t /\\ s SUBSET t ==> matroid_independent m s
       #|  x:A
       #|  (x:A) INSERT t
       #|  t:A->bool
@@ -8756,8 +8756,8 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  s DELETE (x:A)
       #|  m:A matroid
       #|  x:A
-      #|  !(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\\n        !t. FINITE t /\\ t SUBSET s ==> matroid_independent m t
-      #|  !(m:A matroid) s.\n         matroid_dependent m s <=>\n         s SUBSET matroid_set m /\\\n         ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t
+      #|  forall(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\\n        forall t. FINITE t /\\ t SUBSET s ==> matroid_independent m t
+      #|  forall(m:A matroid) s.\n         matroid_dependent m s <=>\n         s SUBSET matroid_set m /\\\n         ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t
       #|  b IN s ==> b INSERT (s DELETE b) = s
       #|  b:A
       #|  a:A
@@ -8768,56 +8768,56 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  b:A = a
       #|  s SUBSET t ==> a IN s ==> a IN t
       #|  b:A
-      #|  (!x. p x ==> (q x <=> r x))\n    ==> ((!x. p x ==> ~q x) <=> (!x. p x ==> ~r x))
+      #|  (forall x. p x ==> (q x <=> r x))\n    ==> ((forall x. p x ==> ~q x) <=> (forall x. p x ==> ~r x))
       #|  (~p /\\ q <=> q' /\\ ~p) <=> ~p ==> (q <=> q')
       #|  ~(a IN s) ==> (a INSERT s) DELETE a = s
       #|  (s:A->bool) SUBSET matroid_set m
       #|  (a:A) IN matroid_set m
       #|  a IN s ==> a INSERT s = s
-      #|  !(m:A matroid) s a.\n        matroid_independent m (a INSERT s) <=>\n        if a IN s then matroid_independent m s\n        else a IN matroid_set m /\\\n             matroid_independent m s /\\\n             ~(a IN matroid_span m s)
+      #|  forall(m:A matroid) s a.\n        matroid_independent m (a INSERT s) <=>\n        if a IN s then matroid_independent m s\n        else a IN matroid_set m /\\\n             matroid_independent m s /\\\n             ~(a IN matroid_span m s)
       #|  t DELETE (x:A)
       #|  s:A->bool
       #|  m:A matroid
       #|  (x:A)
       #|  x:A
       #|  x:A
-      #|  !(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> matroid_span m s PSUBSET matroid_span m t
+      #|  forall(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> matroid_span m s PSUBSET matroid_span m t
       #|  s:A->bool
       #|  t:A->bool
       #|  m:A matroid
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> ?a. a IN t /\\ ~(a IN matroid_span m s)
+      #|  forall(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> ?a. a IN t /\\ ~(a IN matroid_span m s)
       #|  s DELETE (a:A)
       #|  t:A->bool
       #|  m:A matroid
       #|  a:A
       #|  a:A
-      #|  !(m:A matroid) s t.\n        t SUBSET s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s = t
+      #|  forall(m:A matroid) s t.\n        t SUBSET s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s = t
       #|  s SUBSET t ==> ~(t PSUBSET s)
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s t.\n        ~(s PSUBSET t /\\ matroid_spanning m s /\\ matroid_independent m t)
+      #|  forall(m:A matroid) s t.\n        ~(s PSUBSET t /\\ matroid_spanning m s /\\ matroid_independent m t)
       #|  s PSUBSET x INSERT s <=> ~(x IN s)
       #|  (x:A) INSERT s
       #|  x:A
-      #|  !(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\\n        (!s'. s PSUBSET s' /\\ s' SUBSET t ==> ~matroid_independent m s')\n        ==> matroid_span m s = matroid_span m t
-      #|  !(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_independent m s /\\\n        !s'. s PSUBSET s' ==> ~matroid_independent m s'
+      #|  forall(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\\n        (forall s'. s PSUBSET s' /\\ s' SUBSET t ==> ~matroid_independent m s')\n        ==> matroid_span m s = matroid_span m t
+      #|  forall(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_independent m s /\\\n        forall s'. s PSUBSET s' ==> ~matroid_independent m s'
       #|  s DELETE (x:A)
       #|  x:A
-      #|  !(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_spanning m s /\\\n        !s'. s' PSUBSET s ==> ~matroid_spanning m s'
+      #|  forall(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_spanning m s /\\\n        forall s'. s' PSUBSET s ==> ~matroid_spanning m s'
       #|  s:A->bool
       #|  c:(A->bool)->bool
       #|  s:A->bool
       #|  c:(A->bool)->bool = {}
-      #|  !(m:A matroid) c.\n        (!s. s IN c ==> matroid_independent m s) /\\\n        (!s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_independent m (UNIONS c)
+      #|  forall(m:A matroid) c.\n        (forall s. s IN c ==> matroid_independent m s) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_independent m (UNIONS c)
       #|  t:A->bool
       #|  c:(A->bool)->bool
       #|  t:A->bool
       #|  a:A
-      #|  !(m:A matroid) c.\n        ~(c = {}) /\\\n        (!s. s IN c ==> s SUBSET matroid_set m) /\\\n        (!s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_span m (UNIONS c) = UNIONS {matroid_span m s | s IN c}
+      #|  forall(m:A matroid) c.\n        ~(c = {}) /\\\n        (forall s. s IN c ==> s SUBSET matroid_set m) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_span m (UNIONS c) = UNIONS {matroid_span m s | s IN c}
       #|  (x:A) INSERT b
       #|  x:A
       #|  s UNION t:A->bool
@@ -8825,27 +8825,27 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  c:(A->bool)->bool
       #|  s:A->bool
       #|  \\u:A->bool. s SUBSET u /\\ u SUBSET (s UNION t) /\\\n                            matroid_independent m u
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m t
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m t
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\ matroid_basis m b
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\ matroid_basis m b
       #|  matroid_set m:A->bool
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s.\n        matroid_independent m s ==> ?b. s SUBSET b /\\ matroid_basis m b
-      #|  !(m:A matroid). ?b. matroid_basis m b
+      #|  forall(m:A matroid) s.\n        matroid_independent m s ==> ?b. s SUBSET b /\\ matroid_basis m b
+      #|  forall(m:A matroid). ?b. matroid_basis m b
       #|  s:A->bool
       #|  {}:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s.\n        matroid_spanning m s ==> ?b. b SUBSET s /\\ matroid_basis m b
+      #|  forall(m:A matroid) s.\n        matroid_spanning m s ==> ?b. b SUBSET s /\\ matroid_basis m b
       #|  s:A->bool
       #|  {}:A->bool
       #|  m:A matroid
       #|  (x:A) IN s
       #|  ~(if p then T else ~x) <=> ~p /\\ x
       #|  p /\\ q /\\ r <=> ~(q ==> ~(p /\\ r))
-      #|  !(m:A matroid) s x.\n        x IN matroid_set m /\\ s SUBSET matroid_set m\n        ==> (x IN matroid_span m s <=>\n             x IN s \\/\n             ?t. t SUBSET s /\\\n                 matroid_independent m t /\\\n                 matroid_dependent m (x INSERT t))
+      #|  forall(m:A matroid) s x.\n        x IN matroid_set m /\\ s SUBSET matroid_set m\n        ==> (x IN matroid_span m s <=>\n             x IN s \\/\n             ?t. t SUBSET s /\\\n                 matroid_independent m t /\\\n                 matroid_dependent m (x INSERT t))
       #|  y IN v ==> y INSERT (v DELETE y) = v
       #|  matroid_span m ((x:A) INSERT (v DELETE y))
       #|  {y:A} UNION (t DIFF (y INSERT u) UNION (x INSERT s))
@@ -8864,7 +8864,7 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  s:A->bool
       #|  x:A
       #|  {}:A->bool
-      #|  !(m:A matroid) s t.\n      t SUBSET matroid_set m /\\\n      FINITE s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n      ==> ?t'. t' SUBSET t /\\ t' HAS_SIZE (CARD s) /\\\n               matroid_span m ((t DIFF t') UNION s) = matroid_span m t
+      #|  forall(m:A matroid) s t.\n      t SUBSET matroid_set m /\\\n      FINITE s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n      ==> ?t'. t' SUBSET t /\\ t' HAS_SIZE (CARD s) /\\\n               matroid_span m ((t DIFF t') UNION s) = matroid_span m t
       #|  m <= n ==> ~(n + 1 = m)
       #|  t:A->bool
       #|  u:A->bool
@@ -8872,11 +8872,11 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  u:A->bool
       #|  ~(a <= b) <=> b + 1 <= a
       #|  p /\\ q <=> ~(p ==> ~q)
-      #|  !(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> FINITE s /\\ CARD s <= CARD t
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (FINITE s <=> FINITE t)
-      #|  !(m:A matroid) s t n.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)
-      #|  !(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> (FINITE s <=> FINITE t)
-      #|  !(m:A matroid) s t n.\n        matroid_basis m s /\\ matroid_basis m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)
+      #|  forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> FINITE s /\\ CARD s <= CARD t
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (FINITE s <=> FINITE t)
+      #|  forall(m:A matroid) s t n.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)
+      #|  forall(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> (FINITE s <=> FINITE t)
+      #|  forall(m:A matroid) s t n.\n        matroid_basis m s /\\ matroid_basis m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)
       #|  x IN t ==> t SUBSET s ==> x IN s
       #|  x:A
       #|  x:A
@@ -8885,26 +8885,26 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  UNIONS {(k:A->A->bool) x | x IN t}
       #|  m:A matroid
       #|  k:A->A->bool
-      #|  !x:A. x IN t\n            ==> ?k. FINITE k /\\ k SUBSET s /\\ x IN matroid_span m k
-      #|  !(m:A matroid) s t.\n          matroid_independent m s /\\\n          INFINITE t /\\ t SUBSET matroid_set m /\\\n          matroid_span m t = matroid_span m s\n          ==> s <=_c t
+      #|  forall x:A. x IN t\n            ==> ?k. FINITE k /\\ k SUBSET s /\\ x IN matroid_span m k
+      #|  forall(m:A matroid) s t.\n          matroid_independent m s /\\\n          INFINITE t /\\ t SUBSET matroid_set m /\\\n          matroid_span m t = matroid_span m s\n          ==> s <=_c t
       #|  b:A->bool
       #|  b:A->bool
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
       #|  FINITE(t:A->bool)
-      #|  !(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s <=_c t
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> s <=_c t
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> s =_c t
-      #|  !(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> s =_c t
-      #|  !(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t /\\ FINITE t\n        ==> FINITE s
+      #|  forall(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s <=_c t
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> s <=_c t
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> s =_c t
+      #|  forall(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> s =_c t
+      #|  forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t /\\ FINITE t\n        ==> FINITE s
       #|  v:A->bool
       #|  v:A->bool
       #|  \\s:A->bool. s SUBSET u /\\ matroid_dependent m s
       #|  u:A->bool
       #|  s:A->bool
       #|  m:A matroid
-      #|  !(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t /\\\n                forall t'. t' PSUBSET t ==> matroid_independent m t'
+      #|  forall(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t /\\\n                forall t'. t' PSUBSET t ==> matroid_independent m t'
       #|  s DELETE a DELETE b = s DIFF {a,b}
       #|  a IN s /\\ b IN s /\\ ~(a = b)\n    ==> a INSERT (s DIFF {a, b}) = s DELETE b /\\\n        b INSERT  (s DIFF {a, b}) = s DELETE a
       #|  b:A
@@ -8919,38 +8919,38 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  b:A
       #|  s:A->bool = {}
       #|  (s:A->bool) SUBSET matroid_set m
-      #|  !(m:A matroid) s.\n        (!t. t PSUBSET s ==> matroid_independent m t)\n        ==> (matroid_dependent m s <=>\n             ~(s = {}) /\\ s SUBSET matroid_set m /\\\n             !a. a IN s ==> a IN matroid_span m (s DELETE a))
-      #|  !(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\\n                matroid_dependent m t /\\ ~(t = {}) /\\\n                !a. a IN t ==> a IN matroid_span m (t DELETE a)
+      #|  forall(m:A matroid) s.\n        (forall t. t PSUBSET s ==> matroid_independent m t)\n        ==> (matroid_dependent m s <=>\n             ~(s = {}) /\\ s SUBSET matroid_set m /\\\n             forall a. a IN s ==> a IN matroid_span m (s DELETE a))
+      #|  forall(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\\n                matroid_dependent m t /\\ ~(t = {}) /\\\n                forall a. a IN t ==> a IN matroid_span m (t DELETE a)
       #|  matroid_subspace (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s = s
-      #|  !(m:A matroid) s. matroid_subspace m s ==> s SUBSET matroid_set m
-      #|  !m:A matroid. matroid_subspace m (matroid_set m)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_subspace m (matroid_span m s)
-      #|  !(m:A matroid) s.\n        matroid_subspace m s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s SUBSET s
+      #|  forall(m:A matroid) s. matroid_subspace m s ==> s SUBSET matroid_set m
+      #|  forall m:A matroid. matroid_subspace m (matroid_set m)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_subspace m (matroid_span m s)
+      #|  forall(m:A matroid) s.\n        matroid_subspace m s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s SUBSET s
       #|  s:A->bool
       #|  s:A->bool
-      #|  !(m:A matroid) f.\n        ~(f = {}) /\\ (!s. s IN f ==> matroid_subspace m s)\n        ==> matroid_subspace m (INTERS f)
-      #|  !(m:A matroid) s t.\n        matroid_subspace m s /\\ matroid_subspace m t\n        ==> matroid_subspace m (s INTER t)
-      #|  !(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (matroid_span m s INTER matroid_span m t) =\n            matroid_span m s INTER matroid_span m t
-      #|  !(m:A matroid) c.\n        ~(c = {}) /\\\n        (!s. s IN c ==> matroid_subspace m s) /\\\n        (!s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_subspace m (UNIONS c)
-      #|  !(m:A matroid) s b.\n        b SUBSET s /\\ s SUBSET matroid_span m b /\\ matroid_subspace m s\n        ==> matroid_span m b = s
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = s <=> matroid_subspace m s)
-      #|  !(m:A matroid) s.\n        matroid_subspace m s ==> matroid_span m s = s
-      #|  !(m:A matroid) s t.\n        s SUBSET t /\\ matroid_subspace m t ==> matroid_span m s SUBSET t
+      #|  forall(m:A matroid) f.\n        ~(f = {}) /\\ (forall s. s IN f ==> matroid_subspace m s)\n        ==> matroid_subspace m (INTERS f)
+      #|  forall(m:A matroid) s t.\n        matroid_subspace m s /\\ matroid_subspace m t\n        ==> matroid_subspace m (s INTER t)
+      #|  forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (matroid_span m s INTER matroid_span m t) =\n            matroid_span m s INTER matroid_span m t
+      #|  forall(m:A matroid) c.\n        ~(c = {}) /\\\n        (forall s. s IN c ==> matroid_subspace m s) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_subspace m (UNIONS c)
+      #|  forall(m:A matroid) s b.\n        b SUBSET s /\\ s SUBSET matroid_span m b /\\ matroid_subspace m s\n        ==> matroid_span m b = s
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = s <=> matroid_subspace m s)
+      #|  forall(m:A matroid) s.\n        matroid_subspace m s ==> matroid_span m s = s
+      #|  forall(m:A matroid) s t.\n        s SUBSET t /\\ matroid_subspace m t ==> matroid_span m s SUBSET t
       #|  submatroid (m:A matroid) s =\n        matroid(matroid_span m (matroid_set m INTER s),matroid_span m)
       #|  matroid_set m INTER s:A->bool
       #|  m:A matroid
-      #|  (!m s:A->bool. matroid_set (submatroid m s) =\n                  matroid_span m (matroid_set m INTER s)) /\\\n   (!m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
+      #|  (forall m s:A->bool. matroid_set (submatroid m s) =\n                  matroid_span m (matroid_set m INTER s)) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
       #|  s SUBSET u ==> u INTER s = s
-      #|  (!m s:A->bool.\n        matroid_subspace m s ==> matroid_set (submatroid m s) = s) /\\\n   (!m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
+      #|  (forall m s:A->bool.\n        matroid_subspace m s ==> matroid_set (submatroid m s) = s) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
       #|  t SUBSET s ==> s INTER t = t
-      #|  !m s:A->bool.\n        s SUBSET matroid_set m\n        ==> submatroid m (matroid_span m s) = submatroid m s
-      #|  (!m s:A->bool.\n        s SUBSET matroid_set m\n        ==> matroid_set (submatroid m s) = matroid_span m s) /\\\n   (!m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
-      #|  !m:A matroid. submatroid m (matroid_set m) = m
-      #|  !(m:A matroid) s b.\n        s SUBSET matroid_set m\n        ==> (matroid_independent (submatroid m s) b <=>\n             b SUBSET matroid_span m s /\\ matroid_independent m b)
-      #|  !(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_spanning (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\ matroid_span m b = matroid_span m s)
-      #|  !(m:A matroid) s.\n       s SUBSET matroid_set m ==> matroid_spanning (submatroid m s) s
-      #|  !(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_basis (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> ?b. b SUBSET s /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m s
+      #|  forall m s:A->bool.\n        s SUBSET matroid_set m\n        ==> submatroid m (matroid_span m s) = submatroid m s
+      #|  (forall m s:A->bool.\n        s SUBSET matroid_set m\n        ==> matroid_set (submatroid m s) = matroid_span m s) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)
+      #|  forall m:A matroid. submatroid m (matroid_set m) = m
+      #|  forall(m:A matroid) s b.\n        s SUBSET matroid_set m\n        ==> (matroid_independent (submatroid m s) b <=>\n             b SUBSET matroid_span m s /\\ matroid_independent m b)
+      #|  forall(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_spanning (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\ matroid_span m b = matroid_span m s)
+      #|  forall(m:A matroid) s.\n       s SUBSET matroid_set m ==> matroid_spanning (submatroid m s) s
+      #|  forall(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_basis (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> ?b. b SUBSET s /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m s
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
@@ -8962,27 +8962,27 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  t:A->bool
       #|  s:A->bool
       #|  submatroid m (t:A->bool)
-      #|  !(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' HAS_SIZE (CARD t) /\\\n                 s SUBSET t' /\\\n                 t' SUBSET (s UNION t) /\\\n                 matroid_span m t' = matroid_span m t
+      #|  forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' HAS_SIZE (CARD t) /\\\n                 s SUBSET t' /\\\n                 t' SUBSET (s UNION t) /\\\n                 matroid_span m t' = matroid_span m t
       #|  t DIFF u:A->bool
       #|  u:A->bool
       #|  t:A->bool
       #|  s:A->bool
       #|  m:(A)matroid
-      #|  !(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' SUBSET t /\\ CARD(t') + CARD s = CARD t /\\\n                 matroid_span m (s UNION t') = matroid_span m t
+      #|  forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' SUBSET t /\\ CARD(t') + CARD s = CARD t /\\\n                 matroid_span m (s UNION t') = matroid_span m t
       #|  matroid_finite_dimensional (m:A matroid) <=>\n        ?b. FINITE b /\\ matroid_spanning m b
-      #|  matroid_dimension (m:A matroid) =\n        @n. !b. matroid_basis m b ==> b HAS_SIZE n
+      #|  matroid_dimension (m:A matroid) =\n        @n. forall b. matroid_basis m b ==> b HAS_SIZE n
       #|  matroid_finite_dim (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        matroid_finite_dimensional(submatroid m s)
       #|  matroid_dim (m:A matroid) s = matroid_dimension(submatroid m s)
-      #|  !(m:A matroid) s. matroid_finite_dim m s ==> s SUBSET matroid_set m
-      #|  !(m:A matroid).\n    matroid_finite_dim m (matroid_set m) = matroid_finite_dimensional m
-      #|  !(m:A matroid).\n      matroid_dim m (matroid_set m) = matroid_dimension m
-      #|  !(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\ matroid_finite_dim m (matroid_span m s)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_finite_dim m (matroid_span m s) <=>\n             matroid_finite_dim m s)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_dim m (matroid_span m s) = matroid_dim m s
-      #|  !(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\\n            b SUBSET matroid_set m /\\\n            matroid_set m SUBSET matroid_span m b
-      #|  !(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\ matroid_basis m b
-      #|  !(m:A matroid) s.\n        matroid_finite_dimensional m /\\ matroid_spanning m s\n        ==> ?b. FINITE b /\\ b SUBSET s /\\ matroid_basis m b
-      #|  !(m:A matroid) b.\n        matroid_basis m b\n        ==> (matroid_finite_dimensional (m:A matroid) <=> FINITE b)
+      #|  forall(m:A matroid) s. matroid_finite_dim m s ==> s SUBSET matroid_set m
+      #|  forall(m:A matroid).\n    matroid_finite_dim m (matroid_set m) = matroid_finite_dimensional m
+      #|  forall(m:A matroid).\n      matroid_dim m (matroid_set m) = matroid_dimension m
+      #|  forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\ matroid_finite_dim m (matroid_span m s)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_finite_dim m (matroid_span m s) <=>\n             matroid_finite_dim m s)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_dim m (matroid_span m s) = matroid_dim m s
+      #|  forall(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\\n            b SUBSET matroid_set m /\\\n            matroid_set m SUBSET matroid_span m b
+      #|  forall(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\ matroid_basis m b
+      #|  forall(m:A matroid) s.\n        matroid_finite_dimensional m /\\ matroid_spanning m s\n        ==> ?b. FINITE b /\\ b SUBSET s /\\ matroid_basis m b
+      #|  forall(m:A matroid) b.\n        matroid_basis m b\n        ==> (matroid_finite_dimensional (m:A matroid) <=> FINITE b)
       #|  c:A->bool
       #|  b:A->bool
       #|  m:A matroid
@@ -8990,42 +8990,42 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  c:A->bool
       #|  p /\\ q <=> ~(p ==> ~q)
       #|  (s ==> r) /\\ (r ==> p) /\\ (p ==> q) /\\ (q ==> s)\n    ==> (p <=> q) /\\ (p <=> r) /\\ (p <=> s)
-      #|  (!(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        ?b. FINITE b /\\ b SUBSET matroid_set m /\\ s SUBSET matroid_span m b) /\\\n   (!(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\ b SUBSET s /\\ s SUBSET matroid_span m b) /\\\n   (!(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)
-      #|  !(m:A matroid) s.\n        matroid_finite_dimensional m /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m s
-      #|  !(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_finite_dim m s
-      #|  !m s:A->bool.\n        FINITE s ==> (matroid_finite_dim m s <=> s SUBSET matroid_set m)
-      #|  !m:A matroid. matroid_finite_dim m {}
-      #|  !(m:A matroid) s t.\n        matroid_finite_dim m t /\\ s SUBSET t ==> matroid_finite_dim m s
+      #|  (forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        ?b. FINITE b /\\ b SUBSET matroid_set m /\\ s SUBSET matroid_span m b) /\\\n   (forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\ b SUBSET s /\\ s SUBSET matroid_span m b) /\\\n   (forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)
+      #|  forall(m:A matroid) s.\n        matroid_finite_dimensional m /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m s
+      #|  forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_finite_dim m s
+      #|  forall m s:A->bool.\n        FINITE s ==> (matroid_finite_dim m s <=> s SUBSET matroid_set m)
+      #|  forall m:A matroid. matroid_finite_dim m {}
+      #|  forall(m:A matroid) s t.\n        matroid_finite_dim m t /\\ s SUBSET t ==> matroid_finite_dim m s
       #|  b UNION c:A->bool
       #|  c:A->bool
       #|  b:A->bool
-      #|  !m s t:A->bool.\n        matroid_finite_dim m (s UNION t) <=>\n        matroid_finite_dim m s /\\ matroid_finite_dim m t
+      #|  forall m s t:A->bool.\n        matroid_finite_dim m (s UNION t) <=>\n        matroid_finite_dim m s /\\ matroid_finite_dim m t
       #|  a INSERT s = {a} UNION s
-      #|  !m s x:A.\n        matroid_finite_dim m (x INSERT s) <=>\n        x IN matroid_set m /\\ matroid_finite_dim m s
-      #|  !m:A matroid.\n        matroid_dimension m = @n. ?b. matroid_basis m b /\\ b HAS_SIZE n
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     matroid_span m b = matroid_span m s /\\\n                     b HAS_SIZE n)
-      #|  !(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     s SUBSET matroid_span m b /\\\n                     b HAS_SIZE n)
-      #|  !(m:A matroid) b n.\n        matroid_basis m b /\\ b HAS_SIZE n ==> matroid_dimension m = n
-      #|  !(m:A matroid) b.\n        matroid_basis m b /\\ FINITE b ==> matroid_dimension m = CARD b
+      #|  forall m s x:A.\n        matroid_finite_dim m (x INSERT s) <=>\n        x IN matroid_set m /\\ matroid_finite_dim m s
+      #|  forall m:A matroid.\n        matroid_dimension m = @n. ?b. matroid_basis m b /\\ b HAS_SIZE n
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     matroid_span m b = matroid_span m s /\\\n                     b HAS_SIZE n)
+      #|  forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     s SUBSET matroid_span m b /\\\n                     b HAS_SIZE n)
+      #|  forall(m:A matroid) b n.\n        matroid_basis m b /\\ b HAS_SIZE n ==> matroid_dimension m = n
+      #|  forall(m:A matroid) b.\n        matroid_basis m b /\\ FINITE b ==> matroid_dimension m = CARD b
       #|  (s:A->bool) SUBSET matroid_set m
       #|  b:A->bool
-      #|  !(m:A matroid) s b n.\n        s SUBSET matroid_set m /\\ b SUBSET matroid_set m /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ matroid_span m b = matroid_span m s\n        ==> matroid_dim m s = n
+      #|  forall(m:A matroid) s b n.\n        s SUBSET matroid_set m /\\ b SUBSET matroid_set m /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ matroid_span m b = matroid_span m s\n        ==> matroid_dim m s = n
       #|  b:A->bool
-      #|  !(m:A matroid) s b n.\n        b SUBSET s /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = n
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        t SUBSET matroid_set m /\\\n        matroid_span m s = matroid_span m t\n        ==> matroid_dim m s = matroid_dim m t
-      #|  !m s x:A.\n        s SUBSET matroid_set m /\\ x IN matroid_span m s\n        ==> matroid_span m (x INSERT s) = matroid_span m s
-      #|  !m:A matroid.\n        matroid_finite_dimensional m <=>\n        ?b. b HAS_SIZE matroid_dimension m /\\ matroid_basis m b
+      #|  forall(m:A matroid) s b n.\n        b SUBSET s /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = n
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        t SUBSET matroid_set m /\\\n        matroid_span m s = matroid_span m t\n        ==> matroid_dim m s = matroid_dim m t
+      #|  forall m s x:A.\n        s SUBSET matroid_set m /\\ x IN matroid_span m s\n        ==> matroid_span m (x INSERT s) = matroid_span m s
+      #|  forall m:A matroid.\n        matroid_finite_dimensional m <=>\n        ?b. b HAS_SIZE matroid_dimension m /\\ matroid_basis m b
       #|  (s:A->bool) SUBSET matroid_set m
-      #|  !m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s
+      #|  forall m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s
       #|  (s:A->bool) SUBSET matroid_set m
-      #|  !m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s
-      #|  !(m:A matroid) s b.\n        b SUBSET s /\\ FINITE b /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = CARD b
-      #|  !(m:A matroid) b.\n        FINITE b /\\ matroid_independent m b\n        ==> matroid_dim m b = CARD b
+      #|  forall m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s
+      #|  forall(m:A matroid) s b.\n        b SUBSET s /\\ FINITE b /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = CARD b
+      #|  forall(m:A matroid) b.\n        FINITE b /\\ matroid_independent m b\n        ==> matroid_dim m b = CARD b
       #|  c:A->bool
       #|  CARD(c:A->bool)
       #|  c:A->bool
-      #|  !(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_dimension m <= n
-      #|  !(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_finite_dimensional m /\\ matroid_dimension m <= n
+      #|  forall(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_dimension m <= n
+      #|  forall(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_finite_dimensional m /\\ matroid_dimension m <= n
       #|  c:A->bool
       #|  s:A->bool
       #|  m:A matroid
@@ -9034,19 +9034,19 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  m:A matroid
       #|  c:A->bool
       #|  (s:A->bool) SUBSET matroid_set m
-      #|  !(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= n
-      #|  !(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_finite_dim m s /\\ matroid_dim m s <= n
-      #|  !(m:A matroid) s b.\n        FINITE b /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= CARD b
-      #|  !(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_dim m s <= CARD s
-      #|  !(m:A matroid) b.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b\n        ==> FINITE b /\\ CARD b <= matroid_dimension m
-      #|  !(m:A matroid) b n.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b /\\\n        n <= CARD b\n        ==> n <= matroid_dimension m
-      #|  !(m:A matroid) b.\n        matroid_finite_dimensional m /\\ matroid_independent m b\n        ==> CARD b <= matroid_dimension m
-      #|  !(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> FINITE b /\\ CARD b <= matroid_dim m s
-      #|  !(m:A matroid) s b n.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\\n        b SUBSET s /\\ n <= CARD b\n        ==> n <= matroid_dim m s
-      #|  !(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> CARD b <= matroid_dim m s
-      #|  !(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> CARD s <= matroid_dim m s
-      #|  !(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m (matroid_span m s)
-      #|  !(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> FINITE s
+      #|  forall(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= n
+      #|  forall(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_finite_dim m s /\\ matroid_dim m s <= n
+      #|  forall(m:A matroid) s b.\n        FINITE b /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= CARD b
+      #|  forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_dim m s <= CARD s
+      #|  forall(m:A matroid) b.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b\n        ==> FINITE b /\\ CARD b <= matroid_dimension m
+      #|  forall(m:A matroid) b n.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b /\\\n        n <= CARD b\n        ==> n <= matroid_dimension m
+      #|  forall(m:A matroid) b.\n        matroid_finite_dimensional m /\\ matroid_independent m b\n        ==> CARD b <= matroid_dimension m
+      #|  forall(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> FINITE b /\\ CARD b <= matroid_dim m s
+      #|  forall(m:A matroid) s b n.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\\n        b SUBSET s /\\ n <= CARD b\n        ==> n <= matroid_dim m s
+      #|  forall(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> CARD b <= matroid_dim m s
+      #|  forall(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> CARD s <= matroid_dim m s
+      #|  forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m (matroid_span m s)
+      #|  forall(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> FINITE s
       #|  t:A->bool
       #|  s:A->bool
       #|  m:A matroid
@@ -9054,13 +9054,13 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  s:A->bool
       #|  submatroid m (s:A->bool)
       #|  (p ==> q) /\\ (r ==> p) /\\ (q ==> r) ==> (p <=> r) /\\ (q <=> r)
-      #|  (!m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ matroid_dim m s = CARD s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s) /\\\n   (!m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ CARD s <= matroid_dim m s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s)
+      #|  (forall m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ matroid_dim m s = CARD s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s) /\\\n   (forall m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ CARD s <= matroid_dim m s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s)
       #|  {}:A->bool
-      #|  !m:A matroid. matroid_dim m {} = 0
+      #|  forall m:A matroid. matroid_dim m {} = 0
       #|  matroid_span m b:A->bool
       #|  (x:A) INSERT b
       #|  b:A->bool
-      #|  !m s x:A.\n        matroid_finite_dim m s /\\ x IN matroid_set m\n        ==> matroid_dim m (x INSERT s) =\n            if x IN matroid_span m s then matroid_dim m s\n            else matroid_dim m s + 1
+      #|  forall m s x:A.\n        matroid_finite_dim m s /\\ x IN matroid_set m\n        ==> matroid_dim m (x INSERT s) =\n            if x IN matroid_span m s then matroid_dim m s\n            else matroid_dim m s + 1
       #|  t:A->bool
       #|  m:A matroid
       #|  b:A->bool
@@ -9070,36 +9070,36 @@ test "Library/matroids matches Library/matroids.ml" {
       #|  s:A->bool
       #|  m:A matroid
       #|  b:A->bool
-      #|  !m s t:A->bool.\n        s SUBSET t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
-      #|  !m s t:A->bool.\n        s SUBSET matroid_span m t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
+      #|  forall m s t:A->bool.\n        s SUBSET t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_span m t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t
       #|  matroid_dim m (matroid_span m t:A->bool)
       #|  n < n + 1
       #|  matroid_dim m ((a:A) INSERT s)
       #|  (a:A) IN matroid_set m
       #|  matroid_finite_dim m (s:A->bool)
       #|  a:A
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s PSUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s < matroid_dim m t
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m t <= matroid_dim m s\n        ==> matroid_span m s = matroid_span m t
-      #|  !m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m s = matroid_dim m t\n        ==> matroid_span m s = matroid_span m t
-      #|  !m s t:A->bool.\n     matroid_finite_dim m t /\\ s SUBSET t /\\ matroid_dim m t <= matroid_dim m s\n     ==> matroid_span m s = matroid_span m t
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s PSUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s < matroid_dim m t
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m t <= matroid_dim m s\n        ==> matroid_span m s = matroid_span m t
+      #|  forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m s = matroid_dim m t\n        ==> matroid_span m s = matroid_span m t
+      #|  forall m s t:A->bool.\n     matroid_finite_dim m t /\\ s SUBSET t /\\ matroid_dim m t <= matroid_dim m s\n     ==> matroid_span m s = matroid_span m t
       #|  b:A->bool
       #|  n:num
       #|  b:A->bool
-      #|  !(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. t SUBSET s /\\ matroid_independent m t /\\ t HAS_SIZE n
+      #|  forall(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. t SUBSET s /\\ matroid_independent m t /\\ t HAS_SIZE n
       #|  (b:A->bool) SUBSET matroid_set m
       #|  matroid_span m b:A->bool
       #|  b:A->bool
-      #|  !(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. matroid_subspace m t /\\ t SUBSET matroid_span m s /\\\n                matroid_finite_dim m t /\\ matroid_dim m t = n
+      #|  forall(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. matroid_subspace m t /\\ t SUBSET matroid_span m s /\\\n                matroid_finite_dim m t /\\ matroid_dim m t = n
       #|  c:A->bool
       #|  d:A->bool
       #|  b:A->bool
       #|  n:num
       #|  d:A->bool
       #|  b:A->bool
-      #|  !m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?b. b HAS_SIZE n /\\ matroid_independent m b /\\\n                matroid_span m s SUBSET matroid_span m b
+      #|  forall m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?b. b HAS_SIZE n /\\ matroid_independent m b /\\\n                matroid_span m s SUBSET matroid_span m b
       #|  t:A->bool
-      #|  !m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?t. matroid_finite_dim m t /\\ matroid_dim m t = n /\\\n                matroid_span m s SUBSET matroid_span m t
+      #|  forall m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?t. matroid_finite_dim m t /\\ matroid_dim m t = n /\\\n                matroid_span m s SUBSET matroid_span m t
       #|matroid_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(matroid('A),bool),bool) (\a:matroid('A). ((#=:fun(matroid('A),fun(matroid('A),bool)) (#matroid:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),matroid('A)) (#dest_matroid:fun(matroid('A),prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) a:matroid('A)))) a:matroid('A))))) (#!:fun(fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),bool),bool) (\r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool))) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) t:fun('A,bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) t:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))))))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool))) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) t:fun('A,bool))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool)))) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool))))) (#?:fun(fun(fun('A,bool),bool),bool) (\s':fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s':fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s':fun('A,bool)) s:fun('A,bool))) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s':fun('A,bool))))))))))))) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) ((#INSERT:fun('A,fun(fun('A,bool),fun('A,bool))) x:'A) s:fun('A,bool))))) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) s:fun('A,bool)))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) ((#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) ((#INSERT:fun('A,fun(fun('A,bool),fun('A,bool))) y:'A) s:fun('A,bool))))))))))))))))) ((#=:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),bool)) (#dest_matroid:fun(matroid('A),prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) (#matroid:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),matroid('A)) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))))) r:prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))))))))
       #|matroid_set =  |- ((#=:fun(fun(matroid('A),fun('A,bool)),fun(fun(matroid('A),fun('A,bool)),bool)) #matroid_set:fun(matroid('A),fun('A,bool))) (\m:matroid('A). (#FST:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun('A,bool)) (#dest_matroid:fun(matroid('A),prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) m:matroid('A)))))
       #|matroid_span =  |- ((#=:fun(fun(matroid('A),fun(fun('A,bool),fun('A,bool))),fun(fun(matroid('A),fun(fun('A,bool),fun('A,bool))),bool)) #matroid_span:fun(matroid('A),fun(fun('A,bool),fun('A,bool)))) (\m:matroid('A). (#SND:fun(prod(fun('A,bool),fun(fun('A,bool),fun('A,bool))),fun(fun('A,bool),fun('A,bool))) (#dest_matroid:fun(matroid('A),prod(fun('A,bool),fun(fun('A,bool),fun('A,bool)))) m:matroid('A)))))

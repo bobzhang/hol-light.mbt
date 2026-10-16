@@ -668,50 +668,50 @@ Warning: inventing type variables
 ind_types quotations (97):
   \\z:C. @y:B. ?x:A. P x y = z
   \\z:C. @x:A. ?y:B. P x y = z
-  !P:A->B->C.\n    (!x1 y1 x2 y2. (P x1 y1 = P x2 y2) <=> (x1 = x2) /\\ (y1 = y2))\n    ==> ?X Y. !x y. (X(P x y) = x) /\\ (Y(P x y) = y)
+  forall P:A->B->C.\n    (forall x1 y1 x2 y2. (P x1 y1 = P x2 y2) <=> (x1 = x2) /\\ (y1 = y2))\n    ==> ?X Y. forall x y. (X(P x y) = x) /\\ (Y(P x y) = y)
   NUMPAIR x y = (2 EXP x) * (2 * y + 1)
   EVEN
-  !x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)
-  !x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) <=> (x1 = x2) /\\ (y1 = y2)
+  forall x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)
+  forall x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) <=> (x1 = x2) /\\ (y1 = y2)
   NUMSUM b x = if b then SUC(2 * x) else 2 * x
-  !b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) <=> (b1 = b2) /\\ (x1 = x2)
+  forall b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) <=> (b1 = b2) /\\ (x1 = x2)
   EVEN
   INJN (m:num) = \\(n:num) (a:A). n = m
   a:A
   n1:num
-  !n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)
+  forall n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)
   INJA (a:A) = \\(n:num) b. b = a
   a1:A
-  !a1 a2. (INJA a1 = INJA a2) <=> (a1:A = a2)
+  forall a1 a2. (INJA a1 = INJA a2) <=> (a1:A = a2)
   INJF (f:num->(num->A->bool)) = \\n. f (NUMFST n) (NUMSND n)
   NUMPAIR n m
   a:A
   a:A
   m:num
   n:num
-  !f1 f2. (INJF f1 :num->A->bool = INJF f2) <=> (f1 = f2)
+  forall f1 f2. (INJF f1 :num->A->bool = INJF f2) <=> (f1 = f2)
   INJP f1 f2:num->A->bool =\n        \\n a. if NUMLEFT n then f1 (NUMRIGHT n) a else f2 (NUMRIGHT n) a
   NUMSUM b n
   b:bool
   n:num
-  !(f1:num->A->bool) f1' f2 f2'.\n        (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\\ (f2 = f2')
+  forall(f1:num->A->bool) f1' f2 f2'.\n        (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\\ (f2 = f2')
   F
   T
   ZCONSTR c i r :num->A->bool\n     = INJP (INJN (SUC c)) (INJP (INJA i) (INJF r))
   ZBOT = INJP (INJN 0) (@z:num->A->bool. T)
-  !c i r. ~(ZCONSTR c i r :num->A->bool = ZBOT)
-  ZRECSPACE (ZBOT:num->A->bool) /\\\n    (!c i r. (!n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))
+  forall c i r. ~(ZCONSTR c i r :num->A->bool = ZBOT)
+  ZRECSPACE (ZBOT:num->A->bool) /\\\n    (forall c i r. (forall n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))
   BOTTOM = _mk_rec (ZBOT:num->A->bool)
   CONSTR c i r :(A)recspace\n     = _mk_rec (ZCONSTR c i (\\n. _dest_rec(r n)))
-  !x y. (_mk_rec x :(A)recspace = _mk_rec y)\n         ==> (ZRECSPACE x /\\ ZRECSPACE y ==> (x = y))
+  forall x y. (_mk_rec x :(A)recspace = _mk_rec y)\n         ==> (ZRECSPACE x /\\ ZRECSPACE y ==> (x = y))
   _mk_rec:(num->A->bool)->(A)recspace
-  !x y. (_dest_rec x = _dest_rec y) <=> (x:(A)recspace = y)
-  !c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)
-  !c1 i1 r1 c2 i2 r2. (CONSTR c1 i1 r1 :(A)recspace = CONSTR c2 i2 r2) <=>\n                       (c1 = c2) /\\ (i1 = i2) /\\ (r1 = r2)
+  forall x y. (_dest_rec x = _dest_rec y) <=> (x:(A)recspace = y)
+  forall c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)
+  forall c1 i1 r1 c2 i2 r2. (CONSTR c1 i1 r1 :(A)recspace = CONSTR c2 i2 r2) <=>\n                       (c1 = c2) /\\ (i1 = i2) /\\ (r1 = r2)
   (a ==> a /\\ b) <=> (a ==> b)
   _dest_rec (x:(A)recspace)
   \\z:num->A->bool. ZRECSPACE(z) /\\ P(_mk_rec z)
-  !P. P(BOTTOM) /\\\n       (!c i r. (!n. P(r n)) ==> P(CONSTR c i r))\n       ==> !x:(A)recspace. P(x)
+  forall P. P(BOTTOM) /\\\n       (forall c i r. (forall n. P(r n)) ==> P(CONSTR c i r))\n       ==> forall x:(A)recspace. P(x)
   fn:(A)recspace->B
   fn:(A)recspace->B
   w:num
@@ -719,11 +719,11 @@ ind_types quotations (97):
   y:num->B
   (Fn:num->A->(num->(A)recspace)->(num->B)->B) c i r y
   y:num->B
-  !x. ?!y. (Z:(A)recspace->B->bool) x y
-  (Z:(A)recspace->B->bool) BOTTOM b /\\\n     (!c i r y. (!n. Z (r n) (y n)) ==> Z (CONSTR c i r) (Fn c i r y))
-  !Fn:num->A->(num->(A)recspace)->(num->B)->B.\n     ?f. (!c i r. f (CONSTR c i r) = Fn c i r (\\n. f (r n)))
-  (!a f. FCONS (a:A) f 0 = a) /\\\n  (!a f n. FCONS (a:A) f (SUC n) = f n)
-  !f:num->A. f = FCONS (f 0) (f o SUC)
+  forall x. ?!y. (Z:(A)recspace->B->bool) x y
+  (Z:(A)recspace->B->bool) BOTTOM b /\\\n     (forall c i r y. (forall n. Z (r n) (y n)) ==> Z (CONSTR c i r) (Fn c i r y))
+  forall Fn:num->A->(num->(A)recspace)->(num->B)->B.\n     ?f. (forall c i r. f (CONSTR c i r) = Fn c i r (\\n. f (r n)))
+  (forall a f. FCONS (a:A) f 0 = a) /\\\n  (forall a f n. FCONS (a:A) f (SUC n) = f n)
+  forall f:num->A. f = FCONS (f 0) (f o SUC)
   FNIL (n:num) = @x:A. T
   0
   SUC
@@ -735,18 +735,18 @@ ind_types quotations (97):
   :num
   OUTL (INL x :A+B) = x
   OUTR (INR y :A+B) = y
-  !P:A option->bool. (!x. P x) <=> P NONE /\\ !a. P(SOME a)
-  (?x. P x) <=> ~(!x. ~P x)
-  !P:A option->bool. (?x. P x) <=> P NONE \\/ ?a. P(SOME a)
+  forall P:A option->bool. (forall x. P x) <=> P NONE /\\ forall a. P(SOME a)
+  (?x. P x) <=> ~(forall x. ~P x)
+  forall P:A option->bool. (?x. P x) <=> P NONE \\/ ?a. P(SOME a)
   :num
   a ==> F <=> ~a
   (T <=> F) <=> F
-  !a:A. ~(SOME a = NONE)
-  !a b:A. SOME a = SOME b <=> a = b
-  ISO (f:A->B) (g:B->A) <=> (!x. f(g x) = x) /\\ (!y. g(f y) = y)
+  forall a:A. ~(SOME a = NONE)
+  forall a b:A. SOME a = SOME b <=> a = b
+  ISO (f:A->B) (g:B->A) <=> (forall x. f(g x) = x) /\\ (forall y. g(f y) = y)
   ISO (\\x:A. x) (\\x. x)
   ISO (f:A->A') f' /\\ ISO (g:B->B') g'\n   ==> ISO (\\h a'. g(h(f' a'))) (\\h a. g'(h(f a)))
-  ISO f g\n   ==> (!P. (!x. P x) <=> (!x. P(g x))) /\\\n       (!P. (?x. P x) <=> (?x. P(g x))) /\\\n       (!(a:A) (b:B). (a = g b) <=> (f a = b))
+  ISO f g\n   ==> (forall P. (forall x. P x) <=> (forall x. P(g x))) /\\\n       (forall P. (?x. P x) <=> (?x. P(g x))) /\\\n       (forall(a:A) (b:B). (a = g b) <=> (f a = b))
   (?) P ==> (c = (@)P) ==> P c
   p:bool
   (if ?!x. x = a /\\ p then @x. x = a /\\ p else @x. F) =\n     (if p then a else @x. F)
@@ -759,10 +759,10 @@ ind_types quotations (97):
   _MATCH x (\\y z. P y z)
   _FUNCTION (_SEQPATTERN r s) x
   _MATCH x (_SEQPATTERN r s)
-  (!x. a = x ==> q x) <=> q a
-  (!x. x = a ==> q x) <=> q a
-  (!x. a = x /\\ p x ==> q x) <=> (p a ==> q a)
-  (!x. x = a /\\ p x ==> q x) <=> (p a ==> q a)
+  (forall x. a = x ==> q x) <=> q a
+  (forall x. x = a ==> q x) <=> q a
+  (forall x. a = x /\\ p x ==> q x) <=> (p a ==> q a)
+  (forall x. x = a /\\ p x ==> q x) <=> (p a ==> q a)
 INJ_INVERSE2 =  |- (#!:fun(fun(fun('A,fun('B,'C)),bool),bool) (\P:fun('A,fun('B,'C)). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x1:'A. (#!:fun(fun('B,bool),bool) (\y1:'B. (#!:fun(fun('A,bool),bool) (\x2:'A. (#!:fun(fun('B,bool),bool) (\y2:'B. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('C,fun('C,bool)) ((P:fun('A,fun('B,'C)) x1:'A) y1:'B)) ((P:fun('A,fun('B,'C)) x2:'A) y2:'B))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x1:'A) x2:'A)) ((#=:fun('B,fun('B,bool)) y1:'B) y2:'B)))))))))))) (#?:fun(fun(fun('C,'A),bool),bool) (\X:fun('C,'A). (#?:fun(fun(fun('C,'B),bool),bool) (\Y:fun('C,'B). (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('B,bool),bool) (\y:'B. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (X:fun('C,'A) ((P:fun('A,fun('B,'C)) x:'A) y:'B))) x:'A)) ((#=:fun('B,fun('B,bool)) (Y:fun('C,'B) ((P:fun('A,fun('B,'C)) x:'A) y:'B))) y:'B)))))))))))))
 NUMPAIR =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(num,fun(num,bool)) ((#NUMPAIR:fun(num,fun(num,num)) x:num) y:num)) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) y:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 NUMPAIR_INJ_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\x1:num. (#!:fun(fun(num,bool),bool) (\y1:num. (#!:fun(fun(num,bool),bool) (\x2:num. (#!:fun(fun(num,bool),bool) (\y2:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#NUMPAIR:fun(num,fun(num,num)) x1:num) y1:num)) ((#NUMPAIR:fun(num,fun(num,num)) x2:num) y2:num))) ((#=:fun(num,fun(num,bool)) x1:num) x2:num))))))))))

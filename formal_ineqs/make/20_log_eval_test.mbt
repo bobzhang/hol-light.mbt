@@ -36,7 +36,7 @@ test "Formal_ineqs/trig/log_eval matches Formal_ineqs/trig/log_eval.ml" {
       #|  &0 < b /\\ &0 < x
       #|  interval_arith x (a, b) /\\\n     &0 < a /\\\n     lo <= log a /\\\n     log b <= hi\n     ==> interval_arith (log x) (lo, hi)
       #|  a + (b - a) = b
-      #|  !x k. &0 < x ==> log x = log (&1 + (x / exp k - &1)) + k
+      #|  forall x k. &0 < x ==> log x = log (&1 + (x / exp k - &1)) + k
       #|  x / t
       #|  r - &1
       #|  a + b - a = b

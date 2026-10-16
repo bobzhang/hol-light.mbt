@@ -102,7 +102,7 @@ fn step_6() -> Unit raise {
   let t13 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21), t22), t23), t24), t25), t26)
-  bound_high_transformation_c.set(@tactics.prove(@parser.parse_term("!c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r"), t27))
+  bound_high_transformation_c.set(@tactics.prove(@parser.parse_term("forall c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r"), t27))
 }
 
 ///|
@@ -133,7 +133,7 @@ fn step_7() -> Unit raise {
   let t29 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t28 = @tactics.repeat_tac(@tactics.strip_tac)
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), t28), t29), t30), t31), t32), t33), t34), t35), t36), t37), t38), t39), t40), t41), t42)
-  bound_low_transformation_c.set(@tactics.prove(@parser.parse_term("!c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c"), t43))
+  bound_low_transformation_c.set(@tactics.prove(@parser.parse_term("forall c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c"), t43))
 }
 
 ///|

@@ -16709,15 +16709,15 @@ proving that 49 is composite
   n:num
   0
   ~(m + 1 <= m)
-  (?m. m EXP 2 <= n) /\\ (?a. !m. m EXP 2 <= n ==> m <= a)
-  !n. ISQRT(n) EXP 2 <= n /\\ n < (ISQRT(n) + 1) EXP 2
+  (?m. m EXP 2 <= n) /\\ (?a. forall m. m EXP 2 <= n ==> m <= a)
+  forall n. ISQRT(n) EXP 2 <= n /\\ n < (ISQRT(n) + 1) EXP 2
   x <= 0 <=> (x = 0)
   0
   ISQRT 0 = 0
   2
   (ISQRT n) EXP 2 < (m + 1) EXP 2 /\\\n                m EXP 2 < (ISQRT n + 1) EXP 2
   n:num
-  !m n. (ISQRT n = m) <=> m EXP 2 <= n /\\ n < (m + 1) EXP 2
+  forall m n. (ISQRT n = m) <=> m EXP 2 <= n /\\ n < (m + 1) EXP 2
   n:num
   2
   ISQRT(n) EXP 2 < m EXP 2 /\\ m EXP 2 <= SUC(ISQRT n) EXP 2
@@ -16725,7 +16725,7 @@ proving that 49 is composite
   m:num
   n:num
   a <= n /\\ n < b /\\ ~(SUC n = a) /\\ ~(SUC n = b)\n      ==> a <= SUC n /\\ SUC n < b
-  !n. ISQRT(SUC n) =\n       if ?m. SUC n = m EXP 2 then SUC(ISQRT n) else ISQRT n
+  forall n. ISQRT(SUC n) =\n       if ?m. SUC n = m EXP 2 then SUC(ISQRT n) else ISQRT n
   ln(&2) =\n   &7 * ln(&1 + inv(&8)) - &2 * ln(&1 + inv(&24)) - &4 * ln(&1 + inv(&80))
   x = (&1 + inv(&8)) pow n * (x / (&1 + inv(&8)) pow n)
   &0 < &1 + inv(&8)
@@ -16747,8 +16747,8 @@ proving that 49 is composite
   &n / &r
   &2 * &n + &d = &2 * (&n + &d / &2)
   floor(&n / &r) = floor((&n + &d / &2) / &r)
-  !n r d.\n        d < 2 /\\ 0 < r\n        ==> &2 * floor(&n / &r) <= floor(&(2 * n + d) / &r) /\\\n            floor(&(2 * n + d) / &r) <= &2 * floor(&n / &r) + &1
-  !n. ln(&(FACT n)) = sum(1,n) (\\d. ln(&d))
+  forall n r d.\n        d < 2 /\\ 0 < r\n        ==> &2 * floor(&n / &r) <= floor(&(2 * n + d) / &r) /\\\n            floor(&(2 * n + d) / &r) <= &2 * floor(&n / &r) + &1
+  forall n. ln(&(FACT n)) = sum(1,n) (\\d. ln(&d))
   (a + b) - c - (a - c) = b
   2 + n = SUC(1 + n)
   1
@@ -16764,13 +16764,13 @@ proving that 49 is composite
   0 + 1
   sum(1,n + 1) (\\i. ln (&i)) = sum(1,n) (\\i. ln(&(i + 1)))
   abs(x - (y - z)) <= a ==> abs(x - (y - (z + &1))) <= &1 + a
-  !n. abs(sum(1,n+1) (\\i. ln(&i)) - (&(n + 1) * ln (&(n + 1)) - &(n + 1)))\n        <= &1 + ln(&(n + 1))
+  forall n. abs(sum(1,n+1) (\\i. ln(&i)) - (&(n + 1) * ln (&(n + 1)) - &(n + 1)))\n        <= &1 + ln(&(n + 1))
   (a = b + c * &1) <=> (b = a - c)
   (a - b = c) <=> (a = b + c)
   SUC(n + 1) = n + 2
   (n + 1) + 1 = n + 2
   n + 1
-  !n. &(n + 1) * ln(&(n + 1)) = sum(1,n) (\\i. ln(k i) + &1)
+  forall n. &(n + 1) * ln(&(n + 1)) = sum(1,n) (\\i. ln(k i) + &1)
   k:num->real
   ~(n = 0)
   &n
@@ -16783,21 +16783,21 @@ proving that 49 is composite
   &n
   \\x. ln(x) + &1
   \\x. x * ln(x)
-  !n. ~(n = 0)\n        ==> ?z. &n < z /\\ z < &(n + 1) /\\\n                (&(n + 1) * ln(&(n + 1)) - &n * ln(&n) = ln(z) + &1)
-  !n. ~(n = 0) ==> abs(ln(&(FACT n)) - (&n * ln(&n) - &n)) <= &1 + ln(&n)
+  forall n. ~(n = 0)\n        ==> ?z. &n < z /\\ z < &(n + 1) /\\\n                (&(n + 1) * ln(&(n + 1)) - &n * ln(&n) = ln(z) + &1)
+  forall n. ~(n = 0) ==> abs(ln(&(FACT n)) - (&n * ln(&n) - &n)) <= &1 + ln(&n)
   primepow q <=> ?p k. 1 <= k /\\ prime p /\\ (q = p EXP k)
   aprimedivisor q = @p. prime p /\\ p divides q
   p:num
   k:num
   p:num
   q:num
-  !q. primepow q ==> 2 <= q
+  forall q. primepow q ==> 2 <= q
   2 <= 0
   ~(primepow 0)
   1 <= k ==> (k = SUC(k - 1))
   q:num
-  !p k. prime p /\\ 1 <= k ==> (aprimedivisor(p EXP k) = p)
-  !n. ~(n = 1) ==> prime(aprimedivisor n) /\\ (aprimedivisor n) divides n
+  forall p k. prime p /\\ 1 <= k ==> (aprimedivisor(p EXP k) = p)
+  forall n. ~(n = 1) ==> prime(aprimedivisor n) /\\ (aprimedivisor n) divides n
   m:num
   2 EXP n
   n:num
@@ -16807,8 +16807,8 @@ proving that 49 is composite
   n:num
   2 EXP (SUC n)
   SUC n
-  !m n. 2 <= m ==> ?k. n <= m EXP k
-  !p. prime p ==> primepow p
+  forall m n. 2 <= m ==> ?k. n <= m EXP k
+  forall p. prime p ==> primepow p
   primepow 0 <=> F
   1 <= 0
   primepow 1 <=> F
@@ -16840,7 +16840,7 @@ proving that 49 is composite
   aprimedivisor
   mangoldt d = if primepow d then ln(&(aprimedivisor d)) else &0
   2 <= a ==> 1 <= a
-  !d. &0 <= mangoldt d
+  forall d. &0 <= mangoldt d
   a * b * c = b * a * c:num
   p divides r
   p * m = q EXP j * r
@@ -16886,7 +16886,7 @@ proving that 49 is composite
   1 + p * m = p EXP k + 1 + (p * m - p EXP k)
   ~(1 + m <= d /\\ d <= m)
   d:num
-  !d. d >= 1 + m\n          ==> ((if primepow d /\\ d divides m then ln (&(aprimedivisor d))\n                else &0) = &0)
+  forall d. d >= 1 + m\n          ==> ((if primepow d /\\ d divides m then ln (&(aprimedivisor d))\n                else &0) = &0)
   (b = &0) ==> (a = a + b)
   2 <= p ==> 1 <= p
   1 * y <= x ==> (1 + x = (1 + y) + (x - y))
@@ -16898,7 +16898,7 @@ proving that 49 is composite
   k:num
   p * m:num
   p:num
-  ?k. !j. 1 <= j /\\ (p EXP j) divides (p * m) ==> j <= k
+  ?k. forall j. 1 <= j /\\ (p EXP j) divides (p * m) ==> j <= k
   1
   ?k. 1 <= k /\\ (p EXP k) divides (p * m)
   0 < n <=> ~(n = 0)
@@ -16912,7 +16912,7 @@ proving that 49 is composite
   sum(1,n) (\\d. &0)
   n = 1
   n:num
-  !n. ~(n = 0)\n       ==> (ln(&n) =\n            sum(1,n) (\\d. if primepow d /\\ d divides n\n                          then ln(&(aprimedivisor d)) else &0))
+  forall n. ~(n = 0)\n       ==> (ln(&n) =\n            sum(1,n) (\\d. if primepow d /\\ d divides n\n                          then ln(&(aprimedivisor d)) else &0))
   (divides) p
   (divides) p
   t + m * d + 1 = (t + 1) + m * d
@@ -16958,7 +16958,7 @@ proving that 49 is composite
   ~(n = 0) <=> 1 <= n
   d:num
   sum(1,n) (\\m. sum(1,n) (\\d. if primepow d /\\ d divides m\n                                then ln (&(aprimedivisor d))\n                                else &0))
-  !n. ln(&(FACT n)) = sum(1,n) (\\d. mangoldt(d) * floor(&n / &d))
+  forall n. ln(&(FACT n)) = sum(1,n) (\\d. mangoldt(d) * floor(&n / &d))
   psi(n) = sum(1,n) (\\d. mangoldt(d))
   0 < r <=> 1 <= r
   (a = &1) ==> &1 <= a
@@ -16990,7 +16990,7 @@ proving that 49 is composite
   2
   k:num
   k:num
-  !n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) <= psi(n) /\\\n       psi(n) - psi(n DIV 2) <= ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))
+  forall n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) <= psi(n) /\\\n       psi(n) - psi(n DIV 2) <= ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))
   &0 <= ln(&2)
   0 < q <=> ~(q = 0)
   &0 < q ==> &0 < q * &2
@@ -17012,7 +17012,7 @@ proving that 49 is composite
   q * 2
   q:num
   ln(&(FACT(q * 2)))
-  !a'. abs((a' - b) - c) <= d - abs(a' - a) ==> abs((a - b) - c) <= d
+  forall a'. abs((a' - b) - c) <= d - abs(a' - a) ==> abs((a - b) - c) <= d
   &0 <= x /\\ x <= &1 ==> abs(x) <= &1 + &1
   &2 = &1 + &1
   x <= &2 ==> x <= &3
@@ -17025,9 +17025,9 @@ proving that 49 is composite
   2
   n:num
   n = 0
-  !n. abs((ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))) - &n * ln(&2))\n       <= &4 * ln(if n = 0 then &1 else &n) + &3
+  forall n. abs((ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))) - &n * ln(&2))\n       <= &4 * ln(if n = 0 then &1 else &n) + &3
   m <= a /\\ b <= m /\\ abs(m - n) <= k\n              ==> n - k <= a /\\ b <= n + k
-  !n. &n * ln(&2) - (&4 * ln (if n = 0 then &1 else &n) + &3) <= psi(n) /\\\n       psi(n) - psi(n DIV 2)\n       <= &n * ln(&2) + (&4 * ln (if n = 0 then &1 else &n) + &3)
+  forall n. &n * ln(&2) - (&4 * ln (if n = 0 then &1 else &n) + &3) <= psi(n) /\\\n       psi(n) - psi(n DIV 2)\n       <= &n * ln(&2) + (&4 * ln (if n = 0 then &1 else &n) + &3)
   mangoldt 0 = ln(&1)
   1 <= 0
   mangoldt 1 = ln(&1)
@@ -17358,9 +17358,9 @@ proving that 49 is composite
   a <= b /\\ l <= a /\\ rest ==> l <= a /\\ l <= b /\\ rest
   T /\\ a <=> a
   n <= 128 <=> n < 129
-  !n. n <= 128 ==> psi(n) <= &133 / &128 * &n
+  forall n. n <= 128 ==> psi(n) <= &133 / &128 * &n
   a <= b ==> x <= a ==> x <= b
-  !n. n <= 128 ==> psi(n) <= (&3 / &2 * ln(&2)) * &n
+  forall n. n <= 128 ==> psi(n) <= (&3 / &2 * ln(&2)) * &n
   fa <= ga /\\ &0 <= d ==> (gx - fx - (ga - fa) = d) ==> fx <= gx
   z:real
   x:real = a
@@ -17369,7 +17369,7 @@ proving that 49 is composite
   a:real
   d:real->real
   \\x:real. g(x) - f(x)
-  !f g d a.\n        f(a) <= g(a) /\\\n        (!x. a <= x ==> ((\\x. g(x) - f(x)) diffl (d(x)))(x)) /\\\n        (!x. a <= x ==> &0 <= d(x))\n        ==> !x. a <= x ==> f(x) <= g(x)
+  forall f g d a.\n        f(a) <= g(a) /\\\n        (forall x. a <= x ==> ((\\x. g(x) - f(x)) diffl (d(x)))(x)) /\\\n        (forall x. a <= x ==> &0 <= d(x))\n        ==> forall x. a <= x ==> f(x) <= g(x)
   n:num
   a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n                 inv(&1 + a) <= b ==> inv(&1 + x) <= b
   x:real
@@ -17454,11 +17454,11 @@ proving that 49 is composite
   n DIV 2
   pn2 <= ((a - &1) * l2) * n - logtm\n    ==> u <= v /\\ pn - pn2 <= n * l2 + logtm ==> pn <= (a * l2) * n
   2 EXP k
-  !a. ~(a = 0) /\\ ~(n <= a) ==> ~(n = 0)
+  forall a. ~(a = 0) /\\ ~(n <= a) ==> ~(n = 0)
   ~(n = 0)
   n:num
   n <= 2 EXP k
-  &4 * ln(&1 + &2 pow j) + &3 <= (d * ln(&2)) * (&1 + &2 pow j) /\\\n   &4 / (&1 + &2 pow j) <= d * ln(&2) /\\ &0 <= c /\\ c / &2 + d + &1 <= c\n   ==> !k. j <= k /\\\n           (!n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n           ==> !n. n <= 2 EXP (SUC k) ==> psi(n) <= (c * ln(&2)) * &n
+  &4 * ln(&1 + &2 pow j) + &3 <= (d * ln(&2)) * (&1 + &2 pow j) /\\\n   &4 / (&1 + &2 pow j) <= d * ln(&2) /\\ &0 <= c /\\ c / &2 + d + &1 <= c\n   ==> forall k. j <= k /\\\n           (forall n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n           ==> forall n. n <= 2 EXP (SUC k) ==> psi(n) <= (c * ln(&2)) * &n
   &n / &2
   x:real
   c2 + (c2 - &1) + &1 = &2 * c2
@@ -17476,11 +17476,11 @@ proving that 49 is composite
   ?j. m <= 2 EXP j
   m:num
   d = c / &2 - &1
-  (!n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n   ==> &4 * ln(&1 + &2 pow k) + &3\n         <= ((c / &2 - &1) * ln(&2)) * (&1 + &2 pow k) /\\\n       &4 / (&1 + &2 pow k) <= (c / &2 - &1) * ln(&2) /\\ &0 <= c\n           ==> !n. psi(n) <= (c * ln(&2)) * &n
+  (forall n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n   ==> &4 * ln(&1 + &2 pow k) + &3\n         <= ((c / &2 - &1) * ln(&2)) * (&1 + &2 pow k) /\\\n       &4 / (&1 + &2 pow k) <= (c / &2 - &1) * ln(&2) /\\ &0 <= c\n           ==> forall n. psi(n) <= (c * ln(&2)) * &n
   2 EXP 10
-  !n. psi(n) <= (&4407 / &2048 * ln (&2)) * &n
+  forall n. psi(n) <= (&4407 / &2048 * ln (&2)) * &n
   (&4407 / &2048 * ln (&2)) * &n
-  !n. psi(n) <= &3 / &2 * &n
+  forall n. psi(n) <= &3 / &2 * &n
   a <= b /\\ b <= l /\\ rest ==> a <= l /\\ b <= l /\\ rest
   inv(&1 + &299)
   x:real
@@ -17498,7 +17498,7 @@ proving that 49 is composite
   n:num
   n:num
   n < 300
-  !n. 4 <= n ==> &3 / &5 * &n <= psi(n)
+  forall n. 4 <= n ==> &3 / &5 * &n <= psi(n)
   x:real
   theta(n) = sum(1,n) (\\p. if prime p then ln(&p) else &0)
   theta(0) = ln(&1)
@@ -17511,7 +17511,7 @@ proving that 49 is composite
   p EXP (2 * j) = q EXP (2 * k + 1)
   2 * j
   q divides p
-  !p q j k.\n     ~(prime(p) /\\ prime(q) /\\ 1 <= j /\\ (p EXP (2 * j) = q EXP (2 * k + 1)))
+  forall p q j k.\n     ~(prime(p) /\\ prime(q) /\\ 1 <= j /\\ (p EXP (2 * j) = q EXP (2 * k + 1)))
   ~(k = 0) ==> 1 <= k
   (k * 2 + 1 = 1) <=> (k = 0)
   1 <= j ==> ~(1 = 2 * j + 1)
@@ -17563,7 +17563,7 @@ proving that 49 is composite
   sum(m,n) (\\r. &0)
   f(p + q:num) = &0
   p + q:num
-  !s. p <= s /\\ s < p + SUC q /\\ ~(f s = &0)\n           ==> (?r:num. m <= r /\\ r < m + n /\\ (i r = s))
+  forall s. p <= s /\\ s < p + SUC q /\\ ~(f s = &0)\n           ==> (?r:num. m <= r /\\ r < m + n /\\ (i r = s))
   f <= s'' ==> s <= s' ==> s + f <= s' + s''
   r < p + SUC q <=> (r = p + q) \\/ r < p + q
   p + q < p + SUC q
@@ -17576,7 +17576,7 @@ proving that 49 is composite
   q:num
   r:num
   sum(m,n) (\\r. if p:num <= i(r) /\\ i(r) < p + q\n                            then f(i(r)) else &0)
-  !f i m n p q.\n        (!r. m <= r /\\ r < m + n ==> &0 <= f(i r)) /\\\n        (!s. p <= s /\\ s < p + q /\\ ~(f(s) = &0)\n             ==> ?r. m <= r /\\ r < m + n /\\ (i r = s))\n        ==> sum(p,q) f <= sum(m,n) (\\r. f(i r))
+  forall f i m n p q.\n        (forall r. m <= r /\\ r < m + n ==> &0 <= f(i r)) /\\\n        (forall s. p <= s /\\ s < p + q /\\ ~(f(s) = &0)\n             ==> ?r. m <= r /\\ r < m + n /\\ (i r = s))\n        ==> sum(p,q) f <= sum(m,n) (\\r. f(i r))
   r * p = p EXP (2 * k + 1)
   q = p:num
   2 * k + 1
@@ -17629,7 +17629,7 @@ proving that 49 is composite
   b <= d /\\ (a = &0) /\\ (c = &0) ==> a + b <= c + d
   ~(n = 0) ==> (n = 1 + (n - 1))
   n = 0
-  !n. sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                     then ln(&(aprimedivisor d)) else &0)\n       <= sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                        then ln(&(aprimedivisor d)) else &0)
+  forall n. sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                     then ln(&(aprimedivisor d)) else &0)\n       <= sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                        then ln(&(aprimedivisor d)) else &0)
   (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
   1 + n = SUC n
   2
@@ -17643,23 +17643,23 @@ proving that 49 is composite
   1 + n = SUC n
   ~(?p k. 1 <= k /\\ prime p /\\ (1 + n = p EXP (2 * k)))
   ?m. SUC n = m EXP 2
-  !n. psi(ISQRT(n)) =\n        sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                      then ln(&(aprimedivisor d)) else &0)
+  forall n. psi(ISQRT(n)) =\n        sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                      then ln(&(aprimedivisor d)) else &0)
   ~(p = 0) ==> 1 <= p
   1 <= k ==> 1 <= 2 * k + 1
   k:num
   p:num
   r:num
   n:num
-  !n. theta(n) + psi(ISQRT n) <= psi(n) /\\\n       psi(n) <= theta(n) + &2 * psi(ISQRT n)
+  forall n. theta(n) + psi(ISQRT n) <= psi(n) /\\\n       psi(n) <= theta(n) + &2 * psi(ISQRT n)
   aprimedivisor p = p
   prime p
   p:num
-  !n. theta(n) <= psi(n)
+  forall n. theta(n) <= psi(n)
   a <= b /\\ l <= a /\\ rest ==> l <= a /\\ l <= b /\\ rest
   T /\\ a <=> a
   n <= 30 <=> n < 31
-  !n. n <= 30 ==> psi(n) <= &65 / &64 * &n
-  !n. theta(n) <= &3 / &2 * &n
+  forall n. n <= 30 ==> psi(n) <= &65 / &64 * &n
+  forall n. theta(n) <= &3 / &2 * &n
   a <= b /\\ b <= l /\\ rest ==> a <= l /\\ b <= l /\\ rest
   ~(n < 413)
   &413
@@ -17690,23 +17690,23 @@ proving that 49 is composite
   n:num
   n:num
   n >= 900
-  !n. 5 <= n ==> &1 / &2 * &n <= theta(n)
+  forall n. 5 <= n ==> &1 / &2 * &n <= theta(n)
   ~(x < &1)
   x:real
   x < &1
-  !x. &0 <= x ==> &0 <= floor x
+  forall x. &0 <= x ==> &0 <= floor x
   &0 <= x ==> (abs x = x)
   x:real
-  !x. &0 <= x ==> ?k. floor x = &k
+  forall x. &0 <= x ==> ?k. floor x = &k
   0 < k + 1
   0 < d <=> ~(d = 0)
   0 < d <=> ~(d = 0)
   k = 0
-  !n d k. ~(d = 0)\n           ==> ((floor(&n / &d) = &k) =\n                  if k = 0 then &n < &d\n                  else &n / &(k + 1) < &d /\\ &d <= &n / &k)
+  forall n d k. ~(d = 0)\n           ==> ((floor(&n / &d) = &k) =\n                  if k = 0 then &n < &d\n                  else &n / &(k + 1) < &d /\\ &d <= &n / &k)
   0 < k + 1 /\\ (~(k = 0) ==> 0 < k)
   k:num
   ?k. floor (&n / &d) = &k
-  !n d. ~(d = 0)\n         ==> ?k. (floor(&n / &d) = &k) /\\\n                 d * k <= n /\\ n < d * (k + 1)
+  forall n d. ~(d = 0)\n         ==> ?k. (floor(&n / &d) = &k) /\\\n                 d * k <= n /\\ n < d * (k + 1)
   ODD(k) ==> ~(k = 0)
   2 * k1 < (2 * k3 + 1) + 1 /\\ 2 * k3 + 1 < 2 * (k1 + 1)\n    ==> (k3 = k1)
   d * 2 * k1 < d * ((2 * k3 + 1) + 1) /\\\n                d * (2 * k3 + 1) < d * 2 * (k1 + 1)
@@ -17722,7 +17722,7 @@ proving that 49 is composite
   k1:num
   n DIV 2
   n:num
-  !n d. ~(d = 0)\n         ==> (floor (&n / &d) - &2 * floor (&(n DIV 2) / &d) =\n                if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                then &1 else &0)
+  forall n d. ~(d = 0)\n         ==> (floor (&n / &d) - &2 * floor (&(n DIV 2) / &d) =\n                if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                then &1 else &0)
   2 * j + 1 < 2 * k + 3 /\\ 2 * k + 2 < 2 * j + 2 ==> (j = k)
   r = 0
   (2 * j + 1) * r < (2 * k + 3) * r /\\\n                (2 * k + 2) * r < (2 * j + 2) * r
@@ -17741,7 +17741,7 @@ proving that 49 is composite
   2 * k + 1
   r:num
   sum (1,n DIV (SUC (2 * k) + 1))\n                  (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                       then mangoldt d else &0)
-  !b. (a - b = d) /\\ (b = c) ==> (a - c = d)
+  forall b. (a - b = d) /\\ (b = c) ==> (a - c = d)
   (s - ss = x + y) ==> (ss = a - ((b + x) + y)) ==> (s = a - b)
   2 * SUC k = SUC(SUC(2 * k))
   SUC k
@@ -17757,7 +17757,7 @@ proving that 49 is composite
   m = 0
   m:num
   n = 0
-  !n m k. (m + 2 * k = n)\n         ==> (sum (1,n DIV (2 * k + 1))\n                  (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                       then mangoldt d else &0) =\n              sum (1,n) (\\d. --(&1) pow (d + 1) * psi (n DIV d)) -\n              sum (1,2 * k)\n                  (\\d. --(&1) pow (d + 1) * psi (n DIV d)))
+  forall n m k. (m + 2 * k = n)\n         ==> (sum (1,n DIV (2 * k + 1))\n                  (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                       then mangoldt d else &0) =\n              sum (1,n) (\\d. --(&1) pow (d + 1) * psi (n DIV d)) -\n              sum (1,2 * k)\n                  (\\d. --(&1) pow (d + 1) * psi (n DIV d)))
   0
   n:num
   n:num
@@ -17772,16 +17772,16 @@ proving that 49 is composite
   2 = 0
   n = n DIV 2 + (n - n DIV 2)
   sum (1,n DIV 2) (\\d. mangoldt d * floor (&(n DIV 2) / &d)) =\n    sum (1,n) (\\d. mangoldt d * floor (&(n DIV 2) / &d))
-  !n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) =\n          sum(1,n) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
-  !m n. m <= n ==> psi(m) <= psi(n)
+  forall n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) =\n          sum(1,n) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
+  forall m n. m <= n ==> psi(m) <= psi(n)
   psi(0) = &0
-  !n. &0 <= psi(n)
+  forall n. &0 <= psi(n)
   &0 <= a + --b <=> b <= a
   s1 <= s1' /\\ s2' <= s2\n    ==> &0 <= a + b /\\ &0 <= --c + --d\n        ==> s1 <= (s1' + a) + b /\\ (s2' + c) + d <= s2
   SUC(SUC n) + 1 = SUC(SUC(n + 1))
   2 * SUC n = SUC(SUC(2 * n))
   m:num
-  !n m p. m <= p\n         ==> sum(1,2 * m) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * p) (\\d. --(&1) pow (d + 1) * psi(n DIV d)) /\\\n             sum(1,2 * p + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * m + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
+  forall n m p. m <= p\n         ==> sum(1,2 * m) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * p) (\\d. --(&1) pow (d + 1) * psi(n DIV d)) /\\\n             sum(1,2 * p + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * m + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
   r < 2 <=> (r = 0) \\/ (r = 1)
   r = n MOD 2
   q = n DIV 2
@@ -17796,7 +17796,7 @@ proving that 49 is composite
   ~(k <= n) ==> n <= k:num
   (b = a) ==> a <= b
   k <= n:num
-  !n k. ODD(k)\n         ==> ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n             <= sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
+  forall n k. ODD(k)\n         ==> ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n             <= sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
   r < 2 <=> (r = 0) \\/ (r = 1)
   r = n MOD 2
   q = n DIV 2
@@ -17811,12 +17811,12 @@ proving that 49 is composite
   ~(k <= n) ==> n <= k:num
   (a = b) ==> a <= b
   k <= n:num
-  !n k. EVEN(k)\n         ==> sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n             <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))
+  forall n k. EVEN(k)\n         ==> sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n             <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))
   3
   n:num
   2
   n:num
-  !n. psi(n) - psi(n DIV 2)\n       <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2))) /\\\n       ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n       <= psi(n) - psi(n DIV 2) + psi(n DIV 3)
+  forall n. psi(n) - psi(n DIV 2)\n       <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2))) /\\\n       ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n       <= psi(n) - psi(n DIV 2) + psi(n DIV 3)
   a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n               inv(&1 + a) <= b ==> inv(&1 + x) <= b
   x:real
   x:real
@@ -17837,7 +17837,7 @@ proving that 49 is composite
   &n / &6 + &n / &2
   b + p3 <= a ==> u <= v /\\ a <= p - p2 + p3 ==> b <= p - p2
   n:num
-  !n. n >= 1200 ==> &n / &6 <= psi(n) - psi(n DIV 2)
+  forall n. n >= 1200 ==> &n / &6 <= psi(n) - psi(n DIV 2)
   x:real
   324 * n
   324 * i * i < a ==> (i * 18) * (i * 18) < a
@@ -17847,33 +17847,33 @@ proving that 49 is composite
   ISQRT(n DIV 2)
   n DIV 2
   n:num
-  !n. n >= 1200 ==> theta(n DIV 2) < theta(n)
+  forall n. n >= 1200 ==> theta(n DIV 2) < theta(n)
   (b + a = c) ==> (a = &0) ==> ~(b < c)
   n + 1 <= r /\\ r < n + n + 1 ==> n <= r /\\ r <= 2 * n
   sum(n + 1,n) (\\r. &0)
   sum(n + 1,n) (\\p. if prime p then ln (&p) else &0) = &0
   ~(a /\\ b /\\ c) <=> b /\\ c ==> ~a
   2 * n
-  !n. n >= 2400 ==> ?p. prime(p) /\\ n <= p /\\ p <= 2 * n
+  forall n. n >= 2400 ==> ?p. prime(p) /\\ n <= p /\\ p <= 2 * n
   (p /\\ b1 ==> a1) /\\ (~b1 ==> a2) ==> p ==> b1 /\\ a1 \\/ a2
   a /\\ b ==> c <=> a ==> c \\/ ~b
-  !n. 0 < n /\\ n < 2400\n       ==> n <= 2 /\\ 2 <= 2 * n \\/\n           n <= 3 /\\ 3 <= 2 * n \\/\n           n <= 5 /\\ 5 <= 2 * n \\/\n           n <= 7 /\\ 7 <= 2 * n \\/\n           n <= 13 /\\ 13 <= 2 * n \\/\n           n <= 23 /\\ 23 <= 2 * n \\/\n           n <= 43 /\\ 43 <= 2 * n \\/\n           n <= 83 /\\ 83 <= 2 * n \\/\n           n <= 163 /\\ 163 <= 2 * n \\/\n           n <= 317 /\\ 317 <= 2 * n \\/\n           n <= 631 /\\ 631 <= 2 * n \\/\n           n <= 1259 /\\ 1259 <= 2 * n \\/\n           n <= 2503 /\\ 2503 <= 2 * n
+  forall n. 0 < n /\\ n < 2400\n       ==> n <= 2 /\\ 2 <= 2 * n \\/\n           n <= 3 /\\ 3 <= 2 * n \\/\n           n <= 5 /\\ 5 <= 2 * n \\/\n           n <= 7 /\\ 7 <= 2 * n \\/\n           n <= 13 /\\ 13 <= 2 * n \\/\n           n <= 23 /\\ 23 <= 2 * n \\/\n           n <= 43 /\\ 43 <= 2 * n \\/\n           n <= 83 /\\ 83 <= 2 * n \\/\n           n <= 163 /\\ 163 <= 2 * n \\/\n           n <= 317 /\\ 317 <= 2 * n \\/\n           n <= 631 /\\ 631 <= 2 * n \\/\n           n <= 1259 /\\ 1259 <= 2 * n \\/\n           n <= 2503 /\\ 2503 <= 2 * n
   prime
   0 < n <=> ~(n = 0)
   n:num
   n >= 2400 \\/ n < 2400
-  !n. ~(n = 0) ==> ?p. prime p /\\ n <= p /\\ p <= 2 * n
+  forall n. ~(n = 0) ==> ?p. prime p /\\ n <= p /\\ p <= 2 * n
   pii(n) = sum(1,n) (\\p. if prime(p) then &1 else &0)
   pii(0) = &0
   pii(SUC n) = pii(n) + (if prime(SUC n) then &1 else &0)
   n:num
   {p | p < SUC n}
-  !n. FINITE {p | p <= n /\\ prime(p)}
+  forall n. FINITE {p | p <= n /\\ prime(p)}
   ~(SUC n <= n)
   1 + n = SUC n
   {p | p <= SUC n /\\ prime p} =\n                if prime(SUC n) then (SUC n) INSERT {p | p <= n /\\ prime p}\n                else {p | p <= n /\\ prime p}
   {p | p <= 0 /\\ prime p} = {}
-  !n. pii(n) = &(CARD {p | p <= n /\\ prime(p)})
+  forall n. pii(n) = &(CARD {p | p <= n /\\ prime(p)})
   r < n + 1
   1 <= r
   &0 < &r /\\ &r <= &n
@@ -17881,13 +17881,13 @@ proving that 49 is composite
   x <= y ==> a <= x ==> a <= y
   3 <= n ==> (n = 3) \\/ (n = 4) \\/ 5 <= n
   3 <= n ==> 1 < n
-  !n. 3 <= n ==> &1 / &2 * (&n / ln(&n)) <= pii(n)
-  !n. n < 50 ==> 3 <= n ==> ln(&n) * pii(n) <= &5 * &n
+  forall n. 3 <= n ==> &1 / &2 * (&n / ln(&n)) <= pii(n)
+  forall n. n < 50 ==> 3 <= n ==> ln(&n) * pii(n) <= &5 * &n
   p:num
-  !n. &0 <= theta n
-  !m n. m <= n ==> pii(m) <= pii(n)
+  forall n. &0 <= theta n
+  forall m n. m <= n ==> pii(m) <= pii(n)
   pii(0) = &0
-  !n. &0 <= pii(n)
+  forall n. &0 <= pii(n)
   ~(m = 0)
   1 + m <= r
   &0 < &m /\\ &m <= &r
@@ -17901,7 +17901,7 @@ proving that 49 is composite
   &0 <= a * (c - b) ==> a * (b - c) <= &0
   &0
   m <= n:num
-  !m n. ~(m = 0) ==> ln(&m) * (pii n - pii m) <= &3 / &2 * &n
+  forall m n. ~(m = 0) ==> ln(&m) * (pii n - pii m) <= &3 / &2 * &n
   &7 <= x ==> &1 <= x
   x:real
   x:real
@@ -17926,7 +17926,7 @@ proving that 49 is composite
   ~(ISQRT n = 0)
   n:num
   ISQRT n
-  !n. 50 <= n\n       ==> ln(&n) * pii(n)\n           <= &9 / &4 * (&3 / &2 * &n + ln(&(ISQRT(n))) * pii(ISQRT(n)))
+  forall n. 50 <= n\n       ==> ln(&n) * pii(n)\n           <= &9 / &4 * (&3 / &2 * &n + ln(&(ISQRT(n))) * pii(ISQRT(n)))
   x:real
   ISQRT n * ISQRT n
   &(ISQRT n) * &7
@@ -17949,7 +17949,7 @@ proving that 49 is composite
   n < 50
   n:num
   3 <= n ==> 1 < n
-  !n. 3 <= n ==> pii(n) <= &5 * (&n / ln(&n))
+  forall n. 3 <= n ==> pii(n) <= &5 * (&n / ln(&n))
 ISQRT =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#ISQRT:fun(num,num) n:num)) (#@:fun(fun(num,bool),num) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 ISQRT_WORKS =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#ISQRT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) (#ISQRT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 ISQRT_0 =  |- ((#=:fun(num,fun(num,bool)) (#ISQRT:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))

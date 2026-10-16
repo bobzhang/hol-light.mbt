@@ -21897,19 +21897,19 @@ proving that 5 is prime
 proving that 7 is prime
 proving that 9 is composite
 Examples/miller_rabin quotations (238):
-  miller_rabin_composite a n <=>\n        if EVEN n then ~(n = 2) else\n        let e = index 2 (n - 1) in\n        let k = (n - 1) DIV 2 EXP e in\n        ~(a EXP k == 1) (mod n) /\\\n        !i. i < e ==> ~((a EXP (2 EXP i * k) == n - 1) (mod n))
+  miller_rabin_composite a n <=>\n        if EVEN n then ~(n = 2) else\n        let e = index 2 (n - 1) in\n        let k = (n - 1) DIV 2 EXP e in\n        ~(a EXP k == 1) (mod n) /\\\n        forall i. i < e ==> ~((a EXP (2 EXP i * k) == n - 1) (mod n))
   miller_rabin_pseudoprime a n <=>\n        n = 2 \\/\n        ODD n /\\\n        let e = index 2 (n - 1) in\n        let k = (n - 1) DIV 2 EXP e in\n        (a EXP k == 1) (mod n) \\/\n        ?i. i < e /\\ (a EXP (2 EXP i * k) == n - 1) (mod n)
   ODD n
   n = 2
-  !a n. ~(miller_rabin_composite a n) <=> miller_rabin_pseudoprime a n
-  !a n. ~(miller_rabin_pseudoprime a n) <=> miller_rabin_composite a n
+  forall a n. ~(miller_rabin_composite a n) <=> miller_rabin_pseudoprime a n
+  forall a n. ~(miller_rabin_pseudoprime a n) <=> miller_rabin_composite a n
   i < j ==> SUC i + j - (i + 1) = j
   ((e * d) * 2) * f = ((2 * e) * f) * d
   2 EXP (index 2 (q - 1) - (i + 1))
   q divides (a + 1) ==> (a EXP 2 == 1) (mod q)
   2 EXP (index 2 (q - 1))
   q = 0
-  !a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> (a EXP (q - 1) == 1) (mod q)
+  forall a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> (a EXP (q - 1) == 1) (mod q)
   ~(n = 0) ==> SUC(n - 1) = n
   (e * k) * 2 = (2 * e) * k
   p = 2
@@ -21927,30 +21927,30 @@ Examples/miller_rabin quotations (238):
   e:num
   \\i. i <= e /\\ (a EXP (2 EXP i * k) == 1) (mod q)
   ODD 2
-  !a q. (?p k. prime p /\\ ODD p /\\ p EXP k = q)\n         ==> (miller_rabin_pseudoprime a q <=> (a EXP (q - 1) == 1) (mod q))
+  forall a q. (?p k. prime p /\\ ODD p /\\ p EXP k = q)\n         ==> (miller_rabin_pseudoprime a q <=> (a EXP (q - 1) == 1) (mod q))
   1
   p:num
   p = 2
-  !a p. prime p /\\ coprime(a,p) ==> miller_rabin_pseudoprime a p
-  !a p. prime p /\\ ~(p divides a) ==> miller_rabin_pseudoprime a p
-  !a p. coprime(a,p) /\\ miller_rabin_composite a p ==> ~(prime p)
-  !a p. ~(p divides a) /\\ miller_rabin_composite a p ==> ~(prime p)
+  forall a p. prime p /\\ coprime(a,p) ==> miller_rabin_pseudoprime a p
+  forall a p. prime p /\\ ~(p divides a) ==> miller_rabin_pseudoprime a p
+  forall a p. coprime(a,p) /\\ miller_rabin_composite a p ==> ~(prime p)
+  forall a p. ~(p divides a) /\\ miller_rabin_composite a p ==> ~(prime p)
   coprime(a,1)
   p = 1
   (a == 1) (mod n) ==> coprime(a,n)
   p = 0
   p = 1
   p = 2
-  !a p. miller_rabin_pseudoprime a p ==> p = 2 \\/ coprime(a,p)
+  forall a p. miller_rabin_pseudoprime a p ==> p = 2 \\/ coprime(a,p)
   i:num
   ODD p
   p:num
   b:num
   a:num
   p ==> (q <=> r) <=> (p ==> q ==> r) /\\ (p ==> r ==> q)
-  !a b p.\n        (a == b) (mod p)\n        ==> (miller_rabin_pseudoprime a p <=> miller_rabin_pseudoprime b p)
-  !p. ODD p ==> miller_rabin_pseudoprime 1 p
-  !a. miller_rabin_pseudoprime a 1
+  forall a b p.\n        (a == b) (mod p)\n        ==> (miller_rabin_pseudoprime a p <=> miller_rabin_pseudoprime b p)
+  forall p. ODD p ==> miller_rabin_pseudoprime 1 p
+  forall a. miller_rabin_pseudoprime a 1
   2 EXP i * k
   (a EXP 2 == 1) (mod p) /\\ (x * y == 1) (mod p)\n      ==> (x == a) (mod p) ==> (y == a) (mod p)
   i:num
@@ -21959,7 +21959,7 @@ Examples/miller_rabin quotations (238):
   coprime(a:num,p)
   p = 2
   p = 0
-  !a p. miller_rabin_pseudoprime a p\n         ==> miller_rabin_pseudoprime (inverse_mod p a) p
+  forall a p. miller_rabin_pseudoprime a p\n         ==> miller_rabin_pseudoprime (inverse_mod p a) p
   coprime(k:num,n)
   (p:num) divides n
   coprime(k:num,a) ==> gcd(k,a * b) = gcd(k,b)
@@ -21969,7 +21969,7 @@ Examples/miller_rabin quotations (238):
   n:num
   ~(prime p /\\ p divides 1)
   k = 0
-  !n a k.\n        ODD n /\\ coprime(k,n) /\\ coprime(n,a)\n        ==> CARD {x | x < n /\\ (x EXP k == a) (mod n)}\n            <= nproduct {p | prime p /\\ p divides n} (\\p. gcd(k,p - 1))
+  forall n a k.\n        ODD n /\\ coprime(k,n) /\\ coprime(n,a)\n        ==> CARD {x | x < n /\\ (x EXP k == a) (mod n)}\n            <= nproduct {p | prime p /\\ p divides n} (\\p. gcd(k,p - 1))
   gcd(a * b:num,c) divides a * gcd(b,c)
   s:num->bool
   p:num
@@ -21978,7 +21978,7 @@ Examples/miller_rabin quotations (238):
   FINITE {p | prime p /\\ p divides n}
   st = n - 1 ==> ~(n = 0) ==> n = st + 1
   z:num
-  !z. coprime(n,z)\n          ==> CARD {a | a < n /\\ (a EXP (2 EXP v * t) == z) (mod n)} <=\n              nproduct {p | prime p /\\ p divides n}\n                       (\\p. 2 EXP v * gcd(t,p - 1))
+  forall z. coprime(n,z)\n          ==> CARD {a | a < n /\\ (a EXP (2 EXP v * t) == z) (mod n)} <=\n              nproduct {p | prime p /\\ p divides n}\n                       (\\p. 2 EXP v * gcd(t,p - 1))
   x <= b /\\ y <= b ==> x + y <= 2 * b
   (x == a) (mod n) ==> (a EXP 2 == 1) (mod n)\n                     ==> (x EXP 2 == 1) (mod n)
   ((2 * i) * d) * t = ((i * t) * 2) * d
@@ -21986,16 +21986,16 @@ Examples/miller_rabin quotations (238):
   d:num
   i:num <= v <=> i < v \\/ i = v
   ~(i <= n) /\\ i <= n + 1 <=> i = n + 1
-  (!p. prime p ==> P p) /\\ ~(!p. prime p ==> Q p) /\\\n         (!p. prime p ==> R p)\n         ==> (!p. ~(p = 2) ==> (Q p <=> R p)) ==> P 2 /\\ ~Q 2 /\\ R 2
+  (forall p. prime p ==> P p) /\\ ~(forall p. prime p ==> Q p) /\\\n         (forall p. prime p ==> R p)\n         ==> (forall p. ~(p = 2) ==> (Q p <=> R p)) ==> P 2 /\\ ~Q 2 /\\ R 2
   p - 1 = 0 <=> p = 0 \\/ p = 1
   p:num
   a:num
   p divides n /\\ coprime(a,n)\n         ==> coprime(a:num,p) /\\ coprime(p,a)
   p divides n ==> ((n == m) (mod p) <=> p divides m)
   (a == 1) (mod p) <=> (a + 1 == 2) (mod p)
-  !p:num. (a == b) (mod n)\n                ==> p divides n /\\ (a == 1) (mod p)\n                    ==> (b == 1) (mod p)
+  forall p:num. (a == b) (mod n)\n                ==> p divides n /\\ (a == 1) (mod p)\n                    ==> (b == 1) (mod p)
   p:num
-  !p:num. (a == b) (mod n)\n                ==> p divides n /\\ (b EXP 2 == 1) (mod n)\n                    ==> (a EXP 2 == 1) (mod p)
+  forall p:num. (a == b) (mod n)\n                ==> p divides n /\\ (b EXP 2 == 1) (mod n)\n                    ==> (a EXP 2 == 1) (mod p)
   p:num
   p = 1
   p = 0
@@ -22005,10 +22005,10 @@ Examples/miller_rabin quotations (238):
   (n - 1) DIV 2 EXP s = t
   a:num
   {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
-  !p. (a == 1) (mod n) /\\ n divides (a + 1)\n            ==> p divides n ==> p divides 2
+  forall p. (a == 1) (mod n) /\\ n divides (a + 1)\n            ==> p divides n ==> p divides 2
   p:num
   a:num
-  (!x. ~(Q x /\\ R x))\n        ==> {x | P x /\\ Q x} INTER {x | P x /\\ R x} = {}
+  (forall x. ~(Q x /\\ R x))\n        ==> {x | P x /\\ Q x} INTER {x | P x /\\ R x} = {}
   {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
   p:num
   CARD {a | a < n /\\ (a EXP (2 EXP v * t) == 1) (mod n)} +\n    CARD {a | a < n /\\ (a EXP (2 EXP v * t) == n - 1) (mod n)}
@@ -22018,7 +22018,7 @@ Examples/miller_rabin quotations (238):
   ODD n
   n = 2
   n:num
-  !n s t v.\n        ~(prime n) /\\ 2 EXP s * t = n - 1 /\\ ODD t /\\\n        (?p. prime p /\\ p divides n /\\ ~(2 EXP (v + 2) divides (p - 1)))\n        ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n}\n            <= 2 * nproduct {p | prime p /\\ p divides n}\n                            (\\p. 2 EXP v * gcd(t,p - 1))
+  forall n s t v.\n        ~(prime n) /\\ 2 EXP s * t = n - 1 /\\ ODD t /\\\n        (?p. prime p /\\ p divides n /\\ ~(2 EXP (v + 2) divides (p - 1)))\n        ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n}\n            <= 2 * nproduct {p | prime p /\\ p divides n}\n                            (\\p. 2 EXP v * gcd(t,p - 1))
   a divides t /\\ b divides t /\\ coprime(a,v) /\\ coprime(b,v)\n        ==> s * t + 1 = (v * a + 1) * (v * b + 1)\n            ==> v * a = v * b
   n - 1 = m ==> ~(n = 0) ==> m + 1 = n
   m = n - 1 ==> ~(n = 0) ==> m + 1 = n
@@ -22054,7 +22054,7 @@ Examples/miller_rabin quotations (238):
   q:num
   p:num
   \\p. 2 <= index p n \\/ 2 EXP (v + 2) divides p - 1
-  !P. (!p q. R p q ==> R q p) /\\\n          (!p q. P p ==> R p q) /\\\n          (!p q. ~P p /\\ ~P q ==> R p q)\n          ==> !p q. R p q
+  forall P. (forall p q. R p q ==> R q p) /\\\n          (forall p q. P p ==> R p q) /\\\n          (forall p q. ~P p /\\ ~P q ==> R p q)\n          ==> forall p q. R p q
   1 <= n - 1 <=> ~(n = 0) /\\ ~(n = 1)
   4 EXP (index p n - 1)
   prime
@@ -22099,7 +22099,7 @@ Examples/miller_rabin quotations (238):
   index 2 (p - 1)
   p:num
   n:num
-  \\v. !p. prime p /\\ p divides n ==> 2 EXP v divides p - 1
+  \\v. forall p. prime p /\\ p divides n ==> 2 EXP v divides p - 1
   t:num
   n - 1 = 0 <=> n = 0 \\/ n = 1
   s = index 2 (n - 1)
@@ -22108,23 +22108,23 @@ Examples/miller_rabin quotations (238):
   n = 2
   n = 1
   n = 0
-  !n. ODD n /\\ ~prime n /\\ n > 9\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= (phi n) DIV 4
-  (?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)
+  forall n. ODD n /\\ ~prime n /\\ n > 9\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= (phi n) DIV 4
+  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
   8 = 2 EXP 3
   2
   n:num
   n:num
   n < 10
   a <= b DIV 4 /\\ ~(b = 0) ==> ~(a = b)
-  {a | a < n /\\ miller_rabin_pseudoprime a n} PSUBSET\n      {a | coprime(a,n) /\\ a < n}\n      ==> ~(!a. coprime (a,n) ==> miller_rabin_pseudoprime a n)
+  {a | a < n /\\ miller_rabin_pseudoprime a n} PSUBSET\n      {a | coprime(a,n) /\\ a < n}\n      ==> ~(forall a. coprime (a,n) ==> miller_rabin_pseudoprime a n)
   n > 9
   ODD n
   n = 2
   n = 1
-  !n. (!a. coprime(a,n) ==> miller_rabin_pseudoprime a n) <=>\n       n = 1 \\/ prime n
-  (?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)
+  forall n. (forall a. coprime(a,n) ==> miller_rabin_pseudoprime a n) <=>\n       n = 1 \\/ prime n
+  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
   8 = 2 EXP 3
-  (!i. i IN s ==> R i) /\\ (!i. R i ==> (P i <=> i IN s))\n      ==> {i | R i /\\ P i} = s
+  (forall i. i IN s ==> R i) /\\ (forall i. R i ==> (P i <=> i IN s))\n      ==> {i | R i /\\ P i} = s
   {a | a < 9 /\\ miller_rabin_pseudoprime a 9} = {1,8}
   4 * m <= n <=> m <= n DIV 4
   phi n
@@ -22132,9 +22132,9 @@ Examples/miller_rabin quotations (238):
   ~(n < 10) <=> n > 9
   n:num
   \\n. n < 10
-  !Q. (!n. ~Q n ==> P n) /\\ (!n. Q n ==> P n)\n        ==> !n. P n
-  !n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> 4 * CARD {a | a < n /\\ miller_rabin_pseudoprime a n} < n
-  !n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= n DIV 4
+  forall Q. (forall n. ~Q n ==> P n) /\\ (forall n. Q n ==> P n)\n        ==> forall n. P n
+  forall n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> 4 * CARD {a | a < n /\\ miller_rabin_pseudoprime a n} < n
+  forall n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= n DIV 4
 miller_rabin_composite =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#miller_rabin_composite:fun(num,fun(num,bool)) a:num) n:num)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) (#EVEN:fun(num,bool) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#LET:fun(fun(num,bool),fun(num,bool)) (\e:num. (#LET_END:fun(bool,bool) ((#LET:fun(fun(num,bool),fun(num,bool)) (\k:num. (#LET_END:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) a:num) k:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num)))) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) i:num) e:num)) (#~:fun(bool,bool) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) a:num) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)) k:num))) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num)))))))))) ((#DIV:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) e:num)))))) ((#index:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 miller_rabin_pseudoprime =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#miller_rabin_pseudoprime:fun(num,fun(num,bool)) a:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#LET:fun(fun(num,bool),fun(num,bool)) (\e:num. (#LET_END:fun(bool,bool) ((#LET:fun(fun(num,bool),fun(num,bool)) (\k:num. (#LET_END:fun(bool,bool) ((#\/:fun(bool,fun(bool,bool)) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) a:num) k:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num))) (#?:fun(fun(num,bool),bool) (\i:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) i:num) e:num)) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) a:num) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)) k:num))) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num))))))))) ((#DIV:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) e:num)))))) ((#index:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))
 NOT_MILLER_RABIN_COMPOSITE =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#miller_rabin_composite:fun(num,fun(num,bool)) a:num) n:num))) ((#miller_rabin_pseudoprime:fun(num,fun(num,bool)) a:num) n:num))))))

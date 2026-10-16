@@ -49718,11 +49718,11 @@ Warning: inventing type variables
 0..0..4..20..solved at 24
 0..0..3..19..67..174..solved at 180
 Multivariate/tarski quotations (128):
-  !a b:real^2. dist(a,b) = dist(b,a)
+  forall a b:real^2. dist(a,b) = dist(b,a)
   :real
   :real
-  !a b p q r s.\n        dist(a,b) = dist(p,q) /\\ dist(a,b) = dist(r,s)\n        ==> dist(p,q) = dist(r,s)
-  !a b c. dist(a,b) = dist(c,c) ==> a = b
+  forall a b p q r s.\n        dist(a,b) = dist(p,q) /\\ dist(a,b) = dist(r,s)\n        ==> dist(p,q) = dist(r,s)
+  forall a b c. dist(a,b) = dist(c,c) ==> a = b
   :real
   :real
   a = &1 + b ==> a * q = q + b * q
@@ -49730,12 +49730,12 @@ Multivariate/tarski quotations (128):
   --(dist(b:real^2,c) / norm(q) % q):real^2
   q:real^2 = vec 0
   a:real^2
-  !a q b c:real^2. ?x:real^2. between a (q,x) /\\ dist(a,x) = dist(b,c)
+  forall a q b c:real^2. ?x:real^2. between a (q,x) /\\ dist(a,x) = dist(b,c)
   dist(b:real^N,b + x) = norm x
   :real
   :real
   dist(b:real^N,x) = dist(b,y)
-  !a b x y:real^N.\n      ~(b = a) /\\ between b (a,x) /\\ between b (a,y) /\\ dist(b,x) = dist(b,y)\n      ==> x = y
+  forall a b x y:real^N.\n      ~(b = a) /\\ between b (a,x) /\\ between b (a,y) /\\ dist(b,x) = dist(b,y)\n      ==> x = y
   dist(a + x:real^N,a + y) = dist(x,y)
   :real
   :real
@@ -49754,8 +49754,8 @@ Multivariate/tarski quotations (128):
   c:real^2
   b:real^2
   a:real^2
-  !a b c x:real^2 a' b' c' x':real^2.\n        ~(a = b) /\\\n        dist(a,b) = dist(a',b') /\\\n        dist(a,c) = dist(a',c') /\\\n        dist(b,c) = dist(b',c') /\\\n        between b (a,x) /\\ between b' (a',x') /\\ dist(b,x) = dist(b',x')\n        ==> dist(c,x) = dist(c',x')
-  !a b. between b (a,a) ==> a = b
+  forall a b c x:real^2 a' b' c' x':real^2.\n        ~(a = b) /\\\n        dist(a,b) = dist(a',b') /\\\n        dist(a,c) = dist(a',c') /\\\n        dist(b,c) = dist(b',c') /\\\n        between b (a,x) /\\ between b' (a',x') /\\ dist(b,x) = dist(b',x')\n        ==> dist(c,x) = dist(c',x')
+  forall a b. between b (a,a) ==> a = b
   &0 <= (&1 - d) * (&1 + e) /\\ &0 <= d * e
   (&1 - d + e - d * e) / (&1 - d + e)
   &0 < &1 - d + e
@@ -49770,7 +49770,7 @@ Multivariate/tarski quotations (128):
   a:real^2
   p:real^2 = a /\\ b:real^2 = q
   q:real^2 = c
-  !a b c p q:real^2.\n        between p (a,c) /\\ between q (b,c)\n        ==> ?x. between x (p,b) /\\ between x (q,a)
+  forall a b c p q:real^2.\n        between p (a,c) /\\ between q (b,c)\n        ==> ?x. between x (p,b) /\\ between x (q,a)
   :real
   :real
   :real
@@ -49802,7 +49802,7 @@ Multivariate/tarski quotations (128):
   :real
   :real
   :real
-  !p q a b c:real^2.\n        ~(p = q) /\\\n        dist(a,p) = dist(a,q) /\\ dist(b,p) = dist(b,q) /\\ dist(c,p) = dist(c,q)\n        ==> between b (a,c) \\/ between c (b,a) \\/ between a (c,b)
+  forall p q a b c:real^2.\n        ~(p = q) /\\\n        dist(a,p) = dist(a,q) /\\ dist(b,p) = dist(b,q) /\\ dist(c,p) = dist(c,q)\n        ==> between b (a,c) \\/ between c (b,a) \\/ between a (c,b)
   b - (&1 + u) % b:real^N = --(u % b)
   (&1 + u) % c:real^N
   (&1 + u) % b:real^N
@@ -49812,7 +49812,7 @@ Multivariate/tarski quotations (128):
   d:real^N
   vec 0:real^N
   a:real^N
-  !a b c d t:real^N.\n        between d (a,t) /\\ between d (b,c) /\\ ~(a = d)\n        ==> ?x y. between b (a,x) /\\ between c (a,y) /\\ between t (x,y)
+  forall a b c d t:real^N.\n        between d (a,t) /\\ between d (b,c) /\\ ~(a = d)\n        ==> ?x y. between b (a,x) /\\ between c (a,y) /\\ between t (x,y)
   s:real->bool
   x <= s /\\ s <= y ==> abs(x - y) = abs(x - s) + abs(s - y)
   y:real
@@ -49842,9 +49842,9 @@ Multivariate/tarski quotations (128):
   c:real^2
   ?c:real^2. c IN Y
   Y:real^2->bool = {}
-  !x:real^2. x IN X ==> x = vec 0
+  forall x:real^2. x IN X ==> x = vec 0
   a:real^2
-  !X Y:real^2->bool.\n        (?a. !x y. x IN X /\\ y IN Y ==> between x (a,y))\n        ==> (?b. !x y. x IN X /\\ y IN Y ==> between b (x,y))
+  forall X Y:real^2->bool.\n        (?a. forall x y. x IN X /\\ y IN Y ==> between x (a,y))\n        ==> (?b. forall x y. x IN X /\\ y IN Y ==> between b (x,y))
   sup s % basis 1 :real^2
 TARSKI_AXIOM_1_EUCLIDEAN =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\a:cart(real,tybit0(1)). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\b:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit0(1)),cart(real,tybit0(1))),real) ((#,:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),prod(cart(real,tybit0(1)),cart(real,tybit0(1))))) a:cart(real,tybit0(1))) b:cart(real,tybit0(1))))) (#distance:fun(prod(cart(real,tybit0(1)),cart(real,tybit0(1))),real) ((#,:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),prod(cart(real,tybit0(1)),cart(real,tybit0(1))))) b:cart(real,tybit0(1))) a:cart(real,tybit0(1)))))))))
 TARSKI_AXIOM_2_EUCLIDEAN =  |- (#!:fun(fun(cart(real,'?1074776),bool),bool) (\a:cart(real,'?1074776). (#!:fun(fun(cart(real,'?1074776),bool),bool) (\b:cart(real,'?1074776). (#!:fun(fun(cart(real,'?1074782),bool),bool) (\p:cart(real,'?1074782). (#!:fun(fun(cart(real,'?1074782),bool),bool) (\q:cart(real,'?1074782). (#!:fun(fun(cart(real,'?1074797),bool),bool) (\r:cart(real,'?1074797). (#!:fun(fun(cart(real,'?1074797),bool),bool) (\s:cart(real,'?1074797). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,'?1074776),cart(real,'?1074776)),real) ((#,:fun(cart(real,'?1074776),fun(cart(real,'?1074776),prod(cart(real,'?1074776),cart(real,'?1074776)))) a:cart(real,'?1074776)) b:cart(real,'?1074776)))) (#distance:fun(prod(cart(real,'?1074782),cart(real,'?1074782)),real) ((#,:fun(cart(real,'?1074782),fun(cart(real,'?1074782),prod(cart(real,'?1074782),cart(real,'?1074782)))) p:cart(real,'?1074782)) q:cart(real,'?1074782))))) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,'?1074776),cart(real,'?1074776)),real) ((#,:fun(cart(real,'?1074776),fun(cart(real,'?1074776),prod(cart(real,'?1074776),cart(real,'?1074776)))) a:cart(real,'?1074776)) b:cart(real,'?1074776)))) (#distance:fun(prod(cart(real,'?1074797),cart(real,'?1074797)),real) ((#,:fun(cart(real,'?1074797),fun(cart(real,'?1074797),prod(cart(real,'?1074797),cart(real,'?1074797)))) r:cart(real,'?1074797)) s:cart(real,'?1074797)))))) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,'?1074782),cart(real,'?1074782)),real) ((#,:fun(cart(real,'?1074782),fun(cart(real,'?1074782),prod(cart(real,'?1074782),cart(real,'?1074782)))) p:cart(real,'?1074782)) q:cart(real,'?1074782)))) (#distance:fun(prod(cart(real,'?1074797),cart(real,'?1074797)),real) ((#,:fun(cart(real,'?1074797),fun(cart(real,'?1074797),prod(cart(real,'?1074797),cart(real,'?1074797)))) r:cart(real,'?1074797)) s:cart(real,'?1074797)))))))))))))))))

@@ -10817,19 +10817,19 @@ Warning: inventing type variables
 0..0..0..solved at 3
 0..0..1..8..17..33..68..116..189..solved at 216
 Logic/lpo quotations (296):
-  !l. 0 < ITLIST (+) l 1
-  !f a args. MEM a args /\\ (FVT(Fn f args) = {}) ==> (FVT a = {})
-  NONWF(R) a <=> ?s:num->A. (s 0 = a) /\\ (!n. R (s(SUC n)) (s n))
-  WF(R) <=> !a. ~(NONWF(R) a)
+  forall l. 0 < ITLIST (+) l 1
+  forall f a args. MEM a args /\\ (FVT(Fn f args) = {}) ==> (FVT a = {})
+  NONWF(R) a <=> ?s:num->A. (s 0 = a) /\\ (forall n. R (s(SUC n)) (s n))
+  WF(R) <=> forall a. ~(NONWF(R) a)
   ~(n = 0) ==> (SUC n - 1 = SUC(n - 1))
   \\n. if n = 0 then a:A else s(n - 1)
   s:num->A
-  !R a:A b. NONWF(R) b /\\ R b a ==> NONWF(R) a
+  forall R a:A b. NONWF(R) b /\\ R b a ==> NONWF(R) a
   s:num->A
   0
   s:num->A
   WF(\\x:A y. R x y /\\ ~(NONWF(R) y))
-  (!a. ~(NONWF(R) a) /\\ (!b. R b a ==> P(b)) ==> P(a))\n   ==> !x. ~(NONWF(R) x) ==> P(x)
+  (forall a. ~(NONWF(R) a) /\\ (forall b. R b a ==> P(b)) ==> P(a))\n   ==> forall x. ~(NONWF(R) x) ==> P(x)
   1
   \\n. s(SUC n):A
   (s:num->A) 1
@@ -10837,55 +10837,55 @@ Logic/lpo quotations (296):
   s:num->A
   (b ==> c) /\\ a ==> (a <=> b) ==> c
   \\n. ?c. NONWF(R) c /\\ R c a /\\ ((m:A->num)(c) = n)
-  !m:A->num a.\n        NONWF(R) a\n        ==> ?b. NONWF(R) b /\\ R b a /\\\n                (!c. NONWF(R) c /\\ R c a ==> m(b) <= m(c))
+  forall m:A->num a.\n        NONWF(R) a\n        ==> ?b. NONWF(R) b /\\ R b a /\\\n                (forall c. NONWF(R) c /\\ R c a ==> m(b) <= m(c))
   SUC n
   0
-  (!n. NONWF R (t(SUC n):A))
-  !d. b /\\ d /\\ a /\\ c ==> a /\\ b /\\ c
+  (forall n. NONWF R (t(SUC n):A))
+  forall d. b /\\ d /\\ a /\\ c ==> a /\\ b /\\ c
   t:num->A
-  \\b (n:num). @c. NONWF(R) c /\\ R c b /\\\n                            !d. NONWF(R) d /\\ R d b ==> (m:A->num)(c) <= m(d)
+  \\b (n:num). @c. NONWF(R) c /\\ R c b /\\\n                            forall d. NONWF(R) d /\\ R d b ==> (m:A->num)(c) <= m(d)
   a:A
-  !s. NONWF R s ==> (m:A->num)(a) <= m(s)
+  forall s. NONWF R s ==> (m:A->num)(a) <= m(s)
   a:A
   n_0:num
   a /\\ (b ==> c) ==> (a <=> b) ==> c
   \\n. ?s. NONWF(R) s /\\ ((m:A->num)(s) = n)
-  !m:A->num.\n     WF(R) <=> ~(?t. (!n. R (t(SUC n)) (t n)) /\\\n                     (!s. NONWF(R) s ==> m(t 0) <= m(s)) /\\\n                     (!n s. NONWF(R) s /\\ R s (t n) ==> m(t(SUC n)) <= m(s)))
+  forall m:A->num.\n     WF(R) <=> ~(?t. (forall n. R (t(SUC n)) (t n)) /\\\n                     (forall s. NONWF(R) s ==> m(t 0) <= m(s)) /\\\n                     (forall n s. NONWF(R) s /\\ R s (t n) ==> m(t(SUC n)) <= m(s)))
   s:num->num
   \\m:num p:num. st(m):num
   st(0):num
   st:num->num
-  !P (x:num->A).\n        (!n. ?m. n < m /\\ P(x m)) ==> ?f. subseq f /\\ !n. P(x(f n))
+  forall P (x:num->A).\n        (forall n. ?m. n < m /\\ P(x m)) ==> ?f. subseq f /\\ forall n. P(x(f n))
   \\x:A. x = a
   a:A
   (m + n < p:num ==> m < p /\\ n < p)
   (~a /\\ c ==> b) ==> (a ==> b) ==> (c ==> b)
   s:A->bool
   b:A
-  !s. FINITE s\n          ==> (?n:num. !m. n < m ==> (x(m) IN s))\n              ==> ?a:A. !n. ?m. n < m /\\ (x m = a)
-  ?a:A. !n. ?m:num. n < m /\\ (x m = a)
-  !x:num->A s. FINITE(s) /\\ (!n. x(n) IN s)\n                ==> ?a f. subseq f /\\ (!n. x(f n) = a)
+  forall s. FINITE s\n          ==> (?n:num. forall m. n < m ==> (x(m) IN s))\n              ==> ?a:A. forall n. ?m. n < m /\\ (x m = a)
+  ?a:A. forall n. ?m:num. n < m /\\ (x m = a)
+  forall x:num->A s. FINITE(s) /\\ (forall n. x(n) IN s)\n                ==> ?a f. subseq f /\\ (forall n. x(f n) = a)
   \\(t:term) (ts:term list) (n:num) (ns:num list). CONS n ns
   []:num list
   \\(f:num) (args:term list) (ns:num list). ITLIST (+) ns 1
   \\x:num. 1
-  ?termsize.\n     (!x. termsize(V x) = 1) /\\\n     (!f args. termsize(Fn f args) = ITLIST (+) (MAP termsize args) 1)
+  ?termsize.\n     (forall x. termsize(V x) = 1) /\\\n     (forall f args. termsize(Fn f args) = ITLIST (+) (MAP termsize args) 1)
   (LEX(<<) [] l <=> F) /\\\n   (LEX(<<) (CONS h t) l <=>\n        if l = [] then F\n        else if h << HD l then LENGTH t = LENGTH(TL l)\n        else (h = HD l) /\\ LEX(<<) t (TL l))
   (LEX(<<) [] l <=> F) /\\\n   (LEX(<<) (CONS h1 t1) [] <=> F) /\\\n   (LEX(<<) (CONS h1 t1) (CONS h2 t2) <=>\n        if h1 << h2 then LENGTH t1 = LENGTH t2\n        else (h1 = h2) /\\ LEX(<<) t1 t2)
-  !l1 l2 R. LEX(R) l1 l2 ==> (LENGTH l1 = LENGTH l2)
+  forall l1 l2 R. LEX(R) l1 l2 ==> (LENGTH l1 = LENGTH l2)
   x:A list
   x:A list
   y:A list
   y:A list
-  (!x:A y:A. R x y ==> S x y) ==> LEX R x y ==> LEX S x y
-  !l1 l2. LEX (\\x y. R (f x) (f y)) l1 l2 ==> LEX R (MAP f l1) (MAP f l2)
-  !R l. (!x. MEM x l ==> ~(R x x)) ==> ~(LEX(R) l l)
-  !lis R. (!n. LEX(R) (lis(SUC n)) (lis n))\n           ==> !n. LENGTH(lis(n)) = LENGTH(lis(0))
+  (forall x:A y:A. R x y ==> S x y) ==> LEX R x y ==> LEX S x y
+  forall l1 l2. LEX (\\x y. R (f x) (f y)) l1 l2 ==> LEX R (MAP f l1) (MAP f l2)
+  forall R l. (forall x. MEM x l ==> ~(R x x)) ==> ~(LEX(R) l l)
+  forall lis R. (forall n. LEX(R) (lis(SUC n)) (lis n))\n           ==> forall n. LENGTH(lis(n)) = LENGTH(lis(0))
   SUC(p + m)
   m:num
   \\n. tl(SUC p + n):A list
   \\n. hd(SUC p + n):A
-  !n. n <= p ==> (hd n :A = h)
+  forall n. n <= p ==> (hd n :A = h)
   (hd:num->A) (SUC p)
   p:num
   ?m. R (hd(SUC m):A) (hd m)
@@ -10899,57 +10899,57 @@ Logic/lpo quotations (296):
   h:A = hd 0
   tl:num->(A)list
   tl:num->(A)list
-  !m. LENGTH ((tl:num->(A)list) m) = n
-  !n:num a:A. MEM a (tl n) ==> ~NONWF R a
+  forall m. LENGTH ((tl:num->(A)list) m) = n
+  forall n:num a:A. MEM a (tl n) ==> ~NONWF R a
   (if p then T else r) <=> p \\/ ~p /\\ r
-  !m:num. LENGTH (CONS (hd m :A) (tl m)) = SUC n
-  !n:num. LEX R (CONS (hd(SUC n):A) (tl(SUC n))) (CONS (hd n) (tl n))
+  forall m:num. LENGTH (CONS (hd m :A) (tl m)) = SUC n
+  forall n:num. LEX R (CONS (hd(SUC n):A) (tl(SUC n))) (CONS (hd n) (tl n))
   (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  !n:num a:A. MEM a (CONS (hd n) (tl n)) ==> ~NONWF R a
+  forall n:num a:A. MEM a (CONS (hd n) (tl n)) ==> ~NONWF R a
   l:(A)list
   (lis:num->(A)list) m
   m:num
-  !n:num. ~(lis n :(A)list = [])
+  forall n:num. ~(lis n :(A)list = [])
   \\n:num. TL(lis n):A list
   \\n:num. HD(lis n):A
-  ?hd tl. !n:num. CONS (hd n :A) (tl n) = lis(n)
-  !n. LENGTH (lis n :(A)list) = LENGTH (lis 0)
-  !n lis. (LENGTH(lis 0) = n)\n           ==> ~((!n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n                 (!n. LEX(R) (lis(SUC n)) (lis n)))
+  ?hd tl. forall n:num. CONS (hd n :A) (tl n) = lis(n)
+  forall n. LENGTH (lis n :(A)list) = LENGTH (lis 0)
+  forall n lis. (LENGTH(lis 0) = n)\n           ==> ~((forall n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n                 (forall n. LEX(R) (lis(SUC n)) (lis n)))
   hd 0 :A = h
-  !n:num. ~NONWF R (hd n :A)
-  !R lis. ~((!n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n             (!n. LEX(R) (lis(SUC n)) (lis n)))
-  !P R l1 l2. LEX R l1 l2 /\\\n               (!a. MEM a l1 ==> P(a)) /\\ (!a. MEM a l2 ==> P(a))\n               ==> LEX (\\x y. P(x) /\\ P(y) /\\ R x y) l1 l2
-  (!t. t subterm t) /\\\n   (!s a f args. s subterm a /\\ MEM a args ==> s subterm (Fn f args))
+  forall n:num. ~NONWF R (hd n :A)
+  forall R lis. ~((forall n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n             (forall n. LEX(R) (lis(SUC n)) (lis n)))
+  forall P R l1 l2. LEX R l1 l2 /\\\n               (forall a. MEM a l1 ==> P(a)) /\\ (forall a. MEM a l2 ==> P(a))\n               ==> LEX (\\x y. P(x) /\\ P(y) /\\ R x y) l1 l2
+  (forall t. t subterm t) /\\\n   (forall s a f args. s subterm a /\\ MEM a args ==> s subterm (Fn f args))
   s psubterm t <=> s subterm t /\\ ~(s = t)
   a < c ==> a < b + c
   0 < b ==> a < a + b
-  !f args s. MEM s args ==> termsize s < termsize (Fn f args)
-  !f args. ~(MEM (Fn f args) args)
-  !t. t subterm t
-  !t u. t subterm u ==> !s. s subterm t ==> s subterm u
-  !s t u. s subterm t /\\ t subterm u ==> s subterm u
-  !s t. s subterm t /\\ t subterm s ==> (s = t)
-  !x t. x IN FVT(t) ==> V(x) subterm t
-  !s t. ~(s psubterm t /\\ t psubterm s)
-  !s t u. s subterm t /\\ t psubterm u ==> s psubterm u
+  forall f args s. MEM s args ==> termsize s < termsize (Fn f args)
+  forall f args. ~(MEM (Fn f args) args)
+  forall t. t subterm t
+  forall t u. t subterm u ==> forall s. s subterm t ==> s subterm u
+  forall s t u. s subterm t /\\ t subterm u ==> s subterm u
+  forall s t. s subterm t /\\ t subterm s ==> (s = t)
+  forall x t. x IN FVT(t) ==> V(x) subterm t
+  forall s t. ~(s psubterm t /\\ t psubterm s)
+  forall s t u. s subterm t /\\ t psubterm u ==> s psubterm u
   a:term
   a:term
   args:term list
   f:num
-  !s t. s psubterm t <=>\n         ?f args u. (t = Fn f args) /\\ MEM u args /\\ s subterm u
-  !i s t. s subterm t ==> (termsubst i s) subterm (termsubst i t)
+  forall s t. s psubterm t <=>\n         ?f args u. (t = Fn f args) /\\ MEM u args /\\ s subterm u
+  forall i s t. s subterm t ==> (termsubst i s) subterm (termsubst i t)
   termsubst i u
   MAP (termsubst i) args
   u:term
   args:term list
   f:num
-  !i s t. s psubterm t ==> (termsubst i s) psubterm (termsubst i t)
-  (!x s. x IN FVT(s) /\\ ~(s = V x) ==> V x << s) /\\\n   (!fs sargs ft targs si.\n          MEM si sargs /\\ (Fn ft targs << si \\/ (si = Fn ft targs))\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (!fs ft sargs targs.\n          (fs > ft \\/ (fs = ft) /\\ LENGTH sargs > LENGTH targs) /\\\n          ALL (\\ti. ti << Fn fs sargs) targs\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (!f sargs targs.\n          ALL (\\ti. ti << Fn f sargs) targs /\\ LEX(<<) targs sargs\n          ==> Fn f targs << Fn f sargs)
+  forall i s t. s psubterm t ==> (termsubst i s) psubterm (termsubst i t)
+  (forall x s. x IN FVT(s) /\\ ~(s = V x) ==> V x << s) /\\\n   (forall fs sargs ft targs si.\n          MEM si sargs /\\ (Fn ft targs << si \\/ (si = Fn ft targs))\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (forall fs ft sargs targs.\n          (fs > ft \\/ (fs = ft) /\\ LENGTH sargs > LENGTH targs) /\\\n          ALL (\\ti. ti << Fn fs sargs) targs\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (forall f sargs targs.\n          ALL (\\ti. ti << Fn f sargs) targs /\\ LEX(<<) targs sargs\n          ==> Fn f targs << Fn f sargs)
   (a /\\ b) /\\ c <=> ~(a /\\ b ==> ~c)
-  (!s x. (s << V x) <=> F) /\\\n   (!x t. V x << t <=> x IN FVT(t) /\\ ~(t = V x)) /\\\n   (!f fargs g gargs.\n          Fn f fargs << Fn g gargs <=>\n                (?gi. MEM gi gargs /\\\n                      (Fn f fargs << gi \\/ (Fn f fargs = gi))) \\/\n                (!fi. MEM fi fargs ==> fi << Fn g gargs) /\\\n                ((f < g \\/ (f = g) /\\ (LENGTH fargs < LENGTH gargs)) \\/\n                 (f = g) /\\ LEX(<<) fargs gargs))
+  (forall s x. (s << V x) <=> F) /\\\n   (forall x t. V x << t <=> x IN FVT(t) /\\ ~(t = V x)) /\\\n   (forall f fargs g gargs.\n          Fn f fargs << Fn g gargs <=>\n                (?gi. MEM gi gargs /\\\n                      (Fn f fargs << gi \\/ (Fn f fargs = gi))) \\/\n                (forall fi. MEM fi fargs ==> fi << Fn g gargs) /\\\n                ((f < g \\/ (f = g) /\\ (LENGTH fargs < LENGTH gargs)) \\/\n                 (f = g) /\\ LEX(<<) fargs gargs))
   t:term
   Fn ft targs
-  !s t. s << t ==> FVT(s) SUBSET FVT(t)
+  forall s t. s << t ==> FVT(s) SUBSET FVT(t)
   (a1 /\\ a2 ==> a3) /\\ (b1 ==> b2 ==> b3)\n                     ==> a1 /\\ b1 ==> a2 /\\ b2 ==> a3 /\\ b3
   ts:term list
   ss:term list
@@ -10958,18 +10958,18 @@ Logic/lpo quotations (296):
   c:term
   b:term
   a:term
-  !r s t. MEM r rs /\\ MEM s ss /\\ MEM t ts /\\\n            t << s /\\ s << r ==> t << r
+  forall r s t. MEM r rs /\\ MEM s ss /\\ MEM t ts /\\\n            t << s /\\ s << r ==> t << r
   Fn g ss << Fn f rs
   Fn h ts << Fn g ss
   Fn g ss
-  !ti. MEM ti ts ==> ti << Fn f rs
+  forall ti. MEM ti ts ==> ti << Fn f rs
   Fn h ts << Fn g ss
-  !ti. MEM ti ts ==> ti << Fn g ss
+  forall ti. MEM ti ts ==> ti << Fn g ss
   si:term
   si:term
   ?si. MEM si ss /\\ (Fn h ts << si \\/ (Fn h ts = si))
   Fn g ss << Fn f rs
-  !si. MEM si ss ==> si << Fn f rs
+  forall si. MEM si ss ==> si << Fn f rs
   Fn g ss
   termsize ri + termsize(Fn g ss) + termsize (Fn h ts)
   ri:term
@@ -10988,7 +10988,7 @@ Logic/lpo quotations (296):
   x:num
   t:term
   n:num
-  !n r s t.\n        (termsize r + termsize s + termsize t = n) /\\ t << s /\\ s << r\n        ==> t << r
+  forall n r s t.\n        (termsize r + termsize s + termsize t = n) /\\ t << s /\\ s << r\n        ==> t << r
   termsize(Fn f rs) + termsize si + termsize (Fn h ts)
   termsize(Fn f rs) + termsize si + termsize (Fn h ts)
   termsize(Fn f rs) + termsize si + termsize (Fn h ts)
@@ -11015,15 +11015,15 @@ Logic/lpo quotations (296):
   termsize a + termsize b + termsize c
   termsize a + termsize b + termsize c
   termsize a + termsize b + termsize c
-  !s t u. s << t /\\ t << u ==> s << u
+  forall s t u. s << t /\\ t << u ==> s << u
   V x
   FVT(V x)
   x:num
-  !f args a. MEM a args ==> a << Fn f args
+  forall f args a. MEM a args ==> a << Fn f args
   a:term
-  !s t. s subterm t ==> (s = t) \\/ s << t
-  !s t. s psubterm t ==> s << t
-  !i s t. s << t ==> termsubst i s << termsubst i t
+  forall s t. s subterm t ==> (s = t) \\/ s << t
+  forall s t. s psubterm t ==> s << t
+  forall i s t. s << t ==> termsubst i s << termsubst i t
   largs:term list
   largs:term list
   u:term
@@ -11035,12 +11035,12 @@ Logic/lpo quotations (296):
   t:term
   u:term = s
   u:term
-  !s t. s << t\n         ==> Fn f (APPEND largs (CONS s rargs))\n              << Fn f (APPEND largs (CONS t rargs))
-  !t. ~(t << t)
+  forall s t. s << t\n         ==> Fn f (APPEND largs (CONS s rargs))\n              << Fn f (APPEND largs (CONS t rargs))
+  forall t. ~(t << t)
   \\n:num. (args:num->term list)(k n)
   (\\s t.\n                     functions_term s SUBSET A /\\\n                     functions_term t SUBSET A /\\\n                     s << t)
   k(SUC n) + m
-  !n:num. t(SUC n) << t n
+  forall n:num. t(SUC n) << t n
   k(SUC n) + m
   k(SUC n):num
   m:num
@@ -11048,24 +11048,24 @@ Logic/lpo quotations (296):
   ~p ==> ~q /\\ ~r <=> q \\/ r ==> p
   MEM (a:term) (args((k:num->num) n))
   (a ==> b) ==> ~a \\/ b
-  !n a. ~(MEM a (args ((k:num->num) n)) /\\\n            (Fn f (args (k (SUC n))) << a \\/ (Fn f (args (k (SUC n))) = a)))
+  forall n a. ~(MEM a (args ((k:num->num) n)) /\\\n            (Fn f (args (k (SUC n))) << a \\/ (Fn f (args (k (SUC n))) = a)))
   n:num
-  !n:num. functions_term (t n) SUBSET A
-  !a n:num. MEM a (args n) ==> functions_term a SUBSET A
+  forall n:num. functions_term (t n) SUBSET A
+  forall a n:num. MEM a (args n) ==> functions_term a SUBSET A
   k(SUC n):num
   (k:num->num) n
   n:num
-  !m n. m < n ==> t(n) << t(m)
-  !n d. t(n + d) << t(n) \\/ (t(n + d) = t(n))
-  !m n. m <= n ==> t(n) << t(m) \\/ (t(n) = t(m))
+  forall m n. m < n ==> t(n) << t(m)
+  forall n d. t(n + d) << t(n) \\/ (t(n + d) = t(n))
+  forall m n. m <= n ==> t(n) << t(m) \\/ (t(n) = t(m))
   k:num->num
   ar:num
   f:num
   n:num
-  !n:num. functions_term (t n) SUBSET A
+  forall n:num. functions_term (t n) SUBSET A
   n:num
   A:num#num->bool
-  ?far:num#num s. subseq s /\\\n                    (!n:num. fn(s n),LENGTH(args(s n):term list) = far)
+  ?far:num#num s. subseq s /\\\n                    (forall n:num. fn(s n),LENGTH(args(s n):term list) = far)
   args:num->term list
   fn:num->num
   u:term
@@ -11073,7 +11073,7 @@ Logic/lpo quotations (296):
   f:num
   (t:num->term)(n)
   n:num
-  !n:num. functions_term (t n) SUBSET A
+  forall n:num. functions_term (t n) SUBSET A
   ~(n = 0) ==> (SUC(n - 1) = n)
   u:term
   n - 1
@@ -11084,35 +11084,35 @@ Logic/lpo quotations (296):
   args:term list
   f:num
   (t:num->term) n
-  !n:num. ?f args. (t(n) = Fn f args) /\\\n                      ALL (\\t. ~(NONWF(\\s t. functions_term(s) SUBSET A /\\\n                                             functions_term(t) SUBSET A /\\\n                                             s << t) t)) args
+  forall n:num. ?f args. (t(n) = Fn f args) /\\\n                      ALL (\\t. ~(NONWF(\\s t. functions_term(s) SUBSET A /\\\n                                             functions_term(t) SUBSET A /\\\n                                             s << t) t)) args
   t:num->term
   termsize
-  !A. FINITE(A)\n       ==> WF(\\s t. functions_term(s) SUBSET A /\\\n                    functions_term(t) SUBSET A /\\\n                    s << t)
+  forall A. FINITE(A)\n       ==> WF(\\s t. functions_term(s) SUBSET A /\\\n                    functions_term(t) SUBSET A /\\\n                    s << t)
   ~(n = 0) ==> (n = SUC(n - 1))
-  !t s. s subterm t ==> ~(t << s)
+  forall t s. s subterm t ==> ~(t << s)
   ts:term list
   ts:term list
   t:term
   ss:term list
   s:term
-  !fargs gargs.\n        (LENGTH fargs = LENGTH gargs) /\\\n        (!fi gi. MEM fi fargs /\\ MEM gi gargs\n                 ==> fi << gi \\/ gi << fi \\/ (fi = gi))\n        ==> LEX(<<) fargs gargs \\/ LEX(<<) gargs fargs \\/ (fargs = gargs)
+  forall fargs gargs.\n        (LENGTH fargs = LENGTH gargs) /\\\n        (forall fi gi. MEM fi fargs /\\ MEM gi gargs\n                 ==> fi << gi \\/ gi << fi \\/ (fi = gi))\n        ==> LEX(<<) fargs gargs \\/ LEX(<<) gargs fargs \\/ (fargs = gargs)
   LENGTH(gargs:term list)
   LENGTH(fargs:term list)
   g:num
   f:num
-  (?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) \\/\n    ~(?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) /\\\n    (!a. MEM a fargs ==> a << Fn g gargs)
-  (?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) \\/\n    ~(?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) /\\\n    (!a. MEM a gargs ==> a << Fn f fargs)
+  (?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) \\/\n    ~(?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) /\\\n    (forall a. MEM a fargs ==> a << Fn g gargs)
+  (?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) \\/\n    ~(?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) /\\\n    (forall a. MEM a gargs ==> a << Fn f fargs)
   a + b < b + c <=> a < c
   a /\\ b /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
   termsize (Fn f fargs) + termsize (Fn g gargs) = n
-  (!fi. MEM fi fargs\n          ==> fi << Fn g gargs \\/ Fn g gargs << fi \\/ (fi = Fn g gargs)) /\\\n    (!gi. MEM gi gargs\n          ==> gi << Fn f fargs \\/ Fn f fargs << gi \\/ (gi = Fn f fargs)) /\\\n    (!fi gi. MEM fi fargs /\\ MEM gi gargs\n          ==> fi << gi \\/ gi << fi \\/ (fi = gi))
+  (forall fi. MEM fi fargs\n          ==> fi << Fn g gargs \\/ Fn g gargs << fi \\/ (fi = Fn g gargs)) /\\\n    (forall gi. MEM gi gargs\n          ==> gi << Fn f fargs \\/ Fn f fargs << gi \\/ (gi = Fn f fargs)) /\\\n    (forall fi gi. MEM fi fargs /\\ MEM gi gargs\n          ==> fi << gi \\/ gi << fi \\/ (fi = gi))
   gargs:term list
   g:num
   fargs:term list
   f:num
   n:num
-  !n s t. (termsize(s) + termsize(t) = n) /\\ (FVT(s) = {}) /\\ (FVT(t) = {})\n             ==> s << t \\/ t << s \\/ (s = t)
-  !s t. (FVT(s) = {}) /\\ (FVT(t) = {}) ==> s << t \\/ t << s \\/ (s = t)
+  forall n s t. (termsize(s) + termsize(t) = n) /\\ (FVT(s) = {}) /\\ (FVT(t) = {})\n             ==> s << t \\/ t << s \\/ (s = t)
+  forall s t. (FVT(s) = {}) /\\ (FVT(t) = {}) ==> s << t \\/ t << s \\/ (s = t)
 ITLIST_ADD_1_POS =  |- (#!:fun(fun(list(num),bool),bool) (\l:list(num). ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (((#ITLIST:fun(fun(num,fun(num,num)),fun(list(num),fun(num,num))) #+:fun(num,fun(num,num))) l:list(num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
 FVT_FUN_EMPTY =  |- (#!:fun(fun(num,bool),bool) (\f:num. (#!:fun(fun(term,bool),bool) (\a:term. (#!:fun(fun(list(term),bool),bool) (\args:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun(term,fun(list(term),bool)) a:term) args:list(term))) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#FVT:fun(term,fun(num,bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) args:list(term)))) #EMPTY:fun(num,bool)))) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#FVT:fun(term,fun(num,bool)) a:term)) #EMPTY:fun(num,bool)))))))))
 NONWF =  |- (#!:fun(fun('A,bool),bool) (\a:'A. (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) ((#NONWF:fun(fun('A,fun('A,bool)),fun('A,bool)) R:fun('A,fun('A,bool))) a:'A)) (#?:fun(fun(fun(num,'A),bool),bool) (\s:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (s:fun(num,'A) (#NUMERAL:fun(num,num) #_0:num))) a:'A)) (#!:fun(fun(num,bool),bool) (\n:num. ((R:fun('A,fun('A,bool)) (s:fun(num,'A) (#SUC:fun(num,num) n:num))) (s:fun(num,'A) n:num))))))))))))

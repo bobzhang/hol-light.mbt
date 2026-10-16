@@ -7833,25 +7833,25 @@ test "100/realsuncountable matches 100/realsuncountable.ml" {
       #|0..0..3..6..12..19..39..93..151..222..315..408..515..638..769..902..1058..1214..1370..1561..1768..1975..2288..2671..3066..3529..4018..4507..5048..5619..6210..6962..7828..8698..9603..10526..11449..12460..13529..14598..solved at 14937
       #|100/realsuncountable quotations (78):
       #|  countable s <=> s <=_c (UNIV:num->bool)
-      #|  repeating = {s:num->bool | ?n. !m. m >= n ==> s m}
-      #|  !n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) < 2 EXP (n + 1)
-      #|  !n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0)) DIV (2 EXP (SUC n)) = 0
-      #|  !a b. ~(b = 0) ==> (a + b) MOD b = a MOD b
+      #|  repeating = {s:num->bool | ?n. forall m. m >= n ==> s m}
+      #|  forall n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) < 2 EXP (n + 1)
+      #|  forall n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0)) DIV (2 EXP (SUC n)) = 0
+      #|  forall a b. ~(b = 0) ==> (a + b) MOD b = a MOD b
       #|  nsum(0..n) (\\i. if b(i) then 2 EXP i else 0)
-      #|  !n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) + 2 EXP (SUC n))\n       DIV (2 EXP (SUC n)) = 1
+      #|  forall n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) + 2 EXP (SUC n))\n       DIV (2 EXP (SUC n)) = 1
       #|  \\x. x MOD (2 EXP (SUC n))
       #|  \\x. x DIV (2 EXP (SUC n))
       #|  i = SUC n
-      #|  !n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) =\n       nsum(0..n) (\\i. if c(i) then 2 EXP i else 0)\n       ==> !i. i <= n ==> (b(i) <=> c(i))
+      #|  forall n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) =\n       nsum(0..n) (\\i. if c(i) then 2 EXP i else 0)\n       ==> forall i. i <= n ==> (b(i) <=> c(i))
       #|  l:num = k
-      #|  l = minimal n. !m. m >= n ==> t m
-      #|  k = minimal n. !m. m >= n ==> s m
+      #|  l = minimal n. forall m. m >= n ==> t m
+      #|  k = minimal n. forall m. m >= n ==> s m
       #|  t:num->bool
       #|  s:num->bool
-      #|  \\s:num->bool. let n = minimal n. !m. m >= n ==> s m in\n                  n,nsum(0..n) (\\i. if s(i) then 2 EXP i else 0)
+      #|  \\s:num->bool. let n = minimal n. forall m. m >= n ==> s m in\n                  n,nsum(0..n) (\\i. if s(i) then 2 EXP i else 0)
       #|  (UNIV:num->bool) *_c (UNIV:num->bool)
       #|  countable repeating
-      #|  canonical = {s:num->bool | !n. ?m. m >= n /\\ ~(s m)}
+      #|  canonical = {s:num->bool | forall n. ?m. m >= n /\\ ~(s m)}
       #|  (UNIV:num->bool) +_c (UNIV:num->bool)
       #|  canonical +_c repeating
       #|  canonical UNION repeating = UNIV
@@ -7860,10 +7860,10 @@ test "100/realsuncountable matches 100/realsuncountable.ml" {
       #|  :A
       #|  :num
       #|  ~countable canonical
-      #|  !m n. &0 <= sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)
+      #|  forall m n. &0 <= sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)
       #|  x <= a ==> a + y <= b ==> x + y <= b
       #|  &0 <= y /\\ x + y <= a ==> x + (if b then y else &0) <= a
-      #|  !s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)\n             <= &2 / &2 pow m - &2 / &2 pow (m + n)
+      #|  forall s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)\n             <= &2 / &2 pow m - &2 / &2 pow (m + n)
       #|  &0 <= x ==> a + x >= a
       #|  n:num
       #|  a - x < a <=> &0 < x
@@ -7874,10 +7874,10 @@ test "100/realsuncountable matches 100/realsuncountable.ml" {
       #|  n:num
       #|  0
       #|  &2
-      #|  !s. summable (\\i. if s(i) then inv(&2 pow i) else &0)
-      #|  !s. (\\i. if s(i) then inv(&2 pow i) else &0) sums\n       (suminf (\\i. if s(i) then inv(&2 pow i) else &0))
+      #|  forall s. summable (\\i. if s(i) then inv(&2 pow i) else &0)
+      #|  forall s. (\\i. if s(i) then inv(&2 pow i) else &0) sums\n       (suminf (\\i. if s(i) then inv(&2 pow i) else &0))
       #|  &0 <= b ==> x <= a - b ==> x <= a
-      #|  !s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0) <= &2 / &2 pow m
+      #|  forall s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0) <= &2 / &2 pow m
       #|  &0 < inv(x) ==> inv(x) < &2 / x
       #|  a = b /\\ d < c ==> a - c < b - d
       #|  &2 / &2 pow (n + 1) - &2 / &2 pow ((n + 1) + r)
@@ -7893,18 +7893,18 @@ test "100/realsuncountable matches 100/realsuncountable.ml" {
       #|  sum(0,m) (\\n. if s n then inv (&2 pow n) else &0) + inv(&2 pow m)
       #|  m:num
       #|  n + 1
-      #|  !n:num. ?m. m >= n /\\ ~s m
+      #|  forall n:num. ?m. m >= n /\\ ~s m
       #|  m:num
       #|  n + 1
       #|  \\n:num. sum(0,n) (\\n. if t n then inv (&2 pow n) else &0)
       #|  \\k:num. sum(0,n+1) (\\n. if t n then inv (&2 pow n) else &0)
       #|  sum(0,n+1) (\\n. if t n then inv (&2 pow n) else &0)
-      #|  !s t n. ~(s n) /\\ t n /\\\n           (!m. m < n ==> (s(m) <=> t(m))) /\\\n           (!n. ?m. m >= n /\\ ~(s m))\n           ==> suminf(\\n. if s n then inv (&2 pow n) else &0)\n                < suminf(\\n. if t n then inv (&2 pow n) else &0)
+      #|  forall s t n. ~(s n) /\\ t n /\\\n           (forall m. m < n ==> (s(m) <=> t(m))) /\\\n           (forall n. ?m. m >= n /\\ ~(s m))\n           ==> suminf(\\n. if s n then inv (&2 pow n) else &0)\n                < suminf(\\n. if t n then inv (&2 pow n) else &0)
       #|  a < b ==> a = b ==> F
       #|  b < a ==> a = b ==> F
       #|  (t:num->bool) n
       #|  n = minimal x. ~(s x <=> t x)
-      #|  (!x. P x) <=> ~(?x. ~P x)
+      #|  (forall x. P x) <=> ~(?x. ~P x)
       #|  t:num->bool
       #|  s:num->bool
       #|  \\s. suminf(\\n. if s(n) then inv(&2 pow n) else &0)

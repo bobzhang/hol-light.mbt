@@ -3,7 +3,7 @@ Formal_ineqs/trig/matan_eval quotations (56):
   #0.9
   #0.00000001
   ~(x = &0) /\\ x > &0
-  !x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (atn (sqrt x) / sqrt x) bounds\n    ==> interval_arith (matan x) bounds
+  forall x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (atn (sqrt x) / sqrt x) bounds\n    ==> interval_arith (matan x) bounds
   r1 <= &1 - u
   &1 - u <= &1 - x <=> x <= u
   &1 - u
@@ -21,9 +21,9 @@ Formal_ineqs/trig/matan_eval quotations (56):
   x:real
   2
   abs x <= u
-  !x. \n    interval_arith x (lo, hi) /\\\n    interval_arith ((&1 - x / &3) + (x * x) / &5) (a, b) /\\\n    iabs (lo, hi) = u /\\\n    u <= #0.9 /\\\n    u * u <= u2 /\\\n    u2 * u <= u3 /\\\n    r1 <= &1 - u /\\\n    r2 <= &7 * r1 /\\ (&0 < r2 <=> T) /\\\n    u3 / r2 <= e /\\\n    low <= a - e /\\\n    b + e <= high \n    ==> interval_arith (matan x) (low, high)
+  forall x. \n    interval_arith x (lo, hi) /\\\n    interval_arith ((&1 - x / &3) + (x * x) / &5) (a, b) /\\\n    iabs (lo, hi) = u /\\\n    u <= #0.9 /\\\n    u * u <= u2 /\\\n    u2 * u <= u3 /\\\n    r1 <= &1 - u /\\\n    r2 <= &7 * r1 /\\ (&0 < r2 <=> T) /\\\n    u3 / r2 <= e /\\\n    low <= a - e /\\\n    b + e <= high \n    ==> interval_arith (matan x) (low, high)
   &0 < x
-  !x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (inv ((&2 * x) * (x + &1)) - atn (sqrt x) / ((&2 * x) * sqrt x)) bounds\n  ==> interval_arith (dmatan x) bounds
+  forall x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (inv ((&2 * x) * (x + &1)) - atn (sqrt x) / ((&2 * x) * sqrt x)) bounds\n  ==> interval_arith (dmatan x) bounds
   r1 <= &1 - u
   r2 <= &2 * r1
   &1 - u <= &1 - x <=> x <= u
@@ -39,10 +39,10 @@ Formal_ineqs/trig/matan_eval quotations (56):
   1
   x:real
   abs x <= u
-  !x. \n\tinterval_arith x (lo, hi) /\\\n\tinterval_arith (&2 * (x / &5) - &1 / &3) (a, b) /\\\n\tiabs (lo, hi) = u /\\\n\tu <= #0.9 /\\\n\tu * u <= u2 /\\\n\tr1 <= &1 - u /\\\n\tr2 <= &2 * r1 /\\ (&0 < r2 <=> T) /\\\n\tu2 / r2 <= e /\\\n\tlow <= a - e /\\\n\tb + e <= high \n\t==> interval_arith (dmatan x) (low, high)
+  forall x. \n\tinterval_arith x (lo, hi) /\\\n\tinterval_arith (&2 * (x / &5) - &1 / &3) (a, b) /\\\n\tiabs (lo, hi) = u /\\\n\tu <= #0.9 /\\\n\tu * u <= u2 /\\\n\tr1 <= &1 - u /\\\n\tr2 <= &2 * r1 /\\ (&0 < r2 <=> T) /\\\n\tu2 / r2 <= e /\\\n\tlow <= a - e /\\\n\tb + e <= high \n\t==> interval_arith (dmatan x) (low, high)
   x:real
   -- #0.2 <= x
-  !x. interval_arith x (lo, hi) /\\ \n    -- #0.2 <= lo /\\\n    interval_arith (#0.65) (a, b) /\\\n    b2 = --b\n    ==> interval_arith (ddmatan x) (b2, b)
+  forall x. interval_arith x (lo, hi) /\\ \n    -- #0.2 <= lo /\\\n    interval_arith (#0.65) (a, b) /\\\n    b2 = --b\n    ==> interval_arith (ddmatan x) (b2, b)
   e:real
   u:real
   u2:real

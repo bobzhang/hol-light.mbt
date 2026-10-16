@@ -51770,7 +51770,7 @@ test "EC/nistp521 matches EC/nistp521.ml" {
       #|  group_carrier p521_group =\n     weierstrass_curve\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521) /\\\n   group_id p521_group =\n     NONE /\\\n   group_inv p521_group =\n     weierstrass_neg\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521) /\\\n   group_mul p521_group =\n     weierstrass_add\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521)
       #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
       #|  x:int
-      #|  !x:int. ~((x pow 3 - &3 * x + &b_521 == &0) (mod &p_521))
+      #|  forall x:int. ~((x pow 3 - &3 * x + &b_521 == &0) (mod &p_521))
       #|  G_521 IN group_carrier p521_group
       #|  group_element_order p521_group G_521 = n_521
       #|  FINITE(group_carrier p521_group)
@@ -51785,7 +51785,7 @@ test "EC/nistp521 matches EC/nistp521.ml" {
       #|  G_521:(int#int)option
       #|  group_carrier p521_group HAS_SIZE n_521
       #|  CARD(group_carrier p521_group) = n_521
-      #|  !P. P IN group_carrier p521_group\n       ==> group_element_order p521_group P =\n           if P = group_id p521_group then 1 else n_521
+      #|  forall P. P IN group_carrier p521_group\n       ==> group_element_order p521_group P =\n           if P = group_id p521_group then 1 else n_521
       #|  subgroup_generated p521_group {G_521} = p521_group
       #|  cyclic_group p521_group
       #|  abelian_group p521_group

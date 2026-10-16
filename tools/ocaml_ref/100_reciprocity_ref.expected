@@ -15449,39 +15449,39 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..1..2..5..10..19..solved at 38
 100/reciprocity quotations (246):
-  !p i. i IN 1..p - 1 <=> 0 < i /\\ i < p
+  forall p i. i IN 1..p - 1 <=> 0 < i /\\ i < p
   ~(2 = 0)
   n:num
-  !n. EVEN n <=> n = 2 * (n DIV 2)
+  forall n. EVEN n <=> n = 2 * (n DIV 2)
   d:num
   0
   (2 + x) - 1 = x + 1
   2 <= p ==> ((p - 1) * (p - 1) == 1) (mod p)
   EVEN n
   (p - 1) * (if EVEN n then 1 else p - 1)
-  !p n. 2 <= p ==> ((p - 1) EXP n == if EVEN n then 1 else p - 1) (mod p)
+  forall p n. 2 <= p ==> ((p - 1) EXP n == if EVEN n then 1 else p - 1) (mod p)
   0 + 1
   3 <= p ==> (p - 1) + 2 = p + 1
   p - 1
   (2 == 0) (mod p)
-  !p. 3 <= p ==> ~(p - 1 == 1) (mod p)
-  !p x y. 3 <= p /\\\n           ((if x then 1 else p - 1) == (if y then 1 else p - 1)) (mod p)\n           ==> (x <=> y)
+  forall p. 3 <= p ==> ~(p - 1 == 1) (mod p)
+  forall p x y. 3 <= p /\\\n           ((if x then 1 else p - 1) == (if y then 1 else p - 1)) (mod p)\n           ==> (x <=> y)
   (s:A->bool) CROSS (t:B->bool)
-  !s:A->bool t:B->bool.\n       FINITE s /\\ FINITE t ==> FINITE {x,y | x IN s /\\ y IN t /\\ P x y}
+  forall s:A->bool t:B->bool.\n       FINITE s /\\ FINITE t ==> FINITE {x,y | x IN s /\\ y IN t /\\ P x y}
   \\(x:A,y:B). x
-  FINITE s /\\ FINITE t /\\ (!x. x IN s /\\ p(x) ==> f(x) IN t)\n   ==> CARD {(x:A),(y:B) | x IN s /\\ y IN t /\\ y = f x /\\ p x} =\n       CARD {x | x IN s /\\ p(x)}
+  FINITE s /\\ FINITE t /\\ (forall x. x IN s /\\ p(x) ==> f(x) IN t)\n   ==> CARD {(x:A),(y:B) | x IN s /\\ y IN t /\\ y = f x /\\ p x} =\n       CARD {x | x IN s /\\ p(x)}
   \\(x:num,y:num). (y,x)
   CARD {y,x | y IN 1..m /\\ x IN 1..n /\\ P x y} =\n   CARD {x,y | x IN 1..n /\\ y IN 1..m /\\ P x y}
   y is_quadratic_residue rel <=> ?x. (x EXP 2 == y) (rel)
   (x * x == a) (mod p)
   x MOD p
   x:num
-  !a p. ~(p = 0) /\\ ~(p divides a)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
-  !a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
+  forall a p. ~(p = 0) /\\ ~(p divides a)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
+  forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
   (x + y) EXP 2 = y * (y + 2 * x) + x EXP 2
-  !p x y. prime p\n           ==> (((x + y) EXP 2 == x EXP 2) (mod p) <=>\n                 p divides y \\/ p divides (2 * x + y))
+  forall p x y. prime p\n           ==> (((x + y) EXP 2 == x EXP 2) (mod p) <=>\n                 p divides y \\/ p divides (2 * x + y))
   x + x + d = 2 * x + d
-  !p x y. prime p\n           ==> ((x EXP 2 == y EXP 2) (mod p) <=>\n                 p divides (x + y) \\/ p divides (dist(x,y)))
+  forall p x y. prime p\n           ==> ((x EXP 2 == y EXP 2) (mod p) <=>\n                 p divides (x + y) \\/ p divides (dist(x,y)))
   (x EXP 2 == z EXP 2) (mod p)
   z:num
   x:num
@@ -15492,21 +15492,21 @@ Warning: inventing type variables
   p - x:num
   x:num
   x:num
-  !a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x y. 0 < x /\\ x < p /\\ 0 < y /\\ y < p /\\ x + y = p /\\\n                       (x EXP 2 == a) (mod p) /\\ (y EXP 2 == a) (mod p) /\\\n                       !z. 0 < z /\\ z < p /\\ (z EXP 2 == a) (mod p)\n                           ==> z = x \\/ z = y)
+  forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x y. 0 < x /\\ x < p /\\ 0 < y /\\ y < p /\\ x + y = p /\\\n                       (x EXP 2 == a) (mod p) /\\ (y EXP 2 == a) (mod p) /\\\n                       forall z. 0 < z /\\ z < p /\\ (z EXP 2 == a) (mod p)\n                           ==> z = x \\/ z = y)
   (x * (p - x) + x EXP 2 == a * (p - 1) + a * 1) (mod p)
   x < p ==> 1 <= p
-  !p x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p)\n         ==> (x * (p - x) == (p - 1) * a) (mod p)
+  forall p x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p)\n         ==> (x * (p - x) == (p - 1) * a) (mod p)
   (legendre:num#num->int)(a,p) =\n        if ~(coprime(a,p)) then &0\n        else if a is_quadratic_residue (mod p) then &1\n        else --(&1)
   nproduct = iterate ( * )
-  !f g s. FINITE s /\\ (!x. x IN s ==> (f x == g x) (mod n))\n           ==> (nproduct s f == nproduct s g) (mod n)
+  forall f g s. FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n           ==> (nproduct s f == nproduct s g) (mod n)
   {x | x IN a INSERT s /\\ p(x)} =\n     if p(a) then a INSERT {x | x IN s /\\ p(x)}\n     else {x | x IN s /\\ p(x)}
   a /\\ b ==> c <=> b ==> a ==> c
   FINITE s ==> FINITE {x | x IN s /\\ p(x)}
   {x | F} = {}
-  !c s. FINITE s\n         ==> nproduct s (\\x. if p(x) then c else 1) =\n             c EXP (CARD {x | x IN s /\\ p(x)})
-  !f p s. FINITE s /\\ (!x. x IN s ==> coprime(p,f x))\n           ==> coprime(p,nproduct s f)
+  forall c s. FINITE s\n         ==> nproduct s (\\x. if p(x) then c else 1) =\n             c EXP (CARD {x | x IN s /\\ p(x)})
+  forall f p s. FINITE s /\\ (forall x. x IN s ==> coprime(p,f x))\n           ==> coprime(p,nproduct s f)
   1 <= SUC n
-  !n. FACT(n) = nproduct(1..n) (\\i. i)
+  forall n. FACT(n) = nproduct(1..n) (\\i. i)
   ~(n = 0) ==> n = SUC(n - 1)
   x:A
   a:A
@@ -15529,14 +15529,14 @@ Warning: inventing type variables
   n = 0
   s:A->bool
   n:num
-  !f r n s k. s HAS_SIZE (2 * n) /\\\n               (!x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                      (f(x) * f(y) == k) (mod r))\n               ==> (nproduct s f == k EXP n) (mod r)
+  forall f r n s k. s HAS_SIZE (2 * n) /\\\n               (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                      (f(x) * f(y) == k) (mod r))\n               ==> (nproduct s f == k EXP n) (mod r)
   x:num
   p:num
   a:num
   ~(p = 0) ==> (x <= p - 1 <=> x < p)
   1 <= x <=> 0 < x
   p = 0
-  !a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ ~(a is_quadratic_residue (mod p))\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 1)) (mod p)
+  forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ ~(a is_quadratic_residue (mod p))\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 1)) (mod p)
   3 <= p ==> SUC(p - 2) = p - 1
   3 <= p ==> p - 1 = SUC(p - 2)
   3 <= p ==> SUC((p - 3) DIV 2) = (p - 1) DIV 2
@@ -15561,12 +15561,12 @@ Warning: inventing type variables
   p = 2
   ODD(p)
   3 <= p /\\ ~(p = 0)
-  !a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ a is_quadratic_residue (mod p)\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 2)) (mod p)
+  forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ a is_quadratic_residue (mod p)\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 2)) (mod p)
   p:num
   1
-  !p. prime(p) ==> (FACT(p - 2) == 1) (mod p)
+  forall p. prime(p) ==> (FACT(p - 2) == 1) (mod p)
   2 <= p ==> p - 1 = SUC(p - 2)
-  !p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
+  forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
   ~(n = 0) ==> n - 1 + 1 = n
   n - 1
   p divides 1
@@ -15577,8 +15577,8 @@ Warning: inventing type variables
   n = 0
   p:num
   n:num
-  !p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
-  !a p. prime p /\\ coprime(a,p)\n         ==> (a EXP ((p - 1) DIV 2) ==\n              (if a is_quadratic_residue (mod p) then 1 else p - 1)) (mod p)
+  forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
+  forall a p. prime p /\\ coprime(a,p)\n         ==> (a EXP ((p - 1) DIV 2) ==\n              (if a is_quadratic_residue (mod p) then 1 else p - 1)) (mod p)
   2 * r + 1 = p
   j <= r
   i <= r
@@ -15617,7 +15617,7 @@ Warning: inventing type variables
   r = 0
   r = 0
   p:num
-  !a p r. prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n           ==> (a is_quadratic_residue (mod p) <=>\n                EVEN(CARD {x | x IN 1..r /\\ r < (a * x) MOD p}))
+  forall a p r. prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n           ==> (a is_quadratic_residue (mod p) <=>\n                EVEN(CARD {x | x IN 1..r /\\ r < (a * x) MOD p}))
   q * x
   prime p
   ((q * x) DIV p + 2) * p <= y * p
@@ -15625,7 +15625,7 @@ Warning: inventing type variables
   ~(x <= y) /\\ ~(y + 2 <= x) ==> x = y + 1
   (q * x) DIV p
   p:num
-  !p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r ==> r < m
+  forall p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r ==> r < m
   a /\\ (a ==> b) ==> a /\\ b
   2 * r + 1 = p
   q * x
@@ -15642,18 +15642,18 @@ Warning: inventing type variables
   r:num
   p:num
   q:num
-  !p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (q is_quadratic_residue (mod p) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   q * x < p * y /\\ p * y <= q * x + r}))
+  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (q is_quadratic_residue (mod p) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   q * x < p * y /\\ p * y <= q * x + r}))
   r:num
   s:num
   p:num
   q:num
-  !p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (p is_quadratic_residue (mod q) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   p * y < q * x /\\ q * x <= p * y + s}))
+  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (p is_quadratic_residue (mod q) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   p * y < q * x /\\ q * x <= p * y + s}))
   a INTER (b UNION c) = {} <=> a INTER b = {} /\\ a INTER c = {}
   CARD:(num#num->bool)->num
   (1..r) CROSS (1..s)
   FINITE(a:num#num->bool) /\\ FINITE(b:num#num->bool) /\\\n    FINITE(c:num#num->bool) /\\ FINITE(d:num#num->bool)
   CARD(a:num#num->bool) + CARD(b:num#num->bool) +\n                CARD(c:num#num->bool) + CARD(d:num#num->bool) = r * s
-  !a b c d r s.\n        a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n        PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n        ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))
+  forall a b c d r s.\n        a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n        PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n        ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))
   EVEN
   a + x < y + a <=> x < y
   x <= r ==> x <= r + 1
@@ -15680,7 +15680,7 @@ Warning: inventing type variables
   r:num
   q:num
   p:num
-  !p q r s.\n        prime p /\\\n        prime q /\\\n        coprime (p,q) /\\\n        2 * r + 1 = p /\\\n        2 * s + 1 = q\n        ==> ((q is_quadratic_residue (mod p) <=>\n              p is_quadratic_residue (mod q)) <=>\n             ~(ODD r /\\ ODD s))
+  forall p q r s.\n        prime p /\\\n        prime q /\\\n        coprime (p,q) /\\\n        2 * r + 1 = p /\\\n        2 * s + 1 = q\n        ==> ((q is_quadratic_residue (mod p) <=>\n              p is_quadratic_residue (mod q)) <=>\n             ~(ODD r /\\ ODD s))
   p is_quadratic_residue (mod q)
   ~(a <=> b) <=> (a <=> ~b)
   EVEN s
@@ -15694,7 +15694,7 @@ Warning: inventing type variables
   r:num
   ODD p
   ODD q
-  !p q. prime p /\\ prime q /\\ ODD p /\\ ODD q /\\ ~(p = q)\n         ==> legendre(p,q) * legendre(q,p) =\n             --(&1) pow ((p - 1) DIV 2 * (q - 1) DIV 2)
+  forall p q. prime p /\\ prime q /\\ ODD p /\\ ODD q /\\ ~(p = q)\n         ==> legendre(p,q) * legendre(q,p) =\n             --(&1) pow ((p - 1) DIV 2 * (q - 1) DIV 2)
 IN_NUMSEG_1 =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\i:num. ((#=:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) i:num)) ((#<:fun(num,fun(num,bool)) i:num) p:num)))))))
 EVEN_DIV =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 CONG_MINUS1_SQUARE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) p:num)) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#*:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) p:num)))

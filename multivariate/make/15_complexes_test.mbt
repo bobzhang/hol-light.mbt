@@ -74233,7 +74233,7 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  w * z = complex(Re(w) * Re(z) - Im(w) * Im(z),\n                   Re(w) * Im(z) + Im(w) * Re(z))
       #|  inv(z) = complex(Re(z) / (Re(z) pow 2 + Im(z) pow 2),\n                    --(Im(z)) / (Re(z) pow 2 + Im(z) pow 2))
       #|  w / z = w * inv(z)
-      #|  (x pow 0 = Cx(&1)) /\\\n   (!n. x pow (SUC n) = x * x pow n)
+      #|  (x pow 0 = Cx(&1)) /\\\n   (forall n. x pow (SUC n) = x * x pow n)
       #|  :P
       #|  :P
       #|  \\n. n + 1
@@ -74241,133 +74241,133 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  \\n. n + 1
       #|  (Re(complex(x,y)) = x)
       #|  Im(complex(x,y)) = y
-      #|  !w z. (w = z) <=> (Re(w) = Re(z)) /\\ (Im(w) = Im(z))
-      #|  !z. complex(Re(z),Im(z)) = z
-      #|  !x y:real. x + y = &0 ==> &0 <= x /\\ &0 <= y ==> x = &0 /\\ y = &0
+      #|  forall w z. (w = z) <=> (Re(w) = Re(z)) /\\ (Im(w) = Im(z))
+      #|  forall z. complex(Re(z),Im(z)) = z
+      #|  forall x y:real. x + y = &0 ==> &0 <= x /\\ &0 <= y ==> x = &0 /\\ y = &0
       #|  z = Cx(&0) <=> Re(z) pow 2 + Im(z) pow 2 = &0
-      #|  (!z. P z) <=> (!x y. P(complex(x,y)))
+      #|  (forall z. P z) <=> (forall x y. P(complex(x,y)))
       #|  (?z. P z) <=> (?x y. P(complex(x,y)))
       #|  --z = complex(--(Re(z)),--(Im(z)))
       #|  w + z = complex(Re(w) + Re(z),Im(w) + Im(z))
       #|  (w:complex) - z = w + --z
       #|  norm(z) = sqrt(Re(z) pow 2 + Im(z) pow 2)
       #|  norm(z) pow 2 = Re(z) pow 2 + Im(z) pow 2
-      #|  !x y. x + y = y + x
-      #|  !x y z. x + y + z = (x + y) + z
-      #|  !x. Cx(&0) + x = x
-      #|  !x. --x + x = Cx(&0)
-      #|  !x y. x * y = y * x
-      #|  !x y z. x * y * z = (x * y) * z
-      #|  !x. Cx(&1) * x = x
-      #|  !x y z. x * (y + z) = x * y + x * z
+      #|  forall x y. x + y = y + x
+      #|  forall x y z. x + y + z = (x + y) + z
+      #|  forall x. Cx(&0) + x = x
+      #|  forall x. --x + x = Cx(&0)
+      #|  forall x y. x * y = y * x
+      #|  forall x y z. x * y * z = (x * y) * z
+      #|  forall x. Cx(&1) * x = x
+      #|  forall x y z. x * (y + z) = x * y + x * z
       #|  (m + n = n + m) /\\ ((m + n) + p = m + n + p) /\\ (m + n + p = n + m + p)
       #|  (m * n = n * m) /\\ ((m * n) * p = m * n * p) /\\ (m * n * p = n * m * p)
-      #|  !x. x + Cx(&0) = x
-      #|  !x. x * Cx(&1) = x
-      #|  !x. x + --x = Cx(&0)
-      #|  !x y z. (x + y) * z = x * z + y * z
-      #|  !x y z. (x + y = x + z) <=> (y = z)
-      #|  !x y z. (x + z = y + z) <=> (x = y)
-      #|  !x. x * Cx(&0) = Cx(&0)
-      #|  !x. Cx(&0) * x = Cx(&0)
-      #|  !x. --(--x) = x
-      #|  !x y. x * --y = --(x * y)
-      #|  !x y. --x * y = --(x * y)
-      #|  !x y. --(x + y) = --x + --y
+      #|  forall x. x + Cx(&0) = x
+      #|  forall x. x * Cx(&1) = x
+      #|  forall x. x + --x = Cx(&0)
+      #|  forall x y z. (x + y) * z = x * z + y * z
+      #|  forall x y z. (x + y = x + z) <=> (y = z)
+      #|  forall x y z. (x + z = y + z) <=> (x = y)
+      #|  forall x. x * Cx(&0) = Cx(&0)
+      #|  forall x. Cx(&0) * x = Cx(&0)
+      #|  forall x. --(--x) = x
+      #|  forall x y. x * --y = --(x * y)
+      #|  forall x y. --x * y = --(x * y)
+      #|  forall x y. --(x + y) = --x + --y
       #|  --Cx(&0) = Cx(&0)
-      #|  !x y. (x + y = x) <=> (y = Cx(&0))
-      #|  !x y. (x + y = y) <=> (x = Cx(&0))
-      #|  !x y. (x + y = Cx(&0)) <=> (x = --y)
-      #|  !x y. (x + y = Cx(&0)) <=> (y = --x)
-      #|  !x y. --(x * y) = --x * y
-      #|  !x y. --(x * y) = x * --y
-      #|  !x y. --x * --y = x * y
-      #|  !x y. x - y + y = x
-      #|  !x y. y + x - y = x
-      #|  !x. x - x = Cx(&0)
-      #|  !x y. (x - y = Cx(&0)) <=> (x = y)
-      #|  !x. (--x = Cx(&0)) <=> (x = Cx(&0))
-      #|  !x y. --(x - y) = y - x
-      #|  !x y. (x + y) - x = y
-      #|  !x y. (--x = y) <=> (x = --y)
-      #|  !x. --x = --Cx(&1) * x
-      #|  !x y. x - y - x = --y
-      #|  !a b c d. (a + b) - (c + d) = a - c + b - d
-      #|  !x. Cx(&0) - x = --x
-      #|  !x. x - Cx(&0) = x
-      #|  !x y. --x - y = --(x + y)
-      #|  !x y. x - --y = x + y
-      #|  !x y. --x - --y = y - x
-      #|  !a b c. a - b + b - c = a - c
-      #|  !x y z. (x = y - z) <=> (x + z = y)
-      #|  !x y z. (x - y = z) <=> (x = z + y)
-      #|  !x y. x - (x - y) = y
-      #|  !x y. x - (x + y) = --y
-      #|  !x y. (x + y) * (x - y) = x * x - y * y
-      #|  !x y. (--x = --y) <=> (x = y)
-      #|  !x y z. x * (y - z) = x * y - x * z
-      #|  !x y z. (x - y) * z = x * z - y * z
-      #|  !x. Cx(&2) * x = x + x
+      #|  forall x y. (x + y = x) <=> (y = Cx(&0))
+      #|  forall x y. (x + y = y) <=> (x = Cx(&0))
+      #|  forall x y. (x + y = Cx(&0)) <=> (x = --y)
+      #|  forall x y. (x + y = Cx(&0)) <=> (y = --x)
+      #|  forall x y. --(x * y) = --x * y
+      #|  forall x y. --(x * y) = x * --y
+      #|  forall x y. --x * --y = x * y
+      #|  forall x y. x - y + y = x
+      #|  forall x y. y + x - y = x
+      #|  forall x. x - x = Cx(&0)
+      #|  forall x y. (x - y = Cx(&0)) <=> (x = y)
+      #|  forall x. (--x = Cx(&0)) <=> (x = Cx(&0))
+      #|  forall x y. --(x - y) = y - x
+      #|  forall x y. (x + y) - x = y
+      #|  forall x y. (--x = y) <=> (x = --y)
+      #|  forall x. --x = --Cx(&1) * x
+      #|  forall x y. x - y - x = --y
+      #|  forall a b c d. (a + b) - (c + d) = a - c + b - d
+      #|  forall x. Cx(&0) - x = --x
+      #|  forall x. x - Cx(&0) = x
+      #|  forall x y. --x - y = --(x + y)
+      #|  forall x y. x - --y = x + y
+      #|  forall x y. --x - --y = y - x
+      #|  forall a b c. a - b + b - c = a - c
+      #|  forall x y z. (x = y - z) <=> (x + z = y)
+      #|  forall x y z. (x - y = z) <=> (x = z + y)
+      #|  forall x y. x - (x - y) = y
+      #|  forall x y. x - (x + y) = --y
+      #|  forall x y. (x + y) * (x - y) = x * x - y * y
+      #|  forall x y. (--x = --y) <=> (x = y)
+      #|  forall x y z. x * (y - z) = x * y - x * z
+      #|  forall x y z. (x - y) * z = x * z - y * z
+      #|  forall x. Cx(&2) * x = x + x
       #|  ~(ii = Cx(&0))
-      #|  !z. ~(z = Cx(&0)) ==> (inv(z) * z = Cx(&1))
-      #|  !x y. (x * y = Cx(&0)) <=> (x = Cx(&0)) \\/ (y = Cx(&0))
-      #|  !z. ~(z = Cx(&0)) ==> (z * inv(z) = Cx(&1))
-      #|  !x. ~(x = Cx(&0)) ==> (x / x = Cx(&1))
+      #|  forall z. ~(z = Cx(&0)) ==> (inv(z) * z = Cx(&1))
+      #|  forall x y. (x * y = Cx(&0)) <=> (x = Cx(&0)) \\/ (y = Cx(&0))
+      #|  forall z. ~(z = Cx(&0)) ==> (z * inv(z) = Cx(&1))
+      #|  forall x. ~(x = Cx(&0)) ==> (x / x = Cx(&1))
       #|  vec 0 = Cx(&0)
-      #|  !c x. c % x = Cx(c) * x
-      #|  !x m n. x pow (m + n) = x pow m * x pow n
-      #|  !x m n. (x pow m) pow n = x pow (m * n)
+      #|  forall c x. c % x = Cx(c) * x
+      #|  forall x m n. x pow (m + n) = x pow m * x pow n
+      #|  forall x m n. (x pow m) pow n = x pow (m * n)
       #|  1
-      #|  !x. x pow 1 = x
+      #|  forall x. x pow 1 = x
       #|  2
-      #|  !x. x pow 2 = x * x
+      #|  forall x. x pow 2 = x * x
       #|  EVEN n
-      #|  !x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-      #|  !n. Cx(&1) pow n = Cx(&1)
-      #|  !x y n. (x * y) pow n = (x pow n) * (y pow n)
+      #|  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
+      #|  forall n. Cx(&1) pow n = Cx(&1)
+      #|  forall x y n. (x * y) pow n = (x pow n) * (y pow n)
       #|  ii pow 2 = --Cx(&1)
-      #|  !x n. (x pow n = Cx(&0)) <=> (x = Cx(&0)) /\\ ~(n = 0)
-      #|  !n. Cx(&0) pow n = if n = 0 then Cx(&1) else Cx(&0)
-      #|  !x y. (Cx(x) = Cx(y)) <=> (x = y)
-      #|  !x. Cx(--x) = --(Cx(x))
-      #|  !x y. Cx(x + y) = Cx(x) + Cx(y)
-      #|  !x y. Cx(x - y) = Cx(x) - Cx(y)
+      #|  forall x n. (x pow n = Cx(&0)) <=> (x = Cx(&0)) /\\ ~(n = 0)
+      #|  forall n. Cx(&0) pow n = if n = 0 then Cx(&1) else Cx(&0)
+      #|  forall x y. (Cx(x) = Cx(y)) <=> (x = y)
+      #|  forall x. Cx(--x) = --(Cx(x))
+      #|  forall x y. Cx(x + y) = Cx(x) + Cx(y)
+      #|  forall x y. Cx(x - y) = Cx(x) - Cx(y)
       #|  x = &0
-      #|  !x. Cx(inv x) = inv(Cx x)
-      #|  !x y. Cx(x * y) = Cx(x) * Cx(y)
-      #|  !x n. Cx(x pow n) = Cx(x) pow n
-      #|  !x y. Cx(x / y) = Cx(x) / Cx(y)
-      #|  !x. Cx(abs x) = Cx(norm(Cx(x)))
-      #|  !x. norm(Cx(x)) = abs(x)
-      #|  !x y. dist(Cx x,Cx y) = abs(x - y)
-      #|  !x. Re(Cx x) = x
-      #|  !x. Re(--x) = --Re(x)
-      #|  !x y. Re(x + y) = Re(x) + Re(y)
-      #|  !x y. Re(x - y) = Re(x) - Re(y)
-      #|  !x. Im(Cx x) = &0
-      #|  !x. Im(--x) = --Im(x)
-      #|  !x y. Im(x + y) = Im(x) + Im(y)
-      #|  !x y. Im(x - y) = Im(x) - Im(y)
-      #|  !z. z = Cx(Re z) + ii * Cx(Im z)
-      #|  !x y. complex(x,y) = Cx(x) + ii * Cx(y)
+      #|  forall x. Cx(inv x) = inv(Cx x)
+      #|  forall x y. Cx(x * y) = Cx(x) * Cx(y)
+      #|  forall x n. Cx(x pow n) = Cx(x) pow n
+      #|  forall x y. Cx(x / y) = Cx(x) / Cx(y)
+      #|  forall x. Cx(abs x) = Cx(norm(Cx(x)))
+      #|  forall x. norm(Cx(x)) = abs(x)
+      #|  forall x y. dist(Cx x,Cx y) = abs(x - y)
+      #|  forall x. Re(Cx x) = x
+      #|  forall x. Re(--x) = --Re(x)
+      #|  forall x y. Re(x + y) = Re(x) + Re(y)
+      #|  forall x y. Re(x - y) = Re(x) - Re(y)
+      #|  forall x. Im(Cx x) = &0
+      #|  forall x. Im(--x) = --Im(x)
+      #|  forall x y. Im(x + y) = Im(x) + Im(y)
+      #|  forall x y. Im(x - y) = Im(x) - Im(y)
+      #|  forall z. z = Cx(Re z) + ii * Cx(Im z)
+      #|  forall x y. complex(x,y) = Cx(x) + ii * Cx(y)
       #|  Re ii = &0
       #|  Im ii = &1
-      #|  !z. Re(z * ii) = --(Im z) /\\ Re(ii * z) = --(Im z)
-      #|  !z. Im(z * ii) = Re z /\\ Im(ii * z) = Re z
+      #|  forall z. Re(z * ii) = --(Im z) /\\ Re(ii * z) = --(Im z)
+      #|  forall z. Im(z * ii) = Re z /\\ Im(ii * z) = Re z
       #|  norm ii = &1
-      #|  !a z. Re(a % z) = a * Re z
-      #|  !a z. Im(a % z) = a * Im z
-      #|  !x z. Re(Cx(x) * z) = x * Re z /\\\n         Re(z * Cx(x)) = Re z * x
-      #|  !x z. Im(Cx(x) * z) = x * Im z /\\\n         Im(z * Cx(x)) = Im z * x
-      #|  !z x. Re(z / Cx(x)) = Re(z) / x
-      #|  !z x. Im(z / Cx(x)) = Im(z) / x
+      #|  forall a z. Re(a % z) = a * Re z
+      #|  forall a z. Im(a % z) = a * Im z
+      #|  forall x z. Re(Cx(x) * z) = x * Re z /\\\n         Re(z * Cx(x)) = Re z * x
+      #|  forall x z. Im(Cx(x) * z) = x * Im z /\\\n         Im(z * Cx(x)) = Im z * x
+      #|  forall z x. Re(z / Cx(x)) = Re(z) / x
+      #|  forall z x. Im(z / Cx(x)) = Im(z) / x
       #|  Cx
       #|  Cx
       #|  Cx
       #|  x:real
       #|  n:num
-      #|  (!x y z. x + (y + z) = (x + y) + z) /\\\n   (!x y. x + y = y + x) /\\\n   (!x. Cx(&0) + x = x) /\\\n   (!x y z. x * (y * z) = (x * y) * z) /\\\n   (!x y. x * y = y * x) /\\\n   (!x. Cx(&1) * x = x) /\\\n   (!x. Cx(&0) * x = Cx(&0)) /\\\n   (!x y z. x * (y + z) = x * y + x * z) /\\\n   (!x. x pow 0 = Cx(&1)) /\\\n   (!x n. x pow (SUC n) = x * x pow n)
-      #|  (!x. --x = Cx(-- &1) * x) /\\\n   (!x y. x - y = x + Cx(-- &1) * y)
+      #|  (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. Cx(&0) + x = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x y. x * y = y * x) /\\\n   (forall x. Cx(&1) * x = x) /\\\n   (forall x. Cx(&0) * x = Cx(&0)) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x. x pow 0 = Cx(&1)) /\\\n   (forall x n. x pow (SUC n) = x * x pow n)
+      #|  (forall x. --x = Cx(-- &1) * x) /\\\n   (forall x y. x - y = x + Cx(-- &1) * y)
       #|  p:num
       #|  q:num
       #|  0
@@ -74380,9 +74380,9 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  (/):complex->complex->complex
       #|  (pow):complex->num->complex
       #|  (w * y + x * z = w * z + x * y) <=>\n      (w - x) * (y - z) = Cx(&0)
-      #|  (!x. Cx(&0) * x = Cx(&0)) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+      #|  (forall x. Cx(&0) * x = Cx(&0)) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
       #|  ~(Cx(&1) = Cx(&0))
-      #|  !x y:complex. ~(x = y) <=> ?z. (x - y) * z = Cx(&1)
+      #|  forall x y:complex. ~(x = y) <=> ?z. (x - y) * z = Cx(&1)
       #|  ii * ii + Cx(&1) = Cx(&0)
       #|  (pow):complex->num->complex
       #|  (/):complex->complex->complex
@@ -74396,130 +74396,130 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  inv(Cx(&1)) = Cx(&1)
       #|  z = Cx(&0)
       #|  w = Cx(&0)
-      #|  !w z. inv(w * z) = inv(w) * inv(z)
-      #|  !x n. (inv x) pow n = inv(x pow n)
+      #|  forall w z. inv(w * z) = inv(w) * inv(z)
+      #|  forall x n. (inv x) pow n = inv(x pow n)
       #|  inv(x):complex
       #|  x:complex
       #|  x = Cx(&0)
-      #|  !x:complex. inv(inv x) = x
-      #|  !w z:complex. inv(w / z) = z / w
-      #|  !w z:complex. inv w = inv z <=> w = z
+      #|  forall x:complex. inv(inv x) = x
+      #|  forall w z:complex. inv(w / z) = z / w
+      #|  forall w z:complex. inv w = inv z <=> w = z
       #|  real_sgn (Re z pow 2 + Im z pow 2) = &1
       #|  z = Cx(&0)
-      #|  !z. real_sgn(Re(inv z)) = real_sgn(Re z)
-      #|  !z. &0 < Re(inv z) <=> &0 < Re z
-      #|  !z. &0 <= Re(inv z) <=> &0 <= Re z
-      #|  !x y z. (x * y = x * z) <=> (x = Cx(&0)) \\/ (y = z)
-      #|  !x y z. (x * z = y * z) <=> (x = y) \\/ (z = Cx(&0))
+      #|  forall z. real_sgn(Re(inv z)) = real_sgn(Re z)
+      #|  forall z. &0 < Re(inv z) <=> &0 < Re z
+      #|  forall z. &0 <= Re(inv z) <=> &0 <= Re z
+      #|  forall x y z. (x * y = x * z) <=> (x = Cx(&0)) \\/ (y = z)
+      #|  forall x y z. (x * z = y * z) <=> (x = y) \\/ (z = Cx(&0))
       #|  inv((x:complex) pow n)
       #|  (T ==> p) <=> p
       #|  ~(x pow n = Cx(&0)) <=>\n        ~((x:complex) = Cx(&0)) \\/\n        (Cx(&n) = Cx(&0)) \\/\n        ~(x pow n = Cx(&0))
       #|  (/\\)
       #|  inv:complex->complex
       #|  (/):complex->complex->complex
-      #|  !z. z / Cx(&1) = z
-      #|  !x y. ~(y = Cx(&0)) ==> y * x / y = x
-      #|  !x y. ~(y = Cx(&0)) ==> x / y * y = x
+      #|  forall z. z / Cx(&1) = z
+      #|  forall x y. ~(y = Cx(&0)) ==> y * x / y = x
+      #|  forall x y. ~(y = Cx(&0)) ==> x / y * y = x
       #|  inv ii = --ii
       #|  x = Cx(&0)
-      #|  !x. inv x = Cx(&0) <=> x = Cx(&0)
+      #|  forall x. inv x = Cx(&0) <=> x = Cx(&0)
       #|  x = Cx(&0)
-      #|  !x:complex. inv(--x) = --(inv x)
-      #|  !x:complex. --(inv x) = inv(--x)
+      #|  forall x:complex. inv(--x) = --(inv x)
+      #|  forall x:complex. --(inv x) = inv(--x)
       #|  x = Cx(&0)
-      #|  !x. inv x = Cx(&1) <=> x = Cx(&1)
-      #|  !w z. w / z = Cx(&0) <=> w = Cx(&0) \\/ z = Cx(&0)
-      #|  !x y n. (x / y) pow n = (x pow n) / (y pow n)
+      #|  forall x. inv x = Cx(&1) <=> x = Cx(&1)
+      #|  forall w z. w / z = Cx(&0) <=> w = Cx(&0) \\/ z = Cx(&0)
+      #|  forall x y n. (x / y) pow n = (x pow n) / (y pow n)
       #|  ~(x pow k = Cx(&0))
       #|  ~(x = Cx(&0))
       #|  ~(k = 0)
       #|  x:complex pow (n - k) * x pow k =\n  x pow n / x pow k * x pow k
-      #|  !x:complex n k:num.\n      ~(x= Cx(&0)) /\\ k <= n /\\ ~(k = 0)\n      ==> x pow (n - k) = x pow n / x pow k
+      #|  forall x:complex n k:num.\n      ~(x= Cx(&0)) /\\ k <= n /\\ ~(k = 0)\n      ==> x pow (n - k) = x pow n / x pow k
       #|  ~(b = Cx(&0)) ==> (a / b = c <=> b * c = a)
       #|  ~(b = Cx(&0)) /\\ ~(c = Cx(&0))\n     ==> (a / b = inv c <=> a * c = b)
-      #|  !z m n. ~(z = Cx(&0))\n           ==> z pow m / z pow n =\n               if n <= m then z pow (m - n) else inv(z pow (n - m))
-      #|  !z. (norm z = &0) <=> (z = Cx(&0))
-      #|  !n. norm(Cx(&n)) = &n
+      #|  forall z m n. ~(z = Cx(&0))\n           ==> z pow m / z pow n =\n               if n <= m then z pow (m - n) else inv(z pow (n - m))
+      #|  forall z. (norm z = &0) <=> (z = Cx(&0))
+      #|  forall n. norm(Cx(&n)) = &n
       #|  norm(Cx(&0)) = &0
-      #|  !z. &0 < norm(z) <=> ~(z = Cx(&0))
-      #|  !w z. norm(w * z) = norm(w) * norm(z)
-      #|  !z n. norm(z pow n) = norm(z) pow n
+      #|  forall z. &0 < norm(z) <=> ~(z = Cx(&0))
+      #|  forall w z. norm(w * z) = norm(w) * norm(z)
+      #|  forall z n. norm(z pow n) = norm(z) pow n
       #|  a * a * b * b:real = (a * b) * (a * b)
       #|  Re z * Re z + Im z * Im z = &0
       #|  (r * d) * r * d + (--i * d) * --i * d =\n                          (r * r + i * i) * d * d:real
-      #|  !z. norm(inv z) = inv(norm z)
-      #|  !w z. norm(w / z) = norm(w) / norm(z)
-      #|  !w z. norm(w) <= norm(w + z) + norm(z)
+      #|  forall z. norm(inv z) = inv(norm z)
+      #|  forall w z. norm(w / z) = norm(w) / norm(z)
+      #|  forall w z. norm(w) <= norm(w + z) + norm(z)
       #|  a - b <= x /\\ b - a <= x ==> abs(a - b) <= x:real
-      #|  !w z. abs(norm w - norm z) <= norm(w - z)
+      #|  forall w z. abs(norm w - norm z) <= norm(w - z)
       #|  norm:complex->real
-      #|  !z n. z pow n = Cx(&1) ==> norm(z) = &1 \\/ n = 0
+      #|  forall z n. z pow n = Cx(&1) ==> norm(z) = &1 \\/ n = 0
       #|  cnj(z) = complex(Re(z),--(Im(z)))
-      #|  !w z. (cnj(w) = cnj(z)) <=> (w = z)
-      #|  !z. cnj(cnj z) = z
-      #|  !x. cnj(Cx x) = Cx x
-      #|  !z. norm(cnj z) = norm(z)
-      #|  !z. cnj(--z) = --(cnj z)
-      #|  !z. cnj(inv z) = inv(cnj z)
-      #|  !w z. cnj(w + z) = cnj(w) + cnj(z)
-      #|  !w z. cnj(w - z) = cnj(w) - cnj(z)
-      #|  !w z. cnj(w * z) = cnj(w) * cnj(z)
-      #|  !w z. cnj(w / z) = cnj(w) / cnj(z)
-      #|  !z n. cnj(z pow n) = cnj(z) pow n
-      #|  !z. Re(cnj z) = Re z
-      #|  !z. Im(cnj z) = --Im z
-      #|  !x z. cnj z = Cx x <=> z = Cx x
-      #|  !z. cnj z = Cx(&0) <=> z = Cx(&0)
-      #|  (!z. z + cnj z = Cx(&2 * Re z)) /\\ (!z. cnj z + z = Cx(&2 * Re z))
+      #|  forall w z. (cnj(w) = cnj(z)) <=> (w = z)
+      #|  forall z. cnj(cnj z) = z
+      #|  forall x. cnj(Cx x) = Cx x
+      #|  forall z. norm(cnj z) = norm(z)
+      #|  forall z. cnj(--z) = --(cnj z)
+      #|  forall z. cnj(inv z) = inv(cnj z)
+      #|  forall w z. cnj(w + z) = cnj(w) + cnj(z)
+      #|  forall w z. cnj(w - z) = cnj(w) - cnj(z)
+      #|  forall w z. cnj(w * z) = cnj(w) * cnj(z)
+      #|  forall w z. cnj(w / z) = cnj(w) / cnj(z)
+      #|  forall z n. cnj(z pow n) = cnj(z) pow n
+      #|  forall z. Re(cnj z) = Re z
+      #|  forall z. Im(cnj z) = --Im z
+      #|  forall x z. cnj z = Cx x <=> z = Cx x
+      #|  forall z. cnj z = Cx(&0) <=> z = Cx(&0)
+      #|  (forall z. z + cnj z = Cx(&2 * Re z)) /\\ (forall z. cnj z + z = Cx(&2 * Re z))
       #|  cnj ii = --ii
-      #|  !z. Cx(Re z) = (z + cnj z) / Cx(&2)
-      #|  !z. Cx(Im z) = --ii * (z - cnj z) / Cx(&2)
-      #|  (!z. P(cnj z)) <=> (!z. P z)
+      #|  forall z. Cx(Re z) = (z + cnj z) / Cx(&2)
+      #|  forall z. Cx(Im z) = --ii * (z - cnj z) / Cx(&2)
+      #|  (forall z. P(cnj z)) <=> (forall z. P z)
       #|  (?z. P(cnj z)) <=> (?z. P z)
-      #|  !z. Cx(norm z) pow 2 = z * cnj z
-      #|  !z. cnj z * z = Cx(norm(z)) pow 2 /\\ z * cnj z = Cx(norm(z)) pow 2
+      #|  forall z. Cx(norm z) pow 2 = z * cnj z
+      #|  forall z. cnj z * z = Cx(norm(z)) pow 2 /\\ z * cnj z = Cx(norm(z)) pow 2
       #|  x * y = z /\\ ~(x = Cx(&0)) /\\ ~(z = Cx(&0)) ==> inv x = y / z
       #|  z = Cx(&0)
-      #|  !z. inv z = cnj z / Cx(norm z) pow 2
-      #|  !a b. a / b = (a * cnj b) / Cx(norm b) pow 2
+      #|  forall z. inv z = cnj z / Cx(norm z) pow 2
+      #|  forall a b. a / b = (a * cnj b) / Cx(norm b) pow 2
       #|  b = Cx(&0)
-      #|  !a b. Re(a / b) = &0 <=> Re(a * cnj b) = &0
+      #|  forall a b. Re(a / b) = &0 <=> Re(a * cnj b) = &0
       #|  b = Cx(&0)
-      #|  !a b. Im(a / b) = &0 <=> Im(a * cnj b) = &0
+      #|  forall a b. Im(a / b) = &0 <=> Im(a * cnj b) = &0
       #|  &0 < a * x <=> &0 * x < a * x
       #|  b = Cx(&0)
-      #|  !a b. &0 < Re(a / b) <=> &0 < Re(a * cnj b)
+      #|  forall a b. &0 < Re(a / b) <=> &0 < Re(a * cnj b)
       #|  &0 < a * x <=> &0 * x < a * x
       #|  b = Cx(&0)
-      #|  !a b. &0 < Im(a / b) <=> &0 < Im(a * cnj b)
+      #|  forall a b. &0 < Im(a / b) <=> &0 < Im(a * cnj b)
       #|  &0 <= x <=> &0 < x \\/ x = &0
-      #|  !a b. &0 <= Re(a / b) <=> &0 <= Re(a * cnj b)
+      #|  forall a b. &0 <= Re(a / b) <=> &0 <= Re(a * cnj b)
       #|  &0 <= x <=> &0 < x \\/ x = &0
-      #|  !a b. &0 <= Im(a / b) <=> &0 <= Im(a * cnj b)
-      #|  !a b. Re(a / b) <= &0 <=> Re(a * cnj b) <= &0
-      #|  !a b. Im(a / b) <= &0 <=> Im(a * cnj b) <= &0
-      #|  !a b. Re(a / b) < &0 <=> Re(a * cnj b) < &0
-      #|  !a b. Im(a / b) < &0 <=> Im(a * cnj b) < &0
+      #|  forall a b. &0 <= Im(a / b) <=> &0 <= Im(a * cnj b)
+      #|  forall a b. Re(a / b) <= &0 <=> Re(a * cnj b) <= &0
+      #|  forall a b. Im(a / b) <= &0 <=> Im(a * cnj b) <= &0
+      #|  forall a b. Re(a / b) < &0 <=> Re(a * cnj b) < &0
+      #|  forall a b. Im(a / b) < &0 <=> Im(a * cnj b) < &0
       #|  z:complex
       #|  Cx(&1)
-      #|  !z. &0 <= Im(inv z) <=> Im(z) <= &0
-      #|  !z. Im(inv z) <= &0 <=> &0 <= Im(z)
+      #|  forall z. &0 <= Im(inv z) <=> Im(z) <= &0
+      #|  forall z. Im(inv z) <= &0 <=> &0 <= Im(z)
       #|  &0 < a <=> ~(a <= &0)
-      #|  !z. &0 < Im(inv z) <=> Im(z) < &0
+      #|  forall z. &0 < Im(inv z) <=> Im(z) < &0
       #|  a < &0 <=> ~(&0 <= a)
-      #|  !z. Im(inv z) < &0 <=> &0 < Im(z)
-      #|  !z. Im(inv z) = &0 <=> Im(z) = &0
+      #|  forall z. Im(inv z) < &0 <=> &0 < Im(z)
+      #|  forall z. Im(inv z) = &0 <=> Im(z) = &0
       #|  x < &0 <=> ~(&0 <= x)
-      #|  !w z. real_sgn(Re(w / z)) = real_sgn(Re(w * cnj z))
+      #|  forall w z. real_sgn(Re(w / z)) = real_sgn(Re(w * cnj z))
       #|  x < &0 <=> ~(&0 <= x)
-      #|  !w z. real_sgn(Im(w / z)) = real_sgn(Im(w * cnj z))
-      #|  !z. abs(Re(z)) <= norm(z) /\\ abs(Im(z)) <= norm(z)
+      #|  forall w z. real_sgn(Im(w / z)) = real_sgn(Im(w * cnj z))
+      #|  forall z. abs(Re(z)) <= norm(z) /\\ abs(Im(z)) <= norm(z)
       #|  z:complex
-      #|  !z. norm(z) <= abs(Re z) + abs(Im z)
+      #|  forall z. norm(z) <= abs(Re z) + abs(Im z)
       #|  z:complex
       #|  x * x / &2 * y = (x pow 2) / &2 * y
       #|  sqrt(&2)
-      #|  !z. sqrt(&2) / &2 * (abs(Re z) + abs(Im z)) <= norm z
+      #|  forall z. sqrt(&2) / &2 * (abs(Re z) + abs(Im z)) <= norm z
       #|  csqrt(z) = if Im(z) = &0 then\n                if &0 <= Re(z) then complex(sqrt(Re(z)),&0)\n                else complex(&0,sqrt(--Re(z)))\n              else complex(sqrt((norm(z) + Re(z)) / &2),\n                           (Im(z) / abs(Im(z))) *\n                           sqrt((norm(z) - Re(z)) / &2))
       #|  &2 * (i * a') * a * h = i * (&2 * h) * a * a'
       #|  (a * b) * a' * b = (a * a') * (b * b:real)
@@ -74528,90 +74528,90 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  &0 <= norm(z) + Re(z) /\\ &0 <= norm(z) - Re(z)
       #|  (s * s - (i * s') * (i * s') = s * s - (i * i) * (s' * s')) /\\\n    (s * i * s' + (i * s')* s = &2 * i * s * s')
       #|  ~(&0 <= x) ==> &0 <= --x
-      #|  !z. csqrt(z) pow 2 = z
-      #|  !x. &0 <= x ==> Cx(sqrt x) = csqrt(Cx x)
-      #|  !x. &0 <= x ==> csqrt(Cx x) = Cx(sqrt x)
+      #|  forall z. csqrt(z) pow 2 = z
+      #|  forall x. &0 <= x ==> Cx(sqrt x) = csqrt(Cx x)
+      #|  forall x. &0 <= x ==> csqrt(Cx x) = Cx(sqrt x)
       #|  csqrt(Cx(&0)) = Cx(&0)
       #|  csqrt(Cx(&1)) = Cx(&1)
       #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
       #|  abs(y) < x ==> &0 < (x + y) / &2
-      #|  !z. &0 < Re(csqrt(z)) \\/ Re(csqrt(z)) = &0 /\\ &0 <= Im(csqrt(z))
-      #|  !z. &0 <= Re(csqrt z)
+      #|  forall z. &0 < Re(csqrt(z)) \\/ Re(csqrt(z)) = &0 /\\ &0 <= Im(csqrt(z))
+      #|  forall z. &0 <= Re(csqrt z)
       #|  (s:complex) pow 2
       #|  Im
       #|  Re
       #|  --z = z <=> z = Cx(&0)
       #|  a pow 2 = b pow 2 <=> a = b \\/ a = --b:complex
       #|  (s:complex) pow 2
-      #|  !s z. s pow 2 = z /\\ (&0 < Re s \\/ Re s = &0 /\\ &0 <= Im s)\n         ==> csqrt z = s
-      #|  !z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im(z) ==> csqrt(z pow 2) = z
+      #|  forall s z. s pow 2 = z /\\ (&0 < Re s \\/ Re s = &0 /\\ &0 <= Im s)\n         ==> csqrt z = s
+      #|  forall z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im(z) ==> csqrt(z pow 2) = z
       #|  z:complex
-      #|  !z. csqrt z = Cx(&0) <=> z = Cx(&0)
-      #|  !w z. w dot z = Re(w * cnj z)
-      #|  !w z. cnj w dot cnj z = w dot z
-      #|  !c. linear (\\x. c * x)
+      #|  forall z. csqrt z = Cx(&0) <=> z = Cx(&0)
+      #|  forall w z. w dot z = Re(w * cnj z)
+      #|  forall w z. cnj w dot cnj z = w dot z
+      #|  forall c. linear (\\x. c * x)
       #|  bilinear( * )
       #|  linear cnj
       #|  orthogonal_transformation cnj
-      #|  !f:real^N->complex c. linear f ==> linear (\\x. c * f x)
-      #|  !f:real^N->complex c. linear f ==> linear (\\x. f x * c)
-      #|  !w z. (w dot z) pow 2 + ((ii * w) dot z) pow 2 =\n          norm(w) pow 2 * norm(z) pow 2
+      #|  forall f:real^N->complex c. linear f ==> linear (\\x. c * f x)
+      #|  forall f:real^N->complex c. linear f ==> linear (\\x. f x * c)
+      #|  forall w z. (w dot z) pow 2 + ((ii * w) dot z) pow 2 =\n          norm(w) pow 2 * norm(z) pow 2
       #|  basis 1 = Cx(&1) /\\ basis 2 = ii
       #|  complex(matrix(f:complex->complex)$1$1,matrix f$2$1)
-      #|  !f:complex->complex.\n        (?c. f = \\z. c * z) <=>\n        linear f /\\\n        (matrix f)$1$1 = (matrix f)$2$2 /\\\n        (matrix f)$1$2 = --((matrix f)$2$1)
-      #|  !f:complex->complex.\n        (?c. f = \\z. c * z) <=> linear f /\\ f(ii) = ii * f(Cx(&1))
+      #|  forall f:complex->complex.\n        (?c. f = \\z. c * z) <=>\n        linear f /\\\n        (matrix f)$1$1 = (matrix f)$2$2 /\\\n        (matrix f)$1$2 = --((matrix f)$2$1)
+      #|  forall f:complex->complex.\n        (?c. f = \\z. c * z) <=> linear f /\\ f(ii) = ii * f(Cx(&1))
       #|  Cx(&1)
       #|  norm(c:complex) = &1
       #|  c * v:real = v <=> c = &1 \\/ v = &0
-      #|  !c. orthogonal_transformation(\\z. c * z) <=> norm c = &1
+      #|  forall c. orthogonal_transformation(\\z. c * z) <=> norm c = &1
       #|  Cx(&1)
       #|  norm(c:complex) = &1
       #|  c * v:real = v <=> c = &1 \\/ v = &0
       #|  f:complex->complex = \\z. c * z
       #|  c:complex
       #|  p /\\ q /\\ r <=> (q /\\ p) /\\ r
-      #|  (!z. norm(f z) = norm z) /\\ (?c. f = \\z:complex. c * z)
-      #|  !f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * z
+      #|  (forall z. norm(f z) = norm z) /\\ (?c. f = \\z:complex. c * z)
+      #|  forall f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * z
       #|  f:complex->complex
       #|  (f:complex->complex) o cnj
       #|  (f:complex->complex) = (f o cnj) o cnj
-      #|  !c. (f = \\z. c * cnj z) = (f o cnj = \\z. c * z)
-      #|  !f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = -- &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * cnj z
-      #|  !f:complex->complex.\n        orthogonal_transformation f <=>\n        ?c. norm c = &1 /\\ ((f = \\z. c * z) \\/ (f = \\z. c * cnj z))
-      #|  !f s. FINITE s ==> Re(vsum s f) = sum s (\\x. Re(f x))
-      #|  !f s. FINITE s ==> Im(vsum s f) = sum s (\\x. Im(f x))
-      #|  !c f s. FINITE(s) ==> vsum s (\\x. c * f x) = c * vsum s f
-      #|  !c f s. FINITE(s) ==> vsum s (\\x. f x * c) = vsum s f * c
-      #|  !f:A->real s. vsum s (\\a. Cx(f a)) = Cx(sum s f)
-      #|  !f s. FINITE s ==> cnj(vsum s f) = vsum s (\\x. cnj(f x))
-      #|  !f m n. vsum (m..n) (\\a. Cx(f a)) = Cx(sum (m..n) f)
+      #|  forall c. (f = \\z. c * cnj z) = (f o cnj = \\z. c * z)
+      #|  forall f:complex->complex.\n        orthogonal_transformation f /\\ det(matrix f) = -- &1 <=>\n        ?c. norm c = &1 /\\ f = \\z. c * cnj z
+      #|  forall f:complex->complex.\n        orthogonal_transformation f <=>\n        ?c. norm c = &1 /\\ ((f = \\z. c * z) \\/ (f = \\z. c * cnj z))
+      #|  forall f s. FINITE s ==> Re(vsum s f) = sum s (\\x. Re(f x))
+      #|  forall f s. FINITE s ==> Im(vsum s f) = sum s (\\x. Im(f x))
+      #|  forall c f s. FINITE(s) ==> vsum s (\\x. c * f x) = c * vsum s f
+      #|  forall c f s. FINITE(s) ==> vsum s (\\x. f x * c) = vsum s f * c
+      #|  forall f:A->real s. vsum s (\\a. Cx(f a)) = Cx(sum s f)
+      #|  forall f s. FINITE s ==> cnj(vsum s f) = vsum s (\\x. cnj(f x))
+      #|  forall f m n. vsum (m..n) (\\a. Cx(f a)) = Cx(sum (m..n) f)
       #|  1 <= n /\\ x <= n - 1\n     ==> n - 1 - x = n - (x + 1) /\\ SUC(n - 1 - x) = n - x
       #|  (x - y) * (a * b):complex = (x * a) * b - a * (y * b)
-      #|  !x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * vsum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))
+      #|  forall x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * vsum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))
       #|  Cx(&1)
       #|  x:complex
-      #|  !x n. 1 <= n\n         ==> x pow n - Cx(&1) = (x - Cx(&1)) * vsum(0..n-1) (\\i. x pow i)
-      #|  !x n. 1 <= n\n         ==> Cx(&1) - x pow n = (Cx(&1) - x) * vsum(0..n-1) (\\i. x pow i)
+      #|  forall x n. 1 <= n\n         ==> x pow n - Cx(&1) = (x - Cx(&1)) * vsum(0..n-1) (\\i. x pow i)
+      #|  forall x n. 1 <= n\n         ==> Cx(&1) - x pow n = (Cx(&1) - x) * vsum(0..n-1) (\\i. x pow i)
       #|  real z <=> Im z = &0
-      #|  !z. real z <=> Cx(Re z) = z
-      #|  !z. real z <=> cnj z = z
-      #|  !z. real z ==> cnj z = z
-      #|  !z. real z <=> ?x. z = Cx x
-      #|  (!z. real z ==> P z) <=> (!x. P(Cx x))
+      #|  forall z. real z <=> Cx(Re z) = z
+      #|  forall z. real z <=> cnj z = z
+      #|  forall z. real z ==> cnj z = z
+      #|  forall z. real z <=> ?x. z = Cx x
+      #|  (forall z. real z ==> P z) <=> (forall x. P(Cx x))
       #|  (?z. real z /\\ P z) <=> (?x. P(Cx x))
-      #|  !x. real(Cx x)
-      #|  !x z. real(Cx x * z) <=> x = &0 \\/ real z
-      #|  !w z. real w /\\ real z ==> real(w + z)
-      #|  !z. real z ==> real(--z)
-      #|  !w z. real w /\\ real z ==> real(w - z)
-      #|  !w z. real w /\\ real z ==> real(w * z)
-      #|  !z n. real z ==> real(z pow n)
-      #|  !z. real z ==> real(inv z)
-      #|  !z. real(inv z) = real z
-      #|  !w z. real w /\\ real z ==> real(w / z)
-      #|  !f s. FINITE s /\\ (!a. a IN s ==> real(f a)) ==> real(vsum s f)
-      #|  (!z. real(z * cnj z)) /\\ (!z. real(cnj z * z))
-      #|  !a b x. x IN segment[a,b] /\\ real a /\\ real b ==> real x
+      #|  forall x. real(Cx x)
+      #|  forall x z. real(Cx x * z) <=> x = &0 \\/ real z
+      #|  forall w z. real w /\\ real z ==> real(w + z)
+      #|  forall z. real z ==> real(--z)
+      #|  forall w z. real w /\\ real z ==> real(w - z)
+      #|  forall w z. real w /\\ real z ==> real(w * z)
+      #|  forall z n. real z ==> real(z pow n)
+      #|  forall z. real z ==> real(inv z)
+      #|  forall z. real(inv z) = real z
+      #|  forall w z. real w /\\ real z ==> real(w / z)
+      #|  forall f s. FINITE s /\\ (forall a. a IN s ==> real(f a)) ==> real(vsum s f)
+      #|  (forall z. real(z * cnj z)) /\\ (forall z. real(cnj z * z))
+      #|  forall a b x. x IN segment[a,b] /\\ real a /\\ real b ==> real x
       #|  ~(a:real = b)
       #|  (a - x:real) / (a - b)
       #|  &0 < a - b
@@ -74627,48 +74627,48 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  x:real = b
       #|  (&1 - u) * b + u * b = b
       #|  a:real = b
-      #|  !a b x. Cx(x) IN segment[Cx(a),Cx(b)] <=>\n                a <= x /\\ x <= b \\/ b <= x /\\ x <= a
+      #|  forall a b x. Cx(x) IN segment[Cx(a),Cx(b)] <=>\n                a <= x /\\ x <= b \\/ b <= x /\\ x <= a
       #|  real x
-      #|  !a b x.\n        x IN segment[Cx a,Cx b] <=>\n        Im(x) = &0 /\\ (a <= Re x /\\ Re x <= b \\/ b <= Re x /\\ Re x <= a)
+      #|  forall a b x.\n        x IN segment[Cx a,Cx b] <=>\n        Im(x) = &0 /\\ (a <= Re x /\\ Re x <= b \\/ b <= Re x /\\ Re x <= a)
       #|  &0 <= x /\\ &0 <= y /\\ ~(x = &0 /\\ y = &0) ==> &0 < x + y
-      #|  !a b x. x IN segment[a,b] /\\ &0 < Re a /\\ &0 < Re b ==> &0 < Re x
+      #|  forall a b x. x IN segment[a,b] /\\ &0 < Re a /\\ &0 < Re b ==> &0 < Re x
       #|  convex real
-      #|  !s. IMAGE Cx s = {z | real z /\\ Re(z) IN s}
+      #|  forall s. IMAGE Cx s = {z | real z /\\ Re(z) IN s}
       #|  subspace real
       #|  real = {x | real x}
       #|  dim real = 1
       #|  interior real = {}
-      #|  !z. real z ==> norm(z) = abs(Re z)
-      #|  !z. real z /\\ &0 <= Re z ==> norm(z) = Re(z)
-      #|  !f s. FINITE s /\\ (!x. x IN s ==> real(f x) /\\ &0 <= Re(f x))\n         ==> norm(vsum s f) = sum s (\\x. Re(f x))
+      #|  forall z. real z ==> norm(z) = abs(Re z)
+      #|  forall z. real z /\\ &0 <= Re z ==> norm(z) = Re(z)
+      #|  forall f s. FINITE s /\\ (forall x. x IN s ==> real(f x) /\\ &0 <= Re(f x))\n         ==> norm(vsum s f) = sum s (\\x. Re(f x))
       #|  x:real = y ==> y <= x
       #|  sum s (\\x. Re((g:A->complex) x))
       #|  sum s (\\x. norm((f:A->complex) x))
-      #|  !s f:A->complex g:A->complex.\n        FINITE s /\\ (!x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum s f) <= norm(vsum s g)
+      #|  forall s f:A->complex g:A->complex.\n        FINITE s /\\ (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum s f) <= norm(vsum s g)
       #|  norm(vsum t (g:A->complex)) = sum t (\\x. Re(g x)) /\\\n    norm(vsum s g) = sum s (\\x. Re(g x))
       #|  norm(vsum t (g:A->complex))
-      #|  !f:A->complex g:A->complex s t.\n        FINITE s /\\ t SUBSET s /\\\n        (!x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum t f) <= norm(vsum s g)
-      #|  !x n. (Cx(&1) - x) * vsum(0..n) (\\i. x pow i) = Cx(&1) - x pow (SUC n)
+      #|  forall f:A->complex g:A->complex s t.\n        FINITE s /\\ t SUBSET s /\\\n        (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum t f) <= norm(vsum s g)
+      #|  forall x n. (Cx(&1) - x) * vsum(0..n) (\\i. x pow i) = Cx(&1) - x pow (SUC n)
       #|  m <= n ==> (SUC(n - m) + m = SUC n)
-      #|  !x m n. m <= n\n           ==> ((Cx(&1) - x) * vsum(m..n) (\\i. x pow i) =\n                x pow m - x pow (SUC n))
+      #|  forall x m n. m <= n\n           ==> ((Cx(&1) - x) * vsum(m..n) (\\i. x pow i) =\n                x pow m - x pow (SUC n))
       #|  ~(z = Cx(&1)) /\\ (Cx(&1) - z) * x = y ==> x = y / (Cx(&1) - z)
       #|  n < m \\/ ~(n < m) /\\ m <= n:num
-      #|  !x m n.\n        vsum(m..n) (\\i. x pow i) =\n                if n < m then Cx(&0)\n                else if x = Cx(&1) then Cx(&((n + 1) - m))\n                else (x pow m - x pow (SUC n)) / (Cx(&1) - x)
+      #|  forall x m n.\n        vsum(m..n) (\\i. x pow i) =\n                if n < m then Cx(&0)\n                else if x = Cx(&1) then Cx(&((n + 1) - m))\n                else (x pow m - x pow (SUC n)) / (Cx(&1) - x)
       #|  ~(m + n < m:num)
-      #|  !x m n. vsum(m..m+n) (\\i. x pow i) =\n                if x = Cx(&1) then Cx(&n) + Cx(&1)\n                else x pow m * (Cx(&1) - x pow (SUC n)) / (Cx(&1) - x)
+      #|  forall x m n. vsum(m..m+n) (\\i. x pow i) =\n                if x = Cx(&1) then Cx(&n) + Cx(&1)\n                else x pow m * (Cx(&1) - x pow (SUC n)) / (Cx(&1) - x)
       #|  a - b - c:num = a - (b + c)
       #|  \\(x:num,y:num). (y,x)
       #|  a * x * s:complex = x * a * s
-      #|  !a x y n.\n   1 <= n\n   ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n       (x - y) *\n       vsum(0..n-1) (\\j. vsum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)
+      #|  forall a x y n.\n   1 <= n\n   ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n       (x - y) *\n       vsum(0..n-1) (\\j. vsum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)
       #|  \\k. j + k + 1
       #|  \\i. i - (j + 1)
       #|  j:num
-      #|  !a x y n.\n    1 <= n\n    ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        vsum(0..n-1) (\\j. vsum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)
+      #|  forall a x y n.\n    1 <= n\n    ==> vsum(0..n) (\\i. a i * x pow i) - vsum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        vsum(0..n-1) (\\j. vsum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)
       #|  \\j. vsum (j + 1..n) (\\i. c i * a pow (i - j - 1))
       #|  \\i:num. Cx(&0)
       #|  n = 0
-      #|  !a c n. ?b. !z. vsum(0..n) (\\i. c(i) * z pow i) =\n                   (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i) +\n                    vsum(0..n) (\\i. c(i) * a pow i)
-      #|  !a c n. vsum(0..n) (\\i. c(i) * a pow i) = Cx(&0)\n           ==> ?b. !z. vsum(0..n) (\\i. c(i) * z pow i) =\n                      (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i)
+      #|  forall a c n. ?b. forall z. vsum(0..n) (\\i. c(i) * z pow i) =\n                   (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i) +\n                    vsum(0..n) (\\i. c(i) * a pow i)
+      #|  forall a c n. vsum(0..n) (\\i. c(i) * a pow i) = Cx(&0)\n           ==> ?b. forall z. vsum(0..n) (\\i. c(i) * z pow i) =\n                      (z - a) * vsum(0..n-1) (\\i. b(i) * z pow i)
       #|  (n + 1) + 1 = 1 + n + 1
       #|  a + norm(y) <= b ==> norm(x) <= a ==> norm(x + y) <= b
       #|  :real
@@ -74679,7 +74679,7 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  M:real
       #|  &0 < &1 / &2
       #|  norm(c 0:complex) / e
-      #|  !c n e. &0 < e\n           ==> ?M. !z. M <= norm(z)\n                       ==> norm(vsum(0..n) (\\i. c(i) * z pow i))\n                               <= e * norm(z) pow (n + 1)
+      #|  forall c n e. &0 < e\n           ==> ?M. forall z. M <= norm(z)\n                       ==> norm(vsum(0..n) (\\i. c(i) * z pow i))\n                               <= e * norm(z) pow (n + 1)
       #|  norm(z:complex) pow 1
       #|  c * x - c / &2 * x = x * c / &2
       #|  abs b + &1 <= norm(y) - a ==> norm(x) <= a ==> b <= norm(y + x)
@@ -74699,7 +74699,7 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  0 <= n
       #|  n = 0
       #|  n:num
-      #|  !c n. (!k. k IN 1..n ==> c(k) = Cx(&0)) \\/\n         !B. eventually (\\z. norm(vsum(0..n) (\\i. c(i) * z pow i)) >= B)\n                        at_infinity
+      #|  forall c n. (forall k. k IN 1..n ==> c(k) = Cx(&0)) \\/\n         forall B. eventually (\\z. norm(vsum(0..n) (\\i. c(i) * z pow i)) >= B)\n                        at_infinity
       #|  :N
       #|  :2
       #|  b:real
@@ -74716,45 +74716,45 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  {z | vsum(0..SUC n) (\\i. c(i) * z pow i) = Cx(&0)} = {}
       #|  c 0 = Cx(&0)
       #|  ~a ==> b <=> a \\/ b
-      #|  !n c. ~(!i. i IN 0..n ==> c(i) = Cx(&0))\n         ==> FINITE {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} /\\\n             CARD {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} <= n
+      #|  forall n c. ~(forall i. i IN 0..n ==> c(i) = Cx(&0))\n         ==> FINITE {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} /\\\n             CARD {z | vsum(0..n) (\\i. c(i) * z pow i) = Cx(&0)} <= n
       #|  {x | T} = (:complex)
       #|  a /\\ ~b <=> ~(a ==> b)
-      #|  !n c. FINITE {x | vsum(0..n) (\\i. c i * x pow i) = Cx(&0)} <=>\n         ?i. i IN 0..n /\\ ~(c i = Cx(&0))
+      #|  forall n c. FINITE {x | vsum(0..n) (\\i. c i * x pow i) = Cx(&0)} <=>\n         ?i. i IN 0..n /\\ ~(c i = Cx(&0))
       #|  {x | T} = (:complex)
       #|  p <=> ~ ~p
-      #|  !n c. (!z. vsum(0..n) (\\i. c i * z pow i) = Cx(&0)) <=>\n         (!i. i IN 0..n ==> c i = Cx(&0))
-      #|  (!n. P n) <=> P 0 /\\ (!n. ~(n = 0) ==> P n)
+      #|  forall n c. (forall z. vsum(0..n) (\\i. c i * z pow i) = Cx(&0)) <=>\n         (forall i. i IN 0..n ==> c i = Cx(&0))
+      #|  (forall n. P n) <=> P 0 /\\ (forall n. ~(n = 0) ==> P n)
       #|  (c - k) + s = Cx(&0) <=> c + s = k
-      #|  !x. vsum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) =\n        Cx(&0)
-      #|  !n c k. (!z. vsum(0..n) (\\i. c i * z pow i) = k) <=>\n           c 0 = k /\\ (!i. i IN 1..n ==> c i = Cx(&0))
+      #|  forall x. vsum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) =\n        Cx(&0)
+      #|  forall n c k. (forall z. vsum(0..n) (\\i. c i * z pow i) = k) <=>\n           c 0 = k /\\ (forall i. i IN 1..n ==> c i = Cx(&0))
       #|  cproduct = iterate (( * ):complex->complex->complex)
       #|  neutral(( * ):complex->complex->complex) = Cx(&1)
       #|  monoidal(( * ):complex->complex->complex)
-      #|  (!f. cproduct {} f = Cx(&1)) /\\\n   (!x f s. FINITE(s)\n            ==> (cproduct (x INSERT s) f =\n                 if x IN s then cproduct s f else f(x) * cproduct s f))
-      #|  !f s. FINITE s ==> (cproduct s f = Cx(&0) <=> ?x. x IN s /\\ f(x) = Cx(&0))
-      #|  !f s. FINITE s ==> cproduct s (\\x. inv(f x)) = inv(cproduct s f)
-      #|  !f g s. FINITE s\n           ==> cproduct s (\\x. f x * g x) = cproduct s f * cproduct s g
-      #|  !f s. (!x:A. x IN s ==> (f(x) = Cx(&1))) ==> (cproduct s f = Cx(&1))
-      #|  !s. cproduct s (\\n. Cx(&1)) = Cx(&1)
-      #|  !f s n. FINITE s\n           ==> cproduct s (\\x. f x pow n) = (cproduct s f) pow n
-      #|  !f s. FINITE s ==> norm(cproduct s f) = product s (\\x. norm(f x))
-      #|  !f g s. (!x. x IN s ==> (f x = g x)) ==> cproduct s f = cproduct s g
-      #|  !f x. cproduct {x} f = f(x)
+      #|  (forall f. cproduct {} f = Cx(&1)) /\\\n   (forall x f s. FINITE(s)\n            ==> (cproduct (x INSERT s) f =\n                 if x IN s then cproduct s f else f(x) * cproduct s f))
+      #|  forall f s. FINITE s ==> (cproduct s f = Cx(&0) <=> ?x. x IN s /\\ f(x) = Cx(&0))
+      #|  forall f s. FINITE s ==> cproduct s (\\x. inv(f x)) = inv(cproduct s f)
+      #|  forall f g s. FINITE s\n           ==> cproduct s (\\x. f x * g x) = cproduct s f * cproduct s g
+      #|  forall f s. (forall x:A. x IN s ==> (f(x) = Cx(&1))) ==> (cproduct s f = Cx(&1))
+      #|  forall s. cproduct s (\\n. Cx(&1)) = Cx(&1)
+      #|  forall f s n. FINITE s\n           ==> cproduct s (\\x. f x pow n) = (cproduct s f) pow n
+      #|  forall f s. FINITE s ==> norm(cproduct s f) = product s (\\x. norm(f x))
+      #|  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> cproduct s f = cproduct s g
+      #|  forall f x. cproduct {x} f = f(x)
       #|  ~(SUC n <= n)
-      #|  (!m. cproduct(m..0) f = if m = 0 then f(0) else Cx(&1)) /\\\n   (!m n. cproduct(m..SUC n) f = if m <= SUC n then cproduct(m..n) f * f(SUC n)\n                                 else cproduct(m..n) f)
-      #|  !f m n. 0 < n /\\ m <= n ==> cproduct(m..n) f = cproduct(m..n-1) f * (f n)
-      #|  !f m n. m <= n ==> cproduct(m..n) f = f m * cproduct(m + 1..n) f
-      #|  !f g s. (!x y. x IN s /\\ y IN s /\\ f x = f y ==> (x = y))\n           ==> (cproduct (IMAGE f s) g = cproduct s (g o f))
-      #|  !f m p. cproduct(m+p..n+p) f = cproduct(m..n) (\\i. f(i + p))
-      #|  !c s. FINITE s ==> cproduct s (\\x. c) = c pow (CARD s)
-      #|  !c m n. cproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
-      #|  !f m n. cproduct(2*m..2*n+1) f = cproduct(m..n) (\\i. f(2*i) * f(2*i+1))
-      #|  !x m n. cproduct(m..n) x =\n           if n < m then Cx(&1) else cproduct(0..n-m) (\\i. x(n - i))
-      #|  !f s. FINITE s ==> cnj(cproduct s f) = cproduct s (\\i. cnj(f i))
-      #|  !f s. FINITE s ==> Cx(product s f) = cproduct s (\\i. Cx(f i))
-      #|  !f:A->complex u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> f(x) = Cx(&1))\n        ==> cproduct v f = cproduct u f
-      #|  !f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (cproduct (s UNION t) f = cproduct s f * cproduct t f)
-      #|  (!f g s.   (!x. x IN s ==> f(x) = g(x))\n              ==> cproduct s (\\i. f(i)) = cproduct s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> cproduct(a..b) (\\i. f(i)) = cproduct(a..b) g) /\\\n   (!f g p.   (!x. p x ==> f x = g x)\n              ==> cproduct {y | p y} (\\i. f(i)) = cproduct {y | p y} g)
+      #|  (forall m. cproduct(m..0) f = if m = 0 then f(0) else Cx(&1)) /\\\n   (forall m n. cproduct(m..SUC n) f = if m <= SUC n then cproduct(m..n) f * f(SUC n)\n                                 else cproduct(m..n) f)
+      #|  forall f m n. 0 < n /\\ m <= n ==> cproduct(m..n) f = cproduct(m..n-1) f * (f n)
+      #|  forall f m n. m <= n ==> cproduct(m..n) f = f m * cproduct(m + 1..n) f
+      #|  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> (x = y))\n           ==> (cproduct (IMAGE f s) g = cproduct s (g o f))
+      #|  forall f m p. cproduct(m+p..n+p) f = cproduct(m..n) (\\i. f(i + p))
+      #|  forall c s. FINITE s ==> cproduct s (\\x. c) = c pow (CARD s)
+      #|  forall c m n. cproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
+      #|  forall f m n. cproduct(2*m..2*n+1) f = cproduct(m..n) (\\i. f(2*i) * f(2*i+1))
+      #|  forall x m n. cproduct(m..n) x =\n           if n < m then Cx(&1) else cproduct(0..n-m) (\\i. x(n - i))
+      #|  forall f s. FINITE s ==> cnj(cproduct s f) = cproduct s (\\i. cnj(f i))
+      #|  forall f s. FINITE s ==> Cx(product s f) = cproduct s (\\i. Cx(f i))
+      #|  forall f:A->complex u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f(x) = Cx(&1))\n        ==> cproduct v f = cproduct u f
+      #|  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (cproduct (s UNION t) f = cproduct s f * cproduct t f)
+      #|  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n              ==> cproduct s (\\i. f(i)) = cproduct s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> cproduct(a..b) (\\i. f(i)) = cproduct(a..b) g) /\\\n   (forall f g p.   (forall x. p x ==> f x = g x)\n              ==> cproduct {y | p y} (\\i. f(i)) = cproduct {y | p y} g)
       #|RE_DEF =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|IM_DEF =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#Im:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|complex =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#complex:fun(prod(real,real),cart(real,tybit0(1))) ((#,:fun(real,fun(real,prod(real,real))) x:real) y:real))) (#vector:fun(list(real),cart(real,tybit0(1))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) #NIL:list(real)))))))))

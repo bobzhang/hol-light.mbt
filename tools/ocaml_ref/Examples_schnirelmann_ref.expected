@@ -9111,50 +9111,50 @@ Warning: inventing type variables
 Examples/schnirelmann quotations (215):
   count s n = CARD (s INTER (1..n))
   schnirelmann s = inf { &(count s n) / &n | 1 <= n}
-  !s. count s n <= n
-  !n. count (:num) n = n
-  !s t n. s SUBSET t ==> count s n <= count t n
-  !s t n. (!m. 1 <= m ==> (m IN s <=> m IN t))\n         ==> count s n = count t n
+  forall s. count s n <= n
+  forall n. count (:num) n = n
+  forall s t n. s SUBSET t ==> count s n <= count t n
+  forall s t n. (forall m. 1 <= m ==> (m IN s <=> m IN t))\n         ==> count s n = count t n
   &0
-  (!x. x IN {f x | P x} ==> Q x) <=> !x. P x ==> Q(f x)
+  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
   { &(count s n) / &n | 1 <= n}
-  (!n. 1 <= n ==> schnirelmann s <= &(count s n) / &n) /\\\n   (!b. (!n. 1 <= n ==> b <= &(count s n) / &n) ==> b <= schnirelmann s)
+  (forall n. 1 <= n ==> schnirelmann s <= &(count s n) / &n) /\\\n   (forall b. (forall n. 1 <= n ==> b <= &(count s n) / &n) ==> b <= schnirelmann s)
   n = 0 \\/ 1 <= n
-  !n s. schnirelmann s * &n <= &(count s n)
-  (!x. x IN {f x | P x} ==> Q x) <=> !x. P x ==> Q(f x)
-  !s. &0 <= schnirelmann s /\\ schnirelmann s <= &1
+  forall n s. schnirelmann s * &n <= &(count s n)
+  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
+  forall s. &0 <= schnirelmann s /\\ schnirelmann s <= &1
   &(count s n) / &n
   n:num
-  !s t. s SUBSET t ==> schnirelmann s <= schnirelmann t
-  !s t. (!n. 1 <= n ==> (n IN s <=> n IN t))\n         ==> schnirelmann s = schnirelmann t
+  forall s t. s SUBSET t ==> schnirelmann s <= schnirelmann t
+  forall s t. (forall n. 1 <= n ==> (n IN s <=> n IN t))\n         ==> schnirelmann s = schnirelmann t
   1 <= k ==> (x <= k - 1 <=> x <= k /\\ ~(x = k))
   &1 <= x ==> (&1 - &1 / x) = (x - &1) / x
   &(count s k) / &k
-  !s k. 1 <= k /\\ ~(k IN s) ==> schnirelmann s <= &1 - &1 / &k
+  forall s k. 1 <= k /\\ ~(k IN s) ==> schnirelmann s <= &1 - &1 / &k
   s:num->bool
   1
   s:num->bool
-  !s. ~(1 IN s) ==> schnirelmann s = &0
+  forall s. ~(1 IN s) ==> schnirelmann s = &0
   schnirelmann(:num) = &1
   &0 < x ==> s <= &1 - x ==> ~(s = &1)
-  !s. schnirelmann s = &1 <=> !n. 1 <= n ==> n IN s
+  forall s. schnirelmann s = &1 <=> forall n. 1 <= n ==> n IN s
   s +++ t = {x + y:num | x IN s /\\ y IN t}
-  !s t. 0 IN s /\\ 0 IN t ==> 0 IN (s +++ t)
+  forall s t. 0 IN s /\\ 0 IN t ==> 0 IN (s +++ t)
   n:num
   0
   n:num
-  !s t. 0 IN s ==> t SUBSET (s +++ t)
+  forall s t. 0 IN s ==> t SUBSET (s +++ t)
   0
   n:num
   n:num
-  !s t. 0 IN t ==> s SUBSET (s +++ t)
-  !s t. s +++ t = t +++ s
-  !s t u. s +++ (t +++ u) = (s +++ t) +++ u
+  forall s t. 0 IN t ==> s SUBSET (s +++ t)
+  forall s t. s +++ t = t +++ s
+  forall s t u. s +++ (t +++ u) = (s +++ t) +++ u
   {0}
   s:num->bool
   neutral(+++) = {0}
   monoidal (+++)
-  !a s. FINITE s /\\ (!k. k IN s ==> 0 IN a k) ==> 0 IN iterate(+++) s a
+  forall a s. FINITE s /\\ (forall k. k IN s ==> 0 IN a k) ==> 0 IN iterate(+++) s a
   b:num
   a:num
   b:num
@@ -9171,17 +9171,17 @@ Examples/schnirelmann quotations (215):
   (n:num) IN t
   (n:num) IN s
   (~p ==> F) ==> p
-  !s t n. 0 IN (s INTER t) /\\ count s n + count t n >= n ==> n IN (s +++ t)
+  forall s t n. 0 IN (s INTER t) /\\ count s n + count t n >= n ==> n IN (s +++ t)
   a + b >= &1 ==> a <= x /\\ b <= y ==> &1 <= x + y
   n = 0
   n:num
-  !s t. 0 IN (s INTER t) /\\ schnirelmann s + schnirelmann t >= &1\n         ==> s +++ t = (:num)
-  !s. 0 IN s /\\ schnirelmann s >= &1 / &2 ==> s +++ s = (:num)
+  forall s t. 0 IN (s INTER t) /\\ schnirelmann s + schnirelmann t >= &1\n         ==> s +++ t = (:num)
+  forall s. 0 IN s /\\ schnirelmann s >= &1 / &2 ==> s +++ s = (:num)
   j:num
   i:num
   j:num
   i:num
-  !k. 1 <= k /\\ k <= n ==> 1 <= f(k) /\\ f(k) <= p
+  forall k. 1 <= k /\\ k <= n ==> 1 <= f(k) /\\ f(k) <= p
   (a ==> b) /\\ a ==> a /\\ b
   1 <= n + 1 /\\ ~(n + 1 <= n)
   \\i. if 1 <= i then if i <= n then f i else p + 1 else 0
@@ -9189,7 +9189,7 @@ Examples/schnirelmann quotations (215):
   s:num->bool
   n:num
   (<=):num->num->bool
-  !n s p. s HAS_SIZE n /\\ (!k. k IN s ==> 1 <= k /\\ k <= p)\n           ==> ?a:num->num.\n                 a(0) = 0 /\\\n                 a(n + 1) = p + 1 /\\\n                 s = IMAGE a (1..n) /\\\n                 (!j k. j <= n /\\ k <= n + 1 /\\ j < k ==> a(j) < a(k)) /\\\n                 (!j k. j <= n /\\ k <= n + 1 /\\ j <= k ==> a(j) <= a(k))
+  forall n s p. s HAS_SIZE n /\\ (forall k. k IN s ==> 1 <= k /\\ k <= p)\n           ==> ?a:num->num.\n                 a(0) = 0 /\\\n                 a(n + 1) = p + 1 /\\\n                 s = IMAGE a (1..n) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j < k ==> a(j) < a(k)) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j <= k ==> a(j) <= a(k))
   j:num
   j:num
   j:num
@@ -9230,7 +9230,7 @@ Examples/schnirelmann quotations (215):
   i:num
   a IN s /\\ (t = a INSERT u)\n      ==> (s INTER t = a INSERT (s INTER u))
   s INTER (0..n) = 0 INSERT (s INTER (1..n))
-  !n s. 0 IN s ==> CARD(s INTER (0..n)) = SUC(CARD(s INTER (1..n)))
+  forall n s. 0 IN s ==> CARD(s INTER (0..n)) = SUC(CARD(s INTER (1..n)))
   (&1 - t) * s * n <= (&1 - t) * a\n    ==> ((s + t) - s * t) * n <= t * (n - a) + a
   (n + &1) - (a + &1) = n - a
   --(&0 - a + b) = a - b
@@ -9252,10 +9252,10 @@ Examples/schnirelmann quotations (215):
   a(i + 1):num <= a(j) \\/ a(j + 1) <= a(i)
   l:num
   k:num
-  IMAGE f s INTER t = {} <=> !x. x IN s ==> ~(f x IN t)
+  IMAGE f s INTER t = {} <=> forall x. x IN s ==> ~(f x IN t)
   j:num
   i:num
-  !i j. i IN 0..A /\\ j IN 0..A /\\ ~(i = j)\n               ==> IMAGE (\\b. a i + b) (t INTER (0..a (i + 1) - a i - 1)) INTER\n                   IMAGE (\\b. a j + b) (t INTER (0..a (j + 1) - a j - 1)) = {}
+  forall i j. i IN 0..A /\\ j IN 0..A /\\ ~(i = j)\n               ==> IMAGE (\\b. a i + b) (t INTER (0..a (i + 1) - a i - 1)) INTER\n                   IMAGE (\\b. a j + b) (t INTER (0..a (j + 1) - a j - 1)) = {}
   k + 1
   k:num = A
   a(k) < a(k + 1) /\\ a(k + 1) <= n + 1 /\\ l <= a(k + 1) - a(k) - 1\n      ==> a(k) + l <= n
@@ -9266,23 +9266,23 @@ Examples/schnirelmann quotations (215):
   d ==> (a /\\ b /\\ c <=> d) ==> a /\\ c
   k = 0 \\/ 1 <= k
   (a:num->num)(k)
-  !k. k <= A ==> (a:num->num)(k) IN s /\\ a(k) <= n
+  forall k. k <= A ==> (a:num->num)(k) IN s /\\ a(k) <= n
   A = CARD(s INTER (1..n))
   a:num->num
   n:num
   s INTER (1..n)
   count s n
   n:num
-  !s t. 0 IN (s INTER t)\n         ==> schnirelmann(s +++ t)\n                >= (schnirelmann s + schnirelmann t) -\n                   schnirelmann s * schnirelmann t
+  forall s t. 0 IN (s INTER t)\n         ==> schnirelmann(s +++ t)\n                >= (schnirelmann s + schnirelmann t) -\n                   schnirelmann s * schnirelmann t
   &1 - (&1 - s) * (&1 - t) <= u <=>\n                            u >= (s + t) - s * t
   a <= b ==> &1 - b <= &1 - a
   &1 - (&1 - schnirelmann(a(k:A))) *\n                   (&1 - schnirelmann(iterate (+++) s a))
   s:A->bool
   k:A
-  !a s. FINITE s /\\ (!i:A. i IN s ==> 0 IN a i)\n         ==> schnirelmann(iterate(+++) s a)\n             >= &1 - product s (\\i. &1 - schnirelmann(a i))
+  forall a s. FINITE s /\\ (forall i:A. i IN s ==> 0 IN a i)\n         ==> schnirelmann(iterate(+++) s a)\n             >= &1 - product s (\\i. &1 - schnirelmann(a i))
   i:A->bool
   \\i:A. (s:num->bool)
-  !i s. FINITE i /\\ 0 IN s\n         ==> schnirelmann(iterate(+++) i (\\k:A. s))\n             >= &1 - (&1 - schnirelmann s) pow (CARD i)
+  forall i s. FINITE i /\\ 0 IN s\n         ==> schnirelmann(iterate(+++) i (\\k:A. s))\n             >= &1 - (&1 - schnirelmann s) pow (CARD i)
   a < &1 / &2 ==> y >= &1 - a ==> x >= &1 - a ==> x + y >= &1
   s:num->bool
   k:A->bool
@@ -9300,7 +9300,7 @@ Examples/schnirelmann quotations (215):
   n:num
   &1 / &2
   &1 - schnirelmann s
-  !s. 0 IN s /\\ schnirelmann s > &0\n       ==> ?k. !i. i HAS_SIZE k ==> iterate(+++) i (\\a:A. s) = (:num)
+  forall s. 0 IN s /\\ schnirelmann s > &0\n       ==> ?k. forall i. i HAS_SIZE k ==> iterate(+++) i (\\a:A. s) = (:num)
   ~(SUC n <= n)
   1 = SUC m \\/ 1 <= m
   ~(SUC n <= n)
@@ -9322,8 +9322,8 @@ Examples/schnirelmann quotations (215):
   k:num
   1..k
   k:num
-  ?k. !i:num->bool.\n           i HAS_SIZE k ==> iterate (+++) i (\\a. 0 INSERT s) = (:num)
-  !s. schnirelmann s > &0\n       ==> ?k. !n. ?m f. m <= k /\\ (!i. i IN 1..m ==> f(i) IN s) /\\\n                         n = nsum (1..m) f
+  ?k. forall i:num->bool.\n           i HAS_SIZE k ==> iterate (+++) i (\\a. 0 INSERT s) = (:num)
+  forall s. schnirelmann s > &0\n       ==> ?k. forall n. ?m f. m <= k /\\ (forall i. i IN 1..m ==> f(i) IN s) /\\\n                         n = nsum (1..m) f
 count =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num)) (#CARD:fun(fun(num,bool),num) ((#INTER:fun(fun(num,bool),fun(fun(num,bool),fun(num,bool))) s:fun(num,bool)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))))))
 schnirelmann =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). ((#=:fun(real,fun(real,bool)) (#schnirelmann:fun(fun(num,bool),real) s:fun(num,bool))) (#inf:fun(fun(real,bool),real) (#GSPEC:fun(fun(real,bool),fun(real,bool)) (\GEN%PVAR%645:real. (#?:fun(fun(num,bool),bool) (\n:num. (((#SETSPEC:fun(real,fun(bool,fun(real,bool))) GEN%PVAR%645:real) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num))) (#real_of_num:fun(num,real) n:num)))))))))))
 COUNT_BOUND =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). ((#<=:fun(num,fun(num,bool)) ((#count:fun(fun(num,bool),fun(num,num)) s:fun(num,bool)) n:num)) n:num)))

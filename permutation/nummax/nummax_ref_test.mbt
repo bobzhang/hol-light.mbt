@@ -5642,30 +5642,30 @@ test "Permutation/nummax matches Permutation/nummax.ml" {
       #|0..0..solved at 4
       #|0..0..3..7..16..30..61..107..182..solved at 195
       #|Permutation/nummax quotations (24):
-      #|  !m n p. MAX m n < p <=> m < p /\\ n < p
-      #|  !m n p. MAX m n <= p <=> m <= p /\\ n <= p
-      #|  !m n p. p < MAX m n <=> p < m \\/ p < n
-      #|  !m n p. p <= MAX m n <=> p <= m \\/ p <= n
-      #|  !m n. MAX n m = MAX m n
+      #|  forall m n p. MAX m n < p <=> m < p /\\ n < p
+      #|  forall m n p. MAX m n <= p <=> m <= p /\\ n <= p
+      #|  forall m n p. p < MAX m n <=> p < m \\/ p < n
+      #|  forall m n p. p <= MAX m n <=> p <= m \\/ p <= n
+      #|  forall m n. MAX n m = MAX m n
       #|  ~(m <= p)
       #|  m <= p
       #|  n <= p
       #|  m <= n
-      #|  !m n p. MAX (MAX m n) p = MAX m (MAX n p)
-      #|  !n. MAX n n = n
-      #|  (!m n. MAX n m = MAX m n) /\\\n    (!m n p. MAX (MAX m n) p = MAX m (MAX n p)) /\\\n    (!m n p. MAX m (MAX n p) = MAX n (MAX m p)) /\\\n    (!m. MAX m m = m) /\\\n    (!m n. MAX m (MAX m n) = MAX m n)
-      #|  (!n. MAX n 0 = n) /\\ (!n. MAX 0 n = n)
-      #|  MAXL [] = 0 /\\\n   (!h t. MAXL (CONS h t) = MAX h (MAXL t))
+      #|  forall m n p. MAX (MAX m n) p = MAX m (MAX n p)
+      #|  forall n. MAX n n = n
+      #|  (forall m n. MAX n m = MAX m n) /\\\n    (forall m n p. MAX (MAX m n) p = MAX m (MAX n p)) /\\\n    (forall m n p. MAX m (MAX n p) = MAX n (MAX m p)) /\\\n    (forall m. MAX m m = m) /\\\n    (forall m n. MAX m (MAX m n) = MAX m n)
+      #|  (forall n. MAX n 0 = n) /\\ (forall n. MAX 0 n = n)
+      #|  MAXL [] = 0 /\\\n   (forall h t. MAXL (CONS h t) = MAX h (MAXL t))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  !l n. MAXL l <= n <=> ALL (\\m. m <= n) l
-      #|  !l n. n < MAXL l <=> EX (\\m. n < m) l
-      #|  !n l. MEM n l ==> n <= MAXL l
+      #|  forall l n. MAXL l <= n <=> ALL (\\m. m <= n) l
+      #|  forall l n. n < MAXL l <=> EX (\\m. n < m) l
+      #|  forall n l. MEM n l ==> n <= MAXL l
       #|  t:num list=[]
-      #|  !l. ~NULL l ==> MEM (MAXL l) l
+      #|  forall l. ~NULL l ==> MEM (MAXL l) l
       #|MAX_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num)))))))))
       #|MAX_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num)))))))))
       #|LT_MAX =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) ((#MAX:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) m:num)) ((#<:fun(num,fun(num,bool)) p:num) n:num)))))))))

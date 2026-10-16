@@ -63582,21 +63582,21 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
-      #|  !n f g:real^N->real^N.\n        (!x. x IN sphere(vec 0,&1) INTER span(IMAGE basis (1..n))\n             ==> f x = g x)\n        ==> brouwer_degree1 n f = brouwer_degree1 n g
+      #|  forall n f g:real^N->real^N.\n        (forall x. x IN sphere(vec 0,&1) INTER span(IMAGE basis (1..n))\n             ==> f x = g x)\n        ==> brouwer_degree1 n f = brouwer_degree1 n g
       #|  n - 1
       #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
-      #|  !n. brouwer_degree1 n (\\x:real^N. x) = &1
+      #|  forall n. brouwer_degree1 n (\\x:real^N. x) = &1
       #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
-      #|  !n f g:real^N->real^N.\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        g continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE g (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n (g o f) =\n            brouwer_degree1 n g * brouwer_degree1 n f
+      #|  forall n f g:real^N->real^N.\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        g continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE g (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n (g o f) =\n            brouwer_degree1 n g * brouwer_degree1 n f
       #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
-      #|  !n f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))),\n       subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))))\n      f g\n     ==> brouwer_degree1 n f = brouwer_degree1 n g
-      #|  !n a:real^N.\n      1 <= n /\\ n <= dimindex(:N) ==> brouwer_degree1 n (\\x. a) = &0
+      #|  forall n f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))),\n       subtopology euclidean (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))))\n      f g\n     ==> brouwer_degree1 n f = brouwer_degree1 n g
+      #|  forall n a:real^N.\n      1 <= n /\\ n <= dimindex(:N) ==> brouwer_degree1 n (\\x. a) = &0
       #|  i <= dimindex(:N)
       #|  1 <= i /\\ i <= n
       #|  i:num
@@ -63605,42 +63605,42 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  j = 1
       #|  j:num
       #|  brouwer_degree1 n (reflect_along (basis 1:real^N))
-      #|  !n a:real^N.\n        1 <= n /\\ n <= dimindex(:N) /\\\n        a IN span(IMAGE basis (1..n)) DELETE vec 0\n        ==> brouwer_degree1 n (reflect_along a) = -- &1
+      #|  forall n a:real^N.\n        1 <= n /\\ n <= dimindex(:N) /\\\n        a IN span(IMAGE basis (1..n)) DELETE vec 0\n        ==> brouwer_degree1 n (reflect_along a) = -- &1
       #|  (h':real^N->num->real) a
-      #|  !a. a IN t /\\ ~(a IN s) ==> ~(s = t)
+      #|  forall a. a IN t /\\ ~(a IN s) ==> ~(s = t)
       #|  a:real^N
       #|  h':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  h:(num->real)->real^N =\n      \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
-      #|  !n (f:real^N->real^N).\n        1 <= n /\\ n <= dimindex(:N) /\\\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) PSUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n f = &0
-      #|  !f g:real^N->real^N.\n        (!x. x IN sphere(vec 0,&1) ==> f x = g x)\n        ==> brouwer_degree f = brouwer_degree g
+      #|  forall n (f:real^N->real^N).\n        1 <= n /\\ n <= dimindex(:N) /\\\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) PSUBSET\n                (sphere(vec 0,&1) INTER span(IMAGE basis (1..n)))\n        ==> brouwer_degree1 n f = &0
+      #|  forall f g:real^N->real^N.\n        (forall x. x IN sphere(vec 0,&1) ==> f x = g x)\n        ==> brouwer_degree f = brouwer_degree g
       #|  brouwer_degree (\\x:real^N. x) = &1
-      #|  !f g:real^N->real^N.\n        f continuous_on sphere(vec 0,&1) /\\\n        g continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        IMAGE g (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> brouwer_degree (g o f) = brouwer_degree g * brouwer_degree f
-      #|  !f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1)),\n       subtopology euclidean (sphere(vec 0,&1)))\n      f g\n     ==> brouwer_degree f = brouwer_degree g
-      #|  !a:real^N. brouwer_degree (\\x. a) = &0
-      #|  !a:real^N. ~(a = vec 0) ==> brouwer_degree (reflect_along a) = -- &1
-      #|  !(f:real^N->real^N).\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) PSUBSET sphere(vec 0,&1)\n        ==> brouwer_degree f = &0
+      #|  forall f g:real^N->real^N.\n        f continuous_on sphere(vec 0,&1) /\\\n        g continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        IMAGE g (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> brouwer_degree (g o f) = brouwer_degree g * brouwer_degree f
+      #|  forall f g:real^N->real^N.\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1)),\n       subtopology euclidean (sphere(vec 0,&1)))\n      f g\n     ==> brouwer_degree f = brouwer_degree g
+      #|  forall a:real^N. brouwer_degree (\\x. a) = &0
+      #|  forall a:real^N. ~(a = vec 0) ==> brouwer_degree (reflect_along a) = -- &1
+      #|  forall(f:real^N->real^N).\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) PSUBSET sphere(vec 0,&1)\n        ==> brouwer_degree f = &0
       #|  \\f:real^N->real^N. T
       #|  reflect_along(basis 1):real^N->real^N
       #|  I:real^N->real^N
       #|  f:real^N->real^N
-      #|  !(f:real^N->real^N).\n        orthogonal_transformation f\n        ==> real_of_int(brouwer_degree f) = det(matrix f)
+      #|  forall(f:real^N->real^N).\n        orthogonal_transformation f\n        ==> real_of_int(brouwer_degree f) = det(matrix f)
       #|  orthogonal_transformation:(real^N->real^N)->bool
-      #|  !f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean (sphere (vec 0,&1)),\n               subtopology euclidean (sphere (vec 0,&1))) f g <=>\n             det(matrix f) = det(matrix g))
+      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean (sphere (vec 0,&1)),\n               subtopology euclidean (sphere (vec 0,&1))) f g <=>\n             det(matrix f) = det(matrix g))
       #|  orthogonal_transformation:(real^N->real^N)->bool
-      #|  ~(z IN s)\n        ==> !f. a IN IMAGE f s ==> a IN IMAGE f (UNIV DELETE z)
+      #|  ~(z IN s)\n        ==> forall f. a IN IMAGE f s ==> a IN IMAGE f (UNIV DELETE z)
       #|  s SUBSET UNIV DELETE z <=> ~(z IN s)
       #|  (:real^N) DELETE vec 0
       #|  \\f:real^N->real^N. T
       #|  \\f:real^N->real^N. T
       #|  (\\x. inv(norm x) % x) o (g:real^N->real^N)
       #|  (\\x. inv(norm x) % x) o (f:real^N->real^N)
-      #|  !f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean ((:real^N) DELETE vec 0),\n               subtopology euclidean ((:real^N) DELETE vec 0))\n              f g <=>\n             det(matrix f) = det(matrix g))
-      #|  !f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean (sphere (vec 0,&1)),\n           subtopology euclidean (sphere (vec 0,&1))) f g\n        ==> det(matrix f) = det(matrix g)
+      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean ((:real^N) DELETE vec 0),\n               subtopology euclidean ((:real^N) DELETE vec 0))\n              f g <=>\n             det(matrix f) = det(matrix g))
+      #|  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean (sphere (vec 0,&1)),\n           subtopology euclidean (sphere (vec 0,&1))) f g\n        ==> det(matrix f) = det(matrix g)
       #|  matrix_inv P:real^N^N
       #|  P:real^N^N
       #|  U:real^N^N
-      #|  !f:real^N->real^N.\n        linear f /\\ ~(det(matrix f) = &0)\n        ==> ?P. positive_definite P /\\\n                orthogonal_transformation ((\\x. P ** x) o f)
+      #|  forall f:real^N->real^N.\n        linear f /\\ ~(det(matrix f) = &0)\n        ==> ?P. positive_definite P /\\\n                orthogonal_transformation ((\\x. P ** x) o f)
       #|  x = &1 /\\ y = &1 ==> x * a = y * b ==> a = b
       #|  real_sgn
       #|  (:real^N) DELETE vec 0
@@ -63653,20 +63653,20 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^N->real^N
       #|  g:real^N->real^N
       #|  IMAGE f (UNIV DELETE w) SUBSET UNIV DELETE z <=>\n     ~(?x. ~(x = w) /\\ f x = z)
-      #|  !f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n       (subtopology euclidean ((:real^N) DELETE vec 0),\n        subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> real_sgn(det(matrix f)) = real_sgn(det(matrix g))
-      #|  IMAGE f (UNIV DELETE a) SUBSET UNIV DELETE a\n    ==> !x. f x = a ==> x = a
+      #|  forall f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n       (subtopology euclidean ((:real^N) DELETE vec 0),\n        subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> real_sgn(det(matrix f)) = real_sgn(det(matrix g))
+      #|  IMAGE f (UNIV DELETE a) SUBSET UNIV DELETE a\n    ==> forall x. f x = a ==> x = a
       #|  g:real^N->real^N
       #|  f:real^N->real^N
-      #|  !f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n        (subtopology euclidean ((:real^N) DELETE vec 0),\n         subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> &0 < det(matrix f) * det(matrix g)
+      #|  forall f g:real^N->real^N.\n     linear f /\\ linear g /\\\n     homotopic_with (\\x. T)\n        (subtopology euclidean ((:real^N) DELETE vec 0),\n         subtopology euclidean ((:real^N) DELETE vec 0)) f g\n     ==> &0 < det(matrix f) * det(matrix g)
       #|  \\x:real^N. x
       #|  &1
       #|  sphere(vec 0:real^N,&1)
       #|  \\x:real^N. --x
       #|  f:real^N->real^N
       #|  (~p ==> F) ==> p
-      #|  !f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean (sphere(vec 0,&1)),\n          subtopology euclidean (sphere(vec 0,&1))) (\\x. x) f\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f x = x
+      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean (sphere(vec 0,&1)),\n          subtopology euclidean (sphere(vec 0,&1))) (\\x. x) f\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f x = x
       #|  (~p ==> q) ==> p \\/ q
-      #|  !f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> ?x. x IN sphere(vec 0,&1) /\\ (f x = --x \\/ f x = x)
+      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1)\n        ==> ?x. x IN sphere(vec 0,&1) /\\ (f x = --x \\/ f x = x)
       #|  x + y * --z = x - z * y
       #|  a + --x * --y:real = x * y + a
       #|  m = 2 * n ==> 1 <= m ==> m = (2 * (n - 1) + 1) + 1
@@ -63686,110 +63686,110 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  r = &0
       #|  r < &0
       #|  r:real
-      #|  (!r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             (!x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r <= &0 \\/ EVEN(dimindex(:N))) /\\\n   (!r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             IMAGE f (sphere(vec 0,r)) SUBSET sphere(vec 0,r) /\\\n             (!x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r < &0 \\/ &0 < r /\\ EVEN(dimindex(:N)))
+      #|  (forall r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             (forall x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r <= &0 \\/ EVEN(dimindex(:N))) /\\\n   (forall r. (?f. f continuous_on sphere(vec 0:real^N,r) /\\\n             IMAGE f (sphere(vec 0,r)) SUBSET sphere(vec 0,r) /\\\n             (forall x. x IN sphere(vec 0,r)\n                  ==> ~(f x = vec 0) /\\ orthogonal x (f x))) <=>\n        r < &0 \\/ &0 < r /\\ EVEN(dimindex(:N)))
       #|  (%) (norm((f:real^N->real^N) v)):real^N->real^N
       #|  v:real^N
       #|  \\x. inv(norm(f x)) % (f:real^N->real^N) x
-      #|  !v. norm v = &1 ==> ~((f:real^N->real^N) v = vec 0)
-      #|  !f:real^N->real^N.\n        ODD(dimindex(:N)) /\\ f continuous_on sphere(vec 0:real^N,&1)\n        ==> ?v c. v IN sphere(vec 0,&1) /\\ f v = c % v
-      #|  orthogonal_transformation(f:real^N->real^N)\n      ==> !x. norm x = a ==> norm(f x) = a
+      #|  forall v. norm v = &1 ==> ~((f:real^N->real^N) v = vec 0)
+      #|  forall f:real^N->real^N.\n        ODD(dimindex(:N)) /\\ f continuous_on sphere(vec 0:real^N,&1)\n        ==> ?v c. v IN sphere(vec 0,&1) /\\ f v = c % v
+      #|  orthogonal_transformation(f:real^N->real^N)\n      ==> forall x. norm x = a ==> norm(f x) = a
       #|  &1
       #|  sphere(vec 0:real^N,&1)
       #|  \\x:real^N. --x
       #|  \\x:real^N. (A:real^N^N) ** x
-      #|  !v:real^N. v IN sphere (vec 0,&1) ==> ~(A ** v = v)
-      #|  !A:real^N^N.\n        ODD(dimindex(:N)) /\\ rotation_matrix A\n        ==> ?v. norm v = &1 /\\ A ** v = v
-      #|  retraction (s,t) (r:real^N->real^N) <=>\n        t SUBSET s /\\ r continuous_on s /\\ (IMAGE r s SUBSET t) /\\\n        (!x. x IN t ==> (r x = x))
+      #|  forall v:real^N. v IN sphere (vec 0,&1) ==> ~(A ** v = v)
+      #|  forall A:real^N^N.\n        ODD(dimindex(:N)) /\\ rotation_matrix A\n        ==> ?v. norm v = &1 /\\ A ** v = v
+      #|  retraction (s,t) (r:real^N->real^N) <=>\n        t SUBSET s /\\ r continuous_on s /\\ (IMAGE r s SUBSET t) /\\\n        (forall x. x IN t ==> (r x = x))
       #|  t retract_of s <=> ?r. retraction (s,t) r
-      #|  !r s t:real^N->bool.\n        retraction_maps (subtopology euclidean s,subtopology euclidean t)\n                        (r,I) <=>\n   retraction (s,t) r
-      #|  !s t:real^N->bool.\n        t retract_of_space (subtopology euclidean s) <=> t retract_of s
-      #|  !s t r. retraction (s,t) r <=>\n           t SUBSET s /\\\n           r continuous_on s /\\\n           IMAGE r s = t /\\\n           (!x. x IN t ==> r x = x)
+      #|  forall r s t:real^N->bool.\n        retraction_maps (subtopology euclidean s,subtopology euclidean t)\n                        (r,I) <=>\n   retraction (s,t) r
+      #|  forall s t:real^N->bool.\n        t retract_of_space (subtopology euclidean s) <=> t retract_of s
+      #|  forall s t r. retraction (s,t) r <=>\n           t SUBSET s /\\\n           r continuous_on s /\\\n           IMAGE r s = t /\\\n           (forall x. x IN t ==> r x = x)
       #|  (f:real^M->real^N) o (r:real^M->real^M)
       #|  r:real^M->real^M
-      #|  !f:real^M->real^N u s t.\n        s retract_of t /\\ f continuous_on s /\\ IMAGE f s SUBSET u\n        ==> ?g. g continuous_on t /\\ IMAGE g t SUBSET u /\\\n                (!x. x IN s ==> g x = f x)
-      #|  !r s t. retraction (s,t) r ==> !x. x IN s ==> (r(r(x)) = r(x))
-      #|  !f:real^N->real^N s.\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (!x. x IN s ==> f(f x) = f x)\n        ==> retraction (s,IMAGE f s) f
-      #|  !r s s' t. retraction (s,t) r /\\ t SUBSET s' /\\ s' SUBSET s\n              ==> retraction (s',t) r
-      #|  !s s' t. t retract_of s /\\ t SUBSET s' /\\ s' SUBSET s\n            ==> t retract_of s'
+      #|  forall f:real^M->real^N u s t.\n        s retract_of t /\\ f continuous_on s /\\ IMAGE f s SUBSET u\n        ==> ?g. g continuous_on t /\\ IMAGE g t SUBSET u /\\\n                (forall x. x IN s ==> g x = f x)
+      #|  forall r s t. retraction (s,t) r ==> forall x. x IN s ==> (r(r(x)) = r(x))
+      #|  forall f:real^N->real^N s.\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (forall x. x IN s ==> f(f x) = f x)\n        ==> retraction (s,IMAGE f s) f
+      #|  forall r s s' t. retraction (s,t) r /\\ t SUBSET s' /\\ s' SUBSET s\n              ==> retraction (s',t) r
+      #|  forall s s' t. t retract_of s /\\ t SUBSET s' /\\ s' SUBSET s\n            ==> t retract_of s'
       #|  --a + a + x:real^N = x
       #|  --a + a + x:real^N = x
       #|  --a + a + x:real^N = x
       #|  (\\x:real^N. a + x) o r o (\\x:real^N. --a + x)
       #|  r:real^N->real^N
-      #|  !a t s:real^N->bool.\n        t retract_of s\n        ==> (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s)
+      #|  forall a t s:real^N->bool.\n        t retract_of s\n        ==> (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s)
       #|  --a + a + x:real^N = x
       #|  --a:real^N
-      #|  !a t s:real^N->bool.\n        (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s) <=>\n        t retract_of s
-      #|  !x y. (f:real^M->real^N) x = f y ==> x = y
+      #|  forall a t s:real^N->bool.\n        (IMAGE (\\x. a + x) t) retract_of (IMAGE (\\x. a + x) s) <=>\n        t retract_of s
+      #|  forall x y. (f:real^M->real^N) x = f y ==> x = y
       #|  (f:real^M->real^N) o r o (g:real^N->real^M)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
       #|  r:real^M->real^M
-      #|  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y) /\\ t retract_of s\n        ==> (IMAGE f t) retract_of (IMAGE f s)
-      #|  !s. s = IMAGE (h:real^N->real^M) (IMAGE (f:real^M->real^N) s)
+      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ t retract_of s\n        ==> (IMAGE f t) retract_of (IMAGE f s)
+      #|  forall s. s = IMAGE (h:real^N->real^M) (IMAGE (f:real^M->real^N) s)
       #|  h:real^N->real^M
-      #|  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n        ==> ((IMAGE f t) retract_of (IMAGE f s) <=> t retract_of s)
-      #|  !s. retraction (s,s) (\\x. x)
-      #|  !s. s retract_of s
-      #|  !s t:real^N->bool.\n        convex t /\\ closed t /\\ ~(t = {}) /\\ t SUBSET s\n        ==> retraction (s,t) (closest_point t)
-      #|  !s t. s retract_of t ==> s SUBSET t
+      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> ((IMAGE f t) retract_of (IMAGE f s) <=> t retract_of s)
+      #|  forall s. retraction (s,s) (\\x. x)
+      #|  forall s. s retract_of s
+      #|  forall s t:real^N->bool.\n        convex t /\\ closed t /\\ ~(t = {}) /\\ t SUBSET s\n        ==> retraction (s,t) (closest_point t)
+      #|  forall s t. s retract_of t ==> s SUBSET t
       #|  s:real^N->bool = {}
       #|  s:real^N->bool
-      #|  (!s:real^N->bool. {} retract_of s <=> s = {}) /\\\n   (!s:real^N->bool. s retract_of {} <=> s = {})
+      #|  (forall s:real^N->bool. {} retract_of s <=> s = {}) /\\\n   (forall s:real^N->bool. s retract_of {} <=> s = {})
       #|  (\\y. x):real^N->real^N
-      #|  !s x:real^N. {x} retract_of s <=> x IN s
+      #|  forall s x:real^N. {x} retract_of s <=> x IN s
       #|  (\\x. a):real^N->real^N
       #|  \\x:real^N. x
       #|  \\x:real^N. if x IN s then x else a
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean (s UNION t)) s /\\\n        open_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
-      #|  !s t:real^N->bool.\n        s INTER closure t = {} /\\ t INTER closure s = {} /\\\n        (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (s UNION t)) s /\\\n        open_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
+      #|  forall s t:real^N->bool.\n        s INTER closure t = {} /\\ t INTER closure s = {} /\\\n        (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
       #|  p /\\ q /\\ r /\\ s <=> (r /\\ p /\\ q) /\\ s
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
-      #|  !f g s t u:real^N->bool.\n        retraction (s,t) f /\\ retraction (t,u) g\n        ==> retraction (s,u) (g o f)
-      #|  !s t u:real^N->bool.\n        s retract_of t /\\ t retract_of u ==> s retract_of u
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        DISJOINT s t /\\ (s = {} ==> t = {})\n        ==> s retract_of (s UNION t)
+      #|  forall f g s t u:real^N->bool.\n        retraction (s,t) f /\\ retraction (t,u) g\n        ==> retraction (s,u) (g o f)
+      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ t retract_of u ==> s retract_of u
       #|  s = {x:real^N | x IN t /\\ lift(norm(r x - x)) = vec 0}
       #|  r:real^N->real^N
-      #|  !s t:real^N->bool.\n        s retract_of t ==> closed_in (subtopology euclidean t) s
+      #|  forall s t:real^N->bool.\n        s retract_of t ==> closed_in (subtopology euclidean t) s
       #|  (r:real^N->real^N) o (h:real^(1,N)finite_sum->real^N)
       #|  (r:real^N->real^N) a
       #|  h:real^(1,N)finite_sum->real^N
       #|  a:real^N
       #|  r:real^N->real^N
-      #|  !s t:real^N->bool. contractible t /\\ s retract_of t ==> contractible s
-      #|  !s t:real^N->bool. compact t /\\ s retract_of t ==> compact s
-      #|  !s t. closed t /\\ s retract_of t ==> closed s
-      #|  !s t:real^N->bool. connected t /\\ s retract_of t ==> connected s
-      #|  !s t:real^N->bool. path_connected t /\\ s retract_of t ==> path_connected s
+      #|  forall s t:real^N->bool. contractible t /\\ s retract_of t ==> contractible s
+      #|  forall s t:real^N->bool. compact t /\\ s retract_of t ==> compact s
+      #|  forall s t. closed t /\\ s retract_of t ==> closed s
+      #|  forall s t:real^N->bool. connected t /\\ s retract_of t ==> connected s
+      #|  forall s t:real^N->bool. path_connected t /\\ s retract_of t ==> path_connected s
       #|  \\x:real^N. x
       #|  r:real^N->real^N
-      #|  !s t:real^N->bool.\n       simply_connected t /\\ s retract_of t ==> simply_connected s
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q /\\ r /\\ s <=> p /\\ q /\\ T /\\ r /\\ s /\\ T
-      #|  !s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (!f g. f continuous_on u /\\ IMAGE f u SUBSET s /\\\n               g continuous_on u /\\ IMAGE g u SUBSET s\n               ==> homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean s)  f g)\n        ==> (!f g. f continuous_on u /\\ IMAGE f u SUBSET t /\\\n                   g continuous_on u /\\ IMAGE g u SUBSET t\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean u,subtopology euclidean t) f g)
-      #|  \\x:real^N. x
-      #|  r:real^N->real^N
-      #|  p /\\ q <=> p /\\ q /\\ T
-      #|  !s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (!f. f continuous_on u /\\ IMAGE f u SUBSET s\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean u,subtopology euclidean s)\n                      f (\\x. c))\n        ==> (!f. f continuous_on u /\\ IMAGE f u SUBSET t\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean u,subtopology euclidean t)\n                          f (\\x. c))
+      #|  forall s t:real^N->bool.\n       simply_connected t /\\ s retract_of t ==> simply_connected s
       #|  \\x:real^N. x
       #|  r:real^N->real^N
       #|  p /\\ q /\\ r /\\ s <=> p /\\ q /\\ T /\\ r /\\ s /\\ T
-      #|  !s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (!f g. f continuous_on s /\\ IMAGE f s SUBSET u /\\\n               g continuous_on s /\\ IMAGE g s SUBSET u\n               ==> homotopic_with (\\x. T)\n                    (subtopology euclidean s,subtopology euclidean u)  f g)\n        ==> (!f g. f continuous_on t /\\ IMAGE f t SUBSET u /\\\n                   g continuous_on t /\\ IMAGE g t SUBSET u\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean t,subtopology euclidean u) f g)
+      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f g. f continuous_on u /\\ IMAGE f u SUBSET s /\\\n               g continuous_on u /\\ IMAGE g u SUBSET s\n               ==> homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean s)  f g)\n        ==> (forall f g. f continuous_on u /\\ IMAGE f u SUBSET t /\\\n                   g continuous_on u /\\ IMAGE g u SUBSET t\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean u,subtopology euclidean t) f g)
       #|  \\x:real^N. x
       #|  r:real^N->real^N
       #|  p /\\ q <=> p /\\ q /\\ T
-      #|  !s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (!f. f continuous_on s /\\ IMAGE f s SUBSET u\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean s,subtopology euclidean u)\n                      f (\\x. c))\n        ==> (!f. f continuous_on t /\\ IMAGE f t SUBSET u\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean t,subtopology euclidean u)\n                          f (\\x. c))
+      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on u /\\ IMAGE f u SUBSET s\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean u,subtopology euclidean s)\n                      f (\\x. c))\n        ==> (forall f. f continuous_on u /\\ IMAGE f u SUBSET t\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean u,subtopology euclidean t)\n                          f (\\x. c))
       #|  \\x:real^N. x
-      #|  !r s t:real^N->bool.\n    retraction (s,t) r\n    ==> !u. u SUBSET t\n            ==> (open_in (subtopology euclidean s) {x | x IN s /\\ r x IN u} <=>\n                 open_in (subtopology euclidean t) u)
-      #|  !s t:real^N->bool.\n        s retract_of t /\\ locally connected t ==> locally connected s
-      #|  !s t:real^N->bool.\n        s retract_of t /\\ locally path_connected t\n        ==> locally path_connected s
-      #|  !s t:real^N->bool.\n        locally compact s /\\ t retract_of s ==> locally compact t
+      #|  r:real^N->real^N
+      #|  p /\\ q /\\ r /\\ s <=> p /\\ q /\\ T /\\ r /\\ s /\\ T
+      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f g. f continuous_on s /\\ IMAGE f s SUBSET u /\\\n               g continuous_on s /\\ IMAGE g s SUBSET u\n               ==> homotopic_with (\\x. T)\n                    (subtopology euclidean s,subtopology euclidean u)  f g)\n        ==> (forall f g. f continuous_on t /\\ IMAGE f t SUBSET u /\\\n                   g continuous_on t /\\ IMAGE g t SUBSET u\n                   ==> homotopic_with (\\x. T)\n                       (subtopology euclidean t,subtopology euclidean u) f g)
+      #|  \\x:real^N. x
+      #|  r:real^N->real^N
+      #|  p /\\ q <=> p /\\ q /\\ T
+      #|  forall s t:real^N->bool u:real^M->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on s /\\ IMAGE f s SUBSET u\n             ==> ?c. homotopic_with (\\x. T)\n                      (subtopology euclidean s,subtopology euclidean u)\n                      f (\\x. c))\n        ==> (forall f. f continuous_on t /\\ IMAGE f t SUBSET u\n                 ==> ?c. homotopic_with (\\x. T)\n                          (subtopology euclidean t,subtopology euclidean u)\n                          f (\\x. c))
+      #|  \\x:real^N. x
+      #|  forall r s t:real^N->bool.\n    retraction (s,t) r\n    ==> forall u. u SUBSET t\n            ==> (open_in (subtopology euclidean s) {x | x IN s /\\ r x IN u} <=>\n                 open_in (subtopology euclidean t) u)
+      #|  forall s t:real^N->bool.\n        s retract_of t /\\ locally connected t ==> locally connected s
+      #|  forall s t:real^N->bool.\n        s retract_of t /\\ locally path_connected t\n        ==> locally path_connected s
+      #|  forall s t:real^N->bool.\n        locally compact s /\\ t retract_of s ==> locally compact t
       #|  \\z. pastecart ((f:real^M->real^M) (fstcart z))\n                            ((g:real^N->real^N) (sndcart z))
       #|  g:real^N->real^N
       #|  f:real^M->real^M
-      #|  !s:real^M->bool s' t:real^N->bool t'.\n        s retract_of s' /\\ t retract_of t'\n        ==> (s PCROSS t) retract_of (s' PCROSS t')
+      #|  forall s:real^M->bool s' t:real^N->bool t'.\n        s retract_of s' /\\ t retract_of t'\n        ==> (s PCROSS t) retract_of (s' PCROSS t')
       #|  \\x. sndcart((r:real^(M,N)finite_sum->real^(M,N)finite_sum)\n                            (pastecart a x))
       #|  ?a:real^M. a IN s
       #|  \\x. fstcart((r:real^(M,N)finite_sum->real^(M,N)finite_sum)\n                            (pastecart x b))
@@ -63799,11 +63799,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  t:real^N->bool = {}
       #|  s':real^M->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s s':real^M->bool t t':real^N->bool.\n        s PCROSS t retract_of s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/\n        s retract_of s' /\\ t retract_of t'
+      #|  forall s s':real^M->bool t t':real^N->bool.\n        s PCROSS t retract_of s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/\n        s retract_of s' /\\ t retract_of t'
       #|  (r:real^N->real^N) o (h:real^(1,M)finite_sum->real^N)
       #|  r:real^N->real^N
       #|  h:real^(1,M)finite_sum->real^N
-      #|  !f:real^M->real^N g s t u.\n        IMAGE f s SUBSET t /\\ IMAGE g s SUBSET t /\\ t retract_of u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
+      #|  forall f:real^M->real^N g s t u.\n        IMAGE f s SUBSET t /\\ IMAGE g s SUBSET t /\\ t retract_of u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
       #|  sphere(vec 0:real^N,&1)
       #|  reflect_along (basis 1:real^N)
       #|  I:real^N->real^N
@@ -63816,8 +63816,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  b:real^N
       #|  r < &0
       #|  a:real^N
-      #|  !a:real^N r. contractible(sphere(a,r)) <=> r <= &0
-      #|  !a:real^N e. &0 < e ==> ~(sphere(a,e) retract_of cball(a,e))
+      #|  forall a:real^N r. contractible(sphere(a,r)) <=> r <= &0
+      #|  forall a:real^N e. &0 < e ==> ~(sphere(a,e) retract_of cball(a,e))
       #|  x:real^N
       #|  &0 <= b /\\ x <= a ==> &0 <= (a + b) - x
       #|  a - x - (y - x):real^N = a - y
@@ -63834,11 +63834,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  x:real^N
       #|  \\x:real^N. x + (&2 * ((a - x) dot (f x - x)) - sqrt(s x)) /\n                             (&2 * ((f x - x) dot (f x - x))) % (f x - x)
       #|  x:real^N
-      #|  !x:real^N. x IN cball(a,e) ==> &0 <= s x
+      #|  forall x:real^N. x IN cball(a,e) ==> &0 <= s x
       #|  s = \\x:real^N.  &4 * ((a - x:real^N) dot (f x - x)) pow 2 +\n                &4 * (e pow 2 - norm(a - x) pow 2) * norm(f x - x) pow 2
       #|  a:real^N
-      #|  (?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)
-      #|  !f:real^N->real^N a e.\n        &0 < e /\\\n        f continuous_on cball(a,e) /\\\n        IMAGE f (cball(a,e)) SUBSET cball(a,e)\n        ==> ?x. x IN cball(a,e) /\\ f x = x
+      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
+      #|  forall f:real^N->real^N a e.\n        &0 < e /\\\n        f continuous_on cball(a,e) /\\\n        IMAGE f (cball(a,e)) SUBSET cball(a,e)\n        ==> ?x. x IN cball(a,e) /\\ f x = x
       #|  :real
       #|  x:real^N
       #|  closest_point s x:real^N
@@ -63849,9 +63849,9 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  :real
       #|  :real
       #|  ?e. &0 < e /\\ s SUBSET cball(vec 0:real^N,e)
-      #|  !f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  !f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(interior s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  !f:real^N->real^N.\n        f continuous_on (interval [vec 0,vec 1]) /\\\n        IMAGE f (interval [vec 0,vec 1]) SUBSET (interval [vec 0,vec 1])\n        ==> ?x. x IN interval[vec 0,vec 1] /\\ f x = x
+      #|  forall f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f:real^N->real^N s.\n        compact s /\\ convex s /\\ ~(interior s = {}) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f:real^N->real^N.\n        f continuous_on (interval [vec 0,vec 1]) /\\\n        IMAGE f (interval [vec 0,vec 1]) SUBSET (interval [vec 0,vec 1])\n        ==> ?x. x IN interval[vec 0,vec 1] /\\ f x = x
       #|  a + (if p then --x else x) = a <=> x = &0
       #|  m:num
       #|  a:real^N
@@ -63866,18 +63866,18 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  z:real^N
       #|  y:real^N
       #|  x:real^N
-      #|  s SUBSET t DIFF u <=> s SUBSET t /\\ !x y. x IN s ==> ~(x IN u)
+      #|  s SUBSET t DIFF u <=> s SUBSET t /\\ forall x y. x IN s ==> ~(x IN u)
       #|  box:real^N->bool
       #|  segment[x,y] INTER (v:num->real^N->bool) m
       #|  segment[x,y] INTER (u:num->real^N->bool) m
       #|  y:real^N
       #|  x:real^N
       #|  segment[x:real^N,y] SUBSET box
-      #|  !i. n < i ==> 1 <= i
+      #|  forall i. n < i ==> 1 <= i
       #|  (x:real^N) IN box
       #|  y IN (l:num->real^N->bool) m
       #|  y:real^N = lambda i. if i = m then &0 else (x:real^N)$i
-      #|  !i. n < i ==> 1 <= i
+      #|  forall i. n < i ==> 1 <= i
       #|  (x:real^N) IN box
       #|  y IN (r:num->real^N->bool) m
       #|  y:real^N = lambda i. if i = m then &1 else (x:real^N)$i
@@ -63886,7 +63886,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  x IN (u:num->real^N->bool) m /\\ ~(x IN v m) \\/\n      x IN v m /\\ ~(x IN u m)
       #|  x IN (b:num->real^N->bool) m
       #|  m:num
-      #|  !i. n < i ==> 1 <= i
+      #|  forall i. n < i ==> 1 <= i
       #|  x:real^N
       #|  x IN (b:num->real^N->bool) m
       #|  x:real^N
@@ -63899,7 +63899,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (v:num->real^N->bool) i
       #|  (u:num->real^N->bool) i
       #|  i:num
-      #|  !i. 1 <= i /\\ i <= n ==> ~(b i:real^N->bool = {})
+      #|  forall i. 1 <= i /\\ i <= n ==> ~(b i:real^N->bool = {})
       #|  t SUBSET s /\\ ~(t = {}) ==> ~(s INTER t = {})
       #|  n - n - w:int = --w
       #|  n:num
@@ -63907,7 +63907,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  v:num->real^N->bool
       #|  u:num->real^N->bool
       #|  b:num->real^N->bool
-      #|  (!x. P x /\\ Q x ==> F)\n         ==> DISJOINT (b INTER {x | P x}) (b INTER {x | Q x})
+      #|  (forall x. P x /\\ Q x ==> F)\n         ==> DISJOINT (b INTER {x | P x}) (b INTER {x | Q x})
       #|  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
       #|  n - (i - w) - w:int = n - i
       #|  i - 1
@@ -63917,10 +63917,10 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  i:num
       #|  b:num->real^N->bool
       #|  1 <= i ==> (x <= i - 1 <=> x < i)
-      #|  ?b:num->real^N->bool.\n       (!i. closed_in (subtopology euclidean box) (b i)) /\\\n       (!i. 1 <= i /\\ i <= n\n            ==> dimension(box INTER INTERS (IMAGE b (1..i))) <= &n - &i - &1 /\\\n                ?u v. open_in (subtopology euclidean box) u /\\\n                      open_in (subtopology euclidean box) v /\\\n                      DISJOINT u v /\\\n                      u UNION v = box DIFF b i /\\\n                      l i SUBSET u /\\\n                      r i SUBSET v)
+      #|  ?b:num->real^N->bool.\n       (forall i. closed_in (subtopology euclidean box) (b i)) /\\\n       (forall i. 1 <= i /\\ i <= n\n            ==> dimension(box INTER INTERS (IMAGE b (1..i))) <= &n - &i - &1 /\\\n                ?u v. open_in (subtopology euclidean box) u /\\\n                      open_in (subtopology euclidean box) v /\\\n                      DISJOINT u v /\\\n                      u UNION v = box DIFF b i /\\\n                      l i SUBSET u /\\\n                      r i SUBSET v)
       #|  (lambda j. if j = i then &1 else &0):real^N
       #|  vec 0:real^N
-      #|  (!i:num. 1 <= i /\\ i <= n ==> ~(l i:real^N->bool = {})) /\\\n    (!i:num. 1 <= i /\\ i <= n ==> ~(r i:real^N->bool = {}))
+      #|  (forall i:num. 1 <= i /\\ i <= n ==> ~(l i:real^N->bool = {})) /\\\n    (forall i:num. 1 <= i /\\ i <= n ==> ~(r i:real^N->bool = {}))
       #|  r = \\i. box INTER {x:real^N | x$i = &1}
       #|  l = \\i. box INTER {x:real^N | x$i = &0}
       #|  box = interval[vec 0:real^N,vec 1] INTER span(IMAGE basis (1..n))
@@ -63931,7 +63931,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  n <= dimindex(:N)
       #|  box:real^N->bool
       #|  dimension(box:real^N->bool)
-      #|  box = {x:real^N | (!i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> &0 <= x$i /\\ x$i <= &1) /\\\n                      (!i. n < i /\\ i <= dimindex(:N) ==> x$i = &0)}
+      #|  box = {x:real^N | (forall i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> &0 <= x$i /\\ x$i <= &1) /\\\n                      (forall i. n < i /\\ i <= dimindex(:N) ==> x$i = &0)}
       #|  dim(IMAGE basis (1..n):real^N->bool) = n
       #|  u:real^N->bool
       #|  span(IMAGE basis (1..n)):real^N->bool
@@ -63950,11 +63950,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  &0 <= aff_dim(s:real^N->bool) /\\ &1 <= aff_dim s
       #|  aff_dim(s:real^N->bool) = &0
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. convex s ==> dimension s = aff_dim s
-      #|  !s:real^N->bool. aff_dim s = dimension(affine hull s)
-      #|  !s:real^N->bool. aff_dim s = dimension(convex hull s)
-      #|  !s:real^N->bool. subspace s ==> dimension s = &(dim s)
-      #|  !s:real^N->bool. &(dim s) = dimension(span s)
+      #|  forall s:real^N->bool. convex s ==> dimension s = aff_dim s
+      #|  forall s:real^N->bool. aff_dim s = dimension(affine hull s)
+      #|  forall s:real^N->bool. aff_dim s = dimension(convex hull s)
+      #|  forall s:real^N->bool. subspace s ==> dimension s = &(dim s)
+      #|  forall s:real^N->bool. &(dim s) = dimension(span s)
       #|  a:real^N
       #|  dimension(affine hull u INTER ball(a:real^N,min d e))
       #|  e:real
@@ -63963,11 +63963,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  u:real^N->bool
-      #|  !u s:real^N->bool.\n        convex u /\\ open_in (subtopology euclidean u) s\n        ==> dimension s = if s = {} then -- &1 else aff_dim u
-      #|  !s:real^N->bool.\n        open s ==> dimension s = if s = {} then -- &1 else &(dimindex(:N))
+      #|  forall u s:real^N->bool.\n        convex u /\\ open_in (subtopology euclidean u) s\n        ==> dimension s = if s = {} then -- &1 else aff_dim u
+      #|  forall s:real^N->bool.\n        open s ==> dimension s = if s = {} then -- &1 else &(dimindex(:N))
       #|  dimension(:real^N) = &(dimindex(:N))
       #|  dimension(interior(s:real^N->bool))
-      #|  !s:real^N->bool. ~(interior s = {}) ==> dimension s = &(dimindex(:N))
+      #|  forall s:real^N->bool. ~(interior s = {}) ==> dimension s = &(dimindex(:N))
       #|  dimindex(:N) - n
       #|  x:int < N - n - (N - (n + &1)) <=> x <= &0
       #|  d2:int < n2 ==> d1 < N - n2 ==> d1 + d2 + &1 < N
@@ -63986,14 +63986,14 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  n:num
       #|  0
       #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  !n. n <= dimindex(:N)\n       ==> dimension\n           {x:real^N | CARD {i | i IN 1..dimindex(:N) /\\ rational(x$i)} <= n} =\n           &n
+      #|  forall n. n <= dimindex(:N)\n       ==> dimension\n           {x:real^N | CARD {i | i IN 1..dimindex(:N) /\\ rational(x$i)} <= n} =\n           &n
       #|  1 <= N /\\ n <= N ==> (~(n = N) <=> n <= N - 1)
       #|  {x | x IN s} = s
-      #|  (!x. P x ==> Q x) <=> {x | P x /\\ Q x} = {x | P x}
+      #|  (forall x. P x ==> Q x) <=> {x | P x /\\ Q x} = {x | P x}
       #|  x:real^N
       #|  n - 1 <= n
       #|  dimindex(:N) - 1
-      #|  dimension((:real^N) DIFF\n             { x | !i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n   &(dimindex(:N)) - &1
+      #|  dimension((:real^N) DIFF\n             { x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n   &(dimindex(:N)) - &1
       #|  i:num
       #|  dist(y:real^N,x)
       #|  (lambda i. if i IN 1..n then (y:real^N)$i else &0):real^N
@@ -64002,7 +64002,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  e:real
       #|  x IN (:real^N)
       #|  x:real^N
-      #|  closure(span(IMAGE basis (1..n)) INTER\n             {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n     span(IMAGE basis (1..n))
+      #|  closure(span(IMAGE basis (1..n)) INTER\n             {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) =\n     span(IMAGE basis (1..n))
       #|  1 <= N /\\ n <= N ==> (N - 1 + 1) - (N - n) <= n
       #|  c:int <= n ==> d <= c - &1 ==> d < n
       #|  c < n ==> c <= n - 1
@@ -64011,7 +64011,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  CARD(n+1..dimindex(:N))
       #|  x:real^N
       #|  dimension(UNIONS\n         {{x:real^N |\n             {i | i IN 1..dimindex (:N) /\\ rational (x$i)} HAS_SIZE m} |\n          m IN (dimindex(:N)-n)..dimindex(:N)-1})
-      #|  !n. n <= dimindex(:N)\n          ==> dimension(span(IMAGE basis (1..n)) DIFF\n                {x:real^N | !i. i IN 1..dimindex(:N) ==> rational(x$i)}) < &n
+      #|  forall n. n <= dimindex(:N)\n          ==> dimension(span(IMAGE basis (1..n)) DIFF\n                {x:real^N | forall i. i IN 1..dimindex(:N) ==> rational(x$i)}) < &n
       #|  g:real^N->real^N
       #|  f:real^N->real^N
       #|  d':int = d ==> d < n ==> d' < n
@@ -64020,7 +64020,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^N->real^N
       #|  t SUBSET s ==> s INTER t = t
       #|  s:real^N->bool
-      #|  span(IMAGE basis (1..n)) INTER\n     {x:real^N | !i. i IN 1..dimindex(:N) ==> rational(x$i)}
+      #|  span(IMAGE basis (1..n)) INTER\n     {x:real^N | forall i. i IN 1..dimindex(:N) ==> rational(x$i)}
       #|  s:real^N->bool
       #|  n:num
       #|  s:real^N->bool
@@ -64042,27 +64042,27 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  relative_interior s:real^N->bool
       #|  affine hull s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        dimension s = aff_dim s <=> s = {} \\/ ~(relative_interior s = {})
+      #|  forall s:real^N->bool.\n        dimension s = aff_dim s <=> s = {} \\/ ~(relative_interior s = {})
       #|  s:int < a <=> s <= a /\\ ~(s = a)
-      #|  !s:real^N->bool. dimension s < aff_dim s <=>\n                    ~(s = {}) /\\ relative_interior s = {}
+      #|  forall s:real^N->bool. dimension s < aff_dim s <=>\n                    ~(s = {}) /\\ relative_interior s = {}
       #|  subtopology euclidean u interior_of s:real^N->bool
       #|  u:real^N->bool
       #|  dimension(subtopology euclidean u interior_of s:real^N->bool)
       #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
-      #|  s = u ==> !a:int. s <= a /\\ a <= u ==> a = u /\\ s = a
+      #|  s = u ==> forall a:int. s <= a /\\ a <= u ==> a = u /\\ s = a
       #|  aff_dim(s:real^N->bool)
       #|  s:real^N->bool = {}
       #|  u:real^N->bool = {}
-      #|  !u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s = aff_dim u <=>\n             s = {} /\\ u = {} \\/\n             ~(subtopology euclidean u interior_of s = {}))
+      #|  forall u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s = aff_dim u <=>\n             s = {} /\\ u = {} \\/\n             ~(subtopology euclidean u interior_of s = {}))
       #|  u:real^N->bool = {}
-      #|  !u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s < aff_dim u <=>\n             ~(u = {}) /\\ subtopology euclidean u interior_of s = {})
+      #|  forall u s:real^N->bool.\n        convex u /\\ s SUBSET u\n        ==> (dimension s < aff_dim u <=>\n             ~(u = {}) /\\ subtopology euclidean u interior_of s = {})
       #|  s:real^N->bool
-      #|  !a. d:int = n ==> d <= a /\\ a <= n ==> a = n
+      #|  forall a. d:int = n ==> d <= a /\\ a <= n ==> a = n
       #|  aff_dim(s:real^N->bool)
       #|  ~(-- &1:int = &n)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. dimension s = &(dimindex(:N)) <=> ~(interior s = {})
-      #|  !s:real^N->bool. dimension s < &(dimindex(:N)) <=> interior s = {}
+      #|  forall s:real^N->bool. dimension s = &(dimindex(:N)) <=> ~(interior s = {})
+      #|  forall s:real^N->bool. dimension s < &(dimindex(:N)) <=> interior s = {}
       #|  IMAGE f c SUBSET s\n      ==> s INTER (IMAGE f (c DIFF i)) = IMAGE f (c DIFF i)
       #|  d:int <= n - &2 ==> d' = d ==> d' <= n - &1 - &1
       #|  u = IMAGE (\\x:real^N. c % x) u
@@ -64101,10 +64101,10 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  aff_dim(u:real^N->bool) <= &0
       #|  u:real^N->bool
       #|  s:real^N->bool
-      #|  !u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\ bounded s\n        ==> dimension(relative_frontier s) =\n            if s = {} then -- &1 else aff_dim u - &1
+      #|  forall u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\ bounded s\n        ==> dimension(relative_frontier s) =\n            if s = {} then -- &1 else aff_dim u - &1
       #|  u:real^N->bool
       #|  (:real^N)
-      #|  !u:real^N->bool.\n        open u /\\ bounded u\n        ==> dimension(frontier u) =\n            if u = {} then -- &1 else &(dimindex(:N)) - &1
+      #|  forall u:real^N->bool.\n        open u /\\ bounded u\n        ==> dimension(frontier u) =\n            if u = {} then -- &1 else &(dimindex(:N)) - &1
       #|  i z = z ==> z INSERT IMAGE i (s DELETE z) = z INSERT IMAGE i s
       #|  z INSERT w = z INSERT y\n    ==> w = x DELETE z ==> z INSERT y = z INSERT x
       #|  c SUBSET u ==> (u DELETE z) INTER c = c DELETE z
@@ -64113,7 +64113,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  &0 < r
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  (!x. x IN s ==> i(i x) = x) /\\\n    t SUBSET s /\\ a INSERT (IMAGE i s) = a INSERT u\n    ==> a INSERT IMAGE i (s DIFF t) = a INSERT (u DIFF IMAGE i t)
+      #|  (forall x. x IN s ==> i(i x) = x) /\\\n    t SUBSET s /\\ a INSERT (IMAGE i s) = a INSERT u\n    ==> a INSERT IMAGE i (s DIFF t) = a INSERT (u DIFF IMAGE i t)
       #|  ~p ==> ~(q /\\ r) <=> ~p /\\ r ==> ~q
       #|  connected(u:real^N->bool)
       #|  vec 0:real^N
@@ -64151,27 +64151,27 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s SUBSET u /\\ ~(s = u) ==> ?x. x IN u /\\ ~(x IN s)
       #|  ?z:real^N. z IN u /\\ ~(z IN subtopology euclidean u closure_of s)
       #|  bounded(s:real^N->bool)
-      #|  !u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\\n        ~(s = {}) /\\ ~(subtopology euclidean u closure_of s = u)\n        ==> dimension(relative_frontier s) = aff_dim u - &1
+      #|  forall u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\\n        ~(s = {}) /\\ ~(subtopology euclidean u closure_of s = u)\n        ==> dimension(relative_frontier s) = aff_dim u - &1
       #|  u:real^N->bool
       #|  (:real^N)
-      #|  !u:real^N->bool.\n        open u /\\ ~(u = {}) /\\ ~(closure u = (:real^N))\n        ==> dimension(frontier u) = &(dimindex(:N)) - &1
+      #|  forall u:real^N->bool.\n        open u /\\ ~(u = {}) /\\ ~(closure u = (:real^N))\n        ==> dimension(frontier u) = &(dimindex(:N)) - &1
       #|  relative_interior s:real^N->bool
       #|  affine hull s:real^N->bool
-      #|  !s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(s = {})\n        ==> dimension(relative_frontier s) = aff_dim s - &1
+      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(s = {})\n        ==> dimension(relative_frontier s) = aff_dim s - &1
       #|  a:real^N
       #|  t:real^N->bool = {}
-      #|  !a:real^N r t.\n        &0 < r /\\ affine t /\\ a IN t\n        ==> dimension(sphere(a,r) INTER t) = aff_dim t - &1
+      #|  forall a:real^N r t.\n        &0 < r /\\ affine t /\\ a IN t\n        ==> dimension(sphere(a,r) INTER t) = aff_dim t - &1
       #|  s = s INTER UNIV
       #|  r:real = &0
-      #|  !a:real^N r. dimension(sphere(a,r)) =\n                if &0 < r then &(dimindex(:N)) - &1\n                else if r = &0 then &0 else -- &1
+      #|  forall a:real^N r. dimension(sphere(a,r)) =\n                if &0 < r then &(dimindex(:N)) - &1\n                else if r = &0 then &0 else -- &1
       #|  u DIFF u INTER s = u DIFF s
       #|  subtopology euclidean u closure_of u2:real^N->bool
       #|  u DIFF subtopology euclidean u closure_of u1:real^N->bool
       #|  subtopology euclidean (u:real^N->bool)
       #|  dimension(d:real^N->bool)
-      #|  !x. d:int <= x /\\ x < n ==> ~(d = n)
+      #|  forall x. d:int <= x /\\ x < n ==> ~(d = n)
       #|  subtopology euclidean u closure_of u2:real^N->bool
-      #|  !t. s SUBSET t /\\ t SUBSET u /\\ ~(t = u)\n        ==> ~(s = u)
+      #|  forall t. s SUBSET t /\\ t SUBSET u /\\ ~(t = u)\n        ==> ~(s = u)
       #|  v:real^N->bool
       #|  u:real^N->bool
       #|  open_in (subtopology euclidean u) (v:real^N->bool)
@@ -64191,7 +64191,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  subtopology euclidean u interior_of d:real^N->bool = {}
       #|  d:real^N->bool
       #|  u:real^N->bool
-      #|  !u s:real^N->bool.\n          affine u /\\ dimension s <= aff_dim u - &2 ==> connected(u DIFF s)
+      #|  forall u s:real^N->bool.\n          affine u /\\ dimension s <= aff_dim u - &2 ==> connected(u DIFF s)
       #|  g:real^N->real^N
       #|  f:real^N->real^N
       #|  dimension(ball(x:real^N,r) INTER u INTER t)
@@ -64218,7 +64218,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  u:real^N->bool
       #|  u DIFF t:real^N->bool
       #|  s:real^N->bool
-      #|  !u s t:real^N->bool.\n          affine u /\\ open_in (subtopology euclidean u) s /\\\n          connected s /\\ dimension t <= aff_dim u - &2\n          ==> connected(s DIFF t)
+      #|  forall u s t:real^N->bool.\n          affine u /\\ open_in (subtopology euclidean u) s /\\\n          connected s /\\ dimension t <= aff_dim u - &2\n          ==> connected(s DIFF t)
       #|  affine hull c DIFF t:real^N->bool
       #|  d:int <= u - &2 ==> d' <= d ==> ~(d' = u)
       #|  ~p ==> p ==> q
@@ -64243,26 +64243,26 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  open_in (subtopology euclidean (affine hull c))\n            (relative_interior c INTER s:real^N->bool)
       #|  (relative_interior c INTER s) DIFF t:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !c s t:real^N->bool.\n        convex c /\\ open_in (subtopology euclidean c) s /\\\n        connected s /\\ dimension t <= aff_dim c - &2\n        ==> connected(s DIFF t)
+      #|  forall c s t:real^N->bool.\n        convex c /\\ open_in (subtopology euclidean c) s /\\\n        connected s /\\ dimension t <= aff_dim c - &2\n        ==> connected(s DIFF t)
       #|  s:real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ dimension t <= aff_dim s - &2 ==> connected(s DIFF t)
+      #|  forall s t:real^N->bool.\n        convex s /\\ dimension t <= aff_dim s - &2 ==> connected(s DIFF t)
       #|  affine hull s:real^N->bool
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean (affine hull s)) s /\\\n        connected s /\\\n        dimension t <= aff_dim s - &2\n        ==> connected(s DIFF t)
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (affine hull s)) s /\\\n        connected s /\\\n        dimension t <= aff_dim s - &2\n        ==> connected(s DIFF t)
       #|  s:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        open s /\\ connected s /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  !s:real^N->bool t.\n        convex s /\\ ~(interior s = {}) /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  !s:real^N->bool.\n        dimension s <= &(dimindex(:N)) - &2 ==> connected((:real^N) DIFF s)
+      #|  forall s t:real^N->bool.\n        open s /\\ connected s /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
+      #|  forall s:real^N->bool t.\n        convex s /\\ ~(interior s = {}) /\\ dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
+      #|  forall s:real^N->bool.\n        dimension s <= &(dimindex(:N)) - &2 ==> connected((:real^N) DIFF s)
       #|  s SUBSET t <=> s INTER t = s
       #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  !s t:real^N->bool.\n          open s /\\ interior t = {} ==> s SUBSET closure(s DIFF t)
+      #|  forall s t:real^N->bool.\n          open s /\\ interior t = {} ==> s SUBSET closure(s DIFF t)
       #|  interior t:real^N->bool = {}
       #|  t:real^N->bool
       #|  closure(interior s):real^N->bool
       #|  s:real^N->bool
       #|  interior s DIFF t:real^N->bool
-      #|  !s:real^N->bool t.\n        s SUBSET closure(interior s) /\\\n        connected(interior s) /\\\n        dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
-      #|  AR(s:real^N->bool) <=>\n        !u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> s' retract_of u
-      #|  ANR(s:real^N->bool) <=>\n        !u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> ?t. open_in (subtopology euclidean u) t /\\\n                        s' retract_of t
+      #|  forall s:real^N->bool t.\n        s SUBSET closure(interior s) /\\\n        connected(interior s) /\\\n        dimension t <= &(dimindex(:N)) - &2\n        ==> connected(s DIFF t)
+      #|  AR(s:real^N->bool) <=>\n        forall u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> s' retract_of u
+      #|  ANR(s:real^N->bool) <=>\n        forall u s':real^(N,1)finite_sum->bool.\n                s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n                ==> ?t. open_in (subtopology euclidean u) t /\\\n                        s' retract_of t
       #|  ENR s <=> ?u. open u /\\ s retract_of u
       #|  (h:real^(N,1)finite_sum->real^N) o r o\n              (f':real^M->real^(N,1)finite_sum)
       #|  r:real^(N,1)finite_sum->real^(N,1)finite_sum
@@ -64277,7 +64277,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^(N,1)finite_sum->bool
       #|  x:int < y + &1 <=> x <= y
       #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  !f:real^M->real^N u t s.\n        AR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                !x. x IN t ==> g x = f x
+      #|  forall f:real^M->real^N u t s.\n        AR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                forall x. x IN t ==> g x = f x
       #|  (g:real^N->real^M) o (h':real^M->real^N)
       #|  h':real^M->real^N
       #|  s:real^N->bool
@@ -64286,8 +64286,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  h:real^M->real^N
       #|  h:real^M->real^N
       #|  g:real^N->real^M
-      #|  !s:real^N->bool u s':real^M->bool.\n        AR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> s' retract_of u
-      #|  !s:real^N->bool s':real^M->bool.\n    AR s /\\ s homeomorphic s' /\\ closed s' ==> s' retract_of (:real^M)
+      #|  forall s:real^N->bool u s':real^M->bool.\n        AR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> s' retract_of u
+      #|  forall s:real^N->bool s':real^M->bool.\n    AR s /\\ s homeomorphic s' /\\ closed s' ==> s' retract_of (:real^M)
       #|  (g:real^N->real^(N,1)finite_sum) o\n              (h':real^(N,1)finite_sum->real^N)
       #|  h':real^(N,1)finite_sum->real^N
       #|  t:real^(N,1)finite_sum->bool
@@ -64297,17 +64297,17 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  g:real^N->real^(N,1)finite_sum
       #|  t:real^(N,1)finite_sum->bool
       #|  u:real^(N,1)finite_sum->bool
-      #|  !s:real^N->bool.\n        (!f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     !x. x IN t ==> g x = f x)\n        ==> AR s
-      #|  !s:real^N->bool.\n        AR s <=>\n        (!f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     !x. x IN t ==> g x = f x)
-      #|  !s u:real^N->bool.\n        AR s /\\ closed_in (subtopology euclidean u) s ==> s retract_of u
+      #|  forall s:real^N->bool.\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     forall x. x IN t ==> g x = f x)\n        ==> AR s
+      #|  forall s:real^N->bool.\n        AR s <=>\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET s /\\\n                     forall x. x IN t ==> g x = f x)
+      #|  forall s u:real^N->bool.\n        AR s /\\ closed_in (subtopology euclidean u) s ==> s retract_of u
       #|  s:real^M->bool
-      #|  !s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ AR t ==> AR s
-      #|  !s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (AR s <=> AR t)
-      #|  !a:real^N s. AR(IMAGE (\\x. a + x) s) <=> AR s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (AR(IMAGE f s) <=> AR s)
+      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ AR t ==> AR s
+      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (AR s <=> AR t)
+      #|  forall a:real^N s. AR(IMAGE (\\x. a + x) s) <=> AR s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (AR(IMAGE f s) <=> AR s)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (AR(IMAGE f k) <=> AR k)
+      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (AR(IMAGE f k) <=> AR k)
       #|  (h:real^(N,1)finite_sum->real^N) o r o\n              (f':real^M->real^(N,1)finite_sum)
       #|  {x | x IN u /\\ (f':real^M->real^(N,1)finite_sum) x IN d}
       #|  r:real^(N,1)finite_sum->real^(N,1)finite_sum
@@ -64323,7 +64323,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^(N,1)finite_sum->bool
       #|  x:int < y + &1 <=> x <= y
       #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  !f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                  !x. x IN t ==> g x = f x
+      #|  forall f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                  forall x. x IN t ==> g x = f x
       #|  (g:real^N->real^M) o (h':real^M->real^N)
       #|  h':real^M->real^N
       #|  v:real^M->bool
@@ -64333,8 +64333,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  h:real^M->real^N
       #|  h:real^M->real^N
       #|  g:real^N->real^M
-      #|  !s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s' retract_of v
-      #|  !s:real^N->bool s':real^M->bool.\n    ANR s /\\ s homeomorphic s' /\\ closed s' ==> ?v. open v /\\ s' retract_of v
+      #|  forall s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s' retract_of v
+      #|  forall s:real^N->bool s':real^M->bool.\n    ANR s /\\ s homeomorphic s' /\\ closed s' ==> ?v. open v /\\ s' retract_of v
       #|  (g:real^N->real^(N,1)finite_sum) o\n              (h':real^(N,1)finite_sum->real^N)
       #|  h':real^(N,1)finite_sum->real^N
       #|  v:real^(N,1)finite_sum->bool
@@ -64345,8 +64345,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  g:real^N->real^(N,1)finite_sum
       #|  t:real^(N,1)finite_sum->bool
       #|  u:real^(N,1)finite_sum->bool
-      #|  !s:real^N->bool.\n        (!f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       !x. x IN t ==> g x = f x)\n        ==> ANR s
-      #|  !s:real^N->bool.\n        ANR s <=>\n        (!f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       !x. x IN t ==> g x = f x)
+      #|  forall s:real^N->bool.\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       forall x. x IN t ==> g x = f x)\n        ==> ANR s
+      #|  forall s:real^N->bool.\n        ANR s <=>\n        (forall f:real^(N,1)finite_sum->real^N u t.\n             f continuous_on t /\\ IMAGE f t SUBSET s /\\\n             closed_in (subtopology euclidean u) t\n             ==> ?v g. t SUBSET v /\\ open_in  (subtopology euclidean u) v /\\\n                       g continuous_on v /\\ IMAGE g v SUBSET s /\\\n                       forall x. x IN t ==> g x = f x)
       #|  u DIFF w:real^M->bool
       #|  w:real^M->bool
       #|  v:real^M->bool
@@ -64354,7 +64354,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  u DIFF z:real^M->bool
       #|  s':real^M->bool
       #|  ?z. open_in (subtopology euclidean u) z /\\\n                    (s':real^M->bool) retract_of z
-      #|  !s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s' SUBSET v /\\ v SUBSET w /\\ s' retract_of w
+      #|  forall s:real^N->bool u s':real^M->bool.\n        ANR s /\\ s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s' SUBSET v /\\ v SUBSET w /\\ s' retract_of w
       #|  g:real^M->real^N
       #|  u DIFF z:real^M->bool
       #|  z:real^M->bool
@@ -64362,20 +64362,20 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  u:real^M->bool
       #|  u DIFF v:real^M->bool
       #|  t:real^M->bool
-      #|  ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n          g continuous_on v /\\ IMAGE g v SUBSET s /\\\n          !x. x IN t ==> g x = (f:real^M->real^N) x
-      #|  !f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v w g. open_in (subtopology euclidean u) v /\\\n                    closed_in (subtopology euclidean u) w /\\\n                    t SUBSET v /\\ v SUBSET w /\\\n                    g continuous_on w /\\ IMAGE g w SUBSET s /\\\n                    !x. x IN t ==> g x = f x
-      #|  !s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s retract_of v
-      #|  !s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s SUBSET v /\\ v SUBSET w /\\ s retract_of w
+      #|  ?v g. t SUBSET v /\\ open_in (subtopology euclidean u) v /\\\n          g continuous_on v /\\ IMAGE g v SUBSET s /\\\n          forall x. x IN t ==> g x = (f:real^M->real^N) x
+      #|  forall f:real^M->real^N u t s.\n        ANR s /\\ f continuous_on t /\\ IMAGE f t SUBSET s /\\\n        closed_in (subtopology euclidean u) t\n        ==> ?v w g. open_in (subtopology euclidean u) v /\\\n                    closed_in (subtopology euclidean u) w /\\\n                    t SUBSET v /\\ v SUBSET w /\\\n                    g continuous_on w /\\ IMAGE g w SUBSET s /\\\n                    forall x. x IN t ==> g x = f x
+      #|  forall s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v. open_in (subtopology euclidean u) v /\\\n                s retract_of v
+      #|  forall s:real^N->bool u.\n        ANR s /\\ closed_in (subtopology euclidean u) s\n        ==> ?v w. open_in (subtopology euclidean u) v /\\\n                  closed_in (subtopology euclidean u) w /\\\n                  s SUBSET v /\\ v SUBSET w /\\ s retract_of w
       #|  s:real^M->bool
-      #|  !s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ ANR t ==> ANR s
-      #|  !s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ANR s <=> ANR t)
-      #|  !a:real^N s. ANR(IMAGE (\\x. a + x) s) <=> ANR s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (ANR(IMAGE f s) <=> ANR s)
+      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t /\\ ANR t ==> ANR s
+      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ANR s <=> ANR t)
+      #|  forall a:real^N s. ANR(IMAGE (\\x. a + x) s) <=> ANR s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (ANR(IMAGE f s) <=> ANR s)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ANR(IMAGE f k) <=> ANR k)
-      #|  !x:real^M. x IN t ==> x IN c
-      #|  !x:real^M. x IN u ==> x IN s
+      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ANR(IMAGE f k) <=> ANR k)
+      #|  forall x:real^M. x IN t ==> x IN c
+      #|  forall x:real^M. x IN u ==> x IN s
       #|  IMAGE h u2 SUBSET v ==> u SUBSET u2 ==> IMAGE h u SUBSET v
       #|  h:real^(1,M)finite_sum->real^N
       #|  u:real^M->bool
@@ -64396,7 +64396,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  fg:real^(1,M)finite_sum->real^N =\n        \\x. if fstcart x = vec 1 then g(sndcart x) else f(sndcart x)
       #|  closed_in (subtopology euclidean s) (c:real^M->bool)
       #|  c = {x | x IN s /\\ (f:real^M->real^N) x = g x}
-      #|  !f g:real^M->real^N s t v.\n        ANR v /\\\n        f continuous_on s /\\ IMAGE f s SUBSET v /\\\n        g continuous_on s /\\ IMAGE g s SUBSET v /\\\n        t SUBSET s /\\ (!x. x IN t ==> f x = g x)\n        ==> ?u. open_in (subtopology euclidean s) u /\\ t SUBSET u /\\\n                homotopic_with (\\h. !x. x IN t ==> h x = f x)\n                 (subtopology euclidean u,subtopology euclidean v) f g
+      #|  forall f g:real^M->real^N s t v.\n        ANR v /\\\n        f continuous_on s /\\ IMAGE f s SUBSET v /\\\n        g continuous_on s /\\ IMAGE g s SUBSET v /\\\n        t SUBSET s /\\ (forall x. x IN t ==> f x = g x)\n        ==> ?u. open_in (subtopology euclidean s) u /\\ t SUBSET u /\\\n                homotopic_with (\\h. forall x. x IN t ==> h x = f x)\n                 (subtopology euclidean u,subtopology euclidean v) f g
       #|  (W:real^N->bool) SUBSET K /\\ Y SUBSET W
       #|  (f:real^M->real^N) o r o (h:real^N->real^M)
       #|  r:real^M->real^M
@@ -64417,24 +64417,24 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  K:real^N->bool
       #|  Y:real^N->bool
       #|  X:real^M->bool
-      #|  !s:real^M->bool s':real^N->bool u.\n        ENR s /\\ s homeomorphic s' /\\ s' SUBSET u\n        ==> ?t'. open_in (subtopology euclidean u) t' /\\ s' retract_of t'
-      #|  !s:real^M->bool s':real^N->bool.\n        ENR s /\\ s homeomorphic s' ==> ?t'. open t' /\\ s' retract_of t'
+      #|  forall s:real^M->bool s':real^N->bool u.\n        ENR s /\\ s homeomorphic s' /\\ s' SUBSET u\n        ==> ?t'. open_in (subtopology euclidean u) t' /\\ s' retract_of t'
+      #|  forall s:real^M->bool s':real^N->bool.\n        ENR s /\\ s homeomorphic s' ==> ?t'. open t' /\\ s' retract_of t'
       #|  s:real^M->bool
       #|  t:real^N->bool
       #|  t:real^N->bool
       #|  s:real^M->bool
-      #|  !s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ENR s <=> ENR t)
-      #|  !a:real^N s. ENR(IMAGE (\\x. a + x) s) <=> ENR s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (ENR(IMAGE f s) <=> ENR s)
+      #|  forall s:real^M->bool t:real^N->bool.\n      s homeomorphic t ==> (ENR s <=> ENR t)
+      #|  forall a:real^N s. ENR(IMAGE (\\x. a + x) s) <=> ENR s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (ENR(IMAGE f s) <=> ENR s)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ENR(IMAGE f k) <=> ENR k)
-      #|  !s:real^N->bool. AR s ==> ANR s
-      #|  !s:real^N->bool. ENR s ==> ANR s
+      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (ENR(IMAGE f k) <=> ENR k)
+      #|  forall s:real^N->bool. AR s ==> ANR s
+      #|  forall s:real^N->bool. ENR s ==> ANR s
       #|  t:real^(N,1)finite_sum->bool
       #|  (:real^(N,1)finite_sum)
       #|  ?t. closed t /\\\n          (s:real^N->bool) homeomorphic (t:real^(N,1)finite_sum->bool)
-      #|  !s:real^N->bool. ENR s <=> ANR s /\\ locally compact s
+      #|  forall s:real^N->bool. ENR s <=> ANR s /\\ locally compact s
       #|  w:real^(N,1)finite_sum->bool = (w DIFF v) UNION (w DIFF v')
       #|  \\x. if (x:real^(N,1)finite_sum) IN w DIFF v then a\n        else (h:real^(1,N)finite_sum->real^N) (pastecart (e x) (g x))
       #|  e:real^(N,1)finite_sum->real^1
@@ -64462,74 +64462,74 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^(N,1)finite_sum->bool
       #|  x:int < y + &1 <=> x <= y
       #|  ?c s':real^(N,1)finite_sum->bool.\n          convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n          (s:real^N->bool) homeomorphic s'
-      #|  !s:real^N->bool. AR s <=> ANR s /\\ contractible s /\\ ~(s = {})
+      #|  forall s:real^N->bool. AR s <=> ANR s /\\ contractible s /\\ ~(s = {})
       #|  (r:real^N->real^N) o (g:real^(N,1)finite_sum->real^N)
       #|  g:real^(N,1)finite_sum->real^N
       #|  r:real^N->real^N
-      #|  !s t:real^N->bool. ANR t /\\ s retract_of t ==> ANR s
-      #|  !s t:real^N->bool. AR t /\\ s retract_of t ==> AR s
-      #|  !s t:real^N->bool. ENR t /\\ s retract_of t ==> ENR s
+      #|  forall s t:real^N->bool. ANR t /\\ s retract_of t ==> ANR s
+      #|  forall s t:real^N->bool. AR t /\\ s retract_of t ==> AR s
+      #|  forall s t:real^N->bool. ENR t /\\ s retract_of t ==> ENR s
       #|  (:real^N)
-      #|  !s:real^N->bool. s retract_of (:real^N) <=> AR s /\\ closed s
-      #|  !s. compact s /\\ AR s <=> compact s /\\ s retract_of (:real^N)
+      #|  forall s:real^N->bool. s retract_of (:real^N) <=> AR s /\\ closed s
+      #|  forall s. compact s /\\ AR s <=> compact s /\\ s retract_of (:real^N)
       #|  ~(AR({}:real^N->bool))
-      #|  !s:real^N->bool. AR s ==> ~(s = {})
+      #|  forall s:real^N->bool. AR s ==> ~(s = {})
       #|  ENR {}
       #|  ANR {}
-      #|  !s:real^N->bool. convex s /\\ ~(s = {}) ==> AR s
-      #|  !s:real^N->bool. convex s ==> ANR s
-      #|  !s:real^N->bool. is_interval s ==> ENR s
-      #|  !s:real^N->bool. closed s /\\ convex s ==> ENR s
+      #|  forall s:real^N->bool. convex s /\\ ~(s = {}) ==> AR s
+      #|  forall s:real^N->bool. convex s ==> ANR s
+      #|  forall s:real^N->bool. is_interval s ==> ENR s
+      #|  forall s:real^N->bool. closed s /\\ convex s ==> ENR s
       #|  AR(:real^N)
       #|  ANR(:real^N)
       #|  ENR(:real^N)
-      #|  !a:real^N. AR {a}
-      #|  !a:real^N. ANR {a}
-      #|  !a:real^N. ENR {a}
+      #|  forall a:real^N. AR {a}
+      #|  forall a:real^N. ANR {a}
+      #|  forall a:real^N. ENR {a}
       #|  w:real^(N,1)finite_sum->bool
       #|  {x | x IN w /\\ (g:real^(N,1)finite_sum->real^N) x IN s}
       #|  w:real^(N,1)finite_sum->bool
       #|  g:real^(N,1)finite_sum->real^N
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ANR t ==> ANR s
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ENR t ==> ENR s
-      #|  !s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ANR u\n        ==> ANR s
-      #|  !s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ENR u\n        ==> ENR s
-      #|  !s. ANR(s) ==> ANR(relative_interior s)
-      #|  !s a:real^N. ANR(s) ==> ANR(s DELETE a)
-      #|  !s. ENR(s) ==> ENR(relative_interior s)
-      #|  !s a:real^N. ENR(s) ==> ENR(s DELETE a)
-      #|  !s:real^N->bool. open s ==> ENR s
-      #|  !s:real^N->bool. open s ==> ANR s
-      #|  !a:real^N r. ANR(ball(a,r))
-      #|  !a:real^N r. ENR(ball(a,r))
-      #|  !a:real^N r. AR(ball(a,r)) <=> &0 < r
-      #|  !a:real^N r. ANR(cball(a,r))
-      #|  !a:real^N r. ENR(cball(a,r))
-      #|  !a:real^N r. AR(cball(a,r)) <=> &0 <= r
-      #|  (!a b:real^N. ANR(interval[a,b])) /\\ (!a b:real^N. ANR(interval(a,b)))
-      #|  (!a b:real^N. ENR(interval[a,b])) /\\ (!a b:real^N. ENR(interval(a,b)))
-      #|  (!a b:real^N. AR(interval[a,b]) <=> ~(interval[a,b] = {})) /\\\n   (!a b:real^N. AR(interval(a,b)) <=> ~(interval(a,b) = {}))
-      #|  !s. ANR(interior s)
-      #|  !s. ENR(interior s)
-      #|  !s:real^N->bool. AR s ==> contractible s
-      #|  !s:real^N->bool. AR s ==> path_connected s
-      #|  !s:real^N->bool. AR s ==> connected s
-      #|  !s:real^N->bool. ENR s ==> locally compact s
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ANR t ==> ANR s
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean t) s /\\ ENR t ==> ENR s
+      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ANR u\n        ==> ANR s
+      #|  forall s t u:real^N->bool.\n        s retract_of t /\\ open_in (subtopology euclidean u) t /\\ ENR u\n        ==> ENR s
+      #|  forall s. ANR(s) ==> ANR(relative_interior s)
+      #|  forall s a:real^N. ANR(s) ==> ANR(s DELETE a)
+      #|  forall s. ENR(s) ==> ENR(relative_interior s)
+      #|  forall s a:real^N. ENR(s) ==> ENR(s DELETE a)
+      #|  forall s:real^N->bool. open s ==> ENR s
+      #|  forall s:real^N->bool. open s ==> ANR s
+      #|  forall a:real^N r. ANR(ball(a,r))
+      #|  forall a:real^N r. ENR(ball(a,r))
+      #|  forall a:real^N r. AR(ball(a,r)) <=> &0 < r
+      #|  forall a:real^N r. ANR(cball(a,r))
+      #|  forall a:real^N r. ENR(cball(a,r))
+      #|  forall a:real^N r. AR(cball(a,r)) <=> &0 <= r
+      #|  (forall a b:real^N. ANR(interval[a,b])) /\\ (forall a b:real^N. ANR(interval(a,b)))
+      #|  (forall a b:real^N. ENR(interval[a,b])) /\\ (forall a b:real^N. ENR(interval(a,b)))
+      #|  (forall a b:real^N. AR(interval[a,b]) <=> ~(interval[a,b] = {})) /\\\n   (forall a b:real^N. AR(interval(a,b)) <=> ~(interval(a,b) = {}))
+      #|  forall s. ANR(interior s)
+      #|  forall s. ENR(interior s)
+      #|  forall s:real^N->bool. AR s ==> contractible s
+      #|  forall s:real^N->bool. AR s ==> path_connected s
+      #|  forall s:real^N->bool. AR s ==> connected s
+      #|  forall s:real^N->bool. ENR s ==> locally compact s
       #|  s':real^(N,1)finite_sum->bool
       #|  c:real^(N,1)finite_sum->bool
       #|  x:int < y + &1 <=> x <= y
       #|  ?c s':real^(N,1)finite_sum->bool.\n        convex c /\\ ~(c = {}) /\\ closed_in (subtopology euclidean c) s' /\\\n        (s:real^N->bool) homeomorphic s'
-      #|  !s:real^N->bool. ANR s ==> locally path_connected s
-      #|  !s:real^N->bool. ANR s ==> locally connected s
-      #|  !s:real^N->bool. AR s ==> locally path_connected s
-      #|  !s:real^N->bool. AR s ==> locally connected s
-      #|  !s:real^N->bool. ENR s ==> locally path_connected s
-      #|  !s:real^N->bool. ENR s ==> locally connected s
-      #|  !s:real^N->bool. ANR s ==> COUNTABLE(components s)
-      #|  !s:real^N->bool t.\n        ANR s ==> COUNTABLE {connected_component s x | x IN t}
-      #|  !s:real^N->bool t.\n        ANR s ==> COUNTABLE {path_component s x | x IN t}
-      #|  !s:real^N->bool. ANR s /\\ compact s ==> FINITE(components s)
-      #|  !s:real^N->bool. ENR s /\\ compact s ==> FINITE(components s)
+      #|  forall s:real^N->bool. ANR s ==> locally path_connected s
+      #|  forall s:real^N->bool. ANR s ==> locally connected s
+      #|  forall s:real^N->bool. AR s ==> locally path_connected s
+      #|  forall s:real^N->bool. AR s ==> locally connected s
+      #|  forall s:real^N->bool. ENR s ==> locally path_connected s
+      #|  forall s:real^N->bool. ENR s ==> locally connected s
+      #|  forall s:real^N->bool. ANR s ==> COUNTABLE(components s)
+      #|  forall s:real^N->bool t.\n        ANR s ==> COUNTABLE {connected_component s x | x IN t}
+      #|  forall s:real^N->bool t.\n        ANR s ==> COUNTABLE {path_component s x | x IN t}
+      #|  forall s:real^N->bool. ANR s /\\ compact s ==> FINITE(components s)
+      #|  forall s:real^N->bool. ENR s /\\ compact s ==> FINITE(components s)
       #|  \\x:real^((M,N)finite_sum,1)finite_sum.\n        pastecart (g x:real^M) (h x:real^N)
       #|  w1 INTER w2:real^((M,N)finite_sum,1)finite_sum->bool
       #|  g:real^((M,N)finite_sum,1)finite_sum->real^M
@@ -64547,7 +64547,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^((M,N)finite_sum,1)finite_sum->bool
       #|  u:real^((M,N)finite_sum,1)finite_sum->bool
       #|  f:real^((M,N)finite_sum,1)finite_sum->real^(M,N)finite_sum
-      #|  !s:real^M->bool t:real^N->bool. ANR s /\\ ANR t ==> ANR(s PCROSS t)
+      #|  forall s:real^M->bool t:real^N->bool. ANR s /\\ ANR t ==> ANR(s PCROSS t)
       #|  \\x:real^(M,N)finite_sum. pastecart (a:real^M) (sndcart x)
       #|  \\x:real^(M,N)finite_sum. pastecart (fstcart x) (b:real^N)
       #|  ANR ({a:real^M} PCROSS (t:real^N->bool))
@@ -64558,18 +64558,18 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  ~(t:real^N->bool = {})
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        ANR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ANR s /\\ ANR t
-      #|  !s:real^M->bool t:real^N->bool. AR s /\\ AR t ==> AR(s PCROSS t)
-      #|  !s:real^M->bool t:real^N->bool. ENR s /\\ ENR t ==> ENR(s PCROSS t)
-      #|  !s:real^M->bool t:real^N->bool.\n        ENR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ENR s /\\ ENR t
-      #|  !s:real^M->bool t:real^N->bool.\n        AR(s PCROSS t) <=> AR s /\\ AR t /\\ ~(s = {}) /\\ ~(t = {})
+      #|  forall s:real^M->bool t:real^N->bool.\n        ANR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ANR s /\\ ANR t
+      #|  forall s:real^M->bool t:real^N->bool. AR s /\\ AR t ==> AR(s PCROSS t)
+      #|  forall s:real^M->bool t:real^N->bool. ENR s /\\ ENR t ==> ENR(s PCROSS t)
+      #|  forall s:real^M->bool t:real^N->bool.\n        ENR(s PCROSS t) <=> s = {} \\/ t = {} \\/ ENR s /\\ ENR t
+      #|  forall s:real^M->bool t:real^N->bool.\n        AR(s PCROSS t) <=> AR s /\\ AR t /\\ ~(s = {}) /\\ ~(t = {})
       #|  p /\\ ~p \\/ q /\\ p <=> p /\\ q
       #|  u:real^N->bool = s' UNION t'
       #|  (r:real^N->real^N) x
       #|  x:real^N
       #|  \\x. if x IN s' then (g:real^N->real^N) x else h x
-      #|  ?h:real^N->real^N.\n          h continuous_on u /\\\n          IMAGE h u SUBSET t /\\\n          !x. x IN w UNION t ==> h x = r x
-      #|  ?g:real^N->real^N.\n          g continuous_on u /\\\n          IMAGE g u SUBSET s /\\\n          !x. x IN w UNION s ==> g x = r x
+      #|  ?h:real^N->real^N.\n          h continuous_on u /\\\n          IMAGE h u SUBSET t /\\\n          forall x. x IN w UNION t ==> h x = r x
+      #|  ?g:real^N->real^N.\n          g continuous_on u /\\\n          IMAGE g u SUBSET s /\\\n          forall x. x IN w UNION s ==> g x = r x
       #|  u:real^N->bool
       #|  (r:real^N->real^N) continuous_on  (w UNION s UNION t)
       #|  IMAGE (r:real^N->real^N) (w UNION s) SUBSET s /\\\n      IMAGE (r:real^N->real^N) (w UNION t) SUBSET t
@@ -64578,7 +64578,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s' INTER t':real^N->bool = w
       #|  ~(s = {}) /\\ (p <=> s = {} \\/ x IN s) ==> p ==> x IN s
       #|  &0 = setdist p <=> setdist p = &0
-      #|  !x:real^N. x IN w ==> (x IN s <=> x IN t)
+      #|  forall x:real^N. x IN w ==> (x IN s <=> x IN t)
       #|  r0:real^N->real^N
       #|  u:real^N->bool
       #|  s INTER t:real^N->bool
@@ -64591,7 +64591,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s' = {x:real^N | x IN u /\\ setdist({x},s) <= setdist({x},t)}
       #|  (s:real^N->bool) SUBSET u /\\ t SUBSET u
       #|  s INTER t:real^N->bool = {}
-      #|  !s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        AR s /\\ AR t /\\ AR(s INTER t)\n        ==> (s UNION t) retract_of u
+      #|  forall s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        AR s /\\ AR t /\\ AR(s INTER t)\n        ==> (s UNION t) retract_of u
       #|  g:real^(N,1)finite_sum->real^N
       #|  f:real^N->real^(N,1)finite_sum
       #|  AR(s INTER t:real^N->bool)
@@ -64605,7 +64605,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^N->real^(N,1)finite_sum
       #|  c:real^(N,1)finite_sum->bool
       #|  u:real^(N,1)finite_sum->bool
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
       #|  (x:real^M) IN s1 \\/ x IN s2
       #|  x:real^M
       #|  n INTER s INTER n = n INTER s
@@ -64697,8 +64697,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  t INTER s1 INTER s2:real^M->bool
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  ?v v' h.\n        t INTER s1 INTER s2 SUBSET v /\\ v SUBSET v' /\\\n        open_in (subtopology euclidean (s1 INTER s2)) v /\\\n        closed_in (subtopology euclidean (s1 INTER s2)) v' /\\\n        h continuous_on v' /\\ IMAGE h v' SUBSET u1 INTER u2 /\\\n        !x. x IN v' INTER t ==> (h:real^M->real^N) x = f x
-      #|  !f:real^M->real^N s t u s1 s2 u1 u2.\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        ANR u1 /\\ ANR u2 /\\ ANR(u1 INTER u2) /\\ u1 UNION u2 = u /\\\n        closed_in (subtopology euclidean s) t /\\\n        closed_in (subtopology euclidean s) s1 /\\\n        closed_in (subtopology euclidean s) s2 /\\\n        s1 UNION s2 = s /\\\n        IMAGE f (t INTER s1) SUBSET u1 /\\\n        IMAGE f (t INTER s2) SUBSET u2\n        ==> ?v g. t SUBSET v /\\\n                  open_in (subtopology euclidean s) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET u /\\\n                  !x. x IN t ==> g x = f x
+      #|  ?v v' h.\n        t INTER s1 INTER s2 SUBSET v /\\ v SUBSET v' /\\\n        open_in (subtopology euclidean (s1 INTER s2)) v /\\\n        closed_in (subtopology euclidean (s1 INTER s2)) v' /\\\n        h continuous_on v' /\\ IMAGE h v' SUBSET u1 INTER u2 /\\\n        forall x. x IN v' INTER t ==> (h:real^M->real^N) x = f x
+      #|  forall f:real^M->real^N s t u s1 s2 u1 u2.\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        ANR u1 /\\ ANR u2 /\\ ANR(u1 INTER u2) /\\ u1 UNION u2 = u /\\\n        closed_in (subtopology euclidean s) t /\\\n        closed_in (subtopology euclidean s) s1 /\\\n        closed_in (subtopology euclidean s) s2 /\\\n        s1 UNION s2 = s /\\\n        IMAGE f (t INTER s1) SUBSET u1 /\\\n        IMAGE f (t INTER s2) SUBSET u2\n        ==> ?v g. t SUBSET v /\\\n                  open_in (subtopology euclidean s) v /\\\n                  g continuous_on v /\\ IMAGE g v SUBSET u /\\\n                  forall x. x IN t ==> g x = f x
       #|  y1 UNION y2:real^N->bool
       #|  t:real^(N,1)finite_sum->bool
       #|  s:real^(N,1)finite_sum->bool
@@ -64733,22 +64733,22 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  yn:real^N->bool
       #|  y2:real^N->bool
       #|  y1:real^N->bool
-      #|  !s t:real^N->bool u.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
-      #|  !s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
-      #|  !s t. s retract_of (:real^N) /\\\n         t retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N)\n         ==> (s UNION t) retract_of (:real^N)
+      #|  forall s t:real^N->bool u.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
+      #|  forall s t u:real^N->bool.\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s) /\\ AR(t) /\\ AR(s INTER t)\n        ==> AR(s UNION t)
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s) /\\ ANR(t) /\\ ANR(s INTER t)\n        ==> ANR(s UNION t)
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s) /\\ ENR(t) /\\ ENR(s INTER t)\n        ==> ENR(s UNION t)
+      #|  forall s t. s retract_of (:real^N) /\\\n         t retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N)\n         ==> (s UNION t) retract_of (:real^N)
       #|  \\x:real^N. if x IN s then x else r x
       #|  r:real^N->real^N
       #|  (s UNION t) retract_of (u:real^N->bool)
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        (s UNION t) retract_of u /\\ (s INTER t) retract_of t\n        ==> s retract_of u
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        (s UNION t) retract_of u /\\ (s INTER t) retract_of t\n        ==> s retract_of u
       #|  s UNION t:real^N->bool
       #|  t:real^N->bool
       #|  s UNION t:real^N->bool
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s)
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s)
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ AR(s UNION t) /\\ AR(s INTER t)\n        ==> AR(s) /\\ AR(t)
       #|  closed_in(subtopology euclidean (s UNION t)) (t:real^N->bool)
       #|  closed_in(subtopology euclidean (s UNION t)) (s:real^N->bool)
       #|  s UNION u:real^N->bool = s UNION (u INTER t)
@@ -64760,31 +64760,31 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s UNION t:real^N->bool
       #|  s INTER t:real^N->bool
       #|  s UNION t:real^N->bool
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s)
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s)
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ANR(s UNION t) /\\ ANR(s INTER t)\n        ==> ANR(s) /\\ ANR(t)
       #|  t:(real^N->bool)->bool
       #|  c:real^N->bool
       #|  t:(real^N->bool)->bool
       #|  t:(real^N->bool)->bool
       #|  p ==> q /\\ r ==> s <=> q ==> p ==> r ==> s
       #|  CARD(t:(real^N->bool)->bool)
-      #|  !t:(real^N->bool)->bool.\n        FINITE t /\\ (!c. c IN t ==> closed c /\\ convex c) ==> ANR(UNIONS t)
+      #|  forall t:(real^N->bool)->bool.\n        FINITE t /\\ (forall c. c IN t ==> closed c /\\ convex c) ==> ANR(UNIONS t)
       #|  s = UNIONS {{a:real^N} | a IN s}
-      #|  !s:real^N->bool. FINITE s ==> ANR s
+      #|  forall s:real^N->bool. FINITE s ==> ANR s
       #|  {a} INTER s = {a} \\/ {a} INTER s = {}
       #|  a INSERT s = {a} UNION s
-      #|  !s a:real^N. closed s /\\ ANR s ==> ANR(a INSERT s)
-      #|  !tr. triangulation tr ==> ANR(UNIONS tr)
-      #|  !c. simplicial_complex c ==>  ANR(UNIONS c)
-      #|  !s x:real^N. ANR(s) ==> ANR(path_component s x)
-      #|  !s x:real^N. ANR(s) ==> ANR(connected_component s x)
-      #|  !s:real^N->bool.\n        ANR s /\\ c IN components s ==> ANR c
+      #|  forall s a:real^N. closed s /\\ ANR s ==> ANR(a INSERT s)
+      #|  forall tr. triangulation tr ==> ANR(UNIONS tr)
+      #|  forall c. simplicial_complex c ==>  ANR(UNIONS c)
+      #|  forall s x:real^N. ANR(s) ==> ANR(path_component s x)
+      #|  forall s x:real^N. ANR(s) ==> ANR(connected_component s x)
+      #|  forall s:real^N->bool.\n        ANR s /\\ c IN components s ==> ANR c
       #|  (x:real^(N,1)finite_sum) IN t2
       #|  x:real^(N,1)finite_sum
       #|  (x:real^(N,1)finite_sum) IN t1
       #|  x:real^(N,1)finite_sum
-      #|  !x. x <= &1 / &2 \\/ x >= &1 / &2
+      #|  forall x. x <= &1 / &2 \\/ x >= &1 / &2
       #|  u1 UNION u2:real^N->bool
       #|  u1:real^N->bool
       #|  u2:real^N->bool
@@ -64809,7 +64809,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  un:real^N->bool
       #|  u2:real^N->bool
       #|  u1:real^N->bool
-      #|  !s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t)\n        ==> ANR(s UNION t)
+      #|  forall s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ANR(s) /\\ ANR(t)\n        ==> ANR(s UNION t)
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
@@ -64818,7 +64818,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
       #|  IMAGE f s SUBSET t\n        ==> {x | x IN s /\\ ~(f x IN u)} =\n            {x | x IN s /\\ f x IN t DIFF u}
-      #|  !s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t)\n        ==> ENR(s UNION t)
+      #|  forall s t u:real^N->bool.\n        open_in (subtopology euclidean u) s /\\\n        open_in (subtopology euclidean u) t /\\\n        ENR(s) /\\ ENR(t)\n        ==> ENR(s UNION t)
       #|  u:real^N->bool
       #|  x:real^(N,1)finite_sum
       #|  ?u. u IN f /\\ x IN\n                          (a:(real^N->bool)->real^(N,1)finite_sum->bool) u
@@ -64850,7 +64850,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
       #|  h:(real^N->bool)->real^(N,1)finite_sum->real^N
       #|  w:(real^N->bool)->real^(N,1)finite_sum->bool
-      #|  !u. u IN (f:(real^N->bool)->bool)\n          ==> ?v h. a u SUBSET v /\\\n                    open_in (subtopology euclidean s) v /\\\n                    (h:real^(N,1)finite_sum->real^N) continuous_on v /\\\n                    IMAGE h v SUBSET u /\\\n                    (!x. x IN a u ==> h x = g x)
+      #|  forall u. u IN (f:(real^N->bool)->bool)\n          ==> ?v h. a u SUBSET v /\\\n                    open_in (subtopology euclidean s) v /\\\n                    (h:real^(N,1)finite_sum->real^N) continuous_on v /\\\n                    IMAGE h v SUBSET u /\\\n                    (forall x. x IN a u ==> h x = g x)
       #|  s SUBSET t /\\ DISJOINT s u ==> s SUBSET t DIFF u
       #|  b <= c /\\ d <= a ==> ~(a < b /\\ c < d)
       #|  (x:real^(N,1)finite_sum) IN s
@@ -64864,16 +64864,16 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  t:real^(N,1)finite_sum->bool
       #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
       #|  x:real^(N,1)finite_sum
-      #|  !u. u IN f\n          ==> (a:(real^N->bool)->real^(N,1)finite_sum->bool) u SUBSET v u
+      #|  forall u. u IN f\n          ==> (a:(real^N->bool)->real^(N,1)finite_sum->bool) u SUBSET v u
       #|  &0 < drop x <=> x IN {y | &0 < drop y}
       #|  x < y <=> &0 < drop(lift(y - x))
-      #|  !u. u IN f\n          ==> open_in (subtopology euclidean s)\n                      ((v:(real^N->bool)->real^(N,1)finite_sum->bool) u)
+      #|  forall u. u IN f\n          ==> open_in (subtopology euclidean s)\n                      ((v:(real^N->bool)->real^(N,1)finite_sum->bool) u)
       #|  v = \\u. if a u = {} then {}\n              else { x:real^(N,1)finite_sum |\n                     x IN s /\\\n                     setdist({x},a(u:real^N->bool)) < setdist({x},t DIFF a u)}
       #|  pairwise (\\i j. DISJOINT\n                  ((a:(real^N->bool)->real^(N,1)finite_sum->bool) i) (a j))\n               f
       #|  u:real^N->bool = UNIONS f DIFF UNIONS(f DELETE u)
       #|  UNIONS f:real^N->bool
       #|  t:real^(N,1)finite_sum->bool
-      #|  !u. u IN f\n          ==> closed_in (subtopology euclidean s)\n                        ((a:(real^N->bool)->real^(N,1)finite_sum->bool) u)
+      #|  forall u. u IN f\n          ==> closed_in (subtopology euclidean s)\n                        ((a:(real^N->bool)->real^(N,1)finite_sum->bool) u)
       #|  (a:(real^N->bool)->real^(N,1)finite_sum->bool) u = t
       #|  t:real^(N,1)finite_sum->bool
       #|  s:real^(N,1)finite_sum->bool
@@ -64885,13 +64885,13 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  t:real^(N,1)finite_sum->bool
       #|  s:real^(N,1)finite_sum->bool
       #|  g:real^(N,1)finite_sum->real^N
-      #|  !f:(real^N->bool)->bool.\n          pairwise DISJOINT f /\\\n          (!u. u IN f ==> ANR u) /\\\n          (!u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
+      #|  forall f:(real^N->bool)->bool.\n          pairwise DISJOINT f /\\\n          (forall u. u IN f ==> ANR u) /\\\n          (forall u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
       #|  u UNION UNIONS f:real^N->bool
       #|  v:real^N->bool
       #|  u UNION UNIONS f:real^N->bool
       #|  f:(real^N->bool)->bool
       #|  u:real^N->bool
-      #|  !f:(real^N->bool)->bool.\n          FINITE f /\\\n          (!u. u IN f ==> ANR u) /\\\n          (!u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
+      #|  forall f:(real^N->bool)->bool.\n          FINITE f /\\\n          (forall u. u IN f ==> ANR u) /\\\n          (forall u. u IN f ==> open_in (subtopology euclidean (UNIONS f)) u)\n          ==> ANR(UNIONS f)
       #|  s INTER closure((w:num->real^N->bool) p)
       #|  p:num
       #|   m:num
@@ -64926,16 +64926,16 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  n:num
       #|  x:real^N
       #|  UNIONS (IMAGE w (:num)):real^N->bool = UNIONS(IMAGE r (:num))
-      #|  !n. ANR((r:num->real^N->bool) n)
-      #|  !n. open_in (subtopology euclidean s) ((r:num->real^N->bool) n)
+      #|  forall n. ANR((r:num->real^N->bool) n)
+      #|  forall n. open_in (subtopology euclidean s) ((r:num->real^N->bool) n)
       #|  s SUBSET t ==> s INTER t INTER u = s INTER u
       #|  closed u /\\ s INTER t INTER u = s INTER u\n        ==> closed_in (subtopology euclidean s) (s INTER t INTER u)
       #|  s DIFF t = s DIFF (s INTER t)
       #|  SUC(SUC n) = n + 2
       #|  n:num
-      #|  !n. open_in (subtopology euclidean (w n)) ((r:num->real^N->bool) n)
-      #|  ?r:num->real^N->bool.\n          r 0 = w 0 /\\\n          r 1 = w 1 /\\\n          (!n. r(n + 2) = w(n + 2) DIFF (s INTER closure(w n)))
-      #|  (!m n:num. m <= n ==> v m SUBSET v n)\n            ==> v b SUBSET v(a + b)
+      #|  forall n. open_in (subtopology euclidean (w n)) ((r:num->real^N->bool) n)
+      #|  ?r:num->real^N->bool.\n          r 0 = w 0 /\\\n          r 1 = w 1 /\\\n          (forall n. r(n + 2) = w(n + 2) DIFF (s INTER closure(w n)))
+      #|  (forall m n:num. m <= n ==> v m SUBSET v n)\n            ==> v b SUBSET v(a + b)
       #|  s SUBSET t ==> u DIFF t SUBSET u DIFF s
       #|  a < b ==> x <= a /\\ b <= y ==> x < y
       #|  m + n:num
@@ -64952,26 +64952,26 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  &0 <= drop x <=> x IN {y | &0 <= drop y}
       #|  x <= y <=> &0 <= drop(lift(y - x))
       #|  {x:real^N | x IN s /\\ inv(&2 pow n) <= setdist({x},s DIFF v n)}
-      #|  !n. s INTER closure(w n) SUBSET (w:num->real^N->bool)(SUC n)
+      #|  forall n. s INTER closure(w n) SUBSET (w:num->real^N->bool)(SUC n)
       #|  s:real^N->bool
       #|  (v:num->real^N->bool) n
-      #|  !n. ANR((w:num->real^N->bool) n)
+      #|  forall n. ANR((w:num->real^N->bool) n)
       #|  p /\\ q ==> r <=> p /\\ ~r ==> ~q
       #|  x:real^N
-      #|  !n. (w:num->real^N->bool) n SUBSET v n
+      #|  forall n. (w:num->real^N->bool) n SUBSET v n
       #|  &0 < drop x <=> x IN {y | &0 < drop y}
       #|  x < y <=> &0 < drop(lift(y - x))
-      #|  !n. open_in (subtopology euclidean s) ((w:num->real^N->bool) n)
+      #|  forall n. open_in (subtopology euclidean s) ((w:num->real^N->bool) n)
       #|  w = \\n:num. {x:real^N | x IN s /\\\n                              inv(&2 pow n) < setdist({x},s DIFF v n)}
       #|  ?n:num. s:real^N->bool = v n
       #|  s:real^N->bool = UNIONS(IMAGE v (:num))
-      #|  !v:num->real^N->bool.\n          (!n. v(n) SUBSET v(SUC n)) /\\\n          (!n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (!n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
+      #|  forall v:num->real^N->bool.\n          (forall n. v(n) SUBSET v(SUC n)) /\\\n          (forall n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (forall n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
       #|  m:num
       #|  k:num
       #|  k:num
       #|  UNIONS(IMAGE v (:num)):real^N->bool = UNIONS(IMAGE u (:num))
       #|  u:num->real^N->bool = \\n. UNIONS (IMAGE v (0..n))
-      #|  !v:num->real^N->bool.\n          (!n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (!n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
+      #|  forall v:num->real^N->bool.\n          (forall n. open_in\n                (subtopology euclidean (UNIONS(IMAGE v (:num)))) (v n)) /\\\n          (forall n. ANR(v n))\n          ==> ANR(UNIONS(IMAGE v (:num)))
       #|  (h:num->real^N->bool) n
       #|  n:num
       #|  x:real^N
@@ -64982,79 +64982,79 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  g:(real^N->bool)->bool
       #|  u:real^N->bool
       #|  f:(real^N->bool)->bool
-      #|  !f:(real^N->bool)->bool u.\n        (!s. s IN f ==> ANR s) /\\\n        (!s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ANR(UNIONS f)
-      #|  !f:(real^N->bool)->bool u.\n        (!s. s IN f ==> ENR s) /\\\n        (!s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ENR(UNIONS f)
+      #|  forall f:(real^N->bool)->bool u.\n        (forall s. s IN f ==> ANR s) /\\\n        (forall s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ANR(UNIONS f)
+      #|  forall f:(real^N->bool)->bool u.\n        (forall s. s IN f ==> ENR s) /\\\n        (forall s. s IN f ==> open_in (subtopology euclidean u) s)\n        ==> ENR(UNIONS f)
       #|  s:real^N->bool
       #|  w:real^N->bool
       #|  w:real^N->bool
       #|  u:real^N->bool
       #|  x:real^N
       #|  v:real^N->bool
-      #|  !s:real^N->bool.\n        locally ANR s <=>\n        !v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ANR u /\\\n                      x IN u /\\ u SUBSET v
+      #|  forall s:real^N->bool.\n        locally ANR s <=>\n        forall v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ANR u /\\\n                      x IN u /\\ u SUBSET v
       #|  s:real^N->bool
       #|  w:real^N->bool
       #|  v INTER w:real^N->bool
       #|  w:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        locally ANR s <=>\n        !x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ANR v
+      #|  forall s:real^N->bool.\n        locally ANR s <=>\n        forall x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ANR v
       #|  s:real^N->bool
       #|  v:real^N->bool
       #|  UNIONS (IMAGE (f:real^N->real^N->bool) s) = s
       #|  f:real^N->real^N->bool
-      #|  !s:real^N->bool. locally ANR s <=> ANR s
+      #|  forall s:real^N->bool. locally ANR s <=> ANR s
       #|  s:real^N->bool
       #|  w:real^N->bool
       #|  w:real^N->bool
       #|  u:real^N->bool
       #|  x:real^N
       #|  v:real^N->bool
-      #|  !s:real^N->bool.\n        locally ENR s <=>\n        !v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ENR u /\\\n                      x IN u /\\ u SUBSET v
+      #|  forall s:real^N->bool.\n        locally ENR s <=>\n        forall v x. open_in (subtopology euclidean s) v /\\ x IN v\n              ==> ?u. open_in (subtopology euclidean s) u /\\ ENR u /\\\n                      x IN u /\\ u SUBSET v
       #|  s:real^N->bool
       #|  w:real^N->bool
       #|  v INTER w:real^N->bool
       #|  w:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        locally ENR s <=>\n        !x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ENR v
+      #|  forall s:real^N->bool.\n        locally ENR s <=>\n        forall x. x IN s\n            ==> ?v. x IN v /\\ open_in (subtopology euclidean s) v /\\ ENR v
       #|  s:real^N->bool
       #|  v:real^N->bool
       #|  UNIONS (IMAGE (f:real^N->real^N->bool) s) = s
       #|  f:real^N->real^N->bool
-      #|  !s:real^N->bool. locally ENR s <=> ENR s
-      #|  !p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ANR s <=> ANR c)
-      #|  !p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ANR c ==> ANR s
-      #|  !p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ENR s <=> ENR c)
-      #|  !p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ENR c ==> ENR s
+      #|  forall s:real^N->bool. locally ENR s <=> ENR s
+      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ANR s <=> ANR c)
+      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ANR c ==> ANR s
+      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s ==> (ENR s <=> ENR c)
+      #|  forall p:real^M->real^N s c.\n        covering_space (c,p) s /\\ ENR c ==> ENR s
       #|  u:real^N->bool
       #|  ball(vec 0:real^N,r) INTER u
       #|  u:real^N->bool
       #|  r:real
       #|  vec 0:real^N
-      #|  !s:real^N->bool.\n        bounded s\n        ==> (ENR s <=> ?u. open u /\\ bounded u /\\ s retract_of u)
+      #|  forall s:real^N->bool.\n        bounded s\n        ==> (ENR s <=> ?u. open u /\\ bounded u /\\ s retract_of u)
       #|  t:real^M->bool
       #|  s:real^M->bool
-      #|  !s:real^M->bool s':real^N->bool t u.\n      s retract_of t /\\ convex t /\\ ~(t = {}) /\\\n      s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n      ==> s' retract_of u
+      #|  forall s:real^M->bool s':real^N->bool t u.\n      s retract_of t /\\ convex t /\\ ~(t = {}) /\\\n      s homeomorphic s' /\\ closed_in (subtopology euclidean u) s'\n      ==> s' retract_of u
       #|  (:real^M)
       #|  s:real^M->bool
-      #|  !s s'. s retract_of (:real^M) /\\ s homeomorphic s' /\\ closed s'\n          ==> s' retract_of (:real^N)
+      #|  forall s s'. s retract_of (:real^M) /\\ s homeomorphic s' /\\ closed s'\n          ==> s' retract_of (:real^N)
       #|  compact(s:real^M->bool) /\\ compact(s':real^N->bool)
-      #|  !s s'. s homeomorphic s'\n          ==> (compact s /\\ s retract_of (:real^M) <=>\n               compact s' /\\ s' retract_of (:real^N))
+      #|  forall s s'. s homeomorphic s'\n          ==> (compact s /\\ s retract_of (:real^M) <=>\n               compact s' /\\ s' retract_of (:real^N))
       #|  (r:real^N->real^N) o (g:real^M->real^N)
       #|  r:real^N->real^N
       #|  g:real^M->real^N
       #|  c:real^M->bool
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N c s t.\n        f continuous_on c /\\ IMAGE f c SUBSET t /\\ t retract_of (:real^N) /\\\n        closed_in (subtopology euclidean s) c\n        ==> ?g. g continuous_on s /\\ IMAGE g (:real^M) SUBSET t /\\\n                !x. x IN c ==> g x = f x
+      #|  forall f:real^M->real^N c s t.\n        f continuous_on c /\\ IMAGE f c SUBSET t /\\ t retract_of (:real^N) /\\\n        closed_in (subtopology euclidean s) c\n        ==> ?g. g continuous_on s /\\ IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN c ==> g x = f x
       #|  t:real^N->bool
       #|  (:real^M)
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ t retract_of (:real^N) /\\\n        closed s\n        ==> ?g. g continuous_on (:real^M) /\\ IMAGE g (:real^M) SUBSET t /\\\n                !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ t retract_of (:real^N) /\\\n        closed s\n        ==> ?g. g continuous_on (:real^M) /\\ IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN s ==> g x = f x
       #|  t:real^N->bool
       #|  s:real^M->bool
       #|  (:real^M)
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ ANR t /\\ closed s\n        ==> ?v g. s SUBSET v /\\ open v /\\ g continuous_on v /\\\n                  IMAGE g v SUBSET t /\\ !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\ ANR t /\\ closed s\n        ==> ?v g. s SUBSET v /\\ open v /\\ g continuous_on v /\\\n                  IMAGE g v SUBSET t /\\ forall x. x IN s ==> g x = f x
       #|  u:real^N->bool
       #|  t:real^M->bool
       #|  s:real^M->bool
@@ -65073,50 +65073,50 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^M->real^N
       #|  f:real^M->real^N
       #|  c:real^M->bool
-      #|  ?t g. open_in (subtopology euclidean s) t /\\\n          closed_in (subtopology euclidean s) t /\\\n          c SUBSET t /\\\n          (g:real^M->real^N) continuous_on t /\\ IMAGE g t SUBSET u /\\\n          !x. x IN c ==> g x = f x
-      #|  !f:real^M->real^N s c u.\n        (locally connected s \\/ compact s /\\ ANR u) /\\\n        c IN components s /\\\n        f continuous_on c /\\ IMAGE f c SUBSET u\n        ==> ?g. g continuous_on s /\\ IMAGE g s SUBSET u /\\\n                !x. x IN c ==> g x = f x
-      #|  !s t. (s UNION t) retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N) /\\\n         closed s /\\ closed t\n         ==> s retract_of (:real^N)
-      #|  !s:real^N->bool. ENR s ==> COUNTABLE(components s)
-      #|  !s:real^N->bool t.\n        ENR s ==> COUNTABLE {connected_component s x | x | x IN t}
-      #|  !s:real^N->bool.\n        ENR s ==> COUNTABLE {path_component s x | x | x IN s}
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
+      #|  ?t g. open_in (subtopology euclidean s) t /\\\n          closed_in (subtopology euclidean s) t /\\\n          c SUBSET t /\\\n          (g:real^M->real^N) continuous_on t /\\ IMAGE g t SUBSET u /\\\n          forall x. x IN c ==> g x = f x
+      #|  forall f:real^M->real^N s c u.\n        (locally connected s \\/ compact s /\\ ANR u) /\\\n        c IN components s /\\\n        f continuous_on c /\\ IMAGE f c SUBSET u\n        ==> ?g. g continuous_on s /\\ IMAGE g s SUBSET u /\\\n                forall x. x IN c ==> g x = f x
+      #|  forall s t. (s UNION t) retract_of (:real^N) /\\\n         (s INTER t) retract_of (:real^N) /\\\n         closed s /\\ closed t\n         ==> s retract_of (:real^N)
+      #|  forall s:real^N->bool. ENR s ==> COUNTABLE(components s)
+      #|  forall s:real^N->bool t.\n        ENR s ==> COUNTABLE {connected_component s x | x | x IN t}
+      #|  forall s:real^N->bool.\n        ENR s ==> COUNTABLE {path_component s x | x | x IN s}
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ ENR(s UNION t) /\\ ENR(s INTER t)\n        ==> ENR s
       #|  s SUBSET closure s /\\ (:real^N) DIFF s SUBSET closure((:real^N) DIFF s)\n    ==> closure s UNION closure ((:real^N) DIFF s) = (:real^N)
       #|  closure s UNION closure ((:real^N) DIFF s) = (:real^N)
       #|  closure((:real^N) DIFF s)
-      #|  !s:real^N->bool. ENR(frontier s) ==> ENR(closure s)
-      #|  !s:real^N->bool. ANR(frontier s) ==> ANR(closure s)
-      #|  !t:(real^N->bool)->bool.\n        FINITE t /\\ (!c. c IN t ==> closed c /\\ convex c) ==> ENR(UNIONS t)
-      #|  !s:real^N->bool. FINITE s ==> ENR s
+      #|  forall s:real^N->bool. ENR(frontier s) ==> ENR(closure s)
+      #|  forall s:real^N->bool. ANR(frontier s) ==> ANR(closure s)
+      #|  forall t:(real^N->bool)->bool.\n        FINITE t /\\ (forall c. c IN t ==> closed c /\\ convex c) ==> ENR(UNIONS t)
+      #|  forall s:real^N->bool. FINITE s ==> ENR s
       #|  {a} INTER s = {a} \\/ {a} INTER s = {}
       #|  a INSERT s = {a} UNION s
-      #|  !s a:real^N. closed s /\\ ENR s ==> ENR(a INSERT s)
-      #|  !tr. triangulation tr ==> ENR(UNIONS tr)
-      #|  !c. simplicial_complex c ==>  ENR(UNIONS c)
-      #|  !s x:real^N. ENR(s) ==> ENR(path_component s x)
-      #|  !s x:real^N. ENR(s) ==> ENR(connected_component s x)
-      #|  !s:real^N->bool.\n        ENR s /\\ c IN components s ==> ENR c
+      #|  forall s a:real^N. closed s /\\ ENR s ==> ENR(a INSERT s)
+      #|  forall tr. triangulation tr ==> ENR(UNIONS tr)
+      #|  forall c. simplicial_complex c ==>  ENR(UNIONS c)
+      #|  forall s x:real^N. ENR(s) ==> ENR(path_component s x)
+      #|  forall s x:real^N. ENR(s) ==> ENR(connected_component s x)
+      #|  forall s:real^N->bool.\n        ENR s /\\ c IN components s ==> ENR c
       #|  u:real^N->bool
-      #|  !s:real^N->bool. ENR s ==> ?t u. closed t /\\ open u /\\ s = t INTER u
-      #|  !s:real^N->bool. ENR s ==> fsigma s
-      #|  !s:real^N->bool. ENR s ==> gdelta s
-      #|  !s:real^N->bool. is_interval s ==> fsigma s
-      #|  !s:real^N->bool. is_interval s ==> gdelta s
-      #|  !s. is_interval s ==> baire 1 (:real^N) (indicator s)
+      #|  forall s:real^N->bool. ENR s ==> ?t u. closed t /\\ open u /\\ s = t INTER u
+      #|  forall s:real^N->bool. ENR s ==> fsigma s
+      #|  forall s:real^N->bool. ENR s ==> gdelta s
+      #|  forall s:real^N->bool. is_interval s ==> fsigma s
+      #|  forall s:real^N->bool. is_interval s ==> gdelta s
+      #|  forall s. is_interval s ==> baire 1 (:real^N) (indicator s)
       #|  (r ==> p) /\\ (p ==> q) /\\ (p ==> r) ==> (p <=> q /\\ r)
-      #|  !s:real^N->bool.\n        ANR s <=>\n        COUNTABLE(components s) /\\\n        !c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ANR c
+      #|  forall s:real^N->bool.\n        ANR s <=>\n        COUNTABLE(components s) /\\\n        forall c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ANR c
       #|  (r ==> p) /\\ (p ==> q) /\\ (p ==> r) ==> (p <=> q /\\ r)
-      #|  !s:real^N->bool.\n        ENR s <=>\n        COUNTABLE(components s) /\\\n        !c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ENR c
+      #|  forall s:real^N->bool.\n        ENR s <=>\n        COUNTABLE(components s) /\\\n        forall c. c IN components s\n            ==> open_in (subtopology euclidean s) c /\\ ENR c
       #|  s:real^N->bool
       #|  t:real^N->bool
       #|  u:real^M->bool
-      #|  !s:real^N->bool t u:real^M->bool.\n        s homeomorphic u /\\ ~(s = {}) /\\ s SUBSET t /\\ convex u /\\ compact u\n        ==> s retract_of t
+      #|  forall s:real^N->bool t u:real^M->bool.\n        s homeomorphic u /\\ ~(s = {}) /\\ s SUBSET t /\\ convex u /\\ compact u\n        ==> s retract_of t
       #|  g:real^1->real^N
       #|  interval[vec 0:real^1,vec 1:real^1]
       #|  s:real^N->bool
       #|  path_image g:real^N->bool
-      #|  !g s:real^N->bool.\n        arc g /\\ path_image g SUBSET s ==> (path_image g) retract_of s
-      #|  !g:real^1->real^N. arc g ==> AR(path_image g)
+      #|  forall g s:real^N->bool.\n        arc g /\\ path_image g SUBSET s ==> (path_image g) retract_of s
+      #|  forall g:real^1->real^N. arc g ==> AR(path_image g)
       #|  \\x. (dd:real^N->real)(x - a)
       #|  inv((dd:real^N->real)(x - a))
       #|  p /\\ (p ==> q) ==> p /\\ q
@@ -65140,7 +65140,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  x:real^N
       #|  a + x - a:real^N = x
       #|  affine hull s:real^N->bool
-      #|  !s t. s SUBSET t /\\ IMAGE f (t DELETE a) SUBSET u\n            ==> IMAGE f (s DELETE a) SUBSET u
+      #|  forall s t. s SUBSET t /\\ IMAGE f (t DELETE a) SUBSET u\n            ==> IMAGE f (s DELETE a) SUBSET u
       #|  &0 < x ==> ~(x = &0 /\\ u = &1)
       #|  (u = &0 \\/ d = &0) /\\ u = &1 <=> d = &0 /\\ u = &1
       #|  &0 <= x /\\ &0 <= u /\\ u <= &1 /\\ ~(x = &0 /\\ u = &1)\n        ==> ~(&1 - u + x = &0)
@@ -65173,28 +65173,28 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s SUBSET t /\\ ~(a IN IMAGE f s)\n        ==> IMAGE f s SUBSET IMAGE f t DELETE a
       #|  x - a:real^N = --a + x
       #|  relative_frontier (IMAGE (\\x:real^N. x - a) s)
-      #|  (!x y. f x = f y <=> x = y)\n                       ==> IMAGE f (s DELETE a) = IMAGE f s DELETE f a
+      #|  (forall x y. f x = f y <=> x = y)\n                       ==> IMAGE f (s DELETE a) = IMAGE f s DELETE f a
       #|  x - a:real^N = y - a <=> x = y
       #|  affine hull s DELETE (a:real^N)
       #|  ((\\x:real^N. a + dd x % x) o (\\x. x - a)) continuous_on t DELETE a
       #|  \\x:real^N. a + dd(x - a) % (x - a)
       #|  dd:real^N->real
       #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  (!x. P x ==> ?d. &0 < d /\\ R d x)\n    ==> !x. ?d. &0 < d /\\ (P x ==> R d x)
+      #|  (forall x. P x ==> ?d. &0 < d /\\ R d x)\n    ==> forall x. ?d. &0 < d /\\ (P x ==> R d x)
       #|  a:real^N
       #|  s:real^N->bool
-      #|  !s t a:real^N.\n        convex s /\\ convex t /\\ bounded s /\\ a IN relative_interior s /\\\n        relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean (t DELETE a),\n                  subtopology euclidean (t DELETE a)) (\\x. x) r /\\\n                retraction (t DELETE a,relative_frontier s) r /\\\n                (!x. ?c. &0 < c /\\ r(x) - a = c % (x - a))
+      #|  forall s t a:real^N.\n        convex s /\\ convex t /\\ bounded s /\\ a IN relative_interior s /\\\n        relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean (t DELETE a),\n                  subtopology euclidean (t DELETE a)) (\\x. x) r /\\\n                retraction (t DELETE a,relative_frontier s) r /\\\n                (forall x. ?c. &0 < c /\\ r(x) - a = c % (x - a))
       #|  s SUBSET u ==> s DIFF t SUBSET u
       #|  a:real^N
       #|  affine hull s:real^N->bool
       #|  s:real^N->bool
-      #|  !s a:real^N.\n        convex s /\\ bounded s /\\ a IN relative_interior s\n        ==> relative_frontier s retract_of (affine hull s DELETE a)
-      #|  !s a:real^N.\n        convex s /\\ compact s /\\ a IN relative_interior s\n        ==> (s DIFF relative_interior s) retract_of\n            (affine hull s DELETE a)
+      #|  forall s a:real^N.\n        convex s /\\ bounded s /\\ a IN relative_interior s\n        ==> relative_frontier s retract_of (affine hull s DELETE a)
+      #|  forall s a:real^N.\n        convex s /\\ compact s /\\ a IN relative_interior s\n        ==> (s DIFF relative_interior s) retract_of\n            (affine hull s DELETE a)
       #|  affine hull s DELETE (a:real^N)
       #|  a:real^N
       #|  relative_interior s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> path_connected(relative_frontier s)
-      #|  !s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> connected(relative_frontier s)
+      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> path_connected(relative_frontier s)
+      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ ~(aff_dim s = &1)\n        ==> connected(relative_frontier s)
       #|  closest_point (affine hull s:real^N->bool)
       #|  (affine hull s) DELETE (a:real^N)
       #|  (:real^N)
@@ -65202,42 +65202,42 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  a:real^N
       #|  ~(relative_interior s:real^N->bool = {})
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. bounded s /\\ convex s ==> ENR(relative_frontier s)
-      #|  !s:real^N->bool. bounded s /\\ convex s ==> ANR(relative_frontier s)
+      #|  forall s:real^N->bool. bounded s /\\ convex s ==> ENR(relative_frontier s)
+      #|  forall s:real^N->bool. bounded s /\\ convex s ==> ANR(relative_frontier s)
       #|  a:real^N
       #|  s:real^N->bool
       #|  a IN s ==> ~(s = {})
-      #|  !s a. convex s /\\ bounded s /\\ a IN interior s\n         ==> (frontier s) retract_of ((:real^N) DELETE a)
-      #|  !a r b:real^N.\n      b IN ball(a,r) ==> sphere(a,r) retract_of ((:real^N) DELETE b)
-      #|  !a r. &0 < r ==> sphere(a,r) retract_of ((:real^N) DELETE a)
+      #|  forall s a. convex s /\\ bounded s /\\ a IN interior s\n         ==> (frontier s) retract_of ((:real^N) DELETE a)
+      #|  forall a r b:real^N.\n      b IN ball(a,r) ==> sphere(a,r) retract_of ((:real^N) DELETE b)
+      #|  forall a r. &0 < r ==> sphere(a,r) retract_of ((:real^N) DELETE a)
       #|  (:real^N) DELETE a
       #|  &0 < r
-      #|  !a:real^N r. ENR(sphere(a,r))
-      #|  !a:real^N r. ANR(sphere(a,r))
+      #|  forall a:real^N r. ENR(sphere(a,r))
+      #|  forall a:real^N r. ANR(sphere(a,r))
       #|  affine hull s:real^N->bool
       #|  (affine hull s) DELETE (a:real^N)
       #|  a:real^N
       #|  relative_interior(s:real^N->bool) = {}
       #|  relative_interior(s:real^N->bool) = {}
-      #|  !s:real^N->bool.\n       bounded s /\\ convex s ==> locally path_connected (relative_frontier s)
-      #|  !s:real^N->bool.\n       bounded s /\\ convex s ==> locally connected (relative_frontier s)
+      #|  forall s:real^N->bool.\n       bounded s /\\ convex s ==> locally path_connected (relative_frontier s)
+      #|  forall s:real^N->bool.\n       bounded s /\\ convex s ==> locally connected (relative_frontier s)
       #|  closest_point(s:real^N->bool)
-      #|  !s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                !x. x IN (affine hull s) DIFF (relative_interior s)\n                    ==> r(x) IN relative_frontier s
+      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                forall x. x IN (affine hull s) DIFF (relative_interior s)\n                    ==> r(x) IN relative_frontier s
       #|  closest_point(s:real^N->bool)
-      #|  !s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                (!x. ~(x IN s) ==> r(x) IN frontier s)
-      #|  !s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> s retract_of t
+      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> ?r. retraction (t,s) r /\\\n                (forall x. ~(x IN s) ==> r(x) IN frontier s)
+      #|  forall s:real^N->bool t.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ s SUBSET t\n        ==> s retract_of t
       #|  s:real^N->bool
       #|  u:real^N->bool
       #|  s:real^N->bool
       #|  \\x:real^N. x
-      #|  !s u:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ closed_in (subtopology euclidean u) s\n        ==> s retract_of u
+      #|  forall s u:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ closed_in (subtopology euclidean u) s\n        ==> s retract_of u
       #|  (:real^N)
       #|  &1
       #|  vec 0:real^2
       #|  g:real^1->real^N
       #|  pathfinish g:real^N = pathstart g
-      #|  !g:real^1->real^N. simple_path g ==> ENR(path_image g)
-      #|  !g:real^1->real^N. simple_path g ==> ANR(path_image g)
+      #|  forall g:real^1->real^N. simple_path g ==> ENR(path_image g)
+      #|  forall g:real^1->real^N. simple_path g ==> ANR(path_image g)
       #|  (a:real^M->real^1) x
       #|  ~((x:real^M) IN s')
       #|  (x:real^M) IN s'
@@ -65276,7 +65276,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s SUBSET t ==> t INTER s = s
       #|  {vec 0:real^1} PCROSS (t:real^M->bool) UNION\n          interval[vec 0,vec 1] PCROSS s
       #|  ANR(B:real^(1,M)finite_sum->bool)
-      #|  ?V k:real^(1,M)finite_sum->real^N.\n        B SUBSET V /\\\n        open_in (subtopology euclidean (interval [vec 0,vec 1] PCROSS t)) V /\\\n        k continuous_on V /\\\n        IMAGE k V SUBSET u /\\\n        (!x. x IN B ==> k x = h' x)
+      #|  ?V k:real^(1,M)finite_sum->real^N.\n        B SUBSET V /\\\n        open_in (subtopology euclidean (interval [vec 0,vec 1] PCROSS t)) V /\\\n        k continuous_on V /\\\n        IMAGE k V SUBSET u /\\\n        (forall x. x IN B ==> k x = h' x)
       #|  IMAGE (h':real^(1,M)finite_sum->real^N) B SUBSET u
       #|  (p /\\ q) /\\ ~q <=> F
       #|  (h':real^(1,M)finite_sum->real^N) continuous_on B
@@ -65284,8 +65284,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  B:real^(1,M)finite_sum->bool =\n       {vec 0} PCROSS t UNION interval[vec 0,vec 1] PCROSS s
       #|  h' = \\z. if sndcart z IN s then (h:real^(1,M)finite_sum->real^N) z\n              else f(sndcart z)
       #|  h:real^(1,M)finite_sum->real^N
-      #|  !f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. homotopic_with (\\x. T)\n                  (subtopology euclidean t,subtopology euclidean u) f g' /\\\n                 g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 !x. x IN s ==> g'(x) = g(x)
-      #|  !f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 !x. x IN s ==> g'(x) = g(x)
+      #|  forall f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. homotopic_with (\\x. T)\n                  (subtopology euclidean t,subtopology euclidean u) f g' /\\\n                 g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 forall x. x IN s ==> g'(x) = g(x)
+      #|  forall f:real^M->real^N g s t u.\n        closed_in (subtopology euclidean t) s /\\\n        (ANR s /\\ ANR t \\/ ANR u) /\\\n        f continuous_on t /\\ IMAGE f t SUBSET u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean s,subtopology euclidean u) f g\n        ==> ?g'. g' continuous_on t /\\ IMAGE g' t SUBSET u /\\\n                 forall x. x IN s ==> g'(x) = g(x)
       #|  (:real^M)
       #|  (\\x. c):real^M->real^N
       #|  g:real^M->real^N
@@ -65294,19 +65294,19 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (:real^M)
       #|  g:real^M->real^N
       #|  (\\x. c):real^M->real^N
-      #|  !f:real^M->real^N s t.\n      closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET t /\\ ANR t\n      ==> ((?c. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t)\n                 f (\\x. c)) <=>\n           (?g. g continuous_on (:real^M) /\\\n                IMAGE g (:real^M) SUBSET t /\\\n                !x. x IN s ==> g x = f x))
+      #|  forall f:real^M->real^N s t.\n      closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET t /\\ ANR t\n      ==> ((?c. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t)\n                 f (\\x. c)) <=>\n           (?g. g continuous_on (:real^M) /\\\n                IMAGE g (:real^M) SUBSET t /\\\n                forall x. x IN s ==> g x = f x))
       #|  t:real^N->bool
-      #|  !f:real^M->real^N s t.\n        closed s /\\ f continuous_on s /\\ ~(s = {}) /\\\n        IMAGE f s SUBSET relative_frontier t /\\ convex t /\\ bounded t\n        ==> ((?c. homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean  (relative_frontier t)) f (\\x. c)) <=>\n             (?g. g continuous_on (:real^M) /\\\n                  IMAGE g (:real^M) SUBSET relative_frontier t /\\\n                  !x. x IN s ==> g x = f x))
+      #|  forall f:real^M->real^N s t.\n        closed s /\\ f continuous_on s /\\ ~(s = {}) /\\\n        IMAGE f s SUBSET relative_frontier t /\\ convex t /\\ bounded t\n        ==> ((?c. homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean  (relative_frontier t)) f (\\x. c)) <=>\n             (?g. g continuous_on (:real^M) /\\\n                  IMAGE g (:real^M) SUBSET relative_frontier t /\\\n                  forall x. x IN s ==> g x = f x))
       #|  (\\x. a):real^M->real^N
       #|  \\y:real^(1,M)finite_sum. (a:real^N)
       #|  a:real^N
       #|  p /\\ q ==> (p <=> q)
       #|  r:real
       #|  a:real^N
-      #|  !f:real^M->real^N s a r.\n     closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET sphere(a,r)\n     ==> ((?c. homotopic_with (\\x. T)\n                (subtopology euclidean s,\n                 subtopology euclidean (sphere(a,r))) f (\\x. c)) <=>\n          (?g. g continuous_on (:real^M) /\\\n               IMAGE g (:real^M) SUBSET sphere(a,r) /\\\n               !x. x IN s ==> g x = f x))
-      #|  !s u:real^N->bool.\n      closed_in (subtopology euclidean u) s /\\\n      contractible s /\\ ~(s = {}) /\\ ANR s\n      ==> s retract_of u
+      #|  forall f:real^M->real^N s a r.\n     closed s /\\ f continuous_on s /\\ ~(s = {}) /\\ IMAGE f s SUBSET sphere(a,r)\n     ==> ((?c. homotopic_with (\\x. T)\n                (subtopology euclidean s,\n                 subtopology euclidean (sphere(a,r))) f (\\x. c)) <=>\n          (?g. g continuous_on (:real^M) /\\\n               IMAGE g (:real^M) SUBSET sphere(a,r) /\\\n               forall x. x IN s ==> g x = f x))
+      #|  forall s u:real^N->bool.\n      closed_in (subtopology euclidean u) s /\\\n      contractible s /\\ ~(s = {}) /\\ ANR s\n      ==> s retract_of u
       #|  c:real^M->bool
-      #|  !s t f g:real^M->real^N.\n        locally connected s /\\\n        (!c. c IN components s\n             ==> homotopic_with (\\x. T)\n                   (subtopology euclidean c,subtopology euclidean t) f g)\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
+      #|  forall s t f g:real^M->real^N.\n        locally connected s /\\\n        (forall c. c IN components s\n             ==> homotopic_with (\\x. T)\n                   (subtopology euclidean c,subtopology euclidean t) f g)\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean t) f g
       #|  b:real^N
       #|  c:real^M->bool
       #|  c:real^M->bool
@@ -65315,7 +65315,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^M->bool
       #|  ?a:real^N. a IN t
       #|  components(s:real^M->bool) = {}
-      #|  !f:real^M->real^N s t.\n        locally connected s /\\ path_connected t /\\\n        (!c. c IN components s\n             ==> ?a. homotopic_with (\\x. T)\n                       (subtopology euclidean c,subtopology euclidean t)\n                       f (\\x. a))\n        ==> ?a. homotopic_with (\\x. T)\n                  (subtopology euclidean s,subtopology euclidean t)\n                  f (\\x. a)
+      #|  forall f:real^M->real^N s t.\n        locally connected s /\\ path_connected t /\\\n        (forall c. c IN components s\n             ==> ?a. homotopic_with (\\x. T)\n                       (subtopology euclidean c,subtopology euclidean t)\n                       f (\\x. a))\n        ==> ?a. homotopic_with (\\x. T)\n                  (subtopology euclidean s,subtopology euclidean t)\n                  f (\\x. a)
       #|  x:real^M
       #|  k:real^(1,M)finite_sum->real^N
       #|  t':real^M->bool
@@ -65341,7 +65341,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  h':real^(1,M)finite_sum->real^N
       #|  h' = \\z. if fstcart z IN {vec 0} then f(sndcart z)\n             else if fstcart z IN {vec 1} then g(sndcart z)\n             else (h:real^(1,M)finite_sum->real^N) z
       #|  h:real^(1,M)finite_sum->real^N
-      #|  !f g:real^M->real^N s t u.\n        f continuous_on s /\\ IMAGE f s SUBSET u /\\\n        g continuous_on s /\\ IMAGE g s SUBSET u /\\\n        closed_in (subtopology euclidean s) t /\\ ANR u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean t,subtopology euclidean u) f g\n        ==> ?v. t SUBSET v /\\\n                open_in (subtopology euclidean s) v /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean v,subtopology euclidean u) f g
+      #|  forall f g:real^M->real^N s t u.\n        f continuous_on s /\\ IMAGE f s SUBSET u /\\\n        g continuous_on s /\\ IMAGE g s SUBSET u /\\\n        closed_in (subtopology euclidean s) t /\\ ANR u /\\\n        homotopic_with (\\x. T)\n         (subtopology euclidean t,subtopology euclidean u) f g\n        ==> ?v. t SUBSET v /\\\n                open_in (subtopology euclidean s) v /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean v,subtopology euclidean u) f g
       #|  s = UNIONS (IMAGE k (components(s:real^M->bool)))
       #|  k:(real^M->bool)->(real^M->bool)
       #|  k:real^M->bool
@@ -65358,9 +65358,9 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^M->bool
       #|  c:real^M->bool
       #|  c:real^M->bool
-      #|  !c. c IN components s\n        ==> ?u. c SUBSET u /\\\n                closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean u,subtopology euclidean t)\n                 (f:real^M->real^N) g
+      #|  forall c. c IN components s\n        ==> ?u. c SUBSET u /\\\n                closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                homotopic_with (\\x. T)\n                 (subtopology euclidean u,subtopology euclidean t)\n                 (f:real^M->real^N) g
       #|  (q ==> r) /\\ (r ==> (q <=> s)) ==> (q <=> r /\\ s)
-      #|  !s t f g:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t)\n        ==> (homotopic_with (\\x. T)\n               (subtopology euclidean s,subtopology euclidean t) f g <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             g continuous_on s /\\ IMAGE g s SUBSET t /\\\n             !c. c IN components s\n                 ==> homotopic_with (\\x. T)\n                      (subtopology euclidean c,subtopology euclidean t) f g)
+      #|  forall s t f g:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t)\n        ==> (homotopic_with (\\x. T)\n               (subtopology euclidean s,subtopology euclidean t) f g <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             g continuous_on s /\\ IMAGE g s SUBSET t /\\\n             forall c. c IN components s\n                 ==> homotopic_with (\\x. T)\n                      (subtopology euclidean c,subtopology euclidean t) f g)
       #|  b:real^N
       #|  d:real^M->bool
       #|  d:real^M->bool
@@ -65369,7 +65369,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  ?c:real^M->bool. c IN components s
       #|  s:real^M->bool = {}
       #|  (q ==> r) /\\ (r ==> (q <=> s)) ==> (q <=> r /\\ s)
-      #|  !s t f:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t) /\\\n        path_connected t\n        ==> ((?a. homotopic_with (\\x. T)\n                   (subtopology euclidean s,subtopology euclidean t)\n                   f (\\x. a)) <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             !c. c IN components s\n                 ==> ?a. homotopic_with (\\x. T)\n                          (subtopology euclidean c,subtopology euclidean t)\n                          f (\\x. a))
+      #|  forall s t f:real^M->real^N.\n        (locally connected s \\/ compact s /\\ ANR t) /\\\n        path_connected t\n        ==> ((?a. homotopic_with (\\x. T)\n                   (subtopology euclidean s,subtopology euclidean t)\n                   f (\\x. a)) <=>\n             f continuous_on s /\\ IMAGE f s SUBSET t /\\\n             forall c. c IN components s\n                 ==> ?a. homotopic_with (\\x. T)\n                          (subtopology euclidean c,subtopology euclidean t)\n                          f (\\x. a))
       #|  c:real^M->bool
       #|  c:real^M->bool
       #|  c:real^M->bool
@@ -65385,8 +65385,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^M->bool
       #|  s:real^M->bool
       #|  g:real^M->real^N
-      #|  !s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t)\n         ==> ((!f g. f continuous_on s /\\ IMAGE f s SUBSET t /\\\n                     g continuous_on s /\\ IMAGE g s SUBSET t\n                     ==> homotopic_with (\\x. T)\n                          (subtopology euclidean s,subtopology euclidean t)\n                          f g) <=>\n              (!c. c IN components s\n                   ==> (!f g. f continuous_on c /\\ IMAGE f c SUBSET t /\\\n                              g continuous_on c /\\ IMAGE g c SUBSET t\n                              ==> homotopic_with (\\x. T)\n                                   (subtopology euclidean c,\n                                    subtopology euclidean t) f g)))
-      #|  !s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t) /\\ path_connected t\n         ==> ((!f. f continuous_on s /\\ IMAGE f s SUBSET t\n                   ==> ?a. homotopic_with (\\x. T)\n                            (subtopology euclidean s,\n                             subtopology euclidean t) f (\\x. a)) <=>\n              (!c. c IN components s\n                   ==> (!f. f continuous_on c /\\ IMAGE f c SUBSET t\n                            ==> ?a. homotopic_with (\\x. T)\n                                     (subtopology euclidean c,\n                                      subtopology euclidean t) f (\\x. a))))
+      #|  forall s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t)\n         ==> ((forall f g. f continuous_on s /\\ IMAGE f s SUBSET t /\\\n                     g continuous_on s /\\ IMAGE g s SUBSET t\n                     ==> homotopic_with (\\x. T)\n                          (subtopology euclidean s,subtopology euclidean t)\n                          f g) <=>\n              (forall c. c IN components s\n                   ==> (forall f g. f continuous_on c /\\ IMAGE f c SUBSET t /\\\n                              g continuous_on c /\\ IMAGE g c SUBSET t\n                              ==> homotopic_with (\\x. T)\n                                   (subtopology euclidean c,\n                                    subtopology euclidean t) f g)))
+      #|  forall s:real^M->bool t:real^N->bool.\n        (locally connected s \\/ compact s /\\ ANR t) /\\ path_connected t\n         ==> ((forall f. f continuous_on s /\\ IMAGE f s SUBSET t\n                   ==> ?a. homotopic_with (\\x. T)\n                            (subtopology euclidean s,\n                             subtopology euclidean t) f (\\x. a)) <=>\n              (forall c. c IN components s\n                   ==> (forall f. f continuous_on c /\\ IMAGE f c SUBSET t\n                            ==> ?a. homotopic_with (\\x. T)\n                                     (subtopology euclidean c,\n                                      subtopology euclidean t) f (\\x. a))))
       #|  s = UNIONS (IMAGE (u:(real^M->bool)->real^M->bool) (components s))
       #|  u:(real^M->bool)->real^M->bool
       #|  a:real^N
@@ -65409,24 +65409,24 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  t:real^N->bool
       #|  c:real^M->bool
       #|  f:real^M->real^N
-      #|  !c. c IN components s\n        ==> ?u. closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                c SUBSET u /\\\n                ?a. homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean t)\n                     (f:real^M->real^N) (\\x. a)
+      #|  forall c. c IN components s\n        ==> ?u. closed_in (subtopology euclidean s) u /\\\n                open_in (subtopology euclidean s) u /\\\n                c SUBSET u /\\\n                ?a. homotopic_with (\\x. T)\n                     (subtopology euclidean u,subtopology euclidean t)\n                     (f:real^M->real^N) (\\x. a)
       #|  r:real^1->bool
       #|  IMAGE (f:real^M->real^1) s
       #|  g:real^1->real^M
       #|  f:real^M->real^1
       #|  p \\/ q ==> (p ==> q) ==> q
       #|  path_connected(t:real^N->bool)
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        ANR t /\\ connected t /\\\n        (dimindex(:M) = 1 \\/ ?r:real^1->bool. s homeomorphic r)\n        ==> ?a. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t) f (\\x. a)
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        ANR t /\\ connected t /\\\n        (dimindex(:M) = 1 \\/ ?r:real^1->bool. s homeomorphic r)\n        ==> ?a. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean t) f (\\x. a)
       #|  t:real^N->bool
       #|  (\\x. x) o (r1:real^N->real^N)
-      #|  !s t u r1 r2:real^N->real^N.\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean s) (\\x. x) r1 /\\\n        retraction (s,t) r1 /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean t,subtopology euclidean t) (\\x. x) r2 /\\\n        retraction (t,u) r2\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s)\n             (\\x. x) (r2 o r1) /\\\n            retraction (s,u) (r2 o r1)
-      #|  !s t u:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction (s,t) r) /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean t,subtopology euclidean t) (\\x. x) r /\\\n             retraction (t,u) r)\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction (s,u) r
-      #|  !s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> s homotopy_equivalent t
+      #|  forall s t u r1 r2:real^N->real^N.\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,subtopology euclidean s) (\\x. x) r1 /\\\n        retraction (s,t) r1 /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean t,subtopology euclidean t) (\\x. x) r2 /\\\n        retraction (t,u) r2\n        ==> homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s)\n             (\\x. x) (r2 o r1) /\\\n            retraction (s,u) (r2 o r1)
+      #|  forall s t u:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction (s,t) r) /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean t,subtopology euclidean t) (\\x. x) r /\\\n             retraction (t,u) r)\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction (s,u) r
+      #|  forall s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> s homotopy_equivalent t
       #|  t SUBSET s ==> s INTER t = t
       #|  (t:real^N->bool) SUBSET s
       #|  t:real^N->bool
       #|  subtopology euclidean (s:real^N->bool)
-      #|  !s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r) <=>\n        t retract_of s /\\\n        ?f. homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s) (\\x. x) f /\\\n            IMAGE f s SUBSET t
+      #|  forall s t:real^N->bool.\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r) <=>\n        t retract_of s /\\\n        ?f. homotopic_with (\\x. T)\n             (subtopology euclidean s,subtopology euclidean s) (\\x. x) f /\\\n            IMAGE f s SUBSET t
       #|  h:real^(1,N)finite_sum->real^N
       #|  (h:real^(1,N)finite_sum->real^N) o pastecart (vec 1)
       #|  h:real^(1,N)finite_sum->real^N
@@ -65461,34 +65461,34 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^(1,N)finite_sum->real^N
       #|  g:real^(1,(1,N)finite_sum)finite_sum->real^N =\n     \\z. if fstcart(sndcart z) = vec 0 then (sndcart(sndcart z))\n         else if fstcart(sndcart z) = vec 1\n              then f(pastecart (vec 1 - fstcart z)\n                               (f(pastecart (vec 1) (sndcart(sndcart z)))))\n         else f(pastecart (lift(drop(fstcart(sndcart z)) *\n                                    (&1 - drop (fstcart z))))\n                          (sndcart(sndcart z)))
       #|  f:real^(1,N)finite_sum->real^N
-      #|  !s t:real^N->bool.\n        ANR s /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> ?r. homotopic_with (\\h. !x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
+      #|  forall s t:real^N->bool.\n        ANR s /\\\n        (?r. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n             retraction(s,t) r)\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
       #|  (b:real^N) IN s
       #|  (a:real^N) IN s
       #|  b:real^N
       #|  (\\x. a):real^N->real^N
       #|  ?a:real^N. a IN t
       #|  t:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        contractible s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  !s t:real^N->bool.\n        contractible s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  !s a:real^N.\n        contractible s /\\ a IN s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
-      #|  !s t:real^N->bool.\n        AR s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\h. !x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
-      #|  !s t:real^N->bool.\n        AR s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\h. !x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
+      #|  forall s t:real^N->bool.\n        contractible s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
+      #|  forall s t:real^N->bool.\n        contractible s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
+      #|  forall s a:real^N.\n        contractible s /\\ a IN s\n        ==> ?r. homotopic_with (\\x. T)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
+      #|  forall s t:real^N->bool.\n        AR s /\\ t retract_of s\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
+      #|  forall s t:real^N->bool.\n        AR s /\\ AR t /\\ closed_in (subtopology euclidean s) t\n        ==> ?r. homotopic_with (\\h. forall x. x IN t ==> h x = x)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,t) r
       #|  {a:real^N}
       #|  s:real^N->bool
-      #|  !s a:real^N.\n        AR s /\\ a IN s\n        ==> ?r. homotopic_with (\\h. h a = a)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
-      #|  !s t a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s /\\\n      convex t /\\ relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n      ==> (relative_frontier s) homotopy_equivalent (t DELETE a)
+      #|  forall s a:real^N.\n        AR s /\\ a IN s\n        ==> ?r. homotopic_with (\\h. h a = a)\n                 (subtopology euclidean s,subtopology euclidean s) (\\x. x) r /\\\n                retraction(s,{a}) r
+      #|  forall s t a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s /\\\n      convex t /\\ relative_frontier s SUBSET t /\\ t SUBSET affine hull s\n      ==> (relative_frontier s) homotopy_equivalent (t DELETE a)
       #|  s SUBSET u ==> s DIFF t SUBSET u
-      #|  !s a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s\n      ==> (relative_frontier s) homotopy_equivalent (affine hull s DELETE a)
+      #|  forall s a:real^N.\n      convex s /\\ bounded s /\\ a IN relative_interior s\n      ==> (relative_frontier s) homotopy_equivalent (affine hull s DELETE a)
       #|  vec 0:real^N
       #|  cball(vec 0:real^N,r)
       #|  sphere(vec 0:real^N,r)
       #|  c:real^N
-      #|  !c a:real^N r.\n        &0 < r ==> ((:real^N) DELETE c) homotopy_equivalent sphere(a,r)
+      #|  forall c a:real^N r.\n        &0 < r ==> ((:real^N) DELETE c) homotopy_equivalent sphere(a,r)
       #|  (i:real^N->real^M) o (g:real^N->real^N) o (r:real^M->real^N)
-      #|  !s:real^M->bool t:real^N->bool i r.\n     i continuous_on t /\\ IMAGE i t SUBSET s /\\\n     r continuous_on s /\\ IMAGE r s SUBSET t /\\\n     (!y. y IN t ==> (r(i(y)) = y))\n     ==> (!f. f continuous_on s /\\ IMAGE f s SUBSET s\n              ==> ?x. x IN s /\\ (f x = x))\n         ==> !g. g continuous_on t /\\ IMAGE g t SUBSET t\n                 ==> ?y. y IN t /\\ (g y = y)
-      #|  !s t. s homeomorphic t\n         ==> ((!f. f continuous_on s /\\ IMAGE f s SUBSET s\n                   ==> ?x. x IN s /\\ (f x = x)) <=>\n              (!g. g continuous_on t /\\ IMAGE g t SUBSET t\n                   ==> ?y. y IN t /\\ (g y = y)))
+      #|  forall s:real^M->bool t:real^N->bool i r.\n     i continuous_on t /\\ IMAGE i t SUBSET s /\\\n     r continuous_on s /\\ IMAGE r s SUBSET t /\\\n     (forall y. y IN t ==> (r(i(y)) = y))\n     ==> (forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n              ==> ?x. x IN s /\\ (f x = x))\n         ==> forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                 ==> ?y. y IN t /\\ (g y = y)
+      #|  forall s t. s homeomorphic t\n         ==> ((forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n                   ==> ?x. x IN s /\\ (f x = x)) <=>\n              (forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                   ==> ?y. y IN t /\\ (g y = y)))
       #|  \\x:real^N. x
-      #|  !s t:real^N->bool.\n        t retract_of s /\\\n        (!f. f continuous_on s /\\ IMAGE f s SUBSET s\n             ==> ?x. x IN s /\\ (f x = x))\n        ==> !g. g continuous_on t /\\ IMAGE g t SUBSET t\n                ==> ?y. y IN t /\\ (g y = y)
+      #|  forall s t:real^N->bool.\n        t retract_of s /\\\n        (forall f. f continuous_on s /\\ IMAGE f s SUBSET s\n             ==> ?x. x IN s /\\ (f x = x))\n        ==> forall g. g continuous_on t /\\ IMAGE g t SUBSET t\n                ==> ?y. y IN t /\\ (g y = y)
       #|  norm(x - a) = dist(a,x)
       #|  :real
       #|  :real
@@ -65503,7 +65503,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  frontier(s:real^N->bool) SUBSET t
       #|  (x:real^N) IN t
       #|  (x:real^N) IN s
-      #|  !x. ~((q:real^N->real^N) x = a)
+      #|  forall x. ~((q:real^N->real^N) x = a)
       #|  a:real^N
       #|  B:real
       #|  s SUBSET closure s /\\ t SUBSET closure t /\\ s UNION t = UNIV\n      ==> closure s UNION closure t = UNIV
@@ -65514,16 +65514,16 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  q = \\z:real^N. if z IN closure s then r(z) else z
       #|  a:real^N
       #|  ~(s SUBSET t) <=> ?x. x IN s /\\ ~(x IN t)
-      #|  !s:real^N->bool t r.\n        bounded s /\\\n        frontier s SUBSET t /\\\n        r continuous_on (closure s) /\\\n        IMAGE r s SUBSET t /\\\n        (!x. x IN t ==> r x = x)\n        ==> s SUBSET t
+      #|  forall s:real^N->bool t r.\n        bounded s /\\\n        frontier s SUBSET t /\\\n        r continuous_on (closure s) /\\\n        IMAGE r s SUBSET t /\\\n        (forall x. x IN t ==> r x = x)\n        ==> s SUBSET t
       #|  s:real^N->bool
       #|  r:real^N->real^N
       #|  frontier s:real^N->bool
       #|  s:real^N->bool
       #|  r:real^N->real^N
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(interior s = {}) ==> ~((frontier s) retract_of s)
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(interior s = {}) ==> ~((frontier s) retract_of s)
       #|  (g:real^N->real^N) x = x
       #|  x:real^N
-      #|  !x. x IN cball (vec 0,r) ==> ~((g:real^N->real^N) x = p)
+      #|  forall x. x IN cball (vec 0,r) ==> ~((g:real^N->real^N) x = p)
       #|  (h:real^N->real^N) o (g:real^N->real^N)
       #|  r:real
       #|  vec 0:real^N
@@ -65537,7 +65537,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  r:real
       #|  vec 0:real^N
       #|  s UNION (IMAGE f s):real^N->bool
-      #|  !f:real^N->real^N s.\n        compact s /\\ f continuous_on s /\\ (!x. x IN frontier s ==> f x = x)\n        ==> s SUBSET IMAGE f s
+      #|  forall f:real^N->real^N s.\n        compact s /\\ f continuous_on s /\\ (forall x. x IN frontier s ==> f x = x)\n        ==> s SUBSET IMAGE f s
       #|  (:real^N) DELETE (vec 0)
       #|  (:real^N) DIFF s
       #|  (:real^N)
@@ -65546,8 +65546,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  vec 0:real^N
       #|  a:real^N
       #|  a:real^N
-      #|  (!x. x IN s ==> F) ==> s = {}
-      #|  !s. bounded s /\\ ((:real^N) DIFF s) retract_of (:real^N) ==> s = {}
+      #|  (forall x. x IN s ==> F) ==> s = {}
+      #|  forall s. bounded s /\\ ((:real^N) DIFF s) retract_of (:real^N) ==> s = {}
       #|  &1 <= c ==> ~(c = &0)
       #|  (&1 - u) + u = &1
       #|  inv(c):real
@@ -65578,7 +65578,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  affine hull s:real^N->bool
       #|  s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !f s a:real^N.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s\n        ==> (?x. x IN s /\\ f x = x) \\/\n            (?x. x IN frontier s /\\ x IN segment(a,f x))
+      #|  forall f s a:real^N.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s\n        ==> (?x. x IN s /\\ f x = x) \\/\n            (?x. x IN frontier s /\\ x IN segment(a,f x))
       #|  x - a:real^N = y ==> x = a + y
       #|  x - a:real^N = y ==> x = a + y
       #|  x - a:real^N = y ==> x = a + y
@@ -65588,18 +65588,18 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  \\x:real^N. x + (a - f(x))
-      #|  !f s a.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s /\\\n        IMAGE f s SUBSET (:real^N) DELETE a\n        ==> ?x. x IN frontier s /\\ a IN segment(x,f x)
+      #|  forall f s a.\n        f continuous_on s /\\ convex s /\\ compact s /\\ a IN interior s /\\\n        IMAGE f s SUBSET (:real^N) DELETE a\n        ==> ?x. x IN frontier s /\\ a IN segment(x,f x)
       #|  s:real^N->bool
       #|  f:real^N->real^N
-      #|  !f:real^N->real^N s a.\n       compact s /\\ a IN s /\\\n       f continuous_on s /\\ IMAGE f s SUBSET (:real^N) DELETE a\n       ==> ?x. x IN frontier s /\\ ~(f x = x)
+      #|  forall f:real^N->real^N s a.\n       compact s /\\ a IN s /\\\n       f continuous_on s /\\ IMAGE f s SUBSET (:real^N) DELETE a\n       ==> ?x. x IN frontier s /\\ ~(f x = x)
       #|  r:real^N->real^N
       #|  (c:real^N->bool) SUBSET s
       #|  closure(c:real^N->bool) SUBSET t
       #|  frontier((:real^N) DIFF s)
       #|  frontier(c:real^N->bool) SUBSET s
-      #|  !s t c. closed s /\\ s retract_of t /\\\n           c IN components((:real^N) DIFF s) /\\ bounded c\n           ==> ~(c SUBSET t)
+      #|  forall s t c. closed s /\\ s retract_of t /\\\n           c IN components((:real^N) DIFF s) /\\ bounded c\n           ==> ~(c SUBSET t)
       #|  bounded(c:real^N->bool)
-      #|  !s t c. closed s /\\ s retract_of t /\\ bounded t /\\\n           c IN components((:real^N) DIFF s)\n           ==> ~(c SUBSET t)
+      #|  forall s t c. closed s /\\ s retract_of t /\\ bounded t /\\\n           c IN components((:real^N) DIFF s)\n           ==> ~(c SUBSET t)
       #|  s SUBSET t ==> s DIFF u SUBSET t DIFF u
       #|  s SUBSET t\n      ==> ~(c INTER s = {}) ==> ~(c INTER t = {})
       #|  frontier((:real^N) DIFF s)
@@ -65607,17 +65607,17 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s DIFF t = {} <=> s SUBSET t
       #|  ~(c INTER frontier(u:real^N->bool) = {})
       #|  c:real^N->bool
-      #|  (!c. c IN s ==> P c) ==> {c | c IN s /\\ P c} = s
+      #|  (forall c. c IN s ==> P c) ==> {c | c IN s /\\ P c} = s
       #|  (:real^N) DIFF s
       #|  cball(vec 0:real^N,r) DIFF u
       #|  r:real
       #|  vec 0:real^N
       #|  u:real^N->bool
-      #|  !c. c IN components((:real^N) DIFF s) ==> ~(c SUBSET u)
+      #|  forall c. c IN components((:real^N) DIFF s) ==> ~(c SUBSET u)
       #|  u:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s. compact s /\\ ENR s ==> FINITE(components((:real^N) DIFF s))
-      #|  !s. compact s /\\ ANR s ==> FINITE(components((:real^N) DIFF s))
+      #|  forall s. compact s /\\ ENR s ==> FINITE(components((:real^N) DIFF s))
+      #|  forall s. compact s /\\ ANR s ==> FINITE(components((:real^N) DIFF s))
       #|  p:real^N
       #|  p:real^N
       #|  u:real^N->bool
@@ -65633,7 +65633,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:real^N->bool
       #|  d:real^N->bool
       #|  SUBSET
-      #|  !s t. compact s /\\ s retract_of t /\\ bounded t\n         ==> components((:real^N) DIFF s) <=_c components((:real^N) DIFF t)
+      #|  forall s t. compact s /\\ s retract_of t /\\ bounded t\n         ==> components((:real^N) DIFF s) <=_c components((:real^N) DIFF t)
       #|  CARD(components((:real^N) DIFF t))
       #|  CARD{u:real^N->bool}
       #|  n = 0 \\/ n = 1 <=> n <= 1
@@ -65644,7 +65644,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s:real^N->bool
       #|  FINITE(components((:real^N) DIFF t))
       #|  u:real^N->bool
-      #|  !s t. compact s /\\ s retract_of t /\\ bounded t /\\\n         connected((:real^N) DIFF t)\n         ==> connected((:real^N) DIFF s)
+      #|  forall s t. compact s /\\ s retract_of t /\\ bounded t /\\\n         connected((:real^N) DIFF t)\n         ==> connected((:real^N) DIFF s)
       #|  &0 < r ==> ~(r < &0)
       #|  cball(vec 0:real^N,r)
       #|  g:real^N->real^N
@@ -65656,11 +65656,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (\\x. a):real^N->real^N
       #|  vec 0:real^N
       #|  r:real
-      #|  !f:real^N->real^N s.\n        compact s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (?a. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) f (\\x. a))\n        ==> ?x. x IN s /\\ f x = x
-      #|  !f:real^N->real^N s.\n        compact s /\\ contractible s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
-      #|  !f a:real^N r c.\n     &0 < r /\\\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(a,r)),\n       subtopology euclidean (sphere(a,r))) f (\\x. c)\n     ==> ?x. x IN sphere(a,r) /\\ f x = x
-      #|  !f s:real^N->bool.\n        compact s /\\ AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
-      #|  !f s. compact s /\\ s retract_of (:real^N) /\\\n         f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
+      #|  forall f:real^N->real^N s.\n        compact s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s /\\\n        (?a. homotopic_with (\\x. T)\n              (subtopology euclidean s,subtopology euclidean s) f (\\x. a))\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f:real^N->real^N s.\n        compact s /\\ contractible s /\\ ~(s = {}) /\\ ANR s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET s\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f a:real^N r c.\n     &0 < r /\\\n     homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(a,r)),\n       subtopology euclidean (sphere(a,r))) f (\\x. c)\n     ==> ?x. x IN sphere(a,r) /\\ f x = x
+      #|  forall f s:real^N->bool.\n        compact s /\\ AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
+      #|  forall f s. compact s /\\ s retract_of (:real^N) /\\\n         f continuous_on s /\\ IMAGE f s SUBSET s\n         ==> ?x. x IN s /\\ f x = x
       #|  y:real^N
       #|  x:real^N
       #|  y:real^N
@@ -65672,11 +65672,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  s SUBSET UNIONS (IMAGE (\\x:real^N. ball(x,e)) t)
       #|  &0 < max (&0) b <=> &0 < b
       #|  &0 <= max (&0) b
-      #|  !x. x IN s ==> &0 < sum t (\\p. (g:real^N->real^N->real) p x)
+      #|  forall x. x IN s ==> &0 < sum t (\\p. (g:real^N->real^N->real) p x)
       #|  g = \\p x:real^N. max (&0) (e - norm(x - p))
       #|  t:real^N->bool
       #|  e:real
-      #|  !s:real^N->bool e.\n        compact s /\\ &0 < e\n        ==> ?t f. FINITE t /\\ t SUBSET s /\\\n                  f continuous_on s /\\ IMAGE f s SUBSET (convex hull t) /\\\n                  (!x. x IN s ==> norm(f x - x) < e)
+      #|  forall s:real^N->bool e.\n        compact s /\\ &0 < e\n        ==> ?t f. FINITE t /\\ t SUBSET s /\\\n                  f continuous_on s /\\ IMAGE f s SUBSET (convex hull t) /\\\n                  (forall x. x IN s ==> norm(f x - x) < e)
       #|  r:real
       #|  a:real^M
       #|  (g:real^N->real^M) o (h:real^M->real^N)
@@ -65687,26 +65687,26 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  f:real^M->real^N
       #|  r:real
       #|  a:real^M
-      #|  !f:real^M->real^N g:real^N->real^M s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        g continuous_on t /\\ IMAGE g t SUBSET s /\\\n        compact s /\\ AR t\n        ==> ?x. x IN s /\\ g(f x) = x
+      #|  forall f:real^M->real^N g:real^N->real^M s t.\n        f continuous_on s /\\ IMAGE f s SUBSET t /\\\n        g continuous_on t /\\ IMAGE g t SUBSET s /\\\n        compact s /\\ AR t\n        ==> ?x. x IN s /\\ g(f x) = x
       #|  (p /\\ q ==> r) /\\ p ==> (p ==> q) ==> r
       #|  s:real^N->bool
       #|  closure(IMAGE (f:real^N->real^N) s)
       #|  f:real^N->real^N
       #|  \\x:real^N. x
-      #|  !f s:real^N->bool.\n           s retract_of (:real^N) /\\\n           f continuous_on s /\\ IMAGE f s SUBSET s /\\ bounded(IMAGE f s)\n           ==> ?x. x IN s /\\ f x = x
+      #|  forall f s:real^N->bool.\n           s retract_of (:real^N) /\\\n           f continuous_on s /\\ IMAGE f s SUBSET s /\\ bounded(IMAGE f s)\n           ==> ?x. x IN s /\\ f x = x
       #|  s:real^N->bool
       #|  t:real^N->bool
       #|  f:real^N->real^N
       #|  \\x:real^N. x
-      #|  !f s t:real^N->bool.\n     AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET t /\\ t SUBSET s /\\ compact t\n     ==> ?x. x IN t /\\ f x = x
+      #|  forall f s t:real^N->bool.\n     AR s /\\ f continuous_on s /\\ IMAGE f s SUBSET t /\\ t SUBSET s /\\ compact t\n     ==> ?x. x IN t /\\ f x = x
       #|  t:real^N->bool
       #|  s:real^N->bool
       #|  f:real^N->real^N
-      #|  !f s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ t SUBSET s /\\ compact t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET t\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ t SUBSET s /\\ compact t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET t\n        ==> ?x. x IN s /\\ f x = x
       #|  closure(IMAGE (f:real^N->real^N) (:real^N))
       #|  (:real^N)
       #|  f:real^N->real^N
-      #|  !f:real^N->real^N.\n        f continuous_on (:real^N) /\\ bounded (IMAGE f (:real^N))\n        ==> ?x. f x = x
+      #|  forall f:real^N->real^N.\n        f continuous_on (:real^N) /\\ bounded (IMAGE f (:real^N))\n        ==> ?x. f x = x
       #|  y:real^N
       #|  IMAGE (r:real^N->real^N) (closure(IMAGE (f:real^N->real^N) s))
       #|  s:real^N->bool
@@ -65714,7 +65714,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  r:real^N->real^N
       #|  (:real^N)
       #|  s:real^N->bool
-      #|  !f s:real^N->bool.\n        closed s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ bounded(IMAGE f s) /\\\n        IMAGE f (frontier s) SUBSET s\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f s:real^N->bool.\n        closed s /\\ convex s /\\ ~(s = {}) /\\\n        f continuous_on s /\\ bounded(IMAGE f s) /\\\n        IMAGE f (frontier s) SUBSET s\n        ==> ?x. x IN s /\\ f x = x
       #|  v:real^N = c % v <=> (c - &1) % v = vec 0
       #|  (%) (vec 1 dot ((A:real^N^N) ** x)):real^N->real^N
       #|  vec 1 dot ((A:real^N^N) ** x)
@@ -65729,32 +65729,32 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  !x. (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i) /\\ vec 1 dot x = &1\n        ==> &0 < vec 1 dot ((A:real^N^N) ** x)
-      #|  !x. (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)\n        ==> !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= ((A:real^N^N) ** x)$i
-      #|  {x:real^N | vec 1 dot x = &1} INTER\n     {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
+      #|  forall x. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i) /\\ vec 1 dot x = &1\n        ==> &0 < vec 1 dot ((A:real^N^N) ** x)
+      #|  forall x. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)\n        ==> forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= ((A:real^N^N) ** x)$i
+      #|  {x:real^N | vec 1 dot x = &1} INTER\n     {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
       #|  \\x:real^N. inv(vec 1 dot (A ** x)) % ((A:real^N^N) ** x)
       #|  ~(~p /\\ q) <=> q ==> p
       #|  &0
       #|  inv(norm v) % v:real^N
       #|  v:real^N
       #|  ?v. ~(v = vec 0) /\\ (A:real^N^N) ** v = vec 0
-      #|  !A:real^N^N.\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n               ==> &0 <= A$i$j)\n        ==> ?v c. norm v = &1 /\\ &0 <= c /\\ A ** v = c % v
+      #|  forall A:real^N^N.\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n               ==> &0 <= A$i$j)\n        ==> ?v c. norm v = &1 /\\ &0 <= c /\\ A ** v = c % v
       #|  interval_bij (a:real^N,b:real^N) (u:real^N,v:real^N) (x:real^N) =\n    (lambda i. u$i + (x$i - a$i) / (b$i - a$i) * (v$i - u$i)):real^N
       #|  interval_bij (a,b) (u,v) =\n        \\x. (lambda i. (v$i - u$i) / (b$i - a$i) * x$i) +\n            (lambda i. u$i - (v$i - u$i) / (b$i - a$i) * a$i)
-      #|  !a b u v x. (interval_bij (a:real^N,b:real^N) (u:real^N,v:real^N))\n                  continuous at x
-      #|  !a b u v s. interval_bij (a,b) (u,v) continuous_on s
+      #|  forall a b u v x. (interval_bij (a:real^N,b:real^N) (u:real^N,v:real^N))\n                  continuous at x
+      #|  forall a b u v s. interval_bij (a,b) (u,v) continuous_on s
       #|  a <= x /\\ x <= b ==> x - a <= &1 * (b - a)
       #|  (a:real^N)$i <= (b:real^N)$i
       #|  u + x <= v <=> x <= &1 * (v - u)
       #|  u <= u + x <=> &0 <= x
-      #|  !a b u v x:real^N.\n        x IN interval[a,b] /\\ ~(interval[u,v] = {})\n        ==> (interval_bij (a,b) (u,v) x) IN interval[u,v]
-      #|  !a b u v x:real^N.\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> a$i < b$i /\\ u$i < v$i)\n        ==> interval_bij (a,b) (u,v) (interval_bij (u,v) (a,b) x) = x
+      #|  forall a b u v x:real^N.\n        x IN interval[a,b] /\\ ~(interval[u,v] = {})\n        ==> (interval_bij (a,b) (u,v) x) IN interval[u,v]
+      #|  forall a b u v x:real^N.\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> a$i < b$i /\\ u$i < v$i)\n        ==> interval_bij (a,b) (u,v) (interval_bij (u,v) (a,b) x) = x
       #|  1..2
       #|  infnorm (x:real^2) = max (abs(x$1)) (abs(x$2))
       #|  infnorm (x:real^2) = &1 <=>\n        abs(x$1) <= &1 /\\ abs(x$2) <= &1 /\\\n        (x$1 = -- &1 \\/ x$1 = &1 \\/ x$2 = -- &1 \\/ x$2 = &1)
       #|  infnorm (x:real^2) = &1 ==> abs(x$1) <= &1 /\\ abs(x$2) <= &1
       #|  IMAGE f s SUBSET t ==> x IN s ==> f x IN t
-      #|  !z:real^2. abs(z$1) <= &1 /\\ abs(z$2) <= &1 <=>\n                           z IN interval[--vec 1,vec 1]
+      #|  forall z:real^2. abs(z$1) <= &1 /\\ abs(z$2) <= &1 <=>\n                           z IN interval[--vec 1,vec 1]
       #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(&0 < x$2 - &1)
       #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(x$2 - -- &1 < &0)
       #|  abs(x$1) <= &1 /\\ abs(x$2) <= &1 ==> ~(&1 - x$1 < &0)
@@ -65763,7 +65763,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  x = -- &1 ==> x < &0
       #|  --x = &1 ==> x < &0
       #|  --x = -- &1 ==> &0 < x
-      #|  (!x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> (&0 < ((sqprojection:real^2->real^2) x)$i <=> &0 < x$i)) /\\\n    (!x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> ((sqprojection x)$i < &0 <=> x$i < &0))
+      #|  (forall x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> (&0 < ((sqprojection:real^2->real^2) x)$i <=> &0 < x$i)) /\\\n    (forall x i. 1 <= i /\\ i <= 2 /\\ ~(x = vec 0)\n           ==> ((sqprojection x)$i < &0 <=> x$i < &0))
       #|  infnorm(x:real^2) = &1
       #|  x:real^2
       #|  x:real^2
@@ -65771,13 +65771,13 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  interval[--vec 1:real^1,vec 1]
       #|  interval[--vec 1,vec 1]:real^2->bool
       #|  (\\w. (negatex:real^2->real^2)\n                       (sqprojection(f(lift(w$1)) - g(lift(w$2)):real^2)))\n                  :real^2->real^2
-      #|  !z. ~(z = vec 0) ==> infnorm((sqprojection:real^2->real^2) z) = &1
-      #|  !z:real^2. infnorm(negatex z:real^2) = infnorm z
+      #|  forall z. ~(z = vec 0) ==> infnorm((sqprojection:real^2->real^2) z) = &1
+      #|  forall z:real^2. infnorm(negatex z:real^2) = infnorm z
       #|  (negatex:real^2->real^2) = \\x. vector[--(x$1); x$2]
       #|  sqprojection = \\z:real^2. inv(infnorm z) % z
       #|  ~(a /\\ b /\\ c) <=> a /\\ b ==> ~c
       #|  p <=> ~ ~p
-      #|  !f:real^1->real^2 g:real^1->real^2.\n        IMAGE f (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        IMAGE g (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        f continuous_on interval[--vec 1,vec 1] /\\\n        g continuous_on interval[--vec 1,vec 1] /\\\n        f(--vec 1)$1 = -- &1 /\\ f(vec 1)$1 = &1 /\\\n        g(--vec 1)$2 = -- &1 /\\ g(vec 1)$2 = &1\n        ==> ?s t. s IN interval[--vec 1,vec 1] /\\\n                  t IN interval[--vec 1,vec 1] /\\\n                  f(s) = g(t)
+      #|  forall f:real^1->real^2 g:real^1->real^2.\n        IMAGE f (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        IMAGE g (interval[--vec 1,vec 1]) SUBSET interval[--vec 1,vec 1] /\\\n        f continuous_on interval[--vec 1,vec 1] /\\\n        g continuous_on interval[--vec 1,vec 1] /\\\n        f(--vec 1)$1 = -- &1 /\\ f(vec 1)$1 = &1 /\\\n        g(--vec 1)$2 = -- &1 /\\ g(vec 1)$2 = &1\n        ==> ?s t. s IN interval[--vec 1,vec 1] /\\\n                  t IN interval[--vec 1,vec 1] /\\\n                  f(s) = g(t)
       #|  inv(&2) % (x + x) = x
       #|  inv(&2) % (--x + x) = vec 0
       #|  (iscale:real^1->real^1) continuous_on interval [--vec 1,vec 1]
@@ -65785,8 +65785,8 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (g:real^1->real^2) o (iscale:real^1->real^1)
       #|  (f:real^1->real^2) o (iscale:real^1->real^1)
       #|  iscale = \\z:real^1. inv(&2) % (z + vec 1)
-      #|  !f:real^1->real^2 g:real^1->real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[--vec 1,vec 1] /\\\n        path_image g SUBSET interval[--vec 1,vec 1] /\\\n        (pathstart f)$1 = -- &1 /\\ (pathfinish f)$1 = &1 /\\\n        (pathstart g)$2 = -- &1 /\\ (pathfinish g)$2 = &1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
-      #|  (!x. x IN s ==> g(f(x)) = x) ==> x IN IMAGE f s ==> g x IN s
+      #|  forall f:real^1->real^2 g:real^1->real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[--vec 1,vec 1] /\\\n        path_image g SUBSET interval[--vec 1,vec 1] /\\\n        (pathstart f)$1 = -- &1 /\\ (pathfinish f)$1 = &1 /\\\n        (pathstart g)$2 = -- &1 /\\ (pathfinish g)$2 = &1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
+      #|  (forall x. x IN s ==> g(f(x)) = x) ==> x IN IMAGE f s ==> g x IN s
       #|  z:real^2
       #|  interval_bij (a,b) (--vec 1,vec 1) o (g:real^1->real^2)
       #|  interval_bij (a,b) (--vec 1,vec 1) o (f:real^1->real^2)
@@ -65812,22 +65812,22 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (a:real^2)$1 <= (b:real^2)$1
       #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
       #|  ~(interval[a:real^2,b] = {})
-      #|  !f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$1 = a$1 /\\ (pathfinish f)$1 = b$1 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = b$2\n        ==> ?z. z IN path_image f /\\ z IN path_image g
+      #|  forall f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$1 = a$1 /\\ (pathfinish f)$1 = b$1 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = b$2\n        ==> ?z. z IN path_image f /\\ z IN path_image g
       #|  interval_bij (--vec 1,vec 1) (a,b) (z:real^2)
       #|  vec 0:real^2 = &0 % basis 2
       #|  b:real^2
       #|  a:real^2
-      #|  !a:real^2 b:real^2 x:real^2.\n      a$1 = b$1\n      ==> (x IN segment[a,b] <=>\n           x$1 = a$1 /\\ x$1 = b$1 /\\\n           (a$2 <= x$2 /\\ x$2 <= b$2 \\/ b$2 <= x$2 /\\ x$2 <= a$2))
+      #|  forall a:real^2 b:real^2 x:real^2.\n      a$1 = b$1\n      ==> (x IN segment[a,b] <=>\n           x$1 = a$1 /\\ x$1 = b$1 /\\\n           (a$2 <= x$2 /\\ x$2 <= b$2 \\/ b$2 <= x$2 /\\ x$2 <= a$2))
       #|  vec 0:real^2 = &0 % basis 1
       #|  b:real^2
       #|  a:real^2
-      #|  !a:real^2 b:real^2 x:real^2.\n      a$2 = b$2\n      ==> (x IN segment[a,b] <=>\n           x$2 = a$2 /\\ x$2 = b$2 /\\\n           (a$1 <= x$1 /\\ x$1 <= b$1 \\/ b$1 <= x$1 /\\ x$1 <= a$1))
+      #|  forall a:real^2 b:real^2 x:real^2.\n      a$2 = b$2\n      ==> (x IN segment[a,b] <=>\n           x$2 = a$2 /\\ x$2 = b$2 /\\\n           (a$1 <= x$1 /\\ x$1 <= b$1 \\/ b$1 <= x$1 /\\ x$1 <= a$1))
       #|  z:real^2
       #|  path_image (g:real^1->real^2) SUBSET interval [a,b]
       #|  z:real^2
       #|  path_image (f:real^1->real^2) SUBSET interval [a,b]
       #|  ~(z IN {x,y}) <=> ~(z = x) /\\ ~(z = y)
-      #|  !f s:real^2->bool. path_image f UNION s =\n                       path_image f UNION (s DIFF {pathstart f,pathfinish f})
+      #|  forall f s:real^2->bool. path_image f UNION s =\n                       path_image f UNION (s DIFF {pathstart f,pathfinish f})
       #|  z:real^2
       #|  interval[a:real^2,b:real^2]
       #|  s SUBSET u /\\ t SUBSET u ==> (s UNION t) SUBSET u
@@ -65838,7 +65838,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  pathstart (f:real^1->real^2) IN interval[a,b] /\\\n    pathfinish f IN interval[a,b] /\\\n    pathstart g IN interval[a,b] /\\\n    pathfinish g IN interval[a,b]
       #|  s SUBSET t ==> ~(s = {}) ==> ~(t = {})
       #|  ~(interval[a:real^2,b] = {})
-      #|  !f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$2 = a$2 /\\ (pathfinish f)$2 = a$2 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = a$2 /\\\n        (pathstart f)$1 < (pathstart g)$1 /\\\n        (pathstart g)$1 < (pathfinish f)$1 /\\\n        (pathfinish f)$1 < (pathfinish g)$1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
+      #|  forall f g a b:real^2.\n        path f /\\ path g /\\\n        path_image f SUBSET interval[a,b] /\\\n        path_image g SUBSET interval[a,b] /\\\n        (pathstart f)$2 = a$2 /\\ (pathfinish f)$2 = a$2 /\\\n        (pathstart g)$2 = a$2 /\\ (pathfinish g)$2 = a$2 /\\\n        (pathstart f)$1 < (pathstart g)$1 /\\\n        (pathstart g)$1 < (pathfinish f)$1 /\\\n        (pathfinish f)$1 < (pathfinish g)$1\n        ==> ?z. z IN path_image f /\\ z IN path_image g
       #|  (s UNION t) UNION u =\n                                         u UNION t UNION s
       #|  ~(c = {}) /\\ c SUBSET (:real^N) DIFF s ==> ~(c SUBSET s)
       #|  (z:real^N) IN s
@@ -65849,24 +65849,24 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  r:real^N->real^N
       #|  open((:real^N) DIFF s)
       #|  y:real^N
-      #|  !s c. compact s /\\ AR s /\\ c IN components((:real^N) DIFF s)\n         ==> ~bounded c
+      #|  forall s c. compact s /\\ AR s /\\ c IN components((:real^N) DIFF s)\n         ==> ~bounded c
       #|  s:real^N->bool
-      #|  !s. 2 <= dimindex(:N) /\\ compact s /\\ AR s\n       ==> connected((:real^N) DIFF s)
-      #|  !s:real^N->bool.\n        2 <= dimindex(:N) /\\ compact s /\\ AR s\n        ==> path_connected((:real^N) DIFF s)
+      #|  forall s. 2 <= dimindex(:N) /\\ compact s /\\ AR s\n       ==> connected((:real^N) DIFF s)
+      #|  forall s:real^N->bool.\n        2 <= dimindex(:N) /\\ compact s /\\ AR s\n        ==> path_connected((:real^N) DIFF s)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> connected((:real^N) DIFF s)
-      #|  !s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> path_connected((:real^N) DIFF s)
+      #|  forall s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> connected((:real^N) DIFF s)
+      #|  forall s:real^N->bool t:real^M->bool.\n        2 <= dimindex(:N) /\\ s homeomorphic t /\\ convex t /\\ compact t\n        ==> path_connected((:real^N) DIFF s)
       #|  (:real^N)
-      #|  !p. arc p\n       ==> ?f. f continuous_on (:real^N) /\\\n               IMAGE f (:real^N) SUBSET path_image p /\\\n               (!x. x IN path_image p ==> f x = x)
+      #|  forall p. arc p\n       ==> ?f. f continuous_on (:real^N) /\\\n               IMAGE f (:real^N) SUBSET path_image p /\\\n               (forall x. x IN path_image p ==> f x = x)
       #|  p:real^1->real^N
       #|  interval[vec 0:real^1,vec 1]
       #|  path_image p:real^N->bool
-      #|  !p. 2 <= dimindex(:N) /\\ arc p\n       ==> path_connected((:real^N) DIFF path_image p)
-      #|  !p. 2 <= dimindex(:N) /\\ arc p\n       ==> connected((:real^N) DIFF path_image p)
+      #|  forall p. 2 <= dimindex(:N) /\\ arc p\n       ==> path_connected((:real^N) DIFF path_image p)
+      #|  forall p. 2 <= dimindex(:N) /\\ arc p\n       ==> connected((:real^N) DIFF path_image p)
       #|  2 <= n <=> 1 <= n /\\ ~(n = 1)
       #|  dimindex(:N) = 1
-      #|  !p:real^1->real^N. arc p ==> inside(path_image p) = {}
-      #|  !g x:real^N.\n        simple_path g /\\ x IN inside(path_image g)\n        ==> pathfinish g = pathstart g
+      #|  forall p:real^1->real^N. arc p ==> inside(path_image p) = {}
+      #|  forall g x:real^N.\n        simple_path g /\\ x IN inside(path_image g)\n        ==> pathfinish g = pathstart g
       #|  q:real^N
       #|  c:real^N->bool
       #|  cball(p:real^N,b) DIFF s
@@ -65893,9 +65893,9 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  :real
       #|  :real
       #|  x:real^N
-      #|  !x:real^N. x IN closure c ==> dist(x,f x) <= (b - a) / &2
-      #|  !x. x IN closure c INTER h ==> (f:real^N->real^N) x = r x
-      #|  !x:real^N. x IN frontier c ==> f x = x
+      #|  forall x:real^N. x IN closure c ==> dist(x,f x) <= (b - a) / &2
+      #|  forall x. x IN closure c INTER h ==> (f:real^N->real^N) x = r x
+      #|  forall x:real^N. x IN frontier c ==> f x = x
       #|  f:real^N->real^N = \\x. r x - g' x
       #|  g':real^N->real^N
       #|  s SUBSET t ==> s DIFF u SUBSET t
@@ -65906,7 +65906,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  IMAGE (g:real^N->real^N) (h UNION frontier c) SUBSET D
       #|  D = cball(vec 0:real^N,(b - a) / &4)
       #|  \\x:real^N. if x IN frontier c then r x - x else vec 0
-      #|  ?g. g continuous_on (h UNION frontier c) /\\\n        (!x. x IN h ==> (g:real^N->real^N) x = vec 0) /\\\n        (!x. x IN frontier c ==> g x = r x - x)
+      #|  ?g. g continuous_on (h UNION frontier c) /\\\n        (forall x. x IN h ==> (g:real^N->real^N) x = vec 0) /\\\n        (forall x. x IN frontier c ==> g x = r x - x)
       #|  h INTER g SUBSET s ==> f SUBSET g ==> h INTER f SUBSET s
       #|  s DIFF t = s INTER (UNIV DIFF t)
       #|  h INTER g SUBSET s ==> f SUBSET g ==> h INTER f SUBSET s
@@ -65920,7 +65920,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  FINITE {c | c IN components(cball(p:real^N,b) DIFF s) /\\\n                ~(c INTER (cball(p,b) DIFF interior sd) = {})}
       #|  compact(sd:real^N->bool)
       #|  (s:real^N->bool) SUBSET sd
-      #|  vec 0 IN t /\\ (!x:real^N. f x (vec 0) = x)\n        ==> s SUBSET {f x y | x IN s /\\ y IN t}
+      #|  vec 0 IN t /\\ (forall x:real^N. f x (vec 0) = x)\n        ==> s SUBSET {f x y | x IN s /\\ y IN t}
       #|  {x + e:real^N | x IN s /\\ e IN ball(vec 0,d)}
       #|  (s:real^N->bool) SUBSET interior sd
       #|  sd = {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)}
@@ -65951,12 +65951,12 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  {f x y | x IN {} /\\ P y} SUBSET u
       #|  s:real^N->bool = {}
       #|  ?d. &0 < d /\\ {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)} SUBSET u
-      #|  ?d. &0 < d /\\ {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)} SUBSET u /\\\n        !w. w IN {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)}\n            ==> dist(w,r w) <= (b - a) / &4
+      #|  ?d. &0 < d /\\ {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)} SUBSET u /\\\n        forall w. w IN {x + e:real^N | x IN s /\\ e IN cball(vec 0,d)}\n            ==> dist(w,r w) <= (b - a) / &4
       #|  r:real^N->real^N
       #|  u:real^N->bool
       #|  (:real^N)
       #|  s:real^N->bool
-      #|  !s p:real^N a b.\n        compact s /\\ ANR s /\\ a < b\n        ==> FINITE {c | c IN components(cball(p,b) DIFF s) /\\\n                        ~(closure c INTER cball(p,a) = {})}
+      #|  forall s p:real^N a b.\n        compact s /\\ ANR s /\\ a < b\n        ==> FINITE {c | c IN components(cball(p,b) DIFF s) /\\\n                        ~(closure c INTER cball(p,a) = {})}
       #|  :real
       #|  :real
       #|  d SUBSET c ==> p IN s DIFF c ==> ~(p IN d)
@@ -65965,15 +65965,15 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  d INTER cball(x:real^N,r) = {} ==> ball(x,r) SUBSET cball(x,r)\n                  ==> ball(x,r) INTER d = {}
       #|  d:real^N->bool
       #|  (:real^N) DIFF ball(p,a / &2)
-      #|  !t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
+      #|  forall t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
       #|  ~p ==> q \\/ p ==> q
       #|  x IN s ==> s SUBSET t ==> x IN t
       #|  s SUBSET t ==> s INTER c SUBSET t INTER c
       #|  closure(ball(p:real^N,a) INTER c)
-      #|  !s. s SUBSET t /\\ x IN s ==> x IN t
+      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
       #|  {x | x IN s /\\ ~P x} UNION {x | x IN s /\\ P x} = s
       #|  p IN closure\n         (UNIONS {d | d IN components (cball(p:real^N,a) INTER c) /\\\n                      ~(closure d INTER cball (p,a / &2) = {})} UNION\n          UNIONS {d | d IN components (cball(p,a) INTER c) /\\\n                      closure d INTER cball (p,a / &2) = {}})
-      #|  s = t ==> !x. x IN s ==> x IN t
+      #|  s = t ==> forall x. x IN s ==> x IN t
       #|  p:real^N
       #|  d:real^N->bool
       #|  c:real^N->bool
@@ -65985,10 +65985,10 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  a / &2
       #|  p:real^N
       #|  s:real^N->bool
-      #|  !s p:real^N a b c.\n          compact s /\\ ANR s /\\\n          &0 < a /\\ cball(p,a) SUBSET b /\\\n          c IN components(b DIFF s) /\\\n          p IN frontier c\n          ==> ?d. d IN components(cball(p,a) INTER c) /\\ p IN frontier d
-      #|  (!x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
+      #|  forall s p:real^N a b c.\n          compact s /\\ ANR s /\\\n          &0 < a /\\ cball(p,a) SUBSET b /\\\n          c IN components(b DIFF s) /\\\n          p IN frontier c\n          ==> ?d. d IN components(cball(p,a) INTER c) /\\ p IN frontier d
+      #|  (forall x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
       #|  a SUBSET g ==> g DELETE z SUBSET u ==> a DELETE z SUBSET u
-      #|  (!x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (!x. x IN i DELETE z ==> f x IN c)
+      #|  (forall x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (forall x. x IN i DELETE z ==> f x IN c)
       #|  a:real^1->real^N
       #|  p:real^N
       #|  s DIFF t = s INTER (UNIV DIFF t)
@@ -66000,9 +66000,9 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  (:real^1) DELETE vec 0
       #|  x:real^1
       #|  (u:num->real^N->bool) m
-      #|  !s. s SUBSET t /\\ x IN s ==> x IN t
+      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
       #|  cball(p:real^N,min a (inv(&2 pow m))) DIFF s
-      #|  !s. s SUBSET t /\\ x IN s ==> x IN t
+      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
       #|  min a (inv(&2 pow m))
       #|  &1 <= &2
       #|  inv(&2 pow m)
@@ -66024,7 +66024,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  e:real
       #|  x:real^1 = vec 0
       #|  x:real^1
-      #|  path g /\\ pathstart g = (p:real^N) /\\\n    (!t. t IN interval[vec 0,vec 1] DELETE vec 0 ==> g t IN c)
+      #|  path g /\\ pathstart g = (p:real^N) /\\\n    (forall t. t IN interval[vec 0,vec 1] DELETE vec 0 ==> g t IN c)
       #|  g = \\x. if x = vec 0 then p else (h:real^1->real^N) x
       #|  h:real^1->real^N
       #|  drop x = inv(&2 pow (SUC m))
@@ -66032,7 +66032,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  n = SUC m
       #|  &1 < &2
       #|  SUC m < n
-      #|  (~(t = {}) ==> !x. x IN s /\\ x IN t ==> P x)\n        ==> !x. x IN s INTER t ==> P x
+      #|  (~(t = {}) ==> forall x. x IN s /\\ x IN t ==> P x)\n        ==> forall x. x IN s INTER t ==> P x
       #|  n:num
       #|  m:num
       #|  s SUBSET t DELETE a <=> ~(a IN s) /\\ s SUBSET t
@@ -66057,7 +66057,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  c:num
       #|  b:num
       #|  a:num
-      #|  (!a b c. a IN s /\\ b IN s /\\ c IN s /\\ ~(a = b) /\\ ~(a = c) /\\ ~(b = c)\n                 ==> ?x y. x IN s /\\ y IN s /\\ x + 2 <= y) /\\\n        (!x y. x IN s /\\ y IN s /\\ x + 2 <= y ==> F)\n        ==> ~(?a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                  ~(a = b) /\\ ~(a = c) /\\ ~(b = c))
+      #|  (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\ ~(a = b) /\\ ~(a = c) /\\ ~(b = c)\n                 ==> ?x y. x IN s /\\ y IN s /\\ x + 2 <= y) /\\\n        (forall x y. x IN s /\\ y IN s /\\ x + 2 <= y ==> F)\n        ==> ~(?a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                  ~(a = b) /\\ ~(a = c) /\\ ~(b = c))
       #|  ~(?a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                  ~(a = b) /\\ ~(a = c) /\\ ~(b = c))\n        ==> ?a b. s SUBSET {a,b}
       #|  (?a b. s SUBSET {a,b}) ==> FINITE s
       #|  {i | ~(interval[lift(inv(&2 pow SUC i)),lift(inv(&2 pow i))] INTER\n               ball(x:real^1,inv(&2 pow n)) = {})}
@@ -66085,16 +66085,16 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  cball(p:real^N,min a (inv(&2 pow n))) DIFF s
       #|  path_component (u n) (q n:real^N) (q(SUC n))
       #|  n:num
-      #|  !n. ?f. (f:real^1->real^N) continuous_on\n            interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))] /\\\n            IMAGE f (interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))])\n            SUBSET u n /\\\n            f(lift(inv(&2 pow n))) = q n /\\\n            f(lift(inv(&2 pow (SUC n)))) = q(SUC n)
+      #|  forall n. ?f. (f:real^1->real^N) continuous_on\n            interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))] /\\\n            IMAGE f (interval[lift(inv(&2 pow (SUC n))),lift(inv(&2 pow n))])\n            SUBSET u n /\\\n            f(lift(inv(&2 pow n))) = q n /\\\n            f(lift(inv(&2 pow (SUC n)))) = q(SUC n)
       #|  q:num->real^N
-      #|  !n. ~((u:num->real^N->bool) n = {})
+      #|  forall n. ~((u:num->real^N->bool) n = {})
       #|  (u:num->real^N->bool) n
       #|  c:real^N->bool
       #|  cball(p:real^N,min a (inv(&2 pow n)))
       #|  b DIFF s:real^N->bool
       #|  n:num
-      #|  !n. u n IN components(cball(p:real^N,min a (inv(&2 pow n))) DIFF s)
-      #|  !n. (u:num->real^N->bool) n SUBSET c
+      #|  forall n. u n IN components(cball(p:real^N,min a (inv(&2 pow n))) DIFF s)
+      #|  forall n. (u:num->real^N->bool) n SUBSET c
       #|  u:num->real^N->bool
       #|  n SUBSET s\n            ==> (b INTER n) INTER (b INTER s) INTER c =\n                (b INTER n) INTER c
       #|  e:real^N->bool
@@ -66121,20 +66121,20 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  min a (&1)
       #|  p:real^N
       #|  s:real^N->bool
-      #|  ?u. (!n. u n IN\n             components(cball(p:real^N,min a (inv(&2 pow n))) INTER c) /\\\n             p IN frontier(u n)) /\\\n        (!n. u(SUC n) SUBSET u n)
+      #|  ?u. (forall n. u n IN\n             components(cball(p:real^N,min a (inv(&2 pow n))) INTER c) /\\\n             p IN frontier(u n)) /\\\n        (forall n. u(SUC n) SUBSET u n)
       #|  a:real
-      #|  !s c p:real^N b.\n        compact s /\\ ANR s /\\\n        c IN components(b DIFF s) /\\ p IN frontier c /\\ p IN interior b\n        ==> ?g. arc g /\\ pathfinish g = p /\\\n                !t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
+      #|  forall s c p:real^N b.\n        compact s /\\ ANR s /\\\n        c IN components(b DIFF s) /\\ p IN frontier c /\\ p IN interior b\n        ==> ?g. arc g /\\ pathfinish g = p /\\\n                forall t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
       #|  m + 1
       #|  n:num
-      #|  (!x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
+      #|  (forall x. x IN i DELETE z ==> g x IN c)\n        ==> g z = p ==> IMAGE g i DELETE p SUBSET c
       #|  a SUBSET g ==> g DELETE z SUBSET u ==> a DELETE z SUBSET u
-      #|  (!x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (!x. x IN i DELETE z ==> f x IN c)
+      #|  (forall x y. x IN i /\\ y IN i /\\ f x = f y ==> x = y)\n        ==> z IN i /\\ IMAGE f i DELETE f z SUBSET c\n            ==> (forall x. x IN i DELETE z ==> f x IN c)
       #|  h:real^1->real^N
       #|  y:real^N
       #|  x:real^N
       #|  g:real^1->real^N
       #|  t:real^1
-      #|  !t. t IN interval[vec 0,vec 1] DELETE vec 1\n        ==> (g:real^1->real^N) t IN c
+      #|  forall t. t IN interval[vec 0,vec 1] DELETE vec 1\n        ==> (g:real^1->real^N) t IN c
       #|  path(g:real^1->real^N)
       #|  pathstart g:real^N = x /\\ pathfinish g = y
       #|  g:real^1->real^N = g1 ++ g2
@@ -66146,7 +66146,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  y:real^N
       #|  c:real^N->bool
       #|  s:real^N->bool
-      #|  !s c x y.\n        compact s /\\ ANR s /\\\n        c IN components((:real^N) DIFF s) /\\ x IN c /\\ y IN frontier c\n        ==> ?g. arc g /\\ pathstart g = x /\\ pathfinish g = y /\\\n                !t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
+      #|  forall s c x y.\n        compact s /\\ ANR s /\\\n        c IN components((:real^N) DIFF s) /\\ x IN c /\\ y IN frontier c\n        ==> ?g. arc g /\\ pathstart g = x /\\ pathfinish g = y /\\\n                forall t. t IN interval[vec 0,vec 1] DELETE (vec 1) ==> g(t) IN c
       #|  d:real^N->bool
       #|  c INTER u:real^N->bool
       #|  r:real^1
@@ -66182,11 +66182,11 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  p:real^N
       #|  s:real^N->bool
       #|  inf ((b / &2) INSERT\n             IMAGE (\\c. setdist({p:real^N},c))\n                   {c | c IN components (cball (p,b) DIFF s) /\\\n                        ~(closure c INTER cball (p,b / &2) = {}) /\\\n                        ~(p IN closure c)})
-      #|  ?a. &0 < a /\\ a < b /\\\n          !d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
+      #|  ?a. &0 < a /\\ a < b /\\\n          forall d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
       #|  open(c:real^N->bool)
       #|  b:real
       #|  p:real^N
-      #|  !s c u p.\n          compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n          p IN frontier c /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  !y. y IN c INTER v\n                      ==> path_component ((p INSERT c) INTER u) p y
+      #|  forall s c u p.\n          compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n          p IN frontier c /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  forall y. y IN c INTER v\n                      ==> path_component ((p INSERT c) INTER u) p y
       #|  (q:real^N) INSERT c INTER v
       #|  (p:real^N) INSERT c INTER u
       #|  r:real^N
@@ -66216,7 +66216,7 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  p:real^N
       #|  uu:real^N->bool
       #|  open(c:real^N->bool)
-      #|  !s c t.\n        compact s /\\\n        ANR s /\\\n        c IN components ((:real^N) DIFF s) /\\\n        c SUBSET t /\\\n        t SUBSET closure c\n        ==> locally path_connected t
+      #|  forall s c t.\n        compact s /\\\n        ANR s /\\\n        c IN components ((:real^N) DIFF s) /\\\n        c SUBSET t /\\\n        t SUBSET closure c\n        ==> locally path_connected t
       #|  c:real^N->bool
       #|  cball(p:real^N,b)
       #|  c:real^N->bool
@@ -66253,10 +66253,10 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  p:real^N
       #|  s:real^N->bool
       #|  inf ((b / &2) INSERT\n             IMAGE (\\c. setdist({p:real^N},c))\n                   {c | c IN components (cball (p,b) DIFF s) /\\\n                        ~(closure c INTER cball (p,b / &2) = {}) /\\\n                        ~(p IN closure c)})
-      #|  ?a. &0 < a /\\ a < b /\\\n          !d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
+      #|  ?a. &0 < a /\\ a < b /\\\n          forall d x. d IN components(cball(p,b) DIFF s) /\\\n                x IN d /\\ x IN ball(p:real^N,a)\n                ==> p IN closure d
       #|  b:real
       #|  p:real^N
-      #|  !s u p:real^N.\n          compact s /\\ ANR s /\\ p IN frontier s /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  !y. y IN v DIFF s\n                      ==> path_component (p INSERT (u DIFF s)) p y
+      #|  forall s u p:real^N.\n          compact s /\\ ANR s /\\ p IN frontier s /\\ open u /\\ p IN u\n          ==> ?v. open v /\\ p IN v /\\ v SUBSET u /\\\n                  forall y. y IN v DIFF s\n                      ==> path_component (p INSERT (u DIFF s)) p y
       #|  (p:real^N) INSERT (u DIFF s)
       #|  (q:real^N) INSERT (v DIFF s)
       #|  (p:real^N) INSERT (u DIFF s)
@@ -66283,18 +66283,18 @@ test "Multivariate/degree matches Multivariate/degree.ml" {
       #|  u:real^N->bool
       #|  p:real^N
       #|  uu:real^N->bool
-      #|  !s t. compact s /\\ ANR s /\\\n         (:real^N) DIFF s SUBSET t /\\ DISJOINT t (interior s)\n         ==> locally path_connected t
+      #|  forall s t. compact s /\\ ANR s /\\\n         (:real^N) DIFF s SUBSET t /\\ DISJOINT t (interior s)\n         ==> locally path_connected t
       #|  path_image g:real^N->bool
-      #|  !g s:real^N->bool.\n        2 <= dimindex(:N) /\\ simple_path g /\\\n        (:real^N) DIFF path_image g SUBSET s\n        ==> locally path_connected s
+      #|  forall g s:real^N->bool.\n        2 <= dimindex(:N) /\\ simple_path g /\\\n        (:real^N) DIFF path_image g SUBSET s\n        ==> locally path_connected s
       #|  i SUBSET p /\\ DISJOINT {a,b} i\n    ==> DISJOINT (UNIV DIFF (p DIFF {a,b})) i
       #|  path_image g:real^N->bool
-      #|  !g. simple_path g\n       ==> locally path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
+      #|  forall g. simple_path g\n       ==> locally path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
       #|  c:real^N->bool
-      #|  !s c t.\n        compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n        c SUBSET t /\\ t SUBSET closure c\n        ==> path_connected t
+      #|  forall s c t.\n        compact s /\\ ANR s /\\ c IN components((:real^N) DIFF s) /\\\n        c SUBSET t /\\ t SUBSET closure c\n        ==> path_connected t
       #|  (:real^N) DIFF path_image g
-      #|  !g s:real^N->bool.\n        2 <= dimindex(:N) /\\ arc g /\\ (:real^N) DIFF path_image g SUBSET s\n        ==> path_connected s
+      #|  forall g s:real^N->bool.\n        2 <= dimindex(:N) /\\ arc g /\\ (:real^N) DIFF path_image g SUBSET s\n        ==> path_connected s
       #|  g:real^1->real^N
-      #|  !g. 2 <= dimindex(:N) /\\ arc g\n       ==> path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
+      #|  forall g. 2 <= dimindex(:N) /\\ arc g\n       ==> path_connected\n            ((:real^N) DIFF (path_image g DIFF {pathstart g,pathfinish g}))
       #|brouwer_degree1 =  |- (#!:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) f:fun(cart(real,'N),cart(real,'N)))) (((#COND:fun(bool,fun(int,fun(int,int))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#brouwer_degree2:fun(num,fun(fun(fun(num,real),fun(num,real)),int)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#o:fun(fun(cart(real,'N),fun(num,real)),fun(fun(fun(num,real),cart(real,'N)),fun(fun(num,real),fun(num,real)))) (\x:cart(real,'N). (\i:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) n:num))) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#o:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(fun(num,real),cart(real,'N)),fun(fun(num,real),cart(real,'N)))) f:fun(cart(real,'N),cart(real,'N))) (\x:fun(num,real). (#lambda:fun(fun(num,real),cart(real,'N)) (\i:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) n:num))) (x:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|brouwer_degree =  |- (#!:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). ((#=:fun(int,fun(int,bool)) (#brouwer_degree:fun(fun(cart(real,'N),cart(real,'N)),int) f:fun(cart(real,'N),cart(real,'N)))) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) f:fun(cart(real,'N),cart(real,'N))))))
       #|BROUWER_DEGREE1_EQ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). (#!:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\g:fun(cart(real,'N),cart(real,'N)). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) ((#INTER:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#sphere:fun(prod(cart(real,'N),real),fun(cart(real,'N),bool)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#span:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) ((#IMAGE:fun(fun(num,cart(real,'N)),fun(fun(num,bool),fun(cart(real,'N),bool))) #basis:fun(num,cart(real,'N))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)))))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) (f:fun(cart(real,'N),cart(real,'N)) x:cart(real,'N))) (g:fun(cart(real,'N),cart(real,'N)) x:cart(real,'N))))))) ((#=:fun(int,fun(int,bool)) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) f:fun(cart(real,'N),cart(real,'N)))) ((#brouwer_degree1:fun(num,fun(fun(cart(real,'N),cart(real,'N)),int)) n:num) g:fun(cart(real,'N),cart(real,'N)))))))))))

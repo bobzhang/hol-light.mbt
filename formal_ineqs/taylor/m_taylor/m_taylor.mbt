@@ -520,7 +520,7 @@ fn step_23() -> Unit raise {
   let t61 = @simp.rewrite_tac(@list.List([@cart.vector()]))
   let t60 = @tactics.repeat_tac(@tactics.gen_tac)
   let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.in_numseg()])), t60), @tactics.disch_tac), t61), t62), t63)
-  vector_component_c.set(@tactics.prove(@parser.parse_term("!l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l"), t64))
+  vector_component_c.set(@tactics.prove(@parser.parse_term("forall l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l"), t64))
 }
 
 ///|
@@ -594,7 +594,7 @@ fn step_25() -> Unit raise {
   })
   let t80 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@lists.length(), @theorems.eq_sym_eq(), @lists.length_eq_nil()]))), t78), t79), @tactics.all_tac])
   let t90 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t80), @lists.list_induct_tac), t81), @list.List([@int.arith_tac, @tactics.all_tac])), t82), @tactics.disch_tac), t83), t88), t89)
-  all2_all_zip_c.set(@tactics.prove(@parser.parse_term("!(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))"), t90))
+  all2_all_zip_c.set(@tactics.prove(@parser.parse_term("forall(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))"), t90))
 }
 
 ///|
@@ -616,7 +616,7 @@ fn step_26() -> Unit raise {
   let t92 = @tactics.try_tac(@int.arith_tac)
   let t91 = @simp.rewrite_tac(@list.List([@lists.zip(), @lists.length()]))
   let t97 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @lists.list_induct_tac), t91), t92), @ssreflect.case), t93), @tactics.gen_tac), t94), @tactics.strip_tac), t95), t96)
-  el_zip_c.set(@tactics.prove(@parser.parse_term("!(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)"), t97))
+  el_zip_c.set(@tactics.prove(@parser.parse_term("forall(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)"), t97))
 }
 
 ///|
@@ -637,7 +637,7 @@ fn step_27() -> Unit raise {
   let t99 = @tactics.try_tac(@int.arith_tac)
   let t98 = @simp.rewrite_tac(@list.List([@lists.zip(), @lists.length()]))
   let t103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @lists.list_induct_tac), t98), t99), t100), @tactics.disch_tac), t101), t102)
-  length_zip_c.set(@tactics.prove(@parser.parse_term("!l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1"), t103))
+  length_zip_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1"), t103))
 }
 
 ///|
@@ -724,7 +724,7 @@ fn step_29() -> Unit raise {
     }
   })
   let t154 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t107), t111), t116), (x117 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.rewrite(@list.List([]), @list.List([]), all2_all_zip(), x117)), t118), @tactics.disch_tac), t119), @tactics.gen_tac), @tactics.disch_tac), t121), t122), t123), t127), t136), t143), t144), (x145 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.rewrite(@list.List([]), @list.List([]), length_zip(), x145)), t146), (x147 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.rewrite(@list.List([]), @list.List([]), el_zip(), x147)), t148), t149), t150), t152), t153), @int.arith_tac)
-  mk_cell_domain_c.set(@tactics.prove(@parser.parse_term("!xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)"), t154))
+  mk_cell_domain_c.set(@tactics.prove(@parser.parse_term("forall xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)"), t154))
 }
 
 ///|
@@ -1056,7 +1056,7 @@ fn step_34() -> Unit raise {
     @simp.rewrite_tac(@list.List([th]))
   })
   let t277 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t268), t270), (x271 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @multivariate_taylor_compiled.partial_uni_compose_v1(), x271)), t274), (x275 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @taylor_interval_compiled.derivative_pow_v2(), x275)), t276), @calc_rat.real_arith_tac)
-  partial_pow_c.set(@tactics.prove(@parser.parse_term("!i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y"), t277))
+  partial_pow_c.set(@tactics.prove(@parser.parse_term("forall i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y"), t277))
 }
 
 ///|
@@ -1084,7 +1084,7 @@ fn step_35() -> Unit raise {
   let t279 = @tactics.exists_tac(@parser.parse_term("(:real)"))
   let t278 = @tactics.repeat_tac(@tactics.gen_tac)
   let t294 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@taylor_interval_compiled.nth_diff_strong2_eq_v1()])), t278), t279), t280), @tactics.gen_tac), (x281 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @realanalysis.real_differentiable_pow_atreal(), x281)), t282), t283), t284), t285), t286), (x287 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @realanalysis.real_differentiable_mul_atreal(), x287)), t288), t290), @tactics.gen_tac), (x291 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @taylor_interval_compiled.derivative_pow_v2(), x291)), t292), t293)
-  nth_diff2_pow_c.set(@tactics.prove(@parser.parse_term("!n y. nth_diff_strong 2 (\\x. x pow n) y"), t294))
+  nth_diff2_pow_c.set(@tactics.prove(@parser.parse_term("forall n y. nth_diff_strong 2 (\\x. x pow n) y"), t294))
 }
 
 ///|
@@ -1107,7 +1107,7 @@ fn step_36() -> Unit raise {
   let t318 = @tactics.match_mp_tac(@realanalysis.real_differentiable_pow_atreal())
   let t317 = @simp.rewrite_tac(@list.List([]))
   let t320 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))), @tactics.gen_tac), (x316 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @taylor_interval_compiled.derivative_scale_v2(), x316)), t317), t318), t319), @tactics.all_tac])
-  let t315 = @tactics.subgoal_then(@parser.parse_term("!n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)"), fn(x312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t315 = @tactics.subgoal_then(@parser.parse_term("forall n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)"), fn(x312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s313 = @tactics.assume_tac(x312)
     fn(x314 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s313(x314)
@@ -1117,7 +1117,7 @@ fn step_36() -> Unit raise {
   let t309 = @simp.rewrite_tac(@list.List([@taylor_interval_compiled.derivative_x_v3(), @realarith.real_mul_rid()]))
   let t308 = @simp.rewrite_tac(@list.List([@realanalysis.real_differentiable_id()]))
   let t310 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))), @tactics.gen_tac), (x307 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @taylor_interval_compiled.derivative_pow_v2(), x307)), t308), t309), @tactics.all_tac])
-  let t306 = @tactics.subgoal_then(@parser.parse_term("!n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))"), fn(x303 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t306 = @tactics.subgoal_then(@parser.parse_term("forall n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))"), fn(x303 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s304 = @tactics.assume_tac(x303)
     fn(x305 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s304(x305)
@@ -1132,7 +1132,7 @@ fn step_36() -> Unit raise {
     @simp.rewrite_tac(@list.List([th]))
   })
   let t325 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t297), t299), (x300 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.apply_tac(@multivariate_taylor_compiled.diff2c_uni_compose_v3(), x300)), t301), t302), t306), t310), t311), t315), t320), t321), t322), t323), t324)
-  diff2c_pow_c.set(@tactics.prove(@parser.parse_term("!f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x"), t325))
+  diff2c_pow_c.set(@tactics.prove(@parser.parse_term("forall f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x"), t325))
 }
 
 ///|
@@ -1150,7 +1150,7 @@ fn step_37() -> Unit raise {
   let t327 = @simp.asm_simp_tac(@list.List([diff2c_pow()]))
   let t326 = @tactics.repeat_tac(@tactics.strip_tac)
   let t328 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.diff2c_domain()])), t326), t327)
-  diff2c_domain_pow_c.set(@tactics.prove(@parser.parse_term("!f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)"), t328))
+  diff2c_domain_pow_c.set(@tactics.prove(@parser.parse_term("forall f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)"), t328))
 }
 
 ///|
@@ -1231,7 +1231,7 @@ fn step_39() -> Unit raise {
   let t342 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t341 = @tactics.repeat_tac(@tactics.strip_tac)
   let t345 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.diff2c_domain()])), t341), t342), t343), t344)
-  let th_imp = @tactics.prove(@parser.parse_term("!f. (!domain. diff2c_domain domain f) ==> !x:real^N. diff2c f x"), t345)
+  let th_imp = @tactics.prove(@parser.parse_term("forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. diff2c f x"), t345)
   gen_diff2c_poly_c.set(fn(x346 : @kernel.Term) -> @kernel.Thm raise {
     let poly_tm = x346
     let t347 = @drule.match_mp(th_imp)
@@ -1277,7 +1277,7 @@ fn step_40() -> Unit raise {
   })
   let t349 = @tactics.repeat_tac(@tactics.strip_tac)
   let t368 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.diff2c_domain(), @multivariate_taylor_compiled.diff2c(), @multivariate_taylor_compiled.diff2()])), t349), t357), t358), @ssreflect.case), t359), t366), t367)
-  let th_imp = @tactics.prove(@parser.parse_term("!f. (!domain. diff2c_domain domain f) ==> !x:real^N. lift o f differentiable at x"), t368)
+  let th_imp = @tactics.prove(@parser.parse_term("forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. lift o f differentiable at x"), t368)
   gen_diff_poly_c.set(fn(x369 : @kernel.Term) -> @kernel.Thm raise {
     let poly_tm = x369
     let t370 = @drule.match_mp(th_imp)
@@ -1649,9 +1649,9 @@ pub fn i_int_array() -> FixedArray[@kernel.Thm] {
 /// gen_in_interval
 fn step_45() -> Unit raise {
   let t454 = @meson.meson_tac(@list.List([]))
-  let th0 = @tactics.prove(@parser.parse_term("(!i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (!i. Q i ==> P i))"), t454)
+  let th0 = @tactics.prove(@parser.parse_term("(forall i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (forall i. Q i ==> P i))"), t454)
   let t455 = @meson.meson_tac(@list.List([]))
-  let th1 = @tactics.prove(@parser.parse_term("(!i:num. (i = k ==> P i)) <=> P k"), t455)
+  let th1 = @tactics.prove(@parser.parse_term("(forall i:num. (i = k ==> P i)) <=> P k"), t455)
   gen_in_interval_c.set(fn(x456 : Int64) -> @kernel.Thm raise {
     let n = x456
     let n_tm = @nums.mk_small_numeral(n)
@@ -1987,7 +1987,7 @@ pub fn mk_eval_function_eq(x563 : Int64, x564 : @kernel.Thm) -> ((Int64) -> ((@k
   let expr_tm = @kernel.rand((fn(x566 : @kernel.Thm) -> @kernel.Term raise {
     @kernel.concl(x566)
   })(eq_th))
-  let tm0 = @parser.parse_term("!x:real^N. x IN interval [domain] ==> interval_arith (f x) f_bounds")
+  let tm0 = @parser.parse_term("forall x:real^N. x IN interval [domain] ==> interval_arith (f x) f_bounds")
   let n = (fn(x568 : (@kernel.Term, @kernel.Term)) -> Int64 raise {
     get_dim((fn(x567 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
       x567.0
@@ -2128,7 +2128,7 @@ fn step_46() -> Unit raise {
   let t615 = @tactics.try_tac(@int.arith_tac)
   let t614 = @simp.rewrite_tac(@list.List([@lists.length(), @lists.itlist2_def()]))
   let t639 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @lists.list_induct_tac), t614), t615), t617), t618), @tactics.disch_tac), t625), t626), t629), t630), (x631 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @iterate.sum_add_split(), x631)), t632), t633), t634), t635), t636), t637), @tactics.disch_tac), t638)
-  itlist2_eq_sum_c.set(@tactics.prove(@parser.parse_term("!(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))"), t639))
+  itlist2_eq_sum_c.set(@tactics.prove(@parser.parse_term("forall(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))"), t639))
 }
 
 ///|
@@ -2145,7 +2145,7 @@ pub fn itlist2_eq_sum() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t640 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @more_float.iabs_p()]))
   let t641 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @ssreflect.case), t640), @calc_rat.real_arith_tac)
-  interval_arith_abs_le_c.set(@tactics.prove(@parser.parse_term("!x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y"), t641))
+  interval_arith_abs_le_c.set(@tactics.prove(@parser.parse_term("forall x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y"), t641))
 }
 
 ///|
@@ -2182,7 +2182,7 @@ fn step_48() -> Unit raise {
   let t644 = @simp.rewrite_tac(@list.List([@lists.length(), @lists.all2()]))
   let t642 = @simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.all_n(), @lists.not_cons_nil()]))
   let t663 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @tactics.gen_tac), t642), (x643 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @more_list.l_seq_cons(), x643)), t644), t645), t650), t651), t652), t654), @ssreflect.case), t655), t656), t658), t659), t662)
-  all_n_all2_c.set(@tactics.prove(@parser.parse_term("!P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)"), t663))
+  all_n_all2_c.set(@tactics.prove(@parser.parse_term("forall P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)"), t663))
 }
 
 ///|
@@ -2225,7 +2225,7 @@ fn step_49() -> Unit raise {
   let t666 = @tactics.spec_tac(@parser.parse_term("l:(A)list"), t665)
   let t664 = @simp.rewrite_tac(@list.List([all_n_all2()]))
   let t695 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t664), t666), @ssreflect.case), t667), t668), (x669 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), all2_all_zip(), x669)), t670), t671), (x672 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), length_zip(), x672)), t673), t674), @tactics.eq_tac), t675), t687), (x688 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), el_zip(), x688)), t689), t690), (x691 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @more_list.el_l_seq(), x691)), t692), t693), t694)
-  all_n_el_c.set(@tactics.prove(@parser.parse_term("!P (l:(A)list) i0. all_n i0 l P <=> (!i. i < LENGTH l ==> P (i0 + i) (EL i l))"), t695))
+  all_n_el_c.set(@tactics.prove(@parser.parse_term("forall P (l:(A)list) i0. all_n i0 l P <=> (forall i. i < LENGTH l ==> P (i0 + i) (EL i l))"), t695))
 }
 
 ///|
@@ -2516,7 +2516,7 @@ fn step_50() -> Unit raise {
     }
   })
   let t722 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t710), (x711 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @taylor_interval_compiled.pair_eq(), x711)), t712), t719), t720), t721), @calc_rat.real_arith_tac), @tactics.all_tac])
-  let t706 = @tactics.subgoal_then(@parser.parse_term("!i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w"), fn(x703 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t706 = @tactics.subgoal_then(@parser.parse_term("forall i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w"), fn(x703 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s704 = ((x702 : @kernel.Thm) => @tactics.label_tac("w_ge0", x702))(x703)
     fn(x705 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s704(x705)
@@ -2528,7 +2528,7 @@ fn step_50() -> Unit raise {
   let t697 = @parser.parse_term("ITLIST2 _1 _2 _3 _4")
   let t696 = @simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.second_bounded()]))
   let t923 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t696), (x698 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.set_tac("s", t697, x698)), t699), t700), t701), t706), t722), t723), t724), t725), t726), (x727 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), itlist2_eq_sum(), x727)), t728), t729), t730), t731), t732), t738), t739), t740), t745), t769), (x770 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), itlist2_eq_sum(), x770)), t771), t780), t781), @tactics.conj_tac), t835), t836), @tactics.conj_tac), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t837), t838), t839), t840), t845), t854), t855), t861), t862), t863), t870), t871), t878), @tactics.ants_tac), t883), t890), @tactics.ants_tac), t895), t898), t902), t903), t909), t910), (x911 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @more_list.el_butlast(), x911)), t921), t922)
-  m_taylor_error_itlist2_c.set(@tactics.prove(@parser.parse_term("!f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error"), t923))
+  m_taylor_error_itlist2_c.set(@tactics.prove(@parser.parse_term("forall f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error"), t923))
 }
 
 ///|
@@ -2547,7 +2547,7 @@ fn step_51() -> Unit raise {
   let t925 = @tactics.mp_tac(@bool.spec_all(m_taylor_error_itlist2()))
   let t924 = @tactics.repeat_tac(@tactics.strip_tac)
   let t927 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.m_taylor_interval()])), t924), t925), t926)
-  m_taylor_error_itlist2_alt_c.set(@tactics.prove(@parser.parse_term("!f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error"), t927))
+  m_taylor_error_itlist2_alt_c.set(@tactics.prove(@parser.parse_term("forall f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error"), t927))
 }
 
 ///|
@@ -2696,7 +2696,7 @@ fn step_53() -> Unit raise {
   })
   let t934 = @parser.parse_term("ITLIST2 _1 _2 _3 _4")
   let t1010 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@multivariate_taylor_compiled.m_bounded_on_int()), @multivariate_taylor_compiled.m_taylor_interval(), @multivariate_taylor_compiled.m_lin_approx(), all_n_el()])), (x935 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.set_tac("s", t934, x935)), @tactics.strip_tac), t939), t941), (x942 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.apply_tac(@multivariate_taylor_compiled.m_taylor_bounds_v1(), x942)), t951), t952), t953), t954), t955), t956), t957), t958), t959), t960), t961), t962), (x963 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), itlist2_eq_sum(), x963)), t964), t965), t966), t967), t968), t969), @tactics.conj_tac), t981), t988), @tactics.ants_tac), t993), t999), t1002), t1007), t1008), t1009)
-  m_taylor_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))"), t1010))
+  m_taylor_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))"), t1010))
 }
 
 ///|
@@ -2714,7 +2714,7 @@ fn step_54() -> Unit raise {
   let t1012 = @simp.asm_simp_tac(@list.List([@interval_arith.interval_arith(), @realax.real_le_refl()]))
   let t1011 = @parser.parse_term("lo:real")
   let t1013 = @tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.mp_tac(@kernel.inst_rule(@list.List([(@parser.parse_term("f_lo - a:real"), t1011)]), m_taylor_bound_p()))), t1012)
-  m_taylor_upper_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(!p. p IN interval [domain] ==> f p <= hi)"), t1013))
+  m_taylor_upper_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(forall p. p IN interval [domain] ==> f p <= hi)"), t1013))
 }
 
 ///|
@@ -2732,7 +2732,7 @@ fn step_55() -> Unit raise {
   let t1015 = @simp.asm_simp_tac(@list.List([@interval_arith.interval_arith(), @realax.real_le_refl()]))
   let t1014 = @parser.parse_term("hi:real")
   let t1016 = @tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.mp_tac(@kernel.inst_rule(@list.List([(@parser.parse_term("f_hi + a:real"), t1014)]), m_taylor_bound_p()))), t1015)
-  m_taylor_lower_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (!p. p IN interval [domain] ==> lo <= f p)"), t1016))
+  m_taylor_lower_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (forall p. p IN interval [domain] ==> lo <= f p)"), t1016))
 }
 
 ///|
@@ -3068,7 +3068,7 @@ fn step_62() -> Unit raise {
     })(t1210(x1211))
   })
   let t1205 = @equal.gsym(@multivariate_taylor_compiled.partial2())
-  let t1206 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("!i. 1 <= i ==> 1 + i - 1 = i")), t1205]))
+  let t1206 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("forall i. 1 <= i ==> 1 + i - 1 = i")), t1205]))
   let t1204 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= j /\\ j <= n ==> j - 1 < n"))]))
   let t1203 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t1202 = @tactics.pop_assum(fn(x1199 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3166,7 +3166,7 @@ fn step_62() -> Unit raise {
   let t1123 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1121 = @parser.parse_term("ITLIST2 _1 _2 _3 _4")
   let t1220 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@multivariate_taylor_compiled.m_taylor_interval(), @multivariate_taylor_compiled.m_lin_approx(), all_n_el(), @equal.gsym(@multivariate_taylor_compiled.m_bounded_on_int())])), (x1122 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.set_tac("s", t1121, x1122)), t1123), t1128), t1129), t1133), t1135), t1136), (x1137 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.apply_tac(@multivariate_taylor_compiled.m_taylor_partial_bounds_v1(), x1137)), t1145), t1146), t1153), t1154), t1155), t1158), t1159), t1160), t1161), t1162), t1163), t1164), (x1165 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), itlist2_eq_sum(), x1165)), t1166), t1167), t1168), t1169), t1170), t1171), @tactics.conj_tac), t1183), t1190), t1191), t1198), t1202), t1203), @tactics.disch_tac), t1204), t1206), t1212), @class.cond_cases_tac), t1214), (x1215 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), @multivariate_taylor_compiled.mixed_second_partials_v1(), x1215)), t1217), t1218), t1219)
-  m_taylor_partial_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))"), t1220))
+  m_taylor_partial_bound_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))"), t1220))
 }
 
 ///|
@@ -3186,7 +3186,7 @@ fn step_63() -> Unit raise {
   let t1221 = @parser.parse_term("lo:real")
   let t1222 = @tactics.mp_tac(@kernel.inst_rule(@list.List([(@parser.parse_term("df_lo - error"), t1221)]), m_taylor_partial_bound_p()))
   let t1225 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1222), t1223), t1224)
-  m_taylor_partial_upper_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (!x. x IN interval [domain] ==> partial i f x <= hi)"), t1225))
+  m_taylor_partial_upper_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (forall x. x IN interval [domain] ==> partial i f x <= hi)"), t1225))
 }
 
 ///|
@@ -3206,7 +3206,7 @@ fn step_64() -> Unit raise {
   let t1226 = @parser.parse_term("hi:real")
   let t1227 = @tactics.mp_tac(@kernel.inst_rule(@list.List([(@parser.parse_term("df_hi + error"), t1226)]), m_taylor_partial_bound_p()))
   let t1230 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1227), t1228), t1229)
-  m_taylor_partial_lower_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> lo <= partial i f x)"), t1230))
+  m_taylor_partial_lower_p_c.set(@tactics.prove(@parser.parse_term("m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> lo <= partial i f x)"), t1230))
 }
 
 ///|

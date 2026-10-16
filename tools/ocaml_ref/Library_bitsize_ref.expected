@@ -5531,60 +5531,60 @@ Warning: inventing type variables
 Library/bitsize quotations (56):
   bitsize n = minimal i. n < 2 EXP i
   bitsize 0 = 0
-  !k. bitsize (2 EXP k) = k + 1
+  forall k. bitsize (2 EXP k) = k + 1
   0
   bitsize 1 = 1
   1
   bitsize 2 = 2
   i:num
   ?i. n < 2 EXP i
-  !n k. bitsize n <= k <=> n < 2 EXP k
-  !n. n < 2 EXP bitsize n
-  !n k. bitsize n = k <=> n < 2 EXP k /\\ !j. j < k ==> 2 EXP j <= n
+  forall n k. bitsize n <= k <=> n < 2 EXP k
+  forall n. n < 2 EXP bitsize n
+  forall n k. bitsize n = k <=> n < 2 EXP k /\\ forall j. j < k ==> 2 EXP j <= n
   ~(2 = 0)
-  !n k. bitsize n = k <=> !j. n < 2 EXP j <=> k <= j
-  !n. bitsize n = 0 <=> n = 0
+  forall n k. bitsize n = k <=> forall j. n < 2 EXP j <=> k <= j
+  forall n. bitsize n = 0 <=> n = 0
   n:num
-  !m n. m <= n ==> bitsize m <= bitsize n
+  forall m n. m <= n ==> bitsize m <= bitsize n
   n <= m ==> MAX m n = m
   m <= n ==> MAX m n = n
   m:num <= n \\/ n <= m
-  !m n. bitsize(MAX m n) = MAX (bitsize m) (bitsize n)
+  forall m n. bitsize(MAX m n) = MAX (bitsize m) (bitsize n)
   n <= m ==> MIN m n = n
   m <= n ==> MIN m n = m
   m:num <= n \\/ n <= m
-  !m n. bitsize(MIN m n) = MIN (bitsize m) (bitsize n)
-  !m n. bitsize(m * n) <= bitsize m + bitsize n
+  forall m n. bitsize(MIN m n) = MIN (bitsize m) (bitsize n)
+  forall m n. bitsize(m * n) <= bitsize m + bitsize n
   n - 1 < n <=> ~(n = 0)
-  !n. 2 EXP (bitsize n - 1) <= n <=> ~(n = 0)
-  !n. ~(n = 0) ==> 2 EXP (bitsize n - 1) <= n
+  forall n. 2 EXP (bitsize n - 1) <= n <=> ~(n = 0)
+  forall n. ~(n = 0) ==> 2 EXP (bitsize n - 1) <= n
   n = SUC(n - 1) <=> ~(n = 0)
   2 * 2 EXP (bitsize n - 1)
   n = 0
-  !n. 2 EXP (bitsize n) <= 2 * n <=> ~(n = 0)
-  !n. ~(n = 0) ==> 2 EXP bitsize n <= 2 * n
+  forall n. 2 EXP (bitsize n) <= 2 * n <=> ~(n = 0)
+  forall n. ~(n = 0) ==> 2 EXP bitsize n <= 2 * n
   k = 0
-  !n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP (k - 1) <= n
+  forall n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP (k - 1) <= n
   2 * a = b ==> (a <= n <=> b <= 2 * n)
   k = 0
-  !n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP k <= 2 * n
+  forall n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP k <= 2 * n
   n = k <=> k <= n /\\ ~(k + 1 <= n)
-  !n k. bitsize n = k <=>\n         n < 2 EXP k /\\ (~(k = 0) ==> 2 EXP k <= 2 * n)
+  forall n k. bitsize n = k <=>\n         n < 2 EXP k /\\ (~(k = 0) ==> 2 EXP k <= 2 * n)
   2 * a * b = a * 2 * b
   (p ==> q) /\\ p ==> p /\\ q
-  (!k n. bitsize (2 EXP k * n) = if n = 0 then 0 else k + bitsize n) /\\\n   (!k n. bitsize (n * 2 EXP k) = if n = 0 then 0 else bitsize n + k)
+  (forall k n. bitsize (2 EXP k * n) = if n = 0 then 0 else k + bitsize n) /\\\n   (forall k n. bitsize (n * 2 EXP k) = if n = 0 then 0 else bitsize n + k)
   bitsize(2 EXP k * m)
   m + 1 <= r <=> m < r
   2 EXP k * (m + 1)
   (p ==> q) /\\ p ==> p /\\ q
-  (!k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (2 EXP k * m + n) = k + bitsize m) /\\\n   (!k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (m * 2 EXP k + n) = k + bitsize m) /\\\n   (!k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + 2 EXP k * m) = k + bitsize m) /\\\n   (!k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + m * 2 EXP k) = k + bitsize m)
+  (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (2 EXP k * m + n) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (m * 2 EXP k + n) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + 2 EXP k * m) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + m * 2 EXP k) = k + bitsize m)
   a < b <=> a + 1 <= b
   ~(n:num <= k) ==> (j < n - k <=> k + j < n)
   ~(n:num <= k) ==> k + n - k = n
   2 EXP bitsize n
   n <= k ==> n - k = 0
   bitsize n <= k
-  !n k. bitsize(n DIV 2 EXP k) = bitsize n - k
+  forall n k. bitsize(n DIV 2 EXP k) = bitsize n - k
 bitsize =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#bitsize:fun(num,num) n:num)) (#minimal:fun(fun(num,bool),num) (\i:num. ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)))))))
 BITSIZE_0 =  |- ((#=:fun(num,fun(num,bool)) (#bitsize:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))
 BITSIZE_POW2 =  |- (#!:fun(fun(num,bool),bool) (\k:num. ((#=:fun(num,fun(num,bool)) (#bitsize:fun(num,num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num))) ((#+:fun(num,fun(num,num)) k:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))

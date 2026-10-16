@@ -4,19 +4,19 @@
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:1
 fn step_1() -> Unit raise {
-  ignore(@meson.meson(@list.List([]), @parser.parse_term("((?x. !y. P(x) <=> P(y)) <=> ((?x. Q(x)) <=> (!y. Q(y)))) <=>\n  ((?x. !y. Q(x) <=> Q(y)) <=> ((?x. P(x)) <=> (!y. P(y))))")))
+  ignore(@meson.meson(@list.List([]), @parser.parse_term("((?x. forall y. P(x) <=> P(y)) <=> ((?x. Q(x)) <=> (forall y. Q(y)))) <=>\n  ((?x. forall y. Q(x) <=> Q(y)) <=> ((?x. P(x)) <=> (forall y. P(y))))")))
 }
 
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:5
 fn step_2() -> Unit raise {
-  ignore(@meson.meson(@list.List([]), @parser.parse_term("(!x y z. P x y /\\ P y z ==> P x z) /\\\n (!x y z. Q x y /\\ Q y z ==> Q x z) /\\\n (!x y. P x y ==> P y x) /\\\n (!x y. P x y \\/ Q x y)\n ==> (!x y. P x y) \\/ (!x y. Q x y)")))
+  ignore(@meson.meson(@list.List([]), @parser.parse_term("(forall x y z. P x y /\\ P y z ==> P x z) /\\\n (forall x y z. Q x y /\\ Q y z ==> Q x z) /\\\n (forall x y. P x y ==> P y x) /\\\n (forall x y. P x y \\/ Q x y)\n ==> (forall x y. P x y) \\/ (forall x y. Q x y)")))
 }
 
 ///|
 /// ewd1062
 fn step_3() -> Unit raise {
-  ewd1062_v1_c.set(@meson.meson(@list.List([]), @parser.parse_term("(!x. x <= x) /\\\n  (!x y z. x <= y /\\ y <= z ==> x <= z) /\\\n  (!x y. f(x) <= y <=> x <= g(y))\n  ==> (!x y. x <= y ==> f(x) <= f(y)) /\\\n      (!x y. x <= y ==> g(x) <= g(y))")))
+  ewd1062_v1_c.set(@meson.meson(@list.List([]), @parser.parse_term("(forall x. x <= x) /\\\n  (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n  (forall x y. f(x) <= y <=> x <= g(y))\n  ==> (forall x y. x <= y ==> f(x) <= f(y)) /\\\n      (forall x y. x <= y ==> g(x) <= g(y))")))
 }
 
 ///|
@@ -31,7 +31,7 @@ pub fn ewd1062_v1() -> @kernel.Thm {
 ///|
 /// ewd1062
 fn step_4() -> Unit raise {
-  ewd1062_c.set(@meson.meson(@list.List([]), @parser.parse_term("(!x. R x x) /\\\n  (!x y z. R x y /\\ R y z ==> R x z) /\\\n  (!x y. R (f x) y <=> R x (g y))\n  ==> (!x y. R x y ==> R (f x) (f y)) /\\\n      (!x y. R x y ==> R (g x) (g y))")))
+  ewd1062_c.set(@meson.meson(@list.List([]), @parser.parse_term("(forall x. R x x) /\\\n  (forall x y z. R x y /\\ R y z ==> R x z) /\\\n  (forall x y. R (f x) y <=> R x (g y))\n  ==> (forall x y. R x y ==> R (f x) (f y)) /\\\n      (forall x y. R x y ==> R (g x) (g y))")))
 }
 
 ///|

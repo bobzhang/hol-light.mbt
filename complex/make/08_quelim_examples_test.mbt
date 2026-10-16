@@ -6935,17 +6935,17 @@ test "Complex/quelim_examples matches Complex/quelim_examples.ml" {
       #|CPU time (user): <t>
       #|CPU time (user): <t>
       #|Complex/quelim_examples quotations (19):
-      #|  !x y. (x pow 2 = Cx(&2)) /\\ (y pow 2 = Cx(&3))\n         ==> ((x * y) pow 2 = Cx(&6))
-      #|  !x a. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))
-      #|  !a x. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))
+      #|  forall x y. (x pow 2 = Cx(&2)) /\\ (y pow 2 = Cx(&3))\n         ==> ((x * y) pow 2 = Cx(&6))
+      #|  forall x a. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))
+      #|  forall a x. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))
       #|  ~(?a x y. (a pow 2 = Cx(&2)) /\\\n             (x pow 2 + a * x + Cx(&1) = Cx(&0)) /\\\n             (y * (x pow 4 + Cx(&1)) + Cx(&1) = Cx(&0)))
-      #|  !x. ?y. x pow 2 = y pow 3
-      #|  !x y z a b. (a + b) * (x - y + z) - (a - b) * (x + y + z) =\n               Cx(&2) * (b * x + b * z - a * y)
-      #|  !a b. ~(a = b) ==> ?x y. (y * x pow 2 = a) /\\ (y * x pow 2 + x = b)
-      #|  !a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n               (a * y pow 2 + b * y + c = Cx(&0)) /\\\n               ~(x = y)\n               ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0))
-      #|  ~(!a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n                 (a * y pow 2 + b * y + c = Cx(&0))\n                 ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0)))
-      #|  !y_1 y_2 y_3 y_4.\n     (y_1 = Cx(&2) * y_3) /\\\n     (y_2 = Cx(&2) * y_4) /\\\n     (y_1 * y_3 = y_2 * y_4)\n     ==> (y_1 pow 2 = y_2 pow 2)
-      #|  !a1 b1 c1 a2 b2 c2.\n        ~(a1 * b2 = a2 * b1)\n        ==> ?x y. (a1 * x + b1 * y = c1) /\\ (a2 * x + b2 * y = c2)
+      #|  forall x. ?y. x pow 2 = y pow 3
+      #|  forall x y z a b. (a + b) * (x - y + z) - (a - b) * (x + y + z) =\n               Cx(&2) * (b * x + b * z - a * y)
+      #|  forall a b. ~(a = b) ==> ?x y. (y * x pow 2 = a) /\\ (y * x pow 2 + x = b)
+      #|  forall a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n               (a * y pow 2 + b * y + c = Cx(&0)) /\\\n               ~(x = y)\n               ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0))
+      #|  ~(forall a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n                 (a * y pow 2 + b * y + c = Cx(&0))\n                 ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0)))
+      #|  forall y_1 y_2 y_3 y_4.\n     (y_1 = Cx(&2) * y_3) /\\\n     (y_2 = Cx(&2) * y_4) /\\\n     (y_1 * y_3 = y_2 * y_4)\n     ==> (y_1 pow 2 = y_2 pow 2)
+      #|  forall a1 b1 c1 a2 b2 c2.\n        ~(a1 * b2 = a2 * b1)\n        ==> ?x y. (a1 * x + b1 * y = c1) /\\ (a2 * x + b2 * y = c2)
       #|  c = Cx(&0)
       #|  b = Cx(&0)
       #|  b * b * Cx (&1) + a * c * Cx(--(&4)) =\n      Cx(--(&1)) * (Cx(&4) * a * c - b * b)

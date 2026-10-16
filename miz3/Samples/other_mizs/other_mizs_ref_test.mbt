@@ -5721,7 +5721,7 @@ test "miz3/Samples/other_mizs matches miz3/Samples/other_mizs.ml" {
       #|  :error
       #|  :error
       #|  :error
-      #|  projective((ON):Point->Line->bool) <=>\n        (!p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l) /\\\n        (!l l'. ?p. p ON l /\\ p ON l') /\\\n        (?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)) /\\\n        (!l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                        p ON l /\\ p' ON l /\\ p'' ON l)
+      #|  projective((ON):Point->Line->bool) <=>\n        (forall p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l) /\\\n        (forall l l'. ?p. p ON l /\\ p ON l') /\\\n        (?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)) /\\\n        (forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                        p ON l /\\ p' ON l /\\ p'' ON l)
       #|  :error
       #|  :Point->Line->bool
       #|  :error

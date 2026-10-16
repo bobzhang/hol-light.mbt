@@ -306,7 +306,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  diff2c_domain domain (g:real^N->real)
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y + g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y + partial i g y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x + g x) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y + g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y + partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x + g x) domain y w bounds d_bounds_list dd_bounds_list
       #|  interval_arith (partial i f (x:real^N) + partial i g x) int <=>\n\t\t\t\t (\\i int. interval_arith (partial i f x + partial i g x) int) i int
       #|  interval_arith (partial2 j i f (x:real^N) + partial2 j i g x) int <=>\n\t\t\t (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int) j int
       #|  all_n 1 list \n\t\t(\\j int. interval_arith (partial2 j i f (x:real^N) + partial2 j i g x) int) <=>\n\t\t(\\i list. all_n 1 list \n\t\t   (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int)) i list
@@ -317,7 +317,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  diff2c_domain domain (g:real^N->real)
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y - g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y - partial i g y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x - g x) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y - g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y - partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x - g x) domain y w bounds d_bounds_list dd_bounds_list
       #|  interval_arith (partial i f (x:real^N) - partial i g x) int <=>\n\t\t\t\t (\\i int. interval_arith (partial i f x - partial i g x) int) i int
       #|  interval_arith (partial2 j i f (x:real^N) - partial2 j i g x) int <=>\n\t\t\t (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int) j int
       #|  all_n 1 list \n\t\t(\\j int. interval_arith (partial2 j i f (x:real^N) - partial2 j i g x) int) <=>\n\t\t(\\i list. all_n 1 list \n\t\t   (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int)) i list
@@ -328,7 +328,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  diff2c_domain domain (g:real^N->real)
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y * g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y * g y + f y * partial i g y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x * g x) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y * g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y * g y + f y * partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x * g x) domain y w bounds d_bounds_list dd_bounds_list
       #|  interval_arith (partial i f (y:real^N) * g y + f y * partial i g y) int <=>\n\t  (\\i int. interval_arith (partial i f y * g y + f y * partial i g y) int) i int
       #|  interval_arith ((partial2 j i f x * g (x:real^N) + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int <=>\n\t  (\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int) j int
       #|  all_n 1 list (\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\tpartial j f x * partial i g x + f (x:real^N) * partial2 j i g x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\t   partial j f x * partial i g x + f x * partial2 j i g x) int)) i list
@@ -338,7 +338,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (-- (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (-- partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (-- partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. -- (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (-- (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (-- partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (-- partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. -- (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  (&0 * a) * b + &1 * c = c
       #|  abs _
       #|  abs
@@ -356,8 +356,8 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  &0 < f (y:real^N)
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> &0 < f x
-      #|  m_taylor_interval f domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  forall x:real^N. x IN interval [domain] ==> &0 < f x
+      #|  m_taylor_interval f domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  (&0 * a) * b + -- &1 * c = --c
       #|  abs _
       #|  abs
@@ -379,9 +379,9 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  f (y:real^N) < &0
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> f x < &0
-      #|  m_taylor_interval (\\x. --f x) domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_neg f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
-      #|  !k x. (\\x. x pow k) real_differentiable atreal x
+      #|  forall x:real^N. x IN interval [domain] ==> f x < &0
+      #|  m_taylor_interval (\\x. --f x) domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_neg f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  forall k x. (\\x. x pow k) real_differentiable atreal x
       #|  \\x. x pow k
       #|  f:real^N->real
       #|  x:real^N
@@ -395,18 +395,18 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow k) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * (f y) pow (k - 1)) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&(k * (k - 1)) * f x pow (k - 2)) * partial j f x) \n\t\t\t\t * partial i f x + (&k * f x pow (k - 1)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow k) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * (f y) pow (k - 1)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&(k * (k - 1)) * f x pow (k - 2)) * partial j f x) \n\t\t\t\t * partial i f x + (&k * f x pow (k - 1)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
       #|  (a * b) * c + (a * x) * y = a * (b * c + x * y)
       #|  2 - 1 = 1 /\\ 2 - 2 = 0
       #|  k:num
       #|  2
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow 2) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&2 * f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (&2 * (partial j f x * partial i f x \n\t\t\t\t       + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow 2) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow 2) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&2 * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (&2 * (partial j f x * partial i f x \n\t\t\t\t       + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow 2) domain y w bounds d_bounds_list dd_bounds_list
       #|  (((k * k1) * f2) * j) * i + (k * f2 * f) * x = \n\t (k * f2) * ((k1 * j) * i + f * x)
       #|  k >= 2 ==> k - 1 = (k - 2) + 1
-      #|  !x. x pow (k - 1) = x pow (k - 2) * x
+      #|  forall x. x pow (k - 1) = x pow (k - 2) * x
       #|  k >= 2 ==> k = 1 + (k - 1)
-      #|  !x. x pow k = x * x pow (k - 1)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (f y * f y pow (k - 1)) bounds ==>\n     k >= 2 ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * f y pow (k - 1)) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f x) * partial i f x\n\t\t\t\t\t\t\t     + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
+      #|  forall x. x pow k = x * x pow (k - 1)
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (f y * f y pow (k - 1)) bounds ==>\n     k >= 2 ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * f y pow (k - 1)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f x) * partial i f x\n\t\t\t\t\t\t\t     + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
       #|  a pow 3 = a * a * a
       #|  inv _
       #|  inv
@@ -423,11 +423,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  ~(f (y:real^N) = &0)
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> ~(f x = &0)
+      #|  forall x:real^N. x IN interval [domain] ==> ~(f x = &0)
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_not_zero f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (inv (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--inv (f y * f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. inv (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_not_zero f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (inv (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--inv (f y * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. inv (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  &4 * a * b = (&2 * a) * (&2 * b)
       #|  a pow 3 = a * a pow 2
       #|  sqrt _
@@ -445,11 +445,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  &0 < f (y:real^N)
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> &0 < f x
+      #|  forall x:real^N. x IN interval [domain] ==> &0 < f x
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (sqrt (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&2 * sqrt (f y)) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (&2 * sqrt (f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sqrt (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (sqrt (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&2 * sqrt (f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (&2 * sqrt (f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sqrt (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  exp _
       #|  exp
       #|  f:real^N->real
@@ -465,7 +465,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (exp (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (exp (f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((exp (f x) * partial j f x) \n\t\t\t\t * partial i f x + exp (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. exp (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (exp (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (exp (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((exp (f x) * partial j f x) \n\t\t\t\t * partial i f x + exp (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. exp (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  log _
       #|  log
       #|  f:real^N->real
@@ -481,11 +481,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  &0 < f (y:real^N)
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> &0 < f x
+      #|  forall x:real^N. x IN interval [domain] ==> &0 < f x
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (log (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t   inv (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. log (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (log (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t   inv (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. log (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  f x pow 2
       #|  atn _
       #|  atn
@@ -502,7 +502,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (atn (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&1 + f y * f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f x) \n\t\t\t\t * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. atn (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (atn (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&1 + f y * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f x) \n\t\t\t\t * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. atn (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  (--c * p1) * p2 + --s * p3 = --((c * p1) * p2 + s * p3)
       #|  cos _
       #|  cos
@@ -519,7 +519,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (cos (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--sin (f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (--((cos (f x) * partial j f x) * partial i f x \n\t\t\t\t    + sin (f x) * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. cos (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (cos (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--sin (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (--((cos (f x) * partial j f x) * partial i f x \n\t\t\t\t    + sin (f x) * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. cos (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  sin _
       #|  sin
       #|  f:real^N->real
@@ -535,7 +535,7 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (sin (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (cos (f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((--sin (f x)) * partial j f x) * partial i f x\n\t\t\t\t   + cos (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sin (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (sin (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (cos (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((--sin (f x)) * partial j f x) * partial i f x\n\t\t\t\t   + cos (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sin (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  iabs f_bounds < &1
       #|  acs _
       #|  acs
@@ -552,11 +552,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  abs (f (y:real^N)) < &1
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> abs (f x) < &1
+      #|  forall x:real^N. x IN interval [domain] ==> abs (f x) < &1
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (acs (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (--inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. acs (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (acs (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (--inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. acs (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  asn _
       #|  asn
       #|  f:real^N->real
@@ -572,11 +572,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  abs (f (y:real^N)) < &1
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> abs (f x) < &1
+      #|  forall x:real^N. x IN interval [domain] ==> abs (f x) < &1
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (asn (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. asn (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (asn (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. asn (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  matan _
       #|  matan
       #|  f:real^N->real
@@ -592,11 +592,11 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  w:real^N
       #|  -- &1 < f (y:real^N)
       #|  f_bounds:real#real
-      #|  !x:real^N. x IN interval [domain] ==> -- &1 < f x
+      #|  forall x:real^N. x IN interval [domain] ==> -- &1 < f x
       #|  w:real^N
       #|  diff2c_domain domain (f:real^N->real)
       #|  lift o f differentiable at (y:real^N)
-      #|  m_cell_domain domain (y:real^N) w ==>\n     (!x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_gt (-- &1) f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (matan (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (dmatan (f y) * partial i f y) int) ==>\n     (!x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f x +\n\t\t\t\t   dmatan (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. matan (f x)) domain y w bounds d_bounds_list dd_bounds_list
+      #|  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_gt (-- &1) f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (matan (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (dmatan (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f x +\n\t\t\t\t   dmatan (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. matan (f x)) domain y w bounds d_bounds_list dd_bounds_list
       #|  interval_arith ((&2 * f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith ((&2 * f y) * partial i f y) int) i int
       #|  interval_arith (&2 * (partial j f (x:real^N) * partial i f x + \n\t\t\t\t f x * partial2 j i f x)) int <=>\n\t  (\\j int. interval_arith (&2 * (partial j f x * partial i f x + \n\t\t\t\t f x * partial2 j i f x)) int) j int
       #|  all_n 1 list \n     (\\j int. interval_arith (&2 * (partial j f (x:real^N) * partial i f x + \n\t\t\t\t      f x * partial2 j i f x)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith (&2 * (partial j f x * partial i f x + \n\t\t\t\t\t f x * partial2 j i f x)) int)) i list

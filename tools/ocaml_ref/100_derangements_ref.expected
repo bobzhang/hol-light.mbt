@@ -6851,42 +6851,42 @@ Warning: inventing type variables
   swap(a,b) (x,y) <=> x = a /\\ y = b \\/ x = b /\\ y = a
   r pairsup (s,t) <=> (r % converse(r) = id(s)) /\\ (converse(r) % r = id(t))
   r permutes s <=> r pairsup (s,s)
-  r deranges s <=> r permutes s /\\ !x. ~(r(x,x))
-  !r s. converse(r % s) = converse(s) % converse(r)
-  !r. converse(converse r) = r
-  !p s t.\n        p pairsup (s,t) <=>\n        (!x y. p(x,y) ==> x IN s /\\ y IN t) /\\\n        (!x. x IN s ==> ?!y. y IN t /\\ p(x,y)) /\\\n        (!y. y IN t ==> ?!x. x IN s /\\ p(x,y))
-  !p s. p permutes s <=>\n         (!x y. p(x,y) ==> x IN s /\\ y IN s) /\\\n         (!x. x IN s ==> ?!y. y IN s /\\ p(x,y)) /\\\n         (!y. y IN s ==> ?!x. x IN s /\\ p(x,y))
-  !p s t. p pairsup (s,t) ==> domain p = s /\\ range p = t
-  !p s. p permutes s ==> domain p = s /\\ range p = s
-  !p s t. p pairsup (s,t) ==> !x y y'. p(x,y) /\\ p(x,y') ==> y = y'
-  !p s. p permutes s ==> !x y y'. p(x,y) /\\ p(x,y') ==> y = y'
-  !p s t. p pairsup (s,t) ==> !x x' y. p(x,y) /\\ p(x',y) ==> x = x'
-  !p s. p permutes s ==> !x x' y. p(x,y) /\\ p(x',y) ==> x = x'
-  !s. id(s) pairsup (s,s)
-  !s. id(s) permutes s
-  !p s t. p pairsup (s,t) ==> converse(p) pairsup (t,s)
-  !p s. p permutes s ==> converse(p) permutes s
-  !p p' s t u. p pairsup (s,t) /\\ p' pairsup (t,u) ==> (p % p') pairsup (s,u)
-  !p p' s. p permutes s /\\ p' permutes s ==> (p % p') permutes s
+  r deranges s <=> r permutes s /\\ forall x. ~(r(x,x))
+  forall r s. converse(r % s) = converse(s) % converse(r)
+  forall r. converse(converse r) = r
+  forall p s t.\n        p pairsup (s,t) <=>\n        (forall x y. p(x,y) ==> x IN s /\\ y IN t) /\\\n        (forall x. x IN s ==> ?!y. y IN t /\\ p(x,y)) /\\\n        (forall y. y IN t ==> ?!x. x IN s /\\ p(x,y))
+  forall p s. p permutes s <=>\n         (forall x y. p(x,y) ==> x IN s /\\ y IN s) /\\\n         (forall x. x IN s ==> ?!y. y IN s /\\ p(x,y)) /\\\n         (forall y. y IN s ==> ?!x. x IN s /\\ p(x,y))
+  forall p s t. p pairsup (s,t) ==> domain p = s /\\ range p = t
+  forall p s. p permutes s ==> domain p = s /\\ range p = s
+  forall p s t. p pairsup (s,t) ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'
+  forall p s. p permutes s ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'
+  forall p s t. p pairsup (s,t) ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'
+  forall p s. p permutes s ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'
+  forall s. id(s) pairsup (s,s)
+  forall s. id(s) permutes s
+  forall p s t. p pairsup (s,t) ==> converse(p) pairsup (t,s)
+  forall p s. p permutes s ==> converse(p) permutes s
+  forall p p' s t u. p pairsup (s,t) /\\ p' pairsup (t,u) ==> (p % p') pairsup (s,u)
+  forall p p' s. p permutes s /\\ p' permutes s ==> (p % p') permutes s
   swap(a,b) permutes {a,b}
   p pairsup ({},{}) <=> (p = {})
   p DELETE (x:A,y:B)
   y:B
   ?y. y IN t /\\ p(x:A,y:B)
   x IN s ==> x INSERT s = s
-  !x:A s t:B->bool p.\n        p pairsup (x INSERT s,t) <=>\n          if x IN s then p pairsup (s,t)\n          else ?y q. y IN t /\\ p = (x,y) INSERT q /\\ q pairsup (s,t DELETE y)
+  forall x:A s t:B->bool p.\n        p pairsup (x INSERT s,t) <=>\n          if x IN s then p pairsup (s,t)\n          else ?y q. y IN t /\\ p = (x,y) INSERT q /\\ q pairsup (s,t DELETE y)
   {p | ?y. y IN t /\\ A y p} = UNIONS {{p | A y p} | y IN t} /\\\n     {p | ?q. p = (a,y) INSERT q /\\ A y q} =\n           IMAGE (\\q. (a,y) INSERT q) {q | A y q}
   {x | x = a} = {a}
-  !n s:A->bool t:B->bool.\n        s HAS_SIZE n /\\ t HAS_SIZE n\n        ==> {p | p pairsup (s,t)} HAS_SIZE (FACT n)
-  !s n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)
+  forall n s:A->bool t:B->bool.\n        s HAS_SIZE n /\\ t HAS_SIZE n\n        ==> {p | p pairsup (s,t)} HAS_SIZE (FACT n)
+  forall s n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)
   (derangements 0 = 1) /\\\n  (derangements 1 = 0) /\\\n  (derangements(n + 2) = (n + 1) * (derangements n + derangements(n + 1)))
   \\n. n + 1
-  !n. P n /\\ P(n + 1)
-  !P. P 0 /\\ P 1 /\\ (!n. P n /\\ P(n + 1) ==> P(n + 2)) ==> !n. P n
-  !p s x y.\n        p deranges s /\\ ~(x IN s) /\\ ~(y IN s) /\\ ~(x = y)\n        ==> ((x,y) INSERT (y,x) INSERT p) deranges (x INSERT y INSERT s)
-  !p s y x. p deranges s /\\ ~(y IN s) /\\ p(x,z)\n             ==> ((x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n                 deranges (y INSERT s)
-  !p. p deranges {} <=> p = {}
-  !x p. ~(p deranges {x})
+  forall n. P n /\\ P(n + 1)
+  forall P. P 0 /\\ P 1 /\\ (forall n. P n /\\ P(n + 1) ==> P(n + 2)) ==> forall n. P n
+  forall p s x y.\n        p deranges s /\\ ~(x IN s) /\\ ~(y IN s) /\\ ~(x = y)\n        ==> ((x,y) INSERT (y,x) INSERT p) deranges (x INSERT y INSERT s)
+  forall p s y x. p deranges s /\\ ~(y IN s) /\\ p(x,z)\n             ==> ((x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n                 deranges (y INSERT s)
+  forall p. p deranges {} <=> p = {}
+  forall x p. ~(p deranges {x})
   y:A = z
   w:A = y
   w:A = z
@@ -6951,7 +6951,7 @@ Warning: inventing type variables
   t:A->bool
   n:num
   {}:A#A->bool
-  !n s:A->bool. s HAS_SIZE n ==> {p | p deranges s} HAS_SIZE (derangements n)
+  forall n s:A->bool. s HAS_SIZE n ==> {p | p deranges s} HAS_SIZE (derangements n)
   a /\\ (a ==> b) ==> a /\\ b
   1
   sum(0..1) f = f 0 + f 1
@@ -6964,7 +6964,7 @@ Warning: inventing type variables
   n + 2 = (n + 1) + 1
   n = 0
   n:num
-  !n. ~(n = 0)\n       ==> &(derangements n) =\n           &(FACT n) * sum(0..n) (\\k. --(&1) pow k / &(FACT k))
+  forall n. ~(n = 0)\n       ==> &(derangements n) =\n           &(FACT n) * sum(0..n) (\\k. --(&1) pow k / &(FACT k))
   ~(n < 5)
   &3
   abs(u) <= abs(-- &1)
@@ -6979,14 +6979,14 @@ Warning: inventing type variables
   abs x < a <=> --a < x /\\ x < a
   n < 5 ==> n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 3 \\/ n = 4
   n < 5
-  !n. ~(n = 0)\n       ==> let e = exp(&1) in\n           abs(&(derangements n) - &(FACT n) / e) < &1 / &2
+  forall n. ~(n = 0)\n       ==> let e = exp(&1) in\n           abs(&(derangements n) - &(FACT n) / e) < &1 / &2
   round x = @n. integer(n) /\\ n - &1 / &2 <= x /\\ x < n + &1 / &2
   x + &1 / &2
   floor(x + &1 / &2)
-  !x. integer(round x) /\\ round x - &1 / &2 <= x /\\ x < round x + &1 / &2
+  forall x. integer(round x) /\\ round x - &1 / &2 <= x /\\ x < round x + &1 / &2
   &(FACT n) / e
-  !n. ~(n = 0)\n       ==> let e = exp(&1) in &(derangements n) = round(&(FACT n) / e)
-  !n s. s HAS_SIZE n /\\ ~(n = 0)\n         ==> FINITE {p | p deranges s} /\\\n             let e = exp(&1) in\n             &(CARD {p | p deranges s}) = round(&(FACT n) / e)
+  forall n. ~(n = 0)\n       ==> let e = exp(&1) in &(derangements n) = round(&(FACT n) / e)
+  forall n s. s HAS_SIZE n /\\ ~(n = 0)\n         ==> FINITE {p | p deranges s} /\\\n             let e = exp(&1) in\n             &(CARD {p | p deranges s}) = round(&(FACT n) / e)
 PAIR_BETA_THM =  |- ((#=:fun('?208835,fun('?208835,bool)) ((#GABS:fun(fun(fun(prod('?208844,'?208843),'?208835),bool),fun(prod('?208844,'?208843),'?208835)) (\_132140:fun(prod('?208844,'?208843),'?208835). (#!:fun(fun('?208844,bool),bool) (\x:'?208844. (#!:fun(fun('?208843,bool),bool) (\y:'?208843. ((#GEQ:fun('?208835,fun('?208835,bool)) (_132140:fun(prod('?208844,'?208843),'?208835) ((#,:fun('?208844,fun('?208843,prod('?208844,'?208843))) x:'?208844) y:'?208843))) ((P:fun('?208844,fun('?208843,'?208835)) x:'?208844) y:'?208843)))))))) ((#,:fun('?208844,fun('?208843,prod('?208844,'?208843))) a:'?208844) b:'?208843))) ((P:fun('?208844,fun('?208843,'?208835)) a:'?208844) b:'?208843))
 domain =  |- (#!:fun(fun(fun(prod('?208860,'?208869),bool),bool),bool) (\r:fun(prod('?208860,'?208869),bool). ((#=:fun(fun('?208860,bool),fun(fun('?208860,bool),bool)) (#domain:fun(fun(prod('?208860,'?208869),bool),fun('?208860,bool)) r:fun(prod('?208860,'?208869),bool))) (#GSPEC:fun(fun('?208860,bool),fun('?208860,bool)) (\GEN%PVAR%387:'?208860. (#?:fun(fun('?208860,bool),bool) (\x:'?208860. (((#SETSPEC:fun('?208860,fun(bool,fun('?208860,bool))) GEN%PVAR%387:'?208860) (#?:fun(fun('?208869,bool),bool) (\y:'?208869. (r:fun(prod('?208860,'?208869),bool) ((#,:fun('?208860,fun('?208869,prod('?208860,'?208869))) x:'?208860) y:'?208869))))) x:'?208860))))))))
 range =  |- (#!:fun(fun(fun(prod('?208896,'?208886),bool),bool),bool) (\r:fun(prod('?208896,'?208886),bool). ((#=:fun(fun('?208886,bool),fun(fun('?208886,bool),bool)) (#range:fun(fun(prod('?208896,'?208886),bool),fun('?208886,bool)) r:fun(prod('?208896,'?208886),bool))) (#GSPEC:fun(fun('?208886,bool),fun('?208886,bool)) (\GEN%PVAR%388:'?208886. (#?:fun(fun('?208886,bool),bool) (\y:'?208886. (((#SETSPEC:fun('?208886,fun(bool,fun('?208886,bool))) GEN%PVAR%388:'?208886) (#?:fun(fun('?208896,bool),bool) (\x:'?208896. (r:fun(prod('?208896,'?208886),bool) ((#,:fun('?208896,fun('?208886,prod('?208896,'?208886))) x:'?208896) y:'?208886))))) y:'?208886))))))))

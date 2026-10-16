@@ -65975,19 +65975,19 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|Warning: inventing type variables
       #|Geometric_Algebra/geometricalgebra quotations (591):
       #|  {i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}
-      #|  !x. mbasis{} * x = x
+      #|  forall x. mbasis{} * x = x
       #|  {i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}
-      #|  !x. x * mbasis{} = x
+      #|  forall x. x * mbasis{} = x
       #|  ~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)
-      #|  !i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})
-      #|  !i. mbasis{i}:real^(N)multivector * mbasis{i} =\n       if i IN 1..dimindex (:N) then mbasis {}\n       else vec 0
+      #|  forall i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})
+      #|  forall i. mbasis{i}:real^(N)multivector * mbasis{i} =\n       if i IN 1..dimindex (:N) then mbasis {}\n       else vec 0
       #|  2 < i /\\ i <= dimindex (:N) ==> 1 <= i - 2 /\\ i - 2 <= dimindex (:N)
       #|  2 < i /\\ i <= dimindex (:N) ==> 1 <= i - 1 /\\ i - 1 <= dimindex (:N)
       #|  2 < i ==> ~(i - 2 = i - 1)
       #|  2 < i ==> 1 <= i
       #|  2 < i ==> ~(i - 2 = i)
       #|  2 < i ==> ~(i - 1 = i)
-      #|  !i. 2 < i /\\ i<= dimindex(:N) ==>\n     (mbasis {i-2} * mbasis {i-1} * (mbasis {i}:real^(N)multivector)) * (mbasis {i-2} * mbasis {i-1} * mbasis {i}) = --mbasis {}
+      #|  forall i. 2 < i /\\ i<= dimindex(:N) ==>\n     (mbasis {i-2} * mbasis {i-1} * (mbasis {i}:real^(N)multivector)) * (mbasis {i-2} * mbasis {i-1} * mbasis {i}) = --mbasis {}
       #|  p + q + 1<= i ==> ~(4 * i - 3 * p - q - 1 = i - q:num)
       #|  p + q + 1<= i ==> ~(4 * i - 3 * p - q - 2 = i - q:num)
       #|  p + q + 1<= i ==> ~(4 * i - 3 * p - q = i - q:num)
@@ -65995,20 +65995,20 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  a + b = vec 0 <=> b = --a
       #|  (a + b) + c + d = (a + d)+(b + c:real^N)
       #|  2  <  3 * i - 2 * p + r  /\\  3 * i - 2 * p + r <= dimindex (:N)
-      #|  !p q r i e.\n    1 <= p + q + r /\\ p + 3 * q + 4 * r <= dimindex(:N) /\\\n    (e i = if 1 <= i /\\ i <= p then (mbasis {i}:real^(N)multivector)\n           else if p + 1 <= i /\\ i <= p + q then\n                 (mbasis {(3 * i - 2 * p + r) - 2} * mbasis {(3 * i - 2 * p + r) - 1} * mbasis {3 * i - 2 * p + r })\n           else if p + q + 1 <= i /\\ i <= p + q + r then\n                 (mbasis {i - q} + mbasis {(4 * i - 3 * p - q) - 2} * mbasis {(4 * i - 3 * p - q) - 1} * mbasis {(4 * i - 3 * p) - q })\n           else vec 0) ==>\n     e i * e i = if 1 <= i /\\ i <= p then mbasis {}\n                 else if p + 1 <= i /\\ i <= p + q then -- mbasis {}\n                 else vec 0
+      #|  forall p q r i e.\n    1 <= p + q + r /\\ p + 3 * q + 4 * r <= dimindex(:N) /\\\n    (e i = if 1 <= i /\\ i <= p then (mbasis {i}:real^(N)multivector)\n           else if p + 1 <= i /\\ i <= p + q then\n                 (mbasis {(3 * i - 2 * p + r) - 2} * mbasis {(3 * i - 2 * p + r) - 1} * mbasis {3 * i - 2 * p + r })\n           else if p + q + 1 <= i /\\ i <= p + q + r then\n                 (mbasis {i - q} + mbasis {(4 * i - 3 * p - q) - 2} * mbasis {(4 * i - 3 * p - q) - 1} * mbasis {(4 * i - 3 * p) - q })\n           else vec 0) ==>\n     e i * e i = if 1 <= i /\\ i <= p then mbasis {}\n                 else if p + 1 <= i /\\ i <= p + q then -- mbasis {}\n                 else vec 0
       #|  {i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n}}
-      #|  !P m n. FINITE {i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n} /\\ P i j}
+      #|  forall P m n. FINITE {i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n} /\\ P i j}
       #|  {i,j | i IN m..n /\\ j IN m'..n'}
-      #|  !P m n m' n'. FINITE {i,j | i IN m..n /\\ j IN m'..n' /\\ P i j}
+      #|  forall P m n m' n'. FINITE {i,j | i IN m..n /\\ j IN m'..n' /\\ P i j}
       #|  pdimindex(s:A->bool) = dimindex(s) - 1
       #|  dimindex(s:A->bool) = pdimindex(s) + 1
       #|  pdimindex(s:A->bool) < dimindex(s)
-      #|  !x. x <= pdimindex s ==> x <= dimindex s
+      #|  forall x. x <= pdimindex s ==> x <= dimindex s
       #|  (:A) HAS_SIZE n + 1 ==> pdimindex(:A) = n
       #|  1
       #|  ?x. x IN 1..n+1
       #|  (:A) = IMAGE mk (1..n+1)
-      #|  (!a:A. mk(dest a) = a) /\\ (!r. r IN 1..n+1 <=> dest(mk r) = r)\n     ==> (:A) HAS_SIZE n+1
+      #|  (forall a:A. mk(dest a) = a) /\\ (forall r. r IN 1..n+1 <=> dest(mk r) = r)\n     ==> (:A) HAS_SIZE n+1
       #|  n:num
       #|  1
       #|  ?x. x IN 1..(if 1 <= pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n                  then pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) else 1)
@@ -66020,49 +66020,49 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  (:(P,Q,R)geomalg) HAS_SIZE (2 EXP (pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)))
       #|  FINITE(:(P,Q,R)geomalg)
       #|  dimindex(:(P,Q,R)geomalg) = 2 EXP (pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))
-      #|  !s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> dest_geomalg(mk_geomalg s:(P,Q,R)geomalg) = s
+      #|  forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> dest_geomalg(mk_geomalg s:(P,Q,R)geomalg) = s
       #|  m:(P,Q,R)geomalg
-      #|  (!s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> P(mk_geomalg s)) <=>\n   (!m:(P,Q,R)geomalg. P m)
+      #|  (forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> P(mk_geomalg s)) <=>\n   (forall m:(P,Q,R)geomalg. P m)
       #|  :real^N->(num->bool)->real
       #|  setindex:real^(P,Q,R)geomalg->(num->bool)->real
       #|  (x:real^(P,Q,R)geomalg) $$ s = x$(setcode s)
       #|  :((num->bool)->real)->real^N
       #|  lambdaset:((num->bool)->real)->real^(P,Q,R)geomalg
       #|  (lambdaset) (g:(num->bool)->real) =\n    (lambda i. g(codeset i)):real^(P,Q,R)geomalg
-      #|  !x y:real^(P,Q,R)geomalg.\n        x = y <=> !s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> x$$s = y$$s
-      #|  !s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n         ==> ((lambdas) g :real^(P,Q,R)geomalg)$$s = g s
-      #|  !m:real^(P,Q,R)geomalg g.\n        (!s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> m$$s = g s)\n        ==> (lambdas) g = m
+      #|  forall x y:real^(P,Q,R)geomalg.\n        x = y <=> forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> x$$s = y$$s
+      #|  forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n         ==> ((lambdas) g :real^(P,Q,R)geomalg)$$s = g s
+      #|  forall m:real^(P,Q,R)geomalg g.\n        (forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> m$$s = g s)\n        ==> (lambdas) g = m
       #|  (lambdas s. m$$s) = m
-      #|  !x y:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (x + y)$$s = x$$s + y$$s
-      #|  !c x:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (c % x)$$s = c * x$$s
-      #|  !k s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (vec k :real^(P,Q,R)geomalg)$$s = &k
-      #|  !f:A->real^(P,Q,R)geomalg t s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)
-      #|  !t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)
+      #|  forall x y:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (x + y)$$s = x$$s + y$$s
+      #|  forall c x:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (c % x)$$s = c * x$$s
+      #|  forall k s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (vec k :real^(P,Q,R)geomalg)$$s = &k
+      #|  forall f:A->real^(P,Q,R)geomalg t s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)
+      #|  forall t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)
       #|  :(num->bool)->real^N
       #|  mvbasis:(num->bool)->real^(P,Q,R)geomalg
       #|  mvbasis i = lambdas s. if i = s then &1 else &0
-      #|  !s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis t :real^(P,Q,R)geomalg)$$s = if s = t then &1 else &0
+      #|  forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis t :real^(P,Q,R)geomalg)$$s = if s = t then &1 else &0
       #|  ~(&1 = &0)
-      #|  !s. (mbasis s :real^(P,Q,R)geomalg = vec 0) <=>\n       ~(s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))
-      #|  !s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> ~(mbasis s :real^(P,Q,R)geomalg = vec 0)
+      #|  forall s. (mbasis s :real^(P,Q,R)geomalg = vec 0) <=>\n       ~(s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))
+      #|  forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> ~(mbasis s :real^(P,Q,R)geomalg = vec 0)
       #|  x * (if p then &1 else &0) = if p then x else &0
-      #|  !x:real^(P,Q,R)geomalg.\n        vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} (\\s. x$$s % mbasis s) = x
+      #|  forall x:real^(P,Q,R)geomalg.\n        vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} (\\s. x$$s % mbasis s) = x
       #|  x:real^(P,Q,R)geomalg
       #|  span {mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} = UNIV
       #|  s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n   ==> (mbasis s):real^(P,Q,R)geomalg = basis (setcode s)
       #|  s:num->bool
-      #|  !s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis s :real^(P,Q,R)geomalg = mbasis t)\n         ==> (s = t)
+      #|  forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis s :real^(P,Q,R)geomalg = mbasis t)\n         ==> (s = t)
       #|  {i}:num->bool
-      #|  !i j. i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis {i}:real^(P,Q,R)geomalg) = mbasis {j}\n         ==> i = j
-      #|  !x:real^(P,Q,R)geomalg s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> ((mbasis s) dot x = x$$s) /\\ (x dot (mbasis s) = x$$s)
-      #|  !s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis s:real^(P,Q,R)geomalg) dot (mbasis t) = if s = t then &1 else &0
-      #|  !s t. ~(s = t) ==> (mbasis s) dot (mbasis t) = &0
+      #|  forall i j. i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis {i}:real^(P,Q,R)geomalg) = mbasis {j}\n         ==> i = j
+      #|  forall x:real^(P,Q,R)geomalg s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> ((mbasis s) dot x = x$$s) /\\ (x dot (mbasis s) = x$$s)
+      #|  forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis s:real^(P,Q,R)geomalg) dot (mbasis t) = if s = t then &1 else &0
+      #|  forall s t. ~(s = t) ==> (mbasis s) dot (mbasis t) = &0
       #|  (if x = y then p else q) = (if y = x then p else q)
       #|  \\v:real^(P,Q,R)geomalg. x dot v
       #|  (IMAGE mbasis ({t|t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} INTER s)):real^(P,Q,R)geomalg->bool
       #|  x:real^(P,Q,R)geomalg
       #|  x:real^(P,Q,R)geomalg
-      #|  !x:real^(P,Q,R)geomalg s.\n        x IN span(IMAGE mbasis s) <=>\n          !t. t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\ ~(t IN s) ==> x$$t = &0
+      #|  forall x:real^(P,Q,R)geomalg s.\n        x IN span(IMAGE mbasis s) <=>\n          forall t. t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\ ~(t IN s) ==> x$$t = &0
       #|  {mbasis s:real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} =\n    {basis i| 1 <= i /\\ i <= dimindex (:(P,Q,R)geomalg)}
       #|  independent {mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
       #|  {i}:num->bool
@@ -66072,15 +66072,15 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  {mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
       #|  independent {mbasis {i} :real^(P,Q,R)geomalg | 1 <= i /\\ i <= pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
       #|  (mbasis s):real^(P,Q,R)geomalg =\n     (basis (setcode s)):real^(P,Q,R)geomalg
-      #|  !s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n       ==>   (norm(mbasis s :real^(P,Q,R)geomalg) = &1)
+      #|  forall s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n       ==>   (norm(mbasis s :real^(P,Q,R)geomalg) = &1)
       #|  {mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
-      #|  !x. x IN UNIV ==> (f:real^(P,Q,R)geomalg->real^N) x = g x
-      #|  !f:real^(P,Q,R)geomalg->real^N g b s.\n        linear f /\\ linear g /\\\n        (!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g
+      #|  forall x. x IN UNIV ==> (f:real^(P,Q,R)geomalg->real^N) x = g x
+      #|  forall f:real^(P,Q,R)geomalg->real^N g b s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g
       #|  {mbasis t :real^(P',Q',R')geomalg | t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')}
       #|  {mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
-      #|  !x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N) x y = g x y
-      #|  !f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N g b s.\n        bilinear f /\\ bilinear g /\\\n        (!s t.  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g
-      #|  !P. (!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> P(mbasis s)) /\\\n       (!c x. P x ==> P(c % x)) /\\ (!x y. P x /\\ P y ==> P(x + y))\n       ==> !x:real^(P,Q,R)geomalg. P x
+      #|  forall x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N) x y = g x y
+      #|  forall f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N g b s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g
+      #|  forall P. (forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> P(mbasis s)) /\\\n       (forall c x. P x ==> P(c % x)) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall x:real^(P,Q,R)geomalg. P x
       #|  :real^M->real^N
       #|  multivect:real^(P, Q, R)trip_fin_sum->real^(P,Q,R)geomalg
       #|  (multivect:real^(P,Q,R)trip_fin_sum->real^(P,Q,R)geomalg) x =\n      vsum(1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) (\\i. x$i % mbasis{i})
@@ -66090,30 +66090,30 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  &0:real
       #|  1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)
       #|  mbasis {i}:real^(P,Q,R)geomalg =\n      vsum (1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) (\\i'. if i' = i then mbasis {i} else vec 0)
-      #|  !i. multivec (basis i:real^(P,Q,R)trip_fin_sum) = mbasis {i}
+      #|  forall i. multivec (basis i:real^(P,Q,R)trip_fin_sum) = mbasis {i}
       #|  \\v. (x:real^(P, Q, R)trip_fin_sum)$((g:real^(P,Q,R)geomalg->num) v)
       #|  ~(a==>b) <=> a /\\ ~b
       #|  g:real^(P,Q,R)geomalg->num
       #|  {mbasis {i} :real^(P,Q,R)geomalg | 1 <= i /\\ i <= pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}
-      #|  !x:real^(P, Q, R)trip_fin_sum.\n   1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==> (x = vec 0 <=> multivec x = vec 0)
-      #|  !x y:real^(P, Q, R)trip_fin_sum.\n     1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==>\n       (x = y <=> multivec x = multivec y)
+      #|  forall x:real^(P, Q, R)trip_fin_sum.\n   1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==> (x = vec 0 <=> multivec x = vec 0)
+      #|  forall x y:real^(P, Q, R)trip_fin_sum.\n     1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==>\n       (x = y <=> multivec x = multivec y)
       #|  :num->real^N->bool
       #|  multivectorga:num->real^(P,Q,R)geomalg->bool
-      #|  k multivector (p:real^(P,Q,R)geomalg) <=>\n        !s. s SUBSET (1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(p$$s = &0)\n               ==> s HAS_SIZE k
-      #|  !k. k multivector (vec 0:real^(P,Q,R)geomalg)
+      #|  k multivector (p:real^(P,Q,R)geomalg) <=>\n        forall s. s SUBSET (1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(p$$s = &0)\n               ==> s HAS_SIZE k
+      #|  forall k. k multivector (vec 0:real^(P,Q,R)geomalg)
       #|  :num->real^N->real^N
       #|  grade_geomalg:num->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  k grade (p:real^(P,Q,R)geomalg) =\n     (lambdas s. if s HAS_SIZE k then p$$s else &0):real^(P,Q,R)geomalg
-      #|  !k x. k multivector (k grade x)
-      #|  !x y k. k grade (x + y) = (k grade x) + (k grade y)
-      #|  !c x k. k grade (c % x) = c % (k grade x)
+      #|  forall k x. k multivector (k grade x)
+      #|  forall x y k. k grade (x + y) = (k grade x) + (k grade y)
+      #|  forall c x k. k grade (c % x) = c % (k grade x)
       #|  s SYMDIFF t = (s DIFF t) UNION (t DIFF s)
-      #|  (!s. s SYMDIFF {} = s) /\\  (!s. {} SYMDIFF s = s)
-      #|  (!s t. s SYMDIFF t = t SYMDIFF s)
-      #|  !s t u. s SUBSET u /\\ t SUBSET u ==> (s SYMDIFF t) SUBSET u
-      #|  !s t u. s SYMDIFF (t SYMDIFF u) = (s SYMDIFF t) SYMDIFF u
+      #|  (forall s. s SYMDIFF {} = s) /\\  (forall s. {} SYMDIFF s = s)
+      #|  (forall s t. s SYMDIFF t = t SYMDIFF s)
+      #|  forall s t u. s SUBSET u /\\ t SUBSET u ==> (s SYMDIFF t) SUBSET u
+      #|  forall s t u. s SYMDIFF (t SYMDIFF u) = (s SYMDIFF t) SYMDIFF u
       #|  (Productga sgn\n     :real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg) x y =\n        vsum {s | s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))}\n         (\\s. vsum {s | s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))}\n                (\\t. (sgn s t * x$$s * y$$t) % mbasis (s SYMDIFF t)))
-      #|  !sgn. bilinear(Productga sgn)
+      #|  forall sgn. bilinear(Productga sgn)
       #|  f:(num->bool)->(num->bool)->real
       #|  {s | s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))}
       #|  a * (if p then b else &0) = if p then a * b else &0
@@ -66122,14 +66122,14 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  t:num->bool
       #|  s:num->bool
       #|  r:num->bool
-      #|  !sgn1 sgn2.\n       (!s t u. sgn1 t u * sgn2 s (t SYMDIFF u) = sgn2 s t * sgn1 (s SYMDIFF t) u)\n             ==> !x y z:real^(P,Q,R)geomalg.\n                        Productga sgn2 x (Productga sgn1 y z) =\n                        Productga sgn1 (Productga sgn2 x y) z
+      #|  forall sgn1 sgn2.\n       (forall s t u. sgn1 t u * sgn2 s (t SYMDIFF u) = sgn2 s t * sgn1 (s SYMDIFF t) u)\n             ==> forall x y z:real^(P,Q,R)geomalg.\n                        Productga sgn2 x (Productga sgn1 y z) =\n                        Productga sgn1 (Productga sgn2 x y) z
       #|  geomga_mul:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  (x:real^(P,Q,R)geomalg) * y =\n     Productga (\\s t.\n       --(&1) pow CARD {i,j | i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                              j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                              i IN s /\\ j IN t /\\ i > j} *\n       --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n           &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n        x y
       #|  bilinear(geomga_mul)
       #|  (x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))
       #|  (x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))
       #|  (a:real * b*c) * (d*e*f) = (a*d)*(b*e)*(c*f)
-      #|  !x y z:real^(P,Q,R)geomalg. x * (y * z) = (x * y) * z
+      #|  forall x y z:real^(P,Q,R)geomalg. x * (y * z) = (x * y) * z
       #|  t:num->bool
       #|  s:num->bool
       #|  u:num->bool
@@ -66148,25 +66148,25 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  t INTER u :num->bool = {}
       #|  s INTER u :num->bool = {}
       #|  s INTER t :num->bool = {}
-      #|  !x y z:real^(P,Q,R)geomalg. x outer (y outer z) = (x outer y) outer z
+      #|  forall x y z:real^(P,Q,R)geomalg. x outer (y outer z) = (x outer y) outer z
       #|  :real^N->real^N->real^N
       #|  innerga:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  x inner y:real^(P,Q,R)geomalg=\n      Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s SUBSET t) /\\ ~(t SUBSET s)\n                     then &0\n                     else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                 j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                 i IN s /\\ j IN t /\\ i > j} *\n                          --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                              &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n               x y
-      #|  !x y:real^(P,Q,R)geomalg.\n    x lcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s SUBSET t)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   i IN s /\\ j IN t /\\ i > j}*\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
-      #|  !x y:real^(P,Q,R)geomalg.\n    x rcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(t SUBSET s)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n\n                                                   i IN s /\\ j IN t /\\ i > j}*\n\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
-      #|  !x y:real^(P,Q,R)geomalg.\n    x scalarinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s = t)\n                       then &0\n                       else --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
+      #|  forall x y:real^(P,Q,R)geomalg.\n    x lcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s SUBSET t)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   i IN s /\\ j IN t /\\ i > j}*\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
+      #|  forall x y:real^(P,Q,R)geomalg.\n    x rcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(t SUBSET s)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n\n                                                   i IN s /\\ j IN t /\\ i > j}*\n\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
+      #|  forall x y:real^(P,Q,R)geomalg.\n    x scalarinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s = t)\n                       then &0\n                       else --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y
       #|  bilinear(inner)
       #|  bilinear(lcinner)
       #|  bilinear(rcinner)
       #|  bilinear(scalarinner)
       #|  t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))
       #|  x * (if p then &1 else &0) * (if q then &1 else &0) =\n    if q then if p then x else &0 else &0
-      #|  !s t. Productga sgn (mbasis s) (mbasis t) :real^(P,Q,R)geomalg =\n            if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n               t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n            then sgn s t % mbasis(s SYMDIFF t)\n            else vec 0
+      #|  forall s t. Productga sgn (mbasis s) (mbasis t) :real^(P,Q,R)geomalg =\n            if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n               t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n            then sgn s t % mbasis(s SYMDIFF t)\n            else vec 0
       #|  {x} SUBSET s <=> x IN s
-      #|  !i j. Productga sgn (mbasis{i}) (mbasis{j}) :real^(P,Q,R)geomalg =\n            if i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n               j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n            then sgn {i} {j} % mbasis({i} SYMDIFF {j})\n            else vec 0
-      #|  !s t.\n     mbasis s * mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)
+      #|  forall i j. Productga sgn (mbasis{i}) (mbasis{j}) :real^(P,Q,R)geomalg =\n            if i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n               j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n            then sgn {i} {j} % mbasis({i} SYMDIFF {j})\n            else vec 0
+      #|  forall s t.\n     mbasis s * mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)
       #|  ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s) <=>\n                       ~(s = {} \\/ t = {} \\/ ~(s SUBSET t) /\\ ~(t SUBSET s))
-      #|  !s t.\n     mbasis s inner mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)
+      #|  forall s t.\n     mbasis s inner mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)
       #|  j:num<=p ==> j< p + q + 1
       #|  CARD {j:num} = 1
       #|  CARD {j:num} = 1
@@ -66187,7 +66187,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  ~(i:num = j) ==> (j < i <=> ~(i < j))
       #|  i:num = j
       #|  {i',j' | (1 <= i' /\\ i' <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)) /\\\n              (1 <= j' /\\ j' <= (pdimindex(:P) + pdimindex(:Q) + pdimindex (:R)))  /\\\n                i' = i /\\\n                j' = j /\\\n           i' > j'}   =\n    if i > j then {(i,j)} else {}
-      #|  !i j.\n     mbasis {i} * mbasis {j} :real^(P,Q,R)geomalg=\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n      then if i = j\n           then if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n           else if i < j then mbasis {i, j} else --mbasis {i, j}\n      else vec 0)
+      #|  forall i j.\n     mbasis {i} * mbasis {j} :real^(P,Q,R)geomalg=\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n      then if i = j\n           then if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n           else if i < j then mbasis {i, j} else --mbasis {i, j}\n      else vec 0)
       #|  j:num<=p ==> j< p + q + 1
       #|  CARD {j:num} = 1
       #|  CARD {j:num} = 1
@@ -66201,22 +66201,22 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  {i',j' | (((((1 <= i' /\\ i' <= (pdimindex (:P) + pdimindex (:Q) + pdimindex (:R))) /\\\n              1 <= j') /\\ j' <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)) /\\\n                i' = i) /\\ j' = j) /\\ i' > j'}  = {}
       #|  i:num = j
       #|  ~({i} = {})
-      #|  !i j.\n     mbasis {i} inner mbasis {j} :real^(P,Q,R)geomalg =\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         i = j\n       then if i IN 1..pdimindex (:P)\n             then mbasis {}\n             else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n        else vec 0)
+      #|  forall i j.\n     mbasis {i} inner mbasis {j} :real^(P,Q,R)geomalg =\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         i = j\n       then if i IN 1..pdimindex (:P)\n             then mbasis {}\n             else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n        else vec 0)
       #|  s INTER t = {} ==> s DIFF t UNION t DIFF s = s UNION t
       #|  (s:num->bool) INTER t = {}
-      #|  !s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n                if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0
+      #|  forall s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n                if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0
       #|  i:num < j
       #|  ~(i:num = j) ==> (j < i <=> ~(i < j))
       #|  ~(i = j) ==> ({i} DIFF {j}) UNION ({j} DIFF {i}) = {i,j}
       #|  {i',j' | i' IN 1 .. pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n             j' IN 1 .. pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}
       #|  i:num = j
       #|  {i} INTER {j} = {} <=> ~(i = j)
-      #|  !i j. mbasis{i} outer mbasis{j} :real^(P,Q,R)geomalg =\n                if i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0
+      #|  forall i j. mbasis{i} outer mbasis{j} :real^(P,Q,R)geomalg =\n                if i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0
       #|  s INTER t = {} ==> s DIFF t UNION t DIFF s = s UNION t
-      #|  !s t. s INTER t = {} ==>\n  (mbasis s) * (mbasis t) :real^(P,Q,R)geomalg = (mbasis s) outer (mbasis t)
+      #|  forall s t. s INTER t = {} ==>\n  (mbasis s) * (mbasis t) :real^(P,Q,R)geomalg = (mbasis s) outer (mbasis t)
       #|  s INTER t = {} ==> s DIFF t UNION t DIFF s = s UNION t
-      #|  !s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n    if s INTER t = {} then mbasis s * mbasis t else vec 0
-      #|  !s t. (mbasis s) inner (mbasis t) :real^(P,Q,R)geomalg =\n    if  ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s) then mbasis s * mbasis t else vec 0
+      #|  forall s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n    if s INTER t = {} then mbasis s * mbasis t else vec 0
+      #|  forall s t. (mbasis s) inner (mbasis t) :real^(P,Q,R)geomalg =\n    if  ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s) then mbasis s * mbasis t else vec 0
       #|  {i,j | i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n                     j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\ i > j}
       #|  (x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))
       #|  (a * c * d) * b = a:real * b * c * d
@@ -66226,7 +66226,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  u SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
       #|  t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
       #|  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
-      #|  !s t u.\n     s INTER u = {} ==>\n       (mbasis s):real^(P,Q,R)geomalg * (mbasis t outer mbasis u) =\n       (mbasis s * mbasis t) outer mbasis u
+      #|  forall s t u.\n     s INTER u = {} ==>\n       (mbasis s):real^(P,Q,R)geomalg * (mbasis t outer mbasis u) =\n       (mbasis s * mbasis t) outer mbasis u
       #|  t:num->bool
       #|  s:num->bool
       #|  u:num->bool
@@ -66240,62 +66240,62 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  u SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
       #|  t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
       #|  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)
-      #|  !s t u.\n     s INTER u = {} ==>\n       (mbasis s outer mbasis t) * (mbasis u):real^(P,Q,R)geomalg =\n       mbasis s outer (mbasis t * mbasis u)
+      #|  forall s t u.\n     s INTER u = {} ==>\n       (mbasis s outer mbasis t) * (mbasis u):real^(P,Q,R)geomalg =\n       mbasis s outer (mbasis t * mbasis u)
       #|  t:num->bool
       #|  u:num->bool
       #|  s:num->bool
       #|  t:num->bool
       #|  ~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)
       #|  i:num = j
-      #|  !i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})
-      #|  !x:real^N. x = --x ==> x = vec 0
-      #|  !i. mbasis{i} outer mbasis{i} = vec 0
+      #|  forall i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})
+      #|  forall x:real^N. x = --x ==> x = vec 0
+      #|  forall i. mbasis{i} outer mbasis{i} = vec 0
       #|  {i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}
-      #|  !x. mbasis{} outer x = x
+      #|  forall x. mbasis{} outer x = x
       #|  {i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}
-      #|  !x. x outer mbasis{} = x
-      #|  !i j.\n   mbasis{i} outer (mbasis{j}:real^(P,Q,R)geomalg) = vec 0\n       <=> ~(i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ ~(i = j))
+      #|  forall x. x outer mbasis{} = x
+      #|  forall i j.\n   mbasis{i} outer (mbasis{j}:real^(P,Q,R)geomalg) = vec 0\n       <=> ~(i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ ~(i = j))
       #|  ~(n < m /\\ n:num > m)
       #|  {(i:num),(j:num) | i IN {a} /\\ j IN s /\\ i > j} = {}
       #|  {a} UNION s = a INSERT s
       #|  {a} SUBSET t /\\ s SUBSET t <=> (a INSERT s) SUBSET t
       #|  {a:num} INTER s = {}
-      #|  !a s. (!x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s
+      #|  forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s
       #|  ~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)
-      #|  !i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})
-      #|  !i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0
+      #|  forall i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})
+      #|  forall i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0
       #|  {i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}
-      #|  !x. mbasis{} * x = x
+      #|  forall x. mbasis{} * x = x
       #|  {i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}
-      #|  !x. x * mbasis{} = x
+      #|  forall x. x * mbasis{} = x
       #|  {a:num} INTER s = {}
-      #|  !a s. (!x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} * mbasis s
+      #|  forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} * mbasis s
       #|  i:num = j
-      #|  !i j. mbasis{i} inner mbasis{j} = mbasis{j} inner mbasis{i}
-      #|  !i. mbasis{i}:real^(P,Q,R)geomalg inner mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0
+      #|  forall i j. mbasis{i} inner mbasis{j} = mbasis{j} inner mbasis{i}
+      #|  forall i. mbasis{i}:real^(P,Q,R)geomalg inner mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0
       #|  swappair p = (SND p, FST p)
-      #|  !x y:real^(P,Q,R)trip_fin_sum.\n  (multivec x) * (multivec y) = (multivec x) outer (multivec y) + (multivec x) inner (multivec y)
-      #|  !s. {x,y | x IN s /\\ y IN s} = IMAGE swappair {x,y | x IN s /\\ y IN s}
-      #|  !P. (\\(x,y). P x y) = (\\(x,y). P y x) o swappair
-      #|  !x y:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec y) = --((multivec y) outer (multivec x))
+      #|  forall x y:real^(P,Q,R)trip_fin_sum.\n  (multivec x) * (multivec y) = (multivec x) outer (multivec y) + (multivec x) inner (multivec y)
+      #|  forall s. {x,y | x IN s /\\ y IN s} = IMAGE swappair {x,y | x IN s /\\ y IN s}
+      #|  forall P. (\\(x,y). P x y) = (\\(x,y). P y x) o swappair
+      #|  forall x y:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec y) = --((multivec y) outer (multivec x))
       #|  x = --x ==> x = vec 0:real^N
-      #|  !x:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec x) = vec 0
+      #|  forall x:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec x) = vec 0
       #|  1 <= (i:num) ==> ~(i + n <= n)
       #|  vsum(1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n       (\\i. ((x:real^(P,Q,R)trip_fin_sum)$i * x$i) % (mbasis {i} inner mbasis {i})):real^(P,Q,R)geomalg
-      #|  !x:real^(P,Q,R)trip_fin_sum.\n     multivec x inner multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}
-      #|  !x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x = multivec x inner multivec x
-      #|  !x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}
-      #|  ((!x:num. x IN {} ==> a < x) <=> T) /\\\n    ((!x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (!x. x IN s ==> a < x))
+      #|  forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x inner multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}
+      #|  forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x = multivec x inner multivec x
+      #|  forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}
+      #|  ((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))
       #|  mbasis {1,2}
-      #|  ((!x:num. x IN {} ==> a < x) <=> T) /\\\n    ((!x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (!x. x IN s ==> a < x))
+      #|  ((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))
       #|  mbasis {1,2}
       #|  x - y:real^N = x + --y
-      #|  (!x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (!i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (!i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (!i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (!i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (!x. mbasis{} outer x = x) /\\\n   (!x. x outer mbasis{} = x)
+      #|  (forall x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (forall i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (forall i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (forall i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (forall x. mbasis{} outer x = x) /\\\n   (forall x. x outer mbasis{} = x)
       #|  i:num > j ==> ~(i = j)
-      #|  (!x y z:real^(P,Q,R)geomalg. (x * y) * z = x * (y * z)) /\\\n   (!i j. i > j\n          ==> mbasis{i}:real^(P,Q,R)geomalg * mbasis{j} =\n              --(&1) % (mbasis{j} * mbasis{i})) /\\\n   (!i j x:real^(P,Q,R)geomalg. i > j\n            ==> mbasis{i} * mbasis{j} * x =\n                --(&1) % (mbasis{j} * mbasis{i} * x)) /\\\n   (!i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} = (if i IN 1..pdimindex (:P)\n          then mbasis{}\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % mbasis{}\n               else vec 0)) /\\\n   (!i x:real^(P,Q,R)geomalg. mbasis{i} * mbasis{i} * x = if i IN 1..pdimindex (:P)\n          then x\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % x\n               else vec 0) /\\\n   (!x:real^(P,Q,R)geomalg. mbasis{} * x = x) /\\\n   (!x:real^(P,Q,R)geomalg. x * mbasis{} = x) /\\\n   (!p x y z:real^(P,Q,R)geomalg. x * (if p then y else z) =\n       if p then x * y else x * z)
+      #|  (forall x y z:real^(P,Q,R)geomalg. (x * y) * z = x * (y * z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i}:real^(P,Q,R)geomalg * mbasis{j} =\n              --(&1) % (mbasis{j} * mbasis{i})) /\\\n   (forall i j x:real^(P,Q,R)geomalg. i > j\n            ==> mbasis{i} * mbasis{j} * x =\n                --(&1) % (mbasis{j} * mbasis{i} * x)) /\\\n   (forall i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} = (if i IN 1..pdimindex (:P)\n          then mbasis{}\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % mbasis{}\n               else vec 0)) /\\\n   (forall i x:real^(P,Q,R)geomalg. mbasis{i} * mbasis{i} * x = if i IN 1..pdimindex (:P)\n          then x\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % x\n               else vec 0) /\\\n   (forall x:real^(P,Q,R)geomalg. mbasis{} * x = x) /\\\n   (forall x:real^(P,Q,R)geomalg. x * mbasis{} = x) /\\\n   (forall p x y z:real^(P,Q,R)geomalg. x * (if p then y else z) =\n       if p then x * y else x * z)
       #|  &2 % mbasis{1,2} + &3 % mbasis{2} + &2 % mbasis{1,3} + --(&3) % mbasis{1}:real^('4,'1,'1)geomalg
       #|  (mbasis{2,3}:real^('3,'0,'1)geomalg) * mbasis{1,2,3,4}
-      #|  !a b x:num. ~(a=b) ==> ~(x=a /\\ x=b)
+      #|  forall a b x:num. ~(a=b) ==> ~(x=a /\\ x=b)
       #|  mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n                      mbasis{1} outer mbasis{2}:real^('4,'1,'1)geomalg)
       #|  mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n       mbasis{1} outer mbasis{2}:real^('4,'1,'1)geomalg)
       #|  multivec:real^(P,Q,R)trip_fin_sum->real^(P,Q,R)geomalg
@@ -66303,14 +66303,14 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  (multivec (basis 1 + basis 2)) outer (multivec (basis 2 + basis 3)) outer (multivec (basis 1 + (basis 3)))
       #|  mvinvertible (x:real^(P,Q,R)geomalg) <=> (?x'. x' * x = mbasis {} /\\ x * x' = mbasis {})
       #|  mvinverse (x:real^(P,Q,R)geomalg) = (@x'. x' * x = mbasis {} /\\ x * x' = mbasis {})
-      #|  !x:real^(P,Q,R)geomalg.\n    mvinvertible x <=> mvinverse x * x = mbasis {} /\\ x * mvinverse x = mbasis {}
+      #|  forall x:real^(P,Q,R)geomalg.\n    mvinvertible x <=> mvinverse x * x = mbasis {} /\\ x * mvinverse x = mbasis {}
       #|  (f':real^(P,Q,R)geomalg->real^(P,Q,R)geomalg) (x:real^(P,Q,R)geomalg) = mbasis {}
       #|  f':real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  (y:real^(P,Q,R)geomalg) * (z:real^(P,Q,R)geomalg)
       #|  z:real^(P,Q,R)geomalg
       #|  \\z:real^(P,Q,R)geomalg. x:(real^(P,Q,R)geomalg) * z
-      #|  !x y:real^(P,Q,R)geomalg. (x * y = mbasis {}) ==> (y * x = mbasis {})
-      #|  !x y:real^(P,Q,R)geomalg. x * y = mbasis {} <=> y * x = mbasis {}
+      #|  forall x y:real^(P,Q,R)geomalg. (x * y = mbasis {}) ==> (y * x = mbasis {})
+      #|  forall x y:real^(P,Q,R)geomalg. x * y = mbasis {} <=> y * x = mbasis {}
       #|  mvinvertible (x:real^(P,Q,R)geomalg) <=> (?x'. x' * x = mbasis {})
       #|  mvinvertible (x:real^(P,Q,R)geomalg) <=> (?x'. x * x' = mbasis {})
       #|  is_null (x:real^(P,Q,R)geomalg) <=> x inner x = vec 0
@@ -66318,26 +66318,26 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  \\y:real^(P,Q,R)geomalg. (x':real^(P,Q,R)geomalg) * x' * y
       #|  x':real^(P,Q,R)geomalg
       #|  inv(sum (1..pdimindex (:P)) (\\i. x$i * x$i) -\n           sum (1..pdimindex (:Q))\n              (\\i. x$(i + pdimindex (:P)) * x$(i + pdimindex (:P)))) % multivec (x:real^(P, Q, R)trip_fin_sum)
-      #|  !x:real^(P, Q, R)trip_fin_sum. ~(is_null(multivec x)) <=> mvinvertible (multivec x)
+      #|  forall x:real^(P, Q, R)trip_fin_sum. ~(is_null(multivec x)) <=> mvinvertible (multivec x)
       #|  b' * (a':real^(P,Q,R)geomalg)
       #|  b':real^(P,Q,R)geomalg
       #|  a':real^(P,Q,R)geomalg
-      #|  !a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b==> mvinvertible (a * b)
-      #|  !a b x:real^(P,Q,R)geomalg. mvinvertible x ==> (a = b <=> (x * a = x * b))
-      #|  !a b x:real^(P,Q,R)geomalg. mvinvertible x /\\ x * a = x * b ==> a = b
+      #|  forall a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b==> mvinvertible (a * b)
+      #|  forall a b x:real^(P,Q,R)geomalg. mvinvertible x ==> (a = b <=> (x * a = x * b))
+      #|  forall a b x:real^(P,Q,R)geomalg. mvinvertible x /\\ x * a = x * b ==> a = b
       #|  a:real^(P,Q,R)geomalg
       #|  b:real^(P,Q,R)geomalg
       #|  a * b:real^(P,Q,R)geomalg
       #|  b:real^(P,Q,R)geomalg
       #|  a:real^(P,Q,R)geomalg
-      #|  !a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b ==> mvinverse b * mvinverse a = mvinverse (a * b)
+      #|  forall a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b ==> mvinverse b * mvinverse a = mvinverse (a * b)
       #|  :(real^M->real^N)->real^A->real^B
       #|  outergamorphism:(real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum)->real^(P,Q,R)geomalg->real^(S,T,U)geomalg
       #|  outermorphism(f:real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum) (x:real^(P,Q,R)geomalg) =\n        vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}\n             (\\s. x$$s % seqiterate(outer) s (multivec o f o basis))
       #|  neutral(outer) = mbasis{}
       #|  neutral( * ) = mbasis{}
-      #|  !f:real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum s t.\n        s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)
-      #|  !f. outermorphism f (mbasis {}) = mbasis {}
+      #|  forall f:real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum s t.\n        s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)
+      #|  forall f. outermorphism f (mbasis {}) = mbasis {}
       #|  SUC n:num
       #|  m:num
       #|  n:num
@@ -66356,7 +66356,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  0:num
       #|  m:num
       #|  m = 0:num
-      #|  !n op m p f:num->real^(P,Q,R)geomalg.\n   seqiterate op (IMAGE (\\i. i + p) (m..n)) f = seqiterate op (m..n) (f o (\\i. i + p))
+      #|  forall n op m p f:num->real^(P,Q,R)geomalg.\n   seqiterate op (IMAGE (\\i. i + p) (m..n)) f = seqiterate op (m..n) (f o (\\i. i + p))
       #|  n:num
       #|  n + 1:num
       #|  n < n + 1
@@ -66377,7 +66377,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n + 1:num
       #|  n < n + 1
       #|  0 < 1
-      #|  !n m op f:num->real^(P,Q,R)geomalg.\n    (!x y z. op (op x y) z = op x (op y z) /\\ op (neutral op) x = x) ==>\n       m <= SUC n ==>\n          seqiterate op (m..SUC n) f = op (seqiterate op (m..n) f) (f (SUC n))
+      #|  forall n m op f:num->real^(P,Q,R)geomalg.\n    (forall x y z. op (op x y) z = op x (op y z) /\\ op (neutral op) x = x) ==>\n       m <= SUC n ==>\n          seqiterate op (m..SUC n) f = op (seqiterate op (m..n) f) (f (SUC n))
       #|  n:num
       #|  n + 1:num
       #|  n < n + 1
@@ -66386,7 +66386,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  m:num
       #|  f:num->real^(P,Q,R)geomalg
       #|  outerga:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
-      #|  !n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate (outer) (m..n) f = (f m) outer (seqiterate (outer) (m + 1..n) f)
+      #|  forall n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate (outer) (m..n) f = (f m) outer (seqiterate (outer) (m + 1..n) f)
       #|  outerga:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  m:num
       #|  n:num
@@ -66400,7 +66400,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  m:num
       #|  f:num->real^(P,Q,R)geomalg
       #|  geomga_mul:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
-      #|  !n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate ( * ) (m..n) f = (f m) * (seqiterate ( * ) (m + 1..n) f)
+      #|  forall n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate ( * ) (m..n) f = (f m) * (seqiterate ( * ) (m + 1..n) f)
       #|  geomga_mul:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  m:num
       #|  n:num
@@ -66408,21 +66408,21 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n:num
       #|  m <= n ==> SUC n - m + 1 = SUC (n - m + 1)
       #|  m <= n ==> m <= SUC n
-      #|  !n m x:real^(P, Q, R)trip_fin_sum f.\n   m <= n ==>\n   (multivec x) outer seqiterate (outer) (m..n) (multivec o f) =\n      (--(&1)) pow (n - m + 1) % (seqiterate (outer) (m..n) (multivec o f) outer (multivec x))
+      #|  forall n m x:real^(P, Q, R)trip_fin_sum f.\n   m <= n ==>\n   (multivec x) outer seqiterate (outer) (m..n) (multivec o f) =\n      (--(&1)) pow (n - m + 1) % (seqiterate (outer) (m..n) (multivec o f) outer (multivec x))
       #|  m <= i ==> m <= SUC i
       #|  m <= i /\\ i <= n:num
-      #|  !i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i) f outer\n                    seqiterate (outer) (i + 1..n) f
+      #|  forall i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i) f outer\n                    seqiterate (outer) (i + 1..n) f
       #|  m <= i ==> m <= SUC i
       #|  m <= i /\\ i <= n:num
-      #|  !i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate ( * ) (m..n) f =\n       seqiterate ( * ) (m..i) f *\n                    seqiterate ( * ) (i + 1..n) f
+      #|  forall i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate ( * ) (m..n) f =\n       seqiterate ( * ) (m..i) f *\n                    seqiterate ( * ) (i + 1..n) f
       #|  i + 1 <= SUC (j - 1)
       #|  j = SUC (j - 1)
       #|  m <= SUC (i - 1)
       #|  i = SUC (i - 1)
-      #|  !i j m n f:num->real^(P,Q,R)geomalg.\n       0 < i /\\ m <= i /\\  i <= n /\\\n       m <= j /\\ j <= n /\\ i < j\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i-1) f outer\n       f i outer\n       seqiterate (outer) (i+1..j-1) f outer\n       f j outer\n       seqiterate (outer) (j + 1..n) f
+      #|  forall i j m n f:num->real^(P,Q,R)geomalg.\n       0 < i /\\ m <= i /\\  i <= n /\\\n       m <= j /\\ j <= n /\\ i < j\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i-1) f outer\n       f i outer\n       seqiterate (outer) (i+1..j-1) f outer\n       f j outer\n       seqiterate (outer) (j + 1..n) f
       #|  i = SUC (i - 1)
       #|  i:num = 0
-      #|  !a:num->real^(P,Q,R)geomalg i m n.\n       m <= i /\\ i <= n /\\ a i = vec 0  ==> seqiterate (outer) (m..n) a = vec 0
+      #|  forall a:num->real^(P,Q,R)geomalg i m n.\n       m <= i /\\ i <= n /\\ a i = vec 0  ==> seqiterate (outer) (m..n) a = vec 0
       #|  m <= n ==> m <= SUC n
       #|  m:num
       #|  m:num
@@ -66430,7 +66430,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n:num
       #|  n:num
       #|  m:num
-      #|  !n m f:num->real^(P,Q,R)geomalg g.\n     (!x. m <= x /\\ x <= n ==> f x = g x) ==>\n         seqiterate (outer) (m..n) f = seqiterate (outer) (m..n) g
+      #|  forall n m f:num->real^(P,Q,R)geomalg g.\n     (forall x. m <= x /\\ x <= n ==> f x = g x) ==>\n         seqiterate (outer) (m..n) f = seqiterate (outer) (m..n) g
       #|  i + 1 <= j:num - 1
       #|  n:num
       #|  n + 1:num
@@ -66443,9 +66443,9 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  j:num
       #|  0 < j:num
       #|  i:num = 0
-      #|  !a:num->real^(P, Q, R)trip_fin_sum i j m n.\n        m <= i /\\ i <= n /\\\n        m <= j /\\ j <= n /\\\n        i < j /\\  a i = a j\n        ==> seqiterate (outer) (m..n) (multivec o a) = vec 0
+      #|  forall a:num->real^(P, Q, R)trip_fin_sum i j m n.\n        m <= i /\\ i <= n /\\\n        m <= j /\\ j <= n /\\\n        i < j /\\  a i = a j\n        ==> seqiterate (outer) (m..n) (multivec o a) = vec 0
       #|  ~(i = j:num) <=> i < j \\/ j < i
-      #|  !a:num->real^(P, Q, R)trip_fin_sum i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\\n       ~(i = j) /\\ a i = a j\n       ==> seqiterate (outer) (m..n) (multivec o a) = vec 0
+      #|  forall a:num->real^(P, Q, R)trip_fin_sum i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\\n       ~(i = j) /\\ a i = a j\n       ==> seqiterate (outer) (m..n) (multivec o a) = vec 0
       #|  k:num = SUC (k - 1)
       #|  m <= k:num
       #|  k:num = 0
@@ -66461,7 +66461,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n:num
       #|  m:num
       #|  k:num
-      #|  !a b c:num->real^(P,Q,R)geomalg k m n.\n    m <= k /\\ k <= n ==>\n       seqiterate (outer) (m..n) (\\i. if i = k then a + b else c i) =\n         seqiterate (outer) (m..n) (\\i. if i = k then a else c i) +\n         seqiterate (outer) (m..n) (\\i. if i = k then b else c i)
+      #|  forall a b c:num->real^(P,Q,R)geomalg k m n.\n    m <= k /\\ k <= n ==>\n       seqiterate (outer) (m..n) (\\i. if i = k then a + b else c i) =\n         seqiterate (outer) (m..n) (\\i. if i = k then a else c i) +\n         seqiterate (outer) (m..n) (\\i. if i = k then b else c i)
       #|  k:num = SUC (k - 1)
       #|  m <= k:num
       #|  k:num = 0
@@ -66473,17 +66473,17 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n:num
       #|  m:num
       #|  k:num
-      #|  !a b:num->real^(P,Q,R)geomalg c k m n.\n       m <= k /\\ k <= n\n       ==> seqiterate (outer) (m..n) (\\i. if i = k then c % a else b i) =\n            c % seqiterate (outer) (m..n) (\\i. if i = k then a else b i)
+      #|  forall a b:num->real^(P,Q,R)geomalg c k m n.\n       m <= k /\\ k <= n\n       ==> seqiterate (outer) (m..n) (\\i. if i = k then c % a else b i) =\n            c % seqiterate (outer) (m..n) (\\i. if i = k then a else b i)
       #|  j:num
       #|  i:num
       #|  x = vec 0:real^N ==> c % x = vec 0:real^N
-      #|  !a:num->real^(P, Q, R)trip_fin_sum c i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\ ~(i = j)\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + c % (multivec o a) j else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)
+      #|  forall a:num->real^(P, Q, R)trip_fin_sum c i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\ ~(i = j)\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + c % (multivec o a) j else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)
       #|  j:num
       #|  i:num
       #|  x = vec 0:real^N ==> c % x = vec 0:real^N
       #|  a + c % x + y:real^N = (a + y) + c % x
       #|  j:num
-      #|  !a:num->real^(P, Q, R)trip_fin_sum i m n x.\n        m <= i /\\ i <= n /\\\n        x IN span {a j| m <= j /\\ j <= n /\\ ~(j = i)}\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + multivec x else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)
+      #|  forall a:num->real^(P, Q, R)trip_fin_sum i m n x.\n        m <= i /\\ i <= n /\\\n        x IN span {a j| m <= j /\\ j <= n /\\ ~(j = i)}\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + multivec x else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)
       #|  i:num
       #|  a = b ==> a ==> b
       #|  --((a:num->real^(P,Q,R)trip_fin_sum) i)
@@ -66493,7 +66493,7 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  a:num->real^(P,Q,R)trip_fin_sum
       #|  ?i j. m <= i /\\ i <= n /\\\n          m <= j /\\ j <= n /\\ ~(i = j) /\\\n          (a:num->real^(P,Q,R)trip_fin_sum) i = a j
       #|  i:num
-      #|  !a:num->real^(P,Q,R)trip_fin_sum m n.\n  dependent {a i | i IN m..n} ==>\n           seqiterate (outer) (m..n) (multivec o a) = vec 0
+      #|  forall a:num->real^(P,Q,R)trip_fin_sum m n.\n  dependent {a i | i IN m..n} ==>\n           seqiterate (outer) (m..n) (multivec o a) = vec 0
       #|  m <= n ==> (SUC n + 1) - m =  ((n + 1) - m) + 1
       #|  x IN s <=> {x} SUBSET s
       #|  c = &0 ==> c % x = vec 0:real^N
@@ -66507,63 +66507,63 @@ test "Geometric_Algebra/geometricalgebra matches Geometric_Algebra/geometricalge
       #|  n:num
       #|  n < (m:num) ==> (n + 1) - m = 0
       #|  n < m:num
-      #|  !m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) =\n       vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}\n        (\\s.\n          if CARD s = (n + 1) - m\n          then (seqiterate (outer) (m..n) (multivec o a))$$s % mbasis s\n          else vec 0)
-      #|  !m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) = vec 0\n     <=> !s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n          /\\ CARD s = (n + 1) - m\n          ==> (seqiterate (outer) (m..n) (multivec o a))$$s = &0
+      #|  forall m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) =\n       vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}\n        (\\s.\n          if CARD s = (n + 1) - m\n          then (seqiterate (outer) (m..n) (multivec o a))$$s % mbasis s\n          else vec 0)
+      #|  forall m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) = vec 0\n     <=> forall s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n          /\\ CARD s = (n + 1) - m\n          ==> (seqiterate (outer) (m..n) (multivec o a))$$s = &0
       #|  :real^N->real^N
       #|  reversionga:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg
       #|  (reversion:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg) x =\n    lambdas s. --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) * x$$s
-      #|  !s. reversion (mbasis s) = --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s
-      #|  (!x y. reversion (x + y) = reversion x + reversion y) /\\\n  (!c x. reversion (c % x) = c % (reversion x))
+      #|  forall s. reversion (mbasis s) = --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s
+      #|  (forall x y. reversion (x + y) = reversion x + reversion y) /\\\n  (forall c x. reversion (c % x) = c % (reversion x))
       #|  reversion (mbasis{1} + mbasis{1,2})
-      #|  !x:real^(P, Q, R)trip_fin_sum. multivec x = reversion (multivec x)
-      #|  !x y:real^(P, Q, R)trip_fin_sum.\n  reversion( multivec x outer multivec y) = multivec y outer multivec x
-      #|  !s. reversion (mbasis s):real^(P, Q, R)geomalg =\n          --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s
+      #|  forall x:real^(P, Q, R)trip_fin_sum. multivec x = reversion (multivec x)
+      #|  forall x y:real^(P, Q, R)trip_fin_sum.\n  reversion( multivec x outer multivec y) = multivec y outer multivec x
+      #|  forall s. reversion (mbasis s):real^(P, Q, R)geomalg =\n          --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s
       #|  -- &1 pow 2  = &1
-      #|  !z:real. ~(z = &0) ==> (x = y <=> x * z = y * z)
+      #|  forall z:real. ~(z = &0) ==> (x = y <=> x * z = y * z)
       #|  --(&1) pow m
       #|  ~(--(&1) = &0)
-      #|  !m n.(EVEN(n) <=> EVEN(m))  ==>\n      --(&1) pow n = --(&1) pow m
+      #|  forall m n.(EVEN(n) <=> EVEN(m))  ==>\n      --(&1) pow n = --(&1) pow m
       #|  {i,j | i IN (s:num->bool) /\\ j IN (t:num->bool)}
-      #|  !s t:num->bool.\n                        {x,y | x IN t /\\ y IN s /\\ x > y} =\n                        IMAGE swappair {x,y | x IN s /\\ y IN t /\\  x < y}
+      #|  forall s t:num->bool.\n                        {x,y | x IN t /\\ y IN s /\\ x > y} =\n                        IMAGE swappair {x,y | x IN s /\\ y IN t /\\  x < y}
       #|  CARD {i,j| i IN (t:num->bool) /\\ j IN (s:num->bool) /\\ i > j} =\n     CARD {i,j | i IN s /\\ j IN t /\\ i < j}
       #|  t:num->bool
       #|  s:num->bool
       #|  c <= a /\\ f <= e /\\ (b:num) + d = g + h ==>\n       (a + b) - c + (d + e) - f =\n        g + a - c + e - f + h
       #|  t:num->bool
       #|  s:num->bool
-      #|  !n. EVEN (n * (n - 1))
+      #|  forall n. EVEN (n * (n - 1))
       #|  ~(2 = 0)
-      #|  !m. EVEN m==> (m DIV 2) * 2 = m
+      #|  forall m. EVEN m==> (m DIV 2) * 2 = m
       #|  2
       #|  n:num
       #|  m:num
-      #|  !x y:real^(P, Q, R)geomalg.\n  reversion( x outer y) = reversion y outer reversion x
+      #|  forall x y:real^(P, Q, R)geomalg.\n  reversion( x outer y) = reversion y outer reversion x
       #|  1 <= k + 1
       #|  1 <= SUC k
       #|  0:num
       #|  1:num
       #|  0 < 1
-      #|  !a:num->real^(P, Q, R)trip_fin_sum k.\n     reversion(seqiterate (outer) (1..k) (multivec o a)) =\n     seqiterate (outer) (1..k) (multivec o a o (\\i. SUC k -i))
+      #|  forall a:num->real^(P, Q, R)trip_fin_sum k.\n     reversion(seqiterate (outer) (1..k) (multivec o a)) =\n     seqiterate (outer) (1..k) (multivec o a o (\\i. SUC k -i))
       #|  (conjugation:real^(P,Q,R)geomalg->real^(P,Q,R)geomalg) x =\n    lambdas s. --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2 +\n                        CARD(s INTER (pdimindex(:P)+1..pdimindex(:P)+pdimindex(:Q)))) * x$$s
-      #|  !s. conjugation (mbasis s:real^(P,Q,R)geomalg) =  --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2 +\n                        CARD(s INTER (pdimindex(:P)+1..pdimindex(:P)+pdimindex(:Q)))) % mbasis s
-      #|  (!x y. conjugation (x + y) = conjugation x + conjugation y) /\\\n  (!c x. conjugation (c % x) = c % (conjugation x))
+      #|  forall s. conjugation (mbasis s:real^(P,Q,R)geomalg) =  --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2 +\n                        CARD(s INTER (pdimindex(:P)+1..pdimindex(:P)+pdimindex(:Q)))) % mbasis s
+      #|  (forall x y. conjugation (x + y) = conjugation x + conjugation y) /\\\n  (forall c x. conjugation (c % x) = c % (conjugation x))
       #|  k blade (A:real^(P,Q,R)geomalg) <=>\n         (?a. independent {a i | i IN 1..k} /\\ {a i | i IN 1..k} HAS_SIZE k /\\\n                      A = seqiterate (outer) (1..k) (multivec o a))
       #|  is_blade (A:real^(P,Q,R)geomalg) <=> ?k. k blade A
       #|  pseudoscalar:real^(P,Q,R)geomalg = mbasis (1..pdimindex(:P)+pdimindex(:Q)+pdimindex(:R))
-      #|  is_versor (A:real^(P,Q,R)geomalg) <=>\n      ?k a:num->real^(P, Q, R)trip_fin_sum.\n         (!i. i IN 1..k ==> ~(is_null(multivec (a i)))) /\\\n         (A = seqiterate( * ) (1..k) (multivec o a))
+      #|  is_versor (A:real^(P,Q,R)geomalg) <=>\n      ?k a:num->real^(P, Q, R)trip_fin_sum.\n         (forall i. i IN 1..k ==> ~(is_null(multivec (a i)))) /\\\n         (A = seqiterate( * ) (1..k) (multivec o a))
       #|  1 <= SUC k:num
       #|  0:num
       #|  1:num
       #|  0 < 1
       #|  k:num
       #|  k:num
-      #|  !x:real^(P,Q,R)geomalg. is_versor x ==> mvinvertible x
+      #|  forall x:real^(P,Q,R)geomalg. is_versor x ==> mvinvertible x
       #|  (dual:real^(P,Q,'0)geomalg->real^(P,Q,'0)geomalg) x =\n     vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q)}\n      (\\s.x$$s % mbasis s inner (mvinverse pseudoscalar))
       #|  meet A B = (dual A) inner B
       #|  project B A = (A inner B) * (mvinverse B)
       #|  reject B A = (A outer B) * (mvinverse B)
       #|  transform v x = v * x * mvinverse v
-      #|  !x a b. is_versor a /\\ is_versor b ==>\n   a *(b * x * mvinverse b) * mvinverse a =\n   (a * b) * x * mvinverse (a *b)
+      #|  forall x a b. is_versor a /\\ is_versor b ==>\n   a *(b * x * mvinverse b) * mvinverse a =\n   (a * b) * x * mvinverse (a *b)
       #|  (u:real^('3,'0,'0)trip_fin_sum) cross_product v = dual ((multivec u) outer (multivec v))
       #|GEOM_MBASIS_LID =  |- (#!:fun(fun(cart(real,multivector('?1341581)),bool),bool) (\x:cart(real,multivector('?1341581)). ((#=:fun(cart(real,multivector('?1341581)),fun(cart(real,multivector('?1341581)),bool)) ((#geom_mul:fun(cart(real,multivector('?1341581)),fun(cart(real,multivector('?1341581)),cart(real,multivector('?1341581)))) (#mbasis:fun(fun(num,bool),cart(real,multivector('?1341581))) #EMPTY:fun(num,bool))) x:cart(real,multivector('?1341581)))) x:cart(real,multivector('?1341581)))))
       #|GEOM_MBASIS_RID =  |- (#!:fun(fun(cart(real,multivector('?1341636)),bool),bool) (\x:cart(real,multivector('?1341636)). ((#=:fun(cart(real,multivector('?1341636)),fun(cart(real,multivector('?1341636)),bool)) ((#geom_mul:fun(cart(real,multivector('?1341636)),fun(cart(real,multivector('?1341636)),cart(real,multivector('?1341636)))) x:cart(real,multivector('?1341636))) (#mbasis:fun(fun(num,bool),cart(real,multivector('?1341636))) #EMPTY:fun(num,bool)))) x:cart(real,multivector('?1341636)))))

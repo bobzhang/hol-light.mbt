@@ -76424,12 +76424,12 @@ Generating HOL version of proof
 Geometric_Algebra/quaternions quotations (56):
   dimindex(:('0,'1,'0)geomalg) = dimindex(:2)
   {s | s SUBSET {1}} = {{}, {1}}
-  !x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}
+  forall x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}
   mbasis{1}:real^('0,'1,'0)geomalg * mbasis{1} = --mbasis{}
   mbasis{1,2}:real^('2,'0,'0)geomalg * mbasis{1,2} = --mbasis{}
   dimindex(:('0,'2,'0)geomalg) = dimindex(:4)
-  !a b:num. (!x. (x=a) <=> (x=a) \\/ (x=b)) <=> (a=b)
-  !a b:num. (!x. (x=a) <=> (x=b)) <=> (a=b)
+  forall a b:num. (forall x. (x=a) <=> (x=a) \\/ (x=b)) <=> (a=b)
+  forall a b:num. (forall x. (x=a) <=> (x=b)) <=> (a=b)
   {}:num->bool
   {1}:num->bool
   {}:num->bool
@@ -76437,7 +76437,7 @@ Geometric_Algebra/quaternions quotations (56):
   p1 = q1 /\\ p2 = q2 ==> (p1 \\/ p2) = (q1 \\/q2)
   p1 = q1 /\\ p2 = q2 ==> (p1 \\/ p2) = (q1 \\/q2)
   {s | s SUBSET {2,1}} = {{}, {1}, {2}, {1,2}}
-  !x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}
+  forall x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}
   (mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{1} = --mbasis{}
   (mbasis{2}:real^('0,'2,'0)geomalg)* mbasis{2} = --mbasis {}
   (mbasis{1,2}:real^('0,'2,'0)geomalg)* mbasis{1,2} = --mbasis {}
@@ -76453,7 +76453,7 @@ Geometric_Algebra/quaternions quotations (56):
   4..3
   4..3
   4..3
-  !q:quat. conjugation (geomalg_300_quat q) = geomalg_300_quat (cnj q)
+  forall q:quat. conjugation (geomalg_300_quat q) = geomalg_300_quat (cnj q)
   (mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis{2,3} = --mbasis{}
   (mbasis{1,2}:real^('3,'0,'0)geomalg)* mbasis{1,2} = --mbasis{}
   (--mbasis{1,3}:real^('3,'0,'0)geomalg)*(--mbasis{1,3}) = --mbasis{}

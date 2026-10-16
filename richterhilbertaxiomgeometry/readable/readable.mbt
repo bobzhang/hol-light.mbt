@@ -23,7 +23,7 @@ pub fn cleanmathfontsforhol_light(x2 : String) -> String raise {
       }
     }
   }
-  clean(s, @list.List([("⇒", "==>"), ("⇔", "<=>"), ("∧", "/\\ "), ("∨", "\\/"), ("¬", "~"), ("∀", "!"), ("∃", "?"), ("∈", "IN"), ("∉", "NOTIN"), ("α", "alpha"), ("β", "beta"), ("γ", "gamma"), ("λ", "\\ "), ("θ", "theta"), ("μ", "mu"), ("⊂", "SUBSET"), ("∩", "INTER"), ("∪", "UNION"), ("∅", "{}"), ("━", "DIFF"), ("≡", "==="), ("≅", "cong"), ("∡", "angle"), ("∥", "parallel"), ("∏", "prod"), ("∘", "_o_"), ("→", "--->"), ("╪", "INSERT"), ("≃", "TarskiCong"), ("≊", "TarskiTriangleCong"), ("ℬ", "TarskiBetween")]))
+  clean(s, @list.List([("⇒", "==>"), ("⇔", "<=>"), ("∧", "/\\ "), ("∨", "\\/"), ("¬", "~"), ("∀", "forall "), ("∃", "?"), ("∈", "IN"), ("∉", "NOTIN"), ("α", "alpha"), ("β", "beta"), ("γ", "gamma"), ("λ", "\\ "), ("θ", "theta"), ("μ", "mu"), ("⊂", "SUBSET"), ("∩", "INTER"), ("∪", "UNION"), ("∅", "{}"), ("━", "DIFF"), ("≡", "==="), ("≅", "cong"), ("∡", "angle"), ("∥", "parallel"), ("∏", "prod"), ("∘", "_o_"), ("→", "--->"), ("╪", "INSERT"), ("≃", "TarskiCong"), ("≊", "TarskiTriangleCong"), ("ℬ", "TarskiBetween")]))
 }
 
 ///|
@@ -1301,7 +1301,7 @@ fn step_24() -> Unit raise {
 ///|
 /// MOD_MOD_REFL'
 fn step_25() -> Unit raise {
-  mod_mod_refl_p_c.set(theorem(parse_qproof(";\n  ∀m n. ¬(n = 0)  ⇒  ((m MOD n) MOD n = m MOD n)\n\n  proof\n    intro_TAC !m n, H1;\n    MP_TAC SPECL [m; n; 1] MOD_MOD;\n    fol H1 MULT_CLAUSES MULT_EQ_0 ONE NOT_SUC;\n  qed;\n")))
+  mod_mod_refl_p_c.set(theorem(parse_qproof(";\n  ∀m n. ¬(n = 0)  ⇒  ((m MOD n) MOD n = m MOD n)\n\n  proof\n    intro_TAC forall m n, H1;\n    MP_TAC SPECL [m; n; 1] MOD_MOD;\n    fol H1 MULT_CLAUSES MULT_EQ_0 ONE NOT_SUC;\n  qed;\n")))
 }
 
 ///|
@@ -1748,7 +1748,7 @@ fn step_56() -> Unit raise {
 ///|
 /// binom
 fn step_57() -> Unit raise {
-  binom_c.set(@define.define_(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
+  binom_c.set(@define.define_(@parser.parse_term("(forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
 }
 
 ///|

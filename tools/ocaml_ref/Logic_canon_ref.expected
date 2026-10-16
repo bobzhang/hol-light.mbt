@@ -7621,11 +7621,11 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..1..5..13..solved at 23
 Logic/canon quotations (149):
-  (!x. terms fns (V x)) /\\\n   (!f l. (f,LENGTH l) IN fns /\\ ALL (terms fns) l\n          ==> terms fns (Fn f l))
+  (forall x. terms fns (V x)) /\\\n   (forall f l. (f,LENGTH l) IN fns /\\ ALL (terms fns) l\n          ==> terms fns (Fn f l))
   a SUBSET s /\\ b SUBSET s ==> (a UNION b) SUBSET s
   a IN s /\\ b SUBSET s ==> (a INSERT b) SUBSET s
-  !l. ALL (\\x. x SUBSET s) l ==> LIST_UNION l SUBSET s
-  !t. t IN terms(FST L) ==> functions_term t SUBSET (FST L)
+  forall l. ALL (\\x. x SUBSET s) l ==> LIST_UNION l SUBSET s
+  forall t. t IN terms(FST L) ==> functions_term t SUBSET (FST L)
   (a INSERT s) SUBSET t <=> a IN t /\\ s SUBSET t
   x IN {formsubst v p | P v /\\ p IN s}
   s' SUBSET {formsubst v p | P v /\\ p IN t0}
@@ -7635,40 +7635,40 @@ Logic/canon quotations (149):
   (@p. ?v. (P v /\\ p IN s) /\\ (x = formsubst v p)) INSERT t0
   t0:form->bool
   EMPTY:form->bool
-  !t'. FINITE(t')\n        ==> t' SUBSET { formsubst v p | P(v) /\\ p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    t' SUBSET {formsubst v p | P(v) /\\ p IN t}
+  forall t'. FINITE(t')\n        ==> t' SUBSET { formsubst v p | P(v) /\\ p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    t' SUBSET {formsubst v p | P(v) /\\ p IN t}
   (a INSERT s) SUBSET t <=> a IN t /\\ s SUBSET t
   {SKOLEM p | p IN x INSERT s} =\n     (SKOLEM x) INSERT {SKOLEM p | p IN s}
   (@p. p IN s /\\ (x = SKOLEM p)) INSERT t0
   t0:form->bool
   EMPTY:form->bool
-  !s u. FINITE(u)\n        ==> u SUBSET { SKOLEM p | p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    (u = {SKOLEM p | p IN t})
+  forall s u. FINITE(u)\n        ==> u SUBSET { SKOLEM p | p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    (u = {SKOLEM p | p IN t})
   \\x:num. a:A
   a:A
-  !M. ~(Dom(M) = EMPTY) ==> ?v:num->A. valuation(M) v
+  forall M. ~(Dom(M) = EMPTY) ==> ?v:num->A. valuation(M) v
   CONS (a:A) as
   as:A list
   a:A
-  !M xs v. holds M v (ITLIST ?? xs p) <=>\n            ?as. (LENGTH as = LENGTH xs) /\\\n                 ALL (Dom M) as /\\\n                 holds M\n                   (ITLIST valmod (REVERSE (MAP2 (\\x a:A. (x,a)) xs as)) v)\n                   p
-  canonical (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = terms (FST L)) /\\\n       (!f. Fun(M) f = Fn f)
+  forall M xs v. holds M v (ITLIST ?? xs p) <=>\n            ?as. (LENGTH as = LENGTH xs) /\\\n                 ALL (Dom M) as /\\\n                 holds M\n                   (ITLIST valmod (REVERSE (MAP2 (\\x a:A. (x,a)) xs as)) v)\n                   p
+  canonical (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = terms (FST L)) /\\\n       (forall f. Fun(M) f = Fn f)
   prop_of_model M v (Atom p l) <=> holds M v (Atom p l)
   canon_of_prop (L:((num#num)->bool)#((num#num)->bool)) (d:form->bool) =\n   terms(FST L),Fn,\\p l. d(Atom p l)
-  !p. qfree(p) ==> (pholds (prop_of_model M v) p <=> holds M v p)
+  forall p. qfree(p) ==> (pholds (prop_of_model M v) p <=> holds M v p)
   t:term
   h:term
   l:term list
   l:term list
-  !p l. prop_of_model (canon_of_prop L d) V (Atom p l) = d (Atom p l)
+  forall p l. prop_of_model (canon_of_prop L d) V (Atom p l) = d (Atom p l)
   p:form
   p:form
-  !p. qfree p ==> (holds (canon_of_prop L d) V p <=> pholds d p)
+  forall p. qfree p ==> (holds (canon_of_prop L d) V p <=> pholds d p)
   p:form
   p:form
   qfree p ==> (holds (canon_of_prop L d) v p <=> pholds d (formsubst v p))
-  !d. canonical L (canon_of_prop L d)
-  !L d. interpretation L (canon_of_prop L d)
-  !p. qfree(p) /\\ (!d. pholds d p) ==> !M v. holds M v p
-  !p. qfree(p) /\\\n       (!C (v:num->term). canonical(language {p}) C ==> holds C v p)\n       ==> !d. pholds d p
-  (!p. p IN s ==> qfree p) /\\ M satisfies s /\\ valuation(M) v\n   ==> (prop_of_model M v) psatisfies s
+  forall d. canonical L (canon_of_prop L d)
+  forall L d. interpretation L (canon_of_prop L d)
+  forall p. qfree(p) /\\ (forall d. pholds d p) ==> forall M v. holds M v p
+  forall p. qfree(p) /\\\n       (forall C (v:num->term). canonical(language {p}) C ==> holds C v p)\n       ==> forall d. pholds d p
+  (forall p. p IN s ==> qfree p) /\\ M satisfies s /\\ valuation(M) v\n   ==> (prop_of_model M v) psatisfies s
   t:term
   (v:num->term) x
   holds (canon_of_prop L d) V (formsubst v p) <=>\n                holds (canon_of_prop L d) (termval (canon_of_prop L d) V o v)\n                      p
@@ -7676,31 +7676,31 @@ Logic/canon quotations (149):
   p:form
   v:num->term
   formsubst v p
-  (!p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (!x. v x IN terms(FST L)) /\\ p IN s}\n   ==> (canon_of_prop L d) satisfies s
+  (forall p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (forall x. v x IN terms(FST L)) /\\ p IN s}\n   ==> (canon_of_prop L d) satisfies s
   functions t = FST(language t)
   interpretation (language t)\n                (M:(A->bool)#(num->A list->A)#(num->A list->bool))
   predicates t
-  !M:(A->bool)#(num->A list->A)#(num->A list->bool) s t.\n        interpretation(language t) M\n        ==> (M satisfies\n             {formsubst i p | p IN s /\\\n                              (!x. i x IN terms(FST(language t)))} <=>\n             M satisfies s)
+  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s t.\n        interpretation(language t) M\n        ==> (M satisfies\n             {formsubst i p | p IN s /\\\n                              (forall x. i x IN terms(FST(language t)))} <=>\n             M satisfies s)
   canon_of_prop (language ss) d
   d:form->bool
   prop_of_model M (v:num->A)
-  !p. p IN t ==> qfree p
+  forall p. p IN t ==> qfree p
   t:form->bool
   ss:form->bool
   t:form->bool
-  {formsubst v p |\n                          (!x. v x IN terms (FST (language ss))) /\\\n                          p IN t}
+  {formsubst v p |\n                          (forall x. v x IN terms (FST (language ss))) /\\\n                          p IN t}
   (a ==> b ==> c) <=> a /\\ b ==> c
-  ?t. FINITE(t) /\\ t SUBSET s /\\\n          u SUBSET {formsubst v p |\n                              (!x. v x IN terms (FST (language ss))) /\\\n                                    p IN t}
+  ?t. FINITE(t) /\\ t SUBSET s /\\\n          u SUBSET {formsubst v p |\n                              (forall x. v x IN terms (FST (language ss))) /\\\n                                    p IN t}
   u:form->bool
-  psatisfiable {formsubst v p | (!x. v x IN terms(FST(language ss))) /\\\n                                  p IN s}
-  (!p. p IN s ==> qfree p) /\\\n   (!t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language ss) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language ss) C /\\\n           canonical (language ss) C /\\\n           C satisfies s
-  !M s t. t SUBSET s /\\ interpretation(language s) M\n         ==> interpretation(language t) M
+  psatisfiable {formsubst v p | (forall x. v x IN terms(FST(language ss))) /\\\n                                  p IN s}
+  (forall p. p IN s ==> qfree p) /\\\n   (forall t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language ss) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language ss) C /\\\n           canonical (language ss) C /\\\n           C satisfies s
+  forall M s t. t SUBSET s /\\ interpretation(language s) M\n         ==> interpretation(language t) M
   v:num->A
   v:num->A
   (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
   Dom(M):A->bool,\n              (\\g zs. if (g,LENGTH zs) IN functions t then Fun(M) g zs\n                      else @a. a IN Dom(M)),\n              Pred(M)
-  !M s t.\n        interpretation (language t) M /\\\n        ~(Dom M :A->bool = EMPTY) /\\\n        M satisfies t\n        ==> ?M'. (Dom M' = Dom M) /\\\n                 (Pred M' = Pred M) /\\\n                 interpretation(language s) M' /\\\n                 M' satisfies t
-  (!y. p y ==> p' y)\n     ==> (?x. p x) ==> (?x. p' x)
+  forall M s t.\n        interpretation (language t) M /\\\n        ~(Dom M :A->bool = EMPTY) /\\\n        M satisfies t\n        ==> ?M'. (Dom M' = Dom M) /\\\n                 (Pred M' = Pred M) /\\\n                 interpretation(language s) M' /\\\n                 M' satisfies t
+  (forall y. p y ==> p' y)\n     ==> (?x. p x) ==> (?x. p' x)
   a /\\ b /\\ c <=> b /\\ a /\\ c
   ss:form->bool
   {SKOLEM p | p IN s}
@@ -7720,27 +7720,27 @@ Logic/canon quotations (149):
   u:form->bool
   s:form->bool
   ?t. (u = {SKOLEM p | p IN t}) /\\\n                      FINITE t /\\ t SUBSET s
-  !u. FINITE u /\\ u SUBSET {SKOLEM p | p IN s}\n        ==> ?M. interpretation(language {SKOLEM p | p IN s}) M /\\\n                ~(Dom(M):A->bool = EMPTY) /\\\n                M satisfies u
-  (!t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language s) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language s) C /\\\n           ~(Dom(C):term->bool = EMPTY) /\\\n           C satisfies s
-  !M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (!p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?C. interpretation (language s) C /\\\n                ~(Dom C :term->bool = EMPTY) /\\\n                C satisfies s
+  forall u. FINITE u /\\ u SUBSET {SKOLEM p | p IN s}\n        ==> ?M. interpretation(language {SKOLEM p | p IN s}) M /\\\n                ~(Dom(M):A->bool = EMPTY) /\\\n                M satisfies u
+  (forall t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language s) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language s) C /\\\n           ~(Dom(C):term->bool = EMPTY) /\\\n           C satisfies s
+  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (forall p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?C. interpretation (language s) C /\\\n                ~(Dom C :term->bool = EMPTY) /\\\n                C satisfies s
   term_of_num n = (@t. num_of_term t = n)
   term_of_num(num_of_term t) = t
   LOWMOD M = {num_of_term t | t IN Dom(M)},\n              (\\g zs. num_of_term (Fun(M) g (MAP term_of_num zs))),\n              (\\p zs. Pred(M) p (MAP term_of_num zs))
   (Dom(LOWMOD M) = EMPTY) <=> (Dom(M) = EMPTY)
-  !v. valuation (LOWMOD M) v\n       ==> !t. termval (LOWMOD M) v t =\n               num_of_term (termval M (term_of_num o v) t)
+  forall v. valuation (LOWMOD M) v\n       ==> forall t. termval (LOWMOD M) v t =\n               num_of_term (termval M (term_of_num o v) t)
   (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-  !P. (!a. a IN {num_of_term t | t IN Dom(M)} ==> P(a)) <=>\n                      (!a. a IN Dom(M) ==> P(num_of_term a))
-  !a. a IN {num_of_term t | t IN Dom M}\n                      ==> valuation (LOWMOD M) (valmod (a0:num,a) v)
-  !p v. valuation (LOWMOD M) v\n         ==> (holds (LOWMOD M) v p <=> holds M (term_of_num o v) p)
+  forall P. (forall a. a IN {num_of_term t | t IN Dom(M)} ==> P(a)) <=>\n                      (forall a. a IN Dom(M) ==> P(num_of_term a))
+  forall a. a IN {num_of_term t | t IN Dom M}\n                      ==> valuation (LOWMOD M) (valmod (a0:num,a) v)
+  forall p v. valuation (LOWMOD M) v\n         ==> (holds (LOWMOD M) v p <=> holds M (term_of_num o v) p)
   CONS (term_of_num h) (MAP term_of_num t)
   [] :term list
   CONS (num_of_term h) (MAP num_of_term t)
   [] :num list
-  !P x. num_of_term x IN {num_of_term y | P y} <=> x IN P
-  !L M. interpretation L (LOWMOD M) = interpretation L M
+  forall P x. num_of_term x IN {num_of_term y | P y} <=> x IN P
+  forall L M. interpretation L (LOWMOD M) = interpretation L M
   LOWMOD C
-  !M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (!p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?N. interpretation (language s) N /\\\n                ~(Dom N :num->bool = EMPTY) /\\\n                N satisfies s
-  !q. q IN {(Not p)} ==> qfree q
+  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (forall p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?N. interpretation (language s) N /\\\n                ~(Dom N :num->bool = EMPTY) /\\\n                N satisfies s
+  forall q. q IN {(Not p)} ==> qfree q
   xs:num list
   xs:num list
   as:term list
@@ -7766,10 +7766,10 @@ Logic/canon quotations (149):
   ps:form list
   ps:form list
   ps:form list
-  MAP (\\q. @i. (!x. i x IN terms (FST (language {p}))) /\\\n                             (q = formsubst i p)) ps
+  MAP (\\q. @i. (forall x. i x IN terms (FST (language {p}))) /\\\n                             (q = formsubst i p)) ps
   ps:form list
-  {formsubst i q | q IN {p} /\\\n                                (!x. i x IN terms(FST(language {p})))}
-  qfree p /\\ (!C v. ~(Dom C = EMPTY) /\\\n                     valuation(C) v ==> holds C (v:num->term) (ITLIST ?? xs p))\n   ==> ?is. (!i x. MEM i is ==> terms(FST(language {p})) (i x)) /\\\n            !d. pholds(d) (ITLIST (||) (MAP (\\i. formsubst i p) is) False)
+  {formsubst i q | q IN {p} /\\\n                                (forall x. i x IN terms(FST(language {p})))}
+  qfree p /\\ (forall C v. ~(Dom C = EMPTY) /\\\n                     valuation(C) v ==> holds C (v:num->term) (ITLIST ?? xs p))\n   ==> ?is. (forall i x. MEM i is ==> terms(FST(language {p})) (i x)) /\\\n            forall d. pholds(d) (ITLIST (||) (MAP (\\i. formsubst i p) is) False)
 terms_RULES =  |- (#!:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) (#V:fun(num,term) x:num))))) (#!:fun(fun(num,bool),bool) (\f:num. (#!:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term)))) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))))
 terms_INDUCT =  |- (#!:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#!:fun(fun(fun(term,bool),bool),bool) (\terms':fun(term,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (terms':fun(term,bool) (#V:fun(num,term) x:num))))) (#!:fun(fun(num,bool),bool) (\f:num. (#!:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) terms':fun(term,bool)) l:list(term)))) (terms':fun(term,bool) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))) (#!:fun(fun(term,bool),bool) (\a:term. ((#==>:fun(bool,fun(bool,bool)) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) (terms':fun(term,bool) a:term)))))))))
 terms_CASES =  |- (#!:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#!:fun(fun(term,bool),bool) (\a:term. ((#=:fun(bool,fun(bool,bool)) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\x:num. ((#=:fun(term,fun(term,bool)) a:term) (#V:fun(num,term) x:num))))) (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(list(term),bool),bool) (\l:list(term). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a:term) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term))))))))))))))

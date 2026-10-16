@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t26 = @tactics.asm_tac(@metis.metis_tac)(@list.List([]))
   let t25 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t24 = @tactics.mp_tac(@ringtheory.integral_domain_rule(@parser.parse_term("!x y:A. integral_domain r\n    ==> (ring_pow r x 2 = ring_pow r y 2 <=> x = y \\/ x = ring_neg r y)")))
+  let t24 = @tactics.mp_tac(@ringtheory.integral_domain_rule(@parser.parse_term("forall x y:A. integral_domain r\n    ==> (ring_pow r x 2 = ring_pow r y 2 <=> x = y \\/ x = ring_neg r y)")))
   let t23 = @simp.rewrite_tac(@list.List([@sets.insert_subset(), @sets.empty_subset()]))
   let t22 = @tactics.first_x_assum(fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s20 = @tactics.subst1_tac(x19)
@@ -35,7 +35,7 @@ fn step_1() -> Unit raise {
   let t2 = @tactics.match_mp_tac(@sets.finite_card_le_subset())
   let t1 = @simp.once_rewrite_tac(@list.List([@arith.mult_sym()]))
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1), t2), t3), @tactics.conj_tac), t7), t8), @tactics.disch_tac), t9), t10), t11), t12), t13), t14), t18), t22), t23), t24), t25), t26)
-  finite_quadratic_curve_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) h.\n        integral_domain r /\\ FINITE(ring_carrier r)\n        ==> FINITE {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_pow r y 2 = h x} /\\\n            CARD {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                        ring_pow r y 2 = h x}\n            <= 2 * CARD(ring_carrier r)"), t27))
+  finite_quadratic_curve_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) h.\n        integral_domain r /\\ FINITE(ring_carrier r)\n        ==> FINITE {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_pow r y 2 = h x} /\\\n            CARD {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                        ring_pow r y 2 = h x}\n            <= 2 * CARD(ring_carrier r)"), t27))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn not_ring_char_divides_tac(x : @tactics.Goal) -> @tactics.Goalstate raise 
 /// FIELD_CHAR_NOT2
 fn step_3() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([@ringtheory.ring_char_divides_prime(), @prime.prime_2()]))
-  field_char_not2_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ P"), t36))
+  field_char_not2_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ P"), t36))
 }
 
 ///|
@@ -98,7 +98,7 @@ pub fn field_char_not2() -> @kernel.Thm {
 /// FIELD_CHAR_NOT3
 fn step_4() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([@ringtheory.ring_char_divides_prime(), @pocklington.prime_conv(@parser.parse_term("prime 3"))]))
-  field_char_not3_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) P.\n        field f /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 3) /\\ P"), t37))
+  field_char_not3_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 3) /\\ P"), t37))
 }
 
 ///|
@@ -114,7 +114,7 @@ pub fn field_char_not3() -> @kernel.Thm {
 /// FIELD_CHAR_NOT23
 fn step_5() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([@ringtheory.ring_char_divides_prime(), @prime.prime_2(), @pocklington.prime_conv(@parser.parse_term("prime 3"))]))
-  field_char_not23_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ ~(ring_char f divides 3) /\\ P"), t38))
+  field_char_not23_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ ~(ring_char f divides 3) /\\ P"), t38))
 }
 
 ///|
@@ -132,7 +132,7 @@ fn step_6() -> Unit raise {
   let t40 = @simp.asm_rewrite_tac(@list.List([@prime.prime_2(), @prime.divides_2()]))
   let t39 = @tactics.match_mp_tac(@grouptheory.cauchy_group_theorem())
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t39), t40)
-  cauchy_group_theorem_2_c.set(@tactics.prove(@parser.parse_term("!G:A group.\n        FINITE(group_carrier G) /\\ EVEN(CARD(group_carrier G))\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = 2"), t41))
+  cauchy_group_theorem_2_c.set(@tactics.prove(@parser.parse_term("forall G:A group.\n        FINITE(group_carrier G) /\\ EVEN(CARD(group_carrier G))\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = 2"), t41))
 }
 
 ///|
@@ -185,7 +185,7 @@ fn step_7() -> Unit raise {
   let t44 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("G:A group"), t43]), @grouptheory.group_element_order_divides_group_order()))
   let t42 = @tactics.repeat_tac(@tactics.strip_tac)
   let t73 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.has_size()])), t42), t44), t45), t46), t47), t48), t49), t50), t51), t52), @tactics.disch_tac), t72)
-  group_adhoc_order_unique_lemma_c.set(@tactics.prove(@parser.parse_term("!G (a:A) p.\n      FINITE(group_carrier G) /\\ CARD(group_carrier G) < 3 * p /\\\n      (!x. x IN group_carrier G /\\ group_inv G x = x ==> x = group_id G) /\\\n      a IN group_carrier G /\\ group_element_order G a = p\n      ==> (group_carrier G) HAS_SIZE p"), t73))
+  group_adhoc_order_unique_lemma_c.set(@tactics.prove(@parser.parse_term("forall G (a:A) p.\n      FINITE(group_carrier G) /\\ CARD(group_carrier G) < 3 * p /\\\n      (forall x. x IN group_carrier G /\\ group_inv G x = x ==> x = group_id G) /\\\n      a IN group_carrier G /\\ group_element_order G a = p\n      ==> (group_carrier G) HAS_SIZE p"), t73))
 }
 
 ///|
@@ -211,7 +211,7 @@ fn step_8() -> Unit raise {
   let t75 = @simp.asm_simp_tac(@list.List([]))
   let t74 = @class.asm_cases_tac(@parser.parse_term("(eq:A->A->bool) x y"))
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t74), t75), t76), t77), t78), t79), t80), t81), t82), t83)
-  symmetry_lemma_c.set(@tactics.prove(@parser.parse_term("!P eq add.\n     (!x y. P x /\\ P y /\\ eq x y ==> eq y x) /\\\n     (!x y. P x /\\ P y ==> P(add x y)) /\\\n     (!x y. P x /\\ P y ==> add x y = add y x) /\\\n     (!x y z. P x /\\ P y /\\ P z /\\ (eq x y \\/ eq (add x y) z)\n              ==> add x (add y z) = add (add x y) z) /\\\n     (!x y z. P x /\\ P y /\\ P z /\\\n              ~(eq x y) /\\ ~(eq y z) /\\ ~(eq x z) /\\\n              ~(eq (add x y) z) /\\ ~(eq (add y z) x)\n              ==> add x (add y z) = add (add x y) z)\n     ==> !x y z:A. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z"), t84))
+  symmetry_lemma_c.set(@tactics.prove(@parser.parse_term("forall P eq add.\n     (forall x y. P x /\\ P y /\\ eq x y ==> eq y x) /\\\n     (forall x y. P x /\\ P y ==> P(add x y)) /\\\n     (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\ (eq x y \\/ eq (add x y) z)\n              ==> add x (add y z) = add (add x y) z) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\\n              ~(eq x y) /\\ ~(eq y z) /\\ ~(eq x z) /\\\n              ~(eq (add x y) z) /\\ ~(eq (add y z) x)\n              ==> add x (add y z) = add (add x y) z)\n     ==> forall x y z:A. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z"), t84))
 }
 
 ///|
@@ -227,7 +227,7 @@ pub fn symmetry_lemma() -> @kernel.Thm {
 /// ASSOCIATIVITY_LEMMA
 fn step_9() -> Unit raise {
   let t134 = @meson.asm_meson_tac(@list.List([]))
-  let t133 = @tactics.subgoal_then(@parser.parse_term("!x y:A. P x /\\ P y ==> add y (add x x) = add (add y x) x"), fn(x131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t133 = @tactics.subgoal_then(@parser.parse_term("forall x y:A. P x /\\ P y ==> add y (add x x) = add (add y x) x"), fn(x131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x131
     @simp.asm_simp_tac(@list.List([th]))
   })
@@ -280,7 +280,7 @@ fn step_9() -> Unit raise {
   let t86 = @tactics.repeat_tac(@tactics.gen_tac)
   let t85 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm(), @theorems.forall_unwind_thm1()]))
   let t135 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("p ==> q ==> r /\\ s ==> t <=> r ==> s ==> p /\\ q ==> t"))])), t85), t86), @tactics.strip_tac), t87), t88), t89), t90), t108), t109), t113), t114), t124), t126), @tactics.conj_tac), t127), t129), @tactics.conj_tac), t130), t133), t134)
-  associativity_lemma_c.set(@tactics.prove(@parser.parse_term("!P add neg (id:A).\n        P id /\\\n        (!x. P x ==> P(neg x)) /\\\n        (!x y. P x /\\ P y ==> P(add x y)) /\\\n        (!x. P x ==> add id x = x) /\\\n        (!x. P x ==> add (neg x) x = id) /\\\n        (!x y. P x /\\ P y ==> add x y = add y x) /\\\n        (!x. P x ==> neg(neg x) = x) /\\\n        (!x y. P x /\\ P y ==> neg(add x y) = add (neg x) (neg y)) /\\\n        (!x y. P x /\\ P y ==> add x (add x y) = add (add x x) y) /\\\n        (!x y. P x /\\ P y ==> add (neg x) (add x y) = y) /\\\n        (!x y z u v.\n            P x /\\ P y /\\ P z /\\ P u /\\ P v\n            ==> ~(x = id) /\\ ~(y = id) /\\ ~(z = id) /\\\n                ~(u = id) /\\ ~(v = id) /\\\n                ~(y = x \\/ y = neg x) /\\\n                ~(z = y \\/ z = neg y) /\\\n                ~(z = x \\/ z = neg x) /\\\n                ~(z = u \\/ z = neg u) /\\\n                ~(x = v \\/ x = neg v)\n                ==> add x y = u /\\ add y z = v\n                    ==> add x v = add u z)\n     ==> !x y z. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z"), t135))
+  associativity_lemma_c.set(@tactics.prove(@parser.parse_term("forall P add neg (id:A).\n        P id /\\\n        (forall x. P x ==> P(neg x)) /\\\n        (forall x y. P x /\\ P y ==> P(add x y)) /\\\n        (forall x. P x ==> add id x = x) /\\\n        (forall x. P x ==> add (neg x) x = id) /\\\n        (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n        (forall x. P x ==> neg(neg x) = x) /\\\n        (forall x y. P x /\\ P y ==> neg(add x y) = add (neg x) (neg y)) /\\\n        (forall x y. P x /\\ P y ==> add x (add x y) = add (add x x) y) /\\\n        (forall x y. P x /\\ P y ==> add (neg x) (add x y) = y) /\\\n        (forall x y z u v.\n            P x /\\ P y /\\ P z /\\ P u /\\ P v\n            ==> ~(x = id) /\\ ~(y = id) /\\ ~(z = id) /\\\n                ~(u = id) /\\ ~(v = id) /\\\n                ~(y = x \\/ y = neg x) /\\\n                ~(z = y \\/ z = neg y) /\\\n                ~(z = x \\/ z = neg x) /\\\n                ~(z = u \\/ z = neg u) /\\\n                ~(x = v \\/ x = neg v)\n                ==> add x y = u /\\ add y z = v\n                    ==> add x v = add u z)\n     ==> forall x y z. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z"), t135))
 }
 
 ///|
@@ -311,7 +311,7 @@ fn step_10() -> Unit raise {
   let t137 = @simp.rewrite_tac(@list.List([@int.int_exists_pos()]))
   let t136 = @equal.gsym(@int.int_of_num_pow())
   let t152 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.num_congruent(), @equal.gsym(@int.int_of_num_rem()), t136])), t137), t138), t139), t140), t151)
-  integer_mod_ring_root_exists_c.set(@tactics.prove(@parser.parse_term("!n a k. (?b. b IN ring_carrier (integer_mod_ring n) /\\\n                ring_pow (integer_mod_ring n) b k = &a) <=>\n           (n = 0 \\/ a < n) /\\\n           (?b. (b EXP k == a) (mod n))"), t152))
+  integer_mod_ring_root_exists_c.set(@tactics.prove(@parser.parse_term("forall n a k. (?b. b IN ring_carrier (integer_mod_ring n) /\\\n                ring_pow (integer_mod_ring n) b k = &a) <=>\n           (n = 0 \\/ a < n) /\\\n           (?b. (b EXP k == a) (mod n))"), t152))
 }
 
 ///|

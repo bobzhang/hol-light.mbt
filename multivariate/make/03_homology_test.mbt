@@ -35285,148 +35285,148 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|0..0..1..3..5..10..20..34..59..solved at 91
       #|0..0..1..3..5..10..20..35..solved at 61
       #|Multivariate/homology quotations (3125):
-      #|  standard_simplex p =\n    { x:num->real | (!i. &0 <= x i /\\ x i <= &1) /\\\n                    (!i. p < i ==> x i = &0) /\\\n                    sum (0..p) x = &1}
-      #|  !p. topspace(subtopology (product_topology (:num) (\\i. euclideanreal))\n                            (standard_simplex p)) = standard_simplex p
+      #|  standard_simplex p =\n    { x:num->real | (forall i. &0 <= x i /\\ x i <= &1) /\\\n                    (forall i. p < i ==> x i = &0) /\\\n                    sum (0..p) x = &1}
+      #|  forall p. topspace(subtopology (product_topology (:num) (\\i. euclideanreal))\n                            (standard_simplex p)) = standard_simplex p
       #|  ~(&1 = &0)
-      #|  !p i. (\\j. if j = i then &1 else &0) IN standard_simplex p <=> i <= p
+      #|  forall p i. (\\j. if j = i then &1 else &0) IN standard_simplex p <=> i <= p
       #|  (\\i. if i = 0 then &1 else &0):num->real
-      #|  !p. ~(standard_simplex p = {})
+      #|  forall p. ~(standard_simplex p = {})
       #|  standard_simplex 0 = {(\\j. if j = 0 then &1 else &0)}
       #|  x:num->real
-      #|  !p q. p <= q ==> standard_simplex p SUBSET standard_simplex q
+      #|  forall p q. p <= q ==> standard_simplex p SUBSET standard_simplex q
       #|  euclideanreal
       #|  i:num
       #|  ~({f x | P x} = {}) <=> ?x. P x
       #|  standard_simplex p =\n    INTERS { {x | x IN topspace top /\\ x i IN real_interval[&0,&1]} |\n             i IN (:num)} INTER\n    INTERS { {x | x IN topspace top /\\ x i IN {&0}} | p < i} INTER\n    {x | x IN topspace top /\\ sum(0..p) x IN {&1}}
       #|  top = product_topology (:num) (\\i. euclideanreal)
-      #|  !p. closed_in (product_topology (:num) (\\i. euclideanreal))\n                 (standard_simplex p)
+      #|  forall p. closed_in (product_topology (:num) (\\i. euclideanreal))\n                 (standard_simplex p)
       #|  cartesian_product (:num) (\\i. real_interval[&0,&1])
-      #|  !p. compact_in (product_topology (:num) (\\i. euclideanreal))\n                  (standard_simplex p)
-      #|  !p x y u.\n        x IN standard_simplex p /\\ y IN standard_simplex p /\\\n        &0 <= u /\\ u <= &1\n        ==> (\\i. (&1 - u) * x i + u * y i) IN standard_simplex p
-      #|  s SUBSET P <=> !x. x IN s ==> P x
+      #|  forall p. compact_in (product_topology (:num) (\\i. euclideanreal))\n                  (standard_simplex p)
+      #|  forall p x y u.\n        x IN standard_simplex p /\\ y IN standard_simplex p /\\\n        &0 <= u /\\ u <= &1\n        ==> (\\i. (&1 - u) * x i + u * y i) IN standard_simplex p
+      #|  s SUBSET P <=> forall x. x IN s ==> P x
       #|  (\\u i. (&1 - u) * x i + u * y i):real->num->real
       #|  y:num->real
       #|  x:num->real
-      #|  !p. path_connected_in (product_topology (:num) (\\i. euclideanreal))\n                         (standard_simplex p)
-      #|  !p. connected_in (product_topology (:num) (\\i. euclideanreal))\n                    (standard_simplex p)
+      #|  forall p. path_connected_in (product_topology (:num) (\\i. euclideanreal))\n                         (standard_simplex p)
+      #|  forall p. connected_in (product_topology (:num) (\\i. euclideanreal))\n                    (standard_simplex p)
       #|  simplicial_face k (x:num->real) =\n  \\i. if i < k then x i else if i = k then &0 else x(i - 1)
       #|  k <= i ==> ~(i + 1 = k)
       #|  1
       #|  p = (p - 1) + 1
       #|  (0 <= i /\\ i <= p) /\\ ~(i < k) <=> k <= i /\\ i <= p
-      #|  !p k (x:num->real).\n        1 <= p /\\ k <= p /\\ x IN standard_simplex (p - 1)\n        ==> (simplicial_face k x) IN standard_simplex p
+      #|  forall p k (x:num->real).\n        1 <= p /\\ k <= p /\\ x IN standard_simplex (p - 1)\n        ==> (simplicial_face k x) IN standard_simplex p
       #|  singular_simplex (p,top) (f:(num->real)->A) <=>\n    continuous_map(subtopology (product_topology (:num) (\\i. euclideanreal))\n                               (standard_simplex p),\n                   top) f /\\\n    EXTENSIONAL (standard_simplex p) f
       #|  ~(s = {}) ==> (IMAGE f s SUBSET t /\\ P) /\\ Q ==> ~(t = {})
-      #|  !p (top:A topology) f. topspace top = {} ==> ~(singular_simplex (p,top) f)
-      #|  !p (top:A topology) s t f.\n        t SUBSET s /\\ singular_simplex (p,subtopology top t) f\n        ==> singular_simplex (p,subtopology top s) f
-      #|  !p (top:A topology) s f.\n        singular_simplex (p,subtopology top s) f <=>\n        singular_simplex (p,top) f /\\ IMAGE f (standard_simplex p) SUBSET s
+      #|  forall p (top:A topology) f. topspace top = {} ==> ~(singular_simplex (p,top) f)
+      #|  forall p (top:A topology) s t f.\n        t SUBSET s /\\ singular_simplex (p,subtopology top t) f\n        ==> singular_simplex (p,subtopology top s) f
+      #|  forall p (top:A topology) s f.\n        singular_simplex (p,subtopology top s) f <=>\n        singular_simplex (p,top) f /\\ IMAGE f (standard_simplex p) SUBSET s
       #|  singular_face p k f =\n    RESTRICTION (standard_simplex (p - 1)) (f o simplicial_face k)
       #|  i:num = k
       #|  i:num < k
       #|  i:num
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                          (standard_simplex p)
-      #|  !p (top:A topology) k f.\n        singular_simplex (p,top) f /\\ 1 <= p /\\ k <= p\n        ==> singular_simplex (p - 1,top) (singular_face p k f)
+      #|  forall p (top:A topology) k f.\n        singular_simplex (p,top) f /\\ 1 <= p /\\ k <= p\n        ==> singular_simplex (p - 1,top) (singular_face p k f)
       #|  singular_chain (p,top) (c:((num->real)->A)frag) <=>\n        frag_support c SUBSET singular_simplex(p,top)
-      #|  (!x. ~t x) ==> (s SUBSET t <=> s = {})
+      #|  (forall x. ~t x) ==> (s SUBSET t <=> s = {})
       #|  c:((num->real)->A)frag = frag_0
-      #|  !p (top:A topology) c.\n        topspace top = {}\n        ==> (singular_chain(p,top) c <=> c = frag_0)
-      #|  !p (top:A topology) s t c.\n        t SUBSET s /\\ singular_chain (p,subtopology top t) c\n        ==> singular_chain (p,subtopology top s) c
-      #|  s SUBSET P <=> !x. x IN s ==> P x
-      #|  !p (top:A topology) s c.\n        singular_chain (p,subtopology top s) c <=>\n        singular_chain (p,top) c /\\\n        !f. f IN frag_support c ==> IMAGE f (standard_simplex p) SUBSET s
-      #|  !p (top:A topology). singular_chain (p,top) frag_0
-      #|  !p (top:A topology) c.\n        singular_chain (p,top) (frag_of c) <=> singular_simplex (p,top) c
-      #|  !p (top:A topology) a c.\n        singular_chain (p,top) c ==> singular_chain (p,top) (frag_cmul a c)
-      #|  !p (top:A topology) c.\n        singular_chain (p,top) (frag_neg c) <=> singular_chain (p,top) c
-      #|  !p (top:A topology) c1 c2.\n        singular_chain (p,top) c1 /\\ singular_chain (p,top) c2\n        ==> singular_chain (p,top) (frag_add c1 c2)
-      #|  !p (top:A topology) c1 c2.\n        singular_chain (p,top) c1 /\\ singular_chain (p,top) c2\n        ==> singular_chain (p,top) (frag_sub c1 c2)
-      #|  !p (top:A topology) f k. (!c. c IN k ==> singular_chain (p,top) (f c))\n             ==> singular_chain (p,top) (iterate frag_add k f)
-      #|  !p top (f:((num->real)->A)->((num->real)->B)frag) x.\n        (!c. c IN frag_support x ==> singular_chain (p,top) (f c))\n        ==> singular_chain (p,top) (frag_extend f x)
+      #|  forall p (top:A topology) c.\n        topspace top = {}\n        ==> (singular_chain(p,top) c <=> c = frag_0)
+      #|  forall p (top:A topology) s t c.\n        t SUBSET s /\\ singular_chain (p,subtopology top t) c\n        ==> singular_chain (p,subtopology top s) c
+      #|  s SUBSET P <=> forall x. x IN s ==> P x
+      #|  forall p (top:A topology) s c.\n        singular_chain (p,subtopology top s) c <=>\n        singular_chain (p,top) c /\\\n        forall f. f IN frag_support c ==> IMAGE f (standard_simplex p) SUBSET s
+      #|  forall p (top:A topology). singular_chain (p,top) frag_0
+      #|  forall p (top:A topology) c.\n        singular_chain (p,top) (frag_of c) <=> singular_simplex (p,top) c
+      #|  forall p (top:A topology) a c.\n        singular_chain (p,top) c ==> singular_chain (p,top) (frag_cmul a c)
+      #|  forall p (top:A topology) c.\n        singular_chain (p,top) (frag_neg c) <=> singular_chain (p,top) c
+      #|  forall p (top:A topology) c1 c2.\n        singular_chain (p,top) c1 /\\ singular_chain (p,top) c2\n        ==> singular_chain (p,top) (frag_add c1 c2)
+      #|  forall p (top:A topology) c1 c2.\n        singular_chain (p,top) c1 /\\ singular_chain (p,top) c2\n        ==> singular_chain (p,top) (frag_sub c1 c2)
+      #|  forall p (top:A topology) f k. (forall c. c IN k ==> singular_chain (p,top) (f c))\n             ==> singular_chain (p,top) (iterate frag_add k f)
+      #|  forall p top (f:((num->real)->A)->((num->real)->B)frag) x.\n        (forall c. c IN frag_support x ==> singular_chain (p,top) (f c))\n        ==> singular_chain (p,top) (frag_extend f x)
       #|  chain_boundary p (c:((num->real)->A)frag) =\n        if p = 0 then frag_0 else\n        frag_extend\n          (\\f. iterate frag_add (0..p)\n                (\\k. frag_cmul (--(&1) pow k)\n                               (frag_of(singular_face p k f)))) c
       #|  ~(p = 0) ==> 1 <= p
-      #|  !p (top:A topology) c.\n        singular_chain (p,top) c\n        ==> singular_chain (p - 1,top) (chain_boundary p c)
-      #|  !p (top:A topology) c.\n        singular_chain (p + 1,top) c\n        ==> singular_chain (p,top) (chain_boundary (p + 1) c)
-      #|  !p. chain_boundary p frag_0 :((num->real)->A)frag = frag_0
-      #|  !p a c:((num->real)->A)frag.\n        chain_boundary p (frag_cmul a c) =\n        frag_cmul a (chain_boundary p c)
+      #|  forall p (top:A topology) c.\n        singular_chain (p,top) c\n        ==> singular_chain (p - 1,top) (chain_boundary p c)
+      #|  forall p (top:A topology) c.\n        singular_chain (p + 1,top) c\n        ==> singular_chain (p,top) (chain_boundary (p + 1) c)
+      #|  forall p. chain_boundary p frag_0 :((num->real)->A)frag = frag_0
+      #|  forall p a c:((num->real)->A)frag.\n        chain_boundary p (frag_cmul a c) =\n        frag_cmul a (chain_boundary p c)
       #|  frag_neg x = frag_cmul (-- &1) x
-      #|  !p c:((num->real)->A)frag.\n        chain_boundary p (frag_neg c) = frag_neg (chain_boundary p c)
-      #|  !p c1 c2:((num->real)->A)frag.\n        chain_boundary p (frag_add c1 c2) =\n        frag_add (chain_boundary p c1) (chain_boundary p c2)
+      #|  forall p c:((num->real)->A)frag.\n        chain_boundary p (frag_neg c) = frag_neg (chain_boundary p c)
+      #|  forall p c1 c2:((num->real)->A)frag.\n        chain_boundary p (frag_add c1 c2) =\n        frag_add (chain_boundary p c1) (chain_boundary p c2)
       #|  frag_sub x y = frag_add x (frag_neg y)
-      #|  !p c1 c2:((num->real)->A)frag.\n        chain_boundary p (frag_sub c1 c2) =\n        frag_sub (chain_boundary p c1) (chain_boundary p c2)
-      #|  !p g:K->((num->real)->A)frag k.\n        FINITE k\n        ==> chain_boundary p (iterate frag_add k g) =\n            iterate frag_add k (chain_boundary p o g)
-      #|  !p f:(num->real)->A.\n         chain_boundary p (frag_of f) =\n         if p = 0 then frag_0\n         else iterate frag_add (0..p)\n               (\\k. frag_cmul (-- &1 pow k) (frag_of(singular_face p k f)))
+      #|  forall p c1 c2:((num->real)->A)frag.\n        chain_boundary p (frag_sub c1 c2) =\n        frag_sub (chain_boundary p c1) (chain_boundary p c2)
+      #|  forall p g:K->((num->real)->A)frag k.\n        FINITE k\n        ==> chain_boundary p (iterate frag_add k g) =\n            iterate frag_add k (chain_boundary p o g)
+      #|  forall p f:(num->real)->A.\n         chain_boundary p (frag_of f) =\n         if p = 0 then frag_0\n         else iterate frag_add (0..p)\n               (\\k. frag_cmul (-- &1 pow k) (frag_of(singular_face p k f)))
       #|  mod_subset (p,top) c1 c2 <=> singular_chain (p,top) (frag_sub c1 c2)
-      #|  !p (top:A topology) c1 c2.\n        (c1 == c2) (mod_subset (p,subtopology top {})) <=> c1 = c2
+      #|  forall p (top:A topology) c1 c2.\n        (c1 == c2) (mod_subset (p,subtopology top {})) <=> c1 = c2
       #|  frag_sub x x = frag_0
-      #|  !p (top:A topology) c. (c == c) (mod_subset(p,top))
+      #|  forall p (top:A topology) c. (c == c) (mod_subset(p,top))
       #|  a:int
-      #|  !p (top:A topology) a c1 c2.\n     (c1 == c2) (mod_subset(p,top))\n     ==> (frag_cmul a c1 == frag_cmul a c2) (mod_subset(p,top))
-      #|  !p (top:A topology) c1 c2 d1 d2.\n     (c1 == c2) (mod_subset(p,top)) /\\ (d1 == d2) (mod_subset(p,top))\n     ==> (frag_add c1 d1 == frag_add c2 d2) (mod_subset(p,top))
+      #|  forall p (top:A topology) a c1 c2.\n     (c1 == c2) (mod_subset(p,top))\n     ==> (frag_cmul a c1 == frag_cmul a c2) (mod_subset(p,top))
+      #|  forall p (top:A topology) c1 c2 d1 d2.\n     (c1 == c2) (mod_subset(p,top)) /\\ (d1 == d2) (mod_subset(p,top))\n     ==> (frag_add c1 d1 == frag_add c2 d2) (mod_subset(p,top))
       #|  singular_relcycle(p,top,s) c <=>\n        singular_chain (p,top) c /\\\n        (chain_boundary p c == frag_0) (mod_subset(p-1,subtopology top s))
-      #|  !p (top:A topology) s.\n        singular_relcycle(p,top,s) =\n        singular_relcycle(p,top,topspace top INTER s)
+      #|  forall p (top:A topology) s.\n        singular_relcycle(p,top,s) =\n        singular_relcycle(p,top,topspace top INTER s)
       #|  frag_sub x frag_0 = x
-      #|  !p (top:A topology) s c.\n        singular_relcycle(p,top,s) c <=>\n        singular_chain (p,top) c /\\\n        singular_chain (p-1,subtopology top s) (chain_boundary p c)
-      #|  !p (top:A topology) s. singular_relcycle (p,top,s) frag_0
+      #|  forall p (top:A topology) s c.\n        singular_relcycle(p,top,s) c <=>\n        singular_chain (p,top) c /\\\n        singular_chain (p-1,subtopology top s) (chain_boundary p c)
+      #|  forall p (top:A topology) s. singular_relcycle (p,top,s) frag_0
       #|  frag_cmul x frag_0 = frag_0
       #|  a:int
-      #|  !p (top:A topology) s a c.\n        singular_relcycle (p,top,s) c\n        ==> singular_relcycle (p,top,s) (frag_cmul a c)
+      #|  forall p (top:A topology) s a c.\n        singular_relcycle (p,top,s) c\n        ==> singular_relcycle (p,top,s) (frag_cmul a c)
       #|  frag_neg x = frag_cmul (-- &1) x
       #|  frag_neg(frag_neg x) = x
-      #|  !p (top:A topology) s c.\n        singular_relcycle (p,top,s) (frag_neg c) <=>\n        singular_relcycle (p,top,s) c
+      #|  forall p (top:A topology) s c.\n        singular_relcycle (p,top,s) (frag_neg c) <=>\n        singular_relcycle (p,top,s) c
       #|  frag_add x frag_0 = x
-      #|  !p (top:A topology) s c1 c2.\n        singular_relcycle (p,top,s) c1 /\\ singular_relcycle (p,top,s) c2\n        ==> singular_relcycle (p,top,s) (frag_add c1 c2)
-      #|  !p top s (f:K->((num->real)->A)frag) k.\n        FINITE k /\\ (!c. c IN k ==> singular_relcycle (p,top,s) (f c))\n        ==> singular_relcycle (p,top,s) (iterate frag_add k f)
+      #|  forall p (top:A topology) s c1 c2.\n        singular_relcycle (p,top,s) c1 /\\ singular_relcycle (p,top,s) c2\n        ==> singular_relcycle (p,top,s) (frag_add c1 c2)
+      #|  forall p top s (f:K->((num->real)->A)frag) k.\n        FINITE k /\\ (forall c. c IN k ==> singular_relcycle (p,top,s) (f c))\n        ==> singular_relcycle (p,top,s) (iterate frag_add k f)
       #|  frag_sub x y = frag_add x (frag_neg y)
-      #|  !p (top:A topology) s c1 c2.\n        singular_relcycle (p,top,s) c1 /\\ singular_relcycle (p,top,s) c2\n        ==> singular_relcycle (p,top,s) (frag_sub c1 c2)
-      #|  !p (top:A topology) c.\n        singular_relcycle(p,top,{}) c <=>\n        singular_chain(p,top) c /\\ chain_boundary p c = frag_0
-      #|  !p (top:A topology) s t c.\n        t SUBSET s /\\ singular_relcycle (p,subtopology top t,{}) c\n        ==> singular_relcycle (p,subtopology top s,{}) c
+      #|  forall p (top:A topology) s c1 c2.\n        singular_relcycle (p,top,s) c1 /\\ singular_relcycle (p,top,s) c2\n        ==> singular_relcycle (p,top,s) (frag_sub c1 c2)
+      #|  forall p (top:A topology) c.\n        singular_relcycle(p,top,{}) c <=>\n        singular_chain(p,top) c /\\ chain_boundary p c = frag_0
+      #|  forall p (top:A topology) s t c.\n        t SUBSET s /\\ singular_relcycle (p,subtopology top t,{}) c\n        ==> singular_relcycle (p,subtopology top s,{}) c
       #|  singular_relboundary(p,top,s) c <=>\n    ?d. singular_chain (p + 1,top) d /\\\n        (chain_boundary (p + 1) d == c) (mod_subset (p,subtopology top s))
-      #|  !p (top:A topology) s.\n        singular_relboundary(p,top,s) =\n        singular_relboundary(p,top,topspace top INTER s)
+      #|  forall p (top:A topology) s.\n        singular_relboundary(p,top,s) =\n        singular_relboundary(p,top,topspace top INTER s)
       #|  d = frag_add c e <=> e = frag_sub d c
-      #|  !p (top:A topology) s c.\n        singular_relboundary(p,top,s) c <=>\n        ?d e. singular_chain (p + 1,top) d /\\\n              singular_chain(p,subtopology top s) e /\\\n              chain_boundary (p + 1) d = frag_add c e
+      #|  forall p (top:A topology) s c.\n        singular_relboundary(p,top,s) c <=>\n        ?d e. singular_chain (p + 1,top) d /\\\n              singular_chain(p,subtopology top s) e /\\\n              chain_boundary (p + 1) d = frag_add c e
       #|  frag_neg(frag_neg x) = x
       #|  d = frag_add c e <=> frag_add d (frag_neg e) = c
-      #|  !p (top:A topology) s c.\n        singular_relboundary(p,top,s) c <=>\n        ?d e. singular_chain (p + 1,top) d /\\\n              singular_chain(p,subtopology top s) e /\\\n              frag_add (chain_boundary (p + 1) d) e = c
-      #|  !p (top:A topology) c.\n        singular_relboundary (p,top,{}) c <=>\n        ?d. singular_chain(p+1,top) d /\\ chain_boundary (p+1) d = c
-      #|  !p (top:A topology) c.\n        singular_relboundary (p,top,{}) c ==> singular_chain(p,top) c
-      #|  !p (top:A topology) s t c.\n        t SUBSET s /\\ singular_relboundary (p,subtopology top t,{}) c\n        ==> singular_relboundary (p,subtopology top s,{}) c
+      #|  forall p (top:A topology) s c.\n        singular_relboundary(p,top,s) c <=>\n        ?d e. singular_chain (p + 1,top) d /\\\n              singular_chain(p,subtopology top s) e /\\\n              frag_add (chain_boundary (p + 1) d) e = c
+      #|  forall p (top:A topology) c.\n        singular_relboundary (p,top,{}) c <=>\n        ?d. singular_chain(p+1,top) d /\\ chain_boundary (p+1) d = c
+      #|  forall p (top:A topology) c.\n        singular_relboundary (p,top,{}) c ==> singular_chain(p,top) c
+      #|  forall p (top:A topology) s t c.\n        t SUBSET s /\\ singular_relboundary (p,subtopology top t,{}) c\n        ==> singular_relboundary (p,subtopology top s,{}) c
       #|  topspace top INTER s:A->bool
-      #|  !p (top:A topology) s c.\n        singular_relboundary (p,top,s) c\n        ==> singular_chain(p,top) c
+      #|  forall p (top:A topology) s c.\n        singular_relboundary (p,top,s) c\n        ==> singular_chain(p,top) c
       #|  frag_0:((num->real)->A)frag
-      #|  !p (top:A topology) s c.\n     singular_chain (p,subtopology top s) c\n     ==> singular_relboundary (p,top,s) c
+      #|  forall p (top:A topology) s c.\n     singular_chain (p,subtopology top s) c\n     ==> singular_relboundary (p,top,s) c
       #|  frag_0:((num->real)->A)frag
-      #|  !p (top:A topology) s. singular_relboundary (p,top,s) frag_0
-      #|  !p (top:A topology) s a c.\n        singular_relboundary (p,top,s) c\n        ==> singular_relboundary (p,top,s) (frag_cmul a c)
+      #|  forall p (top:A topology) s. singular_relboundary (p,top,s) frag_0
+      #|  forall p (top:A topology) s a c.\n        singular_relboundary (p,top,s) c\n        ==> singular_relboundary (p,top,s) (frag_cmul a c)
       #|  frag_neg x = frag_cmul (-- &1) x
       #|  frag_neg(frag_neg x) = x
-      #|  !p (top:A topology) s c.\n        singular_relboundary (p,top,s) (frag_neg c) <=>\n        singular_relboundary (p,top,s) c
-      #|  !p (top:A topology) s c1 c2.\n        singular_relboundary (p,top,s) c1 /\\ singular_relboundary (p,top,s) c2\n        ==> singular_relboundary (p,top,s) (frag_add c1 c2)
+      #|  forall p (top:A topology) s c.\n        singular_relboundary (p,top,s) (frag_neg c) <=>\n        singular_relboundary (p,top,s) c
+      #|  forall p (top:A topology) s c1 c2.\n        singular_relboundary (p,top,s) c1 /\\ singular_relboundary (p,top,s) c2\n        ==> singular_relboundary (p,top,s) (frag_add c1 c2)
       #|  frag_sub x y = frag_add x (frag_neg y)
-      #|  !p (top:A topology) s c1 c2.\n        singular_relboundary (p,top,s) c1 /\\ singular_relboundary (p,top,s) c2\n        ==> singular_relboundary (p,top,s) (frag_sub c1 c2)
+      #|  forall p (top:A topology) s c1 c2.\n        singular_relboundary (p,top,s) c1 /\\ singular_relboundary (p,top,s) c2\n        ==> singular_relboundary (p,top,s) (frag_sub c1 c2)
       #|  homologous_rel (p,top,s) (c1:((num->real)->A)frag) c2 <=>\n    singular_relboundary (p,top,s) (frag_sub c1 c2)
-      #|  !p (top:A topology) s.\n        homologous_rel (p,top,s) =\n        homologous_rel (p,top,topspace top INTER s)
+      #|  forall p (top:A topology) s.\n        homologous_rel (p,top,s) =\n        homologous_rel (p,top,topspace top INTER s)
       #|  frag_sub x x = frag_0
-      #|  !p (top:A topology) s c. homologous_rel (p,top,s) c c
+      #|  forall p (top:A topology) s c. homologous_rel (p,top,s) c c
       #|  frag_neg(frag_sub x y) = frag_sub y x
-      #|  !p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2 <=> homologous_rel (p,top,s) c2 c1
-      #|  !p (top:A topology) s c1 c2 c3.\n        homologous_rel (p,top,s) c1 c2 /\\  homologous_rel (p,top,s) c2 c3\n        ==>  homologous_rel (p,top,s) c1 c3
-      #|  !p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 = homologous_rel (p,top,s) c2 <=>\n        homologous_rel (p,top,s) c1 c2
+      #|  forall p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2 <=> homologous_rel (p,top,s) c2 c1
+      #|  forall p (top:A topology) s c1 c2 c3.\n        homologous_rel (p,top,s) c1 c2 /\\  homologous_rel (p,top,s) c2 c3\n        ==>  homologous_rel (p,top,s) c1 c3
+      #|  forall p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 = homologous_rel (p,top,s) c2 <=>\n        homologous_rel (p,top,s) c1 c2
       #|  frag_add (frag_sub c1 c2) c2 = c1
-      #|  (!x y. R x y ==> R y x) /\\\n    (!x y. R x y ==> P y ==> P x)\n    ==> (!x y. R x y ==> (P x <=> P y))
-      #|  !p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2\n        ==> (singular_chain (p,top) c1 <=> singular_chain (p,top) c2)
-      #|  !p (top:A topology) s c1 c1' c2 c2'.\n        homologous_rel (p,top,s) c1 c1' /\\ homologous_rel (p,top,s) c2 c2'\n        ==> homologous_rel (p,top,s) (frag_add c1 c2) (frag_add c1' c2')
-      #|  !p (top:A topology) s c1 c1' c2 c2'.\n        homologous_rel (p,top,s) c1 c1' /\\ homologous_rel (p,top,s) c2 c2'\n        ==> homologous_rel (p,top,s) (frag_sub c1 c2) (frag_sub c1' c2')
+      #|  (forall x y. R x y ==> R y x) /\\\n    (forall x y. R x y ==> P y ==> P x)\n    ==> (forall x y. R x y ==> (P x <=> P y))
+      #|  forall p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2\n        ==> (singular_chain (p,top) c1 <=> singular_chain (p,top) c2)
+      #|  forall p (top:A topology) s c1 c1' c2 c2'.\n        homologous_rel (p,top,s) c1 c1' /\\ homologous_rel (p,top,s) c2 c2'\n        ==> homologous_rel (p,top,s) (frag_add c1 c2) (frag_add c1' c2')
+      #|  forall p (top:A topology) s c1 c1' c2 c2'.\n        homologous_rel (p,top,s) c1 c1' /\\ homologous_rel (p,top,s) c2 c2'\n        ==> homologous_rel (p,top,s) (frag_sub c1 c2) (frag_sub c1' c2')
       #|  l:K->bool
       #|  l:K->bool
       #|  FINITE(l:K->bool)
-      #|  !i. i IN l\n        ==> homologous_rel (p,top,s) ((f:K->((num->real)->A)frag) i) (g i)
+      #|  forall i. i IN l\n        ==> homologous_rel (p,top,s) ((f:K->((num->real)->A)frag) i) (g i)
       #|  iterate frag_add k (f:K->((num->real)->A)frag) = iterate frag_add l f /\\\n    iterate frag_add k (g:K->((num->real)->A)frag) = iterate frag_add l g
       #|  l = {i | i IN k /\\ ~((f:K->((num->real)->A)frag) i = frag_0)} UNION\n        {i | i IN k /\\ ~((g:K->((num->real)->A)frag) i = frag_0)}
-      #|  !p top s f (g:K->((num->real)->A)frag) k.\n        (!i. i IN k ==> homologous_rel(p,top,s) (f i) (g i)) /\\\n        FINITE {i | i IN k /\\ ~(f i = frag_0)} /\\\n        FINITE {i | i IN k /\\ ~(g i = frag_0)}\n        ==> homologous_rel (p,top,s)\n             (iterate frag_add k f) (iterate frag_add k g)
+      #|  forall p top s f (g:K->((num->real)->A)frag) k.\n        (forall i. i IN k ==> homologous_rel(p,top,s) (f i) (g i)) /\\\n        FINITE {i | i IN k /\\ ~(f i = frag_0)} /\\\n        FINITE {i | i IN k /\\ ~(g i = frag_0)}\n        ==> homologous_rel (p,top,s)\n             (iterate frag_add k f) (iterate frag_add k g)
       #|  frag_sub a (frag_add a b) = frag_neg b
       #|  (h:((num->real)->A)frag->((num->real)->B)frag) c
       #|  frag_sub x frag_0 = x
       #|  c:((num->real)->A)frag
-      #|  !p (top:A topology) s (top':B topology) t h h' f g.\n        (!c. singular_chain (p,top) c ==> singular_chain(p + 1,top') (h c)) /\\\n        (!c. singular_chain (p - 1,subtopology top s) c\n             ==> singular_chain(p,subtopology top' t) (h' c)) /\\\n        (!c. singular_chain (p,top) c\n             ==> frag_add (chain_boundary (p + 1) (h c))\n                          (h'(chain_boundary p c)) =\n                 frag_sub (f c) (g c))\n         ==> !c. singular_relcycle (p,top,s) c\n                 ==> homologous_rel (p,top',t) (f c) (g c)
+      #|  forall p (top:A topology) s (top':B topology) t h h' f g.\n        (forall c. singular_chain (p,top) c ==> singular_chain(p + 1,top') (h c)) /\\\n        (forall c. singular_chain (p - 1,subtopology top s) c\n             ==> singular_chain(p,subtopology top' t) (h' c)) /\\\n        (forall c. singular_chain (p,top) c\n             ==> frag_add (chain_boundary (p + 1) (h c))\n                          (h'(chain_boundary p c)) =\n                 frag_sub (f c) (g c))\n         ==> forall c. singular_relcycle (p,top,s) c\n                 ==> homologous_rel (p,top',t) (f c) (g c)
       #|  k:num
       #|  simplicial_face i (t:num->real) IN standard_simplex (p - 1) /\\\n                simplicial_face j (t:num->real) IN standard_simplex (p - 1)
       #|  (t:(num->real)) IN standard_simplex (p - 1 - 1)
@@ -35444,7 +35444,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  frag_cmul a (frag_cmul b c) = frag_cmul (a * b) c
       #|  frag_cmul (-- &1) c1 = c2 ==> frag_add c1 c2 = frag_0
       #|  {i,j | (i IN s /\\ j IN t) /\\ P i j} =\n    {i,j | i IN s /\\ j IN {k | k IN t /\\ P i k}}
-      #|  (!a b a' b'. f a b = f a' b' <=> a = a' /\\ b = b')\n    ==> DISJOINT {f x y | P x y /\\ Q x y} {f x y | P x y /\\ ~Q x y}
+      #|  (forall a b a' b'. f a b = f a' b' <=> a = a' /\\ b = b')\n    ==> DISJOINT {f x y | P x y /\\ Q x y} {f x y | P x y /\\ ~Q x y}
       #|  {x,y | P x y} = {x,y | P x y /\\ (y:num) < x} UNION\n                    {x,y | P x y /\\ ~(y < x)}
       #|  frag_cmul a (frag_cmul b c) = frag_cmul (a * b) c
       #|  2 <= p ==> ~(p = 0)
@@ -35452,56 +35452,56 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  frag_sub x frag_0 = x
       #|  ~(p - 1 = 0) ==> 2 <= p
       #|  p - 1 = 0
-      #|  !p (top:A topology) c.\n        singular_chain (p,top) c\n        ==> chain_boundary (p - 1) (chain_boundary p c) = frag_0
+      #|  forall p (top:A topology) c.\n        singular_chain (p,top) c\n        ==> chain_boundary (p - 1) (chain_boundary p c) = frag_0
       #|  p + 2 = (p + 1) + 1
-      #|  !p (top:A topology) c.\n        singular_chain (p + 1,top) c\n        ==> chain_boundary p (chain_boundary (p + 1) c) = frag_0
+      #|  forall p (top:A topology) c.\n        singular_chain (p + 1,top) c\n        ==> chain_boundary p (chain_boundary (p + 1) c) = frag_0
       #|  topspace top INTER s:A->bool
-      #|  !p s (top:A topology) c.\n        singular_relboundary(p,top,s) c ==> singular_relcycle(p,top,s) c
+      #|  forall p s (top:A topology) c.\n        singular_relboundary(p,top,s) c ==> singular_relcycle(p,top,s) c
       #|  frag_add frag_0 x = x
       #|  frag_add (frag_sub c1 c2) c2 = c1
-      #|  (!x y. R x y ==> R y x) /\\\n    (!x y. R x y ==> P y ==> P x)\n    ==> (!x y. R x y ==> (P x <=> P y))
-      #|  !p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2\n        ==> (singular_relcycle (p,top,s) c1 <=>\n             singular_relcycle (p,top,s) c2)
+      #|  (forall x y. R x y ==> R y x) /\\\n    (forall x y. R x y ==> P y ==> P x)\n    ==> (forall x y. R x y ==> (P x <=> P y))
+      #|  forall p (top:A topology) s c1 c2.\n        homologous_rel (p,top,s) c1 c2\n        ==> (singular_relcycle (p,top,s) c1 <=>\n             singular_relcycle (p,top,s) c2)
       #|  simplex_map p (g:A->B) (c:(num->real)->A) =\n        RESTRICTION (standard_simplex p) (g o c)
-      #|  !p top top' f g:A->B.\n        singular_simplex (p,top) f /\\ continuous_map (top,top') g\n        ==> singular_simplex (p,top') (simplex_map p g f)
-      #|  !p (f:A->B) g top c.\n        singular_simplex (p,top) c /\\\n        (!x. x IN topspace top ==> f x = g x)\n        ==>  simplex_map p f c = simplex_map p g c
-      #|  !p f top (c:(num->real)->A).\n        singular_simplex (p,top) c /\\\n        (!x. x IN topspace top ==> f x = x)\n        ==> simplex_map p f c = c
-      #|  !p. simplex_map p (I:A->A) =\n       RESTRICTION (standard_simplex p:(num->real)->bool)
-      #|  !p (g:A->B) (h:B->C).\n        simplex_map p (h o g) :((num->real)->A)->((num->real)->C) =\n        simplex_map p h o simplex_map p g
-      #|  !p k f:A->B c.\n        1 <= p /\\ k <= p\n        ==> singular_face p k (simplex_map p f c) =\n            simplex_map (p - 1) f (c o simplicial_face k)
+      #|  forall p top top' f g:A->B.\n        singular_simplex (p,top) f /\\ continuous_map (top,top') g\n        ==> singular_simplex (p,top') (simplex_map p g f)
+      #|  forall p (f:A->B) g top c.\n        singular_simplex (p,top) c /\\\n        (forall x. x IN topspace top ==> f x = g x)\n        ==>  simplex_map p f c = simplex_map p g c
+      #|  forall p f top (c:(num->real)->A).\n        singular_simplex (p,top) c /\\\n        (forall x. x IN topspace top ==> f x = x)\n        ==> simplex_map p f c = c
+      #|  forall p. simplex_map p (I:A->A) =\n       RESTRICTION (standard_simplex p:(num->real)->bool)
+      #|  forall p (g:A->B) (h:B->C).\n        simplex_map p (h o g) :((num->real)->A)->((num->real)->C) =\n        simplex_map p h o simplex_map p g
+      #|  forall p k f:A->B c.\n        1 <= p /\\ k <= p\n        ==> singular_face p k (simplex_map p f c) =\n            simplex_map (p - 1) f (c o simplicial_face k)
       #|  chain_map p (g:A->B) (c:((num->real)->A)frag) =\n        frag_extend (frag_of o simplex_map p g) c
-      #|  !p top top' (g:A->B) c.\n        singular_chain (p,top) c /\\ continuous_map (top,top') g\n        ==> singular_chain (p,top') (chain_map p g c)
-      #|  !p (g:A->B). chain_map p g frag_0 = frag_0
-      #|  !p (g:A->B) f. chain_map p g (frag_of f) = frag_of (simplex_map p g f)
-      #|  !p (g:A->B) a c.\n        chain_map p g (frag_cmul a c) =\n        frag_cmul a (chain_map p g c)
-      #|  !p (g:A->B) c.\n        chain_map p g (frag_neg c) = frag_neg(chain_map p g c)
-      #|  !p (g:A->B) c1 c2.\n        chain_map p g (frag_add c1 c2) =\n        frag_add (chain_map p g c1) (chain_map p g c2)
-      #|  !p (g:A->B) c1 c2.\n        chain_map p g (frag_sub c1 c2) =\n        frag_sub (chain_map p g c1) (chain_map p g c2)
-      #|  !p (g:A->B) (f:K->((num->real)->A)frag) k.\n        FINITE k\n        ==> chain_map p g (iterate frag_add k f) =\n            iterate frag_add k (chain_map p g o f)
-      #|  !p (f:A->B) g top c.\n        singular_chain (p,top) c /\\\n        (!x. x IN topspace top ==> f x = g x)\n        ==> chain_map p f c = chain_map p g c
-      #|  !p f top (c:((num->real)->A)frag).\n        singular_chain (p,top) c /\\\n        (!x. x IN topspace top ==> f x = x)\n        ==> chain_map p f c = c
-      #|  !p top (c:((num->real)->B)frag).\n        singular_chain (p,top) c ==> chain_map p (\\x. x) c = c
-      #|  !p. chain_map p I =\n       frag_extend (frag_of o RESTRICTION (standard_simplex p))
-      #|  (!c. frag_support c SUBSET (:B) ==> P c) ==> (!c. P c)
-      #|  !p (g:A->B) (h:B->C).\n        chain_map p (h o g):((num->real)->A)frag->((num->real)->C)frag =\n        chain_map p h o chain_map p g
-      #|  !p top f:(num->real)->A.\n      singular_simplex (p,top) f\n      ==> chain_map p f (frag_of (RESTRICTION (standard_simplex p) I)) =\n          frag_of f
+      #|  forall p top top' (g:A->B) c.\n        singular_chain (p,top) c /\\ continuous_map (top,top') g\n        ==> singular_chain (p,top') (chain_map p g c)
+      #|  forall p (g:A->B). chain_map p g frag_0 = frag_0
+      #|  forall p (g:A->B) f. chain_map p g (frag_of f) = frag_of (simplex_map p g f)
+      #|  forall p (g:A->B) a c.\n        chain_map p g (frag_cmul a c) =\n        frag_cmul a (chain_map p g c)
+      #|  forall p (g:A->B) c.\n        chain_map p g (frag_neg c) = frag_neg(chain_map p g c)
+      #|  forall p (g:A->B) c1 c2.\n        chain_map p g (frag_add c1 c2) =\n        frag_add (chain_map p g c1) (chain_map p g c2)
+      #|  forall p (g:A->B) c1 c2.\n        chain_map p g (frag_sub c1 c2) =\n        frag_sub (chain_map p g c1) (chain_map p g c2)
+      #|  forall p (g:A->B) (f:K->((num->real)->A)frag) k.\n        FINITE k\n        ==> chain_map p g (iterate frag_add k f) =\n            iterate frag_add k (chain_map p g o f)
+      #|  forall p (f:A->B) g top c.\n        singular_chain (p,top) c /\\\n        (forall x. x IN topspace top ==> f x = g x)\n        ==> chain_map p f c = chain_map p g c
+      #|  forall p f top (c:((num->real)->A)frag).\n        singular_chain (p,top) c /\\\n        (forall x. x IN topspace top ==> f x = x)\n        ==> chain_map p f c = c
+      #|  forall p top (c:((num->real)->B)frag).\n        singular_chain (p,top) c ==> chain_map p (\\x. x) c = c
+      #|  forall p. chain_map p I =\n       frag_extend (frag_of o RESTRICTION (standard_simplex p))
+      #|  (forall c. frag_support c SUBSET (:B) ==> P c) ==> (forall c. P c)
+      #|  forall p (g:A->B) (h:B->C).\n        chain_map p (h o g):((num->real)->A)frag->((num->real)->C)frag =\n        chain_map p h o chain_map p g
+      #|  forall p top f:(num->real)->A.\n      singular_simplex (p,top) f\n      ==> chain_map p f (frag_of (RESTRICTION (standard_simplex p) I)) =\n          frag_of f
       #|  i:num
       #|  f:(num->real)->A
-      #|  !p top g:A->B c:((num->real)->A)frag.\n        singular_chain (p,top) c\n        ==> chain_boundary p (chain_map p g c) =\n            chain_map (p - 1) g (chain_boundary p c)
+      #|  forall p top g:A->B c:((num->real)->A)frag.\n        singular_chain (p,top) c\n        ==> chain_boundary p (chain_map p g c) =\n            chain_map (p - 1) g (chain_boundary p c)
       #|  subtopology top (s:A->bool)
       #|  g:A->B
       #|  top:A topology
       #|  p:num
-      #|  !p top s top' t g:A->B c:((num->real)->A)frag.\n        singular_relcycle (p,top,s) c /\\\n        continuous_map (top,top') g /\\ IMAGE g s SUBSET t\n        ==> singular_relcycle (p,top',t) (chain_map p g c)
+      #|  forall p top s top' t g:A->B c:((num->real)->A)frag.\n        singular_relcycle (p,top,s) c /\\\n        continuous_map (top,top') g /\\ IMAGE g s SUBSET t\n        ==> singular_relcycle (p,top',t) (chain_map p g c)
       #|  subtopology top (s:A->bool)
       #|  chain_map p (g:A->B) e
       #|  chain_map (p + 1) (g:A->B) d
-      #|  !p top s top' t g:A->B c:((num->real)->A)frag.\n        singular_relboundary (p,top,s) c /\\\n        continuous_map (top,top') g /\\ IMAGE g s SUBSET t\n         ==> singular_relboundary (p,top',t) (chain_map p g c)
-      #|  !p top a f:(num->real)->A.\n        topspace top = {a}\n        ==> (singular_simplex(p,top) f <=>\n             f = RESTRICTION (standard_simplex p) (\\x. a))
+      #|  forall p top s top' t g:A->B c:((num->real)->A)frag.\n        singular_relboundary (p,top,s) c /\\\n        continuous_map (top,top') g /\\ IMAGE g s SUBSET t\n         ==> singular_relboundary (p,top',t) (chain_map p g c)
+      #|  forall p top a f:(num->real)->A.\n        topspace top = {a}\n        ==> (singular_simplex(p,top) f <=>\n             f = RESTRICTION (standard_simplex p) (\\x. a))
       #|  frag_cmul (&0) x = frag_0
       #|  s SUBSET {a} <=> s = {} \\/ s = {a}
-      #|  (!x. x IN s ==> x = a) <=> s SUBSET {a}
-      #|  s SUBSET t <=> !x. x IN s ==> t x
-      #|  !p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_chain(p,top) c <=>\n             ?b. c = frag_cmul b\n                      (frag_of(RESTRICTION (standard_simplex p) (\\x. a))))
+      #|  (forall x. x IN s ==> x = a) <=> s SUBSET {a}
+      #|  s SUBSET t <=> forall x. x IN s ==> t x
+      #|  forall p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_chain(p,top) c <=>\n             ?b. c = frag_cmul b\n                      (frag_of(RESTRICTION (standard_simplex p) (\\x. a))))
       #|  ODD p
       #|  p:num
       #|  p:num
@@ -35510,11 +35510,11 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  k:num
       #|  iterate frag_add (0..p)\n         (\\k. frag_cmul (-- &1 pow k)\n                (frag_of(RESTRICTION (standard_simplex (p - 1))\n                             ((\\x. a):(num->real)->A))))
       #|  f:(num->real)->A
-      #|  s SUBSET t ==> (!x. t x ==> P x) ==> (!x. x IN s ==> P x)
+      #|  s SUBSET t ==> (forall x. t x ==> P x) ==> (forall x. x IN s ==> P x)
       #|  ODD p
       #|  frag_extend (\\f. if ODD p then frag_0 else\n                      frag_of(RESTRICTION (standard_simplex (p - 1))\n                                          ((\\x. a):(num->real)->A)))\n                 (c:((num->real)->A)frag)
       #|  p = 0
-      #|  !p top a c:((num->real)->A)frag.\n        topspace top = {a} /\\ singular_chain (p,top) c\n        ==> chain_boundary p c =\n                if p = 0 \\/ ODD p then frag_0 else\n                frag_extend\n                  (\\f. frag_of(RESTRICTION (standard_simplex (p - 1)) (\\x. a)))\n                  c
+      #|  forall p top a c:((num->real)->A)frag.\n        topspace top = {a} /\\ singular_chain (p,top) c\n        ==> chain_boundary p c =\n                if p = 0 \\/ ODD p then frag_0 else\n                frag_extend\n                  (\\f. frag_of(RESTRICTION (standard_simplex (p - 1)) (\\x. a)))\n                  c
       #|  frag_cmul b c = frag_0 <=> b = &0 \\/ c = frag_0
       #|  c:((num->real)->A)frag
       #|  a:A
@@ -35524,7 +35524,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  p:num
       #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
-      #|  !p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_relcycle (p,top,{}) c <=>\n             singular_chain (p,top) c /\\ (p = 0 \\/ ODD p \\/ c = frag_0))
+      #|  forall p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_relcycle (p,top,{}) c <=>\n             singular_chain (p,top) c /\\ (p = 0 \\/ ODD p \\/ c = frag_0))
       #|  ODD p
       #|  a:A
       #|  top:A topology
@@ -35534,8 +35534,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p + 1
       #|  p /\\ q <=> ~(p ==> ~q)
       #|  singular_chain(p,top) (c:((num->real)->A)frag)
-      #|  !p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_relboundary (p,top,{}) c <=>\n             singular_chain (p,top) c /\\ (ODD p \\/ c = frag_0))
-      #|  !p top a c:((num->real)->A)frag.\n      topspace top = {a} /\\ 1 <= p\n      ==> (singular_relboundary (p,top,{}) c <=>\n           singular_relcycle (p,top,{}) c)
+      #|  forall p top a c:((num->real)->A)frag.\n        topspace top = {a}\n        ==> (singular_relboundary (p,top,{}) c <=>\n             singular_chain (p,top) c /\\ (ODD p \\/ c = frag_0))
+      #|  forall p top a c:((num->real)->A)frag.\n      topspace top = {a} /\\ 1 <= p\n      ==> (singular_relboundary (p,top,{}) c <=>\n           singular_relcycle (p,top,{}) c)
       #|  \\/
       #|  ~
       #|  \\/
@@ -35786,26 +35786,26 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  n:num
       #|  k:num
       #|  (r ==> p) ==> ((p /\\ q) /\\ r <=> q /\\ r)
-      #|  !p s f.\n        simplicial_simplex (p,s) f <=>\n        IMAGE f (standard_simplex p) SUBSET s /\\\n        ?l. f = oriented_simplex p l
-      #|  !p f. ~(simplicial_simplex (p,{}) f)
+      #|  forall p s f.\n        simplicial_simplex (p,s) f <=>\n        IMAGE f (standard_simplex p) SUBSET s /\\\n        ?l. f = oriented_simplex p l
+      #|  forall p f. ~(simplicial_simplex (p,{}) f)
       #|  simplicial_chain (p,s) c <=>\n  frag_support c SUBSET simplicial_simplex (p,s)
-      #|  !p s. simplicial_chain (p,s) frag_0
-      #|  !p s c. simplicial_chain (p,s) (frag_of c) <=> simplicial_simplex (p,s) c
-      #|  !p s a c. simplicial_chain (p,s) c\n             ==> simplicial_chain (p,s) (frag_cmul a c)
-      #|  !p s c1 c2.\n        simplicial_chain (p,s) c1 /\\ simplicial_chain (p,s) c2\n        ==> simplicial_chain (p,s) (frag_sub c1 c2)
-      #|  !p s f k. (!c. c IN k ==> simplicial_chain (p,s) (f c))\n             ==> simplicial_chain (p,s) (iterate frag_add k f)
+      #|  forall p s. simplicial_chain (p,s) frag_0
+      #|  forall p s c. simplicial_chain (p,s) (frag_of c) <=> simplicial_simplex (p,s) c
+      #|  forall p s a c. simplicial_chain (p,s) c\n             ==> simplicial_chain (p,s) (frag_cmul a c)
+      #|  forall p s c1 c2.\n        simplicial_chain (p,s) c1 /\\ simplicial_chain (p,s) c2\n        ==> simplicial_chain (p,s) (frag_sub c1 c2)
+      #|  forall p s f k. (forall c. c IN k ==> simplicial_chain (p,s) (f c))\n             ==> simplicial_chain (p,s) (iterate frag_add k f)
       #|  q /\\ (p <=> p') ==> (p /\\ q <=> p')
-      #|  !p s l. simplicial_simplex (p,s) (oriented_simplex p l) <=>\n           IMAGE (\\x i. sum (0..p) (\\j. l j i * x j)) (standard_simplex p)\n           SUBSET s
-      #|  !p s f.\n      simplicial_simplex (p,s) f\n      ==> singular_simplex\n            (p,subtopology (product_topology (:num) (\\i. euclideanreal)) s) f
-      #|  !p s c. simplicial_chain (p,s) c\n         ==> singular_chain\n            (p,subtopology (product_topology (:num) (\\i. euclideanreal)) s) c
+      #|  forall p s l. simplicial_simplex (p,s) (oriented_simplex p l) <=>\n           IMAGE (\\x i. sum (0..p) (\\j. l j i * x j)) (standard_simplex p)\n           SUBSET s
+      #|  forall p s f.\n      simplicial_simplex (p,s) f\n      ==> singular_simplex\n            (p,subtopology (product_topology (:num) (\\i. euclideanreal)) s) f
+      #|  forall p s c. simplicial_chain (p,s) c\n         ==> singular_chain\n            (p,subtopology (product_topology (:num) (\\i. euclideanreal)) s) c
       #|  (\\j:num. if j = i then &1 else &0)
       #|  i:num
-      #|  !p l l'. oriented_simplex p l = oriented_simplex p l' <=>\n            !i. i <= p ==> l i = l' i
-      #|  !i. (i <= p /\\ ~(i < k)) /\\ ~(i = k) <=>\n         k + 1 <= i /\\ i <= (p - 1) + 1
-      #|  !i. i <= p - 1 /\\ i < k <=> i <= p /\\ i < k
+      #|  forall p l l'. oriented_simplex p l = oriented_simplex p l' <=>\n            forall i. i <= p ==> l i = l' i
+      #|  forall i. (i <= p /\\ ~(i < k)) /\\ ~(i = k) <=>\n         k + 1 <= i /\\ i <= (p - 1) + 1
+      #|  forall i. i <= p - 1 /\\ i < k <=> i <= p /\\ i < k
       #|  j:num
       #|  x:num->real
-      #|  !p k l.\n        1 <= p /\\ k <= p\n        ==> singular_face p k (oriented_simplex p l) =\n            oriented_simplex (p - 1)\n                             (\\j. if j < k then l j else l (j + 1))
+      #|  forall p k l.\n        1 <= p /\\ k <= p\n        ==> singular_face p k (oriented_simplex p l) =\n            oriented_simplex (p - 1)\n                             (\\j. if j < k then l j else l (j + 1))
       #|  1 <= p ==> ((k <= j /\\ j <= p) /\\ ~(j = k) <=>\n                k + 1 <= j /\\ j <= (p - 1) + 1)
       #|  j:num <= p /\\ k <= j <=> k <= j /\\ j <= p
       #|  k <= p ==> (j <= p - 1 /\\ j < k <=> j <= p /\\ j < k)
@@ -35813,11 +35813,11 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  \\i. if i < k then (m:num->num->real) i else m (i + 1)
       #|  m:num->num->real
-      #|  !p s k f.\n      simplicial_simplex (p,s) f /\\ 1 <= p /\\ k <= p\n      ==> simplicial_simplex (p - 1,s) (singular_face p k f)
+      #|  forall p s k f.\n      simplicial_simplex (p,s) f /\\ 1 <= p /\\ k <= p\n      ==> simplicial_simplex (p - 1,s) (singular_face p k f)
       #|  i:num
       #|  f:(num->real)->(num->real)
-      #|  !p s c. simplicial_chain (p,s) c\n           ==> simplicial_chain (p - 1,s) (chain_boundary p c)
-      #|  ?cone. !p v l.\n          cone p v (oriented_simplex p l) =\n          oriented_simplex (p + 1) (\\i. if i = 0 then v else l(i - 1))
+      #|  forall p s c. simplicial_chain (p,s) c\n           ==> simplicial_chain (p - 1,s) (chain_boundary p c)
+      #|  ?cone. forall p v l.\n          cone p v (oriented_simplex p l) =\n          oriented_simplex (p + 1) (\\i. if i = 0 then v else l(i - 1))
       #|  sum {n} (\\i. (x:num->real)(i + 1))
       #|  p + 1 < n + 1
       #|  n:num
@@ -35840,9 +35840,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  l:num->num->real
       #|  s:(num->real)->bool = {}
-      #|  !p s t v f.\n        simplicial_simplex (p,s) f /\\\n        (!x u. &0 <= u /\\ u <= &1 /\\ x IN s\n               ==> (\\i. (&1 - u) * v i + u * x i) IN t)\n        ==> simplicial_simplex (p + 1,t) (simplex_cone p v f)
+      #|  forall p s t v f.\n        simplicial_simplex (p,s) f /\\\n        (forall x u. &0 <= u /\\ u <= &1 /\\ x IN s\n               ==> (\\i. (&1 - u) * v i + u * x i) IN t)\n        ==> simplicial_simplex (p + 1,t) (simplex_cone p v f)
       #|  simplicial_cone p v = frag_extend (frag_of o simplex_cone p v)
-      #|  !p s t v c.\n        simplicial_chain (p,s) c /\\\n        (!x u. &0 <= u /\\ u <= &1 /\\ x IN s\n               ==> (\\i. (&1 - u) * v i + u * x i) IN t)\n        ==> simplicial_chain (p + 1,t) (simplicial_cone p v c)
+      #|  forall p s t v c.\n        simplicial_chain (p,s) c /\\\n        (forall x u. &0 <= u /\\ u <= &1 /\\ x IN s\n               ==> (\\i. (&1 - u) * v i + u * x i) IN t)\n        ==> simplicial_chain (p + 1,t) (simplicial_cone p v c)
       #|  1 <= k + 1
       #|  frag_cmul a (frag_cmul b c) = frag_cmul (a * b) c
       #|  k:num
@@ -35854,8 +35854,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  j < 1 <=> j = 0
       #|  p = 0
       #|  l:num->num->real
-      #|  !p s v f.\n        simplicial_simplex (p,s) f\n        ==> chain_boundary (p + 1) (simplicial_cone p v (frag_of f)) =\n            frag_sub (frag_of f)\n             (if p = 0 then frag_of(RESTRICTION (standard_simplex p) (\\u. v))\n              else simplicial_cone (p - 1) v (chain_boundary p (frag_of f)))
-      #|  !p s v c.\n        simplicial_chain (p,s) c\n        ==> chain_boundary (p + 1) (simplicial_cone p v c) =\n            frag_sub c\n             (if p = 0 then\n              frag_extend\n               (\\f. frag_of(RESTRICTION (standard_simplex p) (\\u. v))) c\n              else simplicial_cone (p - 1) v (chain_boundary p c))
+      #|  forall p s v f.\n        simplicial_simplex (p,s) f\n        ==> chain_boundary (p + 1) (simplicial_cone p v (frag_of f)) =\n            frag_sub (frag_of f)\n             (if p = 0 then frag_of(RESTRICTION (standard_simplex p) (\\u. v))\n              else simplicial_cone (p - 1) v (chain_boundary p (frag_of f)))
+      #|  forall p s v c.\n        simplicial_chain (p,s) c\n        ==> chain_boundary (p + 1) (simplicial_cone p v c) =\n            frag_sub c\n             (if p = 0 then\n              frag_extend\n               (\\f. frag_of(RESTRICTION (standard_simplex p) (\\u. v))) c\n              else simplicial_cone (p - 1) v (chain_boundary p c))
       #|  k:num
       #|  (\\j. if j = i then &1 else &0):num->real
       #|  i:num
@@ -35863,7 +35863,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  m:num->num->real
       #|  simplicial_simplex (r,s) g
       #|  x:num->real
-      #|  !p q r g l s.\n        simplicial_simplex(p,standard_simplex q) (oriented_simplex p l) /\\\n        simplicial_simplex(r,s) g /\\ q <= r\n        ==> simplex_map p g (oriented_simplex p l) =\n            oriented_simplex p (g o l)
+      #|  forall p q r g l s.\n        simplicial_simplex(p,standard_simplex q) (oriented_simplex p l) /\\\n        simplicial_simplex(r,s) g /\\ q <= r\n        ==> simplex_map p g (oriented_simplex p l) =\n            oriented_simplex p (g o l)
       #|  p <= SUC p
       #|  s:(num->real)->bool
       #|  m:num->num->real
@@ -35882,14 +35882,14 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  m:num->num->real
       #|  simplicial_simplex (p,standard_simplex q) f
       #|  f:(num->real)->(num->real)
-      #|  !s p q r v c g.\n        simplicial_simplex (r,s) g /\\\n        simplicial_chain (p,standard_simplex q) c /\\\n        v IN standard_simplex q /\\ q <= r\n        ==> chain_map (p + 1) g (simplicial_cone p v c) =\n            simplicial_cone p (g v) (chain_map p g c)
+      #|  forall s p q r v c g.\n        simplicial_simplex (r,s) g /\\\n        simplicial_chain (p,standard_simplex q) c /\\\n        v IN standard_simplex q /\\ q <= r\n        ==> chain_map (p + 1) g (simplicial_cone p v c) =\n            simplicial_cone p (g v) (chain_map p g c)
       #|  simplicial_vertex i (f:(num->real)->(num->real)) =\n        f(\\j. if j = i then &1 else &0)
-      #|  !i p l. simplicial_vertex i (oriented_simplex p l) =\n           if i <= p then l i else ARB
+      #|  forall i p l. simplicial_vertex i (oriented_simplex p l) =\n           if i <= p then l i else ARB
       #|  simplicial_subdivision 0 = I /\\\n  simplicial_subdivision (SUC p) =\n     frag_extend\n      (\\f. simplicial_cone p\n            (\\i. sum(0..SUC p) (\\j. simplicial_vertex j f i) / (&p + &2))\n            (simplicial_subdivision p (chain_boundary (SUC p) (frag_of f))))
-      #|  !p. simplicial_subdivision p frag_0 = frag_0
-      #|  !p c1 c2.\n        simplicial_subdivision p (frag_sub c1 c2) =\n        frag_sub (simplicial_subdivision p c1)\n                 (simplicial_subdivision p c2)
+      #|  forall p. simplicial_subdivision p frag_0 = frag_0
+      #|  forall p c1 c2.\n        simplicial_subdivision p (frag_sub c1 c2) =\n        frag_sub (simplicial_subdivision p c1)\n                 (simplicial_subdivision p c2)
       #|  SUC p + 1 = p + 2
-      #|  !p f. simplicial_subdivision p (frag_of f) =\n         if p = 0 then frag_of f\n         else simplicial_cone (p - 1)\n               (\\i. sum(0..p) (\\j. simplicial_vertex j f i) / (&p + &1))\n               (simplicial_subdivision (p - 1)\n                                       (chain_boundary p (frag_of f)))
+      #|  forall p f. simplicial_subdivision p (frag_of f) =\n         if p = 0 then frag_of f\n         else simplicial_cone (p - 1)\n               (\\i. sum(0..p) (\\j. simplicial_vertex j f i) / (&p + &1))\n               (simplicial_subdivision (p - 1)\n                                       (chain_boundary p (frag_of f)))
       #|  &1 - u + u = &1
       #|  k:num
       #|  x IN standard_simplex (p + 1)
@@ -35904,7 +35904,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  f:(num->real)->(num->real)
       #|  s:(num->real)->bool
       #|  p:num
-      #|  !p s c. simplicial_chain (p,s) c\n           ==> simplicial_chain (p,s) (simplicial_subdivision p c)
+      #|  forall p s c. simplicial_chain (p,s) c\n           ==> simplicial_chain (p,s) (simplicial_subdivision p c)
       #|  simplicial_chain (p,s) c ==> ?s. singular_chain(p,s) c
       #|  c = frag_0 ==> simplicial_subdivision q c = frag_0
       #|  c = frag_0 ==> frag_extend f c = frag_0
@@ -35914,10 +35914,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p = (p + 1) - 1
       #|  f:(num->real)->(num->real)
       #|  p:num
-      #|  !p s c. simplicial_chain (p,s) c\n           ==> chain_boundary p (simplicial_subdivision p c) =\n               simplicial_subdivision (p - 1) (chain_boundary p c)
+      #|  forall p s c. simplicial_chain (p,s) c\n           ==> chain_boundary p (simplicial_subdivision p c) =\n               simplicial_subdivision (p - 1) (chain_boundary p c)
       #|  (\\j. if j = r then &1 else &0):num->real
       #|  r:num
-      #|  !r. r <= p + 1\n          ==> (l:num->num->real) r IN IMAGE f (standard_simplex(SUC p))
+      #|  forall r. r <= p + 1\n          ==> (l:num->num->real) r IN IMAGE f (standard_simplex(SUC p))
       #|  (((&p + &1) * inv((&p + &1) + &1)) * d) / (&p + &1) * (&p + &2) = d
       #|  &0 < &p + &2
       #|  q:num
@@ -35936,7 +35936,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  &p / (&p + &1) * d
       #|  ~(n = 0) /\\ n <= p + 1 ==> n - 1 <= p
       #|  (\\j. if j = i then &1 else &0):num->real
-      #|  !i. i <= p ==> (m:num->num->real) i IN IMAGE g (standard_simplex p)
+      #|  forall i. i <= p ==> (m:num->num->real) i IN IMAGE g (standard_simplex p)
       #|  m < n ==> ~(n = 0)
       #|  n:num
       #|  m:num
@@ -35954,38 +35954,38 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  abs x <= d ==> &0 <= d
       #|  &0 <= d
       #|  g:(num->real)->(num->real)
-      #|  (!x. t x ==> P x) ==> s SUBSET t ==> !x. x IN s ==> P x
+      #|  (forall x. t x ==> P x) ==> s SUBSET t ==> forall x. x IN s ==> P x
       #|  simplicial_chain (SUC p,IMAGE f (standard_simplex(SUC p))) (frag_of f)
       #|  chain_boundary (SUC p) (frag_of(f:(num->real)->(num->real)))
       #|  d:real
       #|  g:(num->real)->(num->real)
       #|  f:(num->real)->(num->real)
-      #|  (!x. x IN s ==> P x)\n    ==> (!x. t x /\\ P x ==> Q x)\n    ==> s SUBSET t ==> !x. x IN s ==> Q x
-      #|  t SUBSET P ==> s SUBSET t ==> (!x. x IN s ==> P x)
+      #|  (forall x. x IN s ==> P x)\n    ==> (forall x. t x /\\ P x ==> Q x)\n    ==> s SUBSET t ==> forall x. x IN s ==> Q x
+      #|  t SUBSET P ==> s SUBSET t ==> (forall x. x IN s ==> P x)
       #|  c:((num->real)->(num->real))frag
       #|  d:real
       #|  p:num
-      #|  !s k p d c.\n        simplicial_chain(p,s) c /\\\n        (!f x y. f IN frag_support c /\\\n                 x IN standard_simplex p /\\ y IN standard_simplex p\n                 ==> abs(f x k - f y k) <= d)\n        ==> (!f x y. f IN frag_support(simplicial_subdivision p c) /\\\n                     x IN standard_simplex p /\\ y IN standard_simplex p\n                     ==> abs(f x k - f y k) <= &p / (&p + &1) * d)
+      #|  forall s k p d c.\n        simplicial_chain(p,s) c /\\\n        (forall f x y. f IN frag_support c /\\\n                 x IN standard_simplex p /\\ y IN standard_simplex p\n                 ==> abs(f x k - f y k) <= d)\n        ==> (forall f x y. f IN frag_support(simplicial_subdivision p c) /\\\n                     x IN standard_simplex p /\\ y IN standard_simplex p\n                     ==> abs(f x k - f y k) <= &p / (&p + &1) * d)
       #|  m - 1
       #|  n - 1
       #|  singular_subdivision p =\n        frag_extend\n           (\\f. chain_map p f\n                  (simplicial_subdivision p\n                         (frag_of(RESTRICTION (standard_simplex p) I))))
-      #|  !p. singular_subdivision p frag_0 = frag_0
-      #|  !p c1 c2. singular_subdivision p (frag_sub c1 c2) =\n             frag_sub (singular_subdivision p c1) (singular_subdivision p c2)
-      #|  !p c1 c2. singular_subdivision p (frag_add c1 c2) =\n             frag_add (singular_subdivision p c1) (singular_subdivision p c2)
+      #|  forall p. singular_subdivision p frag_0 = frag_0
+      #|  forall p c1 c2. singular_subdivision p (frag_sub c1 c2) =\n             frag_sub (singular_subdivision p c1) (singular_subdivision p c2)
+      #|  forall p c1 c2. singular_subdivision p (frag_add c1 c2) =\n             frag_add (singular_subdivision p c1) (singular_subdivision p c2)
       #|  x:num->real
       #|  (\\i j. if i = j then &1 else &0):num->num->real
       #|  q ==> (p /\\ q <=> p)
-      #|  !p s. simplicial_simplex (p,s) (RESTRICTION (standard_simplex p) I) <=>\n         standard_simplex p SUBSET s
+      #|  forall p s. simplicial_simplex (p,s) (RESTRICTION (standard_simplex p) I) <=>\n         standard_simplex p SUBSET s
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                          (standard_simplex p)
       #|  f:(num->real)->A
-      #|  !p s c:((num->real)->A)frag.\n        singular_chain (p,s) c\n        ==> singular_chain (p,s) (singular_subdivision p c)
+      #|  forall p s c:((num->real)->A)frag.\n        singular_chain (p,s) c\n        ==> singular_chain (p,s) (singular_subdivision p c)
       #|  d:((num->real)->(num->real))frag
       #|  simplicial_subdivision p\n             (frag_of (RESTRICTION (standard_simplex p:(num->real)->bool) I))
       #|  frag_of (RESTRICTION (standard_simplex p:(num->real)->bool) I)
       #|  standard_simplex p:(num->real)->bool
       #|  p:num
       #|  f:(num->real)->A
-      #|  !p s (g:A->B) c.\n        singular_chain (p,s) c\n        ==> singular_subdivision p (chain_map p g c) =\n            chain_map p g (singular_subdivision p c)
+      #|  forall p s (g:A->B) c.\n        singular_chain (p,s) c\n        ==> singular_subdivision p (chain_map p g c) =\n            chain_map p g (singular_subdivision p c)
       #|  k:num
       #|  x:num->real
       #|  \\(j:num) (k:num). sum (0..q) (\\i. l i k * m j i)
@@ -35993,7 +35993,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  m:num->num->real
       #|  l:num->num->real
       #|  g:(num->real)->(num->real)
-      #|  !p q s f c.\n        simplicial_simplex (q,s) f /\\\n        simplicial_chain (p,standard_simplex q) c\n        ==> simplicial_chain (p,s) (chain_map p f c)
+      #|  forall p q s f c.\n        simplicial_simplex (q,s) f /\\\n        simplicial_chain (p,standard_simplex q) c\n        ==> simplicial_chain (p,s) (chain_map p f c)
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                          (standard_simplex (SUC p))
       #|  SUC p
       #|  chain_map p (f:(num->real)->(num->real))\n       (chain_boundary (SUC p)\n         (frag_of (RESTRICTION (standard_simplex (SUC p)) I)))
@@ -36013,10 +36013,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  s:(num->real)->bool
       #|  p:num
       #|  s:(num->real)->bool
-      #|  !p s c. simplicial_chain (p,s) c\n           ==> singular_subdivision p c = simplicial_subdivision p c
+      #|  forall p s c. simplicial_chain (p,s) c\n           ==> singular_subdivision p c = simplicial_subdivision p c
       #|  q:num
       #|  s:(num->real)->bool
-      #|  !p q s g c.\n        simplicial_chain(p,standard_simplex q) c /\\\n        simplicial_simplex (q,s) g\n        ==> simplicial_subdivision p (chain_map p g c) =\n            chain_map p g (simplicial_subdivision p c)
+      #|  forall p q s g c.\n        simplicial_chain(p,standard_simplex q) c /\\\n        simplicial_simplex (q,s) g\n        ==> simplicial_subdivision p (chain_map p g c) =\n            chain_map p g (simplicial_subdivision p c)
       #|  frag_of (RESTRICTION (standard_simplex p) I)
       #|  f:(num->real)->A
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                              (standard_simplex p)
@@ -36034,8 +36034,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                              (standard_simplex p)
       #|  p:num
       #|  f:(num->real)->A
-      #|  !p s c:((num->real)->A)frag.\n        singular_chain (p,s) c\n        ==> chain_boundary p (singular_subdivision p c) =\n            singular_subdivision (p - 1) (chain_boundary p c)
-      #|  !s c. singular_chain(0,s) c ==> singular_subdivision 0 c = c
+      #|  forall p s c:((num->real)->A)frag.\n        singular_chain (p,s) c\n        ==> chain_boundary p (singular_subdivision p c) =\n            singular_subdivision (p - 1) (chain_boundary p c)
+      #|  forall s c. singular_chain(0,s) c ==> singular_subdivision 0 c = c
       #|  frag_of(f:(num->real)->(num->real))
       #|  standard_simplex s
       #|  SUC p
@@ -36089,16 +36089,16 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  SUC p = q
       #|  f:(num->real)->(num->real)
       #|  q = SUC p
-      #|  !p c1 c2.\n      (h:num->((num->real)->num->real)frag->((num->real)->num->real)frag)\n      p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)
-      #|  !p. (h:num->((num->real)->num->real)frag->((num->real)->num->real)frag)\n        p frag_0 = frag_0
+      #|  forall p c1 c2.\n      (h:num->((num->real)->num->real)frag->((num->real)->num->real)frag)\n      p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)
+      #|  forall p. (h:num->((num->real)->num->real)frag->((num->real)->num->real)frag)\n        p frag_0 = frag_0
       #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
       #|  p:num
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  (!r g c. P r c g) <=> (!c r g. P r c g)
+      #|  (forall r g c. P r c g) <=> (forall c r g. P r c g)
       #|  s:num
       #|  h:num->((num->real)->num->real)frag->((num->real)->num->real)frag
-      #|  h 0 = (\\x. frag_0) /\\\n    !p. h(SUC p) =\n          frag_extend\n             (\\f. simplicial_cone (SUC p)\n                   (\\i. sum (0..SUC p)\n                        (\\j. simplicial_vertex j f i) / (&(SUC p) + &1))\n                   (frag_sub\n                      (frag_sub (simplicial_subdivision (SUC p) (frag_of f))\n                                (frag_of f))\n                      (h p (chain_boundary (SUC p) (frag_of f)))))
-      #|  ?h. (!p. h p frag_0 = frag_0) /\\\n       (!p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n       (!p q r g c.\n                simplicial_chain (p,standard_simplex q) c /\\\n                simplicial_simplex (q,standard_simplex r) g\n                ==> chain_map (p + 1) g (h p c) = h p (chain_map p g c)) /\\\n       (!p q c. simplicial_chain (p,standard_simplex q) c\n                ==> simplicial_chain (p + 1,standard_simplex q) (h p c)) /\\\n       (!p q c. simplicial_chain (p,standard_simplex q) c\n                ==> frag_add (chain_boundary (p + 1) (h p c))\n                             (h (p - 1) (chain_boundary p c)) =\n                    frag_sub (simplicial_subdivision p c) c)
+      #|  h 0 = (\\x. frag_0) /\\\n    forall p. h(SUC p) =\n          frag_extend\n             (\\f. simplicial_cone (SUC p)\n                   (\\i. sum (0..SUC p)\n                        (\\j. simplicial_vertex j f i) / (&(SUC p) + &1))\n                   (frag_sub\n                      (frag_sub (simplicial_subdivision (SUC p) (frag_of f))\n                                (frag_of f))\n                      (h p (chain_boundary (SUC p) (frag_of f)))))
+      #|  ?h. (forall p. h p frag_0 = frag_0) /\\\n       (forall p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n       (forall p q r g c.\n                simplicial_chain (p,standard_simplex q) c /\\\n                simplicial_simplex (q,standard_simplex r) g\n                ==> chain_map (p + 1) g (h p c) = h p (chain_map p g c)) /\\\n       (forall p q c. simplicial_chain (p,standard_simplex q) c\n                ==> simplicial_chain (p + 1,standard_simplex q) (h p c)) /\\\n       (forall p q c. simplicial_chain (p,standard_simplex q) c\n                ==> frag_add (chain_boundary (p + 1) (h p c))\n                             (h (p - 1) (chain_boundary p c)) =\n                    frag_sub (simplicial_subdivision p c) c)
       #|  f:(num->real)->(num->real)
       #|  c:((num->real)->(num->real))frag
       #|  (h:num->((num->real)->(num->real))frag\n                     ->((num->real)->(num->real))frag) (p - 1)\n            (frag_of (RESTRICTION (standard_simplex (p - 1)) I))
@@ -36112,10 +36112,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p - 1
       #|  frag_cmul (-- &1) c = frag_sub frag_0 c
       #|  frag_cmul (&1) c = c
-      #|  !k c. (h:num->((num->real)->(num->real))frag\n                 ->((num->real)->(num->real))frag) (p - 1)\n            (frag_cmul (-- &1 pow k) c) =\n            frag_cmul (-- &1 pow k) (h (p - 1) c)
+      #|  forall k c. (h:num->((num->real)->(num->real))frag\n                 ->((num->real)->(num->real))frag) (p - 1)\n            (frag_cmul (-- &1 pow k) c) =\n            frag_cmul (-- &1 pow k) (h (p - 1) c)
       #|  k:num
       #|  frag_add x y = frag_sub x (frag_sub frag_0 y)
-      #|  !k z. FINITE k\n            ==> (h:num->((num->real)->(num->real))frag\n                     ->((num->real)->(num->real))frag) (p - 1)\n                (iterate frag_add (k:num->bool) z) =\n                iterate frag_add k (h (p - 1) o z)
+      #|  forall k z. FINITE k\n            ==> (h:num->((num->real)->(num->real))frag\n                     ->((num->real)->(num->real))frag) (p - 1)\n                (iterate frag_add (k:num->bool) z) =\n                iterate frag_add k (h (p - 1) o z)
       #|  chain_map p (f:(num->real)->A)\n      (iterate frag_add (0..p)\n       (\\k. frag_cmul (-- &1 pow k)\n              (chain_map p (singular_face p k I)\n               ((h:num->((num->real)->(num->real))frag\n                   ->((num->real)->(num->real))frag) (p - 1)\n                (frag_of (RESTRICTION (standard_simplex (p - 1)) I))))))
       #|  p = 0
       #|  b = y /\\ frag_sub a c = frag_sub x z\n    ==> frag_sub (frag_sub a b) c = frag_sub (frag_sub x y) z
@@ -36133,17 +36133,17 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  s:A topology
       #|  p:num
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  !p c1 c2. (k:num->((num->real)->A)frag->((num->real)->A)frag) p\n                (frag_sub c1 c2) = frag_sub (k p c1) (k p c2)
-      #|  !p. (k:num->((num->real)->A)frag->((num->real)->A)frag) p frag_0 = frag_0
+      #|  forall p c1 c2. (k:num->((num->real)->A)frag->((num->real)->A)frag) p\n                (frag_sub c1 c2) = frag_sub (k p c1) (k p c2)
+      #|  forall p. (k:num->((num->real)->A)frag->((num->real)->A)frag) p frag_0 = frag_0
       #|  k:num->((num->real)->A)frag->((num->real)->A)frag
       #|  k:num->((num->real)->A)frag->((num->real)->A)frag =\n        \\p. frag_extend\n              (\\f. chain_map (p + 1) (f:(num->real)->A)\n               (h p (frag_of(RESTRICTION (standard_simplex p)\n                      (I:(num->real)->(num->real))))))
       #|  h:num->((num->real)->(num->real))frag->((num->real)->(num->real))frag
-      #|  ?h:num->((num->real)->A)frag->((num->real)->A)frag.\n        (!p. h p frag_0 = frag_0) /\\\n        (!p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n        (!p top c. singular_chain (p,top) c\n                   ==> singular_chain (p + 1,top) (h p c)) /\\\n        (!p top c. singular_chain (p,top) c\n                   ==> frag_add (chain_boundary (p + 1) (h p c))\n                                (h (p - 1) (chain_boundary p c)) =\n                       frag_sub (singular_subdivision p c) c)
+      #|  ?h:num->((num->real)->A)frag->((num->real)->A)frag.\n        (forall p. h p frag_0 = frag_0) /\\\n        (forall p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n        (forall p top c. singular_chain (p,top) c\n                   ==> singular_chain (p + 1,top) (h p c)) /\\\n        (forall p top c. singular_chain (p,top) c\n                   ==> frag_add (chain_boundary (p + 1) (h p c))\n                                (h (p - 1) (chain_boundary p c)) =\n                       frag_sub (singular_subdivision p c) c)
       #|  (k:num->((num->real)->A)frag->((num->real)->A)frag) (p - 1)
       #|  (k:num->((num->real)->A)frag->((num->real)->A)frag) p
       #|  k:num->((num->real)->A)frag->((num->real)->A)frag
       #|  p = 0
-      #|  !p s t c:((num->real)->A)frag.\n        singular_relcycle (p,s,t) c\n        ==> homologous_rel (p,s,t) (singular_subdivision p c) c
+      #|  forall p s t c:((num->real)->A)frag.\n        singular_relcycle (p,s,t) c\n        ==> homologous_rel (p,s,t) (singular_subdivision p c) c
       #|  n:num
       #|  n:num
       #|  standard_simplex p
@@ -36160,7 +36160,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  n:num
       #|  c = frag_0 ==> frag_0 = frag_extend f c
       #|  n:num
-      #|  !p s n c.\n        singular_chain(p,s) c\n        ==> ITER n (singular_subdivision p) c =\n            frag_extend\n             (\\f:(num->real)->A.\n                  chain_map p f\n                       (ITER n (simplicial_subdivision p)\n                         (frag_of(RESTRICTION (standard_simplex p) I)))) c
+      #|  forall p s n c.\n        singular_chain(p,s) c\n        ==> ITER n (singular_subdivision p) c =\n            frag_extend\n             (\\f:(num->real)->A.\n                  chain_map p f\n                       (ITER n (simplicial_subdivision p)\n                         (frag_of(RESTRICTION (standard_simplex p) I)))) c
       #|  top:A topology
       #|  p + 1
       #|  p = 0
@@ -36173,7 +36173,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  h:num->((num->real)->A)frag->((num->real)->A)frag
       #|  k:num->((num->real)->A)frag->((num->real)->A)frag
       #|  (\\p x. frag_0):num->((num->real)->A)frag->((num->real)->A)frag
-      #|  !n. ?h:num->((num->real)->A)frag->((num->real)->A)frag.\n        (!p. h p frag_0 = frag_0) /\\\n        (!p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n        (!p top c. singular_chain (p,top) c\n                   ==> singular_chain (p + 1,top) (h p c)) /\\\n        (!p top c. singular_chain (p,top) c\n                   ==> frag_add (chain_boundary (p + 1) (h p c))\n                                (h (p - 1) (chain_boundary p c)) =\n                       frag_sub (ITER n (singular_subdivision p) c) c)
+      #|  forall n. ?h:num->((num->real)->A)frag->((num->real)->A)frag.\n        (forall p. h p frag_0 = frag_0) /\\\n        (forall p c1 c2. h p (frag_sub c1 c2) = frag_sub (h p c1) (h p c2)) /\\\n        (forall p top c. singular_chain (p,top) c\n                   ==> singular_chain (p + 1,top) (h p c)) /\\\n        (forall p top c. singular_chain (p,top) c\n                   ==> frag_add (chain_boundary (p + 1) (h p c))\n                                (h (p - 1) (chain_boundary p c)) =\n                       frag_sub (ITER n (singular_subdivision p) c) c)
       #|  i:num
       #|  a:num->real
       #|  i:num
@@ -36221,8 +36221,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  u:(num->real)->bool
       #|  u:(num->real)->bool
       #|  x:num->real
-      #|  !x. x IN standard_simplex p\n          ==> ?e u. &0 < e /\\ u IN c /\\ x IN u /\\\n                    !y. (!i. i <= p ==> abs(y i - x i) <= &2 * e) /\\\n                        (!i. p < i ==> y i = &0)\n                        ==> y IN u
-      #|  !p c. standard_simplex p SUBSET UNIONS c /\\\n           (!u. u IN c\n                ==> open_in (product_topology (:num) (\\i. euclideanreal)) u)\n           ==> ?d. &0 < d /\\\n                   !k. k SUBSET standard_simplex p /\\\n                       (!x y i.\n                          x IN k /\\ y IN k /\\ i <= p ==> abs (x i - y i) <= d)\n                       ==> ?u. u IN c /\\ k SUBSET u
+      #|  forall x. x IN standard_simplex p\n          ==> ?e u. &0 < e /\\ u IN c /\\ x IN u /\\\n                    forall y. (forall i. i <= p ==> abs(y i - x i) <= &2 * e) /\\\n                        (forall i. p < i ==> y i = &0)\n                        ==> y IN u
+      #|  forall p c. standard_simplex p SUBSET UNIONS c /\\\n           (forall u. u IN c\n                ==> open_in (product_topology (:num) (\\i. euclideanreal)) u)\n           ==> ?d. &0 < d /\\\n                   forall k. k SUBSET standard_simplex p /\\\n                       (forall x y i.\n                          x IN k /\\ y IN k /\\ i <= p ==> abs (x i - y i) <= d)\n                       ==> ?u. u IN c /\\ k SUBSET u
       #|  &0 < &p + &1
       #|  (&p / (&p + &1)) pow m
       #|  (&p / (&p + &1)) pow n
@@ -36230,13 +36230,13 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  d:(num->real)->(num->real)
       #|  m:num
       #|  &0 <= x /\\ &0 <= y /\\ x <= &1 /\\ y <= &1 ==> abs(x - y) <= &1
-      #|  !n. simplicial_chain (p,standard_simplex p)\n         (ITER n (simplicial_subdivision p)\n                        (frag_of (RESTRICTION (standard_simplex p) I))) /\\\n        !f x y.\n          f IN frag_support(ITER n (simplicial_subdivision p)\n                        (frag_of (RESTRICTION (standard_simplex p) I))) /\\\n          x IN standard_simplex p /\\\n          y IN standard_simplex p\n          ==> abs (f x i - f y i) <= (&p / (&p + &1)) pow n
+      #|  forall n. simplicial_chain (p,standard_simplex p)\n         (ITER n (simplicial_subdivision p)\n                        (frag_of (RESTRICTION (standard_simplex p) I))) /\\\n        forall f x y.\n          f IN frag_support(ITER n (simplicial_subdivision p)\n                        (frag_of (RESTRICTION (standard_simplex p) I))) /\\\n          x IN standard_simplex p /\\\n          y IN standard_simplex p\n          ==> abs (f x i - f y i) <= (&p / (&p + &1)) pow n
       #|  i:num
-      #|  P /\\ (!x y i. Q x y i) <=> !i. P /\\ (!x y. Q x y i)
+      #|  P /\\ (forall x y i. Q x y i) <=> forall i. P /\\ (forall x y. Q x y i)
       #|  d:(num->real)->(num->real)
-      #|  (!x. x IN s ==> P x) ==> top SUBSET s ==> (!x. x IN top ==> P x)
+      #|  (forall x. x IN s ==> P x) ==> top SUBSET s ==> (forall x. x IN top ==> P x)
       #|  f:(num->real)->A
-      #|  (!x. x IN s ==> P x) ==> top SUBSET s ==> (!x. x IN top ==> P x)
+      #|  (forall x. x IN s ==> P x) ==> top SUBSET s ==> (forall x. x IN top ==> P x)
       #|  c:((num->real)->A)frag
       #|  m:num
       #|  top:A topology
@@ -36257,15 +36257,15 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  g:(A->bool)->((num->real)->bool)
       #|  v:A->bool
       #|  f:(num->real)->A
-      #|  !v. v IN u\n            ==> ?t. open_in (product_topology (:num) (\\i. euclideanreal)) t /\\\n                    {x | x IN standard_simplex p /\\ (f:(num->real)->A) x IN v}\n                    = t INTER standard_simplex p
-      #|  !f:(num->real)->A.\n          f IN frag_support c\n          ==> ?e. &0 < e /\\\n                  !k. k SUBSET standard_simplex p /\\\n                      (!x y i. x IN k /\\ y IN k /\\ i <= p\n                               ==> abs(x i - y i) <= e)\n                      ==> ?v. v IN u /\\ IMAGE f k SUBSET v
-      #|  ?d. &0 < d /\\\n        !f k. f IN frag_support c /\\ k SUBSET standard_simplex p /\\\n             (!x y i. x IN k /\\ y IN k /\\ i <= p ==> abs(x i - y i) <= d)\n             ==> ?v. v IN u /\\ IMAGE (f:(num->real)->A) k SUBSET v
+      #|  forall v. v IN u\n            ==> ?t. open_in (product_topology (:num) (\\i. euclideanreal)) t /\\\n                    {x | x IN standard_simplex p /\\ (f:(num->real)->A) x IN v}\n                    = t INTER standard_simplex p
+      #|  forall f:(num->real)->A.\n          f IN frag_support c\n          ==> ?e. &0 < e /\\\n                  forall k. k SUBSET standard_simplex p /\\\n                      (forall x y i. x IN k /\\ y IN k /\\ i <= p\n                               ==> abs(x i - y i) <= e)\n                      ==> ?v. v IN u /\\ IMAGE f k SUBSET v
+      #|  ?d. &0 < d /\\\n        forall f k. f IN frag_support c /\\ k SUBSET standard_simplex p /\\\n             (forall x y i. x IN k /\\ y IN k /\\ i <= p ==> abs(x i - y i) <= d)\n             ==> ?v. v IN u /\\ IMAGE (f:(num->real)->A) k SUBSET v
       #|  u:(A->bool)->bool = {}
       #|  topspace top:A->bool = {}
-      #|  !k. ITER k (singular_subdivision p) frag_0:((num->real)->A)frag =\n          frag_0
+      #|  forall k. ITER k (singular_subdivision p) frag_0:((num->real)->A)frag =\n          frag_0
       #|  0
       #|  c:((num->real)->A)frag = frag_0
-      #|  !p top u c:((num->real)->A)frag.\n        (!v. v IN u ==> open_in top v) /\\\n        topspace top SUBSET UNIONS u /\\\n        singular_chain (p,top) c\n        ==> ?n. !m f. n <= m /\\\n                      f IN frag_support (ITER m (singular_subdivision p) c)\n                      ==> ?v. v IN u /\\ IMAGE f (standard_simplex p) SUBSET v
+      #|  forall p top u c:((num->real)->A)frag.\n        (forall v. v IN u ==> open_in top v) /\\\n        topspace top SUBSET UNIONS u /\\\n        singular_chain (p,top) c\n        ==> ?n. forall m f. n <= m /\\\n                      f IN frag_support (ITER m (singular_subdivision p) c)\n                      ==> ?v. v IN u /\\ IMAGE f (standard_simplex p) SUBSET v
       #|  m:num
       #|  n:num
       #|  (q ==> p) /\\ q ==> p /\\ q
@@ -36277,7 +36277,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  u:(A->bool)->bool
       #|  top:A topology
       #|  p:num
-      #|  !p top s u c:((num->real)->A)frag.\n        (!v. v IN u ==> open_in top v) /\\ topspace top SUBSET UNIONS u /\\\n        singular_relcycle (p,top,s) c\n        ==> ?c'. singular_relcycle (p,top,s) c' /\\\n                 homologous_rel (p,top,s) c c' /\\\n                 !f. f IN frag_support c'\n                      ==> ?v. v IN u /\\ IMAGE f (standard_simplex p) SUBSET v
+      #|  forall p top s u c:((num->real)->A)frag.\n        (forall v. v IN u ==> open_in top v) /\\ topspace top SUBSET UNIONS u /\\\n        singular_relcycle (p,top,s) c\n        ==> ?c'. singular_relcycle (p,top,s) c' /\\\n                 homologous_rel (p,top,s) c c' /\\\n                 forall f. f IN frag_support c'\n                      ==> ?v. v IN u /\\ IMAGE f (standard_simplex p) SUBSET v
       #|  u:A->bool
       #|  top:A topology
       #|  f:(num->real)->A
@@ -36300,8 +36300,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  topspace top INTER s:A->bool
       #|  top:A topology
       #|  p:num
-      #|  !p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\\n      u SUBSET topspace top /\\ t SUBSET s /\\ s SUBSET topspace top /\\\n      singular_chain(p,subtopology top s) c\n      ==> ?n d e. singular_chain(p,subtopology top (s DIFF u)) d /\\\n                  singular_chain(p,subtopology top t) e /\\\n                  ITER n (singular_subdivision p) c = frag_add d e
-      #|  !p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\ t SUBSET s /\\\n      singular_chain(p,subtopology top s) c\n      ==> ?n d e. singular_chain(p,subtopology top (s DIFF u)) d /\\\n                  singular_chain(p,subtopology top t) e /\\\n                  ITER n (singular_subdivision p) c = frag_add d e
+      #|  forall p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\\n      u SUBSET topspace top /\\ t SUBSET s /\\ s SUBSET topspace top /\\\n      singular_chain(p,subtopology top s) c\n      ==> ?n d e. singular_chain(p,subtopology top (s DIFF u)) d /\\\n                  singular_chain(p,subtopology top t) e /\\\n                  ITER n (singular_subdivision p) c = frag_add d e
+      #|  forall p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\ t SUBSET s /\\\n      singular_chain(p,subtopology top s) c\n      ==> ?n d e. singular_chain(p,subtopology top (s DIFF u)) d /\\\n                  singular_chain(p,subtopology top t) e /\\\n                  ITER n (singular_subdivision p) c = frag_add d e
       #|  t SUBSET s ==> s INTER t = t
       #|  frag_sub x frag_0 = x
       #|  m:num
@@ -36329,7 +36329,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:num
       #|  t SUBSET s\n    ==> s INTER t = t /\\ (s DIFF u) INTER (t DIFF u) = t DIFF u
       #|  frag_sub x frag_0 = x
-      #|  !p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\ t SUBSET s /\\\n      singular_relcycle (p,subtopology top s,t) c\n      ==> ?c'. singular_relcycle (p,subtopology top (s DIFF u),t DIFF u) c' /\\\n               homologous_rel (p,subtopology top s,t) c c'
+      #|  forall p top s t u c:((num->real)->A)frag.\n      top closure_of u SUBSET top interior_of t /\\ t SUBSET s /\\\n      singular_relcycle (p,subtopology top s,t) c\n      ==> ?c'. singular_relcycle (p,subtopology top (s DIFF u),t DIFF u) c' /\\\n               homologous_rel (p,subtopology top s,t) c c'
       #|  1 <= k ==> (k - 1 = j <=> k = j + 1)
       #|  1 <= k
       #|  i < j /\\ k = j - 1 <=> i < j /\\ j = k + 1
@@ -36386,7 +36386,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  i:num
       #|  \\(a:num,b:num). (a + 1,b)
       #|  \\(a:num,b:num). (a - 1,b)
-      #|  DISJOINT s t <=> !x. x IN s ==> ~(x IN t)
+      #|  DISJOINT s t <=> forall x. x IN s ==> ~(x IN t)
       #|  {i,j | i IN 0..q-1 /\\ j IN 0..q} =\n    {i,j | i IN 0..q-1 /\\ j IN {j | j IN 0..q /\\ j <= i}} UNION\n    {i,j | i IN 0..q /\\ j IN {j | j IN 0..q /\\ i < j}}
       #|  frag_cmul a (frag_cmul b c) = frag_cmul (a * b) c
       #|  frag_neg c = frag_cmul (-- &1) c
@@ -36417,7 +36417,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (if p then f1 else f2) a * (if p then y1 else y2):real =\n        if p then f1 a * y1 else f2 a * y2
       #|  j < q + 1 <=> j <= q
       #|  1 <= p + 1
-      #|  (!x. h(a,x) = c x) ==> w = a /\\ z = y ==> h(w,z) = c y
+      #|  (forall x. h(a,x) = c x) ==> w = a /\\ z = y ==> h(w,z) = c y
       #|  x IN standard_simplex q
       #|  x:num->real
       #|  1 <= p + 1
@@ -36433,10 +36433,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  i <= k <=> 0 <= i /\\ i <= k
       #|  i <= q /\\ i <= q + 1 <=> i <= q
       #|  frag_add x1 y1 = w /\\ frag_add x2 y2 = frag_neg z\n    ==> frag_add (frag_add x1 x2) (frag_add y1 y2) = frag_sub w z
-      #|  DISJOINT s t <=> !x. x IN s ==> ~(x IN t)
-      #|  DISJOINT s t <=> !x. x IN s ==> ~(x IN t)
+      #|  DISJOINT s t <=> forall x. x IN s ==> ~(x IN t)
+      #|  DISJOINT s t <=> forall x. x IN s ==> ~(x IN t)
       #|  {i,j | i IN s /\\ j IN t i} =\n    IMAGE (\\i. (i,i)) {i | i IN s /\\ i IN t i} UNION\n    {i,j | i IN s /\\ j IN (t i DELETE i)}
-      #|  !i. {j | j IN 0..q + 1 /\\ ~(j <= i)} = i+1..q+1
+      #|  forall i. {j | j IN 0..q + 1 /\\ ~(j <= i)} = i+1..q+1
       #|  {i,j | i IN 0..q /\\ j IN 0..q + 1} =\n    {i,j | i IN 0..q /\\ j IN {j | j IN 0..q + 1 /\\ j <= i}} UNION\n    {i,j | i IN 0..q /\\ j IN {j | j IN 0..q + 1 /\\ ~(j <= i)}}
       #|  ~(q + 1 = 0)
       #|  a:(num->real)->A
@@ -36474,7 +36474,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  i:num
       #|  q:num
-      #|  !q i. i <= q\n        ==> simplicial_simplex\n              (q + 1,{x | x 0 IN real_interval[&0,&1] /\\\n                          (x o SUC) IN standard_simplex q})\n              ((simp:num->num->(num->real)->(num->real)) q i)
+      #|  forall q i. i <= q\n        ==> simplicial_simplex\n              (q + 1,{x | x 0 IN real_interval[&0,&1] /\\\n                          (x o SUC) IN standard_simplex q})\n              ((simp:num->num->(num->real)->(num->real)) q i)
       #|  \\q. frag_extend((prism:num->((num->real)->A)->((num->real)->B)frag) q)
       #|  prism:num->((num->real)->A)->((num->real)->B)frag =\n       \\q c. iterate frag_add (0..q)\n              (\\i. frag_cmul (int_pow (-- &1) i)\n                             (frag_of (simplex_map (q + 1)\n                                             (\\z. h(z 0,c(z o SUC)))\n                            (simp q i:(num->real)->(num->real)))))
       #|  simp =\n     \\q i. oriented_simplex (q + 1) (\\j. if j <= i then vv j else ww(j - 1))
@@ -36486,38 +36486,38 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  frag_neg((prism:num->(((num->real)->A)frag)->((num->real)->B)frag)\n                p c)
       #|  frag_sub x frag_0 = x
       #|  c:((num->real)->A)frag
-      #|  ?prism:num->(((num->real)->A)frag)->(((num->real)->B)frag).\n        (!q. prism q frag_0 = frag_0) /\\\n        (!q c. singular_chain (q,s) c\n               ==> singular_chain (q + 1,u) (prism q c)) /\\\n        (!q c. singular_chain (q,subtopology s t) c\n               ==> singular_chain (q + 1,subtopology u v) (prism q c)) /\\\n        (!q c. singular_chain (q,s) c\n               ==> chain_boundary (q + 1) (prism q c) =\n                   frag_sub (frag_sub (chain_map q g c) (chain_map q f c))\n                            (prism (q - 1) (chain_boundary q c)))
-      #|  !p f g:A->B s t u v c:((num->real)->A)frag.\n        homotopic_with (\\h. IMAGE h t SUBSET v) (s,u) f g /\\\n        singular_relcycle (p,s,t) c\n        ==> homologous_rel (p,u,v) (chain_map p f c) (chain_map p g c)
+      #|  ?prism:num->(((num->real)->A)frag)->(((num->real)->B)frag).\n        (forall q. prism q frag_0 = frag_0) /\\\n        (forall q c. singular_chain (q,s) c\n               ==> singular_chain (q + 1,u) (prism q c)) /\\\n        (forall q c. singular_chain (q,subtopology s t) c\n               ==> singular_chain (q + 1,subtopology u v) (prism q c)) /\\\n        (forall q c. singular_chain (q,s) c\n               ==> chain_boundary (q + 1) (prism q c) =\n                   frag_sub (frag_sub (chain_map q g c) (chain_map q f c))\n                            (prism (q - 1) (chain_boundary q c)))
+      #|  forall p f g:A->B s t u v c:((num->real)->A)frag.\n        homotopic_with (\\h. IMAGE h t SUBSET v) (s,u) f g /\\\n        singular_relcycle (p,s,t) c\n        ==> homologous_rel (p,u,v) (chain_map p f c) (chain_map p g c)
       #|  ~(p = 0) ==> p = (p - 1) + 1
       #|  chain_group (p,top:A topology) =\n  free_abelian_group (singular_simplex(p,top))
-      #|  (!p top:A topology.\n        group_carrier(chain_group(p,top)) = singular_chain(p,top)) /\\\n   (!p top:A topology. group_id(chain_group(p,top)) = frag_0) /\\\n   (!p top:A topology. group_inv(chain_group(p,top)) = frag_neg) /\\\n   (!p top:A topology. group_mul(chain_group(p,top)) = frag_add)
-      #|  !p top:A topology. abelian_group(chain_group (p,top))
-      #|  !p top s:A->bool.\n        singular_relcycle(p,top,s) subgroup_of chain_group(p,top)
+      #|  (forall p top:A topology.\n        group_carrier(chain_group(p,top)) = singular_chain(p,top)) /\\\n   (forall p top:A topology. group_id(chain_group(p,top)) = frag_0) /\\\n   (forall p top:A topology. group_inv(chain_group(p,top)) = frag_neg) /\\\n   (forall p top:A topology. group_mul(chain_group(p,top)) = frag_add)
+      #|  forall p top:A topology. abelian_group(chain_group (p,top))
+      #|  forall p top s:A->bool.\n        singular_relcycle(p,top,s) subgroup_of chain_group(p,top)
       #|  relcycle_group(p,top:A topology,s) =\n        subgroup_generated (chain_group(p,top)) (singular_relcycle(p,top,s))
-      #|  (!p top s:A->bool. group_carrier(relcycle_group(p,top,s)) =\n                      singular_relcycle(p,top,s)) /\\\n   (!p top s:A->bool. group_id(relcycle_group(p,top,s)) = frag_0) /\\\n   (!p top s:A->bool. group_inv(relcycle_group(p,top,s)) = frag_neg) /\\\n   (!p top s:A->bool. group_mul(relcycle_group(p,top,s)) = frag_add)
-      #|  !p top s:A->bool. abelian_group(relcycle_group(p,top,s))
-      #|  !p top s:A->bool.\n        relcycle_group(p,top,s) =\n        relcycle_group(p,top,topspace top INTER s)
+      #|  (forall p top s:A->bool. group_carrier(relcycle_group(p,top,s)) =\n                      singular_relcycle(p,top,s)) /\\\n   (forall p top s:A->bool. group_id(relcycle_group(p,top,s)) = frag_0) /\\\n   (forall p top s:A->bool. group_inv(relcycle_group(p,top,s)) = frag_neg) /\\\n   (forall p top s:A->bool. group_mul(relcycle_group(p,top,s)) = frag_add)
+      #|  forall p top s:A->bool. abelian_group(relcycle_group(p,top,s))
+      #|  forall p top s:A->bool.\n        relcycle_group(p,top,s) =\n        relcycle_group(p,top,topspace top INTER s)
       #|  relative_homology_group(p,top:A topology,s) =\n        if p < &0 then singleton_group ARB else\n        quotient_group (relcycle_group(num_of_int p,top,s))\n                       (singular_relboundary(num_of_int p,top,s))
       #|  homology_group(p,top:A topology) = relative_homology_group(p,top,{})
-      #|  !p top s:A->bool.\n        relative_homology_group(p,top,s) =\n        relative_homology_group(p,top,topspace top INTER s)
+      #|  forall p top s:A->bool.\n        relative_homology_group(p,top,s) =\n        relative_homology_group(p,top,topspace top INTER s)
       #|  ~(&p:int < &0)
-      #|  !p top s:A->bool.\n        relative_homology_group(&p,top,s) =\n        quotient_group (relcycle_group(p,top,s))\n                       (singular_relboundary(p,top,s))
-      #|  !p top s:A->bool.\n        p < &0 ==> trivial_group(relative_homology_group(p,top,s))
-      #|  !p top s:A->bool.\n        singular_relboundary(p,top,s) subgroup_of chain_group(p,top)
-      #|  !p top s:A->bool.\n        singular_relboundary(p,top,s) subgroup_of relcycle_group(p,top,s)
-      #|  !p top s:A->bool.\n     singular_relboundary(p,top,s) normal_subgroup_of relcycle_group(p,top,s)
+      #|  forall p top s:A->bool.\n        relative_homology_group(&p,top,s) =\n        quotient_group (relcycle_group(p,top,s))\n                       (singular_relboundary(p,top,s))
+      #|  forall p top s:A->bool.\n        p < &0 ==> trivial_group(relative_homology_group(p,top,s))
+      #|  forall p top s:A->bool.\n        singular_relboundary(p,top,s) subgroup_of chain_group(p,top)
+      #|  forall p top s:A->bool.\n        singular_relboundary(p,top,s) subgroup_of relcycle_group(p,top,s)
+      #|  forall p top s:A->bool.\n     singular_relboundary(p,top,s) normal_subgroup_of relcycle_group(p,top,s)
       #|  c2 = frag_add x c1 <=> x = frag_neg(frag_sub c1 c2)
       #|  {f x y | x IN s /\\ y IN {a}} = IMAGE (\\x. f x a) s
       #|  c2:((num->real)->A)frag
       #|  c1:((num->real)->A)frag
-      #|  !p top s:A->bool.\n      right_coset (relcycle_group(p,top,s)) (singular_relboundary (p,top,s)) =\n      homologous_rel (p,top,s)
-      #|  (!p top s:A->bool.\n        group_carrier(relative_homology_group(&p,top,s)) =\n        {homologous_rel (p,top,s) c | c | singular_relcycle (p,top,s) c}) /\\\n   (!p top s:A->bool.\n        group_id(relative_homology_group(&p,top,s)) =\n        singular_relboundary (p,top,s)) /\\\n   (!p top s:A->bool.\n        group_inv(relative_homology_group(&p,top,s)) =\n        \\r. {frag_neg c | c IN r}) /\\\n   (!p top s:A->bool.\n        group_mul(relative_homology_group(&p,top,s)) =\n        \\r1 r2. {frag_add c1 c2 | c1 IN r1 /\\ c2 IN r2})
+      #|  forall p top s:A->bool.\n      right_coset (relcycle_group(p,top,s)) (singular_relboundary (p,top,s)) =\n      homologous_rel (p,top,s)
+      #|  (forall p top s:A->bool.\n        group_carrier(relative_homology_group(&p,top,s)) =\n        {homologous_rel (p,top,s) c | c | singular_relcycle (p,top,s) c}) /\\\n   (forall p top s:A->bool.\n        group_id(relative_homology_group(&p,top,s)) =\n        singular_relboundary (p,top,s)) /\\\n   (forall p top s:A->bool.\n        group_inv(relative_homology_group(&p,top,s)) =\n        \\r. {frag_neg c | c IN r}) /\\\n   (forall p top s:A->bool.\n        group_mul(relative_homology_group(&p,top,s)) =\n        \\r1 r2. {frag_add c1 c2 | c1 IN r1 /\\ c2 IN r2})
       #|  d:((num->real)->A)frag = frag_sub c (frag_sub c d)
       #|  frag_sub c c:((num->real)->A)frag = frag_0
-      #|  !p top (s:A->bool) c.\n        homologous_rel(p,top,s) c = singular_relboundary(p,top,s) <=>\n        singular_relboundary(p,top,s) c
+      #|  forall p top (s:A->bool) c.\n        homologous_rel(p,top,s) c = singular_relboundary(p,top,s) <=>\n        singular_relboundary(p,top,s) c
       #|  frag_sub x frag_0 = x
       #|  c:((num->real)->A)frag
-      #|  !p top s:A->bool.\n     group_homomorphism (relcycle_group(p,top,s),\n                         relcycle_group(p-1,subtopology top s,{}))\n                        (chain_boundary p)
+      #|  forall p top s:A->bool.\n     group_homomorphism (relcycle_group(p,top,s),\n                         relcycle_group(p-1,subtopology top s,{}))\n                        (chain_boundary p)
       #|  frag_neg(frag_sub x y) = y <=> x = frag_0
       #|  frag_neg(frag_sub (chain_boundary (p + 1) d) c):\n                ((num->real)->A)frag
       #|  d:((num->real)->A)frag
@@ -36531,7 +36531,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  singular_relboundary(p,top:A topology,s)
       #|  relative_homology_group(&(p-1),subtopology top s:A topology,{})
       #|  relcycle_group(p,top:A topology,s)
-      #|  ?d. !p (top:A topology) s.\n          group_homomorphism\n           (relative_homology_group (&p,top,s),\n            homology_group (&(p - 1),subtopology top s))\n           (d p (top,s)) /\\\n          !c. singular_relcycle (p,top,s) c\n              ==> d p (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)
+      #|  ?d. forall p (top:A topology) s.\n          group_homomorphism\n           (relative_homology_group (&p,top,s),\n            homology_group (&(p - 1),subtopology top s))\n           (d p (top,s)) /\\\n          forall c. singular_relcycle (p,top,s) c\n              ==> d p (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)
       #|  ~(p:int <= &0) ==> &1 <= p
       #|  ~(p:int <= &0) ==> &0 <= p
       #|  s:A->bool
@@ -36543,8 +36543,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:int
       #|  1 <= p ==> ~(p <= 0)
       #|  (?f. P(\\p. if p <= &0 then \\q r. ARB else f(num_of_int p)))\n     ==> ?f. P f
-      #|  ?d. (!p (top:A topology) s.\n            group_homomorphism\n             (relative_homology_group (p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (d p (top,s))) /\\\n         (!p (top:A topology) s c.\n              singular_relcycle (p,top,s) c /\\ 1 <= p\n              ==> d (&p) (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)) /\\\n         (!p. p <= &0 ==> d p = \\q r. ARB)
-      #|  (!x. (x IN s ==> f x IN t) ==> P x)\n        ==> IMAGE f s SUBSET t /\\ Q ==> !x. P x
+      #|  ?d. (forall p (top:A topology) s.\n            group_homomorphism\n             (relative_homology_group (p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (d p (top,s))) /\\\n         (forall p (top:A topology) s c.\n              singular_relcycle (p,top,s) c /\\ 1 <= p\n              ==> d (&p) (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)) /\\\n         (forall p. p <= &0 ==> d p = \\q r. ARB)
+      #|  (forall x. (x IN s ==> f x IN t) ==> P x)\n        ==> IMAGE f s SUBSET t /\\ Q ==> forall x. P x
       #|  topspace top INTER s:A->bool
       #|  top:A topology
       #|  p:int
@@ -36562,9 +36562,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p - &1:int < &0 <=> p <= &0
       #|  p:int <= &0
       #|  p:int
-      #|  (!x. Q x ==> R x) /\\ (?x. P x /\\ Q x)\n      ==> ?x. (P x /\\ Q x) /\\ R x
-      #|  ?d. (!p (top:A topology) s c.\n                ~(c IN group_carrier(relative_homology_group (p,top,s)))\n                ==> d p (top,s) c =\n                    group_id(homology_group (p - &1,subtopology top s))) /\\\n         (!p (top:A topology) s.\n            group_homomorphism\n             (relative_homology_group (p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (d p (top,s))) /\\\n         (!p (top:A topology) s c.\n              singular_relcycle (p,top,s) c /\\ 1 <= p\n              ==> d (&p) (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)) /\\\n         (!p (top:A topology) s.\n                d p (top,s) = d p (top,topspace top INTER s)) /\\\n         (!p (top:A topology) s c.\n                d p (top,s) c IN\n                group_carrier(homology_group (p - &1,subtopology top s))) /\\\n         (!p. p <= &0 ==> d p = \\q r. ARB)
-      #|  !p top s top' t (f:A->B).\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t\n        ==> group_homomorphism\n             (relcycle_group (p,top,s),relcycle_group (p,top',t))\n             (chain_map p f)
+      #|  (forall x. Q x ==> R x) /\\ (?x. P x /\\ Q x)\n      ==> ?x. (P x /\\ Q x) /\\ R x
+      #|  ?d. (forall p (top:A topology) s c.\n                ~(c IN group_carrier(relative_homology_group (p,top,s)))\n                ==> d p (top,s) c =\n                    group_id(homology_group (p - &1,subtopology top s))) /\\\n         (forall p (top:A topology) s.\n            group_homomorphism\n             (relative_homology_group (p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (d p (top,s))) /\\\n         (forall p (top:A topology) s c.\n              singular_relcycle (p,top,s) c /\\ 1 <= p\n              ==> d (&p) (top,s) (homologous_rel (p,top,s) c) =\n                  homologous_rel (p - 1,subtopology top s,{})\n                                 (chain_boundary p c)) /\\\n         (forall p (top:A topology) s.\n                d p (top,s) = d p (top,topspace top INTER s)) /\\\n         (forall p (top:A topology) s c.\n                d p (top,s) c IN\n                group_carrier(homology_group (p - &1,subtopology top s))) /\\\n         (forall p. p <= &0 ==> d p = \\q r. ARB)
+      #|  forall p top s top' t (f:A->B).\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t\n        ==> group_homomorphism\n             (relcycle_group (p,top,s),relcycle_group (p,top',t))\n             (chain_map p f)
       #|  topspace top INTER s:A->bool
       #|  top:A topology
       #|  relcycle_group (p,top':B topology,t)
@@ -36573,7 +36573,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  relative_homology_group(&p,top':B topology,t)
       #|  relcycle_group(p,top:A topology,s)
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  ?hom_relmap.\n      (!p top s top' t (f:A->B).\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t\n          ==> group_homomorphism(relative_homology_group(&p,top,s),\n                                 relative_homology_group(&p,top',t))\n                                (hom_relmap p (top,s) (top',t) f)) /\\\n      (!p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap p (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c))
+      #|  ?hom_relmap.\n      (forall p top s top' t (f:A->B).\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t\n          ==> group_homomorphism(relative_homology_group(&p,top,s),\n                                 relative_homology_group(&p,top',t))\n                                (hom_relmap p (top,s) (top',t) f)) /\\\n      (forall p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap p (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c))
       #|  ~(p:int < &0) ==> &0 <= p
       #|  num_of_int p
       #|  f:A->B
@@ -36584,7 +36584,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:int
       #|  ~(&p:int < &0)
       #|  (?f. P(\\p. if p < &0 then \\q r s t. ARB else f(num_of_int p)))\n     ==> ?f. P f
-      #|  ?hom_relmap.\n      (!p top s top' t (f:A->B).\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t\n          ==> group_homomorphism(relative_homology_group(p,top,s),\n                                 relative_homology_group(p,top',t))\n                                (hom_relmap p (top,s) (top',t) f)) /\\\n      (!p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c)) /\\\n      (!p. p < &0 ==> hom_relmap p = \\q r s t. ARB)
+      #|  ?hom_relmap.\n      (forall p top s top' t (f:A->B).\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t\n          ==> group_homomorphism(relative_homology_group(p,top,s),\n                                 relative_homology_group(p,top',t))\n                                (hom_relmap p (top,s) (top',t) f)) /\\\n      (forall p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c)) /\\\n      (forall p. p < &0 ==> hom_relmap p = \\q r s t. ARB)
       #|  f:A->B
       #|  topspace top' INTER t:B->bool
       #|  top':B topology
@@ -36609,30 +36609,30 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  \\p (top:A topology,s) (top':B topology,t) (f:A->B) c.\n         if continuous_map (top,top') f /\\\n            IMAGE f (topspace top INTER s) SUBSET t /\\\n            c IN group_carrier(relative_homology_group (p,top,s))\n         then hom_relmap p (top,topspace top INTER s)\n                           (top',topspace top' INTER t) f c\n         else group_id(relative_homology_group (p,top',t))
       #|  p:int < &0
       #|  p:int
-      #|  (!x. Q x ==> R x) /\\ (?x. P x /\\ Q x)\n      ==> ?x. (P x /\\ Q x) /\\ R x
-      #|  ?hom_relmap.\n      (!p top s top' t (f:A->B) c.\n          ~(continuous_map (top,top') f /\\\n            IMAGE f (topspace top INTER s) SUBSET t /\\\n            c IN group_carrier(relative_homology_group (p,top,s)))\n          ==> hom_relmap p (top,s) (top',t) f c =\n              group_id(relative_homology_group (p,top',t))) /\\\n      (!p top s top' t (f:A->B).\n          group_homomorphism(relative_homology_group(p,top,s),\n                             relative_homology_group(p,top',t))\n                            (hom_relmap p (top,s) (top',t) f)) /\\\n      (!p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c)) /\\\n      (!p top s top' t.\n          hom_relmap p (top,s) (top',t) =\n          hom_relmap p (top,topspace top INTER s)\n                       (top',topspace top' INTER t)) /\\\n      (!p top s top' f t c.\n          hom_relmap p (top,s) (top',t) f c IN\n          group_carrier(relative_homology_group(p,top',t))) /\\\n      (!p. p < &0 ==> hom_relmap p = \\q r s t. ARB)
-      #|  !p top s top' t (f:A->B) c.\n        continuous_map (top,top') f /\\\n        IMAGE f s SUBSET t /\\\n        singular_relcycle (p,top,s) c\n        ==> hom_induced (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n            homologous_rel (p,top',t) (chain_map p f c)
+      #|  (forall x. Q x ==> R x) /\\ (?x. P x /\\ Q x)\n      ==> ?x. (P x /\\ Q x) /\\ R x
+      #|  ?hom_relmap.\n      (forall p top s top' t (f:A->B) c.\n          ~(continuous_map (top,top') f /\\\n            IMAGE f (topspace top INTER s) SUBSET t /\\\n            c IN group_carrier(relative_homology_group (p,top,s)))\n          ==> hom_relmap p (top,s) (top',t) f c =\n              group_id(relative_homology_group (p,top',t))) /\\\n      (forall p top s top' t (f:A->B).\n          group_homomorphism(relative_homology_group(p,top,s),\n                             relative_homology_group(p,top',t))\n                            (hom_relmap p (top,s) (top',t) f)) /\\\n      (forall p top s top' t (f:A->B) c.\n          continuous_map(top,top') f /\\\n          IMAGE f (topspace top INTER s) SUBSET t /\\\n          singular_relcycle (p,top,s) c\n          ==> hom_relmap (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n              homologous_rel (p,top',t) (chain_map p f c)) /\\\n      (forall p top s top' t.\n          hom_relmap p (top,s) (top',t) =\n          hom_relmap p (top,topspace top INTER s)\n                       (top',topspace top' INTER t)) /\\\n      (forall p top s top' f t c.\n          hom_relmap p (top,s) (top',t) f c IN\n          group_carrier(relative_homology_group(p,top',t))) /\\\n      (forall p. p < &0 ==> hom_relmap p = \\q r s t. ARB)
+      #|  forall p top s top' t (f:A->B) c.\n        continuous_map (top,top') f /\\\n        IMAGE f s SUBSET t /\\\n        singular_relcycle (p,top,s) c\n        ==> hom_induced (&p) (top,s) (top',t) f (homologous_rel (p,top,s) c) =\n            homologous_rel (p,top',t) (chain_map p f c)
       #|  c:((num->real)->A)frag->bool
       #|  c:((num->real)->A)frag->bool
       #|  c IN group_carrier (relative_homology_group (&p,top,s:A->bool))
       #|  (p <=> q) <=> ~p /\\ ~q \\/ p /\\ q
       #|  continuous_map (top,top') (f:A->B) /\\\n    IMAGE f (topspace top INTER s) SUBSET t /\\\n    c IN group_carrier (relative_homology_group (&p,top,s)) <=>\n    continuous_map (top,top') (g:A->B) /\\\n    IMAGE g (topspace top INTER s) SUBSET t /\\\n    c IN group_carrier (relative_homology_group (&p,top,s))
       #|  c:((num->real)->A)frag->bool
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s top' t (f:A->B) g.\n        (!x. x IN topspace top ==> f x = g x)\n        ==> hom_induced p (top,s) (top',t) f =\n            hom_induced p (top,s) (top',t) g
-      #|  !p top s:A->bool. abelian_group(relative_homology_group(p,top,s))
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top (f:A->A) s c.\n        continuous_map(top,top) f /\\\n        (!x. x IN topspace top ==> f x = x) /\\\n        c IN group_carrier (relative_homology_group (p,top,s))\n        ==> hom_induced p (top,s) (top,s) f c = c
-      #|  !p top (s:A->bool) c.\n        c IN group_carrier (relative_homology_group (p,top,s))\n        ==> hom_induced p (top,s) (top,s) (\\x. x) c = c
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s top' t (f:A->B) g.\n        (forall x. x IN topspace top ==> f x = g x)\n        ==> hom_induced p (top,s) (top',t) f =\n            hom_induced p (top,s) (top',t) g
+      #|  forall p top s:A->bool. abelian_group(relative_homology_group(p,top,s))
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top (f:A->A) s c.\n        continuous_map(top,top) f /\\\n        (forall x. x IN topspace top ==> f x = x) /\\\n        c IN group_carrier (relative_homology_group (p,top,s))\n        ==> hom_induced p (top,s) (top,s) f c = c
+      #|  forall p top (s:A->bool) c.\n        c IN group_carrier (relative_homology_group (p,top,s))\n        ==> hom_induced p (top,s) (top,s) (\\x. x) c = c
       #|  c:((num->real)->A)frag
       #|  \\c. c IN group_carrier(relative_homology_group(&p,top:A topology,s))
-      #|  !P. (!x. ~P x ==> Q x) /\\ (!x. P x ==> Q x) ==> !x. Q x
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s top' t top'' u (f:A->B) (g:B->C).\n        continuous_map(top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map(top',top'') g /\\ IMAGE g t SUBSET u\n        ==> hom_induced p (top,s) (top'',u) (g o f) =\n            hom_induced p (top',t) (top'',u) g o\n            hom_induced p (top,s) (top',t) f
+      #|  forall P. (forall x. ~P x ==> Q x) /\\ (forall x. P x ==> Q x) ==> forall x. Q x
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s top' t top'' u (f:A->B) (g:B->C).\n        continuous_map(top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map(top',top'') g /\\ IMAGE g t SUBSET u\n        ==> hom_induced p (top,s) (top'',u) (g o f) =\n            hom_induced p (top',t) (top'',u) g o\n            hom_induced p (top,s) (top',t) f
       #|  frag_sub x frag_0 = x
       #|  c:((num->real)->A)frag
       #|  \\c. c IN group_carrier(relative_homology_group(&p,top:A topology,s))
-      #|  !P. (!x. ~P x ==> Q x) /\\ (!x. P x ==> Q x) ==> !x. Q x
+      #|  forall P. (forall x. ~P x ==> Q x) /\\ (forall x. P x ==> Q x) ==> forall x. Q x
       #|  p:num
       #|  q:int
       #|  q:int
@@ -36640,7 +36640,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  q:int <= &0 ==> q - &1 < &0
       #|  q:int <= &0
       #|  q:int
-      #|  !p top s top' t (f:A->B).\n    continuous_map(top,top') f /\\ IMAGE f s SUBSET t\n    ==> hom_boundary p (top',t) o\n        hom_induced p (top,s) (top',t) f =\n        hom_induced (p - &1) (subtopology top s,{}) (subtopology top' t,{}) f o\n        hom_boundary p (top,s)
+      #|  forall p top s top' t (f:A->B).\n    continuous_map(top,top') f /\\ IMAGE f s SUBSET t\n    ==> hom_boundary p (top',t) o\n        hom_induced p (top,s) (top',t) f =\n        hom_induced (p - &1) (subtopology top s,{}) (subtopology top' t,{}) f o\n        hom_boundary p (top,s)
       #|  frag_sub frag_0 (frag_sub c (frag_sub c d)) = frag_neg d
       #|  frag_0:((num->real)->A)frag
       #|  frag_sub x x = frag_0
@@ -36649,13 +36649,13 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  frag_sub x x = frag_0
       #|  c:((num->real)->A)frag
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> ?y. Q y /\\ f x = f y) /\\\n    (!x. Q x ==> ?y. P y /\\ f x = f y)\n    ==> {f x | P x} = {f x | Q x}
+      #|  (forall x. P x ==> ?y. Q y /\\ f x = f y) /\\\n    (forall x. Q x ==> ?y. P y /\\ f x = f y)\n    ==> {f x | P x} = {f x | Q x}
       #|  c:((num->real)->A)frag
       #|  1 <= p + 1
-      #|  (!x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
+      #|  (forall x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
       #|  { homologous_rel (p+1,top:A topology,s) c | c |\n      singular_relcycle (p+1,top,s) c /\\\n      singular_relboundary (p,subtopology top s,{})\n                           (chain_boundary (p+1) c)}
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
+      #|  (forall x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
       #|  { homologous_rel (p+1,top:A topology,s) c | c |\n      singular_relcycle (p+1,top,{}) c}
       #|  IMAGE g {f y | P y} = { g(f y) | P y}
       #|  {x | x IN {f y | P y} /\\ Q x} = {f y |y| P y /\\ Q(f y)}
@@ -36672,17 +36672,17 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  s = {x | x IN t} <=> s SUBSET t /\\ t SUBSET s
       #|  &0 - &1:int < &0
       #|  q:int < &0 ==> q <= &0 /\\ q - &1 < &0
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s:A->bool.\n        group_exactness(homology_group(p,top),\n                        relative_homology_group(p,top,s),\n                        homology_group(p - &1,subtopology top s))\n                       (hom_induced p (top,{}) (top,s) (\\x. x),\n                        hom_boundary p (top,s))
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s:A->bool.\n        group_exactness(homology_group(p,top),\n                        relative_homology_group(p,top,s),\n                        homology_group(p - &1,subtopology top s))\n                       (hom_induced p (top,{}) (top,s) (\\x. x),\n                        hom_boundary p (top,s))
       #|  frag_sub x frag_0 = x
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> (Q x <=> R x))\n    ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
+      #|  (forall x. P x ==> (Q x <=> R x))\n    ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
       #|  {f x | P x /\\ ?y. Q y /\\ g y = x} = {f(g z) |z| Q z /\\ P(g z)}
-      #|  (!x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
+      #|  (forall x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
       #|  { homologous_rel (p,subtopology top s:A topology,{}) c | c |\n      singular_relcycle (p,subtopology top s,{}) c /\\\n      singular_relboundary (p,top,{}) c}
       #|  1 <= p + 1
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
+      #|  (forall x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
       #|  { homologous_rel (p,subtopology top s,{}) (chain_boundary (p + 1) c) | c |\n      singular_relcycle (p+1,top:A topology,s) c}
       #|  IMAGE g {f y | P y} = { g(f y) | P y}
       #|  {x | x IN {f y | P y} /\\ Q x} = {f y |y| P y /\\ Q(f y)}
@@ -36695,7 +36695,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  q:int <= &0 ==> q - &1 < &0
       #|  q:int <= &0
       #|  q:int
-      #|  !p top s:A->bool.\n      group_exactness(relative_homology_group(p,top,s),\n                      homology_group(p - &1,subtopology top s),\n                      homology_group(p - &1,top))\n               (hom_boundary p (top,s),\n                hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top s:A->bool.\n      group_exactness(relative_homology_group(p,top,s),\n                      homology_group(p - &1,subtopology top s),\n                      homology_group(p - &1,top))\n               (hom_boundary p (top,s),\n                hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
       #|  frag_sub x frag_0 = x
       #|  e = frag_add c d ==> d = frag_sub e c
       #|  frag_sub c (frag_neg d) = frag_add c d
@@ -36705,23 +36705,23 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  topspace top INTER s:A->bool
       #|  c:((num->real)->A)frag
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> ?y. Q y /\\ f x = f y) /\\\n    (!x. Q x ==> ?y. P y /\\ f x = f y)\n    ==> {f x | P x} = {f x | Q x}
-      #|  (!x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
+      #|  (forall x. P x ==> ?y. Q y /\\ f x = f y) /\\\n    (forall x. Q x ==> ?y. P y /\\ f x = f y)\n    ==> {f x | P x} = {f x | Q x}
+      #|  (forall x. P x ==> (Q x <=> R x))\n      ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
       #|  { homologous_rel (p,top:A topology,{}) c | c |\n      singular_relcycle (p,top,{}) c /\\\n      singular_relboundary (p,top,s) c}
       #|  c:((num->real)->A)frag
-      #|  (!x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
+      #|  (forall x. P x ==> f x = g x) ==> {f x | P x} = {g x | P x}
       #|  { homologous_rel (p,top:A topology,{}) c | c |\n      singular_relcycle (p,subtopology top s,{}) c}
       #|  IMAGE g {f y | P y} = { g(f y) | P y}
       #|  {x | x IN {f y | P y} /\\ Q x} = {f y |y| P y /\\ Q(f y)}
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s:A->bool.\n        group_exactness(homology_group(p,subtopology top s),\n                        homology_group(p,top),\n                        relative_homology_group(p,top,s))\n                       (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                        hom_induced p (top,{}) (top,s) (\\x. x))
-      #|  s = {a} <=> a IN s /\\ !b. b IN s ==> b = a
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top (a:A).\n        topspace top = {a} /\\ ~(p = &0)\n        ==> trivial_group(homology_group(p,top))
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s:A->bool.\n        group_exactness(homology_group(p,subtopology top s),\n                        homology_group(p,top),\n                        relative_homology_group(p,top,s))\n                       (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                        hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  s = {a} <=> a IN s /\\ forall b. b IN s ==> b = a
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top (a:A).\n        topspace top = {a} /\\ ~(p = &0)\n        ==> trivial_group(homology_group(p,top))
       #|  \\c. c IN group_carrier(relative_homology_group(&p,top:A topology,s))
-      #|  !P. (!x. ~P x ==> Q x) /\\ (!x. P x ==> Q x) ==> !x. Q x
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s top' t (f:A->B) g.\n           homotopic_with (\\h. IMAGE h s SUBSET t) (top,top') f g\n           ==> hom_induced p (top,s) (top',t) f =\n               hom_induced p (top,s) (top',t) g
+      #|  forall P. (forall x. ~P x ==> Q x) /\\ (forall x. P x ==> Q x) ==> forall x. Q x
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s top' t (f:A->B) g.\n           homotopic_with (\\h. IMAGE h s SUBSET t) (top,top') f g\n           ==> hom_induced p (top,s) (top',t) f =\n               hom_induced p (top,s) (top',t) g
       #|  c1 = frag_add c c2 ==> c2 = frag_sub c1 c
       #|  singular_chain (p,subtopology top (s DIFF u:A->bool)) c2 /\\\n      singular_chain (p,subtopology top t) c2
       #|  p /\\ (p ==> q) ==> p /\\ q
@@ -36775,8 +36775,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  s DIFF u = s INTER (s DIFF u)
       #|  continuous_map (subtopology top (s DIFF u),subtopology top s) (\\x. x) /\\\n    IMAGE (\\x:A. x) (t DIFF u) SUBSET t
       #|  (IMAGE f s SUBSET t /\\ P) /\\ IMAGE f s = t /\\ Q <=>\n    (IMAGE f s SUBSET t /\\ P) /\\ t SUBSET IMAGE f s /\\ Q
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top s t (u:A->bool).\n        top closure_of u SUBSET top interior_of t /\\ t SUBSET s\n        ==> group_isomorphism\n             (relative_homology_group(p,subtopology top (s DIFF u),t DIFF u),\n              relative_homology_group(p,subtopology top s,t))\n             (hom_induced p (subtopology top (s DIFF u),t DIFF u)\n                            (subtopology top s,t) (\\x. x))
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top s t (u:A->bool).\n        top closure_of u SUBSET top interior_of t /\\ t SUBSET s\n        ==> group_isomorphism\n             (relative_homology_group(p,subtopology top (s DIFF u),t DIFF u),\n              relative_homology_group(p,subtopology top s,t))\n             (hom_induced p (subtopology top (s DIFF u),t DIFF u)\n                            (subtopology top s,t) (\\x. x))
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                            (standard_simplex p)
       #|  (?x. x IN t /\\ x IN s) <=> ~(DISJOINT s t)
       #|  t:A->bool
@@ -36785,10 +36785,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  c IN singular_simplex (p,top) <=> singular_simplex (p,top) c
       #|  DISJOINT s t /\\ ~(p = {})\n      ==> IMAGE f p SUBSET t ==> IMAGE f p SUBSET s ==> F
       #|  f:(num->real)->A
-      #|  DISJOINT s t <=> !x. s x /\\ t x ==> F
+      #|  DISJOINT s t <=> forall x. s x /\\ t x ==> F
       #|  t:A->bool
       #|  s:A->bool
-      #|  !p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (!c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism (sum_group u (\\s. chain_group(p,subtopology top s)),\n                            chain_group(p,top))\n                           (iterate frag_add u)
+      #|  forall p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (forall c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism (sum_group u (\\s. chain_group(p,subtopology top s)),\n                            chain_group(p,top))\n                           (iterate frag_add u)
       #|  iterate f u (RESTRICTION u x) = iterate f u x /\\ iterate f u x = y\n      ==> y = iterate f u (RESTRICTION u x)
       #|  t:A->bool
       #|  RESTRICTION u (chain_boundary p o (z:(A->bool)->((num->real)->A)frag))
@@ -36799,11 +36799,11 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  z IN singular_chain q <=> singular_chain q z
       #|  z IN singular_relcycle q <=> singular_relcycle q z
       #|  z:(A->bool)->((num->real)->A)frag
-      #|  s SUBSET u /\\ t SUBSET v /\\\n    (!x. x IN u ==> (f x IN t <=> x IN s))\n    ==> (IMAGE f u SUBSET v /\\ P) /\\ (IMAGE f' v SUBSET u /\\ Q) /\\\n        (!x. x IN u ==> f'(f x) = x) /\\ (!y. y IN v ==> f(f' y) = y)\n        ==> IMAGE f s = t
+      #|  s SUBSET u /\\ t SUBSET v /\\\n    (forall x. x IN u ==> (f x IN t <=> x IN s))\n    ==> (IMAGE f u SUBSET v /\\ P) /\\ (IMAGE f' v SUBSET u /\\ Q) /\\\n        (forall x. x IN u ==> f'(f x) = x) /\\ (forall y. y IN v ==> f(f' y) = y)\n        ==> IMAGE f s = t
       #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  !top:A topology. relcycle_group(p,top,{}) = chain_group(p,top)
+      #|  forall top:A topology. relcycle_group(p,top,{}) = chain_group(p,top)
       #|  p = 0
-      #|  !p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (!c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism\n          (sum_group u (\\t. relcycle_group(p,subtopology top t,{})),\n           relcycle_group(p,top,{}))\n          (iterate frag_add u)
+      #|  forall p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (forall c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism\n          (sum_group u (\\t. relcycle_group(p,subtopology top t,{})),\n           relcycle_group(p,top,{}))\n          (iterate frag_add u)
       #|  iterate frag_add u\n      (chain_boundary (p + 1) o (w:(A->bool)->((num->real)->A)frag))
       #|  {s:A->bool | s IN u /\\ ~(w s:((num->real)->A)frag = frag_0)}
       #|  p /\\ ~q <=> ~(p ==> q)
@@ -36825,7 +36825,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  d:((num->real)->A)frag
       #|  z:(A->bool)->((num->real)->A)frag
       #|  x IN singular_relcycle p <=> singular_relcycle p x
-      #|  IMAGE f s = t ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  u:(A->bool)->bool
       #|  top:A topology
       #|  p:num
@@ -36835,14 +36835,14 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  v:(A->bool)->bool
       #|  {s:A->bool | s IN u /\\ ~(z s:((num->real)->A)frag = frag_0)}
       #|  FINITE {s:A->bool | s IN u /\\\n                      ~(z s:((num->real)->A)frag = frag_0)}
-      #|  !s:A->bool. s IN {i | i IN u /\\ ~(z i = frag_0)}\n                  ==> singular_relcycle (p,subtopology top s,{}) (z s)
+      #|  forall s:A->bool. s IN {i | i IN u /\\ ~(z i = frag_0)}\n                  ==> singular_relcycle (p,subtopology top s,{}) (z s)
       #|  iterate (group_add (homology_group (&p,top:A topology)))\n              {s:A->bool | s IN u /\\ ~(z s = frag_0)}\n              (\\s. homologous_rel (p,top,{}) (z s))
       #|  s:A->bool
       #|  iterate (group_add (homology_group (&p,top:A topology))) u\n              (\\s:A->bool. homologous_rel (p,top,{}) (z s))
       #|  z:(A->bool)->((num->real)->A)frag
       #|  x IN singular_relcycle q <=> singular_relcycle q x
-      #|  !x. x IN group_carrier\n          (sum_group u (\\s. relcycle_group (p,subtopology top s,{})))\n        ==> iterate (group_add (homology_group (&p,top))) u\n             (\\v. hom_induced (&p) (subtopology top v,{}) (top,{}) (\\z:A. z)\n                  (RESTRICTION u\n                   (\\s. homologous_rel (p,subtopology top s,{}) (x s)) v)) =\n            homologous_rel(p,top,{}) (iterate frag_add u x)
-      #|  t SUBSET IMAGE f s <=> !y. y IN t ==> ~(!x. x IN s ==> ~(f x = y))
+      #|  forall x. x IN group_carrier\n          (sum_group u (\\s. relcycle_group (p,subtopology top s,{})))\n        ==> iterate (group_add (homology_group (&p,top))) u\n             (\\v. hom_induced (&p) (subtopology top v,{}) (top,{}) (\\z:A. z)\n                  (RESTRICTION u\n                   (\\s. homologous_rel (p,subtopology top s,{}) (x s)) v)) =\n            homologous_rel(p,top,{}) (iterate frag_add u x)
+      #|  t SUBSET IMAGE f s <=> forall y. y IN t ==> ~(forall x. x IN s ==> ~(f x = y))
       #|  frag_sub c frag_0 = c
       #|  p /\\ ~q <=> ~(p ==> q)
       #|  RESTRICTION u\n     (\\s. if singular_relboundary (p,subtopology top s,{}) (c s)\n          then frag_0\n          else (c:(A->bool)->((num->real)->A)frag) s)
@@ -36852,21 +36852,21 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  group_carrier(sum_group u\n       (\\s:A->bool. homology_group (&p,subtopology top s))) =\n    IMAGE (\\x. RESTRICTION u\n                  (\\s. homologous_rel (p,subtopology top s,{}) (x s)))\n          (group_carrier\n            (sum_group u (\\s. relcycle_group(p,subtopology top s,{}))))
       #|  \\x. group_sum (homology_group (&p,top:A topology)) u\n                 (\\v. hom_induced (&p) (subtopology top v,{}) (top,{})\n                                       (\\z. z) (x v))
       #|  p /\\ (p ==> q /\\ r) ==> (p /\\ q) /\\ (p /\\ r)
-      #|  (!x. x < &0 ==> P x) /\\ (!p. P(&p)) ==> !x:int. P x
-      #|  !p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (!c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism\n          (sum_group u (\\s. homology_group(p,subtopology top s)),\n           homology_group(p,top))\n          (\\x. iterate (group_add (homology_group(p,top))) u\n           (\\v. hom_induced p (subtopology top v,{}) (top,{}) (\\z. z) (x v)))
+      #|  (forall x. x < &0 ==> P x) /\\ (forall p. P(&p)) ==> forall x:int. P x
+      #|  forall p top u:(A->bool)->bool.\n     pairwise DISJOINT u /\\ UNIONS u = topspace top /\\\n     (forall c t. compact_in top c /\\ path_connected_in top c /\\\n            t IN u /\\ ~(DISJOINT c t)\n            ==> c SUBSET t)\n     ==> group_isomorphism\n          (sum_group u (\\s. homology_group(p,subtopology top s)),\n           homology_group(p,top))\n          (\\x. iterate (group_add (homology_group(p,top))) u\n           (\\v. hom_induced p (subtopology top v,{}) (top,{}) (\\z. z) (x v)))
       #|  UNIONS (u DIFF {t:A->bool})
       #|  t:A->bool
       #|  (p /\\ ~r ==> q) ==> p /\\ ~q ==> r
       #|  t:A->bool
       #|  c:A->bool
-      #|  !p top u:(A->bool)->bool.\n     (!v. v IN u ==> open_in top v) /\\\n     pairwise DISJOINT u /\\\n     UNIONS u = topspace top\n     ==> group_isomorphism\n          (sum_group u (\\s. homology_group(p,subtopology top s)),\n           homology_group(p,top))\n          (\\x. iterate (group_add (homology_group(p,top))) u\n           (\\v. hom_induced p (subtopology top v,{}) (top,{}) (\\z. z) (x v)))
+      #|  forall p top u:(A->bool)->bool.\n     (forall v. v IN u ==> open_in top v) /\\\n     pairwise DISJOINT u /\\\n     UNIONS u = topspace top\n     ==> group_isomorphism\n          (sum_group u (\\s. homology_group(p,subtopology top s)),\n           homology_group(p,top))\n          (\\x. iterate (group_add (homology_group(p,top))) u\n           (\\v. hom_induced p (subtopology top v,{}) (top,{}) (\\z. z) (x v)))
       #|  p ==> (if p then x else y) = x
       #|  1
       #|  x:num->real = p
       #|  x:num->real = p
       #|  x:num->real
       #|  x = x' /\\ y = y'\n        ==> frag_add (frag_cmul (&1) x)\n                     (frag_add (frag_cmul (-- &1) y) frag_0) =\n            frag_sub x' y'
-      #|  (!x. x IN s ==> f x IN t) ==> IMAGE f (u INTER s) SUBSET t
+      #|  (forall x. x IN s ==> f x IN t) ==> IMAGE f (u INTER s) SUBSET t
       #|  subtopology euclideanreal (real_interval [&0,&1])
       #|  0..1
       #|  frag_of(RESTRICTION (standard_simplex 1)\n                   ((g:real->A) o (\\x:num->real. x 0)))
@@ -36874,31 +36874,31 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (f':(num->real)->A) p
       #|  (f:(num->real)->A) p
       #|  p:num->real = \\j. if j = 0 then &1 else &0
-      #|  !(top:A topology) f f'.\n          path_connected_space top /\\\n          singular_simplex (0,top) f /\\ singular_simplex (0,top) f'\n          ==> homologous_rel (0,top,{}) (frag_of f) (frag_of f')
+      #|  forall(top:A topology) f f'.\n          path_connected_space top /\\\n          singular_simplex (0,top) f /\\ singular_simplex (0,top) f'\n          ==> homologous_rel (0,top,{}) (frag_of f) (frag_of f')
       #|  frag_cmul (&1) x = x
       #|  &1:int
       #|  f':(num->real)->A
       #|  frag_sub (frag_cmul a c) (frag_cmul b c) = frag_cmul (a - b) c
       #|  frag_cmul (&0) x = frag_0
       #|  &0:int
-      #|  (!x. P x ==> R x) ==> (!x. P x /\\ Q x ==> R x)
+      #|  (forall x. P x ==> R x) ==> (forall x. P x /\\ Q x ==> R x)
       #|  frag_cmul n t = frag_0 <=> n = &0 \\/ t = frag_0
       #|  1
       #|  g:(num->real)->A
       #|  frag_sub x frag_0 = x
-      #|  !d. singular_chain (1,top:A topology) d\n          ==> frag_extend (\\x. frag_of(f:(num->real)->A))\n                          (chain_boundary 1 d) = frag_0
+      #|  forall d. singular_chain (1,top:A topology) d\n          ==> frag_extend (\\x. frag_of(f:(num->real)->A))\n                          (chain_boundary 1 d) = frag_0
       #|  n:int
       #|  n:int
       #|  group_zpow (homology_group (&0,top)) q =\n    \\n. homologous_rel(0,top:A topology,{}) (frag_cmul n (frag_of f))
       #|  q IN group_carrier (homology_group (&0,top:A topology))
       #|  q = homologous_rel(0,top:A topology,{}) (frag_of f)
       #|  singular_relcycle(0,top:A topology,{}) (frag_of f)
-      #|  !(top:A topology) f.\n        path_connected_space top /\\ singular_simplex(0,top) f\n        ==> group_isomorphism (integer_group,homology_group(&0,top))\n              (group_zpow (homology_group(&0,top))\n                          (homologous_rel(0,top,{}) (frag_of f)))
+      #|  forall(top:A topology) f.\n        path_connected_space top /\\ singular_simplex(0,top) f\n        ==> group_isomorphism (integer_group,homology_group(&0,top))\n              (group_zpow (homology_group(&0,top))\n                          (homologous_rel(0,top,{}) (frag_of f)))
       #|  RESTRICTION (standard_simplex 0) (\\x. (a:A))
       #|  a:A
       #|  ?f. singular_simplex(0,top:A topology) f
-      #|  !top:A topology.\n        path_connected_space top /\\ ~(topspace top = {})\n        ==> homology_group(&0,top) isomorphic_group integer_group
-      #|  !top (a:A).\n        topspace top = {a}\n        ==> homology_group(&0,top) isomorphic_group integer_group
+      #|  forall top:A topology.\n        path_connected_space top /\\ ~(topspace top = {})\n        ==> homology_group(&0,top) isomorphic_group integer_group
+      #|  forall top (a:A).\n        topspace top = {a}\n        ==> homology_group(&0,top) isomorphic_group integer_group
       #|  s:A->bool
       #|  sum_group (path_components_of (top:A topology)) (\\i. integer_group)
       #|  top:A topology
@@ -36906,24 +36906,24 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  &0:int
       #|  sum_group (path_components_of top)\n       (\\s:A->bool. homology_group(&0,subtopology top s))
-      #|  !top:A topology.\n        homology_group(&0,top) isomorphic_group\n        free_abelian_group (path_components_of top)
+      #|  forall top:A topology.\n        homology_group(&0,top) isomorphic_group\n        free_abelian_group (path_components_of top)
       #|  homology_group(&0,(top:A topology))
       #|  homology_group(&0,(top':B topology))
-      #|  !(top:A topology) (top':B topology).\n        homology_group(&0,top) isomorphic_group homology_group(&0,top')\n        ==> path_components_of top =_c path_components_of top'
-      #|  !(top:A topology) (top':B topology).\n        homology_group(&0,top) isomorphic_group homology_group(&0,top')\n        ==> (path_connected_space top <=> path_connected_space top')
-      #|  !p top:A topology. p < &0 ==> trivial_group(homology_group(p,top))
-      #|  !p top:A topology. abelian_group(homology_group(p,top))
-      #|  !p top top' f:A->B.\n        group_homomorphism\n         (homology_group (p,top),homology_group (p,top'))\n         (hom_induced p (top,{}) (top',{}) f)
-      #|  !p top top' top'' (f:A->B) (g:B->C).\n        continuous_map(top,top') f /\\\n        continuous_map(top',top'') g\n        ==> hom_induced p (top,{}) (top'',{}) (g o f) =\n            hom_induced p (top',{}) (top'',{}) g o\n            hom_induced p (top,{}) (top',{}) f
-      #|  !p (top:A topology) (top':B topology) f g.\n        homotopic_with (\\h. T) (top,top') f g\n        ==> hom_induced p (top,{}) (top',{}) f =\n            hom_induced p (top,{}) (top',{}) g
+      #|  forall(top:A topology) (top':B topology).\n        homology_group(&0,top) isomorphic_group homology_group(&0,top')\n        ==> path_components_of top =_c path_components_of top'
+      #|  forall(top:A topology) (top':B topology).\n        homology_group(&0,top) isomorphic_group homology_group(&0,top')\n        ==> (path_connected_space top <=> path_connected_space top')
+      #|  forall p top:A topology. p < &0 ==> trivial_group(homology_group(p,top))
+      #|  forall p top:A topology. abelian_group(homology_group(p,top))
+      #|  forall p top top' f:A->B.\n        group_homomorphism\n         (homology_group (p,top),homology_group (p,top'))\n         (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' top'' (f:A->B) (g:B->C).\n        continuous_map(top,top') f /\\\n        continuous_map(top',top'') g\n        ==> hom_induced p (top,{}) (top'',{}) (g o f) =\n            hom_induced p (top',{}) (top'',{}) g o\n            hom_induced p (top,{}) (top',{}) f
+      #|  forall p (top:A topology) (top':B topology) f g.\n        homotopic_with (\\h. T) (top,top') f g\n        ==> hom_induced p (top,{}) (top',{}) f =\n            hom_induced p (top,{}) (top',{}) g
       #|  p:int
-      #|  !p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> group_isomorphisms (relative_homology_group (p,top,s),\n                                relative_homology_group (p,top',t))\n                               (hom_induced p (top,s) (top',t) f,\n                                hom_induced p (top',t) (top,s) g)
-      #|  !p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> group_isomorphism (relative_homology_group (p,top,s),\n                               relative_homology_group (p,top',t))\n                              (hom_induced p (top,s) (top',t) f)
+      #|  forall p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> group_isomorphisms (relative_homology_group (p,top,s),\n                                relative_homology_group (p,top',t))\n                               (hom_induced p (top,s) (top',t) f,\n                                hom_induced p (top',t) (top,s) g)
+      #|  forall p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> group_isomorphism (relative_homology_group (p,top,s),\n                               relative_homology_group (p,top',t))\n                              (hom_induced p (top,s) (top',t) f)
       #|  g:B->A
-      #|  !p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\ continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphism (homology_group (p,top),homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
-      #|  !p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> relative_homology_group (p,top,s) isomorphic_group\n            relative_homology_group (p,top',t)
-      #|  !p (top:A topology) (top':B topology).\n        top homotopy_equivalent_space top'\n        ==> homology_group(p,top) isomorphic_group homology_group(p,top')
-      #|  !p (top:A topology) (top':B topology).\n        top homeomorphic_space top'\n        ==> homology_group(p,top) isomorphic_group homology_group(p,top')
+      #|  forall p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\ continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphism (homology_group (p,top),homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' s t (f:A->B) g.\n        continuous_map (top,top') f /\\ IMAGE f s SUBSET t /\\\n        continuous_map (top',top) g /\\ IMAGE g t SUBSET s /\\\n        homotopic_with (\\h. IMAGE h s SUBSET s) (top,top) (g o f) I /\\\n        homotopic_with (\\k. IMAGE k t SUBSET t) (top',top') (f o g) I\n        ==> relative_homology_group (p,top,s) isomorphic_group\n            relative_homology_group (p,top',t)
+      #|  forall p (top:A topology) (top':B topology).\n        top homotopy_equivalent_space top'\n        ==> homology_group(p,top) isomorphic_group homology_group(p,top')
+      #|  forall p (top:A topology) (top':B topology).\n        top homeomorphic_space top'\n        ==> homology_group(p,top) isomorphic_group homology_group(p,top')
       #|  homology_group (p - &1,top:A topology)
       #|  homology_group (p - &1,subtopology top (s:A->bool))
       #|  relative_homology_group (p,top,s:A->bool)
@@ -36933,19 +36933,19 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_boundary p (top:A topology,s)
       #|  hom_induced p (top:A topology,{}) (top,s) (\\x. x)
       #|  hom_induced p (subtopology top s:A topology,{}) (top,{}) (\\x. x)
-      #|  !p top s f:A->A.\n        continuous_map (top,subtopology top s) f /\\\n        homotopic_with (\\h. T) (subtopology top s,subtopology top s) f I /\\\n        homotopic_with (\\k. T) (top,top) f I\n        ==> trivial_group(relative_homology_group(p,top,s))
+      #|  forall p top s f:A->A.\n        continuous_map (top,subtopology top s) f /\\\n        homotopic_with (\\h. T) (subtopology top s,subtopology top s) f I /\\\n        homotopic_with (\\k. T) (top,top) f I\n        ==> trivial_group(relative_homology_group(p,top,s))
       #|  \\x:A. x
-      #|  !p top:A topology.\n        trivial_group(relative_homology_group(p,top,topspace top))
-      #|  !p top s:A->bool.\n        topspace top = {}\n        ==> trivial_group(relative_homology_group(p,top,s))
-      #|  !p top:A topology.\n        topspace top = {} ==> trivial_group(homology_group(p,top))
+      #|  forall p top:A topology.\n        trivial_group(relative_homology_group(p,top,topspace top))
+      #|  forall p top s:A->bool.\n        topspace top = {}\n        ==> trivial_group(relative_homology_group(p,top,s))
+      #|  forall p top:A topology.\n        topspace top = {} ==> trivial_group(homology_group(p,top))
       #|  a:A
       #|  p:int
       #|  a:A
-      #|  !p top:A topology.\n        contractible_space top /\\ ~(p = &0)\n        ==> trivial_group(homology_group(p,top))
-      #|  !p top top' s t (f:A->B) g.\n        homeomorphic_maps (top,top') (f,g) /\\\n        IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s\n        ==> group_isomorphisms (relative_homology_group (p,top,s),\n                                relative_homology_group (p,top',t))\n                               (hom_induced p (top,s) (top',t) f,\n                                hom_induced p (top',t) (top,s) g)
+      #|  forall p top:A topology.\n        contractible_space top /\\ ~(p = &0)\n        ==> trivial_group(homology_group(p,top))
+      #|  forall p top top' s t (f:A->B) g.\n        homeomorphic_maps (top,top') (f,g) /\\\n        IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s\n        ==> group_isomorphisms (relative_homology_group (p,top,s),\n                                relative_homology_group (p,top',t))\n                               (hom_induced p (top,s) (top',t) f,\n                                hom_induced p (top',t) (top,s) g)
       #|  hom_induced p (top',t) (top,s) (g:B->A)
       #|  g:B->A
-      #|  !p top top' s t (f:A->B).\n        homeomorphic_map (top,top') f /\\ s SUBSET topspace top /\\ IMAGE f s = t\n        ==> group_isomorphism (relative_homology_group (p,top,s),\n                               relative_homology_group (p,top',t))\n                              (hom_induced p (top,s) (top',t) f)
+      #|  forall p top top' s t (f:A->B).\n        homeomorphic_map (top,top') f /\\ s SUBSET topspace top /\\ IMAGE f s = t\n        ==> group_isomorphism (relative_homology_group (p,top,s),\n                               relative_homology_group (p,top',t))\n                              (hom_induced p (top,s) (top',t) f)
       #|  g:B->A
       #|  f:A->B
       #|  top:A topology
@@ -36954,7 +36954,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:int
       #|  hom_induced p (top',{}) (top,{}) (g:B->A)
       #|  g:B->A
-      #|  !p top top' f:A->B.\n        section_map (top,top') f\n        ==> group_monomorphism (homology_group (p,top),\n                                homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' f:A->B.\n        section_map (top,top') f\n        ==> group_monomorphism (homology_group (p,top),\n                                homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f)
       #|  f:A->B
       #|  g:B->A
       #|  top':B topology
@@ -36963,31 +36963,31 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:int
       #|  hom_induced p (top',{}) (top,{}) (g:B->A)
       #|  g:B->A
-      #|  !p top top' f:A->B.\n        retraction_map (top,top') f\n        ==> group_epimorphism (homology_group (p,top),\n                               homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
-      #|  !p top top' f:A->B.\n        homeomorphic_map (top,top') f\n        ==> group_isomorphism (homology_group (p,top),\n                               homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f)
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> group_monomorphism\n             (homology_group(p,subtopology top s),homology_group(p,top))\n             (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top top' f:A->B.\n        retraction_map (top,top') f\n        ==> group_epimorphism (homology_group (p,top),\n                               homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' f:A->B.\n        homeomorphic_map (top,top') f\n        ==> group_isomorphism (homology_group (p,top),\n                               homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> group_monomorphism\n             (homology_group(p,subtopology top s),homology_group(p,top))\n             (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
       #|  p:int
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> trivial_homomorphism\n             (relative_homology_group(p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (hom_boundary p (top,s))
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> trivial_homomorphism\n             (relative_homology_group(p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (hom_boundary p (top,s))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
       #|  p:int
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> group_epimorphism\n             (homology_group(p,top),relative_homology_group(p,top,s))\n             (hom_induced p (top,{}) (top,s) (\\x. x))
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> short_exact_sequence\n               (homology_group(p,subtopology top s),\n                homology_group(p,top),\n                relative_homology_group(p,top,s))\n               (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> group_epimorphism\n             (homology_group(p,top),relative_homology_group(p,top,s))\n             (hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> short_exact_sequence\n               (homology_group(p,subtopology top s),\n                homology_group(p,top),\n                relative_homology_group(p,top,s))\n               (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                hom_induced p (top,{}) (top,s) (\\x. x))
       #|  hom_induced p (top,{}) (subtopology top s,{}) (r:A->A)
       #|  r:A->A
-      #|  s = {a} ==> !x. x IN s ==> a = x
+      #|  s = {a} ==> forall x. x IN s ==> a = x
       #|  (\\x. group_id(homology_group(p,subtopology top {})))\n             :(((num->real)->A)frag->bool)->((num->real)->A)frag->bool
       #|  p:int
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> ?h k. h subgroup_of homology_group(p,top) /\\\n                  k subgroup_of homology_group(p,top) /\\\n                  group_isomorphism\n                   (prod_group (subgroup_generated (homology_group(p,top)) h)\n                               (subgroup_generated (homology_group(p,top)) k),\n                     (homology_group(p,top)))\n                   (\\(x,y). group_mul(homology_group(p,top)) x y) /\\\n                  group_isomorphism\n                  (homology_group(p,subtopology top s),\n                   subgroup_generated (homology_group(p,top)) h)\n                  (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x)) /\\\n                  group_isomorphism\n                  (subgroup_generated (homology_group(p,top)) k,\n                   relative_homology_group(p,top,s))\n                  (hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> ?h k. h subgroup_of homology_group(p,top) /\\\n                  k subgroup_of homology_group(p,top) /\\\n                  group_isomorphism\n                   (prod_group (subgroup_generated (homology_group(p,top)) h)\n                               (subgroup_generated (homology_group(p,top)) k),\n                     (homology_group(p,top)))\n                   (\\(x,y). group_mul(homology_group(p,top)) x y) /\\\n                  group_isomorphism\n                  (homology_group(p,subtopology top s),\n                   subgroup_generated (homology_group(p,top)) h)\n                  (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x)) /\\\n                  group_isomorphism\n                  (subgroup_generated (homology_group(p,top)) k,\n                   relative_homology_group(p,top,s))\n                  (hom_induced p (top,{}) (top,s) (\\x. x))
       #|  prod_group (subgroup_generated (homology_group(p,top:A topology)) h)\n               (subgroup_generated (homology_group(p,top)) k)
       #|  k:(((num->real)->A)frag->bool)->bool
       #|  h:(((num->real)->A)frag->bool)->bool
       #|  p:int
-      #|  !p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> homology_group(p,top) isomorphic_group\n            prod_group (homology_group(p,subtopology top s))\n                       (relative_homology_group(p,top,s))
+      #|  forall p top s:A->bool.\n        s = {} \\/ s retract_of_space top\n        ==> homology_group(p,top) isomorphic_group\n            prod_group (homology_group(p,subtopology top s))\n                       (relative_homology_group(p,top,s))
       #|  DISJOINT s t ==> (s UNION t) DIFF t = s /\\ (s UNION t) DIFF s = t
       #|  s:A->bool
       #|  s:A->bool
@@ -37013,49 +37013,49 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  open_in top (s:A->bool)
       #|  open_in top (t:A->bool)
       #|  closed_in top (s:A->bool) /\\ closed_in top t
-      #|  !p top s t:A->bool.\n        open_in top s /\\ open_in top t /\\\n        DISJOINT s t /\\ s UNION t = topspace top\n        ==> group_isomorphism\n             (prod_group (homology_group (p,subtopology top s))\n                         (homology_group (p,subtopology top t)),\n              homology_group (p,top))\n             (\\(a,b). group_mul (homology_group (p,top))\n                (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x) a)\n                (hom_induced p (subtopology top t,{}) (top,{}) (\\x. x) b))
+      #|  forall p top s t:A->bool.\n        open_in top s /\\ open_in top t /\\\n        DISJOINT s t /\\ s UNION t = topspace top\n        ==> group_isomorphism\n             (prod_group (homology_group (p,subtopology top s))\n                         (homology_group (p,subtopology top t)),\n              homology_group (p,top))\n             (\\(a,b). group_mul (homology_group (p,top))\n                (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x) a)\n                (hom_induced p (subtopology top t,{}) (top,{}) (\\x. x) b))
       #|  hom_relboundary p (top:A topology,s,t) =\n    hom_induced (p - &1) (subtopology top s,{}) (subtopology top s,t) (\\x. x) o\n    hom_boundary p (top,s)
       #|  homology_group(p - &1,subtopology top (s:A->bool))
-      #|  !p top s t:A->bool.\n           group_homomorphism\n           (relative_homology_group (p,top,s),\n            relative_homology_group (p - &1,subtopology top s,t))\n           (hom_relboundary p (top,s,t))
-      #|  !p top s t c.\n         hom_relboundary p (top,s,t) c IN\n         group_carrier (relative_homology_group (p - &1,subtopology top s,t))
-      #|  !p top s:A->bool.\n        hom_relboundary p (top,s,{}) = hom_boundary p (top,s)
+      #|  forall p top s t:A->bool.\n           group_homomorphism\n           (relative_homology_group (p,top,s),\n            relative_homology_group (p - &1,subtopology top s,t))\n           (hom_relboundary p (top,s,t))
+      #|  forall p top s t c.\n         hom_relboundary p (top,s,t) c IN\n         group_carrier (relative_homology_group (p - &1,subtopology top s,t))
+      #|  forall p top s:A->bool.\n        hom_relboundary p (top,s,{}) = hom_boundary p (top,s)
       #|  IMAGE f s SUBSET t ==> IMAGE f (u INTER s) SUBSET t
-      #|  !p top s t top' u v (f:A->B).\n    continuous_map(top,top') f /\\ IMAGE f s SUBSET u /\\ IMAGE f t SUBSET v\n    ==> hom_relboundary p (top',u,v) o\n        hom_induced p (top,s) (top',u) f =\n        hom_induced (p - &1) (subtopology top s,t) (subtopology top' u,v) f o\n        hom_relboundary p (top,s,t)
+      #|  forall p top s t top' u v (f:A->B).\n    continuous_map(top,top') f /\\ IMAGE f s SUBSET u /\\ IMAGE f t SUBSET v\n    ==> hom_relboundary p (top',u,v) o\n        hom_induced p (top,s) (top',u) f =\n        hom_induced (p - &1) (subtopology top s,t) (subtopology top' u,v) f o\n        hom_relboundary p (top,s,t)
       #|  x = group_mul G z y <=> group_div G x y = z
       #|  group_mul (relative_homology_group (p,top,t)) z\n                        (hom_induced p (top,{}) (top,t) (\\x:A. x) w)
       #|  w:((num->real)->A)frag->bool
       #|  group_div G x y = group_id G <=> y = x
       #|  group_div (relative_homology_group (p,top,s)) x\n              (hom_induced p (top,t) (top,s) (\\x:A. x) z)
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
       #|  z:((num->real)->A)frag->bool
       #|  x:((num->real)->A)frag->bool
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN s ==> g(f x) = z
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN s ==> g(f x) = z
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
       #|  y:((num->real)->A)frag->bool
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  t:A->bool
       #|  top:A topology
       #|  p:int
       #|  y:((num->real)->A)frag->bool
       #|  t SUBSET s ==> s INTER t = t
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  hom_boundary p (top,s:A->bool) x
       #|  t:A->bool
       #|  subtopology top (s:A->bool)
       #|  p - &1:int
       #|  x:((num->real)->A)frag->bool
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN s ==> g(f x) = z
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN s ==> g(f x) = z
       #|  t SUBSET s ==> s INTER t = t
       #|  t:A->bool
       #|  subtopology top (s:A->bool)
       #|  p - &1:int
       #|  b:((num->real)->A)frag->bool
-      #|  !p top s t:A->bool.\n       t SUBSET s\n       ==> group_exactness(relative_homology_group(p,top,t),\n                           relative_homology_group(p,top,s),\n                           relative_homology_group(p - &1,subtopology top s,t))\n               (hom_induced p (top,t) (top,s) (\\x. x),\n                hom_relboundary p (top,s,t))
+      #|  forall p top s t:A->bool.\n       t SUBSET s\n       ==> group_exactness(relative_homology_group(p,top,t),\n                           relative_homology_group(p,top,s),\n                           relative_homology_group(p - &1,subtopology top s,t))\n               (hom_induced p (top,t) (top,s) (\\x. x),\n                hom_relboundary p (top,s,t))
       #|  x IN s ==> P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n    ==> g(f x) = z
       #|  t SUBSET s ==> s INTER t = t
       #|  t:A->bool
@@ -37065,7 +37065,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  w:((num->real)->A)frag->bool
       #|  group_div G x y = group_id G <=> y = x
       #|  group_div (homology_group(p - &1,subtopology top s)) y\n              (hom_induced (p - &1) (subtopology top t,{})\n                                    (subtopology top s,{}) (\\x:A. x) z)
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
@@ -37080,7 +37080,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology top s:A topology
       #|  p - &1:int
       #|  hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x:A. x) y
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  t:A->bool
       #|  top:A topology
       #|  p - &1:int
@@ -37095,7 +37095,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology top s:A topology
       #|  p - &1:int
       #|  x:((num->real)->A)frag->bool
-      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> !x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
+      #|  P /\\ Q /\\ IMAGE f s = {y | y IN t /\\ g y = z}\n      ==> forall x. x IN t /\\ g x = z ==> ?y. y IN s /\\ f y = x
       #|  t:A->bool
       #|  subtopology top s:A topology
       #|  p - &1:int
@@ -37105,10 +37105,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  p:int
       #|  homology_group(p - &1,top:A topology)
-      #|  !G. group_homomorphism(G,H) f /\\ x = group_id G\n            ==> f x = group_id H
+      #|  forall G. group_homomorphism(G,H) f /\\ x = group_id G\n            ==> f x = group_id H
       #|  (hom_induced (p - &1) (top,{}) (top,t) (\\x:A. x) o\n       hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x) o\n       hom_boundary p (top,s)) c
       #|  c:((num->real)->A)frag->bool
-      #|  !p top s t:A->bool.\n       t SUBSET s\n       ==> group_exactness(relative_homology_group(p,top,s),\n                           relative_homology_group(p - &1,subtopology top s,t),\n                           relative_homology_group(p - &1,top,t))\n              (hom_relboundary p (top,s,t),\n               hom_induced (p - &1) (subtopology top s,t) (top,t) (\\x. x))
+      #|  forall p top s t:A->bool.\n       t SUBSET s\n       ==> group_exactness(relative_homology_group(p,top,s),\n                           relative_homology_group(p - &1,subtopology top s,t),\n                           relative_homology_group(p - &1,top,t))\n              (hom_relboundary p (top,s,t),\n               hom_induced (p - &1) (subtopology top s,t) (top,t) (\\x. x))
       #|  x = group_mul G z u <=> z = group_div G x u
       #|  group_mul (relative_homology_group (p,subtopology top s,t))\n                (hom_induced p (subtopology top s,{}) (subtopology top s,t)\n                    (\\x:A. x) w) u
       #|  w:((num->real)->A)frag->bool
@@ -37148,23 +37148,23 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology top (s:A->bool)
       #|  p:int
       #|  relative_homology_group (p,subtopology top (s:A->bool),s)
-      #|  !G. group_homomorphism(G,H) f /\\ x = group_id G\n            ==> f x = group_id H
+      #|  forall G. group_homomorphism(G,H) f /\\ x = group_id G\n            ==> f x = group_id H
       #|  hom_induced p (subtopology top s,s) (top,s) (\\x:A. x)\n       (hom_induced p (subtopology top s,t) (subtopology top s,s) (\\x. x)\n        c)
       #|  c:((num->real)->A)frag->bool
       #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  !p top s t:A->bool.\n      t SUBSET s\n      ==> group_exactness(relative_homology_group(p,subtopology top s,t),\n                          relative_homology_group(p,top,t),\n                          relative_homology_group(p,top,s))\n            (hom_induced p (subtopology top s,t) (top,t) (\\x. x),\n             hom_induced p (top,t) (top,s) (\\x. x))
+      #|  forall p top s t:A->bool.\n      t SUBSET s\n      ==> group_exactness(relative_homology_group(p,subtopology top s,t),\n                          relative_homology_group(p,top,t),\n                          relative_homology_group(p,top,s))\n            (hom_induced p (subtopology top s,t) (top,t) (\\x. x),\n             hom_induced p (top,t) (top,s) (\\x. x))
       #|  reduced_homology_group(p,(top:A topology)) =\n        subgroup_generated (homology_group(p,top))\n          (group_kernel (homology_group(p,top),\n                         homology_group(p,discrete_topology {one}))\n                        (hom_induced p (top,{}) (discrete_topology {one},{})\n                                     (\\x. one)))
-      #|  !p top:A topology.\n        group_carrier (reduced_homology_group(p,top)) =\n        group_kernel (homology_group(p,top),\n                      homology_group(p,discrete_topology {one}))\n             (hom_induced p (top,{}) (discrete_topology {one},{}) (\\x. one))
-      #|  !p top:A topology.\n        group_carrier (reduced_homology_group(p,top))\n        SUBSET group_carrier (homology_group(p,top))
+      #|  forall p top:A topology.\n        group_carrier (reduced_homology_group(p,top)) =\n        group_kernel (homology_group(p,top),\n                      homology_group(p,discrete_topology {one}))\n             (hom_induced p (top,{}) (discrete_topology {one},{}) (\\x. one))
+      #|  forall p top:A topology.\n        group_carrier (reduced_homology_group(p,top))\n        SUBSET group_carrier (homology_group(p,top))
       #|  one
       #|  s = group_carrier G ==> subgroup_generated G s = G
-      #|  !p top:A topology.\n        ~(p = &0)\n        ==> reduced_homology_group(p,top) = homology_group(p,top)
-      #|  !p top:A topology.\n        p < &0 ==> trivial_group(reduced_homology_group(p,top))
-      #|  (!x. x IN s ==> k(f x) = h x) /\\ IMAGE f s SUBSET t\n    ==> IMAGE f {x | x IN s /\\ h x = z} SUBSET\n        {y | y IN t /\\ k y = z}
+      #|  forall p top:A topology.\n        ~(p = &0)\n        ==> reduced_homology_group(p,top) = homology_group(p,top)
+      #|  forall p top:A topology.\n        p < &0 ==> trivial_group(reduced_homology_group(p,top))
+      #|  (forall x. x IN s ==> k(f x) = h x) /\\ IMAGE f s SUBSET t\n    ==> IMAGE f {x | x IN s /\\ h x = z} SUBSET\n        {y | y IN t /\\ k y = z}
       #|  hom_induced p (top,{}) (top',{}) (f:A->B) =\n        \\c. group_id(reduced_homology_group (p,top'))
       #|  continuous_map(top,top') (f:A->B)
-      #|  !p top top' f:A->B.\n        group_homomorphism\n          (reduced_homology_group (p,top),reduced_homology_group (p,top'))\n          (hom_induced p (top,{}) (top',{}) f)
-      #|  !p top top' f c.\n        c IN group_carrier(reduced_homology_group(p,top))\n        ==> hom_induced p (top,{}) (top',{}) f c IN\n            group_carrier(reduced_homology_group (p,top'))
+      #|  forall p top top' f:A->B.\n        group_homomorphism\n          (reduced_homology_group (p,top),reduced_homology_group (p,top'))\n          (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' f c.\n        c IN group_carrier(reduced_homology_group(p,top))\n        ==> hom_induced p (top,{}) (top',{}) f c IN\n            group_carrier(reduced_homology_group (p,top'))
       #|  x IN s ==> IMAGE f s = {z} ==> f x = z
       #|  {one}
       #|  discrete_topology {one}
@@ -37179,24 +37179,24 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  p:int
       #|  c:((num->real)->A)frag->bool
-      #|  !p top s:A->bool.\n        group_homomorphism\n         (relative_homology_group (p,top,s),\n          reduced_homology_group (p - &1,subtopology top s))\n         (hom_boundary p (top,s))
+      #|  forall p top s:A->bool.\n        group_homomorphism\n         (relative_homology_group (p,top,s),\n          reduced_homology_group (p - &1,subtopology top s))\n         (hom_boundary p (top,s))
       #|  p:int
-      #|  !p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\\n        continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphisms (reduced_homology_group (p,top),\n                                reduced_homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f,\n                                hom_induced p (top',{}) (top,{}) g)
+      #|  forall p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\\n        continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphisms (reduced_homology_group (p,top),\n                                reduced_homology_group (p,top'))\n                               (hom_induced p (top,{}) (top',{}) f,\n                                hom_induced p (top',{}) (top,{}) g)
       #|  hom_induced p (top',{}) (top,{}) (g:B->A)
-      #|  !p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\ continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphism (reduced_homology_group (p,top),\n                               reduced_homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
+      #|  forall p top top' (f:A->B) g.\n        continuous_map (top,top') f /\\ continuous_map (top',top) g /\\\n        homotopic_with (\\h. T) (top,top) (g o f) I /\\\n        homotopic_with (\\k. T) (top',top') (f o g) I\n        ==> group_isomorphism (reduced_homology_group (p,top),\n                               reduced_homology_group (p,top'))\n                              (hom_induced p (top,{}) (top',{}) f)
       #|  hom_induced p (top,{}) (top',{}) (f:A->B)
       #|  g:B->A
       #|  f:A->B
-      #|  !p (top:A topology) (top':B topology).\n        top homotopy_equivalent_space top'\n        ==> reduced_homology_group(p,top) isomorphic_group\n            reduced_homology_group(p,top')
-      #|  !p (top:A topology) (top':B topology).\n        top homeomorphic_space top'\n        ==> reduced_homology_group(p,top) isomorphic_group\n            reduced_homology_group(p,top')
-      #|  !p top:A topology.\n        topspace top = {} ==> trivial_group(reduced_homology_group(p,top))
+      #|  forall p (top:A topology) (top':B topology).\n        top homotopy_equivalent_space top'\n        ==> reduced_homology_group(p,top) isomorphic_group\n            reduced_homology_group(p,top')
+      #|  forall p (top:A topology) (top':B topology).\n        top homeomorphic_space top'\n        ==> reduced_homology_group(p,top) isomorphic_group\n            reduced_homology_group(p,top')
+      #|  forall p top:A topology.\n        topspace top = {} ==> trivial_group(reduced_homology_group(p,top))
       #|  (\\x. a):1->A
       #|  group_isomorphism (G,G') f\n     ==> group_kernel(G,G') f SUBSET {group_id G}
-      #|  !p top a:A.\n        topspace top = {a} ==> trivial_group (reduced_homology_group (p,top))
+      #|  forall p top a:A.\n        topspace top = {a} ==> trivial_group (reduced_homology_group (p,top))
       #|  a:A
       #|  p:int
       #|  a:A
-      #|  !p top:A topology.\n         contractible_space top\n         ==> trivial_group (reduced_homology_group (p,top))
+      #|  forall p top:A topology.\n         contractible_space top\n         ==> trivial_group (reduced_homology_group (p,top))
       #|  (\\y. a) o f = \\x. a
       #|  discrete_topology {one}
       #|  p:int
@@ -37240,11 +37240,11 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  y:((num->real)->A)frag->bool
       #|  a:A
       #|  s INTER t = s <=> s SUBSET t
-      #|  !p top s:A->bool.\n        ~(topspace top INTER s = {})\n        ==> group_image (reduced_homology_group (p,top),\n                         relative_homology_group (p,top,s))\n                        (hom_induced p (top,{}) (top,s) (\\x. x)) =\n            group_image (homology_group (p,top),\n                         relative_homology_group (p,top,s))\n                        (hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        ~(topspace top INTER s = {})\n        ==> group_image (reduced_homology_group (p,top),\n                         relative_homology_group (p,top,s))\n                        (hom_induced p (top,{}) (top,s) (\\x. x)) =\n            group_image (homology_group (p,top),\n                         relative_homology_group (p,top,s))\n                        (hom_induced p (top,{}) (top,s) (\\x. x))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
-      #|  !p top s:A->bool.\n        ~(topspace top INTER s = {})\n        ==> group_exactness(reduced_homology_group(p,top),\n                            relative_homology_group(p,top,s),\n                            reduced_homology_group(p - &1,subtopology top s))\n                           (hom_induced p (top,{}) (top,s) (\\x. x),\n                            hom_boundary p (top,s))
+      #|  forall p top s:A->bool.\n        ~(topspace top INTER s = {})\n        ==> group_exactness(reduced_homology_group(p,top),\n                            relative_homology_group(p,top,s),\n                            reduced_homology_group(p - &1,subtopology top s))\n                           (hom_induced p (top,{}) (top,s) (\\x. x),\n                            hom_boundary p (top,s))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
@@ -37252,19 +37252,19 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
-      #|  !p top s:A->bool.\n      group_exactness(relative_homology_group(p,top,s),\n                      reduced_homology_group(p - &1,subtopology top s),\n                      reduced_homology_group(p - &1,top))\n               (hom_boundary p (top,s),\n                hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top s:A->bool.\n      group_exactness(relative_homology_group(p,top,s),\n                      reduced_homology_group(p - &1,subtopology top s),\n                      reduced_homology_group(p - &1,top))\n               (hom_boundary p (top,s),\n                hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
       #|  x:((num->real)->A)frag->bool
-      #|  (!x. x IN s /\\ f x IN k ==> x IN c)\n    ==> k INTER IMAGE f s SUBSET IMAGE f s INTER IMAGE f c
+      #|  (forall x. x IN s /\\ f x IN k ==> x IN c)\n    ==> k INTER IMAGE f s SUBSET IMAGE f s INTER IMAGE f c
       #|  \\x:A. x
       #|  top:A topology
       #|  subtopology top s:A topology
       #|  p:int
       #|  group_carrier(reduced_homology_group (p,top:A topology))
-      #|  !u. s' SUBSET u /\\ s' SUBSET s /\\ u INTER t = t' /\\ u INTER s SUBSET s'\n        ==> s = t ==> s' = t'
+      #|  forall u. s' SUBSET u /\\ s' SUBSET s /\\ u INTER t = t' /\\ u INTER s SUBSET s'\n        ==> s = t ==> s' = t'
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
-      #|  !p top s:A->bool.\n        group_exactness(reduced_homology_group(p,subtopology top s),\n                        reduced_homology_group(p,top),\n                        relative_homology_group(p,top,s))\n                       (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                        hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        group_exactness(reduced_homology_group(p,subtopology top s),\n                        reduced_homology_group(p,top),\n                        relative_homology_group(p,top,s))\n                       (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x),\n                        hom_induced p (top,{}) (top,s) (\\x. x))
       #|  reduced_homology_group (p - &1,top:A topology)
       #|  reduced_homology_group (p - &1,subtopology top s:A topology)
       #|  relative_homology_group (p,top:A topology,s)
@@ -37272,12 +37272,12 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x:A. x)
       #|  hom_boundary p (top:A topology,s)
       #|  hom_induced p (top,{}) (top,s) (\\x:A. x)
-      #|  !p top s:A->bool.\n      contractible_space top /\\ ~(topspace top INTER s = {})\n      ==> group_isomorphism (relative_homology_group(p,top,s),\n                             reduced_homology_group(p - &1,subtopology top s))\n                            (hom_boundary p (top,s))
+      #|  forall p top s:A->bool.\n      contractible_space top /\\ ~(topspace top INTER s = {})\n      ==> group_isomorphism (relative_homology_group(p,top,s),\n                             reduced_homology_group(p - &1,subtopology top s))\n                            (hom_boundary p (top,s))
       #|  p:int
-      #|  !p top s:A->bool.\n        contractible_space top /\\ ~(topspace top INTER s = {})\n        ==> relative_homology_group(p,top,s) isomorphic_group\n            reduced_homology_group(p - &1,subtopology top s)
+      #|  forall p top s:A->bool.\n        contractible_space top /\\ ~(topspace top INTER s = {})\n        ==> relative_homology_group(p,top,s) isomorphic_group\n            reduced_homology_group(p - &1,subtopology top s)
       #|  (x + &1) - &1:int = x
       #|  p + &1:int
-      #|  !p top s:A->bool.\n        contractible_space top /\\ ~(topspace top INTER s = {})\n        ==> reduced_homology_group(p,subtopology top s) isomorphic_group\n            relative_homology_group(p + &1,top,s)
+      #|  forall p top s:A->bool.\n        contractible_space top /\\ ~(topspace top INTER s = {})\n        ==> reduced_homology_group(p,subtopology top s) isomorphic_group\n            relative_homology_group(p + &1,top,s)
       #|  reduced_homology_group (p - &1,subtopology top s:A topology)
       #|  relative_homology_group (p,top:A topology,s)
       #|  reduced_homology_group (p,top:A topology)
@@ -37285,12 +37285,12 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_boundary p (top:A topology,s)
       #|  hom_induced p (top,{}) (top,s) (\\x:A. x)
       #|  hom_induced p (subtopology top s,{}) (top,{}) (\\x:A. x)
-      #|  !p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> group_isomorphism (reduced_homology_group(p,top),\n                             relative_homology_group(p,top,s))\n                            (hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> group_isomorphism (reduced_homology_group(p,top),\n                             relative_homology_group(p,top,s))\n                            (hom_induced p (top,{}) (top,s) (\\x. x))
       #|  p:int
-      #|  !p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> reduced_homology_group(p,top) isomorphic_group\n          relative_homology_group(p,top,s)
-      #|  !p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> relative_homology_group(p,top,s) isomorphic_group\n          reduced_homology_group(p,top)
-      #|  !p top a:A.\n        a IN topspace top\n        ==> reduced_homology_group(p,top) isomorphic_group\n            relative_homology_group(p,top,{a})
-      #|  !p top a:A.\n        a IN topspace top\n        ==> relative_homology_group(p,top,{a}) isomorphic_group\n            reduced_homology_group(p,top)
+      #|  forall p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> reduced_homology_group(p,top) isomorphic_group\n          relative_homology_group(p,top,s)
+      #|  forall p top s:A->bool.\n      contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n      ==> relative_homology_group(p,top,s) isomorphic_group\n          reduced_homology_group(p,top)
+      #|  forall p top a:A.\n        a IN topspace top\n        ==> reduced_homology_group(p,top) isomorphic_group\n            relative_homology_group(p,top,{a})
+      #|  forall p top a:A.\n        a IN topspace top\n        ==> relative_homology_group(p,top,{a}) isomorphic_group\n            reduced_homology_group(p,top)
       #|  ~(a = b) ==> {a, b} INTER ({a, b} DIFF {b}) = {a}
       #|  {b:A}
       #|  {b:A}
@@ -37298,26 +37298,26 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology top {a:A,b}
       #|  p:int
       #|  relative_homology_group(p,subtopology top {a,b},{b:A})
-      #|  !p top a b:A.\n        t1_space top /\\ a IN topspace top /\\ b IN topspace top /\\ ~(a = b)\n        ==> reduced_homology_group(p,subtopology top {a,b}) isomorphic_group\n            homology_group(p,subtopology top {a})
-      #|  !p top top' u v (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        IMAGE r u SUBSET v /\\ IMAGE s v SUBSET u /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) (s o r) I\n        ==> group_isomorphisms\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r,\n              hom_induced p (top',v) (top,u) s)
-      #|  !p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphisms\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r,\n              hom_induced p (top',v) (top,u) (\\x. x))
+      #|  forall p top a b:A.\n        t1_space top /\\ a IN topspace top /\\ b IN topspace top /\\ ~(a = b)\n        ==> reduced_homology_group(p,subtopology top {a,b}) isomorphic_group\n            homology_group(p,subtopology top {a})
+      #|  forall p top top' u v (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        IMAGE r u SUBSET v /\\ IMAGE s v SUBSET u /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) (s o r) I\n        ==> group_isomorphisms\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r,\n              hom_induced p (top',v) (top,u) s)
+      #|  forall p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphisms\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r,\n              hom_induced p (top',v) (top,u) (\\x. x))
       #|  p:int
-      #|  !p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphism\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r)
+      #|  forall p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphism\n             (relative_homology_group (p,top,u),\n              relative_homology_group (p,top',v))\n             (hom_induced p (top,u) (top',v) r)
       #|  p:int
-      #|  !p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphism\n             (relative_homology_group (p,top',v),\n              relative_homology_group (p,top,u))\n             (hom_induced p (top',v) (top,u) (\\x. x))
+      #|  forall p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> group_isomorphism\n             (relative_homology_group (p,top',v),\n              relative_homology_group (p,top,u))\n             (hom_induced p (top',v) (top,u) (\\x. x))
       #|  p:int
-      #|  !p top top' u v (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        IMAGE r u SUBSET v /\\ IMAGE s v SUBSET u /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) (s o r) I\n        ==> relative_homology_group (p,top,u) isomorphic_group\n            relative_homology_group (p,top',v)
-      #|  !p top top' (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        homotopic_with (\\h. T) (top,top) (s o r) I\n        ==> homology_group (p,top) isomorphic_group\n            homology_group (p,top')
+      #|  forall p top top' u v (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        IMAGE r u SUBSET v /\\ IMAGE s v SUBSET u /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) (s o r) I\n        ==> relative_homology_group (p,top,u) isomorphic_group\n            relative_homology_group (p,top',v)
+      #|  forall p top top' (r:A->B) s.\n        retraction_maps(top,top') (r,s) /\\\n        homotopic_with (\\h. T) (top,top) (s o r) I\n        ==> homology_group (p,top) isomorphic_group\n            homology_group (p,top')
       #|  p:int
-      #|  !p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> relative_homology_group (p,top,u) isomorphic_group\n            relative_homology_group (p,top',v)
-      #|  !p top top' (r:A->A).\n        retraction_maps(top,top') (r,I) /\\\n        homotopic_with (\\h. T) (top,top) r I\n        ==> homology_group (p,top) isomorphic_group\n            homology_group (p,top')
+      #|  forall p top top' u v (r:A->A).\n        retraction_maps(top,top') (r,I) /\\ v SUBSET u /\\ IMAGE r u SUBSET v /\\\n        homotopic_with (\\h. IMAGE h u SUBSET u) (top,top) r I\n        ==> relative_homology_group (p,top,u) isomorphic_group\n            relative_homology_group (p,top',v)
+      #|  forall p top top' (r:A->A).\n        retraction_maps(top,top') (r,I) /\\\n        homotopic_with (\\h. T) (top,top) r I\n        ==> homology_group (p,top) isomorphic_group\n            homology_group (p,top')
       #|  a:A
       #|  {a:A}
       #|  top:A topology
       #|  &0:int
-      #|  (!top a:A.\n        a IN topspace top\n        ==> homology_group (&0,top) isomorphic_group\n            prod_group integer_group (relative_homology_group(&0,top,{a}))) /\\\n   (!p top a:A.\n        a IN topspace top /\\ ~(p = &0)\n        ==> homology_group (p,top) isomorphic_group\n            relative_homology_group(p,top,{a}))
+      #|  (forall top a:A.\n        a IN topspace top\n        ==> homology_group (&0,top) isomorphic_group\n            prod_group integer_group (relative_homology_group(&0,top,{a}))) /\\\n   (forall p top a:A.\n        a IN topspace top /\\ ~(p = &0)\n        ==> homology_group (p,top) isomorphic_group\n            relative_homology_group(p,top,{a}))
       #|  hom_induced p (top,{}) (subtopology top s,{}) (f:A->A)
-      #|  !p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> group_epimorphism\n             (homology_group(p,subtopology top s),homology_group(p,top))\n             (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> group_epimorphism\n             (homology_group(p,subtopology top s),homology_group(p,top))\n             (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
@@ -37325,7 +37325,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  p:int
       #|  p:int
-      #|  !p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> trivial_homomorphism\n             (homology_group(p,top),relative_homology_group(p,top,s))\n             (hom_induced p (top,{}) (top,s) (\\x. x))
+      #|  forall p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> trivial_homomorphism\n             (homology_group(p,top),relative_homology_group(p,top,s))\n             (hom_induced p (top,{}) (top,s) (\\x. x))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
@@ -37333,31 +37333,31 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  top:A topology
       #|  p:int
       #|  p:int
-      #|  !p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> group_monomorphism\n             (relative_homology_group(p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (hom_boundary p (top,s))
-      #|  !p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> short_exact_sequence\n             (relative_homology_group(p,top,s),\n              homology_group(p - &1,subtopology top s),\n              homology_group(p - &1,top))\n             (hom_boundary p (top,s),\n              hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> group_monomorphism\n             (relative_homology_group(p,top,s),\n              homology_group (p - &1,subtopology top s))\n             (hom_boundary p (top,s))
+      #|  forall p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> short_exact_sequence\n             (relative_homology_group(p,top,s),\n              homology_group(p - &1,subtopology top s),\n              homology_group(p - &1,top))\n             (hom_boundary p (top,s),\n              hom_induced (p - &1) (subtopology top s,{}) (top,{}) (\\x. x))
       #|  hom_induced p (top,{}) (subtopology top s,{}) (f:A->A)
       #|  f:A->A
       #|  (p + &1) - &1:int = p
       #|  p + &1:int
-      #|  !p top s:A->bool.\n     (?f. homotopic_with (\\x. T) (top,top) I f /\\\n          IMAGE f (topspace top) SUBSET s)\n     ==> ?h k. h subgroup_of homology_group (p,subtopology top s) /\\\n               k subgroup_of homology_group (p,subtopology top s) /\\\n               group_isomorphism\n                (prod_group\n                  (subgroup_generated (homology_group(p,subtopology top s)) h)\n                  (subgroup_generated (homology_group(p,subtopology top s)) k),\n                 homology_group(p,subtopology top s))\n                (\\(x,y). group_mul(homology_group(p,subtopology top s)) x y) /\\\n               group_isomorphism\n                (relative_homology_group (p + &1,top,s),\n                 subgroup_generated (homology_group (p,subtopology top s)) h)\n                (hom_boundary (p + &1) (top,s)) /\\\n               group_isomorphism\n                (subgroup_generated (homology_group (p,subtopology top s)) k,\n                 homology_group (p,top))\n                (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
+      #|  forall p top s:A->bool.\n     (?f. homotopic_with (\\x. T) (top,top) I f /\\\n          IMAGE f (topspace top) SUBSET s)\n     ==> ?h k. h subgroup_of homology_group (p,subtopology top s) /\\\n               k subgroup_of homology_group (p,subtopology top s) /\\\n               group_isomorphism\n                (prod_group\n                  (subgroup_generated (homology_group(p,subtopology top s)) h)\n                  (subgroup_generated (homology_group(p,subtopology top s)) k),\n                 homology_group(p,subtopology top s))\n                (\\(x,y). group_mul(homology_group(p,subtopology top s)) x y) /\\\n               group_isomorphism\n                (relative_homology_group (p + &1,top,s),\n                 subgroup_generated (homology_group (p,subtopology top s)) h)\n                (hom_boundary (p + &1) (top,s)) /\\\n               group_isomorphism\n                (subgroup_generated (homology_group (p,subtopology top s)) k,\n                 homology_group (p,top))\n                (hom_induced p (subtopology top s,{}) (top,{}) (\\x. x))
       #|  prod_group\n     (subgroup_generated (homology_group(p,subtopology top s:A topology)) h)\n     (subgroup_generated (homology_group(p,subtopology top s)) k)
       #|  k:(((num->real)->A)frag->bool)->bool
       #|  h:(((num->real)->A)frag->bool)->bool
       #|  p:int
-      #|  !p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> homology_group(p,subtopology top s) isomorphic_group\n            prod_group (homology_group(p,top))\n                       (relative_homology_group(p + &1,top,s))
+      #|  forall p top s:A->bool.\n        (?f. homotopic_with (\\x. T) (top,top) I f /\\\n             IMAGE f (topspace top) SUBSET s)\n        ==> homology_group(p,subtopology top s) isomorphic_group\n            prod_group (homology_group(p,top))\n                       (relative_homology_group(p + &1,top,s))
       #|  (\\x. a):A->A
       #|  a:A
       #|  s:A->bool
       #|  top:A topology
       #|  &0:int
       #|  s SUBSET u ==> u INTER s = s
-      #|  (!top s:A->bool.\n        contractible_space top /\\ s SUBSET topspace top /\\ ~(s = {})\n        ==> homology_group (&0,subtopology top s) isomorphic_group\n            prod_group integer_group (relative_homology_group(&1,top,s))) /\\\n   (!p top s:A->bool.\n        ~(p = &0) /\\\n        contractible_space top /\\ s SUBSET topspace top /\\ ~(s = {})\n        ==> homology_group (p,subtopology top s) isomorphic_group\n            relative_homology_group(p + &1,top,s))
+      #|  (forall top s:A->bool.\n        contractible_space top /\\ s SUBSET topspace top /\\ ~(s = {})\n        ==> homology_group (&0,subtopology top s) isomorphic_group\n            prod_group integer_group (relative_homology_group(&1,top,s))) /\\\n   (forall p top s:A->bool.\n        ~(p = &0) /\\\n        contractible_space top /\\ s SUBSET topspace top /\\ ~(s = {})\n        ==> homology_group (p,subtopology top s) isomorphic_group\n            relative_homology_group(p + &1,top,s))
       #|  s:A->bool
       #|  top:A topology
       #|  p:int
-      #|  !p top s:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n        ==> trivial_group(relative_homology_group(p,top,s))
+      #|  forall p top s:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\ ~(topspace top INTER s = {})\n        ==> trivial_group(relative_homology_group(p,top,s))
       #|  f:A->A
-      #|  !p top s f:A->A.\n        continuous_map (top,subtopology top s) f /\\\n        homotopic_with (\\k. IMAGE k s SUBSET s) (top,top) f I\n        ==> trivial_group (relative_homology_group (p,top,s))
+      #|  forall p top s f:A->A.\n        continuous_map (top,subtopology top s) f /\\\n        homotopic_with (\\k. IMAGE k s SUBSET s) (top,top) f I\n        ==> trivial_group (relative_homology_group (p,top,s))
       #|  t SUBSET s ==> (u INTER s) INTER t = u INTER t
       #|  t SUBSET s ==> s INTER t = t
       #|  relative_homology_group(p - &1,subtopology top (s:A->bool),t)
@@ -37367,9 +37367,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_relboundary p (top,s:A->bool,t)
       #|  hom_induced p (top,t) (top,s) (\\x:A. x)
       #|  hom_induced p (subtopology top s,t) (top,t) (\\x:A. x)
-      #|  !p top s t:A->bool.\n        contractible_space(subtopology top s) /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> group_isomorphism (relative_homology_group(p,top,t),\n                               relative_homology_group(p,top,s))\n                              (hom_induced p (top,t) (top,s) (\\x. x))
+      #|  forall p top s t:A->bool.\n        contractible_space(subtopology top s) /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> group_isomorphism (relative_homology_group(p,top,t),\n                               relative_homology_group(p,top,s))\n                              (hom_induced p (top,t) (top,s) (\\x. x))
       #|  p:int
-      #|  !p top s t:A->bool.\n        contractible_space(subtopology top s) /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> relative_homology_group(p,top,t) isomorphic_group\n            relative_homology_group(p,top,s)
+      #|  forall p top s t:A->bool.\n        contractible_space(subtopology top s) /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> relative_homology_group(p,top,t) isomorphic_group\n            relative_homology_group(p,top,s)
       #|  p:int = q - &1
       #|  q:int = p + &1
       #|  relative_homology_group(p,top,s:A->bool)
@@ -37379,9 +37379,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_induced p (top,t) (top,s) (\\x:A. x)
       #|  hom_induced p (subtopology top s,t) (top,t) (\\x:A. x)
       #|  hom_relboundary (p + &1) (top:A topology,s,t)
-      #|  !p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\\n        t SUBSET s /\\ ~(topspace top INTER s = {})\n        ==> group_isomorphism (relative_homology_group(p,subtopology top s,t),\n                               relative_homology_group(p,top,t))\n                              (hom_induced p\n                                (subtopology top s,t) (top,t) (\\x. x))
+      #|  forall p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\\n        t SUBSET s /\\ ~(topspace top INTER s = {})\n        ==> group_isomorphism (relative_homology_group(p,subtopology top s,t),\n                               relative_homology_group(p,top,t))\n                              (hom_induced p\n                                (subtopology top s,t) (top,t) (\\x. x))
       #|  p:int
-      #|  !p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\\n        t SUBSET s /\\ ~(topspace top INTER s = {})\n        ==> relative_homology_group(p,subtopology top s,t) isomorphic_group\n            relative_homology_group(p,top,t)
+      #|  forall p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top s) /\\\n        t SUBSET s /\\ ~(topspace top INTER s = {})\n        ==> relative_homology_group(p,subtopology top s,t) isomorphic_group\n            relative_homology_group(p,top,t)
       #|  relative_homology_group(p - &1,top,t:A->bool)
       #|  relative_homology_group(p - &1,subtopology top s,t:A->bool)
       #|  relative_homology_group(p,top,s:A->bool)
@@ -37389,19 +37389,19 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_induced (p - &1) (subtopology top s,t) (top,t) (\\x:A. x)
       #|  hom_relboundary p (top:A topology,s,t)
       #|  hom_induced p (top,t) (top,s) (\\x:A. x)
-      #|  !p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> group_isomorphism\n             (relative_homology_group(p,top,s),\n              relative_homology_group(p - &1,subtopology top s,t))\n             (hom_relboundary p (top,s,t))
+      #|  forall p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> group_isomorphism\n             (relative_homology_group(p,top,s),\n              relative_homology_group(p - &1,subtopology top s,t))\n             (hom_relboundary p (top,s,t))
       #|  p:int
-      #|  !p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> relative_homology_group(p,top,s) isomorphic_group\n            relative_homology_group(p - &1,subtopology top s,t)
+      #|  forall p top s t:A->bool.\n        contractible_space top /\\\n        contractible_space(subtopology top t) /\\\n        t SUBSET s /\\ ~(topspace top INTER t = {})\n        ==> relative_homology_group(p,top,s) isomorphic_group\n            relative_homology_group(p - &1,subtopology top s,t)
       #|  relative_homology_group (p + &1,top':B topology,t)
       #|  relative_homology_group (p + &1,top:A topology,s)
       #|  prod_group integer_group\n                  (relative_homology_group (&1,top':B topology,t))
       #|  prod_group integer_group\n                  (relative_homology_group (&1,top:A topology,s))
       #|  p:int = &0
       #|  t:B->bool = {}
-      #|  !(top:A topology) (top':B topology) s t.\n        contractible_space top /\\ contractible_space top' /\\\n        s SUBSET topspace top /\\ t SUBSET topspace top' /\\\n        (s = {} <=> t = {}) /\\\n        (!p. relative_homology_group(p,top,s) isomorphic_group\n             relative_homology_group(p,top',t))\n        ==> !p. homology_group(p,subtopology top s) isomorphic_group\n                homology_group(p,subtopology top' t)
+      #|  forall(top:A topology) (top':B topology) s t.\n        contractible_space top /\\ contractible_space top' /\\\n        s SUBSET topspace top /\\ t SUBSET topspace top' /\\\n        (s = {} <=> t = {}) /\\\n        (forall p. relative_homology_group(p,top,s) isomorphic_group\n             relative_homology_group(p,top',t))\n        ==> forall p. homology_group(p,subtopology top s) isomorphic_group\n                homology_group(p,subtopology top' t)
       #|  (\\i. if i = k then -- &1 else &0):num->real
-      #|  !p n k. k IN 1..n+1\n           ==> group_isomorphism\n                (reduced_homology_group (p,nsphere n),\n                 relative_homology_group (p,nsphere n,{x | x k <= &0}))\n                (hom_induced p (nsphere n,{}) (nsphere n,{x | x k <= &0})\n                               (\\x. x))
-      #|  i SUBSET p /\\ (!x. x IN i ==> h x IN v)\n      ==> IMAGE h p SUBSET u\n          ==> IMAGE h i SUBSET u INTER v
+      #|  forall p n k. k IN 1..n+1\n           ==> group_isomorphism\n                (reduced_homology_group (p,nsphere n),\n                 relative_homology_group (p,nsphere n,{x | x k <= &0}))\n                (hom_induced p (nsphere n,{}) (nsphere n,{x | x k <= &0})\n                               (\\x. x))
+      #|  i SUBSET p /\\ (forall x. x IN i ==> h x IN v)\n      ==> IMAGE h p SUBSET u\n          ==> IMAGE h i SUBSET u INTER v
       #|  (s INTER {x | P x}) INTER {x | P x /\\ Q x} =\n      s INTER {x | P x /\\ Q x}
       #|  t:real
       #|  h:real#(num->real)->(num->real)
@@ -37439,7 +37439,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (x:num->real) k pow 2 = &1
       #|  i:num
       #|  t <= x ==> max x t = x
-      #|  !t x. &0 <= t /\\ t <= &1 /\\ x IN topspace(nsphere n) /\\ --t <= x k\n          ==> h(t,x) = x
+      #|  forall t x. &0 <= t /\\ t <= &1 /\\ x IN topspace(nsphere n) /\\ --t <= x k\n          ==> h(t,x) = x
       #|  h = \\(t,x). let y = max (x k) (--t) in\n                \\i. if i:num = k then y\n                    else sqrt(&1 - y pow 2) / sqrt(&1 - x k pow 2) * x i
       #|  topspace(subtopology (nsphere n) {x | &0 <= x k}) INTER\n     {x:num->real | x k = &0}
       #|  topspace(subtopology (nsphere n) {x | -- &1 / &2 <= x k}) INTER\n     {x:num->real | -- &1 / &2 <= x k /\\ x k <= &0}
@@ -37457,26 +37457,26 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (:num->real)
       #|  nsphere n
       #|  p:int
-      #|  !p n k.\n        group_isomorphism\n         (relative_homology_group\n               (p,subtopology (nsphere n) {x | x k >= &0},{x | x k = &0}),\n          relative_homology_group\n               (p,nsphere n,{x | x k <= &0}))\n         (hom_induced p\n               (subtopology (nsphere n) {x | x k >= &0},{x | x k = &0})\n               (nsphere n,{x | x k <= &0})\n               (\\x. x))
+      #|  forall p n k.\n        group_isomorphism\n         (relative_homology_group\n               (p,subtopology (nsphere n) {x | x k >= &0},{x | x k = &0}),\n          relative_homology_group\n               (p,nsphere n,{x | x k <= &0}))\n         (hom_induced p\n               (subtopology (nsphere n) {x | x k >= &0},{x | x k = &0})\n               (nsphere n,{x | x k <= &0})\n               (\\x. x))
       #|  ~(n + 2 = n + 1)
       #|  (n + 1) + 1 = n + 2
       #|  (\\i. if i = n + 1 then &1 else &0):num->real
       #|  p:int = q - &1
       #|  q:int = p + &1
       #|  nsphere n =\n    subtopology (subtopology (nsphere (n + 1)) {x | x(n+2) >= &0})\n                {x | x(n+2) = &0}
-      #|  !p n. group_isomorphism\n           (relative_homology_group\n                (p + &1,subtopology (nsphere (n + 1)) {x | x(n+2) >= &0},\n                        {x | x(n+2) = &0}),\n            reduced_homology_group(p,nsphere n))\n           (hom_boundary (p + &1)\n                         (subtopology (nsphere (n + 1)) {x | x(n+2) >= &0},\n                         {x | x(n+2) = &0}))
+      #|  forall p n. group_isomorphism\n           (relative_homology_group\n                (p + &1,subtopology (nsphere (n + 1)) {x | x(n+2) >= &0},\n                        {x | x(n+2) = &0}),\n            reduced_homology_group(p,nsphere n))\n           (hom_boundary (p + &1)\n                         (subtopology (nsphere (n + 1)) {x | x(n+2) >= &0},\n                         {x | x(n+2) = &0}))
       #|  (\\i. if i = k then &1 else &0):num->real
-      #|  !p n k. k IN 1..n+1\n           ==> group_isomorphism\n                (reduced_homology_group (p,nsphere n),\n                 relative_homology_group (p,nsphere n,{x | x k >= &0}))\n                (hom_induced p (nsphere n,{}) (nsphere n,{x | x k >= &0})\n                               (\\x. x))
-      #|  (!x. r(r x) = x)\n    ==> (IMAGE r s = t <=> IMAGE r s SUBSET t /\\ IMAGE r t SUBSET s)
+      #|  forall p n k. k IN 1..n+1\n           ==> group_isomorphism\n                (reduced_homology_group (p,nsphere n),\n                 relative_homology_group (p,nsphere n,{x | x k >= &0}))\n                (hom_induced p (nsphere n,{}) (nsphere n,{x | x k >= &0})\n                               (\\x. x))
+      #|  (forall x. r(r x) = x)\n    ==> (IMAGE r s = t <=> IMAGE r s SUBSET t /\\ IMAGE r t SUBSET s)
       #|  r:(num->real)->(num->real)
       #|  hom_induced p (nsphere n,{x | x k <= &0})\n                   (nsphere n,{x | x k >= &0}) r
       #|  hom_induced p (subtopology (nsphere n) {x | x k <= &0},{x | x k = &0})\n       (subtopology (nsphere n) {x | x k >= &0},{x | x k = &0}) r
-      #|  !x:num->real. r(r x) = x
+      #|  forall x:num->real. r(r x) = x
       #|  k:num
       #|  n:num
       #|  r = \\(x:num->real) i. if i = k then --x i else x i
-      #|  !f h. group_isomorphism(G',G) f /\\\n           group_isomorphism(H,H') h /\\ h o g o f = k\n           ==> group_isomorphism(G,H) g\n               ==> group_isomorphism(G',H') k
-      #|  !p n k.\n        group_isomorphism\n         (relative_homology_group\n               (p,subtopology (nsphere n) {x | x k <= &0},{x | x k = &0}),\n          relative_homology_group\n               (p,nsphere n,{x | x k >= &0}))\n         (hom_induced p\n               (subtopology (nsphere n) {x | x k <= &0},{x | x k = &0})\n               (nsphere n,{x | x k >= &0})\n               (\\x. x))
+      #|  forall f h. group_isomorphism(G',G) f /\\\n           group_isomorphism(H,H') h /\\ h o g o f = k\n           ==> group_isomorphism(G,H) g\n               ==> group_isomorphism(G',H') k
+      #|  forall p n k.\n        group_isomorphism\n         (relative_homology_group\n               (p,subtopology (nsphere n) {x | x k <= &0},{x | x k = &0}),\n          relative_homology_group\n               (p,nsphere n,{x | x k >= &0}))\n         (hom_induced p\n               (subtopology (nsphere n) {x | x k <= &0},{x | x k = &0})\n               (nsphere n,{x | x k >= &0})\n               (\\x. x))
       #|  ~(n + 2 = n + 1)
       #|  (n + 1) + 1 = n + 2
       #|  (\\i. if i = n + 1 then &1 else &0):num->real
@@ -37490,13 +37490,13 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (n + 1) + 1 = SUC(n + 1)
       #|  x:num->real
       #|  nsphere n =\n    subtopology (subtopology (nsphere (n + 1)) {x | x(n+2) <= &0})\n                {x | x(n+2) = &0}
-      #|  !p n. group_isomorphism\n           (relative_homology_group\n                (p + &1,subtopology (nsphere (n + 1)) {x | x(n+2) <= &0},\n                        {x | x(n+2) = &0}),\n            reduced_homology_group(p,nsphere n))\n           (hom_boundary (p + &1)\n                         (subtopology (nsphere (n + 1)) {x | x(n+2) <= &0},\n                         {x | x(n+2) = &0}))
+      #|  forall p n. group_isomorphism\n           (relative_homology_group\n                (p + &1,subtopology (nsphere (n + 1)) {x | x(n+2) <= &0},\n                        {x | x(n+2) = &0}),\n            reduced_homology_group(p,nsphere n))\n           (hom_boundary (p + &1)\n                         (subtopology (nsphere (n + 1)) {x | x(n+2) <= &0},\n                         {x | x(n+2) = &0}))
       #|  p ==> q ==> r <=> q ==> p ==> r
-      #|  !G1 G2 (r:A->A) (r':A->A).\n        (?f. group_isomorphism(G1,G2) f /\\\n             !x. x IN group_carrier G1 ==> r'(f x) = f(r x))\n        ==> (!x. x IN group_carrier G1 ==> r x IN group_carrier G1)\n            ==> (?f. group_isomorphism(G2,G1) f /\\\n                     !x. x IN group_carrier G2 ==> r(f x) = f(r' x))
+      #|  forall G1 G2 (r:A->A) (r':A->A).\n        (?f. group_isomorphism(G1,G2) f /\\\n             forall x. x IN group_carrier G1 ==> r'(f x) = f(r x))\n        ==> (forall x. x IN group_carrier G1 ==> r x IN group_carrier G1)\n            ==> (?f. group_isomorphism(G2,G1) f /\\\n                     forall x. x IN group_carrier G2 ==> r(f x) = f(r' x))
       #|  (g:A->A) o (f:A->A)
       #|  g:A->A
       #|  f:A->A
-      #|  !G1 G2 G3 (r:A->A) (r':A->A) (r'':A->A).\n        (?f. group_isomorphism(G1,G2) f /\\\n             !x. x IN group_carrier G1 ==> r'(f x) = f(r x)) /\\\n        (?f. group_isomorphism(G2,G3) f /\\\n             !x. x IN group_carrier G2 ==> r''(f x) = f(r' x))\n        ==> (?f. group_isomorphism(G1,G3) f /\\\n                 !x. x IN group_carrier G1 ==> r''(f x) = f(r x))
+      #|  forall G1 G2 G3 (r:A->A) (r':A->A) (r'':A->A).\n        (?f. group_isomorphism(G1,G2) f /\\\n             forall x. x IN group_carrier G1 ==> r'(f x) = f(r x)) /\\\n        (?f. group_isomorphism(G2,G3) f /\\\n             forall x. x IN group_carrier G2 ==> r''(f x) = f(r' x))\n        ==> (?f. group_isomorphism(G1,G3) f /\\\n                 forall x. x IN group_carrier G1 ==> r''(f x) = f(r x))
       #|  ~(n + 2 = 1)
       #|  hom_induced (p + &1) (nsphere(n + 1),{})\n                        (nsphere (n + 1),{x | x(n + 2) <= &0}) (\\x. x)
       #|  ~(n + 2 = 1)
@@ -37511,9 +37511,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  hom_boundary (p + &1)\n         (subtopology (nsphere (n + 1)) {x | x (n + 2) >= &0},\n          {x | x (n + 2) = &0})
       #|  hom_induced (p + &1)\n                 (subtopology (nsphere (n + 1)) {x | x (n + 2) >= &0},\n                  {x | x (n + 2) = &0})\n                 (subtopology (nsphere (n + 1)) {x | x (n + 2) >= &0},\n                  {x | x (n + 2) = &0}) r
       #|  relative_homology_group(p + &1,\n           subtopology (nsphere (n + 1)) {x | x (n + 2) >= &0},\n           {x | x (n + 2) = &0})
-      #|  !n. continuous_map (nsphere n,nsphere n) r
+      #|  forall n. continuous_map (nsphere n,nsphere n) r
       #|  r = \\(x:num->real) i. if i = 1 then --x i else x i
-      #|  !p n. ?f.\n        group_isomorphism(reduced_homology_group (p,nsphere n),\n                          reduced_homology_group(p + &1,nsphere (n + 1))) f /\\\n        !c. c IN group_carrier(reduced_homology_group(p,nsphere n))\n            ==> hom_induced (p + &1) (nsphere(n + 1),{}) (nsphere(n + 1),{})\n                            (\\x i. if i = 1 then --x i else x i)\n                            (f c) =\n                f (hom_induced p (nsphere n,{}) (nsphere n,{})\n                               (\\x i. if i = 1 then --x i else x i) c)
+      #|  forall p n. ?f.\n        group_isomorphism(reduced_homology_group (p,nsphere n),\n                          reduced_homology_group(p + &1,nsphere (n + 1))) f /\\\n        forall c. c IN group_carrier(reduced_homology_group(p,nsphere n))\n            ==> hom_induced (p + &1) (nsphere(n + 1),{}) (nsphere(n + 1),{})\n                            (\\x i. if i = 1 then --x i else x i)\n                            (f c) =\n                f (hom_induced p (nsphere n,{}) (nsphere n,{})\n                               (\\x i. if i = 1 then --x i else x i) c)
       #|  p:int = &n
       #|  reduced_homology_group (p + &1,nsphere (n + 1))\n    isomorphic_group reduced_homology_group (p,nsphere n)
       #|  p:int
@@ -37540,90 +37540,90 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  subtopology (product_topology (:num) (\\i. euclideanreal))\n                  {(\\i. if i = 1 then &1 else &0),\n                   (\\i. if i = 1 then -- &1 else &0)} =\n      nsphere 0
       #|  p:int
-      #|  (!n. P (&n:int) n) /\\ (!n p. ~(p = &n) ==> Q p n) <=>\n    !n p. (p = &n ==> P p n) /\\ (~(p = &n) ==> Q p n)
-      #|  (!n. reduced_homology_group(&n,nsphere n) isomorphic_group integer_group) /\\\n   (!n p. ~(p = &n) ==> trivial_group(reduced_homology_group(p,nsphere n)))
-      #|  !p n. cyclic_group(reduced_homology_group(p,nsphere n))
-      #|  !p n. trivial_group(reduced_homology_group (p,nsphere n)) <=> ~(p = &n)
+      #|  (forall n. P (&n:int) n) /\\ (forall n p. ~(p = &n) ==> Q p n) <=>\n    forall n p. (p = &n ==> P p n) /\\ (~(p = &n) ==> Q p n)
+      #|  (forall n. reduced_homology_group(&n,nsphere n) isomorphic_group integer_group) /\\\n   (forall n p. ~(p = &n) ==> trivial_group(reduced_homology_group(p,nsphere n)))
+      #|  forall p n. cyclic_group(reduced_homology_group(p,nsphere n))
+      #|  forall p n. trivial_group(reduced_homology_group (p,nsphere n)) <=> ~(p = &n)
       #|  a:num->real
       #|  &n:int
       #|  a:num->real
-      #|  !n. ~(contractible_space(nsphere n))
-      #|  brouwer_degree2 p f =\n    @d. !x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n            ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                group_zpow (reduced_homology_group (&p,nsphere p)) x d
-      #|  !p f g.\n    (!x. x IN topspace(nsphere p) ==> f x = g x)\n    ==> brouwer_degree2 p f = brouwer_degree2 p g
+      #|  forall n. ~(contractible_space(nsphere n))
+      #|  brouwer_degree2 p f =\n    @d. forall x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n            ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                group_zpow (reduced_homology_group (&p,nsphere p)) x d
+      #|  forall p f g.\n    (forall x. x IN topspace(nsphere p) ==> f x = g x)\n    ==> brouwer_degree2 p f = brouwer_degree2 p g
       #|  n:int
       #|  d:int
-      #|  s = t ==> !x. x IN t ==> x IN s
+      #|  s = t ==> forall x. x IN t ==> x IN s
       #|  hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f a
       #|  a:((num->real)->num->real)frag->bool
       #|  p:num
       #|  &p:int
       #|  &0:int
       #|  continuous_map(nsphere p,nsphere p) f
-      #|  !p f x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n            ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                group_zpow (reduced_homology_group (&p,nsphere p))\n                           x (brouwer_degree2 p f)
+      #|  forall p f x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n            ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                group_zpow (reduced_homology_group (&p,nsphere p))\n                           x (brouwer_degree2 p f)
       #|  d:int = &0 ==> (d divides n * a - n * b <=> d divides n \\/ b = a)
       #|  a:((num->real)->num->real)frag->bool
       #|  p:num
       #|  &p:int
-      #|  !p f x d.\n        continuous_map (nsphere p,nsphere p) f /\\\n        x IN group_carrier(reduced_homology_group(&p,nsphere p))\n        ==> (hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n             group_zpow (reduced_homology_group (&p,nsphere p)) x d <=>\n             x = group_id(reduced_homology_group(&p,nsphere p)) \\/\n             brouwer_degree2 p f = d)
+      #|  forall p f x d.\n        continuous_map (nsphere p,nsphere p) f /\\\n        x IN group_carrier(reduced_homology_group(&p,nsphere p))\n        ==> (hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n             group_zpow (reduced_homology_group (&p,nsphere p)) x d <=>\n             x = group_id(reduced_homology_group(&p,nsphere p)) \\/\n             brouwer_degree2 p f = d)
       #|  d:int = &0 ==> d divides b - a ==> a = b
       #|  a:((num->real)->num->real)frag->bool
       #|  a:((num->real)->num->real)frag->bool
       #|  p:num
       #|  &p:int
-      #|  !p f d. continuous_map (nsphere p,nsphere p) f /\\\n           (!x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n                ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                    group_zpow (reduced_homology_group (&p,nsphere p)) x d)\n           ==> brouwer_degree2 p f = d
+      #|  forall p f d. continuous_map (nsphere p,nsphere p) f /\\\n           (forall x. x IN group_carrier(reduced_homology_group(&p,nsphere p))\n                ==> hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f x =\n                    group_zpow (reduced_homology_group (&p,nsphere p)) x d)\n           ==> brouwer_degree2 p f = d
       #|  p:num
       #|  &p:int
       #|  d:int = &0 ==> d divides b - a ==> a = b
       #|  a IN group_carrier(reduced_homology_group (&p,nsphere p))
-      #|  !p f d a.\n        continuous_map (nsphere p,nsphere p) f /\\\n        subgroup_generated (reduced_homology_group (&p,nsphere p)) {a} =\n        reduced_homology_group (&p,nsphere p) /\\\n        hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f a =\n        group_zpow (reduced_homology_group (&p,nsphere p)) a d\n        ==> brouwer_degree2 p f = d
-      #|  !p f g. homotopic_with (\\x. T) (nsphere p,nsphere p) f g\n           ==> brouwer_degree2 p f = brouwer_degree2 p g
-      #|  !p. brouwer_degree2 p (\\x. x) = &1
-      #|  !p f g.\n        continuous_map (nsphere p,nsphere p) f /\\\n        continuous_map (nsphere p,nsphere p) g\n        ==> brouwer_degree2 p (g o f) =\n            brouwer_degree2 p g * brouwer_degree2 p f
-      #|  !p f g. continuous_map (nsphere p,nsphere p) f /\\\n           continuous_map (nsphere p,nsphere p) g /\\\n           homotopic_with (\\x. T) (nsphere p,nsphere p) (f o g) I\n           ==> abs(brouwer_degree2 p f) = &1 /\\\n               abs(brouwer_degree2 p g) = &1 /\\\n               brouwer_degree2 p g = brouwer_degree2 p f
-      #|  !p f g. homeomorphic_maps (nsphere p,nsphere p) (f,g)\n           ==> abs(brouwer_degree2 p f) = &1 /\\\n               abs(brouwer_degree2 p g) = &1 /\\\n               brouwer_degree2 p g = brouwer_degree2 p f
+      #|  forall p f d a.\n        continuous_map (nsphere p,nsphere p) f /\\\n        subgroup_generated (reduced_homology_group (&p,nsphere p)) {a} =\n        reduced_homology_group (&p,nsphere p) /\\\n        hom_induced (&p) (nsphere p,{}) (nsphere p,{}) f a =\n        group_zpow (reduced_homology_group (&p,nsphere p)) a d\n        ==> brouwer_degree2 p f = d
+      #|  forall p f g. homotopic_with (\\x. T) (nsphere p,nsphere p) f g\n           ==> brouwer_degree2 p f = brouwer_degree2 p g
+      #|  forall p. brouwer_degree2 p (\\x. x) = &1
+      #|  forall p f g.\n        continuous_map (nsphere p,nsphere p) f /\\\n        continuous_map (nsphere p,nsphere p) g\n        ==> brouwer_degree2 p (g o f) =\n            brouwer_degree2 p g * brouwer_degree2 p f
+      #|  forall p f g. continuous_map (nsphere p,nsphere p) f /\\\n           continuous_map (nsphere p,nsphere p) g /\\\n           homotopic_with (\\x. T) (nsphere p,nsphere p) (f o g) I\n           ==> abs(brouwer_degree2 p f) = &1 /\\\n               abs(brouwer_degree2 p g) = &1 /\\\n               brouwer_degree2 p g = brouwer_degree2 p f
+      #|  forall p f g. homeomorphic_maps (nsphere p,nsphere p) (f,g)\n           ==> abs(brouwer_degree2 p f) = &1 /\\\n               abs(brouwer_degree2 p g) = &1 /\\\n               brouwer_degree2 p g = brouwer_degree2 p f
       #|  g:(num->real)->(num->real)
       #|  f:(num->real)->(num->real)
       #|  p:num
       #|  g:(num->real)->(num->real)
-      #|  !p f. retraction_map(nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
+      #|  forall p f. retraction_map(nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
       #|  f:(num->real)->(num->real)
       #|  g:(num->real)->(num->real)
       #|  p:num
       #|  g:(num->real)->(num->real)
-      #|  !p f. section_map (nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
-      #|  !p f. homeomorphic_map (nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
+      #|  forall p f. section_map (nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
+      #|  forall p f. homeomorphic_map (nsphere p,nsphere p) f\n         ==> abs(brouwer_degree2 p f) = &1
       #|  subtopology (nsphere p) {a}
       #|  &p:int
       #|  a = group_id(reduced_homology_group(p,top))\n       ==> hom_induced p (top,{}) (top',{}) f a =\n           group_id(reduced_homology_group(p,top'))
       #|  IMAGE (\\x. a) s SUBSET {a}
       #|  hom_induced (&p) (nsphere p,{}) (nsphere p,{}) (\\x. a) =\n    hom_induced (&p) (subtopology (nsphere p) {a},{})\n                     (nsphere p,{}) (\\x. x) o\n    hom_induced (&p) (nsphere p,{})\n                     (subtopology (nsphere p) {a},{}) (\\x. a)
       #|  c:((num->real)->num->real)frag->bool
-      #|  !p f a. homotopic_with (\\x. T) (nsphere p,nsphere p) f (\\x. a)\n           ==> brouwer_degree2 p f = &0
+      #|  forall p f a. homotopic_with (\\x. T) (nsphere p,nsphere p) f (\\x. a)\n           ==> brouwer_degree2 p f = &0
       #|  c = &0 ==> c divides d ==> d = &0
       #|  c:((num->real)->num->real)frag->bool
       #|  c:((num->real)->num->real)frag->bool
       #|  p:num
       #|  &p:int
-      #|  !x:int. x divides &0
+      #|  forall x:int. x divides &0
       #|  d:int
       #|  group_id(relative_homology_group(&p,nsphere p,{})) =\n                group_id(reduced_homology_group(&p,nsphere p))
       #|  a:num->real
       #|  continuous_map(nsphere p,nsphere p) (\\x. a)
-      #|  !p a. brouwer_degree2 p (\\x. a) = &0
-      #|  !p f. continuous_map(nsphere p,nsphere p) f /\\\n         ~(IMAGE f (topspace(nsphere p)) = topspace(nsphere p))\n         ==> brouwer_degree2 p f = &0
+      #|  forall p a. brouwer_degree2 p (\\x. a) = &0
+      #|  forall p f. continuous_map(nsphere p,nsphere p) f /\\\n         ~(IMAGE f (topspace(nsphere p)) = topspace(nsphere p))\n         ==> brouwer_degree2 p f = &0
       #|  group_inv G (group_div G x y) = group_div G y x
       #|  group_mul (homology_group (&0,subtopology (nsphere 0) {p})) d e
       #|  (\\w. p):1->num->real
       #|  group_monomorphism(homology_group(&0,subtopology (nsphere 0) {p}),\n                         homology_group(&0,discrete_topology {one}))\n        (hom_induced (&0) (subtopology (nsphere 0) {p},{})\n                          (discrete_topology {one},{}) (\\x. one))
       #|  e:((num->real)->num->real)frag->bool
       #|  d':((num->real)->num->real)frag->bool
-      #|  P /\\ IMAGE f s = t\n                  ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ IMAGE f s = t\n                  ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  r:(num->real)->num->real
       #|  group_epimorphism(homology_group(&0,subtopology (nsphere 0) {p}),\n                        homology_group(&0,subtopology (nsphere 0) {n}))\n        (hom_induced (&0) (subtopology (nsphere 0) {p},{})\n                          (subtopology (nsphere 0) {n},{}) r)
       #|  d':((num->real)->num->real)frag->bool
       #|  d:((num->real)->num->real)frag->bool
       #|  c:((num->real)->num->real)frag->bool
-      #|  P /\\ IMAGE f s = t /\\ Q\n        ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ IMAGE f s = t /\\ Q\n        ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  {p:num->real,n}
       #|  nsphere 0
       #|  {n:num->real}
@@ -37631,17 +37631,17 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  nsphere 0
       #|  &0:int
       #|  ?d. d IN group_carrier(homology_group(&0,subtopology (nsphere 0) {p})) /\\\n        group_div (homology_group (&0,nsphere 0))\n                  (hom_induced (&0) (subtopology (nsphere 0) {p},{})\n                                    (nsphere 0,{}) (\\x. x) d)\n                  (hom_induced (&0) (subtopology (nsphere 0) {p},{})\n                                    (nsphere 0,{}) r d) = c
-      #|  !x:num->real. r(r x) = x
+      #|  forall x:num->real. r(r x) = x
       #|  r(p:num->real) = n /\\ r n = p
       #|  1
       #|  ~(p:num->real = n)
       #|  (x:real) pow 2 = &1 <=> x = &1 \\/ x = -- &1
-      #|  s = {a,b} <=> !x. x IN s <=> x = a \\/ x = b
+      #|  s = {a,b} <=> forall x. x IN s <=> x = a \\/ x = b
       #|  topspace(nsphere 0) = {p,n}
       #|  n:num->real = \\i. if i = 1 then -- &1 else &0
       #|  p:num->real = \\i. if i = 1 then &1 else &0
       #|  c:((num->real)->num->real)frag->bool
-      #|  !c. c IN group_carrier(reduced_homology_group(&0,nsphere 0))\n                    ==> hom_induced (&0) (nsphere 0,{}) (nsphere 0,{}) r c =\n                        group_inv (homology_group(&0,nsphere 0)) c
+      #|  forall c. c IN group_carrier(reduced_homology_group(&0,nsphere 0))\n                    ==> hom_induced (&0) (nsphere 0,{}) (nsphere 0,{}) r c =\n                        group_inv (homology_group(&0,nsphere 0)) c
       #|  p:num
       #|  &p:int
       #|  p:num
@@ -37649,7 +37649,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  p:num
       #|  p:num
       #|  r = \\(x:num->real) i. if i = 1 then --x i else x i
-      #|  !p. brouwer_degree2 p (\\x i. if i = 1 then --x i else x i) = -- &1
+      #|  forall p. brouwer_degree2 p (\\x i. if i = 1 then --x i else x i) = -- &1
       #|  d * a * d:int = a * d pow 2
       #|  (p /\\ r) /\\ (q /\\ s ==> t) ==> (p ==> q) ==> (r ==> s) ==> t
       #|  group_zpow (relative_homology_group (&n,nsphere n,equator n))\n     (hom_induced (&n) (nsphere n,equator n) (nsphere n,equator n) neg\n        (hom_induced (&n) (nsphere n,equator n) (nsphere n,equator n) f up))\n     (brouwer_degree2 (n - 1) neg)
@@ -37675,7 +37675,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  group_zpow (relative_homology_group(&n,nsphere n,{})) =\n       group_zpow (reduced_homology_group(&n,nsphere n))
       #|  v:((num->real)->num->real)frag->bool
       #|  z IN group_carrier(reduced_homology_group(&n - &1,nsphere(n-1)))
-      #|  P /\\ Q /\\ IMAGE f s = t\n             ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ Q /\\ IMAGE f s = t\n             ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  u:((num->real)->num->real)frag->bool
       #|  \\i. if i = 1 then &1:real else &0
       #|  (equator:num->(num->real)->bool) n
@@ -37731,7 +37731,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  brouwer_degree2 (n - 1) f = a + b /\\ brouwer_degree2 n f = a - b
       #|  b:int
       #|  a:int
-      #|  P /\\ IMAGE f s = t /\\ Q\n      ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ IMAGE f s = t /\\ Q\n      ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  hom_induced (&n) (nsphere n,equator n) (nsphere n,equator n) f up
       #|  ?a b. hom_induced (&n) (nsphere n,equator n) (nsphere n,equator n) f up =\n          group_mul (relative_homology_group(&n,nsphere n,equator n))\n           (group_zpow (relative_homology_group(&n,nsphere n,equator n)) up a)\n           (group_zpow (relative_homology_group(&n,nsphere n,equator n)) un b)
       #|  relative_homology_group(&n,nsphere n,equator n)
@@ -37749,13 +37749,13 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  un = hom_induced (&n) (usphere n,equator n) (nsphere n,equator n)\n                      (\\x. x) zn
       #|  up = hom_induced (&n) (lsphere n,equator n) (nsphere n,equator n)\n                      (\\x. x) zp
       #|  x IN s ==> s = t ==> x IN t
-      #|  P /\\ IMAGE f s = t /\\ Q ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ IMAGE f s = t /\\ Q ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  n + 1
       #|  n:num
       #|  &n:int
       #|  ?vn. vn IN group_carrier(reduced_homology_group(&n,nsphere n)) /\\\n         hom_induced (&n) (nsphere n,{}) (nsphere n,lower n) (\\x. x) vn = wn
       #|  x IN s ==> s = t ==> x IN t
-      #|  P /\\ IMAGE f s = t /\\ Q ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  P /\\ IMAGE f s = t /\\ Q ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  n + 1
       #|  n:num
       #|  &n:int
@@ -37763,18 +37763,18 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  wp IN group_carrier(relative_homology_group(&n,nsphere n,upper n)) /\\\n    wn IN group_carrier(relative_homology_group(&n,nsphere n,lower n))
       #|  wn = hom_induced (&n) (usphere n,equator n) (nsphere n,lower n)\n                           (\\x. x) zn
       #|  wp = hom_induced (&n) (lsphere n,equator n) (nsphere n,upper n)\n                           (\\x. x) zp
-      #|  (!x. x IN s ==> g'(g x) = x)\n        ==> (!y. y IN t ==> g(g' y) = y) /\\\n           IMAGE g s SUBSET t /\\ IMAGE g' t SUBSET s\n        ==> IMAGE g s = t
+      #|  (forall x. x IN s ==> g'(g x) = x)\n        ==> (forall y. y IN t ==> g(g' y) = y) /\\\n           IMAGE g s SUBSET t /\\ IMAGE g' t SUBSET s\n        ==> IMAGE g s = t
       #|  {g z} = IMAGE g {z}
       #|  z:((num->real)->num->real)frag->bool
-      #|  (!g. P g ==> ?x. Q(g x)) ==> (?g. P g) ==> ?y. Q y
+      #|  (forall g. P g ==> ?x. Q(g x)) ==> (?g. P g) ==> ?y. Q y
       #|  1 <= n ==> n - 1 + 2 = n + 1
       #|  n - 1
       #|  &n - &1:int
       #|  ?zn. zn IN group_carrier(relative_homology_group(&n,usphere n,equator n)) /\\\n         hom_boundary (&n) (usphere n,equator n:(num->real)->bool) zn = z /\\\n         subgroup_generated (relative_homology_group(&n,usphere n,equator n))\n                            {zn} =\n         relative_homology_group(&n,usphere n,equator n)
-      #|  (!x. x IN s ==> g'(g x) = x)\n        ==> (!y. y IN t ==> g(g' y) = y) /\\\n           IMAGE g s SUBSET t /\\ IMAGE g' t SUBSET s\n        ==> IMAGE g s = t
+      #|  (forall x. x IN s ==> g'(g x) = x)\n        ==> (forall y. y IN t ==> g(g' y) = y) /\\\n           IMAGE g s SUBSET t /\\ IMAGE g' t SUBSET s\n        ==> IMAGE g s = t
       #|  {g z} = IMAGE g {z}
       #|  z:((num->real)->num->real)frag->bool
-      #|  (!g. P g ==> ?x. Q(g x)) ==> (?g. P g) ==> ?y. Q y
+      #|  (forall g. P g ==> ?x. Q(g x)) ==> (?g. P g) ==> ?y. Q y
       #|  1 <= n ==> n - 1 + 2 = n + 1
       #|  n - 1
       #|  &n - &1:int
@@ -37783,9 +37783,9 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  n - 1
       #|  &n - &1:int
       #|  (--x:real) pow 2 = x pow 2
-      #|  !m. continuous_map(nsphere m,nsphere m) neg
+      #|  forall m. continuous_map(nsphere m,nsphere m) neg
       #|  (--x:real) pow 2 = x pow 2
-      #|  !m x. neg x IN topspace(nsphere m) <=> x IN topspace(nsphere m)
+      #|  forall m x. neg x IN topspace(nsphere m) <=> x IN topspace(nsphere m)
       #|  IMAGE f (topspace(nsphere(n-1))) SUBSET topspace(nsphere(n - 1))
       #|  continuous_map(nsphere(n - 1),nsphere(n - 1)) f
       #|  1 <= n ==> n - 1 + 2 = n + 1
@@ -37801,7 +37801,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  neg = \\(x:num->real) i. --x i
       #|  (x:int == x) (mod b)
       #|  n = 0 \\/ 1 <= n
-      #|  !f n. continuous_map (nsphere n,nsphere n) f /\\\n         (!x. x IN topspace(nsphere n)\n              ==> (f o (\\x i. --x i)) x = ((\\x i. --x i) o f) x) /\\\n         IMAGE f (topspace(nsphere(n - 1))) SUBSET topspace(nsphere(n - 1))\n         ==> (brouwer_degree2 n f == brouwer_degree2 (n - 1) f) (mod &2)
+      #|  forall f n. continuous_map (nsphere n,nsphere n) f /\\\n         (forall x. x IN topspace(nsphere n)\n              ==> (f o (\\x i. --x i)) x = ((\\x i. --x i) o f) x) /\\\n         IMAGE f (topspace(nsphere(n - 1))) SUBSET topspace(nsphere(n - 1))\n         ==> (brouwer_degree2 n f == brouwer_degree2 (n - 1) f) (mod &2)
       #|  (\\i. if i = n + 1 then -- &1 else &0)
       #|  p /\\ p /\\ q <=> p /\\ q
       #|  k = n + 1
@@ -37809,7 +37809,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  --x < (if p then &0 else &1) <=> x > (if p then &0 else -- &1)
       #|  --x > (if p then &0 else -- &1) <=> x < (if p then &0 else &1)
       #|  ~(n + 1 <= n)
-      #|  !(x:num->real) a. (\\i. if i = n + 1 then a else x i) IN s <=> x IN s
+      #|  forall(x:num->real) a. (\\i. if i = n + 1 then a else x i) IN s <=> x IN s
       #|  (if i = n then x n else x i) = x i
       #|  (if p then --x:real else y) = &0 <=> (if p then x else y) = &0
       #|  \\(x:num->real) i. if i = n + 1 then --(x i) else x i
@@ -37904,17 +37904,17 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  k = n + 1
       #|  k:num
       #|  (\\(z,x). ret ((&1 - z) * t + z * x(n+1)) x)\n       :real#(num->real)->num->real
-      #|  !u v t. squashable t u /\\ squashable (t:real) v\n          ==> homotopic_with (\\k. IMAGE k v SUBSET v)\n                             (subtopology (euclidean_space (n + 1)) u,\n                              subtopology (euclidean_space (n + 1)) u)\n                             (ret t) I
+      #|  forall u v t. squashable t u /\\ squashable (t:real) v\n          ==> homotopic_with (\\k. IMAGE k v SUBSET v)\n                             (subtopology (euclidean_space (n + 1)) u,\n                              subtopology (euclidean_space (n + 1)) u)\n                             (ret t) I
       #|  t:real
       #|  x:num->real
       #|  x:num->real
-      #|  !u t. squashable t u\n          ==> retraction_maps\n              (subtopology (euclidean_space (n + 1)) u,\n               subtopology (euclidean_space (n + 1))\n                           {x | x IN u /\\ x(n+1) = t})\n              (ret t,I)
+      #|  forall u t. squashable t u\n          ==> retraction_maps\n              (subtopology (euclidean_space (n + 1)) u,\n               subtopology (euclidean_space (n + 1))\n                           {x | x IN u /\\ x(n+1) = t})\n              (ret t,I)
       #|  1 <= n + 1
-      #|  !t:real. squashable t (topspace(euclidean_space(n + 1))):bool
-      #|  squashable =\n      \\t s. !x t'. x IN s /\\\n                   (x(n+1):real <= t' /\\ t' <= t \\/ t <= t' /\\ t' <= x(n+1))\n                   ==> ret t' x IN s
+      #|  forall t:real. squashable t (topspace(euclidean_space(n + 1))):bool
+      #|  squashable =\n      \\t s. forall x t'. x IN s /\\\n                   (x(n+1):real <= t' /\\ t' <= t \\/ t <= t' /\\ t' <= x(n+1))\n                   ==> ret t' x IN s
       #|  k = n + 1
       #|  k:num
-      #|  !t:real. continuous_map (product_topology (:num) (\\i. euclideanreal),\n                             product_topology (:num) (\\i. euclideanreal))\n                            (ret t)
+      #|  forall t:real. continuous_map (product_topology (:num) (\\i. euclideanreal),\n                             product_topology (:num) (\\i. euclideanreal))\n                            (ret t)
       #|  ret = \\c (x:num->real) i. if i = n + 1 then c else x i
       #|  (x:num->real) IN s
       #|  x IN topspace(euclidean_space (n + 1))
@@ -37934,7 +37934,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  i:num
       #|  x:num->real
       #|  ~(1 <= i /\\ i <= n + 1) ==> ~(1 <= i /\\ i <= n)
-      #|  (!x. x IN u ==> (x IN s <=> x IN t))\n        ==> u DIFF s = u DIFF t
+      #|  (forall x. x IN u ==> (x IN s <=> x IN t))\n        ==> u DIFF s = u DIFF t
       #|  1 <= n + 1
       #|  k:num <= n
       #|  k:num
@@ -37954,21 +37954,21 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  closed_in (euclidean_space n) s
       #|  closed_in (euclidean_space (m + n)) s
       #|  m:num
-      #|  !p n s.\n        closed_in (euclidean_space (n + 1)) s /\\\n        (!x y. (!i. ~(i = n + 1) ==> x i = y i) /\\ x IN s ==> y IN s)\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p + &1,euclidean_space (n+1),\n              topspace(euclidean_space (n+1)) DIFF\n              {x | x IN s /\\ x(n + 1) = &0})
-      #|  !p n k s.\n        closed_in (euclidean_space n) s\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p + &k,euclidean_space (n+k),\n                     topspace(euclidean_space (n+k)) DIFF s)
+      #|  forall p n s.\n        closed_in (euclidean_space (n + 1)) s /\\\n        (forall x y. (forall i. ~(i = n + 1) ==> x i = y i) /\\ x IN s ==> y IN s)\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p + &1,euclidean_space (n+1),\n              topspace(euclidean_space (n+1)) DIFF\n              {x | x IN s /\\ x(n + 1) = &0})
+      #|  forall p n k s.\n        closed_in (euclidean_space n) s\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p + &k,euclidean_space (n+k),\n                     topspace(euclidean_space (n+k)) DIFF s)
       #|  i IN 1..n
       #|  i:num
       #|  i IN 1..n
       #|  i:num
-      #|  IMAGE f s SUBSET P <=> !x. x IN s ==> P(f x)
+      #|  IMAGE f s SUBSET P <=> forall x. x IN s ==> P(f x)
       #|  n:num
       #|  continuous_map(subtopology (euclidean_space m) s,\n                                  euclidean_space n) f
       #|  \\x i. if i IN 1..n then (g:num->(num->real)->real) i x else &0
       #|  g:num->(num->real)->real
       #|  continuous_map(subtopology (euclidean_space m) s,\n                                  euclidean_space n) f
       #|  euclidean_space m
-      #|  !i:num. ?g. continuous_map(euclidean_space m,euclideanreal) g /\\\n                  !x. x IN s ==> g x = f x i
-      #|  !f s m n.\n          closed_in (euclidean_space m) s /\\\n          continuous_map(subtopology (euclidean_space m) s,euclidean_space n) f\n          ==> ?g. continuous_map(euclidean_space m,euclidean_space n) g /\\\n                  !x. x IN s ==> g x = f x
+      #|  forall i:num. ?g. continuous_map(euclidean_space m,euclideanreal) g /\\\n                  forall x. x IN s ==> g x = f x i
+      #|  forall f s m n.\n          closed_in (euclidean_space m) s /\\\n          continuous_map(subtopology (euclidean_space m) s,euclidean_space n) f\n          ==> ?g. continuous_map(euclidean_space m,euclidean_space n) g /\\\n                  forall x. x IN s ==> g x = f x
       #|  s SUBSET t ==> t INTER s = s
       #|  (p':(num->real)#(num->real)->(num->real)#(num->real)) o (\\(x,y). y,x) o\n       (q:(num->real)#(num->real)->(num->real)#(num->real))
       #|  (q':(num->real)#(num->real)->(num->real)#(num->real)) o (\\(x,y). y,x) o\n       (p:(num->real)#(num->real)->(num->real)#(num->real))
@@ -37991,7 +37991,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  f:(num->real)->(num->real)
       #|  g:(num->real)->(num->real)
       #|  s SUBSET t ==> t INTER s = s
-      #|  !f s t m n.\n        closed_in (euclidean_space m) s /\\ closed_in (euclidean_space n) t /\\\n        homeomorphic_map\n        (subtopology (euclidean_space m) s,subtopology (euclidean_space n) t) f\n        ==> ?g. homeomorphic_map(prod_topology (euclidean_space m)\n                                               (euclidean_space n),\n                                 prod_topology (euclidean_space n)\n                                               (euclidean_space m)) g /\\\n                !a. a IN s ==> g(a,(\\i. &0)) = (f a,(\\i. &0))
+      #|  forall f s t m n.\n        closed_in (euclidean_space m) s /\\ closed_in (euclidean_space n) t /\\\n        homeomorphic_map\n        (subtopology (euclidean_space m) s,subtopology (euclidean_space n) t) f\n        ==> ?g. homeomorphic_map(prod_topology (euclidean_space m)\n                                               (euclidean_space n),\n                                 prod_topology (euclidean_space n)\n                                               (euclidean_space m)) g /\\\n                forall a. a IN s ==> g(a,(\\i. &0)) = (f a,(\\i. &0))
       #|  &0 = x <=> x = &0
       #|  f (x:num->real) IN topspace(euclidean_space n)
       #|  (x:num->real) IN topspace(euclidean_space n)
@@ -38000,12 +38000,12 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  i <= n ==> i <= 2 * n
       #|  f (x:num->real) IN topspace(euclidean_space n)
       #|  x:num->real
-      #|  (!x. x IN s ==> k(h(f x)) = f x) /\\\n        (!x. x IN s ==> g(h x) = h(f x))\n        ==> !x. x IN s ==> k(g(h x)) = f x
+      #|  (forall x. x IN s ==> k(h(f x)) = f x) /\\\n        (forall x. x IN s ==> g(h x) = h(f x))\n        ==> forall x. x IN s ==> k(g(h x)) = f x
       #|  t = IMAGE (f:(num->real)->num->real) s
       #|  i <= n ==> i <= 2 * n
       #|  closed_in (euclidean_space n) t
       #|  closed_in (euclidean_space n) s
-      #|  s SUBSET u /\\ t SUBSET u /\\ IMAGE g u = u /\\\n      (!x y. x IN u /\\ y IN u /\\ g x = g y ==> x = y) /\\\n      IMAGE g s = t\n      ==> IMAGE g (u DIFF s) = u DIFF t
+      #|  s SUBSET u /\\ t SUBSET u /\\ IMAGE g u = u /\\\n      (forall x y. x IN u /\\ y IN u /\\ g x = g y ==> x = y) /\\\n      IMAGE g s = t\n      ==> IMAGE g (u DIFF s) = u DIFF t
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  hom_induced (p + &n)\n      (euclidean_space(2 * n),topspace(euclidean_space(2 * n)) DIFF s)\n      (euclidean_space(2 * n),topspace(euclidean_space(2 * n)) DIFF t)\n      g'
       #|  g' = (k:(num->real)#(num->real)->num->real) o g o\n         (h:(num->real)->(num->real)#(num->real))
@@ -38031,15 +38031,15 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  n:num
       #|  n:num
       #|  p:int
-      #|  !p n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF t)
+      #|  forall p n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF s)\n            isomorphic_group\n            relative_homology_group\n             (p,euclidean_space n,topspace(euclidean_space n) DIFF t)
       #|  &0 <= x /\\ x <= &1 <=> x = &0 \\/ x = &1 \\/ &0 < x /\\ x < &1
       #|  t SUBSET u ==> u INTER t = t
       #|  (\\t i. (&1 - t) * a i + t * b i):real->num->real
       #|  b:num->real
-      #|  !x. x IN t ==> path_component_of (subtopology (euclidean_space n) t) a x
+      #|  forall x. x IN t ==> path_component_of (subtopology (euclidean_space n) t) a x
       #|  a:num->real
       #|  t SUBSET topspace(euclidean_space n)
-      #|  !n s t:(num->real)->bool.\n          s SUBSET t /\\ ~(s = {}) /\\ t SUBSET topspace(euclidean_space n) /\\\n          (!a b u. a IN s /\\ b IN t /\\ &0 < u /\\ u < &1\n                   ==> (\\i. (&1 - u) * a i + u * b i) IN s)\n          ==> path_connected_in (euclidean_space n) t
+      #|  forall n s t:(num->real)->bool.\n          s SUBSET t /\\ ~(s = {}) /\\ t SUBSET topspace(euclidean_space n) /\\\n          (forall a b u. a IN s /\\ b IN t /\\ &0 < u /\\ u < &1\n                   ==> (\\i. (&1 - u) * a i + u * b i) IN s)\n          ==> path_connected_in (euclidean_space n) t
       #|  &0 < a /\\ &0 <= b ==> &0 < a + b
       #|  (\\i. if i = n + 1 then &1 else &0):num->real
       #|  &0 < a /\\ &0 <= b ==> &0 < a + b
@@ -38051,8 +38051,8 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  1 <= i /\\ i <= n + 1 <=> 1 <= i /\\ i <= n \\/ i = n + 1
       #|  topspace(euclidean_space(n + 1)) INTER {x | x(n+1) = &0} =\n      topspace(euclidean_space n)
       #|  (s INTER {x | P x}) INTER (s INTER {x | Q x}) =\n      s INTER {x | P x /\\ Q x}
-      #|  (!x. P x \\/ Q x)\n        ==> t = t INTER {x | P x} UNION t INTER {x | Q x}
-      #|  !t. t = t INTER {x:num->real | x(n+1) <= &0} UNION\n              t INTER {x:num->real | x(n+1) >= &0}
+      #|  (forall x. P x \\/ Q x)\n        ==> t = t INTER {x | P x} UNION t INTER {x | Q x}
+      #|  forall t. t = t INTER {x:num->real | x(n+1) <= &0} UNION\n              t INTER {x:num->real | x(n+1) >= &0}
       #|  u INTER (u DIFF s) = u DIFF s
       #|  i <= n + 1 <=> i = n + 1 \\/ i <= n
       #|  &0:real
@@ -38074,19 +38074,19 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  subtopology (euclidean_space(n + 1)) (topspace(euclidean_space n)) =\n     euclidean_space n
       #|  closed_in (euclidean_space (n + 1)) (topspace(euclidean_space n))
       #|  a:num->real
-      #|  s SUBSET t /\\ (!x. ~(~(x IN s) /\\ x IN t)) ==> s = t
-      #|  !n s. closed_in (euclidean_space n) s\n         ==> (subtopology (euclidean_space n) s homeomorphic_space\n              euclidean_space n <=>\n              s = topspace(euclidean_space n))
+      #|  s SUBSET t /\\ (forall x. ~(~(x IN s) /\\ x IN t)) ==> s = t
+      #|  forall n s. closed_in (euclidean_space n) s\n         ==> (subtopology (euclidean_space n) s homeomorphic_space\n              euclidean_space n <=>\n              s = topspace(euclidean_space n))
       #|  s SUBSET u ==> (u DIFF s = {} <=> s = u)
-      #|  !p n s t.\n      closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n      (subtopology (euclidean_space n) s) homeomorphic_space\n      (subtopology (euclidean_space n) t)\n      ==> homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF s))\n          isomorphic_group\n          homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF t))
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF s) <=>\n             path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF t))
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> connected_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            connected_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (connected_in (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s) <=>\n             connected_in (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
+      #|  forall p n s t.\n      closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n      (subtopology (euclidean_space n) s) homeomorphic_space\n      (subtopology (euclidean_space n) t)\n      ==> homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF s))\n          isomorphic_group\n          homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF s) <=>\n             path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> connected_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            connected_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\\n        closed_in (euclidean_space n) t /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (connected_in (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s) <=>\n             connected_in (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
       #|  s = t INTER s <=> s SUBSET t
       #|  euclidean_space m =\n    subtopology (euclidean_space n) (topspace(euclidean_space m))
       #|  n:num
       #|  m:num
-      #|  !m n. euclidean_space m homeomorphic_space euclidean_space n <=> m = n
+      #|  forall m n. euclidean_space m homeomorphic_space euclidean_space n <=> m = n
       #|  s SUBSET t /\\ ~(s = t) ==> ~(t DIFF s = {})
       #|  topspace(euclidean_space n) DIFF t
       #|  euclidean_space n
@@ -38102,23 +38102,23 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  topspace(euclidean_space n) DIFF s
       #|  euclidean_space n
       #|  p:int = &0
-      #|  !p n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> homology_group(p,subtopology (euclidean_space n)\n                                         (topspace(euclidean_space n) DIFF s))\n            isomorphic_group\n            homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF t))
+      #|  forall p n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> homology_group(p,subtopology (euclidean_space n)\n                                         (topspace(euclidean_space n) DIFF s))\n            isomorphic_group\n            homology_group(p,subtopology (euclidean_space n)\n                                       (topspace(euclidean_space n) DIFF t))
       #|  subtopology (euclidean_space n) (topspace (euclidean_space n) DIFF t)
       #|  subtopology (euclidean_space n) (topspace (euclidean_space n) DIFF s)
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
-      #|  !n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF s) <=>\n             path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF s)) =_c\n            path_components_of\n             (subtopology (euclidean_space n)\n                          (topspace(euclidean_space n) DIFF t))
+      #|  forall n s t.\n        closed_in (euclidean_space n) s /\\ closed_in (euclidean_space n) t /\\\n        ~(s = topspace(euclidean_space n)) /\\\n        ~(t = topspace(euclidean_space n)) /\\\n        (subtopology (euclidean_space n) s) homeomorphic_space\n        (subtopology (euclidean_space n) t)\n        ==> (path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF s) <=>\n             path_connected_in (euclidean_space n)\n                               (topspace(euclidean_space n) DIFF t))
       #|  compact_in (euclidean_space n)
       #|  IMAGE (h:(num->real)->(num->real)) s SUBSET topspace(euclidean_space n)
       #|  h:(num->real)->(num->real)
       #|  q /\\ (q ==> p) ==> p /\\ q
-      #|  !n h s.\n        ~(n = 0) /\\\n        compact_in (euclidean_space n) s /\\\n        continuous_map\n         (subtopology (euclidean_space n) s,euclidean_space n) h /\\\n        (!x y. x IN s /\\ y IN s ==> (h x = h y <=> x = y))\n        ==> (path_connected_in (euclidean_space n)\n              (topspace(euclidean_space n) DIFF IMAGE h s) <=>\n             path_connected_in (euclidean_space n)\n              (topspace(euclidean_space n) DIFF s))
+      #|  forall n h s.\n        ~(n = 0) /\\\n        compact_in (euclidean_space n) s /\\\n        continuous_map\n         (subtopology (euclidean_space n) s,euclidean_space n) h /\\\n        (forall x y. x IN s /\\ y IN s ==> (h x = h y <=> x = y))\n        ==> (path_connected_in (euclidean_space n)\n              (topspace(euclidean_space n) DIFF IMAGE h s) <=>\n             path_connected_in (euclidean_space n)\n              (topspace(euclidean_space n) DIFF s))
       #|  c:A->bool = c'
       #|  p ==> ~p ==> q
       #|  d':A->bool
       #|  c':A->bool = d'
       #|  d':A->bool
       #|  c':A->bool
-      #|  !u c d:A->bool.\n          (?t. t IN u /\\ c SUBSET t) /\\\n          (?t. t IN u /\\ d SUBSET t) /\\\n          UNIONS u = c UNION d /\\\n          (!t. t IN u ==> ~(t = {})) /\\\n          pairwise DISJOINT u /\\\n          ~(?t. u SUBSET {t})\n          ==> c IN u
+      #|  forall u c d:A->bool.\n          (?t. t IN u /\\ c SUBSET t) /\\\n          (?t. t IN u /\\ d SUBSET t) /\\\n          UNIONS u = c UNION d /\\\n          (forall t. t IN u ==> ~(t = {})) /\\\n          pairwise DISJOINT u /\\\n          ~(?t. u SUBSET {t})\n          ==> c IN u
       #|  r:real
       #|  i:num
       #|  ~(r + &1 = r)
@@ -38151,7 +38151,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  (\\i. if i = 2 then d else &0):num->real
       #|  (\\i. if i = 1 then d else &0):num->real
       #|  neg:(num->real)->(num->real)
-      #|  !n. (!x. n(n x) = x) /\\\n          (?a b. a IN topspace top /\\ b IN topspace top /\\\n                 ~(a = b) /\\ ~(n a = b)) /\\\n          (!x y. x IN topspace top /\\ y IN topspace top /\\ ~(x = n y)\n                 ==> path_component_of top x y)\n          ==> !x y. x IN topspace top /\\ y IN topspace top\n                    ==> path_component_of top x y
+      #|  forall n. (forall x. n(n x) = x) /\\\n          (?a b. a IN topspace top /\\ b IN topspace top /\\\n                 ~(a = b) /\\ ~(n a = b)) /\\\n          (forall x y. x IN topspace top /\\ y IN topspace top /\\ ~(x = n y)\n                 ==> path_component_of top x y)\n          ==> forall x y. x IN topspace top /\\ y IN topspace top\n                    ==> path_component_of top x y
       #|  \\/
       #|  \\/
       #|  \\/
@@ -38259,7 +38259,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  ~
       #|  \\/
       #|  F
-      #|  !x. (neg:(num->real)->(num->real)) (neg x) = x
+      #|  forall x. (neg:(num->real)->(num->real)) (neg x) = x
       #|  neg:(num->real)->(num->real) = mul (-- &1:real)
       #|  &0 < d
       #|  (S:real->(num->real)->bool) d = {zero}
@@ -38291,20 +38291,20 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  d:real
       #|  enorm:(num->real)->real
-      #|  !f:A->real.\n          (!m n x y. f x = m /\\ f y = n /\\\n                     x IN topspace top /\\ y IN topspace top\n                     ==> path_component_of top x y)\n          ==> path_connected_space top
+      #|  forall f:A->real.\n          (forall m n x y. f x = m /\\ f y = n /\\\n                     x IN topspace top /\\ y IN topspace top\n                     ==> path_component_of top x y)\n          ==> path_connected_space top
       #|  t:real->bool
       #|  {x:real | P x}
       #|  {x | x IN s /\\ P(f x)} = {x | x IN s /\\ f x IN {y | P y}}
       #|  P:real->bool
-      #|  !r:real. &0 <= r ==> path_connected_in (euclidean_space n) (S r)
-      #|  !(a:real) x. x IN topspace(euclidean_space n)\n                   ==> mul a x IN topspace(euclidean_space n)
-      #|  !a x:num->real. enorm(mul a x) = abs a * enorm x
+      #|  forall r:real. &0 <= r ==> path_connected_in (euclidean_space n) (S r)
+      #|  forall(a:real) x. x IN topspace(euclidean_space n)\n                   ==> mul a x IN topspace(euclidean_space n)
+      #|  forall a x:num->real. enorm(mul a x) = abs a * enorm x
       #|  mul = \\a (x:num->real) i. a * x i
       #|  abs(x) <= y ==> y = &0 ==> x = &0
       #|  i:num
       #|  x:num->real
-      #|  !x. x IN topspace(euclidean_space n)\n          ==> (enorm x = &0 <=> x = zero)
-      #|  !P. is_realinterval {x | P x}\n        ==> path_connected_in (euclidean_space n)\n                           {x | x IN topspace(euclidean_space n) /\\ P(enorm x)}
+      #|  forall x. x IN topspace(euclidean_space n)\n          ==> (enorm x = &0 <=> x = zero)
+      #|  forall P. is_realinterval {x | P x}\n        ==> path_connected_in (euclidean_space n)\n                           {x | x IN topspace(euclidean_space n) /\\ P(enorm x)}
       #|  subtopology (euclidean_space n) (C(r:real))
       #|  compact_in (euclidean_space n)
       #|  s SUBSET u /\\ ~(s = u) ==> ~(u INTER (u DIFF s) = {})
@@ -38322,10 +38322,10 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  i:num
       #|  x:num->real
       #|  cartesian_product (:num) (\\i. real_interval[--(abs r),abs r])
-      #|  (!r:real. compact_in (euclidean_space n) (C r)) /\\\n    (!r:real. compact_in (euclidean_space n) (S r))
+      #|  (forall r:real. compact_in (euclidean_space n) (C r)) /\\\n    (forall r:real. compact_in (euclidean_space n) (S r))
       #|  euclideanreal
       #|  {x | P x /\\ R (f x) z} =\n                               {x | P x /\\ f x IN {y | R y z}}
-      #|  (!r:real. closed_in (euclidean_space n) (C r)) /\\\n    (!r:real. closed_in (euclidean_space n) (S r))
+      #|  (forall r:real. closed_in (euclidean_space n) (C r)) /\\\n    (forall r:real. closed_in (euclidean_space n) (S r))
       #|  x IN (B:real->(num->real)->bool) r
       #|  x:num->real
       #|  x:num->real
@@ -38361,7 +38361,7 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  y IN topspace(euclidean_space n)
       #|  x IN topspace(euclidean_space n)
       #|  y:num->real
-      #|  !y:num->real. y IN C(r / &2) ==> (\\i. x i + y i) IN u
+      #|  forall y:num->real. y IN C(r / &2) ==> (\\i. x i + y i) IN u
       #|  i:num
       #|  y IN topspace(euclidean_space n)
       #|  x IN topspace(euclidean_space n)
@@ -38378,22 +38378,22 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  x:num->real
       #|  v:(num->real)->bool
       #|  open_in (euclidean_space n) u
-      #|  ?r. &0 < r /\\\n          !y. y IN topspace(euclidean_space n) /\\\n              (!i. 1 <= i /\\ i <= n ==> abs(y i - x i) < r)\n              ==> y IN u
+      #|  ?r. &0 < r /\\\n          forall y. y IN topspace(euclidean_space n) /\\\n              (forall i. 1 <= i /\\ i <= n ==> abs(y i - x i) < r)\n              ==> y IN u
       #|  x IN topspace(euclidean_space n)
       #|  x:num->real
       #|  f:(num->real)->(num->real)
       #|  u:(num->real)->bool
-      #|  !r f. &0 < r /\\\n           continuous_map(subtopology (euclidean_space n) (C r),\n                          euclidean_space n) f /\\\n           (!x y. x IN C r /\\ y IN C r /\\ f x = f y ==> x = y)\n           ==> open_in (euclidean_space n) (IMAGE f (B r))
+      #|  forall r f. &0 < r /\\\n           continuous_map(subtopology (euclidean_space n) (C r),\n                          euclidean_space n) f /\\\n           (forall x y. x IN C r /\\ y IN C r /\\ f x = f y ==> x = y)\n           ==> open_in (euclidean_space n) (IMAGE f (B r))
       #|  x IN topspace(euclidean_space n)
       #|  x:num->real
       #|  r:real
-      #|  (!r. (B:real->(num->real)->bool) r SUBSET C r) /\\\n    (!r. S r SUBSET C r) /\\\n    (!r. DISJOINT (S r) (B r)) /\\\n    (!r. B r UNION S r = C r)
+      #|  (forall r. (B:real->(num->real)->bool) r SUBSET C r) /\\\n    (forall r. S r SUBSET C r) /\\\n    (forall r. DISJOINT (S r) (B r)) /\\\n    (forall r. B r UNION S r = C r)
       #|  S = \\r:real. {x | x IN topspace(euclidean_space n) /\\ enorm x = r}
       #|  C = \\r:real. {x | x IN topspace(euclidean_space n) /\\ enorm x <= r}
       #|  B = \\r:real. {x | x IN topspace(euclidean_space n) /\\ enorm x < r}
       #|  sqrt(sum {i:num} (\\i. x i pow 2))
-      #|  !(x:num->real) i. 1 <= i /\\ i <= n ==> abs(x i) <= enorm x
-      #|  !x. &0 <= (enorm:(num->real)->real) x
+      #|  forall(x:num->real) i. 1 <= i /\\ i <= n ==> abs(x i) <= enorm x
+      #|  forall x. &0 <= (enorm:(num->real)->real) x
       #|  continuous_map(euclidean_space n,euclideanreal) enorm
       #|  (enorm:(num->real)->real) zero = &0
       #|  zero IN topspace(euclidean_space n)
@@ -38401,15 +38401,15 @@ test "Multivariate/homology matches Multivariate/homology.ml" {
       #|  enorm = \\x. sqrt(sum(1..n) (\\i. x i pow 2))
       #|  euclidean_space 0 = discrete_topology {\\i. &0}
       #|  n = 0
-      #|  !n u f.\n      open_in (euclidean_space n) u /\\\n      continuous_map(subtopology (euclidean_space n) u,euclidean_space n) f /\\\n      (!x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> open_in (euclidean_space n) (IMAGE f u)
+      #|  forall n u f.\n      open_in (euclidean_space n) u /\\\n      continuous_map(subtopology (euclidean_space n) u,euclidean_space n) f /\\\n      (forall x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> open_in (euclidean_space n) (IMAGE f u)
       #|  v:(num->real)->bool
-      #|  !n u f.\n     open_in (euclidean_space n) u /\\\n     continuous_map(subtopology (euclidean_space n) u,euclidean_space n) f /\\\n     (!x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n     ==> embedding_map(subtopology (euclidean_space n) u,euclidean_space n) f
+      #|  forall n u f.\n     open_in (euclidean_space n) u /\\\n     continuous_map(subtopology (euclidean_space n) u,euclidean_space n) f /\\\n     (forall x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n     ==> embedding_map(subtopology (euclidean_space n) u,euclidean_space n) f
       #|  n = m INTER n <=> n SUBSET m
       #|  euclidean_space n = subtopology (euclidean_space m)\n                                    (topspace(euclidean_space n))
-      #|  !m n u f.\n      n <= m /\\\n      open_in (euclidean_space m) u /\\\n      continuous_map(subtopology (euclidean_space m) u,euclidean_space n) f /\\\n      (!x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> open_in (euclidean_space n) (IMAGE f u)
+      #|  forall m n u f.\n      n <= m /\\\n      open_in (euclidean_space m) u /\\\n      continuous_map(subtopology (euclidean_space m) u,euclidean_space n) f /\\\n      (forall x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> open_in (euclidean_space n) (IMAGE f u)
       #|  m:num
       #|  v:(num->real)->bool
-      #|  !m n u f.\n      n <= m /\\\n      open_in (euclidean_space m) u /\\\n      continuous_map(subtopology (euclidean_space m) u,euclidean_space n) f /\\\n      (!x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> embedding_map(subtopology (euclidean_space m) u,euclidean_space n) f
+      #|  forall m n u f.\n      n <= m /\\\n      open_in (euclidean_space m) u /\\\n      continuous_map(subtopology (euclidean_space m) u,euclidean_space n) f /\\\n      (forall x y. x IN u /\\ y IN u /\\ f x = f y ==> x = y)\n      ==> embedding_map(subtopology (euclidean_space m) u,euclidean_space n) f
       #|standard_simplex =  |- (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(fun(fun(num,real),bool),fun(fun(fun(num,real),bool),bool)) (#standard_simplex:fun(num,fun(fun(num,real),bool)) p:num)) (#GSPEC:fun(fun(fun(num,real),bool),fun(fun(num,real),bool)) (\GEN%PVAR%2449:fun(num,real). (#?:fun(fun(fun(num,real),bool),bool) (\x:fun(num,real). (((#SETSPEC:fun(fun(num,real),fun(bool,fun(fun(num,real),bool))) GEN%PVAR%2449:fun(num,real)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (x:fun(num,real) i:num))) ((#real_le:fun(real,fun(real,bool)) (x:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) i:num)) ((#=:fun(real,fun(real,bool)) (x:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))) ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) p:num)) x:fun(num,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) x:fun(num,real)))))))))
       #|TOPSPACE_STANDARD_SIMPLEX =  |- (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(fun(fun(num,real),bool),fun(fun(fun(num,real),bool),bool)) (#topspace:fun(topology(fun(num,real)),fun(fun(num,real),bool)) ((#subtopology:fun(topology(fun(num,real)),fun(fun(fun(num,real),bool),topology(fun(num,real)))) ((#product_topology:fun(fun(num,bool),fun(fun(num,topology(real)),topology(fun(num,real)))) #UNIV:fun(num,bool)) (\i:num. #euclideanreal:topology(real)))) (#standard_simplex:fun(num,fun(fun(num,real),bool)) p:num)))) (#standard_simplex:fun(num,fun(fun(num,real),bool)) p:num))))
       #|BASIS_IN_STANDARD_SIMPLEX =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\i:num. ((#=:fun(bool,fun(bool,bool)) ((#IN:fun(fun(num,real),fun(fun(fun(num,real),bool),bool)) (\j:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(num,fun(num,bool)) j:num) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#standard_simplex:fun(num,fun(fun(num,real),bool)) p:num))) ((#<=:fun(num,fun(num,bool)) i:num) p:num))))))

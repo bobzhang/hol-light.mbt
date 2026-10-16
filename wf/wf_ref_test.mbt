@@ -607,55 +607,55 @@ test "wf matches wf.ml" {
       #|0..0..0..solved at 3
       #|0..0..solved at 2
       #|wf quotations (110):
-      #|  WF(<<) <=> !P:A->bool. (?x. P(x)) ==> (?x. P(x) /\\ !y. y << x ==> ~P(y))
-      #|  WF(<<) <=> !P:A->bool. (?x. P(x)) <=> (?x. P(x) /\\ !y. y << x ==> ~P(y))
+      #|  WF(<<) <=> forall P:A->bool. (?x. P(x)) ==> (?x. P(x) /\\ forall y. y << x ==> ~P(y))
+      #|  WF(<<) <=> forall P:A->bool. (?x. P(x)) <=> (?x. P(x) /\\ forall y. y << x ==> ~P(y))
       #|  \\x:A. ~P(x)
-      #|  WF(<<) <=> !P:A->bool. (!x. (!y. y << x ==> P(y)) ==> P(x)) ==> !x. P(x)
+      #|  WF(<<) <=> forall P:A->bool. (forall x. (forall y. y << x ==> P(y)) ==> P(x)) ==> forall x. P(x)
       #|  \\y:A. ?n:num. y = s(n)
-      #|  !n. P(s n) /\\ s(SUC n):A << s(n)
+      #|  forall n. P(s n) /\\ s(SUC n):A << s(n)
       #|  s:num->A
-      #|  (s(0) = a:A) /\\ (!n. s(SUC n) = f(s n))
+      #|  (s(0) = a:A) /\\ (forall n. s(SUC n) = f(s n))
       #|  f:A->A
-      #|  !x:A. ?y. P(x) ==> P(y) /\\ y << x
+      #|  forall x:A. ?y. P(x) ==> P(y) /\\ y << x
       #|  a:A
       #|  (a <=> ~b) <=> (~a <=> b)
-      #|  WF(<<) <=> ~(?s:num->A. !n. s(SUC n) << s(n))
+      #|  WF(<<) <=> ~(?s:num->A. forall n. s(SUC n) << s(n))
       #|  s:num->A
-      #|  !(<<):A->A->bool.\n        (!x y z. x << y /\\ y << z ==> x << z)\n        ==> (WF(<<) <=> ~(?s:num->A. !i j. i < j ==> s j << s i))
-      #|  WF(<<) ==>\n       !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> !(f:A->B) g. (!x. f x = H f x) /\\ (!x. g x = H g x)\n                              ==> (f = g)
+      #|  forall(<<):A->A->bool.\n        (forall x y z. x << y /\\ y << z ==> x << z)\n        ==> (WF(<<) <=> ~(?s:num->A. forall i j. i < j ==> s j << s i))
+      #|  WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> forall(f:A->B) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                              ==> (f = g)
       #|  \\x:A. T
       #|  P:A->bool
-      #|  \\f x. P(x:A) \\/ !z:A. z << x ==> f(z)
-      #|  (!H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n        ==> !(f:A->bool) g. (!x. f x = H f x) /\\ (!x. g x = H g x)\n                          ==> (f = g))\n   ==> WF(<<)
-      #|  !f:A->B x. (!z. z << x ==> R z (f z)) ==> R x (H f x)
-      #|  !x:A y:B. R x y ==> S x y
-      #|  !x:A. ?!y:B. R x y
+      #|  \\f x. P(x:A) \\/ forall z:A. z << x ==> f(z)
+      #|  (forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n        ==> forall(f:A->bool) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                          ==> (f = g))\n   ==> WF(<<)
+      #|  forall f:A->B x. (forall z. z << x ==> R z (f z)) ==> R x (H f x)
+      #|  forall x:A y:B. R x y ==> S x y
+      #|  forall x:A. ?!y:B. R x y
       #|  R:A->B->bool
-      #|  WF(<<)\n   ==> !H S. (!f g x. (!z. z << x ==> (f z = g z) /\\ S z (f z))\n                      ==> (H f x = H g x) /\\ S x (H f x))\n             ==> ?f:A->B. !x. (f x = H f x)
+      #|  WF(<<)\n   ==> forall H S. (forall f g x. (forall z. z << x ==> (f z = g z) /\\ S z (f z))\n                      ==> (H f x = H g x) /\\ S x (H f x))\n             ==> ?f:A->B. forall x. (f x = H f x)
       #|  \\x:A y:B. T
-      #|  WF(<<)\n   ==> !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n           ==> ?f:A->B. !x. f x = H f x
+      #|  WF(<<)\n   ==> forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n           ==> ?f:A->B. forall x. f x = H f x
       #|  \\n:num. ?i:num. n = f(x(i):A)
       #|  @m:num. x(m):A << x(n)
-      #|  !n:num. ?k. f(x(k):A) < f(x(n))
-      #|  !n. ?p. (x:num->A) n = x p
+      #|  forall n:num. ?k. f(x(k):A) < f(x(n))
+      #|  forall n. ?p. (x:num->A) n = x p
       #|  (x:num->A) n
       #|  n:num
       #|  f:A->num
       #|  p:num
       #|  \\f:A->num. \\y:A. if ?p:num. y = x(p)\n                     then SUC(f(x(@m. x(m) << y)))\n                     else 0
-      #|  !n. (x:num->A)(@m. x(m) << x(n)) << x(n)
+      #|  forall n. (x:num->A)(@m. x(m) << x(n)) << x(n)
       #|  x:num->A
-      #|  (!H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n                 ==> ?f:A->num. !x. f x = H f x)\n   ==> WF(<<)
-      #|  WF(<<) ==>\n       !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> ?!f:A->B. !x. f x = H f x
+      #|  (forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n                 ==> ?f:A->num. forall x. f x = H f x)\n   ==> WF(<<)
+      #|  WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> ?!f:A->B. forall x. f x = H f x
       #|  f:A->B
-      #|  ?f:A->B. !x. f x = @y. P f x y
-      #|  WF((<<):A->A->bool)\n   ==> !P. (!f g x y. (!z. z << x ==> f z = g z) ==> (P f x y <=> P g x y)) /\\\n           (!f x. (!z. z << x ==> P f z (f z)) ==> ?y. P f x y)\n           ==> ?f:A->B. !x. P f x (f x)
-      #|  !(x:A) (y:A). x << y ==> x <<< y
-      #|  !(<<) (<<<). (!(x:A) y. x << y ==> x <<< y) /\\ WF(<<<) ==> WF(<<)
-      #|  !(<<) P:A->bool. WF(<<) ==> WF(\\x y. P x /\\ P y /\\ x << y)
-      #|  !x. (!y. (m:A->B) y << m x ==> P y) ==> P x
-      #|  \\y:B. !x:A. (m(x) = y) ==> P x
-      #|  !(<<) (m:A->B). WF(<<) ==> WF(\\x x'. m x << m x')
+      #|  ?f:A->B. forall x. f x = @y. P f x y
+      #|  WF((<<):A->A->bool)\n   ==> forall P. (forall f g x y. (forall z. z << x ==> f z = g z) ==> (P f x y <=> P g x y)) /\\\n           (forall f x. (forall z. z << x ==> P f z (f z)) ==> ?y. P f x y)\n           ==> ?f:A->B. forall x. P f x (f x)
+      #|  forall(x:A) (y:A). x << y ==> x <<< y
+      #|  forall(<<) (<<<). (forall(x:A) y. x << y ==> x <<< y) /\\ WF(<<<) ==> WF(<<)
+      #|  forall(<<) P:A->bool. WF(<<) ==> WF(\\x y. P x /\\ P y /\\ x << y)
+      #|  forall x. (forall y. (m:A->B) y << m x ==> P y) ==> P x
+      #|  \\y:B. forall x:A. (m(x) = y) ==> P x
+      #|  forall(<<) (m:A->B). WF(<<) ==> WF(\\x x'. m x << m x')
       #|  (a:A,b:B)
       #|  b:B
       #|  b1:B
@@ -669,54 +669,54 @@ test "wf matches wf.ml" {
       #|  b0:B
       #|  a0:A
       #|  P:A#B->bool
-      #|  !R:A->A->bool S:A->B->B->bool. WF(R) /\\ (!a. WF(S a))\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S r1 s1 s2)
-      #|  !R:A->A->bool S:B->B->bool. WF(R) /\\ WF(S)\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S s1 s2)
+      #|  forall R:A->A->bool S:A->B->B->bool. WF(R) /\\ (forall a. WF(S a))\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S r1 s1 s2)
+      #|  forall R:A->A->bool S:B->B->bool. WF(R) /\\ WF(S)\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S s1 s2)
       #|  \\(x1,y1) (x2,y2). x1 << x2 \\/ (x1:A = x2) /\\ (y1:B) <<< (y2:B)
       #|  WF((<<) :A->A->bool) /\\ WF((<<<) :B->B->bool)\n   ==> WF(\\(x1,y1) (x2,y2). x1 << x2 /\\ y1 <<< y2)
       #|  WF(<)
-      #|  !H. (!f g n. (!m. m < n ==> (f m = g m)) ==> (H f n = H g n))\n        ==> ?f:num->A. !n. f n = H f n
+      #|  forall H. (forall f g n. (forall m. m < n ==> (f m = g m)) ==> (H f n = H g n))\n        ==> ?f:num->A. forall n. f n = H f n
       #|  MEASURE (m:A->num) = \\x y. m(x) < m(y)
-      #|  !m:A->num. WF(MEASURE m)
-      #|  !m:A->num. (!y. MEASURE m y a ==> MEASURE m y b) <=> m(a) <= m(b)
+      #|  forall m:A->num. WF(MEASURE m)
+      #|  forall m:A->num. (forall y. MEASURE m y a ==> MEASURE m y b) <=> m(a) <= m(b)
       #|  \\z:A. z = x \\/ z = y
-      #|  !(<<) x y:A. WF(<<) ==> ~(x << y /\\ y << x)
-      #|  !x:A. WF(<<) ==> ~(x << x)
+      #|  forall(<<) x y:A. WF(<<) ==> ~(x << y /\\ y << x)
+      #|  forall x:A. WF(<<) ==> ~(x << x)
       #|  WF(\\x y:A. F)
       #|  n:num
       #|  n:num
       #|  \\x:num->A. x n
       #|  (<<):A->A->bool
-      #|  (?a. (?y. P y /\\ Q y /\\ f y = a) /\\ (!z. A z ==> ~B a z)) <=>\n     ?y. (P y /\\ Q y) /\\ (!z. B (f y) z ==> ~A z)
+      #|  (?a. (?y. P y /\\ Q y /\\ f y = a) /\\ (forall z. A z ==> ~B a z)) <=>\n     ?y. (P y /\\ Q y) /\\ (forall z. B (f y) z ==> ~A z)
       #|  n:num
       #|  x:num->A
-      #|  ?x:num->A. !n. (?y. bad y /\\ (!k. k < n ==> y k = x k) /\\ y n = x n) /\\\n                   !z. bad z /\\ (!k. k < n ==> z k = x k) ==> ~(z n << x n)
-      #|  !(<<) (bad:(num->A)->bool).\n        WF(<<) /\\\n        (!x. ~bad x ==> ?n. !y. (!k. k < n ==> y k = x k) ==> ~bad y) /\\\n        (?x. bad x)\n         ==> ?y. bad y /\\\n                 !z n. bad z /\\ (!k. k < n ==> z k = y k) ==> ~(z n << y n)
+      #|  ?x:num->A. forall n. (?y. bad y /\\ (forall k. k < n ==> y k = x k) /\\ y n = x n) /\\\n                   forall z. bad z /\\ (forall k. k < n ==> z k = x k) ==> ~(z n << x n)
+      #|  forall(<<) (bad:(num->A)->bool).\n        WF(<<) /\\\n        (forall x. ~bad x ==> ?n. forall y. (forall k. k < n ==> y k = x k) ==> ~bad y) /\\\n        (?x. bad x)\n         ==> ?y. bad y /\\\n                 forall z n. bad z /\\ (forall k. k < n ==> z k = y k) ==> ~(z n << y n)
       #|  ~(P 0) ==> ((?n. P(SUC n)) <=> (?n. P(n)))
-      #|  (P 0) ==> ((!m. m < n ==> P(SUC m)) <=> (!m. m < SUC n ==> P(m)))
+      #|  (P 0) ==> ((forall m. m < n ==> P(SUC m)) <=> (forall m. m < SUC n ==> P(m)))
       #|  y:A
       #|  (P:A->bool) x
-      #|  !x:A n. s x (SUC n) :A = g (s x n)
-      #|  !n x:A. s (g x) n :A = s x (SUC n)
+      #|  forall x:A n. s x (SUC n) :A = g (s x n)
+      #|  forall n x:A. s (g x) n :A = s x (SUC n)
       #|  x:A
-      #|  \\x:A. if ?n:num. ~P(s x n)\n                    then (h:A->B)(@y. ?n. (y = s x n) /\\ ~P(s x n) /\\\n                                          !m. m < n ==> P(s x m))\n                    else something_arbitrary:B
+      #|  \\x:A. if ?n:num. ~P(s x n)\n                    then (h:A->B)(@y. ?n. (y = s x n) /\\ ~P(s x n) /\\\n                                          forall m. m < n ==> P(s x m))\n                    else something_arbitrary:B
       #|  s:A->num->A
       #|  \\y:A n:num. g(y):A
       #|  x:A
       #|  x:A
-      #|  !P g h. ?f:A->B. !x. f x = if P(x) then f(g x) else h x
+      #|  forall P g h. ?f:A->B. forall x. f x = if P(x) then f(g x) else h x
       #|  P (f:A->B) (x:A) :bool
       #|  x:A
-      #|  !f:A->B. (!x:A y:A. P f x /\\ y << G f x ==> y << x)\n         ==> !x. terminates f x ==> !y. y << while f x ==> y << x
-      #|  !x:A. terminates (f:A->B) x /\\\n              (!y:A. (!z:A. z << y ==> z << x)\n                     ==> (P f y <=> P g y) /\\ (G f y :A = G g y))\n              ==> (while f x :A = while g x)
+      #|  forall f:A->B. (forall x:A y:A. P f x /\\ y << G f x ==> y << x)\n         ==> forall x. terminates f x ==> forall y. y << while f x ==> y << x
+      #|  forall x:A. terminates (f:A->B) x /\\\n              (forall y:A. (forall z:A. z << y ==> z << x)\n                     ==> (P f y <=> P g y) /\\ (G f y :A = G g y))\n              ==> (while f x :A = while g x)
       #|  a ==> b ==> c <=> b ==> a ==> c
-      #|  !f g x.\n           (!x y. P f x /\\ y << G (f:A->B) x ==> y << x) /\\\n           (!y:A. (!z:A. z << y ==> z << x)\n                  ==> (P f y = P g y) /\\ (G f y = G g y))\n               ==> terminates f x ==> terminates g x
+      #|  forall f g x.\n           (forall x y. P f x /\\ y << G (f:A->B) x ==> y << x) /\\\n           (forall y:A. (forall z:A. z << y ==> z << x)\n                  ==> (P f y = P g y) /\\ (G f y = G g y))\n               ==> terminates f x ==> terminates g x
       #|  (a = b) /\\ (a /\\ b ==> (x = y) /\\ (f x = g x))\n      ==> ((if a then f x else d) = (if b then g y else d))
-      #|  ?f:A->B. !x. f x = if terminates f x then H f (while f x :A) else anything
-      #|  ?while. !f:A->B x:A. while f x = if P f x then while f (G f x) else x
-      #|  (!x:A. ~(P f x) ==> terminates f x) /\\\n      (!x. P (f:A->B) x /\\ terminates f (G f x) ==> terminates f x)
-      #|  !P G H. WF(<<) /\\\n           (!f g x. (!z. z << x ==> (f z = g z))\n                    ==> (P f x <=> P g x) /\\ G f x = G g x /\\ H f x = H g x) /\\\n           (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x)) /\\\n           (!f x y. P f x /\\ y << G f x ==> y << x)\n           ==> ?f:A->B. !x. f x = if P f x then f(G f x) else H f x
-      #|  (!x. P x ==> !y. Q x y) <=> !y x. P x ==> Q x y
-      #|  (!m. P m ==> (m = e) ==> Q) <=> (P e ==> Q)
+      #|  ?f:A->B. forall x. f x = if terminates f x then H f (while f x :A) else anything
+      #|  ?while. forall f:A->B x:A. while f x = if P f x then while f (G f x) else x
+      #|  (forall x:A. ~(P f x) ==> terminates f x) /\\\n      (forall x. P (f:A->B) x /\\ terminates f (G f x) ==> terminates f x)
+      #|  forall P G H. WF(<<) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z))\n                    ==> (P f x <=> P g x) /\\ G f x = G g x /\\ H f x = H g x) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x)) /\\\n           (forall f x y. P f x /\\ y << G f x ==> y << x)\n           ==> ?f:A->B. forall x. f x = if P f x then f(G f x) else H f x
+      #|  (forall x. P x ==> forall y. Q x y) <=> forall y x. P x ==> Q x y
+      #|  (forall m. P m ==> (m = e) ==> Q) <=> (P e ==> Q)
       #|WF =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\<<:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (#~:fun(bool,bool) (P:fun('A,bool) y:'A))))))))))))))
       #|WF_EQ =  |- ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (#~:fun(bool,bool) (P:fun('A,bool) y:'A))))))))))))
       #|WF_IND =  |- ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (P:fun('A,bool) y:'A))))) (P:fun('A,bool) x:'A))))) (#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))))))

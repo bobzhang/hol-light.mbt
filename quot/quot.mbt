@@ -58,7 +58,7 @@ fn step_1() -> Unit raise {
     t12,
   )
   let select_lemma = @tactics.prove(
-    @parser.parse_term("!x:A. (@y. x = y) = x"),
+    @parser.parse_term("forall x:A. (@y. x = y) = x"),
     t13,
   )
   lift_function_c.set(fn(
@@ -473,7 +473,7 @@ fn step_2() -> Unit raise {
                             @tactics.strip_tac,
                             @tactics.subgoal_then(
                               @parser.parse_term(
-                                "!x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)",
+                                "forall x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)",
                               ),
                               fn(
                                 x50 : @kernel.Thm,
@@ -575,7 +575,7 @@ fn step_2() -> Unit raise {
   )
   let pth = @tactics.prove(
     @parser.parse_term(
-      "(!x:Repty. R x x) /\\\n     (!x y. R x y <=> R y x) /\\\n     (!x y z. R x y /\\ R y z ==> R x z) /\\\n     (!a. mk(dest a) = a) /\\\n     (!r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (!x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (!P. (!x. P(mk(R x))) <=> (!x. P x)) /\\\n         (!P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (!x:Absty. mk(R((@)(dest x))) = x)",
+      "(forall x:Repty. R x x) /\\\n     (forall x y. R x y <=> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall a. mk(dest a) = a) /\\\n     (forall r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (forall x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (forall P. (forall x. P(mk(R x))) <=> (forall x. P x)) /\\\n         (forall P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (forall x:Absty. mk(R((@)(dest x))) = x)",
     ),
     t81,
   )

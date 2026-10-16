@@ -5557,7 +5557,7 @@ Translating certificate to HOL inferences
 Translating certificate to HOL inferences
 0..0..1..2..solved at 6
 RichterHilbertAxiomGeometry/readable quotations (8):
-  (!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
+  (forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
   :P
   :P
   :P

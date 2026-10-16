@@ -15192,9 +15192,9 @@ proving that 4001 is prime
 CPU time (user): <t>
 100/div3 quotations (5):
   10 * 1
-  !n. (10 EXP n == 1) (mod 3)
+  forall n. (10 EXP n == 1) (mod 3)
   d = 1 * d
-  !d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)
+  forall d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)
   3 divides (nsum(0..n) (\\i. 10 EXP i * d(i))) <=>\n   3 divides (nsum(0..n) (\\i. d i))
 EXP_10_CONG_3 =  |- (#!:fun(fun(num,bool),bool) (\n:num. (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
 SUM_CONG_3 =  |- (#!:fun(fun(fun(num,num),bool),bool) (\d:fun(num,num). (#!:fun(fun(num,bool),bool) (\n:num. (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) i:num)) (d:fun(num,num) i:num))))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. (d:fun(num,num) i:num)))) (#num_mod:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

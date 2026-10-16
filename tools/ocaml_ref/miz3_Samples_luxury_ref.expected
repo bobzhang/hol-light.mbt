@@ -5610,7 +5610,7 @@ miz3/Samples/luxury quotations (78):
   :error
   :error
   :error
-  !p. NUM_REP (IND_SUC (dest_num p))
+  forall p. NUM_REP (IND_SUC (dest_num p))
   :error
   dest_num
   :error
@@ -5633,7 +5633,7 @@ miz3/Samples/luxury quotations (78):
   :error
   :error
   :error
-  !p. NUM_REP (IND_SUC (dest_num p))
+  forall p. NUM_REP (IND_SUC (dest_num p))
   :error
   :error
   :error

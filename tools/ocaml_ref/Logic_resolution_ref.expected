@@ -8238,7 +8238,7 @@ Warning: inventing type variables
 Logic/resolution quotations (225):
   (atom False <=> F) /\\\n   (atom (Atom p l) <=> T) /\\\n   (atom (q --> r) <=> F) /\\\n   (atom (!!x q) <=> F)
   literal p <=> atom(p) \\/ ?q. atom(q) /\\ (p = Not q)
-  clause cl <=> FINITE cl /\\ !p. p IN cl ==> literal p
+  clause cl <=> FINITE cl /\\ forall p. p IN cl ==> literal p
   literal(Atom r args) /\\\n   literal(Not(Atom r args))
   atom p <=> ?q l. p = Atom q l
   negative p <=> ?q. p = Not q
@@ -8247,63 +8247,63 @@ Logic/resolution quotations (225):
   pholds d (~~p) <=> ~(pholds d p)
   holds M v (~~p) <=> ~(holds M v p)
   ~~(Not p) = p
-  !p. atom p ==> (~~p = Not p)
-  !p. ~(~~p = p)
-  !p d. atom(p) ==> (pholds d p = d(p))
-  !p. literal p ==> (~~(~~p) = p)
+  forall p. atom p ==> (~~p = Not p)
+  forall p. ~(~~p = p)
+  forall p d. atom(p) ==> (pholds d p = d(p))
+  forall p. literal p ==> (~~(~~p) = p)
   resolve (p:form) cl1 cl2 = (cl1 DELETE p) UNION (cl2 DELETE ~~p)
-  (!cl. cl IN hyps ==> presproof hyps cl) /\\\n   (!p cl1 cl2.\n       presproof hyps cl1 /\\ presproof hyps cl2 /\\ p IN cl1 /\\ ~~p IN cl2\n      ==> presproof hyps (resolve p cl1 cl2))
+  (forall cl. cl IN hyps ==> presproof hyps cl) /\\\n   (forall p cl1 cl2.\n       presproof hyps cl1 /\\ presproof hyps cl2 /\\ p IN cl1 /\\ ~~p IN cl2\n      ==> presproof hyps (resolve p cl1 cl2))
   interp cl = ITLIST (||) (list_of_set cl) False
-  !s. ~(psatisfiable s)\n       ==> ?t. FINITE t /\\ t SUBSET s /\\ ~(psatisfiable t)
-  !hyps1 hyps2 c.\n        presproof hyps1 c /\\ hyps1 SUBSET hyps2 ==> presproof hyps2 c
-  !hyps hyps' c.\n        (!c'. c' IN hyps' ==> presproof hyps c') /\\ presproof hyps' c\n        ==> presproof hyps c
+  forall s. ~(psatisfiable s)\n       ==> ?t. FINITE t /\\ t SUBSET s /\\ ~(psatisfiable t)
+  forall hyps1 hyps2 c.\n        presproof hyps1 c /\\ hyps1 SUBSET hyps2 ==> presproof hyps2 c
+  forall hyps hyps' c.\n        (forall c'. c' IN hyps' ==> presproof hyps c') /\\ presproof hyps' c\n        ==> presproof hyps c
   {interp cl | cl IN hyps} = IMAGE interp hyps
   l:form list
   list_of_set(cl:form->bool)
-  !cl d. FINITE cl ==> (pholds d (interp cl) <=> ?p. p IN cl /\\ pholds d p)
+  forall cl d. FINITE cl ==> (pholds d (interp cl) <=> ?p. p IN cl /\\ pholds d p)
   l:form list
   list_of_set(cl:form->bool)
-  !cl M v. FINITE cl\n            ==> (holds M v (interp cl) <=> ?p. p IN cl /\\ holds M v p)
+  forall cl M v. FINITE cl\n            ==> (holds M v (interp cl) <=> ?p. p IN cl /\\ holds M v p)
   b /\\ ~c ==> ~(a \\/ b ==> c)
   resolve p cl1 cl2
   ~a ==> a ==> b
-  !x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
+  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
   cl2:form->bool
   r:form
   literal q
   q:form
   ((a ==> c) ==> d) ==> (a \\/ b ==> c) ==> d
   cl:form->bool
-  !x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
+  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
   r:form
   literal q
   q:form
   cl:form->bool
-  !cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n             ==> (?q. q IN cl DELETE ~~p /\\ pholds d q)
+  forall cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n             ==> (?q. q IN cl DELETE ~~p /\\ pholds d q)
   ~~p IN cl
   p:form
   p:form IN cl
   cl:form->bool
   \\x:form. if x = p then T else d(x)
-  !cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n         ==> ?q. q IN (cl DELETE ~~p) /\\ pholds d q
+  forall cl. cl IN hyps /\\ ~~p IN cl /\\ ~(p IN cl)\n         ==> ?q. q IN (cl DELETE ~~p) /\\ pholds d q
   cl1:form->bool
   r:form
   literal q
   q:form
   ((a ==> c) ==> d) ==> (a \\/ b ==> c) ==> d
   cl:form->bool
-  !x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
+  forall x. x IN hyps' ==> (?p. p IN x /\\ pholds d p)
   r:form
   literal q
   q:form
   cl:form->bool
-  !cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n             ==> (?q. q IN cl DELETE p /\\ pholds d q)
+  forall cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n             ==> (?q. q IN cl DELETE p /\\ pholds d q)
   p:form IN cl
   ~~p
   ~~p IN cl
   cl:form->bool
   \\x:form. if x = p then F else d(x)
-  !cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n         ==> ?q. q IN (cl DELETE p) /\\ pholds d q
+  forall cl. cl IN hyps /\\ p IN cl /\\ ~(~~p IN cl)\n         ==> ?q. q IN (cl DELETE p) /\\ pholds d q
   d:form->bool
   ~a ==> ~b <=> b ==> a
   ~psatisfiable (IMAGE interp hyps)
@@ -8335,36 +8335,36 @@ Logic/resolution quotations (225):
   {}:form->bool IN hyps
   hyps:(form->bool)->bool
   n:num
-  !n hyps. FINITE hyps /\\\n             (CARD(UNIONS hyps) = n) /\\\n             (!cl. cl IN hyps ==> clause cl) /\\\n             ~(psatisfiable (IMAGE interp hyps))\n             ==> presproof hyps {}
-  FINITE hyps /\\\n   (!cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
+  forall n hyps. FINITE hyps /\\\n             (CARD(UNIONS hyps) = n) /\\\n             (forall cl. cl IN hyps ==> clause cl) /\\\n             ~(psatisfiable (IMAGE interp hyps))\n             ==> presproof hyps {}
+  FINITE hyps /\\\n   (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
   b ==> ~c ==> ~a <=> a /\\ b ==> c
   t SUBSET {interp cl | cl IN h}
   ~(psatisfiable t)
   ?h. FINITE h /\\ h SUBSET hyps /\\ t SUBSET {interp cl | cl IN h}
   t:form->bool
-  (!cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
+  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(psatisfiable {interp cl | cl IN hyps})\n   ==> presproof hyps {}
   cl1 instance_of cl2 <=> ?i. cl1 = IMAGE (formsubst i) cl2
   FVS(cl) = UNIONS {FV(p) | p IN cl}
   r:form
   r:form
   r:form
-  !p. negative (formsubst i p) = negative p
+  forall p. negative (formsubst i p) = negative p
   q:form
-  !p i. formsubst i (~~p) = ~~(formsubst i p)
-  !p i. atom (formsubst i p) = atom p
-  !i p. formsubst i (Not p) = Not(formsubst i p)
-  !p. ~atom(Not p)
+  forall p i. formsubst i (~~p) = ~~(formsubst i p)
+  forall p i. atom (formsubst i p) = atom p
+  forall i p. formsubst i (Not p) = Not(formsubst i p)
+  forall p. ~atom(Not p)
   r:form
   r:form
   r:form
   s:form
-  !p i. literal (formsubst i p) = literal p
-  !p. qfree(Not p) = qfree p
-  !p. atom p ==> qfree p
-  !p. literal p ==> qfree p
-  !p. qfree(~~p) = qfree p
+  forall p i. literal (formsubst i p) = literal p
+  forall p. qfree(Not p) = qfree p
+  forall p. atom p ==> qfree p
+  forall p. literal p ==> qfree p
+  forall p. qfree(~~p) = qfree p
   s:form->bool = A DIFF A1 UNION B DIFF B1
-  !q. q IN (A DIFF A1 UNION B DIFF B1)\n                    ==> (formsubst k (formsubst j q) = formsubst i q)
+  forall q. q IN (A DIFF A1 UNION B DIFF B1)\n                    ==> (formsubst k (formsubst j q) = formsubst i q)
   IMAGE (formsubst i) B DELETE ~~p =\n                IMAGE (formsubst i) (B DIFF B1)
   IMAGE (formsubst i) A DELETE p =\n                IMAGE (formsubst i) (A DIFF A1)
   k:num->term
@@ -8394,16 +8394,16 @@ Logic/resolution quotations (225):
   A' instance_of A
   i:num->term
   ?i. (A' = IMAGE (formsubst i) A) /\\\n                    (B' = IMAGE (formsubst i) B)
-  !A B A' B' C' p.\n        clause A /\\ clause B /\\ (FVS(A) INTER FVS(B) = {}) /\\\n        A' instance_of A /\\ B' instance_of B /\\\n        p IN A' /\\ ~~p IN B' /\\ (C' = resolve p A' B')\n        ==> ?A1 B1. A1 SUBSET A /\\ B1 SUBSET B /\\ ~(A1 = {}) /\\ ~(B1 = {}) /\\\n                    (?i. Unifies i (A1 UNION {~~l | l IN B1})) /\\\n                    !j. ismgu (A1 UNION {~~l | l IN B1}) j\n                        ==> C' instance_of (IMAGE (formsubst j)\n                                           ((A DIFF A1) UNION (B DIFF B1)))
+  forall A B A' B' C' p.\n        clause A /\\ clause B /\\ (FVS(A) INTER FVS(B) = {}) /\\\n        A' instance_of A /\\ B' instance_of B /\\\n        p IN A' /\\ ~~p IN B' /\\ (C' = resolve p A' B')\n        ==> ?A1 B1. A1 SUBSET A /\\ B1 SUBSET B /\\ ~(A1 = {}) /\\ ~(B1 = {}) /\\\n                    (?i. Unifies i (A1 UNION {~~l | l IN B1})) /\\\n                    forall j. ismgu (A1 UNION {~~l | l IN B1}) j\n                        ==> C' instance_of (IMAGE (formsubst j)\n                                           ((A DIFF A1) UNION (B DIFF B1)))
   FINITE (IMAGE FV cl)
   (a ==> (b <=> c)) ==> a /\\ c ==> b
-  !cl. clause(cl) ==> FINITE(FVS cl)
-  ((UNIONS s) INTER y = {}) <=> !x. x IN s ==> (x INTER y = {})
+  forall cl. clause(cl) ==> FINITE(FVS cl)
+  ((UNIONS s) INTER y = {}) <=> forall x. x IN s ==> (x INTER y = {})
   y < 2 * N ==> y - N < N
   ~(x + N < N)
   y:num
   x:num
-  !x. x IN FV(r) ==> x < N:num
+  forall x. x IN FV(r) ==> x < N:num
   r:form
   \\x. if x < N then V(x + N) else if x < 2 * N then V(x - N)\n                    else V(x)
   \\x. if x < N then V(x + N) else if x < 2 * N then V(x - N)\n                  else V(x)
@@ -8412,19 +8412,19 @@ Logic/resolution quotations (225):
   s:num->bool
   s UNION FVS(cl)
   FINITE(s UNION FVS(cl))
-  ?n. !x. x IN s \\/ x IN FVS cl ==> x < n
-  !cl s. FINITE(s) /\\ clause(cl)\n          ==> ?i. renaming(i) /\\ (FVS(IMAGE (formsubst i) cl) INTER s = {})
-  (!cl. cl IN hyps ==> resproof hyps cl) /\\\n   (!cl1 cl2 cl2' ps1 ps2 i.\n        resproof hyps cl1 /\\ resproof hyps cl2 /\\\n        (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n        ps1 SUBSET cl1 /\\ ps2 SUBSET cl2' /\\ ~(ps1 = {}) /\\ ~(ps2 = {}) /\\\n        (?i. Unifies i (ps1 UNION {~~p | p IN ps2})) /\\\n        (mgu (ps1 UNION {~~p | p IN ps2}) = i)\n        ==> resproof hyps\n               (IMAGE (formsubst i) ((cl1 DIFF ps1) UNION (cl2' DIFF ps2))))
-  !p i d. qfree(p)\n           ==> (pholds d (formsubst i p) <=> pholds (d o formsubst i) p)
+  ?n. forall x. x IN s \\/ x IN FVS cl ==> x < n
+  forall cl s. FINITE(s) /\\ clause(cl)\n          ==> ?i. renaming(i) /\\ (FVS(IMAGE (formsubst i) cl) INTER s = {})
+  (forall cl. cl IN hyps ==> resproof hyps cl) /\\\n   (forall cl1 cl2 cl2' ps1 ps2 i.\n        resproof hyps cl1 /\\ resproof hyps cl2 /\\\n        (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n        ps1 SUBSET cl1 /\\ ps2 SUBSET cl2' /\\ ~(ps1 = {}) /\\ ~(ps2 = {}) /\\\n        (?i. Unifies i (ps1 UNION {~~p | p IN ps2})) /\\\n        (mgu (ps1 UNION {~~p | p IN ps2}) = i)\n        ==> resproof hyps\n               (IMAGE (formsubst i) ((cl1 DIFF ps1) UNION (cl2' DIFF ps2))))
+  forall p i d. qfree(p)\n           ==> (pholds d (formsubst i p) <=> pholds (d o formsubst i) p)
   l:form list
   list_of_set cl :form list
-  !p. MEM p (list_of_set cl) ==> qfree p
-  !cl. clause cl ==> qfree(interp cl)
-  !cl v d. clause cl\n            ==> (pholds d (interp (IMAGE (formsubst v) cl)) <=>\n                 pholds d (formsubst v (interp cl)))
-  !v cl. clause(cl) ==> clause(IMAGE (formsubst v) cl)
-  !cl. {} instance_of cl ==> (cl = {})
+  forall p. MEM p (list_of_set cl) ==> qfree p
+  forall cl. clause cl ==> qfree(interp cl)
+  forall cl v d. clause cl\n            ==> (pholds d (interp (IMAGE (formsubst v) cl)) <=>\n                 pholds d (formsubst v (interp cl)))
+  forall v cl. clause(cl) ==> clause(IMAGE (formsubst v) cl)
+  forall cl. {} instance_of cl ==> (cl = {})
   s DIFF t SUBSET s
-  (!cl. cl IN hyps ==> clause cl)\n   ==> !cl. resproof hyps cl ==> clause cl
+  (forall cl. cl IN hyps ==> clause cl)\n   ==> forall cl. resproof hyps cl ==> clause cl
   B:form->bool
   {~~l | l IN B1} = IMAGE (~~) B1
   mgu (A1 UNION {~~ l | l IN B1})
@@ -8451,16 +8451,16 @@ Logic/resolution quotations (225):
   p:form
   (b ==> c) ==> (a ==> b) ==> (a ==> c)
   {}:form->bool
-  !cl0. presproof {IMAGE (formsubst v) cl | cl,v | cl IN hyps} cl0\n           ==> ?cl. resproof hyps cl /\\ cl0 instance_of cl
+  forall cl0. presproof {IMAGE (formsubst v) cl | cl,v | cl IN hyps} cl0\n           ==> ?cl. resproof hyps cl /\\ cl0 instance_of cl
   d:form->bool
   ~(psatisfiable\n        {interp cl |\n         cl IN {IMAGE(formsubst v) cl | cl,v | cl IN hyps}})
   IMAGE interp hyps
-  (!cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> resproof hyps {}
+  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> resproof hyps {}
   (b ==> a) ==> ~a ==> ~b
   isaresolvent cl (cl1,cl2) <=>\n        let cl2' = IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 in\n        ?ps1 ps2.\n            ps1 SUBSET cl1 /\\ ps2 SUBSET cl2' /\\ ~(ps1 = {}) /\\ ~(ps2 = {}) /\\\n            (?i. Unifies i (ps1 UNION {~~p | p IN ps2})) /\\\n            let i = mgu (ps1 UNION {~~p | p IN ps2}) in\n            cl = IMAGE (formsubst i) ((cl1 DIFF ps1) UNION (cl2' DIFF ps2))
   i:num->term
   cl2:form->bool
-  !hyps. (!cl. cl IN hyps ==> resproof hyps cl) /\\\n          (!cl1 cl2 cl.\n                resproof hyps cl1 /\\ resproof hyps cl2 /\\\n                isaresolvent cl (cl1,cl2)\n                ==> resproof hyps cl)
+  forall hyps. (forall cl. cl IN hyps ==> resproof hyps cl) /\\\n          (forall cl1 cl2 cl.\n                resproof hyps cl1 /\\ resproof hyps cl2 /\\\n                isaresolvent cl (cl1,cl2)\n                ==> resproof hyps cl)
 atom =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#-->:fun(form,fun(form,form)) q:form) r:form))) #F:bool)) ((#=:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) q:form))) #F:bool))))
 literal =  |- (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#literal:fun(form,bool) p:form)) ((#\/:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) p:form)) (#?:fun(fun(form,bool),bool) (\q:form. ((#/\:fun(bool,fun(bool,bool)) (#atom:fun(form,bool) q:form)) ((#=:fun(form,fun(form,bool)) p:form) (#Not:fun(form,form) q:form)))))))))
 clause =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun(form,bool),bool) cl:fun(form,bool))) (#!:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#literal:fun(form,bool) p:form))))))))

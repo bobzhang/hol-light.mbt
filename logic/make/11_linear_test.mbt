@@ -9093,10 +9093,10 @@ test "Logic/linear matches Logic/linear.ml" {
       #|0..0..4..11..25..54..110..196..368..solved at 513
       #|0..0..4..11..25..54..110..196..368..solved at 513
       #|Logic/linear quotations (291):
-      #|  !c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)
-      #|  !hyps cl. (!c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl
-      #|  !c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')
-      #|  (!c. clause(c) ==> ppresproof {c} c) /\\\n    (!p asm1 asm2 c1 c2.\n            ppresproof asm1 c1 /\\ ppresproof asm2 c2 /\\\n            p IN c1 /\\ ~~ p IN c2\n                ==> ppresproof (asm1 UNION asm2) (resolve p c1 c2))
+      #|  forall c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)
+      #|  forall hyps cl. (forall c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl
+      #|  forall c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')
+      #|  (forall c. clause(c) ==> ppresproof {c} c) /\\\n    (forall p asm1 asm2 c1 c2.\n            ppresproof asm1 c1 /\\ ppresproof asm2 c2 /\\\n            p IN c1 /\\ ~~ p IN c2\n                ==> ppresproof (asm1 UNION asm2) (resolve p c1 c2))
       #|  asm:(form->bool)->bool
       #|  c:form->bool
       #|  asm:(form->bool)->bool
@@ -9105,8 +9105,8 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  c:form->bool
       #|  c:form->bool
       #|  c:form->bool
-      #|  !hyps. (!c. c IN hyps ==> clause c)\n          ==> !c. presproof hyps c <=>\n                        ?asm. asm SUBSET hyps /\\ ppresproof asm c
-      #|  !asm cl. ppresproof asm cl ==> clause cl /\\ (!c. c IN asm ==> clause c)
+      #|  forall hyps. (forall c. c IN hyps ==> clause c)\n          ==> forall c. presproof hyps c <=>\n                        ?asm. asm SUBSET hyps /\\ ppresproof asm c
+      #|  forall asm cl. ppresproof asm cl ==> clause cl /\\ (forall c. c IN asm ==> clause c)
       #|  r:form
       #|  q:form
       #|  d:form->bool
@@ -9116,9 +9116,9 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  asm1:(form->bool)->bool
       #|  p:form
       #|  ppresproof asm cl
-      #|  !asm cl. ppresproof asm cl\n            ==> !d. (!c. c IN asm ==> ?p. p IN c /\\ pholds d p)\n                    ==> ?p. p IN cl /\\ pholds d p
-      #|  !asm cl. ppresproof asm cl\n            ==> !d. d psatisfies (IMAGE interp asm) ==> pholds d (interp cl)
-      #|  !asm. ppresproof asm {} ==> ~(psatisfiable (IMAGE interp asm))
+      #|  forall asm cl. ppresproof asm cl\n            ==> forall d. (forall c. c IN asm ==> ?p. p IN c /\\ pholds d p)\n                    ==> ?p. p IN cl /\\ pholds d p
+      #|  forall asm cl. ppresproof asm cl\n            ==> forall d. d psatisfies (IMAGE interp asm) ==> pholds d (interp cl)
+      #|  forall asm. ppresproof asm {} ==> ~(psatisfiable (IMAGE interp asm))
       #|  ~(negative q)
       #|  literal q
       #|  q:form
@@ -9126,34 +9126,34 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  FINITE(c:form->bool)
       #|  c:form->bool
       #|  \\x:form. T
-      #|  !asm. ppresproof asm {} ==> ?c. c IN asm /\\ !p. p IN c ==> negative p
-      #|  (!cl. cl IN hyps ==> lpresproof hyps [cl]) /\\\n    (!c1 c2 lis p.\n        lpresproof hyps (CONS c1 lis) /\\\n        (c2 IN hyps \\/ MEM c2 lis) /\\\n        p IN c1 /\\ ~~p IN c2\n        ==> lpresproof hyps (CONS (resolve p c1 c2) (CONS c1 lis)))
+      #|  forall asm. ppresproof asm {} ==> ?c. c IN asm /\\ forall p. p IN c ==> negative p
+      #|  (forall cl. cl IN hyps ==> lpresproof hyps [cl]) /\\\n    (forall c1 c2 lis p.\n        lpresproof hyps (CONS c1 lis) /\\\n        (c2 IN hyps \\/ MEM c2 lis) /\\\n        p IN c1 /\\ ~~p IN c2\n        ==> lpresproof hyps (CONS (resolve p c1 c2) (CONS c1 lis)))
       #|  c:(form->bool)list
       #|  c:(form->bool)list
-      #|  !hyps hyps' c.\n        hyps SUBSET hyps' /\\ lpresproof hyps c ==> lpresproof hyps' c
-      #|  !c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)
+      #|  forall hyps hyps' c.\n        hyps SUBSET hyps' /\\ lpresproof hyps c ==> lpresproof hyps' c
+      #|  forall c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)
       #|  (p = q) \\/ (p = ~~q)
       #|  q:form
-      #|  !c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)
+      #|  forall c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)
       #|  (p = q) \\/ (p = ~~q)
       #|  q:form
-      #|  !c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)
-      #|  !c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2
+      #|  forall c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)
+      #|  forall c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2
       #|  (suffix lis [] <=> (lis = [])) /\\\n   (suffix lis (CONS s cs) <=> (lis = CONS s cs) \\/ suffix lis cs)
-      #|  !lis. suffix lis lis
+      #|  forall lis. suffix lis lis
       #|  l1:(A)list = []
-      #|  !l1 l2. suffix l1 l2 /\\ ~(l1 = []) ==> (LAST l1 :A = LAST l2)
-      #|  !l1 l2 l3. suffix l1 l2 /\\ suffix l2 l3 ==> suffix l1 l3
-      #|  !x:A l lis. suffix (CONS x l) lis ==> MEM x lis
-      #|  !x l1 l2. suffix l1 l2 ==> suffix l1 (CONS x l2)
+      #|  forall l1 l2. suffix l1 l2 /\\ ~(l1 = []) ==> (LAST l1 :A = LAST l2)
+      #|  forall l1 l2 l3. suffix l1 l2 /\\ suffix l2 l3 ==> suffix l1 l3
+      #|  forall x:A l lis. suffix (CONS x l) lis ==> MEM x lis
+      #|  forall x l1 l2. suffix l1 l2 ==> suffix l1 (CONS x l2)
       #|  x <= y ==> x <= SUC y
-      #|  !l1 l2. suffix l1 l2 ==> LENGTH l1 <= LENGTH l2
+      #|  forall l1 l2. suffix l1 l2 ==> LENGTH l1 <= LENGTH l2
       #|  ~(SUC n <= n)
-      #|  !x l. ~(suffix (CONS x l) l)
-      #|  !l1 l2. suffix l1 l2 /\\ suffix l2 l1 ==> (l1 = l2)
-      #|  !q. literal q ==> literal(~~q)
-      #|  (!q basm B casm C c.\n        literal q\n        ==> (P q basm B casm C c = P (~~q) casm C basm B c)) /\\\n    (!q basm B casm C. literal q\n        ==> (Q q basm B casm C = Q (~~q) casm C basm B)) /\\\n    (!q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> !c. c IN basm ==> P q basm B casm C c)\n    ==> !q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> !c. c IN basm UNION casm ==> P q basm B casm C c
-      #|  (!p q basm B casm C main aasm A.\n        literal q\n        ==> (P p q basm B casm C main aasm A =\n             P p (~~q) casm C basm B main aasm A)) /\\\n    (!p q basm B casm C main aasm A.\n        ~~p IN B ==> literal q ==> P p q basm B casm C main aasm A)\n    ==> !p q basm B casm C main aasm A.\n            ~~p IN B \\/ ~~p IN C ==> literal q\n            ==> P p q basm B casm C main aasm A
+      #|  forall x l. ~(suffix (CONS x l) l)
+      #|  forall l1 l2. suffix l1 l2 /\\ suffix l2 l1 ==> (l1 = l2)
+      #|  forall q. literal q ==> literal(~~q)
+      #|  (forall q basm B casm C c.\n        literal q\n        ==> (P q basm B casm C c = P (~~q) casm C basm B c)) /\\\n    (forall q basm B casm C. literal q\n        ==> (Q q basm B casm C = Q (~~q) casm C basm B)) /\\\n    (forall q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> forall c. c IN basm ==> P q basm B casm C c)\n    ==> forall q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> forall c. c IN basm UNION casm ==> P q basm B casm C c
+      #|  (forall p q basm B casm C main aasm A.\n        literal q\n        ==> (P p q basm B casm C main aasm A =\n             P p (~~q) casm C basm B main aasm A)) /\\\n    (forall p q basm B casm C main aasm A.\n        ~~p IN B ==> literal q ==> P p q basm B casm C main aasm A)\n    ==> forall p q basm B casm C main aasm A.\n            ~~p IN B \\/ ~~p IN C ==> literal q\n            ==> P p q basm B casm C main aasm A
       #|  A SUBSET resolve q (resolve p A B) C
       #|  A SUBSET resolve p A B
       #|  main:(form->bool)list
@@ -9198,7 +9198,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  q:form
       #|  middle:(form->bool)list
       #|  D:form->bool
-      #|  !c lis p asm'.\n               clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n               ==> (?c' lis'.\n                        suffix (CONS c lis) (CONS c' lis') /\\\n                        lpresproof (casm UNION asm') (CONS c' lis') /\\\n                        c' SUBSET resolve p c C)
+      #|  forall c lis p asm'.\n               clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n               ==> (?c' lis'.\n                        suffix (CONS c lis) (CONS c' lis') /\\\n                        lpresproof (casm UNION asm') (CONS c' lis') /\\\n                        c' SUBSET resolve p c C)
       #|  q:form IN D
       #|  ?c' lis'.\n       suffix (CONS D middle) (CONS c' lis') /\\\n       suffix (CONS A main) (CONS c' lis') /\\\n       lpresproof ((basm UNION casm) UNION aasm) (CONS c' lis') /\\\n       c' SUBSET resolve q (resolve p A B) C
       #|  middle:(form->bool)list
@@ -9207,7 +9207,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  p:form
       #|  main:(form->bool)list
       #|  A:form->bool
-      #|  !c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
+      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
       #|  q IN resolve q B C
       #|  q:form IN C
       #|  B SUBSET (resolve q B C)
@@ -9219,7 +9219,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  ~~q
       #|  main:(form->bool)list
       #|  A:form->bool
-      #|  !c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
+      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
       #|  p = ~~q
       #|  p = ~~q
       #|  ~~q IN B
@@ -9231,7 +9231,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  q:form
       #|  main:(form->bool)list
       #|  A:form->bool
-      #|  !c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
+      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
       #|  p:form = q
       #|  p:form = q
       #|  A:form->bool
@@ -9268,12 +9268,12 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  q:form
       #|  main:(form->bool)list
       #|  B1:form->bool
-      #|  !c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
+      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
       #|  q:form IN B1
       #|  main:(form->bool)list
       #|  B1:form->bool
       #|  c:form->bool
-      #|  !c. c IN basm\n           ==> (?cl' lis.\n                    lpresproof basm (CONS cl' lis) /\\\n                    cl' SUBSET B /\\\n                    (LAST (CONS cl' lis) = c))
+      #|  forall c. c IN basm\n           ==> (?cl' lis.\n                    lpresproof basm (CONS cl' lis) /\\\n                    cl' SUBSET B /\\\n                    (LAST (CONS cl' lis) = c))
       #|  c:form->bool
       #|  q:form
       #|  basm:(form->bool)->bool
@@ -9295,19 +9295,19 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  []:(form->bool)list
       #|  cl:form->bool
       #|  cl:form->bool
-      #|  !asm cl. ppresproof asm cl\n             ==> (!c. c IN asm ==> clause c) /\\ clause cl /\\\n                 (!c. c IN asm\n                      ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                    cl' SUBSET cl /\\\n                                    (LAST (CONS cl' lis) = c)) /\\\n                 (!c lis p asm'.\n                        clause c /\\\n                        lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~p IN cl\n                        ==> ?c' lis'. suffix (CONS c lis) (CONS c' lis') /\\\n                                      lpresproof (asm UNION asm')\n                                                 (CONS c' lis') /\\\n                                      c' SUBSET (resolve p c cl))
-      #|  !asm cl. ppresproof asm cl\n            ==> !c. c IN asm\n                    ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                  cl' SUBSET cl /\\\n                                  (LAST (CONS cl' lis) = c)
+      #|  forall asm cl. ppresproof asm cl\n             ==> (forall c. c IN asm ==> clause c) /\\ clause cl /\\\n                 (forall c. c IN asm\n                      ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                    cl' SUBSET cl /\\\n                                    (LAST (CONS cl' lis) = c)) /\\\n                 (forall c lis p asm'.\n                        clause c /\\\n                        lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~p IN cl\n                        ==> ?c' lis'. suffix (CONS c lis) (CONS c' lis') /\\\n                                      lpresproof (asm UNION asm')\n                                                 (CONS c' lis') /\\\n                                      c' SUBSET (resolve p c cl))
+      #|  forall asm cl. ppresproof asm cl\n            ==> forall c. c IN asm\n                    ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                  cl' SUBSET cl /\\\n                                  (LAST (CONS cl' lis) = c)
       #|  literal q
-      #|  (!cl. cl IN hyps ==> lresproof hyps [cl]) /\\\n    (!c1 c2 lis cl.\n        lresproof hyps (CONS c1 lis) /\\ (c2 IN hyps \\/ MEM c2 lis) /\\\n        isaresolvent cl (c1,c2)\n        ==> lresproof hyps (CONS cl (CONS c1 lis)))
+      #|  (forall cl. cl IN hyps ==> lresproof hyps [cl]) /\\\n    (forall c1 c2 lis cl.\n        lresproof hyps (CONS c1 lis) /\\ (c2 IN hyps \\/ MEM c2 lis) /\\\n        isaresolvent cl (c1,c2)\n        ==> lresproof hyps (CONS cl (CONS c1 lis)))
       #|  t:A list
       #|  t:A list
       #|  ~(t:A list = [])
       #|  t':A list
       #|  t':A list
       #|  t:A list = []
-      #|  !P:(A->A->bool) l1 l2.\n       ~(l1 = []) /\\ ALL2 P l1 l2 ==> P (LAST l1) (LAST l2)
-      #|  !l1 l2. ALL2 P l1 l2 /\\ MEM x l1 ==> ?y. MEM y l2 /\\ P x y
-      #|  !hyps. (!c. c IN hyps ==> clause c)\n          ==> !lis. lresproof hyps lis ==> ALL clause lis
+      #|  forall P:(A->A->bool) l1 l2.\n       ~(l1 = []) /\\ ALL2 P l1 l2 ==> P (LAST l1) (LAST l2)
+      #|  forall l1 l2. ALL2 P l1 l2 /\\ MEM x l1 ==> ?y. MEM y l2 /\\ P x y
+      #|  forall hyps. (forall c. c IN hyps ==> clause c)\n          ==> forall lis. lresproof hyps lis ==> ALL clause lis
       #|  B1:form->bool
       #|  A1:form->bool
       #|  B:form->bool
@@ -9335,7 +9335,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  B':form->bool
       #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
       #|  ?B. B' instance_of B /\\ (B IN hyps \\/ MEM B lis)
-      #|  clause A /\\ !c. MEM c lis ==> clause c
+      #|  clause A /\\ forall c. MEM c lis ==> clause c
       #|  lis:(form->bool)list
       #|  A:form->bool
       #|  alist:(form->bool)list
@@ -9360,7 +9360,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
       #|  clause cl
       #|  cl:form->bool
-      #|  !plis. lpresproof asm plis\n           ==> (!c. MEM c plis ==> clause c) /\\\n               ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
+      #|  forall plis. lpresproof asm plis\n           ==> (forall c. MEM c plis ==> clause c) /\\\n               ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
       #|  formsubst jj p
       #|  jj:num->term
       #|  sos instance_of (LAST (CONS {} lis))
@@ -9371,7 +9371,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  lis:(form->bool)list
       #|  emp:form->bool
       #|  CONS {} (qlist:(form->bool)list)
-      #|  !plis. lpresproof asm plis\n           ==> ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
+      #|  forall plis. lpresproof asm plis\n           ==> ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
       #|  qlist:(form->bool)list
       #|  a /\\ b /\\ c <=> b /\\ a /\\ c
       #|  emptyclause:form->bool
@@ -9382,7 +9382,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  d:form->bool
       #|  ~(psatisfiable\n        {interp cl |\n         cl IN {IMAGE(formsubst v) cl | cl,v | cl IN hyps}})
       #|  IMAGE interp hyps
-      #|  (!cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> ?lis. lresproof hyps (CONS {} lis) /\\\n             (!p. p IN (LAST (CONS {} lis)) ==> negative p)
+      #|  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> ?lis. lresproof hyps (CONS {} lis) /\\\n             (forall p. p IN (LAST (CONS {} lis)) ==> negative p)
       #|  (b ==> a) ==> ~a ==> ~b
       #|RESOLVE_CLAUSE =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#!:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). (#!:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) c1:fun(form,bool))) (#clause:fun(fun(form,bool),bool) c2:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) (((#resolve:fun(form,fun(fun(form,bool),fun(fun(form,bool),fun(form,bool)))) p:form) c1:fun(form,bool)) c2:fun(form,bool))))))))))
       #|PRESPROOF_CLAUSE =  |- (#!:fun(fun(fun(fun(form,bool),bool),bool),bool) (\hyps:fun(fun(form,bool),bool). (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(form,bool),bool),bool) (\c:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c:fun(form,bool)) hyps:fun(fun(form,bool),bool))) (#clause:fun(fun(form,bool),bool) c:fun(form,bool)))))) ((#presproof:fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)) hyps:fun(fun(form,bool),bool)) cl:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool)))))))

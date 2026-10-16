@@ -79637,7 +79637,7 @@ Examples/brunn_minkowski quotations (466):
   i:num
   a <= b /\\ c <= d ==> a + c <= b + d
   measure(interval[a:real^N,b]) = &0
-  !a b c d:real^N.\n    ~(interval[a,b] = {}) /\\ ~(interval[c,d] = {})\n    ==> root (dimindex(:N))\n             (measure {x + y | x IN interval[a,b] /\\ y IN interval[c,d]})\n        >= root (dimindex(:N)) (measure(interval[a,b])) +\n           root (dimindex(:N)) (measure(interval[c,d]))
+  forall a b c d:real^N.\n    ~(interval[a,b] = {}) /\\ ~(interval[c,d] = {})\n    ==> root (dimindex(:N))\n             (measure {x + y | x IN interval[a,b] /\\ y IN interval[c,d]})\n        >= root (dimindex(:N)) (measure(interval[a,b])) +\n           root (dimindex(:N)) (measure(interval[c,d]))
   {x:real^N | x$k = &0}
   (x:real^N) IN s
   x:real^N
@@ -79707,7 +79707,7 @@ Examples/brunn_minkowski quotations (466):
   x <= &0 /\\ y <= &0 ==> x + y <= &0
   s SUBSET {x | P x} /\\ t SUBSET {x | Q x}\n        ==> (s INTER t) SUBSET {x | P x /\\ Q x}
   {x:real^N | x$k = &0}
-  (!x. P x \\/ Q x)\n        ==> s = (s INTER {x | P x}) UNION (s INTER {x | Q x})
+  (forall x. P x \\/ Q x)\n        ==> s = (s INTER {x | P x}) UNION (s INTER {x | Q x})
   s = (s INTER {x:real^N | x$k <= &0}) UNION (s INTER {x | x$k >= &0}) /\\\n      t = (t INTER {x:real^N | x$k <= &0}) UNION (t INTER {x | x$k >= &0})
   s SUBSET s' ==> {x + y:real^N | x IN s /\\ y IN t} SUBSET\n                         {x + y:real^N | x IN s' /\\ y IN t}
   {f x |x| x IN s /\\ ~(f x = a)} =\n                                     {t | t IN IMAGE f s /\\ ~(t = a)}
@@ -79726,12 +79726,12 @@ Examples/brunn_minkowski quotations (466):
   x <= a /\\ x >= a <=> x = a
   negligible t ==> negligible(s INTER t)
   (t INTER {x | P x}) INTER (t INTER {x | Q x}) =\n                               t INTER {x | P x /\\ Q x}
-  (!x. P x \\/ Q x)\n           ==> s INTER {x | P x} UNION s INTER {x | Q x} = s
+  (forall x. P x \\/ Q x)\n           ==> s INTER {x | P x} UNION s INTER {x | Q x} = s
   &0 < s /\\ &0 < t /\\ t' / t = s' / s  /\\ s' + s'' = s /\\ t' + t'' = t\n        ==> t' / t = s' / s /\\ t'' / t = s'' / s
   \\x:real^N. a % basis k + x
-  !g. (!x. f(x) IN s' <=> x IN s) /\\ (!x. g(f x) = x)\n               ==> IMAGE f t INTER s' = IMAGE f (t INTER s)
+  forall g. (forall x. f(x) IN s' <=> x IN s) /\\ (forall x. g(f x) = x)\n               ==> IMAGE f t INTER s' = IMAGE f (t INTER s)
   IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k >= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k >= a}) /\\\n        IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k <= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k <= a})
-  (!x y. Q x y ==> R x y)\n          ==> (!x y. P x /\\ P y /\\ Q x y ==> R x y)
+  (forall x y. Q x y ==> R x y)\n          ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)
   x - a:real^N = --a + x
   k:num
   j:real^N->bool
@@ -79747,14 +79747,14 @@ Examples/brunn_minkowski quotations (466):
   &0 <= u ==> x = &0 ==> x <= u
   ?a. a IN real_interval[--b,b] /\\\n            measure (t INTER {x:real^N | x$k <= a}) / measure t = u
   bounded(t:real^N->bool)
-  ?b:real. &0 < b /\\ !x:real^N. x IN t ==> abs(x$k) <= b
+  ?b:real. &0 < b /\\ forall x:real^N. x IN t ==> abs(x$k) <= b
   u:real
   u:real
   measure(s INTER {x:real^N | x$k <= &0}) / measure s
   &0 <= measure(s INTER {x:real^N | x$k <= &0}) / measure s /\\\n        measure(s INTER {x:real^N | x$k <= &0}) / measure s <= &1
   ?a. measure(t INTER {x:real^N | x$k <= a}) / measure t =\n          measure(s INTER {x:real^N | x$k <= &0}) / measure s
   &0 < measure(s:real^N->bool) /\\ &0 < measure(t:real^N->bool)
-  !d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\ ~(negligible i) /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\ ~(negligible j) /\\\n        measure(t INTER {x | x$k <= &0}) / measure t =\n        measure(s INTER {x | x$k <= &0}) / measure s /\\\n        measure(t INTER {x | x$k >= &0}) / measure t =\n        measure(s INTER {x | x$k >= &0}) / measure s /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
+  forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\ ~(negligible i) /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\ ~(negligible j) /\\\n        measure(t INTER {x | x$k <= &0}) / measure t =\n        measure(s INTER {x | x$k <= &0}) / measure s /\\\n        measure(t INTER {x | x$k >= &0}) / measure t =\n        measure(s INTER {x | x$k >= &0}) / measure s /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
   {a + x + y:real^N | x IN s /\\ y IN t} =\n           IMAGE (\\z. a + z) {x + y | x IN s /\\ y IN t}
   {f x y | x IN IMAGE g s /\\ y IN t} =\n           {f (g x) y | x IN s /\\ y IN t}
   x - a:real^N = --a + x
@@ -79764,8 +79764,8 @@ Examples/brunn_minkowski quotations (466):
   x - a:real^N = --a + x
   x - a:real^N = --a + x
   x - a:real^N = y - a <=> x = y
-  (!x y. f x = f y ==> x = y) /\\ ~(s = t)\n           ==> ~(IMAGE f s = IMAGE f t)
-  (!x y. Q x y ==> R x y)\n           ==> (!x y. P x /\\ P y /\\ Q x y ==> R x y)
+  (forall x y. f x = f y ==> x = y) /\\ ~(s = t)\n           ==> ~(IMAGE f s = IMAGE f t)
+  (forall x y. Q x y ==> R x y)\n           ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)
   k:num
   IMAGE (\\x:real^N. x - a % basis k) i
   IMAGE (\\x:real^N. x - a % basis k) j
@@ -79776,7 +79776,7 @@ Examples/brunn_minkowski quotations (466):
   IMAGE (\\x:real^N. x - a % basis k) s
   d2:(real^N->bool)->bool
   IMAGE (IMAGE (\\x:real^N. x - a % basis k)) d1
-  !i:real^N->bool. i IN d1 ==> ~(interior i = {})
+  forall i:real^N->bool. i IN d1 ==> ~(interior i = {})
   min v z <= a /\\ a <= max u w\n        ==> u < v /\\ w < z\n            ==> u <= a /\\ v <= a /\\ a <= w /\\ a <= z \\/\n                w <= a /\\ z <= a /\\ a <= u /\\ a <= v
   a:real
   k <= dimindex(:N)
@@ -79805,7 +79805,7 @@ Examples/brunn_minkowski quotations (466):
   d2:(real^N->bool)->bool
   {i:real^N->bool | i IN d1 /\\ ~(interior i = {})}
   ?i:real^N->bool. i IN d1 /\\ interior i = {}
-  !d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\\n        ~(negligible i) /\\ ~(negligible j) /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
+  forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\\n        ~(negligible i) /\\ ~(negligible j) /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)
   measure(IMAGE (\\x:real^N. a + x) t)
   ?a:real^N. a IN s
   measure(s:real^N->bool) = &0
@@ -79817,8 +79817,8 @@ Examples/brunn_minkowski quotations (466):
   ~(2 <= n) <=> n = 0 \\/ n = 1
   FINITE(d1:(real^N->bool)->bool) /\\\n                   FINITE(d2:(real^N->bool)->bool)
   x = y ==> x >= a + b ==> y >= b + a
-  (!d d' s s'. P d d' s s' ==> P d' d s' s) /\\\n    (!d d' s s'. ~(2 <= CARD d) /\\ ~(2 <= CARD d') ==> P d d' s s') /\\\n    (!d d' s s'. negligible s ==>  P d d' s s') /\\\n    (!d d' s s'. 2 <= CARD d /\\ ~(negligible s) /\\ ~(negligible s')\n                 ==> P d d' s s')\n    ==> !d d' s s'.  P d d' s s'
-  (!m. m < n ==> !a b c d. f a b = m /\\ stuff a b c d ==> other a b c d) <=>\n    (!a b c d. f a b:num < n /\\ stuff a b c d ==> other a b c d)
+  (forall d d' s s'. P d d' s s' ==> P d' d s' s) /\\\n    (forall d d' s s'. ~(2 <= CARD d) /\\ ~(2 <= CARD d') ==> P d d' s s') /\\\n    (forall d d' s s'. negligible s ==>  P d d' s s') /\\\n    (forall d d' s s'. 2 <= CARD d /\\ ~(negligible s) /\\ ~(negligible s')\n                 ==> P d d' s s')\n    ==> forall d d' s s'.  P d d' s s'
+  (forall m. m < n ==> forall a b c d. f a b = m /\\ stuff a b c d ==> other a b c d) <=>\n    (forall a b c d. f a b:num < n /\\ stuff a b c d ==> other a b c d)
   n:num
   n:num
   d1:(real^N->bool)->bool
@@ -79834,7 +79834,7 @@ Examples/brunn_minkowski quotations (466):
   d1:(real^N->bool)->bool
   t:real^N->bool
   s:real^N->bool
-  !s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ (?d. d division_of s) /\\ (?d. d division_of t)\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ (?d. d division_of s) /\\ (?d. d division_of t)\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
   interval[w:real^N,z]
   interval[u:real^N,v]
   t INTER {x:real^N | x$k >= &0}
@@ -79984,7 +79984,7 @@ Examples/brunn_minkowski quotations (466):
   atreal(&0) within {e | &0 <= e}
   {x + y:real^N | x IN {} /\\ y IN {}} = {}
   t:real^N->bool = {}
-  !s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ open s /\\ bounded t /\\ open t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ open s /\\ bounded t /\\ open t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
   s' SUBSET s /\\ t' SUBSET t\n    ==> {x + y:real^N | x IN s' /\\ y IN t'} SUBSET\n        {x + y | x IN s /\\ y IN t}
   root (dimindex (:N))\n          (measure {x + y:real^N | x IN interior s /\\ y IN interior t})
   measure(IMAGE (\\x:real^N. a + x) s)
@@ -79994,7 +79994,7 @@ Examples/brunn_minkowski quotations (466):
   ?a:real^N. a IN s
   interior s:real^N->bool = {}
   t:real^N->bool = {}
-  !s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ convex s /\\ bounded t /\\ convex t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ convex s /\\ bounded t /\\ convex t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
   vec 0:real^N
   x:real^N
   n:num
@@ -80012,7 +80012,7 @@ Examples/brunn_minkowski quotations (466):
   s:real^N->bool
   (x:real^N) IN s
   x:real^N
-  !s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s
+  forall s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s
   t' SUBSET t\n      ==> {x + y:real^N | x IN s /\\ y IN t'} SUBSET\n          {x + y | x IN s /\\ y IN t}
   vec 0:real^N
   x:real^N
@@ -80027,7 +80027,7 @@ Examples/brunn_minkowski quotations (466):
   e:real
   t' SUBSET t\n      ==> {x + y:real^N | x IN s /\\ y IN t'} SUBSET\n          {x + y | x IN s /\\ y IN t}
   \\n. {x + d:real^N | x IN s /\\ d IN ball(vec 0,inv(&n + &1))}
-  !s:real^N->bool.\n        compact s\n        ==> ((\\e. measure {x + d | x IN s /\\ d IN ball(vec 0,e)})\n             ---> measure s)\n            (atreal (&0) within {e | &0 <= e})
+  forall s:real^N->bool.\n        compact s\n        ==> ((\\e. measure {x + d | x IN s /\\ d IN ball(vec 0,e)})\n             ---> measure s)\n            (atreal (&0) within {e | &0 <= e})
   inv(&2) % d:real^N
   y:real^N
   x:real^N
@@ -80059,7 +80059,7 @@ Examples/brunn_minkowski quotations (466):
   \\e. root (dimindex(:N))\n             (measure {x + d:real^N | x IN s /\\ d IN ball(vec 0,e)}) +\n        root (dimindex(:N))\n             (measure {x + d:real^N | x IN t /\\ d IN ball(vec 0,e)})
   atreal (&0) within {e | &0 <= e}
   t:real^N->bool = {}
-  !s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ compact s /\\ compact t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ compact s /\\ compact t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
   s1 <= r1 /\\ s2 <= r2 /\\ rs <= s\n      ==> rs >= r1 + r2 ==> s1 + s2 <= s
   e < s ==> ~(s - e < &0)
   t':real^N->bool
@@ -80088,7 +80088,7 @@ Examples/brunn_minkowski quotations (466):
   ?a:real^N. a IN s
   measure(s:real^N->bool) = &0
   t:real^N->bool = {}
-  !s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ measurable s /\\ measurable t /\\\n    measurable {x + y | x IN s /\\ y IN t}\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
+  forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ measurable s /\\ measurable t /\\\n    measurable {x + y | x IN s /\\ y IN t}\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)
 BRUNN_MINKOWSKI_INTERVAL =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\d:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) #EMPTY:fun(cart(real,'N),bool)))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) #EMPTY:fun(cart(real,'N),bool))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%9017:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%9017:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))))))
 BRUNN_MINKOWSKI_ELEMENTARY =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(fun(fun(cart(real,'N),bool),bool),bool),bool) (\d:fun(fun(cart(real,'N),bool),bool). ((#division_of:fun(fun(fun(cart(real,'N),bool),bool),fun(fun(cart(real,'N),bool),bool)) d:fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool))))) (#?:fun(fun(fun(fun(cart(real,'N),bool),bool),bool),bool) (\d:fun(fun(cart(real,'N),bool),bool). ((#division_of:fun(fun(fun(cart(real,'N),bool),bool),fun(fun(cart(real,'N),bool),bool)) d:fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool))))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%9161:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%9161:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) t:fun(cart(real,'N),bool)))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) s:fun(cart(real,'N),bool)))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) t:fun(cart(real,'N),bool))))))))))
 BRUNN_MINKOWSKI_OPEN =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) t:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#open:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))) (#open:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))))))) ((#real_ge:fun(real,fun(real,bool)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%9351:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%9351:cart(real,'N)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) t:fun(cart(real,'N),bool)))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N)))))))))))) ((#real_add:fun(real,fun(real,real)) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) s:fun(cart(real,'N),bool)))) ((#root:fun(num,fun(real,real)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#measure:fun(fun(cart(real,'N),bool),real) t:fun(cart(real,'N),bool))))))))))

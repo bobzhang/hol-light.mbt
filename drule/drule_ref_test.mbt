@@ -61,7 +61,7 @@ test "drule matches drule.ml" {
   tmatch("match_lconst", ["x:bool"], "x /\\ y", "x /\\ T")
   tmatch("match_lconst_bad", ["x:bool"], "x /\\ y", "y /\\ T")
   tmatch("match_bad", [], "x /\\ y", "a \\/ b")
-  tmatch("match_ho", [], "!x:A. (P:A->bool) x", "!n:num. n = n")
+  tmatch("match_ho", [], "forall x:A. (P:A->bool) x", "forall n:num. n = n")
   tmatch("match_ho2", [], "?x:A. (P:A->B->bool) x y", "?n:num. n = m /\\ m = n")
   tmatch("match_ho_app", [], "(P:A->bool) (f (x:A))", "Q (g (y:B)):bool")
   tmatch("match_ho_beta", [], "\\x:A. (P:A->A->bool) x c", "\\n:num. n = c")
@@ -69,8 +69,8 @@ test "drule matches drule.ml" {
   tmatch("match_repeat_bad", [], "(x:A) = x", "T = F")
   let i1 = @drule.term_match(
     @list.List([]),
-    tm("!x:A. (P:A->bool) x"),
-    tm("!n:num. n = n"),
+    tm("forall x:A. (P:A->bool) x"),
+    tm("forall n:num. n = n"),
   )
   log.attempt("instantiate_ho", () => {
     stm(@drule.instantiate(i1, tm("(P:A->bool) (z:A)")))
@@ -159,7 +159,7 @@ test "drule matches drule.ml" {
       ),
     )
   })
-  let addth = hyp_of("!x y. (f:A->A->A) x y = f y x")
+  let addth = hyp_of("forall x y. (f:A->A->A) x y = f y x")
   th("PART_MATCH", () => {
     @drule.part_match(@equal.lhs, addth)(tm("(f:A->A->A) u v"))
   })
@@ -167,20 +167,20 @@ test "drule matches drule.ml" {
     @drule.part_match(@equal.lhs, addth)(tm("(g:A->A->A) u v"))
   })
   th("GEN_PART_MATCH", () => {
-    @drule.gen_part_match(@equal.lhs, hyp_of("!x. (f:A->A->A) x y = f y x"))(
+    @drule.gen_part_match(@equal.lhs, hyp_of("forall x. (f:A->A->A) x y = f y x"))(
       tm("(f:A->A->A) u v"),
     )
   })
   th("MATCH_MP", () => {
-    @drule.match_mp(hyp_of("!x:A. (P:A->bool) x ==> Q x"))(
+    @drule.match_mp(hyp_of("forall x:A. (P:A->bool) x ==> Q x"))(
       hyp_of("(P:A->bool) c"),
     )
   })
   th("MATCH_MP_ty", () => {
-    @drule.match_mp(hyp_of("!x:A. (x = x) ==> T"))(@kernel.refl(tm("F")))
+    @drule.match_mp(hyp_of("forall x:A. (x = x) ==> T"))(@kernel.refl(tm("F")))
   })
   th("MATCH_MP_bad", () => {
-    @drule.match_mp(hyp_of("!x:A. (P:A->bool) x ==> Q x"))(
+    @drule.match_mp(hyp_of("forall x:A. (P:A->bool) x ==> Q x"))(
       hyp_of("(R:A->bool) c"),
     )
   })
@@ -191,11 +191,11 @@ test "drule matches drule.ml" {
     @drule.match_mp(a1)(a2)
   })
   th("MATCH_MP_partial", () => {
-    @drule.match_mp(hyp_of("!x y:A. (P:A->bool) x ==> (R:A->A->bool) x y"))(
+    @drule.match_mp(hyp_of("forall x y:A. (P:A->bool) x ==> (R:A->A->bool) x y"))(
       hyp_of("(P:A->bool) c"),
     )
   })
-  let hr = hyp_of("!x:A. (P:A->bool) ((f:A->A) x) <=> Q x")
+  let hr = hyp_of("forall x:A. (P:A->bool) ((f:A->A) x) <=> Q x")
   th("HIGHER_REWRITE_CONV", () => {
     @drule.higher_rewrite_conv(@list.singleton(hr))(true)(
       tm("a /\\ (R:A->bool) ((f:A->A) c)"),

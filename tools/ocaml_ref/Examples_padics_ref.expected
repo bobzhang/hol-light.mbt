@@ -27829,8 +27829,8 @@ Examples/padics quotations (533):
   a2:num
   b1:num
   a1:num
-  ?padic. !p m n.\n          padic p (&m / &n) =\n          if ~prime p \\/ m = 0 \\/ n = 0 then &0\n          else &p pow (index p n) / &p pow (index p m)
-  ?qnorm.\n          (!p m n. prime p /\\ ~(m = 0) /\\ ~(n = 0)\n                   ==> qnorm p (&m / &n) =\n                       &p pow (index p n) / &p pow (index p m)) /\\\n          (!p x. qnorm p x = &0 <=> ~prime p \\/ ~rational x \\/ x = &0) /\\\n          (!p x. qnorm p (abs x) = qnorm p x)
+  ?padic. forall p m n.\n          padic p (&m / &n) =\n          if ~prime p \\/ m = 0 \\/ n = 0 then &0\n          else &p pow (index p n) / &p pow (index p m)
+  ?qnorm.\n          (forall p m n. prime p /\\ ~(m = 0) /\\ ~(n = 0)\n                   ==> qnorm p (&m / &n) =\n                       &p pow (index p n) / &p pow (index p m)) /\\\n          (forall p x. qnorm p x = &0 <=> ~prime p \\/ ~rational x \\/ x = &0) /\\\n          (forall p x. qnorm p (abs x) = qnorm p x)
   \\/
   \\/
   ~
@@ -27957,9 +27957,9 @@ Examples/padics quotations (533):
   \\/
   ~
   F
-  !p m n. qnorm p (&m / &n) =\n           if ~prime p \\/ m = 0 \\/ n = 0 then &0\n           else &p pow (index p n) / &p pow (index p m)
-  !p x. qnorm p (--x) = qnorm p x
-  !p. qnorm p (&0) = &0
+  forall p m n. qnorm p (&m / &n) =\n           if ~prime p \\/ m = 0 \\/ n = 0 then &0\n           else &p pow (index p n) / &p pow (index p m)
+  forall p x. qnorm p (--x) = qnorm p x
+  forall p. qnorm p (&0) = &0
   a2 = 0
   a1 = 0
   a1 / b1 * a2 / b2:real = (a1 * a2) * inv b1 * inv b2
@@ -27972,7 +27972,7 @@ Examples/padics quotations (533):
   rational y
   rational x
   prime p
-  !p x y. (rational (x * y) ==> rational x /\\ rational y)\n           ==> qnorm p (x * y) = qnorm p x * qnorm p y
+  forall p x y. (rational (x * y) ==> rational x /\\ rational y)\n           ==> qnorm p (x * y) = qnorm p x * qnorm p y
   \\/
   ~
   ~
@@ -27992,11 +27992,11 @@ Examples/padics quotations (533):
   ~
   F
   ~(x = &0) /\\ x * x = x ==> x = &1
-  !p. qnorm p (&1) = if prime p then &1 else &0
+  forall p. qnorm p (&1) = if prime p then &1 else &0
   x * y = &1 ==> x = inv y
   prime p
   x:real = &0
-  !p x. rational x ==> qnorm p (inv x) = inv(qnorm p x)
+  forall p x. rational x ==> qnorm p (inv x) = inv(qnorm p x)
   ~
   \\/
   ~
@@ -28006,9 +28006,9 @@ Examples/padics quotations (533):
   rational x
   ~(x = &0)
   (~(x = &0) ==> &0 <= x) ==> &0 <= x
-  !p x. &0 <= qnorm p x
+  forall p x. &0 <= qnorm p x
   &0 < x <=> &0 <= x /\\ ~(x = &0)
-  !p x. &0 < qnorm p x <=> prime p /\\ rational x /\\ ~(x = &0)
+  forall p x. &0 < qnorm p x <=> prime p /\\ rational x /\\ ~(x = &0)
   x <= z \\/ y <= z <=> MIN x y <= z
   (b1 + b2) + a1:num <= b2 + c <=> b1 + a1 <= c
   (b1 + b2) + a1:num <= b1 + c <=> b2 + a1 <= c
@@ -28027,7 +28027,7 @@ Examples/padics quotations (533):
   ~(y = &0)
   ~(x = &0)
   max a b = max b a
-  (!x y. P x y ==> P y x) /\\ (!x y. abs y <= abs x ==> P x y)\n    ==> (!x y. P x y)
+  (forall x y. P x y ==> P y x) /\\ (forall x y. abs y <= abs x ==> P x y)\n    ==> (forall x y. P x y)
   x:real
   y:real
   x = &0 /\\ &0 <= y ==> x <= max y z
@@ -28038,7 +28038,7 @@ Examples/padics quotations (533):
   y = &0
   y <= max x y
   x = &0
-  !p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= max (qnorm p x) (qnorm p y)
+  forall p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= max (qnorm p x) (qnorm p y)
   \\/
   ~
   \\/
@@ -28048,7 +28048,7 @@ Examples/padics quotations (533):
   F
   &0 <= x /\\ &0 <= y ==> max x y <= x + y
   p:num
-  !p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= qnorm p x + qnorm p y
+  forall p x y. (rational(x + y) ==> rational x /\\ rational y)\n           ==> qnorm p (x + y) <= qnorm p x + qnorm p y
   qadic_metric p =\n        metric(rational,(\\(x,y). qnorm (if prime p then p else 2) (x - y)))
   x - z:real = (x - y) + (y - z)
   z:real
@@ -28058,13 +28058,13 @@ Examples/padics quotations (533):
   \\(x,y). qnorm (if prime p then p else 2) (x - y)
   rational
   p:num
-  (!p. mspace(qadic_metric p) = rational) /\\\n   (!p x y. mdist(qadic_metric p) (x,y) =\n                if prime p then qnorm p (x - y)\n                else qnorm 2 (x - y))
+  (forall p. mspace(qadic_metric p) = rational) /\\\n   (forall p x y. mdist(qadic_metric p) (x,y) =\n                if prime p then qnorm p (x - y)\n                else qnorm 2 (x - y))
   x - z:real = (x - y) + (y - z)
   z:real
   y:real
   x:real
   prime p
-  !p x y z.\n        x IN mspace(qadic_metric p) /\\\n        y IN mspace(qadic_metric p) /\\\n        z IN mspace(qadic_metric p)\n        ==> mdist(qadic_metric p) (x,z) <=\n            max (mdist(qadic_metric p) (x,y)) (mdist(qadic_metric p) (y,z))
+  forall p x y z.\n        x IN mspace(qadic_metric p) /\\\n        y IN mspace(qadic_metric p) /\\\n        z IN mspace(qadic_metric p)\n        ==> mdist(qadic_metric p) (x,z) <=\n            max (mdist(qadic_metric p) (x,y)) (mdist(qadic_metric p) (y,z))
   ?x:real. T
   mk_padic
   dest_padic
@@ -28088,7 +28088,7 @@ Examples/padics quotations (533):
   {y | y IN IMAGE f s /\\ P y} =\n          IMAGE f {x | x IN s /\\ P(f x)}
   (q ==> p) /\\ q /\\ r ==> p /\\ q /\\ r
   prational
-  !x. x IN rational\n          ==> g ((f:real->real->real) x) = padic_of_rational x
+  forall x. x IN rational\n          ==> g ((f:real->real->real) x) = padic_of_rational x
   prational = IMAGE (g:(real->real)->padic)\n                        (IMAGE (f:real->real->real) rational)
   l:real->real
   (h:padic->real->real) o (x:num->padic)
@@ -28151,29 +28151,29 @@ Examples/padics quotations (533):
   s:(real->real)->bool
   qadic_metric p
   p:num
-  !p. ?(m:padic metric).\n          mcomplete m /\\\n          mspace m = (:padic) /\\\n          mtopology m closure_of prational = (:padic) /\\\n          mtopology m derived_set_of prational = (:padic) /\\\n          !x y. rational x /\\ rational y\n                ==> mdist m (padic_of_rational x,padic_of_rational y) =\n                    qnorm (if prime p then p else 2) (x - y)
-  !p. mspace(padic_metric p) = (:padic)
-  !p. mcomplete (padic_metric p)
+  forall p. ?(m:padic metric).\n          mcomplete m /\\\n          mspace m = (:padic) /\\\n          mtopology m closure_of prational = (:padic) /\\\n          mtopology m derived_set_of prational = (:padic) /\\\n          forall x y. rational x /\\ rational y\n                ==> mdist m (padic_of_rational x,padic_of_rational y) =\n                    qnorm (if prime p then p else 2) (x - y)
+  forall p. mspace(padic_metric p) = (:padic)
+  forall p. mcomplete (padic_metric p)
   padic_topology p = mtopology (padic_metric p)
-  !p. topspace(padic_topology p) = (:padic)
-  !p. hausdorff_space (padic_topology p)
-  !p. (padic_topology p) closure_of prational = (:padic)
-  !p. (padic_topology p) derived_set_of prational = (:padic)
+  forall p. topspace(padic_topology p) = (:padic)
+  forall p. hausdorff_space (padic_topology p)
+  forall p. (padic_topology p) closure_of prational = (:padic)
+  forall p. (padic_topology p) derived_set_of prational = (:padic)
   pdist p = mdist (padic_metric p)
-  !p q r. rational q /\\ rational r\n         ==> pdist p (padic_of_rational q,padic_of_rational r) =\n             if prime p then qnorm p (q - r) else qnorm 2 (q - r)
-  !p q r. prime p /\\ rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm p (q - r)
-  !p q r. rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm (if prime p then p else 2) (q - r)
-  !p x y. &0 <= pdist p (x,y)
-  !p x. pdist p (x,x) = &0
-  !p x y. pdist p (x,y) = pdist p (y,x)
-  !p x y. pdist p (x,y) = &0 <=> x = y
-  !p x y z.\n        pdist p (x,z) <= pdist p (x,y) + pdist p (y,z)
-  !p. (\\(x,y,z). &0 <= f x y z) p <=>\n         f (FST p) (FST(SND p)) (SND(SND p)) IN {t | &0 <= t}
+  forall p q r. rational q /\\ rational r\n         ==> pdist p (padic_of_rational q,padic_of_rational r) =\n             if prime p then qnorm p (q - r) else qnorm 2 (q - r)
+  forall p q r. prime p /\\ rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm p (q - r)
+  forall p q r. rational q /\\ rational r\n           ==> pdist p (padic_of_rational q,padic_of_rational r) =\n               qnorm (if prime p then p else 2) (q - r)
+  forall p x y. &0 <= pdist p (x,y)
+  forall p x. pdist p (x,x) = &0
+  forall p x y. pdist p (x,y) = pdist p (y,x)
+  forall p x y. pdist p (x,y) = &0 <=> x = y
+  forall p x y z.\n        pdist p (x,z) <= pdist p (x,y) + pdist p (y,z)
+  forall p. (\\(x,y,z). &0 <= f x y z) p <=>\n         f (FST p) (FST(SND p)) (SND(SND p)) IN {t | &0 <= t}
   euclideanreal
   prational CROSS prational CROSS prational
   \\(x,y,z). pdist p (x,z)\n               <= max (pdist p (x,y)) (pdist p (y,z))
   prod_topology (padic_topology p)\n                   (prod_topology (padic_topology p) (padic_topology p))
-  !p x y z.\n        pdist p (x,z) <= max (pdist p (x,y)) (pdist p (y,z))
+  forall p x y z.\n        pdist p (x,z) <= max (pdist p (x,y)) (pdist p (y,z))
   a < e /\\ b < e ==> x <= max a b ==> x < e
   (x + y) - (x' + y'):real = (x - x') + (y - y')
   MAX M N <= n <=> M <= n /\\ N <= n
@@ -28187,7 +28187,7 @@ Examples/padics quotations (533):
   p':num
   prime p'
   p' = if prime p then p else 2
-  !p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n + y n)
+  forall p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n + y n)
   plus:padic->padic->padic
   prime p
   y:num->real
@@ -28200,14 +28200,14 @@ Examples/padics quotations (533):
   \\(x,y). padic_of_rational\n           (rational_of_padic x + rational_of_padic y)
   padic_metric p
   prod_metric (padic_metric p) (padic_metric p)
-  !p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        !x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x + y)
+  forall p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        forall x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x + y)
   n:num
   (x:num->real) n = --(c - x n) + c
   n:num
   qnorm p c + b
   b:real
   c:real
-  !p x. prime p /\\ cauchy_in (qadic_metric p) x\n           ==> ?b. &0 < b /\\ !n. qnorm p (x n) <= b
+  forall p x. prime p /\\ cauchy_in (qadic_metric p) x\n           ==> ?b. &0 < b /\\ forall n. qnorm p (x n) <= b
   B * e / &3 / B + B * e / &3 / B
   (x:num->real) m * y m - x n * y n =\n      x m * (y m - y n) + y n * (x m - x n)
   MAX M N <= n <=> M <= n /\\ N <= n
@@ -28223,14 +28223,14 @@ Examples/padics quotations (533):
   C:real
   B:real
   p:num
-  ?B. &0 < B /\\\n          (!n:num. qnorm p (x n) <= B) /\\\n          (!n:num. qnorm p (y n) <= B)
+  ?B. &0 < B /\\\n          (forall n:num. qnorm p (x n) <= B) /\\\n          (forall n:num. qnorm p (y n) <= B)
   p:num
   p':num
   prime p'
   prime p
   qadic_metric p = qadic_metric p'
   p' = if prime p then p else 2
-  !p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n * y n)
+  forall p x y. cauchy_in (qadic_metric p) x /\\ cauchy_in (qadic_metric p) y\n           ==> cauchy_in (qadic_metric p) (\\n. x n * y n)
   x:num->real
   y:num->real
   plus:padic->padic->padic
@@ -28245,49 +28245,49 @@ Examples/padics quotations (533):
   \\(x,y). padic_of_rational\n           (rational_of_padic x * rational_of_padic y)
   padic_metric p
   prod_metric (padic_metric p) (padic_metric p)
-  !p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        !x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x * y)
+  forall p. ?plus.\n        continuous_map\n         (prod_topology (padic_topology p) (padic_topology p),padic_topology p)\n         (\\(a,b). plus a b) /\\\n        forall x y. rational x /\\ rational y\n              ==> plus (padic_of_rational x) (padic_of_rational y) =\n                  padic_of_rational (x * y)
   padic_of_num n = padic_of_rational(&n)
   padic_neg p x = padic_mul p (padic_of_rational(-- &1)) x
   padic_sub p x y = padic_add p x (padic_neg p y)
-  !p x. rational x\n         ==> padic_neg p (padic_of_rational x) =\n             padic_of_rational (--x)
-  !p x y.\n         rational x /\\ rational y\n         ==> padic_sub p (padic_of_rational x) (padic_of_rational y) =\n             padic_of_rational (x - y)
+  forall p x. rational x\n         ==> padic_neg p (padic_of_rational x) =\n             padic_of_rational (--x)
+  forall p x y.\n         rational x /\\ rational y\n         ==> padic_sub p (padic_of_rational x) (padic_of_rational y) =\n             padic_of_rational (x - y)
   prod_topology (padic_topology p) (padic_topology p)
   (\\x. padic_add p (f x) (g x)) =\n    (\\(x,y). padic_add p x y) o (\\a. (f:A->padic) a,g a)
-  !p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_add p (f x) (g x))
+  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_add p (f x) (g x))
   prod_topology (padic_topology p) (padic_topology p)
   (\\x. padic_mul p (f x) (g x)) =\n    (\\(x,y). padic_mul p x y) o (\\a. (f:A->padic) a,g a)
-  !p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_mul p (f x) (g x))
-  !p top f:A->padic.\n        continuous_map (top,padic_topology p) f\n        ==> continuous_map (top,padic_topology p) (\\x. padic_neg p (f x))
-  !p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_sub p (f x) (g x))
+  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_mul p (f x) (g x))
+  forall p top f:A->padic.\n        continuous_map (top,padic_topology p) f\n        ==> continuous_map (top,padic_topology p) (\\x. padic_neg p (f x))
+  forall p top f g:A->padic.\n      continuous_map (top,padic_topology p) f /\\\n      continuous_map (top,padic_topology p) g\n      ==> continuous_map (top,padic_topology p) (\\x. padic_sub p (f x) (g x))
   padic_topology p
-  !p top s f g:A->padic.\n        (continuous_map (top,padic_topology p) f /\\\n         continuous_map (top,padic_topology p) g) /\\\n        (!x. x IN s ==> f x = g x)\n        ==> (!x. x IN top closure_of s ==> f x = g x)
+  forall p top s f g:A->padic.\n        (continuous_map (top,padic_topology p) f /\\\n         continuous_map (top,padic_topology p) g) /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> (forall x. x IN top closure_of s ==> f x = g x)
   p:num
-  (!x. P x) <=> (!x. x IN UNIV ==> P x)
+  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
   p:num
-  !p x y. padic_add p x y = padic_add p y x
-  !p x y z. padic_add p x (padic_add p y z) =\n             padic_add p (padic_add p x y) z
-  !p x. padic_add p (padic_of_num 0) x = x
-  !p x. padic_add p (padic_neg p x) x = padic_of_num 0
-  !p x y. padic_mul p x y = padic_mul p y x
-  !p x y z. padic_mul p x (padic_mul p y z) =\n             padic_mul p (padic_mul p x y) z
-  !p x. padic_mul p (padic_of_num 1) x = x
-  !p x y z. padic_mul p x (padic_add p y z) =\n             padic_add p (padic_mul p x y)  (padic_mul p x z)
+  forall p x y. padic_add p x y = padic_add p y x
+  forall p x y z. padic_add p x (padic_add p y z) =\n             padic_add p (padic_add p x y) z
+  forall p x. padic_add p (padic_of_num 0) x = x
+  forall p x. padic_add p (padic_neg p x) x = padic_of_num 0
+  forall p x y. padic_mul p x y = padic_mul p y x
+  forall p x y z. padic_mul p x (padic_mul p y z) =\n             padic_mul p (padic_mul p x y) z
+  forall p x. padic_mul p (padic_of_num 1) x = x
+  forall p x y z. padic_mul p x (padic_add p y z) =\n             padic_add p (padic_mul p x y)  (padic_mul p x z)
   pnorm p x = pdist p (padic_of_num 0,x)
   euclideanreal
-  (!x. P x) <=> (!x. x IN UNIV ==> P x)
+  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
   p:num
-  !p x y. pdist p (x,y) = pnorm p (padic_sub p x y)
-  !p. pnorm p (padic_of_num 0) = &0
-  !p x. rational x\n         ==> pnorm p (padic_of_rational x) =\n             qnorm (if prime p then p else 2) x
-  !p. pnorm p (padic_of_num 1) = &1
+  forall p x y. pdist p (x,y) = pnorm p (padic_sub p x y)
+  forall p. pnorm p (padic_of_num 0) = &0
+  forall p x. rational x\n         ==> pnorm p (padic_of_rational x) =\n             qnorm (if prime p then p else 2) x
+  forall p. pnorm p (padic_of_num 1) = &1
   x:padic
   x:padic
-  !p x. pnorm p (padic_neg p x) = pnorm p x
-  !p x. &0 <= pnorm p x
-  !p x. pnorm p (padic_of_num 0) = &0
-  !p x. pnorm p x = &0 <=> x = padic_of_num 0
+  forall p x. pnorm p (padic_neg p x) = pnorm p x
+  forall p x. &0 <= pnorm p x
+  forall p x. pnorm p (padic_of_num 0) = &0
+  forall p x. pnorm p x = &0 <=> x = padic_of_num 0
   &0 < x <=> &0 <= x /\\ ~(x = &0)
-  !p x. &0 < pnorm p x <=> ~(x = padic_of_num 0)
+  forall p x. &0 < pnorm p x <=> ~(x = padic_of_num 0)
   padic_neg p y
   padic_of_num 0
   x:padic
@@ -28295,16 +28295,16 @@ Examples/padics quotations (533):
   x:padic
   y:padic
   pnorm p (padic_sub p x (padic_neg p y))
-  !p x y. pnorm p (padic_add p x y) <= max (pnorm p x) (pnorm p y)
+  forall p x y. pnorm p (padic_add p x y) <= max (pnorm p x) (pnorm p y)
   x <= max y z /\\ &0 <= y /\\ &0 <= z ==> x <= y + z
-  !p x y. pnorm p (padic_add p x y) <= pnorm p x + pnorm p y
+  forall p x y. pnorm p (padic_add p x y) <= pnorm p x + pnorm p y
   euclideanreal
-  (!x. P x) <=> (!x. x IN UNIV ==> P x)
+  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
   p:num
-  !p x y. pnorm p (padic_mul p x y) = pnorm p x * pnorm p y
-  !p x y. padic_mul p x y = padic_of_num 0 <=>\n          x = padic_of_num 0 \\/ y = padic_of_num 0
+  forall p x y. pnorm p (padic_mul p x y) = pnorm p x * pnorm p y
+  forall p x y. padic_mul p x y = padic_of_num 0 <=>\n          x = padic_of_num 0 \\/ y = padic_of_num 0
   padic_inv p x = if x = padic_of_num 0 then padic_of_num 0\n                  else @y. padic_mul p x y = padic_of_num 1
-  !p. padic_inv p (padic_of_num 0) = padic_of_num 0
+  forall p. padic_inv p (padic_of_num 0) = padic_of_num 0
   n:num
   prod_topology (padic_topology p) (padic_topology p)
   padic_mul p x y = (\\(x,y). padic_mul p x y) (x,y)
@@ -28314,7 +28314,7 @@ Examples/padics quotations (533):
   y:padic
   n:num
   m:num
-  !x. e <= x ==> &0 < x
+  forall x. e <= x ==> &0 < x
   ~(x = &0) /\\ ~(y = &0)\n      ==> inv x - inv y = --(x - y) * inv(x) * inv(y)
   MAX M N <= n <=> M <= n /\\ N <= n
   n:num
@@ -28337,11 +28337,11 @@ Examples/padics quotations (533):
   x:padic
   prational
   padic_metric p
-  !p x. ~(x = padic_of_num 0)\n         ==> padic_mul p x (padic_inv p x) = padic_of_num 1
-  !p x. ~(x = padic_of_num 0)\n         ==> padic_mul p (padic_inv p x) x = padic_of_num 1
+  forall p x. ~(x = padic_of_num 0)\n         ==> padic_mul p x (padic_inv p x) = padic_of_num 1
+  forall p x. ~(x = padic_of_num 0)\n         ==> padic_mul p (padic_inv p x) x = padic_of_num 1
   x * y = &1 ==> x = inv y
   x = padic_of_num 0
-  !p x. pnorm p (padic_inv p x) = inv(pnorm p x)
+  forall p x. pnorm p (padic_inv p x) = inv(pnorm p x)
 qnorm_def =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) (#real_of_num:fun(num,real) n:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) p:num)) ((#index:fun(num,fun(num,num)) p:num) n:num))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) p:num)) ((#index:fun(num,fun(num,num)) p:num) m:num)))))))))))
 QNORM_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#prime:fun(num,bool) p:num))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#rational:fun(real,bool) x:real))) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
 QNORM_ABS =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#qnorm:fun(num,fun(real,real)) p:num) (#real_abs:fun(real,real) x:real))) ((#qnorm:fun(num,fun(real,real)) p:num) x:real))))))

@@ -7220,12 +7220,12 @@ test "Logic/fol matches Logic/fol.ml" {
       #|0..0..2..5..13..solved at 19
       #|Logic/fol quotations (210):
       #|  (LIST_UNION [] = {}) /\\\n   (LIST_UNION (CONS h t) = h UNION (LIST_UNION t))
-      #|  !l. ALL FINITE l ==> FINITE(LIST_UNION l)
-      #|  !x l. x IN (LIST_UNION l) <=> EX (\\s. x IN s) l
-      #|  !l1 l2. LIST_UNION(APPEND l1 l2) = (LIST_UNION l1) UNION (LIST_UNION l2)
+      #|  forall l. ALL FINITE l ==> FINITE(LIST_UNION l)
+      #|  forall x l. x IN (LIST_UNION l) <=> EX (\\s. x IN s) l
+      #|  forall l1 l2. LIST_UNION(APPEND l1 l2) = (LIST_UNION l1) UNION (LIST_UNION l2)
       #|  ALL(P:term->bool)
       #|  P:term->bool
-      #|  !P. (!v. P(V v)) /\\ (!s l. ALL P l ==> P(Fn s l)) ==> !t. P t
+      #|  forall P. (forall v. P(V v)) /\\ (forall s l. ALL P l ==> P(Fn s l)) ==> forall t. P t
       #|  l:term list
       #|  l:term list
       #|  l:term list
@@ -7236,14 +7236,14 @@ test "Logic/fol matches Logic/fol.ml" {
       #|  []:(Z)list
       #|  h:num->(term)list->(Z)list->Z
       #|  f:num->Z
-      #|  !f h. ?fn:term->Z.\n        (!v. fn(V v) = f v) /\\\n        (!s l. fn(Fn s l) = h s l (MAP fn l))
+      #|  forall f h. ?fn:term->Z.\n        (forall v. fn(V v) = f v) /\\\n        (forall s l. fn(Fn s l) = h s l (MAP fn l))
       #|  Not p = p --> False
       #|  True = Not False
       #|  p || q = (p --> q) --> q
       #|  p && q = Not (Not p || Not q)
       #|  (p <-> q) = (p --> q) && (q --> p)
       #|  ?? x p = Not(!!x (Not p))
-      #|  (!v. functions_term (V v) = {}) /\\\n   (!f l. functions_term (Fn f l) =\n        (f,LENGTH l) INSERT (LIST_UNION (MAP functions_term l)))
+      #|  (forall v. functions_term (V v) = {}) /\\\n   (forall f l. functions_term (Fn f l) =\n        (f,LENGTH l) INSERT (LIST_UNION (MAP functions_term l)))
       #|  (functions_form False = {}) /\\\n   (functions_form (Atom a l) = LIST_UNION (MAP functions_term l)) /\\\n   (functions_form (p --> q) = (functions_form p) UNION (functions_form q)) /\\\n   (functions_form (!! x p) = functions_form p)
       #|  (predicates_form False = {}) /\\\n   (predicates_form (Atom a l) = {(a,LENGTH l)}) /\\\n   (predicates_form (p --> q) =\n        (predicates_form p) UNION (predicates_form q)) /\\\n   (predicates_form (!! x p) = predicates_form p)
       #|  functions fms = UNIONS {functions_form f | f IN fms}
@@ -7257,79 +7257,79 @@ test "Logic/fol matches Logic/fol.ml" {
       #|  p = FST(p),FST(SND p),SND(SND p)
       #|  (M = M') <=> (Dom M = Dom M') /\\ (Fun M = Fun M') /\\ (Pred M = Pred M')
       #|  M = Dom M,Fun M,Pred M
-      #|  (!x. FVT (V x) = {x}) /\\\n   (!f l. FVT (Fn f l) = LIST_UNION (MAP FVT l))
-      #|  (FV False = {}) /\\\n   (!a l. FV (Atom a l) = LIST_UNION (MAP FVT l)) /\\\n   (!p q. FV (p --> q) = FV p UNION FV q) /\\\n   (!x p. FV (!! x p) = FV p DELETE x)
-      #|  (BV False = {}) /\\\n   (!a l. BV (Atom a l) = {}) /\\\n   (!p q. BV (p --> q) = BV p UNION BV q) /\\\n   (!x p. BV (!! x p) = x INSERT BV p)
-      #|  !t. FINITE(FVT t)
-      #|  !p. FINITE(FV p)
-      #|  !p. FINITE(BV p)
+      #|  (forall x. FVT (V x) = {x}) /\\\n   (forall f l. FVT (Fn f l) = LIST_UNION (MAP FVT l))
+      #|  (FV False = {}) /\\\n   (forall a l. FV (Atom a l) = LIST_UNION (MAP FVT l)) /\\\n   (forall p q. FV (p --> q) = FV p UNION FV q) /\\\n   (forall x p. FV (!! x p) = FV p DELETE x)
+      #|  (BV False = {}) /\\\n   (forall a l. BV (Atom a l) = {}) /\\\n   (forall p q. BV (p --> q) = BV p UNION BV q) /\\\n   (forall x p. BV (!! x p) = x INSERT BV p)
+      #|  forall t. FINITE(FVT t)
+      #|  forall p. FINITE(FV p)
+      #|  forall p. FINITE(BV p)
       #|  FV(??x p) = FV(p) DELETE x
       #|  valmod (x,a) v = \\y. if y = x then a else v y
-      #|  (!v a k. valmod (k,a) v k = a) /\\\n   (!v a k x. ~(x = k) ==> (valmod (k,a) v x = v x))
-      #|  !v x. valmod (x,v x) v = v
-      #|  !v a x b. valmod (x,a) (valmod (x,b) v) = valmod (x,a) v
-      #|  valuation(M) v <=> !x:num. v(x) IN Dom(M)
-      #|  !M a v. valuation(M) v /\\ a IN Dom(M) ==> valuation(M) (valmod (x,a) v)
-      #|  !v x. valmod(x,v x) v = v
-      #|  (!x. termval M v (V x) = v(x)) /\\\n   (!f l. termval M v (Fn f l) = Fun(M) f (MAP (termval M v) l))
-      #|  (holds M v False <=> F) /\\\n   (!a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (!p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (!x p. holds M v (!! x p) <=>\n                !a. a IN Dom(M) ==> holds M (valmod (x,a) v) p)
-      #|  hold M v fms <=> !p. p IN fms ==> holds M v p
-      #|  M satisfies fms <=> !v p. valuation(M) v /\\ p IN fms ==> holds M v p
-      #|  M satisfies {p} <=> !v. valuation(M) v ==> holds M v p
-      #|  (holds M v False <=> F) /\\\n   (holds M v True <=> T) /\\\n   (!a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (!p. holds M v (Not p) <=> ~(holds M v p)) /\\\n   (!p q. holds M v (p || q) <=> holds M v p \\/ holds M v q) /\\\n   (!p q. holds M v (p && q) <=> holds M v p /\\ holds M v q) /\\\n   (!p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (!p q. holds M v (p <-> q) <=> (holds M v p = holds M v q)) /\\\n   (!x p. holds M v (!! x p) <=>\n                !a. a IN Dom(M) ==> holds M (valmod (x,a) v) p) /\\\n   (!x p. holds M v (?? x p) <=>\n                ?a. a IN Dom(M) /\\ holds M (valmod (x,a) v) p)
-      #|  !l t x. x IN FVT t /\\ MEM t l\n             ==>  x IN LIST_UNION (MAP FVT l)
-      #|  \\t. !(v:num->A) v'.\n                (!x. x IN FVT t ==> (v' x = v x))\n                ==> (termval M v' t :A = termval M v t)
-      #|  !M t (v:num->A) v'.\n        (!x. x IN (FVT t) ==> (v'(x) = v(x)))\n             ==> (termval M v' t = termval M v t)
+      #|  (forall v a k. valmod (k,a) v k = a) /\\\n   (forall v a k x. ~(x = k) ==> (valmod (k,a) v x = v x))
+      #|  forall v x. valmod (x,v x) v = v
+      #|  forall v a x b. valmod (x,a) (valmod (x,b) v) = valmod (x,a) v
+      #|  valuation(M) v <=> forall x:num. v(x) IN Dom(M)
+      #|  forall M a v. valuation(M) v /\\ a IN Dom(M) ==> valuation(M) (valmod (x,a) v)
+      #|  forall v x. valmod(x,v x) v = v
+      #|  (forall x. termval M v (V x) = v(x)) /\\\n   (forall f l. termval M v (Fn f l) = Fun(M) f (MAP (termval M v) l))
+      #|  (holds M v False <=> F) /\\\n   (forall a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (forall p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (forall x p. holds M v (!! x p) <=>\n                forall a. a IN Dom(M) ==> holds M (valmod (x,a) v) p)
+      #|  hold M v fms <=> forall p. p IN fms ==> holds M v p
+      #|  M satisfies fms <=> forall v p. valuation(M) v /\\ p IN fms ==> holds M v p
+      #|  M satisfies {p} <=> forall v. valuation(M) v ==> holds M v p
+      #|  (holds M v False <=> F) /\\\n   (holds M v True <=> T) /\\\n   (forall a l. holds M v (Atom a l) <=> Pred(M) a (MAP (termval M v) l)) /\\\n   (forall p. holds M v (Not p) <=> ~(holds M v p)) /\\\n   (forall p q. holds M v (p || q) <=> holds M v p \\/ holds M v q) /\\\n   (forall p q. holds M v (p && q) <=> holds M v p /\\ holds M v q) /\\\n   (forall p q. holds M v (p --> q) <=> holds M v p ==> holds M v q) /\\\n   (forall p q. holds M v (p <-> q) <=> (holds M v p = holds M v q)) /\\\n   (forall x p. holds M v (!! x p) <=>\n                forall a. a IN Dom(M) ==> holds M (valmod (x,a) v) p) /\\\n   (forall x p. holds M v (?? x p) <=>\n                ?a. a IN Dom(M) /\\ holds M (valmod (x,a) v) p)
+      #|  forall l t x. x IN FVT t /\\ MEM t l\n             ==>  x IN LIST_UNION (MAP FVT l)
+      #|  \\t. forall(v:num->A) v'.\n                (forall x. x IN FVT t ==> (v' x = v x))\n                ==> (termval M v' t :A = termval M v t)
+      #|  forall M t (v:num->A) v'.\n        (forall x. x IN (FVT t) ==> (v'(x) = v(x)))\n             ==> (termval M v' t = termval M v t)
       #|  x:num = p
       #|  x:num
       #|  p:num
       #|  l:term list
       #|  l:term list
       #|  l:term list
-      #|  !M p (v:num->A) v'.\n      (!x. x IN (FV p) ==> (v'(x) = v(x)))\n             ==> (holds M v' p <=> holds M v p)
+      #|  forall M p (v:num->A) v'.\n      (forall x. x IN (FV p) ==> (v'(x) = v(x)))\n             ==> (holds M v' p <=> holds M v p)
       #|  satisfiable (U:A->bool) fms <=>\n   ?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        ~(Dom M = {}) /\\ M satisfies fms
-      #|  valid (U:A->bool) fms <=>\n   !M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        M satisfies fms
-      #|  entails (U:A->bool) A p <=>\n   !(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        hold M v A ==> holds M v p
-      #|  equivalent (U:A->bool) p q <=>\n   !(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        holds M v p <=> holds M v q
-      #|  interpretation (fns:(num#num)->bool,preds:(num#num)->bool) M <=>\n     !f l. (f,LENGTH l) IN fns /\\ ALL (\\x. x IN Dom(M)) l\n           ==> (Fun(M) f l) IN Dom(M)
+      #|  valid (U:A->bool) fms <=>\n   forall M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        M satisfies fms
+      #|  entails (U:A->bool) A p <=>\n   forall(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        hold M v A ==> holds M v p
+      #|  equivalent (U:A->bool) p q <=>\n   forall(M:(A->bool)#(num->A list->A)#(num->A list->bool)) v.\n        holds M v p <=> holds M v q
+      #|  interpretation (fns:(num#num)->bool,preds:(num#num)->bool) M <=>\n     forall f l. (f,LENGTH l) IN fns /\\ ALL (\\x. x IN Dom(M)) l\n           ==> (Fun(M) f l) IN Dom(M)
       #|  l:term list
       #|  l:term list
       #|  MEM (x:term) l
-      #|  !any:num#num->bool M v t.\n        interpretation (functions_term t,any) M /\\\n        valuation(M) v\n        ==> termval M v t IN Dom(M)
-      #|  !M funs1 funs2 preds1 preds2.\n        funs2 SUBSET funs1\n        ==> interpretation (funs1,preds1) M\n            ==> interpretation (funs2,preds2) M
-      #|  (!x. termsubst v (V x) = v(x)) /\\\n  (!f l. termsubst v (Fn f l) = Fn f (MAP (termsubst v) l))
-      #|  !M. (Fun(M) = Fn) ==> !v t. termsubst v t = termval M v t
-      #|  !M. (Fun(M) = Fn) ==> !t. termval M V t = t
-      #|  !M v i t. termval M v (termsubst i t) = termval M (termval M v o i) t
-      #|  !i j t. termsubst j (termsubst i t) = termsubst (termsubst j o i) t
-      #|  !t. termsubst V t = t
+      #|  forall any:num#num->bool M v t.\n        interpretation (functions_term t,any) M /\\\n        valuation(M) v\n        ==> termval M v t IN Dom(M)
+      #|  forall M funs1 funs2 preds1 preds2.\n        funs2 SUBSET funs1\n        ==> interpretation (funs1,preds1) M\n            ==> interpretation (funs2,preds2) M
+      #|  (forall x. termsubst v (V x) = v(x)) /\\\n  (forall f l. termsubst v (Fn f l) = Fn f (MAP (termsubst v) l))
+      #|  forall M. (Fun(M) = Fn) ==> forall v t. termsubst v t = termval M v t
+      #|  forall M. (Fun(M) = Fn) ==> forall t. termval M V t = t
+      #|  forall M v i t. termval M v (termsubst i t) = termval M (termval M v o i) t
+      #|  forall i j t. termsubst j (termsubst i t) = termsubst (termsubst j o i) t
+      #|  forall t. termsubst V t = t
       #|  Dom(a,Fn,b),Fn,Pred(a,Fn,b)
-      #|  !t v v'. (!x. x IN (FVT t) ==> (v'(x) = v(x)))\n            ==> (termsubst v' t = termsubst v t)
+      #|  forall t v v'. (forall x. x IN (FVT t) ==> (v'(x) = v(x)))\n            ==> (termsubst v' t = termsubst v t)
       #|  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
       #|  i:num->term
       #|  i:num->term
       #|  i:num->term
-      #|  !t i. FVT(termsubst i t) = {x | ?y. y IN FVT(t) /\\ x IN FVT(i y)}
-      #|  !x y. MAX x y = MAX y x
-      #|  !x y z. MAX x (MAX y z) = MAX (MAX x y) z
+      #|  forall t i. FVT(termsubst i t) = {x | ?y. y IN FVT(t) /\\ x IN FVT(i y)}
+      #|  forall x y. MAX x y = MAX y x
+      #|  forall x y z. MAX x (MAX y z) = MAX (MAX x y) z
       #|  SETMAX s = ITSET MAX s 0
       #|  VARIANT s = SETMAX s + 1
       #|  y <= x
       #|  x:num <= y
       #|  y:num <= s
       #|  x:num <= s
-      #|  (SETMAX {} = 0) /\\\n   (!x s. FINITE s ==>\n           (SETMAX (x INSERT s) = if x IN s then SETMAX s\n                                  else MAX x (SETMAX s)))
-      #|  !s. FINITE s ==> !x. x IN s ==> x <= SETMAX s
-      #|  (SETMAX {} = 0) /\\\n   (!x s. FINITE s ==>\n           (SETMAX (x INSERT s) = MAX x (SETMAX s)))
+      #|  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = if x IN s then SETMAX s\n                                  else MAX x (SETMAX s)))
+      #|  forall s. FINITE s ==> forall x. x IN s ==> x <= SETMAX s
+      #|  (SETMAX {} = 0) /\\\n   (forall x s. FINITE s ==>\n           (SETMAX (x INSERT s) = MAX x (SETMAX s)))
       #|  (x INSERT s) UNION t = x INSERT (s UNION t)
-      #|  !t. FINITE(t) ==> !s. FINITE(s) ==>\n                        (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
-      #|  !s t. FINITE(s UNION t)\n         ==> (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
+      #|  forall t. FINITE(t) ==> forall s. FINITE(s) ==>\n                        (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
+      #|  forall s t. FINITE(s UNION t)\n         ==> (SETMAX(s UNION t) = MAX (SETMAX s) (SETMAX t))
       #|  ~(x + 1 <= x)
-      #|  !s:num->bool. FINITE(s) ==> ~(VARIANT(s) IN s)
-      #|  !p. ~(VARIANT(FV p) IN FV(p))
+      #|  forall s:num->bool. FINITE(s) ==> ~(VARIANT(s) IN s)
+      #|  forall p. ~(VARIANT(FV p) IN FV(p))
       #|  (formsubst v False = False) /\\\n   (formsubst v (Atom p l) = Atom p (MAP (termsubst v) l)) /\\\n   (formsubst v (q --> r) = (formsubst v q --> formsubst v r)) /\\\n   (formsubst v (!!x q) =\n        let v' = valmod (x,V x) v in\n        let z = if ?y. y IN FV(!!x q) /\\ x IN FVT(v'(y))\n                then VARIANT(FV(formsubst v' q)) else x in\n        !!z (formsubst (valmod (x,V(z)) v) q))
       #|  ~(~p /\\ p)
-      #|  !p. formsubst V p = p
+      #|  forall p. formsubst V p = p
       #|  y:num
       #|  x:num
       #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
@@ -7338,46 +7338,46 @@ test "Logic/fol matches Logic/fol.ml" {
       #|  l:term list
       #|  l:term list
       #|  l:term list
-      #|  !p v v'. (!x. x IN (FV p) ==> (v'(x) = v(x)))\n            ==> (formsubst v' p = formsubst v p)
+      #|  forall p v v'. (forall x. x IN (FV p) ==> (v'(x) = v(x)))\n            ==> (formsubst v' p = formsubst v p)
       #|  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
       #|  y:num
       #|  a0' = VARIANT (FV (formsubst (valmod (a0,V a0) i) a1))
       #|  formsubst (valmod (a0,V a0) i) a1
-      #|  !p i. FV(formsubst i p) = {x | ?y. y IN FV(p) /\\ x IN FVT(i y)}
+      #|  forall p i. FV(formsubst i p) = {x | ?y. y IN FV(p) /\\ x IN FVT(i y)}
       #|  x:num
       #|  x:num
       #|  ~(y IN FV(formsubst (valmod (a0,V a0) i) a1))
       #|  y:num
       #|  x:num
       #|  (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
-      #|  !p i v. holds M (v:num->A) (formsubst i p) <=>\n           holds M (termval M v o i) p
+      #|  forall p i v. holds M (v:num->A) (formsubst i p) <=>\n           holds M (termval M v o i) p
       #|  y:num
-      #|  !x t p v. holds M (v:num->A) (formsubst (valmod (x,t) V) p) <=>\n             holds M (valmod (x,termval M v t) v) p
-      #|  !x y p v. holds M (v:num->A) (formsubst (valmod (x,V y) V) p) <=>\n             holds M (valmod (x,v(y)) v) p
-      #|  !x y p v. ~(y IN FV(!!x p))\n             ==> (holds M v (!!y (formsubst (valmod (x,V y) V) p)) <=>\n                  holds M (v:num->A) (!!x p))
-      #|  !x y p v. ~(y IN FV(??x p))\n              ==> (holds M v (??y (formsubst (valmod (x,V y) V) p)) <=>\n                   holds M (v:num->A) (??x p))
-      #|  !p x y. FV(formsubst (valmod (x,V y) V) p) DELETE y =\n           (FV(p) DELETE x) DELETE y
+      #|  forall x t p v. holds M (v:num->A) (formsubst (valmod (x,t) V) p) <=>\n             holds M (valmod (x,termval M v t) v) p
+      #|  forall x y p v. holds M (v:num->A) (formsubst (valmod (x,V y) V) p) <=>\n             holds M (valmod (x,v(y)) v) p
+      #|  forall x y p v. ~(y IN FV(!!x p))\n             ==> (holds M v (!!y (formsubst (valmod (x,V y) V) p)) <=>\n                  holds M (v:num->A) (!!x p))
+      #|  forall x y p v. ~(y IN FV(??x p))\n              ==> (holds M v (??y (formsubst (valmod (x,V y) V) p)) <=>\n                   holds M (v:num->A) (??x p))
+      #|  forall p x y. FV(formsubst (valmod (x,V y) V) p) DELETE y =\n           (FV(p) DELETE x) DELETE y
       #|  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
       #|  (s = a UNION c) /\\ (t = b UNION d)\n     ==> (s UNION t = (a UNION b) UNION (c UNION d))
       #|  i:num->term
       #|  i:num->term
       #|  i:num->term
-      #|  !l.\n     ALL\n     (\\t. !i. functions_term (termsubst i t) =\n              functions_term t UNION\n              {x | ?y. y IN FVT t /\\ x IN functions_term (i y)}) l\n     ==> (!i. LIST_UNION (MAP functions_term (MAP (termsubst i) l)) =\n              LIST_UNION (MAP functions_term l) UNION\n              {x | ?y. y IN LIST_UNION (MAP FVT l) /\\\n                       x IN functions_term (i y)})
-      #|  !t i. functions_term(termsubst i t) =\n         functions_term t UNION\n         {x | ?y. y IN FVT(t) /\\ x IN functions_term(i y)}
+      #|  forall l.\n     ALL\n     (\\t. forall i. functions_term (termsubst i t) =\n              functions_term t UNION\n              {x | ?y. y IN FVT t /\\ x IN functions_term (i y)}) l\n     ==> (forall i. LIST_UNION (MAP functions_term (MAP (termsubst i) l)) =\n              LIST_UNION (MAP functions_term l) UNION\n              {x | ?y. y IN LIST_UNION (MAP FVT l) /\\\n                       x IN functions_term (i y)})
+      #|  forall t i. functions_term(termsubst i t) =\n         functions_term t UNION\n         {x | ?y. y IN FVT(t) /\\ x IN functions_term(i y)}
       #|  {x | ?y. y IN (s UNION t) /\\ P x y} =\n     {x | ?y. y IN s /\\ P x y} UNION {x | ?y. y IN t /\\ P x y}
       #|  (a UNION b) UNION (c UNION d) = (a UNION c) UNION (b UNION d)
       #|  y:num = a0
       #|  i:num->term
-      #|  !p i. functions_form(formsubst i p) =\n         functions_form p UNION\n         {x | ?y. y IN FV(p) /\\ x IN functions_term(i y)}
-      #|  !x t p. x IN FV(p)\n           ==> (functions_form(formsubst (valmod (x,t) V) p) =\n                functions_form p UNION functions_term t)
-      #|  !p i. predicates_form(formsubst i p) = predicates_form p
+      #|  forall p i. functions_form(formsubst i p) =\n         functions_form p UNION\n         {x | ?y. y IN FV(p) /\\ x IN functions_term(i y)}
+      #|  forall x t p. x IN FV(p)\n           ==> (functions_form(formsubst (valmod (x,t) V) p) =\n                functions_form p UNION functions_term t)
+      #|  forall p i. predicates_form(formsubst i p) = predicates_form p
       #|  ~p /\\ p <=> F
       #|  language {(formsubst (valmod (x,V y) V) p)} = language {p}
       #|  l:term list
       #|  l:term list
       #|  MEM (x:term) l
       #|  MAP (termval M (v:num->A)) l =\n                 MAP (termval M' v) l
-      #|  !M t. (!f zs. (f,LENGTH zs) IN functions_term t\n                 ==> (Fun(M) f zs = Fun(M') f zs))\n         ==> !v:num->A. termval M v t = termval M' v t
+      #|  forall M t. (forall f zs. (f,LENGTH zs) IN functions_term t\n                 ==> (Fun(M) f zs = Fun(M') f zs))\n         ==> forall v:num->A. termval M v t = termval M' v t
       #|  v:num->A
       #|  v:num->A
       #|  v:num->A
@@ -7388,17 +7388,17 @@ test "Logic/fol matches Logic/fol.ml" {
       #|  v:num->A
       #|  a1:term list
       #|  a1:term list
-      #|  !f zs.\n           f,LENGTH zs IN functions_form (Atom a0 a1)\n           ==> (Fun M f zs :A = Fun M' f zs)
-      #|  !M M' p. (Dom(M) = Dom(M')) /\\\n            (!P zs. Pred(M) P zs = Pred(M') P zs) /\\\n            (!f zs. (f,LENGTH zs) IN functions_form p\n                    ==> (Fun(M) f zs = Fun(M') f zs))\n            ==> !v:num->A. holds M v p <=> holds M' v p
+      #|  forall f zs.\n           f,LENGTH zs IN functions_form (Atom a0 a1)\n           ==> (Fun M f zs :A = Fun M' f zs)
+      #|  forall M M' p. (Dom(M) = Dom(M')) /\\\n            (forall P zs. Pred(M) P zs = Pred(M') P zs) /\\\n            (forall f zs. (f,LENGTH zs) IN functions_form p\n                    ==> (Fun(M) f zs = Fun(M') f zs))\n            ==> forall v:num->A. holds M v p <=> holds M' v p
       #|  v:num->A
       #|  valmod (a0,a) (v:num->A)
       #|  v:num->A
       #|  v:num->A
-      #|  !x. termval M' (v:num->A) x = termval M (v:num->A) x
+      #|  forall x. termval M' (v:num->A) x = termval M (v:num->A) x
       #|  MAP (termval M' (v:num->A)) a1 = MAP (termval M (v:num->A)) a1
-      #|  !M M' p. (Dom(M) = Dom(M')) /\\\n            (!f zs. Fun(M) f zs = Fun(M') f zs) /\\\n            (!P zs. (P,LENGTH zs) IN predicates_form p\n                    ==> (Pred(M) P zs = Pred(M') P zs))\n            ==> !v:num->A. holds M v p <=> holds M' v p
+      #|  forall M M' p. (Dom(M) = Dom(M')) /\\\n            (forall f zs. Fun(M) f zs = Fun(M') f zs) /\\\n            (forall P zs. (P,LENGTH zs) IN predicates_form p\n                    ==> (Pred(M) P zs = Pred(M') P zs))\n            ==> forall v:num->A. holds M v p <=> holds M' v p
       #|  Dom(M):A->bool = EMPTY
-      #|  !M x p. (!v:num->A. valuation(M) v ==> holds M v (!!x p)) <=>\n           (Dom M = EMPTY) \\/ !v. valuation(M) v ==> holds M v p
+      #|  forall M x p. (forall v:num->A. valuation(M) v ==> holds M v (!!x p)) <=>\n           (Dom M = EMPTY) \\/ forall v. valuation(M) v ==> holds M v p
       #|  v:num->A = i o v
       #|  v:num->A
       #|  functions s SUBSET fns
@@ -7406,29 +7406,29 @@ test "Logic/fol matches Logic/fol.ml" {
       #|  p:form IN s
       #|  p:form
       #|  s:form->bool
-      #|  !x:A. x IN Dom(M) ==> (i x = x)
-      #|  !a. i o valmod (x,a) (v:num->A) = valmod (x,i(a)) ((i:A->A) o v)
+      #|  forall x:A. x IN Dom(M) ==> (i x = x)
+      #|  forall a. i o valmod (x,a) (v:num->A) = valmod (x,i(a)) ((i:A->A) o v)
       #|  v:num->A
       #|  p:form
       #|  x:num
-      #|  !p. functions_form p SUBSET fns\n        ==> !v:num->A. holds M' v p <=> holds M ((i:A->A) o v) p
+      #|  forall p. functions_form p SUBSET fns\n        ==> forall v:num->A. holds M' v p <=> holds M ((i:A->A) o v) p
       #|  Fun M P (MAP ((i:A->A) o termval M' (v:num->A)) args) IN\n                    Dom(M)
       #|  Fun M P (MAP ((i:A->A) o termval M' (v:num->A)) args)
       #|  v:num->A
-      #|  !t. MEM t args\n          ==> !v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
-      #|  !t. MEM t args ==> functions_term t SUBSET fns
+      #|  forall t. MEM t args\n          ==> forall v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
+      #|  forall t. MEM t args ==> functions_term t SUBSET fns
       #|  (P:num,LENGTH(args:term list)) IN fns
       #|  args:term list
       #|  P:num
-      #|  !t. functions_term t SUBSET fns\n        ==> !v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
+      #|  forall t. functions_term t SUBSET fns\n        ==> forall v:num->A. (i:A->A) (termval M' v t) = termval M (i o v) t
       #|  ALL (\\x:A. x IN D) l
       #|  b /\\ (b ==> a /\\ c) ==> a /\\ b /\\ c
       #|  ~(Dom(M) = ({}:A->bool))
       #|  x:A
-      #|  !x. (i:A->A) x IN Dom(M)
+      #|  forall x. (i:A->A) x IN Dom(M)
       #|  M' = (D:A->bool,\n                   (\\f args. Fun(M) f (MAP (i:A->A) args)),\n                   (\\P args. Pred(M) P (MAP i args)))
       #|  i = \\x. if x IN Dom(M) then x else @z:A. z IN Dom(M)
-      #|  !M fns preds D.\n        interpretation(fns,preds) M /\\\n        (Dom(M) SUBSET D) /\\\n        ~(Dom(M):A->bool = {})\n        ==> ?M'. interpretation(fns,preds) M' /\\\n                 (Dom(M') = D) /\\\n                 !s. functions s SUBSET fns /\\\n                     predicates s SUBSET preds\n                     ==> (M' satisfies s <=> M satisfies s)
+      #|  forall M fns preds D.\n        interpretation(fns,preds) M /\\\n        (Dom(M) SUBSET D) /\\\n        ~(Dom(M):A->bool = {})\n        ==> ?M'. interpretation(fns,preds) M' /\\\n                 (Dom(M') = D) /\\\n                 forall s. functions s SUBSET fns /\\\n                     predicates s SUBSET preds\n                     ==> (M' satisfies s <=> M satisfies s)
       #|LIST_UNION =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?185223,bool),fun(fun('?185223,bool),bool)) (#LIST_UNION:fun(list(fun('?185223,bool)),fun('?185223,bool)) #NIL:list(fun('?185223,bool)))) #EMPTY:fun('?185223,bool))) ((#=:fun(fun('?185223,bool),fun(fun('?185223,bool),bool)) (#LIST_UNION:fun(list(fun('?185223,bool)),fun('?185223,bool)) ((#CONS:fun(fun('?185223,bool),fun(list(fun('?185223,bool)),list(fun('?185223,bool)))) h:fun('?185223,bool)) t:list(fun('?185223,bool))))) ((#UNION:fun(fun('?185223,bool),fun(fun('?185223,bool),fun('?185223,bool))) h:fun('?185223,bool)) (#LIST_UNION:fun(list(fun('?185223,bool)),fun('?185223,bool)) t:list(fun('?185223,bool))))))
       #|LIST_UNION_FINITE =  |- (#!:fun(fun(list(fun('?185239,bool)),bool),bool) (\l:list(fun('?185239,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(fun('?185239,bool),bool),fun(list(fun('?185239,bool)),bool)) #FINITE:fun(fun('?185239,bool),bool)) l:list(fun('?185239,bool)))) (#FINITE:fun(fun('?185239,bool),bool) (#LIST_UNION:fun(list(fun('?185239,bool)),fun('?185239,bool)) l:list(fun('?185239,bool)))))))
       #|IN_LIST_UNION =  |- (#!:fun(fun('?185262,bool),bool) (\x:'?185262. (#!:fun(fun(list(fun('?185262,bool)),bool),bool) (\l:list(fun('?185262,bool)). ((#=:fun(bool,fun(bool,bool)) ((#IN:fun('?185262,fun(fun('?185262,bool),bool)) x:'?185262) (#LIST_UNION:fun(list(fun('?185262,bool)),fun('?185262,bool)) l:list(fun('?185262,bool))))) ((#EX:fun(fun(fun('?185262,bool),bool),fun(list(fun('?185262,bool)),bool)) (\s:fun('?185262,bool). ((#IN:fun('?185262,fun(fun('?185262,bool),bool)) x:'?185262) s:fun('?185262,bool)))) l:list(fun('?185262,bool))))))))

@@ -10099,21 +10099,21 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|Translating certificate to HOL inferences
       #|Divstep/idivstep quotations (124):
       #|  1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
-      #|  !P. (!i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2
+      #|  forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2
       #|  1
       #|  (vector[x;y]:A^2)$1 = x /\\\n   (vector[x;y]:A^2)$2 = y
       #|  2
-      #|  !t. isum(1..2) t = t(1) + t(2)
+      #|  forall t. isum(1..2) t = t(1) + t(2)
       #|  imat_I:int^2^2 = lambda i j. if i = j then &1 else &0
       #|  (imat_mul:int^2^2->int^2^2->int^2^2) m n =\n        lambda i j. isum(1..2) (\\k. m$i$k * n$k$j)
       #|  (imat_vmul:int^2^2->int^2->int^2) m v =\n        lambda i. isum(1..2) (\\j. m$i$j * v$j)
       #|  imat_vmul imat_I = I
-      #|  !m1 m2. imat_vmul (imat_mul m1 m2) = imat_vmul m1 o imat_vmul m2
-      #|  !m. imat_mul imat_I m = m
-      #|  !m1 m2 m3. imat_mul m1 (imat_mul m2 m3) = imat_mul (imat_mul m1 m2) m3
+      #|  forall m1 m2. imat_vmul (imat_mul m1 m2) = imat_vmul m1 o imat_vmul m2
+      #|  forall m. imat_mul imat_I m = m
+      #|  forall m1 m2 m3. imat_mul m1 (imat_mul m2 m3) = imat_mul (imat_mul m1 m2) m3
       #|  idivstep(d:int,f:int,g:int) =\n        if d >= &0 /\\ g rem &2 = &1\n        then &2 - d, g, (g - f) div &2\n        else &2 + d, f, (g + (g rem &2) * f) div &2
-      #|  !d f g d' f' g'.\n         d rem &2 = &1 /\\ idivstep(d,f,g) = d',f',g' ==> d' rem &2 = &1
-      #|  !d f g d' f' g'.\n         g = &0 /\\ idivstep(d,f,g) = d',f',g' ==> g' = &0
+      #|  forall d f g d' f' g'.\n         d rem &2 = &1 /\\ idivstep(d,f,g) = d',f',g' ==> d' rem &2 = &1
+      #|  forall d f g d' f' g'.\n         g = &0 /\\ idivstep(d,f,g) = d',f',g' ==> g' = &0
       #|  divstep_d n t = FST(ITER n idivstep t)
       #|  divstep_f n t = FST(SND(ITER n idivstep t))
       #|  divstep_g n t = SND(SND(ITER n idivstep t))
@@ -10132,26 +10132,26 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  p divides (p + x:int) <=> p divides x
       #|  x rem &2 = y rem &2 <=> (&2 divides x <=> &2 divides y)
       #|  &1:int = &0
-      #|  !n d f g. divstep_d n (d,f,g) rem &2 = d rem &2
-      #|  !n d f g. abs(abs(divstep_d n (d,f,g)) - abs(d)) <= &2 * &n
-      #|  !n d f g. f rem &2 = &1 ==> divstep_f n (d,f,g) rem &2 = &1
-      #|  !n d f g. g = &0 ==> divstep_g n (d,f,g) = &0
+      #|  forall n d f g. divstep_d n (d,f,g) rem &2 = d rem &2
+      #|  forall n d f g. abs(abs(divstep_d n (d,f,g)) - abs(d)) <= &2 * &n
+      #|  forall n d f g. f rem &2 = &1 ==> divstep_f n (d,f,g) rem &2 = &1
+      #|  forall n d f g. g = &0 ==> divstep_g n (d,f,g) = &0
       #|  p:int
       #|  &2:int
       #|  &2:int
       #|  m:int
       #|  coprime(k:int,m)\n      ==> (d divides m /\\ d divides p <=>\n           d divides m /\\ d divides (k * p))
-      #|  !m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)
+      #|  forall m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)
       #|  divstep_g n (d,f,g)
-      #|  !n d f g.\n        f rem &2 = &1\n        ==> gcd(divstep_f n (d,f,g),divstep_g n (d,f,g)) = gcd(f,g)
-      #|  divstep_g n (d,f,g)
-      #|  &0:int < &2
-      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  (!B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (!B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)
+      #|  forall n d f g.\n        f rem &2 = &1\n        ==> gcd(divstep_f n (d,f,g),divstep_g n (d,f,g)) = gcd(f,g)
       #|  divstep_g n (d,f,g)
       #|  &0:int < &2
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  (!B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (!B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)
+      #|  (forall B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (forall B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)
+      #|  divstep_g n (d,f,g)
+      #|  &0:int < &2
+      #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
+      #|  (forall B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (forall B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)
       #|  divstep_d n (&1,f,g) = &0
       #|  g:int
       #|  f:int
@@ -10161,7 +10161,7 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  &1 + x / &2 = (&2 + x) / &2
       #|  &1 - x / &2 = (&2 - x) / &2
       #|  x / &2 > &0 <=> x > &0
-      #|  !f g n.\n        ITER n divstep (&1 / &2,f,g) =\n        (real_of_int(divstep_d n (&1,f,g)) / &2,\n         divstep_f n (&1,f,g),\n         divstep_g n (&1,f,g))
+      #|  forall f g n.\n        ITER n divstep (&1 / &2,f,g) =\n        (real_of_int(divstep_d n (&1,f,g)) / &2,\n         divstep_f n (&1,f,g),\n         divstep_g n (&1,f,g))
       #|  divstep_mat 0 t = imat_I /\\\n  divstep_mat (SUC n) t =\n    imat_mul\n     (if divstep_d n t >= &0 /\\ divstep_g n t rem &2 = &1\n      then vector[vector[&0; &2]; vector[-- &1; &1]]\n      else vector[vector[&2; &0];vector[divstep_g n t rem &2; &1]])\n     (divstep_mat n t)
       #|  :P
       #|  :P
@@ -10176,35 +10176,35 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  -- &1 * x + &1 * y:int = y - x
       #|  (a:int) * x pow n * b = x pow n * a * b
       #|  (a:int) * x pow n = x pow n * a
-      #|  !d f g n.\n        f rem &2 = &1\n        ==> imat_vmul (divstep_mat n (d,f,g)) (vector[f;g]) =\n            vector[&2 pow n * divstep_f n (d,f,g);\n                   &2 pow n * divstep_g n (d,f,g)]
+      #|  forall d f g n.\n        f rem &2 = &1\n        ==> imat_vmul (divstep_mat n (d,f,g)) (vector[f;g]) =\n            vector[&2 pow n * divstep_f n (d,f,g);\n                   &2 pow n * divstep_g n (d,f,g)]
       #|  divstep_g n t
-      #|  !n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n
+      #|  forall n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n
       #|  divstep_g n t
-      #|  !n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n /\\\n    abs(divstep_mat n t$1$1) + abs(divstep_mat n t$1$2) <= &2 pow n /\\\n    abs(divstep_mat n t$2$1) + abs(divstep_mat n t$2$2) <= &2 pow n
+      #|  forall n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n /\\\n    abs(divstep_mat n t$1$1) + abs(divstep_mat n t$1$2) <= &2 pow n /\\\n    abs(divstep_mat n t$2$1) + abs(divstep_mat n t$2$2) <= &2 pow n
       #|  m:num
       #|  m:num
       #|  divstep_mat (m + n) t =\n   imat_mul (divstep_mat m (divstep_d n t,divstep_f n t,divstep_g n t))\n            (divstep_mat n t)
-      #|  !d f n.\n        divstep_mat n (d,f,&0) $1$2 = &0 /\\\n        divstep_mat n (d,f,&0) $2$1 = &0
-      #|  !d f g n. g = &0 ==> divstep_mat n (d,f,g) $1$2 = &0
-      #|  !d f g n. g = &0 ==> divstep_mat n (d,f,g) $2$1 = &0
+      #|  forall d f n.\n        divstep_mat n (d,f,&0) $1$2 = &0 /\\\n        divstep_mat n (d,f,&0) $2$1 = &0
+      #|  forall d f g n. g = &0 ==> divstep_mat n (d,f,g) $1$2 = &0
+      #|  forall d f g n. g = &0 ==> divstep_mat n (d,f,g) $2$1 = &0
       #|  (a == b) (mod (c * d:int)) ==> (a == b) (mod c)
       #|  m - n = SUC(m - SUC n)
       #|  SUC n <= m ==> n <= m
-      #|  !m d f g f' g' n.\n        (f == f') (mod (&2 pow m)) /\\ (g == g') (mod (&2 pow m)) /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == divstep_f n (d,f',g'))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == divstep_g n (d,f',g'))\n            (mod (&2 pow (m - n)))
-      #|  !d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g')
-      #|  !d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d',f',g')
-      #|  !d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d,f',g')
-      #|  !d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d',f',g')
+      #|  forall m d f g f' g' n.\n        (f == f') (mod (&2 pow m)) /\\ (g == g') (mod (&2 pow m)) /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == divstep_f n (d,f',g'))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == divstep_g n (d,f',g'))\n            (mod (&2 pow (m - n)))
+      #|  forall d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g')
+      #|  forall d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d',f',g')
+      #|  forall d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d,f',g')
+      #|  forall d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d',f',g')
       #|  (&2:int) pow n
-      #|  !m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
-      #|  !m n d f g.\n        m <= n\n        ==> divstep_d m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_d m (d,f,g)
+      #|  forall m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
+      #|  forall m n d f g.\n        m <= n\n        ==> divstep_d m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_d m (d,f,g)
       #|  (&2:int) pow n
-      #|  !m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
-      #|  !m n d f g.\n        m <= n\n        ==> divstep_mat m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_mat m (d,f,g)
+      #|  forall m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
+      #|  forall m n d f g.\n        m <= n\n        ==> divstep_mat m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_mat m (d,f,g)
       #|  --x + y * --z:int = --(x + y * z)
       #|  --x - --y:int = --(x - y)
       #|  f rem &2 = &1
-      #|  (!n d f g.\n      f rem &2 = &1 ==> divstep_d n (d,--f,--g) = divstep_d n (d,f,g)) /\\\n   (!n d f g.\n      f rem &2 = &1 ==>  divstep_mat n (d,--f,--g) = divstep_mat n (d,f,g)) /\\\n   (!n d f g.\n      f rem &2 = &1 ==> divstep_f n (d,--f,--g) = --(divstep_f n (d,f,g))) /\\\n   (!n d f g.\n      f rem &2 = &1 ==> divstep_g n (d,--f,--g) = --(divstep_g n (d,f,g)))
+      #|  (forall n d f g.\n      f rem &2 = &1 ==> divstep_d n (d,--f,--g) = divstep_d n (d,f,g)) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==>  divstep_mat n (d,--f,--g) = divstep_mat n (d,f,g)) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==> divstep_f n (d,--f,--g) = --(divstep_f n (d,f,g))) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==> divstep_g n (d,--f,--g) = --(divstep_g n (d,f,g)))
       #|  (--x:int == y) (mod p) <=> (x == --y) (mod p)
       #|  n:num
       #|  g':int
@@ -10213,7 +10213,7 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  --f:int
       #|  d:int
       #|  m:num
-      #|  !m d f g f' g' n.\n        (f == --f') (mod (&2 pow m)) /\\ (g == --g') (mod (&2 pow m)) /\\\n        f rem &2 = &1 /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == --(divstep_f n (d,f',g')))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == --(divstep_g n (d,f',g')))\n            (mod (&2 pow (m - n)))
+      #|  forall m d f g f' g' n.\n        (f == --f') (mod (&2 pow m)) /\\ (g == --g') (mod (&2 pow m)) /\\\n        f rem &2 = &1 /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == --(divstep_f n (d,f',g')))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == --(divstep_g n (d,f',g')))\n            (mod (&2 pow (m - n)))
       #|  hdivstep(d:int,f:int,g:int) =\n        if d > &0 /\\ g rem &2 = &1\n        then &2 - d, g, (g - f) div &2\n        else &2 + d, f, (g + (g rem &2) * f) div &2
       #|  &1 + x / &2 = y / &2 <=> &2 + x = y
       #|  &1 - x / &2 = y / &2 <=> &2 - x = y
@@ -10221,7 +10221,7 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  hdivstep(d,f,g) = d',f',g' <=>\n   divstep(real_of_int d / &2,f,g) = real_of_int d' / &2,f',g'
       #|  d:int = &0
       #|  d >= &0 <=> d:int = &0 \\/ d > &0
-      #|  !d f g. d rem &2 = &1 ==> hdivstep(d,f,g) = idivstep(d,f,g)
+      #|  forall d f g. d rem &2 = &1 ==> hdivstep(d,f,g) = idivstep(d,f,g)
       #|FORALL_2 =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|VECTOR_2 =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) ((#$:fun(cart('A,tybit0(1)),fun(num,'A)) (#vector:fun(list('A),cart('A,tybit0(1))) ((#CONS:fun('A,fun(list('A),list('A))) x:'A) ((#CONS:fun('A,fun(list('A),list('A))) y:'A) #NIL:list('A))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:'A)) ((#=:fun('A,fun('A,bool)) ((#$:fun(cart('A,tybit0(1)),fun(num,'A)) (#vector:fun(list('A),cart('A,tybit0(1))) ((#CONS:fun('A,fun(list('A),list('A))) x:'A) ((#CONS:fun('A,fun(list('A),list('A))) y:'A) #NIL:list('A))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) y:'A))
       #|ISUM_2 =  |- (#!:fun(fun(fun(num,int),bool),bool) (\t:fun(num,int). ((#=:fun(int,fun(int,bool)) ((#isum:fun(fun(num,bool),fun(fun(num,int),int)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) t:fun(num,int))) ((#int_add:fun(int,fun(int,int)) (t:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (t:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

@@ -86653,9 +86653,9 @@ Autoformalization/three_squares quotations (1104):
   r = x rem q
   q:int
   x:int
-  !x q:int. &0 < q ==> ?b. abs(x - q * b) * &2 <= q
+  forall x q:int. &0 < q ==> ?b. abs(x - q * b) * &2 <= q
   (abs a * &2) pow 2 <= q pow 2
-  !a q:int. abs a * &2 <= q ==> &4 * a pow 2 <= q pow 2
+  forall a q:int. abs a * &2 <= q ==> &4 * a pow 2 <= q pow 2
   &0 <= a /\\ &0 < b ==> &0 < a + b
   A11 * (A11*x pow 2 + &2*A12*x*y + A22*y pow 2) =\n      (A11*x + A12*y) pow 2 + (A11*A22 - A12 pow 2) * y pow 2
   &0 < A11 *\n       (A11*x pow 2 + &2*A12*x*y + A22*y pow 2)
@@ -86663,7 +86663,7 @@ Autoformalization/three_squares quotations (1104):
   ~(x = &0 /\\ y = &0)
   ~(x = &0)
   y = &0
-  !A11 A12 A22:int.\n     &0 < A11 /\\ &0 < A11 * A22 - A12 pow 2\n     ==> !x y. ~(x = &0 /\\ y = &0)\n               ==> &0 < A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2
+  forall A11 A12 A22:int.\n     &0 < A11 /\\ &0 < A11 * A22 - A12 pow 2\n     ==> forall x y. ~(x = &0 /\\ y = &0)\n               ==> &0 < A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2
   A11 * x pow 2 + &2*A12*x*y + A22*y pow 2 = n
   x - r * y:int
   y:int
@@ -86706,8 +86706,8 @@ Autoformalization/three_squares quotations (1104):
   y:int
   x:int
   abs:int->int
-  !A11. &0 < A11\n   ==> !A12 A22. A11 * A22 - A12 pow 2 = &1\n       ==> !n. (?x y. A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2 = n)\n               ==> ?u v:int. u pow 2 + v pow 2 = n
-  !a11 a12 a13 a22 a23 a33 x1 x2 x3:int.\n    a11 * (a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n           &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 + &2 * a23 * x2 * x3) =\n    (a11 * x1 + a12 * x2 + a13 * x3) pow 2 +\n    ((a11 * a22 - a12 pow 2) * x2 pow 2 +\n     &2 * (a11 * a23 - a12 * a13) * x2 * x3 +\n     (a11 * a33 - a13 pow 2) * x3 pow 2)
+  forall A11. &0 < A11\n   ==> forall A12 A22. A11 * A22 - A12 pow 2 = &1\n       ==> forall n. (?x y. A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2 = n)\n               ==> ?u v:int. u pow 2 + v pow 2 = n
+  forall a11 a12 a13 a22 a23 a33 x1 x2 x3:int.\n    a11 * (a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n           &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 + &2 * a23 * x2 * x3) =\n    (a11 * x1 + a12 * x2 + a13 * x3) pow 2 +\n    ((a11 * a22 - a12 pow 2) * x2 pow 2 +\n     &2 * (a11 * a23 - a12 * a13) * x2 * x3 +\n     (a11 * a33 - a13 pow 2) * x3 pow 2)
   u pow 2 + v pow 2 = n - L pow 2
   v:int
   u:int
@@ -86737,7 +86737,7 @@ Autoformalization/three_squares quotations (1104):
   G22 = a33 - a13 pow 2
   G12 = a23 - a12 * a13
   G11 = a22 - a12 pow 2
-  !a12 a13 a22 a23 a33 n:int.\n     &0 < &1 * a22 - a12 pow 2 /\\\n     &1 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. &1 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
+  forall a12 a13 a22 a23 a33 n:int.\n     &0 < &1 * a22 - a12 pow 2 /\\\n     &1 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. &1 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
   a * (u1' * x + u2' * y) + u3 * z = &1
   u1' * x' + u2' * y' = &1
   u2 = a * u2'
@@ -86772,7 +86772,7 @@ Autoformalization/three_squares quotations (1104):
   &0:int
   z:int
   u1 = &0 /\\ u2 = &0
-  !u1 u2 u3:int. (?x y z. u1 * x + u2 * y + u3 * z = &1)\n     ==> ?c12 c13 c22 c23 c32 c33.\n            u1 * (c22 * c33 - c23 * c32) -\n            c12 * (u2 * c33 - c23 * u3) +\n            c13 * (u2 * c32 - c22 * u3) = &1
+  forall u1 u2 u3:int. (?x y z. u1 * x + u2 * y + u3 * z = &1)\n     ==> ?c12 c13 c22 c23 c32 c33.\n            u1 * (c22 * c33 - c23 * c32) -\n            c12 * (u2 * c33 - c23 * u3) +\n            c13 * (u2 * c32 - c22 * u3) = &1
   u1:int
   u1:int
   u1:int
@@ -86821,7 +86821,7 @@ Autoformalization/three_squares quotations (1104):
   A11:int
   A12:int
   abs:int->int
-  !D. &0 < D ==>\n     !A11. &0 < A11\n       ==> !A12 A22. A11 * A22 - A12 pow 2 = D\n           ==> ?x y. ~(x = &0 /\\ y = &0) /\\\n                     &3 * (A11 * x pow 2 + &2 * A12 * x * y +\n                           A22 * y pow 2) pow 2\n                       <= &4 * D
+  forall D. &0 < D ==>\n     forall A11. &0 < A11\n       ==> forall A12 A22. A11 * A22 - A12 pow 2 = D\n           ==> ?x y. ~(x = &0 /\\ y = &0) /\\\n                     &3 * (A11 * x pow 2 + &2 * A12 * x * y +\n                           A22 * y pow 2) pow 2\n                       <= &4 * D
   y':int
   y * x':int
   x * x':int
@@ -86834,7 +86834,7 @@ Autoformalization/three_squares quotations (1104):
   e:int
   b:int
   a:int
-  !a b c:int. ?d. d divides a /\\ d divides b /\\ d divides c /\\\n                   (?x y z. d = a * x + b * y + c * z)
+  forall a b c:int. ?d. d divides a /\\ d divides b /\\ d divides c /\\\n                   (?x y z. d = a * x + b * y + c * z)
   mn = a11*x' pow 2 + a22*y pow 2 + a33*z pow 2 +\n                      &2*a12*x'*y + &2*a13*x'*z + &2*a23*y*z
   s:int
   q:int
@@ -86857,7 +86857,7 @@ Autoformalization/three_squares quotations (1104):
   ?v. &0 <= v /\\\n        (?x y z. ~(x = &0 /\\ y = &0 /\\ z = &0) /\\\n                 v = a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z)
   P:int->bool
   \\v:int. ?x y z. ~(x = &0 /\\ y = &0 /\\ z = &0) /\\\n                v = a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                    &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
-  !a11 a12 a13 a22 a23 a33:int.\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?v1 v2 v3.\n            ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n            (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                     ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                         &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                         &2 * a23 * v2 * v3\n                         <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                            &2 * a12 * x * y + &2 * a13 * x * z +\n                            &2 * a23 * y * z)
+  forall a11 a12 a13 a22 a23 a33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?v1 v2 v3.\n            ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n            (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                     ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                         &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                         &2 * a23 * v2 * v3\n                         <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                            &2 * a12 * x * y + &2 * a13 * x * z +\n                            &2 * a23 * y * z)
   g pow 2 = &1
   g = (g*w1)*x + (g*w2)*y + (g*w3)*z
   g*z:int
@@ -86870,7 +86870,7 @@ Autoformalization/three_squares quotations (1104):
   w3:int
   w2:int
   w1:int
-  !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11*(g*w1) pow 2 + a22*(g*w2) pow 2 +\n                  a33*(g*w3) pow 2 + &2*a12*(g*w1)*(g*w2) +\n                  &2*a13*(g*w1)*(g*w3) + &2*a23*(g*w2)*(g*w3)\n                  <= a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
+  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11*(g*w1) pow 2 + a22*(g*w2) pow 2 +\n                  a33*(g*w3) pow 2 + &2*a12*(g*w1)*(g*w2) +\n                  &2*a13*(g*w1)*(g*w3) + &2*a23*(g*w2)*(g*w3)\n                  <= a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
   &0 < Fw
   Fw = a11*w1 pow 2 + a22*w2 pow 2 + a33*w3 pow 2 +\n                     &2*a12*w1*w2 + &2*a13*w1*w3 + &2*a23*w2*w3
   g pow 2 = &1
@@ -86888,7 +86888,7 @@ Autoformalization/three_squares quotations (1104):
   v3:int
   v2:int
   v1:int
-  !a11 a12 a13 a22 a23 a33 v1 v2 v3:int.\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z +\n                       &2 * a23 * y * z) /\\\n     ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?x y z. v1 * x + v2 * y + v3 * z = &1
+  forall a11 a12 a13 a22 a23 a33 v1 v2 v3:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z +\n                       &2 * a23 * y * z) /\\\n     ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?x y z. v1 * x + v2 * y + v3 * z = &1
   v1:int
   v1:int
   v1:int
@@ -86910,19 +86910,19 @@ Autoformalization/three_squares quotations (1104):
   v1:int
   v2:int
   v3:int
-  !a11 a12 a13 a22 a23 a33:int.\n    (a11 * a22 - a12 pow 2) * (a11 * a33 - a13 pow 2) -\n    (a11 * a23 - a12 * a13) pow 2 =\n    a11 * (a11 * (a22 * a33 - a23 pow 2) -\n           a12 * (a12 * a33 - a23 * a13) +\n           a13 * (a12 * a23 - a22 * a13))
+  forall a11 a12 a13 a22 a23 a33:int.\n    (a11 * a22 - a12 pow 2) * (a11 * a33 - a13 pow 2) -\n    (a11 * a23 - a12 * a13) pow 2 =\n    a11 * (a11 * (a22 * a33 - a23 pow 2) -\n           a12 * (a12 * a33 - a23 * a13) +\n           a13 * (a12 * a23 - a22 * a13))
   &2 pow 3
-  !a:int. &2 <= a ==> &8 <= a pow 3
+  forall a:int. &2 <= a ==> &8 <= a pow 3
   &4 * (a11*x1 + a12*s + a13*t) pow 2 <= a11 pow 2
   a11 * a11 <= a11 * (a11*x1 pow 2 + a22*s pow 2 + a33*t pow 2 +\n            &2*a12*x1*s + &2*a13*x1*t + &2*a23*s*t)
-  !a11 a12 a13 a22 a23 a33 x1 s t Gst:int.\n     &0 < a11 /\\\n     a11 <= a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n             &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t /\\\n     &4 * (a11 * x1 + a12 * s + a13 * t) pow 2 <= a11 pow 2 /\\\n     a11 * (a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n            &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t) =\n       (a11 * x1 + a12 * s + a13 * t) pow 2 + Gst\n     ==> &3 * a11 pow 2 <= &4 * Gst
+  forall a11 a12 a13 a22 a23 a33 x1 s t Gst:int.\n     &0 < a11 /\\\n     a11 <= a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n             &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t /\\\n     &4 * (a11 * x1 + a12 * s + a13 * t) pow 2 <= a11 pow 2 /\\\n     a11 * (a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n            &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t) =\n       (a11 * x1 + a12 * s + a13 * t) pow 2 + Gst\n     ==> &3 * a11 pow 2 <= &4 * Gst
   &3 * G pow 2 <= &4 * a
   a pow 2 pow 2 = a pow 3 * a
   &3 pow 2 * a pow 2 pow 2 <= &4 pow 2 * G pow 2
   &16 * (&3 * G pow 2)
   a:int
   (&3 * a pow 2) pow 2 <= (&4 * G) pow 2
-  !a G:int.\n     &0 < a /\\ &0 < G /\\\n     &3 * a pow 2 <= &4 * G /\\ &3 * G pow 2 <= &4 * a\n     ==> &27 * a pow 3 <= &64
+  forall a G:int.\n     &0 < a /\\ &0 < G /\\\n     &3 * a pow 2 <= &4 * G /\\ &3 * G pow 2 <= &4 * a\n     ==> &27 * a pow 3 <= &64
   G22:int
   G12:int
   G11:int
@@ -86946,12 +86946,12 @@ Autoformalization/three_squares quotations (1104):
   G22 = a11*a33 - a13 pow 2
   G12 = a11*a23 - a12*a13
   G11 = a11*a22 - a12 pow 2
-  !a11 a12 a13 a22 a23 a33:int.\n     &0 < a11 /\\ &0 < a11 * a22 - a12 pow 2 /\\\n     &0 < a11 * (a22 * a33 - a23 pow 2) -\n          a12 * (a12 * a33 - a23 * a13) +\n          a13 * (a12 * a23 - a22 * a13)\n     ==> !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                          &2 * a12 * x * y + &2 * a13 * x * z +\n                          &2 * a23 * y * z
+  forall a11 a12 a13 a22 a23 a33:int.\n     &0 < a11 /\\ &0 < a11 * a22 - a12 pow 2 /\\\n     &0 < a11 * (a22 * a33 - a23 pow 2) -\n          a12 * (a12 * a33 - a23 * a13) +\n          a13 * (a12 * a23 - a22 * a13)\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                          &2 * a12 * x * y + &2 * a13 * x * z +\n                          &2 * a23 * y * z
   u1*(c22*c33 - c23*c32) - c12*(u2*c33 - c23*u3) +\n    c13*(u2*c32 - c22*u3) = &1
   (u2*c32 - u3*c22)*X1 + (u3*c12 - u1*c32)*X2 + (u1*c22 - u2*c12)*X3
   (c23*u3 - u2*c33)*X1 + (u1*c33 - c13*u3)*X2 + (c13*u2 - u1*c23)*X3
   (c22*c33 - c23*c32)*X1 + (c13*c32 - c12*c33)*X2 + (c12*c23 - c13*c22)*X3
-  !u1 u2 u3 c12 c22 c32 c13 c23 c33 X1 X2 X3:int.\n     u1 * (c22 * c33 - c23 * c32) -\n     c12 * (u2 * c33 - c23 * u3) +\n     c13 * (u2 * c32 - c22 * u3) = &1\n     ==> ?y1 y2 y3.\n            u1 * y1 + c12 * y2 + c13 * y3 = X1 /\\\n            u2 * y1 + c22 * y2 + c23 * y3 = X2 /\\\n            u3 * y1 + c32 * y2 + c33 * y3 = X3
+  forall u1 u2 u3 c12 c22 c32 c13 c23 c33 X1 X2 X3:int.\n     u1 * (c22 * c33 - c23 * c32) -\n     c12 * (u2 * c33 - c23 * u3) +\n     c13 * (u2 * c32 - c22 * u3) = &1\n     ==> ?y1 y2 y3.\n            u1 * y1 + c12 * y2 + c13 * y3 = X1 /\\\n            u2 * y1 + c22 * y2 + c23 * y3 = X2 /\\\n            u3 * y1 + c32 * y2 + c33 * y3 = X3
   &27 * b11 pow 3 <= &64
   b11:int
   ~(&2 <= b11)
@@ -87003,7 +87003,7 @@ Autoformalization/three_squares quotations (1104):
   G22 = b11*b33 - b13 pow 2
   G12 = b11*b23 - b12*b13
   G11 = b11*b22 - b12 pow 2
-  !b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     b11 * (b22 * b33 - b23 pow 2) - b12 * (b12 * b33 - b13 * b23) +\n       b13 * (b12 * b23 - b13 * b22) = &1 /\\\n     &0 < b11 * b22 - b12 pow 2 /\\\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                         &2 * b12 * x * y + &2 * b13 * x * z +\n                         &2 * b23 * y * z)\n     ==> b11 = &1
+  forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     b11 * (b22 * b33 - b23 pow 2) - b12 * (b12 * b33 - b13 * b23) +\n       b13 * (b12 * b23 - b13 * b22) = &1 /\\\n     &0 < b11 * b22 - b12 pow 2 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                         &2 * b12 * x * y + &2 * b13 * x * z +\n                         &2 * b23 * y * z)\n     ==> b11 = &1
   ~(s = &0 /\\ t = &0)
   t:int
   s:int
@@ -87053,14 +87053,14 @@ Autoformalization/three_squares quotations (1104):
   x*v3 + y*c32 + z*c33
   x*v2 + y*c22 + z*c23
   x*v1 + y*c12 + z*c13
-  !a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33:int.\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z) /\\\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) + a33 * c32 * c33\n     ==> !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                            &2 * b12 * x * y + &2 * b13 * x * z +\n                            &2 * b23 * y * z
+  forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z) /\\\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) + a33 * c32 * c33\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                            &2 * b12 * x * y + &2 * b13 * x * z +\n                            &2 * b23 * y * z
   a = b ==> &0 < a ==> &0 < b
   ~(b11 = &0)
   &0:int
   b11:int
   --b12:int
   &0 < b11 * (b11*b22 - b12 pow 2)
-  !b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     (!x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                       &2 * b12 * x * y + &2 * b13 * x * z + &2 * b23 * y * z)\n     ==> &0 < b11 * b22 - b12 pow 2
+  forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                       &2 * b12 * x * y + &2 * b13 * x * z + &2 * b23 * y * z)\n     ==> &0 < b11 * b22 - b12 pow 2
   y3:int
   y2:int
   y1:int
@@ -87079,7 +87079,7 @@ Autoformalization/three_squares quotations (1104):
   v3:int
   v2:int
   v1:int
-  !a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33 n:int.\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) +\n            a33 * c32 * c33 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?y1 y2 y3. b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n                    &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n                    &2 * b23 * y2 * y3 = n
+  forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33 n:int.\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) +\n            a33 * c32 * c33 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?y1 y2 y3. b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n                    &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n                    &2 * b23 * y2 * y3 = n
   b11 = &1
   b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n      &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n      &2 * b23 * y2 * y3 = n
   y3:int
@@ -87122,7 +87122,7 @@ Autoformalization/three_squares quotations (1104):
   b13:int
   &0 < b11*b22 - b12 pow 2
   b11:int
-  !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                     &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
+  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                     &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
   a11 * (a22 * a33 - a23 pow 2) -\n      a12 * (a12 * a33 - a23 * a13) +\n      a13 * (a12 * a23 - a22 * a13) = &1
   v1 * (c22 * c33 - c23 * c32) - c12 * (v2 * c33 - c23 * v3) +\n                   c13 * (v2 * c32 - c22 * v3) = &1
   b11*(b22*b33 - b23 pow 2) - b12*(b12*b33 - b13*b23) +\n    b13*(b12*b23 - b13*b22) = &1
@@ -87143,7 +87143,7 @@ Autoformalization/three_squares quotations (1104):
   a13:int
   a12:int
   a11:int
-  !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> b11 <= b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                       &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
+  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> b11 <= b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                       &2*b12*x*y + &2*b13*x*z + &2*b23*y*z
   b23 = a11*c12*c13 + a12*(c12*c23+c22*c13) +\n          a13*(c12*c33+c32*c13) + a22*c22*c23 +\n          a23*(c22*c33+c32*c23) + a33*c32*c33
   b13 = a11*v1*c13 + a12*(v1*c23+v2*c13) + a13*(v1*c33+v3*c13) +\n                a22*v2*c23 + a23*(v2*c33+v3*c23) + a33*v3*c33
   b12 = a11*v1*c12 + a12*(v1*c22+v2*c12) + a13*(v1*c32+v3*c12) +\n                a22*v2*c22 + a23*(v2*c32+v3*c22) + a33*v3*c32
@@ -87176,8 +87176,8 @@ Autoformalization/three_squares quotations (1104):
   a12:int
   a11:int
   a11*(a22*a33 - a23 pow 2) - a12*(a12*a33 - a23*a13) +\n       a13*(a12*a23 - a22*a13) = &1
-  !x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
-  !a11 a12 a13 a22 a23 a33 n:int.\n     &0 < a11 /\\\n     &0 < a11 * a22 - a12 pow 2 /\\\n     a11 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
+  forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z
+  forall a11 a12 a13 a22 a23 a33 n:int.\n     &0 < a11 /\\\n     &0 < a11 * a22 - a12 pow 2 /\\\n     a11 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
   v3:int
   v2:int
   v1:int
@@ -87240,47 +87240,47 @@ Autoformalization/three_squares quotations (1104):
   a11:int
   a22 divides (t pow 2 + d')
   a22 = d'*n - &1
-  !n d' t:int.\n     &1 < n /\\ &0 < d' /\\ (d' * n - &1) divides (t pow 2 + d')\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
+  forall n d' t:int.\n     &1 < n /\\ &0 < d' /\\ (d' * n - &1) divides (t pow 2 + d')\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
   d:int
   (x pow 2 + d' == &0) (mod (d'*n - &1))
   x:int
   d':int
-  !n d':int.\n     &1 < n /\\ &0 < d' /\\ (?x:int. (x pow 2 + d' == &0) (mod (d' * n - &1)))\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
+  forall n d':int.\n     &1 < n /\\ &0 < d' /\\ (?x:int. (x pow 2 + d' == &0) (mod (d' * n - &1)))\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n
   1 < 8
-  !d:num. (d == 1) (mod 8) ==> ?q. d = 8 * q + 1
+  forall d:num. (d == 1) (mod 8) ==> ?q. d = 8 * q + 1
   4
   8
   a:num
   x:num
-  !x a:num. (x == a) (mod 8) ==> (x == a) (mod 4)
+  forall x a:num. (x == a) (mod 8) ==> (x == a) (mod 4)
   ((8 * q + 1) EXP 2 - 1) DIV 8 = 8*q*q + 2*q
   q:num
-  !d:num. (d == 1) (mod 8) ==> jacobi(2, d) = &1
+  forall d:num. (d == 1) (mod 8) ==> jacobi(2, d) = &1
   1 < 4
-  !d:num. (d == 1) (mod 4) ==> ?q. d = 4 * q + 1
+  forall d:num. (d == 1) (mod 4) ==> ?q. d = 4 * q + 1
   q:num
-  !p:num. (p == 1) (mod 4) ==> ODD p
-  !p:num. (p == 1) (mod 4) ==> jacobi(p - 1, p) = &1
+  forall p:num. (p == 1) (mod 4) ==> ODD p
+  forall p:num. (p == 1) (mod 4) ==> jacobi(p - 1, p) = &1
   3 < 8
-  !d:num. (d == 3) (mod 8) ==> ?q. d = 8 * q + 3
+  forall d:num. (d == 3) (mod 8) ==> ?q. d = 8 * q + 3
   3 < 4
-  !d:num. (d == 3) (mod 4) ==> ?q. d = 4 * q + 3
+  forall d:num. (d == 3) (mod 4) ==> ?q. d = 4 * q + 3
   q:num
-  !p:num. (p == 3) (mod 4) ==> ODD p
+  forall p:num. (p == 3) (mod 4) ==> ODD p
   ((4 * q + 3) - 1) DIV 2 = 2 * q + 1
   ODD p
   q:num
-  !p:num. (p == 3) (mod 4) ==> jacobi(p - 1, p) = -- &1
+  forall p:num. (p == 3) (mod 4) ==> jacobi(p - 1, p) = -- &1
   ((8 * q + 3) EXP 2 - 1) DIV 8 = 8*q*q + 6*q + 1
   q:num
-  !d:num. (d == 3) (mod 8) ==> jacobi(2, d) = -- &1
+  forall d:num. (d == 3) (mod 8) ==> jacobi(2, d) = -- &1
   d':num
   p:num
   2
   d':num
   d' - 1
   2*p
-  !p d':num.\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> jacobi(p, d') = &1
+  forall p d':num.\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> jacobi(p, d') = &1
   8
   8
   8
@@ -87373,9 +87373,9 @@ Autoformalization/three_squares quotations (1104):
   qp:num
   d':num
   p:num
-  !p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\ (p == 1) (mod 4)\n     ==> jacobi(d', p) = jacobi(p, d')
+  forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\ (p == 1) (mod 4)\n     ==> jacobi(d', p) = jacobi(p, d')
   jacobi(d,p) = jacobi(p,d)
-  !p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
+  forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
   p:num
   d = d * 1
   d * (p - 1) + d = d * p:num
@@ -87386,26 +87386,26 @@ Autoformalization/three_squares quotations (1104):
   p:num
   d * (p - 1)
   ?x:num. (x EXP 2 == d * (p - 1)) (mod p)
-  !p d:num.\n     prime p /\\ jacobi(d * (p - 1),p) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
+  forall p d:num.\n     prime p /\\ jacobi(d * (p - 1),p) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
   ODD p
-  !p d:num.\n     prime p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
-  !p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
+  forall p d:num.\n     prime p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)
+  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
   x EXP 2 + d'
   (z EXP 2 + d' == 0) (mod p)
   z:num
-  !x p:num. (x + p == x) (mod p)
+  forall x p:num. (x + p == x) (mod p)
   x + p:num
   x:num
   ODD x
   ?z. ODD z /\\ (z == x) (mod p)
-  !p d' x:num.\n     ODD p /\\ ODD d' /\\ (x EXP 2 + d' == 0) (mod p)\n     ==> ?z. (z EXP 2 + d' == 0) (mod (2 * p))
+  forall p d' x:num.\n     ODD p /\\ ODD d' /\\ (x EXP 2 + d' == 0) (mod p)\n     ==> ?z. (z EXP 2 + d' == 0) (mod (2 * p))
   (x EXP 2 + d == 0) (mod q)
   q + 1 = d * m
   &d * &m - &1:int = &q
   &x:int
   &d:int
   &m:int
-  !q d m x:num.\n     (x EXP 2 + d == 0) (mod q) /\\\n     q + 1 = d * m /\\\n     1 < m /\\ 1 <= d\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
+  forall q d m x:num.\n     (x EXP 2 + d == 0) (mod q) /\\\n     q + 1 = d * m /\\\n     1 < m /\\ 1 <= d\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
   z:num
   m:num
   d:num
@@ -87414,7 +87414,7 @@ Autoformalization/three_squares quotations (1104):
   x:num
   d:num
   p:num
-  !p d m:num.\n     ODD p /\\ ODD d /\\\n     (?x. (x EXP 2 + d == 0) (mod p)) /\\\n     2 * p + 1 = d * m /\\\n     1 < m\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
+  forall p d m:num.\n     ODD p /\\ ODD d /\\\n     (?x. (x EXP 2 + d == 0) (mod p)) /\\\n     2 * p + 1 = d * m /\\\n     1 < m\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m
   ODD d
   ODD d
   ODD d
@@ -87423,15 +87423,15 @@ Autoformalization/three_squares quotations (1104):
   2
   c:num
   4 = 2 * 2
-  !a b c:num. ODD a /\\ c * b = 2 * a + 1 ==> coprime(a,4 * b)
+  forall a b c:num. ODD a /\\ c * b = 2 * a + 1 ==> coprime(a,4 * b)
   a:num
   m:num
-  !m a:num. 1 < m /\\ coprime(a,m)\n            ==> ?p. prime p /\\ (p == a) (mod m)
+  forall m a:num. 1 < m /\\ coprime(a,m)\n            ==> ?p. prime p /\\ (p == a) (mod m)
   1
   8*k+3
   4*k+1
-  !k:num. ?p. prime p /\\ (p == 4 * k + 1) (mod (4 * (8 * k + 3)))
-  !p c d m:num. prime p /\\ c * p + 1 = d * m ==> coprime(p,d)
+  forall k:num. ?p. prime p /\\ (p == 4 * k + 1) (mod (4 * (8 * k + 3)))
+  forall p c d m:num. prime p /\\ c * p + 1 = d * m ==> coprime(p,d)
   m:num
   d':num
   p:num
@@ -87460,25 +87460,25 @@ Autoformalization/three_squares quotations (1104):
   ?j. p = 4*(8*k+3)*j + (4*k+1)
   p:num
   k:num
-  !k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 3)
+  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 3)
   num_of_int(abs w)
   num_of_int(abs v)
   num_of_int(abs u)
   w:int
   v:int
   u:int
-  !n:num.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n)\n     ==> (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n)
-  !k:num. ?u v w:num. u EXP 2 + v EXP 2 + w EXP 2 = 8 * k + 3
+  forall n:num.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n)\n     ==> (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n)
+  forall k:num. ?u v w:num. u EXP 2 + v EXP 2 + w EXP 2 = 8 * k + 3
   ~(m = 0) ==> (n < m <=> n = m - 1 \\/ n < m - 1)
   8
   n:num
-  !n. (n EXP 2 == 0) (mod 8) \\/\n       (n EXP 2 == 1) (mod 8) \\/\n       (n EXP 2 == 4) (mod 8)
+  forall n. (n EXP 2 == 0) (mod 8) \\/\n       (n EXP 2 == 1) (mod 8) \\/\n       (n EXP 2 == 4) (mod 8)
   (x:num == a) (mod n) /\\ (y == b) (mod n) /\\ (z == c) (mod n) /\\\n    (x + y + z == d) (mod n)\n    ==> (a + b + c == d) (mod n)
   a ==> ~b <=> ~(a /\\ b)
   x:num
   y:num
   z:num
-  !x y z. ~((x EXP 2 + y EXP 2 + z EXP 2 == 7) (mod 8))
+  forall x y z. ~((x EXP 2 + y EXP 2 + z EXP 2 == 7) (mod 8))
   p divides (1 + p * q + r) <=> p divides (r + 1)
   p divides (1 + p * q) <=> p divides 1
   p:num divides (p * x + y) <=> p divides y
@@ -87488,7 +87488,7 @@ Autoformalization/three_squares quotations (1104):
   z:num
   y:num
   x:num
-  !x y z.\n     4 divides (x EXP 2 + y EXP 2 + z EXP 2)\n     ==> EVEN x /\\ EVEN y /\\ EVEN z
+  forall x y z.\n     4 divides (x EXP 2 + y EXP 2 + z EXP 2)\n     ==> EVEN x /\\ EVEN y /\\ EVEN z
   (2 * x) EXP 2 = 4 * x EXP 2
   4 * 4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2
   EVEN x /\\ EVEN y /\\ EVEN z
@@ -87498,7 +87498,7 @@ Autoformalization/three_squares quotations (1104):
   y:num
   x:num
   8
-  !a m x y z. ~(4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2)
+  forall a m x y z. ~(4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2)
   (2 * m) EXP 2 = 4 * m EXP 2
   2 * z
   2 * y
@@ -87506,18 +87506,18 @@ Autoformalization/three_squares quotations (1104):
   z:num
   y:num
   x:num
-  !n.\n     (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = n)\n     ==> (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = 4 * n)
+  forall n.\n     (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = n)\n     ==> (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = 4 * n)
   EVEN n
   n = 1
-  !n:num. 1 <= n /\\ EVEN n ==> ODD(n - 1)
+  forall n:num. 1 <= n /\\ EVEN n ==> ODD(n - 1)
   2 < 4
-  !n:num. (n == 2) (mod 4) ==> ?t. n = 4 * t + 2
+  forall n:num. (n == 2) (mod 4) ==> ?t. n = 4 * t + 2
   jacobi(d' - 1,d')
-  !p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\ (d' == 1) (mod 4) /\\\n     (p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
+  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\ (d' == 1) (mod 4) /\\\n     (p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
   1 <= n
   4 = 2 * 2
-  !n:num. 1 <= n /\\ EVEN n ==> coprime(n - 1, 4 * n)
-  !n:num. 1 <= n /\\ EVEN n ==> ?p. prime p /\\ (p == n - 1) (mod (4 * n))
+  forall n:num. 1 <= n /\\ EVEN n ==> coprime(n - 1, 4 * n)
+  forall n:num. 1 <= n /\\ EVEN n ==> ?p. prime p /\\ (p == n - 1) (mod (4 * n))
   x:num
   4 * t + 2
   d':num
@@ -87552,11 +87552,11 @@ Autoformalization/three_squares quotations (1104):
   4 * t + 2
   1 <= 4 * t + 2 /\\ EVEN(4 * t + 2)
   t:num
-  !n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n
+  forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n
   3
   8*k+1
   12*k+1
-  !k:num. ?p. prime p /\\ (p == 12 * k + 1) (mod (4 * (8 * k + 1)))
+  forall k:num. ?p. prime p /\\ (p == 12 * k + 1) (mod (4 * (8 * k + 1)))
   m:num
   d':num
   p:num
@@ -87588,7 +87588,7 @@ Autoformalization/three_squares quotations (1104):
   &0:int
   &1:int
   k = 0
-  !k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 1)
+  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 1)
   ((8 * qd + 3) - 1) DIV 2 = 4 * qd + 1
   (d' - 1) DIV 2 = 4 * qd + 1
   ((4 * qp + 3) - 1) DIV 2 = 2 * qp + 1
@@ -87597,15 +87597,15 @@ Autoformalization/three_squares quotations (1104):
   qp:num
   d':num
   p:num
-  !p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8)\n     ==> jacobi(d', p) = -- jacobi(p, d')
+  forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8)\n     ==> jacobi(d', p) = -- jacobi(p, d')
   jacobi(d,p) = -- jacobi(p,d)
-  !p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 3) (mod 4) /\\ (d == 3) (mod 8) /\\\n     jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
+  forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 3) (mod 4) /\\ (d == 3) (mod 8) /\\\n     jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1
   ODD p
-  !p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
+  forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)
   3
   8*k+5
   12*k+7
-  !k:num. ?p. prime p /\\ (p == 12 * k + 7) (mod (4 * (8 * k + 5)))
+  forall k:num. ?p. prime p /\\ (p == 12 * k + 7) (mod (4 * (8 * k + 5)))
   m:num
   d':num
   p:num
@@ -87633,20 +87633,20 @@ Autoformalization/three_squares quotations (1104):
   ?j. p = 4*(8*k+5)*j + (12*k+7)
   p:num
   k:num
-  !k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 5)
-  !k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 1
-  !k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 5
-  !n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
+  forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 5)
+  forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 1
+  forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 5
+  forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
   8*k+6 = (2*k+1)*4+2
   8*k+2 = (2*k)*4+2
   k * 8 + r = 8 * k + r
   k = n DIV 8
   8
   n:num
-  !n:num.\n     (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/\n      n MOD 8 = 5 \\/ n MOD 8 = 6)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
+  forall n:num.\n     (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/\n      n MOD 8 = 5 \\/ n MOD 8 = 6)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
   8 = 4 * 2
   n MOD 4 = n MOD 8 MOD 4
-  !n:num. (n MOD 8 = 0 \\/ n MOD 8 = 4) ==> 4 divides n
+  forall n:num. (n MOD 8 = 0 \\/ n MOD 8 = 4) ==> 4 divides n
   c * 4 = 4 * c
   (c * 4) DIV 4 = c
   4 * c = c * 4
@@ -87656,15 +87656,15 @@ Autoformalization/three_squares quotations (1104):
   ~(?a m. n = 4 EXP a * (8 * m + 7))
   m:num
   a:num
-  !n:num.\n     4 divides n /\\ ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ~(?a m. n DIV 4 = 4 EXP a * (8 * m + 7))
+  forall n:num.\n     4 divides n /\\ ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ~(?a m. n DIV 4 = 4 EXP a * (8 * m + 7))
   (4 * c) DIV 4 = c
   c:num
-  !n:num. ~(n = 0) /\\ 4 divides n ==> n DIV 4 < n
+  forall n:num. ~(n = 0) /\\ 4 divides n ==> n DIV 4 < n
   8
   n:num
   n DIV 8
   0:num
-  !n:num. n MOD 8 = 7 ==> ?a m. n = 4 EXP a * (8 * m + 7)
+  forall n:num. n MOD 8 = 7 ==> ?a m. n = 4 EXP a * (8 * m + 7)
   c:num
   4 * (n DIV 4) = n
   n DIV 4
@@ -87677,32 +87677,32 @@ Autoformalization/three_squares quotations (1104):
   0:num
   n = 0
   n:num
-  !n:num.\n     ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
-  !n:num.\n     (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n) <=>\n     ~(?a m. n = 4 EXP a * (8 * m + 7))
+  forall n:num.\n     ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n
+  forall n:num.\n     (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n) <=>\n     ~(?a m. n = 4 EXP a * (8 * m + 7))
   &8:int
   x:int
-  !x:int. x rem &8 = &0 \\/ x rem &8 = &1 \\/ x rem &8 = &2 \\/ x rem &8 = &3 \\/\n           x rem &8 = &4 \\/ x rem &8 = &5 \\/ x rem &8 = &6 \\/ x rem &8 = &7
+  forall x:int. x rem &8 = &0 \\/ x rem &8 = &1 \\/ x rem &8 = &2 \\/ x rem &8 = &3 \\/\n           x rem &8 = &4 \\/ x rem &8 = &5 \\/ x rem &8 = &6 \\/ x rem &8 = &7
   x:int
-  !x:int.\n     (x pow 2) rem &8 = &0 \\/\n     (x pow 2) rem &8 = &1 \\/\n     (x pow 2) rem &8 = &4
+  forall x:int.\n     (x pow 2) rem &8 = &0 \\/\n     (x pow 2) rem &8 = &1 \\/\n     (x pow 2) rem &8 = &4
   x:int
   &8 = &2 * &4
   x rem &2 = (x rem &8) rem &2
-  !x:int. (x pow 2 rem &8 = &1) <=> ~(&2 divides x)
-  !pu pv pw:int.\n     (pu = &0 \\/ pu = &1 \\/ pu = &4) /\\\n     (pv = &0 \\/ pv = &1 \\/ pv = &4) /\\\n     (pw = &0 \\/ pw = &1 \\/ pw = &4) /\\\n     (pu + pv + pw) rem &8 = &3\n     ==> pu = &1 /\\ pv = &1 /\\ pw = &1
+  forall x:int. (x pow 2 rem &8 = &1) <=> ~(&2 divides x)
+  forall pu pv pw:int.\n     (pu = &0 \\/ pu = &1 \\/ pu = &4) /\\\n     (pv = &0 \\/ pv = &1 \\/ pv = &4) /\\\n     (pw = &0 \\/ pw = &1 \\/ pw = &4) /\\\n     (pu + pv + pw) rem &8 = &3\n     ==> pu = &1 /\\ pv = &1 /\\ pw = &1
   (u pow 2 rem &8 + v pow 2 rem &8 + w pow 2 rem &8) rem &8 =\n    (u pow 2 + v pow 2 + w pow 2) rem &8
-  !u v w n:int.\n     u pow 2 + v pow 2 + w pow 2 = &8 * n + &3\n     ==> ~(&2 divides u) /\\ ~(&2 divides v) /\\ ~(&2 divides w)
+  forall u v w n:int.\n     u pow 2 + v pow 2 + w pow 2 = &8 * n + &3\n     ==> ~(&2 divides u) /\\ ~(&2 divides v) /\\ ~(&2 divides w)
   u rem &2 = &1
   ~(&2 = &0)
   &2:int
   u:int
   u div &2
-  !u:int. ~(&2 divides u) ==> ?a. u = &2 * a + &1
+  forall u:int. ~(&2 divides u) ==> ?a. u = &2 * a + &1
   &(num_of_int(--a - &1)) = --a - &1
   num_of_int(--a - &1)
   &(num_of_int a) = a
   num_of_int a
   &0 <= a \\/ a < &0
-  !a:int. ?k:num. a * (a + &1) = &(k * (k + 1))
+  forall a:int. ?k:num. a * (a + &1) = &(k * (k + 1))
   &2 * &n = r * (r + &1) + s * (s + &1) + t * (t + &1)
   c:num
   b:num
@@ -87728,8 +87728,8 @@ Autoformalization/three_squares quotations (1104):
   w:int
   v:int
   u:int
-  !n.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3)\n     ==> ?a b c:num. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
-  !n:num. ?a b c. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
+  forall n.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3)\n     ==> ?a b c:num. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
+  forall n:num. ?a b c. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
   triangular t <=> ?k. t = (k * (k + 1)) DIV 2
   2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)
   (2 * x) DIV 2 = x
@@ -87749,7 +87749,7 @@ Autoformalization/three_squares quotations (1104):
   b:num
   a:num
   n:num
-  !n:num.\n     ?a b c. triangular a /\\ triangular b /\\ triangular c /\\\n             n = a + b + c
+  forall n:num.\n     ?a b c. triangular a /\\ triangular b /\\ triangular c /\\\n             n = a + b + c
 INT_BALANCED_REM =  |- (#!:fun(fun(int,bool),bool) (\x:int. (#!:fun(fun(int,bool),bool) (\q:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) q:int)) (#?:fun(fun(int,bool),bool) (\b:int. ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_abs:fun(int,int) ((#int_sub:fun(int,fun(int,int)) x:int) ((#int_mul:fun(int,fun(int,int)) q:int) b:int)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) q:int))))))))
 SQ_BOUND =  |- (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\q:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_abs:fun(int,int) a:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) q:int)) ((#int_le:fun(int,fun(int,bool)) ((#int_mul:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_pow:fun(int,fun(num,int)) a:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_pow:fun(int,fun(num,int)) q:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
 POSDEF_BINARY_CRITERION =  |- (#!:fun(fun(int,bool),bool) (\A11:int. (#!:fun(fun(int,bool),bool) (\A12:int. (#!:fun(fun(int,bool),bool) (\A22:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) A11:int)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_sub:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) A11:int) A22:int)) ((#int_pow:fun(int,fun(num,int)) A12:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#!:fun(fun(int,bool),bool) (\x:int. (#!:fun(fun(int,bool),bool) (\y:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) x:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(int,fun(int,bool)) y:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))))) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) A11:int) ((#int_pow:fun(int,fun(num,int)) x:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#int_mul:fun(int,fun(int,int)) A12:int) ((#int_mul:fun(int,fun(int,int)) x:int) y:int)))) ((#int_mul:fun(int,fun(int,int)) A22:int) ((#int_pow:fun(int,fun(num,int)) y:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))))))))

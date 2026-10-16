@@ -31,8 +31,9 @@ fn[T] failure() -> T raise {
 
 ///|
 fn reverse_interface(s0 : String, ty0 : HolType) -> String raise {
+  let spelling = if s0 == "!" { "forall" } else { s0 }
   if !reverse_interface_mapping.val {
-    return s0
+    return spelling
   }
   let found = @lib.find(
     (e : (String, (String, HolType))) => {
@@ -41,7 +42,7 @@ fn reverse_interface(s0 : String, ty0 : HolType) -> String raise {
     },
     the_interface.val,
   ) catch {
-    Failure(_) => return s0
+    Failure(_) => return spelling
     e => raise e
   }
   found.0

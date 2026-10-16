@@ -7638,7 +7638,7 @@ Warning: inventing type variables
   p:num
   &
   denumerable { x:real | rational(x)}
-  ?rat:num->real. (!n. rational(rat n)) /\\\n                   (!x. rational x ==> ?!n. x = rat n)
+  ?rat:num->real. (forall n. rational(rat n)) /\\\n                   (forall x. rational x ==> ?!n. x = rat n)
 rational =  |- (#!:fun(fun(real,bool),bool) (\r:real. ((#=:fun(bool,fun(bool,bool)) (#rational:fun(real,bool) r:real)) (#?:fun(fun(num,bool),bool) (\p:num. (#?:fun(fun(num,bool),bool) (\q:num. ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) r:real)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) p:num)) (#real_of_num:fun(num,real) q:num)))))))))))
 countable =  |- (#!:fun(fun(fun('?173367,bool),bool),bool) (\s:fun('?173367,bool). ((#=:fun(bool,fun(bool,bool)) (#countable:fun(fun('?173367,bool),bool) s:fun('?173367,bool))) ((#<=_c:fun(fun('?173367,bool),fun(fun(num,bool),bool)) s:fun('?173367,bool)) #UNIV:fun(num,bool)))))
 COUNTABLE_RATIONALS =  |- (#countable:fun(fun(real,bool),bool) (#GSPEC:fun(fun(real,bool),fun(real,bool)) (\GEN%PVAR%523:real. (#?:fun(fun(real,bool),bool) (\x:real. (((#SETSPEC:fun(real,fun(bool,fun(real,bool))) GEN%PVAR%523:real) (#rational:fun(real,bool) x:real)) x:real))))))

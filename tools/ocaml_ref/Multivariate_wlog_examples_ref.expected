@@ -49935,17 +49935,17 @@ Multivariate/wlog_examples quotations (195):
   u1:real^2
   a /\\ b /\\ c /\\ d ==> e <=> c /\\ a /\\ b /\\ d ==> e
   p:real^3->bool
-  !u1:real^3 u2 p a b.\n     ~(u1 = u2) /\\\n     plane p /\\\n     {u1,u2} SUBSET p /\\\n     dist(u1,u2) <= a + b /\\\n     abs(a - b) < dist(u1,u2) /\\\n     &0 <= a /\\\n     &0 <= b\n     ==> (?d1 d2.\n              {d1, d2} SUBSET p /\\\n              &1 / &2 % (d1 + d2) IN affine hull {u1, u2} /\\\n              dist(d1,u1) = a /\\\n              dist(d1,u2) = b /\\\n              dist(d2,u1) = a /\\\n              dist(d2,u2) = b)
-  opposite a b p <=>\n        (&1 / &2 % (a + b)) IN p /\\\n        (!x y:real^N. {x,y} SUBSET p ==> (x - y) dot (a - b) = &0)
-  !c a b p. opposite (c + a) (c + b) (IMAGE (\\x. c + x) p) <=>\n             opposite a b p
-  !f a b p. linear f /\\ (!x. norm(f x) = norm x)\n             ==> (opposite (f a) (f b) (IMAGE f p) <=> opposite a b p)
-  !p. plane p ==> affine p
+  forall u1:real^3 u2 p a b.\n     ~(u1 = u2) /\\\n     plane p /\\\n     {u1,u2} SUBSET p /\\\n     dist(u1,u2) <= a + b /\\\n     abs(a - b) < dist(u1,u2) /\\\n     &0 <= a /\\\n     &0 <= b\n     ==> (?d1 d2.\n              {d1, d2} SUBSET p /\\\n              &1 / &2 % (d1 + d2) IN affine hull {u1, u2} /\\\n              dist(d1,u1) = a /\\\n              dist(d1,u2) = b /\\\n              dist(d2,u1) = a /\\\n              dist(d2,u2) = b)
+  opposite a b p <=>\n        (&1 / &2 % (a + b)) IN p /\\\n        (forall x y:real^N. {x,y} SUBSET p ==> (x - y) dot (a - b) = &0)
+  forall c a b p. opposite (c + a) (c + b) (IMAGE (\\x. c + x) p) <=>\n             opposite a b p
+  forall f a b p. linear f /\\ (forall x. norm(f x) = norm x)\n             ==> (opposite (f a) (f b) (IMAGE f p) <=> opposite a b p)
+  forall p. plane p ==> affine p
   --(a$2) / ((b:real^2)$2 - (a:real^2)$2)
   a:real^2
   a <= &0 /\\ &0 <= b ==> a = &0 /\\ b = &0 \\/ &0 < b - a
-  !a b:real^2.\n        a$2 <= &0 /\\ &0 <= b$2 ==> ?x. x IN convex hull {a,b} /\\ x$2 = &0
+  forall a b:real^2.\n        a$2 <= &0 /\\ &0 <= b$2 ==> ?x. x IN convex hull {a,b} /\\ x$2 = &0
   {a,b} = {b,a}
-  b' = --b ==> !a. a <= &0 /\\ &0 <= b \\/ a <= &0 /\\ &0 <= b' \\/\n                     b <= &0 /\\ &0 <= a \\/ b' <= &0 /\\ &0 <= a
+  b' = --b ==> forall a. a <= &0 /\\ &0 <= b \\/ a <= &0 /\\ &0 <= b' \\/\n                     b <= &0 /\\ &0 <= a \\/ b' <= &0 /\\ &0 <= a
   (a:real^2)$2
   ~(s INTER t = {}) <=> ?x. x IN s /\\ x IN t
   inv(&2) * (x + y) = &0 <=> y = --x
@@ -49956,16 +49956,16 @@ Multivariate/wlog_examples quotations (195):
   y:real^2
   x:real^2
   p:real^3->bool
-  !p a b bb m x y:real^3.\n     plane p /\\\n     {a, b, bb, m, x, y} SUBSET p /\\\n     ~(x = y) /\\ m IN affine hull {x,y} /\\ midpoint(b,bb) = m\n     ==> ~(convex hull {a, b} INTER affine hull {x, y} = {}) \\/\n         ~(convex hull {a, bb} INTER affine hull {x, y} = {})
+  forall p a b bb m x y:real^3.\n     plane p /\\\n     {a, b, bb, m, x, y} SUBSET p /\\\n     ~(x = y) /\\ m IN affine hull {x,y} /\\ midpoint(b,bb) = m\n     ==> ~(convex hull {a, b} INTER affine hull {x, y} = {}) \\/\n         ~(convex hull {a, bb} INTER affine hull {x, y} = {})
   bb:real^3 = -- &1 % b + &2 % &1 / &2 % (b + bb)
   affine hull {x:real^3,y}
-  !t. x IN t /\\ t SUBSET s ==> x IN s
+  forall t. x IN t /\\ t SUBSET s ==> x IN s
   b /\\ (b ==> a) ==> a /\\ b
   &1 / &2 % (b + bb):real^3
   p:real^3->bool
-  !a b bb x y:real^3 p.\n     ~(x = y) /\\\n     plane p /\\\n     {a, b, x, y} SUBSET p /\\\n     opposite b bb (affine hull {x, y})\n     ==> ~(convex hull {a, b} INTER affine hull {x, y} = {}) \\/\n         ~(convex hull {a, bb} INTER affine hull {x, y} = {})
+  forall a b bb x y:real^3 p.\n     ~(x = y) /\\\n     plane p /\\\n     {a, b, x, y} SUBSET p /\\\n     opposite b bb (affine hull {x, y})\n     ==> ~(convex hull {a, b} INTER affine hull {x, y} = {}) \\/\n         ~(convex hull {a, bb} INTER affine hull {x, y} = {})
   lin_combo V f = vsum V (\\v. f v % (v:real^N))
-  affsign sgn s t (v:real^A) <=>\n     (?f. (v = lin_combo (s UNION t) f) /\\\n          (!w. t w ==> sgn (f w)) /\\\n          (sum (s UNION t) f = &1))
+  affsign sgn s t (v:real^A) <=>\n     (?f. (v = lin_combo (s UNION t) f) /\\\n          (forall w. t w ==> sgn (f w)) /\\\n          (sum (s UNION t) f = &1))
   sgn_gt = (\\t. (&0 < t))
   sgn_ge = (\\t. (&0 <= t))
   sgn_lt = (\\t. (t < &0))
@@ -49974,16 +49974,16 @@ Multivariate/wlog_examples quotations (195):
   aff_ge = affsign sgn_ge
   aff_lt = affsign sgn_lt
   aff_le = affsign sgn_le
-  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (!w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
+  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (forall w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
   (w IN (s UNION t) ==> w IN t ==> P w) <=>\n                        (w IN t ==> P w)
-  affsign sgn s t =\n        {y | ?f. (!w. w IN (s UNION t) ==> w IN t ==> sgn(f w)) /\\\n                 sum (s UNION t) f = &1 /\\\n                 vsum (s UNION t) (\\v. f v % v) = y}
-  y IN affsign sgn s t <=>\n        ?u. (!x. x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
+  affsign sgn s t =\n        {y | ?f. (forall w. w IN (s UNION t) ==> w IN t ==> sgn(f w)) /\\\n                 sum (s UNION t) f = &1 /\\\n                 vsum (s UNION t) (\\v. f v % v) = y}
+  y IN affsign sgn s t <=>\n        ?u. (forall x. x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
   p /\\ ~(p /\\ ~q) <=> p /\\ q
   vsum s (\\x. u x % x) = vsum {x | x IN s /\\ ~(u x = &0)} (\\x. u x % x)
   FINITE {x | x IN s /\\ ~(u((f:real^M->real^N) x) = &0)}
   {y | y IN IMAGE (f:real^M->real^N) s /\\ ~(u y = &0)} =\n      IMAGE f {x | x IN s /\\ ~(u(f x) = &0)}
   (p ==> z = x) ==> (p /\\ x = y <=> p /\\ z = y)
-  !f:real^M->real^N s.\n           linear f /\\ (!x y. f x = f y ==> x = y)\n           ==> (sum(IMAGE f s) u = &1 /\\ vsum(IMAGE f s) (\\x. u x % x) = y <=>\n                sum s (u o f) = &1 /\\ f(vsum s (\\x. (u o f) x % x)) = y)
+  forall f:real^M->real^N s.\n           linear f /\\ (forall x y. f x = f y ==> x = y)\n           ==> (sum(IMAGE f s) u = &1 /\\ vsum(IMAGE f s) (\\x. u x % x) = y <=>\n                sum s (u o f) = &1 /\\ f(vsum s (\\x. (u o f) x % x)) = y)
   (u:real^M->real) o (g:real^N->real^M)
   u:real^M->real
   x:real^M
@@ -49993,11 +49993,11 @@ Multivariate/wlog_examples quotations (195):
   vsum (s UNION t) (\\x. (u o (f:real^M->real^N)) x % x)
   u:real^N->real
   y:real^N
-  !f:real^M->real^N sgn s t v.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (affsign sgn (IMAGE f s) (IMAGE f t) =\n             IMAGE f (affsign sgn s t))
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_ge (IMAGE f s) (IMAGE f t) = IMAGE f (aff_ge s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_gt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_gt s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_le (IMAGE f s) (IMAGE f t) = IMAGE f (aff_le s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_lt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_lt s t)
+  forall f:real^M->real^N sgn s t v.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (affsign sgn (IMAGE f s) (IMAGE f t) =\n             IMAGE f (affsign sgn s t))
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_ge (IMAGE f s) (IMAGE f t) = IMAGE f (aff_ge s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_gt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_gt s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_le (IMAGE f s) (IMAGE f t) = IMAGE f (aff_le s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_lt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_lt s t)
   a + x:real^N = a + y <=> x = y
   FINITE {x:real^N | x IN s UNION t /\\ ~(f x = &0)}
   vsum (IMAGE (\\x:real^N. a + x)\n                          {x | x IN s UNION t /\\ ~(f x = &0)})\n                   (\\v. f(v - a) % v)
@@ -50006,25 +50006,25 @@ Multivariate/wlog_examples quotations (195):
   (a + x) - a:real^N = x
   \\x. (f:real^N->real)(x - a)
   f:real^N->real
-  (!x. s x ==> p x) <=> (!x. x IN s ==> p x)
-  !sgn s t a v:real^N.\n        affsign sgn s t v\n        ==> affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) (a + v)
+  (forall x. s x ==> p x) <=> (forall x. x IN s ==> p x)
+  forall sgn s t a v:real^N.\n        affsign sgn s t v\n        ==> affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) (a + v)
   a:real^N
   --a + x:real^N
   --a + a + x:real^N = x
   --a:real^N
-  !a:real^N sgn s t.\n        affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (affsign sgn s t)
-  !a:real^N s t.\n        aff_ge (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_ge s t)
-  !a:real^N s t.\n        aff_gt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_gt s t)
-  !a:real^N s t.\n        aff_le (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_le s t)
-  !a:real^N s t.\n        aff_lt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_lt s t)
+  forall a:real^N sgn s t.\n        affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (affsign sgn s t)
+  forall a:real^N s t.\n        aff_ge (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_ge s t)
+  forall a:real^N s t.\n        aff_gt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_gt s t)
+  forall a:real^N s t.\n        aff_le (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_le s t)
+  forall a:real^N s t.\n        aff_lt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_lt s t)
   affine hull {x:real^N,y}
-  !t. t SUBSET s /\\ x IN t ==> x IN s
+  forall t. t SUBSET s /\\ x IN t ==> x IN s
   w:real^N
   y:real^N
   x:real^N
-  !v1 v2 v3 w:real^N. ~coplanar {v1, v2, v3, w} ==> ~collinear {v1, v2, v3}
-  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (!w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
-  y IN affsign sgn s t <=>\n        ?u. (!x. x IN (s UNION t) ==> x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
+  forall v1 v2 v3 w:real^N. ~coplanar {v1, v2, v3, w} ==> ~collinear {v1, v2, v3}
+  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (forall w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
+  y IN affsign sgn s t <=>\n        ?u. (forall x. x IN (s UNION t) ==> x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
   (x + a) + y:real^3 = a + z <=> x + y = z
   (a + x * a') % v1 + (b + x * b') % v2 + (c + x * c') % v3 + h:real^N =\n      (a % v1 + b % v2 + c % v3) + x % (a' % v1 + b' % v2 + c' % v3) + h
   (a + x * a') + (b + x * b') + (c + x * c') + h:real =\n      (a + b + c + h) + x * (a' + b' + c')
@@ -50091,7 +50091,7 @@ Multivariate/wlog_examples quotations (195):
   x - a:real^N = y - a <=> x = y
   (\\x. x IN s) = s
   span {x - v1:real^3 | x IN {v2,v3}}
-  !s. t SUBSET u /\\ s SUBSET t /\\ u SUBSET s ==> t = u
+  forall s. t SUBSET u /\\ s SUBSET t /\\ u SUBSET s ==> t = u
   affine hull {v1,v2,v3} = {z:real^3 | z$3 = &0}
   dim {z:real^3 | z$3 = &0}
   {v1:real^3,v2,v3}
@@ -50106,11 +50106,11 @@ Multivariate/wlog_examples quotations (195):
   v1:real^3 = v3
   v1:real^3 = v2
   p:real^3->bool
-  !v1 v2 v3 w:real^3 p.\n     plane p /\\ {v1, v2, v3} SUBSET p /\\\n     ~coplanar {v1, v2, v3, w}\n     ==> (?n n'. norm(n - n') = &1 /\\\n                (!x. x IN aff_ge {v1, v2, v3} {w} <=>\n                     (?xx h.\n                          xx IN affine hull {v1, v2, v3} /\\\n                          &0 <= h /\\\n                          x - xx = h % (n - n'))) /\\\n                (!x y.\n                     {x, y} SUBSET affine hull {v1, v2, v3}\n                     ==> (n - n') dot (x - y) = &0))
+  forall v1 v2 v3 w:real^3 p.\n     plane p /\\ {v1, v2, v3} SUBSET p /\\\n     ~coplanar {v1, v2, v3, w}\n     ==> (?n n'. norm(n - n') = &1 /\\\n                (forall x. x IN aff_ge {v1, v2, v3} {w} <=>\n                     (?xx h.\n                          xx IN affine hull {v1, v2, v3} /\\\n                          &0 <= h /\\\n                          x - xx = h % (n - n'))) /\\\n                (forall x y.\n                     {x, y} SUBSET affine hull {v1, v2, v3}\n                     ==> (n - n') dot (x - y) = &0))
   affine hull {v1:real^3,v2,v3}
   (?a b. P(a - b)) ==> ?a:real^3. P a
   x:real^3 = y + h % z <=> x - y = h % z
-  !v1 v2 v3 w:real^3.\n     ~coplanar {v1, v2, v3, w}\n     ==> (?nor. norm nor = &1 /\\\n                (!x. x IN aff_ge {v1, v2, v3} {w} <=>\n                     (?xx h.\n                          xx IN affine hull {v1, v2, v3} /\\\n                          &0 <= h /\\\n                          x = xx + h % nor)) /\\\n                (!x y.\n                     {x, y} SUBSET affine hull {v1, v2, v3}\n                     ==> nor dot (x - y) = &0))
+  forall v1 v2 v3 w:real^3.\n     ~coplanar {v1, v2, v3, w}\n     ==> (?nor. norm nor = &1 /\\\n                (forall x. x IN aff_ge {v1, v2, v3} {w} <=>\n                     (?xx h.\n                          xx IN affine hull {v1, v2, v3} /\\\n                          &0 <= h /\\\n                          x = xx + h % nor)) /\\\n                (forall x y.\n                     {x, y} SUBSET affine hull {v1, v2, v3}\n                     ==> nor dot (x - y) = &0))
 TRUONG_1 =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\u1:cart(real,tybit1(1)). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\u2:cart(real,tybit1(1)). (#!:fun(fun(fun(cart(real,tybit1(1)),bool),bool),bool) (\p:fun(cart(real,tybit1(1)),bool). (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) u1:cart(real,tybit1(1))) u2:cart(real,tybit1(1))))) ((#/\:fun(bool,fun(bool,bool)) (#plane:fun(fun(cart(real,tybit1(1)),bool),bool) p:fun(cart(real,tybit1(1)),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,tybit1(1)),bool),fun(fun(cart(real,tybit1(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) u1:cart(real,tybit1(1))) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) u2:cart(real,tybit1(1))) #EMPTY:fun(cart(real,tybit1(1)),bool)))) p:fun(cart(real,tybit1(1)),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) u1:cart(real,tybit1(1))) u2:cart(real,tybit1(1))))) ((#real_add:fun(real,fun(real,real)) a:real) b:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) a:real) b:real))) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) u1:cart(real,tybit1(1))) u2:cart(real,tybit1(1)))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) b:real)))))))) (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\d1:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\d2:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,tybit1(1)),bool),fun(fun(cart(real,tybit1(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) d1:cart(real,tybit1(1))) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) d2:cart(real,tybit1(1))) #EMPTY:fun(cart(real,tybit1(1)),bool)))) p:fun(cart(real,tybit1(1)),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),bool)) ((#%:fun(real,fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#vector_add:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) d1:cart(real,tybit1(1))) d2:cart(real,tybit1(1))))) ((#hull:fun(fun(fun(cart(real,tybit1(1)),bool),bool),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) #affine:fun(fun(cart(real,tybit1(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) u1:cart(real,tybit1(1))) ((#INSERT:fun(cart(real,tybit1(1)),fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool))) u2:cart(real,tybit1(1))) #EMPTY:fun(cart(real,tybit1(1)),bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) d1:cart(real,tybit1(1))) u1:cart(real,tybit1(1))))) a:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) d1:cart(real,tybit1(1))) u2:cart(real,tybit1(1))))) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) d2:cart(real,tybit1(1))) u1:cart(real,tybit1(1))))) a:real)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit1(1)),cart(real,tybit1(1))),real) ((#,:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),prod(cart(real,tybit1(1)),cart(real,tybit1(1))))) d2:cart(real,tybit1(1))) u2:cart(real,tybit1(1))))) b:real)))))))))))))))))))))
 opposite =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\p:fun(cart(real,'N),bool). (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). ((#=:fun(bool,fun(bool,bool)) (((#opposite:fun(cart(real,'N),fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool))) a:cart(real,'N)) b:cart(real,'N)) p:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) b:cart(real,'N)))) p:fun(cart(real,'N),bool))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) x:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) y:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool)))) p:fun(cart(real,'N),bool))) ((#=:fun(real,fun(real,bool)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) b:cart(real,'N)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))
 OPPOSITE_TRANSLATION_EQ =  |- (#!:fun(fun(cart(real,'?1077650),bool),bool) (\c:cart(real,'?1077650). (#!:fun(fun(cart(real,'?1077650),bool),bool) (\a:cart(real,'?1077650). (#!:fun(fun(cart(real,'?1077650),bool),bool) (\b:cart(real,'?1077650). (#!:fun(fun(fun(cart(real,'?1077650),bool),bool),bool) (\p:fun(cart(real,'?1077650),bool). ((#=:fun(bool,fun(bool,bool)) (((#opposite:fun(cart(real,'?1077650),fun(cart(real,'?1077650),fun(fun(cart(real,'?1077650),bool),bool))) ((#vector_add:fun(cart(real,'?1077650),fun(cart(real,'?1077650),cart(real,'?1077650))) c:cart(real,'?1077650)) a:cart(real,'?1077650))) ((#vector_add:fun(cart(real,'?1077650),fun(cart(real,'?1077650),cart(real,'?1077650))) c:cart(real,'?1077650)) b:cart(real,'?1077650))) ((#IMAGE:fun(fun(cart(real,'?1077650),cart(real,'?1077650)),fun(fun(cart(real,'?1077650),bool),fun(cart(real,'?1077650),bool))) (\x:cart(real,'?1077650). ((#vector_add:fun(cart(real,'?1077650),fun(cart(real,'?1077650),cart(real,'?1077650))) c:cart(real,'?1077650)) x:cart(real,'?1077650)))) p:fun(cart(real,'?1077650),bool)))) (((#opposite:fun(cart(real,'?1077650),fun(cart(real,'?1077650),fun(fun(cart(real,'?1077650),bool),bool))) a:cart(real,'?1077650)) b:cart(real,'?1077650)) p:fun(cart(real,'?1077650),bool)))))))))))

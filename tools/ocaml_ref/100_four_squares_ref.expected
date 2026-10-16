@@ -12841,17 +12841,17 @@ Warning: inventing type variables
 0..0..1..2..7..15..31..77..solved at 85
 0..0..solved at 2
 100/four_squares quotations (342):
-  involution f s = !x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
-  !f s. involution f s ==> (IMAGE f s = s)
+  involution f s = forall x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
+  forall f s. involution f s ==> (IMAGE f s = s)
   involution f s /\\ a IN s /\\ (f a = a) ==> involution f (s DELETE a)
   involution f s /\\ a IN s ==> involution f (s DIFF {a, (f a)})
   involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}
-  !f s t. involution f s /\\ (!x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
-  !s. FINITE(s) /\\ involution f s /\\ (!x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
+  forall f s t. involution f s /\\ (forall x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
+  forall s. FINITE(s) /\\ involution f s /\\ (forall x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
   s = (a:A) INSERT (s DELETE a)
   FINITE(s) /\\ involution f s /\\ (?!a:A. a IN s /\\ (f a = a))\n   ==> ODD(CARD s)
-  !n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
-  !f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
+  forall n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
+  forall f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
   zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}
   zag(x,y,z) =\n        if x + z < y then (x + 2 * z,z,y - (x + z))\n        else if x < 2 * y then (2 * y - x, y, (x + z) - y)\n        else (x - 2 * y,(x + z) - y, y)
   tag((x,y,z):num#num#num) = (x,z,y)
@@ -12861,18 +12861,18 @@ Warning: inventing type variables
   n:num
   n = 1
   n = 0
-  !n. ~prime(n * n)
+  forall n. ~prime(n * n)
   n = 0
   2 * 2
   2
-  !n. ~prime(4 * n)
+  forall n. ~prime(4 * n)
   ~(0 < x) = (x = 0)
   prime(x EXP 2 + 4 * y * z) ==> 0 < x /\\ 0 < y /\\ 0 < z
   z:num
   y:num
   x:num
-  !p. prime(p) ==> involution zag (zset(p))
-  !a. involution tag (zset a)
+  forall p. prime(p) ==> involution zag (zset(p))
+  forall a. involution tag (zset a)
   (zag(x,y,z) = (x,y,z)) ==> (y = x)
   0 < a ==> 1 <= 4 * a
   y <= 4 * a * y <=> 1 * y <= (4 * a) * y
@@ -12890,7 +12890,7 @@ Warning: inventing type variables
   x:num
   a /\\ b ==> c <=> b ==> a ==> c
   p + 1
-  !p. prime(p) ==> FINITE(zset p)
+  forall p. prime(p) ==> FINITE(zset p)
   x = 1
   4 * k + 1 = x * (4 * z + x)
   ~(z = 0)
@@ -12911,14 +12911,14 @@ Warning: inventing type variables
   zag
   4 * x * y = (2 * x) * (2 * y)
   ?t. t IN zset(p) /\\ (tag(t) = t)
-  !p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
+  forall p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
   CARD(t:B->bool)
-  !t. t < 2 * s /\\ p <= t ==> ~(p = s + s)
+  forall t. t < 2 * s /\\ p <= t ==> ~(p = s + s)
   (~a ==> c) /\\ ~b ==> (a ==> b) ==> c
   (CARD(IMAGE (f:A->B) s) = CARD s) /\\\n                (CARD(IMAGE (g:A->B) s) = CARD s)
   IMAGE (g:A->B) s
   IMAGE (f:A->B) s
-  !f:A->B g s t.\n        FINITE(s) /\\ FINITE(t) /\\\n        (!x. x IN s ==> f(x) IN t) /\\\n        (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y)) /\\\n        (!x. x IN s ==> g(x) IN t) /\\\n        (!x y. x IN s /\\ y IN s /\\ (g x = g y) ==> (x = y)) /\\\n        CARD(t) < 2 * CARD(s)\n        ==> ?x y. x IN s /\\ y IN s /\\ (f x = g y)
+  forall f:A->B g s t.\n        FINITE(s) /\\ FINITE(t) /\\\n        (forall x. x IN s ==> f(x) IN t) /\\\n        (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y)) /\\\n        (forall x. x IN s ==> g(x) IN t) /\\\n        (forall x y. x IN s /\\ y IN s /\\ (g x = g y) ==> (x = y)) /\\\n        CARD(t) < 2 * CARD(s)\n        ==> ?x y. x IN s /\\ y IN s /\\ (f x = g y)
   2 * k + 1 < 2 * (k + 1)
   2 * x < 2 * k + 1 <=> x < k + 1
   {x:num | x < 2 * k + 1}
@@ -12926,13 +12926,13 @@ Warning: inventing type variables
   g:num->num
   f:num->num
   k:num
-  !f g p.\n        ODD(p) /\\\n        (!x. 2 * x < p ==> f(x) < p) /\\\n        (!x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y)) /\\\n        (!x. 2 * x < p ==> g(x) < p) /\\\n        (!x y. 2 * x < p /\\ 2 * y < p /\\ (g x = g y) ==> (x = y))\n        ==> ?x y. 2 * x < p /\\ 2 * y < p /\\ (f x = g y)
+  forall f g p.\n        ODD(p) /\\\n        (forall x. 2 * x < p ==> f(x) < p) /\\\n        (forall x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y)) /\\\n        (forall x. 2 * x < p ==> g(x) < p) /\\\n        (forall x y. 2 * x < p /\\ 2 * y < p /\\ (g x = g y) ==> (x = y))\n        ==> ?x y. 2 * x < p /\\ 2 * y < p /\\ (f x = g y)
   2 * (x + d) < p
   x * x:num
-  !a:num. (a + b + d = a + c) ==> (b = c - d)
+  forall a:num. (a + b + d = a + c) ==> (b = c - d)
   n - m:num
   p divides d \\/ p divides (2 * x + d)
-  !p x d. prime(p) /\\ 2 * (x + d) < p /\\\n           ((x + d) * (x + d) + m * p = x * x + n * p)\n           ==> (d = 0)
+  forall p x d. prime(p) /\\ 2 * (x + d) < p /\\\n           ((x + d) * (x + d) + m * p = x * x + n * p)\n           ==> (d = 0)
   (x + d = x) = (d = 0)
   d:num
   y:num
@@ -12940,10 +12940,10 @@ Warning: inventing type variables
   (x2 + a = xp + b:num) /\\ (y2 + a = yp + b)\n    ==> (x2 + yp = y2 + xp)
   (x EXP 2 + a = (x EXP 2 + a) DIV p * p + (x EXP 2 + a) MOD p) /\\\n    (y EXP 2 + a = (y EXP 2 + a) DIV p * p + (y EXP 2 + a) MOD p)
   x < a ==> ~(a = 0)
-  !p. prime(p)\n   ==> (!x. 2 * x < p ==> (x EXP 2 + a) MOD p < p) /\\\n       (!x y. 2 * x < p /\\ 2 * y < p /\\\n              ((x EXP 2 + a) MOD p = (y EXP 2 + a) MOD p)\n              ==> (x = y))
+  forall p. prime(p)\n   ==> (forall x. 2 * x < p ==> (x EXP 2 + a) MOD p < p) /\\\n       (forall x y. 2 * x < p /\\ 2 * y < p /\\\n              ((x EXP 2 + a) MOD p = (y EXP 2 + a) MOD p)\n              ==> (x = y))
   x < p /\\ y < p /\\ (p - 1 - x = p - 1 - y) ==> (x = y)
   2 * x < p ==> p - 1 - y < p
-  (!x. 2 * x < p ==> f(x) < p) /\\\n   (!x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y))\n   ==> (!x. 2 * x < p ==> p - 1 - f(x) < p) /\\\n       (!x y. 2 * x < p /\\ 2 * y < p /\\ (p - 1 - f(x) = p - 1 - f(y))\n              ==> (x = y))
+  (forall x. 2 * x < p ==> f(x) < p) /\\\n   (forall x y. 2 * x < p /\\ 2 * y < p /\\ (f x = f y) ==> (x = y))\n   ==> (forall x. 2 * x < p ==> p - 1 - f(x) < p) /\\\n       (forall x y. 2 * x < p /\\ 2 * y < p /\\ (p - 1 - f(x) = p - 1 - f(y))\n              ==> (x = y))
   x EXP 2 + y EXP 2 + a + 1
   y:num
   x:num
@@ -12962,7 +12962,7 @@ Warning: inventing type variables
   \\x. p - 1 - (x EXP 2 + 0) MOD p
   \\x. (x EXP 2 + a) MOD p
   ~(p = 0)
-  !a p. prime(p) /\\ ODD(p)\n         ==> ?n x y. 2 * x < p /\\ 2 * y < p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a + 1)
+  forall a p. prime(p) /\\ ODD(p)\n         ==> ?n x y. 2 * x < p /\\ 2 * y < p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a + 1)
   p:num
   a - 1
   ~(a = 0) ==> (a = (a - 1) + 1)
@@ -12983,21 +12983,21 @@ Warning: inventing type variables
   EVEN(a)
   2
   EVEN(p)
-  !a p. prime(p)\n         ==> ?n x y. 2 * x <= p /\\ 2 * y <= p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a)
+  forall a p. prime(p)\n         ==> ?n x y. 2 * x <= p /\\ 2 * y <= p /\\\n                     (n * p = x EXP 2 + y EXP 2 + a)
   (a + --b = c) <=> (b + c = a)
   (--a + b = c) <=> (a + c = b)
   &0 <= a ==> ((abs(x) = a) <=> (x = a) \\/ (x = --a))
   x /\\ c /\\ d /\\ e /\\ f /\\ (a /\\ e ==> b) /\\ a\n    ==> x /\\ a /\\ b /\\ c /\\ d /\\ e /\\ f
-  (!n. ?p. abs(&n) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x + y) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x - y) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x * y) = &p) /\\\n   (!x r. (?n. abs(x) = &n) ==> ?p. abs(x pow r) = &p) /\\\n   (!x. (?n. abs(x) = &n) ==> ?p. abs(--x) = &p) /\\\n   (!x. (?n. abs(x) = &n) ==> ?p. abs(abs x) = &p)
+  (forall n. ?p. abs(&n) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x + y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x - y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x * y) = &p) /\\\n   (forall x r. (?n. abs(x) = &n) ==> ?p. abs(x pow r) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(--x) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(abs x) = &p)
   a <= x /\\ x < a + &1\n     ==> abs(x - a) * &2 <= &1 \\/ abs(x - (a + &1)) * &2 <= &1
-  !x. &0 <= x ==> ?n. abs(x - &n) <= &1 / &2
+  forall x. &0 <= x ==> ?n. abs(x - &n) <= &1 / &2
   n - &1 + a = n - (&1 - a)
   &0 <= &1 / &2
   (n = 0) \\/ 1 <= n
   n:num
   1
-  !x n. &0 <= x /\\ (abs(x - &n) = &1 / &2)\n         ==> (x = &(n - 1) + &1 / &2) \\/ (x = &n + &1 / &2)
-  !m n p. (abs(&m / &p - &n) = &1 / &2)\n         ==> (&m / &p = &(n - 1) + &1 / &2) \\/ (&m / &p = &n + &1 / &2)
+  forall x n. &0 <= x /\\ (abs(x - &n) = &1 / &2)\n         ==> (x = &(n - 1) + &1 / &2) \\/ (x = &n + &1 / &2)
+  forall m n p. (abs(&m / &p - &n) = &1 / &2)\n         ==> (&m / &p = &(n - 1) + &1 / &2) \\/ (&m / &p = &n + &1 / &2)
   d:num
   c:num
   b:num
@@ -13032,7 +13032,7 @@ Warning: inventing type variables
   (a = c) /\\ (b = d) ==> (a + b + n - m = c + d + n - m)
   (n + s * z) * (n + s * z) + (p + t * z) * (p + t * z) +\n        (q + u * z) * (q + u * z) + (r + v * z) * (r + v * z) - N =\n        (s * s + t * t + u * u + v * v) * (z * z) +\n        (&2 * (n * s + p * t + q * u + r * v)) * z +\n        ((n * n + p * p + q * q + r * r) - N)
   &m * &m' * z pow 2 + (&M - &2 * &m * &N') * z + &N' - &N
-  !z. (&n' + s * z) pow 2 + (&p' + t * z) pow 2 +\n        (&q' + u * z) pow 2 + (&r' + v * z) pow 2 - &N =\n        (&m * z - &1) * (&m' * z + &N - &N')
+  forall z. (&n' + s * z) pow 2 + (&p' + t * z) pow 2 +\n        (&q' + u * z) pow 2 + (&r' + v * z) pow 2 - &N =\n        (&m * z - &1) * (&m' * z + &N - &N')
   b < a ==> ~(a - b = &0)
   (&N + &N') * &m - &M = &m'
   ~(m' = 0)
@@ -13084,7 +13084,7 @@ Warning: inventing type variables
   (a * a = b * b) <=> ((a + b) * (a - b) = &0)
   a - b
   (&1 / &2) pow 2
-  !m. a <= m /\\ b <= m /\\ c <= m /\\ d <= m /\\\n          ~((a = m) /\\ (b = m) /\\ (c = m) /\\ (d = m)) /\\\n          &4 * m <= &1\n          ==> a + b + c + d < &1
+  forall m. a <= m /\\ b <= m /\\ c <= m /\\ d <= m /\\\n          ~((a = m) /\\ (b = m) /\\ (c = m) /\\ (d = m)) /\\\n          &4 * m <= &1\n          ==> a + b + c + d < &1
   r':num
   q':num
   p':num
@@ -13115,7 +13115,7 @@ Warning: inventing type variables
   ?n' p' q' r'. (&n / &m = &n' + &1 / &2) /\\\n                    (&p / &m = &p' + &1 / &2) /\\\n                    (&q / &m = &q' + &1 / &2) /\\\n                    (&r / &m = &r' + &1 / &2)
   ?n' p' q' r'.\n        (&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n        (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 < &1 \\/\n        (((&n / &m - &n') pow 2 + (&p / &m - &p') pow 2 +\n          (&q / &m - &q') pow 2 + (&r / &m - &r') pow 2 = &1) /\\\n         (m = 2) /\\ (EVEN(n' + p' + q' + r') = EVEN(N)))
   (~p ==> p) ==> p
-  !m n p q r.\n        ~(m = 0) /\\ ~(m = 1) /\\\n        ((&n / &m) pow 2 + (&p / &m) pow 2 +\n         (&q / &m) pow 2 + (&r / &m) pow 2 = &N)\n        ==> ?m' n' p' q' r'.\n               ~(m' = 0) /\\ m' < m /\\\n               ((&n' / &m') pow 2 + (&p' / &m') pow 2 +\n                (&q' / &m') pow 2 + (&r' / &m') pow 2 = &N)
+  forall m n p q r.\n        ~(m = 0) /\\ ~(m = 1) /\\\n        ((&n / &m) pow 2 + (&p / &m) pow 2 +\n         (&q / &m) pow 2 + (&r / &m) pow 2 = &N)\n        ==> ?m' n' p' q' r'.\n               ~(m' = 0) /\\ m' < m /\\\n               ((&n' / &m') pow 2 + (&p' / &m') pow 2 +\n                (&q' / &m') pow 2 + (&r' / &m') pow 2 = &N)
   m:num
   m = 1
   m:num
@@ -13169,7 +13169,7 @@ Warning: inventing type variables
   0
   n = 0
   n:num
-  !n. ?w x y z. &n = &w pow 2 + &x pow 2 + &y pow 2 + &z pow 2
+  forall n. ?w x y z. &n = &w pow 2 + &x pow 2 + &y pow 2 + &z pow 2
   m:num
   m:num
   m:num
@@ -13177,12 +13177,12 @@ Warning: inventing type variables
   m:num
   p:num
   n:num
-  !n. ?w x y z. n = w EXP 2 + x EXP 2 + y EXP 2 + z EXP 2
+  forall n. ?w x y z. n = w EXP 2 + x EXP 2 + y EXP 2 + z EXP 2
   n:num
   n:num
   a:int
   a:int
-  !a. &0 <= a <=> ?w x y z. a = w pow 2 + x pow 2 + y pow 2 + z pow 2
+  forall a. &0 <= a <=> ?w x y z. a = w pow 2 + x pow 2 + y pow 2 + z pow 2
 involution =  |- (#!:fun(fun(fun('?183468,bool),bool),bool) (\s:fun('?183468,bool). (#!:fun(fun(fun('?183468,'?183468),bool),bool) (\f:fun('?183468,'?183468). ((#=:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?183468,'?183468),fun(fun('?183468,bool),bool)) f:fun('?183468,'?183468)) s:fun('?183468,bool))) (#!:fun(fun('?183468,bool),bool) (\x:'?183468. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?183468,fun(fun('?183468,bool),bool)) x:'?183468) s:fun('?183468,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?183468,fun(fun('?183468,bool),bool)) (f:fun('?183468,'?183468) x:'?183468)) s:fun('?183468,bool))) ((#=:fun('?183468,fun('?183468,bool)) (f:fun('?183468,'?183468) (f:fun('?183468,'?183468) x:'?183468))) x:'?183468))))))))))
 INVOLUTION_IMAGE =  |- (#!:fun(fun(fun('?183482,'?183482),bool),bool) (\f:fun('?183482,'?183482). (#!:fun(fun(fun('?183482,bool),bool),bool) (\s:fun('?183482,bool). ((#==>:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?183482,'?183482),fun(fun('?183482,bool),bool)) f:fun('?183482,'?183482)) s:fun('?183482,bool))) ((#=:fun(fun('?183482,bool),fun(fun('?183482,bool),bool)) ((#IMAGE:fun(fun('?183482,'?183482),fun(fun('?183482,bool),fun('?183482,bool))) f:fun('?183482,'?183482)) s:fun('?183482,bool))) s:fun('?183482,bool)))))))
 INVOLUTION_DELETE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?183510,'?183510),fun(fun('?183510,bool),bool)) f:fun('?183510,'?183510)) s:fun('?183510,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?183510,fun(fun('?183510,bool),bool)) a:'?183510) s:fun('?183510,bool))) ((#=:fun('?183510,fun('?183510,bool)) (f:fun('?183510,'?183510) a:'?183510)) a:'?183510)))) ((#involution:fun(fun('?183510,'?183510),fun(fun('?183510,bool),bool)) f:fun('?183510,'?183510)) ((#DELETE:fun(fun('?183510,bool),fun('?183510,fun('?183510,bool))) s:fun('?183510,bool)) a:'?183510)))

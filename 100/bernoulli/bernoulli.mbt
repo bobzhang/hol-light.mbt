@@ -18,7 +18,7 @@ fn step_2() -> Unit raise {
   let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("m <= 0 + 1 <=> m = 0 \\/ m = 1"))])), @tactics.strip_tac), t2), t6])
   let t1 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg()]))
   let t8 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1), t7)
-  sum_diffs_c.set(@tactics.prove(@parser.parse_term("!a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)"), t8))
+  sum_diffs_c.set(@tactics.prove(@parser.parse_term("forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)"), t8))
 }
 
 ///|
@@ -38,7 +38,7 @@ fn step_3() -> Unit raise {
   let t10 = @simp.asm_simp_tac(@list.List([@calc_num.arith(), @analysis.diff_const(), @iterate.sum_triv_numseg(), @int.arith_rule(@parser.parse_term("~(a <= SUC b) ==> b < a"))]))
   let t9 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), @nums.induct_tac), t9), @class.cond_cases_tac), t10), @tactics.disch_tac), t11), t12)
-  diff_sum_c.set(@tactics.prove(@parser.parse_term("!f f' a b.\n        (!k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x"), t13))
+  diff_sum_c.set(@tactics.prove(@parser.parse_term("forall f f' a b.\n        (forall k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x"), t13))
 }
 
 ///|
@@ -53,7 +53,7 @@ pub fn diff_sum() -> @kernel.Thm {
 ///|
 /// bernoulli
 fn step_4() -> Unit raise {
-  bernoulli_c.set(@define.define_(@parser.parse_term("(bernoulli 0 = &1) /\\\n  (!n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))")))
+  bernoulli_c.set(@define.define_(@parser.parse_term("(bernoulli 0 = &1) /\\\n  (forall n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))")))
 }
 
 ///|
@@ -76,7 +76,7 @@ fn step_5() -> Unit raise {
   let t15 = @simp.rewrite_tac(@list.List([@arith.add_clauses()]))
   let t14 = @simp.simp_tac(@list.List([@binomial.binom_lt(), @int.arith_rule(@parser.parse_term("n < SUC n")), @binomial.binom_refl(), @realax.real_add_lid()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([bernoulli(), @iterate.sum_clauses_numseg(), @equal.gsym(@arith.add1()), @arith.add_clauses(), @binomial.binom(), @realax.real_mul_lid(), @arith.le_0(), @nums.not_suc()]))), t14), t15), t16), t17), t18), t19), t20), @calc_rat.real_arith_tac)
-  bernoulli_v1_c.set(@tactics.prove(@parser.parse_term("!n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0"), t21))
+  bernoulli_v1_c.set(@tactics.prove(@parser.parse_term("forall n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0"), t21))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_7() -> Unit raise {
     })(x28))
   }, @list.List([@equal.gsym(@class.eta_ax())]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29), t30), t34), t35), t36), t37), t38), t39), t40), @transc.diff_tac), t41), t42), t43), t45), t46), t48), t49), t50)
-  diff_bernpoly_c.set(@tactics.prove(@parser.parse_term("!n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x"), t51))
+  diff_bernpoly_c.set(@tactics.prove(@parser.parse_term("forall n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x"), t51))
 }
 
 ///|
@@ -163,7 +163,7 @@ fn step_8() -> Unit raise {
   let t53 = @parser.parse_term("x:real")
   let t54 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("\\x:real. f(x) - g(x)"), t53, t52]), @analysis.diff_isconst_all()))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t54), t55), @calc_rat.real_arith_tac)
-  integrals_eq_c.set(@tactics.prove(@parser.parse_term("!f g. (!x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> !x. f(x) = g(x)"), t56))
+  integrals_eq_c.set(@tactics.prove(@parser.parse_term("forall f g. (forall x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> forall x. f(x) = g(x)"), t56))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_9() -> Unit raise {
   let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:real")), t64), t65), t72), t73), t78), t79), t80), t81), t85), t86), t87), @transc.diff_tac), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t57 = @tactics.match_mp_tac(integrals_eq())
   let t100 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@nums.induct_tac, @list.List([@simp.rewrite_tac(@list.List([bernpoly(), @iterate.sum_sing_numseg(), @analysis.real_sub_refl(), @arith.sub_refl(), @realax.real_pow(), @analysis.real_mul_lzero()])), @tactics.all_tac])), t57), @tactics.conj_tac), t88), t89), t90), t91), t92), t93), t94), t95), @class.cond_cases_tac), t96), t97), t98), t99)
-  recurrence_bernpoly_c.set(@tactics.prove(@parser.parse_term("!n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)"), t100))
+  recurrence_bernpoly_c.set(@tactics.prove(@parser.parse_term("forall n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)"), t100))
 }
 
 ///|
@@ -255,7 +255,7 @@ fn step_10() -> Unit raise {
   let t102 = @simp.rewrite_tac(@list.List([@equal.gsym(@iterate.sum_lmul())]))
   let t101 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@realax.real_mul_sym())]))
   let t109 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.asm_simp_tac(@list.List([@real.real_eq_rdiv_eq(), @calc_rat.real_arith(@parser.parse_term("&0 < &n + &1"))]))), t101), t102), t103), t104), @tactics.conj_tac), t108)
-  sum_of_powers_c.set(@tactics.prove(@parser.parse_term("!n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)"), t109))
+  sum_of_powers_c.set(@tactics.prove(@parser.parse_term("forall n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)"), t109))
 }
 
 ///|

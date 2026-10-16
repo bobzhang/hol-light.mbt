@@ -39,7 +39,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  num_exp n 1
       #|  num_exp n (SUC e)
       #|  num_exp n e
-      #|  !e. num_exp 0 e = 0
+      #|  forall e. num_exp 0 e = 0
       #|  ~(e = 0) ==> SUC (PRE e) = e
       #|  a:num
       #|  n:num
@@ -1115,7 +1115,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  -- &1 * -- &1 = &1
       #|  (if s1 then -- &1 else &1) * (if s2 then -- &1 else &1) = if mod_plus s1 s2 then -- &1 else &1
       #|  (a * b / c) * (d * e / f) = (a * d) * (b * e) / c / f
-      #|  !s1 s2. min_exp <= e /\\ num_exp n1 e1 * num_exp n2 e2 = num_exp n e\n\t\t\t  ==> float_num s1 n1 e1 * float_num s2 n2 e2 =\n\t\t\t      float_num (mod_plus s1 s2) n (e - min_exp)
+      #|  forall s1 s2. min_exp <= e /\\ num_exp n1 e1 * num_exp n2 e2 = num_exp n e\n\t\t\t  ==> float_num s1 n1 e1 * float_num s2 n2 e2 =\n\t\t\t      float_num (mod_plus s1 s2) n (e - min_exp)
       #|  min_exp <= e /\\ e - min_exp = r /\\ num_exp n1 e1 * num_exp n2 e2 = num_exp n e ==>\n\t\t\t     float_num F n1 e1 * float_num F n2 e2 = float_num F n r
       #|  min_exp <= e /\\ e - min_exp = r /\\ num_exp n1 e1 * num_exp n2 e2 = num_exp n e ==>\n\t\t\t     float_num F n1 e1 * float_num T n2 e2 = float_num T n r
       #|  min_exp <= e /\\ e - min_exp = r /\\ num_exp n1 e1 * num_exp n2 e2 = num_exp n e ==>\n\t\t\t     float_num T n1 e1 * float_num F n2 e2 = float_num T n r
@@ -1148,7 +1148,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  --a * b <= --c <=> c <= a * b
       #|  x:num
       #|  y:num
-      #|  !x y. ~(y = 0) ==> &(x DIV y) <= &x / &y /\\ &x / &y <= &(x DIV y + 1)
+      #|  forall x y. ~(y = 0) ==> &(x DIV y) <= &x / &y /\\ &x / &y <= &(x DIV y + 1)
       #|  (a * b * c) * d = (d * a) * b * c
       #|  (a * b) * c = (a * c) * b
       #|  &0
@@ -1248,7 +1248,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  float_num F m e
       #|  ~(e = 0) /\\ PRE e = e1
       #|  x = y ==> 2 * x = 2 * y
-      #|  !n. EVEN n ==> 2 * (n DIV 2) = n
+      #|  forall n. EVEN n ==> 2 * (n DIV 2) = n
       #|  &m
       #|  &(f1 * f1)
       #|  &(num_exp 1 (2 * p))
@@ -1256,7 +1256,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  x:real
       #|  z:real
       #|  y * inv x
-      #|  !x y z. &0 < x /\\ y <= z * x ==> y * inv x <= z
+      #|  forall x y z. &0 < x /\\ y <= z * x ==> y * inv x <= z
       #|  ~(&(num_exp 1 min_exp) = &0)
       #|  (n * n) * (((e * e) * x * y) * z) * u = (n * e) * (n * e) * (x * u) * z * y:real
       #|  EVEN min_exp
@@ -1282,7 +1282,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  x:real
       #|  y * inv x
       #|  z:real
-      #|  !x y z. &0 < x /\\ z * x <= y ==> z <= y * inv x
+      #|  forall x y z. &0 < x /\\ z * x <= y ==> z <= y * inv x
       #|  ~(&(num_exp 1 min_exp) = &0)
       #|  (n * n) * (((e * e) * x * y) * z) * u = (n * e) * (n * e) * (x * u) * z * y:real
       #|  EVEN min_exp
@@ -1326,7 +1326,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  F
       #|  interval_arith x (float_num T n1 e1, float_num F n2 e2) /\\\n     max (float_num F n1 e1) (float_num F n2 e2) = t\n      ==> interval_arith (abs x) (float_num F 0 min_exp, t)
       #|  interval_arith x (lo1, hi1) /\\ interval_arith y (lo2, hi2) /\\ hi1 < lo2\n\t\t\t\t==> x < y
-      #|  !s1 s2. interval_arith x (float_num s1 n1 e1, float_num s2 n2 e2)\n                                 ==> interval_arith (--x) (float_num (~s2) n2 e2, float_num (~s1) n1 e1)
+      #|  forall s1 s2. interval_arith x (float_num s1 n1 e1, float_num s2 n2 e2)\n                                 ==> interval_arith (--x) (float_num (~s2) n2 e2, float_num (~s1) n1 e1)
       #|  F
       #|  F
       #|  T
@@ -1357,7 +1357,7 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  interval_arith x (float_num F n1 e1, float_num F n2 e2) /\\\n    interval_arith y (float_num F m1 r1, float_num F m2 r2) /\\\n    f1 <= float_num F n1 e1 * float_num F m1 r1 /\\\n    float_num F n2 e2 * float_num F m2 r2 <= f2\n    ==> interval_arith (x * y) (f1, f2)
       #|  d:real
       #|  b:real
-      #|  !b x. &0 <= b /\\ x <= --b ==> &0 <= --x
+      #|  forall b x. &0 <= b /\\ x <= --b ==> &0 <= --x
       #|  --x <= c <=> --c <= x
       #|  x * y <= a <=> --x * --y <= a
       #|  a * c:real

@@ -82237,10 +82237,10 @@ Multivariate/flyspeck quotations (2071):
   y:real^3
   x:real^3
   2
-  !x y. norm(x cross y) = norm(x) * norm(y) * sin(vector_angle x y)
+  forall x y. norm(x cross y) = norm(x) * norm(y) * sin(vector_angle x y)
   a /\\ b /\\ c <=> ~(a ==> ~(b /\\ c))
   coplanar(vec 0 INSERT --x INSERT s) <=> coplanar(vec 0 INSERT x INSERT s)
-  !s:real^3->bool. coplanar s ==> negligible s
+  forall s:real^3->bool. coplanar s ==> negligible s
   a IN s ==> s SUBSET t ==> a IN t
   v2:real^N
   v1:real^N
@@ -82256,37 +82256,37 @@ Multivariate/flyspeck quotations (2071):
   v3:real^N
   v2:real^N
   vec 0:real^N
-  !v1 v2 v3:real^N. v1 IN span {v2,v3} ==> coplanar{vec 0,v1,v2,v3}
-  !v1 v2 v3:real^N. ~coplanar {vec 0,v1,v2,v3} ==> independent {v1,v2,v3}
+  forall v1 v2 v3:real^N. v1 IN span {v2,v3} ==> coplanar{vec 0,v1,v2,v3}
+  forall v1 v2 v3:real^N. ~coplanar {vec 0,v1,v2,v3} ==> independent {v1,v2,v3}
   affine hull {x:real^N,y}
-  !t. t SUBSET s /\\ x IN t ==> x IN s
+  forall t. t SUBSET s /\\ x IN t ==> x IN s
   w:real^N
   y:real^N
   x:real^N
-  !v1 v2 v3 w:real^N. ~coplanar {v1, v2, v3, w} ==> ~collinear {v1, v2, v3}
+  forall v1 v2 v3 w:real^N. ~coplanar {v1, v2, v3, w} ==> ~collinear {v1, v2, v3}
   (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  !a x s t.\n        ~(a = &0)\n        ==> (vec 0 INSERT (a % x) INSERT s SUBSET affine hull t <=>\n             vec 0 INSERT x INSERT s SUBSET affine hull t)
-  !a x y. ~(a = &0) ==> (collinear {vec 0,a % x,y} <=> collinear{vec 0,x,y})
+  forall a x s t.\n        ~(a = &0)\n        ==> (vec 0 INSERT (a % x) INSERT s SUBSET affine hull t <=>\n             vec 0 INSERT x INSERT s SUBSET affine hull t)
+  forall a x y. ~(a = &0) ==> (collinear {vec 0,a % x,y} <=> collinear{vec 0,x,y})
   {a,b,c} = {a,c,b}
-  !a b v w. ~(a = &0) /\\ ~(b = &0)\n             ==> (collinear {vec 0,a % v,b % w} <=> collinear {vec 0,v,w})
-  !a x y z.\n    ~(a = &0) ==> (coplanar {vec 0,a % x,y,z} <=> coplanar {vec 0,x,y,z})
+  forall a b v w. ~(a = &0) /\\ ~(b = &0)\n             ==> (collinear {vec 0,a % v,b % w} <=> collinear {vec 0,v,w})
+  forall a x y z.\n    ~(a = &0) ==> (coplanar {vec 0,a % x,y,z} <=> coplanar {vec 0,x,y,z})
   {a,b,c,d} = {a,c,d,b}
   {a,b,c,d} = {a,c,d,b}
-  !a b c x y z.\n        ~(a = &0) /\\ ~(b = &0) /\\ ~(c = &0)\n        ==> (coplanar {vec 0,a % x,b % y,c % z} <=> coplanar {vec 0,x,y,z})
+  forall a b c x y z.\n        ~(a = &0) /\\ ~(b = &0) /\\ ~(c = &0)\n        ==> (coplanar {vec 0,a % x,b % y,c % z} <=> coplanar {vec 0,x,y,z})
   1 <= i + 1
   i <= 2 ==> i + 1 <= 3
   (dropout 3:real^3->real^2) (basis 1) = basis 1 /\\\n   (dropout 3:real^3->real^2) (basis 2) = basis 2 /\\\n   (dropout 3:real^3->real^2) (basis 3) = vec 0
   collinear {vec 0,basis 3,x} <=> (dropout 3:real^3->real^2) x = vec 0
   {x:real^2 | P x}
   dropout 3:real^3->real^2
-  !P. open {x | P x} ==> open {x | P((dropout 3:real^3->real^2) x)}
+  forall P. open {x | P x} ==> open {x | P((dropout 3:real^3->real^2) x)}
   (pushin 3 t:real^2->real^3) y
   y:real^2
-  !P t. slice 3 t {x | P((dropout 3:real^3->real^2) x)} = {x | P x}
+  forall P t. slice 3 t {x | P((dropout 3:real^3->real^2) x)} = {x | P x}
   x = a + b + c * &1 <=> c = x - a - b
   d:real
   c:real
-  !x. (dropout 3:real^3->real^2) x IN span {u,v}\n         ==> x IN span {vector [u$1; u$2; r], vector [v$1; v$2; s], basis 3}
+  forall x. (dropout 3:real^3->real^2) x IN span {u,v}\n         ==> x IN span {vector [u$1; u$2; r], vector [v$1; v$2; s], basis 3}
   a / &2 + b / &2 + &1 / &2 = &1 <=> a + b = &1
   &1 / &2
   b / &2
@@ -82303,34 +82303,34 @@ Multivariate/flyspeck quotations (2071):
   a:real
   v:real^2
   u:real^2
-  !x y:real^3.\n        ~coplanar {vec 0,basis 3, x, y}\n        ==> ~collinear {vec 0,dropout 3 x:real^2,dropout 3 y}
-  !s:real^3->bool. slice 1 t s = {y:real^2 | vector[t;y$1;y$2] IN s}
-  !s:real^3->bool. slice 3 t s = {y:real^2 | vector[y$1;y$2;t] IN s}
+  forall x y:real^3.\n        ~coplanar {vec 0,basis 3, x, y}\n        ==> ~collinear {vec 0,dropout 3 x:real^2,dropout 3 y}
+  forall s:real^3->bool. slice 1 t s = {y:real^2 | vector[t;y$1;y$2] IN s}
+  forall s:real^3->bool. slice 3 t s = {y:real^2 | vector[y$1;y$2;t] IN s}
   (pad2d3d:real^2->real^3) x = lambda i. if i < 3 then x$i else &0
   i <= 3 <=> i <= 2 \\/ i = 3
   i < 3 <=> i <= 2
   (lambda i. (y:real^3)$i):real^2
-  !P. (!y:real^3. y$3 = &0 ==> P y) <=> (!x. P(pad2d3d x))
-  (?y. P y) <=> ~(!x. ~P x)
-  (!P. (!y:real^3. y$3 = &0 ==> P y) <=> (!x. P(pad2d3d x))) /\\\n   (!P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))
+  forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))
+  (?y. P y) <=> ~(forall x. ~P x)
+  (forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))) /\\\n   (forall P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))
   i < 3 ==> i <= 2
   linear pad2d3d
   i <= 2 ==> i <= 3
   i < 3 <=> i <= 2
-  !x y. pad2d3d x = pad2d3d y ==> x = y
-  !x. norm(pad2d3d x) = norm x
+  forall x y. pad2d3d x = pad2d3d y ==> x = y
+  forall x. norm(pad2d3d x) = norm x
   :real^2
   pad2d3d
   {} = IMAGE pad2d3d {} /\\\n     vec 0 = pad2d3d(vec 0)
   plane x = (?u v w. ~(collinear {u,v,w}) /\\ x = affine hull {u,v,w})
-  !a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s
-  !a:real^N s. plane s ==> plane(IMAGE (\\x. a + x) s)
+  forall a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s
+  forall a:real^N s. plane s ==> plane(IMAGE (\\x. a + x) s)
   {f a,f b,f c} = IMAGE f {a,b,c}
   {u,v,w} SUBSET IMAGE (f:real^M->real^N) p
   ?u. u IN IMAGE f (:real^M) /\\\n        ?v. v IN IMAGE f (:real^M) /\\\n            ?w. w IN IMAGE (f:real^M->real^N) (:real^M) /\\\n                ~collinear {u, v, w} /\\ IMAGE f p = affine hull {u, v, w}
-  !f:real^M->real^N p.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (plane(IMAGE f p) <=> plane p)
-  !f:real^M->real^N p.\n        linear f /\\ plane p /\\ (!x y. f x = f y ==> x = y)\n        ==> plane(IMAGE f p)
-  !p. plane p ==> affine p
+  forall f:real^M->real^N p.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (plane(IMAGE f p) <=> plane p)
+  forall f:real^M->real^N p.\n        linear f /\\ plane p /\\ (forall x y. f x = f y ==> x = y)\n        ==> plane(IMAGE f p)
+  forall p. plane p ==> affine p
   span {z:real^3 | z$3 = &0} = {z:real^3 | z$3 = &0}
   b - a:real^3 = c - a <=> b = c
   ~(a = b) ==> {a,b} DELETE a = {b}
@@ -82358,16 +82358,16 @@ Multivariate/flyspeck quotations (2071):
   c:real^3
   b:real^3
   a:real^3
-  !s. plane s\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE f (IMAGE (\\x. a + x) s) = {z:real^3 | z$3 = &0}
+  forall s. plane s\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE f (IMAGE (\\x. a + x) s) = {z:real^3 | z$3 = &0}
   det(matrix(f:real^3->real^3))
-  !f. f * g = &1 /\\ f = &1 ==> g = &1
+  forall f. f * g = &1 /\\ f = &1 ==> g = &1
   --a + a + x:real^3 = x
   g:real^3->real^3
   --a:real^3
   g:real^3->real^3
   f:real^3->real^3
   a:real^3
-  !p. plane p\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE (\\x. a + x) (IMAGE f {z:real^3 | z$3 = &0}) = p
+  forall p. plane p\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE (\\x. a + x) (IMAGE f {z:real^3 | z$3 = &0}) = p
   \\x:real^N. u + x
   u = u + a <=> a = vec 0
   b:real^N
@@ -82394,7 +82394,7 @@ Multivariate/flyspeck quotations (2071):
   v:real^N
   u:real^N
   (?x u v w. p x u v w) <=> (?u v w x. p x u v w)
-  2 <= dimindex(:N)\n   ==> !s:real^N->bool. coplanar s <=> ?x. plane x /\\ s SUBSET x
+  2 <= dimindex(:N)\n   ==> forall s:real^N->bool. coplanar s <=> ?x. plane x /\\ s SUBSET x
   v1:real^N = v0 + x <=> x = v1 - v0
   vec 0:real^3
   IMAGE (\\v:real^3. v0 + v) (span{v1 - v0, v2 - v0, v3 - v0})
@@ -82408,26 +82408,26 @@ Multivariate/flyspeck quotations (2071):
   n <= 2 <=> n < 3
   2
   {v1 - v0,v2 - v0,v3 - v0}:real^3->bool
-  !x y:real^3. x - y = (x - a) - (y - a)
+  forall x y:real^3. x - y = (x - a) - (y - a)
   CARD {b - a:real^3,c - a}
   \\x:real^3. x - a
   c:real^3
   b:real^3
   a:real^3
-  !v0 v1 (v2: real^3) v3.\n        coplanar {v0,v1,v2,v3} <=>\n        det(vector[v1 - v0; v2 - v0; v3 - v0]) = &0
-  !v w x y. coplanar {v,w,x,y} <=> ((w - v) cross (x - v)) dot (y - v) = &0
-  !a b c:real^N. plane(affine hull {a,b,c}) <=> ~collinear{a,b,c}
+  forall v0 v1 (v2: real^3) v3.\n        coplanar {v0,v1,v2,v3} <=>\n        det(vector[v1 - v0; v2 - v0; v3 - v0]) = &0
+  forall v w x y. coplanar {v,w,x,y} <=> ((w - v) cross (x - v)) dot (y - v) = &0
+  forall a b c:real^N. plane(affine hull {a,b,c}) <=> ~collinear{a,b,c}
   &2:int
-  !s u v w:real^N.\n        s SUBSET affine hull {u,v,w} /\\ ~collinear s\n        ==> affine hull {u,v,w} = affine hull s
+  forall s u v w:real^N.\n        s SUBSET affine hull {u,v,w} /\\ ~collinear s\n        ==> affine hull {u,v,w} = affine hull s
   (p ==> (x <=> x')) /\\ (~p ==> (x <=> T)) ==> (x' ==> x)
   a + (x - a:real^N) = x
   (\\x. a + x) o (f:real^N->real^N)
-  !a f. orthogonal_transformation (f:real^N->real^N)\n           ==> ((!P. (!x. P x) <=> (!x. P (a + f x))) /\\\n                (!P. (?x. P x) <=> (?x. P (a + f x))) /\\\n                (!Q. (!s. Q s) <=> (!s. Q (IMAGE (\\x. a + x) (IMAGE f s)))) /\\\n                (!Q. (?s. Q s) <=> (?s. Q (IMAGE (\\x. a + x) (IMAGE f s))))) /\\\n               (!P. {x | P x} =\n                    IMAGE (\\x. a + x) (IMAGE f {x | P(a + f x)}))
-  !a f. {} = IMAGE (\\x:real^3. a + x) (IMAGE f {})
-  !f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)
-  (!a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> !a f. q a f ==> p' a f))
+  forall a f. orthogonal_transformation (f:real^N->real^N)\n           ==> ((forall P. (forall x. P x) <=> (forall x. P (a + f x))) /\\\n                (forall P. (?x. P x) <=> (?x. P (a + f x))) /\\\n                (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE (\\x. a + x) (IMAGE f s)))) /\\\n                (forall Q. (?s. Q s) <=> (?s. Q (IMAGE (\\x. a + x) (IMAGE f s))))) /\\\n               (forall P. {x | P x} =\n                    IMAGE (\\x. a + x) (IMAGE f {x | P(a + f x)}))
+  forall a f. {} = IMAGE (\\x:real^3. a + x) (IMAGE f {})
+  forall f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (forall x y. f x = f y ==> x = y) /\\\n            (forall y. ?x. f x = y) /\\\n            (forall x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)
+  (forall a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> forall a f. q a f ==> p' a f))
   lin_combo V f = vsum V (\\v. f v % (v:real^N))
-  affsign sgn s t (v:real^A) <=>\n     (?f. (v = lin_combo (s UNION t) f) /\\\n          (!w. t w ==> sgn (f w)) /\\\n          (sum (s UNION t) f = &1))
+  affsign sgn s t (v:real^A) <=>\n     (?f. (v = lin_combo (s UNION t) f) /\\\n          (forall w. t w ==> sgn (f w)) /\\\n          (sum (s UNION t) f = &1))
   sgn_gt = (\\t. (&0 < t))
   sgn_ge = (\\t. (&0 <= t))
   sgn_lt = (\\t. (t < &0))
@@ -82436,19 +82436,19 @@ Multivariate/flyspeck quotations (2071):
   aff_ge = affsign sgn_ge
   aff_lt = affsign sgn_lt
   aff_le = affsign sgn_le
-  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (!w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
+  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (forall w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
   (w IN (s UNION t) ==> w IN t ==> P w) <=>\n                        (w IN t ==> P w)
-  affsign sgn s t =\n        {y | ?f. (!w. w IN (s UNION t) ==> w IN t ==> sgn(f w)) /\\\n                 sum (s UNION t) f = &1 /\\\n                 vsum (s UNION t) (\\v. f v % v) = y}
-  y IN affsign sgn s t <=>\n        ?u. (!x. x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
+  affsign sgn s t =\n        {y | ?f. (forall w. w IN (s UNION t) ==> w IN t ==> sgn(f w)) /\\\n                 sum (s UNION t) f = &1 /\\\n                 vsum (s UNION t) (\\v. f v % v) = y}
+  y IN affsign sgn s t <=>\n        ?u. (forall x. x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
   (s DIFF t) UNION t = s UNION t
-  !s t. affsign sgn s t = affsign sgn (s DIFF t) t
-  !s t. aff_ge s t = aff_ge (s DIFF t) t
+  forall s t. affsign sgn s t = affsign sgn (s DIFF t) t
+  forall s t. aff_ge s t = aff_ge (s DIFF t) t
   p /\\ ~(p /\\ ~q) <=> p /\\ q
   vsum s (\\x. u x % x) = vsum {x | x IN s /\\ ~(u x = &0)} (\\x. u x % x)
   FINITE {x | x IN s /\\ ~(u((f:real^M->real^N) x) = &0)}
   {y | y IN IMAGE (f:real^M->real^N) s /\\ ~(u y = &0)} =\n      IMAGE f {x | x IN s /\\ ~(u(f x) = &0)}
   (p ==> z = x) ==> (p /\\ x = y <=> p /\\ z = y)
-  !f:real^M->real^N s.\n           linear f /\\ (!x y. f x = f y ==> x = y)\n           ==> (sum(IMAGE f s) u = &1 /\\ vsum(IMAGE f s) (\\x. u x % x) = y <=>\n                sum s (u o f) = &1 /\\ f(vsum s (\\x. (u o f) x % x)) = y)
+  forall f:real^M->real^N s.\n           linear f /\\ (forall x y. f x = f y ==> x = y)\n           ==> (sum(IMAGE f s) u = &1 /\\ vsum(IMAGE f s) (\\x. u x % x) = y <=>\n                sum s (u o f) = &1 /\\ f(vsum s (\\x. (u o f) x % x)) = y)
   (u:real^M->real) o (g:real^N->real^M)
   u:real^M->real
   x:real^M
@@ -82458,11 +82458,11 @@ Multivariate/flyspeck quotations (2071):
   vsum (s UNION t) (\\x. (u o (f:real^M->real^N)) x % x)
   u:real^N->real
   y:real^N
-  !f:real^M->real^N sgn s t v.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (affsign sgn (IMAGE f s) (IMAGE f t) =\n             IMAGE f (affsign sgn s t))
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_ge (IMAGE f s) (IMAGE f t) = IMAGE f (aff_ge s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_gt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_gt s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_le (IMAGE f s) (IMAGE f t) = IMAGE f (aff_le s t)
-  !f:real^M->real^N s t.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_lt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_lt s t)
+  forall f:real^M->real^N sgn s t v.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (affsign sgn (IMAGE f s) (IMAGE f t) =\n             IMAGE f (affsign sgn s t))
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_ge (IMAGE f s) (IMAGE f t) = IMAGE f (aff_ge s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_gt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_gt s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_le (IMAGE f s) (IMAGE f t) = IMAGE f (aff_le s t)
+  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_lt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_lt s t)
   a + x:real^N = a + y <=> x = y
   FINITE {x:real^N | x IN s UNION t /\\ ~(f x = &0)}
   vsum (IMAGE (\\x:real^N. a + x)\n                          {x | x IN s UNION t /\\ ~(f x = &0)})\n                   (\\v. f(v - a) % v)
@@ -82471,17 +82471,17 @@ Multivariate/flyspeck quotations (2071):
   (a + x) - a:real^N = x
   \\x. (f:real^N->real)(x - a)
   f:real^N->real
-  (!x. s x ==> p x) <=> (!x. x IN s ==> p x)
-  !sgn s t a v:real^N.\n        affsign sgn s t v\n        ==> affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) (a + v)
+  (forall x. s x ==> p x) <=> (forall x. x IN s ==> p x)
+  forall sgn s t a v:real^N.\n        affsign sgn s t v\n        ==> affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) (a + v)
   a:real^N
   --a + x:real^N
   --a + a + x:real^N = x
   --a:real^N
-  !a:real^N sgn s t.\n        affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (affsign sgn s t)
-  !a:real^N s t.\n        aff_ge (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_ge s t)
-  !a:real^N s t.\n        aff_gt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_gt s t)
-  !a:real^N s t.\n        aff_le (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_le s t)
-  !a:real^N s t.\n        aff_lt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_lt s t)
+  forall a:real^N sgn s t.\n        affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (affsign sgn s t)
+  forall a:real^N s t.\n        aff_ge (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_ge s t)
+  forall a:real^N s t.\n        aff_gt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_gt s t)
+  forall a:real^N s t.\n        aff_le (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_le s t)
+  forall a:real^N s t.\n        aff_lt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_lt s t)
   &1 = x <=> x = &1
   x - y:real^N = z <=> x = y + z
   x - y:real = z <=> x = y + z
@@ -82492,26 +82492,26 @@ Multivariate/flyspeck quotations (2071):
   &0 < a / &2 <=> &0 < a
   &0 <= a / &2 <=> &0 <= a
   (x INSERT s) UNION t = x INSERT (s UNION t)
-  !x v w.\n        DISJOINT {x} {v}\n        ==> aff_ge {x} {v} =\n             {y | ?t1 t2.\n                     &0 <= t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v }
-  !x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_ge {x} {v,w} =\n             {y | ?t1 t2 t3.\n\n                     &0 <= t2 /\\ &0 <= t3 /\\\n\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-  !x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_ge {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 <= t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-  !x v w.\n        DISJOINT {x} {v}\n        ==> aff_gt {x} {v} =\n             {y | ?t1 t2.\n                     &0 < t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
-  !x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_gt {x} {v,w} =\n             {y | ?t1 t2 t3.\n                     &0 < t2 /\\ &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-  !x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_gt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-  !v w x y.\n        DISJOINT {v,w,x} {y}\n        ==> aff_gt {v,w,x} {y} =\n             {z | ?t1 t2 t3 t4.\n                     &0 < t4 /\\\n                     t1 + t2 + t3 + t4 = &1 /\\\n                     z = t1 % v + t2 % w + t3 % x + t4 % y}
-  !x v.\n        DISJOINT {x} {v}\n        ==> aff_lt {x} {v} =\n             {y | ?t1 t2.\n                     t2 < &0 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
-  !x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_lt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     t3 < &0 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
+  forall x v w.\n        DISJOINT {x} {v}\n        ==> aff_ge {x} {v} =\n             {y | ?t1 t2.\n                     &0 <= t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v }
+  forall x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_ge {x} {v,w} =\n             {y | ?t1 t2 t3.\n\n                     &0 <= t2 /\\ &0 <= t3 /\\\n\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
+  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_ge {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 <= t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
+  forall x v w.\n        DISJOINT {x} {v}\n        ==> aff_gt {x} {v} =\n             {y | ?t1 t2.\n                     &0 < t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
+  forall x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_gt {x} {v,w} =\n             {y | ?t1 t2 t3.\n                     &0 < t2 /\\ &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
+  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_gt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
+  forall v w x y.\n        DISJOINT {v,w,x} {y}\n        ==> aff_gt {v,w,x} {y} =\n             {z | ?t1 t2 t3 t4.\n                     &0 < t4 /\\\n                     t1 + t2 + t3 + t4 = &1 /\\\n                     z = t1 % v + t2 % w + t3 % x + t4 % y}
+  forall x v.\n        DISJOINT {x} {v}\n        ==> aff_lt {x} {v} =\n             {y | ?t1 t2.\n                     t2 < &0 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
+  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_lt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     t3 < &0 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
   t + s:real = &1 <=> t = &1 - s
   (?a b c. P b c /\\ Q b c /\\ R a b c /\\ S b c) <=>\n    (?b c. P b c /\\ Q b c /\\ S b c /\\ ?a. R a b c)
   DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
-  !v w.\n        ~(v = vec 0) /\\ ~(w = vec 0)\n        ==> aff_ge {vec 0} {v,w} = {a % v + b % w | &0 <= a /\\ &0 <= b}
+  forall v w.\n        ~(v = vec 0) /\\ ~(w = vec 0)\n        ==> aff_ge {vec 0} {v,w} = {a % v + b % w | &0 <= a /\\ &0 <= b}
   &0 <= a ==> &0 <= a / &2 /\\ a / &2 + a / &2 = a
   {a} = {a,a}
-  !v. ~(v = vec 0) ==> aff_ge {vec 0} {v} = {a % v | &0 <= a}
+  forall v. ~(v = vec 0) ==> aff_ge {vec 0} {v} = {a % v | &0 <= a}
   t + u = &1 <=> t = &1 - u
   (?a b c. P a b c) <=> (?c b a. P a b c)
   p /\\ q /\\ r <=> q /\\ p /\\ r
-  !v w. DISJOINT {vec 0, v} {w}\n         ==> aff_ge {vec 0, v} {w} = {s % v + t % w |s,t| &0 <= t}
+  forall v w. DISJOINT {vec 0, v} {w}\n         ==> aff_ge {vec 0, v} {w} = {s % v + t % w |s,t| &0 <= t}
   sum (s UNION t:real^N->bool) g = &1
   sum (s UNION t:real^N->bool) f = &1
   \\x:real^N. (&1 - u) * f x + u * g x
@@ -82520,66 +82520,66 @@ Multivariate/flyspeck quotations (2071):
   u:real
   y:real^N
   x:real^N
-  !sgn. (!x y u. sgn(x) /\\ sgn(y) /\\ &0 <= u /\\ u <= &1\n                  ==> sgn((&1 - u) * x + u * y))\n         ==> !s t:real^N->bool. convex(affsign sgn s t)
-  !s t. convex(aff_ge s t)
+  forall sgn. (forall x y u. sgn(x) /\\ sgn(y) /\\ &0 <= u /\\ u <= &1\n                  ==> sgn((&1 - u) * x + u * y))\n         ==> forall s t:real^N->bool. convex(affsign sgn s t)
+  forall s t. convex(aff_ge s t)
   x <= &0 <=> &0 <= --x
-  !s t. convex(aff_le s t)
+  forall s t. convex(aff_le s t)
   x <= &1 <=> x = &1 \\/ x < &1
   &0 <= x <=> x = &0 \\/ &0 < x
-  !s t. convex(aff_gt s t)
+  forall s t. convex(aff_gt s t)
   x <= &1 <=> x = &1 \\/ x < &1
   &0 <= x <=> x = &0 \\/ &0 < x
   x < &0 <=> &0 < --x
-  !s t. convex(aff_lt s t)
-  !sgn s t. (affsign sgn s t) SUBSET (affine hull (s UNION t))
-  !s t. (aff_ge s t) SUBSET (affine hull (s UNION t))
-  !s t. (aff_le s t) SUBSET (affine hull (s UNION t))
-  !s t. (aff_gt s t) SUBSET (affine hull (s UNION t))
-  !s t. (aff_lt s t) SUBSET (affine hull (s UNION t))
-  !sgn s t. affsign sgn s {} = affine hull s
-  !s t. aff_ge s {} = affine hull s
-  !s t. aff_le s {} = affine hull s
-  !s t. aff_gt s {} = affine hull s
-  !s t. aff_lt s {} = affine hull s
-  !sgn1 sgn2 s t.\n        (!x. sgn1 x ==> sgn2 x) ==> affsign sgn1 s t SUBSET affsign sgn2 s t
-  !s t. aff_gt s t SUBSET aff_ge s t
+  forall s t. convex(aff_lt s t)
+  forall sgn s t. (affsign sgn s t) SUBSET (affine hull (s UNION t))
+  forall s t. (aff_ge s t) SUBSET (affine hull (s UNION t))
+  forall s t. (aff_le s t) SUBSET (affine hull (s UNION t))
+  forall s t. (aff_gt s t) SUBSET (affine hull (s UNION t))
+  forall s t. (aff_lt s t) SUBSET (affine hull (s UNION t))
+  forall sgn s t. affsign sgn s {} = affine hull s
+  forall s t. aff_ge s {} = affine hull s
+  forall s t. aff_le s {} = affine hull s
+  forall s t. aff_gt s {} = affine hull s
+  forall s t. aff_lt s {} = affine hull s
+  forall sgn1 sgn2 s t.\n        (forall x. sgn1 x ==> sgn2 x) ==> affsign sgn1 s t SUBSET affsign sgn2 s t
+  forall s t. aff_gt s t SUBSET aff_ge s t
   s SUBSET s' ==> {x | x IN s' UNION t /\\ x IN s UNION t} = s UNION t
   \\x:real^N. if x IN s UNION t then u x else &0
   u:real^N->real
   y:real^N
-  !sgn s s' t:real^N->bool.\n        s SUBSET s' ==> affsign sgn s t SUBSET affsign sgn s' t
-  !sgn s t s' t'.\n        s' UNION t' = s UNION t /\\ t' SUBSET t\n        ==> affsign sgn s t SUBSET affsign sgn s' t'
-  !s s' t. s SUBSET s' ==> aff_gt s t SUBSET aff_gt s' t
-  !s s' t. s SUBSET s' ==> aff_ge s t SUBSET aff_ge s' t
-  !s s' t. s SUBSET s' ==> aff_lt s t SUBSET aff_lt s' t
-  !s s' t. s SUBSET s' ==> aff_le s t SUBSET aff_le s' t
+  forall sgn s s' t:real^N->bool.\n        s SUBSET s' ==> affsign sgn s t SUBSET affsign sgn s' t
+  forall sgn s t s' t'.\n        s' UNION t' = s UNION t /\\ t' SUBSET t\n        ==> affsign sgn s t SUBSET affsign sgn s' t'
+  forall s s' t. s SUBSET s' ==> aff_gt s t SUBSET aff_gt s' t
+  forall s s' t. s SUBSET s' ==> aff_ge s t SUBSET aff_ge s' t
+  forall s s' t. s SUBSET s' ==> aff_lt s t SUBSET aff_lt s' t
+  forall s s' t. s SUBSET s' ==> aff_le s t SUBSET aff_le s' t
   t SUBSET t' ==> {x | x IN s UNION t' /\\ x IN s UNION t} = s UNION t
   \\x:real^N. if x IN s UNION t then u x else &0
   u:real^N->real
   y:real^N
-  !sgn s t t':real^N->bool.\n        sgn(&0) /\\ t SUBSET t' /\\ DISJOINT s t'\n        ==> affsign sgn s t SUBSET affsign sgn s t'
-  !s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_ge s t SUBSET aff_ge s t'
-  !s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_le s t SUBSET aff_le s t'
+  forall sgn s t t':real^N->bool.\n        sgn(&0) /\\ t SUBSET t' /\\ DISJOINT s t'\n        ==> affsign sgn s t SUBSET affsign sgn s t'
+  forall s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_ge s t SUBSET aff_ge s t'
+  forall s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_le s t SUBSET aff_le s t'
   affsign sgn (s:real^N->bool) {}
-  !sgn s t:real^N->bool.\n        sgn(&0) /\\ DISJOINT s t\n        ==> affine hull s SUBSET affsign sgn s t
-  !s t. DISJOINT s t ==> affine hull s SUBSET aff_ge s t
+  forall sgn s t:real^N->bool.\n        sgn(&0) /\\ DISJOINT s t\n        ==> affine hull s SUBSET affsign sgn s t
+  forall s t. DISJOINT s t ==> affine hull s SUBSET aff_ge s t
   a IN t /\\ DISJOINT s t\n      ==> s UNION (t DELETE a) = (s UNION t) DELETE a
   u:real^N->real
   a:real^N
   &0 <= x ==> (&0 < x <=> ~(x = &0))
   u:real^N->real
-  !x:real^N. x IN t ==> &0 < u x
+  forall x:real^N. x IN t ==> &0 < u x
   u:real^N->real
   y:real^N
-  t' SUBSET t /\\ (!a. a IN s ==> f(a) SUBSET t) /\\\n    (!y. y IN t ==> y IN t' \\/ ?a. a IN s /\\ y IN f(a))\n    ==> t = t' UNION UNIONS {f a | a IN s}
-  !s:real^N->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> aff_ge s t = aff_gt s t UNION\n                         UNIONS {aff_ge s (t DELETE a) | a | a IN t}
-  !a. &0 < a ==> (!y. ?x. a * x = y)
+  t' SUBSET t /\\ (forall a. a IN s ==> f(a) SUBSET t) /\\\n    (forall y. y IN t ==> y IN t' \\/ ?a. a IN s /\\ y IN f(a))\n    ==> t = t' UNION UNIONS {f a | a IN s}
+  forall s:real^N->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> aff_ge s t = aff_gt s t UNION\n                         UNIONS {aff_ge s (t DELETE a) | a | a IN t}
+  forall a. &0 < a ==> (forall y. ?x. a * x = y)
   x = &1 - v - v' <=> v = &1 - (x + v')
-  !sgn s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        (!x. sgn x ==> sgn(x / &2)) /\\\n        (!x y. sgn x /\\ sgn y ==> sgn(x + y)) /\\\n        &0 < a\n        ==> affsign sgn (vec 0 INSERT (a % v) INSERT s) t =\n            affsign sgn (vec 0 INSERT v INSERT s) t
-  !s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_ge (vec 0 INSERT (a % v) INSERT s) t =\n            aff_ge (vec 0 INSERT v INSERT s) t
-  !s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_le (vec 0 INSERT (a % v) INSERT s) t =\n            aff_le (vec 0 INSERT v INSERT s) t
-  !s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_gt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_gt (vec 0 INSERT v INSERT s) t
-  !s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_lt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_lt (vec 0 INSERT v INSERT s) t
+  forall sgn s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        (forall x. sgn x ==> sgn(x / &2)) /\\\n        (forall x y. sgn x /\\ sgn y ==> sgn(x + y)) /\\\n        &0 < a\n        ==> affsign sgn (vec 0 INSERT (a % v) INSERT s) t =\n            affsign sgn (vec 0 INSERT v INSERT s) t
+  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_ge (vec 0 INSERT (a % v) INSERT s) t =\n            aff_ge (vec 0 INSERT v INSERT s) t
+  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_le (vec 0 INSERT (a % v) INSERT s) t =\n            aff_le (vec 0 INSERT v INSERT s) t
+  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_gt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_gt (vec 0 INSERT v INSERT s) t
+  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_lt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_lt (vec 0 INSERT v INSERT s) t
   &0 < a
   c:real
   b / a:real
@@ -82588,15 +82588,15 @@ Multivariate/flyspeck quotations (2071):
   b:real
   DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
   u:real^N = vec 0
-  !a u v:real^N.\n        &0 < a /\\ ~(v = vec 0)\n        ==> aff_ge {vec 0} {a % u,v} = aff_ge {vec 0} {u,v}
-  !x:real^N. x IN (s UNION t) DELETE vec 0 ==> ~(x = vec 0)
+  forall a u v:real^N.\n        &0 < a /\\ ~(v = vec 0)\n        ==> aff_ge {vec 0} {a % u,v} = aff_ge {vec 0} {u,v}
+  forall x:real^N. x IN (s UNION t) DELETE vec 0 ==> ~(x = vec 0)
   \\x:real^N. if x = vec 0\n                 then &1 - sum ((s UNION t) DELETE vec 0) (\\x. f x)\n                 else f x
   f:real^N->real
   f:real^N->real
   f:real^N->real
   y:real^N
   x IN s DIFF t ==> s UNION t = x INSERT ((s UNION t) DELETE x)
-  !sgn s t.\n        FINITE s /\\ FINITE t /\\ (vec 0) IN (s DIFF t)\n        ==> affsign sgn s t =\n             { vsum (s UNION t) (\\v. f v % v) |f|\n               !x:real^N. x IN t ==> sgn(f x)}
+  forall sgn s t.\n        FINITE s /\\ FINITE t /\\ (vec 0) IN (s DIFF t)\n        ==> affsign sgn s t =\n             { vsum (s UNION t) (\\v. f v % v) |f|\n               forall x:real^N. x IN t ==> sgn(f x)}
   (\\x. if x IN t then c * v x else u x):real^N->real
   v:real^N->real
   u:real^N->real
@@ -82620,7 +82620,7 @@ Multivariate/flyspeck quotations (2071):
   f:real^N->real
   DISJOINT (s DIFF t) t
   s UNION t = (s DIFF t) UNION t
-  !s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               {x + c % y | x IN affine hull (s DIFF t) /\\\n                            y IN convex hull t /\\ &0 <= c}
+  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               {x + c % y | x IN affine hull (s DIFF t) /\\\n                            y IN convex hull t /\\ &0 <= c}
   y:real^N
   c:real
   c % x:real^N
@@ -82634,22 +82634,22 @@ Multivariate/flyspeck quotations (2071):
   y:real^N
   c:real
   x:real^N
-  !s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               affine hull (s DIFF t) UNION\n               {c % (x + y) | x IN affine hull (s DIFF t) /\\\n                              y IN convex hull t /\\ &0 <= c}
+  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               affine hull (s DIFF t) UNION\n               {c % (x + y) | x IN affine hull (s DIFF t) /\\\n                              y IN convex hull t /\\ &0 <= c}
   {x + y:real^N | P x /\\ y = a} = {x + a | P x}
   t:real^N->bool = {}
-  !s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n               {x + y | x IN affine hull (s DIFF t) /\\\n                        y IN convex_cone hull t}
-  !s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n                {y | ?u. (!x. x IN s ==> &0 <= u x) /\\\n                         y = vsum s (\\x. u x % x)}
+  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n               {x + y | x IN affine hull (s DIFF t) /\\\n                        y IN convex_cone hull t}
+  forall s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n                {y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                         y = vsum s (\\x. u x % x)}
   ~(a IN s) ==> {a} DIFF s = {a}
-  !s:real^N->bool.\n        FINITE s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s = {t % y | &0 <= t /\\ y IN convex hull s}
+  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s = {t % y | &0 <= t /\\ y IN convex hull s}
   t = &0
   t:real
   &0
   y:real^N = vec 0
   y:real^N
   s:real^N->bool = {}
-  !s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n            vec 0 INSERT {t % y | &0 < t /\\ y IN convex hull s}
-  !s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n            convex_cone hull (s UNION t UNION IMAGE (--) (s DIFF t))
-  !s. convex hull s = aff_ge {} s
+  forall s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n            vec 0 INSERT {t % y | &0 < t /\\ y IN convex hull s}
+  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n            convex_cone hull (s UNION t UNION IMAGE (--) (s DIFF t))
+  forall s. convex hull s = aff_ge {} s
   (vec 0:real^N) IN ((vec 0 INSERT s) DIFF t)
   a:real^N
   s:real^N->bool
@@ -82657,12 +82657,12 @@ Multivariate/flyspeck quotations (2071):
   s:real^N->bool
   s DIFF t:real^N->bool
   FINITE(s DIFF t) /\\ FINITE(t:real^N->bool) /\\\n                DISJOINT (s DIFF t) t
-  !s t:real^N->bool. FINITE s /\\ FINITE t ==> polyhedron(aff_ge s t)
-  !s t:real^N->bool. FINITE s /\\ FINITE t ==> closed(aff_ge s t)
+  forall s t:real^N->bool. FINITE s /\\ FINITE t ==> polyhedron(aff_ge s t)
+  forall s t:real^N->bool. FINITE s /\\ FINITE t ==> closed(aff_ge s t)
   \\v. c * (u:real^N->real) v
   u:real^N->real
   c:real
-  !s:real^N->bool. FINITE s /\\ ~(vec 0 IN s) ==> conic(aff_ge {vec 0} s)
+  forall s:real^N->bool. FINITE s /\\ ~(vec 0 IN s) ==> conic(aff_ge {vec 0} s)
   &0 < a + b
   b / (a + b):real
   a / (a + b):real
@@ -82674,37 +82674,37 @@ Multivariate/flyspeck quotations (2071):
   b:real
   a:real
   u:real^N
-  !u v w x:real^N.\n        ~(v = u) /\\ ~(w = u) /\\ ~(x = u) /\\ x IN aff_ge {u} {v,w}\n        ==> angle(v,u,x) + angle(x,u,w) = angle(v,u,w)
+  forall u v w x:real^N.\n        ~(v = u) /\\ ~(w = u) /\\ ~(x = u) /\\ x IN aff_ge {u} {v,w}\n        ==> angle(v,u,x) + angle(x,u,w) = angle(v,u,w)
   (w:real^3)$3 - t * (z:real^3)$3
   t:real
-  (!t. ((?s. P s t) <=> Q t)) ==> ((?s t. P s t) <=> (?t. Q t))
+  (forall t. ((?s. P s t) <=> Q t)) ==> ((?s t. P s t) <=> (?t. Q t))
   DISJOINT s {a} <=> ~(a IN s)
   z:real^3 = basis 3
   z:real^3 = vec 0
-  !w z:real^3.\n        ~collinear{vec 0,basis 3,z}\n        ==> (w IN aff_ge {vec 0,basis 3} {z} <=>\n             (dropout 3 w) IN aff_ge {vec 0:real^2} {dropout 3 z})
+  forall w z:real^3.\n        ~collinear{vec 0,basis 3,z}\n        ==> (w IN aff_ge {vec 0,basis 3} {z} <=>\n             (dropout 3 w) IN aff_ge {vec 0:real^2} {dropout 3 z})
   ~(y = vec 0) ==> ((?s. x = s % y) <=> y cross x = vec 0)
   x:real^N = t % y
   t:real
-  !x y:real^N.\n          ~(y = vec 0)\n          ==> ((?t. &0 <= t /\\ x = t % y) <=>\n               (?t. x = t % y) /\\ &0 <= x dot y)
+  forall x y:real^N.\n          ~(y = vec 0)\n          ==> ((?t. &0 <= t /\\ x = t % y) <=>\n               (?t. x = t % y) /\\ &0 <= x dot y)
   a:real^N = b + c <=> a - c = b
   DISJOINT {a,b} {c} <=> ~(a = c) /\\ ~(b = c)
   y:real^3 = x
   y:real^3 = vec 0
   x:real^3 = vec 0
-  !x y z:real^3.\n        ~collinear {vec 0,x,y} /\\ ~collinear {vec 0,x,z}\n        ==> (z IN aff_ge {vec 0,x} {y} <=>\n             (x cross y) cross x cross z = vec 0 /\\\n             &0 <= (x cross z) dot (x cross y))
-  !x. aff_ge {x} {x} = {x}
+  forall x y z:real^3.\n        ~collinear {vec 0,x,y} /\\ ~collinear {vec 0,x,z}\n        ==> (z IN aff_ge {vec 0,x} {y} <=>\n             (x cross y) cross x cross z = vec 0 /\\\n             &0 <= (x cross z) dot (x cross y))
+  forall x. aff_ge {x} {x} = {x}
   (?x y. P y /\\ x = f y /\\ Q x y) <=> (?y. P y /\\ Q (f y) y)
   (&1 - x) % v + x % v:real^N = v
   x + y = &1 <=> x = &1 - y
   x:real^N = y
-  !x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t1 t2. &0 <= t2 /\\ t1 + t2 = &1 /\\ z = t1 % x + t2 % y}
+  forall x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t1 t2. &0 <= t2 /\\ t1 + t2 = &1 /\\ z = t1 % x + t2 % y}
   x + y = &1 <=> x = &1 - y
-  !x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t. &0 <= t /\\ z = (&1 - t) % x + t % y}
-  !x y. closed(aff_ge {x} {y})
-  !x y. segment[x,y] SUBSET aff_ge {x} {y}
-  (!x y. x IN aff_ge {x} {y}) /\\ (!x y. y IN aff_ge {x} {y})
+  forall x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t. &0 <= t /\\ z = (&1 - t) % x + t % y}
+  forall x y. closed(aff_ge {x} {y})
+  forall x y. segment[x,y] SUBSET aff_ge {x} {y}
+  (forall x y. x IN aff_ge {x} {y}) /\\ (forall x y. y IN aff_ge {x} {y})
   {x,y} = {x} UNION {y}
-  !x y. aff_ge {x} {y} SUBSET affine hull {x,y}
+  forall x y. aff_ge {x} {y} SUBSET affine hull {x,y}
   &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
   a = (&1 - u) % ((&1 - s) % a + s % b) + u % ((&1 - t) % a + t % b) <=>\n      ((&1 - u) * s + u * t) % (b - a):real^N = vec 0
   u:real
@@ -82721,24 +82721,24 @@ Multivariate/flyspeck quotations (2071):
   ?u v:real^N. aff_ge {a} {b} INTER s = segment[u,v]
   a:real^N
   b:real^N = a
-  !s a b:real^N.\n        compact s /\\ convex s /\\ a IN s\n        ==> ?c. aff_ge {a} {b} INTER s = segment[a,c]
+  forall s a b:real^N.\n        compact s /\\ convex s /\\ a IN s\n        ==> ?c. aff_ge {a} {b} INTER s = segment[a,c]
   conv0 S:real^A->bool = affsign sgn_gt {} S
-  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> conv0(IMAGE f s) = IMAGE f (conv0 s)
-  !a s. conv0(IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (conv0 s)
-  !s. conv0 s SUBSET convex hull s
-  !s. conv0 s = aff_gt {} s
-  !s:real^N->bool.\n        FINITE s\n        ==> convex hull s = conv0 s UNION\n                            UNIONS {convex hull (s DELETE a) | a | a IN s}
-  !s. convex(conv0 s)
+  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> conv0(IMAGE f s) = IMAGE f (conv0 s)
+  forall a s. conv0(IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (conv0 s)
+  forall s. conv0 s SUBSET convex hull s
+  forall s. conv0 s = aff_gt {} s
+  forall s:real^N->bool.\n        FINITE s\n        ==> convex hull s = conv0 s UNION\n                            UNIONS {convex hull (s DELETE a) | a | a IN s}
+  forall s. convex(conv0 s)
   convex hull s:real^N->bool
-  !s:real^N->bool. bounded s ==> bounded(conv0 s)
-  !s. bounded s ==> measurable(conv0 s)
+  forall s:real^N->bool. bounded s ==> bounded(conv0 s)
+  forall s. bounded s ==> measurable(conv0 s)
   (s UNION t) DIFF s = t DIFF s
-  !s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> negligible(convex hull s DIFF conv0 s)
+  forall s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> negligible(convex hull s DIFF conv0 s)
   s SUBSET t ==> s DIFF t = {}
-  !s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> measure(conv0 s) = measure(convex hull s)
+  forall s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> measure(conv0 s) = measure(convex hull s)
   orthonormal e1 e2 e3 <=>\n     e1 dot e1 = &1 /\\ e2 dot e2 = &1 /\\ e3 dot e3 = &1 /\\\n     e1 dot e2 = &0 /\\ e1 dot e3 = &0 /\\ e2 dot e3 = &0 /\\\n     &0 < (e1 cross e2) dot e3
-  !f. linear(f) /\\ (!x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> !e1 e2 e3. orthonormal (f e1) (f e2) (f e3) <=>\n                      orthonormal e1 e2 e3
-  !e1 e2 e3. orthonormal e1 e2 e3 ==> orthonormal e2 e3 e1
+  forall f. linear(f) /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall e1 e2 e3. orthonormal (f e1) (f e2) (f e3) <=>\n                      orthonormal e1 e2 e3
+  forall e1 e2 e3. orthonormal e1 e2 e3 ==> orthonormal e2 e3 e1
   &0 <= x * x /\\ &0 <= y * y ==> --x * x + y * -- y <= &0
   (u = &1 /\\ v = &1 /\\ w = &0 ==> a = b /\\ --c = d \\/ a = --b /\\ c = d) /\\\n    (a = --b /\\ c = d ==> x <= &0)\n    ==> (u = &1 /\\ v = &1 /\\ w = &0 /\\ &0 < x\n         ==> a:real = b /\\ --c:real = d)
   (e3:real^3)$1 = &0
@@ -82748,23 +82748,23 @@ Multivariate/flyspeck quotations (2071):
   k * k = &1 <=> k = &1 \\/ k = -- &1
   k:real
   e1:real^3
-  !e1 e2 e3. orthonormal e1 e2 e3 ==> e3 cross e1 = e2
-  !e1 e2 e3.\n        orthonormal e1 e2 e3\n        ==> e2 cross e3 = e1 /\\ e3 cross e1 = e2 /\\ e1 cross e2 = e3
-  !e1 e2 e3. orthonormal e1 e2 e3\n              ==> ~(e1 = vec 0) /\\ ~(e2 = vec 0) /\\ ~(e3 = vec 0)
-  !e1 e2 e3. orthonormal e1 e2 e3 ==> ~(e1 = e2) /\\ ~(e1 = e3) /\\ ~(e2 = e3)
-  !e1 e2 e3. orthonormal e1 e2 e3 ==> independent {e1,e2,e3}
+  forall e1 e2 e3. orthonormal e1 e2 e3 ==> e3 cross e1 = e2
+  forall e1 e2 e3.\n        orthonormal e1 e2 e3\n        ==> e2 cross e3 = e1 /\\ e3 cross e1 = e2 /\\ e1 cross e2 = e3
+  forall e1 e2 e3. orthonormal e1 e2 e3\n              ==> ~(e1 = vec 0) /\\ ~(e2 = vec 0) /\\ ~(e3 = vec 0)
+  forall e1 e2 e3. orthonormal e1 e2 e3 ==> ~(e1 = e2) /\\ ~(e1 = e3) /\\ ~(e2 = e3)
+  forall e1 e2 e3. orthonormal e1 e2 e3 ==> independent {e1,e2,e3}
   {e1:real^3,e2,e3}
   (:real^3)
-  !e1 e2 e3. orthonormal e1 e2 e3 ==> span {e1,e2,e3} = (:real^3)
-  !e1 e2 e3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (t1 % e1 + t2 % e2 + t3 % e3 = vec 0 <=>\n             t1 = &0 /\\ t2 = &0 /\\ t3 = &0)
+  forall e1 e2 e3. orthonormal e1 e2 e3 ==> span {e1,e2,e3} = (:real^3)
+  forall e1 e2 e3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (t1 % e1 + t2 % e2 + t3 % e3 = vec 0 <=>\n             t1 = &0 /\\ t2 = &0 /\\ t3 = &0)
   a % x + b % y + c % z:real^3 = a' % x + b' % y + c' % z <=>\n    (a - a') % x + (b - b') % y + (c - c') % z = vec 0
-  !e1 e2 e3 s1 s2 s3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (s1 % e1 + s2 % e2 + s3 % e3 = t1 % e1 + t2 % e2 + t3 % e3 <=>\n             s1 = t1 /\\ s2 = t2 /\\ s3 = t3)
+  forall e1 e2 e3 s1 s2 s3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (s1 % e1 + s2 % e2 + s3 % e3 = t1 % e1 + t2 % e2 + t3 % e3 <=>\n             s1 = t1 /\\ s2 = t2 /\\ s3 = t3)
   arcV u v w = acs (( (v - u) dot (w - u))/((norm (v-u)) * (norm (w-u))))
   w:real^N = u
   v:real^N = u
-  !u v w:real^N. arcV u v w = angle(v,u,w)
-  !f a b c.\n        linear f /\\ (!x. norm(f x) = norm x)\n        ==> arcV (f a) (f b) (f c) = arcV a b c
-  !a b c d. arcV (a + b) (a + c) (a + d) = arcV b c d
+  forall u v w:real^N. arcV u v w = angle(v,u,w)
+  forall f a b c.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> arcV (f a) (f b) (f c) = arcV a b c
+  forall a b c d. arcV (a + b) (a + c) (a + d) = arcV b c d
   cos(p) % e + sin(p) % rotate2d (pi / &2) e = rotate2d p e
   a % b % x:real^2 = b % a % x
   norm(v1:real^2)
@@ -82799,7 +82799,7 @@ Multivariate/flyspeck quotations (2071):
   v2:real^3 = w2 - (w2$3) % basis 3
   v1:real^3 = w1 - (w1$3) % basis 3
   x:real^3 = a + b + c <=> x - c = a + b
-  (!e3. p e3 /\\ e3 = a ==> q e3) <=> p a ==> q a
+  (forall e3. p e3 /\\ e3 = a ==> q e3) <=> p a ==> q a
   a % x:real^3 = a % y <=> a % (x - y) = vec 0
   &0 < w ==> abs w = w
   &0 < w ==> (w * x) / (w * w) * w = x
@@ -82810,8 +82810,8 @@ Multivariate/flyspeck quotations (2071):
   (w dot (w2:real^3)) / (w dot w)
   (w dot (w1:real^3)) / (w dot w)
   v:real^3
-  !v w w1 w2.\n          ?theta. &0 <= theta /\\ theta < &2 * pi /\\\n                  ?h1 h2.\n                     !e1 e2 e3.\n                        orthonormal e1 e2 e3 /\\\n                        dist(w,v) % e3 = w - v /\\\n                        ~(w = v)\n                        ==> ?psi r1 r2.\n                                w1 - v = (r1 * cos psi) % e1 +\n                                         (r1 * sin psi) % e2 +\n                                         h1 % (w - v) /\\\n                                w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                         (r2 * sin (psi + theta)) % e2 +\n                                         h2 % (w - v) /\\\n                                (~collinear {v, w, w1} ==> &0 < r1) /\\\n                                (~collinear {v, w, w2} ==> &0 < r2)
-  azim v w w1 w2 =\n        if collinear {v,w,w1} \\/ collinear {v,w,w2} then &0\n        else @theta. &0 <= theta /\\ theta < &2 * pi /\\\n                     ?h1 h2.\n                         !e1 e2 e3.\n                            orthonormal e1 e2 e3 /\\\n                            dist(w,v) % e3 = w - v /\\\n                            ~(w = v)\n                            ==> ?psi r1 r2.\n                                    w1 - v = (r1 * cos psi) % e1 +\n                                             (r1 * sin psi) % e2 +\n                                             h1 % (w - v) /\\\n                                    w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                             (r2 * sin (psi + theta)) % e2 +\n                                             h2 % (w - v) /\\\n                                    &0 < r1 /\\ &0 < r2
+  forall v w w1 w2.\n          ?theta. &0 <= theta /\\ theta < &2 * pi /\\\n                  ?h1 h2.\n                     forall e1 e2 e3.\n                        orthonormal e1 e2 e3 /\\\n                        dist(w,v) % e3 = w - v /\\\n                        ~(w = v)\n                        ==> ?psi r1 r2.\n                                w1 - v = (r1 * cos psi) % e1 +\n                                         (r1 * sin psi) % e2 +\n                                         h1 % (w - v) /\\\n                                w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                         (r2 * sin (psi + theta)) % e2 +\n                                         h2 % (w - v) /\\\n                                (~collinear {v, w, w1} ==> &0 < r1) /\\\n                                (~collinear {v, w, w2} ==> &0 < r2)
+  azim v w w1 w2 =\n        if collinear {v,w,w1} \\/ collinear {v,w,w2} then &0\n        else @theta. &0 <= theta /\\ theta < &2 * pi /\\\n                     ?h1 h2.\n                         forall e1 e2 e3.\n                            orthonormal e1 e2 e3 /\\\n                            dist(w,v) % e3 = w - v /\\\n                            ~(w = v)\n                            ==> ?psi r1 r2.\n                                    w1 - v = (r1 * cos psi) % e1 +\n                                             (r1 * sin psi) % e2 +\n                                             h1 % (w - v) /\\\n                                    w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                             (r2 * sin (psi + theta)) % e2 +\n                                             h2 % (w - v) /\\\n                                    &0 < r1 /\\ &0 < r2
   (d * h * d) pow 2 = (d * d) * (r * &1 + h * d * h * d) <=>\n    d = &0 \\/ r = &0
   r * c + r * s + f:real = r * (s + c) + f
   (r * c) * (r * c):real = r pow 2 * c pow 2
@@ -82859,7 +82859,7 @@ Multivariate/flyspeck quotations (2071):
   w1:real^3
   w:real^3
   v:real^3
-  !v w w1 w2:real^3.\n        &0 <= azim v w w1 w2 /\\ azim v w w1 w2 < &2 * pi /\\\n        ?h1 h2.\n           !e1 e2 e3.\n              orthonormal e1 e2 e3 /\\\n              dist(w,v) % e3 = w - v /\\\n              ~(w = v)\n              ==> ?psi r1 r2.\n                      w1 - v = (r1 * cos psi) % e1 +\n                               (r1 * sin psi) % e2 +\n                               h1 % (w - v) /\\\n                      w2 - v = (r2 * cos (psi + azim v w w1 w2)) % e1 +\n                               (r2 * sin (psi + azim v w w1 w2)) % e2 +\n                               h2 % (w - v) /\\\n                      (~collinear {v, w, w1} ==> &0 < r1) /\\\n                      (~collinear {v, w, w2} ==> &0 < r2)
+  forall v w w1 w2:real^3.\n        &0 <= azim v w w1 w2 /\\ azim v w w1 w2 < &2 * pi /\\\n        ?h1 h2.\n           forall e1 e2 e3.\n              orthonormal e1 e2 e3 /\\\n              dist(w,v) % e3 = w - v /\\\n              ~(w = v)\n              ==> ?psi r1 r2.\n                      w1 - v = (r1 * cos psi) % e1 +\n                               (r1 * sin psi) % e2 +\n                               h1 % (w - v) /\\\n                      w2 - v = (r2 * cos (psi + azim v w w1 w2)) % e1 +\n                               (r2 * sin (psi + azim v w w1 w2)) % e2 +\n                               h2 % (w - v) /\\\n                      (~collinear {v, w, w1} ==> &0 < r1) /\\\n                      (~collinear {v, w, w2} ==> &0 < r2)
   &0 < pi ==> (x * &2 * pi) / (&2 * pi) = x
   n:real
   &2 * m * pi + x = &2 * n * pi <=> x = (n - m) * &2 * pi
@@ -82888,30 +82888,30 @@ Multivariate/flyspeck quotations (2071):
   dist(w:real^3,v) % e3 = w - v
   {a,b,c} = {b,a,c}
   ~collinear{v:real^3,w,w2} /\\ ~collinear {v,w,w1}
-  !v w w1 w2 h1 h2 r1 r2 e1 e2 e3 psi theta.\n        &0 <= theta /\\\n        theta < &2 * pi /\\\n        orthonormal e1 e2 e3 /\\\n        dist(w,v) % e3 = w - v /\\\n        ~(w = v) /\\\n        &0 < r1 /\\ &0 < r2 /\\\n        w1 - v = (r1 * cos psi) % e1 +\n                 (r1 * sin psi) % e2 +\n                 h1 % (w - v) /\\\n        w2 - v = (r2 * cos (psi + theta)) % e1 +\n                 (r2 * sin (psi + theta)) % e2 +\n                 h2 % (w - v)\n        ==> azim v w w1 w2 = theta
+  forall v w w1 w2 h1 h2 r1 r2 e1 e2 e3 psi theta.\n        &0 <= theta /\\\n        theta < &2 * pi /\\\n        orthonormal e1 e2 e3 /\\\n        dist(w,v) % e3 = w - v /\\\n        ~(w = v) /\\\n        &0 < r1 /\\ &0 < r2 /\\\n        w1 - v = (r1 * cos psi) % e1 +\n                 (r1 * sin psi) % e2 +\n                 h1 % (w - v) /\\\n        w2 - v = (r2 * cos (psi + theta)) % e1 +\n                 (r2 * sin (psi + theta)) % e2 +\n                 h2 % (w - v)\n        ==> azim v w w1 w2 = theta
   {a + x,a + y,a + z} = IMAGE (\\x:real^3. a + x) {x,y,z}
   dist(a + v,a + w) = dist(v,w)
   :real
   :real
   a + w:real^3 = a + v <=> w = v
   (a + w) - (a + v):real^3 = w - v
-  !a v w w1 w2. azim (a + v) (a + w) (a + w1) (a + w2) = azim v w w1 w2
+  forall a v w w1 w2. azim (a + v) (a + w) (a + w1) (a + w2) = azim v w w1 w2
   {f x,f y,f z} = IMAGE f {x,y,z}
-  !x y. (f:real^3->real^3) x = f y <=> x = y
+  forall x y. (f:real^3->real^3) x = f y <=> x = y
   f:real^3->real^3
-  !f. linear f /\\ (!x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> !v w w1 w2. azim (f v) (f w) (f w1) (f w2) = azim v w w1 w2
-  (!v w w1 w2. v = w ==> azim v w w1 w2 = &0) /\\\n   (!v w w1 w2. collinear{v,w,w1} ==> azim v w w1 w2 = &0) /\\\n   (!v w w1 w2. collinear{v,w,w2} ==> azim v w w1 w2 = &0)
-  !v x y. azim v v x y = &0
+  forall f. linear f /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall v w w1 w2. azim (f v) (f w) (f w1) (f w2) = azim v w w1 w2
+  (forall v w w1 w2. v = w ==> azim v w w1 w2 = &0) /\\\n   (forall v w w1 w2. collinear{v,w,w1} ==> azim v w w1 w2 = &0) /\\\n   (forall v w w1 w2. collinear{v,w,w2} ==> azim v w w1 w2 = &0)
+  forall v x y. azim v v x y = &0
   a % x:real^3 = a % y <=> a % (x - y) = vec 0
   &0 < a ==> abs a = a
-  !a. &0 < a ==> (!y. ?x. a * x = y)
-  !a v w1 w2.\n        &0 < a\n        ==> azim (vec 0) (a % v) w1 w2 = azim (vec 0) v w1 w2
-  !a. &0 < a ==> (!y. ?x. a * x = y)
+  forall a. &0 < a ==> (forall y. ?x. a * x = y)
+  forall a v w1 w2.\n        &0 < a\n        ==> azim (vec 0) (a % v) w1 w2 = azim (vec 0) v w1 w2
+  forall a. &0 < a ==> (forall y. ?x. a * x = y)
   &0 < c
   &0 < b
   &0 < a
   &0 < a ==> abs a = a
-  !a v w1 w2.\n        &0 < a /\\ &0 < b /\\ &0 < c\n        ==> azim (vec 0) (a % v) (b % w1) (c % w2) = azim (vec 0) v w1 w2
+  forall a v w1 w2.\n        &0 < a /\\ &0 < b /\\ &0 < c\n        ==> azim (vec 0) (a % v) (b % w1) (c % w2) = azim (vec 0) v w1 w2
   (r * cos t) % basis 1 + (r * sin t) % basis 2 = Cx r * cexp(ii * Cx t)
   r2 / r1:real
   (a * b) * (c * d):complex = (a * c) * b * d
@@ -82930,7 +82930,7 @@ Multivariate/flyspeck quotations (2071):
   vec 0:real^3
   collinear {vec 0:real^3,basis 3,y}
   collinear {vec 0:real^3,basis 3,x}
-  !x y:real^3. azim (vec 0) (basis 3) x y = Arg(dropout 3 y / dropout 3 x)
+  forall x y:real^3. azim (vec 0) (basis 3) x y = Arg(dropout 3 y / dropout 3 x)
   Re z / w
   z:complex
   w = &0
@@ -82946,19 +82946,19 @@ Multivariate/flyspeck quotations (2071):
   w:real
   w:real^3
   v:real^3
-  !v w w1 w2.\n        ~collinear{v,w,w1} /\\ ~(w2 IN aff_ge {v,w} {w1})\n        ==> (azim v w w1) real_continuous at w2
+  forall v w w1 w2.\n        ~collinear{v,w,w1} /\\ ~(w2 IN aff_ge {v,w} {w1})\n        ==> (azim v w w1) real_continuous at w2
   {a,b,c,d} SUBSET s <=> {a,b,c} SUBSET s /\\ d IN s
   w1:real^3
   w:real^3
   v:real^3
   {a,b} UNION {c} = {a,b,c}
-  !v w w1 w2. ~coplanar{v,w,w1,w2} ==> (azim v w w1) real_continuous at w2
+  forall v w w1 w2. ~coplanar{v,w,w1,w2} ==> (azim v w w1) real_continuous at w2
   (dropout 3 :real^3->real^2) w = Cx(&0)
   w:real^3
   &0 <= x <=> x = &0 \\/ &0 < x
   v1:real^3
   v0:real^3
-  !v0 v1 w. azim v0 v1 w w = &0
+  forall v0 v1 w. azim v0 v1 w w = &0
   y:real = t + z <=> t = y - z
   t:real
   a + b + c = &1 <=> a = &1 - b - c
@@ -82969,29 +82969,29 @@ Multivariate/flyspeck quotations (2071):
   &0 <= x <=> x = &0 \\/ &0 < x
   v1:real^3
   v0:real^3
-  !v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> y IN aff_gt {v0,v1} {x})
-  !v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> x IN aff_gt {v0,v1} {y})
+  forall v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> y IN aff_gt {v0,v1} {x})
+  forall v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> x IN aff_gt {v0,v1} {y})
   azim v0 v1 w x = azim v0 v1 w w
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_gt {v0,v1} {x})
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_gt {v0,v1} {x})
   azim v0 v1 w x = azim v0 v1 w w
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_gt {v0,v1} {w})
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_gt {v0,v1} {w})
   {x} DELETE x = {}
   v1:real^3 = v0
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_ge {v0,v1} {x})
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_ge {v0,v1} {x})
   w = &0
   w:real
   w:real^3
   z:real^3
-  !z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ azim z w w1 w2 = &0\n        ==> azim z w w2 w1 = &0
+  forall z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ azim z w w1 w2 = &0\n        ==> azim z w w2 w1 = &0
   (dropout 3:real^3->real^2) w2 /\n                (dropout 3:real^3->real^2) w1
   w = &0
   w:real
   w:real^3
   z:real^3
-  !z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2}\n        ==> azim z w w2 w1 = if azim z w w1 w2 = &0 then &0\n                             else &2 * pi - azim z w w1 w2
-  !z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = pi <=> azim z w w2 w1 = pi)
-  !z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = &0 <=> azim z w w2 w1 = &0)
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_ge {v0,v1} {w})
+  forall z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2}\n        ==> azim z w w2 w1 = if azim z w w1 w2 = &0 then &0\n                             else &2 * pi - azim z w w1 w2
+  forall z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = pi <=> azim z w w2 w1 = pi)
+  forall z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = &0 <=> azim z w w2 w1 = &0)
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_ge {v0,v1} {w})
   x:real = t + y <=> t = x - y
   t:real
   s + t = &1 <=> s = &1- t
@@ -83015,8 +83015,8 @@ Multivariate/flyspeck quotations (2071):
   &0 <= x <=> x = &0 \\/ &0 < x
   v1:real^3
   v0:real^3
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> w IN aff_lt {v0,v1} {x})
-  !v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> x IN aff_lt {v0,v1} {w})
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> w IN aff_lt {v0,v1} {x})
+  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> x IN aff_lt {v0,v1} {w})
   (w2:real^3)$1 / (w1:real^3)$1
   (w2:real^3)$2 / (w1:real^3)$2
   ~((w1:real^3)$2 = &0) \\/ ~((w2:real^3)$1 = &0)
@@ -83044,7 +83044,7 @@ Multivariate/flyspeck quotations (2071):
   v1:real^3
   v0:real^3
   collinear {v0:real^3,v1,w1}
-  !v0 v1 w1 w2.\n        azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi\n        ==> coplanar {v0,v1,w1,w2}
+  forall v0 v1 w1 w2.\n        azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi\n        ==> coplanar {v0,v1,w1,w2}
   a * b * c:complex = b * a * c
   dropout 3:real^3->real^2
   b:real
@@ -83055,9 +83055,9 @@ Multivariate/flyspeck quotations (2071):
   u:real
   u:real^3
   a:real^3
-  !a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u v z = azim a u w z
+  forall a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u v z = azim a u w z
   collinear {a:real^3,u,z}
-  !a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u z v = azim a u z w
+  forall a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u z v = azim a u z w
   c:real
   b:real
   DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
@@ -83068,7 +83068,7 @@ Multivariate/flyspeck quotations (2071):
   u:real^N = vec 0
   w:real^N = vec 0
   a:real^N
-  !a u v w:real^N.\n        v IN aff_ge {a} {u,w} /\\ collinear{a,u,w} ==> collinear{a,v,w}
+  forall a u v w:real^N.\n        v IN aff_ge {a} {u,w} /\\ collinear{a,u,w} ==> collinear{a,v,w}
   &0 < t ==> (inv t * a - inv t * b + inv t * c - inv t * d = &1 <=>\n                  (a + c) - (b + d) = t)
   inv t3 * s2 - inv t3 * t2:real
   inv t3 * s1 - inv t3 * t1:real
@@ -83086,10 +83086,10 @@ Multivariate/flyspeck quotations (2071):
   collinear {v0:real^3,v1,x}
   collinear {v0:real^3,v1,x}
   v1:real^3 = v0
-  !v0 v1 w x y.\n     ~collinear {v0, v1, w} /\\\n     ~collinear {v0, v1, y} /\\\n     x IN aff_gt {v0, v1} {y}\n     ==> azim v0 v1 w x = azim v0 v1 w y
+  forall v0 v1 w x y.\n     ~collinear {v0, v1, w} /\\\n     ~collinear {v0, v1, y} /\\\n     x IN aff_gt {v0, v1} {y}\n     ==> azim v0 v1 w x = azim v0 v1 w y
   collinear {v0:real^3,v1,x}
   collinear {v0:real^3,v1,w}
-  !v0 v1 w x. x IN aff_ge {v0, v1} {w} ==> azim v0 v1 w x = &0
+  forall v0 v1 w x. x IN aff_ge {v0, v1} {w} ==> azim v0 v1 w x = &0
   z = Cx(&0)
   &0 < x
   x = &0
@@ -83105,19 +83105,19 @@ Multivariate/flyspeck quotations (2071):
   w:real
   w:real^3
   v:real^3
-  !v w x y. real_sgn(sin(azim v w x y)) =\n             real_sgn(((w - v) cross (x - v)) dot (y - v))
+  forall v w x y. real_sgn(sin(azim v w x y)) =\n             real_sgn(((w - v) cross (x - v)) dot (y - v))
   x - pi < pi <=> x < &2 * pi
   azim v w x y - pi
   &0 <= sin(azim v w x y)
-  !v w x y. azim v w x y <= pi <=>\n             &0 <= ((w - v) cross (x - v)) dot (y - v)
+  forall v w x y. azim v w x y <= pi <=>\n             &0 <= ((w - v) cross (x - v)) dot (y - v)
   dihV w0 w1 w2 w3 =\n     let va = w2 - w0 in\n     let vb = w3 - w0 in\n     let vc = w1 - w0 in\n     let vap = ( vc dot vc) % va - ( va dot vc) % vc in\n     let vbp = ( vc dot vc) % vb - ( vb dot vc) % vc in\n     arcV (vec 0) vap vbp
   dihV (w0:real^N) w1 w2 w3 =\n     let va = w2 - w0 in\n     let vb = w3 - w0 in\n     let vc = w1 - w0 in\n     let vap = (vc dot vc) % va - (va dot vc) % vc in\n     let vbp = (vc dot vc) % vb - (vb dot vc) % vc in\n     angle(vap,vec 0,vbp)
   (a + x) - (a + y):real^N = x - y
-  !a w0 w1 w2 w3:real^N.\n        dihV (a + w0) (a + w1) (a + w2) (a + w3) = dihV w0 w1 w2 w3
-  !f:real^M->real^N w0 w1 w2 w3.\n        linear f /\\ (!x. norm(f x) = norm x)\n        ==> dihV (f w0) (f w1) (f w2) (f w3) = dihV w0 w1 w2 w3
+  forall a w0 w1 w2 w3:real^N.\n        dihV (a + w0) (a + w1) (a + w2) (a + w3) = dihV w0 w1 w2 w3
+  forall f:real^M->real^N w0 w1 w2 w3.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> dihV (f w0) (f w1) (f w2) (f w3) = dihV w0 w1 w2 w3
   a % a % x - a % b % a % y:real^N =\n                            (a * a) % (x - b % y)
-  !a v w1 w2:real^N.\n        ~(a = &0)\n        ==> dihV (vec 0) (a % v) w1 w2 = dihV (vec 0) v w1 w2
-  !w0 w1 w2 w3. &0 <= dihV w0 w1 w2 w3 /\\ dihV w0 w1 w2 w3 <= pi
+  forall a v w1 w2:real^N.\n        ~(a = &0)\n        ==> dihV (vec 0) (a % v) w1 w2 = dihV (vec 0) v w1 w2
+  forall w0 w1 w2 w3. &0 <= dihV w0 w1 w2 w3 /\\ dihV w0 w1 w2 w3 <= pi
   a:real = b + c * d <=> b - --c * d = a
   &0 < r1 /\\ &0 < r2 ==> ((r1 * r2) * x) / (r1 * r2) = x
   (r1 * c1) * (r2 * c2) + (r1 * s1) * (r2 * s2):real =\n                          (r1 * r2) * (c1 * c2 + s1 * s2)
@@ -83143,17 +83143,17 @@ Multivariate/flyspeck quotations (2071):
   w:real^3
   v:real^3
   w:real^3 = v
-  !v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> cos(azim v w v1 v2) = cos(dihV v w v1 v2)
-  !v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 < pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
+  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> cos(azim v w v1 v2) = cos(dihV v w v1 v2)
+  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 < pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
   p <= x /\\ x < &2 * p ==> &0 <= &2 * p - x /\\ &2 * p - x <= p
   x = &2 * pi - y <=> y = &2 * pi - x
-  !v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        pi <= azim v w v1 v2\n        ==> azim v w v1 v2 = &2 * pi - dihV v w v1 v2
-  !v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> azim v w v1 v2 = if azim v w v1 v2 < pi then dihV v w v1 v2\n                             else &2 * pi - dihV v w v1 v2
+  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        pi <= azim v w v1 v2\n        ==> azim v w v1 v2 = &2 * pi - dihV v w v1 v2
+  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> azim v w v1 v2 = if azim v w v1 v2 < pi then dihV v w v1 v2\n                             else &2 * pi - dihV v w v1 v2
   a < &2 * pi /\\ ~(a < pi) ==> (a = &0 <=> &2 * pi - a = &0)
   &2 * p - (&2 * p - a) = &0 <=> a = &0
   a:real = p - b <=> b = p - a
-  !v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 <=> dihV v0 v1 w1 w2 = &0)
-  !v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = pi <=> dihV v0 v1 w1 w2 = pi)
+  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 <=> dihV v0 v1 w1 w2 = &0)
+  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = pi <=> dihV v0 v1 w1 w2 = pi)
   v0:real^2
   p:real^3->bool
   p:real^3->bool
@@ -83162,36 +83162,36 @@ Multivariate/flyspeck quotations (2071):
   v1:real^3
   v0:real^3
   (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-  !v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
-  !v0 v1 w1 w2:real^3.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (dihV v0 v1 w1 w2 = &0 \\/ dihV v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
-  !v0 v1 v2 v3:real^N.\n        dihV v0 v1 v3 v2 = dihV v0 v1 v2 v3
+  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
+  forall v0 v1 w1 w2:real^3.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (dihV v0 v1 w1 w2 = &0 \\/ dihV v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
+  forall v0 v1 v2 v3:real^N.\n        dihV v0 v1 v3 v2 = dihV v0 v1 v2 v3
   --a - --b:real^N = --(a - b)
   --a - --b:real^N = --(a - b)
-  !v0 v1 v2 v3. dihV (--v0) (--v1) (--v2) (--v3) = dihV v0 v1 v2 v3
-  !v1 v2 v3. dihV (vec 0) (--v1) (--v2) (--v3) = dihV (vec 0) v1 v2 v3
+  forall v0 v1 v2 v3. dihV (--v0) (--v1) (--v2) (--v3) = dihV v0 v1 v2 v3
+  forall v1 v2 v3. dihV (vec 0) (--v1) (--v2) (--v3) = dihV (vec 0) v1 v2 v3
   u:real^N
-  !e u v w:real^N.\n      orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\ ~(e = u)\n      ==> dihV u e v w = arcV u v w
-  !v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 <= pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
+  forall e u v w:real^N.\n      orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\ ~(e = u)\n      ==> dihV u e v w = arcV u v w
+  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 <= pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
   u:real^3 = e
-  !e u v w:real^3.\n        orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\\n        ~collinear{u,e,v} /\\ ~collinear{u,e,w} /\\\n        azim u e v w <= pi\n        ==> azim u e v w = arcV u v w
+  forall e u v w:real^3.\n        orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\\n        ~collinear{u,e,v} /\\ ~collinear{u,e,w} /\\\n        azim u e v w <= pi\n        ==> azim u e v w = arcV u v w
   {u,e,v,w} = {u,v,w,e}
   collinear{u:real^3,e,w}
   collinear{u:real^3,e,v}
-  !u e v w. collinear {u,v,w} ==> azim u e v w = &0 \\/ azim u e v w = pi
-  !f:real^M->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x within s)
-  !f:real^M->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x)
-  !f:real->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
-  !f:real->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (atreal x)
+  forall u e v w. collinear {u,v,w} ==> azim u e v w = &0 \\/ azim u e v w = pi
+  forall f:real^M->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x within s)
+  forall f:real^M->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x)
+  forall f:real->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
+  forall f:real->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (atreal x)
   (%) (inv((w:real^N) dot w)):real^N->real^N
   w:real^N = vec 0
   w:real^N
   z:real^N
   v:real^N
-  !v w w1 w2:real^N.\n        ~collinear {v, w, w2} ==> dihV v w w1 real_continuous at w2
+  forall v w w1 w2:real^N.\n        ~collinear {v, w, w2} ==> dihV v w w1 real_continuous at w2
   t:real^M->bool
   s:real^M->bool
   u:real^M->bool = (u INTER s) UNION (u INTER t)
-  !s t u f:real^M->real^N g h.\n          (closed s /\\ closed t) /\\ s UNION t = UNIV /\\\n          (g continuous_on (u INTER s) /\\ h continuous_on (u INTER t)) /\\\n          (!x. x IN u INTER s ==> g x = f x) /\\\n          (!x. x IN u INTER t ==> h x = f x)\n          ==> f continuous_on u
+  forall s t u f:real^M->real^N g h.\n          (closed s /\\ closed t) /\\ s UNION t = UNIV /\\\n          (g continuous_on (u INTER s) /\\ h continuous_on (u INTER t)) /\\\n          (forall x. x IN u INTER s ==> g x = f x) /\\\n          (forall x. x IN u INTER t ==> h x = f x)\n          ==> f continuous_on u
   vec 0:real^3
   x <= &0 ==> (&0 <= x <=> x = &0)
   (x <= pi ==> x = pi) ==> pi <= x
@@ -83211,24 +83211,24 @@ Multivariate/flyspeck quotations (2071):
   {z | f z = vec 0 /\\ drop(g z) >= &0} =\n        {z | z IN UNIV /\\ f z IN {vec 0}} INTER\n        {z | z IN UNIV /\\ g z IN {k | drop(k) >= &0}}
   &0 <= x <=> drop(lift x) >= &0
   {x | f x = a} = {x | x IN UNIV /\\ f x IN {a}}
-  (!x. ~(x IN s) ==> (x IN t <=> x IN t'))\n        ==> s UNION t = s UNION t'
+  (forall x. ~(x IN s) ==> (x IN t <=> x IN t'))\n        ==> s UNION t = s UNION t'
   {z | (fstcart z cross fstcart(sndcart z)) cross\n             fstcart z cross sndcart(sndcart z) = vec 0 /\\\n            &0 <= (fstcart z cross sndcart(sndcart z)) dot\n                  (fstcart z cross fstcart(sndcart z))}
-  !t'. s UNION t = s UNION t' /\\ closed(s UNION t')\n           ==> closed(s UNION t)
-  open s /\\ f continuous_on s ==> !z. z IN s ==> f continuous at z
-  (!x. ~P x /\\ ~Q x /\\ ~R x ==> J x) <=>\n    (!x. x IN UNIV DIFF (({x | P x} UNION {x | Q x}) UNION {x | R x})\n         ==> J x)
+  forall t'. s UNION t = s UNION t' /\\ closed(s UNION t')\n           ==> closed(s UNION t)
+  open s /\\ f continuous_on s ==> forall z. z IN s ==> f continuous at z
+  (forall x. ~P x /\\ ~Q x /\\ ~R x ==> J x) <=>\n    (forall x. x IN UNIV DIFF (({x | P x} UNION {x | Q x}) UNION {x | R x})\n         ==> J x)
   {a} UNION {b} = {a,b}
   a + x:real^3 = b + x <=> a = b
   {a - b:real^3} = IMAGE (\\x. x - b) {a}
   {a,b} = {a} UNION {b}
   vec 0 = (f:real^M->real^3) x - f x
-  !z. ~collinear {vec 0,fstcart z,fstcart(sndcart z)} /\\\n        ~collinear {vec 0,fstcart z,sndcart(sndcart z)} /\\\n        ~(sndcart(sndcart z) IN aff_ge {vec 0,fstcart z} {fstcart(sndcart z)})\n        ==> (\\z. Cx(azim (vec 0) (fstcart z) (fstcart(sndcart z))\n                                             (sndcart(sndcart z))))\n            continuous (at z)
+  forall z. ~collinear {vec 0,fstcart z,fstcart(sndcart z)} /\\\n        ~collinear {vec 0,fstcart z,sndcart(sndcart z)} /\\\n        ~(sndcart(sndcart z) IN aff_ge {vec 0,fstcart z} {fstcart(sndcart z)})\n        ==> (\\z. Cx(azim (vec 0) (fstcart z) (fstcart(sndcart z))\n                                             (sndcart(sndcart z))))\n            continuous (at z)
   vec 0 = (f:real^M->real^3) y - f y
   y:real^M
   (\\x:real^M. Cx(azim (f x) (g x) (h x) (k x))) =\n    (\\z. Cx(azim (vec 0) (fstcart z)\n                 (fstcart(sndcart z)) (sndcart(sndcart z)))) o\n    (\\x. pastecart (g x - f x) (pastecart (h x - f x) (k x - f x)))
-  !f:real^M->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x within s)
-  !f:real^M->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x)
-  !f:real->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
-  !f:real->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (atreal x)
+  forall f:real^M->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x within s)
+  forall f:real^M->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x)
+  forall f:real->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
+  forall f:real->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (atreal x)
   u - u':real^3 = x <=> u' = u - x
   &0 < w ==> n * ((abs w) * x) * y = w * n * x * y
   w % basis 3:real^3
@@ -83240,7 +83240,7 @@ Multivariate/flyspeck quotations (2071):
   u:real^3 = u' + x <=> u - u' = x
   v:real^3
   u:real^3 = v + u' + x <=> u - v = u' + x
-  !u v w:real^3.\n       ~(u = v) /\\ ~(w = v)\n       ==> (?u' r phi e3.\n                phi = arcV v u w /\\\n                r = dist(u,v) /\\\n                dist(w,v) % e3 = w - v /\\\n                u' dot e3 = &0 /\\\n                u = v + u' + (r * cos phi) % e3)
+  forall u v w:real^3.\n       ~(u = v) /\\ ~(w = v)\n       ==> (?u' r phi e3.\n                phi = arcV v u w /\\\n                r = dist(u,v) /\\\n                dist(w,v) % e3 = w - v /\\\n                u' dot e3 = &0 /\\\n                u = v + u' + (r * cos phi) % e3)
   Im d1 = &0
   z:complex
   d1 = Cx(&1)
@@ -83294,17 +83294,17 @@ Multivariate/flyspeck quotations (2071):
   v:real^3
   v:real^3
   u':real^3 = u + v + w <=> u' - u = v + w
-  !u v w u' e1 e2 e3 r phi theta.\n       ~collinear {v, w, u} /\\\n       ~collinear {v, w, u'} /\\\n       orthonormal e1 e2 e3 /\\\n       dist(w,v) % e3 = w - v /\\\n       (v + e1) IN aff_gt {v, w} {u} /\\\n       r = dist(v,u') /\\\n       phi = arcV v u' w /\\\n       theta = azim v w u u'\n       ==> u' = v + (r * cos theta * sin phi) % e1 +\n                    (r * sin theta * sin phi) % e2 +\n                    (r * cos phi) % e3
+  forall u v w u' e1 e2 e3 r phi theta.\n       ~collinear {v, w, u} /\\\n       ~collinear {v, w, u'} /\\\n       orthonormal e1 e2 e3 /\\\n       dist(w,v) % e3 = w - v /\\\n       (v + e1) IN aff_gt {v, w} {u} /\\\n       r = dist(v,u') /\\\n       phi = arcV v u' w /\\\n       theta = azim v w u u'\n       ==> u' = v + (r * cos theta * sin phi) % e1 +\n                    (r * sin theta * sin phi) % e2 +\n                    (r * cos phi) % e3
   wedge v0 v1 w1 w2 = {y | ~collinear {v0,v1,y} /\\\n                         &0 < azim v0 v1 w1 y /\\\n                         azim v0 v1 w1 y < azim v0 v1 w1 w2}
-  !v0 v1 w1 w2.\n        ~(v0 = v1)\n        ==> wedge v0 v1 w1 w2 = {y | ~(y IN affine hull {v0,v1}) /\\\n                                     &0 < azim v0 v1 w1 y /\\\n                                     azim v0 v1 w1 y < azim v0 v1 w1 w2}
+  forall v0 v1 w1 w2.\n        ~(v0 = v1)\n        ==> wedge v0 v1 w1 w2 = {y | ~(y IN affine hull {v0,v1}) /\\\n                                     &0 < azim v0 v1 w1 y /\\\n                                     azim v0 v1 w1 y < azim v0 v1 w1 w2}
   {a + x,a + y,a + z} = IMAGE (\\x:real^N. a + x) {x,y,z}
   a + (x - a):real^3 = x
-  !a v w w1 w2. wedge (a + v) (a + w) (a + w1) (a + w2) =\n                 IMAGE (\\x. a + x) (wedge v w w1 w2)
+  forall a v w w1 w2. wedge (a + v) (a + w) (a + w1) (a + w2) =\n                 IMAGE (\\x. a + x) (wedge v w w1 w2)
   {f v,f w,f y} = IMAGE (f:real^3->real^3) {v,w,y}
   y:real^3
-  !f. linear f /\\ (!x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> !v w w1 w2. wedge (f v) (f w) (f w1) (f w2) =\n                       IMAGE f (wedge v w w1 w2)
-  !a v w1 w2.\n        &0 < a /\\\n        ~collinear{vec 0,a % v,w1} /\\\n        ~collinear{vec 0,a % v,w2}\n        ==> wedge (vec 0) (a % v) w1 w2 = wedge (vec 0) v w1 w2
-  (!z w w1 w2. z = w ==> wedge z w w1 w2 = {}) /\\\n   (!z w w1 w2. collinear{z,w,w1} ==> wedge z w w1 w2 = {}) /\\\n   (!z w w1 w2. collinear{z,w,w2} ==> wedge z w w1 w2 = {})
+  forall f. linear f /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall v w w1 w2. wedge (f v) (f w) (f w1) (f w2) =\n                       IMAGE f (wedge v w w1 w2)
+  forall a v w1 w2.\n        &0 < a /\\\n        ~collinear{vec 0,a % v,w1} /\\\n        ~collinear{vec 0,a % v,w2}\n        ==> wedge (vec 0) (a % v) w1 w2 = wedge (vec 0) v w1 w2
+  (forall z w w1 w2. z = w ==> wedge z w w1 w2 = {}) /\\\n   (forall z w w1 w2. collinear{z,w,w1} ==> wedge z w w1 w2 = {}) /\\\n   (forall z w w1 w2. collinear{z,w,w2} ==> wedge z w w1 w2 = {})
   a / t1:real
   a * t1:real
   a:real
@@ -83316,8 +83316,8 @@ Multivariate/flyspeck quotations (2071):
   vec 0 = a % x <=> a % x = vec 0
   x IN {a} <=> a = x
   {a} UNION {b,c} = {a,b,c}
-  !v1 v2:real^N.\n        &0 < t1 /\\ ~(v2 = vec 0)\n        ==> aff_gt {vec 0} {t1 % basis 1, v2} =\n                {a % basis 1 + b % v2 | &0 < a /\\ &0 < b}
-  !a x:real^3. (?a. x = a % basis 3) <=> dropout 3 x:real^2 = vec 0
+  forall v1 v2:real^N.\n        &0 < t1 /\\ ~(v2 = vec 0)\n        ==> aff_gt {vec 0} {t1 % basis 1, v2} =\n                {a % basis 1 + b % v2 | &0 < a /\\ &0 < b}
+  forall a x:real^3. (?a. x = a % basis 3) <=> dropout 3 x:real^2 = vec 0
   &0 < z ==> w / z * b * z = b * w
   pi / &2 - x < pi / &2 - y <=> y < x
   &0 < Im z
@@ -83373,15 +83373,15 @@ Multivariate/flyspeck quotations (2071):
   w:real
   v1:real^3
   v0:real^3
-  !v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
+  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
   {a} DELETE a = {}
   ~(w1 = w2) ==> {w1,w2} DELETE w2 = {w1}
   ~(w1 = w2) ==> {w1,w2} DELETE w1 = {w2}
   y:real^3
-  (!x. ~c x ==> (p x \\/ q x \\/ x IN t <=> x IN e))\n    ==> {x | ~c x /\\ p x} UNION {x | ~c x /\\ q x} UNION (t DIFF {x | c x}) =\n        e DIFF {x | c x}
+  (forall x. ~c x ==> (p x \\/ q x \\/ x IN t <=> x IN e))\n    ==> {x | ~c x /\\ p x} UNION {x | ~c x /\\ q x} UNION (t DIFF {x | c x}) =\n        e DIFF {x | c x}
   {x | x IN s} = s
   {x:real^3 | collinear {v0,v1,x}}
-  !c. c SUBSET {x | p x} /\\ c SUBSET s /\\\n        ({x | ~(~c x ==> ~p x)} UNION {x | ~(~c x ==> ~q x)} UNION\n         ({x | ~c x /\\ r x} DIFF c) = s DIFF c)\n        ==> {x | p x \\/ q x \\/ r x} = s
+  forall c. c SUBSET {x | p x} /\\ c SUBSET s /\\\n        ({x | ~(~c x ==> ~p x)} UNION {x | ~(~c x ==> ~q x)} UNION\n         ({x | ~c x /\\ r x} DIFF c) = s DIFF c)\n        ==> {x | p x \\/ q x \\/ r x} = s
   &0 < a\n    ==> (&0 <= x /\\ x <= a <=> x = &0 \\/ x = a \\/ &0 < x /\\ x < a)
   w1:real^3 = w2
   w2:real^3 = v1
@@ -83389,7 +83389,7 @@ Multivariate/flyspeck quotations (2071):
   w2:real^3 = v0
   w1:real^3 = v0
   v1:real^3 = v0
-  !v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> {x | &0 <= azim v0 v1 w1 x /\\\n                 azim v0 v1 w1 x <= azim v0 v1 w1 w2} =\n            aff_ge {v0,v1} {w1,w2}
+  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> {x | &0 <= azim v0 v1 w1 x /\\\n                 azim v0 v1 w1 x <= azim v0 v1 w1 w2} =\n            aff_ge {v0,v1} {w1,w2}
   {a,b,c,d} = {a,b,d,c}
   w1:real^3
   w2:real^3
@@ -83399,7 +83399,7 @@ Multivariate/flyspeck quotations (2071):
   w1:real^3
   v1:real^3
   v0:real^3
-  !v0 v1 w1 w2.\n        ~coplanar{v0,v1,w1,w2} /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
+  forall v0 v1 w1 w2.\n        ~coplanar{v0,v1,w1,w2} /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
   t = &0
   ~(x = Cx(&0)) ==> (z / x = t <=> z = t * x)
   z / x = Cx t
@@ -83494,7 +83494,7 @@ Multivariate/flyspeck quotations (2071):
   w:real^3
   z:real^3
   z:real^3 = w \\/  collinear{z,w,w1} \\/ collinear{z,w,w2}
-  !z:real^3 w w1 w2. open(wedge z w w1 w2)
+  forall z:real^3 w w1 w2. open(wedge z w w1 w2)
   u:real
   &1 - u
   u:real
@@ -83504,12 +83504,12 @@ Multivariate/flyspeck quotations (2071):
   ~(s SUBSET {a}) ==> ?z. ~(a = z) /\\ z IN s
   basis 1:real^2
   {z | Arg z = a} SUBSET {vec 0}
-  !a. ?b. ~(b = vec 0) /\\ {z | Arg z = a} SUBSET aff_ge {vec 0} {b}
+  forall a. ?b. ~(b = vec 0) /\\ {z | Arg z = a} SUBSET aff_ge {vec 0} {b}
   a:real
   w = &0
   w:real
   w:complex
-  !w a. ~(w = vec 0)\n         ==> ?b. ~(b = vec 0) /\\\n                 {z | Arg(z / w) = a} SUBSET aff_ge {vec 0} {b}
+  forall w a. ~(w = vec 0)\n         ==> ?b. ~(b = vec 0) /\\\n                 {z | Arg(z / w) = a} SUBSET aff_ge {vec 0} {b}
   (x:real^3)$3
   v:real
   &1 - v - (x:real^3)$3
@@ -83524,13 +83524,13 @@ Multivariate/flyspeck quotations (2071):
   v1:real^3
   v0:real^3
   collinear{v0:real^3,v1,w1}
-  !v0 v1 w1 a.\n     (collinear{v0,v1,w1} ==> ~(a = &0))\n     ==> coplanar {z | azim v0 v1 w1 z = a}
+  forall v0 v1 w1 a.\n     (collinear{v0,v1,w1} ==> ~(a = &0))\n     ==> coplanar {z | azim v0 v1 w1 z = a}
   (dropout 3:real^3->real^2) x
   x:real^3
   delta_x x1 x2 x3 x4 x5 x6 =\n        x1*x4*(--x1 + x2 + x3 -x4 + x5 + x6) +\n        x2*x5*(x1 - x2 + x3 + x4 -x5 + x6) +\n        x3*x6*(x1 + x2 - x3 + x4 + x5 - x6)\n        -x2*x3*x4 - x1*x3*x5 - x1*x2*x6 -x4*x5*x6:real
   x / &6 = y / &12 <=> y = &2 * x
-  !x1 x2 x3 x4:real^3.\n     measure(convex hull {x1,x2,x3,x4}) =\n     sqrt(delta_x (dist(x1,x2) pow 2) (dist(x1,x3) pow 2) (dist(x1,x4) pow 2)\n                  (dist(x3,x4) pow 2) (dist(x2,x4) pow 2) (dist(x2,x3) pow 2))\n      / &12
-  !v1 v2 v3 v4:real^3.\n        measure(conv0 {v1,v2,v3,v4}) =\n            let x12 = dist(v1,v2) pow 2 in\n            let x13 = dist(v1,v3) pow 2 in\n            let x14 = dist(v1,v4) pow 2 in\n            let x23 = dist(v2,v3) pow 2 in\n            let x24 = dist(v2,v4) pow 2 in\n            let x34 = dist(v3,v4) pow 2 in\n            sqrt(delta_x x12 x13 x14 x34 x24 x23)/(&12)
+  forall x1 x2 x3 x4:real^3.\n     measure(convex hull {x1,x2,x3,x4}) =\n     sqrt(delta_x (dist(x1,x2) pow 2) (dist(x1,x3) pow 2) (dist(x1,x4) pow 2)\n                  (dist(x3,x4) pow 2) (dist(x2,x4) pow 2) (dist(x2,x3) pow 2))\n      / &12
+  forall v1 v2 v3 v4:real^3.\n        measure(conv0 {v1,v2,v3,v4}) =\n            let x12 = dist(v1,v2) pow 2 in\n            let x13 = dist(v1,v3) pow 2 in\n            let x14 = dist(v1,v4) pow 2 in\n            let x23 = dist(v2,v3) pow 2 in\n            let x24 = dist(v2,v4) pow 2 in\n            let x34 = dist(v3,v4) pow 2 in\n            sqrt(delta_x x12 x13 x14 x34 x24 x23)/(&12)
   s pow 2 = &1 - x pow 2 /\\ x pow 2 < &1\n      ==> (inv s + x * --(&2 * x) * inv (&2) * inv s + s) = &2 * s
   x / &2 - --(x / &2) = x
   &1
@@ -83540,7 +83540,7 @@ Multivariate/flyspeck quotations (2071):
   &0 <= x ==> --x <= x
   t:real
   \\t. &2 * sqrt(&1 - t pow 2)
-  !t. abs(t) <= &1 <=> t IN real_interval[-- &1,&1]
+  forall t. abs(t) <= &1 <=> t IN real_interval[-- &1,&1]
   1
   :N
   :2
@@ -83559,8 +83559,8 @@ Multivariate/flyspeck quotations (2071):
   cball(vec 0:real^2,&1)
   &0 < r
   r = &0
-  !z:real^2 r. &0 <= r ==> measure(cball(z,r)) = pi * r pow 2
-  !z:real^2 r. &0 <= r ==> measure(ball(z,r)) = pi * r pow 2
+  forall z:real^2 r. &0 <= r ==> measure(cball(z,r)) = pi * r pow 2
+  forall z:real^2 r. &0 <= r ==> measure(ball(z,r)) = pi * r pow 2
   r:real
   --r:real
   \\t. pi * (r pow 2 - t pow 2)
@@ -83568,22 +83568,22 @@ Multivariate/flyspeck quotations (2071):
   abs x <= r ==> abs x <= abs r
   t:real
   \\t. pi * (r pow 2 - t pow 2)
-  !t. abs(t) <= r <=> t IN real_interval[--r,r]
+  forall t. abs(t) <= r <=> t IN real_interval[--r,r]
   1
   :N
   :3
   :M
   :2
   z:real^3
-  !z:real^3 r. &0 <= r ==> measure(cball(z,r)) = &4 / &3 * pi * r pow 3
-  !z:real^3 r. &0 <= r ==> measure(ball(z,r)) =  &4 / &3 * pi * r pow 3
+  forall z:real^3 r. &0 <= r ==> measure(cball(z,r)) = &4 / &3 * pi * r pow 3
+  forall z:real^3 r. &0 <= r ==> measure(ball(z,r)) =  &4 / &3 * pi * r pow 3
   rconesgn sgn v w h =\n       {x:real^A | sgn ((x-v) dot (w-v)) (dist(x,v)*dist(w,v)*h)}
   rcone_gt = rconesgn ( > )
   rcone_ge = rconesgn ( >= )
   rcone_eq = rconesgn ( = )
   frustum v0 v1 h1 h2 a =\n     { y:real^N | rcone_gt v0 v1 a y /\\\n                  let d = (y - v0) dot (v1 - v0) in\n                  let n = norm(v1 - v0) in\n                  (h1*n < d /\\ d < h2*n)}
   frustt v0 v1 h a = frustum v0 v1 (&0) h a
-  !v0 h1 h2 a. frustum v0 v0 h1 h2 a = {}
+  forall v0 h1 h2 a. frustum v0 v0 h1 h2 a = {}
   norm(x:real^N) = a /\\ norm(y) = b ==> norm(x + y) <= a + b
   :real
   :real
@@ -83592,17 +83592,17 @@ Multivariate/flyspeck quotations (2071):
   y:real^N
   x:real^N
   v0:real^N
-  !v0 v1:real^N a. &0 <= a ==> convex(rcone_gt v0 v1 a)
+  forall v0 v1:real^N a. &0 <= a ==> convex(rcone_gt v0 v1 a)
   {x:real^1 | x$1 > &0}
   \\x:real^N. lift(x dot v1 - norm x * norm v1 * a)
   v0:real^N
-  !v0 v1:real^N a. open(rcone_gt v0 v1 a)
+  forall v0 v1:real^N a. open(rcone_gt v0 v1 a)
   &2 % v - x - v:real^N = --(x - v)
   dist(&2 % x - y,x) = dist(y,x)
   :real
   :real
   a - (a - b):real^N = b
-  !v0 v1:real^N a.\n        rcone_gt v0 v1 (--a) =\n         IMAGE (\\x. &2 % v0 - x) ((:real^N) DIFF rcone_ge v0 v1 a)
+  forall v0 v1:real^N a.\n        rcone_gt v0 v1 (--a) =\n         IMAGE (\\x. &2 % v0 - x) ((:real^N) DIFF rcone_ge v0 v1 a)
   &0 < a
   h:real
   &0
@@ -83628,33 +83628,33 @@ Multivariate/flyspeck quotations (2071):
   b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
   abs(x) <= a ==> x <= a
   y:real^3
-  !y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
+  forall y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
   &1 <= a
   &0 <= x ==> x = &0 \\/ &0 < x
   b:real
   v1:real^3
   v0:real^3
-  !v0 v1:real^3 h a.\n       &0 < a\n       ==> bounded(frustt v0 v1 h a) /\\\n           convex(frustt v0 v1 h a) /\\\n           measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
-  !v0 v1:real^3 h a.\n       &0 < a\n       ==> measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
+  forall v0 v1:real^3 h a.\n       &0 < a\n       ==> bounded(frustt v0 v1 h a) /\\\n           convex(frustt v0 v1 h a) /\\\n           measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
+  forall v0 v1:real^3 h a.\n       &0 < a\n       ==> measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
   scale (t:real^3) (u:real^3):real^3 =\n       vector[t$1 * u$1; t$2 * u$2; t$3 * u$3]
   normball x r = { y:real^A | dist(y,x) < r}
   ellipsoid t r = IMAGE (scale t) (normball(vec 0) r)
-  !z r. normball z r = ball(z,r)
+  forall z r. normball z r = ball(z,r)
   (\\x:real^3. (lambda k. t$k * x$k):real^3) = scale t
   \\i. (t:real^3)$i
-  !s. measurable s\n       ==> measurable(IMAGE (scale t) s) /\\\n           measure(IMAGE (scale t) s) = abs(t$1 * t$2 * t$3) * measure s
+  forall s. measurable s\n       ==> measurable(IMAGE (scale t) s) /\\\n           measure(IMAGE (scale t) s) = abs(t$1 * t$2 * t$3) * measure s
   vec 0:real^3
-  !t r. &0 <= r\n         ==> measurable(ellipsoid t r) /\\\n             measure(ellipsoid t r) =\n                abs(t$1 * t$2 * t$3) * &4 / &3 * pi * r pow 3
+  forall t r. &0 <= r\n         ==> measurable(ellipsoid t r) /\\\n             measure(ellipsoid t r) =\n                abs(t$1 * t$2 * t$3) * &4 / &3 * pi * r pow 3
   ~(&0 <= r) ==> ~(norm(x:real^3) < r)
   :real
   &0 <= r
-  !t r. measurable(ellipsoid t r)
+  forall t r. measurable(ellipsoid t r)
   conic_cap v0 v1 r a = normball v0 r INTER rcone_gt v0 v1 a
-  !v0 r a. conic_cap v0 v0 r a = {}
+  forall v0 r a. conic_cap v0 v0 r a = {}
   ball(v0:real^3,r)
-  !v0 v1:real^3 r a. bounded(conic_cap v0 v1 r a)
+  forall v0 v1:real^3 r a. bounded(conic_cap v0 v1 r a)
   ball(v0:real^3,r)
-  !v0 v1:real^3 r a. measurable(conic_cap v0 v1 r a)
+  forall v0 v1:real^3 r a. measurable(conic_cap v0 v1 r a)
   &0 < a
   a * r <= r <=> &0 <= r * (&1 - a)
   r:real
@@ -83688,7 +83688,7 @@ Multivariate/flyspeck quotations (2071):
   a * r:real
   pi * &2 / &3 * (&1 - a) * r pow 3 =\n    pi / &3 * (inv (a pow 2) - &1) * (a * r) pow 3 +\n    (pi * &2 / &3 * (&1 - a) * r pow 3 -\n     pi / &3 * (inv (a pow 2) - &1) * (a * r) pow 3)
   &0 <= a /\\ &0 <= b /\\ c <= d\n                             ==> ~(&0 < r /\\ d + a + b < c)
-  !y. ~(norm(vector[t; (y:real^2)$1; y$2]:real^3) < r)
+  forall y. ~(norm(vector[t; (y:real^2)$1; y$2]:real^3) < r)
   &0 < r
   t:real < r
   &0 < t
@@ -83710,14 +83710,14 @@ Multivariate/flyspeck quotations (2071):
   b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
   abs(x) <= a ==> x <= a
   y:real^3
-  !y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
+  forall y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
   &1 <= a
   &0 <= x ==> x = &0 \\/ &0 < x
   b:real
   v1:real^3
   v0:real^3
-  !v0 v1:real^3 r a.\n       &0 < a\n       ==> bounded(conic_cap v0 v1 r a) /\\\n           convex(conic_cap v0 v1 r a) /\\\n           measurable(conic_cap v0 v1 r a) /\\\n           measure(conic_cap v0 v1 r a) =\n             if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n             else &2 / &3 * pi * (&1 - a) * r pow 3
-  !v0 v1:real^3 r a.\n       &0 < a\n       ==> measurable(conic_cap v0 v1 r a) /\\ measure(conic_cap v0 v1 r a) =\n           if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n           else &2 / &3 * pi * (&1 - a) * r pow 3
+  forall v0 v1:real^3 r a.\n       &0 < a\n       ==> bounded(conic_cap v0 v1 r a) /\\\n           convex(conic_cap v0 v1 r a) /\\\n           measurable(conic_cap v0 v1 r a) /\\\n           measure(conic_cap v0 v1 r a) =\n             if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n             else &2 / &3 * pi * (&1 - a) * r pow 3
+  forall v0 v1:real^3 r a.\n       &0 < a\n       ==> measurable(conic_cap v0 v1 r a) /\\ measure(conic_cap v0 v1 r a) =\n           if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n           else &2 / &3 * pi * (&1 - a) * r pow 3
   vector_angle c ((inv a * u - inv a + &1) % c:real^N) = k
   c + a % c = (a + &1) % c
   a % c + x = b % c <=> x = (b - a) % c
@@ -83748,7 +83748,7 @@ Multivariate/flyspeck quotations (2071):
   x:real^N = vec 0
   x:real^N
   (vec 0:real^N) INSERT\n              UNIONS { {x | x IN ((:real^N) DIFF ball(vec 0,inv(&n + &1))) /\\\n                            Cx(vector_angle c x) = Cx k} |\n                       n IN (:num)  }
-  !c:real^N k. ~(c = vec 0) /\\ ~(k = &0) /\\ ~(k = pi)\n                ==> negligible {x | vector_angle c x = k}
+  forall c:real^N k. ~(c = vec 0) /\\ ~(k = &0) /\\ ~(k = pi)\n                ==> negligible {x | vector_angle c x = k}
   p - x = p <=> x = &0
   {x:real^N | vector_angle b x = pi - vector_angle c b}
   {x:real^N | vector_angle b x = vector_angle c b}
@@ -83759,45 +83759,45 @@ Multivariate/flyspeck quotations (2071):
   2 <= d ==> 1 <= d
   basis 2:real^N
   basis 1:real^N
-  !a b. P a \\/ P b ==> ?x. P x
+  forall a b. P a \\/ P b ==> ?x. P x
   ?b:real^N. ~(b = vec 0) /\\\n               ~(vector_angle c b = &0) /\\\n               ~(vector_angle c b = pi)
   k = &0 \\/ k = pi
   2 <= d ==> 1 <= d
   orthogonal (basis 1:real^N) (basis 2)
-  !c:real^N k. 2 <= dimindex(:N) /\\ ~(c = vec 0)\n                ==> negligible {x | vector_angle c x = k}
+  forall c:real^N k. 2 <= dimindex(:N) /\\ ~(c = vec 0)\n                ==> negligible {x | vector_angle c x = k}
   --a + x:real^N = x - a
   {x:real^N | vector_angle c x = k}
   --a:real^N
-  !a:real^N c k.\n      2 <= dimindex(:N) /\\ ~(c = vec 0)\n      ==> negligible(a INSERT {x | vector_angle c (x - a) = k})
+  forall a:real^N c k.\n      2 <= dimindex(:N) /\\ ~(c = vec 0)\n      ==> negligible(a INSERT {x | vector_angle c (x - a) = k})
   ~(x * w * h <= x * w) <=> &0 < x * w * (h - &1)
   w:real^3
   x:real^3
   x:real^3
-  {x | P x} SUBSET {a} <=> !x. ~(x = a) ==> ~P x
+  {x | P x} SUBSET {a} <=> forall x. ~(x = a) ==> ~P x
   {vec 0}:real^3->bool
   ~(x = &0) /\\ ~(w = &0) ==> (a = x * w * b <=> a / (w * x) = b)
   x:real^3
-  (!x. ~(x = a) ==> (x IN s <=> x IN t))\n      ==> (s DIFF t) UNION (t DIFF s) SUBSET {a}
+  (forall x. ~(x = a) ==> (x IN s <=> x IN t))\n      ==> (s DIFF t) UNION (t DIFF s) SUBSET {a}
   {vec 0:real^3}
   acs h
   w:real^3
   abs(h) <= &1
   z:real^3
-  !w z:real^3 h. ~(w = z) ==> negligible(rcone_eq z w h)
+  forall w z:real^3 h. ~(w = z) ==> negligible(rcone_eq z w h)
   z:complex
   z:complex
   {z | cexp(ii * Cx(pi / &2 + t)) dot z = &0}
-  !t. negligible {z | Arg z = t}
+  forall t. negligible {z | Arg z = t}
   norm z = dist(vec 0,z)
   :real
   :real
   {z | P z /\\ Q z} = {z | P z} INTER {z | Q z}
-  !r t. measurable {z | norm(z) <= r /\\ Arg z <= t}
+  forall r t. measurable {z | norm(z) <= r /\\ Arg z <= t}
   {z | Arg z = t}
   {z | norm(z) <= r /\\ Arg z <= t}
-  !r t. measurable {z | norm(z) <= r /\\ Arg z < t}
+  forall r t. measurable {z | norm(z) <= r /\\ Arg z < t}
   {z | P z /\\ Q z /\\ R z} = {z | P z /\\ R z} DIFF {z | P z /\\ ~Q z}
-  !r s t. measurable {z | norm(z) <= r /\\ s < Arg z /\\ Arg z <= t}
+  forall r s t. measurable {z | norm(z) <= r /\\ s < Arg z /\\ Arg z <= t}
   z:complex
   x:real
   rotate2d x z
@@ -83834,18 +83834,18 @@ Multivariate/flyspeck quotations (2071):
   t / (&2 * pi)
   &2 * pi
   \\t. measure {z:real^2 | norm(z) <= r /\\ Arg(z) <= t}
-  !t r. &0 <= r /\\ &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) <= r /\\ Arg(x) <= t} =\n             t * r pow 2 / &2
+  forall t r. &0 <= r /\\ &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) <= r /\\ Arg(x) <= t} =\n             t * r pow 2 / &2
   {x | dist(vec 0,x) = r} UNION\n              {z | Arg z = &0} UNION {z | Arg z = t}
   {x | norm x <= r /\\ Arg x <= t}
   ~(&0 <= r) ==> ~(norm x < r)
   :real
-  !t r. &0 <= t /\\ t <= &2 * pi\n         ==> {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t}\n             has_measure (if &0 <= r then t * r pow 2 / &2 else &0)
-  !t r. &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t} =\n             if &0 <= r then t * r pow 2 / &2 else &0
+  forall t r. &0 <= t /\\ t <= &2 * pi\n         ==> {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t}\n             has_measure (if &0 <= r then t * r pow 2 / &2 else &0)
+  forall t r. &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t} =\n             if &0 <= r then t * r pow 2 / &2 else &0
   w = &0
   w:real
   w:complex
-  !w z.\n        ~(w = vec 0)\n        ==> {x | norm(x) < r /\\ &0 < Arg(x / w) /\\ Arg(x / w) < Arg(z / w)}\n            has_measure (if &0 <= r then Arg(z / w) * r pow 2 / &2 else &0)
-  !z:real^3 w w1 w2. measurable(ball(z,r) INTER wedge z w w1 w2)
+  forall w z.\n        ~(w = vec 0)\n        ==> {x | norm(x) < r /\\ &0 < Arg(x / w) /\\ Arg(x / w) < Arg(z / w)}\n            has_measure (if &0 <= r then Arg(z / w) * r pow 2 / &2 else &0)
+  forall z:real^3 w w1 w2. measurable(ball(z,r) INTER wedge z w w1 w2)
   r:real
   --r:real
   \\t. Arg v2 * (r pow 2 - t pow 2) / &2
@@ -83853,8 +83853,8 @@ Multivariate/flyspeck quotations (2071):
   abs x <= r ==> abs x <= abs r
   t:real
   \\t. Arg v2 * (r pow 2 - t pow 2) / &2
-  !t. abs(t) < r <=> t IN real_interval(--r,r)
-  !t z. ~(z = Cx(&0)) /\\ &0 < Arg z /\\ Arg z < t <=>\n          &0 < Arg z /\\ Arg z < t
+  forall t. abs(t) < r <=> t IN real_interval(--r,r)
+  forall t z. ~(z = Cx(&0)) /\\ &0 < Arg z /\\ Arg z < t <=>\n          &0 < Arg z /\\ Arg z < t
   v1 = &0
   v1:real
   v1:complex
@@ -83878,7 +83878,7 @@ Multivariate/flyspeck quotations (2071):
   w:real^3
   z:real^3
   z:real^3 = w \\/  collinear{z,w,w1} \\/ collinear{z,w,w2}
-  !z:real^3 w r w1 w2.\n        &0 <= r ==> measure(ball(z,r) INTER wedge z w w1 w2) =\n                       azim z w w1 w2 * &2 * r pow 3 / &3
+  forall z:real^3 w r w1 w2.\n        &0 <= r ==> measure(ball(z,r) INTER wedge z w w1 w2) =\n                       azim z w w1 w2 * &2 * r pow 3 / &3
   {w1:real^3,w2} = {w2,w1}
   w2:real^3
   w1:real^3
@@ -83913,7 +83913,7 @@ Multivariate/flyspeck quotations (2071):
   w:real
   w:real^3
   z:real^3
-  !z:real^3 w r w1 w2.\n        &0 <= r /\\ ~(w = z) /\\\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ ~(dihV z w w1 w2 = pi)\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
+  forall z:real^3 w r w1 w2.\n        &0 <= r /\\ ~(w = z) /\\\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ ~(dihV z w w1 w2 = pi)\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
   &2 * pi - pi = pi
   w2:real^3
   w1:real^3
@@ -83921,8 +83921,8 @@ Multivariate/flyspeck quotations (2071):
   z:real^3
   a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
   w:real^3 = z
-  !z:real^3 w r w1 w2.\n        &0 <= r /\\ ~coplanar{z,w,w1,w2}\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
-  !z r s t. measurable(ball(z,r) INTER aff_gt s t)
+  forall z:real^3 w r w1 w2.\n        &0 <= r /\\ ~coplanar{z,w,w1,w2}\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
+  forall z r s t. measurable(ball(z,r) INTER aff_gt s t)
   &0
   y - --a % v:real^N = y - a % --v
   \\x:real^N. if x = vec 0 then &2 * a + f(vec 0) else f x
@@ -83942,14 +83942,14 @@ Multivariate/flyspeck quotations (2071):
   ~(a IN s)\n    ==> ((w IN s UNION t ==> w = a \\/ w IN t ==> P w) <=>\n         (w IN t ==> P w))
   s UNION (v INSERT t) = v INSERT (s UNION t)
   (v INSERT s) UNION t = v INSERT (s UNION t)
-  !s t v:real^N.\n        FINITE s /\\ FINITE t /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> aff_gt (v INSERT s) t =\n            aff_gt s (v INSERT t) UNION\n            aff_gt s (--v INSERT t) UNION\n            aff_gt s t
-  !s t u:real^N->bool.\n          measurable s /\\ measurable t /\\ s INTER t = {} /\\ negligible u\n          ==> measure(s UNION t UNION u) = measure s + measure t
+  forall s t v:real^N.\n        FINITE s /\\ FINITE t /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> aff_gt (v INSERT s) t =\n            aff_gt s (v INSERT t) UNION\n            aff_gt s (--v INSERT t) UNION\n            aff_gt s t
+  forall s t u:real^N->bool.\n          measurable s /\\ measurable t /\\ s INTER t = {} /\\ negligible u\n          ==> measure(s UNION t UNION u) = measure s + measure t
   1 <= n /\\ x <= n ==> x - 1 < n
   CARD((s UNION t) DELETE (vec 0:real^N))
   affine hull (s UNION t:real^N->bool)
   aff_gt s t :real^N->bool
   (a + b) % v + (y - a % v) - (y - b % --v):real^N
-  !x:real^N. (if x = v then a + b else f x - g x) % x =\n                 (if x = v then a else f x) % x -\n                 (if x = v then --b else g x) % x
+  forall x:real^N. (if x = v then a + b else f x - g x) % x =\n                 (if x = v then a else f x) % x -\n                 (if x = v then --b else g x) % x
   ~(a IN t) ==> (s DELETE a) UNION t = (s UNION t) DELETE a
   v:real^N
   \\x. if x = v then a + b else (f:real^N->real) x - g x
@@ -83962,7 +83962,7 @@ Multivariate/flyspeck quotations (2071):
   s UNION (v INSERT t) = v INSERT (s UNION t)
   (v INSERT s) UNION t = v INSERT (s UNION t)
   t INTER u = {} ==> (s INTER t) INTER (s INTER u) = {}
-  !r s t v:real^N.\n        &0 <= r /\\\n        independent(v INSERT((s DELETE vec 0) UNION t)) /\\\n        FINITE s /\\ FINITE t /\\ CARD(s UNION t) <= dimindex(:N) /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> measure(ball(vec 0,r) INTER aff_gt (v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt s (v INSERT t)) +\n            measure(ball(vec 0,r) INTER aff_gt s (--v INSERT t))
+  forall r s t v:real^N.\n        &0 <= r /\\\n        independent(v INSERT((s DELETE vec 0) UNION t)) /\\\n        FINITE s /\\ FINITE t /\\ CARD(s UNION t) <= dimindex(:N) /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> measure(ball(vec 0,r) INTER aff_gt (v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt s (v INSERT t)) +\n            measure(ball(vec 0,r) INTER aff_gt s (--v INSERT t))
   --v:real^N = v <=> v = vec 0
   v:real^N
   (a INSERT s) UNION t = a INSERT (s UNION t)
@@ -83970,18 +83970,18 @@ Multivariate/flyspeck quotations (2071):
   t:real^N->bool
   (vec 0:real^N) INSERT s
   r:real
-  !r s t v:real^N.\n        &0 <= r /\\ ~(v IN (s UNION t)) /\\\n        independent(v INSERT (s UNION t))\n        ==> measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT s) (v INSERT t)) +\n            measure(ball(vec 0,r) INTER\n                    aff_gt (vec 0 INSERT s) (--v INSERT t))
+  forall r s t v:real^N.\n        &0 <= r /\\ ~(v IN (s UNION t)) /\\\n        independent(v INSERT (s UNION t))\n        ==> measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT s) (v INSERT t)) +\n            measure(ball(vec 0,r) INTER\n                    aff_gt (vec 0 INSERT s) (--v INSERT t))
   vec 0:real^3
   v1:real^3
   v2:real^3
   v3:real^3
-  !v1 v2 v3:real^3.\n         &0 <= r /\\ ~coplanar {vec 0, v1, v2, v3}\n         ==> measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1,v2,v3}) +\n             measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1,v2,v3}) =\n             dihV (vec 0) v1 v2 v3 * &2 * r pow 3 / &3
+  forall v1 v2 v3:real^3.\n         &0 <= r /\\ ~coplanar {vec 0, v1, v2, v3}\n         ==> measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1,v2,v3}) +\n             measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1,v2,v3}) =\n             dihV (vec 0) v1 v2 v3 * &2 * r pow 3 / &3
   --x - a % --w:real^N = --(x - a % w)
   vec 0:real^N = --x <=> vec 0 = x
   x IN {a} <=> a = x
   {a} UNION {b,c,d} = {a,b,d,c}
   ball(vec 0:real^N,r) INTER aff_gt {vec 0} {--v1, --v2, --v3} =\n    IMAGE (--)\n          (ball(vec 0,r) INTER aff_gt {vec 0} {v1, v2, v3})
-  !r v1 v2 v3:real^N.\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1, --v2, --v3}) =\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1, v2, v3})
+  forall r v1 v2 v3:real^N.\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1, --v2, --v3}) =\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1, v2, v3})
   --v2:real^3
   --v1:real^3
   --v3:real^3
@@ -84018,17 +84018,17 @@ Multivariate/flyspeck quotations (2071):
   vec 0:real^3
   measure(ball(vec 0:real^3,r) INTER aff_gt {vec 0,v1,v2,v3} {}) =\n     &4 / &3 * pi * r pow 3
   v0:real^3
-  !r v0 v1 v2 v3:real^3.\n       &0 < r /\\ ~coplanar{v0, v1, v2, v3}\n       ==> measure(ball(v0,r) INTER aff_gt {v0} {v1,v2,v3}) =\n                let a123 = dihV v0 v1 v2 v3 in\n                let a231 = dihV v0 v2 v3 v1 in\n                let a312 = dihV v0 v3 v1 v2 in\n                  (a123 + a231 + a312 - pi) * r pow 3 / &3
+  forall r v0 v1 v2 v3:real^3.\n       &0 < r /\\ ~coplanar{v0, v1, v2, v3}\n       ==> measure(ball(v0,r) INTER aff_gt {v0} {v1,v2,v3}) =\n                let a123 = dihV v0 v1 v2 v3 in\n                let a231 = dihV v0 v2 v3 v1 in\n                let a312 = dihV v0 v3 v1 v2 in\n                  (a123 + a231 + a312 - pi) * r pow 3 / &3
   s SUBSET i ==> s INTER t = s INTER (t INTER i)
   b:real^N
   a:real^N
-  !s t:real^N->bool.\n       measurable s /\\ bounded s /\\ open t ==> measurable(s INTER t)
+  forall s t:real^N->bool.\n       measurable s /\\ bounded s /\\ open t ==> measurable(s INTER t)
   w = Cx(&0)
   w:complex
   v2:real^2 = dropout 3 (w2:real^3)
   v1:real^2 = dropout 3 (w1:real^3)
   ~a /\\ b /\\ c <=> ~(~a ==> ~(b /\\ c))
-  !w1 w2.\n        ~collinear {vec 0, basis 3, w1} /\\ ~collinear {vec 0, basis 3, w2}\n        ==> slice 3 t (wedge (vec 0) (basis 3) w1 w2) =\n            {z | &0 < Arg(z / dropout 3 w1) /\\\n                 Arg(z / dropout 3 w1) < Arg(dropout 3 w2 / dropout 3 w1)}
+  forall w1 w2.\n        ~collinear {vec 0, basis 3, w1} /\\ ~collinear {vec 0, basis 3, w2}\n        ==> slice 3 t (wedge (vec 0) (basis 3) w1 w2) =\n            {z | &0 < Arg(z / dropout 3 w1) /\\\n                 Arg(z / dropout 3 w1) < Arg(dropout 3 w2 / dropout 3 w1)}
   &0 < a
   h:real
   &0
@@ -84047,7 +84047,7 @@ Multivariate/flyspeck quotations (2071):
   t < h
   z:real^2
   t:real
-  !t. slice 3 t {y:real^3 | norm y * a < y$3 /\\ &0 < y$3 /\\ y$3 < h} =\n        if t < h\n        then ball(vec 0:real^2,sqrt(inv(a pow 2) - &1) * t)\n        else {}
+  forall t. slice 3 t {y:real^3 | norm y * a < y$3 /\\ &0 < y$3 /\\ y$3 < h} =\n        if t < h\n        then ball(vec 0:real^2,sqrt(inv(a pow 2) - &1) * t)\n        else {}
   3
   :M
   :2
@@ -84056,7 +84056,7 @@ Multivariate/flyspeck quotations (2071):
   b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
   abs(x) <= a ==> x <= a
   y:real^3
-  !y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
+  forall y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
   &1 <= a
   b = &0
   b:real
@@ -84064,7 +84064,7 @@ Multivariate/flyspeck quotations (2071):
   v0:real^3
   a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
   v1:real^3 = v0
-  !v0 v1:real^3 w1 w2 h a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measurable(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measure(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ h < &0 then &0\n           else azim v0 v1 w1 w2 * ((h / a) pow 2 - h pow 2) * h / &6
+  forall v0 v1:real^3 w1 w2 h a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measurable(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measure(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ h < &0 then &0\n           else azim v0 v1 w1 w2 * ((h / a) pow 2 - h pow 2) * h / &6
   &0 < a
   a * r <= r <=> &0 <= r * (&1 - a)
   r:real
@@ -84106,7 +84106,7 @@ Multivariate/flyspeck quotations (2071):
   &0 < t
   z:real^2
   t:real
-  !t. slice 3 t {y:real^3 | norm y < r /\\ norm y * a < y$3} =\n        if &0 < t /\\ t < r\n        then ball(vec 0:real^2,min (sqrt(r pow 2 - t pow 2))\n                                   (t * sqrt(inv(a pow 2) - &1)))\n        else {}
+  forall t. slice 3 t {y:real^3 | norm y < r /\\ norm y * a < y$3} =\n        if &0 < t /\\ t < r\n        then ball(vec 0:real^2,min (sqrt(r pow 2 - t pow 2))\n                                   (t * sqrt(inv(a pow 2) - &1)))\n        else {}
   &0 < inv(a pow 2) - &1
   ~(b = &0)
   {x | P x /\\ x IN s} = {x | P x} INTER s
@@ -84120,7 +84120,7 @@ Multivariate/flyspeck quotations (2071):
   b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
   abs(x) <= a ==> x <= a
   y:real^3
-  !y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
+  forall y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
   &1 <= a
   b = &0
   b:real
@@ -84128,14 +84128,14 @@ Multivariate/flyspeck quotations (2071):
   v0:real^3
   a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
   v1:real^3 = v0
-  !v0 v1:real^3 w1 w2 r a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
+  forall v0 v1:real^3 w1 w2 r a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
   a <= b ==> min b a = a
   conic_cap (v0:real^3) v1 r a
-  !v0 v1:real^3 w1 w2 r a.\n        bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
-  !v0 v1:real^3 w1 w2 r a.\n        measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
+  forall v0 v1:real^3 w1 w2 r a.\n        bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
+  forall v0 v1:real^3 w1 w2 r a.\n        measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
   measure(s:real^N->bool) + measure(t':real^N->bool)
   orthogonal_transformation(f:real^N->real^N)
-  !f:real^N->real^N s t t' u.\n          measurable(s) /\\ measurable(t) /\\ measurable(u) /\\\n          orthogonal_transformation f /\\\n          s SUBSET u /\\ t' SUBSET u /\\ s INTER t' = {} /\\\n          negligible(u DIFF (s UNION t')) /\\\n          ((!y. ?x. f x = y) ==> IMAGE f t = t')\n          ==> measure s + measure t = measure u
+  forall f:real^N->real^N s t t' u.\n          measurable(s) /\\ measurable(t) /\\ measurable(u) /\\\n          orthogonal_transformation f /\\\n          s SUBSET u /\\ t' SUBSET u /\\ s INTER t' = {} /\\\n          negligible(u DIFF (s UNION t')) /\\\n          ((forall y. ?x. f x = y) ==> IMAGE f t = t')\n          ==> measure s + measure t = measure u
   (dropout 3 :real^3->real^2) (vector [x$1; x$2; --(x$3)]) =\n                (dropout 3 :real^3->real^2) x
   (a ==> (b <=> b')) ==> (a /\\ b <=> a /\\ b')
   n * a > --x <=> n * --a < x
@@ -84165,7 +84165,7 @@ Multivariate/flyspeck quotations (2071):
   v1:real
   v1:real^3
   v0:real^3
-  !v0 v1:real^3 w1 w2 r a.\n        &0 <= r\n        ==> measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) +\n            measure(conic_cap v0 v1 r (--a) INTER wedge v0 v1 w1 w2) =\n            azim v0 v1 w1 w2 * &2 * r pow 3 / &3
+  forall v0 v1:real^3 w1 w2 r a.\n        &0 <= r\n        ==> measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) +\n            measure(conic_cap v0 v1 r (--a) INTER wedge v0 v1 w1 w2) =\n            azim v0 v1 w1 w2 * &2 * r pow 3 / &3
   &0
   r:real
   w2:real^3
@@ -84175,7 +84175,7 @@ Multivariate/flyspeck quotations (2071):
   ball(v0:real^3,r) = {}
   a = &1
   &0 <= a ==> &0 < a \\/ a = &0
-  !v0 v1:real^3 w1 w2 r a.\n       &0 <= a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 < abs a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
+  forall v0 v1:real^3 w1 w2 r a.\n       &0 <= a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 < abs a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
   ~(&1 < --a) ==> max a (-- &1) = a
   &1 < --a ==> max a (-- &1) = -- &1
   ~(&0 <= a) ==> ~(&1 < a) /\\ abs a = --a
@@ -84195,12 +84195,12 @@ Multivariate/flyspeck quotations (2071):
   v0:real^3
   &0 <= a ==> abs a = a /\\ max a (-- &1) = a
   &0 <= a
-  !v0 v1:real^3 w1 w2 r a.\n       ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n                if &1 < a \\/ r < &0 then &0\n                else azim v0 v1 w1 w2 / &3 * (&1 - max a (-- &1)) * r pow 3
+  forall v0 v1:real^3 w1 w2 r a.\n       ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n                if &1 < a \\/ r < &0 then &0\n                else azim v0 v1 w1 w2 / &3 * (&1 - max a (-- &1)) * r pow 3
   cone v S:real^A->bool = affsign sgn_ge {v} S
   cone0 v S:real^A->bool = affsign sgn_gt {v} S
   solid_triangle v0 S r = normball v0 r INTER cone0 v0 S
-  rect (a:real^3) (b:real^3) =\n        {(v:real^3) | !i. (a$i < v$i /\\ v$i < b$i )}
-  !a b. rect a b = interval(a,b)
+  rect (a:real^3) (b:real^3) =\n        {(v:real^3) | forall i. (a$i < v$i /\\ v$i < b$i )}
+  forall a b. rect a b = interval(a,b)
   rcone_ge z w h =\n        rcone_gt z w h UNION\n        { x | (x - z) dot (w - z) = norm(x - z) * norm(w - z) * h}
   rcone_gt z w h =\n        rcone_ge z w h DIFF\n        { x | (x - z) dot (w - z) = norm(x - z) * norm(w - z) * h}
   negligible:(real^3->bool)->bool
@@ -84214,7 +84214,7 @@ Multivariate/flyspeck quotations (2071):
   v:real^3
   w + v:real^3
   s:real^3->bool
-  (!P. ((plane P)\\/ (is_sphere P) \\/ (circular_cone P)) ==> NULLSET P) /\\\n   (!(s:real^3->bool) t. (NULLSET s /\\ NULLSET t) ==> NULLSET (s UNION t))
+  (forall P. ((plane P)\\/ (is_sphere P) \\/ (circular_cone P)) ==> NULLSET P) /\\\n   (forall(s:real^3->bool) t. (NULLSET s /\\ NULLSET t) ==> NULLSET (s UNION t))
   primitive (C:real^3->bool) =\n  ((?v0 v1 v2 v3 r.  (C = solid_triangle v0 {v1,v2,v3} r)) \\/\n  (?v0 v1 v2 v3. (C = conv0 {v0,v1,v2,v3})) \\/\n  (?v0 v1 v2 v3 h a. &0 < a /\\\n                     (C = frustt v0 v1 h a INTER wedge v0 v1 v2 v3)) \\/\n  (?v0 v1 v2 v3 r c. (C = conic_cap v0 v1 r c INTER wedge v0 v1 v2 v3)) \\/\n  (?a b.  (C = rect a b)) \\/\n  (?t r. (C = ellipsoid t r)) \\/\n  (?v0 v1 v2 v3 r. (C = normball v0 r INTER wedge v0 v1 v2 v3)))
   collinear {v0:real^3, v1, v3}
   collinear {v0:real^3, v1, v2}
@@ -84228,7 +84228,7 @@ Multivariate/flyspeck quotations (2071):
   \\i. (t:real^3)$i
   t:real^3
   X:real^3->bool
-  (!C. primitive C ==> measurable C) /\\\n   (!Z. NULLSET Z ==> measurable Z) /\\\n   (!X t. measurable X ==> (measurable (IMAGE (scale t) X))) /\\\n   (!X v. measurable X ==> (measurable (IMAGE ((+) v) X))) /\\\n   (!(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s UNION t)) /\\\n   (!(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s INTER t)) /\\\n   (!(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s DIFF t))
+  (forall C. primitive C ==> measurable C) /\\\n   (forall Z. NULLSET Z ==> measurable Z) /\\\n   (forall X t. measurable X ==> (measurable (IMAGE (scale t) X))) /\\\n   (forall X v. measurable X ==> (measurable (IMAGE ((+) v) X))) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s UNION t)) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s INTER t)) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s DIFF t))
   vol_solid_triangle v0 v1 v2 v3 r =\n   let a123 = dihV v0 v1 v2 v3 in\n   let a231 = dihV v0 v2 v3 v1 in\n   let a312 = dihV v0 v3 v1 v2 in\n     (a123 + a231 + a312 - pi)*(r pow 3)/(&3)
   vol_frustt_wedge v0 v1 v2 v3 h a =\n       (azim v0 v1 v2 v3)*(h pow 3)*(&1/(a*a) - &1)/(&6)
   vol_conic_cap_wedge v0 v1 v2 v3 r c =\n       (azim v0 v1 v2 v3)*(&1 - c)*(r pow 3)/(&3)
@@ -84251,7 +84251,7 @@ Multivariate/flyspeck quotations (2071):
   X:real^3->bool
   t:real^3->bool
   s:real^3->bool
-  (!C. measurable C ==> vol C >= &0) /\\\n   (!Z. NULLSET Z ==> (vol Z = &0)) /\\\n   (!X Y. measurable X /\\ measurable Y /\\ NULLSET (SDIFF X Y)\n          ==> (vol X = vol Y)) /\\\n   (!X t. (measurable X) /\\ (measurable (IMAGE (scale t) X))\n          ==> (vol (IMAGE (scale t) X) = abs(t$1 * t$2 * t$3)*vol(X))) /\\\n   (!X v. measurable X ==> (vol (IMAGE ((+) v) X) = vol X)) /\\\n   (!v0 v1 v2 v3 r. (r > &0) /\\ ~coplanar{v0,v1,v2,v3}\n                    ==> vol (solid_triangle v0 {v1,v2,v3} r) =\n                        vol_solid_triangle v0 v1 v2 v3 r) /\\\n   (!v0 v1 v2 v3. vol(conv0 {v0,v1,v2,v3}) = vol_conv v0 v1 v2 v3) /\\\n   (!v0 v1 v2 v3 h a. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                      (h >= &0) /\\ (a > &0) /\\ (a <= &1)\n                      ==> vol(frustt v0 v1 h a INTER wedge v0 v1 v2 v3) =\n                          vol_frustt_wedge v0 v1 v2 v3 h a) /\\\n   (!v0 v1 v2 v3 r c.  ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                       (r >= &0) /\\ (c >= -- (&1)) /\\ (c <= &1)\n                       ==> (vol(conic_cap v0 v1 r c INTER wedge v0 v1 v2 v3) =\n                           vol_conic_cap_wedge v0 v1 v2 v3 r c)) /\\\n   (!(a:real^3) (b:real^3). vol(rect a b) = vol_rect a b) /\\\n   (!v0 v1 v2 v3 r. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                    (r >= &0)\n                    ==> (vol(normball v0 r INTER wedge v0 v1 v2 v3) =\n                         vol_ball_wedge v0 v1 v2 v3 r))
+  (forall C. measurable C ==> vol C >= &0) /\\\n   (forall Z. NULLSET Z ==> (vol Z = &0)) /\\\n   (forall X Y. measurable X /\\ measurable Y /\\ NULLSET (SDIFF X Y)\n          ==> (vol X = vol Y)) /\\\n   (forall X t. (measurable X) /\\ (measurable (IMAGE (scale t) X))\n          ==> (vol (IMAGE (scale t) X) = abs(t$1 * t$2 * t$3)*vol(X))) /\\\n   (forall X v. measurable X ==> (vol (IMAGE ((+) v) X) = vol X)) /\\\n   (forall v0 v1 v2 v3 r. (r > &0) /\\ ~coplanar{v0,v1,v2,v3}\n                    ==> vol (solid_triangle v0 {v1,v2,v3} r) =\n                        vol_solid_triangle v0 v1 v2 v3 r) /\\\n   (forall v0 v1 v2 v3. vol(conv0 {v0,v1,v2,v3}) = vol_conv v0 v1 v2 v3) /\\\n   (forall v0 v1 v2 v3 h a. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                      (h >= &0) /\\ (a > &0) /\\ (a <= &1)\n                      ==> vol(frustt v0 v1 h a INTER wedge v0 v1 v2 v3) =\n                          vol_frustt_wedge v0 v1 v2 v3 h a) /\\\n   (forall v0 v1 v2 v3 r c.  ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                       (r >= &0) /\\ (c >= -- (&1)) /\\ (c <= &1)\n                       ==> (vol(conic_cap v0 v1 r c INTER wedge v0 v1 v2 v3) =\n                           vol_conic_cap_wedge v0 v1 v2 v3 r c)) /\\\n   (forall(a:real^3) (b:real^3). vol(rect a b) = vol_rect a b) /\\\n   (forall v0 v1 v2 v3 r. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                    (r >= &0)\n                    ==> (vol(normball v0 r INTER wedge v0 v1 v2 v3) =\n                         vol_ball_wedge v0 v1 v2 v3 r))
   inv t:real
   q:real^N
   t % q:real^N
@@ -84272,14 +84272,14 @@ Multivariate/flyspeck quotations (2071):
   u:real = t / s
   (%) (inv s):real^N->real^N
   F ==> p
-  (!P f f' p q s t. Q P f f' p q s t) <=>\n    (!s t P f f' p q. Q P f f' p q s t)
-  !P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN relative_interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
-  !P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
+  (forall P f f' p q s t. Q P f f' p q s t) <=>\n    (forall s t P f f' p q. Q P f f' p q s t)
+  forall P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN relative_interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
+  forall P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
   vertices s = {x:real^N | x extreme_point_of s}
   edges s = {{v,w} | segment[v,w] edge_of s}
-  !a s. vertices (IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (vertices s)
-  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> vertices(IMAGE f s) = IMAGE f (vertices s)
-  !a s. edges (IMAGE (\\x. a + x) s) = IMAGE (IMAGE (\\x. a + x)) (edges s)
+  forall a s. vertices (IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (vertices s)
+  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> vertices(IMAGE f s) = IMAGE f (vertices s)
+  forall a s. edges (IMAGE (\\x. a + x) s) = IMAGE (IMAGE (\\x. a + x)) (edges s)
   (f:real^M->real^N) w
   (f:real^M->real^N) v
   w:real^M
@@ -84287,21 +84287,21 @@ Multivariate/flyspeck quotations (2071):
   ?v w. x = (f:real^M->real^N) v /\\ y = f w
   y:real^N
   x:real^N
-  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> edges(IMAGE f s) = IMAGE (IMAGE f) (edges s)
-  (!x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a within s) <=> (g --> l) (at a within s))
-  (!x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a) <=> (g --> l) (at a))
-  (!x. x IN s ==> f x = g x) ==> product s (\\i. f i) = product s g
-  (!i. a <= i /\\ i <= b ==> f i = g i)\n    ==> product (a..b) (\\i. f i) = product (a..b) g
-  (!x. p x ==> f x = g x)\n    ==> product {y | p y} (\\i. f i) = product {y | p y} g
-  (!x. x IN s ==> f x = g x) ==> vsum s (\\i. f i) = vsum s g
-  (!i. a <= i /\\ i <= b ==> f i = g i)\n    ==> vsum (a..b) (\\i. f i) = vsum (a..b) g
-  (!x. p x ==> f x = g x) ==> vsum {y | p y} (\\i. f i) = vsum {y | p y} g
-  (!x. x IN s ==> f x = g x) ==> sum s (\\i. f i) = sum s g
-  (!i. a <= i /\\ i <= b ==> f i = g i)\n    ==> sum (a..b) (\\i. f i) = sum (a..b) g
-  (!x. p x ==> f x = g x) ==> sum {y | p y} (\\i. f i) = sum {y | p y} g
-  (!x. x IN s ==> f x = g x) ==> nsum s (\\i. f i) = nsum s g
-  (!i. a <= i /\\ i <= b ==> f i = g i)\n    ==> nsum (a..b) (\\i. f i) = nsum (a..b) g
-  (!x. p x ==> f x = g x) ==> nsum {y | p y} (\\i. f i) = nsum {y | p y} g
+  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> edges(IMAGE f s) = IMAGE (IMAGE f) (edges s)
+  (forall x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a within s) <=> (g --> l) (at a within s))
+  (forall x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a) <=> (g --> l) (at a))
+  (forall x. x IN s ==> f x = g x) ==> product s (\\i. f i) = product s g
+  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> product (a..b) (\\i. f i) = product (a..b) g
+  (forall x. p x ==> f x = g x)\n    ==> product {y | p y} (\\i. f i) = product {y | p y} g
+  (forall x. x IN s ==> f x = g x) ==> vsum s (\\i. f i) = vsum s g
+  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> vsum (a..b) (\\i. f i) = vsum (a..b) g
+  (forall x. p x ==> f x = g x) ==> vsum {y | p y} (\\i. f i) = vsum {y | p y} g
+  (forall x. x IN s ==> f x = g x) ==> sum s (\\i. f i) = sum s g
+  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> sum (a..b) (\\i. f i) = sum (a..b) g
+  (forall x. p x ==> f x = g x) ==> sum {y | p y} (\\i. f i) = sum {y | p y} g
+  (forall x. x IN s ==> f x = g x) ==> nsum s (\\i. f i) = nsum s g
+  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> nsum (a..b) (\\i. f i) = nsum (a..b) g
+  (forall x. p x ==> f x = g x) ==> nsum {y | p y} (\\i. f i) = nsum {y | p y} g
   (g <=> g')\n    ==> (g' ==> t = t')\n    ==> (~g' ==> e = e')\n    ==> (if g then t else e) = (if g' then t' else e')
   (p <=> p') ==> (p' ==> (q <=> q')) ==> (p ==> q <=> p' ==> q')
 NORM_CROSS =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\y:cart(real,tybit1(1)). ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1))))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,tybit1(1)),real) y:cart(real,tybit1(1)))) (#sin:fun(real,real) ((#vector_angle:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),real)) x:cart(real,tybit1(1))) y:cart(real,tybit1(1)))))))))))

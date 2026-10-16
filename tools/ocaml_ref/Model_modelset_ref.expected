@@ -7963,19 +7963,19 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..solved at 2
 Model/modelset quotations (165):
-  (!x y. (f x = f y) ==> (x = y)) <=> (!x y. (f x = f y) <=> (x = y))
+  (forall x y. (f x = f y) ==> (x = y)) <=> (forall x y. (f x = f y) <=> (x = y))
   (x |-> a) (v:A->B) = \\y. if y = x then a else v(y)
-  !v x y a. ((x |-> y) v) a = if a = x then y else v(a)
-  !v x y. (x |-> y) v x = y
-  !v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v
-  !v x. (x |-> v(x)) v = v
-  !x. (!v a. P((x |-> a) v)) = (!v. P v)
-  !v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))
+  forall v x y a. ((x |-> y) v) a = if a = x then y else v(a)
+  forall v x y. (x |-> y) v x = y
+  forall v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v
+  forall v x. (x |-> v(x)) v = v
+  forall x. (forall v a. P((x |-> a) v)) = (forall v. P v)
+  forall v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))
   ?x. x IN @s:num->bool. ~(s = {}) /\\ FINITE s
   ?x:num. x IN UNIV
-  !s. s <_c UNIV:I->bool <=> FINITE s
+  forall s. s <_c UNIV:I->bool <=> FINITE s
   UNIV = IMAGE mk_ind (@s. ~(s = {}) /\\ FINITE s)
-  UNIV:ind_model->bool <_c UNIV:I->bool /\\\n   (!s:A->bool. s <_c UNIV:I->bool ==> {t | t SUBSET s} <_c UNIV:I->bool)
+  UNIV:ind_model->bool <_c UNIV:I->bool /\\\n   (forall s:A->bool. s <_c UNIV:I->bool ==> {t | t SUBSET s} <_c UNIV:I->bool)
   n:num
   CARD(UNIV:I->bool) - 1
   a - 1 < b ==> ~(a = 0) ==> a <= b
@@ -7985,13 +7985,13 @@ Model/modelset quotations (165):
   INFINITE(UNIV:I->bool)
   (a = b) ==> a ==> b
   UNIV:I#I->bool <=_c UNIV:I->bool
-  ?f:I#I->I. !x y. (f x = f y) ==> (x = y)
+  ?f:I#I->I. forall x y. (f x = f y) ==> (x = y)
   UNIV:bool->bool = {F,T}
   FINITE(UNIV:bool->bool)
   UNIV:bool->bool <_c UNIV:I->bool
-  ?f:bool->I. !x y. (f x = f y) ==> (x = y)
-  ?f:ind_model->I. !x y. (f x = f y) ==> (x = y)
-  !s:I->bool.\n        s <_c UNIV:I->bool\n        ==> ?f:(I->bool)->I. !t u. t SUBSET s /\\ u SUBSET s /\\ (f t = f u)\n                                   ==> (t = u)
+  ?f:bool->I. forall x y. (f x = f y) ==> (x = y)
+  ?f:ind_model->I. forall x y. (f x = f y) ==> (x = y)
+  forall s:I->bool.\n        s <_c UNIV:I->bool\n        ==> ?f:(I->bool)->I. forall t u. t SUBSET s /\\ u SUBSET s /\\ (f t = f u)\n                                   ==> (t = u)
   (setlevel Ur_bool = IMAGE I_BOOL UNIV) /\\\n  (setlevel Ur_ind = IMAGE I_IND UNIV) /\\\n  (setlevel (Cartprod l1 l2) =\n           IMAGE I_PAIR {x,y | x IN setlevel l1 /\\ y IN setlevel l2}) /\\\n  (setlevel (Powerset l) = IMAGE (I_SET (setlevel l))\n                                 {s | s SUBSET (setlevel l)})
   setlevel l1 *_c setlevel l2
   l2:setlevel
@@ -8000,32 +8000,32 @@ Model/modelset quotations (165):
   l:setlevel
   UNIV:ind_model->bool
   UNIV:bool->bool
-  !l. setlevel l <_c UNIV:I->bool
-  !l s t. s SUBSET setlevel l /\\ t SUBSET setlevel l /\\\n          (I_SET (setlevel l) s = I_SET (setlevel l) t)\n          ==> (s = t)
+  forall l. setlevel l <_c UNIV:I->bool
+  forall l s t. s SUBSET setlevel l /\\ t SUBSET setlevel l /\\\n          (I_SET (setlevel l) s = I_SET (setlevel l) t)\n          ==> (s = t)
   universe = {(t,x) | x IN setlevel t}
   Ur_bool,I_BOOL T
   ?a. a IN universe
-  !l e. e IN setlevel l <=> (dest_V(mk_V(l,e)) = (l,e))
+  forall l e. e IN setlevel l <=> (dest_V(mk_V(l,e)) = (l,e))
   droplevel(Powerset l) = l
   (isasetlevel Ur_bool = F) /\\\n  (isasetlevel Ur_ind = F) /\\\n  (isasetlevel (Cartprod l1 l2) = F) /\\\n  (isasetlevel (Powerset l) = T)
   level x = FST(dest_V x)
   element x = SND(dest_V x)
-  !x. (element x) IN setlevel(level x)
-  !x. mk_V(level x,element x) = x
+  forall x. (element x) IN setlevel(level x)
+  forall x. mk_V(level x,element x) = x
   set x = @s. s SUBSET (setlevel(droplevel(level x))) /\\\n              (I_SET (setlevel(droplevel(level x))) s = element x)
   isaset x <=> ?l. level x = Powerset l
   x <: s <=> (level s = Powerset(level x)) /\\ (element x) IN (set s)
-  s <=: t <=> (level s = level t) /\\ !x. x <: s ==> x <: t
-  !x s. x <: s ==> isaset s
-  !l. ?x. x IN setlevel l
-  !l. ?s. level s = l
+  s <=: t <=> (level s = level t) /\\ forall x. x <: s ==> x <: t
+  forall x s. x <: s ==> isaset s
+  forall l. ?x. x IN setlevel l
+  forall l. ?s. level s = l
   e IN setlevel l\n   ==> (level(mk_V(l,e)) = l) /\\ (element(mk_V(l,e)) = e)
   I_SET (setlevel l) s IN setlevel(Powerset l)
   I_SET (setlevel l) s IN setlevel(Powerset l)
   s SUBSET setlevel l\n   ==> (set(mk_V(Powerset l,I_SET (setlevel l) s)) = s) /\\\n       (level(mk_V(Powerset l,I_SET (setlevel l) s)) = Powerset l) /\\\n       (element(mk_V(Powerset l,I_SET (setlevel l) s)) = I_SET (setlevel l) s)
   mk_V(Powerset l,I_SET (setlevel l) {})
   l:setlevel
-  !l. ?s. (level s = l) /\\ !x. ~(x <: s)
+  forall l. ?s. (level s = l) /\\ forall x. ~(x <: s)
   x:V
   {i | i IN u /\\ p (mk_V (l,i))} SUBSET (setlevel l)
   mk_V(Powerset l,\n                   I_SET(setlevel l)\n                   {i | i IN u /\\ p(mk_V(l,i))})
@@ -8033,33 +8033,33 @@ Model/modelset quotations (165):
   s:V
   l:setlevel
   isaset s
-  !s p. ?t. (level t = level s) /\\ !x. x <: t <=> x <: s /\\ p x
+  forall s p. ?t. (level t = level s) /\\ forall x. x <: t <=> x <: s /\\ p x
   mk_V(Powerset l,I_SET (setlevel l) (setlevel l))
-  !l. ?s. (level s = Powerset l) /\\\n           !x. x <: s <=> (level x = l) /\\ element(x) IN setlevel l
+  forall l. ?s. (level s = Powerset l) /\\\n           forall x. x <: s <=> (level x = l) /\\ element(x) IN setlevel l
   s:V
   l:setlevel
-  !s. isaset s\n       ==> (set s) SUBSET (setlevel(droplevel(level s))) /\\\n           (I_SET (setlevel(droplevel(level s))) (set s) = element s)
-  !s. isaset s ==> set(s) SUBSET setlevel(droplevel(level s))
+  forall s. isaset s\n       ==> (set s) SUBSET (setlevel(droplevel(level s))) /\\\n           (I_SET (setlevel(droplevel(level s))) (set s) = element s)
+  forall s. isaset s ==> set(s) SUBSET setlevel(droplevel(level s))
   t:V
   level s
   u:V
-  \\v. !x. x <: v ==> x <: s
+  \\v. forall x. x <: v ==> x <: s
   t:V
   Powerset l
   t:V
   l:setlevel
   isaset s
-  !s. ?t. (level t = Powerset(level s)) /\\ !x. x <: t <=> x <=: s
+  forall s. ?t. (level t = Powerset(level s)) /\\ forall x. x <: t <=> x <=: s
   pair x y =\n        mk_V(Cartprod (level x) (level y),I_PAIR(element x,element y))
-  !x y l m. x IN setlevel l /\\ y IN setlevel m\n             ==> I_PAIR(x,y) IN setlevel (Cartprod l m)
+  forall x y l m. x IN setlevel l /\\ y IN setlevel m\n             ==> I_PAIR(x,y) IN setlevel (Cartprod l m)
   dest_V(mk_V(Cartprod (level x) (level y),I_PAIR(element x,element y))) =\n        Cartprod (level x) (level y),I_PAIR(element x,element y)
   dest_V
-  !x1 y1 x2 y2. (pair x1 y1 = pair x2 y2) <=> (x1 = x2) /\\ (y1 = y2)
+  forall x1 y1 x2 y2. (pair x1 y1 = pair x2 y2) <=> (x1 = x2) /\\ (y1 = y2)
   dest_V
-  !x y. level(pair x y) = Cartprod (level x) (level y)
+  forall x y. level(pair x y) = Cartprod (level x) (level y)
   fst p = @x. ?y. p = pair x y
   snd p = @y. ?x. p = pair x y
-  !x y. (fst(pair x y) = x) /\\ (snd(pair x y) = y)
+  forall x y. (fst(pair x y) = x) /\\ (snd(pair x y) = y)
   (a ==> b) /\\ (c ==> a) ==> ((a /\\ b) /\\ c <=> c)
   z:V
   w:V
@@ -8071,18 +8071,18 @@ Model/modelset quotations (165):
   isaset t
   ?l. (level s = Powerset l)
   isaset s
-  !s t. ?u. (level u =\n                  Powerset(Cartprod (droplevel(level s))\n                                    (droplevel(level t)))) /\\\n                 !z. z <: u <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
+  forall s t. ?u. (level u =\n                  Powerset(Cartprod (droplevel(level s))\n                                    (droplevel(level t)))) /\\\n                 forall z. z <: u <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
   e IN setlevel l
   mk_V(l,e)
   l:setlevel
-  !s. isaset s /\\ e IN set(s)\n       ==> ?x. (e = element x) /\\ (level s = Powerset(level x)) /\\ x <: s
+  forall s. isaset s /\\ e IN set(s)\n       ==> ?x. (e = element x) /\\ (level s = Powerset(level x)) /\\ x <: s
   level s = level t
   isaset s /\\ isaset t\n   ==> (s <=: t <=> (level s = level t) /\\ set(s) SUBSET set(t))
   t:V
   s:V
-  !s t. isaset s /\\ isaset t /\\ s <=: t /\\ t <=: s ==> (s = t)
-  !s t. isaset s /\\ isaset t /\\ (level s = level t) /\\ (!x. x <: s <=> x <: t)\n         ==> (s = t)
-  !s t. (?x. x <: s) /\\ (?x. x <: t) /\\ (!x. x <: s <=> x <: t)\n         ==> (s = t)
+  forall s t. isaset s /\\ isaset t /\\ s <=: t /\\ t <=: s ==> (s = t)
+  forall s t. isaset s /\\ isaset t /\\ (level s = level t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)
+  forall s t. (?x. x <: s) /\\ (?x. x <: t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)
   \\x. ?u. x <: u /\\ u <: s
   t:V
   t:V
@@ -8093,41 +8093,41 @@ Model/modelset quotations (165):
   l:setlevel
   droplevel(level s)
   isaset s
-  !s. ?t. (level t = droplevel(level s)) /\\\n           !x. x <: t <=> ?u. x <: u /\\ u <: s
+  forall s. ?t. (level t = droplevel(level s)) /\\\n           forall x. x <: t <=> ?u. x <: u /\\ u <: s
   True = mk_V(Ur_bool,I_BOOL T)
   False = mk_V(Ur_bool,I_BOOL F)
   boolset =\n     mk_V(Powerset Ur_bool,I_SET (setlevel Ur_bool) (setlevel Ur_bool))
-  !b. (I_BOOL b) IN setlevel Ur_bool
+  forall b. (I_BOOL b) IN setlevel Ur_bool
   IMAGE I_BOOL UNIV = {I_BOOL F,I_BOOL T}
-  !x. x <: boolset <=> (x = True) \\/ (x = False)
-  !b. (I_BOOL b) IN setlevel Ur_bool
+  forall x. x <: boolset <=> (x = True) \\/ (x = False)
+  forall b. (I_BOOL b) IN setlevel Ur_bool
   dest_V
   ~(True = False)
-  !x y. x <: boolset /\\ y <: boolset /\\\n         ((x = True) <=> (y = True))\n         ==> (x = y)
+  forall x y. x <: boolset /\\ y <: boolset /\\\n         ((x = True) <=> (y = True))\n         ==> (x = y)
   indset = mk_V(Powerset Ur_ind,I_SET (setlevel Ur_ind) (setlevel Ur_ind))
-  !i. (I_IND i) IN setlevel Ur_ind
+  forall i. (I_IND i) IN setlevel Ur_ind
   \\i. mk_V(Ur_ind,I_IND i)
-  ?f. (!i:ind_model. f(i) <: indset) /\\ (!i j. (f i = f j) ==> (i = j))
+  ?f. (forall i:ind_model. f(i) <: indset) /\\ (forall i j. (f i = f j) ==> (i = j))
   ?x. x <: indset
-  ?ch. !s. (?x. x <: s) ==> ch(s) <: s
-  !x s. x <: powerset s <=> x <=: s
-  !z s t. z <: cartproduct s t <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
-  !p s x. x <: s suchthat p <=> x <: s /\\ p x
+  ?ch. forall s. (?x. x <: s) ==> ch(s) <: s
+  forall x s. x <: powerset s <=> x <=: s
+  forall z s t. z <: cartproduct s t <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t
+  forall p s x. x <: s suchthat p <=> x <: s /\\ p x
   (?x. x <: s) /\\ (?y. y <: t) ==> ?z. z <: cartproduct s t
-  funspace s t =\n      powerset(cartproduct s t) suchthat\n      (\\u. !x. x <: s ==> ?!y. pair x y <: u)
+  funspace s t =\n      powerset(cartproduct s t) suchthat\n      (\\u. forall x. x <: s ==> ?!y. pair x y <: u)
   apply f x = @y. pair x y <: f
-  abstract s t f =\n        (cartproduct s t) suchthat (\\z. !x y. (pair x y = z) ==> (y = f x))
-  !x s t. x <: s /\\ f(x) <: t ==> (apply(abstract s t f) x = f(x))
-  !f x s t. x <: s /\\ f <: funspace s t ==> apply f x <: t
-  !f x s t. (!x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t
+  abstract s t f =\n        (cartproduct s t) suchthat (\\z. forall x y. (pair x y = z) ==> (y = f x))
+  forall x s t. x <: s /\\ f(x) <: t ==> (apply(abstract s t f) x = f(x))
+  forall f x s t. x <: s /\\ f <: funspace s t ==> apply f x <: t
+  forall f x s t. (forall x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t
   abstract s t (\\x. @y. y <: t)
-  !s t. ((?x. x <: s) ==> (?y. y <: t)) ==> ?f. f <: funspace s t
+  forall s t. ((?x. x <: s) ==> (?y. y <: t)) ==> ?f. f <: funspace s t
   (a /\\ b /\\ c) /\\ d <=> ~(a ==> b /\\ c ==> ~d)
-  !s t1 t2 f g.\n        (?x. x <: s) /\\\n        (!x. x <: s ==> f(x) <: t1 /\\ g(x) <: t2 /\\ (f x = g x))\n        ==> (abstract s t1 f = abstract s t2 g)
+  forall s t1 t2 f g.\n        (?x. x <: s) /\\\n        (forall x. x <: s ==> f(x) <: t1 /\\ g(x) <: t2 /\\ (f x = g x))\n        ==> (abstract s t1 f = abstract s t2 g)
   boolean b = if b then True else False
   holds s x <=> (apply s x = True)
-  !b. boolean b <: boolset
-  !b. (boolean b = True) <=> b
+  forall b. boolean b <: boolset
+  forall b. (boolean b = True) <=> b
 INJ_LEMMA =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('?176746,bool),bool) (\x:'?176746. (#!:fun(fun('?176746,bool),bool) (\y:'?176746. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?176741,fun('?176741,bool)) (f:fun('?176746,'?176741) x:'?176746)) (f:fun('?176746,'?176741) y:'?176746))) ((#=:fun('?176746,fun('?176746,bool)) x:'?176746) y:'?176746))))))) (#!:fun(fun('?176746,bool),bool) (\x:'?176746. (#!:fun(fun('?176746,bool),bool) (\y:'?176746. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?176741,fun('?176741,bool)) (f:fun('?176746,'?176741) x:'?176746)) (f:fun('?176746,'?176741) y:'?176746))) ((#=:fun('?176746,fun('?176746,bool)) x:'?176746) y:'?176746)))))))
 valmod =  |- (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('B,bool),bool) (\a:'B. (#!:fun(fun(fun('A,'B),bool),bool) (\v:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (((#|->:fun('A,fun('B,fun(fun('A,'B),fun('A,'B)))) x:'A) a:'B) v:fun('A,'B))) (\y:'A. (((#COND:fun(bool,fun('B,fun('B,'B))) ((#=:fun('A,fun('A,bool)) y:'A) x:'A)) a:'B) (v:fun('A,'B) y:'A))))))))))
 VALMOD =  |- (#!:fun(fun(fun('?176799,'?176783),bool),bool) (\v:fun('?176799,'?176783). (#!:fun(fun('?176799,bool),bool) (\x:'?176799. (#!:fun(fun('?176783,bool),bool) (\y:'?176783. (#!:fun(fun('?176799,bool),bool) (\a:'?176799. ((#=:fun('?176783,fun('?176783,bool)) ((((#|->:fun('?176799,fun('?176783,fun(fun('?176799,'?176783),fun('?176799,'?176783)))) x:'?176799) y:'?176783) v:fun('?176799,'?176783)) a:'?176799)) (((#COND:fun(bool,fun('?176783,fun('?176783,'?176783))) ((#=:fun('?176799,fun('?176799,bool)) a:'?176799) x:'?176799)) y:'?176783) (v:fun('?176799,'?176783) a:'?176799)))))))))))

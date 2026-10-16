@@ -186,83 +186,83 @@ Searching with limit 0
 Searching with limit 1
 Searching with limit 2
 theorems quotations (77):
-  !x:A. x = x
-  !x:A. (x = x) <=> T
-  !(x:A) y. (x = y) ==> (y = x)
-  !(x:A) y. (x = y) <=> (y = x)
-  !(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)
-  !(f:A->B) y. (\\x. (f:A->B) x) y = f y
-  !(t1:A) (t2:B). (\\x. t1) t2 = t1
-  !t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3
-  !t1 t2. t1 /\\ t2 <=> t2 /\\ t1
+  forall x:A. x = x
+  forall x:A. (x = x) <=> T
+  forall(x:A) y. (x = y) ==> (y = x)
+  forall(x:A) y. (x = y) <=> (y = x)
+  forall(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)
+  forall(f:A->B) y. (\\x. (f:A->B) x) y = f y
+  forall(t1:A) (t2:B). (\\x. t1) t2 = t1
+  forall t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3
+  forall t1 t2. t1 /\\ t2 <=> t2 /\\ t1
   (p /\\ q <=> q /\\ p) /\\\n   ((p /\\ q) /\\ r <=> p /\\ (q /\\ r)) /\\\n   (p /\\ (q /\\ r) <=> q /\\ (p /\\ r)) /\\\n   (p /\\ p <=> p) /\\\n   (p /\\ (p /\\ q) <=> p /\\ q)
-  !t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3
-  !t1 t2. t1 \\/ t2 <=> t2 \\/ t1
+  forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3
+  forall t1 t2. t1 \\/ t2 <=> t2 \\/ t1
   (p \\/ q <=> q \\/ p) /\\\n   ((p \\/ q) \\/ r <=> p \\/ (q \\/ r)) /\\\n   (p \\/ (q \\/ r) <=> q \\/ (p \\/ r)) /\\\n   (p \\/ p <=> p) /\\\n   (p \\/ (p \\/ q) <=> p \\/ q)
   p /\\ q ==> r <=> p ==> q ==> r
   p /\\ q ==> r <=> q ==> p ==> r
-  !p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r
-  !p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r
-  !t. (!x:A. t) = t
-  !t. (?x:A. t) = t
+  forall p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r
+  forall p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r
+  forall t. (forall x:A. t) = t
+  forall t. (?x:A. t) = t
   (a <=> b) ==> a ==> b
-  !t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)
+  forall t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)
   (~T <=> F) /\\ (~F <=> T)
-  !t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)
-  !t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)
-  !t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)
+  forall t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)
+  forall t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)
+  forall t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)
   ((x = x) ==> p) <=> p
   (p <=> p') ==> (p' ==> (q <=> q')) ==> (p ==> q <=> p' ==> q')
-  !P. (?!x:A. P x) <=> (?x. P x) /\\ (!x x'. P x /\\ P x' ==> (x = x'))
+  forall P. (?!x:A. P x) <=> (?x. P x) /\\ (forall x x'. P x /\\ P x' ==> (x = x'))
   a:A
-  !a:A. ?x. x = a
+  forall a:A. ?x. x = a
   a:A
-  !a:A. ?!x. x = a
+  forall a:A. ?!x. x = a
   a:A
-  !P (a:A). (?x. a = x /\\ P x) <=> P a
-  !P (a:A). (?x. x = a /\\ P x) <=> P a
+  forall P (a:A). (?x. a = x /\\ P x) <=> P a
+  forall P (a:A). (?x. x = a /\\ P x) <=> P a
   a:A
-  !P (a:A). (!x. x = a ==> P x) <=> P a
-  !P (a:A). (!x. a = x ==> P x) <=> P a
-  !P:A->B->bool. (!x y. P x y) <=> (!y x. P x y)
-  !P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)
-  !P Q. (!x:A. P x /\\ Q x) <=> (!x. P x) /\\ (!x. Q x)
-  !P Q. (!x. P x) /\\ (!x. Q x) <=> (!x:A. P x /\\ Q x)
-  !P Q. (!x:A. P x) /\\ Q <=> (!x:A. P x /\\ Q)
-  !P Q. P /\\ (!x:A. Q x) <=> (!x. P /\\ Q x)
-  !P Q. (?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x)
-  !P Q. (?x. P x) \\/ (?x. Q x) <=> (?x:A. P x \\/ Q x)
-  !P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
-  !P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)
-  !P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q
-  !P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)
-  !P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)
-  !P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
-  !P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)
-  !P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)
-  !P Q. (!x:A. P \\/ Q) <=> (!x:A. P) \\/ (!x:A. Q)
-  !P Q. (!x:A. P) \\/ (!x:A. Q) <=> (!x:A. P \\/ Q)
-  !P Q. (P ==> !x:A. Q x) <=> (!x. P ==> Q x)
-  !P Q. (!x. P ==> Q x) <=> (P ==> !x:A. Q x)
-  !P Q. ((?x:A. P x) ==> Q) <=> (!x. P x ==> Q)
-  !P Q. (!x. P x ==> Q) <=> ((?x:A. P x) ==> Q)
-  !P Q. (!x:A. P ==> Q) <=> ((?x:A. P) ==> (!x:A. Q))
-  !P Q. (?x:A. P ==> Q) <=> ((!x:A. P) ==> (?x:A. Q))
+  forall P (a:A). (forall x. x = a ==> P x) <=> P a
+  forall P (a:A). (forall x. a = x ==> P x) <=> P a
+  forall P:A->B->bool. (forall x y. P x y) <=> (forall y x. P x y)
+  forall P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)
+  forall P Q. (forall x:A. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)
+  forall P Q. (forall x. P x) /\\ (forall x. Q x) <=> (forall x:A. P x /\\ Q x)
+  forall P Q. (forall x:A. P x) /\\ Q <=> (forall x:A. P x /\\ Q)
+  forall P Q. P /\\ (forall x:A. Q x) <=> (forall x. P /\\ Q x)
+  forall P Q. (?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x)
+  forall P Q. (?x. P x) \\/ (?x. Q x) <=> (?x:A. P x \\/ Q x)
+  forall P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
+  forall P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)
+  forall P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q
+  forall P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)
+  forall P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)
+  forall P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
+  forall P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)
+  forall P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)
+  forall P Q. (forall x:A. P \\/ Q) <=> (forall x:A. P) \\/ (forall x:A. Q)
+  forall P Q. (forall x:A. P) \\/ (forall x:A. Q) <=> (forall x:A. P \\/ Q)
+  forall P Q. (P ==> forall x:A. Q x) <=> (forall x. P ==> Q x)
+  forall P Q. (forall x. P ==> Q x) <=> (P ==> forall x:A. Q x)
+  forall P Q. ((?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)
+  forall P Q. (forall x. P x ==> Q) <=> ((?x:A. P x) ==> Q)
+  forall P Q. (forall x:A. P ==> Q) <=> ((?x:A. P) ==> (forall x:A. Q))
+  forall P Q. (?x:A. P ==> Q) <=> ((forall x:A. P) ==> (?x:A. Q))
   (A ==> B) /\\ (C ==> D) ==> (A /\\ C ==> B /\\ D)
   (A ==> B) /\\ (C ==> D) ==> (A \\/ C ==> B \\/ D)
   (B ==> A) /\\ (C ==> D) ==> ((A ==> C) ==> (B ==> D))
   (B ==> A) ==> (~A ==> ~B)
-  (!x:A. P x ==> Q x) ==> ((!x. P x) ==> (!x. Q x))
+  (forall x:A. P x ==> Q x) ==> ((forall x. P x) ==> (forall x. Q x))
   x:A
   x:A
-  (!x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))
-  !R P. (!x y. P x y ==> P y x) /\\\n         (!x y. R x y \\/ R y x) /\\\n         (!x y. R x y ==> P x y)\n         ==> !x y:A. P x y
+  (forall x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))
+  forall R P. (forall x y. P x y ==> P y x) /\\\n         (forall x y. R x y \\/ R y x) /\\\n         (forall x y. R x y ==> P x y)\n         ==> forall x y:A. P x y
   x:A
   x:A
   x:A
-  !P:A->bool. (?!x. P x) <=> (?x. !y. P y <=> (x = y))
+  forall P:A->bool. (?!x. P x) <=> (?x. forall y. P y <=> (x = y))
   (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-  !P:A->bool. (?!x. P x) <=> (?x. P x /\\ !y. P y ==> (y = x))
+  forall P:A->bool. (?!x. P x) <=> (?x. P x /\\ forall y. P y ==> (y = x))
 EQ_REFL =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) x:'A)))
 REFL_CLAUSE =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) x:'A)) #T:bool)))
 EQ_SYM =  |- (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))

@@ -81766,7 +81766,7 @@ Examples/borsuk quotations (50):
   ~(z = Cx(&0)) ==> a - b = z ==> ~(b - a = z)
   n:real
   Cx(&1)
-  ?n. integer n /\\ !z:complex. norm z = &1 ==> m z = Cx(&2 * n + &1)
+  ?n. integer n /\\ forall z:complex. norm z = &1 ==> m z = Cx(&2 * n + &1)
   v:complex
   ~(abs(x - y) < &1) ==> &1 <= abs((&2 * x + &1) - (&2 * y + &1))
   w:complex
@@ -81775,13 +81775,13 @@ Examples/borsuk quotations (50):
   norm z = dist(vec 0,z)
   :real
   :real
-  ?n. !z. z IN {z | norm(z) = &1} ==> (m:complex->complex)(z) = n
+  ?n. forall z. z IN {z | norm(z) = &1} ==> (m:complex->complex)(z) = n
   ~(p = Cx(&0))\n    ==> (p * ii * m = p * ii + (t * n * p) * ii <=> m = t * n + Cx(&1))
   ~(y = Cx(&0)) /\\ x = -- y ==> x / y = Cx(-- &1)
   cexp(h z) = k z /\\ cexp(h(--z:complex)) = k(--z)
   z:complex
   ~(p = Cx(&0)) ==> p * ii * h * inv(p * ii) = h
-  !z:complex. norm(z) = &1 ==> cexp(Cx pi * ii * m z) = cexp(Cx pi * ii)
+  forall z:complex. norm(z) = &1 ==> cexp(Cx pi * ii * m z) = cexp(Cx pi * ii)
   m = \\z:complex. (h(z) - h(--z)) / (Cx pi * ii)
   h:complex->complex
   r + i + s = &1 <=> s = &1 - (r + i)
@@ -81799,7 +81799,7 @@ Examples/borsuk quotations (50):
   (g:real^3->real^2) = \\x. f(x) - f(--x)
   ~(a /\\ b) <=> a ==> ~b
   p <=> ~ ~ p
-  !f:real^3->real^2.\n        f continuous_on {x | norm(x) = &1}\n        ==> ?x. norm(x) = &1 /\\ f(--x) = f(x)
+  forall f:real^3->real^2.\n        f continuous_on {x | norm(x) = &1}\n        ==> ?x. norm(x) = &1 /\\ f(--x) = f(x)
   z:complex
   w:complex
   Cx(&1)
@@ -81808,7 +81808,7 @@ Examples/borsuk quotations (50):
   r % x:real^3
   x:real^3
   \\x. (f:real^3->real^2) (a + r % x)
-  !f:real^3->real^2 a r.\n        &0 <= r /\\ f continuous_on {z | norm(z - a) = r}\n        ==> ?x. norm(x) = r /\\ f(a + x) = f(a - x)
+  forall f:real^3->real^2 a r.\n        &0 <= r /\\ f continuous_on {z | norm(z - a) = r}\n        ==> ?x. norm(x) = r /\\ f(a + x) = f(a - x)
 THEOREM_1 =  |- (#!:fun(fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#continuous_on:fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit1(1)),bool),bool)) f:fun(cart(real,tybit1(1)),cart(real,tybit0(1)))) (#GSPEC:fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool)) (\GEN%PVAR%9140:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). (((#SETSPEC:fun(cart(real,tybit1(1)),fun(bool,fun(cart(real,tybit1(1)),bool))) GEN%PVAR%9140:cart(real,tybit1(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:cart(real,tybit1(1))))))))) (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit1(1)),cart(real,tybit1(1))) x:cart(real,tybit1(1))))) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) x:cart(real,tybit1(1))))))))))
 BORSUK_ULAM =  |- (#!:fun(fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\a:cart(real,tybit1(1)). (#!:fun(fun(real,bool),bool) (\r:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#continuous_on:fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit1(1)),bool),bool)) f:fun(cart(real,tybit1(1)),cart(real,tybit0(1)))) (#GSPEC:fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool)) (\GEN%PVAR%9141:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\z:cart(real,tybit1(1)). (((#SETSPEC:fun(cart(real,tybit1(1)),fun(bool,fun(cart(real,tybit1(1)),bool))) GEN%PVAR%9141:cart(real,tybit1(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) ((#vector_sub:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) z:cart(real,tybit1(1))) a:cart(real,tybit1(1))))) r:real)) z:cart(real,tybit1(1)))))))))) (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) r:real)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) ((#vector_add:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) a:cart(real,tybit1(1))) x:cart(real,tybit1(1))))) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) ((#vector_sub:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) a:cart(real,tybit1(1))) x:cart(real,tybit1(1)))))))))))))))
 types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

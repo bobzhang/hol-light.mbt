@@ -57418,7 +57418,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  montgomery_of_edwards(f:A ring) c (x,y) =\n        if (x,y) = (ring_0 f,ring_1 f) then\n           NONE\n        else if (x,y) = (ring_0 f,ring_neg f (ring_1 f)) then\n           SOME(ring_0 f,ring_0 f)\n        else\n           SOME(ring_div f (ring_add f (ring_1 f) y) (ring_sub f (ring_1 f) y),\n                ring_mul f c\n                 (ring_div f (ring_add f (ring_1 f) y)\n                             (ring_mul f x (ring_sub f (ring_1 f) y))))
       #|  ecurve_of_mcurve (f,A:A,B) c =\n        (f,\n         ring_div f (ring_div f (ring_add f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2),\n         ring_div f (ring_div f (ring_sub f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2))
       #|  edwards_of_montgomery(f:A ring) c NONE =\n    (ring_0 f,ring_1 f) /\\\n  edwards_of_montgomery(f:A ring) c (SOME(x,y)) =\n    if (x,y) = (ring_0 f,ring_0 f) then (ring_0 f,ring_neg f (ring_1 f))\n    else ring_mul f c (ring_div f x y),\n         ring_div f (ring_sub f x (ring_of_num f 1))\n                    (ring_add f x (ring_of_num f 1))
-      #|  !f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = d)\n        ==> ecurve_of_mcurve (mcurve_of_ecurve (f,a,d) c) c = (f,a,d)
+      #|  forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = d)\n        ==> ecurve_of_mcurve (mcurve_of_ecurve (f,a,d) c) c = (f,a,d)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57433,7 +57433,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f A B c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(B = ring_0 f)\n        ==> mcurve_of_ecurve (ecurve_of_mcurve (f,A,B) c) c = (f,A,B)
+      #|  forall f A B c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(B = ring_0 f)\n        ==> mcurve_of_ecurve (ecurve_of_mcurve (f,A,B) c) c = (f,A,B)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57452,8 +57452,8 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  ring_mul f (z:A) (ring_div f (ring_sub f a d) (ring_of_num f 4))
       #|  z:A
       #|  a:A = d
-      #|  !p'. (p' <=> p) /\\ (p' ==> r) /\\ (~p' ==> (q <=> r))\n         ==> (~p /\\ ~q <=> ~r)
-      #|  !f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(?z. z IN ring_carrier f /\\ ring_pow f z 2 = ring_mul f a d))
+      #|  forall p'. (p' <=> p) /\\ (p' ==> r) /\\ (~p' ==> (q <=> r))\n         ==> (~p /\\ ~q <=> ~r)
+      #|  forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(?z. z IN ring_carrier f /\\ ring_pow f z 2 = ring_mul f a d))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57479,7 +57479,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f))
+      #|  forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57490,7 +57490,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  ring_div f z b:A
       #|  z:A
       #|  b:A
-      #|  !f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c)
+      #|  forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57500,7 +57500,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c)
+      #|  forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c)
       #|  x:A = ring_0 f
       #|  y:A
       #|  x:A
@@ -57508,7 +57508,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  d:A
       #|  a:A
       #|  f:A ring
-      #|  !f (a:A) d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_curve (mcurve_of_ecurve(f,a,d) c)\n                             (montgomery_of_edwards f c p)
+      #|  forall f (a:A) d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_curve (mcurve_of_ecurve(f,a,d) c)\n                             (montgomery_of_edwards f c p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57550,7 +57550,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  d:A
       #|  a:A
       #|  f:A ring
-      #|  !(f:A ring) a d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_of_montgomery f c (montgomery_of_edwards f c p) = p
+      #|  forall(f:A ring) a d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_of_montgomery f c (montgomery_of_edwards f c p) = p
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57610,7 +57610,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  B:A
       #|  A:A
       #|  f:A ring
-      #|  !f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> edwards_curve (ecurve_of_mcurve(f,A,B) c)\n                          (edwards_of_montgomery f c p)
+      #|  forall f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> edwards_curve (ecurve_of_mcurve(f,A,B) c)\n                          (edwards_of_montgomery f c p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57673,7 +57673,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  B:A
       #|  A:A
       #|  f:A ring
-      #|  !f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> montgomery_of_edwards f c (edwards_of_montgomery f c p) = p
+      #|  forall f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> montgomery_of_edwards f c (edwards_of_montgomery f c p) = p
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57787,7 +57787,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  d:A
       #|  a:A
       #|  f:A ring
-      #|  !f (a:A) d c p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_of_edwards f c (edwards_neg(f,a,d) p) =\n            montgomery_neg (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)
+      #|  forall f (a:A) d c p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_of_edwards f c (edwards_neg(f,a,d) p) =\n            montgomery_neg (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -57838,8 +57838,8 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  x:A = group_id G
       #|  y:A
       #|  x:A
-      #|  !x y. x IN group_carrier G /\\ y IN group_carrier G /\\ ~(x = y)\n            ==> (f:A->B) (group_mul G x y) = group_mul H (f x) (f y)
-      #|  !(G:A group) (H:B group) f g z.\n          abelian_group G /\\ abelian_group H /\\\n          z IN group_carrier G /\\ ~(z = group_id G) /\\\n          (!x. x IN group_carrier G\n               ==> f(x) IN group_carrier H /\\ g(f x) = x) /\\\n          (!y. y IN group_carrier H\n               ==> g(y) IN group_carrier G /\\ f(g y) = y) /\\\n          f(group_id G) = group_id H /\\\n          (!x. x IN group_carrier G ==> f(group_inv G x) = group_inv H (f x)) /\\\n          (!x. x IN group_carrier G\n               ==> f(group_mul G z x) = group_mul H (f z) (f x)) /\\\n          (!u v w. u IN group_carrier G /\\ ~(u = group_id G) /\\ ~(u = z) /\\\n                   v IN group_carrier G /\\ ~(v = group_id G) /\\ ~(v = z) /\\\n                   w IN group_carrier G /\\ ~(w = group_id G) /\\ ~(w = z) /\\\n                   group_mul G u v = w /\\\n                   ~(f v = f u) /\\ ~(group_inv H (f v) = f u)\n                   ==> group_mul H (f u) (f v) = f w)\n          ==> group_isomorphisms (G,H) (f,g)
+      #|  forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ ~(x = y)\n            ==> (f:A->B) (group_mul G x y) = group_mul H (f x) (f y)
+      #|  forall(G:A group) (H:B group) f g z.\n          abelian_group G /\\ abelian_group H /\\\n          z IN group_carrier G /\\ ~(z = group_id G) /\\\n          (forall x. x IN group_carrier G\n               ==> f(x) IN group_carrier H /\\ g(f x) = x) /\\\n          (forall y. y IN group_carrier H\n               ==> g(y) IN group_carrier G /\\ f(g y) = y) /\\\n          f(group_id G) = group_id H /\\\n          (forall x. x IN group_carrier G ==> f(group_inv G x) = group_inv H (f x)) /\\\n          (forall x. x IN group_carrier G\n               ==> f(group_mul G z x) = group_mul H (f z) (f x)) /\\\n          (forall u v w. u IN group_carrier G /\\ ~(u = group_id G) /\\ ~(u = z) /\\\n                   v IN group_carrier G /\\ ~(v = group_id G) /\\ ~(v = z) /\\\n                   w IN group_carrier G /\\ ~(w = group_id G) /\\ ~(w = z) /\\\n                   group_mul G u v = w /\\\n                   ~(f v = f u) /\\ ~(group_inv H (f v) = f u)\n                   ==> group_mul H (f u) (f v) = f w)\n          ==> group_isomorphisms (G,H) (f,g)
       #|  ring_add f (ring_mul f a (ring_pow f x2 2)) (ring_pow f y2 2):A =\n      ring_add f (ring_1 f)\n      (ring_mul f d (ring_mul f (ring_pow f x2 2) (ring_pow f y2 2)))
       #|  ring_add f (ring_mul f a (ring_pow f x1 2)) (ring_pow f y1 2):A =\n      ring_add f (ring_1 f)\n      (ring_mul f d (ring_mul f (ring_pow f x1 2) (ring_pow f y1 2)))
       #|  ~(ring_sub f (ring_1 f) y1:A = ring_0 f) /\\\n    ~(ring_sub f (ring_1 f) y2:A = ring_0 f) /\\\n    ~(ring_sub f (ring_1 f) y3:A = ring_0 f)
@@ -57913,7 +57913,7 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  ~(ring_char(f:A ring) = 2)
       #|  p /\\ (q /\\ r ==> s) ==> (p ==> q) ==> (p ==> r) ==> s
       #|  ring_0 f:A,ring_neg f (ring_1 f)
-      #|  !f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (edwards_group(f,a,d),\n                                montgomery_group(mcurve_of_ecurve(f,a,d) c))\n                               (montgomery_of_edwards f c,\n                                edwards_of_montgomery f c)
+      #|  forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (edwards_group(f,a,d),\n                                montgomery_group(mcurve_of_ecurve(f,a,d) c))\n                               (montgomery_of_edwards f c,\n                                edwards_of_montgomery f c)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -58086,10 +58086,10 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  d:A
       #|  a:A
       #|  f:A ring
-      #|  !f (a:A) d c p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) p /\\\n        edwards_curve(f,a,d) q\n        ==> montgomery_of_edwards f c (edwards_add(f,a,d) p q) =\n            montgomery_add (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)\n                           (montgomery_of_edwards f c q)
-      #|  !f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (montgomery_group(mcurve_of_ecurve(f,a,d) c),\n                                edwards_group(f,a,d))\n                               (edwards_of_montgomery f c,\n                                montgomery_of_edwards f c)
-      #|  !f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> edwards_group(f,a,d) isomorphic_group\n            montgomery_group(mcurve_of_ecurve(f,a,d) c)
-      #|  !f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_group(mcurve_of_ecurve(f,a,d) c) isomorphic_group\n            edwards_group(f,a,d)
+      #|  forall f (a:A) d c p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) p /\\\n        edwards_curve(f,a,d) q\n        ==> montgomery_of_edwards f c (edwards_add(f,a,d) p q) =\n            montgomery_add (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)\n                           (montgomery_of_edwards f c q)
+      #|  forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (montgomery_group(mcurve_of_ecurve(f,a,d) c),\n                                edwards_group(f,a,d))\n                               (edwards_of_montgomery f c,\n                                montgomery_of_edwards f c)
+      #|  forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> edwards_group(f,a,d) isomorphic_group\n            montgomery_group(mcurve_of_ecurve(f,a,d) c)
+      #|  forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_group(mcurve_of_ecurve(f,a,d) c) isomorphic_group\n            edwards_group(f,a,d)
       #|mcurve_of_ecurve =  |- ((#=:fun(prod(ring('A),prod('A,'A)),fun(prod(ring('A),prod('A,'A)),bool)) ((#mcurve_of_ecurve:fun(prod(ring('A),prod('A,'A)),fun('A,prod(ring('A),prod('A,'A)))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) d:'A))) c:'A)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) d:'A))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) d:'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) d:'A))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) c:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|montgomery_of_edwards =  |- ((#=:fun(option(prod('A,'A)),fun(option(prod('A,'A)),bool)) (((#montgomery_of_edwards:fun(ring('A),fun('A,fun(prod('A,'A),option(prod('A,'A))))) f:ring('A)) c:'A) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A))) (((#COND:fun(bool,fun(option(prod('A,'A)),fun(option(prod('A,'A)),option(prod('A,'A))))) ((#=:fun(prod('A,'A),fun(prod('A,'A),bool)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun('A,prod('A,'A))) (#ring_0:fun(ring('A),'A) f:ring('A))) (#ring_1:fun(ring('A),'A) f:ring('A))))) #NONE:option(prod('A,'A))) (((#COND:fun(bool,fun(option(prod('A,'A)),fun(option(prod('A,'A)),option(prod('A,'A))))) ((#=:fun(prod('A,'A),fun(prod('A,'A),bool)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun('A,prod('A,'A))) (#ring_0:fun(ring('A),'A) f:ring('A))) ((#ring_neg:fun(ring('A),fun('A,'A)) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A)))))) (#SOME:fun(prod('A,'A),option(prod('A,'A))) ((#,:fun('A,fun('A,prod('A,'A))) (#ring_0:fun(ring('A),'A) f:ring('A))) (#ring_0:fun(ring('A),'A) f:ring('A))))) (#SOME:fun(prod('A,'A),option(prod('A,'A))) ((#,:fun('A,fun('A,prod('A,'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A))) y:'A)) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A))) y:'A))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) c:'A) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A))) y:'A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A))) y:'A)))))))))
       #|ecurve_of_mcurve =  |- ((#=:fun(prod(ring('A),prod('A,'A)),fun(prod(ring('A),prod('A,'A)),bool)) ((#ecurve_of_mcurve:fun(prod(ring('A),prod('A,'A)),fun('A,prod(ring('A),prod('A,'A)))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) A:'A) B:'A))) c:'A)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) A:'A) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) B:'A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) c:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) A:'A) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) B:'A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) c:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

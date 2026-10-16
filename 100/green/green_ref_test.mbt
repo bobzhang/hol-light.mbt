@@ -87747,24 +87747,24 @@ test "100/green matches 100/green.ml" {
       #|100/green quotations (971):
       #|  wirtinger_dbar (f:complex->complex) (z:complex) =\n    complex((jacobian f (at z))$1$1 - (jacobian f (at z))$2$2,\n            (jacobian f (at z))$2$1 + (jacobian f (at z))$1$2) / Cx(&2)
       #|  wirtinger_dz (f:complex->complex) (z:complex) =\n    complex((jacobian f (at z))$1$1 + (jacobian f (at z))$2$2,\n            (jacobian f (at z))$2$1 - (jacobian f (at z))$1$2) / Cx(&2)
-      #|  !f z. f differentiable (at z)\n         ==> (wirtinger_dbar f z = Cx(&0) <=>\n              f complex_differentiable (at z))
-      #|  !f z. f complex_differentiable (at z)\n         ==> wirtinger_dz f z = complex_derivative f z
+      #|  forall f z. f differentiable (at z)\n         ==> (wirtinger_dbar f z = Cx(&0) <=>\n              f complex_differentiable (at z))
+      #|  forall f z. f complex_differentiable (at z)\n         ==> wirtinger_dz f z = complex_derivative f z
       #|  z:complex
       #|  f:complex->complex
       #|  f' = (\\h:complex. jacobian (f:complex->complex) (at z) ** h)
       #|  (f:complex->complex) differentiable (at z)
-      #|  !f f' z. (f has_derivative f') (at z)\n            ==> !h:complex. f'(h) =\n                    wirtinger_dz f z * h + wirtinger_dbar f z * cnj h
-      #|  !z. (cnj has_derivative cnj) (at z)
+      #|  forall f f' z. (f has_derivative f') (at z)\n            ==> forall h:complex. f'(h) =\n                    wirtinger_dz f z * h + wirtinger_dbar f z * cnj h
+      #|  forall z. (cnj has_derivative cnj) (at z)
       #|  w:complex
       #|  cnj = (\\x:complex.\n       (vector[vector[&1;&0]; vector[&0;-- &1]]:real^2^2) ** x)
       #|  frechet_derivative cnj (at z) = cnj
-      #|  !z. jacobian cnj (at z) = (vector[vector[&1;&0]; vector[&0;-- &1]]:real^2^2)
+      #|  forall z. jacobian cnj (at z) = (vector[vector[&1;&0]; vector[&0;-- &1]]:real^2^2)
       #|  wirtinger_dbar cnj = \\z. Cx(&1)
       #|  wirtinger_dbar I = \\z. Cx(&0)
-      #|  !f:complex->complex z.\n        wirtinger_dbar f z =\n        (frechet_derivative f (at z) (Cx(&1)) +\n         ii * frechet_derivative f (at z) ii) / Cx(&2)
+      #|  forall f:complex->complex z.\n        wirtinger_dbar f z =\n        (frechet_derivative f (at z) (Cx(&1)) +\n         ii * frechet_derivative f (at z) ii) / Cx(&2)
       #|  ii
       #|  Cx(&1)
-      #|  !f:complex->complex s.\n        (!h. (\\z. frechet_derivative f (at z) h) continuous_on s)\n        ==> (\\z. wirtinger_dbar f z) continuous_on s
+      #|  forall f:complex->complex s.\n        (forall h. (\\z. frechet_derivative f (at z) h) continuous_on s)\n        ==> (\\z. wirtinger_dbar f z) continuous_on s
       #|  ~(wirtinger_dbar (f:complex->complex) z = vec 0)
       #|  e:real
       #|  (\\x:complex. vec 0):complex->complex
@@ -87772,42 +87772,42 @@ test "100/green matches 100/green.ml" {
       #|  y:complex
       #|  ~(?y:complex. y IN support (+) (f:complex->complex) (:complex) /\\\n                     dist(z:complex,y) < e)
       #|  y:complex
-      #|  !y:complex. dist(y,z) < e ==> (f:complex->complex) y = vec 0
+      #|  forall y:complex. dist(y,z) < e ==> (f:complex->complex) y = vec 0
       #|  ?y:complex. y IN support (+) (f:complex->complex) (:complex) /\\\n                 dist(z,y) < e
       #|  e:real
       #|  z:complex
       #|  closure(support (+) (f:complex->complex) (:complex))
-      #|  !f:complex->complex.\n        f differentiable_on (:complex) /\\\n        bounded (support (+) f (:complex))\n        ==> bounded (support (+) (wirtinger_dbar f) (:complex))
+      #|  forall f:complex->complex.\n        f differentiable_on (:complex) /\\\n        bounded (support (+) f (:complex))\n        ==> bounded (support (+) (wirtinger_dbar f) (:complex))
       #|  (w + x) - w:complex = x
       #|  w:complex
-      #|  !f:complex->complex w.\n        integral (:complex) (\\z. wirtinger_dbar f z / (z - w)) =\n        integral (:complex) (\\z. wirtinger_dbar f (w + z) / z)
+      #|  forall f:complex->complex w.\n        integral (:complex) (\\z. wirtinger_dbar f z / (z - w)) =\n        integral (:complex) (\\z. wirtinger_dbar f (w + z) / z)
       #|  (\\z:complex. (f:complex->complex)(a + z)) =\n     (f:complex->complex) o (\\z:complex. a + z)
-      #|  !f:complex->complex a.\n        f continuous_on (:complex)\n        ==> (\\z. f(a + z)) continuous_on (:complex)
+      #|  forall f:complex->complex a.\n        f continuous_on (:complex)\n        ==> (\\z. f(a + z)) continuous_on (:complex)
       #|  IMAGE (\\z:complex. --a + z)\n                (support (+) (f:complex->complex) (:complex))
       #|  --a + a + z:complex = z
       #|  a + z:complex
       #|  z:complex
       #|  support (+) (\\z:complex. (f:complex->complex)(a + z)) (:complex) SUBSET\n     IMAGE (\\z. --a + z) (support (+) f (:complex))
-      #|  !f:complex->complex a.\n        bounded (support (+) f (:complex))\n        ==> bounded (support (+) (\\z. f(a + z)) (:complex))
+      #|  forall f:complex->complex a.\n        bounded (support (+) f (:complex))\n        ==> bounded (support (+) (\\z. f(a + z)) (:complex))
       #|  Cx(drop r) * (g * (inv(Cx(drop r)) * inv e)) =\n                (Cx(drop r) * inv(Cx(drop r))) * (g * inv e)
       #|  ~(Cx(drop r) = Cx(&0))
-      #|  !g:complex (r:real^1) (e:complex).\n        &0 < drop r /\\ ~(e = Cx(&0))\n        ==> drop r % (g / (Cx(drop r) * e)) = g * inv e
-      #|  !t. inv(cexp(ii * Cx t)) = cnj(cexp(ii * Cx t))
+      #|  forall g:complex (r:real^1) (e:complex).\n        &0 < drop r /\\ ~(e = Cx(&0))\n        ==> drop r % (g / (Cx(drop r) * e)) = g * inv e
+      #|  forall t. inv(cexp(ii * Cx t)) = cnj(cexp(ii * Cx t))
       #|  ~(cexp(ii * Cx(drop t)) = Cx(&0))
-      #|  !g:complex (r:real^1) t.\n        &0 < drop r\n        ==> drop r % (g / (Cx(drop r) * cexp(ii * Cx(drop t)))) =\n            g * cnj(cexp(ii * Cx(drop t)))
+      #|  forall g:complex (r:real^1) t.\n        &0 < drop r\n        ==> drop r % (g / (Cx(drop r) * cexp(ii * Cx(drop t)))) =\n            g * cnj(cexp(ii * Cx(drop t)))
       #|  f' = frechet_derivative (f:complex->complex) (at z)
       #|  z:complex
       #|  f':complex->complex
       #|  f:complex->complex
       #|  f':complex->complex
-      #|  !f:complex->complex z e.\n        f differentiable at z\n        ==> frechet_derivative f (at z) e +\n            ii * frechet_derivative f (at z) (ii * e) =\n            Cx(&2) * wirtinger_dbar f z * cnj e
+      #|  forall f:complex->complex z e.\n        f differentiable at z\n        ==> frechet_derivative f (at z) e +\n            ii * frechet_derivative f (at z) (ii * e) =\n            Cx(&2) * wirtinger_dbar f z * cnj e
       #|  &1
       #|  cexp(ii * Cx(&2 * pi)) = Cx(&1)
       #|  cexp(ii * Cx(&0)) = Cx(&1)
       #|  w = Cx(&0)
       #|  r:real
       #|  w:complex
-      #|  !w z. real z\n         ==> norm(w cpow z) =\n             if w = Cx(&0) /\\ z = Cx(&0) then &0 else norm(w) rpow (Re z)
+      #|  forall w z. real z\n         ==> norm(w cpow z) =\n             if w = Cx(&0) /\\ z = Cx(&0) then &0 else norm(w) rpow (Re z)
       #|  {vec 0:real^1}
       #|  --(&2):real < p
       #|  (p + &2) - &1:real = p + &1
@@ -87833,11 +87833,11 @@ test "100/green matches 100/green.ml" {
       #|  w:complex
       #|  w:complex
       #|  p:real
-      #|  !s p w.\n        bounded s /\\ measurable s /\\ real p /\\ --(&2) < Re p\n        ==> (\\z. (z - w) cpow p) absolutely_integrable_on s
+      #|  forall s p w.\n        bounded s /\\ measurable s /\\ real p /\\ --(&2) < Re p\n        ==> (\\z. (z - w) cpow p) absolutely_integrable_on s
       #|  z:complex
       #|  {w:complex}
       #|  (\\z:complex. (z - w) cpow (--Cx(&1)))
-      #|  !s w:complex.\n        bounded s /\\ measurable s\n        ==> (\\z. inv(z - w)) absolutely_integrable_on s
+      #|  forall s w:complex.\n        bounded s /\\ measurable s\n        ==> (\\z. inv(z - w)) absolutely_integrable_on s
       #|  z:complex
       #|  {w:complex}
       #|  w:complex
@@ -87846,7 +87846,7 @@ test "100/green matches 100/green.ml" {
       #|  w:complex
       #|  --Cx(&1)
       #|  s:complex->bool
-      #|  !s p w:complex.\n      bounded s /\\ measurable s /\\ p < &2 ==> (\\z. inv(z - w)) IN lspace s p
+      #|  forall s p w:complex.\n      bounded s /\\ measurable s /\\ p < &2 ==> (\\z. inv(z - w)) IN lspace s p
       #|  (:complex)
       #|  (:complex)
       #|  (\\z:real^2. (u:real^2->real^2) z * inv(z - w)) =\n       (\\z. u z * (\\z. inv(z - w)) z)
@@ -87856,8 +87856,8 @@ test "100/green matches 100/green.ml" {
       #|  (\\z:complex. if z IN cball(Cx(&0),R) then\n                     u z * inv(z - w) else vec 0)
       #|  R:real
       #|  Cx(&0)
-      #|  !u:complex->complex w.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex))\n        ==> (\\z. u(z) / (z - w)) absolutely_integrable_on (:complex)
-      #|  !s P (f:real^M->real^N).\n    integral s (\\y. if P then f y else vec 0) =\n    if P then integral s f else vec 0
+      #|  forall u:complex->complex w.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex))\n        ==> (\\z. u(z) / (z - w)) absolutely_integrable_on (:complex)
+      #|  forall s P (f:real^M->real^N).\n    integral s (\\y. if P then f y else vec 0) =\n    if P then integral s f else vec 0
       #|  {y:complex | y = a} = {a}
       #|  {x:real^1 | ~negligible {y:complex | y = (h:real^1->complex) x}} = {}
       #|  :N
@@ -87869,7 +87869,7 @@ test "100/green matches 100/green.ml" {
       #|  :N
       #|  :2
       #|  (\\p:real^(1,2)finite_sum. sndcart p - (h:real^1->complex)(fstcart p)) measurable_on\n    (:real^(1,2)finite_sum)
-      #|  !h:real^1->complex. h measurable_on (:real^1) ==>\n    negligible {p:real^(1,2)finite_sum | sndcart p = h(fstcart p)}
+      #|  forall h:real^1->complex. h measurable_on (:real^1) ==>\n    negligible {p:real^(1,2)finite_sum | sndcart p = h(fstcart p)}
       #|  p:real^(1,2)finite_sum
       #|  :N
       #|  :2
@@ -87884,8 +87884,8 @@ test "100/green matches 100/green.ml" {
       #|  interval[vec 0:real^1,vec 1]
       #|  (:real^1)
       #|  g:real^1->complex
-      #|  ?G:real^1->complex. G continuous_on (:real^1) /\\\n     (!x. x IN interval[vec 0,vec 1] ==> G x = (g:real^1->complex) x)
-      #|  !u:complex->complex g:real^1->complex.\n    u continuous_on (:complex) /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> (\\p:real^(1,2)finite_sum.\n            if fstcart p IN interval[vec 0,vec 1]\n            then u(sndcart p) / (sndcart p - g(fstcart p)) *\n                 vector_derivative g (at (fstcart p))\n            else vec 0)\n        measurable_on (:real^(1,2)finite_sum)
+      #|  ?G:real^1->complex. G continuous_on (:real^1) /\\\n     (forall x. x IN interval[vec 0,vec 1] ==> G x = (g:real^1->complex) x)
+      #|  forall u:complex->complex g:real^1->complex.\n    u continuous_on (:complex) /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> (\\p:real^(1,2)finite_sum.\n            if fstcart p IN interval[vec 0,vec 1]\n            then u(sndcart p) / (sndcart p - g(fstcart p)) *\n                 vector_derivative g (at (fstcart p))\n            else vec 0)\n        measurable_on (:real^(1,2)finite_sum)
       #|  z:complex
       #|  cball(w:complex,R + S) = IMAGE (\\z. w + z) (cball(Cx(&0),R + S))
       #|  M * drop(integral (cball(w:complex,R + S))\n       (\\y. lift(norm(inv(y - w))))) = C
@@ -87911,7 +87911,7 @@ test "100/green matches 100/green.ml" {
       #|  Cx(&0)
       #|  C:real
       #|  C = M * drop(integral (cball(Cx(&0),R + S))\n                           (\\z:complex. lift(norm(inv z))))
-      #|  !w:complex. (\\z. inv(z - w))\n       absolutely_integrable_on cball(Cx(&0),R + S)
+      #|  forall w:complex. (\\z. inv(z - w))\n       absolutely_integrable_on cball(Cx(&0),R + S)
       #|  ~(y IN support (+) (u:complex->complex) (:complex))
       #|  (y:complex) IN cball(Cx(&0),R)
       #|  y:complex
@@ -87922,47 +87922,47 @@ test "100/green matches 100/green.ml" {
       #|  u:complex->complex
       #|  (:complex)
       #|  u:complex->complex
-      #|  ?M. &0 <= M /\\ !y:complex. norm((u:complex->complex) y) <= M
+      #|  ?M. &0 <= M /\\ forall y:complex. norm((u:complex->complex) y) <= M
       #|  S:real
       #|  Cx(&0)
       #|  R:real
       #|  Cx(&0)
-      #|  !u:complex->complex K.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        compact K\n        ==> ?C. &0 <= C /\\\n                !w. w IN K ==>\n                  drop(integral (:complex)\n                       (\\y. lift(norm(u y / (y - w))))) <= C
+      #|  forall u:complex->complex K.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        compact K\n        ==> ?C. &0 <= C /\\\n                forall w. w IN K ==>\n                  drop(integral (:complex)\n                       (\\y. lift(norm(u y / (y - w))))) <= C
       #|  M * drop(integral (cball(Cx(&0),R))\n         (\\y:complex. lift(norm(inv(y - w:complex)))))
       #|  M * drop(integral (cball(w:complex,R + S))\n         (\\y. lift(norm(inv(y - w)))))
       #|  y:real^M
       #|  (u:real^M->real^N) y = vec 0
-      #|  !(u:real^M->real^N) R y.\n    (!z. z IN support (+) u (:real^M) ==> norm z <= R) /\\\n    norm(y) > R ==> u y = vec 0
+      #|  forall(u:real^M->real^N) R y.\n    (forall z. z IN support (+) u (:real^M) ==> norm z <= R) /\\\n    norm(y) > R ==> u y = vec 0
       #|  y:complex
       #|  y:complex
       #|  (\\y:complex. lift(real_min (norm(u y / (y - w))) (&n))) =\n      (\\y. (lambda i. min (lift(norm(u y / (y - w)))$i) (lift(&n)$i)):real^1)
       #|  (\\y:complex. lift(norm(u y / (y - w)))) measurable_on (:complex)
       #|  (\\y:complex. lift(norm(u y / (y - w))))
-      #|  !u:complex->complex w:complex n:num.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> (\\y. lift(real_min (norm(u y / (y - w))) (&n)))\n        integrable_on (:complex)
+      #|  forall u:complex->complex w:complex n:num.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> (\\y. lift(real_min (norm(u y / (y - w))) (&n)))\n        integrable_on (:complex)
       #|  {w0:complex}
       #|  (:complex)
       #|  \\y:complex.\n       if y IN cball(vec 0:complex, R:real) then lift(&(n:num)) else vec 0
       #|  \\y:complex.\n       lift(real_min (norm((u:complex->complex) y / (y - w0:complex))) (&(n:num)))
       #|  \\k:num. \\y:complex.\n       lift(real_min (norm((u:complex->complex) y / (y - (w:num->complex) k))) (&(n:num)))
-      #|  !z:complex. lift(real_min (norm((u:complex->complex) (y:complex) / (y - z))) (&(n:num))) =\n       (lambda i. min (lift(norm(u y / (y - z)))$i) (lift(&n)$i)):real^1
+      #|  forall z:complex. lift(real_min (norm((u:complex->complex) (y:complex) / (y - z))) (&(n:num))) =\n       (lambda i. min (lift(norm(u y / (y - z)))$i) (lift(&n)$i)):real^1
       #|  y:complex
-      #|  !y:complex. ~(y = w0:complex)\n    ==> ((\\k:num. lift(real_min (norm((u:complex->complex) y / (y - (w:num->complex) k))) (&(n:num))))\n         --> lift(real_min (norm(u y / (y - w0))) (&n))) sequentially
+      #|  forall y:complex. ~(y = w0:complex)\n    ==> ((\\k:num. lift(real_min (norm((u:complex->complex) y / (y - (w:num->complex) k))) (&(n:num))))\n         --> lift(real_min (norm(u y / (y - w0))) (&n))) sequentially
       #|  y:complex
       #|  R:real
       #|  u:complex->complex
       #|  (u:complex->complex) y = vec 0
       #|  (y:complex) IN cball(vec 0:complex, R)
-      #|  !k:num y:complex. ~(y = w0)\n    ==> norm(lift(real_min (norm(u y / (y - (w:num->complex) k))) (&n))) <=\n        drop(if y IN cball(vec 0:complex, R) then lift(&n) else vec 0)
+      #|  forall k:num y:complex. ~(y = w0)\n    ==> norm(lift(real_min (norm(u y / (y - (w:num->complex) k))) (&n))) <=\n        drop(if y IN cball(vec 0:complex, R) then lift(&n) else vec 0)
       #|  y:complex
       #|  (\\y:complex. lift(&n))
       #|  y:complex
       #|  cball(vec 0:complex, R)
       #|  (\\y:complex. if y IN cball(vec 0, R) then lift(&n) else vec 0)\n    integrable_on (:complex)
-      #|  !k:num. (\\y:complex. lift(real_min (norm(u y / (y - (w:num->complex) k))) (&n)))\n            integrable_on (:complex)
+      #|  forall k:num. (\\y:complex. lift(real_min (norm(u y / (y - (w:num->complex) k))) (&n)))\n            integrable_on (:complex)
       #|  R:real
       #|  w0:complex
       #|  w:num->complex
-      #|  !u:complex->complex n:num.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> (\\w. integral (:complex)\n               (\\y. lift(real_min (norm(u y / (y - w))) (&n))))\n        continuous_on (:complex)
+      #|  forall u:complex->complex n:num.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> (\\w. integral (:complex)\n               (\\y. lift(real_min (norm(u y / (y - w))) (&n))))\n        continuous_on (:complex)
       #|  N:num <= k
       #|  ~(norm((u:complex->complex) y / (y - w)) <= &k)
       #|  k:num
@@ -87975,7 +87975,7 @@ test "100/green matches 100/green.ml" {
       #|  \\y:complex.\n       lift(norm((u:complex->complex) y / (y - w:complex)))
       #|  \\y:complex.\n       lift(norm((u:complex->complex) y / (y - w:complex)))
       #|  \\k:num. \\y:complex.\n       lift(real_min (norm((u:complex->complex) y / (y - w:complex))) (&k))
-      #|  !u:complex->complex w:complex.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> ((\\n. integral (:complex)\n               (\\y. lift(real_min (norm(u y / (y - w))) (&n))))\n         --> integral (:complex)\n               (\\y. lift(norm(u y / (y - w))))) sequentially
+      #|  forall u:complex->complex w:complex.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex))\n    ==> ((\\n. integral (:complex)\n               (\\y. lift(real_min (norm(u y / (y - w))) (&n))))\n         --> integral (:complex)\n               (\\y. lift(norm(u y / (y - w))))) sequentially
       #|  (g:real^1->complex) x
       #|  u:complex->complex
       #|  x:real^1
@@ -87987,8 +87987,8 @@ test "100/green matches 100/green.ml" {
       #|  \\x:real^1. integral (:complex)\n         (\\y:complex. lift(norm((u:complex->complex) y / (y - (g:real^1->complex) x))))
       #|  \\n:num. \\x:real^1. integral (:complex)\n         (\\y:complex. lift(real_min (norm((u:complex->complex) y / (y - (g:real^1->complex) x))) (&n)))
       #|  (\\x. norm(vector_derivative (g:real^1->complex) (at x)) %\n          integral (:complex) (\\y. lift(norm((u:complex->complex) y / (y - g x))))) =\n     (\\x. drop((\\x. lift(norm(vector_derivative g (at x)))) x) %\n          (\\x. integral (:complex) (\\y. lift(norm(u y / (y - g x))))) x)
-      #|  !u:complex->complex g:real^1->complex.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex)) /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> (\\x. norm(vector_derivative g (at x)) %\n             integral (:complex) (\\y. lift(norm(u y / (y - g x)))))\n        measurable_on interval[vec 0, vec 1]
-      #|  !g:real^1->complex.\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> negligible(path_image g)
+      #|  forall u:complex->complex g:real^1->complex.\n    u continuous_on (:complex) /\\ bounded(support (+) u (:complex)) /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> (\\x. norm(vector_derivative g (at x)) %\n             integral (:complex) (\\y. lift(norm(u y / (y - g x)))))\n        measurable_on interval[vec 0, vec 1]
+      #|  forall g:real^1->complex.\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> negligible(path_image g)
       #|  t:real^1
       #|  interval[vec 0:real^1,vec 1]
       #|  s:real^1->bool
@@ -88001,16 +88001,16 @@ test "100/green matches 100/green.ml" {
       #|  s:real^1->bool
       #|  gd:real^1->complex
       #|  g:real^1->complex has_bounded_variation_on interval[vec 0,vec 1]
-      #|  !f:complex->complex g:real^1->complex.\n    f continuous_on path_image g /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> f path_integrable_on g
+      #|  forall f:complex->complex g:real^1->complex.\n    f continuous_on path_image g /\\\n    g absolutely_continuous_on interval[vec 0,vec 1]\n    ==> f path_integrable_on g
       #|  t:real^1
       #|  (\\t:real^1. Cx(&1) / (z - (g:real^1->complex) t) *\n                 vector_derivative g (at t)) =\n     (\\t. --(Cx(&1) / (g t - z) * vector_derivative g (at t)))
       #|  ~(z IN path_image(g:real^1->complex))
       #|  w:complex
       #|  (\\t:real^1. Cx(&1) / ((g:real^1->complex) t - z) *\n                 vector_derivative g (at t))\n     integrable_on interval[vec 0,vec 1]
-      #|  !x:real^1. u(z:complex) / (z - (g:real^1->complex) x) *\n                vector_derivative g (at x) =\n                u z * (Cx(&1) / (z - g x) * vector_derivative g (at x))
+      #|  forall x:real^1. u(z:complex) / (z - (g:real^1->complex) x) *\n                vector_derivative g (at x) =\n                u z * (Cx(&1) / (z - g x) * vector_derivative g (at x))
       #|  z:complex
       #|  path_image (g:real^1->complex)
-      #|  !x:real^1.\n       integral (:complex) (\\z:complex. u z / (z - g x)) *\n       vector_derivative g (at x) =\n       integral (:complex)\n       (\\z. u z / (z - g x) * vector_derivative g (at x))
+      #|  forall x:real^1.\n       integral (:complex) (\\z:complex. u z / (z - g x)) *\n       vector_derivative g (at x) =\n       integral (:complex)\n       (\\z. u z / (z - g x) * vector_derivative g (at x))
       #|  x:real^1
       #|  &0 <= x /\\ x <= C ==> abs(x) <= C
       #|  x:real^1
@@ -88028,25 +88028,25 @@ test "100/green matches 100/green.ml" {
       #|  {x:real^1 | ~((\\y:complex.\n            if x IN interval[vec 0,vec 1]\n            then u y / (y - g x) * vector_derivative g (at x)\n            else vec 0)\n            absolutely_integrable_on (:complex))} = {}
       #|  (\\p:real^(1,2)finite_sum.\n          if fstcart p IN interval[vec 0,vec 1]\n          then u(sndcart p:complex) / (sndcart p - g(fstcart p)) *\n               vector_derivative g (at (fstcart p))\n          else vec 0)\n       measurable_on (:real^(1,2)finite_sum)
       #|  (\\p:real^(1,2)finite_sum.\n        if fstcart p IN interval[vec 0,vec 1]\n        then u(sndcart p:complex) / (sndcart p - g(fstcart p)) *\n             vector_derivative g (at (fstcart p))\n        else vec 0)\n     absolutely_integrable_on (:real^(1,2)finite_sum)
-      #|  !w:complex. (\\z. u(z:complex) / (z - w)) integrable_on (:complex)
-      #|  !w:complex. (\\z. u(z:complex) / (z - w))\n                 absolutely_integrable_on (:complex)
-      #|  !u:complex->complex g.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> path_integral g (\\w. integral (:complex)\n               (\\z. u(z) / (z - w))) =\n            integral (:complex)\n               (\\z. u(z) * path_integral g (\\w. Cx(&1) / (z - w)))
+      #|  forall w:complex. (\\z. u(z:complex) / (z - w)) integrable_on (:complex)
+      #|  forall w:complex. (\\z. u(z:complex) / (z - w))\n                 absolutely_integrable_on (:complex)
+      #|  forall u:complex->complex g.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> path_integral g (\\w. integral (:complex)\n               (\\z. u(z) / (z - w))) =\n            integral (:complex)\n               (\\z. u(z) * path_integral g (\\w. Cx(&1) / (z - w)))
       #|  (\\z:complex. wirtinger_dbar (f:complex->complex) (w + z) / z) =\n     (\\z. wirtinger_dbar f (w + z) / (z - Cx(&0)))
-      #|  !f:complex->complex w.\n        (\\z. wirtinger_dbar f z) continuous_on (:complex) /\\\n        bounded (support (+) (wirtinger_dbar f) (:complex))\n        ==> (\\z. wirtinger_dbar f (w + z) / z) absolutely_integrable_on\n            (:complex)
-      #|  !t:real^1. ((\\t. Cx(drop t)) has_derivative (\\h. Cx(drop h))) (at t)
+      #|  forall f:complex->complex w.\n        (\\z. wirtinger_dbar f z) continuous_on (:complex) /\\\n        bounded (support (+) (wirtinger_dbar f) (:complex))\n        ==> (\\z. wirtinger_dbar f (w + z) / z) absolutely_integrable_on\n            (:complex)
+      #|  forall t:real^1. ((\\t. Cx(drop t)) has_derivative (\\h. Cx(drop h))) (at t)
       #|  (\\h:real^1. ii * Cx(drop h)) =\n     ((\\z:complex. ii * z) o (\\h:real^1. Cx(drop h)))
       #|  (\\t:real^1. ii * Cx(drop t)) =\n     ((\\z:complex. ii * z) o (\\t:real^1. Cx(drop t)))
-      #|  !t:real^1. ((\\t. ii * Cx(drop t)) has_derivative (\\h. ii * Cx(drop h)))\n              (at t)
+      #|  forall t:real^1. ((\\t. ii * Cx(drop t)) has_derivative (\\h. ii * Cx(drop h)))\n              (at t)
       #|  ii * Cx(drop(t:real^1))
       #|  (\\h:real^1. cexp(ii * Cx(drop t)) * (ii * Cx(drop h))) =\n     ((\\x:complex. cexp(ii * Cx(drop t)) * x) o (\\h:real^1. ii * Cx(drop h)))
       #|  (\\t:real^1. cexp(ii * Cx(drop t))) =\n     (cexp o (\\t:real^1. ii * Cx(drop t)))
-      #|  !t:real^1. ((\\t. cexp(ii * Cx(drop t))) has_derivative\n      (\\h. cexp(ii * Cx(drop t)) * (ii * Cx(drop h)))) (at t)
+      #|  forall t:real^1. ((\\t. cexp(ii * Cx(drop t))) has_derivative\n      (\\h. cexp(ii * Cx(drop t)) * (ii * Cx(drop h)))) (at t)
       #|  ((\\z:complex. w) has_derivative (\\h:complex. vec 0:complex)) (at a) /\\\n     ((\\z:complex. c * z) has_derivative (\\h:complex. c * h)) (at a)
-      #|  !c:complex w:complex a:complex.\n     ((\\z. w + c * z) has_derivative (\\h. c * h)) (at a)
+      #|  forall c:complex w:complex a:complex.\n     ((\\z. w + c * z) has_derivative (\\h. c * h)) (at a)
       #|  (\\h:real^1. Cx r * (cexp(ii * Cx(drop(t:real^1))) * (ii * Cx(drop h)))) =\n     ((\\h:complex. Cx r * h) o\n      (\\h:real^1. cexp(ii * Cx(drop t)) * (ii * Cx(drop h))))
       #|  (\\t:real^1. w + Cx r * cexp(ii * Cx(drop t))) =\n     ((\\z:complex. w + Cx r * z) o (\\t:real^1. cexp(ii * Cx(drop t))))
-      #|  !w:complex r t:real^1.\n     ((\\t. w + Cx r * cexp(ii * Cx(drop t))) has_derivative\n      (\\h. Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop h))))) (at t)
-      #|  !c:complex. (\\z:complex. c * z) continuous_on (:complex)
+      #|  forall w:complex r t:real^1.\n     ((\\t. w + Cx r * cexp(ii * Cx(drop t))) has_derivative\n      (\\h. Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop h))))) (at t)
+      #|  forall c:complex. (\\z:complex. c * z) continuous_on (:complex)
       #|  (:complex)
       #|  ((\\z:complex. ii * z) o (\\t:real^1. Cx(drop t))) continuous_on (:real^1)
       #|  (\\t:real^1. ii * Cx(drop t)) continuous_on (:real^1)
@@ -88057,12 +88057,12 @@ test "100/green matches 100/green.ml" {
       #|  ((\\z:complex. w + z) o (\\z:complex. Cx r * z)) continuous_on (:complex)
       #|  (:complex)
       #|  ((\\z:complex. w + Cx r * z) o (\\t:real^1. cexp(ii * Cx(drop t))))\n     continuous_on (:real^1)
-      #|  !w:complex r.\n     (\\t. w + Cx r * cexp(ii * Cx(drop t))) continuous_on (:real^1)
+      #|  forall w:complex r.\n     (\\t. w + Cx r * cexp(ii * Cx(drop t))) continuous_on (:real^1)
       #|  (:real^1)
-      #|  !w:complex r.\n     (\\t. w + Cx r * cexp(ii * Cx(drop t))) continuous_on\n     interval[vec 0:real^1, lift(&2 * pi)]
+      #|  forall w:complex r.\n     (\\t. w + Cx r * cexp(ii * Cx(drop t))) continuous_on\n     interval[vec 0:real^1, lift(&2 * pi)]
       #|  (:complex)
       #|  ((f:complex->complex) o\n     (\\t:real^1. w + Cx r * cexp(ii * Cx(drop t)))) continuous_on\n     interval[vec 0:real^1, lift(&2 * pi)]
-      #|  !f:complex->complex w r.\n     f continuous_on (:complex)\n     ==> (\\t. f(w + Cx r * cexp(ii * Cx(drop t)))) continuous_on\n         interval[vec 0:real^1, lift(&2 * pi)]
+      #|  forall f:complex->complex w r.\n     f continuous_on (:complex)\n     ==> (\\t. f(w + Cx r * cexp(ii * Cx(drop t)))) continuous_on\n         interval[vec 0:real^1, lift(&2 * pi)]
       #|  linear (frechet_derivative (f:complex->complex)\n                  (at (w + Cx r * cexp(ii * Cx(drop(t:real^1))))))
       #|  Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop(h:real^1)))) =\n         drop h % (Cx r * cexp(ii * Cx(drop t)) * ii)
       #|  h:real^1
@@ -88070,61 +88070,61 @@ test "100/green matches 100/green.ml" {
       #|  (\\h:real^1. frechet_derivative (f:complex->complex)\n                    (at (w + Cx r * cexp(ii * Cx(drop(t:real^1)))))\n                    (Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop h))))) =\n       (frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t)))) o\n        (\\h:real^1. Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop h)))))
       #|  (\\t:real^1. (f:complex->complex)(w + Cx r * cexp(ii * Cx(drop t)))) =\n       (f o (\\t:real^1. w + Cx r * cexp(ii * Cx(drop t))))
       #|  ((\\t:real^1. (f:complex->complex)(w + Cx r * cexp(ii * Cx(drop t))))\n      has_derivative\n      (\\h. frechet_derivative f\n             (at (w + Cx r * cexp(ii * Cx(drop(t:real^1)))))\n             (Cx r * (cexp(ii * Cx(drop t)) * (ii * Cx(drop h))))))\n     (at t)
-      #|  !f:complex->complex w r t.\n     f differentiable at (w + Cx r * cexp(ii * Cx(drop t)))\n     ==> ((\\t. f(w + Cx r * cexp(ii * Cx(drop t))))\n          has_vector_derivative\n          (frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n            (Cx r * cexp(ii * Cx(drop t)) * ii)))\n         (at t)
+      #|  forall f:complex->complex w r t.\n     f differentiable at (w + Cx r * cexp(ii * Cx(drop t)))\n     ==> ((\\t. f(w + Cx r * cexp(ii * Cx(drop t))))\n          has_vector_derivative\n          (frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n            (Cx r * cexp(ii * Cx(drop t)) * ii)))\n         (at t)
       #|  t:real^1
-      #|  !f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex)\n     ==> ((\\t. frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n                (Cx r * cexp(ii * Cx(drop t)) * ii))\n          has_integral\n          (f(w + Cx r * cexp(ii * Cx(drop(lift(&2 * pi))))) -\n           f(w + Cx r * cexp(ii * Cx(drop(vec 0))))))\n         (interval[vec 0, lift(&2 * pi)])
+      #|  forall f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex)\n     ==> ((\\t. frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n                (Cx r * cexp(ii * Cx(drop t)) * ii))\n          has_integral\n          (f(w + Cx r * cexp(ii * Cx(drop(lift(&2 * pi))))) -\n           f(w + Cx r * cexp(ii * Cx(drop(vec 0))))))\n         (interval[vec 0, lift(&2 * pi)])
       #|  r:real
       #|  w:complex
       #|  f:complex->complex
-      #|  !f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex)\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (Cx r * cexp(ii * Cx(drop t)) * ii)) = vec 0
+      #|  forall f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex)\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (Cx r * cexp(ii * Cx(drop t)) * ii)) = vec 0
       #|  Cx c * frechet_derivative (f:complex->complex) (at z) x =\n                c % frechet_derivative f (at z) x
       #|  Cx c * (x:complex) = c % x
       #|  linear(frechet_derivative (f:complex->complex) (at z))
-      #|  !f:complex->complex z c x.\n     f differentiable at z\n     ==> frechet_derivative f (at z) (Cx c * x) =\n         Cx c * frechet_derivative f (at z) x
+      #|  forall f:complex->complex z c x.\n     f differentiable at z\n     ==> frechet_derivative f (at z) (Cx c * x) =\n         Cx c * frechet_derivative f (at z) x
       #|  ~(r = &0)
       #|  Cx r * integral (interval[vec 0, lift(&2 * pi)])\n        (\\t. frechet_derivative (f:complex->complex)\n               (at (w + Cx r * cexp(ii * Cx(drop t))))\n               (ii * cexp(ii * Cx(drop t)))) = vec 0
       #|  Cx r * cexp(ii * Cx(drop t)) * ii =\n                      Cx r * (ii * cexp(ii * Cx(drop(t:real^1))))
       #|  t:real^1
-      #|  !t:real^1.\n        frechet_derivative (f:complex->complex)\n          (at (w + Cx r * cexp(ii * Cx(drop t))))\n          (Cx r * cexp(ii * Cx(drop t)) * ii) =\n        Cx r * frechet_derivative f\n          (at (w + Cx r * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))
+      #|  forall t:real^1.\n        frechet_derivative (f:complex->complex)\n          (at (w + Cx r * cexp(ii * Cx(drop t))))\n          (Cx r * cexp(ii * Cx(drop t)) * ii) =\n        Cx r * frechet_derivative f\n          (at (w + Cx r * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))
       #|  r:real
       #|  w:complex
       #|  f:complex->complex
       #|  ((\\t. frechet_derivative (f:complex->complex)\n               (at (w + Cx r * cexp(ii * Cx(drop t))))\n               (ii * cexp(ii * Cx(drop t))))\n       integrable_on (interval[vec 0, lift(&2 * pi)]))
       #|  Cx r * cexp(ii * Cx(drop t)) * ii =\n       Cx r * (ii * cexp(ii * Cx(drop(t:real^1))))
       #|  t:real^1
-      #|  !t:real^1. frechet_derivative (f:complex->complex)\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (Cx r * cexp(ii * Cx(drop t)) * ii) =\n                Cx r * frechet_derivative f\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (ii * cexp(ii * Cx(drop t)))
+      #|  forall t:real^1. frechet_derivative (f:complex->complex)\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (Cx r * cexp(ii * Cx(drop t)) * ii) =\n                Cx r * frechet_derivative f\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (ii * cexp(ii * Cx(drop t)))
       #|  r:real
       #|  w:complex
       #|  f:complex->complex
-      #|  !f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     ~(r = &0)\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (ii * cexp(ii * Cx(drop t)))) = vec 0
+      #|  forall f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     ~(r = &0)\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f\n                  (at (w + Cx r * cexp(ii * Cx(drop t))))\n                  (ii * cexp(ii * Cx(drop t)))) = vec 0
       #|  (\\h:real^1. Cx(drop h) * cexp(ii * Cx t0)) =\n         ((\\z:complex. cexp(ii * Cx t0) * z) o (\\h:real^1. Cx(drop h)))
       #|  (\\r:real^1. Cx(drop r) * cexp(ii * Cx t0)) =\n         ((\\z:complex. cexp(ii * Cx t0) * z) o (\\r:real^1. Cx(drop r)))
       #|  ((\\r:real^1. w) has_derivative (\\h:real^1. vec 0:complex)) (at r) /\\\n     ((\\r:real^1. Cx(drop r) * cexp(ii * Cx t0)) has_derivative\n      (\\h:real^1. Cx(drop h) * cexp(ii * Cx t0))) (at r)
-      #|  !w:complex t0:real r:real^1.\n     ((\\r. w + Cx(drop r) * cexp(ii * Cx t0)) has_derivative\n      (\\h. Cx(drop h) * cexp(ii * Cx t0))) (at r)
+      #|  forall w:complex t0:real r:real^1.\n     ((\\r. w + Cx(drop r) * cexp(ii * Cx t0)) has_derivative\n      (\\h. Cx(drop h) * cexp(ii * Cx t0))) (at r)
       #|  linear (frechet_derivative (f:complex->complex)\n                (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx t0))))
       #|  h:real^1
       #|  (\\h:real^1. drop h % frechet_derivative (f:complex->complex)\n                    (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx t0)))\n                    (cexp(ii * Cx t0))) =\n       (\\h:real^1. frechet_derivative f\n                    (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                    (Cx(drop h) * cexp(ii * Cx t0)))
       #|  (\\h:real^1. frechet_derivative (f:complex->complex)\n                    (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx t0)))\n                    (Cx(drop h) * cexp(ii * Cx t0))) =\n       (frechet_derivative f (at (w + Cx(drop r) * cexp(ii * Cx t0))) o\n        (\\h:real^1. Cx(drop h) * cexp(ii * Cx t0)))
       #|  (\\r:real^1. (f:complex->complex)(w + Cx(drop r) * cexp(ii * Cx t0))) =\n       (f o (\\r:real^1. w + Cx(drop r) * cexp(ii * Cx t0)))
       #|  ((\\r:real^1. (f:complex->complex)(w + Cx(drop r) * cexp(ii * Cx t0)))\n      has_derivative\n      (\\h. frechet_derivative f\n             (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx t0)))\n             (Cx(drop h) * cexp(ii * Cx t0))))\n     (at r)
-      #|  !f:complex->complex w t0 r.\n     f differentiable at (w + Cx(drop r) * cexp(ii * Cx t0))\n     ==> ((\\r. f(w + Cx(drop r) * cexp(ii * Cx t0)))\n          has_vector_derivative\n          (frechet_derivative f (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n            (cexp(ii * Cx t0))))\n         (at r)
+      #|  forall f:complex->complex w t0 r.\n     f differentiable at (w + Cx(drop r) * cexp(ii * Cx t0))\n     ==> ((\\r. f(w + Cx(drop r) * cexp(ii * Cx t0)))\n          has_vector_derivative\n          (frechet_derivative f (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n            (cexp(ii * Cx t0))))\n         (at r)
       #|  (\\z:complex. z * cexp(ii * Cx t0)) =\n                  (\\z. cexp(ii * Cx t0) * z)
       #|  (:complex)
       #|  ((\\z:complex. z * cexp(ii * Cx t0)) o (\\r:real^1. Cx(drop r)))\n     continuous_on (:real^1)
-      #|  !w:complex t0. (\\r:real^1. w + Cx(drop r) * cexp(ii * Cx t0))\n                  continuous_on (:real^1)
+      #|  forall w:complex t0. (\\r:real^1. w + Cx(drop r) * cexp(ii * Cx t0))\n                  continuous_on (:real^1)
       #|  (:complex)
       #|  (:real^1)
       #|  ((f:complex->complex) o\n     (\\r:real^1. w + Cx(drop r) * cexp(ii * Cx t0))) continuous_on\n     {r:real^1 | &0 <= drop r}
-      #|  !f:complex->complex w t0.\n     f continuous_on (:complex)\n     ==> (\\r. f(w + Cx(drop r) * cexp(ii * Cx t0))) continuous_on\n         {r:real^1 | &0 <= drop r}
+      #|  forall f:complex->complex w t0.\n     f continuous_on (:complex)\n     ==> (\\r. f(w + Cx(drop r) * cexp(ii * Cx t0))) continuous_on\n         {r:real^1 | &0 <= drop r}
       #|  r:real^1
       #|  {r:real^1 | &0 <= drop r}
       #|  ((\\r:real^1. frechet_derivative (f:complex->complex)\n                   (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                   (cexp(ii * Cx t0)))\n      has_integral\n      (f(w + Cx(drop(lift R)) * cexp(ii * Cx t0)) -\n       f(w + Cx(drop(vec 0:real^1)) * cexp(ii * Cx t0))))\n     (interval[vec 0, lift R])
-      #|  !f:complex->complex w t0 R.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     &0 < R\n     ==> ((\\r. frechet_derivative f\n                (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                (cexp(ii * Cx t0)))\n          has_integral\n          (f(w + Cx R * cexp(ii * Cx t0)) - f(w)))\n         (interval[vec 0, lift R])
+      #|  forall f:complex->complex w t0 R.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     &0 < R\n     ==> ((\\r. frechet_derivative f\n                (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                (cexp(ii * Cx t0)))\n          has_integral\n          (f(w + Cx R * cexp(ii * Cx t0)) - f(w)))\n         (interval[vec 0, lift R])
       #|  integral (interval[vec 0, lift(&2 * pi)])\n        (\\t:real^1. ii * frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))) =\n       ii * integral (interval[vec 0, lift(&2 * pi)])\n        (\\t. frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t))))
       #|  integral (interval[vec 0, lift(&2 * pi)])\n        (\\t:real^1. ii * frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))) = vec 0
       #|  Cx(drop(r:real^1)) * cexp(ii * Cx(drop t')) * ii =\n                      Cx(drop r) * (ii * cexp(ii * Cx(drop(t':real^1))))
       #|  t':real^1
-      #|  !t:real^1.\n        frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx(drop t))))\n          (Cx(drop r) * cexp(ii * Cx(drop t)) * ii) =\n        Cx(drop r) * frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))
+      #|  forall t:real^1.\n        frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx(drop t))))\n          (Cx(drop r) * cexp(ii * Cx(drop t)) * ii) =\n        Cx(drop r) * frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t)))
       #|  drop(r:real^1)
       #|  w:complex
       #|  f:complex->complex
@@ -88139,7 +88139,7 @@ test "100/green matches 100/green.ml" {
       #|  ((\\t:real^1. ii * frechet_derivative (f:complex->complex)\n            (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n            (ii * cexp(ii * Cx(drop t))))\n         integrable_on (interval[vec 0, lift(&2 * pi)]))
       #|  Cx(drop(r:real^1)) * cexp(ii * Cx(drop t')) * ii =\n             Cx(drop r) * (ii * cexp(ii * Cx(drop(t':real^1))))
       #|  t':real^1
-      #|  !t:real^1.\n          frechet_derivative (f:complex->complex)\n            (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx(drop t))))\n            (Cx(drop r) * cexp(ii * Cx(drop t)) * ii) =\n          Cx(drop r) * frechet_derivative f\n            (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n            (ii * cexp(ii * Cx(drop t)))
+      #|  forall t:real^1.\n          frechet_derivative (f:complex->complex)\n            (at (w + Cx(drop(r:real^1)) * cexp(ii * Cx(drop t))))\n            (Cx(drop r) * cexp(ii * Cx(drop t)) * ii) =\n          Cx(drop r) * frechet_derivative f\n            (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n            (ii * cexp(ii * Cx(drop t)))
       #|  drop(r:real^1)
       #|  w:complex
       #|  f:complex->complex
@@ -88156,8 +88156,8 @@ test "100/green matches 100/green.ml" {
       #|  ((\\t:real^1. frechet_derivative (f:complex->complex)\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (cexp(ii * Cx(drop t))) +\n        ii * frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t))))\n       integrable_on (interval[vec 0, lift(&2 * pi)]))
       #|  ~(Cx(&2) = Cx(&0)) /\\ f1 + ii * f2 = Cx(&2) * d * c\n       ==> d * c = inv(Cx(&2)) * (f1 + ii * f2)
       #|  t:real^1
-      #|  !t:real^1.\n       drop r %\n       (wirtinger_dbar (f:complex->complex)\n          (w + Cx(drop r) * cexp(ii * Cx(drop t))) /\n        (Cx(drop r) * cexp(ii * Cx(drop t)))) =\n       inv(Cx(&2)) *\n       (frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (cexp(ii * Cx(drop t))) +\n        ii * frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t))))
-      #|  !f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     (!h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     &0 < drop r\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. drop r %\n                (wirtinger_dbar f (w + Cx(drop r) * cexp(ii * Cx(drop t))) /\n                 (Cx(drop r) * cexp(ii * Cx(drop t))))) =\n         inv(Cx(&2)) *\n         integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f\n                  (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                  (cexp(ii * Cx(drop t))))
+      #|  forall t:real^1.\n       drop r %\n       (wirtinger_dbar (f:complex->complex)\n          (w + Cx(drop r) * cexp(ii * Cx(drop t))) /\n        (Cx(drop r) * cexp(ii * Cx(drop t)))) =\n       inv(Cx(&2)) *\n       (frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (cexp(ii * Cx(drop t))) +\n        ii * frechet_derivative f\n          (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n          (ii * cexp(ii * Cx(drop t))))
+      #|  forall f:complex->complex w r.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     (forall h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     &0 < drop r\n     ==> integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. drop r %\n                (wirtinger_dbar f (w + Cx(drop r) * cexp(ii * Cx(drop t))) /\n                 (Cx(drop r) * cexp(ii * Cx(drop t))))) =\n         inv(Cx(&2)) *\n         integral (interval[vec 0, lift(&2 * pi)])\n           (\\t. frechet_derivative f\n                  (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                  (cexp(ii * Cx(drop t))))
       #|  w:complex
       #|  x - (w + x):complex = --w
       #|  w + Cx a * cexp(ii * Cx t0):complex
@@ -88182,12 +88182,12 @@ test "100/green matches 100/green.ml" {
       #|  ((\\r:real^1. frechet_derivative (f:complex->complex)\n                    (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                    (cexp(ii * Cx t0)))\n     has_integral --(f w)) {r:real^1 | &0 <= drop r}
       #|  B = R + norm(w:complex) + &1
       #|  R:real
-      #|  !f:complex->complex w t0.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     bounded (support (+) f (:complex))\n     ==> integral {r:real^1 | &0 <= drop r}\n           (\\r. frechet_derivative f\n                  (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                  (cexp(ii * Cx t0))) = --(f w)
-      #|  !r:real^1. &0 <= drop r /\\ ~(r = vec 0) ==> &0 < drop r
-      #|  !f:complex->complex z.\n        wirtinger_dz f z =\n        (frechet_derivative f (at z) (Cx(&1)) -\n         ii * frechet_derivative f (at z) ii) / Cx(&2)
+      #|  forall f:complex->complex w t0.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     bounded (support (+) f (:complex))\n     ==> integral {r:real^1 | &0 <= drop r}\n           (\\r. frechet_derivative f\n                  (at (w + Cx(drop r) * cexp(ii * Cx t0)))\n                  (cexp(ii * Cx t0))) = --(f w)
+      #|  forall r:real^1. &0 <= drop r /\\ ~(r = vec 0) ==> &0 < drop r
+      #|  forall f:complex->complex z.\n        wirtinger_dz f z =\n        (frechet_derivative f (at z) (Cx(&1)) -\n         ii * frechet_derivative f (at z) ii) / Cx(&2)
       #|  ii
       #|  Cx(&1)
-      #|  !f:complex->complex s.\n        (!h. (\\z. frechet_derivative f (at z) h) continuous_on s)\n        ==> (\\z. wirtinger_dz f z) continuous_on s
+      #|  forall f:complex->complex s.\n        (forall h. (\\z. frechet_derivative f (at z) h) continuous_on s)\n        ==> (\\z. wirtinger_dz f z) continuous_on s
       #|  (:complex)
       #|  (:complex)
       #|  wirtinger_dbar (f:complex->complex) continuous_on (:complex)
@@ -88197,10 +88197,10 @@ test "100/green matches 100/green.ml" {
       #|  f:complex->complex
       #|  x:real^P
       #|  (\\x:real^P. frechet_derivative (f:complex->complex)\n          (at ((g:real^P->complex) x)) ((h:real^P->complex) x)) =\n     (\\x. wirtinger_dz f (g x) * h x + wirtinger_dbar f (g x) * cnj(h x))
-      #|  !z:complex. (f:complex->complex) differentiable (at z)
-      #|  !f:complex->complex (g:real^P->complex) (h:real^P->complex) s.\n        f differentiable_on (:complex) /\\\n        (!e. (\\z. frechet_derivative f (at z) e) continuous_on (:complex)) /\\\n        g continuous_on s /\\\n        h continuous_on s\n        ==> (\\x. frechet_derivative f (at (g x)) (h x)) continuous_on s
-      #|  !s. (\\z:real^(1,1)finite_sum.\n          cexp(ii * Cx(drop(sndcart z)))) continuous_on s
-      #|  !w:complex s.\n     (\\z:real^(1,1)finite_sum.\n        w + Cx(drop(fstcart z)) * cexp(ii * Cx(drop(sndcart z))))\n     continuous_on s
+      #|  forall z:complex. (f:complex->complex) differentiable (at z)
+      #|  forall f:complex->complex (g:real^P->complex) (h:real^P->complex) s.\n        f differentiable_on (:complex) /\\\n        (forall e. (\\z. frechet_derivative f (at z) e) continuous_on (:complex)) /\\\n        g continuous_on s /\\\n        h continuous_on s\n        ==> (\\x. frechet_derivative f (at (g x)) (h x)) continuous_on s
+      #|  forall s. (\\z:real^(1,1)finite_sum.\n          cexp(ii * Cx(drop(sndcart z)))) continuous_on s
+      #|  forall w:complex s.\n     (\\z:real^(1,1)finite_sum.\n        w + Cx(drop(fstcart z)) * cexp(ii * Cx(drop(sndcart z))))\n     continuous_on s
       #|  y:real^M
       #|  z:real^M
       #|  y:real^M
@@ -88210,15 +88210,15 @@ test "100/green matches 100/green.ml" {
       #|  \\h:real^M. vec 0:real^N
       #|  \\y:real^M. vec 0:real^N
       #|  (f has_derivative (\\h:real^M. vec 0:real^N)) (at (z:real^M))
-      #|  !f:real^M->real^N z h R.\n    f differentiable_on (:real^M) /\\\n    (!y. R < norm y ==> f y = vec 0) /\\\n    R < norm z\n    ==> frechet_derivative f (at z) h = vec 0
+      #|  forall f:real^M->real^N z h R.\n    f differentiable_on (:real^M) /\\\n    (forall y. R < norm y ==> f y = vec 0) /\\\n    R < norm z\n    ==> frechet_derivative f (at z) h = vec 0
       #|  y IN support (+) (f:real^M->real^N) (:real^M)
       #|  (~p ==> F) ==> p
-      #|  !f:real^M->real^N R.\n    (!x. x IN support (+) f (:real^M) ==> norm x <= R)\n    ==> (!y. R < norm y ==> f y = vec 0)
+      #|  forall f:real^M->real^N R.\n    (forall x. x IN support (+) f (:real^M) ==> norm x <= R)\n    ==> (forall y. R < norm y ==> f y = vec 0)
       #|  w:complex
       #|  x - (w + x):complex = --w
       #|  w + Cx(drop(r:real^1)) * cexp(ii * Cx(drop(t:real^1)))
       #|  Cx(drop(r:real^1)) * cexp(ii * Cx(drop(t:real^1)))
-      #|  !w:complex r:real^1 t:real^1 R.\n    R + norm w + &1 <= drop r\n    ==> R < norm(w + Cx(drop r) * cexp(ii * Cx(drop t)))
+      #|  forall w:complex r:real^1 t:real^1 R.\n    R + norm w + &1 <= drop r\n    ==> R < norm(w + Cx(drop r) * cexp(ii * Cx(drop t)))
       #|  lift(&2 * pi):real^1
       #|  vec 0:real^1
       #|  lift B:real^1
@@ -88229,25 +88229,25 @@ test "100/green matches 100/green.ml" {
       #|  r:real^1
       #|  t:real^1
       #|  integral (interval[vec 0, lift(&2 * pi)])\n       (\\t. integral {r:real^1 | &0 <= drop r}\n              (\\r. frechet_derivative (f:complex->complex)\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t))))) =\n     integral (interval[vec 0, lift(&2 * pi)])\n       (\\t. integral (interval[vec 0:real^1, lift B])\n              (\\r. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t)))))
-      #|  !t:real^1.\n      frechet_derivative (f:complex->complex)\n        (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n        (cexp(ii * Cx(drop t))) = vec 0
+      #|  forall t:real^1.\n      frechet_derivative (f:complex->complex)\n        (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n        (cexp(ii * Cx(drop t))) = vec 0
       #|  drop(r:real^1) <= B
       #|  &0 <= drop(r:real^1)
       #|  r:real^1
       #|  integral {r:real^1 | &0 <= drop r}\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. frechet_derivative (f:complex->complex)\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t))))) =\n     integral (interval[vec 0:real^1, lift B])\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t)))))
       #|  R:real
-      #|  !r:real^1 t:real^1. B < drop r ==>\n       frechet_derivative (f:complex->complex)\n         (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n         (cexp(ii * Cx(drop t))) = vec 0
+      #|  forall r:real^1 t:real^1. B < drop r ==>\n       frechet_derivative (f:complex->complex)\n         (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n         (cexp(ii * Cx(drop t))) = vec 0
       #|  R:real
       #|  f:complex->complex
       #|  w:complex
       #|  &0 < B
       #|  B = R + norm(w:complex) + &1
       #|  R:real
-      #|  !f:complex->complex w.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     (!h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     bounded (support (+) f (:complex))\n     ==>\n     integral {r:real^1 | &0 <= drop r}\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t))))) =\n     integral (interval[vec 0, lift(&2 * pi)])\n       (\\t. integral {r:real^1 | &0 <= drop r}\n              (\\r. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t)))))
+      #|  forall f:complex->complex w.\n     f continuous_on (:complex) /\\\n     f differentiable_on (:complex) /\\\n     (forall h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     bounded (support (+) f (:complex))\n     ==>\n     integral {r:real^1 | &0 <= drop r}\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t))))) =\n     integral (interval[vec 0, lift(&2 * pi)])\n       (\\t. integral {r:real^1 | &0 <= drop r}\n              (\\r. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t)))))
       #|  drop(t0:real^1)
       #|  w:complex
       #|  f:complex->complex
       #|  t0:real^1
-      #|  !t:real^1. integral {r:real^1 | &0 <= drop r}\n                  (\\r. frechet_derivative (f:complex->complex)\n                         (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                         (cexp(ii * Cx(drop t)))) = --(f w)
+      #|  forall t:real^1. integral {r:real^1 | &0 <= drop r}\n                  (\\r. frechet_derivative (f:complex->complex)\n                         (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                         (cexp(ii * Cx(drop t)))) = --(f w)
       #|  integral {r:real^1 | &0 <= drop r}\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. frechet_derivative (f:complex->complex)\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t))))) =\n     integral (interval[vec 0, lift(&2 * pi)])\n       (\\t. integral {r:real^1 | &0 <= drop r}\n              (\\r. frechet_derivative f\n                     (at (w + Cx(drop r) * cexp(ii * Cx(drop t))))\n                     (cexp(ii * Cx(drop t)))))
       #|  inv(Cx(&2)) = Cx(&0)
       #|  x:real^1
@@ -88269,30 +88269,30 @@ test "100/green matches 100/green.ml" {
       #|  integral (:complex) (\\z. wirtinger_dbar (f:complex->complex) (w + z) / z) =\n     integral {r:real^1 | &0 <= drop r}\n       (\\r. integral (interval[vec 0, lift(&2 * pi)])\n              (\\t. drop r %\n                   (wirtinger_dbar f (w + Cx(drop r) * cexp(ii * Cx(drop t))) /\n                    (Cx(drop r) * cexp(ii * Cx(drop t))))))
       #|  (\\z. wirtinger_dbar (f:complex->complex) (w + z) / z)\n     absolutely_integrable_on (:complex)
       #|  (f:complex->complex) continuous_on (:complex)
-      #|  !f:complex->complex w.\n     f differentiable_on (:complex) /\\\n     (!h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     bounded (support (+) f (:complex))\n     ==> integral (:complex) (\\z. wirtinger_dbar f (w + z) / z) =\n         inv(Cx(&2)) *\n         integral (interval[vec 0:real^1, lift(&2 * pi)]) (\\t:real^1. --(f w))
+      #|  forall f:complex->complex w.\n     f differentiable_on (:complex) /\\\n     (forall h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n     bounded (support (+) f (:complex))\n     ==> integral (:complex) (\\z. wirtinger_dbar f (w + z) / z) =\n         inv(Cx(&2)) *\n         integral (interval[vec 0:real^1, lift(&2 * pi)]) (\\t:real^1. --(f w))
       #|  lift(&2 * pi)
       #|  vec 0:real^1
       #|  content(interval[vec 0:real^1, lift(&2 * pi)]) = &2 * pi
-      #|  !c:complex.\n     integral (interval[vec 0:real^1, lift(&2 * pi)]) (\\t. c) =\n     Cx(&2 * pi) * c
+      #|  forall c:complex.\n     integral (interval[vec 0:real^1, lift(&2 * pi)]) (\\t. c) =\n     Cx(&2 * pi) * c
       #|  inv(Cx(&2)) * Cx(&2) = Cx(&1)
       #|  inv(Cx(&2)) * Cx(&2 * pi) = Cx(pi)
       #|  integral (:complex) (\\z. wirtinger_dbar (f:complex->complex) (w + z) / z) =\n     inv(Cx(&2)) *\n     integral (interval[vec 0:real^1, lift(&2 * pi)]) (\\t:real^1. --(f w))
-      #|  !f:complex->complex w.\n        f differentiable_on (:complex) /\\\n        (!h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n        bounded (support (+) f (:complex))\n        ==> integral (:complex)\n              (\\z. wirtinger_dbar f z / (z - w)) = --(Cx pi * f w)
+      #|  forall f:complex->complex w.\n        f differentiable_on (:complex) /\\\n        (forall h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n        bounded (support (+) f (:complex))\n        ==> integral (:complex)\n              (\\z. wirtinger_dbar f z / (z - w)) = --(Cx pi * f w)
       #|  (ef:real^M->real^N) y - g z - f'(y - z:real^M) =\n       g y - g z - f'(y - z)
       #|  (g:real^M->real^N) z = f z
       #|  (ef:real^M->real^N) y - g z - f'(y - z:real^M) =\n       f y - f z - f'(y - z)
       #|  y:real^M
-      #|  !y:real^M. norm(y - z) < d0\n                ==> (ef:real^M->real^N) y = f y \\/ ef y = g y
+      #|  forall y:real^M. norm(y - z) < d0\n                ==> (ef:real^M->real^N) y = f y \\/ ef y = g y
       #|  y:real^M
       #|  min d0 (min d1 d2)
       #|  d2:real
       #|  e:real
-      #|  !e. &0 < e\n         ==> (?d. &0 < d /\\\n                  (!y. norm (y - z) < d\n                       ==> norm ((g:real^M->real^N) y - g z - f' (y - z))\n                           <= e * norm (y - z)))
+      #|  forall e. &0 < e\n         ==> (?d. &0 < d /\\\n                  (forall y. norm (y - z) < d\n                       ==> norm ((g:real^M->real^N) y - g z - f' (y - z))\n                           <= e * norm (y - z)))
       #|  d1:real
       #|  e:real
-      #|  !e. &0 < e\n         ==> (?d. &0 < d /\\\n                  (!y. norm (y - z) < d\n                       ==> norm ((f:real^M->real^N) y - f z - f' (y - z))\n                           <= e * norm (y - z)))
+      #|  forall e. &0 < e\n         ==> (?d. &0 < d /\\\n                  (forall y. norm (y - z) < d\n                       ==> norm ((f:real^M->real^N) y - f z - f' (y - z))\n                           <= e * norm (y - z)))
       #|  e:real
-      #|  !(f:real^M->real^N) g ef f' z d0.\n    &0 < d0 /\\\n    (f has_derivative f') (at z) /\\\n    (g has_derivative f') (at z) /\\\n    f z = g z /\\\n    (!y:real^M. norm(y - z) < d0 ==> ef y = f y \\/ ef y = g y) /\\\n    ef z = f z\n    ==> (ef has_derivative f') (at z)
+      #|  forall(f:real^M->real^N) g ef f' z d0.\n    &0 < d0 /\\\n    (f has_derivative f') (at z) /\\\n    (g has_derivative f') (at z) /\\\n    f z = g z /\\\n    (forall y:real^M. norm(y - z) < d0 ==> ef y = f y \\/ ef y = g y) /\\\n    ef z = f z\n    ==> (ef has_derivative f') (at z)
       #|  d1:real
       #|  d1:real
       #|  d1:real
@@ -88306,7 +88306,7 @@ test "100/green matches 100/green.ml" {
       #|  d0:real
       #|  (\\y:real^1. lift(g(drop y)))
       #|  (\\y:real^1. lift(f(drop y)))
-      #|  !f g ef f' x d0.\n    &0 < d0 /\\\n    (f has_real_derivative f') (atreal x) /\\\n    (g has_real_derivative f') (atreal x) /\\\n    f x = g x /\\\n    (!y. abs(y - x) < d0 ==> ef y = f y \\/ ef y = g y) /\\\n    ef x = f x\n    ==> (ef has_real_derivative f') (atreal x)
+      #|  forall f g ef f' x d0.\n    &0 < d0 /\\\n    (f has_real_derivative f') (atreal x) /\\\n    (g has_real_derivative f') (atreal x) /\\\n    f x = g x /\\\n    (forall y. abs(y - x) < d0 ==> ef y = f y \\/ ef y = g y) /\\\n    ef x = f x\n    ==> (ef has_real_derivative f') (atreal x)
       #|  hermite_cutoff (t:real) =\n    if t <= &0 then &1\n    else if &1 <= t then &0\n    else &2 * t pow 3 - &3 * t pow 2 + &1
       #|  hermite_cutoff_deriv (t:real) =\n    if t <= &0 then &0\n    else if &1 <= t then &0\n    else &6 * t pow 2 - &6 * t
       #|  s:real
@@ -88315,21 +88315,21 @@ test "100/green matches 100/green.ml" {
       #|  hermite_cutoff
       #|  &6 * t pow 2 - &6 * t
       #|  \\t:real. &2 * t pow 3 - &3 * t pow 2 + &1
-      #|  !t. &0 < t /\\ t < &1\n       ==> (hermite_cutoff has_real_derivative (&6 * t pow 2 - &6 * t))\n           (atreal t)
+      #|  forall t. &0 < t /\\ t < &1\n       ==> (hermite_cutoff has_real_derivative (&6 * t pow 2 - &6 * t))\n           (atreal t)
       #|  s:real
       #|  -- t:real
       #|  t:real
       #|  hermite_cutoff
       #|  &0:real
       #|  \\t:real. &1
-      #|  !t. t < &0\n       ==> (hermite_cutoff has_real_derivative (&0)) (atreal t)
+      #|  forall t. t < &0\n       ==> (hermite_cutoff has_real_derivative (&0)) (atreal t)
       #|  s:real
       #|  t - &1:real
       #|  t:real
       #|  hermite_cutoff
       #|  &0:real
       #|  \\t:real. &0:real
-      #|  !t. &1 < t\n       ==> (hermite_cutoff has_real_derivative (&0)) (atreal t)
+      #|  forall t. &1 < t\n       ==> (hermite_cutoff has_real_derivative (&0)) (atreal t)
       #|  t:real
       #|  &1
       #|  \\t:real. &2 * t pow 3 - &3 * t pow 2 + &1
@@ -88342,7 +88342,7 @@ test "100/green matches 100/green.ml" {
       #|  (hermite_cutoff has_real_derivative (&0)) (atreal (&1))
       #|  t = &1
       #|  t = &0
-      #|  !t. (hermite_cutoff has_real_derivative hermite_cutoff_deriv t) (atreal t)
+      #|  forall t. (hermite_cutoff has_real_derivative hermite_cutoff_deriv t) (atreal t)
       #|  (\\x:real^1. lift(&6 * drop x pow 2 - &6 * drop x)) =\n     (\\x. &6 % lift(x dot x) - &6 % x)
       #|  (:real^1)
       #|  (\\x:real^1. lift(&6 * drop x pow 2 - &6 * drop x)) continuous_on s
@@ -88354,8 +88354,8 @@ test "100/green matches 100/green.ml" {
       #|  (lift o hermite_cutoff_deriv o drop) continuous_on (:real^1)
       #|  drop x
       #|  \\v:real^1. hermite_cutoff_deriv(drop x) % v
-      #|  !x:real^1. (lift o hermite_cutoff o drop) differentiable (at x)
-      #|  !s. (lift o hermite_cutoff o drop) differentiable_on s
+      #|  forall x:real^1. (lift o hermite_cutoff o drop) differentiable (at x)
+      #|  forall s. (lift o hermite_cutoff o drop) differentiable_on s
       #|  (lift o hermite_cutoff o drop) continuous_on (:real^1)
       #|  (norm(z:complex) pow 2 - R pow 2) / c
       #|  (\\h:complex. lift((&2 * (z dot h)) / c)) =\n       (\\h. inv(c) % (\\h. &2 % lift(z dot h)) h + (\\h:complex. vec 0) h)
@@ -88364,13 +88364,13 @@ test "100/green matches 100/green.ml" {
       #|  (\\h:complex. hermite_cutoff_deriv((norm(z:complex) pow 2 - R pow 2) / c) %\n          lift((&2 * (z dot h)) / c)) =\n     (\\v:real^1. hermite_cutoff_deriv((norm z pow 2 - R pow 2) / c) % v) o\n     (\\h:complex. lift((&2 * (z dot h)) / c))
       #|  (\\h:complex. lift(hermite_cutoff_deriv((norm z pow 2 - R pow 2) / c) *\n                       (&2 * (z dot h)) / c)) =\n     (\\h. hermite_cutoff_deriv((norm(z:complex) pow 2 - R pow 2) / c) %\n          lift((&2 * (z dot h)) / c))
       #|  (\\z':complex. lift(hermite_cutoff((norm z' pow 2 - R pow 2) / c))) =\n     (lift o hermite_cutoff o drop) o\n     (\\z':complex. lift((norm z' pow 2 - R pow 2) / c))
-      #|  !R c (z:complex).\n     &0 < c\n     ==> ((\\z'. lift(hermite_cutoff((norm z' pow 2 - R pow 2) / c)))\n          has_derivative\n          (\\h:complex. lift(hermite_cutoff_deriv((norm z pow 2 - R pow 2) / c) *\n                            (&2 * (z dot h)) / c))) (at z)
-      #|  !t. t <= &0 ==> hermite_cutoff t = &1
-      #|  !t. &1 <= t ==> hermite_cutoff t = &0
+      #|  forall R c (z:complex).\n     &0 < c\n     ==> ((\\z'. lift(hermite_cutoff((norm z' pow 2 - R pow 2) / c)))\n          has_derivative\n          (\\h:complex. lift(hermite_cutoff_deriv((norm z pow 2 - R pow 2) / c) *\n                            (&2 * (z dot h)) / c))) (at z)
+      #|  forall t. t <= &0 ==> hermite_cutoff t = &1
+      #|  forall t. &1 <= t ==> hermite_cutoff t = &0
       #|  &2 * t pow 3 - &3 * t pow 2 + &1 = (&1 - t) pow 2 * (&1 + &2 * t)
       #|  &1 <= t
       #|  t <= &0
-      #|  !t. &0 <= hermite_cutoff t
+      #|  forall t. &0 <= hermite_cutoff t
       #|  z - a:complex
       #|  c:real
       #|  R:real
@@ -88380,16 +88380,16 @@ test "100/green matches 100/green.ml" {
       #|  \\h:complex. h
       #|  \\w:complex. lift(hermite_cutoff((norm w pow 2 - R pow 2) / c))
       #|  \\w:complex. w - a
-      #|  !a:complex R c (z:complex).\n     &0 < c\n     ==> ((\\w. lift(hermite_cutoff((norm(w - a) pow 2 - R pow 2) / c)))\n          has_derivative\n          (\\h:complex. lift(hermite_cutoff_deriv\n               ((norm(z - a) pow 2 - R pow 2) / c) *\n               (&2 * ((z - a) dot h)) / c))) (at z)
+      #|  forall a:complex R c (z:complex).\n     &0 < c\n     ==> ((\\w. lift(hermite_cutoff((norm(w - a) pow 2 - R pow 2) / c)))\n          has_derivative\n          (\\h:complex. lift(hermite_cutoff_deriv\n               ((norm(z - a) pow 2 - R pow 2) / c) *\n               (&2 * ((z - a) dot h)) / c))) (at z)
       #|  &0 < c
       #|  (\\z:complex. lift((norm(z - a) pow 2 - R pow 2) / c)) =\n     (\\z. inv(c) % lift((z - a) dot (z - a)) + lift(--(R pow 2 / c)))
-      #|  !a:complex c R s. &0 < c ==>\n    (\\z. lift((norm(z - a) pow 2 - R pow 2) / c)) continuous_on s
+      #|  forall a:complex c R s. &0 < c ==>\n    (\\z. lift((norm(z - a) pow 2 - R pow 2) / c)) continuous_on s
       #|  (:real^1)
       #|  (\\z:complex. lift(hermite_cutoff_deriv\n        ((norm(z - a) pow 2 - R pow 2) / c))) =\n     (lift o hermite_cutoff_deriv o drop) o\n     (\\z. lift((norm(z - a) pow 2 - R pow 2) / c))
-      #|  !a:complex c R s. &0 < c ==>\n    (\\z. lift(hermite_cutoff_deriv((norm(z - a) pow 2 - R pow 2) / c)))\n    continuous_on s
+      #|  forall a:complex c R s. &0 < c ==>\n    (\\z. lift(hermite_cutoff_deriv((norm(z - a) pow 2 - R pow 2) / c)))\n    continuous_on s
       #|  (:real^1)
       #|  (\\z:complex. lift(hermite_cutoff\n        ((norm(z - a) pow 2 - R pow 2) / c))) =\n     (lift o hermite_cutoff o drop) o\n     (\\z. lift((norm(z - a) pow 2 - R pow 2) / c))
-      #|  !a:complex c R s. &0 < c ==>\n    (\\z. lift(hermite_cutoff((norm(z - a) pow 2 - R pow 2) / c)))\n    continuous_on s
+      #|  forall a:complex c R s. &0 < c ==>\n    (\\z. lift(hermite_cutoff((norm(z - a) pow 2 - R pow 2) / c)))\n    continuous_on s
       #|  hermite_cutoff(&1 - sum A (\\a:complex.\n         hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc))) = &1
       #|  &1 <= sum A (\\a:complex. hermite_cutoff(\n            (norm(z - a) pow 2 - r pow 2) / cc))
       #|  z:complex
@@ -88443,7 +88443,7 @@ test "100/green matches 100/green.ml" {
       #|  (\\h':complex. hermite_cutoff_deriv(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(z' - a) pow 2 - r pow 2) / cc))) %\n           ((vec 0):real^1 - vsum A (\\a:complex. lift(\n              hermite_cutoff_deriv(\n                (norm(z' - a) pow 2 - r pow 2) / cc) *\n              (&2 * ((z' - a) dot h')) / cc)))) =\n         (\\v:real^1. hermite_cutoff_deriv(\n            drop(lift(&1 - sum A (\\a:complex. hermite_cutoff(\n              (norm(z' - a) pow 2 - r pow 2) / cc))))) % v) o\n         (\\h'. (vec 0):real^1 - vsum A (\\a:complex. lift(\n              hermite_cutoff_deriv(\n                (norm(z' - a) pow 2 - r pow 2) / cc) *\n              (&2 * ((z' - a) dot h')) / cc)))
       #|  (\\w:complex. lift(hermite_cutoff(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(w - a) pow 2 - r pow 2) / cc))))) =\n         (lift o hermite_cutoff o drop) o\n         (\\w. lift(&1 - sum A (\\a:complex. hermite_cutoff(\n              (norm(w - a) pow 2 - r pow 2) / cc))))
       #|  z':complex
-      #|  !z':complex.\n        ((\\w:complex. lift(hermite_cutoff(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(w - a) pow 2 - r pow 2) / cc)))))\n         has_derivative\n         (\\h':complex. hermite_cutoff_deriv(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(z' - a) pow 2 - r pow 2) / cc))) %\n           ((vec 0):real^1 - vsum A (\\a:complex. lift(\n              hermite_cutoff_deriv(\n                (norm(z' - a) pow 2 - r pow 2) / cc) *\n              (&2 * ((z' - a) dot h')) / cc)))))\n         (at z')
+      #|  forall z':complex.\n        ((\\w:complex. lift(hermite_cutoff(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(w - a) pow 2 - r pow 2) / cc)))))\n         has_derivative\n         (\\h':complex. hermite_cutoff_deriv(&1 -\n            sum A (\\a:complex. hermite_cutoff(\n              (norm(z' - a) pow 2 - r pow 2) / cc))) %\n           ((vec 0):real^1 - vsum A (\\a:complex. lift(\n              hermite_cutoff_deriv(\n                (norm(z' - a) pow 2 - r pow 2) / cc) *\n              (&2 * ((z' - a) dot h')) / cc)))))\n         (at z')
       #|  y:complex
       #|  (:complex) DIFF W
       #|  (\\w:complex. (vec 0):complex)
@@ -88464,7 +88464,7 @@ test "100/green matches 100/green.ml" {
       #|  (z:complex) IN UNIONS(IMAGE (\\x:complex. ball(x, e / &3)) A)
       #|  ?a:complex. a IN A /\\ norm(z - a) < r
       #|  z:complex
-      #|  !z:complex. z IN K\n     ==> &1 <= sum A (\\a. hermite_cutoff(\n           (norm(z - a) pow 2 - r pow 2) / cc))
+      #|  forall z:complex. z IN K\n     ==> &1 <= sum A (\\a. hermite_cutoff(\n           (norm(z - a) pow 2 - r pow 2) / cc))
       #|  hermite_cutoff(&1) = &0
       #|  cball(a:complex, &2 * r) SUBSET W
       #|  ~(z:complex IN cball(a, &2 * r))
@@ -88473,15 +88473,15 @@ test "100/green matches 100/green.ml" {
       #|  b:complex
       #|  y:complex
       #|  b:complex
-      #|  !b:complex. b IN A ==> cball(b, &2 * r) SUBSET W
+      #|  forall b:complex. b IN A ==> cball(b, &2 * r) SUBSET W
       #|  z:complex
-      #|  !z:complex. ~(z IN W)\n     ==> hermite_cutoff(&1 - sum A (\\a:complex.\n           hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc))) %\n         (f:complex->complex) z = vec 0
-      #|  !z:complex a:complex.\n      &0 <= hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc)
+      #|  forall z:complex. ~(z IN W)\n     ==> hermite_cutoff(&1 - sum A (\\a:complex.\n           hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc))) %\n         (f:complex->complex) z = vec 0
+      #|  forall z:complex a:complex.\n      &0 <= hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc)
       #|  x * y <= &0 <=> &0 <= --(x * y)
       #|  norm(z - a:complex) pow 2 <= r pow 2
-      #|  !z:complex a:complex.\n      norm(z - a) <= r\n      ==> hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc) = &1
+      #|  forall z:complex a:complex.\n      norm(z - a) <= r\n      ==> hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc) = &1
       #|  (&2 * r) pow 2 <= norm(z - a:complex) pow 2
-      #|  !z:complex a:complex.\n      &2 * r <= norm(z - a)\n      ==> hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc) = &0
+      #|  forall z:complex a:complex.\n      &2 * r <= norm(z - a)\n      ==> hermite_cutoff((norm(z - a) pow 2 - r pow 2) / cc) = &0
       #|  open((:complex) DIFF W)
       #|  compact(W:complex->bool)
       #|  (W:complex->bool) SUBSET u
@@ -88489,7 +88489,7 @@ test "100/green matches 100/green.ml" {
       #|  t < e ==> x <= t ==> x < e
       #|  ball(a:complex, e)
       #|  a:complex
-      #|  !a:complex. a IN A ==> cball(a, &2 * r) SUBSET u
+      #|  forall a:complex. a IN A ==> cball(a, &2 * r) SUBSET u
       #|  r pow 2 + cc = (&2 * r) pow 2
       #|  &0 < cc
       #|  &0 < r
@@ -88501,7 +88501,7 @@ test "100/green matches 100/green.ml" {
       #|  e:real
       #|  {u:complex->bool}
       #|  K:complex->bool
-      #|  !f:complex->complex u (K:complex->bool).\n    compact K /\\ open u /\\ K SUBSET u /\\\n    f differentiable_on u /\\\n    (!h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n    ==> ?ef:complex->complex.\n        ef differentiable_on (:complex) /\\\n        (!h:complex. (\\z. frechet_derivative ef (at z) h)\n          continuous_on (:complex)) /\\\n        bounded(support (+) ef (:complex)) /\\\n        (!z. z IN K ==> ef z = f z)
+      #|  forall f:complex->complex u (K:complex->bool).\n    compact K /\\ open u /\\ K SUBSET u /\\\n    f differentiable_on u /\\\n    (forall h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n    ==> ?ef:complex->complex.\n        ef differentiable_on (:complex) /\\\n        (forall h:complex. (\\z. frechet_derivative ef (at z) h)\n          continuous_on (:complex)) /\\\n        bounded(support (+) ef (:complex)) /\\\n        (forall z. z IN K ==> ef z = f z)
       #|  x:real^1
       #|  &0 <= x /\\ x <= C ==> abs(x) <= C
       #|  x:real^1
@@ -88518,15 +88518,15 @@ test "100/green matches 100/green.ml" {
       #|  t:real^1
       #|  {x:real^1 | ~((\\y:complex.\n          if x IN interval[vec 0,vec 1]\n          then u y / (y - g x) * vector_derivative g (at x)\n          else vec 0)\n          absolutely_integrable_on (:complex))} = {}
       #|  (\\p:real^(1,2)finite_sum.\n        if fstcart p IN interval[vec 0,vec 1]\n        then u(sndcart p:complex) / (sndcart p - g(fstcart p)) *\n             vector_derivative g (at (fstcart p))\n        else vec 0)\n     measurable_on (:real^(1,2)finite_sum)
-      #|  !w:complex. (\\z. u(z:complex) / (z - w))\n                 absolutely_integrable_on (:complex)
-      #|  !u:complex->complex g:real^1->complex.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1]\n        ==> (\\p:real^(1,2)finite_sum.\n                if fstcart p IN interval[vec 0,vec 1]\n                then u(sndcart p) / (sndcart p - g(fstcart p)) *\n                     vector_derivative g (at (fstcart p))\n                else vec 0)\n            absolutely_integrable_on (:real^(1,2)finite_sum)
+      #|  forall w:complex. (\\z. u(z:complex) / (z - w))\n                 absolutely_integrable_on (:complex)
+      #|  forall u:complex->complex g:real^1->complex.\n        u continuous_on (:complex) /\\\n        bounded (support (+) u (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1]\n        ==> (\\p:real^(1,2)finite_sum.\n                if fstcart p IN interval[vec 0,vec 1]\n                then u(sndcart p) / (sndcart p - g(fstcart p)) *\n                     vector_derivative g (at (fstcart p))\n                else vec 0)\n            absolutely_integrable_on (:real^(1,2)finite_sum)
       #|  --(Cx(&2) * Cx pi * ii) = Cx(&0)
       #|  (\\z:complex. --(Cx(&2) * Cx pi * ii) *\n       (Cx(Re(winding_number(g:real^1->complex,z))) *\n        wirtinger_dbar (f:complex->complex) z))\n     integrable_on (:complex)
       #|  complex_integer(winding_number(g:real^1->complex,z))
       #|  winding_number(g:real^1->complex,z) =\n         Cx(Re(winding_number(g,z)))
       #|  integral (interval[vec 0,vec 1])\n           (\\t:real^1. Cx(&1) / (z - (g:real^1->complex) t) *\n                       vector_derivative g (at t)) =\n         --(Cx(&2) * Cx pi * ii *\n            winding_number(g:real^1->complex,z))
       #|  integral (interval[vec 0,vec 1])\n           (\\t:real^1. wirtinger_dbar (f:complex->complex) z *\n             (Cx(&1) / (z - (g:real^1->complex) t) *\n                 vector_derivative g (at t))) =\n         wirtinger_dbar f z *\n           integral (interval[vec 0,vec 1])\n             (\\t. Cx(&1) / (z - g t) * vector_derivative g (at t))
-      #|  !t:real^1. wirtinger_dbar (f:complex->complex) z /\n           (z - (g:real^1->complex) t) * vector_derivative g (at t) =\n         wirtinger_dbar f z *\n           (Cx(&1) / (z - g t) * vector_derivative g (at t))
+      #|  forall t:real^1. wirtinger_dbar (f:complex->complex) z /\n           (z - (g:real^1->complex) t) * vector_derivative g (at t) =\n         wirtinger_dbar f z *\n           (Cx(&1) / (z - g t) * vector_derivative g (at t))
       #|  t:real^1
       #|  (\\t:real^1. Cx(&1) / (z - (g:real^1->complex) t) *\n                     vector_derivative g (at t)) =\n         (\\t. --(Cx(&1) / (g t - z) * vector_derivative g (at t)))
       #|  (\\w:complex. Cx(&1) / (w - z))\n                     path_integrable_on (g:real^1->complex)
@@ -88541,7 +88541,7 @@ test "100/green matches 100/green.ml" {
       #|  (\\z:complex. --(Cx(&2) * Cx pi * ii) *\n       (Cx(Re(winding_number(g:real^1->complex,z))) *\n        wirtinger_dbar (f:complex->complex) z))\n     integrable_on (:complex)
       #|  g:real^1->complex
       #|  \\z:complex. wirtinger_dbar (f:complex->complex) z
-      #|  !f:complex->complex g:real^1->complex.\n        (\\z. wirtinger_dbar f z) continuous_on (:complex) /\\\n        bounded (support (+) (wirtinger_dbar f) (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> (\\z. Cx(Re(winding_number(g,z))) *\n              wirtinger_dbar f z) integrable_on (:complex)
+      #|  forall f:complex->complex g:real^1->complex.\n        (\\z. wirtinger_dbar f z) continuous_on (:complex) /\\\n        bounded (support (+) (wirtinger_dbar f) (:complex)) /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> (\\z. Cx(Re(winding_number(g,z))) *\n              wirtinger_dbar f z) integrable_on (:complex)
       #|  --(Cx pi) * path_integral g (f:complex->complex) =\n     --(Cx(&2) * Cx pi * ii) *\n     integral (:complex)\n       (\\z. Cx(Re(winding_number(g:real^1->complex,z))) *\n            wirtinger_dbar f z)
       #|  (\\z. wirtinger_dbar (f:complex->complex) z *\n            (--(Cx(&2) * Cx pi * ii *\n                Cx(Re(winding_number(g:real^1->complex,z)))))) =\n       (\\z. --(Cx(&2) * Cx pi * ii) *\n            (Cx(Re(winding_number(g,z))) * wirtinger_dbar f z))
       #|  complex_integer(winding_number(g:real^1->complex,z))
@@ -88561,10 +88561,10 @@ test "100/green matches 100/green.ml" {
       #|  (:complex)
       #|  (f:complex->complex) path_integrable_on g
       #|  (\\z. Cx(Re(winding_number(g:real^1->complex,z))) *\n          wirtinger_dbar (f:complex->complex) z) integrable_on (:complex)
-      #|  !w. integral (:complex)\n           (\\z. wirtinger_dbar (f:complex->complex) z / (z - w)) =\n         --(Cx pi * f w)
+      #|  forall w. integral (:complex)\n           (\\z. wirtinger_dbar (f:complex->complex) z / (z - w)) =\n         --(Cx pi * f w)
       #|  bounded (support (+) (wirtinger_dbar (f:complex->complex)) (:complex))
       #|  (\\z. wirtinger_dbar (f:complex->complex) z) continuous_on (:complex)
-      #|  !f:complex->complex g.\n          f differentiable_on (:complex) /\\\n          (!h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n          bounded (support (+) f (:complex)) /\\\n          g absolutely_continuous_on interval[vec 0,vec 1] /\\\n          pathfinish g = pathstart g\n          ==> (\\z. Cx(Re(winding_number(g,z))) *\n                   wirtinger_dbar f z) integrable_on (:complex) /\\\n              f path_integrable_on g /\\\n              Cx(inv(&2)) / ii * path_integral g f =\n              integral (:complex)\n                (\\z. Cx(Re(winding_number(g,z))) *\n                     wirtinger_dbar f z)
+      #|  forall f:complex->complex g.\n          f differentiable_on (:complex) /\\\n          (forall h. (\\z. frechet_derivative f (at z) h) continuous_on (:complex)) /\\\n          bounded (support (+) f (:complex)) /\\\n          g absolutely_continuous_on interval[vec 0,vec 1] /\\\n          pathfinish g = pathstart g\n          ==> (\\z. Cx(Re(winding_number(g,z))) *\n                   wirtinger_dbar f z) integrable_on (:complex) /\\\n              f path_integrable_on g /\\\n              Cx(inv(&2)) / ii * path_integral g f =\n              integral (:complex)\n                (\\z. Cx(Re(winding_number(g,z))) *\n                     wirtinger_dbar f z)
       #|  path_image(g:real^1->complex)
       #|  integral (:complex)\n              (\\z. Cx(Re(winding_number(g:real^1->complex,z))) *\n                   wirtinger_dbar (ef:complex->complex) z) =\n     integral (:complex)\n              (\\z. Cx(Re(winding_number(g,z))) *\n                   wirtinger_dbar f z)
       #|  z:complex
@@ -88581,19 +88581,19 @@ test "100/green matches 100/green.ml" {
       #|  path_image(g:real^1->complex)
       #|  z IN inside(path_image(g:real^1->complex)) \\/\n       z IN outside(path_image g)
       #|  z:complex
-      #|  !z. ~(z IN path_image(g:real^1->complex)) ==>\n         Cx(Re(winding_number(g,z))) *\n         wirtinger_dbar (ef:complex->complex) z =\n         Cx(Re(winding_number(g,z))) * wirtinger_dbar f z
+      #|  forall z. ~(z IN path_image(g:real^1->complex)) ==>\n         Cx(Re(winding_number(g,z))) *\n         wirtinger_dbar (ef:complex->complex) z =\n         Cx(Re(winding_number(g,z))) * wirtinger_dbar f z
       #|  (\\z. Cx(Re(winding_number(g:real^1->complex,z))) *\n          wirtinger_dbar (ef:complex->complex) z)\n     integrable_on (:complex) /\\\n     ef path_integrable_on g /\\\n     Cx(inv(&2)) / ii * path_integral g ef =\n     integral (:complex)\n       (\\z. Cx(Re(winding_number(g:real^1->complex,z))) *\n            wirtinger_dbar ef z)
       #|  w:complex
       #|  inside(path_image(g:real^1->complex))
       #|  ef:complex->complex
       #|  z:complex
-      #|  !z. z IN inside(path_image g) ==>\n     frechet_derivative (ef:complex->complex) (at z) =\n     frechet_derivative f (at z)
+      #|  forall z. z IN inside(path_image g) ==>\n     frechet_derivative (ef:complex->complex) (at z) =\n     frechet_derivative f (at z)
       #|  open(inside(path_image(g:real^1->complex)))
       #|  ef:complex->complex
       #|  path_image g UNION inside(path_image g):complex->bool
       #|  u:complex->bool
       #|  f:complex->complex
-      #|  !f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (!h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. Cx(Re(winding_number(g,z))) *\n                 wirtinger_dbar f z) integrable_on (:complex) /\\\n            f path_integrable_on g /\\\n            Cx(inv(&2)) / ii * path_integral g f =\n            integral (:complex)\n              (\\z. Cx(Re(winding_number(g,z))) *\n                   wirtinger_dbar f z)
+      #|  forall f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (forall h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. Cx(Re(winding_number(g,z))) *\n                 wirtinger_dbar f z) integrable_on (:complex) /\\\n            f path_integrable_on g /\\\n            Cx(inv(&2)) / ii * path_integral g f =\n            integral (:complex)\n              (\\z. Cx(Re(winding_number(g,z))) *\n                   wirtinger_dbar f z)
       #|  path_image g:complex->bool
       #|  (:complex)
       #|  path_image(g:real^1->complex)
@@ -88601,7 +88601,7 @@ test "100/green matches 100/green.ml" {
       #|  \\z:complex. Cx(Re(winding_number(g:real^1->complex,z))) *\n            wirtinger_dbar (f:complex->complex) z
       #|  path(g:real^1->complex)
       #|  inv(Cx(&2)) / ii * x = y <=> x = Cx(&2) * ii * y
-      #|  !f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (!h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. winding_number(g,z) * wirtinger_dbar f z)\n            integrable_on (:complex) /\\\n            f path_integrable_on g /\\\n            path_integral g f =\n            Cx(&2) * ii *\n            integral (:complex)\n                     (\\z. winding_number(g,z) * wirtinger_dbar f z)
+      #|  forall f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (forall h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. winding_number(g,z) * wirtinger_dbar f z)\n            integrable_on (:complex) /\\\n            f path_integrable_on g /\\\n            path_integral g f =\n            Cx(&2) * ii *\n            integral (:complex)\n                     (\\z. winding_number(g,z) * wirtinger_dbar f z)
       #|  z:complex
       #|  path_image g:complex->bool
       #|  winding_number(g:real^1->complex,z) = Cx(&0)
@@ -88611,27 +88611,27 @@ test "100/green matches 100/green.ml" {
       #|  \\z:complex. if z IN inside(path_image(g:real^1->complex))\n                      then winding_number(g,z) *\n                           wirtinger_dbar (f:complex->complex) z\n                      else vec 0
       #|  \\z:complex. winding_number(g:real^1->complex,z) *\n              wirtinger_dbar (f:complex->complex) z
       #|  (\\z:complex. if z IN inside(path_image(g:real^1->complex))\n                    then winding_number(g,z) *\n                         wirtinger_dbar (f:complex->complex) z\n                    else vec 0)\n       integrable_on (:complex)
-      #|  !f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (!h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. winding_number(g,z) * wirtinger_dbar f z)\n            integrable_on inside(path_image g) /\\\n            f path_integrable_on g /\\\n            path_integral g f =\n            Cx(&2) * ii *\n            integral (inside(path_image g))\n                     (\\z. winding_number(g,z) * wirtinger_dbar f z)
+      #|  forall f:complex->complex g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (forall h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. winding_number(g,z) * wirtinger_dbar f z)\n            integrable_on inside(path_image g) /\\\n            f path_integrable_on g /\\\n            path_integral g f =\n            Cx(&2) * ii *\n            integral (inside(path_image g))\n                     (\\z. winding_number(g,z) * wirtinger_dbar f z)
       #|  cnj
       #|  (:complex)
       #|  g:real^1->complex
       #|  cnj
-      #|  !g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> cnj path_integrable_on g /\\\n            path_integral g cnj =\n            Cx(&2) * ii *\n            integral (inside(path_image g))\n                     (\\z. winding_number(g,z))
+      #|  forall g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> cnj path_integrable_on g /\\\n            path_integral g cnj =\n            Cx(&2) * ii *\n            integral (inside(path_image g))\n                     (\\z. winding_number(g,z))
       #|  inside(path_image(g:real^1->complex))
       #|  \\z:complex. Cx(&1)
       #|  \\z:complex. winding_number(g:real^1->complex,z)
       #|  measurable(inside(path_image(g:real^1->complex)))
       #|  g:real^1->complex
-      #|  !g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (cnj has_path_integral\n            Cx(&2) * ii * Cx(measure(inside(path_image g)))) g
+      #|  forall g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (cnj has_path_integral\n            Cx(&2) * ii * Cx(measure(inside(path_image g)))) g
       #|  (\\z:complex. Cx(&0)) = (\\z. vec 0)
-      #|  !z:complex. frechet_derivative (\\x:complex. x) (at z) = (\\h. h)
+      #|  forall z:complex. frechet_derivative (\\x:complex. x) (at z) = (\\h. h)
       #|  (:complex)
       #|  g:real^1->complex
       #|  I:complex->complex
-      #|  !g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> (I has_path_integral Cx(&0)) g
-      #|  !g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (I has_path_integral Cx(&0)) g
+      #|  forall g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g\n        ==> (I has_path_integral Cx(&0)) g
+      #|  forall g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (I has_path_integral Cx(&0)) g
       #|  path_integral g cnj =\n               Cx(&2) * ii * Cx(measure(inside(path_image g)))
-      #|  !g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> cnj path_integrable_on g /\\\n           Cx(measure(inside(path_image g))) =\n           --ii / Cx(&2) * path_integral g cnj
+      #|  forall g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> cnj path_integrable_on g /\\\n           Cx(measure(inside(path_image g))) =\n           --ii / Cx(&2) * path_integral g cnj
       #|  &0 <= x ==> x = (&2 * abs x) / &2
       #|  inside(path_image(g:real^1->complex))
       #|  \\z:complex. --Cx(&1)
@@ -88644,14 +88644,14 @@ test "100/green matches 100/green.ml" {
       #|  g:real^1->complex
       #|  measurable(inside(path_image g):complex->bool)
       #|  g:real^1->complex
-      #|  !g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> cnj path_integrable_on g /\\\n            measure(inside(path_image g)) =\n            norm(path_integral g cnj) / &2
+      #|  forall g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> cnj path_integrable_on g /\\\n            measure(inside(path_image g)) =\n            norm(path_integral g cnj) / &2
       #|  z:complex
       #|  integral (inside(path_image g))\n         (\\z. winding_number(g:real^1->complex,z) * wirtinger_dbar f z) =\n       integral (inside(path_image g)) (wirtinger_dbar f)
       #|  u:complex->bool
       #|  g:real^1->complex
       #|  f:complex->complex
-      #|  !f:complex->complex g u.\n          g absolutely_continuous_on interval[vec 0,vec 1] /\\\n          pathfinish g = pathstart g /\\\n          (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1)) /\\\n          open u /\\\n          inside(path_image g) UNION path_image g SUBSET u /\\\n          f differentiable_on u /\\\n          (!h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n          ==> ((\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                         f(g t)$1 * vector_derivative g (at t) $2))\n               has_integral\n               lift(Im(Cx(&2) * ii *\n                       integral (inside(path_image g))\n                                (wirtinger_dbar f))))\n              (interval[vec 0,vec 1])
-      #|  !f:complex->complex z.\n          Im(Cx(&2) * ii * wirtinger_dbar f z) =\n          frechet_derivative f (at z) (Cx(&1)) $1 -\n          frechet_derivative f (at z) ii $2
+      #|  forall f:complex->complex g u.\n          g absolutely_continuous_on interval[vec 0,vec 1] /\\\n          pathfinish g = pathstart g /\\\n          (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1)) /\\\n          open u /\\\n          inside(path_image g) UNION path_image g SUBSET u /\\\n          f differentiable_on u /\\\n          (forall h:complex. (\\z. frechet_derivative f (at z) h) continuous_on u)\n          ==> ((\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                         f(g t)$1 * vector_derivative g (at t) $2))\n               has_integral\n               lift(Im(Cx(&2) * ii *\n                       integral (inside(path_image g))\n                                (wirtinger_dbar f))))\n              (interval[vec 0,vec 1])
+      #|  forall f:complex->complex z.\n          Im(Cx(&2) * ii * wirtinger_dbar f z) =\n          frechet_derivative f (at z) (Cx(&1)) $1 -\n          frechet_derivative f (at z) ii $2
       #|  (\\z:complex. lift(Im(Cx(&2) * ii * z))) =\n       (\\x:complex. lift(x$2)) o (\\z:complex. Cx(&2) * ii * z)
       #|  linear(\\z:complex. lift(Im(Cx(&2) * ii * z)))
       #|  z:complex
@@ -88671,20 +88671,20 @@ test "100/green matches 100/green.ml" {
       #|  z:complex
       #|  \\z:complex. winding_number(g:real^1->complex,z) *\n                   wirtinger_dbar (f:complex->complex) z
       #|  wirtinger_dbar (f:complex->complex) integrable_on\n     inside(path_image g)
-      #|  !f:real^2->real^2 g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1)) /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (!h:real^2. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. lift(frechet_derivative f (at z) (basis 1) $1 -\n                      frechet_derivative f (at z) (basis 2) $2))\n            integrable_on inside(path_image g) /\\\n            (\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                      f(g t)$1 * vector_derivative g (at t) $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            integral (interval[vec 0,vec 1])\n              (\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                        f(g t)$1 * vector_derivative g (at t) $2)) =\n            integral (inside(path_image g))\n              (\\z. lift(frechet_derivative f (at z) (basis 1) $1 -\n                        frechet_derivative f (at z) (basis 2) $2))
+      #|  forall f:real^2->real^2 g u.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        pathfinish g = pathstart g /\\\n        (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1)) /\\\n        open u /\\\n        inside(path_image g) UNION path_image g SUBSET u /\\\n        f differentiable_on u /\\\n        (forall h:real^2. (\\z. frechet_derivative f (at z) h) continuous_on u)\n        ==> (\\z. lift(frechet_derivative f (at z) (basis 1) $1 -\n                      frechet_derivative f (at z) (basis 2) $2))\n            integrable_on inside(path_image g) /\\\n            (\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                      f(g t)$1 * vector_derivative g (at t) $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            integral (interval[vec 0,vec 1])\n              (\\t. lift(f(g t)$2 * vector_derivative g (at t) $1 +\n                        f(g t)$1 * vector_derivative g (at t) $2)) =\n            integral (inside(path_image g))\n              (\\z. lift(frechet_derivative f (at z) (basis 1) $1 -\n                        frechet_derivative f (at z) (basis 2) $2))
       #|  lift(measure(inside(path_image(g:real^1->complex)))) =\n     inv(&2) % (lift (&2 * measure(inside(path_image g))) +\n                (vec 0:real^1))
-      #|  !t:real^1. lift(Re (g t) * Im (vector_derivative g (at t))) =\n     inv(&2) %\n       (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                --Im (g t) * Re (vector_derivative g (at t))) +\n        lift (Re (g t) * Im (vector_derivative g (at t)) +\n                Im (g t) * Re (vector_derivative g (at t))))
+      #|  forall t:real^1. lift(Re (g t) * Im (vector_derivative g (at t))) =\n     inv(&2) %\n       (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                --Im (g t) * Re (vector_derivative g (at t))) +\n        lift (Re (g t) * Im (vector_derivative g (at t)) +\n                Im (g t) * Re (vector_derivative g (at t))))
       #|  g:real^1->complex
       #|  g:real^1->complex
-      #|  !g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (\\t. lift(g t $1 * vector_derivative g (at t) $2))\n           integrable_on interval[vec 0,vec 1] /\\\n           integral (interval[vec 0,vec 1])\n             (\\t. lift(g t $1 * vector_derivative g (at t) $2)) =\n           lift(measure(inside(path_image g)))
+      #|  forall g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (\\t. lift(g t $1 * vector_derivative g (at t) $2))\n           integrable_on interval[vec 0,vec 1] /\\\n           integral (interval[vec 0,vec 1])\n             (\\t. lift(g t $1 * vector_derivative g (at t) $2)) =\n           lift(measure(inside(path_image g)))
       #|  --lift(measure(inside(path_image(g:real^1->complex)))) =\n     --inv(&2) % (lift (&2 * measure(inside(path_image g))) -\n                  (vec 0:real^1))
-      #|  !t:real^1. lift(Re (vector_derivative g (at t)) * Im (g t)) =\n     --inv(&2) %\n       (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                --Im (g t) * Re (vector_derivative g (at t))) -\n        lift (Re (g t) * Im (vector_derivative g (at t)) +\n                Im (g t) * Re (vector_derivative g (at t))))
+      #|  forall t:real^1. lift(Re (vector_derivative g (at t)) * Im (g t)) =\n     --inv(&2) %\n       (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                --Im (g t) * Re (vector_derivative g (at t))) -\n        lift (Re (g t) * Im (vector_derivative g (at t)) +\n                Im (g t) * Re (vector_derivative g (at t))))
       #|  g:real^1->complex
       #|  g:real^1->complex
-      #|  !g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (!z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (\\t. lift(vector_derivative g (at t) $1 * g t $2))\n           integrable_on interval[vec 0,vec 1] /\\\n           integral (interval[vec 0,vec 1])\n             (\\t. lift(vector_derivative g (at t) $1 * g t $2)) =\n           --lift(measure(inside(path_image g)))
+      #|  forall g. g absolutely_continuous_on interval[vec 0,vec 1] /\\\n       pathfinish g = pathstart g /\\\n       (forall z. z IN inside(path_image g) ==> winding_number(g,z) = Cx(&1))\n       ==> (\\t. lift(vector_derivative g (at t) $1 * g t $2))\n           integrable_on interval[vec 0,vec 1] /\\\n           integral (interval[vec 0,vec 1])\n             (\\t. lift(vector_derivative g (at t) $1 * g t $2)) =\n           --lift(measure(inside(path_image g)))
       #|  &0 <= x ==> abs x = x
       #|  --lift(measure(inside(path_image(g:real^1->complex)))) =\n       inv(&2) % (lift (&2 * --measure(inside(path_image g))) +\n                  (vec 0:real^1))
-      #|  !t:real^1. lift(Re (g t) * Im (vector_derivative g (at t))) =\n       inv(&2) %\n         (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  --(Im (g t) * Re (vector_derivative g (at t)))) +\n          lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  Im (g t) * Re (vector_derivative g (at t))))
+      #|  forall t:real^1. lift(Re (g t) * Im (vector_derivative g (at t))) =\n       inv(&2) %\n         (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  --(Im (g t) * Re (vector_derivative g (at t)))) +\n          lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  Im (g t) * Re (vector_derivative g (at t))))
       #|  ((\\t:real^1. lift(Re(g t) * Im(vector_derivative g (at t))))\n      has_integral --lift(measure(inside(path_image(g:real^1->complex)))))\n     (interval[vec 0,vec 1])
       #|  (I has_path_integral Cx(&0)) (g:real^1->complex)
       #|  (cnj has_path_integral\n      Cx(&2) * ii * --Cx(measure(inside(path_image g))))\n     (g:real^1->complex)
@@ -88698,10 +88698,10 @@ test "100/green matches 100/green.ml" {
       #|  &0 <= x ==> abs x = x
       #|  g:real^1->complex
       #|  g:real^1->complex
-      #|  !g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> (\\t. lift(g t $1 * vector_derivative g (at t) $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n              (\\t. lift(g t $1 * vector_derivative g (at t) $2))) =\n            measure(inside(path_image g))
+      #|  forall g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> (\\t. lift(g t $1 * vector_derivative g (at t) $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n              (\\t. lift(g t $1 * vector_derivative g (at t) $2))) =\n            measure(inside(path_image g))
       #|  &0 <= x ==> abs x = x
       #|  lift(measure(inside(path_image(g:real^1->complex)))) =\n       --inv(&2) % (lift (&2 * --measure(inside(path_image g))) -\n                    (vec 0:real^1))
-      #|  !t:real^1. lift(Re(vector_derivative g (at t)) * Im(g t)) =\n       --inv(&2) %\n         (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  --(Im (g t) * Re (vector_derivative g (at t)))) -\n          lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  Im (g t) * Re (vector_derivative g (at t))))
+      #|  forall t:real^1. lift(Re(vector_derivative g (at t)) * Im(g t)) =\n       --inv(&2) %\n         (lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  --(Im (g t) * Re (vector_derivative g (at t)))) -\n          lift (Re (g t) * Im (vector_derivative g (at t)) +\n                  Im (g t) * Re (vector_derivative g (at t))))
       #|  ((\\t:real^1. lift(Re(vector_derivative g (at t)) * Im(g t)))\n      has_integral lift(measure(inside(path_image(g:real^1->complex)))))\n     (interval[vec 0,vec 1])
       #|  (I has_path_integral Cx(&0)) (g:real^1->complex)
       #|  (cnj has_path_integral\n      Cx(&2) * ii * --Cx(measure(inside(path_image g))))\n     (g:real^1->complex)
@@ -88715,7 +88715,7 @@ test "100/green matches 100/green.ml" {
       #|  &0 <= x ==> abs x = x
       #|  g:real^1->complex
       #|  g:real^1->complex
-      #|  !g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> (\\t. lift(vector_derivative g (at t) $1 * g t $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n              (\\t. lift(vector_derivative g (at t) $1 * g t $2))) =\n            measure(inside(path_image g))
+      #|  forall g:real^1->complex.\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        simple_path g /\\ pathfinish g = pathstart g\n        ==> (\\t. lift(vector_derivative g (at t) $1 * g t $2))\n            integrable_on interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n              (\\t. lift(vector_derivative g (at t) $1 * g t $2))) =\n            measure(inside(path_image g))
       #|wirtinger_dbar =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#wirtinger_dbar:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) z:cart(real,tybit0(1)))) ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#complex:fun(prod(real,real),cart(real,tybit0(1))) ((#,:fun(real,fun(real,prod(real,real))) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
       #|wirtinger_dz =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#wirtinger_dz:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) z:cart(real,tybit0(1)))) ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#complex:fun(prod(real,real),cart(real,tybit0(1))) ((#,:fun(real,fun(real,prod(real,real))) ((#real_add:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) ((#$:fun(cart(cart(real,tybit0(1)),tybit0(1)),fun(num,cart(real,tybit0(1)))) ((#jacobian:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),cart(cart(real,tybit0(1)),tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
       #|WIRTINGER_DBAR_EQ_ZERO =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#wirtinger_dbar:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) z:cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))))))))

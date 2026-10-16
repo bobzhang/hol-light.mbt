@@ -74,18 +74,18 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  \\k. &1 / &(FACT k) * x pow k
       #|  n:num
       #|  0
-      #|  !x n. &0 <= x ==> \n     sum (0..n) (\\k. inv (&(FACT k)) * x pow k) <= exp x
+      #|  forall x n. &0 <= x ==> \n     sum (0..n) (\\k. inv (&(FACT k)) * x pow k) <= exp x
       #|  0
       #|  x:real
-      #|  !x. &0 <= x ==> &1 <= exp x
-      #|  !x. &0 <= x ==> exp (--x) <= &1
+      #|  forall x. &0 <= x ==> &1 <= exp x
+      #|  forall x. &0 <= x ==> exp (--x) <= &1
       #|  --x = -- &1 * x
-      #|  !k. &1 / &(FACT k) * --x pow k = (-- &1) pow k / &(FACT k) * x pow k
+      #|  forall k. &1 / &(FACT k) * --x pow k = (-- &1) pow k / &(FACT k) * x pow k
       #|  --x:real
-      #|  !x. ((\\k. (-- &1) pow k / &(FACT k) * x pow k) real_sums exp (--x)) (from 0)
-      #|  !x. real_infsum (from 0) (\\k. (-- &1) pow k / &(FACT k) * x pow k) = exp (--x)
+      #|  forall x. ((\\k. (-- &1) pow k / &(FACT k) * x pow k) real_sums exp (--x)) (from 0)
+      #|  forall x. real_infsum (from 0) (\\k. (-- &1) pow k / &(FACT k) * x pow k) = exp (--x)
       #|  a <= b <=> a * 1 <= b
-      #|  !n. n <= FACT n
+      #|  forall n. n <= FACT n
       #|  &1 / a = inv a
       #|  a <= b <=> a <= b * &1
       #|  1
@@ -93,7 +93,7 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  1 + (k + 1) + k = 2 * (k + 1)
       #|  (a / b * r) * (c / d * t) <= &0 \n\t\t <=> &0 <= ((-- &1 pow 1 * a * c) * (r * t)) / b / d
       #|  &1 / a = inv a
-      #|  !x. &0 <= x /\\ x <= &1\n     ==> (!k. abs ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) \n \t        <= abs ((-- &1) pow k / &(FACT k) * x pow k) /\\\n              ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) * \n\t         ((-- &1) pow k / &(FACT k) * x pow k) <= &0) /\\\n         ((\\k. (-- &1) pow k / &(FACT k) * x pow k) ---> &0) sequentially
+      #|  forall x. &0 <= x /\\ x <= &1\n     ==> (forall k. abs ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) \n \t        <= abs ((-- &1) pow k / &(FACT k) * x pow k) /\\\n              ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) * \n\t         ((-- &1) pow k / &(FACT k) * x pow k) <= &0) /\\\n         ((\\k. (-- &1) pow k / &(FACT k) * x pow k) ---> &0) sequentially
       #|  &0 <= x ==> abs x = x
       #|  abs (-- &1 pow (2 * m) / &(FACT (2 * m)) * x pow (2 * m)) = f (2 * m)
       #|  sum (0..2 * m) f = sum (0..SUC (2 * m - 1)) f
@@ -105,7 +105,7 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  &1 / &1 * &1 = &1
       #|  n = 0
       #|  f = \\k. (-- &1) pow k / &(FACT k) * x pow k
-      #|  !x n. &0 <= x /\\ x <= &1 /\\ EVEN n ==>\n     exp (--x) <= sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k)
+      #|  forall x n. &0 <= x /\\ x <= &1 /\\ EVEN n ==>\n     exp (--x) <= sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k)
       #|  &0 <= x ==> abs x = x
       #|  abs (-- &1 pow (SUC (2 * m)) / &(FACT (SUC (2 * m))) * x pow SUC (2 * m)) = \n\t --f (SUC (2 * m))
       #|  SUC a - 1 = a
@@ -113,11 +113,11 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  0
       #|  f:num->real
       #|  f = \\k. (-- &1) pow k / &(FACT k) * x pow k
-      #|  !x n. &0 <= x /\\ x <= &1 /\\ ODD n ==>\n     sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k) <= exp (--x)
+      #|  forall x n. &0 <= x /\\ x <= &1 /\\ ODD n ==>\n     sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k) <= exp (--x)
       #|  ~(&k = &0)
       #|  a * b / a = b * (a / a)
-      #|  !x k. 0 < k ==> exp (x / &k) pow k = exp x
-      #|  !x k. 0 < k ==> inv (exp (--x / &k) pow k) = exp x
+      #|  forall x k. 0 < k ==> exp (x / &k) pow k = exp x
+      #|  forall x k. 0 < k ==> inv (exp (--x / &k) pow k) = exp x
       #|  &1 / a = inv a
       #|  a <= b <=> a <= b * &1
       #|  1
@@ -127,7 +127,7 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  0 <= t + 1
       #|  (a / b * r) * (c / d * t) <= &0 \n\t\t <=> &0 <= ((-- &1 pow 1 * a * c) * (r * t)) / b / d
       #|  &1 / a = inv a
-      #|  !x. &0 <= x /\\ x <= &1\n     ==> let f = (\\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)) in\n       (!k. abs (f (k + 1)) <= abs (f k) /\\ f (k + 1) * f k <= &0) /\\\n       (f ---> &0) sequentially
+      #|  forall x. &0 <= x /\\ x <= &1\n     ==> let f = (\\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)) in\n       (forall k. abs (f (k + 1)) <= abs (f k) /\\ f (k + 1) * f k <= &0) /\\\n       (f ---> &0) sequentially
       #|  &0 <= x ==> abs x = x
       #|  abs (f (2 * m)) = f (2 * m)
       #|  sum (0..2 * m) f = sum (0..SUC (2 * m - 1)) f
@@ -141,7 +141,7 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  a * b / c * d = b / c * (a * d)
       #|  x * sum (0..n) (\\k. -- &1 pow k / &(k + 1) * x pow k) \n\t                = sum (0..n) f
       #|  f = \\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)
-      #|  !x n. &0 <= x /\\ x < &1 /\\ EVEN n /\\ 0 < n ==>\n     log (&1 + x) <= x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k)
+      #|  forall x n. &0 <= x /\\ x < &1 /\\ EVEN n /\\ 0 < n ==>\n     log (&1 + x) <= x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k)
       #|  --(-- &1 / b * c) = inv b * c
       #|  &0 <= --x ==> abs x = --x
       #|  abs (f (SUC (2 * m))) = --f (SUC (2 * m))
@@ -156,11 +156,11 @@ test "Formal_ineqs/trig/exp_log matches Formal_ineqs/trig/exp_log.ml" {
       #|  a * b / c * d = b / c * (a * d)
       #|  x * sum (0..n) (\\k. -- &1 pow k / &(k + 1) * x pow k) \n\t                = sum (0..n) f
       #|  f = \\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)
-      #|  !x n. &0 <= x /\\ x < &1 /\\ ODD n ==>\n     x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k) <= log (&1 + x)
+      #|  forall x n. &0 <= x /\\ x < &1 /\\ ODD n ==>\n     x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k) <= log (&1 + x)
       #|  &0 < &2
-      #|  !k y. &0 < y ==> log (&2 pow k * y) = &k * log (&2) + log y
+      #|  forall k y. &0 < y ==> log (&2 pow k * y) = &k * log (&2) + log y
       #|  &0 < &2
-      #|  !k y. &0 < y ==> log (y / (&2 pow k)) = log y - &k * log (&2)
+      #|  forall k y. &0 < y ==> log (y / (&2 pow k)) = log y - &k * log (&2)
       #|Exp_log.exp_pos_poly_lower_bound =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\k:num. ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) (#real_of_num:fun(num,real) (#FACT:fun(num,num) k:num)))) ((#real_pow:fun(real,fun(num,real)) x:real) k:num))))) (#exp:fun(real,real) x:real)))))))
       #|Exp_log.exp_ge1 =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#exp:fun(real,real) x:real)))))
       #|Exp_log.neg_exp_le1 =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#exp:fun(real,real) (#real_neg:fun(real,real) x:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

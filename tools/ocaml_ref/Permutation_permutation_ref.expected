@@ -5664,23 +5664,23 @@ Warning: inventing type variables
 Permutation/permutation quotations (19):
   REVPERM 0 = [] /\\\n   REVPERM (SUC n) = n :: REVPERM n
   \\n. n + 1
-  !n m. MEM m (REVPERM n) <=> m < n
-  !n. LIST_UNIQ (REVPERM n)
-  !n. DELETE1 n (REVPERM (SUC n)) = REVPERM n
-  !n i. COUNT i (REVPERM n) = if i < n then 1 else 0
-  !n. set_of_list (REVPERM n) = {m | m < n}
-  !l. PERMUTATION l <=> REVPERM (LENGTH l) PERMUTED l
+  forall n m. MEM m (REVPERM n) <=> m < n
+  forall n. LIST_UNIQ (REVPERM n)
+  forall n. DELETE1 n (REVPERM (SUC n)) = REVPERM n
+  forall n i. COUNT i (REVPERM n) = if i < n then 1 else 0
+  forall n. set_of_list (REVPERM n) = {m | m < n}
+  forall l. PERMUTATION l <=> REVPERM (LENGTH l) PERMUTED l
   PERMUTATION []
-  !l. PERMUTATION l ==> LIST_UNIQ l
-  !l. PERMUTATION l ==> (!i. MEM i l <=> i < LENGTH l)
-  !l. PERMUTATION l <=> (!x. COUNT x l = if x < LENGTH l then 1 else 0)
-  !l1 l2. LIST_UNIQ l1 /\\ LIST_UNIQ l2\n           ==> (l1 PERMUTED l2 <=> set_of_list l1 = set_of_list l2)
-  !l l':A list.\n        LIST_UNIQ l /\\ LENGTH l = LENGTH l' /\\ (!x. MEM x l <=> MEM x l')\n        ==> l PERMUTED l'
+  forall l. PERMUTATION l ==> LIST_UNIQ l
+  forall l. PERMUTATION l ==> (forall i. MEM i l <=> i < LENGTH l)
+  forall l. PERMUTATION l <=> (forall x. COUNT x l = if x < LENGTH l then 1 else 0)
+  forall l1 l2. LIST_UNIQ l1 /\\ LIST_UNIQ l2\n           ==> (l1 PERMUTED l2 <=> set_of_list l1 = set_of_list l2)
+  forall l l':A list.\n        LIST_UNIQ l /\\ LENGTH l = LENGTH l' /\\ (forall x. MEM x l <=> MEM x l')\n        ==> l PERMUTED l'
   LIST_UNIQ (l:num list)
-  !l. PERMUTATION l <=> set_of_list l = {n | n < LENGTH l}
-  !l. (!n. n < LENGTH l ==> MEM n l) ==> PERMUTATION l
-  !l. LIST_UNIQ l /\\ (!n. MEM n l ==> n < LENGTH l) ==> PERMUTATION l
-  !l. PERMUTATION l <=> LIST_UNIQ l /\\ (!n. MEM n l ==> n < LENGTH l)
+  forall l. PERMUTATION l <=> set_of_list l = {n | n < LENGTH l}
+  forall l. (forall n. n < LENGTH l ==> MEM n l) ==> PERMUTATION l
+  forall l. LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l) ==> PERMUTATION l
+  forall l. PERMUTATION l <=> LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l)
 REVPERM =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(num),fun(list(num),bool)) (#REVPERM:fun(num,list(num)) (#NUMERAL:fun(num,num) #_0:num))) #NIL:list(num))) ((#=:fun(list(num),fun(list(num),bool)) (#REVPERM:fun(num,list(num)) (#SUC:fun(num,num) n:num))) ((#CONS:fun(num,fun(list(num),list(num))) n:num) (#REVPERM:fun(num,list(num)) n:num))))
 MEM_REVPERM =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#MEM:fun(num,fun(list(num),bool)) m:num) (#REVPERM:fun(num,list(num)) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
 LIST_UNIQ_REVPERM =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#LIST_UNIQ:fun(list(num),bool) (#REVPERM:fun(num,list(num)) n:num))))

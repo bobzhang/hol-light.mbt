@@ -79203,14 +79203,14 @@ test "100/descartes matches 100/descartes.ml" {
       #|0..0..solved at 2
       #|100/descartes quotations (354):
       #|  a * b < &0 <=> &0 < a * --b
-      #|  !a b:real. a * b < &0 <=> &0 < a /\\ b < &0 \\/ a < &0 /\\ &0 < b
+      #|  forall a b:real. a * b < &0 <=> &0 < a /\\ b < &0 \\/ a < &0 /\\ &0 < b
       #|  {p,q | p IN s /\\ q IN t /\\ R p q} =\n    {p,q | p IN s /\\ q IN {q | q IN t /\\ R p q}}
       #|  FINITE s ==> FINITE {p,q | p IN s /\\ q IN s /\\ P p q}
-      #|  variation s (a:num->real) =\n     CARD {(p,q) | p IN s /\\ q IN s /\\ p < q /\\\n                   a(p) * a(q) < &0 /\\\n                   !i. i IN s /\\ p < i /\\ i < q ==> a(i) = &0 }
-      #|  !a b s. (!i. i IN s ==> a i = b i) ==> variation s a = variation s b
-      #|  !a s t. t SUBSET s /\\ (!i. i IN (s DIFF t) ==> a i = &0)\n           ==> variation s a = variation t a
+      #|  variation s (a:num->real) =\n     CARD {(p,q) | p IN s /\\ q IN s /\\ p < q /\\\n                   a(p) * a(q) < &0 /\\\n                   forall i. i IN s /\\ p < i /\\ i < q ==> a(i) = &0 }
+      #|  forall a b s. (forall i. i IN s ==> a i = b i) ==> variation s a = variation s b
+      #|  forall a s t. t SUBSET s /\\ (forall i. i IN (s DIFF t) ==> a i = &0)\n           ==> variation s a = variation t a
       #|  ~(a /\\ b) <=> ~b \\/ ~a
-      #|  !a s n.\n        FINITE s /\\ n IN s /\\ ~(a n = &0)\n        ==> variation s a = variation {i | i IN s /\\ i <= n} a +\n                            variation {i | i IN s /\\ n <= i} a
+      #|  forall a s n.\n        FINITE s /\\ n IN s /\\ ~(a n = &0)\n        ==> variation s a = variation {i | i IN s /\\ i <= n} a +\n                            variation {i | i IN s /\\ n <= i} a
       #|  n:num
       #|  n:num
       #|  n:num
@@ -79241,10 +79241,10 @@ test "100/descartes matches 100/descartes.ml" {
       #|  n:num
       #|  n:num
       #|  a /\\ b /\\ c ==> d <=> b /\\ c ==> a ==> d
-      #|  !a m n p. n IN m..p /\\ ~(a n = &0)\n             ==> variation(m..p) a = variation(m..n) a + variation(n..p) a
+      #|  forall a m n p. n IN m..p /\\ ~(a n = &0)\n             ==> variation(m..p) a = variation(m..n) a + variation(n..p) a
       #|  s = {} ==> CARD s = 0
       #|  p:num = n /\\ q = n /\\ p < q /\\ X <=> F
-      #|  !a n. variation {n} a = 0
+      #|  forall a n. variation {n} a = 0
       #|  s = {} ==> CARD s = 0
       #|  {p,q | p = a /\\ q = b} = {(a,b)}
       #|  a m * a(n:num) < &0
@@ -79252,16 +79252,16 @@ test "100/descartes matches 100/descartes.ml" {
       #|  (p = m /\\ q = n) /\\ X p q <=>\n                         (p = m /\\ q = n) /\\ X m n
       #|  m:num < n\n      ==> ((p = m \\/ p = n) /\\ (q = m \\/ q = n) /\\ p < q <=>\n           p = m /\\ q = n)
       #|  a /\\ b /\\ c /\\ d /\\ e <=> (a /\\ b /\\ c) /\\ d /\\ e
-      #|  !a m n. variation {m,n} a = if a(m) * a(n) < &0 then 1 else 0
+      #|  forall a m n. variation {m,n} a = if a(m) * a(n) < &0 then 1 else 0
       #|  n:num
       #|  {m:num,n,p}
       #|  a:num->real
-      #|  !a m n p.\n        m < n /\\ n < p\n        ==> variation {m,n,p} a = if a(n) = &0 then variation{m,p} a\n                                  else variation {m,n} a + variation{n,p} a
+      #|  forall a m n p.\n        m < n /\\ n < p\n        ==> variation {m,n,p} a = if a(n) = &0 then variation{m,p} a\n                                  else variation {m,n} a + variation{n,p} a
       #|  i - p:num
       #|  y < &0 ==> x = y ==> x < &0
       #|  \\(i:num,j). i + p,j + p
       #|  \\(i:num,j). i - p,j - p
-      #|  !p m n a. variation(m+p..n+p) a = variation(m..n) (\\i. a(i + p))
+      #|  forall p m n a. variation(m+p..n+p) a = variation(m..n) (\\i. a(i + p))
       #|  x:int = y + --z <=> x + z = y
       #|  1 < p ==> ~(p = 1)
       #|  0
@@ -79282,7 +79282,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  (b:num->real) p = a p
       #|  0 < i ==> 0 + 1 <= i
       #|  i:num
-      #|  !i. 0 < i /\\ i < p ==> b i = &0
+      #|  forall i. 0 < i /\\ i < p ==> b i = &0
       #|  a 0 + a 1 = &0
       #|  a + b:int = c + d <=> d = (a + b) - c
       #|  a + b:int = c + d ==> c = (a + b) - d
@@ -79310,16 +79310,16 @@ test "100/descartes matches 100/descartes.ml" {
       #|  0
       #|  n = 0
       #|  n:num
-      #|  !n a b.\n        ~(a n = &0) /\\ (b n = &0) /\\ (!m. sum(0..m) a = b m)\n        ==> ?d. ODD d /\\ variation (0..n) a = variation (0..n) b + d
+      #|  forall n a b.\n        ~(a n = &0) /\\ (b n = &0) /\\ (forall m. sum(0..m) a = b m)\n        ==> ?d. ODD d /\\ variation (0..n) a = variation (0..n) b + d
       #|  1
       #|  1
       #|  0
       #|  ODD(variation(m..p) a + variation(p..n) a)
       #|  p:num
       #|  ODD(variation {m,n} a)
-      #|  !i:num. m < i /\\ i < n ==> a i = &0
+      #|  forall i:num. m < i /\\ i < n ==> a i = &0
       #|  n - m:num
-      #|  !a m n.\n    m <= n /\\ ~(a m = &0) /\\ ~(a n = &0)\n    ==> (ODD(variation(m..n) a) <=> a m * a n < &0)
+      #|  forall a m n.\n    m <= n /\\ ~(a m = &0) /\\ ~(a n = &0)\n    ==> (ODD(variation(m..n) a) <=> a m * a n < &0)
       #|  m:num
       #|  p:num
       #|  m:num
@@ -79346,7 +79346,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  B = sum (0..n-1) (\\i. abs(a i)) / abs(a n)
       #|  &1
       #|  n = 0
-      #|  !a n. ~(a n = &0)\n         ==> ?B. &0 < B /\\\n                 !x. B <= abs x\n                     ==> real_sgn(sum(0..n) (\\i. a i * x pow i)) =\n                         real_sgn(a n * x pow n)
+      #|  forall a n. ~(a n = &0)\n         ==> ?B. &0 < B /\\\n                 forall x. B <= abs x\n                     ==> real_sgn(sum(0..n) (\\i. a i * x pow i)) =\n                         real_sgn(a n * x pow n)
       #|  y:real = &0
       #|  y:real
       #|  &0
@@ -79359,12 +79359,12 @@ test "100/descartes matches 100/descartes.ml" {
       #|  n:num
       #|  a:num->real
       #|  ?x. &0 < x /\\ &0 <= sum(0..n) (\\i. a i * x pow i)
-      #|  !a n. a 0 < &0 /\\ &0 < a n\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
+      #|  forall a n. a 0 < &0 /\\ &0 < a n\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
       #|  p:num
       #|  (a:num->real) q = &0
       #|  (aq * xp) * api / aq * xi:real = (aq / aq) * api * (xp * xi)
       #|  (a:num->real) q * x pow p
-      #|  !a. y = a * x ==> x = &0 ==> y = &0
+      #|  forall a. y = a * x ==> x = &0 ==> y = &0
       #|  x:real
       #|  x < &0 <=> &0 < --x
       #|  p:num <= q ==> p + q - p = q
@@ -79379,16 +79379,16 @@ test "100/descartes matches 100/descartes.ml" {
       #|  p ==> ~(q /\\ r) <=> p /\\ q ==> ~r
       #|  a ==> b ==> c <=> a ==> a /\\ b ==> c
       #|  variation (0..n) a = variation {0} a
-      #|  ((!i. P i ==> Q i) ==> F) ==> ?i. P i /\\ ~Q i
+      #|  ((forall i. P i ==> Q i) ==> F) ==> ?i. P i /\\ ~Q i
       #|  ?i. i IN 0..n /\\ ~(a i = &0)
       #|  n:num
-      #|  ?M. !i. i IN 0..n /\\ ~(a i = &0) ==> i <= M
-      #|  !a n. ODD(variation(0..n) a)\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
-      #|  multiplicity f r =\n        @k. ?a n. ~(sum(0..n) (\\i. a i * r pow i) = &0) /\\\n                  !x. f(x) = (x - r) pow k * sum(0..n) (\\i. a i * x pow i)
+      #|  ?M. forall i. i IN 0..n /\\ ~(a i = &0) ==> i <= M
+      #|  forall a n. ODD(variation(0..n) a)\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
+      #|  multiplicity f r =\n        @k. ?a n. ~(sum(0..n) (\\i. a i * r pow i) = &0) /\\\n                  forall x. f(x) = (x - r) pow k * sum(0..n) (\\i. a i * x pow i)
       #|  &0 = &0 * (g:real->real) r
       #|  i:num < j ==> i + j - i = j
       #|  (x - r:real) pow i
-      #|  !a. a * x = a * y /\\ ~(a = &0) ==> x = y
+      #|  forall a. a * x = a * y /\\ ~(a = &0) ==> x = y
       #|  x:real
       #|  &0 < abs(x - r) <=> ~(x = r)
       #|  &1
@@ -79400,11 +79400,11 @@ test "100/descartes matches 100/descartes.ml" {
       #|  F ==> p
       #|  j:num
       #|  i:num
-      #|  !i j f g. f real_continuous_on (:real) /\\ g real_continuous_on (:real) /\\\n               ~(f r = &0) /\\ ~(g r = &0)\n               ==> (!x. (x - r) pow i * f(x) = (x - r) pow j * g(x))\n                   ==> j = i
+      #|  forall i j f g. f real_continuous_on (:real) /\\ g real_continuous_on (:real) /\\\n               ~(f r = &0) /\\ ~(g r = &0)\n               ==> (forall x. (x - r) pow i * f(x) = (x - r) pow j * g(x))\n                   ==> j = i
       #|  m:num
       #|  b:num->real
       #|  j:num
-      #|  !f a r b m k.\n        (!x. f(x) = (x - r) pow k * sum(0..m) (\\j. b j * x pow j)) /\\\n        ~(sum(0..m) (\\j. b j * r pow j) = &0)\n        ==> k = multiplicity f r
+      #|  forall f a r b m k.\n        (forall x. f(x) = (x - r) pow k * sum(0..m) (\\j. b j * x pow j)) /\\\n        ~(sum(0..m) (\\j. b j * r pow j) = &0)\n        ==> k = multiplicity f r
       #|  n:num
       #|  a:num->real
       #|  0
@@ -79431,7 +79431,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  (a:num->real) n = &0
       #|  a:num->real
       #|  n:num
-      #|  !r n a.\n    (?i. i IN 0..n /\\ ~(a i = &0))\n    ==> ?b m.\n        ~(sum(0..m) (\\i. b i * r pow i) = &0) /\\\n        !x. sum(0..n) (\\i. a i * x pow i) =\n            (x - r) pow multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r *\n            sum(0..m) (\\i. b i * x pow i)
+      #|  forall r n a.\n    (?i. i IN 0..n /\\ ~(a i = &0))\n    ==> ?b m.\n        ~(sum(0..m) (\\i. b i * r pow i) = &0) /\\\n        forall x. sum(0..n) (\\i. a i * x pow i) =\n            (x - r) pow multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r *\n            sum(0..m) (\\i. b i * x pow i)
       #|  SUC k
       #|  ~(n + 1 <= n)
       #|  0 < n + 1
@@ -79450,13 +79450,13 @@ test "100/descartes matches 100/descartes.ml" {
       #|  p:num
       #|  c:num->real
       #|  r * x = s * r * y <=> r = &0 \\/ s * y = x
-      #|  ?b q. !x. sum(0..q) (\\j. b j * x pow j) =\n              (x - r) pow m * sum (0..p) (\\i. c i * x pow i)
+      #|  ?b q. forall x. sum(0..q) (\\j. b j * x pow j) =\n              (x - r) pow m * sum (0..p) (\\i. c i * x pow i)
       #|  p:num
       #|  c:num->real
       #|  a:num->real
       #|  n:num
       #|  s:real
-      #|  !a n r s.\n    ~(r = s) /\\ (?i. i IN 0..n /\\ ~(a i = &0))\n     ==> multiplicity (\\x. (x - r) pow m * sum(0..n) (\\i. a i * x pow i)) s =\n         multiplicity (\\x.  sum(0..n) (\\i. a i * x pow i)) s
+      #|  forall a n r s.\n    ~(r = s) /\\ (?i. i IN 0..n /\\ ~(a i = &0))\n     ==> multiplicity (\\x. (x - r) pow m * sum(0..n) (\\i. a i * x pow i)) s =\n         multiplicity (\\x.  sum(0..n) (\\i. a i * x pow i)) s
       #|  x * y < &0 <=> &0 < x * --y
       #|  --x * --y:real = x * y
       #|  (a * x) * (b * x'):real = (x * x') * a * b
@@ -79470,7 +79470,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  ~(j <= n) ==> ((0 <= i /\\ i <= j) /\\ i <= n <=> 0 <= i /\\ i <= n)
       #|  j + 1 <= k ==> k - j - 1 + j + 1 = k
       #|  a:real = --b * c <=> a + b * c = &0
-      #|  !i:num. i <= j ==> i <= n
+      #|  forall i:num. i <= j ==> i <= n
       #|  j:num <= n
       #|  j:num
       #|  \\i. if i <= n then --b i * (r:real) pow (i + 1) else &0
@@ -79486,7 +79486,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  b:num->real
       #|  b = \\j. sum (j + 1..n) (\\i. a i * r pow (i - j - 1))
       #|  n = 0
-      #|  !a n r.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b. ~(b(n - 1) = &0) /\\\n            (!x. sum(0..n) (\\i. a i * x pow i) =\n                 (x - r) * sum(0..n-1) (\\i. b i * x pow i)) /\\\n            ?d. ODD d /\\ variation(0..n) a = variation(0..n-1) b + d
+      #|  forall a n r.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b. ~(b(n - 1) = &0) /\\\n            (forall x. sum(0..n) (\\i. a i * x pow i) =\n                 (x - r) * sum(0..n-1) (\\i. b i * x pow i)) /\\\n            ?d. ODD d /\\ variation(0..n) a = variation(0..n-1) b + d
       #|  p:num
       #|  ODD d
       #|  d - 1
@@ -79510,16 +79510,16 @@ test "100/descartes matches 100/descartes.ml" {
       #|  n = 0
       #|  a:num->real
       #|  n:num
-      #|  !r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b k m. 0 < k /\\ m < n /\\ ~(b m = &0) /\\\n                (!x. sum(0..n) (\\i. a i * x pow i) =\n                     (x - r) pow k * sum(0..m) (\\i. b i * x pow i)) /\\\n                ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n                ?d. EVEN d /\\ variation(0..n) a = variation(0..m) b + k + d
+      #|  forall r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b k m. 0 < k /\\ m < n /\\ ~(b m = &0) /\\\n                (forall x. sum(0..n) (\\i. a i * x pow i) =\n                     (x - r) pow k * sum(0..m) (\\i. b i * x pow i)) /\\\n                ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n                ?d. EVEN d /\\ variation(0..n) a = variation(0..m) b + k + d
       #|  m:num
       #|  b:num->real
       #|  multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r = k
       #|  m:num
       #|  k:num
       #|  b:num->real
-      #|  !r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b m. m < n /\\ ~(b m = &0) /\\\n              (!x. sum(0..n) (\\i. a i * x pow i) =\n                   (x - r) pow\n                   (multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r) *\n                   sum(0..m) (\\i. b i * x pow i)) /\\\n              ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n              ?d. EVEN d /\\\n                  variation(0..n) a = variation(0..m) b +\n                     multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r + d
+      #|  forall r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b m. m < n /\\ ~(b m = &0) /\\\n              (forall x. sum(0..n) (\\i. a i * x pow i) =\n                   (x - r) pow\n                   (multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r) *\n                   sum(0..m) (\\i. b i * x pow i)) /\\\n              ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n              ?d. EVEN d /\\\n                  variation(0..n) a = variation(0..m) b +\n                     multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r + d
       #|  ~(sum (0..m) (\\j. b j * r pow j) = &0)
-      #|  (?i. P i /\\ Q i) <=> ~(!i. P i ==> ~Q i)
+      #|  (?i. P i /\\ Q i) <=> ~(forall i. P i ==> ~Q i)
       #|  s:real
       #|  s1:num = s2 ==> s1 + m = m + s2
       #|  m:num
@@ -79555,7 +79555,7 @@ test "100/descartes matches 100/descartes.ml" {
       #|  n:num
       #|  n:num
       #|  a:num->real
-      #|  !f a n. f = (\\x. sum(0..n) (\\i. a i * x pow i)) /\\\n           (?i. i IN 0..n /\\ ~(a i = &0))\n           ==> ?d. EVEN d /\\\n                   variation(0..n) a =\n                   nsum {r | &0 < r /\\ f(r) = &0} (\\r. multiplicity f r) + d
+      #|  forall f a n. f = (\\x. sum(0..n) (\\i. a i * x pow i)) /\\\n           (?i. i IN 0..n /\\ ~(a i = &0))\n           ==> ?d. EVEN d /\\\n                   variation(0..n) a =\n                   nsum {r | &0 < r /\\ f(r) = &0} (\\r. multiplicity f r) + d
       #|OPPOSITE_SIGNS =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\b:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) a:real) b:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) ((#real_lt:fun(real,fun(real,bool)) b:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) b:real))))))))
       #|VARIATION_SET_FINITE =  |- ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1834350,bool),bool) s:fun('?1834350,bool))) (#FINITE:fun(fun(prod('?1834350,'?1834350),bool),bool) (#GSPEC:fun(fun(prod('?1834350,'?1834350),bool),fun(prod('?1834350,'?1834350),bool)) (\GEN%PVAR%9020:prod('?1834350,'?1834350). (#?:fun(fun('?1834350,bool),bool) (\p:'?1834350. (#?:fun(fun('?1834350,bool),bool) (\q:'?1834350. (((#SETSPEC:fun(prod('?1834350,'?1834350),fun(bool,fun(prod('?1834350,'?1834350),bool))) GEN%PVAR%9020:prod('?1834350,'?1834350)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1834350,fun(fun('?1834350,bool),bool)) p:'?1834350) s:fun('?1834350,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1834350,fun(fun('?1834350,bool),bool)) q:'?1834350) s:fun('?1834350,bool))) ((P:fun('?1834350,fun('?1834350,bool)) p:'?1834350) q:'?1834350)))) ((#,:fun('?1834350,fun('?1834350,prod('?1834350,'?1834350))) p:'?1834350) q:'?1834350))))))))))
       #|variation =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#!:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). ((#=:fun(num,fun(num,bool)) ((#variation:fun(fun(num,bool),fun(fun(num,real),num)) s:fun(num,bool)) a:fun(num,real))) (#CARD:fun(fun(prod(num,num),bool),num) (#GSPEC:fun(fun(prod(num,num),bool),fun(prod(num,num),bool)) (\GEN%PVAR%9021:prod(num,num). (#?:fun(fun(num,bool),bool) (\p:num. (#?:fun(fun(num,bool),bool) (\q:num. (((#SETSPEC:fun(prod(num,num),fun(bool,fun(prod(num,num),bool))) GEN%PVAR%9021:prod(num,num)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) p:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) q:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) q:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (a:fun(num,real) p:num)) (a:fun(num,real) q:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) i:num)) ((#<:fun(num,fun(num,bool)) i:num) q:num)))) ((#=:fun(real,fun(real,bool)) (a:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))) ((#,:fun(num,fun(num,prod(num,num))) p:num) q:num))))))))))))))

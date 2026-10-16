@@ -6037,15 +6037,15 @@ Generating HOL version of proof
 Generating HOL version of proof
 100/stirling quotations (176):
   (tends_num_real)
-  !n. P n /\\ P(n + 1)
-  !P. P 0 /\\ P 1 /\\ (!n. P n ==> P(n + 2)) ==> !n. P n
+  forall n. P n /\\ P(n + 1)
+  forall P. P 0 /\\ P 1 /\\ (forall n. P n ==> P(n + 2)) ==> forall n. P n
   &0 < t
   n * --((i * i) * a) = --((n * i) * a * i)
   ~(x = &0) ==> x * (inv(x) + a) - &1 = x * a
   t:real
   2
   &1 / &n
-  !n. ~(n = 0) ==> abs(&n * ln(&1 + &1 / &n) - &1) <= &1 / (&2 * &n)
+  forall n. ~(n = 0) ==> abs(&n * ln(&1 + &1 / &n) - &1) <= &1 / (&2 * &n)
   ~(n = 0)
   &1 / (&2 * &n)
   n >= 1 <=> ~(n = 0)
@@ -6068,12 +6068,12 @@ Generating HOL version of proof
   &m
   f':real->real
   f:real->real
-  !m p. n <= m /\\ m < p ==> (f:real->real)(&p) < f(&m)
-  !f f'. (!x. &0 < x ==> (f diffl f'(x)) x /\\ f'(x) < &0) /\\\n          (\\n. f(&n)) --> &0\n          ==> !n. ~(n = 0) ==> &0 < f(&n)
+  forall m p. n <= m /\\ m < p ==> (f:real->real)(&p) < f(&m)
+  forall f f'. (forall x. &0 < x ==> (f diffl f'(x)) x /\\ f'(x) < &0) /\\\n          (\\n. f(&n)) --> &0\n          ==> forall n. ~(n = 0) ==> &0 < f(&n)
   stirling n = ln(&(FACT n)) - ((&n + &1 / &2) * ln(&n) - &n)
   (f' - f) + x = (nl' - nl) /\\ n' = n + &1\n    ==> (f - (nl - n)) - (f' - (nl' - n')) = x - &1
-  !n. ~(n = 0)\n       ==> stirling(n) - stirling(n + 1) =\n           (&n + &1 / &2) * ln((&n + &1) / &n) - &1
-  !x. &0 < x\n       ==> ((\\x. ln ((x + &1) / x) - &1 / (x + &1 / &2)) diffl\n            (-- &1 / (x * (x + &1) * (&2 * x + &1) pow 2))) x
+  forall n. ~(n = 0)\n       ==> stirling(n) - stirling(n + 1) =\n           (&n + &1 / &2) * ln((&n + &1) / &n) - &1
+  forall x. &0 < x\n       ==> ((\\x. ln ((x + &1) / x) - &1 / (x + &1 / &2)) diffl\n            (-- &1 / (x * (x + &1) * (&2 * x + &1) pow 2))) x
   &1 <= x ==> (x + &1) / x = &1 + &1 / x
   &1 <= x ==> &0 < x
   &0 <= x /\\ x <= y ==> abs x <= abs y
@@ -6085,8 +6085,8 @@ Generating HOL version of proof
   x:real
   \\x. -- &1 / (x * (x + &1) * (&2 * x + &1) pow 2)
   &0 < &n + &1 / &2
-  !n. ~(n = 0) ==> stirling(n + 1) < stirling(n)
-  !x. &0 < x\n       ==> ((\\x. &1 / (&12 * x * (x + &1) * (x + &1 / &2))) diffl\n            --(&3 * x pow 2 + &3 * x + &1 / &2) /\n              (&12 * (x * (x + &1) * (x + &1 / &2)) pow 2)) x
+  forall n. ~(n = 0) ==> stirling(n + 1) < stirling(n)
+  forall x. &0 < x\n       ==> ((\\x. &1 / (&12 * x * (x + &1) * (x + &1 / &2))) diffl\n            --(&3 * x pow 2 + &3 * x + &1 / &2) /\n              (&12 * (x * (x + &1) * (x + &1 / &2)) pow 2)) x
   &0 < x\n    ==> &1 / (x * (x + &1) * (&2 * x + &1) pow 2) =\n        (&3 * x * (x + &1)) /\n        (&12 * (x * (x + &1) * (x + &1 / &2)) *\n               (x * (x + &1) * (x + &1 / &2)))
   a - b < &0 <=> a < b
   &1 / x - y / z = --y / z - -- &1 / x
@@ -6105,10 +6105,10 @@ Generating HOL version of proof
   a * b - &1 < c <=> b * a < c + &1
   ~(&n = &0) ==> &1 / (&12 * &n) - &1 / (&12 * (&n + &1)) =\n                    &1 / (&12 * &n * (&n + &1))
   a - b > c - d <=> c - a < d - b
-  !n. ~(n = 0)\n       ==> stirling(n + 1) - &1 / (&12 * (&(n + 1)))\n           > stirling(n) - &1 / (&12 * &n)
+  forall n. ~(n = 0)\n       ==> stirling(n + 1) - &1 / (&12 * (&(n + 1)))\n           > stirling(n) - &1 / (&12 * &n)
   SUC(SUC n) = SUC n + 1
   stirling(SUC n)
-  !n. stirling(SUC n) <= &1
+  forall n. stirling(SUC n) <= &1
   b > a ==> a <= b
   SUC(SUC n) = SUC n + 1
   stirling(SUC n) - &1 / (&12 * &(SUC n))
@@ -6116,12 +6116,12 @@ Generating HOL version of proof
   n:num
   a - b <= a <=> &0 <= b
   stirling(SUC n) - &1 / (&12 * &(SUC n))
-  !n. -- &1 <= stirling(SUC n)
+  forall n. -- &1 <= stirling(SUC n)
   stirling(m + d)
   d:num
   d:num
   d:num
-  !m n. ~(m = 0) /\\ m <= n ==> stirling n <= stirling m
+  forall m n. ~(m = 0) /\\ m <= n ==> stirling n <= stirling m
   -- &1 <= x /\\ x <= &1 ==> abs(x) < &2
   0
   &2
@@ -6138,8 +6138,8 @@ Generating HOL version of proof
   \\x. (&n + &1) * sin(x) pow n * cos(x)
   \\x. --cos(x)
   \\x. sin(x) pow (n + 1)
-  !n. (&n + &2) * integral(&0,pi / &2) (\\x. sin(x) pow (n + 2)) =\n       (&n + &1) * integral(&0,pi / &2) (\\x. sin(x) pow n)
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (n + 2)) =\n       (&n + &1) / (&n + &2) * integral(&0,pi / &2) (\\x. sin(x) pow n)
+  forall n. (&n + &2) * integral(&0,pi / &2) (\\x. sin(x) pow (n + 2)) =\n       (&n + &1) * integral(&0,pi / &2) (\\x. sin(x) pow n)
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (n + 2)) =\n       (&n + &1) / (&n + &2) * integral(&0,pi / &2) (\\x. sin(x) pow n)
   integral(&0,pi / &2) (\\x. sin(x) pow 0) = pi / &2
   pi / &2
   &0
@@ -6149,25 +6149,25 @@ Generating HOL version of proof
   2 * n + 2 = SUC(SUC(2 * n))
   (&2 * x) * y * z = (&2 * y) * (x * z)
   2 * SUC n = 2 * n + 2
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) =\n         (&(FACT(2 * n)) / (&2 pow n * &(FACT n)) pow 2) * pi / &2
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) =\n         (&(FACT(2 * n)) / (&2 pow n * &(FACT n)) pow 2) * pi / &2
   2 * n + 1
   n + 2 = SUC(SUC n)
   (&2 * x) * y * z = (x * z) * (&2 * y)
   2 * SUC n + 1 = (2 * n + 1) + 2
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) =\n         (&2 pow n * &(FACT n)) pow 2 / &(FACT(2 * n + 1))
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) /\n       integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) =\n        (&(FACT(2 * n)) * &(FACT(2 * n + 1))) / (&2 pow n * &(FACT n)) pow 4 *\n        pi / &2
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) /\n       integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) * &2 / pi =\n         (&(FACT(2 * n)) * &(FACT(2 * n + 1))) / (&2 pow n * &(FACT n)) pow 4
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) =\n         (&2 pow n * &(FACT n)) pow 2 / &(FACT(2 * n + 1))
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) /\n       integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) =\n        (&(FACT(2 * n)) * &(FACT(2 * n + 1))) / (&2 pow n * &(FACT n)) pow 4 *\n        pi / &2
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (2 * n)) /\n       integral(&0,pi / &2) (\\x. sin(x) pow (2 * n + 1)) * &2 / pi =\n         (&(FACT(2 * n)) * &(FACT(2 * n + 1))) / (&2 pow n * &(FACT n)) pow 4
   x:real
-  !m n. m <= n\n         ==> integral(&0,pi / &2) (\\x. sin(x) pow n)\n                <= integral(&0,pi / &2) (\\x. sin(x) pow m)
-  !n. &0 < integral(&0,pi / &2) (\\x. sin(x) pow n)
-  !n. ~(integral(&0,pi / &2) (\\x. sin(x) pow n) = &0)
+  forall m n. m <= n\n         ==> integral(&0,pi / &2) (\\x. sin(x) pow n)\n                <= integral(&0,pi / &2) (\\x. sin(x) pow m)
+  forall n. &0 < integral(&0,pi / &2) (\\x. sin(x) pow n)
+  forall n. ~(integral(&0,pi / &2) (\\x. sin(x) pow n) = &0)
   n + 1 <= n + 2
   (&n + &2) / (&n + &1) *\n              integral (&0,pi / &2) (\\x. sin x pow (n + 2))
-  !n. integral(&0,pi / &2) (\\x. sin(x) pow (n + 1))\n        <= integral(&0,pi / &2) (\\x. sin(x) pow n) /\\\n       integral(&0,pi / &2) (\\x. sin(x) pow n) <=\n        (&n + &2) / (&n + &1) * integral(&0,pi / &2) (\\x. sin(x) pow (n + 1))
-  !n. &1 <= integral(&0,pi / &2) (\\x. sin(x) pow n) /\n            integral(&0,pi / &2) (\\x. sin(x) pow (n + 1)) /\\\n      integral(&0,pi / &2) (\\x. sin(x) pow n) /\n      integral(&0,pi / &2) (\\x. sin(x) pow (n + 1)) <= (&n + &2) / (&n + &1)
+  forall n. integral(&0,pi / &2) (\\x. sin(x) pow (n + 1))\n        <= integral(&0,pi / &2) (\\x. sin(x) pow n) /\\\n       integral(&0,pi / &2) (\\x. sin(x) pow n) <=\n        (&n + &2) / (&n + &1) * integral(&0,pi / &2) (\\x. sin(x) pow (n + 1))
+  forall n. &1 <= integral(&0,pi / &2) (\\x. sin(x) pow n) /\n            integral(&0,pi / &2) (\\x. sin(x) pow (n + 1)) /\\\n      integral(&0,pi / &2) (\\x. sin(x) pow n) /\n      integral(&0,pi / &2) (\\x. sin(x) pow (n + 1)) <= (&n + &2) / (&n + &1)
   (&2 * &n + &2) / (&2 * &n + &1) - &1 = &1 / (&2 * &n + &1)
   (&(2 * n) + &2) / (&(2 * n) + &1)
-  !d. &1 <= x /\\ x <= d /\\ d - &1 <= e ==> abs(x - &1) <= e
+  forall d. &1 <= x /\\ x <= d /\\ d - &1 <= e ==> abs(x - &1) <= e
   1
   \\n. &1 / &n
   x = (x - &1) + &1
@@ -6175,7 +6175,7 @@ Generating HOL version of proof
   \\x. ln(x)
   pi / &2
   inv(pi / &2)
-  !n. &0 < &2 pow n
+  forall n. &0 < &2 pow n
   &4 * x + &4 * y - z = &4 * (x + y) - z
   (\\n. &4 * &n * ln(&2) + &4 * ln(&(FACT n)) -\n        (ln(&(FACT(2 * n))) + ln(&(FACT(2 * n + 1))))) --> ln(pi / &2)
   &1

@@ -5831,48 +5831,48 @@ Warning: inventing type variables
 Examples/reduct quotations (92):
   fld(R) = {x | ?y. R x y \\/ R y x}
   NORMAL(R:A->A->bool) x <=> ~(?y. R x y)
-  CR(R:A->A->bool) <=> !x y1 y2. R x y1 /\\ R x y2 ==> ?z. R y1 z /\\ R y2 z
-  WCR(R:A->A->bool) <=>\n   !x y1 y2. R x y1 /\\ R x y2 ==> ?z. RTC R y1 z /\\ RTC R y2 z
-  WN(R:A->A->bool) <=> !x. ?y. RTC R x y /\\ NORMAL(R) y
-  SN(R:A->A->bool) <=> ~(?seq. !n. R (seq n) (seq (SUC n)))
-  TREE(R:A->A->bool) <=>\n        (!y. ~(TC R y y)) /\\\n        ?a. a IN fld(R) /\\\n            !y. y IN fld(R) ==> (y = a) \\/ TC R a y /\\ ?!x. R x y
-  LF(R:A->A->bool) <=> !x. FINITE {y | R x y}
-  !R:A->A->bool. SN(R) <=> WF(INV R)
-  !R:A->A->bool. SN(R) <=> !P. (!x. P x ==> ?y. P y /\\ R x y) ==> ~(?x. P x)
-  !R:A->A->bool. SN(R) <=> !P. (!x. (!y. R x y ==> P y) ==> P x) ==> !x. P x
-  !R:A->A->bool. NORMAL(TC R) x <=> NORMAL(R) x
-  !R:A->A->bool. NORMAL(R) x ==> !y. RTC R x y <=> (x = y)
-  !R:A->A->bool. WN(TC R) <=> WN R
-  !R:A->A->bool. SN(TC R) <=> SN R
+  CR(R:A->A->bool) <=> forall x y1 y2. R x y1 /\\ R x y2 ==> ?z. R y1 z /\\ R y2 z
+  WCR(R:A->A->bool) <=>\n   forall x y1 y2. R x y1 /\\ R x y2 ==> ?z. RTC R y1 z /\\ RTC R y2 z
+  WN(R:A->A->bool) <=> forall x. ?y. RTC R x y /\\ NORMAL(R) y
+  SN(R:A->A->bool) <=> ~(?seq. forall n. R (seq n) (seq (SUC n)))
+  TREE(R:A->A->bool) <=>\n        (forall y. ~(TC R y y)) /\\\n        ?a. a IN fld(R) /\\\n            forall y. y IN fld(R) ==> (y = a) \\/ TC R a y /\\ ?!x. R x y
+  LF(R:A->A->bool) <=> forall x. FINITE {y | R x y}
+  forall R:A->A->bool. SN(R) <=> WF(INV R)
+  forall R:A->A->bool. SN(R) <=> forall P. (forall x. P x ==> ?y. P y /\\ R x y) ==> ~(?x. P x)
+  forall R:A->A->bool. SN(R) <=> forall P. (forall x. (forall y. R x y ==> P y) ==> P x) ==> forall x. P x
+  forall R:A->A->bool. NORMAL(TC R) x <=> NORMAL(R) x
+  forall R:A->A->bool. NORMAL(R) x ==> forall y. RTC R x y <=> (x = y)
+  forall R:A->A->bool. WN(TC R) <=> WN R
+  forall R:A->A->bool. SN(TC R) <=> SN R
   \\y:A. RTC R a y
   a:A
-  !R:A->A->bool. SN(R) ==> WN(R)
-  !R:A->A->bool. CR(R) ==> CR(RC R)
+  forall R:A->A->bool. SN(R) ==> WN(R)
+  forall R:A->A->bool. CR(R) ==> CR(RC R)
   a /\\ b ==> c <=> a ==> (b ==> c)
-  !R S. (!x y1 y2.    R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\    R y2 z) ==>\n         (!x y1 y2. TC R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\ TC R y2 z)
-  !R:A->A->bool. CR(R) ==> CR(TC R)
-  !R:A->A->bool. CR(R) ==> CR(RTC R)
-  !R:A->A->bool. CR(RTC R) <=>\n        !x y. RSTC R x y ==> ?z:A. RTC R x z /\\ RTC R y z
-  !R:A->A->bool. WN(R) ==>\n     (CR(RTC R) <=> (!x y1 y2. RTC R x y1 /\\ NORMAL(R) y1 /\\\n                               RTC R x y2 /\\ NORMAL(R) y2 ==> (y1 = y2)))
+  forall R S. (forall x y1 y2.    R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\    R y2 z) ==>\n         (forall x y1 y2. TC R x y1 /\\ S x y2 ==> ?z:A. S y1 z /\\ TC R y2 z)
+  forall R:A->A->bool. CR(R) ==> CR(TC R)
+  forall R:A->A->bool. CR(R) ==> CR(RTC R)
+  forall R:A->A->bool. CR(RTC R) <=>\n        forall x y. RSTC R x y ==> ?z:A. RTC R x z /\\ RTC R y z
+  forall R:A->A->bool. WN(R) ==>\n     (CR(RTC R) <=> (forall x y1 y2. RTC R x y1 /\\ NORMAL(R) y1 /\\\n                               RTC R x y2 /\\ NORMAL(R) y2 ==> (y1 = y2)))
   (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  !R:A->A->bool. WN(R) /\\ CR(RTC R) <=> !x. ?!y. RTC R x y /\\ NORMAL(R) y
+  forall R:A->A->bool. WN(R) /\\ CR(RTC R) <=> forall x. ?!y. RTC R x y /\\ NORMAL(R) y
   z1:A
   z2:A
   RTC R (x:A) y2
   RTC R (x:A) y1
   x:A
-  !R:A->A->bool. SN(R) /\\ WCR(R) ==> CR(RTC R)
+  forall R:A->A->bool. SN(R) /\\ WCR(R) ==> CR(RTC R)
   {z | (R:A->A->bool) x z}
   \\z:A. {y | TC R z y}
   {y:A | TC(R) x y} = {y | R x y} UNION\n                         (UNIONS { s | ?z. R x z /\\ (s = {y | TC(R) z y})})
-  !R. LF(R) /\\ SN(R) ==> !x:A. FINITE {y | TC(R) x y}
+  forall R. LF(R) /\\ SN(R) ==> forall x:A. FINITE {y | TC(R) x y}
   \\x:A. x = z
   R:A->A->bool
   TC(R:A->A->bool)
-  !R:A->A->bool. SN(R) ==> !z. ~(TC(R) z z)
-  !R:A->A->bool. !n x y. RELPOW n R x y ==> RTC(R) x y
-  !R x:A. {y:A | RTC(R) x y} = x INSERT {y:A | TC(R) x y}
-  !s:A->bool t m n. s HAS_SIZE m /\\ t HAS_SIZE n /\\ s SUBSET t ==> m <= n
+  forall R:A->A->bool. SN(R) ==> forall z. ~(TC(R) z z)
+  forall R:A->A->bool. forall n x y. RELPOW n R x y ==> RTC(R) x y
+  forall R x:A. {y:A | RTC(R) x y} = x INSERT {y:A | TC(R) x y}
+  forall s:A->bool t m n. s HAS_SIZE m /\\ t HAS_SIZE n /\\ s SUBSET t ==> m <= n
   SUC (q + SUC (SUC d)) <= m
   (f:num->A)(q + SUC d)
   SUC (SUC q) <= m
@@ -5889,38 +5889,38 @@ Examples/reduct quotations (92):
   {z:A | ?i. i < SUC p /\\ (z = f i)} =\n                f(p) INSERT {z | ?i. i < p /\\ (z = f i)}
   {y:A | RTC(R) x y}
   {z:A | ?i. i < m /\\ (z = f i)}
-  !p. p <= m ==> {z:A | ?i. i < p /\\ (z = f i)} HAS_SIZE p
+  forall p. p <= m ==> {z:A | ?i. i < p /\\ (z = f i)} HAS_SIZE p
   {z:A | ?i:num. i < m /\\ (z = f i)} SUBSET {y | RTC R x y}
-  !i. i <= m ==> RELPOW i R (x:A) (f i)
+  forall i. i <= m ==> RELPOW i R (x:A) (f i)
   f:num->A
-  !R. (!z. ~(TC R z z))\n       ==> !n. {y:A | RTC(R) x y} HAS_SIZE n\n               ==> !m y. RELPOW m R x y ==> m <= n
+  forall R. (forall z. ~(TC R z z))\n       ==> forall n. {y:A | RTC(R) x y} HAS_SIZE n\n               ==> forall m y. RELPOW m R x y ==> m <= n
   m:num
   CARD {y:A | RTC(R) x y}
-  !R (x:A). FINITE {y | RTC(R) x y} /\\\n             (!z. ~(TC R z z))\n             ==> ?N. !n y. RELPOW n R x y ==> n <= N
-  !n. RELPOW n R (f 0 :A) (f n)
+  forall R (x:A). FINITE {y | RTC(R) x y} /\\\n             (forall z. ~(TC R z z))\n             ==> ?N. forall n y. RELPOW n R x y ==> n <= N
+  forall n. RELPOW n R (f 0 :A) (f n)
   f(SUC N):A
   SUC N
   N:num
   (f:num->A) 0
   f:num->A
-  !R. (!x:A. ?N. !n y. RELPOW n R x y ==> n <= N) ==> SN(R)
+  forall R. (forall x:A. ?N. forall n y. RELPOW n R x y ==> n <= N) ==> SN(R)
   x:A
   x:A
-  !R. LF(R) ==> (SN(R) <=> !x:A. ?N. !n y. RELPOW n R x y ==> n <= N)
+  forall R. LF(R) ==> (SN(R) <=> forall x:A. ?N. forall n y. RELPOW n R x y ==> n <= N)
   x:A
   a:A
   a:A
-  !R. TREE(R) ==> ?a:A. fld(R) = {y | RTC(R) a y}
+  forall R. TREE(R) ==> ?a:A. fld(R) = {y | RTC(R) a y}
   a:A
   a:A
   a:A
-  !R:A->A->bool. TREE(R) /\\ LF(R) /\\ SN(R) ==> FINITE (fld R)
+  forall R:A->A->bool. TREE(R) /\\ LF(R) /\\ SN(R) ==> FINITE (fld R)
   JOINABLE R s t <=> ?u. RTC R s u /\\ RTC R t u
-  !R t. JOINABLE R t t
-  !R s t. JOINABLE R s t <=> JOINABLE R t s
-  !R s t u. R s t /\\ JOINABLE R t u ==> JOINABLE R s u
-  !R. CR(RTC R) ==> !x:A y. RSTC(R) x y <=> JOINABLE(R) x y
-  !R. CR(RTC R) <=>\n       !x y z. JOINABLE(R) x y /\\ JOINABLE(R) y z ==> JOINABLE(R) x z
+  forall R t. JOINABLE R t t
+  forall R s t. JOINABLE R s t <=> JOINABLE R t s
+  forall R s t u. R s t /\\ JOINABLE R t u ==> JOINABLE R s u
+  forall R. CR(RTC R) ==> forall x:A y. RSTC(R) x y <=> JOINABLE(R) x y
+  forall R. CR(RTC R) <=>\n       forall x y z. JOINABLE(R) x y /\\ JOINABLE(R) y z ==> JOINABLE(R) x z
 fld =  |- (#!:fun(fun(fun('?146986,fun('?146986,bool)),bool),bool) (\R:fun('?146986,fun('?146986,bool)). ((#=:fun(fun('?146986,bool),fun(fun('?146986,bool),bool)) (#fld:fun(fun('?146986,fun('?146986,bool)),fun('?146986,bool)) R:fun('?146986,fun('?146986,bool)))) (#GSPEC:fun(fun('?146986,bool),fun('?146986,bool)) (\GEN%PVAR%372:'?146986. (#?:fun(fun('?146986,bool),bool) (\x:'?146986. (((#SETSPEC:fun('?146986,fun(bool,fun('?146986,bool))) GEN%PVAR%372:'?146986) (#?:fun(fun('?146986,bool),bool) (\y:'?146986. ((#\/:fun(bool,fun(bool,bool)) ((R:fun('?146986,fun('?146986,bool)) x:'?146986) y:'?146986)) ((R:fun('?146986,fun('?146986,bool)) y:'?146986) x:'?146986))))) x:'?146986))))))))
 NORMAL =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) ((#NORMAL:fun(fun('A,fun('A,bool)),fun('A,bool)) R:fun('A,fun('A,bool))) x:'A)) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))))
 CR =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#CR:fun(fun('A,fun('A,bool)),bool) R:fun('A,fun('A,bool)))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y1:'A. (#!:fun(fun('A,bool),bool) (\y2:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y1:'A)) ((R:fun('A,fun('A,bool)) x:'A) y2:'A))) (#?:fun(fun('A,bool),bool) (\z:'A. ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) y1:'A) z:'A)) ((R:fun('A,fun('A,bool)) y2:'A) z:'A))))))))))))))

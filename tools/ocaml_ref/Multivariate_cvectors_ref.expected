@@ -74567,15 +74567,15 @@ Generating HOL version of proof
 Warning: inventing type variables
 0..0..1..solved at 4
 Multivariate/cvectors quotations (416):
-  !x:real^N i. 1 <= i /\\ i <= dimindex (:N) ==> x$i <= norm x
-  !x. Re x <= norm x /\\ Im x <= norm x /\\ abs(Re x) <= norm x\n  /\\ abs(Im x) <= norm x
-  !x. &0 <= norm x + Re x /\\ &0 <= norm x - Re x
+  forall x:real^N i. 1 <= i /\\ i <= dimindex (:N) ==> x$i <= norm x
+  forall x. Re x <= norm x /\\ Im x <= norm x /\\ abs(Re x) <= norm x\n  /\\ abs(Im x) <= norm x
+  forall x. &0 <= norm x + Re x /\\ &0 <= norm x - Re x
   ~(2=0)
-  !x y.\n    real x /\\ real y ==> norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2
+  forall x y.\n    real x /\\ real y ==> norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2
   (p <=> r \\/ q) ==> (p /\\ ~r ==> q) 
   (y/z*t)*z=(y/z*z)*t:complex
   x=y/z*t <=> x*z=(y/z*t)*z:complex
-  !x y z t. ~(z=Cx(&0)) ==> (x = y/z * t <=> x*z = y * t)
+  forall x y z t. ~(z=Cx(&0)) ==> (x = y/z * t <=> x*z = y * t)
   z:complex
   x:complex
   Im y/abs(Im y) * sqrt x * sqrt (norm y-Re y) / sqrt(&2) =\n        Im y/abs (Im y) * (sqrt x * sqrt (norm y - Re y))/sqrt(&2)
@@ -74592,49 +74592,49 @@ Multivariate/cvectors quotations (416):
   ~(x<y /\\ ~(x <=y))
   ~(&0 <= y) = y < &0
   ~(&0 <= y) = &0 > y
-  !x y. &0 < x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
-  !x y. &0 <= x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
-  !x y:real. (x+y) pow 2 = x pow 2 + y pow 2 + &2 * x * y
-  !x y:complex. (x+y) pow 2 = x pow 2 + y pow 2 + Cx(&2) * x * y
-  !s n. FINITE(s INTER (0..n))
-  !x y. norm x <= norm (pastecart x y)
-  !x y. norm y <= norm (pastecart x y)
-  !s f1:num->real^N f2:num->real^M l1 l2. (f1 sums l1) s /\\ (f2 sums l2) s\n    <=> ((\\x. pastecart (f1 x) (f2 x)) sums (pastecart l1 l2)) s
-  !s f l g. linear g ==> ((f sums l) s ==> ((g o f) sums (g l)) s)
+  forall x y. &0 < x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
+  forall x y. &0 <= x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
+  forall x y:real. (x+y) pow 2 = x pow 2 + y pow 2 + &2 * x * y
+  forall x y:complex. (x+y) pow 2 = x pow 2 + y pow 2 + Cx(&2) * x * y
+  forall s n. FINITE(s INTER (0..n))
+  forall x y. norm x <= norm (pastecart x y)
+  forall x y. norm y <= norm (pastecart x y)
+  forall s f1:num->real^N f2:num->real^M l1 l2. (f1 sums l1) s /\\ (f2 sums l2) s\n    <=> ((\\x. pastecart (f1 x) (f2 x)) sums (pastecart l1 l2)) s
+  forall s f l g. linear g ==> ((f sums l) s ==> ((g o f) sums (g l)) s)
   real_of_complex c = @r. c = Cx r
-  !c. real c ==> Cx(real_of_complex c) = c
-  !c. real c ==> real_of_complex c = Re c
-  !r. real_of_complex (Cx r) = r
-  !c. real c ==> norm c = abs (real_of_complex c)
-  !x y. real x /\\ real y\n    ==> real_of_complex (x+y) = real_of_complex x + real_of_complex y
-  !x y. real x /\\ real y ==> real (x*y)
-  !x y. real x /\\ real y\n    ==> real_of_complex (x*y) = real_of_complex x * real_of_complex y
-  !x. real x ==> (real_of_complex x = &0 <=> x = Cx(&0))
-  !x. real(cnj x + x) /\\ real(x + cnj x)
+  forall c. real c ==> Cx(real_of_complex c) = c
+  forall c. real c ==> real_of_complex c = Re c
+  forall r. real_of_complex (Cx r) = r
+  forall c. real c ==> norm c = abs (real_of_complex c)
+  forall x y. real x /\\ real y\n    ==> real_of_complex (x+y) = real_of_complex x + real_of_complex y
+  forall x y. real x /\\ real y ==> real (x*y)
+  forall x y. real x /\\ real y\n    ==> real_of_complex (x*y) = real_of_complex x * real_of_complex y
+  forall x. real x ==> (real_of_complex x = &0 <=> x = Cx(&0))
+  forall x. real(cnj x + x) /\\ real(x + cnj x)
   vector_const (k:A) :A^N = lambda i. k
   vector_map (f:A->B) (v:A^N) :B^N = lambda i. f(v$i)
   vector_map2 (f:A->B->C) (v1:A^N) (v2:B^N) :C^N =\n    lambda i. f (v1$i) (v2$i)
   vector_map3 (f:A->B->C->D) (v1:A^N) (v2:B^N) (v3:C^N) :D^N =\n    lambda i. f (v1$i) (v2$i) (v3$i)
-  !i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ (!x:A^N. x$i = x$k)\n  /\\ (!x:B^N. x$i = x$k) /\\ (!x:C^N. x$i = x$k) /\\ (!x:D^N. x$i = x$k)
-  !i k. ((vector_const k):A^N)$i = k
-  !i f:A->B v:A^N. (vector_map f v)$i = f (v$i)
-  !i f:A->B->C v1:A^N v2. (vector_map2 f v1 v2)$i = f (v1$i) (v2$i)
-  !i f:A->B->C->D v1:A^N v2 v3. (vector_map3 f v1 v2 v3)$i =\n    f (v1$i) (v2$i) (v3$i)
-  !f:A->B k. vector_map f ((vector_const k):A^N) = vector_const (f k)
-  !f:A->B g:C->A v:C^N.\n    vector_map f (vector_map g v) = vector_map (f o g) v
-  !f:A->B g:C->D->A u v:D^N.\n    vector_map f (vector_map2 g u v) = vector_map2 (\\x y. f (g x y)) u v
-  !f:A->B->C k v:B^N.\n    vector_map2 f (vector_const k) v = vector_map (f k) v
-  !f:A->B->C k v:A^N.\n    vector_map2 f v (vector_const k) = vector_map (\\x. f x k) v
-  !f:A->B->C g:D->A v1 v2:B^N.\n    vector_map2 f (vector_map g v1) v2 = vector_map2 (f o g) v1 v2
-  !f:A->B->C g:D->B v1 v2:D^N.\n    vector_map2 f v1 (vector_map g v2) = vector_map2 (\\x y. f x (g y)) v1 v2
-  !f:A->B->C g:D->E->A v1 v2 v3:B^N.\n    vector_map2 f (vector_map2 g v1 v2) v3 =\n      vector_map3 (\\x y. f (g x y)) v1 v2 v3
-  !f:A->B->C g:D->E->B v1 v2 v3:E^N.\n    vector_map2 f v1 (vector_map2 g v2 v3) =\n      vector_map3 (\\x y z. f x (g y z)) v1 v2 v3
-  !f:complex->complex g. f = vector_map g\n    <=> !z. f z = complex (g (Re z), g (Im z))
+  forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ (forall x:A^N. x$i = x$k)\n  /\\ (forall x:B^N. x$i = x$k) /\\ (forall x:C^N. x$i = x$k) /\\ (forall x:D^N. x$i = x$k)
+  forall i k. ((vector_const k):A^N)$i = k
+  forall i f:A->B v:A^N. (vector_map f v)$i = f (v$i)
+  forall i f:A->B->C v1:A^N v2. (vector_map2 f v1 v2)$i = f (v1$i) (v2$i)
+  forall i f:A->B->C->D v1:A^N v2 v3. (vector_map3 f v1 v2 v3)$i =\n    f (v1$i) (v2$i) (v3$i)
+  forall f:A->B k. vector_map f ((vector_const k):A^N) = vector_const (f k)
+  forall f:A->B g:C->A v:C^N.\n    vector_map f (vector_map g v) = vector_map (f o g) v
+  forall f:A->B g:C->D->A u v:D^N.\n    vector_map f (vector_map2 g u v) = vector_map2 (\\x y. f (g x y)) u v
+  forall f:A->B->C k v:B^N.\n    vector_map2 f (vector_const k) v = vector_map (f k) v
+  forall f:A->B->C k v:A^N.\n    vector_map2 f v (vector_const k) = vector_map (\\x. f x k) v
+  forall f:A->B->C g:D->A v1 v2:B^N.\n    vector_map2 f (vector_map g v1) v2 = vector_map2 (f o g) v1 v2
+  forall f:A->B->C g:D->B v1 v2:D^N.\n    vector_map2 f v1 (vector_map g v2) = vector_map2 (\\x y. f x (g y)) v1 v2
+  forall f:A->B->C g:D->E->A v1 v2 v3:B^N.\n    vector_map2 f (vector_map2 g v1 v2) v3 =\n      vector_map3 (\\x y. f (g x y)) v1 v2 v3
+  forall f:A->B->C g:D->E->B v1 v2 v3:E^N.\n    vector_map2 f v1 (vector_map2 g v2 v3) =\n      vector_map3 (\\x y z. f x (g y z)) v1 v2 v3
+  forall f:complex->complex g. f = vector_map g\n    <=> forall z. f z = complex (g (Re z), g (Im z))
   (--):complex->complex = vector_map ((--):real->real)
   (--):real^N->real^N = vector_map ((--):real->real)
-  !f:A^N->B^N g:C^N->A^N f' g'. f = vector_map f' /\\ g = vector_map g' ==>\n    f o g = vector_map (f' o g')
-  !f:complex->complex->complex g. f = vector_map2 g <=>\n    !z1 z2. f z1 z2 = complex (g (Re z1) (Re z2), g (Im z1) (Im z2))
-  !f:complex->complex->complex g:complex->complex f' g'.\n    f = vector_map2 f' /\\ g = vector_map g'\n      ==> (\\x y. f x (g y)) = vector_map2 (\\x y. f' x (g' y))
+  forall f:A^N->B^N g:C^N->A^N f' g'. f = vector_map f' /\\ g = vector_map g' ==>\n    f o g = vector_map (f' o g')
+  forall f:complex->complex->complex g. f = vector_map2 g <=>\n    forall z1 z2. f z1 z2 = complex (g (Re z1) (Re z2), g (Im z1) (Im z2))
+  forall f:complex->complex->complex g:complex->complex f' g'.\n    f = vector_map2 f' /\\ g = vector_map g'\n      ==> (\\x y. f x (g y)) = vector_map2 (\\x y. f' x (g' y))
   (+):complex->complex->complex = vector_map2 ((+):real->real->real)
   (+):real^N->real^N->real^N = vector_map2 ((+):real->real->real)
   (-) = \\x y:real. x-y
@@ -74642,16 +74642,16 @@ Multivariate/cvectors quotations (416):
   (-):complex->complex->complex = vector_map2 ((-):real->real->real)
   (-):real^N->real^N->real^N = vector_map2 ((-):real->real->real)
   1<= i-dimindex(:N) /\\ i-dimindex(:N) <= dimindex(:M)
-  !f:A->B x:A^N y:A^M.\n    pastecart (vector_map f x) (vector_map f y) =\n      vector_map f (pastecart x y)
+  forall f:A->B x:A^N y:A^M.\n    pastecart (vector_map f x) (vector_map f y) =\n      vector_map f (pastecart x y)
   1<= i-dimindex(:N) /\\ i-dimindex(:N) <= dimindex(:M)
-  !f:A->B->C x1:A^N x2 y1:A^M y2.\n    pastecart (vector_map2 f x1 x2) (vector_map2 f y1 y2)\n      = vector_map2 f (pastecart x1 y1) (pastecart x2 y2)
+  forall f:A->B->C x1:A^N x2 y1:A^M y2.\n    pastecart (vector_map2 f x1 x2) (vector_map2 f y1 y2)\n      = vector_map2 f (pastecart x1 y1) (pastecart x2 y2)
   vector_zip (v1:A^N) (v2:B^N) : (A#B)^N = lambda i. (v1$i,v2$i)
   :C
   :A#B
-  !i v1:A^N v2:B^N. (vector_zip v1 v2)$i = (v1$i,v2$i)
+  forall i v1:A^N v2:B^N. (vector_zip v1 v2)$i = (v1$i,v2$i)
   vector_unzip (v:(A#B)^N):(A^N)#(B^N) = vector_map FST v,vector_map SND v
-  !i v:(A#B)^N. (FST (vector_unzip v))$i = FST (v$i)\n    /\\ (SND (vector_unzip v))$i = SND (v$i)
-  !f:A->B->C v1:A^N v2:B^N.\n    vector_map2 f v1 v2 = vector_map (UNCURRY f) (vector_zip v1 v2)
+  forall i v:(A#B)^N. (FST (vector_unzip v))$i = FST (v$i)\n    /\\ (SND (vector_unzip v))$i = SND (v$i)
+  forall f:A->B->C v1:A^N v2:B^N.\n    vector_map2 f v1 v2 = vector_map (UNCURRY f) (vector_zip v1 v2)
   :A-> B-> B
   cvector_zero:complex^N = vector_const (Cx(&0))
   cvector_neg :complex^N->complex^N = vector_map (--)
@@ -74663,144 +74663,144 @@ Multivariate/cvectors quotations (416):
   (cvector_add):complex^N->complex^N->complex^N
   (cvector_sub):complex^N->complex^N->complex^N
   (cvector_mul):complex->complex^N->complex^N
-  !i. (cvector_zero:complex^N)$i = Cx(&0)
-  !x:complex^N. ~(x=cvector_zero)\n    <=> ?i. 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = Cx(&0))
-  !X Y:complex^N i. ((X + Y)$i = X$i + Y$i)
-  !X:complex^N Y i. ((X - Y)$i = X$i - Y$i)
-  !X:complex^N i. ((--X)$i = --(X$i))
-  !c:complex X:complex^N i. ((c % X)$i = c * X$i)
+  forall i. (cvector_zero:complex^N)$i = Cx(&0)
+  forall x:complex^N. ~(x=cvector_zero)\n    <=> ?i. 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = Cx(&0))
+  forall X Y:complex^N i. ((X + Y)$i = X$i + Y$i)
+  forall X:complex^N Y i. ((X - Y)$i = X$i - Y$i)
+  forall X:complex^N i. ((--X)$i = --(X$i))
+  forall c:complex X:complex^N i. ((c % X)$i = c * X$i)
   (a ==> b ==> c) ==> (a ==> b) ==> (a ==> c)
   (a ==> b) \\/ (a ==> c) <=> a ==> b \\/ c
   (a ==> b) /\\ (a ==> c) <=> a ==> b /\\ c
-  !x y:complex^N. x + y = y + x
-  !x y z:complex^N. x + (y + z) = (x + y) + z
-  !x:complex^N. x + cvector_zero = x /\\ cvector_zero + x = x
-  !x:complex^N. x + -- x = cvector_zero /\\ --x + x = cvector_zero
-  !a b x:complex^N. a % (b % x) = (a * b) % x
-  !c x y:complex^N. c % (x - y) = c % x - c % y
-  !a b x:complex^N. (a + b) % x = a % x + b % x
-  !x:complex^N. Cx(&1) % x = x
-  !x:complex^N. x - x = cvector_zero
-  !x y:complex^N. x - (x + y) = --y
-  !x y:complex^N. --(x - y) = y - x
-  !x y:complex^N. (x - y = cvector_zero) <=> (x = y)
-  !x. Cx(&0) % x = cvector_zero
-  !x y:complex^N. (x - y) + y = x
-  !x y:complex^N. y + (x - y) = x
-  !c x y:complex^N. c % (x + y) = c % x + c % y
-  !a b x:complex^N. (a + b) % x = a % x + b % x
-  !a b x:complex^N. (a - b) % x = a % x - b % x
-  !x y:complex^N. (x + y:complex^N) - x = y
-  !x y:complex^N. (x + y = x) <=> (y = cvector_zero)
-  !x y:complex^N. x - y = x + --(y:complex^N)
-  !x:complex^N. x - cvector_zero = x
-  !c:complex. c % cvector_zero = cvector_zero
-  !x:complex^N. Cx(&0) % x = cvector_zero
+  forall x y:complex^N. x + y = y + x
+  forall x y z:complex^N. x + (y + z) = (x + y) + z
+  forall x:complex^N. x + cvector_zero = x /\\ cvector_zero + x = x
+  forall x:complex^N. x + -- x = cvector_zero /\\ --x + x = cvector_zero
+  forall a b x:complex^N. a % (b % x) = (a * b) % x
+  forall c x y:complex^N. c % (x - y) = c % x - c % y
+  forall a b x:complex^N. (a + b) % x = a % x + b % x
+  forall x:complex^N. Cx(&1) % x = x
+  forall x:complex^N. x - x = cvector_zero
+  forall x y:complex^N. x - (x + y) = --y
+  forall x y:complex^N. --(x - y) = y - x
+  forall x y:complex^N. (x - y = cvector_zero) <=> (x = y)
+  forall x. Cx(&0) % x = cvector_zero
+  forall x y:complex^N. (x - y) + y = x
+  forall x y:complex^N. y + (x - y) = x
+  forall c x y:complex^N. c % (x + y) = c % x + c % y
+  forall a b x:complex^N. (a + b) % x = a % x + b % x
+  forall a b x:complex^N. (a - b) % x = a % x - b % x
+  forall x y:complex^N. (x + y:complex^N) - x = y
+  forall x y:complex^N. (x + y = x) <=> (y = cvector_zero)
+  forall x y:complex^N. x - y = x + --(y:complex^N)
+  forall x:complex^N. x - cvector_zero = x
+  forall c:complex. c % cvector_zero = cvector_zero
+  forall x:complex^N. Cx(&0) % x = cvector_zero
   a=Cx(&0)
-  !a:complex x:complex^N.\n    (a % x = cvector_zero <=> a = Cx(&0) \\/ x = cvector_zero)
-  !x:complex^N. --x = (--(Cx(&1))) % x
-  !x:complex^N. cvector_zero - x = --x
-  !x:complex^N. --(--(x:complex^N)) = x
-  !c x:complex^N. --c % x = --(c % x)
-  !c x:complex^N. c % --x = --(c % x)
+  forall a:complex x:complex^N.\n    (a % x = cvector_zero <=> a = Cx(&0) \\/ x = cvector_zero)
+  forall x:complex^N. --x = (--(Cx(&1))) % x
+  forall x:complex^N. cvector_zero - x = --x
+  forall x:complex^N. --(--(x:complex^N)) = x
+  forall c x:complex^N. --c % x = --(c % x)
+  forall c x:complex^N. c % --x = --(c % x)
   --cvector_zero = cvector_zero
-  !x:complex^N. --x = cvector_zero <=> x = cvector_zero
-  !x y z:complex^N.\n    (x + y = y + x) /\\ ((x + y) + z = x + y + z) /\\ (x + y + z = y + x + z)
-  !a x y:complex^N. a % x = a % y <=> a = Cx(&0) \\/ x = y
-  !a b x:complex^N. a % x = b % x <=> a = b \\/ x = cvector_zero
-  clinear (f:complex^M->complex^N)\n    <=> (!x y. f(x + y) = f(x) + f(y)) /\\ (!c x. f(c % x) = c % f(x))
-  !f:complex^M->complex^N c. clinear f ==> clinear (\\x. c % f x)
-  !f:complex^M->complex^N. clinear f ==> clinear (\\x. --(f x))
-  !f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x + g x)
-  !f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x - g x)
-  !f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (g o f)
+  forall x:complex^N. --x = cvector_zero <=> x = cvector_zero
+  forall x y z:complex^N.\n    (x + y = y + x) /\\ ((x + y) + z = x + y + z) /\\ (x + y + z = y + x + z)
+  forall a x y:complex^N. a % x = a % y <=> a = Cx(&0) \\/ x = y
+  forall a b x:complex^N. a % x = b % x <=> a = b \\/ x = cvector_zero
+  clinear (f:complex^M->complex^N)\n    <=> (forall x y. f(x + y) = f(x) + f(y)) /\\ (forall c x. f(c % x) = c % f(x))
+  forall f:complex^M->complex^N c. clinear f ==> clinear (\\x. c % f x)
+  forall f:complex^M->complex^N. clinear f ==> clinear (\\x. --(f x))
+  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x + g x)
+  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x - g x)
+  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (g o f)
   clinear (\\x:complex^N. x)
   clinear (I:complex^N->complex^N)
   clinear ((\\x. cvector_zero):complex^M->complex^N)
   clinear ((--):complex^N->complex^N)
-  !f:complex^M->complex^N v:complex^P k.\n     clinear f /\\ 1 <= k /\\ k <= dimindex(:N) ==> clinear (\\x. (f x)$k % v)
-  !f:complex^M->complex^N. clinear f ==> (f cvector_zero = cvector_zero)
-  !f:complex^M->complex^N c x. clinear f ==> (f (c % x) = c % f x)
-  !f:complex^M->complex^N x. clinear f ==> (f (--x) = --(f x))
-  !f:complex^M->complex^N x y. clinear f ==> (f (x + y) = f x + f y)
-  !f:complex^M->complex^N x y. clinear f ==> (f(x - y) = f x - f y)
-  !f:complex^M->complex^N.\n  clinear f\n   ==> ((!x y. f x = f y ==> x = y)\n    <=> (!x. f x = cvector_zero ==> x = cvector_zero))
+  forall f:complex^M->complex^N v:complex^P k.\n     clinear f /\\ 1 <= k /\\ k <= dimindex(:N) ==> clinear (\\x. (f x)$k % v)
+  forall f:complex^M->complex^N. clinear f ==> (f cvector_zero = cvector_zero)
+  forall f:complex^M->complex^N c x. clinear f ==> (f (c % x) = c % f x)
+  forall f:complex^M->complex^N x. clinear f ==> (f (--x) = --(f x))
+  forall f:complex^M->complex^N x y. clinear f ==> (f (x + y) = f x + f y)
+  forall f:complex^M->complex^N x y. clinear f ==> (f(x - y) = f x - f y)
+  forall f:complex^M->complex^N.\n  clinear f\n   ==> ((forall x y. f x = f y ==> x = y)\n    <=> (forall x. f x = cvector_zero ==> x = cvector_zero))
   x <= b ==> x + a <= a + b:num
   x <= a ==> x <= a + b:num
   clinear fstcart /\\ clinear sndcart
   x <= b ==> x + a <= a + b:num
   x <= a ==> x <= a + b:num
   fstcart cvector_zero = cvector_zero /\\ sndcart cvector_zero = cvector_zero
-  !x:complex^(M,N)finite_sum y.\n  fstcart(x + y) = fstcart(x) + fstcart(y)\n  /\\ sndcart(x + y) = sndcart(x) + sndcart(y)
-  !x:complex^(M,N)finite_sum c.\n  fstcart(c % x) = c % fstcart(x) /\\ sndcart(c % x) = c % sndcart(x)
+  forall x:complex^(M,N)finite_sum y.\n  fstcart(x + y) = fstcart(x) + fstcart(y)\n  /\\ sndcart(x + y) = sndcart(x) + sndcart(y)
+  forall x:complex^(M,N)finite_sum c.\n  fstcart(c % x) = c % fstcart(x) /\\ sndcart(c % x) = c % sndcart(x)
   pastecart (cvector_zero:complex^N) (cvector_zero:complex^M) = cvector_zero
-  !x:complex^N y:complex^M.\n    pastecart x y = cvector_zero <=> x = cvector_zero /\\ y = cvector_zero
-  !x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)
-  !x1 x2 c:complex.\n  pastecart (c % x1) (c % y1) = c % pastecart x1 y1
+  forall x:complex^N y:complex^M.\n    pastecart x y = cvector_zero <=> x = cvector_zero /\\ y = cvector_zero
+  forall x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)
+  forall x1 x2 c:complex.\n  pastecart (c % x1) (c % y1) = c % pastecart x1 y1
   cvector_re :complex^N -> real^N = vector_map Re
   cvector_im :complex^N -> real^N = vector_map Im
   vector_to_cvector :real^N -> complex^N = vector_map Cx
-  !x:complex^N i. (cvector_re x)$i = Re (x$i)
-  !x:complex^N i. (cvector_im x)$i = Im (x$i)
-  !x:real^N i. (vector_to_cvector x)$i = Cx(x$i)
+  forall x:complex^N i. (cvector_re x)$i = Re (x$i)
+  forall x:complex^N i. (cvector_im x)$i = Im (x$i)
+  forall x:real^N i. (vector_to_cvector x)$i = Cx(x$i)
   vector_to_cvector (vec 0) = cvector_zero:complex^N
-  !x:real^N. vector_to_cvector x = cvector_zero <=> x = vec 0
-  !x:complex^N. x = cvector_zero <=> cvector_re x = vec 0 /\\ cvector_im x = vec 0
-  !a x:real^N. vector_to_cvector (a % x) = Cx a % vector_to_cvector x
-  !x:complex^N y z.\n    x = vector_to_cvector y + ii % vector_to_cvector z\n    <=> cvector_re x = y /\\ cvector_im x = z
-  !x:real^N. cvector_re (vector_to_cvector x) = x
-  !x:real^N. cvector_im (vector_to_cvector x) = vec 0
-  !x:real^N. cvector_im (ii % vector_to_cvector x) = x
-  !x:complex^N.\n    vector_to_cvector (cvector_re x) + ii % vector_to_cvector (cvector_im x)\n      = x
-  !x y:real^N. cvector_im (vector_to_cvector x + ii % vector_to_cvector y) = y
-  !x y:real^N. cvector_re (vector_to_cvector x + ii % vector_to_cvector y)= x
-  !x y:complex^N. cvector_re (x+y) = cvector_re x + cvector_re y
-  !x y:complex^N. cvector_im (x+y) = cvector_im x + cvector_im y
-  !a x:complex^N. cvector_re (Cx a % x) = a % cvector_re x
-  !a x:complex^N. cvector_im (Cx a % x) = a % cvector_im x
-  !f v:A^N. cvector_re (vector_map f v) = vector_map (Re o f) v
-  !f v:A^N. cvector_im (vector_map f v) = vector_map (Im o f) v
-  !f:real->A v:complex^N.\n    vector_map f (cvector_re v) = vector_map (f o Re) v
-  !f:real->A v:complex^N.\n    vector_map f (cvector_im v) = vector_map (f o Im) v
-  !f v1:A^N v2:B^N.\n    cvector_re (vector_map2 f v1 v2) = vector_map2 (\\x y. Re (f x y)) v1 v2
-  !f v1:A^N v2:B^N.\n    cvector_im (vector_map2 f v1 v2) = vector_map2 (\\x y. Im (f x y)) v1 v2
+  forall x:real^N. vector_to_cvector x = cvector_zero <=> x = vec 0
+  forall x:complex^N. x = cvector_zero <=> cvector_re x = vec 0 /\\ cvector_im x = vec 0
+  forall a x:real^N. vector_to_cvector (a % x) = Cx a % vector_to_cvector x
+  forall x:complex^N y z.\n    x = vector_to_cvector y + ii % vector_to_cvector z\n    <=> cvector_re x = y /\\ cvector_im x = z
+  forall x:real^N. cvector_re (vector_to_cvector x) = x
+  forall x:real^N. cvector_im (vector_to_cvector x) = vec 0
+  forall x:real^N. cvector_im (ii % vector_to_cvector x) = x
+  forall x:complex^N.\n    vector_to_cvector (cvector_re x) + ii % vector_to_cvector (cvector_im x)\n      = x
+  forall x y:real^N. cvector_im (vector_to_cvector x + ii % vector_to_cvector y) = y
+  forall x y:real^N. cvector_re (vector_to_cvector x + ii % vector_to_cvector y)= x
+  forall x y:complex^N. cvector_re (x+y) = cvector_re x + cvector_re y
+  forall x y:complex^N. cvector_im (x+y) = cvector_im x + cvector_im y
+  forall a x:complex^N. cvector_re (Cx a % x) = a % cvector_re x
+  forall a x:complex^N. cvector_im (Cx a % x) = a % cvector_im x
+  forall f v:A^N. cvector_re (vector_map f v) = vector_map (Re o f) v
+  forall f v:A^N. cvector_im (vector_map f v) = vector_map (Im o f) v
+  forall f:real->A v:complex^N.\n    vector_map f (cvector_re v) = vector_map (f o Re) v
+  forall f:real->A v:complex^N.\n    vector_map f (cvector_im v) = vector_map (f o Im) v
+  forall f v1:A^N v2:B^N.\n    cvector_re (vector_map2 f v1 v2) = vector_map2 (\\x y. Re (f x y)) v1 v2
+  forall f v1:A^N v2:B^N.\n    cvector_im (vector_map2 f v1 v2) = vector_map2 (\\x y. Im (f x y)) v1 v2
   cvector_flatten (v:complex^N) :real^(N,N) finite_sum =\n    pastecart (cvector_re v) (cvector_im v)
-  !v:complex^N i.\n  1 <= i /\\ i <= 2 * dimindex(:N)\n    ==> (cvector_flatten v)$i =\n      if i <= dimindex(:N)\n      then (cvector_re v)$i\n      else (cvector_im v)$(i-dimindex(:N))
+  forall v:complex^N i.\n  1 <= i /\\ i <= 2 * dimindex(:N)\n    ==> (cvector_flatten v)$i =\n      if i <= dimindex(:N)\n      then (cvector_re v)$i\n      else (cvector_im v)$(i-dimindex(:N))
   complex_vector (v1,v2) :complex^N\n    = vector_map2 (\\x y. Cx x + ii * Cx y) v1 v2
-  !v1 v2:real^N.\n  complex_vector (v1,v2) = vector_to_cvector v1 + ii % vector_to_cvector v2
+  forall v1 v2:real^N.\n  complex_vector (v1,v2) = vector_to_cvector v1 + ii % vector_to_cvector v2
   cvector_unflatten (v:real^(N,N) finite_sum) :complex^N\n    = complex_vector (fstcart v, sndcart v)
   cvector_unflatten o cvector_flatten = I :complex^N -> complex^N
   cvector_flatten o cvector_unflatten =\n    I :real^(N,N) finite_sum -> real^(N,N) finite_sum
-  !f:complex^N->complex^M.\n    clinear f ==> linear (cvector_flatten o f o cvector_unflatten)
-  !f g.\n    f = vector_map g\n      ==> !x:complex^N.\n        cvector_flatten (vector_map f x) = vector_map g (cvector_flatten x)
-  !x:complex^N. cvector_flatten (--x) = --(cvector_flatten x)
-  !x:complex^N. --x = cvector_unflatten (--(cvector_flatten x))
-  !f g.\n    f = vector_map2 g ==>\n      !x y:complex^N.\n        cvector_flatten (vector_map2 f x y) =\n          vector_map2 g (cvector_flatten x) (cvector_flatten y)
-  !x y:complex^N.\n    cvector_flatten (x+y) = cvector_flatten x + cvector_flatten y
-  !x y:complex^N.\n    x+y = cvector_unflatten (cvector_flatten x + cvector_flatten y)
-  !x y:complex^N. cvector_flatten (x-y) = cvector_flatten x - cvector_flatten y
-  !x y:complex^N. x-y = cvector_unflatten (cvector_flatten x - cvector_flatten y)
+  forall f:complex^N->complex^M.\n    clinear f ==> linear (cvector_flatten o f o cvector_unflatten)
+  forall f g.\n    f = vector_map g\n      ==> forall x:complex^N.\n        cvector_flatten (vector_map f x) = vector_map g (cvector_flatten x)
+  forall x:complex^N. cvector_flatten (--x) = --(cvector_flatten x)
+  forall x:complex^N. --x = cvector_unflatten (--(cvector_flatten x))
+  forall f g.\n    f = vector_map2 g ==>\n      forall x y:complex^N.\n        cvector_flatten (vector_map2 f x y) =\n          vector_map2 g (cvector_flatten x) (cvector_flatten y)
+  forall x y:complex^N.\n    cvector_flatten (x+y) = cvector_flatten x + cvector_flatten y
+  forall x y:complex^N.\n    x+y = cvector_unflatten (cvector_flatten x + cvector_flatten y)
+  forall x y:complex^N. cvector_flatten (x-y) = cvector_flatten x - cvector_flatten y
+  forall x y:complex^N. x-y = cvector_unflatten (cvector_flatten x - cvector_flatten y)
   cvector_cnj : complex^N->complex^N = vector_map cnj
-  !x y:complex^N. cvector_cnj (x+y) = cvector_cnj x + cvector_cnj y
-  !x y:complex^N. cvector_cnj (x-y) = cvector_cnj x - cvector_cnj y
-  !x:complex^N. cvector_cnj (--x) = --(cvector_cnj x)
-  !x:complex^N. cvector_re (cvector_cnj x) = cvector_re x
-  !x:complex^N. cvector_im (cvector_cnj x) = --(cvector_im x)
-  !x:complex^N. cvector_cnj (cvector_cnj x) = x
+  forall x y:complex^N. cvector_cnj (x+y) = cvector_cnj x + cvector_cnj y
+  forall x y:complex^N. cvector_cnj (x-y) = cvector_cnj x - cvector_cnj y
+  forall x:complex^N. cvector_cnj (--x) = --(cvector_cnj x)
+  forall x:complex^N. cvector_re (cvector_cnj x) = cvector_re x
+  forall x:complex^N. cvector_im (cvector_cnj x) = --(cvector_im x)
+  forall x:complex^N. cvector_cnj (cvector_cnj x) = x
   ((ccross):complex^3 -> complex^3 -> complex^3) x y = vector [\n    x$2 * y$3 - x$3 * y$2;\n    x$3 * y$1 - x$1 * y$3;\n    x$1 * y$2 - x$2 * y$1\n  ]
-  !x y:complex^3.\n  (x ccross y)$1 = x$2 * y$3 - x$3 * y$2\n  /\\ (x ccross y)$2 = x$3 * y$1 - x$1 * y$3\n  /\\ (x ccross y)$3 = x$1 * y$2 - x$2 * y$1
-  !x y:complex^3. x = y <=> x$1 = y$1 /\\ x$2 = y$2 /\\ x$3 = y$3
-  !x:complex^3. cvector_zero ccross x = cvector_zero
-  !x:complex^3. x ccross cvector_zero = cvector_zero
-  !x y:complex^3. (x ccross y) = --(y ccross x)
-  !x:complex^3. x ccross x = cvector_zero
-  !x y z:complex^3. (x + y) ccross z = (x ccross z) + (y ccross z)
-  !x y z:complex^3. x ccross(y + z) = (x ccross y) + (x ccross z)
-  !c x y:complex^3. (c % x) ccross y = c % (x ccross y)
-  !c x y:complex^3. x ccross (c % y) = c % (x ccross y)
-  !x y:complex^3. (--x) ccross y = --(x ccross y)
-  !x y:complex^3. x ccross (--y) = --(x ccross y)
-  !(x:complex^3) y z.\n    x ccross (y ccross z) + y ccross (z ccross x) + z ccross (x ccross y) =\n      cvector_zero
+  forall x y:complex^3.\n  (x ccross y)$1 = x$2 * y$3 - x$3 * y$2\n  /\\ (x ccross y)$2 = x$3 * y$1 - x$1 * y$3\n  /\\ (x ccross y)$3 = x$1 * y$2 - x$2 * y$1
+  forall x y:complex^3. x = y <=> x$1 = y$1 /\\ x$2 = y$2 /\\ x$3 = y$3
+  forall x:complex^3. cvector_zero ccross x = cvector_zero
+  forall x:complex^3. x ccross cvector_zero = cvector_zero
+  forall x y:complex^3. (x ccross y) = --(y ccross x)
+  forall x:complex^3. x ccross x = cvector_zero
+  forall x y z:complex^3. (x + y) ccross z = (x ccross z) + (y ccross z)
+  forall x y z:complex^3. x ccross(y + z) = (x ccross y) + (x ccross z)
+  forall c x y:complex^3. (c % x) ccross y = c % (x ccross y)
+  forall c x y:complex^3. x ccross (c % y) = c % (x ccross y)
+  forall x y:complex^3. (--x) ccross y = --(x ccross y)
+  forall x y:complex^3. x ccross (--y) = --(x ccross y)
+  forall(x:complex^3) y z.\n    x ccross (y ccross z) + y ccross (z ccross x) + z ccross (x ccross y) =\n      cvector_zero
   vector_neg:complex->complex
   vector_add:complex->complex->complex
   vector_sub:complex->complex->complex
@@ -74810,101 +74810,101 @@ Multivariate/cvectors quotations (416):
   complex_inv:complex->complex
   (cdot) (x:complex^N) (y:complex^N) =\n    vsum (1..dimindex(:N)) (\\i. x$i * cnj(y$i))
   dimindex (:N)
-  !x:complex^N y. x cdot y = cnj (y cdot x)
-  !x:complex^N. real(x cdot x)
+  forall x:complex^N y. x cdot y = cnj (y cdot x)
+  forall x:complex^N. real(x cdot x)
   cnj ((z:real^2^N)$(x':num))
   (y:real^2^N)$(x':num)
   (x:real^2^N)$(x':num)
   dimindex (:N)
-  !x:complex^N y z. (x + y) cdot z = (x cdot z) + (y cdot z)
+  forall x:complex^N y z. (x + y) cdot z = (x cdot z) + (y cdot z)
   cnj ((z:real^2^N)$(x':num))
   cnj((y:real^2^N)$(x':num))
   (x:real^2^N)$(x':num)
   dimindex (:N)
-  !x:complex^N y z. x cdot (y + z) = (x cdot y) + (x cdot z)
+  forall x:complex^N y z. x cdot (y + z) = (x cdot y) + (x cdot z)
   cnj ((z:real^2^N)$(x':num))
   (y:real^2^N)$(x':num)
   (x:real^2^N)$(x':num)
   dimindex (:N)
-  !x:complex^N y z. (x - y) cdot z = (x cdot z) - (y cdot z)
+  forall x:complex^N y z. (x - y) cdot z = (x cdot z) - (y cdot z)
   cnj ((z:real^2^N)$(x':num))
   cnj((y:real^2^N)$(x':num))
   (x:real^2^N)$(x':num)
   dimindex (:N)
-  !x:complex^N y z. x cdot (y - z) = (x cdot y) - (x cdot z)
+  forall x:complex^N y z. x cdot (y - z) = (x cdot y) - (x cdot z)
   dimindex (:N)
-  !c:complex x:complex^N y. (c % x) cdot y = c * (x cdot y)
+  forall c:complex x:complex^N y. (c % x) cdot y = c * (x cdot y)
   dimindex (:N)
-  !c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)
+  forall c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)
   dimindex (:N)
-  !x:complex^N y. (--x) cdot y = --(x cdot y)
+  forall x:complex^N y. (--x) cdot y = --(x cdot y)
   dimindex (:N)
-  !x:complex^N y. x cdot (--y) = --(x cdot y)
-  !x:complex^N. cvector_zero cdot x = Cx (&0)
+  forall x:complex^N y. x cdot (--y) = --(x cdot y)
+  forall x:complex^N. cvector_zero cdot x = Cx (&0)
   cnj (Cx(&0)) = Cx(&0)
-  !x:complex^N. x cdot cvector_zero = Cx (&0)
-  !x y:complex^3.\n    x cdot y = (x$1 * cnj (y$1) + x$2 * cnj (y$2) + x$3 * cnj (y$3))
-  !x y:complex^N. x cdot y + y cdot x = Cx(&2 * Re(x cdot y))
-  !r c.\n    (vector_to_cvector r) ccross c =\n      vector_to_cvector (r cross (cvector_re c))\n      + ii % (vector_to_cvector (r cross (cvector_im c)))
-  !r c.\n    c ccross (vector_to_cvector r) =\n      vector_to_cvector ((cvector_re c) cross r)\n      + ii % (vector_to_cvector ((cvector_im c) cross r))
+  forall x:complex^N. x cdot cvector_zero = Cx (&0)
+  forall x y:complex^3.\n    x cdot y = (x$1 * cnj (y$1) + x$2 * cnj (y$2) + x$3 * cnj (y$3))
+  forall x y:complex^N. x cdot y + y cdot x = Cx(&2 * Re(x cdot y))
+  forall r c.\n    (vector_to_cvector r) ccross c =\n      vector_to_cvector (r cross (cvector_re c))\n      + ii % (vector_to_cvector (r cross (cvector_im c)))
+  forall r c.\n    c ccross (vector_to_cvector r) =\n      vector_to_cvector ((cvector_re c) cross r)\n      + ii % (vector_to_cvector ((cvector_im c) cross r))
   dimindex (:N)
   dimindex (:N)
-  !r c.\n    (vector_to_cvector r) cdot c =\n      Cx (r dot (cvector_re c)) - ii * Cx (r dot (cvector_im c))
+  forall r c.\n    (vector_to_cvector r) cdot c =\n      Cx (r dot (cvector_re c)) - ii * Cx (r dot (cvector_im c))
   dimindex (:N)
   dimindex (:N)
-  !r c.\n    c cdot (vector_to_cvector r) =\n      Cx ((cvector_re c) dot r) + ii * Cx ((cvector_im c) dot r)
+  forall r c.\n    c cdot (vector_to_cvector r) =\n      Cx ((cvector_re c) dot r) + ii * Cx ((cvector_im c) dot r)
   cnorm2 (v:complex^N) = real_of_complex (v cdot v)
-  !v:complex^N. Cx(cnorm2 v) = v cdot v
+  forall v:complex^N. Cx(cnorm2 v) = v cdot v
   cnorm2 (cvector_zero:complex^N) = &0
-  !x:complex^N. cnorm2 x = (vector_map norm x) dot (vector_map norm x)
-  !x:complex^N. cnorm2 x = &0 <=> x = cvector_zero
+  forall x:complex^N. cnorm2 x = (vector_map norm x) dot (vector_map norm x)
+  forall x:complex^N. cnorm2 x = &0 <=> x = cvector_zero
   x = Cx y ==> real_of_complex x = y
   (p<=>q) <=> ((p==>q) /\\ (q==>p))
-  !x:complex^N. x cdot x = Cx(&0) <=> x = cvector_zero
-  !x:complex^N. &0 <= cnorm2 x
-  !x:complex^N. &0 <= real_of_complex (x cdot x)
+  forall x:complex^N. x cdot x = Cx(&0) <=> x = cvector_zero
+  forall x:complex^N. &0 <= cnorm2 x
+  forall x:complex^N. &0 <= real_of_complex (x cdot x)
   x * cnj x * y = (x * cnj x) * y
-  !a x:complex^N. cnorm2 (a % x) = (norm a) pow 2 * cnorm2 x
+  forall a x:complex^N. cnorm2 (a % x) = (norm a) pow 2 * cnorm2 x
   FINITE (1..dimindex(:N))
   x-(--Cx(&1))*y = x+y
   (x*x+x*(--ii)*y)+(ii*y)*x+(ii*y)*(--ii)*y = x*x-(ii*ii)*y*y
-  !x y:real^N.\n    cnorm2 (vector_to_cvector x + ii % vector_to_cvector y) =\n      norm x pow 2 + norm y pow 2
-  !v:complex^N.\n    cnorm2 v = norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2
-  !x:complex^N. cnorm2 x = norm (x cdot x)
-  !x y:complex^N. cnorm2 (x-y) = cnorm2 (y-x)
-  !x:real^N. cnorm2 (vector_to_cvector x) = norm x pow 2
+  forall x y:real^N.\n    cnorm2 (vector_to_cvector x + ii % vector_to_cvector y) =\n      norm x pow 2 + norm y pow 2
+  forall v:complex^N.\n    cnorm2 v = norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2
+  forall x:complex^N. cnorm2 x = norm (x cdot x)
+  forall x y:complex^N. cnorm2 (x-y) = cnorm2 (y-x)
+  forall x:real^N. cnorm2 (vector_to_cvector x) = norm x pow 2
   cnorm :complex^N->real = sqrt o cnorm2
   cnorm:complex^N->real
   norm (cvector_zero:complex^N) = &0
-  !x:complex^N. norm x pow 2 = cnorm2 x
-  !x y:real^N.\n    norm (vector_to_cvector x + ii % vector_to_cvector y) =\n      sqrt(norm x pow 2 + norm y pow 2)
-  !v:complex^N.\n    norm v = sqrt(norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2)
-  !a x:complex^N. norm (a % x) = norm a * norm x
-  !x:complex^N. norm x = &0 <=> x = cvector_zero
-  !x:complex^N. &0 <= norm x
-  !x y:complex^N. norm (x-y) = norm (y-x)
-  !x:real^N. norm (vector_to_cvector x) = norm x
-  !k. 1 <= k /\\ k <= dimindex(:N)\n    ==> norm (vector_to_cvector (basis k :real^N)) = &1
+  forall x:complex^N. norm x pow 2 = cnorm2 x
+  forall x y:real^N.\n    norm (vector_to_cvector x + ii % vector_to_cvector y) =\n      sqrt(norm x pow 2 + norm y pow 2)
+  forall v:complex^N.\n    norm v = sqrt(norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2)
+  forall a x:complex^N. norm (a % x) = norm a * norm x
+  forall x:complex^N. norm x = &0 <=> x = cvector_zero
+  forall x:complex^N. &0 <= norm x
+  forall x y:complex^N. norm (x-y) = norm (y-x)
+  forall x:real^N. norm (vector_to_cvector x) = norm x
+  forall k. 1 <= k /\\ k <= dimindex(:N)\n    ==> norm (vector_to_cvector (basis k :real^N)) = &1
   norm(basis 1:real^N) = &1
-  !c. &0 <= c ==> ?x:complex^N. norm(x) = c
+  forall c. &0 <= c ==> ?x:complex^N. norm(x) = c
   cunit (X:complex^N) = inv(Cx(norm X))% X
   cunit cvector_zero = cvector_zero:complex^N
   (x*y)*x=(x*x)*y
   x = cvector_zero:complex^N
-  !x:complex^N. (cunit x cdot x) % cunit x = x
+  forall x:complex^N. (cunit x cdot x) % cunit x = x
   collinear_cvectors x (y:complex^N) <=> ?a. y = a % x \\/ x = a % y
-  !x y:complex^N. collinear_cvectors x y <=> collinear_cvectors y x
+  forall x y:complex^N. collinear_cvectors x y <=> collinear_cvectors y x
   Cx(&0)
-  !x:complex^N. collinear_cvectors x cvector_zero
+  forall x:complex^N. collinear_cvectors x cvector_zero
   inv a :complex
   ~(a=Cx(&0))
-  !x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ?a. ~(a=Cx(&0)) /\\ y = a % x
+  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ?a. ~(a=Cx(&0)) /\\ y = a % x
   Cx(&0)
   y=cvector_zero:complex^N
-  !x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) ==> ?a. y = a % x
-  !x y:complex^N.\n    collinear_cvectors x y /\\ ~(y=cvector_zero) ==> ?a. x = a % y
-  !x. x= &1 ==> ~(x= &0)
-  !x y:real^N.\n    collinear_cvectors x (vector_to_cvector y) /\\ norm y = &1\n      ==> x = (x cdot (vector_to_cvector y)) % vector_to_cvector y
+  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) ==> ?a. y = a % x
+  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(y=cvector_zero) ==> ?a. x = a % y
+  forall x. x= &1 ==> ~(x= &0)
+  forall x y:real^N.\n    collinear_cvectors x (vector_to_cvector y) /\\ norm y = &1\n      ==> x = (x cdot (vector_to_cvector y)) % vector_to_cvector y
   (y:complex^3)$1/(x:complex^3)$1
   (y:complex^3)$2/(x:complex^3)$2
   (y:complex^3)$3/(x:complex^3)$3
@@ -74912,55 +74912,55 @@ Multivariate/cvectors quotations (416):
   (x:complex^3)$3 = Cx(&0)
   (x:complex^3)$2 = Cx(&0)
   (x:complex^3)$1 = Cx(&0)
-  !x y:complex^3. x ccross y = cvector_zero <=> collinear_cvectors x y
+  forall x y:complex^3. x ccross y = cvector_zero <=> collinear_cvectors x y
   (p\\/q) <=> (~p ==> q)
-  !a x y:complex^N. ~(a = Cx(&0)) /\\ x = a % y ==> y = inv a % x
+  forall a x y:complex^N. ~(a = Cx(&0)) /\\ x = a % y ==> y = inv a % x
   a=Cx(&0)
-  !a x y:complex^N. ~(x = cvector_zero) /\\ x = a % y ==> y = inv a % x
+  forall a x y:complex^N. ~(x = cvector_zero) /\\ x = a % y ==> y = inv a % x
   Cx c
   Cx(&0)
   Re(inv a)
   vector_to_cvector (y:real^N) =\n      inv a % vector_to_cvector x
   (p\\/q) <=> (~p ==> q)
   Re a
-  !x y:real^N.\n    collinear_cvectors (vector_to_cvector x) (vector_to_cvector y)\n      <=> collinear {vec 0,x,y}
+  forall x y:real^N.\n    collinear_cvectors (vector_to_cvector x) (vector_to_cvector y)\n      <=> collinear {vec 0,x,y}
   corthogonal (x:complex^N) y <=> x cdot y = Cx(&0)
-  !x y:complex^N. corthogonal x y <=> corthogonal y x
-  !x:complex^N. corthogonal cvector_zero x /\\ corthogonal x cvector_zero
-  !x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ~(corthogonal x y)
-  !x y a.\n    (corthogonal x y ==> corthogonal x (a%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal x (a%y))\n    /\\ (corthogonal x y ==> corthogonal (a%x) y)\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal (a%x) y)
-  !x y a b.\n    (corthogonal x y ==> corthogonal (a%x) (b%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) \\/ b = Cx(&0)\n      <=> corthogonal (a%x) (b%y))
-  !r c.\n    (corthogonal c (vector_to_cvector r)\n      <=> orthogonal (cvector_re c) r /\\ orthogonal (cvector_im c) r)\n    /\\ (corthogonal (vector_to_cvector r) c\n      <=> orthogonal r (cvector_re c) /\\ orthogonal r (cvector_im c))
-  !x y:complex^N.\n    (corthogonal x (cunit y) <=> corthogonal x y)\n    /\\ (corthogonal (cunit x) y <=> corthogonal x y)
+  forall x y:complex^N. corthogonal x y <=> corthogonal y x
+  forall x:complex^N. corthogonal cvector_zero x /\\ corthogonal x cvector_zero
+  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ~(corthogonal x y)
+  forall x y a.\n    (corthogonal x y ==> corthogonal x (a%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal x (a%y))\n    /\\ (corthogonal x y ==> corthogonal (a%x) y)\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal (a%x) y)
+  forall x y a b.\n    (corthogonal x y ==> corthogonal (a%x) (b%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) \\/ b = Cx(&0)\n      <=> corthogonal (a%x) (b%y))
+  forall r c.\n    (corthogonal c (vector_to_cvector r)\n      <=> orthogonal (cvector_re c) r /\\ orthogonal (cvector_im c) r)\n    /\\ (corthogonal (vector_to_cvector r) c\n      <=> orthogonal r (cvector_re c) /\\ orthogonal r (cvector_im c))
+  forall x y:complex^N.\n    (corthogonal x (cunit y) <=> corthogonal x y)\n    /\\ (corthogonal (cunit x) y <=> corthogonal x y)
   y=cvector_zero:complex^N
-  !x y:complex^N. corthogonal (x - (x cdot cunit y) % cunit y) y
+  forall x y:complex^N. corthogonal (x - (x cdot cunit y) % cunit y) y
   x cdot y = Cx (&0) ==> y cdot x = Cx(&0)
-  !x y:complex^N. corthogonal x y ==> cnorm2 (x+y) = cnorm2 x + cnorm2 y
+  forall x y:complex^N. corthogonal x y ==> cnorm2 (x+y) = cnorm2 x + cnorm2 y
   x * ((y * inv x) * x) * (z * inv x') * inv x'\n    = (y * z) * (x * inv x) * (x * inv x' * inv x'):complex
-  (!x y. P x y ==> f x y = (g x y:real))\n    ==> P x y /\\ a <= g x y * b ==> a <= f x y * b
-  (!x:complex^N y. p (x - f x y) y)\n      ==> cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
+  (forall x y. P x y ==> f x y = (g x y:real))\n    ==> P x y /\\ a <= g x y * b ==> a <= f x y * b
+  (forall x:complex^N y. p (x - f x y) y)\n      ==> cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
   y = cvector_zero:complex^N
-  !x y:complex^N. norm (x cdot y) pow 2 <= cnorm2 x * cnorm2 y
+  forall x y:complex^N. norm (x cdot y) pow 2 <= cnorm2 x * cnorm2 y
   &0 <= x /\\ &0 <= y /\\ abs x <= abs y ==> x <= y
-  !x y:complex^N. norm (x cdot y) <= norm x * norm y
+  forall x y:complex^N. norm (x cdot y) <= norm x * norm y
   x = y + x <=> y = &0
   x * ((y * inv x) * x) * (z * inv x') * inv x' =\n        (y * z) * (x * inv x) * (x * inv x' * inv x'):complex
-  (!x y. P x y ==> g x y = (f x y:real)) ==>\n        P x y /\\ (a = f x y * z ==> R) ==> (a = g x y * z ==> R)
-  (!x:complex^N y. p (x - f x y) y) ==>\n      cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
+  (forall x y. P x y ==> g x y = (f x y:real)) ==>\n        P x y /\\ (a = f x y * z ==> R) ==> (a = g x y * z ==> R)
+  (forall x:complex^N y. p (x - f x y) y) ==>\n      cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
   y = cvector_zero:complex^N
-  !x y:complex^N.\n    norm (x cdot y) pow 2 = cnorm2 x * cnorm2 y <=> collinear_cvectors x y
+  forall x y:complex^N.\n    norm (x cdot y) pow 2 = cnorm2 x * cnorm2 y <=> collinear_cvectors x y
   x=y <=> abs x = abs y /\\ (&0 <= x /\\ &0 <= y \\/ x < &0 /\\ y < &0)
-  !x y:complex^N.\n  norm (x cdot y) = norm x * norm y <=> collinear_cvectors x y
+  forall x y:complex^N.\n  norm (x cdot y) = norm x * norm y <=> collinear_cvectors x y
   x+ &2*y+z<=x+z+ &2*t <=> y<=t:real
   (x+y)+z+t = x+(y+z)+t:complex
   abs x <= abs y /\\ &0 <= x /\\ &0 <= y ==> x <= y
-  !x y:complex^N. norm (x+y) <= norm x + norm y
+  forall x y:complex^N. norm (x+y) <= norm x + norm y
   y-x:complex^N
   x:complex^N
   x<=y+z <=> x-y<=z:real
   --x <= y <=>  --y <= x
-  (!x y. P x y <=> Q x y) ==> Q x y ==> P x y
-  !x y:complex^N. abs (norm x - norm y) <= norm (x-y)
+  (forall x y. P x y <=> Q x y) ==> Q x y ==> P x y
+  forall x y:complex^N. abs (norm x - norm y) <= norm (x-y)
   (cvsum:(A->bool)->(A->complex^N)->complex^N) s f = lambda i. vsum s (\\x. (f x)$i)
   csummable (s:num->bool) (f:num->complex^N)\n    <=> summable s (cvector_re o f) /\\ summable s (cvector_im o f)
   cinfsum (s:num->bool) (f:num->complex^N) :complex^N\n    = vector_to_cvector (infsum s (\\x. cvector_re (f x)))\n      + ii % vector_to_cvector (infsum s (\\x.cvector_im (f x)))
@@ -74977,12 +74977,12 @@ Multivariate/cvectors quotations (416):
   (p /\\ q <=> r) ==> (r ==> p)
   fstcart (l:real^(N,N) finite_sum)
   pastecart (l:real^N) (l':real^N)
-  !s (f:num->complex^N). csummable s f <=> summable s (cvector_flatten o f)
-  !s f.\n    csummable s f ==>\n      ((cinfsum s f):complex^N) =\n        cvector_unflatten (infsum s (cvector_flatten o f))
+  forall s (f:num->complex^N). csummable s f <=> summable s (cvector_flatten o f)
+  forall s f.\n    csummable s f ==>\n      ((cinfsum s f):complex^N) =\n        cvector_unflatten (infsum s (cvector_flatten o f))
   cvector_flatten o (h:complex^N -> complex^M) o (f:num -> complex^N) =\n    \\n. (cvector_flatten o h o cvector_unflatten) (cvector_flatten (f n))
-  !f h:complex^N->complex^M s.\n    csummable s f /\\ clinear h ==> csummable s (h o f)
+  forall f h:complex^N->complex^M s.\n    csummable s f /\\ clinear h ==> csummable s (h o f)
   cvector_flatten o (h:complex^M->complex^N) o (f:num->complex^M) =\n    \\n. (cvector_flatten o h o cvector_unflatten) ((cvector_flatten o f) n)
-  !f (h:complex^M->complex^N) s.\n    csummable s f /\\ clinear h ==> cinfsum s (h o f) = h (cinfsum s f)
+  forall f (h:complex^M->complex^N) s.\n    csummable s f /\\ clinear h ==> cinfsum s (h o f) = h (cinfsum s f)
 COMPONENT_LE_NORM_ALT =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))))))))
 RE_IM_NORM =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#Im:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Im:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))))))))
 RE_NORM =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). ((#real_le:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))))

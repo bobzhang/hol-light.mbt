@@ -1151,7 +1151,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|Warning: inventing type variables
       #|Formal_ineqs/taylor/theory/multivariate_taylor-compiled quotations (789):
       #|  :real^N
-      #|  !f s a. (!x. f(x) = f(a) ==> x = a)\n            ==> (IMAGE f (s DELETE a) = (IMAGE f s) DELETE (f a))
+      #|  forall f s a. (forall x. f(x) = f(a) ==> x = a)\n            ==> (IMAGE f (s DELETE a) = (IMAGE f s) DELETE (f a))
       #|  partial i f x = derivative (f o (\\t. (x:real^N) + t % basis i)) (&0)
       #|  (all_n n [] s <=> T) /\\ (all_n n (CONS h t) s <=> s n h /\\ all_n (SUC n) t s)
       #|  :P
@@ -1231,7 +1231,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  x - y:real^2
       #|  (x:real^2)$1 * x$2 - ((y:real^2)$1 * y$2 + y$2 * (x$1 - y$1) + y$1 * (x$2 - y$2)) =\n\t\t(x$2 - y$2) * (x$1 - y$1)
       #|  (lift o (\\x:real^2. x$1 * x$2) has_derivative lift o (\\x. y$2 * x$1 + y$1 * x$2)) (at y)
-      #|  !a b. a = b + a * &1 <=> b = &0
+      #|  forall a b. a = b + a * &1 <=> b = &0
       #|  DISJOINT B {i} /\\ A = B UNION {i}
       #|  A DIFF {i}
       #|  1.. _
@@ -1240,8 +1240,8 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  x = i
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
-      #|  !f. (\\x:real^N. f i x % (basis i:real^M)) = (\\x. drop ((lift o f i) x) % basis i)
-      #|  (!i. i IN 1..dimindex (:M) ==> (lift o (f i) has_derivative lift o (f' i)) (at (y:real^N))) ==>\n\t(((\\x. lambda i. f i x):real^N->real^M) has_derivative (\\x. lambda i. f' i x) ) (at y)
+      #|  forall f. (\\x:real^N. f i x % (basis i:real^M)) = (\\x. drop ((lift o f i) x) % basis i)
+      #|  (forall i. i IN 1..dimindex (:M) ==> (lift o (f i) has_derivative lift o (f' i)) (at (y:real^N))) ==>\n\t(((\\x. lambda i. f i x):real^N->real^M) has_derivative (\\x. lambda i. f' i x) ) (at y)
       #|  1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
       #|  (vector [x; y]:real^2) = (lambda i. if i = 1 then x else y)
       #|  ~(2 = 1)
@@ -1332,8 +1332,8 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  &0 <= y$j - x$j
       #|  h = g o (\\t'. t + t')
       #|  f o _
-      #|  !t. t IN s ==> (g has_real_derivative (partial j f (y' + t % basis j))) (atreal t within s)
-      #|  !t. t IN s ==> y' + t % basis j IN interval [x,z]
+      #|  forall t. t IN s ==> (g has_real_derivative (partial j f (y' + t % basis j))) (atreal t within s)
+      #|  forall t. t IN s ==> y' + t % basis j IN interval [x,z]
       #|  real_interval [&0, y$j - x$j]
       #|  f y = g (y$j - x$j)
       #|  f y' = g (&0)
@@ -1342,7 +1342,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  y' = y
       #|  f y' <= f y
       #|  (lambda i. if i = j then x$j else y$i):real^N
-      #|  (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(!y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(!y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(!y. y IN interval [x,u] ==> lo <= f y) ==>\n\t(!y. y IN interval [x,z] ==> lo <= f y)
+      #|  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(forall y. y IN interval [x,u] ==> lo <= f y) ==>\n\t(forall y. y IN interval [x,z] ==> lo <= f y)
       #|  i = j
       #|  j IN 1..dimindex (:N)
       #|  i = j
@@ -1351,20 +1351,20 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  \\t. partial j f (y' + t % basis j)
       #|  &0
       #|  y$j - x$j
-      #|  (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(!y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(!y. y IN interval [x,z] ==> partial j f y <= &0) ==>\n\t(!y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(!y. y IN interval [x,z] ==> f y <= hi)
+      #|  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> partial j f y <= &0) ==>\n\t(forall y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
       #|  (\\p. -- f p)
       #|  --hi
-      #|  !net. (\\x. p + x) differentiable net
+      #|  forall net. (\\x. p + x) differentiable net
       #|  lift o f differentiable at (p + y) ==>\n\tpartial i (f o (\\x. p + x)) y = partial i f (p + y)
-      #|  !net. (\\x. p - x) differentiable net
+      #|  forall net. (\\x. p - x) differentiable net
       #|  lift o f differentiable at (p - y) ==>\n\tpartial i (f o (\\x. p - x)) y = --partial i f (p - y)
-      #|  !x z y:real^N. x + z - (x + z - y) = y
-      #|  !x z p. x + z - p = (x + z) - p:real^N
+      #|  forall x z y:real^N. x + z - (x + z - y) = y
+      #|  forall x z p. x + z - p = (x + z) - p:real^N
       #|  dP
-      #|  !y. _ y
-      #|  !p. p IN interval [x,z] ==> x + (z - p) IN interval [x,z]
+      #|  forall y. _ y
+      #|  forall p. p IN interval [x,z] ==> x + (z - p) IN interval [x,z]
       #|  ~(i = j)
-      #|  (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\tu$j = z$j ==>\n\t(!y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(!y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(!y. y IN interval [u,z] ==> f y <= hi) ==>\n\t(!y. y IN interval [x,z] ==> f y <= hi)
+      #|  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\tu$j = z$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(forall y. y IN interval [u,z] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
       #|  j IN 1..dimindex (:N)
       #|  f o (\\p:real^N. x + (z - p))
       #|  x + (z - u):real^N
@@ -1375,7 +1375,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  i <= 1 <=> i = 0 \\/ i = 1
       #|  0 + 1 = 1 /\\ ~(1 = 0) /\\ 1 + 1 = 2 /\\ ~(2 = 1) /\\ ~(2 = 0)
       #|  \\i. if i = 0 then f else if i = 1 then derivative f else nth_derivative 2 f
-      #|  nth_diff_strong_int 2 (&0, &1) f ==>\n\t(!t. interval_arith t (&0, &1) ==> abs (nth_derivative 2 f t) <= dd_bound) ==>\n\tabs (f (&1) - (f (&0) + derivative f (&0))) <= dd_bound / &2
+      #|  nth_diff_strong_int 2 (&0, &1) f ==>\n\t(forall t. interval_arith t (&0, &1) ==> abs (nth_derivative 2 f t) <= dd_bound) ==>\n\tabs (f (&1) - (f (&0) + derivative f (&0))) <= dd_bound / &2
       #|  1
       #|  real_interval [&0, &1]
       #|  ~P <=> (P <=> F)
@@ -1425,7 +1425,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  FACT 1 = 1 /\\ FACT 0 = 1
       #|  0 + 1 = 1 /\\ ~(1 = 0)
       #|  \\i. if i = 0 then f else derivative f
-      #|  (!t. interval_arith t (&0, &1) ==> f real_differentiable atreal t /\\ \n\t\t\tabs (derivative f t) <= d_bound) ==>\n\tabs (f (&1) - f (&0)) <= d_bound
+      #|  (forall t. interval_arith t (&0, &1) ==> f real_differentiable atreal t /\\ \n\t\t\tabs (derivative f t) <= d_bound) ==>\n\tabs (f (&1) - f (&0)) <= d_bound
       #|  0
       #|  real_interval [&0, &1]
       #|  ~P <=> (P <=> F)
@@ -1437,14 +1437,14 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  &0
       #|  &1
       #|  ~P <=> (P <=> F)
-      #|  m_taylor_error f domain (w:real^N) error <=>\n\t!x:real^N. x IN interval [domain] ==> sum (1..dimindex (:N)) (\\i. w$i * sum (1..dimindex (:N))\n\t\t(\\j. w$j * abs (partial j (partial i f) x))) <= error
-      #|  m_taylor_partial_error f i domain (w:real^N) error <=>\n\t(!x:real^N. x IN interval[domain] ==>\n\t\tsum (1..dimindex (:N)) (\\j. w$j * abs (partial j (partial i f) x)) <= error)
-      #|  (!i. i IN 1..dimindex (:N) ==> m_taylor_partial_error f i domain w (p_error i) /\\ &0 <= w$i) ==>\n\tsum (1..dimindex (:N)) (\\i. w$i * p_error i) <= error ==>\n\tm_taylor_error f domain (w:real^N) error
+      #|  m_taylor_error f domain (w:real^N) error <=>\n\tforall x:real^N. x IN interval [domain] ==> sum (1..dimindex (:N)) (\\i. w$i * sum (1..dimindex (:N))\n\t\t(\\j. w$j * abs (partial j (partial i f) x))) <= error
+      #|  m_taylor_partial_error f i domain (w:real^N) error <=>\n\t(forall x:real^N. x IN interval[domain] ==>\n\t\tsum (1..dimindex (:N)) (\\j. w$j * abs (partial j (partial i f) x)) <= error)
+      #|  (forall i. i IN 1..dimindex (:N) ==> m_taylor_partial_error f i domain w (p_error i) /\\ &0 <= w$i) ==>\n\tsum (1..dimindex (:N)) (\\i. w$i * p_error i) <= error ==>\n\tm_taylor_error f domain (w:real^N) error
       #|  partial2 j i f = partial j (partial i f)
-      #|  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (!y. y IN s ==> (lift o f) differentiable at y /\\\n\t\t(!i. (lift o partial i f) differentiable at y))
-      #|  diff2c f x <=> diff2 f x /\\\n\t(!i j. (lift o partial2 j i f) continuous at x)
+      #|  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (forall y. y IN s ==> (lift o f) differentiable at y /\\\n\t\t(forall i. (lift o partial i f) differentiable at y))
+      #|  diff2c f x <=> diff2 f x /\\\n\t(forall i j. (lift o partial2 j i f) continuous at x)
       #|  diff2c f x ==> diff2 f x
-      #|  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (!y. y IN s ==> diff2 f y)
+      #|  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (forall y. y IN s ==> diff2 f y)
       #|  diff2 f (x + t % e) ==>\n\tf o (\\t. x + t % e) real_differentiable atreal t
       #|  diff2 f (x + t % e:real^N) ==>\n\tderivative (f o (\\t. x + t % e)) t =\n\tsum (1..dimindex (:N)) (\\i. e$i * (partial i f o (\\t. x + t % e)) t)
       #|  diff2 f (x + t % e:real^N) ==>\n\tpartial i f o (\\t. x + t % e) real_differentiable atreal t
@@ -1479,7 +1479,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  (\\x. c) o (\\t. x + t % basis i) = (\\x. c)
       #|  partial i (\\x:real^N. c) = (\\x. &0)
       #|  ~(i IN 1..dimindex (:N)) ==> partial i f = (\\x:real^N. &0)
-      #|  !f f' a. (!x. abs x <= abs a ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(?t. abs t <= abs a /\\ f a - f (&0) = f' t * a)
+      #|  forall f f' a. (forall x. abs x <= abs a ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(?t. abs t <= abs a /\\ f a - f (&0) = f' t * a)
       #|  &0 <= a
       #|  &0
       #|  &0
@@ -1503,38 +1503,38 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  e * inv(&2) * sqrt(&2)
       #|  infnorm y = e / &2
       #|  &0 < e / (&2)
-      #|  !i. y$i = e / (&2)
+      #|  forall i. y$i = e / (&2)
       #|  e / &2 % (vec 1:real^2)
       #|  (vec 0:real^2) limit_point_of {y | &0 < y$1 /\\ &0 < y$2}
-      #|  !a. h * a * k = h * k * a
+      #|  forall a. h * a * k = h * k * a
       #|  p = g k - g (&0)
       #|  _1 - _2
       #|  partial i f o (\\k. (x + t3 % basis i) + k % basis j)
-      #|  !h k. abs h <= r /\\ abs k <= r ==>\n\t(?t3 t4. G h k = h * k * partial j (partial i f) (x + t4 % basis j + t3 % basis i) \n\t\t/\\ abs t3 <= abs h /\\ abs t4 <= abs k)
-      #|  !h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t3. G h k = h * derivative (F2 k) t3 /\\ abs t3 <= abs h)
-      #|  !y e. (f o (\\h. y + h % e)) o (\\t. h + t) = f o (\\t. (y + h % e) + t % e)
+      #|  forall h k. abs h <= r /\\ abs k <= r ==>\n\t(?t3 t4. G h k = h * k * partial j (partial i f) (x + t4 % basis j + t3 % basis i) \n\t\t/\\ abs t3 <= abs h /\\ abs t4 <= abs k)
+      #|  forall h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t3. G h k = h * derivative (F2 k) t3 /\\ abs t3 <= abs h)
+      #|  forall y e. (f o (\\h. y + h % e)) o (\\t. h + t) = f o (\\t. (y + h % e) + t % e)
       #|  derivative (f o (\\h. x + h % basis i)) h
-      #|  !h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F2 k) h = partial i f ((x + k % basis j) + h % basis i) - partial i f (x + h % basis i)
-      #|  !k. abs k <= r ==> !h. abs h <= r ==> (F2 k) real_differentiable atreal h
-      #|  !k. F2 k = (\\h. (f o (\\h. (x + k % basis j) + h % basis i)) h - (f o (\\h. x + h % basis i)) h)
-      #|  !a. k * a * h = h * k * a
+      #|  forall h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F2 k) h = partial i f ((x + k % basis j) + h % basis i) - partial i f (x + h % basis i)
+      #|  forall k. abs k <= r ==> forall h. abs h <= r ==> (F2 k) real_differentiable atreal h
+      #|  forall k. F2 k = (\\h. (f o (\\h. (x + k % basis j) + h % basis i)) h - (f o (\\h. x + h % basis i)) h)
+      #|  forall a. k * a * h = h * k * a
       #|  p = g h - g (&0)
       #|  _1 - _2
       #|  partial j f o (\\h. (x + t1 % basis j) + h % basis i)
-      #|  !h k. abs h <= r /\\ abs k <= r ==>\n\t(?t1 t2. G h k = h * k * partial i (partial j f) (x + t1 % basis j + t2 % basis i) \n\t\t/\\ abs t1 <= abs k /\\ abs t2 <= abs h)
-      #|  !h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t1. G h k = k * derivative (F1 h) t1 /\\ abs t1 <= abs k)
-      #|  !y e. (f o (\\k. y + k % e)) o (\\t. k + t) = f o (\\t. (y + k % e) + t % e)
+      #|  forall h k. abs h <= r /\\ abs k <= r ==>\n\t(?t1 t2. G h k = h * k * partial i (partial j f) (x + t1 % basis j + t2 % basis i) \n\t\t/\\ abs t1 <= abs k /\\ abs t2 <= abs h)
+      #|  forall h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t1. G h k = k * derivative (F1 h) t1 /\\ abs t1 <= abs k)
+      #|  forall y e. (f o (\\k. y + k % e)) o (\\t. k + t) = f o (\\t. (y + k % e) + t % e)
       #|  derivative (f o (\\k. x + k % basis j)) k
-      #|  !h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F1 h) k = partial j f ((x + h % basis i) + k % basis j) - partial j f (x + k % basis j)
-      #|  !h. abs h <= r ==> !k. abs k <= r ==> (F1 h) real_differentiable atreal k
-      #|  !h. F1 h = (\\k. (f o (\\k. (x + h % basis i) + k % basis j)) k - (f o (\\k. x + k % basis j)) k)
-      #|  (!h. abs h <= r ==> x + h % basis i IN s) /\\ (!k. abs k <= r ==> x + k % basis j IN s)
+      #|  forall h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F1 h) k = partial j f ((x + h % basis i) + k % basis j) - partial j f (x + k % basis j)
+      #|  forall h. abs h <= r ==> forall k. abs k <= r ==> (F1 h) real_differentiable atreal k
+      #|  forall h. F1 h = (\\k. (f o (\\k. (x + h % basis i) + k % basis j)) k - (f o (\\k. x + k % basis j)) k)
+      #|  (forall h. abs h <= r ==> x + h % basis i IN s) /\\ (forall k. abs k <= r ==> x + k % basis j IN s)
       #|  abs h + abs k
       #|  e / &3 + e / &3
       #|  e / &3
-      #|  ?r. &0 < r /\\ (!h k. abs h <= r /\\ abs k <= r ==> (x + h % basis i) + k % basis j IN s)
+      #|  ?r. &0 < r /\\ (forall h k. abs h <= r /\\ abs k <= r ==> (x + h % basis i) + k % basis j IN s)
       #|  G = \\h k. F2 k h - F2 k (&0)
-      #|  !h k. (x + k % basis j) + h % basis i = (x + h % basis i) + k % basis j
+      #|  forall h k. (x + k % basis j) + h % basis i = (x + h % basis i) + k % basis j
       #|  \\h k. F1 h k - F1 h (&0)
       #|  \\k h. f ((x + h % basis i) + k % basis j) - f (x + h % basis i)
       #|  \\h k. f ((x + k % basis j) + h % basis i) - f (x + k % basis j)
@@ -1557,13 +1557,13 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  y$1
       #|  y$2
       #|  at (vec 0:real^2) within {y:real^2 | &0 < y$1 /\\ &0 < y$2}
-      #|  m_cell_domain (x:real^N, z:real^N) (y:real^N) (w:real^N) <=>\n\t!i. i IN 1..dimindex (:N) ==> x$i <= y$i /\\ y$i <= z$i /\\ max (y$i - x$i) (z$i - y$i) <= w$i
-      #|  m_bounded_on_int (f:real^N->real) domain f_bounds <=>\n\t!x. x IN interval [domain] ==> interval_arith (f x) f_bounds
-      #|  diff2_domain domain f <=>\n\t!x. x IN interval [domain] ==> diff2 f x
-      #|  diff2c_domain domain f <=>\n\t!x. x IN interval [domain] ==> diff2c f x
-      #|  diff2c_domain domain f <=> diff2_domain domain f /\\\n\t(!x. x IN interval [domain] ==> !i j. (lift o partial2 j i f) continuous at x)
+      #|  m_cell_domain (x:real^N, z:real^N) (y:real^N) (w:real^N) <=>\n\tforall i. i IN 1..dimindex (:N) ==> x$i <= y$i /\\ y$i <= z$i /\\ max (y$i - x$i) (z$i - y$i) <= w$i
+      #|  m_bounded_on_int (f:real^N->real) domain f_bounds <=>\n\tforall x. x IN interval [domain] ==> interval_arith (f x) f_bounds
+      #|  diff2_domain domain f <=>\n\tforall x. x IN interval [domain] ==> diff2 f x
+      #|  diff2c_domain domain f <=>\n\tforall x. x IN interval [domain] ==> diff2c f x
+      #|  diff2c_domain domain f <=> diff2_domain domain f /\\\n\t(forall x. x IN interval [domain] ==> forall i j. (lift o partial2 j i f) continuous at x)
       #|  m_cell_domain domain y w ==> y IN interval [domain]
-      #|  m_cell_domain domain y (w:real^N) ==> \n\tp IN interval [domain] ==>\n\t!i. i IN 1..dimindex (:N) ==> abs (p$i - y$i) <= w$i
+      #|  m_cell_domain domain y (w:real^N) ==> \n\tp IN interval [domain] ==>\n\tforall i. i IN 1..dimindex (:N) ==> abs (p$i - y$i) <= w$i
       #|  (\\(i,j). g j i) = (\\(i,j). g i j) o f
       #|  j, i
       #|  s1 = IMAGE f s2
@@ -1571,8 +1571,8 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  {i, j | (1 <= i /\\ i <= n) /\\ 1 <= j /\\ j <= i - 1}
       #|  {i, j | (1 <= i /\\ i <= n) /\\ i + 1 <= j /\\ j <= n}
       #|  sum (1..n) (\\i. sum (i + 1..n) (\\j. g i j)) = \n\t\t\tsum (1..n) (\\i. sum (1..i - 1) (\\j. g j i))
-      #|  !a b c. a * b * c = b * a * c
-      #|  !a b c. (a + b) + c = (a + c) + b
+      #|  forall a b c. a * b * c = b * a * c
+      #|  forall a b c. (a + b) + c = (a + c) + b
       #|  s3 = sum (1..n) (\\i. sum (i + 1..n) (\\j. g i j))
       #|  s3 = sum (1..n) (\\i. sum (1..i - 1) (\\j. g i j))
       #|  sum _1 _2
@@ -1582,48 +1582,48 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  sum _1 _2
       #|  dimindex (:N)
       #|  \\i j. w$i * w$j * abs (partial2 j i f x)
-      #|  !g1 g2. (!x. x IN interval [domain] ==> g1 x = g2 x) ==> \n\t((!x. x IN interval [domain] ==> g1 x <= error) <=> (!x. x IN interval [domain] ==> g2 x <= error))
-      #|  diff2c_domain domain f ==> \n\t(m_taylor_error f domain (w:real^N) error <=>\n\t(!x. x IN interval [domain] ==> \n\tsum (1..dimindex (:N)) (\\i. w$i * (w$i * abs (partial2 i i f x)\n\t\t+ &2 * sum (1..i - 1) (\\j. w$j * abs (partial2 j i f x)))) <= error))
+      #|  forall g1 g2. (forall x. x IN interval [domain] ==> g1 x = g2 x) ==> \n\t((forall x. x IN interval [domain] ==> g1 x <= error) <=> (forall x. x IN interval [domain] ==> g2 x <= error))
+      #|  diff2c_domain domain f ==> \n\t(m_taylor_error f domain (w:real^N) error <=>\n\t(forall x. x IN interval [domain] ==> \n\tsum (1..dimindex (:N)) (\\i. w$i * (w$i * abs (partial2 i i f x)\n\t\t+ &2 * sum (1..i - 1) (\\j. w$j * abs (partial2 j i f x)))) <= error))
       #|  g i
       #|  sum _1 _2
       #|  sum _1 _2
       #|  y + t % (p - y) = (&1 - t) % y + t % p:real^N
       #|  y + t % (p - y) IN interval [domain]
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\t(!t. interval_arith t (&0, &1) ==> \n\t\tabs (nth_derivative 2 (f o (\\t. y + t % (p - y))) t) <= dd_bound)
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\t(forall t. interval_arith t (&0, &1) ==> \n\t\tabs (nth_derivative 2 (f o (\\t. y + t % (p - y))) t) <= dd_bound)
       #|  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-      #|  !t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
+      #|  forall t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
       #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tabs (f p - (f y + sum (1..dimindex (:N)) (\\i. (p - y)$i * partial i f y))) <= dd_bound / &2
       #|  f o (\\t. y + t % (p - y))
       #|  abs s
       #|  (f y + s) + dd_bound / &2
       #|  sum _1 _2
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tf y <= hi ==>\n\thi + sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2 <= hi_bound ==>\n\t!p. p IN interval [domain] ==> f p <= hi_bound
-      #|  !x y e. abs (x - y) <= e ==> x <= y + e
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tf y <= hi ==>\n\thi + sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2 <= hi_bound ==>\n\tforall p. p IN interval [domain] ==> f p <= hi_bound
+      #|  forall x y e. abs (x - y) <= e ==> x <= y + e
       #|  --abs s
       #|  (f y + s) - dd_bound / &2
       #|  sum _1 _2
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tlo <= f y ==>\n\tlo_bound <= lo - (sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2) ==>\n\t!p. p IN interval [domain] ==> lo_bound <= f p
-      #|  !x y e. abs (x - y) <= e ==> y - e <= x
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tlo <= f y ==>\n\tlo_bound <= lo - (sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2) ==>\n\tforall p. p IN interval [domain] ==> lo_bound <= f p
+      #|  forall x y e. abs (x - y) <= e ==> y - e <= x
       #|  hi + err_bound
       #|  lo - err_bound
       #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tinterval_arith (f y) (lo, hi) ==>\n\tsum(1..dimindex (:N)) (\\i. w$i * abs(partial i f y)) + dd_bound / &2 <= err_bound ==>\n\tlo_bound <= lo - err_bound ==>\n\thi + err_bound <= hi_bound ==>\n\tm_bounded_on_int f domain (lo_bound, hi_bound)
       #|  y + t % (p - y) = (&1 - t) % y + t % p:real^N
       #|  y + t % (p - y) IN interval [domain]
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w d_bound ==>\n\t(!t. interval_arith t (&0, &1) ==> \n\t\tabs (derivative (partial i f o (\\t. y + t % (p - y))) t) <= d_bound)
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w d_bound ==>\n\t(forall t. interval_arith t (&0, &1) ==> \n\t\tabs (derivative (partial i f o (\\t. y + t % (p - y))) t) <= d_bound)
       #|  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-      #|  !t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
+      #|  forall t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
       #|  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tabs (partial i f p - partial i f y) <= dd_bound
       #|  partial i f o (\\t. y + t % (p - y))
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tpartial i f y <= hi ==>\n\thi + dd_bound <= hi_bound ==>\n\t!p. p IN interval [domain] ==> partial i f p <= hi_bound
-      #|  !x y e. abs (x - y) <= e ==> x <= y + e
-      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tlo <= partial i f y ==>\n\tlo_bound <= lo - dd_bound ==>\n\t!p. p IN interval [domain] ==> lo_bound <= partial i f p
-      #|  !x y e. abs (x - y) <= e ==> y - e <= x
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tpartial i f y <= hi ==>\n\thi + dd_bound <= hi_bound ==>\n\tforall p. p IN interval [domain] ==> partial i f p <= hi_bound
+      #|  forall x y e. abs (x - y) <= e ==> x <= y + e
+      #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tlo <= partial i f y ==>\n\tlo_bound <= lo - dd_bound ==>\n\tforall p. p IN interval [domain] ==> lo_bound <= partial i f p
+      #|  forall x y e. abs (x - y) <= e ==> y - e <= x
       #|  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tinterval_arith (partial i f y) (lo, hi) ==>\n\tlo_bound <= lo - dd_bound ==>\n\thi + dd_bound <= hi_bound ==>\n\tm_bounded_on_int (partial i f) domain (lo_bound, hi_bound)
       #|  :real^N -> real
       #|  :real^N -> real
       #|  :real^N
       #|  :real^N#real^N
-      #|  f differentiable at x ==>\topen s ==> x IN s ==> (!y. y IN s ==> g y = f y) ==>\n\t\tg differentiable at x
+      #|  f differentiable at x ==>\topen s ==> x IN s ==> (forall y. y IN s ==> g y = f y) ==>\n\t\tg differentiable at x
       #|  diff2 f x ==> diff2 (\\x. c * f x) x
       #|  lift o (\\x. c * partial i f x)
       #|  diff2 f x ==> diff2 (\\x. --f x) x
@@ -1687,7 +1687,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  diff2 f x ==> (lift o partial i f) differentiable at x
       #|  real_interval (a, b)
       #|  g o (\\t. x + t % basis i)
-      #|  (lift o f) differentiable at x ==>\n\topen s ==> x IN s ==> (!y:real^N. y IN s ==> f y = g y) ==>\n\tpartial i f x = partial i g x
+      #|  (lift o f) differentiable at x ==>\n\topen s ==> x IN s ==> (forall y:real^N. y IN s ==> f y = g y) ==>\n\tpartial i f x = partial i g x
       #|  lift o f
       #|  basis i:real^N
       #|  :num
@@ -1707,10 +1707,10 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  derivative u
       #|  derivative u
       #|  min d0 d1
-      #|  g real_continuous at x ==> open s ==> x IN s ==>\n\t(!y. y IN s ==> f y = g y) ==> f real_continuous at x
+      #|  g real_continuous at x ==> open s ==> x IN s ==>\n\t(forall y. y IN s ==> f y = g y) ==> f real_continuous at x
       #|  IMAGE lift t
       #|  v o drop
-      #|  v real_continuous atreal x ==> real_open t ==> x IN t ==>\n\t(!y. y IN t ==> u y = v y) ==> u real_continuous atreal x
+      #|  v real_continuous atreal x ==> real_open t ==> x IN t ==>\n\t(forall y. y IN t ==> u y = v y) ==> u real_continuous atreal x
       #|  :real^N -> real
       #|  :real^N -> real
       #|  :real^N
@@ -1719,7 +1719,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  diff2c f x ==> diff2c (\\x. c * f x) x
       #|  diff2c f x ==> diff2c (\\x. --f x) x
       #|  --(&1)
-      #|  nth_diff_strong n u x ==>\n\t?s. real_open s /\\ x IN s /\\ (!y. y IN s ==> nth_diff_strong n u y)
+      #|  nth_diff_strong n u x ==>\n\t?s. real_open s /\\ x IN s /\\ (forall y. y IN s ==> nth_diff_strong n u y)
       #|  diff2 f x ==> f real_continuous at x
       #|  diff2 f x ==> (partial i f) real_continuous at x
       #|  2
@@ -1767,7 +1767,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  \\x. -- inv (x pow 2)
       #|  &0 < f x ==> diff2c f x ==> diff2c (log o f) x
       #|  (\\x. sqrt ((&1 - x * x) pow 3)) = sqrt o (\\x. (&1 - x * x) pow 3)
-      #|  !a. &1 - a * a = (&1 - a) * (&1 + a)
+      #|  forall a. &1 - a * a = (&1 - a) * (&1 + a)
       #|  &0 < (&1 - f x * f x) pow 3
       #|  f x
       #|  {x | x < &1} INTER {x | x > -- &1}
@@ -1775,7 +1775,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  abs (f x) < &1 ==> diff2c f x ==> diff2c (acs o f) x
       #|  ~P <=> (P <=> F)
       #|  (\\x. sqrt ((&1 - x * x) pow 3)) = sqrt o (\\x. (&1 - x * x) pow 3)
-      #|  !a. &1 - a * a = (&1 - a) * (&1 + a)
+      #|  forall a. &1 - a * a = (&1 - a) * (&1 + a)
       #|  &0 < (&1 - f x * f x) pow 3
       #|  f x
       #|  {x | x < &1} INTER {x | x > -- &1}
@@ -1834,7 +1834,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x + g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x + partial i g x) int) ==>\n\tm_lin_approx (\\x. f x + g x) x bounds d_bounds_list
       #|  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x - g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x - partial i g x) int) ==>\n\tm_lin_approx (\\x. f x - g x) x bounds d_bounds_list
       #|  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x * g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x * g x + f x * partial i g x) int) ==>\n\tm_lin_approx (\\x. f x * g x) x bounds d_bounds_list
-      #|  second_bounded f domain dd_bounds_list <=>\n\t!x. x IN interval [domain] ==> all_n 1 dd_bounds_list\n\t\t(\\i list_i. all_n 1 list_i (\\j int. interval_arith (partial2 j i f x) int))
+      #|  second_bounded f domain dd_bounds_list <=>\n\tforall x. x IN interval [domain] ==> all_n 1 dd_bounds_list\n\t\t(\\i list_i. all_n 1 list_i (\\j int. interval_arith (partial2 j i f x) int))
       #|  m_taylor_interval f domain y w f_bounds d_bounds_list dd_bounds_list <=>\n\t\tm_cell_domain domain y w /\\\n\t\tdiff2c_domain domain f /\\\n\t\tm_lin_approx f y f_bounds d_bounds_list /\\\n\t\tsecond_bounded f domain dd_bounds_list
       #|  :real^N -> real
       #|  :real^N -> real
@@ -1877,19 +1877,19 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  &0 < b ==> (a / b <= &1 <=> a <= b)
       #|  DISJOINT ((1..dimindex (:N)) DELETE j) {j}
       #|  1..dimindex (:N) = ((1..dimindex (:N)) DELETE j) UNION {j}
-      #|  !t. t IN s ==> nth_derivative 2 g t = partial2 j j f (y1 + t % basis j)
+      #|  forall t. t IN s ==> nth_derivative 2 g t = partial2 j j f (y1 + t % basis j)
       #|  h = g o (\\t'. t + t')
       #|  f o _
-      #|  !t. t IN s ==> derivative g t = partial j f (y1 + t % basis j)
-      #|  !t. t IN s ==> nth_diff_strong 2 g t
-      #|  !t. t IN s ==> y1 + t % basis j IN interval [x,z]
+      #|  forall t. t IN s ==> derivative g t = partial j f (y1 + t % basis j)
+      #|  forall t. t IN s ==> nth_diff_strong 2 g t
+      #|  forall t. t IN s ==> y1 + t % basis j IN interval [x,z]
       #|  real_interval _
-      #|  !a. &0 < a ==> &0 <= a
+      #|  forall a. &0 < a ==> &0 <= a
       #|  real_interval [&0, z$j - x$j]
-      #|  !a. &0 < a ==> &0 <= a
+      #|  forall a. &0 < a ==> &0 <= a
       #|  &0 <= t /\\ t <= &1 /\\ y$j - x$j = (&1 - t) * &0 + t * (z$j - x$j)
       #|  y$j
-      #|  !a b. &0 < a - b <=> ~(a = b) /\\ b <= a
+      #|  forall a b. &0 < a - b <=> ~(a = b) /\\ b <= a
       #|  &0 < z$j - x$j
       #|  (y$j - x$j) / (z$j - x$j)
       #|  y$j = x$j
@@ -1904,7 +1904,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  y1 IN interval [x,u] /\\ y2 IN interval [v,z]
       #|  (lambda i. if i = j then z$j else y$i):real^N
       #|  (lambda i. if i = j then x$j else y$i):real^N
-      #|  (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\tu$j = x$j ==> v$j = z$j ==>\n\tdiff2_domain (x,z) f ==>\n\t(!y. y IN interval [x,z] ==> &0 <= partial2 j j f y) ==>\n\t(!y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(!y. y IN interval [v,z] ==> f y <= hi) ==>\n\t(!y. y IN interval [x,z] ==> f y <= hi)
+      #|  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\tu$j = x$j ==> v$j = z$j ==>\n\tdiff2_domain (x,z) f ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial2 j j f y) ==>\n\t(forall y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(forall y. y IN interval [v,z] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
       #|  i = j
       #|  i = j
       #|  j IN 1..dimindex (:N)

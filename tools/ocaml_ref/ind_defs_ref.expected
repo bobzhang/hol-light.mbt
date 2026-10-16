@@ -189,10 +189,10 @@ Searching with limit 0
 Searching with limit 1
 ind_defs quotations (5):
   t:A
-  !P t. (!x:A. (x = t) ==> P x) ==> (?) P
+  forall P t. (forall x:A. (x = t) ==> P x) ==> (?) P
   T
   (==>)
-  !p. p ==> p
+  forall p. p ==> p
 strip_ncomb = (f:fun('A,fun('A,fun('A,'A))) a:'A) [b:'A; c:'A]
 strip_ncomb_bad ! dest_comb: not a combination
 RIGHT_BETAS ! BETA_CONV: Not a beta-redex

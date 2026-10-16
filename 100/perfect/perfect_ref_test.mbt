@@ -12685,7 +12685,7 @@ test "100/perfect matches 100/perfect.ml" {
       #|  perfect n <=> ~(n = 0) /\\ sigma(n) = 2 * n
       #|  k = k - 1 + 1 <=> ~(k = 0)
       #|  EVEN(2 EXP k) <=> EVEN((2 EXP k - 1) + 1)
-      #|  !k. ~(k = 0) ==> ODD(2 EXP k - 1)
+      #|  forall k. ~(k = 0) ==> ODD(2 EXP k - 1)
       #|  0
       #|  SUC r
       #|  r:num
@@ -12696,9 +12696,9 @@ test "100/perfect matches 100/perfect.ml" {
       #|  m:num
       #|  n:num
       #|  n:num
-      #|  !n. ~(n = 0) ==> ?r s. ODD s /\\ n = 2 EXP r * s
+      #|  forall n. ~(n = 0) ==> ?r s. ODD s /\\ n = 2 EXP r * s
       #|  {d | d <= n}
-      #|  !n. ~(n = 0) ==> FINITE {d | d divides n}
+      #|  forall n. ~(n = 0) ==> FINITE {d | d divides n}
       #|  (a * x * u = x * a * v) <=> (a * x) * u = (a * x) * v
       #|  a * b = x * y
       #|  b:num
@@ -12707,24 +12707,24 @@ test "100/perfect matches 100/perfect.ml" {
       #|  y:num
       #|  x:num
       #|  a:num
-      #|  !a b x y. a * b = x * y /\\ coprime(a,x)\n             ==> ?d. y = a * d /\\ b = x * d
+      #|  forall a b x y. a * b = x * y /\\ coprime(a,x)\n             ==> ?d. y = a * d /\\ b = x * d
       #|  ODD n
-      #|  !k n. ODD(n) ==> coprime(2 EXP k,n)
-      #|  !s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))
+      #|  forall k n. ODD(n) ==> coprime(2 EXP k,n)
+      #|  forall s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))
       #|  sigma 0 = 0
       #|  {d | d = 1} = {1}
       #|  sigma(1) = 1
       #|  nsum {1,n} (\\i. i)
       #|  1 < n ==> ~(n = 0)
-      #|  !n. 1 < n ==> n + 1 <= sigma(n)
+      #|  forall n. 1 < n ==> n + 1 <= sigma(n)
       #|  x = a * b <=> a * b = 1 * x
       #|  nsum {1,b,a*b} (\\i. i)
       #|  1 < n ==> ~(n = 0)
-      #|  !a b. 1 < a /\\ 1 < b ==> 1 + b + a * b <= sigma(a * b)
+      #|  forall a b. 1 < a /\\ 1 < b ==> 1 + b + a * b <= sigma(a * b)
       #|  nsum {1,p} (\\i. i)
       #|  p = 1
       #|  p = 0
-      #|  !p. prime(p) ==> sigma(p) = p + 1
+      #|  forall p. prime(p) ==> sigma(p) = p + 1
       #|  a = a * b <=> a * b = a * 1
       #|  b = 0
       #|  a = 0
@@ -12733,7 +12733,7 @@ test "100/perfect matches 100/perfect.ml" {
       #|  b:num
       #|  a:num
       #|  p = 1
-      #|  !p. prime(p) <=> sigma(p) = p + 1
+      #|  forall p. prime(p) <=> sigma(p) = p + 1
       #|  ~(SUC k <= k)
       #|  {2 EXP i | i <= k} = IMAGE (\\i. 2 EXP i) {i | i <= k}
       #|  {2 EXP i | i = SUC k \\/ i <= k} =\n    (2 EXP (SUC k)) INSERT {2 EXP i | i <= k}
@@ -12742,7 +12742,7 @@ test "100/perfect matches 100/perfect.ml" {
       #|  k:num
       #|  x + 1 = y ==> x = y - 1
       #|  nsum {2 EXP i | i <= k} (\\i. i)
-      #|  !k. sigma(2 EXP k) = 2 EXP (k + 1) - 1
+      #|  forall k. sigma(2 EXP k) = 2 EXP (k + 1) - 1
       #|  z:num
       #|  y:num
       #|  x:num
@@ -12752,12 +12752,12 @@ test "100/perfect matches 100/perfect.ml" {
       #|  nsum (IMAGE (\\(x,y). x * y)\n         {x,y | x divides a /\\ y divides b}) (\\i. i)
       #|  b = 0
       #|  a = 0
-      #|  !a b. coprime(a,b) ==> sigma(a * b) = sigma(a) * sigma(b)
+      #|  forall a b. coprime(a,b) ==> sigma(a * b) = sigma(a) * sigma(b)
       #|  ~(k = 0)
       #|  ~(k = 0) ==> k - 1 + 1 = k
       #|  coprime(2 EXP (k - 1),2 EXP k - 1)
       #|  k = 0
-      #|  !k. prime(2 EXP k - 1) ==> perfect(2 EXP (k - 1) * (2 EXP k - 1))
+      #|  forall k. prime(2 EXP k - 1) ==> perfect(2 EXP (k - 1) * (2 EXP k - 1))
       #|  ~(r = 0)
       #|  2 EXP 0 < a ==> 1 < a
       #|  1 * d < x * d ==> x * d < 1 + d + x * d - d
@@ -12777,7 +12777,7 @@ test "100/perfect matches 100/perfect.ml" {
       #|  r:num
       #|  n = 0
       #|  n:num
-      #|  !n. EVEN(n) /\\ perfect(n)\n       ==> ?k. prime(2 EXP k - 1) /\\ n = 2 EXP (k - 1) * (2 EXP k - 1)
+      #|  forall n. EVEN(n) /\\ perfect(n)\n       ==> ?k. prime(2 EXP k - 1) /\\ n = 2 EXP (k - 1) * (2 EXP k - 1)
       #|sigma =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#sigma:fun(num,num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%406:num. (#?:fun(fun(num,bool),bool) (\d:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%406:num) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)) d:num)))))) (\i:num. i:num))))))
       #|perfect =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#perfect:fun(num,bool) n:num)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) (#sigma:fun(num,num) n:num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))
       #|ODD_POW2_MINUS1 =  |- (#!:fun(fun(num,bool),bool) (\k:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) k:num) (#NUMERAL:fun(num,num) #_0:num)))) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

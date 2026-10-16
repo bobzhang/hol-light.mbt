@@ -6481,18 +6481,18 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  (c ## [] = []) /\\\n   (c ## (CONS h t) = CONS (c * h) (c ## t))
       #|  (neg [] = []) /\\\n   (neg (CONS h t) = CONS (--h) (neg t))
       #|  ([] ** p2 = []) /\\\n   ([h1] ** p2 = h1 ## p2) /\\\n   ((CONS h1 (CONS k1 t1)) ** p2 =\n        h1 ## p2 ++ CONS (Cx(&0)) (CONS k1 t1 ** p2))
-      #|  !p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x
-      #|  !p c x. poly (c ## p) x = c * poly p x
-      #|  !p x. poly (neg p) x = --(poly p x)
+      #|  forall p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x
+      #|  forall p c x. poly (c ## p) x = c * poly p x
+      #|  forall p x. poly (neg p) x = --(poly p x)
       #|  t:complex list
       #|  t:complex list
       #|  h:complex
       #|  h:complex
-      #|  !x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x
-      #|  !p n x. poly (p exp n) x = (poly p x) pow n
-      #|  !p. poly (p ++ []) = poly p
-      #|  !p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)
-      #|  !d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)
+      #|  forall x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x
+      #|  forall p n x. poly (p exp n) x = (poly p x) pow n
+      #|  forall p. poly (p ++ []) = poly p
+      #|  forall p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)
+      #|  forall d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)
       #|  q:complex list
       #|  q:complex list
       #|  r * a + k
@@ -6501,15 +6501,15 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  k:complex
       #|  h:complex
       #|  []:complex list
-      #|  !t h. ?q r. CONS h t = [r] ++ [--a; Cx(&1)] ** q
+      #|  forall t h. ?q r. CONS h t = [r] ++ [--a; Cx(&1)] ** q
       #|  q:complex list
       #|  q:complex list
       #|  poly (CONS h t) a = Cx(&0)
       #|  r = Cx(&0)
       #|  q:complex list
-      #|  !a p. (poly p a = Cx(&0)) <=> (p = []) \\/ ?q. p = [--a; Cx(&1)] ** q
-      #|  !p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)
-      #|  !q. LENGTH([--a; Cx(&1)] ** q) = SUC(LENGTH q)
+      #|  forall a p. (poly p a = Cx(&0)) <=> (p = []) \\/ ?q. p = [--a; Cx(&1)] ** q
+      #|  forall p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)
+      #|  forall q. LENGTH([--a; Cx(&1)] ** q) = SUC(LENGTH q)
       #|  ~(?a. poly p a = Cx(&0))
       #|  m:num <= n
       #|  m:num
@@ -6523,24 +6523,24 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  q:complex list
       #|  ?a. poly p a = Cx(&0)
       #|  ?a. poly p a = Cx(&0)
-      #|  !n. !p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. !x. (poly p x = Cx(&0)) ==> ?m. m <= n /\\ (x = i m)
+      #|  forall n. forall p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. forall x. (poly p x = Cx(&0)) ==> ?m. m <= n /\\ (x = i m)
       #|  SUC n
-      #|  !p. ~(poly p = poly [])\n       ==> ?i. !x. (poly p(x) = Cx(&0)) ==> ?n. n <= LENGTH p /\\ (x = i n)
-      #|  !p. ~(poly p = poly [])\n       ==> ?N i. !x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
+      #|  forall p. ~(poly p = poly [])\n       ==> ?i. forall x. (poly p(x) = Cx(&0)) ==> ?n. n <= LENGTH p /\\ (x = i n)
+      #|  forall p. ~(poly p = poly [])\n       ==> ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
       #|  y:complex
-      #|  (!x. norm(x) < abs(a) + norm(x) + &1) /\\\n                (!x y. norm(x) < a ==> norm(x) < abs(a) + norm(y) + &1)
+      #|  (forall x. norm(x) < abs(a) + norm(x) + &1) /\\\n                (forall x y. norm(x) < a ==> norm(x) < abs(a) + norm(y) + &1)
       #|  abs(a) + norm(i(N:num)) + &1
       #|  a:real
       #|  \\z. P z /\\ ~(z = (i:num->complex) N)
       #|  P:complex->bool
-      #|  !i N P. (!x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. !x. P x ==> norm(x) < a
+      #|  forall i N P. (forall x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. forall x. P x ==> norm(x) < a
       #|  ~(abs(x) < x)
       #|  \\x. poly p x = Cx(&0)
       #|  N:num
       #|  i:num->complex
       #|  N:num
       #|  i:num->complex
-      #|  !p. ~(poly p = poly []) <=>\n       ?N i. !x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
+      #|  forall p. ~(poly p = poly []) <=>\n       ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)
       #|  ~(m + n < m:num)
       #|  N1 + n:num
       #|  n:num
@@ -6552,19 +6552,19 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  N1:num
       #|  i2:num->complex
       #|  N2:num
-      #|  !p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])
-      #|  !p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])
+      #|  forall p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])
+      #|  forall p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])
       #|  (p + --q = Cx(&0)) <=> (p = q)
-      #|  !p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)
-      #|  !p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))
-      #|  !p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)
+      #|  forall p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)
+      #|  forall p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))
+      #|  forall p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)
       #|  n:num
       #|  n:num
-      #|  !p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)
+      #|  forall p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)
       #|  Cx(&1) - a
-      #|  !a. ~(poly [a ; Cx(&1)] = poly [])
-      #|  !a n. ~(poly ([a ; Cx(&1)] exp n) = poly [])
-      #|  !x. (poly t x = Cx(&0)) ==> norm(x) < a
+      #|  forall a. ~(poly [a ; Cx(&1)] = poly [])
+      #|  forall a n. ~(poly ([a ; Cx(&1)] exp n) = poly [])
+      #|  forall x. (poly t x = Cx(&0)) ==> norm(x) < a
       #|  Cx(abs(a) + &1)
       #|  a:real
       #|  \\x. poly t x = Cx(&0)
@@ -6574,8 +6574,8 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  N:num
       #|  Cx(&0)
       #|  h = Cx(&0)
-      #|  !h t. (poly (CONS h t) = poly []) ==> (h = Cx(&0)) /\\ (poly t = poly [])
-      #|  !p. (poly p = poly []) <=> ALL (\\c. c = Cx(&0)) p
+      #|  forall h t. (poly (CONS h t) = poly []) ==> (h = Cx(&0)) /\\ (poly t = poly [])
+      #|  forall p. (poly p = poly []) <=> ALL (\\c. c = Cx(&0)) p
       #|  p1 divides p2 <=> ?q. poly p2 = poly (p1 ** q)
       #|  p ** s
       #|  s ** q
@@ -6585,37 +6585,37 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  s:complex list
       #|  --a
       #|  r:complex list
-      #|  !a p q. [a; Cx(&1)] divides (p ** q) <=>\n           [a; Cx(&1)] divides p \\/ [a; Cx(&1)] divides q
+      #|  forall a p q. [a; Cx(&1)] divides (p ** q) <=>\n           [a; Cx(&1)] divides p \\/ [a; Cx(&1)] divides q
       #|  [Cx(&1)]
-      #|  !p. p divides p
+      #|  forall p. p divides p
       #|  t ** s
       #|  t:complex list
       #|  s:complex list
-      #|  !p q r. p divides q /\\ q divides r ==> p divides r
+      #|  forall p q r. p divides q /\\ q divides r ==> p divides r
       #|  p:complex list
       #|  p exp (m + d)
       #|  d:num
       #|  d:num
       #|  d:num
-      #|  !p m n. m <= n ==> (p exp m) divides (p exp n)
-      #|  !p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q
+      #|  forall p m n. m <= n ==> (p exp m) divides (p exp n)
+      #|  forall p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q
       #|  t ++ s
       #|  t:complex list
       #|  s:complex list
-      #|  !p q r. p divides q /\\ p divides r ==> p divides (q ++ r)
+      #|  forall p q r. p divides q /\\ p divides r ==> p divides (q ++ r)
       #|  s ++ neg(t)
       #|  t:complex list
       #|  s:complex list
-      #|  !p q r. p divides q /\\ p divides (q ++ r) ==> p divides r
+      #|  forall p q r. p divides q /\\ p divides (q ++ r) ==> p divides r
       #|  x:complex
       #|  x:complex
       #|  s:complex list
       #|  s:complex list
       #|  p divides (q ++ r)
       #|  r:complex list
-      #|  !p q r. p divides r /\\ p divides (q ++ r) ==> p divides q
+      #|  forall p q r. p divides r /\\ p divides (q ++ r) ==> p divides q
       #|  []:complex list
-      #|  !p q. (poly p = poly []) ==> q divides p
+      #|  forall p q. (poly p = poly []) ==> q divides p
       #|  a + Cx(&1)
       #|  ~(poly s a = Cx(&0))
       #|  n:num
@@ -6634,22 +6634,22 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  s:complex list
       #|  n:num
       #|  q:complex list
-      #|  !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                      ~(poly q a = Cx(&0))
+      #|  forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                      ~(poly q a = Cx(&0))
       #|  q:complex list
       #|  poly p a = Cx(&0)
       #|  poly p a = Cx(&0)
       #|  p:complex list
-      #|  !d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                     ~(poly q a = Cx(&0))
-      #|  (!p q. mulexp 0 p q = q) /\\\n     (!p q n. mulexp (SUC n) p q = p ** (mulexp n p q))
-      #|  !a d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; Cx(&1)] exp n) divides p /\\\n                     ~(([--a; Cx(&1)] exp (SUC n)) divides p)
-      #|  !p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; Cx(&1)] exp n) divides p /\\\n                      ~(([--a; Cx(&1)] exp (SUC n)) divides p)
+      #|  forall d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                     ~(poly q a = Cx(&0))
+      #|  (forall p q. mulexp 0 p q = q) /\\\n     (forall p q n. mulexp (SUC n) p q = p ** (mulexp n p q))
+      #|  forall a d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; Cx(&1)] exp n) divides p /\\\n                     ~(([--a; Cx(&1)] exp (SUC n)) divides p)
+      #|  forall p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; Cx(&1)] exp n) divides p /\\\n                      ~(([--a; Cx(&1)] exp (SUC n)) divides p)
       #|  order a p = @n. ([--a; Cx(&1)] exp n) divides p /\\\n                   ~(([--a; Cx(&1)] exp (SUC n)) divides p)
       #|  []:complex list
       #|  ~(poly p = poly [])
-      #|  !p a n. ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])
-      #|  !p a. ~(poly p = poly [])\n         ==> ([--a; Cx(&1)] exp (order a p)) divides p /\\\n             ~(([--a; Cx(&1)] exp (SUC(order a p))) divides p)
-      #|  !p a n. ~(poly p = poly []) /\\\n           ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p)\n           ==> (n = order a p)
-      #|  !p q a. (poly p = poly q) ==> (order a p = order a q)
+      #|  forall p a n. ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])
+      #|  forall p a. ~(poly p = poly [])\n         ==> ([--a; Cx(&1)] exp (order a p)) divides p /\\\n             ~(([--a; Cx(&1)] exp (SUC(order a p))) divides p)
+      #|  forall p a n. ~(poly p = poly []) /\\\n           ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p)\n           ==> (n = order a p)
+      #|  forall p q a. (poly p = poly q) ==> (order a p = order a q)
       #|  s:complex list
       #|  n:num
       #|  order a p
@@ -6660,17 +6660,17 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  q:complex list
       #|  p:complex list = []
       #|  poly p = poly []
-      #|  !p a. (poly p a = Cx(&0)) <=> (poly p = poly []) \\/ ~(order a p = 0)
+      #|  forall p a. (poly p a = Cx(&0)) <=> (poly p = poly []) \\/ ~(order a p = 0)
       #|  []:complex list
       #|  poly p = poly []
-      #|  !p a n. ([--a; Cx(&1)] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p
+      #|  forall p a n. ([--a; Cx(&1)] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p
       #|  r:complex list
       #|  ~([-- a; Cx(&1)] exp SUC (order a p) divides p)
       #|  r: complex list
       #|  q:complex list
       #|  q:complex list
       #|  a:complex
-      #|  !p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; Cx(&1)] exp (order a p)) ** q)) /\\\n                 ~([--a; Cx(&1)] divides q)
+      #|  forall p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; Cx(&1)] exp (order a p)) ** q)) /\\\n                 ~([--a; Cx(&1)] divides q)
       #|  poly ([-- a; Cx(&1)] exp (order a q) **\n                        [-- a; Cx(&1)] exp (order a p) ** r ** s) =\n                  poly ([-- a; Cx(&1)] exp (order a q) **\n                        [-- a; Cx(&1)] exp (order a p) **\n                        [-- a; Cx(&1)] ** t)
       #|  poly ([-- a; Cx(&1)] exp (order a p) ** r ** s) =\n                  poly ([-- a; Cx(&1)] exp (order a p) **\n                       ([-- a; Cx(&1)] ** t))
       #|  t:complex list
@@ -6690,52 +6690,52 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  ~(poly p = poly [])
       #|  a:complex
       #|  (order a p + order a q = order a (p ** q)) /\\\n                ~(poly (p ** q) = poly [])
-      #|  !a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)
+      #|  forall a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)
       #|  (normalize [] = []) /\\\n   (normalize (CONS h t) =\n        if normalize t = [] then if h = Cx(&0) then [] else [h]\n        else CONS h (normalize t))
       #|  poly (normalize t) = poly t
       #|  h = Cx(&0)
-      #|  !p. poly (normalize p) = poly p
-      #|  !p. LENGTH(normalize p) <= LENGTH p
+      #|  forall p. poly (normalize p) = poly p
+      #|  forall p. LENGTH(normalize p) <= LENGTH p
       #|  degree p = PRE(LENGTH(normalize p))
       #|  normalize t = []
       #|  p:complex list
       #|  p:complex list
       #|  normalize p = []
-      #|  !p. (poly p = poly []) ==> (degree p = 0)
+      #|  forall p. (poly p = poly []) ==> (degree p = 0)
       #|  poly (CONS h1 t1 ++ neg(CONS h2 t2)) = poly []
       #|  (a = b) <=> (a + --b = Cx(&0))
       #|  (poly (CONS h1 t1) = poly (CONS h2 t2)) <=>\n   (h1 = h2) /\\ (poly t1 = poly t2)
       #|  normalize t = []
-      #|  !p. (poly p = poly []) <=> (normalize p = [])
+      #|  forall p. (poly p = poly []) <=> (normalize p = [])
       #|  t':complex list
-      #|  !p q. (poly p = poly q) ==> (normalize p = normalize q)
-      #|  !p q. (poly p = poly q) <=> (normalize p = normalize q)
-      #|  !p q. (poly p = poly q) ==> (degree p = degree q)
-      #|  !p. ~(LAST p = Cx(&0)) ==> (normalize p = p)
-      #|  !p. ~(LAST p = Cx(&0)) ==> (degree p = LENGTH p - 1)
+      #|  forall p q. (poly p = poly q) ==> (normalize p = normalize q)
+      #|  forall p q. (poly p = poly q) <=> (normalize p = normalize q)
+      #|  forall p q. (poly p = poly q) ==> (degree p = degree q)
+      #|  forall p. ~(LAST p = Cx(&0)) ==> (normalize p = p)
+      #|  forall p. ~(LAST p = Cx(&0)) ==> (degree p = LENGTH p - 1)
       #|  t:complex list
       #|  t:complex list
       #|  ~(a ## t ++ CONS (b * h) (b ## t) = [])
-      #|  !p a b x.\n     LAST(a ## p ++ CONS x (b ## p)) = if p = [] then x else b * LAST(p)
-      #|  !p. ~(p = []) ==> (LAST([a; Cx(&1)] ** p) = LAST p)
+      #|  forall p a b x.\n     LAST(a ## p ++ CONS x (b ## p)) = if p = [] then x else b * LAST(p)
+      #|  forall p. ~(p = []) ==> (LAST([a; Cx(&1)] ** p) = LAST p)
       #|  normalize t = []
-      #|  !p. ~(normalize p = []) ==> ~(LAST(normalize p) = Cx(&0))
+      #|  forall p. ~(normalize p = []) ==> ~(LAST(normalize p) = Cx(&0))
       #|  p:complex list
       #|  normalize p
       #|  ~(normalize p = [])
       #|  a:complex
       #|  degree([a; Cx(&1)] ** normalize p) = degree(normalize p) + 1
-      #|  !p a. ~(poly p = poly []) ==> (degree([a; Cx(&1)] ** p) = degree(p) + 1)
+      #|  forall p a. ~(poly p = poly []) ==> (degree([a; Cx(&1)] ** p) = degree(p) + 1)
       #|  ~(poly [a; Cx (&1)] = poly [])
       #|  poly p = poly []
       #|  degree([a; Cx (&1)] exp n ** ([a; Cx (&1)] ** p))
       #|  degree []
       #|  degree(p)
-      #|  !n a p. degree([a; Cx(&1)] exp n ** p) =\n                if poly p = poly [] then 0 else degree p + n
+      #|  forall n a p. degree([a; Cx(&1)] exp n ** p) =\n                if poly p = poly [] then 0 else degree p + n
       #|  ~(poly p = poly [])
       #|  q:complex list
       #|  a:complex
-      #|  !a p. ~(poly p = poly []) ==> order a p <= degree p
+      #|  forall a p. ~(poly p = poly []) ==> order a p <= degree p
       #|  {x:complex | ?n. n < SUC N /\\ (x = i n)} =\n                    (i N) INSERT {x:complex | ?n. n < N /\\ (x = i n)}
       #|  {x:complex | ?n. n < 0 /\\ (x = i n)} = {}
       #|  N:num
@@ -6743,7 +6743,7 @@ test "Complex/cpoly matches Complex/cpoly.ml" {
       #|  {x:complex | ?n:num. n < N /\\ (x = i n)}
       #|  i:num->complex
       #|  N:num
-      #|  !p. ~(poly p = poly []) ==> FINITE { x | poly p x = Cx(&0)}
+      #|  forall p. ~(poly p = poly []) ==> FINITE { x | poly p x = Cx(&0)}
       #|  normalize (CONS h t) =\n      (\\n. if n = [] then if h = Cx(&0) then [] else [h] else CONS h n)\n      (normalize t)
       #|poly =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(complex,fun(complex,bool)) ((#poly:fun(list(complex),fun(complex,complex)) #NIL:list(complex)) x:complex)) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(complex,fun(complex,bool)) ((#poly:fun(list(complex),fun(complex,complex)) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) x:complex)) ((#complex_add:fun(complex,fun(complex,complex)) h:complex) ((#complex_mul:fun(complex,fun(complex,complex)) x:complex) ((#poly:fun(list(complex),fun(complex,complex)) t:list(complex)) x:complex)))))
       #|poly_add =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) #NIL:list(complex)) l2:list(complex))) l2:list(complex))) ((#=:fun(list(complex),fun(list(complex),bool)) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) l2:list(complex))) (((#COND:fun(bool,fun(list(complex),fun(list(complex),list(complex)))) ((#=:fun(list(complex),fun(list(complex),bool)) l2:list(complex)) #NIL:list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) h:complex) t:list(complex))) ((#CONS:fun(complex,fun(list(complex),list(complex))) ((#complex_add:fun(complex,fun(complex,complex)) h:complex) (#HD:fun(list(complex),complex) l2:list(complex)))) ((#poly_add:fun(list(complex),fun(list(complex),list(complex))) t:list(complex)) (#TL:fun(list(complex),list(complex)) l2:list(complex)))))))

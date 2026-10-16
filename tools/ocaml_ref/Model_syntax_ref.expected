@@ -7822,7 +7822,7 @@ Warning: inventing type variables
 Model/syntax quotations (290):
   domain (Fun s t) = s
   codomain (Fun s t) = t
-  (!n ty. (Var n ty) has_type ty) /\\\n   (!ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (!ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (!s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (!n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))
+  (forall n ty. (Var n ty) has_type ty) /\\\n   (forall ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (forall ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (forall s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (forall n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))
   welltyped tm <=> ?ty. tm has_type ty
   (typeof (Var n ty) = ty) /\\\n  (typeof (Equal ty) = Fun ty (Fun ty Bool)) /\\\n  (typeof (Select ty) = Fun (Fun ty Bool) ty) /\\\n  (typeof (Comb s t) = codomain (typeof s)) /\\\n  (typeof (Abs n ty t) = Fun ty (typeof t))
   :P
@@ -7835,11 +7835,11 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  !tm ty. tm has_type ty ==> (typeof tm = ty)
-  !tm. welltyped tm <=> tm has_type (typeof tm)
-  (!n ty. welltyped(Var n ty)) /\\\n   (!ty. welltyped(Equal ty)) /\\\n   (!ty. welltyped(Select ty)) /\\\n   (!s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (!n ty t. welltyped (Abs n ty t) = welltyped t)
+  forall tm ty. tm has_type ty ==> (typeof tm = ty)
+  forall tm. welltyped tm <=> tm has_type (typeof tm)
+  (forall n ty. welltyped(Var n ty)) /\\\n   (forall ty. welltyped(Equal ty)) /\\\n   (forall ty. welltyped(Select ty)) /\\\n   (forall s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (forall n ty t. welltyped (Abs n ty t) = welltyped t)
   (s === t) = Comb (Comb (Equal(typeof s)) s) t
-  !s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)
+  forall s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)
   (ALPHAVARS [] tmp <=> (FST tmp = SND tmp)) /\\\n   (ALPHAVARS (CONS tp oenv) tmp <=>\n        (tmp = tp) \\/\n        ~(FST tp = FST tmp) /\\ ~(SND tp = SND tmp) /\\ ALPHAVARS oenv tmp)
   :P
   :P
@@ -7852,17 +7852,17 @@ Model/syntax quotations (290):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  (!env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (!env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (!env ty. RACONV env (Select ty,Select ty)) /\\\n  (!env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (!env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))
+  (forall env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (forall env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (forall env ty. RACONV env (Select ty,Select ty)) /\\\n  (forall env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (forall env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))
   (RACONV env (Var x1 ty1,Var x2 ty2) <=>\n        ALPHAVARS env (Var x1 ty1,Var x2 ty2)) /\\\n   (RACONV env (Var x1 ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Select ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Equal ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Equal ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Equal ty1,Select ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Equal ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Select ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Select ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Select ty1,Select ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Select ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Select ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Equal ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Select ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Comb l2 r2) <=>\n        RACONV env (l1,l2) /\\ RACONV env (r1,r2)) /\\\n   (RACONV env (Comb l1 r1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Equal ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Select ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2) <=>\n        (ty1 = ty2) /\\ RACONV (CONS (Var x1 ty1,Var x2 ty2) env) (t1,t2))
   ACONV t1 t2 <=> RACONV [] (t1,t2)
-  !env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)
-  !t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)
-  !t. ACONV t t
-  !env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)
-  !env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))
+  forall env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)
+  forall t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)
+  forall t. ACONV t t
+  forall env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)
+  forall env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))
   (s:term,t:term)
   []:(term#term)list
-  !s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)
+  forall s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)
   (TERM_UNION [] l2 = l2) /\\\n  (TERM_UNION (CONS h t) l2 =\n        let subun = TERM_UNION t l2 in\n        if EX (ACONV h) subun then subun else CONS h subun)
   :P
   :P
@@ -7877,8 +7877,8 @@ Model/syntax quotations (290):
   \\n. n + 1
   (+):num->num->num
   (+):num->num->num
-  !l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2
-  !l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y
+  forall l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2
+  forall l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y
   ALL (\\a. a has_type Bool) l1 /\\ ALL (\\a. a has_type Bool) l2\n   ==> ALL (\\a. a has_type Bool) (TERM_UNION l1 l2)
   (VFREE_IN v (Var x ty) <=> (Var x ty = v)) /\\\n   (VFREE_IN v (Equal ty) <=> (Equal ty = v)) /\\\n   (VFREE_IN v (Select ty) <=> (Select ty = v)) /\\\n   (VFREE_IN v (Comb s t) <=> VFREE_IN v s \\/ VFREE_IN v t) /\\\n   (VFREE_IN v (Abs x ty t) <=> ~(Var x ty = v) /\\ VFREE_IN v t)
   :P
@@ -7900,8 +7900,8 @@ Model/syntax quotations (290):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  !env p. RACONV env p\n           ==> !x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)
-  !s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)
+  forall env p. RACONV env p\n           ==> forall x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)
+  forall s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)
   (REV_ASSOCD a [] d = d) /\\\n   (REV_ASSOCD a (CONS (x,y) t) d =\n        if y = a then x else REV_ASSOCD a t d)
   :P
   :P
@@ -7922,14 +7922,14 @@ Model/syntax quotations (290):
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   {x | P x \\/ Q x} = {x | P x} UNION {x | Q x}
   {x | a = x} = {a}
-  !t. FINITE {x | VFREE_IN x t}
+  forall t. FINITE {x | VFREE_IN x t}
   Var x ty
   x:string
   IMAGE (\\(Var x ty). x) {x | VFREE_IN x t}
-  !t ty. FINITE {x | VFREE_IN (Var x ty) t}
+  forall t ty. FINITE {x | VFREE_IN (Var x ty) t}
   ty:type
   t:term
-  !t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)
+  forall t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)
   (VSUBST ilist (Var x ty) = REV_ASSOCD (Var x ty) ilist (Var x ty)) /\\\n   (VSUBST ilist (Equal ty) = Equal ty) /\\\n   (VSUBST ilist (Select ty) = Select ty) /\\\n   (VSUBST ilist (Comb s t) = Comb (VSUBST ilist s) (VSUBST ilist t)) /\\\n   (VSUBST ilist (Abs x ty t) =\n        let ilist' = FILTER (\\(s',s). ~(s = Var x ty)) ilist in\n        let t' = VSUBST ilist' t in\n        if EX (\\(s',s). VFREE_IN (Var x ty) s' /\\ VFREE_IN s t) ilist'\n        then let z = VARIANT t' x ty in\n             let ilist'' = CONS (Var z ty,Var x ty) ilist' in\n             Abs z ty (VSUBST ilist'' t)\n        else Abs x ty t')
   :P
   :P
@@ -8003,13 +8003,13 @@ Model/syntax quotations (290):
   tty:type
   ty:type
   x:string
-  !tm ty ilist.\n        tm has_type ty /\\\n        (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty
-  !tm ty ilist.\n        welltyped tm /\\\n        (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)
+  forall tm ty ilist.\n        tm has_type ty /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty
+  forall tm ty ilist.\n        welltyped tm /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)
   (P:A->bool) x
   l:(B#A)list
   x:A
   y:B
-  !l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b
+  forall l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b
   l:(term#term)list
   ilist:(term#term)list
   ty:type
@@ -8022,7 +8022,7 @@ Model/syntax quotations (290):
   t:term
   ty:type
   x:string
-  !tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))
+  forall tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))
   (IS_RESULT(Clash t) = F) /\\\n  (IS_RESULT(Result t) = T)
   (IS_CLASH(Clash t) = T) /\\\n  (IS_CLASH(Result t) = F)
   RESULT(Result t) = t
@@ -8050,9 +8050,9 @@ Model/syntax quotations (290):
   s':term
   ty:type
   x:string
-  !t ilist. (!s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)
+  forall t ilist. (forall s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)
   MEASURE(\\(env:(term#term)list,tyin:(type#type)list,t).\n                        sizeof t)
-  ?INST_CORE.\n  (!env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (!env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (!env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (!env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (!env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))
+  ?INST_CORE.\n  (forall env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (forall env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))
   :P
   :P
   :P
@@ -8107,9 +8107,9 @@ Model/syntax quotations (290):
   :P
   :P
   INST tyin tm = RESULT(INST_CORE [] tyin tm)
-  !r. ~(IS_RESULT r) <=> IS_CLASH r
+  forall r. ~(IS_RESULT r) <=> IS_CLASH r
   (let x = t in P x) = P t
-  (!t. welltyped t ==> [] |- t === t) /\\\n  (!asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (!asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (!asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (!x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (!p. p has_type Bool ==> [p] |- p) /\\\n  (!asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (!asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (!tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (!ilist asl p.\n      (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)
+  (forall t. welltyped t ==> [] |- t === t) /\\\n  (forall asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (forall x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (forall p. p has_type Bool ==> [p] |- p) /\\\n  (forall asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (forall asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (forall tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (forall ilist asl p.\n      (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)
 type_INDUCT =  |- (#!:fun(fun(fun(type,bool),bool),bool) (\P:fun(type,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(type,bool) (#Tyvar:fun(list(char),type) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) #Bool:type)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) #Ind:type)) (#!:fun(fun(type,bool),bool) (\a0:type. (#!:fun(fun(type,bool),bool) (\a1:type. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(type,bool) a0:type)) (P:fun(type,bool) a1:type))) (P:fun(type,bool) ((#Fun:fun(type,fun(type,type)) a0:type) a1:type))))))))))) (#!:fun(fun(type,bool),bool) (\x:type. (P:fun(type,bool) x:type))))))
 type_RECURSION =  |- (#!:fun(fun(fun(list(char),'Z),bool),bool) (\f0:fun(list(char),'Z). (#!:fun(fun('Z,bool),bool) (\f1:'Z. (#!:fun(fun('Z,bool),bool) (\f2:'Z. (#!:fun(fun(fun(type,fun(type,fun('Z,fun('Z,'Z)))),bool),bool) (\f3:fun(type,fun(type,fun('Z,fun('Z,'Z)))). (#?:fun(fun(fun(type,'Z),bool),bool) (\fn:fun(type,'Z). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) (#Tyvar:fun(list(char),type) a:list(char)))) (f0:fun(list(char),'Z) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) #Bool:type)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) #Ind:type)) f2:'Z)) (#!:fun(fun(type,bool),bool) (\a0:type. (#!:fun(fun(type,bool),bool) (\a1:type. ((#=:fun('Z,fun('Z,bool)) (fn:fun(type,'Z) ((#Fun:fun(type,fun(type,type)) a0:type) a1:type))) ((((f3:fun(type,fun(type,fun('Z,fun('Z,'Z)))) a0:type) a1:type) (fn:fun(type,'Z) a0:type)) (fn:fun(type,'Z) a1:type))))))))))))))))))))
 type_DISTINCT =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) #Bool:type))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) #Ind:type))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (#!:fun(fun(type,bool),bool) (\a0':type. (#!:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) (#Tyvar:fun(list(char),type) a:list(char))) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Bool:type) #Ind:type))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(type,bool),bool) (\a0':type. (#!:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Bool:type) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type)))))))) (#!:fun(fun(type,bool),bool) (\a0':type. (#!:fun(fun(type,bool),bool) (\a1':type. (#~:fun(bool,bool) ((#=:fun(type,fun(type,bool)) #Ind:type) ((#Fun:fun(type,fun(type,type)) a0':type) a1':type))))))))))))

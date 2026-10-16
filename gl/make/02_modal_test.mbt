@@ -8103,15 +8103,15 @@ test "GL/modal matches GL/modal.ml" {
       #|0..0..1..2..7..13..solved at 21
       #|0..0..1..2..6..10..14..18..22..26..47..71..95..121..solved at 159
       #|GL/modal quotations (99):
-      #|  (!WP. P WP) <=> (!W R. P (W,R))
-      #|  (holds WR V False (w:W) <=> F) /\\\n   (holds WR V True w <=> T) /\\\n   (holds WR V (Atom s) w <=> V s w) /\\\n   (holds WR V (Not p) w <=> ~(holds WR V p w)) /\\\n   (holds WR V (p && q) w <=> holds WR V p w /\\ holds WR V q w) /\\\n   (holds WR V (p || q) w <=> holds WR V p w \\/ holds WR V q w) /\\\n   (holds WR V (p --> q) w <=> holds WR V p w ==> holds WR V q w) /\\\n   (holds WR V (p <-> q) w <=> holds WR V p w <=> holds WR V q w) /\\\n   (holds WR V (Box p) w <=>\n    !w'. w' IN FST WR /\\ SND WR w w' ==> holds WR V p w')
-      #|  holds_in (W,R) p <=> !V w. w IN W ==> holds (W,R) V p w
-      #|  L: (W->bool)#(W->W->bool)->bool |= p <=> !f. L f ==> holds_in f p
+      #|  (forall WP. P WP) <=> (forall W R. P (W,R))
+      #|  (holds WR V False (w:W) <=> F) /\\\n   (holds WR V True w <=> T) /\\\n   (holds WR V (Atom s) w <=> V s w) /\\\n   (holds WR V (Not p) w <=> ~(holds WR V p w)) /\\\n   (holds WR V (p && q) w <=> holds WR V p w /\\ holds WR V q w) /\\\n   (holds WR V (p || q) w <=> holds WR V p w \\/ holds WR V q w) /\\\n   (holds WR V (p --> q) w <=> holds WR V p w ==> holds WR V q w) /\\\n   (holds WR V (p <-> q) w <=> holds WR V p w <=> holds WR V q w) /\\\n   (holds WR V (Box p) w <=>\n    forall w'. w' IN FST WR /\\ SND WR w w' ==> holds WR V p w')
+      #|  holds_in (W,R) p <=> forall V w. w IN W ==> holds (W,R) V p w
+      #|  L: (W->bool)#(W->W->bool)->bool |= p <=> forall f. L f ==> holds_in f p
       #|  P (\\w:W. holds (W,R) (\\a. p) (Atom a) w):bool
-      #|  !W R P. (!p V. P (holds (W,R) V p)) <=> (!p:W->bool. P p)
-      #|  !W R.\n     (!w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                   R w w' /\\ R w' w''\n                   ==> R w w'') <=>\n     (!p. holds_in (W,R) (Box p --> Box Box p))
-      #|  TRANSNT (W:W->bool,R:W->W->bool) <=>\n   ~(W = {}) /\\\n   (!x y:W. R x y ==> x IN W /\\ y IN W) /\\\n   (!x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n   WF(\\x y. R y x)
-      #|  (!p. p IN MINOR (Not p)) /\\\n   (!p q. p IN MINOR (p && q)) /\\\n   (!p q. q IN MINOR (p && q)) /\\\n   (!p q. p IN MINOR (p || q)) /\\\n   (!p q. q IN MINOR (p || q)) /\\\n   (!p q. p IN MINOR (p --> q)) /\\\n   (!p q. q IN MINOR (p --> q)) /\\\n   (!p q. p IN MINOR (p <-> q)) /\\\n   (!p q. q IN MINOR (p <-> q)) /\\\n   (!p. p IN MINOR (Box p))
+      #|  forall W R P. (forall p V. P (holds (W,R) V p)) <=> (forall p:W->bool. P p)
+      #|  forall W R.\n     (forall w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                   R w w' /\\ R w' w''\n                   ==> R w w'') <=>\n     (forall p. holds_in (W,R) (Box p --> Box Box p))
+      #|  TRANSNT (W:W->bool,R:W->W->bool) <=>\n   ~(W = {}) /\\\n   (forall x y:W. R x y ==> x IN W /\\ y IN W) /\\\n   (forall x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n   WF(\\x y. R y x)
+      #|  (forall p. p IN MINOR (Not p)) /\\\n   (forall p q. p IN MINOR (p && q)) /\\\n   (forall p q. q IN MINOR (p && q)) /\\\n   (forall p q. p IN MINOR (p || q)) /\\\n   (forall p q. q IN MINOR (p || q)) /\\\n   (forall p q. p IN MINOR (p --> q)) /\\\n   (forall p q. q IN MINOR (p --> q)) /\\\n   (forall p q. p IN MINOR (p <-> q)) /\\\n   (forall p q. q IN MINOR (p <-> q)) /\\\n   (forall p. p IN MINOR (Box p))
       #|  (==>)
       #|  (==>)
       #|  (==>)
@@ -8122,35 +8122,35 @@ test "GL/modal matches GL/modal.ml" {
       #|  (==>)
       #|  (==>)
       #|  (==>)
-      #|  MINOR False = {} /\\\n   MINOR True = {} /\\\n   MINOR (Atom s) = {} /\\\n   (!p. MINOR (Not p) = {p}) /\\\n   (!p q. MINOR (p && q) = {p,q}) /\\\n   (!p q. MINOR (p || q) = {p,q}) /\\\n   (!p q. MINOR (p --> q) = {p,q}) /\\\n   (!p q. MINOR (p <-> q) = {p,q}) /\\\n   (!p. MINOR (Box p) = {p})
+      #|  MINOR False = {} /\\\n   MINOR True = {} /\\\n   MINOR (Atom s) = {} /\\\n   (forall p. MINOR (Not p) = {p}) /\\\n   (forall p q. MINOR (p && q) = {p,q}) /\\\n   (forall p q. MINOR (p || q) = {p,q}) /\\\n   (forall p q. MINOR (p --> q) = {p,q}) /\\\n   (forall p q. MINOR (p <-> q) = {p,q}) /\\\n   (forall p. MINOR (Box p) = {p})
       #|  (SUBFORMULA) = RTC (\\p q. p IN MINOR q)
-      #|  !p. p SUBFORMULA p
-      #|  !p q r. p SUBFORMULA q /\\ q SUBFORMULA r ==> p SUBFORMULA r
-      #|  !p q. p SUBFORMULA q <=> p = q \\/ (?r. p SUBFORMULA r /\\ r IN MINOR q)
+      #|  forall p. p SUBFORMULA p
+      #|  forall p q r. p SUBFORMULA q /\\ q SUBFORMULA r ==> p SUBFORMULA r
+      #|  forall p q. p SUBFORMULA q <=> p = q \\/ (?r. p SUBFORMULA r /\\ r IN MINOR q)
       #|  {q | ?r. q SUBFORMULA r /\\ (r = a0 \\/ r = a1)} =\n                       {q | q SUBFORMULA a0} UNION {q | q SUBFORMULA a1}
       #|  {q | ?r. q SUBFORMULA r /\\ r = a} = {q | q SUBFORMULA a}
       #|  {q | q = a \\/ P q} = a INSERT {q | P q}
       #|  {x | x = a} = {a}
-      #|  !p. FINITE {q | q SUBFORMULA p}
+      #|  forall p. FINITE {q | q SUBFORMULA p}
       #|  {Not q | q SUBFORMULA p} =\n                        IMAGE (Not) {q | q SUBFORMULA p}
-      #|  !p. FINITE {A | A SUBSET {q | q SUBFORMULA p} UNION\n                            {Not q | q SUBFORMULA p}}
-      #|  (!p. p SUBFORMULA False <=> p = False) /\\\n   (!p. p SUBFORMULA True <=> p = True) /\\\n   (!p s. p SUBFORMULA (Atom s) <=> p = Atom s) /\\\n   (!p q. p SUBFORMULA (Not q) <=> p = Not q \\/ p SUBFORMULA q) /\\\n   (!p q r. p SUBFORMULA (q && r) <=>\n            p = q && r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (!p q r. p SUBFORMULA (q || r) <=>\n            p = q || r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (!p q r. p SUBFORMULA (q --> r) <=>\n            p = q --> r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (!p q r. p SUBFORMULA (q <-> r) <=>\n            p = q <-> r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (!p q. p SUBFORMULA (Box q) <=> p = Box q \\/ p SUBFORMULA q)
+      #|  forall p. FINITE {A | A SUBSET {q | q SUBFORMULA p} UNION\n                            {Not q | q SUBFORMULA p}}
+      #|  (forall p. p SUBFORMULA False <=> p = False) /\\\n   (forall p. p SUBFORMULA True <=> p = True) /\\\n   (forall p s. p SUBFORMULA (Atom s) <=> p = Atom s) /\\\n   (forall p q. p SUBFORMULA (Not q) <=> p = Not q \\/ p SUBFORMULA q) /\\\n   (forall p q r. p SUBFORMULA (q && r) <=>\n            p = q && r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (forall p q r. p SUBFORMULA (q || r) <=>\n            p = q || r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (forall p q r. p SUBFORMULA (q --> r) <=>\n            p = q --> r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (forall p q r. p SUBFORMULA (q <-> r) <=>\n            p = q <-> r \\/ p SUBFORMULA q \\/ p SUBFORMULA r) /\\\n   (forall p q. p SUBFORMULA (Box q) <=> p = Box q \\/ p SUBFORMULA q)
       #|  list_of_set {q | q SUBFORMULA p}
-      #|  !p. ?X. NOREPETITION X /\\ (!q. MEM q X <=> q SUBFORMULA p)
+      #|  forall p. ?X. NOREPETITION X /\\ (forall q. MEM q X <=> q SUBFORMULA p)
       #|  p:form
-      #|  !p q n. MAX p q < n <=> p < n /\\ q < n
-      #|  !p q:form n:num. MAX (size p) (size q) < n <=> p IN u n /\\ q IN u n
-      #|  !p:form n:num. size p < n <=> p IN u n
+      #|  forall p q n. MAX p q < n <=> p < n /\\ q < n
+      #|  forall p q:form n:num. MAX (size p) (size q) < n <=> p IN u n /\\ q IN u n
+      #|  forall p:form n:num. size p < n <=> p IN u n
       #|  SUC n
       #|  u (n:num) UNION\n     {True, False} UNION\n     IMAGE Atom (:string) UNION\n     IMAGE (Not) (u n) UNION\n     IMAGE (\\(op,p,q). op p q)\n           ({(&&),(||),(-->),(<->)} CROSS (u n) CROSS (u n)) UNION\n     IMAGE (Box) (u n)
-      #|  !n. ~(n < 0)
+      #|  forall n. ~(n < 0)
       #|  IMAGE u (:num):(form->bool)->bool
       #|  m < m + 1
       #|  u (size (p:form)+1):form->bool
       #|  p:form
       #|  (:form) = UNIONS {u n | n | n IN (:num)}
       #|  u n = {p:form | p | size p < n}
-      #|  ?depth.\n       depth False = 0 /\\\n       depth True = 0 /\\\n       (!a. depth (Atom a) = 0) /\\\n       (!p. depth (Not p) = depth p + 1) /\\\n       (!p q. depth (p && q) = MAX (depth p) (depth q) + 1) /\\\n       (!p q. depth (p || q) = MAX (depth p) (depth q) + 1) /\\\n       (!p q. depth (p --> q) = MAX (depth p) (depth q) + 1) /\\\n       (!p q. depth (p <-> q) = MAX (depth p) (depth q) + 1) /\\\n       (!p. depth (Box p) = depth p + 1)
+      #|  ?depth.\n       depth False = 0 /\\\n       depth True = 0 /\\\n       (forall a. depth (Atom a) = 0) /\\\n       (forall p. depth (Not p) = depth p + 1) /\\\n       (forall p q. depth (p && q) = MAX (depth p) (depth q) + 1) /\\\n       (forall p q. depth (p || q) = MAX (depth p) (depth q) + 1) /\\\n       (forall p q. depth (p --> q) = MAX (depth p) (depth q) + 1) /\\\n       (forall p q. depth (p <-> q) = MAX (depth p) (depth q) + 1) /\\\n       (forall p. depth (Box p) = depth p + 1)
       #|  :P
       #|  :P
       #|  :P
@@ -8192,14 +8192,14 @@ test "GL/modal matches GL/modal.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  COUNTABLE (:form)
-      #|  BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z <=>\n   (!w1:A w2:B.\n      Z w1 w2\n      ==> w1 IN W1 /\\ w2 IN W2 /\\\n          (!a:string. V1 a w1 <=> V2 a w2) /\\\n          (!w1'. R1 w1 w1' ==> ?w2'. w2' IN W2 /\\ Z w1' w2' /\\ R2 w2 w2') /\\\n          (!w2'. R2 w2 w2' ==> ?w1'. w1' IN W1 /\\ Z w1' w2' /\\ R1 w1 w1'))
-      #|  !W1 R1 V1 W2 R2 V2 Z.\n       BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z\n       ==> !p w1:A w2:B.\n             Z w1 w2\n             ==> (holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
-      #|  !W1 R1 V1 W2 R2 V2 Z p w1:A w2:B.\n     BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z /\\\n     Z w1 w2\n     ==> (holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
+      #|  BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z <=>\n   (forall w1:A w2:B.\n      Z w1 w2\n      ==> w1 IN W1 /\\ w2 IN W2 /\\\n          (forall a:string. V1 a w1 <=> V2 a w2) /\\\n          (forall w1'. R1 w1 w1' ==> ?w2'. w2' IN W2 /\\ Z w1' w2' /\\ R2 w2 w2') /\\\n          (forall w2'. R2 w2 w2' ==> ?w1'. w1' IN W1 /\\ Z w1' w2' /\\ R1 w1 w1'))
+      #|  forall W1 R1 V1 W2 R2 V2 Z.\n       BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z\n       ==> forall p w1:A w2:B.\n             Z w1 w2\n             ==> (holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
+      #|  forall W1 R1 V1 W2 R2 V2 Z p w1:A w2:B.\n     BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z /\\\n     Z w1 w2\n     ==> (holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
       #|  BISIMILAR (W1,R1,V1) (W2,R2,V2) (w1:A) (w2:B) <=>\n   ?Z. BISIMIMULATION (W1,R1,V1) (W2,R2,V2) Z /\\ Z w1 w2
-      #|  !W1 R1 V1 W2 R2 V2 w1:A w2:B.\n     BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2 ==> w1 IN W1 /\\ w2 IN W2
-      #|  !W1 R1 V1 W2 R2 V2 w1:A w2:B.\n     BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2\n     ==> (!p. holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
-      #|  !W1 R1 W2 R2.\n     (!V1 w1:A. ?V2 w2:B. BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2)\n     ==> (!p. holds_in (W2,R2) p ==> holds_in (W1,R1) p)
-      #|  !L1 L2 .\n    (!W1 R1 V1 w1:A.\n       L1 (W1,R1) /\\ w1 IN W1\n       ==> ?W2 R2 V2 w2:B.\n             L2 (W2,R2) /\\\n             BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2)\n    ==> (!p. L2 |= p ==> L1 |= p)
+      #|  forall W1 R1 V1 W2 R2 V2 w1:A w2:B.\n     BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2 ==> w1 IN W1 /\\ w2 IN W2
+      #|  forall W1 R1 V1 W2 R2 V2 w1:A w2:B.\n     BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2\n     ==> (forall p. holds (W1,R1) V1 p w1 <=> holds (W2,R2) V2 p w2)
+      #|  forall W1 R1 W2 R2.\n     (forall V1 w1:A. ?V2 w2:B. BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2)\n     ==> (forall p. holds_in (W2,R2) p ==> holds_in (W1,R1) p)
+      #|  forall L1 L2 .\n    (forall W1 R1 V1 w1:A.\n       L1 (W1,R1) /\\ w1 IN W1\n       ==> ?W2 R2 V2 w2:B.\n             L2 (W2,R2) /\\\n             BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2)\n    ==> (forall p. L2 |= p ==> L1 |= p)
       #|  Diam p = Not Box Not p
       #|  Dotbox p = (Box p && p)
       #|form_INDUCT =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\P:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #False:form)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #True:form)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(form,bool) (#Atom:fun(list(char),form) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Not:fun(form,form) a:form)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#&&:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#||:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#-->:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#<->:fun(form,fun(form,form)) a0:form) a1:form)))))))) (#!:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Box:fun(form,form) a:form)))))))))))))) (#!:fun(fun(form,bool),bool) (\x:form. (P:fun(form,bool) x:form))))))

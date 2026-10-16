@@ -37,12 +37,12 @@ test "Formal_ineqs/trig/cos_eval matches Formal_ineqs/trig/cos_eval.ml" {
       #|  interval_arith x (float_num F n e, f) \n\t\t\t   ==> x <= f /\\ &0 <= (float_num F n e)
       #|  a - b + &2 * b = a + b
       #|  x - pi
-      #|  !x. cos (x - pi) = -- cos x
+      #|  forall x. cos (x - pi) = -- cos x
       #|  a - b = --(b - a)
-      #|  !x. cos (pi - x) = -- cos x
+      #|  forall x. cos (pi - x) = -- cos x
       #|  &1
       #|  cos (&2 * pi - x) = cos x
-      #|  !x. interval_arith (cos x) (-- &1, &1)
+      #|  forall x. interval_arith (cos x) (-- &1, &1)
       #|  --k:real
       #|  cos x = cos (x + (&2 * pi) * k)
       #|  cos a1

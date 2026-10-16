@@ -961,30 +961,30 @@ test "calc_int matches calc_int.ml" {
       #|  (--)
       #|  (/)
       #|  (m + n = n + m) /\\\n   ((m + n) + p = m + (n + p)) /\\\n   (m + (n + p) = n + (m + p))
-      #|  !x. x + --x = &0
+      #|  forall x. x + --x = &0
       #|  (+) (--x)
-      #|  !x y z. (x + y = x + z) <=> (y = z)
-      #|  !x y z. (x + z = y + z) <=> (x = y)
-      #|  !x. x * &0 = &0
-      #|  !x. &0 * x = &0
-      #|  !x. --(--x) = x
-      #|  !x y. x * (--y) = -- (x * y)
-      #|  !x y. (--x) * y = -- (x * y)
+      #|  forall x y z. (x + y = x + z) <=> (y = z)
+      #|  forall x y z. (x + z = y + z) <=> (x = y)
+      #|  forall x. x * &0 = &0
+      #|  forall x. &0 * x = &0
+      #|  forall x. --(--x) = x
+      #|  forall x y. x * (--y) = -- (x * y)
+      #|  forall x y. (--x) * y = -- (x * y)
       #|  (a + b) + (c + d) = (a + c) + (b + d)
       #|  x + y
-      #|  !x y. --(x + y) = --x + --y
-      #|  !x. x + &0 = x
+      #|  forall x y. --(x + y) = --x + --y
+      #|  forall x. x + &0 = x
       #|  --(&0) = &0
       #|  --x
       #|  x:real
-      #|  !x y. --x <= y <=> &0 <= x + y
-      #|  !x y. --x <= --y <=> y <= x
-      #|  !x y. x <= --y <=> x + y <= &0
-      #|  !x n. (&x) pow n = &(x EXP n)
+      #|  forall x y. --x <= y <=> &0 <= x + y
+      #|  forall x y. --x <= --y <=> y <= x
+      #|  forall x y. x <= --y <=> x + y <= &0
+      #|  forall x n. (&x) pow n = &(x EXP n)
       #|  EVEN n
-      #|  !x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-      #|  !n. abs(&n) = &n
-      #|  !x. abs(--x) = abs x
+      #|  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
+      #|  forall n. abs(&n) = &n
+      #|  forall x. abs(--x) = abs x
       #|  (F /\\ F <=> F) /\\ (F /\\ T <=> F) /\\\n          (T /\\ F <=> F) /\\ (T /\\ T <=> T)
       #|  (~T <=> F) /\\ (~F <=> T)
       #|  (--(&m) <= &n <=> T) /\\\n     (&m <= &n <=> m <= n) /\\\n     (--(&m) <= --(&n) <=> n <= m) /\\\n     (&m <= --(&n) <=> (m = 0) /\\ (n = 0))

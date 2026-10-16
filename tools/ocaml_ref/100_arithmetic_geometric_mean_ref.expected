@@ -5895,8 +5895,8 @@ Generating HOL version of proof
   k * x * x pow n = (k * x pow n) * x
   k <= n ==> SUC n - k = SUC(n - k)
   1 <= SUC n
-  !x n. x pow (n + 1) - (&n + &1) * x + &n =\n         (x - &1) pow 2 * sum(1..n) (\\k. &k * x pow (n - k))
-  !n x. &0 <= x ==> &0 <= x pow (n + 1) - (&n + &1) * x + &n
+  forall x n. x pow (n + 1) - (&n + &1) * x + &n =\n         (x - &1) pow 2 * sum(1..n) (\\k. &k * x pow (n - k))
+  forall n x. &0 <= x ==> &0 <= x pow (n + 1) - (&n + &1) * x + &n
   ~(b = &0)
   &0 < b
   &0 <= x - a + b <=> a - b <= x
@@ -5910,18 +5910,18 @@ Generating HOL version of proof
   x(n + 1) = (&n + &1) * a - &n * b
   b = sum(1..n) x / &n
   a = sum(1..n+1) x / (&n + &1)
-  !n x. 1 <= n /\\ (!i. 1 <= i /\\ i <= n + 1 ==> &0 <= x i)\n         ==> x(n + 1) * (sum(1..n) x / &n) pow n\n                <= (sum(1..n+1) x / (&n + &1)) pow (n + 1)
+  forall n x. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n + 1 ==> &0 <= x i)\n         ==> x(n + 1) * (sum(1..n) x / &n) pow n\n                <= (sum(1..n+1) x / (&n + &1)) pow (n + 1)
   i <= n ==> i <= n + 1
   i <= n ==> i <= n + 1
   x(n + 1) * (sum(1..n) x / &n) pow n
   n = 0
   x:num->real
   1 <= SUC n
-  !n a. 1 <= n /\\ (!i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
+  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
   1 <= SUC n
   root(SUC n) ((sum(1..SUC n) a / &(SUC n)) pow (SUC n))
   1 <= SUC n
-  !n a. 1 <= n /\\ (!i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> root n (product(1..n) a) <= sum(1..n) a / &n
+  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> root n (product(1..n) a) <= sum(1..n) a / &n
 LEMMA_1 =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real))) (#real_of_num:fun(num,real) n:num))) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\k:num. ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) k:num)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#-:fun(num,fun(num,num)) n:num) k:num)))))))))))
 LEMMA_2 =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real))) (#real_of_num:fun(num,real) n:num))))))))
 LEMMA_3 =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(num,real),bool),bool) (\x:fun(num,real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (x:fun(num,real) i:num))))))) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (x:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) ((#real_div:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) x:fun(num,real))) (#real_of_num:fun(num,real) n:num))) n:num))) ((#real_pow:fun(real,fun(num,real)) ((#real_div:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:fun(num,real))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))

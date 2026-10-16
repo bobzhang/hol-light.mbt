@@ -13110,25 +13110,25 @@ Arithmetic/tarski quotations (66):
   x < 2 ==> 1 - (1 - x) = x
   1 - m < 2
   x < 2 ==> (2 * y + x) DIV 2 = y
-  (!s. denumber(number s) = s) /\\\n   (!n. number(denumber n) = n)
-  !x y. number(x) = number(y) <=> x = y
-  !y. ?x. number(x) = y
+  (forall s. denumber(number s) = s) /\\\n   (forall n. number(denumber n) = n)
+  forall x y. number(x) = number(y) <=> x = y
+  forall y. ?x. number(x) = y
   (gterm (V x) = NPAIR 0 (number x)) /\\\n   (gterm Z = NPAIR 1 0) /\\\n   (gterm (Suc t) = NPAIR 2 (gterm t)) /\\\n   (gterm (s ++ t) = NPAIR 3 (NPAIR (gterm s) (gterm t))) /\\\n   (gterm (s ** t) = NPAIR 4 (NPAIR (gterm s) (gterm t)))
   (gform False = NPAIR 0 0) /\\\n   (gform True = NPAIR 0 1) /\\\n   (gform (s === t) = NPAIR 1 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (s << t) = NPAIR 2 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (s <<= t) = NPAIR 3 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (Not p) = NPAIR 4 (gform p)) /\\\n   (gform (p && q) = NPAIR 5 (NPAIR (gform p) (gform q))) /\\\n   (gform (p || q) = NPAIR 6 (NPAIR (gform p) (gform q))) /\\\n   (gform (p --> q) = NPAIR 7 (NPAIR (gform p) (gform q))) /\\\n   (gform (p <-> q) = NPAIR 8 (NPAIR (gform p) (gform q))) /\\\n   (gform (!! x p) = NPAIR 9 (NPAIR (number x) (gform p))) /\\\n   (gform (?? x p) = NPAIR 10 (NPAIR (number x) (gform p)))
-  !s t. (gterm s = gterm t) <=> (s = t)
-  !p q. (gform p = gform q) <=> (p = q)
+  forall s t. (gterm s = gterm t) <=> (s = t)
+  forall p q. (gform p = gform q) <=> (p = q)
   u:term
   ((gterm u = NPAIR 0 (number x)) <=> (u = V x)) /\\\n   ((gterm u = NPAIR 1 0) <=> (u = Z)) /\\\n   ((gterm u = NPAIR 2 n) <=> (?t. (u = Suc t) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 3 (NPAIR m n)) <=>\n          (?s t. (u = s ++ t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 4 (NPAIR m n)) <=>\n          (?s t. (u = s ** t) /\\ (gterm s = m) /\\ (gterm t = n)))
   r:form
   ((gform r = NPAIR 0 0) <=> (r = False)) /\\\n   ((gform r = NPAIR 0 1) <=> (r = True)) /\\\n   ((gform r = NPAIR 1 (NPAIR m n)) <=>\n        (?s t. (r = s === t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 2 (NPAIR m n)) <=>\n        (?s t. (r = s << t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 3 (NPAIR m n)) <=>\n        (?s t. (r = s <<= t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 4 n) = (?p. (r = Not p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 5 (NPAIR m n)) <=>\n        (?p q. (r = p && q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 6 (NPAIR m n)) <=>\n        (?p q. (r = p || q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 7 (NPAIR m n)) <=>\n        (?p q. (r = p --> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 8 (NPAIR m n)) <=>\n        (?p q. (r = p <-> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 9 (NPAIR (number x) n)) <=>\n        (?p. (r = !!x p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 10 (NPAIR (number x) n)) <=>\n        (?p. (r = ??x p) /\\ (gform p = n)))
   gnumeral m n = (gterm(numeral m) = n)
   arith_gnumeral1 a b = formsubst ((3 |-> a) ((4 |-> b) V))\n       (??0 (??1\n       (V 3 === arith_pair (V 0) (V 1) &&\n        V 4 === arith_pair (Suc(V 0)) (arith_pair (numeral 2) (V 1)))))
-  !v a b. holds v (arith_gnumeral1 a b) <=>\n                ?x y. termval v a = NPAIR x y /\\\n                      termval v b = NPAIR (SUC x) (NPAIR 2 y)
+  forall v a b. holds v (arith_gnumeral1 a b) <=>\n                ?x y. termval v a = NPAIR x y /\\\n                      termval v b = NPAIR (SUC x) (NPAIR 2 y)
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  !s t. FV(arith_gnumeral1 s t) = FVT s UNION FVT t
+  forall s t. FV(arith_gnumeral1 s t) = FVT s UNION FVT t
   arith_gnumeral1' x y = arith_rtc arith_gnumeral1 x y
-  !v s t. holds v (arith_gnumeral1' s t) <=>\n              RTC (\\a b. ?x y. a = NPAIR x y /\\\n                               b = NPAIR (SUC x) (NPAIR 2 y))\n                  (termval v s) (termval v t)
-  !s t. FV(arith_gnumeral1' s t) = FVT s UNION FVT t
+  forall v s t. holds v (arith_gnumeral1' s t) <=>\n              RTC (\\a b. ?x y. a = NPAIR x y /\\\n                               b = NPAIR (SUC x) (NPAIR 2 y))\n                  (termval v s) (termval v t)
+  forall s t. FV(arith_gnumeral1' s t) = FVT s UNION FVT t
   arith_gnumeral n p =\n        formsubst ((0 |-> n) ((1 |-> p) V))\n            (arith_gnumeral1' (arith_pair Z (numeral 3))\n                              (arith_pair (V 0) (V 1)))
   f:num->num->num
   \\a:num b:num. NPAIR 2 a
@@ -13136,35 +13136,35 @@ Arithmetic/tarski quotations (66):
   3
   fn:num->num
   (gterm o numeral)
-  !v s t. holds v (arith_gnumeral s t) <=>\n            gnumeral (termval v s) (termval v t)
+  forall v s t. holds v (arith_gnumeral s t) <=>\n            gnumeral (termval v s) (termval v t)
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  !s t. FV(arith_gnumeral s t) =  FVT(s) UNION FVT(t)
+  forall s t. FV(arith_gnumeral s t) =  FVT(s) UNION FVT(t)
   qdiag x q = qsubst (x,numeral(gform q)) q
   arith_qdiag x s t =\n        formsubst ((1 |-> s) ((2 |-> t) V))\n        (?? 3\n           (arith_gnumeral (V 1) (V 3) &&\n            arith_pair (numeral 10)  (arith_pair (numeral(number x))\n                                                 (arith_pair (numeral 5)\n              (arith_pair (arith_pair (numeral 1)\n       (arith_pair (arith_pair (numeral 0) (numeral(number x))) (V 3)))\n                   (V 1)))) ===\n        V 2))
   FV(qdiag x q) = FV(q) DELETE x
-  !v x q. holds v (qdiag x q) = holds ((x |-> gform q) v) q
+  forall v x q. holds v (qdiag x q) = holds ((x |-> gform q) v) q
   (termval v s = gform p)\n   ==> (holds v (arith_qdiag x s t) <=> (termval v t = gform(qdiag x p)))
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  !x s t. FV(arith_qdiag x s t) = FVT(s) UNION FVT(t)
+  forall x s t. FV(arith_qdiag x s t) = FVT(s) UNION FVT(t)
   diagonalize x q =\n        let y = VARIANT(x INSERT FV(q)) in\n        ??y (arith_qdiag x (V x) (V y) && formsubst ((x |-> V y) V) q)
   u:num = y
   u:num = x
-  ~(y = x) /\\ !z. z IN FV(q) ==> ~(y = z)
+  ~(y = x) /\\ forall z. z IN FV(q) ==> ~(y = z)
   u:num
-  !x q. FV(diagonalize x q) = x INSERT (FV q)
+  forall x q. FV(diagonalize x q) = x INSERT (FV q)
   u:num
   ~(x:num = y)
-  !a. holds ((y |-> a) v) (arith_qdiag x (V x) (V y)) <=>\n                    (termval ((y |-> a) v) (V y) = gform(qdiag x p))
-  (v x = gform p)\n   ==> !q. holds v (diagonalize x q) <=> holds ((x |-> gform(qdiag x p)) v) q
+  forall a. holds ((y |-> a) v) (arith_qdiag x (V x) (V y)) <=>\n                    (termval ((y |-> a) v) (V y) = gform(qdiag x p))
+  (v x = gform p)\n   ==> forall q. holds v (diagonalize x q) <=> holds ((x |-> gform(qdiag x p)) v) q
   fixpoint x q = qdiag x (diagonalize x q)
-  !x p. FV(fixpoint x p) = FV(p) DELETE x
+  forall x p. FV(fixpoint x p) = FV(p) DELETE x
   ((x |-> gform(diagonalize x p)) v) x = gform (diagonalize x p)
-  !x p v. holds v (fixpoint x p) <=>\n           holds ((x |-> gform(fixpoint x p)) v) p
-  !x p v. holds v\n        (fixpoint x p <-> qsubst (x,numeral(gform(fixpoint x p))) p)
+  forall x p v. holds v (fixpoint x p) <=>\n           holds ((x |-> gform(fixpoint x p)) v) p
+  forall x p v. holds v\n        (fixpoint x p <-> qsubst (x,numeral(gform(fixpoint x p))) p)
   fixpoint x q
-  !x q. ?p. (FV(p) = FV(q) DELETE x) /\\\n             arithtrue (p <-> qsubst (x,numeral(gform p)) q)
-  definable_by P s <=> ?p x. P p /\\ (!v. holds v p <=> (v(x)) IN s)
-  definable s <=> ?p x. !v. holds v p <=> (v(x)) IN s
+  forall x q. ?p. (FV(p) = FV(q) DELETE x) /\\\n             arithtrue (p <-> qsubst (x,numeral(gform p)) q)
+  definable_by P s <=> ?p x. P p /\\ (forall v. holds v p <=> (v(x)) IN s)
+  definable s <=> ?p x. forall v. holds v p <=> (v(x)) IN s
   q:form
   Not p
   x:num

@@ -51725,66 +51725,66 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  --a:real^N
       #|  s:real^N->bool
       #|  a:real^N
-      #|  !P:(real^N->bool)->bool.\n        (!a s. P(IMAGE (\\x. a + x) s) <=> P s) <=>\n        (!a s. P s ==> P (IMAGE (\\x. a + x) s))
+      #|  forall P:(real^N->bool)->bool.\n        (forall a s. P(IMAGE (\\x. a + x) s) <=> P s) <=>\n        (forall a s. P s ==> P (IMAGE (\\x. a + x) s))
       #|  a:real^N
-      #|  !a:real^N. ~(a = vec 0) ==> dim {x | a dot x = &0} = dimindex(:N) - 1
-      #|  !s. dim s = dimindex(:N) - 1 <=>\n       ?a:real^N. ~(a = vec 0) /\\ span s = {x | a dot x = &0}
-      #|  affine s <=> !x y u v. x IN s /\\ y IN s /\\ (u + v = &1)\n                          ==> (u % x + v % y) IN s
+      #|  forall a:real^N. ~(a = vec 0) ==> dim {x | a dot x = &0} = dimindex(:N) - 1
+      #|  forall s. dim s = dimindex(:N) - 1 <=>\n       ?a:real^N. ~(a = vec 0) /\\ span s = {x | a dot x = &0}
+      #|  affine s <=> forall x y u v. x IN s /\\ y IN s /\\ (u + v = &1)\n                          ==> (u % x + v % y) IN s
       #|  (u + v = &1) <=> (u = &1 - v)
-      #|  affine s <=> !x y u. x IN s /\\ y IN s ==> ((&1 - u) % x + u % y) IN s
+      #|  affine s <=> forall x y u. x IN s /\\ y IN s ==> ((&1 - u) % x + u % y) IN s
       #|  u % c % x + v % c % y = c % (u % x + v % y)
-      #|  !s c. affine s ==> affine (IMAGE (\\x. c % x) s)
+      #|  forall s c. affine s ==> affine (IMAGE (\\x. c % x) s)
       #|  u % --x + v % --y = --(u % x + v % y)
-      #|  !s. affine s ==> affine (IMAGE (--) s)
+      #|  forall s. affine s ==> affine (IMAGE (--) s)
       #|  u % (a + b) + v % (c + d) = (u % a + v % c) + (u % b + v % d)
-      #|  !s t. affine s /\\ affine t ==> affine {x + y | x IN s /\\ y IN t}
+      #|  forall s t. affine s /\\ affine t ==> affine {x + y | x IN s /\\ y IN t}
       #|  u % (a - b) + v % (c - d) = (u % a + v % c) - (u % b + v % d)
-      #|  !s t. affine s /\\ affine t ==> affine {x - y | x IN s /\\ y IN t}
+      #|  forall s t. affine s /\\ affine t ==> affine {x - y | x IN s /\\ y IN t}
       #|  (&1 - u) % (a + x) + u % (a + y) = a + z <=> (&1 - u) % x + u % y = z
-      #|  !a:real^N s. affine (IMAGE (\\x. a + x) s) <=> affine s
-      #|  !s a:real^N. affine s ==> affine (IMAGE (\\x. a + x) s)
-      #|  !f s. affine s /\\ linear f ==> affine(IMAGE f s)
-      #|  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (affine (IMAGE f s) <=> affine s)
-      #|  !f:real^M->real^N s. linear f /\\ affine s ==> affine {x | f(x) IN s}
+      #|  forall a:real^N s. affine (IMAGE (\\x. a + x) s) <=> affine s
+      #|  forall s a:real^N. affine s ==> affine (IMAGE (\\x. a + x) s)
+      #|  forall f s. affine s /\\ linear f ==> affine(IMAGE f s)
+      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (affine (IMAGE f s) <=> affine s)
+      #|  forall f:real^M->real^N s. linear f /\\ affine s ==> affine {x | f(x) IN s}
       #|  affine {}
-      #|  !x. affine {x}
+      #|  forall x. affine {x}
       #|  inv(c):real
       #|  c = &0
-      #|  !s:real^N->bool c. affine (IMAGE (\\x. c % x) s) <=> c = &0 \\/ affine s
-      #|  !s m c:real^N.\n        affine (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ affine s
-      #|  !s m c:real^N. affine s ==> affine (IMAGE (\\x. m % x + c) s)
+      #|  forall s:real^N->bool c. affine (IMAGE (\\x. c % x) s) <=> c = &0 \\/ affine s
+      #|  forall s m c:real^N.\n        affine (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ affine s
+      #|  forall s m c:real^N. affine s ==> affine (IMAGE (\\x. m % x + c) s)
       #|  affine(UNIV:real^N->bool)
-      #|  !a b. affine {x | a dot x = b}
+      #|  forall a b. affine {x | a dot x = b}
       #|  b:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !b k. affine {x:real^N | x$k = b}
-      #|  (!s. s IN f ==> affine s) ==> affine(INTERS f)
-      #|  !s t. affine s /\\ affine t ==> affine(s INTER t)
-      #|  !s. affine(affine hull s)
-      #|  !s. (affine hull s = s) <=> affine s
-      #|  !s. affine s <=> ?t. s = affine hull t
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall b k. affine {x:real^N | x$k = b}
+      #|  (forall s. s IN f ==> affine s) ==> affine(INTERS f)
+      #|  forall s t. affine s /\\ affine t ==> affine(s INTER t)
+      #|  forall s. affine(affine hull s)
+      #|  forall s. (affine hull s = s) <=> affine s
+      #|  forall s. affine s <=> ?t. s = affine hull t
       #|  affine hull (:real^N) = (:real^N)
-      #|  !s t. s SUBSET affine hull t /\\ t SUBSET affine hull s\n         ==> affine hull s = affine hull t
-      #|  !a s. affine hull (IMAGE (\\x. a + x) s) =\n         IMAGE (\\x. a + x) (affine hull s)
-      #|  !f s. linear f\n         ==> affine hull (IMAGE f s) = IMAGE f (affine hull s)
-      #|  !f:real^M->real^N s x.\n        linear f /\\ x IN affine hull s ==> (f x) IN affine hull (IMAGE f s)
+      #|  forall s t. s SUBSET affine hull t /\\ t SUBSET affine hull s\n         ==> affine hull s = affine hull t
+      #|  forall a s. affine hull (IMAGE (\\x. a + x) s) =\n         IMAGE (\\x. a + x) (affine hull s)
+      #|  forall f s. linear f\n         ==> affine hull (IMAGE f s) = IMAGE f (affine hull s)
+      #|  forall f:real^M->real^N s x.\n        linear f /\\ x IN affine hull s ==> (f x) IN affine hull (IMAGE f s)
       #|  (x + y) dot (x + y):real^N = (x dot x + y dot y) + &2 * x dot y
       #|  ((&1 - u) % x + u % y) - a:real^N = (&1 - u) % (x - a) + u % (y - a)
-      #|  !s a b:real^N.\n        (!x. x IN s ==> dist(x,a) = dist(x,b))\n        ==> (!x. x IN affine hull s ==> dist(x,a) = dist(x,b))
-      #|  {x | !y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
-      #|  !(f:real^M->real^N->real^P) s t x y.\n        bilinear f /\\ x IN affine hull s /\\ y IN affine hull t\n        ==> f x y IN affine hull { f a b | a IN s /\\ b IN t}
+      #|  forall s a b:real^N.\n        (forall x. x IN s ==> dist(x,a) = dist(x,b))\n        ==> (forall x. x IN affine hull s ==> dist(x,a) = dist(x,b))
+      #|  {x | forall y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
+      #|  forall(f:real^M->real^N->real^P) s t x y.\n        bilinear f /\\ x IN affine hull s /\\ y IN affine hull t\n        ==> f x y IN affine hull { f a b | a IN s /\\ b IN t}
       #|  a + d % x:real^N = (&1 - d) % a + d % (a + x)
-      #|  !s a x:real^N d. affine s /\\ a IN s /\\ (a + x) IN s ==> (a + d % x) IN s
+      #|  forall s a x:real^N d. affine s /\\ a IN s /\\ (a + x) IN s ==> (a + d % x) IN s
       #|  x + a % (y - z):real^N =\n    &1 / &2 % ((&1 - &2 * a) % x + (&2 * a) % y) +\n    &1 / &2 % ((&1 + &2 * a) % x + (-- &2 * a) % z)
-      #|  !s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> (x + a % (y - z)) IN s
-      #|  !s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> a % (x - y) + z IN s
+      #|  forall s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> (x + a % (y - z)) IN s
+      #|  forall s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> a % (x - y) + z IN s
       #|  x - a % (y - z):real^N = x + a % (z - y)
-      #|  !s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> x - a % (y - z) IN s
+      #|  forall s a x y z:real^N.\n        affine s /\\ x IN s /\\ y IN s /\\ z IN s ==> x - a % (y - z) IN s
       #|  c % (x - a):real^N = y - a <=>\n                            y = a + c % (x - a)
       #|  x - a + y - a:real^N = z - a <=>\n                            z = (a + &1 % (x - a)) + &1 % (y - a)
       #|  vec 0:real^N = x - a <=> x = a
-      #|  !s:real^N->bool a.\n        affine s /\\ a IN s ==> subspace {x - a | x IN s}
+      #|  forall s:real^N->bool a.\n        affine s /\\ a IN s ==> subspace {x - a | x IN s}
       #|  x - &1 % a:real^N = y - a <=> x = y
       #|  k:A->bool
       #|  (\\i. u i % (x i - a)):A->real^N
@@ -51794,10 +51794,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  k:A->bool = {}
       #|  s:real^N->bool = {}
-      #|  !s k u x:A->real^N.\n        FINITE k /\\ affine s /\\ sum k u = &1 /\\ (!i. i IN k ==> x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
+      #|  forall s k u x:A->real^N.\n        FINITE k /\\ affine s /\\ sum k u = &1 /\\ (forall i. i IN k ==> x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
       #|  ~(&1 = &0)
       #|  vsum k (\\i. u i % (x:A->real^N) i) =\n    vsum {i | i IN k /\\ ~(u i = &0)} (\\i. u i % x i)
-      #|  !s k u x:A->real^N.\n        affine s /\\\n        sum k u = &1 /\\\n        (!i. i IN k ==> u i = &0 \\/ x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
+      #|  forall s k u x:A->real^N.\n        affine s /\\\n        sum k u = &1 /\\\n        (forall i. i IN k ==> u i = &0 \\/ x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
       #|  2
       #|  \\n. if n = 1 then x else y:real^N
       #|  \\n. if n = 1 then u else v:real
@@ -51806,7 +51806,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  y:real^N
       #|  x:real^N
-      #|  !s:real^N->bool.\n        affine s <=>\n            !k u x. (!i:num. 1 <= i /\\ i <= k ==> x(i) IN s) /\\\n                    (sum (1..k) u = &1)\n                    ==> vsum (1..k) (\\i. u(i) % x(i)) IN s
+      #|  forall s:real^N->bool.\n        affine s <=>\n            forall k u x. (forall i:num. 1 <= i /\\ i <= k ==> x(i) IN s) /\\\n                    (sum (1..k) u = &1)\n                    ==> vsum (1..k) (\\i. u(i) % x(i)) IN s
       #|  i <= k1 + k2 /\\ ~(i <= k1) ==> 1 <= i - k1 /\\ i - k1 <= k2
       #|  k1 + 1 <= i ==> ~(i <= k1)
       #|  1 <= x + 1 /\\ x < x + 1
@@ -51827,7 +51827,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\i:num. &1
       #|  1
       #|  x:real^N
-      #|  !s. affine hull s =\n        {y:real^N | ?k u x. (!i. 1 <= i /\\ i <= k ==> x i IN s) /\\\n                            (sum (1..k) u = &1) /\\\n                            (vsum (1..k) (\\i. u i % x i) = y)}
+      #|  forall s. affine hull s =\n        {y:real^N | ?k u x. (forall i. 1 <= i /\\ i <= k ==> x i IN s) /\\\n                            (sum (1..k) u = &1) /\\\n                            (vsum (1..k) (\\i. u i % x i) = y)}
       #|  \\w. if w = x:real^N then u else v:real
       #|  {x:real^N,y}
       #|  x:real^N = y
@@ -51835,10 +51835,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  y:real^N
       #|  x:real^N
-      #|  !V:real^N->bool.\n     affine V <=>\n         !(s:real^N->bool) (u:real^N->real).\n             FINITE s /\\ ~(s = {}) /\\ s SUBSET V /\\ sum s u = &1\n             ==> vsum s (\\x. u x % x) IN V
+      #|  forall V:real^N->bool.\n     affine V <=>\n         forall(s:real^N->bool) (u:real^N->real).\n             FINITE s /\\ ~(s = {}) /\\ s SUBSET V /\\ sum s u = &1\n             ==> vsum s (\\x. u x % x) IN V
       #|  t:real^N->bool = {}
       #|  t:real^N->bool
-      #|  !s:real^N->bool.\n        affine s <=>\n            !t u. FINITE t /\\ t SUBSET s /\\ sum t u = &1\n                  ==> vsum t (\\x. u(x) % x) IN s
+      #|  forall s:real^N->bool.\n        affine s <=>\n            forall t u. FINITE t /\\ t SUBSET s /\\ sum t u = &1\n                  ==> vsum t (\\x. u(x) % x) IN s
       #|  (p:real^N->bool) = {}
       #|  (a:real^N) + b - c = a <=> b = c
       #|  ((a:real^N) + b) + (c + d) - (e + b) = (a + d) + c - e
@@ -51858,8 +51858,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\v:real^N. &1:real
       #|  {x:real^N}
       #|  x:real^N
-      #|  !(p:real^N -> bool).\n        affine hull p =\n         {y | ?s u. FINITE s /\\ ~(s = {}) /\\ s SUBSET p /\\\n                    sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
-      #|  !(p:real^N -> bool).\n        affine hull p =\n         {y | ?s u. FINITE s /\\ s SUBSET p /\\\n                    sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall(p:real^N -> bool).\n        affine hull p =\n         {y | ?s u. FINITE s /\\ ~(s = {}) /\\ s SUBSET p /\\\n                    sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall(p:real^N -> bool).\n        affine hull p =\n         {y | ?s u. FINITE s /\\ s SUBSET p /\\\n                    sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
       #|  support (+) (f:real^N->real) s = {}
       #|  sum s (f:real^N->real) = &1
       #|  sum s (f:real^N->real) = &1
@@ -51872,14 +51872,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  f:real^N->real
       #|  t:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        affine hull s = {y | ?u. sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall s:real^N->bool.\n        affine hull s = {y | ?u. sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
       #|  \\x:real^N. inv(sum t u) * u x
       #|  u:real^N->real
       #|  &1 = &0
       #|  t:real^N->bool
-      #|  !s:real^N->bool.\n        vec 0 IN affine hull s <=>\n        ?t u. FINITE t /\\ ~(t = {}) /\\ t SUBSET s /\\\n              ~(sum t u = &0) /\\ vsum t (\\x. u x % x) = vec 0
+      #|  forall s:real^N->bool.\n        vec 0 IN affine hull s <=>\n        ?t u. FINITE t /\\ ~(t = {}) /\\ t SUBSET s /\\\n              ~(sum t u = &0) /\\ vsum t (\\x. u x % x) = vec 0
       #|  affine hull {} = {}
-      #|  !s. (affine hull s = {}) <=> (s = {})
+      #|  forall s. (affine hull s = {}) <=> (s = {})
       #|  ~(a IN s) ==> s DELETE a = s
       #|  ~(a IN s) ==> {x | x IN s /\\ x = a} = {}
       #|  \\x:real^N. if x = a then v:real else u x
@@ -51897,16 +51897,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  a IN s ==> a INSERT s = s
       #|  (a:real^N) IN s
-      #|  !P:real^N->real->bool.\n        ((?u. (!x. x IN {} ==> P x (u x)) /\\\n              sum {} u = w /\\ vsum {} (\\x. u(x) % x) = y) <=>\n         w = &0 /\\ y = vec 0) /\\\n        (FINITE(s:real^N->bool) /\\\n         (!y. a IN s /\\ P a y ==> P a (y / &2)) /\\\n         (!x y. a IN s /\\ P a x /\\ P a y ==> P a (x + y))\n         ==> ((?u. (!x. x IN (a INSERT s) ==> P x (u x)) /\\\n                   sum (a INSERT s) u = w /\\\n                   vsum (a INSERT s) (\\x. u(x) % x) = y) <=>\n              ?v u. P a v /\\ (!x. x IN s ==> P x (u x)) /\\\n                    sum s u = w - v /\\\n                    vsum s (\\x. u(x) % x) = y - v % a))
+      #|  forall P:real^N->real->bool.\n        ((?u. (forall x. x IN {} ==> P x (u x)) /\\\n              sum {} u = w /\\ vsum {} (\\x. u(x) % x) = y) <=>\n         w = &0 /\\ y = vec 0) /\\\n        (FINITE(s:real^N->bool) /\\\n         (forall y. a IN s /\\ P a y ==> P a (y / &2)) /\\\n         (forall x y. a IN s /\\ P a x /\\ P a y ==> P a (x + y))\n         ==> ((?u. (forall x. x IN (a INSERT s) ==> P x (u x)) /\\\n                   sum (a INSERT s) u = w /\\\n                   vsum (a INSERT s) (\\x. u(x) % x) = y) <=>\n              ?v u. P a v /\\ (forall x. x IN s ==> P x (u x)) /\\\n                    sum s u = w - v /\\\n                    vsum s (\\x. u(x) % x) = y - v % a))
       #|  \\x:real^N y:real. T
       #|  ((?u. sum {} u = w /\\ vsum {} (\\x. u(x) % x) = y) <=>\n    w = &0 /\\ y = vec 0) /\\\n   (FINITE(s:real^N->bool)\n    ==> ((?u. sum (a INSERT s) u = w /\\\n              vsum (a INSERT s) (\\x. u(x) % x) = y) <=>\n         ?v u.  sum s u = w - v /\\\n                vsum s (\\x. u(x) % x) = y - v % a))
       #|  x - y = z:real^N <=> x = y + z
       #|  x - y = z:real <=> x = y + z
-      #|  !a b. affine hull {a,b} =\n         {u % a + v % b | u + v = &1}
+      #|  forall a b. affine hull {a,b} =\n         {u % a + v % b | u + v = &1}
       #|  &1 - u
       #|  u:real
       #|  u + v = &1 <=> v = &1 - u
-      #|  !a b. affine hull {a,b} = {a + u % (b - a) | u IN (:real)}
+      #|  forall a b. affine hull {a,b} = {a + u % (b - a) | u IN (:real)}
       #|  x - y = z:real^N <=> x = y + z
       #|  x - y = z:real <=> x = y + z
       #|  affine hull {a,b,c} =\n    { u % a + v % b + w % c | u + v + w = &1}
@@ -51915,7 +51915,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real
       #|  a:real
       #|  ~(&1 = &0)
-      #|  !x y:real^N. vec 0 IN affine hull {x,y} <=>\n                  ?a b. a % x + b % y = vec 0 /\\ ~(a + b = &0)
+      #|  forall x y:real^N. vec 0 IN affine hull {x,y} <=>\n                  ?a b. a % x + b % y = vec 0 /\\ ~(a + b = &0)
       #|  c / (a + b + c):real
       #|  b / (a + b + c):real
       #|  a / (a + b + c):real
@@ -51923,7 +51923,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real
       #|  a:real
       #|  ~(&1 = &0)
-      #|  !x y z:real^N. vec 0 IN affine hull {x,y,z} <=>\n                  ?a b c. a % x + b % y + c % z = vec 0 /\\ ~(a + b + c = &0)
+      #|  forall x y z:real^N. vec 0 IN affine hull {x,y,z} <=>\n                  ?a b c. a % x + b % y + c % z = vec 0 /\\ ~(a + b + c = &0)
       #|  a + x - &1 % a:real^N = x
       #|  a + vsum t (\\x. u x % (x - a)):real^N
       #|  t SUBSET (a INSERT s) ==> t DELETE a SUBSET s
@@ -51935,8 +51935,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x - a:real^N = y - a <=> x = y
       #|  (?v. (?s u. P s /\\ f s u = v) /\\ (x = g a v)) <=>\n    (?s u. ~(P s ==> ~(g a (f s u) = x)))
       #|  (?s u. (?t. P t /\\ s = f t) /\\ Q s u) <=>\n    (?t u. P t /\\ Q (f t) u)
-      #|  !a:real^N s.\n     affine hull (a INSERT s) SUBSET {a + v | v | v IN span {x - a | x IN s}}
-      #|  !x:real^N. x IN t ==> ~(x = a)
+      #|  forall a:real^N s.\n     affine hull (a INSERT s) SUBSET {a + v | v | v IN span {x - a | x IN s}}
+      #|  forall x:real^N. x IN t ==> ~(x = a)
       #|  s SUBSET t ==> (a INSERT s) SUBSET (a INSERT t)
       #|  (a:real^N) IN t
       #|  \\x. if x = a then &1 - sum t (\\x. u(x - a))\n         else (u:real^N->real)(x - a)
@@ -51947,90 +51947,90 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x - a:real^N = y - a <=> x = y
       #|  (?v. (?s u. P s /\\ f s u = v) /\\ (x = g a v)) <=>\n    (?s u. ~(P s ==> ~(g a (f s u) = x)))
       #|  (?s u. (?t. P t /\\ s = f t) /\\ Q s u) <=>\n    (?t u. P t /\\ Q (f t) u)
-      #|  !a:real^N s.\n        ~(a IN s)\n        ==> affine hull (a INSERT s) =\n            {a + v | v | v IN span {x - a | x IN s}}
+      #|  forall a:real^N s.\n        ~(a IN s)\n        ==> affine hull (a INSERT s) =\n            {a + v | v | v IN span {x - a | x IN s}}
       #|  s DELETE (a:real^N)
       #|  a:real^N
-      #|  !a:real^N s.\n        a IN s\n        ==> (affine hull s =\n             {a + v | v | v IN span {x - a | x | x IN (s DELETE a)}})
+      #|  forall a:real^N s.\n        a IN s\n        ==> (affine hull s =\n             {a + v | v | v IN span {x - a | x | x IN (s DELETE a)}})
       #|  x - a:real^N = y - a <=> x = y
-      #|  !a:real^N s.\n        a IN s ==> {x - a | x IN affine hull s} = span {x - a | x IN s}
+      #|  forall a:real^N s.\n        a IN s ==> {x - a | x IN affine hull s} = span {x - a | x IN s}
       #|  {f x | x IN {a}} = {f a}
       #|  {f x | x | F} = {}
-      #|  !a. affine hull {a} = {a}
+      #|  forall a. affine hull {a} = {a}
       #|  ~(s = {}) /\\ s SUBSET {a} ==> s = {a}
       #|  s:real^N->bool = {}
-      #|  !s a:real^N. affine hull s = {a} <=> s = {a}
+      #|  forall s a:real^N. affine hull s = {a} <=> s = {a}
       #|  inv c % x:real^N
       #|  x:real^N
       #|  c % x = c % y <=> c % (x - y) = vec 0
       #|  c = &0
-      #|  !s:real^N->bool c.\n        affine hull (IMAGE (\\x. c % x) s) =\n        IMAGE (\\x. c % x) (affine hull s)
-      #|  !s a:real^N c.\n        affine hull (IMAGE (\\x. c % x + a) s) =\n        IMAGE (\\x. c % x + a) (affine hull s)
-      #|  convex s <=>\n        !x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                  ==> (u % x + v % y) IN s
+      #|  forall s:real^N->bool c.\n        affine hull (IMAGE (\\x. c % x) s) =\n        IMAGE (\\x. c % x) (affine hull s)
+      #|  forall s a:real^N c.\n        affine hull (IMAGE (\\x. c % x + a) s) =\n        IMAGE (\\x. c % x + a) (affine hull s)
+      #|  convex s <=>\n        forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                  ==> (u % x + v % y) IN s
       #|  u <= &1 ==> &0 <= &1 - u /\\ ((&1 - u) + u = &1)
       #|  &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                        ==> v <= &1 /\\ (u = &1 - v)
-      #|  convex s <=> !x y u. x IN s /\\ y IN s /\\ &0 <= u /\\ u <= &1\n                        ==> ((&1 - u) % x + u % y) IN s
-      #|  !s a b u.\n        convex s /\\ a IN s /\\ b IN s /\\ &0 <= u /\\ u <= &1\n        ==> ((&1 - u) % a + u % b) IN s
+      #|  convex s <=> forall x y u. x IN s /\\ y IN s /\\ &0 <= u /\\ u <= &1\n                        ==> ((&1 - u) % x + u % y) IN s
+      #|  forall s a b u.\n        convex s /\\ a IN s /\\ b IN s /\\ &0 <= u /\\ u <= &1\n        ==> ((&1 - u) % a + u % b) IN s
       #|  &1 / &2
       #|  y:real^N
       #|  x:real^N
       #|  s:real^N->bool
-      #|  !s x y:real^N.\n        convex s /\\ x IN s /\\ y IN s ==> midpoint(x,y) IN s
-      #|  !s. convex s <=> !a b. a IN s /\\ b IN s ==> segment[a,b] SUBSET s
-      #|  !s. convex s <=> !a b. a IN s /\\ b IN s ==> segment(a,b) SUBSET s
-      #|  !s:real^N->bool.\n        convex s <=> !a b. segment[a,b] SUBSET s <=> a IN s /\\ b IN s
-      #|  !s a b. convex s ==> (segment[a,b] SUBSET s <=> a IN s /\\ b IN s)
-      #|  !s a b:real^N.\n        convex s /\\ a IN s /\\ b IN s ==> segment[a,b] SUBSET s
-      #|  !s a b x:real^N.\n        convex s /\\ a IN s /\\ b IN s /\\ x IN segment[a,b] ==> x IN s
+      #|  forall s x y:real^N.\n        convex s /\\ x IN s /\\ y IN s ==> midpoint(x,y) IN s
+      #|  forall s. convex s <=> forall a b. a IN s /\\ b IN s ==> segment[a,b] SUBSET s
+      #|  forall s. convex s <=> forall a b. a IN s /\\ b IN s ==> segment(a,b) SUBSET s
+      #|  forall s:real^N->bool.\n        convex s <=> forall a b. segment[a,b] SUBSET s <=> a IN s /\\ b IN s
+      #|  forall s a b. convex s ==> (segment[a,b] SUBSET s <=> a IN s /\\ b IN s)
+      #|  forall s a b:real^N.\n        convex s /\\ a IN s /\\ b IN s ==> segment[a,b] SUBSET s
+      #|  forall s a b x:real^N.\n        convex s /\\ a IN s /\\ b IN s /\\ x IN segment[a,b] ==> x IN s
       #|  convex {}
-      #|  !a. convex {a}
+      #|  forall a. convex {a}
       #|  convex(UNIV:real^N->bool)
-      #|  (!s. s IN f ==> convex s) ==> convex(INTERS f)
-      #|  !s t. convex s /\\ convex t ==> convex(s INTER t)
+      #|  (forall s. s IN f ==> convex s) ==> convex(INTERS f)
+      #|  forall s t. convex s /\\ convex t ==> convex(s INTER t)
       #|  (u + v) * b
-      #|  !a b. convex {x | a dot x <= b}
+      #|  forall a b. convex {x | a dot x <= b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !a k. convex {x:real^N | x$k <= a}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall a k. convex {x:real^N | x$k <= a}
       #|  {x:real^N | a dot x >= b} = {x | --a dot x <= --b}
-      #|  !a b. convex {x:real^N | a dot x >= b}
+      #|  forall a b. convex {x:real^N | a dot x >= b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !a k. convex {x:real^N | x$k >= a}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall a k. convex {x:real^N | x$k >= a}
       #|  {x:real^N | a dot x = b} = {x | a dot x <= b} INTER {x | a dot x >= b}
-      #|  !a b. convex {x:real^N | a dot x = b}
+      #|  forall a b. convex {x:real^N | a dot x = b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !k a. convex {x:real^N | x$k = a}
-      #|  !a b. convex {x | a dot x < b}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall k a. convex {x:real^N | x$k = a}
+      #|  forall a b. convex {x | a dot x < b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !a k. convex {x:real^N | x$k < a}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall a k. convex {x:real^N | x$k < a}
       #|  ax > b <=> --ax < --b
-      #|  !a b. convex {x | a dot x > b}
+      #|  forall a b. convex {x | a dot x > b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !a k. convex {x:real^N | x$k > a}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall a k. convex {x:real^N | x$k > a}
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  abs(x) <= a <=> x <= a /\\ x >= --a
-      #|  !a k. convex {x:real^N | abs(x$k) <= a}
+      #|  forall a k. convex {x:real^N | abs(x$k) <= a}
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  abs(x) < a <=> x < a /\\ x > --a
-      #|  !a k. convex {x:real^N | abs(x$k) < a}
-      #|  (!x. P(real_sgn x)) ==> ~(P b) ==> {x | real_sgn(f x) = b} = {}
+      #|  forall a k. convex {x:real^N | abs(x$k) < a}
+      #|  (forall x. P(real_sgn x)) ==> ~(P b) ==> {x | real_sgn(f x) = b} = {}
       #|  b = &1
       #|  b = -- &1
       #|  b = &0
-      #|  !a b. convex {x:real^N | real_sgn(a dot x) = b}
+      #|  forall a b. convex {x:real^N | real_sgn(a dot x) = b}
       #|  a:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !a k. convex {x:real^N | real_sgn(x$k) = a}
-      #|  convex {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N)\n                          ==> &0 <= x$i}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall a k. convex {x:real^N | real_sgn(x$k) = a}
+      #|  convex {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                          ==> &0 <= x$i}
       #|  x <= e / &2 /\\ &0 < e ==> x < e
       #|  &0 < u ==> abs u = u
       #|  ((&1 - u) % x + u % y) - x:real^N = u % (y - x)
@@ -52041,13 +52041,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  e:real
       #|  ?y:real^N. y IN s /\\ ~(y = x)
       #|  s = {x:real^N}
-      #|  !s x:real^N.\n        convex s /\\ x IN s ==> (x limit_point_of s <=> ~(s = {x}))
-      #|  !s x:real^N.\n        convex s /\\ x IN s ==> (trivial_limit(at x within s) <=> s = {x})
+      #|  forall s x:real^N.\n        convex s /\\ x IN s ==> (x limit_point_of s <=> ~(s = {x}))
+      #|  forall s x:real^N.\n        convex s /\\ x IN s ==> (trivial_limit(at x within s) <=> s = {x})
       #|  (&1 - u) % (a + x) + u % (a + y) = a + z <=> (&1 - u) % x + u % y = z
-      #|  !a:real^N s. convex (IMAGE (\\x. a + x) s) <=> convex s
-      #|  !s a:real^N. convex s ==> convex (IMAGE (\\x. a + x) s)
-      #|  !f s. convex s /\\ linear f ==> convex(IMAGE f s)
-      #|  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (convex (IMAGE f s) <=> convex s)
+      #|  forall a:real^N s. convex (IMAGE (\\x. a + x) s) <=> convex s
+      #|  forall s a:real^N. convex s ==> convex (IMAGE (\\x. a + x) s)
+      #|  forall f s. convex s /\\ linear f ==> convex(IMAGE f s)
+      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (convex (IMAGE f s) <=> convex s)
       #|  u(i:A):real
       #|  &1 - u(i:A)
       #|  x(i:A):real^N
@@ -52063,10 +52063,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  k:A->bool
       #|  i:A
       #|  convex(s:real^N->bool)
-      #|  !s k u x:A->real^N.\n        FINITE k /\\ convex s /\\ sum k u = &1 /\\\n        (!i. i IN k ==> &0 <= u i /\\ x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
+      #|  forall s k u x:A->real^N.\n        FINITE k /\\ convex s /\\ sum k u = &1 /\\\n        (forall i. i IN k ==> &0 <= u i /\\ x i IN s)\n        ==> vsum k (\\i. u i % x i) IN s
       #|  ~(&1 = &0)
       #|  vsum k (\\i. u i % (x:A->real^N) i) =\n    vsum {i | i IN k /\\ ~(u i = &0)} (\\i. u i % x i)
-      #|  !s k u x:A->real^N.\n        convex s /\\\n        sum k u = &1 /\\\n        (!i. i IN k ==> &0 <= u i /\\ (u i = &0 \\/ x i IN s))\n        ==> vsum k (\\i. u i % x i) IN s
+      #|  forall s k u x:A->real^N.\n        convex s /\\\n        sum k u = &1 /\\\n        (forall i. i IN k ==> &0 <= u i /\\ (u i = &0 \\/ x i IN s))\n        ==> vsum k (\\i. u i % x i) IN s
       #|  2
       #|  \\n. if n = 1 then x else y:real^N
       #|  \\n. if n = 1 then u else v:real
@@ -52075,7 +52075,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  y:real^N
       #|  x:real^N
-      #|  !s:real^N->bool.\n        convex s <=>\n            !k u x. (!i:num. 1 <= i /\\ i <= k ==> &0 <= u(i) /\\ x(i) IN s) /\\\n                    (sum (1..k) u = &1)\n                    ==> vsum (1..k) (\\i. u(i) % x(i)) IN s
+      #|  forall s:real^N->bool.\n        convex s <=>\n            forall k u x. (forall i:num. 1 <= i /\\ i <= k ==> &0 <= u(i) /\\ x(i) IN s) /\\\n                    (sum (1..k) u = &1)\n                    ==> vsum (1..k) (\\i. u(i) % x(i)) IN s
       #|  \\z:real^N. if z = x then u else v:real
       #|  {x:real^N,y}
       #|  x:real^N = y
@@ -52083,60 +52083,60 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  y:real^N
       #|  x:real^N
-      #|  !s:real^N->bool.\n        convex s <=>\n        !t u. FINITE t /\\ t SUBSET s /\\ (!x. x IN t ==> &0 <= u x) /\\\n              sum t u = &1\n              ==> vsum t (\\x. u(x) % x) IN s
+      #|  forall s:real^N->bool.\n        convex s <=>\n        forall t u. FINITE t /\\ t SUBSET s /\\ (forall x. x IN t ==> &0 <= u x) /\\\n              sum t u = &1\n              ==> vsum t (\\x. u(x) % x) IN s
       #|  t:real^N->bool = {}
       #|  t:real^N->bool
-      #|  !V:real^N->bool.\n     convex V <=>\n         !(s:real^N->bool) (u:real^N->real).\n             FINITE s /\\ ~(s = {}) /\\ s SUBSET V /\\\n             (!x. x IN s ==> &0 <= u x) /\\ sum s u = &1\n             ==> vsum s (\\x. u x % x) IN V
+      #|  forall V:real^N->bool.\n     convex V <=>\n         forall(s:real^N->bool) (u:real^N->real).\n             FINITE s /\\ ~(s = {}) /\\ s SUBSET V /\\\n             (forall x. x IN s ==> &0 <= u x) /\\ sum s u = &1\n             ==> vsum s (\\x. u x % x) IN V
       #|  t SUBSET s ==> {x | x IN s /\\ x IN t} = t
       #|  \\x:real^N. if x IN t then u x else &0
       #|  u:real^N->real
       #|  t:real^N->bool
-      #|  !s:real^N->bool.\n        FINITE s\n        ==> (convex s <=>\n                !u. (!x. x IN s ==> &0 <= u x) /\\\n                    sum s u = &1\n                    ==> vsum s (\\x. u(x) % x) IN s)
-      #|  !s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t ==> affine(s PCROSS t)
+      #|  forall s:real^N->bool.\n        FINITE s\n        ==> (convex s <=>\n                forall u. (forall x. x IN s ==> &0 <= u x) /\\\n                    sum s u = &1\n                    ==> vsum s (\\x. u(x) % x) IN s)
+      #|  forall s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t ==> affine(s PCROSS t)
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  sndcart:real^(M,N)finite_sum->real^N
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  fstcart:real^(M,N)finite_sum->real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        affine(s PCROSS t) <=> s = {} \\/ t = {} \\/ affine s /\\ affine t
-      #|  !s:real^M->bool t:real^N->bool.\n        convex s /\\ convex t ==> convex(s PCROSS t)
+      #|  forall s:real^M->bool t:real^N->bool.\n        affine(s PCROSS t) <=> s = {} \\/ t = {} \\/ affine s /\\ affine t
+      #|  forall s:real^M->bool t:real^N->bool.\n        convex s /\\ convex t ==> convex(s PCROSS t)
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  sndcart:real^(M,N)finite_sum->real^N
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  fstcart:real^(M,N)finite_sum->real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        convex(s PCROSS t) <=> s = {} \\/ t = {} \\/ convex s /\\ convex t
-      #|  conic s <=> !x c. x IN s /\\ &0 <= c ==> (c % x) IN s
-      #|  !s. subspace s ==> conic s
+      #|  forall s:real^M->bool t:real^N->bool.\n        convex(s PCROSS t) <=> s = {} \\/ t = {} \\/ convex s /\\ convex t
+      #|  conic s <=> forall x c. x IN s /\\ &0 <= c ==> (c % x) IN s
+      #|  forall s. subspace s ==> conic s
       #|  conic {}
       #|  conic (UNIV:real^N->bool)
-      #|  (!s. s IN f ==> conic s) ==> conic(INTERS f)
-      #|  !f s. conic s /\\ linear f ==> conic(IMAGE f s)
-      #|  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (conic (IMAGE f s) <=> conic s)
-      #|  !s c x:real^N. conic s /\\ x IN s /\\ &0 <= c ==> (c % x) IN s
-      #|  !s. conic(conic hull s)
-      #|  !s. (conic hull s = s) <=> conic s
+      #|  (forall s. s IN f ==> conic s) ==> conic(INTERS f)
+      #|  forall f s. conic s /\\ linear f ==> conic(IMAGE f s)
+      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (conic (IMAGE f s) <=> conic s)
+      #|  forall s c x:real^N. conic s /\\ x IN s /\\ &0 <= c ==> (c % x) IN s
+      #|  forall s. conic(conic hull s)
+      #|  forall s. (conic hull s = s) <=> conic s
       #|  conic hull (:real^N) = (:real^N)
-      #|  !s. conic s ==> conic (IMAGE (--) s)
-      #|  !s. conic(span s)
+      #|  forall s. conic s ==> conic (IMAGE (--) s)
+      #|  forall s. conic(span s)
       #|  x:real^N
       #|  &1
       #|  x:real^N
-      #|  !s:real^N->bool. conic hull s = {c % x | &0 <= c /\\ x IN s}
-      #|  !s:real^N->bool.\n        conic hull s = IMAGE (\\z. drop(fstcart z) % sndcart z)\n                             ({t | &0 <= drop t} PCROSS s)
+      #|  forall s:real^N->bool. conic hull s = {c % x | &0 <= c /\\ x IN s}
+      #|  forall s:real^N->bool.\n        conic hull s = IMAGE (\\z. drop(fstcart z) % sndcart z)\n                             ({t | &0 <= drop t} PCROSS s)
       #|  y:real^N = a % b
       #|  b:real^N
       #|  a:real
       #|  y:real^N
-      #|  !s:real^N->bool.\n        conic hull s DELETE vec 0 =\n        IMAGE (\\z. drop(fstcart z) % sndcart z)\n              ({t | &0 < drop t} PCROSS (s DELETE vec 0))
+      #|  forall s:real^N->bool.\n        conic hull s DELETE vec 0 =\n        IMAGE (\\z. drop(fstcart z) % sndcart z)\n              ({t | &0 < drop t} PCROSS (s DELETE vec 0))
       #|  {c % x | &0 <= c /\\ x IN IMAGE f s} =\n                        {c % f(x) | &0 <= c /\\ x IN s}
       #|  IMAGE f {c % x | P c x} = {f(c % x) | P c x}
-      #|  !f s. linear f ==> conic hull (IMAGE f s) = IMAGE f (conic hull s)
+      #|  forall f s. linear f ==> conic hull (IMAGE f s) = IMAGE f (conic hull s)
       #|  x:real^N = inv(c x) % c x % x
       #|  x:real^N
-      #|  !c s:real^N->bool.\n        (!x. x IN s ==> &0 < c x)\n        ==> conic hull (IMAGE (\\x. c x % x) s) = conic hull s
+      #|  forall c s:real^N->bool.\n        (forall x. x IN s ==> &0 < c x)\n        ==> conic hull (IMAGE (\\x. c x % x) s) = conic hull s
       #|  &0 < u + v ==> u / (u + v) = &1 - (v / (u + v))
       #|  ((&1 - u) * c) / ((&1 - u) * c + u * d) % x +\n              (u * d) / ((&1 - u) * c + u * d) % y:real^N
       #|  (&1 - u) * c + u * d:real
@@ -52148,33 +52148,33 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  c:real
       #|  s:real^N->bool
-      #|  !s:real^N->bool. convex s ==> convex (conic hull s)
+      #|  forall s:real^N->bool. convex s ==> convex (conic hull s)
       #|  a <= &0 <=> &0 <= --a
-      #|  !a. conic {x | a dot x <= &0}
-      #|  !a. conic {x | a dot x >= &0}
+      #|  forall a. conic {x | a dot x <= &0}
+      #|  forall a. conic {x | a dot x >= &0}
       #|  conic hull {} = {}
       #|  &0
       #|  x:real^N
       #|  x:real^N
-      #|  !s:real^N->bool. conic s ==> (vec 0 IN s <=> ~(s = {}))
-      #|  !s. (conic hull s = {}) <=> (s = {})
-      #|  !s t. conic s /\\ conic t ==> conic {x + y:real^N | x IN s /\\ y IN t}
-      #|  !s:real^M->bool t:real^N->bool.\n        conic s /\\ conic t ==> conic(s PCROSS t)
+      #|  forall s:real^N->bool. conic s ==> (vec 0 IN s <=> ~(s = {}))
+      #|  forall s. (conic hull s = {}) <=> (s = {})
+      #|  forall s t. conic s /\\ conic t ==> conic {x + y:real^N | x IN s /\\ y IN t}
+      #|  forall s:real^M->bool t:real^N->bool.\n        conic s /\\ conic t ==> conic(s PCROSS t)
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  sndcart:real^(M,N)finite_sum->real^N
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  fstcart:real^(M,N)finite_sum->real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        conic(s PCROSS t) <=> s = {} \\/ t = {} \\/ conic s /\\ conic t
-      #|  conic {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
+      #|  forall s:real^M->bool t:real^N->bool.\n        conic(s PCROSS t) <=> s = {} \\/ t = {} \\/ conic s /\\ conic t
+      #|  conic {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
       #|  conic hull {vec 0} = {vec 0}
-      #|  !s:real^N->bool. vec 0 IN conic hull s <=> ~(s = {})
+      #|  forall s:real^N->bool. vec 0 IN conic hull s <=> ~(s = {})
       #|  {x:real^N}
       #|  x:real^N = vec 0
       #|  s SUBSET {a} ==> s = {} \\/ s = {a}
       #|  s SUBSET {x:real^N}
-      #|  !s x:real^N. conic hull s = {x} <=> s = {vec 0} /\\ x = vec 0
+      #|  forall s x:real^N. conic hull s = {x} <=> s = {vec 0} /\\ x = vec 0
       #|  ~(c = &1)
       #|  affine hull s:real^N->bool
       #|  ~(c = &1)
@@ -52183,7 +52183,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c = &1
       #|  x:real^N
       #|  c:real
-      #|  !s f:real^N->bool.\n        f SUBSET s /\\ ~(vec 0 IN affine hull s)\n        ==> (conic hull f) INTER (affine hull s) = f
+      #|  forall s f:real^N->bool.\n        f SUBSET s /\\ ~(vec 0 IN affine hull s)\n        ==> (conic hull f) INTER (affine hull s) = f
       #|  e * norm(x:real^N)
       #|  d * norm(y:real^N)
       #|  y:real^N
@@ -52201,8 +52201,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c INTER d SUBSET {a} ==> ~(a IN s) ==> (c INTER s) INTER d = {}
       #|  d:real^N->bool
       #|  c INTER sphere(vec 0:real^N,&1)
-      #|  !c d:real^N->bool.\n        conic c /\\ closed c /\\ conic d /\\ closed d /\\ c INTER d SUBSET {vec 0}\n        ==> ?e. &0 < e /\\\n                !x y. x IN c /\\ y IN d ==> dist(x,y)\n                      >= e * norm x
-      #|  !c d:real^N->bool.\n        conic c /\\ closed c /\\ conic d /\\ closed d /\\ c INTER d SUBSET {vec 0}\n        ==> ?e. &0 < e /\\\n                !x y. x IN c /\\ y IN d\n                      ==> dist(x,y) >= e * max (norm x) (norm y)
+      #|  forall c d:real^N->bool.\n        conic c /\\ closed c /\\ conic d /\\ closed d /\\ c INTER d SUBSET {vec 0}\n        ==> ?e. &0 < e /\\\n                forall x y. x IN c /\\ y IN d ==> dist(x,y)\n                      >= e * norm x
+      #|  forall c d:real^N->bool.\n        conic c /\\ closed c /\\ conic d /\\ closed d /\\ c INTER d SUBSET {vec 0}\n        ==> ?e. &0 < e /\\\n                forall x y. x IN c /\\ y IN d\n                      ==> dist(x,y) >= e * max (norm x) (norm y)
       #|  c:real^N->bool
       #|  d:real^N->bool
       #|  c:real^N->bool
@@ -52221,7 +52221,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  :real
       #|  IMAGE (p:real^N->real^N) pnc = IMAGE p srf
       #|  (s:real^N->real^N) o (p:real^N->real^N)
-      #|  !s:real^N->real^N p srf:real^N->bool pnc.\n          compact srf /\\ srf SUBSET pnc /\\\n          IMAGE s pnc SUBSET srf /\\ (!x. x IN srf ==> s x = x) /\\\n          p continuous_on pnc /\\\n          (!x. x IN pnc ==> s(p x) = s x /\\ p(s x) = p x)\n          ==> s continuous_on pnc
+      #|  forall s:real^N->real^N p srf:real^N->bool pnc.\n          compact srf /\\ srf SUBSET pnc /\\\n          IMAGE s pnc SUBSET srf /\\ (forall x. x IN srf ==> s x = x) /\\\n          p continuous_on pnc /\\\n          (forall x. x IN pnc ==> s(p x) = s x /\\ p(s x) = p x)\n          ==> s continuous_on pnc
       #|  &0 < x ==> (inv(x) * y) * x = y
       #|  (d:real^N->real) x
       #|  x:real^N
@@ -52237,7 +52237,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  p /\\ q /\\ r <=> q /\\ p /\\ r
       #|  s:real^N->bool
       #|  \\x:real^N. inv(norm x) % x
-      #|  !s:real^N->bool v d:real^N->real.\n        compact s /\\ s SUBSET (v DELETE (vec 0)) /\\ conic v /\\\n        (!x k. x IN v DELETE (vec 0) ==> (&0 < k /\\ (k % x) IN s <=> d x = k))\n        ==> (\\x. d x % x) continuous_on (v DELETE (vec 0))
+      #|  forall s:real^N->bool v d:real^N->real.\n        compact s /\\ s SUBSET (v DELETE (vec 0)) /\\ conic v /\\\n        (forall x k. x IN v DELETE (vec 0) ==> (&0 < k /\\ (k % x) IN s <=> d x = k))\n        ==> (\\x. d x % x) continuous_on (v DELETE (vec 0))
       #|  affine_dependent (s:real^N -> bool) <=>\n        ?x. x IN s /\\ x IN (affine hull (s DELETE x))
       #|  sum {v:real^N} u = &0
       #|  s = {v:real^N}
@@ -52256,30 +52256,30 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\v:real^N.if v = x then -- &1 else u v
       #|  (x:real^N) INSERT s
       #|  p:real^N->bool
-      #|  !p. affine_dependent (p:real^N -> bool) <=>\n            (?s u. FINITE s /\\ s SUBSET p /\\\n                   sum s u = &0 /\\\n                   (?v. v IN s /\\ ~(u v = &0)) /\\\n                   vsum s (\\v. u v % v) = (vec 0):real^N)
+      #|  forall p. affine_dependent (p:real^N -> bool) <=>\n            (?s u. FINITE s /\\ s SUBSET p /\\\n                   sum s u = &0 /\\\n                   (?v. v IN s /\\ ~(u v = &0)) /\\\n                   vsum s (\\v. u v % v) = (vec 0):real^N)
       #|  t SUBSET s ==> {x | x IN s /\\ x IN t} = t
       #|  \\x:real^N. if x IN t then u(x) else &0
       #|  u:real^N->real
       #|  t:real^N->bool
-      #|  !s. FINITE(s:real^N -> bool)\n       ==> (affine_dependent s <=>\n            ?u. sum s u = &0 /\\\n                (?v. v IN s /\\ ~(u v = &0)) /\\\n                vsum s (\\v. u v % v) = vec 0)
-      #|  !a s. affine_dependent (IMAGE (\\x. a + x) s) <=> affine_dependent s
-      #|  !s a. affine_dependent s ==> affine_dependent (IMAGE (\\x. a + x) s)
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (affine_dependent(IMAGE f s) <=> affine_dependent s)
+      #|  forall s. FINITE(s:real^N -> bool)\n       ==> (affine_dependent s <=>\n            ?u. sum s u = &0 /\\\n                (?v. v IN s /\\ ~(u v = &0)) /\\\n                vsum s (\\v. u v % v) = vec 0)
+      #|  forall a s. affine_dependent (IMAGE (\\x. a + x) s) <=> affine_dependent s
+      #|  forall s a. affine_dependent s ==> affine_dependent (IMAGE (\\x. a + x) s)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (affine_dependent(IMAGE f s) <=> affine_dependent s)
       #|  IMAGE (f:real^M->real^N) s DELETE f a = IMAGE f (s DELETE a)
       #|  a:real^M
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        affine_dependent(s)\n        ==> affine_dependent(IMAGE f s)
-      #|  !x. s SUBSET t ==> (s DELETE x) SUBSET (t DELETE x)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        affine_dependent(s)\n        ==> affine_dependent(IMAGE f s)
+      #|  forall x. s SUBSET t ==> (s DELETE x) SUBSET (t DELETE x)
       #|  x:real^N
       #|  x:real^N
-      #|  !s t:real^N->bool. affine_dependent s /\\ s SUBSET t ==> affine_dependent t
+      #|  forall s t:real^N->bool. affine_dependent s /\\ s SUBSET t ==> affine_dependent t
       #|  ~(affine_dependent {})
       #|  {a} DELETE a = {}
-      #|  !a:real^N. ~(affine_dependent {a})
+      #|  forall a:real^N. ~(affine_dependent {a})
       #|  ~(a = b) ==> {a,b} DELETE a = {b} /\\ {a,b} DELETE b = {a}
       #|  b:real^N = a
-      #|  !a b:real^N. ~(affine_dependent {a,b})
-      #|  !s t. ~affine_dependent t /\\ s SUBSET t ==> ~affine_dependent s
-      #|  !s a. ~affine_dependent s ==> ~affine_dependent(s DELETE a)
+      #|  forall a b:real^N. ~(affine_dependent {a,b})
+      #|  forall s t. ~affine_dependent t /\\ s SUBSET t ==> ~affine_dependent s
+      #|  forall s a. ~affine_dependent s ==> ~affine_dependent(s DELETE a)
       #|  coplanar s <=> ?u v w. s SUBSET affine hull {u,v,w}
       #|  s - r:real
       #|  s:real
@@ -52300,22 +52300,22 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool = {}
       #|  u:real^N
       #|  u + v = &1 <=> &1 - u = v
-      #|  !s:real^N->bool. collinear s <=> ?u v. s SUBSET affine hull {u,v}
+      #|  forall s:real^N->bool. collinear s <=> ?u v. s SUBSET affine hull {u,v}
       #|  x:real^N
       #|  x:real^N
       #|  x:real^N
       #|  y:real^N
-      #|  !s. collinear s ==> coplanar s
+      #|  forall s. collinear s ==> coplanar s
       #|  s <= 3 <=> s <= 2 \\/ s = 3
-      #|  !s. FINITE s /\\ CARD s <= 3 ==> coplanar s
+      #|  forall s. FINITE s /\\ CARD s <= 3 ==> coplanar s
       #|  coplanar {}
-      #|  !a. coplanar {a}
-      #|  !a b. coplanar {a,b}
-      #|  !a b c. coplanar {a,b,c}
-      #|  !s. collinear(affine hull s) <=> collinear s
-      #|  !s. coplanar(affine hull s) <=> coplanar s
-      #|  !a:real^N s. coplanar(IMAGE (\\x. a + x) s) <=> coplanar s
-      #|  !a:real^N s. coplanar s ==> coplanar(IMAGE (\\x. a + x) s)
+      #|  forall a. coplanar {a}
+      #|  forall a b. coplanar {a,b}
+      #|  forall a b c. coplanar {a,b,c}
+      #|  forall s. collinear(affine hull s) <=> collinear s
+      #|  forall s. coplanar(affine hull s) <=> coplanar s
+      #|  forall a:real^N s. coplanar(IMAGE (\\x. a + x) s) <=> coplanar s
+      #|  forall a:real^N s. coplanar s ==> coplanar(IMAGE (\\x. a + x) s)
       #|  {f a,f b,f c} = IMAGE f {a,b,c}
       #|  (f:real^M->real^N) c
       #|  (f:real^M->real^N) b
@@ -52323,10 +52323,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^M
       #|  b:real^M
       #|  a:real^M
-      #|  !f:real^M->real^N s. coplanar s /\\ linear f ==> coplanar(IMAGE f s)
-      #|  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (coplanar (IMAGE f s) <=> coplanar s)
-      #|  !s t. coplanar t /\\ s SUBSET t ==> coplanar s
-      #|  !a b c. c IN affine hull {a,b} ==> collinear {a,b,c}
+      #|  forall f:real^M->real^N s. coplanar s /\\ linear f ==> coplanar(IMAGE f s)
+      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (coplanar (IMAGE f s) <=> coplanar s)
+      #|  forall s t. coplanar t /\\ s SUBSET t ==> coplanar s
+      #|  forall a b c. c IN affine hull {a,b} ==> collinear {a,b,c}
       #|  x / y:real
       #|  &1 - x / y
       #|  y = &0
@@ -52334,7 +52334,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real
       #|  a - b:real^N = c <=> a = b + c
       #|  u:real^N
-      #|  !a b c:real^N.\n        ~(a = b) ==> (collinear {a,b,c} <=> c IN affine hull {a,b})
+      #|  forall a b c:real^N.\n        ~(a = b) ==> (collinear {a,b,c} <=> c IN affine hull {a,b})
       #|  a:real^N
       #|  c:real^N
       #|  a:real^N
@@ -52346,7 +52346,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N = c
       #|  a:real^N = c
       #|  a:real^N = b
-      #|  !a b c:real^N.\n        collinear{a,b,c} <=>\n                a = b \\/ a = c \\/ b = c \\/ affine_dependent {a,b,c}
+      #|  forall a b c:real^N.\n        collinear{a,b,c} <=>\n                a = b \\/ a = c \\/ b = c \\/ affine_dependent {a,b,c}
       #|  s SUBSET t ==> a IN s ==> a IN t
       #|  b:real^N
       #|  a:real^N
@@ -52354,13 +52354,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  c:real^N
       #|  b:real^N
-      #|  !a b c:real^N. affine_dependent {a,b,c} ==> collinear{a,b,c}
+      #|  forall a b c:real^N. affine_dependent {a,b,c} ==> collinear{a,b,c}
       #|  u + v = &1 <=> u = &1 - v
       #|  &0
       #|  &1
       #|  x:real^N = vec 0
       #|  v0:real^N
-      #|  !v0 v1 x:real^N.\n        ~(v1 = v0)\n        ==> (collinear {v0,v1,x} <=> x IN affine hull {v0,v1})
+      #|  forall v0 v1 x:real^N.\n        ~(v1 = v0)\n        ==> (collinear {v0,v1,x} <=> x IN affine hull {v0,v1})
       #|  (\\w. if w = x then a else if w = y then b else c):real^N->real
       #|  c:real
       #|  b:real
@@ -52368,34 +52368,34 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0
       #|  -- &1
       #|  &1
-      #|  (!x y z. P x y z ==> P y z x) /\\\n    (!x z. P x x z) /\\\n    (!x y z. ~(x = y) /\\ ~(x = z) /\\ ~(y = z) ==> P x y z)\n    ==> !x y z. P x y z
-      #|  !x y z:real^N.\n        collinear {x,y,z} <=>\n        ?a b c. a % x + b % y + c % z = vec 0 /\\\n                a + b + c = &0 /\\ ~(a = &0 /\\ b = &0 /\\ c = &0)
+      #|  (forall x y z. P x y z ==> P y z x) /\\\n    (forall x z. P x x z) /\\\n    (forall x y z. ~(x = y) /\\ ~(x = z) /\\ ~(y = z) ==> P x y z)\n    ==> forall x y z. P x y z
+      #|  forall x y z:real^N.\n        collinear {x,y,z} <=>\n        ?a b c. a % x + b % y + c % z = vec 0 /\\\n                a + b + c = &0 /\\ ~(a = &0 /\\ b = &0 /\\ c = &0)
       #|  segment[a:real^N,b]
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. convex s ==> connected s
-      #|  f convex_on s <=>\n        !x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                  ==> f(u % x + v % y) <= u * f(x) + v * f(y)
-      #|  !f:real^N->real. f convex_on {}
-      #|  !f s t. f convex_on t /\\ s SUBSET t ==> f convex_on s
-      #|  !f g s. convex s /\\ (!x. x IN s ==> f x = g x) /\\ f convex_on s\n           ==> g convex_on s
-      #|  !s a. (\\x. a) convex_on s
-      #|  !f s:real^N->bool. linear (lift o f) ==> f convex_on s
+      #|  forall s:real^N->bool. convex s ==> connected s
+      #|  f convex_on s <=>\n        forall x y u v. x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n                  ==> f(u % x + v % y) <= u * f(x) + v * f(y)
+      #|  forall f:real^N->real. f convex_on {}
+      #|  forall f s t. f convex_on t /\\ s SUBSET t ==> f convex_on s
+      #|  forall f g s. convex s /\\ (forall x. x IN s ==> f x = g x) /\\ f convex_on s\n           ==> g convex_on s
+      #|  forall s a. (\\x. a) convex_on s
+      #|  forall f s:real^N->bool. linear (lift o f) ==> f convex_on s
       #|  \\x:real^N. (f:real^N->real) a
-      #|  !f a:real^N. f convex_on {a}
+      #|  forall f a:real^N. f convex_on {a}
       #|  (b /\\ c ==> d) ==> (a ==> b) /\\ (a ==> c) ==> a ==> d
-      #|  !s f g. f convex_on s /\\ g convex_on s ==> (\\x. f(x) + g(x)) convex_on s
+      #|  forall s f g. f convex_on s /\\ g convex_on s ==> (\\x. f(x) + g(x)) convex_on s
       #|  --a + a + x:real = x
       #|  (\\x. --a):real^N->real
-      #|  !a f s:real^N->bool. (\\x. a + f x) convex_on s <=> f convex_on s
+      #|  forall a f s:real^N->bool. (\\x. a + f x) convex_on s <=> f convex_on s
       #|  u * c * fx + v * c * fy = c * (u * fx + v * fy)
-      #|  !s c f. &0 <= c /\\ f convex_on s ==> (\\x. c * f(x)) convex_on s
-      #|  !f g s. f convex_on s /\\ g convex_on s\n           ==> (\\x. max (f x) (g x)) convex_on s
-      #|  !t f:A->real^N->real s.\n         FINITE s /\\ (!a. a IN s ==> f a convex_on t)\n         ==> (\\x. sum s (\\a. f a x)) convex_on t
+      #|  forall s c f. &0 <= c /\\ f convex_on s ==> (\\x. c * f(x)) convex_on s
+      #|  forall f g s. f convex_on s /\\ g convex_on s\n           ==> (\\x. max (f x) (g x)) convex_on s
+      #|  forall t f:A->real^N->real s.\n         FINITE s /\\ (forall a. a IN s ==> f a convex_on t)\n         ==> (\\x. sum s (\\a. f a x)) convex_on t
       #|  (x + y) / &2 = inv(&2) * x + inv(&2) * y
-      #|  !f s x y:real^N.\n        f convex_on s /\\ x IN s /\\ y IN s\n        ==> f(midpoint(x,y)) <= (f x + f y) / &2
-      #|  !f s x y:real^N u v.\n        f convex_on s /\\\n        x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n        ==> f(u % x + v % y) <= max (f(x)) (f(y))
+      #|  forall f s x y:real^N.\n        f convex_on s /\\ x IN s /\\ y IN s\n        ==> f(midpoint(x,y)) <= (f x + f y) / &2
+      #|  forall f s x y:real^N u v.\n        f convex_on s /\\\n        x IN s /\\ y IN s /\\ &0 <= u /\\ &0 <= v /\\ (u + v = &1)\n        ==> f(u % x + v % y) <= max (f(x)) (f(y))
       #|  s:real^N->bool
-      #|  !f s a b x:real^N.\n        f convex_on s /\\ a IN s /\\ b IN s /\\ x IN segment[a,b]\n        ==> f(x) <= max (f a) (f b)
+      #|  forall f s a b x:real^N.\n        f convex_on s /\\ a IN s /\\ b IN s /\\ x IN segment[a,b]\n        ==> f(x) <= max (f a) (f b)
       #|  u = &1
       #|  ~p ==> p ==> q
       #|  ~(x:real^N = b)
@@ -52406,7 +52406,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  a:real^N
       #|  u:real
-      #|  !f s a b x:real^N.\n        f convex_on s /\\ a IN s /\\ b IN s /\\\n        x IN segment[a,b] /\\ ~(x = b) /\\ f a < f b\n        ==> f x < f b
+      #|  forall f s a b x:real^N.\n        f convex_on s /\\ a IN s /\\ b IN s /\\\n        x IN segment[a,b] /\\ ~(x = b) /\\ f a < f b\n        ==> f x < f b
       #|  y:real^N
       #|  x:real^N
       #|  z:real^N
@@ -52415,7 +52415,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  z:real^N = x
       #|  z:real^N
-      #|  !f s x:real^N.\n        f convex_on s /\\ x IN s /\\\n        (!z. z IN s /\\ ~(z = x)\n             ==> ?y. y IN segment[x,z] /\\ y IN s /\\ ~(y = x) /\\ f(x) <= f(y))\n        ==> !z. z IN s ==> f(x) <= f(z)
+      #|  forall f s x:real^N.\n        f convex_on s /\\ x IN s /\\\n        (forall z. z IN s /\\ ~(z = x)\n             ==> ?y. y IN segment[x,z] /\\ y IN s /\\ ~(y = x) /\\ f(x) <= f(y))\n        ==> forall z. z IN s ==> f(x) <= f(z)
       #|  &0 < x / y ==> &0 < x / &2 / y /\\ x / &2 / y < x / y
       #|  &0 < x /\\ x < d ==> abs(min (&1) x) < d
       #|  dist(x + a:real^N,x) = norm a
@@ -52426,7 +52426,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  min (&1) (d / &2 / norm(z - x:real^N))
       #|  x + min (&1) (d / &2 / norm(z - x:real^N)) % (z - x)
       #|  z:real^N
-      #|  !f s t x:real^N.\n       f convex_on s /\\ x IN t /\\\n       open_in (subtopology euclidean (affine hull s)) t /\\\n       t SUBSET s /\\\n       (!y. y IN t ==> f(x) <= f(y))\n       ==> !y. y IN s ==> f(x) <= f(y)
+      #|  forall f s t x:real^N.\n       f convex_on s /\\ x IN t /\\\n       open_in (subtopology euclidean (affine hull s)) t /\\\n       t SUBSET s /\\\n       (forall y. y IN t ==> f(x) <= f(y))\n       ==> forall y. y IN s ==> f(x) <= f(y)
       #|  d:real
       #|  x:real^N
       #|  d:real
@@ -52439,15 +52439,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  s:real^N->bool
       #|  t:real^N->bool
-      #|  !f s t x:real^N.\n       f convex_on s /\\ x IN t /\\ open t /\\ t SUBSET s /\\\n       (!y. y IN t ==> f(x) <= f(y))\n       ==> !y. y IN s ==> f(x) <= f(y)
+      #|  forall f s t x:real^N.\n       f convex_on s /\\ x IN t /\\ open t /\\ t SUBSET s /\\\n       (forall y. y IN t ==> f(x) <= f(y))\n       ==> forall y. y IN s ==> f(x) <= f(y)
       #|  (u + v) % z - (u % x + v % y) = u % (z - x) + v % (z - y)
-      #|  !s a. (\\x. dist(a,x)) convex_on s
+      #|  forall s a. (\\x. dist(a,x)) convex_on s
       #|  vec 0:real^N
       #|  s:real^N->bool
-      #|  !s:real^N->bool. norm convex_on s
-      #|  !f g:real^M->real^N s.\n        f convex_on (IMAGE g s) /\\ linear g ==> (f o g) convex_on s
+      #|  forall s:real^N->bool. norm convex_on s
+      #|  forall f g:real^M->real^N s.\n        f convex_on (IMAGE g s) /\\ linear g ==> (f o g) convex_on s
       #|  u % (a + x) + v % (a + y):real^N = (u + v) % a + u % x + v % y
-      #|  !f a:real^N.\n        f convex_on (IMAGE (\\x. a + x) s) <=> (\\x. f(a + x)) convex_on s
+      #|  forall f a:real^N.\n        f convex_on (IMAGE (\\x. a + x) s) <=> (\\x. f(a + x)) convex_on s
       #|  ~(&0 <= c) ==> &0 <= --c
       #|  (f:real^N->real^1)(--c % x) = --c % f x
       #|  &0 <= c
@@ -52458,23 +52458,23 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  inv(&2)
       #|  --x:real^N
       #|  x:real^N
-      #|  !x. (f:real^N->real^1) (--x) = --(f x)
+      #|  forall x. (f:real^N->real^1) (--x) = --(f x)
       #|  &1 <= c /\\ ~(c = &0)
       #|  c % x:real^N
       #|  inv c:real
       #|  c <= &1
-      #|  !c x:real^N. &0 <= c ==> (f:real^N->real^1)(c % x) = c % f x
+      #|  forall c x:real^N. &0 <= c ==> (f:real^N->real^1)(c % x) = c % f x
       #|  &1 - c
       #|  c:real
       #|  vec 0:real^N
       #|  x:real^N
-      #|  !c x:real^N. &0 <= c /\\ c <= &1 ==> (f:real^N->real^1)(c % x) = c % f x
+      #|  forall c x:real^N. &0 <= c /\\ c <= &1 ==> (f:real^N->real^1)(c % x) = c % f x
       #|  y:real^N
       #|  x:real^N
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  --a <= u * --x + v * --y <=> u * x + v * y <= a
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  !f:real^N->real^1.\n        linear f <=>\n        f(vec 0) = vec 0 /\\\n        (drop o f) convex_on UNIV /\\\n        ((--) o drop o f) convex_on UNIV
+      #|  forall f:real^N->real^1.\n        linear f <=>\n        f(vec 0) = vec 0 /\\\n        (drop o f) convex_on UNIV /\\\n        ((--) o drop o f) convex_on UNIV
       #|  &1 / &2
       #|  &1 / &2
       #|  vec 0:real^N
@@ -52486,10 +52486,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (f:real^N->real) (vec 0)
       #|  a:real^N
       #|  \\x. lift(--f(vec 0) + (f:real^N->real) x)
-      #|  !f:real^N->real.\n        f convex_on UNIV /\\ ((--) o f) convex_on UNIV <=>\n        (?a b. f = \\x. a dot x + b)
+      #|  forall f:real^N->real.\n        f convex_on UNIV /\\ ((--) o f) convex_on UNIV <=>\n        (?a b. f = \\x. a dot x + b)
       #|  (:real^N)
-      #|  !x:real^N e. convex(ball(x,e))
-      #|  !x:real^N e. connected(ball(x,e))
+      #|  forall x:real^N e. convex(ball(x,e))
+      #|  forall x:real^N e. connected(ball(x,e))
       #|  &0 <= u /\\ &0 <= v /\\ (u + v = &1) ==> (abs(u) + abs(v) = &1)
       #|  norm(u % (x - y)) + norm(v % (x - z):real^N)
       #|  (a + b) % x - (a % y + b % z) = a % (x - y) + b % (x - z)
@@ -52500,10 +52500,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  e:real
       #|  x:real^N
-      #|  !x:real^N e. convex(cball(x,e))
-      #|  !x:real^N e. connected(cball(x,e))
+      #|  forall x:real^N e. convex(cball(x,e))
+      #|  forall x:real^N e. connected(cball(x,e))
       #|  a:real^N
-      #|  !a:real^N r t. ball(a,r) SUBSET t /\\ t SUBSET cball(a,r) ==> convex t
+      #|  forall a:real^N r t. ball(a,r) SUBSET t /\\ t SUBSET cball(a,r) ==> convex t
       #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
       #|  y:real^N
       #|  x:real^N
@@ -52514,9 +52514,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  e:real
       #|  y IN s ==> s SUBSET t ==> y IN t
       #|  y:real^N
-      #|  !s x:real^N. frontier(connected_component s x) SUBSET frontier s
-      #|  !s c:real^N->bool.\n        c IN components s ==> frontier c SUBSET frontier s
-      #|  !s c. closed s /\\ c IN components ((:real^N) DIFF s)\n         ==> frontier c SUBSET s
+      #|  forall s x:real^N. frontier(connected_component s x) SUBSET frontier s
+      #|  forall s c:real^N->bool.\n        c IN components s ==> frontier c SUBSET frontier s
+      #|  forall s c. closed s /\\ c IN components ((:real^N) DIFF s)\n         ==> frontier c SUBSET s
       #|  frontier s:real^N->bool
       #|  s:real^N->bool
       #|  d:real^N->bool
@@ -52524,26 +52524,26 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  f SUBSET c /\\ ~(f = {}) ==> f SUBSET s ==> ~(s INTER c = {})
       #|  ~(UNIONS(components(frontier s)) INTER c:real^N->bool = {})
-      #|  !s:real^N->bool c.\n        compact s /\\ c IN components s\n        ==> ?d. d IN components(frontier s) /\\ d SUBSET c
+      #|  forall s:real^N->bool c.\n        compact s /\\ c IN components s\n        ==> ?d. d IN components(frontier s) /\\ d SUBSET c
       #|  e:real^N->bool
       #|  d:real^N->bool
       #|  c:real^N->bool
       #|  \\s t:real^N->bool. s SUBSET t
-      #|  !s:real^N->bool. compact s ==> components s <=_c components(frontier s)
+      #|  forall s:real^N->bool. compact s ==> components s <=_c components(frontier s)
       #|  frontier s:real^N->bool
       #|  closure s:real^N->bool
       #|  d:real^N->bool
-      #|  (?d. P d) ==> (!d. P d ==> ~(d = {}) /\\ d SUBSET f /\\ d SUBSET c)\n      ==> f SUBSET g ==> ~(g INTER c = {})
+      #|  (?d. P d) ==> (forall d. P d ==> ~(d = {}) /\\ d SUBSET f /\\ d SUBSET c)\n      ==> f SUBSET g ==> ~(g INTER c = {})
       #|  s:real^N->bool
       #|  ~(UNIONS(components(frontier s)) INTER c:real^N->bool = {})
       #|  c:real^N->bool
       #|  closure s:real^N->bool
-      #|  !s:real^N->bool c.\n        bounded s /\\ c IN components(closure s)\n        ==> ?d. d IN components(frontier s) /\\ d SUBSET c
+      #|  forall s:real^N->bool c.\n        bounded s /\\ c IN components(closure s)\n        ==> ?d. d IN components(frontier s) /\\ d SUBSET c
       #|  e:real^N->bool
       #|  d:real^N->bool
       #|  c:real^N->bool
       #|  \\s t:real^N->bool. s SUBSET t
-      #|  !s:real^N->bool.\n        bounded s ==> components(closure s) <=_c components(frontier s)
+      #|  forall s:real^N->bool.\n        bounded s ==> components(closure s) <=_c components(frontier s)
       #|  closed_in(subtopology euclidean (c UNION h)) (h2:real^N->bool)
       #|  h:real^N->bool
       #|  open_in(subtopology euclidean (c UNION h)) (h2:real^N->bool)
@@ -52563,11 +52563,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  h2:real^N->bool
       #|  h1:real^N->bool
       #|  \\x:real^N->bool. c SUBSET x
-      #|  !Q. (!x y. P x y <=> P y x) /\\\n        (!x y. P x y ==> Q x \\/ Q y) /\\\n        (!x y. P x y /\\ Q x ==> F)\n        ==> (!x y. ~(P x y))
+      #|  forall Q. (forall x y. P x y <=> P y x) /\\\n        (forall x y. P x y ==> Q x \\/ Q y) /\\\n        (forall x y. P x y /\\ Q x ==> F)\n        ==> (forall x y. ~(P x y))
       #|  s:real^N->bool
       #|  h:real^N->bool
       #|  c:real^N->bool
-      #|  !s t u:real^N->bool.\n        connected s /\\ connected u /\\ s SUBSET u /\\\n        open_in (subtopology euclidean (u DIFF s)) t /\\\n        closed_in (subtopology euclidean (u DIFF s)) t\n        ==> connected (s UNION t)
+      #|  forall s t u:real^N->bool.\n        connected s /\\ connected u /\\ s SUBSET u /\\\n        open_in (subtopology euclidean (u DIFF s)) t /\\\n        closed_in (subtopology euclidean (u DIFF s)) t\n        ==> connected (s UNION t)
       #|  s DIFF c DIFF h4:real^N->bool = h3
       #|  s:real^N->bool
       #|  c:real^N->bool
@@ -52588,7 +52588,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N->bool
       #|  s:real^N->bool
       #|  a:real^N->bool
-      #|  !s u c:real^N->bool.\n        connected s /\\ connected u /\\ s SUBSET u /\\ c IN components (u DIFF s)\n        ==> connected(u DIFF c)
+      #|  forall s u c:real^N->bool.\n        connected s /\\ connected u /\\ s SUBSET u /\\ c IN components (u DIFF s)\n        ==> connected(u DIFF c)
       #|  IMAGE (f:real^M->real^N) (interior s)
       #|  norm(f y - (f:real^M->real^N) a)
       #|  (f:real^M->real^N) o (z:num->real^M)
@@ -52596,9 +52596,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  w = (f:real^M->real^N) y
       #|  z:num->real^M
       #|  (z:num->real^M) o (r:num->num)
-      #|  !n. (z:num->real^M) n IN s
+      #|  forall n. (z:num->real^M) n IN s
       #|  ((\\n. (f:real^M->real^N) ((z:num->real^M) n)) --> w)\n                  sequentially
-      #|  !n. ((z:num->real^M) o (r:num->num)) n IN s
+      #|  forall n. ((z:num->real^M) o (r:num->num)) n IN s
       #|  (((\\n. (f:real^M->real^N)(z n)) o (r:num->num)) --> w) sequentially
       #|  r:num->num
       #|  y:real^M
@@ -52610,40 +52610,40 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  bounded s ==> ~(s = UNIV)
       #|  (f:real^M->real^N) a
       #|  frontier(IMAGE (f:real^M->real^N) s)
-      #|  s INTER t = {} <=> !x. x IN t ==> ~(x IN s)
+      #|  s INTER t = {} <=> forall x. x IN t ==> ~(x IN s)
       #|  (f:real^M->real^N) a
       #|  ~(b INTER s = {}) /\\ b INTER f = {} ==>\n    (~(b INTER (UNIV DIFF s) = {}) /\\ ~(b DIFF (UNIV DIFF s) = {})\n     ==> ~(b INTER f = {}))\n    ==> b SUBSET s
       #|  (:real^N) DIFF IMAGE (f:real^M->real^N) s
       #|  ball((f:real^M->real^N) a,r)
-      #|  !f:real^M->real^N s a r.\n        bounded s /\\ f continuous_on closure s /\\ open(IMAGE f (interior s)) /\\\n        a IN s /\\ &0 < r /\\ (!z. z IN frontier s ==> r <= norm(f z - f a))\n        ==> ball(f(a),r) SUBSET IMAGE f s
+      #|  forall f:real^M->real^N s a r.\n        bounded s /\\ f continuous_on closure s /\\ open(IMAGE f (interior s)) /\\\n        a IN s /\\ &0 < r /\\ (forall z. z IN frontier s ==> r <= norm(f z - f a))\n        ==> ball(f(a),r) SUBSET IMAGE f s
       #|  u % c % x + v % c % y = c % (u % x + v % y)
-      #|  !s c. convex s ==> convex (IMAGE (\\x. c % x) s)
+      #|  forall s c. convex s ==> convex (IMAGE (\\x. c % x) s)
       #|  inv(c):real
       #|  c = &0
-      #|  !s:real^N->bool c. convex (IMAGE (\\x. c % x) s) <=> c = &0 \\/ convex s
+      #|  forall s:real^N->bool c. convex (IMAGE (\\x. c % x) s) <=> c = &0 \\/ convex s
       #|  u % --x + v % --y = --(u % x + v % y)
-      #|  !s. convex s ==> convex (IMAGE (--) s)
+      #|  forall s. convex s ==> convex (IMAGE (--) s)
       #|  u % (a + b) + v % (c + d) = (u % a + v % c) + (u % b + v % d)
-      #|  !s t. convex s /\\ convex t ==> convex {x + y | x IN s /\\ y IN t}
+      #|  forall s t. convex s /\\ convex t ==> convex {x + y | x IN s /\\ y IN t}
       #|  u % (a - b) + v % (c - d) = (u % a + v % c) - (u % b + v % d)
-      #|  !s t. convex s /\\ convex t ==> convex {x - y | x IN s /\\ y IN t}
-      #|  !s m c:real^N.\n        convex (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ convex s
-      #|  !s m c:real^N. convex s ==> convex (IMAGE (\\x. m % x + c) s)
-      #|  !f:real^M->real^N.\n     linear f /\\ convex s ==> convex {x | f(x) IN s}
+      #|  forall s t. convex s /\\ convex t ==> convex {x - y | x IN s /\\ y IN t}
+      #|  forall s m c:real^N.\n        convex (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ convex s
+      #|  forall s m c:real^N. convex s ==> convex (IMAGE (\\x. m % x + c) s)
+      #|  forall f:real^M->real^N.\n     linear f /\\ convex s ==> convex {x | f(x) IN s}
       #|  &0 < c + d
       #|  c / (c + d) % x + d / (c + d) % y:real^N
       #|  y:real^N
       #|  x:real^N
       #|  c = &0 /\\ d = &0 \\/ &0 < c + d
-      #|  !s:real^N->bool c d.\n        convex s /\\ &0 <= c /\\ &0 <= d\n        ==> {c % x + d % y | x IN s /\\ y IN s} = IMAGE (\\x. (c + d) % x) s
+      #|  forall s:real^N->bool c d.\n        convex s /\\ &0 <= c /\\ &0 <= d\n        ==> {c % x + d % y | x IN s /\\ y IN s} = IMAGE (\\x. (c + d) % x) s
       #|  ((&1 - u) % a + u % b) + x:real^N = (&1 - u) % (a + x) + u % (b + x)
       #|  x:real^N
       #|  u:real
       #|  b:real^N
       #|  a:real^N
-      #|  !s t:real^N->bool.\n        convex t ==> convex {a | IMAGE (\\x. a + x) s SUBSET t}
-      #|  (!x:real^N. --(--x) = x) ==> {a:real^N | P(--a)} = IMAGE (--) {a | P a}
-      #|  !s t:real^N->bool.\n        convex t ==> convex {a | s SUBSET IMAGE (\\x. a + x) t}
+      #|  forall s t:real^N->bool.\n        convex t ==> convex {a | IMAGE (\\x. a + x) s SUBSET t}
+      #|  (forall x:real^N. --(--x) = x) ==> {a:real^N | P(--a)} = IMAGE (--) {a | P a}
+      #|  forall s t:real^N->bool.\n        convex t ==> convex {a | s SUBSET IMAGE (\\x. a + x) t}
       #|  abs(&n + &1) = &n + &1
       #|  abs(&n + &1)
       #|  d:real^N
@@ -52673,32 +52673,32 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b - z:real^N = w - a <=> a + b = w + z
       #|  b:real^N
       #|  a:real^N
-      #|  !n. ?w z:real^N. w IN s /\\ z IN u /\\ (&n + &1) % (b - z) = w - a
+      #|  forall n. ?w z:real^N. w IN s /\\ z IN u /\\ (&n + &1) % (b - z) = w - a
       #|  b:real^N
       #|  a:real^N
-      #|  !s t u:real^N->bool.\n        ~(s = {}) /\\ bounded s /\\ closed u /\\ convex u /\\\n        {x + y | x IN s /\\ y IN t} SUBSET {x + z | x IN s /\\ z IN u}\n        ==> t SUBSET u
+      #|  forall s t u:real^N->bool.\n        ~(s = {}) /\\ bounded s /\\ closed u /\\ convex u /\\\n        {x + y | x IN s /\\ y IN t} SUBSET {x + z | x IN s /\\ z IN u}\n        ==> t SUBSET u
       #|  u:real^N->bool
-      #|  !s t u:real^N->bool.\n        closed t /\\ convex t /\\ bounded u /\\ ~(u = {}) /\\\n        {x + z | x IN s /\\ z IN u} SUBSET {y + z | y IN t /\\ z IN u}\n        ==> s SUBSET t
-      #|  !s t u.\n        ~(s = {}) /\\ bounded s /\\\n        closed t /\\ convex t /\\ closed u /\\ convex u /\\\n        {x + y | x IN s /\\ y IN t} = {x + z | x IN s /\\ z IN u}\n        ==> t = u
-      #|  !s t u.\n        closed s /\\ convex s /\\ closed t /\\ convex t /\\\n        bounded u /\\ ~(u = {}) /\\\n        {x + z | x IN s /\\ z IN u} = {y + z | y IN t /\\ z IN u}\n        ==> s = t
-      #|  !s. convex(convex hull s)
-      #|  !s. (convex hull s = s) <=> convex s
-      #|  !s t. s SUBSET convex hull t /\\ t SUBSET convex hull s\n         ==> convex hull s = convex hull t
-      #|  !s. convex s <=> ?t. s = convex hull t
-      #|  !s a b x:real^N.\n        a IN convex hull s /\\ b IN convex hull s /\\ x IN segment[a,b]\n        ==> x IN convex hull s
-      #|  !x:real^N s. x IN convex hull s /\\ y IN convex hull s\n         ==> midpoint(x,y) IN convex hull s
+      #|  forall s t u:real^N->bool.\n        closed t /\\ convex t /\\ bounded u /\\ ~(u = {}) /\\\n        {x + z | x IN s /\\ z IN u} SUBSET {y + z | y IN t /\\ z IN u}\n        ==> s SUBSET t
+      #|  forall s t u.\n        ~(s = {}) /\\ bounded s /\\\n        closed t /\\ convex t /\\ closed u /\\ convex u /\\\n        {x + y | x IN s /\\ y IN t} = {x + z | x IN s /\\ z IN u}\n        ==> t = u
+      #|  forall s t u.\n        closed s /\\ convex s /\\ closed t /\\ convex t /\\\n        bounded u /\\ ~(u = {}) /\\\n        {x + z | x IN s /\\ z IN u} = {y + z | y IN t /\\ z IN u}\n        ==> s = t
+      #|  forall s. convex(convex hull s)
+      #|  forall s. (convex hull s = s) <=> convex s
+      #|  forall s t. s SUBSET convex hull t /\\ t SUBSET convex hull s\n         ==> convex hull s = convex hull t
+      #|  forall s. convex s <=> ?t. s = convex hull t
+      #|  forall s a b x:real^N.\n        a IN convex hull s /\\ b IN convex hull s /\\ x IN segment[a,b]\n        ==> x IN convex hull s
+      #|  forall x:real^N s. x IN convex hull s /\\ y IN convex hull s\n         ==> midpoint(x,y) IN convex hull s
       #|  convex hull (:real^N) = (:real^N)
       #|  cball(vec 0:real^N,B)
       #|  B:real
-      #|  !s:real^N->bool. bounded s ==> bounded(convex hull s)
-      #|  !s. bounded(convex hull s) <=> bounded s
-      #|  !s. FINITE s ==> bounded(convex hull s)
+      #|  forall s:real^N->bool. bounded s ==> bounded(convex hull s)
+      #|  forall s. bounded(convex hull s) <=> bounded s
+      #|  forall s. FINITE s ==> bounded(convex hull s)
       #|  convex hull {} = {}
-      #|  !s. (convex hull s = {}) <=> (s = {})
-      #|  !a. convex hull {a} = {a}
+      #|  forall s. (convex hull s = {}) <=> (s = {})
+      #|  forall a. convex hull {a} = {a}
       #|  ~(s = {}) /\\ s SUBSET {a} ==> s = {a}
       #|  s:real^N->bool = {}
-      #|  !s a:real^N. convex hull s = {a} <=> s = {a}
+      #|  forall s a:real^N. convex hull s = {a} <=> s = {a}
       #|  (u * v1) / (u * v1 + v * v2) % b1 +\n              (v * v2) / (u * v1 + v * v2) % b2 :real^N
       #|  (a + b = &0) ==> &0 <= a /\\ &0 <= b ==> (a = &0) /\\ (b = &0)
       #|  u * v1 + v * v2 = &0
@@ -52721,11 +52721,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0
       #|  &1
       #|  x:real^N
-      #|  !s a. ~(s = {})\n         ==> convex hull (a INSERT s) =\n               {x:real^N | ?u v b. &0 <= u /\\ &0 <= v /\\ u + v = &1 /\\\n                                    b IN (convex hull s) /\\\n                                    x = u % a + v % b}
+      #|  forall s a. ~(s = {})\n         ==> convex hull (a INSERT s) =\n               {x:real^N | ?u v b. &0 <= u /\\ &0 <= v /\\ u + v = &1 /\\\n                                    b IN (convex hull s) /\\\n                                    x = u % a + v % b}
       #|  u + v = &1 <=> u = &1 - v
       #|  a /\\ b /\\ c /\\ d <=> b /\\ c /\\ a /\\ d
-      #|  !s a:real^N.\n      convex hull (a INSERT s) =\n      if s = {} then {a}\n      else {(&1 - u) % a + u % x | &0 <= u /\\ u <= &1 /\\ x IN convex hull s}
-      #|  !s a:real^N.\n        convex hull (a INSERT s) =\n        if s = {} then {a} else  UNIONS {segment[a,x] | x IN convex hull s}
+      #|  forall s a:real^N.\n      convex hull (a INSERT s) =\n      if s = {} then {a}\n      else {(&1 - u) % a + u % x | &0 <= u /\\ u <= &1 /\\ x IN convex hull s}
+      #|  forall s a:real^N.\n        convex hull (a INSERT s) =\n        if s = {} then {a} else  UNIONS {segment[a,x] | x IN convex hull s}
       #|  i <= k1 + k2 /\\ ~(i <= k1) ==> 1 <= i - k1 /\\ i - k1 <= k2
       #|  k1 + 1 <= i ==> ~(i <= k1)
       #|  1 <= x + 1 /\\ x < x + 1
@@ -52746,7 +52746,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\i:num. &1
       #|  1
       #|  x:real^N
-      #|  !s. convex hull s =\n        {y:real^N | ?k u x. (!i. 1 <= i /\\ i <= k ==> &0 <= u i /\\ x i IN s) /\\\n                            (sum (1..k) u = &1) /\\\n                            (vsum (1..k) (\\i. u i % x i) = y)}
+      #|  forall s. convex hull s =\n        {y:real^N | ?k u x. (forall i. 1 <= i /\\ i <= k ==> &0 <= u i /\\ x i IN s) /\\\n                            (sum (1..k) u = &1) /\\\n                            (vsum (1..k) (\\i. u i % x i) = y)}
       #|  c + s = &1 ==> &0 <= s ==> &0 <= &1 - c
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  ~(c = &1) ==> (inv(&1 - c) * b = &1 <=> c + b = &1)
@@ -52764,7 +52764,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c(b:A) + sum k c = &1
       #|  (c:A->real) b = &1
       #|  c:A->real
-      #|  ~(b IN k) ==> !a. a IN k ==> ~(a = b)
+      #|  ~(b IN k) ==> forall a. a IN k ==> ~(a = b)
       #|  \\a. if a = b then u else v * (c:A->real) a
       #|  c:A->real
       #|  z:real^N
@@ -52777,7 +52777,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  k:A->bool = {}
       #|  k:A->bool
       #|  b:A
-      #|  !f:A->real^N k.\n        FINITE k\n        ==> convex hull (IMAGE f k) =\n             {y | ?u. (!a. a IN k ==> &0 <= u a) /\\\n                      sum k u = &1 /\\\n                      vsum k (\\a. u a % f a) = y}
+      #|  forall f:A->real^N k.\n        FINITE k\n        ==> convex hull (IMAGE f k) =\n             {y | ?u. (forall a. a IN k ==> &0 <= u a) /\\\n                      sum k u = &1 /\\\n                      vsum k (\\a. u a % f a) = y}
       #|  (s:real^N->bool) = IMAGE f (1..CARD s)
       #|  vsum (s:real^N->bool) (\\v. u v % v)
       #|  (\\i:num. (u o f) i % f i) = (\\v:real^N. u v % v) o f
@@ -52794,7 +52794,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x':num->real^N
       #|  \\v:real^N.sum {i | i IN (1..k) /\\ x' i = v} u
       #|  IMAGE (x':num->real^N) (1..k)
-      #|  !p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n             (!x. x IN s ==> &0 <= u x) /\\\n             sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n             (forall x. x IN s ==> &0 <= u x) /\\\n             sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
       #|  support (+) (f:real^N->real) s = {}
       #|  sum s (f:real^N->real) = &1
       #|  sum s (f:real^N->real) = &1
@@ -52807,7 +52807,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  f:real^N->real
       #|  t:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        convex hull s =\n          {y | ?u. (!x. x IN s ==> &0 <= u x) /\\\n                   sum s u = &1 /\\\n                   vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        convex hull s =\n          {y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                   sum s u = &1 /\\\n                   vsum s (\\x. u x % x) = y}
       #|  c:A->bool
       #|  g:A->real^N
       #|  f:A->real^N
@@ -52822,12 +52822,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:A->bool
       #|  p /\\ q /\\ r ==> s <=> p /\\ q ==> r ==> s
       #|  y:real^N
-      #|  !f:A->real^N k.\n        convex hull (IMAGE f k) =\n             {y | ?c u. FINITE c /\\ c SUBSET k /\\\n                        (!a. a IN c ==> &0 <= u a) /\\\n                        sum c u = &1 /\\\n                        vsum c (\\a. u a % f a) = y}
+      #|  forall f:A->real^N k.\n        convex hull (IMAGE f k) =\n             {y | ?c u. FINITE c /\\ c SUBSET k /\\\n                        (forall a. a IN c ==> &0 <= u a) /\\\n                        sum c u = &1 /\\\n                        vsum c (\\a. u a % f a) = y}
       #|  {a | a IN c /\\ &0 < (u:A->real) a}
       #|  c:A->bool
       #|  u:A->real
       #|  y:real^N
-      #|  !f:A->real^N k.\n        convex hull (IMAGE f k) =\n             {y | ?c u. FINITE c /\\ c SUBSET k /\\\n                        (!a. a IN c ==> &0 < u a) /\\\n                        sum c u = &1 /\\\n                        vsum c (\\a. u a % f a) = y}
+      #|  forall f:A->real^N k.\n        convex hull (IMAGE f k) =\n             {y | ?c u. FINITE c /\\ c SUBSET k /\\\n                        (forall a. a IN c ==> &0 < u a) /\\\n                        sum c u = &1 /\\\n                        vsum c (\\a. u a % f a) = y}
       #|  y:real^N
       #|  u:real
       #|  x:real^N
@@ -52837,16 +52837,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  vsum(u DIFF s) (\\v:real^N. (f v / sum(u DIFF s) f) % v)
       #|  sum(u DIFF s) (f:real^N->real)
       #|  vsum(u INTER s) (\\v:real^N. (f v / sum(u INTER s) f) % v)
-      #|  !x. x IN (u DIFF s) ==> (f:real^N->real) x = &0
+      #|  forall x. x IN (u DIFF s) ==> (f:real^N->real) x = &0
       #|  sum (u DIFF s) (f:real^N->real) = &0
-      #|  !x. x IN (u INTER s) ==> (f:real^N->real) x = &0
+      #|  forall x. x IN (u INTER s) ==> (f:real^N->real) x = &0
       #|  sum (u INTER s) (f:real^N->real) = &0
       #|  DISJOINT (u INTER s) (u DIFF s)
       #|  u:real^N->bool = (u INTER s) UNION (u DIFF s)
       #|  f:real^N->real
       #|  u:real^N->bool
       #|  y:real^N
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t\n        ==> convex hull (s UNION t) =\n             s UNION t UNION\n             {(&1 - u) % x + u % y | x IN s /\\ y IN t /\\ &0 <= u /\\ u <= &1}
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t\n        ==> convex hull (s UNION t) =\n             s UNION t UNION\n             {(&1 - u) % x + u % y | x IN s /\\ y IN t /\\ &0 <= u /\\ u <= &1}
       #|  z:real^N
       #|  &1
       #|  ?a:real^N. a IN s
@@ -52854,7 +52854,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  z:real^N
       #|  s UNION t UNION u = u <=> s SUBSET u /\\ t SUBSET u
-      #|  !s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ convex t /\\ ~(t = {})\n        ==> convex hull (s UNION t) =\n             {(&1 - u) % x + u % y | x IN s /\\ y IN t /\\ &0 <= u /\\ u <= &1}
+      #|  forall s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ convex t /\\ ~(t = {})\n        ==> convex hull (s UNION t) =\n             {(&1 - u) % x + u % y | x IN s /\\ y IN t /\\ &0 <= u /\\ u <= &1}
       #|  u:real^N->bool
       #|  y:real^N
       #|  u:real^N->bool
@@ -52866,24 +52866,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  convex hull u:real^N->bool
       #|  u:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !f s:real^N->bool.\n        convex(UNIONS f) /\\ ~(f = {})\n        ==> convex hull (s UNION UNIONS f) =\n            UNIONS {convex hull (s UNION t) | t IN f}
+      #|  forall f s:real^N->bool.\n        convex(UNIONS f) /\\ ~(f = {})\n        ==> convex hull (s UNION UNIONS f) =\n            UNIONS {convex hull (s UNION t) | t IN f}
       #|  &0 <= x / &2 <=> &0 <= x
       #|  \\x:real^N y:real. &0 <= y
-      #|  ((?u. (!x. x IN {} ==> &0 <= u x) /\\\n         sum {} u = w /\\\n         vsum {} (\\x. u(x) % x) = y) <=> w = &0 /\\ y = vec 0) /\\\n   (FINITE(s:real^N->bool)\n    ==> ((?u. (!x. x IN (a INSERT s) ==> &0 <= u x) /\\\n              sum (a INSERT s) u = w /\\\n              vsum (a INSERT s) (\\x. u(x) % x) = y) <=>\n         ?v. &0 <= v /\\\n             ?u. (!x. x IN s ==> &0 <= u x) /\\\n              sum s u = w - v /\\\n              vsum s (\\x. u(x) % x) = y - v % a))
+      #|  ((?u. (forall x. x IN {} ==> &0 <= u x) /\\\n         sum {} u = w /\\\n         vsum {} (\\x. u(x) % x) = y) <=> w = &0 /\\ y = vec 0) /\\\n   (FINITE(s:real^N->bool)\n    ==> ((?u. (forall x. x IN (a INSERT s) ==> &0 <= u x) /\\\n              sum (a INSERT s) u = w /\\\n              vsum (a INSERT s) (\\x. u(x) % x) = y) <=>\n         ?v. &0 <= v /\\\n             ?u. (forall x. x IN s ==> &0 <= u x) /\\\n              sum s u = w - v /\\\n              vsum s (\\x. u(x) % x) = y - v % a))
       #|  x - y = z:real^N <=> x = y + z
       #|  x - y = z:real <=> x = y + z
-      #|  !a b. convex hull {a,b} =\n         {u % a + v % b | &0 <= u /\\ &0 <= v /\\ u + v = &1}
+      #|  forall a b. convex hull {a,b} =\n         {u % a + v % b | &0 <= u /\\ &0 <= v /\\ u + v = &1}
       #|  x + y = &1 <=> y = &1 - x
       #|  (a /\\ x + y = &1) /\\ b <=> x + y = &1 /\\ a /\\ b
       #|  {a,b} = {b,a}
-      #|  !a b. convex hull {a,b} = {a + u % (b - a) | &0 <= u /\\ u <= &1}
+      #|  forall a b. convex hull {a,b} = {a + u % (b - a) | &0 <= u /\\ u <= &1}
       #|  x - y = z:real^N <=> x = y + z
       #|  x - y = z:real <=> x = y + z
       #|  convex hull {a,b,c} =\n    { u % a + v % b + w % c |\n      &0 <= u /\\ &0 <= v /\\ &0 <= w /\\ u + v + w = &1}
       #|  x + y = &1 <=> y = &1 - x
       #|  (a /\\ x + y = &1) /\\ b <=> x + y = &1 /\\ a /\\ b
       #|  {a,b,c} = {b,c,a}
-      #|  !a b c. convex hull {a,b,c} =\n                {a + u % (b - a) + v % (c - a) |\n                   &0 <= u /\\ &0 <= v /\\ u + v <= &1}
+      #|  forall a b c. convex hull {a,b,c} =\n                {a + u % (b - a) + v % (c - a) |\n                   &0 <= u /\\ &0 <= v /\\ u + v <= &1}
       #|  x + y:real^N =\n      vsum(1..k1) (\\i. vsum(1..k2) (\\j. u1 i % u2 j % (x1 i + x2 j)))
       #|  x2:num->real^N
       #|  u2:num->real
@@ -52893,7 +52893,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  k1:num
       #|  y:real^N
       #|  x:real^N
-      #|  !s t:real^N->bool.\n        convex hull {x + y | x IN s /\\ y IN t} =\n        {x + y | x IN convex hull s /\\ y IN convex hull t}
+      #|  forall s t:real^N->bool.\n        convex hull {x + y | x IN s /\\ y IN t} =\n        {x + y | x IN convex hull s /\\ y IN convex hull t}
       #|  x + y:real^N =\n      vsum(1..k1) (\\i. vsum(1..k2) (\\j. u1 i % u2 j % (x1 i + x2 j)))
       #|  x2:num->real^N
       #|  u2:num->real
@@ -52903,31 +52903,31 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  k1:num
       #|  y:real^N
       #|  x:real^N
-      #|  !s t:real^N->bool.\n        affine hull {x + y | x IN s /\\ y IN t} =\n        {x + y | x IN affine hull s /\\ y IN affine hull t}
-      #|  !u v x y:real^M z:real^N.\n       u + v = &1\n          ==> pastecart z (u % x + v % y) =\n              u % pastecart z x + v % pastecart z y /\\\n              pastecart (u % x + v % y) z =\n              u % pastecart x z + v % pastecart y z
-      #|  INTERS {{x | pastecart x y IN u} | y IN t} =\n     {x | !y. y IN t ==> pastecart x y IN u}
+      #|  forall s t:real^N->bool.\n        affine hull {x + y | x IN s /\\ y IN t} =\n        {x + y | x IN affine hull s /\\ y IN affine hull t}
+      #|  forall u v x y:real^M z:real^N.\n       u + v = &1\n          ==> pastecart z (u % x + v % y) =\n              u % pastecart z x + v % pastecart z y /\\\n              pastecart (u % x + v % y) z =\n              u % pastecart x z + v % pastecart y z
+      #|  INTERS {{x | pastecart x y IN u} | y IN t} =\n     {x | forall y. y IN t ==> pastecart x y IN u}
       #|  pastecart (x:real^M) (y:real^N) IN s PCROSS t
       #|  y:real^N
       #|  x:real^M
       #|  pastecart (x:real^M) (y:real^N) IN s PCROSS t
       #|  y:real^N
       #|  x:real^M
-      #|  (!s:real^M->bool t:real^N->bool.\n        affine hull (s PCROSS t) =\n        (affine hull s) PCROSS (affine hull t)) /\\\n   (!s:real^M->bool t:real^N->bool.\n        convex hull (s PCROSS t) =\n        (convex hull s) PCROSS (convex hull t))
-      #|  {x | !y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
-      #|  !(f:real^M->real^N->real^P) s t x y.\n        bilinear f /\\ x IN convex hull s /\\ y IN convex hull t\n        ==> f x y IN convex hull { f a b | a IN s /\\ b IN t}
-      #|  !s. subspace s ==> affine s
-      #|  !s. affine s ==> convex s
-      #|  !s. subspace s ==> convex s
-      #|  !s. (affine hull s) SUBSET (span s)
-      #|  !s. (convex hull s) SUBSET (span s)
-      #|  !s. (convex hull s) SUBSET (affine hull s)
-      #|  !s:real^N->bool. collinear(convex hull s) <=> collinear s
-      #|  !s. affine(span s)
-      #|  !s. convex(span s)
+      #|  (forall s:real^M->bool t:real^N->bool.\n        affine hull (s PCROSS t) =\n        (affine hull s) PCROSS (affine hull t)) /\\\n   (forall s:real^M->bool t:real^N->bool.\n        convex hull (s PCROSS t) =\n        (convex hull s) PCROSS (convex hull t))
+      #|  {x | forall y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
+      #|  forall(f:real^M->real^N->real^P) s t x y.\n        bilinear f /\\ x IN convex hull s /\\ y IN convex hull t\n        ==> f x y IN convex hull { f a b | a IN s /\\ b IN t}
+      #|  forall s. subspace s ==> affine s
+      #|  forall s. affine s ==> convex s
+      #|  forall s. subspace s ==> convex s
+      #|  forall s. (affine hull s) SUBSET (span s)
+      #|  forall s. (convex hull s) SUBSET (span s)
+      #|  forall s. (convex hull s) SUBSET (affine hull s)
+      #|  forall s:real^N->bool. collinear(convex hull s) <=> collinear s
+      #|  forall s. affine(span s)
+      #|  forall s. convex(span s)
       #|  (p ==> q) /\\ p ==> p /\\ q
-      #|  (!a b:real^N. segment[a,b] SUBSET affine hull {a,b}) /\\\n   (!a b:real^N. segment(a,b) SUBSET affine hull {a,b})
-      #|  !s:real^N->bool. span(convex hull s) = span s
-      #|  !s:real^N->bool. dim(convex hull s) = dim s
+      #|  (forall a b:real^N. segment[a,b] SUBSET affine hull {a,b}) /\\\n   (forall a b:real^N. segment(a,b) SUBSET affine hull {a,b})
+      #|  forall s:real^N->bool. span(convex hull s) = span s
+      #|  forall s:real^N->bool. dim(convex hull s) = dim s
       #|  x + y:real^N = &2 % (&1 / &2 % x + &1 / &2 % y)
       #|  y:real^N
       #|  x:real^N
@@ -52935,26 +52935,26 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  c:real
       #|  b /\\ (b ==> a) ==> a /\\ b
-      #|  !s:real^N->bool. vec 0 IN s ==> (affine s <=> subspace s)
-      #|  !s. affine s /\\ vec 0 IN s ==> subspace s
-      #|  !s:real^N->bool. subspace s <=> affine s /\\ vec 0 IN s
+      #|  forall s:real^N->bool. vec 0 IN s ==> (affine s <=> subspace s)
+      #|  forall s. affine s /\\ vec 0 IN s ==> subspace s
+      #|  forall s:real^N->bool. subspace s <=> affine s /\\ vec 0 IN s
       #|  c % x:real^N = c % x + (&1 - c) % vec 0
       #|  x + y:real^N = &2 % (&1 / &2 % x + &1 / &2 % y) + --(&1) % vec 0
-      #|  !s:real^N->bool. (vec 0) IN affine hull s ==> affine hull s = span s
-      #|  !s:real^N->bool. span s = affine hull (vec 0 INSERT s)
+      #|  forall s:real^N->bool. (vec 0) IN affine hull s ==> affine hull s = span s
+      #|  forall s:real^N->bool. span s = affine hull (vec 0 INSERT s)
       #|  a:real^N
       #|  affine (IMAGE (\\x:real^N. --a + x) s)\n                ==> closed (IMAGE (\\x:real^N. --a + x) s)
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. affine s ==> closed s
-      #|  !s. closed(affine hull s)
-      #|  !s. closure s SUBSET affine hull s
+      #|  forall s:real^N->bool. affine s ==> closed s
+      #|  forall s. closed(affine hull s)
+      #|  forall s. closure s SUBSET affine hull s
       #|  t:real^N->bool
-      #|  !s:real^N->bool. affine hull (closure s) = affine hull s
-      #|  !s:real^N->bool. (affine hull s = span s) <=> (vec 0) IN affine hull s
-      #|  !s. affine_dependent s ==> dependent s
+      #|  forall s:real^N->bool. affine hull (closure s) = affine hull s
+      #|  forall s:real^N->bool. (affine hull s = span s) <=> (vec 0) IN affine hull s
+      #|  forall s. affine_dependent s ==> dependent s
       #|  x = &1 ==> x = &0 ==> F
-      #|  (?v. v IN t /\\ ~p v) <=> ~(!v. v IN t ==> p v)
+      #|  (?v. v IN t /\\ ~p v) <=> ~(forall v. v IN t ==> p v)
       #|  u:real^N->real
       #|  u:real^N->real
       #|  \\v:real^N. inv(sum t u) * u v
@@ -52962,9 +52962,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  FINITE(t:real^N->bool)
       #|  t:real^N->bool
-      #|  !s:real^N->bool.\n        dependent s <=> affine_dependent s \\/ (vec 0) IN affine hull s
+      #|  forall s:real^N->bool.\n        dependent s <=> affine_dependent s \\/ (vec 0) IN affine hull s
       #|  vsum t (\\x:real^N. u(x - a) % x)
-      #|  !s. s - t % a = vec 0 /\\ s = u ==> --t % a + u = vec 0
+      #|  forall s. s - t % a = vec 0 /\\ s = u ==> --t % a + u = vec 0
       #|  x:real^N
       #|  x = y ==> --x + y = &0
       #|  \\x. if x = a then --sum t (\\x. u (x - a))\n         else (u:real^N->real) (x - a)
@@ -52973,7 +52973,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  t:real^N->bool
       #|  u:real^N->real
       #|  a /\\ x = IMAGE f s /\\ b <=> x = IMAGE f s /\\ a /\\ b
-      #|  !a:real^N s. dependent {x - a | x IN s} /\\ ~(a IN s)\n                ==> affine_dependent(a INSERT s)
+      #|  forall a:real^N s. dependent {x - a | x IN s} /\\ ~(a IN s)\n                ==> affine_dependent(a INSERT s)
       #|  x - a = y - a <=> x:real^N = y
       #|  {x - a:real^N | x | x IN s /\\ ~(x = a)} =\n                        IMAGE (\\x. x - a) (s DELETE a)
       #|  SUC x >= n + 2 <=> x > n
@@ -52981,7 +52981,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  ~(0 >= n + 2)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        (FINITE s ==> CARD s >= dimindex(:N) + 2) ==> affine_dependent s
+      #|  forall s:real^N->bool.\n        (FINITE s ==> CARD s >= dimindex(:N) + 2) ==> affine_dependent s
       #|  c:num <= b ==> (a > b ==> a > c)
       #|  x - a = y - a <=> x:real^N = y
       #|  {x - a:real^N | x | x IN s /\\ ~(x = a)} =\n                        IMAGE (\\x. x - a) (s DELETE a)
@@ -52990,10 +52990,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  ~(0 >= n + 2)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. (FINITE s ==> CARD s >= dim s + 2) ==> affine_dependent s
-      #|  !s:real^N->bool. ~(affine_dependent s) ==> FINITE s
+      #|  forall s:real^N->bool. (FINITE s ==> CARD s >= dim s + 2) ==> affine_dependent s
+      #|  forall s:real^N->bool. ~(affine_dependent s) ==> FINITE s
       #|  s <= n + 1 <=> ~(n + 2 <= s)
-      #|  !s:real^N->bool. ~(affine_dependent s) ==> CARD s <= dimindex(:N) + 1
+      #|  forall s:real^N->bool. ~(affine_dependent s) ==> CARD s <= dimindex(:N) + 1
       #|  x:real^N
       #|  a - b + b - a:real^N = vec 0
       #|  a - b + b - a = &0
@@ -53008,8 +53008,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  ct SUBSET a /\\ ct SUBSET cs /\\ a INTER cs SUBSET ct\n    ==> ct = a INTER cs
       #|  FINITE(t:real^N->bool)
-      #|  !s t:real^N->bool.\n        ~affine_dependent s /\\ t SUBSET s\n        ==> convex hull t = affine hull t INTER convex hull s
-      #|  !x:real^N. x IN t ==> a x = &0
+      #|  forall s t:real^N->bool.\n        ~affine_dependent s /\\ t SUBSET s\n        ==> convex hull t = affine hull t INTER convex hull s
+      #|  forall x:real^N. x IN t ==> a x = &0
       #|  sum t (a:real^N->real) = &1
       #|  DISJOINT t u ==> ~(x IN t /\\ x IN u)
       #|  t SUBSET s ==> {x | x IN s /\\ x IN t} = t
@@ -53020,7 +53020,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N->real
       #|  y:real^N
       #|  FINITE(t:real^N->bool) /\\ FINITE (u:real^N->bool)
-      #|  !s t u:real^N->bool.\n        ~affine_dependent s /\\ t SUBSET s /\\ u SUBSET s /\\ DISJOINT t u\n        ==> DISJOINT (affine hull t) (affine hull u)
+      #|  forall s t u:real^N->bool.\n        ~affine_dependent s /\\ t SUBSET s /\\ u SUBSET s /\\ DISJOINT t u\n        ==> DISJOINT (affine hull t) (affine hull u)
       #|  {x | x IN s} = s
       #|  ~affine_dependent((vec 0:real^N) INSERT s)
       #|  SUC n = m + 1 <=> n = m
@@ -53028,17 +53028,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  orig:real^N
       #|  FINITE s ==> (CARD s = n <=> s HAS_SIZE n)
       #|  ~(0 = n + 1)
-      #|  !s. ~(affine_dependent s) /\\ CARD s = dimindex(:N) + 1\n       ==> affine hull s = (:real^N)
+      #|  forall s. ~(affine_dependent s) /\\ CARD s = dimindex(:N) + 1\n       ==> affine hull s = (:real^N)
       #|  s:real^N->bool
-      #|  !s:real^N->bool.\n        ~(affine_dependent s) /\\ dimindex(:N) < CARD s\n        ==> affine hull s = (:real^N)
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s) /\\ dimindex(:N) < CARD s\n        ==> affine hull s = (:real^N)
       #|  CARD(s:real^N->bool)
       #|  orig:real^N
       #|  orig:real^N
-      #|  !x s:real^N->bool n.\n        ~(x IN s) /\\ (x INSERT s) HAS_SIZE n /\\ n <= dimindex(:N)\n        ==> interior(affine hull(x INSERT s)) = {}
-      #|  !s:real^N->bool.\n        FINITE s /\\ CARD(s) <= dimindex(:N)\n        ==> interior(affine hull s) = {}
+      #|  forall x s:real^N->bool n.\n        ~(x IN s) /\\ (x INSERT s) HAS_SIZE n /\\ n <= dimindex(:N)\n        ==> interior(affine hull(x INSERT s)) = {}
+      #|  forall s:real^N->bool.\n        FINITE s /\\ CARD(s) <= dimindex(:N)\n        ==> interior(affine hull s) = {}
       #|  interior(affine hull s):real^N->bool
-      #|  !t. s SUBSET t /\\ t = {} ==> s = {}
-      #|  !s:real^N->bool.\n        FINITE s /\\ CARD(s) <= dimindex(:N)\n        ==> interior(convex hull s) = {}
+      #|  forall t. s SUBSET t /\\ t = {} ==> s = {}
+      #|  forall s:real^N->bool.\n        FINITE s /\\ CARD(s) <= dimindex(:N)\n        ==> interior(convex hull s) = {}
       #|  ~(a IN s) ==> (a INSERT s) DELETE a = s
       #|  a:real^N
       #|  --a * --b:real = a * b
@@ -53051,34 +53051,34 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(affine_dependent(s:real^N->bool))
       #|  a IN s ==> a INSERT s = s
       #|  (a:real^N) IN s
-      #|  !s a:real^N.\n       ~(affine_dependent s)\n       ==> (affine_dependent(a INSERT s) <=> ~(a IN s) /\\ a IN affine hull s)
-      #|  !s a:real^N.\n        ~(affine_dependent s) /\\ ~(a IN affine hull s)\n        ==> ~(affine_dependent(a INSERT s))
+      #|  forall s a:real^N.\n       ~(affine_dependent s)\n       ==> (affine_dependent(a INSERT s) <=> ~(a IN s) /\\ a IN affine hull s)
+      #|  forall s a:real^N.\n        ~(affine_dependent s) /\\ ~(a IN affine hull s)\n        ==> ~(affine_dependent(a INSERT s))
       #|  (\\x. u x - u' x):real^N->real
-      #|  !s:real^N->bool u u'.\n      ~(affine_dependent s) /\\\n      sum s u = &1 /\\ sum s u' = &1 /\\\n      vsum s (\\x. u x % x) = vsum s (\\x. u' x % x)\n      ==> !x. x IN s ==> u x = u' x
-      #|  !s. independent s ==> ~(affine_dependent(vec 0 INSERT s))
+      #|  forall s:real^N->bool u u'.\n      ~(affine_dependent s) /\\\n      sum s u = &1 /\\ sum s u' = &1 /\\\n      vsum s (\\x. u x % x) = vsum s (\\x. u' x % x)\n      ==> forall x. x IN s ==> u x = u' x
+      #|  forall s. independent s ==> ~(affine_dependent(vec 0 INSERT s))
       #|  ~(affine_dependent\n      ((vec 0:real^N) INSERT {basis i | 1 <= i /\\ i <= dimindex (:N)}))
-      #|  !s:real^N->bool. span(conic hull s) = span s
-      #|  !s t:real^N->bool.\n        conic hull s = conic hull t ==> span s = span t
-      #|  !s:real^N->bool. dim(conic hull s) = dim s
-      #|  !s:real^N->bool. conic hull s SUBSET span s
-      #|  !s:real^N->bool. conic s <=> !a. &0 <= a ==> IMAGE (\\x. a % x) s SUBSET s
+      #|  forall s:real^N->bool. span(conic hull s) = span s
+      #|  forall s t:real^N->bool.\n        conic hull s = conic hull t ==> span s = span t
+      #|  forall s:real^N->bool. dim(conic hull s) = dim s
+      #|  forall s:real^N->bool. conic hull s SUBSET span s
+      #|  forall s:real^N->bool. conic s <=> forall a. &0 <= a ==> IMAGE (\\x. a % x) s SUBSET s
       #|  inv a:real
       #|  IMAGE (\\x:real^N. a % x) s
-      #|  !s:real^N->bool a. conic s /\\ &0 < a ==> IMAGE (\\x. a % x) s = s
+      #|  forall s:real^N->bool a. conic s /\\ &0 < a ==> IMAGE (\\x. a % x) s = s
       #|  a:real^N
       #|  a:real^N
-      #|  !t:real^N->bool.\n        affine t /\\ ~(t = {}) <=> ?a s. subspace s /\\ t = IMAGE (\\x. a + x) s
+      #|  forall t:real^N->bool.\n        affine t /\\ ~(t = {}) <=> ?a s. subspace s /\\ t = IMAGE (\\x. a + x) s
       #|  a':real^N = a + x <=> x = a' - a
       #|  a:real^N = a + x <=> x = vec 0
       #|  \\s. (a':real^N) IN s
       #|  t = IMAGE (\\x:real^N. a' + x) s'
       #|  --a' + a:real^N = --(a' - a)
-      #|  (!a a' s s'. P s a /\\ P s' a' ==> s = s')\n    ==> ((?a s. P s a) <=> (?!s. ?a. P s a))
-      #|  !t:real^N->bool.\n        affine t /\\ ~(t = {}) <=>\n        ?!s. ?a. subspace s /\\ t = IMAGE (\\x. a + x) s
-      #|  !t:real^N->bool a.\n        affine t /\\ a IN t\n        ==> subspace {x - a | x IN t} /\\\n            t = IMAGE (\\x. a + x) {x - a | x IN t}
+      #|  (forall a a' s s'. P s a /\\ P s' a' ==> s = s')\n    ==> ((?a s. P s a) <=> (?!s. ?a. P s a))
+      #|  forall t:real^N->bool.\n        affine t /\\ ~(t = {}) <=>\n        ?!s. ?a. subspace s /\\ t = IMAGE (\\x. a + x) s
+      #|  forall t:real^N->bool a.\n        affine t /\\ a IN t\n        ==> subspace {x - a | x IN t} /\\\n            t = IMAGE (\\x. a + x) {x - a | x IN t}
       #|  x + a':real^N
       #|  x:real^N
-      #|  (!x. x IN s ==> (p x <=> q x))\n         ==> s INTER {x | p x} = s INTER {x | q x}
+      #|  (forall x. x IN s ==> (p x <=> q x))\n         ==> s INTER {x | p x} = s INTER {x | q x}
       #|  (a':real^N) dot z
       #|  a':real^N
       #|  a'':real^N = a
@@ -53096,32 +53096,32 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ?u v:real^N. u IN s /\\ v IN s /\\\n                    a dot u <= b /\\ ~(a dot v <= b)
       #|  ~(~p /\\ ~q) ==> p \\/ q \\/ r
       #|  s INTER {x:real^N | a dot x = b} = {}
-      #|  !s a:real^N b.\n       affine s\n       ==> s INTER {x | a dot x <= b} = {} \\/ s SUBSET {x | a dot x <= b} \\/\n           ?a' b'. ~(a' = vec 0) /\\\n                   s INTER {x | a' dot x <= b'} = s INTER {x | a dot x <= b} /\\\n                   s INTER {x | a' dot x = b'} = s INTER {x | a dot x = b} /\\\n                   !w. w IN s ==> (w + a') IN s
+      #|  forall s a:real^N b.\n       affine s\n       ==> s INTER {x | a dot x <= b} = {} \\/ s SUBSET {x | a dot x <= b} \\/\n           ?a' b'. ~(a' = vec 0) /\\\n                   s INTER {x | a' dot x <= b'} = s INTER {x | a dot x <= b} /\\\n                   s INTER {x | a' dot x = b'} = s INTER {x | a dot x = b} /\\\n                   forall w. w IN s ==> (w + a') IN s
       #|  (a:real^N) INSERT b
       #|  a:real^N
-      #|  (!a. a IN t /\\ ~(a IN s) ==> F) ==> t SUBSET s
-      #|  !s b:real^N->bool.\n        b SUBSET s /\\ ~(affine_dependent b) /\\\n        (!b'. b SUBSET b' /\\ b' SUBSET s /\\ ~(affine_dependent b') ==> b' = b)\n        ==> s SUBSET (affine hull b)
-      #|  !s b:real^N->bool.\n        affine s /\\ b SUBSET s /\\ ~(affine_dependent b) /\\\n        (!b'. b SUBSET b' /\\ b' SUBSET s /\\ ~(affine_dependent b') ==> b' = b)\n        ==> affine hull b = s
+      #|  (forall a. a IN t /\\ ~(a IN s) ==> F) ==> t SUBSET s
+      #|  forall s b:real^N->bool.\n        b SUBSET s /\\ ~(affine_dependent b) /\\\n        (forall b'. b SUBSET b' /\\ b' SUBSET s /\\ ~(affine_dependent b') ==> b' = b)\n        ==> s SUBSET (affine hull b)
+      #|  forall s b:real^N->bool.\n        affine s /\\ b SUBSET s /\\ ~(affine_dependent b) /\\\n        (forall b'. b SUBSET b' /\\ b' SUBSET s /\\ ~(affine_dependent b') ==> b' = b)\n        ==> affine hull b = s
       #|  c:real^N->bool
       #|  CARD(c:real^N->bool)
       #|  c:real^N->bool
       #|  t:real^N->bool
       #|  n:num
       #|  \\n. ?t:real^N->bool. ~(affine_dependent t) /\\ s SUBSET t /\\\n                                    t SUBSET u /\\ CARD t = n
-      #|  !s u:real^N->bool.\n        ~(affine_dependent s) /\\ s SUBSET u\n        ==> ?t. ~(affine_dependent t) /\\ s SUBSET t /\\ t SUBSET u /\\\n                affine hull t = affine hull u
+      #|  forall s u:real^N->bool.\n        ~(affine_dependent s) /\\ s SUBSET u\n        ==> ?t. ~(affine_dependent t) /\\ s SUBSET t /\\ t SUBSET u /\\\n                affine hull t = affine hull u
       #|  s:real^N->bool
       #|  {}:real^N->bool
-      #|  !s:real^N->bool.\n      ?b. ~(affine_dependent b) /\\ b SUBSET s /\\\n          affine hull b = affine hull s
+      #|  forall s:real^N->bool.\n      ?b. ~(affine_dependent b) /\\ b SUBSET s /\\\n          affine hull b = affine hull s
       #|  aff_dim s =\n        @d:int. ?b. affine hull b = affine hull s /\\ ~(affine_dependent b) /\\\n                    &(CARD b) = d + &1
       #|  y:int = x + &1 <=> x = y - &1
-      #|  !s. ?b. affine hull b = affine hull s /\\\n           ~(affine_dependent b) /\\\n           aff_dim s = &(CARD b) - &1
+      #|  forall s. ?b. affine hull b = affine hull s /\\\n           ~(affine_dependent b) /\\\n           aff_dim s = &(CARD b) - &1
       #|  &0 = d + &1 <=> d:int = -- &1
       #|  aff_dim {} = -- &1
-      #|  !s. aff_dim(affine hull s) = aff_dim s
+      #|  forall s. aff_dim(affine hull s) = aff_dim s
       #|  a + x:real^N = a + y <=> x = y
       #|  a /\\ b /\\ c <=> ~(a /\\ b ==> ~c)
-      #|  !a:real^N s. aff_dim (IMAGE (\\x. a + x) s) = aff_dim s
-      #|  !s:real^N->bool.\n        affine hull (conic hull s) =\n        if s = {} then {} else affine hull (vec 0 INSERT s)
+      #|  forall a:real^N s. aff_dim (IMAGE (\\x. a + x) s) = aff_dim s
+      #|  forall s:real^N->bool.\n        affine hull (conic hull s) =\n        if s = {} then {} else affine hull (vec 0 INSERT s)
       #|  x - a:real^N = y - a <=> x = y
       #|  s = (a:real^N) INSERT (s DELETE a)
       #|  ~affine_dependent(s:real^N->bool)
@@ -53129,7 +53129,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  {b - a:real^N |b| b IN (s DELETE a)}
       #|  ~(s = 0) /\\ v = s - 1 ==> s = v + 1
-      #|  !s a:real^N.\n        ~affine_dependent s /\\ a IN s\n        ==> CARD s = dim {x - a | x IN s} + 1
+      #|  forall s a:real^N.\n        ~affine_dependent s /\\ a IN s\n        ==> CARD s = dim {x - a | x IN s} + 1
       #|  x - c:real^N = y - a <=> y = x + &1 % (a - c)
       #|  (c:real^N) IN s
       #|  affine hull s:real^N->bool = s
@@ -53139,16 +53139,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N->bool = {}
       #|  b:real^N->bool
       #|  s:real^N->bool
-      #|  !a:real^N s. affine s /\\ a IN s ==> aff_dim s = &(dim {x - a | x IN s})
+      #|  forall a:real^N s. affine s /\\ a IN s ==> aff_dim s = &(dim {x - a | x IN s})
       #|  {x | x IN s} = s
       #|  affine hull s:real^N->bool
       #|  vec 0:real^N
-      #|  !s:real^N->bool. vec 0 IN affine hull s ==> aff_dim s = &(dim s)
-      #|  !s:real^N->bool. subspace s ==> aff_dim s = &(dim s)
+      #|  forall s:real^N->bool. vec 0 IN affine hull s ==> aff_dim s = &(dim s)
+      #|  forall s:real^N->bool. subspace s ==> aff_dim s = &(dim s)
       #|  {x | x IN s} = s
       #|  a:real^N
-      #|  !a:real^N s. a IN affine hull s ==> aff_dim s = &(dim {x - a | x IN s})
-      #|  !a:real^N s. a IN s ==> aff_dim s = &(dim {x - a | x IN s})
+      #|  forall a:real^N s. a IN affine hull s ==> aff_dim s = &(dim {x - a | x IN s})
+      #|  forall a:real^N s. a IN s ==> aff_dim s = &(dim {x - a | x IN s})
       #|  {f x | x IN IMAGE g s} = {f (g x) | x IN s}
       #|  dim {x - f(a) |x| x IN IMAGE (f:real^M->real^N) s} <=\n                dim {x - a | x IN s}
       #|  a:real^M
@@ -53156,11 +53156,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^M->bool
       #|  affine hull s:real^M->bool
       #|  s:real^M->bool
-      #|  !f:real^M->real^N s. linear f ==> aff_dim(IMAGE f s) <= aff_dim s
+      #|  forall f:real^M->real^N s. linear f ==> aff_dim(IMAGE f s) <= aff_dim s
       #|  aff_dim(IMAGE (g:real^N->real^M) (IMAGE (f:real^M->real^N) s))
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> aff_dim(IMAGE f s) = aff_dim s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_dim(IMAGE f s) = aff_dim s
       #|  affine hull b:real^N->bool
       #|  a:real^N
       #|  (a + b) - b:int = a
@@ -53168,46 +53168,46 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N->bool
       #|  a:real^N
       #|  b:real^N->bool = {}
-      #|  !b:real^N->bool.\n        ~(affine_dependent b) ==> aff_dim b = &(CARD b) - &1
-      #|  !s b:real^N->bool.\n        affine hull b = affine hull s /\\ ~(affine_dependent b)\n        ==> aff_dim s = &(CARD b) - &1
+      #|  forall b:real^N->bool.\n        ~(affine_dependent b) ==> aff_dim b = &(CARD b) - &1
+      #|  forall s b:real^N->bool.\n        affine hull b = affine hull s /\\ ~(affine_dependent b)\n        ==> aff_dim s = &(CARD b) - &1
       #|  &(CARD {a:real^N}) - &1:int
-      #|  !a:real^N. aff_dim {a} = &0
+      #|  forall a:real^N. aff_dim {a} = &0
       #|  a + x:real^N = a + y <=> x = y
       #|  a:real^N
-      #|  !s:real^N->bool. FINITE s ==> aff_dim s <= &(CARD s) - &1
+      #|  forall s:real^N->bool. FINITE s ==> aff_dim s <= &(CARD s) - &1
       #|  s:real^N->bool
-      #|  !s:real^N->bool. -- &1 <= aff_dim s
+      #|  forall s:real^N->bool. -- &1 <= aff_dim s
       #|  (vec 0:real^N) IN t
       #|  a:real^N
-      #|  !s t:real^N->bool. s SUBSET t ==> aff_dim s <= aff_dim t
-      #|  !s:real^N->bool. aff_dim s <= &(dim s)
+      #|  forall s t:real^N->bool. s SUBSET t ==> aff_dim s <= aff_dim t
+      #|  forall s:real^N->bool. aff_dim s <= &(dim s)
       #|  aff_dim(affine hull s:real^N->bool)
-      #|  !c:int. c = a /\\ a <= b /\\ b <= c ==> b = a
-      #|  !s:real^N->bool. aff_dim(convex hull s) = aff_dim s
+      #|  forall c:int. c = a /\\ a <= b /\\ b <= c ==> b = a
+      #|  forall s:real^N->bool. aff_dim(convex hull s) = aff_dim s
       #|  aff_dim(affine hull s:real^N->bool)
-      #|  !h. h = s /\\ s <= c /\\ c <= h ==> c:int = s
-      #|  !s:real^N->bool. aff_dim(closure s) = aff_dim s
+      #|  forall h. h = s /\\ s <= c /\\ c <= h ==> c:int = s
+      #|  forall s:real^N->bool. aff_dim(closure s) = aff_dim s
       #|  &(CARD {a:real^N,b}) - &1:int
-      #|  !a b:real^N. aff_dim {a,b} = if a = b then &0 else &1
+      #|  forall a b:real^N. aff_dim {a,b} = if a = b then &0 else &1
       #|  aff_dim {a:real^N}
       #|  &0:int <= n ==> ~(n = -- &1)
       #|  a:real^N
-      #|  !s:real^N->bool. aff_dim s = -- &1 <=> s = {}
+      #|  forall s:real^N->bool. aff_dim s = -- &1 <=> s = {}
       #|  s:real^N->bool
-      #|  !s:real^N->bool. &0 <= aff_dim s <=> ~(s = {})
+      #|  forall s:real^N->bool. &0 <= aff_dim s <=> ~(s = {})
       #|  b:real^N
       #|  a:real^N
       #|  b:real^N
-      #|  (!b. ~(b = a) /\\ {a,b} SUBSET s ==> F) ==> a IN s ==> s = {a}
+      #|  (forall b. ~(b = a) /\\ {a,b} SUBSET s ==> F) ==> a IN s ==> s = {a}
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. aff_dim s = &0 <=> ?a. s = {a}
-      #|  !s x:real^N.\n        connected s /\\ ~(aff_dim s = &0) /\\ x IN s ==> x limit_point_of s
+      #|  forall s:real^N->bool. aff_dim s = &0 <=> ?a. s = {a}
+      #|  forall s x:real^N.\n        connected s /\\ ~(aff_dim s = &0) /\\ x IN s ==> x limit_point_of s
       #|  aff_dim(:real^N) = &(dimindex(:N))
       #|  a:real^N
       #|  a:real^N
       #|  a:int <= x ==> (x <= a <=> x = a)
-      #|  !s t:real^N->bool.\n        s SUBSET t /\\ aff_dim t <= aff_dim s\n        ==> affine hull s = affine hull t
+      #|  forall s t:real^N->bool.\n        s SUBSET t /\\ aff_dim t <= aff_dim s\n        ==> affine hull s = affine hull t
       #|  vec 0:real^N
       #|  (vec 0:real^N) IN {x + y | x IN s /\\ y IN t}
       #|  t:real^N->bool
@@ -53217,16 +53217,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  a:real^N
       #|  a /\\ b /\\ c ==> d <=> c ==> a /\\ b ==> d
-      #|  !s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s INTER t = {})\n        ==> aff_dim {x + y | x IN s /\\ y IN t} =\n                (aff_dim s + aff_dim t) - aff_dim(s INTER t)
-      #|  !s t. (affine hull s) PSUBSET (affine hull t) ==> aff_dim s < aff_dim t
-      #|  !s t:real^N->bool.\n        s SUBSET t\n        ==> (aff_dim s = aff_dim t <=> affine hull s = affine hull t)
-      #|  !s. aff_dim s = &(dimindex(:N)) <=> affine hull s = (:real^N)
-      #|  !s:real^N->bool. aff_dim s <= &(dimindex(:N))
+      #|  forall s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s INTER t = {})\n        ==> aff_dim {x + y | x IN s /\\ y IN t} =\n                (aff_dim s + aff_dim t) - aff_dim(s INTER t)
+      #|  forall s t. (affine hull s) PSUBSET (affine hull t) ==> aff_dim s < aff_dim t
+      #|  forall s t:real^N->bool.\n        s SUBSET t\n        ==> (aff_dim s = aff_dim t <=> affine hull s = affine hull t)
+      #|  forall s. aff_dim s = &(dimindex(:N)) <=> affine hull s = (:real^N)
+      #|  forall s:real^N->bool. aff_dim s <= &(dimindex(:N))
       #|  &(CARD(b:real^N->bool)):int
-      #|  !b:int. a <= b - &1 /\\ b < s ==> ~(a = s - &1)
+      #|  forall b:int. a <= b - &1 /\\ b < s ==> ~(a = s - &1)
       #|  s:real^N->bool
       #|  b:real^N->bool
-      #|  !s:real^N->bool.\n        ~affine_dependent s <=> FINITE s /\\ aff_dim s = &(CARD s) - &1
+      #|  forall s:real^N->bool.\n        ~affine_dependent s <=> FINITE s /\\ aff_dim s = &(CARD s) - &1
       #|  k % x:real^N = (&1 - k) % vec 0 + k % x
       #|  x:real^N = inv k % k % x
       #|  &0 < k /\\ k < &1
@@ -53238,36 +53238,36 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  t:real^N->bool
       #|  s:real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ ~(s INTER interior t = {})\n        ==> affine hull (s INTER t) = affine hull s
-      #|  !s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = affine hull s
-      #|  !s t:real^N->bool.\n        affine s /\\ ~(s INTER interior t = {})\n        ==> affine hull (s INTER t) = s
-      #|  !s t:real^N->bool.\n        affine s /\\ open t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = s
+      #|  forall s t:real^N->bool.\n        convex s /\\ ~(s INTER interior t = {})\n        ==> affine hull (s INTER t) = affine hull s
+      #|  forall s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = affine hull s
+      #|  forall s t:real^N->bool.\n        affine s /\\ ~(s INTER interior t = {})\n        ==> affine hull (s INTER t) = s
+      #|  forall s t:real^N->bool.\n        affine s /\\ open t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = s
       #|  affine hull t:real^N->bool
       #|  affine hull (s INTER u:real^N->bool)
-      #|  !u v. x = u /\\ u = v /\\ v = y ==> x = y
-      #|  !s t u:real^N->bool.\n        convex s /\\ affine t /\\ open u /\\\n        s INTER u = t INTER u /\\ ~(s INTER u = {})\n        ==> affine hull s = t
+      #|  forall u v. x = u /\\ u = v /\\ v = y ==> x = y
+      #|  forall s t u:real^N->bool.\n        convex s /\\ affine t /\\ open u /\\\n        s INTER u = t INTER u /\\ ~(s INTER u = {})\n        ==> affine hull s = t
       #|  s SUBSET t ==> s INTER t INTER u = s INTER u
       #|  u:real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean (affine hull s)) t /\\\n        ~(s INTER t = {})\n        ==> affine hull (s INTER t) = affine hull s
+      #|  forall s t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean (affine hull s)) t /\\\n        ~(s INTER t = {})\n        ==> affine hull (s INTER t) = affine hull s
       #|  t:real^N->bool
       #|  affine hull s:real^N->bool
-      #|  !s t:real^N->bool.\n        affine s /\\ open_in (subtopology euclidean s) t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = s
+      #|  forall s t:real^N->bool.\n        affine s /\\ open_in (subtopology euclidean s) t /\\ ~(s INTER t = {})\n        ==> affine hull (s INTER t) = s
       #|  u:real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean s) t /\\ ~(t = {})\n        ==> affine hull t = affine hull s
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean (affine hull t)) s /\\ ~(s = {})\n        ==> affine hull s = affine hull t
-      #|  !u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\ ~(s = {})\n        ==> affine hull s = u
+      #|  forall s t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean s) t /\\ ~(t = {})\n        ==> affine hull t = affine hull s
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (affine hull t)) s /\\ ~(s = {})\n        ==> affine hull s = affine hull t
+      #|  forall u s:real^N->bool.\n        affine u /\\ open_in (subtopology euclidean u) s /\\ ~(s = {})\n        ==> affine hull s = u
       #|  s = (:real^N) INTER s
-      #|  !s. open s /\\ ~(s = {}) ==> affine hull s = (:real^N)
+      #|  forall s. open s /\\ ~(s = {}) ==> affine hull s = (:real^N)
       #|  affine hull (interior s:real^N->bool)
-      #|  !s. s SUBSET t /\\ s = UNIV ==> t = UNIV
-      #|  !s. ~(interior s = {}) ==> affine hull s = (:real^N)
-      #|  !s:real^N->bool. open s /\\ ~(s = {}) ==> aff_dim s = &(dimindex(:N))
-      #|  !s:real^N->bool. ~(interior s = {}) ==> aff_dim s = &(dimindex(:N))
-      #|  !s:real^N->bool. aff_dim s < &(dimindex(:N)) ==> interior s = {}
+      #|  forall s. s SUBSET t /\\ s = UNIV ==> t = UNIV
+      #|  forall s. ~(interior s = {}) ==> affine hull s = (:real^N)
+      #|  forall s:real^N->bool. open s /\\ ~(s = {}) ==> aff_dim s = &(dimindex(:N))
+      #|  forall s:real^N->bool. ~(interior s = {}) ==> aff_dim s = &(dimindex(:N))
+      #|  forall s:real^N->bool. aff_dim s < &(dimindex(:N)) ==> interior s = {}
       #|  affine hull s:real^N->bool
-      #|  !s. s SUBSET t /\\ s = UNIV ==> t = UNIV
-      #|  !s. open s /\\ ~(s = {}) ==> span s = (:real^N)
-      #|  !s:real^N->bool. open s /\\ ~(s = {}) ==> dim s = dimindex(:N)
+      #|  forall s. s SUBSET t /\\ s = UNIV ==> t = UNIV
+      #|  forall s. open s /\\ ~(s = {}) ==> span s = (:real^N)
+      #|  forall s:real^N->bool. open s /\\ ~(s = {}) ==> dim s = dimindex(:N)
       #|  s:real^N->bool
       #|  (vec 0:real^N) INSERT s
       #|  s:real^N->bool
@@ -53276,18 +53276,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  b:real^N
-      #|  !a:real^N s.\n        aff_dim (a INSERT s) =\n        if a IN affine hull s then aff_dim s else aff_dim s + &1
+      #|  forall a:real^N s.\n        aff_dim (a INSERT s) =\n        if a IN affine hull s then aff_dim s else aff_dim s + &1
       #|  s:real^N->bool
       #|  vec 0:real^N
-      #|  !s:real^N->bool.\n        aff_dim s = if vec 0 IN affine hull s then &(dim s)\n                    else &(dim s) - &1
+      #|  forall s:real^N->bool.\n        aff_dim s = if vec 0 IN affine hull s then &(dim s)\n                    else &(dim s) - &1
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        aff_dim (conic hull s) = if s = {} then -- &1 else &(dim s)
+      #|  forall s:real^N->bool.\n        aff_dim (conic hull s) = if s = {} then -- &1 else &(dim s)
       #|  b:real^N
       #|  b:real^N
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        affine s ==> (bounded s <=> s = {} \\/ ?a. s = {a})
+      #|  forall s:real^N->bool.\n        affine s ==> (bounded s <=> s = {} \\/ ?a. s = {a})
       #|  --(&1):int <= x ==> (x <= &0 <=> x = --(&1) \\/ x = &0)
-      #|  !s:real^N->bool.\n        affine s ==> (bounded s <=> aff_dim s <= &0)
+      #|  forall s:real^N->bool.\n        affine s ==> (bounded s <=> aff_dim s <= &0)
       #|  x - &1:int <= &1 <=> x <= &2
       #|  b:real^N->bool
       #|  s:real^N->bool
@@ -53296,21 +53296,21 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  aff_dim{u:real^N,v}
       #|  v:real^N
       #|  u:real^N
-      #|  !s:real^N->bool. collinear s <=> aff_dim s <= &1
+      #|  forall s:real^N->bool. collinear s <=> aff_dim s <= &1
       #|  b:real^N->bool
       #|  s:real^N->bool
       #|  aff_dim(affine hull {a:real^N,b,c})
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. coplanar s <=> aff_dim s <= &2
+      #|  forall s:real^N->bool. coplanar s <=> aff_dim s <= &2
       #|  b:real^N
       #|  a:real^M
       #|  b:real^N
       #|  a:real^M
       #|  s:real^M->bool = {}
       #|  t:real^N->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t /\\ aff_dim s = aff_dim t ==> s homeomorphic t
+      #|  forall s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t /\\ aff_dim s = aff_dim t ==> s homeomorphic t
       #|  IMAGE (\\x:real^N. e % x) b
       #|  s:real^N->bool
       #|  b:real^N->bool
@@ -53320,31 +53320,31 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (vec 0:real^N) IN t
       #|  a:real^N
       #|  a:real^N
-      #|  !s t:real^N->bool.\n        ~(s = {}) /\\ open_in (subtopology euclidean t) s /\\ affine t\n        ==> aff_dim s = aff_dim t
+      #|  forall s t:real^N->bool.\n        ~(s = {}) /\\ open_in (subtopology euclidean t) s /\\ affine t\n        ==> aff_dim s = aff_dim t
       #|  aff_dim(s:real^N->bool)
-      #|  !s t:real^N->bool.\n        ~(s = {}) /\\ open_in (subtopology euclidean t) s /\\ subspace t\n        ==> dim s = dim t
-      #|  !s t:real^N->bool.\n        convex s /\\ ~(s INTER interior t = {})\n        ==> aff_dim(s INTER t) = aff_dim s
-      #|  !s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> aff_dim(s INTER t) = aff_dim s
+      #|  forall s t:real^N->bool.\n        ~(s = {}) /\\ open_in (subtopology euclidean t) s /\\ subspace t\n        ==> dim s = dim t
+      #|  forall s t:real^N->bool.\n        convex s /\\ ~(s INTER interior t = {})\n        ==> aff_dim(s INTER t) = aff_dim s
+      #|  forall s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> aff_dim(s INTER t) = aff_dim s
       #|  aff_dim((subtopology euclidean u) interior_of s:real^N->bool)
-      #|  !u s:real^N->bool.\n        s SUBSET u /\\ affine u /\\\n        ~((subtopology euclidean u) interior_of s = {})\n        ==> aff_dim s = aff_dim u
+      #|  forall u s:real^N->bool.\n        s SUBSET u /\\ affine u /\\\n        ~((subtopology euclidean u) interior_of s = {})\n        ==> aff_dim s = aff_dim u
       #|  s:int < u ==> t <= s ==> ~(t = u)
       #|  ~q ==> (~p ==> q) ==> p
       #|  u INTER s:real^N->bool
       #|  u:real^N->bool
-      #|  !u s:real^N->bool.\n        affine u /\\ aff_dim s < aff_dim u\n        ==> (subtopology euclidean u) interior_of s = {}
-      #|  !a b. affine hull {x | a dot x < b} =\n         if a = vec 0 /\\ b <= &0 then {} else (:real^N)
+      #|  forall u s:real^N->bool.\n        affine u /\\ aff_dim s < aff_dim u\n        ==> (subtopology euclidean u) interior_of s = {}
+      #|  forall a b. affine hull {x | a dot x < b} =\n         if a = vec 0 /\\ b <= &0 then {} else (:real^N)
       #|  {x | p} = if p then UNIV else {}
       #|  a:real^N = vec 0
-      #|  !a b. affine hull {x | a dot x <= b} =\n         if a = vec 0 /\\ b < &0 then {} else (:real^N)
-      #|  !a b. affine hull {x | a dot x > b} =\n         if a = vec 0 /\\ b >= &0 then {} else (:real^N)
+      #|  forall a b. affine hull {x | a dot x <= b} =\n         if a = vec 0 /\\ b < &0 then {} else (:real^N)
+      #|  forall a b. affine hull {x | a dot x > b} =\n         if a = vec 0 /\\ b >= &0 then {} else (:real^N)
       #|  --b < &0 <=> b > &0
       #|  --b:real
       #|  --a:real^N
-      #|  !a b. affine hull {x | a dot x >= b} =\n         if a = vec 0 /\\ b > &0 then {} else (:real^N)
-      #|  !a:real^N b.\n        aff_dim {x | a dot x < b} =\n        if a = vec 0 /\\ b <= &0 then --(&1) else &(dimindex(:N))
-      #|  !a:real^N b.\n        aff_dim {x | a dot x <= b} =\n        if a = vec 0 /\\ b < &0 then --(&1) else &(dimindex(:N))
-      #|  !a:real^N b.\n        aff_dim {x | a dot x > b} =\n        if a = vec 0 /\\ b >= &0 then --(&1) else &(dimindex(:N))
-      #|  !a:real^N b.\n        aff_dim {x | a dot x >= b} =\n        if a = vec 0 /\\ b > &0 then --(&1) else &(dimindex(:N))
+      #|  forall a b. affine hull {x | a dot x >= b} =\n         if a = vec 0 /\\ b > &0 then {} else (:real^N)
+      #|  forall a:real^N b.\n        aff_dim {x | a dot x < b} =\n        if a = vec 0 /\\ b <= &0 then --(&1) else &(dimindex(:N))
+      #|  forall a:real^N b.\n        aff_dim {x | a dot x <= b} =\n        if a = vec 0 /\\ b < &0 then --(&1) else &(dimindex(:N))
+      #|  forall a:real^N b.\n        aff_dim {x | a dot x > b} =\n        if a = vec 0 /\\ b >= &0 then --(&1) else &(dimindex(:N))
+      #|  forall a:real^N b.\n        aff_dim {x | a dot x >= b} =\n        if a = vec 0 /\\ b > &0 then --(&1) else &(dimindex(:N))
       #|  t:real^N->bool
       #|  n:num
       #|  s:real^N->bool
@@ -53355,31 +53355,31 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(d:int = --(&1)) ==> (--(&1) <= d <=> &0 <= d)
       #|  {}:real^N->bool
       #|  d:int = --(&1)
-      #|  !s:real^N->bool d.\n        affine s /\\ --(&1) <= d /\\ d <= aff_dim s\n        ==> ?t. affine t /\\ t SUBSET s /\\ aff_dim t = d
+      #|  forall s:real^N->bool d.\n        affine s /\\ --(&1) <= d /\\ d <= aff_dim s\n        ==> ?t. affine t /\\ t SUBSET s /\\ aff_dim t = d
       #|  ?s:real^N->bool. subspace s /\\ dim s = m
       #|  m:num
       #|  n:int
       #|  a:real^N
-      #|  !n a:real^N.\n        &0 <= n /\\ n <= &(dimindex(:N))\n        ==> ?s. affine s /\\ a IN s /\\ aff_dim s = n
+      #|  forall n a:real^N.\n        &0 <= n /\\ n <= &(dimindex(:N))\n        ==> ?s. affine s /\\ a IN s /\\ aff_dim s = n
       #|  {}:real^N->bool
       #|  &0:int <= n
-      #|  !n. -- &1 <= n /\\ n <= &(dimindex(:N))\n       ==> ?s:real^N->bool. affine s /\\ aff_dim s = n
+      #|  forall n. -- &1 <= n /\\ n <= &(dimindex(:N))\n       ==> ?s:real^N->bool. affine s /\\ aff_dim s = n
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        aff_dim(conic hull s) =\n        if s = {} \\/ vec 0 IN affine hull s\n        then aff_dim s else aff_dim s + &1
+      #|  forall s:real^N->bool.\n        aff_dim(conic hull s) =\n        if s = {} \\/ vec 0 IN affine hull s\n        then aff_dim s else aff_dim s + &1
       #|  aff_dim(IMAGE (\\z. pastecart (a:real^M) (b:real^N) + z) (s PCROSS t))
       #|  b:real^N
       #|  a:real^M
       #|  b:real^N
       #|  a:real^M
-      #|  !s:real^M->bool t:real^N->bool.\n        ~(s = {}) /\\ ~(t = {})\n        ==> aff_dim(s PCROSS t) = aff_dim s + aff_dim t
+      #|  forall s:real^M->bool t:real^N->bool.\n        ~(s = {}) /\\ ~(t = {})\n        ==> aff_dim(s PCROSS t) = aff_dim s + aff_dim t
       #|  a:int = b - c <=> a + c = b
       #|  z:real^N
       #|  z:real^N
-      #|  !s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s INTER t = {})\n        ==> aff_dim(s UNION t) =\n            (aff_dim s + aff_dim t) - aff_dim(s INTER t)
+      #|  forall s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s INTER t = {})\n        ==> aff_dim(s UNION t) =\n            (aff_dim s + aff_dim t) - aff_dim(s INTER t)
       #|  a:int <= &1 /\\ b <= &1 /\\ &0 <= c ==> (a + b) - c <= &2
       #|  z IN affine hull {a:real^N,z,b} /\\ z IN affine hull {c,z,d}
       #|  aff_dim(affine hull {a:real^N,z,b} UNION affine hull {c,z,d})
-      #|  !a b c d z:real^N.\n        collinear {a,z,b} /\\ collinear {c,z,d} ==> coplanar {z,a,b,c,d}
+      #|  forall a b c d z:real^N.\n        collinear {a,z,b} /\\ collinear {c,z,d} ==> coplanar {z,a,b,c,d}
       #|  dist(a + x:real^N,a + y) = dist(x,y)
       #|  :real
       #|  :real
@@ -53400,10 +53400,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  t:real^N->bool
       #|  s:real^M->bool = {}
       #|  t:real^N->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t /\\ aff_dim s = aff_dim t\n        ==> ?f g. homeomorphism (s,t) (f,g) /\\\n                  (!x y. x IN s /\\ y IN s ==> dist(f x,f y) = dist(x,y)) /\\\n                  (!x y. x IN t /\\ y IN t ==> dist(g x,g y) = dist(x,y))
+      #|  forall s:real^M->bool t:real^N->bool.\n        affine s /\\ affine t /\\ aff_dim s = aff_dim t\n        ==> ?f g. homeomorphism (s,t) (f,g) /\\\n                  (forall x y. x IN s /\\ y IN s ==> dist(f x,f y) = dist(x,y)) /\\\n                  (forall x y. x IN t /\\ y IN t ==> dist(g x,g y) = dist(x,y))
       #|  j:num
       #|  i:num
-      #|  !M:real^M^N. M = M ** (P:real^M^M) ** transp P
+      #|  forall M:real^M^N. M = M ** (P:real^M^M) ** transp P
       #|  matrix(f:real^N->real^N)
       #|  f:real^N->real^N
       #|  1..dimindex(:M)
@@ -53421,7 +53421,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  transp(X:real^M^N) ** X = transp(Y:real^M^N) ** Y
       #|  (Y:real^M^N) = lambda i j. (y:real^N^M)$j$i - y$1$i
       #|  (X:real^M^N) = lambda i j. (x:real^N^M)$j$i - x$1$i
-      #|  !x:(real^N)^M y:(real^N)^M.\n          (!i j. 1 <= i /\\ i <= dimindex(:M) /\\\n                 1 <= j /\\ j <= dimindex(:M)\n                 ==> dist(x$i,x$j) = dist(y$i,y$j))\n          ==> ?a f. orthogonal_transformation f /\\\n                    !i. 1 <= i /\\ i <= dimindex(:M)\n                        ==> y$i = a + f(x$i)
+      #|  forall x:(real^N)^M y:(real^N)^M.\n          (forall i j. 1 <= i /\\ i <= dimindex(:M) /\\\n                 1 <= j /\\ j <= dimindex(:M)\n                 ==> dist(x$i,x$j) = dist(y$i,y$j))\n          ==> ?a f. orthogonal_transformation f /\\\n                    forall i. 1 <= i /\\ i <= dimindex(:M)\n                        ==> y$i = a + f(x$i)
       #|  a:real^N = b <=> dist(a:real^N,a) = dist(a,b)
       #|  :real
       #|  :real
@@ -53431,7 +53431,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a + x) - (a + y):real^N = x - y
       #|  dist(x(r(j:num)),(x:A->real^N) k)
       #|  j:num
-      #|  !z. z IN\n          affine hull IMAGE (y o (r:num->A)) (1..dimindex(:(N,1)finite_sum))\n          ==> dist(z,y k) = dist(z,a + (f:real^N->real^N)(x k))
+      #|  forall z. z IN\n          affine hull IMAGE (y o (r:num->A)) (1..dimindex(:(N,1)finite_sum))\n          ==> dist(z,y k) = dist(z,a + (f:real^N->real^N)(x k))
       #|  k:A
       #|  f:real^N->real^N
       #|  a:real^N
@@ -53454,7 +53454,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\x:real^N. x
       #|  vec 0:real^N
       #|  s:A->bool = {}
-      #|  !x:A->real^N y:A->real^N s.\n        (!i j. i IN s /\\ j IN s ==> dist(x i,x j) = dist(y i,y j))\n        ==> ?a f. orthogonal_transformation f /\\\n                  !i. i IN s ==> y i = a + f(x i)
+      #|  forall x:A->real^N y:A->real^N s.\n        (forall i j. i IN s /\\ j IN s ==> dist(x i,x j) = dist(y i,y j))\n        ==> ?a f. orthogonal_transformation f /\\\n                  forall i. i IN s ==> y i = a + f(x i)
       #|  a:real^N = b <=> dist(a:real^N,a) = dist(a,b)
       #|  :real
       #|  :real
@@ -53466,25 +53466,25 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  :real
       #|  dist(a + f(x(j:A):real^N):real^N,a + f(x i))
       #|  j:A
-      #|  !z. z IN affine hull (IMAGE (y:A->real^N) t)\n        ==> dist(z,y i) = dist(z,a + (f:real^N->real^N)(x i))
+      #|  forall z. z IN affine hull (IMAGE (y:A->real^N) t)\n        ==> dist(z,y i) = dist(z,a + (f:real^N->real^N)(x i))
       #|  i:A
       #|  f:real^N->real^N
       #|  a:real^N
       #|  t:A->bool
       #|  y:A->real^N
       #|  x:A->real^N
-      #|  !x:A->real^N y:A->real^N s t.\n        t SUBSET s /\\ affine hull (IMAGE y t) = affine hull (IMAGE y s) /\\\n        (!i j. i IN s /\\ j IN t ==> dist(x i,x j) = dist(y i,y j))\n        ==> ?a f. orthogonal_transformation f /\\\n                  !i. i IN s ==> y i = a + f(x i)
+      #|  forall x:A->real^N y:A->real^N s t.\n        t SUBSET s /\\ affine hull (IMAGE y t) = affine hull (IMAGE y s) /\\\n        (forall i j. i IN s /\\ j IN t ==> dist(x i,x j) = dist(y i,y j))\n        ==> ?a f. orthogonal_transformation f /\\\n                  forall i. i IN s ==> y i = a + f(x i)
       #|  {(a:real^N,a':real^N), (b,b'), (c,c')}
       #|  SND:real^N#real^N->real^N
       #|  FST:real^N#real^N->real^N
-      #|  !a b c a' b' c':real^N.\n        dist(a,b) = dist(a',b') /\\\n        dist(b,c) = dist(b',c') /\\\n        dist(c,a) = dist(c',a')\n        ==> ?k f. orthogonal_transformation f /\\\n                  a' = k + f a /\\ b' = k + f b /\\ c' = k + f c
+      #|  forall a b c a' b' c':real^N.\n        dist(a,b) = dist(a',b') /\\\n        dist(b,c) = dist(b',c') /\\\n        dist(c,a) = dist(c',a')\n        ==> ?k f. orthogonal_transformation f /\\\n                  a' = k + f a /\\ b' = k + f b /\\ c' = k + f c
       #|  a':real^N
       #|  b':real^N
       #|  a':real^N
       #|  a:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !a b a' b':real^N.\n        dist(a,b) = dist(a',b')\n        ==> ?k f. orthogonal_transformation f /\\\n                  a' = k + f a /\\ b' = k + f b
+      #|  forall a b a' b':real^N.\n        dist(a,b) = dist(a',b')\n        ==> ?k f. orthogonal_transformation f /\\\n                  a' = k + f a /\\ b' = k + f b
       #|  (\\v. u(v) + t * w(v)):real^N->real
       #|  s DELETE (a:real^N)
       #|  w(a:real^N) < &0
@@ -53501,7 +53501,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  i:real->bool
       #|  inf i
       #|  i = IMAGE (\\v. u(v) / --w(v)) {v:real^N | v IN s /\\ w v < &0}
-      #|  ?t. (!v:real^N. v IN s ==> u(v) + t * w(v) >= &0) /\\\n        ?a. a IN s /\\ u(a) + t * w(a) = &0
+      #|  ?t. (forall v:real^N. v IN s ==> u(v) + t * w(v) >= &0) /\\\n        ?a. a IN s /\\ u(a) + t * w(a) = &0
       #|  w:real^N->real
       #|  aff_dim(p:real^N->bool) + &1 < &n
       #|  ~(aff_dim(s:real^N->bool) = &n - &1)
@@ -53511,15 +53511,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(n = 0) ==> n - 1 < n
       #|  n - 1
       #|  n:num
-      #|  ?n s u. CARD s = n /\\\n                      FINITE s /\\ s SUBSET p /\\\n                      (!x. x IN s ==> &0 <= u x) /\\\n                      sum s u = &1 /\\ vsum s (\\v. u v % v) = (y:real^N)
-      #|  !q. (p ==> q) /\\ (q ==> r) ==> (p ==> r)
+      #|  ?n s u. CARD s = n /\\\n                      FINITE s /\\ s SUBSET p /\\\n                      (forall x. x IN s ==> &0 <= u x) /\\\n                      sum s u = &1 /\\ vsum s (\\v. u v % v) = (y:real^N)
+      #|  forall q. (p ==> q) /\\ (q ==> r) ==> (p ==> r)
       #|  y:real^N
-      #|  !p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n                          &(CARD s) <= aff_dim p + &1 /\\\n                          (!x. x IN s ==> &0 <= u x) /\\\n                          sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
-      #|  !p. convex hull p =\n        {x:real^N | ?s. FINITE s /\\ s SUBSET p /\\\n                         &(CARD s) <= aff_dim p + &1 /\\\n                        x IN convex hull s}
+      #|  forall p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n                          &(CARD s) <= aff_dim p + &1 /\\\n                          (forall x. x IN s ==> &0 <= u x) /\\\n                          sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall p. convex hull p =\n        {x:real^N | ?s. FINITE s /\\ s SUBSET p /\\\n                         &(CARD s) <= aff_dim p + &1 /\\\n                        x IN convex hull s}
       #|  a:int <= x + &1 ==> x <= y ==> a <= y + &1
       #|  y:real^N
-      #|  !p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n                          CARD(s) <= dimindex(:N) + 1 /\\\n                          (!x. x IN s ==> &0 <= u x) /\\\n                          sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
-      #|  !p. convex hull p =\n        {x:real^N | ?s. FINITE s /\\ s SUBSET p /\\\n                        CARD(s) <= dimindex(:N) + 1 /\\\n                        x IN convex hull s}
+      #|  forall p. convex hull p =\n        {y:real^N | ?s u. FINITE s /\\ s SUBSET p /\\\n                          CARD(s) <= dimindex(:N) + 1 /\\\n                          (forall x. x IN s ==> &0 <= u x) /\\\n                          sum s u = &1 /\\ vsum s (\\v. u v % v) = y}
+      #|  forall p. convex hull p =\n        {x:real^N | ?s. FINITE s /\\ s SUBSET p /\\\n                        CARD(s) <= dimindex(:N) + 1 /\\\n                        x IN convex hull s}
       #|  x:real^N
       #|  x:real^N
       #|  vsum s (\\x. (u:real^N->real) x % x)
@@ -53534,7 +53534,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  v:real^N->real
       #|  u:real^N->real
       #|  y:real^N
-      #|  (!s t:real^N->bool.\n        ~(affine_dependent(s UNION t))\n        ==> affine hull s INTER affine hull t = affine hull (s INTER t)) /\\\n   (!s t:real^N->bool.\n        ~(affine_dependent (s UNION t))\n        ==> convex hull s INTER convex hull t = convex hull (s INTER t))
+      #|  (forall s t:real^N->bool.\n        ~(affine_dependent(s UNION t))\n        ==> affine hull s INTER affine hull t = affine hull (s INTER t)) /\\\n   (forall s t:real^N->bool.\n        ~(affine_dependent (s UNION t))\n        ==> convex hull s INTER convex hull t = convex hull (s INTER t))
       #|  {f x | x IN (a INSERT s)} = (f a) INSERT {f x | x IN s}
       #|  ~(f:(real^N->bool)->bool = {})
       #|  ~affine_dependent((s UNION UNIONS f):real^N->bool)
@@ -53546,7 +53546,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {f x | x IN {}} = {}
       #|  s:(real^N->bool)->bool
       #|  s:(real^N->bool)->bool
-      #|  !s:(real^N->bool)->bool.\n        ~(affine_dependent(UNIONS s))\n        ==> affine hull (INTERS s) = INTERS {affine hull t | t IN s}
+      #|  forall s:(real^N->bool)->bool.\n        ~(affine_dependent(UNIONS s))\n        ==> affine hull (INTERS s) = INTERS {affine hull t | t IN s}
       #|  {f x | x IN (a INSERT s)} = (f a) INSERT {f x | x IN s}
       #|  ~(f:(real^N->bool)->bool = {})
       #|  ~affine_dependent((s UNION UNIONS f):real^N->bool)
@@ -53558,7 +53558,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {f x | x IN {}} = {}
       #|  s:(real^N->bool)->bool
       #|  s:(real^N->bool)->bool
-      #|  !s:(real^N->bool)->bool.\n        ~(affine_dependent(UNIONS s))\n        ==> convex hull (INTERS s) = INTERS {convex hull t | t IN s}
+      #|  forall s:(real^N->bool)->bool.\n        ~(affine_dependent(UNIONS s))\n        ==> convex hull (INTERS s) = INTERS {convex hull t | t IN s}
       #|  (u:real^N->real) c = &0
       #|  c:real^N
       #|  b:real^N = a
@@ -53568,9 +53568,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x = &0 ==> x = &1 ==> F
       #|  sum s (u:real^N->real) = &1
       #|  &0 <= x ==> (x <= &0 <=> x = &0)
-      #|  !x. x IN s ==> (u:real^N->real) x / v x <= u b / v b
+      #|  forall x. x IN s ==> (u:real^N->real) x / v x <= u b / v b
       #|  &0 < (u:real^N->real) b /\\ &0 < v b
-      #|  !b. b IN s ==> &0 < (v:real^N->real) b
+      #|  forall b. b IN s ==> &0 < (v:real^N->real) b
       #|  b:real^N
       #|  s:real^N->bool = {}
       #|  IMAGE (\\b. (u:real^N->real) b / v b) s
@@ -53594,7 +53594,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  FINITE(s:real^N->bool) /\\ CARD s <= dimindex(:N) + 1
       #|  a:real^N
       #|  (a:real^N) IN s
-      #|  !s a x:real^N.\n        a IN convex hull s /\\ x IN convex hull s\n        ==> ?b. b IN s /\\ x IN convex hull (a INSERT (s DELETE b))
+      #|  forall s a x:real^N.\n        a IN convex hull s /\\ x IN convex hull s\n        ==> ?b. b IN s /\\ x IN convex hull (a INSERT (s DELETE b))
       #|  y:real^N
       #|  y:real^N
       #|  u' + u:real^N = y <=> u = y - u'
@@ -53606,7 +53606,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  y:real^N
       #|  &0 <= (u' - v') \\/ &0 <= (v' - u')
-      #|  (!x. x IN s ==> (if x IN t then u x else &0) <=\n                    (if x IN t' then v x else &0)) \\/\n    (!x:real^N. x IN s ==> (if x IN t' then v x else &0) <=\n                           (if x IN t then u x else &0))
+      #|  (forall x. x IN s ==> (if x IN t then u x else &0) <=\n                    (if x IN t' then v x else &0)) \\/\n    (forall x:real^N. x IN s ==> (if x IN t' then v x else &0) <=\n                           (if x IN t then u x else &0))
       #|  a /\\ c /\\ (~b ==> d) ==> ~(a /\\ b /\\ c) ==> d
       #|  t SUBSET s ==> {x | x IN s /\\ x IN t} = t
       #|  (if p then a else b) % x = (if p then a % x else b % x)
@@ -53623,10 +53623,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(affine_dependent(s:real^N->bool))
       #|  a INSERT (s INTER t) = (a INSERT s) INTER (a INSERT t)
       #|  (a:real^N) IN s
-      #|  !s t t' a x:real^N.\n        ~(affine_dependent s) /\\\n        a IN convex hull s /\\\n        t SUBSET s /\\ t' SUBSET s /\\\n        x IN convex hull (a INSERT t) /\\\n        x IN convex hull (a INSERT t')\n        ==> x IN convex hull (a INSERT (t INTER t'))
-      #|  !s a:real^N.\n        a IN convex hull s\n        ==> convex hull s =\n            UNIONS {convex hull (a INSERT (s DELETE b)) |b| b IN s}
+      #|  forall s t t' a x:real^N.\n        ~(affine_dependent s) /\\\n        a IN convex hull s /\\\n        t SUBSET s /\\ t' SUBSET s /\\\n        x IN convex hull (a INSERT t) /\\\n        x IN convex hull (a INSERT t')\n        ==> x IN convex hull (a INSERT (t INTER t'))
+      #|  forall s a:real^N.\n        a IN convex hull s\n        ==> convex hull s =\n            UNIONS {convex hull (a INSERT (s DELETE b)) |b| b IN s}
       #|  s:real^N->bool
-      #|  !s a:real^N t t'.\n         ~affine_dependent s /\\\n         a IN convex hull s /\\\n         t SUBSET s /\\\n         t' SUBSET s\n         ==> (convex hull (a INSERT t)) INTER (convex hull (a INSERT t')) =\n             convex hull (a INSERT (t INTER t'))
+      #|  forall s a:real^N t t'.\n         ~affine_dependent s /\\\n         a IN convex hull s /\\\n         t SUBSET s /\\\n         t' SUBSET s\n         ==> (convex hull (a INSERT t)) INTER (convex hull (a INSERT t')) =\n             convex hull (a INSERT (t INTER t'))
       #|  (a:real^N) dot z
       #|  a:real^N
       #|  (vec 0:real^N) IN s
@@ -53639,7 +53639,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  --a + a:int = b <=> b = &0
       #|  t:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        affine s /\\ affine t /\\ t SUBSET s /\\ aff_dim t + &1 = aff_dim s\n        ==> ?a b. ~(a = vec 0) /\\ {x | a dot x = b} INTER s = t
+      #|  forall s t:real^N->bool.\n        affine s /\\ affine t /\\ t SUBSET s /\\ aff_dim t + &1 = aff_dim s\n        ==> ?a b. ~(a = vec 0) /\\ {x | a dot x = b} INTER s = t
       #|  \\s. (vec 0:real^N) IN s
       #|  (a:real^N) dot c
       #|  a + b:real = c <=> b = c - a
@@ -53652,16 +53652,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  --a:int = b - a <=> b = &0
       #|  s:real^N->bool = {}
-      #|  !s. aff_dim s = &(dimindex(:N)) - &1 <=>\n       ?a b. ~(a = vec 0) /\\ affine hull s = {x:real^N | a dot x = b}
+      #|  forall s. aff_dim s = &(dimindex(:N)) - &1 <=>\n       ?a b. ~(a = vec 0) /\\ affine hull s = {x:real^N | a dot x = b}
       #|  b:real
       #|  a:real^N
-      #|  !a b. ~(a = vec 0)\n         ==> aff_dim {x:real^N | a dot x = b} = &(dimindex(:N)) - &1
+      #|  forall a b. ~(a = vec 0)\n         ==> aff_dim {x:real^N | a dot x = b} = &(dimindex(:N)) - &1
       #|  1 <= n ==> (n <= 1 <=> n = 1)
       #|  a - &1:int <= &0 <=> a <= &1
       #|  {x | T} = UNIV
       #|  b = &0
       #|  a:real^N = vec 0
-      #|  !a b. bounded {x:real^N | a dot x = b} <=>\n         if a = vec 0 then ~(b = &0) else dimindex(:N) = 1
+      #|  forall a b. bounded {x:real^N | a dot x = b} <=>\n         if a = vec 0 then ~(b = &0) else dimindex(:N) = 1
       #|  ~(c = 0) ==> 1 <= c
       #|  c:real^N->bool
       #|  x:real^N
@@ -53679,7 +53679,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N->bool
       #|  b:real^N->bool
       #|  s:real^N->bool
-      #|  !s:real^N->bool.\n        ?f. FINITE f /\\\n            &(CARD f) + aff_dim s = &(dimindex(:N)) /\\\n            affine hull s = INTERS f /\\\n            (!h. h IN f ==> ?a b. ~(a = vec 0) /\\ h = {x | a dot x = b})
+      #|  forall s:real^N->bool.\n        ?f. FINITE f /\\\n            &(CARD f) + aff_dim s = &(dimindex(:N)) /\\\n            affine hull s = INTERS f /\\\n            (forall h. h IN f ==> ?a b. ~(a = vec 0) /\\ h = {x | a dot x = b})
       #|  vec 0:real^N
       #|  x:real^N
       #|  x:real^N
@@ -53691,7 +53691,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  subspace s /\\ span s = t ==> s = t
       #|  c + x - c:real^N = x
       #|  \\x:real^N. x - c
-      #|  !f. (!x. g(f x) = x) /\\ s = UNIV ==> IMAGE g s = UNIV
+      #|  forall f. (forall x. g(f x) = x) /\\ s = UNIV ==> IMAGE g s = UNIV
       #|  {z | ?x y. x IN s /\\ P y /\\ z = c + x + y} =\n    IMAGE (\\x. c + x) {x + y:real^N | x IN s /\\ y IN {v | P v}}
       #|  c + z:real^N = (c + x) + (c + y) <=>\n                            z = c + x + y
       #|  b dot c + a = d <=> a = d - b dot c
@@ -53700,7 +53700,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N
       #|  a /\\ b /\\ c ==> d <=> b ==> a /\\ c ==> d
       #|  a:real^N = vec 0
-      #|  !a b s.\n        affine s /\\\n        ~(s INTER {v | a dot v = b} = {}) /\\\n        ~(s DIFF {v | a dot v = b} = {})\n        ==> {x + y | x IN s /\\ y IN {v | a dot v = b}} = (:real^N)
+      #|  forall a b s.\n        affine s /\\\n        ~(s INTER {v | a dot v = b} = {}) /\\\n        ~(s DIFF {v | a dot v = b} = {})\n        ==> {x + y | x IN s /\\ y IN {v | a dot v = b}} = (:real^N)
       #|  i:int
       #|  aff_dim (s INTER {x:real^N | a dot x = b})
       #|  ~(s SUBSET t) ==> ~(s DIFF t = {})
@@ -53709,9 +53709,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {x | T} = UNIV
       #|  b = &0
       #|  a:real^N = vec 0
-      #|  !a b s:real^N->bool.\n        affine s\n        ==> aff_dim(s INTER {x | a dot x = b}) =\n                if s INTER {v | a dot v = b} = {} then -- &1\n                else if s SUBSET {v | a dot v = b} then aff_dim s\n                else aff_dim s - &1
+      #|  forall a b s:real^N->bool.\n        affine s\n        ==> aff_dim(s INTER {x | a dot x = b}) =\n                if s INTER {v | a dot v = b} = {} then -- &1\n                else if s SUBSET {v | a dot v = b} then aff_dim s\n                else aff_dim s - &1
       #|  s:real^N->bool
-      #|  !s. aff_dim s < &(dimindex(:N)) <=> ~(affine hull s = (:real^N))
+      #|  forall s. aff_dim s < &(dimindex(:N)) <=> ~(affine hull s = (:real^N))
       #|  (u:real^N) dot c
       #|  u:real^N
       #|  c:real^N
@@ -53719,12 +53719,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  c:real^N
       #|  basis 1:real^N
-      #|  !s:real^N->bool.\n        aff_dim s < &(dimindex(:N))\n        ==> ?a b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
-      #|  !a:real^N b.\n     dimindex(:N) <= 2 /\\ ~(a = vec 0) ==> collinear {x | a dot x = b}
+      #|  forall s:real^N->bool.\n        aff_dim s < &(dimindex(:N))\n        ==> ?a b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
+      #|  forall a:real^N b.\n     dimindex(:N) <= 2 /\\ ~(a = vec 0) ==> collinear {x | a dot x = b}
       #|  b:real
       #|  basis i:real^N
-      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ !x:real^N. x$k = x$i
-      #|  !k b. dimindex(:N) <= 2 ==> collinear {x:real^N | x$k = b}
+      #|  ?i. 1 <= i /\\ i <= dimindex(:N) /\\ forall x:real^N. x$k = x$i
+      #|  forall k b. dimindex(:N) <= 2 ==> collinear {x:real^N | x$k = b}
       #|  aff_dim(span{a:real^N})
       #|  x - &1:int < x
       #|  (a:real^N) IN k
@@ -53735,7 +53735,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  subtopology euclidean (s:real^N->bool)
       #|  t SUBSET s /\\ ~(s SUBSET t) ==> t PSUBSET s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool k.\n          affine s /\\ &2 <= aff_dim s /\\ COUNTABLE k /\\\n          (!a. a IN k ==> ~(s SUBSET {x | orthogonal a x}))\n          ==> UNIONS {{x | x IN s /\\ orthogonal a x} | a IN k} UNION\n              UNIONS {{x | x IN s /\\ x IN span {a}} | a IN k} PSUBSET s
+      #|  forall s:real^N->bool k.\n          affine s /\\ &2 <= aff_dim s /\\ COUNTABLE k /\\\n          (forall a. a IN k ==> ~(s SUBSET {x | orthogonal a x}))\n          ==> UNIONS {{x | x IN s /\\ orthogonal a x} | a IN k} UNION\n              UNIONS {{x | x IN s /\\ x IN span {a}} | a IN k} PSUBSET s
       #|  1 <= SUC n
       #|  ~(h(inv(norm a) % a) dot (h:real^N->real^N) x = &0)
       #|  j <= dimindex(:N)
@@ -53743,15 +53743,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  j:num
       #|  (h:real^N->real^N) x IN span(IMAGE basis (1..SUC n))
       #|  1 <= SUC n /\\ ~(SUC n <= n)
-      #|  IMAGE f b = b ==> x IN b /\\ (!y. y IN b ==> y$SUC n = &0)\n              ==> (f:real^N->real^N) x $SUC n = &0
+      #|  IMAGE f b = b ==> x IN b /\\ (forall y. y IN b ==> y$SUC n = &0)\n              ==> (f:real^N->real^N) x $SUC n = &0
       #|  x = &0 /\\ ~(y = &0) ==> ~(x + y * &1 = &0)
       #|  1 <= SUC n
       #|  i <= n ==> ~(i = SUC n)
-      #|  !j. j <= n ==> j <= dimindex(:N)
+      #|  forall j. j <= n ==> j <= dimindex(:N)
       #|  y:real^N = z ==> x = x - y + z
       #|  (f:real^N->real^N)(h(x:real^N)) =\n                      f(h x - h x$(SUC n) % basis(SUC n)) +\n                      h x$(SUC n) % basis(SUC n)
       #|  i <= n ==> ~(i = SUC n)
-      #|  !j. j <= n ==> j <= dimindex(:N)
+      #|  forall j. j <= n ==> j <= dimindex(:N)
       #|  i <= dimindex(:N)
       #|  y$i = &0 /\\ (f:real^N->real^N)(y)$i = y$i\n            ==> &0 - f(y)$i = &0
       #|  i:num
@@ -53759,8 +53759,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  i:num
       #|  x:real^N
       #|  i <= n ==> ~(i = SUC n)
-      #|  !i. i <= n ==> i <= dimindex(:N)
-      #|  IMAGE f s = u /\\ (!x. x IN t ==> f x = x)\n          ==> {(f:real^N->real^N) x + f y | x IN s /\\ y IN t} =\n              {x + y | x IN u /\\ y IN t}
+      #|  forall i. i <= n ==> i <= dimindex(:N)
+      #|  IMAGE f s = u /\\ (forall x. x IN t ==> f x = x)\n          ==> {(f:real^N->real^N) x + f y | x IN s /\\ y IN t} =\n              {x + y | x IN u /\\ y IN t}
       #|  IMAGE f {p x y | P x y} = {f(p x y) | P x y}
       #|  a INSERT s = s UNION {a}
       #|  1 <= SUC n
@@ -53779,7 +53779,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real
       #|  (h:real^N->real^N) x$(SUC n)
       #|  x:real^N
-      #|  ~(a IN IMAGE f (IMAGE g s)) <=> !x. x IN s ==> ~(f(g x) = a)
+      #|  ~(a IN IMAGE f (IMAGE g s)) <=> forall x. x IN s ==> ~(f(g x) = a)
       #|  IMAGE (\\x. x - x$(SUC n) % basis(SUC n))\n            (IMAGE (h:real^N->real^N) s)
       #|  h:real^N->real^N
       #|  1 <= SUC n
@@ -53790,7 +53790,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(p /\\ q) <=> p ==> ~q
       #|  a:real^N
       #|  t PSUBSET s ==> ?a. a IN s /\\ ~(a IN t)
-      #|  s SUBSET u /\\ (!a. a IN s ==> ~(a IN f a))\n        ==> !a. a IN s ==> ~(u SUBSET f a)
+      #|  s SUBSET u /\\ (forall a. a IN s ==> ~(a IN f a))\n        ==> forall a. a IN s ==> ~(u SUBSET f a)
       #|  MAX 1 1 = 1
       #|  s:real^N->bool
       #|  span(IMAGE basis (1..SUC n)):real^N->bool
@@ -53807,20 +53807,20 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  n:num
       #|  \\x:real^N. x
       #|  ~(1 <= i /\\ i <= 0)
-      #|  !n s:real^N->bool.\n        n <= dimindex(:N) /\\ COUNTABLE s /\\\n        s SUBSET span(IMAGE basis (1..n)) DELETE vec 0\n        ==> ?f. orthogonal_transformation f /\\\n                (!x. (!i. 1 <= i /\\ i <= n ==> x$i = &0) ==> f x = x) /\\\n                IMAGE f (span(IMAGE basis (1..n))) =\n                span(IMAGE basis (1..n)) /\\\n                !x i. x IN s /\\ 1 <= i /\\ i <= n ==> ~(f x$i = &0)
+      #|  forall n s:real^N->bool.\n        n <= dimindex(:N) /\\ COUNTABLE s /\\\n        s SUBSET span(IMAGE basis (1..n)) DELETE vec 0\n        ==> ?f. orthogonal_transformation f /\\\n                (forall x. (forall i. 1 <= i /\\ i <= n ==> x$i = &0) ==> f x = x) /\\\n                IMAGE f (span(IMAGE basis (1..n))) =\n                span(IMAGE basis (1..n)) /\\\n                forall x i. x IN s /\\ 1 <= i /\\ i <= n ==> ~(f x$i = &0)
       #|  s SUBSET t ==> s DELETE a SUBSET t DELETE a
       #|  {x - y:real^N | x IN s /\\ y IN s} DELETE (vec 0)
       #|  n:num
-      #|  !i. i <= n ==> i <= dimindex(:N)
+      #|  forall i. i <= n ==> i <= dimindex(:N)
       #|  reflect_along (basis 1:real^N) o (f:real^N->real^N)
       #|  f:real^N->real^N
-      #|  (!f. P f /\\ R f ==> ?f'. P f' /\\ Q f' /\\ R f') /\\ (?f. P f /\\ R f)\n    ==> ?f. P f /\\ Q f /\\ R f
+      #|  (forall f. P f /\\ R f ==> ?f'. P f' /\\ Q f' /\\ R f') /\\ (?f. P f /\\ R f)\n    ==> ?f. P f /\\ Q f /\\ R f
       #|  \\x:real^N. x
       #|  n = 0
-      #|  !n s:real^N->bool.\n      n <= dimindex(:N) /\\ COUNTABLE s /\\\n      s SUBSET span(IMAGE basis (1..n))\n      ==> ?f. orthogonal_transformation f /\\\n              det(matrix f) = &1 /\\\n              (!x. (!i. 1 <= i /\\ i <= n ==> x$i = &0) ==> f x = x) /\\\n              IMAGE f (span(IMAGE basis (1..n))) = span(IMAGE basis (1..n)) /\\\n              pairwise (\\x y. !i. 1 <= i /\\ i <= n ==> ~(f x$i = f y$i)) s
+      #|  forall n s:real^N->bool.\n      n <= dimindex(:N) /\\ COUNTABLE s /\\\n      s SUBSET span(IMAGE basis (1..n))\n      ==> ?f. orthogonal_transformation f /\\\n              det(matrix f) = &1 /\\\n              (forall x. (forall i. 1 <= i /\\ i <= n ==> x$i = &0) ==> f x = x) /\\\n              IMAGE f (span(IMAGE basis (1..n))) = span(IMAGE basis (1..n)) /\\\n              pairwise (\\x y. forall i. 1 <= i /\\ i <= n ==> ~(f x$i = f y$i)) s
       #|  s:real^N->bool
       #|  dimindex(:N)
-      #|  !s:real^N->bool.\n        COUNTABLE s\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                pairwise (\\x y. !i. 1 <= i /\\ i <= dimindex(:N)\n                                    ==> ~(f x$i = f y$i)) s
+      #|  forall s:real^N->bool.\n        COUNTABLE s\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                pairwise (\\x y. forall i. 1 <= i /\\ i <= dimindex(:N)\n                                    ==> ~(f x$i = f y$i)) s
       #|  norm(z - (z + a - y)) = norm(y - a)
       #|  :real
       #|  :real
@@ -53835,15 +53835,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  i:real->bool
       #|  inf i
       #|  i = IMAGE (b:real^N->real) t
-      #|  ?b. !x:real^N. x IN t ==> &0 < b(x) /\\ cball(x,b(x)) SUBSET s
+      #|  ?b. forall x:real^N. x IN t ==> &0 < b(x) /\\ cball(x,b(x)) SUBSET s
       #|  u:real^N->real
       #|  t:real^N->bool
       #|  a:real^N
-      #|  !s:real^N->bool. open s ==> open(convex hull s)
+      #|  forall s:real^N->bool. open s ==> open(convex hull s)
       #|  z:real^(1,(N,N)finite_sum)finite_sum
       #|  x:real^N
       #|  { (&1 - u) % x + u % y :real^N | &0 <= u /\\ u <= &1 /\\ x IN s /\\ y IN t} =\n    IMAGE (\\z. (&1 - drop(fstcart z)) % fstcart(sndcart z) +\n               drop(fstcart z) % sndcart(sndcart z))\n          { pastecart u w | u IN interval[vec 0,vec 1] /\\\n                            w IN { pastecart x y | x IN s /\\ y IN t} }
-      #|  !s t. compact s /\\ compact t\n         ==> compact { (&1 - u) % x + u % y :real^N |\n                      &0 <= u /\\ u <= &1 /\\ x IN s /\\ y IN t}
+      #|  forall s t. compact s /\\ compact t\n         ==> compact { (&1 - u) % x + u % y :real^N |\n                      &0 <= u /\\ u <= &1 /\\ x IN s /\\ y IN t}
       #|  CARD ((a:real^N) INSERT u) <= SUC n
       #|  u:real^N->bool
       #|  d <= &1 <=> &0 <= &1 - d
@@ -53887,9 +53887,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool = {}
       #|  n:num
       #|  dimindex(:N) + 1
-      #|  !s:real^N->bool. compact s ==> compact(convex hull s)
-      #|  !s:real^N->bool. FINITE s ==> compact(convex hull s)
-      #|  !s:real^N->bool. convex hull (interior s) SUBSET interior (convex hull s)
+      #|  forall s:real^N->bool. compact s ==> compact(convex hull s)
+      #|  forall s:real^N->bool. FINITE s ==> compact(convex hull s)
+      #|  forall s:real^N->bool. convex hull (interior s) SUBSET interior (convex hull s)
       #|  u + v = &1
       #|  b:real^N
       #|  v + w
@@ -53928,52 +53928,52 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  t:real^N->bool
       #|  t:real^N->bool
-      #|  ((!s. FINITE s ==> P s) ==> !s. P s) /\\ (!s. FINITE s ==> P s)\n    ==> !s. P s
-      #|  !a:real^N s x.\n        x IN (convex hull s) /\\ ~(x IN s)\n        ==> ?y. y IN (convex hull s) /\\ norm(x - a) < norm(y - a)
+      #|  ((forall s. FINITE s ==> P s) ==> forall s. P s) /\\ (forall s. FINITE s ==> P s)\n    ==> forall s. P s
+      #|  forall a:real^N s x.\n        x IN (convex hull s) /\\ ~(x IN s)\n        ==> ?y. y IN (convex hull s) /\\ norm(x - a) < norm(y - a)
       #|  norm(y - a:real^N) = dist(a,y)
       #|  :real
       #|  :real
       #|  ~(p /\\ q) <=> p ==> ~q
       #|  a:real^N
-      #|  !a:real^N s x.\n        x IN convex hull s /\\ ~(x IN s)\n        ==> ?y. y IN s /\\ norm(x - a) < norm(y - a)
-      #|  !a:real^N s x.\n        x IN convex hull s\n        ==> ?y. y IN s /\\ norm(x - a) <= norm(y - a)
+      #|  forall a:real^N s x.\n        x IN convex hull s /\\ ~(x IN s)\n        ==> ?y. y IN s /\\ norm(x - a) < norm(y - a)
+      #|  forall a:real^N s x.\n        x IN convex hull s\n        ==> ?y. y IN s /\\ norm(x - a) <= norm(y - a)
       #|  a:real^N
       #|  convex hull (s:real^N->bool)
-      #|  !a:real^N s.\n        FINITE s /\\ ~(s = {})\n        ==> ?y. y IN s /\\\n                !x. x IN (convex hull s) ==> norm(x - a) <= norm(y - a)
+      #|  forall a:real^N s.\n        FINITE s /\\ ~(s = {})\n        ==> ?y. y IN s /\\\n                forall x. x IN (convex hull s) ==> norm(x - a) <= norm(y - a)
       #|  convex hull (s:real^N->bool)
-      #|  !s:real^N->bool.\n        FINITE s /\\ ~(s = {})\n         ==> ?u v. u IN s /\\ v IN s /\\\n                   !x y. x IN convex hull s /\\ y IN convex hull s\n                         ==> norm(x - y) <= norm(u - v)
-      #|  !s:real^N->bool x y. FINITE s /\\ x IN convex hull s /\\ y IN convex hull s\n                        ==> ?u v. u IN s /\\ v IN s /\\\n                                  norm(x - y) <= norm(u - v)
+      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {})\n         ==> ?u v. u IN s /\\ v IN s /\\\n                   forall x y. x IN convex hull s /\\ y IN convex hull s\n                         ==> norm(x - y) <= norm(u - v)
+      #|  forall s:real^N->bool x y. FINITE s /\\ x IN convex hull s /\\ y IN convex hull s\n                        ==> ?u v. u IN s /\\ v IN s /\\\n                                  norm(x - y) <= norm(u - v)
       #|  &0 < y /\\ x <= y ==> x < y + y
       #|  &0 < z dot (z:real^N)
       #|  (y dot (z:real^N)) / (z dot z)
       #|  (z:real^N) dot y = y dot z
       #|  (a - b) - (c - d) < d <=> a < b + c
-      #|  !y:real^N z.\n        y dot z > &0\n        ==> ?u. &0 < u /\\\n                !v. &0 < v /\\ v <= u ==> norm(v % z - y) < norm y
+      #|  forall y:real^N z.\n        y dot z > &0\n        ==> ?u. &0 < u /\\\n                forall v. &0 < v /\\ v <= u ==> norm(v % z - y) < norm y
       #|  min u (&1)
       #|  u:real
       #|  (y - (x + z)) dot (y - (x + z)) = (z - (y - x)) dot (z - (y - x))
-      #|  !x y z. (y - x) dot (z - x) > &0\n           ==> ?u. &0 < u /\\ u <= &1 /\\ dist(x + u % (z - x),y) < dist(x,y)
+      #|  forall x y z. (y - x) dot (z - x) > &0\n           ==> ?u. &0 < u /\\ u <= &1 /\\ dist(x + u % (z - x),y) < dist(x,y)
       #|  x + u % (y - x) = (&1 - u) % x + u % y
       #|  u:real
       #|  x <= &0 <=> ~(x > &0)
-      #|  !s a x y:real^N.\n        convex s /\\ closed s /\\ x IN s /\\ y IN s /\\\n        (!z. z IN s ==> dist(a,x) <= dist(a,z))\n        ==> (a - x) dot (y - x) <= &0
+      #|  forall s a x y:real^N.\n        convex s /\\ closed s /\\ x IN s /\\ y IN s /\\\n        (forall z. z IN s ==> dist(a,x) <= dist(a,z))\n        ==> (a - x) dot (y - x) <= &0
       #|  (a - x:real^N) dot (y - x) <= &0 /\\ (a - y) dot (x - y) <= &0
-      #|  !s a x y:real^N.\n        convex s /\\ closed s /\\ x IN s /\\ y IN s /\\\n        (!z. z IN s ==> dist(a,x) <= dist(a,z)) /\\\n        (!z. z IN s ==> dist(a,y) <= dist(a,z))\n        ==> x = y
+      #|  forall s a x y:real^N.\n        convex s /\\ closed s /\\ x IN s /\\ y IN s /\\\n        (forall z. z IN s ==> dist(a,x) <= dist(a,z)) /\\\n        (forall z. z IN s ==> dist(a,y) <= dist(a,z))\n        ==> x = y
       #|  a:real^N
       #|  s:real^N->bool
-      #|  !s a x:real^N.\n        convex s /\\ closed s /\\ x IN s /\\\n        (!z. z IN s ==> dist(a,x) <= dist(a,z))\n        ==> x = closest_point s a
+      #|  forall s a x:real^N.\n        convex s /\\ closed s /\\ x IN s /\\\n        (forall z. z IN s ==> dist(a,x) <= dist(a,z))\n        ==> x = closest_point s a
       #|  s:real^N->bool
-      #|  !s a x:real^N.\n        convex s /\\ closed s /\\ x IN s\n        ==> (a - closest_point s a) dot (x - closest_point s a) <= &0
-      #|  !s a x. convex s /\\ closed s /\\ x IN s /\\ ~(x = closest_point s a)\n           ==> dist(a,closest_point s a) < dist(a,x)
+      #|  forall s a x:real^N.\n        convex s /\\ closed s /\\ x IN s\n        ==> (a - closest_point s a) dot (x - closest_point s a) <= &0
+      #|  forall s a x. convex s /\\ closed s /\\ x IN s /\\ ~(x = closest_point s a)\n           ==> dist(a,closest_point s a) < dist(a,x)
       #|  (x - closest_point s x :real^N) - (y - closest_point s y)
       #|  s:real^N->bool
       #|  (x - closest_point s x :real^N) dot\n    (closest_point s y - closest_point s x) <= &0 /\\\n    (y - closest_point s y) dot\n    (closest_point s x - closest_point s y) <= &0
-      #|  !s x y:real^N.\n        convex s /\\ closed s /\\ ~(s = {})\n        ==> dist(closest_point s x,closest_point s y) <= dist(x,y)
-      #|  !s x. convex s /\\ closed s /\\ ~(s = {})\n         ==> (closest_point s) continuous (at x)
-      #|  !s t. convex s /\\ closed s /\\ ~(s = {})\n         ==> (closest_point s) continuous_on t
+      #|  forall s x y:real^N.\n        convex s /\\ closed s /\\ ~(s = {})\n        ==> dist(closest_point s x,closest_point s y) <= dist(x,y)
+      #|  forall s x. convex s /\\ closed s /\\ ~(s = {})\n         ==> (closest_point s) continuous (at x)
+      #|  forall s t. convex s /\\ closed s /\\ ~(s = {})\n         ==> (closest_point s) continuous_on t
       #|  dist(x:real^N,closest_point s x) <= dist(x,y)
       #|  closest_point s (x:real^N)
-      #|  !s a:real^N.\n     convex s /\\ closed s /\\ ~(s = {})\n     ==> closest_point (IMAGE (\\x. a + x) s) (a + x) =\n         a + closest_point s x
+      #|  forall s a:real^N.\n     convex s /\\ closed s /\\ ~(s = {})\n     ==> closest_point (IMAGE (\\x. a + x) s) (a + x) =\n         a + closest_point s x
       #|  :real
       #|  :real
       #|  ~(x = &0) ==> x < &2 * abs x
@@ -53981,30 +53981,30 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N = vec 0
       #|  a <= a - y - (y - x) <=> &2 * y <= x
       #|  b:real^N
-      #|  !s a b:real^N.\n        affine s /\\ b IN s /\\ (!x. x IN s ==> dist(a,b) <= dist(a,x))\n        ==> (!x. x IN s ==> orthogonal (x - b) (a - b))
+      #|  forall s a b:real^N.\n        affine s /\\ b IN s /\\ (forall x. x IN s ==> dist(a,b) <= dist(a,x))\n        ==> (forall x. x IN s ==> orthogonal (x - b) (a - b))
       #|  vec 0 + (a dot x) / (x dot x) % (x - vec 0:real^N)
       #|  vec 0 + (a dot x) / (x dot x) % (x - vec 0:real^N)
       #|  vec 0 + (a dot x) / (x dot x) % (x - vec 0:real^N)
       #|  vec 0 + --((a dot x) / (x dot x)) % (x - vec 0:real^N)
       #|  a <= a - &0 - (&0 - x) <=> &0 <= x
       #|  b:real^N
-      #|  !s a b:real^N.\n        b IN s /\\ (!x. x IN s ==> orthogonal (x - b) (a - b))\n        ==> (!x. x IN s ==> dist(a,b) <= dist(a,x))
-      #|  !s a:real^N x.\n        affine s /\\ ~(s = {}) /\\ x IN s\n        ==> orthogonal (x - closest_point s a) (a - closest_point s a)
-      #|  !s a b:real^N.\n        affine s /\\ b IN s\n        ==> (closest_point s a = b <=>\n             !x. x IN s ==> orthogonal (x - b) (a - b))
+      #|  forall s a b:real^N.\n        b IN s /\\ (forall x. x IN s ==> orthogonal (x - b) (a - b))\n        ==> (forall x. x IN s ==> dist(a,b) <= dist(a,x))
+      #|  forall s a:real^N x.\n        affine s /\\ ~(s = {}) /\\ x IN s\n        ==> orthogonal (x - closest_point s a) (a - closest_point s a)
+      #|  forall s a b:real^N.\n        affine s /\\ b IN s\n        ==> (closest_point s a = b <=>\n             forall x. x IN s ==> orthogonal (x - b) (a - b))
       #|  x - b:real^N
       #|  b + x:real^N
       #|  x:real^N
       #|  (b:real^N) IN s
-      #|  !s a b:real^N.\n         subspace s\n         ==> (closest_point s a = b <=>\n              b IN s /\\ (!x. x IN s ==> orthogonal (a - b) x))
-      #|  !s a b:real^N.\n        subspace s /\\ b IN s ==> orthogonal (a - closest_point s a) b
+      #|  forall s a b:real^N.\n         subspace s\n         ==> (closest_point s a = b <=>\n              b IN s /\\ (forall x. x IN s ==> orthogonal (a - b) x))
+      #|  forall s a b:real^N.\n        subspace s /\\ b IN s ==> orthogonal (a - closest_point s a) b
       #|  (x + y) - (a + b):real^N = (x - a) + (y - b)
-      #|  !s:real^N->bool. subspace s ==> linear(closest_point s)
+      #|  forall s:real^N->bool. subspace s ==> linear(closest_point s)
       #|  p ==> (p <=> q /\\ r) ==> q
       #|  closest_point(s:real^N->bool)
-      #|  !s:real^N->bool.\n        subspace s ==> adjoint(closest_point s) = closest_point s
+      #|  forall s:real^N->bool.\n        subspace s ==> adjoint(closest_point s) = closest_point s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        closed s ==> closest_point s o closest_point s = closest_point s
-      #|  (!A:real^M^N. A ** matrix_inv A =\n                 matrix(closest_point (IMAGE (\\x. A ** x) UNIV))) /\\\n   (!A:real^M^N x. (A ** matrix_inv A) ** x =\n                  closest_point (IMAGE (\\x. A ** x) UNIV) x)
+      #|  forall s:real^N->bool.\n        closed s ==> closest_point s o closest_point s = closest_point s
+      #|  (forall A:real^M^N. A ** matrix_inv A =\n                 matrix(closest_point (IMAGE (\\x. A ** x) UNIV))) /\\\n   (forall A:real^M^N x. (A ** matrix_inv A) ** x =\n                  closest_point (IMAGE (\\x. A ** x) UNIV) x)
       #|  x:real^N
       #|  v:real^N
       #|  u:real^N
@@ -54020,7 +54020,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d:real^N = u - v
       #|  vec 0:real^N
       #|  {x - y:real^N | x IN s /\\ y IN t}
-      #|  ?u v. u IN s /\\ v IN t /\\\n          !x y:real^N. x IN s /\\ y IN t ==> dist(u,v) <= dist(x,y)
+      #|  ?u v. u IN s /\\ v IN t /\\\n          forall x y:real^N. x IN s /\\ y IN t ==> dist(u,v) <= dist(x,y)
       #|  --c:real
       #|  --b:real
       #|  --a:real^N
@@ -54031,26 +54031,26 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|   c:real
       #|  b:real
       #|  a:real^N
-      #|  !s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b c. ~(a = vec 0) /\\ ~(b = c) /\\\n                    (!x. x IN s ==> a dot x = b) /\\\n                    (!x. x IN t ==> a dot x = c)
-      #|  !s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b c. ~(a = vec 0) /\\ b < c /\\\n                    (!x. x IN s ==> a dot x = b) /\\\n                    (!x. x IN t ==> a dot x = c)
+      #|  forall s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b c. ~(a = vec 0) /\\ ~(b = c) /\\\n                    (forall x. x IN s ==> a dot x = b) /\\\n                    (forall x. x IN t ==> a dot x = c)
+      #|  forall s t:real^N->bool.\n        affine s /\\ affine t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b c. ~(a = vec 0) /\\ b < c /\\\n                    (forall x. x IN s ==> a dot x = b) /\\\n                    (forall x. x IN t ==> a dot x = c)
       #|  affine hull t:real^N->bool
       #|  affine hull s:real^N->bool
-      #|  !s t:real^N->bool.\n        ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT (affine hull s) (affine hull t)\n        ==> ?a b c. ~(a = vec 0) /\\ b < c /\\\n                    (!x. x IN s ==> a dot x = b) /\\\n                    (!x. x IN t ==> a dot x = c)
+      #|  forall s t:real^N->bool.\n        ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT (affine hull s) (affine hull t)\n        ==> ?a b c. ~(a = vec 0) /\\ b < c /\\\n                    (forall x. x IN s ==> a dot x = b) /\\\n                    (forall x. x IN t ==> a dot x = c)
       #|  (\\x:real^N. a dot (x - c)) = (\\x. a dot x) o (\\x. x - c)
       #|  s:real^N->bool
       #|  \\x:real^N. a dot (x - c)
-      #|  !a c s:real^N->bool.\n        compact s /\\ ~(s = {})\n        ==> ?b y. y IN s /\\ a dot (y - c) = b /\\\n                  (!x. x IN s ==> a dot (x - c) <= b)
+      #|  forall a c s:real^N->bool.\n        compact s /\\ ~(s = {})\n        ==> ?b y. y IN s /\\ a dot (y - c) = b /\\\n                  (forall x. x IN s ==> a dot (x - c) <= b)
       #|  x >= -- b <=> --x <= b
       #|  b:real
       #|  s:real^N->bool
       #|  c:real^N
       #|  --a:real^N
-      #|  !a c s:real^N->bool.\n        compact s /\\ ~(s = {})\n        ==> ?b y. y IN s /\\ a dot (y - c) = b /\\\n                  (!x. x IN s ==> a dot (x - c) >= b)
+      #|  forall a c s:real^N->bool.\n        compact s /\\ ~(s = {})\n        ==> ?b y. y IN s /\\ a dot (y - c) = b /\\\n                  (forall x. x IN s ==> a dot (x - c) >= b)
       #|  --b:real
       #|  y + u % (x - y) = (&1 - u) % y + u % x
       #|  (a - b) dot x - (a - b) dot y = (b - a) dot (y - x)
       #|  x < y <=> y - x > &0
-      #|  !u. &0 <= u /\\ u <= &1 ==> dist(z:real^N,y) <= dist(z,(&1 - u) % y + u % x)
+      #|  forall u. &0 <= u /\\ u <= &1 ==> dist(z:real^N,y) <= dist(z,(&1 - u) % y + u % x)
       #|  x:real^N
       #|  y:real^N
       #|  (y - z:real^N) dot y
@@ -54058,7 +54058,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  z:real^N
       #|  s:real^N->bool
-      #|  !s z:real^N. convex s /\\ closed s /\\ ~(s = {}) /\\ ~(z IN s)\n                ==> ?a b y. a dot z < b /\\ y IN s /\\ (a dot y = b) /\\\n                            (!x. x IN s ==> a dot x >= b)
+      #|  forall s z:real^N. convex s /\\ closed s /\\ ~(s = {}) /\\ ~(z IN s)\n                ==> ?a b y. a dot z < b /\\ y IN s /\\ (a dot y = b) /\\\n                            (forall x. x IN s ==> a dot x >= b)
       #|  y + u % (x - y) = (&1 - u) % y + u % x
       #|  ~(--x > &0) /\\ &0 < y ==> &0 < &2 * x + y
       #|  ((y - z) dot x - (y - z) dot z) * &2 - (y - z) dot (y - z) =\n    &2 * ((y - z) dot (x - y)) + (y - z) dot (y - z)
@@ -54070,18 +54070,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  z:real^N
       #|  s:real^N->bool
-      #|  !s z:real^N. convex s /\\ closed s /\\ ~(s = {}) /\\ ~(z IN s)\n                ==> ?a b. a IN s /\\\n                          (a - z) dot z < b /\\\n                          (!x. x IN s ==> (a - z) dot x > b)
-      #|  !s:real^N->bool.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> ?a b. a IN s /\\ ~(a = vec 0) /\\ &0 < b /\\\n                  (!x. x IN s ==> a dot x > b)
+      #|  forall s z:real^N. convex s /\\ closed s /\\ ~(s = {}) /\\ ~(z IN s)\n                ==> ?a b. a IN s /\\\n                          (a - z) dot z < b /\\\n                          (forall x. x IN s ==> (a - z) dot x > b)
+      #|  forall s:real^N->bool.\n        convex s /\\ closed s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> ?a b. a IN s /\\ ~(a = vec 0) /\\ &0 < b /\\\n                  (forall x. x IN s ==> a dot x > b)
       #|  &0 <= x ==> --x < &1
       #|  &1
       #|  --z:real^N
       #|  s:real^N->bool = {}
-      #|  !s z:real^N. convex s /\\ closed s /\\ ~(z IN s)\n                ==> ?a b. a dot z < b /\\ (!x. x IN s ==> a dot x > b)
+      #|  forall s z:real^N. convex s /\\ closed s /\\ ~(z IN s)\n                ==> ?a b. a dot z < b /\\ (forall x. x IN s ==> a dot x > b)
       #|  &1
       #|  basis 1:real^N
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s /\\ closed s /\\ ~(vec 0 IN s)\n        ==> ?a b. ~(a = vec 0) /\\ &0 < b /\\ (!x. x IN s ==> a dot x > b)
-      #|  !b. (b2 + b2 = b) /\\ b + ay < ax ==> ~(ay <= k - b2) ==> k + b2 < ax
+      #|  forall s:real^N->bool.\n        convex s /\\ closed s /\\ ~(vec 0 IN s)\n        ==> ?a b. ~(a = vec 0) /\\ &0 < b /\\ (forall x. x IN s ==> a dot x > b)
+      #|  forall b. (b2 + b2 = b) /\\ b + ay < ax ==> ~(ay <= k - b2) ==> k + b2 < ax
       #|  y:real^N
       #|  k <= k - b2 <=> ~(&0 < b2)
       #|  k - b / &2
@@ -54102,14 +54102,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ?z:real^N. norm(z) = b + &1
       #|  b:real
       #|  s:real^N->bool = {}
-      #|  !s t. convex s /\\ closed s /\\\n         convex t /\\ compact t /\\ ~(t = {}) /\\ DISJOINT s t\n         ==> ?a:real^N b. (!x. x IN s ==> a dot x < b) /\\\n                          (!x. x IN t ==> a dot x > b)
+      #|  forall s t. convex s /\\ closed s /\\\n         convex t /\\ compact t /\\ ~(t = {}) /\\ DISJOINT s t\n         ==> ?a:real^N b. (forall x. x IN s ==> a dot x < b) /\\\n                          (forall x. x IN t ==> a dot x > b)
       #|  --b:real
       #|  --a:real^N
       #|  b:real
       #|  a:real^N
       #|  s:real^N->bool
       #|  t:real^N->bool
-      #|  !s t. convex s /\\ compact s /\\ ~(s = {}) /\\\n         convex t /\\ closed t /\\ DISJOINT s t\n         ==> ?a:real^N b. (!x. x IN s ==> a dot x < b) /\\\n                          (!x. x IN t ==> a dot x > b)
+      #|  forall s t. convex s /\\ compact s /\\ ~(s = {}) /\\\n         convex t /\\ closed t /\\ DISJOINT s t\n         ==> ?a:real^N b. (forall x. x IN s ==> a dot x < b) /\\\n                          (forall x. x IN t ==> a dot x > b)
       #|  a:real^N = vec 0
       #|  t:real^N->bool
       #|  s:real^N->bool
@@ -54117,7 +54117,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  bounded(IMAGE (\\x:real^N. lift(basis 1 dot x)) s)
       #|  basis 1:real^N
       #|  t:real^N->bool = {}
-      #|  !s t:real^N->bool.\n           convex s /\\ compact s /\\ ~(s = {}) /\\\n           convex t /\\ closed t /\\ DISJOINT s t\n           ==> ?a b. ~(a = vec 0) /\\\n                     (!x. x IN s ==> a dot x < b) /\\\n                     (!x. x IN t ==> a dot x > b)
+      #|  forall s t:real^N->bool.\n           convex s /\\ compact s /\\ ~(s = {}) /\\\n           convex t /\\ closed t /\\ DISJOINT s t\n           ==> ?a b. ~(a = vec 0) /\\\n                     (forall x. x IN s ==> a dot x < b) /\\\n                     (forall x. x IN t ==> a dot x > b)
       #|  abs x < b ==> x < b
       #|  --x > --y <=> x < y
       #|  --b:real
@@ -54125,7 +54125,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  bounded(IMAGE (\\x:real^N. lift(basis 1 dot x)) t)
       #|  --basis 1:real^N
       #|  s:real^N->bool = {}
-      #|  !s t:real^N->bool.\n           convex s /\\ compact s /\\ convex t /\\ compact t /\\ DISJOINT s t\n           ==> ?a b. ~(a = vec 0) /\\\n                     (!x. x IN s ==> a dot x < b) /\\\n                     (!x. x IN t ==> a dot x > b)
+      #|  forall s t:real^N->bool.\n           convex s /\\ compact s /\\ convex t /\\ compact t /\\ DISJOINT s t\n           ==> ?a b. ~(a = vec 0) /\\\n                     (forall x. x IN s ==> a dot x < b) /\\\n                     (forall x. x IN t ==> a dot x > b)
       #|  (a:real^N) IN s
       #|  inv(norm(a)) % a:real^N
       #|  b:real
@@ -54139,22 +54139,22 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(&1 = &0)
       #|  ~((span s INTER frontier(cball(vec 0:real^N,&1))) INTER\n      (INTERS (IMAGE k (s:real^N->bool))) = {})
       #|  k = \\c:real^N. {x | &0 <= c dot x}
-      #|  !s:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> ?a b. a IN span s /\\ ~(a = vec 0) /\\\n                  !x. x IN s ==> &0 <= a dot x
+      #|  forall s:real^N->bool.\n        convex s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> ?a b. a IN span s /\\ ~(a = vec 0) /\\\n                  forall x. x IN s ==> &0 <= a dot x
       #|  x >= y <=> &0 <= x - y
       #|  (a:real^N) dot z
       #|  --x + y:real^N = y - x
       #|  a:real^N
       #|  vec 0:real^N = --z + x <=> x = z
       #|  IMAGE (\\x:real^N. --z + x) s
-      #|  !s z:real^N.\n        convex s /\\ ~(s = {}) /\\ ~(z IN s)\n        ==> ?a b. (z + a) IN affine hull (z INSERT s) /\\ ~(a = vec 0) /\\\n                  a dot z <= b /\\ (!x. x IN s ==> a dot x >= b)
+      #|  forall s z:real^N.\n        convex s /\\ ~(s = {}) /\\ ~(z IN s)\n        ==> ?a b. (z + a) IN affine hull (z INSERT s) /\\ ~(a = vec 0) /\\\n                  a dot z <= b /\\ (forall x. x IN s ==> a dot x >= b)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s /\\ ~(vec 0 IN s)\n        ==> ?a. ~(a = vec 0) /\\ !x. x IN s ==> &0 <= a dot x
+      #|  forall s:real^N->bool.\n        convex s /\\ ~(vec 0 IN s)\n        ==> ?a. ~(a = vec 0) /\\ forall x. x IN s ==> &0 <= a dot x
       #|  k = sup (IMAGE (\\x:real^N. a dot x) s)
       #|  IMAGE (\\x:real^N. a dot x) s
       #|  a:real^N
       #|  {y - x:real^N | y IN t /\\ x IN s}
-      #|  !s t. convex s /\\ convex t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n         ==> ?a:real^N b. ~(a = vec 0) /\\\n                          (!x. x IN s ==> a dot x <= b) /\\\n                          (!x. x IN t ==> a dot x >= b)
-      #|  s SUBSET UNIV DIFF t <=> !x. x IN t ==> ~(x IN s)
+      #|  forall s t. convex s /\\ convex t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n         ==> ?a:real^N b. ~(a = vec 0) /\\\n                          (forall x. x IN s ==> a dot x <= b) /\\\n                          (forall x. x IN t ==> a dot x >= b)
+      #|  s SUBSET UNIV DIFF t <=> forall x. x IN t ==> ~(x IN s)
       #|  (:real^N) DIFF s
       #|  a INSERT {x:real^N | ~(v dot x <= d)}
       #|  d:real
@@ -54164,11 +54164,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a:real^N) IN s
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s c:real^N->bool.\n        convex s /\\ c IN components((:real^N) DIFF s) ==> ~bounded c
+      #|  forall s c:real^N->bool.\n        convex s /\\ c IN components((:real^N) DIFF s) ==> ~bounded c
       #|  k:real^N->bool
       #|  UNIV DIFF s = {} <=> s = UNIV
       #|  (:real^N) DIFF c
-      #|  !c. convex c /\\ ~(c = (:real^N)) ==> ~bounded((:real^N) DIFF c)
+      #|  forall c. convex c /\\ ~(c = (:real^N)) ==> ~bounded((:real^N) DIFF c)
       #|  ~(a < b) <=> a >= b
       #|  {x | P x} SUBSET UNIV DIFF s <=> s SUBSET {x | ~P x}
       #|  (:real^N) DIFF s
@@ -54181,7 +54181,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  z:real^N
       #|  s:real^N->bool = {}
-      #|  !s c. convex s /\\ c IN components((:real^N) DIFF s)\n         ==> ?a b. ~(a = vec 0) /\\ {x | a dot x <= b} SUBSET c
+      #|  forall s c. convex s /\\ c IN components((:real^N) DIFF s)\n         ==> ?a b. ~(a = vec 0) /\\ {x | a dot x <= b} SUBSET c
       #|  {x | f x <= min a b} SUBSET {x | f x <= a} /\\\n    {x | f x <= min a b} SUBSET {x | f x <= b} /\\\n    ~({x | f x <= min a b} = {})\n    ==> ~DISJOINT {x | f x <= a} {x | f x <= b}
       #|  DISJOINT {x:real^N | a2 dot x <= b2} {x | a3 dot x <= b3}
       #|  DISJOINT {x:real^N | a1 dot x <= b1} {x | a2 dot x <= b2}
@@ -54222,7 +54222,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x <= 2 <=> ~(3 <= x)
       #|  convex(s:real^N->bool)
       #|  s:real^N->bool
-      #|  (!s. convex s ==> CARD(components((:real^N) DIFF s)) <= 2) /\\\n   (!s. convex s ==> FINITE(components((:real^N) DIFF s)))
+      #|  (forall s. convex s ==> CARD(components((:real^N) DIFF s)) <= 2) /\\\n   (forall s. convex s ==> FINITE(components((:real^N) DIFF s)))
       #|  c1:real^N->bool
       #|  c3:real^N->bool
       #|  c3:real^N->bool
@@ -54239,7 +54239,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  y:real^N
       #|  x:real^N
-      #|  !s:real^N->bool. convex s ==> convex(closure s)
+      #|  forall s:real^N->bool. convex s ==> convex(closure s)
       #|  y - (z + (&1 - u) % (y - x)) =\n                                ((&1 - u) % x + u % y) - z:real^N
       #|  x - (z - u % (y - x)) =\n                                ((&1 - u) % x + u % y) - z:real^N
       #|  z:real^N =\n   (&1 - u) % (z - u % (y - x)) + u % (z + (&1 - u) % (y - x))
@@ -54247,9 +54247,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  min d e
       #|  e:real
       #|  d:real
-      #|  !s:real^N->bool. convex s ==> convex(interior s)
-      #|  !s:real^N->bool. convex hull (closure s) SUBSET closure(convex hull s)
-      #|  !s. bounded s ==> convex hull (closure s) = closure(convex hull s)
+      #|  forall s:real^N->bool. convex s ==> convex(interior s)
+      #|  forall s:real^N->bool. convex hull (closure s) SUBSET closure(convex hull s)
+      #|  forall s. bounded s ==> convex hull (closure s) = closure(convex hull s)
       #|  z:real^N
       #|  closure s:real^N->bool
       #|  a dot x >= b <=> x IN {x | a dot x >= b}
@@ -54261,7 +54261,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  {z:real^N}
       #|  (z:real^N) IN closure s
-      #|  !s z:real^N.\n        convex s /\\ ~(s = {}) /\\ ~(z IN s)\n        ==> ?a b y. ~(a = vec 0) /\\\n                    a dot z <= b /\\\n                    y IN closure s /\\\n                    a dot y = b /\\\n                    !x. x IN closure s ==> a dot x >= b
+      #|  forall s z:real^N.\n        convex s /\\ ~(s = {}) /\\ ~(z IN s)\n        ==> ?a b y. ~(a = vec 0) /\\\n                    a dot z <= b /\\\n                    y IN closure s /\\\n                    a dot y = b /\\\n                    forall x. x IN closure s ==> a dot x >= b
       #|  norm(a - a':real^N) + norm(b - b') <= r\n      ==> norm((a + b) - (a' + b')) <= r
       #|  :real
       #|  :real
@@ -54279,16 +54279,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  t:real^N->bool = {}
       #|  closure t:real^N->bool
       #|  s:real^N->bool
-      #|  !s t:real^N->bool. convex t /\\ closed t\n                       ==> (\\x. setdist ({x},t)) convex_on s
-      #|  !s t:real^N->bool. convex t ==> (\\x. setdist ({x},t)) convex_on s
+      #|  forall s t:real^N->bool. convex t /\\ closed t\n                       ==> (\\x. setdist ({x},t)) convex_on s
+      #|  forall s t:real^N->bool. convex t ==> (\\x. setdist ({x},t)) convex_on s
       #|  a + x:real^N = y <=> x = y - a
-      #|  !a:real^N s.\n       convex hull (IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (convex hull s)
+      #|  forall a:real^N s.\n       convex hull (IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (convex hull s)
       #|  inv c % x:real^N
       #|  x:real^N
       #|  c % x = c % y <=> c % (x - y) = vec 0
       #|  c = &0
-      #|  !s:real^N->bool c.\n       convex hull (IMAGE (\\x. c % x) s) = IMAGE (\\x. c % x) (convex hull s)
-      #|  !s a:real^N c.\n        convex hull (IMAGE (\\x. c % x + a) s) =\n        IMAGE (\\x. c % x + a) (convex hull s)
+      #|  forall s:real^N->bool c.\n       convex hull (IMAGE (\\x. c % x) s) = IMAGE (\\x. c % x) (convex hull s)
+      #|  forall s a:real^N c.\n        convex hull (IMAGE (\\x. c % x + a) s) =\n        IMAGE (\\x. c % x + a) (convex hull s)
       #|  a > b ==> b <= a
       #|  --b:real
       #|  --a:real^N
@@ -54297,36 +54297,36 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  s:real^N->bool
       #|  (~p ==> F) ==> p
-      #|  (!t. (P t /\\ ?a b. t = x a b) ==> Q t) <=>\n                       (!a b. P(x a b) ==> Q(x a b))
+      #|  (forall t. (P t /\\ ?a b. t = x a b) ==> Q t) <=>\n                       (forall a b. P(x a b) ==> Q(x a b))
       #|  x:real^N
-      #|  !s. closed(s:real^N->bool) /\\ convex s\n       ==> s = INTERS {h | s SUBSET h /\\ ?a b. h = {x | a dot x <= b}}
-      #|  polar_dual s = {x:real^N | !u. u IN s ==> u dot x >= -- &1}
-      #|  !s:real^N->bool.\n        polar_dual s = INTERS {{x | u dot x >= -- &1} | u IN s}
-      #|  !s:real^N->bool. closed(polar_dual s)
-      #|  !s:real^N->bool. convex(polar_dual s)
-      #|  !s:real^N->bool. vec 0 IN polar_dual s
+      #|  forall s. closed(s:real^N->bool) /\\ convex s\n       ==> s = INTERS {h | s SUBSET h /\\ ?a b. h = {x | a dot x <= b}}
+      #|  polar_dual s = {x:real^N | forall u. u IN s ==> u dot x >= -- &1}
+      #|  forall s:real^N->bool.\n        polar_dual s = INTERS {{x | u dot x >= -- &1} | u IN s}
+      #|  forall s:real^N->bool. closed(polar_dual s)
+      #|  forall s:real^N->bool. convex(polar_dual s)
+      #|  forall s:real^N->bool. vec 0 IN polar_dual s
       #|  polar_dual {} = (:real^N)
       #|  polar_dual {vec 0} = (:real^N)
       #|  ~(--x * y >= --a) <=> a < x * y
       #|  --(&2 / (x dot x)) % x:real^N
       #|  x:real^N
       #|  polar_dual (:real^N) = {vec 0}
-      #|  !s t:real^N->bool.\n        s SUBSET t ==> polar_dual t SUBSET polar_dual s
-      #|  !s t:real^N->bool. polar_dual(s UNION t) = polar_dual s INTER polar_dual t
+      #|  forall s t:real^N->bool.\n        s SUBSET t ==> polar_dual t SUBSET polar_dual s
+      #|  forall s t:real^N->bool. polar_dual(s UNION t) = polar_dual s INTER polar_dual t
       #|  ~(a = &0) ==> inv a * a * b = b
       #|  a % y:real^N
       #|  y:real^N
-      #|  !a s:real^N->bool.\n        ~(a = &0)\n        ==> polar_dual {a % x | x IN s} = {inv a % x | x IN polar_dual s}
+      #|  forall a s:real^N->bool.\n        ~(a = &0)\n        ==> polar_dual {a % x | x IN s} = {inv a % x | x IN polar_dual s}
       #|  y <= u * x /\\ (u <= &1 /\\ x <= &1 ==> u * x <= &1 * &1)\n      ==> x <= &1 ==> u <= &1 ==> y <= &1
       #|  ~(x = &0) ==> inv x * x pow 2 = x
       #|  inv(norm x) % x:real^N
       #|  x:real^N = vec 0
       #|  x:real^N
       #|  --x >= -- &1 <=> x <= &1
-      #|  (!x:real^N. P x) <=> (!x. P(--x))
+      #|  (forall x:real^N. P x) <=> (forall x. P(--x))
       #|  polar_dual(cball(vec 0:real^N,&1)) = cball(vec 0,&1)
       #|  &0 < r ==> cball(vec 0,r) = IMAGE (\\x. r % x) (cball(vec 0,&1))
-      #|  !r. &0 < r ==> polar_dual(cball(vec 0:real^N,r)) = cball(vec 0,inv r)
+      #|  forall r. &0 < r ==> polar_dual(cball(vec 0:real^N,r)) = cball(vec 0,inv r)
       #|  a > b ==> ~(a < b)
       #|  u:real^N
       #|  --x * --y:real = x * y
@@ -54341,37 +54341,37 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  closure (convex hull (vec 0 INSERT s)):real^N->bool
       #|  p ==> q <=> ~(p /\\ ~q)
       #|  x:real^N
-      #|  !s:real^N->bool.\n        polar_dual(polar_dual s) = closure(convex hull (vec 0 INSERT s))
+      #|  forall s:real^N->bool.\n        polar_dual(polar_dual s) = closure(convex hull (vec 0 INSERT s))
       #|  a IN s ==> a INSERT s = s
-      #|  convex hull t = s\n      ==> (!x. x IN s ==> x IN t) /\\ t SUBSET convex hull t\n          ==> t = s
-      #|  closure t = s\n      ==> (!x. x IN s ==> x IN t) /\\ t SUBSET closure t\n          ==> t = s
-      #|  !s:real^N->bool.\n        polar_dual(polar_dual s) = s <=>\n        closed s /\\ convex s /\\ vec 0 IN s
-      #|  !s:real^N->bool.\n        closed s /\\ convex s /\\ vec 0 IN s\n        ==> polar_dual(polar_dual s) = s
+      #|  convex hull t = s\n      ==> (forall x. x IN s ==> x IN t) /\\ t SUBSET convex hull t\n          ==> t = s
+      #|  closure t = s\n      ==> (forall x. x IN s ==> x IN t) /\\ t SUBSET closure t\n          ==> t = s
+      #|  forall s:real^N->bool.\n        polar_dual(polar_dual s) = s <=>\n        closed s /\\ convex s /\\ vec 0 IN s
+      #|  forall s:real^N->bool.\n        closed s /\\ convex s /\\ vec 0 IN s\n        ==> polar_dual(polar_dual s) = s
       #|  v:real^N
       #|  s SUBSET c ==> {x | x IN c /\\ x IN s} = s
       #|  \\v:real^N. if v IN s then u v else &0
-      #|  !(c:real^N->bool).\n        FINITE c /\\ affine_dependent c\n        ==> (?u. sum c u = &0 /\\ (?v. v IN c /\\ ~(u v = &0)) /\\\n                                      vsum c (\\v. u v % v) = (vec 0):real^N)
+      #|  forall(c:real^N->bool).\n        FINITE c /\\ affine_dependent c\n        ==> (?u. sum c u = &0 /\\ (?v. v IN c /\\ ~(u v = &0)) /\\\n                                      vsum c (\\v. u v % v) = (vec 0):real^N)
       #|  a = b ==> sum a f = sum b f
       #|  DISJOINT {x:A | x IN s /\\ f x = &0}\n                         ({x | x IN s /\\ &0 < f x} UNION\n                          {x | x IN s /\\ f x < &0})
       #|  sum {x:A | x IN s /\\ f x = &0} f
-      #|  !a b.a = &0 /\\ a + b = &0 ==> b = &0
-      #|  (!x:A. &0 < f x ==> ~(f x < &0))\n                ==>  DISJOINT {x | x IN s /\\ &0 < f x}\n                              {x | x IN s /\\ f x < &0}
+      #|  forall a b.a = &0 /\\ a + b = &0 ==> b = &0
+      #|  (forall x:A. &0 < f x ==> ~(f x < &0))\n                ==>  DISJOINT {x | x IN s /\\ &0 < f x}\n                              {x | x IN s /\\ f x < &0}
       #|  &0 < f x ==> ~(f x < &0)
       #|  a = --b <=> a + b = &0
-      #|  !(s:A->bool) f.\n        FINITE s /\\ sum s f = &0\n        ==> sum {x | x IN s /\\ &0 < f x} f =\n            -- sum {x | x IN s /\\ f x < &0} f
+      #|  forall(s:A->bool) f.\n        FINITE s /\\ sum s f = &0\n        ==> sum {x | x IN s /\\ &0 < f x} f =\n            -- sum {x | x IN s /\\ f x < &0} f
       #|  a = b ==> vsum a f = vsum b f
       #|  DISJOINT {x:A | x IN s /\\ g x = &0}\n                           ({x | x IN s /\\ &0 < g x} UNION\n                            {x | x IN s /\\ g x < &0})
       #|  (vsum {x:A | x IN s /\\ g x = &0} f):real^N
-      #|  !a b. (a:real^N) = vec 0 /\\ a + b = vec 0 ==> b = vec 0
-      #|  (!x:A. &0 < f x ==> ~(f x < &0))\n                            ==>  DISJOINT {x | x IN s /\\ &0 < f x}\n                                          {x | x IN s /\\ f x < &0}
+      #|  forall a b. (a:real^N) = vec 0 /\\ a + b = vec 0 ==> b = vec 0
+      #|  (forall x:A. &0 < f x ==> ~(f x < &0))\n                            ==>  DISJOINT {x | x IN s /\\ &0 < f x}\n                                          {x | x IN s /\\ f x < &0}
       #|  &0 < f x ==> ~(f x < &0)
       #|  a:real^N = --b <=> a + b = vec 0
-      #|  !(s:A->bool) f g.\n        FINITE s /\\ vsum s f = vec 0 /\\ (!x. g x = &0 ==> f x = vec 0)\n        ==> (vsum {x | x IN s /\\ &0 < g x} f) :real^N =\n             -- vsum {x | x IN s /\\ g x < &0} f
+      #|  forall(s:A->bool) f g.\n        FINITE s /\\ vsum s f = vec 0 /\\ (forall x. g x = &0 ==> f x = vec 0)\n        ==> (vsum {x | x IN s /\\ &0 < g x} f) :real^N =\n             -- vsum {x | x IN s /\\ g x < &0} f
       #|  &0 < a <=>  a > &0
       #|  a > &0 <=> &0 < a
       #|  ~(a = &0) ==> a * &1 / a * b = b
       #|  sum {x:real^N | x IN c /\\ u x > &0} u
-      #|  !a. ~(a = &0) /\\ a * b = a * c ==> b = c
+      #|  forall a. ~(a = &0) /\\ a * b = a * c ==> b = c
       #|  a > &0 ==> &0 <= a
       #|  \\y:real^N.\n                           &1 / (sum {x:real^N | x IN c /\\ u x > &0} u) *\n                           (u y)
       #|  {v:real^N | v IN c /\\ u v > &0}
@@ -54379,7 +54379,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a > &0 <=> &0 < a
       #|  ~(a = &0) ==> a * &1 / a * b = b
       #|  sum {x:real^N | x IN c /\\ u x > &0} u
-      #|  !a. ~(a = &0) /\\ a * b = a * c ==> b = c
+      #|  forall a. ~(a = &0) /\\ a * b = a * c ==> b = c
       #|  \\y:real^N.\n                         &1 / (sum {x:real^N | x IN c /\\ u x > &0} u) *\n                           (--(u y))
       #|  {v:real^N | v IN c /\\ u v < &0}
       #|  &1 / (sum {x:real^N | x IN c /\\ u x > &0} u) %\n              vsum {x:real^N | x IN c /\\ u x > &0} (\\x. u x % x)
@@ -54388,10 +54388,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N->bool
       #|  \\x:real^N. &0
       #|  u:real^N->real
-      #|  (?x:real^N. P x /\\ &0 < u x) <=> (!x. P x ==> u x <= &0) ==> F
+      #|  (?x:real^N. P x /\\ &0 < u x) <=> (forall x. P x ==> u x <= &0) ==> F
       #|  ~(a = &0) /\\ ~(&0 < a) <=> a < &0
       #|  &0 < u (v:real^N)
-      #|  ~(!x. ~(P x /\\ Q x)) = ?x. P x /\\ Q x
+      #|  ~(forall x. ~(P x /\\ Q x)) = ?x. P x /\\ Q x
       #|  \\x. &0
       #|  a > &0 <=> &0 < a
       #|  a > &0 ==> ~(a = &0)
@@ -54401,14 +54401,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {v:real^N | v IN c /\\ u v > &0}
       #|  {v:real^N | v IN c /\\ u v <= &0}
       #|  c:real^N->bool
-      #|  !(c:real^N->bool).\n        FINITE c /\\ affine_dependent c\n        ==> ?(m:real^N->bool) (p:real^N->bool).\n                (DISJOINT m p) /\\\n                (m UNION p = c) /\\\n                ~(DISJOINT (convex hull m) (convex hull p))
+      #|  forall(c:real^N->bool).\n        FINITE c /\\ affine_dependent c\n        ==> ?(m:real^N->bool) (p:real^N->bool).\n                (DISJOINT m p) /\\\n                (m UNION p = c) /\\\n                ~(DISJOINT (convex hull m) (convex hull p))
       #|  p:real^N->bool
       #|  m:real^N->bool
       #|  u:real^N->real
       #|  s:real^N->bool
       #|  s:real^N->bool
       #|  c:real^N->bool
-      #|  !(c:real^N->bool).\n        affine_dependent c\n        ==> ?(m:real^N->bool) (p:real^N->bool).\n                m SUBSET c /\\\n                p SUBSET c /\\\n                DISJOINT m p /\\\n                ~(DISJOINT (convex hull m) (convex hull p))
+      #|  forall(c:real^N->bool).\n        affine_dependent c\n        ==> ?(m:real^N->bool) (p:real^N->bool).\n                m SUBSET c /\\\n                p SUBSET c /\\\n                DISJOINT m p /\\\n                ~(DISJOINT (convex hull m) (convex hull p))
       #|  IMAGE X s INTER IMAGE X t = {} ==> s INTER t = {}
       #|  g SUBSET INTERS g' /\\ h SUBSET INTERS h'\n    ==> ~(g INTER h = {}) ==> ~(INTERS(g' UNION h') = {})
       #|  X:(real^N->bool)->real^N
@@ -54416,46 +54416,46 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (f:(real^N->bool)->bool) = h UNION g
       #|  h:(real^N->bool)->bool
       #|  g:(real^N->bool)->bool
-      #|  (?m p. (?u. P u /\\ m = t u) /\\ (?u. P u /\\ p = t u) /\\ Q m p) ==> r <=>\n    (!u v. P u /\\ P v /\\ Q (t u) (t v) ==> r)
+      #|  (?m p. (?u. P u /\\ m = t u) /\\ (?u. P u /\\ p = t u) /\\ Q m p) ==> r <=>\n    (forall u v. P u /\\ P v /\\ Q (t u) (t v) ==> r)
       #|  P /\\ m UNION p = s /\\ Q <=>\n    m SUBSET s /\\ p SUBSET s /\\ m UNION p = s /\\ P /\\ Q
       #|  n:num
       #|  CARD(f:(real^N->bool)->bool)
-      #|  !f n. n >= d + 1 /\\ f = SUC n /\\ c = f ==> c >= d + 2
+      #|  forall f n. n >= d + 1 /\\ f = SUC n /\\ c = f ==> c >= d + 2
       #|  IMAGE (X:(real^N->bool)->real^N) f
       #|  (X:(real^N->bool)->real^N) t
       #|  ?s t:real^N->bool. s IN f /\\ t IN f /\\ ~(s = t) /\\ X s:real^N = X t
-      #|  ?X. !s:real^N->bool. s IN f ==> X(s) IN INTERS (f DELETE s)
+      #|  ?X. forall s:real^N->bool. s IN f ==> X(s) IN INTERS (f DELETE s)
       #|  SUC n >= m + 1 ==> m = n \\/ n >= m + 1
       #|  ~(0 >= n + 1)
-      #|  !n f. f HAS_SIZE n /\\ n >= dimindex(:N) + 1 /\\\n         (!s:real^N->bool. s IN f ==> convex s) /\\\n         (!t. t SUBSET f /\\ CARD(t) = dimindex(:N) + 1\n              ==> ~(INTERS t = {}))\n         ==> ~(INTERS f = {})
+      #|  forall n f. f HAS_SIZE n /\\ n >= dimindex(:N) + 1 /\\\n         (forall s:real^N->bool. s IN f ==> convex s) /\\\n         (forall t. t SUBSET f /\\ CARD(t) = dimindex(:N) + 1\n              ==> ~(INTERS t = {}))\n         ==> ~(INTERS f = {})
       #|  ~(s = t)\n               ==> INTERS f = INTERS(f DELETE s) INTER INTERS(f DELETE t)
       #|  ~(s = t)\n               ==> INTERS f = INTERS(f DELETE s) INTER INTERS(f DELETE t)
-      #|  !f:(real^N->bool)->bool.\n        FINITE f /\\ CARD(f) >= dimindex(:N) + 1 /\\\n        (!s. s IN f ==> convex s) /\\\n        (!t. t SUBSET f /\\ CARD(t) = dimindex(:N) + 1 ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  forall f:(real^N->bool)->bool.\n        FINITE f /\\ CARD(f) >= dimindex(:N) + 1 /\\\n        (forall s. s IN f ==> convex s) /\\\n        (forall t. t SUBSET f /\\ CARD(t) = dimindex(:N) + 1 ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
       #|  CARD(f:(real^N->bool)->bool) < dimindex(:N) + 1
-      #|  !f:(real^N->bool)->bool.\n        FINITE f /\\\n        (!s. s IN f ==> convex s) /\\\n        (!t. t SUBSET f /\\ CARD(t) <= dimindex(:N) + 1 ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  forall f:(real^N->bool)->bool.\n        FINITE f /\\\n        (forall s. s IN f ==> convex s) /\\\n        (forall t. t SUBSET f /\\ CARD(t) <= dimindex(:N) + 1 ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
       #|  g:(real^N->bool)->bool
-      #|  !f:(real^N->bool)->bool.\n        (!s. s IN f ==> convex s /\\ closed s) /\\ (?s. s IN f /\\ bounded s) /\\\n        (!t. t SUBSET f /\\ FINITE t /\\ CARD(t) <= dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  forall f:(real^N->bool)->bool.\n        (forall s. s IN f ==> convex s /\\ closed s) /\\ (?s. s IN f /\\ bounded s) /\\\n        (forall t. t SUBSET f /\\ FINITE t /\\ CARD(t) <= dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
       #|  f:(real^N->bool)->bool = {}
-      #|  !f:(real^N->bool)->bool.\n        (!s. s IN f ==> convex s /\\ compact s) /\\\n        (!t. t SUBSET f /\\ FINITE t /\\ CARD(t) <= dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  forall f:(real^N->bool)->bool.\n        (forall s. s IN f ==> convex s /\\ compact s) /\\\n        (forall t. t SUBSET f /\\ FINITE t /\\ CARD(t) <= dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
       #|  INTERS h: real^N->bool
-      #|  !s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
+      #|  forall s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
       #|  h:(real^N->bool)->bool
       #|  f:(real^N->bool)->bool
       #|  g:(real^N->bool)->bool
       #|  dimindex(:N) + 1
       #|  g:(real^N->bool)->bool
-      #|  !f:(real^N->bool)->bool.\n        (FINITE f ==> CARD f >= dimindex (:N) + 1) /\\\n        (!s. s IN f ==> convex s /\\ closed s) /\\ (?s. s IN f /\\ bounded s) /\\\n        (!t. t SUBSET f /\\ FINITE t /\\ CARD(t) = dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  forall f:(real^N->bool)->bool.\n        (FINITE f ==> CARD f >= dimindex (:N) + 1) /\\\n        (forall s. s IN f ==> convex s /\\ closed s) /\\ (?s. s IN f /\\ bounded s) /\\\n        (forall t. t SUBSET f /\\ FINITE t /\\ CARD(t) = dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
       #|  f:(real^N->bool)->bool = {}
-      #|  !f:(real^N->bool)->bool.\n        (FINITE f ==> CARD f >= dimindex (:N) + 1) /\\\n        (!s. s IN f ==> convex s /\\ compact s) /\\\n        (!t. t SUBSET f /\\ FINITE t /\\ CARD(t) = dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
-      #|  (!x. x IN s ==> P x) <=> s SUBSET {x | P x}
-      #|  (!x. x IN convex hull s ==> a dot x < b) /\\\n     (!x. x IN convex hull t ==> a dot x > b) <=>\n     (!x. x IN s ==> a dot x < b) /\\ (!x. x IN t ==> a dot x > b)
-      #|  ((!y:real. a < y <=> b < y) <=> a = b) /\\\n          ((!y:real. y < a <=> y < b) <=> a = b)
+      #|  forall f:(real^N->bool)->bool.\n        (FINITE f ==> CARD f >= dimindex (:N) + 1) /\\\n        (forall s. s IN f ==> convex s /\\ compact s) /\\\n        (forall t. t SUBSET f /\\ FINITE t /\\ CARD(t) = dimindex(:N) + 1\n             ==> ~(INTERS t = {}))\n        ==> ~(INTERS f = {})
+      #|  (forall x. x IN s ==> P x) <=> s SUBSET {x | P x}
+      #|  (forall x. x IN convex hull s ==> a dot x < b) /\\\n     (forall x. x IN convex hull t ==> a dot x > b) <=>\n     (forall x. x IN s ==> a dot x < b) /\\ (forall x. x IN t ==> a dot x > b)
+      #|  ((forall y:real. a < y <=> b < y) <=> a = b) /\\\n          ((forall y:real. y < a <=> y < b) <=> a = b)
       #|  a = a' /\\ b = b' ==> a + b <= n + 2 ==> a' + b' <= n + 2
       #|  &1
       #|  vec 0:real^N
       #|  y:real^N
       #|  x:real^N
-      #|  IMAGE f s INTER IMAGE g t = {} <=>\n                              !x y. x IN s /\\ y IN t ==> ~(f x = g y)
+      #|  IMAGE f s INTER IMAGE g t = {} <=>\n                              forall x y. x IN s /\\ y IN t ==> ~(f x = g y)
       #|  FINITE(u:real^N->bool) /\\ FINITE(v:real^N->bool)
       #|  v:real^N->bool
       #|  u:real^N->bool
@@ -54465,28 +54465,28 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a > b <=> --a < --b
       #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
       #|  IMAGE (\\r. {z:real^(N,1)finite_sum |\n                          fstcart z dot r < drop(sndcart z)}) s UNION\n       IMAGE (\\r. {z:real^(N,1)finite_sum |\n                          fstcart z dot r > drop(sndcart z)}) t
-      #|  !s t:real^N->bool.\n          FINITE s /\\ FINITE t /\\\n          (!s' t'. s' SUBSET s /\\ t' SUBSET t /\\\n                   CARD(s') + CARD(t') <= dimindex(:N) + 2\n                   ==> ?a b. (!x. x IN s' ==> a dot x < b) /\\\n                             (!x. x IN t' ==> a dot x > b))\n          ==> ?a b. (!x. x IN s ==> a dot x < b) /\\\n                    (!x. x IN t ==> a dot x > b)
+      #|  forall s t:real^N->bool.\n          FINITE s /\\ FINITE t /\\\n          (forall s' t'. s' SUBSET s /\\ t' SUBSET t /\\\n                   CARD(s') + CARD(t') <= dimindex(:N) + 2\n                   ==> ?a b. (forall x. x IN s' ==> a dot x < b) /\\\n                             (forall x. x IN t' ==> a dot x > b))\n          ==> ?a b. (forall x. x IN s ==> a dot x < b) /\\\n                    (forall x. x IN t ==> a dot x > b)
       #|  t':real^N->bool
       #|  s':real^N->bool
       #|  t':real^N->bool
       #|  s':real^N->bool
       #|  x:real^N
-      #|  DISJOINT s t <=> !x. x IN s /\\ x IN t ==> F
+      #|  DISJOINT s t <=> forall x. x IN s /\\ x IN t ==> F
       #|  t':real^N->bool
       #|  s':real^N->bool
-      #|  !s' t'. (s':real^N->bool) SUBSET s /\\ t' SUBSET t /\\\n            FINITE s' /\\ CARD(s') <= dimindex(:N) + 1 /\\\n            FINITE t' /\\ CARD(t') <= dimindex(:N) + 1\n            ==> DISJOINT (convex hull s') (convex hull t')
-      #|  !s t:real^N->bool.\n        compact s /\\ compact t /\\\n        (!s' t'. s' SUBSET s /\\ t' SUBSET t /\\ FINITE s' /\\ FINITE t' /\\\n                 CARD(s') + CARD(t') <= dimindex(:N) + 2\n                 ==> ?a b. (!x. x IN s' ==> a dot x < b) /\\\n                           (!x. x IN t' ==> a dot x > b))\n        ==> ?a b. ~(a = vec 0) /\\\n                  (!x. x IN s ==> a dot x < b) /\\\n                  (!x. x IN t ==> a dot x > b)
-      #|  !f s. linear f ==> convex hull (IMAGE f s) = IMAGE f (convex hull s)
-      #|  !f:real^M->real^N s x.\n        linear f /\\ x IN convex hull s ==> (f x) IN convex hull (IMAGE f s)
-      #|  !s:real^N->bool. conic s ==> conic(convex hull s)
-      #|  !s:real^N->bool. conic hull (convex hull s) = convex hull (conic hull s)
+      #|  forall s' t'. (s':real^N->bool) SUBSET s /\\ t' SUBSET t /\\\n            FINITE s' /\\ CARD(s') <= dimindex(:N) + 1 /\\\n            FINITE t' /\\ CARD(t') <= dimindex(:N) + 1\n            ==> DISJOINT (convex hull s') (convex hull t')
+      #|  forall s t:real^N->bool.\n        compact s /\\ compact t /\\\n        (forall s' t'. s' SUBSET s /\\ t' SUBSET t /\\ FINITE s' /\\ FINITE t' /\\\n                 CARD(s') + CARD(t') <= dimindex(:N) + 2\n                 ==> ?a b. (forall x. x IN s' ==> a dot x < b) /\\\n                           (forall x. x IN t' ==> a dot x > b))\n        ==> ?a b. ~(a = vec 0) /\\\n                  (forall x. x IN s ==> a dot x < b) /\\\n                  (forall x. x IN t ==> a dot x > b)
+      #|  forall f s. linear f ==> convex hull (IMAGE f s) = IMAGE f (convex hull s)
+      #|  forall f:real^M->real^N s x.\n        linear f /\\ x IN convex hull s ==> (f x) IN convex hull (IMAGE f s)
+      #|  forall s:real^N->bool. conic s ==> conic(convex hull s)
+      #|  forall s:real^N->bool. conic hull (convex hull s) = convex hull (conic hull s)
       #|  &1 * a <= b /\\ b <= &1 * c ==> a <= b /\\ b <= c
       #|  (y:real^N)$i
       #|  (x:real^N)$i
       #|  y:real^N
       #|  x:real^N
-      #|  !s:real^N->bool. is_interval s ==> convex s
-      #|  !s:real^N->bool. is_interval s ==> connected s
+      #|  forall s:real^N->bool. is_interval s ==> convex s
+      #|  forall s:real^N->bool. is_interval s ==> connected s
       #|  lift b
       #|  lift a
       #|  {z:real^1 | basis 1 dot z > x}
@@ -54494,11 +54494,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real
       #|  b:real
       #|  a:real
-      #|  !s:real^1->bool. is_interval s <=> connected s
-      #|  !a b:real^N. convex(interval [a,b]) /\\ convex(interval (a,b))
-      #|  (!a b:real^N. connected(interval[a,b])) /\\\n   (!a b:real^N. connected(interval(a,b)))
+      #|  forall s:real^1->bool. is_interval s <=> connected s
+      #|  forall a b:real^N. convex(interval [a,b]) /\\ convex(interval (a,b))
+      #|  (forall a b:real^N. connected(interval[a,b])) /\\\n   (forall a b:real^N. connected(interval(a,b)))
       #|  a:real^N = b
-      #|  (!a b x:real^N.\n        x limit_point_of interval[a,b] <=>\n        ~(a = b) /\\ x IN interval[a,b]) /\\\n   (!a b x:real^N.\n        x limit_point_of interval(a,b) <=>\n        ~(interval(a,b) = {}) /\\ x IN interval[a,b])
+      #|  (forall a b x:real^N.\n        x limit_point_of interval[a,b] <=>\n        ~(a = b) /\\ x IN interval[a,b]) /\\\n   (forall a b x:real^N.\n        x limit_point_of interval(a,b) <=>\n        ~(interval(a,b) = {}) /\\ x IN interval[a,b])
       #|  ~(&0 < x - y \\/ &0 < y - x) <=> y = x
       #|  (&0 < x ==> &0 < u * x) /\\ (&0 < --x ==> &0 < (&1 - u) * --x) /\\\n        ~(x = &0)\n        ==>  &0 < u * x \\/ &0 < (u - &1) * x
       #|  a - ((&1 - u) % a + u % b):real^N = u % (a - b)
@@ -54507,7 +54507,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ((&1 - u) % a + u % b) - b:real^N = (u - &1) % (b - a)
       #|  (a:real^N) IN s \\/ b IN s ==> ~(s = {})
       #|  (x:real^N) IN span {basis 1}
-      #|  !p q:real^N. p IN span {basis 1} /\\ q IN span {basis 1} /\\\n                   basis 1 dot p = basis 1 dot q\n                   ==> p = q
+      #|  forall p q:real^N. p IN span {basis 1} /\\ q IN span {basis 1} /\\\n                   basis 1 dot p = basis 1 dot q\n                   ==> p = q
       #|  ~(s SUBSET {x | P x} UNION {x | Q x}) <=>\n      ?x. x IN s /\\ ~(P x \\/ Q x)
       #|  ~(x:real < a /\\ x > a)
       #|  q /\\ r /\\ (~p ==> s) ==> ~(p /\\ q /\\ r) ==> s
@@ -54525,24 +54525,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N
       #|  v:real^N
       #|  u:real^N
-      #|  !s:real^N->bool. collinear s ==> (convex s <=> connected s)
+      #|  forall s:real^N->bool. collinear s ==> (convex s <=> connected s)
       #|  b:real^N
       #|  a:real^N
       #|  b:real^N
       #|  a:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. convex s <=> !a b. convex(s INTER affine hull {a,b})
+      #|  forall s:real^N->bool. convex s <=> forall a b. convex(s INTER affine hull {a,b})
       #|  affine hull {a:real^N,b}
-      #|  !s:real^N->bool. convex s <=> !a b. connected(s INTER affine hull {a,b})
-      #|  !s:real^1->bool. is_interval s <=> convex s
-      #|  !s:real^1->bool. convex s <=> connected s
-      #|  !s:real^1->bool. connected s <=> convex s
-      #|  !s:real^1->bool. connected s /\\ compact s <=> ?a b. s = interval[a,b]
-      #|  !s:real^N->bool.\n        dimindex(:N) = 1 ==> (convex s <=> connected s)
-      #|  !s:real^N->bool.\n        dimindex(:N) = 1 ==> (connected s <=> convex s)
-      #|  s SUBSET t\n              ==> (!x. x IN t ==> P x) ==> (!x. x IN s ==> P x)
-      #|  (!x. lift(drop x) = x) /\\ (!x. drop(lift x) = x) /\\\n     (!x. x IN s ==> f(drop(g x)) = x)\n    ==> s = {f y | lift y IN IMAGE g s}
+      #|  forall s:real^N->bool. convex s <=> forall a b. connected(s INTER affine hull {a,b})
+      #|  forall s:real^1->bool. is_interval s <=> convex s
+      #|  forall s:real^1->bool. convex s <=> connected s
+      #|  forall s:real^1->bool. connected s <=> convex s
+      #|  forall s:real^1->bool. connected s /\\ compact s <=> ?a b. s = interval[a,b]
+      #|  forall s:real^N->bool.\n        dimindex(:N) = 1 ==> (convex s <=> connected s)
+      #|  forall s:real^N->bool.\n        dimindex(:N) = 1 ==> (connected s <=> convex s)
+      #|  s SUBSET t\n              ==> (forall x. x IN t ==> P x) ==> (forall x. x IN s ==> P x)
+      #|  (forall x. lift(drop x) = x) /\\ (forall x. drop(lift x) = x) /\\\n     (forall x. x IN s ==> f(drop(g x)) = x)\n    ==> s = {f y | lift y IN IMAGE g s}
       #|  a <= x /\\ x <= b <=> a <= drop(lift x) /\\ drop(lift x) <= b
       #|  a <= b\n    ==> (a <= x /\\ x <= b \\/ b <= x /\\ x <= a <=> a <= x /\\ x <= b)
       #|  drop b % basis 1:real^N
@@ -54555,15 +54555,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  w:real^N
       #|  z:real^N
-      #|  !s:real^N->bool.\n        ~(s = {}) /\\ compact s /\\ connected s /\\ collinear s\n        ==> ?a b. s = segment[a,b]
-      #|  !s:real^N->bool.\n        ~(s = {}) /\\ compact s /\\ convex s /\\ collinear s\n        ==> ?a b. s = segment[a,b]
+      #|  forall s:real^N->bool.\n        ~(s = {}) /\\ compact s /\\ connected s /\\ collinear s\n        ==> ?a b. s = segment[a,b]
+      #|  forall s:real^N->bool.\n        ~(s = {}) /\\ compact s /\\ convex s /\\ collinear s\n        ==> ?a b. s = segment[a,b]
       #|  convex hull s = s /\\ ~(x IN s) ==> ~(x IN convex hull s)
       #|  x:real^1
       #|  s SUBSET t ==> convex hull s SUBSET convex hull t
       #|  (?x. x IN s /\\ P x) <=> ~(s SUBSET {x | ~P x})
       #|  a /\\ b /\\ p /\\ q <=> (a /\\ p) /\\ (b /\\ q)
       #|  (r ==> q) /\\ (q ==> p) /\\ (p ==> r)\n    ==> (p <=> q) /\\ (p <=> r)
-      #|  (!s:real^1->bool x.\n        x IN convex hull s <=>\n        ?a b. a IN s /\\ b IN s /\\ x IN segment[a,b]) /\\\n   (!s:real^1->bool x.\n        x IN convex hull s <=>\n        ?a b. a IN s /\\ b IN s /\\ x IN interval[a,b])
+      #|  (forall s:real^1->bool x.\n        x IN convex hull s <=>\n        ?a b. a IN s /\\ b IN s /\\ x IN segment[a,b]) /\\\n   (forall s:real^1->bool x.\n        x IN convex hull s <=>\n        ?a b. a IN s /\\ b IN s /\\ x IN interval[a,b])
       #|  &0 < y
       #|  x / y * z:real = (x * z) / y
       #|  &0 < x /\\ x <= y ==> (x - &1) / x <= (y - &1) / y
@@ -54596,30 +54596,30 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0 < r ==> (r <= max (&0) a <=> r <= a)
       #|  a:real^N
       #|  max (&0) (r - inf (IMAGE (\\x:real^N. r - norm(x - a)) s))
-      #|  !x a:real^N. &0 <= x /\\ s SUBSET cball (a,x) ==> r <= x
+      #|  forall x a:real^N. &0 <= x /\\ s SUBSET cball (a,x) ==> r <= x
       #|  norm(x:real^N) < r ==> &0 < r
       #|  :real
       #|  &0 < r
-      #|  !x:real^N a. x IN s DIFF t /\\ norm a < d ==> norm (x - a) < r
-      #|  !x:real^N e. &0 < e /\\ e < b /\\ x IN t\n                       ==> norm (x - e % basis 1) < r
+      #|  forall x:real^N a. x IN s DIFF t /\\ norm a < d ==> norm (x - a) < r
+      #|  forall x:real^N e. &0 < e /\\ e < b /\\ x IN t\n                       ==> norm (x - e % basis 1) < r
       #|  (x:real^N) IN t
       #|  x:real^N
       #|  min (b / &2) (d / &2) % basis 1:real^N
-      #|  ?a. !x. x IN s ==> norm(x - a:real^N) < r
+      #|  ?a. forall x. x IN s ==> norm(x - a:real^N) < r
       #|  norm a < r - norm x ==> norm(x - a:real^N) < r
       #|  :real
       #|  :real
       #|  FINITE(s DIFF t:real^N->bool)
       #|  inf (IMAGE (\\x:real^N. r - norm x) (s DIFF t))
       #|  s DIFF t:real^N->bool = {}
-      #|  ?d. &0 < d /\\\n          !x:real^N a. x IN (s DIFF t) /\\ norm(a) < d ==> norm(x - a) < r
+      #|  ?d. &0 < d /\\\n          forall x:real^N a. x IN (s DIFF t) /\\ norm(a) < d ==> norm(x - a) < r
       #|  b:real
-      #|  !b. &0 < e /\\ e < b /\\ b < x ==> abs(x - e * &1) < abs x
+      #|  forall b. &0 < e /\\ e < b /\\ b < x ==> abs(x - e * &1) < abs x
       #|  2 <= n ==> 1 <= n /\\ ~(n = 1)
       #|  r = norm(x:real^N)
       #|  e:real
       #|  x:real^N
-      #|  !x:real^N e. &0 < e /\\ e < b /\\ x IN t ==> norm(x - e % basis 1) < r
+      #|  forall x:real^N e. &0 < e /\\ e < b /\\ x IN t ==> norm(x - e % basis 1) < r
       #|  b:real
       #|  b:real
       #|  b / m:real
@@ -54671,13 +54671,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  cball(vec 0:real^N,B + d + &1)
       #|  B:real
       #|  vec 0:real^N
-      #|  ?t. compact t /\\ !n. (aa:num->real^N) n IN t
+      #|  ?t. compact t /\\ forall n. (aa:num->real^N) n IN t
       #|  aa:num->real^N
       #|  &0 < &n + &1
       #|  d + i <= d <=> ~(&0 < i)
       #|  d + inv(&n + &1)
       #|  n:num
-      #|  !n. ?a:real^N. s SUBSET cball(a,d + inv(&n + &1))
+      #|  forall n. ?a:real^N. s SUBSET cball(a,d + inv(&n + &1))
       #|  ?a:real^N. s SUBSET cball(a,d)
       #|  &0 <= d
       #|  d = inf {d | &0 <= d /\\ ?a:real^N. s SUBSET cball(a,d)}
@@ -54693,7 +54693,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  p /\\ q /\\ r ==> s <=> q /\\ p ==> r ==> s
       #|  IMAGE (\\x:real^N. cball(x,r)) s
       #|  &0 <= r
-      #|  !s:real^N->bool r.\n        bounded s /\\\n        sqrt(&(dimindex(:N)) / &(2 * dimindex(:N) + 2)) * diameter s <= r\n        ==> ?a. s SUBSET cball(a,r)
+      #|  forall s:real^N->bool r.\n        bounded s /\\\n        sqrt(&(dimindex(:N)) / &(2 * dimindex(:N) + 2)) * diameter s <= r\n        ==> ?a. s SUBSET cball(a,r)
       #|  :real
       #|  :real
       #|  a * b < c /\\ &0 < c ==> a * b / &2 <= c
@@ -54727,7 +54727,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &1
       #|  x - y <= &0 <=> x <= y
       #|  abs(x - y) <= &0 <=> x = y
-      #|  (!e. &0 < e ==> x <= e) <=> x <= &0
+      #|  (forall e. &0 < e ==> x <= e) <=> x <= &0
       #|  ~(x <= &0) ==> &0 < x / &2 /\\ ~(x <= x / &2)
       #|  r:real^1
       #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
@@ -54747,7 +54747,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x - a < x <=> &0 < a
       #|  sqrt(c pow 2 - dist(y:real^N,z) pow 2 / B pow 2 / &4)
       #|  midpoint(y:real^N,z)
-      #|  !t. t < c ==> (Y:real->real^N->bool) t = {}
+      #|  forall t. t < c ==> (Y:real->real^N->bool) t = {}
       #|  B:real
       #|  bounded(IMAGE sndcart (p:real^(N,1)finite_sum->bool))
       #|  &0 < c
@@ -54758,7 +54758,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c = &0
       #|  z:real^N
       #|  y:real^N
-      #|  b IN s /\\ (!y z. y IN s /\\ z IN s ==> y = z) ==> s = {b}
+      #|  b IN s /\\ (forall y z. y IN s /\\ z IN s ==> y = z) ==> s = {b}
       #|  (Y:real->real^N->bool) c = {b}
       #|  &0 <= c
       #|  pastecart (a:real^N) (r:real^1)
@@ -54769,12 +54769,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  ~((Y:real->real^N->bool) t = {})
       #|  &0 <= t
-      #|  !t. t < c ==> (Y:real->real^N->bool) t = {}
+      #|  forall t. t < c ==> (Y:real->real^N->bool) t = {}
       #|  a < b ==> a < (a + b) / &2 /\\ (a + b) / &2 < b
       #|  pastecart (a:real^N) (r:real^1)
       #|  r:real^1
       #|  a:real^N
-      #|  (!x. P x ==> !a r. Q a r ==> R a r x) <=>\n        (!a r. Q a r ==> !x. P x ==> R a r x)
+      #|  (forall x. P x ==> forall a r. Q a r ==> R a r x) <=>\n        (forall a r. Q a r ==> forall x. P x ==> R a r x)
       #|  y:real^N
       #|  (Y:real->real^N->bool) c = INTERS (IMAGE Y {t | c < t})
       #|  b IN (Y:real->real^N->bool) c
@@ -54795,16 +54795,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  vec 0:real^N
       #|  B:real
       #|  B:real
-      #|  s SUBSET t ==> (!x. x IN t ==> P x) ==> (!x. x IN s ==> P x)
+      #|  s SUBSET t ==> (forall x. x IN t ==> P x) ==> (forall x. x IN s ==> P x)
       #|  bounded (IMAGE (\\z. lift(norm(fstcart z:real^N) / drop(sndcart z)))\n                       p)
       #|  ~({t | &0 <= t /\\ ~(Y t:real^N->bool = {})} = {})
-      #|  p SUBSET s\n         ==> (!a r. pastecart a r IN s /\\ P a r ==> Q a r)\n             ==> (!a r. pastecart a r IN p ==> P a r)\n                 ==> (!a r. pastecart a r IN p ==> Q a r)
-      #|  !t t'. t <= t' ==> (Y:real->real^N->bool) t SUBSET Y t'
-      #|  !p Y c.\n      compact p /\\ ~(p = {}) /\\ p SUBSET (:real^N) PCROSS {r | &0 < drop r} /\\\n      (\\t. {y | !a r. pastecart a r IN p ==> norm(y - a) <= drop r * t}) = Y /\\\n      inf {t | &0 <= t /\\ ~(Y t = {})} = c\n      ==> ?b. b IN Y c /\\\n              b IN convex hull\n                {a | ?r. pastecart a r IN p /\\ norm(b - a) = drop r * c}
+      #|  p SUBSET s\n         ==> (forall a r. pastecart a r IN s /\\ P a r ==> Q a r)\n             ==> (forall a r. pastecart a r IN p ==> P a r)\n                 ==> (forall a r. pastecart a r IN p ==> Q a r)
+      #|  forall t t'. t <= t' ==> (Y:real->real^N->bool) t SUBSET Y t'
+      #|  forall p Y c.\n      compact p /\\ ~(p = {}) /\\ p SUBSET (:real^N) PCROSS {r | &0 < drop r} /\\\n      (\\t. {y | forall a r. pastecart a r IN p ==> norm(y - a) <= drop r * t}) = Y /\\\n      inf {t | &0 <= t /\\ ~(Y t = {})} = c\n      ==> ?b. b IN Y c /\\\n              b IN convex hull\n                {a | ?r. pastecart a r IN p /\\ norm(b - a) = drop r * c}
       #|  FINITE(d:real^M->bool)
       #|  x = &0 ==> &2 * x <= &0
       #|  (x * y) * (a - b) = &2 * (x * y * (a - b) / &2)
-      #|  !x y. (g:real^M->real^N) x - g y = (g x - b) - (g y - b)
+      #|  forall x y. (g:real^M->real^N) x - g y = (g x - b) - (g y - b)
       #|  c' <= c /\\ a' = a /\\ b' = b ==> (a + b) - c <= (a' + b') - c'
       #|  z:real^M
       #|  x:real^M
@@ -54818,7 +54818,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d = {x:real^M}
       #|  sum (d:real^M->bool) l = &1
       #|  (x:real^M) IN d
-      #|  !x:real^M. x IN d ==> ~(l x = &0)
+      #|  forall x:real^M. x IN d ==> ~(l x = &0)
       #|  x:real^M
       #|  x:real^M
       #|  ~(&1 = &0)
@@ -54827,28 +54827,28 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0 <= x /\\ &0 <= y /\\ ~(x = &0 /\\ y = &0)\n        ==> &0 < x + y
       #|  &2 * q pow 2 * norm(vsum d (\\x:real^M. l x % (x - y))) pow 2 +\n      (q pow 2 - &1) *\n      sum d (\\x. sum d (\\z. l x * l z * norm(x - z) pow 2)) <= &0
       #|  abs x <= abs(&1) ==> x <= &1
-      #|  !a:real^M. a IN d ==> &0 <= l a
+      #|  forall a:real^M. a IN d ==> &0 <= l a
       #|  l:real^M->real
       #|  d:real^M->bool
       #|  {a | ?x. a = g x /\\ x IN c /\\ P a x} =\n      IMAGE g {x | x IN c /\\ P (g x) x}
       #|  (?r x. P x /\\ r = f x /\\ Q r x) <=> (?x. P x /\\ Q (f x) x)
-      #|  (!a r x. P a r x) <=> (!x a r. P a r x)
+      #|  (forall a r x. P a r x) <=> (forall x a r. P a r x)
       #|  b IN (Y:real->real^N->bool) q
       #|  q <= &1
       #|  b:real^N
       #|  q:real
-      #|  (!y. a = y ==> p y) ==> (?y. a = y /\\ p y)
+      #|  (forall y. a = y ==> p y) ==> (?y. a = y /\\ p y)
       #|  Y:real->real^N->bool
-      #|  (!y. a = y ==> p y) ==> (?y. a = y /\\ p y)
+      #|  (forall y. a = y ==> p y) ==> (?y. a = y /\\ p y)
       #|  IMAGE (\\x. pastecart ((g:real^M->real^N) x) (lift(norm(x - y)))) c
       #|  c:real^M->bool = {}
       #|  c:real^M->bool
       #|  IMAGE (\\x. cball((g:real^M->real^N) x,norm(x - y))) t
       #|  (y:real^M) INSERT t
       #|  \\x. if x = y then z else (g:real^M->real^N) x
-      #|  ?z. !x. x IN t ==> norm(z - (g:real^M->real^N) x) <= norm(y - x)
+      #|  ?z. forall x. x IN t ==> norm(z - (g:real^M->real^N) x) <= norm(y - x)
       #|  y:real^M
-      #|  ~(t = UNIV) ==> (!y. ~(y IN t) ==> F) ==> P
+      #|  ~(t = UNIV) ==> (forall y. ~(y IN t) ==> F) ==> P
       #|  t = (:real^M)
       #|  t:real^M->bool
       #|  g:real^M->real^N
@@ -54857,12 +54857,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\x:real^M. @y:real^N. r(x,y)
       #|  norm(x - y:real^N) <= norm(z - z:real^M)\n                                    ==> x = y
       #|  :real
-      #|  !x:real^M y z:real^N. r(x,y) /\\ r(x,z) ==> y = z
+      #|  forall x:real^M y z:real^N. r(x,y) /\\ r(x,z) ==> y = z
       #|  r:real^M#real^N->bool
       #|  \\(x,y). x IN s /\\ (f:real^M->real^N) x = y
-      #|  \\r. (!x y x' y'. r(x,y) /\\ r(x',y')\n                         ==> norm(y' - y) <= norm(x' - x)) /\\\n            (!x. x IN s ==> r(x,(f:real^M->real^N) x))
-      #|  ?g:real^M->real^N t.\n          s SUBSET t /\\ (!x. x IN s ==> g x = f x) /\\\n          (!x y. x IN t /\\ y IN t ==> norm(g x - g y) <= norm(x - y)) /\\\n          !h u. t SUBSET u /\\ (!x. x IN t ==> h x = g x) /\\\n                (!x y. x IN u /\\ y IN u ==> norm(h x - h y) <= norm(x - y))\n                ==> u = t
-      #|  !f:real^M->real^N s.\n          (!x y. x IN s /\\ y IN s ==> norm(f x - f y) <= norm(x - y))\n          ==> ?g. (!x y. norm(g x - g y) <= norm(x - y)) /\\\n                  (!x. x IN s ==> g x = f x)
+      #|  \\r. (forall x y x' y'. r(x,y) /\\ r(x',y')\n                         ==> norm(y' - y) <= norm(x' - x)) /\\\n            (forall x. x IN s ==> r(x,(f:real^M->real^N) x))
+      #|  ?g:real^M->real^N t.\n          s SUBSET t /\\ (forall x. x IN s ==> g x = f x) /\\\n          (forall x y. x IN t /\\ y IN t ==> norm(g x - g y) <= norm(x - y)) /\\\n          forall h u. t SUBSET u /\\ (forall x. x IN t ==> h x = g x) /\\\n                (forall x y. x IN u /\\ y IN u ==> norm(h x - h y) <= norm(x - y))\n                ==> u = t
+      #|  forall f:real^M->real^N s.\n          (forall x y. x IN s /\\ y IN s ==> norm(f x - f y) <= norm(x - y))\n          ==> ?g. (forall x y. norm(g x - g y) <= norm(x - y)) /\\\n                  (forall x. x IN s ==> g x = f x)
       #|  \\x. B % (g:real^M->real^N) x
       #|  g:real^M->real^N
       #|  s:real^M->bool
@@ -54870,17 +54870,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0 < B
       #|  (\\a. b):real^M->real^N
       #|  b:real^N
-      #|  (!x y. x IN s /\\ y IN s ==> f x = f y) <=>\n                         (?a. !x. x IN s ==> f x = a)
+      #|  (forall x y. x IN s /\\ y IN s ==> f x = f y) <=>\n                         (?a. forall x. x IN s ==> f x = a)
       #|  norm(x - y:real^N) <= &0 <=> x = y
       #|  :real
       #|  :real
       #|  B = &0
-      #|  !f:real^M->real^N s B.\n        &0 <= B /\\\n        (!x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm(x - y))\n        ==> ?g. (!x y. norm(g x - g y) <= B * norm(x - y)) /\\\n                (!x. x IN s ==> g x = f x)
+      #|  forall f:real^M->real^N s B.\n        &0 <= B /\\\n        (forall x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm(x - y))\n        ==> ?g. (forall x y. norm(g x - g y) <= B * norm(x - y)) /\\\n                (forall x. x IN s ==> g x = f x)
       #|  &0 <= abs B + &1 /\\ B <= abs B + &1
       #|  abs B + &1
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s.\n        (?B. !x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm(x - y))\n        ==> ?g. (?B. !x y. norm(g x - g y) <= B * norm(x - y)) /\\\n                (!x. x IN s ==> g x = f x)
+      #|  forall f:real^M->real^N s.\n        (?B. forall x y. x IN s /\\ y IN s ==> norm(f x - f y) <= B * norm(x - y))\n        ==> ?g. (?B. forall x y. norm(g x - g y) <= B * norm(x - y)) /\\\n                (forall x. x IN s ==> g x = f x)
       #|  dist(a:real^M,v) < d / &6\n    ==> dist(a,a') <= &6 * dist(a,v) ==> dist(a',a) < d
       #|  :real
       #|  :real
@@ -54900,7 +54900,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^M
       #|  t:real^M->bool
       #|  (u DIFF s) INTER n:real^M->bool
-      #|  \\x. vsum {u | u IN c /\\ ~(!x:real^M. x IN n ==> h u x = &0)}\n                (\\t:real^M->bool. h t x % (f:real^M->real^N) (aa t))
+      #|  \\x. vsum {u | u IN c /\\ ~(forall x:real^M. x IN n ==> h u x = &0)}\n                (\\t:real^M->bool. h t x % (f:real^M->real^N) (aa t))
       #|  n:real^M->bool
       #|  a:real^M
       #|  u DIFF s:real^M->bool
@@ -54920,13 +54920,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  t:real^M->bool
       #|  v:real^M
       #|  t:real^M->bool
-      #|  !t v a:real^M. t IN c /\\ v IN t /\\ a IN s\n                   ==> dist(a,aa t) <= &6 * dist(a,v)
+      #|  forall t v a:real^M. t IN c /\\ v IN t /\\ a IN s\n                   ==> dist(a,aa t) <= &6 * dist(a,v)
       #|  v:real^M
       #|  (vv:(real^M->bool)->real^M) t
       #|  s:real^M->bool
       #|  v:real^M
       #|  t:real^M->bool
-      #|  !t v:real^M. t IN c /\\ v IN t ==> setdist({vv t},s) <= &2 * setdist({v},s)
+      #|  forall t v:real^M. t IN c /\\ v IN t ==> setdist({vv t},s) <= &2 * setdist({v},s)
       #|  aa:(real^M->bool)->real^M
       #|  vv:(real^M->bool)->real^M
       #|  &0 <= x ==> (x < &2 * x <=> ~(x = &0))
@@ -54936,7 +54936,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  v:real^M
       #|  t:real^M->bool
       #|  t:real^M->bool
-      #|  !t. t IN c\n        ==> ?v a:real^M. v IN u /\\ ~(v IN s) /\\ a IN s /\\\n                         t SUBSET ball(v,setdist({v},s) / &2) /\\\n                         dist(v,a) <= &2 * setdist({v},s)
+      #|  forall t. t IN c\n        ==> ?v a:real^M. v IN u /\\ ~(v IN s) /\\ a IN s /\\\n                         t SUBSET ball(v,setdist({v},s) / &2) /\\\n                         dist(v,a) <= &2 * setdist({v},s)
       #|  c:(real^M->bool)->bool
       #|  &0 <= x /\\ ~(x = &0) ==> &0 < x / &2
       #|  x:real^M
@@ -54946,7 +54946,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (\\x. y):real^M->real^N
       #|  y:real^N
       #|  s:real^M->bool = {}
-      #|  !f:real^M->real^N c u s.\n        convex c /\\ ~(c = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET c\n        ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET c /\\\n                !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N c u s.\n        convex c /\\ ~(c = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\ IMAGE f s SUBSET c\n        ==> ?g. g continuous_on u /\\ IMAGE g u SUBSET c /\\\n                forall x. x IN s ==> g x = f x
       #|  :real
       #|  :real
       #|  :real
@@ -54954,24 +54954,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^M->bool
       #|  cball(vec 0:real^N,B)
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N u s B.\n        &0 <= B /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (!x. x IN s ==> norm(f x) <= B)\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x) /\\\n                (!x. x IN u ==> norm(g x) <= B)
+      #|  forall f:real^M->real^N u s B.\n        &0 <= B /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (forall x. x IN s ==> norm(f x) <= B)\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x) /\\\n                (forall x. x IN u ==> norm(g x) <= B)
       #|  s:real^M->bool
       #|  u:real^M->bool
       #|  interval[a:real^N,b]
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N u s a b.\n        ~(interval[a,b] = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (!x. x IN s ==> f x IN interval[a,b])\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x) /\\\n                (!x. x IN u ==> g(x) IN interval[a,b])
-      #|  !f:real^N->real^1 u s a b.\n        drop a <= drop b /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (!x. x IN s ==> f x IN interval[a,b])\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x) /\\\n                (!x. x IN u ==> g(x) IN interval[a,b])
+      #|  forall f:real^M->real^N u s a b.\n        ~(interval[a,b] = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (forall x. x IN s ==> f x IN interval[a,b])\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x) /\\\n                (forall x. x IN u ==> g(x) IN interval[a,b])
+      #|  forall f:real^N->real^1 u s a b.\n        drop a <= drop b /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (forall x. x IN s ==> f x IN interval[a,b])\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x) /\\\n                (forall x. x IN u ==> g(x) IN interval[a,b])
       #|  s:real^M->bool
       #|  u:real^M->bool
       #|  interval(a:real^N,b)
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N u s a b.\n        ~(interval(a,b) = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (!x. x IN s ==> f x IN interval(a,b))\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x) /\\\n                (!x. x IN u ==> g(x) IN interval(a,b))
-      #|  !f:real^N->real^1 u s a b.\n        drop a < drop b /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (!x. x IN s ==> f x IN interval(a,b))\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x) /\\\n                (!x. x IN u ==> g(x) IN interval(a,b))
+      #|  forall f:real^M->real^N u s a b.\n        ~(interval(a,b) = {}) /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (forall x. x IN s ==> f x IN interval(a,b))\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x) /\\\n                (forall x. x IN u ==> g(x) IN interval(a,b))
+      #|  forall f:real^N->real^1 u s a b.\n        drop a < drop b /\\\n        closed_in (subtopology euclidean u) s /\\\n        f continuous_on s /\\\n        (forall x. x IN s ==> f x IN interval(a,b))\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x) /\\\n                (forall x. x IN u ==> g(x) IN interval(a,b))
       #|  s:real^M->bool
       #|  u:real^M->bool
       #|  (:real^N)
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N u s.\n        closed_in (subtopology euclidean u) s /\\ f continuous_on s\n        ==> ?g. g continuous_on u /\\\n                (!x. x IN s ==> g x = f x)
+      #|  forall f:real^M->real^N u s.\n        closed_in (subtopology euclidean u) s /\\ f continuous_on s\n        ==> ?g. g continuous_on u /\\\n                (forall x. x IN s ==> g x = f x)
       #|  convex_cone s <=> ~(s = {}) /\\ convex s /\\ conic s
       #|  &1 / &2
       #|  &1 / &2
@@ -54980,113 +54980,113 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  x:real^N
       #|  conic(s:real^N->bool)
-      #|  !s:real^N->bool.\n     convex_cone s <=>\n        vec 0 IN s /\\\n        (!x y. x IN s /\\ y IN s ==> (x + y) IN s) /\\\n        (!x c. x IN s /\\ &0 <= c ==> (c % x) IN s)
-      #|  !s x y. convex_cone s /\\ x IN s /\\ y IN s ==> (x + y) IN s
-      #|  !s c x. convex_cone s /\\ &0 <= c /\\ x IN s ==> (c % x) IN s
-      #|  !s. convex_cone s ==> ~(s = {})
-      #|  !f:real^M->real^N s.\n        convex_cone s /\\ linear f ==> convex_cone(IMAGE f s)
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (convex_cone(IMAGE f s) <=> convex_cone s)
-      #|  !a. convex_cone {x | a dot x >= &0}
+      #|  forall s:real^N->bool.\n     convex_cone s <=>\n        vec 0 IN s /\\\n        (forall x y. x IN s /\\ y IN s ==> (x + y) IN s) /\\\n        (forall x c. x IN s /\\ &0 <= c ==> (c % x) IN s)
+      #|  forall s x y. convex_cone s /\\ x IN s /\\ y IN s ==> (x + y) IN s
+      #|  forall s c x. convex_cone s /\\ &0 <= c /\\ x IN s ==> (c % x) IN s
+      #|  forall s. convex_cone s ==> ~(s = {})
+      #|  forall f:real^M->real^N s.\n        convex_cone s /\\ linear f ==> convex_cone(IMAGE f s)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (convex_cone(IMAGE f s) <=> convex_cone s)
+      #|  forall a. convex_cone {x | a dot x >= &0}
       #|  x <= &0 <=> &0 <= --x
-      #|  !a. convex_cone {x | a dot x <= &0}
-      #|  !s:real^N->bool. convex_cone s ==> vec 0 IN s
+      #|  forall a. convex_cone {x | a dot x <= &0}
+      #|  forall s:real^N->bool. convex_cone s ==> vec 0 IN s
       #|  vec 0:real^N
-      #|  !f. (!s:real^N->bool. s IN f ==> convex_cone s) ==> convex_cone(INTERS f)
-      #|  !s. convex_cone(convex_cone hull s)
-      #|  !s. convex(convex_cone hull s)
-      #|  !s. conic(convex_cone hull s)
-      #|  !s. ~(convex_cone hull s = {})
-      #|  !s. vec 0 IN convex_cone hull s
-      #|  !s x y:real^N.\n        x IN convex_cone hull s /\\ y IN convex_cone hull s\n        ==> x + y IN convex_cone hull s
-      #|  !s c x:real^N.\n        &0 <= c /\\ x IN convex_cone hull s\n        ==> (c % x) IN convex_cone hull s
-      #|  !s t. convex_cone s /\\ convex_cone t\n         ==> convex_cone {x + y:real^N | x IN s /\\ y IN t}
-      #|  !s:real^M->bool t:real^N->bool.\n        convex_cone s /\\ convex_cone t ==> convex_cone(s PCROSS t)
+      #|  forall f. (forall s:real^N->bool. s IN f ==> convex_cone s) ==> convex_cone(INTERS f)
+      #|  forall s. convex_cone(convex_cone hull s)
+      #|  forall s. convex(convex_cone hull s)
+      #|  forall s. conic(convex_cone hull s)
+      #|  forall s. ~(convex_cone hull s = {})
+      #|  forall s. vec 0 IN convex_cone hull s
+      #|  forall s x y:real^N.\n        x IN convex_cone hull s /\\ y IN convex_cone hull s\n        ==> x + y IN convex_cone hull s
+      #|  forall s c x:real^N.\n        &0 <= c /\\ x IN convex_cone hull s\n        ==> (c % x) IN convex_cone hull s
+      #|  forall s t. convex_cone s /\\ convex_cone t\n         ==> convex_cone {x + y:real^N | x IN s /\\ y IN t}
+      #|  forall s:real^M->bool t:real^N->bool.\n        convex_cone s /\\ convex_cone t ==> convex_cone(s PCROSS t)
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  sndcart:real^(M,N)finite_sum->real^N
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  fstcart:real^(M,N)finite_sum->real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        convex_cone(s PCROSS t) <=> convex_cone s /\\ convex_cone t
+      #|  forall s:real^M->bool t:real^N->bool.\n        convex_cone(s PCROSS t) <=> convex_cone s /\\ convex_cone t
       #|  x:real^N
       #|  vec 0:real^N
       #|  vec 0:real^N
       #|  x:real^N
       #|  x:real^N
-      #|  !s t. convex_cone hull(s UNION t) =\n         {x + y:real^N | x IN convex_cone hull s /\\ y IN convex_cone hull t}
+      #|  forall s t. convex_cone hull(s UNION t) =\n         {x + y:real^N | x IN convex_cone hull s /\\ y IN convex_cone hull t}
       #|  convex_cone {vec 0}
-      #|  !s. convex hull s SUBSET convex_cone hull s
-      #|  !s. conic hull s SUBSET convex_cone hull s
-      #|  !s:real^N->bool.\n    ~(s = {})\n    ==> convex_cone hull s = conic hull (convex hull s)
+      #|  forall s. convex hull s SUBSET convex_cone hull s
+      #|  forall s. conic hull s SUBSET convex_cone hull s
+      #|  forall s:real^N->bool.\n    ~(s = {})\n    ==> convex_cone hull s = conic hull (convex hull s)
       #|  {a} SUBSET s <=> a IN s
       #|  convex_cone hull {} = {vec 0}
       #|  a IN s ==> s = a INSERT s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n    convex_cone hull s = vec 0 INSERT conic hull (convex hull s)
-      #|  !s:real^N->bool.\n        ~(s = {})\n        ==> convex_cone hull s = {c % x | &0 <= c /\\ x IN convex hull s}
-      #|  !s:real^N->bool.\n        convex_cone hull s =\n        vec 0 INSERT {c % x | &0 <= c /\\ x IN convex hull s}
+      #|  forall s:real^N->bool.\n    convex_cone hull s = vec 0 INSERT conic hull (convex hull s)
+      #|  forall s:real^N->bool.\n        ~(s = {})\n        ==> convex_cone hull s = {c % x | &0 <= c /\\ x IN convex hull s}
+      #|  forall s:real^N->bool.\n        convex_cone hull s =\n        vec 0 INSERT {c % x | &0 <= c /\\ x IN convex hull s}
       #|  f x = y ==> {y} = {f x}
       #|  s:real^M-> bool = {}
-      #|  !f:real^M->real^N s.\n        linear f\n        ==> convex_cone hull (IMAGE f s) = IMAGE f (convex_cone hull s)
-      #|  !s. subspace s ==> convex_cone s
-      #|  !s. convex_cone(span s)
-      #|  !s. convex_cone s ==> convex_cone (IMAGE (--) s)
+      #|  forall f:real^M->real^N s.\n        linear f\n        ==> convex_cone hull (IMAGE f s) = IMAGE f (convex_cone hull s)
+      #|  forall s. subspace s ==> convex_cone s
+      #|  forall s. convex_cone(span s)
+      #|  forall s. convex_cone s ==> convex_cone (IMAGE (--) s)
       #|  c % x:real^N = --(--c % x)
       #|  c:real
       #|  x:real^N
       #|  c:real
       #|  --x:real^N = -- &1 % x
-      #|  !s:real^N->bool.\n        subspace s <=> convex_cone s /\\ (!x. x IN s ==> --x IN s)
-      #|  !s. {x:real^N | (--x) IN s} = IMAGE (--) s
+      #|  forall s:real^N->bool.\n        subspace s <=> convex_cone s /\\ (forall x. x IN s ==> --x IN s)
+      #|  forall s. {x:real^N | (--x) IN s} = IMAGE (--) s
       #|  x:real^N
-      #|  !s:real^N->bool. span s = convex_cone hull (s UNION IMAGE (--) s)
+      #|  forall s:real^N->bool. span s = convex_cone hull (s UNION IMAGE (--) s)
       #|  epigraph s (f:real^N->real) =\n       {xy:real^((N,1)finite_sum) |\n             fstcart xy IN s /\\ f(fstcart xy) <= drop(sndcart xy)}
-      #|  !x y. (pastecart x (lift y)) IN epigraph s f <=> x IN s /\\ f(x) <= y
-      #|  !f s. f convex_on s /\\ convex s <=> convex(epigraph s f)
-      #|  !f s. convex s ==> (f convex_on s <=> convex(epigraph s f))
-      #|  !f:real^N->real s a.\n        f convex_on s /\\ convex s ==> convex {x | x IN s /\\ f(x) <= a}
-      #|  !f:real^N->real s a.\n        f convex_on s /\\ convex s ==> convex {x | x IN s /\\ f(x) < a}
+      #|  forall x y. (pastecart x (lift y)) IN epigraph s f <=> x IN s /\\ f(x) <= y
+      #|  forall f s. f convex_on s /\\ convex s <=> convex(epigraph s f)
+      #|  forall f s. convex s ==> (f convex_on s <=> convex(epigraph s f))
+      #|  forall f:real^N->real s a.\n        f convex_on s /\\ convex s ==> convex {x | x IN s /\\ f(x) <= a}
+      #|  forall f:real^N->real s a.\n        f convex_on s /\\ convex s ==> convex {x | x IN s /\\ f(x) < a}
       #|  (x:real^N) IN s
       #|  y:real
       #|  x:real^N
       #|  convex(INTERS {epigraph (s:real^N->bool) (f i) | (i:A) IN t})
       #|  {f i x | i | F} = {}
       #|  t:A->bool = {}
-      #|  !t:A->bool s:real^N->bool.\n        convex s /\\\n        (!i. i IN t ==> f i convex_on s) /\\\n        (!x. x IN s ==> ?B. !i. i IN t ==> f i x <= B)\n        ==> (\\x. sup {f i x | i IN t}) convex_on s
+      #|  forall t:A->bool s:real^N->bool.\n        convex s /\\\n        (forall i. i IN t ==> f i convex_on s) /\\\n        (forall x. x IN s ==> ?B. forall i. i IN t ==> f i x <= B)\n        ==> (\\x. sup {f i x | i IN t}) convex_on s
       #|  \\a:A. pastecart (x a :B^M) (y a :B^N)
-      #|  (!p. P (fstcart o p) (sndcart o p)) <=> (!x:A->B^M y:A->B^N. P x y)
+      #|  (forall p. P (fstcart o p) (sndcart o p)) <=> (forall x:A->B^M y:A->B^N. P x y)
       #|  \\a:A. lift(x a)
-      #|  (!v. P (drop o v)) <=> (!x:A->real. P x)
-      #|  (!x. P x ==> (Q x = R x)) ==> (!x. P x) ==> ((!x. Q x) <=> (!x. R x))
+      #|  (forall v. P (drop o v)) <=> (forall x:A->real. P x)
+      #|  (forall x. P x ==> (Q x = R x)) ==> (forall x. P x) ==> ((forall x. Q x) <=> (forall x. R x))
       #|  a <= b ==> x <= a ==> x <= b
       #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
       #|  drop
       #|  sndcart
       #|  fstcart
-      #|  !f:real^N->real s.\n        convex s\n        ==> (f convex_on s <=>\n                !k u x.\n                   (!i:num. 1 <= i /\\ i <= k ==> &0 <= u(i) /\\ x(i) IN s) /\\\n                   (sum (1..k) u = &1)\n                   ==> f(vsum (1..k) (\\i. u(i) % x(i)))\n                           <= sum (1..k) (\\i. u(i) * f(x(i))))
+      #|  forall f:real^N->real s.\n        convex s\n        ==> (f convex_on s <=>\n                forall k u x.\n                   (forall i:num. 1 <= i /\\ i <= k ==> &0 <= u(i) /\\ x(i) IN s) /\\\n                   (sum (1..k) u = &1)\n                   ==> f(vsum (1..k) (\\i. u(i) % x(i)))\n                           <= sum (1..k) (\\i. u(i) * f(x(i))))
       #|  s:real^N->bool
       #|  f:real^N->real
       #|  g:num->A
       #|  n = CARD(k:A->bool)
-      #|  !f:real^N->real s k:A->bool u x.\n        f convex_on s /\\ convex s /\\ FINITE k /\\\n        (!i. i IN k ==> &0 <= u i /\\ x i IN s) /\\ sum k u = &1\n        ==> f(vsum k (\\i. u i % x i)) <= sum k (\\i. u i * f(x i))
+      #|  forall f:real^N->real s k:A->bool u x.\n        f convex_on s /\\ convex s /\\ FINITE k /\\\n        (forall i. i IN k ==> &0 <= u i /\\ x i IN s) /\\ sum k u = &1\n        ==> f(vsum k (\\i. u i % x i)) <= sum k (\\i. u i * f(x i))
       #|  b:real^1
       #|  a:real^1
       #|  IMAGE (f:real^1->real^N) (interval[a,b])
-      #|  !f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        f continuous_on interval[a,b] /\\\n        f(a)$k <= y /\\ y <= f(b)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
-      #|  !f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        (!x. x IN interval[a,b] ==> f continuous at x) /\\\n        f(a)$k <= y /\\ y <= f(b)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
-      #|  !f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        f continuous_on interval[a,b] /\\\n        f(b)$k <= y /\\ y <= f(a)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
-      #|  !f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        (!x. x IN interval[a,b] ==> f continuous at x) /\\\n        f(b)$k <= y /\\ y <= f(a)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
+      #|  forall f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        f continuous_on interval[a,b] /\\\n        f(a)$k <= y /\\ y <= f(b)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
+      #|  forall f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        (forall x. x IN interval[a,b] ==> f continuous at x) /\\\n        f(a)$k <= y /\\ y <= f(b)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
+      #|  forall f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        f continuous_on interval[a,b] /\\\n        f(b)$k <= y /\\ y <= f(a)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
+      #|  forall f:real^1->real^N a b y k.\n        drop a <= drop b /\\ 1 <= k /\\ k <= dimindex(:N) /\\\n        (forall x. x IN interval[a,b] ==> f continuous at x) /\\\n        f(b)$k <= y /\\ y <= f(a)$k\n        ==> ?x. x IN interval[a,b] /\\ f(x)$k = y
       #|  sum(1..k) (\\i. u i * b)
       #|  sum(1..k) (\\i. u i * f(v i :real^N))
       #|  v:num->real^N
       #|  u:num->real
       #|  k:num
-      #|  !f s b. f convex_on (convex hull s) /\\\n           (!x:real^N. x IN s ==> f(x) <= b)\n           ==> !x. x IN convex hull s ==> f(x) <= b
-      #|  !f s:real^N->bool b.\n       f convex_on convex hull s\n       ==> ((!x. x IN convex hull s ==> f x <= b) <=>\n            (!x. x IN s ==> f x <= b))
-      #|  !s a:real^N d.\n        (!x. x IN convex hull s ==> dist(a,x) <= d) <=>\n        (!x. x IN s ==> dist(a,x) <= d)
-      #|  !s:real^N->bool d.\n        (!x y. x IN convex hull s /\\ y IN convex hull s ==> dist(x,y) <= d) <=>\n        (!x y. x IN s /\\ y IN s ==> dist(x,y) <= d)
-      #|  !s:real^N->bool. diameter(convex hull s) = diameter s
-      #|  !s:real^N->bool.\n        ~(s = {})\n        ==> diameter(convex hull s) = sup { dist(x,y) | x IN s /\\ y IN s}
+      #|  forall f s b. f convex_on (convex hull s) /\\\n           (forall x:real^N. x IN s ==> f(x) <= b)\n           ==> forall x. x IN convex hull s ==> f(x) <= b
+      #|  forall f s:real^N->bool b.\n       f convex_on convex hull s\n       ==> ((forall x. x IN convex hull s ==> f x <= b) <=>\n            (forall x. x IN s ==> f x <= b))
+      #|  forall s a:real^N d.\n        (forall x. x IN convex hull s ==> dist(a,x) <= d) <=>\n        (forall x. x IN s ==> dist(a,x) <= d)
+      #|  forall s:real^N->bool d.\n        (forall x y. x IN convex hull s /\\ y IN convex hull s ==> dist(x,y) <= d) <=>\n        (forall x y. x IN s /\\ y IN s ==> dist(x,y) <= d)
+      #|  forall s:real^N->bool. diameter(convex hull s) = diameter s
+      #|  forall s:real^N->bool.\n        ~(s = {})\n        ==> diameter(convex hull s) = sup { dist(x,y) | x IN s /\\ y IN s}
       #|  x = (x + 1) - 1
       #|  1..n
       #|  FINITE {i | 1 <= i /\\ i <= n /\\ P(i)} /\\\n     CARD {i | 1 <= i /\\ i <= n /\\ P(i)} <= n
@@ -55115,16 +55115,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(a /\\ b /\\ c) <=> a /\\ b ==> ~c
       #|  x:real^N
       #|  dimindex(:N)
-      #|  !n x:real^N.\n        x IN interval[vec 0,vec 1] /\\\n        n <= dimindex(:N) /\\\n        CARD {i | 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = &0)} <= n\n        ==> x IN convex hull\n                  {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N)\n                                  ==> ((x$i = &0) \\/ (x$i = &1))}
-      #|  interval [vec 0,vec 1:real^N] =\n     convex hull\n       {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> ((x$i = &0) \\/ (x$i = &1))}
+      #|  forall n x:real^N.\n        x IN interval[vec 0,vec 1] /\\\n        n <= dimindex(:N) /\\\n        CARD {i | 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = &0)} <= n\n        ==> x IN convex hull\n                  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                                  ==> ((x$i = &0) \\/ (x$i = &1))}
+      #|  interval [vec 0,vec 1:real^N] =\n     convex hull\n       {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> ((x$i = &0) \\/ (x$i = &1))}
       #|  IMAGE (\\x:real^N. a + x)\n                      (IMAGE (\\x. (lambda i. ((b:real^N)$i - a$i) * x$i))\n                             (s:real^N->bool))
       #|  {i | 1 <= i /\\ i <= dimindex(:N) /\\ ((x:real^N)$i = &1)}
       #|  x:real^N
       #|  IMAGE (\\s. (lambda i. if i IN s then &1 else &0):real^N)\n            {t | t SUBSET (1..dimindex(:N))}
-      #|  {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N)\n                      ==> ((x$i = &0) \\/ (x$i = &1))}
+      #|  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                      ==> ((x$i = &0) \\/ (x$i = &1))}
       #|  ?s:real^N->bool. FINITE s /\\ interval[vec 0,vec 1] = convex hull s
       #|  interval[a:real^N,b] = {}
-      #|  !a b:real^N. ?s. FINITE s /\\ interval[a,b] = convex hull s
+      #|  forall a b:real^N. ?s. FINITE s /\\ interval[a,b] = convex hull s
       #|  &0 <= u /\\ u <= &1 ==> abs u = u /\\ abs(&1 - u) = &1 - u
       #|  (&1 - u) % a + u % a:real^N = a
       #|  b:real^N = a
@@ -55140,7 +55140,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a:real^N) IN s
       #|  b:real^N
       #|  a:real^N
-      #|  (!f s:real^N->bool.\n        f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f x - f a) * norm(b - a) <= (f b - f a) * norm(x - a)) /\\\n   (!f s:real^N->bool.\n        f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f b - f a) * norm(b - x) <= (f b - f x) * norm(b - a)) /\\\n   (!f s:real^N->bool.\n        f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f x - f a) * norm (b - x) <= (f b - f x) * norm(x - a))
+      #|  (forall f s:real^N->bool.\n        f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f x - f a) * norm(b - a) <= (f b - f a) * norm(x - a)) /\\\n   (forall f s:real^N->bool.\n        f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f b - f a) * norm(b - x) <= (f b - f x) * norm(b - a)) /\\\n   (forall f s:real^N->bool.\n        f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment[a,b]\n                ==> (f x - f a) * norm (b - x) <= (f b - f x) * norm(x - a))
       #|  x:real^N = b
       #|  x:real^N = a
       #|  x:real^N
@@ -55149,7 +55149,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (a:real^N) IN s
       #|  b:real^N
       #|  a:real^N
-      #|  (!f s:real^N->bool.\n      f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f x - f a) / norm(x - a) <= (f b - f a) / norm(b - a)) /\\\n   (!f s:real^N->bool.\n      f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f b - f a) / norm(b - a) <= (f b - f x) / norm(b - x)) /\\\n   (!f s:real^N->bool.\n      f convex_on s <=>\n        !a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f x - f a) / norm (x - a) <= (f b - f x) / norm(b - x))
+      #|  (forall f s:real^N->bool.\n      f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f x - f a) / norm(x - a) <= (f b - f a) / norm(b - a)) /\\\n   (forall f s:real^N->bool.\n      f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f b - f a) / norm(b - a) <= (f b - f x) / norm(b - x)) /\\\n   (forall f s:real^N->bool.\n      f convex_on s <=>\n        forall a b x. a IN s /\\ b IN s /\\ x IN segment(a,b)\n                ==> (f x - f a) / norm (x - a) <= (f b - f x) / norm(b - x))
       #|  c:real^1
       #|  d:real^1
       #|  b:real^1
@@ -55164,7 +55164,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^1
       #|  drop a <= drop d
       #|  c:real^1 = b
-      #|  !f s a b c d.\n        f convex_on s /\\\n        a IN s /\\ b IN s /\\ c IN s /\\ d IN s /\\\n        drop a < drop b /\\ drop b <= drop c /\\ drop c < drop d\n        ==> (f b - f a) / (drop b - drop a)\n            <= (f d - f c) / (drop d - drop c)
+      #|  forall f s a b c d.\n        f convex_on s /\\\n        a IN s /\\ b IN s /\\ c IN s /\\ d IN s /\\\n        drop a < drop b /\\ drop b <= drop c /\\ drop c < drop d\n        ==> (f b - f a) / (drop b - drop a)\n            <= (f d - f c) / (drop d - drop c)
       #|  a < b ==> ~(b <= a)
       #|  a:real^1
       #|  x:real^1
@@ -55179,34 +55179,34 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^1
       #|  b:real^1
       #|  a:real^1
-      #|  !f s. is_interval s\n         ==> (f convex_on s <=>\n              !a b c d. a IN s /\\ b IN s /\\ c IN s /\\ d IN s /\\\n                         drop a < drop b /\\ drop b <= drop c /\\ drop c < drop d\n                         ==> (f b - f a) / (drop b - drop a)\n                             <= (f d - f c) / (drop d - drop c))
-      #|  starlike s <=> ?a. a IN s /\\ !x. x IN s ==> segment[a,x] SUBSET s
-      #|  !s. convex s /\\ ~(s = {}) ==> starlike s
+      #|  forall f s. is_interval s\n         ==> (f convex_on s <=>\n              forall a b c d. a IN s /\\ b IN s /\\ c IN s /\\ d IN s /\\\n                         drop a < drop b /\\ drop b <= drop c /\\ drop c < drop d\n                         ==> (f b - f a) / (drop b - drop a)\n                             <= (f d - f c) / (drop d - drop c))
+      #|  starlike s <=> ?a. a IN s /\\ forall x. x IN s ==> segment[a,x] SUBSET s
+      #|  forall s. convex s /\\ ~(s = {}) ==> starlike s
       #|  (vec 0:real^N) IN s
       #|  vec 0:real^N
-      #|  !s:real^N->bool. conic s /\\ ~(s = {}) ==> starlike s
+      #|  forall s:real^N->bool. conic s /\\ ~(s = {}) ==> starlike s
       #|  a /\\ b /\\ c /\\ d <=> c /\\ a /\\ b /\\ d
       #|  u + v = &1 <=> u = &1 - v
-      #|  !a b. segment[a,b] = convex hull {a,b}
+      #|  forall a b. segment[a,b] = convex hull {a,b}
       #|  segment[(f:real^1->real^1) a,f b]
-      #|  !f:real^1->real^1 a b.\n        ~(interval[a,b] = {}) /\\ f continuous_on interval[a,b] /\\\n        (!x y. x IN interval[a,b] /\\ y IN interval[a,b] /\\ drop x <= drop y\n               ==> drop(f x) <= drop(f y))\n        ==> IMAGE f (interval[a,b]) = interval[f a,f b]
+      #|  forall f:real^1->real^1 a b.\n        ~(interval[a,b] = {}) /\\ f continuous_on interval[a,b] /\\\n        (forall x y. x IN interval[a,b] /\\ y IN interval[a,b] /\\ drop x <= drop y\n               ==> drop(f x) <= drop(f y))\n        ==> IMAGE f (interval[a,b]) = interval[f a,f b]
       #|  segment[(f:real^1->real^1) b,f a]
-      #|  !f:real^1->real^1 a b.\n        ~(interval[a,b] = {}) /\\ f continuous_on interval[a,b] /\\\n        (!x y. x IN interval[a,b] /\\ y IN interval[a,b] /\\ drop x <= drop y\n               ==> drop(f y) <= drop(f x))\n        ==> IMAGE f (interval[a,b]) = interval[f b,f a]
+      #|  forall f:real^1->real^1 a b.\n        ~(interval[a,b] = {}) /\\ f continuous_on interval[a,b] /\\\n        (forall x y. x IN interval[a,b] /\\ y IN interval[a,b] /\\ drop x <= drop y\n               ==> drop(f y) <= drop(f x))\n        ==> IMAGE f (interval[a,b]) = interval[f b,f a]
       #|  x:real^N
       #|  {a:real^N,b}
       #|  y:real^N
-      #|  !a b x y:real^N.\n        x IN segment[a,b] ==> norm(y - x) <= norm(y - a) \\/\n                              norm(y - x) <= norm(y - b)
+      #|  forall a b x y:real^N.\n        x IN segment[a,b] ==> norm(y - x) <= norm(y - a) \\/\n                              norm(y - x) <= norm(y - b)
       #|  b:real^N
       #|  a:real^N
       #|  x:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !a b x:real^N.\n        x IN segment[a,b] ==> norm(x - a) <= norm(b - a) /\\\n                              norm(x - b) <= norm(b - a)
-      #|  !x a b:real^N. between x (a,b) <=> x IN convex hull {a,b}
-      #|  !f s. starlike s /\\ linear f ==> starlike(IMAGE f s)
-      #|  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (starlike (IMAGE f s) <=> starlike s)
-      #|  !a s. starlike (IMAGE (\\x. a + x) s) <=> starlike s
-      #|  !f x y z. linear f /\\ (!x y. f x = f y ==> x = y)\n             ==> (between (f x) (f y,f z) <=> between x (y,z))
+      #|  forall a b x:real^N.\n        x IN segment[a,b] ==> norm(x - a) <= norm(b - a) /\\\n                              norm(x - b) <= norm(b - a)
+      #|  forall x a b:real^N. between x (a,b) <=> x IN convex hull {a,b}
+      #|  forall f s. starlike s /\\ linear f ==> starlike(IMAGE f s)
+      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (starlike (IMAGE f s) <=> starlike s)
+      #|  forall a s. starlike (IMAGE (\\x. a + x) s) <=> starlike s
+      #|  forall f x y z. linear f /\\ (forall x y. f x = f y ==> x = y)\n             ==> (between (f x) (f y,f z) <=> between x (y,z))
       #|  u * n <= n <=> &0 <= n * (&1 - u)
       #|  (v % a + u % y) - (v % a + u % z):real^N = u % (y - z)
       #|  (&1 - u) % a + u % y:real^N
@@ -55216,24 +55216,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real
       #|  x:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. starlike s ==> starlike(closure s)
+      #|  forall s:real^N->bool. starlike s ==> starlike(closure s)
       #|  starlike(:real^N)
-      #|  !s:real^M->bool t:real^N->bool.\n        starlike s /\\ starlike t ==> starlike(s PCROSS t)
+      #|  forall s:real^M->bool t:real^N->bool.\n        starlike s /\\ starlike t ==> starlike(s PCROSS t)
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  sndcart:real^(M,N)finite_sum->real^N
       #|  (s:real^M->bool) PCROSS (t:real^N->bool)
       #|  fstcart:real^(M,N)finite_sum->real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        starlike(s PCROSS t) <=> starlike s /\\ starlike t
+      #|  forall s:real^M->bool t:real^N->bool.\n        starlike(s PCROSS t) <=> starlike s /\\ starlike t
       #|  convex hull {a,b} SUBSET ball(c:real^N,r)
-      #|  !r a b c:real^N.\n        dist(c,a) < r /\\ dist(c,b) < r /\\ between x (a,b) ==> dist(c,x) < r
+      #|  forall r a b c:real^N.\n        dist(c,a) < r /\\ dist(c,b) < r /\\ between x (a,b) ==> dist(c,x) < r
       #|  convex hull {a,b} SUBSET cball(c:real^N,r)
-      #|  !r a b c:real^N.\n      dist(c,a) <= r /\\ dist(c,b) <= r /\\ between x (a,b) ==> dist(c,x) <= r
-      #|  !r a b x:real^N.\n        norm a < r /\\ norm b < r /\\ between x (a,b) ==> norm x < r
-      #|  !r a b x:real^N.\n        norm a <= r /\\ norm b <= r /\\ between x (a,b) ==> norm x <= r
+      #|  forall r a b c:real^N.\n      dist(c,a) <= r /\\ dist(c,b) <= r /\\ between x (a,b) ==> dist(c,x) <= r
+      #|  forall r a b x:real^N.\n        norm a < r /\\ norm b < r /\\ between x (a,b) ==> norm x < r
+      #|  forall r a b x:real^N.\n        norm a <= r /\\ norm b <= r /\\ between x (a,b) ==> norm x <= r
       #|  c:real^N = a
-      #|  !a b c:real^N.\n        b IN segment[a,c]\n        ==> segment[a,b] UNION segment[b,c] = segment[a,c]
+      #|  forall a b c:real^N.\n        b IN segment[a,c]\n        ==> segment[a,b] UNION segment[b,c] = segment[a,c]
       #|  {a,b,y} = {y,b,a}
       #|  (z:real^N) IN convex hull {a,b,y}
       #|  z:real^N
@@ -55241,7 +55241,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool.\n        convex {a | a IN s /\\ !x. x IN s ==> segment[a,x] SUBSET s}
+      #|  forall s:real^N->bool.\n        convex {a | a IN s /\\ forall x. x IN s ==> segment[a,x] SUBSET s}
       #|  dist(c,d) <= m ==> dist(c,x) <= dist(c,d) /\\ m < e\n                ==> dist(c:real^N,x) < e
       #|  d:real^N
       #|  c:real^N
@@ -55252,7 +55252,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d:real^N
       #|  c:real^N
       #|  N:num
-      #|  !n. ?c d:real^N. c IN s /\\ d IN s /\\ x IN segment[c,d] /\\\n                       dist(c,d) <= dist(a:real^N,b) / &2 pow n
+      #|  forall n. ?c d:real^N. c IN s /\\ d IN s /\\ x IN segment[c,d] /\\\n                       dist(c,d) <= dist(a:real^N,b) / &2 pow n
       #|  d:real^N
       #|  c:real^N
       #|  dist(c:real^N,c + x - y) = dist(y,x)
@@ -55271,7 +55271,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d:real^N
       #|  c:real^N
       #|  N:num
-      #|  !n. ?c d:real^N. ball(c,e) SUBSET s /\\ ball(d,e) SUBSET s /\\\n                       x IN segment[c,d] /\\\n                       dist(c,d) <= dist(a:real^N,b) / &2 pow n
+      #|  forall n. ?c d:real^N. ball(c,e) SUBSET s /\\ ball(d,e) SUBSET s /\\\n                       x IN segment[c,d] /\\\n                       dist(c,d) <= dist(a:real^N,b) / &2 pow n
       #|  N:num
       #|  e / dist(a:real^N,b)
       #|  inv(&2)
@@ -55284,7 +55284,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N = a
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool.\n        open s \\/ closed s\n        ==> (convex s <=> !a b. a IN s /\\ b IN s ==> midpoint(a,b) IN s)
+      #|  forall s:real^N->bool.\n        open s \\/ closed s\n        ==> (convex s <=> forall a b. a IN s /\\ b IN s ==> midpoint(a,b) IN s)
       #|  a:real^N
       #|  b:real^N
       #|  vec 0:real^N
@@ -55297,7 +55297,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c':real
       #|  b':real
       #|  a':real
-      #|  !a b c x y z:real^N.\n        ~(a = &0) /\\ ~(c = &0) /\\\n        collinear {a % x,b % y,c % z} /\\\n        ~(vec 0 IN affine hull {x,y,z})\n        ==> collinear {x,y,z}
+      #|  forall a b c x y z:real^N.\n        ~(a = &0) /\\ ~(c = &0) /\\\n        collinear {a % x,b % y,c % z} /\\\n        ~(vec 0 IN affine hull {x,y,z})\n        ==> collinear {x,y,z}
       #|  (%) (inv b):real^N->real^N
       #|  ~(b = &0)
       #|  &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
@@ -55310,7 +55310,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b % y:real^N = a + c <=> a + (--b) % y + c = vec 0
       #|  v:real
       #|  u:real
-      #|  !a b c x y z:real^N.\n        &0 < a /\\ &0 <= b /\\ &0 < c /\\\n        (b % y) IN segment[a % x,c % z] /\\\n        ~(vec 0 IN affine hull {x,y,z})\n        ==> y IN segment[x,z]
+      #|  forall a b c x y z:real^N.\n        &0 < a /\\ &0 <= b /\\ &0 < c /\\\n        (b % y) IN segment[a % x,c % z] /\\\n        ~(vec 0 IN affine hull {x,y,z})\n        ==> y IN segment[x,z]
       #|  a + x:real^N = a + y <=> x = y
       #|  b % x:real^N = (&1 - u) % a % x + u % c % z
       #|  a - b + c = &0 <=> b = a + c
@@ -55324,8 +55324,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N = x
       #|  b % x:real^N = c % z
       #|  y:real^N = x
-      #|  (!a b c x y z. P a b c x y z ==> P c b a z y x) /\\\n    (!a b c x y z. P a b c x y z /\\ x = y ==> z = y) /\\\n    (!a b c x y z. P a b c x y z /\\ ~(x = y) /\\ ~(z = y) ==> Q x y z)\n    ==> !a b c x y z. P a b c x y z /\\ ~(x = y /\\ z = y) ==> Q x y z
-      #|  !a b c x y z:real^N.\n        &0 < a /\\ &0 <= b /\\ &0 < c /\\\n        (b % y) IN segment(a % x,c % z) /\\\n        ~(vec 0 IN affine hull {x,y,z}) /\\\n        ~(x = y /\\ z = y)\n        ==> y IN segment(x,z)
+      #|  (forall a b c x y z. P a b c x y z ==> P c b a z y x) /\\\n    (forall a b c x y z. P a b c x y z /\\ x = y ==> z = y) /\\\n    (forall a b c x y z. P a b c x y z /\\ ~(x = y) /\\ ~(z = y) ==> Q x y z)\n    ==> forall a b c x y z. P a b c x y z /\\ ~(x = y /\\ z = y) ==> Q x y z
+      #|  forall a b c x y z:real^N.\n        &0 < a /\\ &0 <= b /\\ &0 < c /\\\n        (b % y) IN segment(a % x,c % z) /\\\n        ~(vec 0 IN affine hull {x,y,z}) /\\\n        ~(x = y /\\ z = y)\n        ==> y IN segment(x,z)
       #|  &1 - (&1 - e) = e
       #|  y' = (&1 - (&1 - e)) % (&1 / e % y' - (&1 - e) / e % x) +\n                       (&1 - e) % x:real^N
       #|  x - e % (x - c) - y':real^N =\n                  e % (c - (&1 / e % y' - (&1 - e) / e % x))
@@ -55334,7 +55334,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y':real^N
       #|  e * d:real
       #|  d:real
-      #|  !s e x c:real^N.\n     convex s /\\ c IN interior s /\\\n     x IN s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN interior s
+      #|  forall s e x c:real^N.\n     convex s /\\ c IN interior s /\\\n     x IN s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN interior s
       #|  norm(c - (c + x)) = norm(x)
       #|  :real
       #|  :real
@@ -55347,49 +55347,49 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x:real^N) IN s
       #|  ?y:real^N. y IN s /\\ norm(y - x) * (&1 - e) < e * d
       #|  d:real
-      #|  !s e x c:real^N.\n     convex s /\\ c IN interior s /\\\n     x IN closure s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN interior s
+      #|  forall s e x c:real^N.\n     convex s /\\ c IN interior s /\\\n     x IN closure s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN interior s
       #|  (&1 - u) % a + u % b:real^N = b - (&1 - u) % (b - a)
-      #|  !s a b:real^N.\n        convex s /\\ a IN interior s /\\ b IN closure s\n        ==> segment(a,b) SUBSET interior s
+      #|  forall s a b:real^N.\n        convex s /\\ a IN interior s /\\ b IN closure s\n        ==> segment(a,b) SUBSET interior s
       #|  relative_interior s =\n   {x | ?t. open_in (subtopology euclidean (affine hull s)) t /\\\n            x IN t /\\ t SUBSET s}
       #|  relative_frontier s = closure s DIFF relative_interior s
-      #|  !s:real^N->bool.\n        relative_interior s =\n        subtopology euclidean (affine hull s) interior_of s
+      #|  forall s:real^N->bool.\n        relative_interior s =\n        subtopology euclidean (affine hull s) interior_of s
       #|  s SUBSET t ==> t INTER s = s
-      #|  !s:real^N->bool.\n        relative_frontier s =\n        subtopology euclidean (affine hull s) frontier_of s
+      #|  forall s:real^N->bool.\n        relative_frontier s =\n        subtopology euclidean (affine hull s) frontier_of s
       #|  (a /\\ b) /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
-      #|  !s. relative_interior s =\n          {x | x IN s /\\\n               ?t. open t /\\ x IN t /\\ t INTER (affine hull s) SUBSET s}
-      #|  !s. relative_interior s = s <=>\n       open_in(subtopology euclidean (affine hull s)) s
-      #|  !s. open_in(subtopology euclidean (affine hull s)) s\n       ==> relative_interior s = s
+      #|  forall s. relative_interior s =\n          {x | x IN s /\\\n               ?t. open t /\\ x IN t /\\ t INTER (affine hull s) SUBSET s}
+      #|  forall s. relative_interior s = s <=>\n       open_in(subtopology euclidean (affine hull s)) s
+      #|  forall s. open_in(subtopology euclidean (affine hull s)) s\n       ==> relative_interior s = s
       #|  relative_interior {} = {}
       #|  relative_frontier {} = {}
-      #|  !s:real^N->bool. affine s ==> relative_interior s = s
-      #|  !s. relative_interior(affine hull s) = affine hull s
-      #|  !s. open_in (subtopology euclidean (affine hull s))\n               (relative_interior s)
-      #|  !s. (relative_interior s) SUBSET s
-      #|  !s:real^N->bool. closed s ==> relative_frontier s SUBSET s
+      #|  forall s:real^N->bool. affine s ==> relative_interior s = s
+      #|  forall s. relative_interior(affine hull s) = affine hull s
+      #|  forall s. open_in (subtopology euclidean (affine hull s))\n               (relative_interior s)
+      #|  forall s. (relative_interior s) SUBSET s
+      #|  forall s:real^N->bool. closed s ==> relative_frontier s SUBSET s
       #|  s:real^N->bool
-      #|  !s:real^N->bool. relative_frontier s SUBSET s <=> closed s
-      #|  !s:real^N->bool. bounded s ==> bounded(relative_interior s)
+      #|  forall s:real^N->bool. relative_frontier s SUBSET s <=> closed s
+      #|  forall s:real^N->bool. bounded s ==> bounded(relative_interior s)
       #|  affine hull s:real^N->bool
-      #|  !s:real^N->bool. open_in (subtopology euclidean s) (relative_interior s)
-      #|  !s t. s SUBSET t /\\ affine hull s = affine hull t\n         ==> (relative_interior s) SUBSET (relative_interior t)
-      #|  !s. relative_interior s SUBSET relative_interior(closure s)
-      #|  !s t. t SUBSET s /\\\n         open_in(subtopology euclidean (affine hull s)) t\n         ==> t SUBSET (relative_interior s)
-      #|  !s t. t SUBSET s /\\\n         open_in(subtopology euclidean (affine hull s)) t /\\\n         (!t'. t' SUBSET s /\\\n               open_in(subtopology euclidean (affine hull s)) t'\n               ==> t' SUBSET t)\n         ==> (relative_interior s = t)
+      #|  forall s:real^N->bool. open_in (subtopology euclidean s) (relative_interior s)
+      #|  forall s t. s SUBSET t /\\ affine hull s = affine hull t\n         ==> (relative_interior s) SUBSET (relative_interior t)
+      #|  forall s. relative_interior s SUBSET relative_interior(closure s)
+      #|  forall s t. t SUBSET s /\\\n         open_in(subtopology euclidean (affine hull s)) t\n         ==> t SUBSET (relative_interior s)
+      #|  forall s t. t SUBSET s /\\\n         open_in(subtopology euclidean (affine hull s)) t /\\\n         (forall t'. t' SUBSET s /\\\n               open_in(subtopology euclidean (affine hull s)) t'\n               ==> t' SUBSET t)\n         ==> (relative_interior s = t)
       #|  ball(x:real^N,e)
       #|  (a /\\ b) /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
-      #|  !x:real^N s.\n        x IN relative_interior s <=>\n        x IN s /\\ ?e. &0 < e /\\ (ball(x,e) INTER (affine hull s)) SUBSET s
+      #|  forall x:real^N s.\n        x IN relative_interior s <=>\n        x IN s /\\ ?e. &0 < e /\\ (ball(x,e) INTER (affine hull s)) SUBSET s
       #|  cball(x:real^N,e) INTER affine hull s
       #|  e:real
       #|  &0 < e /\\ x <= e / &2 ==> x < e
       #|  ball(x:real^N,e) INTER affine hull s
       #|  e / &2
       #|  e:real
-      #|  !x:real^N s.\n        x IN relative_interior s <=>\n        x IN s /\\ ?e. &0 < e /\\ (cball(x,e) INTER affine hull s) SUBSET s
+      #|  forall x:real^N s.\n        x IN relative_interior s <=>\n        x IN s /\\ ?e. &0 < e /\\ (cball(x,e) INTER affine hull s) SUBSET s
       #|  t INTER u:real^N->bool
       #|  u:real^N->bool
       #|  s:real^N->bool
       #|  s:real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> relative_interior(s INTER t) = relative_interior s INTER t
+      #|  forall s t:real^N->bool.\n        convex s /\\ open t /\\ ~(s INTER t = {})\n        ==> relative_interior(s INTER t) = relative_interior s INTER t
       #|  ~(x = &0) /\\ &0 < e ==> x / e * e / x = &1
       #|  e / norm x % x:real^N
       #|  norm(x:real^N) / e
@@ -55400,15 +55400,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  a = s /\\ c SUBSET s /\\ a SUBSET c ==> c = s /\\ c = a
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-      #|  (!s:real^N->bool.\n        vec 0 IN relative_interior s ==> conic hull s = span s) /\\\n   (!s:real^N->bool.\n        vec 0 IN relative_interior s ==> conic hull s = affine hull s)
+      #|  (forall s:real^N->bool.\n        vec 0 IN relative_interior s ==> conic hull s = span s) /\\\n   (forall s:real^N->bool.\n        vec 0 IN relative_interior s ==> conic hull s = affine hull s)
       #|  conic hull s:real^N->bool
-      #|  !s:real^N->bool.\n        vec 0 IN relative_interior(conic hull s) <=> conic hull s = span s
-      #|  !s t. open_in(subtopology euclidean (affine hull t)) s\n         ==> (s SUBSET relative_interior t <=> s SUBSET t)
-      #|  !a:real^N s.\n        relative_interior (IMAGE (\\x. a + x) s) =\n        IMAGE (\\x. a + x) (relative_interior s)
-      #|  !a:real^N s.\n        relative_frontier (IMAGE (\\x. a + x) s) =\n        IMAGE (\\x. a + x) (relative_frontier s)
+      #|  forall s:real^N->bool.\n        vec 0 IN relative_interior(conic hull s) <=> conic hull s = span s
+      #|  forall s t. open_in(subtopology euclidean (affine hull t)) s\n         ==> (s SUBSET relative_interior t <=> s SUBSET t)
+      #|  forall a:real^N s.\n        relative_interior (IMAGE (\\x. a + x) s) =\n        IMAGE (\\x. a + x) (relative_interior s)
+      #|  forall a:real^N s.\n        relative_frontier (IMAGE (\\x. a + x) s) =\n        IMAGE (\\x. a + x) (relative_frontier s)
       #|  a /\\ b /\\ c <=> c /\\ a /\\ b
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> relative_interior(IMAGE f s) = IMAGE f (relative_interior s)
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> relative_frontier(IMAGE f s) = IMAGE f (relative_frontier s)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> relative_interior(IMAGE f s) = IMAGE f (relative_interior s)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> relative_frontier(IMAGE f s) = IMAGE f (relative_frontier s)
       #|  z:real^N
       #|  e - dist(x:real^N,y)
       #|  y:real^N
@@ -55416,7 +55416,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0 < e
       #|  e:real
       #|  x:real^N
-      #|  !s:real^N->bool.\n        relative_interior(relative_interior s) = relative_interior s
+      #|  forall s:real^N->bool.\n        relative_interior(relative_interior s) = relative_interior s
       #|  :real
       #|  :real
       #|  &0 < &2 * &n + &1
@@ -55432,7 +55432,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N = vsum b (\\v. inv(&2 * &n + &1) % v)
       #|  &1 - x + y = &1 <=> x = y
       #|  vsum (vec 0 INSERT b :real^N->bool)\n           (\\v. (if v = vec 0 then &1 - sum b c else c v) % v) IN s
-      #|  !c. (!v. v IN b ==> &0 <= c(v)) /\\ sum b c <= &1\n        ==> vsum b (\\v:real^N. c(v) % v) IN s
+      #|  forall c. (forall v. v IN b ==> &0 <= c(v)) /\\ sum b c <= &1\n        ==> vsum b (\\v:real^N. c(v) % v) IN s
       #|  n = dim(s:real^N->bool)
       #|  span(s:real^N->bool) = span b
       #|  s:real^N->bool
@@ -55441,36 +55441,36 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  IMAGE (\\x:real^N. --a + x) s
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        vec 0 IN s /\\ convex s ==> ~(relative_interior s = {})
-      #|  !s:real^N->bool.\n        convex s ==> (relative_interior s = {} <=> s = {})
+      #|  forall s:real^N->bool.\n        vec 0 IN s /\\ convex s ==> ~(relative_interior s = {})
+      #|  forall s:real^N->bool.\n        convex s ==> (relative_interior s = {} <=> s = {})
       #|  s:real^N->bool = {}
       #|  u:real^N->bool = {}
-      #|  !u s:real^N->bool.\n        convex s /\\ affine u /\\ s SUBSET u\n        ==> (aff_dim s = aff_dim u <=>\n             s = {} /\\ u = {} \\/\n             ~((subtopology euclidean u) interior_of s = {}))
-      #|  !s. affine hull s = (:real^N)\n       ==> relative_interior s = interior s
+      #|  forall u s:real^N->bool.\n        convex s /\\ affine u /\\ s SUBSET u\n        ==> (aff_dim s = aff_dim u <=>\n             s = {} /\\ u = {} \\/\n             ~((subtopology euclidean u) interior_of s = {}))
+      #|  forall s. affine hull s = (:real^N)\n       ==> relative_interior s = interior s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. open s ==> relative_interior s = s
-      #|  !s. ~(interior s = {}) ==> relative_interior s = interior s
-      #|  !s. ~(interior s = {}) ==> relative_frontier s = frontier s
-      #|  !s. affine hull s = (:real^N) ==> relative_frontier s = frontier s
+      #|  forall s:real^N->bool. open s ==> relative_interior s = s
+      #|  forall s. ~(interior s = {}) ==> relative_interior s = interior s
+      #|  forall s. ~(interior s = {}) ==> relative_frontier s = frontier s
+      #|  forall s. affine hull s = (:real^N) ==> relative_frontier s = frontier s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool. open s ==> relative_frontier s = frontier s
-      #|  !s. affine hull (convex hull s) = affine hull s
+      #|  forall s:real^N->bool. open s ==> relative_frontier s = frontier s
+      #|  forall s. affine hull (convex hull s) = affine hull s
       #|  UNIV SUBSET s ==> s = UNIV
       #|  (a INSERT s) SUBSET P hull (a INSERT s)\n      ==> s SUBSET P hull (a INSERT s)
       #|  span s:real^N->bool
-      #|  !s. s SUBSET t /\\ s = UNIV ==> t = UNIV
+      #|  forall s. s SUBSET t /\\ s = UNIV ==> t = UNIV
       #|  convex hull (vec 0 INSERT s):real^N->bool
-      #|  !s:real^N->bool.\n        independent s /\\ s HAS_SIZE (dimindex(:N))\n        ==> ?a. a IN interior(convex hull (vec 0 INSERT s))
-      #|  !s. interior s SUBSET relative_interior s
+      #|  forall s:real^N->bool.\n        independent s /\\ s HAS_SIZE (dimindex(:N))\n        ==> ?a. a IN interior(convex hull (vec 0 INSERT s))
+      #|  forall s. interior s SUBSET relative_interior s
       #|  s:real^N->bool
-      #|  !s:real^N->bool. relative_frontier s SUBSET frontier s
+      #|  forall s:real^N->bool. relative_frontier s SUBSET frontier s
       #|  a - b % c:real^N = a + --b % c
       #|  norm x < e ==> norm x = y ==> y < e
       #|  z:real^N =\n   (&1 - u) % (z - u % (y - x)) + u % (z + (&1 - u) % (y - x))
       #|  z:real^N
-      #|  (!d e. P d /\\ Q e ==> R(min d e))\n                        ==> (?e. P e) /\\ (?e. Q e) ==> (?e. R e)
+      #|  (forall d e. P d /\\ Q e ==> R(min d e))\n                        ==> (?e. P e) /\\ (?e. Q e) ==> (?e. R e)
       #|  (a /\\ b) /\\ (c /\\ d) /\\ e ==> f <=>\n                    a /\\ c /\\ e ==> b /\\ d ==> f
-      #|  !s:real^N->bool. convex s ==> convex(relative_interior s)
+      #|  forall s:real^N->bool. convex s ==> convex(relative_interior s)
       #|  &1 - (&1 - e) = e
       #|  y' = (&1 - (&1 - e)) % (&1 / e % y' - (&1 - e) / e % x) +\n                       (&1 - e) % x:real^N
       #|  a % y - (b - c) % x:real^N =\n                                (c - b) % x + a % y
@@ -55481,11 +55481,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  e * d:real
       #|  x - e % (x - c):real^N = (&1 - e) % x + e % c
       #|  d:real
-      #|  !s e x c:real^N.\n     convex s /\\ c IN relative_interior s /\\\n     x IN s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN relative_interior s
+      #|  forall s e x c:real^N.\n     convex s /\\ c IN relative_interior s /\\\n     x IN s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN relative_interior s
       #|  dist(c:real^N,z) < d
       #|  d - dist(c:real^N,z)
       #|  closure(affine hull s):real^N->bool
-      #|  !t. x IN t /\\ t = s ==> x IN s
+      #|  forall t. x IN t /\\ t = s ==> x IN s
       #|  (z:real^N) IN affine hull s
       #|  a / b * c:real = (c * a) / b
       #|  dist(c:real^N,c + x) = norm x
@@ -55501,14 +55501,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x:real^N) IN s
       #|  ?y:real^N. y IN s /\\ norm(y - x) * (&1 - e) < e * d
       #|  d:real
-      #|  !s e x c:real^N.\n     convex s /\\ c IN relative_interior s /\\\n     x IN closure s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN relative_interior s
+      #|  forall s e x c:real^N.\n     convex s /\\ c IN relative_interior s /\\\n     x IN closure s /\\ &0 < e /\\ e <= &1\n     ==> x - e % (x - c) IN relative_interior s
       #|  :real
       #|  :real
       #|  (&1 - u) % a + u % b:real^N = b - (&1 - u) % (b - a)
-      #|  !s a b:real^N.\n        convex s /\\ a IN relative_interior s /\\ b IN closure s\n        ==> segment(a,b) SUBSET relative_interior s
+      #|  forall s a b:real^N.\n        convex s /\\ a IN relative_interior s /\\ b IN closure s\n        ==> segment(a,b) SUBSET relative_interior s
       #|  inv c:real
       #|  c:real
-      #|  P /\\ (?u. &0 < u /\\ u < &1 /\\ ~Q(u % y))\n    ==> ~(!x. P /\\ (?u. &0 < u /\\ u < &1 /\\ x = u % y) ==> Q x)
+      #|  P /\\ (?u. &0 < u /\\ u < &1 /\\ ~Q(u % y))\n    ==> ~(forall x. P /\\ (?u. &0 < u /\\ u < &1 /\\ x = u % y) ==> Q x)
       #|  c % x:real^N
       #|  x:real^N
       #|  vec 0:real^N
@@ -55519,7 +55519,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c = &0
       #|  x:real^N
       #|  c:real
-      #|  !s t:real^N->bool.\n     convex s /\\ vec 0 IN relative_interior s /\\ t SUBSET relative_frontier s\n     ==> t = relative_frontier s INTER conic hull t
+      #|  forall s t:real^N->bool.\n     convex s /\\ vec 0 IN relative_interior s /\\ t SUBSET relative_frontier s\n     ==> t = relative_frontier s INTER conic hull t
       #|  x:real^N
       #|  y:real^N
       #|  z:real^N
@@ -55529,19 +55529,19 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  t SUBSET u ==> s INTER t SUBSET s INTER u
       #|  s SUBSET a INSERT s
-      #|  !c t s z:real^N.\n        convex c /\\ t SUBSET c /\\ z IN relative_interior c /\\\n        DISJOINT s (relative_interior c)\n        ==> s INTER (convex hull (z INSERT t)) =\n            s INTER (convex hull t)
+      #|  forall c t s z:real^N.\n        convex c /\\ t SUBSET c /\\ z IN relative_interior c /\\\n        DISJOINT s (relative_interior c)\n        ==> s INTER (convex hull (z INSERT t)) =\n            s INTER (convex hull t)
       #|  c:real^N
       #|  s:real^N->bool
       #|  c:real^N
-      #|  s SUBSET c /\\ (!a. a IN i /\\ a IN s ==> s SUBSET i)\n    ==> s SUBSET c DIFF i \\/ s SUBSET i
-      #|  !s a b:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s\n        ==> segment(a,b) SUBSET relative_frontier s \\/\n            segment(a,b) SUBSET relative_interior s
+      #|  s SUBSET c /\\ (forall a. a IN i /\\ a IN s ==> s SUBSET i)\n    ==> s SUBSET c DIFF i \\/ s SUBSET i
+      #|  forall s a b:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s\n        ==> segment(a,b) SUBSET relative_frontier s \\/\n            segment(a,b) SUBSET relative_interior s
       #|  a:real^N
       #|  b:real^N
       #|  b:real^N
       #|  a:real^N
       #|  s:real^N->bool
       #|  interior s:real^N->bool = {}
-      #|  !s a b:real^N.\n         convex s /\\ a IN closure s /\\ b IN closure s\n         ==> segment (a,b) SUBSET frontier s \\/\n             segment (a,b) SUBSET interior s
+      #|  forall s a b:real^N.\n         convex s /\\ a IN closure s /\\ b IN closure s\n         ==> segment (a,b) SUBSET frontier s \\/\n             segment (a,b) SUBSET interior s
       #|  b:real^N
       #|  a:real^N
       #|  s:real^N->bool
@@ -55553,10 +55553,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  (a:real^N) IN relative_interior s
-      #|  !s a b x:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s /\\\n        x IN segment(a,b) /\\ x IN relative_frontier s\n        ==> segment[a,b] SUBSET relative_frontier s
+      #|  forall s a b x:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s /\\\n        x IN segment(a,b) /\\ x IN relative_frontier s\n        ==> segment[a,b] SUBSET relative_frontier s
       #|  s:real^N->bool
       #|  c:real^N
-      #|  !s a b c:real^N.\n        convex s /\\ c IN segment(a,b) /\\ {a,b,c} SUBSET relative_frontier s\n        ==> segment[a,b] SUBSET relative_frontier s
+      #|  forall s a b c:real^N.\n        convex s /\\ c IN segment(a,b) /\\ {a,b,c} SUBSET relative_frontier s\n        ==> segment[a,b] SUBSET relative_frontier s
       #|  b:real^N
       #|  a:real^N
       #|  s:real^N->bool
@@ -55568,19 +55568,19 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  (a:real^N) IN interior s
-      #|  !s a b x:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s /\\\n        x IN segment(a,b) /\\ x IN frontier s\n        ==> segment[a,b] SUBSET frontier s
+      #|  forall s a b x:real^N.\n        convex s /\\ a IN closure s /\\ b IN closure s /\\\n        x IN segment(a,b) /\\ x IN frontier s\n        ==> segment[a,b] SUBSET frontier s
       #|  s SUBSET {a} /\\ ~(s = {}) ==> s = {a}
-      #|  !a. relative_interior {a} = {a}
-      #|  !a:real^N. relative_frontier {a} = {}
+      #|  forall a. relative_interior {a} = {a}
+      #|  forall a:real^N. relative_frontier {a} = {}
       #|  r < &0
-      #|  !a r. relative_interior(cball(a,r)) = if r = &0 then {a} else ball(a,r)
-      #|  !a r. relative_interior(ball(a,r)) = ball(a,r)
+      #|  forall a r. relative_interior(cball(a,r)) = if r = &0 then {a} else ball(a,r)
+      #|  forall a r. relative_interior(ball(a,r)) = ball(a,r)
       #|  &0 < r
       #|  r < &0
-      #|  !a:real^N r. relative_frontier(cball(a,r)) =\n                if r = &0 then {} else sphere(a,r)
+      #|  forall a:real^N r. relative_frontier(cball(a,r)) =\n                if r = &0 then {} else sphere(a,r)
       #|  &0 < r
       #|  r < &0
-      #|  !a:real^N r. relative_frontier(ball(a,r)) =\n                if r = &0 then {} else sphere(a,r)
+      #|  forall a:real^N r. relative_frontier(ball(a,r)) =\n                if r = &0 then {} else sphere(a,r)
       #|  (&1 - u) * (&1 - u) * a + &2 * (&1 - u) * u * x + u * u * a = a <=>\n    x = a \\/ u = &0 \\/ u = &1
       #|  a + a - &2 * ab = &0 <=> ab = a
       #|  (a - b:real^N) dot (a - b) = a dot a + b dot b - &2 * a dot b
@@ -55588,7 +55588,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (x + y:real^N) dot (x + y) = x dot x + &2 * x dot y + y dot y
       #|  u:real
       #|  a:real^N = b
-      #|  !a b x:real^N.\n     ~(x IN segment(a,b) /\\ norm(a) = norm(b) /\\ norm(x) = norm(b))
+      #|  forall a b x:real^N.\n     ~(x IN segment(a,b) /\\ norm(a) = norm(b) /\\ norm(x) = norm(b))
       #|  midpoint(u,v):real^N
       #|  v:real^N
       #|  u:real^N
@@ -55609,11 +55609,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  r < &0
       #|  u:real^N = v
       #|  a:real^N
-      #|  !a r u v:real^N.\n      u IN cball(a,r) /\\ v IN cball(a,r) ==> segment(u,v) SUBSET ball(a,r)
+      #|  forall a r u v:real^N.\n      u IN cball(a,r) /\\ v IN cball(a,r) ==> segment(u,v) SUBSET ball(a,r)
       #|  a IN s /\\ b IN s /\\ segment[a,b] DIFF {a,b} SUBSET s\n    ==> segment[a:real^N,b] SUBSET s
       #|  a:real^N
       #|  ~(relative_interior s:real^N->bool = {})
-      #|  !s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\\n        relative_interior s SUBSET t /\\ t SUBSET closure s\n        ==> starlike t
+      #|  forall s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\\n        relative_interior s SUBSET t /\\ t SUBSET closure s\n        ==> starlike t
       #|  dist(x:real^N,x + y) = norm y
       #|  :real
       #|  :real
@@ -55623,7 +55623,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y + t % (x - x):real^N = y
       #|  y:real^N = x
       #|  e:real
-      #|  !s x y:real^N.\n        x IN relative_interior s /\\ y IN s\n        ==> ?t. &1 < t /\\ (y + t % (x - y)) IN s
+      #|  forall s x y:real^N.\n        x IN relative_interior s /\\ y IN s\n        ==> ?t. &1 < t /\\ (y + t % (x - y)) IN s
       #|  &1 < x ==> &0 < x
       #|  inv t:real
       #|  (&1 - u) % y + u % (y + t % (x - y)):real^N =\n                    y + t % u % (x - y)
@@ -55636,12 +55636,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  ?y:real^N. y IN relative_interior s
       #|  x:real^N
-      #|  !s. convex s\n       ==> relative_interior s =\n           {x:real^N | x IN s /\\\n                       !y. y IN s ==> ?t. &1 < t /\\ (y + t % (x - y)) IN s}
+      #|  forall s. convex s\n       ==> relative_interior s =\n           {x:real^N | x IN s /\\\n                       forall y. y IN s ==> ?t. &1 < t /\\ (y + t % (x - y)) IN s}
       #|  affine hull s:real^N->bool
       #|  ~(s = {}) ==> s = {} \\/ s = a ==> a = s
       #|  relative_interior s = closure s\n    ==> relative_interior s SUBSET s /\\ s SUBSET closure s\n        ==> relative_interior s = s /\\ closure s = s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        relative_interior s = closure s <=> affine s
+      #|  forall s:real^N->bool.\n        relative_interior s = closure s <=> affine s
       #|  dist(a + x:real^N,a + y) = norm(x - y)
       #|  :real
       #|  :real
@@ -55680,12 +55680,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  k:real
-      #|  ?e. &0 < e /\\ !d. &0 <= d /\\ d < e\n                      ==> (a + d % l:real^N) IN relative_interior s
+      #|  ?e. &0 < e /\\ forall d. &0 <= d /\\ d < e\n                      ==> (a + d % l:real^N) IN relative_interior s
       #|  d = inf {d | &0 < d /\\ ~((a + d % l:real^N) IN relative_interior(s))}
       #|  {d | &0 < d /\\ ~((a + d % l:real^N) IN relative_interior(s))}
-      #|  !s a l:real^N.\n        bounded s /\\ a IN relative_interior s /\\\n        (a + l) IN affine hull s /\\ ~(l = vec 0)\n        ==> ?d. &0 < d /\\\n                (a + d % l) IN relative_frontier s /\\\n                !e. &0 <= e /\\ e < d ==> (a + e % l) IN relative_interior s
+      #|  forall s a l:real^N.\n        bounded s /\\ a IN relative_interior s /\\\n        (a + l) IN affine hull s /\\ ~(l = vec 0)\n        ==> ?d. &0 < d /\\\n                (a + d % l) IN relative_frontier s /\\\n                forall e. &0 <= e /\\ e < d ==> (a + e % l) IN relative_interior s
       #|  interior s:real^N->bool = relative_interior s
-      #|  !s a l:real^N.\n        bounded s /\\ a IN interior s /\\ ~(l = vec 0)\n        ==> ?d. &0 < d /\\ (a + d % l) IN frontier s /\\\n                !e. &0 <= e /\\ e < d ==> (a + e % l) IN interior s
+      #|  forall s a l:real^N.\n        bounded s /\\ a IN interior s /\\ ~(l = vec 0)\n        ==> ?d. &0 < d /\\ (a + d % l) IN frontier s /\\\n                forall e. &0 <= e /\\ e < d ==> (a + e % l) IN interior s
       #|  d:real
       #|  x + d % (y - x):real^N
       #|  y:real^N
@@ -55704,8 +55704,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  w:real^N
       #|  ~(s = {a}) ==> a IN s ==> ?b. ~(b = a) /\\ b IN s
       #|  x:real^N = y
-      #|  !s x y:real^N.\n        convex s /\\ bounded s /\\ x IN relative_interior s /\\ y IN s /\\ ~(x = y)\n        ==> ?z. z IN relative_frontier s /\\ y IN segment[x,z] /\\\n                segment(x,z) SUBSET relative_interior s
-      #|  !s x y:real^N.\n        convex s /\\ bounded s /\\ x IN relative_interior s /\\ y IN s /\\\n        ~(x = y /\\ s = {x})\n        ==> ?z. z IN relative_frontier s /\\ y IN segment[x,z] /\\\n                segment(x,z) SUBSET relative_interior s
+      #|  forall s x y:real^N.\n        convex s /\\ bounded s /\\ x IN relative_interior s /\\ y IN s /\\ ~(x = y)\n        ==> ?z. z IN relative_frontier s /\\ y IN segment[x,z] /\\\n                segment(x,z) SUBSET relative_interior s
+      #|  forall s x y:real^N.\n        convex s /\\ bounded s /\\ x IN relative_interior s /\\ y IN s /\\\n        ~(x = y /\\ s = {x})\n        ==> ?z. z IN relative_frontier s /\\ y IN segment[x,z] /\\\n                segment(x,z) SUBSET relative_interior s
       #|  &0 < v
       #|  &0 < u
       #|  u:real / (u + v)
@@ -55725,7 +55725,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~((vec 0:real^N) IN relative_frontier s)
       #|  (vec 0:real^N) IN relative_frontier s
       #|  x:real^N
-      #|  !s x:real^N.\n        bounded s /\\ x IN s /\\ ~(s = {x})\n        ==> ?a b. a IN relative_frontier s /\\\n                  b IN relative_frontier s /\\\n                  x IN segment[a,b]
+      #|  forall s x:real^N.\n        bounded s /\\ x IN s /\\ ~(s = {x})\n        ==> ?a b. a IN relative_frontier s /\\\n                  b IN relative_frontier s /\\\n                  x IN segment[a,b]
       #|  &0 < v
       #|  &0 < u
       #|  u:real / (u + v)
@@ -55745,7 +55745,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (vec 0:real^N) IN frontier s
       #|  s = {vec 0:real^N}
       #|  x:real^N
-      #|  !s x:real^N.\n        bounded s /\\ x IN s\n        ==> ?a b. a IN frontier s /\\\n                  b IN frontier s /\\\n                  x IN segment[a,b]
+      #|  forall s x:real^N.\n        bounded s /\\ x IN s\n        ==> ?a b. a IN frontier s /\\\n                  b IN frontier s /\\\n                  x IN segment[a,b]
       #|  &0 < d
       #|  &0 < d ==> &1 <= &1 + d
       #|  inv(&1 + d)
@@ -55757,29 +55757,29 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  s:real^N->bool
       #|  (b:real^N) IN frontier s
-      #|  !s a b:real^N.\n        bounded s /\\ b IN closure s /\\ ~(b = a)\n        ==> ?c. ~(c = a) /\\ c IN frontier s /\\ b IN segment[a,c]
+      #|  forall s a b:real^N.\n        bounded s /\\ b IN closure s /\\ ~(b = a)\n        ==> ?c. ~(c = a) /\\ c IN frontier s /\\ b IN segment[a,c]
       #|  segment[a:real^N,b] SUBSET convex hull (relative_frontier s)
       #|  x:real^N
       #|  s:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> s SUBSET convex hull (relative_frontier s)
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> s SUBSET convex hull (relative_frontier s)
       #|  segment[a:real^N,b] SUBSET convex hull (frontier s)
       #|  x:real^N
       #|  s:real^N->bool
       #|  x:real^N
-      #|  !s:real^N->bool.\n        bounded s ==> s SUBSET convex hull (frontier s)
+      #|  forall s:real^N->bool.\n        bounded s ==> s SUBSET convex hull (frontier s)
       #|  convex hull (relative_frontier s):real^N->bool
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> affine hull (relative_frontier s) = affine hull s
-      #|  !s:real^N->bool.\n        convex s /\\ compact s /\\ ~(?a. s = {a})\n        ==> s = convex hull (relative_frontier s)
-      #|  !s:real^N->bool.\n        convex s /\\ compact s /\\ ~(?a. s = {a})\n        ==> s = convex hull (s DIFF relative_interior s)
-      #|  !s:real^N->bool.\n        convex s /\\ compact s ==> s = convex hull (frontier s)
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> affine hull (relative_frontier s) = affine hull s
+      #|  forall s:real^N->bool.\n        convex s /\\ compact s /\\ ~(?a. s = {a})\n        ==> s = convex hull (relative_frontier s)
+      #|  forall s:real^N->bool.\n        convex s /\\ compact s /\\ ~(?a. s = {a})\n        ==> s = convex hull (s DIFF relative_interior s)
+      #|  forall s:real^N->bool.\n        convex s /\\ compact s ==> s = convex hull (frontier s)
       #|  a + x:real^N = a + y <=> x = y
       #|  e:real
       #|  d % (w - z):real^N
       #|  z:real^N
       #|  s:real^N->bool
       #|  d:real
-      #|  (!w z. Q w z <=> Q z w) /\\ (!w z. P z ==> Q w z)\n    ==> !w z. P w \\/ P z ==> Q w z
+      #|  (forall w z. Q w z <=> Q z w) /\\ (forall w z. P z ==> Q w z)\n    ==> forall w z. P w \\/ P z ==> Q w z
       #|  w:real^N
       #|  z:real^N
       #|  ~((w:real^N) IN relative_frontier s /\\ z IN relative_frontier s)
@@ -55793,7 +55793,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s = {z:real^N}
       #|  z:real^N
       #|  s:real^N->bool = {}
-      #|  !s a:real^N. bounded s ==> ~(relative_frontier s = {a})
+      #|  forall s a:real^N. bounded s ==> ~(relative_frontier s = {a})
       #|  --(&1)
       #|  &1
       #|  (v:real^M->bool) PCROSS (w:real^N->bool)
@@ -55805,10 +55805,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^M
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n        relative_interior(s PCROSS t) =\n        relative_interior s PCROSS relative_interior t
+      #|  forall s:real^M->bool t:real^N->bool.\n        relative_interior(s PCROSS t) =\n        relative_interior s PCROSS relative_interior t
       #|  s:real^N->bool
       #|  s:real^N->bool
-      #|  !s:real^N->bool. relative_frontier s = {} <=> affine s
+      #|  forall s:real^N->bool. relative_frontier s = {} <=> affine s
       #|  &0 < e ==> &0 < abs(&1 + e) - &1
       #|  ~(a * n <= n) <=> &0 < n * (a - &1)
       #|  (x + e % (x - y)) - y:real^N = (&1 + e) % (x - y)
@@ -55821,12 +55821,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x + e / norm(x - y) % (x - y):real^N
       #|  y:real^N = x
       #|  e:real
-      #|  !s x y:real^N.\n          bounded s /\\ x IN relative_interior s /\\ y IN s /\\\n          ~(diameter s = &0)\n          ==> norm(x - y) < diameter s
+      #|  forall s x y:real^N.\n          bounded s /\\ x IN relative_interior s /\\ y IN s /\\\n          ~(diameter s = &0)\n          ==> norm(x - y) < diameter s
       #|  x IN s ==> s SUBSET t ==> x IN t
       #|  y:real^N
       #|  x:real^N
       #|  closure s:real^N->bool
-      #|  !s x y:real^N.\n        bounded s /\\ x IN relative_interior s /\\ y IN closure s /\\\n        ~(diameter s = &0)\n        ==> norm(x - y) < diameter s
+      #|  forall s x y:real^N.\n        bounded s /\\ x IN relative_interior s /\\ y IN closure s /\\\n        ~(diameter s = &0)\n        ==> norm(x - y) < diameter s
       #|  x:real^N
       #|  y:real^N
       #|  y:real^N
@@ -55834,16 +55834,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  closure s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(diameter s = &0)\n        ==> ?x y. x IN relative_frontier s /\\\n                  y IN relative_frontier s /\\\n                  norm(x - y) = diameter s
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(diameter s = &0)\n        ==> ?x y. x IN relative_frontier s /\\\n                  y IN relative_frontier s /\\\n                  norm(x - y) = diameter s
       #|  s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> diameter(relative_frontier s) = diameter s
-      #|  !s:real^N->bool.\n        bounded s /\\ ~(diameter s = &0)\n        ==> ?x y. x IN frontier s /\\ y IN frontier s /\\\n                  norm(x - y) = diameter s
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(?a. s = {a})\n        ==> diameter(relative_frontier s) = diameter s
+      #|  forall s:real^N->bool.\n        bounded s /\\ ~(diameter s = &0)\n        ==> ?x y. x IN frontier s /\\ y IN frontier s /\\\n                  norm(x - y) = diameter s
       #|  s:real^N->bool
       #|  diameter(closure s DIFF relative_interior s:real^N->bool)
-      #|  !r. r <= f /\\ f <= s /\\ r = s ==> f = s
+      #|  forall r. r <= f /\\ f <= s /\\ r = s ==> f = s
       #|  ?a:real^N. s = {a}
-      #|  !s:real^N->bool. bounded s ==> diameter(frontier s) = diameter s
+      #|  forall s:real^N->bool. bounded s ==> diameter(frontier s) = diameter s
       #|  &0 < e /\\ e <= &1 ==> &0 < &1 - abs(&1 - e)
       #|  ~(n <= a * n) <=> &0 < (&1 - a) * n
       #|  &0 <= a ==> abs(min (&1) a) <= a
@@ -55858,8 +55858,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  e:real
       #|  ~q /\\ ~p ==> (p <=> q)
       #|  (x:real^N) IN s
-      #|  !s x:real^N.\n        closed s /\\ ~(s = {}) /\\ x IN affine hull s\n        ==> ((closest_point s x) IN relative_interior s <=>\n             x IN relative_interior s)
-      #|  !s x:real^N.\n        closed s /\\ ~(s = {}) /\\ x IN affine hull s DIFF relative_interior s\n        ==> closest_point s x IN relative_frontier s
+      #|  forall s x:real^N.\n        closed s /\\ ~(s = {}) /\\ x IN affine hull s\n        ==> ((closest_point s x) IN relative_interior s <=>\n             x IN relative_interior s)
+      #|  forall s x:real^N.\n        closed s /\\ ~(s = {}) /\\ x IN affine hull s DIFF relative_interior s\n        ==> closest_point s x IN relative_frontier s
       #|  &0 < d ==> &1 <= &1 + d /\\ &0 <= &1 + d
       #|  p /\\ q /\\ r <=> r /\\ p /\\ q
       #|  &0 < d ==> (&1 - u * (&1 + d) = &0 <=> u = inv(&1 + d))
@@ -55870,14 +55870,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  :real
       #|  x + d / norm(x - a) % (x - a:real^N)
       #|  d:real
-      #|  !s x a:real^N.\n        convex s /\\ x IN relative_interior s /\\ a IN affine hull s /\\ ~(x = a)\n        ==> ?b. b IN s /\\ x IN segment(a,b)
+      #|  forall s x a:real^N.\n        convex s /\\ x IN relative_interior s /\\ a IN affine hull s /\\ ~(x = a)\n        ==> ?b. b IN s /\\ x IN segment(a,b)
       #|  b:real^N
       #|  b:real^N
       #|  x:real^N
       #|  s:real^N->bool
       #|  midpoint(x:real^N,b)
       #|  b:real^N
-      #|  !s x a:real^N.\n        convex s /\\ x IN relative_interior s /\\ a IN affine hull s /\\ ~(x = a)\n        ==> ?b. b IN relative_interior s /\\ x IN segment(a,b)
+      #|  forall s x a:real^N.\n        convex s /\\ x IN relative_interior s /\\ a IN affine hull s /\\ ~(x = a)\n        ==> ?b. b IN relative_interior s /\\ x IN segment(a,b)
       #|  y:real^N
       #|  z:real^N
       #|  s:real^N->bool
@@ -55887,7 +55887,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s x:real^N.\n        convex s\n        ==> (x IN relative_interior s <=>\n             ~(s = {}) /\\\n             !a. a IN s /\\ ~(a = x) ==> ?b. b IN s /\\ x IN segment(a,b))
+      #|  forall s x:real^N.\n        convex s\n        ==> (x IN relative_interior s <=>\n             ~(s = {}) /\\\n             forall a. a IN s /\\ ~(a = x) ==> ?b. b IN s /\\ x IN segment(a,b))
       #|  u:real^N
       #|  y:real^N
       #|  s:real^N->bool
@@ -55906,7 +55906,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  i1 INTER i2 = {} ==> k1 SUBSET i1 /\\ k2 SUBSET i2\n      ==> k1 INTER k2 SUBSET u
       #|  s INTER t:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t\n        ==> relative_interior s INTER relative_interior t SUBSET\n            relative_interior(s INTER t)
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t\n        ==> relative_interior s INTER relative_interior t SUBSET\n            relative_interior(s INTER t)
       #|  z:real^N
       #|  v:real^N
       #|  t:real^N->bool
@@ -55922,7 +55922,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s INTER t:real^N->bool
       #|  x:real^N
       #|  v:real^N
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t /\\\n        ~(relative_interior s INTER relative_interior t = {})\n        ==> relative_interior(s INTER t) =\n            relative_interior s INTER relative_interior t
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t /\\\n        ~(relative_interior s INTER relative_interior t = {})\n        ==> relative_interior(s INTER t) =\n            relative_interior s INTER relative_interior t
       #|  s SUBSET t ==> a IN s ==> a IN t
       #|  b:real^N
       #|  a:real^N
@@ -55931,16 +55931,16 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N = a
       #|  x:real^N
       #|  a:real^N
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t /\\\n        s SUBSET t /\\ ~(s INTER relative_interior t = {})\n        ==> relative_interior s SUBSET relative_interior t
-      #|  !a:real^N r. convex hull (sphere(a,r)) = cball(a,r)
-      #|  !s a:real^N r. convex s ==> (sphere(a,r) SUBSET s <=> cball(a,r) SUBSET s)
-      #|  !a:real^N r. diameter(sphere(a,r)) = if r < &0 then &0 else &2 * r
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t /\\\n        s SUBSET t /\\ ~(s INTER relative_interior t = {})\n        ==> relative_interior s SUBSET relative_interior t
+      #|  forall a:real^N r. convex hull (sphere(a,r)) = cball(a,r)
+      #|  forall s a:real^N r. convex s ==> (sphere(a,r) SUBSET s <=> cball(a,r) SUBSET s)
+      #|  forall a:real^N r. diameter(sphere(a,r)) = if r < &0 then &0 else &2 * r
       #|  inv(r - &1) % (y - x):real^N
       #|  x:real^N
       #|  r = &1 + (r - &1)
       #|  a * (r - &1)
       #|  a:real
-      #|  !s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &1 < r\n        ==> ?d. &0 < d /\\\n                !x y. x IN s /\\ y IN affine hull s /\\ dist(x,y) <= d\n                      ==> y IN IMAGE (\\x. r % x) s
+      #|  forall s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &1 < r\n        ==> ?d. &0 < d /\\\n                forall x y. x IN s /\\ y IN affine hull s /\\ dist(x,y) <= d\n                      ==> y IN IMAGE (\\x. r % x) s
       #|  &1 < x ==> &0 < &2 * x
       #|  &0 < x /\\ x < &1 ==> &0 < &1 - x /\\ &1 - x <= &1
       #|  a % x:real^N = x - (&1 - a) % (x - vec 0)
@@ -55955,7 +55955,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d:real
       #|  (r + &1) / &2
       #|  s:real^N->bool
-      #|  !s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &1 < r\n        ==> ?d. &0 < d /\\\n                !x y. x IN s /\\ y IN affine hull s /\\ dist(x,y) <= d\n                      ==> y IN IMAGE (\\x. r % x) (relative_interior s)
+      #|  forall s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &1 < r\n        ==> ?d. &0 < d /\\\n                forall x y. x IN s /\\ y IN affine hull s /\\ dist(x,y) <= d\n                      ==> y IN IMAGE (\\x. r % x) (relative_interior s)
       #|  z:real^N
       #|  inv r % x:real^N
       #|  inv r % y:real^N
@@ -55965,7 +55965,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  d:real
       #|  inv r:real
       #|  s:real^N->bool
-      #|  !s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &0 < r /\\ r < &1\n        ==> ?d. &0 < d /\\\n                !x y. x IN relative_frontier s /\\ dist(x,y) <= d\n                      ==> ~(y IN IMAGE (\\x. r % x) s)
+      #|  forall s:real^N->bool r.\n        convex s /\\ vec 0 IN relative_interior s /\\ &0 < r /\\ r < &1\n        ==> ?d. &0 < d /\\\n                forall x y. x IN relative_frontier s /\\ dist(x,y) <= d\n                      ==> ~(y IN IMAGE (\\x. r % x) s)
       #|  a + b:real^N = a + &1 % b
       #|  dist(x:real^N,y) <= min d e
       #|  cball(b:real^N,e) INTER affine hull s SUBSET s
@@ -55982,7 +55982,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. is_interval s ==> is_interval(relative_interior s)
+      #|  forall s:real^N->bool. is_interval s ==> is_interval(relative_interior s)
       #|  \\/
       #|  \\/
       #|  \\/
@@ -56033,12 +56033,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  :real
       #|  :real
       #|  interior s:real^N->bool = {}
-      #|  !s:real^N->bool. is_interval s ==> is_interval(interior s)
+      #|  forall s:real^N->bool. is_interval s ==> is_interval(interior s)
       #|  b:real
       #|  a:real
       #|  x:real
-      #|  !a b c. P a \\/ P b \\/ P c ==> ?x. P x
-      #|  !a b u v. (u <= x /\\ x <= v \\/ v <= x /\\ x <= u) /\\\n               abs(a - u) < e /\\ abs(b - v) < e\n               ==> ?y. (a <= y /\\ y <= b \\/ b <= y /\\ y <= a) /\\\n                       abs(y - x) < e
+      #|  forall a b c. P a \\/ P b \\/ P c ==> ?x. P x
+      #|  forall a b u v. (u <= x /\\ x <= v \\/ v <= x /\\ x <= u) /\\\n               abs(a - u) < e /\\ abs(b - v) < e\n               ==> ?y. (a <= y /\\ y <= b \\/ b <= y /\\ y <= a) /\\\n                       abs(y - x) < e
       #|  y:real^N
       #|  v:real^N
       #|  u:real^N
@@ -56046,7 +56046,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (b:real^N)$i
       #|  (a:real^N)$i
       #|  i:num
-      #|  !i. 1 <= i /\\ i <= dimindex(:N)\n        ==> ?y. ((u:real^N)$i <= y /\\ y <= (v:real^N)$i \\/\n                 v$i <= y /\\ y <= u$i) /\\\n                abs(y - (x:real^N)$i) < e / &(dimindex(:N))
+      #|  forall i. 1 <= i /\\ i <= dimindex(:N)\n        ==> ?y. ((u:real^N)$i <= y /\\ y <= (v:real^N)$i \\/\n                 v$i <= y /\\ y <= u$i) /\\\n                abs(y - (x:real^N)$i) < e / &(dimindex(:N))
       #|  v:real^N
       #|  u:real^N
       #|  e / &(dimindex(:N))
@@ -56054,7 +56054,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. is_interval s ==> is_interval(closure s)
+      #|  forall s:real^N->bool. is_interval s ==> is_interval(closure s)
       #|  &0 < a ==> (u * a / b) * inv a = inv b * u
       #|  u:real
       #|  &1 - u
@@ -56069,17 +56069,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (?a b c. P a b c) <=> (?b c a. P a b c)
       #|  (p /\\ q /\\ r /\\ s) /\\ t <=> s /\\ q /\\ r /\\ p /\\ t
       #|  convex hull {vec 0:real^N,inv(f a) % a,inv(f b) % b}
-      #|  !s. x IN s /\\ s SUBSET t ==> x IN t
+      #|  forall s. x IN s /\\ s SUBSET t ==> x IN t
       #|  x:real^N
       #|  s SUBSET {x | x IN t /\\ Q x} <=> s SUBSET t /\\ s SUBSET {x | Q x}
       #|  b:real^N
       #|  a:real^N
-      #|  !f s t:real^N->bool.\n        convex s /\\ convex t /\\ vec 0 IN s /\\\n        (\\x. --f x) convex_on t /\\ (!x. x IN t ==> &0 < f x)\n        ==> convex {x | x IN t /\\ (inv(f x) % x) IN s}
+      #|  forall f s t:real^N->bool.\n        convex s /\\ convex t /\\ vec 0 IN s /\\\n        (\\x. --f x) convex_on t /\\ (forall x. x IN t ==> &0 < f x)\n        ==> convex {x | x IN t /\\ (inv(f x) % x) IN s}
       #|  ~(&1 + norm(x:real^N) = &0)
       #|  :real
       #|  x:real^N = (&1 + norm x) % inv(&1 + norm x) % x
       #|  x:real^N
-      #|  (!x. f x IN ss ==> x IN ss)\n      ==> IMAGE f br INTER ss SUBSET IMAGE f br INTER IMAGE f ss
+      #|  (forall x. f x IN ss ==> x IN ss)\n      ==> IMAGE f br INTER ss SUBSET IMAGE f br INTER IMAGE f ss
       #|  IMAGE (f:real^N->real^N) (ball(vec 0,r)) INTER IMAGE f (span s)
       #|  bd SUBSET IMAGE f br\n    ==> br INTER ss SUBSET s /\\\n        IMAGE f br INTER ss SUBSET IMAGE f (br INTER ss)\n        ==> bd INTER ss SUBSET IMAGE f s
       #|  d:real
@@ -56116,12 +56116,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  f:real^N->real^N
       #|  g = \\x:real^N. inv(&1 - norm x) % x
       #|  f = \\x:real^N. inv(&1 + norm x) % x
-      #|  ?f g. homeomorphism ((:real^N),ball(vec 0:real^N,&1)) (f,g) /\\\n         (!s. conic hull (IMAGE f s) = conic hull s) /\\\n         (!s. vec 0 IN s ==> vec 0 IN IMAGE f s) /\\\n         (!s. convex s /\\ vec 0 IN s ==> convex(IMAGE f s)) /\\\n         (!s. vec 0 IN relative_interior s\n              ==> vec 0 IN relative_interior(IMAGE f s))
+      #|  ?f g. homeomorphism ((:real^N),ball(vec 0:real^N,&1)) (f,g) /\\\n         (forall s. conic hull (IMAGE f s) = conic hull s) /\\\n         (forall s. vec 0 IN s ==> vec 0 IN IMAGE f s) /\\\n         (forall s. convex s /\\ vec 0 IN s ==> convex(IMAGE f s)) /\\\n         (forall s. vec 0 IN relative_interior s\n              ==> vec 0 IN relative_interior(IMAGE f s))
       #|  t:real^N->bool
       #|  s:real^N->bool
       #|  t:real^N->bool = {}
       #|  s:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        bounded s /\\ bounded t\n        ==> hausdist(convex hull s,convex hull t) <= hausdist(s,t)
+      #|  forall s t:real^N->bool.\n        bounded s /\\ bounded t\n        ==> hausdist(convex hull s,convex hull t) <= hausdist(s,t)
       #|  {f x y | x IN s /\\ y IN t} = {} <=> s = {} \\/ t = {}
       #|  u:real^N->bool
       #|  s SUBSET s'\n      ==> {f x y | x IN s /\\ y IN t} SUBSET {f x y | x IN s' /\\ y IN t}
@@ -56138,8 +56138,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  convex(s:real^N->bool)
       #|  convex(closure s:real^N->bool) /\\ convex(closure t:real^N->bool)
       #|  hausdist(s:real^N->bool,t) = hausdist(closure s,closure t)
-      #|  !s t:real^N->bool u.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ bounded u /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(u = {})\n        ==> hausdist({x + e | x IN s /\\ e IN u},\n                     {y + e | y IN t /\\ e IN u}) =\n            hausdist(s,t)
-      #|  s INTER t = {} ==> !w. w IN t ==> ~(w IN s)
+      #|  forall s t:real^N->bool u.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ bounded u /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(u = {})\n        ==> hausdist({x + e | x IN s /\\ e IN u},\n                     {y + e | y IN t /\\ e IN u}) =\n            hausdist(s,t)
+      #|  s INTER t = {} ==> forall w. w IN t ==> ~(w IN s)
       #|  w:real^N
       #|  dist(x:real^N,x + y) = norm y
       #|  :real
@@ -56152,7 +56152,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  v - (x + l % --a):real^N
       #|  a:real^N
       #|  v:real^N
-      #|  (!y. y IN t ==> P y) ==> (!x. x IN u ==> ~P x) ==> u INTER t = {}
+      #|  (forall y. y IN t ==> P y) ==> (forall x. x IN u ==> ~P x) ==> u INTER t = {}
       #|  ball(x + l % --a:real^N,dist(x,x + l % --a)) INTER closure s = {}
       #|  dist(y:real^N,z) < d - dist(x,z) ==> dist(x,y) < d
       #|  :real
@@ -56171,7 +56171,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  x:real^N
       #|  s:real^N->bool
-      #|  !s t d x:real^N.\n        convex s /\\ bounded s /\\ ~(s = {}) /\\\n        bounded t /\\ ~(x IN s) /\\ hausdist(s,t) < d\n        ==> ?y. ~(y IN t) /\\ dist(x,y) < d
+      #|  forall s t d x:real^N.\n        convex s /\\ bounded s /\\ ~(s = {}) /\\\n        bounded t /\\ ~(x IN s) /\\ hausdist(s,t) < d\n        ==> ?y. ~(y IN t) /\\ dist(x,y) < d
       #|  y:real^N
       #|  x:real^N
       #|  d:real
@@ -56180,32 +56180,32 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  t:real^N->bool
       #|  s:real^N->bool
       #|  d:real
-      #|  (!z:real. y < z ==> x < z) ==> x <= y
+      #|  (forall z:real. y < z ==> x < z) ==> x <= y
       #|  x:real^N
       #|  (:real^N) DIFF t = {}
       #|  (:real^N) DIFF s = {}
-      #|  !s t:real^N->bool.\n      convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ ~(s = {}) /\\ ~(t = {})\n      ==> hausdist((:real^N) DIFF s,(:real^N) DIFF t) <= hausdist(s,t)
+      #|  forall s t:real^N->bool.\n      convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ ~(s = {}) /\\ ~(t = {})\n      ==> hausdist((:real^N) DIFF s,(:real^N) DIFF t) <= hausdist(s,t)
       #|  \\n. hausdist(convex hull t,convex hull ((s:num->real^N->bool) n)) +\n        hausdist(s n,t)
       #|  ((\\x. a) --> b) sequentially ==> a = b
       #|  hausdist(convex hull t:real^N->bool,t) = &0
       #|  t:real^N->bool = {}
-      #|  !s:(num->real^N->bool) t.\n    eventually (\\n. bounded(s n) /\\ convex(s n) /\\ ~(s n = {})) sequentially /\\\n    compact t /\\ ((\\n. lift(hausdist(s n,t))) --> vec 0) sequentially\n    ==> convex t
+      #|  forall s:(num->real^N->bool) t.\n    eventually (\\n. bounded(s n) /\\ convex(s n) /\\ ~(s n = {})) sequentially /\\\n    compact t /\\ ((\\n. lift(hausdist(s n,t))) --> vec 0) sequentially\n    ==> convex t
       #|  f:num->real^N->bool
       #|  c:real^N->bool
       #|  f:num->(real^N->bool)
-      #|  !f:num->(real^N->bool) c.\n        closed c /\\\n        (!n. bounded(f n) /\\ convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c) /\\\n        (!e. &0 < e\n             ==> ?N. !m n. m >= N /\\ n >= N ==> hausdist(f m,f n) < e)\n        ==> ?s. compact s /\\ convex s /\\ ~(s = {}) /\\ s SUBSET c /\\\n                ((\\n. lift(hausdist(f n,s))) --> vec 0) sequentially
+      #|  forall f:num->(real^N->bool) c.\n        closed c /\\\n        (forall n. bounded(f n) /\\ convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c) /\\\n        (forall e. &0 < e\n             ==> ?N. forall m n. m >= N /\\ n >= N ==> hausdist(f m,f n) < e)\n        ==> ?s. compact s /\\ convex s /\\ ~(s = {}) /\\ s SUBSET c /\\\n                ((\\n. lift(hausdist(f n,s))) --> vec 0) sequentially
       #|  (:real^N)
       #|  f:num->(real^N->bool)
-      #|  !f:num->(real^N->bool).\n        (!n. bounded(f n) /\\ convex(f n) /\\ ~(f n = {})) /\\\n        (!e. &0 < e\n             ==> ?N. !m n. m >= N /\\ n >= N ==> hausdist(f m,f n) < e)\n        ==> ?s. compact s /\\ convex s /\\ ~(s = {}) /\\\n                ((\\n. lift(hausdist(f n,s))) --> vec 0) sequentially
+      #|  forall f:num->(real^N->bool).\n        (forall n. bounded(f n) /\\ convex(f n) /\\ ~(f n = {})) /\\\n        (forall e. &0 < e\n             ==> ?N. forall m n. m >= N /\\ n >= N ==> hausdist(f m,f n) < e)\n        ==> ?s. compact s /\\ convex s /\\ ~(s = {}) /\\\n                ((\\n. lift(hausdist(f n,s))) --> vec 0) sequentially
       #|  (f:num->real^N->bool) o (r:num->num)
       #|  s:real^N->bool
       #|  r:num->num
       #|  c:real^N->bool
       #|  f:num->(real^N->bool)
-      #|  !f:num->(real^N->bool) c.\n        compact c /\\ (!n. convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c)\n        ==> ?r s. (!m n. m < n ==> r m < r n) /\\\n                  compact s /\\ convex s /\\ ~(s = {}) /\\ s SUBSET c /\\\n                  ((\\n. lift(hausdist(f(r n),s))) --> vec 0) sequentially
+      #|  forall f:num->(real^N->bool) c.\n        compact c /\\ (forall n. convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c)\n        ==> ?r s. (forall m n. m < n ==> r m < r n) /\\\n                  compact s /\\ convex s /\\ ~(s = {}) /\\ s SUBSET c /\\\n                  ((\\n. lift(hausdist(f(r n),s))) --> vec 0) sequentially
       #|  closure c:real^N->bool
       #|  f:num->(real^N->bool)
-      #|  !f:num->(real^N->bool) c.\n        bounded c /\\ (!n. convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c)\n        ==> ?r s. (!m n. m < n ==> r m < r n) /\\\n                  compact s /\\ convex s /\\ ~(s = {}) /\\\n                  ((\\n. lift(hausdist(f(r n),s))) --> vec 0) sequentially
+      #|  forall f:num->(real^N->bool) c.\n        bounded c /\\ (forall n. convex(f n) /\\ ~(f n = {}) /\\ f n SUBSET c)\n        ==> ?r s. (forall m n. m < n ==> r m < r n) /\\\n                  compact s /\\ convex s /\\ ~(s = {}) /\\\n                  ((\\n. lift(hausdist(f(r n),s))) --> vec 0) sequentially
       #|  &0 < x ==> abs(min x (&1)) <= x
       #|  e / &2 / norm(b - a:real^N) * norm(b - a)
       #|  dist(b - x:real^N,b) = norm x
@@ -56218,19 +56218,19 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N = a
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool.\n        convex s /\\ ~(interior s = {})\n        ==> closure(interior s) = closure s
+      #|  forall s:real^N->bool.\n        convex s /\\ ~(interior s = {})\n        ==> closure(interior s) = closure s
       #|  &0
       #|  a:real^N
       #|  a:real^N
       #|  ~(relative_interior(s:real^N->bool) = {})
-      #|  !s. convex s /\\ (vec 0) IN s /\\ interior s = {}\n         ==> ?a:real^N b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
+      #|  forall s. convex s /\\ (vec 0) IN s /\\ interior s = {}\n         ==> ?a:real^N b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
       #|  a + x:real = b <=> x = b - a
       #|  c:real^N
       #|  vec 0:real^N = --a + x <=> x = a
       #|  IMAGE (\\x:real^N. --a + x) s
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s. convex s /\\ interior s = {}\n       ==> ?a:real^N b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
+      #|  forall s. convex s /\\ interior s = {}\n       ==> ?a:real^N b. ~(a = vec 0) /\\ s SUBSET {x | a dot x = b}
       #|  &0 < x ==> ~(&1 + x = &0)
       #|  &0 < x ==> &0 < &1 + x
       #|  b = (b + e % (b - a)) - d % ((b + e % (b - a)) - a) <=>\n      (e - d * (&1 + e)) % (b - a) = vec 0
@@ -56246,13 +56246,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  a:real^N
       #|  interior {x:real^N | a dot x = b}
-      #|  !t. s SUBSET t /\\ t = {} ==> s = {}
+      #|  forall t. s SUBSET t /\\ t = {} ==> s = {}
       #|  b:real
       #|  a:real^N
       #|  s:real^N->bool
       #|  interior(s:real^N->bool) = {}
-      #|  !s:real^N->bool. convex s ==> interior(closure s) = interior s
-      #|  !s:real^N->bool. convex s ==> frontier(closure s) = frontier s
+      #|  forall s:real^N->bool. convex s ==> interior(closure s) = interior s
+      #|  forall s:real^N->bool. convex s ==> frontier(closure s) = frontier s
       #|  &0 < x ==> abs(min x (&1)) <= x
       #|  e / &2 / norm(b - a:real^N) * norm(b - a)
       #|  dist(b - x:real^N,b) = norm x
@@ -56266,18 +56266,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  a:real^N
       #|  relative_interior(s:real^N->bool) = {}
-      #|  !s:real^N->bool.\n        convex s ==> closure(relative_interior s) = closure s
+      #|  forall s:real^N->bool.\n        convex s ==> closure(relative_interior s) = closure s
       #|  u:real^N->bool
       #|  u:real^N->bool
       #|  relative_interior u:real^N->bool
       #|  v:real^N->bool
       #|  v:real^N->bool
-      #|  !u s:real^N->bool.\n        convex u /\\ open_in (subtopology euclidean u) s /\\ ~(s = {})\n        ==> ~(s INTER relative_interior u = {})
-      #|  !u s:real^N->bool.\n        open u /\\ convex s ==> (u SUBSET closure s <=> u SUBSET interior s)
-      #|  (!s t. convex s ==> setdist(relative_interior s,t) = setdist(s,t)) /\\\n   (!s t. convex t ==> setdist(s,relative_interior t) = setdist(s,t))
-      #|  (!s t. convex s ==> hausdist(relative_interior s,t) = hausdist(s,t)) /\\\n   (!s t. convex t ==> hausdist(s,relative_interior t) = hausdist(s,t))
-      #|  !s. convex s\n       ==> affine hull (relative_interior s) = affine hull s
-      #|  !s:real^N->bool. convex s ==> aff_dim(relative_interior s) = aff_dim s
+      #|  forall u s:real^N->bool.\n        convex u /\\ open_in (subtopology euclidean u) s /\\ ~(s = {})\n        ==> ~(s INTER relative_interior u = {})
+      #|  forall u s:real^N->bool.\n        open u /\\ convex s ==> (u SUBSET closure s <=> u SUBSET interior s)
+      #|  (forall s t. convex s ==> setdist(relative_interior s,t) = setdist(s,t)) /\\\n   (forall s t. convex t ==> setdist(s,relative_interior t) = setdist(s,t))
+      #|  (forall s t. convex s ==> hausdist(relative_interior s,t) = hausdist(s,t)) /\\\n   (forall s t. convex t ==> hausdist(s,relative_interior t) = hausdist(s,t))
+      #|  forall s. convex s\n       ==> affine hull (relative_interior s) = affine hull s
+      #|  forall s:real^N->bool. convex s ==> aff_dim(relative_interior s) = aff_dim s
       #|  &0 < x ==> ~(&1 + x = &0)
       #|  &0 < x ==> &0 < &1 + x
       #|  b = (b + e % (b - a)) - d % ((b + e % (b - a)) - a) <=>\n      (e - d * (&1 + e)) % (b - a) = vec 0
@@ -56293,9 +56293,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  ?a:real^N. a IN relative_interior s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s ==> relative_interior(closure s) = relative_interior s
-      #|  !s. convex s ==> relative_frontier(closure s) = relative_frontier s
-      #|  !s:real^N->bool.\n        convex s\n        ==> relative_frontier(relative_interior s) = relative_frontier s
+      #|  forall s:real^N->bool.\n        convex s ==> relative_interior(closure s) = relative_interior s
+      #|  forall s. convex s ==> relative_frontier(closure s) = relative_frontier s
+      #|  forall s:real^N->bool.\n        convex s\n        ==> relative_frontier(relative_interior s) = relative_frontier s
       #|  t:real^N->bool
       #|  t:real^N->bool
       #|  i SUBSET t /\\ t SUBSET c ==> (s INTER i) INTER (s DIFF c) = {}
@@ -56303,17 +56303,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  affine hull t:real^N->bool
       #|  s DIFF closure t:real^N->bool
       #|  s INTER relative_interior t:real^N->bool
-      #|  !s t:real^N->bool.\n        connected s /\\ s SUBSET affine hull t /\\\n        ~(s INTER t = {}) /\\ ~(s DIFF t = {})\n        ==> ~(s INTER relative_frontier t = {})
+      #|  forall s t:real^N->bool.\n        connected s /\\ s SUBSET affine hull t /\\\n        ~(s INTER t = {}) /\\ ~(s DIFF t = {})\n        ==> ~(s INTER relative_frontier t = {})
       #|  s SUBSET closure t /\\ closure t = t ==> s SUBSET t
       #|  affine hull s:real^N->bool
-      #|  !s:real^N->bool. closed(relative_frontier s)
-      #|  !s. closed s ==> closed(s DIFF relative_interior s)
-      #|  !s. compact s ==> compact(s DIFF relative_interior s)
-      #|  !s:real^N->bool. bounded s ==> bounded(relative_frontier s)
-      #|  !s:real^N->bool. bounded s ==> compact(relative_frontier s)
-      #|  !s:real^N->bool. compact s ==> compact(relative_frontier s)
-      #|  !s t. convex s /\\ convex t\n         ==> (relative_interior s = relative_interior t <=>\n              closure s = closure t)
-      #|  !s t. convex s /\\ convex t\n         ==> (relative_interior s = relative_interior t <=>\n              relative_interior s SUBSET t /\\ t SUBSET closure s)
+      #|  forall s:real^N->bool. closed(relative_frontier s)
+      #|  forall s. closed s ==> closed(s DIFF relative_interior s)
+      #|  forall s. compact s ==> compact(s DIFF relative_interior s)
+      #|  forall s:real^N->bool. bounded s ==> bounded(relative_frontier s)
+      #|  forall s:real^N->bool. bounded s ==> compact(relative_frontier s)
+      #|  forall s:real^N->bool. compact s ==> compact(relative_frontier s)
+      #|  forall s t. convex s /\\ convex t\n         ==> (relative_interior s = relative_interior t <=>\n              closure s = closure t)
+      #|  forall s t. convex s /\\ convex t\n         ==> (relative_interior s = relative_interior t <=>\n              relative_interior s SUBSET t /\\ t SUBSET closure s)
       #|  f:real^M->real^N
       #|  t:real
       #|  x:real^M
@@ -56324,7 +56324,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  IMAGE (f:real^M->real^N) (closure(relative_interior s))
       #|  IMAGE (f:real^M->real^N) (relative_interior s)
       #|  relative_interior (IMAGE f (relative_interior s)) =\n      relative_interior (IMAGE (f:real^M->real^N) s)
-      #|  !f:real^M->real^N s.\n        linear f /\\ convex s\n        ==> relative_interior(IMAGE f s) = IMAGE f (relative_interior s)
+      #|  forall f:real^M->real^N s.\n        linear f /\\ convex s\n        ==> relative_interior(IMAGE f s) = IMAGE f (relative_interior s)
       #|  s SUBSET t ==> {x | f x IN s} SUBSET {x | f x IN t}
       #|  s:real^N->bool
       #|  affine hull s:real^N->bool
@@ -56334,10 +56334,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  s:real^N->bool
       #|  IMAGE f s SUBSET t ==> s SUBSET {x | f x IN t}
-      #|  !f:real^M->real^N s.\n        linear f /\\ convex s /\\ ~({x | f(x) IN relative_interior s} = {})\n        ==> relative_interior {x | f(x) IN s} =\n            {x | f(x) IN relative_interior s}
-      #|  !s t. {x + y:real^N | x IN s /\\ y IN t} =\n          IMAGE (\\z. fstcart z + sndcart z) (s PCROSS t)
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t\n        ==> relative_interior {x + y | x IN s /\\ y IN t} =\n            {x + y | x IN relative_interior s /\\ y IN relative_interior t}
-      #|  !x. x IN relative_interior s ==> x IN s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ convex s /\\ ~({x | f(x) IN relative_interior s} = {})\n        ==> relative_interior {x | f(x) IN s} =\n            {x | f(x) IN relative_interior s}
+      #|  forall s t. {x + y:real^N | x IN s /\\ y IN t} =\n          IMAGE (\\z. fstcart z + sndcart z) (s PCROSS t)
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t\n        ==> relative_interior {x + y | x IN s /\\ y IN t} =\n            {x + y | x IN relative_interior s /\\ y IN relative_interior t}
+      #|  forall x. x IN relative_interior s ==> x IN s
       #|  s:real^N->bool
       #|  &0 < a /\\ &0 < x /\\ x < y ==> abs(min a x) < y
       #|  dist(b - a:real^N,b) = norm a
@@ -56349,18 +56349,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  e:real
       #|  a:real^N
       #|  b:real^N
-      #|  !f:(real^N->bool)->bool.\n        (!s. s IN f ==> convex s) /\\\n        ~(INTERS(IMAGE relative_interior f) = {})\n        ==> closure(INTERS f) = INTERS(IMAGE closure f)
-      #|  (!x. x IN s ==> f x = x) ==> s = IMAGE f s
+      #|  forall f:(real^N->bool)->bool.\n        (forall s. s IN f ==> convex s) /\\\n        ~(INTERS(IMAGE relative_interior f) = {})\n        ==> closure(INTERS f) = INTERS(IMAGE closure f)
+      #|  (forall x. x IN s ==> f x = x) ==> s = IMAGE f s
       #|  ~(s = {}) ==> s = t ==> ~(t = {})
-      #|  !f:(real^N->bool)->bool.\n        (!s. s IN f ==> convex s /\\ open s)\n        ==> closure(INTERS f) =\n                if INTERS f = {} then {}\n                else INTERS(IMAGE closure f)
+      #|  forall f:(real^N->bool)->bool.\n        (forall s. s IN f ==> convex s /\\ open s)\n        ==> closure(INTERS f) =\n                if INTERS f = {} then {}\n                else INTERS(IMAGE closure f)
       #|  {s:real^N->bool,t}
-      #|  !s t:real^N->bool.\n        convex s /\\ convex t /\\\n        ~(relative_interior s INTER relative_interior t = {})\n        ==> closure(s INTER t) = closure(s) INTER closure(t)
-      #|  !s t. convex s /\\ open s /\\ convex t /\\ open t\n         ==> closure(s INTER t) =\n                if s INTER t = {} then {} else closure(s) INTER closure(t)
+      #|  forall s t:real^N->bool.\n        convex s /\\ convex t /\\\n        ~(relative_interior s INTER relative_interior t = {})\n        ==> closure(s INTER t) = closure(s) INTER closure(t)
+      #|  forall s t. convex s /\\ open s /\\ convex t /\\ open t\n         ==> closure(s INTER t) =\n                if s INTER t = {} then {} else closure(s) INTER closure(t)
       #|  s:real^N->bool
       #|  closure(interior s):real^N->bool
-      #|  !s t:real^N->bool.\n        convex s /\\ ~(interior s = {}) /\\ interior s SUBSET closure t\n        ==> closure(s INTER t) = closure s
-      #|  !s:real^N->bool.\n        convex s /\\ ~(interior s = {})\n        ==> closure(s INTER\n                    { inv(&2 pow n) % x | n,x |\n                      !i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i) }) =\n            closure s
-      #|  !s:real^N->bool.\n      convex s /\\ ~(interior s = {})\n      ==> closure(s INTER\n                  { x | !i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i) }) =\n          closure s
+      #|  forall s t:real^N->bool.\n        convex s /\\ ~(interior s = {}) /\\ interior s SUBSET closure t\n        ==> closure(s INTER t) = closure s
+      #|  forall s:real^N->bool.\n        convex s /\\ ~(interior s = {})\n        ==> closure(s INTER\n                    { inv(&2 pow n) % x | n,x |\n                      forall i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i) }) =\n            closure s
+      #|  forall s:real^N->bool.\n      convex s /\\ ~(interior s = {})\n      ==> closure(s INTER\n                  { x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i) }) =\n          closure s
       #|  &0 < x ==> &1 < &1 + x /\\ &0 < &1 + x /\\ ~(&1 + x = &0)
       #|  inv(&1 + e / norm(x:real^N))
       #|  dist(a:real^N,a + x) = norm x
@@ -56379,7 +56379,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  (vec 0:real^N) IN t
       #|  a:real^N
       #|  a:real^N
-      #|  !s t:real^N->bool.\n        convex s /\\ affine t /\\ ~(interior s INTER t = {})\n        ==> relative_interior(s INTER t) = interior s INTER t
+      #|  forall s t:real^N->bool.\n        convex s /\\ affine t /\\ ~(interior s INTER t = {})\n        ==> relative_interior(s INTER t) = interior s INTER t
       #|  x:real^N
       #|  ball(x:real^N,r)
       #|  u INTER b INTER i = b INTER u INTER i
@@ -56402,17 +56402,17 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  closure(relative_interior c INTER u):real^N->bool
       #|  v:real^N->bool
       #|  u:real^N->bool
-      #|  !c s:real^N->bool.\n        convex c /\\ connected s /\\ open_in (subtopology euclidean c) s\n        ==> connected(relative_interior c INTER s)
+      #|  forall c s:real^N->bool.\n        convex c /\\ connected s /\\ open_in (subtopology euclidean c) s\n        ==> connected(relative_interior c INTER s)
       #|  a:real^N
       #|  r < &0
-      #|  !s a:real^N r.\n        affine s /\\ a IN s /\\ ~(r = &0)\n        ==> relative_interior(cball(a,r) INTER s) = ball(a,r) INTER s
+      #|  forall s a:real^N r.\n        affine s /\\ a IN s /\\ ~(r = &0)\n        ==> relative_interior(cball(a,r) INTER s) = ball(a,r) INTER s
       #|  x:real^1
       #|  (y:real^1) IN convex hull s
       #|  (x:real^1) IN convex hull s
       #|  y:real^1
       #|  x:real^1
       #|  \\x. lift(sup {drop(f u) | u IN s /\\ drop u <= drop x})
-      #|  !f s. (!x y. x IN s /\\ y IN s /\\ drop x <= drop y\n                ==> drop(f x) <= drop(f y))\n         ==> ?g. (!x y. x IN convex hull s /\\ y IN convex hull s /\\\n                        drop x <= drop y\n                        ==> drop(g x) <= drop(g y)) /\\\n                 (!x. x IN s ==> g x = f x)
+      #|  forall f s. (forall x y. x IN s /\\ y IN s /\\ drop x <= drop y\n                ==> drop(f x) <= drop(f y))\n         ==> ?g. (forall x y. x IN convex hull s /\\ y IN convex hull s /\\\n                        drop x <= drop y\n                        ==> drop(g x) <= drop(g y)) /\\\n                 (forall x. x IN s ==> g x = f x)
       #|  closure(IMAGE (f:real^1->real^1) s)
       #|  interior(closure s) SUBSET s /\\ UNIV SUBSET interior(closure s)\n      ==> s = UNIV
       #|  drop((g:real^1->real^1) a) <= drop(g y) /\\ drop(g y) <= drop(g b)
@@ -56432,7 +56432,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  g:real^1->real^1
       #|  s:real^1->bool
       #|  f:real^1->real^1
-      #|  !f s. closure s = (:real^1) /\\ closure(IMAGE f s) = (:real^1) /\\\n         (!x y. x IN s /\\ y IN s /\\ drop x <= drop y\n                ==> drop(f x) <= drop(f y))\n         ==> ?g. (!x y. drop x <= drop y ==> drop(g x) <= drop(g y)) /\\\n                 (!x. x IN s ==> g x = f x) /\\\n                 g continuous_on (:real^1) /\\\n                 IMAGE g (:real^1) = (:real^1)
+      #|  forall f s. closure s = (:real^1) /\\ closure(IMAGE f s) = (:real^1) /\\\n         (forall x y. x IN s /\\ y IN s /\\ drop x <= drop y\n                ==> drop(f x) <= drop(f y))\n         ==> ?g. (forall x y. drop x <= drop y ==> drop(g x) <= drop(g y)) /\\\n                 (forall x. x IN s ==> g x = f x) /\\\n                 g continuous_on (:real^1) /\\\n                 IMAGE g (:real^1) = (:real^1)
       #|  g(x:real^1) - lift(e / &2)
       #|  g(x:real^1) + lift(e / &2)
       #|  drop(g x) <= drop(g(x':real^1)) /\\\n    drop(g x') < drop(g y') /\\ drop(g y') <= drop(g y)
@@ -56446,18 +56446,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  g:real^1->real^1
       #|  s:real^1->bool
       #|  f:real^1->real^1
-      #|  !f s. closure s = (:real^1) /\\ closure(IMAGE f s) = (:real^1) /\\\n         (!x y. x IN s /\\ y IN s /\\ drop x < drop y\n                ==> drop(f x) < drop(f y))\n         ==> ?g. (!x y. drop(g x) < drop(g y) <=> drop x < drop y) /\\\n                 (!x. x IN s ==> g x = f x) /\\\n                 g continuous_on (:real^1) /\\\n                 IMAGE g (:real^1) = (:real^1)
+      #|  forall f s. closure s = (:real^1) /\\ closure(IMAGE f s) = (:real^1) /\\\n         (forall x y. x IN s /\\ y IN s /\\ drop x < drop y\n                ==> drop(f x) < drop(f y))\n         ==> ?g. (forall x y. drop(g x) < drop(g y) <=> drop x < drop y) /\\\n                 (forall x. x IN s ==> g x = f x) /\\\n                 g continuous_on (:real^1) /\\\n                 IMAGE g (:real^1) = (:real^1)
       #|  x + inv(&4) % (y - x):real^1
       #|  y - inv(&4) % (y - x):real^1
       #|  bounded s /\\ t SUBSET s ==> bounded s /\\ bounded t
-      #|  (!a b:real^N. bounded(segment[a,b])) /\\\n   (!a b:real^N. bounded(segment(a,b)))
-      #|  (!a b. segment[a,b] =\n          IMAGE (\\u. (&1 - drop u) % a + drop u % b)\n                (interval[vec 0,vec 1])) /\\\n   (!a b. ~(a = b)\n          ==> segment(a,b) =\n                IMAGE (\\u. (&1 - drop u) % a + drop u % b)\n                (interval(vec 0,vec 1)))
+      #|  (forall a b:real^N. bounded(segment[a,b])) /\\\n   (forall a b:real^N. bounded(segment(a,b)))
+      #|  (forall a b. segment[a,b] =\n          IMAGE (\\u. (&1 - drop u) % a + drop u % b)\n                (interval[vec 0,vec 1])) /\\\n   (forall a b. ~(a = b)\n          ==> segment(a,b) =\n                IMAGE (\\u. (&1 - drop u) % a + drop u % b)\n                (interval(vec 0,vec 1)))
       #|  (\\u. (&1 - drop u) % a + drop u % (b:real^N)) =\n    (\\x. a + x) o (\\u. drop u % (b - a))
       #|  ~(&1 <= &0)
-      #|  (!a b:real^N. closure(segment[a,b]) = segment[a,b]) /\\\n   (!a b:real^N. closure(segment(a,b)) = if a = b then {} else segment[a,b])
-      #|  (!a b:real^N. closed(segment[a,b])) /\\\n   (!a b:real^N. closed(segment(a,b)) <=> a = b)
-      #|  (!a b:real^N. compact(segment[a,b])) /\\\n   (!a b:real^N. compact(segment(a,b)) <=> a = b)
-      #|  (!a b:real^N. affine hull (segment [a,b]) = affine hull {a,b}) /\\\n   (!a b:real^N. affine hull (segment(a,b)) =\n                 if a = b then {} else affine hull {a,b})
+      #|  (forall a b:real^N. closure(segment[a,b]) = segment[a,b]) /\\\n   (forall a b:real^N. closure(segment(a,b)) = if a = b then {} else segment[a,b])
+      #|  (forall a b:real^N. closed(segment[a,b])) /\\\n   (forall a b:real^N. closed(segment(a,b)) <=> a = b)
+      #|  (forall a b:real^N. compact(segment[a,b])) /\\\n   (forall a b:real^N. compact(segment(a,b)) <=> a = b)
+      #|  (forall a b:real^N. affine hull (segment [a,b]) = affine hull {a,b}) /\\\n   (forall a b:real^N. affine hull (segment(a,b)) =\n                 if a = b then {} else affine hull {a,b})
       #|  a * n <= n / &2 <=> &0 <= n * (inv(&2) - a)
       #|  a * n < n / &2 <=> &0 < n * (inv(&2) - a)
       #|  &1 / &2 % (a + b) - ((&1 - u) % a + u % b):real^N =\n       (&1 / &2 - u) % (b - a)
@@ -56468,19 +56468,19 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a = b INTER a <=> a SUBSET b
       #|  &1 / &2 % (a + a) = a
       #|  b:real^N = a
-      #|  (!a b. segment[a:real^N,b] =\n         affine hull {a,b} INTER cball(inv(&2) % (a + b),norm(b - a) / &2)) /\\\n   (!a b. segment(a:real^N,b) =\n         affine hull {a,b} INTER ball(inv(&2) % (a + b),norm(b - a) / &2))
-      #|  (!a b. convex(segment[a,b])) /\\ (!a b. convex(segment(a,b)))
+      #|  (forall a b. segment[a:real^N,b] =\n         affine hull {a,b} INTER cball(inv(&2) % (a + b),norm(b - a) / &2)) /\\\n   (forall a b. segment(a:real^N,b) =\n         affine hull {a,b} INTER ball(inv(&2) % (a + b),norm(b - a) / &2))
+      #|  (forall a b. convex(segment[a,b])) /\\ (forall a b. convex(segment(a,b)))
       #|  b:real^N
       #|  a:real^N
       #|  ball(inv(&2) % (a + b):real^N,norm(b - a) / &2)
       #|  a:real^N = b
       #|  b /\\ (b ==> a) ==> a /\\ b
-      #|  (!a b:real^N.\n      relative_interior(segment[a,b]) = if a = b then {a} else segment(a,b)) /\\\n   (!a b:real^N. relative_interior(segment(a,b)) = segment(a,b))
+      #|  (forall a b:real^N.\n      relative_interior(segment[a,b]) = if a = b then {a} else segment(a,b)) /\\\n   (forall a b:real^N. relative_interior(segment(a,b)) = segment(a,b))
       #|  affine hull (segment(a:real^N,b))
-      #|  !s a b:real^N.\n        segment(a,b) SUBSET s /\\ s SUBSET affine hull (segment(a,b))\n        ==> open_in (subtopology euclidean s) (segment(a,b))
+      #|  forall s a b:real^N.\n        segment(a,b) SUBSET s /\\ s SUBSET affine hull (segment(a,b))\n        ==> open_in (subtopology euclidean s) (segment(a,b))
       #|  b:real^N
       #|  a:real^N
-      #|  (!a b:real^N. aff_dim(segment[a,b]) = if a = b then &0 else &1) /\\\n   (!a b:real^N. aff_dim(segment(a,b)) = if a = b then -- &1 else &1)
+      #|  (forall a b:real^N. aff_dim(segment[a,b]) = if a = b then &0 else &1) /\\\n   (forall a b:real^N. aff_dim(segment(a,b)) = if a = b then -- &1 else &1)
       #|  (&1 - &0) % a + &0 % b:real^N = a
       #|  (u = &0 \\/ w = &0) /\\ (u = &1 \\/ v = &0)\n    ==> u = &0 /\\ v = &0 \\/ u = &1 /\\ w = &0 \\/ v = &0 /\\ w = &0
       #|  &1 - x = &0 <=> x = &1
@@ -56490,18 +56490,18 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {a} DELETE a = {}
       #|  b:real^N = a
       #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  (!a b:real^N. convex(segment[a,b] DELETE a)) /\\\n   (!a b:real^N. convex(segment[a,b] DELETE b))
-      #|  (!a b:real^N. connected(segment[a,b] DELETE a)) /\\\n   (!a b:real^N. connected(segment[a,b] DELETE b))
+      #|  (forall a b:real^N. convex(segment[a,b] DELETE a)) /\\\n   (forall a b:real^N. convex(segment[a,b] DELETE b))
+      #|  (forall a b:real^N. connected(segment[a,b] DELETE a)) /\\\n   (forall a b:real^N. connected(segment[a,b] DELETE b))
       #|  a:real^N = b
-      #|  (!a b:real^N. ~(segment[a,b] = {})) /\\\n   (!a b:real^N. segment(a,b) = {} <=> a = b)
+      #|  (forall a b:real^N. ~(segment[a,b] = {})) /\\\n   (forall a b:real^N. segment(a,b) = {} <=> a = b)
       #|  (&1 - u) % a + u % b:real^N = (&1 - v) % a + v % b <=>\n      (u - v) % (b - a) = vec 0
       #|  a:real^N = b
       #|  s DIFF {a,b} = s DELETE a DELETE b
-      #|  (!a b:real^N. FINITE(segment[a,b]) <=> a = b) /\\\n   (!a b:real^N. FINITE(segment(a,b)) <=> a = b)
+      #|  (forall a b:real^N. FINITE(segment[a,b]) <=> a = b) /\\\n   (forall a b:real^N. FINITE(segment(a,b)) <=> a = b)
       #|  b:real^N
       #|  a:real^N
       #|  a:real^N = b
-      #|  (!a b c:real^N. segment[a,b] = {c} <=> a = c /\\ b = c) /\\\n   (!a b c:real^N. ~(segment(a,b) = {c}))
+      #|  (forall a b c:real^N. segment[a,b] = {c} <=> a = c /\\ b = c) /\\\n   (forall a b c:real^N. ~(segment(a,b) = {c}))
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
@@ -56512,11 +56512,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N
       #|  b:real^N
       #|  s:real^N->bool
-      #|  !s a b c:real^N.\n        convex s /\\ collinear{a,b,c} /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        {a,b,c} SUBSET relative_frontier s\n        ==> convex hull {a,b,c} SUBSET relative_frontier s
+      #|  forall s a b c:real^N.\n        convex s /\\ collinear{a,b,c} /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        {a,b,c} SUBSET relative_frontier s\n        ==> convex hull {a,b,c} SUBSET relative_frontier s
       #|  x:real
       #|  a < x /\\ x < b \\/ b < x /\\ x < a <=>\n                          min a b < x /\\ x < max a b
       #|  a <= x /\\ x <= b \\/ b <= x /\\ x <= a <=>\n                          min a b <= x /\\ x <= max a b
-      #|  (!x y. x % v = y % v <=> x = y)\n                 ==> ({x % v | P x} SUBSET {x % v | Q x} <=>\n                      {x | P x} SUBSET {x | Q x})
+      #|  (forall x y. x % v = y % v <=> x = y)\n                 ==> ({x % v | P x} SUBSET {x % v | Q x} <=>\n                      {x | P x} SUBSET {x | Q x})
       #|  vec 0:real^N = &0 % basis 1
       #|  b:real
       #|  a:real
@@ -56533,21 +56533,21 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  m:real^N
       #|  m:real^N = d - c
       #|  a:real^N = b
-      #|  !a b c d:real^N.\n        segment(a,b) SUBSET segment(c,d) <=>\n        a = b \\/ segment[a,b] SUBSET segment[c,d]
+      #|  forall a b c d:real^N.\n        segment(a,b) SUBSET segment(c,d) <=>\n        a = b \\/ segment[a,b] SUBSET segment[c,d]
       #|  max (a:real) b
       #|  min (a:real) b
       #|  closure(segment(a:real^N,b)) SUBSET segment[c,d]
       #|  (a /\\ b) /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  (!a b c d:real^N.\n        segment[a,b] SUBSET segment[c,d] <=>\n        a IN segment[c,d] /\\ b IN segment[c,d]) /\\\n   (!a b c d:real^N.\n        segment[a,b] SUBSET segment(c,d) <=>\n        a IN segment(c,d) /\\ b IN segment(c,d)) /\\\n   (!a b c d:real^N.\n        segment(a,b) SUBSET segment[c,d] <=>\n        a = b \\/ a IN segment[c,d] /\\ b IN segment[c,d]) /\\\n   (!a b c d:real^N.\n        segment(a,b) SUBSET segment(c,d) <=>\n        a = b \\/ a IN segment[c,d] /\\ b IN segment[c,d])
+      #|  (forall a b c d:real^N.\n        segment[a,b] SUBSET segment[c,d] <=>\n        a IN segment[c,d] /\\ b IN segment[c,d]) /\\\n   (forall a b c d:real^N.\n        segment[a,b] SUBSET segment(c,d) <=>\n        a IN segment(c,d) /\\ b IN segment(c,d)) /\\\n   (forall a b c d:real^N.\n        segment(a,b) SUBSET segment[c,d] <=>\n        a = b \\/ a IN segment[c,d] /\\ b IN segment[c,d]) /\\\n   (forall a b c d:real^N.\n        segment(a,b) SUBSET segment(c,d) <=>\n        a = b \\/ a IN segment[c,d] /\\ b IN segment[c,d])
       #|  affine hull (segment[a,b]) = (:real^N) /\\\n      affine hull (segment(a,b)) = (:real^N)
       #|  a:real^N = b
       #|  t SUBSET s /\\ s = {} ==> s = {} /\\ t = {}
       #|  2 <= dimindex(:N)
-      #|  (!a b:real^N. interior(segment[a,b]) =\n                 if 2 <= dimindex(:N) then {} else segment(a,b)) /\\\n   (!a b:real^N. interior(segment(a,b)) =\n                 if 2 <= dimindex(:N) then {} else segment(a,b))
+      #|  (forall a b:real^N. interior(segment[a,b]) =\n                 if 2 <= dimindex(:N) then {} else segment(a,b)) /\\\n   (forall a b:real^N. interior(segment(a,b)) =\n                 if 2 <= dimindex(:N) then {} else segment(a,b))
       #|  b:real^N
       #|  a:real^N
       #|  2 <= dimindex(:N)
-      #|  (!a b:real^N.\n        frontier(segment[a,b]) =\n        if 2 <= dimindex(:N) then segment[a,b] else {a,b}) /\\\n   (!a b:real^N.\n        frontier(segment(a,b)) =\n        if a = b then {}\n        else if 2 <= dimindex(:N) then segment[a,b] else {a,b})
+      #|  (forall a b:real^N.\n        frontier(segment[a,b]) =\n        if 2 <= dimindex(:N) then segment[a,b] else {a,b}) /\\\n   (forall a b:real^N.\n        frontier(segment(a,b)) =\n        if a = b then {}\n        else if 2 <= dimindex(:N) then segment[a,b] else {a,b})
       #|  a:real^N = b
       #|  c:real^N = d
       #|  s = s DIFF {a,b} <=> ~(a IN s) /\\ ~(b IN s)
@@ -56555,12 +56555,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a /\\ (a ==> b) ==> a /\\ b
       #|  a IN s /\\ b IN s ==> s DIFF (s DIFF {a,b}) = {a,b}
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  (!a b c d:real^N.\n        segment[a,b] = segment[c,d] <=> {a,b} = {c,d}) /\\\n   (!a b c d:real^N.\n        ~(segment[a,b] = segment(c,d))) /\\\n   (!a b c d:real^N.\n        ~(segment(a,b) = segment[c,d])) /\\\n   (!a b c d:real^N.\n        segment(a,b) = segment(c,d) <=> a = b /\\ c = d \\/ {a,b} = {c,d})
+      #|  (forall a b c d:real^N.\n        segment[a,b] = segment[c,d] <=> {a,b} = {c,d}) /\\\n   (forall a b c d:real^N.\n        ~(segment[a,b] = segment(c,d))) /\\\n   (forall a b c d:real^N.\n        ~(segment(a,b) = segment[c,d])) /\\\n   (forall a b c d:real^N.\n        segment(a,b) = segment(c,d) <=> a = b /\\ c = d \\/ {a,b} = {c,d})
       #|  \\s:real^N->bool. s DIFF relative_interior s
       #|  b:real^N
       #|  a:real^N
       #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  (!a b:real^N. collinear(segment[a,b])) /\\\n   (!a b:real^N. collinear(segment(a,b)))
+      #|  (forall a b:real^N. collinear(segment[a,b])) /\\\n   (forall a b:real^N. collinear(segment(a,b)))
       #|  d:real^N
       #|  d:real^N
       #|  ~(s INTER t = {b})\n      ==> b IN s /\\ b IN t\n          ==> ?a. ~(a = b) /\\ a IN s /\\ b IN s /\\ a IN t /\\ b IN t
@@ -56570,7 +56570,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  {a:real^N,c}
       #|  c:real^N = a
-      #|  !a b c:real^N.\n        b IN segment[a,c] \\/ ~collinear{a,b,c}\n        ==> segment[a,b] INTER segment[b,c] = {b}
+      #|  forall a b c:real^N.\n        b IN segment[a,c] \\/ ~collinear{a,b,c}\n        ==> segment[a,b] INTER segment[b,c] = {b}
       #|  b:real^N
       #|  a:real^N
       #|  (?a. ~(a IN t) /\\ a IN s) ==> s SUBSET t ==> P
@@ -56583,7 +56583,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^N
       #|  (a:real^N) IN s /\\ (b:real^N) IN s
       #|  a:real^N = b
-      #|  !s a b:real^N.\n        convex s /\\ closed s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER relative_interior s = {})\n        ==> s INTER (affine hull {a,b}) = segment[a,b]
+      #|  forall s a b:real^N.\n        convex s /\\ closed s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER relative_interior s = {})\n        ==> s INTER (affine hull {a,b}) = segment[a,b]
       #|  b:real^N
       #|  a:real^N
       #|  s:real^N->bool
@@ -56591,33 +56591,33 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  closure s INTER affine hull {a:real^N,b}
       #|  s SUBSET t DIFF {a,b} <=> (~(a IN s) /\\ ~(b IN s)) /\\ s SUBSET t
-      #|  !s a b:real^N.\n        convex s /\\\n        open_in (subtopology euclidean (affine hull s)) s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER s = {})\n        ==> s INTER (affine hull {a,b}) = segment(a,b)
-      #|  !s a b:real^N.\n        convex s /\\ open s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER s = {})\n        ==> s INTER (affine hull {a,b}) = segment(a,b)
+      #|  forall s a b:real^N.\n        convex s /\\\n        open_in (subtopology euclidean (affine hull s)) s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER s = {})\n        ==> s INTER (affine hull {a,b}) = segment(a,b)
+      #|  forall s a b:real^N.\n        convex s /\\ open s /\\\n        a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER s = {})\n        ==> s INTER (affine hull {a,b}) = segment(a,b)
       #|  t SUBSET s ==> s DIFF (s DIFF t) = t
       #|  (s DIFF t) INTER u = (s INTER u) DIFF (t INTER u)
       #|  (p /\\ q ==> r) /\\ p /\\ q ==> p /\\ q /\\ r
       #|  a:real^N = b
-      #|  !s a b:real^N.\n        convex s /\\ a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER relative_interior s = {})\n        ==> ~(a = b) /\\\n            closure s INTER affine hull {a,b} = segment[a,b] /\\\n            relative_interior s INTER affine hull {a,b} = segment(a,b) /\\\n            relative_frontier s INTER affine hull {a,b} = {a,b}
+      #|  forall s a b:real^N.\n        convex s /\\ a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) INTER relative_interior s = {})\n        ==> ~(a = b) /\\\n            closure s INTER affine hull {a,b} = segment[a,b] /\\\n            relative_interior s INTER affine hull {a,b} = segment(a,b) /\\\n            relative_frontier s INTER affine hull {a,b} = {a,b}
       #|  segment[a:real^N,b]
       #|  ~(s SUBSET c DIFF d) ==> s SUBSET c ==> ~(s INTER d = {})
-      #|  !s a b:real^N.\n        convex s /\\ a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) SUBSET relative_frontier s)\n        ==> ~(a = b) /\\\n            closure s INTER affine hull {a,b} = segment[a,b] /\\\n            relative_interior s INTER affine hull {a,b} = segment(a,b) /\\\n            relative_frontier s INTER affine hull {a,b} = {a,b}
+      #|  forall s a b:real^N.\n        convex s /\\ a IN relative_frontier s /\\ b IN relative_frontier s /\\\n        ~(segment(a,b) SUBSET relative_frontier s)\n        ==> ~(a = b) /\\\n            closure s INTER affine hull {a,b} = segment[a,b] /\\\n            relative_interior s INTER affine hull {a,b} = segment(a,b) /\\\n            relative_frontier s INTER affine hull {a,b} = {a,b}
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  abs(x) <= a <=> x <= a /\\ x >= --a
-      #|  !a k. closed {x:real^N | abs(x$k) <= a}
+      #|  forall a k. closed {x:real^N | abs(x$k) <= a}
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  abs(x) < a <=> x < a /\\ x > --a
-      #|  !a k. open {x:real^N | abs(x$k) < a}
+      #|  forall a k. open {x:real^N | abs(x$k) < a}
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  abs(x) < a <=> x < a /\\ x > --a
       #|  abs(x) <= a <=> x <= a /\\ x >= --a
-      #|  !a k. interior {x:real^N | abs(x$k) <= a} = {x | abs(x$k) < a}
+      #|  forall a k. interior {x:real^N | abs(x$k) <= a} = {x | abs(x$k) < a}
       #|  vec 0:real^N
       #|  a < &0 ==> ~(abs x < a) /\\ ~(abs x <= a)
       #|  a < &0
       #|  ~(abs x < &0)
-      #|  !a k. closure {x:real^N | abs(x$k) < a} =\n         if a = &0 then {} else {x | abs(x$k) <= a}
-      #|  !a k. frontier {x:real^N | abs(x$k) <= a} = {x | abs(x$k) = a}
-      #|  !a k. frontier {x:real^N | abs(x$k) < a} =\n         if a = &0 then {} else {x | abs(x$k) = a}
+      #|  forall a k. closure {x:real^N | abs(x$k) < a} =\n         if a = &0 then {} else {x | abs(x$k) <= a}
+      #|  forall a k. frontier {x:real^N | abs(x$k) <= a} = {x | abs(x$k) = a}
+      #|  forall a k. frontier {x:real^N | abs(x$k) < a} =\n         if a = &0 then {} else {x | abs(x$k) = a}
       #|  dist(x + a:real^N,x) = norm a
       #|  :real
       #|  :real
@@ -56636,24 +56636,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s INTER t:real^N->bool
       #|  t:real^N->bool
       #|  s:real^N->bool
-      #|  !s t:real^N->bool.\n        dim t < dim s /\\ subspace s /\\ t SUBSET s\n        ==> closure(s DIFF t) = s
-      #|  !s t:real^N->bool.\n        dim t < dim s /\\ subspace s ==> closure(s DIFF t) = s
+      #|  forall s t:real^N->bool.\n        dim t < dim s /\\ subspace s /\\ t SUBSET s\n        ==> closure(s DIFF t) = s
+      #|  forall s t:real^N->bool.\n        dim t < dim s /\\ subspace s ==> closure(s DIFF t) = s
       #|  z:real^N
       #|  z:real^N
       #|  closure s:real^N->bool
       #|  s INTER t:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ affine s ==> closure(s DIFF t) = s
+      #|  forall s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ affine s ==> closure(s DIFF t) = s
       #|  s:real^N->bool
       #|  affine:(real^N->bool)->bool
       #|  affine hull s:real^N->bool
       #|  affine hull s DIFF t:real^N->bool
       #|  s:real^N->bool
-      #|  !s t:real^N->bool.\n        aff_dim t < aff_dim s /\\\n        open_in (subtopology euclidean (affine hull s)) s\n        ==> closure(s DIFF t) = closure s
+      #|  forall s t:real^N->bool.\n        aff_dim t < aff_dim s /\\\n        open_in (subtopology euclidean (affine hull s)) s\n        ==> closure(s DIFF t) = closure s
       #|  s:real^N->bool
       #|  t:real^N->bool
       #|  relative_interior s:real^N->bool
-      #|  !s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ convex s ==> closure(s DIFF t) = closure s
-      #|  !s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ convex s /\\ closed s\n        ==> closure(s DIFF t) = s
+      #|  forall s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ convex s ==> closure(s DIFF t) = closure s
+      #|  forall s t:real^N->bool.\n        aff_dim t < aff_dim s /\\ convex s /\\ closed s\n        ==> closure(s DIFF t) = s
       #|  v % x:real^N
       #|  v:real
       #|  (u + (e / &2) / norm(x:real^N)) % x
@@ -56673,14 +56673,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  vec 0:real^N
       #|  {y:real^N | ?u. &0 <= u /\\ u <= b / norm(x) /\\ (y = u % x)} INTER s
       #|  b:real
-      #|  !s x. compact s /\\ (vec 0 IN s) /\\ ~(x = vec 0 :real^N)\n         ==> ?u. &0 <= u /\\ (u % x) IN frontier s /\\\n                 !v. u < v ==> ~((v % x) IN s)
+      #|  forall s x. compact s /\\ (vec 0 IN s) /\\ ~(x = vec 0 :real^N)\n         ==> ?u. &0 <= u /\\ (u % x) IN frontier s /\\\n                 forall v. u < v ==> ~((v % x) IN s)
       #|  IMAGE f s SUBSET t DIFF u ==> x IN s ==> ~(f x IN u)
       #|  norm(surf(proj x)) / norm x % x:real^N = surf(proj x:real^N)
       #|  norm(surf(proj x:real^N):real^N) / norm(x:real^N)
       #|  x:real^N
       #|  ~(y = &0) ==> x = (inv y * x) * y
       #|  inv(norm(surf(proj x:real^N):real^N)) % x:real^N
-      #|  !x. x IN usph ==> ~((surf:real^N->real^N) x = vec 0)
+      #|  forall x. x IN usph ==> ~((surf:real^N->real^N) x = vec 0)
       #|  vec 0:real^N
       #|  x:real^N = vec 0
       #|  x:real^N
@@ -56701,7 +56701,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  (proj:real^N->real^N) continuous_on s DIFF relative_interior s
       #|  t SUBSET s /\\ u = s DIFF t ==> s DIFF u = t
-      #|  (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\ u SUBSET s /\\\n      IMAGE f s DIFF IMAGE f u = v\n      ==> IMAGE f (s DIFF u) = v
+      #|  (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\ u SUBSET s /\\\n      IMAGE f s DIFF IMAGE f u = v\n      ==> IMAGE f (s DIFF u) = v
       #|  (s DIFF t) INTER u = (s INTER u) DIFF {x | x IN u /\\ x IN t}
       #|  b SUBSET c ==> b INTER s SUBSET c INTER s
       #|  p ==> q <=> p ==> p ==> q
@@ -56728,27 +56728,27 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N = vec 0
       #|  x:real^N
       #|  ?surf. homeomorphism (s DIFF relative_interior s,usph)\n                                     (proj:real^N->real^N,surf)
-      #|  !x. x IN affine hull s /\\ ~(x = vec 0)\n        ==> (proj:real^N->real^N) x IN usph
+      #|  forall x. x IN affine hull s /\\ ~(x = vec 0)\n        ==> (proj:real^N->real^N) x IN usph
       #|   sphere(vec 0:real^N,&1) INTER affine hull s = usph
       #|  usph = {x:real^N | x IN affine hull s /\\ norm x = &1}
       #|  &0 < a ==> (inv(a) * x) * a = x
-      #|  !a x. &0 < a ==> (proj:real^N->real^N)(a % x) = proj x
+      #|  forall a x. &0 < a ==> (proj:real^N->real^N)(a % x) = proj x
       #|  inv:real->real
       #|  lift
       #|  (proj:real^N->real^N) continuous_on (UNIV DELETE vec 0)
-      #|  (!x. x IN affine hull s ==> proj x IN affine hull s) /\\\n    (!x. ~(x = vec 0) ==> norm(proj x) = &1) /\\\n    (!x:real^N. proj x = vec 0 <=> x = vec 0)
+      #|  (forall x. x IN affine hull s ==> proj x IN affine hull s) /\\\n    (forall x. ~(x = vec 0) ==> norm(proj x) = &1) /\\\n    (forall x:real^N. proj x = vec 0 <=> x = vec 0)
       #|  a % x = a % y <=> a % (x - y):real^N = vec 0
       #|  x:real^N = vec 0
       #|  y:real^N = vec 0
-      #|  !x:real^N y. (proj(x) = proj(y):real^N) /\\ (norm x = norm y) <=> (x = y)
+      #|  forall x:real^N y. (proj(x) = proj(y):real^N) /\\ (norm x = norm y) <=> (x = y)
       #|  proj = \\x:real^N. inv(norm(x)) % x
       #|  x:real^N
       #|  x:real^N
       #|  x:real^N = vec 0
       #|  &0 <= u <=> u = &0 \\/ &0 < u
-      #|  !x:real^N u. x IN s /\\ &0 <= u /\\ u < &1\n                 ==> (u % x) IN relative_interior s
+      #|  forall x:real^N u. x IN s /\\ &0 <= u /\\ u < &1\n                 ==> (u % x) IN relative_interior s
       #|  a:real^N
-      #|  !s:real^N->bool a.\n       compact s /\\ a IN relative_interior s /\\\n       (!x. x IN s ==> segment(a,x) SUBSET relative_interior s)\n       ==> s DIFF relative_interior s homeomorphic\n           sphere(a,&1) INTER affine hull s /\\\n           s homeomorphic cball(a,&1) INTER affine hull s /\\\n           relative_interior s homeomorphic (ball(a,&1)) INTER affine hull s
+      #|  forall s:real^N->bool a.\n       compact s /\\ a IN relative_interior s /\\\n       (forall x. x IN s ==> segment(a,x) SUBSET relative_interior s)\n       ==> s DIFF relative_interior s homeomorphic\n           sphere(a,&1) INTER affine hull s /\\\n           s homeomorphic cball(a,&1) INTER affine hull s /\\\n           relative_interior s homeomorphic (ball(a,&1)) INTER affine hull s
       #|  :real
       #|  :real
       #|  proj:real^N->real^N
@@ -56769,20 +56769,20 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^N
       #|  relative_interior t:real^N->bool = {}
       #|  relative_interior t:real^N->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n          convex s /\\ compact s /\\ convex t /\\ compact t /\\\n          aff_dim s = aff_dim t\n          ==> (s DIFF relative_interior s) homeomorphic\n              (t DIFF relative_interior t) /\\\n              s homeomorphic t /\\\n              relative_interior s homeomorphic relative_interior t
+      #|  forall s:real^M->bool t:real^N->bool.\n          convex s /\\ compact s /\\ convex t /\\ compact t /\\\n          aff_dim s = aff_dim t\n          ==> (s DIFF relative_interior s) homeomorphic\n              (t DIFF relative_interior t) /\\\n              s homeomorphic t /\\\n              relative_interior s homeomorphic relative_interior t
       #|  closure t:real^N->bool
       #|  closure s:real^M->bool
-      #|  (!s:real^M->bool t:real^N->bool.\n        convex s /\\ compact s /\\ convex t /\\ compact t /\\ aff_dim s = aff_dim t\n        ==> s homeomorphic t) /\\\n   (!s:real^M->bool t:real^N->bool.\n        convex s /\\ compact s /\\ convex t /\\ compact t /\\ aff_dim s = aff_dim t\n        ==> relative_interior s homeomorphic relative_interior t) /\\\n   (!s:real^M->bool t:real^N->bool.\n        convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s = aff_dim t\n        ==> relative_frontier s homeomorphic relative_frontier t)
-      #|  !s:real^N->bool t:real^N->bool.\n        convex s /\\ compact s /\\ ~(interior s = {}) /\\\n        convex t /\\ compact t /\\ ~(interior t = {})\n        ==> s homeomorphic t
-      #|  !s:real^N->bool b:real^N e.\n        convex s /\\ compact s /\\ ~(interior s = {}) /\\ &0 < e\n        ==> s homeomorphic cball(b,e)
-      #|  !a b:real^N c d:real^N.\n        ~(interval(a,b) = {}) /\\ ~(interval(c,d) = {})\n        ==> interval[a,b] homeomorphic interval[c,d]
+      #|  (forall s:real^M->bool t:real^N->bool.\n        convex s /\\ compact s /\\ convex t /\\ compact t /\\ aff_dim s = aff_dim t\n        ==> s homeomorphic t) /\\\n   (forall s:real^M->bool t:real^N->bool.\n        convex s /\\ compact s /\\ convex t /\\ compact t /\\ aff_dim s = aff_dim t\n        ==> relative_interior s homeomorphic relative_interior t) /\\\n   (forall s:real^M->bool t:real^N->bool.\n        convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s = aff_dim t\n        ==> relative_frontier s homeomorphic relative_frontier t)
+      #|  forall s:real^N->bool t:real^N->bool.\n        convex s /\\ compact s /\\ ~(interior s = {}) /\\\n        convex t /\\ compact t /\\ ~(interior t = {})\n        ==> s homeomorphic t
+      #|  forall s:real^N->bool b:real^N e.\n        convex s /\\ compact s /\\ ~(interior s = {}) /\\ &0 < e\n        ==> s homeomorphic cball(b,e)
+      #|  forall a b:real^N c d:real^N.\n        ~(interval(a,b) = {}) /\\ ~(interval(c,d) = {})\n        ==> interval[a,b] homeomorphic interval[c,d]
       #|  g:real^N->real^N
       #|  f:real^N->real^N
       #|  {c % f x | P c} = {c % x | P c}\n          ==> P(&1) ==> ?c. &1 % x = c % f x
       #|  {f a x | P a /\\ x IN {b}} = {f a b | P a}
       #|  conic hull (IMAGE (f:real^N->real^N) {x}) = conic hull {x}
       #|  x:real^N
-      #|  (!x y. f x = f y ==> x = y) /\\\n          (!x. f(x) IN v ==> x IN v)\n           ==> v INTER u = s ==> v INTER IMAGE f u SUBSET IMAGE f s
+      #|  (forall x y. f x = f y ==> x = y) /\\\n          (forall x. f(x) IN v ==> x IN v)\n           ==> v INTER u = s ==> v INTER IMAGE f u SUBSET IMAGE f s
       #|  IMAGE (f:real^N->real^N) u
       #|  u:real^N->bool
       #|  ball(vec 0:real^N,&1)
@@ -56793,7 +56793,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n          convex s /\\ open_in (subtopology euclidean (affine hull s)) s\n          ==> ?t:real^N->bool.\n                 convex t /\\ bounded t /\\ aff_dim t = aff_dim s /\\\n                 open_in (subtopology euclidean (affine hull t)) t /\\\n                 s homeomorphic t
+      #|  forall s:real^N->bool.\n          convex s /\\ open_in (subtopology euclidean (affine hull s)) s\n          ==> ?t:real^N->bool.\n                 convex t /\\ bounded t /\\ aff_dim t = aff_dim s /\\\n                 open_in (subtopology euclidean (affine hull t)) t /\\\n                 s homeomorphic t
       #|  closure s':real^M->bool
       #|  closure t':real^N->bool
       #|  t':real^N->bool
@@ -56802,9 +56802,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s':real^M->bool
       #|  s':real^M->bool
       #|  s:real^M->bool
-      #|  !s:real^M->bool t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean (affine hull s)) s /\\\n        convex t /\\ open_in (subtopology euclidean (affine hull t)) t /\\\n        aff_dim s = aff_dim t\n        ==> s homeomorphic t
+      #|  forall s:real^M->bool t:real^N->bool.\n        convex s /\\ open_in (subtopology euclidean (affine hull s)) s /\\\n        convex t /\\ open_in (subtopology euclidean (affine hull t)) t /\\\n        aff_dim s = aff_dim t\n        ==> s homeomorphic t
       #|  t:real^N->bool = {}
-      #|  !s:real^N->bool t:real^N->bool.\n        convex s /\\ open s /\\ convex t /\\ open t /\\ (s = {} <=> t = {})\n        ==> s homeomorphic t
+      #|  forall s:real^N->bool t:real^N->bool.\n        convex s /\\ open s /\\ convex t /\\ open t /\\ (s = {} <=> t = {})\n        ==> s homeomorphic t
       #|  s INTER t SUBSET u\n      ==> (r <= norm(z:real^N) <=> ~(z IN s)) /\\ z IN t /\\ ~(z IN u)\n          ==> r <= norm z
       #|  s INTER t SUBSET u\n      ==> z IN s /\\ z IN t /\\ ~(x IN u) ==> ~(x = z)
       #|  ~(x:real^N = vec 0) /\\ ~(y:real^N = vec 0)
@@ -56812,15 +56812,15 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  inv(norm x) % x:real^N
       #|  norm(y:real^N)
       #|  norm(x:real^N)
-      #|  !r s x y:real^N.\n      convex s /\\ &0 < r /\\ vec 0 IN s /\\\n      ball(vec 0,r) INTER affine hull s SUBSET relative_interior s /\\\n      x IN relative_frontier s /\\ y IN relative_frontier s\n      ==> dist(inv(norm x) % x,inv(norm y) % y) <= inv r * dist(x,y)
+      #|  forall r s x y:real^N.\n      convex s /\\ &0 < r /\\ vec 0 IN s /\\\n      ball(vec 0,r) INTER affine hull s SUBSET relative_interior s /\\\n      x IN relative_frontier s /\\ y IN relative_frontier s\n      ==> dist(inv(norm x) % x,inv(norm y) % y) <= inv r * dist(x,y)
       #|  s:real^N->bool
       #|  inv r:real
       #|  r:real
-      #|  !s:real^N->bool.\n     convex s /\\ vec 0 IN relative_interior s\n     ==> ?B. !x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                   ==> dist(inv(norm x) % x,inv(norm y) % y) <= B * dist(x,y)
-      #|  !x y:real^N. orthogonal x y ==> norm(x) <= norm(x + y)
+      #|  forall s:real^N->bool.\n     convex s /\\ vec 0 IN relative_interior s\n     ==> ?B. forall x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                   ==> dist(inv(norm x) % x,inv(norm y) % y) <= B * dist(x,y)
+      #|  forall x y:real^N. orthogonal x y ==> norm(x) <= norm(x + y)
       #|  a * &2 <= (&2 * x) * y <=> a <= x * y
       #|  (x - y:real^N) dot (x - y) = x dot x + y dot y + &2 * --(x dot y)
-      #|  !a b x y:real^N.\n          &0 <= a /\\ &0 <= b /\\ x dot y <= &0\n          ==> dist(a % x,b % y) >= min a b * dist(x,y)
+      #|  forall a b x y:real^N.\n          &0 <= a /\\ &0 <= b /\\ x dot y <= &0\n          ==> dist(a % x,b % y) >= min a b * dist(x,y)
       #|  x - ((&1 - u) % x + u % y):real^N = u % (x - y) /\\\n        y - ((&1 - u) % x + u % y):real^N = (u - &1) % (x - y)
       #|  a % x - b % y:real^N =\n        (a % (x - w) - b % (y - w)) + (a - b) % w
       #|  dist(x - w:real^N,y - w) = dist(x,y)
@@ -56832,19 +56832,19 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x - w:real^N
       #|  b:real
       #|  a:real
-      #|  !a b w x y:real^N.\n          &0 <= a /\\ &0 <= b /\\ between w (x,y) /\\ orthogonal w (x - y)\n          ==> dist(a % x,b % y) >= min a b * dist(x,y)
+      #|  forall a b w x y:real^N.\n          &0 <= a /\\ &0 <= b /\\ between w (x,y) /\\ orthogonal w (x - y)\n          ==> dist(a % x,b % y) >= min a b * dist(x,y)
       #|  x = &0 <=> x pow 2 = &0
       #|  &0 <= x /\\ &0 <= y /\\ abs x = abs y ==> x = y
       #|  x:real^2
       #|  collinear {z:real^2,x,x'} /\\ collinear {w,x,y} /\\\n     orthogonal (z - w) (x - y) /\\\n     orthogonal (y - x') (z - x') /\\\n     ~(x' = z) /\\ ~(y = w)\n     ==> dist(z,w) * dist(x,y) = dist(y,x') * dist(z,x)
       #|  {} = IMAGE (f:real^2->real^N) {}
       #|  f:real^2->real^N
-      #|  !x y. (f:real^2->real^N) x = f y ==> x = y
+      #|  forall x y. (f:real^2->real^N) x = f y ==> x = y
       #|  span s SUBSET t ==> s SUBSET span s ==> s SUBSET t
       #|  x:int <= &1 /\\ y <= &1 /\\ &0 <= z ==> (x + y) - z <= &2
       #|  p /\\ (p /\\ q ==> r) ==> (p ==> q) ==> r
       #|  aff_dim(affine hull {vec 0:real^N,x,x'} UNION affine hull {w,x,y})
-      #|  ?f:real^2->real^N.\n          linear f /\\\n          span {vec 0:real^N,x,y,w,x'} SUBSET IMAGE f (:real^2) /\\\n          (!x. norm(f x) = norm x)
+      #|  ?f:real^2->real^N.\n          linear f /\\\n          span {vec 0:real^N,x,y,w,x'} SUBSET IMAGE f (:real^2) /\\\n          (forall x. norm(f x) = norm x)
       #|  z:real^N
       #|  dimindex(:N) <= dimindex(:2)
       #|  dimindex(:N) <= dimindex(:2)
@@ -56889,7 +56889,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  w:real^N = y
       #|  w:real^N = x
       #|  orthogonal (x - y:real^N) w <=> orthogonal (y - x) w
-      #|  (!x y. R x y <=> R y x) /\\ (!x y. P x y ==> R x y)\n      ==> (!x y. P x y \\/ P y x ==> R x y)
+      #|  (forall x y. R x y <=> R y x) /\\ (forall x y. P x y ==> R x y)\n      ==> (forall x y. P x y \\/ P y x ==> R x y)
       #|  x:real^N
       #|  y:real^N
       #|  p \\/ q \\/ r ==> (q /\\ ~p \\/ r /\\ ~p) \\/ p
@@ -56897,7 +56897,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N
       #|  x:real^N
       #|  w:real^N
-      #|  !v:real^N. v IN affine hull {x, y} ==> orthogonal (v - w) w
+      #|  forall v:real^N. v IN affine hull {x, y} ==> orthogonal (v - w) w
       #|  x - y:real^N = (x - w) - (y - w)
       #|  orthogonal (x - y:real^N) w
       #|  w = closest_point (affine hull {x, y}) (vec 0:real^N)
@@ -56918,12 +56918,12 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s INTER t SUBSET u\n      ==> z IN s /\\ z IN t /\\ ~(x IN u) ==> ~(x = z)
       #|  ~(x:real^N = vec 0) /\\ ~(y:real^N = vec 0)
       #|  R < &0
-      #|  !r R s x y:real^N.\n      convex s /\\ &0 < r /\\ vec 0 IN s /\\\n      ball(vec 0,r) INTER affine hull s SUBSET relative_interior s /\\\n      s SUBSET cball(vec 0,R) /\\\n      x IN relative_frontier s /\\ y IN relative_frontier s\n      ==> dist(inv(norm x) % x,inv(norm y) % y) >= r / R pow 2 * dist(x,y)
+      #|  forall r R s x y:real^N.\n      convex s /\\ &0 < r /\\ vec 0 IN s /\\\n      ball(vec 0,r) INTER affine hull s SUBSET relative_interior s /\\\n      s SUBSET cball(vec 0,R) /\\\n      x IN relative_frontier s /\\ y IN relative_frontier s\n      ==> dist(inv(norm x) % x,inv(norm y) % y) >= r / R pow 2 * dist(x,y)
       #|  s:real^N->bool
       #|  (r:real) / R pow 2
       #|  r:real
       #|  R:real
-      #|  !s:real^N->bool.\n    convex s /\\ bounded s /\\ vec 0 IN relative_interior s\n    ==>  ?B. &0 < B /\\\n             !x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                   ==> dist(inv(norm x) % x,inv(norm y) % y) >= B * dist(x,y)
+      #|  forall s:real^N->bool.\n    convex s /\\ bounded s /\\ vec 0 IN relative_interior s\n    ==>  ?B. &0 < B /\\\n             forall x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                   ==> dist(inv(norm x) % x,inv(norm y) % y) >= B * dist(x,y)
       #|  IMAGE (\\x:real^N. inv (norm x) % x) (relative_frontier s) =\n      sphere (vec 0,&1) INTER affine hull s
       #|  inv b:real
       #|  g:real^N->real^N
@@ -56950,7 +56950,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s:real^N->bool
       #|  B:real
       #|  s:real^N->bool
-      #|  !s:real^N->bool.\n        convex s /\\ bounded s /\\ vec 0 IN relative_interior s\n        ==> ?g. homeomorphism\n                  (relative_frontier s,sphere(vec 0,&1) INTER affine hull s)\n                  ((\\x. inv(norm x) % x),g) /\\\n                (?B. !x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                           ==> norm(inv(norm x) % x - inv(norm y) % y)\n                               <= B * norm(x - y)) /\\\n                (?B. !x y. x IN sphere(vec 0,&1) INTER affine hull s /\\\n                           y IN sphere(vec 0,&1) INTER affine hull s\n                           ==> norm(g x - g y) <= B * norm(x - y))
+      #|  forall s:real^N->bool.\n        convex s /\\ bounded s /\\ vec 0 IN relative_interior s\n        ==> ?g. homeomorphism\n                  (relative_frontier s,sphere(vec 0,&1) INTER affine hull s)\n                  ((\\x. inv(norm x) % x),g) /\\\n                (?B. forall x y. x IN relative_frontier s /\\ y IN relative_frontier s\n                           ==> norm(inv(norm x) % x - inv(norm y) % y)\n                               <= B * norm(x - y)) /\\\n                (?B. forall x y. x IN sphere(vec 0,&1) INTER affine hull s /\\\n                           y IN sphere(vec 0,&1) INTER affine hull s\n                           ==> norm(g x - g y) <= B * norm(x - y))
       #|  sphere(vec 0:real^N,&1) INTER affine hull t
       #|  sphere(vec 0:real^N,&1) INTER affine hull t
       #|  (f:real^N->real^N) o (n:real^N->real^N)
@@ -56965,11 +56965,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  n (x:real^N) = inv(norm x) % x
       #|  s:real^N->bool
       #|  t:real^N->bool
-      #|  !s:real^N->bool t:real^N->bool.\n          convex s /\\ bounded s /\\ convex t /\\ bounded t /\\\n          vec 0 IN relative_interior s /\\\n          vec 0 IN relative_interior t /\\\n          affine hull s = affine hull t\n          ==> ?f g. homeomorphism\n                      (relative_frontier s,relative_frontier t) (f,g) /\\\n                    (?B. !x y. x IN relative_frontier s /\\\n                               y IN relative_frontier s\n                               ==> norm(f x - f y) <= B * norm(x - y)) /\\\n                    (?B. !x y. x IN relative_frontier t /\\\n                               y IN relative_frontier t\n                               ==> norm(g x - g y) <= B * norm(x - y))
+      #|  forall s:real^N->bool t:real^N->bool.\n          convex s /\\ bounded s /\\ convex t /\\ bounded t /\\\n          vec 0 IN relative_interior s /\\\n          vec 0 IN relative_interior t /\\\n          affine hull s = affine hull t\n          ==> ?f g. homeomorphism\n                      (relative_frontier s,relative_frontier t) (f,g) /\\\n                    (?B. forall x y. x IN relative_frontier s /\\\n                               y IN relative_frontier s\n                               ==> norm(f x - f y) <= B * norm(x - y)) /\\\n                    (?B. forall x y. x IN relative_frontier t /\\\n                               y IN relative_frontier t\n                               ==> norm(g x - g y) <= B * norm(x - y))
       #|  s SUBSET u ==> s DIFF t SUBSET u
       #|  x IN s /\\ t SUBSET u ==> IMAGE f s SUBSET t ==> f x IN u
-      #|  !x y. x IN relative_frontier t /\\ y IN relative_frontier t\n              ==> ((g:real^N->real^N) x - g y) IN span t
-      #|  !x y. x IN relative_frontier s /\\ y IN relative_frontier s\n              ==> norm((h:real^M->real^N) x - h y) = norm(x - y)
+      #|  forall x y. x IN relative_frontier t /\\ y IN relative_frontier t\n              ==> ((g:real^N->real^N) x - g y) IN span t
+      #|  forall x y. x IN relative_frontier s /\\ y IN relative_frontier s\n              ==> norm((h:real^M->real^N) x - h y) = norm(x - y)
       #|  s:real^M->bool
       #|  IMAGE (h:real^M->real^N) (relative_frontier s)
       #|  (k:real^N->real^M) o (g:real^N->real^N)
@@ -56986,7 +56986,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  h:real^M->real^N
       #|  span t:real^N->bool
       #|  span s:real^M->bool
-      #|  !s:real^M->bool t:real^N->bool.\n          convex s /\\ bounded s /\\ convex t /\\ bounded t /\\\n          vec 0 IN relative_interior s /\\\n          vec 0 IN relative_interior t /\\\n          dim s = dim t\n          ==> ?f g. homeomorphism\n                      (relative_frontier s,relative_frontier t) (f,g) /\\\n                    (?B. !x y. x IN relative_frontier s /\\\n                               y IN relative_frontier s\n                               ==> norm(f x - f y) <= B * norm(x - y)) /\\\n                    (?B. !x y. x IN relative_frontier t /\\\n                               y IN relative_frontier t\n                               ==> norm(g x - g y) <= B * norm(x - y))
+      #|  forall s:real^M->bool t:real^N->bool.\n          convex s /\\ bounded s /\\ convex t /\\ bounded t /\\\n          vec 0 IN relative_interior s /\\\n          vec 0 IN relative_interior t /\\\n          dim s = dim t\n          ==> ?f g. homeomorphism\n                      (relative_frontier s,relative_frontier t) (f,g) /\\\n                    (?B. forall x y. x IN relative_frontier s /\\\n                               y IN relative_frontier s\n                               ==> norm(f x - f y) <= B * norm(x - y)) /\\\n                    (?B. forall x y. x IN relative_frontier t /\\\n                               y IN relative_frontier t\n                               ==> norm(g x - g y) <= B * norm(x - y))
       #|  a + --a + x:real^N = x
       #|  a + --a + x:real^N = x
       #|  a + --a + x:real^N = x
@@ -57007,13 +57007,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(relative_interior(s:real^M->bool) = {}) /\\\n    ~(relative_interior(t:real^N->bool) = {})
       #|  s:real^M->bool = {}
       #|  t:real^N->bool = {}
-      #|  !s:real^M->bool t:real^N->bool.\n     convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s = aff_dim t\n     ==> ?f g. homeomorphism (relative_frontier s,relative_frontier t) (f,g) /\\\n               (?B. !x y. x IN relative_frontier s /\\\n                          y IN relative_frontier s\n                          ==> norm(f x - f y) <= B * norm(x - y)) /\\\n               (?B. !x y. x IN relative_frontier t /\\\n                          y IN relative_frontier t\n                          ==> norm(g x - g y) <= B * norm(x - y))
+      #|  forall s:real^M->bool t:real^N->bool.\n     convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s = aff_dim t\n     ==> ?f g. homeomorphism (relative_frontier s,relative_frontier t) (f,g) /\\\n               (?B. forall x y. x IN relative_frontier s /\\\n                          y IN relative_frontier s\n                          ==> norm(f x - f y) <= B * norm(x - y)) /\\\n               (?B. forall x y. x IN relative_frontier t /\\\n                          y IN relative_frontier t\n                          ==> norm(g x - g y) <= B * norm(x - y))
       #|  s:real^N->bool
-      #|  !s:real^N->bool.\n        convex s ==> (aff_dim s = &(dimindex (:N)) <=> ~(interior s = {}))
-      #|  !a:real^N r.\n        aff_dim(ball(a,r)) = if &0 < r then &(dimindex(:N)) else --(&1)
+      #|  forall s:real^N->bool.\n        convex s ==> (aff_dim s = &(dimindex (:N)) <=> ~(interior s = {}))
+      #|  forall a:real^N r.\n        aff_dim(ball(a,r)) = if &0 < r then &(dimindex(:N)) else --(&1)
       #|  s = {} ==> aff_dim s = --(&1)
-      #|  !a:real^N r.\n        aff_dim(cball(a,r)) =\n            if &0 < r then &(dimindex(:N))\n            else if r = &0 then &0 else --(&1)
-      #|  ~(a IN {f x | P x}) <=> !x. P x ==> ~(f x = a)
+      #|  forall a:real^N r.\n        aff_dim(cball(a,r)) =\n            if &0 < r then &(dimindex(:N))\n            else if r = &0 then &0 else --(&1)
+      #|  ~(a IN {f x | P x}) <=> forall x. P x ==> ~(f x = a)
       #|  i:num
       #|  (x:real^N)$i = &0
       #|  &0 < (b:real^N)$i
@@ -57024,7 +57024,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  i:num
       #|  {basis i:real^N | 1 <= i /\\ i <= dimindex(:N) /\\ &0 < (b:real^N)$i}
       #|  a:real^N
-      #|  (!a b:real^N.\n        aff_dim(interval[a,b]) =\n                if interval[a,b] = {} then --(&1)\n                else &(CARD {i | 1 <= i /\\ i <= dimindex(:N) /\\ a$i < b$i})) /\\\n   (!a b:real^N.\n         aff_dim(interval(a,b)) =\n                if interval(a,b) = {} then --(&1)\n                else &(dimindex(:N)))
+      #|  (forall a b:real^N.\n        aff_dim(interval[a,b]) =\n                if interval[a,b] = {} then --(&1)\n                else &(CARD {i | 1 <= i /\\ i <= dimindex(:N) /\\ a$i < b$i})) /\\\n   (forall a b:real^N.\n         aff_dim(interval(a,b)) =\n                if interval(a,b) = {} then --(&1)\n                else &(dimindex(:N)))
       #|  c:real
       #|  b:real
       #|  a:real
@@ -57044,7 +57044,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  {a,a} = {a}
       #|  s SUBSET a INSERT s
       #|  aff_dim(z INSERT IMAGE (v:real->real^3) {a,b,c,d})
-      #|  !y:int. x <= y /\\ y <= &2 ==> ~(x = &3)
+      #|  forall y:int. x <= y /\\ y <= &2 ==> ~(x = &3)
       #|  ~p ==> p ==> q
       #|  d:real
       #|  c:real
@@ -57056,7 +57056,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real
       #|  a:real
       #|  {a,b} = {b,a}
-      #|  (!a b c d. P a b c d ==> P c d a b /\\ P b a c d /\\ P a b d c) /\\\n    (!a b c d. ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\\n               ~(b = c) /\\ ~(b = d) /\\ ~(c = d)\n               ==> P a b c d) /\\\n    (!a b c. P a b c c) /\\\n    (!a b c. ~(a = b) ==> P a b b c)\n    ==> !a b c d. P a b c d
+      #|  (forall a b c d. P a b c d ==> P c d a b /\\ P b a c d /\\ P a b d c) /\\\n    (forall a b c d. ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\\n               ~(b = c) /\\ ~(b = d) /\\ ~(c = d)\n               ==> P a b c d) /\\\n    (forall a b c. P a b c c) /\\\n    (forall a b c. ~(a = b) ==> P a b b c)\n    ==> forall a b c d. P a b c d
       #|  \\/
       #|  \\/
       #|  \\/
@@ -57139,28 +57139,28 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real
       #|  b:real
       #|  a:real
-      #|  !a b c. collinear(IMAGE (v:real->real^3) {a,b,c})\n            ==> ~PAIRWISE (\\x y. ~(x = y)) [a;b;c]
+      #|  forall a b c. collinear(IMAGE (v:real->real^3) {a,b,c})\n            ==> ~PAIRWISE (\\x y. ~(x = y)) [a;b;c]
       #|  x - z:real^3 = y - z <=> x = y
       #|  1..3
       #|  ~(det(vector[(v:real->real^3) b - (v:real->real^3) a;\n                   (v:real->real^3) c - (v:real->real^3) a;\n                   (v:real->real^3) d - (v:real->real^3) a]:real^3^3) = &0)
       #|  IMAGE (v:real->real^3) {a,b,c,d}
       #|  (v:real->real^3) a
-      #|  !a b c d. PAIRWISE (\\x y. ~(x = y)) [a;b;c;d]\n              ==> aff_dim (IMAGE (v:real->real^3) {a,b,c,d}) = &3
+      #|  forall a b c d. PAIRWISE (\\x y. ~(x = y)) [a;b;c;d]\n              ==> aff_dim (IMAGE (v:real->real^3) {a,b,c,d}) = &3
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  v:real->real^3
       #|  v:real->real^3 = \\x. vector[x; x pow 2; x pow 3]
       #|  (v:real->real^3) o (f:A->real)
       #|  f:A->real
       #|  s:A->bool
-      #|  ?v:real->real^3.\n        (!a b. v a = v b <=> a = b) /\\\n        (!a b c d. ~({v a,v b} = {v c,v d})\n                   ==> segment[v a,v b] INTER segment[v c,v d]\n                       SUBSET {v a,v b} INTER {v c,v d})
-      #|  !s:A->bool.\n        s <=_c (:real)\n        ==> ?v:A->real^3.\n                (!a b. a IN s /\\ b IN s ==> (v a = v b <=> a = b)) /\\\n                (!a b c d. ~({v a,v b} = {v c,v d})\n                           ==> segment[v a,v b] INTER segment[v c,v d]\n                               SUBSET {v a,v b} INTER {v c,v d})
+      #|  ?v:real->real^3.\n        (forall a b. v a = v b <=> a = b) /\\\n        (forall a b c d. ~({v a,v b} = {v c,v d})\n                   ==> segment[v a,v b] INTER segment[v c,v d]\n                       SUBSET {v a,v b} INTER {v c,v d})
+      #|  forall s:A->bool.\n        s <=_c (:real)\n        ==> ?v:A->real^3.\n                (forall a b. a IN s /\\ b IN s ==> (v a = v b <=> a = b)) /\\\n                (forall a b c d. ~({v a,v b} = {v c,v d})\n                           ==> segment[v a,v b] INTER segment[v c,v d]\n                               SUBSET {v a,v b} INTER {v c,v d})
       #|  &p * inv(&2 pow n) = &(p - 2 EXP n) * inv(&2 pow n) + &1
       #|  2 EXP n <= p
       #|  x * inv(&2) * y = inv(&2) * x * y
       #|  p:num
       #|  m:num
       #|  m + p = 2 EXP 0 <=> m = 0 /\\ p = 1 \\/ m = 1 /\\ p = 0
-      #|  !f:real^N->real s.\n        (!x y. x IN s /\\ y IN s\n               ==> midpoint(x,y) IN s /\\\n                   f(midpoint(x,y)) <= (f(x) + f(y)) / &2)\n        ==> !n m p x y.\n                x IN s /\\ y IN s /\\ m + p = 2 EXP n\n                ==> (&m / &2 pow n % x + &p / &2 pow n % y) IN s /\\\n                    f(&m / &2 pow n % x + &p / &2 pow n % y)\n                    <= &m / &2 pow n * f x + &p / &2 pow n * f y
+      #|  forall f:real^N->real s.\n        (forall x y. x IN s /\\ y IN s\n               ==> midpoint(x,y) IN s /\\\n                   f(midpoint(x,y)) <= (f(x) + f(y)) / &2)\n        ==> forall n m p x y.\n                x IN s /\\ y IN s /\\ m + p = 2 EXP n\n                ==> (&m / &2 pow n % x + &p / &2 pow n % y) IN s /\\\n                    f(&m / &2 pow n % x + &p / &2 pow n % y)\n                    <= &m / &2 pow n * f x + &p / &2 pow n * f y
       #|  &0 < y ==> (y - x) / y = &1 - x / y
       #|  y:real^N
       #|  x:real^N
@@ -57178,8 +57178,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u + v = &1 <=> v = &1 - u
       #|  y:real^N
       #|  x:real^N
-      #|  !f:real^N->real s.\n        (lift o f) continuous_on s /\\ convex s /\\\n        (!x y. x IN s /\\ y IN s ==> f(midpoint(x,y)) <= (f(x) + f(y)) / &2)\n         ==> f convex_on s
-      #|  convex s /\\ (!x. x IN closure(relative_interior s) ==> P x)\n       ==> !x. x IN s ==> P x
+      #|  forall f:real^N->real s.\n        (lift o f) continuous_on s /\\ convex s /\\\n        (forall x y. x IN s /\\ y IN s ==> f(midpoint(x,y)) <= (f(x) + f(y)) / &2)\n         ==> f convex_on s
+      #|  convex s /\\ (forall x. x IN closure(relative_interior s) ==> P x)\n       ==> forall x. x IN s ==> P x
       #|  b:real
       #|  a:real^N
       #|  relative_interior t:real^N->bool
@@ -57199,10 +57199,10 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  basis 1:real^N
       #|  t:real^N->bool = {}
       #|  s:real^N->bool = {}
-      #|  !s t. convex s /\\ convex t /\\\n         ~(s = {} /\\ t = (:real^N) \\/ s = (:real^N) /\\ t = {}) /\\\n         DISJOINT (relative_interior s) (relative_interior t)\n         ==> ?a b. ~(a = vec 0) /\\\n                   (!x. x IN s ==> a dot x <= b) /\\\n                   (!x. x IN t ==> a dot x >= b)
+      #|  forall s t. convex s /\\ convex t /\\\n         ~(s = {} /\\ t = (:real^N) \\/ s = (:real^N) /\\ t = {}) /\\\n         DISJOINT (relative_interior s) (relative_interior t)\n         ==> ?a b. ~(a = vec 0) /\\\n                   (forall x. x IN s ==> a dot x <= b) /\\\n                   (forall x. x IN t ==> a dot x >= b)
       #|  &0 < x * y ==> ~(a <= a + --x * y)
       #|  y + --(e / norm(a)) % a:real^N
-      #|  !y:real^N. y IN s ==> a dot x <= a dot y
+      #|  forall y:real^N. y IN s ==> a dot x <= a dot y
       #|  x IN s ==> s SUBSET t ==> x IN t
       #|  dist(y:real^N,y + e) = norm e
       #|  :real
@@ -57222,13 +57222,13 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  x:real^N
       #|  relative_interior s:real^N->bool
-      #|  !s x:real^N.\n        convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n        ==> ?a. ~(a = vec 0) /\\\n                (!y. y IN s ==> a dot x <= a dot y) /\\\n                (!y. y IN relative_interior s ==> a dot x < a dot y)
+      #|  forall s x:real^N.\n        convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n        ==> ?a. ~(a = vec 0) /\\\n                (forall y. y IN s ==> a dot x <= a dot y) /\\\n                (forall y. y IN relative_interior s ==> a dot x < a dot y)
       #|  x:real^N
       #|  closure s:real^N->bool
-      #|  !s x:real^N.\n        convex s /\\ x IN relative_frontier s\n        ==> ?a. ~(a = vec 0) /\\\n                (!y. y IN closure s ==> a dot x <= a dot y) /\\\n                (!y. y IN relative_interior s ==> a dot x < a dot y)
+      #|  forall s x:real^N.\n        convex s /\\ x IN relative_frontier s\n        ==> ?a. ~(a = vec 0) /\\\n                (forall y. y IN closure s ==> a dot x <= a dot y) /\\\n                (forall y. y IN relative_interior s ==> a dot x < a dot y)
       #|  s:real^N->bool
       #|  interior s:real^N->bool = {}
-      #|  !s x:real^N.\n        convex s /\\ x IN frontier s\n        ==> ?a. ~(a = vec 0) /\\\n                !y. y IN closure s ==> a dot x <= a dot y
+      #|  forall s x:real^N.\n        convex s /\\ x IN frontier s\n        ==> ?a. ~(a = vec 0) /\\\n                forall y. y IN closure s ==> a dot x <= a dot y
       #|  N:num
       #|  N + n:num
       #|  vec 0:real^N
@@ -57236,7 +57236,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\n:num. t / norm((x:num->real^N)(r(N + n))) % x(r(N + n))
       #|  t <= m /\\ m <= n /\\ n + &1 < x ==> t <= x
       #|  t:real
-      #|  ?N:num. !n. N <= n ==> t / norm(x n:real^N) <= &1
+      #|  ?N:num. forall n. N <= n ==> t / norm(x n:real^N) <= &1
       #|  t:real
       #|  ~(norm(vec 0:real^N) = &1)
       #|  :real
@@ -57245,14 +57245,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\n. inv(norm(x n)) % (x:num->real^N) n
       #|  sphere(vec 0:real^N,&1)
       #|  ~(&n + &1 < norm(vec 0:real^N))
-      #|  !n. ~((x:num->real^N) n = vec 0)
+      #|  forall n. ~((x:num->real^N) n = vec 0)
       #|  x:num->real^N
       #|  &0 < &n + &1
       #|  &n + &1:real
       #|  n:num
       #|  ~(p /\\ q) <=> p ==> ~q
       #|  a:real^N
-      #|  !s a:real^N.\n        convex s /\\ ~bounded s /\\ closed s /\\ a IN s\n        ==> ?l. ~(l = vec 0) /\\ !t. &0 <= t ==> (a + t % l) IN s
+      #|  forall s a:real^N.\n        convex s /\\ ~bounded s /\\ closed s /\\ a IN s\n        ==> ?l. ~(l = vec 0) /\\ forall t. &0 <= t ==> (a + t % l) IN s
       #|  norm(t % (a - b):real^N)
       #|  (x * y) % a:real^N = y % x % a
       #|  (v % a + b) - v % c:real^N = b + v % (a - c)
@@ -57266,22 +57266,22 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  \\n. (&1 - t / (&n + &1)) % b +\n                  t / (&n + &1) % (a + (&n + &1) % l):real^N
       #|  sequentially
       #|  &0
-      #|  !s a b l:real^N.\n        convex s /\\ closed s /\\ b IN s /\\ (!t. &0 <= t ==> (a + t % l) IN s)\n        ==> !t. &0 <= t ==> (b + t % l) IN s
+      #|  forall s a b l:real^N.\n        convex s /\\ closed s /\\ b IN s /\\ (forall t. &0 <= t ==> (a + t % l) IN s)\n        ==> forall t. &0 <= t ==> (b + t % l) IN s
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s /\\ ~bounded s /\\ closed s\n        ==> ?l. ~(l = vec 0) /\\ !a t. a IN s /\\ &0 <= t ==> (a + t % l) IN s
+      #|  forall s:real^N->bool.\n        convex s /\\ ~bounded s /\\ closed s\n        ==> ?l. ~(l = vec 0) /\\ forall a t. a IN s /\\ &0 <= t ==> (a + t % l) IN s
       #|  a + t % l:real^N =\n       (a + (&2 * t) % l) - inv(&2) % ((a + (&2 * t) % l) - a)
       #|  l:real^N
       #|  a:real^N
       #|  closure s:real^N->bool
-      #|  !s a:real^N.\n        convex s /\\ ~bounded s /\\ a IN relative_interior s\n        ==> ?l. ~(l = vec 0) /\\\n                !t. &0 <= t ==> (a + t % l) IN relative_interior s
+      #|  forall s a:real^N.\n        convex s /\\ ~bounded s /\\ a IN relative_interior s\n        ==> ?l. ~(l = vec 0) /\\\n                forall t. &0 <= t ==> (a + t % l) IN relative_interior s
       #|  a + t % l:real^N =\n       (a + (&2 * t) % l) - inv(&2) % ((a + (&2 * t) % l) - a)
       #|  l:real^N
       #|  b:real^N
       #|  a:real^N
       #|  closure s:real^N->bool
-      #|  !s a b l:real^N.\n        convex s /\\ b IN relative_interior s /\\\n        (!t. &0 <= t ==> (a + t % l) IN relative_interior s)\n        ==> !t. &0 <= t ==> (b + t % l) IN relative_interior s
+      #|  forall s a b l:real^N.\n        convex s /\\ b IN relative_interior s /\\\n        (forall t. &0 <= t ==> (a + t % l) IN relative_interior s)\n        ==> forall t. &0 <= t ==> (b + t % l) IN relative_interior s
       #|  relative_interior s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        convex s /\\ ~bounded s\n        ==> ?l. ~(l = vec 0) /\\\n                !a t. a IN relative_interior s /\\ &0 <= t\n                      ==> (a + t % l) IN relative_interior s
+      #|  forall s:real^N->bool.\n        convex s /\\ ~bounded s\n        ==> ?l. ~(l = vec 0) /\\\n                forall a t. a IN relative_interior s /\\ &0 <= t\n                      ==> (a + t % l) IN relative_interior s
       #|  a:real < b \\/ a > b <=> ~(a = b)
       #|  euclidean:(real^2)topology
       #|  relative_interior s SUBSET {x:real^2 | d dot x < e} \\/\n    relative_interior s SUBSET {x | d dot x > e}
@@ -57302,7 +57302,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  c:real^2
       #|  b:real^2
       #|  a:real^2
-      #|  ((!a b c. Q a b c <=> Q b a c) /\\ (!a b c. Q a b c <=> Q b c a)) /\\\n    (!a b c. P c a b ==> Q a b c)\n    ==> !a b c. P a b c \\/ P b c a \\/ P c a b ==> Q a b c
+      #|  ((forall a b c. Q a b c <=> Q b a c) /\\ (forall a b c. Q a b c <=> Q b c a)) /\\\n    (forall a b c. P c a b ==> Q a b c)\n    ==> forall a b c. P a b c \\/ P b c a \\/ P c a b ==> Q a b c
       #|  a:real^2
       #|  b:real^2
       #|  c:real^2
@@ -57312,7 +57312,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^2
       #|  e:real = &0
       #|  d:real^2 = vec 0
-      #|  !s a b c d e.\n        convex s /\\\n        {a,b,c} SUBSET relative_frontier s /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        d dot a = e /\\ d dot b = e /\\ d dot c = e\n        ==> s SUBSET {x:real^2 | d dot x <= e} \\/\n            s SUBSET {x:real^2 | d dot x >= e}
+      #|  forall s a b c d e.\n        convex s /\\\n        {a,b,c} SUBSET relative_frontier s /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        d dot a = e /\\ d dot b = e /\\ d dot c = e\n        ==> s SUBSET {x:real^2 | d dot x <= e} \\/\n            s SUBSET {x:real^2 | d dot x >= e}
       #|  x:real^N
       #|  &0 <= x ==> &0 < &1 + x
       #|  dist(z:real^N,y) < k ==> k <= d ==> norm(z - y) < d
@@ -57339,7 +57339,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  v:real^N->real
       #|  (x:real^N) IN affine hull s
       #|  x:real^N
-      #|  !i. i IN b ==> ?u. sum s u = &0 /\\ vsum s (\\x:real^N. u x % x) = i
+      #|  forall i. i IN b ==> ?u. sum s u = &0 /\\ vsum s (\\x:real^N. u x % x) = i
       #|  B:real
       #|  compo:real^N->real^N->real
       #|  c:real^N->bool
@@ -57350,7 +57350,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  y:real^N
       #|  s:real^N->bool = {}
-      #|  !s. FINITE s\n       ==> {y:real^N | ?u. (!x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                           sum s u = &1 /\\\n                           vsum s (\\x. u x % x) = y}\n       SUBSET relative_interior(convex hull s)
+      #|  forall s. FINITE s\n       ==> {y:real^N | ?u. (forall x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                           sum s u = &1 /\\\n                           vsum s (\\x. u x % x) = y}\n       SUBSET relative_interior(convex hull s)
       #|  &0 < y ==> x + y + &0 <= &1 ==> x < &1
       #|  sum {x,y} u <= sum s (u:real^N->real)
       #|  ?y:real^N. y IN s /\\ ~(y = x)
@@ -57360,7 +57360,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  s = {a:real^N}
       #|  a:real^N
       #|  s:real^N->bool = {}
-      #|  !s. FINITE s\n       ==> {y:real^N | ?u. (!x. x IN s ==> &0 < u x) /\\\n                           sum s u = &1 /\\\n                           vsum s (\\x. u x % x) = y}\n       SUBSET relative_interior(convex hull s)
+      #|  forall s. FINITE s\n       ==> {y:real^N | ?u. (forall x. x IN s ==> &0 < u x) /\\\n                           sum s u = &1 /\\\n                           vsum s (\\x. u x % x) = y}\n       SUBSET relative_interior(convex hull s)
       #|  a:real^N
       #|  a:real^N
       #|  b IN s /\\ ~(b = a)\n             ==> {x | (x IN s /\\ ~(x = a)) /\\ x = b} = {b}
@@ -57384,14 +57384,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  u:real^N->real
       #|  y:real^N
-      #|  relative_interior s SUBSET s /\\\n    (!x. x IN s /\\ ~(x IN t) ==> ~(x IN relative_interior s))\n    ==> relative_interior s SUBSET t
+      #|  relative_interior s SUBSET s /\\\n    (forall x. x IN s /\\ ~(x IN t) ==> ~(x IN relative_interior s))\n    ==> relative_interior s SUBSET t
       #|  \\x:real^N. &1
       #|  ?a:real^N. s = {a}
-      #|  !s. ~(affine_dependent s)\n       ==> relative_interior(convex hull s) =\n             {y:real^N | ?u. (!x. x IN s ==> &0 < u x) /\\\n                             sum s u = &1 /\\\n                             vsum s (\\x. u x % x) = y}
-      #|  !s. FINITE s /\\ affine hull s = (:real^N)\n       ==> {y | ?u. (!x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                    sum s u = &1 /\\\n                    vsum s (\\x. u x % x) = y}\n           SUBSET interior(convex hull s)
-      #|  !s. FINITE s /\\ affine hull s = (:real^N)\n       ==> {y | ?u. (!x. x IN s ==> &0 < u x) /\\\n                    sum s u = &1 /\\\n                    vsum s (\\x. u x % x) = y}\n           SUBSET interior(convex hull s)
+      #|  forall s. ~(affine_dependent s)\n       ==> relative_interior(convex hull s) =\n             {y:real^N | ?u. (forall x. x IN s ==> &0 < u x) /\\\n                             sum s u = &1 /\\\n                             vsum s (\\x. u x % x) = y}
+      #|  forall s. FINITE s /\\ affine hull s = (:real^N)\n       ==> {y | ?u. (forall x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                    sum s u = &1 /\\\n                    vsum s (\\x. u x % x) = y}\n           SUBSET interior(convex hull s)
+      #|  forall s. FINITE s /\\ affine hull s = (:real^N)\n       ==> {y | ?u. (forall x. x IN s ==> &0 < u x) /\\\n                    sum s u = &1 /\\\n                    vsum s (\\x. u x % x) = y}\n           SUBSET interior(convex hull s)
       #|  relative_interior(convex hull s):real^N->bool
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> interior(convex hull s) =\n             if CARD(s) <= dimindex(:N) then {}\n              else {y | ?u. (!x. x IN s ==> &0 < u x) /\\\n                            sum s u = &1 /\\\n                            vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> interior(convex hull s) =\n             if CARD(s) <= dimindex(:N) then {}\n              else {y | ?u. (forall x. x IN s ==> &0 < u x) /\\\n                            sum s u = &1 /\\\n                            vsum s (\\x. u x % x) = y}
       #|  &0 < y ==> x + y + &0 <= &1 ==> x < &1
       #|  sum {x,y} u <= sum s (u:real^N->real)
       #|  ?y:real^N. y IN s /\\ ~(y = x)
@@ -57404,20 +57404,20 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  u:real^N->real
       #|  v:real^N
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> interior(convex hull s) =\n             if CARD(s) <= dimindex(:N) then {}\n              else {y | ?u. (!x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                            sum s u = &1 /\\\n                            vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> interior(convex hull s) =\n             if CARD(s) <= dimindex(:N) then {}\n              else {y | ?u. (forall x. x IN s ==> &0 < u x /\\ u x < &1) /\\\n                            sum s u = &1 /\\\n                            vsum s (\\x. u x % x) = y}
       #|  ~(?a. s = {a}) ==> vec 0 IN s ==> ?b. ~(b = vec 0) /\\ b IN s
       #|  (?x. ~(x = a) /\\ q x) ==> ?x. if x = a then p x else q x
       #|  \\x. (if x = vec 0 then -- &1 else &0) + (u:real^N->real) x
       #|  u:real^N->real
       #|  z:real^N
       #|  z:real^N
-      #|  s INTER t = {} <=> !x. x IN t ==> ~(x IN s)
-      #|  !s:real^N->bool.\n        ~affine_dependent s /\\ ~(?a. s = {a})\n        ==> relative_interior(convex hull s) INTER s = {}
+      #|  s INTER t = {} <=> forall x. x IN t ==> ~(x IN s)
+      #|  forall s:real^N->bool.\n        ~affine_dependent s /\\ ~(?a. s = {a})\n        ==> relative_interior(convex hull s) INTER s = {}
       #|  y - a - b - c:real^N = vec 0 <=> a + b + c = y
       #|  &1 - a - b - c = &0 <=> a + b + c = &1
-      #|  !a b c:real^2.\n        ~collinear{a,b,c}\n        ==> interior(convex hull {a,b,c}) =\n                {v | ?x y z. &0 < x /\\\n                             &0 < y /\\\n                             &0 < z /\\\n                             x + y + z = &1 /\\\n                             x % a + y % b + z % c = v}
-      #|  !a b c:real^2.\n        ~collinear{a,b,c}\n        ==> interior(convex hull {a,b,c}) =\n                {v | ?x y z. &0 < x /\\ x < &1 /\\\n                             &0 < y /\\ y < &1 /\\\n                             &0 < z /\\ z < &1 /\\\n                             x + y + z = &1 /\\\n                             x % a + y % b + z % c = v}
-      #|  !s. compact s ==> closure(convex hull s) = convex hull s
+      #|  forall a b c:real^2.\n        ~collinear{a,b,c}\n        ==> interior(convex hull {a,b,c}) =\n                {v | ?x y z. &0 < x /\\\n                             &0 < y /\\\n                             &0 < z /\\\n                             x + y + z = &1 /\\\n                             x % a + y % b + z % c = v}
+      #|  forall a b c:real^2.\n        ~collinear{a,b,c}\n        ==> interior(convex hull {a,b,c}) =\n                {v | ?x y z. &0 < x /\\ x < &1 /\\\n                             &0 < y /\\ y < &1 /\\\n                             &0 < z /\\ z < &1 /\\\n                             x + y + z = &1 /\\\n                             x % a + y % b + z % c = v}
+      #|  forall s. compact s ==> closure(convex hull s) = convex hull s
       #|  (\\x. u x - v x):real^N->real
       #|  s:real^N->bool
       #|  v:real^N->real
@@ -57428,11 +57428,11 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  u:real^N->real
       #|  y:real^N
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> relative_frontier(convex hull s) =\n                {y | ?u. (!x. x IN s ==> &0 <= u x) /\\\n                         (?x. x IN s /\\ u x = &0) /\\\n                         sum s u = &1 /\\\n                         vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> relative_frontier(convex hull s) =\n                {y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                         (?x. x IN s /\\ u x = &0) /\\\n                         sum s u = &1 /\\\n                         vsum s (\\x. u x % x) = y}
       #|  affine hull s:real^N->bool
-      #|  !s. s SUBSET t /\\ s = UNIV ==> t = UNIV
+      #|  forall s. s SUBSET t /\\ s = UNIV ==> t = UNIV
       #|  CARD(s:real^N->bool) <= dimindex(:N) \\/\n                dimindex(:N) < CARD(s:real^N->bool)
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> frontier(convex hull s) =\n                {y | ?u. (!x. x IN s ==> &0 <= u x) /\\\n                         (dimindex(:N) < CARD s ==> ?x. x IN s /\\ u x = &0) /\\\n                         sum s u = &1 /\\\n                         vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> frontier(convex hull s) =\n                {y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                         (dimindex(:N) < CARD s ==> ?x. x IN s /\\ u x = &0) /\\\n                         sum s u = &1 /\\\n                         vsum s (\\x. u x % x) = y}
       #|  (\\x. if x = a then &0 else u x):real^N->real
       #|  u:real^N->real
       #|  a:real^N
@@ -57440,29 +57440,29 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  u:real^N->real
       #|  y:real^N
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> relative_frontier(convex hull s) =\n                UNIONS { convex hull (s DELETE a) |a| a IN s }
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> relative_frontier(convex hull s) =\n                UNIONS { convex hull (s DELETE a) |a| a IN s }
       #|  affine hull s:real^N->bool
-      #|  !s. s SUBSET t /\\ s = UNIV ==> t = UNIV
-      #|  !s:real^N->bool.\n        ~(affine_dependent s)\n        ==> frontier(convex hull s) =\n                if CARD(s) <= dimindex(:N) then convex hull s\n                else UNIONS { convex hull (s DELETE a) |a| a IN s }
+      #|  forall s. s SUBSET t /\\ s = UNIV ==> t = UNIV
+      #|  forall s:real^N->bool.\n        ~(affine_dependent s)\n        ==> frontier(convex hull s) =\n                if CARD(s) <= dimindex(:N) then convex hull s\n                else UNIONS { convex hull (s DELETE a) |a| a IN s }
       #|  x IN s ==> ~(s = {x}) ==> ?y. y IN s /\\ ~(y = x)
       #|  ?y:real^N. y IN s /\\ ~(y = x)
       #|  s = (a:real^N) INSERT (s DELETE a)
       #|  interior(affine hull s):real^N->bool
-      #|  !t. s SUBSET t /\\ t = {} ==> ~(x IN s)
+      #|  forall t. s SUBSET t /\\ t = {} ==> ~(x IN s)
       #|  a:real^N
       #|  affine_dependent(s:real^N->bool)
-      #|  !s x:real^N.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1 /\\ x IN s\n        ==> x IN frontier(convex hull s)
-      #|  !s x:real^N.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1 /\\ x IN s\n        ==> ~(x IN interior(convex hull s))
+      #|  forall s x:real^N.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1 /\\ x IN s\n        ==> x IN frontier(convex hull s)
+      #|  forall s x:real^N.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1 /\\ x IN s\n        ==> ~(x IN interior(convex hull s))
       #|  &0 < &n + &1
       #|  \\x:real^N. inv(&(dimindex(:N)) + &1)
       #|  vsum s (\\x:real^N. inv(&(dimindex(:N)) + &1) % x)
       #|  ~(n + 1 <= n)
       #|  s = (a:real^N) INSERT (s DELETE a)
       #|  interior(affine hull s):real^N->bool
-      #|  !t. s SUBSET t /\\ t = {} ==> s = {}
+      #|  forall t. s SUBSET t /\\ t = {} ==> s = {}
       #|  a:real^N
       #|  affine_dependent(s:real^N->bool)
-      #|  !s:real^N->bool.\n        s HAS_SIZE (dimindex(:N) + 1)\n        ==> (interior(convex hull s) = {} <=> affine_dependent s)
+      #|  forall s:real^N->bool.\n        s HAS_SIZE (dimindex(:N) + 1)\n        ==> (interior(convex hull s) = {} <=> affine_dependent s)
       #|  s = t ==> &1 - s + t = &1
       #|  x:real^N = vec 0
       #|  x:real^N
@@ -57471,14 +57471,14 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  u:real^N->real
       #|  u:real^N->real
       #|  y:real^N
-      #|  !s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> convex hull (vec 0 INSERT s) =\n            { y | ?u. (!x. x IN s ==> &0 <= u x) /\\\n                      sum s u <= &1 /\\\n                      vsum s (\\x. u x % x) = y}
+      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> convex hull (vec 0 INSERT s) =\n            { y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                      sum s u <= &1 /\\\n                      vsum s (\\x. u x % x) = y}
       #|  \\y:real^N. y dot x
       #|  x <= &1 ==> x = y ==> y <= &1
       #|  u:real^N->real
-      #|  !u. vsum (IMAGE (basis:num->real^N) (1..dimindex(:N))) u =\n                        vsum (1..dimindex(:N)) ((u:real^N->real^N) o basis)
-      #|  !u. sum (IMAGE (basis:num->real^N) (1..dimindex(:N))) u =\n                        sum (1..dimindex(:N)) (u o basis)
+      #|  forall u. vsum (IMAGE (basis:num->real^N) (1..dimindex(:N))) u =\n                        vsum (1..dimindex(:N)) ((u:real^N->real^N) o basis)
+      #|  forall u. sum (IMAGE (basis:num->real^N) (1..dimindex(:N))) u =\n                        sum (1..dimindex(:N)) (u o basis)
       #|  x:real^N
-      #|  convex hull (vec 0 INSERT { basis i | 1 <= i /\\ i <= dimindex(:N)}) =\n        {x:real^N | (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i) /\\\n                    sum (1..dimindex(:N)) (\\i. x$i) <= &1 }
+      #|  convex hull (vec 0 INSERT { basis i | 1 <= i /\\ i <= dimindex(:N)}) =\n        {x:real^N | (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i) /\\\n                    sum (1..dimindex(:N)) (\\i. x$i) <= &1 }
       #|  abs(y - x) <= z ==> x <= z + y
       #|  s2 <= s0 + s1 ==> s0 < &1 - s1 ==> s2 <= &1
       #|  abs(xk - yk) <= d ==> d < xk ==> &0 <= yk
@@ -57505,23 +57505,23 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x:real^N
       #|  e:real
       #|  x:real^N
-      #|  interior\n    (convex hull (vec 0 INSERT { basis i | 1 <= i /\\ i <= dimindex(:N)})) =\n        {x:real^N | (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < x$i) /\\\n                    sum (1..dimindex(:N)) (\\i. x$i) < &1 }
+      #|  interior\n    (convex hull (vec 0 INSERT { basis i | 1 <= i /\\ i <= dimindex(:N)})) =\n        {x:real^N | (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < x$i) /\\\n                    sum (1..dimindex(:N)) (\\i. x$i) < &1 }
       #|  barycentre s =\n     if FINITE s then vsum s (\\x. inv(&(CARD s)) % x) else vec 0
       #|  barycentre {} = vec 0
-      #|  !a:real^N. barycentre {a} = a
-      #|  !a b:real^N. barycentre {a,b} = midpoint(a,b)
+      #|  forall a:real^N. barycentre {a} = a
+      #|  forall a b:real^N. barycentre {a,b} = midpoint(a,b)
       #|  0 < n <=> ~(n = 0)
       #|  \\x:real^N. inv(&(CARD(s:real^N->bool)))
-      #|  !s:real^N->bool.\n        FINITE s /\\ ~(s = {})\n        ==> (barycentre s) IN relative_interior(convex hull s)
-      #|  !s:real^N->bool.\n        FINITE s /\\ ~(s = {}) ==> (barycentre s) IN (convex hull s)
-      #|  !s:real^N->bool.\n        FINITE s /\\ ~(s = {}) ==> (barycentre s) IN (affine hull s)
+      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {})\n        ==> (barycentre s) IN relative_interior(convex hull s)
+      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {}) ==> (barycentre s) IN (convex hull s)
+      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {}) ==> (barycentre s) IN (affine hull s)
       #|  a + x:real^N = a + y <=> x = y
       #|  s:real^N->bool = {}
-      #|  !a:real^N s.\n        barycentre (IMAGE (\\x. a + x) s) =\n        (if FINITE s /\\ ~(s = {}) then a else vec 0) + barycentre s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> barycentre (IMAGE f s) = f(barycentre s)
+      #|  forall a:real^N s.\n        barycentre (IMAGE (\\x. a + x) s) =\n        (if FINITE s /\\ ~(s = {}) then a else vec 0) + barycentre s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> barycentre (IMAGE f s) = f(barycentre s)
       #|  b IN i ==> i INTER s = {} ==> ~(b IN s)
       #|  s:real^N->bool = {}
-      #|  !s:real^N->bool.\n        ~affine_dependent s /\\ ~(?a. s = {a}) ==> ~(barycentre s IN s)
+      #|  forall s:real^N->bool.\n        ~affine_dependent s /\\ ~(?a. s = {a}) ==> ~(barycentre s IN s)
       #|  x * r:real = y * r <=> y = x \\/ r = &0
       #|  ~(n = &0) ==> (n * x + a * r / &2 = a * r <=> x = (a / (&2 * n)) * r)
       #|  n * s + n * s = (n - &1) * n * r <=> n = &0 \\/ s = (n - &1) * r / &2
@@ -57529,7 +57529,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  x - &2 * &0 + y = x + y
       #|  (x - y:real^N) dot (x - y) = x dot x - &2 * x dot y + y dot y
       #|  sum s (\\y:real^N. if y = x then &0 else r pow 2)
-      #|  !x. x IN s\n        ==> sum s (\\y:real^N. dist(x,y) pow 2) = (&n - &1) * r pow 2
+      #|  forall x. x IN s\n        ==> sum s (\\y:real^N. dist(x,y) pow 2) = (&n - &1) * r pow 2
       #|  n = 0
       #|  a + x:real^N = a + y <=> x = y
       #|  s:real^N->bool = {}
@@ -57540,7 +57540,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~(&0 <= r) ==> ~(dist(x,y) = r)
       #|  :real
       #|  &0 <= r
-      #|  !s:real^N->bool n r.\n        s HAS_SIZE n /\\\n        (!x y. x IN s /\\ y IN s /\\ ~(x = y) ==> dist(x,y) = r)\n        ==> !x. x IN s\n                ==> dist(barycentre s,x) = sqrt((&n - &1) / (&2 * &n)) * r
+      #|  forall s:real^N->bool n r.\n        s HAS_SIZE n /\\\n        (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> dist(x,y) = r)\n        ==> forall x. x IN s\n                ==> dist(barycentre s,x) = sqrt((&n - &1) / (&2 * &n)) * r
       #|  ~(n = 0)
       #|  --c:real^N
       #|  b:real^N
@@ -57558,7 +57558,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  ~((b:real^N) IN affine hull k)
       #|  b:real^N = vec 0 + b
       #|  (b:real^N) IN affine hull s
-      #|  !y:real^N. y IN affine hull k ==> orthogonal b y
+      #|  forall y:real^N. y IN affine hull k ==> orthogonal b y
       #|  ~(b:real^N = vec 0)
       #|  norm(b:real^N) = sqrt((&n + &1) / (&2 * &n)) * r
       #|  (b:real^N) INSERT k
@@ -57585,7 +57585,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &n + &1 <= aff_dim(s:real^N->bool) + &1
       #|  n = 0
       #|  k:real^N->bool
-      #|  !r s:real^N->bool n.\n       &n <= aff_dim s + &1 /\\ &0 < r\n       ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n               (!x y. x IN k /\\ y IN k /\\ ~(x = y) ==> dist(x,y) = r)
+      #|  forall r s:real^N->bool n.\n       &n <= aff_dim s + &1 /\\ &0 < r\n       ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n               (forall x y. x IN k /\\ y IN k /\\ ~(x = y) ==> dist(x,y) = r)
       #|  x - y:real^N = &1 % (x - y)
       #|  dist(a + x:real^N,a + y) = dist(x,y)
       #|  :real
@@ -57600,20 +57600,20 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  n:num
       #|  s:real^N->bool
       #|  r:real
-      #|  !r s:real^N->bool a n.\n      &n <= aff_dim s + &1 /\\ &0 < r /\\ a IN affine hull s /\\ ~(n = 0)\n      ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n              barycentre k = a /\\\n              (!x y. x IN k /\\ y IN k /\\ ~(x = y) ==> dist(x,y) = r) /\\\n              (!x. x IN k ==> dist(a,x) = sqrt((&n - &1) / (&2 * &n)) * r)
+      #|  forall r s:real^N->bool a n.\n      &n <= aff_dim s + &1 /\\ &0 < r /\\ a IN affine hull s /\\ ~(n = 0)\n      ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n              barycentre k = a /\\\n              (forall x y. x IN k /\\ y IN k /\\ ~(x = y) ==> dist(x,y) = r) /\\\n              (forall x. x IN k ==> dist(a,x) = sqrt((&n - &1) / (&2 * &n)) * r)
       #|  x = &1 ==> sqrt x = &1
       #|  a * b = &1 ==> a * b * y = y
       #|  n:num
       #|  a:real^N
       #|  s:real^N->bool
       #|  sqrt((&2 * &n) / (&n - &1)) * r
-      #|  !r s:real^N->bool a n.\n      &n <= aff_dim s + &1 /\\ &0 < r /\\ a IN affine hull s /\\ 1 < n\n      ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n              barycentre k = a /\\\n              (!x. x IN k ==> dist(a,x) = r) /\\\n              (!x y. x IN k /\\ y IN k /\\ ~(x = y)\n                     ==> dist(x,y) = sqrt((&2 * &n) / (&n - &1)) * r)
+      #|  forall r s:real^N->bool a n.\n      &n <= aff_dim s + &1 /\\ &0 < r /\\ a IN affine hull s /\\ 1 < n\n      ==> ?k. k HAS_SIZE n /\\ ~affine_dependent k /\\ k SUBSET affine hull s /\\\n              barycentre k = a /\\\n              (forall x. x IN k ==> dist(a,x) = r) /\\\n              (forall x y. x IN k /\\ y IN k /\\ ~(x = y)\n                     ==> dist(x,y) = sqrt((&2 * &n) / (&n - &1)) * r)
       #|  &2 % a - x:real^N = &1 % (a - x) + a
       #|  dist(a:real^N,&2 % a - x) = dist(a,x)
       #|  :real
       #|  :real
       #|  &2 % a - x IN cball(a:real^N,d) /\\\n                  &2 % a - x IN affine hull s
-      #|  !x:real^N. x IN convex hull k ==> f x <= b
+      #|  forall x:real^N. x IN convex hull k ==> f x <= b
       #|  &1 / &2 % x + &1 / &2 % (&2 % a - x):real^N = a
       #|  &1 / &2
       #|  &1 / &2
@@ -57647,7 +57647,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  aff_dim(s:real^N->bool) = &0
       #|  s:real^N->bool = {}
       #|  e:real
-      #|  !f s a:real^N.\n        f convex_on s /\\ a IN relative_interior s\n        ==> ?e B. &0 < e /\\ &0 < B /\\\n                  cball(a,e) INTER affine hull s SUBSET s /\\\n                  !x. x IN cball(a,e) INTER affine hull s ==> abs(f x) <= B
+      #|  forall f s a:real^N.\n        f convex_on s /\\ a IN relative_interior s\n        ==> ?e B. &0 < e /\\ &0 < B /\\\n                  cball(a,e) INTER affine hull s SUBSET s /\\\n                  forall x. x IN cball(a,e) INTER affine hull s ==> abs(f x) <= B
       #|  a:real^N
       #|  x:real^N
       #|  &2 % a - x:real^N
@@ -57681,7 +57681,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  y:real^N = x
       #|  x <= y ==> abs(x - y) = y - x
       #|  \\x y. (f:real^N->real) x <= f y
-      #|  !i. (!x y. i x y \\/ i y x) /\\ (!x y. P x y ==> P y x) /\\\n        (!x y. i x y ==> P x y)\n        ==> !x y. P x y
+      #|  forall i. (forall x y. i x y \\/ i y x) /\\ (forall x y. P x y ==> P y x) /\\\n        (forall x y. i x y ==> P x y)\n        ==> forall x y. P x y
       #|  e:real
       #|  e / &2
       #|  a:real^N
@@ -57693,7 +57693,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  a:real^N
       #|  s:real^N->bool
       #|  f:real^N->real
-      #|  !f s a:real^N.\n        f convex_on s /\\ a IN relative_interior s\n        ==> ?e B. &0 < e /\\ &0 < B /\\\n                  cball(a,e) INTER affine hull s SUBSET s /\\\n                  !x y. x IN cball(a,e) INTER affine hull s /\\\n                        y IN cball(a,e) INTER affine hull s\n                        ==> abs(f x - f y) <= B * norm(x - y)
+      #|  forall f s a:real^N.\n        f convex_on s /\\ a IN relative_interior s\n        ==> ?e B. &0 < e /\\ &0 < B /\\\n                  cball(a,e) INTER affine hull s SUBSET s /\\\n                  forall x y. x IN cball(a,e) INTER affine hull s /\\\n                        y IN cball(a,e) INTER affine hull s\n                        ==> abs(f x - f y) <= B * norm(x - y)
       #|  norm(a - b:real^N) = dist(b,a)
       #|  :real
       #|  :real
@@ -57709,8 +57709,8 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  f:real^N->real
       #|  e:real
       #|  a:real^N
-      #|  !f s:real^N->bool.\n        f convex_on s ==> lift o f continuous_on relative_interior s
-      #|  !f s:real^N->bool. open s /\\ f convex_on s ==> lift o f continuous_on s
+      #|  forall f s:real^N->bool.\n        f convex_on s ==> lift o f continuous_on relative_interior s
+      #|  forall f s:real^N->bool. open s /\\ f convex_on s ==> lift o f continuous_on s
       #|  x > a ==> b <= a ==> ~(x <= b)
       #|  (y:num->real^N) n
       #|  (x:num->real^N) n
@@ -57758,9 +57758,9 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &0 < &n + &1
       #|  &n + &1:real
       #|  n:num
-      #|  ?x y a b:real^N.\n        (!n. x n IN s) /\\ (!n. y n IN s) /\\ a IN s /\\ b IN s /\\\n        (x --> a) sequentially /\\ (y --> b) sequentially /\\\n        (!n. abs(f(x n) - f(y n)) > &n * norm(x n - y n))
-      #|  (?x. P x) <=> ~(!x. ~P x)
-      #|  !f:real^N->real s t.\n        f convex_on t /\\ compact s /\\ s SUBSET relative_interior t\n        ==> ?B. &0 < B /\\\n                !x y. x IN s /\\ y IN s ==> abs(f x - f y) <= B * norm(x - y)
+      #|  ?x y a b:real^N.\n        (forall n. x n IN s) /\\ (forall n. y n IN s) /\\ a IN s /\\ b IN s /\\\n        (x --> a) sequentially /\\ (y --> b) sequentially /\\\n        (forall n. abs(f(x n) - f(y n)) > &n * norm(x n - y n))
+      #|  (?x. P x) <=> ~(forall x. ~P x)
+      #|  forall f:real^N->real s t.\n        f convex_on t /\\ compact s /\\ s SUBSET relative_interior t\n        ==> ?B. &0 < B /\\\n                forall x y. x IN s /\\ y IN s ==> abs(f x - f y) <= B * norm(x - y)
       #|  x - (&2 % x - y) = y - x
       #|  y:real^N IN cball(x,e)
       #|  z:real^N IN cball(x,e)
@@ -57771,7 +57771,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  &2 % x - y:real^N
       #|  y:real^N
       #|  &0 <= e
-      #|  !f x:real^N e.\n        f convex_on cball(x,e) /\\\n        (!y. y IN cball(x,e) ==> f(y) <= b)\n        ==> !y. y IN cball(x,e) ==> abs(f(y)) <= b + &2 * abs(f(x))
+      #|  forall f x:real^N e.\n        f convex_on cball(x,e) /\\\n        (forall y. y IN cball(x,e) ==> f(y) <= b)\n        ==> forall y. y IN cball(x,e) ==> abs(f(y)) <= b + &2 * abs(f(x))
       #|  z:real^N
       #|  y:real^N
       #|  z:real^N
@@ -57781,24 +57781,24 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  z:real^N
       #|  y:real^N
       #|  x <= b ==> x <= &1 + abs b
-      #|  !x:real^1. x IN interval[a,b] ==> f x <= B
+      #|  forall x:real^1. x IN interval[a,b] ==> f x <= B
       #|  f convex_on interval[a:real^1,b]
       #|  (&1 + abs B) + &2 * abs(f(midpoint(a,b):real^1))
       #|  max (f(a:real^1)) (f b)
       #|  {a:real^1,b}
       #|  f:real^1->real
       #|  max (f(a:real^1)) (f b)
-      #|  ?B. !x:real^1. x IN interval[a,b] ==> f(x) <= B
+      #|  ?B. forall x:real^1. x IN interval[a,b] ==> f(x) <= B
       #|  interval[a:real^1,b] = {}
-      #|  !f:real^1->real a b.\n        f convex_on interval[a,b]\n        ==> ?B. &0 < B /\\ !x. x IN interval[a,b] ==> abs(f x) <= B
+      #|  forall f:real^1->real a b.\n        f convex_on interval[a,b]\n        ==> ?B. &0 < B /\\ forall x. x IN interval[a,b] ==> abs(f x) <= B
       #|  x:real^1
       #|  y:real^1
       #|  a:real^1
       #|  s:real^1->bool
       #|  f:real^1->real
-      #|  !x y. x IN s /\\ y IN s /\\ x IN segment[a,y] ==> (f:real^1->real) x <= f y
+      #|  forall x y. x IN s /\\ y IN s /\\ x IN segment[a,y] ==> (f:real^1->real) x <= f y
       #|  interval(u:real^1,v)
-      #|  !x. x IN s ==> (f:real^1->real) a <= f x
+      #|  forall x. x IN s ==> (f:real^1->real) a <= f x
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  a:real^1
       #|  interior s:real^1->bool
@@ -57815,7 +57815,7 @@ test "Multivariate/convex matches Multivariate/convex.ml" {
       #|  b:real^1
       #|  u:real^1
       #|  ~p \\/ q <=> p ==> q
-      #|  !f s. f convex_on s /\\ is_interval s\n         ==> (!x y. x IN interior s /\\ y IN interior s /\\ drop x <= drop y\n                    ==> f x <= f y) \\/\n             (!x y. x IN interior s /\\ y IN interior s /\\ drop x <= drop y\n                    ==> f y <= f x) \\/\n             ?a. a IN interior s /\\\n                 (!x y. x IN s /\\ y IN s /\\\n                        drop x <= drop y /\\ drop y <= drop a\n                        ==> f y <= f x) /\\\n                 (!x y. x IN s /\\ y IN s /\\\n                        drop a <= drop x /\\ drop x <= drop y\n                        ==> f x <= f y)
+      #|  forall f s. f convex_on s /\\ is_interval s\n         ==> (forall x y. x IN interior s /\\ y IN interior s /\\ drop x <= drop y\n                    ==> f x <= f y) \\/\n             (forall x y. x IN interior s /\\ y IN interior s /\\ drop x <= drop y\n                    ==> f y <= f x) \\/\n             ?a. a IN interior s /\\\n                 (forall x y. x IN s /\\ y IN s /\\\n                        drop x <= drop y /\\ drop y <= drop a\n                        ==> f y <= f x) /\\\n                 (forall x y. x IN s /\\ y IN s /\\\n                        drop a <= drop x /\\ drop x <= drop y\n                        ==> f x <= f y)
       #|TRANSLATION_EQ_IMP =  |- (#!:fun(fun(fun(fun(cart(real,'N),bool),bool),bool),bool) (\P:fun(fun(cart(real,'N),bool),bool). ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) (P:fun(fun(cart(real,'N),bool),bool) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) s:fun(cart(real,'N),bool)))) (P:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool)))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (P:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) (P:fun(fun(cart(real,'N),bool),bool) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) s:fun(cart(real,'N),bool)))))))))))
       #|DIM_HYPERPLANE =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) a:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) (#dim:fun(fun(cart(real,'N),bool),num) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%4610:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%4610:cart(real,'N)) ((#=:fun(real,fun(real,bool)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) a:cart(real,'N)) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) x:cart(real,'N)))))))) ((#-:fun(num,fun(num,num)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|DIM_EQ_HYPERPLANE =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#dim:fun(fun(cart(real,'N),bool),num) s:fun(cart(real,'N),bool))) ((#-:fun(num,fun(num,num)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#?:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) a:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#span:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) s:fun(cart(real,'N),bool))) (#GSPEC:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) (\GEN%PVAR%4611:cart(real,'N). (#?:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (((#SETSPEC:fun(cart(real,'N),fun(bool,fun(cart(real,'N),bool))) GEN%PVAR%4611:cart(real,'N)) ((#=:fun(real,fun(real,bool)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) a:cart(real,'N)) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) x:cart(real,'N)))))))))))))

@@ -43,8 +43,8 @@ test "impconv matches impconv.ml" {
     tac : (@tactics.Goal) -> @tactics.Goalstate raise,
   ) => log.attempt(name, () => sthm(@tactics.prove(w, tac)))
   let (ax, ax2, px) = try {
-    let ax = @kernel.assume_rule(tm("!x:bool. P x ==> (f x <=> g x)"))
-    let ax2 = @kernel.assume_rule(tm("!x:bool. Q x ==> (g x <=> h x)"))
+    let ax = @kernel.assume_rule(tm("forall x:bool. P x ==> (f x <=> g x)"))
+    let ax2 = @kernel.assume_rule(tm("forall x:bool. Q x ==> (g x <=> h x)"))
     let px = @kernel.assume_rule(tm("P (a:bool):bool"))
     (ax, ax2, px)
   } catch {
@@ -98,7 +98,7 @@ test "impconv matches impconv.ml" {
     st("hint_exists_none", goal("?x:bool. P x"), @impconv.hint_exists_tac)
     st(
       "imp_rewrite_forall",
-      goal("!y:bool. P y ==> f y"),
+      goal("forall y:bool. P y ==> f y"),
       @impconv.imp_rewrite_tac(ths([ax])),
     )
     st(
@@ -108,7 +108,7 @@ test "impconv matches impconv.ml" {
     )
     pv(
       "prove_imp_rewrite",
-      tm("(!x:bool. P x ==> (f x <=> g x)) ==> P a ==> g a ==> f a"),
+      tm("(forall x:bool. P x ==> (f x <=> g x)) ==> P a ==> g a ==> f a"),
       @tactics.then_tac(
         @tactics.disch_then(th => @impconv.imp_rewrite_tac(ths([th]))),
         @itab.itaut_tac,

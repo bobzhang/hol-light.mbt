@@ -1062,7 +1062,7 @@ pub fn norm_lin_approx(x164 : @kernel.Thm, x165 : @kernel.Thm) -> @kernel.Thm ra
 /// BOUNDED_ON_INT
 fn step_36() -> Unit raise {
   let t167 = @simp.rewrite_tac(@list.List([@interval_arith.bounded_on_int(), @interval_arith.interval_arith()]))
-  let t168 = (@parser.parse_term("(!x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds"), t167)
+  let t168 = (@parser.parse_term("(forall x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds"), t167)
   bounded_on_int_c.set(@bool.undisch_all((fn(x166 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x166.0, x166.1)
   })(t168)))
@@ -1081,7 +1081,7 @@ pub fn bounded_on_int() -> @kernel.Thm {
 /// BOUNDED_ON_INT_DEST
 fn step_37() -> Unit raise {
   let t170 = @simp.rewrite_tac(@list.List([@interval_arith.bounded_on_int(), @interval_arith.interval_arith()]))
-  let t171 = (@parser.parse_term("bounded_on_int f int f_bounds ==>\n\t\t\t(!x. interval_arith x int ==> interval_arith (f x) f_bounds)"), t170)
+  let t171 = (@parser.parse_term("bounded_on_int f int f_bounds ==>\n\t\t\t(forall x. interval_arith x int ==> interval_arith (f x) f_bounds)"), t170)
   bounded_on_int_dest_c.set(@bool.undisch_all((fn(x169 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x169.0, x169.1)
   })(t171)))

@@ -1232,9 +1232,9 @@ test "calc_rat matches calc_rat.ml" {
       #|  abs:real->real
       #|  max:real->real->real
       #|  min:real->real->real
-      #|  (!x. &0 * x = &0) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+      #|  (forall x. &0 * x = &0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
       #|  ~(&1 = &0)
-      #|  !x y:real. ~(x = y) <=> ?z. (x - y) * z = &1
+      #|  forall x y:real. ~(x = y) <=> ?z. (x - y) * z = &1
       #|  :real
       #|  (pow):real->num->real
       #|  (/):real->real->real
@@ -1245,11 +1245,11 @@ test "calc_rat matches calc_rat.ml" {
       #|  (--):real->real
       #|  ( + ):real->real->real
       #|  ( * ):real->real->real
-      #|  !x y:real. x <= y <=> (!z. y <= z ==> x <= z)
+      #|  forall x y:real. x <= y <=> (forall z. y <= z ==> x <= z)
       #|  y + (x - y) / &2
-      #|  !x y:real. x <= y <=> (!z. y < z ==> x <= z)
+      #|  forall x y:real. x <= y <=> (forall z. y < z ==> x <= z)
       #|  y + (x - y) / &2
-      #|  !x y:real. x <= y <=> (!z. y < z ==> x < z)
+      #|  forall x y:real. x <= y <=> (forall z. y < z ==> x < z)
       #|  inv((x:real) pow n)
       #|  (T ==> p) <=> p
       #|  ~(x pow n = &0) <=>\n        ~((x:real) = &0) \\/ (&n = &0) \\/ ~(x pow n = &0)
@@ -1259,27 +1259,27 @@ test "calc_rat matches calc_rat.ml" {
       #|  (/):real->real->real
       #|  &0 < &1 + abs x
       #|  abs(&1 + abs x) = &1 + abs x
-      #|  !x. abs(x / (&1 + abs x)) < &1
+      #|  forall x. abs(x / (&1 + abs x)) < &1
       #|  &0 < &1 + abs x
       #|  a / b * c:real = (a * c) / b
       #|  &0 < &1 + abs x
       #|  abs(&1 + abs x) = &1 + abs x
-      #|  (!x y. P x y /\\ P y x) <=> (!x y. P x y)
+      #|  (forall x y. P x y /\\ P y x) <=> (forall x y. P x y)
       #|  x:real
       #|  y:real
       #|  &0 < &1 + abs x
       #|  (&0 < x' <=> &0 < x) /\\ (&0 < y' <=> &0 < y) /\\\n    (abs x' < abs y' <=> abs x < abs y) /\\ (abs y' < abs x' <=> abs y < abs x)\n    ==> (x' < y' <=> x < y)
-      #|  !x y. x / (&1 + abs x) < y / (&1 + abs y) <=> x < y
-      #|  !x y. x / (&1 + abs x) <= y / (&1 + abs y) <=> x <= y
-      #|  !x y. x / (&1 + abs x) = y / (&1 + abs y) <=> x = y
+      #|  forall x y. x / (&1 + abs x) < y / (&1 + abs y) <=> x < y
+      #|  forall x y. x / (&1 + abs x) <= y / (&1 + abs y) <=> x <= y
+      #|  forall x y. x / (&1 + abs x) = y / (&1 + abs y) <=> x = y
       #|  x * y = &1 ==> inv x * inv y = &1
       #|  x * inv y * inv z = x * &1 ==> x / y / z = x
       #|  abs y < &1 ==> abs(&1 - abs y) = &1 - abs y
       #|  abs(&1 + abs x) = &1 + abs x
-      #|  !x y. x / (&1 + abs x) = y <=> abs y < &1 /\\ y / (&1 - abs y) = x
-      #|  !x. x / (&1 + abs x) / (&1 - abs(x / (&1 + abs x))) = x
-      #|  !x. x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x <=> abs x < &1
-      #|  !x. abs x < &1\n       ==> x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x
+      #|  forall x y. x / (&1 + abs x) = y <=> abs y < &1 /\\ y / (&1 - abs y) = x
+      #|  forall x. x / (&1 + abs x) / (&1 - abs(x / (&1 + abs x))) = x
+      #|  forall x. x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x <=> abs x < &1
+      #|  forall x. abs x < &1\n       ==> x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x
       #|DECIMAL =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(real,fun(real,bool)) ((#DECIMAL:fun(num,fun(num,real)) x:num) y:num)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) x:num)) (#real_of_num:fun(num,real) y:num)))))))
       #|RAT_LEMMA1 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) y1:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) y2:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) x1:real) y1:real)) ((#real_div:fun(real,fun(real,real)) x2:real) y2:real))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x1:real) y2:real)) ((#real_mul:fun(real,fun(real,real)) x2:real) y1:real))) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) y1:real)) (#real_inv:fun(real,real) y2:real)))))
       #|RAT_LEMMA2 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y1:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y2:real))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) x1:real) y1:real)) ((#real_div:fun(real,fun(real,real)) x2:real) y2:real))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x1:real) y2:real)) ((#real_mul:fun(real,fun(real,real)) x2:real) y1:real))) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) y1:real)) (#real_inv:fun(real,real) y2:real)))))

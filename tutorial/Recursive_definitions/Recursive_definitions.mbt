@@ -64,7 +64,7 @@ pub fn unknown() -> @kernel.Thm {
 ///|
 /// Tutorial/Recursive_definitions.ml:13
 fn step_5() -> Unit raise {
-  ignore(@define.define_(@parser.parse_term("!n. collatz(n) = if n <= 1 then n\n                   else if EVEN(n) then collatz(n DIV 2)\n                   else collatz(3 * n + 1)")))
+  ignore(@define.define_(@parser.parse_term("forall n. collatz(n) = if n <= 1 then n\n                   else if EVEN(n) then collatz(n DIV 2)\n                   else collatz(3 * n + 1)")))
 }
 
 ///|
@@ -104,7 +104,7 @@ pub fn fusc() -> @kernel.Thm {
 ///|
 /// binom
 fn step_8() -> Unit raise {
-  binom_c.set(@define.define_(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
+  binom_c.set(@define.define_(@parser.parse_term("(forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_9() -> Unit raise {
   let t6 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("n < k ==> n < SUC(k)")), @calc_num.arith()]))
   let t5 = @simp.rewrite_tac(@list.List([binom(), @calc_num.arith(), @arith.lt_suc(), @arith.lt()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @nums.induct_tac), t5), t6)
-  binom_lt_c.set(@tactics.prove(@parser.parse_term("!n k. n < k ==> (binom(n,k) = 0)"), t7))
+  binom_lt_c.set(@tactics.prove(@parser.parse_term("forall n k. n < k ==> (binom(n,k) = 0)"), t7))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn binom_lt() -> @kernel.Thm {
 /// BINOM_REFL
 fn step_10() -> Unit raise {
   let t8 = @tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([binom(), binom_lt(), @arith.lt(), @calc_num.arith()])))
-  binom_refl_c.set(@tactics.prove(@parser.parse_term("!n. binom(n,n) = 1"), t8))
+  binom_refl_c.set(@tactics.prove(@parser.parse_term("forall n. binom(n,n) = 1"), t8))
 }
 
 ///|
@@ -172,7 +172,7 @@ fn step_11() -> Unit raise {
   })
   let t9 = @simp.rewrite_tac(@list.List([@arith.add_clauses(), @arith.fact(), @arith.mult_clauses(), binom()]))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.fact(), @arith.add_clauses(), @arith.mult_clauses(), binom_refl()]))), @nums.induct_tac), t9), t16), t20), t21), t22)
-  binom_fact_c.set(@tactics.prove(@parser.parse_term("!n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)"), t23))
+  binom_fact_c.set(@tactics.prove(@parser.parse_term("forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)"), t23))
 }
 
 ///|
@@ -203,7 +203,7 @@ fn step_12() -> Unit raise {
   let t25 = @simp.simp_tac(@list.List([@iterate.nsum_clauses_left(), @arith.add1(), @int.arith_rule(@parser.parse_term("0 <= n + 1")), @iterate.nsum_offset()]))
   let t24 = @simp.rewrite_tac(@list.List([@iterate.nsum_sing_numseg(), binom(), @arith.sub_refl(), @arith.exp(), @arith.mult_clauses()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@arith.exp()]))), t24), t25), t27), t28), t29), @tactics.conj_tac), t31), t33), t34), t35), t36), t37), t38)
-  binomial_theorem_c.set(@tactics.prove(@parser.parse_term("!n. (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))"), t39))
+  binomial_theorem_c.set(@tactics.prove(@parser.parse_term("forall n. (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))"), t39))
 }
 
 ///|

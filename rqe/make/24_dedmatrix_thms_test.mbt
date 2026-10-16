@@ -6970,20 +6970,20 @@ test "Rqe/dedmatrix_thms matches Rqe/dedmatrix_thms.ml" {
       #|0..0..0..2..6..solved at 11
       #|0..0..0..2..6..solved at 11
       #|Rqe/dedmatrix_thms quotations (14):
-      #|  (!y. y <= Y ==> P y) ==>\n  (!y. y < Y ==> P y) /\\\n  (!y. (y = Y) ==> P y)
-      #|  (!y. y < Y ==> P y) ==> X < Y ==>\n  (!y. X < y /\\ y < Y ==> P y)
-      #|  (!y. Y <= y ==> P y) ==>\n  (!y. Y < y ==> P y) /\\\n  (!y. (y = Y) ==> P y)
-      #|  (!y. Y < y ==> P y) ==> Y < X ==>\n  (!y. Y < y /\\ y < X ==> P y)
-      #|  Y < X ==> (!x. x < X ==> P x) ==> (!x. x < Y ==> P x)
-      #|  X < Y ==> (!x. X < x ==> P x) ==> (!x. Y < x ==> P x)
-      #|  Y < X ==> (!x. x < X ==> P x) ==> (!x. (x = Y) ==> P x)
-      #|  X < Y ==> (!x. X < x ==> P x) ==> (!x. (x = Y) ==> P x)
-      #|  Y < X ==> (!x. x < X ==> P x) ==> (!x. Y < x /\\ x < X ==> P x)
-      #|  X < Y ==> (!x. X < x ==> P x) ==> (!x. X < x /\\ x < Y ==> P x)
+      #|  (forall y. y <= Y ==> P y) ==>\n  (forall y. y < Y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)
+      #|  (forall y. y < Y ==> P y) ==> X < Y ==>\n  (forall y. X < y /\\ y < Y ==> P y)
+      #|  (forall y. Y <= y ==> P y) ==>\n  (forall y. Y < y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)
+      #|  (forall y. Y < y ==> P y) ==> Y < X ==>\n  (forall y. Y < y /\\ y < X ==> P y)
+      #|  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. x < Y ==> P x)
+      #|  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. Y < x ==> P x)
+      #|  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. (x = Y) ==> P x)
+      #|  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. (x = Y) ==> P x)
+      #|  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. Y < x /\\ x < X ==> P x)
+      #|  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. X < x /\\ x < Y ==> P x)
       #|  s:sign
-      #|  !P Q p s. interpsign P p s  /\\ Q SUBSET P ==> interpsign Q p s
-      #|  !P Q ps ss. interpsigns ps P ss  /\\ Q SUBSET P ==> interpsigns ps Q ss
-      #|  !pl sl. interpsigns pl (\\x. T) sl  ==>\n   (interpsigns pl (\\x. x < &0) sl  /\\\n    interpsigns pl (\\x. x = &0) sl  /\\\n    interpsigns pl (\\x. &0 < x) sl)
+      #|  forall P Q p s. interpsign P p s  /\\ Q SUBSET P ==> interpsign Q p s
+      #|  forall P Q ps ss. interpsigns ps P ss  /\\ Q SUBSET P ==> interpsigns ps Q ss
+      #|  forall pl sl. interpsigns pl (\\x. T) sl  ==>\n   (interpsigns pl (\\x. x < &0) sl  /\\\n    interpsigns pl (\\x. x = &0) sl  /\\\n    interpsigns pl (\\x. &0 < x) sl)
       #|le_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))))
       #|lt_int_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) X:real) Y:real)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) X:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real))) (P:fun(real,bool) y:real))))))
       #|ge_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) Y:real) y:real)) (P:fun(real,bool) y:real))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) Y:real) y:real)) (P:fun(real,bool) y:real))))) (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))))

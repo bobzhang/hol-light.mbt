@@ -8308,61 +8308,61 @@ test "Model/semantics matches Model/semantics.ml" {
       #|Model/semantics quotations (254):
       #|  (typeset tau (Tyvar s) = tau(s)) /\\\n   (typeset tau Bool = boolset) /\\\n   (typeset tau Ind = indset) /\\\n   (typeset tau (Fun a b) = funspace (typeset tau a) (typeset tau b))
       #|  (semantics sigma tau (Var n ty) = sigma(n,ty)) /\\\n   (semantics sigma tau (Equal ty) =\n        abstract (typeset tau ty) (typeset tau (Fun ty Bool))\n                 (\\x. abstract (typeset tau ty) (typeset tau Bool)\n                               (\\y. boolean(x = y)))) /\\\n   (semantics sigma tau (Select ty) =\n        abstract (typeset tau (Fun ty Bool)) (typeset tau ty)\n                 (\\s. if ?x. x <: ((typeset tau ty) suchthat (holds s))\n                      then ch ((typeset tau ty) suchthat (holds s))\n                      else ch (typeset tau ty))) /\\\n   (semantics sigma tau (Comb s t) =\n        apply (semantics sigma tau s) (semantics sigma tau t)) /\\\n   (semantics sigma tau (Abs n ty t) =\n        abstract (typeset tau ty) (typeset tau (typeof t))\n                 (\\x. semantics (((n,ty) |-> x) sigma) tau t))
-      #|  type_valuation tau <=> !x. (?y. y <: tau x)
-      #|  term_valuation tau sigma <=> !n ty. sigma(n,ty) <: typeset tau ty
-      #|  !sigma taut n ty x.\n        term_valuation tau sigma /\\ x <: typeset tau ty\n        ==> term_valuation tau (((n,ty) |-> x) sigma)
-      #|  !tau ty. type_valuation tau ==> ?x. x <: typeset tau ty
-      #|  !tm ty. tm has_type ty\n           ==> tm has_type ty /\\\n               !sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                           ==> (semantics sigma tau tm) <: (typeset tau ty)
-      #|  !sigma tau tm ty.\n        type_valuation tau /\\ term_valuation tau sigma /\\ tm has_type ty\n        ==> (semantics sigma tau tm) <: (typeset tau ty)
-      #|  !sigma tau s t.\n        s has_type (typeof s) /\\ t has_type (typeof s) /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
+      #|  type_valuation tau <=> forall x. (?y. y <: tau x)
+      #|  term_valuation tau sigma <=> forall n ty. sigma(n,ty) <: typeset tau ty
+      #|  forall sigma taut n ty x.\n        term_valuation tau sigma /\\ x <: typeset tau ty\n        ==> term_valuation tau (((n,ty) |-> x) sigma)
+      #|  forall tau ty. type_valuation tau ==> ?x. x <: typeset tau ty
+      #|  forall tm ty. tm has_type ty\n           ==> tm has_type ty /\\\n               forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                           ==> (semantics sigma tau tm) <: (typeset tau ty)
+      #|  forall sigma tau tm ty.\n        type_valuation tau /\\ term_valuation tau sigma /\\ tm has_type ty\n        ==> (semantics sigma tau tm) <: (typeset tau ty)
+      #|  forall sigma tau s t.\n        s has_type (typeof s) /\\ t has_type (typeof s) /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
       #|  welltyped(s === t)
-      #|  !sigma tau s t.\n        (s === t) has_type Bool /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
+      #|  forall sigma tau s t.\n        (s === t) has_type Bool /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))
       #|  p has_type (Fun ty Bool) /\\\n   type_valuation tau /\\ term_valuation tau sigma\n   ==> (semantics sigma tau (Comb (Select ty) p) =\n        if ?x. x <: (typeset tau ty) suchthat (holds (semantics sigma tau p))\n        then ch((typeset tau ty) suchthat (holds (semantics sigma tau p)))\n        else ch(typeset tau ty))
-      #|  asms |= p <=> ALL (\\a. a has_type Bool) (CONS p asms) /\\\n                 !sigma tau. type_valuation tau /\\\n                             term_valuation tau sigma /\\\n                              ALL (\\a. semantics sigma tau a = True) asms\n                              ==> (semantics sigma tau p = True)
+      #|  asms |= p <=> ALL (\\a. a has_type Bool) (CONS p asms) /\\\n                 forall sigma tau. type_valuation tau /\\\n                             term_valuation tau sigma /\\\n                              ALL (\\a. semantics sigma tau a = True) asms\n                              ==> (semantics sigma tau p = True)
       #|  x:V
-      #|  !env tp.\n        RACONV env tp\n        ==> !sigma1 sigma2 tau.\n                type_valuation tau /\\\n                term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n                (!x1 ty1 x2 ty2.\n                        ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n                        ==> (semantics sigma1 tau (Var x1 ty1) =\n                             semantics sigma2 tau (Var x2 ty2)))\n                ==> welltyped(FST tp) /\\ welltyped(SND tp)\n                    ==> (semantics sigma1 tau (FST tp) =\n                         semantics sigma2 tau (SND tp))
+      #|  forall env tp.\n        RACONV env tp\n        ==> forall sigma1 sigma2 tau.\n                type_valuation tau /\\\n                term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n                (forall x1 ty1 x2 ty2.\n                        ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n                        ==> (semantics sigma1 tau (Var x1 ty1) =\n                             semantics sigma2 tau (Var x2 ty2)))\n                ==> welltyped(FST tp) /\\ welltyped(SND tp)\n                    ==> (semantics sigma1 tau (FST tp) =\n                         semantics sigma2 tau (SND tp))
       #|  []:(term#term)list
-      #|  !sigma tau s t.\n        type_valuation tau /\\ term_valuation tau sigma /\\\n         welltyped s /\\ welltyped t /\\ ACONV s t\n        ==> (semantics sigma tau s = semantics sigma tau t)
+      #|  forall sigma tau s t.\n        type_valuation tau /\\ term_valuation tau sigma /\\\n         welltyped s /\\ welltyped t /\\ ACONV s t\n        ==> (semantics sigma tau s = semantics sigma tau t)
       #|  s:term
       #|  s:term
       #|  r:term
       #|  asl2:term list
       #|  asl1:term list
       #|  ALL (\\a. semantics sigma tau a = True) (TERM_UNION asl1 asl2)
-      #|  (p1 has_type Bool /\\ p2 has_type Bool\n   ==> q has_type Bool /\\\n       !sigma tau. type_valuation tau /\\ term_valuation tau sigma /\\\n                   (semantics sigma tau p1 = True) /\\\n                   (semantics sigma tau p2 = True)\n                  ==> (semantics sigma tau q = True))\n   ==> (asl1 |= p1 /\\ asl2 |= p2 ==> TERM_UNION asl1 asl2 |= q)
+      #|  (p1 has_type Bool /\\ p2 has_type Bool\n   ==> q has_type Bool /\\\n       forall sigma tau. type_valuation tau /\\ term_valuation tau sigma /\\\n                   (semantics sigma tau p1 = True) /\\\n                   (semantics sigma tau p2 = True)\n                  ==> (semantics sigma tau q = True))\n   ==> (asl1 |= p1 /\\ asl2 |= p2 ==> TERM_UNION asl1 asl2 |= q)
       #|  r:term
       #|  r:term
       #|  ty:type
       #|  x:string
       #|  x:V
-      #|  !tau sigma1 sigma2 t.\n        type_valuation tau /\\\n        term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n        welltyped t /\\\n        (!x ty. VFREE_IN (Var x ty) t ==> (sigma1(x,ty) = sigma2(x,ty)))\n        ==> (semantics sigma1 tau t = semantics sigma2 tau t)
-      #|  !p. p has_type Bool ==> [p] |= p
-      #|  !t. welltyped t ==> [] |= t === t
+      #|  forall tau sigma1 sigma2 t.\n        type_valuation tau /\\\n        term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n        welltyped t /\\\n        (forall x ty. VFREE_IN (Var x ty) t ==> (sigma1(x,ty) = sigma2(x,ty)))\n        ==> (semantics sigma1 tau t = semantics sigma2 tau t)
+      #|  forall p. p has_type Bool ==> [p] |= p
+      #|  forall t. welltyped t ==> [] |= t === t
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !asl1 asl2 l m1 m2 r.\n        asl1 |= l === m1 /\\ asl2 |= m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |= l === r
+      #|  forall asl1 asl2 l m1 m2 r.\n        asl1 |= l === m1 /\\ asl2 |= m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |= l === r
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !asl1 l1 r1 asl2 l2 r2.\n        asl1 |= l1 === r1 /\\ asl2 |= l2 === r2 /\\\n        (?rty. typeof l1 = Fun (typeof l2) rty)\n        ==> TERM_UNION asl1 asl2 |= Comb l1 l2 === Comb r1 r2
+      #|  forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |= l1 === r1 /\\ asl2 |= l2 === r2 /\\\n        (?rty. typeof l1 = Fun (typeof l2) rty)\n        ==> TERM_UNION asl1 asl2 |= Comb l1 l2 === Comb r1 r2
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !asl1 asl2 p q p'.\n        asl1 |= p === q /\\ asl2 |= p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |= q
+      #|  forall asl1 asl2 p q p'.\n        asl1 |= p === q /\\ asl2 |= p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |= q
       #|  semantics (((x,ty) |-> sigma(x,ty)) sigma) tau t
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !x ty t. welltyped t ==> [] |= Comb (Abs x ty t) (Var x ty) === t
+      #|  forall x ty t. welltyped t ==> [] |= Comb (Abs x ty t) (Var x ty) === t
       #|  p:term
       #|  ALL (\\a. a has_type Bool) asl /\\\n                ALL (\\a. ~(VFREE_IN (Var x ty) a)) asl /\\\n                ALL (\\a. semantics sigma tau a = True) asl
       #|  x:V
       #|  typeof r = typeof l
       #|  (l === r) has_type Bool
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |= l === r\n        ==> asl |= (Abs x ty l) === (Abs x ty r)
+      #|  forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |= l === r\n        ==> asl |= (Abs x ty l) === (Abs x ty r)
       #|  MEM a (FILTER (\\x. ~ACONV c2 x) asl1) \\/\n     MEM a (FILTER (\\x. ~ACONV c1 x) asl2)
       #|  ACONV c2 a
       #|  ACONV c1 a
       #|  a:term
       #|  \n    (a1 /\\ b1 ==> c1) /\\ (a1 /\\ b1 /\\ c1 ==> a2 /\\ b2 ==> c2)\n    ==> a1 /\\ a2 /\\ b1 /\\ b2 ==> c1 /\\ c2
-      #|  !asl1 asl2 p q.\n        asl1 |= c1 /\\ asl2 |= c2\n        ==> let asl1' = FILTER((~) o ACONV c2) asl1\n            and asl2' = FILTER((~) o ACONV c1) asl2 in\n            (TERM_UNION asl1' asl2') |= c1 === c2
+      #|  forall asl1 asl2 p q.\n        asl1 |= c1 /\\ asl2 |= c2\n        ==> let asl1' = FILTER((~) o ACONV c2) asl1\n            and asl2' = FILTER((~) o ACONV c1) asl2 in\n            (TERM_UNION asl1' asl2') |= c1 === c2
       #|  DEST_VAR (Var x ty) = (x,ty)
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !ilist sigma tau.\n    type_valuation tau /\\ term_valuation tau sigma /\\\n    (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n    ==> term_valuation tau\n         (ITLIST (\\(t,x). DEST_VAR x |-> semantics sigma tau t) ilist sigma)
+      #|  forall ilist sigma tau.\n    type_valuation tau /\\ term_valuation tau sigma /\\\n    (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n    ==> term_valuation tau\n         (ITLIST (\\(t,x). DEST_VAR x |-> semantics sigma tau t) ilist sigma)
       #|  (s:string = x) /\\ (sty:type = ty)
       #|  sty:type
       #|  s:string
@@ -8370,8 +8370,8 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  pp:term
       #|  t:term
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !ilist sigma sem x ty y yty.\n     (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n     ==> (ITLIST (\\(t,x). DEST_VAR x |-> sem x t)\n           (FILTER (\\(s',s). ~(s = Var x ty)) ilist) sigma (y,yty) =\n          if (y = x) /\\ (yty = ty) then sigma(y,yty)\n          else ITLIST (\\(t,x). DEST_VAR x |-> sem x t) ilist sigma (y,yty))
-      #|  !l. (!t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)
+      #|  forall ilist sigma sem x ty y yty.\n     (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n     ==> (ITLIST (\\(t,x). DEST_VAR x |-> sem x t)\n           (FILTER (\\(s',s). ~(s = Var x ty)) ilist) sigma (y,yty) =\n          if (y = x) /\\ (yty = ty) then sigma(y,yty)\n          else ITLIST (\\(t,x). DEST_VAR x |-> sem x t) ilist sigma (y,yty))
+      #|  forall l. (forall t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)
       #|  (v:string = u) /\\ (vty:type = uty) <=> (u = v) /\\ (uty = vty)
       #|  vty:type
       #|  v:string
@@ -8381,7 +8381,7 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
       #|  l:(term#term)list
       #|  ilist:(term#term)list
-      #|  !s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty
+      #|  forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty
       #|  REV_ASSOCD (Var u uty) ilist' (Var u uty) =\n    REV_ASSOCD (Var u uty) ilist (Var u uty)
       #|  uty:type
       #|  u:string
@@ -8401,8 +8401,8 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  uty:type
       #|  u:string
       #|  a:V
-      #|  !s s'. MEM (s',s) ilist'' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
-      #|  !s s'. MEM (s',s) ilist' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
+      #|  forall s s'. MEM (s',s) ilist'' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
+      #|  forall s s'. MEM (s',s) ilist' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)
       #|  welltyped t
       #|  t:term
       #|  ty:type
@@ -8415,13 +8415,13 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  t:term
       #|  ty:type
       #|  x:string
-      #|  !tm sigma tau ilist.\n       welltyped tm /\\\n       (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n       ==> !sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau (VSUBST ilist tm) =\n                            semantics\n                             (ITLIST\n                                (\\(t,x). DEST_VAR x |-> semantics sigma tau t)\n                                ilist sigma)\n                             tau tm)
+      #|  forall tm sigma tau ilist.\n       welltyped tm /\\\n       (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n       ==> forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau (VSUBST ilist tm) =\n                            semantics\n                             (ITLIST\n                                (\\(t,x). DEST_VAR x |-> semantics sigma tau t)\n                                ilist sigma)\n                             tau tm)
       #|  welltyped a
       #|  a:term
       #|  welltyped p
       #|  ALL (\\a. a has_type Bool) (CONS p asl)
-      #|  !ilist asl p.\n        (!s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> asl |= p ==> MAP (VSUBST ilist) asl |= VSUBST ilist p
-      #|  !ty tau tyin.\n      typeset (\\s. typeset tau (REV_ASSOCD (Tyvar s) tyin (Tyvar s))) ty =\n      typeset tau (TYPE_SUBST tyin ty)
+      #|  forall ilist asl p.\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> asl |= p ==> MAP (VSUBST ilist) asl |= VSUBST ilist p
+      #|  forall ty tau tyin.\n      typeset (\\s. typeset tau (REV_ASSOCD (Tyvar s) tyin (Tyvar s))) ty =\n      typeset tau (TYPE_SUBST tyin ty)
       #|  kty:type
       #|  k:string
       #|  kty:type
@@ -8436,7 +8436,7 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  x /\\ (if p then a /\\ b else c /\\ b) <=>\n                      b /\\ x /\\ (if p then a else c)
       #|  kty:type
       #|  k:string
-      #|  !x'' ty'.\n           VFREE_IN (Var x'' ty') (VSUBST [Var x' ty,Var x ty] t)\n           ==> (REV_ASSOCD (Var x'' (TYPE_SUBST tyin ty')) env''\n                           (Var x'' ty') = Var x'' ty')
+      #|  forall x'' ty'.\n           VFREE_IN (Var x'' ty') (VSUBST [Var x' ty,Var x ty] t)\n           ==> (REV_ASSOCD (Var x'' (TYPE_SUBST tyin ty')) env''\n                           (Var x'' ty') = Var x'' ty')
       #|  kty:type
       #|  k:string
       #|  x /\\ (if p /\\ q then a else b) <=>\n                      p /\\ q /\\ a /\\ x \\/ b /\\ ~(p /\\ q) /\\ x
@@ -8476,7 +8476,7 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  y:string = x
       #|  yty:type
       #|  y:string
-      #|  !u uty.\n         VFREE_IN (Var u uty) t' <=>\n         (?oty. VFREE_IN (Var u oty) t /\\ (uty = TYPE_SUBST tyin oty))
+      #|  forall u uty.\n         VFREE_IN (Var u uty) t' <=>\n         (?oty. VFREE_IN (Var u oty) t /\\ (uty = TYPE_SUBST tyin oty))
       #|  yty:type
       #|  y:string
       #|  yty:type
@@ -8511,7 +8511,7 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  n = sizeof(Comb s t)
       #|  t:term
       #|  s:term
-      #|  !n tm env tyin.\n        welltyped tm /\\ (sizeof tm = n) /\\\n        (!s s'. MEM (s,s') env\n                ==> ?x ty. (s = Var x ty) /\\\n                           (s' = Var x (TYPE_SUBST tyin ty)))\n        ==> (?x ty. (INST_CORE env tyin tm =\n                     Clash(Var x (TYPE_SUBST tyin ty))) /\\\n                    VFREE_IN (Var x ty) tm /\\\n                    ~(REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) \\/\n            (!x ty. VFREE_IN (Var x ty) tm\n                    ==> (REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) /\\\n            (?tm'. (INST_CORE env tyin tm = Result tm') /\\\n                   tm' has_type (TYPE_SUBST tyin (typeof tm)) /\\\n                   (!u uty. VFREE_IN (Var u uty) tm' <=>\n                                ?oty. VFREE_IN (Var u oty) tm /\\\n                                      (uty = TYPE_SUBST tyin oty)) /\\\n                   !sigma tau.\n                       type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau tm' =\n                            semantics\n                               (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                               (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s)))\n                               tm))
+      #|  forall n tm env tyin.\n        welltyped tm /\\ (sizeof tm = n) /\\\n        (forall s s'. MEM (s,s') env\n                ==> ?x ty. (s = Var x ty) /\\\n                           (s' = Var x (TYPE_SUBST tyin ty)))\n        ==> (?x ty. (INST_CORE env tyin tm =\n                     Clash(Var x (TYPE_SUBST tyin ty))) /\\\n                    VFREE_IN (Var x ty) tm /\\\n                    ~(REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) \\/\n            (forall x ty. VFREE_IN (Var x ty) tm\n                    ==> (REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) /\\\n            (?tm'. (INST_CORE env tyin tm = Result tm') /\\\n                   tm' has_type (TYPE_SUBST tyin (typeof tm)) /\\\n                   (forall u uty. VFREE_IN (Var u uty) tm' <=>\n                                ?oty. VFREE_IN (Var u oty) tm /\\\n                                      (uty = TYPE_SUBST tyin oty)) /\\\n                   forall sigma tau.\n                       type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau tm' =\n                            semantics\n                               (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                               (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s)))\n                               tm))
       #|  sizeof s
       #|  sizeof t
       #|  s:term
@@ -8544,13 +8544,13 @@ test "Model/semantics matches Model/semantics.ml" {
       #|  []:(term#term)list
       #|  tm:term
       #|  sizeof tm
-      #|  !tyin tm.\n        welltyped tm\n        ==> (INST tyin tm) has_type (TYPE_SUBST tyin (typeof tm)) /\\\n            (!u uty. VFREE_IN (Var u uty) (INST tyin tm) <=>\n                         ?oty. VFREE_IN (Var u oty) tm /\\\n                               (uty = TYPE_SUBST tyin oty)) /\\\n            !sigma tau.\n                type_valuation tau /\\ term_valuation tau sigma\n                ==> (semantics sigma tau (INST tyin tm) =\n                     semantics\n                        (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                        (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s))) tm)
+      #|  forall tyin tm.\n        welltyped tm\n        ==> (INST tyin tm) has_type (TYPE_SUBST tyin (typeof tm)) /\\\n            (forall u uty. VFREE_IN (Var u uty) (INST tyin tm) <=>\n                         ?oty. VFREE_IN (Var u oty) tm /\\\n                               (uty = TYPE_SUBST tyin oty)) /\\\n            forall sigma tau.\n                type_valuation tau /\\ term_valuation tau sigma\n                ==> (semantics sigma tau (INST tyin tm) =\n                     semantics\n                        (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                        (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s))) tm)
       #|  welltyped a
       #|  a:term
       #|  welltyped p
       #|  ALL (\\a. a has_type Bool) (CONS p asl)
-      #|  !tyin asl p. asl |= p ==> MAP (INST tyin) asl |= INST tyin p
-      #|  !asl p. asl |- p ==> asl |= p
+      #|  forall tyin asl p. asl |= p ==> MAP (INST tyin) asl |= INST tyin p
+      #|  forall asl p. asl |- p ==> asl |= p
       #|  \\x:string. boolset
       #|  ((x:string,Bool) |-> False) (((y,Bool) |-> True)\n                        (\\(x,ty). @a. a <: typeset (\\x. boolset) ty))
       #|  y = VARIANT (Var x Bool) x Bool

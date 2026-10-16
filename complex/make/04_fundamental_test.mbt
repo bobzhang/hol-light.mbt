@@ -6449,15 +6449,15 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|0..0..4..11..26..48..86..143..205..289..402..552..753..1023..solved at 1173
       #|0..0..2..5..12..24..42..69..101..141..193..282..386..531..solved at 556
       #|Complex/fundamental quotations (311):
-      #|  !x y. sqrt(x pow 2 + y pow 2) < &1 <=> x pow 2 + y pow 2 < &1
-      #|  !x y. (sqrt(x pow 2 + y pow 2) = &1) <=> (x pow 2 + y pow 2 = &1)
+      #|  forall x y. sqrt(x pow 2 + y pow 2) < &1 <=> x pow 2 + y pow 2 < &1
+      #|  forall x y. (sqrt(x pow 2 + y pow 2) = &1) <=> (x pow 2 + y pow 2 = &1)
       #|  (&2 * r) * (&2 * r) <= &1 /\\ (&2 * i) * (&2 * i) <= &1\n    ==> ~(r * r + i * i = &1)
       #|  Re z * Re z + Im z * Im z = &1
       #|  ~(abs(a) <= &1 /\\ abs(b) <= &1)\n     ==> &0 < --a + --(&1) \\/ &0 < a + --(&1) \\/\n         &0 < --b + --(&1) \\/ &0 < b + --(&1)
       #|  &1 + x < &1 <=> &0 < --x
       #|  (b + c) * (b + c) + a * a =\n                       (b * b + a * a) + (&2 * b * c + c * c)
       #|  a * a + (b + c) * (b + c) =\n                       (a * a + b * b) + (&2 * b * c + c * c)
-      #|  !z. (norm(z) = &1)\n       ==> norm(z + Cx(&1)) < &1 \\/\n           norm(z - Cx(&1)) < &1 \\/\n           norm(z + ii) < &1 \\/\n           norm(z - ii) < &1
+      #|  forall z. (norm(z) = &1)\n       ==> norm(z + Cx(&1)) < &1 \\/\n           norm(z - Cx(&1)) < &1 \\/\n           norm(z + ii) < &1 \\/\n           norm(z - ii) < &1
       #|  (m * b') * b * p * m' = (m * m') * (b * b') * p
       #|  norm(Cx(norm b) / b) = &1
       #|  norm(Cx(norm b) / b)
@@ -6477,9 +6477,9 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  m:num
       #|  m:num
       #|  EVEN(n)
-      #|  !b n. ~(b = Cx(&0)) /\\ ~(n = 0)\n         ==> ?z. norm(Cx(&1) + b * z pow n) < &1
-      #|  !p c x. poly (MAP (( * ) c) p) x = c * poly p x
-      #|  !p x. ALL (\\b. b = Cx(&0)) p ==> (poly p x = Cx(&0))
+      #|  forall b n. ~(b = Cx(&0)) /\\ ~(n = 0)\n         ==> ?z. norm(Cx(&1) + b * z pow n) < &1
+      #|  forall p c x. poly (MAP (( * ) c) p) x = c * poly p x
+      #|  forall p x. ALL (\\b. b = Cx(&0)) p ==> (poly p x = Cx(&0))
       #|  y <= z ==> x + y <= &1 + x + abs(z)
       #|  norm(h) + norm(z * poly t z)
       #|  z:complex
@@ -6487,7 +6487,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  &1 + norm(h) + abs(r * m)
       #|  m:real
       #|  &1
-      #|  !p r. ?m. &0 < m /\\ !z. norm(z) <= r ==> norm(poly p z) <= m
+      #|  forall p r. ?m. &0 < m /\\ forall z. norm(z) <= r ==> norm(poly p z) <= m
       #|  ( * ) x
       #|  x:complex
       #|  x:complex 
@@ -6495,7 +6495,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  a * h
       #|  []:complex list
       #|  Cx(&0)
-      #|  !a p. ?b q. (LENGTH q = LENGTH p) /\\\n               !x. poly (CONS b q) x = (a + x) * poly p x
+      #|  forall a p. ?b q. (LENGTH q = LENGTH p) /\\\n               forall x. poly (CONS b q) x = (a + x) * poly p x
       #|  CONS (h + b) r
       #|  r: complex list
       #|  b:complex
@@ -6503,11 +6503,11 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  a:complex
       #|  p:complex list
       #|  []:complex list
-      #|  !a p. ?q. (LENGTH q = LENGTH p) /\\ !x. poly q x = poly p (a + x)
+      #|  forall a p. ?q. (LENGTH q = LENGTH p) /\\ forall x. poly q x = poly p (a + x)
       #|  a + b <= abs a + abs b + &2 * abs c
       #|  (a + b) * (a + b) = a * a + b * b + &2 * a * b
       #|  a <= abs(abs x + abs y) ==> a <= abs x + abs y
-      #|  !x y. norm(x - y) <= abs(Re(x) - Re(y)) + abs(Im(x) - Im(y))
+      #|  forall x y. norm(x - y) <= abs(Re(x) - Re(y)) + abs(Im(x) - Im(y))
       #|  a < c /\\ b < c ==> x <= a + b ==> x < &2 * c
       #|  &2 * e / &2
       #|  n:num
@@ -6516,7 +6516,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  N2:num
       #|  e / &2
       #|  e / &2
-      #|  !e. &0 < e\n        ==> (?N. !n. N <= n ==> abs(Re(s ((f:num->num) n)) - x) < e)
+      #|  forall e. &0 < e\n        ==> (?N. forall n. N <= n ==> abs(Re(s ((f:num->num) n)) - x) < e)
       #|  e:real
       #|  subseq g
       #|  subseq f
@@ -6534,7 +6534,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  Im o (s:num->complex) o (f:num->num)
       #|  f:num->num
       #|  Re o (s:num->complex)
-      #|  !s r. (!n. norm(s n) <= r)\n         ==> ?f z. subseq f /\\\n                   !e. &0 < e ==> ?N. !n. n >= N ==> norm(s(f n) - z) < e
+      #|  forall s r. (forall n. norm(s n) <= r)\n         ==> ?f z. subseq f /\\\n                   forall e. &0 < e ==> ?N. forall n. n >= N ==> norm(s(f n) - z) < e
       #|  d * m:real
       #|  w:complex
       #|  d:real
@@ -6551,7 +6551,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  q:complex list
       #|  p:complex list
       #|  z:complex
-      #|  !p z e. &0 < e\n           ==> ?d. &0 < d /\\ !w. &0 < norm(w - z) /\\ norm(w - z) < d\n                   ==> norm(poly p w - poly p z) < e
+      #|  forall p z e. &0 < e\n           ==> ?d. &0 < d /\\ forall w. &0 < norm(w - z) /\\ norm(w - z) < d\n                   ==> norm(poly p w - poly p z) < e
       #|  P /\\ (m = --x) /\\ --x < y <=> (--x = m) /\\ P /\\ m < y
       #|  abs(norm(psfn) - norm(pz)) <= norm(psfn - pz)\n    ==> abs(norm(pz) - m) <= abs(norm(psfn) - m) + norm(psfn - pz)
       #|  &N2
@@ -6559,7 +6559,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  m <= x /\\ x < m + e ==> abs(x - m:real) < e
       #|  inv(&(SUC(N1 + N2)))
       #|  m:real
-      #|  !m. abs(norm(psfn) - m) < e2 /\\\n        &2 * e2 <= abs(norm(psfn) - m) + norm(psfn - pz)\n        ==> norm(psfn - pz) < e2 ==> F
+      #|  forall m. abs(norm(psfn) - m) < e2 /\\\n        &2 * e2 <= abs(norm(psfn) - m) + norm(psfn - pz)\n        ==> norm(psfn - pz) < e2 ==> F
       #|  norm(poly p (s((f:num->num) (N1 + N2))) - poly p z) < e / &2
       #|  N2:num
       #|  &2 / e
@@ -6567,7 +6567,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  d:real
       #|  u = z:complex
       #|  u:complex
-      #|  !w. norm(w - z) < d ==> norm(poly p w - poly p z) < e / &2
+      #|  forall w. norm(w - z) < d ==> norm(poly p w - poly p z) < e / &2
       #|  d:real
       #|  e / &2
       #|  z:complex
@@ -6599,7 +6599,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  --norm(poly p (Cx(&0)))
       #|  \\x. ?z. norm(z) <= r /\\ (norm(poly p z) = --x)
       #|  &0 <= r
-      #|  !p r. ?z. !w. norm(w) <= r ==> norm(poly p z) <= norm(poly p w)
+      #|  forall p r. ?z. forall w. norm(w) <= r ==> norm(poly p z) <= norm(poly p w)
       #|  m:real
       #|  mzh <= mazh + ma ==> abs(d) + ma <= mzh ==> d <= mazh
       #|  z:complex
@@ -6617,7 +6617,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  d:real
       #|  EX (\\b. ~(b = Cx(&0))) t
       #|  a:complex
-      #|  !p a. EX (\\b. ~(b = Cx(&0))) p\n         ==> !d. ?r. !z. r <= norm(z) ==> d <= norm(poly (CONS a p) z)
+      #|  forall p a. EX (\\b. ~(b = Cx(&0))) p\n         ==> forall d. ?r. forall z. r <= norm(z) ==> d <= norm(poly (CONS a p) z)
       #|  r <= z \\/ z <= abs(r)
       #|  abs(r)
       #|  CONS (h:complex) t
@@ -6625,11 +6625,11 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  norm(poly (CONS h t) (Cx(&0)))
       #|  h:complex
       #|  EX (\\b. ~(b = Cx(&0))) t
-      #|  !p. ?z. !w. norm(poly p z) <= norm(poly p w)
-      #|  constant f = !w z. f(w) = f(z)
+      #|  forall p. ?z. forall w. norm(poly p z) <= norm(poly p w)
+      #|  constant f = forall w z. f(w) = f(z)
       #|  ~a ==> ~b <=> b ==> a
       #|  2 <= SUC n <=> ~(n = 0)
-      #|  !p. ~constant(poly p) ==> 2 <= LENGTH p
+      #|  forall p. ~constant(poly p) ==> 2 <= LENGTH p
       #|  t:complex list
       #|  h:complex
       #|  0
@@ -6640,7 +6640,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  a:complex
       #|  k:num
       #|  h = Cx(&0)
-      #|  !p. ~(!z. ~(z = Cx(&0)) ==> (poly p z = Cx(&0)))\n       ==> ?k a q. ~(a = Cx(&0)) /\\\n                   (SUC(LENGTH q + k) = LENGTH p) /\\\n                   !z. poly p z = z pow k * poly (CONS a q) z
+      #|  forall p. ~(forall z. ~(z = Cx(&0)) ==> (poly p z = Cx(&0)))\n       ==> ?k a q. ~(a = Cx(&0)) /\\\n                   (SUC(LENGTH q + k) = LENGTH p) /\\\n                   forall z. poly p z = z pow k * poly (CONS a q) z
       #|  q:complex list
       #|  a:complex
       #|  SUC k
@@ -6650,8 +6650,8 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  ~a ==> b <=> a \\/ b
       #|  ~b ==> ~a <=> a ==> b
       #|  t:complex list
-      #|  !p. ~constant(poly p)\n       ==> ?k a q. ~(a = Cx(&0)) /\\ ~(k = 0) /\\\n                   (LENGTH q + k + 1 = LENGTH p) /\\\n                   !z. poly p z = poly p (Cx(&0)) +\n                                  z pow k * poly (CONS a q) z
-      #|  !n p x. poly (APPEND (REPLICATE n (Cx(&0))) p) x = x pow n * poly p x
+      #|  forall p. ~constant(poly p)\n       ==> ?k a q. ~(a = Cx(&0)) /\\ ~(k = 0) /\\\n                   (LENGTH q + k + 1 = LENGTH p) /\\\n                   forall z. poly p z = poly p (Cx(&0)) +\n                                  z pow k * poly (CONS a q) z
+      #|  forall n p x. poly (APPEND (REPLICATE n (Cx(&0))) p) x = x pow n * poly p x
       #|  &0 < t /\\ t < x ==> abs(t) < x
       #|  &0 < t /\\ t < &1 ==> abs(t) <= &1
       #|  abs t * norm(w pow (k + 1)) * m
@@ -6698,13 +6698,13 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  LENGTH(q:complex list) = LENGTH(r:complex list)
       #|  r = MAP (( * ) (inv(a0))) q
       #|  (a * b) * c = b * c * a
-      #|  !z. poly q z = poly (MAP (( * ) (inv(a0))) q) z * a0
+      #|  forall z. poly q z = poly (MAP (( * ) (inv(a0))) q) z * a0
       #|  a0 = poly q (Cx(&0))
       #|  ~a ==> a ==> b
-      #|  !w. norm(poly q (Cx(&0))) <= norm(poly q w)
+      #|  forall w. norm(poly q (Cx(&0))) <= norm(poly q w)
       #|  poly p c = poly q (Cx(&0))
       #|  a + (x - a) = x
-      #|  !z. poly q (z - c) = poly p z
+      #|  forall z. poly q (z - c) = poly p z
       #|  ~(constant(poly p))
       #|  ~constant(poly q)
       #|  q:complex list
@@ -6715,8 +6715,8 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  c:complex
       #|  p:complex list
       #|  n:num
-      #|  !n p. (LENGTH p = n) /\\ ~constant(poly p) ==> ?z. poly p z = Cx(&0)
-      #|  !p. ~constant(poly p) ==> ?z. poly p z = Cx(&0)
+      #|  forall n p. (LENGTH p = n) /\\ ~constant(poly p) ==> ?z. poly p z = Cx(&0)
+      #|  forall p. ~constant(poly p) ==> ?z. poly p z = Cx(&0)
       #|  p:complex list
       #|  p:complex list
       #|  p:complex list
@@ -6759,7 +6759,7 @@ test "Complex/fundamental matches Complex/fundamental.ml" {
       #|  Cx(&0)
       #|  h = Cx(&0)
       #|  a /\\ b /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  !p. ~(?a l. ~(a = Cx(&0)) /\\ ALL (\\b. b = Cx(&0)) l /\\ (p = CONS a l))\n       ==> ?z. poly p z = Cx(&0)
+      #|  forall p. ~(?a l. ~(a = Cx(&0)) /\\ ALL (\\b. b = Cx(&0)) l /\\ (p = CONS a l))\n       ==> ?z. poly p z = Cx(&0)
       #|SQRT_SOS_LT_1 =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|SQRT_SOS_EQ_1 =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#sqrt:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) y:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|UNIMODULAR_REDUCE_NORM =  |- (#!:fun(fun(complex,bool),bool) (\z:complex. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) z:complex)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_add:fun(complex,fun(complex,complex)) z:complex) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_sub:fun(complex,fun(complex,complex)) z:complex) (#Cx:fun(real,complex) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_add:fun(complex,fun(complex,complex)) z:complex) #ii:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) (#complex_norm:fun(complex,real) ((#complex_sub:fun(complex,fun(complex,complex)) z:complex) #ii:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))

@@ -5629,13 +5629,13 @@ Warning: inventing type variables
   edges(E:E->bool,V:V->bool,Ter:E->V->bool) = E
   vertices(E:E->bool,V:V->bool,Ter:E->V->bool) = V
   termini(E:E->bool,V:V->bool,Ter:E->V->bool) = Ter
-  graph G <=>\n        !e. e IN edges(G)\n            ==> ?a b. a IN vertices(G) /\\ b IN vertices(G) /\\\n                      termini G e = {a,b}
-  !G e v. graph G /\\ e IN edges(G) /\\ v IN termini G e ==> v IN vertices G
+  graph G <=>\n        forall e. e IN edges(G)\n            ==> ?a b. a IN vertices(G) /\\ b IN vertices(G) /\\\n                      termini G e = {a,b}
+  forall G e v. graph G /\\ e IN edges(G) /\\ v IN termini G e ==> v IN vertices G
   connects G e (a,b) <=> termini G e = {a,b}
   delete_edge e (E,V,Ter) = (E DELETE e,V,Ter)
-  (!G. edges(delete_edge e G) = (edges G) DELETE e) /\\\n   (!G. vertices(delete_edge e G) = vertices G) /\\\n   (!G. termini(delete_edge e G) = termini G)
-  !G e. graph G ==> graph(delete_edge e G)
-  locally_finite G <=>\n     !v. v IN vertices(G) ==> FINITE {e | e IN edges G /\\ v IN termini G e}
+  (forall G. edges(delete_edge e G) = (edges G) DELETE e) /\\\n   (forall G. vertices(delete_edge e G) = vertices G) /\\\n   (forall G. termini(delete_edge e G) = termini G)
+  forall G e. graph G ==> graph(delete_edge e G)
+  locally_finite G <=>\n     forall v. v IN vertices(G) ==> FINITE {e | e IN edges G /\\ v IN termini G e}
   localdegree G v e =\n        if termini G e = {v} then 2\n        else if v IN termini G e then 1\n        else 0
   degree G v = nsum {e | e IN edges G /\\ v IN termini G e} (localdegree G v)
   nsum {e':E | (e' IN edges G /\\ ~(e' = e)) /\\ (v:V) IN termini G e'}\n         (localdegree (delete_edge e G) v) =\n    nsum {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}\n         (localdegree G v)
@@ -5643,9 +5643,9 @@ Warning: inventing type variables
   FINITE {e':E | (e' IN edges G /\\ ~(e' = e)) /\\ (v:V) IN termini G e'}
   (v:V) IN termini G (e:E)
   {e:E | e IN edges G /\\ (v:V) IN termini G e} =\n        if v IN termini G e\n        then e INSERT {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}\n        else {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}
-  !G e:E v:V.\n        graph G /\\ locally_finite G /\\ e IN edges(G)\n        ==> degree G v =\n                if termini G e = {v} then degree (delete_edge e G) v + 2\n                else if v IN termini G e then degree (delete_edge e G) v + 1\n                else degree (delete_edge e G) v
-  (!G a. a IN vertices G /\\ edges G = {} ==> eulerian G [] (a,a)) /\\\n  (!G a b c e es. e IN edges(G) /\\ connects G e (a,b) /\\\n                  eulerian (delete_edge e G) es (b,c)\n                  ==> eulerian G (CONS e es) (a,c))
-  !G es ab. eulerian G es ab ==> FINITE (edges G)
+  forall G e:E v:V.\n        graph G /\\ locally_finite G /\\ e IN edges(G)\n        ==> degree G v =\n                if termini G e = {v} then degree (delete_edge e G) v + 2\n                else if v IN termini G e then degree (delete_edge e G) v + 1\n                else degree (delete_edge e G) v
+  (forall G a. a IN vertices G /\\ edges G = {} ==> eulerian G [] (a,a)) /\\\n  (forall G a b c e es. e IN edges(G) /\\ connects G e (a,b) /\\\n                  eulerian (delete_edge e G) es (b,c)\n                  ==> eulerian G (CONS e es) (a,c))
+  forall G es ab. eulerian G es ab ==> FINITE (edges G)
   {a,b} = {v} <=> a = b /\\ a = v
   {a,a} = {v} <=> v = a
   b:V = a
@@ -5657,8 +5657,8 @@ Warning: inventing type variables
   G:(E->bool)#(V->bool)#(E->V->bool)
   v:V
   {x | F} = {}
-  !G:(E->bool)#(V->bool)#(E->V->bool) es ab.\n        eulerian G es ab\n        ==> graph G\n            ==> FINITE(edges G) /\\\n                !v. v IN vertices G\n                    ==> (ODD(degree G v) <=>\n                         ~(FST ab = SND ab) /\\ (v = FST ab \\/ v = SND ab))
-  !G es a b.\n        graph G /\\ eulerian G es (a,b)\n        ==> !v. v IN vertices G\n                ==> (ODD(degree G v) <=> ~(a = b) /\\ (v = a \\/ v = b))
+  forall G:(E->bool)#(V->bool)#(E->V->bool) es ab.\n        eulerian G es ab\n        ==> graph G\n            ==> FINITE(edges G) /\\\n                forall v. v IN vertices G\n                    ==> (ODD(degree G v) <=>\n                         ~(FST ab = SND ab) /\\ (v = FST ab \\/ v = SND ab))
+  forall G es a b.\n        graph G /\\ eulerian G es (a,b)\n        ==> forall v. v IN vertices G\n                ==> (ODD(degree G v) <=> ~(a = b) /\\ (v = a \\/ v = b))
   {a,b} = {x} <=> x = a /\\ a = b
   {x | x = a} = {a}
   {x | x = a \\/ P(x)} = a INSERT {x | P(x)}
@@ -5667,7 +5667,7 @@ Warning: inventing type variables
   a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
   {a,b} = {x,y} <=> a = x /\\ b = y \\/ a = y /\\ b = x
   G:(num->bool)#(num->bool)#(num->num->bool)
-  !G. vertices(G) = {0,1,2,3} /\\\n       edges(G) = {10,20,30,40,50,60,70} /\\\n       termini G (10) = {0,1} /\\\n       termini G (20) = {0,2} /\\\n       termini G (30) = {0,3} /\\\n       termini G (40) = {1,2} /\\\n       termini G (50) = {1,2} /\\\n       termini G (60) = {2,3} /\\\n       termini G (70) = {2,3}\n       ==> ~(?es a b. eulerian G es (a,b))
+  forall G. vertices(G) = {0,1,2,3} /\\\n       edges(G) = {10,20,30,40,50,60,70} /\\\n       termini G (10) = {0,1} /\\\n       termini G (20) = {0,2} /\\\n       termini G (30) = {0,3} /\\\n       termini G (40) = {1,2} /\\\n       termini G (50) = {1,2} /\\\n       termini G (60) = {2,3} /\\\n       termini G (70) = {2,3}\n       ==> ~(?es a b. eulerian G es (a,b))
   3
   2
   1

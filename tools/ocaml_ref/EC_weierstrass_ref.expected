@@ -51450,23 +51450,23 @@ EC/weierstrass quotations (1882):
   (weierstrass_point f NONE <=> T) /\\\n  (weierstrass_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)
   (weierstrass_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (weierstrass_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b))
   (weierstrass_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (weierstrass_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))
-  (!y. weierstrass_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. weierstrass_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        weierstrass_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let m = ring_div f\n              (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2)) a)\n              (ring_mul f (ring_of_num f 2) y1) in\n            let x3 = ring_sub f (ring_pow f m 2)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let m = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_pow f m 2)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))
+  (forall y. weierstrass_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (forall x. weierstrass_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (forall x1 y1 x2 y2.\n        weierstrass_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let m = ring_div f\n              (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2)) a)\n              (ring_mul f (ring_of_num f 2) y1) in\n            let x3 = ring_sub f (ring_pow f m 2)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let m = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_pow f m 2)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))
   weierstrass_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(ring_add f (ring_mul f (ring_of_num f 4) (ring_pow f a 3))\n                     (ring_mul f (ring_of_num f 27) (ring_pow f b 2)) =\n          ring_0 f)
   weierstrass_group (f:A ring,a:A,b:A) =\n        group(weierstrass_curve(f,a,b),\n              NONE,\n              weierstrass_neg(f,a,b),\n              weierstrass_add(f,a,b))
   IMAGE SOME\n     {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n              ring_pow f y 2 =\n              ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b)}\n    UNION {NONE}
   (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
-  (!f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> FINITE(weierstrass_curve(f,a,b))) /\\\n   (!f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> CARD(weierstrass_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1)
-  !f a b p. weierstrass_curve(f,a,b) p ==> weierstrass_point f p
-  !(f:A ring) a b p.\n        weierstrass_point f p\n        ==> weierstrass_point f (weierstrass_neg (f,a,b) p)
-  !(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_point f (weierstrass_add (f,a,b) p q)
-  !f a b:A. weierstrass_curve(f,a,b) NONE
-  !f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_curve(f,a,b) (weierstrass_neg (f,a,b) p)
+  (forall f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> FINITE(weierstrass_curve(f,a,b))) /\\\n   (forall f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> CARD(weierstrass_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1)
+  forall f a b p. weierstrass_curve(f,a,b) p ==> weierstrass_point f p
+  forall(f:A ring) a b p.\n        weierstrass_point f p\n        ==> weierstrass_point f (weierstrass_neg (f,a,b) p)
+  forall(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_point f (weierstrass_add (f,a,b) p q)
+  forall f a b:A. weierstrass_curve(f,a,b) NONE
+  forall f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_curve(f,a,b) (weierstrass_neg (f,a,b) p)
   ~(ring_of_num f 2:A = ring_0 f)
   y2:A
   x2:A
   y1:A
   x1:A
-  !f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_curve(f,a,b) (weierstrass_add (f,a,b) p q)
+  forall f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_curve(f,a,b) (weierstrass_add (f,a,b) p q)
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -51497,7 +51497,7 @@ EC/weierstrass quotations (1882):
   x:A
   y:A
   x:A
-  !f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_add(f,a,b) (weierstrass_neg (f,a,b) p) p = NONE
+  forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_add(f,a,b) (weierstrass_neg (f,a,b) p) p = NONE
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -51517,7 +51517,7 @@ EC/weierstrass quotations (1882):
   x2:A
   y1:A
   x1:A
-  !f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_add (f,a,b) p q = weierstrass_add (f,a,b) q p
+  forall f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_add (f,a,b) p q = weierstrass_add (f,a,b) q p
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -51609,7 +51609,7 @@ EC/weierstrass quotations (1882):
   x:A
   (x:A) IN ring_carrier f
   x:A
-  !f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          weierstrass_curve(f,a,b) (SOME(x1,y1)) /\\\n          weierstrass_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = weierstrass_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))
+  forall f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          weierstrass_curve(f,a,b) (SOME(x1,y1)) /\\\n          weierstrass_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = weierstrass_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -51640,7 +51640,7 @@ EC/weierstrass quotations (1882):
   b:A
   a:A
   f:A ring
-  !f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        weierstrass_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\\n        weierstrass_curve(f,a,b) q /\\\n        weierstrass_curve(f,a,b) r\n        ==> weierstrass_add (f,a,b) p (weierstrass_add (f,a,b) q r) =\n            weierstrass_add (f,a,b) (weierstrass_add (f,a,b) p q) r
+  forall f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        weierstrass_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\\n        weierstrass_curve(f,a,b) q /\\\n        weierstrass_curve(f,a,b) r\n        ==> weierstrass_add (f,a,b) p (weierstrass_add (f,a,b) q r) =\n            weierstrass_add (f,a,b) (weierstrass_add (f,a,b) p q) r
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -52928,10 +52928,10 @@ EC/weierstrass quotations (1882):
   (x:A) IN ring_carrier f
   x:A
   x = a /\\ x = y ==> x = a /\\ y = a
-  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      weierstrass_nonsingular(f,a,b)\n      ==> group_carrier(weierstrass_group(f,a,b)) = weierstrass_curve(f,a,b) /\\\n          group_id(weierstrass_group(f,a,b)) = NONE /\\\n          group_inv(weierstrass_group(f,a,b)) = weierstrass_neg(f,a,b) /\\\n          group_mul(weierstrass_group(f,a,b)) = weierstrass_add(f,a,b)
+  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      weierstrass_nonsingular(f,a,b)\n      ==> group_carrier(weierstrass_group(f,a,b)) = weierstrass_curve(f,a,b) /\\\n          group_id(weierstrass_group(f,a,b)) = NONE /\\\n          group_inv(weierstrass_group(f,a,b)) = weierstrass_neg(f,a,b) /\\\n          group_mul(weierstrass_group(f,a,b)) = weierstrass_add(f,a,b)
   weierstrass_triplex f (c:A) NONE = NONE /\\\n  weierstrass_triplex f c (SOME(x:A,y:A)) = SOME(ring_mul f c x,y)
   a:A = ring_0 f
-  !f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ ring_pow f c 3 = ring_1 f /\\ a = ring_0 f\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_triplex f c)
+  forall f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ ring_pow f c 3 = ring_1 f /\\ a = ring_0 f\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_triplex f c)
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -53112,7 +53112,7 @@ EC/weierstrass quotations (1882):
   x:A
   weierstrass_quady f (c:A) NONE = NONE /\\\n  weierstrass_quady f c (SOME(x:A,y:A)) = SOME(ring_neg f x,ring_mul f c y)
   b:A = ring_0 f
-  !f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ b = ring_0 f /\\\n        ring_pow f c 4 = ring_1 f /\\ ~(ring_pow f c 2 = ring_1 f)\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_quady f c)
+  forall f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ b = ring_0 f /\\\n        ring_pow f c 4 = ring_1 f /\\ ~(ring_pow f c 2 = ring_1 f)\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_quady f c)
   :A
   (x:A) IN ring_carrier f
   x:A

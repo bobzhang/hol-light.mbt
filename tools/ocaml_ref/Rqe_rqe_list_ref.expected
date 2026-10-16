@@ -5779,32 +5779,32 @@ Warning: inventing type variables
 0..0..3..6..13..solved at 41
 Rqe/rqe_list quotations (49):
   CONS:A -> A list -> A list
-  !l. (~ ?(h:A) t. (l = CONS h t)) ==> (l = [])
+  forall l. (~ ?(h:A) t. (l = CONS h t)) ==> (l = [])
   (REMOVE x [] = []) /\\\n   (REMOVE x (CONS (h:A) t) =\n     let rest = REMOVE x t in\n       if x = h then rest else CONS h rest)
   (CHOP_LIST 0 l = [],l) /\\\n   (CHOP_LIST (SUC n) l =\n     let a,b = CHOP_LIST n (TL l) in\n      CONS (HD l) a,b)
   REMOVE x [] = []
   x = h
-  !x l. ~(MEM x (REMOVE x l))
+  forall x l. ~(MEM x (REMOVE x l))
   y = z
-  !x y z l. MEM x (REMOVE y l) ==> MEM x (REMOVE y (CONS z l))
+  forall x y z l. MEM x (REMOVE y l) ==> MEM x (REMOVE y (CONS z l))
   MEM x (REMOVE x1 t)
   MEM x t
   x = h
-  !x x1 l. MEM x l /\\ ~(x = x1) ==> MEM x (REMOVE x1 l)
-  !h. LAST [h] = h
-  !h t. ~(t = []) ==> (LAST (CONS h t) = LAST t)
-  !h1 h2 t. ~(t = []) ==> (LAST (CONS h1 (CONS h2 t)) = LAST (CONS h1 t))
-  !h t l. HD (APPEND (CONS h t) l) = h
+  forall x x1 l. MEM x l /\\ ~(x = x1) ==> MEM x (REMOVE x1 l)
+  forall h. LAST [h] = h
+  forall h t. ~(t = []) ==> (LAST (CONS h t) = LAST t)
+  forall h1 h2 t. ~(t = []) ==> (LAST (CONS h1 (CONS h2 t)) = LAST (CONS h1 t))
+  forall h t l. HD (APPEND (CONS h t) l) = h
   ~(0 = SUC n)
-  !l. (LENGTH l = 0) <=> (l = [])
+  forall l. (LENGTH l = 0) <=> (l = [])
   t = []
   LENGTH t = 0
   ~(0 = 1)
   ~(1 = 0)
-  !l. (LENGTH l = 1) <=> ?x. l = [x]
+  forall l. (LENGTH l = 1) <=> ?x. l = [x]
   t:A list
   p:A list
-  !p. (p = []) \\/ (?x. p = [x:A]) \\/ (?x y t. p = CONS x (CONS y t))
+  forall p. (p = []) \\/ (?x. p = [x:A]) \\/ (?x y t. p = CONS x (CONS y t))
   2 < LENGTH p
   p = CONS h (CONS h' (CONS h'' t''))
   h':A
@@ -5814,19 +5814,19 @@ Rqe/rqe_list quotations (49):
   t:A list
   ~(2 = 0)
   p:A list
-  !p. (LENGTH p = 2) <=> ?h t. p = [h:A; t]
+  forall p. (LENGTH p = 2) <=> ?h t. p = [h:A; t]
   1 < LENGTH p
   p = CONS h (CONS h' t')
   h:A
   t:A list
   ~(1 = 0)
   p:A list
-  !p. (LENGTH p = 1) <=> ?h. p = [h:A]
+  forall p. (LENGTH p = 1) <=> ?h. p = [h:A]
   ?h t. l = CONS h t
-  !l. ~(l = []) ==> ((TL l = []) <=> ?x. l = [x])
-  !l. ~(l = []) /\\  ~(TL l = []) ==> (LAST (TL l) = LAST l)
-  !l. ~(l = []) /\\  ~(TL l = []) ==> (LENGTH (TL l) = PRE(LENGTH l))
-  !p. 0 < LENGTH p <=> ~(p = [])
+  forall l. ~(l = []) ==> ((TL l = []) <=> ?x. l = [x])
+  forall l. ~(l = []) /\\  ~(TL l = []) ==> (LAST (TL l) = LAST l)
+  forall l. ~(l = []) /\\  ~(TL l = []) ==> (LENGTH (TL l) = PRE(LENGTH l))
+  forall p. 0 < LENGTH p <=> ~(p = [])
 NOT_CONS =  |- (#!:fun(fun(list('A),bool),bool) (\l:list('A). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\h:'A. (#?:fun(fun(list('A),bool),bool) (\t:list('A). ((#=:fun(list('A),fun(list('A),bool)) l:list('A)) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) t:list('A))))))))) ((#=:fun(list('A),fun(list('A),bool)) l:list('A)) #NIL:list('A)))))
 REMOVE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('A),fun(list('A),bool)) ((#REMOVE:fun('A,fun(list('A),list('A))) x:'A) #NIL:list('A))) #NIL:list('A))) ((#=:fun(list('A),fun(list('A),bool)) ((#REMOVE:fun('A,fun(list('A),list('A))) x:'A) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) t:list('A)))) ((#LET:fun(fun(list('A),list('A)),fun(list('A),list('A))) (\rest:list('A). (#LET_END:fun(list('A),list('A)) (((#COND:fun(bool,fun(list('A),fun(list('A),list('A)))) ((#=:fun('A,fun('A,bool)) x:'A) h:'A)) rest:list('A)) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) rest:list('A)))))) ((#REMOVE:fun('A,fun(list('A),list('A))) x:'A) t:list('A)))))
 CHOP_LIST =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(prod(list('?177593),list('?177593)),fun(prod(list('?177593),list('?177593)),bool)) ((#CHOP_LIST:fun(num,fun(list('?177593),prod(list('?177593),list('?177593)))) (#NUMERAL:fun(num,num) #_0:num)) l:list('?177593))) ((#,:fun(list('?177593),fun(list('?177593),prod(list('?177593),list('?177593)))) #NIL:list('?177593)) l:list('?177593)))) ((#=:fun(prod(list('?177593),list('?177593)),fun(prod(list('?177593),list('?177593)),bool)) ((#CHOP_LIST:fun(num,fun(list('?177593),prod(list('?177593),list('?177593)))) (#SUC:fun(num,num) n:num)) l:list('?177593))) ((#LET:fun(fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593))),fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593)))) (#GABS:fun(fun(fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593))),bool),fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593)))) (\f:fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593))). (#!:fun(fun(list('?177593),bool),bool) (\a:list('?177593). (#!:fun(fun(list('?177593),bool),bool) (\b:list('?177593). ((#GEQ:fun(prod(list('?177593),list('?177593)),fun(prod(list('?177593),list('?177593)),bool)) (f:fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593))) ((#,:fun(list('?177593),fun(list('?177593),prod(list('?177593),list('?177593)))) a:list('?177593)) b:list('?177593)))) (#LET_END:fun(prod(list('?177593),list('?177593)),prod(list('?177593),list('?177593))) ((#,:fun(list('?177593),fun(list('?177593),prod(list('?177593),list('?177593)))) ((#CONS:fun('?177593,fun(list('?177593),list('?177593))) (#HD:fun(list('?177593),'?177593) l:list('?177593))) a:list('?177593))) b:list('?177593))))))))))) ((#CHOP_LIST:fun(num,fun(list('?177593),prod(list('?177593),list('?177593)))) n:num) (#TL:fun(list('?177593),list('?177593)) l:list('?177593))))))

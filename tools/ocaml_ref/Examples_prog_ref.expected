@@ -5723,11 +5723,11 @@ Examples/prog quotations (108):
   NOT p = \\x:S. ~(p x)
   p AND q = \\x:S. p x /\\ q x
   p OR q = \\x:S. p x \\/ q x
-  ANDS P = \\x:S. !p. P p ==> p x
+  ANDS P = \\x:S. forall p. P p ==> p x
   ORS P = \\x:S. ?p. P p /\\ p x
   p IMP q = \\x:S. p x ==> q x
-  p IMPLIES q <=> !x:S. p x ==> q x
-  !p q r. p IMPLIES q /\\ q IMPLIES r ==> p IMPLIES r
+  p IMPLIES q <=> forall x:S. p x ==> q x
+  forall p q r. p IMPLIES q /\\ q IMPLIES r ==> p IMPLIES r
   SKIP = Assign I
   ABORT = While TRUE SKIP
   IF e c = Ite e c SKIP
@@ -5735,73 +5735,73 @@ Examples/prog quotations (108):
   ASSERT g = Ite g SKIP ABORT
   AWHILE (i:S->bool) (v:S->S->bool) (e:S->bool) c = While e c
   ADO (i:S->bool) (v:S->S->bool) c (e:S->bool) = DO c e
-  (!f s. sem(Assign f) s (f s)) /\\\n   (!c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s''\n                     ==> sem(c1 Seq c2) s s'') /\\\n   (!e c1 c2 s s'. e s /\\ sem(c1) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (!e c1 c2 s s'. ~(e s) /\\ sem(c2) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (!e c s. ~(e s) ==> sem(While e c) s s) /\\\n   (!e c s s' s''. e s /\\ sem(c) s s' /\\ sem(While e c) s' s''\n               ==> sem(While e c) s s'')
+  (forall f s. sem(Assign f) s (f s)) /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s''\n                     ==> sem(c1 Seq c2) s s'') /\\\n   (forall e c1 c2 s s'. e s /\\ sem(c1) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. ~(e s) /\\ sem(c2) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c s. ~(e s) ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. e s /\\ sem(c) s s' /\\ sem(While e c) s' s''\n               ==> sem(While e c) s s'')
   sem(Assign f) s s' <=> (s' = f s)
   sem(c1 Seq c2) s s' <=> ?s''. sem c1 s s'' /\\ sem c2 s'' s'
   sem(Ite e c1 c2) s s' <=> e s /\\ sem c1 s s' \\/\n                             ~(e s) /\\ sem c2 s s'
   sem(SKIP) s s' <=> (s' = s)
   sem(IF e c) s s' <=> e s /\\ sem c s s' \\/ ~(e s) /\\ (s = s')
   sem(While e c) s s' <=> sem(IF e (c Seq While e c)) s s'
-  !c s s'. sem c s s' ==> ~(c = ABORT)
+  forall c s s'. sem c s s' ==> ~(c = ABORT)
   sem(ABORT) s s' <=> F
   sem(DO c e) s s' <=> sem(c Seq IF e (DO c e)) s s'
   sem(ASSERT g) s s' <=> g s /\\ (s' = s)
-  deterministic r <=> !s s1 s2. r s s1 /\\ r s s2 ==> (s1 = s2)
-  !c s s1. sem c s s1 ==> !s2:S. sem c s s2 ==> (s1 = s2)
-  !c:(S)command. deterministic(sem c)
+  deterministic r <=> forall s s1 s2. r s s1 /\\ r s s2 ==> (s1 = s2)
+  forall c s s1. sem c s s1 ==> forall s2:S. sem c s s2 ==> (s1 = s2)
+  forall c:(S)command. deterministic(sem c)
   terminates c s <=> ?s'. sem c s s'
-  wlp c q s <=> !s'. sem c s s' ==> q s'
+  wlp c q s <=> forall s'. sem c s s' ==> q s'
   wp c q s <=> terminates c s /\\ wlp c q s
-  !c. (wp c FALSE = FALSE)
+  forall c. (wp c FALSE = FALSE)
   q IMPLIES r ==> wp c q IMPLIES wp c r
   (wp c q) AND (wp c r) = wp c (q AND r)
   (wp c p) OR (wp c q) = wp c (p OR q)
-  !f q. wp (Assign f) q = q o f
-  !c1 c2 q. wp (c1 Seq c2) q = wp c1 (wp c2 q)
-  !e c1 c2 q. wp (Ite e c1 c2) q = (e AND wp c1 q) OR (NOT e AND wp c2 q)
-  !e c. wp (IF e (c Seq While e c)) q = wp (While e c) q
-  !q. wp SKIP q = q
-  !q. wp ABORT q = FALSE
-  !e c q. wp (IF e c) q = (e AND wp c q) OR (NOT e AND q)
-  !e c. wp (c Seq IF e (DO c e)) q = wp (DO c e) q
-  !g q. wp (ASSERT g) q = g AND q
+  forall f q. wp (Assign f) q = q o f
+  forall c1 c2 q. wp (c1 Seq c2) q = wp c1 (wp c2 q)
+  forall e c1 c2 q. wp (Ite e c1 c2) q = (e AND wp c1 q) OR (NOT e AND wp c2 q)
+  forall e c. wp (IF e (c Seq While e c)) q = wp (While e c) q
+  forall q. wp SKIP q = q
+  forall q. wp ABORT q = FALSE
+  forall e c q. wp (IF e c) q = (e AND wp c q) OR (NOT e AND q)
+  forall e c. wp (c Seq IF e (DO c e)) q = wp (DO c e) q
+  forall g q. wp (ASSERT g) q = g AND q
   correct p c q <=> p IMPLIES (wp c q)
-  !p p' c q. p IMPLIES p' /\\ correct p' c q ==> correct p c q
-  !p c q q'. correct p c q' /\\ q' IMPLIES q ==> correct p c q
-  !p f q. (p IMPLIES (\\s. q(f s))) ==> correct p (Assign f) q
-  !p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 Seq c2) q
-  !p e c1 c2 q.\n       correct (p AND e) c1 q /\\ correct (p AND (NOT e)) c2 q\n       ==> correct p (Ite e c1 c2) q
+  forall p p' c q. p IMPLIES p' /\\ correct p' c q ==> correct p c q
+  forall p c q q'. correct p c q' /\\ q' IMPLIES q ==> correct p c q
+  forall p f q. (p IMPLIES (\\s. q(f s))) ==> correct p (Assign f) q
+  forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 Seq c2) q
+  forall p e c1 c2 q.\n       correct (p AND e) c1 q /\\ correct (p AND (NOT e)) c2 q\n       ==> correct p (Ite e c1 c2) q
   (\\x:S. invariant x /\\ x << (s:S)) IMPLIES wp (While e c) q
   wp c (\\x:S. invariant x /\\ x << s) (s:S) :bool
   (e:S->bool) s
   s:S
-  !s:S. invariant s ==> wp (While e c) q s
-  ! (<<) p c q e invariant.\n       WF(<<) /\\\n       p IMPLIES invariant /\\\n       (NOT e) AND invariant IMPLIES q /\\\n       (!X:S. correct\n              (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n       ==> correct p (While e c) q
-  !p q. (p IMPLIES q) ==> correct p SKIP q
-  !p q. F ==> correct p ABORT q
-  !p e c q.\n        correct (p AND e) c q /\\ (p AND (NOT e)) IMPLIES q\n        ==> correct p (IF e c) q
+  forall s:S. invariant s ==> wp (While e c) q s
+  forall (<<) p c q e invariant.\n       WF(<<) /\\\n       p IMPLIES invariant /\\\n       (NOT e) AND invariant IMPLIES q /\\\n       (forall X:S. correct\n              (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n       ==> correct p (While e c) q
+  forall p q. (p IMPLIES q) ==> correct p SKIP q
+  forall p q. F ==> correct p ABORT q
+  forall p e c q.\n        correct (p AND e) c q /\\ (p AND (NOT e)) IMPLIES q\n        ==> correct p (IF e c) q
   (e:S->bool) AND invariant IMPLIES p
   p AND (\\s:S. X = s)
   X:S
   invariant:S->bool
   (<<) :S->S->bool
   invariant:S->bool
-  ! (<<) p q c invariant.\n        WF(<<) /\\\n        (e AND invariant) IMPLIES p /\\\n        ((NOT e) AND invariant) IMPLIES q /\\\n        (!X:S. correct\n               (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n        ==> correct p (DO c e) q
-  !p g q. p IMPLIES (g AND q) ==> correct p (ASSERT g) q
+  forall (<<) p q c invariant.\n        WF(<<) /\\\n        (e AND invariant) IMPLIES p /\\\n        ((NOT e) AND invariant) IMPLIES q /\\\n        (forall X:S. correct\n               (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n        ==> correct p (DO c e) q
+  forall p g q. p IMPLIES (g AND q) ==> correct p (ASSERT g) q
   p IMPLIES (q o f) ==> correct p (Assign f) q
   p IMPLIES q ==> correct p SKIP q
   F ==> correct p ABORT q
   p IMPLIES (b AND q) ==> correct p (ASSERT b) q
   correct (p AND e) c1 q /\\ correct (p AND NOT e) c2 q\n   ==> correct p (Ite e c1 c2) q
   correct (p AND e) c q /\\ p AND NOT e IMPLIES q\n   ==> correct p (IF e c) q
-  WF(<<) /\\\n   p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (!X. correct\n        (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (AWHILE invariant (<<) e c) q
+  WF(<<) /\\\n   p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n        (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (AWHILE invariant (<<) e c) q
   (m:S->num) X
   X:S
-  p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (!X. correct\n          (invariant AND e AND (\\s:S. X = m(s)))\n          c\n          (invariant AND (\\s. m(s) < X)))\n   ==> correct p (AWHILE invariant (MEASURE m) e c) q
-  WF(<<) /\\\n   (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (!X. correct\n          (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (ADO invariant (<<) c e) q
+  p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n          (invariant AND e AND (\\s:S. X = m(s)))\n          c\n          (invariant AND (\\s. m(s) < X)))\n   ==> correct p (AWHILE invariant (MEASURE m) e c) q
+  WF(<<) /\\\n   (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (ADO invariant (<<) c e) q
   (m:S->num) X
   X:S
-  (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (!X. correct\n          (p AND (\\s:S. X = m(s))) c (invariant AND (\\s. m(s) < X)))\n   ==> correct p (ADO invariant (MEASURE m) c e) q
+  (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s:S. X = m(s))) c (invariant AND (\\s. m(s) < X)))\n   ==> correct p (ADO invariant (MEASURE m) c e) q
   (p IMPLIES b) ==> (p IMPLIES b AND p)
   p IMPLIES b /\\ correct b c q ==> correct p (ASSERT b Seq c) q
   (p IMPLIES b) ==> (p IMPLIES p AND b)

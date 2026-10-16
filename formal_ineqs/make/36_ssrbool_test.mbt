@@ -195,7 +195,7 @@ test "Formal_ineqs/lib/ssrbool matches Formal_ineqs/lib/ssrbool.ml" {
       #|  (c ==> ~b) ==> b ==> c = F
       #|  (c ==> b) ==> ~b ==> c = F
       #|  (c ==> b) ==> b = F ==> c = F
-      #|  isSome NONE = F /\\ (!x. isSome (SOME x) = T)
+      #|  isSome NONE = F /\\ (forall x. isSome (SOME x) = T)
       #|  :A
       #|  :A
       #|  :A -> B
@@ -276,8 +276,8 @@ test "Formal_ineqs/lib/ssrbool matches Formal_ineqs/lib/ssrbool.ml" {
       #|  b + T <=> ~ b
       #|  a + ~ b <=> ~ (a + b)
       #|  ~ a + b <=> ~ (a + b)
-      #|  subpred p1 p2 <=> (!x. p1 x ==> p2 x)
-      #|  subrel r1 r2 <=> (!x y. r1 x y ==> r2 x y)
+      #|  subpred p1 p2 <=> (forall x. p1 x ==> p2 x)
+      #|  subrel r1 r2 <=> (forall x y. r1 x y ==> r2 x y)
       #|  pred0 = (\\x. F)
       #|  predT = (\\x. T)
       #|  predI p1 p2 = (\\x. p1 x /\\ p2 x)

@@ -6038,7 +6038,7 @@ Generating HOL version of proof
 5 basis elements and 0 critical pairs
 Generating HOL version of proof
 100/ballot quotations (88):
-  (s --> t) = {f:A->B | (!x. x IN s ==> f(x) IN t) /\\\n                        (!x. ~(x IN s) ==> f(x) = @y. T)}
+  (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
   ({} --> t) = {(\\x. @y. T)}
   u:A = x
   u:A
@@ -6050,34 +6050,34 @@ Generating HOL version of proof
   f:A->B
   (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
   (x INSERT s) --> t =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\ g IN s --> t}
-  !s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
-  !s t. FINITE s /\\ FINITE t ==> FINITE(s --> t)
+  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
+  forall s t. FINITE s /\\ FINITE t ==> FINITE(s --> t)
   all_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b}
-  valid_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b /\\\n                  !m. 1 <= m /\\ m <= n\n                      ==> CARD { i | i IN 1..m /\\ f(i) = A} >\n                          CARD { i | i IN 1..m /\\ f(i) = B}}
+  valid_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b /\\\n                  forall m. 1 <= m /\\ m <= n\n                      ==> CARD { i | i IN 1..m /\\ f(i) = A} >\n                          CARD { i | i IN 1..m /\\ f(i) = B}}
   FINITE {f | f IN (1..n --> {A,B}) /\\ P f}
   (:vote) = {A,B}
-  !m n. ~((n + 1) IN m..n)
+  forall m n. ~((n + 1) IN m..n)
   1 <= SUC n
-  !n. 1..(n+1) = (n + 1) INSERT (1..n)
+  forall n. 1..(n+1) = (n + 1) INSERT (1..n)
   {i | i IN 1..(n+1) /\\ P i} =\n        if P(n + 1) then (n + 1) INSERT {i | i IN 1..n /\\ P i}\n        else {i | i IN 1..n /\\ P i}
   CARD {i | i IN 1..(n+1) /\\ P i} =\n        if P(n + 1) then CARD {i | i IN 1..n /\\ P i} + 1\n        else CARD {i | i IN 1..n /\\ P i}
   1 <= n + 1
   i <= n + 1 <=> i <= n \\/ i = n + 1
-  (!i. 1 <= i /\\ i <= n + 1 ==> P i) <=>\n      P(n + 1) /\\ (!i. 1 <= i /\\ i <= n ==> P i)
+  (forall i. 1 <= i /\\ i <= n + 1 ==> P i) <=>\n      P(n + 1) /\\ (forall i. 1 <= i /\\ i <= n ==> P i)
   i <= m /\\ m <= n ==> ~(i = n + 1)
   m <= n\n   ==> (i IN 1..m /\\ (if i = n + 1 then p i else q i) <=> i IN 1..m /\\ q i)
   1..n
   {i | i IN 1..n /\\ P i}
-  (CARD {i | i IN 1..n /\\ P i} = n <=> !i. 1 <= i /\\ i <= n ==> P i) /\\\n   (CARD {i | i IN 1..n /\\ P i} = 0 <=> !i. 1 <= i /\\ i <= n ==> ~(P i))
-  (!x. ~(x = A) <=> x = B) /\\\n   (!x. ~(x = B) <=> x = A)
-  {f | f IN (s --> t) /\\ (!i. i IN s ==> f i = a)} =\n   if s = {} \\/ a IN t then {(\\i. if i IN s then a else @x. T)} else {}
+  (CARD {i | i IN 1..n /\\ P i} = n <=> forall i. 1 <= i /\\ i <= n ==> P i) /\\\n   (CARD {i | i IN 1..n /\\ P i} = 0 <=> forall i. 1 <= i /\\ i <= n ==> ~(P i))
+  (forall x. ~(x = A) <=> x = B) /\\\n   (forall x. ~(x = B) <=> x = A)
+  {f | f IN (s --> t) /\\ (forall i. i IN s ==> f i = a)} =\n   if s = {} \\/ a IN t then {(\\i. if i IN s then a else @x. T)} else {}
   P x ==> x = y ==> P y
   \\f i. if i = n + 1 then B else f i
   \\f i. if i = n + 1 then A else f i
   \\f i. if i = n + 1 then @x:vote. T else f i
   CARD {f | f IN (1..(n+1) --> {A,B}) /\\ f(n+1) = A /\\ P f} +\n              CARD {f | f IN (1..(n+1) --> {A,B}) /\\ f(n+1) = B /\\ P f}
   CARD {f | f IN (1..(n+1) --> {A,B}) /\\ P f} =\n   CARD {f | f IN (1..n --> {A,B}) /\\ P (\\i. if i = n + 1 then A else f i)} +\n   CARD {f | f IN (1..n --> {A,B}) /\\ P (\\i. if i = n + 1 then B else f i)}
-  !a. all_countings a 0 = 1 /\\ all_countings 0 a = 1
+  forall a. all_countings a 0 = 1 /\\ all_countings 0 a = 1
   {x} INTER s = if x IN s then {x} else {}
   {x | F} = {} /\\ {x | x = a} = {a}
   1 <= SUC n
@@ -6086,27 +6086,27 @@ Generating HOL version of proof
   1 <= SUC n
   1
   1
-  1 <= k /\\ k <= a ==> 1 <= k /\\ !i. i <= k ==> i <= a
+  1 <= k /\\ k <= a ==> 1 <= k /\\ forall i. i <= k ==> i <= a
   b = 0 /\\ ~(a = 0) ==> a > b
   k:num
   {x | P x /\\ Q x /\\ R x} =\n                             {x | P x /\\ Q x} INTER {x | R x}
   {x | x = a} = {a}
   a /\\ a /\\ b <=> a /\\ b
-  valid_countings 0 0 = 1 /\\\n   !a. valid_countings (SUC a) 0 = 1 /\\ valid_countings 0 (SUC a) = 0
+  valid_countings 0 0 = 1 /\\\n   forall a. valid_countings (SUC a) 0 = 1 /\\ valid_countings 0 (SUC a) = 0
   n = a + b + 1
   (a + 1) + b = a + b + 1
   (a + 1) + (b + 1) = (a + b + 1) + 1
-  !a b. all_countings (a + 1) (b + 1) =\n                all_countings a (b + 1) + all_countings (a + 1) b
+  forall a b. all_countings (a + 1) (b + 1) =\n                all_countings a (b + 1) + all_countings (a + 1) b
   {x | F} = EMPTY
   x = a /\\ y = b /\\ P x y <=> x = a /\\ y = b /\\ P a b
   n = a + b + 1
   (a + 1) + b = a + b + 1
   (a + 1) + (b + 1) = (a + b + 1) + 1
   b:num < a
-  !a b. valid_countings (a + 1) (b + 1) =\n                if a <= b then 0\n                else valid_countings a (b + 1) + valid_countings (a + 1) b
+  forall a b. valid_countings (a + 1) (b + 1) =\n                if a <= b then 0\n                else valid_countings a (b + 1) + valid_countings (a + 1) b
   a < SUC a
   1 = a + 1 <=> a = 0
-  !a b. all_countings a b = binom(a + b,a)
+  forall a b. all_countings a b = binom(a + b,a)
   ~(a <= b) ==> b <= SUC a /\\ SUC b <= a /\\ SUC b <= SUC a
   a + b:num
   b:num
@@ -6120,12 +6120,12 @@ Generating HOL version of proof
   SUC b
   ~(a + b + 1 = 0) /\\\n    (SUC a + SUC b) *\n    ((SUC a + b) * (a + SUC b) * y + (a + SUC b) * (SUC a + b) * z) =\n    (SUC a + b) * (a + SUC b) * w\n    ==> (SUC a + SUC b) * (y + z) = w
   a <= b ==> SUC a - SUC b = 0
-  !a b. (a + b) * valid_countings a b = (a - b) * binom(a + b,a)
+  forall a b. (a + b) * valid_countings a b = (a - b) * binom(a + b,a)
   ~(a <= b) ==> SUC b <= SUC a
   a <= b ==> (SUC a - SUC b) = 0
   SUC b
   SUC a
-  !a b. &(valid_countings a b) =\n            if a <= b then if b = 0 then &1 else &0\n            else (&a - &b) / (&a + &b) *  &(all_countings a b)
+  forall a b. &(valid_countings a b) =\n            if a <= b then if b = 0 then &1 else &0\n            else (&a - &b) / (&a + &b) *  &(all_countings a b)
 funspace =  |- (#!:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'B),bool),fun(fun(fun('A,'B),bool),bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) (#GSPEC:fun(fun(fun('A,'B),bool),fun(fun('A,'B),bool)) (\GEN%PVAR%380:fun('A,'B). (#?:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (((#SETSPEC:fun(fun('A,'B),fun(bool,fun(fun('A,'B),bool))) GEN%PVAR%380:fun('A,'B)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool)))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (#@:fun(fun('B,bool),'B) (\y:'B. #T:bool)))))))) f:fun('A,'B)))))))))))
 FUNSPACE_EMPTY =  |- ((#=:fun(fun(fun('?144961,'?144965),bool),fun(fun(fun('?144961,'?144965),bool),bool)) ((#-->:fun(fun('?144961,bool),fun(fun('?144965,bool),fun(fun('?144961,'?144965),bool))) #EMPTY:fun('?144961,bool)) t:fun('?144965,bool))) ((#INSERT:fun(fun('?144961,'?144965),fun(fun(fun('?144961,'?144965),bool),fun(fun('?144961,'?144965),bool))) (\x:'?144961. (#@:fun(fun('?144965,bool),'?144965) (\y:'?144965. #T:bool)))) #EMPTY:fun(fun('?144961,'?144965),bool)))
 HAS_SIZE_FUNSPACE =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) s:fun('A,bool)) m:num)) ((#HAS_SIZE:fun(fun('B,bool),fun(num,bool)) t:fun('B,bool)) n:num))) ((#HAS_SIZE:fun(fun(fun('A,'B),bool),fun(num,bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) ((#EXP:fun(num,fun(num,num)) n:num) m:num)))))))))))

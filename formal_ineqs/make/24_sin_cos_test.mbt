@@ -59,35 +59,35 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
     content=(
       #|Formal_ineqs/trig/sin_cos quotations (124):
       #|  a - (b + a) = --b:real
-      #|  !x. cos (x + pi / &2) = --sin x
+      #|  forall x. cos (x + pi / &2) = --sin x
       #|  x + (a + &1) * t = (x + a * t) + t
       #|  (&1 + &0) * --a = --a
-      #|  !x n. ((\\x. cos (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative cos (x + &(n + 1) * pi / &2)) (atreal x)
+      #|  forall x n. ((\\x. cos (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative cos (x + &(n + 1) * pi / &2)) (atreal x)
       #|  i:num
       #|  cos (&i * pi / &2) = &0
       #|  (&2 * a) * b / &2 = a * b
       #|  (2 * m) DIV 2 = m
       #|  EVEN i
-      #|  !i. cos (&i * pi / &2) * x pow i / &(FACT i) = if EVEN i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
+      #|  forall i. cos (&i * pi / &2) * x pow i / &(FACT i) = if EVEN i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
       #|  x:real
       #|  &0
       #|  &1
       #|  (:real)
       #|  n:num
       #|  (\\i x. cos (x + &i * pi / &2))
-      #|  !x n. \n   abs (cos x - sum (0..n) (\\k. if (EVEN k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
+      #|  forall x n. \n   abs (cos x - sum (0..n) (\\k. if (EVEN k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
       #|  2 * 0 = 0
       #|  n:num
       #|  0
       #|  f:num->real
-      #|  !f n. sum (0..2 * n + 1) f = sum(0..n) (\\i. f (2 * i) + f (2 * i + 1))
+      #|  forall f n. sum (0..2 * n + 1) f = sum(0..n) (\\i. f (2 * i) + f (2 * i + 1))
       #|  (a * b) / c = (a / c) * b:real
-      #|  !i. (2 * i) DIV 2 = i
-      #|  !i. ~(EVEN (2 * i + 1))
+      #|  forall i. (2 * i) DIV 2 = i
+      #|  forall i. ~(EVEN (2 * i + 1))
       #|  (2 * n + 1) + 1 = 2 *n + 2
       #|  2 * n + 1
       #|  x:real
-      #|  !x n. abs (cos x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))) \n\t\t       <= abs x pow (2*n + 2) / &(FACT (2*n + 2))
+      #|  forall x n. abs (cos x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))) \n\t\t       <= abs x pow (2*n + 2) / &(FACT (2*n + 2))
       #|  abs x pow (2 * n) = x pow (2 * n)
       #|  &1 / a * b = b / a
       #|  ~(n = 0) ==> 2 * (n - 1) + 2 = 2 * n
@@ -97,7 +97,7 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
       #|  0 <= n
       #|  ~(n = 0) ==> 0 < n
       #|  n = 0
-      #|  !x n. EVEN n ==>\n\t\tcos x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))
+      #|  forall x n. EVEN n ==>\n\t\tcos x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))
       #|  abs x pow (2 * n) = x pow (2 * n)
       #|  -- &1 / a * b = -- b / a
       #|  ~(n = 0) ==> 2 * (n - 1) + 2 = 2 * n
@@ -108,12 +108,12 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
       #|  ~(n = 0) ==> 0 < n
       #|  ~EVEN n
       #|  n = 0
-      #|  !x n. ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i)) <= cos x
+      #|  forall x n. ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i)) <= cos x
       #|  a - (b + a) = --b:real
-      #|  !x. sin (x + pi / &2) = cos x
+      #|  forall x. sin (x + pi / &2) = cos x
       #|  x + (a + &1) * t = (x + a * t) + t
       #|  (&1 + &0) * a = a
-      #|  !x n. ((\\x. sin (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative sin (x + &(n + 1) * pi / &2)) (atreal x)
+      #|  forall x n. ((\\x. sin (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative sin (x + &(n + 1) * pi / &2)) (atreal x)
       #|  i:num
       #|  sin (&i * pi / &2) = &0
       #|  (&2 * a + &1) * b / &2 = a * b + b / &2
@@ -122,30 +122,30 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
       #|  2 * m = m * 2
       #|  (SUC (2 * m)) DIV 2 = m
       #|  ODD i
-      #|  !i. sin (&i * pi / &2) * x pow i / &(FACT i) = if ODD i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
+      #|  forall i. sin (&i * pi / &2) * x pow i / &(FACT i) = if ODD i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
       #|  x:real
       #|  &0
       #|  &1
       #|  (:real)
       #|  n:num
       #|  (\\i x. sin (x + &i * pi / &2))
-      #|  !x n. \n   abs (sin x - sum (0..n) (\\k. if (ODD k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
+      #|  forall x n. \n   abs (sin x - sum (0..n) (\\k. if (ODD k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
       #|  (2 * n + 2) + 1 = 2 * n + 3
       #|  (a * b) / c = (a / c) * b:real
       #|  1 < 2
       #|  ~(2 = 0)
       #|  2 * m = m * 2
-      #|  !i. SUC (2 * i) DIV 2 = i
-      #|  !i. ~(ODD (2 * i))
+      #|  forall i. SUC (2 * i) DIV 2 = i
+      #|  forall i. ~(ODD (2 * i))
       #|  2 * i + 1 = SUC (2 * i)
       #|  n:num
       #|  ~(ODD (SUC (2 * n + 1)))
       #|  0 <= SUC k
       #|  a + 2 = SUC (a + 1)
-      #|  !f. sum (0..2 * n + 2) (\\k. if ODD k then f k else &0) = sum (0..2 * n + 1) (\\k. if ODD k then f k else &0)
+      #|  forall f. sum (0..2 * n + 2) (\\k. if ODD k then f k else &0) = sum (0..2 * n + 1) (\\k. if ODD k then f k else &0)
       #|  2 * n + 2
       #|  x:real
-      #|  !x n. abs (sin x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))) \n\t\t       <= abs x pow (2 * n + 3) / &(FACT (2 * n + 3))
+      #|  forall x n. abs (sin x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))) \n\t\t       <= abs x pow (2 * n + 3) / &(FACT (2 * n + 3))
       #|  abs x pow (2 * n + 1) = x pow (2 * n + 1)
       #|  &1 / a * b = b / a
       #|  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
@@ -158,7 +158,7 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
       #|  0
       #|  x:real
       #|  n = 0
-      #|  !x n. &0 <= x /\\ EVEN n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
+      #|  forall x n. &0 <= x /\\ EVEN n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
       #|  abs x pow (2 * n + 1) = x pow (2 * n + 1)
       #|  -- &1 / a * b = -- b / a
       #|  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
@@ -169,19 +169,19 @@ test "Formal_ineqs/trig/sin_cos matches Formal_ineqs/trig/sin_cos.ml" {
       #|  ~(n = 0) ==> 0 < n
       #|  ~EVEN n
       #|  n = 0
-      #|  !x n. &0 <= x /\\ ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
+      #|  forall x n. &0 <= x /\\ ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
       #|  a * (--b) = --(a * b)
-      #|  !x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
+      #|  forall x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
       #|  n:num
       #|  --x
       #|  &0 <= --x
-      #|  !x n. x <= &0 /\\ ODD n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
+      #|  forall x n. x <= &0 /\\ ODD n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
       #|  a * (--b) = --(a * b)
-      #|  !x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
+      #|  forall x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
       #|  n:num
       #|  --x
       #|  &0 <= --x
-      #|  !x n. x <= &0 /\\ EVEN n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
+      #|  forall x n. x <= &0 /\\ EVEN n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
       #|Sin_cos.cos_pi_2 =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_neg:fun(real,real) (#sin:fun(real,real) x:real)))))
       #|Sin_cos.cos_derivatives =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(num,bool),bool) (\n:num. (((#has_real_derivative:fun(fun(real,real),fun(real,fun(net(real),bool))) (\x:real. (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))) (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) (#atreal:fun(real,net(real)) x:real))))))
       #|Sin_cos.taylor_cos_raw =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (#cos:fun(real,real) x:real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\k:num. (((#COND:fun(bool,fun(real,fun(real,real))) (#EVEN:fun(num,bool) k:num)) ((#real_div:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#DIV:fun(num,fun(num,num)) k:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_pow:fun(real,fun(num,real)) x:real) k:num))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) k:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_abs:fun(real,real) x:real)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))

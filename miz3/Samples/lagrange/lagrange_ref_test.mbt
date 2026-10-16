@@ -12742,10 +12742,10 @@ test "miz3/Samples/lagrange matches miz3/Samples/lagrange.ml" {
       #|0..0..1..2..7..15..31..53..88..131..211..306..454..solved at 483
       #|0..0..1..3..5..12..22..solved at 30
       #|miz3/Samples/lagrange quotations (263):
-      #|  group(g,(**),i,(e:A)) <=>\n    (e IN g) /\\ (!x. x IN g ==> i(x) IN g) /\\\n    (!x y. x IN g /\\ y IN g ==> x**y IN g) /\\\n    (!x y z. x IN g /\\ y IN g /\\ z IN g ==> x**(y**z) = (x**y)**z) /\\\n    (!x. x IN g ==> x**e = x /\\ e**x = x) /\\\n    (!x. x IN g ==> x**i(x) = e /\\ i(x)**x = e)
+      #|  group(g,(**),i,(e:A)) <=>\n    (e IN g) /\\ (forall x. x IN g ==> i(x) IN g) /\\\n    (forall x y. x IN g /\\ y IN g ==> x**y IN g) /\\\n    (forall x y z. x IN g /\\ y IN g /\\ z IN g ==> x**(y**z) = (x**y)**z) /\\\n    (forall x. x IN g ==> x**e = x /\\ e**x = x) /\\\n    (forall x. x IN g ==> x**i(x) = e /\\ i(x)**x = e)
       #|  subgroup h (g,(**),i,(e:A)) <=> h SUBSET g /\\ group(h,(**),i,e)
-      #|  bijection f s t <=> ?g. (!x:A. x IN s ==> f x IN t /\\ g (f x) = x) /\\\n                           (!y:B. y IN t ==> g y IN s /\\ f (g y) = y)
-      #|  X PARTITIONS s <=> UNIONS X = (s:A->bool) /\\\n                      !t u. t IN X /\\ u IN X /\\ ~(t = u) ==> t INTER u = {}
+      #|  bijection f s t <=> ?g. (forall x:A. x IN s ==> f x IN t /\\ g (f x) = x) /\\\n                           (forall y:B. y IN t ==> g y IN s /\\ f (g y) = y)
+      #|  X PARTITIONS s <=> UNIONS X = (s:A->bool) /\\\n                      forall t u. t IN X /\\ u IN X /\\ ~(t = u) ==> t INTER u = {}
       #|  :A->bool
       #|  :A->A->A
       #|  :A->A

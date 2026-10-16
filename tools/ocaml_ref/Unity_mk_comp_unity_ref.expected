@@ -5735,13 +5735,13 @@ Unity/mk_comp_unity quotations (88):
   FPr:('a->'a)list
   GPr:('a->'a)list
   GPr:('a->'a)list
-  !(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) ==> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
+  forall(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) ==> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
   FPr:('a->'a)list
   FPr:('a->'a)list
   GPr:('a->'a)list
   GPr:('a->'a)list
-  !(p:'a->bool) q FPr GPr.\n     (p UNLESS q) FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
-  !(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) <=> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
+  forall(p:'a->bool) q FPr GPr.\n     (p UNLESS q) FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
+  forall(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) <=> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
   ((p:'a->bool) ENSURES q) GPr
   ((p:'a->bool) ENSURES q) t
   APPEND (t:('a->'a)list) GPr
@@ -5754,7 +5754,7 @@ Unity/mk_comp_unity quotations (88):
   FPr:('a->'a)list
   GPr:('a->'a)list
   GPr:('a->'a)list
-  !(p:'a->bool) q FPr GPr.\n    (p ENSURES q) (APPEND FPr GPr) ==> (p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n                                       (p ENSURES q) GPr /\\ (p UNLESS q) FPr
+  forall(p:'a->bool) q FPr GPr.\n    (p ENSURES q) (APPEND FPr GPr) ==> (p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n                                       (p ENSURES q) GPr /\\ (p UNLESS q) FPr
   t:('a->'a)list
   GPr:('a->'a)list
   q:'a->bool
@@ -5763,22 +5763,22 @@ Unity/mk_comp_unity quotations (88):
   t:('a->'a)list
   q:'a->bool
   p:'a->bool
-  !(p:'a->bool) q FPr GPr.\n    ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n     (p ENSURES q) GPr /\\ (p UNLESS q) FPr)\n           ==> (p ENSURES q) (APPEND FPr GPr)
-  !(p:'a->bool) q FPr GPr.\n      (p ENSURES q) (APPEND FPr GPr) <=>\n         ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n          (p ENSURES q) GPr /\\ (p UNLESS q) FPr)
+  forall(p:'a->bool) q FPr GPr.\n    ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n     (p ENSURES q) GPr /\\ (p UNLESS q) FPr)\n           ==> (p ENSURES q) (APPEND FPr GPr)
+  forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) (APPEND FPr GPr) <=>\n         ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n          (p ENSURES q) GPr /\\ (p UNLESS q) FPr)
   ((p:'a->bool) UNLESS q)GPr
   ((p:'a->bool) ENSURES q)FPr
-  !(p:'a->bool) q FPr GPr.\n      (p ENSURES q) FPr /\\ (p UNLESS q) GPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
+  forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) FPr /\\ (p UNLESS q) GPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
   ((p:'a->bool) UNLESS q)FPr
   ((p:'a->bool) ENSURES q)GPr
-  !(p:'a->bool) q FPr GPr.\n      (p ENSURES q) GPr /\\ (p UNLESS q) FPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
-  !(p0:'a->bool) p FPr GPr.\n       (p INVARIANT (p0, APPEND FPr GPr)) =\n          (p INVARIANT (p0,FPr) /\\ p INVARIANT (p0,GPr))
-  !(p:'a->bool) FPr GPr.\n           (p STABLE (APPEND FPr GPr)) = (p STABLE FPr /\\ p STABLE GPr)
+  forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) GPr /\\ (p UNLESS q) FPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
+  forall(p0:'a->bool) p FPr GPr.\n       (p INVARIANT (p0, APPEND FPr GPr)) =\n          (p INVARIANT (p0,FPr) /\\ p INVARIANT (p0,GPr))
+  forall(p:'a->bool) FPr GPr.\n           (p STABLE (APPEND FPr GPr)) = (p STABLE FPr /\\ p STABLE GPr)
   ~(False:'a->bool) s ==> (p:'a->bool)(h s) \\/ False(h s)
   GPr:('a->'a)list
   GPr:('a->'a)list
   ((p:'a->bool) UNLESS False)GPr
-  !(p:'a->bool) q FPr GPr.\n         (p UNLESS q) FPr /\\ p STABLE GPr ==>(p UNLESS q) (APPEND FPr GPr)
-  !(p0:'a->bool) p FPr GPr.\n       p INVARIANT (p0, FPr) /\\ p STABLE GPr ==>\n                    p INVARIANT (p0, (APPEND FPr GPr))
+  forall(p:'a->bool) q FPr GPr.\n         (p UNLESS q) FPr /\\ p STABLE GPr ==>(p UNLESS q) (APPEND FPr GPr)
+  forall(p0:'a->bool) p FPr GPr.\n       p INVARIANT (p0, FPr) /\\ p STABLE GPr ==>\n                    p INVARIANT (p0, (APPEND FPr GPr))
   FPr:('a->'a)list
   FPr:('a->'a)list
   ((p:'a->bool) EXIST_TRANSITION q)FPr
@@ -5792,33 +5792,33 @@ Unity/mk_comp_unity quotations (88):
   FPr:('a->'a)list
   q:'a->bool
   p:'a->bool
-  !(p:'a->bool) q FPr GPr.\n        (p ENSURES q) FPr /\\ p STABLE GPr ==> (p ENSURES q) (APPEND FPr GPr)
-  !(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) GPr
-  !(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) FPr
-  !(p:'a->bool) q st FPr. (p UNLESS q)(CONS st FPr) ==> (p UNLESS q) FPr
+  forall(p:'a->bool) q FPr GPr.\n        (p ENSURES q) FPr /\\ p STABLE GPr ==> (p ENSURES q) (APPEND FPr GPr)
+  forall(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) GPr
+  forall(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) FPr
+  forall(p:'a->bool) q st FPr. (p UNLESS q)(CONS st FPr) ==> (p UNLESS q) FPr
   GPr:('a->'a)list
   t:('a->'a)list
   Not (p:'a->bool)
   p:'a->bool
-  !(p:'a->bool) FPr GPr.\n        (p ENSURES (Not p)) FPr ==> (p ENSURES (Not p)) (APPEND FPr GPr)
+  forall(p:'a->bool) FPr GPr.\n        (p ENSURES (Not p)) FPr ==> (p ENSURES (Not p)) (APPEND FPr GPr)
   ~(False:'a->bool) s ==> (p:'a->bool)(h s) \\/ False(h s)
   FPr:('a->'a)list
   FPr:('a->'a)list
   ((p:'a->bool) UNLESS False)FPr
-  !(p:'a->bool) q FPr GPr.\n         p STABLE FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
-  !(p:'a->bool) q FPr GPr.\n         (p UNLESS q) (APPEND FPr GPr) = (p UNLESS q) (APPEND GPr FPr)
-  !(p:'a->bool) q FPr GPr.\n         (p ENSURES q) (APPEND FPr GPr) = (p ENSURES q) (APPEND GPr FPr)
+  forall(p:'a->bool) q FPr GPr.\n         p STABLE FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
+  forall(p:'a->bool) q FPr GPr.\n         (p UNLESS q) (APPEND FPr GPr) = (p UNLESS q) (APPEND GPr FPr)
+  forall(p:'a->bool) q FPr GPr.\n         (p ENSURES q) (APPEND FPr GPr) = (p ENSURES q) (APPEND GPr FPr)
   APPEND (Pr1:('a->'a)list) Pr2
   q:'a->bool
   p:'a->bool
   \\(p:'a->bool) q. (p LEADSTO q)(APPEND Pr2 Pr1)
   ((p':'a->bool) ENSURES q')(APPEND Pr1 Pr2)
-  !(p':'a->bool) q' Pr1 Pr2.\n      (p' ENSURES q')(APPEND Pr1 Pr2) ==> (p' LEADSTO q')(APPEND Pr2 Pr1)
-  !(p':'a->bool) q' Pr1 Pr2.\n     (!r.\n       (p' LEADSTO r)(APPEND Pr1 Pr2) /\\ (p' LEADSTO r)(APPEND Pr2 Pr1) /\\\n       (r LEADSTO q')(APPEND Pr1 Pr2) /\\ (r LEADSTO q')(APPEND Pr2 Pr1)\n          ==> (p' LEADSTO q')(APPEND Pr2 Pr1))
-  !(p':'a->bool) q' Pr1 Pr2.\n     (!P:('a->bool)->bool.\n       (!p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr1 Pr2)) /\\\n       (!p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr2 Pr1))\n            ==> ((LUB P) LEADSTO q')(APPEND Pr2 Pr1))
-  !(p:'a->bool) q Pr1 Pr2.\n       (p LEADSTO q)(APPEND Pr1 Pr2) = (p LEADSTO q)(APPEND Pr2 Pr1)
-  !(p:'a->bool) FPr GPr.\n      (p STABLE (APPEND FPr GPr)) = (p STABLE (APPEND GPr FPr))
-  !(p0:'a->bool) p FPr GPr.\n      (p INVARIANT (p0, (APPEND FPr GPr)))\n    =\n      (p INVARIANT (p0, (APPEND GPr FPr)))
+  forall(p':'a->bool) q' Pr1 Pr2.\n      (p' ENSURES q')(APPEND Pr1 Pr2) ==> (p' LEADSTO q')(APPEND Pr2 Pr1)
+  forall(p':'a->bool) q' Pr1 Pr2.\n     (forall r.\n       (p' LEADSTO r)(APPEND Pr1 Pr2) /\\ (p' LEADSTO r)(APPEND Pr2 Pr1) /\\\n       (r LEADSTO q')(APPEND Pr1 Pr2) /\\ (r LEADSTO q')(APPEND Pr2 Pr1)\n          ==> (p' LEADSTO q')(APPEND Pr2 Pr1))
+  forall(p':'a->bool) q' Pr1 Pr2.\n     (forall P:('a->bool)->bool.\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr1 Pr2)) /\\\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr2 Pr1))\n            ==> ((LUB P) LEADSTO q')(APPEND Pr2 Pr1))
+  forall(p:'a->bool) q Pr1 Pr2.\n       (p LEADSTO q)(APPEND Pr1 Pr2) = (p LEADSTO q)(APPEND Pr2 Pr1)
+  forall(p:'a->bool) FPr GPr.\n      (p STABLE (APPEND FPr GPr)) = (p STABLE (APPEND GPr FPr))
+  forall(p0:'a->bool) p FPr GPr.\n      (p INVARIANT (p0, (APPEND FPr GPr)))\n    =\n      (p INVARIANT (p0, (APPEND GPr FPr)))
 COMP_UNLESS_thm1_lemma_1 =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\FPr:list(fun(''a,''a)). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\GPr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#APPEND:fun(list(fun(''a,''a)),fun(list(fun(''a,''a)),list(fun(''a,''a)))) FPr:list(fun(''a,''a))) GPr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) FPr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) GPr:list(fun(''a,''a)))))))))))))
 COMP_UNLESS_thm1_lemma_2 =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\FPr:list(fun(''a,''a)). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\GPr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) FPr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) GPr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#APPEND:fun(list(fun(''a,''a)),fun(list(fun(''a,''a)),list(fun(''a,''a)))) FPr:list(fun(''a,''a))) GPr:list(fun(''a,''a)))))))))))))
 COMP_UNLESS_thm1 =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\FPr:list(fun(''a,''a)). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\GPr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#APPEND:fun(list(fun(''a,''a)),fun(list(fun(''a,''a)),list(fun(''a,''a)))) FPr:list(fun(''a,''a))) GPr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) FPr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) GPr:list(fun(''a,''a)))))))))))))

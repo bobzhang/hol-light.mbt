@@ -75,7 +75,7 @@ let cases : String =
   #|const real_lt : real->real->bool
   #|prefix ~
   #|binder \
-  #|binder !
+  #|binder forall
   #|binder ?
   #|binder ?!
   #|binder @
@@ -147,8 +147,8 @@ let cases : String =
   #|T: 12345678901234567890
   #|T: 0x1F
   #|T: 0b101
-  #|T: !x. x = x
-  #|T: !x y. x = y ==> y = x
+  #|T: forall x. x = x
+  #|T: forall x y. x = y ==> y = x
   #|T: ?x. x < 1
   #|T: ?!x. x = 0
   #|T: @x. x < 5
@@ -156,7 +156,7 @@ let cases : String =
   #|T: \x y. x + y
   #|T: (\x. x) 1
   #|T: \(x,y). x + y
-  #|T: !(x,y). x = y
+  #|T: forall(x,y). x = y
   #|T: x,y
   #|T: x,y,z
   #|T: FST (x,y)
@@ -210,7 +210,7 @@ let cases : String =
   #|T: f (g x) (h y z)
   #|T: (+)
   #|T: (+) 1 2
-  #|T: (!)
+  #|T: (forall)
   #|T: (~)
   #|T: (x)
   #|T: ((x))
@@ -242,10 +242,10 @@ let cases : String =
   #|T: 1abc
   #|T: a $ b
   #|margin 30
-  #|T: !x y z. x + y + z = z + y + x /\ x * y * z = z * y * x
+  #|T: forall x y z. x + y + z = z + y + x /\ x * y * z = z * y * x
   #|T: if long_condition_name then first_branch_value else second_branch_value
   #|margin 78
-  #|T: !aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
+  #|T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
   #|hide SUC
   #|T: SUC x
   #|prioritize int
@@ -438,9 +438,9 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: 0x1F = (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) | 31
       #|T: 0b101 = (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) | 5
       #|Warning: inventing type variables
-      #|T: !x. x = x = (#!:fun(fun('?106,bool),bool) (\x:'?106. ((#=:fun('?106,fun('?106,bool)) x:'?106) x:'?106))) | !(x:?106). (x:?106) = (x:?106)
+      #|T: forall x. x = x = (#!:fun(fun('?106,bool),bool) (\x:'?106. ((#=:fun('?106,fun('?106,bool)) x:'?106) x:'?106))) | forall (x:?106). (x:?106) = (x:?106)
       #|Warning: inventing type variables
-      #|T: !x y. x = y ==> y = x = (#!:fun(fun('?123,bool),bool) (\x:'?123. (#!:fun(fun('?123,bool),bool) (\y:'?123. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?123,fun('?123,bool)) x:'?123) y:'?123)) ((#=:fun('?123,fun('?123,bool)) y:'?123) x:'?123)))))) | !(x:?123) (y:?123). (x:?123) = (y:?123) ==> (y:?123) = (x:?123)
+      #|T: forall x y. x = y ==> y = x = (#!:fun(fun('?123,bool),bool) (\x:'?123. (#!:fun(fun('?123,bool),bool) (\y:'?123. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?123,fun('?123,bool)) x:'?123) y:'?123)) ((#=:fun('?123,fun('?123,bool)) y:'?123) x:'?123)))))) | forall (x:?123) (y:?123). (x:?123) = (y:?123) ==> (y:?123) = (x:?123)
       #|T: ?x. x < 1 = (#?:fun(fun(num,bool),bool) (\x:num. ((#<:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) | ?x. x < 1
       #|T: ?!x. x = 0 = (#?!:fun(fun(num,bool),bool) (\x:num. ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num)))) | ?!x. x = 0
       #|T: @x. x < 5 = (#@:fun(fun(num,bool),num) (\x:num. ((#<:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) | @x. x < 5
@@ -449,7 +449,7 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: (\x. x) 1 = ((\x:num. x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) | (\x. x) 1
       #|T: \(x,y). x + y = (#GABS:fun(fun(fun(prod(num,num),num),bool),fun(prod(num,num),num)) (\f:fun(prod(num,num),num). (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#GEQ:fun(num,fun(num,bool)) (f:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) x:num) y:num))) ((#+:fun(num,fun(num,num)) x:num) y:num)))))))) | \(x,y). x + y
       #|Warning: inventing type variables
-      #|T: !(x,y). x = y = (#!:fun(fun(prod('?185,'?185),bool),bool) (#GABS:fun(fun(fun(prod('?185,'?185),bool),bool),fun(prod('?185,'?185),bool)) (\f:fun(prod('?185,'?185),bool). (#!:fun(fun('?185,bool),bool) (\x:'?185. (#!:fun(fun('?185,bool),bool) (\y:'?185. ((#GEQ:fun(bool,fun(bool,bool)) (f:fun(prod('?185,'?185),bool) ((#,:fun('?185,fun('?185,prod('?185,'?185))) x:'?185) y:'?185))) ((#=:fun('?185,fun('?185,bool)) x:'?185) y:'?185))))))))) | !((x:?185),(y:?185)). (x:?185) = (y:?185)
+      #|T: forall(x,y). x = y = (#!:fun(fun(prod('?185,'?185),bool),bool) (#GABS:fun(fun(fun(prod('?185,'?185),bool),bool),fun(prod('?185,'?185),bool)) (\f:fun(prod('?185,'?185),bool). (#!:fun(fun('?185,bool),bool) (\x:'?185. (#!:fun(fun('?185,bool),bool) (\y:'?185. ((#GEQ:fun(bool,fun(bool,bool)) (f:fun(prod('?185,'?185),bool) ((#,:fun('?185,fun('?185,prod('?185,'?185))) x:'?185) y:'?185))) ((#=:fun('?185,fun('?185,bool)) x:'?185) y:'?185))))))))) | forall ((x:?185),(y:?185)). (x:?185) = (y:?185)
       #|Warning: inventing type variables
       #|T: x,y = ((#,:fun('?190,fun('?189,prod('?190,'?189))) x:'?190) y:'?189) | (x:?190),(y:?189)
       #|Warning: inventing type variables
@@ -523,7 +523,7 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: (+) = #+:fun(num,fun(num,num)) | (+)
       #|T: (+) 1 2 = ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) | 1 + 2
       #|Warning: inventing type variables
-      #|T: (!) = #!:fun(fun('?854,bool),bool) | ((!):(?854->bool)->bool)
+      #|T: (forall) = #!:fun(fun('?854,bool),bool) | ((forall):(?854->bool)->bool)
       #|T: (~) = #~:fun(bool,bool) | (~)
       #|Warning: inventing type variables
       #|T: (x) = x:'?856 | (x:?856)
@@ -564,14 +564,14 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: 1abc = 1abc:'?889 | (1abc:?889)
       #|Warning: inventing type variables
       #|T: a $ b = ((a:fun('?892,fun('?891,'?890)) $:'?892) b:'?891) | (a:?892->?891->?890) ($ :?892) (b:?891)
-      #|T: !x y z. x + y + z = z + y + x /\ x * y * z = z * y * x = (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) x:num) ((#+:fun(num,fun(num,num)) y:num) z:num))) ((#+:fun(num,fun(num,num)) z:num) ((#+:fun(num,fun(num,num)) y:num) x:num)))) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) x:num) ((#*:fun(num,fun(num,num)) y:num) z:num))) ((#*:fun(num,fun(num,num)) z:num) ((#*:fun(num,fun(num,num)) y:num) x:num)))))))))) | !x y z.
+      #|T: forall x y z. x + y + z = z + y + x /\ x * y * z = z * y * x = (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) x:num) ((#+:fun(num,fun(num,num)) y:num) z:num))) ((#+:fun(num,fun(num,num)) z:num) ((#+:fun(num,fun(num,num)) y:num) x:num)))) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) x:num) ((#*:fun(num,fun(num,num)) y:num) z:num))) ((#*:fun(num,fun(num,num)) z:num) ((#*:fun(num,fun(num,num)) y:num) x:num)))))))))) | forall x y z.
       #|    x + y + z = z + y + x /\
       #|    x * y * z = z * y * x
       #|Warning: inventing type variables
       #|T: if long_condition_name then first_branch_value else second_branch_value = (((#COND:fun(bool,fun('?934,fun('?934,'?934))) long_condition_name:bool) first_branch_value:'?934) second_branch_value:'?934) | if long_condition_name
       #| then (first_branch_value:?934)
       #| else (second_branch_value:?934)
-      #|T: !aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa = (#!:fun(fun(num,bool),bool) (\aaaaaaaaaaaaaaa:num. (#!:fun(fun(num,bool),bool) (\bbbbbbbbbbbbbbbbbb:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) aaaaaaaaaaaaaaa:num) bbbbbbbbbbbbbbbbbb:num)) ((#+:fun(num,fun(num,num)) bbbbbbbbbbbbbbbbbb:num) aaaaaaaaaaaaaaa:num)))))) | !aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb.
+      #|T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa = (#!:fun(fun(num,bool),bool) (\aaaaaaaaaaaaaaa:num. (#!:fun(fun(num,bool),bool) (\bbbbbbbbbbbbbbbbbb:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) aaaaaaaaaaaaaaa:num) bbbbbbbbbbbbbbbbbb:num)) ((#+:fun(num,fun(num,num)) bbbbbbbbbbbbbbbbbb:num) aaaaaaaaaaaaaaa:num)))))) | forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb.
       #|    aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb =
       #|    bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
       #|Warning: inventing type variables
@@ -590,6 +590,7 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: é ! Unparsed input
       #|T: xé ! Unparsed input
       #|
+
     ),
   )
 }

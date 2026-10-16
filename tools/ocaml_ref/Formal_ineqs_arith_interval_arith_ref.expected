@@ -4,17 +4,17 @@ Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/arith/interval_arith quotations (13):
   interval_arith (x:real) (lo, hi) <=> lo <= x /\\ x <= hi
-  bounded_on f s f_bounds <=>\n\t!x. x IN s ==> interval_arith (f x) f_bounds
-  bounded_on_int f int f_bounds <=>\n\t!x. interval_arith x int ==> interval_arith (f x) f_bounds
+  bounded_on f s f_bounds <=>\n\tforall x. x IN s ==> interval_arith (f x) f_bounds
+  bounded_on_int f int f_bounds <=>\n\tforall x. interval_arith x int ==> interval_arith (f x) f_bounds
   iabs (x_lo, x_hi) = max x_hi (-- x_lo)
   interval_not_zero (lo, hi) <=> &0 < lo \\/ hi < &0
   interval_pos (lo, hi) <=> &0 < lo
   interval_neg (lo, hi) <=> hi < &0
   interval_gt f (lo, hi) <=> f < lo
-  !x. interval_arith x (x,x)
+  forall x. interval_arith x (x,x)
   (a <= lo /\\ hi <= b) /\\ interval_arith x (lo, hi)\n                              ==> interval_arith x (a,b)
   interval_arith x (a, b) ==>\n                           interval_arith (--x) (--b, --a)
-  !x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)
+  forall x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)
   interval_arith
 Interval_arith.interval_arith =  |- (#!:fun(fun(real,bool),bool) (\lo:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\hi:real. ((#=:fun(bool,fun(bool,bool)) ((#interval_arith:fun(real,fun(prod(real,real),bool)) x:real) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) lo:real) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) hi:real)))))))))
 Interval_arith.bounded_on =  |- (#!:fun(fun(fun('?1836651,bool),bool),bool) (\s:fun('?1836651,bool). (#!:fun(fun(fun('?1836651,real),bool),bool) (\f:fun('?1836651,real). (#!:fun(fun(prod(real,real),bool),bool) (\f_bounds:prod(real,real). ((#=:fun(bool,fun(bool,bool)) (((#bounded_on:fun(fun('?1836651,real),fun(fun('?1836651,bool),fun(prod(real,real),bool))) f:fun('?1836651,real)) s:fun('?1836651,bool)) f_bounds:prod(real,real))) (#!:fun(fun('?1836651,bool),bool) (\x:'?1836651. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?1836651,fun(fun('?1836651,bool),bool)) x:'?1836651) s:fun('?1836651,bool))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun('?1836651,real) x:'?1836651)) f_bounds:prod(real,real))))))))))))

@@ -5665,35 +5665,35 @@ test "Library/isum matches Library/isum.ml" {
       #|0..0..2..4..8..26..55..85..141..solved at 150
       #|Warning: inventing type variables
       #|Library/isum quotations (29):
-      #|  !f s. isum (support (+) f s) f = isum s f
+      #|  forall f s. isum (support (+) f s) f = isum s f
       #|  s:A->bool
       #|  support(+) (f:A->int) s
       #|  support(+) (\\x:A. real_of_int(f x)) s = support(+) f s
-      #|  !f:A->int s. real_of_int(isum s f) = sum s (\\x. real_of_int(f x))
+      #|  forall f:A->int s. real_of_int(isum s f) = sum s (\\x. real_of_int(f x))
       #|  real_of_int
       #|  :real
       #|  :int
       #|  real_of_int(if b then x else y) =\n       if b then real_of_int x else real_of_int y
       #|  (\\x. real_of_int((f o g) x)) = (\\x. real_of_int(f x)) o g
-      #|  !s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> isum s (\\i. isum (t i) (x i)) =\n            isum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
-      #|  !(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. isum(a(x)..b(x)) (h f x))
-      #|  !x n. 1 <= n ==> &1 - x pow n = (&1 - x) * isum (0..n - 1) (\\i. x pow i)
-      #|  !x n. 1 <= n ==> x pow n - &1 = (x - &1) * isum (0..n - 1) (\\i. x pow i)
-      #|  !f:A->int s. support (+) f (:A) SUBSET s ==> isum s f = isum (:A) f
+      #|  forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> isum s (\\i. isum (t i) (x i)) =\n            isum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
+      #|  forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. isum(a(x)..b(x)) (h f x))
+      #|  forall x n. 1 <= n ==> &1 - x pow n = (&1 - x) * isum (0..n - 1) (\\i. x pow i)
+      #|  forall x n. 1 <= n ==> x pow n - &1 = (x - &1) * isum (0..n - 1) (\\i. x pow i)
+      #|  forall f:A->int s. support (+) f (:A) SUBSET s ==> isum s f = isum (:A) f
       #|  P:int->bool
-      #|  !P f:A->int s.\n        P(&0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(isum s f)
+      #|  forall P f:A->int s.\n        P(&0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)
       #|  R:int->int->bool
-      #|  !R (f:A->int) g s.\n        R (&0) (&0) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
+      #|  forall R (f:A->int) g s.\n        R (&0) (&0) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
       #|  P:int->bool
-      #|  !P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(isum s f)
+      #|  forall P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)
       #|  R:int->int->bool
-      #|  !R (f:A->int) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
+      #|  forall R (f:A->int) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
       #|  (n < m ==> isum(m..n) f = &0) /\\\n     isum(m..m) f = f m /\\\n     (m <= n ==> isum (m..n) f = f m + isum (m + 1..n) f)
       #|  ..
       #|  f:num->int
       #|  m:num
       #|  n:num
-      #|  (!f g s.   (!x. x IN s ==> f(x) = g(x))\n              ==> isum s (\\i. f(i)) = isum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> isum(a..b) (\\i. f(i)) = isum(a..b) g) /\\\n   (!f g p.   (!x. p x ==> f x = g x)\n              ==> isum {y | p y} (\\i. f(i)) = isum {y | p y} g)
+      #|  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n              ==> isum s (\\i. f(i)) = isum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> isum(a..b) (\\i. f(i)) = isum(a..b) g) /\\\n   (forall f g p.   (forall x. p x ==> f x = g x)\n              ==> isum {y | p y} (\\i. f(i)) = isum {y | p y} g)
       #|ISUM_SUPPORT =  |- (#!:fun(fun(fun('?142951,int),bool),bool) (\f:fun('?142951,int). (#!:fun(fun(fun('?142951,bool),bool),bool) (\s:fun('?142951,bool). ((#=:fun(int,fun(int,bool)) ((#isum:fun(fun('?142951,bool),fun(fun('?142951,int),int)) (((#support:fun(fun(int,fun(int,int)),fun(fun('?142951,int),fun(fun('?142951,bool),fun('?142951,bool)))) #int_add:fun(int,fun(int,int))) f:fun('?142951,int)) s:fun('?142951,bool))) f:fun('?142951,int))) ((#isum:fun(fun('?142951,bool),fun(fun('?142951,int),int)) s:fun('?142951,bool)) f:fun('?142951,int)))))))
       #|int_isum =  |- (#!:fun(fun(fun('A,int),bool),bool) (\f:fun('A,int). (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(real,fun(real,bool)) (#real_of_int:fun(int,real) ((#isum:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) f:fun('A,int)))) ((#sum:fun(fun('A,bool),fun(fun('A,real),real)) s:fun('A,bool)) (\x:'A. (#real_of_int:fun(int,real) (f:fun('A,int) x:'A)))))))))
       #|CARD_EQ_ISUM =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#=:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#CARD:fun(fun('A,bool),num) s:fun('A,bool)))) ((#isum:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) (\x:'A. (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

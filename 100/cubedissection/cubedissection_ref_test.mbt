@@ -67959,17 +67959,17 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|0..0..1..2..solved at 6
       #|100/cubedissection quotations (530):
       #|  cube k <=>\n     ?a:real^N d. &0 < d /\\ k = interval[a,a + d % vec 1]
-      #|  !k:real^N->bool. cube k ==> ~(interior k = {})
-      #|  !k:real^N->bool. cube k ==> ~(k = {})
+      #|  forall k:real^N->bool. cube k ==> ~(interior k = {})
+      #|  forall k:real^N->bool. cube k ==> ~(k = {})
       #|  interval_length (s:real^N->bool) =\n        if s = {} then &0\n        else interval_upperbound s$1 - interval_lowerbound s$1
       #|  a + d < a <=> d < &0
       #|  d:real < &0
       #|  max d (&0) = if d < &0 then &0 else d
-      #|  !(a:real^N) d. interval_length(interval[a,a + d % vec 1]) = max d (&0)
-      #|  !(k:real^N->bool) i.\n        cube k\n        ==> interval_upperbound k$i - interval_lowerbound k$i =\n            interval_length k
-      #|  !(a:real^N) d. &0 < d ==> interval_length(interval[a, a + d % vec 1]) = d
-      #|  !c:real^3 s. vector[c$2 + s; c$3 + s]:real^2 =\n                vector[c$2; c$3] + s % vec 1
-      #|  cube_dissection (d:(real^N->bool)->bool) <=>\n        d division_of UNIONS d /\\\n        (!k. k IN d ==> cube k) /\\\n        pairwise (\\k k'. ~(interval_length k = interval_length k')) d
+      #|  forall(a:real^N) d. interval_length(interval[a,a + d % vec 1]) = max d (&0)
+      #|  forall(k:real^N->bool) i.\n        cube k\n        ==> interval_upperbound k$i - interval_lowerbound k$i =\n            interval_length k
+      #|  forall(a:real^N) d. &0 < d ==> interval_length(interval[a, a + d % vec 1]) = d
+      #|  forall c:real^3 s. vector[c$2 + s; c$3 + s]:real^2 =\n                vector[c$2; c$3] + s % vec 1
+      #|  cube_dissection (d:(real^N->bool)->bool) <=>\n        d division_of UNIONS d /\\\n        (forall k. k IN d ==> cube k) /\\\n        pairwise (\\k k'. ~(interval_length k = interval_length k')) d
       #|  i:num
       #|  j:num
       #|  j:num
@@ -67983,20 +67983,20 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  UNIONS (D:(real^N->bool)->bool) DIFF s SUBSET UNIONS(D DELETE s) /\\\n    (x:real^N) IN closure(UNIONS D DIFF s)\n    ==> x IN closure(UNIONS(D DELETE s))
       #|  closed (s:real^N->bool) /\\ (x:real^N) IN closure s ==> x IN s
       #|  (x:real^N) IN UNIONS(D DELETE interval[u,v])
-      #|  !D a b u v (x:real^N) i.\n        D division_of UNIONS D /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        interval[a,b] SUBSET UNIONS D /\\\n        interval[u,v] SUBSET interval[a,b] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
+      #|  forall D a b u v (x:real^N) i.\n        D division_of UNIONS D /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        interval[a,b] SUBSET UNIONS D /\\\n        interval[u,v] SUBSET interval[a,b] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
       #|  i:num
       #|  b:real^N
       #|  a:real^N
-      #|  !D a b u v (x:real^N) i.\n        D division_of interval[a,b] /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
+      #|  forall D a b u v (x:real^N) i.\n        D division_of interval[a,b] /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
       #|  ee:real
       #|  xx:real^N
       #|  ee:real
       #|  xx:real^N
       #|  cube(j:real^N->bool)
       #|  j:real^N->bool
-      #|  !D:(real^N->bool)->bool.\n        cube_dissection D /\\\n        (!(x:real^N) e. interval[x,x + e % vec 1] IN D /\\\n               P(interval[x,x + e % vec 1])\n               ==> R x e)\n        ==> (?j. j IN D /\\ P j) ==> (?(x:real^N) e. R x e)
+      #|  forall D:(real^N->bool)->bool.\n        cube_dissection D /\\\n        (forall(x:real^N) e. interval[x,x + e % vec 1] IN D /\\\n               P(interval[x,x + e % vec 1])\n               ==> R x e)\n        ==> (?j. j IN D /\\ P j) ==> (?(x:real^N) e. R x e)
       #|  a + e:real <= a <=> ~(&0 < e)
-      #|  (?i. 1 <= i /\\ i <= 2 /\\ P i) <=>\n      ~(!i. 1 <= i /\\ i <= 2 ==> ~P i)
+      #|  (?i. 1 <= i /\\ i <= 2 /\\ P i) <=>\n      ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)
       #|  interval[x2:real^2,x2 + e2 % vec 1]
       #|  interval[x1:real^2,x1 + e1 % vec 1]
       #|  interval[x4:real^2,x4 + e4 % vec 1]
@@ -68009,7 +68009,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  (u:real^2)$2 = (a:real^2)$2
       #|  (u:real^2)$1 + d = (b:real^2)$1
       #|  (u:real^2)$1 = (a:real^2)$1
-      #|  (?(i:num). 1 <= i /\\ i <= 2 /\\ (P:num->bool) i) <=>\n        ~(!i. 1 <= i /\\ i <= 2 ==> ~P i)
+      #|  (?(i:num). 1 <= i /\\ i <= 2 /\\ (P:num->bool) i) <=>\n        ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)
       #|  interval[u:real^2,u + d % vec 1]
       #|  interval[x:real^2,x + e % vec 1]
       #|  interval[x:real^2,x + e % vec 1]
@@ -68038,7 +68038,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  d:real
       #|  u:real^2
       #|  cube(j:real^2->bool)
-      #|  !D a b j:real^2->bool.\n        cube_dissection D /\\ UNIONS D = interval[a,b] /\\ j IN D /\\\n        (!j'. j' IN D /\\ ~(j' = j)\n             ==> interval_length(j) < interval_length j')\n        ==> j = interval[a,b] \\/ j SUBSET interval(a,b)
+      #|  forall D a b j:real^2->bool.\n        cube_dissection D /\\ UNIONS D = interval[a,b] /\\ j IN D /\\\n        (forall j'. j' IN D /\\ ~(j' = j)\n             ==> interval_length(j) < interval_length j')\n        ==> j = interval[a,b] \\/ j SUBSET interval(a,b)
       #|  interval[x3:real^2,x3 + e3 % vec 1]
       #|  interval[x2:real^2,x2 + e2 % vec 1]
       #|  interval[x4:real^2,x4 + e4 % vec 1]
@@ -68074,14 +68074,14 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  ?x0:A. x0 IN s /\\ (f:A->real) x0 = b
       #|  b:real
       #|  IMAGE (f:A->real) s
-      #|  !(f:A->real) s.\n    FINITE s /\\ ~(s = {}) /\\ pairwise (\\x y. ~(f x = f y)) s\n    ==> ?x. x IN s /\\ !y. y IN s /\\ ~(y = x) ==> f x < f y
-      #|  valley (D:(real^3->bool)->bool) (v:real^3->bool) <=>\n    cube v /\\\n    (!z:real^3. z$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3\n                ==> ?k. k IN D /\\ z IN k /\\\n                        interval_lowerbound k $ 1 =\n                        interval_upperbound (v:real^3->bool) $ 1) /\\\n    (!k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_lowerbound (v:real^3->bool) $ 2 <= interval_lowerbound k $ 2 /\\\n             interval_upperbound k $ 2 <= interval_upperbound (v:real^3->bool) $ 2 /\\\n             interval_lowerbound (v:real^3->bool) $ 3 <= interval_lowerbound k $ 3 /\\\n             interval_upperbound k $ 3 <= interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_length k < interval_length v)
+      #|  forall(f:A->real) s.\n    FINITE s /\\ ~(s = {}) /\\ pairwise (\\x y. ~(f x = f y)) s\n    ==> ?x. x IN s /\\ forall y. y IN s /\\ ~(y = x) ==> f x < f y
+      #|  valley (D:(real^3->bool)->bool) (v:real^3->bool) <=>\n    cube v /\\\n    (forall z:real^3. z$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3\n                ==> ?k. k IN D /\\ z IN k /\\\n                        interval_lowerbound k $ 1 =\n                        interval_upperbound (v:real^3->bool) $ 1) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_lowerbound (v:real^3->bool) $ 2 <= interval_lowerbound k $ 2 /\\\n             interval_upperbound k $ 2 <= interval_upperbound (v:real^3->bool) $ 2 /\\\n             interval_lowerbound (v:real^3->bool) $ 3 <= interval_lowerbound k $ 3 /\\\n             interval_upperbound k $ 3 <= interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_length k < interval_length v)
       #|  interior(j:real^3->bool) INTER interior(interval[a:real^3,b]) = {}
       #|  interior(j:real^3->bool) SUBSET interior(interval[a:real^3,b])
       #|  interior(j:real^3->bool) = {}
       #|  j = interval[a:real^3,b]
       #|  j:real^3->bool
-      #|  !D (a:real^3) b.\n    D division_of interval[a,b] /\\\n    (!k:real^3->bool. k IN D ==> cube k) /\\\n    interval[a,b] IN D\n    ==> D = {interval[a,b]}
+      #|  forall D (a:real^3) b.\n    D division_of interval[a,b] /\\\n    (forall k:real^3->bool. k IN D ==> cube k) /\\\n    interval[a,b] IN D\n    ==> D = {interval[a,b]}
       #|  D = {interval[a:real^3, a + d % vec 1]}
       #|  k = interval[a:real^3, a + d % vec 1]
       #|  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
@@ -68120,10 +68120,10 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  1 <= 2
       #|  1 <= 1
       #|  interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $1 =\n     (a:real^3)$1 /\\\n     interval_lowerbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $2 =\n     a$2 /\\\n     interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $2 =\n     a$2 + d /\\\n     interval_lowerbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $3 =\n     a$3 /\\\n     interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $3 =\n     a$3 + d /\\\n     interval_length(interval[a - d % basis 1:real^3,\n                               a - d % basis 1 + d % vec 1]) = d
-      #|  !i. 1 <= i /\\ i <= dimindex(:3)\n         ==> (a - d % basis 1:real^3)$i <=\n             (a - d % basis 1 + d % vec 1:real^3)$i
+      #|  forall i. 1 <= i /\\ i <= dimindex(:3)\n         ==> (a - d % basis 1:real^3)$i <=\n             (a - d % basis 1 + d % vec 1:real^3)$i
       #|  D division_of interval[a:real^3, a + d % vec 1]
-      #|  !D (a:real^3) d.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    ~(D = {interval[a, a + d % vec 1]})\n    ==> valley D (interval[a - d % basis 1, a - d % basis 1 + d % vec 1])
-      #|  (?i. 1 <= i /\\ i <= 3 /\\ P i) <=>\n     ~(!i. 1 <= i /\\ i <= 3 ==> ~P i)
+      #|  forall D (a:real^3) d.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    ~(D = {interval[a, a + d % vec 1]})\n    ==> valley D (interval[a - d % basis 1, a - d % basis 1 + d % vec 1])
+      #|  (?i. 1 <= i /\\ i <= 3 /\\ P i) <=>\n     ~(forall i. 1 <= i /\\ i <= 3 ==> ~P i)
       #|  (x:real^3)$3 < interval_upperbound (k:real^3->bool) $ 3
       #|  interval_lowerbound (k:real^3->bool) $ 3 < (x:real^3)$3
       #|  (x:real^3)$2 < interval_upperbound (k:real^3->bool) $ 2
@@ -68136,7 +68136,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  interval_lowerbound k = (u:real^3) /\\\n     interval_upperbound k = (v:real^3) /\\\n     interval_lowerbound j = (p:real^3) /\\\n     interval_upperbound j = (q:real^3)
       #|  ?p q:real^3. j = interval[p,q] /\\ ~(interval[p,q] = {})
       #|  ?u v:real^3. k = interval[u,v] /\\ ~(interval[u,v] = {})
-      #|  !D (k:real^3->bool) j (x:real^3).\n    D division_of UNIONS D /\\\n    ~(interior k = {}) /\\ ~(interior j = {}) /\\\n    k IN D /\\ j IN D /\\ ~(j = k) /\\\n    x IN k /\\ x IN j /\\\n    x$1 = interval_upperbound k $ 1 /\\\n    interval_lowerbound k $ 2 < x$2 /\\\n    x$2 < interval_upperbound k $ 2 /\\\n    interval_lowerbound k $ 3 < x$3 /\\\n    x$3 < interval_upperbound k $ 3\n    ==> interval_lowerbound j $ 1 = interval_upperbound k $ 1
+      #|  forall D (k:real^3->bool) j (x:real^3).\n    D division_of UNIONS D /\\\n    ~(interior k = {}) /\\ ~(interior j = {}) /\\\n    k IN D /\\ j IN D /\\ ~(j = k) /\\\n    x IN k /\\ x IN j /\\\n    x$1 = interval_upperbound k $ 1 /\\\n    interval_lowerbound k $ 2 < x$2 /\\\n    x$2 < interval_upperbound k $ 2 /\\\n    interval_lowerbound k $ 3 < x$3 /\\\n    x$3 < interval_upperbound k $ 3\n    ==> interval_lowerbound j $ 1 = interval_upperbound k $ 1
       #|  interval_lowerbound m1 = c1:real^3 /\\\n     interval_upperbound m1 = c1 + s1 % vec 1:real^3 /\\\n     interval_lowerbound m2 = c2:real^3 /\\\n     interval_upperbound m2 = c2 + s2 % vec 1:real^3
       #|  (?c1:real^3 s1. &0 < s1 /\\ m1 = interval[c1, c1 + s1 % vec 1]) /\\\n     (?c2:real^3 s2. &0 < s2 /\\ m2 = interval[c2, c2 + s2 % vec 1])
       #|  ~(e1:real^2->bool = e2)
@@ -68162,7 +68162,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  m1:real^3->bool
       #|  (e0:real^2->bool) IN E
       #|  e0:real^2->bool
-      #|  !e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e
+      #|  forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e
       #|  interval[vector[(cv:real^3)$2;cv$3]:real^2,\n                     vector[cv$2 + sv;cv$3 + sv]] =\n           closure(interval(vector[(cv:real^3)$2;cv$3]:real^2,\n                             vector[cv$2 + sv;cv$3 + sv]))
       #|  &0 < sv
       #|  ~(interval(vector[(cv:real^3)$2;cv$3]:real^2,\n                       vector[cv$2 + sv;cv$3 + sv]) = {})
@@ -68204,14 +68204,14 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  (c1:real^3)$1 = (c2:real^3)$1
       #|  e2:real^2->bool
       #|  e1:real^2->bool
-      #|  !e1 e2:real^2->bool. e1 IN E /\\ e2 IN E /\\ ~(e1 = e2)\n       ==> interior e1 INTER interior e2 = {}
+      #|  forall e1 e2:real^2->bool. e1 IN E /\\ e2 IN E /\\ ~(e1 = e2)\n       ==> interior e1 INTER interior e2 = {}
       #|  sma:real
       #|  vector[(cma:real^3)$2; cma$3]:real^2
       #|  interval_lowerbound(ma:real^3->bool) = cma /\\\n         interval_upperbound ma = cma + sma % vec 1:real^3
       #|  ?cma:real^3 sma. &0 < sma /\\ ma = interval[cma, cma + sma % vec 1]
       #|  ma:real^3->bool
       #|  ea:real^2->bool
-      #|  !e:real^2->bool. e IN E ==> cube e
+      #|  forall e:real^2->bool. e IN E ==> cube e
       #|  D:(real^3->bool)->bool
       #|  FINITE(E:(real^2->bool)->bool)
       #|  k:real^3->bool
@@ -68222,7 +68222,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  interval_lowerbound(v:real^3->bool) $ 2 < (z:real^3)$2
       #|  z:real^3
       #|  ?z:real^3. z IN k /\\ (cv:real^3)$2 < z$2 /\\ z$2 < cv$2 + sv /\\\n                  cv$3 < z$3 /\\ z$3 < cv$3 + sv
-      #|  cube_dissection (E:(real^2->bool)->bool) /\\\n     UNIONS E = (face_sq:real^2->bool) /\\\n     (proj_k:real^2->bool) IN E /\\\n     (!e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e)
+      #|  cube_dissection (E:(real^2->bool)->bool) /\\\n     UNIONS E = (face_sq:real^2->bool) /\\\n     (proj_k:real^2->bool) IN E /\\\n     (forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e)
       #|  proj_k = interval[vector[(ck:real^3)$2; ck$3]:real^2,\n                        vector[ck$2 + sk; ck$3 + sk]]
       #|  face_sq = interval[vector[(cv:real^3)$2; cv$3]:real^2,\n                         vector[cv$2 + sv; cv$3 + sv]]
       #|  E = IMAGE (\\m:real^3->bool.\n       interval[vector[(interval_lowerbound m)$2;\n                       (interval_lowerbound m)$3]:real^2,\n                vector[(interval_upperbound m)$2;\n                       (interval_upperbound m)$3]])\n       {m | m IN D /\\\n            interval_lowerbound m $ 1 = (cv:real^3)$1 + sv /\\\n            (?z:real^3. z IN m /\\\n                 cv$2 < z$2 /\\ z$2 < cv$2 + sv /\\\n                 cv$3 < z$3 /\\ z$3 < cv$3 + sv)}
@@ -68238,12 +68238,12 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  cube(k:real^3->bool)
       #|  FINITE(D:(real^3->bool)->bool)
       #|  (D:(real^3->bool)->bool) division_of UNIONS D
-      #|  !D (a:real^3) d (v:real^3->bool) k.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j')\n    ==> interval_lowerbound (v:real^3->bool) $ 2 < interval_lowerbound k $ 2 /\\\n        interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n        interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n        interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3
+      #|  forall D (a:real^3) d (v:real^3->bool) k.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j')\n    ==> interval_lowerbound (v:real^3->bool) $ 2 < interval_lowerbound k $ 2 /\\\n        interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n        interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n        interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3
       #|  m1:real^3->bool
       #|  vector[(ck:real^3)$2 + sk; ck$3 + sk]:real^2
       #|  vector[(ck:real^3)$2; ck$3]:real^2
       #|  INFINITE({x:real | a < x /\\ x < b} DIFF s)
-      #|  !s a b. FINITE s /\\ a < b ==> ?x:real. a < x /\\ x < b /\\ ~(x IN s)
+      #|  forall s a b. FINITE s /\\ a < b ==> ?x:real. a < x /\\ x < b /\\ ~(x IN s)
       #|  j:real^3->bool
       #|  m:real^3->bool
       #|  (D:(real^3->bool)->bool) division_of UNIONS D
@@ -68337,7 +68337,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  d:real
       #|  a:real^3
       #|  D:(real^3->bool)->bool
-      #|  !D (a:real^3) d (v:real^3->bool) k j.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j') /\\\n    j IN D /\\\n    interval_lowerbound j $ 1 = interval_upperbound k $ 1 /\\\n    (?z:real^3. z IN j /\\\n         interval_lowerbound k $ 2 < z$2 /\\ z$2 < interval_upperbound k $ 2 /\\\n         interval_lowerbound k $ 3 < z$3 /\\ z$3 < interval_upperbound k $ 3)\n    ==> interval_lowerbound k $ 2 <= interval_lowerbound j $ 2 /\\\n        interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n        interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n        interval_upperbound j $ 3 <= interval_upperbound k $ 3
+      #|  forall D (a:real^3) d (v:real^3->bool) k j.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j') /\\\n    j IN D /\\\n    interval_lowerbound j $ 1 = interval_upperbound k $ 1 /\\\n    (?z:real^3. z IN j /\\\n         interval_lowerbound k $ 2 < z$2 /\\ z$2 < interval_upperbound k $ 2 /\\\n         interval_lowerbound k $ 3 < z$3 /\\ z$3 < interval_upperbound k $ 3)\n    ==> interval_lowerbound k $ 2 <= interval_lowerbound j $ 2 /\\\n        interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n        interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n        interval_upperbound j $ 3 <= interval_upperbound k $ 3
       #|  zw:real^3
       #|  j0:real^3->bool
       #|  ?j0:real^3->bool. j0 IN D /\\ (zw:real^3) IN j0 /\\\n     interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1
@@ -68358,7 +68358,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  a:real^3
       #|  D:(real^3->bool)->bool
       #|  interval_lowerbound (v:real^3->bool) $ 2 <\n       interval_lowerbound (k:real^3->bool) $ 2 /\\\n     interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n     interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n     interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3
-      #|  !D (a:real^3) d (v:real^3->bool) (k:real^3->bool).\n     &0 < d /\\\n     cube_dissection D /\\\n     UNIONS D = interval[a, a + d % vec 1] /\\\n     valley D v /\\\n     k IN D /\\\n     interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     (?z. z IN k /\\\n          interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n          z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n          interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n          z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (!j'. j' IN D /\\ ~(j' = k) /\\\n           interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n           (?z. z IN j' /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3)\n           ==> interval_length k < interval_length j')\n     ==> ?j0. j0 IN D /\\ ~(j0 = k) /\\\n              interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n              (?z'. z' IN j0 /\\\n                    interval_lowerbound (v:real^3->bool) $ 2 < z'$2 /\\\n                    z'$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                    interval_lowerbound (v:real^3->bool) $ 3 < z'$3 /\\\n                    z'$3 < interval_upperbound (v:real^3->bool) $ 3)
+      #|  forall D (a:real^3) d (v:real^3->bool) (k:real^3->bool).\n     &0 < d /\\\n     cube_dissection D /\\\n     UNIONS D = interval[a, a + d % vec 1] /\\\n     valley D v /\\\n     k IN D /\\\n     interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     (?z. z IN k /\\\n          interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n          z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n          interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n          z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (forall j'. j' IN D /\\ ~(j' = k) /\\\n           interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n           (?z. z IN j' /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3)\n           ==> interval_length k < interval_length j')\n     ==> ?j0. j0 IN D /\\ ~(j0 = k) /\\\n              interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n              (?z'. z' IN j0 /\\\n                    interval_lowerbound (v:real^3->bool) $ 2 < z'$2 /\\\n                    z'$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                    interval_lowerbound (v:real^3->bool) $ 3 < z'$3 /\\\n                    z'$3 < interval_upperbound (v:real^3->bool) $ 3)
       #|  2
       #|  j:real^3->bool
       #|  2
@@ -68461,7 +68461,7 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  cube(v:real^3->bool)
       #|  FINITE(D:(real^3->bool)->bool)
       #|  (D:(real^3->bool)->bool) division_of UNIONS D
-      #|  !D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v\n    ==> ?k. k IN D /\\ interval_length k < interval_length v /\\\n            valley D k
+      #|  forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v\n    ==> ?k. k IN D /\\ interval_length k < interval_length v /\\\n            valley D k
       #|  k:real^3->bool
       #|  CARD {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n               interval_length k' < interval_length (k:real^3->bool)}\n         < CARD {k':real^3->bool | k' IN D /\\\n                 interval_length k' < interval_length (v':real^3->bool)}
       #|  FINITE {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n                 interval_length k' < interval_length (v':real^3->bool)}
@@ -68475,19 +68475,19 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  D:(real^3->bool)->bool
       #|  v':real^3->bool
       #|  n:num
-      #|  !n (v:real^3->bool).\n       CARD {k:real^3->bool | k IN (D:(real^3->bool)->bool) /\\\n             interval_length k < interval_length v}\n       = n /\\ valley D v ==> F
+      #|  forall n (v:real^3->bool).\n       CARD {k:real^3->bool | k IN (D:(real^3->bool)->bool) /\\\n             interval_length k < interval_length v}\n       = n /\\ valley D v ==> F
       #|  FINITE(D:(real^3->bool)->bool)
       #|  (D:(real^3->bool)->bool) division_of UNIONS D
-      #|  !D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v ==> F
+      #|  forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v ==> F
       #|  interval[a - d % basis 1:real^3,\n                           a - d % basis 1 + d % vec 1]
       #|  d:real
       #|  a:real^3
       #|  D:(real^3->bool)->bool
       #|  D = {interval[a:real^3, a + d % vec 1]}
-      #|  !(a:real^3) d D.\n        &0 < d /\\\n        cube_dissection D /\\\n        UNIONS D = interval[a, a + d % vec 1]\n        ==> D = {interval[a, a + d % vec 1]}
+      #|  forall(a:real^3) d D.\n        &0 < d /\\\n        cube_dissection D /\\\n        UNIONS D = interval[a, a + d % vec 1]\n        ==> D = {interval[a, a + d % vec 1]}
       #|  d:real
       #|  a:real^3
-      #|  !D:(real^3->bool)->bool.\n        cube_dissection D /\\ cube(UNIONS D) ==> D = {UNIONS D}
+      #|  forall D:(real^3->bool)->bool.\n        cube_dissection D /\\ cube(UNIONS D) ==> D = {UNIONS D}
       #|cube =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#?:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) d:real)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) k:fun(cart(real,'N),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) d:real) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))
       #|CUBE_IMP_NONEMPTY_INTERIOR =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#interior:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) k:fun(cart(real,'N),bool))) #EMPTY:fun(cart(real,'N),bool))))))
       #|CUBE_IMP_NONEMPTY =  |- (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) k:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))))))

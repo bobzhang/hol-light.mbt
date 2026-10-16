@@ -244,70 +244,70 @@ pair quotations (78):
   _FUNCTION = \\(r:A->B->bool) x. if (?!) (r x) then (@) (r x) else @z. F
   mk_pair (x:A) (y:B) = \\a b. (a = x) /\\ (b = y)
   ?x. ?(a:A) (b:B). x = mk_pair a b
-  !(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y
+  forall(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y
   (x:A),(y:B) = ABS_prod(mk_pair x y)
   FST (p:A#B) = @x. ?y. p = x,y
   SND (p:A#B) = @y. ?x. p = x,y
   REP_prod:A#B->A->B->bool
-  !(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\\ (y = b)
+  forall(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\\ (y = b)
   b:B
   a:A
   ABS_prod:(A->B->bool)->A#B
   b:B
   a:A
   REP_prod p :A->B->bool
-  !p:A#B. ?x y. p = x,y
+  forall p:A#B. ?x y. p = x,y
   y:B
-  !(x:A) (y:B). FST(x,y) = x
+  forall(x:A) (y:B). FST(x,y) = x
   x:A
-  !(x:A) (y:B). SND(x,y) = y
+  forall(x:A) (y:B). SND(x,y) = y
   x:A#B
   b:B
   a:A
-  !x:A#B. FST x,SND x = x
-  !P:A#B->bool. (!x y. P (x,y)) ==> !p. P p
+  forall x:A#B. FST x,SND x = x
+  forall P:A#B->bool. (forall x y. P (x,y)) ==> forall p. P p
   \\p. (PAIR':A->B->C) (FST p) (SND p)
-  !PAIR'. ?fn:A#B->C. !a0 a1. fn (a0,a1) = PAIR' a0 a1
+  forall PAIR'. ?fn:A#B->C. forall a0 a1. fn (a0,a1) = PAIR' a0 a1
   CURRY(f:A#B->C) x y = f(x,y)
-  !f x y. UNCURRY(f:A->B->C)(x,y) = f x y
-  !f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)
+  forall f x y. UNCURRY(f:A->B->C)(x,y) = f x y
+  forall f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)
   (?) P ==> P (GABS P)
   GABS (\\a. b) c
-  !P:A#B->bool. (!p. P p) <=> (!p1 p2. P(p1,p2))
-  !P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)
-  !t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))
-  !f:A->B->C. (\\(x,y). f x y) = (\\p. f (FST p) (SND p))
-  !f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))
-  !f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))
-  (!f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (!f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (!f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)
+  forall P:A#B->bool. (forall p. P p) <=> (forall p1 p2. P(p1,p2))
+  forall P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)
+  forall t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))
+  forall f:A->B->C. (\\(x,y). f x y) = (\\p. f (FST p) (SND p))
+  forall f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))
+  forall f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))
+  (forall f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (forall f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (forall f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)
   \\(a,b). (f:A->B->C) a b
   f:A->B->C
-  !P. (!f:A->B->C. P f) <=> (!f. P (\\a b. f(a,b)))
-  (?x. P x) <=> ~(!x. ~P x)
-  !P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))
-  !P:(A#B->C)->bool. (?f. P f) <=> (?f. P (\\(a,b). f a b))
-  !P:(A#B->C)->bool. (!f. P f) <=> (!f. P (\\(a,b). f a b))
-  !P:A->B->bool. (!x y. P x y) <=> !z. P (FST z) (SND z)
-  !P:A->B->bool. (?x y. P x y) <=> ?z. P (FST z) (SND z)
-  !P. (!f:A->B#C. P f) <=> (!g h. P(\\a. g a,h a))
-  (?x. P x) <=> ~(!x. ~P x)
-  !P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))
-  !P:(A->B)->(A->C)->bool. (!f g. P f g) <=> (!h. P (FST o h) (SND o h))
-  !P:(A->B)->(A->C)->bool. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))
+  forall P. (forall f:A->B->C. P f) <=> (forall f. P (\\a b. f(a,b)))
+  (?x. P x) <=> ~(forall x. ~P x)
+  forall P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))
+  forall P:(A#B->C)->bool. (?f. P f) <=> (?f. P (\\(a,b). f a b))
+  forall P:(A#B->C)->bool. (forall f. P f) <=> (forall f. P (\\(a,b). f a b))
+  forall P:A->B->bool. (forall x y. P x y) <=> forall z. P (FST z) (SND z)
+  forall P:A->B->bool. (?x y. P x y) <=> ?z. P (FST z) (SND z)
+  forall P. (forall f:A->B#C. P f) <=> (forall g h. P(\\a. g a,h a))
+  (?x. P x) <=> ~(forall x. ~P x)
+  forall P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))
+  forall P:(A->B)->(A->C)->bool. (forall f g. P f g) <=> (forall h. P (FST o h) (SND o h))
+  forall P:(A->B)->(A->C)->bool. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))
   \\b a. (f:B->A->C) a b
   f:B->A->C
   \\b a. (f:A->B->C) a b
   f:A->B->C
-  !P:(A->B->C)->bool. (?f. P f) <=> (?f. P (\\a b. f b a))
-  !P:A->B->bool. (!(x,y). P x y) <=> (!x y. P x y)
+  forall P:(A->B->C)->bool. (?f. P f) <=> (?f. P (\\a b. f b a))
+  forall P:A->B->bool. (forall(x,y). P x y) <=> (forall x y. P x y)
   (~p <=> ~q) ==> (p <=> q)
-  !P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)
-  !P:A->B->C->bool. (!(x,y,z). P x y z) <=> (!x y z. P x y z)
+  forall P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)
+  forall P:A->B->C->bool. (forall(x,y,z). P x y z) <=> (forall x y z. P x y z)
   (~p <=> ~q) ==> (p <=> q)
-  !P:A->B->C->bool. (?(x,y,z). P x y z) <=> (?x y z. P x y z)
-  !P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))
+  forall P:A->B->C->bool. (?(x,y,z). P x y z) <=> (?x y z. P x y z)
+  forall P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))
   (\\ (x:A,y:B). P x y:bool) = (\\p. P (FST p) (SND p))
-  !P Q. (?x:A y:B. P x y) /\\ (!x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)
+  forall P Q. (?x:A y:B. P x y) /\\ (forall x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)
   ((x,y) = a) <=> (x = FST a) /\\ (y = SND a)
   a /\\ T <=> a
   (x = x) <=> T

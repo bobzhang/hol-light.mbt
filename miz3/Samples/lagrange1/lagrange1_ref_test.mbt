@@ -12770,7 +12770,7 @@ test "miz3/Samples/lagrange1 matches miz3/Samples/lagrange1.ml" {
       #|0..0..1..2..7..13..23..36..53..72..122..176..282..417..621..854..1233..1647..2249..solved at 2264
       #|0..0..1..2..3..7..14..28..51..87..131..solved at 170
       #|miz3/Samples/lagrange1 quotations (279):
-      #|  group(g,(**),i,(e:A)) <=>\n    (e IN g) /\\ (!x. x IN g ==> i(x) IN g) /\\\n    (!x y. x IN g /\\ y IN g ==> x**y IN g) /\\\n    (!x y z. x IN g /\\ y IN g /\\ z IN g ==> x**(y**z) = (x**y)**z) /\\\n    (!x. x IN g ==> x**e = x /\\ e**x = x) /\\\n    (!x. x IN g ==> x**i(x) = e /\\ i(x)**x = e)
+      #|  group(g,(**),i,(e:A)) <=>\n    (e IN g) /\\ (forall x. x IN g ==> i(x) IN g) /\\\n    (forall x y. x IN g /\\ y IN g ==> x**y IN g) /\\\n    (forall x y z. x IN g /\\ y IN g /\\ z IN g ==> x**(y**z) = (x**y)**z) /\\\n    (forall x. x IN g ==> x**e = x /\\ e**x = x) /\\\n    (forall x. x IN g ==> x**i(x) = e /\\ i(x)**x = e)
       #|  subgroup h (g,(**),i,(e:A)) <=> h SUBSET g /\\ group(h,(**),i,e)
       #|  :error
       #|  :A->bool

@@ -87263,27 +87263,27 @@ Warning: inventing type variables
 0..0..2..4..solved at 8
 0..0..1..2..solved at 9
 Examples/misiurewicz quotations (493):
-  !f z. (f has_complex_derivative f') (at z)\n         ==> ((\\w. cexp(f w)) has_complex_derivative (f' * cexp(f z))) (at z)
+  forall f z. (f has_complex_derivative f') (at z)\n         ==> ((\\w. cexp(f w)) has_complex_derivative (f' * cexp(f z))) (at z)
   (f has_complex_derivative f') net
-  !f z. f complex_differentiable at z\n         ==> (\\w. cexp(f w)) complex_differentiable at z
-  !f z. f complex_differentiable at z\n         ==> complex_derivative (\\w. cexp(f w)) z =\n             complex_derivative f z * cexp(f z)
-  !n z. (ITER n cexp) complex_differentiable at z
-  !n z. (ITER n cexp) continuous at z
-  !n s. (ITER n cexp) holomorphic_on s
-  !n s. (ITER n cexp) continuous_on s
+  forall f z. f complex_differentiable at z\n         ==> (\\w. cexp(f w)) complex_differentiable at z
+  forall f z. f complex_differentiable at z\n         ==> complex_derivative (\\w. cexp(f w)) z =\n             complex_derivative f z * cexp(f z)
+  forall n z. (ITER n cexp) complex_differentiable at z
+  forall n z. (ITER n cexp) continuous at z
+  forall n s. (ITER n cexp) holomorphic_on s
+  forall n s. (ITER n cexp) continuous_on s
   w:complex
   ITER n cexp z
   abs(Im(ITER n cexp z)) * norm(cexp (ITER n cexp z))
   n = 0
   z:complex
-  !n z. 1 <= n\n         ==> abs(Im(ITER n cexp z)) <= norm(complex_derivative(ITER n cexp) z)
+  forall n z. 1 <= n\n         ==> abs(Im(ITER n cexp z)) <= norm(complex_derivative(ITER n cexp) z)
   (x + l) + &1 - l <= (e * &2) / &2 <=> &1 + x <= e
   z - l:real = x ==> z = x + l
   x = Re z - log(&2)
   abs(Im z)
   pi / &3
   exp(Re z) / &2
-  !z. abs(Im z) <= pi / &3 ==> Re(cexp z) >= Re z + (&1 - log(&2))
+  forall z. abs(Im z) <= pi / &3 ==> Re(cexp z) >= Re z + (&1 - log(&2))
   m * a <= b ==> c >= &2 * b  ==> (&2 * m) * a <= c
   m:num
   d:num
@@ -87292,7 +87292,7 @@ Examples/misiurewicz quotations (493):
   d:num
   pi / &3 / abs(Im (ITER N cexp z))
   &2
-  !n. abs(Im(ITER n cexp z)) <= pi / &3
+  forall n. abs(Im(ITER n cexp z)) <= pi / &3
   z + m * l <= n ==> s >= n + l ==> z + (m + &1) * l <= s
   m:num
   n:num
@@ -87305,9 +87305,9 @@ Examples/misiurewicz quotations (493):
   N:num
   log(&5) - Re z
   &1 - log(&2)
-  ?N. !n. N <= n\n            ==> abs(Im(ITER (n + 1) cexp z)) >= &2 * abs(Im(ITER n cexp z))
+  ?N. forall n. N <= n\n            ==> abs(Im(ITER (n + 1) cexp z)) >= &2 * abs(Im(ITER n cexp z))
   n:num
-  !n. &0 < abs(Im(ITER n cexp z))
+  forall n. &0 < abs(Im(ITER n cexp z))
   (&16 / &5) pow 2
   (pi / &3) pow 2 <= a <=> pi pow 2 <= &9 * a
   (pi / &3) pow 2
@@ -87316,19 +87316,19 @@ Examples/misiurewicz quotations (493):
   Cx x
   0
   &0 <= x /\\ x <= pi / &3 ==> x <= pi
-  (!x. P(--x) <=> P x) /\\ (!x. &0 <= x ==> P x) ==> !x. P x
+  (forall x. P(--x) <=> P x) /\\ (forall x. &0 <= x ==> P x) ==> forall x. P x
   x:real
   Im(ITER n cexp z)
   n:num
   e * x >= (y * e) * z <=> e * y * z <= e * x
-  !n. abs(Im(ITER (n + 1) cexp z)) >=\n        (&2 / &5 * exp(Re(ITER n cexp z))) * abs(Im(ITER n cexp z))
-  (?n. P n) <=> (!n. ~P n) ==> F
-  !z. ~(real z) ==> ?n. abs(Im(ITER n cexp z)) > pi / &3
+  forall n. abs(Im(ITER (n + 1) cexp z)) >=\n        (&2 / &5 * exp(Re(ITER n cexp z))) * abs(Im(ITER n cexp z))
+  (?n. P n) <=> (forall n. ~P n) ==> F
+  forall z. ~(real z) ==> ?n. abs(Im(ITER n cexp z)) > pi / &3
   a * b = Cx(&1) ==> ~(a = Cx(&0))
   n * r / s:real = (r * n) / s
   norm(complex_derivative f z)
   z:complex
-  t SUBSET IMAGE f s\n    ==> (!x. x IN s ==> P(f x)) ==> !x. x IN t ==> P x
+  t SUBSET IMAGE f s\n    ==> (forall x. x IN s ==> P(f x)) ==> forall x. x IN t ==> P x
   t / s * r:real = r / s * t
   s <= t ==> norm(w - b) <= s ==> dist(b,w) <= t
   :real
@@ -87341,8 +87341,8 @@ Examples/misiurewicz quotations (493):
   w:complex
   (z:num->complex) nn
   nn:num
-  !n:num. z n IN ball(b:complex,r)
-  !n:num. (f:complex->complex) (z n) IN ball (f b,t)
+  forall n:num. z n IN ball(b:complex,r)
+  forall n:num. (f:complex->complex) (z n) IN ball (f b,t)
   x IN s ==> s SUBSET t ==> x IN t
   sequentially
   f:complex->complex
@@ -87353,7 +87353,7 @@ Examples/misiurewicz quotations (493):
   w:complex
   z:num->complex
   cball(b:complex,t / s * r)
-  !n. (z:num->complex) n IN cball(b,t / s * r)
+  forall n. (z:num->complex) n IN cball(b,t / s * r)
   z:num->complex
   s SUBSET t ==> t INTER s = s
   c IN closure(IMAGE (f:complex->complex) (ball (b,r)) INTER\n                 ball(f b,t))
@@ -87375,7 +87375,7 @@ Examples/misiurewicz quotations (493):
   ITER n cexp
   n:num
   s <= &0 \\/ &0 < s
-  !n b r s.\n        &0 < r /\\\n        (!w z. w IN ball(b,r) /\\ z IN ball(b,r) /\\\n               ITER n cexp w = ITER n cexp z\n               ==> w = z) /\\\n        (!z. z IN ball(b,r)\n             ==> s <= r * norm(complex_derivative (ITER n cexp) z))\n        ==> ball(ITER n cexp b,s) SUBSET IMAGE (ITER n cexp) (ball(b,r))
+  forall n b r s.\n        &0 < r /\\\n        (forall w z. w IN ball(b,r) /\\ z IN ball(b,r) /\\\n               ITER n cexp w = ITER n cexp z\n               ==> w = z) /\\\n        (forall z. z IN ball(b,r)\n             ==> s <= r * norm(complex_derivative (ITER n cexp) z))\n        ==> ball(ITER n cexp b,s) SUBSET IMAGE (ITER n cexp) (ball(b,r))
   b:complex
   a:complex
   b:complex
@@ -87401,7 +87401,7 @@ Examples/misiurewicz quotations (493):
   z:complex
   z:complex
   SUC n
-  DISJOINT (IMAGE f s) t ==> !P. (!z. ~(z IN t) ==> P z)\n         ==> !z. z IN s ==> P(f z)
+  DISJOINT (IMAGE f s) t ==> forall P. (forall z. ~(z IN t) ==> P z)\n         ==> forall z. z IN s ==> P(f z)
   z:complex
   z:complex
   (z:complex) IN v
@@ -87409,16 +87409,16 @@ Examples/misiurewicz quotations (493):
   &0 < x / &3 <=> &0 < x
   ITER (r (SUC n)) cexp = ITER (r(SUC n) - r n) cexp o ITER (r n) cexp
   0
-  DISJOINT (IMAGE f s) t ==> (!z. ~(z IN t) ==> P z)\n         ==> !z. z IN s ==> P(f z)
+  DISJOINT (IMAGE f s) t ==> (forall z. ~(z IN t) ==> P z)\n         ==> forall z. z IN s ==> P(f z)
   z:complex
   z:complex
   (z:complex) IN v
   abs(Im(ITER (r 0) cexp z))
   z:complex
-  !n z. z IN v\n          ==> (pi / &3) pow n <= norm(complex_derivative (ITER (r n) cexp) z)
-  !m n. m < n ==> (r:num->num) m < r n
+  forall n z. z IN v\n          ==> (pi / &3) pow n <= norm(complex_derivative (ITER (r n) cexp) z)
+  forall m n. m < n ==> (r:num->num) m < r n
   m < n ==> 0 < n
-  ?r. ((!n. 0 < r n) /\\\n         (!n. DISJOINT (IMAGE (ITER (r n) cexp) v)\n              {z | abs (Im z) <= pi / &3})) /\\\n        (!n. r n < r(SUC n))
+  ?r. ((forall n. 0 < r n) /\\\n         (forall n. DISJOINT (IMAGE (ITER (r n) cexp) v)\n              {z | abs (Im z) <= pi / &3})) /\\\n        (forall n. r n < r(SUC n))
   &1 <= x ==> &1 <= &2 * x
   pi <= &2 * x * pi <=> pi * &1 <= pi * &2 * x
   i = &0
@@ -87428,7 +87428,7 @@ Examples/misiurewicz quotations (493):
   z:complex
   w:complex
   (p ==> r) ==> (~p ==> q ==> r) ==> (q ==> r)
-  !n w z. w IN v /\\ z IN v /\\ ITER n cexp w = ITER n cexp z ==> w = z
+  forall n w z. w IN v /\\ z IN v /\\ ITER n cexp w = ITER n cexp z ==> w = z
   ~(pi = &0) ==> (x * pi) / pi = x
   y:complex
   x + &1 <= y /\\ y < floor y + &1 ==> x <= floor y
@@ -87443,17 +87443,17 @@ Examples/misiurewicz quotations (493):
   \\w z. Im(ITER n cexp z) <= Im(ITER n cexp w)
   n:num
   ?n w z. w IN v /\\ z IN v /\\\n            pi <= abs(Im(ITER n cexp w) - Im(ITER n cexp z))
-  (!x. real x ==> x IN t) /\\ z IN s\n        ==> real(f z) ==> ~DISJOINT (IMAGE f s) t
+  (forall x. real x ==> x IN t) /\\ z IN s\n        ==> real(f z) ==> ~DISJOINT (IMAGE f s) t
   d:num
   d:num
   q:num
-  !d. real(ITER (n + SUC d) cexp z)
+  forall d. real(ITER (n + SUC d) cexp z)
   n:num
   ?n z:complex. z IN v /\\ integer(Im(ITER n cexp z) / pi)
   0..N
   (~p ==> p) ==> p
-  ?N. !n. N < n\n            ==> ~DISJOINT (IMAGE (ITER n cexp) v) {z | abs(Im z) <= pi / &3}
-  !v. ~(v = {}) /\\ open v /\\ connected v\n        ==> FINITE {n | DISJOINT (IMAGE (ITER n cexp) v)\n                                 {z | abs(Im z) <= pi / &3}}
+  ?N. forall n. N < n\n            ==> ~DISJOINT (IMAGE (ITER n cexp) v) {z | abs(Im z) <= pi / &3}
+  forall v. ~(v = {}) /\\ open v /\\ connected v\n        ==> FINITE {n | DISJOINT (IMAGE (ITER n cexp) v)\n                                 {z | abs(Im z) <= pi / &3}}
   n:num
   w + pi / &2 % basis 2:complex
   w - pi / &2 % basis 2:complex
@@ -87461,10 +87461,10 @@ Examples/misiurewicz quotations (493):
   s DIFF t = {} <=> s SUBSET t
   s:complex->bool
   IMAGE (ITER (SUC(n + m)) cexp) v
-  u SUBSET w INTER h INTER s ==> (!x. x IN h /\\ x IN s ==> f x IN h)\n         ==> IMAGE f u SUBSET h
+  u SUBSET w INTER h INTER s ==> (forall x. x IN h /\\ x IN s ==> f x IN h)\n         ==> IMAGE f u SUBSET h
   p /\\ (p ==> q) ==> p /\\ q
   p /\\ (p ==> q) ==> p /\\ q
-  !m. IMAGE (ITER (n + m) cexp) v SUBSET (w INTER h INTER s)
+  forall m. IMAGE (ITER (n + m) cexp) v SUBSET (w INTER h INTER s)
   m:num
   x > y <=> ~(x <= y)
   z:complex
@@ -87481,17 +87481,17 @@ Examples/misiurewicz quotations (493):
   N:num
   {n | ~(IMAGE (ITER n cexp) v SUBSET w)} UNION\n       {n | DISJOINT (IMAGE (ITER n cexp) v) s}
   \\n:num. n
-  ?N. (!n. N <= n ==> ~(IMAGE (ITER n cexp) v INTER s = {})) /\\\n        (!n. N <= n ==> IMAGE (ITER n cexp) v SUBSET w)
+  ?N. (forall n. N <= n ==> ~(IMAGE (ITER n cexp) v INTER s = {})) /\\\n        (forall n. N <= n ==> IMAGE (ITER n cexp) v SUBSET w)
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   (~(s INTER (UNIV DIFF t) = {}) /\\ ~(s DIFF (UNIV DIFF t) = {}) ==> F)\n      ==> ~(s SUBSET t) ==> DISJOINT s t
   n:num
   FINITE {n | ~(IMAGE (ITER n cexp) v SUBSET w)}
-  (!z. Q z ==> P z) ==> DISJOINT t {z | P(cexp z)}\n             ==> DISJOINT (IMAGE cexp t) {z | Q z}
-  (!x. x IN s ==> x IN t) ==> DISJOINT u t ==> DISJOINT u s
+  (forall z. Q z ==> P z) ==> DISJOINT t {z | P(cexp z)}\n             ==> DISJOINT (IMAGE cexp t) {z | Q z}
+  (forall x. x IN s ==> x IN t) ==> DISJOINT u t ==> DISJOINT u s
   n:num
   s SUBSET s' /\\ t SUBSET t'\n          ==> (s UNION t) SUBSET (s' UNION t')
   ~(~(s INTER (UNIV DIFF t) = {}) /\\ ~(s DIFF (UNIV DIFF t) = {}))\n          ==> s SUBSET t \\/ DISJOINT s t
-  ((!n. f n SUBSET s \\/ DISJOINT (f n) s) /\\\n         (!n. f n SUBSET t \\/ DISJOINT (f n) t))/\\\n        {n | DISJOINT (f n) s} UNION {n | DISJOINT (f n) t} SUBSET u\n        ==> {n | DISJOINT (f n) (s INTER t)} SUBSET u
+  ((forall n. f n SUBSET s \\/ DISJOINT (f n) s) /\\\n         (forall n. f n SUBSET t \\/ DISJOINT (f n) t))/\\\n        {n | DISJOINT (f n) s} UNION {n | DISJOINT (f n) t} SUBSET u\n        ==> {n | DISJOINT (f n) (s INTER t)} SUBSET u
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   IMAGE (\\n. n - 1)\n                        {n | DISJOINT (IMAGE (ITER n cexp) v)\n                                      {z | abs (Im z) <= pi / &3}}
   n = (n + 1) - 1
@@ -87502,34 +87502,34 @@ Examples/misiurewicz quotations (493):
   IMAGE f u SUBSET t\n      ==> IMAGE f s INTER t = {} ==> s INTER u = {}
   SUC n
   n:num
-  !n. IMAGE (ITER n cexp) v INTER frontier {z | abs(Im(cexp z)) <= &2 * pi} =\n        {}
+  forall n. IMAGE (ITER n cexp) v INTER frontier {z | abs(Im(cexp z)) <= &2 * pi} =\n        {}
   abs x = a ==> x = a \\/ x = --a
-  (!x. x IN t ==> real(f x))\n      ==> IMAGE f s INTER real = {} ==> s INTER t = {}
+  (forall x. x IN t ==> real(f x))\n      ==> IMAGE f s INTER real = {} ==> s INTER t = {}
   SUC n
   n:num
-  !n. IMAGE (ITER n cexp) v INTER frontier {z | abs (Im z) <= &2 * pi} = {}
+  forall n. IMAGE (ITER n cexp) v INTER frontier {z | abs (Im z) <= &2 * pi} = {}
   exp(&4 * &1)
   a <= x /\\ x * &1 <= x * s ==> a <= x * s
   pi < &4 /\\ &2 pow 4 <= x * y ==> &2 * pi < x * y / &2
   abs x = a ==> x = a \\/ x = --a
   abs(sin(Im z)) = sqrt(&3) / &2
   z:complex
-  (!x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
+  (forall x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
   DISJOINT (frontier s) (w INTER h:complex->bool)
   w = {z | abs(Im z) <= &2 * pi /\\ abs(Im(cexp z)) <= &2 * pi}
   s = {z | abs(Im z) <= pi / &3}
   h = {z | Re z > &4}
-  !v. ~(v = {}) /\\ open v /\\ connected v /\\\n       INFINITE {n | IMAGE (ITER n cexp) v SUBSET {z | Re z > &4}}\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
+  forall v. ~(v = {}) /\\ open v /\\ connected v /\\\n       INFINITE {n | IMAGE (ITER n cexp) v SUBSET {z | Re z > &4}}\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
   N + 1
-  IMAGE f s INTER t = {}\n      ==> (!x. ~(x IN u) ==> f x IN t)\n      ==> s SUBSET u
+  IMAGE f s INTER t = {}\n      ==> (forall x. ~(x IN u) ==> f x IN t)\n      ==> s SUBSET u
   n:num
   n:num
   0 INSERT (IMAGE (\\n. n + 1)\n                      {n | IMAGE (ITER n cexp) v SUBSET {z | Re z > &4}})
   v:complex->bool
-  !v. ~(v = {}) /\\ open v /\\ connected v /\\\n         (!n. IMAGE (ITER n cexp) v INTER real = {})\n         ==> FINITE {n | IMAGE (ITER n cexp) v INTER\n                         cball(Cx(&0),exp(&4)) = {}}
+  forall v. ~(v = {}) /\\ open v /\\ connected v /\\\n         (forall n. IMAGE (ITER n cexp) v INTER real = {})\n         ==> FINITE {n | IMAGE (ITER n cexp) v INTER\n                         cball(Cx(&0),exp(&4)) = {}}
   y:complex
   n:num
-  DISJOINT s t <=> !x. x IN s ==> x IN (UNIV DIFF t)
+  DISJOINT s t <=> forall x. x IN s ==> x IN (UNIV DIFF t)
   IMAGE (\\n. r n + (k:num)) ((:num) DIFF (0..N))
   ball(w:complex,min b c)
   ball(w:complex,min b c) SUBSET ball(w,c)
@@ -87550,7 +87550,7 @@ Examples/misiurewicz quotations (493):
   n:num
   n:num
   real(ITER n cexp (g(w:complex)))
-  !p. p /\\ q ==> q
+  forall p. p /\\ q ==> q
   x + n <= y ==> &5 - x <= n ==> y > &4
   n:num
   &5 - Re(g(w:complex))
@@ -87591,7 +87591,7 @@ Examples/misiurewicz quotations (493):
   w:complex
   ~q ==> p /\\ q ==> r
   r:num->num
-  P a /\\ P b ==> IMAGE f s INTER P = {}\n          ==> !x. x IN s ==> ~(f x = a) /\\ ~(f x = b)
+  P a /\\ P b ==> IMAGE f s INTER P = {}\n          ==> forall x. x IN s ==> ~(f x = a) /\\ ~(f x = b)
   n:num
   n:num
   Cx(&1)
@@ -87599,16 +87599,16 @@ Examples/misiurewicz quotations (493):
   v:complex->bool
   {ITER n cexp | n IN (:num)}
   \\n. ITER n cexp
-  ?g r:num->num.\n        g holomorphic_on v /\\\n        (!m n. m < n ==> r m < r n) /\\\n        (!x. x IN v ==> ((\\n. ITER (r n) cexp x) --> g x) sequentially) /\\\n        (!x e. x IN v /\\ &0 < e\n               ==> ?d N. &0 < d /\\\n                         !n y. N <= n /\\ y IN cball(x,d)\n                               ==> norm(ITER (r n) cexp y - g x) < e)
+  ?g r:num->num.\n        g holomorphic_on v /\\\n        (forall m n. m < n ==> r m < r n) /\\\n        (forall x. x IN v ==> ((\\n. ITER (r n) cexp x) --> g x) sequentially) /\\\n        (forall x e. x IN v /\\ &0 < e\n               ==> ?d N. &0 < d /\\\n                         forall n y. N <= n /\\ y IN cball(x,d)\n                               ==> norm(ITER (r n) cexp y - g x) < e)
   s = {z | abs(Im z) <= pi / &3}
   h = {z | Re z > &4}
   d = cball(Cx(&0),exp(&4))
-  !v. ~(v = {}) /\\ open v /\\ connected v\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
+  forall v. ~(v = {}) /\\ open v /\\ connected v\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
   r(M + N + 1):num
   M + N + 1
   x * -- &1 <= &0 <=> &0 <= x
   N < n ==> N <= SUC(SUC n)
-  IMAGE f s INTER t = {} <=> !x. x IN s ==> ~(f x IN t)
+  IMAGE f s INTER t = {} <=> forall x. x IN s ==> ~(f x IN t)
   N:num
   &1
   1
@@ -87632,7 +87632,7 @@ Examples/misiurewicz quotations (493):
   abs x = a ==> x = a \\/ x = --a
   abs(sin(Im z)) = sqrt(&3) / &2
   z:complex
-  (!x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
+  (forall x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
   DISJOINT (frontier s) (w INTER h:complex->bool)
   ~(DISJOINT s real) ==> {x | real x} SUBSET t\n        ==> ~(s INTER t = {})
   s:complex->bool
@@ -87659,9 +87659,9 @@ Examples/misiurewicz quotations (493):
   \\n:num. n
   {x | P x /\\ Q x /\\ R x} =\n      {x | R x} DIFF ({x | ~P x} UNION {x | ~Q x})
   INFINITE {n | IMAGE (ITER n cexp) v SUBSET h /\\\n                   ~(DISJOINT (IMAGE (ITER n cexp) v) real) /\\\n                   ~(IMAGE (ITER n cexp) v SUBSET s)}
-  (!x. real x ==> real(cexp x))\n      ==> ~(s INTER real = {}) ==> ~(IMAGE cexp s INTER real = {})
+  (forall x. real x ==> real(cexp x))\n      ==> ~(s INTER real = {}) ==> ~(IMAGE cexp s INTER real = {})
   d:num
-  (!d:num. ~P (N + d)) ==> (!n. P n ==> n <= N)
+  (forall d:num. ~P (N + d)) ==> (forall n. P n ==> n <= N)
   ~(n:num <= N) ==> n = N + (n - N)
   0..N
   N:num
@@ -87680,7 +87680,7 @@ Examples/misiurewicz quotations (493):
   s = {z | abs(Im z) <= pi / &3}
   h = {z | Re z > &4}
   d + y <= x /\\ &1 + x <= exp x ==> (d + &1) + y <= exp(x) * &1
-  !d. real(ITER (n + d) cexp w) /\\\n            &d + x <= Re(ITER (n + d) cexp w)
+  forall d. real(ITER (n + d) cexp w) /\\\n            &d + x <= Re(ITER (n + d) cexp w)
   d:num
   m + d:num
   (m + n) + d:num = n + (m + d)
@@ -87708,22 +87708,22 @@ Examples/misiurewicz quotations (493):
   ball(z:complex,d)
   c:real
   cball(z:complex,d / &2)
-  !n:num. ?x. x IN IMAGE (ITER (r n) cexp) (ball(z,d / &2)) /\\ norm x <= c
-  !m n. m < n ==> (r:num->num) m < r n
+  forall n:num. ?x. x IN IMAGE (ITER (r n) cexp) (ball(z,d / &2)) /\\ norm x <= c
+  forall m n. m < n ==> (r:num->num) m < r n
   r n = (q:num->num) (p(n:num))
   p:num->num
   q:num->num
-  !m n. m < n ==> (q:num->num) m < q n
+  forall m n. m < n ==> (q:num->num) m < q n
   n >= N + 1 ==> N < n
-  ?q. (!n. ?x. x IN IMAGE (ITER (q n) cexp) (ball(z,d / &2)) /\\\n                   norm(x) <= c) /\\\n          (!n. q n < q(SUC n))
+  ?q. (forall n. ?x. x IN IMAGE (ITER (q n) cexp) (ball(z,d / &2)) /\\\n                   norm(x) <= c) /\\\n          (forall n. q n < q(SUC n))
   c:real
   ball(z:complex,d / &2)
   d:real
   z:complex
   z:complex
   v:complex->bool
-  !v. ~(open v /\\ connected v /\\ bounded v /\\ ~(v = {}) /\\\n          (!c. ?N. !n x. n >= N /\\ x IN v ==> c < norm(ITER n cexp x)))
-  !v. open v /\\ connected v /\\ ~(v = {})\n       ==> ?q. (!m n. m < n ==> (q:num->num) m < q n) /\\\n               !r. (!m n. m < n ==> r m < r n) /\\\n                   ((!x. x IN v\n                         ==> ((\\n. inv (ITER (q(r n)) cexp x)) --> Cx (&0))\n                             sequentially) /\\\n                    (!k c.\n                         compact k /\\ k SUBSET v\n                         ==> (?N. !n x. n >= N /\\ x IN k\n                                        ==> c < norm(ITER (q(r n)) cexp x))) \\/\n                    (?g. g holomorphic_on v /\\\n                         (!x. x IN v\n                              ==> ((\\n. ITER (q(r n)) cexp x) --> g x)\n                                  sequentially) /\\\n                         (!k e.\n                              compact k /\\ k SUBSET v /\\ &0 < e\n                              ==> (?N. !n x.\n                                           n >= N /\\ x IN k\n                                           ==> norm(ITER (q(r n)) cexp x - g x)\n                                                < e)))) ==> F
+  forall v. ~(open v /\\ connected v /\\ bounded v /\\ ~(v = {}) /\\\n          (forall c. ?N. forall n x. n >= N /\\ x IN v ==> c < norm(ITER n cexp x)))
+  forall v. open v /\\ connected v /\\ ~(v = {})\n       ==> ?q. (forall m n. m < n ==> (q:num->num) m < q n) /\\\n               forall r. (forall m n. m < n ==> r m < r n) /\\\n                   ((forall x. x IN v\n                         ==> ((\\n. inv (ITER (q(r n)) cexp x)) --> Cx (&0))\n                             sequentially) /\\\n                    (forall k c.\n                         compact k /\\ k SUBSET v\n                         ==> (?N. forall n x. n >= N /\\ x IN k\n                                        ==> c < norm(ITER (q(r n)) cexp x))) \\/\n                    (?g. g holomorphic_on v /\\\n                         (forall x. x IN v\n                              ==> ((\\n. ITER (q(r n)) cexp x) --> g x)\n                                  sequentially) /\\\n                         (forall k e.\n                              compact k /\\ k SUBSET v /\\ &0 < e\n                              ==> (?N. forall n x.\n                                           n >= N /\\ x IN k\n                                           ==> norm(ITER (q(r n)) cexp x - g x)\n                                                < e)))) ==> F
   SUC k
   k:num
   k:num
@@ -87739,7 +87739,7 @@ Examples/misiurewicz quotations (493):
   \\n:num. ITER (q n) cexp
   q:num->num
   v:complex->bool
-  ((!x. ~P x) ==> F) ==> ?x. P x
+  ((forall x. ~P x) ==> F) ==> ?x. P x
   ball(b:complex,r)
   s SUBSET t ==> a IN IMAGE f s ==> a IN IMAGE f t
   a:complex
@@ -87748,14 +87748,14 @@ Examples/misiurewicz quotations (493):
   b:complex
   b:complex
   ~(u SUBSET {Cx(&0),a})
-  !v a. open v /\\ ~(v = {}) /\\ connected v /\\ ~(Cx(&0) IN v) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) v
-  !u a. open u /\\ ~(u = {}) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) u
+  forall v a. open v /\\ ~(v = {}) /\\ connected v /\\ ~(Cx(&0) IN v) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) v
+  forall u a. open u /\\ ~(u = {}) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) u
   b:complex
   u:complex->bool
   b:complex
   ~(s SUBSET {z}) ==> ?a. a IN s /\\ ~(a = z)
   ~(v SUBSET {Cx(&0)})
-  !u v. open u /\\ ~(u = {}) /\\ open v /\\ ~(v = {})\n         ==> ?n. ~(IMAGE (ITER n cexp) u INTER v = {})
+  forall u v. open u /\\ ~(u = {}) /\\ open v /\\ ~(v = {})\n         ==> ?n. ~(IMAGE (ITER n cexp) u INTER v = {})
 HAS_COMPLEX_DERIVATIVE_CEXP_COMPOSE =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) (((#has_complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(net(cart(real,tybit0(1))),bool))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f':cart(real,tybit0(1))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (((#has_complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(net(cart(real,tybit0(1))),bool))) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f':cart(real,tybit0(1))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) z:cart(real,tybit0(1)))))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1)))))))))
 COMPLEX_DIFFERENTIABLE_CEXP_COMPOSE =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1)))))))))
 COMPLEX_DERIVATIVE_CEXP_COMPOSE =  |- (#!:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) z:cart(real,tybit0(1)))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) z:cart(real,tybit0(1)))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) z:cart(real,tybit0(1)))))))))))

@@ -577,7 +577,7 @@ pub fn iffe() -> @kernel.Thm {
 /// allE
 fn step_23() -> Unit raise {
   let t69 = @tactics.then_tac(mimp_tac, @meson.meson_tac(@list.List([])))
-  alle_c.set(@tactics.prove(@parser.parse_term("(!x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r"), t69))
+  alle_c.set(@tactics.prove(@parser.parse_term("(forall x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r"), t69))
 }
 
 ///|

@@ -197,24 +197,24 @@ Warning: inventing type variables
 trivia quotations (20):
   (o) (f:B->C) g = \\x:A. f(g(x))
   I = \\x:A. x
-  !f:B->C. !g:A->B. !x:A. (f o g) x = f(g(x))
-  !f:C->D. !g:B->C. !h:A->B. f o (g o h) = (f o g) o h
-  !x:A. I x = x
-  !f:A->B. (I o f = f) /\\ (f o I = f)
+  forall f:B->C. forall g:A->B. forall x:A. (f o g) x = f(g(x))
+  forall f:C->D. forall g:B->C. forall h:A->B. f o (g o h) = (f o g) o h
+  forall x:A. I x = x
+  forall f:A->B. (I o f = f) /\\ (f o I = f)
   T
   ?b:bool. b
   one = @x:1. T
   one_REP a
-  !v:1. v = one
-  !f g. f = (g:A->1)
-  !P. P one ==> !x. P x
+  forall v:1. v = one
+  forall f g. f = (g:A->1)
+  forall P. P one ==> forall x. P x
   \\x:1. e:A
-  !e:A. ?fn. fn one = e
-  !e:A. ?!fn. fn one = e
-  (!x. P x) <=> P one
+  forall e:A. ?fn. fn one = e
+  forall e:A. ?!fn. fn one = e
+  (forall x. P x) <=> P one
   (p <=> q) <=> (~p <=> ~q)
   (?x. P x) <=> P one
-  !f:1->A. (\\x. f one) = f
+  forall f:1->A. (\\x. f one) = f
 o_DEF =  |- (#!:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#=:fun(fun('A,'C),fun(fun('A,'C),bool)) ((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B))) (\x:'A. (f:fun('B,'C) (g:fun('A,'B) x:'A))))))))
 I_DEF =  |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #I:fun('A,'A)) (\x:'A. x:'A))
 o_THM =  |- (#!:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('C,fun('C,bool)) (((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B)) x:'A)) (f:fun('B,'C) (g:fun('A,'B) x:'A)))))))))

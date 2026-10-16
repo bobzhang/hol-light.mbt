@@ -78373,9 +78373,9 @@ EC/x25519 quotations (206):
   p:num
   ring_char (f:A ring)
   ring_pow f x 2 = ring_of_num f 4 <=>\n    x = ring_of_num f 2 \\/ x = ring_neg f (ring_of_num f 2)
-  !f:A ring.\n        field f /\\\n        ~(ring_char f divides 14802493890)\n        ==> montgomery_nonsingular(curve25519x f)
-  !f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> montgomery_nonsingular(curve25519x f)
-  !f:A ring.\n          field f /\\\n          A IN ring_carrier f /\\\n          x IN ring_carrier f /\\\n          y IN ring_carrier f /\\\n          ~(ring_pow f (ring_add f (ring_mul f (ring_of_num f 2) x) A) 2 =\n            ring_sub f (ring_pow f A 2) (ring_of_num f 4))\n          ==> ring_mul f (ring_1 f) (ring_pow f y 2) =\n              ring_add f (ring_pow f x 3)\n              (ring_add f (ring_mul f A (ring_pow f x 2)) x)\n          ==> (y = ring_0 f <=> x = ring_0 f)
+  forall f:A ring.\n        field f /\\\n        ~(ring_char f divides 14802493890)\n        ==> montgomery_nonsingular(curve25519x f)
+  forall f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> montgomery_nonsingular(curve25519x f)
+  forall f:A ring.\n          field f /\\\n          A IN ring_carrier f /\\\n          x IN ring_carrier f /\\\n          y IN ring_carrier f /\\\n          ~(ring_pow f (ring_add f (ring_mul f (ring_of_num f 2) x) A) 2 =\n            ring_sub f (ring_pow f A 2) (ring_of_num f 4))\n          ==> ring_mul f (ring_1 f) (ring_pow f y 2) =\n              ring_add f (ring_pow f x 3)\n              (ring_add f (ring_mul f A (ring_pow f x 2)) x)\n          ==> (y = ring_0 f <=> x = ring_0 f)
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -78384,19 +78384,19 @@ EC/x25519 quotations (206):
   (x:A) IN ring_carrier f
   x:A
   (z EXP 2 == a) (mod p) ==> ?x:num. (x EXP 2 == a) (mod p)
-  !f X y:A.\n        field f /\\ ring_char f = p_25519 /\\\n        montgomery_curve (curve25519x f) (SOME(ring_of_num f X,y))\n        ==> (y = ring_0 f <=> ring_of_num f X = ring_0 f)
+  forall f X y:A.\n        field f /\\ ring_char f = p_25519 /\\\n        montgomery_curve (curve25519x f) (SOME(ring_of_num f X,y))\n        ==> (y = ring_0 f <=> ring_of_num f X = ring_0 f)
   curve25519x_group (f:A ring) = montgomery_group(curve25519x f)
   curve25519x_group (integer_mod_ring p_25519) = curve25519_group
-  !f:A ring.\n        field f /\\ ~(ring_char f divides 14802493890)\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)
-  !f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)
-  !(f:A ring) n.\n        field f /\\ ring_char f = p_25519\n        ==> group_pow (curve25519x_group f) (SOME(ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)
+  forall f:A ring.\n        field f /\\ ~(ring_char f divides 14802493890)\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)
+  forall f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)
+  forall(f:A ring) n.\n        field f /\\ ring_char f = p_25519\n        ==> group_pow (curve25519x_group f) (SOME(ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)
   quadratic_extension (r:A ring) a =\n        ring((ring_carrier r CROSS ring_carrier r),\n             (ring_0 r,ring_0 r),\n             (ring_1 r,ring_0 r),\n             (\\(x,y). ring_neg r x,ring_neg r y),\n             (\\(x1,y1) (x2,y2). ring_add r x1 x2,ring_add r y1 y2),\n             (\\(x1,y1) (x2,y2).\n                ring_add r (ring_mul r x1 x2)\n                           (ring_mul r (ring_of_num r a) (ring_mul r y1 y2)),\n                ring_add r (ring_mul r x1 y2) (ring_mul r x2 y1)))
-  (!(r:A ring) a. ring_carrier(quadratic_extension r a) =\n                   ring_carrier r CROSS ring_carrier r) /\\\n   (!(r:A ring) a. ring_0 (quadratic_extension r a) =\n                   (ring_0 r,ring_0 r)) /\\\n   (!(r:A ring) a. ring_1 (quadratic_extension r a) =\n                   (ring_1 r,ring_0 r)) /\\\n   (!(r:A ring) a. ring_neg (quadratic_extension r a) =\n                   \\(x,y). ring_neg r x,ring_neg r y) /\\\n   (!(r:A ring) a. ring_add (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2). ring_add r x1 x2,ring_add r y1 y2) /\\\n   (!(r:A ring) a. ring_mul (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2).\n                     ring_add r (ring_mul r x1 x2)\n                                (ring_mul r (ring_of_num r a)\n                                            (ring_mul r y1 y2)),\n                     ring_add r (ring_mul r x1 y2) (ring_mul r x2 y1))
-  !(r:A ring) a.\n    ring_homomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))
-  !(r:A ring) a.\n    ring_monomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))
-  !(r:A ring) a n.\n        ring_of_num (quadratic_extension r a) n = (ring_of_num r n,ring_0 r)
-  !(r:A ring) a n.\n        ring_of_int (quadratic_extension r a) n = (ring_of_int r n,ring_0 r)
-  !(r:A ring) a. ring_char (quadratic_extension r a) = ring_char r
+  (forall(r:A ring) a. ring_carrier(quadratic_extension r a) =\n                   ring_carrier r CROSS ring_carrier r) /\\\n   (forall(r:A ring) a. ring_0 (quadratic_extension r a) =\n                   (ring_0 r,ring_0 r)) /\\\n   (forall(r:A ring) a. ring_1 (quadratic_extension r a) =\n                   (ring_1 r,ring_0 r)) /\\\n   (forall(r:A ring) a. ring_neg (quadratic_extension r a) =\n                   \\(x,y). ring_neg r x,ring_neg r y) /\\\n   (forall(r:A ring) a. ring_add (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2). ring_add r x1 x2,ring_add r y1 y2) /\\\n   (forall(r:A ring) a. ring_mul (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2).\n                     ring_add r (ring_mul r x1 x2)\n                                (ring_mul r (ring_of_num r a)\n                                            (ring_mul r y1 y2)),\n                     ring_add r (ring_mul r x1 y2) (ring_mul r x2 y1))
+  forall(r:A ring) a.\n    ring_homomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))
+  forall(r:A ring) a.\n    ring_monomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))
+  forall(r:A ring) a n.\n        ring_of_num (quadratic_extension r a) n = (ring_of_num r n,ring_0 r)
+  forall(r:A ring) a n.\n        ring_of_int (quadratic_extension r a) n = (ring_of_int r n,ring_0 r)
+  forall(r:A ring) a. ring_char (quadratic_extension r a) = ring_char r
   x:A
   ring_div r (ring_neg r y) d:A
   ring_div r x d:A
@@ -78405,7 +78405,7 @@ EC/x25519 quotations (206):
   d:A = ring_sub r (ring_pow r x 2)\n                               (ring_mul r (ring_of_num r a)\n                                           (ring_pow r y 2))
   y:A
   x:A
-  !(r:A ring) a.\n        field r /\\\n        (!d. d IN ring_carrier r ==> ~(ring_pow r d 2 = ring_of_num r a))\n        ==> field(quadratic_extension r a)
+  forall(r:A ring) a.\n        field r /\\\n        (forall d. d IN ring_carrier r ==> ~(ring_pow r d 2 = ring_of_num r a))\n        ==> field(quadratic_extension r a)
   :A
   (x:A) IN ring_carrier f
   x:A
@@ -78435,7 +78435,7 @@ EC/x25519 quotations (206):
   a EXP ((p_25519 - 1) DIV 2)
   1
   p_25519
-  !a. ?x. (x EXP 2 == a) (mod p_25519) \\/ (x EXP 2 == 2 * a) (mod p_25519)
+  forall a. ?x. (x EXP 2 == a) (mod p_25519) \\/ (x EXP 2 == 2 * a) (mod p_25519)
   (m EXP 2 == t * n) (mod p) /\\ (t * i == 1) (mod p)\n    ==> (t * (m * i) EXP 2 == n) (mod p)
   m * inverse_mod p_25519 2
   0
@@ -78446,9 +78446,9 @@ EC/x25519 quotations (206):
   &p:int = &0 \\/ &0:int < &p
   ~(&p:int < &0)
   &p_25519:int
-  !p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)
+  forall p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)
   p /\\ q <=> ~(p ==> ~q)
-  !n. ?x. x IN ring_carrier sqintmod_field /\\\n           ring_pow sqintmod_field x 2 = ring_of_num sqintmod_field n
+  forall n. ?x. x IN ring_carrier sqintmod_field /\\\n           ring_pow sqintmod_field x 2 = ring_of_num sqintmod_field n
   x25519_ladderstep b P (P0,P1) =\n        if b then (montgomery_xzdiffadd curve25519 P P1 P0,\n                   montgomery_xzdouble curve25519 P1)\n        else (montgomery_xzdouble curve25519 P0,\n              montgomery_xzdiffadd curve25519 P P1 P0)
   x25519_ladder n P =\n    if n = 0 then ((&1,&0),P)\n    else x25519_ladderstep (n MOD 2 = 1) P (x25519_ladder (n DIV 2) P)
   :P
@@ -78504,8 +78504,8 @@ EC/x25519 quotations (206):
   n DIV 2 < n <=> ~(n = 0)
   n DIV 2
   n:num
-  !(f:A ring) x y n.\n        field f /\\ ring_char f = p_25519 /\\\n        SOME(ring_of_num f x,y) IN group_carrier (curve25519x_group f) /\\\n        ~(ring_of_num f x = ring_0 f)\n        ==> let (X,Z),(X',Z') = x25519_ladder n (&x,&1) in\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) n)\n                            (ring_of_int f X,ring_of_int f Z) /\\\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) (n+1))\n                            (ring_of_int f X',ring_of_int f Z')
-  !n q. purex25519(n,q) < p_25519
+  forall(f:A ring) x y n.\n        field f /\\ ring_char f = p_25519 /\\\n        SOME(ring_of_num f x,y) IN group_carrier (curve25519x_group f) /\\\n        ~(ring_of_num f x = ring_0 f)\n        ==> let (X,Z),(X',Z') = x25519_ladder n (&x,&1) in\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) n)\n                            (ring_of_int f X,ring_of_int f Z) /\\\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) (n+1))\n                            (ring_of_int f X',ring_of_int f Z')
+  forall n q. purex25519(n,q) < p_25519
   &(inverse_mod p_25519 (num_of_int (Zn rem &p_25519))) *\n    &(num_of_int (Zn rem &p_25519)):int
   f:A ring
   f:A ring
@@ -78535,7 +78535,7 @@ EC/x25519 quotations (206):
   q:num
   n:num
   f:A ring
-  !(f:A ring) n q Q.\n        field f /\\ ring_char f = p_25519 /\\\n        Q IN group_carrier(curve25519x_group f) /\\\n        montgomery_xmap f Q = ring_of_num f q\n        ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n            ring_of_num f (purex25519(n,q))
+  forall(f:A ring) n q Q.\n        field f /\\ ring_char f = p_25519 /\\\n        Q IN group_carrier(curve25519x_group f) /\\\n        montgomery_xmap f Q = ring_of_num f q\n        ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n            ring_of_num f (purex25519(n,q))
   p /\\ q <=> ~(p ==> ~q)
   ring_of_num sqintmod_field q
   ring_of_num sqintmod_field q = ring_0 sqintmod_field
@@ -78546,13 +78546,13 @@ EC/x25519 quotations (206):
   Q:((int#int)#(int#int))option
   ?Q. Q IN group_carrier (curve25519x_group sqintmod_field) /\\\n        montgomery_xmap sqintmod_field Q = ring_of_num sqintmod_field q
   ring_of_num sqintmod_field s =\n    ring_of_num sqintmod_field (purex25519(n,q))
-  !n q s. purex25519(n,q) = s <=>\n           s < p_25519 /\\\n           !Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n               montgomery_xmap sqintmod_field Q =\n               ring_of_num sqintmod_field q\n               ==> montgomery_xmap sqintmod_field\n                     (group_pow (curve25519x_group sqintmod_field) Q n) =\n                   ring_of_num sqintmod_field s
-  !n q. purex25519(n,q) =\n         @s. s < p_25519 /\\\n             !Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n                 montgomery_xmap sqintmod_field Q =\n                 ring_of_num sqintmod_field q\n                 ==> montgomery_xmap sqintmod_field\n                       (group_pow (curve25519x_group sqintmod_field) Q n) =\n                     ring_of_num sqintmod_field s
-  !n q. purex25519(n,q MOD p_25519) = purex25519(n,q)
-  !n q s. s < p_25519 /\\\n           (!(f:(int#int)ring) Q.\n                field f /\\ ring_char f = p_25519 /\\\n                Q IN group_carrier(curve25519x_group f) /\\\n                montgomery_xmap f Q = ring_of_num f q\n                ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n                    ring_of_num f s)\n           ==> purex25519(n,q) = s
+  forall n q s. purex25519(n,q) = s <=>\n           s < p_25519 /\\\n           forall Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n               montgomery_xmap sqintmod_field Q =\n               ring_of_num sqintmod_field q\n               ==> montgomery_xmap sqintmod_field\n                     (group_pow (curve25519x_group sqintmod_field) Q n) =\n                   ring_of_num sqintmod_field s
+  forall n q. purex25519(n,q) =\n         @s. s < p_25519 /\\\n             forall Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n                 montgomery_xmap sqintmod_field Q =\n                 ring_of_num sqintmod_field q\n                 ==> montgomery_xmap sqintmod_field\n                       (group_pow (curve25519x_group sqintmod_field) Q n) =\n                     ring_of_num sqintmod_field s
+  forall n q. purex25519(n,q MOD p_25519) = purex25519(n,q)
+  forall n q s. s < p_25519 /\\\n           (forall(f:(int#int)ring) Q.\n                field f /\\ ring_char f = p_25519 /\\\n                Q IN group_carrier(curve25519x_group f) /\\\n                montgomery_xmap f Q = ring_of_num f q\n                ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n                    ring_of_num f s)\n           ==> purex25519(n,q) = s
   rfcx25519(n,q) =\n    purex25519(2 EXP 254 + (n MOD 2 EXP 254 - n MOD 8),\n               q MOD 2 EXP 255)
   a + 8 * i = 1 * a + 8 * i
-  !n q. n IN {2 EXP 254 + 8 * i | i < 2 EXP 251} /\\ q < 2 EXP 255\n         ==> rfcx25519(n,q) = purex25519(n,q)
+  forall n q. n IN {2 EXP 254 + 8 * i | i < 2 EXP 251} /\\ q < 2 EXP 255\n         ==> rfcx25519(n,q) = purex25519(n,q)
   C_25519
   9
   m:num
@@ -78569,7 +78569,7 @@ EC/x25519 quotations (206):
   n MOD 2 EXP 254
   n MOD 2 EXP 254 < 2 EXP 254
   n MOD 8 = n MOD 2 EXP 254 MOD 2 EXP 3
-  !n. ~(rfcx25519(n,9) = 0)
+  forall n. ~(rfcx25519(n,9) = 0)
 curve25519x =  |- ((#=:fun(prod(ring('A),prod('A,'A)),fun(prod(ring('A),prod('A,'A)),bool)) (#curve25519x:fun(ring('A),prod(ring('A),prod('A,'A))) f:ring('A))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) #A_25519:num)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
 curve25519x_curve25519 =  |- ((#=:fun(prod(ring(int),prod(int,int)),fun(prod(ring(int),prod(int,int)),bool)) (#curve25519x:fun(ring(int),prod(ring(int),prod(int,int))) (#integer_mod_ring:fun(num,ring(int)) #p_25519:num))) #curve25519:prod(ring(int),prod(int,int)))
 MONTGOMERY_NONSINGULAR_CURVE25519X_GEN =  |- (#!:fun(fun(ring('A),bool),bool) (\f:ring('A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))))))))))))))))))))))))))) (#montgomery_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) (#curve25519x:fun(ring('A),prod(ring('A),prod('A,'A))) f:ring('A))))))

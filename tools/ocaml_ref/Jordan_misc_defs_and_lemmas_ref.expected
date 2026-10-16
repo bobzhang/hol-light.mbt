@@ -6272,14 +6272,14 @@ Warning: inventing type variables
 priority is now real
 Jordan/misc_defs_and_lemmas quotations (605):
   dirac_delta (i:num) =\n     (\\j. if (i=j) then (&.1) else (&.0))
-  min_num (X:num->bool) = @m. (m IN X) /\\ (!n. (n IN X) ==> (m <= n))
+  min_num (X:num->bool) = @m. (m IN X) /\\ (forall n. (n IN X) ==> (m <= n))
   ~(n' < n) ==> (n <=| n') 
-  r = @m. (X:num->bool) m /\\ (!n. X n ==> m <=| n)
+  r = @m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)
   n:num
-  \\m. (X:num->bool) m /\\ (!n. X n ==> m <=| n)
+  \\m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)
   X:num->bool
-  ?n. (X:num->bool) n /\\ (!m. m <| n ==> ~X m)
-  !(X:num->bool) c. (X c) ==> (X (min_num X) /\\ (min_num X <=| c))
+  ?n. (X:num->bool) n /\\ (forall m. m <| n ==> ~X m)
+  forall(X:num->bool) c. (X c) ==> (X (min_num X) /\\ (min_num X <=| c))
   max_real x y =\n        if (y <. x) then x else y
   min_real x y =\n        if (x <. y) then x else y
   deriv f x = @d. (f diffl d)(x)
@@ -6291,14 +6291,14 @@ Jordan/misc_defs_and_lemmas quotations (605):
   &.0 < (y+x) \\/ (y+x <=. (&.0))
   (a <=. b) <=> (&.0 <= (b - a))
   ( *. )
-  !x y. (&.0 <=. x) /\\ (&.0 <=. y) /\\ (x*.x <=. y*.y) ==> (x <=. y)
+  forall x y. (&.0 <=. x) /\\ (&.0 <=. y) /\\ (x*.x <=. y*.y) ==> (x <=. y)
   x <=| M ==> (x <=| M+ u)
   (i:num) = n
   (M:num) + (t:num->num) n
   (n <=| m) /\\ (~(m = n)) ==> (SUC n <=| m)
   m = (n:num)
-  !m. (n<=|m) ==> (b m =0)
-  ((b:num->num) (n) = 0) /\\ (!m. ~(m=n) ==> (b m = t m))
+  forall m. (n<=|m) ==> (b m =0)
+  ((b:num->num) (n) = 0) /\\ (forall m. ~(m=n) ==> (b m = t m))
   b = \\m. (if (m=n) then 0 else (t (m:num)) )
   (a=0) ==> (a <=|0)
   0
@@ -6307,7 +6307,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   n:num
   t:num->num
   t:num->num
-  !(t:num->num). (?n. !m. (n <=| m) ==> (t m = 0)) ==>\n      (?M. !i. (t i <=| M))
+  forall(t:num->num). (?n. forall m. (n <=| m) ==> (t m = 0)) ==>\n      (?M. forall i. (t i <=| M))
   b:num->num
   b:num->num
   b:num->num
@@ -6318,7 +6318,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   b:num->num
   b:num->num
   inv x * y = y* inv x
-  !x y z. (&.0 <. x) ==> ((inv(x)*y < z) <=> (y <. x*z))
+  forall x y z. (&.0 <. x) ==> ((inv(x)*y < z) <=> (y <. x*z))
   (x <. &.0) ==> (x <=. &.0)
   ((x <. &.0) ==> ~(&.0 <=. x))
   --. (y:real)
@@ -6328,52 +6328,52 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (&.0 < x) \\/ (x = &.0) \\/ (x < &.0)
   (&.0 <. x) ==> ~(x <=. &.0)
   ((&.0 <. x) ==> (&.0 <=. x))
-  ! x y. ((&.0 < x) ==> ((&.0 <= x*y) <=> ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))))
-  !x y. (&.0 <= x*y) <=>\n    ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))
+  forall x y. ((&.0 < x) ==> ((&.0 <= x*y) <=> ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))))
+  forall x y. (&.0 <= x*y) <=>\n    ((&.0 <= x /\\ (&.0 <=. y)) \\/ ((x <= &.0) /\\ (y <= &.0) ))
   (b:real) = (abs t)
   t:real
   t:real
-  !t u. abs(t) <. u ==> t*t <. u*u
+  forall t u. abs(t) <. u ==> t*t <. u*u
   (b:real) = (abs t)
   t:real
   t:real
-  !t u. abs(t) <=. u ==> t*t <=. u*u
+  forall t u. abs(t) <=. u ==> t*t <=. u*u
   n:num
   R/e
-  !n. &.0 < &.2 pow n
-  !R e. ?n. (&.0 <. R)/\\ (&.0 <. e) ==> R*(twopow(--: (&:n))) <. e
+  forall n. &.0 < &.2 pow n
+  forall R e. ?n. (&.0 <. R)/\\ (&.0 <. e) ==> R*(twopow(--: (&:n))) <. e
   TAGB
   \\(n,m) f. (sm:num->num->(num->real)->real) n m f
-  (!f n. sm n 0 f = &1) /\\ (!f m n. sm  n (SUC m) f = sm n m f * f(n + m))
-  ?prod. (!f n.  prod(n,0) f = &1) /\\\n         (!f m n. prod(n,SUC m) f = prod(n,m) f * f(n + m))
-  !n m. (prod(n,0) f = &1) /\\\n   (prod(n,SUC m) f = prod(n,m) f * f(n + m))
+  (forall f n. sm n 0 f = &1) /\\ (forall f m n. sm  n (SUC m) f = sm n m f * f(n + m))
+  ?prod. (forall f n.  prod(n,0) f = &1) /\\\n         (forall f m n. prod(n,SUC m) f = prod(n,m) f * f(n + m))
+  forall n m. (prod(n,0) f = &1) /\\\n   (prod(n,SUC m) f = prod(n,m) f * f(n + m))
   0+|n = n
   n+| (SUC p) = (SUC (n+|p))
-  !f n p. prod(0,n) f * prod(n,p) f = prod(0,n + p) f
-  !f m n. abs(prod(m,n) f) = prod(m,n) (\\n. abs(f n))
+  forall f n p. prod(0,n) f * prod(n,p) f = prod(0,n + p) f
+  forall f m n. abs(prod(m,n) f) = prod(m,n) (\\n. abs(f n))
   r <| (n+| m) ==> (r <| (SUC n +| m))
   (m<=| (m+|n))/\\ (m +| n <| (SUC n +| m))
-  !f g m n. (!r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (prod(m,n) f = prod(m,n) g)
+  forall f g m n. (forall r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (prod(m,n) f = prod(m,n) g)
   m+|n
-  !f. (!n. &0 <= f(n)) ==> !m n. &0 <= prod(m,n) f
+  forall f. (forall n. &0 <= f(n)) ==> forall m n. &0 <= prod(m,n) f
   m <=| (m +| n)
   n:num
   n:num
-  !f m n.\n     (!n. m <= n ==> &0 <= f(n))\n     ==> &0 <= prod(m,n) f
+  forall f m n.\n     (forall n. m <= n ==> &0 <= f(n))\n     ==> &0 <= prod(m,n) f
   ||. (||. x) = (||. x)
-  !f m n. abs(prod(m,n) (\\m. abs(f m))) = prod(m,n) (\\m. abs(f m))
+  forall f m n. abs(prod(m,n) (\\m. abs(f m))) = prod(m,n) (\\m. abs(f m))
   (x = (&.0)) ==> (y *. x = (&.0))
   (x = (&.0)) ==> (x *. y = (&.0))
   p <| (n+| m)
-  !f m n. (?p. (m <= p /\\ (p < (n+| m)) /\\ (f p = (&.0)))) ==>\n         (prod(m,n) f = &0)
+  forall f m n. (?p. (m <= p /\\ (p < (n+| m)) /\\ (f p = (&.0)))) ==>\n         (prod(m,n) f = &0)
   (~(p <| (n+|m)) ==> ((p <| ((SUC n) +| m)) ==> (p = ((m +| n)))))
-  !f g m n. prod(m,n) (\\n. f(n) * g(n)) = prod(m,n) f * prod(m,n) g
-  !f c m n. prod(m,n) (\\n. c * f(n)) = (c **. n) * prod(m,n) f
-  !(f:A->B) a b. SURJ f a b ==> (b = (IMAGE f a))
-  !a b (f:A->B). FINITE a /\\ (SURJ f a b) ==> FINITE b
+  forall f g m n. prod(m,n) (\\n. f(n) * g(n)) = prod(m,n) f * prod(m,n) g
+  forall f c m n. prod(m,n) (\\n. c * f(n)) = (c **. n) * prod(m,n) f
+  forall(f:A->B) a b. SURJ f a b ==> (b = (IMAGE f a))
+  forall a b (f:A->B). FINITE a /\\ (SURJ f a b) ==> FINITE b
   u:B->A
-  !y. ?u. ((y IN b) ==> ((u IN a) /\\ ((f:A->B) u = y)))
-  !a b (f:A->B). (SURJ f a b) ==> (?(g:B->A). (INJ g b a))
+  forall y. ?u. ((y IN b) ==> ((u IN a) /\\ ((f:A->B) u = y)))
+  forall a b (f:A->B). (SURJ f a b) ==> (?(g:B->A). (INJ g b a))
   x:A->bool
   (?)
   (IN)
@@ -6382,47 +6382,47 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (X DIFF t):A->bool
   (?)
   c:A
-  !(X:A->bool)  V.\n     (X DIFF (INTERS V) = UNIONS (IMAGE ((DIFF) X) V))
-  !X (A:A->bool).  (A IN X) ==> (INTERS X SUBSET A)
+  forall(X:A->bool)  V.\n     (X DIFF (INTERS V) = UNIONS (IMAGE ((DIFF) X) V))
+  forall X (A:A->bool).  (A IN X) ==> (INTERS X SUBSET A)
   X:A->bool
-  !X (U:(A->bool)->bool). (U X) ==> (X SUBSET (UNIONS U))
-  !(f:A->B) a. SURJ f a (IMAGE f a)
+  forall X (U:(A->bool)->bool). (U X) ==> (X SUBSET (UNIONS U))
+  forall(f:A->B) a. SURJ f a (IMAGE f a)
   (SUBSET)
   y:B
   {x | (x IN (X:A->bool))/\\ (f x IN (Y:B->bool)) }
-  !(f:A->B) X Y. (Y SUBSET (IMAGE f X)) ==>\n    (?Z. (Z SUBSET X) /\\ (Y = IMAGE f Z))
+  forall(f:A->B) X Y. (Y SUBSET (IMAGE f X)) ==>\n    (?Z. (Z SUBSET X) /\\ (Y = IMAGE f Z))
   y:B
   A INTER (u:A->bool)
   (?)
   y:A
   y:A
   ((C SUBSET (B:A->bool)) /\\ (C SUBSET A) /\\ ((A INTER B) SUBSET C)) ==> ((B INTER A) = C)
-  !(U:(A->bool)->bool) A. (((UNIONS U) INTER A) =\n       (UNIONS (IMAGE ((INTER) A) U)))
-  !U (X:A->bool). (!A. (A IN U) ==> (A SUBSET X))  ==> (UNIONS U SUBSET X)
-  !X A (B:A->bool). (X SUBSET (A INTER B)) <=> (X SUBSET A) /\\ (X SUBSET B)
-  !X. ~(X = {}) <=> (? (u:A). (u IN X))
-  !A B. (A SUBSET B) ==>(UNIONS (A:(A->bool)->bool) SUBSET (UNIONS B))
+  forall(U:(A->bool)->bool) A. (((UNIONS U) INTER A) =\n       (UNIONS (IMAGE ((INTER) A) U)))
+  forall U (X:A->bool). (forall A. (A IN U) ==> (A SUBSET X))  ==> (UNIONS U SUBSET X)
+  forall X A (B:A->bool). (X SUBSET (A INTER B)) <=> (X SUBSET A) /\\ (X SUBSET B)
+  forall X. ~(X = {}) <=> (? (u:A). (u IN X))
+  forall A B. (A SUBSET B) ==>(UNIONS (A:(A->bool)->bool) SUBSET (UNIONS B))
   x':(A->bool)->bool
   t':(A->bool)
   (x:A) IN t
   (t':(A->bool)->bool)
   UNIONS (t':(A->bool)->bool)
-  !(X:((A->bool)->bool)->bool).\n    UNIONS (UNIONS X) = (UNIONS (IMAGE UNIONS X))
-  !X A. (?(x:A->bool). (A x /\\ (x SUBSET X))) ==> ((INTERS A) SUBSET X)
+  forall(X:((A->bool)->bool)->bool).\n    UNIONS (UNIONS X) = (UNIONS (IMAGE UNIONS X))
+  forall X A. (?(x:A->bool). (A x /\\ (x SUBSET X))) ==> ((INTERS A) SUBSET X)
   INTERS EMPTY = (UNIV:A->bool)
   preimage dom (f:A->B)\n  Z = {x | (x IN dom) /\\ (f x IN Z)}
-  !f x Z dom. x IN (preimage dom (f:A->B) Z) <=> (x IN dom) /\\ (f x IN Z)
+  forall f x Z dom. x IN (preimage dom (f:A->B) Z) <=> (x IN dom) /\\ (f x IN Z)
   supp (f:A->B) = \\ x.  ~(f x = (CHOICE (UNIV:B ->bool)) )
-  func a b = (\\ (f:A->B). ((!x. (x IN a) ==> (f x IN b)) /\\\n              ((supp f) SUBSET a))) 
-  reflexive (f:A->A->bool) <=> (!x. f x x)
-  symmetric (f:A->A->bool) <=> (!x y. f x y ==> f y x)
-  transitive (f:A->A->bool) <=> (!x y z. f x y /\\ f y z ==> f x z)
+  func a b = (\\ (f:A->B). ((forall x. (x IN a) ==> (f x IN b)) /\\\n              ((supp f) SUBSET a))) 
+  reflexive (f:A->A->bool) <=> (forall x. f x x)
+  symmetric (f:A->A->bool) <=> (forall x y. f x y ==> f y x)
+  transitive (f:A->A->bool) <=> (forall x y z. f x y /\\ f y z ==> f x z)
   equivalence_relation (f:A->A->bool) <=>\n    (reflexive f) /\\ (symmetric f) /\\ (transitive f)
-  partition (A:A->bool) SA <=> (UNIONS SA = A) /\\\n   (!a b. ((a IN SA) /\\ (b IN SA) /\\ (~(a = b)) ==> ({} = (a INTER b))))
-  !X (A:A->bool). (A SUBSET X) ==> ((X DIFF (X DIFF A)) = A)
-  !P (x:A). (?y. P y /\\ (x = y)) <=> P x
+  partition (A:A->bool) SA <=> (UNIONS SA = A) /\\\n   (forall a b. ((a IN SA) /\\ (b IN SA) /\\ (~(a = b)) ==> ({} = (a INTER b))))
+  forall X (A:A->bool). (A SUBSET X) ==> ((X DIFF (X DIFF A)) = A)
+  forall P (x:A). (?y. P y /\\ (x = y)) <=> P x
   \\x:A. x
-  !s:A->bool. s >=_c s
+  forall s:A->bool. s >=_c s
   n:num < N
   n:num
   n:num
@@ -6433,7 +6433,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   SUC N
   N:num
   0
-  !s:A->bool. FINITE s ==> ?n:num. {x | x < n} >=_c s
+  forall s:A->bool. FINITE s ==> ?n:num. {x | x < n} >=_c s
   COUNTABLE (UNIV:num->bool)
   SUC a = a+| 1
   n:num
@@ -6473,9 +6473,9 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (x:(A->bool)->num) a
   a:A->bool
   a:A->bool
-  !a y. (a IN (A:(A->bool)->bool)) /\\ (y IN a) ==> (? (u:num) (v:num). ( a = f u) /\\ (y = g a v))
+  forall a y. (a IN (A:(A->bool)->bool)) /\\ (y IN a) ==> (? (u:num) (v:num). ( a = f u) /\\ (y = g a v))
   g:(A->bool)->num->A
-  !A:(A->bool)->bool. (COUNTABLE A) /\\\n      (!a. (a IN A) ==> (COUNTABLE a)) ==> (COUNTABLE (UNIONS A))
+  forall A:(A->bool)->bool. (COUNTABLE A) /\\\n      (forall a. (a IN A) ==> (COUNTABLE a)) ==> (COUNTABLE (UNIONS A))
   TAGB
   TAGB
   TAGB
@@ -6483,27 +6483,27 @@ Jordan/misc_defs_and_lemmas quotations (605):
   x':A
   y:B
   (f':A->B) o (f:num->A)
-  !(A:A->bool) (B:B->bool) . (COUNTABLE A) /\\ (?f. (B SUBSET IMAGE f A)) ==>\n        (COUNTABLE B)
+  forall(A:A->bool) (B:B->bool) . (COUNTABLE A) /\\ (?f. (B SUBSET IMAGE f A)) ==>\n        (COUNTABLE B)
   f:A->B
   A:A->bool
-  !(A:A->bool) (B:B->bool). (COUNTABLE A) /\\ (A >=_c B) ==>\n     (COUNTABLE B)
+  forall(A:A->bool) (B:B->bool). (COUNTABLE A) /\\ (A >=_c B) ==>\n     (COUNTABLE B)
   I:num->num
-  !n. COUNTABLE {x | x <| n}
+  forall n. COUNTABLE {x | x <| n}
   n:num
-  !(A:A->bool). (FINITE A) ==> (COUNTABLE A)
+  forall(A:A->bool). (FINITE A) ==> (COUNTABLE A)
   ~ (FINITE (UNIV:num->bool))
   ({u | i <| u} UNION {m | m <=| i}) = UNIV
-  !i. ({u | i <| u} UNION {m | m <=| i}) = UNIV
+  forall i. ({u | i <| u} UNION {m | m <=| i}) = UNIV
   ({u | i <| u} UNION {m | m <=| i}) = UNIV
   i:num
-  !i. ~ (FINITE {u | i <| u})
+  forall i. ~ (FINITE {u | i <| u})
   s INTER t SUBSET (s:A->bool)
-  !s (t:A->bool). (FINITE s ==> FINITE(s INTER t)) /\\ (FINITE t ==> FINITE (s INTER t))
+  forall s (t:A->bool). (FINITE s ==> FINITE(s INTER t)) /\\ (FINITE t ==> FINITE (s INTER t))
   TAGB
   TAGB
   i:num
   J = (J INTER {u | (i <| u)}) UNION (J INTER {m | m <=| i})
-  !i J. (FINITE (J INTER {u | (i <| u)})) ==> (FINITE J)
+  forall i J. (FINITE (J INTER {u | (i <| u)})) ==> (FINITE J)
   (SUC n = j -| i) ==> (0 < j -| i)
   (i<=| j')
   (n = j'-|i)
@@ -6517,7 +6517,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   i:num
   i:num
   ?n. n = j -| i
-  !(f:num->A->bool). (!i. f i SUBSET f (SUC i)) ==> (! i j. ( i <=| j) ==> (f i SUBSET f j))
+  forall(f:num->A->bool). (forall i. f i SUBSET f (SUC i)) ==> (forall i j. ( i <=| j) ==> (f i SUBSET f j))
   TAGB
   TAGB
   TAGB
@@ -6534,7 +6534,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   i:num
   i:num
   ?n. n = j -| i
-  !(f:num->A->bool). (!i. f (SUC i) SUBSET (f i)) ==> (! i j. ( i <=| j) ==> (f j SUBSET f i))
+  forall(f:num->A->bool). (forall i. f (SUC i) SUBSET (f i)) ==> (forall i j. ( i <=| j) ==> (f j SUBSET f i))
   TAGB
   TAGB
   TAGB
@@ -6548,7 +6548,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   j = (x:A)
   {i | I' i /\\ (C ((f:A->B) i))} = UNIONS (IMAGE (\\b. {i | I' i /\\ ((C INTER b) (f i))}) B)
   P ==> (~P ==> F)
-  !I (f:A->B) B C. (~(FINITE {i | (I i) /\\ (C (f i))})) /\\ (FINITE B) /\\\n    (C SUBSET (UNIONS B)) ==>\n    (?b. (B b) /\\ ~(FINITE {i | (I i) /\\ (C INTER b) (f i) }))
+  forall I (f:A->B) B C. (~(FINITE {i | (I i) /\\ (C (f i))})) /\\ (FINITE B) /\\\n    (C SUBSET (UNIONS B)) ==>\n    (?b. (B b) /\\ ~(FINITE {i | (I i) /\\ (C INTER b) (f i) }))
   TAGB
   TAGB
   TAGB
@@ -6559,22 +6559,22 @@ Jordan/misc_defs_and_lemmas quotations (605):
   &.a
   IMAGE (n:real->num) s
   FINITE (IMAGE (n:real->num) s)
-  !(s:real->bool). FINITE s ==> (?a. !x. x IN s ==> (x <=. a))
+  forall(s:real->bool). FINITE s ==> (?a. forall x. x IN s ==> (x <=. a))
   TAGB
   TAGB
   TAGB
-  !s. (UNIONS (s:(A->bool)->bool)) = (UNIONS (s DELETE (EMPTY)))
+  forall s. (UNIONS (s:(A->bool)->bool)) = (UNIONS (s DELETE (EMPTY)))
   SUPP (f:A->B) = \\ x.  ~(f x = (CHOICE (UNIV:B ->bool)) )
-  FUN a b = (\\ (f:A->B). ((!x. (x IN a) ==> (f x IN b)) /\\\n              ((SUPP f) SUBSET a))) 
+  FUN a b = (\\ (f:A->B). ((forall x. (x IN a) ==> (f x IN b)) /\\\n              ((SUPP f) SUBSET a))) 
   compose f g = \\x. (f (g x))
-  !(f:num ->num) (g:num->num) (h:num->num).\n      (compose f (compose g h)) = (compose (compose f g) h)
-  !(f:A->B) (g:B->C) s t u.\n      INJ f s t /\\ (INJ g t u) ==>\n  (INJ (compose g f) s u)
-  !(f:A->B) (g:B->C) s t u.\n   SURJ f s t /\\ (SURJ g t u) ==> (SURJ (compose g f) s u)
-  !(f:A->B) s t (g:B->C) u.\n    BIJ f s t /\\ (BIJ g t u) ==> (BIJ (compose g f) s u)
+  forall(f:num ->num) (g:num->num) (h:num->num).\n      (compose f (compose g h)) = (compose (compose f g) h)
+  forall(f:A->B) (g:B->C) s t u.\n      INJ f s t /\\ (INJ g t u) ==>\n  (INJ (compose g f) s u)
+  forall(f:A->B) (g:B->C) s t u.\n   SURJ f s t /\\ (SURJ g t u) ==> (SURJ (compose g f) s u)
+  forall(f:A->B) s t (g:B->C) u.\n    BIJ f s t /\\ (BIJ g t u) ==> (BIJ (compose g f) s u)
   u:B->A
-  ?u. !y. ((y IN b)==> ((u y IN a) /\\ ((f:A->B) (u y) = y)))
-  !A B. (A ==> (?x. (B x))) ==> (?(x:B->A). (A ==> (B x)))
-  ?INV. (! (f:A->B) a b. (SURJ f a b) ==> ((INJ (INV f a b) b a) /\\\n       (!(x:B). (x IN b) ==> (f ((INV f a b) x) = x))))
+  ?u. forall y. ((y IN b)==> ((u y IN a) /\\ ((f:A->B) (u y) = y)))
+  forall A B. (A ==> (?x. (B x))) ==> (?(x:B->A). (A ==> (B x)))
+  ?INV. (forall (f:A->B) a b. (SURJ f a b) ==> ((INJ (INV f a b) b a) /\\\n       (forall(x:B). (x IN b) ==> (f ((INV f a b) x) = x))))
   f:A->B
   f:A->B
   f:A->B
@@ -6582,13 +6582,13 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (f:A->B) (INV f a b (f x)) = (f x)
   ((f:A->B) x) IN b
   (f:A->B) x
-  !(f:A->B) a b. (BIJ f a b) ==> ((BIJ (INV f a b) b a))
+  forall(f:A->B) a b. (BIJ f a b) ==> ((BIJ (INV f a b) b a))
   x:A
   INV (f:A->B) a b (f x)
   x:A
   INV (f:A->B) a b (f x)
-  !(f:A->B) a b x y. (BIJ f a b) /\\ (x IN a) /\\ (y IN b) ==> ((INV f a b y = x) <=> (f x = y))
-  !a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (FINITE b)
+  forall(f:A->B) a b x y. (BIJ f a b) /\\ (x IN a) /\\ (y IN b) ==> ((INV f a b y = x) <=> (f x = y))
+  forall a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (FINITE b)
   ({x | (x IN a) /\\ ((f:A->B) x IN b)})
   B ==> (A==>B)
   B ==> (A==>B)
@@ -6596,18 +6596,18 @@ Jordan/misc_defs_and_lemmas quotations (605):
   a:A->bool
   b:B->bool
   f:A->B
-  !a b (f:A->B). FINITE b /\\ (INJ f a b) ==> (FINITE a)
-  !a b (f:A->B). FINITE b /\\ (BIJ f a b) ==> (FINITE a)
-  !a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (CARD a = (CARD b))
-  !(x:num#num) i j. ((FST x = i) /\\ (SND x = j)) <=> (x = (i,j))
+  forall a b (f:A->B). FINITE b /\\ (INJ f a b) ==> (FINITE a)
+  forall a b (f:A->B). FINITE b /\\ (BIJ f a b) ==> (FINITE a)
+  forall a b (f:A->B). FINITE a /\\ (BIJ f a b) ==> (CARD a = (CARD b))
+  forall(x:num#num) i j. ((FST x = i) /\\ (SND x = j)) <=> (x = (i,j))
   SUC 0
-  !(u:A->bool). (SING u ) ==> (CARD u = 1)
-  !(x:A). FINITE ({x})
+  forall(u:A->bool). (SING u ) ==> (CARD u = 1)
+  forall(x:A). FINITE ({x})
   g:A
   (f:A->num) (g:A)
-  !f P.((!(n:num). !(g:A). (f g = n) ==> (P g)) ==> (!g. (P g)))
+  forall f P.((forall(n:num). forall(g:A). (f g = n) ==> (P g)) ==> (forall g. (P g)))
   f:A->B
-  !b. FUN (EMPTY:A->bool) b = { (\\ (u:A). (CHOICE (UNIV:B->bool))) }
+  forall b. FUN (EMPTY:A->bool) b = { (\\ (u:A). (CHOICE (UNIV:B->bool))) }
   (((t:A)=s) <=> T) \\/ ((t=s) <=> F)
   t:A
   B ==> (A==>B)
@@ -6656,14 +6656,14 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (f:A->B)
   (A /\\ (A ==> B) /\\ (A ==>C))  ==> ((A/\\ B) /\\ (A /\\ C))
   \\ f. ((\\ x. (if (x=(s:A)) then (CHOICE (UNIV:B->bool)) else (f x))),(f s))
-  !a b s. (~((s:A) IN a) ==>\n      (?F.   (BIJ F (FUN (s INSERT a) b)\n           { (u,v) | (u IN (FUN a b)) /\\ ((v:B) IN b) }\n           )))
+  forall a b s. (~((s:A) IN a) ==>\n      (?F.   (BIJ F (FUN (s INSERT a) b)\n           { (u,v) | (u IN (FUN a b)) /\\ ((v:B) IN b) }\n           )))
   FST:((A->B)#B)->(A->B)
   FST:((A->B)#B)->(A->B)
   x:A
   t:A
   t:A
   ~(x=0) ==> (SUC (x -| 1) = x)
-  !(a:(A->bool)). ((FINITE a) /\\ (~(a=EMPTY))) ==>\n   (SUC (CARD (a DELETE (CHOICE a))) = (CARD a))
+  forall(a:(A->bool)). ((FINITE a) /\\ (~(a=EMPTY))) ==>\n   (SUC (CARD (a DELETE (CHOICE a))) = (CARD a))
   B ==> (A==>B)
   B ==> (A==>B)
   B ==> (A==>B)
@@ -6683,21 +6683,21 @@ Jordan/misc_defs_and_lemmas quotations (605):
   :A->B
   FUN (a:A->bool) (b:B->bool)
   FINITE (FUN (a:A->bool) (b:B->bool))
-  !x. (x = (SUC n)) ==> (~(x = 0))
+  forall x. (x = (SUC n)) ==> (~(x = 0))
   ~((a:A->bool) = EMPTY)
   (CHOICE (a:A->bool))
   b:B->bool
   ((a:A->bool) DELETE (CHOICE a))
   FUN ((a:A->bool) DELETE CHOICE a) (b:B->bool) HAS_SIZE CARD b **| CARD (a DELETE CHOICE a)
-  !n. (SUC n -| 1) = n
-  !x. (x = (SUC n)) ==> (~(x = 0))
+  forall n. (SUC n -| 1) = n
+  forall x. (x = (SUC n)) ==> (~(x = 0))
   CHOICE (a:A->bool) IN a
   CARD ((a:A->bool) DELETE (CHOICE a)) = n
   (a:A->bool) = EMPTY
   :A
   :A->bool
   CARD:(A->bool)->num
-  !b a. (FINITE (a:A->bool)) /\\ (FINITE (b:B->bool))\n          ==> ((FUN a b) HAS_SIZE ((CARD b) EXP (CARD a)))
+  forall b a. (FINITE (a:A->bool)) /\\ (FINITE (b:B->bool))\n          ==> ((FUN a b) HAS_SIZE ((CARD b) EXP (CARD a)))
   (a:A->bool) DELETE (CHOICE a)
   drop0 (u:A#B) = SND u
   drop1 (u:A#B#C) = SND (SND u)
@@ -6719,7 +6719,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   euclid'euclid_neg
   euclid'euclid_minus:(num->real)->(num->real)->(num->real)
   euclid_plus f g = \\ (i:num). (f i) +. (g i)
-  euclid n v <=> !m. (n <=| m) ==> (v m = &.0)
+  euclid n v <=> forall m. (n <=| m) ==> (v m = &.0)
   euclidean v <=> ?n. euclid n v
   euclid_minus f g = \\(i:num). (f i) -. (g i)
   euclid0 = \\(i:num). &.0
@@ -6728,16 +6728,16 @@ Jordan/misc_defs_and_lemmas quotations (605):
   norm f = sqrt(dot f f)
   d_euclid f g = norm (f - g)
   \\(n,m) f. (sm:num->num->(num->(num->real))->(num->real)) n m f
-  (!f n. sm n 0 f = (\\n. &0)) /\\ (!f m n. sm  n (SUC m) f = sm n m f + f(n + m))
-  ?sum_vector. (!f n. sum_vector(n,0) f = (\\n. &.0)) /\\\n    (!f m n. sum_vector(n,SUC m) f = sum_vector(n,m) f + f(n + m))
+  (forall f n. sm n 0 f = (\\n. &0)) /\\ (forall f m n. sm  n (SUC m) f = sm n m f + f(n + m))
+  ?sum_vector. (forall f n. sum_vector(n,0) f = (\\n. &.0)) /\\\n    (forall f m n. sum_vector(n,SUC m) f = sum_vector(n,m) f + f(n + m))
   mk_segment x y = { u | ?a. (&.0 <=. a) /\\ (a <=. &.1) /\\\n        (u = a *# x + (&.1 - a) *# y) }
   mk_open_segment x y = { u | ?a. (&.0 <. a) /\\ (a <. &.1) /\\\n        (u = a *# x + (&.1 - a) *# y) }
-  convex S <=> !x y. (S x) /\\ (S y) ==> (mk_segment x y SUBSET S)
-  convex_hull S = { u | ?f alpha m. (!n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\ (!n. (n< m) ==> (&.0 <=. (alpha n))) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
-  affine_hull S = { u | ?f alpha m. (!n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
+  convex S <=> forall x y. (S x) /\\ (S y) ==> (mk_segment x y SUBSET S)
+  convex_hull S = { u | ?f alpha m. (forall n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\ (forall n. (n< m) ==> (&.0 <=. (alpha n))) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
+  affine_hull S = { u | ?f alpha m. (forall n. (n< m) ==> (S (f n))) /\\\n    (sum(0,m) alpha = &.1) /\\\n    (u = sum_vector(0,m) (\\n. (alpha n) *# (f n)))}
   mk_line x y =\n   {z| ?t. (z = (t *# x) + ((&.1 - t) *# y)) }
-  affine S <=> !x y. (S x ) /\\ (S y) ==> (mk_line x y SUBSET S)
-  affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (!T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))
+  affine S <=> forall x y. (S x ) /\\ (S y) ==> (mk_line x y SUBSET S)
+  affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (forall T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))
   collinear S <=> (?n. affine_dim n S /\\ (n < 2))
   coplanar S <=> (?n. affine_dim n S /\\ (n < 3))
   line L <=> (affine L) /\\ (affine_dim 1 L)
@@ -6748,45 +6748,45 @@ Jordan/misc_defs_and_lemmas quotations (605):
   mk_angle x y z =\n   (mk_half_set {x} {y}) UNION (mk_half_set {x} {z})
   mk_signed_angle x y z =\n   (mk_half_set {x} {y} , mk_half_set {x} {z})
   mk_convex_cone v (S:(num->real)->bool) =\n    mk_half_set {v} (convex_hull S)
-  packing (S:(num->real)->bool) <=>\n        !x y. ( ((S x) /\\ (S y) /\\ ((d_euclid x y) < (&.2))) ==>\n                (x = y))
-  saturated_packing S <=>\n        (( packing S) /\\\n        (!z. (affine_hull S z)  ==>\n               (?x. ((S x) /\\ ((d_euclid x z) < (&.2))))))
+  packing (S:(num->real)->bool) <=>\n        forall x y. ( ((S x) /\\ (S y) /\\ ((d_euclid x y) < (&.2))) ==>\n                (x = y))
+  saturated_packing S <=>\n        (( packing S) /\\\n        (forall z. (affine_hull S z)  ==>\n               (?x. ((S x) /\\ ((d_euclid x z) < (&.2))))))
   cross_product3 v1 v2 =\n        let (x1 = v1 0) and (x2 = v1 1) and (x3 = v1 2) in\n        let (y1 = v2 0) and (y2 = v2 1) and (y3 = v2 2) in\n        (\\k.\n                (if (k=0) then (x2*y3-x3*y2)\n                else if (k=1) then (x3*y1-x1*y3)\n                else if (k=2) then (x1*y2-x2*y1)\n                else (&0)))
   triple_product v1 v2 v3 =\n        dot v1 (cross_product3 v2 v3)
   mk_triangle v1 v2 v3 =\n  (mk_segment v1 v2) UNION (mk_segment v2 v3) UNION (mk_segment v3 v1)
   mk_interior_triangle v1 v2 v3 =\n     mk_open_half_set (mk_line v1 v2) {v3} INTER\n       (mk_open_half_set (mk_line v2 v3) {v1}) INTER\n       (mk_open_half_set (mk_line v3 v1) {v2})
   mk_triangular_region v1 v2 v3 =\n    (mk_triangle v1 v2 v3) UNION (mk_interior_triangle v1 v2 v3)
-  !L S. convex (mk_half_set L S)
-  !L S . convex (mk_open_half_set L S )
-  !S. (affine_dim 0 S) = (SING S)
-  !S. (convex (convex_hull S))
-  !S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T
-  !S. (affine (affine_hull S))
-  !S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T
-  !x y. ~(x = y) ==> affine_dim 1 (mk_line x y)
-  !S. (affine_hull S) = (affine_hull (convex_hull S))
-  !S. (convex_hull S) = (convex_hull (convex_hull S))
-  !n. affine_dim n (euclid n)
-  !m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)
-  !x y. ~(x = y) ==>\n   (?!L. (L x) /\\ (L y) /\\ (line L))
-  !L. (line L) ==>\n  (?f. (BIJ f L UNIV) /\\\n  (!x y. (L x /\\ L y ==> (d_euclid x y = abs(f x -. f y)))))
-  !n. (affine_dim n P) ==> (?S.\n  (S SUBSET P) /\\ (S HAS_SIZE n) /\\ (affine_dim n S))
-  !P x y. (plane P) /\\ (P x) /\\ (P y) ==>\n  (mk_line x y SUBSET P)
-  !S. (S HAS_SIZE 3) ==> (?P. (plane P) /\\\n   (S SUBSET P))
-  !S. (S HAS_SIZE 3) ==> (collinear S) \\/\n  (?! P. (plane P) /\\ (S SUBSET P))
-  !P Q. (plane P) /\\ (plane Q) ==>\n  (P INTER Q = EMPTY) \\/ (line (P INTER Q)) \\/ (P = Q)
-  !P L. (plane P) /\\ (line L) /\\ (L SUBSET P) ==>\n  (?A B. (A INTER B = EMPTY) /\\ (A INTER L = EMPTY) /\\\n    (B INTER L = EMPTY) /\\ (L UNION A UNION B = P) /\\\n   (!c u. (P c) /\\ (u = mk_open_half_set L {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = L)) /\\\n   (!a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
-  !R P. (space R) /\\ (plane P) /\\ (P SUBSET R) ==>\n  (?A B. (A INTER B = EMRTY) /\\ (A INTER P = EMRTY) /\\\n    (B INTER P = EMRTY) /\\ (P UNION A UNION B = R) /\\\n   (!c u. (R c) /\\ (u = mk_open_half_set P {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = P)) /\\\n     (!a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
-  metric_space (X:A->bool,d:A->A->real)\n   <=>\n   !x y z.\n      (X x) /\\ (X y) /\\ (X z) ==>\n         (((&.0) <=. (d x y)) /\\\n          ((&.0 = d x y) = (x = y)) /\\\n          (d x y = d y x) /\\\n          (d x z <=. d x y + d y z))
+  forall L S. convex (mk_half_set L S)
+  forall L S . convex (mk_open_half_set L S )
+  forall S. (affine_dim 0 S) = (SING S)
+  forall S. (convex (convex_hull S))
+  forall S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T
+  forall S. (affine (affine_hull S))
+  forall S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T
+  forall x y. ~(x = y) ==> affine_dim 1 (mk_line x y)
+  forall S. (affine_hull S) = (affine_hull (convex_hull S))
+  forall S. (convex_hull S) = (convex_hull (convex_hull S))
+  forall n. affine_dim n (euclid n)
+  forall m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)
+  forall x y. ~(x = y) ==>\n   (?!L. (L x) /\\ (L y) /\\ (line L))
+  forall L. (line L) ==>\n  (?f. (BIJ f L UNIV) /\\\n  (forall x y. (L x /\\ L y ==> (d_euclid x y = abs(f x -. f y)))))
+  forall n. (affine_dim n P) ==> (?S.\n  (S SUBSET P) /\\ (S HAS_SIZE n) /\\ (affine_dim n S))
+  forall P x y. (plane P) /\\ (P x) /\\ (P y) ==>\n  (mk_line x y SUBSET P)
+  forall S. (S HAS_SIZE 3) ==> (?P. (plane P) /\\\n   (S SUBSET P))
+  forall S. (S HAS_SIZE 3) ==> (collinear S) \\/\n  (?! P. (plane P) /\\ (S SUBSET P))
+  forall P Q. (plane P) /\\ (plane Q) ==>\n  (P INTER Q = EMPTY) \\/ (line (P INTER Q)) \\/ (P = Q)
+  forall P L. (plane P) /\\ (line L) /\\ (L SUBSET P) ==>\n  (?A B. (A INTER B = EMPTY) /\\ (A INTER L = EMPTY) /\\\n    (B INTER L = EMPTY) /\\ (L UNION A UNION B = P) /\\\n   (forall c u. (P c) /\\ (u = mk_open_half_set L {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = L)) /\\\n   (forall a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
+  forall R P. (space R) /\\ (plane P) /\\ (P SUBSET R) ==>\n  (?A B. (A INTER B = EMRTY) /\\ (A INTER P = EMRTY) /\\\n    (B INTER P = EMRTY) /\\ (P UNION A UNION B = R) /\\\n   (forall c u. (R c) /\\ (u = mk_open_half_set P {c}) ==>\n      (u = A) \\/ (u = B) \\/ (u = P)) /\\\n     (forall a b. (A a) /\\ (B b) ==> ~(segment a b INTER L = EMPTY)))
+  metric_space (X:A->bool,d:A->A->real)\n   <=>\n   forall x y z.\n      (X x) /\\ (X y) /\\ (X z) ==>\n         (((&.0) <=. (d x y)) /\\\n          ((&.0 = d x y) = (x = y)) /\\\n          (d x y = d y x) /\\\n          (d x z <=. d x y + d y z))
   set_translate v X = { z | ?x. (X x) /\\ (z = v + x) }
   set_scale r X = { z | ?x. (X x) /\\ (z = r *# x) }
-  mk_rectangle a b = { z | !(i:num). (a i <=. z i) /\\ (z i <. b i) }
+  mk_rectangle a b = { z | forall(i:num). (a i <=. z i) /\\ (z i <. b i) }
   one_vec n = (\\i. if (i<| n) then (&.1) else (&.0))
   mk_cube n k v =\n    let (r = twopow (--: (&: k))) in\n    let (vv = (\\i. (real_of_int (v i)))) in\n     mk_rectangle (r *# vv) (r *# (vv + (one_vec n)))
-  inner_cube n k A =\n    { v | (mk_cube n k v SUBSET A) /\\\n      (!i. (n <| i) ==> (&:0 = v i)) }
-  outer_cube n k A =\n    { v | ~((mk_cube n k v) INTER A = EMPTY) /\\\n      (!i. (n <| i) ==> (&:0 = v i)) }
+  inner_cube n k A =\n    { v | (mk_cube n k v SUBSET A) /\\\n      (forall i. (n <| i) ==> (&:0 = v i)) }
+  outer_cube n k A =\n    { v | ~((mk_cube n k v) INTER A = EMPTY) /\\\n      (forall i. (n <| i) ==> (&:0 = v i)) }
   inner_vol n k A =\n    (&. (CARD (inner_cube n k A)))*(twopow (--: (&: (n*k))))
   outer_vol n k A =\n    (&. (CARD (outer_cube n k A)))*(twopow (--: (&: (n*k))))
-  euclid_bounded A = (?R. !(x:num->real) i. (A x) ==> (x i <. R))
+  euclid_bounded A = (?R. forall(x:num->real) i. (A x) ==> (x i <. R))
   vol n A = lim (\\k. outer_vol n k A)
   (+):num->(num->num)
   (-):num->(num->num)
@@ -6835,31 +6835,31 @@ Jordan/misc_defs_and_lemmas quotations (605):
   real_of_num:num->real
   summable (\\n. (f (n+k))) /\\ (suminf (\\n. (f (n+k))) <=. (suminf (\\n. (g (n+k)))))
   (\\n. (f (n+ k))) sums (s - (sum(0,k) f))
-  !s f g.  (f sums s) /\\ (summable g) ==>\n    (!k. ((!n. (||. (f (n+k)) <=. (g (n+k)))) ==>\n    ( (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k)))))))
+  forall s f g.  (f sums s) /\\ (summable g) ==>\n    (forall k. ((forall n. (||. (f (n+k)) <=. (g (n+k)))) ==>\n    ( (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k)))))))
   k:num
   k:num
   k:num
   (--. s -. (--. u) <=. x) ==> (--. x <=. (s -. u))
-  (!k. ((!n. (||. ((\\p. (--. (f p))) (n+k))) <=. (g (n+k)))) ==> ((--.s) - (sum(0,k) (\\p. (--. (f p)))) <=. (suminf (\\n. (g (n +k))))))
-  !s f g.  (f sums s) /\\ (!n. (||. (f n) <=. (g n))) /\\\n       (summable g) ==>\n    (!k. (abs (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k))))))
+  (forall k. ((forall n. (||. ((\\p. (--. (f p))) (n+k))) <=. (g (n+k)))) ==> ((--.s) - (sum(0,k) (\\p. (--. (f p)))) <=. (suminf (\\n. (g (n +k))))))
+  forall s f g.  (f sums s) /\\ (forall n. (||. (f n) <=. (g n))) /\\\n       (summable g) ==>\n    (forall k. (abs (s - (sum(0,k) f)) <=. (suminf (\\n. (g (n +| k))))))
   ((&.0 <. (&.n)) /\\ (&.n <=. a)) ==> (inv(a)<=. (inv(&.n)))
   ||.(&.n) = (&.n)
   (a<=.b) ==> (&.n*a <=. (&.n)*b)
   1 <=| n ==> (0 < n)
   (abs((&.4)*.u)<=. (&.4)/(&.9)) /\\ (abs((&.2)*.v)<=. (&.2)/(&.12)) /\\ (abs((&.1)*w) <=. (&.1)/(&.13)) /\\ (abs((&.1)*x) <=. (&.1)/(&.14)) ==> (abs((&.4)*u -(&.2)*v - (&.1)*w - (&.1)*x) <= (&.4/(&.9) +(&.2/(&.12)) + (&.1/(&.13))+ (&.1/(&.14))))
   (&.4/(&.9) +(&.2/(&.12)) + (&.1/(&.13))+ (&.1/(&.14)))
-  !n. (1 <=| n) ==> (abs(&4 / &(8 * n + 1) -\n            &2 / &(8 * n + 4) -\n            &1 / &(8 * n + 5) -\n            &1 / &(8 * n + 6)) <= &.622/(&.819))
+  forall n. (1 <=| n) ==> (abs(&4 / &(8 * n + 1) -\n            &2 / &(8 * n + 4) -\n            &1 / &(8 * n + 5) -\n            &1 / &(8 * n + 6)) <= &.622/(&.819))
   pi_fun n = inv (&.16 **. n) *.\n          (&.4 / &.(8 *| n +| 1) -.\n           &.2 / &.(8 *| n +| 4) -.\n           &.1 / &.(8 *| n +| 5) -.\n           &.1 / &.(8 *| n +| 6))
   pi_bound_fun n = if (n=0) then (&.8) else\n    (((&.15)/(&.16))*(inv(&.16 **. n))) 
   &.0 < (&.16)
   ~(k=0) ==> (1<=| k)
   (&.622)/(&.819) <=. (&.15)/(&.16)
-  !x y z. (&.0 <. z /\\ (y <=. x) ==> (z*y <=. (z*x)))
+  forall x y z. (&.0 <. z /\\ (y <=. x) ==> (z*y <=. (z*x)))
   ||.(&.n) = (&.n)
   a*b = b*.a
-  !k. abs(pi_fun k) <=. (pi_bound_fun k)
+  forall k. abs(pi_fun k) <=. (pi_bound_fun k)
   abs (&.1 / (&. 16)) <. (&.1)
-  !k. (\\n. inv (&16 pow k) * inv (&16 pow n)) sums\n         inv (&16 pow k) * &16 / &15
+  forall k. (\\n. inv (&16 pow k) * inv (&16 pow n)) sums\n         inv (&16 pow k) * &16 / &15
   (b*(a*c) = (b*(&.1))) ==> ((a*b)*c = b)
   (x=y) ==> ((a sums x) ==> (a sums y))
   k:num
@@ -6867,15 +6867,15 @@ Jordan/misc_defs_and_lemmas quotations (605):
   0<| k ==> (~(n+k = 0))
   n:num
   (\\n. pi_bound_fun (n+k)) = (\\n. ((&.15/(&.16))* (inv(&.16)**. k) *. inv(&.16 **. n)))
-  !k. (0<|k) ==> (\\n. (pi_bound_fun (n+k))) sums (inv(&.16 **. k))
+  forall k. (0<|k) ==> (\\n. (pi_bound_fun (n+k))) sums (inv(&.16 **. k))
   suminf (\\n. pi_bound_fun (n + k)) = inv (&.16 **. k)
   pi_bound_fun
   pi_fun
   pi
-  !k. (0<|k) ==> (abs(pi - (sum(0,k) pi_fun)) <=. (inv(&.16 **. (k))))
+  forall k. (0<|k) ==> (abs(pi - (sum(0,k) pi_fun)) <=. (inv(&.16 **. (k))))
   k:num
   2 EXP 4
-  !n. inv (&.16 **. n) = (twopow (--: (&:(4*n)))) 
+  forall n. inv (&.16 **. n) = (twopow (--: (&:(4*n)))) 
 dirac_delta =  |- (#!:fun(fun(num,bool),bool) (\i:num. ((#=:fun(fun(num,real),fun(fun(num,real),bool)) (#dirac_delta:fun(num,fun(num,real)) i:num)) (\j:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(num,fun(num,bool)) i:num) j:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))
 min_num =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\X:fun(num,bool). ((#=:fun(num,fun(num,bool)) (#min_num:fun(fun(num,bool),num) X:fun(num,bool))) (#@:fun(fun(num,bool),num) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) m:num) X:fun(num,bool))) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) X:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))))
 min_least =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\X:fun(num,bool). (#!:fun(fun(num,bool),bool) (\c:num. ((#==>:fun(bool,fun(bool,bool)) (X:fun(num,bool) c:num)) ((#/\:fun(bool,fun(bool,bool)) (X:fun(num,bool) (#min_num:fun(fun(num,bool),num) X:fun(num,bool)))) ((#<=:fun(num,fun(num,bool)) (#min_num:fun(fun(num,bool),num) X:fun(num,bool))) c:num)))))))

@@ -321944,84 +321944,84 @@ test "100/pascal matches 100/pascal.ml" {
       #|100/pascal quotations (119):
       #|  CARD {u:real^3,v}
       #|  {u:real^3,v}
-      #|  !u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
+      #|  forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
       #|  ?x:real^3. ~(x = vec 0)
       #|  x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
       #|  x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-      #|  ((!x. P(dest_dir x)) <=> (!x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-      #|  (!x. x || x) /\\\n   (!x y. x || y <=> y || x) /\\\n   (!x y z. x || y /\\ y || z ==> x || z)
-      #|  !x y. ((||) x = (||) y) <=> x || y
+      #|  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
+      #|  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
+      #|  forall x y. ((||) x = (||) y) <=> x || y
       #|  p':real^3
       #|  p:real^3
-      #|  !p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             !l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-      #|  !l l'. ?p. p _|_ l /\\ p _|_ l'
+      #|  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
+      #|  forall l l'. ?p. p _|_ l /\\ p _|_ l'
       #|  basis 3 :real^3
       #|  basis 2 : real^3
       #|  basis 1 :real^3
       #|  ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
       #|  orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-      #|  !l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
+      #|  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
       #|  a + b:real^3
-      #|  !x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-      #|  !l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
+      #|  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
+      #|  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
       #|  (||)
-      #|  !x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
+      #|  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
       #|  ?x:line. T
       #|  p on l <=> perpl (dest_point p) l
-      #|  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((!p. P (dest_point p)) <=> (!l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-      #|  !p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          !l'. p on l' /\\ p' on l' ==> (l' = l)
-      #|  !l l'. ?p. p on l /\\ p on l'
+      #|  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
+      #|  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
+      #|  forall l l'. ?p. p on l /\\ p on l'
       #|  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-      #|  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
+      #|  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
       #|  projl x = mk_line((||) (mk_dir x))
       #|  projp x = mk_point(projl x)
       #|  dest_dir d
       #|  ?d. l = mk_line((||) d)
-      #|  !l. ?x. ~(x = vec 0) /\\ l = projl x
-      #|  !p. ?x. ~(x = vec 0) /\\ p = projp x
+      #|  forall l. ?x. ~(x = vec 0) /\\ l = projl x
+      #|  forall p. ?x. ~(x = vec 0) /\\ p = projp x
       #|  homop p = homol(dest_point p)
       #|  p = mk_point l <=> dest_point p = l
-      #|  !p. ~(homop p = vec 0) /\\ p = projp(homop p)
+      #|  forall p. ~(homop p = vec 0) /\\ p = projp(homop p)
       #|  parallel x y <=> x cross y = vec 0
-      #|  !p l. p on l <=> orthogonal (homop p) (homol l)
+      #|  forall p l. p on l <=> orthogonal (homop p) (homol l)
       #|  mk_line((||) l) = mk_line((||) l') <=> (||) l = (||) l'
-      #|  !l l'. l = l' <=> parallel (homol l) (homol l')
-      #|  !p p'. p = p' <=> parallel (homop p) (homop p')
+      #|  forall l l'. l = l' <=> parallel (homol l) (homol l')
+      #|  forall p p'. p = p' <=> parallel (homop p) (homop p')
       #|  dest_line(mk_line((||) l)) = (||) l
       #|  dest_line
       #|  projl x
       #|  x:real^3 = vec 0
-      #|  !x. parallel x (homol(projl x))
-      #|  !x. parallel x (homop(projp x))
+      #|  forall x. parallel x (homol(projl x))
+      #|  forall x. parallel x (homop(projp x))
       #|  c = &0
       #|  c:real
       #|  x:real^3 = vec 0
-      #|  !x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
+      #|  forall x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
       #|  bracket[a;b;c] = det(vector[homop a;homop b;homop c])
-      #|  COLLINEAR s <=> ?l. !p. p IN s ==> p on l
-      #|  !a. COLLINEAR {a}
+      #|  COLLINEAR s <=> ?l. forall p. p IN s ==> p on l
+      #|  forall a. COLLINEAR {a}
       #|  a:point = b
-      #|  !a b. COLLINEAR{a,b}
-      #|  !a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
-      #|  !a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
+      #|  forall a b. COLLINEAR{a,b}
+      #|  forall a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
+      #|  forall a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
       #|  homop p1 cross homop p2
       #|  mk_line((||) (mk_dir(homop p1 cross homop p2)))
       #|  p1:point = p2
-      #|  !p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
+      #|  forall p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
       #|  homogeneous_conic con <=>\n    ?a b c d e f.\n       ~(a = &0 /\\ b = &0 /\\ c = &0 /\\ d = &0 /\\ e = &0 /\\ f = &0) /\\\n       con = {x:real^3 | a * x$1 pow 2 + b * x$2 pow 2 + c * x$3 pow 2 +\n                         d * x$1 * x$2 + e * x$1 * x$3 + f * x$2 * x$3 = &0}
       #|  projective_conic con <=>\n        ?c. homogeneous_conic c /\\ con = {p | (homop p) IN c}
-      #|  !con x1 x2 x3 x4 x5 x6.\n        homogeneous_conic con /\\\n        x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n        x4 IN con /\\ x5 IN con /\\ x6 IN con\n        ==> det(vector[x6;x1;x4]) * det(vector[x6;x2;x3]) *\n            det(vector[x5;x1;x3]) * det(vector[x5;x2;x4]) =\n            det(vector[x6;x1;x3]) * det(vector[x6;x2;x4]) *\n            det(vector[x5;x1;x4]) * det(vector[x5;x2;x3])
-      #|  !con p1 p2 p3 p4 p5 p6.\n        projective_conic con /\\\n        p1 IN con /\\ p2 IN con /\\ p3 IN con /\\\n        p4 IN con /\\ p5 IN con /\\ p6 IN con\n        ==> bracket[p6;p1;p4] * bracket[p6;p2;p3] *\n            bracket[p5;p1;p3] * bracket[p5;p2;p4] =\n            bracket[p6;p1;p3] * bracket[p6;p2;p4] *\n            bracket[p5;p1;p4] * bracket[p5;p2;p3]
+      #|  forall con x1 x2 x3 x4 x5 x6.\n        homogeneous_conic con /\\\n        x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n        x4 IN con /\\ x5 IN con /\\ x6 IN con\n        ==> det(vector[x6;x1;x4]) * det(vector[x6;x2;x3]) *\n            det(vector[x5;x1;x3]) * det(vector[x5;x2;x4]) =\n            det(vector[x6;x1;x3]) * det(vector[x6;x2;x4]) *\n            det(vector[x5;x1;x4]) * det(vector[x5;x2;x3])
+      #|  forall con p1 p2 p3 p4 p5 p6.\n        projective_conic con /\\\n        p1 IN con /\\ p2 IN con /\\ p3 IN con /\\\n        p4 IN con /\\ p5 IN con /\\ p6 IN con\n        ==> bracket[p6;p1;p4] * bracket[p6;p2;p3] *\n            bracket[p5;p1;p3] * bracket[p5;p2;p4] =\n            bracket[p6;p1;p3] * bracket[p6;p2;p4] *\n            bracket[p5;p1;p4] * bracket[p5;p2;p3]
       #|  a = b /\\ x:real = y ==> a * x = b * y
       #|  bracket[x1;x2;x5] * bracket[x1;x3;x6] *\n    bracket[x2;x4;x6] * bracket[x3;x4;x5] =\n    bracket[x1;x2;x6] * bracket[x1;x3;x5] *\n    bracket[x2;x4;x5] * bracket[x3;x4;x6] /\\\n    bracket[x1;x5;x7] * bracket[x2;x5;x9] =\n    --bracket[x1;x2;x5] * bracket[x5;x9;x7] /\\\n    bracket[x1;x2;x6] * bracket[x3;x6;x8] =\n    bracket[x1;x3;x6] * bracket[x2;x6;x8] /\\\n    bracket[x2;x4;x5] * bracket[x2;x9;x7] =\n    --bracket[x2;x4;x7] * bracket[x2;x5;x9] /\\\n    bracket[x2;x4;x7] * bracket[x2;x6;x8] =\n    --bracket[x2;x4;x6] * bracket[x2;x8;x7] /\\\n    bracket[x3;x4;x6] * bracket[x3;x5;x8] =\n    bracket[x3;x4;x5] * bracket[x3;x6;x8] /\\\n    bracket[x1;x3;x5] * bracket[x5;x8;x7] =\n    --bracket[x1;x5;x7] * bracket[x3;x5;x8]
-      #|  !q. (p ==> q) /\\ (q ==> r) ==> p ==> r
+      #|  forall q. (p ==> q) /\\ (q ==> r) ==> p ==> r
       #|  a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h ==> p <=>\n                    a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g ==> h ==> p
-      #|  !con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x2,x5,x7} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x4,x6} /\\\n        ~COLLINEAR {x3,x4,x5} /\\\n        ~COLLINEAR {x1,x5,x7} /\\\n        ~COLLINEAR {x2,x5,x9} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x3,x6,x8} /\\\n        ~COLLINEAR {x2,x4,x5} /\\\n        ~COLLINEAR {x2,x4,x7} /\\\n        ~COLLINEAR {x2,x6,x8} /\\\n        ~COLLINEAR {x3,x4,x6} /\\\n        ~COLLINEAR {x3,x5,x8} /\\\n        ~COLLINEAR {x1,x3,x5}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
-      #|  !con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x1,x2,x4} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x1,x3,x4} /\\\n        ~COLLINEAR {x1,x3,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x3,x4} /\\\n        ~COLLINEAR {x2,x3,x5} /\\\n        ~COLLINEAR {x2,x3,x6} /\\\n        ~COLLINEAR {x4,x5,x1} /\\\n        ~COLLINEAR {x4,x5,x2} /\\\n        ~COLLINEAR {x4,x5,x3} /\\\n        ~COLLINEAR {x4,x6,x1} /\\\n        ~COLLINEAR {x4,x6,x2} /\\\n        ~COLLINEAR {x4,x6,x3} /\\\n        ~COLLINEAR {x5,x6,x1} /\\\n        ~COLLINEAR {x5,x6,x2} /\\\n        ~COLLINEAR {x5,x6,x3}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
+      #|  forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x2,x5,x7} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x4,x6} /\\\n        ~COLLINEAR {x3,x4,x5} /\\\n        ~COLLINEAR {x1,x5,x7} /\\\n        ~COLLINEAR {x2,x5,x9} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x3,x6,x8} /\\\n        ~COLLINEAR {x2,x4,x5} /\\\n        ~COLLINEAR {x2,x4,x7} /\\\n        ~COLLINEAR {x2,x6,x8} /\\\n        ~COLLINEAR {x3,x4,x6} /\\\n        ~COLLINEAR {x3,x5,x8} /\\\n        ~COLLINEAR {x1,x3,x5}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
+      #|  forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x1,x2,x4} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x1,x3,x4} /\\\n        ~COLLINEAR {x1,x3,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x3,x4} /\\\n        ~COLLINEAR {x2,x3,x5} /\\\n        ~COLLINEAR {x2,x3,x6} /\\\n        ~COLLINEAR {x4,x5,x1} /\\\n        ~COLLINEAR {x4,x5,x2} /\\\n        ~COLLINEAR {x4,x5,x3} /\\\n        ~COLLINEAR {x4,x6,x1} /\\\n        ~COLLINEAR {x4,x6,x2} /\\\n        ~COLLINEAR {x4,x6,x3} /\\\n        ~COLLINEAR {x5,x6,x1} /\\\n        ~COLLINEAR {x5,x6,x2} /\\\n        ~COLLINEAR {x5,x6,x3}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}
       #|  (~p ==> p) ==> p
       #|  (homogenize:real^2->real^3) x = vector[x$1; x$2; &1]
       #|  projectivize = projp o homogenize
-      #|  !x. ~(homogenize x = vec 0)
+      #|  forall x. ~(homogenize x = vec 0)
       #|  affine_conic con <=>\n    ?a b c d e f.\n       ~(a = &0 /\\ b = &0 /\\ c = &0 /\\ d = &0 /\\ e = &0 /\\ f = &0) /\\\n       con = {x:real^2 | a * x$1 pow 2 + b * x$2 pow 2 + c * x$1 * x$2 +\n                         d * x$1 + e * x$2 + f = &0}
       #|  projp(homogenize c)
       #|  projp(homogenize b)
@@ -322033,7 +322033,7 @@ test "100/pascal matches 100/pascal.ml" {
       #|  homogenize b
       #|  homogenize a
       #|  det(vector[homogenize a; homogenize b; homogenize c]) = &0
-      #|  !a b c. collinear{a,b,c} <=>\n           COLLINEAR{projectivize a,projectivize b,projectivize c}
+      #|  forall a b c. collinear{a,b,c} <=>\n           COLLINEAR{projectivize a,projectivize b,projectivize c}
       #|  ~(k = &0)
       #|  k:real
       #|  x:real^2
@@ -322045,9 +322045,9 @@ test "100/pascal matches 100/pascal.ml" {
       #|  :real
       #|  :real
       #|  (?con' con a b c d e f. P con' con a b c d e f) <=>\n    (?a b d e f c con' con. P con' con a b c d e f)
-      #|  !con. affine_conic con <=> ?con'. projective_conic con' /\\\n                                     con = {x | projectivize x IN con'}
-      #|  !con x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        ~collinear {x1,x2,x4} /\\\n        ~collinear {x1,x2,x5} /\\\n        ~collinear {x1,x2,x6} /\\\n        ~collinear {x1,x3,x4} /\\\n        ~collinear {x1,x3,x5} /\\\n        ~collinear {x1,x3,x6} /\\\n        ~collinear {x2,x3,x4} /\\\n        ~collinear {x2,x3,x5} /\\\n        ~collinear {x2,x3,x6} /\\\n        ~collinear {x4,x5,x1} /\\\n        ~collinear {x4,x5,x2} /\\\n        ~collinear {x4,x5,x3} /\\\n        ~collinear {x4,x6,x1} /\\\n        ~collinear {x4,x6,x2} /\\\n        ~collinear {x4,x6,x3} /\\\n        ~collinear {x5,x6,x1} /\\\n        ~collinear {x5,x6,x2} /\\\n        ~collinear {x5,x6,x3}\n        ==> affine_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            collinear {x1,x9,x5} /\\\n            collinear {x1,x8,x6} /\\\n            collinear {x2,x9,x4} /\\\n            collinear {x2,x7,x6} /\\\n            collinear {x3,x8,x4} /\\\n            collinear {x3,x7,x5}\n            ==> collinear {x7,x8,x9}
-      #|  !r c x y z:real^2.\n        dist(c,x) = r /\\ dist(c,y) = r /\\ dist(c,z) = r /\\\n        ~(x = y) /\\ ~(x = z) /\\ ~(y = z)\n        ==> ~collinear {x,y,z}
+      #|  forall con. affine_conic con <=> ?con'. projective_conic con' /\\\n                                     con = {x | projectivize x IN con'}
+      #|  forall con x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        ~collinear {x1,x2,x4} /\\\n        ~collinear {x1,x2,x5} /\\\n        ~collinear {x1,x2,x6} /\\\n        ~collinear {x1,x3,x4} /\\\n        ~collinear {x1,x3,x5} /\\\n        ~collinear {x1,x3,x6} /\\\n        ~collinear {x2,x3,x4} /\\\n        ~collinear {x2,x3,x5} /\\\n        ~collinear {x2,x3,x6} /\\\n        ~collinear {x4,x5,x1} /\\\n        ~collinear {x4,x5,x2} /\\\n        ~collinear {x4,x5,x3} /\\\n        ~collinear {x4,x6,x1} /\\\n        ~collinear {x4,x6,x2} /\\\n        ~collinear {x4,x6,x3} /\\\n        ~collinear {x5,x6,x1} /\\\n        ~collinear {x5,x6,x2} /\\\n        ~collinear {x5,x6,x3}\n        ==> affine_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            collinear {x1,x9,x5} /\\\n            collinear {x1,x8,x6} /\\\n            collinear {x2,x9,x4} /\\\n            collinear {x2,x7,x6} /\\\n            collinear {x3,x8,x4} /\\\n            collinear {x3,x7,x5}\n            ==> collinear {x7,x8,x9}
+      #|  forall r c x y z:real^2.\n        dist(c,x) = r /\\ dist(c,y) = r /\\ dist(c,z) = r /\\\n        ~(x = y) /\\ ~(x = z) /\\ ~(y = z)\n        ==> ~collinear {x,y,z}
       #|  &1
       #|  &0
       #|  (c:real^2)$1 pow 2 + (c:real^2)$2 pow 2 - r pow 2
@@ -322060,7 +322060,7 @@ test "100/pascal matches 100/pascal.ml" {
       #|  c:real^2
       #|  r:real
       #|  {x:real^2 | dist(c,x) = r}
-      #|  !c r x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        PAIRWISE (\\x y. ~(x = y)) [x1;x2;x3;x4;x5;x6] /\\\n        dist(c,x1) = r /\\ dist(c,x2) = r /\\ dist(c,x3) = r /\\\n        dist(c,x4) = r /\\ dist(c,x5) = r /\\ dist(c,x6) = r /\\\n        collinear {x1,x9,x5} /\\\n        collinear {x1,x8,x6} /\\\n        collinear {x2,x9,x4} /\\\n        collinear {x2,x7,x6} /\\\n        collinear {x3,x8,x4} /\\\n        collinear {x3,x7,x5}\n        ==> collinear {x7,x8,x9}
+      #|  forall c r x1 x2 x3 x4 x5 x6 x7 x8 x9:real^2.\n        PAIRWISE (\\x y. ~(x = y)) [x1;x2;x3;x4;x5;x6] /\\\n        dist(c,x1) = r /\\ dist(c,x2) = r /\\ dist(c,x3) = r /\\\n        dist(c,x4) = r /\\ dist(c,x5) = r /\\ dist(c,x6) = r /\\\n        collinear {x1,x9,x5} /\\\n        collinear {x1,x8,x6} /\\\n        collinear {x2,x9,x4} /\\\n        collinear {x2,x7,x6} /\\\n        collinear {x3,x8,x4} /\\\n        collinear {x3,x7,x5}\n        ==> collinear {x7,x8,x9}
       #|NORMAL_EXISTS =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\u:cart(real,tybit1(1)). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\v:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\w:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) w:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) u:cart(real,tybit1(1))) w:cart(real,tybit1(1)))) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) v:cart(real,tybit1(1))) w:cart(real,tybit1(1)))))))))))
       #|direction_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(direction,bool),bool) (\a:direction. ((#=:fun(direction,fun(direction,bool)) (#mk_dir:fun(cart(real,tybit1(1)),direction) (#dest_dir:fun(direction,cart(real,tybit1(1))) a:direction))) a:direction)))) (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\r:cart(real,tybit1(1)). ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) r:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) (#mk_dir:fun(cart(real,tybit1(1)),direction) r:cart(real,tybit1(1))))) r:cart(real,tybit1(1)))))))
       #|perpdir =  |- (#!:fun(fun(direction,bool),bool) (\x:direction. (#!:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#_|_:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction)))))))

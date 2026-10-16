@@ -16843,7 +16843,7 @@ test "100/primerecip matches 100/primerecip.ml" {
       #|100/primerecip quotations (57):
       #|  n = 0 \\/ 1 <= n
       #|  1
-      #|  !P. P 0 /\\ P 1 /\\ (!n. 1 <= n /\\ P n ==> P(SUC n)) ==> !n. P n
+      #|  forall P. P 0 /\\ P 1 /\\ (forall n. 1 <= n /\\ P n ==> P(SUC n)) ==> forall n. P n
       #|  1 <= SUC n
       #|  sum(1..1) f = f 1 /\\ sum(1..SUC n) f = sum(1..n) f + f(SUC n)
       #|  &6 * &1 * n1 <= &16 * n1 - &5 * n <=> n <= inv(inv(&2)) * n1
@@ -16866,16 +16866,16 @@ test "100/primerecip matches 100/primerecip.ml" {
       #|  b - a <= s2 - s1 ==> a <= s1 ==> b <= s2
       #|  n:num
       #|  &2 pow 5
-      #|  !n. (&3 / (&16 * ln(&32))) * sum(1..n) (\\i. &1 / &i) <=\n       sum(1..32 EXP n) (\\i. if prime(i) then &1 / &i else &0)
+      #|  forall n. (&3 / (&16 * ln(&32))) * sum(1..n) (\\i. &1 / &i) <=\n       sum(1..32 EXP n) (\\i. if prime(i) then &1 / &i else &0)
       #|  &3 / (&32 * ln(&32)) * &n = &3 / (&16 * ln(&32)) * (&n / &2)
       #|  &3 / (&16 * ln(&32)) * sum (1 .. 2 EXP n) (\\i. &1 / &i)
-      #|  !n. &3 / (&32 * ln(&32)) * &n\n       <= sum (1 .. 32 EXP (2 EXP n)) (\\i. if prime i then &1 / &i else &0)
+      #|  forall n. &3 / (&32 * ln(&32)) * &n\n       <= sum (1 .. 32 EXP (2 EXP n)) (\\i. if prime i then &1 / &i else &0)
       #|  M + N:num
       #|  M + N:num
       #|  M:num
       #|  l + &1
       #|  &1
-      #|  !s. (!k. ?N. !n. n >= N ==> sum(1..n) s >= k)\n       ==> ~(convergent(\\n. sum(1..n) s))
+      #|  forall s. (forall k. ?N. forall n. n >= N ==> sum(1..n) s >= k)\n       ==> ~(convergent(\\n. sum(1..n) s))
       #|  1 <= n + 1
       #|  sum(1 .. 32 EXP (2 EXP N)) (\\i. if prime i then &1 / &i else &0)
       #|  &N * &3 / (&32 * ln (&32))

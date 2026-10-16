@@ -88247,16 +88247,16 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|0..0..1..2..3..7..12..solved at 23
       #|0..0..1..2..5..9..15..26..solved at 44
       #|100/isoperimetric quotations (862):
-      #|  !g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> convex hull (path_image g) = closure(inside(path_image g))
-      #|  !g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> frontier(convex hull (path_image g)) = path_image g
+      #|  forall g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> convex hull (path_image g) = closure(inside(path_image g))
+      #|  forall g:real^1->real^2.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        convex(inside(path_image g))\n        ==> frontier(convex hull (path_image g)) = path_image g
       #|  ~(inside(path_image g):real^2->bool = {})
       #|  t = s <=> s SUBSET t /\\ ~(s PSUBSET t)
-      #|  !g:real^1->real^2.\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_image g SUBSET frontier (convex hull path_image g)\n        ==> frontier (convex hull path_image g) = path_image g
+      #|  forall g:real^1->real^2.\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_image g SUBSET frontier (convex hull path_image g)\n        ==> frontier (convex hull path_image g) = path_image g
       #|  abs x <= x <=> &0 <= x
       #|  &2
       #|  IMAGE lift s
       #|  lift o f o drop
-      #|  !f s. real_measurable s /\\\n         f real_measurable_on s /\\\n         (\\x. f x pow 2) real_integrable_on s\n         ==> (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
+      #|  forall f s. real_measurable s /\\\n         f real_measurable_on s /\\\n         (\\x. f x pow 2) real_integrable_on s\n         ==> (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
       #|  x:real
       #|  x:real
       #|  a:real
@@ -88292,7 +88292,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  u:real
       #|  \\x. c * sin(x - a)
       #|  \\x. --(c * cos(x - a))
-      #|  !u v c. u <= v\n            ==> real_integral(real_interval[u,v]) (\\x. c * sin(x - a)) =\n                c * (cos(u - a) - cos(v - a))
+      #|  forall u v c. u <= v\n            ==> real_integral(real_interval[u,v]) (\\x. c * sin(x - a)) =\n                c * (cos(u - a) - cos(v - a))
       #|  z:real
       #|  x / x' = y / y' <=> &0 = y * inv y' - x * inv x'
       #|  y:real
@@ -88313,13 +88313,13 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  f:real->real
       #|  y:real
       #|  x:real
-      #|  (?c. !u. P u ==> f u = c) <=> (!u v. P u /\\ P v ==> f u = f v)
+      #|  (?c. forall u. P u ==> f u = c) <=> (forall u v. P u /\\ P v ==> f u = f v)
       #|  ~(y = &0) ==> (x = c * y <=> x / y = c)
       #|  w:real
-      #|  ?c. !x. u < x /\\ x < v ==> f x = c * sin (x - a)
+      #|  ?c. forall x. u < x /\\ x < v ==> f x = c * sin (x - a)
       #|  v:real
       #|  u:real
-      #|  !u v. &0 <= u /\\ u < v /\\ v <= &2 * pi /\\\n          (!x. u < x /\\ x < v ==> ~(sin(x - a) = &0))\n          ==> ?c. !x. u <= x /\\ x <= v ==> f(x) = c * sin(x - a)
+      #|  forall u v. &0 <= u /\\ u < v /\\ v <= &2 * pi /\\\n          (forall x. u < x /\\ x < v ==> ~(sin(x - a) = &0))\n          ==> ?c. forall x. u <= x /\\ x <= v ==> f(x) = c * sin(x - a)
       #|  (f:real->real) a = &0
       #|  i':real = i
       #|  &2 * (f:real->real) a
@@ -88378,10 +88378,10 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  u:real
       #|  v:real
       #|  u:real
-      #|  !u v. real_interval[u,v] SUBSET real_interval(c,d)\n              ==> g' real_integrable_on real_interval[u,v]
+      #|  forall u v. real_interval[u,v] SUBSET real_interval(c,d)\n              ==> g' real_integrable_on real_interval[u,v]
       #|  (\\x. f' x pow 2) absolutely_real_integrable_on\n        real_interval[&0,&2 * pi] /\\\n        (\\x. (f x - f a) pow 2) absolutely_real_integrable_on\n        real_interval[&0,&2 * pi]
       #|  g' absolutely_real_integrable_on real_interval[c,d]
-      #|  !c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (!x. x IN real_interval(c,d) ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
+      #|  forall c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (forall x. x IN real_interval(c,d) ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
       #|  c:real
       #|  x:real
       #|  x:real
@@ -88442,7 +88442,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  \\x. &2 * ((f:real->real) x - f a) * f' x
       #|  \\x. inv(tan(x - a))
       #|  \\x. ((f:real->real) x - f a) pow 2
-      #|  !c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (!x. x IN real_interval[c,d] ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
+      #|  forall c d. c <= d /\\\n          real_interval[c,d] SUBSET real_interval[&0,&2 * pi] /\\\n          (forall x. x IN real_interval[c,d] ==> ~(sin(x - a) = &0))\n          ==> (g' has_real_integral g d - g c) (real_interval[c,d])
       #|  g' = \\x. f'(x) pow 2 - (f(x) - f(a)) pow 2 -\n              (f'(x) - (f(x) - f(a)) / tan(x - a)) pow 2
       #|  g = \\x. (f(x) - f(a)) pow 2 / tan(x - a)
       #|  a < pi <=> a <= pi /\\ ~(a = pi)
@@ -88470,7 +88470,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  f' absolutely_real_integrable_on real_interval[&0,&2 * pi]
       #|  &2 * pi
       #|  f' real_integrable_on real_interval[&0,&2 * pi]
-      #|  !f f'.\n        (!x. x IN real_interval[&0,&2 * pi]\n             ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n        f(&2 * pi) = f(&0) /\\\n        (f has_real_integral &0) (real_interval[&0,&2 * pi]) /\\\n        (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&2 * pi]\n        ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&2 * pi] /\\\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) <=\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2) /\\\n            (real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) =\n             real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2)\n             ==> ?c a. !x. x IN real_interval[&0,&2 * pi]\n                           ==> f x = c * sin(x - a))
+      #|  forall f f'.\n        (forall x. x IN real_interval[&0,&2 * pi]\n             ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n        f(&2 * pi) = f(&0) /\\\n        (f has_real_integral &0) (real_interval[&0,&2 * pi]) /\\\n        (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&2 * pi]\n        ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&2 * pi] /\\\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) <=\n            real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2) /\\\n            (real_integral (real_interval[&0,&2 * pi]) (\\x. f(x) pow 2) =\n             real_integral (real_interval[&0,&2 * pi]) (\\x. f'(x) pow 2)\n             ==> ?c a. forall x. x IN real_interval[&0,&2 * pi]\n                           ==> f x = c * sin(x - a))
       #|  a:real
       #|  &0:real
       #|  a + pi
@@ -88542,11 +88542,11 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  inv(&2 * pi)
       #|  &0 < &2 * x <=> &0 < x
       #|  x / (&2 * pi)
-      #|  !x. x = inv(&2 * pi) * &2 * pi * x
+      #|  forall x. x = inv(&2 * pi) * &2 * pi * x
       #|  x:real
       #|  (\\x. inv(&2 * pi) * f'(inv(&2 * pi) * x)):real->real
       #|  (\\x. f(inv(&2 * pi) * x)):real->real
-      #|  !f f'.\n      (!x. x IN real_interval[&0,&1]\n           ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n      f(&1) = f(&0) /\\\n      (f has_real_integral &0) (real_interval[&0,&1]) /\\\n      (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&1]\n      ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&1] /\\\n          real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) <=\n          real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2) /\\\n          (real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) =\n           real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2)\n           ==> ?c a. !x. x IN real_interval[&0,&1]\n                         ==> f x = c * sin(&2 * pi * x - a))
+      #|  forall f f'.\n      (forall x. x IN real_interval[&0,&1]\n           ==> (f' has_real_integral (f x - f(&0))) (real_interval[&0,x])) /\\\n      f(&1) = f(&0) /\\\n      (f has_real_integral &0) (real_interval[&0,&1]) /\\\n      (\\x. f'(x) pow 2) real_integrable_on real_interval[&0,&1]\n      ==> (\\x. f(x) pow 2) real_integrable_on real_interval[&0,&1] /\\\n          real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) <=\n          real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2) /\\\n          (real_integral (real_interval[&0,&1]) (\\x. (&2 * pi * f(x)) pow 2) =\n           real_integral (real_interval[&0,&1]) (\\x. f'(x) pow 2)\n           ==> ?c a. forall x. x IN real_interval[&0,&1]\n                         ==> f x = c * sin(&2 * pi * x - a))
       #|  inv(&2 * pi)
       #|  inv(&2 * pi)
       #|  &2 * pi * x
@@ -88556,7 +88556,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  x:real^1
       #|  u:real^1->bool
       #|  g:real^1->real^2
-      #|  !(g:real^1->real^2) g' u a.\n        simple_path g /\\ pathstart g = a /\\ pathfinish g = a /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        negligible u /\\\n        (!t. t IN interval[vec 0,vec 1] DIFF u\n             ==> (g has_vector_derivative g'(t)) (at t))\n        ==> (\\t. lift(g'(t)$1 * g(t)$2)) integrable_on\n            interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n                          (\\t. lift(g'(t)$1 * g(t)$2))) =\n            measure(inside(path_image g))
+      #|  forall(g:real^1->real^2) g' u a.\n        simple_path g /\\ pathstart g = a /\\ pathfinish g = a /\\\n        g absolutely_continuous_on interval[vec 0,vec 1] /\\\n        negligible u /\\\n        (forall t. t IN interval[vec 0,vec 1] DIFF u\n             ==> (g has_vector_derivative g'(t)) (at t))\n        ==> (\\t. lift(g'(t)$1 * g(t)$2)) integrable_on\n            interval[vec 0,vec 1] /\\\n            norm(integral (interval[vec 0,vec 1])\n                          (\\t. lift(g'(t)$1 * g(t)$2))) =\n            measure(inside(path_image g))
       #|  abs C:real
       #|  z:real^2
       #|  sphere(z:real^2,abs C)
@@ -88576,7 +88576,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  interval[vec 0:real^1,x]
       #|  \\x. lift((g':real^1->real^2) x$1 -\n               &2 * pi * sgn * C * sin(&2 * pi * drop x - A))
       #|  x:real^1
-      #|  !x. x IN interval[vec 0,vec 1]\n        ==> (g:real^1->real^2)x$1 =\n            --sgn * C * (cos(&2 * pi * drop x - A) - cos A)
+      #|  forall x. x IN interval[vec 0,vec 1]\n        ==> (g:real^1->real^2)x$1 =\n            --sgn * C * (cos(&2 * pi * drop x - A) - cos A)
       #|  A:real
       #|  C:real
       #|  p /\\ ~q <=> ~(p ==> q)
@@ -88644,7 +88644,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  g:real^1->real^2
       #|  &0 < l ==> abs l = l
       #|  L = norm(lift L)
-      #|  !x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n        ==> norm((g':real^1->real^2) x) <= L
+      #|  forall x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n        ==> norm((g':real^1->real^2) x) <= L
       #|  s:real^1->bool
       #|  x:real^1
       #|  vec 0:real^1
@@ -88654,14 +88654,14 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  vec 0:real^1
       #|  g:real^1->real^2
       #|  x:real^1
-      #|  !x. x IN interval[vec 0,vec 1]\n        ==> (\\x. lift(norm((g':real^1->real^2) x))) absolutely_integrable_on\n            interval[vec 0,x] /\\\n            integral (interval[vec 0,x]) (\\x. lift(norm(g' x))) =\n            L % x
+      #|  forall x. x IN interval[vec 0,vec 1]\n        ==> (\\x. lift(norm((g':real^1->real^2) x))) absolutely_integrable_on\n            interval[vec 0,x] /\\\n            integral (interval[vec 0,x]) (\\x. lift(norm(g' x))) =\n            L % x
       #|  vec 1:real^1
       #|  vec 0:real^1
       #|  g':real^1->real^2
       #|  g:real^1->real^2
-      #|  !t. t IN interval[vec 0,vec 1]\n        ==> (g':real^1->real^2) absolutely_integrable_on interval[vec 0,t] /\\\n            integral (interval[vec 0,t]) g' = g t - a
+      #|  forall t. t IN interval[vec 0,vec 1]\n        ==> (g':real^1->real^2) absolutely_integrable_on interval[vec 0,t] /\\\n            integral (interval[vec 0,t]) g' = g t - a
       #|  \\x. vector_derivative (g:real^1->real^2) (at x)
-      #|  ?g':real^1->real^2.\n        !x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n            ==> (g has_vector_derivative g' x) (at x)
+      #|  ?g':real^1->real^2.\n        forall x. x IN interval[vec 0,vec 1] /\\ ~(x IN s)\n            ==> (g has_vector_derivative g' x) (at x)
       #|  s = {x | x IN interval[vec 0,vec 1] /\\\n              ~((g:real^1->real^2) differentiable at x)}
       #|  (g:real^1->real^2) absolutely_continuous_on interval[vec 0,vec 1]
       #|  --lift av
@@ -88704,7 +88704,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  g0:real^1->real^2
       #|  g0:real^1->real^2
       #|  L:real
-      #|  !L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        convex(inside(path_image g)) /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
+      #|  forall L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        convex(inside(path_image g)) /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
       #|  s pow 2 = &1 ==> x * &4 * pi = &4 * pi * s * s * x
       #|  s pow 2 = &1 ==> x * &4 * pi = &4 * pi * s * s * x
       #|  convex hull\n       (IMAGE (g:real^1->real^2)\n              (interval[vec 0,vec 1] DIFF interval(a,b)))
@@ -88713,7 +88713,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  IMAGE g i SUBSET j ==> c IN i ==> g c IN j
       #|  s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
       #|  (g:real^1->real^2) c
-      #|  !c:real^N. (norm(c - a) <= v /\\ norm(b - c) <= w) /\\\n                 ~(dist(a,b) = dist(a,c) + dist(c,b))\n                 ==> ~(norm(b - a) = v + w)
+      #|  forall c:real^N. (norm(c - a) <= v /\\ norm(b - c) <= w) /\\\n                 ~(dist(a,b) = dist(a,c) + dist(c,b))\n                 ==> ~(norm(b - a) = v + w)
       #|  :real
       #|  :real
       #|  :real
@@ -88757,7 +88757,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  (a + x % c) - (a + y % c):real^N = (x - y) % c
       #|  a < b ==> (b - a) / (b - a) = &1
       #|  (a - a) / b = &0
-      #|  !t. t IN interval[a,b]\n          ==> (h:real^1->real^2) t =\n              g a + (drop t - drop a) / (drop b - drop a) % (g b - g a)
+      #|  forall t. t IN interval[a,b]\n          ==> (h:real^1->real^2) t =\n              g a + (drop t - drop a) / (drop b - drop a) % (g b - g a)
       #|  b:real^1
       #|  a:real^1
       #|  p /\\ (p ==> q) ==> p /\\ q
@@ -88766,7 +88766,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  (g:real^1->real^2) x = h x
       #|  (g:real^1->real^2) x
       #|  (path_image g1 DIFF {(g:real^1->real^2) b, g a}) INTER path_image d0 =\n         {}
-      #|  IMAGE f s = t ==> !x. x IN s ==> f x IN t
+      #|  IMAGE f s = t ==> forall x. x IN s ==> f x IN t
       #|  x:real^1
       #|  IMAGE (g:real^1->real^2) (interval [vec 0,vec 1] DIFF interval (a,b)) =\n        path_image g1
       #|  y:real^1
@@ -88775,14 +88775,14 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  a + x:real^N = a + y <=> x = y
       #|  simple_path(g:real^1->real^2)
       #|  \\x:real^1. x IN interval(a,b)
-      #|  !Q. (!x y. P x y <=> P y x) /\\\n          (!x y. ~Q x /\\ ~Q y ==> P x y) /\\\n          (!x y. Q x /\\ Q y ==> P x y) /\\\n          (!x y. ~Q x /\\ Q y ==> P x y)\n      ==> !x y. P x y
+      #|  forall Q. (forall x y. P x y <=> P y x) /\\\n          (forall x y. ~Q x /\\ ~Q y ==> P x y) /\\\n          (forall x y. Q x /\\ Q y ==> P x y) /\\\n          (forall x y. ~Q x /\\ Q y ==> P x y)\n      ==> forall x y. P x y
       #|  (r ==> p) /\\ q /\\ r /\\ s ==> p /\\ q /\\ r /\\ s
       #|  IMAGE h (interval[a,b]) = segment[(g:real^1->real^2) a,g b]
       #|  (h:real^1->real^2) a = g a /\\ h b = g b
       #|  drop a < drop b
       #|  (&1 - a) % x + a % y:real^N = x + a % (y - x)
       #|  t:real^1
-      #|  (!x. f x = g x) ==> IMAGE f s = IMAGE g s
+      #|  (forall x. f x = g x) ==> IMAGE f s = IMAGE g s
       #|  b:real^1
       #|  a:real^1
       #|  (\\x. if x IN s then f x else g x) = h\n      ==> IMAGE f s = t\n          ==> IMAGE h s = t
@@ -88821,7 +88821,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  gb = (g:real^1->real^2) b
       #|  ga = (g:real^1->real^2) a
       #|  z:real^2
-      #|  (!x. x IN s ==> x IN t /\\ ~P x) <=>\n      s SUBSET t /\\ (!x. x IN s ==> ~P x)
+      #|  (forall x. x IN s ==> x IN t /\\ ~P x) <=>\n      s SUBSET t /\\ (forall x. x IN s ==> ~P x)
       #|  segment[(g:real^1->real^2) a,g b] SUBSET\n    frontier(convex hull (path_image g))
       #|  IMAGE (g:real^1->real^2) (interval [a,b]) = path_image g0
       #|  d UNION d' = g ==> g INTER s SUBSET a ==> d INTER s SUBSET a
@@ -88853,7 +88853,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  inside(path_image d1 UNION path_image g0):real^2->bool
       #|  i INTER j = {}\n        ==> ~(z IN s INTER t) /\\ ~(z IN s INTER j) /\\ ~(z IN t INTER i)\n            ==> ~(z IN s UNION i /\\ z IN t UNION j)
       #|  z:real^2
-      #|  (s INTER t) INTER (s INTER u) = {} <=>\n        !x. x IN s ==> ~(x IN t INTER u)
+      #|  (s INTER t) INTER (s INTER u) = {} <=>\n        forall x. x IN s ==> ~(x IN t INTER u)
       #|  i UNION j UNION p = k\n        ==> ~(z IN p) /\\ z IN f UNION k\n            ==> z IN f UNION i UNION j
       #|  (s UNION t) UNION (u UNION v) = (s UNION u) UNION (t UNION v)
       #|  z:real^2
@@ -88877,7 +88877,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  (~p <=> q) <=> (p \\/ q) /\\ ~(p /\\ q)
       #|  z:real^2
       #|  (~p <=> q) <=> ~q <=> p
-      #|  (!x. x IN s ==> (~(x IN u) <=> x IN t))\n        ==> s DIFF u = s INTER t
+      #|  (forall x. x IN s ==> (~(x IN u) <=> x IN t))\n        ==> s DIFF u = s INTER t
       #|  g0 INTER g1 = {a,b}\n        ==> (g1 DIFF {b,a}) DIFF (i UNION d1 UNION g0) =\n            (g1 DIFF {b,a}) DIFF (d1 UNION i)
       #|  b:real^1
       #|  a:real^1
@@ -88929,7 +88929,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  s INTER f = {} ==> s SUBSET f UNION i ==> s SUBSET i
       #|  IMAGE (g:real^1->real^2) (interval(a,b)) SUBSET\n    interior(convex hull (path_image g))
       #|  interval(a:real^1,b) = {}
-      #|  !g:real^1->real^2 a b L.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        (!x y. x IN interval [vec 0,vec 1] /\\\n               y IN interval [vec 0,vec 1]\n               ==> dist(g x,g y) <= L * dist(x,y)) /\\\n        drop a < drop b /\\\n        a IN interval[vec 0,vec 1] /\\ b IN interval[vec 0,vec 1] /\\\n        g(a) IN frontier(convex hull (path_image g)) /\\\n        g(b) IN frontier(convex hull (path_image g)) /\\\n        IMAGE g (interval(a,b)) INTER frontier(convex hull (path_image g)) = {}\n        ==> ?h. simple_path h /\\\n                pathstart h = pathstart g /\\ pathfinish h = pathstart g /\\\n                (!x y. x IN interval [vec 0,vec 1] /\\\n                       y IN interval [vec 0,vec 1]\n                       ==> dist(h x,h y) <= L * dist(x,y)) /\\\n                path_length h < path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                (!x. ~(x IN interval(a,b)) ==> h x = g x) /\\\n                IMAGE h (interval[a,b]) SUBSET\n                frontier(convex hull (path_image g))
+      #|  forall g:real^1->real^2 a b L.\n        simple_path g /\\ pathfinish g = pathstart g /\\\n        (forall x y. x IN interval [vec 0,vec 1] /\\\n               y IN interval [vec 0,vec 1]\n               ==> dist(g x,g y) <= L * dist(x,y)) /\\\n        drop a < drop b /\\\n        a IN interval[vec 0,vec 1] /\\ b IN interval[vec 0,vec 1] /\\\n        g(a) IN frontier(convex hull (path_image g)) /\\\n        g(b) IN frontier(convex hull (path_image g)) /\\\n        IMAGE g (interval(a,b)) INTER frontier(convex hull (path_image g)) = {}\n        ==> ?h. simple_path h /\\\n                pathstart h = pathstart g /\\ pathfinish h = pathstart g /\\\n                (forall x y. x IN interval [vec 0,vec 1] /\\\n                       y IN interval [vec 0,vec 1]\n                       ==> dist(h x,h y) <= L * dist(x,y)) /\\\n                path_length h < path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                (forall x. ~(x IN interval(a,b)) ==> h x = g x) /\\\n                IMAGE h (interval[a,b]) SUBSET\n                frontier(convex hull (path_image g))
       #|  g:real^1->real^2
       #|  h:real^1->real^2
       #|  g:real^1->real^2
@@ -88938,9 +88938,9 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  n:num
       #|  x:real^1
       #|  x:real^1
-      #|  (!x. x IN k DIFF j ==> h x = g x)\n      ==> IMAGE g (k DIFF j) SUBSET IMAGE h k
+      #|  (forall x. x IN k DIFF j ==> h x = g x)\n      ==> IMAGE g (k DIFF j) SUBSET IMAGE h k
       #|  x:real^1
-      #|  (!x. x IN k /\\ x IN j ==> ~(g x IN t))\n      ==> DISJOINT (IMAGE g k DIFF IMAGE g (k DIFF j)) t
+      #|  (forall x. x IN k /\\ x IN j ==> ~(g x IN t))\n      ==> DISJOINT (IMAGE g k DIFF IMAGE g (k DIFF j)) t
       #|  p SUBSET c /\\ DISJOINT (p DIFF q) f\n      ==> p DIFF q SUBSET c DIFF f
       #|  s = t ==> s SUBSET t
       #|  convex hull IMAGE (g:real^1->real^2)\n    (interval[vec 0,vec 1] DIFF UNIONS {interval(a n,b n) | n IN (:num)})
@@ -88974,10 +88974,10 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  n:num
       #|  n:num
-      #|  !x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n          ==> dist((h:real^1->real^2) x,h y) <= L * dist(x,y)
+      #|  forall x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n          ==> dist((h:real^1->real^2) x,h y) <= L * dist(x,y)
       #|  h:real^1->real^2
       #|  n:num
-      #|  (!d:num. P(n + d)) ==> (!m. n <= m ==> P m)
+      #|  (forall d:num. P(n + d)) ==> (forall m. n <= m ==> P m)
       #|  n + 1
       #|  (f:num->real^1->real^2) (n + 1) x
       #|  n:num
@@ -88985,21 +88985,21 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  (x:real^1) IN UNIONS {interval (a n,b n) | n IN (:num)}
       #|  (x:real^1) IN interval[vec 0,vec 1]
       #|  x:real^1
-      #|  !x. ?y. x IN interval[vec 0,vec 1]\n            ==> eventually (\\n. (f:num->real^1->real^2) n x = y) sequentially
+      #|  forall x. ?y. x IN interval[vec 0,vec 1]\n            ==> eventually (\\n. (f:num->real^1->real^2) n x = y) sequentially
       #|  f:num->real^1->real^2
-      #|  (!m. m < n ==> ~(k n SUBSET k m))\n         ==> x IN k n /\\\n            (!s t. s IN {k n | n IN (:num)} /\\\n                       t IN {k n | n IN (:num)} /\\\n                       ~(s = t)\n                       ==> DISJOINT s t)\n            ==> ~(!m. m < n ==> ~(x IN k m)) ==> p
+      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n         ==> x IN k n /\\\n            (forall s t. s IN {k n | n IN (:num)} /\\\n                       t IN {k n | n IN (:num)} /\\\n                       ~(s = t)\n                       ==> DISJOINT s t)\n            ==> ~(forall m. m < n ==> ~(x IN k m)) ==> p
       #|  x IN interval((a:num->real^1) n,b n)
       #|  x:real^1
-      #|  (!m. m < n ==> ~(k n SUBSET k m))\n          ==> (x IN UNIONS {k m | m < n}) /\\\n              (!s t. s IN {k n | n IN (:num)} /\\\n                     t IN {k n | n IN (:num)} /\\\n                     ~(s = t)\n                     ==> DISJOINT s t)\n              ==> ~(x IN k n)
+      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n          ==> (x IN UNIONS {k m | m < n}) /\\\n              (forall s t. s IN {k n | n IN (:num)} /\\\n                     t IN {k n | n IN (:num)} /\\\n                     ~(s = t)\n                     ==> DISJOINT s t)\n              ==> ~(x IN k n)
       #|  (f:real^1->real^2) x = h x
       #|  x:real^1
-      #|  IMAGE f c SUBSET t\n        ==> i SUBSET c ==> !x. x IN i ==> f x IN t
+      #|  IMAGE f c SUBSET t\n        ==> i SUBSET c ==> forall x. x IN i ==> f x IN t
       #|  {f x | x = a \\/ P x} = (f a) INSERT {f x | P x}
       #|  f:real^1->real^2
       #|  s = {k n | n IN (:num)}\n        ==> IMAGE g (UNIONS s) INTER f = {}\n            ==> IMAGE g (k n) INTER f = {}
-      #|  (!x. x IN s ==> h x = g x)\n        ==> IMAGE g s INTER k = j\n            ==> IMAGE h s INTER k = j
-      #|  (!m. m < n ==> ~(k n SUBSET k m))\n        ==> x IN k n /\\\n            (!s t. s IN {k n | n IN (:num)} /\\\n                   t IN {k n | n IN (:num)} /\\\n                   ~(s = t)\n                   ==> DISJOINT s t)\n            ==> ~(?m. m < n /\\ x IN k m)
-      #|  !x. x IN interval(a(n:num),b n) ==> (h:real^1->real^2) x = g x
+      #|  (forall x. x IN s ==> h x = g x)\n        ==> IMAGE g s INTER k = j\n            ==> IMAGE h s INTER k = j
+      #|  (forall m. m < n ==> ~(k n SUBSET k m))\n        ==> x IN k n /\\\n            (forall s t. s IN {k n | n IN (:num)} /\\\n                   t IN {k n | n IN (:num)} /\\\n                   ~(s = t)\n                   ==> DISJOINT s t)\n            ==> ~(?m. m < n /\\ x IN k m)
+      #|  forall x. x IN interval(a(n:num),b n) ==> (h:real^1->real^2) x = g x
       #|  s = {i n | n IN (:num)} ==> ~(x IN UNIONS s)\n        ==> ~(x IN UNIONS {i n | P n})
       #|  (h:real^1->real^2)(a(n:num)) = g(a n) /\\\n      (h:real^1->real^2)(b(n:num)) = g(b n)
       #|  L:real
@@ -89013,7 +89013,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  h:real^1->real^2
       #|  n:num
       #|  g:real^1->real^2
-      #|  ?h. (!n. simple_path (h n) /\\\n             rectifiable_path (h n) /\\\n             pathstart (h n) = pathstart g /\\\n             pathfinish (h n) = pathfinish g /\\\n             convex hull path_image (h n) = convex hull path_image g /\\\n             (!x y.\n                x IN interval [vec 0,vec 1] /\\ y IN interval [vec 0,vec 1]\n                ==> dist (h n x,h n y) <= L * dist (x,y)) /\\\n             (!x.\n                x IN UNIONS {interval (a m,b m) | m < n}\n                ==> h n x IN frontier (convex hull path_image g)) /\\\n             (!x. ~(x IN UNIONS {interval (a m,b m) | m < n})\n                  ==> h n x = g x)) /\\\n        (!n x. ~(x IN interval(a n,b n) /\\\n                 !m. m < n ==> ~(x IN interval(a m,b m)))\n               ==> (h:num->real^1->real^2)(SUC n) x = h n x)
+      #|  ?h. (forall n. simple_path (h n) /\\\n             rectifiable_path (h n) /\\\n             pathstart (h n) = pathstart g /\\\n             pathfinish (h n) = pathfinish g /\\\n             convex hull path_image (h n) = convex hull path_image g /\\\n             (forall x y.\n                x IN interval [vec 0,vec 1] /\\ y IN interval [vec 0,vec 1]\n                ==> dist (h n x,h n y) <= L * dist (x,y)) /\\\n             (forall x.\n                x IN UNIONS {interval (a m,b m) | m < n}\n                ==> h n x IN frontier (convex hull path_image g)) /\\\n             (forall x. ~(x IN UNIONS {interval (a m,b m) | m < n})\n                  ==> h n x = g x)) /\\\n        (forall n x. ~(x IN interval(a n,b n) /\\\n                 forall m. m < n ==> ~(x IN interval(a m,b m)))\n               ==> (h:num->real^1->real^2)(SUC n) x = h n x)
       #|  interval((a:num->real^1) n,b n)
       #|  x INSERT s = s <=> x IN s
       #|  q /\\ ~s /\\ r /\\ (~t ==> p) ==> (p ==> q ==> r ==> s) ==> t
@@ -89023,11 +89023,11 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  s:real^1->bool
       #|  n:num
       #|  (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
-      #|  !n. closure(interval((a:num->real^1) n,b n)) SUBSET interval[vec 0,vec 1]
-      #|  s = IMAGE q UNIV\n        ==> (!c. c IN s ==> c SUBSET t) ==> q n SUBSET t
-      #|  !n. interval((a:num->real^1) n,b n) SUBSET s
-      #|  s = IMAGE q UNIV\n        ==> (!c. c IN s ==> ~(c = {})) ==> !n. ~(q n = {})
-      #|  !n. drop((a:num->real^1) n) < drop(b n)
+      #|  forall n. closure(interval((a:num->real^1) n,b n)) SUBSET interval[vec 0,vec 1]
+      #|  s = IMAGE q UNIV\n        ==> (forall c. c IN s ==> c SUBSET t) ==> q n SUBSET t
+      #|  forall n. interval((a:num->real^1) n,b n) SUBSET s
+      #|  s = IMAGE q UNIV\n        ==> (forall c. c IN s ==> ~(c = {})) ==> forall n. ~(q n = {})
+      #|  forall n. drop((a:num->real^1) n) < drop(b n)
       #|  b:num->real^1
       #|  a:num->real^1
       #|  s = IMAGE q UNIV\n          ==> UNIONS s SUBSET t\n              ==> q n SUBSET t
@@ -89037,15 +89037,15 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  s:real^1->bool
       #|  interval[vec 0:real^1,vec 1]
       #|  interval(vec 0:real^1,vec 1)
-      #|  s = IMAGE q UNIV\n            ==> (!x. x IN s ==> connected x) ==> connected(q n)
+      #|  s = IMAGE q UNIV\n            ==> (forall x. x IN s ==> connected x) ==> connected(q n)
       #|  interior((q:num->real^1->bool) n)
       #|  b:real^1
       #|  a:real^1
       #|  interval[vec 0:real^1,vec 1]
-      #|  s = IMAGE q UNIV\n            ==> (!x. x IN s ==> connected x) ==> connected(q n)
+      #|  s = IMAGE q UNIV\n            ==> (forall x. x IN s ==> connected x) ==> connected(q n)
       #|  closure((q:num->real^1->bool) n)
       #|  n:num
-      #|  !n:num. ?a b:real^1. q n = interval(a,b)
+      #|  forall n:num. ?a b:real^1. q n = interval(a,b)
       #|  q:num->real^1->bool
       #|  components(s:real^1->bool)
       #|  interval[vec 0:real^1,vec 1]
@@ -89055,12 +89055,12 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  s:real^1->bool = {}
       #|  s =\n        {t | t IN interval[vec 0,vec 1] /\\\n             (g:real^1->real^2) t IN\n             (:real^2) DIFF frontier(convex hull (path_image g))}
       #|  open_in (subtopology euclidean (interval[vec 0,vec 1]))\n              {t | t IN interval[vec 0,vec 1] /\\\n                   (g:real^1->real^2) t IN\n                   (:real^2) DIFF frontier(convex hull (path_image g))}
-      #|  ?a b. (!n. a n IN interval[vec 0,vec 1]) /\\\n          (!n. b n IN interval[vec 0,vec 1]) /\\\n          (!n:num. drop(a n) <= drop(b n)) /\\\n          (!n. g(a n) IN frontier(convex hull (path_image g))) /\\\n          (!n. g(b n) IN frontier(convex hull (path_image g))) /\\\n          components\n            {t | t IN interval[vec 0,vec 1] /\\\n                 (g:real^1->real^2) t IN\n                 (:real^2) DIFF frontier(convex hull (path_image g))} =\n          {interval(a n,b n) | n IN (:num)}
+      #|  ?a b. (forall n. a n IN interval[vec 0,vec 1]) /\\\n          (forall n. b n IN interval[vec 0,vec 1]) /\\\n          (forall n:num. drop(a n) <= drop(b n)) /\\\n          (forall n. g(a n) IN frontier(convex hull (path_image g))) /\\\n          (forall n. g(b n) IN frontier(convex hull (path_image g))) /\\\n          components\n            {t | t IN interval[vec 0,vec 1] /\\\n                 (g:real^1->real^2) t IN\n                 (:real^2) DIFF frontier(convex hull (path_image g))} =\n          {interval(a n,b n) | n IN (:num)}
       #|  g:real^1->real^2
       #|  (path_image g:real^2->bool) SUBSET frontier(convex hull path_image g)
       #|  g:real^1->real^2
       #|  g':real^1->real^2
-      #|  &0 <= L /\\\n    path_length g' = L /\\\n    simple_path(g':real^1->real^2) /\\\n    rectifiable_path(g':real^1->real^2) /\\\n    pathfinish g' = pathstart g' /\\\n    pathstart g' IN frontier(convex hull (path_image g')) /\\\n    (!x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n           ==> dist(g' x,g' y) <= L * dist(x,y))
+      #|  &0 <= L /\\\n    path_length g' = L /\\\n    simple_path(g':real^1->real^2) /\\\n    rectifiable_path(g':real^1->real^2) /\\\n    pathfinish g' = pathstart g' /\\\n    pathstart g' IN frontier(convex hull (path_image g')) /\\\n    (forall x y. x IN interval[vec 0,vec 1] /\\ y IN interval[vec 0,vec 1]\n           ==> dist(g' x,g' y) <= L * dist(x,y))
       #|  g':real^1->real^2
       #|  g:real^1->real^2
       #|  L = path_length(g:real^1->real^2)
@@ -89068,8 +89068,8 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  t:real^1
       #|  {}:real^2->bool
       #|  path_image g:real^2->bool
-      #|  !g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        pathstart g IN frontier(convex hull (path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
-      #|  !g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
+      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        pathstart g IN frontier(convex hull (path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
+      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull (path_image h) = convex hull (path_image g) /\\\n                path_image h = frontier(convex hull (path_image g))
       #|  x:real^1
       #|  y:real^1
       #|  x:real^1
@@ -89096,7 +89096,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  ~(path_image g INTER interior(convex hull path_image g):real^2->bool = {})
       #|  h:real^1->real^2
       #|  g:real^1->real^2
-      #|  !g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        ~convex(inside(path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull path_image h = convex hull path_image g /\\\n                path_image h = frontier (convex hull path_image g) /\\\n                measure(inside(path_image g)) < measure(inside(path_image h))
+      #|  forall g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        ~convex(inside(path_image g))\n        ==> ?h:real^1->real^2.\n                rectifiable_path h /\\\n                simple_path h /\\\n                pathfinish h = pathstart h /\\\n                path_length h <= path_length g /\\\n                convex hull path_image h = convex hull path_image g /\\\n                path_image h = frontier (convex hull path_image g) /\\\n                measure(inside(path_image g)) < measure(inside(path_image h))
       #|  :real
       #|  :real
       #|  &0 <= x /\\ x <= y ==> abs x <= abs y
@@ -89108,7 +89108,7 @@ test "100/isoperimetric matches 100/isoperimetric.ml" {
       #|  h:real^1->real^2
       #|  g:real^1->real^2
       #|  convex(inside(path_image g):real^2->bool)
-      #|  !L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
+      #|  forall L g:real^1->real^2.\n        rectifiable_path g /\\\n        simple_path g /\\\n        pathfinish g = pathstart g /\\\n        path_length g = L\n        ==> measure(inside(path_image g)) <= L pow 2 / (&4 * pi) /\\\n            (measure(inside(path_image g)) =  L pow 2 / (&4 * pi)\n             ==> ?a r. path_image g = sphere(a,r))
       #|lemma1 =  |- (#!:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#convex:fun(fun(cart(real,tybit0(1)),bool),bool) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#closure:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))))
       #|lemma2 =  |- (#!:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) (#convex:fun(fun(cart(real,tybit0(1)),bool),bool) (#inside:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))
       #|lemma3 =  |- (#!:fun(fun(fun(cart(real,1),cart(real,tybit0(1))),bool),bool) (\g:fun(cart(real,1),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#simple_path:fun(fun(cart(real,1),cart(real,tybit0(1))),bool) g:fun(cart(real,1),cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#pathfinish:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1))))) (#pathstart:fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1))) g:fun(cart(real,1),cart(real,tybit0(1)))))) ((#SUBSET:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1)))))))))) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#frontier:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #convex:fun(fun(cart(real,tybit0(1)),bool),bool)) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))) (#path_image:fun(fun(cart(real,1),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) g:fun(cart(real,1),cart(real,tybit0(1))))))))

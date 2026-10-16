@@ -239,7 +239,7 @@ fn step_16() -> Unit raise {
 /// NO_ROOTS_256K1
 fn step_17() -> Unit raise {
   let t25 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p256k1(), @list.List([p_256k1()]))
-  no_roots_256k1_c.set(@tactics.prove(@parser.parse_term("!x:int. ~((x pow 3 + &7 == &0) (mod &p_256k1))"), t25))
+  no_roots_256k1_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 + &7 == &0) (mod &p_256k1))"), t25))
 }
 
 ///|
@@ -427,7 +427,7 @@ pub fn p256k1_group_order() -> @kernel.Thm {
 /// P256K1_GROUP_ELEMENT_ORDER
 fn step_23() -> Unit raise {
   let t103 = @meson.meson_tac(@list.List([size_p256k1_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n256k1()]))
-  p256k1_group_element_order_c.set(@tactics.prove(@parser.parse_term("!P. P IN group_carrier p256k1_group\n       ==> group_element_order p256k1_group P =\n           if P = group_id p256k1_group then 1 else n_256k1"), t103))
+  p256k1_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p256k1_group\n       ==> group_element_order p256k1_group P =\n           if P = group_id p256k1_group then 1 else n_256k1"), t103))
 }
 
 ///|
@@ -542,7 +542,7 @@ fn step_28() -> Unit raise {
       }
     })(x123))
   }, @list.List([@equal.gsym(generated_p256k1_group())])), t124), t125), t126), t127), t128), t129), @tactics.disch_tac), t130), t131), t132), t133), t134)
-  p256k1_triplex_beta_c.set(@tactics.prove(@parser.parse_term("!x. x IN group_carrier p256k1_group\n       ==> weierstrass_triplex (integer_mod_ring p_256k1) (&p256k1_beta) x =\n           group_pow p256k1_group x p256k1_lambda"), t135))
+  p256k1_triplex_beta_c.set(@tactics.prove(@parser.parse_term("forall x. x IN group_carrier p256k1_group\n       ==> weierstrass_triplex (integer_mod_ring p_256k1) (&p256k1_beta) x =\n           group_pow p256k1_group x p256k1_lambda"), t135))
 }
 
 ///|

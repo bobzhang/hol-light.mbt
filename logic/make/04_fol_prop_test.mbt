@@ -7608,12 +7608,12 @@ test "Logic/fol_prop matches Logic/fol_prop.ml" {
       #|Logic/fol_prop quotations (100):
       #|  (pholds v False <=> F) /\\\n   (pholds v (Atom p l) <=> v (Atom p l)) /\\\n   (pholds v (q --> r) <=> pholds v q ==> pholds v r) /\\\n   (pholds v (!!x q) <=> v (!!x q))
       #|  (pholds v False <=> F) /\\\n   (pholds v True <=> T) /\\\n   (pholds v (Atom p l) <=> v (Atom p l)) /\\\n   (pholds v (Not q) <=> ~(pholds v q)) /\\\n   (pholds v (q || r) <=> pholds v q \\/ pholds v r) /\\\n   (pholds v (q && r) <=> pholds v q /\\ pholds v r) /\\\n   (pholds v (q --> r) <=> pholds v q ==> pholds v r) /\\\n   (pholds v (q <-> r) <=> (pholds v q = pholds v r))
-      #|  v psatisfies s <=> !p. p IN s ==> pholds v p
-      #|  psatisfiable s <=> ?v. !p. p IN s ==> pholds v p
-      #|  !A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
-      #|  finsat A <=> !B. B SUBSET A /\\ FINITE(B) ==> psatisfiable B
-      #|  !A B. finsat A /\\ B SUBSET A ==> finsat B
-      #|  !A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
+      #|  v psatisfies s <=> forall p. p IN s ==> pholds v p
+      #|  psatisfiable s <=> ?v. forall p. p IN s ==> pholds v p
+      #|  forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
+      #|  finsat A <=> forall B. B SUBSET A /\\ FINITE(B) ==> psatisfiable B
+      #|  forall A B. finsat A /\\ B SUBSET A ==> finsat B
+      #|  forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B
       #|  psatisfiable B ==> finsat B
       #|  v:form->bool
       #|  v:form->bool
@@ -7634,7 +7634,7 @@ test "Logic/fol_prop matches Logic/fol_prop.ml" {
       #|  (p:form INSERT W) SUBSET (UNIONS C)
       #|  W:form->bool
       #|  p:form
-      #|  !B:form->bool. FINITE B ==> B SUBSET (UNIONS C)\n                               ==> ?U. U IN C /\\ B SUBSET U
+      #|  forall B:form->bool. FINITE B ==> B SUBSET (UNIONS C)\n                               ==> ?U. U IN C /\\ B SUBSET U
       #|  A:form->bool SUBSET (UNIONS C)
       #|  u:form->bool
       #|  UNIONS (C:(form->bool)->bool)
@@ -7644,7 +7644,7 @@ test "Logic/fol_prop matches Logic/fol_prop.ml" {
       #|  fld(\\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C)) =\n                 \\B. A SUBSET B /\\ finsat(B)
       #|  poset (\\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C))
       #|  \\B C. A SUBSET B /\\ B SUBSET C /\\ finsat(C)
-      #|  !A. finsat(A) ==> ?B. A SUBSET B /\\ finsat(B) /\\\n                         !C. B SUBSET C /\\ finsat(C) ==> (C = B)
+      #|  forall A. finsat(A) ==> ?B. A SUBSET B /\\ finsat(B) /\\\n                         forall C. B SUBSET C /\\ finsat(C) ==> (C = B)
       #|  ~pholds v (Not q)
       #|  r:form
       #|  r:form
@@ -7652,7 +7652,7 @@ test "Logic/fol_prop matches Logic/fol_prop.ml" {
       #|  p:form = q
       #|  q:form
       #|  v:form->bool
-      #|  !v. ?p. p IN C /\\ ~pholds v p
+      #|  forall v. ?p. p IN C /\\ ~pholds v p
       #|  v:form->bool
       #|  ~(psatisfiable D)
       #|  ~(psatisfiable C)
@@ -7661,51 +7661,51 @@ test "Logic/fol_prop matches Logic/fol_prop.ml" {
       #|  C:form->bool
       #|  p <=> ~ ~ p
       #|  finsat(B) ==> finsat(p INSERT B) \\/ finsat(Not p INSERT B)
-      #|  finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. p IN B \\/ Not(p) IN B
+      #|  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B \\/ Not(p) IN B
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
       #|  { p, (Not p) }
       #|  finsat B
       #|  (a \\/ b) /\\ ~(a /\\ b) ==> (b <=> ~a)
-      #|  finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. Not(p) IN B <=> ~(p IN B)
+      #|  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. Not(p) IN B <=> ~(p IN B)
       #|  ~(psatisfiable A1)
-      #|  !v. (!q. q IN A ==> pholds v q) ==> pholds v p
+      #|  forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p
       #|  (A:form->bool) UNION (A1 DELETE p)
       #|  A1:form->bool
       #|  finsat B
       #|  {p:form}
-      #|  finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. p IN B <=> ?A. FINITE(A) /\\ A SUBSET B /\\\n                        !v. (!q. q IN A ==> pholds v q) ==> pholds v p
+      #|  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B <=> ?A. FINITE(A) /\\ A SUBSET B /\\\n                        forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p
       #|  {False}
-      #|  finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> ~(False IN B)
+      #|  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> ~(False IN B)
       #|  A:form->bool
       #|  p ==> q <=> ~p \\/ q
-      #|  !v. (!q. q IN A1 ==> pholds v q) ==> pholds v (p --> q)
-      #|  !v. (!q. q IN A2 ==> pholds v q) ==> pholds v p
+      #|  forall v. (forall q. q IN A1 ==> pholds v q) ==> pholds v (p --> q)
+      #|  forall v. (forall q. q IN A2 ==> pholds v q) ==> pholds v p
       #|  (A1:form->bool) UNION A2
       #|  A2:form->bool
       #|  A1:form->bool
-      #|  finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p q. (p --> q) IN B <=> p IN B ==> q IN B
-      #|  !r. pholds (\\p. p IN B) r <=> r IN B
+      #|  finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p q. (p --> q) IN B <=> p IN B ==> q IN B
+      #|  forall r. pholds (\\p. p IN B) r <=> r IN B
       #|  \\p:form. p IN B
       #|  B:form->bool
       #|  finsat(A)
-      #|  (!B. FINITE(B) /\\ B SUBSET A\n        ==> ?d. !r. r IN B ==> pholds(d) r)\n   ==> ?d. !r. r IN A ==> pholds(d) r
+      #|  (forall B. FINITE(B) /\\ B SUBSET A\n        ==> ?d. forall r. r IN B ==> pholds(d) r)\n   ==> ?d. forall r. r IN A ==> pholds(d) r
       #|  B SUBSET {Not q | q IN A}
       #|  { r | Not r IN B }
       #|  B:form->bool
-      #|  ~(?d. !r. r IN { Not q | q IN A } ==> pholds(d) r)
-      #|  !A. (!d. ?p. p IN A /\\ pholds d p)\n       ==> ?B. FINITE(B) /\\ B SUBSET A /\\ (!d. ?p. p IN B /\\ pholds d p)
+      #|  ~(?d. forall r. r IN { Not q | q IN A } ==> pholds(d) r)
+      #|  forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?B. FINITE(B) /\\ B SUBSET A /\\ (forall d. ?p. p IN B /\\ pholds d p)
       #|  \\p:form. p IN s
       #|  CONS (q:form) ps
       #|  ps:form list
       #|  s:form->bool
       #|  q:form
       #|  [] :form list
-      #|  !A. FINITE(A) ==> ?ps. ALL (\\p. p IN A) ps /\\\n                          !d. pholds(d) (ITLIST (||) ps False) <=>\n                              ?p. p IN A /\\ pholds d p
+      #|  forall A. FINITE(A) ==> ?ps. ALL (\\p. p IN A) ps /\\\n                          forall d. pholds(d) (ITLIST (||) ps False) <=>\n                              ?p. p IN A /\\ pholds d p
       #|  \\p:form. p IN B
       #|  ps:form list
       #|  ps:form list
       #|  B:form->bool
-      #|  !A. (!d. ?p. p IN A /\\ pholds d p)\n       ==> ?ps. ALL (\\p. p IN A) ps /\\\n                !d. pholds(d) (ITLIST (||) ps False)
+      #|  forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?ps. ALL (\\p. p IN A) ps /\\\n                forall d. pholds(d) (ITLIST (||) ps False)
       #|pholds =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) (v:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#-->:fun(form,fun(form,form)) q:form) r:form))) ((#==>:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#!!:fun(num,fun(form,form)) x:num) q:form))) (v:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) q:form))))))
       #|PHOLDS =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #False:form)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) #True:form)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term)))) (v:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) p:num) l:list(term))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) (#Not:fun(form,form) q:form))) (#~:fun(bool,bool) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#||:fun(form,fun(form,form)) q:form) r:form))) ((#\/:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#&&:fun(form,fun(form,form)) q:form) r:form))) ((#/\:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#-->:fun(form,fun(form,form)) q:form) r:form))) ((#==>:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form)))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) ((#<->:fun(form,fun(form,form)) q:form) r:form))) ((#=:fun(bool,fun(bool,bool)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) q:form)) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) r:form))))))))))
       #|psatisfies =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\s:fun(form,bool). (#!:fun(fun(fun(form,bool),bool),bool) (\v:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) ((#psatisfies:fun(fun(form,bool),fun(fun(form,bool),bool)) v:fun(form,bool)) s:fun(form,bool))) (#!:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) s:fun(form,bool))) ((#pholds:fun(fun(form,bool),fun(form,bool)) v:fun(form,bool)) p:form)))))))))

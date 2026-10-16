@@ -63854,24 +63854,24 @@ Warning: inventing type variables
 Warning: inventing type variables
 Multivariate/clifford quotations (161):
   FINITE s /\\ FINITE t /\\ FINITE u /\\ FINITE v /\\\n   s INTER t = {} /\\ u INTER v = {} /\\ s UNION t = u UNION v\n   ==> CARD(s) + CARD(t) = CARD(u) + CARD(v)
-  !s t. FINITE s ==> CARD s = CARD(s DIFF t) + CARD(s INTER t)
+  forall s t. FINITE s ==> CARD s = CARD(s DIFF t) + CARD(s INTER t)
   c = a + b ==> (a + x) + (b + x) = c + 2 * x
   FINITE(t:A->bool)
   s:A->bool
   FINITE(s:A->bool)
   t:A->bool
-  !s t:A->bool.\n        FINITE s /\\ FINITE t\n        ==> CARD s + CARD t =\n            CARD((s DIFF t) UNION (t DIFF s)) + 2 * CARD(s INTER t)
-  !s t u. FINITE s /\\ FINITE t /\\ (s DIFF t) UNION (t DIFF s) = u\n           ==> EVEN(CARD u) = (EVEN(CARD s) <=> EVEN(CARD t))
+  forall s t:A->bool.\n        FINITE s /\\ FINITE t\n        ==> CARD s + CARD t =\n            CARD((s DIFF t) UNION (t DIFF s)) + 2 * CARD(s INTER t)
+  forall s t u. FINITE s /\\ FINITE t /\\ (s DIFF t) UNION (t DIFF s) = u\n           ==> EVEN(CARD u) = (EVEN(CARD s) <=> EVEN(CARD t))
   {i,j | i IN 1..m /\\ j IN 1..n}
-  !P m n. FINITE {i,j | i IN 1..m /\\ j IN 1..n /\\ P i j}
+  forall P m n. FINITE {i,j | i IN 1..m /\\ j IN 1..n /\\ P i j}
   ?s. s SUBSET (1..dimindex(:N))
   (:(N)multivector) = IMAGE mk_multivector {s | s SUBSET 1..dimindex(:N)}
   (:(N)multivector) HAS_SIZE (2 EXP dimindex(:N))
   FINITE(:(N)multivector)
   dimindex(:(N)multivector) = 2 EXP dimindex(:N)
-  !s. s SUBSET 1..dimindex(:N)\n         ==> dest_multivector(mk_multivector s :(N)multivector) = s
+  forall s. s SUBSET 1..dimindex(:N)\n         ==> dest_multivector(mk_multivector s :(N)multivector) = s
   m:(N)multivector
-  (!s. s SUBSET 1..dimindex(:N) ==> P(mk_multivector s)) <=>\n   (!m:(N)multivector. P m)
+  (forall s. s SUBSET 1..dimindex(:N) ==> P(mk_multivector s)) <=>\n   (forall m:(N)multivector. P m)
   setcode s = 1 + binarysum (IMAGE PRE s)
   codeset n = IMAGE SUC (bitset(n - 1))
   1 <= n ==> SUC(PRE n) = n
@@ -63885,46 +63885,46 @@ Multivariate/clifford quotations (161):
   1 <= SUC n /\\ SUC n <= k <=> n < k
   1 <= i ==> (1 + b = i <=> b = i - 1)
   IMAGE (\\x. x) s = s
-  (!i. i IN 1..(2 EXP n)\n        ==> codeset i SUBSET 1..n /\\ setcode(codeset i) = i) /\\\n   (!s. s SUBSET (1..n)\n        ==> (setcode s) IN 1..(2 EXP n) /\\ codeset(setcode s) = s)
-  (!s. s SUBSET (1..n) ==> P(setcode s)) <=> (!i. i IN 1..(2 EXP n) ==> P i)
-  !s n. s SUBSET 1..n ==> setcode s IN (1..(2 EXP n))
+  (forall i. i IN 1..(2 EXP n)\n        ==> codeset i SUBSET 1..n /\\ setcode(codeset i) = i) /\\\n   (forall s. s SUBSET (1..n)\n        ==> (setcode s) IN 1..(2 EXP n) /\\ codeset(setcode s) = s)
+  (forall s. s SUBSET (1..n) ==> P(setcode s)) <=> (forall i. i IN 1..(2 EXP n) ==> P i)
+  forall s n. s SUBSET 1..n ==> setcode s IN (1..(2 EXP n))
   (x:real^(N)multivector)$$s = x$(setcode s)
   (lambdas) (g:(num->bool)->real) =\n    (lambda i. g(codeset i)):real^(N)multivector
-  !x y:real^(N)multivector.\n        x = y <=> !s. s SUBSET 1..dimindex(:N) ==> x$$s = y$$s
-  !s. s SUBSET 1..dimindex(:N)\n         ==> ((lambdas) g :real^(N)multivector)$$s = g s
-  !m:real^(N)multivector g.\n        (!s. s SUBSET 1..dimindex(:N) ==> m$$s = g s)\n        ==> (lambdas) g = m
+  forall x y:real^(N)multivector.\n        x = y <=> forall s. s SUBSET 1..dimindex(:N) ==> x$$s = y$$s
+  forall s. s SUBSET 1..dimindex(:N)\n         ==> ((lambdas) g :real^(N)multivector)$$s = g s
+  forall m:real^(N)multivector g.\n        (forall s. s SUBSET 1..dimindex(:N) ==> m$$s = g s)\n        ==> (lambdas) g = m
   (lambdas s. m$$s) = m
-  !x y:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (x + y)$$s = x$$s + y$$s
-  !c x:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (c % x)$$s = c * x$$s
-  !k s. s SUBSET (1..dimindex(:N)) ==> (vec k :real^(N)multivector)$$s = &k
-  !f:A->real^(N)multivector t s.\n        s SUBSET (1..dimindex(:N))\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)
-  !t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)
+  forall x y:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (x + y)$$s = x$$s + y$$s
+  forall c x:real^(N)multivector s.\n      s SUBSET (1..dimindex(:N)) ==> (c % x)$$s = c * x$$s
+  forall k s. s SUBSET (1..dimindex(:N)) ==> (vec k :real^(N)multivector)$$s = &k
+  forall f:A->real^(N)multivector t s.\n        s SUBSET (1..dimindex(:N))\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)
+  forall t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)
   mbasis i = lambdas s. if i = s then &1 else &0
-  !s t. s SUBSET (1..dimindex(:N))\n         ==> (mbasis t :real^(N)multivector)$$s = if s = t then &1 else &0
+  forall s t. s SUBSET (1..dimindex(:N))\n         ==> (mbasis t :real^(N)multivector)$$s = if s = t then &1 else &0
   ~(&1 = &0)
-  !s. (mbasis s :real^(N)multivector = vec 0) <=>\n       ~(s SUBSET 1..dimindex(:N))
-  !s. s SUBSET 1..dimindex(:N) ==> ~(mbasis s :real^(N)multivector = vec 0)
+  forall s. (mbasis s :real^(N)multivector = vec 0) <=>\n       ~(s SUBSET 1..dimindex(:N))
+  forall s. s SUBSET 1..dimindex(:N) ==> ~(mbasis s :real^(N)multivector = vec 0)
   x * (if p then &1 else &0) = if p then x else &0
-  !x:real^(N)multivector.\n        vsum {s | s SUBSET 1..dimindex(:N)} (\\s. x$$s % mbasis s) = x
+  forall x:real^(N)multivector.\n        vsum {s | s SUBSET 1..dimindex(:N)} (\\s. x$$s % mbasis s) = x
   x:real^(N)multivector
   span {mbasis s :real^(N)multivector | s SUBSET 1..dimindex(:N)} = UNIV
   {mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}
-  !x. x IN UNIV ==> (f:real^(M)multivector->real^N) x = g x
-  !f:real^(M)multivector->real^N g s.\n        linear f /\\ linear g /\\\n        (!s. s SUBSET 1..dimindex(:M) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g
+  forall x. x IN UNIV ==> (f:real^(M)multivector->real^N) x = g x
+  forall f:real^(M)multivector->real^N g s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..dimindex(:M) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g
   {mbasis t :real^(N)multivector | t SUBSET 1..dimindex(:N)}
   {mbasis s :real^(M)multivector | s SUBSET 1..dimindex(:M)}
-  !x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(M)multivector->real^(N)multivector->real^P) x y = g x y
-  !f:real^(M)multivector->real^(N)multivector->real^P g s.\n        bilinear f /\\ bilinear g /\\\n        (!s t.  s SUBSET 1..dimindex(:M) /\\ t SUBSET 1..dimindex(:N)\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g
-  !P. P(vec 0) /\\ (!x y. P x /\\ P y ==> P(x + y))\n       ==> !f s. FINITE s /\\ (!i. i IN s ==> P(f i)) ==> P(vsum s f)
-  !P. (!s. s SUBSET 1..dimindex(:N) ==> P(mbasis s)) /\\\n       (!c x. P x ==> P(c % x)) /\\ (!x y. P x /\\ P y ==> P(x + y))\n       ==> !x:real^(N)multivector. P x
+  forall x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(M)multivector->real^(N)multivector->real^P) x y = g x y
+  forall f:real^(M)multivector->real^(N)multivector->real^P g s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..dimindex(:M) /\\ t SUBSET 1..dimindex(:N)\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g
+  forall P. P(vec 0) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall f s. FINITE s /\\ (forall i. i IN s ==> P(f i)) ==> P(vsum s f)
+  forall P. (forall s. s SUBSET 1..dimindex(:N) ==> P(mbasis s)) /\\\n       (forall c x. P x ==> P(c % x)) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall x:real^(N)multivector. P x
   (multivec:real^N->real^(N)multivector) x =\n      vsum(1..dimindex(:N)) (\\i. x$i % mbasis{i})
-  k multivector (p:real^(N)multivector) <=>\n        !s. s SUBSET (1..dimindex(:N)) /\\ ~(p$$s = &0) ==> s HAS_SIZE k
+  k multivector (p:real^(N)multivector) <=>\n        forall s. s SUBSET (1..dimindex(:N)) /\\ ~(p$$s = &0) ==> s HAS_SIZE k
   k grade (p:real^(N)multivector) =\n     (lambdas s. if s HAS_SIZE k then p$$s else &0):real^(N)multivector
-  !k x. k multivector (k grade x)
-  !x y k. k grade (x + y) = (k grade x) + (k grade y)
-  !c x k. k grade (c % x) = c % (k grade x)
+  forall k x. k multivector (k grade x)
+  forall x y k. k grade (x + y) = (k grade x) + (k grade y)
+  forall c x k. k grade (c % x) = c % (k grade x)
   (Product mult op\n     :real^(N)multivector->real^(N)multivector->real^(N)multivector) x y =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n         (\\s. vsum {s | s SUBSET 1..dimindex(:N)}\n                (\\t. (x$$s * y$$t * mult s t) % mbasis (op s t)))
-  !mult op. bilinear(Product mult op)
+  forall mult op. bilinear(Product mult op)
   f:(num->bool)->(num->bool)->real
   {s | s SUBSET 1..dimindex(:N)}
   a * (if p then b else &0) = if p then a * b else &0
@@ -63933,86 +63933,86 @@ Multivariate/clifford quotations (161):
   t:num->bool
   s:num->bool
   r:num->bool
-  !op mult. (!s t. s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                    ==> (op s t) SUBSET 1..dimindex(:N)) /\\\n             (!s t u. op s (op t u) = op (op s t) u) /\\\n             (!s t u. mult t u * mult s (op t u) = mult s t * mult (op s t) u)\n             ==> !x y z:real^(N)multivector.\n                        Product mult op x (Product mult op y z) =\n                        Product mult op (Product mult op x y) z
+  forall op mult. (forall s t. s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                    ==> (op s t) SUBSET 1..dimindex(:N)) /\\\n             (forall s t u. op s (op t u) = op (op s t) u) /\\\n             (forall s t u. mult t u * mult s (op t u) = mult s t * mult (op s t) u)\n             ==> forall x y z:real^(N)multivector.\n                        Product mult op x (Product mult op y z) =\n                        Product mult op (Product mult op x y) z
   geom_mul:real^(N)multivector->real^(N)multivector->real^(N)multivector
   (x:real^(N)multivector) * y =\n        Product (\\s t. --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                              j IN 1..dimindex(:N) /\\\n                                              i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
   bilinear(geom_mul)
   (x <=> y <=> z) ==> ((a <=> x) <=> (y <=> z <=> a))
-  !x y z:real^(N)multivector. x * (y * z) = (x * y) * z
+  forall x y z:real^(N)multivector. x * (y * z) = (x * y) * z
   t:num->bool
   s:num->bool
   u:num->bool
   t:num->bool
-  !x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
+  forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
   (s INTER t = {}) ==> (s DIFF t) UNION (t DIFF s) = s UNION t
   s INTER t :num->bool = {}
-  !x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (UNION)\n                x y
+  forall x y:real^(N)multivector.\n    x outer y =\n        Product (\\s t. if ~(s INTER t = {}) then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (UNION)\n                x y
   bilinear(outer)
   t INTER u :num->bool = {}
   s INTER u :num->bool = {}
   s INTER t :num->bool = {}
   (t UNION u) INTER s = (t INTER s) UNION (u INTER s)
   s INTER (t UNION u) = (s INTER t) UNION (s INTER u)
-  !x y z:real^(N)multivector. x outer (y outer z) = (x outer y) outer z
-  !x y:real^(N)multivector.\n    x inner y =\n        Product (\\s t. if s = {} \\/ t = {} \\/\n                          ~((s DIFF t) = {} /\\ ~(t DIFF s = {}))\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
+  forall x y z:real^(N)multivector. x outer (y outer z) = (x outer y) outer z
+  forall x y:real^(N)multivector.\n    x inner y =\n        Product (\\s t. if s = {} \\/ t = {} \\/\n                          ~((s DIFF t) = {} /\\ ~(t DIFF s = {}))\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..dimindex(:N) /\\\n                                                   j IN 1..dimindex(:N) /\\\n                                                   i IN s /\\ j IN t /\\ i > j})\n                (\\s t. (s DIFF t) UNION (t DIFF s))\n                x y
   bilinear(inner)
   t SUBSET 1..dimindex(:N)
   (if p then &1 else &0) * (if q then &1 else &0) * x =\n    if q then if p then x else &0 else &0
-  !s t. Product mult op (mbasis s) (mbasis t) :real^(N)multivector =\n            if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n            then mult s t % mbasis(op s t)\n            else vec 0
+  forall s t. Product mult op (mbasis s) (mbasis t) :real^(N)multivector =\n            if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n            then mult s t % mbasis(op s t)\n            else vec 0
   {x} SUBSET s <=> x IN s
-  !i j. Product mult op (mbasis{i}) (mbasis{j}) :real^(N)multivector =\n            if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n            then mult {i} {j} % mbasis(op {i} {j})\n            else vec 0
-  !s t. mbasis s * mbasis t :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis((s DIFF t) UNION (t DIFF s))\n                else vec 0
+  forall i j. Product mult op (mbasis{i}) (mbasis{j}) :real^(N)multivector =\n            if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n            then mult {i} {j} % mbasis(op {i} {j})\n            else vec 0
+  forall s t. mbasis s * mbasis t :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N)\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis((s DIFF t) UNION (t DIFF s))\n                else vec 0
   i:num < j
   ~(i:num = j) ==> (j < i <=> ~(i < j))
   ~(i = j) ==> ({i} DIFF {j}) UNION ({j} DIFF {i}) = {i,j}
   i:num = j
   {i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}
-  !i j. mbasis{i} * mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n                then if i = j then mbasis{}\n                     else if i < j then mbasis{i,j}\n                     else --(mbasis{i,j})\n                else vec 0
+  forall i j. mbasis{i} * mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N)\n                then if i = j then mbasis{}\n                     else if i < j then mbasis{i,j}\n                     else --(mbasis{i,j})\n                else vec 0
   (s:num->bool) INTER t = {}
-  !s t. (mbasis s) outer (mbasis t) :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0
+  forall s t. (mbasis s) outer (mbasis t) :real^(N)multivector =\n                if s SUBSET 1..dimindex(:N) /\\ t SUBSET 1..dimindex(:N) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0
   i:num < j
   ~(i:num = j) ==> (j < i <=> ~(i < j))
   {i} UNION {j} = {i,j}
   {i',j' | i' IN 1 .. dimindex (:N) /\\\n             j' IN 1 .. dimindex (:N) /\\\n             i' = i /\\\n             j' = j /\\\n             i' > j'} =\n    if i > j then {(i,j)} else {}
   i:num = j
   {i} INTER {j} = {} <=> ~(i = j)
-  !i j. mbasis{i} outer mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0
+  forall i j. mbasis{i} outer mbasis{j} :real^(N)multivector =\n                if i IN 1..dimindex(:N) /\\ j IN 1..dimindex(:N) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0
   ~(i:num = j) ==> i < j /\\ ~(j < i) \\/ j < i /\\ ~(i < j)
   i:num = j
-  !i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})
-  !x:real^N. x = --x ==> x = vec 0
-  !i. mbasis{i} outer mbasis{i} = vec 0
+  forall i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})
+  forall x:real^N. x = --x ==> x = vec 0
+  forall i. mbasis{i} outer mbasis{i} = vec 0
   {i,j | i IN {} /\\ j IN s /\\ i:num > j} = {}
-  !x. mbasis{} outer x = x
+  forall x. mbasis{} outer x = x
   {i,j | i IN s /\\ j IN {} /\\ i:num > j} = {}
-  !x. x outer mbasis{} = x
+  forall x. x outer mbasis{} = x
   ~(n < m /\\ n:num > m)
   {(i:num),(j:num) | i IN {a} /\\ j IN s /\\ i > j} = {}
   {a} UNION s = a INSERT s
   {a} SUBSET t /\\ s SUBSET t <=> (a INSERT s) SUBSET t
   {a:num} INTER s = {}
-  !a s. (!x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s
-  ((!x:num. x IN {} ==> a < x) <=> T) /\\\n    ((!x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (!x. x IN s ==> a < x))
+  forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s
+  ((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))
   x - y:real^N = x + --y
-  (!x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (!i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (!i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (!i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (!i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (!x. mbasis{} outer x = x) /\\\n   (!x. x outer mbasis{} = x)
+  (forall x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (forall i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (forall i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (forall i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (forall x. mbasis{} outer x = x) /\\\n   (forall x. x outer mbasis{} = x)
   n - 1 < n <=> ~(n = 0)
   ?i:num. i IN s
   CARD:(num->bool)->num
-  !op f. ?h.\n        !s. h s = if INFINITE s \\/ s = {} then neutral op else\n                  let i = minimal x. x IN s in\n                  if s = {i} then f(i) else op (f i) (h (s DELETE i))
+  forall op f. ?h.\n        forall s. h s = if INFINITE s \\/ s = {} then neutral op else\n                  let i = minimal x. x IN s in\n                  if s = {i} then f(i) else op (f i) (h (s DELETE i))
   \\a b. (f:B->A->C) b a
-  !P. (?f. P f) <=> (?f:A->B->C. P (\\b a. f a b))
-  !s i. (!j. j IN s ==> i < j) ==> (minimal j. j IN (i INSERT s)) = i
+  forall P. (?f. P f) <=> (?f:A->B->C. P (\\b a. f a b))
+  forall s i. (forall j. j IN s ==> i < j) ==> (minimal j. j IN (i INSERT s)) = i
   ~(i IN s) /\\ ~(s = {}) ==> (s DELETE i = s) /\\ ~(i INSERT s = {i})
   ~((i:num) IN s)
-  (!op f. seqiterate op {} f = neutral op) /\\\n   (!op f i. seqiterate op {i} f = f(i)) /\\\n   (!op f i s. FINITE s /\\ ~(s = {}) /\\ (!j. j IN s ==> i < j)\n               ==> seqiterate op (i INSERT s) f =\n                   op (f i) (seqiterate op s f))
+  (forall op f. seqiterate op {} f = neutral op) /\\\n   (forall op f i. seqiterate op {i} f = f(i)) /\\\n   (forall op f i s. FINITE s /\\ ~(s = {}) /\\ (forall j. j IN s ==> i < j)\n               ==> seqiterate op (i INSERT s) f =\n                   op (f i) (seqiterate op s f))
   s DELETE (i:num) = {}
   i IN s ==> s = i INSERT (s DELETE i)
   i:num
-  !op f s. monoidal op /\\ FINITE s ==> seqiterate op s f = iterate op s f
+  forall op f s. monoidal op /\\ FINITE s ==> seqiterate op s f = iterate op s f
   outermorphism(f:real^N->real^P) (x:real^(N)multivector) =\n        vsum {s | s SUBSET 1..dimindex(:N)}\n             (\\s. x$$s % seqiterate(outer) s (multivec o f o basis))
   neutral(outer) = mbasis{}
-  !f:real^M->real^N s.\n        s SUBSET 1..dimindex(:M)\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)
-  !f. outermorphism f (mbasis {}) = mbasis {}
+  forall f:real^M->real^N s.\n        s SUBSET 1..dimindex(:M)\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)
+  forall f. outermorphism f (mbasis {}) = mbasis {}
   (reversion:real^(N)multivector->real^(N)multivector) x =\n    lambdas s. --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) * x$$s
 CARD_UNION_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1336669,bool),bool) s:fun('?1336669,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1336669,bool),bool) t:fun('?1336669,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1336669,bool),bool) u:fun('?1336669,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1336669,bool),bool) v:fun('?1336669,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1336669,bool),fun(fun('?1336669,bool),bool)) ((#INTER:fun(fun('?1336669,bool),fun(fun('?1336669,bool),fun('?1336669,bool))) s:fun('?1336669,bool)) t:fun('?1336669,bool))) #EMPTY:fun('?1336669,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1336669,bool),fun(fun('?1336669,bool),bool)) ((#INTER:fun(fun('?1336669,bool),fun(fun('?1336669,bool),fun('?1336669,bool))) u:fun('?1336669,bool)) v:fun('?1336669,bool))) #EMPTY:fun('?1336669,bool))) ((#=:fun(fun('?1336669,bool),fun(fun('?1336669,bool),bool)) ((#UNION:fun(fun('?1336669,bool),fun(fun('?1336669,bool),fun('?1336669,bool))) s:fun('?1336669,bool)) t:fun('?1336669,bool))) ((#UNION:fun(fun('?1336669,bool),fun(fun('?1336669,bool),fun('?1336669,bool))) u:fun('?1336669,bool)) v:fun('?1336669,bool)))))))))) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?1336669,bool),num) s:fun('?1336669,bool))) (#CARD:fun(fun('?1336669,bool),num) t:fun('?1336669,bool)))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?1336669,bool),num) u:fun('?1336669,bool))) (#CARD:fun(fun('?1336669,bool),num) v:fun('?1336669,bool)))))
 CARD_DIFF_INTER =  |- (#!:fun(fun(fun('?1336720,bool),bool),bool) (\s:fun('?1336720,bool). (#!:fun(fun(fun('?1336720,bool),bool),bool) (\t:fun('?1336720,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1336720,bool),bool) s:fun('?1336720,bool))) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun('?1336720,bool),num) s:fun('?1336720,bool))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('?1336720,bool),num) ((#DIFF:fun(fun('?1336720,bool),fun(fun('?1336720,bool),fun('?1336720,bool))) s:fun('?1336720,bool)) t:fun('?1336720,bool)))) (#CARD:fun(fun('?1336720,bool),num) ((#INTER:fun(fun('?1336720,bool),fun(fun('?1336720,bool),fun('?1336720,bool))) s:fun('?1336720,bool)) t:fun('?1336720,bool))))))))))

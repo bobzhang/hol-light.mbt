@@ -12909,8 +12909,8 @@ Generating HOL version of proof
 100/sqrt quotations (5):
   p = (n / m) pow 2 ==> ~(m = &0) ==> m pow 2 * p = n pow 2
   \\x:real. x pow 2
-  !n. rational(sqrt(&n)) ==> ?m. n = m EXP 2
-  !p. prime p ==> ~rational(sqrt(&p))
+  forall n. rational(sqrt(&n)) ==> ?m. n = m EXP 2
+  forall p. prime p ==> ~rational(sqrt(&p))
   ~rational(sqrt(&2))
 IRRATIONAL_SQRT_NONSQUARE =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#rational:fun(real,bool) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) n:num)))) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
 IRRATIONAL_SQRT_PRIME =  |- (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) (#~:fun(bool,bool) (#rational:fun(real,bool) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) p:num)))))))

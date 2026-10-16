@@ -46,41 +46,41 @@ test "ind_defs matches ind_defs.ml" {
     sthm(@ind_defs.exists_equation(e)(th))
   })
   ndef(
-    "RTC", "(!x:A. RTC R x x) /\\ (!x y z. R x y /\\ RTC R y z ==> RTC R x z)",
+    "RTC", "(forall x:A. RTC R x x) /\\ (forall x y z. R x y /\\ RTC R y z ==> RTC R x z)",
   )
   ndef(
-    "EVOD", "EV (a:A) /\\ (!x. OD x ==> EV ((f:A->A) x)) /\\ (!x. EV x ==> OD (f x))",
+    "EVOD", "EV (a:A) /\\ (forall x. OD x ==> EV ((f:A->A) x)) /\\ (forall x. EV x ==> OD (f x))",
   )
-  ndef("EVB", "EVB T /\\ (!x. ODB x ==> EVB (~x)) /\\ (!x. EVB x ==> ODB (~x))")
+  ndef("EVB", "EVB T /\\ (forall x. ODB x ==> EVB (~x)) /\\ (forall x. EVB x ==> ODB (~x))")
   log.attempt("strong_ok", () => {
-    let t = tm("NB F /\\ (!x. NB x ==> NB (~x))")
+    let t = tm("NB F /\\ (forall x. NB x ==> NB (~x))")
     let (rules, ind, _) = @ind_defs.new_inductive_definition(t)
     sthm(@ind_defs.derive_strong_induction((rules, ind)))
   })
-  ndef("ACC", "!x:A. (!y. R y x ==> ACC R y) ==> ACC R x")
+  ndef("ACC", "forall x:A. (forall y. R y x ==> ACC R y) ==> ACC R x")
   ndef(
-    "RTC_again", "(!x:A. RTC R x x) /\\ (!x y z. R x y /\\ RTC R y z ==> RTC R x z)",
+    "RTC_again", "(forall x:A. RTC R x x) /\\ (forall x y z. R x y /\\ RTC R y z ==> RTC R x z)",
   )
   log.attempt("exist", () => {
-    let t = tm("(!x:A. TC R x x ==> TC R x x) /\\ (!x y. R x y ==> TC R x y)")
+    let t = tm("(forall x:A. TC R x x ==> TC R x x) /\\ (forall x y. R x y ==> TC R x y)")
     sthm(@ind_defs.prove_inductive_relations_exist(t))
   })
   log.attempt("derive_nonschematic", () => {
-    let t = tm("(!x:A. Q x) /\\ (!x. Q x ==> Q ((g:A->A) x))")
+    let t = tm("(forall x:A. Q x) /\\ (forall x. Q x ==> Q ((g:A->A) x))")
     sthm(@ind_defs.derive_nonschematic_inductive_relations(t))
   })
-  ndef("bad_clause", "!x:A. ~(BAD x) ==> BAD x")
+  ndef("bad_clause", "forall x:A. ~(BAD x) ==> BAD x")
   log.attempt("strong", () => {
-    let t = tm("EV2 (a:A) /\\ (!x. EV2 x ==> EV2 ((f:A->A) x))")
+    let t = tm("EV2 (a:A) /\\ (forall x. EV2 x ==> EV2 ((f:A->A) x))")
     let (rules, ind, _) = @ind_defs.new_inductive_definition(t)
     sthm(@ind_defs.derive_strong_induction((rules, ind)))
   })
   log.attempt("prove_monotonicity_hyps", () => {
-    let th = @kernel.assume_rule(tm("(!x:A. P x ==> Q x) ==> R"))
+    let th = @kernel.assume_rule(tm("(forall x:A. P x ==> Q x) ==> R"))
     sthm(@ind_defs.prove_monotonicity_hyps(th))
   })
   log.attempt("MONO_TAC", () => {
-    let w = tm("(!x:A. P x ==> Q x) ==> (!x. P x /\\ c) ==> (!x. Q x /\\ c)")
+    let w = tm("(forall x:A. P x ==> Q x) ==> (forall x. P x /\\ c) ==> (forall x. Q x /\\ c)")
     let tac = @tactics.then_tac(@tactics.disch_tac, g => @ind_defs.mono_tac(g))
     let (_, gls, _) = tac((@list.List([]), w))
     gls.length().to_string()
@@ -294,10 +294,10 @@ test "ind_defs matches ind_defs.ml" {
       #|Searching with limit 1
       #|ind_defs quotations (5):
       #|  t:A
-      #|  !P t. (!x:A. (x = t) ==> P x) ==> (?) P
+      #|  forall P t. (forall x:A. (x = t) ==> P x) ==> (?) P
       #|  T
       #|  (==>)
-      #|  !p. p ==> p
+      #|  forall p. p ==> p
       #|strip_ncomb = (f:fun('A,fun('A,fun('A,'A))) a:'A) [b:'A; c:'A]
       #|strip_ncomb_bad ! dest_comb: not a combination
       #|RIGHT_BETAS ! BETA_CONV: Not a beta-redex

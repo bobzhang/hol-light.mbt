@@ -81946,10 +81946,10 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  basis 1:real^N = vec 0 \\/ x + --(&1) % y:real^N = vec 0
       #|  y:real^N
       #|  x:real^N
-      #|  ?g. linear g /\\\n        (!x. g (m (basis 1) x) = x) /\\\n        (!x. (m:real^N->real^N->real^N) (basis 1) (g x) = x)
+      #|  ?g. linear g /\\\n        (forall x. g (m (basis 1) x) = x) /\\\n        (forall x. (m:real^N->real^N->real^N) (basis 1) (g x) = x)
       #|  ~(n = 1) ==> 1 <= n ==> 2 <= n
       #|  dimindex(:N) = 1
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\ (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) = 1 \\/ EVEN(dimindex(:N))
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\ (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) = 1 \\/ EVEN(dimindex(:N))
       #|  x = --(&1) % x <=> x:real^N = vec 0
       #|  x:real^N
       #|  ~(s SUBSET {a}) <=> ?x. x IN s /\\ ~(x = a)
@@ -81998,37 +81998,37 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  {x | x IN s DELETE vec 0 /\\ (f:real^N->real^N) x IN k} =\n      s INTER {x | x IN UNIV /\\ (f:real^N->real^N) x IN k}
       #|  k:real^N->bool
       #|  x + y:real^N = x <=> y = vec 0
-      #|  !x. (f:real^N->real^N) x = vec 0 <=> x = vec 0
+      #|  forall x. (f:real^N->real^N) x = vec 0 <=> x = vec 0
       #|  s DELETE (vec 0:real^N)
       #|  s DELETE (vec 0:real^N)
       #|  f:real^N->real^N
       #|  f:real^N->real^N = \\x. m x x
-      #|  (!x y c. (m:real^N->real^N->real^N) x (c % y) = c % m x y) /\\\n    (!x y z. m x (y + z) = m x y + m x z)
+      #|  (forall x y c. (m:real^N->real^N->real^N) x (c % y) = c % m x y) /\\\n    (forall x y z. m x (y + z) = m x y + m x z)
       #|  n <= 2 <=> ~(3 <= n)
-      #|  !m:real^N->real^N->real^N s.\n        bilinear m /\\\n        subspace s /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0) /\\\n        (!x y. x IN s /\\ y IN s ==> m x y IN s /\\ m x y = m y x)\n        ==> dim s <= 2
+      #|  forall m:real^N->real^N->real^N s.\n        bilinear m /\\\n        subspace s /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0) /\\\n        (forall x y. x IN s /\\ y IN s ==> m x y IN s /\\ m x y = m y x)\n        ==> dim s <= 2
       #|  x:real^N
       #|  --(&1) % x:real^N
       #|  m:real^N->real^N->real^N
       #|  1 <= n /\\ n <= 2 ==> n = 1 \\/ n = 2
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\\n        (!x y. m x y = m y x) /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2}
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m x y = m y x) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2}
       #|  x + --(&1) % x:real^N = vec 0
       #|  x - y:real^N = x + --(&1) % y
-      #|  !x. (e:real^N = vec 0 \\/ m e x - x:real^N = vec 0) /\\\n        (m x e - x = vec 0 \\/ e = vec 0)
+      #|  forall x. (e:real^N = vec 0 \\/ m e x - x:real^N = vec 0) /\\\n        (m x e - x = vec 0 \\/ e = vec 0)
       #|  x + --(&1) % y = vec 0 <=> x:real^N = y
       #|  basis 1:real^N = vec 0 \\/\n                (m:real^N->real^N->real^N) e e + --(&1) % e = vec 0
       #|  e:real^N = vec 0
       #|  e:real^N
-      #|  !x y. (m:real^N->real^N->real^N) (basis 1) x + -- &1 % m (basis 1) y =\n            m (basis 1) (x + -- &1 % y)
+      #|  forall x y. (m:real^N->real^N->real^N) (basis 1) x + -- &1 % m (basis 1) y =\n            m (basis 1) (x + -- &1 % y)
       #|  x:real^N = y <=> x + -- &1 % y = vec 0
       #|  (m:real^N->real^N->real^N) (basis 1)
       #|  ?e. (m:real^N->real^N->real^N) (basis 1) e = basis 1
       #|  ~(basis 1:real^N = vec 0)
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\\n        (!x y. m (m x x) y = m x (m x y)) /\\\n        (!x y. m (m x y) y = m x (m y y)) /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (!x. m e x = x) /\\ (!x. m x e = x)
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\\n        (!x y z. m (m x y) z = m x (m y z)) /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (!x. m e x = x) /\\ (!x. m x e = x)
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m (m x x) y = m x (m x y)) /\\\n        (forall x y. m (m x y) y = m x (m y y)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x)
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y z. m (m x y) z = m x (m y z)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x)
       #|  dim{m i i:real^N,i,e}
       #|  ~(basis 1:real^N = vec 0)
       #|  ~(e:real^N = vec 0)
-      #|  !w z:real^N. w IN C /\\ z IN C ==> m (m i w) (m i z) = m i (m (m w z) i)
+      #|  forall w z:real^N. w IN C /\\ z IN C ==> m (m i w) (m i z) = m i (m (m w z) i)
       #|  y:real^N
       #|  (m:real^N->real^N->real^N) i x = m x i /\\ m i y = m y i
       #|  (p ==> (q <=> r)) ==> (p ==> q) ==> (p ==> r)
@@ -82039,12 +82039,12 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  (x:real^N) IN C
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
       #|  x:real^N
-      #|  !x. x IN C ==> (m:real^N->real^N->real^N) i x = m x i
+      #|  forall x. x IN C ==> (m:real^N->real^N->real^N) i x = m x i
       #|  C:real^N->bool
       #|  m:real^N->real^N->real^N
       #|  (i:real^N) IN C
-      #|  !x:real^N. C x <=> x IN C
-      #|  (!x:real^N. x IN {e} ==> C x) /\\\n     (!x. C x ==> C(m i x)) /\\\n     (!x. C x ==> C(m x i)) /\\\n     (!c x. C x ==> C(c % x)) /\\\n     (!x y. C x /\\ C y ==> C(x + y))
+      #|  forall x:real^N. C x <=> x IN C
+      #|  (forall x:real^N. x IN {e} ==> C x) /\\\n     (forall x. C x ==> C(m i x)) /\\\n     (forall x. C x ==> C(m x i)) /\\\n     (forall c x. C x ==> C(c % x)) /\\\n     (forall x y. C x /\\ C y ==> C(x + y))
       #|  C:real^N->bool
       #|  {e,i} = {i,e}
       #|  i IN span {e:real^N}
@@ -82054,21 +82054,21 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  x - y:real^N = x + --(&1) % y
       #|  (A:real^N#real^N#real^N->real^N)(y,m z z,x) +\n        m (A(x,y,z)) z - A(x,y,m z z)
       #|  (A:real^N#real^N#real^N->real^N)(y,m z z,x) - A(m y z,z,x)
-      #|  !x:real^N y:real^N z:real^N. A(m z x,y,z) = m (A(x,y,z)) z
+      #|  forall x:real^N y:real^N z:real^N. A(m z x,y,z) = m (A(x,y,z)) z
       #|  x:real^N = --y <=> x + y = vec 0
       #|  (A:real^N#real^N#real^N->real^N)(x + z,y,x + z) = vec 0
       #|  --(A:real^N#real^N#real^N->real^N)(z,y,x)
-      #|  !x y z. (A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,z,x)
+      #|  forall x y z. (A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,z,x)
       #|  (A:real^N#real^N#real^N->real^N)(x + y,x + y,z) = vec 0
-      #|  !x y z. --(A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,x,z)
-      #|  (!x y. (A:real^N#real^N#real^N->real^N)(x,x,y) = vec 0) /\\\n      (!x y. (A:real^N#real^N#real^N->real^N)(x,y,y) = vec 0) /\\\n      (!x y. (A:real^N#real^N#real^N->real^N)(x,y,x) = vec 0) /\\\n      (!w x y z. (A:real^N#real^N#real^N->real^N)(w + x,y,z) =\n                 A(w,y,z) + A(x,y,z)) /\\\n      (!w x y z. A(w,x + y,z) = A(w,x,z) + A(w,y,z)) /\\\n      (!w x y z. A(w,x,y + z) = A(w,x,y) + A(w,x,z))
+      #|  forall x y z. --(A:real^N#real^N#real^N->real^N)(x,y,z) = A(y,x,z)
+      #|  (forall x y. (A:real^N#real^N#real^N->real^N)(x,x,y) = vec 0) /\\\n      (forall x y. (A:real^N#real^N#real^N->real^N)(x,y,y) = vec 0) /\\\n      (forall x y. (A:real^N#real^N#real^N->real^N)(x,y,x) = vec 0) /\\\n      (forall w x y z. (A:real^N#real^N#real^N->real^N)(w + x,y,z) =\n                 A(w,y,z) + A(x,y,z)) /\\\n      (forall w x y z. A(w,x + y,z) = A(w,x,z) + A(w,y,z)) /\\\n      (forall w x y z. A(w,x,y + z) = A(w,x,y) + A(w,x,z))
       #|  A = \\(x:real^N,y,z). m x (m y z) - m (m x y) z
-      #|  !x y z:real^N. m (m z x) (m y z) = m z (m (m x y) z)
-      #|  !x y:real^N. m (m x y) y = m x (m y y)
-      #|  !x y:real^N. m (m x y) x = m x (m y x)
+      #|  forall x y z:real^N. m (m z x) (m y z) = m z (m (m x y) z)
+      #|  forall x y:real^N. m (m x y) y = m x (m y y)
+      #|  forall x y:real^N. m (m x y) x = m x (m y x)
       #|  e:real^N
       #|  m:real^N->real^N->real^N
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\\n        (!x y. m (m x x) y = m x (m x y)) /\\\n        (!x y. m (m x y) y = m x (m y y)) /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (!x. m e x = x) /\\ (!x. m x e = x) /\\\n                (!x. m x x IN span {e,x})
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y. m (m x x) y = m x (m x y)) /\\\n        (forall x y. m (m x y) y = m x (m y y)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> ?e. (forall x. m e x = x) /\\ (forall x. m x e = x) /\\\n                (forall x. m x x IN span {e,x})
       #|  x + y:real^N
       #|  x:real^N
       #|  y:real^N
@@ -82076,8 +82076,8 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  x:real^N
       #|  y:real^N
       #|  subspace s /\\ subspace t /\\ span s = span t ==> s = t
-      #|  IMAGE f c SUBSET d /\\ IMAGE f d SUBSET c /\\\n   (!x y. f x = f y ==> x = y) /\\\n   IMAGE f (IMAGE f c) = c\n   ==> d = IMAGE f c
-      #|  !x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
+      #|  IMAGE f c SUBSET d /\\ IMAGE f d SUBSET c /\\\n   (forall x y. f x = f y ==> x = y) /\\\n   IMAGE f (IMAGE f c) = c\n   ==> d = IMAGE f c
+      #|  forall x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
       #|  --x:real^N = y <=> x = --y
       #|  (k:real^N) IN D
       #|  IMAGE ((m:real^N->real^N->real^N) k) C SUBSET D /\\\n    IMAGE ((m:real^N->real^N->real^N) k) D SUBSET C
@@ -82085,17 +82085,17 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  k:real^N = vec 0 \\/ x + --(&1) % y:real^N = vec 0
       #|  y:real^N
       #|  x:real^N
-      #|  !x y. (m:real^N->real^N->real^N) k x = m k y <=> x = y
+      #|  forall x y. (m:real^N->real^N->real^N) k x = m k y <=> x = y
       #|  linear((m:real^N->real^N->real^N) k)
       #|  k:real^N
       #|  ~(s SUBSET {z}) <=> ?a. a IN s /\\ ~(a = z)
       #|  2 + d = 4 <=> d = 2
       #|  dim(D:real^N->bool) = 0
-      #|  !x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
+      #|  forall x y z. (m:real^N->real^N->real^N) (m x y) z = m x (m y z)
       #|  inv(&2) % (x + m i (m x i)):real^N
       #|  inv(&2) % (x + --(&1) % m i (m x i)):real^N
       #|  x:real^N
-      #|  s = UNIV <=> !x. x IN s
+      #|  s = UNIV <=> forall x. x IN s
       #|  dim(C UNION D:real^N->bool) = dimindex(:N)
       #|  a:real^N = b /\\ --a = b <=> a = vec 0 /\\ b = vec 0
       #|  C INTER D:real^N->bool = {vec 0}
@@ -82107,7 +82107,7 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  D = {x | --((m:real^N->real^N->real^N) i x) = m x i}
       #|  {k:real^N,i,e}
       #|  k:real^N
-      #|  t SUBSET s /\\ (!a. a IN s /\\ ~(a IN t) ==> F) ==> s = t
+      #|  t SUBSET s /\\ (forall a. a IN s /\\ ~(a IN t) ==> F) ==> s = t
       #|  {x | (m:real^N->real^N->real^N) i x = m x i} = C
       #|  j:real^N
       #|  span{j:real^N,e} = span{i,e}
@@ -82136,12 +82136,12 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  ?i. i IN C /\\ (m:real^N->real^N->real^N) i i = --e
       #|  {m j j:real^N,j,e}
       #|  (~p ==> F) ==> p
-      #|  !x y:real^N. x IN C /\\ y IN C ==> m x y IN C
+      #|  forall x y:real^N. x IN C /\\ y IN C ==> m x y IN C
       #|  dim(C:real^N->bool) = 2
       #|  subspace(C:real^N->bool)
       #|  (e:real^N) IN C /\\ j IN C
       #|  C = span{j:real^N,e}
-      #|  (!x. (m:real^N->real^N->real^N) x (vec 0) = vec 0) /\\\n    (!x. (m:real^N->real^N->real^N) (vec 0) x = vec 0)
+      #|  (forall x. (m:real^N->real^N->real^N) x (vec 0) = vec 0) /\\\n    (forall x. (m:real^N->real^N->real^N) (vec 0) x = vec 0)
       #|  m:real^N->real^N->real^N
       #|  C:real^N->bool = {}
       #|  dim(C:real^N->bool)
@@ -82154,11 +82154,11 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  y:real^N
       #|  x:real^N
       #|  z:real^N
-      #|  !x y. x IN C /\\ y IN C ==> (m:real^N->real^N->real^N) x y = m y x
-      #|  !x:real^N. C x <=> x IN C
-      #|  (!x:real^N. x IN s ==> C x) /\\\n      (!c x. C x ==> C(c % x)) /\\\n      (!x y. C x /\\ C y ==> C(x + y)) /\\\n      (!x y. C x /\\ C y ==> C(m x y))
+      #|  forall x y. x IN C /\\ y IN C ==> (m:real^N->real^N->real^N) x y = m y x
+      #|  forall x:real^N. C x <=> x IN C
+      #|  (forall x:real^N. x IN s ==> C x) /\\\n      (forall c x. C x ==> C(c % x)) /\\\n      (forall x y. C x /\\ C y ==> C(x + y)) /\\\n      (forall x y. C x /\\ C y ==> C(m x y))
       #|  C:real^N->bool
-      #|  !s. (!x y. x IN s /\\ y IN s ==> (m:real^N->real^N->real^N) x y = m y x)\n        ==> dim s <= 2
+      #|  forall s. (forall x y. x IN s /\\ y IN s ==> (m:real^N->real^N->real^N) x y = m y x)\n        ==> dim s <= 2
       #|  j:real^N
       #|  ~(s = UNIV) ==> ?x. ~(x IN s)
       #|  dim:(real^N->bool)->num
@@ -82167,7 +82167,7 @@ test "Examples/division_algebras matches Examples/division_algebras.ml" {
       #|  ~(e:real^N = vec 0)
       #|  e:real^N
       #|  m:real^N->real^N->real^N
-      #|  !m:real^N->real^N->real^N.\n        bilinear m /\\\n        (!x y z. m (m x y) z = m x (m y z)) /\\\n        (!x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2,4}
+      #|  forall m:real^N->real^N->real^N.\n        bilinear m /\\\n        (forall x y z. m (m x y) z = m x (m y z)) /\\\n        (forall x y. m x y = vec 0 ==> x = vec 0 \\/ y = vec 0)\n        ==> dimindex(:N) IN {1,2,4}
       #|DIVISION_ALGEBRA =  |- (#!:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))))))))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#EVEN:fun(num,bool) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))))))
       #|COMMUTATIVE_DIVISION_ALGEBRA_GEN =  |- (#!:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) ((#/\:fun(bool,fun(bool,bool)) (#subspace:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) s:fun(cart(real,'N),bool))) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) s:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) s:fun(cart(real,'N),bool))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) y:cart(real,'N)) x:cart(real,'N))))))))))))) ((#<=:fun(num,fun(num,bool)) (#dim:fun(fun(cart(real,'N),bool),num) s:fun(cart(real,'N),bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|COMMUTATIVE_DIVISION_ALGEBRA =  |- (#!:fun(fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool),bool) (\m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#bilinear:fun(fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))),bool) m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) y:cart(real,'N)) x:cart(real,'N)))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) ((m:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) y:cart(real,'N))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) y:cart(real,'N)) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num)))))))))))) ((#IN:fun(num,fun(fun(num,bool),bool)) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) #EMPTY:fun(num,bool)))))))

@@ -6166,20 +6166,20 @@ test "Library/transc matches Library/transc.ml" {
       #|Library/transc quotations (2073):
       #|  ~(n < p:num)
       #|  p:num
-      #|  !n x y. sum(0,SUC n)(\\p. (x pow p) * y pow ((SUC n) - p)) =\n                y * sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p)))
+      #|  forall n x y. sum(0,SUC n)(\\p. (x pow p) * y pow ((SUC n) - p)) =\n                y * sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p)))
       #|  (a + b) + (c + d) = (d + a) + (c + b)
       #|  n:num
       #|  SUC n
       #|  a * (b * c) = b * (a * c)
-      #|  !n x y. (x pow (SUC n)) - (y pow (SUC n)) =\n                (x - y) * sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p)))
+      #|  forall n x y. (x pow (SUC n)) - (y pow (SUC n)) =\n                (x - y) * sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p)))
       #|  p:num
       #|  x:real = y
-      #|  !n x y. sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p))) =\n                sum(0,SUC n)(\\p. (x pow (n - p)) * (y pow p))
+      #|  forall n x y. sum(0,SUC n)(\\p. (x pow p) * (y pow (n - p))) =\n                sum(0,SUC n)(\\p. (x pow (n - p)) * (y pow p))
       #|  abs(z)
       #|  n:num
       #|  abs(z) < &0
       #|  ~(abs(x) = &0)
-      #|  !n. abs(z pow n) / abs(x pow n) =\n                        (abs(z) / abs(x)) pow n
+      #|  forall n. abs(z pow n) / abs(x pow n) =\n                        (abs(z) / abs(x)) pow n
       #|  K * inv(&1 - (abs(z) / abs(x)))
       #|  z pow n
       #|  a * b * c = (a * c) * b
@@ -6188,24 +6188,24 @@ test "Library/transc matches Library/transc.ml" {
       #|  0
       #|  \\n. (K * abs(z pow n)) / abs(x pow n)
       #|  K:real
-      #|  !f x z. summable (\\n. f(n) * (x pow n)) /\\ abs(z) < abs(x)\n        ==> summable (\\n. abs(f(n)) * (z pow n))
+      #|  forall f x z. summable (\\n. f(n) * (x pow n)) /\\ abs(z) < abs(x)\n        ==> summable (\\n. abs(f(n)) * (z pow n))
       #|  z:real
-      #|  !f x z. summable (\\n. f(n) * (x pow n)) /\\ abs(z) < abs(x)\n        ==> summable (\\n. f(n) * (z pow n))
+      #|  forall f x z. summable (\\n. f(n) * (x pow n)) /\\ abs(z) < abs(x)\n        ==> summable (\\n. f(n) * (z pow n))
       #|  diffs c = (\\n. &(SUC n) * c(SUC n))
-      #|  !c. diffs(\\n. --(c n)) = \\n. --((diffs c) n)
-      #|  !n c x. sum(0,n) (\\n. (diffs c)(n) * (x pow n)) =\n           sum(0,n) (\\n. &n * c(n) * (x pow (n - 1))) +\n             (&n * c(n) * x pow (n - 1))
-      #|  !n c x. sum(0,n) (\\n. &n * c(n) * (x pow (n - 1))) =\n           sum(0,n) (\\n. (diffs c)(n) * (x pow n)) -\n                (&n * c(n) * x pow (n - 1))
+      #|  forall c. diffs(\\n. --(c n)) = \\n. --((diffs c) n)
+      #|  forall n c x. sum(0,n) (\\n. (diffs c)(n) * (x pow n)) =\n           sum(0,n) (\\n. &n * c(n) * (x pow (n - 1))) +\n             (&n * c(n) * x pow (n - 1))
+      #|  forall n c x. sum(0,n) (\\n. &n * c(n) * (x pow (n - 1))) =\n           sum(0,n) (\\n. (diffs c)(n) * (x pow n)) -\n                (&n * c(n) * x pow (n - 1))
       #|  summable(\\n. (diffs c)(n) * (x pow n))
       #|  (\\n. &n * c(n) * (x pow (n - 1))) tends_num_real &0
-      #|  !c x. summable(\\n. (diffs c)(n) * (x pow n)) ==>\n      (\\n. &n * c(n) * (x pow (n - 1))) sums\n         (suminf(\\n. (diffs c)(n) * (x pow n)))
+      #|  forall c x. summable(\\n. (diffs c)(n) * (x pow n)) ==>\n      (\\n. &n * c(n) * (x pow (n - 1))) sums\n         (suminf(\\n. (diffs c)(n) * (x pow n)))
       #|  p:num
-      #|  !m z h.\n     sum(0,m)(\\p. (((z + h) pow (m - p)) * (z pow p)) - (z pow m)) =\n       sum(0,m)(\\p. (z pow p) *\n       (((z + h) pow (m - p)) - (z pow (m - p))))
+      #|  forall m z h.\n     sum(0,m)(\\p. (((z + h) pow (m - p)) * (z pow p)) - (z pow m)) =\n       sum(0,m)(\\p. (z pow p) *\n       (((z + h) pow (m - p)) - (z pow (m - p))))
       #|  q:num
       #|  d:num
       #|  p:num
       #|  n:num
       #|  m:num
-      #|  !z h. ~(h = &0) ==>\n       (((((z + h) pow n) - (z pow n)) / h) - (&n * (z pow (n - 1))) =\n        h * sum(0,n - 1)(\\p. (z pow p) *\n              sum(0,(n - 1) - p)\n                (\\q. ((z + h) pow q) *\n                       (z pow (((n - 2) - p) - q)))))
+      #|  forall z h. ~(h = &0) ==>\n       (((((z + h) pow n) - (z pow n)) / h) - (&n * (z pow (n - 1))) =\n        h * sum(0,n - 1)(\\p. (z pow p) *\n              sum(0,(n - 1) - p)\n                (\\q. ((z + h) pow q) *\n                       (z pow (((n - 2) - p) - q)))))
       #|  e:num
       #|  q < (SUC d)
       #|  q:num
@@ -6221,7 +6221,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  n:num
       #|  r:num
       #|  p:num
-      #|  !z h n K. ~(h = &0) /\\ abs(z) <= K /\\ abs(z + h) <= K ==>\n    abs(((((z + h) pow n) - (z pow n)) / h) - (&n * (z pow (n - 1))))\n        <= &n * &(n - 1) * (K pow (n - 2)) * abs(h)
+      #|  forall z h n K. ~(h = &0) /\\ abs(z) <= K /\\ abs(z + h) <= K ==>\n    abs(((((z + h) pow n) - (z pow n)) / h) - (&n * (z pow (n - 1))))\n        <= &n * &(n - 1) * (K pow (n - 2)) * abs(h)
       #|  (e / K) / &2
       #|  ~(K = &0)
       #|  &0 < K
@@ -6247,7 +6247,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0 < k
       #|  k / &2
       #|  &0 <= K
-      #|  !f K k. &0 < k /\\\n           (!h. &0 < abs(h) /\\ abs(h) < k ==> abs(f h) <= K * abs(h))\n        ==> (f tends_real_real &0)(&0)
+      #|  forall f K k. &0 < k /\\\n           (forall h. &0 < abs(h) /\\ abs(h) < k ==> abs(f h) <= K * abs(h))\n        ==> (f tends_real_real &0)(&0)
       #|  k:real
       #|  suminf(f)
       #|  suminf(\\n. abs(g(h:real)(n:num)))
@@ -6257,13 +6257,13 @@ test "Library/transc matches Library/transc.ml" {
       #|  summable(\\n. abs(g(h:real)(n:num)))
       #|  suminf(f) * abs(h)
       #|  summable(\\n. f(n) * abs(h))
-      #|  !h. &0 < abs(h) /\\ abs(h) < k ==>\n    abs(suminf(g h)) <= (suminf(f) * abs(h))
+      #|  forall h. &0 < abs(h) /\\ abs(h) < k ==>\n    abs(suminf(g h)) <= (suminf(f) * abs(h))
       #|  h:real
       #|  h:real
       #|  f sums (suminf f)
       #|  abs(h)
       #|  h:real
-      #|  !f g k. &0 < k /\\\n         summable(f) /\\\n         (!h. &0 < abs(h) /\\ abs(h) < k ==> !n. abs(g(h) n) <= (f(n) * abs(h)))\n             ==> ((\\h. suminf(g h)) tends_real_real &0)(&0)
+      #|  forall f g k. &0 < k /\\\n         summable(f) /\\\n         (forall h. &0 < abs(h) /\\ abs(h) < k ==> forall n. abs(g(h) n) <= (f(n) * abs(h)))\n             ==> ((\\h. suminf(g h)) tends_real_real &0)(&0)
       #|  abs(x) + abs(h)
       #|  n:num
       #|  h:real
@@ -6283,7 +6283,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  n:num
       #|  m:num
       #|  (\\n. &n * &(SUC n) * abs(c(SUC n)) * (R pow (n - 1))) =\n           \\n. diffs(\\m. &(m - 1) * abs(c m) / R) n * (R pow n)
-      #|  !n. diffs(diffs (\\n. abs(c n))) n * (R pow n) =\n           &(SUC n) * &(SUC(SUC n)) * abs(c(SUC(SUC n))) * (R pow n)
+      #|  forall n. diffs(diffs (\\n. abs(c n))) n * (R pow n) =\n           &(SUC n) * &(SUC(SUC n)) * abs(c(SUC(SUC n))) * (R pow n)
       #|  abs(x)
       #|  abs(R) = R
       #|  K:real
@@ -6310,7 +6310,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  abs(K) - abs(x)
       #|  e:real
       #|  \\h. suminf(\\n. ((c(n) * ((x + h) pow n)) -\n                             (c(n) * (x pow n))) / h)
-      #|  !c K. summable(\\n. c(n) * (K pow n)) /\\\n         summable(\\n. (diffs c)(n) * (K pow n)) /\\\n         summable(\\n. (diffs(diffs c))(n) * (K pow n)) /\\\n         abs(x) < abs(K)\n        ==> ((\\x. suminf (\\n. c(n) * (x pow n))) diffl\n             (suminf (\\n. (diffs c)(n) * (x pow n))))(x)
+      #|  forall c K. summable(\\n. c(n) * (K pow n)) /\\\n         summable(\\n. (diffs c)(n) * (K pow n)) /\\\n         summable(\\n. (diffs(diffs c))(n) * (K pow n)) /\\\n         abs(x) < abs(K)\n        ==> ((\\x. suminf (\\n. c(n) * (x pow n))) diffl\n             (suminf (\\n. (diffs c)(n) * (x pow n))))(x)
       #|  &0
       #|  &0
       #|  d:num
@@ -6324,8 +6324,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  &(SUC(SUC N)) * abs(x) / &(SUC N)
       #|  N:num
       #|  abs(x) / (&1 - abs(x))
-      #|  !n. abs(x) / (&1 - abs(x)) < &n <=> &(SUC n) * abs(x) < &n
-      #|  !x. abs(x) < &1 ==> (\\n. &n * x pow n) tends_num_real &0
+      #|  forall n. abs(x) / (&1 - abs(x)) < &n <=> &(SUC n) * abs(x) < &n
+      #|  forall x. abs(x) < &1 ==> (\\n. &n * x pow n) tends_num_real &0
       #|  (a * b) * c = b * a * c
       #|  (b ==> c) ==> (a ==> b) ==> (a ==> c)
       #|  &1
@@ -6347,17 +6347,17 @@ test "Library/transc matches Library/transc.ml" {
       #|  1 <= m <=> ~(m = 0)
       #|  sum(0,1) (\\n. diffs c n * x pow n)
       #|  x = &0
-      #|  !K. (!x. abs(x) < K ==> summable(\\n. c(n) * x pow n))\n       ==> !x. abs(x) < K ==> summable (\\n. diffs c n * x pow n)
+      #|  forall K. (forall x. abs(x) < K ==> summable(\\n. c(n) * x pow n))\n       ==> forall x. abs(x) < K ==> summable (\\n. diffs c n * x pow n)
       #|  K:real
-      #|  !x. abs(x) < abs(K) ==> summable (\\n. diffs(diffs c) n * x pow n)
-      #|  !x. abs(x) < abs(K) ==> summable (\\n. diffs c n * x pow n)
+      #|  forall x. abs(x) < abs(K) ==> summable (\\n. diffs(diffs c) n * x pow n)
+      #|  forall x. abs(x) < abs(K) ==> summable (\\n. diffs c n * x pow n)
       #|  K:real
       #|  abs(x) < abs(K)
       #|  abs(x) < abs((abs(x) + abs(K)) / &2) /\\\n                abs((abs(x) + abs(K)) / &2) < abs(K)
       #|  (abs(x) + abs(K)) / &2
-      #|  !c K x.\n        summable(\\n. c(n) * (K pow n)) /\\ abs(x) < abs(K)\n        ==> ((\\x. suminf (\\n. c(n) * (x pow n))) diffl\n             (suminf (\\n. (diffs c)(n) * (x pow n))))(x)
+      #|  forall c K x.\n        summable(\\n. c(n) * (K pow n)) /\\ abs(x) < abs(K)\n        ==> ((\\x. suminf (\\n. c(n) * (x pow n))) diffl\n             (suminf (\\n. (diffs c)(n) * (x pow n))))(x)
       #|  a(0) = sum(0,1) (\\n. a n * (&0) pow n)
-      #|  !a. (\\n. a n * (&0) pow n) sums a(0)
+      #|  forall a. (\\n. a n * (&0) pow n) sums a(0)
       #|  (a = b) /\\ &0 < e ==> abs(a - b) < e
       #|  s:real
       #|  suminf (\\n. a n * &0 pow n) = a(0)
@@ -6367,14 +6367,14 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0
       #|  s / &2
       #|  a:num->real
-      #|  !f a s. &0 < s /\\\n           (!x. abs(x) < s ==> (\\n. a n * x pow n) sums (f x))\n           ==> (f tends_real_real a(0))(&0)
+      #|  forall f a s. &0 < s /\\\n           (forall x. abs(x) < s ==> (\\n. a n * x pow n) sums (f x))\n           ==> (f tends_real_real a(0))(&0)
       #|  1
       #|  e:real
       #|  x = &0
       #|  x:real
       #|  s:real
       #|  ((\\x. if x = &0 then a(0):real else f x) tends_real_real a(0))(&0)
-      #|  !f a s.\n        &0 < s /\\\n        (!x. &0 < abs(x) /\\ abs(x) < s ==> (\\n. a n * x pow n) sums (f x))\n        ==> (f tends_real_real a(0))(&0)
+      #|  forall f a s.\n        &0 < s /\\\n        (forall x. &0 < abs(x) /\\ abs(x) < s ==> (\\n. a n * x pow n) sums (f x))\n        ==> (f tends_real_real a(0))(&0)
       #|  abs(x) < s
       #|  suminf(\\n. b n * x pow n)
       #|  abs(x) < s
@@ -6382,12 +6382,12 @@ test "Library/transc matches Library/transc.ml" {
       #|  (h:real->real) x
       #|  (g:real->real) x
       #|  (f:real->real) x
-      #|  !f g h. abs(g - a) < e2 /\\ abs(h - b) < e2 /\\ (g = f) /\\ (h = f)\n            ==> abs(a - b) < e2 + e2
+      #|  forall f g h. abs(g - a) < e2 /\\ abs(h - b) < e2 /\\ (g = f) /\\ (h = f)\n            ==> abs(a - b) < e2 + e2
       #|  e / &2 + e / &2
       #|  abs(a 0 - b 0) < e
       #|  x:real
       #|  d:real
-      #|  !e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs x < e
+      #|  forall e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs x < e
       #|  d:real
       #|  s:real
       #|  d0:real
@@ -6413,8 +6413,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  k:real
       #|  abs(k)
       #|  k:real
-      #|  ?s. &0 < s /\\\n        !x. abs(x) < s\n            ==> summable (\\n. a n * x pow n) /\\ summable (\\n. b n * x pow n)
-      #|  !f a b P.\n        (!e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs(x) < e) /\\\n        (!x. &0 < abs(x) /\\ P x\n             ==> (\\n. a n * x pow n) sums (f x) /\\\n                 (\\n. b n * x pow n) sums (f x))\n        ==> (a(0) = b(0))
+      #|  ?s. &0 < s /\\\n        forall x. abs(x) < s\n            ==> summable (\\n. a n * x pow n) /\\ summable (\\n. b n * x pow n)
+      #|  forall f a b P.\n        (forall e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs(x) < e) /\\\n        (forall x. &0 < abs(x) /\\ P x\n             ==> (\\n. a n * x pow n) sums (f x) /\\\n                 (\\n. b n * x pow n) sums (f x))\n        ==> (a(0) = b(0))
       #|  (f:real->real) x
       #|  \\n. b n * x pow n
       #|  f x = suminf (\\n. b n * x pow n)
@@ -6423,7 +6423,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  sum(0,n) (\\n. b n * x pow n) = sum(0,n) (\\n. a n * x pow n)
       #|  (x = &0) <=> ~(&0 < abs x)
       #|  x' * a * b * x = (x * x') * a * b
-      #|  !a m. a(m + n) * x pow m =\n                      inv(x pow n) * a(m + n) * x pow (m + n)
+      #|  forall a m. a(m + n) * x pow m =\n                      inv(x pow n) * a(m + n) * x pow (m + n)
       #|  x:real
       #|  P:real->bool
       #|  \\x. inv(x pow n) * (f(x) - sum(0,n) (\\n. b n * x pow n))
@@ -6431,20 +6431,20 @@ test "Library/transc matches Library/transc.ml" {
       #|  ~(~a /\\ b) <=> b ==> a
       #|  n:num
       #|  p <=> ~ ~ p
-      #|  !f a b P.\n        (!e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs(x) < e) /\\\n        (!x. P x ==> (\\n. a n * x pow n) sums (f x) /\\\n                     (\\n. b n * x pow n) sums (f x))\n        ==> (a = b)
-      #|  !n. (2 * n) DIV 2 = n
+      #|  forall f a b P.\n        (forall e. &0 < e ==> ?x. P x /\\ &0 < abs x /\\ abs(x) < e) /\\\n        (forall x. P x ==> (\\n. a n * x pow n) sums (f x) /\\\n                     (\\n. b n * x pow n) sums (f x))\n        ==> (a = b)
+      #|  forall n. (2 * n) DIV 2 = n
       #|  1 + 1 = 2 * 1
       #|  m:num
-      #|  !n. ~(EVEN n) ==> ((SUC n) DIV 2 = SUC((n - 1) DIV 2))
-      #|  !n x. (x pow n = &0) ==> (x = &0)
-      #|  !n x. (x pow (SUC n) = &0) <=> (x = &0)
+      #|  forall n. ~(EVEN n) ==> ((SUC n) DIV 2 = SUC((n - 1) DIV 2))
+      #|  forall n x. (x pow n = &0) ==> (x = &0)
+      #|  forall n x. (x pow (SUC n) = &0) <=> (x = &0)
       #|  n:num
       #|  n:num
-      #|  !n x y. &0 <= x /\\ x < y ==> (x pow (SUC n)) < (y pow (SUC n))
+      #|  forall n x y. &0 <= x /\\ x < y ==> (x pow (SUC n)) < (y pow (SUC n))
       #|  x pow (SUC n) = y pow (SUC n)
       #|  y:real
       #|  x:real
-      #|  !n x y. &0 <= x /\\ &0 <= y /\\ (x pow (SUC n) = y pow (SUC n))\n        ==> (x = y)
+      #|  forall n x y. &0 <= x /\\ &0 <= y /\\ (x pow (SUC n) = y pow (SUC n))\n        ==> (x = y)
       #|  exp(x) = suminf(\\n. ((\\n. inv(&(FACT n)))) n * (x pow n))
       #|  sin(x) = suminf(\\n. ((\\n. if EVEN n then &0 else\n      ((--(&1)) pow ((n - 1) DIV 2)) / &(FACT n))) n * (x pow n))
       #|  cos(x) = suminf(\\n. ((\\n. if EVEN n then ((--(&1)) pow (n DIV 2)) / &(FACT n)\n       else &0)) n * (x pow n))
@@ -6461,15 +6461,15 @@ test "Library/transc matches Library/transc.ml" {
       #|  c:real
       #|  c:real
       #|  &1
-      #|  !x. (\\n. ((\\n. inv(&(FACT n)))) n * (x pow n)) sums exp(x)
+      #|  forall x. (\\n. ((\\n. inv(&(FACT n)))) n * (x pow n)) sums exp(x)
       #|  n:num
       #|  0
       #|  \\n. ((\\n. inv(&(FACT n)))) n * (abs(x) pow n)
-      #|  !x. (\\n. ((\\n. if EVEN n then &0 else\n  ((--(&1)) pow ((n - 1) DIV 2)) / &(FACT n))) n * (x pow n)) sums\n  sin(x)
+      #|  forall x. (\\n. ((\\n. if EVEN n then &0 else\n  ((--(&1)) pow ((n - 1) DIV 2)) / &(FACT n))) n * (x pow n)) sums\n  sin(x)
       #|  n:num
       #|  0
       #|  \\n. ((\\n. inv(&(FACT n)))) n * (abs(x) pow n)
-      #|  !x. (\\n. ((\\n. if EVEN n then ((--(&1)) pow (n DIV 2)) / &(FACT n) else &0)) n\n    * (x pow n)) sums cos(x)
+      #|  forall x. (\\n. ((\\n. if EVEN n then ((--(&1)) pow (n DIV 2)) / &(FACT n) else &0)) n\n    * (x pow n)) sums cos(x)
       #|  ~(&(SUC n) = &0) /\\ ~(&(FACT n) = &0)
       #|  n:num
       #|  diffs (\\n. inv(&(FACT n))) = (\\n. inv(&(FACT n)))
@@ -6480,30 +6480,30 @@ test "Library/transc matches Library/transc.ml" {
       #|  n:num
       #|  diffs (\\n. if EVEN n then ((--(&1)) pow (n DIV 2)) / &(FACT n) else &0) =\n  (\\n. --(((\\n. if EVEN n then &0 else ((--(&1)) pow ((n - 1) DIV 2)) /\n   &(FACT n))) n))
       #|  x:real
-      #|  !x. --(sin x) = suminf (\\n. --(((\\n. if EVEN n then &0 else ((--(&1))\n        pow ((n - 1) DIV 2)) / &(FACT n))) n * (x pow n)))
+      #|  forall x. --(sin x) = suminf (\\n. --(((\\n. if EVEN n then &0 else ((--(&1))\n        pow ((n - 1) DIV 2)) / &(FACT n))) n * (x pow n)))
       #|  1
       #|  abs(x) + &1
       #|  abs(x) + &1
-      #|  !x. (exp diffl exp(x))(x)
+      #|  forall x. (exp diffl exp(x))(x)
       #|  1
       #|  abs(x) + &1
       #|  abs(x) + &1
       #|  abs(x) + &1
-      #|  !x. (sin diffl cos(x))(x)
+      #|  forall x. (sin diffl cos(x))(x)
       #|  1
       #|  abs(x) + &1
       #|  abs(x) + &1
       #|  abs(x) + &1
       #|  abs(x) + &1
       #|  n:num
-      #|  !x. (cos diffl --(sin(x)))(x)
+      #|  forall x. (cos diffl --(sin(x)))(x)
       #|  x:real
       #|  k:real
       #|  (diffl)
       #|  \\x. x pow n
       #|  ((f diffl l)(x) /\\ ~(f(x) = &0) ==>\n        ((\\x. inv(f x)) diffl --(l / (f(x) pow 2)))(x)) /\\\n   ((f diffl l)(x) /\\ (g diffl m)(x) /\\ ~(g(x) = &0) ==>\n    ((\\x. f(x) / g(x)) diffl (((l * g(x)) - (m * f(x))) / (g(x) pow 2)))(x)) /\\\n   ((f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) + g(x)) diffl (l + m))(x)) /\\\n   ((f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) * g(x)) diffl ((l * g(x)) + (m * f(x))))(x)) /\\\n   ((f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) - g(x)) diffl (l - m))(x)) /\\\n   ((f diffl l)(x) ==> ((\\x. --(f x)) diffl --l)(x)) /\\\n   ((g diffl m)(x) ==>\n         ((\\x. (g x) pow n) diffl ((&n * (g x) pow (n - 1)) * m))(x)) /\\\n   ((g diffl m)(x) ==> ((\\x. exp(g x)) diffl (exp(g x) * m))(x)) /\\\n   ((g diffl m)(x) ==> ((\\x. sin(g x)) diffl (cos(g x) * m))(x)) /\\\n   ((g diffl m)(x) ==> ((\\x. cos(g x)) diffl (--(sin(g x)) * m))(x))
       #|  (f diffl l) x ==> f differentiable x
-      #|  !f x. f differentiable x ==> f contl x
+      #|  forall f x. f differentiable x ==> f contl x
       #|  1
       #|  n:num
       #|  1
@@ -6513,38 +6513,38 @@ test "Library/transc matches Library/transc.ml" {
       #|  1
       #|  2
       #|  \\n. ((\\n. inv(&(FACT n)))) n * (x pow n)
-      #|  !x. &0 <= x ==> (&1 + x) <= exp(x)
+      #|  forall x. &0 <= x ==> (&1 + x) <= exp(x)
       #|  &1 + x
-      #|  !x. &0 < x ==> &1 < exp(x)
+      #|  forall x. &0 < x ==> &1 < exp(x)
       #|  x:real
       #|  x:real
       #|  exp(y) = (\\x. exp(x + y) * exp(--x))(&0)
       #|  x:real
-      #|  !x y. exp(x + y) * exp(--x) = exp(y)
+      #|  forall x y. exp(x + y) * exp(--x) = exp(y)
       #|  &0
       #|  x:real
-      #|  !x. exp(x) * exp(--x) = &1
-      #|  !x. exp(--x) * exp(x) = &1
-      #|  !x. exp(--x) = inv(exp(x))
+      #|  forall x. exp(x) * exp(--x) = &1
+      #|  forall x. exp(--x) * exp(x) = &1
+      #|  forall x. exp(--x) = inv(exp(x))
       #|  (*)
       #|  exp(x)
       #|  y:real
       #|  x:real
-      #|  !x y. exp(x + y) = exp(x) * exp(y)
-      #|  !x. &0 <= exp(x)
+      #|  forall x y. exp(x + y) = exp(x) * exp(y)
+      #|  forall x. &0 <= exp(x)
       #|  x:real
-      #|  !x. ~(exp(x) = &0)
-      #|  !x. &0 < exp(x)
-      #|  !n x. exp(&n * x) = exp(x) pow n
-      #|  !x y. exp(x - y) = exp(x) / exp(y)
+      #|  forall x. ~(exp(x) = &0)
+      #|  forall x. &0 < exp(x)
+      #|  forall n x. exp(&n * x) = exp(x) pow n
+      #|  forall x y. exp(x - y) = exp(x) / exp(y)
       #|  &1 < exp(y) / exp(x) <=>\n                 (&1 * exp(x)) < ((exp(y) / exp(x)) * exp(x))
-      #|  !x y. x < y ==> exp(x) < exp(y)
-      #|  !x y. exp(x) < exp(y) <=> x < y
-      #|  !x y. exp(x) <= exp(y) <=> x <= y
-      #|  !x y. (exp(x) = exp(y)) <=> (x = y)
+      #|  forall x y. x < y ==> exp(x) < exp(y)
+      #|  forall x y. exp(x) < exp(y) <=> x < y
+      #|  forall x y. exp(x) <= exp(y) <=> x <= y
+      #|  forall x y. (exp(x) = exp(y)) <=> (x = y)
       #|  exp(x)
       #|  x:real
-      #|  !y. &1 <= y ==> ?x. &0 <= x /\\ x <= y - &1 /\\ (exp(x) = y)
+      #|  forall y. &1 <= y ==> ?x. &0 <= x /\\ x <= y - &1 /\\ (exp(x) = y)
       #|  --x
       #|  x:real
       #|  y:real
@@ -6552,7 +6552,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  x:real
       #|  y:real
       #|  &1
-      #|  !y. &0 < y ==> ?x. exp(x) = y
+      #|  forall y. &0 < y ==> ?x. exp(x) = y
       #|  inv(&2)
       #|  &1 <= (&1 + &2 * x) - (x + x * &2 * x) <=>\n                                  x * (&2 * x) <= x * &1
       #|  a - x < b - x <=> a < b
@@ -6568,82 +6568,82 @@ test "Library/transc matches Library/transc.ml" {
       #|  exp x
       #|  1
       #|  suminf (\\n. x pow n)
-      #|  !x. &0 <= x /\\ x <= inv(&2) ==> exp(x) <= &1 + &2 * x
+      #|  forall x. &0 <= x /\\ x <= inv(&2) ==> exp(x) <= &1 + &2 * x
       #|  ln x = @u. exp(u) = x
       #|  x:real
-      #|  !x. ln(exp x) = x
+      #|  forall x. ln(exp x) = x
       #|  y:real
-      #|  !x. (exp(ln x) = x) <=> &0 < x
-      #|  !x. &0 < x ==> exp(ln x) = x
+      #|  forall x. (exp(ln x) = x) <=> &0 < x
+      #|  forall x. &0 < x ==> exp(ln x) = x
       #|  &0 < x * y
-      #|  !x y. &0 < x /\\ &0 < y ==> (ln(x * y) = ln(x) + ln(y))
-      #|  !x y. &0 < x /\\ &0 < y ==> ((ln(x) = ln(y)) <=> (x = y))
+      #|  forall x y. &0 < x /\\ &0 < y ==> (ln(x * y) = ln(x) + ln(y))
+      #|  forall x y. &0 < x /\\ &0 < y ==> ((ln(x) = ln(y)) <=> (x = y))
       #|  ln(&1) = &0
       #|  x * (inv x) = &1
       #|  &0 < x /\\ &0 < inv(x)
-      #|  !x. &0 < x ==> (ln(inv x) = --(ln x))
+      #|  forall x. &0 < x ==> (ln(inv x) = --(ln x))
       #|  &0 < y
       #|  &0 < x /\\ &0 < inv(y)
-      #|  !x. &0 < x /\\ &0 < y ==> (ln(x / y) = ln(x) - ln(y))
-      #|  !x y. &0 < x /\\ &0 < y ==> (ln(x) < ln(y) <=> x < y)
-      #|  !x y. &0 < x /\\ &0 < y ==> (ln(x) <= ln(y) <=> x <= y)
-      #|  !n x. &0 < x ==> (ln(x pow n) = &n * ln(x))
+      #|  forall x. &0 < x /\\ &0 < y ==> (ln(x / y) = ln(x) - ln(y))
+      #|  forall x y. &0 < x /\\ &0 < y ==> (ln(x) < ln(y) <=> x < y)
+      #|  forall x y. &0 < x /\\ &0 < y ==> (ln(x) <= ln(y) <=> x <= y)
+      #|  forall n x. &0 < x ==> (ln(x pow n) = &n * ln(x))
       #|  x:real
       #|  exp(x)
       #|  &1 + x
-      #|  !x. &0 <= x ==> ln(&1 + x) <= x
+      #|  forall x. &0 <= x ==> ln(&1 + x) <= x
       #|  ln(&1 + x)
-      #|  !x. &0 < x ==> ln(x) < x
+      #|  forall x. &0 < x ==> ln(x) < x
       #|  &1 <= x ==> &0 < x
-      #|  !x. &1 <= x ==> &0 <= ln(x)
+      #|  forall x. &1 <= x ==> &0 <= ln(x)
       #|  &1 < x ==> &0 < x
-      #|  !x. &1 < x ==> &0 < ln(x)
+      #|  forall x. &1 < x ==> &0 < ln(x)
       #|  &1
       #|  ln(x)
-      #|  !x. &0 < x ==> (ln diffl (inv x))(x)
+      #|  forall x. &0 < x ==> (ln diffl (inv x))(x)
       #|  root(n) x = @u. (&0 < x ==> &0 < u) /\\ (u pow n = x)
       #|  inv(&(SUC n)) * &(SUC n) = &1
-      #|  !n x. &0 < x ==> (exp(ln(x) / &(SUC n)) pow (SUC n) = x)
+      #|  forall n x. &0 < x ==> (exp(ln(x) / &(SUC n)) pow (SUC n) = x)
       #|  inv(&(SUC n)) * &(SUC n) = &1
       #|  ln(y) * &(SUC n) = (ln(y pow(SUC n)) / &(SUC n)) * &(SUC n)
-      #|  !z. &0 < y /\\ &0 < exp(z)
+      #|  forall z. &0 < y /\\ &0 < exp(z)
       #|  y:real
-      #|  !x. &0 < x ==> !n. root(SUC n) x = exp(ln(x) / &(SUC n))
+      #|  forall x. &0 < x ==> forall n. root(SUC n) x = exp(ln(x) / &(SUC n))
       #|  n:num
       #|  n:num
       #|  y:real
-      #|  !n. root(SUC n) (&0) = &0
-      #|  !n. root(SUC n) (&1) = &1
-      #|  !n x. &0 <= x ==> ((root(SUC n) x) pow (SUC n) = x)
+      #|  forall n. root(SUC n) (&0) = &0
+      #|  forall n. root(SUC n) (&1) = &1
+      #|  forall n x. &0 <= x ==> ((root(SUC n) x) pow (SUC n) = x)
       #|  n:num
       #|  &0 <= x
       #|  y:real
-      #|  !n x. &0 <= x ==> (root(SUC n)(x pow (SUC n)) = x)
-      #|  !x n. &0 <= x ==> &0 <= root(SUC n) x
-      #|  !n x y. &0 <= x /\\ &0 <= y /\\ (y pow (SUC n) = x)\n           ==> (root (SUC n) x = y)
-      #|  !n x y. &0 <= x /\\ &0 <= y\n           ==> (root(SUC n) (x * y) = root(SUC n) x * root(SUC n) y)
-      #|  !n x. &0 <= x ==> (root(SUC n) (inv x) = inv(root(SUC n) x))
-      #|  !n x y. &0 <= x /\\ &0 <= y\n           ==> (root(SUC n) (x / y) = root(SUC n) x / root(SUC n) y)
+      #|  forall n x. &0 <= x ==> (root(SUC n)(x pow (SUC n)) = x)
+      #|  forall x n. &0 <= x ==> &0 <= root(SUC n) x
+      #|  forall n x y. &0 <= x /\\ &0 <= y /\\ (y pow (SUC n) = x)\n           ==> (root (SUC n) x = y)
+      #|  forall n x y. &0 <= x /\\ &0 <= y\n           ==> (root(SUC n) (x * y) = root(SUC n) x * root(SUC n) y)
+      #|  forall n x. &0 <= x ==> (root(SUC n) (inv x) = inv(root(SUC n) x))
+      #|  forall n x y. &0 <= x /\\ &0 <= y\n           ==> (root(SUC n) (x / y) = root(SUC n) x / root(SUC n) y)
       #|  (x = (root(SUC n) x) pow (SUC n)) /\\\n                (y = (root(SUC n) y) pow (SUC n))
       #|  x < y
       #|  &0 <= y
-      #|  !x y. &0 <= x /\\ x < y ==> root(SUC n) x < root(SUC n) y
-      #|  !x y. &0 <= x /\\ x <= y ==> root(SUC n) x <= root(SUC n) y
-      #|  !x y. &0 <= x /\\ &0 <= y ==> (root(SUC n) x < root(SUC n) y <=> x < y)
-      #|  !x y. &0 <= x /\\ &0 <= y ==> (root(SUC n) x <= root(SUC n) y <=> x <= y)
-      #|  !x y. &0 <= x /\\ &0 <= y ==> ((root(SUC n) x = root(SUC n) y) <=> (x = y))
+      #|  forall x y. &0 <= x /\\ x < y ==> root(SUC n) x < root(SUC n) y
+      #|  forall x y. &0 <= x /\\ x <= y ==> root(SUC n) x <= root(SUC n) y
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> (root(SUC n) x < root(SUC n) y <=> x < y)
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> (root(SUC n) x <= root(SUC n) y <=> x <= y)
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> ((root(SUC n) x = root(SUC n) y) <=> (x = y))
       #|  ~(2 = 0)
-      #|  !n. EVEN n ==> (sqrt(&2 pow n) = &2 pow (n DIV 2))
+      #|  forall n. EVEN n ==> (sqrt(&2 pow n) = &2 pow (n DIV 2))
       #|  x = &0
-      #|  !x. &0 <= x ==> x / sqrt(x) = sqrt(x)
+      #|  forall x. &0 <= x ==> x / sqrt(x) = sqrt(x)
       #|  abs(x - y) < y ==> &0 <= x
       #|  sqrt(x)
       #|  sqrt(x)
       #|  &2 * sqrt(x)
       #|  sqrt
       #|  \\x. x pow 2
-      #|  !x. &0 < x ==> (sqrt diffl inv(&2 * sqrt(x))) x
-      #|  !g m x. (g diffl m)(x) /\\ &0 < g x\n           ==> ((\\x. sqrt(g x)) diffl (inv(&2 * sqrt(g x)) * m))(x)
+      #|  forall x. &0 < x ==> (sqrt diffl inv(&2 * sqrt(x))) x
+      #|  forall g m x. (g diffl m)(x) /\\ &0 < g x\n           ==> ((\\x. sqrt(g x)) diffl (inv(&2 * sqrt(g x)) * m))(x)
       #|  n:num
       #|  n:num
       #|  0
@@ -6663,50 +6663,50 @@ test "Library/transc matches Library/transc.ml" {
       #|  2
       #|  &1 = (\\x.(sin(x) pow 2) + (cos(x) pow 2))(&0)
       #|  x:real
-      #|  !x. (sin(x) pow 2) + (cos(x) pow 2) = &1
+      #|  forall x. (sin(x) pow 2) + (cos(x) pow 2) = &1
       #|  a + b + c = (a + c) + b
       #|  cos(x)
       #|  a <=> ~ ~a
-      #|  !x. abs(sin x) <= &1
-      #|  !x. --(&1) <= sin(x) /\\ sin(x) <= &1
+      #|  forall x. abs(sin x) <= &1
+      #|  forall x. --(&1) <= sin(x) /\\ sin(x) <= &1
       #|  sin(x)
       #|  a <=> ~ ~a
-      #|  !x. abs(cos x) <= &1
-      #|  !x. --(&1) <= cos(x) /\\ cos(x) <= &1
+      #|  forall x. abs(cos x) <= &1
+      #|  forall x. --(&1) <= cos(x) /\\ cos(x) <= &1
       #|  x:real
       #|  2
       #|  x:real
       #|  &0
       #|  x:real
-      #|  !x y. ((sin(x + y) - ((sin(x) * cos(y)) + (cos(x) * sin(y)))) pow 2) +\n         ((cos(x + y) - ((cos(x) * cos(y)) - (sin(x) * sin(y)))) pow 2) = &0
+      #|  forall x y. ((sin(x + y) - ((sin(x) * cos(y)) + (cos(x) * sin(y)))) pow 2) +\n         ((cos(x + y) - ((cos(x) * cos(y)) - (sin(x) * sin(y)))) pow 2) = &0
       #|  x:real
       #|  2
       #|  x:real
       #|  &0
       #|  x:real
-      #|  !x. ((sin(--x) + (sin x)) pow 2) +\n       ((cos(--x) - (cos x)) pow 2) = &0
+      #|  forall x. ((sin(--x) + (sin x)) pow 2) +\n       ((cos(--x) - (cos x)) pow 2) = &0
       #|  y:real
       #|  x:real
-      #|  !x y. sin(x + y) = (sin(x) * cos(y)) + (cos(x) * sin(y))
+      #|  forall x y. sin(x + y) = (sin(x) * cos(y)) + (cos(x) * sin(y))
       #|  y:real
       #|  x:real
-      #|  !x y. cos(x + y) = (cos(x) * cos(y)) - (sin(x) * sin(y))
+      #|  forall x y. cos(x + y) = (cos(x) * cos(y)) - (sin(x) * sin(y))
       #|  x:real
-      #|  !x. sin(--x) = --(sin(x))
+      #|  forall x. sin(--x) = --(sin(x))
       #|  x:real
-      #|  !x. cos(--x) = cos(x)
-      #|  !x. sin(&2 * x) = &2 * sin(x) * cos(x)
-      #|  !x. cos(&2 * x) = (cos(x) pow 2) - (sin(x) pow 2)
-      #|  !x. cos(abs x) = cos(x)
+      #|  forall x. cos(--x) = cos(x)
+      #|  forall x. sin(&2 * x) = &2 * sin(x) * cos(x)
+      #|  forall x. cos(&2 * x) = (cos(x) pow 2) - (sin(x) pow 2)
+      #|  forall x. cos(abs x) = cos(x)
       #|  x:real
-      #|  !x. (\\n. (((--(&1)) pow n) / &(FACT((2 * n) + 1)))\n         * (x pow ((2 * n) + 1))) sums (sin x)
+      #|  forall x. (\\n. (((--(&1)) pow n) / &(FACT((2 * n) + 1)))\n         * (x pow ((2 * n) + 1))) sums (sin x)
       #|  &2
       #|  &
       #|  a * b * c * d * e = (a * b * e) * (c * d)
-      #|  !n. ~(&(FACT n) = &0)
-      #|  !n. ~(&(SUC n) = &0)
-      #|  !n. &0 < &(FACT n)
-      #|  !n. &0 < &(SUC n)
+      #|  forall n. ~(&(FACT n) = &0)
+      #|  forall n. ~(&(SUC n) = &0)
+      #|  forall n. &0 < &(FACT n)
+      #|  forall n. &0 < &(SUC n)
       #|  1
       #|  2
       #|  2
@@ -6715,18 +6715,18 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0
       #|  x:real
       #|  x:real
-      #|  !x. &0 < x /\\ x < &2 ==> &0 < sin(x)
+      #|  forall x. &0 < x /\\ x < &2 ==> &0 < sin(x)
       #|  x:real
-      #|  !x. (\\n. (((--(&1)) pow n) / &(FACT(2 * n)))\n         * (x pow (2 * n))) sums (cos x)
+      #|  forall x. (\\n. (((--(&1)) pow n) / &(FACT(2 * n)))\n         * (x pow (2 * n))) sums (cos x)
       #|  1
       #|  2
       #|  3
       #|  4
       #|  a * b * c * d = (a * b * d) * c
-      #|  !n. ~(&(FACT n) = &0)
-      #|  !n. ~(&(SUC n) = &0)
-      #|  !n. &0 < &(FACT n)
-      #|  !n. &0 < &(SUC n)
+      #|  forall n. ~(&(FACT n) = &0)
+      #|  forall n. ~(&(SUC n) = &0)
+      #|  forall n. &0 < &(FACT n)
+      #|  forall n. &0 < &(SUC n)
       #|  1
       #|  1
       #|  2
@@ -6764,7 +6764,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  x1:real
       #|  cos
       #|  --(sin x)
-      #|  (!x. cos differentiable x) /\\\n                  (!x. cos contl x)
+      #|  (forall x. cos differentiable x) /\\\n                  (forall x. cos contl x)
       #|  x2:real
       #|  x1:real
       #|  a <=> ~ ~a
@@ -6788,16 +6788,16 @@ test "Library/transc matches Library/transc.ml" {
       #|  pi / &2
       #|  pi / &2
       #|  sin(pi) = &0
-      #|  !x. sin(x) = cos((pi / &2) - x)
-      #|  !x. cos(x) = sin((pi / &2) - x)
-      #|  !x. sin(x + pi) = --(sin(x))
-      #|  !x. cos(x + pi) = --(cos(x))
-      #|  !x. sin(x + (&2 * pi)) = sin(x)
-      #|  !x. cos(x + (&2 * pi)) = cos(x)
-      #|  !n. cos(&n * pi) = --(&1) pow n
-      #|  !n. sin(&n * pi) = &0
+      #|  forall x. sin(x) = cos((pi / &2) - x)
+      #|  forall x. cos(x) = sin((pi / &2) - x)
+      #|  forall x. sin(x + pi) = --(sin(x))
+      #|  forall x. cos(x + pi) = --(cos(x))
+      #|  forall x. sin(x + (&2 * pi)) = sin(x)
+      #|  forall x. cos(x + (&2 * pi)) = cos(x)
+      #|  forall n. cos(&n * pi) = --(&1) pow n
+      #|  forall n. sin(&n * pi) = &0
       #|  pi / &2
-      #|  !x. &0 < x /\\ x < pi / &2 ==> &0 < sin(x)
+      #|  forall x. &0 < x /\\ x < pi / &2 ==> &0 < sin(x)
       #|  x < pi / &2
       #|  pi / &2
       #|  x:real
@@ -6811,12 +6811,12 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0
       #|  cos
       #|  a <=> ~ ~a
-      #|  !x. &0 < x /\\ x < pi / &2 ==> &0 < cos(x)
+      #|  forall x. &0 < x /\\ x < pi / &2 ==> &0 < cos(x)
       #|  &0
       #|  x:real
-      #|  !x. --(pi / &2) < x /\\ x < pi / &2 ==> &0 < cos(x)
-      #|  !x. &0 < x /\\ x < pi ==> &0 < sin(x)
-      #|  !x. &0 <= x /\\ x <= pi ==> &0 <= sin(x)
+      #|  forall x. --(pi / &2) < x /\\ x < pi / &2 ==> &0 < cos(x)
+      #|  forall x. &0 < x /\\ x < pi ==> &0 < sin(x)
+      #|  forall x. &0 <= x /\\ x <= pi ==> &0 <= sin(x)
       #|  x1:real
       #|  x2:real
       #|  x2:real
@@ -6838,12 +6838,12 @@ test "Library/transc matches Library/transc.ml" {
       #|  x2:real
       #|  x1:real
       #|  --(sin x)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==> ?!x. &0 <= x /\\ x <= pi /\\ (cos(x) = y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==> ?!x. &0 <= x /\\ x <= pi /\\ (cos(x) = y)
       #|  x - pi / &2
       #|  x:real
       #|  --y
-      #|  !x. --(pi / &2) <= x /\\ x <= pi / &2 /\\ (sin(x) = y) <=>\n    &0 <= (x + pi / &2) /\\ (x + pi / &2) <= pi /\\ (cos(x + pi / &2) = --y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==>\n        ?!x.  --(pi / &2) <= x /\\ x <= pi / &2 /\\ (sin(x) = y)
+      #|  forall x. --(pi / &2) <= x /\\ x <= pi / &2 /\\ (sin(x) = y) <=>\n    &0 <= (x + pi / &2) /\\ (x + pi / &2) <= pi /\\ (cos(x + pi / &2) = --y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==>\n        ?!x.  --(pi / &2) <= x /\\ x <= pi / &2 /\\ (sin(x) = y)
       #|  SUC(2 * n)
       #|  pi / &2
       #|  x - &n * pi
@@ -6852,14 +6852,14 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0 <= x - &n * pi /\\ (x - &n * pi) <= pi /\\\n                (cos(x - &n * pi) = &0)
       #|  n:num
       #|  x:real
-      #|  !x. &0 <= x /\\ (cos(x) = &0) ==>\n      ?n. ~EVEN n /\\ (x = &n * (pi / &2))
+      #|  forall x. &0 <= x /\\ (cos(x) = &0) ==>\n      ?n. ~EVEN n /\\ (x = &n * (pi / &2))
       #|  2 * m
       #|  m:num
       #|  n:num
       #|  n:num
       #|  x:real
       #|  x + pi / &2
-      #|  !x. &0 <= x /\\ (sin(x) = &0) ==>\n        ?n. EVEN n /\\ (x = &n * (pi / &2))
+      #|  forall x. &0 <= x /\\ (sin(x) = &0) ==>\n        ?n. EVEN n /\\ (x = &n * (pi / &2))
       #|  m:num
       #|  m:num
       #|  m:num
@@ -6867,28 +6867,28 @@ test "Library/transc matches Library/transc.ml" {
       #|  n:num
       #|  x:real
       #|  &0
-      #|  !x. (cos(x) = &0) <=> (?n. ~EVEN n /\\ (x = &n * (pi / &2))) \\/\n                         (?n. ~EVEN n /\\ (x = --(&n * (pi / &2))))
+      #|  forall x. (cos(x) = &0) <=> (?n. ~EVEN n /\\ (x = &n * (pi / &2))) \\/\n                         (?n. ~EVEN n /\\ (x = --(&n * (pi / &2))))
       #|  (a * b) * c = b * (a * c)
       #|  m:num
       #|  n:num
       #|  n:num
       #|  x:real
       #|  &0
-      #|  !x. (sin(x) = &0) <=> (?n. EVEN n /\\ (x = &n * (pi / &2))) \\/\n                         (?n. EVEN n /\\ (x = --(&n * (pi / &2))))
-      #|  !x. (sin(x) = &0) <=> (?n. x = &n * pi) \\/ (?n. x = --(&n * pi))
+      #|  forall x. (sin(x) = &0) <=> (?n. EVEN n /\\ (x = &n * (pi / &2))) \\/\n                         (?n. EVEN n /\\ (x = --(&n * (pi / &2))))
+      #|  forall x. (sin(x) = &0) <=> (?n. x = &n * pi) \\/ (?n. x = --(&n * pi))
       #|  m:num
       #|  (a ==> a') /\\ (b ==> b') ==> (a \\/ b ==> a' \\/ b')
       #|  (x + &1 * &1 = &1) <=> (x = &0)
       #|  x:real
-      #|  !x. (cos(x) = &1) <=> (?n. x = &n * &2 * pi) \\/ (?n. x = --(&n * &2 * pi))
+      #|  forall x. (cos(x) = &1) <=> (?n. x = &n * &2 * pi) \\/ (?n. x = --(&n * &2 * pi))
       #|  tan(x) = sin(x) / cos(x)
       #|  tan(&0) = &0
       #|  tan(pi) = &0
-      #|  !n. tan(&n * pi) = &0
-      #|  !x. tan(--x) = --(tan x)
-      #|  !x. tan(x + &2 * pi) = tan(x)
-      #|  !x. tan(x + pi) = tan(x)
-      #|  !x n. tan(x + &n * pi) = tan(x)
+      #|  forall n. tan(&n * pi) = &0
+      #|  forall x. tan(--x) = --(tan x)
+      #|  forall x. tan(x + &2 * pi) = tan(x)
+      #|  forall x. tan(x + pi) = tan(x)
+      #|  forall x n. tan(x + &n * pi) = tan(x)
       #|  a * b * c * d * e * f = (f * b) * (d * a) * (c * e)
       #|  a * b * c * d = (d * b) * (a * c)
       #|  a * b * c * d = (d * a) * (c * b)
@@ -6896,14 +6896,14 @@ test "Library/transc matches Library/transc.ml" {
       #|  (*) (cos(x) * cos(y))
       #|  &1 - (sin(x) / cos(x)) * (sin(y) / cos(y))
       #|  cos(x) * cos(y)
-      #|  !x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x + y) = &0) ==>\n           (tan(x + y) = (tan(x) + tan(y)) / (&1 - tan(x) * tan(y)))
+      #|  forall x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x + y) = &0) ==>\n           (tan(x + y) = (tan(x) + tan(y)) / (&1 - tan(x) * tan(y)))
       #|  x:real
       #|  x:real
-      #|  !x. ~(cos(x) = &0) /\\ ~(cos(&2 * x) = &0) ==>\n            (tan(&2 * x) = (&2 * tan(x)) / (&1 - (tan(x) pow 2)))
-      #|  !x. &0 < x /\\ x < pi / &2 ==> &0 < tan(x)
+      #|  forall x. ~(cos(x) = &0) /\\ ~(cos(&2 * x) = &0) ==>\n            (tan(&2 * x) = (&2 * tan(x)) / (&1 - (tan(x) pow 2)))
+      #|  forall x. &0 < x /\\ x < pi / &2 ==> &0 < tan(x)
       #|  x:real
       #|  \\x. sin(x) / cos(x)
-      #|  !x. ~(cos(x) = &0) ==> (tan diffl inv(cos(x) pow 2))(x)
+      #|  forall x. ~(cos(x) = &0) ==> (tan diffl inv(cos(x) pow 2))(x)
       #|  (g diffl m)(x) /\\ ~(cos(g x) = &0)\n   ==> ((\\x. tan(g x)) diffl (inv(cos(g x) pow 2) * m))(x)
       #|  &0 < cos((pi / &2) - e) / sin((pi / &2) - e)
       #|  &0 < cos((pi / &2) - e) / sin((pi / &2) - e)
@@ -6919,7 +6919,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  --(sin(pi / &2))
       #|  &1
       #|  ((\\x. cos(x) / sin(x)) tends_real_real &0)(pi / &2)
-      #|  !y. &0 < y ==> ?x. &0 < x /\\ x < pi / &2 /\\ y < tan(x)
+      #|  forall y. &0 < y ==> ?x. &0 < x /\\ x < pi / &2 /\\ y < tan(x)
       #|  &0
       #|  x:real
       #|  z:real
@@ -6933,7 +6933,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0
       #|  tan
       #|  x:real
-      #|  !y. &0 <= y ==> ?x. &0 <= x /\\ x < pi / &2 /\\ (tan(x) = y)
+      #|  forall y. &0 <= y ==> ?x. &0 <= x /\\ x < pi / &2 /\\ (tan(x) = y)
       #|  x2:real
       #|  x1:real
       #|  (tan diffl &0)(x)
@@ -6963,13 +6963,13 @@ test "Library/transc matches Library/transc.ml" {
       #|  x:real
       #|  x:real
       #|  y:real
-      #|  !y. ?!x. --(pi / &2) < x /\\ x < (pi / &2) /\\ (tan(x) = y)
+      #|  forall y. ?!x. --(pi / &2) < x /\\ x < (pi / &2) /\\ (tan(x) = y)
       #|  pi / &2 = &2 * pi / &4
       #|  EVEN
       #|  &0 <= x ==> ~(&1 = --x)
       #|  a * b * c = b * a * c
       #|  tan(pi / &4) = &1
-      #|  !x. tan(pi / &2 - x) = inv(tan x)
+      #|  forall x. tan(pi / &2 - x) = inv(tan x)
       #|  ~(x = &0) /\\ ~(&0 < x) ==> &0 < --x
       #|  &0 < x /\\ x < &1 ==> abs(x) < &1
       #|  &0 < x /\\ x < &1 ==> abs(x) < &1
@@ -6988,8 +6988,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  \\x. inv(cos(x) pow 2)
       #|  tan
       #|  &0 < x /\\ x < a ==> x < &2 * a
-      #|  !x. &0 < x /\\ x < pi / &4 ==> &0 < tan(x) /\\ tan(x) < &1
-      #|  !x. abs(x) < pi / &4 ==> abs(tan x) < &1
+      #|  forall x. &0 < x /\\ x < pi / &4 ==> &0 < tan(x) /\\ tan(x) < &1
+      #|  forall x. abs(x) < pi / &4 ==> abs(tan x) < &1
       #|  z:real
       #|  a /\\ (b ==> c) ==> (a ==> b) ==> c
       #|  y:real
@@ -6998,33 +6998,33 @@ test "Library/transc matches Library/transc.ml" {
       #|  tan
       #|  &0 < x /\\ (x < p ==> x <= tx)\n      ==> abs(x) < p ==> abs(x) <= abs(tx)
       #|  x:real
-      #|  !y. &0 < y /\\ y < pi / &2 ==> y <= tan(y)
-      #|  !x. abs(x) < pi / &2 ==> abs(x) <= abs(tan x)
+      #|  forall y. &0 < y /\\ y < pi / &2 ==> y <= tan(y)
+      #|  forall x. abs(x) < pi / &2 ==> abs(x) <= abs(tan x)
       #|  asn(y) = @x. --(pi / &2) <= x /\\ x <= pi / &2 /\\ (sin x = y)
       #|  acs(y) = @x. &0 <= x /\\ x <= pi /\\ (cos x = y)
       #|  atn(y) = @x. --(pi / &2) < x /\\ x < pi / &2 /\\ (tan x = y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==>\n     --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2 /\\ (sin(asn y) = y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==> (sin(asn(y)) = y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==> --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==>\n     --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2 /\\ (sin(asn y) = y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==> (sin(asn(y)) = y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==> --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2
       #|  sin
       #|  y:real
-      #|  !y. --(&1) < y /\\ y < &1 ==> --(pi / &2) < asn(y) /\\ asn(y) < pi / &2
+      #|  forall y. --(&1) < y /\\ y < &1 ==> --(pi / &2) < asn(y) /\\ asn(y) < pi / &2
       #|  x:real
-      #|  !x. --(pi / &2) <= x /\\ x <= pi / &2 ==> (asn(sin(x)) = x)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==>\n     &0 <= acs(y) /\\ acs(y) <= pi  /\\ (cos(acs y) = y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==> (cos(acs(y)) = y)
-      #|  !y. --(&1) <= y /\\ y <= &1 ==> &0 <= acs(y) /\\ acs(y) <= pi
+      #|  forall x. --(pi / &2) <= x /\\ x <= pi / &2 ==> (asn(sin(x)) = x)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==>\n     &0 <= acs(y) /\\ acs(y) <= pi  /\\ (cos(acs y) = y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==> (cos(acs(y)) = y)
+      #|  forall y. --(&1) <= y /\\ y <= &1 ==> &0 <= acs(y) /\\ acs(y) <= pi
       #|  cos
       #|  y:real
-      #|  !y. --(&1) < y /\\ y < &1 ==> &0 < acs(y) /\\ acs(y) < pi
+      #|  forall y. --(&1) < y /\\ y < &1 ==> &0 < acs(y) /\\ acs(y) < pi
       #|  x:real
-      #|  !x. &0 <= x /\\ x <= pi ==> (acs(cos(x)) = x)
+      #|  forall x. &0 <= x /\\ x <= pi ==> (acs(cos(x)) = x)
       #|  y:real
-      #|  !y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2) /\\ (tan(atn y) = y)
-      #|  !y. tan(atn y) = y
-      #|  !y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2)
+      #|  forall y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2) /\\ (tan(atn y) = y)
+      #|  forall y. tan(atn y) = y
+      #|  forall y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2)
       #|  tan(x)
-      #|  !x. --(pi / &2) < x /\\ x < (pi / &2) ==> (atn(tan(x)) = x)
+      #|  forall x. --(pi / &2) < x /\\ x < (pi / &2) ==> (atn(tan(x)) = x)
       #|  &0 < a ==> --a < &0 /\\ &0 < a
       #|  atn(&0) = &0
       #|  &0 < a /\\ a < b ==> --b < a /\\ a < b
@@ -7032,21 +7032,21 @@ test "Library/transc matches Library/transc.ml" {
       #|  atn(&1) = pi / &4
       #|  --a < x /\\ x < a ==> --a < --x /\\ --x < a
       #|  atn(x)
-      #|  !x. atn(--x) = --(atn x)
+      #|  forall x. atn(--x) = --(atn x)
       #|  x:real
       #|  n:num
       #|  n:num
-      #|  !x. ~(cos(atn(x)) = &0)
-      #|  !x. ~(cos(x) = &0) ==> (&1 + (tan(x) pow 2) = inv(cos x) pow 2)
+      #|  forall x. ~(cos(atn(x)) = &0)
+      #|  forall x. ~(cos(x) = &0) ==> (&1 + (tan(x) pow 2) = inv(cos x) pow 2)
       #|  2
       #|  &1 + (x pow 2) = &0
       #|  x:real
       #|  inv(cos(z) pow 2)
       #|  d:real
       #|  d:real
-      #|  ?d. &0 < d /\\\n         !z. abs(z - atn(x)) < d ==>  (--(pi / (& 2))) < z /\\ z < (pi / (& 2))
+      #|  ?d. &0 < d /\\\n         forall z. abs(z - atn(x)) < d ==>  (--(pi / (& 2))) < z /\\ z < (pi / (& 2))
       #|  (atn diffl (inv(&1 + (x pow 2))))(tan(atn x))
-      #|  !x. (atn diffl (inv(&1 + (x pow 2))))(x)
+      #|  forall x. (atn diffl (inv(&1 + (x pow 2))))(x)
       #|  (g diffl m)(x) ==> ((\\x. atn(g x)) diffl (inv(&1 + (g x) pow 2) * m))(x)
       #|  &0 <= x ==> &0 < &1 + x
       #|  a < b + a <=> &0 < b
@@ -7055,52 +7055,52 @@ test "Library/transc matches Library/transc.ml" {
       #|  x:real
       #|  \\x. inv(&1 + x pow 2)
       #|  atn
-      #|  !x y. x < y ==> atn(x) < atn(y)
-      #|  !x y. atn(x) < atn(y) <=> x < y
-      #|  !x y. atn(x) <= atn(y) <=> x <= y
-      #|  !x y. (atn x = atn y) <=> (x = y)
+      #|  forall x y. x < y ==> atn(x) < atn(y)
+      #|  forall x y. atn(x) < atn(y) <=> x < y
+      #|  forall x y. atn(x) <= atn(y) <=> x <= y
+      #|  forall x y. (atn x = atn y) <=> (x = y)
       #|  &0 < atn(x) <=> &0 < x
       #|  &0 <= atn(x) <=> &0 <= x
-      #|  !x. x < &1 ==> atn(x) < pi / &4
-      #|  !x. --(&1) < x ==> --(pi / &4) < atn(x)
+      #|  forall x. x < &1 ==> atn(x) < pi / &4
+      #|  forall x. --(&1) < x ==> --(pi / &4) < atn(x)
       #|  (&0 < x ==> &0 < y) /\\\n    (x < &0 ==> y < &0) /\\\n    ((x = &0) ==> (y = &0)) /\\\n    (x < a ==> y < b) /\\\n    (--a < x ==> --b < y)\n    ==> abs(x) < a ==> abs(y) < b
-      #|  !x. abs(x) < &1 ==> abs(atn x) < pi / &4
+      #|  forall x. abs(x) < &1 ==> abs(atn x) < pi / &4
       #|  (abs(x) = a) ==> (x = a) \\/ (x = --a)
-      #|  !x. abs(x) <= &1 ==> abs(atn x) <= pi / &4
+      #|  forall x. abs(x) <= &1 ==> abs(atn x) <= pi / &4
       #|  x:real
-      #|  !x. &0 <= cos(x) ==> (cos(x) = sqrt(&1 - (sin(x) pow 2)))
+      #|  forall x. &0 <= cos(x) ==> (cos(x) = sqrt(&1 - (sin(x) pow 2)))
       #|  --(pi / &2) < asn(x)
       #|  asn(x) < (pi / &2)
       #|  n:num
       #|  n:num
-      #|  !x. --(&1) < x /\\ x < &1 ==> ~(cos(asn(x)) = &0)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> ~(cos(asn(x)) = &0)
       #|  cos(z)
       #|  z:real
       #|  d:real
       #|  d:real
       #|  x:real
       #|  x:real
-      #|  !x. --(&1) < x /\\ x < &1 ==> (asn diffl (inv(cos(asn x))))(x)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> (asn diffl (inv(cos(asn x))))(x)
       #|  sin(asn x) = x
-      #|  !x. --(&1) < x /\\ x < &1 ==> (asn diffl (inv(sqrt(&1 - (x pow 2)))))(x)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> (asn diffl (inv(sqrt(&1 - (x pow 2)))))(x)
       #|  (g diffl m)(x) /\\ -- &1 < g(x) /\\ g(x) < &1\n   ==> ((\\x. asn(g x)) diffl (inv(sqrt (&1 - g(x) pow 2)) * m))(x)
       #|  x:real
-      #|  !x. &0 <= sin(x) ==> (sin(x) = sqrt(&1 - (cos(x) pow 2)))
+      #|  forall x. &0 <= sin(x) ==> (sin(x) = sqrt(&1 - (cos(x) pow 2)))
       #|  &0 < acs(x)
       #|  acs(x) < pi
       #|  n:num
       #|  n:num
       #|  F
-      #|  !x. --(&1) < x /\\ x < &1 ==> ~(sin(acs(x)) = &0)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> ~(sin(acs(x)) = &0)
       #|  --(sin(z))
       #|  z:real
       #|  d:real
       #|  d:real
       #|  x:real
       #|  x:real
-      #|  !x. --(&1) < x /\\ x < &1 ==> (acs diffl (inv(--(sin(acs x)))))(x)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> (acs diffl (inv(--(sin(acs x)))))(x)
       #|  cos(acs x) = x
-      #|  !x. --(&1) < x /\\ x < &1 ==> (acs diffl --(inv(sqrt(&1 - (x pow 2)))))(x)
+      #|  forall x. --(&1) < x /\\ x < &1 ==> (acs diffl --(inv(sqrt(&1 - (x pow 2)))))(x)
       #|  (g diffl m)(x) /\\ -- &1 < g(x) /\\ g(x) < &1\n   ==> ((\\x. acs(g x)) diffl (--inv(sqrt(&1 - g(x) pow 2)) * m))(x)
       #|  ~(&0 <= y) /\\ (abs(y) = x) ==> (y = --x)
       #|  &0 <= y /\\ (abs(y) = x) ==> (y = x)
@@ -7114,7 +7114,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  &1 * &1
       #|  (&1 < x ==> &1 < x pow 2) /\\ (&1 < y ==> &1 < y pow 2) /\\\n      &0 <= x pow 2 /\\ &0 <= y pow 2 /\\ x pow 2 + y pow 2 <= &1\n      ==> x <= &1 /\\ y <= &1
       #|  abs(x) <= &1 /\\ abs(y) <= &1
-      #|  !x y. (x pow 2 + y pow 2 = &1) ==> ?t. (x = cos(t)) /\\ (y = sin(t))
+      #|  forall x y. (x pow 2 + y pow 2 = &1) ==> ?t. (x = cos(t)) /\\ (y = sin(t))
       #|  &0 < &1 - z * z <=> z * z < &1 * &1
       #|  a * --c + x < x <=> &0 < a * c
       #|  z:real
@@ -7122,20 +7122,20 @@ test "Library/transc matches Library/transc.ml" {
       #|  x:real
       #|  \\x. --inv(sqrt(&1 - x pow 2))
       #|  acs
-      #|  !x y. --(&1) < x /\\ x < y /\\ y < &1 ==> acs(y) < acs(x)
-      #|  !m n. m < SUC n <=> m <= n
+      #|  forall x y. --(&1) < x /\\ x < y /\\ y < &1 ==> acs(y) < acs(x)
+      #|  forall m n. m < SUC n <=> m <= n
       #|  1
-      #|  !n. n < 1 <=> (n = 0)
-      #|  division(a,b) D <=>\n     (D 0 = a) /\\\n     (?N. (!n. n < N ==> D(n) < D(SUC n)) /\\\n          (!n. n >= N ==> (D(n) = b)))
-      #|  dsize D =\n      @N. (!n. n < N ==> D(n) < D(SUC n)) /\\\n          (!n. n >= N ==> (D(n) = D(N)))
-      #|  tdiv(a,b) (D,p) <=>\n     division(a,b) D /\\\n     (!n. D(n) <= p(n) /\\ p(n) <= D(SUC n))
-      #|  gauge(E) (g:real->real) <=> !x. E x ==> &0 < g(x)
-      #|  fine(g:real->real) (D,p) <=>\n     !n. n < (dsize D) ==> (D(SUC n) - D(n)) < g(p(n))
+      #|  forall n. n < 1 <=> (n = 0)
+      #|  division(a,b) D <=>\n     (D 0 = a) /\\\n     (?N. (forall n. n < N ==> D(n) < D(SUC n)) /\\\n          (forall n. n >= N ==> (D(n) = b)))
+      #|  dsize D =\n      @N. (forall n. n < N ==> D(n) < D(SUC n)) /\\\n          (forall n. n >= N ==> (D(n) = D(N)))
+      #|  tdiv(a,b) (D,p) <=>\n     division(a,b) D /\\\n     (forall n. D(n) <= p(n) /\\ p(n) <= D(SUC n))
+      #|  gauge(E) (g:real->real) <=> forall x. E x ==> &0 < g(x)
+      #|  fine(g:real->real) (D,p) <=>\n     forall n. n < (dsize D) ==> (D(SUC n) - D(n)) < g(p(n))
       #|  rsum (D,(p:num->real)) f =\n        sum(0,dsize(D))(\\n. f(p n) * (D(SUC n) - D(n)))
-      #|  defint(a,b) f k <=>\n     !e. &0 < e ==>\n        ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n            !D p. tdiv(a,b) (D,p) /\\ fine(g)(D,p) ==>\n                abs(rsum(D,p) f - k) < e
+      #|  defint(a,b) f k <=>\n     forall e. &0 < e ==>\n        ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n            forall D p. tdiv(a,b) (D,p) /\\ fine(g)(D,p) ==>\n                abs(rsum(D,p) f - k) < e
       #|  0
       #|  n:num
-      #|  !a b. (a = b) ==> (dsize(\\n. if (n = 0) then a else b) = 0)
+      #|  forall a b. (a = b) ==> (dsize(\\n. if (n = 0) then a else b) = 0)
       #|  n = 0
       #|  1
       #|  n:num
@@ -7145,68 +7145,68 @@ test "Library/transc matches Library/transc.ml" {
       #|  2
       #|  1
       #|  n:num
-      #|  !a b. a < b ==> (dsize(\\n. if (n = 0) then a else b) = 1)
+      #|  forall a b. a < b ==> (dsize(\\n. if (n = 0) then a else b) = 1)
       #|  0
       #|  1
       #|  n:num
       #|  1
-      #|  !a b. a <= b ==> division(a,b)(\\n. if (n = 0) then a else b)
-      #|  !D a b. division(a,b) D ==> (D(0) = a)
-      #|  !n:num. n >= N ==> (D n :real = b)
+      #|  forall a b. a <= b ==> division(a,b)(\\n. if (n = 0) then a else b)
+      #|  forall D a b. division(a,b) D ==> (D(0) = a)
+      #|  forall n:num. n >= N ==> (D n :real = b)
       #|  N:num
       #|  M:num
-      #|  !n. n < N ==> (D n) < (D(SUC n))
+      #|  forall n. n < N ==> (D n) < (D(SUC n))
       #|  SUC M
       #|  N:num
       #|  M:num
-      #|  !n:num. n >= N ==> (D n :real = b)
+      #|  forall n:num. n >= N ==> (D n :real = b)
       #|  N:num
       #|  M:num
       #|  dsize D = N
       #|  N:num
       #|  dsize D
-      #|  !D a b. division(a,b) D <=>\n        (D(0) = a) /\\\n        (!n. n < (dsize D) ==> D(n) < D(SUC n)) /\\\n        (!n. n >= (dsize D) ==> (D(n) = b))
+      #|  forall D a b. division(a,b) D <=>\n        (D(0) = a) /\\\n        (forall n. n < (dsize D) ==> D(n) < D(SUC n)) /\\\n        (forall n. n >= (dsize D) ==> (D(n) = b))
       #|  SUC N
       #|  N:num
       #|  dsize D
-      #|  !D a b. division(a,b) D ==> (D(dsize D) = b)
+      #|  forall D a b. division(a,b) D ==> (D(dsize D) = b)
       #|  D(m + (SUC d)):real
       #|  d:num
       #|  d:num
       #|  (m + (SUC d)) <= (dsize D)
       #|  d:num
       #|  m:num < n
-      #|  !D a b m n. division(a,b) D /\\\n               m < n /\\\n               n <= (dsize D) ==> D(m) < D(n)
+      #|  forall D a b m n. division(a,b) D /\\\n               m < n /\\\n               n <= (dsize D) ==> D(m) < D(n)
       #|  SUC n
       #|  D(0):real = a
       #|  D(SUC n):real
-      #|  !D a b. division(a,b) D ==> !n. n < (dsize D) ==> D(0) < D(SUC n)
+      #|  forall D a b. division(a,b) D ==> forall n. n < (dsize D) ==> D(0) < D(SUC n)
       #|  dsize D
       #|  PRE(dsize D)
       #|  dsize D
-      #|  !n. n >= (dsize D) ==> (D n = b)
+      #|  forall n. n >= (dsize D) ==> (D n = b)
       #|  D(0):real = a
-      #|  !D a b. division(a,b) D ==> a <= b
+      #|  forall D a b. division(a,b) D ==> a <= b
       #|  b:real
       #|  a:real
-      #|  !D a b. division(a,b) D ==> !n. n < (dsize D) ==> D(n) < D(dsize D)
+      #|  forall D a b. division(a,b) D ==> forall n. n < (dsize D) ==> D(n) < D(dsize D)
       #|  dsize D
       #|  PRE(dsize D)
       #|  dsize D
-      #|  !n. n >= (dsize D) ==> (D n = b)
+      #|  forall n. n >= (dsize D) ==> (D n = b)
       #|  D(0):real = a
-      #|  !D a b. division(a,b) D ==> ((a = b) <=> (dsize D = 0))
+      #|  forall D a b. division(a,b) D ==> ((a = b) <=> (dsize D = 0))
       #|  D:num->real
       #|  b:real
       #|  SUC r
       #|  (D:num->real) r
       #|  dsize D
       #|  SUC r
-      #|  !D a b r. division(a,b) D ==> a <= D(r)
+      #|  forall D a b r. division(a,b) D ==> a <= D(r)
       #|  SUC n
       #|  SUC n
       #|  dsize D
-      #|  !D a b n. division(a,b) D /\\ ~(dsize D = 0) ==> a < D(SUC n)
+      #|  forall D a b n. division(a,b) D /\\ ~(dsize D = 0) ==> a < D(SUC n)
       #|  SUC r
       #|  dsize D
       #|  r < 0
@@ -7219,11 +7219,11 @@ test "Library/transc matches Library/transc.ml" {
       #|  r:num
       #|  r < (dsize D)
       #|  (dsize D) - r
-      #|  !r. D((dsize D) - r) <= b
+      #|  forall r. D((dsize D) - r) <= b
       #|  dsize D
       #|  r:num
-      #|  !D a b r. division(a,b) D ==> D(r) <= b
-      #|  !D a b n. division(a,b) D /\\\n             n < dsize D ==> D(n) < b
+      #|  forall D a b r. division(a,b) D ==> D(r) <= b
+      #|  forall D a b n. division(a,b) D /\\\n             n < dsize D ==> D(n) < b
       #|  d:num
       #|  dsize D1
       #|  n >= ((dsize D1) + (dsize D2))
@@ -7239,7 +7239,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  n < (dsize D1)
       #|  (SUC n) < (dsize D1)
       #|  n:num
-      #|  !a b c D1 D2. division(a,b) D1 /\\ division(b,c) D2 ==>\n        (!n. n < ((dsize D1) + (dsize D2)) ==>\n                (\\n. if (n < (dsize D1)) then  D1(n) else\n                     D2(n - (dsize D1)))(n) <\n   (\\n. if (n < (dsize D1)) then  D1(n) else D2(n - (dsize D1)))(SUC n)) /\\\n        (!n. n >= ((dsize D1) + (dsize D2)) ==>\n               ((\\n. if (n < (dsize D1)) then  D1(n) else\n   D2(n - (dsize D1)))(n) = (\\n. if (n < (dsize D1)) then  D1(n) else\n   D2(n - (dsize D1)))((dsize D1) + (dsize D2))))
+      #|  forall a b c D1 D2. division(a,b) D1 /\\ division(b,c) D2 ==>\n        (forall n. n < ((dsize D1) + (dsize D2)) ==>\n                (\\n. if (n < (dsize D1)) then  D1(n) else\n                     D2(n - (dsize D1)))(n) <\n   (\\n. if (n < (dsize D1)) then  D1(n) else D2(n - (dsize D1)))(SUC n)) /\\\n        (forall n. n >= ((dsize D1) + (dsize D2)) ==>\n               ((\\n. if (n < (dsize D1)) then  D1(n) else\n   D2(n - (dsize D1)))(n) = (\\n. if (n < (dsize D1)) then  D1(n) else\n   D2(n - (dsize D1)))((dsize D1) + (dsize D2))))
       #|  dsize D1 + dsize D2
       #|  (dsize D1) <= n
       #|  n:num
@@ -7267,10 +7267,10 @@ test "Library/transc matches Library/transc.ml" {
       #|  SUC(dsize D2)
       #|  division(b,c) D2
       #|  x + y:num
-      #|  !x y. x <= SUC(x + y)
+      #|  forall x y. x <= SUC(x + y)
       #|  dsize(D1) + dsize(D2)
       #|  N:num
-      #|  !a b c D1 D2. division(a,b) D1 /\\ division(b,c) D2 ==>\n                   (dsize(\\n. if (n < (dsize D1)) then  D1(n) else\n       D2(n - (dsize D1))) = dsize(D1) + dsize(D2))
+      #|  forall a b c D1 D2. division(a,b) D1 /\\ division(b,c) D2 ==>\n                   (dsize(\\n. if (n < (dsize D1)) then  D1(n) else\n       D2(n - (dsize D1))) = dsize(D1) + dsize(D2))
       #|  dsize D1 = SUC n
       #|  SUC n
       #|  n < (dsize D1)
@@ -7325,11 +7325,11 @@ test "Library/transc matches Library/transc.ml" {
       #|  c:real
       #|  b:real
       #|  a:real
-      #|  !a b c g d1 p1 d2 p2.\n        tdiv(a,b) (d1,p1) /\\\n        fine g (d1,p1) /\\\n        tdiv(b,c) (d2,p2) /\\\n        fine g (d2,p2)\n        ==> tdiv(a,c)\n              ((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n               (\\n. if n < dsize d1\n                    then p1(n) else p2(n - (dsize d1)))) /\\\n            fine g ((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n               (\\n. if n < dsize d1\n                    then p1(n) else p2(n - (dsize d1)))) /\\\n            !f. rsum((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n                     (\\n. if n < dsize d1\n                          then p1(n) else p2(n - (dsize d1)))) f =\n                rsum(d1,p1) f + rsum(d2,p2) f
+      #|  forall a b c g d1 p1 d2 p2.\n        tdiv(a,b) (d1,p1) /\\\n        fine g (d1,p1) /\\\n        tdiv(b,c) (d2,p2) /\\\n        fine g (d2,p2)\n        ==> tdiv(a,c)\n              ((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n               (\\n. if n < dsize d1\n                    then p1(n) else p2(n - (dsize d1)))) /\\\n            fine g ((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n               (\\n. if n < dsize d1\n                    then p1(n) else p2(n - (dsize d1)))) /\\\n            forall f. rsum((\\n. if n < dsize d1 then  d1(n) else d2(n - (dsize d1))),\n                     (\\n. if n < dsize d1\n                          then p1(n) else p2(n - (dsize d1)))) f =\n                rsum(d1,p1) f + rsum(d2,p2) f
       #|  \\n. if n < dsize D1 then p1(n):real else p2(n - (dsize D1))
       #|  \\n. if n < dsize D1 then D1(n):real else D2(n - (dsize D1))
-      #|  !a b c D1 p1 D2 p2.\n        tdiv(a,b) (D1,p1) /\\ fine(g) (D1,p1) /\\\n        tdiv(b,c) (D2,p2) /\\ fine(g) (D2,p2)\n        ==> ?D p. tdiv(a,c) (D,p) /\\ fine(g) (D,p) /\\\n                  !f. rsum(D,p) f = rsum(D1,p1) f + rsum(D2,p2) f
-      #|  !a b c.\n      (?D1 p1. tdiv(a,b) (D1,p1) /\\ fine(g) (D1,p1)) /\\\n      (?D2 p2. tdiv(b,c) (D2,p2) /\\ fine(g) (D2,p2)) ==>\n        ?D p. tdiv(a,c) (D,p) /\\ fine(g) (D,p)
+      #|  forall a b c D1 p1 D2 p2.\n        tdiv(a,b) (D1,p1) /\\ fine(g) (D1,p1) /\\\n        tdiv(b,c) (D2,p2) /\\ fine(g) (D2,p2)\n        ==> ?D p. tdiv(a,c) (D,p) /\\ fine(g) (D,p) /\\\n                  forall f. rsum(D,p) f = rsum(D1,p1) f + rsum(D2,p2) f
+      #|  forall a b c.\n      (?D1 p1. tdiv(a,b) (D1,p1) /\\ fine(g) (D1,p1)) /\\\n      (?D2 p2. tdiv(b,c) (D2,p2) /\\ fine(g) (D2,p2)) ==>\n        ?D p. tdiv(a,c) (D,p) /\\ fine(g) (D,p)
       #|  1
       #|  w <= y
       #|  n:num
@@ -7357,11 +7357,11 @@ test "Library/transc matches Library/transc.ml" {
       #|  b:real
       #|  a:real
       #|  \\(u,v). a <= u /\\ v <= b ==> ?D p. tdiv(u,v) (D,p) /\\ fine(g) (D,p)
-      #|  !a b g. a <= b /\\ gauge(\\x. a <= x /\\ x <= b) g ==>\n        ?D p. tdiv(a,b) (D,p) /\\ fine(g) (D,p)
+      #|  forall a b g. a <= b /\\ gauge(\\x. a <= x /\\ x <= b) g ==>\n        ?D p. tdiv(a,b) (D,p) /\\ fine(g) (D,p)
       #|  x:real
-      #|  !E g1 g2. gauge(E) g1 /\\ gauge(E) g2 ==>\n        gauge(E) (\\x. if g1(x) < g2(x) then g1(x) else g2(x))
+      #|  forall E g1 g2. gauge(E) g1 /\\ gauge(E) g2 ==>\n        gauge(E) (\\x. if g1(x) < g2(x) then g1(x) else g2(x))
       #|  n:num
-      #|  !g1 g2 D p. fine (\\x. if g1(x) < g2(x) then g1(x) else g2(x)) (D,p) ==>\n        fine(g1) (D,p) /\\ fine(g2) (D,p)
+      #|  forall g1 g2 D p. fine (\\x. if g1(x) < g2(x) then g1(x) else g2(x)) (D,p) ==>\n        fine(g1) (D,p) /\\ fine(g2) (D,p)
       #|  (a + b) + (c + d) = (d + a) + (c + b)
       #|  abs(rsum(D,p) f - k2) + abs(rsum(D,p) f - k1)
       #|  abs((rsum(D,p) f - k2) - (rsum(D,p) f - k1)) < abs(k1 - k2)
@@ -7378,23 +7378,23 @@ test "Library/transc matches Library/transc.ml" {
       #|  g2:real->real
       #|  g1:real->real
       #|  abs(k1 - k2) / &2
-      #|  !a b f k1 k2. a <= b /\\ defint(a,b) f k1 /\\ defint(a,b) f k2 ==> (k1 = k2)
+      #|  forall a b f k1 k2. a <= b /\\ defint(a,b) f k1 /\\ defint(a,b) f k2 ==> (k1 = k2)
       #|  \\x:real. &1
-      #|  !f a. defint(a,a) f (&0)
+      #|  forall f a. defint(a,a) f (&0)
       #|  2
-      #|  !x y. (x * inv(&2)) <= (y * inv(&2)) <=> x <= y
+      #|  forall x y. (x * inv(&2)) <= (y * inv(&2)) <=> x <= y
       #|  &0 < e
       #|  (a * b) * c = (a * c) * b
       #|  v - u
       #|  (e / &2) * abs(x - u)
       #|  2
-      #|  !x y. (x * inv(&2)) <= (y * inv(&2)) <=> x <= y
+      #|  forall x y. (x * inv(&2)) <= (y * inv(&2)) <=> x <= y
       #|  &0 < e
       #|  (a * b) * c = (a * c) * b
       #|  v - u
       #|  (e / &2) * abs(v - x)
       #|  (a + b) + (c + d) = (b + c) + (a + d)
-      #|  !a b c. (a - b) + (b - c) = (a - c)
+      #|  forall a b c. (a - b) + (b - c) = (a - c)
       #|  (f(x) - f(u)) - (f'(x) * (x - u))
       #|  (f(v) - f(x)) - (f'(x) * (v - x))
       #|  abs((f(v) - f(x)) - (f'(x) * (v - x))) +\n              abs((f(x) - f(u)) - (f'(x) * (x - u)))
@@ -7404,7 +7404,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0 < abs(z - x)
       #|  ~(&0 < abs(z - x))
       #|  &0 < abs(z - x)
-      #|  !z. abs(z - x) < d ==>\n        abs((f(z) - f(x)) - (f'(x) * (z - x))) <= (e / &2) * abs(z - x)
+      #|  forall z. abs(z - x) < d ==>\n        abs((f(z) - f(x)) - (f'(x) * (z - x))) <= (e / &2) * abs(z - x)
       #|  d:real
       #|  e / &2
       #|  x:real
@@ -7413,8 +7413,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  a <= x /\\ x <= b
       #|  g:real->real
       #|  g:real->real
-      #|  !x. a <= x /\\ x <= b ==>\n        ?d. &0 < d /\\\n          !u v. u <= x /\\ x <= v /\\ (v - u) < d ==>\n            abs((f(v) - f(u)) - (f'(x) * (v - u))) <= e * (v - u)
-      #|  !f f' a b e. (!x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\ &0 < e\n    ==> ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n            !x u v. a <= u /\\ u <= x /\\ x <= v /\\ v <= b /\\ (v - u) < g(x)\n                ==> abs((f(v) - f(u)) - (f'(x) * (v - u))) <= e * (v - u)
+      #|  forall x. a <= x /\\ x <= b ==>\n        ?d. &0 < d /\\\n          forall u v. u <= x /\\ x <= v /\\ (v - u) < d ==>\n            abs((f(v) - f(u)) - (f'(x) * (v - u))) <= e * (v - u)
+      #|  forall f f' a b e. (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\ &0 < e\n    ==> ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n            forall x u v. a <= u /\\ u <= x /\\ x <= v /\\ v <= b /\\ (v - u) < g(x)\n                ==> abs((f(v) - f(u)) - (f'(x) * (v - u))) <= e * (v - u)
       #|  fine(g)(D,p)
       #|  r:num
       #|  (\\n. (D(SUC n) - D(n))) n
@@ -7439,20 +7439,20 @@ test "Library/transc matches Library/transc.ml" {
       #|  g:real->real
       #|  g:real->real
       #|  e / &2
-      #|  !e. &0 < e ==>\n      ?g. gauge(\\x. a <= x /\\ x <= b)g /\\\n          (!D p.\n            tdiv(a,b)(D,p) /\\ fine g(D,p) ==>\n            (abs((rsum(D,p)f') - ((f b) - (f a)))) <= e)
+      #|  forall e. &0 < e ==>\n      ?g. gauge(\\x. a <= x /\\ x <= b)g /\\\n          (forall D p.\n            tdiv(a,b)(D,p) /\\ fine g(D,p) ==>\n            (abs((rsum(D,p)f') - ((f b) - (f a)))) <= e)
       #|  e:real
       #|  a <= b
-      #|  !f f' a b. a <= b /\\ (!x. a <= x /\\ x <= b ==> (f diffl f'(x))(x))\n        ==> defint(a,b) f' (f(b) - f(a))
+      #|  forall f f' a b. a <= b /\\ (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x))\n        ==> defint(a,b) f' (f(b) - f(a))
       #|  integrable(a,b) f = ?i. defint(a,b) f i
       #|  integral(a,b) f = @i. defint(a,b) f i
-      #|  !f a b. integrable(a,b) f ==> defint(a,b) f (integral(a,b) f)
-      #|  !d a b. division(a,b) d ==> !n. a <= d(n) /\\ d(n) <= b
-      #|  !d p a b. tdiv(a,b) (d,p)\n             ==> !n. a <= d(n) /\\ d(n) <= b /\\ a <= p(n) /\\ p(n) <= b
-      #|  !d p a b. tdiv(a,b) (d,p) ==> a <= b
+      #|  forall f a b. integrable(a,b) f ==> defint(a,b) f (integral(a,b) f)
+      #|  forall d a b. division(a,b) d ==> forall n. a <= d(n) /\\ d(n) <= b
+      #|  forall d p a b. tdiv(a,b) (d,p)\n             ==> forall n. a <= d(n) /\\ d(n) <= b /\\ a <= p(n) /\\ p(n) <= b
+      #|  forall d p a b. tdiv(a,b) (d,p) ==> a <= b
       #|  b < a ==> (a <= x /\\ x <= b <=> F)
       #|  \\x:real. &0
-      #|  !a b f i. b < a ==> defint(a,b) f i
-      #|  !f a b i. a <= b /\\ defint(a,b) f i ==> integral(a,b) f = i
+      #|  forall a b f i. b < a ==> defint(a,b) f i
+      #|  forall f a b i. a <= b /\\ defint(a,b) f i ==> integral(a,b) f = i
       #|  \\x. c * x
       #|  x:real
       #|  b < a \\/ a <= b
@@ -7460,26 +7460,26 @@ test "Library/transc matches Library/transc.ml" {
       #|  a:real
       #|  \\x:real. c:real
       #|  \\x. c * x
-      #|  !a b c. defint(a,b) (\\x. c) (c * (b - a))
+      #|  forall a b c. defint(a,b) (\\x. c) (c * (b - a))
       #|  &0
-      #|  !a b. defint(a,b) (\\x. &0) (&0)
+      #|  forall a b. defint(a,b) (\\x. &0) (&0)
       #|  abs(--x - --y) = abs(x - y)
-      #|  !f a b i. defint(a,b) f i ==> defint(a,b) (\\x. --f x) (--i)
+      #|  forall f a b i. defint(a,b) f i ==> defint(a,b) (\\x. --f x) (--i)
       #|  e / abs c
       #|  e:real
       #|  c:real
       #|  b:real
       #|  a:real
       #|  c = &0
-      #|  !f a b c i. defint(a,b) f i ==> defint(a,b) (\\x. c * f x) (c * i)
+      #|  forall f a b c i. defint(a,b) f i ==> defint(a,b) (\\x. c * f x) (c * i)
       #|  abs(x - i) < e / &2 /\\ abs(y - j) < e / &2\n    ==> abs((x + y) - (i + j)) < e
       #|  \\x:real. if g1(x) < g2(x) then g1(x) else g2(x)
       #|  g2:real->real
       #|  g1:real->real
       #|  e / &2
       #|  e:real
-      #|  !f g a b i j.\n        defint(a,b) f i /\\ defint(a,b) g j\n        ==> defint(a,b) (\\x. f x + g x) (i + j)
-      #|  !f g a b i j.\n        defint(a,b) f i /\\ defint(a,b) g j\n        ==> defint(a,b) (\\x. f x - g x) (i - j)
+      #|  forall f g a b i j.\n        defint(a,b) f i /\\ defint(a,b) g j\n        ==> defint(a,b) (\\x. f x + g x) (i + j)
+      #|  forall f g a b i j.\n        defint(a,b) f i /\\ defint(a,b) g j\n        ==> defint(a,b) (\\x. f x - g x) (i - j)
       #|  r:num
       #|  ih - ig = e /\\ &0 < e /\\ sh <= sg\n    ==> abs(sg - ig) < e / &2 ==> ~(abs(sh - ih) < e / &2)
       #|  p:num->real
@@ -7497,8 +7497,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  e / &2
       #|  e = integral(a,b) f - integral(a,b) g
       #|  ~(&0 < x - y) ==> x <= y
-      #|  !f g a b i j.\n        a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g /\\\n        (!x. a <= x /\\ x <= b ==> f(x) <= g(x))\n        ==> integral(a,b) f <= integral(a,b) g
-      #|  !f g a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) g j /\\\n                 (!x. a <= x /\\ x <= b ==> f(x) <= g(x))\n                 ==> i <= j
+      #|  forall f g a b i j.\n        a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g /\\\n        (forall x. a <= x /\\ x <= b ==> f(x) <= g(x))\n        ==> integral(a,b) f <= integral(a,b) g
+      #|  forall f g a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) g j /\\\n                 (forall x. a <= x /\\ x <= b ==> f(x) <= g(x))\n                 ==> i <= j
       #|  b:real
       #|  a:real
       #|  \\x:real. abs(f x)
@@ -7506,8 +7506,8 @@ test "Library/transc matches Library/transc.ml" {
       #|  f:real->real
       #|  \\x:real. --abs(f x)
       #|  --a <= b /\\ b <= a ==> abs(b) <= a
-      #|  !f a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) (\\x. abs(f x)) j\n               ==> abs(i) <= j
-      #|  !f g a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) g j /\\\n                 (!x. a <= x /\\ x <= b ==> f(x) = g(x))\n                 ==> i = j
+      #|  forall f a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) (\\x. abs(f x)) j\n               ==> abs(i) <= j
+      #|  forall f g a b i j. a <= b /\\ defint(a,b) f i /\\ defint(a,b) g j /\\\n                 (forall x. a <= x /\\ x <= b ==> f(x) = g(x))\n                 ==> i = j
       #|  x = y ==> abs(x - i) < e ==> abs(y - i) < e
       #|  p:num->real
       #|  D:num->real
@@ -7515,23 +7515,23 @@ test "Library/transc matches Library/transc.ml" {
       #|  &0 < e
       #|  e:real
       #|  a <= b
-      #|  !f g a b i. defint(a,b) f i /\\\n               (!x. a <= x /\\ x <= b ==> f(x) = g(x))\n               ==> defint(a,b) g i
+      #|  forall f g a b i. defint(a,b) f i /\\\n               (forall x. a <= x /\\ x <= b ==> f(x) = g(x))\n               ==> defint(a,b) g i
       #|  a + b * c = a + c * b
-      #|  !f g f' g' a b.\n        a <= b /\\\n        (!x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        (!x. a <= x /\\ x <= b ==> (g diffl g'(x))(x))\n        ==> defint(a,b) (\\x. f'(x) * g(x) + f(x) * g'(x))\n                        (f(b) * g(b) - f(a) * g(a))
-      #|  !d a b. division(a,b) d ==> !n. d(n) <= d(SUC n)
-      #|  !d a b. division(a,b) d ==> !m n. m <= n ==> d(m) <= d(n)
-      #|  !d a b. division(a,b) d ==> !n. d(n) <= d(SUC n)
+      #|  forall f g f' g' a b.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        (forall x. a <= x /\\ x <= b ==> (g diffl g'(x))(x))\n        ==> defint(a,b) (\\x. f'(x) * g(x) + f(x) * g'(x))\n                        (f(b) * g(b) - f(a) * g(a))
+      #|  forall d a b. division(a,b) d ==> forall n. d(n) <= d(SUC n)
+      #|  forall d a b. division(a,b) d ==> forall m n. m <= n ==> d(m) <= d(n)
+      #|  forall d a b. division(a,b) d ==> forall n. d(n) <= d(SUC n)
       #|  SUC(dsize d)
       #|  ~(SUC n <= n)
       #|  SUC n
       #|  n:num
       #|  \\n. n <= dsize d /\\ (d:num->real)(n) <= c
-      #|  !d a b c. division(a,b) d /\\ a <= c /\\ c <= b\n             ==> ?n. n <= dsize d /\\ d(n) <= c /\\ c <= d(SUC n)
-      #|  !a b d n. division(a,b) d /\\ d(SUC n) = d(n) ==> dsize d <= n
-      #|  !a b d n. division(a,b) d /\\ d(n) < d(SUC n) ==> SUC n <= dsize d
-      #|  !a b d n. division(a,b) d /\\ d(n) < d(SUC n) /\\ d(SUC(SUC n)) = d(SUC n)\n           ==> dsize d = SUC n
+      #|  forall d a b c. division(a,b) d /\\ a <= c /\\ c <= b\n             ==> ?n. n <= dsize d /\\ d(n) <= c /\\ c <= d(SUC n)
+      #|  forall a b d n. division(a,b) d /\\ d(SUC n) = d(n) ==> dsize d <= n
+      #|  forall a b d n. division(a,b) d /\\ d(n) < d(SUC n) ==> SUC n <= dsize d
+      #|  forall a b d n. division(a,b) d /\\ d(n) < d(SUC n) /\\ d(SUC(SUC n)) = d(SUC n)\n           ==> dsize d = SUC n
       #|  d <= 0 ==> d = 0
-      #|  !a b d n. division(a,b) d /\\ d(SUC n) = d(n) /\\\n             (!i. i < n ==> d(i) < d(SUC i))\n             ==> dsize d = n
+      #|  forall a b d n. division(a,b) d /\\ d(SUC n) = d(n) /\\\n             (forall i. i < n ==> d(i) < d(SUC i))\n             ==> dsize d = n
       #|  m + 0 + 1 = 0 + m + 1
       #|  1 = 0 + 1
       #|  a = b ==> x + a = b + x
@@ -7562,7 +7562,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  a /\\ (a ==> b /\\ (b /\\ c ==> d))\n                     ==> (a /\\ b ==> c) ==> d
       #|  \\i. if i = 0 then b:real else p(i + m)
       #|  \\i. if i = 0 then b:real else d(i + m)
-      #|  !D p. tdiv(b,c) (D,p) /\\ fine g2 (D,p)\n          ==> abs(rsum(D,p) f - j) < e / &2
+      #|  forall D p. tdiv(b,c) (D,p) /\\ fine g2 (D,p)\n          ==> abs(rsum(D,p) f - j) < e / &2
       #|  x = y ==> abs(x - i) < e ==> abs(y - i) < e
       #|  m + 1 = 0 + SUC m
       #|  k + SUC m
@@ -7585,7 +7585,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  a /\\ (a ==> b /\\ (b /\\ c ==> d))\n                       ==> (a /\\ b ==> c) ==> d
       #|  \\i. (p:num->real) (i + SUC m)
       #|  \\i. (d:num->real) (i + SUC m)
-      #|  !D p. tdiv(b,c) (D,p) /\\ fine g2 (D,p)\n            ==> abs(rsum(D,p) f - j) < e / &2
+      #|  forall D p. tdiv(b,c) (D,p) /\\ fine g2 (D,p)\n            ==> abs(rsum(D,p) f - j) < e / &2
       #|  d(SUC m):real = b
       #|  ~(SUC(SUC m) <= m)
       #|  ~(SUC m <= m)
@@ -7633,9 +7633,9 @@ test "Library/transc matches Library/transc.ml" {
       #|  a /\\ (a ==> b) /\\ (a /\\ c ==> d)\n                       ==> (a /\\ b ==> c) ==> d
       #|  \\i. if i <= m then (p:num->real)(i) else b
       #|  \\i. if i <= m then (d:num->real)(i) else b
-      #|  !D p. tdiv(a,b) (D,p) /\\ fine g1 (D,p)\n            ==> abs(rsum(D,p) f - i) < e / &2
+      #|  forall D p. tdiv(a,b) (D,p) /\\ fine g1 (D,p)\n            ==> abs(rsum(D,p) f - i) < e / &2
       #|  b:real
-      #|  !b. abs((s1 + x * (b - a)) - i) < e / &2 /\\\n        abs((s2 + x * (c - b)) - j) < e / &2\n        ==> abs((s1 + x * (c - a) + s2) - (i + j)) < e
+      #|  forall b. abs((s1 + x * (b - a)) - i) < e / &2 /\\\n        abs((s2 + x * (c - b)) - j) < e / &2\n        ==> abs((s1 + x * (c - a) + s2) - (i + j)) < e
       #|  b:real <= d(SUC m)
       #|  (d:num->real) m <= b
       #|  m:num
@@ -7660,7 +7660,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  b <= c
       #|  a:real = b
       #|  a <= b
-      #|  !f a b c i j. a <= b /\\ b <= c /\\ defint(a,b) f i /\\ defint(b,c) f j\n                 ==> defint(a,c) f (i + j)
+      #|  forall f a b c i j. a <= b /\\ b <= c /\\ defint(a,b) f i /\\ defint(b,c) f j\n                 ==> defint(a,c) f (i + j)
       #|  e:real
       #|  k:num
       #|  k + m:num
@@ -7682,7 +7682,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  (\\x. e):real->real
       #|  e:real
       #|  b < a \\/ a <= b
-      #|  !a b. defint(a,b) (\\x. if x = a then &1 else &0) (&0)
+      #|  forall a b. defint(a,b) (\\x. if x = a then &1 else &0) (&0)
       #|  x < x + 1
       #|  m + 1
       #|  m:num
@@ -7700,16 +7700,16 @@ test "Library/transc matches Library/transc.ml" {
       #|  (\\x. e):real->real
       #|  e:real
       #|  b < a \\/ a <= b
-      #|  !a b. defint(a,b) (\\x. if x = b then &1 else &0) (&0)
+      #|  forall a b. defint(a,b) (\\x. if x = b then &1 else &0) (&0)
       #|  c:real
       #|  \\x:real. &0
       #|  a <= c /\\ c <= b
       #|  a <= b
-      #|  !a b c. defint(a,b) (\\x. if x = c then &1 else &0) (&0)
+      #|  forall a b c. defint(a,b) (\\x. if x = c then &1 else &0) (&0)
       #|  i = i + ((g:real->real) c - f c) * &0
       #|  \\x:real. f(x) + (g c - f c) * (if x = c then &1 else &0)
       #|  a <= b
-      #|  !f g a b c i.\n        (!x. a <= x /\\ x <= b /\\ ~(x = c) ==> (f x = g x)) /\\ defint(a,b) f i\n        ==> defint(a,b) g i
+      #|  forall f g a b c i.\n        (forall x. a <= x /\\ x <= b /\\ ~(x = c) ==> (f x = g x)) /\\ defint(a,b) f i\n        ==> defint(a,b) g i
       #|  c:real
       #|  \\x. if x = c then (f:real->real) x else g x
       #|  g:real->real
@@ -7718,11 +7718,11 @@ test "Library/transc matches Library/transc.ml" {
       #|  s:real->bool
       #|  g:real->real
       #|  a /\\ b /\\ c ==> d <=> c ==> a ==> b ==> d
-      #|  !f g a b s i.\n        FINITE s /\\\n        (!x. a <= x /\\ x <= b /\\ ~(x IN s) ==> (f x = g x)) /\\\n        defint(a,b) f i\n        ==> defint(a,b) g i
+      #|  forall f g a b s i.\n        FINITE s /\\\n        (forall x. a <= x /\\ x <= b /\\ ~(x IN s) ==> (f x = g x)) /\\\n        defint(a,b) f i\n        ==> defint(a,b) g i
       #|  \\x:real. if gm x < gs(SUC n) x then gm x else gs(SUC n) x
       #|  gm:real->real
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !s gs n. (!m:num. m <= n ==> gauge s (gs m))\n            ==> ?g. gauge s g /\\\n                    !d p. fine g (d,p) ==> !m. m <= n ==> fine (gs m) (d,p)
+      #|  forall s gs n. (forall m:num. m <= n ==> gauge s (gs m))\n            ==> ?g. gauge s g /\\\n                    forall d p. fine g (d,p) ==> forall m. m <= n ==> fine (gs m) (d,p)
       #|  &2 pow N2
       #|  abs(s1 - i) < e / &2\n    ==> d < e / &2\n        ==> abs(s2 - s1) < d ==> abs(s2 - i) < e
       #|  (p:num->num->real)(N1 + N2)
@@ -7775,7 +7775,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  e / &2
       #|  e:real
       #|  i:real
-      #|  !f a b. integrable(a,b) f <=>\n           !e. &0 < e\n               ==> ?g. gauge (\\x. a <= x /\\ x <= b) g /\\\n                       !d1 p1 d2 p2.\n                            tdiv (a,b) (d1,p1) /\\ fine g (d1,p1) /\\\n                            tdiv (a,b) (d2,p2) /\\ fine g (d2,p2)\n                            ==> abs (rsum(d1,p1) f - rsum(d2,p2) f) < e
+      #|  forall f a b. integrable(a,b) f <=>\n           forall e. &0 < e\n               ==> ?g. gauge (\\x. a <= x /\\ x <= b) g /\\\n                       forall d1 p1 d2 p2.\n                            tdiv (a,b) (d1,p1) /\\ fine g (d1,p1) /\\\n                            tdiv (a,b) (d2,p2) /\\ fine g (d2,p2)\n                            ==> abs (rsum(d1,p1) f - rsum(d2,p2) f) < e
       #|  p2:num->real
       #|  d2:num->real
       #|  p2:num->real
@@ -7788,14 +7788,14 @@ test "Library/transc matches Library/transc.ml" {
       #|  d2:num->real
       #|  p1:num->real
       #|  d1:num->real
-      #|  !m n. sum(m,n) (\\i. d(SUC i) - d(i)) = d(m + n) - d m
+      #|  forall m n. sum(m,n) (\\i. d(SUC i) - d(i)) = d(m + n) - d m
       #|  a <= d0 /\\ d1 <= b ==> d1 - d0 <= b - a
       #|  a:real
       #|  r:num
       #|  sum(0,dsize d) (\\i. e * abs(d(SUC i) - d(i)))
       #|  sum(0,dsize d) (\\i. abs(f(p i :real) * (d(SUC i) - d i)))
-      #|  !a b d p e f.\n        tdiv(a,b) (d,p) /\\\n        (!x. a <= x /\\ x <= b ==> abs(f x) <= e)\n        ==> abs(rsum(d,p) f) <= e * (b - a)
-      #|  !a b d p e f g.\n        tdiv(a,b) (d,p) /\\\n        (!x. a <= x /\\ x <= b ==> abs(f x - g x) <= e)\n        ==> abs(rsum (d,p) f - rsum (d,p) g) <= e * (b - a)
+      #|  forall a b d p e f.\n        tdiv(a,b) (d,p) /\\\n        (forall x. a <= x /\\ x <= b ==> abs(f x) <= e)\n        ==> abs(rsum(d,p) f) <= e * (b - a)
+      #|  forall a b d p e f g.\n        tdiv(a,b) (d,p) /\\\n        (forall x. a <= x /\\ x <= b ==> abs(f x - g x) <= e)\n        ==> abs(rsum (d,p) f - rsum (d,p) g) <= e * (b - a)
       #|  N2 <= N1 + N2:num
       #|  &2 pow N2
       #|  &1 / n * x <= e / &3 <=> (&3 * x) / n <= e
@@ -7819,7 +7819,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  &1 / &2 pow n
       #|  &1 / &2 pow m
       #|  (f:real->real) x
-      #|  !f. abs(f - gm) <= inv(k) /\\ abs(f - gn) <= inv(k)\n            ==> abs(gm - gn) <= &2 / k
+      #|  forall f. abs(f - gm) <= inv(k) /\\ abs(f - gn) <= inv(k)\n            ==> abs(gm - gn) <= &2 / k
       #|  &2 / &2 pow N * (b - a)
       #|  abs(rsum(d,p) (g(m:num)) - rsum(d,p) (g n)) <= e / &2
       #|  p:num->real
@@ -7843,12 +7843,12 @@ test "Library/transc matches Library/transc.ml" {
       #|  &1 / &2 pow n
       #|  n:num
       #|  a <= b
-      #|  !f a b. (!e. &0 < e\n                ==> ?g. (!x. a <= x /\\ x <= b ==> abs(f x - g x) <= e) /\\\n                        integrable(a,b) g)\n           ==> integrable(a,b) f
+      #|  forall f a b. (forall e. &0 < e\n                ==> ?g. (forall x. a <= x /\\ x <= b ==> abs(f x - g x) <= e) /\\\n                        integrable(a,b) g)\n           ==> integrable(a,b) f
       #|  n:num
       #|  m:num
-      #|  !a b c. integrable(a,b) (\\x. c)
-      #|  !f a b c. a <= b /\\ b <= c /\\ integrable(a,b) f /\\ integrable(b,c) f\n         ==> integrable(a,c) f
-      #|  !f g a b c.\n         (!x. a <= x /\\ x <= b /\\ ~(x = c) ==> f x = g x) /\\ integrable(a,b) f\n         ==> integrable(a,b) g
+      #|  forall a b c. integrable(a,b) (\\x. c)
+      #|  forall f a b c. a <= b /\\ b <= c /\\ integrable(a,b) f /\\ integrable(b,c) f\n         ==> integrable(a,c) f
+      #|  forall f g a b c.\n         (forall x. a <= x /\\ x <= b /\\ ~(x = c) ==> f x = g x) /\\ integrable(a,b) f\n         ==> integrable(a,b) g
       #|  \\x:real. (f:real->real) u
       #|  v:real
       #|  u:real
@@ -7876,12 +7876,12 @@ test "Library/transc matches Library/transc.ml" {
       #|  f:real->real
       #|  e:real
       #|  b < a \\/ a <= b
-      #|  !f a b. (!x. a <= x /\\ x <= b ==> f contl x) ==> integrable(a,b) f
+      #|  forall f a b. (forall x. a <= x /\\ x <= b ==> f contl x) ==> integrable(a,b) f
       #|  g:real->real
       #|  &0 < e
       #|  e:real
       #|  i:real
-      #|  !f a b c.\n        a <= c /\\ c <= b /\\ integrable(a,b) f\n        ==> ?i. !e. &0 < e\n                    ==> ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n                            !d1 p1 d2 p2. tdiv(a,c) (d1,p1) /\\\n                                          fine g (d1,p1) /\\\n                                          tdiv(c,b) (d2,p2) /\\\n                                          fine g (d2,p2)\n                                          ==> abs((rsum(d1,p1) f +\n                                                   rsum(d2,p2) f) - i) < e
+      #|  forall f a b c.\n        a <= c /\\ c <= b /\\ integrable(a,b) f\n        ==> ?i. forall e. &0 < e\n                    ==> ?g. gauge(\\x. a <= x /\\ x <= b) g /\\\n                            forall d1 p1 d2 p2. tdiv(a,c) (d1,p1) /\\\n                                          fine g (d1,p1) /\\\n                                          tdiv(c,b) (d2,p2) /\\\n                                          fine g (d2,p2)\n                                          ==> abs((rsum(d1,p1) f +\n                                                   rsum(d2,p2) f) - i) < e
       #|  p:num->real
       #|  d:num->real
       #|  p:num->real
@@ -7894,7 +7894,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  e / &2
       #|  e:real
       #|  i:real
-      #|  !f a b c. a <= c /\\ c <= b /\\ integrable(a,b) f ==> integrable(a,c) f
+      #|  forall f a b c. a <= c /\\ c <= b /\\ integrable(a,b) f ==> integrable(a,c) f
       #|  p2:num->real
       #|  d2:num->real
       #|  p2:num->real
@@ -7923,25 +7923,25 @@ test "Library/transc matches Library/transc.ml" {
       #|  e / &2
       #|  e:real
       #|  i:real
-      #|  !f a b c. a <= c /\\ c <= b /\\ integrable(a,b) f ==> integrable(c,b) f
+      #|  forall f a b c. a <= c /\\ c <= b /\\ integrable(a,b) f ==> integrable(c,b) f
       #|  p2:num->real
       #|  d2:num->real
       #|  p1:num->real
       #|  d1:num->real
-      #|  !f a b c d. a <= c /\\ c <= d /\\ d <= b /\\ integrable(a,b) f\n               ==> integrable(c,d) f
-      #|  (!x. f contl x) ==> integrable(a,b) f
-      #|  !a b c. a <= b ==> integral(a,b) (\\x. c) = c * (b - a)
-      #|  !f c a b. a <= b /\\ integrable(a,b) f\n             ==> integral(a,b) (\\x. c * f(x)) = c * integral(a,b) f
-      #|  !f g a b. a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g\n             ==> integral(a,b) (\\x. f(x) + g(x)) =\n                 integral(a,b) f + integral(a,b) g
-      #|  !f g a b. a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g\n             ==> integral(a,b) (\\x. f(x) - g(x)) =\n                 integral(a,b) f - integral(a,b) g
+      #|  forall f a b c d. a <= c /\\ c <= d /\\ d <= b /\\ integrable(a,b) f\n               ==> integrable(c,d) f
+      #|  (forall x. f contl x) ==> integrable(a,b) f
+      #|  forall a b c. a <= b ==> integral(a,b) (\\x. c) = c * (b - a)
+      #|  forall f c a b. a <= b /\\ integrable(a,b) f\n             ==> integral(a,b) (\\x. c * f(x)) = c * integral(a,b) f
+      #|  forall f g a b. a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g\n             ==> integral(a,b) (\\x. f(x) + g(x)) =\n                 integral(a,b) f + integral(a,b) g
+      #|  forall f g a b. a <= b /\\ integrable(a,b) f /\\ integrable(a,b) g\n             ==> integral(a,b) (\\x. f(x) - g(x)) =\n                 integral(a,b) f - integral(a,b) g
       #|  a <= b
-      #|  !f g f' g' a b.\n         a <= b /\\\n         (!x. a <= x /\\ x <= b ==> (f diffl f' x) x) /\\\n         (!x. a <= x /\\ x <= b ==> (g diffl g' x) x) /\\\n         integrable(a,b) (\\x. f' x * g x) /\\\n         integrable(a,b) (\\x. f x * g' x)\n         ==> integral(a,b) (\\x. f x * g' x) =\n             (f b * g b - f a * g a) - integral(a,b) (\\x. f' x * g x)
+      #|  forall f g f' g' a b.\n         a <= b /\\\n         (forall x. a <= x /\\ x <= b ==> (f diffl f' x) x) /\\\n         (forall x. a <= x /\\ x <= b ==> (g diffl g' x) x) /\\\n         integrable(a,b) (\\x. f' x * g x) /\\\n         integrable(a,b) (\\x. f x * g' x)\n         ==> integral(a,b) (\\x. f x * g' x) =\n             (f b * g b - f a * g a) - integral(a,b) (\\x. f' x * g x)
       #|  t0:real
       #|  t:real
       #|  t:real
       #|  t0:real
       #|  difg(SUC(SUC m))(t:real):real
-      #|  !t. &0 <= t /\\ t <= t0 ==>\n                       difg(SUC m) differentiable t
+      #|  forall t. &0 <= t /\\ t <= t0 ==>\n                       difg(SUC m) differentiable t
       #|  SUC m
       #|  t0:real
       #|  difg(m:num):real->real
@@ -7952,25 +7952,25 @@ test "Library/transc matches Library/transc.ml" {
       #|  m < n:num
       #|  difg(0):real->real = g
       #|  difg(SUC 0)(t:real):real
-      #|  !t. &0 <= t /\\ t <= h ==> g differentiable t
+      #|  forall t. &0 <= t /\\ t <= h ==> g differentiable t
       #|  t:real
       #|  difg(m:num):real->real
       #|  t:real
       #|  t:real
-      #|  !m:num. m < n ==> ?t. &0 < t /\\ t < h /\\\n                        (difg(m) diffl &0)(t)
+      #|  forall m:num. m < n ==> ?t. &0 < t /\\ t < h /\\\n                        (difg(m) diffl &0)(t)
       #|  1
       #|  d:num
       #|  j:num->real
       #|  j:num->real
       #|  d:num
       #|  m:num
-      #|  !m:num. m < n ==> (difg(m)(&0) = &0)
+      #|  forall m:num. m < n ==> (difg(m)(&0) = &0)
       #|  (a * b) * c = a * (c * b)
       #|  difg(SUC r)(t:real) = &0
       #|  t:real
       #|  t:real
       #|  r:num
-      #|  !m. m < n ==>\n        ?t. &0 < t /\\ t < h /\\ (difg(SUC m)(t) = &0)
+      #|  forall m. m < n ==>\n        ?t. &0 < t /\\ t < h /\\ (difg(SUC m)(t) = &0)
       #|  &(SUC k) = inv(inv(&(SUC k)))
       #|  a * b * c * d = c * (a * d) * b
       #|  z:real
@@ -7987,7 +7987,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  a * b * c * d = b * (a * (d * c))
       #|  t:real
       #|  t:real
-      #|  (!m t. m < n /\\ (& 0) <= t /\\ t <= h ==>\n                   (difg(m) diffl difg(SUC m)(t))(t))
+      #|  (forall m t. m < n /\\ (& 0) <= t /\\ t <= h ==>\n                   (difg(m) diffl difg(SUC m)(t))(t))
       #|  difg(0):real->real = g
       #|  difg = \\m t. diff(m) t -\n      (sum(0,n - m)(\\p. (diff(m + p)(&0) / &(FACT p)) * (t pow p))\n       + (B * ((t pow (n - m)) / &(FACT(n - m)))))
       #|  1
@@ -8003,7 +8003,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  n:num
       #|  r:num
       #|  0 < n
-      #|  !f diff h n.\n    &0 < h /\\\n    0 < n /\\\n    (diff(0) = f) /\\\n    (!m t. m < n /\\ &0 <= t /\\ t <= h ==>\n           (diff(m) diffl diff(SUC m)(t))(t)) ==>\n   (?t. &0 < t /\\ t < h /\\\n        (f(h) = sum(0,n)(\\m. (diff(m)(&0) / &(FACT m)) * (h pow m)) +\n                ((diff(n)(t) / &(FACT n)) * (h pow n))))
+      #|  forall f diff h n.\n    &0 < h /\\\n    0 < n /\\\n    (diff(0) = f) /\\\n    (forall m t. m < n /\\ &0 <= t /\\ t <= h ==>\n           (diff(m) diffl diff(SUC m)(t))(t)) ==>\n   (?t. &0 < t /\\ t < h /\\\n        (f(h) = sum(0,n)(\\m. (diff(m)(&0) / &(FACT m)) * (h pow m)) +\n                ((diff(n)(t) / &(FACT n)) * (h pow n))))
       #|  a * b * c * d = (b * c) * (a * d)
       #|  m:num
       #|  --t
@@ -8017,7 +8017,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  --h
       #|  \\n x. ((--(&1)) pow n) * (diff:num->real->real)(n)(--x)
       #|  \\x. (f(--x):real)
-      #|  !f diff h n.\n    h < &0 /\\\n    0 < n /\\\n    (diff(0) = f) /\\\n    (!m t. m < n /\\ h <= t /\\ t <= &0 ==>\n           (diff(m) diffl diff(SUC m)(t))(t)) ==>\n   (?t. h < t /\\ t < &0 /\\\n        (f(h) = sum(0,n)(\\m. (diff(m)(&0) / &(FACT m)) * (h pow m)) +\n                ((diff(n)(t) / &(FACT n)) * (h pow n))))
+      #|  forall f diff h n.\n    h < &0 /\\\n    0 < n /\\\n    (diff(0) = f) /\\\n    (forall m t. m < n /\\ h <= t /\\ t <= &0 ==>\n           (diff(m) diffl diff(SUC m)(t))(t)) ==>\n   (?t. h < t /\\ t < &0 /\\\n        (f(h) = sum(0,n)(\\m. (diff(m)(&0) / &(FACT m)) * (h pow m)) +\n                ((diff(n)(t) / &(FACT n)) * (h pow n))))
       #|  x < t /\\ t < &0 ==> abs(t) <= abs(x)
       #|  x <= t /\\ t <= &0 ==> abs(t) <= abs(x)
       #|  n:num
@@ -8038,7 +8038,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  x = &0
       #|  x:real
       #|  n = 0
-      #|  !f diff x n.\n        (diff 0 = f) /\\\n        (!m t. m < n /\\ abs(t) <= abs(x) ==> (diff m diffl diff (SUC m) t) t)\n        ==> ?t. abs(t) <= abs(x) /\\\n                (f x = sum (0,n) (\\m. diff m (&0) / &(FACT m) * x pow m) +\n                       diff n t / &(FACT n) * x pow n)
+      #|  forall f diff x n.\n        (diff 0 = f) /\\\n        (forall m t. m < n /\\ abs(t) <= abs(x) ==> (diff m diffl diff (SUC m) t) t)\n        ==> ?t. abs(t) <= abs(x) /\\\n                (f x = sum (0,n) (\\m. diff m (&0) / &(FACT m) * x pow m) +\n                       diff n t / &(FACT n) * x pow n)
       #|  t < x
       #|  &0 < t
       #|  t:real
@@ -8057,13 +8057,13 @@ test "Library/transc matches Library/transc.ml" {
       #|  f:real->real
       #|  &0
       #|  x:real
-      #|  !f diff.\n      (diff 0 = f) /\\\n      (!m x. ((diff m) diffl (diff(SUC m) x)) x)\n      ==> !x n. ~(x = &0) /\\ 0 < n\n            ==> ?t. &0 < abs(t) /\\ abs(t) < abs(x) /\\\n                    (f(x) = sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) +\n                            (diff n t / &(FACT n)) * x pow n)
+      #|  forall f diff.\n      (diff 0 = f) /\\\n      (forall m x. ((diff m) diffl (diff(SUC m) x)) x)\n      ==> forall x n. ~(x = &0) /\\ 0 < n\n            ==> ?t. &0 < abs(t) /\\ abs(t) < abs(x) /\\\n                    (f(x) = sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) +\n                            (diff n t / &(FACT n)) * x pow n)
       #|  n:num
       #|  n:num
       #|  0 < n
       #|  n:num
       #|  n:num
-      #|  !diff n x. (x = &0) /\\ 0 < n ==>\n       (sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) = diff 0 (&0))
+      #|  forall diff n x. (x = &0) /\\ 0 < n ==>\n       (sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) = diff 0 (&0))
       #|  t:real
       #|  t:real
       #|  &0 pow n = &0
@@ -8072,11 +8072,11 @@ test "Library/transc matches Library/transc.ml" {
       #|  x:real
       #|  0
       #|  n:num
-      #|  !f diff.\n      (diff 0 = f) /\\\n      (!m x. ((diff m) diffl (diff(SUC m) x)) x)\n      ==> !x n. ?t. abs(t) <= abs(x) /\\\n                    (f(x) = sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) +\n                            (diff n t / &(FACT n)) * x pow n)
-      #|  ((\\n:num. exp) 0 = exp) /\\\n   (!m x. (((\\n:num. exp) m) diffl ((\\n:num. exp) (SUC m) x)) x)
-      #|  !x n. ~(x = &0) /\\ 0 < n\n         ==> ?t. &0 < abs(t) /\\\n                 abs(t) < abs(x) /\\\n                 (exp(x) = sum(0,n)(\\m. x pow m / &(FACT m)) +\n                           (exp(t) / &(FACT n)) * x pow n)
-      #|  !x n. ?t. abs(t) <= abs(x) /\\\n             (exp(x) = sum(0,n)(\\m. x pow m / &(FACT m)) +\n                       (exp(t) / &(FACT n)) * x pow n)
-      #|  !g m x. (g diffl m)(x) /\\ &0 < g x\n           ==> ((\\x. ln(g x)) diffl (inv(g x) * m))(x)
+      #|  forall f diff.\n      (diff 0 = f) /\\\n      (forall m x. ((diff m) diffl (diff(SUC m) x)) x)\n      ==> forall x n. ?t. abs(t) <= abs(x) /\\\n                    (f(x) = sum(0,n)(\\m. (diff m (&0) / &(FACT m)) * x pow m) +\n                            (diff n t / &(FACT n)) * x pow n)
+      #|  ((\\n:num. exp) 0 = exp) /\\\n   (forall m x. (((\\n:num. exp) m) diffl ((\\n:num. exp) (SUC m) x)) x)
+      #|  forall x n. ~(x = &0) /\\ 0 < n\n         ==> ?t. &0 < abs(t) /\\\n                 abs(t) < abs(x) /\\\n                 (exp(x) = sum(0,n)(\\m. x pow m / &(FACT m)) +\n                           (exp(t) / &(FACT n)) * x pow n)
+      #|  forall x n. ?t. abs(t) <= abs(x) /\\\n             (exp(x) = sum(0,n)(\\m. x pow m / &(FACT m)) +\n                       (exp(t) / &(FACT n)) * x pow n)
+      #|  forall g m x. (g diffl m)(x) /\\ &0 < g x\n           ==> ((\\x. ln(g x)) diffl (inv(g x) * m))(x)
       #|  &0 <= u
       #|  p:num
       #|  m:num
@@ -8089,17 +8089,17 @@ test "Library/transc matches Library/transc.ml" {
       #|  m = 0
       #|  u:real
       #|  m:num
-      #|  !t. (--(&1) pow (SUC n) * &(FACT(PRE n)) * inv ((&1 + t) pow n)) /\n         &(FACT n) * x pow n = --(&1) pow (SUC n) *\n                               x pow n / (&n * (&1 + t) pow n)
-      #|  !p. (if p = 0 then &0 else --(&1) pow (SUC p) * &(FACT (PRE p))) /\n        &(FACT p) = --(&1) pow (SUC p) * inv(&p)
+      #|  forall t. (--(&1) pow (SUC n) * &(FACT(PRE n)) * inv ((&1 + t) pow n)) /\n         &(FACT n) * x pow n = --(&1) pow (SUC n) *\n                               x pow n / (&n * (&1 + t) pow n)
+      #|  forall p. (if p = 0 then &0 else --(&1) pow (SUC p) * &(FACT (PRE p))) /\n        &(FACT p) = --(&1) pow (SUC p) * inv(&p)
       #|  p:num
-      #|  !p. ~(p = 0) ==> (&(FACT(PRE p)) / &(FACT p) = inv(&p))
+      #|  forall p. ~(p = 0) ==> (&(FACT(PRE p)) / &(FACT p) = inv(&p))
       #|  0 < n
       #|  ~(n = 0)
       #|  n:num
       #|  x:real
       #|  \\n x. if n = 0 then ln(&1 + x)\n           else --(&1) pow (SUC n) *\n                &(FACT(PRE n)) * inv((&1 + x) pow n)
       #|  \\x. ln(&1 + x)
-      #|  !x n.\n     &0 < x /\\ 0 < n\n     ==> ?t. &0 < t /\\\n             t < x /\\\n             (ln(&1 + x) = sum(0,n)\n                           (\\m. --(&1) pow (SUC m) * (x pow m) / &m) +\n               --(&1) pow (SUC n) * x pow n / (&n * (&1 + t) pow n))
+      #|  forall x n.\n     &0 < x /\\ 0 < n\n     ==> ?t. &0 < t /\\\n             t < x /\\\n             (ln(&1 + x) = sum(0,n)\n                           (\\m. --(&1) pow (SUC m) * (x pow m) / &m) +\n               --(&1) pow (SUC n) * x pow n / (&n * (&1 + t) pow n))
       #|  u:real <= x
       #|  x < &1
       #|  p:num
@@ -8115,17 +8115,17 @@ test "Library/transc matches Library/transc.ml" {
       #|  m = 0
       #|  u:real
       #|  m:num
-      #|  !t. (&(FACT(PRE n)) * inv ((&1 - t) pow n)) / &(FACT n) * x pow n\n         = x pow n / (&n * (&1 - t) pow n)
-      #|  !p. (if p = 0 then &0 else &(FACT (PRE p))) / &(FACT p) =\n                    inv(&p)
+      #|  forall t. (&(FACT(PRE n)) * inv ((&1 - t) pow n)) / &(FACT n) * x pow n\n         = x pow n / (&n * (&1 - t) pow n)
+      #|  forall p. (if p = 0 then &0 else &(FACT (PRE p))) / &(FACT p) =\n                    inv(&p)
       #|  p:num
-      #|  !p. ~(p = 0) ==> (&(FACT(PRE p)) / &(FACT p) = inv(&p))
+      #|  forall p. ~(p = 0) ==> (&(FACT(PRE p)) / &(FACT p) = inv(&p))
       #|  0 < n
       #|  ~(n = 0)
       #|  n:num
       #|  x:real
       #|  \\n x. if n = 0 then --(ln(&1 - x))\n           else &(FACT(PRE n)) * inv((&1 - x) pow n)
       #|  \\x. --(ln(&1 - x))
-      #|  !x n. &0 < x /\\ x < &1 /\\ 0 < n\n         ==> ?t. &0 < t /\\\n                 t < x /\\\n                 (--(ln(&1 - x)) = sum(0,n) (\\m. (x pow m) / &m) +\n                                    x pow n / (&n * (&1 - t) pow n))
+      #|  forall x n. &0 < x /\\ x < &1 /\\ 0 < n\n         ==> ?t. &0 < t /\\\n                 t < x /\\\n                 (--(ln(&1 - x)) = sum(0,n) (\\m. (x pow m) / &m) +\n                                    x pow n / (&n * (&1 - t) pow n))
       #|  x * 4 = 2 * 2 * x
       #|  x * 4 + 2 = 2 * (2 * x + 1)
       #|  (x + 3) - 1 = x + 2
@@ -8149,7 +8149,7 @@ test "Library/transc matches Library/transc.ml" {
       #|  m:num
       #|  \\n x. if n MOD 4 = 0 then sin(x)\n                              else if n MOD 4 = 1 then cos(x)\n                              else if n MOD 4 = 2 then --sin(x)\n                              else --cos(x)
       #|  sin
-      #|  !x n. abs(sin x -\n             sum(0,n) (\\m. (if EVEN m then &0\n                            else -- &1 pow ((m - 1) DIV 2) / &(FACT m)) *\n                            x pow m))\n         <= inv(&(FACT n)) * abs(x) pow n
+      #|  forall x n. abs(sin x -\n             sum(0,n) (\\m. (if EVEN m then &0\n                            else -- &1 pow ((m - 1) DIV 2) / &(FACT m)) *\n                            x pow m))\n         <= inv(&(FACT n)) * abs(x) pow n
       #|  x * 4 + 0 = 2 * 2 * x
       #|  x * 4 + 2 = 2 * (2 * x + 1)
       #|  d:num
@@ -8171,21 +8171,21 @@ test "Library/transc matches Library/transc.ml" {
       #|  m:num
       #|  \\n x. if n MOD 4 = 0 then cos(x)\n                              else if n MOD 4 = 1 then --sin(x)\n                              else if n MOD 4 = 2 then --cos(x)\n                              else sin(x)
       #|  cos
-      #|  !x n. abs(cos x -\n                   sum(0,n) (\\m. (if EVEN m\n                                  then -- &1 pow (m DIV 2) / &(FACT m)\n                                  else &0) * x pow m))\n               <= inv(&(FACT n)) * abs(x) pow n
+      #|  forall x n. abs(cos x -\n                   sum(0,n) (\\m. (if EVEN m\n                                  then -- &1 pow (m DIV 2) / &(FACT m)\n                                  else &0) * x pow m))\n               <= inv(&(FACT n)) * abs(x) pow n
       #|  inv(&1 - abs x)
       #|  1 <= n <=> ~(n = 0)
       #|  0
       #|  \\n. abs(x) pow n
-      #|  !x. abs(x) < &1\n       ==> summable (\\n. (if EVEN n then &0\n                          else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)
+      #|  forall x. abs(x) < &1\n       ==> summable (\\n. (if EVEN n then &0\n                          else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)
       #|  inv(&1 - abs x)
       #|  0
       #|  \\n. abs(x) pow n
-      #|  !x. abs(x) < &1\n       ==> summable (\\n. diffs (\\n. (if EVEN n then &0\n                                     else --(&1) pow ((n - 1) DIV 2) / &n)) n *\n                         x pow n)
+      #|  forall x. abs(x) < &1\n       ==> summable (\\n. diffs (\\n. (if EVEN n then &0\n                                     else --(&1) pow ((n - 1) DIV 2) / &n)) n *\n                         x pow n)
       #|  &1 + x = &1 - (--x)
       #|  (\\n. --(x pow 2) pow n) sums inv (&1 + x pow 2)
       #|  SUC n - 1 = n
       #|  (\\n. sum (2 * n,2) (\\n. diffs\n      (\\n. (if EVEN n then &0\n            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)) =\n    (\\n. --(x pow 2) pow n)
-      #|  !x. abs(x) < &1\n       ==> (\\n. diffs (\\n. (if EVEN n then &0\n                            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)\n           sums (inv(&1 + x pow 2))
+      #|  forall x. abs(x) < &1\n       ==> (\\n. diffs (\\n. (if EVEN n then &0\n                            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)\n           sums (inv(&1 + x pow 2))
       #|  a <= b ==> a <= b + &1
       #|  &1 <= x ==> x <= y ==> &1 <= y
       #|  N:num
@@ -8195,19 +8195,19 @@ test "Library/transc matches Library/transc.ml" {
       #|  0
       #|  x = &0
       #|  N:num
-      #|  ?N. !n. n >= N ==> &(SUC(SUC n)) * abs(x) <= &(SUC n) * c
+      #|  ?N. forall n. n >= N ==> &(SUC(SUC n)) * abs(x) <= &(SUC n) * c
       #|  c:real
       #|  abs(x) < &1
       #|  (&1 + abs(x)) / &2
       #|  ?c. abs(x) < c /\\ c < &1
       #|  0
       #|  \\n. &(SUC n) * abs(x) pow n
-      #|  !x. abs(x) < &1\n       ==> summable\n             (\\n. diffs (diffs\n                 (\\n. (if EVEN n then &0\n                       else --(&1) pow ((n - 1) DIV 2) / &n))) n * x pow n)
+      #|  forall x. abs(x) < &1\n       ==> summable\n             (\\n. diffs (diffs\n                 (\\n. (if EVEN n then &0\n                       else --(&1) pow ((n - 1) DIV 2) / &n))) n * x pow n)
       #|  K:real
       #|  abs(x) < &1
       #|  (&1 + abs(x)) / &2
       #|  ?K. abs(x) < abs(K) /\\ abs(K) < &1
-      #|  !x. abs(x) < &1\n       ==> ((\\x. suminf (\\n. (if EVEN n then &0\n                              else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n))\n            diffl (inv(&1 + x pow 2))) x
+      #|  forall x. abs(x) < &1\n       ==> ((\\x. suminf (\\n. (if EVEN n then &0\n                              else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n))\n            diffl (inv(&1 + x pow 2))) x
       #|  u:real
       #|  abs(u) < &1
       #|  u:real
@@ -8225,18 +8225,18 @@ test "Library/transc matches Library/transc.ml" {
       #|  suminf (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * &0 pow n) -\n    atn(&0) = &0
       #|  (a = b) <=> (a - b = &0)
       #|  suminf (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n) = atn(x)
-      #|  !x. abs(x) < &1\n       ==> (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)\n           sums (atn x)
+      #|  forall x. abs(x) < &1\n       ==> (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)\n           sums (atn x)
       #|  \\m. abs(x) pow (m + n)
       #|  \\m. abs(x) pow (m + n)
       #|  suminf (\\m. abs((if EVEN (m + n) then &0\n                     else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n                    x pow (m + n)))
       #|  1 <= n <=> ~(n = 0)
-      #|  !m. abs((if EVEN (m + n) then &0\n             else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n             x pow (m + n))\n        <= abs(x) pow (m + n)
+      #|  forall m. abs((if EVEN (m + n) then &0\n             else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n             x pow (m + n))\n        <= abs(x) pow (m + n)
       #|  abs(x) pow n
       #|  abs(x) < &1 ==> abs(abs x) < &1
       #|  (\\m. abs(x) pow (m + n)) sums (abs(x) pow n) * inv(&1 - abs(x))
       #|  abs(r) <= e ==> (f - s = r) ==> abs(f - s) <= e
       #|  n:num
-      #|  !x n. abs(x) < &1\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= abs(x) pow n / (&1 - abs x)
+      #|  forall x n. abs(x) < &1\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= abs(x) pow n / (&1 - abs x)
       #|POWDIFF_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))) (\p:num. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) p:num)) ((#real_pow:fun(real,fun(num,real)) y:real) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) p:num)))))) ((#real_mul:fun(real,fun(real,real)) y:real) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))) (\p:num. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) p:num)) ((#real_pow:fun(real,fun(num,real)) y:real) ((#-:fun(num,fun(num,num)) n:num) p:num)))))))))))))
       #|POWDIFF =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#SUC:fun(num,num) n:num))) ((#real_pow:fun(real,fun(num,real)) y:real) (#SUC:fun(num,num) n:num)))) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) x:real) y:real)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))) (\p:num. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) p:num)) ((#real_pow:fun(real,fun(num,real)) y:real) ((#-:fun(num,fun(num,num)) n:num) p:num)))))))))))))
       #|POWREV =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))) (\p:num. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) p:num)) ((#real_pow:fun(real,fun(num,real)) y:real) ((#-:fun(num,fun(num,num)) n:num) p:num)))))) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))) (\p:num. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#real_pow:fun(real,fun(num,real)) y:real) p:num)))))))))))

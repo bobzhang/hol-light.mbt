@@ -42,122 +42,122 @@ Formal_ineqs/lib/ssrnat quotations (413):
   n1 + m = n2 + m ==> n1 = n2
   0 - n = 0
   n - 0 = n
-  !n. n - n = 0
-  !n m. SUC m - SUC n = m - n
-  !p m n. (p + m) - (p + n) = m - n
+  forall n. n - n = 0
+  forall n m. SUC m - SUC n = m - n
+  forall p m n. (p + m) - (p + n) = m - n
   _1 + p
-  !p m n. (m + p) - (n + p) = m - n
+  forall p m n. (m + p) - (n + p) = m - n
   n
-  !x. (n + x) - n = x
-  !n x. (x + n) - n = x
+  forall x. (n + x) - n = x
+  forall n x. (x + n) - n = x
   SUC n - n = 1
   (n - m) - p = n - (m + p)
-  !m n p. (m - n) - p = (m - p) - n
-  !m n. (m - n) - 1 = m - SUC n
-  !m n. (SUC m - n) - 1 = m - n
-  !m n. (m < SUC n) = (m <= n)
-  !n. 0 <= n
-  !n. 0 < SUC n
-  !n. n < 0 <=> F
-  !n. n <= n
-  !n. n < SUC n
-  !m n. m = n ==> m <= n
-  !n. n <= SUC n
-  !n. n - 1 <= n
-  !n. n <= SUC (n - 1)
-  !m n. m < n ==> SUC (n - 1) = n
-  !n. 0 < n ==> SUC (n - 1) = n
+  forall m n p. (m - n) - p = (m - p) - n
+  forall m n. (m - n) - 1 = m - SUC n
+  forall m n. (SUC m - n) - 1 = m - n
+  forall m n. (m < SUC n) = (m <= n)
+  forall n. 0 <= n
+  forall n. 0 < SUC n
+  forall n. n < 0 <=> F
+  forall n. n <= n
+  forall n. n < SUC n
+  forall m n. m = n ==> m <= n
+  forall n. n <= SUC n
+  forall n. n - 1 <= n
+  forall n. n <= SUC (n - 1)
+  forall m n. m < n ==> SUC (n - 1) = n
+  forall n. 0 < n ==> SUC (n - 1) = n
   0
-  !m n. (m <= n) <=> ~(n < m)
-  !m n. (m < n) = ~(n <= m)
-  !n. n < n <=> F
-  !n. (n <= 0) = (n = 0)
-  !n. (0 < n) = ~(n = 0)
-  !n. 0 < n ==> ~(n = 0)
-  !n. (n = 0) = ~(0 < n)
-  !n. (n = 0) = F ==> 0 < n
-  !m n. (m = n) = (m <= n /\\ n <= m)
-  !m n. m <= n /\\ n <= m ==> m = n
-  !m n. ~(m = n) <=> (m < n) \\/ (n < m)
+  forall m n. (m <= n) <=> ~(n < m)
+  forall m n. (m < n) = ~(n <= m)
+  forall n. n < n <=> F
+  forall n. (n <= 0) = (n = 0)
+  forall n. (0 < n) = ~(n = 0)
+  forall n. 0 < n ==> ~(n = 0)
+  forall n. (n = 0) = ~(0 < n)
+  forall n. (n = 0) = F ==> 0 < n
+  forall m n. (m = n) = (m <= n /\\ n <= m)
+  forall m n. m <= n /\\ n <= m ==> m = n
+  forall m n. ~(m = n) <=> (m < n) \\/ (n < m)
   (m <= n) <=> (m = n) \\/ (m < n)
-  !x y:A. x = y <=> y = x
+  forall x y:A. x = y <=> y = x
   n = m
-  !m n. (m < n) <=> ~(m = n) /\\ (m <= n)
-  !n m p. m <= n ==> n <= p ==> m <= p
-  !n m. n < m <=> SUC n <= m
-  !n m. SUC n <= SUC m <=> n <= m
-  !n m p. m <= n ==> n < p ==> m < p
+  forall m n. (m < n) <=> ~(m = n) /\\ (m <= n)
+  forall n m p. m <= n ==> n <= p ==> m <= p
+  forall n m. n < m <=> SUC n <= m
+  forall n m. SUC n <= SUC m <=> n <= m
+  forall n m p. m <= n ==> n < p ==> m < p
   m < n ==> n <= p ==> m < p
-  !m n. m < n ==> m <= n
-  !m n. m <= n ==> m <= SUC n
-  !n m p. m < n ==> n < p ==> m < p
-  !m n. m >= n <=> n <= m
+  forall m n. m < n ==> m <= n
+  forall m n. m <= n ==> m <= SUC n
+  forall n m p. m < n ==> n < p ==> m < p
+  forall m n. m >= n <=> n <= m
   m > n <=> n < m
   (m <= n) \\/ (n <= m)
   m <= n \\/ n < m
   m < n \\/ n <= m
   n = 0 \\/ 0 < n
   m < n \\/ n < m \\/ m = n
-  !p m n. (p + m <= p + n) = (m <= n)
-  !p m n. (p + m < p + n) = (m < n)
+  forall p m n. (p + m <= p + n) = (m <= n)
+  forall p m n. (p + m < p + n) = (m < n)
   (m + p <= n + p) = (m <= n)
-  !p m n. (m + p < n + p) = (m < n)
-  !m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2
+  forall p m n. (m + p < n + p) = (m < n)
+  forall m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2
   m1 + n2
   n
-  !m n. n <= n + m
-  !m n. n <= m + n
+  forall m n. n <= n + m
+  forall m n. n <= m + n
   m < n ==> m < n + p
-  !m n p. m < n ==> m < p + n
-  !m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)
+  forall m n p. m < n ==> m < p + n
+  forall m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)
   (0 < n - m) = (m < n)
-  !m n. (m - n = 0) = (m <= n)
-  !m n. m <= n <=> m - n = 0
-  !m n p. (m - n <= p) = (m <= n + p)
-  !m n. n - m <= n
-  !m n. m <= n ==> m + (n - m) = n
-  !m n. m <= n ==> (n - m) + m = n
-  !m n p. p <= n ==> m + (n - p) = (m + n) - p
-  !m n p. p <= n ==> m - (n - p) = (m + p) - n
-  !m n. m <= n ==> n - (n - m) = m
-  !m n. m <= n ==> SUC n - m = SUC (n - m)
+  forall m n. (m - n = 0) = (m <= n)
+  forall m n. m <= n <=> m - n = 0
+  forall m n p. (m - n <= p) = (m <= n + p)
+  forall m n. n - m <= n
+  forall m n. m <= n ==> m + (n - m) = n
+  forall m n. m <= n ==> (n - m) + m = n
+  forall m n p. p <= n ==> m + (n - p) = (m + n) - p
+  forall m n p. p <= n ==> m - (n - p) = (m + p) - n
+  forall m n. m <= n ==> n - (n - m) = m
+  forall m n. m <= n ==> SUC n - m = SUC (n - m)
   1
-  !m n. m < n ==> n - m = SUC (n - SUC m)
-  !p m n. m <= n ==> m - p <= n - p
-  !p m n. m <= n ==> p - n <= p - m
+  forall m n. m < n ==> n - m = SUC (n - SUC m)
+  forall p m n. m <= n ==> m - p <= n - p
+  forall p m n. m <= n ==> p - n <= p - m
   p - m
-  !m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2
-  !p m n. p < n ==> m < n ==> m - p < n - p
+  forall m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2
+  forall p m n. p < n ==> m < n ==> m - p < n - p
   SUC p
-  !p m n. m < p ==> m < n ==> p - n < p - m
-  !m n p. (m + n < p) = (n < p - m)
+  forall p m n. m < p ==> m < n ==> p - n < p - m
+  forall m n p. (m + n < p) = (n < p - m)
   maxn m n = if m < n then n else m
   minn m n = if m < n then m else n
-  !n. maxn 0 n = n
-  !n. maxn n 0 = n
-  !m n. maxn m n = maxn n m
-  !m n. n <= m ==> maxn m n = m
-  !m n. m <= n ==> maxn m n = n
-  !m n. m + (n - m) = maxn m n
-  !m n p. maxn (maxn m n) p = maxn (maxn m p) n
+  forall n. maxn 0 n = n
+  forall n. maxn n 0 = n
+  forall m n. maxn m n = maxn n m
+  forall m n. n <= m ==> maxn m n = m
+  forall m n. m <= n ==> maxn m n = n
+  forall m n. m + (n - m) = maxn m n
+  forall m n p. maxn (maxn m n) p = maxn (maxn m p) n
   maxn m _1
-  !m n p. maxn m (maxn n p) = maxn (maxn m n) p
+  forall m n p. maxn m (maxn n p) = maxn (maxn m n) p
   maxn m _1
-  !m n p. maxn m (maxn n p) = maxn n (maxn m p)
+  forall m n p. maxn m (maxn n p) = maxn n (maxn m p)
   n
-  !m n. (maxn m n = n) = (m <= n)
+  forall m n. (maxn m n = n) = (m <= n)
   m
-  !m n. (maxn m n = m) = (n <= m)
-  !n. maxn n n = n
+  forall m n. (maxn m n = m) = (n <= m)
+  forall n. maxn n n = n
   n2
   n1
   n2 <= n1
   (m <= maxn n1 n2) <=> (m <= n1) \\/ (m <= n2)
   m <= n1
   (maxn n1 n2 <= m) <=> (n1 <= m) /\\ (n2 <= m)
-  !m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)
+  forall m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)
   m + _1
-  !m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)
+  forall m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)
   minn 0 n = 0
   minn n 0 = 0
   minn m n = minn n m
@@ -169,11 +169,11 @@ Formal_ineqs/lib/ssrnat quotations (413):
   m2 + m1
   (m2 + _1) - _2
   minn _1 (minn _2 _3)
-  !m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)
+  forall m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)
   maxn m2 m3
   maxn m1 m3
   minn m2 _1
-  !m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3
+  forall m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3
   minn (minn m1 m2) m3 = minn (minn m1 m3) m2
   m = _1
   n + m
@@ -184,9 +184,9 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (m <= minn n1 n2) <=> (m <= n1) /\\ (m <= n2)
   (minn n1 n2 <= m) <=> (n1 <= m) \\/ (n2 <= m)
   _1 + n
-  !m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)
+  forall m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)
   m + _1
-  !m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)
+  forall m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)
   minn (maxn m n) m = m
   minn n (maxn m n) = n
   maxn (minn m n) m = m
@@ -195,9 +195,9 @@ Formal_ineqs/lib/ssrnat quotations (413):
   maxn m _1
   maxn m (minn n1 n2) = minn (maxn m n1) (maxn m n2)
   maxn _1 n
-  !m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)
+  forall m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)
   minn m _1
-  !m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)
+  forall m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)
   :num
   :num
   :A
@@ -231,14 +231,14 @@ Formal_ineqs/lib/ssrnat quotations (413):
   m * SUC n = m * n + m
   1 = SUC 0
   n * 1 = n
-  !m n. m * n = n * m
+  forall m n. m * n = n * m
   (m1 + m2) * n = m1 * n + m2 * n
   m * _1
   m * (n1 + n2) = m * n1 + m * n2
-  !m n p. (m - n) * p = m * p - n * p
+  forall m n p. (m - n) * p = m * p - n * p
   m * _1
-  !m n p. m * (n - p) = m * n - m * p
-  !m n p. m * (n * p) = (m * n) * p
+  forall m n p. m * (n - p) = m * n - m * p
+  forall m n p. m * (n * p) = (m * n) * p
   m * _1
   m * (n1 * n2) = n1 * (m * n2)
   p * _1
@@ -298,13 +298,13 @@ Formal_ineqs/lib/ssrnat quotations (413):
   1 < m ==> (m ^ n1 <= m ^ n2 <=> n1 <= n2)
   1 < m ==> (m ^ n1 < m ^ n2 <=> n1 < n2)
   1 < m ==> (m ^ n1 = m ^ n2 <=> n1 = n2)
-  1 < m ==> !e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2
+  1 < m ==> forall e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2
   0 < m ==> n1 <= n2 ==> m ^ n1 <= m ^ n2
   0 < m ==> m ^ n1 < m ^ n2 ==> n1 < n2
   0 < e ==> (m ^ e < n ^ e <=> m < n)
   0 < e ==> (m ^ e <= n ^ e <=> m <= n)
   0 < e ==> (m ^ e = n ^ e <=> m = n)
-  0 < e ==> !m n. m ^ e = n ^ e ==> m = n
+  0 < e ==> forall m n. m ^ e = n ^ e ==> m = n
   FACT 0 = 1
   FACT (SUC n)  = (SUC n) * FACT n
   0 < FACT n
@@ -320,7 +320,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   odd m
   SUC n = 0 <=> F
   odd (m ^ n) <=> (n = 0) \\/ odd m
-  double 0 = 0 /\\ (!n. double (SUC n) = SUC (SUC (double n)))
+  double 0 = 0 /\\ (forall n. double (SUC n) = SUC (SUC (double n)))
   \\n. n + 1
   double 0 = 0
   double (SUC n) = SUC (SUC (double n))
@@ -341,7 +341,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (double n = 0) = (n = 0)
   double (m * n) = double m * n
   double (m * n) = m * double n
-  HALF 0 = (0, 0) /\\\n        !n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))
+  HALF 0 = (0, 0) /\\\n        forall n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))
   \\n. n + 1
   half = FST o HALF
   uphalf = SND o HALF
@@ -352,7 +352,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   half (double x) = x
   n
   m
-  !m n. double m = double n ==> m = n
+  forall m n. double m = double n ==> m = n
   uphalf (double n) = n
   odd n
   uphalf n = (if odd n then 1 else 0) + half n
@@ -380,13 +380,13 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (m ^ 2 = n ^ 2) = (m = n)
   m ^ 2 = n ^ 2 ==> m = n
   0 < 2
-  !m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))
+  forall m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))
   leqif m n c <=> if c then m = n else m < n
   leqif m n c ==> m <= n
   leqif m n c ==> (m = n <=> c)
   (leqif m m c) <=> c
   leqif m1 m2 c1 ==> leqif m2 m3 c2 ==> leqif m1 m3 (c1 /\\ c2)
-  (!m n. f m <= f n <=> m <= n) ==>\n  !m n c. (leqif (f m) (f n) c) <=> (leqif m n c)
+  (forall m n. f m <= f n <=> m <= n) ==>\n  forall m n c. (leqif (f m) (f n) c) <=> (leqif m n c)
   m <= n ==> leqif m n (n <= m)
   m <= n ==> leqif m n (m = n)
   leqif a b C ==> ((b <= a) <=> C)
@@ -403,7 +403,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   m = n
   4 = 2 * 2
   leqif (4 * (m * n)) ((m + n) ^ 2) (m = n)
-  !m n. distn m n = (m - n) + (n - m)
+  forall m n. distn m n = (m - n) + (n - m)
   distn m n = distn n m
   distn (d + m) (d + n) = distn m n
   distn (m + d) (n + d) = distn m n
@@ -421,7 +421,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (distn m n = 1) <=> (if m < n then SUC m = n else m = SUC n)
   distn p _
   distn n _
-  !m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)
+  forall m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)
   leqif (distn m p) (distn m n + distn n p) ((m <= n /\\ n <= p) \\/ (p <= n /\\ n <= m))
   m <= n /\\ n <= p
   distn m p <= distn m n + distn n p

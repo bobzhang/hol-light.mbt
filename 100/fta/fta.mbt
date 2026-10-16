@@ -29,7 +29,7 @@ fn step_3() -> Unit raise {
   let t2 = @tactics.match_mp_tac(@iterate.iterate_clauses())
   let t1 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([nproduct(), @equal.gsym(@iterate.neutral_mul())])), t1), t2), t3)
-  nproduct_clauses_c.set(@tactics.prove(@parser.parse_term("(!f. nproduct {} f = 1) /\\\n   (!x f s. FINITE(s)\n            ==> (nproduct (x INSERT s) f =\n                 if x IN s then nproduct s f else f(x) * nproduct s f))"), t4))
+  nproduct_clauses_c.set(@tactics.prove(@parser.parse_term("(forall f. nproduct {} f = 1) /\\\n   (forall x f s. FINITE(s)\n            ==> (nproduct (x INSERT s) f =\n                 if x IN s then nproduct s f else f(x) * nproduct s f))"), t4))
 }
 
 ///|
@@ -48,7 +48,7 @@ fn step_4() -> Unit raise {
   let t6 = @simp.asm_simp_tac(@list.List([nproduct_clauses(), @sets.in_insert(), @arith.mult_eq_1(), @sets.not_in_empty()]))
   let t5 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), t5), t6), t7)
-  nproduct_eq_1_eq_c.set(@tactics.prove(@parser.parse_term("!s f. FINITE s ==> (nproduct s f = 1 <=> !x. x IN s ==> f(x) = 1)"), t8))
+  nproduct_eq_1_eq_c.set(@tactics.prove(@parser.parse_term("forall s f. FINITE s ==> (nproduct s f = 1 <=> forall x. x IN s ==> f(x) = 1)"), t8))
 }
 
 ///|
@@ -89,7 +89,7 @@ fn step_5() -> Unit raise {
   })
   let t9 = @simp.asm_simp_tac(@list.List([@arith.mult_clauses(), @sets.set_rule(@parser.parse_term("~(x IN s) ==> s DELETE x = s"))]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t9), t20), t24), t25)
-  nproduct_splitoff_c.set(@tactics.prove(@parser.parse_term("!x:A f s. FINITE s\n             ==> nproduct s f =\n                 (if x IN s then f(x) else 1) * nproduct (s DELETE x) f"), t26))
+  nproduct_splitoff_c.set(@tactics.prove(@parser.parse_term("forall x:A f s. FINITE s\n             ==> nproduct s f =\n                 (if x IN s then f(x) else 1) * nproduct (s DELETE x) f"), t26))
 }
 
 ///|
@@ -106,7 +106,7 @@ pub fn nproduct_splitoff() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([nproduct_splitoff()]))
   let t28 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t27)
-  nproduct_splitoff_hack_c.set(@tactics.prove(@parser.parse_term("!x:A f s. nproduct s f =\n             if FINITE s then\n               (if x IN s then f(x) else 1) * nproduct (s DELETE x) f\n             else nproduct s f"), t28))
+  nproduct_splitoff_hack_c.set(@tactics.prove(@parser.parse_term("forall x:A f s. nproduct s f =\n             if FINITE s then\n               (if x IN s then f(x) else 1) * nproduct (s DELETE x) f\n             else nproduct s f"), t28))
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_7() -> Unit raise {
   let t30 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t29 = @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t29), t30), t31)
-  nproduct_eq_c.set(@tactics.prove(@parser.parse_term("!f g s. FINITE s /\\ (!x. x IN s ==> f x = g x)\n           ==> nproduct s f = nproduct s g"), t32))
+  nproduct_eq_c.set(@tactics.prove(@parser.parse_term("forall f g s. FINITE s /\\ (forall x. x IN s ==> f x = g x)\n           ==> nproduct s f = nproduct s g"), t32))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn nproduct_eq() -> @kernel.Thm {
 /// NPRODUCT_EQ_GEN
 fn step_8() -> Unit raise {
   let t33 = @meson.meson_tac(@list.List([nproduct_eq()]))
-  nproduct_eq_gen_c.set(@tactics.prove(@parser.parse_term("!f g s t. FINITE s /\\ s = t /\\ (!x. x IN s ==> f x = g x)\n             ==> nproduct s f = nproduct t g"), t33))
+  nproduct_eq_gen_c.set(@tactics.prove(@parser.parse_term("forall f g s t. FINITE s /\\ s = t /\\ (forall x. x IN s ==> f x = g x)\n             ==> nproduct s f = nproduct t g"), t33))
 }
 
 ///|
@@ -160,7 +160,7 @@ fn step_9() -> Unit raise {
   let t35 = @simp.simp_tac(@list.List([nproduct_clauses(), @sets.in_insert(), @sets.not_in_empty()]))
   let t34 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))), @tactics.disch_tac), t34), t35), t36)
-  prime_divides_nproduct_c.set(@tactics.prove(@parser.parse_term("!p s f. prime p /\\ FINITE s /\\ p divides (nproduct s f)\n           ==> ?x. x IN s /\\ p divides (f x)"), t37))
+  prime_divides_nproduct_c.set(@tactics.prove(@parser.parse_term("forall p s f. prime p /\\ FINITE s /\\ p divides (nproduct s f)\n           ==> ?x. x IN s /\\ p divides (f x)"), t37))
 }
 
 ///|
@@ -198,7 +198,7 @@ fn step_10() -> Unit raise {
   let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @class.asm_cases_tac(@parser.parse_term("j = 0"))
   let t57 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t38), t39), t47), t48), t49), t50), t53), @tactics.ants_tac), t54), t55), t56)
-  nproduct_cancel_prime_c.set(@tactics.prove(@parser.parse_term("!s p m f j.\n        p EXP j * nproduct (s DELETE p) (\\p. p EXP (f p)) = p * m\n        ==> prime p /\\ FINITE s /\\ (!x. x IN s ==> prime x)\n            ==> ~(j = 0) /\\\n                p EXP (j - 1) * nproduct (s DELETE p) (\\p. p EXP (f p)) = m"), t57))
+  nproduct_cancel_prime_c.set(@tactics.prove(@parser.parse_term("forall s p m f j.\n        p EXP j * nproduct (s DELETE p) (\\p. p EXP (f p)) = p * m\n        ==> prime p /\\ FINITE s /\\ (forall x. x IN s ==> prime x)\n            ==> ~(j = 0) /\\\n                p EXP (j - 1) * nproduct (s DELETE p) (\\p. p EXP (f p)) = m"), t57))
 }
 
 ///|
@@ -247,7 +247,7 @@ fn step_11() -> Unit raise {
   }, @list.List([@parser.parse_term("~(j(p:num) = 0)"), t165]))
   let t161 = @simp.asm_rewrite_tac(@list.List([]))
   let t167 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac), @class.cond_cases_tac), t161), t166), @int.arith_tac)])
-  let t160 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("!j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p"))]))
+  let t160 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("forall j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p"))]))
   let t159 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t156 = @drule.match_mp(nproduct_cancel_prime())
   let t158 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x157 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -372,7 +372,7 @@ fn step_11() -> Unit raise {
   let t59 = @tactics.match_mp_tac(@arith.num_wf())
   let t58 = @simp.rewrite_tac(@list.List([@theorems.exists_unique_thm()]))
   let t191 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("n = nproduct s f <=> nproduct s f = n"))])), t58), t59), t60), t61), t62), t72), t78), t79), t81), t88), t95), @tactics.ants_tac), t96), t97), t101), t102), t103), @tactics.conj_tac), t133), t134), t137), t138), t139), t140), t141), @tactics.disch_tac), t143), @tactics.strip_tac), t151), t152), t158), t159), @tactics.strip_tac), @tactics.strip_tac), t160), @tactics.ants_tac), t167), t168), t169), t170), t190)
-  fta_c.set(@tactics.prove(@parser.parse_term("!n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (!p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))"), t191))
+  fta_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (forall p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))"), t191))
 }
 
 ///|

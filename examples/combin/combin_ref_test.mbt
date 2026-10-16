@@ -5955,40 +5955,40 @@ test "Examples/combin matches Examples/combin.ml" {
       #|0..0..1..4..8..20..32..44..184..324..476..700..924..solved at 948
       #|0..0..1..3..8..15..25..39..solved at 62
       #|Examples/combin quotations (36):
-      #|  confluent R <=>\n        !x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u
-      #|  !R. confluent R <=> CR(RTC R)
-      #|  (!x y f. x --> y   ==>    f % x --> f % y) /\\\n  (!f g x. f --> g   ==>    f % x --> g % x) /\\\n  (!x y.   K % x % y --> x) /\\\n  (!f g x. S % f % g % x --> (f % x) % (g % x))
-      #|  (!x. x -||-> x) /\\\n  (!x y u v. x -||-> y /\\ u -||-> v ==> x % u -||-> y % v) /\\\n  (!x y. K % x % y -||-> x) /\\\n  (!f g x. S % f % g % x -||-> (f % x) % (g % x))
+      #|  confluent R <=>\n        forall x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u
+      #|  forall R. confluent R <=> CR(RTC R)
+      #|  (forall x y f. x --> y   ==>    f % x --> f % y) /\\\n  (forall f g x. f --> g   ==>    f % x --> g % x) /\\\n  (forall x y.   K % x % y --> x) /\\\n  (forall f g x. S % f % g % x --> (f % x) % (g % x))
+      #|  (forall x. x -||-> x) /\\\n  (forall x y u v. x -||-> y /\\ u -||-> v ==> x % u -||-> y % v) /\\\n  (forall x y. K % x % y -||-> x) /\\\n  (forall f g x. S % f % g % x -||-> (f % x) % (g % x))
       #|  (-->*) = RTC(-->)
       #|  (-||->*) = RTC(-||->)
       #|  (-->)
       #|  (-->)
       #|  (-||->)
       #|  (-||->)
-      #|  !x y. x -->* y ==> x -||->* y
-      #|  !x y. x -->* y ==> !z. x % z -->* y % z /\\ z % x -->* z % y
-      #|  !x y. x -||-> y ==> x -->* y
-      #|  !x y. x -||->* y ==> x -->* y
+      #|  forall x y. x -->* y ==> x -||->* y
+      #|  forall x y. x -->* y ==> forall z. x % z -->* y % z /\\ z % x -->* z % y
+      #|  forall x y. x -||-> y ==> x -->* y
+      #|  forall x y. x -||->* y ==> x -->* y
       #|  (-||->*) = (-->*)
       #|  S
       #|  S % x
-      #|  !x y. S % x -||-> y <=> ?z. y = S % z /\\ x -||-> z
+      #|  forall x y. S % x -||-> y <=> ?z. y = S % z /\\ x -||-> z
       #|  K
       #|  K % x
-      #|  !x y. K % x -||-> y <=> ?z. y = K % z /\\ x -||-> z
+      #|  forall x y. K % x -||-> y <=> ?z. y = K % z /\\ x -||-> z
       #|  K % x % y
-      #|  !x y z. K % x % y -||-> z <=>\n            (?u v. z = K % u % v /\\ x -||-> u /\\ y -||-> v) \\/ z = x
+      #|  forall x y z. K % x % y -||-> z <=>\n            (?u v. z = K % u % v /\\ x -||-> u /\\ y -||-> v) \\/ z = x
       #|  S
       #|  S % x % y
-      #|  !x y z. S % x % y -||-> z <=>\n            ?u v. z = S % u % v /\\ x -||-> u /\\ y -||-> v
+      #|  forall x y z. S % x % y -||-> z <=>\n            ?u v. z = S % u % v /\\ x -||-> u /\\ y -||-> v
       #|  S % w % x % y
-      #|  !w x y z. S % w % x % y -||-> z <=>\n              (?p q r. z = S % p % q % r /\\\n                       w -||-> p /\\ x -||-> q /\\ y -||-> r) \\/\n              z = (w % y) % (x % y)
+      #|  forall w x y z. S % w % x % y -||-> z <=>\n              (?p q r. z = S % p % q % r /\\\n                       w -||-> p /\\ x -||-> q /\\ y -||-> r) \\/\n              z = (w % y) % (x % y)
       #|  ?p q. y = S % p % q /\\ f -||-> p /\\ g -||-> q
       #|  ?w. y = K % w /\\ z -||-> w
       #|  x % y
       #|  x % u -||-> z
       #|  a ==> b <=> a ==> a /\\ b
-      #|  !x y. x -||-> y ==> !z. x -||-> z ==> ?u. y -||-> u /\\ z -||-> u
+      #|  forall x y. x -||-> y ==> forall z. x -||-> z ==> ?u. y -||-> u /\\ z -||-> u
       #|  CR (-||->)
       #|  confluent(-->)
       #|confluent =  |- ((#=:fun(bool,fun(bool,bool)) (#confluent:fun(fun('?148729,fun('?148729,bool)),bool) R:fun('?148729,fun('?148729,bool)))) (#!:fun(fun('?148729,bool),bool) (\x:'?148729. (#!:fun(fun('?148729,bool),bool) (\y:'?148729. (#!:fun(fun('?148729,bool),bool) (\z:'?148729. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#RTC:fun(fun('?148729,fun('?148729,bool)),fun('?148729,fun('?148729,bool))) R:fun('?148729,fun('?148729,bool))) x:'?148729) y:'?148729)) (((#RTC:fun(fun('?148729,fun('?148729,bool)),fun('?148729,fun('?148729,bool))) R:fun('?148729,fun('?148729,bool))) x:'?148729) z:'?148729))) (#?:fun(fun('?148729,bool),bool) (\u:'?148729. ((#/\:fun(bool,fun(bool,bool)) (((#RTC:fun(fun('?148729,fun('?148729,bool)),fun('?148729,fun('?148729,bool))) R:fun('?148729,fun('?148729,bool))) y:'?148729) u:'?148729)) (((#RTC:fun(fun('?148729,fun('?148729,bool)),fun('?148729,fun('?148729,bool))) R:fun('?148729,fun('?148729,bool))) z:'?148729) u:'?148729))))))))))))

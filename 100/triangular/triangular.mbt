@@ -58,7 +58,7 @@ fn step_4() -> Unit raise {
   let t14 = @simp.rewrite_tac(@list.List([real_triangle(), @equal.gsym(@real.real_of_num_suc())]))
   let t13 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @calc_num.arith_eq(), @int.arith_rule(@parser.parse_term("1 <= SUC n"))]))), t13), t14), t15)
-  triangle_finite_sum_c.set(@tactics.prove(@parser.parse_term("!n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)"), t16))
+  triangle_finite_sum_c.set(@tactics.prove(@parser.parse_term("forall n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)"), t16))
 }
 
 ///|
@@ -100,7 +100,7 @@ fn step_5() -> Unit raise {
       s18(x19)
     }
   }, @list.List([@real.real_arch_inv()]))), t20), t21), t22), t23), t24), t25), t26), t27), t28), t29), t30), t31), t32), t38), @int.arith_tac)
-  triangle_converges_c.set(@tactics.prove(@parser.parse_term("!e. &0 < e\n       ==> ?N. !n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e"), t39))
+  triangle_converges_c.set(@tactics.prove(@parser.parse_term("forall e. &0 < e\n       ==> ?N. forall n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e"), t39))
 }
 
 ///|

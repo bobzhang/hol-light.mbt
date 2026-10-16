@@ -80198,22 +80198,22 @@ Warning: inventing type variables
 Warning: inventing type variables
 Functionspaces/cfunspace quotations (570):
   real_of_complex c = @r. c = Cx r
-  !c. real c ==> Cx(real_of_complex c) = c
-  !c. real c ==> real_of_complex c = Re c
-  !r. real_of_complex (Cx r) = r
-  !c. real c ==> norm c = abs (real_of_complex c)
-  !x y. real x /\\ real y ==>\n    real_of_complex (x+y) = real_of_complex x + real_of_complex y
-  !x y. real x /\\ real y ==>\n    real_of_complex (x-y) = real_of_complex x - real_of_complex y
+  forall c. real c ==> Cx(real_of_complex c) = c
+  forall c. real c ==> real_of_complex c = Re c
+  forall r. real_of_complex (Cx r) = r
+  forall c. real c ==> norm c = abs (real_of_complex c)
+  forall x y. real x /\\ real y ==>\n    real_of_complex (x+y) = real_of_complex x + real_of_complex y
+  forall x y. real x /\\ real y ==>\n    real_of_complex (x-y) = real_of_complex x - real_of_complex y
   Im x = &0 ==> (Re x = &0 <=> x = Cx(&0))
-  !x y. real x ==>\n    (real_of_complex x = &0 <=> x = Cx(&0))
-  !x y. real x /\\ real y ==> real (x*y)
-  !x y. real x /\\ real y ==>\n    real_of_complex (x*y) = real_of_complex x * real_of_complex y
+  forall x y. real x ==>\n    (real_of_complex x = &0 <=> x = Cx(&0))
+  forall x y. real x /\\ real y ==> real (x*y)
+  forall x y. real x /\\ real y ==>\n    real_of_complex (x*y) = real_of_complex x * real_of_complex y
   ~(2=0)
-  !x y. real x /\\ real y ==>\n    norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2
+  forall x y. real x /\\ real y ==>\n    norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2
   fun_map2 (f:B->C->D) (g1:A->B) (g2:A->C) = \\x. f (g1 x) (g2 x)
-  !f g1 g2 x. fun_map2 f g1 g2 x = f (g1 x) (g2 x)
+  forall f g1 g2 x. fun_map2 f g1 g2 x = f (g1 x) (g2 x)
   K (x:A) = \\y:B. x
-  !x y. K x y = x
+  forall x y. K x y = x
   :A->complex
   :B->complex
   :C->complex
@@ -80228,127 +80228,127 @@ Functionspaces/cfunspace quotations (570):
   cfun_smul:complex->cfun->cfun
   cfun_neg : cfun->cfun
   cfun_sub:cfun->cfun->cfun
-  !f g:cfun. f = g <=> !x. f x = g x
-  (!x. P x <=> Q x) ==> (!x. P x) = (!x. Q x)
-  !f g. f - g = \\x. f x - g x
-  !f g. (f - g) x = f x - g x
-  !f g. f + g = \\x. f x + g x
-  !f g. (f + g) x =  f x + g x
-  !a f. a % f = \\x. a * f x
-  !f. --f = \\x. --(f x)
-  !a f. (--a) % f = --(a % f)
-  !a f. a % (--f) = --(a % f)
-  !x y. x + y = y + x
-  !x y z. (x + y) + z = x + y + z
-  !x y. x - y = x + --y
-  !x. Cx(&0) % x = cfun_zero
-  !x. cfun_zero + x = x
-  !x. x + cfun_zero = x
-  !x. x - cfun_zero = x
-  !a. a % cfun_zero = cfun_zero
-  !x. x - x = cfun_zero
-  !a b x. a % (b % x) = b % (a % x)
-  !a x y. a % (x + y) = a % x + a % y
-  !a b x. a % (b % x) = (a * b) % x
-  !a b x. (a + b) % x = a % x + b % x
-  !a b x. (a - b) % x = a % x - b % x
-  !x y z. x - (y + z) = x - y - z
-  !x y z. x + (y - z) = (x + y) - z
-  !x y z. (x - y) + z= (x + z) - y
-  !x y z. x - (y - z) = x - y + z
-  !x y z. x - y = z <=> x = z + y
-  !x y z. x = y - z <=> x + z = y
-  !x y. y + x = x <=> y = cfun_zero
-  !a x y. a % (x - y) = a % x - a % y
-  !a x y. a % (x + y) = a % x + a % y
-  !a b f. a % (b % f) = (a * b) % f
-  !v. Cx(&1) % v = v
-  !v. (--Cx(&1)) % v = --v
-  !x y. --x = --y <=> x = y
-  !x y z. x + y = x + z <=> y = z
-  !x y z. x + z = y + z <=> x = y
-  !x y z. x - y = x - z <=> y = z
-  !x y z. x - y = z <=> x = z + y
-  !x y. y + x - y = x
-  !x y. x - y = cfun_zero <=> x = y
-  !a x. a % x = cfun_zero <=> a = Cx(&0) \\/ x = cfun_zero
-  !x y a. a % x = a % y <=> a = Cx(&0) \\/ x = y
-  (!x. P x <=> Q x) ==> (!x. P x) = (!x. Q x)
-  !a x y. ~(a=Cx(&0)) ==> (a % x = y <=> x = inv a % y)
-  is_cfun_subspace (spc:cfun->bool) <=>\n    cfun_zero IN spc /\\\n    !x. x IN spc ==> (!a. a % x IN spc) /\\ !y. y IN spc ==> x+y IN spc
-  !s. is_cfun_subspace s ==> cfun_zero IN s
-  !s a x. is_cfun_subspace s /\\ x IN s ==> a%x IN s
-  !s x y. is_cfun_subspace s /\\ x IN s /\\ y IN s ==> x+y IN s
-  !s x. is_cfun_subspace s /\\ x IN s ==> --x IN s
-  !s x y. is_cfun_subspace s /\\ x IN s /\\ y IN s ==> x-y IN s
+  forall f g:cfun. f = g <=> forall x. f x = g x
+  (forall x. P x <=> Q x) ==> (forall x. P x) = (forall x. Q x)
+  forall f g. f - g = \\x. f x - g x
+  forall f g. (f - g) x = f x - g x
+  forall f g. f + g = \\x. f x + g x
+  forall f g. (f + g) x =  f x + g x
+  forall a f. a % f = \\x. a * f x
+  forall f. --f = \\x. --(f x)
+  forall a f. (--a) % f = --(a % f)
+  forall a f. a % (--f) = --(a % f)
+  forall x y. x + y = y + x
+  forall x y z. (x + y) + z = x + y + z
+  forall x y. x - y = x + --y
+  forall x. Cx(&0) % x = cfun_zero
+  forall x. cfun_zero + x = x
+  forall x. x + cfun_zero = x
+  forall x. x - cfun_zero = x
+  forall a. a % cfun_zero = cfun_zero
+  forall x. x - x = cfun_zero
+  forall a b x. a % (b % x) = b % (a % x)
+  forall a x y. a % (x + y) = a % x + a % y
+  forall a b x. a % (b % x) = (a * b) % x
+  forall a b x. (a + b) % x = a % x + b % x
+  forall a b x. (a - b) % x = a % x - b % x
+  forall x y z. x - (y + z) = x - y - z
+  forall x y z. x + (y - z) = (x + y) - z
+  forall x y z. (x - y) + z= (x + z) - y
+  forall x y z. x - (y - z) = x - y + z
+  forall x y z. x - y = z <=> x = z + y
+  forall x y z. x = y - z <=> x + z = y
+  forall x y. y + x = x <=> y = cfun_zero
+  forall a x y. a % (x - y) = a % x - a % y
+  forall a x y. a % (x + y) = a % x + a % y
+  forall a b f. a % (b % f) = (a * b) % f
+  forall v. Cx(&1) % v = v
+  forall v. (--Cx(&1)) % v = --v
+  forall x y. --x = --y <=> x = y
+  forall x y z. x + y = x + z <=> y = z
+  forall x y z. x + z = y + z <=> x = y
+  forall x y z. x - y = x - z <=> y = z
+  forall x y z. x - y = z <=> x = z + y
+  forall x y. y + x - y = x
+  forall x y. x - y = cfun_zero <=> x = y
+  forall a x. a % x = cfun_zero <=> a = Cx(&0) \\/ x = cfun_zero
+  forall x y a. a % x = a % y <=> a = Cx(&0) \\/ x = y
+  (forall x. P x <=> Q x) ==> (forall x. P x) = (forall x. Q x)
+  forall a x y. ~(a=Cx(&0)) ==> (a % x = y <=> x = inv a % y)
+  is_cfun_subspace (spc:cfun->bool) <=>\n    cfun_zero IN spc /\\\n    forall x. x IN spc ==> (forall a. a % x IN spc) /\\ forall y. y IN spc ==> x+y IN spc
+  forall s. is_cfun_subspace s ==> cfun_zero IN s
+  forall s a x. is_cfun_subspace s /\\ x IN s ==> a%x IN s
+  forall s x y. is_cfun_subspace s /\\ x IN s /\\ y IN s ==> x+y IN s
+  forall s x. is_cfun_subspace s /\\ x IN s ==> --x IN s
+  forall s x y. is_cfun_subspace s /\\ x IN s /\\ y IN s ==> x-y IN s
   is_cfun_subspace {cfun_zero}
-  !x. x = SING_ELT
+  forall x. x = SING_ELT
   cfun_of_complex = K :complex->singleton->complex
-  !x y. cfun_of_complex (x+y) = cfun_of_complex x + cfun_of_complex y
-  !x y. cfun_of_complex (x-y) = cfun_of_complex x - cfun_of_complex y
-  !x. cfun_of_complex (--x) = -- cfun_of_complex x
-  !a x. cfun_of_complex (a*x) = a % cfun_of_complex x
-  !x. cfun_of_complex (cnj x) = cfun_cnj (cfun_of_complex x)
+  forall x y. cfun_of_complex (x+y) = cfun_of_complex x + cfun_of_complex y
+  forall x y. cfun_of_complex (x-y) = cfun_of_complex x - cfun_of_complex y
+  forall x. cfun_of_complex (--x) = -- cfun_of_complex x
+  forall a x. cfun_of_complex (a*x) = a % cfun_of_complex x
+  forall x. cfun_of_complex (cnj x) = cfun_cnj (cfun_of_complex x)
   cfun_of_complex (Cx(&0)) = cfun_zero
   complex_of_cfun f :complex = f SING_ELT
-  !x y. complex_of_cfun (x + y) = complex_of_cfun x + complex_of_cfun y
-  !x y. complex_of_cfun (x - y) = complex_of_cfun x - complex_of_cfun y
-  !x. complex_of_cfun (--x) = -- complex_of_cfun x
-  !a x. complex_of_cfun (a % x) = a * complex_of_cfun x
+  forall x y. complex_of_cfun (x + y) = complex_of_cfun x + complex_of_cfun y
+  forall x y. complex_of_cfun (x - y) = complex_of_cfun x - complex_of_cfun y
+  forall x. complex_of_cfun (--x) = -- complex_of_cfun x
+  forall a x. complex_of_cfun (a % x) = a * complex_of_cfun x
   complex_of_cfun o cfun_of_complex = I
   cfun_of_complex o complex_of_cfun = I
   :cfun->cfun->complex
    ((f:cfun) equv (g:cfun)) inprod <=> inprod (f-g) (f-g) = Cx(&0)
   :(cfun->bool)#inprod
-  is_inner_space ((s,inprod):inner_space) <=>\n    is_cfun_subspace s /\\\n    !x. x IN s ==>\n      real (inprod x x) /\\ &0 <= real_of_complex (inprod x x)\n      /\\ !y. y IN s ==>\n             (inprod x x = Cx(&0) ==> inprod y x = Cx(&0))\n        /\\ cnj (inprod y x) = inprod x y /\\\n        (!a. inprod x (a%y) = a * (inprod x y))\n        /\\ !z. z IN s ==> inprod (x+y) z = inprod x z + inprod y z
-  !P. (!is:inner_space. P is) <=> !s inprod. P (s,inprod)
-  !s inprod. is_inner_space (s,inprod) ==> is_cfun_subspace s
-  !s inprod. is_inner_space (s,inprod) ==> cfun_zero IN s
-  !s inprod. is_inner_space (s,inprod) ==> !x a. x IN s ==> a%x IN s
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> x+y IN s
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> --x IN s
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> x-y IN s
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> cnj(inprod y x) = inprod x y
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> real (inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> &0 <= real_of_complex (inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x y a. x IN s /\\ y IN s ==> inprod x (a%y) = a * inprod x y
-  !s inprod. is_inner_space (s,inprod) ==> !x y z. x IN s /\\ y IN s /\\ z IN s\n      ==> inprod (x+y) z = inprod x z + inprod y z
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> (inprod x x = Cx(&0) ==> inprod y x = Cx(&0))
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> (inprod x x = Cx(&0) ==> inprod x y = Cx(&0))
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> real (inprod x x) /\\ &0 <= real_of_complex (inprod x x)
-  !s inprod x. is_inner_space (s,inprod) /\\ x IN s ==> real(inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x y a. x IN s /\\ y IN s ==> inprod (a%x) y = cnj a * inprod x y
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> inprod (--x) y = --inprod x y
-  !s inprod. is_inner_space (s,inprod) ==> !x y z. x IN s /\\ y IN s /\\ z IN s ==>\n      inprod (x-y) z = inprod x z - inprod y z
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> inprod x (--y) = --inprod x y
-  !s inprod. is_inner_space (s,inprod) ==> !x y z. x IN s /\\ y IN s /\\ z IN s ==>\n      inprod z (x+y) = inprod z x + inprod z y
-  !s inprod. is_inner_space (s,inprod) ==> !x y z. x IN s /\\ y IN s /\\ z IN s ==>\n    inprod z (x-y) = inprod z x - inprod z y
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> inprod x cfun_zero = Cx(&0)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> inprod cfun_zero x = Cx(&0)
-  !s inprod. is_inner_space (s,inprod) ==> inprod cfun_zero cfun_zero = Cx(&0)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> cnj (inprod x x) = inprod x x
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> inprod x y + inprod y x =\n   Cx(&2 * Re (inprod x y))
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> norm (inprod x x) = real_of_complex (inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> real_of_complex (inprod x x) = Re (inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> inprod (--x) (--y) = inprod x y
-  !x inprod. inprod x x = Cx(&0) <=> (x equv cfun_zero) inprod
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s /\\ ~(x equv cfun_zero) inprod ==> ~(x = cfun_zero)
-  !x inprod.   (x equv y) inprod  <=> ((x - y) equv cfun_zero) inprod
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==> (x equv cfun_zero) inprod ==> inprod y x = Cx(&0)
-  ! x y. x-y = --(y-x)
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==>  ((x equv y) inprod <=> (y equv x) inprod)
-  !s inprod x y z.\n         (x equv y) inprod ==>\n                 is_inner_space (s,inprod) /\\\n         x IN s /\\\n         y IN s /\\\n         z IN s\n         ==> inprod z x = inprod z y
-  !s inprod x y z.\n         (x equv y) inprod ==>\n                 is_inner_space (s,inprod) /\\\n         x IN s /\\\n         y IN s /\\\n         z IN s\n         ==> inprod x z = inprod y z
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n    ==> ((x equv y) inprod  <=> (!z. z IN s ==> inprod x z = inprod y z))
-  !s inprod. is_inner_space (s,inprod) ==> !x y z. x IN s /\\ y IN s /\\ z IN s ==> (x equv y) inprod /\\\n          (y equv z) inprod ==> (x equv z) inprod
+  is_inner_space ((s,inprod):inner_space) <=>\n    is_cfun_subspace s /\\\n    forall x. x IN s ==>\n      real (inprod x x) /\\ &0 <= real_of_complex (inprod x x)\n      /\\ forall y. y IN s ==>\n             (inprod x x = Cx(&0) ==> inprod y x = Cx(&0))\n        /\\ cnj (inprod y x) = inprod x y /\\\n        (forall a. inprod x (a%y) = a * (inprod x y))\n        /\\ forall z. z IN s ==> inprod (x+y) z = inprod x z + inprod y z
+  forall P. (forall is:inner_space. P is) <=> forall s inprod. P (s,inprod)
+  forall s inprod. is_inner_space (s,inprod) ==> is_cfun_subspace s
+  forall s inprod. is_inner_space (s,inprod) ==> cfun_zero IN s
+  forall s inprod. is_inner_space (s,inprod) ==> forall x a. x IN s ==> a%x IN s
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> x+y IN s
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> --x IN s
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> x-y IN s
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> cnj(inprod y x) = inprod x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> real (inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> &0 <= real_of_complex (inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y a. x IN s /\\ y IN s ==> inprod x (a%y) = a * inprod x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y z. x IN s /\\ y IN s /\\ z IN s\n      ==> inprod (x+y) z = inprod x z + inprod y z
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> (inprod x x = Cx(&0) ==> inprod y x = Cx(&0))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> (inprod x x = Cx(&0) ==> inprod x y = Cx(&0))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> real (inprod x x) /\\ &0 <= real_of_complex (inprod x x)
+  forall s inprod x. is_inner_space (s,inprod) /\\ x IN s ==> real(inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y a. x IN s /\\ y IN s ==> inprod (a%x) y = cnj a * inprod x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> inprod (--x) y = --inprod x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y z. x IN s /\\ y IN s /\\ z IN s ==>\n      inprod (x-y) z = inprod x z - inprod y z
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> inprod x (--y) = --inprod x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y z. x IN s /\\ y IN s /\\ z IN s ==>\n      inprod z (x+y) = inprod z x + inprod z y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y z. x IN s /\\ y IN s /\\ z IN s ==>\n    inprod z (x-y) = inprod z x - inprod z y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> inprod x cfun_zero = Cx(&0)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> inprod cfun_zero x = Cx(&0)
+  forall s inprod. is_inner_space (s,inprod) ==> inprod cfun_zero cfun_zero = Cx(&0)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> cnj (inprod x x) = inprod x x
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> inprod x y + inprod y x =\n   Cx(&2 * Re (inprod x y))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> norm (inprod x x) = real_of_complex (inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> real_of_complex (inprod x x) = Re (inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> inprod (--x) (--y) = inprod x y
+  forall x inprod. inprod x x = Cx(&0) <=> (x equv cfun_zero) inprod
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s /\\ ~(x equv cfun_zero) inprod ==> ~(x = cfun_zero)
+  forall x inprod.   (x equv y) inprod  <=> ((x - y) equv cfun_zero) inprod
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==> (x equv cfun_zero) inprod ==> inprod y x = Cx(&0)
+  forall x y. x-y = --(y-x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==>  ((x equv y) inprod <=> (y equv x) inprod)
+  forall s inprod x y z.\n         (x equv y) inprod ==>\n                 is_inner_space (s,inprod) /\\\n         x IN s /\\\n         y IN s /\\\n         z IN s\n         ==> inprod z x = inprod z y
+  forall s inprod x y z.\n         (x equv y) inprod ==>\n                 is_inner_space (s,inprod) /\\\n         x IN s /\\\n         y IN s /\\\n         z IN s\n         ==> inprod x z = inprod y z
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n    ==> ((x equv y) inprod  <=> (forall z. z IN s ==> inprod x z = inprod y z))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y z. x IN s /\\ y IN s /\\ z IN s ==> (x equv y) inprod /\\\n          (y equv z) inprod ==> (x equv z) inprod
   are_orthogonal1 ((s,inprod):inner_space) u v <=>\n    is_inner_space (s,inprod) /\\ u IN s /\\ v IN s ==> inprod u v = Cx(&0)
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s ==>\n      (are_orthogonal1 (s,inprod) u v <=> inprod u v = Cx(&0))
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s\n      ==> (are_orthogonal1 (s,inprod) u v <=> are_orthogonal1 (s,inprod) v u)
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s /\\ are_orthogonal1 (s,inprod) u v\n      ==> !a. are_orthogonal1 (s,inprod) (a % u) v
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s /\\ are_orthogonal1 (s,inprod) u v ==>\n    inprod (u+v) (u+v) = inprod u u + inprod v v
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component\n      /\\ are_orthogonal1 (s,inprod) v orthogonal_component
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component
-  !s inprod. is_inner_space (s,inprod) ==> !u v. u IN s /\\ v IN s ==>\n      are_orthogonal1 (s,inprod) v (u - (inprod v u / inprod v v) % v)
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      (are_orthogonal1 (s,inprod) u v <=> inprod u v = Cx(&0))
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s\n      ==> (are_orthogonal1 (s,inprod) u v <=> are_orthogonal1 (s,inprod) v u)
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s /\\ are_orthogonal1 (s,inprod) u v\n      ==> forall a. are_orthogonal1 (s,inprod) (a % u) v
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s /\\ are_orthogonal1 (s,inprod) u v ==>\n    inprod (u+v) (u+v) = inprod u u + inprod v v
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component\n      /\\ are_orthogonal1 (s,inprod) v orthogonal_component
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component
+  forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      are_orthogonal1 (s,inprod) v (u - (inprod v u / inprod v v) % v)
   vector_neg:complex->complex
   vector_add:complex->complex->complex
   vector_sub:complex->complex->complex
@@ -80358,7 +80358,7 @@ Functionspaces/cfunspace quotations (570):
   complex_inv:complex->complex
   ((x*y)*(z*t)*u)*v = (x*z)*(u*t)*(v*y)
   (A ==> B) ==> ((A ==> C) <=> (A /\\ B ==>\n    C))
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n      ==> norm (inprod x y) pow 2\n        <= real_of_complex (inprod x x) * real_of_complex (inprod y y)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n      ==> norm (inprod x y) pow 2\n        <= real_of_complex (inprod x x) * real_of_complex (inprod y y)
   real :complex -> bool
   real :complex -> bool
   real :complex -> bool
@@ -80366,12 +80366,12 @@ Functionspaces/cfunspace quotations (570):
   /\\
   /\\
   /\\
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n      ==> norm (inprod x y)\n        <= sqrt (real_of_complex (inprod x x)) *\n                        sqrt(real_of_complex (inprod y y))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n      ==> norm (inprod x y)\n        <= sqrt (real_of_complex (inprod x x)) *\n                        sqrt(real_of_complex (inprod y y))
   x*y*inv ii=inv ii*(x*y)
   (x:real) = y ==> x pow 2 = y pow 2
   x=y+z ==> &0<=y /\\ t=z ==> t<=x
-  !f g. (P ==> f x y <= g x y) ==> P /\\ z <= f x y ==> z <= g x y
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==>\n      real_of_complex ((inprod x y - inprod y x) / (Cx(&2) * ii)) pow 2\n        <= real_of_complex (inprod x x) * real_of_complex (inprod y y)
+  forall f g. (P ==> f x y <= g x y) ==> P /\\ z <= f x y ==> z <= g x y
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==>\n      real_of_complex ((inprod x y - inprod y x) / (Cx(&2) * ii)) pow 2\n        <= real_of_complex (inprod x x) * real_of_complex (inprod y y)
   :cfunB->cfun
   :cfunC->cfunB
   :cfun->cfun
@@ -80394,105 +80394,105 @@ Functionspaces/cfunspace quotations (570):
   cop_mul:cop->copB->(cfunC->cfun)
   cop_pow:(cfun->cfun)->num->(cfun->cfun)
   cop_smul:complex->cop->cop
-  !f g:cop. f = g <=> (!x. f x = g x)
+  forall f g:cop. f = g <=> (forall x. f x = g x)
   cop_pow t (SUC 0)
-  (!x. P x <=> Q x) ==> (!x. P x) = (!x. Q x)
-  !x. cop_zero x = cfun_zero
-  !a op. a % op = \\x. a * op x
-  !a op x. (a % op) x = a % op x
-  !a op. a % op = \\x. a * op x
-  !op1 op2. op1 ** op2 = \\x. op1 (op2 x)
-  !op1 op2. op1 + op2 = \\x. op1 x + op2 x
-  !op1 op2. op1 - op2 = \\x. op1 x - op2 x
-  !op1 op2 x. (op1 + op2) x = op1 x + op2 x
-  !op1 op2 x. (op1 - op2) x = op1 x - op2 x
+  (forall x. P x <=> Q x) ==> (forall x. P x) = (forall x. Q x)
+  forall x. cop_zero x = cfun_zero
+  forall a op. a % op = \\x. a * op x
+  forall a op x. (a % op) x = a % op x
+  forall a op. a % op = \\x. a * op x
+  forall op1 op2. op1 ** op2 = \\x. op1 (op2 x)
+  forall op1 op2. op1 + op2 = \\x. op1 x + op2 x
+  forall op1 op2. op1 - op2 = \\x. op1 x - op2 x
+  forall op1 op2 x. (op1 + op2) x = op1 x + op2 x
+  forall op1 op2 x. (op1 - op2) x = op1 x - op2 x
   cop_zero x = cfun_zero
-  !op. I ** op = op
-  !op. op ** I = op
-  !a x. a % x = cop_zero <=> a = Cx(&0) \\/ x = cop_zero
+  forall op. I ** op = op
+  forall op. op ** I = op
+  forall a x. a % x = cop_zero <=> a = Cx(&0) \\/ x = cop_zero
   ~(I = cop_zero)
-  !a. a % I = cop_zero <=> a = Cx(&0)
-  !a. a % I = I <=> a = Cx(&1)
-  !op. op ** I = I ** op
-  !op. op + I = I + op
+  forall a. a % I = cop_zero <=> a = Cx(&0)
+  forall a. a % I = I <=> a = Cx(&1)
+  forall op. op ** I = I ** op
+  forall op. op + I = I + op
   (\\x. a % x)  = a % I
-  !x op1 op2. (op1 ** op2) x = op1 (op2 x)
-  !a op. --a % op = --(a % op)
-  !a op. a % --op = --(a % op)
-  !op1 op2. op1 - op2 = op1 + --op2
-  !op1 op2. op1 - op2 = op1 + --op2
-  !op. --(--op) = op
-  !op1 op2. --(op1 + op2) = --op1 + --op2
-  !op1 op2. --(op1 - op2) = --op1 + op2
-  !a b op. a % (b % op) = (a * b) % op
-  !a b op. a % (b % op) = b % (a % op)
-  !op1 op2. a % op1 ** op2 = a % (op1 ** op2)
-  !a op1 op2. a % (op1 + op2) = a % op1 + a % op2
-  !a b op. (a + b) % op = a % op + b % op
-  !a op. ~(a = Cx (&0)) ==> a % (inv a % op) = op
-  !a x y. a % (x - y) = a % x - a % y
-  !x y z. x - (y + z) = x - y - z
-  !x y z. x + (y - z) = (x + y) - z
-  !x y z. x - (y - z) = x - y + z
-  !op1 op2. op1 + op2 = op2 + op1
-  !x y z. (x + y) + z = x + y + z
-  !m n p. m + n = n + m /\\ (m + n) + p = m + n + p /\\ m + n + p = n + m + p
-  !x y z . (x ** y) ** z = x ** y ** z
-  !x y z. (x-y)+z= (x+z)-y
-  !x y. --x = --y <=> x = y
-  !x y z. x + y = x + z <=> y=z
-  !x y z. x + z = y + z <=> x=y
-  !x y z. x - y = x - z <=> y=z
-  !x y z. x - y = z <=> x = z + y
-  !x y z. x = y - z <=> x + z = y
-  !op. cop_zero ** op = cop_zero
-  !op. op - op = cop_zero
-  !x. (--Cx(&1)) % x = --x
-  !op. op + cop_zero = op
-  !op. cop_zero + op = op
-  !op. Cx(&1) % op = op
-  !op. a % cop_zero = cop_zero
-  !op. cop_zero - op = --op
-  !op. op - cop_zero  = op
-  !x. Cx(&0) % x = cop_zero
-  !op1 op2 op3. (op1 + op2) ** op3 = op1 ** op3 + op2 ** op3
-  !op1 op2 op3. (op1 - op2) ** op3 = op1 ** op3 - op2 ** op3
-  !x y z. x - y = z <=> x - z = y
-  !a x y. a % x = a % y <=> x = y \\/ a = Cx(&0)
-  (!x y. P x y <=> Q x y) ==> (!x y. P x y) = !x y. Q x y
-  !x y z t:cop. ~(x=Cx(&0)) ==> (x % y = z % t <=> y = (z / x) % t)
-  !op. op pow 2 = op ** op
-  !n. I pow n = I
-  !n. cop_zero pow  (n+1) = cop_zero
-  !op1 op2. op1 ** op2 = op2 ** op1 ==>\n    !n. op1 ** op2 pow n = op2 pow n ** op1
-  !op. Cx(&2) % op  = op + op
-  is_linear_cop (op:cop) <=>\n    !x y. op (x + y) = op x + op y /\\ !a. op (a % x) = a % (op x)
-  !x y op. is_linear_cop op ==> op (x + y) = op x + op y
-  !a x op. is_linear_cop op ==> op (a % x) = a % op x
-  !x y op. is_linear_cop op ==> op (x - y) = op x - op y
-  !a op1 op2. is_linear_cop op2 ==> op2 ** (a % op1) = a % (op2 ** op1)
-  !op1 op2. is_linear_cop op2 ==> op2 ** (a % op1) = a % (op2 ** op1)
-  !op1 op2 op3. is_linear_cop op3 ==>\n      op3 ** (op1 + op2) = op3 ** op1 + op3 ** op2
-  !op1 op2 op3. is_linear_cop op3 ==>\n      op3 ** (op1 - op2) = op3 ** op1 - op3 ** op2
-  !op. is_linear_cop op ==> op cfun_zero = cfun_zero
-  !op. is_linear_cop op ==> !n a. (a % op) pow n = (a pow n) % (op pow n)
-  !op n a. is_linear_cop op ==>  (a % op) pow n = (a pow n) % (op pow n)
-  !op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 + op2)
-  !op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 - op2)
-  !a op. is_linear_cop op ==> is_linear_cop (a % op)
-  !op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 ** op2)
+  forall x op1 op2. (op1 ** op2) x = op1 (op2 x)
+  forall a op. --a % op = --(a % op)
+  forall a op. a % --op = --(a % op)
+  forall op1 op2. op1 - op2 = op1 + --op2
+  forall op1 op2. op1 - op2 = op1 + --op2
+  forall op. --(--op) = op
+  forall op1 op2. --(op1 + op2) = --op1 + --op2
+  forall op1 op2. --(op1 - op2) = --op1 + op2
+  forall a b op. a % (b % op) = (a * b) % op
+  forall a b op. a % (b % op) = b % (a % op)
+  forall op1 op2. a % op1 ** op2 = a % (op1 ** op2)
+  forall a op1 op2. a % (op1 + op2) = a % op1 + a % op2
+  forall a b op. (a + b) % op = a % op + b % op
+  forall a op. ~(a = Cx (&0)) ==> a % (inv a % op) = op
+  forall a x y. a % (x - y) = a % x - a % y
+  forall x y z. x - (y + z) = x - y - z
+  forall x y z. x + (y - z) = (x + y) - z
+  forall x y z. x - (y - z) = x - y + z
+  forall op1 op2. op1 + op2 = op2 + op1
+  forall x y z. (x + y) + z = x + y + z
+  forall m n p. m + n = n + m /\\ (m + n) + p = m + n + p /\\ m + n + p = n + m + p
+  forall x y z . (x ** y) ** z = x ** y ** z
+  forall x y z. (x-y)+z= (x+z)-y
+  forall x y. --x = --y <=> x = y
+  forall x y z. x + y = x + z <=> y=z
+  forall x y z. x + z = y + z <=> x=y
+  forall x y z. x - y = x - z <=> y=z
+  forall x y z. x - y = z <=> x = z + y
+  forall x y z. x = y - z <=> x + z = y
+  forall op. cop_zero ** op = cop_zero
+  forall op. op - op = cop_zero
+  forall x. (--Cx(&1)) % x = --x
+  forall op. op + cop_zero = op
+  forall op. cop_zero + op = op
+  forall op. Cx(&1) % op = op
+  forall op. a % cop_zero = cop_zero
+  forall op. cop_zero - op = --op
+  forall op. op - cop_zero  = op
+  forall x. Cx(&0) % x = cop_zero
+  forall op1 op2 op3. (op1 + op2) ** op3 = op1 ** op3 + op2 ** op3
+  forall op1 op2 op3. (op1 - op2) ** op3 = op1 ** op3 - op2 ** op3
+  forall x y z. x - y = z <=> x - z = y
+  forall a x y. a % x = a % y <=> x = y \\/ a = Cx(&0)
+  (forall x y. P x y <=> Q x y) ==> (forall x y. P x y) = forall x y. Q x y
+  forall x y z t:cop. ~(x=Cx(&0)) ==> (x % y = z % t <=> y = (z / x) % t)
+  forall op. op pow 2 = op ** op
+  forall n. I pow n = I
+  forall n. cop_zero pow  (n+1) = cop_zero
+  forall op1 op2. op1 ** op2 = op2 ** op1 ==>\n    forall n. op1 ** op2 pow n = op2 pow n ** op1
+  forall op. Cx(&2) % op  = op + op
+  is_linear_cop (op:cop) <=>\n    forall x y. op (x + y) = op x + op y /\\ forall a. op (a % x) = a % (op x)
+  forall x y op. is_linear_cop op ==> op (x + y) = op x + op y
+  forall a x op. is_linear_cop op ==> op (a % x) = a % op x
+  forall x y op. is_linear_cop op ==> op (x - y) = op x - op y
+  forall a op1 op2. is_linear_cop op2 ==> op2 ** (a % op1) = a % (op2 ** op1)
+  forall op1 op2. is_linear_cop op2 ==> op2 ** (a % op1) = a % (op2 ** op1)
+  forall op1 op2 op3. is_linear_cop op3 ==>\n      op3 ** (op1 + op2) = op3 ** op1 + op3 ** op2
+  forall op1 op2 op3. is_linear_cop op3 ==>\n      op3 ** (op1 - op2) = op3 ** op1 - op3 ** op2
+  forall op. is_linear_cop op ==> op cfun_zero = cfun_zero
+  forall op. is_linear_cop op ==> forall n a. (a % op) pow n = (a pow n) % (op pow n)
+  forall op n a. is_linear_cop op ==>  (a % op) pow n = (a pow n) % (op pow n)
+  forall op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 + op2)
+  forall op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 - op2)
+  forall a op. is_linear_cop op ==> is_linear_cop (a % op)
+  forall op1 op2.\n    is_linear_cop op1 /\\ is_linear_cop op2 ==> is_linear_cop (op1 ** op2)
   is_linear_cop I
   (\\x. a % x)  = a % I
-  !a n. (\\x. a % x) pow n = (\\x. (a pow n) % x)
+  forall a n. (\\x. a % x) pow n = (\\x. (a pow n) % x)
   is_linear_cop cop_zero
-  !a. is_linear_cop \\x. a % x
-  !op. is_linear_cop op ==> !n. is_linear_cop (op pow n)
-  is_set_linear_cop s (op:cop) <=>\n    !x y. x IN s /\\ y IN s ==> op (x + y) = op x + op y /\\\n                !a. op (a % x) = a % (op x)
-  !s op. is_linear_cop op ==> is_set_linear_cop s op
-  !a x op s. x IN s /\\\n is_set_linear_cop s op ==> op (a % x) = a % op x
-  !x y op s. is_set_linear_cop s op /\\ x IN s /\\ y IN s\n   ==> op (x + y) = op x + op y
-  !x y op s.  is_cfun_subspace s /\\ is_set_linear_cop s op /\\\n  x IN s /\\ y IN s\n   ==> op (x - y) = op x - op y
-  !op s. is_set_linear_cop s op /\\ is_cfun_subspace s ==>\n    op cfun_zero = cfun_zero
+  forall a. is_linear_cop \\x. a % x
+  forall op. is_linear_cop op ==> forall n. is_linear_cop (op pow n)
+  is_set_linear_cop s (op:cop) <=>\n    forall x y. x IN s /\\ y IN s ==> op (x + y) = op x + op y /\\\n                forall a. op (a % x) = a % (op x)
+  forall s op. is_linear_cop op ==> is_set_linear_cop s op
+  forall a x op s. x IN s /\\\n is_set_linear_cop s op ==> op (a % x) = a % op x
+  forall x y op s. is_set_linear_cop s op /\\ x IN s /\\ y IN s\n   ==> op (x + y) = op x + op y
+  forall x y op s.  is_cfun_subspace s /\\ is_set_linear_cop s op /\\\n  x IN s /\\ y IN s\n   ==> op (x - y) = op x - op y
+  forall op s. is_set_linear_cop s op /\\ is_cfun_subspace s ==>\n    op cfun_zero = cfun_zero
   :cfun->complex
   :cfunB->complex
   cfun_dual (spc:cfun->bool) =\n    { f:cfun->complex | is_linear_cop (cfun_of_complex o f) }
@@ -80500,273 +80500,273 @@ Functionspaces/cfunspace quotations (570):
   commutator (op1:cfun->cfun) op2 = op1 ** op2 - op2 ** op1
   :A->A->A
   commutator:cops->cops->cops
-  !op1 op2. commutator op1 op2 = -- commutator op2 op1
-  !op1 op2 a b c d. is_linear_cop op1 /\\ is_linear_cop op2 ==>\n  commutator (a%op1+b%op2) (c%op1+d%op2) =\n   (a*d)% commutator op1 op2 - (b*c)% commutator op1 op2
-  !op1 op2. commutator op1 op2 = cop_zero <=> commutator op2 op1 = cop_zero
-  !op a. is_linear_cop op ==>\n  commutator op (\\x. a%x) = cop_zero
-  !op a. is_linear_cop op ==>\n  commutator op (a%op) = cop_zero
-  !op. is_linear_cop op ==>\n  commutator op cop_zero = cop_zero
-  !op1 op2. is_linear_cop op1 /\\ is_linear_cop op2\n    ==> is_linear_cop (commutator op1 op2)
+  forall op1 op2. commutator op1 op2 = -- commutator op2 op1
+  forall op1 op2 a b c d. is_linear_cop op1 /\\ is_linear_cop op2 ==>\n  commutator (a%op1+b%op2) (c%op1+d%op2) =\n   (a*d)% commutator op1 op2 - (b*c)% commutator op1 op2
+  forall op1 op2. commutator op1 op2 = cop_zero <=> commutator op2 op1 = cop_zero
+  forall op a. is_linear_cop op ==>\n  commutator op (\\x. a%x) = cop_zero
+  forall op a. is_linear_cop op ==>\n  commutator op (a%op) = cop_zero
+  forall op. is_linear_cop op ==>\n  commutator op cop_zero = cop_zero
+  forall op1 op2. is_linear_cop op1 /\\ is_linear_cop op2\n    ==> is_linear_cop (commutator op1 op2)
   expectation (inprod:inprod) f op = inprod f (op f)
   deviation (inprod:inprod) f op = op - (\\x. expectation inprod f op % x)
-  !inprod f op. deviation inprod f op = op - expectation inprod f op % I
-  !inprod state op. is_linear_cop op\n    ==> is_linear_cop (deviation inprod state op)
+  forall inprod f op. deviation inprod f op = op - expectation inprod f op % I
+  forall inprod state op. is_linear_cop op\n    ==> is_linear_cop (deviation inprod state op)
   variance  (inprod:inprod) f op =\n    expectation inprod f (deviation inprod f op ** deviation inprod f op)
   f (a % (b % op)) (b % (a % op)) = f (a % (b % op)) (a % (b % op))
-  !inprod op1 op2 state. is_linear_cop op1 /\\ is_linear_cop op2\n    ==> commutator (deviation inprod state op1) (deviation inprod state op2)\n      = commutator op1 op2
-  !s inprod op. is_linear_cop op /\\ is_inner_space (s,inprod)\n    ==> expectation inprod cfun_zero op = Cx(&0)
-  is_closed_by s f <=> !x. x IN s ==> f x IN s
-  !x s f. is_closed_by s f /\\ x IN s ==> f x IN s
-  !s f g. is_closed_by s f /\\ is_closed_by s g ==> is_closed_by s (f o g)
-  !s. is_closed_by s I
-  !s op1 op2.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (op1+op2)
-  !s op1 op2.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (op1-op2)
-  !s op1 op2.\n      is_closed_by s op1 /\\ is_closed_by s op2 ==> is_closed_by s (op1**op2)
-  !s a. is_cfun_subspace s ==> is_closed_by s (a % I)
-  !s inprod. is_inner_space (s,inprod) ==> !a. is_closed_by s (a % I)
-  !s a op.\n      is_cfun_subspace s /\\ is_closed_by s op ==> is_closed_by s (a % op)
-  !s a op.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (commutator op1 op2)
-  is_hermitian ((s,inprod):inner_space) op1 op2 <=>\n    is_inner_space (s,inprod) ==>\n      is_closed_by s op1 /\\ is_closed_by s op2\n      /\\ is_linear_cop op1 /\\ is_linear_cop op2\n      /\\ !x y. x IN s /\\ y IN s ==> inprod x (op1 y) = inprod (op2 x) y
-  !is. is_inner_space is ==> !op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op1\n                /\\ is_linear_cop op2
-  !is. is_inner_space is ==> !op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op1
-  !is. is_inner_space is ==> !op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op2
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2. is_hermitian (s,inprod) op1 op2 ==> is_closed_by s op1
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2. is_hermitian (s,inprod) op1 op2 ==> is_closed_by s op2
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2 x y. is_hermitian (s,inprod) op1 op2 /\\ x IN s /\\ y IN s ==>\n   inprod x (op1 y) = inprod (op2 x) y
-  !is. is_inner_space is ==> !op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n    ==> is_hermitian is (op1+op3) (op2+op4)
-  !is. is_inner_space is ==> !op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (op1-op3) (op2-op4)
-  !is. is_inner_space is ==> !op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (op1**op3) (op4**op2)
-  !is. is_inner_space is ==> !a op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (a % op1) (cnj a % op2)
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2 op3. is_hermitian (s,inprod) op1 op2 /\\ is_closed_by s op3\n    ==> !x y. x IN s /\\ y IN s\n      ==> inprod x ((op1 ** op3) y) = inprod (op2 x) (op3 y)
-  !is. is_hermitian is cop_zero cop_zero
-  !is op1 op2.\n    is_hermitian is op1 op2 <=> is_hermitian is op2 op1
-  !s inprod op1 op2 op3.\n      is_inner_space (s,inprod)\n      /\\ is_hermitian (s,inprod) op1 op2 /\\ is_hermitian (s,inprod) op1 op3\n        ==> !x. x IN s ==> (op2 x equv op3 x) inprod
-  !s inprod op1 op2 op3.\n    is_inner_space (s,inprod) /\\\n    is_hermitian (s,inprod) op2 op1 /\\ is_hermitian (s,inprod) op3 op1\n      ==> !x. x IN s ==> (op2 x equv op3 x) inprod
-  !s inprod. is_inner_space (s,inprod) ==> !a b op1 op2 op3 op4 op5.\n    is_hermitian (s,inprod) op1 op2 /\\ is_hermitian (s,inprod) op3 op4\n    /\\ is_hermitian (s,inprod) op5 (a % op1 + b % op3)\n      ==> !x. x IN s ==> (op5 x equv (cnj a % op2 + cnj b % op4) x) inprod
+  forall inprod op1 op2 state. is_linear_cop op1 /\\ is_linear_cop op2\n    ==> commutator (deviation inprod state op1) (deviation inprod state op2)\n      = commutator op1 op2
+  forall s inprod op. is_linear_cop op /\\ is_inner_space (s,inprod)\n    ==> expectation inprod cfun_zero op = Cx(&0)
+  is_closed_by s f <=> forall x. x IN s ==> f x IN s
+  forall x s f. is_closed_by s f /\\ x IN s ==> f x IN s
+  forall s f g. is_closed_by s f /\\ is_closed_by s g ==> is_closed_by s (f o g)
+  forall s. is_closed_by s I
+  forall s op1 op2.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (op1+op2)
+  forall s op1 op2.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (op1-op2)
+  forall s op1 op2.\n      is_closed_by s op1 /\\ is_closed_by s op2 ==> is_closed_by s (op1**op2)
+  forall s a. is_cfun_subspace s ==> is_closed_by s (a % I)
+  forall s inprod. is_inner_space (s,inprod) ==> forall a. is_closed_by s (a % I)
+  forall s a op.\n      is_cfun_subspace s /\\ is_closed_by s op ==> is_closed_by s (a % op)
+  forall s a op.\n      is_cfun_subspace s /\\ is_closed_by s op1 /\\ is_closed_by s op2\n        ==> is_closed_by s (commutator op1 op2)
+  is_hermitian ((s,inprod):inner_space) op1 op2 <=>\n    is_inner_space (s,inprod) ==>\n      is_closed_by s op1 /\\ is_closed_by s op2\n      /\\ is_linear_cop op1 /\\ is_linear_cop op2\n      /\\ forall x y. x IN s /\\ y IN s ==> inprod x (op1 y) = inprod (op2 x) y
+  forall is. is_inner_space is ==> forall op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op1\n                /\\ is_linear_cop op2
+  forall is. is_inner_space is ==> forall op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op1
+  forall is. is_inner_space is ==> forall op1 op2. is_hermitian is op1 op2 ==> is_linear_cop op2
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2. is_hermitian (s,inprod) op1 op2 ==> is_closed_by s op1
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2. is_hermitian (s,inprod) op1 op2 ==> is_closed_by s op2
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2 x y. is_hermitian (s,inprod) op1 op2 /\\ x IN s /\\ y IN s ==>\n   inprod x (op1 y) = inprod (op2 x) y
+  forall is. is_inner_space is ==> forall op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n    ==> is_hermitian is (op1+op3) (op2+op4)
+  forall is. is_inner_space is ==> forall op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (op1-op3) (op2-op4)
+  forall is. is_inner_space is ==> forall op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (op1**op3) (op4**op2)
+  forall is. is_inner_space is ==> forall a op1 op2 op3 op4.\n    is_hermitian is op1 op2 /\\ is_hermitian is op3 op4\n      ==> is_hermitian is (a % op1) (cnj a % op2)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2 op3. is_hermitian (s,inprod) op1 op2 /\\ is_closed_by s op3\n    ==> forall x y. x IN s /\\ y IN s\n      ==> inprod x ((op1 ** op3) y) = inprod (op2 x) (op3 y)
+  forall is. is_hermitian is cop_zero cop_zero
+  forall is op1 op2.\n    is_hermitian is op1 op2 <=> is_hermitian is op2 op1
+  forall s inprod op1 op2 op3.\n      is_inner_space (s,inprod)\n      /\\ is_hermitian (s,inprod) op1 op2 /\\ is_hermitian (s,inprod) op1 op3\n        ==> forall x. x IN s ==> (op2 x equv op3 x) inprod
+  forall s inprod op1 op2 op3.\n    is_inner_space (s,inprod) /\\\n    is_hermitian (s,inprod) op2 op1 /\\ is_hermitian (s,inprod) op3 op1\n      ==> forall x. x IN s ==> (op2 x equv op3 x) inprod
+  forall s inprod. is_inner_space (s,inprod) ==> forall a b op1 op2 op3 op4 op5.\n    is_hermitian (s,inprod) op1 op2 /\\ is_hermitian (s,inprod) op3 op4\n    /\\ is_hermitian (s,inprod) op5 (a % op1 + b % op3)\n      ==> forall x. x IN s ==> (op5 x equv (cnj a % op2 + cnj b % op4) x) inprod
   is_self_adjoint1 is op <=> is_hermitian is op op
-  !is. is_inner_space is ==> !op. is_self_adjoint1 is op ==> is_linear_cop op
-  !s inprod. is_inner_space (s,inprod) ==> !op. is_self_adjoint1 (s,inprod) op ==> is_closed_by s op
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2. is_self_adjoint1 (s,inprod) op1 /\\ is_closed_by s op2\n    ==> !x y. x IN s /\\ y IN s\n      ==> inprod x ((op1 ** op2) y) = inprod (op1 x) (op2 y)
-  !is. is_inner_space is ==> !op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 + op2)
-  !is. is_inner_space is ==> !op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 - op2)
-  !is. is_inner_space is ==> !a op. real a /\\ is_self_adjoint1 is op ==> is_self_adjoint1 is (a % op)
-  !is. is_inner_space is ==> !op1 op2.\n    is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2 /\\ op1 ** op2 = op2 ** op1\n    ==> is_self_adjoint1 is (op1 ** op2)
-  !is. is_self_adjoint1 is I
-  !is. is_self_adjoint1 is cop_zero
-  !is. is_inner_space is ==> !op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 ** op2 + op2 ** op1)
-  !is. is_inner_space is ==> !op. is_linear_cop op /\\ is_self_adjoint1 is op\n    ==> is_self_adjoint1 is (--op)
+  forall is. is_inner_space is ==> forall op. is_self_adjoint1 is op ==> is_linear_cop op
+  forall s inprod. is_inner_space (s,inprod) ==> forall op. is_self_adjoint1 (s,inprod) op ==> is_closed_by s op
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2. is_self_adjoint1 (s,inprod) op1 /\\ is_closed_by s op2\n    ==> forall x y. x IN s /\\ y IN s\n      ==> inprod x ((op1 ** op2) y) = inprod (op1 x) (op2 y)
+  forall is. is_inner_space is ==> forall op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 + op2)
+  forall is. is_inner_space is ==> forall op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 - op2)
+  forall is. is_inner_space is ==> forall a op. real a /\\ is_self_adjoint1 is op ==> is_self_adjoint1 is (a % op)
+  forall is. is_inner_space is ==> forall op1 op2.\n    is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2 /\\ op1 ** op2 = op2 ** op1\n    ==> is_self_adjoint1 is (op1 ** op2)
+  forall is. is_self_adjoint1 is I
+  forall is. is_self_adjoint1 is cop_zero
+  forall is. is_inner_space is ==> forall op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (op1 ** op2 + op2 ** op1)
+  forall is. is_inner_space is ==> forall op. is_linear_cop op /\\ is_self_adjoint1 is op\n    ==> is_self_adjoint1 is (--op)
   :inner_space->cop->bool
-  !s inprod. is_inner_space (s,inprod) ==> !op. is_linear_cop op /\\ (!x y. inprod (op x) y = -- (inprod x (op y)))\n      /\\ is_closed_by s op\n        ==> is_self_adjoint1 (s,inprod) (ii % op)
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2. is_self_adjoint1 (s,inprod) op1 /\\ is_self_adjoint1 (s,inprod) op2\n    ==> !x y. x IN s /\\ y IN s\n     ==> inprod (commutator op1 op2 x) y = --(inprod x (commutator op1 op2 y))
+  forall s inprod. is_inner_space (s,inprod) ==> forall op. is_linear_cop op /\\ (forall x y. inprod (op x) y = -- (inprod x (op y)))\n      /\\ is_closed_by s op\n        ==> is_self_adjoint1 (s,inprod) (ii % op)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2. is_self_adjoint1 (s,inprod) op1 /\\ is_self_adjoint1 (s,inprod) op2\n    ==> forall x y. x IN s /\\ y IN s\n     ==> inprod (commutator op1 op2 x) y = --(inprod x (commutator op1 op2 y))
   x = --y <=> y = --x:complex
-  !is. is_inner_space is ==> !op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (ii % commutator op1 op2)
-  !s inprod. is_inner_space (s,inprod) ==> !op state. is_self_adjoint1 (s,inprod) op /\\ state IN s\n    ==> real (expectation inprod state op)
-  !s inprod. is_inner_space (s,inprod) ==> !op state. is_self_adjoint1 (s,inprod) op /\\ state IN s\n    ==> is_self_adjoint1 (s,inprod) (deviation inprod state op)
+  forall is. is_inner_space is ==> forall op1 op2. is_self_adjoint1 is op1 /\\ is_self_adjoint1 is op2\n    ==> is_self_adjoint1 is (ii % commutator op1 op2)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op state. is_self_adjoint1 (s,inprod) op /\\ state IN s\n    ==> real (expectation inprod state op)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op state. is_self_adjoint1 (s,inprod) op /\\ state IN s\n    ==> is_self_adjoint1 (s,inprod) (deviation inprod state op)
   :inner_space->cop->bool
   real :complex -> bool
   real :complex -> bool
-  !s inprod. is_inner_space (s,inprod) ==> !op state.  state IN s /\\ is_self_adjoint1 (s,inprod) op\n    ==> real (variance inprod state op)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op state.  state IN s /\\ is_self_adjoint1 (s,inprod) op\n    ==> real (variance inprod state op)
   real :complex -> bool
   /\\
   :inner_space->cop->bool
   is_eigen_pair (op:cfun->cfun) (x,a) <=>\n    is_linear_cop op ==> op x = a % x /\\ ~(x = cfun_zero)
-  !op v x. is_eigen_pair op (x,v)\n    ==> !a. ~(a = Cx(&0)) ==> is_eigen_pair op (a % x,v)
-  !op v x y. is_eigen_pair op (x,v) /\\ is_eigen_pair op (y,v)\n        /\\ ~(x + y = cfun_zero)\n          ==> is_eigen_pair op (x+y,v)
-  !op. is_linear_cop op ==>\n    !a. is_cfun_subspace ({ x | is_eigen_pair op (x,a) } UNION { cfun_zero })
+  forall op v x. is_eigen_pair op (x,v)\n    ==> forall a. ~(a = Cx(&0)) ==> is_eigen_pair op (a % x,v)
+  forall op v x y. is_eigen_pair op (x,v) /\\ is_eigen_pair op (y,v)\n        /\\ ~(x + y = cfun_zero)\n          ==> is_eigen_pair op (x+y,v)
+  forall op. is_linear_cop op ==>\n    forall a. is_cfun_subspace ({ x | is_eigen_pair op (x,a) } UNION { cfun_zero })
   is_eigen_val (op:cfun->cfun) a <=> ?x. is_eigen_pair op (x,a)
   is_eigen_fun (op:cfun->cfun) x <=> ?a. is_eigen_pair op (x,a)
-  is_unbounded_linear_cop s (op:cop) <=> is_cfun_subspace s /\\\n    !x y. x IN s /\\ y IN s ==> op (x + y) = op x + op y /\\\n                !a. op (a % x) = a % (op x)
-  !op s.\n is_unbounded_linear_cop s op\n   ==> is_cfun_subspace s
-  !op s a x.\n is_unbounded_linear_cop s op /\\ x IN s\n   ==> op (a % x) = a % op x
-  !op s x y. is_unbounded_linear_cop s op /\\ x IN s /\\ y IN s\n   ==> op (x + y) = op x + op y
-  !op s. is_unbounded_linear_cop s op\n   ==> is_cfun_subspace s
-  !x y op s.  is_unbounded_linear_cop s op /\\\n  x IN s /\\ y IN s\n   ==> op (x - y) = op x - op y
-  !op s. is_unbounded_linear_cop s op  ==>\n    op cfun_zero = cfun_zero
-  !s1 s2. is_cfun_subspace s1 /\\ is_cfun_subspace s2 ==>\n     is_cfun_subspace (s1 INTER s2)
-  !m n p:cfun. m + n = n + m /\\ (m + n) + p = m + n + p /\\ m + n + p = n + m + p
-  !s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop (s1 INTER s2) (op1+op2)
-  !s op a. is_unbounded_linear_cop s op\n                ==> is_unbounded_linear_cop s  (a%op)
-  !s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop (s1 INTER s2) (op1-op2)
-  !s1. is_cfun_subspace s1 ==> is_unbounded_linear_cop s1 I
-  !s1 s2 op2. is_cfun_subspace s1 /\\\n is_unbounded_linear_cop s2 op2 ==>\n  is_cfun_subspace {x| x IN s2 /\\ op2 x IN s1}
-  !s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop {x| x IN s2 /\\ op2 x IN s1} (op1**op2)
-  !op1 s1 op2 s2.\n   is_unbounded_linear_cop s1 op1 /\\ is_unbounded_linear_cop s2 op2\n        ==> is_unbounded_linear_cop  ({x|x IN s2 /\\ op2 x IN s1}\n               INTER {x|x IN s1 /\\ op1 x IN s2}) (commutator op1 op2)
-  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 <=>\n    is_inner_space (s,inprod) ==>\n       s1 SUBSET s /\\ s2 SUBSET s /\\\n           is_unbounded_linear_cop s1 op1 /\\ is_unbounded_linear_cop s2 op2 /\\\n           (!x. x IN s1 ==> op1 x IN s) /\\ (!x. x IN s2 ==> op2 x IN s)\n      /\\ (!x y. x IN s2 /\\ y IN s1  ==> inprod x (op1 y) = inprod (op2 x) y)
-  !op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n        ==> is_hermitian_unbounded (\n          (s,inprod):inner_space) (s1 INTER s3)  (s2 INTER s4) (op1+op3) (op2+op4)
-  !a op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n    is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2\n      ==> is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 (a % op1) (cnj a % op2)
-  !op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n        ==> is_hermitian_unbounded ((s,inprod):inner_space)\n        (s1 INTER s3)  (s2 INTER s4) (op1-op3) (op2-op4)
-  !op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n    ==>\n        is_hermitian_unbounded ((s,inprod):inner_space)\n        {x| x IN s3 /\\ op3 x IN s1}\n        {x| x IN s2 /\\ op2 x IN s4}  (op1**op3) (op4**op2)
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2 s1 s2 x y.\n  is_hermitian_unbounded (s,inprod) s1 s2 op1 op2\n  /\\ x IN s2 /\\ y IN s1 ==>\n   inprod x (op1 y) = inprod (op2 x) y
-  !s inprod. is_inner_space (s,inprod) ==> !op1 op2 op3 s1 s2. is_hermitian_unbounded (s,inprod) s1 s2 op1 op2\n    ==> !x y. x IN s2 /\\ op3 y IN s1\n      ==> inprod x ((op1 ** op3) y) = inprod (op2 x) (op3 y)
-  !is op1 op2 s1 s2.\n    is_hermitian_unbounded is s1 s2 op1 op2 <=>\n        is_hermitian_unbounded is s2 s1 op2 op1
+  is_unbounded_linear_cop s (op:cop) <=> is_cfun_subspace s /\\\n    forall x y. x IN s /\\ y IN s ==> op (x + y) = op x + op y /\\\n                forall a. op (a % x) = a % (op x)
+  forall op s.\n is_unbounded_linear_cop s op\n   ==> is_cfun_subspace s
+  forall op s a x.\n is_unbounded_linear_cop s op /\\ x IN s\n   ==> op (a % x) = a % op x
+  forall op s x y. is_unbounded_linear_cop s op /\\ x IN s /\\ y IN s\n   ==> op (x + y) = op x + op y
+  forall op s. is_unbounded_linear_cop s op\n   ==> is_cfun_subspace s
+  forall x y op s.  is_unbounded_linear_cop s op /\\\n  x IN s /\\ y IN s\n   ==> op (x - y) = op x - op y
+  forall op s. is_unbounded_linear_cop s op  ==>\n    op cfun_zero = cfun_zero
+  forall s1 s2. is_cfun_subspace s1 /\\ is_cfun_subspace s2 ==>\n     is_cfun_subspace (s1 INTER s2)
+  forall m n p:cfun. m + n = n + m /\\ (m + n) + p = m + n + p /\\ m + n + p = n + m + p
+  forall s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop (s1 INTER s2) (op1+op2)
+  forall s op a. is_unbounded_linear_cop s op\n                ==> is_unbounded_linear_cop s  (a%op)
+  forall s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop (s1 INTER s2) (op1-op2)
+  forall s1. is_cfun_subspace s1 ==> is_unbounded_linear_cop s1 I
+  forall s1 s2 op2. is_cfun_subspace s1 /\\\n is_unbounded_linear_cop s2 op2 ==>\n  is_cfun_subspace {x| x IN s2 /\\ op2 x IN s1}
+  forall s1 s2 op1 op2. is_unbounded_linear_cop s1 op1\n        /\\ is_unbounded_linear_cop s2 op2\n                ==> is_unbounded_linear_cop {x| x IN s2 /\\ op2 x IN s1} (op1**op2)
+  forall op1 s1 op2 s2.\n   is_unbounded_linear_cop s1 op1 /\\ is_unbounded_linear_cop s2 op2\n        ==> is_unbounded_linear_cop  ({x|x IN s2 /\\ op2 x IN s1}\n               INTER {x|x IN s1 /\\ op1 x IN s2}) (commutator op1 op2)
+  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 <=>\n    is_inner_space (s,inprod) ==>\n       s1 SUBSET s /\\ s2 SUBSET s /\\\n           is_unbounded_linear_cop s1 op1 /\\ is_unbounded_linear_cop s2 op2 /\\\n           (forall x. x IN s1 ==> op1 x IN s) /\\ (forall x. x IN s2 ==> op2 x IN s)\n      /\\ (forall x y. x IN s2 /\\ y IN s1  ==> inprod x (op1 y) = inprod (op2 x) y)
+  forall op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n        ==> is_hermitian_unbounded (\n          (s,inprod):inner_space) (s1 INTER s3)  (s2 INTER s4) (op1+op3) (op2+op4)
+  forall a op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n    is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2\n      ==> is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 (a % op1) (cnj a % op2)
+  forall op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n        ==> is_hermitian_unbounded ((s,inprod):inner_space)\n        (s1 INTER s3)  (s2 INTER s4) (op1-op3) (op2-op4)
+  forall op1 op2 op3 op4 s1 s2 s3 s4 s inprod.\n  is_hermitian_unbounded ((s,inprod):inner_space) s1 s2 op1 op2 /\\\n        is_hermitian_unbounded ((s,inprod):inner_space) s3 s4 op3 op4\n    ==>\n        is_hermitian_unbounded ((s,inprod):inner_space)\n        {x| x IN s3 /\\ op3 x IN s1}\n        {x| x IN s2 /\\ op2 x IN s4}  (op1**op3) (op4**op2)
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2 s1 s2 x y.\n  is_hermitian_unbounded (s,inprod) s1 s2 op1 op2\n  /\\ x IN s2 /\\ y IN s1 ==>\n   inprod x (op1 y) = inprod (op2 x) y
+  forall s inprod. is_inner_space (s,inprod) ==> forall op1 op2 op3 s1 s2. is_hermitian_unbounded (s,inprod) s1 s2 op1 op2\n    ==> forall x y. x IN s2 /\\ op3 y IN s1\n      ==> inprod x ((op1 ** op3) y) = inprod (op2 x) (op3 y)
+  forall is op1 op2 s1 s2.\n    is_hermitian_unbounded is s1 s2 op1 op2 <=>\n        is_hermitian_unbounded is s2 s1 op2 op1
   is_symmetric is s op <=> is_hermitian_unbounded is s s op op
-  !op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> is_unbounded_linear_cop s1 op
-  !op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> s1 SUBSET s
-  !op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> !x. x IN s1 ==> op x IN s
-  !op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==>\n  (!x y. x IN s1 /\\ y IN s1  ==> inprod x (op y) = inprod (op x) y) 
-  !op1 op2 s1 s inprod. is_inner_space (s,inprod)\n  /\\ is_symmetric (s,inprod) s1 op1\n    ==> !x y. x IN s1 /\\ op2 y IN s1\n      ==> inprod x ((op1 ** op2) y) = inprod (op1 x) (op2 y)
-  !op1 op2 s1 s2 s inprod. is_symmetric (s,inprod)  s1 op1 /\\\n    is_symmetric (s,inprod)  s2 op2\n    ==> is_symmetric (s,inprod)  (s1 INTER s2) (op1 + op2)
-  !op1 op2 s1 s2 s inprod. is_symmetric (s,inprod)  s1 op1 /\\\n    is_symmetric (s,inprod)  s2 op2\n    ==> is_symmetric (s,inprod)  (s1 INTER s2) (op1 - op2)
-  !a ops s inprod. real a /\\ is_symmetric (s,inprod) s1 op ==>\n  is_symmetric (s,inprod) s1 (a % op)
-  !op s1 s inprod.\n  is_symmetric (s,inprod)  s1 op\n    ==>\n        is_symmetric ((s,inprod):inner_space)\n        {x| x IN s1 /\\ op x IN s1}  (op**op)
-  !s1 s inprod. s1 SUBSET s /\\ is_cfun_subspace s1 ==>  is_symmetric (s,inprod) s1 I
-  !op1 op2 s1 s2 s inprod. is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n    ==> is_symmetric (s,inprod)\n        ( {x| x IN s2 /\\ op2 x IN s1} INTER {x| x IN s1 /\\ op1 x IN s2})\n        (op1 ** op2 + op2 ** op1)
+  forall op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> is_unbounded_linear_cop s1 op
+  forall op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> s1 SUBSET s
+  forall op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==> forall x. x IN s1 ==> op x IN s
+  forall op s1 s inprod. is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1 op ==>\n  (forall x y. x IN s1 /\\ y IN s1  ==> inprod x (op y) = inprod (op x) y) 
+  forall op1 op2 s1 s inprod. is_inner_space (s,inprod)\n  /\\ is_symmetric (s,inprod) s1 op1\n    ==> forall x y. x IN s1 /\\ op2 y IN s1\n      ==> inprod x ((op1 ** op2) y) = inprod (op1 x) (op2 y)
+  forall op1 op2 s1 s2 s inprod. is_symmetric (s,inprod)  s1 op1 /\\\n    is_symmetric (s,inprod)  s2 op2\n    ==> is_symmetric (s,inprod)  (s1 INTER s2) (op1 + op2)
+  forall op1 op2 s1 s2 s inprod. is_symmetric (s,inprod)  s1 op1 /\\\n    is_symmetric (s,inprod)  s2 op2\n    ==> is_symmetric (s,inprod)  (s1 INTER s2) (op1 - op2)
+  forall a ops s inprod. real a /\\ is_symmetric (s,inprod) s1 op ==>\n  is_symmetric (s,inprod) s1 (a % op)
+  forall op s1 s inprod.\n  is_symmetric (s,inprod)  s1 op\n    ==>\n        is_symmetric ((s,inprod):inner_space)\n        {x| x IN s1 /\\ op x IN s1}  (op**op)
+  forall s1 s inprod. s1 SUBSET s /\\ is_cfun_subspace s1 ==>  is_symmetric (s,inprod) s1 I
+  forall op1 op2 s1 s2 s inprod. is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n    ==> is_symmetric (s,inprod)\n        ( {x| x IN s2 /\\ op2 x IN s1} INTER {x| x IN s1 /\\ op1 x IN s2})\n        (op1 ** op2 + op2 ** op1)
   --op = --Cx(&1) % op
-  !op s1 s inprod. is_symmetric (s,inprod) s1 op\n    ==> is_symmetric (s,inprod) s1 (--op)
+  forall op s1 s inprod. is_symmetric (s,inprod) s1 op\n    ==> is_symmetric (s,inprod) s1 (--op)
   :inner_space->(cfun->boo)->cop->bool
   real :complex -> bool
-  !op s1 s inprod.\n  is_unbounded_linear_cop s1 op /\\ s1 SUBSET s  /\\ (!x. x IN s1 ==> op x IN s)\n  /\\ (!x y. x IN s1 /\\ y IN s1 ==> inprod (op x) y = -- (inprod x (op y)))\n        ==> is_symmetric (s,inprod) s1 (ii % op)
-  !op1 op2 s1 s2 s inprod.\n  is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n    ==> !x y. x IN s2 /\\ op2 x IN s1 /\\ x IN s1 /\\ op1 x IN s2\n         /\\ y IN s2 /\\ op2 y IN s1 /\\ y IN s1 /\\ op1 y IN s2\n      ==> inprod (commutator op1 op2 x) y = --(inprod x (commutator op1 op2 y))
+  forall op s1 s inprod.\n  is_unbounded_linear_cop s1 op /\\ s1 SUBSET s  /\\ (forall x. x IN s1 ==> op x IN s)\n  /\\ (forall x y. x IN s1 /\\ y IN s1 ==> inprod (op x) y = -- (inprod x (op y)))\n        ==> is_symmetric (s,inprod) s1 (ii % op)
+  forall op1 op2 s1 s2 s inprod.\n  is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n    ==> forall x y. x IN s2 /\\ op2 x IN s1 /\\ x IN s1 /\\ op1 x IN s2\n         /\\ y IN s2 /\\ op2 y IN s1 /\\ y IN s1 /\\ op1 y IN s2\n      ==> inprod (commutator op1 op2 x) y = --(inprod x (commutator op1 op2 y))
   --(a:complex-b) = b-a
-  !op1 op2 s1 s2 s inprod.\n  is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n   ==> is_symmetric (s,inprod) ({x| x IN s2 /\\ op2 x IN s1} INTER {x| x IN s1 /\\ op1 x IN s2})\n   (ii % commutator op1 op2)
+  forall op1 op2 s1 s2 s inprod.\n  is_inner_space (s,inprod) /\\\n  is_symmetric (s,inprod) s1  op1 /\\ is_symmetric (s,inprod) s2 op2\n   ==> is_symmetric (s,inprod) ({x| x IN s2 /\\ op2 x IN s1} INTER {x| x IN s1 /\\ op1 x IN s2})\n   (ii % commutator op1 op2)
   :inner_space->(cfun->boo)->cop->bool
   real :complex -> bool
   real :complex -> bool
   real :complex -> bool
   real :complex -> bool
-  !op s1 s inprod.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op\n    ==> !state. state IN s1 ==> real (expectation inprod state op)
-  !op s1 s inprod state.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op /\\\n  state IN s1 ==>  is_symmetric (s,inprod) (s1 INTER s1) (deviation inprod state op)
+  forall op s1 s inprod.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op\n    ==> forall state. state IN s1 ==> real (expectation inprod state op)
+  forall op s1 s inprod state.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op /\\\n  state IN s1 ==>  is_symmetric (s,inprod) (s1 INTER s1) (deviation inprod state op)
   :inner_space->(cfun->boo)->cop->bool
   real :complex -> bool
   real :complex -> bool
   real :complex -> bool
   real :complex -> bool
   s INTER s = s
-  !op s1 s inprod.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op\n   ==> !state. state IN s1 /\\ deviation inprod state op state IN s1\n   ==>  real (variance inprod state op)
+  forall op s1 s inprod.\n  is_inner_space (s,inprod) /\\ is_symmetric (s,inprod) s1  op\n   ==> forall state. state IN s1 /\\ deviation inprod state op state IN s1\n   ==>  real (variance inprod state op)
   real :complex -> bool
   :inner_space->(cfun->boo)->cop->bool
   is_eigen_pair_unbounded s (op:cfun->cfun) (x,a) <=>\n    is_unbounded_linear_cop s op ==> x IN s /\\ op x = a % x /\\ ~(x = cfun_zero)
-  !op s v x. is_eigen_pair_unbounded s op (x,v)\n    ==> !a. ~(a = Cx(&0)) ==> is_eigen_pair_unbounded s op (a % x,v)
-  !op s v x y. is_eigen_pair_unbounded s op (x,v) /\\\n    is_eigen_pair_unbounded s op (y,v)\n        /\\ ~(x + y = cfun_zero)\n          ==> is_eigen_pair_unbounded  s op (x+y,v)
+  forall op s v x. is_eigen_pair_unbounded s op (x,v)\n    ==> forall a. ~(a = Cx(&0)) ==> is_eigen_pair_unbounded s op (a % x,v)
+  forall op s v x y. is_eigen_pair_unbounded s op (x,v) /\\\n    is_eigen_pair_unbounded s op (y,v)\n        /\\ ~(x + y = cfun_zero)\n          ==> is_eigen_pair_unbounded  s op (x+y,v)
   cfun_norm inprod (x:cfun) =  sqrt(real_of_complex (inprod x x))
   x:complex - y - (z - h) = x + h - (z+y)
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n     ==> real_of_complex (inprod (x-y) (x-y)) = real_of_complex(inprod x x) +\n            real_of_complex(inprod y y) - &2*Re(inprod y x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n     ==> real_of_complex (inprod (x-y) (x-y)) = real_of_complex(inprod x x) +\n            real_of_complex(inprod y y) - &2*Re(inprod y x)
   ((x:complex) + y) + z + h = x + h + (y+z)
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n     ==> real_of_complex (inprod (x+y) (x+y)) = real_of_complex(inprod x x) +\n            real_of_complex(inprod y y) + &2*Re(inprod x y)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n     ==> real_of_complex (inprod (x+y) (x+y)) = real_of_complex(inprod x x) +\n            real_of_complex(inprod y y) + &2*Re(inprod x y)
   &0 < &2
   x*x+x*y+x*y+y*y = x pow 2 + y pow 2 + &2*x*y
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n    ==> real_of_complex(inprod (x+y) (x+y)) <=\n          (sqrt(real_of_complex (inprod x x)) +\n          sqrt(real_of_complex (inprod y y))) pow 2
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n    ==> real_of_complex(inprod (x+y) (x+y)) <=\n          (sqrt(real_of_complex (inprod x x)) +\n          sqrt(real_of_complex (inprod y y))) pow 2
   &0 <= x /\\ &0<= y ==> ( x <= y <=> abs x <= abs y)
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n    ==> sqrt (real_of_complex(inprod (x+y) (x+y))) <=\n          sqrt(real_of_complex (inprod x x)) +\n          sqrt(real_of_complex (inprod y y))
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n    ==> sqrt (real_of_complex(inprod (x+y) (x+y))) <=\n          sqrt(real_of_complex (inprod x x)) +\n          sqrt(real_of_complex (inprod y y))
   (x:real)+y-z = y+x-z
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n     ==> cfun_norm inprod (x-y) = cfun_norm inprod (y-x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n     ==> cfun_norm inprod (x-y) = cfun_norm inprod (y-x)
   cfun_norm inprod x - cfun_norm inprod y =\n        cfun_norm inprod (x-y+y) - cfun_norm inprod y
   x = (x:cfun) - y + y
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s\n     ==> cfun_norm inprod x - cfun_norm inprod y <= cfun_norm inprod (x-y)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n     ==> cfun_norm inprod x - cfun_norm inprod y <= cfun_norm inprod (x-y)
   cfun_dist (inprod:inprod) (x:cfun) (y:cfun) =\n    sqrt (real_of_complex(inprod (x-y) (x-y)))
   ((x:cfun)+y)-(x'+y') = x-x'+y-y'
-  !s inprod. is_inner_space (s,inprod) ==> !x y x' y'. x IN s /\\ y IN s /\\ x' IN s /\\ y' IN s\n     ==> cfun_dist inprod (x+y) (x'+y')\n           <= cfun_dist inprod x x' + cfun_dist inprod y y'
-  !s inprod. is_inner_space (s,inprod) ==> !x. cfun_dist inprod x x = &0
-  !s inprod. is_inner_space (s,inprod) ==> cfun_norm inprod cfun_zero = &0
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> (cfun_norm inprod x = &0 <=> (x  equv cfun_zero) inprod)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> &0 <= cfun_norm inprod x 
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> cfun_norm inprod x pow 2 = real_of_complex (inprod x x)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> (cfun_norm inprod x = &0 <=>\n                   real_of_complex(inprod x x) = &0)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y x' y'. x IN s /\\ y IN s /\\ x' IN s /\\ y' IN s\n     ==> cfun_dist inprod (x+y) (x'+y')\n           <= cfun_dist inprod x x' + cfun_dist inprod y y'
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. cfun_dist inprod x x = &0
+  forall s inprod. is_inner_space (s,inprod) ==> cfun_norm inprod cfun_zero = &0
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> (cfun_norm inprod x = &0 <=> (x  equv cfun_zero) inprod)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> &0 <= cfun_norm inprod x 
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> cfun_norm inprod x pow 2 = real_of_complex (inprod x x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> (cfun_norm inprod x = &0 <=>\n                   real_of_complex(inprod x x) = &0)
    y <= x ==>  (~(x=y) <=> y < x)
-  !s inprod. is_inner_space (s,inprod) ==> !x. x IN s ==> (~((x equv cfun_zero) inprod) <=> &0 < cfun_norm inprod x)
-  !s inprod. is_inner_space (s,inprod) ==> !x a. x IN s ==> cfun_norm inprod (a%x) =  norm a * cfun_norm inprod x
-  !s inprod. is_inner_space (s,inprod) ==> !x y. x IN s /\\ y IN s ==>\n    (~((x equv y) inprod) <=>  &0 < cfun_dist inprod x y)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x. x IN s ==> (~((x equv cfun_zero) inprod) <=> &0 < cfun_norm inprod x)
+  forall s inprod. is_inner_space (s,inprod) ==> forall x a. x IN s ==> cfun_norm inprod (a%x) =  norm a * cfun_norm inprod x
+  forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s ==>\n    (~((x equv y) inprod) <=>  &0 < cfun_dist inprod x y)
   cfun_sum = iterate cfun_add
   neutral cfun_add = cfun_zero
   monoidal cfun_add
-  (!f. cfun_sum {} f = cfun_zero) /\\\n (!x f s. FINITE s ==>\n         cfun_sum (x INSERT s) f =\n         (if x IN s then cfun_sum s f else f x + cfun_sum s f))
-  !f m n. m <= n ==> cfun_sum (m..n) f = f(m) + cfun_sum(m+1..n) f
-  !f g s. (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n           ==> (cfun_sum (IMAGE f s) g = cfun_sum s (g o f))
-  !m n. n < m ==> (m..n = {}) 
-  !m n f. n < m ==> cfun_sum (m..n) f = cfun_zero
-  !p f m n. cfun_sum(m+p..n+p) f = cfun_sum(m..n) (\\i. f(i + p))
-  !f m n. m <= n ==> (cfun_sum(m..n) f = cfun_sum(0..n-m) (\\i. f(i + m)))
-  !c s. FINITE s ==> (cfun_sum s (\\n. c) = Cx(&(CARD s)) % c)
-  !f s. (!x:A. x IN s ==> (f(x) = cfun_zero)) ==> (cfun_sum s f = cfun_zero)
-  !s:A->bool. cfun_sum s (\\n. cfun_zero) = cfun_zero
-  !f g s. (!x. x IN s ==> (f x = g x)) ==> (cfun_sum s f = cfun_sum s g)
-  !f x. cfun_sum {x} f = f(x)
-  !f n. cfun_sum(n..n) f = f(n)
-  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (cfun_sum(m..n) f = cfun_sum(m..n) g)
-  !g spc. is_cfun_subspace spc /\\ (!n. g n IN spc) ==> !s. FINITE s\n    ==> cfun_sum s g IN spc
-  ! spc f g.  is_cfun_subspace spc /\\  (!n. g n IN spc)\n     /\\ is_set_linear_cop spc f\n   ==> !s. FINITE s  ==> (f(cfun_sum s g) = cfun_sum s (f o g))
-  ! spc f g s.  is_cfun_subspace spc /\\  (!n. g n IN spc)\n   /\\ is_set_linear_cop spc f\n        /\\FINITE s  ==> (f(cfun_sum s g) = cfun_sum s (f o g))
-  !f g s. is_linear_cop f /\\ FINITE s ==>\n        (f(cfun_sum s g) = cfun_sum s (f o g))
-  !f g s. FINITE s ==>\n        (cfun_sum s (\\x. f(x) + g(x)) = cfun_sum s f + cfun_sum s g)
+  (forall f. cfun_sum {} f = cfun_zero) /\\\n (forall x f s. FINITE s ==>\n         cfun_sum (x INSERT s) f =\n         (if x IN s then cfun_sum s f else f x + cfun_sum s f))
+  forall f m n. m <= n ==> cfun_sum (m..n) f = f(m) + cfun_sum(m+1..n) f
+  forall f g s. (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n           ==> (cfun_sum (IMAGE f s) g = cfun_sum s (g o f))
+  forall m n. n < m ==> (m..n = {}) 
+  forall m n f. n < m ==> cfun_sum (m..n) f = cfun_zero
+  forall p f m n. cfun_sum(m+p..n+p) f = cfun_sum(m..n) (\\i. f(i + p))
+  forall f m n. m <= n ==> (cfun_sum(m..n) f = cfun_sum(0..n-m) (\\i. f(i + m)))
+  forall c s. FINITE s ==> (cfun_sum s (\\n. c) = Cx(&(CARD s)) % c)
+  forall f s. (forall x:A. x IN s ==> (f(x) = cfun_zero)) ==> (cfun_sum s f = cfun_zero)
+  forall s:A->bool. cfun_sum s (\\n. cfun_zero) = cfun_zero
+  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> (cfun_sum s f = cfun_sum s g)
+  forall f x. cfun_sum {x} f = f(x)
+  forall f n. cfun_sum(n..n) f = f(n)
+  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (cfun_sum(m..n) f = cfun_sum(m..n) g)
+  forall g spc. is_cfun_subspace spc /\\ (forall n. g n IN spc) ==> forall s. FINITE s\n    ==> cfun_sum s g IN spc
+  forall spc f g.  is_cfun_subspace spc /\\  (forall n. g n IN spc)\n     /\\ is_set_linear_cop spc f\n   ==> forall s. FINITE s  ==> (f(cfun_sum s g) = cfun_sum s (f o g))
+  forall spc f g s.  is_cfun_subspace spc /\\  (forall n. g n IN spc)\n   /\\ is_set_linear_cop spc f\n        /\\FINITE s  ==> (f(cfun_sum s g) = cfun_sum s (f o g))
+  forall f g s. is_linear_cop f /\\ FINITE s ==>\n        (f(cfun_sum s g) = cfun_sum s (f o g))
+  forall f g s. FINITE s ==>\n        (cfun_sum s (\\x. f(x) + g(x)) = cfun_sum s f + cfun_sum s g)
   a % (y:cfun) = (\\x. a%x) y
-  !f a s. FINITE s ==> (cfun_sum s (\\x. a % f(x) ) = a % cfun_sum s f)
-  !f g s. FINITE s ==>\n        (cfun_sum s (\\x. f(x) - g(x)) = cfun_sum s f - cfun_sum s g)
-  !f g m n. cfun_sum(m..n) (\\i. f(i) + g(i)) =\n        cfun_sum(m..n) f + cfun_sum(m..n) g
-  cfun_lim1 (s,inprod) f l net <=>\n   is_inner_space (s,inprod) /\\ l IN s /\\ (!x. (f x) IN s) /\\\n   (!e. &0 < e ==> eventually (\\x. cfun_dist inprod (f x) l < e) net)
-  !innerspc f l net. cfun_lim1 innerspc f l net ==> is_inner_space innerspc
-  is_bounded1  (s,inprod)  h <=> is_inner_space (s,inprod)\n     ==>   ?B. &0 < B /\\\n         (!x.  x IN s /\\ h x IN s ==> sqrt(real_of_complex(inprod (h x) (h x))) <=\n           B * sqrt(real_of_complex(inprod x x)))
-  is_bounded_linear1 (s,inprod) h <=> is_inner_space (s,inprod)\n     ==> is_linear_cop h /\\ is_closed_by s h /\\ ?B. &0 < B /\\\n         (!x. x IN s ==> sqrt(real_of_complex(inprod (h x) (h x))) <=\n           B * sqrt(real_of_complex(inprod x x)))
-  !a is. is_bounded1 is (\\x:cfun. a % x)
+  forall f a s. FINITE s ==> (cfun_sum s (\\x. a % f(x) ) = a % cfun_sum s f)
+  forall f g s. FINITE s ==>\n        (cfun_sum s (\\x. f(x) - g(x)) = cfun_sum s f - cfun_sum s g)
+  forall f g m n. cfun_sum(m..n) (\\i. f(i) + g(i)) =\n        cfun_sum(m..n) f + cfun_sum(m..n) g
+  cfun_lim1 (s,inprod) f l net <=>\n   is_inner_space (s,inprod) /\\ l IN s /\\ (forall x. (f x) IN s) /\\\n   (forall e. &0 < e ==> eventually (\\x. cfun_dist inprod (f x) l < e) net)
+  forall innerspc f l net. cfun_lim1 innerspc f l net ==> is_inner_space innerspc
+  is_bounded1  (s,inprod)  h <=> is_inner_space (s,inprod)\n     ==>   ?B. &0 < B /\\\n         (forall x.  x IN s /\\ h x IN s ==> sqrt(real_of_complex(inprod (h x) (h x))) <=\n           B * sqrt(real_of_complex(inprod x x)))
+  is_bounded_linear1 (s,inprod) h <=> is_inner_space (s,inprod)\n     ==> is_linear_cop h /\\ is_closed_by s h /\\ ?B. &0 < B /\\\n         (forall x. x IN s ==> sqrt(real_of_complex(inprod (h x) (h x))) <=\n           B * sqrt(real_of_complex(inprod x x)))
+  forall a is. is_bounded1 is (\\x:cfun. a % x)
   B:real
   e:real
-  !net:(A)net h s1 f l s inprod.\n        cfun_lim1 (s,inprod) f l net /\\ is_unbounded_linear_cop s1 h\n                /\\ (!x. x IN s1 ==> x IN s /\\ h x IN s)\n                /\\ (!x. f x IN s1) /\\ l IN s1 /\\\n                  is_bounded1 (s,inprod) h\n                ==> cfun_lim1 (s,inprod) (\\x.h (f x)) (h l) net
+  forall net:(A)net h s1 f l s inprod.\n        cfun_lim1 (s,inprod) f l net /\\ is_unbounded_linear_cop s1 h\n                /\\ (forall x. x IN s1 ==> x IN s /\\ h x IN s)\n                /\\ (forall x. f x IN s1) /\\ l IN s1 /\\\n                  is_bounded1 (s,inprod) h\n                ==> cfun_lim1 (s,inprod) (\\x.h (f x)) (h l) net
   cfun_sums innerspc f l s <=>\n    cfun_lim1 innerspc (\\n. cfun_sum (s INTER (0..n)) f) l sequentially
   cfun_infsum innerspc s f = @l.  cfun_sums innerspc f l s
   cfun_summable innerspc s f = ?l. cfun_sums innerspc f l s
-  !innerspc f l s. cfun_sums innerspc f l s ==> is_inner_space innerspc
-  !f l s innerspc. cfun_sums innerspc f l s\n     ==> cfun_summable innerspc s f
-  !f s innerspc. cfun_sums innerspc f (cfun_infsum innerspc s f) s <=>\n     cfun_summable innerspc s f
-  !f s. FINITE s\n         ==> (cfun_sum s (\\x. if x IN s then f(x) else cfun_zero) =\n                                        cfun_sum s f)
-  !f u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = cfun_zero))\n        ==> (cfun_sum v f = cfun_sum u f)
-  !f l s inprod. cfun_lim1 (s,inprod) f l sequentially <=>\n       is_inner_space (s,inprod) /\\  l IN s /\\\n          (!x. f x IN s)\n          /\\ (!e. &0 < e ==> ?N. !n. N <= n ==> cfun_dist inprod (f n) l < e)
+  forall innerspc f l s. cfun_sums innerspc f l s ==> is_inner_space innerspc
+  forall f l s innerspc. cfun_sums innerspc f l s\n     ==> cfun_summable innerspc s f
+  forall f s innerspc. cfun_sums innerspc f (cfun_infsum innerspc s f) s <=>\n     cfun_summable innerspc s f
+  forall f s. FINITE s\n         ==> (cfun_sum s (\\x. if x IN s then f(x) else cfun_zero) =\n                                        cfun_sum s f)
+  forall f u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = cfun_zero))\n        ==> (cfun_sum v f = cfun_sum u f)
+  forall f l s inprod. cfun_lim1 (s,inprod) f l sequentially <=>\n       is_inner_space (s,inprod) /\\  l IN s /\\\n          (forall x. f x IN s)\n          /\\ (forall e. &0 < e ==> ?N. forall n. N <= n ==> cfun_dist inprod (f n) l < e)
   --(x:cfun) - --y = --(x - y)
   e:real
   --(x:cfun) - --y = --(x - y)
-  !net f l innerspc.  cfun_lim1 innerspc f l net\n     ==> cfun_lim1 innerspc (\\x. --(f x)) (--l) net
+  forall net f l innerspc.  cfun_lim1 innerspc f l net\n     ==> cfun_lim1 innerspc (\\x. --(f x)) (--l) net
   z <= x + y ==> x < e / &2 /\\ y < e / &2 ==> z < e
   e / &2
   e:real
-  !net f g l m innerspc.\n    cfun_lim1 innerspc f l net /\\ cfun_lim1 innerspc g m net\n        ==> cfun_lim1 innerspc (\\x. f(x) + g(x)) (l+m) net
-  !net f g l m innerspc.\n    cfun_lim1 innerspc f l net /\\ cfun_lim1 innerspc g m net\n        ==> cfun_lim1 innerspc (\\x. f(x) - g(x)) (l-m) net
-  !net s inprod y. y IN s /\\ is_inner_space (s,inprod)\n     ==> cfun_lim1 (s,inprod) (\\x. y) y net
-  !a net f l  innerspc.\n    cfun_lim1 innerspc f l net\n        ==> cfun_lim1 innerspc (\\x. a% f(x)) (a%l) net
+  forall net f g l m innerspc.\n    cfun_lim1 innerspc f l net /\\ cfun_lim1 innerspc g m net\n        ==> cfun_lim1 innerspc (\\x. f(x) + g(x)) (l+m) net
+  forall net f g l m innerspc.\n    cfun_lim1 innerspc f l net /\\ cfun_lim1 innerspc g m net\n        ==> cfun_lim1 innerspc (\\x. f(x) - g(x)) (l-m) net
+  forall net s inprod y. y IN s /\\ is_inner_space (s,inprod)\n     ==> cfun_lim1 (s,inprod) (\\x. y) y net
+  forall a net f l  innerspc.\n    cfun_lim1 innerspc f l net\n        ==> cfun_lim1 innerspc (\\x. a% f(x)) (a%l) net
   is_inner_space (s,inprod) /\\ l IN s /\\ f IN s\n    ==> cfun_norm inprod l <= cfun_norm inprod (f-l) + b \\/\n         ~(cfun_norm inprod f <= b)
   z <= b /\\  x-z <= y ==> x  <= y+b
   x:A
   p ==> q ==> F <=> ~(p /\\ q)
   ~(l <= b) <=> &0 < l - b
-  !net:(A)net f l b s inprod.\n      ~(trivial_limit net) /\\\n      cfun_lim1 (s,inprod) f l net /\\\n      eventually (\\x. cfun_norm inprod (f x) <= b) net\n      ==> cfun_norm inprod l <= b
-  !net:(A)net f l l' s inprod.\n      ~(trivial_limit net) /\\ cfun_lim1 (s,inprod) f l net\n      /\\ cfun_lim1 (s,inprod) f l' net ==> (l equv l') inprod
-  !f g l l' s innerspc. cfun_sums innerspc f l s /\\ cfun_sums innerspc g l' s\n   ==> cfun_sums innerspc (\\n.f n + g n) (l+l') s
-  !f g l l' s innerspc. cfun_sums innerspc f l s /\\ cfun_sums innerspc g l' s\n   ==> cfun_sums innerspc (\\n.f n - g n) (l-l') s
-  !a f l s innerspc. cfun_sums innerspc f l s\n   ==> cfun_sums innerspc (\\n.a% (f n))  (a%l) s
-  !f l l' s s1 inprod. cfun_sums (s1,inprod) f l s /\\ cfun_sums (s1,inprod) f l' s\n                        ==> (l equv l') inprod
-  !f l s s1 inprod. cfun_sums (s1,inprod) f l s ==> (cfun_infsum (s1,inprod) s f equv l) inprod
-  !spc inprod f l s. cfun_summable (spc,inprod) s f ==>\n    (cfun_infsum (spc,inprod) s f) IN spc
-  !s spc inprod. is_inner_space (spc,inprod) ==>\n  cfun_sums (spc,inprod)  (\\n. cfun_zero) (cfun_zero) s
+  forall net:(A)net f l b s inprod.\n      ~(trivial_limit net) /\\\n      cfun_lim1 (s,inprod) f l net /\\\n      eventually (\\x. cfun_norm inprod (f x) <= b) net\n      ==> cfun_norm inprod l <= b
+  forall net:(A)net f l l' s inprod.\n      ~(trivial_limit net) /\\ cfun_lim1 (s,inprod) f l net\n      /\\ cfun_lim1 (s,inprod) f l' net ==> (l equv l') inprod
+  forall f g l l' s innerspc. cfun_sums innerspc f l s /\\ cfun_sums innerspc g l' s\n   ==> cfun_sums innerspc (\\n.f n + g n) (l+l') s
+  forall f g l l' s innerspc. cfun_sums innerspc f l s /\\ cfun_sums innerspc g l' s\n   ==> cfun_sums innerspc (\\n.f n - g n) (l-l') s
+  forall a f l s innerspc. cfun_sums innerspc f l s\n   ==> cfun_sums innerspc (\\n.a% (f n))  (a%l) s
+  forall f l l' s s1 inprod. cfun_sums (s1,inprod) f l s /\\ cfun_sums (s1,inprod) f l' s\n                        ==> (l equv l') inprod
+  forall f l s s1 inprod. cfun_sums (s1,inprod) f l s ==> (cfun_infsum (s1,inprod) s f equv l) inprod
+  forall spc inprod f l s. cfun_summable (spc,inprod) s f ==>\n    (cfun_infsum (spc,inprod) s f) IN spc
+  forall s spc inprod. is_inner_space (spc,inprod) ==>\n  cfun_sums (spc,inprod)  (\\n. cfun_zero) (cfun_zero) s
   s INTER (0..m) = s
   m:num
   n:num
   e:real
   n:num
-  !f s spc inprod. (!x. f x IN spc)  /\\ is_inner_space (spc,inprod) /\\\n      FINITE s ==> cfun_sums (spc,inprod) f (cfun_sum s f) s
-  !f h l s s1 s2 inprod. cfun_sums (s2,inprod) f l s /\\\n     is_unbounded_linear_cop s1 h  /\\ is_bounded1 (s2,inprod) h /\\\n         (!x. x IN s1 ==> x IN s2 /\\ h x IN s2) /\\\n         (!n. f n IN s1) /\\ l IN s1\n       ==> cfun_sums (s2,inprod) (\\n. h(f n)) (h l) s 
-  !spc inprod s. is_inner_space (spc,inprod) ==>\n    (cfun_infsum (spc,inprod) s (\\i. cfun_zero) equv cfun_zero) inprod
-  !f h l s s1 s2 inprod. cfun_summable (s2,inprod) s f /\\\n   is_unbounded_linear_cop s1 h  /\\ is_bounded1 (s2,inprod) h /\\\n   (!x. x IN s1 ==> x IN s2 /\\ h x IN s2) /\\\n     (!n. f n IN s1) /\\  (cfun_infsum (s2,inprod) s f) IN s1\n           ==> (cfun_infsum (s2,inprod) s (\\n. h(f n)) equv\n                       h (cfun_infsum (s2,inprod) s f)) inprod
-  !a f s s1 inprod. cfun_summable (s1,inprod) s f\n   ==>  (cfun_infsum (s1,inprod) s (\\n.a% (f n)) equv a % (cfun_infsum (s1,inprod) s f)) inprod
+  forall f s spc inprod. (forall x. f x IN spc)  /\\ is_inner_space (spc,inprod) /\\\n      FINITE s ==> cfun_sums (spc,inprod) f (cfun_sum s f) s
+  forall f h l s s1 s2 inprod. cfun_sums (s2,inprod) f l s /\\\n     is_unbounded_linear_cop s1 h  /\\ is_bounded1 (s2,inprod) h /\\\n         (forall x. x IN s1 ==> x IN s2 /\\ h x IN s2) /\\\n         (forall n. f n IN s1) /\\ l IN s1\n       ==> cfun_sums (s2,inprod) (\\n. h(f n)) (h l) s 
+  forall spc inprod s. is_inner_space (spc,inprod) ==>\n    (cfun_infsum (spc,inprod) s (\\i. cfun_zero) equv cfun_zero) inprod
+  forall f h l s s1 s2 inprod. cfun_summable (s2,inprod) s f /\\\n   is_unbounded_linear_cop s1 h  /\\ is_bounded1 (s2,inprod) h /\\\n   (forall x. x IN s1 ==> x IN s2 /\\ h x IN s2) /\\\n     (forall n. f n IN s1) /\\  (cfun_infsum (s2,inprod) s f) IN s1\n           ==> (cfun_infsum (s2,inprod) s (\\n. h(f n)) equv\n                       h (cfun_infsum (s2,inprod) s f)) inprod
+  forall a f s s1 inprod. cfun_summable (s1,inprod) s f\n   ==>  (cfun_infsum (s1,inprod) s (\\n.a% (f n)) equv a % (cfun_infsum (s1,inprod) s f)) inprod
   \n  cfun_sum s f = cfun_sum t f /\\ cfun_sum t f = cfun_sum t g\n                        ==> cfun_sum s f = cfun_sum t g
-  !f k l innerspc.\n        cfun_sums innerspc (\\n. if n IN k then f(n) else cfun_zero)  l (:num)\n                        <=> cfun_sums innerspc f  l k
+  forall f k l innerspc.\n        cfun_sums innerspc (\\n. if n IN k then f(n) else cfun_zero)  l (:num)\n                        <=> cfun_sums innerspc f  l k
   (P /\\ Q /\\ E ==> C)<=> (E ==> P ==> Q ==>C)
   (x:num) IN t
   (x:num) IN s
   x:num
   x:num
-  !f l s t spc inpord.\n        t SUBSET s /\\ FINITE t /\\ (!x. f x IN spc) /\\\n                cfun_sums (spc,inpord) f l s\n        ==> cfun_sums (spc,inpord) f (l - cfun_sum t f)  (s DIFF t)
+  forall f l s t spc inpord.\n        t SUBSET s /\\ FINITE t /\\ (forall x. f x IN spc) /\\\n                cfun_sums (spc,inpord) f l s\n        ==> cfun_sums (spc,inpord) f (l - cfun_sum t f)  (s DIFF t)
   from n = from m DIFF (m..(n-1))
-  !f l m n s inprod.\n      cfun_sums (s,inprod) f l (from m) /\\ (!x. f x IN s) /\\ m < n\n        ==> cfun_sums (s,inprod) f (l - cfun_sum (m..(n-1)) f) (from n)
-  !f s inprod n. cfun_summable (s,inprod) (from m)  f  /\\ (!x. f x IN s)\n                /\\ m < n ==> cfun_summable (s,inprod) (from n)  f
-  !f s inprod n m. cfun_summable (s,inprod) (from m) f\n   /\\ (!x. f x IN s) /\\ m < n ==>\n (cfun_infsum (s,inprod) (from n) f equv\n   ( cfun_infsum (s,inprod) (from m) f - cfun_sum (m..n-1) f))inprod
+  forall f l m n s inprod.\n      cfun_sums (s,inprod) f l (from m) /\\ (forall x. f x IN s) /\\ m < n\n        ==> cfun_sums (s,inprod) f (l - cfun_sum (m..(n-1)) f) (from n)
+  forall f s inprod n. cfun_summable (s,inprod) (from m)  f  /\\ (forall x. f x IN s)\n                /\\ m < n ==> cfun_summable (s,inprod) (from n)  f
+  forall f s inprod n m. cfun_summable (s,inprod) (from m) f\n   /\\ (forall x. f x IN s) /\\ m < n ==>\n (cfun_infsum (s,inprod) (from n) f equv\n   ( cfun_infsum (s,inprod) (from m) f - cfun_sum (m..n-1) f))inprod
   N + k:num <= n ==> N <= n + k
   N + k:num <= n ==> n = (n - k) + k /\\ N <= n - k
-  !f innerspc n l k. cfun_sums innerspc (\\x. f(x+k)) l (from n) <=>\n     cfun_sums innerspc f l (from (n+k))
-  !f innerspc n  k. cfun_summable innerspc (from n) (\\x. f(x+k))  <=>\n     cfun_summable innerspc (from (n+k)) f
-  !f s inprod n k.  cfun_summable  (s,inprod) (from n) (\\x. f (x + k)) ==>\n       (cfun_infsum (s,inprod) (from (n+k)) f equv\n                        cfun_infsum (s,inprod) (from n) (\\x. f(x+k))) inprod 
+  forall f innerspc n l k. cfun_sums innerspc (\\x. f(x+k)) l (from n) <=>\n     cfun_sums innerspc f l (from (n+k))
+  forall f innerspc n  k. cfun_summable innerspc (from n) (\\x. f(x+k))  <=>\n     cfun_summable innerspc (from (n+k)) f
+  forall f s inprod n k.  cfun_summable  (s,inprod) (from n) (\\x. f (x + k)) ==>\n       (cfun_infsum (s,inprod) (from (n+k)) f equv\n                        cfun_infsum (s,inprod) (from n) (\\x. f(x+k))) inprod 
   cop_sum s f = \\x. cfun_sum s (\\n.(f n) x)
   k <= n ==> SUC n - k = SUC(n - k)
   cfun_sum(m+1..n+1) (\\i. f i)
   a = e /\\ b = c + d ==> a + b = c + d + e
   0 <= n + 1
-  !n op1 op2.\n        op1 ** op2 = op2 ** op1 /\\ is_linear_cop op1 /\\ is_linear_cop op2\n        ==> (op1 + op2) pow n =\n            cop_sum (0..n)\n            (\\k. Cx (&(binom (n,k))) % (op1 pow k ** op2 pow (n - k)))
+  forall n op1 op2.\n        op1 ** op2 = op2 ** op1 /\\ is_linear_cop op1 /\\ is_linear_cop op2\n        ==> (op1 + op2) pow n =\n            cop_sum (0..n)\n            (\\k. Cx (&(binom (n,k))) % (op1 pow k ** op2 pow (n - k)))
 real_of_complex =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). ((#=:fun(real,fun(real,bool)) (#real_of_complex:fun(cart(real,tybit0(1)),real) c:cart(real,tybit0(1)))) (#@:fun(fun(real,bool),real) (\r:real. ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) c:cart(real,tybit0(1))) (#Cx:fun(real,cart(real,tybit0(1))) r:real)))))))
 REAL_OF_COMPLEX =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) (#real:fun(cart(real,tybit0(1)),bool) c:cart(real,tybit0(1)))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_complex:fun(cart(real,tybit0(1)),real) c:cart(real,tybit0(1))))) c:cart(real,tybit0(1))))))
 REAL_OF_COMPLEX_RE =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) (#real:fun(cart(real,tybit0(1)),bool) c:cart(real,tybit0(1)))) ((#=:fun(real,fun(real,bool)) (#real_of_complex:fun(cart(real,tybit0(1)),real) c:cart(real,tybit0(1)))) (#Re:fun(cart(real,tybit0(1)),real) c:cart(real,tybit0(1)))))))

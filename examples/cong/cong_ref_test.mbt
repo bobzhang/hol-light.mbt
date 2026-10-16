@@ -5619,18 +5619,18 @@ test "Examples/cong matches Examples/cong.ml" {
       #|  (x == y) (mod n) <=> ?q. x - y = q * n
       #|  (x == y) (mod (&0)) <=> (x = y)
       #|  (x == y) (mod (&1))
-      #|  !n x. (x == x) (mod n)
-      #|  !n x y. (x == y) (mod n) ==> (y == x) (mod n)
-      #|  !n x y z. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
-      #|  !n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 + y1 == x2 + y2) (mod n)
-      #|  !n x1 x2. (x1 == x2) (mod n) ==> (--x1 == --x2) (mod n)
-      #|  !n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 - y1 == x2 - y2) (mod n)
-      #|  !n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 * y1 == x2 * y2) (mod n)
-      #|  !x y n. (x == y) (mod (--n)) <=> (x == y) (mod n)
-      #|  !x y n. (x == y) (mod (abs n)) <=> (x == y) (mod n)
-      #|  !m n. (m * n == &0) (mod n)
-      #|  !n. (n == &0) (mod n)
-      #|  !n. (abs(n) == &0) (mod n)
+      #|  forall n x. (x == x) (mod n)
+      #|  forall n x y. (x == y) (mod n) ==> (y == x) (mod n)
+      #|  forall n x y z. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
+      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 + y1 == x2 + y2) (mod n)
+      #|  forall n x1 x2. (x1 == x2) (mod n) ==> (--x1 == --x2) (mod n)
+      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 - y1 == x2 - y2) (mod n)
+      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 * y1 == x2 * y2) (mod n)
+      #|  forall x y n. (x == y) (mod (--n)) <=> (x == y) (mod n)
+      #|  forall x y n. (x == y) (mod (abs n)) <=> (x == y) (mod n)
+      #|  forall m n. (m * n == &0) (mod n)
+      #|  forall n. (n == &0) (mod n)
+      #|  forall n. (abs(n) == &0) (mod n)
       #|  (x == y) (mod &1)
       #|  (x - y = z) <=> (x = z + y)
       #|  &(k DIV n)
@@ -5642,7 +5642,7 @@ test "Examples/cong matches Examples/cong.ml" {
       #|  n:int
       #|  k:num
       #|  n:int
-      #|  !n x. &0 <= x /\\ ~(n = &0)\n         ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
+      #|  forall n x. &0 <= x /\\ ~(n = &0)\n         ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
       #|  x + --y = x - y
       #|  abs n
       #|  &0 <= y /\\ ~(y = &0) ==> abs(n) - y < abs(n)
@@ -5654,7 +5654,7 @@ test "Examples/cong matches Examples/cong.ml" {
       #|  --x
       #|  n:int
       #|  &0 <= x \\/ &0 <= --x
-      #|  !n x. ~(n = &0) ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
+      #|  forall n x. ~(n = &0) ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
       #|  x - &0 = x
       #|  (x == y) (mod n)
       #|  n:int
@@ -5662,9 +5662,9 @@ test "Examples/cong matches Examples/cong.ml" {
       #|  &0 <= y /\\ y < abs n\n    ==> --(abs n) <= &2 * y /\\ &2 * y < abs(n) \\/\n        --(abs n) <= &2 * (y - abs(n)) /\\ &2 * (y - abs(n)) < abs(n)
       #|  x:int
       #|  y:int
-      #|  !n x. ~(n = &0)\n         ==> ?y. --(abs n) <= &2 * y /\\ &2 * y < abs n /\\ (x == y) (mod n)
+      #|  forall n x. ~(n = &0)\n         ==> ?y. --(abs n) <= &2 * y /\\ &2 * y < abs n /\\ (x == y) (mod n)
       #|  x:int
-      #|  !n x. ~(n = &0) ==> ?y. &2 * abs(y) <= abs(n) /\\ (x == y) (mod n)
+      #|  forall n x. ~(n = &0) ==> ?y. &2 * abs(y) <= abs(n) /\\ (x == y) (mod n)
       #|CONG =  |- ((#=:fun(bool,fun(bool,bool)) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) y:int) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int))) (#?:fun(fun(int,bool),bool) (\q:int. ((#=:fun(int,fun(int,bool)) ((#int_sub:fun(int,fun(int,int)) x:int) y:int)) ((#int_mul:fun(int,fun(int,int)) q:int) n:int)))))
       #|CONG_MOD_0 =  |- ((#=:fun(bool,fun(bool,bool)) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) y:int) (#int_mod:fun(int,fun(int,fun(int,bool))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(int,fun(int,bool)) x:int) y:int))
       #|CONG_REFL =  |- (#!:fun(fun(int,bool),bool) (\n:int. (#!:fun(fun(int,bool),bool) (\x:int. (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) x:int) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int))))))

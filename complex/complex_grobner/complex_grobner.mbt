@@ -1234,11 +1234,11 @@ pub fn grobner_refute(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_12() -> Unit raise {
   let pth0 = @cpoly.simple_complex_arith(@parser.parse_term("(x = y) <=> (x - y = Cx(&0))"))
   let t263 = @tactics.conv_tac((x262 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x262))
-  let pth1 = @tactics.prove(@parser.parse_term("!x. ~(x = Cx(&0)) <=> ?z. z * x + Cx(&1) = Cx(&0)"), t263)
+  let pth1 = @tactics.prove(@parser.parse_term("forall x. ~(x = Cx(&0)) <=> ?z. z * x + Cx(&1) = Cx(&0)"), t263)
   let t265 = @tactics.conv_tac((x264 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x264))
-  let pth2a = @tactics.prove(@parser.parse_term("!x y u v. ~(x = y) \\/ ~(u = v) <=>\n                ?w z. w * (x - y) + z * (u - v) + Cx(&1) = Cx(&0)"), t265)
+  let pth2a = @tactics.prove(@parser.parse_term("forall x y u v. ~(x = y) \\/ ~(u = v) <=>\n                ?w z. w * (x - y) + z * (u - v) + Cx(&1) = Cx(&0)"), t265)
   let t267 = @tactics.conv_tac((x266 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x266))
-  let pth2b = @tactics.prove(@parser.parse_term("!x y. ~(x = y) <=> ?z. z * (x - y) + Cx(&1) = Cx(&0)"), t267)
+  let pth2b = @tactics.prove(@parser.parse_term("forall x y. ~(x = y) <=> ?z. z * (x - y) + Cx(&1) = Cx(&0)"), t267)
   let pth3 = @class.taut(@parser.parse_term("(p ==> F) ==> (~q <=> p) ==> q"))
   let gen_prenex_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x268 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s269 = @equal.redepth_conv(x268)

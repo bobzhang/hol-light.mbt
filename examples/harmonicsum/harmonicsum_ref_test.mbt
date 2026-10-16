@@ -13101,7 +13101,7 @@ test "Examples/harmonicsum matches Examples/harmonicsum.ml" {
       #|Examples/harmonicsum quotations (54):
       #|  q:num
       #|  p:num
-      #|  !p. m <= e * q /\\ e * (q + 1) <= e * p /\\ e * p <= n\n         ==> m <= e * (q + 1) /\\ e * (q + 1) <= n
+      #|  forall p. m <= e * q /\\ e * (q + 1) <= e * p /\\ e * p <= n\n         ==> m <= e * (q + 1) /\\ e * (q + 1) <= n
       #|  n * 1 + k <= n <=> k = 0
       #|  2 EXP index 2 k * (p + 1)
       #|  2 EXP index 2 k * (q + 1)
@@ -13118,13 +13118,13 @@ test "Examples/harmonicsum matches Examples/harmonicsum.ml" {
       #|  k:num
       #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
       #|  \\x. x IN IMAGE (index 2) (m..n)
-      #|  !m n. 1 <= m /\\ m <= n\n         ==> ?k. k IN m..n /\\\n                 !l. l IN m..n /\\ ~(l = k) ==> index 2 l < index 2 k
+      #|  forall m n. 1 <= m /\\ m <= n\n         ==> ?k. k IN m..n /\\\n                 forall l. l IN m..n /\\ ~(l = k) ==> index 2 l < index 2 k
       #|  k:num
       #|  m..n
       #|  \\i. &i
       #|  ~(x = &0) /\\ ~(z = &0) /\\ x * y = z\n      ==> inv x = y * inv z
       #|  k:num
-      #|  !m n. 1 <= m\n           ==> sum(m..n) (\\k. inv(&k)) =\n               (sum(m..n) (\\k. product ((m..n) DELETE k) (\\i. &i))) /\n               product(m..n) (\\i. &i)
+      #|  forall m n. 1 <= m\n           ==> sum(m..n) (\\k. inv(&k)) =\n               (sum(m..n) (\\k. product ((m..n) DELETE k) (\\i. &i))) /\n               product(m..n) (\\i. &i)
       #|  l:num
       #|  index 2
       #|  k:num
@@ -13139,7 +13139,7 @@ test "Examples/harmonicsum matches Examples/harmonicsum.ml" {
       #|  \\i:num. i
       #|  l:num
       #|  2 EXP (i + 1)
-      #|  !p. p divides r /\\ p divides n /\\ ~(p divides m)\n       ==> ~(r divides (m + n))
+      #|  forall p. p divides r /\\ p divides n /\\ ~(p divides m)\n       ==> ~(r divides (m + n))
       #|  i = index 2 (nproduct ((m..n) DELETE k) (\\j. j))
       #|  k:num
       #|  m..n
@@ -13149,7 +13149,7 @@ test "Examples/harmonicsum matches Examples/harmonicsum.ml" {
       #|  m:num
       #|  inv x = &1 / x
       #|  n:num = m
-      #|  !m n. 1 <= m /\\ 1 < n /\\ m <= n ==> ~(integer (sum(m..n) (\\k. inv(&k))))
+      #|  forall m n. 1 <= m /\\ 1 < n /\\ m <= n ==> ~(integer (sum(m..n) (\\k. inv(&k))))
       #|  n:num
       #|  n:num
       #|  m:num

@@ -6469,9 +6469,9 @@ test "Complex/complex_grobner matches Complex/complex_grobner.ml" {
       #|  (*):complex->complex->complex
       #|  (x = y) ==> (x + Cx(--(&1)) * (y + Cx(&1)) = Cx(&0)) ==> F
       #|  (x = y) <=> (x - y = Cx(&0))
-      #|  !x. ~(x = Cx(&0)) <=> ?z. z * x + Cx(&1) = Cx(&0)
-      #|  !x y u v. ~(x = y) \\/ ~(u = v) <=>\n                ?w z. w * (x - y) + z * (u - v) + Cx(&1) = Cx(&0)
-      #|  !x y. ~(x = y) <=> ?z. z * (x - y) + Cx(&1) = Cx(&0)
+      #|  forall x. ~(x = Cx(&0)) <=> ?z. z * x + Cx(&1) = Cx(&0)
+      #|  forall x y u v. ~(x = y) \\/ ~(u = v) <=>\n                ?w z. w * (x - y) + z * (u - v) + Cx(&1) = Cx(&0)
+      #|  forall x y. ~(x = y) <=> ?z. z * (x - y) + Cx(&1) = Cx(&0)
       #|  (p ==> F) ==> (~q <=> p) ==> q
       #|  Cx(&0)
       #|types = complex/0 metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

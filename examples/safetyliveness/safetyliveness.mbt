@@ -4,7 +4,7 @@
 ///|
 /// safety
 fn step_1() -> Unit raise {
-  safety_c.set(@pair.new_definition(@parser.parse_term("safety (p:(num->S)->bool) <=>\n        !s. ~(p s) ==> ?n. !s'. (!m. m <= n ==> s(m) = s'(m)) ==> ~(p s')")))
+  safety_c.set(@pair.new_definition(@parser.parse_term("safety (p:(num->S)->bool) <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m <= n ==> s(m) = s'(m)) ==> ~(p s')")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn safety() -> @kernel.Thm {
 ///|
 /// liveness
 fn step_2() -> Unit raise {
-  liveness_c.set(@pair.new_definition(@parser.parse_term("liveness (p:(num->S)->bool) <=>\n        !s n. ?s'. (!m. m <= n ==> s(m) = s'(m)) /\\ p s'")))
+  liveness_c.set(@pair.new_definition(@parser.parse_term("liveness (p:(num->S)->bool) <=>\n        forall s n. ?s'. (forall m. m <= n ==> s(m) = s'(m)) /\\ p s'")))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn liveness() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("m < n ==> m < SUC n"))]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([safety(), @equal.gsym(@arith.lt_suc_le())]))), t1)
-  safety_v1_c.set(@tactics.prove(@parser.parse_term("!p:(num->S)->bool.\n        safety p <=>\n        !s. ~(p s) ==> ?n. !s'. (!m. m < n ==> s(m) = s'(m)) ==> ~(p s')"), t2))
+  safety_v1_c.set(@tactics.prove(@parser.parse_term("forall p:(num->S)->bool.\n        safety p <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m < n ==> s(m) = s'(m)) ==> ~(p s')"), t2))
 }
 
 ///|
@@ -53,7 +53,7 @@ pub fn safety_v1() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("m < n ==> m < SUC n"))]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([liveness(), @equal.gsym(@arith.lt_suc_le())]))), t3)
-  liveness_v1_c.set(@tactics.prove(@parser.parse_term("!p:(num->S)->bool.\n        liveness p <=>\n        !s n. ?s'. (!m. m < n ==> s(m) = s'(m)) /\\ p s'"), t4))
+  liveness_v1_c.set(@tactics.prove(@parser.parse_term("forall p:(num->S)->bool.\n        liveness p <=>\n        forall s n. ?s'. (forall m. m < n ==> s(m) = s'(m)) /\\ p s'"), t4))
 }
 
 ///|
@@ -84,9 +84,9 @@ fn step_5() -> Unit raise {
       s7(x8)
     }
   }, @list.List([@parser.parse_term("\\s:num->S. P s \\/ Q s"), t9]))
-  let t5 = @simp.abbrev_tac(@parser.parse_term("Q = \\s:num->S. !i. ?b. (!j. j <= i ==> b j = s j) /\\ P b"))
+  let t5 = @simp.abbrev_tac(@parser.parse_term("Q = \\s:num->S. forall i. ?b. (forall j. j <= i ==> b j = s j) /\\ P b"))
   let t20 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), t10), t11), @tactics.conj_tac), t14), t15), @tactics.conj_tac), t19)
-  safety_liveness_decomposition_c.set(@tactics.prove(@parser.parse_term("!P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (!x. S x /\\ L x <=> P x)"), t20))
+  safety_liveness_decomposition_c.set(@tactics.prove(@parser.parse_term("forall P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (forall x. S x /\\ L x <=> P x)"), t20))
 }
 
 ///|

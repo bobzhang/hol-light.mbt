@@ -429,7 +429,7 @@ fn step_28() -> Unit raise {
   let t62 = @simp.rewrite_tac(@list.List([edwards448_group_v1(), @edwards.edwards_0(), @ringtheory.integer_mod_ring_clauses()]))
   let t61 = @simp.rewrite_tac(@list.List([@grouptheory.group_element_order_eq_1(), @grouptheory.group_id_v1()]))
   let t60 = @tactics.exists_tac(@parser.parse_term("group_id edwards448_group"))
-  let t59 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("!a'. a' IN G /\\ (x IN G ==> (P x <=> x = a')) /\\ a' = a\n         ==> (x IN G /\\ P x <=> x = a)")))
+  let t59 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall a'. a' IN G /\\ (x IN G ==> (P x <=> x = a')) /\\ a' = a\n         ==> (x IN G /\\ P x <=> x = a)")))
   let t57 = @parser.parse_term("y:int")
   let t58 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:int"), t57]))
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @pair.forall_pair_thm(), @sets.in_elim_thm(), @sets.in_sing()])), t58), t59), t60), t61), t62), t63), t64)

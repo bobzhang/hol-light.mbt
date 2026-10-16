@@ -19,7 +19,7 @@ pub fn reverse_table() -> @kernel.Thm {
 ///|
 /// TABLE
 fn step_2() -> Unit raise {
-  table_c.set(@pair.new_definition(@parser.parse_term("!(f:num->A) k. TABLE f k = REVERSE (REVERSE_TABLE f k)")))
+  table_c.set(@pair.new_definition(@parser.parse_term("forall(f:num->A) k. TABLE f k = REVERSE (REVERSE_TABLE f k)")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn l_seq() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t1 = @simp.asm_rewrite_tac(@list.List([reverse_table(), @lists.length()]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1)
-  length_reverse_table_c.set(@tactics.prove(@parser.parse_term("!(f:num->A) n. LENGTH (REVERSE_TABLE f n) = n"), t2))
+  length_reverse_table_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A) n. LENGTH (REVERSE_TABLE f n) = n"), t2))
 }
 
 ///|
@@ -70,7 +70,7 @@ fn step_5() -> Unit raise {
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3 = @simp.rewrite_tac(@list.List([@lists.reverse()]))
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t3), t4), t5), @int.arith_tac)
-  length_reverse_c.set(@tactics.prove(@parser.parse_term("!(l:(A)list). LENGTH (REVERSE l) = LENGTH l"), t6))
+  length_reverse_c.set(@tactics.prove(@parser.parse_term("forall(l:(A)list). LENGTH (REVERSE l) = LENGTH l"), t6))
 }
 
 ///|
@@ -86,7 +86,7 @@ pub fn length_reverse() -> @kernel.Thm {
 /// LENGTH_TABLE
 fn step_6() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([table(), length_reverse(), length_reverse_table()]))
-  length_table_c.set(@tactics.prove(@parser.parse_term("!(f:num->A) n. LENGTH (TABLE f n) = n"), t7))
+  length_table_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A) n. LENGTH (TABLE f n) = n"), t7))
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_7() -> Unit raise {
   let t8 = @parser.parse_term("n:num")
   let t9 = @tactics.spec_tac(@parser.parse_term("n:num"), t8)
   let t26 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), @nums.induct_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t10), t11), @tactics.disch_tac), @class.cond_cases_tac), t13), t16), t24), t25)
-  el_table_c.set(@tactics.prove(@parser.parse_term("!(f:num->A) n i. i < n ==> EL i (TABLE f n) = f i"), t26))
+  el_table_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A) n i. i < n ==> EL i (TABLE f n) = f i"), t26))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn el_table() -> @kernel.Thm {
 /// TABLE_0
 fn step_8() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([table(), reverse_table(), @lists.reverse()]))
-  table_0_c.set(@tactics.prove(@parser.parse_term("!(f:num->A). TABLE f 0 = []"), t27))
+  table_0_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A). TABLE f 0 = []"), t27))
 }
 
 ///|
@@ -158,7 +158,7 @@ pub fn table_0() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([table(), reverse_table(), @lists.reverse()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t28)
-  table_suc_c.set(@tactics.prove(@parser.parse_term("!(f:num->A) n. TABLE f (SUC n) = APPEND (TABLE f n) [f n]"), t29))
+  table_suc_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A) n. TABLE f (SUC n) = APPEND (TABLE f n) [f n]"), t29))
 }
 
 ///|
@@ -229,7 +229,7 @@ fn step_10() -> Unit raise {
   })
   let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), @tactics.strip_tac), t30), t34), t38), t40), t42), @lists.list_induct_tac), @lists.list_induct_tac), t43), t46), t47), t48), t55), t56), @tactics.ants_tac), t65), @tactics.disch_tac), t72), t73)
-  list_el_eq_c.set(@tactics.prove(@parser.parse_term("!ul vl:(A)list. ul = vl <=> \n               (LENGTH ul = LENGTH vl /\\ (!j. j < LENGTH ul ==> EL j ul = EL j vl))"), t74))
+  list_el_eq_c.set(@tactics.prove(@parser.parse_term("forall ul vl:(A)list. ul = vl <=> \n               (LENGTH ul = LENGTH vl /\\ (forall j. j < LENGTH ul ==> EL j ul = EL j vl))"), t74))
 }
 
 ///|
@@ -264,7 +264,7 @@ fn step_12() -> Unit raise {
   let t77 = @tactics.match_mp_tac(el_table())
   let t76 = @tactics.repeat_tac(@tactics.strip_tac)
   let t79 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([l_seq()])), t76), t77), t78)
-  el_l_seq_c.set(@tactics.prove(@parser.parse_term("!i m n. i < (m + 1) - n ==> EL i (l_seq n m) = n + i"), t79))
+  el_l_seq_c.set(@tactics.prove(@parser.parse_term("forall i m n. i < (m + 1) - n ==> EL i (l_seq n m) = n + i"), t79))
 }
 
 ///|
@@ -281,7 +281,7 @@ pub fn el_l_seq() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t80 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.length_eq_nil()), length_l_seq()]))
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t80), @int.arith_tac)
-  l_seq_nil_c.set(@tactics.prove(@parser.parse_term("!n m. l_seq n m = [] <=> (m < n)"), t81))
+  l_seq_nil_c.set(@tactics.prove(@parser.parse_term("forall n m. l_seq n m = [] <=> (m < n)"), t81))
 }
 
 ///|
@@ -298,7 +298,7 @@ pub fn l_seq_nil() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t82 = @simp.rewrite_tac(@list.List([@lists.append(), @arith.add_0()]))
   let t83 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([l_seq(), @int.arith_rule(@parser.parse_term("(n + 1) - n = 1")), @arith.one(), table(), reverse_table(), @lists.reverse()]))), t82)
-  l_seq_nn_c.set(@tactics.prove(@parser.parse_term("!n. l_seq n n = [n]"), t83))
+  l_seq_nn_c.set(@tactics.prove(@parser.parse_term("forall n. l_seq n n = [n]"), t83))
 }
 
 ///|
@@ -326,7 +326,7 @@ fn step_15() -> Unit raise {
   let t94 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([el_l_seq()])), t85), @int.arith_tac), t93])
   let t84 = @simp.rewrite_tac(@list.List([list_el_eq(), length_l_seq(), @lists.length()]))
   let t95 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t84), @tactics.conj_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), @nums.induct_tac), t94)
-  l_seq_cons_c.set(@tactics.prove(@parser.parse_term("!n m. n <= m ==> l_seq n m = CONS n (l_seq (n + 1) m)"), t95))
+  l_seq_cons_c.set(@tactics.prove(@parser.parse_term("forall n m. n <= m ==> l_seq n m = CONS n (l_seq (n + 1) m)"), t95))
 }
 
 ///|
@@ -352,7 +352,7 @@ fn step_16() -> Unit raise {
   let t97 = @tactics.repeat_tac(@tactics.strip_tac)
   let t96 = @simp.rewrite_tac(@list.List([@lists.butlast(), @lists.length(), @calc_num.arith()]))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t96), t97), @class.cond_cases_tac), t98), t102), t103), @int.arith_tac)
-  length_butlast_c.set(@tactics.prove(@parser.parse_term("!l. LENGTH (BUTLAST l) = LENGTH l - 1"), t104))
+  length_butlast_c.set(@tactics.prove(@parser.parse_term("forall l. LENGTH (BUTLAST l) = LENGTH l - 1"), t104))
 }
 
 ///|
@@ -384,7 +384,7 @@ fn step_17() -> Unit raise {
   let t106 = @tactics.repeat_tac(@tactics.strip_tac)
   let t105 = @simp.rewrite_tac(@list.List([@lists.butlast(), @lists.length()]))
   let t119 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t105), t106), @class.cond_cases_tac), t108), t109), @class.cond_cases_tac), t110), t117), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t118)
-  el_butlast_c.set(@tactics.prove(@parser.parse_term("!(l:(A)list) i. i < LENGTH l - 1 ==> EL i (BUTLAST l) = EL i l"), t119))
+  el_butlast_c.set(@tactics.prove(@parser.parse_term("forall(l:(A)list) i. i < LENGTH l - 1 ==> EL i (BUTLAST l) = EL i l"), t119))
 }
 
 ///|

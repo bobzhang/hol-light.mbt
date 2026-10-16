@@ -19,7 +19,7 @@ fn step_2() -> Unit raise {
 ///|
 /// KNASTER_TARSKI
 fn step_3() -> Unit raise {
-  knaster_tarski_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let (<=) be A->A->bool;\n  thus !f. (!x y. x <= y /\\ y <= x ==> (x = y)) /\\\n      (!x y z. x <= y /\\ y <= z ==> x <= z) /\\\n      (!x y. x <= y ==> f x <= f y) /\\\n      (!X. ?s. (!x. x IN X ==> s <= x) /\\\n                 (!s'. (!x. x IN X ==> s' <= x) ==> s' <= s))\n      ==> ?x. f x = x\n  proof\n    let f be A->A;\n    exec DISCH_THEN (LABEL_TAC \"L\");\n    !x y. x <= y /\\ y <= x ==> (x = y) [antisymmetry] by L;\n    !x y z. x <= y /\\ y <= z ==> x <= z [transitivity] by L;\n    !x y. x <= y ==> f x <= f y [monotonicity] by L;\n    !X. ?s:A. (!x. x IN X ==> s <= x) /\\\n              (!s'. (!x. x IN X ==> s' <= x) ==> s' <= s) [least_upper_bound]\n      by L;\n    set Y = {b | f b <= b} [Y_def];\n    !b. b IN Y <=> f b <= b [Y_thm] by ALL_TAC,Y_def,IN_ELIM_THM,BETA_THM;\n    consider a such that\n      (!x. x IN Y ==> a <= x) /\\\n      (!a'. (!x. x IN Y ==> a' <= x) ==> a' <= a) [lub] by least_upper_bound;\n    take a;\n    !b. b IN Y ==> f a <= b\n    proof\n      let b be A;\n      assume b IN Y [b_in_Y];\n      f b <= b [L0] by -,Y_thm;\n      a <= b by b_in_Y,lub;\n      f a <= f b by -,monotonicity;\n      thus f a <= b by -,L0,transitivity;\n    end;\n    f(a) <= a [Part1] by -,lub;\n    f(f(a)) <= f(a) by -,monotonicity;\n    f(a) IN Y by -,Y_thm;\n    a <= f(a) by -,lub;\n  qed by -,Part1,antisymmetry")))
+  knaster_tarski_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let (<=) be A->A->bool;\n  thus forall f. (forall x y. x <= y /\\ y <= x ==> (x = y)) /\\\n      (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n      (forall x y. x <= y ==> f x <= f y) /\\\n      (forall X. ?s. (forall x. x IN X ==> s <= x) /\\\n                 (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s))\n      ==> ?x. f x = x\n  proof\n    let f be A->A;\n    exec DISCH_THEN (LABEL_TAC \"L\");\n    forall x y. x <= y /\\ y <= x ==> (x = y) [antisymmetry] by L;\n    forall x y z. x <= y /\\ y <= z ==> x <= z [transitivity] by L;\n    forall x y. x <= y ==> f x <= f y [monotonicity] by L;\n    forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n              (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s) [least_upper_bound]\n      by L;\n    set Y = {b | f b <= b} [Y_def];\n    forall b. b IN Y <=> f b <= b [Y_thm] by ALL_TAC,Y_def,IN_ELIM_THM,BETA_THM;\n    consider a such that\n      (forall x. x IN Y ==> a <= x) /\\\n      (forall a'. (forall x. x IN Y ==> a' <= x) ==> a' <= a) [lub] by least_upper_bound;\n    take a;\n    forall b. b IN Y ==> f a <= b\n    proof\n      let b be A;\n      assume b IN Y [b_in_Y];\n      f b <= b [L0] by -,Y_thm;\n      a <= b by b_in_Y,lub;\n      f a <= f b by -,monotonicity;\n      thus f a <= b by -,L0,transitivity;\n    end;\n    f(a) <= a [Part1] by -,lub;\n    f(f(a)) <= f(a) by -,monotonicity;\n    f(a) IN Y by -,Y_thm;\n    a <= f(a) by -,lub;\n  qed by -,Part1,antisymmetry")))
 }
 
 ///|
@@ -121,7 +121,7 @@ fn step_10() -> Unit raise {
 ///|
 /// projective
 fn step_11() -> Unit raise {
-  projective_c.set(@pair.new_definition(@parser.parse_term("projective((ON):Point->Line->bool) <=>\n        (!p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l) /\\\n        (!l l'. ?p. p ON l /\\ p ON l') /\\\n        (?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)) /\\\n        (!l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                        p ON l /\\ p' ON l /\\ p'' ON l)")))
+  projective_c.set(@pair.new_definition(@parser.parse_term("projective((ON):Point->Line->bool) <=>\n        (forall p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l) /\\\n        (forall l l'. ?p. p ON l /\\ p ON l') /\\\n        (?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)) /\\\n        (forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                        p ON l /\\ p' ON l /\\ p'' ON l)")))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_12() -> Unit raise {
 ///|
 /// LEMMA_1
 fn step_13() -> Unit raise {
-  lemma_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !(ON):Point->Line->bool. projective(ON) ==> !p. ?l. p ON l\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  !p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [3] by 0,projective;\n  let p be Point;\n  consider q q' such that ~(q = q':Point);\n  ~(p = q) \\/ ~(p = q');\n  consider l such that p ON l by 1;\n  take l;\nqed")))
+  lemma_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall(ON):Point->Line->bool. projective(ON) ==> forall p. ?l. p ON l\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  forall p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [3] by 0,projective;\n  let p be Point;\n  consider q q' such that ~(q = q':Point);\n  ~(p = q) \\/ ~(p = q');\n  consider l such that p ON l by 1;\n  take l;\nqed")))
 }
 
 ///|
@@ -176,7 +176,7 @@ fn step_14() -> Unit raise {
 ///|
 /// LEMMA_2
 fn step_15() -> Unit raise {
-  lemma_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !(ON):Point->Line->bool. projective(ON)\n   ==> !p1 p2 q l l1 l2.\n     p1 ON l /\\ p2 ON l /\\ p1 ON l1 /\\ p2 ON l2 /\\ q ON l2 /\\\n     ~(q ON l) /\\ ~(p1 = p2) ==> ~(l1 = l2)\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  !p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n// here qed already works\n  let p1 p2 q be Point;\n  let l l1 l2 be Line;\n  assume p1 ON l [5];\n  assume p2 ON l [6];\n  assume p1 ON l1 [7];\n  assume p2 ON l2 [9];\n  assume q ON l2 [10];\n  assume ~(q ON l) [11];\n  assume ~(p1 = p2) [12];\n  assume l1 = l2 [13];\n  p1 ON l2 by 7;\n  l = l2 by 1,5,6,9,12;\n  thus F by 10,11;\nend")))
+  lemma_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall(ON):Point->Line->bool. projective(ON)\n   ==> forall p1 p2 q l l1 l2.\n     p1 ON l /\\ p2 ON l /\\ p1 ON l1 /\\ p2 ON l2 /\\ q ON l2 /\\\n     ~(q ON l) /\\ ~(p1 = p2) ==> ~(l1 = l2)\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  forall p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n// here qed already works\n  let p1 p2 q be Point;\n  let l l1 l2 be Line;\n  assume p1 ON l [5];\n  assume p2 ON l [6];\n  assume p1 ON l1 [7];\n  assume p2 ON l2 [9];\n  assume q ON l2 [10];\n  assume ~(q ON l) [11];\n  assume ~(p1 = p2) [12];\n  assume l1 = l2 [13];\n  p1 ON l2 by 7;\n  l = l2 by 1,5,6,9,12;\n  thus F by 10,11;\nend")))
 }
 
 ///|
@@ -191,7 +191,7 @@ pub fn lemma_2() -> @kernel.Thm {
 ///|
 /// PROJECTIVE_DUALITY
 fn step_16() -> Unit raise {
-  projective_duality_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !(ON):Point->Line->bool. projective(ON) ==> projective (\\l p. p ON l)\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  !p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n  !l l'. ?p. p ON l /\\ p ON l' [2] by 0,projective;\n  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [3] by 0,projective;\n  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                 p ON l /\\ p' ON l /\\ p'' ON l [4] by 0,projective;\n// dual of axiom 1\n  !l1 l2. ~(l1 = l2) ==> ?!p. p ON l1 /\\ p ON l2 [5]\n  proof\n    let l1 l2 be Line;\n    assume ~(l1 = l2) [6];\n    consider p such that p ON l1 /\\ p ON l2 [7] by 2;\n    !p'. p' ON l1 /\\ p' ON l2 ==> (p' = p)\n    proof\n      let p' be Point;\n      assume p' ON l1 /\\ p' ON l2 [8];\n      assume ~(p' = p);\n      l1 = l2 by 1,7,8;\n      thus F by 6;\n    end;\n  qed by 7;\n// dual of axiom 2\n  !p1 p2. ?l. p1 ON l /\\ p2 ON l [9]\n  proof\n    let p1 p2 be Point;\n    cases;\n    suppose p1 = p2;\n    qed by 0,LEMMA_1;\n    suppose ~(p1 = p2);\n    qed by 1;\n  end;\n// dual of axiom 3\n  ?l1 l2 l3. ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) /\\\n             ~(?p. p ON l1 /\\ p ON l2 /\\ p ON l3) [10]\n  proof\n    consider p1 p2 p3 such that\n      ~(p1 = p2) /\\ ~(p2 = p3) /\\ ~(p1 = p3) /\\\n      ~(?l. p1 ON l /\\ p2 ON l /\\ p3 ON l) [11] by 3;\n    ~(p1 = p3) by 11;\n    ?!l1. p1 ON l1 /\\ p3 ON l1 by 1;  // ADDED STEP\n    consider l1 such that p1 ON l1 /\\ p3 ON l1 /\\\n      !l'. p1 ON l' /\\ p3 ON l' ==> (l1 = l') [12];\n    ~(p2 = p3) by 11;\n    ?!l2. p2 ON l2 /\\ p3 ON l2 by 1;  // ADDED STEP\n    consider l2 such that p2 ON l2 /\\ p3 ON l2 /\\\n      !l'. p2 ON l' /\\ p3 ON l' ==> (l2 = l') [13];\n    ~(p1 = p2) by 11;\n    ?!l3. p1 ON l3 /\\ p2 ON l3 by 1;  // ADDED STEP\n    consider l3 such that p1 ON l3 /\\ p2 ON l3 /\\\n      !l'. p1 ON l' /\\ p2 ON l' ==> (l3 = l') [14];\n    take l1; take l2; take l3;\n    thus ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) [15] by 11,12,13,14;\n    assume ?q. q ON l1 /\\ q ON l2 /\\ q ON l3;\n    consider q such that q ON l1 /\\ q ON l2 /\\ q ON l3;\n    (p1 = q) /\\ (p2 = q) /\\ (p3 = q) by 5,12,13,14,15;\n    thus F by 11;\n  end;\n// dual of axiom 4\n  !p0. ?l0 L1 L2. ~(l0 = L1) /\\ ~(L1 = L2) /\\ ~(l0 = L2) /\\\n                  p0 ON l0 /\\ p0 ON L1 /\\ p0 ON L2\n  proof\n    let p0 be Point;\n    consider l0 such that p0 ON l0 [16] by 0,LEMMA_1;\n    consider p such that ~(p = p0) /\\ p ON l0 [17] by 4;\n    consider q such that ~(q ON l0) [18] by 3;\n    consider l1 such that p ON l1 /\\ q ON l1 [19] by 1,16;\n    consider r such that r ON l1 /\\ ~(r = p) /\\ ~(r = q) [20]\n    proof\n      consider r1 r2 r3 such that\n        ~(r1 = r2) /\\ ~(r2 = r3) /\\ ~(r1 = r3) /\\\n       r1 ON l1 /\\ r2 ON l1 /\\ r3 ON l1 [21] by 4;\n      ~(r1 = p) /\\ ~(r1 = q) \\/\n      ~(r2 = p) /\\ ~(r2 = q) \\/\n      ~(r3 = p) /\\ ~(r3 = q);\n    qed by 21;\n    ~(p0 ON l1) [22]\n    proof\n      assume p0 ON l1;\n      l1 = l0 by 1,16,17,19;\n    qed by 18,19;\n    ~(p0 = r) by 20;\n    consider L1 such that r ON L1 /\\ p0 ON L1 [23] by 1;\n    consider L2 such that q ON L2 /\\ p0 ON L2 [24] by 1,16,18;\n    take l0; take L1; take L2;\n    thus ~(l0 = L1) by 0,17,19,20,22,23,LEMMA_2;\n    thus ~(L1 = L2) by 0,19,20,22,23,24,LEMMA_2;\n    thus ~(l0 = L2) by 18,24;\n    thus p0 ON l0 /\\ p0 ON L2 /\\ p0 ON L1 by 16,24,23;\n  end;\nqed by REWRITE_TAC,5,9,10,projective")))
+  projective_duality_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall(ON):Point->Line->bool. projective(ON) ==> projective (\\l p. p ON l)\nproof\n  let (ON) be Point->Line->bool;\n  assume projective(ON) [0];\n  forall p p'. ~(p = p') ==> ?!l. p ON l /\\ p' ON l [1] by 0,projective;\n  forall l l'. ?p. p ON l /\\ p ON l' [2] by 0,projective;\n  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [3] by 0,projective;\n  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                 p ON l /\\ p' ON l /\\ p'' ON l [4] by 0,projective;\n// dual of axiom 1\n  forall l1 l2. ~(l1 = l2) ==> ?!p. p ON l1 /\\ p ON l2 [5]\n  proof\n    let l1 l2 be Line;\n    assume ~(l1 = l2) [6];\n    consider p such that p ON l1 /\\ p ON l2 [7] by 2;\n    forall p'. p' ON l1 /\\ p' ON l2 ==> (p' = p)\n    proof\n      let p' be Point;\n      assume p' ON l1 /\\ p' ON l2 [8];\n      assume ~(p' = p);\n      l1 = l2 by 1,7,8;\n      thus F by 6;\n    end;\n  qed by 7;\n// dual of axiom 2\n  forall p1 p2. ?l. p1 ON l /\\ p2 ON l [9]\n  proof\n    let p1 p2 be Point;\n    cases;\n    suppose p1 = p2;\n    qed by 0,LEMMA_1;\n    suppose ~(p1 = p2);\n    qed by 1;\n  end;\n// dual of axiom 3\n  ?l1 l2 l3. ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) /\\\n             ~(?p. p ON l1 /\\ p ON l2 /\\ p ON l3) [10]\n  proof\n    consider p1 p2 p3 such that\n      ~(p1 = p2) /\\ ~(p2 = p3) /\\ ~(p1 = p3) /\\\n      ~(?l. p1 ON l /\\ p2 ON l /\\ p3 ON l) [11] by 3;\n    ~(p1 = p3) by 11;\n    ?!l1. p1 ON l1 /\\ p3 ON l1 by 1;  // ADDED STEP\n    consider l1 such that p1 ON l1 /\\ p3 ON l1 /\\\n      forall l'. p1 ON l' /\\ p3 ON l' ==> (l1 = l') [12];\n    ~(p2 = p3) by 11;\n    ?!l2. p2 ON l2 /\\ p3 ON l2 by 1;  // ADDED STEP\n    consider l2 such that p2 ON l2 /\\ p3 ON l2 /\\\n      forall l'. p2 ON l' /\\ p3 ON l' ==> (l2 = l') [13];\n    ~(p1 = p2) by 11;\n    ?!l3. p1 ON l3 /\\ p2 ON l3 by 1;  // ADDED STEP\n    consider l3 such that p1 ON l3 /\\ p2 ON l3 /\\\n      forall l'. p1 ON l' /\\ p2 ON l' ==> (l3 = l') [14];\n    take l1; take l2; take l3;\n    thus ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) [15] by 11,12,13,14;\n    assume ?q. q ON l1 /\\ q ON l2 /\\ q ON l3;\n    consider q such that q ON l1 /\\ q ON l2 /\\ q ON l3;\n    (p1 = q) /\\ (p2 = q) /\\ (p3 = q) by 5,12,13,14,15;\n    thus F by 11;\n  end;\n// dual of axiom 4\n  forall p0. ?l0 L1 L2. ~(l0 = L1) /\\ ~(L1 = L2) /\\ ~(l0 = L2) /\\\n                  p0 ON l0 /\\ p0 ON L1 /\\ p0 ON L2\n  proof\n    let p0 be Point;\n    consider l0 such that p0 ON l0 [16] by 0,LEMMA_1;\n    consider p such that ~(p = p0) /\\ p ON l0 [17] by 4;\n    consider q such that ~(q ON l0) [18] by 3;\n    consider l1 such that p ON l1 /\\ q ON l1 [19] by 1,16;\n    consider r such that r ON l1 /\\ ~(r = p) /\\ ~(r = q) [20]\n    proof\n      consider r1 r2 r3 such that\n        ~(r1 = r2) /\\ ~(r2 = r3) /\\ ~(r1 = r3) /\\\n       r1 ON l1 /\\ r2 ON l1 /\\ r3 ON l1 [21] by 4;\n      ~(r1 = p) /\\ ~(r1 = q) \\/\n      ~(r2 = p) /\\ ~(r2 = q) \\/\n      ~(r3 = p) /\\ ~(r3 = q);\n    qed by 21;\n    ~(p0 ON l1) [22]\n    proof\n      assume p0 ON l1;\n      l1 = l0 by 1,16,17,19;\n    qed by 18,19;\n    ~(p0 = r) by 20;\n    consider L1 such that r ON L1 /\\ p0 ON L1 [23] by 1;\n    consider L2 such that q ON L2 /\\ p0 ON L2 [24] by 1,16,18;\n    take l0; take L1; take L2;\n    thus ~(l0 = L1) by 0,17,19,20,22,23,LEMMA_2;\n    thus ~(L1 = L2) by 0,19,20,22,23,24,LEMMA_2;\n    thus ~(l0 = L2) by 18,24;\n    thus p0 ON l0 /\\ p0 ON L2 /\\ p0 ON L1 by 16,24,23;\n  end;\nqed by REWRITE_TAC,5,9,10,projective")))
 }
 
 ///|
@@ -436,7 +436,7 @@ pub fn on_clauses() -> @kernel.Thm {
 ///|
 /// FORALL_POINT
 fn step_29() -> Unit raise {
-  forall_point_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P. (!p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                    P Point_5 /\\ P Point_6 /\\ P Point_7\n    by Point_INDUCT")))
+  forall_point_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P. (forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                    P Point_5 /\\ P Point_6 /\\ P Point_7\n    by Point_INDUCT")))
 }
 
 ///|
@@ -467,7 +467,7 @@ fn step_30() -> Unit raise {
 ///|
 /// EXISTS_POINT
 fn step_31() -> Unit raise {
-  exists_point_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P. (?p. P p) <=> P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                    P Point_5 \\/ P Point_6 \\/ P Point_7\nproof\n  let P be fano_Point->bool;\n  ~(?p. P p) <=> ~(P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                   P Point_5 \\/ P Point_6 \\/ P Point_7)\n    by REWRITE_TAC,DE_MORGAN_THM,NOT_EXISTS_THM,FORALL_POINT;\nqed")))
+  exists_point_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P. (?p. P p) <=> P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                    P Point_5 \\/ P Point_6 \\/ P Point_7\nproof\n  let P be fano_Point->bool;\n  ~(?p. P p) <=> ~(P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                   P Point_5 \\/ P Point_6 \\/ P Point_7)\n    by REWRITE_TAC,DE_MORGAN_THM,NOT_EXISTS_THM,FORALL_POINT;\nqed")))
 }
 
 ///|
@@ -530,7 +530,7 @@ fn step_34() -> Unit raise {
 ///|
 /// FORALL_LINE
 fn step_35() -> Unit raise {
-  forall_line_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P. (!p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                    P Line_5 /\\ P Line_6 /\\ P Line_7\n    by Line_INDUCT")))
+  forall_line_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P. (forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                    P Line_5 /\\ P Line_6 /\\ P Line_7\n    by Line_INDUCT")))
 }
 
 ///|
@@ -561,7 +561,7 @@ fn step_36() -> Unit raise {
 ///|
 /// EXISTS_LINE
 fn step_37() -> Unit raise {
-  exists_line_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P. (?p. P p) <=> P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                    P Line_5 \\/ P Line_6 \\/ P Line_7\nproof\n  let P be fano_Line->bool;\n  ~(?p. P p) <=> ~(P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                   P Line_5 \\/ P Line_6 \\/ P Line_7)\n    by REWRITE_TAC,DE_MORGAN_THM,NOT_EXISTS_THM,FORALL_LINE;\nqed;")))
+  exists_line_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P. (?p. P p) <=> P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                    P Line_5 \\/ P Line_6 \\/ P Line_7\nproof\n  let P be fano_Line->bool;\n  ~(?p. P p) <=> ~(P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                   P Line_5 \\/ P Line_6 \\/ P Line_7)\n    by REWRITE_TAC,DE_MORGAN_THM,NOT_EXISTS_THM,FORALL_LINE;\nqed;")))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn fano_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// AXIOM_1
 fn step_40() -> Unit raise {
-  axiom_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                           !l'. p ON l' /\\ p' ON l' ==> (l' = l)\n    by TIMED_TAC 3 FANO_TAC")))
+  axiom_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                           forall l'. p ON l' /\\ p' ON l' ==> (l' = l)\n    by TIMED_TAC 3 FANO_TAC")))
 }
 
 ///|
@@ -649,7 +649,7 @@ fn step_41() -> Unit raise {
 ///|
 /// AXIOM_2
 fn step_42() -> Unit raise {
-  axiom_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !l l'. ?p. p ON l /\\ p ON l' by FANO_TAC")))
+  axiom_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall l l'. ?p. p ON l /\\ p ON l' by FANO_TAC")))
 }
 
 ///|
@@ -711,7 +711,7 @@ fn step_45() -> Unit raise {
 ///|
 /// AXIOM_4
 fn step_46() -> Unit raise {
-  axiom_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                 p ON l /\\ p' ON l /\\ p'' ON l\n    by TIMED_TAC 3 FANO_TAC")))
+  axiom_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                 p ON l /\\ p' ON l /\\ p'' ON l\n    by TIMED_TAC 3 FANO_TAC")))
 }
 
 ///|
@@ -726,7 +726,7 @@ pub fn axiom_4() -> @kernel.Thm {
 ///|
 /// AXIOM_1'
 fn step_47() -> Unit raise {
-  axiom_1_p_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p p' l l'. ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'\n              ==> (l' = l)\nproof\n  let p p' be fano_Point;\n  let l l' be fano_Line;\n  assume ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l' [1];\n  consider l1 such that p ON l1 /\\ p' ON l1 /\\\n                        !l'. p ON l' /\\ p' ON l' ==> (l' = l1) [2]\n    by 1,AXIOM_1;\n  l = l1 by 1,2;\n    .= l' by 1,2;\nqed")))
+  axiom_1_p_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p' l l'. ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'\n              ==> (l' = l)\nproof\n  let p p' be fano_Point;\n  let l l' be fano_Line;\n  assume ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l' [1];\n  consider l1 such that p ON l1 /\\ p' ON l1 /\\\n                        forall l'. p ON l' /\\ p' ON l' ==> (l' = l1) [2]\n    by 1,AXIOM_1;\n  l = l1 by 1,2;\n    .= l' by 1,2;\nqed")))
 }
 
 ///|
@@ -757,7 +757,7 @@ fn step_48() -> Unit raise {
 ///|
 /// LEMMA_1'
 fn step_49() -> Unit raise {
-  lemma_1_p_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !O. ?l. O ON l\nproof\n  consider p p' p'' such that\n    ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [1] by AXIOM_3;\n  let O be fano_Point;\n  ~(p = O) \\/ ~(p' = O) by 1;\n  consider P such that ~(P = O) [2];\n  consider l such that O ON l /\\ P ON l /\\\n    !l'. O ON l' /\\ P ON l' ==> (l' = l) [3] by 2,AXIOM_1;\n  thus ?l. O ON l by 3;\nend")))
+  lemma_1_p_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall O. ?l. O ON l\nproof\n  consider p p' p'' such that\n    ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p ON l /\\ p' ON l /\\ p'' ON l) [1] by AXIOM_3;\n  let O be fano_Point;\n  ~(p = O) \\/ ~(p' = O) by 1;\n  consider P such that ~(P = O) [2];\n  consider l such that O ON l /\\ P ON l /\\\n    forall l'. O ON l' /\\ P ON l' ==> (l' = l) [3] by 2,AXIOM_1;\n  thus ?l. O ON l by 3;\nend")))
 }
 
 ///|
@@ -788,7 +788,7 @@ fn step_50() -> Unit raise {
 ///|
 /// DUAL_1
 fn step_51() -> Unit raise {
-  dual_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !l l'. ~(l = l') ==> ?p. p ON l /\\ p ON l' /\\\n         !p'. p' ON l /\\ p' ON l' ==> (p' = p)\nproof\n  assume ~thesis;\n  consider l l' such that ~(l = l') /\\ !p. p ON l /\\ p ON l'\n                          ==> ?p'. p' ON l /\\ p' ON l' /\\ ~(p' = p) [1];\n  consider p such that p ON l /\\ p ON l' [2] by AXIOM_2;\n  consider p' such that p' ON l /\\ p' ON l' /\\ ~(p' = p) [3] by 1,2;\n  thus F by 1,2,AXIOM_1';\nend")))
+  dual_1_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall l l'. ~(l = l') ==> ?p. p ON l /\\ p ON l' /\\\n         forall p'. p' ON l /\\ p' ON l' ==> (p' = p)\nproof\n  assume ~thesis;\n  consider l l' such that ~(l = l') /\\ forall p. p ON l /\\ p ON l'\n                          ==> ?p'. p' ON l /\\ p' ON l' /\\ ~(p' = p) [1];\n  consider p such that p ON l /\\ p ON l' [2] by AXIOM_2;\n  consider p' such that p' ON l /\\ p' ON l' /\\ ~(p' = p) [3] by 1,2;\n  thus F by 1,2,AXIOM_1';\nend")))
 }
 
 ///|
@@ -835,7 +835,7 @@ fn step_53() -> Unit raise {
 ///|
 /// DUAL_2
 fn step_54() -> Unit raise {
-  dual_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p p'. ?l. p ON l /\\ p' ON l\nproof\n  let p p' be fano_Point;\n  ?l. p ON l [1] by LEMMA_1';\n  (p = p') \\/\n    ?l. p ON l /\\ p' ON l /\\\n        !l'. p ON l' /\\ p' ON l' ==> (l' = l) by AXIOM_1;\nqed by 1")))
+  dual_2_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p'. ?l. p ON l /\\ p' ON l\nproof\n  let p p' be fano_Point;\n  ?l. p ON l [1] by LEMMA_1';\n  (p = p') \\/\n    ?l. p ON l /\\ p' ON l /\\\n        forall l'. p ON l' /\\ p' ON l' ==> (l' = l) by AXIOM_1;\nqed by 1")))
 }
 
 ///|
@@ -866,7 +866,7 @@ fn step_55() -> Unit raise {
 ///|
 /// DUAL_3
 fn step_56() -> Unit raise {
-  dual_3_c.set(@miz3.thm(@miz3.parse_qproof(";\n  ?l1 l2 l3. ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) /\\\n             ~(?p. p ON l1 /\\ p ON l2 /\\ p ON l3)\nproof\n  consider p1 p2 p3 such that\n    ~(p1 = p2) /\\ ~(p2 = p3) /\\ ~(p1 = p3) /\\\n    ~(?l. p1 ON l /\\ p2 ON l /\\ p3 ON l) [1] by AXIOM_3;\n  consider l1 such that p1 ON l1 /\\ p3 ON l1 [2] by DUAL_2;\n  consider l2 such that p2 ON l2 /\\ p3 ON l2 [3] by DUAL_2;\n  consider l3 such that p1 ON l3 /\\ p2 ON l3 [4] by DUAL_2;\n  take l1; take l2; take l3;\n  thus ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) [5] by 1,2,3,4;\n  assume ~thesis;\n  consider q such that q ON l1 /\\ q ON l2 /\\ q ON l3 [6];\n  consider q' such that q' ON l1 /\\ q' ON l3 /\\\n    !p'. p' ON l1 /\\ p' ON l3 ==> (p' = q') [7] by 5,DUAL_1;\n  q = q' by 6,7;\n    .= p1 by 2,4,7;\n  thus F by 1,3,6;\nend")))
+  dual_3_c.set(@miz3.thm(@miz3.parse_qproof(";\n  ?l1 l2 l3. ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) /\\\n             ~(?p. p ON l1 /\\ p ON l2 /\\ p ON l3)\nproof\n  consider p1 p2 p3 such that\n    ~(p1 = p2) /\\ ~(p2 = p3) /\\ ~(p1 = p3) /\\\n    ~(?l. p1 ON l /\\ p2 ON l /\\ p3 ON l) [1] by AXIOM_3;\n  consider l1 such that p1 ON l1 /\\ p3 ON l1 [2] by DUAL_2;\n  consider l2 such that p2 ON l2 /\\ p3 ON l2 [3] by DUAL_2;\n  consider l3 such that p1 ON l3 /\\ p2 ON l3 [4] by DUAL_2;\n  take l1; take l2; take l3;\n  thus ~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3) [5] by 1,2,3,4;\n  assume ~thesis;\n  consider q such that q ON l1 /\\ q ON l2 /\\ q ON l3 [6];\n  consider q' such that q' ON l1 /\\ q' ON l3 /\\\n    forall p'. p' ON l1 /\\ p' ON l3 ==> (p' = q') [7] by 5,DUAL_1;\n  q = q' by 6,7;\n    .= p1 by 2,4,7;\n  thus F by 1,3,6;\nend")))
 }
 
 ///|
@@ -913,7 +913,7 @@ fn step_58() -> Unit raise {
 ///|
 /// DUAL_4
 fn step_59() -> Unit raise {
-  dual_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !O. ?OP OQ OR. ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n                 O ON OP /\\ O ON OQ /\\ O ON OR\nproof\n  let O be fano_Point;\n  consider OP such that O ON OP [1] by LEMMA_1';\n  consider p p' p'' such that\n    ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p ON OP /\\ p' ON OP /\\ p'' ON OP [2] by AXIOM_4;\n  ~(p = O) \\/ ~(p' = O) by 2;\n  consider P such that ~(P = O) /\\ P ON OP [3] by 2;\n  consider q q' q'' such that\n    ~(q = q') /\\ ~(q' = q'') /\\ ~(q = q'') /\\\n    ~(?l. q ON l /\\ q' ON l /\\ q'' ON l) [4] by AXIOM_3;\n  ~(q ON OP) \\/ ~(q' ON OP) \\/ ~(q'' ON OP) by 4;\n  consider Q such that ~(Q ON OP) [5];\n  consider l such that P ON l /\\ Q ON l [6] by DUAL_2;\n  consider r r' r'' such that\n  ~(r = r') /\\ ~(r' = r'') /\\ ~(r = r'') /\\\n  r ON l /\\ r' ON l /\\ r'' ON l [7] by AXIOM_4;\n  ((r = P) \\/ (r = Q) \\/ ~(r = P) /\\ ~(r = Q)) /\\\n  ((r' = P) \\/ (r' = Q) \\/ ~(r' = P) /\\ ~(r' = Q));\n  consider R such that R ON l /\\ ~(R = P) /\\ ~(R = Q) [8] by 7;\n  consider OQ such that O ON OQ /\\ Q ON OQ [9] by DUAL_2;\n  consider OR such that O ON OR /\\ R ON OR [10] by DUAL_2;\n  take OP; take OQ; take OR;\n  ~(O ON l) by 1,3,5,6,AXIOM_1';\n  thus ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n       O ON OP /\\ O ON OQ /\\ O ON OR by 1,3,5,6,8,9,10,AXIOM_1';\nend")))
+  dual_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall O. ?OP OQ OR. ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n                 O ON OP /\\ O ON OQ /\\ O ON OR\nproof\n  let O be fano_Point;\n  consider OP such that O ON OP [1] by LEMMA_1';\n  consider p p' p'' such that\n    ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p ON OP /\\ p' ON OP /\\ p'' ON OP [2] by AXIOM_4;\n  ~(p = O) \\/ ~(p' = O) by 2;\n  consider P such that ~(P = O) /\\ P ON OP [3] by 2;\n  consider q q' q'' such that\n    ~(q = q') /\\ ~(q' = q'') /\\ ~(q = q'') /\\\n    ~(?l. q ON l /\\ q' ON l /\\ q'' ON l) [4] by AXIOM_3;\n  ~(q ON OP) \\/ ~(q' ON OP) \\/ ~(q'' ON OP) by 4;\n  consider Q such that ~(Q ON OP) [5];\n  consider l such that P ON l /\\ Q ON l [6] by DUAL_2;\n  consider r r' r'' such that\n  ~(r = r') /\\ ~(r' = r'') /\\ ~(r = r'') /\\\n  r ON l /\\ r' ON l /\\ r'' ON l [7] by AXIOM_4;\n  ((r = P) \\/ (r = Q) \\/ ~(r = P) /\\ ~(r = Q)) /\\\n  ((r' = P) \\/ (r' = Q) \\/ ~(r' = P) /\\ ~(r' = Q));\n  consider R such that R ON l /\\ ~(R = P) /\\ ~(R = Q) [8] by 7;\n  consider OQ such that O ON OQ /\\ Q ON OQ [9] by DUAL_2;\n  consider OR such that O ON OR /\\ R ON OR [10] by DUAL_2;\n  take OP; take OQ; take OR;\n  ~(O ON l) by 1,3,5,6,AXIOM_1';\n  thus ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n       O ON OP /\\ O ON OQ /\\ O ON OR by 1,3,5,6,8,9,10,AXIOM_1';\nend")))
 }
 
 ///|
@@ -953,7 +953,7 @@ fn step_61() -> Unit raise {
 ///|
 /// NSQRT_2_4
 fn step_62() -> Unit raise {
-  nsqrt_2_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p q. p * p = 2 * q * q ==> q = 0\nproof\n  !p. (!m. m < p ==> (!q. m * m = 2 * q * q ==> q = 0))\n      ==> (!q. p * p = 2 * q * q ==> q = 0)\n  proof\n    let p be num;\n    assume !m. m < p ==> !q. m * m = 2 * q * q ==> q = 0 [A];\n    let q be num;\n    assume p * p = 2 * q * q [B];\n    EVEN(p * p) <=> EVEN(2 * q * q);\n    EVEN(p) by TIMED_TAC 2 o MESON_TAC,ARITH,EVEN_MULT;\n//  \"EVEN 2 by CONV_TAC o HOL_BY,ARITH;\" takes over a minute...\n    consider m such that p = 2 * m [C] by EVEN_EXISTS;\n    cases by ARITH_TAC;\n    suppose q < p;\n      q * q = 2 * m * m ==> m = 0 by A;\n    qed by NUM_RING,B,C;\n    suppose p <= q;\n      p * p <= q * q by LE_MULT2;\n      q * q = 0 by ARITH_TAC,B;\n    qed by NUM_RING;\n  end;\nqed by MATCH_MP_TAC,num_WF")))
+  nsqrt_2_4_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p q. p * p = 2 * q * q ==> q = 0\nproof\n  forall p. (forall m. m < p ==> (forall q. m * m = 2 * q * q ==> q = 0))\n      ==> (forall q. p * p = 2 * q * q ==> q = 0)\n  proof\n    let p be num;\n    assume forall m. m < p ==> forall q. m * m = 2 * q * q ==> q = 0 [A];\n    let q be num;\n    assume p * p = 2 * q * q [B];\n    EVEN(p * p) <=> EVEN(2 * q * q);\n    EVEN(p) by TIMED_TAC 2 o MESON_TAC,ARITH,EVEN_MULT;\n//  \"EVEN 2 by CONV_TAC o HOL_BY,ARITH;\" takes over a minute...\n    consider m such that p = 2 * m [C] by EVEN_EXISTS;\n    cases by ARITH_TAC;\n    suppose q < p;\n      q * q = 2 * m * m ==> m = 0 by A;\n    qed by NUM_RING,B,C;\n    suppose p <= q;\n      p * p <= q * q by LE_MULT2;\n      q * q = 0 by ARITH_TAC,B;\n    qed by NUM_RING;\n  end;\nqed by MATCH_MP_TAC,num_WF")))
 }
 
 ///|

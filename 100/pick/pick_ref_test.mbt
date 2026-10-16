@@ -83146,42 +83146,42 @@ test "100/pick matches 100/pick.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|100/pick quotations (1269):
-      #|  !s:real^2->bool. collinear s ==> negligible s
+      #|  forall s:real^2->bool. collinear s ==> negligible s
       #|  &1 - x - y
       #|  y:real
       #|  x:real
       #|  y:real^N
       #|  {c,a,b} = {a,b,c}
-      #|  !a b:real^N.\n        convex hull {vec 0,a,b} =\n        {x % a + y % b | &0 <= x /\\ &0 <= y /\\ x + y <= &1}
+      #|  forall a b:real^N.\n        convex hull {vec 0,a,b} =\n        {x % a + y % b | &0 <= x /\\ &0 <= y /\\ x + y <= &1}
       #|  x + y + z = &1 <=> &1 - x - y = z
       #|  a /\\ x = &1 /\\ b <=> x = &1 /\\ a /\\ b
       #|  {c,a,b} = {a,b,c}
-      #|  !a b:real^2.\n        ~(collinear {vec 0,a,b})\n        ==> interior(convex hull {vec 0,a,b}) =\n              {x % a + y % b | &0 < x /\\ &0 < y /\\ x + y < &1}
-      #|  (!a:real^2. measure(convex hull {a}) = &0) /\\\n   (!a b:real^2. measure(convex hull {a,b}) = &0)
-      #|  !a b:real^2. negligible(segment[a,b])
+      #|  forall a b:real^2.\n        ~(collinear {vec 0,a,b})\n        ==> interior(convex hull {vec 0,a,b}) =\n              {x % a + y % b | &0 < x /\\ &0 < y /\\ x + y < &1}
+      #|  (forall a:real^2. measure(convex hull {a}) = &0) /\\\n   (forall a b:real^2. measure(convex hull {a,b}) = &0)
+      #|  forall a b:real^2. negligible(segment[a,b])
       #|  x:real^2
       #|  x:real^2
       #|  x:real^2
       #|  d:real^2
       #|  {a:real^2,b,c}
       #|  x:real^2
-      #|  !a b c d:real^2.\n        d IN convex hull {a,b,c}\n        ==> (convex hull {a,b,c} =\n             convex hull {d,b,c} UNION\n             convex hull {d,a,c} UNION\n             convex hull {d,a,b})
+      #|  forall a b c d:real^2.\n        d IN convex hull {a,b,c}\n        ==> (convex hull {a,b,c} =\n             convex hull {d,b,c} UNION\n             convex hull {d,a,c} UNION\n             convex hull {d,a,b})
       #|  s SUBSET u /\\ t SUBSET u ==> (s INTER t) SUBSET u
       #|  d:real^2
       #|  {a:real^2,b,c}
-      #|  !f:(real^2->bool)->real a b c d.\n        (!s t. compact s /\\ compact t\n               ==> f(s UNION t) = f(s) + f(t) - f(s INTER t)) /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        ~affine_dependent {a,b,c} /\\ d IN convex hull {a,b,c}\n        ==> f(convex hull {a,b,c}) =\n            (f(convex hull {a,b,d}) +\n             f(convex hull {a,c,d}) +\n             f(convex hull {b,c,d})) -\n            (f(convex hull {a,d}) +\n             f(convex hull {b,d}) +\n             f(convex hull {c,d})) +\n            f(convex hull {d})
-      #|  integral_vector(x:real^N) <=>\n        !i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i)
-      #|  !n. integral_vector(vec n)
-      #|  !i. integral_vector(basis i:real^N)
-      #|  !x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x + y)
-      #|  !x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x - y)
+      #|  forall f:(real^2->bool)->real a b c d.\n        (forall s t. compact s /\\ compact t\n               ==> f(s UNION t) = f(s) + f(t) - f(s INTER t)) /\\\n        ~(a = b) /\\ ~(a = c) /\\ ~(b = c) /\\\n        ~affine_dependent {a,b,c} /\\ d IN convex hull {a,b,c}\n        ==> f(convex hull {a,b,c}) =\n            (f(convex hull {a,b,d}) +\n             f(convex hull {a,c,d}) +\n             f(convex hull {b,c,d})) -\n            (f(convex hull {a,d}) +\n             f(convex hull {b,d}) +\n             f(convex hull {c,d})) +\n            f(convex hull {d})
+      #|  integral_vector(x:real^N) <=>\n        forall i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i)
+      #|  forall n. integral_vector(vec n)
+      #|  forall i. integral_vector(basis i:real^N)
+      #|  forall x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x + y)
+      #|  forall x y:real^N.\n        integral_vector x /\\ integral_vector y ==> integral_vector(x - y)
       #|  (x + y) - x:real^N = y
-      #|  !x y:real^N.\n        integral_vector x ==> (integral_vector(x + y) <=> integral_vector y)
-      #|  {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N)\n                       ==> integer(x$i) /\\\n                           (a:real^N)$i <= x$i /\\ x$i <= (b:real^N)$i}
+      #|  forall x y:real^N.\n        integral_vector x ==> (integral_vector(x + y) <=> integral_vector y)
+      #|  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N)\n                       ==> integer(x$i) /\\\n                           (a:real^N)$i <= x$i /\\ x$i <= (b:real^N)$i}
       #|  b:real^N
       #|  a:real^N
-      #|  !s:real^N->bool. bounded s ==> FINITE {x | x IN s /\\ integral_vector x}
-      #|  !a b c:real^N. FINITE {x | x IN convex hull {a,b,c} /\\ integral_vector x}
+      #|  forall s:real^N->bool. bounded s ==> FINITE {x | x IN s /\\ integral_vector x}
+      #|  forall a b c:real^N. FINITE {x | x IN convex hull {a,b,c} /\\ integral_vector x}
       #|  i:num
       #|  x:real^N
       #|  i:num
@@ -83189,16 +83189,16 @@ test "100/pick matches 100/pick.ml" {
       #|  j:num
       #|  i:num
       #|  M = matrix(f:real^N->real^N)
-      #|  !f:real^N->real^N.\n        linear f\n        ==> ((!x. integral_vector x ==> integral_vector(f x)) <=>\n             (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N)\n                    ==> integer(matrix f$i$j)))
+      #|  forall f:real^N->real^N.\n        linear f\n        ==> ((forall x. integral_vector x ==> integral_vector(f x)) <=>\n             (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N)\n                    ==> integer(matrix f$i$j)))
       #|  abs:real->real
       #|  det(matrix(f:real^N->real^N)) * det(matrix(g:real^N->real^N)) =\n    det(matrix(I:real^N->real^N))
-      #|  !i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(g:real^N->real^N)$i$j)
+      #|  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(g:real^N->real^N)$i$j)
       #|  k:num
-      #|  !y. y:real^N IN span(IMAGE f (:real^N))
+      #|  forall y. y:real^N IN span(IMAGE f (:real^N))
       #|  (b ==> a) /\\ b ==> a /\\ b
-      #|  ?g:real^N->real^N. linear g /\\ (!x. g(f x) = x) /\\ (!y. f(g y) = y)
-      #|  !i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(f:real^N->real^N)$i$j)
-      #|  !f:real^N->real^N.\n        linear f /\\ IMAGE f integral_vector = integral_vector\n        ==> abs(det(matrix f)) = &1
+      #|  ?g:real^N->real^N. linear g /\\ (forall x. g(f x) = x) /\\ (forall y. f(g y) = y)
+      #|  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N)\n          ==> integer(matrix(f:real^N->real^N)$i$j)
+      #|  forall f:real^N->real^N.\n        linear f /\\ IMAGE f integral_vector = integral_vector\n        ==> abs(det(matrix f)) = &1
       #|  v:real
       #|  u:real
       #|  x % a + y % b = b <=> x % a + (y - &1) % b = vec 0
@@ -83233,11 +83233,11 @@ test "100/pick matches 100/pick.ml" {
       #|  a:real^2 = b
       #|  b:real^2 = vec 0
       #|  a:real^2 = vec 0
-      #|  !a b:real^2.\n        {x | x IN convex hull {vec 0,a,b} /\\ integral_vector x} = {vec 0,a,b}\n        ==> measure(convex hull {vec 0,a,b}) =\n               if collinear {vec 0,a,b} then &0 else &1 / &2
+      #|  forall a b:real^2.\n        {x | x IN convex hull {vec 0,a,b} /\\ integral_vector x} = {vec 0,a,b}\n        ==> measure(convex hull {vec 0,a,b}) =\n               if collinear {vec 0,a,b} then &0 else &1 / &2
       #|  a:real^2
       #|  a:real^2
-      #|  s = t ==> (!x. x IN s <=> x IN t) /\\ s = t
-      #|  !a b c:real^2.\n        {x | x IN convex hull {a,b,c} /\\ integral_vector x} = {a,b,c}\n        ==> measure(convex hull {a,b,c}) =\n               if collinear {a,b,c} then &0 else &1 / &2
+      #|  s = t ==> (forall x. x IN s <=> x IN t) /\\ s = t
+      #|  forall a b c:real^2.\n        {x | x IN convex hull {a,b,c} /\\ integral_vector x} = {a,b,c}\n        ==> measure(convex hull {a,b,c}) =\n               if collinear {a,b,c} then &0 else &1 / &2
       #|  {x:real^2 | x IN {c} /\\ integral_vector x} = {c}
       #|  segment[b:real^2,c] INTER segment[a,c] = {c}
       #|  {x | x IN s /\\ P x} INTER {x | x IN t /\\ P x} =\n                          {x | x IN (s INTER t) /\\ P x}
@@ -83247,7 +83247,7 @@ test "100/pick matches 100/pick.ml" {
       #|  &0 = c - (a + b + c) / &2 + &1 / &2 <=> a + b = c + &1
       #|  measure(segment[a:real^2,b]) = &0
       #|  convex hull {a:real^2,b,c} = segment[a,b]
-      #|  !a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c /\\\n        c IN segment[a,b]\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
+      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c /\\\n        c IN segment[a,b]\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
       #|  {x | x IN s /\\ P x} = s INTER P
       #|  {x:real^2 | x IN convex hull {d} /\\ integral_vector x} = {d}
       #|  {a:real^2,b,d}
@@ -83311,7 +83311,7 @@ test "100/pick matches 100/pick.ml" {
       #|  b:real^2
       #|  collinear{a:real^2,b,c}
       #|  CARD {x:real^2 | x IN convex hull {a,b,c} /\\\n                                  integral_vector x}
-      #|  !a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
+      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n             &(CARD {x | x IN convex hull {a,b,c} /\\ integral_vector x}) -\n             (&(CARD {x | x IN convex hull {b,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,c} /\\ integral_vector x}) +\n              &(CARD {x | x IN convex hull {a,b} /\\ integral_vector x})) / &2 +\n             &1 / &2
       #|  d:real^2
       #|  c:real^2
       #|  b:real^2
@@ -83375,8 +83375,8 @@ test "100/pick matches 100/pick.ml" {
       #|  y:num <= x /\\ x - y = z ==> z + y = x
       #|  i + c = s /\\ ccc = c + &3\n    ==> s - ccc / &2 + &1 / &2 = i + c / &2 - &1
       #|  {x | x IN (s DIFF t) /\\ P x} =\n    {x | x IN s /\\ P x} DIFF {x | x IN t /\\ P x}
-      #|  !a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n                if collinear {a,b,c} then &0\n                else &(CARD {x | x IN interior(convex hull {a,b,c}) /\\\n                                 integral_vector x}) +\n                     &(CARD {x | x IN frontier(convex hull {a,b,c}) /\\\n                                 integral_vector x}) / &2 - &1
-      #|  !a b x y:real^N.\n          collinear{y,a,b} /\\ between x (a,b) /\\\n          dist(y,x) < dist(x,b) /\\ dist(y,x) < dist(x,a)\n          ==> y IN segment(a,b)
+      #|  forall a b c:real^2.\n        integral_vector a /\\ integral_vector b /\\ integral_vector c\n        ==> measure(convex hull {a,b,c}) =\n                if collinear {a,b,c} then &0\n                else &(CARD {x | x IN interior(convex hull {a,b,c}) /\\\n                                 integral_vector x}) +\n                     &(CARD {x | x IN frontier(convex hull {a,b,c}) /\\\n                                 integral_vector x}) / &2 - &1
+      #|  forall a b x y:real^N.\n          collinear{y,a,b} /\\ between x (a,b) /\\\n          dist(y,x) < dist(x,b) /\\ dist(y,x) < dist(x,a)\n          ==> y IN segment(a,b)
       #|  :real
       #|  :real
       #|  :real
@@ -83386,7 +83386,7 @@ test "100/pick matches 100/pick.ml" {
       #|  :real
       #|  :real
       #|  ~(x = &0) <=> &0 < x \\/ &0 < --x
-      #|  (!n. P(--n) <=> P (n)) /\\ (!n. &0 < n dot x ==> P n)\n     ==> !n:real^N. ~(n dot x = &0) ==> P n
+      #|  (forall n. P(--n) <=> P (n)) /\\ (forall n. &0 < n dot x ==> P n)\n     ==> forall n:real^N. ~(n dot x = &0) ==> P n
       #|  &0 < --x <=> x < &0
       #|  x * y < &0 <=> &0 < x * --y
       #|  &0 < x /\\ x < e ==> abs(min (&1 / &2) x) < e
@@ -83397,9 +83397,9 @@ test "100/pick matches 100/pick.ml" {
       #|  {x,b,a} = {a,x,b}
       #|  ((&1 - v) % x + v % b) - x:real^N = v % (b - x)
       #|  u + v = &1 <=> u = &1 - v
-      #|  s INTER t = {} <=> !x. x IN s ==> ~(x IN t)
+      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
       #|  affine hull {x:real^2,b}
-      #|  !t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
+      #|  forall t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
       #|  p SUBSET (UNIV DIFF b) /\\ l INTER w = {}\n          ==> (b INTER w) SUBSET (UNIV DIFF (p UNION l))
       #|  a - b < &0 <=> a < b
       #|  ball(x,e) INTER {w:real^2 | n dot (w - x) < &0}
@@ -83419,9 +83419,9 @@ test "100/pick matches 100/pick.ml" {
       #|  {x,b,a} = {a,x,b}
       #|  ((&1 - v) % x + v % b) - x:real^N = v % (b - x)
       #|  u + v = &1 <=> u = &1 - v
-      #|  s INTER t = {} <=> !x. x IN s ==> ~(x IN t)
+      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
       #|  affine hull {x:real^2,b}
-      #|  !t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
+      #|  forall t. t INTER u = {} /\\ s SUBSET t ==> s INTER u = {}
       #|  p SUBSET (UNIV DIFF b) /\\ l INTER w = {}\n          ==> (b INTER w) SUBSET (UNIV DIFF (p UNION l))
       #|  ball(x,e) INTER {w:real^2 | &0 < n dot (w - x)}
       #|  &0 < x ==> ~(min (&1 / &2) x = &0)
@@ -83436,14 +83436,14 @@ test "100/pick matches 100/pick.ml" {
       #|  ~(y IN path_image(p ++ linepath(a:real^2,b)))
       #|  ~p ==> p ==> q
       #|  y:real^2
-      #|  !y. y IN ball(x:real^2,e)\n          ==> y IN segment(a,b) \\/ &0 < n dot (y - x) \\/ n dot (y - x) < &0
+      #|  forall y. y IN ball(x:real^2,e)\n          ==> y IN segment(a,b) \\/ &0 < n dot (y - x) \\/ n dot (y - x) < &0
       #|  ~(a IN segment[c,d]) /\\ ~(b IN segment[c,d]) /\\\n      segment(a,b) INTER segment(c,d) = {x} /\\\n      segment(a,b) = segment[a,b] DIFF {a,b} /\\\n      segment(c,d) = segment[c,d] DIFF {c,d}\n      ==> segment[a,b] INTER segment(c,d) = {x}
       #|  cd INTER p = {} /\\ l INTER (cd DIFF {c,d}) = {x}\n      ==> (cd DIFF {c,d}) INTER (p UNION l) = {x}
       #|  {c,d} INTER p = {} /\\ (segment[c,d] DIFF {c,d}) INTER p = {x}\n      ==> segment[c,d] INTER p = {x}
       #|  segment[c,d] INTER path_image(p ++ linepath(a,b)) = {x:real^2}
       #|  y:real^2
       #|  c:real^2
-      #|  !y. dist(y,x) < e /\\ ~(y IN path_image(p ++ linepath (a,b)))\n        ==> connected_component\n             ((:real^2) DIFF path_image(p ++ linepath(a,b))) c y
+      #|  forall y. dist(y,x) < e /\\ ~(y IN path_image(p ++ linepath (a,b)))\n        ==> connected_component\n             ((:real^2) DIFF path_image(p ++ linepath(a,b))) c y
       #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
       #|  outside(path_image(p ++ linepath(a:real^2,b)))
       #|  z:real^2
@@ -83467,10 +83467,10 @@ test "100/pick matches 100/pick.ml" {
       #|  inside (path_image (p ++ linepath (a,b))) UNION\n                  outside (path_image (p ++ linepath (a,b))) =\n                  (:real^2) DIFF path_image (p ++ linepath (a,b))
       #|  v:real^2
       #|  u:real^2
-      #|  !u v. u IN inside(path_image(p ++ linepath(a,b))) /\\\n          v IN outside(path_image(p ++ linepath(a,b)))\n          ==> connected_component\n              ((:real^2) DIFF path_image (p ++ linepath (a,b))) u v
+      #|  forall u v. u IN inside(path_image(p ++ linepath(a,b))) /\\\n          v IN outside(path_image(p ++ linepath(a,b)))\n          ==> connected_component\n              ((:real^2) DIFF path_image (p ++ linepath (a,b))) u v
       #|  p ++ linepath(a:real^2,b)
       #|  t SUBSET UNIV DIFF s <=> t INTER s = {}
-      #|  ~(x IN s <=> y IN t)\n      ==> !p. s UNION t = (:real^2) DIFF p /\\ {x,y} INTER p = {}\n              ==> x IN s /\\ y IN s \\/ x IN t /\\ y IN t
+      #|  ~(x IN s <=> y IN t)\n      ==> forall p. s UNION t = (:real^2) DIFF p /\\ {x,y} INTER p = {}\n              ==> x IN s /\\ y IN s \\/ x IN t /\\ y IN t
       #|  path_image(p ++ linepath(a:real^2,b))
       #|  ~(connected_component((:real^2) DIFF path_image(p ++ linepath (a,b))) c d)
       #|  p ++ linepath(a:real^2,b)
@@ -83484,7 +83484,7 @@ test "100/pick matches 100/pick.ml" {
       #|  n:real^2
       #|  ~(x < &0) /\\ ~(&0 < x) <=> x = &0
       #|  (~c /\\ ~b ==> a) ==> a \\/ b \\/ c
-      #|  !y. y IN ball(x:real^2,e)\n        ==> y IN segment(a,b) \\/\n            &0 < n dot (y - x) \\/\n            n dot (y - x) < &0
+      #|  forall y. y IN ball(x:real^2,e)\n        ==> y IN segment(a,b) \\/\n            &0 < n dot (y - x) \\/\n            n dot (y - x) < &0
       #|  --x < &0 <=> &0 < x
       #|  d - ((&1 - u) % c + u % d):real^N = (&1 - u) % (d - c) /\\\n       c - ((&1 - u) % c + u % d) = --u % (d - c)
       #|  (x:real^2) IN segment(c,d)
@@ -83533,30 +83533,30 @@ test "100/pick matches 100/pick.ml" {
       #|  (a:real^2) INSERT b INSERT c INSERT d INSERT path_image p
       #|  linepath(a:real^2,b)
       #|  p:real^1->real^2
-      #|  !a b c d p x:real^2.\n        simple_path(p ++ linepath(a,b)) /\\\n        pathstart p = b /\\ pathfinish p = a /\\\n        segment(a,b) INTER segment(c,d) = {x} /\\\n        segment[c,d] INTER path_image p = {}\n        ==> (c IN inside(path_image(p ++ linepath(a,b))) <=>\n             d IN outside(path_image(p ++ linepath(a,b))))
+      #|  forall a b c d p x:real^2.\n        simple_path(p ++ linepath(a,b)) /\\\n        pathstart p = b /\\ pathfinish p = a /\\\n        segment(a,b) INTER segment(c,d) = {x} /\\\n        segment[c,d] INTER path_image p = {}\n        ==> (c IN inside(path_image(p ++ linepath(a,b))) <=>\n             d IN outside(path_image(p ++ linepath(a,b))))
       #|  polygonal_path[] = linepath(vec 0,vec 0) /\\\n  polygonal_path[a] = linepath(a,a) /\\\n  polygonal_path [a;b] = linepath(a,b) /\\\n  polygonal_path (CONS a (CONS b (CONS c l))) =\n       linepath(a,b) ++ polygonal_path(CONS b (CONS c l))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  !a b p. ~(p = [])\n           ==> polygonal_path(CONS a (CONS b p)) =\n               linepath(a,b) ++ polygonal_path(CONS b p)
-      #|  !a b p. polygonal_path (MAP (\\x. a + x) (CONS b p)) =\n         (\\x. a + x) o (polygonal_path (CONS b p))
-      #|  !f p. linear f ==> polygonal_path (MAP f p) = f o polygonal_path p
-      #|  !p. pathstart(polygonal_path p) = if p = [] then vec 0 else HD p
-      #|  !p. pathfinish(polygonal_path p) = if p = [] then vec 0 else LAST p
-      #|  !p:(real^N)list. set_of_list p SUBSET path_image (polygonal_path p)
+      #|  forall a b p. ~(p = [])\n           ==> polygonal_path(CONS a (CONS b p)) =\n               linepath(a,b) ++ polygonal_path(CONS b p)
+      #|  forall a b p. polygonal_path (MAP (\\x. a + x) (CONS b p)) =\n         (\\x. a + x) o (polygonal_path (CONS b p))
+      #|  forall f p. linear f ==> polygonal_path (MAP f p) = f o polygonal_path p
+      #|  forall p. pathstart(polygonal_path p) = if p = [] then vec 0 else HD p
+      #|  forall p. pathfinish(polygonal_path p) = if p = [] then vec 0 else LAST p
+      #|  forall p:(real^N)list. set_of_list p SUBSET path_image (polygonal_path p)
       #|  a:real^N
       #|  p:(real^N)list
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !p:(real^N)list. arc(polygonal_path p) ==> PAIRWISE (\\x y. ~(x = y)) p
-      #|  !p:(real^N)list. path(polygonal_path p)
-      #|  !p. ~(p = [])\n       ==> path_image(polygonal_path p) SUBSET convex hull (set_of_list p)
+      #|  forall p:(real^N)list. arc(polygonal_path p) ==> PAIRWISE (\\x y. ~(x = y)) p
+      #|  forall p:(real^N)list. path(polygonal_path p)
+      #|  forall p. ~(p = [])\n       ==> path_image(polygonal_path p) SUBSET convex hull (set_of_list p)
       #|  a:real^N
       #|  segment[d:real^N,e]
-      #|  (sab INTER p) SUBSET {b}\n          ==> !sde a. sde SUBSET p /\\\n              ~(b IN sde) /\\ d IN sde /\\ a IN sde /\\ a IN sab\n              ==> F
+      #|  (sab INTER p) SUBSET {b}\n          ==> forall sde a. sde SUBSET p /\\\n              ~(b IN sde) /\\ d IN sde /\\ a IN sde /\\ a IN sab\n              ==> F
       #|  e:real^N
       #|  d:real^N
       #|  b:real^N
@@ -83569,7 +83569,7 @@ test "100/pick matches 100/pick.ml" {
       #|  x:real^N
       #|  b:real^N
       #|  path_image(polygonal_path (CONS (b:real^N) (CONS c p)))
-      #|  !p b. (s INTER p) SUBSET {b} /\\\n      x IN p /\\ b IN s /\\ ~(x = b)\n      ==> ~(x IN s)
+      #|  forall p b. (s INTER p) SUBSET {b} /\\\n      x IN p /\\ b IN s /\\ ~(x = b)\n      ==> ~(x IN s)
       #|  b:real^N
       #|  a:real^N
       #|  x:real^N
@@ -83577,8 +83577,8 @@ test "100/pick matches 100/pick.ml" {
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !p x:real^N.\n        arc(polygonal_path p) /\\ 3 <= LENGTH p /\\\n        x IN path_image(polygonal_path p)\n        ==> ?a b. MEM a p /\\ MEM b p /\\ x IN segment[a,b] /\\\n                  segment[a,b] SUBSET path_image(polygonal_path p) /\\\n                  ~(pathstart(polygonal_path p) IN segment[a,b] /\\\n                    pathfinish(polygonal_path p) IN segment[a,b])
-      #|  !p. ~(p = []) ==> set_of_list(CONS (LAST p) (BUTLAST p)) = set_of_list p
+      #|  forall p x:real^N.\n        arc(polygonal_path p) /\\ 3 <= LENGTH p /\\\n        x IN path_image(polygonal_path p)\n        ==> ?a b. MEM a p /\\ MEM b p /\\ x IN segment[a,b] /\\\n                  segment[a,b] SUBSET path_image(polygonal_path p) /\\\n                  ~(pathstart(polygonal_path p) IN segment[a,b] /\\\n                    pathfinish(polygonal_path p) IN segment[a,b])
+      #|  forall p. ~(p = []) ==> set_of_list(CONS (LAST p) (BUTLAST p)) = set_of_list p
       #|  ((q <=> p) /\\ (q' <=> p')) /\\ (p <=> p')\n      ==> (p <=> p') /\\ (q <=> q')
       #|  (~p /\\ ~p') /\\ (q <=> q') ==> (p <=> p') /\\ (q <=> q')
       #|  a:real^N = d
@@ -83589,24 +83589,24 @@ test "100/pick matches 100/pick.ml" {
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !p d:real^N.\n        2 <= LENGTH p\n        ==> path_image(polygonal_path(APPEND p [d])) =\n            path_image(polygonal_path p ++ linepath(LAST p,d)) /\\\n            (arc(polygonal_path(APPEND p [d])) <=>\n             arc(polygonal_path p ++ linepath(LAST p,d))) /\\\n            (simple_path(polygonal_path(APPEND p [d])) <=>\n             simple_path(polygonal_path p ++ linepath(LAST p,d)))
+      #|  forall p d:real^N.\n        2 <= LENGTH p\n        ==> path_image(polygonal_path(APPEND p [d])) =\n            path_image(polygonal_path p ++ linepath(LAST p,d)) /\\\n            (arc(polygonal_path(APPEND p [d])) <=>\n             arc(polygonal_path p ++ linepath(LAST p,d))) /\\\n            (simple_path(polygonal_path(APPEND p [d])) <=>\n             simple_path(polygonal_path p ++ linepath(LAST p,d)))
       #|  2 <= SUC(SUC n)
       #|  p:(real^N)list
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> path_image(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n            path_image(polygonal_path p)
+      #|  forall p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> path_image(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n            path_image(polygonal_path p)
       #|  2 <= SUC(SUC n)
       #|  p:(real^N)list
       #|  c:real^N
       #|  b:real^N
       #|  a:real^N
-      #|  !p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> (simple_path(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n             simple_path(polygonal_path p))
+      #|  forall p:(real^N)list.\n        2 <= LENGTH p /\\ LAST p = HD p\n        ==> (simple_path(polygonal_path(APPEND (TL p) [HD(TL p)])) =\n             simple_path(polygonal_path p))
       #|  0 < k ==> k - 1 < k /\\ k - (k - 1) = 1
       #|  k - 1
       #|  k - SUC i = k - i - 1
-      #|  !i:num. i < k ==> P(k - i)
-      #|  !P. (!i. P i /\\ 0 < i ==> P(i - 1)) /\\ (?k. 0 < k /\\ P k)\n             ==> P 1
+      #|  forall i:num. i < k ==> P(k - i)
+      #|  forall P. (forall i. P i /\\ 0 < i ==> P(i - 1)) /\\ (?k. 0 < k /\\ P k)\n             ==> P 1
       #|  0 < k ==> k - 1 + 1 = k
       #|  ~(3 <= 0)
       #|  ~(m:A list = [])
@@ -83625,7 +83625,7 @@ test "100/pick matches 100/pick.ml" {
       #|  ~(3 <= 0)
       #|  ~(l:A list = [])
       #|  ?i l'. 0 < i /\\ i < LENGTH l' /\\ P l' /\\ EL i l' = (a:A)
-      #|  !P l a:A.\n      (!l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (!l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. EL 1 l' = a /\\ P l'
+      #|  forall P l a:A.\n      (forall l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (forall l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. EL 1 l' = a /\\ P l'
       #|  1
       #|  p:A list
       #|  l':A list
@@ -83636,28 +83636,28 @@ test "100/pick matches 100/pick.ml" {
       #|  a:A
       #|  l:A list
       #|  P:A list->bool
-      #|  !P l a:A.\n      (!l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (!l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. HD l' = a /\\ P l'
+      #|  forall P l a:A.\n      (forall l. P(l) ==> 3 <= LENGTH l /\\ LAST l = HD l) /\\\n      (forall l. P(l) ==> P(APPEND (TL l) [HD(TL l)])) /\\\n      P l /\\ MEM a l\n      ==> ?l'. HD l' = a /\\ P l'
       #|  x - y:complex
-      #|  (!x y. x IN s /\\ y IN s ==> x = y) ==> ?a. s SUBSET {a}
+      #|  (forall x y. x IN s /\\ y IN s ==> x = y) ==> ?a. s SUBSET {a}
       #|  (?a. s SUBSET {a}) ==> FINITE s
       #|  {x | p x /\\ q x /\\ (r x \\/ s x)} =\n    {x | p x /\\ q x /\\ r x} UNION {x | p x /\\ q x /\\ s x}
-      #|  !x y. ~(x = y)\n         ==> FINITE {t | &0 <= t /\\ t < &2 * pi /\\\n                         (rotate2d t x)$2 = (rotate2d t y)$2}
+      #|  forall x y. ~(x = y)\n         ==> FINITE {t | &0 <= t /\\ t < &2 * pi /\\\n                         (rotate2d t x)$2 = (rotate2d t y)$2}
       #|  t:real
       #|  INFINITE s ==> ~(s = {})
       #|  {(x:real^2,y:real^2) | x IN s /\\ y IN s}
       #|  INFINITE ({t | &0 <= t /\\ t < &2 * pi} DIFF\n              UNIONS (IMAGE (\\(x,y). {t | &0 <= t /\\ t < &2 * pi /\\\n                                          (rotate2d t x)$2 = (rotate2d t y)$2})\n                            ({(x,y) | x IN s /\\ y IN s /\\ ~(x = y)})))
-      #|  !s. FINITE s ==> ?t. pairwise (\\x y. ~(x$2 = y$2)) (IMAGE (rotate2d t) s)
+      #|  forall s. FINITE s ==> ?t. pairwise (\\x y. ~(x$2 = y$2)) (IMAGE (rotate2d t) s)
       #|  MAP (rotate2d t) p
       #|  MAP (rotate2d(--t))
       #|  t:real
       #|  set_of_list(p:(real^2)list)
-      #|  !p:(real^2)list.\n        ?f q. (?g. orthogonal_transformation g /\\ f = MAP g) /\\\n              (!x y. MEM x q /\\ MEM y q /\\ ~(x = y) ==> ~(x$2 = y$2)) /\\\n              f q = p
-      #|  (!x. ?f:A->A y. transform f /\\ nice y /\\ f y = x)\n    ==> !P. (!f x. transform f ==> (P(f x) <=> P x)) /\\\n            (!x. nice x ==> P x)\n            ==> !x. P x
+      #|  forall p:(real^2)list.\n        ?f q. (?g. orthogonal_transformation g /\\ f = MAP g) /\\\n              (forall x y. MEM x q /\\ MEM y q /\\ ~(x = y) ==> ~(x$2 = y$2)) /\\\n              f q = p
+      #|  (forall x. ?f:A->A y. transform f /\\ nice y /\\ f y = x)\n    ==> forall P. (forall f x. transform f ==> (P(f x) <=> P x)) /\\\n            (forall x. nice x ==> P x)\n            ==> forall x. P x
       #|  dir:real^N = vec 0
       #|  origin:real^N
       #|  dir:real^N
       #|  origin:real^N
-      #|  !a c u v m:real^N.\n          collinear {a,c,u,v,m} /\\ m IN segment[u,v] /\\ m IN segment(a,c)\n          ==> u IN segment(a,c) \\/ v IN segment(a,c) \\/\n              segment[a,c] SUBSET segment[u,v]
+      #|  forall a c u v m:real^N.\n          collinear {a,c,u,v,m} /\\ m IN segment[u,v] /\\ m IN segment(a,c)\n          ==> u IN segment(a,c) \\/ v IN segment(a,c) \\/\n              segment[a,c] SUBSET segment[u,v]
       #|  segment[a:real^2,c] SUBSET segment[u,v]
       #|  (u % a + v % c) - b:real^N =\n        u % (a - b) + v % (c - b) + ((u + v) - &1) % b
       #|  {a,v,c} = {a,c,v}
@@ -83708,12 +83708,12 @@ test "100/pick matches 100/pick.ml" {
       #|  n:real^2
       #|  {a,b,c} = {a,c,b}
       #|  y:real^2
-      #|  !y:real^2. n dot (y - b) = m ==> collinear {a,y,c}
+      #|  forall y:real^2. n dot (y - b) = m ==> collinear {a,y,c}
       #|  collinear {a:real^2,mx,c} /\\ collinear {a,u,c}
       #|  ~(m < m)
       #|  m <= m
       #|  mx:real^2
-      #|  !mx. n dot (u - b) <= m /\\\n           ~(n dot (u - b) < n dot (c - b)) /\\\n           n dot (mx - b) = m /\\\n           n dot (mx - b) <= n dot (c - b)\n           ==> n dot (u - b) = m /\\ n dot (c - b) = m
+      #|  forall mx. n dot (u - b) <= m /\\\n           ~(n dot (u - b) < n dot (c - b)) /\\\n           n dot (mx - b) = m /\\\n           n dot (mx - b) <= n dot (c - b)\n           ==> n dot (u - b) = m /\\ n dot (c - b) = m
       #|  n dot (u - b) = m /\\ n dot (c - b) = m
       #|  r * x + s * x < x <=> &0 < (&1 - r - s) * x
       #|  (r % a + s % b + t % c) - b =\n      r % (a - b) + t % (c - b) + ((r + s + t) - &1) % b
@@ -83783,7 +83783,7 @@ test "100/pick matches 100/pick.ml" {
       #|  y:real^2
       #|  x >= b + e <=> e <= x - b
       #|  {x:real^2 | (x:real^2)$2 >= (b:real^2)$2 + e}
-      #|  !t. ~(b IN t) /\\ s SUBSET t ==> ~(b IN s)
+      #|  forall t. ~(b IN t) /\\ s SUBSET t ==> ~(b IN s)
       #|  ~(x IN t) ==> s SUBSET t ==> ~(x IN s)
       #|  CONS (c:real^2) p
       #|  path_image(polygonal_path(CONS (c:real^2) p))
@@ -83791,7 +83791,7 @@ test "100/pick matches 100/pick.ml" {
       #|  c:real^2
       #|  b:real^2
       #|  a:real^2
-      #|  !a b c t u.\n                s SUBSET t /\\ t SUBSET u /\\\n                a IN ca /\\ c IN ca /\\\n                ab INTER u SUBSET {a,b} /\\ bc INTER u SUBSET {c} /\\\n                ~(b IN u) /\\ s INTER ca = {}\n                ==> s INTER (ab UNION bc UNION ca) = {}
+      #|  forall a b c t u.\n                s SUBSET t /\\ t SUBSET u /\\\n                a IN ca /\\ c IN ca /\\\n                ab INTER u SUBSET {a,b} /\\ bc INTER u SUBSET {c} /\\\n                ~(b IN u) /\\ s INTER ca = {}\n                ==> s INTER (ab UNION bc UNION ca) = {}
       #|  closure(segment(u:real^2,mx)) SUBSET convex hull {a,b,c}
       #|  (s SUBSET c ==> u IN c) /\\ s INTER f = {} /\\ ~(s INTER c = {})\n      ==> (~(s INTER c = {}) /\\ ~(s DIFF c = {}) ==> ~(s INTER f = {}))\n          ==> u IN c
       #|  convex hull {a:real^2,b,c}
@@ -83820,25 +83820,25 @@ test "100/pick matches 100/pick.ml" {
       #|  segment(b:real^2,z)
       #|  x >= b + e <=> e <= x - b
       #|  e <= x - b <=> x >= b + e
-      #|  t SUBSET {x | P x} ==> s SUBSET t ==> !x. x IN s ==> P x
+      #|  t SUBSET {x | P x} ==> s SUBSET t ==> forall x. x IN s ==> P x
       #|  CONS (c:real^2) p
       #|  s INTER t = {} <=> s SUBSET (UNIV DIFF t)
       #|  {x | (x:real^2)$2 - (b:real^2)$2 < e}
-      #|  !t. s SUBSET t /\\ u INTER t = {} ==> s INTER u = {}
+      #|  forall t. s SUBSET t /\\ u INTER t = {} ==> s INTER u = {}
       #|  convex hull {a:real^2,b,c}
-      #|  !s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b UNION d ==> i INTER b = {}
+      #|  forall s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b UNION d ==> i INTER b = {}
       #|  c:real^2
       #|  b:real^2
       #|  a:real^2
       #|  interior(convex hull {a:real^2,b,c})
-      #|  !t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
+      #|  forall t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
       #|  convex hull {a:real^2,b,c}
-      #|  !s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b ==> i INTER a = {}
+      #|  forall s. i SUBSET s /\\ s SUBSET c\n          ==> c DIFF i = a UNION b ==> i INTER a = {}
       #|  c:real^2
       #|  b:real^2
       #|  a:real^2
       #|  interior(convex hull {a:real^2,b,c})
-      #|  !t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
+      #|  forall t. s SUBSET t /\\ t INTER u = {} ==> s INTER u = {}
       #|  s SUBSET UNIV DIFF (a UNION b UNION c) <=>\n        s INTER a = {} /\\ s INTER b = {} /\\ s INTER c = {}
       #|  interior(convex hull {a':real^2,b,c'})
       #|  y:real^2
@@ -83878,7 +83878,7 @@ test "100/pick matches 100/pick.ml" {
       #|  v:real^2
       #|  segment(b:real^2,z) INTER segment[a,b] = {} /\\\n      segment(b,z) INTER segment[b,c] = {}
       #|  convex hull {a:real^2,b,c}
-      #|  !c. x IN c /\\ ~(x IN (a INTER c)) /\\ ~(x IN (b INTER c))\n            ==> ~(x IN a) /\\ ~(x IN b)
+      #|  forall c. x IN c /\\ ~(x IN (a INTER c)) /\\ ~(x IN (b INTER c))\n            ==> ~(x IN a) /\\ ~(x IN b)
       #|  ~collinear{b:real^2,a,z} /\\ ~collinear{b,c,z}
       #|  ~(z IN segment[a:real^2,b]) /\\ ~(z IN segment[b,c])
       #|  (z:real^2) IN path_image(polygonal_path(CONS c p)) /\\\n      (z:real^2) IN path_image(polygonal_path p)
@@ -83900,22 +83900,22 @@ test "100/pick matches 100/pick.ml" {
       #|  mx:real^2
       #|  n dot (mx - b:real^2) <= n dot (c - b)
       #|  mx:real^2
-      #|  ?mx:real^2.\n      ~(mx = a) /\\ ~(mx = c) /\\\n      mx IN path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c} /\\\n      (!y. y IN\n           path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c}\n           ==> n dot (mx - b) <= n dot (y - b))
+      #|  ?mx:real^2.\n      ~(mx = a) /\\ ~(mx = c) /\\\n      mx IN path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c} /\\\n      (forall y. y IN\n           path_image(polygonal_path(CONS c p)) INTER convex hull {a, b, c}\n           ==> n dot (mx - b) <= n dot (y - b))
       #|  (\\x:real^2. n dot (x - b)) = (\\x. n dot x) o (\\x. x - b)
       #|  path_image (polygonal_path(CONS c p)) INTER convex hull {a:real^2,b,c}
       #|  \\x:real^2. n dot (x - b)
       #|  (&1 - u - v) * x + v * x <= x <=> &0 <= u * x
       #|  (a + u % (b - a) + v % (c - a)) - b =\n      (&1 - u - v) % (a - b) + v % (c - b)
-      #|  !y:real^2. y IN convex hull {a,b,c} ==> n dot (y - b) <= n dot (c - b)
+      #|  forall y:real^2. y IN convex hull {a,b,c} ==> n dot (y - b) <= n dot (c - b)
       #|  y:real^2 = b
-      #|  !y:real^2. y IN convex hull {a,b,c} ==> &0 <= n dot (y - b)
+      #|  forall y:real^2. y IN convex hull {a,b,c} ==> &0 <= n dot (y - b)
       #|  ~(a + r % (b - a) + s % (c - a):real^2 = b)
       #|  r = &1 /\\ s = &0
       #|  (&1 - u - v) * x + v * x = (&1 - u) * x
       #|  s:real
       #|  r:real
       #|  (a + u % (b - a) + v % (c - a)) - b =\n      (&1 - u - v) % (a - b) + v % (c - b)
-      #|  !y:real^2. y IN convex hull {a,b,c} /\\ ~(y = b) ==> &0 < n dot (y - b)
+      #|  forall y:real^2. y IN convex hull {a,b,c} /\\ ~(y = b) ==> &0 < n dot (y - b)
       #|  x = y <=> y - x = &0
       #|  n dot (a - b:real^2) = n dot (c - b)
       #|  n:real^2
@@ -83974,7 +83974,7 @@ test "100/pick matches 100/pick.ml" {
       #|  s INTER (t UNION u) = {} <=>\n                        s INTER t = {} /\\ s INTER u = {}
       #|  b:real^2
       #|  a:real^2
-      #|  x IN s /\\ x IN t /\\ (!y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
+      #|  x IN s /\\ x IN t /\\ (forall y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
       #|  path_image((polygonal_path (CONS c p) ++ linepath (a,b)) ++\n                   linepath(b:real^2,c)) =\n        path_image(linepath(a,b) ++ linepath(b:real^2,c) ++\n                   polygonal_path(CONS c p))
       #|  x:real^2
       #|  polygonal_path(CONS c p) ++ linepath(a:real^2,b)
@@ -83998,7 +83998,7 @@ test "100/pick matches 100/pick.ml" {
       #|  s INTER (t UNION u) = {} <=>\n                        s INTER t = {} /\\ s INTER u = {}
       #|  b:real^2
       #|  a:real^2
-      #|  x IN s /\\ x IN t /\\ (!y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
+      #|  x IN s /\\ x IN t /\\ (forall y. y IN s /\\ y IN t ==> y = x)\n          ==> s INTER t = {x}
       #|  pathfinish(linepath(a,b) ++\n          linepath (b,c) ++ polygonal_path(CONS c p)):real^2 = a
       #|  path_image((linepath(b:real^2,c) ++ polygonal_path(CONS c p)) ++\n                   linepath(a,b)) =\n        path_image(linepath(a,b) ++ linepath(b:real^2,c) ++\n                   polygonal_path(CONS c p))
       #|  x:real^2
@@ -84031,7 +84031,7 @@ test "100/pick matches 100/pick.ml" {
       #|  d':real^2
       #|  d:real^2
       #|  collinear {d:real^2,x,y}
-      #|  !y:real^2. y IN segment[d,d'] /\\\n               y IN (segment (b,a) UNION segment (b,c))\n               ==> y = x
+      #|  forall y:real^2. y IN segment[d,d'] /\\\n               y IN (segment (b,a) UNION segment (b,c))\n               ==> y = x
       #|  ~(d':real^2 = d)
       #|  d:real^2
       #|  d:real^2
@@ -84041,11 +84041,11 @@ test "100/pick matches 100/pick.ml" {
       #|  d':real^2
       #|  d:real^2
       #|  y:real^2
-      #|  s INTER t = {} <=> !x. x IN s ==> ~(x IN t)
+      #|  s INTER t = {} <=> forall x. x IN s ==> ~(x IN t)
       #|  b + e <= x <=> e <= x - b
       #|  convex hull(set_of_list(CONS c p)) :real^2->bool
       #|  {x:real^2 | x$2 >= (b:real^2)$2 + e}
-      #|  !u. t SUBSET u /\\ s INTER u = {} ==> s INTER t = {}
+      #|  forall u. t SUBSET u /\\ s INTER u = {} ==> s INTER t = {}
       #|  segment[d:real^2,d'] INTER path_image(polygonal_path(CONS c p)) = {}
       #|  x:real^2
       #|  a':real^2
@@ -84073,7 +84073,7 @@ test "100/pick matches 100/pick.ml" {
       #|  ~(segment[d:real^2,d'] INTER frontier(convex hull {a',b,c'}) = {})
       #|  ~(d' IN convex hull {a':real^2,b,c'})
       #|  {x | (x:real^2)$2 >= (b:real^2)$2}
-      #|  !t. s SUBSET t /\\ ~(x IN t) ==> ~(x IN s)
+      #|  forall t. s SUBSET t /\\ ~(x IN t) ==> ~(x IN s)
       #|  ~(d' IN convex hull {a:real^2,b,c})
       #|  x:real^2
       #|  c':real^2
@@ -84101,7 +84101,7 @@ test "100/pick matches 100/pick.ml" {
       #|  path_image(polygonal_path(CONS a (CONS b (CONS c p))))\n     SUBSET {x:real^2 | x$2 >= b$2}
       #|  &0 < k
       #|  k / &2 % basis 1:real^2
-      #|  !a. dist(x + a,y) < k / &2 /\\ norm(a) = k / &2 ==> dist(x,y) < k
+      #|  forall a. dist(x + a,y) < k / &2 /\\ norm(a) = k / &2 ==> dist(x,y) < k
       #|  :real
       #|  :real
       #|  y:real^2
@@ -84156,7 +84156,7 @@ test "100/pick matches 100/pick.ml" {
       #|  d:real^2
       #|  a:real^2
       #|  IMAGE (\\v. (v:real^2)$2 - (b:real^2)$2)\n                        (set_of_list(CONS a (CONS b (CONS c p)))\n                          DELETE b)
-      #|  ?e. &0 < e /\\\n         e <= (a:real^2)$2 - (b:real^2)$2 /\\\n         e <= (c:real^2)$2 - (b:real^2)$2 /\\\n         !v. MEM v p ==> e <= (v:real^2)$2 - (b:real^2)$2
+      #|  ?e. &0 < e /\\\n         e <= (a:real^2)$2 - (b:real^2)$2 /\\\n         e <= (c:real^2)$2 - (b:real^2)$2 /\\\n         forall v. MEM v p ==> e <= (v:real^2)$2 - (b:real^2)$2
       #|  s INTER t = t <=> t SUBSET s
       #|  segment[a:real^2,b] INTER segment[b,c] = segment[b,c]
       #|  (&1 - u) * b < (&1 - u) * c /\\ u * b < u * a\n        ==> ~(b = (&1 - u) * c + u * a)
@@ -84168,8 +84168,8 @@ test "100/pick matches 100/pick.ml" {
       #|  {a:real^2,b}
       #|  FINITE(segment[a:real^2,b] INTER segment[b,c])
       #|  ~collinear{a:real^2,b,c}
-      #|  (b:real^2)$2 < (a:real^2)$2 /\\\n                (b:real^2)$2 < (c:real^2)$2 /\\\n                (!v. MEM v p ==> (b:real^2)$2 < (v:real^2)$2)
-      #|  (!x. P x ==> ~(a = x)) <=> ~(P a)
+      #|  (b:real^2)$2 < (a:real^2)$2 /\\\n                (b:real^2)$2 < (c:real^2)$2 /\\\n                (forall v. MEM v p ==> (b:real^2)$2 < (v:real^2)$2)
+      #|  (forall x. P x ==> ~(a = x)) <=> ~(P a)
       #|  CONS (b:real^2) (CONS c p)
       #|  a:real^2 = c
       #|  s INTER (t UNION u) SUBSET v <=>\n                        s INTER t SUBSET v /\\ s INTER u SUBSET v
@@ -84214,10 +84214,10 @@ test "100/pick matches 100/pick.ml" {
       #|  q:(real^2)list = []
       #|  5 <= LENGTH(q:(real^2)list)
       #|  IMAGE (\\x:real^2. x$2) (set_of_list q)
-      #|  ?b:real^2. MEM b q /\\ !d. MEM d q ==> b$2 <= d$2
+      #|  ?b:real^2. MEM b q /\\ forall d. MEM d q ==> b$2 <= d$2
       #|  q:(real^2)list
-      #|  (!x y. (?z. P z /\\ x = f z) ==> Q x y) <=>\n                         (!z y. P z ==> Q (f z) y)
-      #|  !p:(real^2)list.\n        simple_path(polygonal_path p) /\\\n        pathfinish(polygonal_path p) = pathstart(polygonal_path p) /\\\n        5 <= LENGTH p\n        ==> ?a b. ~(a = b) /\\ MEM a p /\\ MEM b p /\\\n                  segment(a,b) SUBSET inside(path_image(polygonal_path p))
+      #|  (forall x y. (?z. P z /\\ x = f z) ==> Q x y) <=>\n                         (forall z y. P z ==> Q (f z) y)
+      #|  forall p:(real^2)list.\n        simple_path(polygonal_path p) /\\\n        pathfinish(polygonal_path p) = pathstart(polygonal_path p) /\\\n        5 <= LENGTH p\n        ==> ?a b. ~(a = b) /\\ MEM a p /\\ MEM b p /\\\n                  segment(a,b) SUBSET inside(path_image(polygonal_path p))
       #|  SUC(SUC n) = n + 2
       #|  P a /\\ P b\n    ==> {x | x IN s UNION {a,b} /\\ P x} =\n        a INSERT b INSERT {x | x IN s /\\ P x}
       #|  ~(a IN s) /\\ ~(b IN s) ==> (s UNION {a,b}) DIFF {a,b} = s
@@ -84299,11 +84299,11 @@ test "100/pick matches 100/pick.ml" {
       #|  HD p = (a:real^2)
       #|  MEM (b:real^2) p
       #|  MEM (a:real^2) p
-      #|  !x:real^2. MEM x p ==> integral_vector x
+      #|  forall x:real^2. MEM x p ==> integral_vector x
       #|  integral_vector(a:real^2) /\\ integral_vector(b:real^2)
       #|  n = LENGTH(p:(real^2)list)
       #|  (set_of_list q UNION set_of_list r):real^2->bool = set_of_list p
-      #|  (!x:real^2. MEM x q ==> integral_vector x) /\\\n    (!x:real^2. MEM x r ==> integral_vector x)
+      #|  (forall x:real^2. MEM x q ==> integral_vector x) /\\\n    (forall x:real^2. MEM x r ==> integral_vector x)
       #|  path_image(polygonal_path q ++ polygonal_path r):real^2->bool =\n                path_image(polygonal_path p)
       #|  pathfinish (polygonal_path p) = (a:real^2)
       #|  5 <= LENGTH(p:(real^2)list)
@@ -84351,7 +84351,7 @@ test "100/pick matches 100/pick.ml" {
       #|  LENGTH(p':(real^2)list) = LENGTH(p:(real^2)list)
       #|  path_image(polygonal_path(p':(real^2)list)) =\n     path_image (polygonal_path p)
       #|  set_of_list(p':(real^2)list) = set_of_list p
-      #|  !x:real^2. MEM x p <=> MEM x p'
+      #|  forall x:real^2. MEM x p <=> MEM x p'
       #|  l:(real^2)list
       #|  LENGTH(t:(real^2)list) - 1
       #|  0
@@ -84396,7 +84396,7 @@ test "100/pick matches 100/pick.ml" {
       #|  LENGTH(p:(real^2)list) <= 4
       #|  LENGTH(p:(real^2)list) <= 4 \\/ 5 <= LENGTH p
       #|  LENGTH(p:(real^2)list)
-      #|  !p:(real^2)list.\n        (!x. MEM x p ==> integral_vector x) /\\\n        simple_path (polygonal_path p) /\\\n        pathfinish (polygonal_path p) = pathstart (polygonal_path p)\n        ==> measure(inside(path_image(polygonal_path p))) =\n                &(CARD {x | x IN inside(path_image(polygonal_path p)) /\\\n                            integral_vector x}) +\n                &(CARD {x | x IN path_image(polygonal_path p) /\\\n                            integral_vector x}) / &2 - &1
+      #|  forall p:(real^2)list.\n        (forall x. MEM x p ==> integral_vector x) /\\\n        simple_path (polygonal_path p) /\\\n        pathfinish (polygonal_path p) = pathstart (polygonal_path p)\n        ==> measure(inside(path_image(polygonal_path p))) =\n                &(CARD {x | x IN inside(path_image(polygonal_path p)) /\\\n                            integral_vector x}) +\n                &(CARD {x | x IN path_image(polygonal_path p) /\\\n                            integral_vector x}) / &2 - &1
       #|  CONS (b:real^2) q
       #|  CONS (b:real^2) q
       #|  CONS (b:real^2) q

@@ -5766,19 +5766,19 @@ Examples/polylog quotations (209):
   SUC(SUC(SUC(SUC 0)))
   &2 * (x * x) * &1 + a - (x * s) * x * s + &1 * &1 =\n   (&2 - s * s) * x * x + (&1 + a)
   (a + b + c) * (a - b + c) = &2 * a * c + a * a - b * b + c * c
-  !x. (x * x + x * sqrt (&2) + &1) * (x * x - x * sqrt (&2) + &1) =\n       &1 + x pow 4
+  forall x. (x * x + x * sqrt (&2) + &1) * (x * x - x * sqrt (&2) + &1) =\n       &1 + x pow 4
   (x12 * (p1 + p2) * (m1 - m2)) * (m' * &2 + p' * &2) * other =\n    --(&2) * x12 * other *\n    ((p2 + p1) * (m2 - m1) * m' + (m2 - m1) * (p2 + p1) * p')
-  !x. &1 - x pow 2 = (&1 + x) * (&1 - x)
+  forall x. &1 - x pow 2 = (&1 + x) * (&1 - x)
   ~(&1 - x pow 2 = &0)
   2 * 2
-  !x. &1 - x pow 4 = (&1 + x pow 2) * (&1 - x pow 2)
+  forall x. &1 - x pow 4 = (&1 + x pow 2) * (&1 - x pow 2)
   ~(&1 - x pow 4 = &0)
   (p * m) * (x + inv(p) * y) = m * x * p + (p * inv(p)) * m * y
   a + b + c1 * c2 * x + x * d - x * e =\n    (a + b) + x * (c1 * c2 + d - e)
   &1
   x pow 4
   4 * 2
-  !x. &1 - x pow 8 = (&1 + x pow 4) * (&1 - x pow 4)
+  forall x. &1 - x pow 8 = (&1 + x pow 4) * (&1 - x pow 4)
   &1 pow 2
   &1 pow 4
   2 * 4
@@ -5797,7 +5797,7 @@ Examples/polylog quotations (209):
   &0 <= x ==> ~(&1 + x = &0)
   ~a /\\ (~a ==> b) ==> ~a /\\ b
   (x * x + x * sqrt (&2) + &1) *\n                (x * x - x * sqrt (&2) + &1)
-  !other. inv(x * x + x * sqrt (&2) + &1) * sqrt (&2) +\n            inv(x * x - x * sqrt (&2) + &1) * sqrt (&2) + other =\n            other + &2 * sqrt(&2) * (&1 + x * x) *\n                    inv(x * x + x * sqrt (&2) + &1) *\n                    inv(x * x - x * sqrt (&2) + &1)
+  forall other. inv(x * x + x * sqrt (&2) + &1) * sqrt (&2) +\n            inv(x * x - x * sqrt (&2) + &1) * sqrt (&2) + other =\n            other + &2 * sqrt(&2) * (&1 + x * x) *\n                    inv(x * x + x * sqrt (&2) + &1) *\n                    inv(x * x - x * sqrt (&2) + &1)
   &0 <= x ==> ~(&1 + x = &0)
   x pow 2
   p' * n * &2 * s2 * aa * n' * n' =\n     (n' * n) * (p' * n') * &2 * s2 * aa
@@ -5824,14 +5824,14 @@ Examples/polylog quotations (209):
   a /\\ (a ==> c) /\\ (a /\\ c ==> b) /\\ d /\\ e\n      ==> e /\\ d /\\ b /\\ a /\\ c
   a /\\ (a ==> (b <=> c)) ==> (a ==> b) ==> c
   x:real
-  !x. abs(x) < &1\n       ==> ((\\x. ln((x - &1) pow 2) +\n                 ln((x + &1) pow 2) +\n                 ln((x pow 2 + x * sqrt(&2) + &1) /\n                    (x pow 2 - x * sqrt(&2) + &1)) +\n                 &2 * atn(x * sqrt(&2) + &1) +\n                 &2 * atn(x * sqrt(&2) - &1) +\n                 &2 * atn(x pow 2) -\n                 ln(x pow 4 + &1))\n            diffl ((&4 * sqrt(&2) -\n                    &8 * x pow 3 -\n                    &4 * sqrt(&2) * x pow 4 -\n                    &8 * x pow 5) / (&1 - x pow 8)))(x)
+  forall x. abs(x) < &1\n       ==> ((\\x. ln((x - &1) pow 2) +\n                 ln((x + &1) pow 2) +\n                 ln((x pow 2 + x * sqrt(&2) + &1) /\n                    (x pow 2 - x * sqrt(&2) + &1)) +\n                 &2 * atn(x * sqrt(&2) + &1) +\n                 &2 * atn(x * sqrt(&2) - &1) +\n                 &2 * atn(x pow 2) -\n                 ln(x pow 4 + &1))\n            diffl ((&4 * sqrt(&2) -\n                    &8 * x pow 3 -\n                    &4 * sqrt(&2) * x pow 4 -\n                    &8 * x pow 5) / (&1 - x pow 8)))(x)
   a:num
   abs(x) pow b * inv(&1 - abs(x) pow a)
   ~(b = 0) ==> 1 <= a + b
   n:num
   0
   \\n. abs(x) pow (a * n + b)
-  !a b x. ~(a = 0) /\\ ~(b = 0) /\\ abs(x) < &1\n           ==> summable (\\n. x pow (a * n + b) / &(a * n + b))
+  forall a b x. ~(a = 0) /\\ ~(b = 0) /\\ abs(x) < &1\n           ==> summable (\\n. x pow (a * n + b) / &(a * n + b))
   a:num
   inv(&1 - abs(z pow a))
   ~(b = 0) ==> 1 <= a + b
@@ -5839,7 +5839,7 @@ Examples/polylog quotations (209):
   0
   \\n. abs(z pow a) pow n
   z:real
-  !z. abs(z) < &1\n        ==> (suminf (\\n. z pow (a * n + b) / &(a * n + b)) =\n             z pow b * suminf (\\n. inv (&(a * n + b)) * z pow a pow n))
+  forall z. abs(z) < &1\n        ==> (suminf (\\n. z pow (a * n + b) / &(a * n + b)) =\n             z pow b * suminf (\\n. inv (&(a * n + b)) * z pow a pow n))
   abs(h) < &1 - abs(x)
   abs(x + h) < &1
   (a = a') /\\ &0 < b ==> abs(a - a') < b
@@ -5857,7 +5857,7 @@ Examples/polylog quotations (209):
   (x pow a) pow n = x pow a * (x pow a) pow (n - 1)
   n = 0
   n:num
-  !n. (&a * x pow (a - 1) * x pow b) *\n        &n / &(a * n + b) * x pow a pow (n - 1) +\n        (&b * x pow (b - 1)) * inv(&(a * n + b)) * x pow a pow n =\n        x pow (a * n + b - 1)
+  forall n. (&a * x pow (a - 1) * x pow b) *\n        &n / &(a * n + b) * x pow a pow (n - 1) +\n        (&b * x pow (b - 1)) * inv(&(a * n + b)) * x pow a pow n =\n        x pow (a * n + b - 1)
   a ==> b ==> c <=> b /\\ a ==> c
   &b * x pow (b - 1)
   inv(&1 - abs(x pow a))
@@ -5898,7 +5898,7 @@ Examples/polylog quotations (209):
   x pow a
   a:num
   abs(x pow a) < &1
-  !a b x. ~(a = 0) /\\ ~(b = 0) /\\ abs(x) < &1\n           ==> ((\\x. suminf (\\n. x pow (a * n + b) / &(a * n + b))) diffl\n               (x pow (b - 1) / (&1 - x pow a)))(x)
+  forall a b x. ~(a = 0) /\\ ~(b = 0) /\\ abs(x) < &1\n           ==> ((\\x. suminf (\\n. x pow (a * n + b) / &(a * n + b))) diffl\n               (x pow (b - 1) / (&1 - x pow a)))(x)
   &0 < x /\\ x < p4\n    ==> --(&2 * p4) < &2 * p4 - x /\\ &2 * p4 - x < &2 * p4
   (a = d - c) ==> (a = b) ==> (b + c = d)
   atn
@@ -5911,13 +5911,13 @@ Examples/polylog quotations (209):
   summable\n      (\\n. inv (&16 pow n) *\n           (&4 / &(8 * n + 1) -\n            &2 / &(8 * n + 4) -\n            &1 / &(8 * n + 5) -\n            &1 / &(8 * n + 6)))
   a * b * c = b * a * c
   inv(sqrt(&2)) pow 2 = &1 / &2
-  !x. x pow 4 = (x pow 2) pow 2
-  !x. x pow 6 = (x pow 2) pow 3
+  forall x. x pow 4 = (x pow 2) pow 2
+  forall x. x pow 6 = (x pow 2) pow 3
   a * s * i * b - c - d * s * (i * e) * f - g =\n    (s * i) * a * b - c - (s * i) * d * e * f - g
-  !x. x pow 5 = x * x pow 4
+  forall x. x pow 5 = x * x pow 4
   inv(sqrt(&2)) pow 2 = &1 / &2
   2 * 4
-  !n. inv(sqrt (&2)) pow (8 * n) = inv(&16 pow n)
+  forall n. inv(sqrt (&2)) pow (8 * n) = inv(&16 pow n)
   l1 + l2 + a + y - l3 = (l1 + l2 - l3) + a + y
   inv(sqrt(&2)) pow 2 = &1 / &2
   (x - &1) * (x + &1) = x * x - &1
@@ -5925,7 +5925,7 @@ Examples/polylog quotations (209):
   &0 < x /\\ x < &1 ==> ~(x - &1 = &0) /\\ ~(x + &1 = &0)
   &0 < x <=> &0 <= x /\\ ~(x = &0)
   &0 < (inv(sqrt(&2)) - &1) pow 2 /\\\n                  &0 < (inv(sqrt (&2)) + &1) pow 2
-  !other. ln((inv (sqrt (&2)) - &1) pow 2) +\n            ln((inv (sqrt (&2)) + &1) pow 2) + other =\n            ln(&1 / &4) + other
+  forall other. ln((inv (sqrt (&2)) - &1) pow 2) +\n            ln((inv (sqrt (&2)) + &1) pow 2) + other =\n            ln(&1 / &4) + other
   inv(sqrt(&2)) pow 2 = &1 / &2
   inv(sqrt(&2)) pow 4 = inv(sqrt(&2)) pow 2 pow 2
   0
@@ -5936,14 +5936,14 @@ Examples/polylog quotations (209):
   sqrt((&5 / &4) pow 2)
   inv(&1)
   inv(sqrt(&2))
-  !a. &0 <= x /\\ x <= a /\\ a < &1 ==> abs(x) < &1
+  forall a. &0 <= x /\\ x <= a /\\ a < &1 ==> abs(x) < &1
   abs(x) < &1
   x:real
   inv(sqrt(&2))
   &0
   \\x. suminf (\\n. &4 * sqrt (&2) * x pow (8 * n + 1) / &(8 * n + 1) -\n                    &8 * x pow (8 * n + 4) / &(8 * n + 4) -\n                    &4 * sqrt (&2) * x pow (8 * n + 5) / &(8 * n + 5) -\n                    &8 * x pow (8 * n + 6) / &(8 * n + 6)) -\n        (ln ((x - &1) pow 2) +\n         ln((x + &1) pow 2) +\n         ln((x pow 2 + x * sqrt (&2) + &1) /\n            (x pow 2 - x * sqrt (&2) + &1)) +\n         &2 * atn (x * sqrt (&2) + &1) +\n         &2 * atn (x * sqrt (&2) - &1) +\n         &2 * atn (x pow 2) - ln (x pow 4 + &1))
   z:real
-  !z. abs(z) < &1\n          ==> (suminf\n                  (\\n. (&4 * sqrt (&2)) * z pow (8 * n + 1) / &(8 * n + 1) -\n                       &8 * z pow (8 * n + 4) / &(8 * n + 4) -\n                       (&4 * sqrt (&2)) * z pow (8 * n + 5) / &(8 * n + 5) -\n                       &8 * z pow (8 * n + 6) / &(8 * n + 6)) =\n            (&4 * sqrt (&2)) * suminf (\\n. z pow (8 * n + 1) / &(8 * n + 1)) -\n             &8 * suminf (\\n. z pow (8 * n + 4) / &(8 * n + 4)) -\n             (&4 * sqrt (&2)) * suminf (\\n. z pow (8 * n + 5) / &(8 * n + 5)) -\n             &8 * suminf (\\n. z pow (8 * n + 6) / &(8 * n + 6)))
+  forall z. abs(z) < &1\n          ==> (suminf\n                  (\\n. (&4 * sqrt (&2)) * z pow (8 * n + 1) / &(8 * n + 1) -\n                       &8 * z pow (8 * n + 4) / &(8 * n + 4) -\n                       (&4 * sqrt (&2)) * z pow (8 * n + 5) / &(8 * n + 5) -\n                       &8 * z pow (8 * n + 6) / &(8 * n + 6)) =\n            (&4 * sqrt (&2)) * suminf (\\n. z pow (8 * n + 1) / &(8 * n + 1)) -\n             &8 * suminf (\\n. z pow (8 * n + 4) / &(8 * n + 4)) -\n             (&4 * sqrt (&2)) * suminf (\\n. z pow (8 * n + 5) / &(8 * n + 5)) -\n             &8 * suminf (\\n. z pow (8 * n + 6) / &(8 * n + 6)))
   abs(h) < &1 - abs(x)
   abs(x + h) < &1
   (a = a') /\\ &0 < b ==> abs(a - a') < b
@@ -5970,7 +5970,7 @@ Examples/polylog quotations (209):
   x:real
   1
   8
-  !x. abs(x) < &1\n        ==> ((\\x. suminf (\\n. &4 * sqrt(&2) * x pow (8 * n + 1) / &(8 * n + 1) -\n                              &8 * x pow (8 * n + 4) / &(8 * n + 4) -\n                              &4 * sqrt(&2) * x pow (8 * n + 5) / &(8 * n + 5) -\n                              &8 * x pow (8 * n + 6) / &(8 * n + 6)))\n             diffl\n              (&4 * sqrt(&2) -\n               &8 * x pow 3 -\n               &4 * sqrt(&2) * x pow 4 -\n               &8 * x pow 5) / (&1 - x pow 8))(x)
+  forall x. abs(x) < &1\n        ==> ((\\x. suminf (\\n. &4 * sqrt(&2) * x pow (8 * n + 1) / &(8 * n + 1) -\n                              &8 * x pow (8 * n + 4) / &(8 * n + 4) -\n                              &4 * sqrt(&2) * x pow (8 * n + 5) / &(8 * n + 5) -\n                              &8 * x pow (8 * n + 6) / &(8 * n + 6)))\n             diffl\n              (&4 * sqrt(&2) -\n               &8 * x pow 3 -\n               &4 * sqrt(&2) * x pow 4 -\n               &8 * x pow 5) / (&1 - x pow 8))(x)
   (\\n. inv(&16 pow n) * (&4 / &(8 * n + 1) -\n                          &2 / &(8 * n + 4) -\n                          &1 / &(8 * n + 5) -\n                          &1 / &(8 * n + 6)))\n   sums pi
 FACTOR_1X4_LEMMA =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) x:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) x:real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 MAGIC_DERIVATIVE =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_add:fun(real,fun(real,real)) (#ln:fun(real,real) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) (#ln:fun(real,real) ((#real_pow:fun(real,fun(num,real)) ((#real_add:fun(real,fun(real,real)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) (#ln:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#atn:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#atn:fun(real,real) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#atn:fun(real,real) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#ln:fun(real,real) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_mul:fun(real,fun(real,real)) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) x:real))))

@@ -15485,42 +15485,42 @@ Translating certificate to HOL inferences
   m:num
   n - m:num
   m:num
-  !m n:num. P m /\\ P (m + n) ==> P n
+  forall m n:num. P m /\\ P (m + n) ==> P n
   m = 0
   m:num
   n:num
   m + n:num
-  !P. (!m n. P m /\\ P (m + n) ==> P n)\n       ==> !m n. P m /\\ P n ==> P (gcd(m,n))
-  !x m n. (!i. x(i + m) = x(i)) /\\ (!i. x(i + n) = x(i))\n           ==> !i. x(i + gcd(m,n)) = x(i)
-  !x m n. (!i. x(i + m) = x(i)) /\\ (!i. x(i + n) = x(i)) /\\ coprime(m,n)\n           ==> !i. x i = x 0
+  forall P. (forall m n. P m /\\ P (m + n) ==> P n)\n       ==> forall m n. P m /\\ P n ==> P (gcd(m,n))
+  forall x m n. (forall i. x(i + m) = x(i)) /\\ (forall i. x(i + n) = x(i))\n           ==> forall i. x(i + gcd(m,n)) = x(i)
+  forall x m n. (forall i. x(i + m) = x(i)) /\\ (forall i. x(i + n) = x(i)) /\\ coprime(m,n)\n           ==> forall i. x i = x 0
   CARD(s) = CARD {y | y IN s /\\ (R:A->A->bool) a y} +\n                          CARD {y | y IN s /\\ ~(R a y)}
   {y:A | y IN s /\\ ~(R (a:A) y)}
   a:A
   s:A->bool = {}
   CARD(s:A->bool)
-  !R s k. FINITE s /\\\n           (!x. x IN s ==> R x x) /\\\n           (!x y. R x y ==> R y x) /\\\n           (!x y z. R x y /\\ R y z ==> R x z) /\\\n           (!x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
+  forall R s k. FINITE s /\\\n           (forall x. x IN s ==> R x x) /\\\n           (forall x y. R x y ==> R y x) /\\\n           (forall x y z. R x y /\\ R y z ==> R x z) /\\\n           (forall x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
   \\x y:A. x IN s /\\ y IN s /\\ R x y
-  !R s k. FINITE s /\\\n           (!x. x IN s ==> R x x) /\\\n           (!x y. x IN s /\\ y IN s /\\ R x y ==> R y x) /\\\n           (!x y z. x IN s /\\ y IN s /\\ z IN s /\\ R x y /\\ R y z ==> R x z) /\\\n           (!x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
+  forall R s k. FINITE s /\\\n           (forall x. x IN s ==> R x x) /\\\n           (forall x y. x IN s /\\ y IN s /\\ R x y ==> R y x) /\\\n           (forall x y z. x IN s /\\ y IN s /\\ z IN s /\\ R x y /\\ R y z ==> R x z) /\\\n           (forall x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
   y:A
   x:A IN s
   x:A
-  !x:A. x IN s ==> (?!y. y IN s /\\ r x y)
+  forall x:A. x IN s ==> (?!y. y IN s /\\ r x y)
   x:A
   s = (a:A) INSERT b INSERT (s DELETE a DELETE b)
   s DELETE (a:A) DELETE b
   b:A
   a:A IN s
   a:A
-  !x:A. x IN s ==> (?!y:A. y IN s /\\ r x y)
+  forall x:A. x IN s ==> (?!y:A. y IN s /\\ r x y)
   a:A
   s:A->bool = {}
   CARD(s:A->bool)
-  !s r. FINITE s /\\\n         (!x. x IN s ==> ~(r x x)) /\\\n         (!x y. x IN s /\\ y IN s /\\ r x y ==> r y x) /\\\n         (!x:A. x IN s ==> ?!y. y IN s /\\ r x y)\n         ==> EVEN(CARD s)
-  cycle r k x <=> (!i. r (x i) (x(i + 1))) /\\ (!i. x(i + k) = x(i))
-  path r k x <=> (!i. i < k ==> r (x i) (x(i + 1))) /\\\n                 (!i. k < i ==> x(i) = @x. T)
-  !r k x:num->A. cycle r k x ==> !i m. x(m * k + i) = x(i)
-  !r k x:num->A. cycle r k x /\\ ~(k = 0) ==> !i. x(i MOD k) = x(i)
-  (!x y. r x y ==> s x y) ==> {x | path r k x} SUBSET {x | path s k x}
+  forall s r. FINITE s /\\\n         (forall x. x IN s ==> ~(r x x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ r x y ==> r y x) /\\\n         (forall x:A. x IN s ==> ?!y. y IN s /\\ r x y)\n         ==> EVEN(CARD s)
+  cycle r k x <=> (forall i. r (x i) (x(i + 1))) /\\ (forall i. x(i + k) = x(i))
+  path r k x <=> (forall i. i < k ==> r (x i) (x(i + 1))) /\\\n                 (forall i. k < i ==> x(i) = @x. T)
+  forall r k x:num->A. cycle r k x ==> forall i m. x(m * k + i) = x(i)
+  forall r k x:num->A. cycle r k x /\\ ~(k = 0) ==> forall i. x(i MOD k) = x(i)
+  (forall x y. r x y ==> s x y) ==> {x | path r k x} SUBSET {x | path s k x}
   k < SUC k
   i = SUC k
   i:num
@@ -15539,14 +15539,14 @@ Translating certificate to HOL inferences
   x:num->A
   {x:num->A | path r (SUC k) x} =\n    IMAGE (\\(x,a) i. if i = SUC k then a else x i)\n          {x,a | x IN {x | path r k x} /\\ a IN {u | r (x k) u}}
   {x:num->A | path r 0 x} =\n                  IMAGE (\\a i. if i = 0 then a else @x. T) (:A)
-  !N m r k. (:A) HAS_SIZE N /\\ (!x. {y | r x y} HAS_SIZE m)\n             ==> {x:num->A | path r k x} HAS_SIZE (N * m EXP k)
+  forall N m r k. (:A) HAS_SIZE N /\\ (forall x. {y | r x y} HAS_SIZE m)\n             ==> {x:num->A | path r k x} HAS_SIZE (N * m EXP k)
   {y | T} = (:A)
   k:num
   \\a:A b:A. T
   CARD(:A)
   CARD(:A)
   {x:num->A | path (\\a b. T) k x}
-  !r k. FINITE(:A) ==> FINITE {x:num->A | path r k x}
+  forall r k. FINITE(:A) ==> FINITE {x:num->A | path r k x}
   k:num
   i:num
   i:num
@@ -15570,8 +15570,8 @@ Translating certificate to HOL inferences
   \\i. if i <= k then x(i):A else @x. T
   x:num->A
   {x:num->A | cycle r k x} =\n    IMAGE (\\x i. x(i MOD k)) {x | path r k x /\\ x(k) = x(0)}
-  !r k. FINITE(:A) /\\ ~(k = 0)\n         ==> {x:num->A | cycle r k x} HAS_SIZE\n             CARD{x:num->A | path r k x /\\ x(k) = x(0)}
-  !r k. FINITE(:A) /\\ ~(k = 0) ==> FINITE {x:num->A | cycle r k x}
+  forall r k. FINITE(:A) /\\ ~(k = 0)\n         ==> {x:num->A | cycle r k x} HAS_SIZE\n             CARD{x:num->A | path r k x /\\ x(k) = x(0)}
+  forall r k. FINITE(:A) /\\ ~(k = 0) ==> FINITE {x:num->A | cycle r k x}
   k + 2 < i ==> k < i
   k + 2 < i ==> ~(i = k + 1) /\\ ~(i = k + 2)
   i < k + 2
@@ -15643,24 +15643,24 @@ Translating certificate to HOL inferences
   y:num->A
   {x:num->A | path r (k + 2) x /\\ x k = x 0 /\\ x (k + 2) = x 0} =\n      IMAGE (\\(x,a) i. if i = k + 1 then a\n                     else if i = k + 2 then x(0)\n                     else x(i))\n            {x,a | x IN {x | path r k x /\\ x(k) = x(0)} /\\\n                   a IN {u | r (x k) u}}
   {x | path r (k + 2) x /\\ x(k + 2) = x(0)} =\n    {x | path r (k + 2) x /\\ x k = x 0 /\\ x(k + 2) = x(0)} UNION\n    {x | path r (k + 2) x /\\ ~(x k = x 0) /\\ x(k + 2) = x(0)}
-  !N m r k.\n     (:A) HAS_SIZE N /\\ ~(k = 0) /\\ ~(m = 0) /\\\n     (!x:A. {y | r x y} HAS_SIZE m) /\\\n     (!x y. r x y ==> r y x) /\\\n     (!x y. ~(x = y) ==> ?!z. r x z /\\ r z y)\n     ==> {x | path r (k + 2) x /\\ x(k + 2) = x(0)} HAS_SIZE\n         (m * CARD {x | path r k x /\\ x(k) = x(0)} +\n          CARD {x | path r (k) x /\\ ~(x(k) = x(0))})
+  forall N m r k.\n     (:A) HAS_SIZE N /\\ ~(k = 0) /\\ ~(m = 0) /\\\n     (forall x:A. {y | r x y} HAS_SIZE m) /\\\n     (forall x y. r x y ==> r y x) /\\\n     (forall x y. ~(x = y) ==> ?!z. r x z /\\ r z y)\n     ==> {x | path r (k + 2) x /\\ x(k + 2) = x(0)} HAS_SIZE\n         (m * CARD {x | path r k x /\\ x(k) = x(0)} +\n          CARD {x | path r (k) x /\\ ~(x(k) = x(0))})
   i:num
   0
   0
   k + 1
   k:num
-  shiftable x y <=> ?k. !i. x(i) = y(i + k)
-  !x. shiftable x x
-  !x y z. shiftable x y /\\ shiftable y z ==> shiftable x z
+  shiftable x y <=> ?k. forall i. x(i) = y(i + k)
+  forall x. shiftable x x
+  forall x y z. shiftable x y /\\ shiftable y z ==> shiftable x z
   k:num
   k MOD p
   k:num
-  !x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0)\n             ==> (shiftable x y <=> ?k. k < p /\\ !i. x(i) = y(i + k))
+  forall x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0)\n             ==> (shiftable x y <=> ?k. k < p /\\ forall i. x(i) = y(i + k))
   k < p ==> (i + (p - k)) + k = i + p:num
   p - k:num
   k:num
   a /\\ b /\\ c /\\ d <=> (a /\\ b /\\ c) /\\ d
-  !x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0) /\\ shiftable x y\n             ==> shiftable y x
+  forall x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0) /\\ shiftable x y\n             ==> shiftable y x
   coprime(p,p + d) <=> coprime(d,p)
   k <= l:num
   k < p:num
@@ -15671,7 +15671,7 @@ Translating certificate to HOL inferences
   i:num
   l + (p - k):num
   p:num
-  !i. x(i):A = x(0)
+  forall i. x(i):A = x(0)
   (~p ==> F) ==> p
   l:num
   k:num
@@ -15683,7 +15683,7 @@ Translating certificate to HOL inferences
   x:num->A
   shiftable:(num->A)->(num->A)->bool
   p = 0
-  !r p x. FINITE(:A) /\\ prime p /\\ (!x. ~(r x x))\n           ==> p divides CARD {x:num->A | cycle r p x}
+  forall r p x. FINITE(:A) /\\ prime p /\\ (forall x. ~(r x x))\n           ==> p divides CARD {x:num->A | cycle r p x}
   p - 2
   friend:person->person->bool
   m:num
@@ -15696,7 +15696,7 @@ Translating certificate to HOL inferences
   ~(m = 0) ==> m - 1 + 1 = m
   ~(m = 0)
   m - 1
-  !q. t divides q /\\ m = q + 1 ==> t divides m ==> t divides w
+  forall q. t divides q /\\ m = q + 1 ==> t divides m ==> t divides w
   2 divides 1
   2 <= p /\\ ~(p = 2) ==> 3 <= p
   3 <= p
@@ -15704,23 +15704,23 @@ Translating certificate to HOL inferences
   CARD {x:num->person | path friend (p-2) x /\\ x (p-2) = x 0}
   CARD {x:num->person | cycle friend p x}
   m - 1
-  !q c K1 K2.\n        p divides q /\\ p divides c /\\\n        c = (q + 1) * K1 + K2 /\\\n        K1 + K2 = ((q + 1) * q + 1) * nep2\n        ==> p divides nep2
+  forall q c K1 K2.\n        p divides q /\\ p divides c /\\\n        c = (q + 1) * K1 + K2 /\\\n        K1 + K2 = ((q + 1) * q + 1) * nep2\n        ==> p divides nep2
   p - 2
   ~(m = 0) ==> m - 1 + 1 = m
   m - 1
-  !x. p divides (x + 1) /\\ p divides x ==> p divides 1
+  forall x. p divides (x + 1) /\\ p divides x ==> p divides 1
   ~(p divides 1)
   p:num
   ~(m = 2)
   m - 1
-  !x:person. x = a \\/ x = b \\/ x = c
+  forall x:person. x = a \\/ x = b \\/ x = c
   z:person
   y:person
   x:person
   a:person
-  !p:person. {q:person | friend p q} HAS_SIZE 2
+  forall p:person. {q:person | friend p q} HAS_SIZE 2
   a:person
-  !u:person. ?v:person. ~(v = u) /\\ ~friend u v
+  forall u:person. ?v:person. ~(v = u) /\\ ~friend u v
   c:person
   b:person
   a:person
@@ -15756,21 +15756,21 @@ Translating certificate to HOL inferences
   N = CARD(:person)
   \\x y:person. friend a x /\\ friend a y /\\ friend x y
   a:person
-  !x:person. degree x = (m:num)
+  forall x:person. degree x = (m:num)
   EVEN(m)
-  !p:person. {q:person | friend p q} HAS_SIZE m
+  forall p:person. {q:person | friend p q} HAS_SIZE m
   ~(m = 0)
-  !p:person. {q:person | friend p q} HAS_SIZE m
-  !x:person. ~(x = c) ==> degree x = (k:num)
+  forall p:person. {q:person | friend p q} HAS_SIZE m
+  forall x:person. ~(x = c) ==> degree x = (k:num)
   (degree:person->num)(b) = k /\\ ~(friend a b) /\\\n                  friend a c /\\ friend b c
   k:num
   k = (degree:person->num) a
   c = (mutualfriend:person->person->person) a b
   a:person
   b:person
-  ?m:num. !x:person. degree(x) = m
+  ?m:num. forall x:person. degree(x) = m
   p <=> ~ ~ p
-  !x y:person. ~(friend x y) ==> degree x:num = degree y
+  forall x y:person. ~(friend x y) ==> degree x:num = degree y
   u2:person
   u1:person
   (mutualfriend:person->person->person) u1 y
@@ -15779,13 +15779,13 @@ Translating certificate to HOL inferences
   u1:person
   CARD(IMAGE (\\u. (mutualfriend:person->person->person) u y)\n                           {q | friend (x:person) q})
   x:person = y
-  !x y:person. ~(friend x y) ==> degree(x):num <= degree(y)
+  forall x y:person. ~(friend x y) ==> degree(x):num <= degree(y)
   degree = \\p:person. CARD {q:person | friend p q}
-  !s:person->bool. FINITE s
+  forall s:person->bool. FINITE s
   mutualfriend:person->person->person
   a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-  !x y:person. ~(x = y) ==> ?!z:person. friend x z /\\ friend y z
-  !friend:person->person->bool.\n      FINITE(:person) /\\\n      (!x. ~(friend x x)) /\\\n      (!x y. friend x y ==> friend y x) /\\\n      (!x y. ~(x = y) ==> ?!z. friend x z /\\ friend y z)\n      ==> ?u. !v. ~(v = u) ==> friend u v
+  forall x y:person. ~(x = y) ==> ?!z:person. friend x z /\\ friend y z
+  forall friend:person->person->bool.\n      FINITE(:person) /\\\n      (forall x. ~(friend x x)) /\\\n      (forall x y. friend x y ==> friend y x) /\\\n      (forall x y. ~(x = y) ==> ?!z. friend x z /\\ friend y z)\n      ==> ?u. forall v. ~(v = u) ==> friend u v
   z:person
   y:person
   x:person

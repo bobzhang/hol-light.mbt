@@ -6,18 +6,18 @@ Formal_ineqs/list/more_list quotations (43):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  !(f:num->A) k. TABLE f k = REVERSE (REVERSE_TABLE f k)
+  forall(f:num->A) k. TABLE f k = REVERSE (REVERSE_TABLE f k)
   l_seq n m = TABLE (\\i. n + i) ((m + 1) - n)
-  !(f:num->A) n. LENGTH (REVERSE_TABLE f n) = n
-  !(l:(A)list). LENGTH (REVERSE l) = LENGTH l
-  !(f:num->A) n. LENGTH (TABLE f n) = n
+  forall(f:num->A) n. LENGTH (REVERSE_TABLE f n) = n
+  forall(l:(A)list). LENGTH (REVERSE l) = LENGTH l
+  forall(f:num->A) n. LENGTH (TABLE f n) = n
   n - n = 0
   i = n:num
   n:num
   n:num
-  !(f:num->A) n i. i < n ==> EL i (TABLE f n) = f i
-  !(f:num->A). TABLE f 0 = []
-  !(f:num->A) n. TABLE f (SUC n) = APPEND (TABLE f n) [f n]
+  forall(f:num->A) n i. i < n ==> EL i (TABLE f n) = f i
+  forall(f:num->A). TABLE f 0 = []
+  forall(f:num->A) n. TABLE f (SUC n) = APPEND (TABLE f n) [f n]
   0 < SUC a
   0
   SUC a < SUC b <=> a < b
@@ -29,20 +29,20 @@ Formal_ineqs/list/more_list quotations (43):
   ul:(A)list
   vl:(A)list
   vl:(A)list
-  !ul vl:(A)list. ul = vl <=> \n               (LENGTH ul = LENGTH vl /\\ (!j. j < LENGTH ul ==> EL j ul = EL j vl))
+  forall ul vl:(A)list. ul = vl <=> \n               (LENGTH ul = LENGTH vl /\\ (forall j. j < LENGTH ul ==> EL j ul = EL j vl))
   LENGTH (l_seq n m) = (m + 1) - n
-  !i m n. i < (m + 1) - n ==> EL i (l_seq n m) = n + i
-  !n m. l_seq n m = [] <=> (m < n)
+  forall i m n. i < (m + 1) - n ==> EL i (l_seq n m) = n + i
+  forall n m. l_seq n m = [] <=> (m < n)
   (n + 1) - n = 1
-  !n. l_seq n n = [n]
+  forall n. l_seq n n = [n]
   n + 1
   m:num
   j:num
-  !n m. n <= m ==> l_seq n m = CONS n (l_seq (n + 1) m)
-  !l. LENGTH (BUTLAST l) = LENGTH l - 1
+  forall n m. n <= m ==> l_seq n m = CONS n (l_seq (n + 1) m)
+  forall l. LENGTH (BUTLAST l) = LENGTH l - 1
   i - 1
   i < SUC (LENGTH (a1:(A)list)) - 1
-  !(l:(A)list) i. i < LENGTH l - 1 ==> EL i (BUTLAST l) = EL i l
+  forall(l:(A)list) i. i < LENGTH l - 1 ==> EL i (BUTLAST l) = EL i l
 More_list.REVERSE_TABLE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('A),fun(list('A),bool)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) (#NUMERAL:fun(num,num) #_0:num))) #NIL:list('A))) ((#=:fun(list('A),fun(list('A),bool)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) (#SUC:fun(num,num) i:num))) ((#CONS:fun('A,fun(list('A),list('A))) (f:fun(num,'A) i:num)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) i:num))))
 More_list.TABLE =  |- (#!:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). (#!:fun(fun(num,bool),bool) (\k:num. ((#=:fun(list('A),fun(list('A),bool)) ((#TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) k:num)) (#REVERSE:fun(list('A),list('A)) ((#REVERSE_TABLE:fun(fun(num,'A),fun(num,list('A))) f:fun(num,'A)) k:num)))))))
 More_list.l_seq =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(list(num),fun(list(num),bool)) ((#l_seq:fun(num,fun(num,list(num))) n:num) m:num)) ((#TABLE:fun(fun(num,num),fun(num,list(num))) (\i:num. ((#+:fun(num,fun(num,num)) n:num) i:num))) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))))))

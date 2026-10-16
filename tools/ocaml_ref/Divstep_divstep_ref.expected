@@ -9872,24 +9872,24 @@ Divstep/divstep quotations (135):
   divstep(d:real,f:int,g:int) =\n        if d > &0 /\\ g rem &2 = &1\n        then &1 - d, g, (g - f) div &2\n        else &1 + d, f, (g + (g rem &2) * f) div &2
   divstep1(d:real,f:int,g:int) =\n        if d > &0 /\\ g rem &2 = &1\n        then --d, g, --f\n        else d, f, g
   divstep2(d:real,f:int,g:int) =\n        &1 + d,f,(g + (g rem &2) * f) div &2
-  !d f g.\n        f rem &2 = &1\n        ==> (divstep2 o divstep1) (d,f,g) = divstep (d,f,g)
-  !d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> f' rem &2 = &1
-  !d f g d' f' g'.\n        g = &0 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> g' = &0
+  forall d f g.\n        f rem &2 = &1\n        ==> (divstep2 o divstep1) (d,f,g) = divstep (d,f,g)
+  forall d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> f' rem &2 = &1
+  forall d f g d' f' g'.\n        g = &0 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> g' = &0
   p:int
   &2:int
   &2:int
   m:int
   coprime(k:int,m)\n      ==> (d divides m /\\ d divides p <=>\n           d divides m /\\ d divides (k * p))
-  !m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)
+  forall m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)
   g:int
-  !d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)
-  g:int
-  &0:int < &2
-  !B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B <= f /\\ f < B /\\\n        --B <= g /\\ g < B\n        ==> --B <= f' /\\ f' < B /\\\n            --B <= g' /\\ g' < B
+  forall d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)
   g:int
   &0:int < &2
-  !B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B < f /\\ f < B /\\\n        --B < g /\\ g < B\n        ==> --B < f' /\\ f' < B /\\\n            --B < g' /\\ g' < B
-  !n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> f' rem &2 = &1
+  forall B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B <= f /\\ f < B /\\\n        --B <= g /\\ g < B\n        ==> --B <= f' /\\ f' < B /\\\n            --B <= g' /\\ g' < B
+  g:int
+  &0:int < &2
+  forall B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B < f /\\ f < B /\\\n        --B < g /\\ g < B\n        ==> --B < f' /\\ f' < B /\\\n            --B < g' /\\ g' < B
+  forall n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> f' rem &2 = &1
   ~
   ~
   ~
@@ -9919,7 +9919,7 @@ Divstep/divstep quotations (135):
   \\/
   \\/
   F
-  !n d f g d' f' g'.\n        g = &0 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> g' = &0
+  forall n d f g d' f' g'.\n        g = &0 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> g' = &0
   ~
   ~
   ~
@@ -9947,7 +9947,7 @@ Divstep/divstep quotations (135):
   \\/
   \\/
   F
-  !n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)
+  forall n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)
   ~
   ~
   ~
@@ -10003,7 +10003,7 @@ Divstep/divstep quotations (135):
   F
   q:real#int#int
   ITER n divstep t
-  !t m. (?n. n <= m /\\ SND(SND(ITER n divstep t)) = &0) <=>\n         SND(SND(ITER m divstep t)) = &0
+  forall t m. (?n. n <= m /\\ SND(SND(ITER n divstep t)) = &0) <=>\n         SND(SND(ITER m divstep t)) = &0
 divstep =  |- (#!:fun(fun(real,bool),bool) (\d:real. (#!:fun(fun(int,bool),bool) (\g:int. (#!:fun(fun(int,bool),bool) (\f:int. ((#=:fun(prod(real,prod(int,int)),fun(prod(real,prod(int,int)),bool)) (#divstep:fun(prod(real,prod(int,int)),prod(real,prod(int,int))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) d:real) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int)))) (((#COND:fun(bool,fun(prod(real,prod(int,int)),fun(prod(real,prod(int,int)),prod(real,prod(int,int))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) d:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(int,fun(int,bool)) ((#rem:fun(int,fun(int,int)) g:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) ((#,:fun(int,fun(int,prod(int,int))) g:int) ((#div:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) g:int) f:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) ((#,:fun(int,fun(int,prod(int,int))) f:int) ((#div:fun(int,fun(int,int)) ((#int_add:fun(int,fun(int,int)) g:int) ((#int_mul:fun(int,fun(int,int)) ((#rem:fun(int,fun(int,int)) g:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f:int))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))
 divstep1 =  |- (#!:fun(fun(real,bool),bool) (\d:real. (#!:fun(fun(int,bool),bool) (\f:int. (#!:fun(fun(int,bool),bool) (\g:int. ((#=:fun(prod(real,prod(int,int)),fun(prod(real,prod(int,int)),bool)) (#divstep1:fun(prod(real,prod(int,int)),prod(real,prod(int,int))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) d:real) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int)))) (((#COND:fun(bool,fun(prod(real,prod(int,int)),fun(prod(real,prod(int,int)),prod(real,prod(int,int))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) d:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(int,fun(int,bool)) ((#rem:fun(int,fun(int,int)) g:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) (#real_neg:fun(real,real) d:real)) ((#,:fun(int,fun(int,prod(int,int))) g:int) (#int_neg:fun(int,int) f:int)))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) d:real) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int))))))))))
 divstep2 =  |- (#!:fun(fun(real,bool),bool) (\d:real. (#!:fun(fun(int,bool),bool) (\g:int. (#!:fun(fun(int,bool),bool) (\f:int. ((#=:fun(prod(real,prod(int,int)),fun(prod(real,prod(int,int)),bool)) (#divstep2:fun(prod(real,prod(int,int)),prod(real,prod(int,int))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) d:real) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int)))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) ((#,:fun(int,fun(int,prod(int,int))) f:int) ((#div:fun(int,fun(int,int)) ((#int_add:fun(int,fun(int,int)) g:int) ((#int_mul:fun(int,fun(int,int)) ((#rem:fun(int,fun(int,int)) g:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f:int))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))

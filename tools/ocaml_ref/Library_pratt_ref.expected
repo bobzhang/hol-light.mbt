@@ -12801,13 +12801,13 @@ CPU time (user): <t>
 Library/pratt quotations (443):
   x <= y ==> (y:num = x + d <=> y - x = d)
   (x == y) (mod &n) <=> &n divides (x - y)
-  !x y n:num. (x == y) (mod n) /\\ y <= x ==> ?q. x = y + n * q
+  forall x y n:num. (x == y) (mod n) /\\ y <= x ==> ?q. x = y + n * q
   x + y * 0 = x
   (x:num == y) (mod n) <=> (y == x) (mod n)
   a \\/ b ==> c ==> d <=> (c /\\ b) \\/ (c /\\ a) ==> d
   y:num
   x:num
-  !x y n:num. (mod n) x y <=> ?q1 q2. x + n * q1 = y + n * q2
+  forall x y n:num. (mod n) x y <=> ?q1 q2. x + n * q1 = y + n * q2
   p:num = q
   q:num
   ~(coprime(p,q))
@@ -12817,24 +12817,24 @@ Library/pratt quotations (443):
   m:num
   p = 1
   p = 0
-  !p. prime p <=>\n       ~(p = 0) /\\ ~(p = 1) /\\ !m. 0 < m /\\ m < p ==> coprime(p,m)
+  forall p. prime p <=>\n       ~(p = 0) /\\ ~(p = 1) /\\ forall m. 0 < m /\\ m < p ==> coprime(p,m)
   ~(n = 0)
   ~(n = 0)
   {m | 0 < m /\\ m < SUC n} = n INSERT {m | 0 < m /\\ m < n}
   {m | 0 < m /\\ m < SUC n} = EMPTY
   n = 0
   {m | 0 < m /\\ m < 0} = EMPTY
-  !n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)
-  !x y. (x == y) (mod 0) <=> (x = y)
-  !x y. (x == y) (mod 1)
-  !x n. ((x == 0) (mod n) <=> n divides x)
-  !x y n. (x == y) (mod n) <=>\n           if x <= y then (y - x == 0) (mod n)\n           else (x - y == 0) (mod n)
+  forall n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)
+  forall x y. (x == y) (mod 0) <=> (x = y)
+  forall x y. (x == y) (mod 1)
+  forall x n. ((x == 0) (mod n) <=> n divides x)
+  forall x y n. (x == y) (mod n) <=>\n           if x <= y then (y - x == 0) (mod n)\n           else (x - y == 0) (mod n)
   a = 0
-  !a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
-  !x n. (x == x) (mod n)
-  !x y n. (x == y) (mod n) <=> (y == x) (mod n)
+  forall a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
+  forall x n. (x == x) (mod n)
+  forall x y n. (x == y) (mod n) <=> (y == x) (mod n)
   (x + n * q1 = y + n * q2) /\\\n    (y + n * q3 = z + n * q4)\n    ==> (x + n * (q1 + q3) = z + n * (q2 + q4))
-  !x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
+  forall x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
   phi(n) = CARD { m | 0 < m /\\ m <= n /\\ coprime(m,n) }
   m = 0
   m:num
@@ -12842,18 +12842,18 @@ Library/pratt quotations (443):
   n = 1
   n = 0
   phi(n) = CARD { m | coprime(m,n) /\\ m < n}
-  !n. ~(n = 1) ==> (phi(n) = CARD {m | 0 < m /\\ m < n /\\ coprime(m,n)})
-  !n. phi(n) <= n
+  forall n. ~(n = 1) ==> (phi(n) = CARD {m | 0 < m /\\ m < n /\\ coprime(m,n)})
+  forall n. phi(n) <= n
   n:num
-  !n. ~(n = 1) ==> phi(n) <= n - 1
+  forall n. ~(n = 1) ==> phi(n) <= n - 1
   0
   phi 0 = 0
   phi 1 = 1
   {b | b <= n}
   1 = CARD {1}
-  !n. 1 <= n ==> 1 <= phi(n)
+  forall n. 1 <= n ==> 1 <= phi(n)
   1 <= 2
-  !n. 2 <= n ==> 1 <= phi(n)
+  forall n. 2 <= n ==> 1 <= phi(n)
   {b | b <= n}
   3 <= n
   1 = n - (n - 1)
@@ -12862,13 +12862,13 @@ Library/pratt quotations (443):
   3 <= n ==> 0 < n - 1 /\\ n - 1 <= n /\\ 1 <= n
   3 <= n ==> ~(1 = n - 1)
   2 = CARD {1,(n-1)}
-  !n. 3 <= n ==> 2 <= phi(n)
+  forall n. 3 <= n ==> 2 <= phi(n)
   {m | 0 < m /\\ m < n /\\ coprime (m,n)} = {m | 0 < m /\\ m < n}
   n:num
   n = 1
   n = 0
-  !n. (phi n = n - 1) /\\ ~(n = 0) /\\ ~(n = 1) <=> prime n
-  !p. prime p ==> phi p = p - 1
+  forall n. (phi n = n - 1) /\\ ~(n = 0) /\\ ~(n = 1) <=> prime n
+  forall p. prime p ==> phi p = p - 1
   x2 - x1
   b <= a /\\\n   (?x1 x2. x1 * n + a = x2 * n + b)\n   ==> ?x. a = x * n + b
   a:num
@@ -12878,7 +12878,7 @@ Library/pratt quotations (443):
   c:num
   ~((a * b) MOD n IN IMAGE (\\b. (a * b) MOD n) s)
   b:num
-  !b. b IN s ==> b < n
+  forall b. b IN s ==> b < n
   (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
   s:num->bool
   b:num
@@ -12890,22 +12890,22 @@ Library/pratt quotations (443):
   coprime(a,n)
   n = 1
   n = 0
-  !n s. FINITE s /\\ ~(n = 0) /\\ ~(n = 1) /\\ coprime(a,n)\n       ==> (!b. b IN s ==> b < n)\n           ==> (ITSET (\\x y. (x * y) MOD n) (IMAGE (\\b. (a * b) MOD n) s) 1 =\n                (a EXP (CARD s) * ITSET (\\x y. (x * y) MOD n) s 1) MOD n)
+  forall n s. FINITE s /\\ ~(n = 0) /\\ ~(n = 1) /\\ coprime(a,n)\n       ==> (forall b. b IN s ==> b < n)\n           ==> (ITSET (\\x y. (x * y) MOD n) (IMAGE (\\b. (a * b) MOD n) s) 1 =\n                (a EXP (CARD s) * ITSET (\\x y. (x * y) MOD n) s 1) MOD n)
   x:num
-  !b. b IN s ==> coprime(b,n)
+  forall b. b IN s ==> coprime(b,n)
   s:num->bool
   x:num
   (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
   1
   \\x y. (x * y) MOD n
   n = 0
-  !n s. FINITE s /\\ (!b. b IN s ==> coprime(b,n)) /\\ ~(n = 0)\n         ==> coprime(ITSET (\\x y. (x * y) MOD n) s 1,n)
+  forall n s. FINITE s /\\ (forall b. b IN s ==> coprime(b,n)) /\\ ~(n = 0)\n         ==> coprime(ITSET (\\x y. (x * y) MOD n) s 1,n)
   ITSET (\\x y. (x * y) MOD n)\n                    {b | 0 < b /\\ b < n /\\ coprime (b,n)} 1
   x = x * 1
   n:num
   (MOD)
   {b | 0 < b /\\ b < n}
-  FINITE {b | 0 < b /\\ b < n /\\ coprime (b,n)} /\\\n                !b. b IN {b | 0 < b /\\ b < n /\\ coprime (b,n)} ==> b < n
+  FINITE {b | 0 < b /\\ b < n /\\ coprime (b,n)} /\\\n                forall b. b IN {b | 0 < b /\\ b < n /\\ coprime (b,n)} ==> b < n
   1
   ITSET (\\x y. (x * y) MOD n)
   {c | ?b. 0 < b /\\ b < n /\\ coprime (b,n) /\\ (c = (a * b) MOD n)} =\n    IMAGE (\\b. (a * b) MOD n) {b | 0 < b /\\ b < n /\\ coprime (b,n)}
@@ -12919,7 +12919,7 @@ Library/pratt quotations (443):
   coprime(a,n)
   1 <= n <=> ~(n = 0)
   c <= a * c * x <=> c * 1 <= c * a * x
-  !x. c * x = (c * x) DIV n * n + (c * x) MOD n
+  forall x. c * x = (c * x) DIV n * n + (c * x) MOD n
   m < n ==> ((n - m) + m = n:num)
   n - y MOD n
   y = (y DIV n) * n + y MOD n
@@ -12951,14 +12951,14 @@ Library/pratt quotations (443):
   { c | ?b. 0 < b /\\ b < n /\\ coprime(b,n) /\\ (c = (a * b) MOD n) } =\n    { b | 0 < b /\\ b < n /\\ coprime(b,n) }
   n = 1
   n = 0
-  !a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)
+  forall a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)
   ~(p = 0) ==> (SUC(p - 1) = p)
   ( * ) a
   q2:num
   q1:num
   0
   a:num
-  !p a. prime p ==> (a EXP p == a) (mod p)
+  forall p a. prime p ==> (a EXP p == a) (mod p)
   ~(m = 0)
   m = SUC(m - 1)
   a EXP m DIV n * n
@@ -12972,7 +12972,7 @@ Library/pratt quotations (443):
   n = 1
   m = 0
   n = 0
-  !m n a. ~(m = 0) /\\ (a EXP m == 1) (mod n) ==> coprime(a,n)
+  forall m n a. ~(m = 0) /\\ (a EXP m == 1) (mod n) ==> coprime(a,n)
   1 <= n ==> 0 < n
   a ==> ~(a /\\ b) ==> ~b
   2 <= n ==> ~(n - 1 = 0)
@@ -12980,7 +12980,7 @@ Library/pratt quotations (443):
   coprime(a,n)
   phi n
   2 <= n ==> ~(n = 0) /\\ ~(n = 1)
-  !a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (!m. 0 < m /\\ m < n - 1 ==> ~(a EXP m == 1) (mod n))\n         ==> prime(n)
+  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall m. 0 < m /\\ m < n - 1 ==> ~(a EXP m == 1) (mod n))\n         ==> prime(n)
   (MOD)
   n:num
   (EXP)
@@ -12993,7 +12993,7 @@ Library/pratt quotations (443):
   0
   (m * r) DIV p = m * (r DIV p)
   p:num
-  !p. prime p /\\ p divides m * r\n                   ==> ~(a EXP ((m * r) DIV p) == 1) (mod n)
+  forall p. prime p /\\ p divides m * r\n                   ==> ~(a EXP ((m * r) DIV p) == 1) (mod n)
   p:num
   m < m * r
   ~(r = 1)
@@ -13012,8 +13012,8 @@ Library/pratt quotations (443):
   a ==> ~b <=> ~(a /\\ b)
   a:num
   2 <= n ==> ~(n = 0)
-  !a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (!p. prime(p) /\\ p divides (n - 1)\n              ==> ~(a EXP ((n - 1) DIV p) == 1) (mod n))\n         ==> prime(n)
-  primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ !p. MEM p ps ==> prime(p)
+  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall p. prime(p) /\\ p divides (n - 1)\n              ==> ~(a EXP ((n - 1) DIV p) == 1) (mod n))\n         ==> prime(n)
+  primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ forall p. MEM p ps ==> prime(p)
   CONS (p:num) ps
   ps:num list
   prime p
@@ -13029,13 +13029,13 @@ Library/pratt quotations (443):
   []:num list
   n = 1
   n:num
-  !n. ~(n = 0) ==> ?ps. primefact ps n
+  forall n. ~(n = 0) ==> ?ps. primefact ps n
   ps:num list
   ps:num list
-  !ps n. primefact ps n ==> !p. prime p /\\ p divides n ==> MEM p ps
+  forall ps n. primefact ps n ==> forall p. prime p /\\ p divides n ==> MEM p ps
   ps:num list
   ps:num list
-  !ps n. primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ ALL prime ps
+  forall ps n. primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ ALL prime ps
   ps:num list
   ps:num list
   ALL (\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)) ps

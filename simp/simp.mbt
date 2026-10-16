@@ -1189,6 +1189,6 @@ fn load_steps() -> Unit raise {
   // `let IMP_CONJ_CONV = ... and IMP_EXISTS_RULE = ...`: left to right.
   let t1 = q("p ==> q ==> r <=> p /\\ q ==> r")
   imp_conj_conv_c.set(rewr_conv(@itab.itaut(t1)))
-  let t2 = q("(!x. P x ==> Q) <=> (?x. P x) ==> Q")
+  let t2 = q("(forall x. P x ==> Q) <=> (?x. P x) ==> Q")
   imp_exists_cnv_c.set(rewr_conv(@itab.itaut(t2)))
 }

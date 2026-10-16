@@ -10265,41 +10265,41 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|0..0..1..3..solved at 8
       #|0..0..2..4..solved at 8
       #|Logic/givensem quotations (254):
-      #|  !v:num->A. holds M v (interp cl)
+      #|  forall v:num->A. holds M v (interp cl)
       #|  i:num->term
-      #|  clause cl /\\ clause cl' /\\ (!v. holds M v (interp cl)) /\\ cl subsumes cl'\n   ==> !v:num->A. holds M v (interp cl')
-      #|  isaresolvent_sem M cl (c1,c2) <=>\n        isaresolvent cl (c1,c2) /\\\n        (~(!v:num->num. holds M v (interp c1)) \\/\n         ~(!v. holds M v (interp c2)))
+      #|  clause cl /\\ clause cl' /\\ (forall v. holds M v (interp cl)) /\\ cl subsumes cl'\n   ==> forall v:num->A. holds M v (interp cl')
+      #|  isaresolvent_sem M cl (c1,c2) <=>\n        isaresolvent cl (c1,c2) /\\\n        (~(forall v:num->num. holds M v (interp c1)) \\/\n         ~(forall v. holds M v (interp c2)))
       #|  allresolvents_sem M s1 s2 =\n        {c | ?c1 c2. c1 IN s1 /\\ c2 IN s2 /\\ isaresolvent_sem M c (c1,c2)}
       #|  allntresolvents_sem M s1 s2 =\n        {r | r IN allresolvents_sem M s1 s2 /\\ ~(tautologous r)}
-      #|  !c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent_sem M cl (c2,c1)\n        ==> ?cl'. isaresolvent_sem M cl' (c1,c2) /\\ cl' subsumes cl
+      #|  forall c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent_sem M cl (c2,c1)\n        ==> ?cl'. isaresolvent_sem M cl' (c1,c2) /\\ cl' subsumes cl
       #|  c2:form->bool
       #|  c1:form->bool
       #|  c1:form->bool
       #|  c2:form->bool
       #|  cl:form->bool
-      #|  (!c. c IN A ==> clause c) /\\ (!c. c IN B ==> clause c)\n   ==> (allresolvents_sem M A B) SUBSUMES (allresolvents_sem M B A)
+      #|  (forall c. c IN A ==> clause c) /\\ (forall c. c IN B ==> clause c)\n   ==> (allresolvents_sem M A B) SUBSUMES (allresolvents_sem M B A)
       #|  (allresolvents_sem M (A UNION B) C =\n        (allresolvents_sem M A C) UNION (allresolvents_sem M B C)) /\\\n   (allresolvents_sem M A (B UNION C) =\n        (allresolvents_sem M A B) UNION (allresolvents_sem M A C))
       #|  A UNION B = (A UNION A) UNION B
       #|  a UNION b UNION c UNION d UNION e UNION f =\n    a UNION b UNION d UNION (c UNION e) UNION f
-      #|  (!c. c IN B ==> clause(c)) /\\\n   (!c. c IN C ==> clause(c))\n   ==> ((allresolvents_sem M B (A UNION B)) UNION\n        (allresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allresolvents_sem M(B UNION C) (A UNION B UNION C))
+      #|  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allresolvents_sem M B (A UNION B)) UNION\n        (allresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allresolvents_sem M(B UNION C) (A UNION B UNION C))
       #|  resolvents_sem M cl cls =\n        list_of_set(allresolvents_sem M {cl} (set_of_list cls))
-      #|  !p q r. clause p /\\ clause q /\\ isaresolvent_sem M r (p,q) ==> clause r
-      #|  (!c. c IN s ==> clause c) /\\ (!c. c IN t ==> clause c)\n   ==> !c. c IN allresolvents_sem M s t ==> clause c
+      #|  forall p q r. clause p /\\ clause q /\\ isaresolvent_sem M r (p,q) ==> clause r
+      #|  (forall c. c IN s ==> clause c) /\\ (forall c. c IN t ==> clause c)\n   ==> forall c. c IN allresolvents_sem M s t ==> clause c
       #|  {c | isaresolvent c (c1,c2)}
-      #|  !c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent_sem M c (c1,c2)}
+      #|  forall c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent_sem M c (c1,c2)}
       #|  allresolvents s t
-      #|  !s t. FINITE(s) /\\ FINITE(t) /\\\n         (!c. c IN s ==> clause c) /\\\n         (!c. c IN t ==> clause c)\n         ==> FINITE(allresolvents_sem M s t)
+      #|  forall s t. FINITE(s) /\\ FINITE(t) /\\\n         (forall c. c IN s ==> clause c) /\\\n         (forall c. c IN t ==> clause c)\n         ==> FINITE(allresolvents_sem M s t)
       #|  step_sem M (used,unused) =\n        if unused = [] then (used,unused) else\n        let new = resolvents_sem M (HD unused) (CONS (HD unused) used) in\n        (insert (HD unused) used,\n         ITLIST (incorporate (HD unused)) new (TL unused))
       #|  (step_sem M(used,[]) = (used,[])) /\\\n   (step_sem M(used,CONS cl cls) =\n        let new = resolvents_sem M cl (CONS cl used) in\n        insert cl used,ITLIST (incorporate cl) new cls)
       #|  (given_sem M 0 p = p) /\\\n   (given_sem M (SUC n) p = step_sem M (given_sem M n p))
       #|  Used_SEM M init n = set_of_list(FST(given_sem M n init))
       #|  Unused_SEM M init n = set_of_list(SND(given_sem M n init))
       #|  (Sub_SEM M init 0 = {}) /\\\n   (Sub_SEM M init (SUC n) =\n        if SND(given_sem M n init) = [] then Sub_SEM M init n\n        else HD(SND(given_sem M n init)) INSERT (Sub_SEM M init n))
-      #|  (!c. c IN B ==> clause(c)) /\\\n   (!c. c IN C ==> clause(c))\n   ==> ((allntresolvents_sem M B (A UNION B)) UNION\n        (allntresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents_sem M (B UNION C) (A UNION B UNION C))
+      #|  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allntresolvents_sem M B (A UNION B)) UNION\n        (allntresolvents_sem M C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents_sem M (B UNION C) (A UNION B UNION C))
       #|  (allntresolvents_sem M (A UNION B) C =\n        (allntresolvents_sem M A C) UNION (allntresolvents_sem M B C)) /\\\n   (allntresolvents_sem M A (B UNION C) =\n        (allntresolvents_sem M A B) UNION (allntresolvents_sem M A C))
       #|  ppp:(form->bool)list#(form->bool)list
       #|  ppp = given_sem M n (used,unused)
-      #|  !used unused n.\n        Used_SEM M(used,unused) n =\n        set_of_list(used) UNION Sub_SEM M (used,unused) n
+      #|  forall used unused n.\n        Used_SEM M(used,unused) n =\n        set_of_list(used) UNION Sub_SEM M (used,unused) n
       #|  x INSERT s = s UNION {x}
       #|  (x INSERT s) UNION t = (s UNION (t UNION {x})) UNION (t UNION {x})
       #|  s UNION t = (s UNION t) UNION t
@@ -10314,12 +10314,12 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  h:form->bool
       #|  cl:form->bool
       #|  tautologous h
-      #|  !c. c IN set_of_list (CONS cl cls) ==> clause c
+      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
       #|  added:(form->bool)list
       #|  new:(form->bool)list
       #|  (b ==> a /\\ c) ==> a ==> b ==> c
-      #|  !c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-      #|  !c. MEM c new ==> clause c
+      #|  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
+      #|  forall c. MEM c new ==> clause c
       #|  set_of_list(list_of_set\n                        (allresolvents_sem M {cl}\n                                       (set_of_list(CONS cl used0)))) =\n                  allresolvents_sem M {cl} (set_of_list(CONS cl used0))
       #|  allntresolvents_sem M {cl} (set_of_list used0 UNION {cl}) =\n    set_of_list(FILTER (\\c. ~(tautologous c)) new)
       #|  set_of_list(used:(form->bool)list) UNION sub0 =\n                set_of_list(used0)
@@ -10327,23 +10327,23 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  ITLIST (incorporate cl) t cls
       #|  h:form->bool
       #|  cl:form->bool
-      #|  !c. c IN set_of_list (CONS cl cls) ==> clause c
+      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
       #|  added:(form->bool)list
       #|  new:(form->bool)list
       #|  (b ==> a /\\ c) ==> a ==> b ==> c
-      #|  !c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-      #|  !c. MEM c new ==> clause c
+      #|  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
+      #|  forall c. MEM c new ==> clause c
       #|  sub0 UNION set_of_list(CONS (cl:form->bool) cls)
       #|  allntresolvents_sem M sub0 (set_of_list(used) UNION sub0) UNION\n    allntresolvents_sem M {cl} (set_of_list(used) UNION sub0 UNION {cl})
-      #|  !c. c IN set_of_list (CONS cl cls) ==> clause c
+      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
       #|  more:(form->bool)list
       #|  new:(form->bool)list
-      #|  !c. MEM c new ==> clause c
+      #|  forall c. MEM c new ==> clause c
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !c. MEM c (list_of_set (allresolvents_sem M {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents_sem M {cl}\n                             (cl INSERT set_of_list used0))
-      #|  !c. MEM c new ==> clause c
+      #|  forall c. MEM c (list_of_set (allresolvents_sem M {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents_sem M {cl}\n                             (cl INSERT set_of_list used0))
+      #|  forall c. MEM c new ==> clause c
       #|  b /\\ a /\\ c ==> a /\\ b /\\ c
-      #|  !c. c IN set_of_list (CONS cl cls) ==> clause c
+      #|  forall c. c IN set_of_list (CONS cl cls) ==> clause c
       #|  clause cl
       #|  cls:(form->bool)list
       #|  cl:form->bool
@@ -10356,14 +10356,14 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  allntresolvents_sem M {} (set_of_list used)
       #|  allresolvents_sem M {} (set_of_list used) = {}
       #|  allresolvents_sem M {} (Used_SEM M (used,unused) 0)
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n. (!c. c IN Used_SEM M(used,unused) n ==> clause c) /\\\n                (!c. c IN Unused_SEM M(used,unused) n ==> clause c) /\\\n                (!c. c IN Sub_SEM M (used,unused) n ==> clause c) /\\\n                (Sub_SEM M (used,unused) n UNION Unused_SEM M(used,unused) n)\n                 SUBSUMES\n                 allntresolvents_sem M\n                         (Sub_SEM M (used,unused) n)\n                         (set_of_list(used) UNION Sub_SEM M (used,unused) n)
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. (forall c. c IN Used_SEM M(used,unused) n ==> clause c) /\\\n                (forall c. c IN Unused_SEM M(used,unused) n ==> clause c) /\\\n                (forall c. c IN Sub_SEM M (used,unused) n ==> clause c) /\\\n                (Sub_SEM M (used,unused) n UNION Unused_SEM M(used,unused) n)\n                 SUBSUMES\n                 allntresolvents_sem M\n                         (Sub_SEM M (used,unused) n)\n                         (set_of_list(used) UNION Sub_SEM M (used,unused) n)
       #|  d:num
       #|  d:num
       #|  d:num
-      #|  !init m n. m <= n ==> (Sub_SEM M init m) SUBSET (Sub_SEM M init n)
-      #|  !init m n. m <= n ==> (Sub_SEM M init n) SUBSUMES (Sub_SEM M init m)
-      #|  !cl current. LENGTH current <= LENGTH(replace cl current)
-      #|  !gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
+      #|  forall init m n. m <= n ==> (Sub_SEM M init m) SUBSET (Sub_SEM M init n)
+      #|  forall init m n. m <= n ==> (Sub_SEM M init n) SUBSUMES (Sub_SEM M init m)
+      #|  forall cl current. LENGTH current <= LENGTH(replace cl current)
+      #|  forall gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
       #|  k:(form->bool)list
       #|  (resolvents_sem M (HD (CONS h t))\n                (CONS (HD (CONS h t))\n                      (FST (given_sem M (m + n) (used,unused)))))
       #|  x <= y ==> SUC x + n <= SUC(y + n)
@@ -10375,16 +10375,16 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  given_sem M (m + n) (used,unused)
       #|  unused:(form->bool)list
       #|  used:(form->bool)list
-      #|  !init m n.\n        LENGTH(SND(given_sem M m init))\n        <= LENGTH (SND(given_sem M (m + n) init)) + n
+      #|  forall init m n.\n        LENGTH(SND(given_sem M m init))\n        <= LENGTH (SND(given_sem M (m + n) init)) + n
       #|  given_sem M (m + n) (used,unused)
-      #|  !used unused m n.\n        (SND (given_sem M m (used,unused)) = [])\n        ==> (SND (given_sem M (m + n) (used,unused)) = [])
-      #|  !cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
-      #|  !gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
-      #|  !cl current.\n        (!c. MEM c current ==> clause c) /\\ clause cl\n        ==> !c. MEM c (replace cl current) ==> clause c
-      #|  (!c. MEM c current ==> clause c) /\\ clause cl\n   ==> !c. MEM c (incorporate gcl cl current) ==> clause c
-      #|  (!c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
-      #|  !current gcl new.\n        (!c. MEM c current ==> clause c) /\\\n        (!c. MEM c new ==> clause c)\n        ==> !c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
-      #|  !gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
+      #|  forall used unused m n.\n        (SND (given_sem M m (used,unused)) = [])\n        ==> (SND (given_sem M (m + n) (used,unused)) = [])
+      #|  forall cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
+      #|  forall gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
+      #|  forall cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause cl\n        ==> forall c. MEM c (replace cl current) ==> clause c
+      #|  (forall c. MEM c current ==> clause c) /\\ clause cl\n   ==> forall c. MEM c (incorporate gcl cl current) ==> clause c
+      #|  (forall c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
+      #|  forall current gcl new.\n        (forall c. MEM c current ==> clause c) /\\\n        (forall c. MEM c new ==> clause c)\n        ==> forall c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
+      #|  forall gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
       #|  k:(form->bool)list
       #|  t':(form->bool)list
       #|  p < LENGTH(t:(form->bool)list)
@@ -10395,7 +10395,7 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  new:(form->bool)list
       #|  p:num
       #|  n + k:num
-      #|  !c. MEM c new ==> clause c
+      #|  forall c. MEM c new ==> clause c
       #|  l:(form->bool)list
       #|  SND(given_sem M m (used,unused))
       #|  ~(SND (given_sem M m (used,unused)) = [])
@@ -10404,10 +10404,10 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  ~(SND(given_sem M m (used,unused)) = [])
       #|  gcl IN Unused_SEM M(used,unused) m
       #|  clause gcl
-      #|  !c. MEM c (list_of_set (allresolvents_sem M {gcl}\n                          (gcl INSERT Used_SEM M (used,unused) m))) <=>\n                      c IN (allresolvents_sem M {gcl}\n                           (gcl INSERT Used_SEM M (used,unused) m))
+      #|  forall c. MEM c (list_of_set (allresolvents_sem M {gcl}\n                          (gcl INSERT Used_SEM M (used,unused) m))) <=>\n                      c IN (allresolvents_sem M {gcl}\n                           (gcl INSERT Used_SEM M (used,unused) m))
       #|  gcl = HD (SND (given_sem M m (used,unused)))
-      #|  !c. MEM c new ==> clause c
-      #|  !c. MEM c (SND (given_sem M m (used,unused))) ==> clause c
+      #|  forall c. MEM c new ==> clause c
+      #|  forall c. MEM c (SND (given_sem M m (used,unused))) ==> clause c
       #|  SUC (n + k) < LENGTH (SND (given_sem M m (used,unused)))
       #|  SUC (n + k) < LENGTH (SND (given_sem M m (used,unused)))
       #|  given_sem M m (used,unused)
@@ -10423,7 +10423,7 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  (used:(form->bool)list,unused:(form->bool)list)
       #|  n:num
       #|  SUC m
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !k m n. n + k < LENGTH(SND(given_sem M m (used,unused)))\n                    ==> (EL n (SND(given_sem M (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given_sem M m (used,unused))))
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall k m n. n + k < LENGTH(SND(given_sem M m (used,unused)))\n                    ==> (EL n (SND(given_sem M (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given_sem M m (used,unused))))
       #|  x INSERT s = {x} UNION s
       #|  ~(LENGTH (SND (given_sem M m (used,unused))) <= n)
       #|  unused:(form->bool)list
@@ -10454,21 +10454,21 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  LENGTH(SND (given_sem M (m + n) (used,unused))) + n
       #|  LENGTH(SND (given_sem M m (used,unused))) <= n
       #|  FIRSTN (SUC n) (SND(given_sem M m (used,unused))) =\n                  FIRSTN n (SND(given_sem M m (used,unused)))
-      #|  !m n. Sub_SEM M (used,unused) (m + n) SUBSUMES\n          Sub_SEM M (used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given_sem M m (used,unused))))
-      #|  (!c. MEM c used ==> clause c) /\\\n   (!c. MEM c unused ==> clause c)\n   ==> !n. Sub_SEM M (used,unused)\n              (n + LENGTH(SND(given_sem M n (used,unused))))\n           SUBSUMES (Sub_SEM M (used,unused) n UNION\n                     Unused_SEM M(used,unused) n)
+      #|  forall m n. Sub_SEM M (used,unused) (m + n) SUBSUMES\n          Sub_SEM M (used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given_sem M m (used,unused))))
+      #|  (forall c. MEM c used ==> clause c) /\\\n   (forall c. MEM c unused ==> clause c)\n   ==> forall n. Sub_SEM M (used,unused)\n              (n + LENGTH(SND(given_sem M n (used,unused))))\n           SUBSUMES (Sub_SEM M (used,unused) n UNION\n                     Unused_SEM M(used,unused) n)
       #|  x <= n ==> x <= SUC n
       #|  (break_sem M init 0 = LENGTH(SND(given_sem M 0 init))) /\\\n   (break_sem M init (SUC n) =\n        break_sem M init n +\n        LENGTH(SND(given_sem M (break_sem M init n) init)))
       #|  level_sem M init n = Sub_SEM M init (break_sem M init n)
       #|  0
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> level_sem M (used,unused) 0 SUBSUMES set_of_list(unused)
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> level_sem M (used,unused) 0 SUBSUMES set_of_list(unused)
       #|  Sub_SEM M (used,unused) (break_sem M(used,unused) n) UNION\n              Unused_SEM M(used,unused) (break_sem M(used,unused) n)
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n. level_sem M (used,unused) (SUC n) SUBSUMES\n                allntresolvents_sem M (level_sem M (used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level_sem M (used,unused) (n))
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n c. c IN (level_sem M (used,unused) n) ==> clause c
-      #|  !init m d. break_sem M init m <= break_sem M init (m + d)
-      #|  !init m n. m <= n ==> break_sem M init m <= break_sem M init n
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !m n. m <= n\n                  ==> level_sem M (used,unused) m SUBSET level_sem M (used,unused) n
-      #|  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !m n. m <= n\n                  ==> level_sem M (used,unused) n SUBSUMES level_sem M (used,unused) m
-      #|  !p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q) /\\ r' subsumes r
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. level_sem M (used,unused) (SUC n) SUBSUMES\n                allntresolvents_sem M (level_sem M (used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level_sem M (used,unused) (n))
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n c. c IN (level_sem M (used,unused) n) ==> clause c
+      #|  forall init m d. break_sem M init m <= break_sem M init (m + d)
+      #|  forall init m n. m <= n ==> break_sem M init m <= break_sem M init n
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level_sem M (used,unused) m SUBSET level_sem M (used,unused) n
+      #|  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level_sem M (used,unused) n SUBSUMES level_sem M (used,unused) m
+      #|  forall p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q) /\\ r' subsumes r
       #|  r'':form->bool
       #|  q':form->bool
       #|  p:form->bool
@@ -10482,7 +10482,7 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  r:form->bool
       #|  p:form->bool
       #|  q:form->bool
-      #|  !p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p,q') /\\ r' subsumes r
+      #|  forall p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p,q') /\\ r' subsumes r
       #|  r':form->bool
       #|  q':form->bool
       #|  p':form->bool
@@ -10492,14 +10492,14 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  q':form->bool
       #|  q:form->bool
       #|  p:form->bool
-      #|  !p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q') /\\ r' subsumes r
-      #|  !s t u.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents_sem M s u)) SUBSUMES\n          (allresolvents_sem M t u)
-      #|  !s t u.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s u)
+      #|  forall p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent_sem M r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent_sem M r' (p',q') /\\ r' subsumes r
+      #|  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents_sem M s u)) SUBSUMES\n          (allresolvents_sem M t u)
+      #|  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s u)
       #|  s UNION (allresolvents_sem M s t')
-      #|  !s t s' t'.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN s' ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s' t')
-      #|  !p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
-      #|  !p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
-      #|  !p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
+      #|  forall s t s' t'.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN s' ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents_sem M s t)) SUBSUMES\n          (allresolvents_sem M s' t')
+      #|  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
+      #|  forall p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
+      #|  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent_sem M r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
       #|  x < n ==> x < SUC n
       #|  l:(form->bool)list
       #|  SND (given_sem M n (used,unused))
@@ -10508,8 +10508,8 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  MEM c (SND (given_sem M n (used,unused)))
       #|  x < n ==> x < SUC n
       #|  given_sem M n (used,unused)
-      #|  !used unused c n.\n        MEM c (SND(given_sem M n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
-      #|  !l. ~(l = []) ==> MEM (HD l) l
+      #|  forall used unused c n.\n        MEM c (SND(given_sem M n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
+      #|  forall l. ~(l = []) ==> MEM (HD l) l
       #|  l:(form->bool)list
       #|  SND (given_sem M n (used,unused))
       #|  ~(SND (given_sem M n (used,unused)) = [])
@@ -10517,8 +10517,8 @@ test "Logic/givensem matches Logic/givensem.ml" {
       #|  MEM c (SND(given_sem M n (used,unused)))
       #|  x < n ==> x < SUC n
       #|  x < n ==> x < SUC n
-      #|  !used unused c n.\n        c IN Sub_SEM M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
-      #|  !used unused c n.\n        c IN level_sem M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
+      #|  forall used unused c n.\n        c IN Sub_SEM M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
+      #|  forall used unused c n.\n        c IN level_sem M (used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents_sem M\n                         (HD(SND(given_sem M m (used,unused))))\n                         (CONS (HD(SND(given_sem M m (used,unused))))\n                               (FST(given_sem M m (used,unused)))))
       #|HOLDS_INTERP_SUBSUME =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl':fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (#interp:fun(fun(form,bool),form) cl:fun(form,bool)))))) ((#subsumes:fun(fun(form,bool),fun(fun(form,bool),bool)) cl:fun(form,bool)) cl':fun(form,bool)))))) (#!:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (#interp:fun(fun(form,bool),form) cl':fun(form,bool))))))
       #|isaresolvent_sem =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). (#!:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#!:fun(fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),bool),bool) (\M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))). (#!:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (((#isaresolvent_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) cl:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#isaresolvent:fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool)) cl:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#!:fun(fun(fun(num,num),bool),bool) (\v:fun(num,num). (((#holds:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(num,num),fun(form,bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) v:fun(num,num)) (#interp:fun(fun(form,bool),form) c1:fun(form,bool))))))) (#~:fun(bool,bool) (#!:fun(fun(fun(num,num),bool),bool) (\v:fun(num,num). (((#holds:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(num,num),fun(form,bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) v:fun(num,num)) (#interp:fun(fun(form,bool),form) c2:fun(form,bool)))))))))))))))))
       #|allresolvents_sem =  |- (#!:fun(fun(fun(fun(form,bool),bool),bool),bool) (\s1:fun(fun(form,bool),bool). (#!:fun(fun(fun(fun(form,bool),bool),bool),bool) (\s2:fun(fun(form,bool),bool). (#!:fun(fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),bool),bool) (\M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))). ((#=:fun(fun(fun(form,bool),bool),fun(fun(fun(form,bool),bool),bool)) (((#allresolvents_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(fun(form,bool),bool),fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) s1:fun(fun(form,bool),bool)) s2:fun(fun(form,bool),bool))) (#GSPEC:fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)) (\GEN%PVAR%648:fun(form,bool). (#?:fun(fun(fun(form,bool),bool),bool) (\c:fun(form,bool). (((#SETSPEC:fun(fun(form,bool),fun(bool,fun(fun(form,bool),bool))) GEN%PVAR%648:fun(form,bool)) (#?:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#?:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c1:fun(form,bool)) s1:fun(fun(form,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c2:fun(form,bool)) s2:fun(fun(form,bool),bool))) (((#isaresolvent_sem:fun(prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool)))),fun(fun(form,bool),fun(prod(fun(form,bool),fun(form,bool)),bool))) M:prod(fun(num,bool),prod(fun(num,fun(list(num),num)),fun(num,fun(list(num),bool))))) c:fun(form,bool)) ((#,:fun(fun(form,bool),fun(fun(form,bool),prod(fun(form,bool),fun(form,bool)))) c1:fun(form,bool)) c2:fun(form,bool)))))))))) c:fun(form,bool)))))))))))))

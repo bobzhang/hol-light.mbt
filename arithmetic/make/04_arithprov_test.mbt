@@ -13377,25 +13377,25 @@ test "Arithmetic/arithprov matches Arithmetic/arithprov.ml" {
       #|0..0..1..2..solved at 6
       #|0..0..0..0..0..1..2..3..4..5..6..7..8..9..36..63..90..solved at 225
       #|Arithmetic/arithprov quotations (126):
-      #|  !P. ?ALLN. !z.\n         ALLN z <=>\n                if ?x y. z = NPAIR x y\n                then P (@x. ?y. NPAIR x y = z) /\\\n                     ALLN (@y. ?x. NPAIR x y = z)\n                else T
+      #|  forall P. ?ALLN. forall z.\n         ALLN z <=>\n                if ?x y. z = NPAIR x y\n                then P (@x. ?y. NPAIR x y = z) /\\\n                     ALLN (@y. ?x. NPAIR x y = z)\n                else T
       #|  (ALLN P 0 <=> T) /\\\n   (ALLN P (NPAIR x y) <=> P x /\\ ALLN P y)
       #|  TERM1 x y <=>\n        (?l u. (x = l) /\\ (y = NPAIR (NPAIR 0 u) l)) \\/\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 1 0) l)) \\/\n        (?t l. (x = NPAIR t l) /\\ (y = NPAIR (NPAIR 2 t) l)) \\/\n        (?n s t l. ((n = 3) \\/ (n = 4)) /\\\n                   (x = NPAIR s (NPAIR t l)) /\\\n                   (y = NPAIR (NPAIR n (NPAIR s t)) l))
       #|  TERM n <=> RTC TERM1 0 (NPAIR n 0)
       #|  isagterm n <=> ?t. n = gterm t
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !x y. TERM1 x y ==> ALLN isagterm x ==> ALLN isagterm y
-      #|  !t a. RTC TERM1 a (NPAIR (gterm t) a)
-      #|  !x y. RTC TERM1 x y ==> ALLN isagterm x ==> ALLN isagterm y
-      #|  !n. TERM n <=> ?t. n = gterm t
+      #|  forall x y. TERM1 x y ==> ALLN isagterm x ==> ALLN isagterm y
+      #|  forall t a. RTC TERM1 a (NPAIR (gterm t) a)
+      #|  forall x y. RTC TERM1 x y ==> ALLN isagterm x ==> ALLN isagterm y
+      #|  forall n. TERM n <=> ?t. n = gterm t
       #|  FORM1 x y <=>\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 0 0) l)) \\/\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 0 1) l)) \\/\n        (?n s t l. ((n = 1) \\/ (n = 2) \\/ (n = 3)) /\\\n                   TERM s /\\ TERM t /\\\n                   (x = l) /\\\n                   (y = NPAIR (NPAIR n (NPAIR s t)) l)) \\/\n        (?p l. (x = NPAIR p l) /\\\n               (y = NPAIR (NPAIR 4 p) l)) \\/\n        (?n p q l. ((n = 5) \\/ (n = 6) \\/ (n = 7) \\/ (n = 8)) /\\\n                   (x = NPAIR p (NPAIR q l)) /\\\n                   (y = NPAIR (NPAIR n (NPAIR p q)) l)) \\/\n        (?n u p l. ((n = 9) \\/ (n = 10)) /\\\n                   (x = NPAIR p l) /\\\n                   (y = NPAIR (NPAIR n (NPAIR u p)) l))
       #|  FORM n <=> RTC FORM1 0 (NPAIR n 0)
       #|  isagform n <=> ?t. n = gform t
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !x y. FORM1 x y ==> ALLN isagform x ==> ALLN isagform y
+      #|  forall x y. FORM1 x y ==> ALLN isagform x ==> ALLN isagform y
       #|  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-      #|  !p a. RTC FORM1 a (NPAIR (gform p) a)
-      #|  !x y. RTC FORM1 x y ==> ALLN isagform x ==> ALLN isagform y
-      #|  !n. FORM n <=> ?p. n = gform p
+      #|  forall p a. RTC FORM1 a (NPAIR (gform p) a)
+      #|  forall x y. RTC FORM1 x y ==> ALLN isagform x ==> ALLN isagform y
+      #|  forall n. FORM n <=> ?p. n = gform p
       #|  FREETERM1 m x y <=>\n        (?l u. ~(u = m) /\\ (x = l) /\\ (y = NPAIR (NPAIR 0 u) l)) \\/\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 1 0) l)) \\/\n        (?t l. (x = NPAIR t l) /\\ (y = NPAIR (NPAIR 2 t) l)) \\/\n        (?n s t l. ((n = 3) \\/ (n = 4)) /\\\n                   (x = NPAIR s (NPAIR t l)) /\\\n                   (y = NPAIR (NPAIR n (NPAIR s t)) l))
       #|  FREETERM m n <=> RTC (FREETERM1 m) 0 (NPAIR n 0)
       #|  isafterm m n <=> ?t. ~(m IN IMAGE number (FVT t)) /\\ (n = gterm t)
@@ -13411,10 +13411,10 @@ test "Arithmetic/arithprov matches Arithmetic/arithprov.ml" {
       #|  V x
       #|  (~(number x = m) ==> isafterm m (NPAIR 0 (number x))) /\\\n   isafterm m (NPAIR 1 0) /\\\n   (isafterm m t ==> isafterm m (NPAIR 2 t)) /\\\n   (isafterm m s /\\ isafterm m t ==> isafterm m (NPAIR 3 (NPAIR s t))) /\\\n   (isafterm m s /\\ isafterm m t ==> isafterm m (NPAIR 4 (NPAIR s t)))
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !m x y. FREETERM1 m x y ==> ALLN (isafterm m) x ==> ALLN (isafterm m) y
-      #|  !m t a. ~(m IN IMAGE number (FVT t))\n           ==> RTC (FREETERM1 m) a (NPAIR (gterm t) a)
-      #|  !x y. RTC (FREETERM1 m) x y\n                      ==> ALLN (isafterm m) x ==> ALLN (isafterm m) y
-      #|  !m n. FREETERM m n <=> ?t. ~(m IN IMAGE number (FVT(t))) /\\ (n = gterm t)
+      #|  forall m x y. FREETERM1 m x y ==> ALLN (isafterm m) x ==> ALLN (isafterm m) y
+      #|  forall m t a. ~(m IN IMAGE number (FVT t))\n           ==> RTC (FREETERM1 m) a (NPAIR (gterm t) a)
+      #|  forall x y. RTC (FREETERM1 m) x y\n                      ==> ALLN (isafterm m) x ==> ALLN (isafterm m) y
+      #|  forall m n. FREETERM m n <=> ?t. ~(m IN IMAGE number (FVT(t))) /\\ (n = gterm t)
       #|  FREEFORM1 m x y <=>\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 0 0) l)) \\/\n        (?l. (x = l) /\\ (y = NPAIR (NPAIR 0 1) l)) \\/\n        (?n s t l. ((n = 1) \\/ (n = 2) \\/ (n = 3)) /\\\n                   FREETERM m s /\\ FREETERM m t /\\\n                   (x = l) /\\\n                   (y = NPAIR (NPAIR n (NPAIR s t)) l)) \\/\n        (?p l. (x = NPAIR p l) /\\\n               (y = NPAIR (NPAIR 4 p) l)) \\/\n        (?n p q l. ((n = 5) \\/ (n = 6) \\/ (n = 7) \\/ (n = 8)) /\\\n                   (x = NPAIR p (NPAIR q l)) /\\\n                   (y = NPAIR (NPAIR n (NPAIR p q)) l)) \\/\n        (?n u p l. ((n = 9) \\/ (n = 10)) /\\\n                   (x = NPAIR p l) /\\\n                   (y = NPAIR (NPAIR n (NPAIR u p)) l)) \\/\n        (?n p l. ((n = 9) \\/ (n = 10)) /\\\n                 (x = l) /\\ FORM p /\\\n                 (y = NPAIR (NPAIR n (NPAIR m p)) l))
       #|  FREEFORM m n <=> RTC (FREEFORM1 m) 0 (NPAIR n 0)
       #|  isafform m n <=> ?p. ~(m IN IMAGE number (FV p)) /\\ (n = gform p)
@@ -13439,12 +13439,12 @@ test "Arithmetic/arithprov matches Arithmetic/arithprov.ml" {
       #|  False
       #|  isafform m (NPAIR 0 0) /\\\n   isafform m (NPAIR 0 1) /\\\n   (isafterm m s /\\ isafterm m t ==> isafform m (NPAIR 1 (NPAIR s t))) /\\\n   (isafterm m s /\\ isafterm m t ==> isafform m (NPAIR 2 (NPAIR s t))) /\\\n   (isafterm m s /\\ isafterm m t ==> isafform m (NPAIR 3 (NPAIR s t))) /\\\n   (isafform m p ==> isafform m (NPAIR 4 p)) /\\\n   (isafform m p /\\ isafform m q ==> isafform m (NPAIR 5 (NPAIR p q))) /\\\n   (isafform m p /\\ isafform m q ==> isafform m (NPAIR 6 (NPAIR p q))) /\\\n   (isafform m p /\\ isafform m q ==> isafform m (NPAIR 7 (NPAIR p q))) /\\\n   (isafform m p /\\ isafform m q ==> isafform m (NPAIR 8 (NPAIR p q))) /\\\n   (isafform m p ==> isafform m (NPAIR 9 (NPAIR x p))) /\\\n   (isafform m p ==> isafform m (NPAIR 10 (NPAIR x p))) /\\\n   (isagform p ==> isafform m (NPAIR 9 (NPAIR m p))) /\\\n   (isagform p ==> isafform m (NPAIR 10 (NPAIR m p)))
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !x y. FREEFORM1 m x y ==> ALLN (isafform m) x ==> ALLN (isafform m) y
+      #|  forall x y. FREEFORM1 m x y ==> ALLN (isafform m) x ==> ALLN (isafform m) y
       #|  m IN IMAGE number (s DELETE k) <=>\n     m IN IMAGE number s /\\ ~(m = number k)
       #|  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-      #|  !m p a. ~(m IN IMAGE number (FV p))\n           ==> RTC (FREEFORM1 m) a (NPAIR (gform p) a)
-      #|  !x y. RTC (FREEFORM1 m) x y\n                      ==> ALLN (isafform m) x ==> ALLN (isafform m) y
-      #|  !m n. FREEFORM m n <=> ?p. ~(m IN IMAGE number (FV p)) /\\ (n = gform p)
+      #|  forall m p a. ~(m IN IMAGE number (FV p))\n           ==> RTC (FREEFORM1 m) a (NPAIR (gform p) a)
+      #|  forall x y. RTC (FREEFORM1 m) x y\n                      ==> ALLN (isafform m) x ==> ALLN (isafform m) y
+      #|  forall m n. FREEFORM m n <=> ?p. ~(m IN IMAGE number (FV p)) /\\ (n = gform p)
       #|  (a /\\ b) /\\ c <=> b /\\ a /\\ c
       #|  ((?x p. P (number x) (gform p) /\\ ~(x IN FV(p))) <=>\n      (?x p. FREEFORM x p /\\ P x p)) /\\\n     ((?x t. P (number x) (gterm t) /\\ ~(x IN FVT(t))) <=>\n      (?x t. FREETERM x t /\\ P x t))
       #|  ((?p. P(gform p)) <=> (?p. FORM(p) /\\ P p)) /\\\n     ((?t. P(gterm t)) <=> (?t. TERM(t) /\\ P t))
@@ -13453,56 +13453,56 @@ test "Arithmetic/arithprov matches Arithmetic/arithprov.ml" {
       #|  gform a
       #|  a:num
       #|  (AXIOM:num->bool) a
-      #|  !p. AXIOM(gform p) <=> axiom p
+      #|  forall p. AXIOM(gform p) <=> axiom p
       #|  (gterm u = NPAIR 0 x <=> u = V(denumber x))
       #|  (gform r = NPAIR 9 (NPAIR x n) <=>\n    (?p. r = !!(denumber x) p /\\ gform p = n)) /\\\n   (gform r = NPAIR 10 (NPAIR x n) <=>\n    (?p. r = ??(denumber x) p /\\ gform p = n))
-      #|  !a. AXIOM a ==> ?p. a = gform p
-      #|  !a. AXIOM a <=> ?p. axiom p /\\ (a = gform p)
+      #|  forall a. AXIOM a ==> ?p. a = gform p
+      #|  forall a. AXIOM a <=> ?p. axiom p /\\ (a = gform p)
       #|  PROV1 A x y <=>\n        (?a. (AXIOM a \\/ a IN A) /\\ (y = NPAIR a x)) \\/\n        (?p q l. (x = NPAIR (NPAIR 7 (NPAIR p q)) (NPAIR p l)) /\\\n                 (y = NPAIR q l)) \\/\n        (?p u l. (x = NPAIR p l) /\\ (y = NPAIR (NPAIR 9 (NPAIR u p)) l))
       #|  PROV A n <=> RTC (PROV1 A) 0 (NPAIR n 0)
       #|  isaprove A n <=> ?p. (gform p = n) /\\ A |-- p
       #|  Q:form
       #|  P:form
       #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  !A p q. PROV1 (IMAGE gform A) x y\n           ==> ALLN (isaprove A) x ==> ALLN (isaprove A) y
-      #|  !A p. A |-- p ==> !a. RTC (PROV1 (IMAGE gform A)) a (NPAIR (gform p) a)
-      #|  !x y. RTC (PROV1 (IMAGE gform A)) x y\n           ==> ALLN (isaprove A) x ==> ALLN (isaprove A) y
-      #|  !A n. PROV (IMAGE gform A) n <=> ?p. A |-- p /\\ (gform p = n)
-      #|  !A p. PROV (IMAGE gform A) (gform p) <=> A |-- p
+      #|  forall A p q. PROV1 (IMAGE gform A) x y\n           ==> ALLN (isaprove A) x ==> ALLN (isaprove A) y
+      #|  forall A p. A |-- p ==> forall a. RTC (PROV1 (IMAGE gform A)) a (NPAIR (gform p) a)
+      #|  forall x y. RTC (PROV1 (IMAGE gform A)) x y\n           ==> ALLN (isaprove A) x ==> ALLN (isaprove A) y
+      #|  forall A n. PROV (IMAGE gform A) n <=> ?p. A |-- p /\\ (gform p = n)
+      #|  forall A p. PROV (IMAGE gform A) (gform p) <=> A |-- p
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_term1 s t) = (FVT s) UNION (FVT t)
+      #|  forall s t. FV(arith_term1 s t) = (FVT s) UNION (FVT t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !t. FV(arith_term t) = FVT t
+      #|  forall t. FV(arith_term t) = FVT t
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_form1 s t) = (FVT s) UNION (FVT t)
+      #|  forall s t. FV(arith_form1 s t) = (FVT s) UNION (FVT t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !t. FV(arith_form t) = FVT t
+      #|  forall t. FV(arith_form t) = FVT t
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t u. FV(arith_freeterm1 s t u) = (FVT s) UNION (FVT t) UNION (FVT u)
+      #|  forall s t u. FV(arith_freeterm1 s t u) = (FVT s) UNION (FVT t) UNION (FVT u)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_freeterm s t) = (FVT s) UNION (FVT t)
+      #|  forall s t. FV(arith_freeterm s t) = (FVT s) UNION (FVT t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t u. FV(arith_freeform1 s t u) = (FVT s) UNION (FVT t) UNION (FVT u)
+      #|  forall s t u. FV(arith_freeform1 s t u) = (FVT s) UNION (FVT t) UNION (FVT u)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_freeform s t) = (FVT s) UNION (FVT t)
+      #|  forall s t. FV(arith_freeform s t) = (FVT s) UNION (FVT t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !t. FV(arith_axiom t) = FVT t
-      #|  !v n. holds v (A n) <=> Ax (termval v n)
-      #|  (!v t. holds v (A t) <=> Ax(termval v t))\n   ==> (!v s t.\n             holds v (arith_prov1 A s t) <=>\n             PROV1 Ax (termval v s) (termval v t))
+      #|  forall t. FV(arith_axiom t) = FVT t
+      #|  forall v n. holds v (A n) <=> Ax (termval v n)
+      #|  (forall v t. holds v (A t) <=> Ax(termval v t))\n   ==> (forall v s t.\n             holds v (arith_prov1 A s t) <=>\n             PROV1 Ax (termval v s) (termval v t))
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  (!t. FV(A t) = FVT t) ==> !s t. FV(arith_prov1 A s t) = FVT(s) UNION FVT(t)
+      #|  (forall t. FV(A t) = FVT t) ==> forall s t. FV(arith_prov1 A s t) = FVT(s) UNION FVT(t)
       #|  arith_prov A n =\n    formsubst ((0 |-> n) V)\n        (arith_rtc (arith_prov1 A) (numeral 0)\n                   (arith_pair (V 0) (numeral 0)))
-      #|  !Ax A. (!v t. holds v (A t) <=> Ax(termval v t))\n          ==> !v n. holds v (arith_prov A n) <=> PROV Ax (termval v n)
+      #|  forall Ax A. (forall v t. holds v (A t) <=> Ax(termval v t))\n          ==> forall v n. holds v (arith_prov A n) <=> PROV Ax (termval v n)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  (!t. FV(A t) = FVT t) ==> !t. FV(arith_prov A t) = FVT t
+      #|  (forall t. FV(A t) = FVT t) ==> forall t. FV(arith_prov A t) = FVT t
       #|  arith_prov (\\t. formsubst ((x |-> t) V) A) (V x)
       #|  \\t. formsubst ((x |-> t) V) A
       #|  IMAGE gform Ax
       #|  x:num
       #|  A:form
-      #|  !Ax. definable {gform p | p IN Ax} ==> definable {gform p | Ax |-- p}
+      #|  forall Ax. definable {gform p | p IN Ax} ==> definable {gform p | Ax |-- p}
       #|  (~c ==> (a <=> b)) ==> a ==> ~b ==> c
-      #|  !Ax. definable {gform p | p IN Ax} ==> ?p. ~(arithtrue p <=> Ax |-- p)
+      #|  forall Ax. definable {gform p | p IN Ax} ==> ?p. ~(arithtrue p <=> Ax |-- p)
       #|ALLN_DEF =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\z:num. ((#=:fun(bool,fun(bool,bool)) ((#ALLN:fun(fun(num,bool),fun(num,bool)) P:fun(num,bool)) z:num)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) (#?:fun(fun(num,bool),bool) (\x:num. (#?:fun(fun(num,bool),bool) (\y:num. ((#=:fun(num,fun(num,bool)) z:num) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num))))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#@:fun(fun(num,bool),num) (\x:num. (#?:fun(fun(num,bool),bool) (\y:num. ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) z:num))))))) ((#ALLN:fun(fun(num,bool),fun(num,bool)) P:fun(num,bool)) (#@:fun(fun(num,bool),num) (\y:num. (#?:fun(fun(num,bool),bool) (\x:num. ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) z:num)))))))) #T:bool))))))
       #|ALLN =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#ALLN:fun(fun(num,bool),fun(num,bool)) P:fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) ((#ALLN:fun(fun(num,bool),fun(num,bool)) P:fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) x:num)) ((#ALLN:fun(fun(num,bool),fun(num,bool)) P:fun(num,bool)) y:num))))
       #|TERM1 =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) ((#TERM1:fun(num,fun(num,bool)) x:num) y:num)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\l:num. (#?:fun(fun(num,bool),bool) (\u:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) l:num)) ((#=:fun(num,fun(num,bool)) y:num) ((#NPAIR:fun(num,fun(num,num)) ((#NPAIR:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) u:num)) l:num)))))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\l:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) l:num)) ((#=:fun(num,fun(num,bool)) y:num) ((#NPAIR:fun(num,fun(num,num)) ((#NPAIR:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))) l:num)))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\t:num. (#?:fun(fun(num,bool),bool) (\l:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) ((#NPAIR:fun(num,fun(num,num)) t:num) l:num))) ((#=:fun(num,fun(num,bool)) y:num) ((#NPAIR:fun(num,fun(num,num)) ((#NPAIR:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) t:num)) l:num)))))))) (#?:fun(fun(num,bool),bool) (\n:num. (#?:fun(fun(num,bool),bool) (\s:num. (#?:fun(fun(num,bool),bool) (\t:num. (#?:fun(fun(num,bool),bool) (\l:num. ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) ((#NPAIR:fun(num,fun(num,num)) s:num) ((#NPAIR:fun(num,fun(num,num)) t:num) l:num)))) ((#=:fun(num,fun(num,bool)) y:num) ((#NPAIR:fun(num,fun(num,num)) ((#NPAIR:fun(num,fun(num,num)) n:num) ((#NPAIR:fun(num,fun(num,num)) s:num) t:num))) l:num))))))))))))))))))))

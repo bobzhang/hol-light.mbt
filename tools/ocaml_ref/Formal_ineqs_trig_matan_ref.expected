@@ -197,7 +197,7 @@ Formal_ineqs/trig/matan quotations (226):
   (a * x) / b * inv x = (x * inv x) * a / b:real
   k:num
   \\k. x pow (2 * k + 1) / &(2 * k + 1) * inv x
-  !x. abs x < &1 /\\ ~(x = &0)\n\t\t\t       ==> ((\\k. x pow (2 * k) / &(2 * k + 1))\n\t\t\t\t      real_sums log ((&1 + x) / (&1 - x)) / (&2 * x)) (:num)
+  forall x. abs x < &1 /\\ ~(x = &0)\n\t\t\t       ==> ((\\k. x pow (2 * k) / &(2 * k + 1))\n\t\t\t\t      real_sums log ((&1 + x) / (&1 - x)) / (&2 * x)) (:num)
   ~(x > &0) ==> abs (--x) = --x
   &1 = abs(&1)
   sqrt (--x:real)
@@ -207,17 +207,17 @@ Formal_ineqs/trig/matan quotations (226):
   y > &0 ==> ~(y = &0)
   k:num
   \\k. (-- &1 pow k / &(2 * k + 1) * y pow (2 * k + 1)) * inv y
-  !y. y > &0 /\\ y < &1 ==> ((\\k. -- &1 pow k / &(2 * k + 1) * (y pow 2) pow k) real_sums atn y / y) (:num)
+  forall y. y > &0 /\\ y < &1 ==> ((\\k. -- &1 pow k / &(2 * k + 1) * (y pow 2) pow k) real_sums atn y / y) (:num)
   x > &0
   \\i:num. &0
   0 < 1
   &1 = &0 + sum(0..1 - 1) h
   ~(1 <= 0)
   1 <= i ==> ~(i = 0)
-  h 0 = &1 /\\ (!i. 1 <= i ==> h i = &0)
+  h 0 = &1 /\\ (forall i. 1 <= i ==> h i = &0)
   h = \\k. -- &1 pow k / &(2 * k + 1) * &0 pow k
   x = &0
-  !x. abs x < &1\n\t\t\t       ==> ((\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k)\n\t\t\t\t      real_sums matan x) (:num)
+  forall x. abs x < &1\n\t\t\t       ==> ((\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k)\n\t\t\t\t      real_sums matan x) (:num)
   2 * SUC m + 1 = 2 * m + 3
   abs (-- &1) = &1
   0 < SUC m
@@ -230,31 +230,31 @@ Formal_ineqs/trig/matan quotations (226):
   abs (-- &1) = &1
   inv (&(2 * m + 3)) = abs ((\\k. ((-- &1) pow k / &(2 * k + 1))) (SUC m))
   SUC m - 1 = m
-  !f. sum (0..m) f = sum (0..SUC m - 1) f
+  forall f. sum (0..m) f = sum (0..SUC m - 1) f
   a * inv(c) * b = inv(c) * (a * b)
-  !m x. abs x < &1 ==>\n\t\t       abs (matan x - sum (0..m) (\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k))\n\t\t\t     <= abs x pow (SUC m) / (&(2 * m + 3) * (&1 - abs x))
+  forall m x. abs x < &1 ==>\n\t\t       abs (matan x - sum (0..m) (\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k))\n\t\t\t     <= abs x pow (SUC m) / (&(2 * m + 3) * (&1 - abs x))
   &0 < x ==> &0 <= x
   &0 < x ==> ~(x = &0)
   ~(sqrt x = &0)
   ~(x' = &0) /\\ x' > &0
   x:real
   \\x. atn(sqrt(x)) / sqrt(x)
-  !x. &0 < x ==>\n       (matan has_real_derivative (inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))))\n       (atreal x)
-  !x. &0 < x ==>\n\treal_derivative matan x = inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))
+  forall x. &0 < x ==>\n       (matan has_real_derivative (inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))))\n       (atreal x)
+  forall x. &0 < x ==>\n\treal_derivative matan x = inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))
   a * b / c = b * a / c
   2 * i + 3 = 2 * SUC i + 1
   real_derivative matan x = f' x
   (f':real->real) x
   x:real
-  !x. abs x < &1 ==>\n\tmatan real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i) \n\t      real_sums (real_derivative matan x)) (from 0)
+  forall x. abs x < &1 ==>\n\tmatan real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i) \n\t      real_sums (real_derivative matan x)) (from 0)
   inv (&2) * (&2 * a + b) = a + inv(&2) * b
   &0 < abs (&(2 * i + 3))
   abs (-- &1) = &1 /\\ abs (&1) = &1
   0 < SUC m
   SUC m - 1 = m
-  !f. sum (0..m) f = sum (0..SUC m - 1) f
+  forall f. sum (0..m) f = sum (0..SUC m - 1) f
   a * inv(&2) * b = inv(&2) * (a * b)
-  !x m. abs x < &1 ==>\n\tabs (real_derivative matan x \n\t     - sum (0..m) (\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i))\n\t<= abs x pow (SUC m) / (&2 * (&1 - abs x))
+  forall x m. abs x < &1 ==>\n\tabs (real_derivative matan x \n\t     - sum (0..m) (\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i))\n\t<= abs x pow (SUC m) / (&2 * (&1 - abs x))
   &0 < x ==> &0 <= x
   s * (x * inv t + s) = s * x * inv t + s pow 2
   sqrt x
@@ -262,11 +262,11 @@ Formal_ineqs/trig/matan quotations (226):
   &0 < x ==> &0 <= x
   ~(sqrt x = &0)
   &0 < x ==> ~(x = &0)
-  !x. &0 < x ==>\n       ((\\x. inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))) has_real_derivative \n\t  (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t- (&3 / &4) * inv(x pow 2 * (x + &1))\n\t- (&1 / &2) * inv(x * (x + &1) pow 2)) (atreal x)
+  forall x. &0 < x ==>\n       ((\\x. inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))) has_real_derivative \n\t  (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t- (&3 / &4) * inv(x pow 2 * (x + &1))\n\t- (&1 / &2) * inv(x * (x + &1) pow 2)) (atreal x)
   &0 < x'
   x:real
   \\x. inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))
-  !x. &0 < x ==>\n\treal_derivative (real_derivative matan) x =\n\t\t\t\t\t    (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t\t\t\t\t    - (&3 / &4) * inv(x pow 2 * (x + &1))\n\t\t\t\t\t    - (&1 / &2) * inv(x * (x + &1) pow 2)
+  forall x. &0 < x ==>\n\treal_derivative (real_derivative matan) x =\n\t\t\t\t\t    (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t\t\t\t\t    - (&3 / &4) * inv(x pow 2 * (x + &1))\n\t\t\t\t\t    - (&1 / &2) * inv(x * (x + &1) pow 2)
   a * (b * d) / c = b * a * d / c
   i + 2 = SUC (SUC i) /\\ 2 * i + 5 = 2 * SUC i + 3 /\\ i + 1 = SUC i
   real_derivative (real_derivative matan) x = f' x
@@ -276,7 +276,7 @@ Formal_ineqs/trig/matan quotations (226):
   &1
   \\i. -- &1 pow SUC i * &(SUC i) / &(2 * i + 3)
   real_derivative matan
-  !x. abs x < &1 ==>\n\t(real_derivative matan) real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i)\n\t      real_sums (real_derivative (real_derivative matan) x)) (from 0)
+  forall x. abs x < &1 ==>\n\t(real_derivative matan) real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i)\n\t      real_sums (real_derivative (real_derivative matan) x)) (from 0)
   &1 / a <= &1 <=> inv a <= inv (&1)
   a <= b <=> a <= &1 * b
   0
@@ -286,15 +286,15 @@ Formal_ineqs/trig/matan quotations (226):
   real_summable (:num) f /\\ real_summable (:num) g /\\ real_summable (:num) h
   x:real
   x:real
-  !i. -- &1 pow i / &(2 * i + 5) * x pow i = h i
-  !i. (-- &1 pow i * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i = &1 / &4 * f i + &1 / &2 * g i + &3 / &4 * h i
+  forall i. -- &1 pow i / &(2 * i + 5) * x pow i = h i
+  forall i. (-- &1 pow i * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i = &1 / &4 * f i + &1 / &2 * g i + &3 / &4 * h i
   h = \\i. (-- &1 pow i * (&1 / &(2 * i + 5))) * x pow i
   g = \\i. (-- &1 pow i * &i) * x pow i
   f = \\i. -- &1 pow i * x pow i
   abs x < &1 ==> (&1 - x) / (&4 * (&1 + x) pow 2) = (&1 / &4) * (&1 / (&1 + x)) - (&1 / &2) * (x / (&1 + x) pow 2)
   -- &1 pow 2 = &1
-  !i. -- &1 pow (i + 2) = -- &1 pow i
-  !x. abs x < &1 ==>\n\treal_derivative (real_derivative matan) x = (&1 - x) / (&4 * (&1 + x) pow 2)\n\t\t\t+ (&3 / &4) * real_infsum (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)\n\t\t\t/\\ real_summable (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)
+  forall i. -- &1 pow (i + 2) = -- &1 pow i
+  forall x. abs x < &1 ==>\n\treal_derivative (real_derivative matan) x = (&1 - x) / (&4 * (&1 + x) pow 2)\n\t\t\t+ (&3 / &4) * real_infsum (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)\n\t\t\t/\\ real_summable (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)
   pi / &4
   &1 <= &5 * x <=> (&1 / &5) <= x
   &1 <= t /\\ &0 <= (t - &1) pow 2 ==> t <= t pow 2 + &1
@@ -306,7 +306,7 @@ Formal_ineqs/trig/matan quotations (226):
   &0 < a ==> ~(a = &0)
   t pow 6
   &1 <= t ==> &0 < t
-  !n. &0 < t pow n
+  forall n. &0 < t pow n
   &0 <= a - b <=> b <= a
   t:real
   inv x' pow 5 * x' pow 10 = x' pow 5
@@ -314,12 +314,12 @@ Formal_ineqs/trig/matan quotations (226):
   (&5 * a * p6 - ip5 * t) * p10 = &5 * a * (p6 * p10) - (ip5 * p10) * t
   x' pow 10
   &1 <= x'
-  !n. ~(x' pow n = &0)
+  forall n. ~(x' pow n = &0)
   5 - 1 = 4 /\\ 5 * 2 = 10
   &1 <= x' ==> ~(x' = &0)
   real_interval [&1, y]
   \\y. &5 * atn(y) / y pow 6 - inv(y pow 5 * (y pow 2 + &1))
-  !x. --(atn x / x pow 5) = f x
+  forall x. --(atn x / x pow 5) = f x
   f = \\y. --(atn y / y pow 5)
   atn (&1) / (&1 pow 5)
   &1 <= y
@@ -331,7 +331,7 @@ Formal_ineqs/trig/matan quotations (226):
   a - b - c <= a <=> &0 <= b + c
   (&3 / &4) * atn(sqrt x) / (x pow 2 * sqrt x)
   &1 <= x ==> &0 < x
-  !x. &1 <= x ==>\n\t\t      real_derivative (real_derivative matan) x <= #0.65
+  forall x. &1 <= x ==>\n\t\t      real_derivative (real_derivative matan) x <= #0.65
   &1 <= x ==> &0 <= x
   &1 <= x ==> &0 <= x
   --(&3 / &4) * a - b <= c - (&3 / &4) * a - b <=> &0 <= c
@@ -342,7 +342,7 @@ Formal_ineqs/trig/matan quotations (226):
   -- #0.65 <= --(&3 / &4) * a - (&1 / &2) * b <=>  &3 * a + &2 * b <= #2.6
   -- (&3 / &4) * inv (x pow 2 * (x + &1)) - (&1 / &2) * inv (x * (x + &1) pow 2)
   &1 <= x ==> &0 < x
-  !x. &1 <= x ==>\n\t\t      -- #0.65 <= real_derivative (real_derivative matan) x
+  forall x. &1 <= x ==>\n\t\t      -- #0.65 <= real_derivative (real_derivative matan) x
   &0 <= x /\\ x < &1
   inv (&n) = inv (&n) * &1
   1
@@ -365,7 +365,7 @@ Formal_ineqs/trig/matan quotations (226):
   f = (&1 - x) / (&4 * (&1 + x) pow 2)
   &1 / &4 + &3 / &20
   x:real
-  !x. &0 <= x /\\ x < &1 ==>\n\tabs (real_derivative (real_derivative matan) x) <= #0.65
+  forall x. &0 <= x /\\ x < &1 ==>\n\tabs (real_derivative (real_derivative matan) x) <= #0.65
   (i + 2) + i = 2 * (i + 1)
   -- &1 * --x = x
   x pow i = (-- &1) pow i * (--x) pow i
@@ -373,7 +373,7 @@ Formal_ineqs/trig/matan quotations (226):
   from 0
   \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i
   x:real
-  !x. -- &1 < x /\\ x < &0 ==>\n\t\t\t\t     &0 <= real_derivative (real_derivative matan) x
+  forall x. -- &1 < x /\\ x < &0 ==>\n\t\t\t\t     &0 <= real_derivative (real_derivative matan) x
   2 * 1 + 5 = 7
   0
   1
@@ -387,7 +387,7 @@ Formal_ineqs/trig/matan quotations (226):
   -- #0.2
   -- &1 * y = --y
   -- &1 pow 2 = &1
-  !y. -- &1 pow (i + 2) * y pow i = (-- y) pow i
+  forall y. -- &1 pow (i + 2) * y pow i = (-- y) pow i
   (a * b) * x pow i = (a * x pow i) * b
   abs (-- #0.2) < &1
   -- #0.2 <= x /\\ x < &0 ==> abs x < &1
@@ -395,7 +395,7 @@ Formal_ineqs/trig/matan quotations (226):
   \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * (-- #0.2) pow i
   \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i
   real_derivative (real_derivative matan) (-- #0.2)
-  !x. -- #0.2 <= x /\\ x < &0 ==>\n\t\t\t\t     real_derivative (real_derivative matan) x <= #0.65
+  forall x. -- #0.2 <= x /\\ x < &0 ==>\n\t\t\t\t     real_derivative (real_derivative matan) x <= #0.65
   x:real
   x:real
   x:real
@@ -403,7 +403,7 @@ Formal_ineqs/trig/matan quotations (226):
   x:real
   x:real
   x < &0
-  !x. -- #0.2 <= x ==>\n\t\t\t     abs (real_derivative (real_derivative matan) x) <= #0.65
+  forall x. -- #0.2 <= x ==>\n\t\t\t     abs (real_derivative (real_derivative matan) x) <= #0.65
 Matan.matan =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#matan:fun(real,real) x:real)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_gt:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_div:fun(real,fun(real,real)) (#atn:fun(real,real) (#sqrt:fun(real,real) x:real))) (#sqrt:fun(real,real) x:real))) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))))))))
 Matan.dmatan =  |- ((#=:fun(fun(real,real),fun(fun(real,real),bool)) #dmatan:fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) #matan:fun(real,real)))
 Matan.ddmatan =  |- ((#=:fun(fun(real,real),fun(fun(real,real),bool)) #ddmatan:fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) #matan:fun(real,real))))

@@ -311,38 +311,38 @@ test "nums matches nums.ml" {
       #|0..0..solved at 3
       #|0..0..solved at 2
       #|nums quotations (35):
-      #|  ONE_ONE(f:A->B) = !x1 x2. (f x1 = f x2) ==> (x1 = x2)
-      #|  ONTO(f:A->B) = !y. ?x. y = f x
+      #|  ONE_ONE(f:A->B) = forall x1 x2. (f x1 = f x2) ==> (x1 = x2)
+      #|  ONTO(f:A->B) = forall y. ?x. y = f x
       #|  ?f:ind->ind. ONE_ONE f /\\ ~(ONTO f)
       #|  f:ind->ind
       #|  f:ind->ind
-      #|  ?(f:ind->ind) z. (!x1 x2. (f x1 = f x2) = (x1 = x2)) /\\ (!x. ~(f x = z))
-      #|  IND_SUC = @f:ind->ind. ?z. (!x1 x2. (f x1 = f x2) = (x1 = x2)) /\\\n                                (!x. ~(f x = z))
-      #|  IND_0 = @z:ind. (!x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\\\n                    (!x. ~(IND_SUC x = z))
-      #|  NUM_REP IND_0 /\\\n    (!i. NUM_REP i ==> NUM_REP (IND_SUC i))
+      #|  ?(f:ind->ind) z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\ (forall x. ~(f x = z))
+      #|  IND_SUC = @f:ind->ind. ?z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\\n                                (forall x. ~(f x = z))
+      #|  IND_0 = @z:ind. (forall x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\\\n                    (forall x. ~(IND_SUC x = z))
+      #|  NUM_REP IND_0 /\\\n    (forall i. NUM_REP i ==> NUM_REP (IND_SUC i))
       #|  _0 = mk_num IND_0
       #|  SUC n = mk_num(IND_SUC(dest_num n))
-      #|  !n. ~(SUC n = _0)
+      #|  forall n. ~(SUC n = _0)
       #|  mk_num
-      #|  !p. NUM_REP (IND_SUC (dest_num p))
+      #|  forall p. NUM_REP (IND_SUC (dest_num p))
       #|  dest_num
-      #|  !m n. SUC m = SUC n <=> m = n
+      #|  forall m n. SUC m = SUC n <=> m = n
       #|  dest_num n
       #|  mk_num(IND_SUC i) = SUC(mk_num i)
       #|  \\i. NUM_REP i /\\ P(mk_num i):bool
-      #|  !P. P(_0) /\\ (!n. P(n) ==> P(SUC n)) ==> !n. P n
+      #|  forall P. P(_0) /\\ (forall n. P(n) ==> P(SUC n)) ==> forall n. P n
       #|  fn:num->A
       #|  fn:num->A
       #|  y:A
       #|  (f:A->num->A) y n
       #|  y:A
       #|  ?!y. PRG (n:num) (y:A)
-      #|  !n:num. ?!y:A. PRG n y
-      #|  PRG _0 e /\\ (!b:A n:num. PRG n b ==> PRG (SUC n) (f b n))
-      #|  !(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (!n. fn (SUC n) = f (fn n) n)
+      #|  forall n:num. ?!y:A. PRG n y
+      #|  PRG _0 e /\\ (forall b:A n:num. PRG n b ==> PRG (SUC n) (f b n))
+      #|  forall(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (forall n. fn (SUC n) = f (fn n) n)
       #|  _0 = 0
-      #|  !m. (m = 0) \\/ (?n. m = SUC n)
-      #|  @fn. fn 0 = 0 /\\ (!n. fn (SUC n) = SUC (SUC(fn n)))
+      #|  forall m. (m = 0) \\/ (?n. m = SUC n)
+      #|  @fn. fn 0 = 0 /\\ (forall n. fn (SUC n) = SUC (SUC(fn n)))
       #|  \\m n:num. SUC(SUC m)
       #|  0
       #|  SUC (BIT0 n)

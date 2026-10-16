@@ -38960,36 +38960,36 @@ Multivariate/determinants quotations (1042):
   (trace:real^N^N->real) A = sum(1..dimindex(:N)) (\\i. A$i$i)
   trace(mat 0) = &0
   trace(mat 1 :real^N^N) = &(dimindex(:N))
-  !A B:real^N^N. trace(A + B) = trace(A) + trace(B)
-  !A B:real^N^N. trace(A - B) = trace(A) - trace(B)
-  !c A:real^N^N. trace(c %% A) = c * trace A
-  !A:real^N^N. trace(--A) = --(trace A)
-  !A B:real^N^M. trace(A ** B) = trace(B ** A)
-  !A:real^N^N. trace(transp A) = trace A
-  !A:real^N^N U:real^N^N.\n        invertible U ==> trace(matrix_inv U ** A ** U) = trace A
-  !A:real^P^M B C:real^M^N. trace(A ** B ** C) = trace(B ** C ** A)
+  forall A B:real^N^N. trace(A + B) = trace(A) + trace(B)
+  forall A B:real^N^N. trace(A - B) = trace(A) - trace(B)
+  forall c A:real^N^N. trace(c %% A) = c * trace A
+  forall A:real^N^N. trace(--A) = --(trace A)
+  forall A B:real^N^M. trace(A ** B) = trace(B ** A)
+  forall A:real^N^N. trace(transp A) = trace A
+  forall A:real^N^N U:real^N^N.\n        invertible U ==> trace(matrix_inv U ** A ** U) = trace A
+  forall A:real^P^M B C:real^M^N. trace(A ** B ** C) = trace(B ** C ** A)
   det(A:real^N^N) =\n        sum { p | p permutes 1..dimindex(:N) }\n            (\\p. sign(p) * product (1..dimindex(:N)) (\\i. A$i$(p i)))
-  !m n j. 1 <= m /\\ m <= dimindex(:N) /\\\n             1 <= n /\\ n <= dimindex(:N) /\\\n             1 <= j /\\ j <= dimindex(:N)\n           ==> 1 <= swap(m,n) j /\\ swap(m,n) j <= dimindex(:N)
-  !p i. p permutes 1..dimindex(:N) /\\ 1 <= i /\\ i <= dimindex(:N)\n         ==> ((lambda) g :A^N) $ p(i) = g(p i)
-  !f p s. p permutes s ==> product s f = product s (f o p)
-  !f p m n. p permutes m..n ==> product(m..n) f = product(m..n) (f o p)
-  !s t f g.\n        FINITE s /\\ FINITE t\n        ==> sum s f * sum t g = sum s (\\i. sum t (\\j. f(i) * g(j)))
-  !m n p q. sum(m..n) f * sum(p..q) g =\n             sum(m..n) (\\i. sum(p..q) (\\j. f(i) * g(j)))
-  !A:real^N^N c. det(c %% A) = c pow dimindex(:N) * det A
-  !A:real^N^N. det(--A) = --(&1) pow dimindex(:N) * det A
+  forall m n j. 1 <= m /\\ m <= dimindex(:N) /\\\n             1 <= n /\\ n <= dimindex(:N) /\\\n             1 <= j /\\ j <= dimindex(:N)\n           ==> 1 <= swap(m,n) j /\\ swap(m,n) j <= dimindex(:N)
+  forall p i. p permutes 1..dimindex(:N) /\\ 1 <= i /\\ i <= dimindex(:N)\n         ==> ((lambda) g :A^N) $ p(i) = g(p i)
+  forall f p s. p permutes s ==> product s f = product s (f o p)
+  forall f p m n. p permutes m..n ==> product(m..n) f = product(m..n) (f o p)
+  forall s t f g.\n        FINITE s /\\ FINITE t\n        ==> sum s f * sum t g = sum s (\\i. sum t (\\j. f(i) * g(j)))
+  forall m n p q. sum(m..n) f * sum(p..q) g =\n             sum(m..n) (\\i. sum(p..q) (\\j. f(i) * g(j)))
+  forall A:real^N^N c. det(c %% A) = c pow dimindex(:N) * det A
+  forall A:real^N^N. det(--A) = --(&1) pow dimindex(:N) * det A
   product(1..dimindex(:N))\n       ((\\i. (transp A:real^N^N)$i$inverse p(i)) o p)
   p:num->num
-  !A:real^N^N. det(transp A) = det A
+  forall A:real^N^N. det(transp A) = det A
   1..dimindex(:N)
   p:num->num
   p:num->num
   sum {I}\n     (\\p. sign p * product(1..dimindex(:N)) (\\i. (A:real^N^N)$i$p(i)))
-  !A:real^N^N.\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ i < j ==> A$i$j = &0)\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
+  forall A:real^N^N.\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ i < j ==> A$i$j = &0)\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
   1..dimindex(:N)
   p:num->num
   p:num->num
   sum {I}\n     (\\p. sign p * product(1..dimindex(:N)) (\\i. (A:real^N^N)$i$p(i)))
-  !A:real^N^N.\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ j < i ==> A$i$j = &0)\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
+  forall A:real^N^N.\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ j < i ==> A$i$j = &0)\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
   product(1..dimindex(:N)) (\\i. (mat 1:real^N^N)$i$i)
   det(mat 1 :real^N^N) = &1
   1
@@ -38997,34 +38997,34 @@ Multivariate/determinants quotations (1042):
   det(mat 0 :real^N^N) = &0
   p permutes 1..dimindex(:N)
   q:num->num
-  !A:real^N^N p.\n        p permutes 1..dimindex(:N)\n        ==> det(lambda i. A$p(i)) = sign(p) * det(A)
-  !A:real^N^N p.\n        p permutes 1..dimindex(:N)\n        ==> det((lambda i j. A$i$p(j)):real^N^N) = sign(p) * det(A)
+  forall A:real^N^N p.\n        p permutes 1..dimindex(:N)\n        ==> det(lambda i. A$p(i)) = sign(p) * det(A)
+  forall A:real^N^N p.\n        p permutes 1..dimindex(:N)\n        ==> det((lambda i j. A$i$p(j)):real^N^N) = sign(p) * det(A)
   a = b ==> b = -- &1 * a ==> a = &0
   swap(i:num,j:num)
   A:real^N^N
-  !A:real^N^N i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j) /\\\n                    row i A = row j A\n                    ==> det A = &0
-  !A:real^N^N i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j) /\\\n                    column i A = column j A\n                    ==> det A = &0
-  !A:real^N^N i.\n       1 <= i /\\ i <= dimindex(:N) /\\ row i A = vec 0  ==> det A = &0
-  !A:real^N^N i.\n       1 <= i /\\ i <= dimindex(:N) /\\ column i A = vec 0  ==> det A = &0
+  forall A:real^N^N i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j) /\\\n                    row i A = row j A\n                    ==> det A = &0
+  forall A:real^N^N i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                    1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j) /\\\n                    column i A = column j A\n                    ==> det A = &0
+  forall A:real^N^N i.\n       1 <= i /\\ i <= dimindex(:N) /\\ row i A = vec 0  ==> det A = &0
+  forall A:real^N^N i.\n       1 <= i /\\ i <= dimindex(:N) /\\ column i A = vec 0  ==> det A = &0
   c = a + b /\\ y = x:real /\\ z = x ==> c * x = a * y + b * z
   1..dimindex(:N) = k INSERT ((1..dimindex(:N)) DELETE k)
   p:num->num
-  !a b c k.\n         1 <= k /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i = k then a + b else c i):real^N^N) =\n             det((lambda i. if i = k then a else c i):real^N^N) +\n             det((lambda i. if i = k then b else c i):real^N^N)
+  forall a b c k.\n         1 <= k /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i = k then a + b else c i):real^N^N) =\n             det((lambda i. if i = k then a else c i):real^N^N) +\n             det((lambda i. if i = k then b else c i):real^N^N)
   cp = c * p /\\ p1 = p2:real ==> s * cp * p1 = c * s * p * p2
   1..dimindex(:N) = k INSERT ((1..dimindex(:N)) DELETE k)
   p:num->num
-  !a b c k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i. if i = k then c % a else b i):real^N^N) =\n            c * det((lambda i. if i = k then a else b i):real^N^N)
+  forall a b c k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i. if i = k then c % a else b i):real^N^N) =\n            c * det((lambda i. if i = k then a else b i):real^N^N)
   j:num
   i:num
   a = b /\\ d = &0 ==> a + c * d = b
-  !A:real^N^N i.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n        ==> det(lambda k. if k = i then row i A + c % row j A else row k A) =\n            det A
+  forall A:real^N^N i.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n        ==> det(lambda k. if k = i then row i A + c % row j A else row k A) =\n            det A
   j:num
   i:num
   d = &0 ==> a + c * d = a
   z = row i (A:real^N^N) + y
   a + c % x + y:real^N = (a + y) + c % x
   j:num
-  !A:real^N^N i x.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        x IN span {row j A | 1 <= j /\\ j <= dimindex(:N) /\\ ~(j = i)}\n        ==> det(lambda k. if k = i then row i A + x else row k A) =\n            det A
+  forall A:real^N^N i x.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        x IN span {row j A | 1 <= j /\\ j <= dimindex(:N) /\\ ~(j = i)}\n        ==> det(lambda k. if k = i then row i A + x else row k A) =\n            det A
   i:num
   a = b ==> a ==> b
   --(row i (A:real^N^N))
@@ -39032,19 +39032,19 @@ Multivariate/determinants quotations (1042):
   A:real^N^N
   ?i j. 1 <= i /\\ i <= dimindex(:N) /\\\n          1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j) /\\\n          row i (A:real^N^N) = row j A
   i:num
-  !A:real^N^N. dependent(rows A) ==> det A = &0
-  !A:real^N^N. dependent(columns A) ==> det A = &0
+  forall A:real^N^N. dependent(rows A) ==> det A = &0
+  forall A:real^N^N. dependent(columns A) ==> det A = &0
   k:num
-  !a c s k.\n         FINITE s /\\ 1 <= k /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i = k then vsum s a else c i):real^N^N) =\n             sum s\n               (\\j. det((lambda i. if i = k then a(j) else c i):real^N^N))
+  forall a c s k.\n         FINITE s /\\ 1 <= k /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i = k then vsum s a else c i):real^N^N) =\n             sum s\n               (\\j. det((lambda i. if i = k then a(j) else c i):real^N^N))
   ~(SUC k <= k)
   ~(1 <= i /\\ i <= SUC k) ==> ~(i = SUC k)
   h:num->num
   y:num
-  !p. p IN {(y,g) | y IN s /\\\n                     g IN {f | (!i. 1 <= i /\\ i <= k ==> f i IN s) /\\\n                               (!i. ~(1 <= i /\\ i <= k) ==> f i = i)}}\n       ==> (\\(y,g) i. if i = SUC k then y else g(i)) p IN\n             {f | (!i. 1 <= i /\\ i <= SUC k ==> f i IN s) /\\\n                  (!i. ~(1 <= i /\\ i <= SUC k) ==> f i = i)} /\\\n           (\\h. h(SUC k),(\\i. if i = SUC k then i else h(i)))\n            ((\\(y,g) i. if i = SUC k then y else g(i)) p) = p
+  forall p. p IN {(y,g) | y IN s /\\\n                     g IN {f | (forall i. 1 <= i /\\ i <= k ==> f i IN s) /\\\n                               (forall i. ~(1 <= i /\\ i <= k) ==> f i = i)}}\n       ==> (\\(y,g) i. if i = SUC k then y else g(i)) p IN\n             {f | (forall i. 1 <= i /\\ i <= SUC k ==> f i IN s) /\\\n                  (forall i. ~(1 <= i /\\ i <= SUC k) ==> f i = i)} /\\\n           (\\h. h(SUC k),(\\i. if i = SUC k then i else h(i)))\n            ((\\(y,g) i. if i = SUC k then y else g(i)) p) = p
   i <= SUC k /\\ ~(i = SUC k) ==> i <= k
   i <= k ==> i <= SUC k /\\ ~(i = SUC k)
   h:num->num
-  !h. h IN {f | (!i. 1 <= i /\\ i <= SUC k ==> f i IN s) /\\\n                 (!i. ~(1 <= i /\\ i <= SUC k) ==> f i = i)}\n       ==> (\\h. h(SUC k),(\\i. if i = SUC k then i else h(i))) h IN\n           {(y,g) | y IN s /\\\n                     g IN {f | (!i. 1 <= i /\\ i <= k ==> f i IN s) /\\\n                               (!i. ~(1 <= i /\\ i <= k) ==> f i = i)}} /\\\n           (\\(y,g) i. if i = SUC k then y else g(i))\n              ((\\h. h(SUC k),(\\i. if i = SUC k then i else h(i))) h) = h
+  forall h. h IN {f | (forall i. 1 <= i /\\ i <= SUC k ==> f i IN s) /\\\n                 (forall i. ~(1 <= i /\\ i <= SUC k) ==> f i = i)}\n       ==> (\\h. h(SUC k),(\\i. if i = SUC k then i else h(i))) h IN\n           {(y,g) | y IN s /\\\n                     g IN {f | (forall i. 1 <= i /\\ i <= k ==> f i IN s) /\\\n                               (forall i. ~(1 <= i /\\ i <= k) ==> f i = i)}} /\\\n           (\\(y,g) i. if i = SUC k then y else g(i))\n              ((\\h. h(SUC k),(\\i. if i = SUC k then i else h(i))) h) = h
   (\\h. h(SUC k),(\\i. if i = SUC k then i else h(i))) h
   h:num->num
   a = b ==> a ==> b
@@ -39053,7 +39053,7 @@ Multivariate/determinants quotations (1042):
   FINITE(s:num->bool)
   {x | x = y} = {y}
   ~(1 <= i /\\ i <= 0)
-  !s k. FINITE s\n         ==> FINITE {f | (!i. 1 <= i /\\ i <= k ==> f(i) IN s) /\\\n                         (!i. ~(1 <= i /\\ i <= k) ==> f(i) = i)}
+  forall s k. FINITE s\n         ==> FINITE {f | (forall i. 1 <= i /\\ i <= k ==> f(i) IN s) /\\\n                         (forall i. ~(1 <= i /\\ i <= k) ==> f(i) = i)}
   1 <= k ==> ~(k <= 0)
   (lambda i. if i <= 0 then x(i) else y(i)) = (lambda i. y i)
   ~(SUC k <= k)
@@ -39071,15 +39071,15 @@ Multivariate/determinants quotations (1042):
   SUC k <= n ==> k <= n
   {x | x = y} = {y}
   ~(1 <= i /\\ i <= 0)
-  !s k a c.\n         FINITE s /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i <= k then vsum s (a i) else c i):real^N^N) =\n             sum {f | (!i. 1 <= i /\\ i <= k ==> f(i) IN s) /\\\n                      !i. ~(1 <= i /\\ i <= k) ==> f(i) = i}\n                 (\\f. det((lambda i. if i <= k then a i (f i) else c i)\n                          :real^N^N))
+  forall s k a c.\n         FINITE s /\\ k <= dimindex(:N)\n         ==> det((lambda i. if i <= k then vsum s (a i) else c i):real^N^N) =\n             sum {f | (forall i. 1 <= i /\\ i <= k ==> f(i) IN s) /\\\n                      forall i. ~(1 <= i /\\ i <= k) ==> f(i) = i}\n                 (\\f. det((lambda i. if i <= k then a i (f i) else c i)\n                          :real^N^N))
   (lambda i. if i <= dimindex(:N) then x(i) else y(i)):real^N^N =\n     (lambda i. x(i))
   dimindex(:N)
   s:num->bool
-  !s a.\n         FINITE s\n         ==> det((lambda i. vsum s (a i)):real^N^N) =\n             sum {f | (!i. 1 <= i /\\ i <= dimindex(:N) ==> f(i) IN s) /\\\n                      !i. ~(1 <= i /\\ i <= dimindex(:N)) ==> f(i) = i}\n                 (\\f. det((lambda i. a i (f i)):real^N^N))
-  !A:real^N^N B:real^N^N. A ** B =\n                  lambda i. vsum (1..dimindex(:N)) (\\k. A$i$k % B$k)
+  forall s a.\n         FINITE s\n         ==> det((lambda i. vsum s (a i)):real^N^N) =\n             sum {f | (forall i. 1 <= i /\\ i <= dimindex(:N) ==> f(i) IN s) /\\\n                      forall i. ~(1 <= i /\\ i <= dimindex(:N)) ==> f(i) = i}\n                 (\\f. det((lambda i. a i (f i)):real^N^N))
+  forall A:real^N^N B:real^N^N. A ** B =\n                  lambda i. vsum (1..dimindex(:N)) (\\k. A$i$k % B$k)
   b = c * d ==> s * b = c * s * d
   p:num->num
-  !a c. det((lambda i. c(i) % a(i)):real^N^N) =\n         product(1..dimindex(:N)) (\\i. c(i)) *\n         det((lambda i. a(i)):real^N^N)
+  forall a c. det((lambda i. c(i) % a(i)):real^N^N) =\n         product(1..dimindex(:N)) (\\i. c(i)) *\n         det((lambda i. a(i)):real^N^N)
   (A:real^N^N)$i$p(i) * (B:real^N^N)$p(i)$q(i)
   i:num
   p permutes 1..dimindex(:N)
@@ -39089,14 +39089,14 @@ Multivariate/determinants quotations (1042):
   p:num->num
   1 <= y /\\ y <= dimindex(:N)
   1 <= x /\\ x <= dimindex(:N)
-  !x y. (f:num->num)(x) = f(y) ==> x = y
+  forall x y. (f:num->num)(x) = f(y) ==> x = y
   (~b ==> c) /\\ (b ==> ~a) ==> (a <=> b) ==> c
   f:num->num
   1..dimindex(:N)
   f:num->num
   sum {p | p permutes 1..dimindex(:N)}\n            (\\f. det (lambda i. (A:real^N^N)$i$f i % (B:real^N^N)$f i))
-  !A B:real^N^N. det(A ** B) = det(A) * det(B)
-  !f:real^N->real^N A:real^N^N.\n        linear f ==> det(lambda i. f(A$i)) = det(matrix f) * det A
+  forall A B:real^N^N. det(A ** B) = det(A) * det(B)
+  forall f:real^N->real^N A:real^N^N.\n        linear f ==> det(lambda i. f(A$i)) = det(matrix f) * det A
   x + --x:real^N = vec 0
   i:num
   j:num
@@ -39107,27 +39107,27 @@ Multivariate/determinants quotations (1042):
   i:num
   c:num->real
   det:real^N^N->real
-  !A:real^N^N. invertible(A) <=> ~(det A = &0)
-  !A:real^N^N. det(A) = &0 <=> ~invertible(A)
+  forall A:real^N^N. invertible(A) <=> ~(det A = &0)
+  forall A:real^N^N. det(A) = &0 <=> ~invertible(A)
   a * b = &1 ==> a = inv b
   invertible(A:real^N^N)
-  !A:real^N^N. det(matrix_inv A) = inv(det A)
-  !A:real^N^N. ~(det A = &0) ==> matrix_inv A ** A = mat 1
-  !A:real^N^N. ~(det A = &0) ==> A ** matrix_inv A = mat 1
-  !f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ f o g = I /\\ g o f = I))
-  !f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ g o f = I))
-  !f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ f o g = I))
+  forall A:real^N^N. det(matrix_inv A) = inv(det A)
+  forall A:real^N^N. ~(det A = &0) ==> matrix_inv A ** A = mat 1
+  forall A:real^N^N. ~(det A = &0) ==> A ** matrix_inv A = mat 1
+  forall f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ f o g = I /\\ g o f = I))
+  forall f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ g o f = I))
+  forall f:real^N->real^N.\n        linear f\n        ==> (det(matrix f) = &0 <=>\n             ~(?g. linear g /\\ f o g = I))
   A:real^N^N
-  !A:real^N^N. det A = &0 <=> rank A < dimindex(:N)
+  forall A:real^N^N. det A = &0 <=> rank A < dimindex(:N)
   MIN n n = n
   A:real^N^N
-  !A:real^N^N. rank A = dimindex(:N) <=> ~(det A = &0)
-  !A:real^N^M. invertible(transp A ** A) <=> rank A = dimindex(:N)
+  forall A:real^N^N. rank A = dimindex(:N) <=> ~(det A = &0)
+  forall A:real^N^M. invertible(transp A ** A) <=> rank A = dimindex(:N)
   r <= MIN N N ==> (~(r = N) <=> r < N)
-  !A:real^N^N. (?x. ~(x = vec 0) /\\ A ** x = vec 0) <=> det A = &0
-  !A:real^N^N B:real^N^N.\n        invertible(A ** B) <=> invertible A /\\ invertible B
-  !A:real^N^N B:real^N^N.\n        invertible A /\\ invertible B\n        ==> matrix_inv(A ** B) = matrix_inv B ** matrix_inv A
-  !S:real^N^N A. invertible S ==> det(matrix_inv S ** A ** S) = det A
+  forall A:real^N^N. (?x. ~(x = vec 0) /\\ A ** x = vec 0) <=> det A = &0
+  forall A:real^N^N B:real^N^N.\n        invertible(A ** B) <=> invertible A /\\ invertible B
+  forall A:real^N^N B:real^N^N.\n        invertible A /\\ invertible B\n        ==> matrix_inv(A ** B) = matrix_inv B ** matrix_inv A
+  forall S:real^N^N A. invertible S ==> det(matrix_inv S ** A ** S) = det A
   x:real^N
   \\x:real^N. (S:real^N^N) ** x
   &1
@@ -39137,30 +39137,30 @@ Multivariate/determinants quotations (1042):
   x:real^N
   B = (A:real^N^N) ** (mat 1 - S:real^N^N)
   S = matrix_inv(A:real^N^N) ** (A - B)
-  !A B:real^N^N.\n        invertible A /\\\n        onorm(\\x. (B - A) ** x) < inv(onorm(\\x. matrix_inv A ** x))\n        ==> invertible B
+  forall A B:real^N^N.\n        invertible A /\\\n        onorm(\\x. (B - A) ** x) < inv(onorm(\\x. matrix_inv A ** x))\n        ==> invertible B
   inv(onorm(\\x. matrix_inv(A:real^N^N) ** x))
-  !A:real^N^N.\n        invertible A\n        ==> ?e. &0 < e /\\ !B. onorm(\\x. (B - A) ** x) < e ==> invertible B
+  forall A:real^N^N.\n        invertible A\n        ==> ?e. &0 < e /\\ forall B. onorm(\\x. (B - A) ** x) < e ==> invertible B
   d = d' /\\ e = d' ==> (c - &1) * d + e = c * d'
   (x:real^N)$k % row k (A:real^N^N) + s =\n    (x$k - &1) % row k A + row k A + s
   1..dimindex(:N) = k INSERT ((1..dimindex(:N)) DELETE k)
-  !A:real^N^N x:real^N.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i. if i = k\n                           then vsum(1..dimindex(:N)) (\\i. x$i % row i A)\n                           else row i A):real^N^N) =\n            x$k * det A
+  forall A:real^N^N x:real^N.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i. if i = k\n                           then vsum(1..dimindex(:N)) (\\i. x$i % row i A)\n                           else row i A):real^N^N) =\n            x$k * det A
   x:real^N
   transp(A:real^N^N)
-  !A:real^N^N x:real^N.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i j. if j = k then (A**x)$i else A$i$j):real^N^N) =\n            x$k * det(A)
+  forall A:real^N^N x:real^N.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> det((lambda i j. if j = k then (A**x)$i else A$i$j):real^N^N) =\n            x$k * det(A)
   ~(z = &0) ==> (x = y / z <=> x * z = y)
   A:real^N^N
-  (?x. p(x)) /\\ (!x. p(x) ==> x = a) ==> !x. p(x) <=> x = a
-  !A:real^N^N x b.\n        ~(det(A) = &0)\n        ==> (A ** x = b <=>\n             x = lambda k.\n                   det((lambda i j. if j = k then b$i else A$i$j):real^N^N) /\n                   det(A))
-  !A:real^N^N X:real^N^N B:real^N^N.\n        ~(det A = &0)\n        ==> (X ** A = B <=>\n             X = lambda k l.\n                   det((lambda i j. if j = l then B$k$i else A$j$i):real^N^N) /\n                   det A)
-  !A:real^N^N X:real^N^N B:real^N^N.\n        ~(det A = &0)\n        ==> (A ** X = B <=>\n             X = lambda k l.\n                   det((lambda i j. if j = k then B$i$l else A$i$j):real^N^N) /\n                   det A)
+  (?x. p(x)) /\\ (forall x. p(x) ==> x = a) ==> forall x. p(x) <=> x = a
+  forall A:real^N^N x b.\n        ~(det(A) = &0)\n        ==> (A ** x = b <=>\n             x = lambda k.\n                   det((lambda i j. if j = k then b$i else A$i$j):real^N^N) /\n                   det(A))
+  forall A:real^N^N X:real^N^N B:real^N^N.\n        ~(det A = &0)\n        ==> (X ** A = B <=>\n             X = lambda k l.\n                   det((lambda i j. if j = l then B$k$i else A$j$i):real^N^N) /\n                   det A)
+  forall A:real^N^N X:real^N^N B:real^N^N.\n        ~(det A = &0)\n        ==> (A ** X = B <=>\n             X = lambda k l.\n                   det((lambda i j. if j = k then B$i$l else A$i$j):real^N^N) /\n                   det A)
   det:real^N^N->real
   det(A:real^N^N) = &0
-  !A:real^N^N A':real^N^N.\n        A ** A' = mat 1 <=>\n        ~(det A = &0) /\\\n        A' = lambda k l.\n                det((lambda i j. if j = k then if i = l then &1 else &0\n                                 else A$i$j):real^N^N) /\n                det A
+  forall A:real^N^N A':real^N^N.\n        A ** A' = mat 1 <=>\n        ~(det A = &0) /\\\n        A' = lambda k l.\n                det((lambda i j. if j = k then if i = l then &1 else &0\n                                 else A$i$j):real^N^N) /\n                det A
   det:real^N^N->real
   det(A:real^N^N) = &0
-  !A:real^N^N A':real^N^N.\n        A' ** A = mat 1 <=>\n        ~(det A = &0) /\\\n        A' = lambda k l.\n                det((lambda i j. if j = l then if i = k then &1 else &0\n                                 else A$j$i):real^N^N) /\n                det A
+  forall A:real^N^N A':real^N^N.\n        A' ** A = mat 1 <=>\n        ~(det A = &0) /\\\n        A' = lambda k l.\n                det((lambda i j. if j = l then if i = k then &1 else &0\n                                 else A$j$i):real^N^N) /\n                det A
   (cofactor:real^N^N->real^N^N) A =\n        lambda i j. det((lambda k l. if k = i /\\ l = j then &1\n                                     else if k = i \\/ l = j then &0\n                                     else A$k$l):real^N^N)
-  !A:real^N^N. cofactor(transp A) = transp(cofactor A)
+  forall A:real^N^N. cofactor(transp A) = transp(cofactor A)
   (p:num->num)(inverse p j) = j
   inverse(p:num->num) j IN 1..dimindex(:N)
   inverse (p:num->num) j
@@ -39171,29 +39171,29 @@ Multivariate/determinants quotations (1042):
   (p:num->num) i = j
   j:num
   i:num
-  !A:real^N^N.\n        cofactor A =\n        lambda i j. det((lambda k l. if l = j then if k = i then &1 else &0\n                                     else A$k$l):real^N^N)
-  !A:real^N^N.\n        cofactor A =\n        lambda i j. det((lambda k l. if k = i then if l = j then &1 else &0\n                                     else A$k$l):real^N^N)
+  forall A:real^N^N.\n        cofactor A =\n        lambda i j. det((lambda k l. if l = j then if k = i then &1 else &0\n                                     else A$k$l):real^N^N)
+  forall A:real^N^N.\n        cofactor A =\n        lambda i j. det((lambda k l. if k = i then if l = j then &1 else &0\n                                     else A$k$l):real^N^N)
   l:num
   k:num
   det(A:real^N^N) = &0
-  !A:real^N^N A':real^N^N.\n        A ** A' = mat 1 <=>\n        ~(det A = &0) /\\ A' = inv(det A) %% transp(cofactor A)
-  !A:real^N^N A':real^N^N.\n        A' ** A = mat 1 <=>\n        ~(det A = &0) /\\ A' = inv(det A) %% transp(cofactor A)
-  !A. ~(det A = &0) ==> matrix_inv A = inv(det A) %% transp(cofactor A)
-  !A:real^N^N. ~(det A = &0) ==> cofactor A = det(A) %% transp(matrix_inv A)
+  forall A:real^N^N A':real^N^N.\n        A ** A' = mat 1 <=>\n        ~(det A = &0) /\\ A' = inv(det A) %% transp(cofactor A)
+  forall A:real^N^N A':real^N^N.\n        A' ** A = mat 1 <=>\n        ~(det A = &0) /\\ A' = inv(det A) %% transp(cofactor A)
+  forall A. ~(det A = &0) ==> matrix_inv A = inv(det A) %% transp(cofactor A)
+  forall A:real^N^N. ~(det A = &0) ==> cofactor A = det(A) %% transp(matrix_inv A)
   cofactor(mat 1:real^N^N) = mat 1
   (p:num->num) k IN 1..dimindex(:N)
   k:num
   x INSERT (s DELETE x) = s <=> x IN s
-  s = t /\\ (!x. x IN t ==> f x = g x) ==> product s f = product t g
+  s = t /\\ (forall x. x IN t ==> f x = g x) ==> product s f = product t g
   j:num
-  s = t /\\ (!x. x IN t ==> f x = g x) ==> product s f = product t g
+  s = t /\\ (forall x. x IN t ==> f x = g x) ==> product s f = product t g
   s = x INSERT (s DELETE x) <=> x IN s
   1..dimindex(:N) = i INSERT ((1..dimindex(:N)) DELETE i)
   x * (if p then &1 else &0) * y = if p then x * y else &0
-  !j. inverse (p:num->num) j = i <=> j = p i
+  forall j. inverse (p:num->num) j = i <=> j = p i
   sum (1..dimindex (:N))\n        (\\j. (A:real^N^N)$i$j *\n             product\n              (inverse p j INSERT ((1..dimindex(:N)) DELETE (inverse p j)))\n              (\\k. if k = inverse p j then if k = i then &1 else &0\n                   else A$k$(p k)))
   a * s * p:real = s * a * p
-  !A:real^N^N i.\n        1 <= i /\\ i <= dimindex(:N)\n        ==> det A = sum (1..dimindex(:N))\n                        (\\j. A$i$j * (cofactor A)$i$j)
+  forall A:real^N^N i.\n        1 <= i /\\ i <= dimindex(:N)\n        ==> det A = sum (1..dimindex(:N))\n                        (\\j. A$i$j * (cofactor A)$i$j)
    i':num
   i:num
   j:num
@@ -39203,8 +39203,8 @@ Multivariate/determinants quotations (1042):
   det((lambda k l. if k = i' then (A:real^N^N)$i$l\n                               else A$k$l):real^N^N)
   i':num
   i:num
-  !A:real^N^N. A ** transp(cofactor A) = det(A) %% mat 1
-  !A:real^N^N. transp(cofactor A) ** A = det(A) %% mat 1
+  forall A:real^N^N. A ** transp(cofactor A) = det(A) %% mat 1
+  forall A:real^N^N. transp(cofactor A) ** A = det(A) %% mat 1
   1 <= (p:num->num) k /\\ p k <= dimindex(:N)
   k:num
   dimindex(:N) - 1 = CARD((1..dimindex(:N)) DELETE i)
@@ -39214,55 +39214,55 @@ Multivariate/determinants quotations (1042):
   p:num->num
   j:num
   i:num
-  !A:real^N^N c. cofactor(c %% A) = c pow (dimindex(:N) - 1) %% cofactor A
+  forall A:real^N^N c. cofactor(c %% A) = c pow (dimindex(:N) - 1) %% cofactor A
   1 <= n ==> (n - 1 = 0 <=> n = 1)
   &0
   mat 1:real^N^N
   cofactor(mat 0:real^N^N) = if dimindex(:N) = 1 then mat 1 else mat 0
   product(1..1) f = f(1)
   2
-  !t. product(1..2) t = t(1) * t(2)
+  forall t. product(1..2) t = t(1) * t(2)
   2
   3
-  !t. product(1..3) t = t(1) * t(2) * t(3)
+  forall t. product(1..3) t = t(1) * t(2) * t(3)
   2
   3
   4
-  !t. product(1..4) t = t(1) * t(2) * t(3) * t(4)
+  forall t. product(1..4) t = t(1) * t(2) * t(3) * t(4)
   {x | x = a} = {a}
-  !A:real^N^N. dimindex(:N) = 1 ==> det A = A$1$1
-  !A:real^1^1. det A = A$1$1
+  forall A:real^N^N. dimindex(:N) = 1 ==> det A = A$1$1
+  forall A:real^1^1. det A = A$1$1
   1..2
   {x | x = a} = {a}
-  !A:real^2^2. det A = A$1$1 * A$2$2 - A$1$2 * A$2$1
+  forall A:real^2^2. det A = A$1$1 * A$2$2 - A$1$2 * A$2$1
   1..3
   {x | x = a} = {a}
-  !A:real^3^3.\n        det(A) = A$1$1 * A$2$2 * A$3$3 +\n                 A$1$2 * A$2$3 * A$3$1 +\n                 A$1$3 * A$2$1 * A$3$2 -\n                 A$1$1 * A$2$3 * A$3$2 -\n                 A$1$2 * A$2$1 * A$3$3 -\n                 A$1$3 * A$2$2 * A$3$1
+  forall A:real^3^3.\n        det(A) = A$1$1 * A$2$2 * A$3$3 +\n                 A$1$2 * A$2$3 * A$3$1 +\n                 A$1$3 * A$2$1 * A$3$2 -\n                 A$1$1 * A$2$3 * A$3$2 -\n                 A$1$2 * A$2$1 * A$3$3 -\n                 A$1$3 * A$2$2 * A$3$1
   (sum {3,4} f = f 3 + f 4) /\\\n     (sum {2,3,4} f = f 2 + f 3 + f 4)
   1..4
   {x | x = a} = {a}
-  !A:real^4^4.\n        det(A) = A$1$1 * A$2$2 * A$3$3 * A$4$4 +\n                 A$1$1 * A$2$3 * A$3$4 * A$4$2 +\n                 A$1$1 * A$2$4 * A$3$2 * A$4$3 +\n                 A$1$2 * A$2$1 * A$3$4 * A$4$3 +\n                 A$1$2 * A$2$3 * A$3$1 * A$4$4 +\n                 A$1$2 * A$2$4 * A$3$3 * A$4$1 +\n                 A$1$3 * A$2$1 * A$3$2 * A$4$4 +\n                 A$1$3 * A$2$2 * A$3$4 * A$4$1 +\n                 A$1$3 * A$2$4 * A$3$1 * A$4$2 +\n                 A$1$4 * A$2$1 * A$3$3 * A$4$2 +\n                 A$1$4 * A$2$2 * A$3$1 * A$4$3 +\n                 A$1$4 * A$2$3 * A$3$2 * A$4$1 -\n                 A$1$1 * A$2$2 * A$3$4 * A$4$3 -\n                 A$1$1 * A$2$3 * A$3$2 * A$4$4 -\n                 A$1$1 * A$2$4 * A$3$3 * A$4$2 -\n                 A$1$2 * A$2$1 * A$3$3 * A$4$4 -\n                 A$1$2 * A$2$3 * A$3$4 * A$4$1 -\n                 A$1$2 * A$2$4 * A$3$1 * A$4$3 -\n                 A$1$3 * A$2$1 * A$3$4 * A$4$2 -\n                 A$1$3 * A$2$2 * A$3$1 * A$4$4 -\n                 A$1$3 * A$2$4 * A$3$2 * A$4$1 -\n                 A$1$4 * A$2$1 * A$3$2 * A$4$3 -\n                 A$1$4 * A$2$2 * A$3$3 * A$4$1 -\n                 A$1$4 * A$2$3 * A$3$1 * A$4$2
-  !A:real^N^N. dimindex(:N) = 1 ==> cofactor A = mat 1
-  !A:real^1^1. cofactor A = mat 1
+  forall A:real^4^4.\n        det(A) = A$1$1 * A$2$2 * A$3$3 * A$4$4 +\n                 A$1$1 * A$2$3 * A$3$4 * A$4$2 +\n                 A$1$1 * A$2$4 * A$3$2 * A$4$3 +\n                 A$1$2 * A$2$1 * A$3$4 * A$4$3 +\n                 A$1$2 * A$2$3 * A$3$1 * A$4$4 +\n                 A$1$2 * A$2$4 * A$3$3 * A$4$1 +\n                 A$1$3 * A$2$1 * A$3$2 * A$4$4 +\n                 A$1$3 * A$2$2 * A$3$4 * A$4$1 +\n                 A$1$3 * A$2$4 * A$3$1 * A$4$2 +\n                 A$1$4 * A$2$1 * A$3$3 * A$4$2 +\n                 A$1$4 * A$2$2 * A$3$1 * A$4$3 +\n                 A$1$4 * A$2$3 * A$3$2 * A$4$1 -\n                 A$1$1 * A$2$2 * A$3$4 * A$4$3 -\n                 A$1$1 * A$2$3 * A$3$2 * A$4$4 -\n                 A$1$1 * A$2$4 * A$3$3 * A$4$2 -\n                 A$1$2 * A$2$1 * A$3$3 * A$4$4 -\n                 A$1$2 * A$2$3 * A$3$4 * A$4$1 -\n                 A$1$2 * A$2$4 * A$3$1 * A$4$3 -\n                 A$1$3 * A$2$1 * A$3$4 * A$4$2 -\n                 A$1$3 * A$2$2 * A$3$1 * A$4$4 -\n                 A$1$3 * A$2$4 * A$3$2 * A$4$1 -\n                 A$1$4 * A$2$1 * A$3$2 * A$4$3 -\n                 A$1$4 * A$2$2 * A$3$3 * A$4$1 -\n                 A$1$4 * A$2$3 * A$3$1 * A$4$2
+  forall A:real^N^N. dimindex(:N) = 1 ==> cofactor A = mat 1
+  forall A:real^1^1. cofactor A = mat 1
   a - b * b = &0 <=> b pow 2 = a
   vector[c;d]:real^2
   vector[vector[(a:real^N) dot a; a dot b];\n            vector[a dot b; b dot b]]:real^2^2
-  DISJOINT {x:real^N | a dot x = c} {x | b dot x = d}\n    ==> !u v. a dot (u % a + v % b) = c /\\\n              b dot (u % a + v % b) = d ==> F
-  !a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}
+  DISJOINT {x:real^N | a dot x = c} {x | b dot x = d}\n    ==> forall u v. a dot (u % a + v % b) = c /\\\n              b dot (u % a + v % b) = d ==> F
+  forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}
   (?x:real. P(--x)) <=> ?x. P x
   --b:real^N = c % a <=> b = --c % a
   b:real^N = c % --a <=> b = --c % a
-  (!a b:real^N. collinear {vec 0,--a,b} <=> collinear{vec 0,a,b}) /\\\n     (!a b:real^N. collinear {vec 0,a,--b} <=> collinear{vec 0,a,b})
+  (forall a b:real^N. collinear {vec 0,--a,b} <=> collinear{vec 0,a,b}) /\\\n     (forall a b:real^N. collinear {vec 0,a,--b} <=> collinear{vec 0,a,b})
   c - &1 < c
   DISJOINT {x | a dot x < b} t\n       ==> b - &1 < b ==> DISJOINT {x | a dot x = b - &1} t
-  DISJOINT {x | a dot x <= b} t\n      ==> (!x y. x < y ==> x <= y) ==> DISJOINT {x | a dot x < b} t
+  DISJOINT {x | a dot x <= b} t\n      ==> (forall x y. x < y ==> x <= y) ==> DISJOINT {x | a dot x < b} t
   x > d <=> --x < --d
   x >= d <=> --x <= --d
-  (!a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b})
+  (forall a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x < c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x <= c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x = c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x >= c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        DISJOINT {x | a dot x > c} {x | b dot x > d}\n        ==> collinear {vec 0, a, b})
   DISJOINT s {x | P x \\/ Q x} <=>\n    DISJOINT s {x | P x} /\\ DISJOINT s {x | Q x}
   (~(x < a) <=> x >= a) /\\ (~(x <= a) <=> x > a) /\\\n     (~(x = a) <=> x > a \\/ x < a) /\\\n     (~(x > a) <=> x <= a) /\\ (~(x >= a) <=> x < a)
   s SUBSET {x | P x} <=> DISJOINT s {x | ~P x}
-  (!a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (!a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b})
+  (forall a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x < c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x <= c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x = c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x >= c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x < d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x <= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x = d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x >= d}\n        ==> collinear {vec 0, a, b}) /\\\n   (forall a b:real^N c d.\n        {x | a dot x > c} SUBSET {x | b dot x > d}\n        ==> collinear {vec 0, a, b})
   (b / (a dot a)) % a:real^N
   ~(c = &0) ==> (c * a = b <=> a = b / c)
   c % a:real^N = vec 0
@@ -39275,10 +39275,10 @@ Multivariate/determinants quotations (1042):
   {x:real^N | a dot x = b} SUBSET {x | a' dot x = b'}
   {x | a' dot x = b'} = (:real^N)
   {x:real^N | a dot x = b} = {}
-  !a b a' b'.\n        {x | a dot x = b} SUBSET {x | a' dot x = b'} <=>\n        {x | a dot x = b} = {} \\/ {x | a' dot x = b'} = (:real^N) \\/\n        {x | a dot x = b} = {x | a' dot x = b'}
-  !A:real^N^N c.\n        (?v. ~(v = vec 0) /\\ A ** v = c % v) <=> det(A - c %% mat 1) = &0
-  !A:real^N^N c.\n        (?v. ~(v = vec 0) /\\ A ** v = c % v) <=> det(c %% mat 1 - A) = &0
-  !A:real^N^N.\n        invertible(A) <=> !c v. A ** v = c % v /\\ ~(v = vec 0) ==> ~(c = &0)
+  forall a b a' b'.\n        {x | a dot x = b} SUBSET {x | a' dot x = b'} <=>\n        {x | a dot x = b} = {} \\/ {x | a' dot x = b'} = (:real^N) \\/\n        {x | a dot x = b} = {x | a' dot x = b'}
+  forall A:real^N^N c.\n        (?v. ~(v = vec 0) /\\ A ** v = c % v) <=> det(A - c %% mat 1) = &0
+  forall A:real^N^N c.\n        (?v. ~(v = vec 0) /\\ A ** v = c % v) <=> det(c %% mat 1 - A) = &0
+  forall A:real^N^N.\n        invertible(A) <=> forall c v. A ** v = c % v /\\ ~(v = vec 0) ==> ~(c = &0)
   p:num->num
   p:num->num
   x:real
@@ -39307,103 +39307,103 @@ Multivariate/determinants quotations (1042):
   1 <= i ==> ~(i <= 0)
   \\i. if i = 0 then &1 else &0
   1 <= SUC n
-  !p n. IMAGE p (1..dimindex(:N)) SUBSET 1..dimindex(:N) /\\\n          n <= dimindex(:N)\n          ==> ?a. a n = (if !i. 1 <= i /\\ i <= n ==> p i = i then &1 else &0) /\\\n                  !x. product (1..n) (\\i. (x %% mat 1 - A:real^N^N)$i$p i) =\n                      sum (0..n) (\\i. a i * x pow i)
-  !A:real^N^N.\n        ?a. a(dimindex(:N)) = &1 /\\\n            !x. det(x %% mat 1 - A) =\n                sum (0..dimindex(:N)) (\\i. a i * x pow i)
+  forall p n. IMAGE p (1..dimindex(:N)) SUBSET 1..dimindex(:N) /\\\n          n <= dimindex(:N)\n          ==> ?a. a n = (if forall i. 1 <= i /\\ i <= n ==> p i = i then &1 else &0) /\\\n                  forall x. product (1..n) (\\i. (x %% mat 1 - A:real^N^N)$i$p i) =\n                      sum (0..n) (\\i. a i * x pow i)
+  forall A:real^N^N.\n        ?a. a(dimindex(:N)) = &1 /\\\n            forall x. det(x %% mat 1 - A) =\n                sum (0..dimindex(:N)) (\\i. a i * x pow i)
   dimindex(:N)
   A:real^N^N
-  !A:real^N^N. FINITE {c | ?v. ~(v = vec 0) /\\ A ** v = c % v}
-  !x1 x2 y1 y2:real^2.\n        det(vector[x1;x2]) * det(vector[y1;y2]) =\n          det(vector[y1;x2]) * det(vector[x1;y2]) +\n          det(vector[y2;x2]) * det(vector[y1;x1])
-  !x1 x2 x3 y1 y2 y3:real^3.\n        det(vector[x1;x2;x3]) * det(vector[y1;y2;y3]) =\n          det(vector[y1;x2;x3]) * det(vector[x1;y2;y3]) +\n          det(vector[y2;x2;x3]) * det(vector[y1;x1;y3]) +\n          det(vector[y3;x2;x3]) * det(vector[y1;y2;x1])
-  !x1 x2 x3 x4:real^4 y1 y2 y3 y4:real^4.\n        det(vector[x1;x2;x3;x4]) * det(vector[y1;y2;y3;y4]) =\n          det(vector[y1;x2;x3;x4]) * det(vector[x1;y2;y3;y4]) +\n          det(vector[y2;x2;x3;x4]) * det(vector[y1;x1;y3;y4]) +\n          det(vector[y3;x2;x3;x4]) * det(vector[y1;y2;x1;y4]) +\n          det(vector[y4;x2;x3;x4]) * det(vector[y1;y2;y3;x1])
-  !f s. (!x. x IN s ==> integer(f x)) ==> integer(product s f)
-  !p. integer(sign p)
+  forall A:real^N^N. FINITE {c | ?v. ~(v = vec 0) /\\ A ** v = c % v}
+  forall x1 x2 y1 y2:real^2.\n        det(vector[x1;x2]) * det(vector[y1;y2]) =\n          det(vector[y1;x2]) * det(vector[x1;y2]) +\n          det(vector[y2;x2]) * det(vector[y1;x1])
+  forall x1 x2 x3 y1 y2 y3:real^3.\n        det(vector[x1;x2;x3]) * det(vector[y1;y2;y3]) =\n          det(vector[y1;x2;x3]) * det(vector[x1;y2;y3]) +\n          det(vector[y2;x2;x3]) * det(vector[y1;x1;y3]) +\n          det(vector[y3;x2;x3]) * det(vector[y1;y2;x1])
+  forall x1 x2 x3 x4:real^4 y1 y2 y3 y4:real^4.\n        det(vector[x1;x2;x3;x4]) * det(vector[y1;y2;y3;y4]) =\n          det(vector[y1;x2;x3;x4]) * det(vector[x1;y2;y3;y4]) +\n          det(vector[y2;x2;x3;x4]) * det(vector[y1;x1;y3;y4]) +\n          det(vector[y3;x2;x3;x4]) * det(vector[y1;y2;x1;y4]) +\n          det(vector[y4;x2;x3;x4]) * det(vector[y1;y2;y3;x1])
+  forall f s. (forall x. x IN s ==> integer(f x)) ==> integer(product s f)
+  forall p. integer(sign p)
   p:num->num
-  !M:real^N^N.\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N)\n               ==> integer(M$i$j))\n        ==> integer(det M)
-  diagonal_matrix(A:real^N^M) <=>\n        !i j. 1 <= i /\\ i <= dimindex(:M) /\\\n              1 <= j /\\ j <= dimindex(:N) /\\\n              ~(i = j)\n              ==> A$i$j = &0
-  !A:real^N^N.\n     diagonal_matrix A <=> A = (lambda i j. if i = j then A$i$j else &0)
-  !m. diagonal_matrix(mat m:real^N^N)
+  forall M:real^N^N.\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N)\n               ==> integer(M$i$j))\n        ==> integer(det M)
+  diagonal_matrix(A:real^N^M) <=>\n        forall i j. 1 <= i /\\ i <= dimindex(:M) /\\\n              1 <= j /\\ j <= dimindex(:N) /\\\n              ~(i = j)\n              ==> A$i$j = &0
+  forall A:real^N^N.\n     diagonal_matrix A <=> A = (lambda i j. if i = j then A$i$j else &0)
+  forall m. diagonal_matrix(mat m:real^N^N)
   i:num = j
   j:num
   i:num
-  !A:real^N^N. diagonal_matrix A ==> transp A = A
-  !A:real^N^N. diagonal_matrix A ==> symmetric_matrix A
-  !A B:real^N^M.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> diagonal_matrix(A + B)
-  !A:real^N^M c.\n        diagonal_matrix A ==> diagonal_matrix(c %% A)
+  forall A:real^N^N. diagonal_matrix A ==> transp A = A
+  forall A:real^N^N. diagonal_matrix A ==> symmetric_matrix A
+  forall A B:real^N^M.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> diagonal_matrix(A + B)
+  forall A:real^N^M c.\n        diagonal_matrix A ==> diagonal_matrix(c %% A)
   (if p then a else &0) * (if q then b else &0) =\n    if q then (if p then a * b else &0) else &0
-  !A:real^N^N B:real^N^N.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> A ** B = lambda i j. A$i$j * B$i$j
-  !A:real^N^N B:real^N^N i j.\n        diagonal_matrix A /\\ diagonal_matrix B /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> (A ** B)$i$j = A$i$j * B$i$j
-  !A:real^N^N B:real^N^N.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> diagonal_matrix(A ** B)
-  !A:real^M^N B:real^N^M.\n        diagonal_matrix (A ** B) <=>\n        pairwise (\\i j. orthogonal (row i A) (column j B)) (1..dimindex(:N))
+  forall A:real^N^N B:real^N^N.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> A ** B = lambda i j. A$i$j * B$i$j
+  forall A:real^N^N B:real^N^N i j.\n        diagonal_matrix A /\\ diagonal_matrix B /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> (A ** B)$i$j = A$i$j * B$i$j
+  forall A:real^N^N B:real^N^N.\n        diagonal_matrix A /\\ diagonal_matrix B\n        ==> diagonal_matrix(A ** B)
+  forall A:real^M^N B:real^N^M.\n        diagonal_matrix (A ** B) <=>\n        pairwise (\\i j. orthogonal (row i A) (column j B)) (1..dimindex(:N))
   a * b * a = a <=> b * a = &1 \\/ a = &0
   j:num
   i:num
   A:real^N^N
   diagonal_matrix((lambda i j. inv((A:real^N^N)$i$j)):real^N^N)
-  !A:real^N^N. diagonal_matrix A ==> matrix_inv A = lambda i j. inv(A$i$j)
-  !A:real^N^N i j.\n        diagonal_matrix A /\\\n        1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n        ==> (matrix_inv A)$i$j = inv(A$i$j)
-  !A:real^N^N. diagonal_matrix A ==> diagonal_matrix(matrix_inv A)
-  !A:real^N^N. diagonal_matrix(matrix_inv A) <=> diagonal_matrix A
-  !A:real^N^N.\n        diagonal_matrix A\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
-  !D:real^N^N.\n        diagonal_matrix D\n        ==> (invertible D <=>\n             !i. 1 <= i /\\ i <= dimindex(:N) ==> ~(D$i$i = &0))
+  forall A:real^N^N. diagonal_matrix A ==> matrix_inv A = lambda i j. inv(A$i$j)
+  forall A:real^N^N i j.\n        diagonal_matrix A /\\\n        1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n        ==> (matrix_inv A)$i$j = inv(A$i$j)
+  forall A:real^N^N. diagonal_matrix A ==> diagonal_matrix(matrix_inv A)
+  forall A:real^N^N. diagonal_matrix(matrix_inv A) <=> diagonal_matrix A
+  forall A:real^N^N.\n        diagonal_matrix A\n        ==> det(A) = product(1..dimindex(:N)) (\\i. A$i$i)
+  forall D:real^N^N.\n        diagonal_matrix D\n        ==> (invertible D <=>\n             forall i. 1 <= i /\\ i <= dimindex(:N) ==> ~(D$i$i = &0))
   (if a = b then x else &0) * y = (if b = a then x * y else &0) /\\\n    y * (if a = b then x else &0) = (if a = b then x * y else &0)
-  !A D:real^N^N.\n        diagonal_matrix D\n        ==> (A ** D = D ** A <=>\n             !i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                   1 <= j /\\ j <= dimindex(:N)\n                   ==> A$i$j = &0 \\/ D$i$i = D$j$j)
+  forall A D:real^N^N.\n        diagonal_matrix D\n        ==> (A ** D = D ** A <=>\n             forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                   1 <= j /\\ j <= dimindex(:N)\n                   ==> A$i$j = &0 \\/ D$i$i = D$j$j)
   basis i:real^N = inv((A:real^N^N)$i$i) % A$i$i % basis i
   i:num
   dim{basis i:real^N | i IN 1..dimindex(:N) /\\ ~((A:real^N^N)$i$i = &0)}
-  t SUBSET s /\\ (!x. x IN s ==> ~(x IN t) ==> x = a)\n      ==> a INSERT s = a INSERT t
+  t SUBSET s /\\ (forall x. x IN s ==> ~(x IN t) ==> x = a)\n      ==> a INSERT s = a INSERT t
   (vec 0:real^N) INSERT s = (vec 0:real^N) INSERT t ==> dim s = dim t
   dim {(A:real^N^N)$i$i % basis i:real^N |i|\n          i IN 1..dimindex(:N) /\\ ~(A$i$i = &0)}
   (if i = j then a else &0) * b = if j = i then a * b else &0
-  (!x. x IN s ==> f x = g x) ==> IMAGE f s = {g x | x IN s}
+  (forall x. x IN s ==> f x = g x) ==> IMAGE f s = {g x | x IN s}
   dim {(A:real^N^N)$i$i % basis i:real^N | i IN 1..dimindex(:N)}
-  !A:real^N^N.\n        diagonal_matrix A\n        ==> rank A = CARD {i | i IN 1..dimindex(:N) /\\ ~(A$i$i = &0)}
+  forall A:real^N^N.\n        diagonal_matrix A\n        ==> rank A = CARD {i | i IN 1..dimindex(:N) /\\ ~(A$i$i = &0)}
   1
   x <= b ==> x <= abs b
   norm(b % x:real^N)
   x:real^N
   i:num
-  norm(x) <= b ==> !i. abs(x$i) <= b
+  norm(x) <= b ==> forall i. abs(x$i) <= b
   basis i:real^N
   i:num
   b:real
-  !A:real^N^N.\n       diagonal_matrix A\n       ==> onorm(\\x. A ** x) = sup {abs(A$i$i) | 1 <= i /\\ i <= dimindex(:N)}
-  positive_semidefinite(A:real^N^N) <=>\n    symmetric_matrix A /\\ !x. &0 <= x dot (A ** x)
-  !A:real^N^N. positive_semidefinite A ==> symmetric_matrix A
-  !A:real^N^N. positive_semidefinite A ==> transp A = A
-  !A B:real^N^N.\n        positive_semidefinite A /\\ positive_semidefinite B\n        ==> positive_semidefinite(A + B)
-  !c A:real^N^N.\n        positive_semidefinite A /\\ &0 <= c\n        ==> positive_semidefinite(c %% A)
-  !A:real^N^N. positive_semidefinite(transp A) <=> positive_semidefinite A
-  !A:real^N^M. positive_semidefinite(transp A ** A)
-  !A B:real^N^M.\n        positive_semidefinite A\n        ==> positive_semidefinite(transp B ** A ** B)
+  forall A:real^N^N.\n       diagonal_matrix A\n       ==> onorm(\\x. A ** x) = sup {abs(A$i$i) | 1 <= i /\\ i <= dimindex(:N)}
+  positive_semidefinite(A:real^N^N) <=>\n    symmetric_matrix A /\\ forall x. &0 <= x dot (A ** x)
+  forall A:real^N^N. positive_semidefinite A ==> symmetric_matrix A
+  forall A:real^N^N. positive_semidefinite A ==> transp A = A
+  forall A B:real^N^N.\n        positive_semidefinite A /\\ positive_semidefinite B\n        ==> positive_semidefinite(A + B)
+  forall c A:real^N^N.\n        positive_semidefinite A /\\ &0 <= c\n        ==> positive_semidefinite(c %% A)
+  forall A:real^N^N. positive_semidefinite(transp A) <=> positive_semidefinite A
+  forall A:real^N^M. positive_semidefinite(transp A ** A)
+  forall A B:real^N^M.\n        positive_semidefinite A\n        ==> positive_semidefinite(transp B ** A ** B)
   matrix_inv B:real^N^N
-  !A B:real^N^N.\n        invertible B\n        ==> (positive_semidefinite (transp B ** A ** B) <=>\n             positive_semidefinite A)
+  forall A B:real^N^N.\n        invertible B\n        ==> (positive_semidefinite (transp B ** A ** B) <=>\n             positive_semidefinite A)
   x * d * x:real = d * x * x
-  !D:real^N^N.\n        diagonal_matrix D /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= D$i$i)\n        ==> positive_semidefinite D
+  forall D:real^N^N.\n        diagonal_matrix D /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= D$i$i)\n        ==> positive_semidefinite D
   basis i:real^N
-  !D:real^N^N.\n        diagonal_matrix D\n        ==> (positive_semidefinite D <=>\n             !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= D$i$i)
+  forall D:real^N^N.\n        diagonal_matrix D\n        ==> (positive_semidefinite D <=>\n             forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= D$i$i)
   basis i:real^N
-  !A:real^N^N i.\n        positive_semidefinite A /\\ 1 <= i /\\ i <= dimindex(:N)\n        ==> &0 <= A$i$i
-  !A:real^N^N. positive_semidefinite A ==> &0 <= trace A
+  forall A:real^N^N i.\n        positive_semidefinite A /\\ 1 <= i /\\ i <= dimindex(:N)\n        ==> &0 <= A$i$i
+  forall A:real^N^N. positive_semidefinite A ==> &0 <= trace A
   a = y /\\ d = y /\\ b = x /\\ c = x ==> &0 <= a - b - (c - d) ==> x <= y
   A ** B - B ** A:real^N^N
-  !A B:real^N^N.\n        symmetric_matrix A /\\ symmetric_matrix B\n        ==> trace((A ** B) ** (A ** B)) <= trace((A ** A) ** (B ** B))
+  forall A B:real^N^N.\n        symmetric_matrix A /\\ symmetric_matrix B\n        ==> trace((A ** B) ** (A ** B)) <= trace((A ** A) ** (B ** B))
   --(a + &1) / b
-  (!t. &0 <= a + b * t) ==> b = &0
+  (forall t. &0 <= a + b * t) ==> b = &0
   (a + t * b) + t * b + t * t * &0 =\n                                a + (&2 * b) * t
   x dot (A ** A ** x) = ((A:real^N^N) ** x) dot (A ** x)
   (A:real^N^N) ** x + t % x
   t:real
-  !A:real^N^N. positive_semidefinite A /\\ x dot (A ** x) = &0\n                ==> A ** x = vec 0
-  !A:real^N^N. positive_semidefinite A\n                ==> (x dot (A ** x) = &0 <=> A ** x = vec 0)
+  forall A:real^N^N. positive_semidefinite A /\\ x dot (A ** x) = &0\n                ==> A ** x = vec 0
+  forall A:real^N^N. positive_semidefinite A\n                ==> (x dot (A ** x) = &0 <=> A ** x = vec 0)
   basis 1:real^N
   x * a * x:real = a * x pow 2
-  !A:real^N^N.\n        dimindex(:N) = 1 ==> (positive_semidefinite A <=> &0 <= A$1$1)
-  !A:real^1^1. positive_semidefinite A <=> &0 <= A$1$1
+  forall A:real^N^N.\n        dimindex(:N) = 1 ==> (positive_semidefinite A <=> &0 <= A$1$1)
+  forall A:real^1^1. positive_semidefinite A <=> &0 <= A$1$1
   P a ==> {x | P x /\\ x = a} = {a}
   (lambda m. if m = i then (x:real^2)$1\n                 else if m = j then (x:real^2)$2  else &0):real^N
   x * (a * x + a * y) + y * (a * x + a * y):real =\n      a * (x + y) pow 2
   j:num = i
-  !A:real^N^N i j.\n        positive_semidefinite A /\\\n        1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n        ==> positive_semidefinite\n              (vector[vector[A$i$i;A$i$j];\n                      vector[A$j$i;A$j$j]]:real^2^2)
+  forall A:real^N^N i j.\n        positive_semidefinite A /\\\n        1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n        ==> positive_semidefinite\n              (vector[vector[A$i$i;A$i$j];\n                      vector[A$j$i;A$j$j]]:real^2^2)
   1 <= x /\\ x - 1 = q * n + r /\\ r < n ==> q * n + 1 + r = x
   1 <= n ==> (1 + m <= n <=> m < n)
   k:num
@@ -39416,58 +39416,58 @@ Multivariate/determinants quotations (1042):
   i:num
   \\(i,j). (j - 1) * dimindex(:N) + i
   \\k. (1 + (k - 1) MOD dimindex(:N)),(1 + (k - 1) DIV dimindex(:N))
-  !A B:real^N^M. vectorize A dot vectorize B = trace(transp A ** B)
-  !A:real^N^M. norm(vectorize(transp A)) = norm(vectorize A)
+  forall A B:real^N^M. vectorize A dot vectorize B = trace(transp A ** B)
+  forall A:real^N^M. norm(vectorize(transp A)) = norm(vectorize A)
   i:num
   sum (1..dimindex(:M))\n        (\\i. norm((A:real^N^M)$i) pow 2 * norm(x:real^N) pow 2)
-  !A:real^N^M x. norm(A ** x) <= norm(vectorize A) * norm x
-  !A:real^M^N. onorm(\\x. A ** x) <= norm(vectorize A)
-  !A:real^N^M.\n    norm(vectorize A) pow 2 = sum(1..dimindex(:M)) (\\i. norm(A$i) pow 2)
+  forall A:real^N^M x. norm(A ** x) <= norm(vectorize A) * norm x
+  forall A:real^M^N. onorm(\\x. A ** x) <= norm(vectorize A)
+  forall A:real^N^M.\n    norm(vectorize A) pow 2 = sum(1..dimindex(:M)) (\\i. norm(A$i) pow 2)
   i:num
-  !A:real^N^P B:real^M^N.\n    norm(vectorize(A ** B)) <= norm(vectorize A) * norm(vectorize B)
-  !A:real^N^M B:real^N^M.\n        norm(vectorize((lambda i j. A$i$j * B$i$j):real^N^M))\n        <= norm(vectorize A) * norm(vectorize B)
-  !A:real^M^N. &0 <= trace(transp A ** A)
-  !A:real^M^N. trace(transp A ** A) = &0 <=> A = mat 0
-  !A:real^M^N. &0 < trace(transp A ** A) <=> ~(A = mat 0)
-  !A B:real^M^N.\n        trace(transp A ** B)\n         <= sqrt(trace(transp A ** A)) * sqrt(trace(transp B ** B))
-  !A B:real^M^N.\n        abs(trace(transp A ** B))\n         <= sqrt(trace(transp A ** A)) * sqrt(trace(transp B ** B))
-  !A B:real^M^N.\n        trace(transp A ** B) pow 2\n        <= trace(transp A ** A) * trace(transp B ** B)
-  positive_definite(A:real^N^N) <=>\n         symmetric_matrix A /\\ !x. ~(x = vec 0) ==> &0 < x dot (A ** x)
-  !A:real^N^N. positive_definite A ==> symmetric_matrix A
-  !A:real^N^N. positive_definite A ==> transp A = A
+  forall A:real^N^P B:real^M^N.\n    norm(vectorize(A ** B)) <= norm(vectorize A) * norm(vectorize B)
+  forall A:real^N^M B:real^N^M.\n        norm(vectorize((lambda i j. A$i$j * B$i$j):real^N^M))\n        <= norm(vectorize A) * norm(vectorize B)
+  forall A:real^M^N. &0 <= trace(transp A ** A)
+  forall A:real^M^N. trace(transp A ** A) = &0 <=> A = mat 0
+  forall A:real^M^N. &0 < trace(transp A ** A) <=> ~(A = mat 0)
+  forall A B:real^M^N.\n        trace(transp A ** B)\n         <= sqrt(trace(transp A ** A)) * sqrt(trace(transp B ** B))
+  forall A B:real^M^N.\n        abs(trace(transp A ** B))\n         <= sqrt(trace(transp A ** A)) * sqrt(trace(transp B ** B))
+  forall A B:real^M^N.\n        trace(transp A ** B) pow 2\n        <= trace(transp A ** A) * trace(transp B ** B)
+  positive_definite(A:real^N^N) <=>\n         symmetric_matrix A /\\ forall x. ~(x = vec 0) ==> &0 < x dot (A ** x)
+  forall A:real^N^N. positive_definite A ==> symmetric_matrix A
+  forall A:real^N^N. positive_definite A ==> transp A = A
   positive_semidefinite(A:real^N^N)
-  P a ==> ((!x:real^N. ~(x = a) ==> P x) <=> (!x. P x))
+  P a ==> ((forall x:real^N. ~(x = a) ==> P x) <=> (forall x. P x))
   p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
   &0 < x <=> &0 <= x /\\ ~(x = &0)
-  !A:real^N^N.\n        positive_definite A <=> positive_semidefinite A /\\ invertible A
-  !A B:real^N^N.\n        positive_definite(transp B ** A ** B) <=>\n        invertible B /\\ positive_definite A
+  forall A:real^N^N.\n        positive_definite A <=> positive_semidefinite A /\\ invertible A
+  forall A B:real^N^N.\n        positive_definite(transp B ** A ** B) <=>\n        invertible B /\\ positive_definite A
   basis 1:real^N
   x * a * x:real = a * x pow 2
-  !A:real^N^N.\n        dimindex(:N) = 1 ==> (positive_definite A <=> &0 < A$1$1)
-  !A:real^1^1. positive_definite A <=> &0 < A$1$1
-  !A:real^N^N. positive_definite A ==> invertible A
-  !A:real^N^N. positive_definite A ==> positive_semidefinite A
-  !A B:real^N^N.\n        positive_semidefinite A /\\ positive_definite B\n        ==> positive_definite(A + B)
-  !A B:real^N^N.\n        positive_definite A /\\ positive_semidefinite B\n        ==> positive_definite(A + B)
-  !A B:real^N^N.\n        positive_definite A /\\ positive_definite B\n        ==> positive_definite(A + B)
-  !c A:real^N^N.\n        positive_definite A /\\ &0 < c\n        ==> positive_definite(c %% A)
-  !A:real^N^N B x.\n        positive_semidefinite A /\\ positive_definite B /\\ &0 < x\n        ==> positive_definite(A + x %% B)
-  !A:real^N^N. positive_definite(transp A) <=> positive_definite A
-  !A:real^N^N. positive_definite(transp A ** A) <=> invertible A
-  !A B:real^N^N.\n        positive_definite A /\\ invertible B\n        ==> positive_definite(transp B ** A ** B)
+  forall A:real^N^N.\n        dimindex(:N) = 1 ==> (positive_definite A <=> &0 < A$1$1)
+  forall A:real^1^1. positive_definite A <=> &0 < A$1$1
+  forall A:real^N^N. positive_definite A ==> invertible A
+  forall A:real^N^N. positive_definite A ==> positive_semidefinite A
+  forall A B:real^N^N.\n        positive_semidefinite A /\\ positive_definite B\n        ==> positive_definite(A + B)
+  forall A B:real^N^N.\n        positive_definite A /\\ positive_semidefinite B\n        ==> positive_definite(A + B)
+  forall A B:real^N^N.\n        positive_definite A /\\ positive_definite B\n        ==> positive_definite(A + B)
+  forall c A:real^N^N.\n        positive_definite A /\\ &0 < c\n        ==> positive_definite(c %% A)
+  forall A:real^N^N B x.\n        positive_semidefinite A /\\ positive_definite B /\\ &0 < x\n        ==> positive_definite(A + x %% B)
+  forall A:real^N^N. positive_definite(transp A) <=> positive_definite A
+  forall A:real^N^N. positive_definite(transp A ** A) <=> invertible A
+  forall A B:real^N^N.\n        positive_definite A /\\ invertible B\n        ==> positive_definite(transp B ** A ** B)
   x * d * x:real = d * x * x
-  !D:real^N^N.\n        diagonal_matrix D /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < D$i$i)\n        ==> positive_definite D
+  forall D:real^N^N.\n        diagonal_matrix D /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < D$i$i)\n        ==> positive_definite D
   basis i:real^N
-  !D:real^N^N.\n        diagonal_matrix D\n        ==> (positive_definite D <=>\n             !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < D$i$i)
+  forall D:real^N^N.\n        diagonal_matrix D\n        ==> (positive_definite D <=>\n             forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 < D$i$i)
   basis i:real^N
-  !A:real^N^N i.\n        positive_definite A /\\ 1 <= i /\\ i <= dimindex(:N)\n        ==> &0 < A$i$i
-  !A:real^N^N. positive_definite A ==> &0 < trace A
-  !m. positive_definite(mat m:real^N^N) <=> 0 < m
+  forall A:real^N^N i.\n        positive_definite A /\\ 1 <= i /\\ i <= dimindex(:N)\n        ==> &0 < A$i$i
+  forall A:real^N^N. positive_definite A ==> &0 < trace A
+  forall m. positive_definite(mat m:real^N^N) <=> 0 < m
   positive_definite(mat 1:real^N^N)
-  !m. positive_semidefinite(mat m:real^N^N)
-  !A:real^N^N x.\n      positive_semidefinite A /\\ &0 < x ==> positive_definite(A + x %% mat 1)
-  !A:real^N^N. positive_semidefinite A /\\ positive_semidefinite(--A) <=>\n                A = mat 0
-  !(A:real^N^N) B.\n        positive_semidefinite(A - B) /\\ positive_semidefinite(B - A) <=>\n        A = B
+  forall m. positive_semidefinite(mat m:real^N^N)
+  forall A:real^N^N x.\n      positive_semidefinite A /\\ &0 < x ==> positive_definite(A + x %% mat 1)
+  forall A:real^N^N. positive_semidefinite A /\\ positive_semidefinite(--A) <=>\n                A = mat 0
+  forall(A:real^N^N) B.\n        positive_semidefinite(A - B) /\\ positive_semidefinite(B - A) <=>\n        A = B
   &0 <= y /\\ abs x <= abs y ==> abs x <= y
   norm((a:num->real^N) i)
   i:num
@@ -39483,7 +39483,7 @@ Multivariate/determinants quotations (1042):
   (x - y:real^N) dot (x - y) = (x dot x + y dot y) - &2 * x dot y
   i:num
   i:num
-  !i. 1 <= i /\\ i <= dimindex(:N) ==> norm(b i:real^N) <= norm(a i:real^N)
+  forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(b i:real^N) <= norm(a i:real^N)
   ~(m:num = n) ==> n < m \\/ m < n
   (b:num->real^N) m = vec 0
   j:num
@@ -39492,7 +39492,7 @@ Multivariate/determinants quotations (1042):
   m:num
   n:num
   j < n /\\ 1 <= n /\\ n <= N /\\ 1 <= j /\\ j <= N /\\ ~(n = j) <=>\n      (1 <= n /\\ n <= N) /\\ (1 <= j /\\ j <= N /\\ j < n)
-  !i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N) /\\\n          ~(i = j)\n          ==> orthogonal (b i:real^N) (b j)
+  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N) /\\\n          ~(i = j)\n          ==> orthogonal (b i:real^N) (b j)
   SUC n = k ==> ~(k <= n)
   SUC n = k
   k:num
@@ -39508,74 +39508,74 @@ Multivariate/determinants quotations (1042):
   n:num
   1 <= n ==> ~(n <= 0)
   dimindex(:N)
-  !n. det((lambda i. if i <= n then b i else a i):real^N^N) =\n          det(A:real^N^N)
+  forall n. det((lambda i. if i <= n then b i else a i):real^N^N) =\n          det(A:real^N^N)
   abs(det(B:real^N^N))
   B:real^N^N = lambda i. b i
   1 <= x /\\ x <= y - 1 ==> x < y
   (<):num->num->bool
-  ?b. !j. b j :real^N =\n            a j - vsum(1..j-1) (\\i. (a j dot b i) / (b i dot b i) % b i)
+  ?b. forall j. b j :real^N =\n            a j - vsum(1..j-1) (\\i. (a j dot b i) / (b i dot b i) % b i)
   a = \\i. (A:real^N^N)$i
-  !A:real^N^N. abs(det A) <= product(1..dimindex(:N)) (\\i. norm(row i A))
-  !A:real^N^N. abs(det A) <= product(1..dimindex(:N)) (\\i. norm(column i A))
-  orthogonal_transformation(f:real^N->real^N) <=>\n        linear f /\\ !v w. f(v) dot f(w) = v dot w
-  !f. orthogonal_transformation f <=> linear f /\\ !v. norm(f v) = norm(v)
-  !f x y:real^N.\n        orthogonal_transformation f\n        ==> (orthogonal (f x) (f y) <=> orthogonal x y)
-  !f g. orthogonal_transformation f /\\ orthogonal_transformation g\n         ==> orthogonal_transformation(f o g)
-  !f:real^N->real^N.\n     orthogonal_transformation(\\x. --(f x)) <=> orthogonal_transformation f
-  !f:real^N->real^N. orthogonal_transformation f ==> linear f
-  !f:real^N->real^N.\n        orthogonal_transformation f ==> !x y. f x = f y ==> x = y
-  !f:real^N->real^N.\n        orthogonal_transformation f ==> !y. ?x. f x = y
+  forall A:real^N^N. abs(det A) <= product(1..dimindex(:N)) (\\i. norm(row i A))
+  forall A:real^N^N. abs(det A) <= product(1..dimindex(:N)) (\\i. norm(column i A))
+  orthogonal_transformation(f:real^N->real^N) <=>\n        linear f /\\ forall v w. f(v) dot f(w) = v dot w
+  forall f. orthogonal_transformation f <=> linear f /\\ forall v. norm(f v) = norm(v)
+  forall f x y:real^N.\n        orthogonal_transformation f\n        ==> (orthogonal (f x) (f y) <=> orthogonal x y)
+  forall f g. orthogonal_transformation f /\\ orthogonal_transformation g\n         ==> orthogonal_transformation(f o g)
+  forall f:real^N->real^N.\n     orthogonal_transformation(\\x. --(f x)) <=> orthogonal_transformation f
+  forall f:real^N->real^N. orthogonal_transformation f ==> linear f
+  forall f:real^N->real^N.\n        orthogonal_transformation f ==> forall x y. f x = f y ==> x = y
+  forall f:real^N->real^N.\n        orthogonal_transformation f ==> forall y. ?x. f x = y
   orthogonal_matrix(Q:real^N^N) <=>\n      transp(Q) ** Q = mat 1 /\\ Q ** transp(Q) = mat 1
   orthogonal_matrix(Q:real^N^N) <=> transp(Q) ** Q = mat 1
-  !A:real^N^N. orthogonal_matrix A <=> A ** transp A = mat 1
-  !A:real^N^N. orthogonal_matrix(transp A) <=> orthogonal_matrix A
-  !P:real^N^N. orthogonal_matrix P ==> transp P ** P = mat 1
-  !P:real^N^N. orthogonal_matrix P ==> P ** transp P = mat 1
-  !A:real^N^N P:real^N^N.\n       orthogonal_matrix P ==> norm(vectorize(A ** P)) = norm(vectorize A)
-  !A:real^N^N P:real^N^N.\n       orthogonal_matrix P ==> norm(vectorize(P ** A)) = norm(vectorize A)
+  forall A:real^N^N. orthogonal_matrix A <=> A ** transp A = mat 1
+  forall A:real^N^N. orthogonal_matrix(transp A) <=> orthogonal_matrix A
+  forall P:real^N^N. orthogonal_matrix P ==> transp P ** P = mat 1
+  forall P:real^N^N. orthogonal_matrix P ==> P ** transp P = mat 1
+  forall A:real^N^N P:real^N^N.\n       orthogonal_matrix P ==> norm(vectorize(A ** P)) = norm(vectorize A)
+  forall A:real^N^N P:real^N^N.\n       orthogonal_matrix P ==> norm(vectorize(P ** A)) = norm(vectorize A)
   orthogonal_matrix(mat 1)
-  !A B. orthogonal_matrix A /\\ orthogonal_matrix B\n         ==> orthogonal_matrix(A ** B)
+  forall A B. orthogonal_matrix A /\\ orthogonal_matrix B\n         ==> orthogonal_matrix(A ** B)
   (if b then &1 else &0) * x = (if b then x else &0) /\\\n               x * (if b then &1 else &0) = (if b then x else &0)
   A = transp (matrix f) ** matrix(f:real^N->real^N)
   basis j:real^N
   basis i:real^N
   j:num
   i:num
-  !f:real^N->real^N.\n     orthogonal_transformation f <=> linear f /\\ orthogonal_matrix(matrix f)
-  !A:real^N^N. orthogonal_matrix A <=> orthogonal_transformation(\\x. A ** x)
-  !f:real^N->real^N.\n    orthogonal_transformation f ==> orthogonal_matrix(matrix f)
-  !A. orthogonal_matrix A <=> !x. norm(A ** x) = norm x
-  !A x:real^N. orthogonal_matrix A ==> norm(A ** x) = norm x
+  forall f:real^N->real^N.\n     orthogonal_transformation f <=> linear f /\\ orthogonal_matrix(matrix f)
+  forall A:real^N^N. orthogonal_matrix A <=> orthogonal_transformation(\\x. A ** x)
+  forall f:real^N->real^N.\n    orthogonal_transformation f ==> orthogonal_matrix(matrix f)
+  forall A. orthogonal_matrix A <=> forall x. norm(A ** x) = norm x
+  forall A x:real^N. orthogonal_matrix A ==> norm(A ** x) = norm x
   x = &1 \\/ x = -- &1 <=> x * x = &1
-  !Q. orthogonal_matrix Q ==> det(Q) = &1 \\/ det(Q) = -- &1
-  !A:real^N^N. orthogonal_matrix A ==> invertible A
-  !A:real^N^M. transp A ** A = (lambda i j. (column i A) dot (column j A))
-  !A:real^N^M. A ** transp A = (lambda i j. (row i A) dot (row j A))
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n               ==> orthogonal (column i A) (column j A))
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        (!i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n               ==> orthogonal (row i A) (row j A))
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise (\\i j. orthogonal (row i A) (row j A)) (1..dimindex(:N))
+  forall Q. orthogonal_matrix Q ==> det(Q) = &1 \\/ det(Q) = -- &1
+  forall A:real^N^N. orthogonal_matrix A ==> invertible A
+  forall A:real^N^M. transp A ** A = (lambda i j. (column i A) dot (column j A))
+  forall A:real^N^M. A ** transp A = (lambda i j. (row i A) dot (row j A))
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n               ==> orthogonal (column i A) (column j A))
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        (forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n               1 <= j /\\ j <= dimindex(:N) /\\ ~(i = j)\n               ==> orthogonal (row i A) (row j A))
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise (\\i j. orthogonal (row i A) (row j A)) (1..dimindex(:N))
   ~(norm(vec 0:real^N) = &1)
   :real
   (p ==> (q <=> r /\\ s)) ==> (p /\\ q <=> r /\\ p /\\ s)
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        CARD(rows A) = dimindex(:N) /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise orthogonal (rows A)
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        CARD(rows A) = dimindex(:N) /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise orthogonal (rows A)
   ~(norm(vec 0:real^N) = &1)
   :real
   UNIV SUBSET s ==> s = UNIV
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        span(rows A) = (:real^N) /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise orthogonal (rows A)
-  !A:real^N^N.\n      orthogonal_matrix A <=>\n      (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n      pairwise (\\i j. orthogonal (column i A) (column j A)) (1..dimindex(:N))
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        CARD(columns A) = dimindex(:N) /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        pairwise orthogonal (columns A)
-  !A:real^N^N.\n        orthogonal_matrix A <=>\n        span(columns A) = (:real^N) /\\\n        (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        pairwise orthogonal (columns A)
-  !A:real^2^2. orthogonal_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                A$1$2 pow 2 + A$2$2 pow 2 = &1 /\\\n                A$1$1 * A$1$2 + A$2$1 * A$2$2 = &0
-  !A:real^2^2. orthogonal_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                (A$1$1 = A$2$2 /\\ A$1$2 = --(A$2$1) \\/\n                 A$1$1 = --(A$2$2) /\\ A$1$2 = A$2$1)
-  !A:real^N^N. orthogonal_matrix A ==> matrix_inv A = transp A
-  (!x. f(f x) = x) /\\ (!x. P x ==> P(f x)) ==> (!x. P(f x) <=> P x)
-  !A:real^N^N. orthogonal_matrix(matrix_inv A) <=> orthogonal_matrix A
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        span(rows A) = (:real^N) /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(row i A) = &1) /\\\n        pairwise orthogonal (rows A)
+  forall A:real^N^N.\n      orthogonal_matrix A <=>\n      (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n      pairwise (\\i j. orthogonal (column i A) (column j A)) (1..dimindex(:N))
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        CARD(columns A) = dimindex(:N) /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        pairwise orthogonal (columns A)
+  forall A:real^N^N.\n        orthogonal_matrix A <=>\n        span(columns A) = (:real^N) /\\\n        (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(column i A) = &1) /\\\n        pairwise orthogonal (columns A)
+  forall A:real^2^2. orthogonal_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                A$1$2 pow 2 + A$2$2 pow 2 = &1 /\\\n                A$1$1 * A$1$2 + A$2$1 * A$2$2 = &0
+  forall A:real^2^2. orthogonal_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                (A$1$1 = A$2$2 /\\ A$1$2 = --(A$2$1) \\/\n                 A$1$1 = --(A$2$2) /\\ A$1$2 = A$2$1)
+  forall A:real^N^N. orthogonal_matrix A ==> matrix_inv A = transp A
+  (forall x. f(f x) = x) /\\ (forall x. P x ==> P(f x)) ==> (forall x. P(f x) <=> P x)
+  forall A:real^N^N. orthogonal_matrix(matrix_inv A) <=> orthogonal_matrix A
   ~(a:real = b)
   (v:real^N) dot w = &0
   w:real^N = vec 0
   v:real^N = vec 0
   x * y = y <=> x = &1 \\/ y = &0
-  !f:real^N->real^N v w a b.\n        orthogonal_transformation f /\\ f v = a % v /\\ f w = b % w /\\ ~(a = b)\n        ==> orthogonal v w
+  forall f:real^N->real^N v w a b.\n        orthogonal_transformation f /\\ f v = a % v /\\ f w = b % w /\\ ~(a = b)\n        ==> orthogonal v w
   w:real^N
   w:real^N
   w:real^N
@@ -39588,38 +39588,38 @@ Multivariate/determinants quotations (1042):
   v:real^N
   v:real^N
   v:real^N
-  !A:real^N^N v w a b.\n        orthogonal_matrix A /\\ A ** v = a % v /\\ A ** w = b % w /\\ ~(a = b)\n        ==> orthogonal v w
+  forall A:real^N^N v w a b.\n        orthogonal_matrix A /\\ A ** v = a % v /\\ A ** w = b % w /\\ ~(a = b)\n        ==> orthogonal v w
   orthogonal_transformation(\\x. x)
   orthogonal_transformation I
   orthogonal_transformation(--)
   abs x * &1 = &1 <=> x = &1 \\/ x = -- &1
   basis 1:real^N
-  !f:real^N->real^N.\n        dimindex(:N) = 1\n        ==> (orthogonal_transformation f <=> f = I \\/ f = (--))
-  !m:real^N^N.\n        dimindex(:N) = 1\n        ==> (orthogonal_matrix m <=> m = mat 1 \\/ m = --mat 1)
+  forall f:real^N->real^N.\n        dimindex(:N) = 1\n        ==> (orthogonal_transformation f <=> f = I \\/ f = (--))
+  forall m:real^N^N.\n        dimindex(:N) = 1\n        ==> (orthogonal_matrix m <=> m = mat 1 \\/ m = --mat 1)
   (A:real^M^N) ** transp U ** U ** (B:real^P^M) =\n    A ** (transp U ** U) ** B
-  !U A:real^M^N.\n        orthogonal_matrix U\n        ==> matrix_inv(U ** A) = matrix_inv A ** matrix_inv U
-  !U A:real^M^N.\n        orthogonal_matrix U\n        ==> matrix_inv(A ** U) = matrix_inv U ** matrix_inv A
-  !f:real^N->real^N.\n        orthogonal_transformation f <=> linear f /\\ adjoint f o f = I
-  !f:real^N->real^N.\n        orthogonal_transformation f <=> linear f /\\ f o adjoint f = I
-  !f:real^N->real^N.\n        orthogonal_transformation f <=>\n        linear f /\\ adjoint f o f = I /\\ f o adjoint f = I
-  !f:real^N->real^N.\n        orthogonal_transformation f ==> orthogonal_transformation(adjoint f)
-  !f:real^N->real^N.\n        linear f\n        ==> (orthogonal_transformation(adjoint f) <=>\n             orthogonal_transformation f)
+  forall U A:real^M^N.\n        orthogonal_matrix U\n        ==> matrix_inv(U ** A) = matrix_inv A ** matrix_inv U
+  forall U A:real^M^N.\n        orthogonal_matrix U\n        ==> matrix_inv(A ** U) = matrix_inv U ** matrix_inv A
+  forall f:real^N->real^N.\n        orthogonal_transformation f <=> linear f /\\ adjoint f o f = I
+  forall f:real^N->real^N.\n        orthogonal_transformation f <=> linear f /\\ f o adjoint f = I
+  forall f:real^N->real^N.\n        orthogonal_transformation f <=>\n        linear f /\\ adjoint f o f = I /\\ f o adjoint f = I
+  forall f:real^N->real^N.\n        orthogonal_transformation f ==> orthogonal_transformation(adjoint f)
+  forall f:real^N->real^N.\n        linear f\n        ==> (orthogonal_transformation(adjoint f) <=>\n             orthogonal_transformation f)
   basis 1:real^N
   c:real
-  !f:real^N->real^N. orthogonal_transformation f ==> onorm f = &1
-  !A:real^N^N. orthogonal_matrix A ==> onorm(\\x. A ** x) = &1
+  forall f:real^N->real^N. orthogonal_transformation f ==> onorm f = &1
+  forall A:real^N^N. orthogonal_matrix A ==> onorm(\\x. A ** x) = &1
   vec 0 :real^M
   v:real^M
   v:real^M
-  !v w. ((f:real^M->real^N) v) dot (f w) = c pow 2 * (v dot w)
-  !f:real^M->real^N c.\n        (f(vec 0) = vec 0) /\\ (!x y. dist(f x,f y) = c * dist(x,y))\n        ==> linear(f)
-  !f:real^M->real^N.\n        (f(vec 0) = vec 0) /\\ (!x y. dist(f x,f y) = dist(x,y))\n        ==> linear(f)
+  forall v w. ((f:real^M->real^N) v) dot (f w) = c pow 2 * (v dot w)
+  forall f:real^M->real^N c.\n        (f(vec 0) = vec 0) /\\ (forall x y. dist(f x,f y) = c * dist(x,y))\n        ==> linear(f)
+  forall f:real^M->real^N.\n        (f(vec 0) = vec 0) /\\ (forall x y. dist(f x,f y) = dist(x,y))\n        ==> linear(f)
   dist(x - a:real^N,y - a) = dist(x,y)
   :real
   :real
   a + (x - a):real^N = x
   \\x. (f:real^M->real^N) x - f(vec 0)
-  !f:real^M->real^N.\n        (!x y. dist(f x,f y) = dist(x,y))\n        ==> ?h. linear h /\\ !x. f(x) = f(vec 0) + h(x)
+  forall f:real^M->real^N.\n        (forall x y. dist(f x,f y) = dist(x,y))\n        ==> ?h. linear h /\\ forall x. f(x) = f(vec 0) + h(x)
   x:real^M
   c:real
   (x + y:real^M) dot (x - y) = x dot x - y dot y
@@ -39629,48 +39629,48 @@ Multivariate/determinants quotations (1042):
   j:num
   i:num
   1
-  (!x. A(f x)) /\\ (?x. P x) /\\ (!i j. P i /\\ P j ==> f i = f j)\n      ==> ?c. A c /\\ !x. P x ==> f x = c
-  ?c. &0 <= c /\\\n        !i. 1 <= i /\\ i <= dimindex(:M)\n            ==> norm((f:real^M->real^N)(basis i)) = c
-  !f:real^M->real^N.\n        linear f /\\ (!x y. orthogonal x y ==> orthogonal (f x) (f y))\n        ==> ?c. &0 <= c /\\ !x. norm(f x) = c * norm(x)
+  (forall x. A(f x)) /\\ (?x. P x) /\\ (forall i j. P i /\\ P j ==> f i = f j)\n      ==> ?c. A c /\\ forall x. P x ==> f x = c
+  ?c. &0 <= c /\\\n        forall i. 1 <= i /\\ i <= dimindex(:M)\n            ==> norm((f:real^M->real^N)(basis i)) = c
+  forall f:real^M->real^N.\n        linear f /\\ (forall x y. orthogonal x y ==> orthogonal (f x) (f y))\n        ==> ?c. &0 <= c /\\ forall x. norm(f x) = c * norm(x)
   \\x. inv(c) % (f:real^N->real^N) x
   \\x:real^N. x
   c = &0
   c:real
   (q ==> r) /\\ (r ==> p) /\\ (p ==> q)\n    ==> (p <=> q) /\\ (p <=> r)
-  (!f:real^N->real^N.\n        linear f /\\ (!x y. orthogonal x y ==> orthogonal (f x) (f y)) <=>\n        ?c g. &0 <= c /\\ orthogonal_transformation g /\\ f = \\z. c % g z) /\\\n   (!f:real^N->real^N.\n        linear f /\\ (!x y. orthogonal x y ==> orthogonal (f x) (f y)) <=>\n        ?c g. orthogonal_transformation g /\\ f = \\z. c % g z)
+  (forall f:real^N->real^N.\n        linear f /\\ (forall x y. orthogonal x y ==> orthogonal (f x) (f y)) <=>\n        ?c g. &0 <= c /\\ orthogonal_transformation g /\\ f = \\z. c % g z) /\\\n   (forall f:real^N->real^N.\n        linear f /\\ (forall x y. orthogonal x y ==> orthogonal (f x) (f y)) <=>\n        ?c g. orthogonal_transformation g /\\ f = \\z. c % g z)
   vec 0:real^N
   x:real^N
   x:real^N
-  !f:real^N->real^N.\n        orthogonal_transformation f <=>\n        (f(vec 0) = vec 0) /\\ (!x y. dist(f x,f y) = dist(x,y))
+  forall f:real^N->real^N.\n        orthogonal_transformation f <=>\n        (f(vec 0) = vec 0) /\\ (forall x y. dist(f x,f y) = dist(x,y))
   b = norm(y:real^N)
   a = norm(x:real^N)
-  !x:real^N y:real^N x':real^N y':real^N x0 y0 x0' y0'.\n          x = norm(x) % x0 /\\ y = norm(y) % y0 /\\\n          x' = norm(x) % x0' /\\ y' = norm(y) % y0' /\\\n          norm(x0) = &1 /\\ norm(x0') = &1 /\\ norm(y0) = &1 /\\ norm(y0') = &1 /\\\n          norm(x0' - y0') = norm(x0 - y0)\n          ==> norm(x' - y') = norm(x - y)
+  forall x:real^N y:real^N x':real^N y':real^N x0 y0 x0' y0'.\n          x = norm(x) % x0 /\\ y = norm(y) % y0 /\\\n          x' = norm(x) % x0' /\\ y' = norm(y) % y0' /\\\n          norm(x0) = &1 /\\ norm(x0') = &1 /\\ norm(y0) = &1 /\\ norm(y0') = &1 /\\\n          norm(x0' - y0') = norm(x0 - y0)\n          ==> norm(x' - y') = norm(x - y)
   (f:real^N->real^N) (inv (norm y) % y)
   (f:real^N->real^N) (inv (norm x) % x)
   inv(norm y) % y:real^N
   inv(norm x) % x:real^N
   ~(&1 = &0)
   \\x. if x = vec 0 then vec 0\n                  else norm(x) % (f:real^N->real^N)(inv(norm x) % x)
-  !f:real^N->real^N.\n        (!x. norm(x) = &1 ==> norm(f x) = &1) /\\\n        (!x y. norm(x) = &1 /\\ norm(y) = &1 ==> dist(f x,f y) = dist(x,y))\n        ==> ?g. orthogonal_transformation g /\\\n                (!x. norm(x) = &1 ==> g(x) = f(x))
+  forall f:real^N->real^N.\n        (forall x. norm(x) = &1 ==> norm(f x) = &1) /\\\n        (forall x y. norm(x) = &1 /\\ norm(y) = &1 ==> dist(f x,f y) = dist(x,y))\n        ==> ?g. orthogonal_transformation g /\\\n                (forall x. norm(x) = &1 ==> g(x) = f(x))
   norm((f:real^N->real^N)((g:real^N->real^N) v))
   v:real^N
   g:real^N->real^N
   f:real^N->real^N
   g:real^N->real^N
   f:real^N->real^N
-  !f:real^N->real^N.\n        orthogonal_transformation f\n        ==> ?g. orthogonal_transformation g /\\ g o f = I /\\ f o g = I
-  !f:real^N->real^N.\n        orthogonal_transformation f\n        ==> ?g. orthogonal_transformation g /\\\n                (!x. g(f x) = x) /\\ (!y. f(g y) = y)
-  !f g. orthogonal_transformation f ==> onorm(f o g) = onorm g
-  !f g. orthogonal_transformation g ==> onorm(f o g) = onorm f
+  forall f:real^N->real^N.\n        orthogonal_transformation f\n        ==> ?g. orthogonal_transformation g /\\ g o f = I /\\ f o g = I
+  forall f:real^N->real^N.\n        orthogonal_transformation f\n        ==> ?g. orthogonal_transformation g /\\\n                (forall x. g(f x) = x) /\\ (forall y. f(g y) = y)
+  forall f g. orthogonal_transformation f ==> onorm(f o g) = onorm g
+  forall f g. orthogonal_transformation g ==> onorm(f o g) = onorm f
   x:real^N
   v:real^N->real
-  !(f:real^N->real^N) b c x l.\n        linear f /\\\n        pairwise orthogonal b /\\\n        (!x. x IN b ==> f x = c x % x /\\ c x pow 2 <= l) /\\\n        x IN span b\n        ==> norm(f x) pow 2 <= l * norm x pow 2
+  forall(f:real^N->real^N) b c x l.\n        linear f /\\\n        pairwise orthogonal b /\\\n        (forall x. x IN b ==> f x = c x % x /\\ c x pow 2 <= l) /\\\n        x IN span b\n        ==> norm(f x) pow 2 <= l * norm x pow 2
   y:real^N
   y:real^N
   c:real^N->real
   b:real^N->bool
   b:real^N->bool = {}
-  !(f:real^N->real^N) b c x l.\n        linear f /\\\n        pairwise orthogonal b /\\\n        (!x. x IN b ==> f x = c x % x /\\ abs(c x) <= l) /\\\n        x IN span b\n        ==> norm(f x) <= l * norm x
+  forall(f:real^N->real^N) b c x l.\n        linear f /\\\n        pairwise orthogonal b /\\\n        (forall x. x IN b ==> f x = c x % x /\\ abs(c x) <= l) /\\\n        x IN span b\n        ==> norm(f x) <= l * norm x
   norm((f:real^N->real^N) x)
   norm(x:real^N)
   x:real^N
@@ -39681,13 +39681,13 @@ Multivariate/determinants quotations (1042):
   vec 1:real^N
   s = UNIV ==> (?x. ~(x IN s)) ==> P
   b:real^N->bool = {}
-  !(f:real^N->real^N) b c.\n        linear f /\\\n        pairwise orthogonal b /\\\n        span b = (:real^N) /\\\n        ~(vec 0 IN b) /\\\n        (!x. x IN b ==> f x = c x % x)\n        ==> onorm f = sup {abs(c x) | x IN b}
+  forall(f:real^N->real^N) b c.\n        linear f /\\\n        pairwise orthogonal b /\\\n        span b = (:real^N) /\\\n        ~(vec 0 IN b) /\\\n        (forall x. x IN b ==> f x = c x % x)\n        ==> onorm f = sup {abs(c x) | x IN b}
   (\\x. ((P:real^N^N) ** (A:real^N^N)) ** x) = (\\x. P ** x) o (\\x. A ** x)
-  !(A:real^N^N) (P:real^N^N).\n        orthogonal_matrix P ==> onorm (\\x. (P ** A) ** x) = onorm(\\x. A ** x)
+  forall(A:real^N^N) (P:real^N^N).\n        orthogonal_matrix P ==> onorm (\\x. (P ** A) ** x) = onorm(\\x. A ** x)
   (\\x. ((A:real^N^N) ** (P:real^N^N)) ** x) =\n    (\\x. A ** x) o (\\x. P ** x)
-  !(A:real^N^N) (P:real^N^N).\n        orthogonal_matrix P ==> onorm (\\x. (A ** P) ** x) = onorm(\\x. A ** x)
-  !(A:real^N^N) D P.\n      orthogonal_matrix P /\\\n      diagonal_matrix D /\\\n      transp P ** D ** P = A\n      ==> onorm(\\x. A ** x) = sup {abs(D$i$i) | 1 <= i /\\ i <= dimindex (:N)}
-  !(A:real^N^N) D P.\n      orthogonal_matrix P /\\\n      diagonal_matrix D /\\\n      transp P ** D ** P = transp A ** A\n      ==> onorm(\\x. A ** x) =\n          sqrt(sup {abs(D$i$i) | 1 <= i /\\ i <= dimindex (:N)})
+  forall(A:real^N^N) (P:real^N^N).\n        orthogonal_matrix P ==> onorm (\\x. (A ** P) ** x) = onorm(\\x. A ** x)
+  forall(A:real^N^N) D P.\n      orthogonal_matrix P /\\\n      diagonal_matrix D /\\\n      transp P ** D ** P = A\n      ==> onorm(\\x. A ** x) = sup {abs(D$i$i) | 1 <= i /\\ i <= dimindex (:N)}
+  forall(A:real^N^N) D P.\n      orthogonal_matrix P /\\\n      diagonal_matrix D /\\\n      transp P ** D ** P = transp A ** A\n      ==> onorm(\\x. A ** x) =\n          sqrt(sup {abs(D$i$i) | 1 <= i /\\ i <= dimindex (:N)})
   orthogonal ((f:num->real^N) i) (f j)
   j:num
   i:num
@@ -39699,24 +39699,24 @@ Multivariate/determinants quotations (1042):
   a:real^N
   s:real^N->bool
   s:real^N->bool
-  !a:real^N.\n        norm(a) = &1\n        ==> ?A. orthogonal_matrix A /\\ A**(basis 1) = a
+  forall a:real^N.\n        norm(a) = &1\n        ==> ?A. orthogonal_matrix A /\\ A**(basis 1) = a
   \\x:real^N. ((B:real^N^N) ** transp(A:real^N^N)) ** x
   B:real^N^N
   A:real^N^N
   a:real^N
   b:real^N
-  !a b:real^N.\n        norm(a) = &1 /\\ norm(b) = &1\n        ==> ?f. orthogonal_transformation f /\\ f a = b
+  forall a b:real^N.\n        norm(a) = &1 /\\ norm(b) = &1\n        ==> ?f. orthogonal_transformation f /\\ f a = b
   a % x:real^N = a % y <=> a % (x - y) = vec 0
   f:real^N->real^N
   inv(norm b) % b:real^N
   inv(norm a) % a:real^N
   a:real^N = vec 0
   b:real^N = vec 0
-  !a b:real^N.\n        norm(a) = norm(b) ==> ?f. orthogonal_transformation f /\\ f a = b
+  forall a b:real^N.\n        norm(a) = norm(b) ==> ?f. orthogonal_transformation f /\\ f a = b
   u:real^N->real
   z:real^N
   span (b UNION b') = (:real^N)
-  !v. v IN UNIV ==> norm((f:real^N->real^N) v) = norm v
+  forall v. v IN UNIV ==> norm((f:real^N->real^N) v) = norm v
   span c:real^N->bool = t
   span b:real^N->bool = s
   f:real^N->real^N
@@ -39732,7 +39732,7 @@ Multivariate/determinants quotations (1042):
   c:real^N->bool
   b:real^N->bool
   fb:real^N->real^N
-  ?f:real^N->real^N.\n        (!x y. x IN b UNION b' /\\ y IN b UNION b' ==> (f x = f y <=> x = y)) /\\\n        IMAGE f b SUBSET c /\\\n        IMAGE f (b UNION b') SUBSET c UNION c'
+  ?f:real^N->real^N.\n        (forall x y. x IN b UNION b' /\\ y IN b UNION b' ==> (f x = f y <=> x = y)) /\\\n        IMAGE f b SUBSET c /\\\n        IMAGE f (b UNION b') SUBSET c UNION c'
   FINITE(b UNION b':real^N->bool) /\\\n                FINITE(c UNION c':real^N->bool)
   ~(norm(vec 0:real^N) = &1)
   :real
@@ -39747,21 +39747,21 @@ Multivariate/determinants quotations (1042):
   b:real^N->bool
   s:real^N->bool
   t:real^N->bool
-  !s t:real^N->bool.\n        subspace s /\\ subspace t /\\ dim s <= dim t\n        ==> ?f. orthogonal_transformation f /\\ IMAGE f s SUBSET t
+  forall s t:real^N->bool.\n        subspace s /\\ subspace t /\\ dim s <= dim t\n        ==> ?f. orthogonal_transformation f /\\ IMAGE f s SUBSET t
   span(IMAGE (f:real^N->real^N) s) = span t
   f:real^N->real^N
   t:real^N->bool
   s:real^N->bool
-  !s t:real^N->bool.\n        subspace s /\\ subspace t /\\ dim s = dim t\n        ==> ?f. orthogonal_transformation f /\\ IMAGE f s = t
+  forall s t:real^N->bool.\n        subspace s /\\ subspace t /\\ dim s = dim t\n        ==> ?f. orthogonal_transformation f /\\ IMAGE f s = t
   rotation_matrix Q <=> orthogonal_matrix Q /\\ det(Q) = &1
   rotoinversion_matrix Q <=> orthogonal_matrix Q /\\ det(Q) = -- &1
-  !Q. orthogonal_matrix Q <=> rotation_matrix Q \\/ rotoinversion_matrix Q
+  forall Q. orthogonal_matrix Q <=> rotation_matrix Q \\/ rotoinversion_matrix Q
   m:real^N^N = mat 1
-  !m:real^N^N.\n        dimindex(:N) = 1 ==> (rotation_matrix m <=> m = mat 1)
+  forall m:real^N^N.\n        dimindex(:N) = 1 ==> (rotation_matrix m <=> m = mat 1)
   m:real^N^N = --mat 1
-  !m:real^N^N.\n        dimindex(:N) = 1 ==> (rotoinversion_matrix m <=> m = --mat 1)
-  !A:real^2^2. rotation_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                A$1$1 = A$2$2 /\\ A$1$2 = --(A$2$1)
-  !i. 1 <= i /\\ i <= dimindex(:N)\n                    ==> row i ((lambda i. if i = dimindex(:N) then -- &1 % B$i\n                                else (B:real^N^N)$i):real^N^N) =\n                        if i = dimindex(:N) then --(row i B) else row i B
+  forall m:real^N^N.\n        dimindex(:N) = 1 ==> (rotoinversion_matrix m <=> m = --mat 1)
+  forall A:real^2^2. rotation_matrix A <=>\n                A$1$1 pow 2 + A$2$1 pow 2 = &1 /\\\n                A$1$1 = A$2$2 /\\ A$1$2 = --(A$2$1)
+  forall i. 1 <= i /\\ i <= dimindex(:N)\n                    ==> row i ((lambda i. if i = dimindex(:N) then -- &1 % B$i\n                                else (B:real^N^N)$i):real^N^N) =\n                        if i = dimindex(:N) then --(row i B) else row i B
   B:real^N^N
   transp(A:real^N^N)
   2 <= n ==> ~(1 = n)
@@ -39769,30 +39769,30 @@ Multivariate/determinants quotations (1042):
   x = -- &1 ==> -- &1 * x = &1
   transp(lambda i. if i = dimindex(:N) then -- &1 % transp A$i\n                               else (transp A:real^N^N)$i):real^N^N
   A:real^N^N
-  !a:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = &1\n        ==> ?A. rotation_matrix A /\\ A**(basis 1) = a
+  forall a:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = &1\n        ==> ?A. rotation_matrix A /\\ A**(basis 1) = a
   \\x:real^N. ((B:real^N^N) ** transp(A:real^N^N)) ** x
   B:real^N^N
   A:real^N^N
   a:real^N
   b:real^N
-  !a b:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = &1 /\\ norm(b) = &1\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f a = b
+  forall a b:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = &1 /\\ norm(b) = &1\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f a = b
   a % x:real^N = a % y <=> a % (x - y) = vec 0
   f:real^N->real^N
   inv(norm b) % b:real^N
   inv(norm a) % a:real^N
   a:real^N = vec 0
   b:real^N = vec 0
-  !a b:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = norm(b)\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f a = b
+  forall a b:real^N.\n        2 <= dimindex(:N) /\\ norm(a) = norm(b)\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f a = b
   ~(n = 1) /\\ 1 <= n ==> 2 <= n
   dimindex(:N) = 1
   2 <= n <=> 1 <= n /\\ ~(n = 1)
   norm(a:real^N)
-  !a:real^N k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> ?b f. orthogonal_transformation f /\\\n                  (2 <= dimindex(:N) ==> det(matrix f) = &1) /\\\n                  f(b % basis k) = a /\\\n                  &0 <= b
+  forall a:real^N k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> ?b f. orthogonal_transformation f /\\\n                  (2 <= dimindex(:N) ==> det(matrix f) = &1) /\\\n                  f(b % basis k) = a /\\\n                  &0 <= b
   A - mat 1:real^3^3
-  !A:real^3^3. rotation_matrix A ==> ?v:real^3. ~(v = vec 0) /\\ A ** v = v
+  forall A:real^3^3. rotation_matrix A ==> ?v:real^3. ~(v = vec 0) /\\ A ** v = v
   A + mat 1:real^3^3
   a:real^N = --v <=> a + v = vec 0
-  !A:real^3^3.\n     rotoinversion_matrix A ==> ?v:real^3. ~(v = vec 0) /\\ A ** v = --v
+  forall A:real^3^3.\n     rotoinversion_matrix A ==> ?v:real^3. ~(v = vec 0) /\\ A ** v = --v
   (f:real^N->real^N) x dot (f a) = &0
   x:real^N
   f:real^N->real^N
@@ -39803,9 +39803,9 @@ Multivariate/determinants quotations (1042):
   s SUBSET {a} ==> a IN t ==> IMAGE (\\x. x) s SUBSET t
   \\x:real^N. x
   dim(s:real^N->bool) = 0
-  !s:real^N->bool.\n        dim s < dimindex(:N)\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n               (IMAGE f s) SUBSET {z | z$(dimindex(:N)) = &0}
-  !s:real^N->bool.\n        dim s < dimindex(:N)\n        ==> ?f. orthogonal_transformation f /\\\n               (IMAGE f s) SUBSET {z | z$(dimindex(:N)) = &0}
-  IMAGE w t INTER IMAGE v s = {} <=>\n      !i j. i IN s /\\ j IN t ==> ~(v i = w j)
+  forall s:real^N->bool.\n        dim s < dimindex(:N)\n        ==> ?f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n               (IMAGE f s) SUBSET {z | z$(dimindex(:N)) = &0}
+  forall s:real^N->bool.\n        dim s < dimindex(:N)\n        ==> ?f. orthogonal_transformation f /\\\n               (IMAGE f s) SUBSET {z | z$(dimindex(:N)) = &0}
+  IMAGE w t INTER IMAGE v s = {} <=>\n      forall i j. i IN s /\\ j IN t ==> ~(v i = w j)
   ~(x <= n) ==> n + 1 <= x /\\ n < x
   ~(x <= n) ==> n + 1 <= x
   (w:num->real^N) i
@@ -39822,10 +39822,10 @@ Multivariate/determinants quotations (1042):
   p /\\ q ==> r <=> p /\\ ~r ==> ~q
   n + 1 <= x <=> n < x
   w:num->real^N
-  (!x. x IN s ==> f x IN t) /\\ (!y. y IN t ==> ?x. x IN s /\\ f x = y) <=>\n      t = IMAGE f s
+  (forall x. x IN s ==> f x IN t) /\\ (forall y. y IN t ==> ?x. x IN s /\\ f x = y) <=>\n      t = IMAGE f s
   t INTER s = {} <=> DISJOINT s t
   ~(&1 = &0)
-  ~(x IN s) <=> !y. y IN s ==> ~(y = x)
+  ~(x IN s) <=> forall y. y IN s ==> ~(y = x)
   IMAGE v (1..n) UNION t:real^N->bool
   (:real^N)
   t:real^N->bool
@@ -39833,15 +39833,15 @@ Multivariate/determinants quotations (1042):
   t:real^N->bool
   (:real^N)
   (\\x. vsum(1..dimindex(:N)) (\\i. x$i % w i)):real^N->real^N
-  ?w:num->real^N.\n          pairwise (\\i j. orthogonal (w i) (w j)) (1..dimindex(:N)) /\\\n          (!i. 1 <= i /\\ i <= dimindex(:N) ==> norm(w i) = &1) /\\\n          (!i. 1 <= i /\\ i <= n ==> w i = v i)
+  ?w:num->real^N.\n          pairwise (\\i j. orthogonal (w i) (w j)) (1..dimindex(:N)) /\\\n          (forall i. 1 <= i /\\ i <= dimindex(:N) ==> norm(w i) = &1) /\\\n          (forall i. 1 <= i /\\ i <= n ==> w i = v i)
   CARD(IMAGE (v:num->real^N) (1..n)) = n
   ~(&1 = &0)
-  !i j. 1 <= i /\\ i <= n /\\ 1 <= j /\\ j <= n /\\ ~(i = j)\n            ==> ~(v i:real^N = v j)
+  forall i j. 1 <= i /\\ i <= n /\\ 1 <= j /\\ j <= n /\\ ~(i = j)\n            ==> ~(v i:real^N = v j)
   ~(&1 = &0)
-  ~(a IN IMAGE f s) <=> !x. x IN s ==> ~(f x = a)
+  ~(a IN IMAGE f s) <=> forall x. x IN s ==> ~(f x = a)
   pairwise orthogonal (IMAGE (v:num->real^N) (1..n))
-  !v:num->real^N n.\n          pairwise (\\i j. orthogonal (v i) (v j)) (1..n) /\\\n          (!i. 1 <= i /\\ i <= n ==> norm(v i) = &1)\n          ==> ?f. orthogonal_transformation f /\\\n                  (!i. 1 <= i /\\ i <= n ==> f(basis i) = v i)
-  (!x. f'(f x) = x) ==> f x = y ==> f' y = x
+  forall v:num->real^N n.\n          pairwise (\\i j. orthogonal (v i) (v j)) (1..n) /\\\n          (forall i. 1 <= i /\\ i <= n ==> norm(v i) = &1)\n          ==> ?f. orthogonal_transformation f /\\\n                  (forall i. 1 <= i /\\ i <= n ==> f(basis i) = v i)
+  (forall x. f'(f x) = x) ==> f x = y ==> f' y = x
   (g:real^N->real^N) (norm((w:num->real^N)(n(i:num))) % basis i)
   i:num
   (g:real^N->real^N) o (f':real^N->real^N)
@@ -39857,47 +39857,47 @@ Multivariate/determinants quotations (1042):
   p /\\ q /\\ r ==> s <=> p /\\ q /\\ ~s ==> ~r
   pairwise orthogonal (IMAGE (v:num->real^N) k)
   FINITE(k:num->bool)
-  !v:num->real^N w k.\n          pairwise (\\i j. orthogonal (v i) (v j)) k /\\\n          pairwise (\\i j. orthogonal (w i) (w j)) k /\\\n          (!i. i IN k ==> norm(v i) = norm(w i)) /\\\n          (!i. i IN k ==> ~(v i = vec 0) /\\ ~(w i = vec 0))\n          ==> ?f. orthogonal_transformation f /\\\n                  (!i. i IN k ==> f(v i) = w i)
+  forall v:num->real^N w k.\n          pairwise (\\i j. orthogonal (v i) (v j)) k /\\\n          pairwise (\\i j. orthogonal (w i) (w j)) k /\\\n          (forall i. i IN k ==> norm(v i) = norm(w i)) /\\\n          (forall i. i IN k ==> ~(v i = vec 0) /\\ ~(w i = vec 0))\n          ==> ?f. orthogonal_transformation f /\\\n                  (forall i. i IN k ==> f(v i) = w i)
   (v:num->real^N) i = vec 0
   i:num
   k:num->bool
   {i | i IN k /\\ ~((v:num->real^N) i = vec 0)}
   w:num->real^N
   v:num->real^N
-  !v:num->real^N w k.\n        pairwise (\\i j. orthogonal (v i) (v j)) k /\\\n        pairwise (\\i j. orthogonal (w i) (w j)) k /\\\n        (!i. i IN k ==> norm(v i) = norm(w i))\n        ==> ?f. orthogonal_transformation f /\\\n                (!i. i IN k ==> f(v i) = w i)
+  forall v:num->real^N w k.\n        pairwise (\\i j. orthogonal (v i) (v j)) k /\\\n        pairwise (\\i j. orthogonal (w i) (w j)) k /\\\n        (forall i. i IN k ==> norm(v i) = norm(w i))\n        ==> ?f. orthogonal_transformation f /\\\n                (forall i. i IN k ==> f(v i) = w i)
   reflect_along v (x:real^N) = x - (&2 * (x dot v) / (v dot v)) % v
   x - a % v + y - b % v:real^N = (x + y) - (a + b) % v
-  !v x y:real^N.\n      reflect_along v (x + y) = reflect_along v x + reflect_along v y
+  forall v x y:real^N.\n      reflect_along v (x + y) = reflect_along v x + reflect_along v y
   &2 * (a * x) / y = a * &2 * x / y
-  !v a x:real^N. reflect_along v (a % x) = a % reflect_along v x
-  !v:real^N. linear(reflect_along v)
-  !v:real^N. reflect_along v (vec 0) = vec 0
-  !v x:real^N. reflect_along v (--x) = --(reflect_along v x)
+  forall v a x:real^N. reflect_along v (a % x) = a % reflect_along v x
+  forall v:real^N. linear(reflect_along v)
+  forall v:real^N. reflect_along v (vec 0) = vec 0
+  forall v x:real^N. reflect_along v (--x) = --(reflect_along v x)
   v:real^N = vec 0
-  !v:real^N. reflect_along v v = --v
+  forall v:real^N. reflect_along v v = --v
   x - a % v - b % v:real^N = x <=> (a + b) % v = vec 0
-  !v x:real^N. reflect_along v (reflect_along v x) = x
-  !v p q:real^N. reflect_along v p = q <=> p = reflect_along v q
-  !v x:real^N. reflect_along v x = vec 0 <=> x = vec 0
+  forall v x:real^N. reflect_along v (reflect_along v x) = x
+  forall v p q:real^N. reflect_along v p = q <=> p = reflect_along v q
+  forall v x:real^N. reflect_along v x = vec 0 <=> x = vec 0
   w:real^N
   (a - b:real^N) dot (a - b) = (a dot a + b dot b) - &2 * a dot b
   v:real^N = vec 0
-  !v:real^N. orthogonal_transformation(reflect_along v)
+  forall v:real^N. orthogonal_transformation(reflect_along v)
   v:real^N = vec 0
   x - a:real^N = x <=> a = vec 0
-  !v x:real^N. reflect_along v x = x <=> orthogonal v x
+  forall v x:real^N. reflect_along v x = x <=> orthogonal v x
   reflect_along (vec 0:real^N) = I
-  !f:real^M->real^N v x.\n        linear f /\\ (!x. norm(f x) = norm x)\n        ==> reflect_along (f v) (f x) = f(reflect_along v x)
+  forall f:real^M->real^N v x.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> reflect_along (f v) (f x) = f(reflect_along v x)
   v:real^N = vec 0
-  !c v x:real^N. ~(c = &0) ==> reflect_along (c % v) x = reflect_along v x
-  !v:real^N. reflect_along (--v) = reflect_along v
-  !v x:real^N.\n        dimindex(:N) = 1 ==> reflect_along v x = if v = vec 0 then x else --x
-  !x:real^N k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> reflect_along (basis k) x = x - (&2 * x$k) % basis k
+  forall c v x:real^N. ~(c = &0) ==> reflect_along (c % v) x = reflect_along v x
+  forall v:real^N. reflect_along (--v) = reflect_along v
+  forall v x:real^N.\n        dimindex(:N) = 1 ==> reflect_along v x = if v = vec 0 then x else --x
+  forall x:real^N k.\n        1 <= k /\\ k <= dimindex(:N)\n        ==> reflect_along (basis k) x = x - (&2 * x$k) % basis k
   i:num = j
   j:num
   i:num
   k:num
-  !k. 1 <= k /\\ k <= dimindex(:N)\n       ==> matrix(reflect_along (basis k)):real^N^N =\n           lambda i j. if i = k /\\ j = k then --(&1)\n                       else if i = j then &1\n                       else &0
+  forall k. 1 <= k /\\ k <= dimindex(:N)\n       ==> matrix(reflect_along (basis k)):real^N^N =\n           lambda i j. if i = k /\\ j = k then --(&1)\n                       else if i = j then &1\n                       else &0
   x = &1 ==> a * x = a
   j < i ==> ~(i = j) /\\ ~(i = 1 /\\ j = 1)
   (x = &1 \\/ x = -- &1) /\\ y = a ==> x * y * x = a
@@ -39915,26 +39915,26 @@ Multivariate/determinants quotations (1042):
   norm(w:real^N) = &1
   reflect_along (v:real^N) = reflect_along w
   w:real^N = inv(norm v) % v
-  !v:real^N. ~(v = vec 0) ==> rotoinversion_matrix(matrix(reflect_along v))
-  !v:real^N. det(matrix(reflect_along v)) =\n                if v = vec 0 then &1 else --(&1)
-  !x:real^N i j.\n       1 <= i /\\ i <= dimindex(:N) /\\\n       1 <= j /\\ j <= dimindex(:N)\n       ==> reflect_along (basis i) x$j = if j = i then --(x$j) else x$j
-  !i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n         ==> reflect_along (basis i:real^N) (basis j) =\n             if i = j then --(basis j) else basis j
-  !v x:real^N. norm(reflect_along v x) = norm x
-  !v x y:real^N. reflect_along v x = reflect_along v y <=> x = y
-  !v y:real^N. ?x. reflect_along v x = y
+  forall v:real^N. ~(v = vec 0) ==> rotoinversion_matrix(matrix(reflect_along v))
+  forall v:real^N. det(matrix(reflect_along v)) =\n                if v = vec 0 then &1 else --(&1)
+  forall x:real^N i j.\n       1 <= i /\\ i <= dimindex(:N) /\\\n       1 <= j /\\ j <= dimindex(:N)\n       ==> reflect_along (basis i) x$j = if j = i then --(x$j) else x$j
+  forall i j. 1 <= i /\\ i <= dimindex(:N) /\\ 1 <= j /\\ j <= dimindex(:N)\n         ==> reflect_along (basis i:real^N) (basis j) =\n             if i = j then --(basis j) else basis j
+  forall v x:real^N. norm(reflect_along v x) = norm x
+  forall v x y:real^N. reflect_along v x = reflect_along v y <=> x = y
+  forall v y:real^N. ?x. reflect_along v x = y
   ~(d = &0) /\\ x + y = &0 /\\ y - x = d\n    ==> &1 + &2 * x * inv d = &0 /\\ &1 - &2 * y * inv d = &0
   (a - c % (b - a):real^N = b <=> (&1 + c) % (b - a) = vec 0) /\\\n     (b - c % (b - a):real^N = a <=> (&1 - c) % (b - a) = vec 0)
-  !a b:real^N.\n        norm a = norm b /\\ ~(a = b)\n        ==> reflect_along (b - a) a = b /\\ reflect_along (b - a) b = a
+  forall a b:real^N.\n        norm a = norm b /\\ ~(a = b)\n        ==> reflect_along (b - a) a = b /\\ reflect_along (b - a) b = a
   x - &0 % y:real^N = x
-  (!x. f(f x) = x) /\\ (!x. x IN s ==> f x IN s) ==> IMAGE f s = s
+  (forall x. f(f x) = x) /\\ (forall x. x IN s ==> f x IN s) ==> IMAGE f s = s
   reflect_along (b - a:real^N)
-  !s a b:real^N.\n        subspace s /\\ a IN s /\\ b IN s /\\ ~(a = b) /\\ norm a = norm b\n         ==> ?f. orthogonal_transformation f /\\ IMAGE f s = s /\\\n                 (!x. orthogonal a x /\\ orthogonal b x ==> f x = x) /\\\n                 det (matrix f) = -- &1 /\\\n                 f a = b /\\ f b = a
+  forall s a b:real^N.\n        subspace s /\\ a IN s /\\ b IN s /\\ ~(a = b) /\\ norm a = norm b\n         ==> ?f. orthogonal_transformation f /\\ IMAGE f s = s /\\\n                 (forall x. orthogonal a x /\\ orthogonal b x ==> f x = x) /\\\n                 det (matrix f) = -- &1 /\\\n                 f a = b /\\ f b = a
   b:real^N
   a:real^N
   s:real^N->bool
   \\x:real^N. x
   b:real^N = a
-  !s a b:real^N.\n        subspace s /\\ a IN s /\\ b IN s /\\ norm a = norm b\n         ==> ?f. orthogonal_transformation f /\\ IMAGE f s = s /\\\n                 (!x. orthogonal a x /\\ orthogonal b x ==> f x = x) /\\\n                 f a = b /\\ f b = a
+  forall s a b:real^N.\n        subspace s /\\ a IN s /\\ b IN s /\\ norm a = norm b\n         ==> ?f. orthogonal_transformation f /\\ IMAGE f s = s /\\\n                 (forall x. orthogonal a x /\\ orthogonal b x ==> f x = x) /\\\n                 f a = b /\\ f b = a
   (o)(reflect_along (v:real^N)):(real^N->real^N)->(real^N->real^N)
   CONS (v:real^N) l
   l:(real^N)list
@@ -39942,15 +39942,15 @@ Multivariate/determinants quotations (1042):
   a:real^N
   (y + aa) - &2 * a = (y + bb) - &2 * b <=>\n                                a - b = inv(&2) * (aa - bb)
   (y - b:real^N) dot (y - b) =\n          (y dot y + b dot b) - &2 * y dot b
-  !y:real^N. dist(y,f a) = dist(y,a) ==> reflect_along v y = y
+  forall y:real^N. dist(y,f a) = dist(y,a) ==> reflect_along v y = y
   a <= d + SUC n ==> d < d' ==> a <= d' + n
   reflect_along v o (f:real^N->real^N)
   v:real^N = inv(&2) % (f a - a)
   a:real^N
   []:(real^N) list
-  !x:real^N. f x = x
+  forall x:real^N. f x = x
   a:num <= b ==> (b <= a <=> a = b)
-  !f:real^N->real^N n.\n        orthogonal_transformation f /\\\n        dimindex(:N) <= dim {x | f x = x} + n\n        ==> ?l. LENGTH l <= n /\\ ALL (\\v. ~(v = vec 0)) l /\\\n                f = ITLIST (\\v h. reflect_along v o h) l I
+  forall f:real^N->real^N n.\n        orthogonal_transformation f /\\\n        dimindex(:N) <= dim {x | f x = x} + n\n        ==> ?l. LENGTH l <= n /\\ ALL (\\v. ~(v = vec 0)) l /\\\n                f = ITLIST (\\v h. reflect_along v o h) l I
   l:(real^N)list
   l:(real^N)list
   LENGTH(l:(real^N)list) <= dimindex(:N)
@@ -39960,45 +39960,45 @@ Multivariate/determinants quotations (1042):
   l:(real^N)list
   dimindex(:N)
   f:real^N->real^N
-  !P:(real^N->real^N)->bool.\n        P I /\\\n        (!f a. orthogonal_transformation f /\\ ~(a = vec 0) /\\ P f\n               ==> P(reflect_along a o f))\n        ==> !f. orthogonal_transformation f ==> P f
-  (!f:real^M->real^N.\n         linear f /\\ (!x. norm(f x) = norm x)\n         ==> (!x y. f x = f y ==> x = y)) /\\\n     (!f:real^N->real^N.\n         linear f /\\ (!x. norm(f x) = norm x) ==> (!y. ?x. f x = y)) /\\\n     (!f:real^N->real^N. linear f /\\ (!x y. f x = f y ==> x = y)\n                         ==> (!y. ?x. f x = y)) /\\\n     (!f:real^N->real^N. linear f /\\ (!y. ?x. f x = y)\n                         ==> (!x y. f x = f y ==> x = y))
+  forall P:(real^N->real^N)->bool.\n        P I /\\\n        (forall f a. orthogonal_transformation f /\\ ~(a = vec 0) /\\ P f\n               ==> P(reflect_along a o f))\n        ==> forall f. orthogonal_transformation f ==> P f
+  (forall f:real^M->real^N.\n         linear f /\\ (forall x. norm(f x) = norm x)\n         ==> (forall x y. f x = f y ==> x = y)) /\\\n     (forall f:real^N->real^N.\n         linear f /\\ (forall x. norm(f x) = norm x) ==> (forall y. ?x. f x = y)) /\\\n     (forall f:real^N->real^N. linear f /\\ (forall x y. f x = f y ==> x = y)\n                         ==> (forall y. ?x. f x = y)) /\\\n     (forall f:real^N->real^N. linear f /\\ (forall y. ?x. f x = y)\n                         ==> (forall x y. f x = f y ==> x = y))
   a + y:real^N = x <=> y = x - a
-  UNIV = IMAGE f UNIV <=> !y. ?x. f x = y
-  !a:real^N. a = a + vec 0 /\\\n                {} = IMAGE (\\x. a + x) {} /\\\n                {} = IMAGE (IMAGE (\\x. a + x)) {} /\\\n                (:real^N) = IMAGE (\\x. a + x) (:real^N) /\\\n                (:real^N->bool) = IMAGE (IMAGE (\\x. a + x)) (:real^N->bool) /\\\n                [] = MAP (\\x. a + x) []
+  UNIV = IMAGE f UNIV <=> forall y. ?x. f x = y
+  forall a:real^N. a = a + vec 0 /\\\n                {} = IMAGE (\\x. a + x) {} /\\\n                {} = IMAGE (IMAGE (\\x. a + x)) {} /\\\n                (:real^N) = IMAGE (\\x. a + x) (:real^N) /\\\n                (:real^N->bool) = IMAGE (IMAGE (\\x. a + x)) (:real^N->bool) /\\\n                [] = MAP (\\x. a + x) []
   y - a:real^N
   y:real^N
-  !a:real^N.\n        ((!P. (!x. P x) <=> (!x. P (a + x))) /\\\n         (!P. (?x. P x) <=> (?x. P (a + x))) /\\\n         (!Q. (!s. Q s) <=> (!s. Q(IMAGE (\\x. a + x) s))) /\\\n         (!Q. (?s. Q s) <=> (?s. Q(IMAGE (\\x. a + x) s))) /\\\n         (!Q. (!s. Q s) <=> (!s. Q(IMAGE (IMAGE (\\x. a + x)) s))) /\\\n         (!Q. (?s. Q s) <=> (?s. Q(IMAGE (IMAGE (\\x. a + x)) s))) /\\\n         (!P. (!g:real^1->real^N. P g) <=> (!g. P ((\\x. a + x) o g))) /\\\n         (!P. (?g:real^1->real^N. P g) <=> (?g. P ((\\x. a + x) o g))) /\\\n         (!P. (!g:num->real^N. P g) <=> (!g. P ((\\x. a + x) o g))) /\\\n         (!P. (?g:num->real^N. P g) <=> (?g. P ((\\x. a + x) o g))) /\\\n         (!Q. (!l. Q l) <=> (!l. Q(MAP (\\x. a + x) l))) /\\\n         (!Q. (?l. Q l) <=> (?l. Q(MAP (\\x. a + x) l)))) /\\\n        ((!P. {x | P x} = IMAGE (\\x. a + x) {x | P(a + x)}) /\\\n         (!Q. {s | Q s} =\n              IMAGE (IMAGE (\\x. a + x)) {s | Q(IMAGE (\\x. a + x) s)}) /\\\n         (!R. {l | R l} = IMAGE (MAP (\\x. a + x)) {l | R(MAP (\\x. a + x) l)}))
-  UNIV = IMAGE f UNIV <=> !y. ?x. f x = y
-  !f. orthogonal_transformation (f:real^N->real^N)\n         ==> (vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {} /\\\n              (:real^N) = IMAGE f (:real^N) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^N->bool) /\\\n              [] = MAP f []) /\\\n             ((!P. (!x. P x) <=> (!x. P (f x))) /\\\n              (!P. (?x. P x) <=> (?x. P (f x))) /\\\n              (!Q. (!s. Q s) <=> (!s. Q (IMAGE f s))) /\\\n              (!Q. (?s. Q s) <=> (?s. Q (IMAGE f s))) /\\\n              (!Q. (!s. Q s) <=> (!s. Q (IMAGE (IMAGE f) s))) /\\\n              (!Q. (?s. Q s) <=> (?s. Q (IMAGE (IMAGE f) s))) /\\\n              (!P. (!g:real^1->real^N. P g) <=> (!g. P (f o g))) /\\\n              (!P. (?g:real^1->real^N. P g) <=> (?g. P (f o g))) /\\\n              (!P. (!g:num->real^N. P g) <=> (!g. P (f o g))) /\\\n              (!P. (?g:num->real^N. P g) <=> (?g. P (f o g))) /\\\n              (!Q. (!l. Q l) <=> (!l. Q(MAP f l))) /\\\n              (!Q. (?l. Q l) <=> (?l. Q(MAP f l)))) /\\\n             ((!P. {x | P x} = IMAGE f {x | P(f x)}) /\\\n              (!Q. {s | Q s} = IMAGE (IMAGE f) {s | Q(IMAGE f s)}) /\\\n              (!R. {l | R l} = IMAGE (MAP f) {l | R(MAP f l)}))
-  !f:real^N->real^N.\n        orthogonal_transformation f /\\\n        (2 <= dimindex(:N) ==> det(matrix f) = &1)\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:N) ==> det(matrix f) = &1)
+  forall a:real^N.\n        ((forall P. (forall x. P x) <=> (forall x. P (a + x))) /\\\n         (forall P. (?x. P x) <=> (?x. P (a + x))) /\\\n         (forall Q. (forall s. Q s) <=> (forall s. Q(IMAGE (\\x. a + x) s))) /\\\n         (forall Q. (?s. Q s) <=> (?s. Q(IMAGE (\\x. a + x) s))) /\\\n         (forall Q. (forall s. Q s) <=> (forall s. Q(IMAGE (IMAGE (\\x. a + x)) s))) /\\\n         (forall Q. (?s. Q s) <=> (?s. Q(IMAGE (IMAGE (\\x. a + x)) s))) /\\\n         (forall P. (forall g:real^1->real^N. P g) <=> (forall g. P ((\\x. a + x) o g))) /\\\n         (forall P. (?g:real^1->real^N. P g) <=> (?g. P ((\\x. a + x) o g))) /\\\n         (forall P. (forall g:num->real^N. P g) <=> (forall g. P ((\\x. a + x) o g))) /\\\n         (forall P. (?g:num->real^N. P g) <=> (?g. P ((\\x. a + x) o g))) /\\\n         (forall Q. (forall l. Q l) <=> (forall l. Q(MAP (\\x. a + x) l))) /\\\n         (forall Q. (?l. Q l) <=> (?l. Q(MAP (\\x. a + x) l)))) /\\\n        ((forall P. {x | P x} = IMAGE (\\x. a + x) {x | P(a + x)}) /\\\n         (forall Q. {s | Q s} =\n              IMAGE (IMAGE (\\x. a + x)) {s | Q(IMAGE (\\x. a + x) s)}) /\\\n         (forall R. {l | R l} = IMAGE (MAP (\\x. a + x)) {l | R(MAP (\\x. a + x) l)}))
+  UNIV = IMAGE f UNIV <=> forall y. ?x. f x = y
+  forall f. orthogonal_transformation (f:real^N->real^N)\n         ==> (vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {} /\\\n              (:real^N) = IMAGE f (:real^N) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^N->bool) /\\\n              [] = MAP f []) /\\\n             ((forall P. (forall x. P x) <=> (forall x. P (f x))) /\\\n              (forall P. (?x. P x) <=> (?x. P (f x))) /\\\n              (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE f s))) /\\\n              (forall Q. (?s. Q s) <=> (?s. Q (IMAGE f s))) /\\\n              (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE (IMAGE f) s))) /\\\n              (forall Q. (?s. Q s) <=> (?s. Q (IMAGE (IMAGE f) s))) /\\\n              (forall P. (forall g:real^1->real^N. P g) <=> (forall g. P (f o g))) /\\\n              (forall P. (?g:real^1->real^N. P g) <=> (?g. P (f o g))) /\\\n              (forall P. (forall g:num->real^N. P g) <=> (forall g. P (f o g))) /\\\n              (forall P. (?g:num->real^N. P g) <=> (?g. P (f o g))) /\\\n              (forall Q. (forall l. Q l) <=> (forall l. Q(MAP f l))) /\\\n              (forall Q. (?l. Q l) <=> (?l. Q(MAP f l)))) /\\\n             ((forall P. {x | P x} = IMAGE f {x | P(f x)}) /\\\n              (forall Q. {s | Q s} = IMAGE (IMAGE f) {s | Q(IMAGE f s)}) /\\\n              (forall R. {l | R l} = IMAGE (MAP f) {l | R(MAP f l)}))
+  forall f:real^N->real^N.\n        orthogonal_transformation f /\\\n        (2 <= dimindex(:N) ==> det(matrix f) = &1)\n        ==> linear f /\\\n            (forall x y. f x = f y ==> x = y) /\\\n            (forall y. ?x. f x = y) /\\\n            (forall x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:N) ==> det(matrix f) = &1)
   1 <= 1
-  !f:real^M->real^N.\n          linear f\n          ==> vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {}
-  UNIV = IMAGE f UNIV <=> !y. ?x. f x = y
-  !f:real^M->real^N.\n          (!y. ?x. f x = y)\n          ==> (:real^N) = IMAGE f (:real^M) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^M->bool)
-  (!f:real^M->real^N.\n         linear f /\\ (!x. norm(f x) = norm x)\n         ==> (!x y. f x = f y ==> x = y)) /\\\n     (!f:real^N->real^N.\n         linear f /\\ (!x. norm(f x) = norm x) ==> (!y. ?x. f x = y)) /\\\n     (!f:real^N->real^N. linear f /\\ (!x y. f x = f y ==> x = y)\n                         ==> (!y. ?x. f x = y)) /\\\n     (!f:real^N->real^N. linear f /\\ (!y. ?x. f x = y)\n                         ==> (!x y. f x = f y ==> x = y))
-  (!f s P. (!y. y IN IMAGE f s ==> P y) <=> (!x. x IN s ==> P(f x))) /\\\n     (!f s P. (!u. u IN IMAGE (IMAGE f) s ==> P u) <=>\n              (!t. t IN s ==> P(IMAGE f t))) /\\\n     (!f s P. (?y. y IN IMAGE f s /\\ P y) <=> (?x. x IN s /\\ P(f x))) /\\\n     (!f s P. (?u. u IN IMAGE (IMAGE f) s /\\ P u) <=>\n              (?t. t IN s /\\ P(IMAGE f t)))
+  forall f:real^M->real^N.\n          linear f\n          ==> vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {}
+  UNIV = IMAGE f UNIV <=> forall y. ?x. f x = y
+  forall f:real^M->real^N.\n          (forall y. ?x. f x = y)\n          ==> (:real^N) = IMAGE f (:real^M) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^M->bool)
+  (forall f:real^M->real^N.\n         linear f /\\ (forall x. norm(f x) = norm x)\n         ==> (forall x y. f x = f y ==> x = y)) /\\\n     (forall f:real^N->real^N.\n         linear f /\\ (forall x. norm(f x) = norm x) ==> (forall y. ?x. f x = y)) /\\\n     (forall f:real^N->real^N. linear f /\\ (forall x y. f x = f y ==> x = y)\n                         ==> (forall y. ?x. f x = y)) /\\\n     (forall f:real^N->real^N. linear f /\\ (forall y. ?x. f x = y)\n                         ==> (forall x y. f x = f y ==> x = y))
+  (forall f s P. (forall y. y IN IMAGE f s ==> P y) <=> (forall x. x IN s ==> P(f x))) /\\\n     (forall f s P. (forall u. u IN IMAGE (IMAGE f) s ==> P u) <=>\n              (forall t. t IN s ==> P(IMAGE f t))) /\\\n     (forall f s P. (?y. y IN IMAGE f s /\\ P y) <=> (?x. x IN s /\\ P(f x))) /\\\n     (forall f s P. (?u. u IN IMAGE (IMAGE f) s /\\ P u) <=>\n              (?t. t IN s /\\ P(IMAGE f t)))
   inv(norm(a:real^N)) % y:real^N
   y:real^N
-  UNIV = IMAGE f UNIV <=> !y. ?x. f x = y
-  !a:real^N. ~(a = vec 0)\n                ==> vec 0 = norm(a) % vec 0 /\\\n                    a = norm(a) % inv(norm a) % a /\\\n                    {} = IMAGE (\\x. norm(a) % x) {} /\\\n                    {} = IMAGE (IMAGE (\\x. norm(a) % x)) {} /\\\n                    (:real^N) = IMAGE (\\x. norm(a) % x) (:real^N) /\\\n                    (:real^N->bool) =\n                    IMAGE (IMAGE (\\x. norm(a) % x)) (:real^N->bool) /\\\n                    [] = MAP (\\x. norm(a) % x) []
+  UNIV = IMAGE f UNIV <=> forall y. ?x. f x = y
+  forall a:real^N. ~(a = vec 0)\n                ==> vec 0 = norm(a) % vec 0 /\\\n                    a = norm(a) % inv(norm a) % a /\\\n                    {} = IMAGE (\\x. norm(a) % x) {} /\\\n                    {} = IMAGE (IMAGE (\\x. norm(a) % x)) {} /\\\n                    (:real^N) = IMAGE (\\x. norm(a) % x) (:real^N) /\\\n                    (:real^N->bool) =\n                    IMAGE (IMAGE (\\x. norm(a) % x)) (:real^N->bool) /\\\n                    [] = MAP (\\x. norm(a) % x) []
   :C
   :real^1
   \\x:real^N. norm(a:real^N) % x
   ~(x = &0) ==> x * inv x * a = a
   (a /\\ b) /\\ c /\\ d ==> (a /\\ b /\\ c) /\\ d
-  !a:real^N.\n        ~(a = vec 0)\n        ==> ((!P. (!r:real. P r) <=> (!r. P(norm a * r))) /\\\n             (!P. (?r:real. P r) <=> (?r. P(norm a * r))) /\\\n             (!P. (!x:real^N. P x) <=> (!x. P (norm(a) % x))) /\\\n             (!P. (?x:real^N. P x) <=> (?x. P (norm(a) % x))) /\\\n             (!Q. (!s:real^N->bool. Q s) <=>\n                  (!s. Q(IMAGE (\\x. norm(a) % x) s))) /\\\n             (!Q. (?s:real^N->bool. Q s) <=>\n                  (?s. Q(IMAGE (\\x. norm(a) % x) s))) /\\\n             (!Q. (!s:(real^N->bool)->bool. Q s) <=>\n                  (!s. Q(IMAGE (IMAGE (\\x. norm(a) % x)) s))) /\\\n             (!Q. (?s:(real^N->bool)->bool. Q s) <=>\n                  (?s. Q(IMAGE (IMAGE (\\x. norm(a) % x)) s))) /\\\n             (!P. (!g:real^1->real^N. P g) <=>\n                  (!g. P ((\\x. norm(a) % x) o g))) /\\\n             (!P. (?g:real^1->real^N. P g) <=>\n                  (?g. P ((\\x. norm(a) % x) o g))) /\\\n             (!P. (!g:num->real^N. P g) <=>\n                  (!g. P ((\\x. norm(a) % x) o g))) /\\\n             (!P. (?g:num->real^N. P g) <=>\n                  (?g. P ((\\x. norm(a) % x) o g))) /\\\n             (!Q. (!l. Q l) <=> (!l. Q(MAP (\\x:real^N. norm(a) % x) l))) /\\\n             (!Q. (?l. Q l) <=> (?l. Q(MAP (\\x:real^N. norm(a) % x) l)))) /\\\n            ((!P. {x:real^N | P x} =\n                  IMAGE (\\x. norm(a) % x) {x | P(norm(a) % x)}) /\\\n             (!Q. {s:real^N->bool | Q s} =\n                  IMAGE (IMAGE (\\x. norm(a) % x))\n                       {s | Q(IMAGE (\\x. norm(a) % x) s)}) /\\\n             (!R. {l:(real^N)list | R l} =\n                  IMAGE (MAP (\\x:real^N. norm(a) % x))\n                        {l | R(MAP (\\x:real^N. norm(a) % x) l)}))
+  forall a:real^N.\n        ~(a = vec 0)\n        ==> ((forall P. (forall r:real. P r) <=> (forall r. P(norm a * r))) /\\\n             (forall P. (?r:real. P r) <=> (?r. P(norm a * r))) /\\\n             (forall P. (forall x:real^N. P x) <=> (forall x. P (norm(a) % x))) /\\\n             (forall P. (?x:real^N. P x) <=> (?x. P (norm(a) % x))) /\\\n             (forall Q. (forall s:real^N->bool. Q s) <=>\n                  (forall s. Q(IMAGE (\\x. norm(a) % x) s))) /\\\n             (forall Q. (?s:real^N->bool. Q s) <=>\n                  (?s. Q(IMAGE (\\x. norm(a) % x) s))) /\\\n             (forall Q. (forall s:(real^N->bool)->bool. Q s) <=>\n                  (forall s. Q(IMAGE (IMAGE (\\x. norm(a) % x)) s))) /\\\n             (forall Q. (?s:(real^N->bool)->bool. Q s) <=>\n                  (?s. Q(IMAGE (IMAGE (\\x. norm(a) % x)) s))) /\\\n             (forall P. (forall g:real^1->real^N. P g) <=>\n                  (forall g. P ((\\x. norm(a) % x) o g))) /\\\n             (forall P. (?g:real^1->real^N. P g) <=>\n                  (?g. P ((\\x. norm(a) % x) o g))) /\\\n             (forall P. (forall g:num->real^N. P g) <=>\n                  (forall g. P ((\\x. norm(a) % x) o g))) /\\\n             (forall P. (?g:num->real^N. P g) <=>\n                  (?g. P ((\\x. norm(a) % x) o g))) /\\\n             (forall Q. (forall l. Q l) <=> (forall l. Q(MAP (\\x:real^N. norm(a) % x) l))) /\\\n             (forall Q. (?l. Q l) <=> (?l. Q(MAP (\\x:real^N. norm(a) % x) l)))) /\\\n            ((forall P. {x:real^N | P x} =\n                  IMAGE (\\x. norm(a) % x) {x | P(norm(a) % x)}) /\\\n             (forall Q. {s:real^N->bool | Q s} =\n                  IMAGE (IMAGE (\\x. norm(a) % x))\n                       {s | Q(IMAGE (\\x. norm(a) % x) s)}) /\\\n             (forall R. {l:(real^N)list | R l} =\n                  IMAGE (MAP (\\x:real^N. norm(a) % x))\n                        {l | R(MAP (\\x:real^N. norm(a) % x) l)}))
   b:real^N = vec 0
-  (!b:real^N. ~(b = vec 0) ==> (P(b) <=> Q(inv(norm b) % b)))\n     ==> P(vec 0) /\\ (!b. norm(b) = &1 ==> Q b) ==> (!b. P b)
-  !a s. collinear (IMAGE (\\x. a + x) s) <=> collinear s
-  !s a. collinear s ==> collinear (IMAGE (\\x. a + x) s)
-  !f s. collinear s /\\ linear f ==> collinear(IMAGE f s)
-  !f s. linear f /\\ (!x y. f x = f y ==> x = y)\n         ==> (collinear (IMAGE f s) <=> collinear s)
-  !f:real^M->real^N.\n          linear f /\\ (!x. norm(f x) = norm x)\n          ==> linear f /\\\n              (!x y. f x = f y ==> x = y) /\\\n              (!x. norm(f x) = norm x)
+  (forall b:real^N. ~(b = vec 0) ==> (P(b) <=> Q(inv(norm b) % b)))\n     ==> P(vec 0) /\\ (forall b. norm(b) = &1 ==> Q b) ==> (forall b. P b)
+  forall a s. collinear (IMAGE (\\x. a + x) s) <=> collinear s
+  forall s a. collinear s ==> collinear (IMAGE (\\x. a + x) s)
+  forall f s. collinear s /\\ linear f ==> collinear(IMAGE f s)
+  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> (collinear (IMAGE f s) <=> collinear s)
+  forall f:real^M->real^N.\n          linear f /\\ (forall x. norm(f x) = norm x)\n          ==> linear f /\\\n              (forall x y. f x = f y ==> x = y) /\\\n              (forall x. norm(f x) = norm x)
   linear(f:real^M->real^N)\n     ==> vec 0 = f(vec 0) /\\\n         {} = IMAGE f {} /\\\n         {} = IMAGE (IMAGE f) {} /\\\n         [] = MAP f []
-  (!y. ?x. f x = y) <=> IMAGE f UNIV = UNIV
-  dimindex(:M) = dimindex(:N)\n     ==> ?f:real^M->real^N.\n             (linear f /\\ (!y. ?x. f x = y)) /\\\n             (!x. norm(f x) = norm x)
-  UNIV = IMAGE f UNIV <=> (!y. ?x. f x = y)
-  !f:real^M->real^N.\n        linear f /\\ (!y. ?x. f x = y)\n         ==> (vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {} /\\\n              (:real^N) = IMAGE f (:real^M) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^M->bool) /\\\n              [] = MAP f []) /\\\n             ((!P. (!x. P x) <=> (!x. P (f x))) /\\\n              (!P. (?x. P x) <=> (?x. P (f x))) /\\\n              (!Q. (!s. Q s) <=> (!s. Q (IMAGE f s))) /\\\n              (!Q. (?s. Q s) <=> (?s. Q (IMAGE f s))) /\\\n              (!Q. (!s. Q s) <=> (!s. Q (IMAGE (IMAGE f) s))) /\\\n              (!Q. (?s. Q s) <=> (?s. Q (IMAGE (IMAGE f) s))) /\\\n              (!P. (!g:real^1->real^N. P g) <=> (!g. P (f o g))) /\\\n              (!P. (?g:real^1->real^N. P g) <=> (?g. P (f o g))) /\\\n              (!P. (!g:num->real^N. P g) <=> (!g. P (f o g))) /\\\n              (!P. (?g:num->real^N. P g) <=> (?g. P (f o g))) /\\\n              (!Q. (!l. Q l) <=> (!l. Q(MAP f l))) /\\\n              (!Q. (?l. Q l) <=> (?l. Q(MAP f l)))) /\\\n             ((!P. {x | P x} = IMAGE f {x | P(f x)}) /\\\n              (!Q. {s | Q s} = IMAGE (IMAGE f) {s | Q(IMAGE f s)}) /\\\n              (!R. {l | R l} = IMAGE (MAP f) {l | R(MAP f l)}))
+  (forall y. ?x. f x = y) <=> IMAGE f UNIV = UNIV
+  dimindex(:M) = dimindex(:N)\n     ==> ?f:real^M->real^N.\n             (linear f /\\ (forall y. ?x. f x = y)) /\\\n             (forall x. norm(f x) = norm x)
+  UNIV = IMAGE f UNIV <=> (forall y. ?x. f x = y)
+  forall f:real^M->real^N.\n        linear f /\\ (forall y. ?x. f x = y)\n         ==> (vec 0 = f(vec 0) /\\\n              {} = IMAGE f {} /\\\n              {} = IMAGE (IMAGE f) {} /\\\n              (:real^N) = IMAGE f (:real^M) /\\\n              (:real^N->bool) = IMAGE (IMAGE f) (:real^M->bool) /\\\n              [] = MAP f []) /\\\n             ((forall P. (forall x. P x) <=> (forall x. P (f x))) /\\\n              (forall P. (?x. P x) <=> (?x. P (f x))) /\\\n              (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE f s))) /\\\n              (forall Q. (?s. Q s) <=> (?s. Q (IMAGE f s))) /\\\n              (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE (IMAGE f) s))) /\\\n              (forall Q. (?s. Q s) <=> (?s. Q (IMAGE (IMAGE f) s))) /\\\n              (forall P. (forall g:real^1->real^N. P g) <=> (forall g. P (f o g))) /\\\n              (forall P. (?g:real^1->real^N. P g) <=> (?g. P (f o g))) /\\\n              (forall P. (forall g:num->real^N. P g) <=> (forall g. P (f o g))) /\\\n              (forall P. (?g:num->real^N. P g) <=> (?g. P (f o g))) /\\\n              (forall Q. (forall l. Q l) <=> (forall l. Q(MAP f l))) /\\\n              (forall Q. (?l. Q l) <=> (?l. Q(MAP f l)))) /\\\n             ((forall P. {x | P x} = IMAGE f {x | P(f x)}) /\\\n              (forall Q. {s | Q s} = IMAGE (IMAGE f) {s | Q(IMAGE f s)}) /\\\n              (forall R. {l | R l} = IMAGE (MAP f) {l | R(MAP f l)}))
 trace =  |- (#!:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). ((#=:fun(real,fun(real,bool)) (#trace:fun(cart(cart(real,'N),'N),real) A:cart(cart(real,'N),'N))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) (\i:num. ((#$:fun(cart(real,'N),fun(num,real)) ((#$:fun(cart(cart(real,'N),'N),fun(num,cart(real,'N))) A:cart(cart(real,'N),'N)) i:num)) i:num))))))
 TRACE_0 =  |- ((#=:fun(real,fun(real,bool)) (#trace:fun(cart(cart(real,'?723578),'?723578),real) (#mat:fun(num,cart(cart(real,'?723578),'?723578)) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))
 TRACE_I =  |- ((#=:fun(real,fun(real,bool)) (#trace:fun(cart(cart(real,'N),'N),real) (#mat:fun(num,cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))

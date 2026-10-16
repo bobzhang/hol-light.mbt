@@ -51770,7 +51770,7 @@ test "EC/nistp384 matches EC/nistp384.ml" {
       #|  group_carrier p384_group =\n     weierstrass_curve\n      (integer_mod_ring p_384,ring_neg (integer_mod_ring p_384) (&3),&b_384) /\\\n   group_id p384_group =\n     NONE /\\\n   group_inv p384_group =\n     weierstrass_neg\n      (integer_mod_ring p_384,ring_neg (integer_mod_ring p_384) (&3),&b_384) /\\\n   group_mul p384_group =\n     weierstrass_add\n      (integer_mod_ring p_384,ring_neg (integer_mod_ring p_384) (&3),&b_384)
       #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
       #|  x:int
-      #|  !x:int. ~((x pow 3 - &3 * x + &b_384 == &0) (mod &p_384))
+      #|  forall x:int. ~((x pow 3 - &3 * x + &b_384 == &0) (mod &p_384))
       #|  G_384 IN group_carrier p384_group
       #|  group_element_order p384_group G_384 = n_384
       #|  FINITE(group_carrier p384_group)
@@ -51785,7 +51785,7 @@ test "EC/nistp384 matches EC/nistp384.ml" {
       #|  G_384:(int#int)option
       #|  group_carrier p384_group HAS_SIZE n_384
       #|  CARD(group_carrier p384_group) = n_384
-      #|  !P. P IN group_carrier p384_group\n       ==> group_element_order p384_group P =\n           if P = group_id p384_group then 1 else n_384
+      #|  forall P. P IN group_carrier p384_group\n       ==> group_element_order p384_group P =\n           if P = group_id p384_group then 1 else n_384
       #|  subgroup_generated p384_group {G_384} = p384_group
       #|  cyclic_group p384_group
       #|  abelian_group p384_group

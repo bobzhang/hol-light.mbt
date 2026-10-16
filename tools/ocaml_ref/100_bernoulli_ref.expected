@@ -6021,11 +6021,11 @@ CPU time (user): <t>
   ~((n + 1) + 1 <= n + 1)
   m <= SUC n + 1 <=> m <= n + 1 \\/ m = SUC n + 1
   m <= 0 + 1 <=> m = 0 \\/ m = 1
-  !a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)
+  forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)
   k <= b ==> k <= SUC b
   ~(a <= SUC b) ==> b < a
-  !f f' a b.\n        (!k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x
-  (bernoulli 0 = &1) /\\\n  (!n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))
+  forall f f' a b.\n        (forall k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x
+  (bernoulli 0 = &1) /\\\n  (forall n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))
   :P
   :P
   \\n. n + 1
@@ -6033,26 +6033,26 @@ CPU time (user): <t>
   x = &n + &2 ==> s + x * --s / (&n + &2) = &0
   SUC(SUC n) = n + 2
   n < SUC n
-  !n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0
+  forall n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0
   bernpoly n x = sum(0..n) (\\k. &(binom(n,k)) * bernoulli k * x pow (n - k))
   z = x pow (n - k)
   k <= n:num
   k <= n ==> k <= n + 1
   k <= n ==> (n + 1) - k - 1 = n - k
   k <= n ==> ~(k = n + 1)
-  !n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x
+  forall n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x
   &0
   x:real
   \\x:real. f(x) - g(x)
-  !f g. (!x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> !x. f(x) = g(x)
+  forall f g. (forall x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> forall x. f(x) = g(x)
   i <= n ==> SUC n - i = SUC(n - i)
   (*) (&(SUC n))
   x:real
   x:real
-  !n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)
+  forall n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)
   sum(0..n) (\\i. bernpoly (SUC m) (&(i + 1)) - bernpoly (SUC m) (&i))
   &0 < &n + &1
-  !n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)
+  forall n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)
   sum(0..0) f = f 0 /\\ sum(0..SUC n) f = sum(0..n) f + f(SUC n)
   0
   a * b * x = FACT c ==> x = (FACT c) DIV (a * b)

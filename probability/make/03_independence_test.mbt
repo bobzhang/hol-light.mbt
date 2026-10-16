@@ -80262,20 +80262,20 @@ test "Probability/independence matches Probability/independence.ml" {
       #|0..0..0..0..solved at 4
       #|Probability/independence quotations (270):
       #|  indep_events (p:(A)prob_space) a b <=>\n   a IN prob_events p /\\ b IN prob_events p /\\\n   prob p (a INTER b) = prob p a * prob p b
-      #|  !p:A prob_space a b. indep_events p a b <=> indep_events p b a
-      #|  !p:A prob_space a. a IN prob_events p ==> indep_events p a {}
+      #|  forall p:A prob_space a b. indep_events p a b <=> indep_events p b a
+      #|  forall p:A prob_space a. a IN prob_events p ==> indep_events p a {}
       #|  a:A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space a. a IN prob_events p ==> indep_events p a (prob_carrier p)
+      #|  forall p:A prob_space a. a IN prob_events p ==> indep_events p a (prob_carrier p)
       #|  a:A->bool
       #|  p:A prob_space
       #|  a INTER (prob_carrier p DIFF b) = a DIFF b:A->bool
-      #|  !p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p a (prob_carrier p DIFF b)
-      #|  !p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p (prob_carrier p DIFF a) (prob_carrier p DIFF b)
+      #|  forall p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p a (prob_carrier p DIFF b)
+      #|  forall p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p (prob_carrier p DIFF a) (prob_carrier p DIFF b)
       #|  a:A->bool
       #|  a INTER b:A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> indep_events p a b
+      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> indep_events p a b
       #|  b = (a INTER b) UNION (b DIFF a):A->bool
       #|  prob p (b:A->bool) =\n     prob p (a INTER b) + prob p (b DIFF a)
       #|  b:A->bool
@@ -80284,45 +80284,45 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  b DIFF a:A->bool
       #|  p:A prob_space
       #|  prob p (b DIFF a:A->bool) = &0
-      #|  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> indep_events p a b
+      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> indep_events p a b
       #|  limsup_events (A:num->A->bool) =\n   INTERS {UNIONS {A n | n >= m} | m IN (:num)}
       #|  m:num
       #|  t:A->bool
       #|  UNIONS {(A:num->A->bool) n | n >= m}
       #|  m:num
-      #|  !A:num->A->bool. limsup_events A =\n     {x | !m. ?n. n >= m /\\ x IN A n}
+      #|  forall A:num->A->bool. limsup_events A =\n     {x | forall m. ?n. n >= m /\\ x IN A n}
       #|  (a:A->bool) INTER a = a
-      #|  !p:A prob_space a.\n      a IN prob_events p /\\ &0 < prob p a\n      ==> cond_prob p a a = &1
-      #|  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ ~(prob p b = &0)\n      ==> prob p (a INTER b) = cond_prob p a b * prob p b
+      #|  forall p:A prob_space a.\n      a IN prob_events p /\\ &0 < prob p a\n      ==> cond_prob p a a = &1
+      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ ~(prob p b = &0)\n      ==> prob p (a INTER b) = cond_prob p a b * prob p b
       #|  prob p ((a:A->bool) INTER b) / prob p b * prob p b =\n       prob p a * prob p b
       #|  ~(prob p (b:A->bool) = &0)
-      #|  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> (indep_events p a b <=> cond_prob p a b = prob p a)
+      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> (indep_events p a b <=> cond_prob p a b = prob p a)
       #|  0
       #|  UNIONS {(A:num->A->bool) n | n >= 0}
       #|  IMAGE (A:num->A->bool) (:num)
-      #|  !p:A prob_space A.\n      (!n. A n IN prob_events p)\n      ==> limsup_events A IN prob_events p
+      #|  forall p:A prob_space A.\n      (forall n. A n IN prob_events p)\n      ==> limsup_events A IN prob_events p
       #|  m:num
-      #|  !A:num->A->bool m.\n      limsup_events A SUBSET UNIONS {A n | n >= m}
+      #|  forall A:num->A->bool m.\n      limsup_events A SUBSET UNIONS {A n | n >= m}
       #|  n:num
       #|  S:A->bool
-      #|  !A:num->A->bool m.\n      UNIONS {A n | n >= SUC m} SUBSET UNIONS {A n | n >= m}
-      #|  !(f:num->B) (P:num->bool). COUNTABLE {f n | P n}
-      #|  !p:A prob_space (B:num->A->bool) m.\n      (!n. B n IN prob_events p)\n      ==> UNIONS {B n | n >= m} IN prob_events p
+      #|  forall A:num->A->bool m.\n      UNIONS {A n | n >= SUC m} SUBSET UNIONS {A n | n >= m}
+      #|  forall(f:num->B) (P:num->bool). COUNTABLE {f n | P n}
+      #|  forall p:A prob_space (B:num->A->bool) m.\n      (forall n. B n IN prob_events p)\n      ==> UNIONS {B n | n >= m} IN prob_events p
       #|  x:A
-      #|  !(B:num->A->bool).\n      UNIONS {UNIONS (IMAGE B (0..n)) | n IN (:num)} =\n      UNIONS {B n | n IN (:num)}
+      #|  forall(B:num->A->bool).\n      UNIONS {UNIONS (IMAGE B (0..n)) | n IN (:num)} =\n      UNIONS {B n | n IN (:num)}
       #|  k:num
       #|  B:num->A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool) k.\n      (!i. i <= k ==> B i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE B (0..k))) <= sum (0..k) (\\i. prob p (B i))
+      #|  forall p:A prob_space (B:num->A->bool) k.\n      (forall i. i <= k ==> B i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE B (0..k))) <= sum (0..k) (\\i. prob p (B i))
       #|  B:num->A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. B n SUBSET B (SUC n))\n      ==> ((\\n. prob p (B n)) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. B n SUBSET B (SUC n))\n      ==> ((\\n. prob p (B n)) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially
       #|  n:num
       #|  B:num->A->bool
       #|  p:A prob_space
       #|  \\n:num. UNIONS (IMAGE (B:num->A->bool) (0..n))
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p)\n      ==> ((\\n. prob p (UNIONS (IMAGE B (0..n)))) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p)\n      ==> ((\\n. prob p (UNIONS (IMAGE B (0..n)))) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially
       #|  n:num
       #|  from 0
       #|  \\i:num. prob (p:A prob_space) ((B:num->A->bool) i)
@@ -80330,7 +80330,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  B:num->A->bool
       #|  p:A prob_space
       #|  sum (0..n) (\\i:num. prob (p:A prob_space) ((B:num->A->bool) i))
-      #|  !p:A prob_space (B:num->A->bool) n.\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS (IMAGE B (0..n))) <=\n          real_infsum (from 0) (\\i. prob p (B i))
+      #|  forall p:A prob_space (B:num->A->bool) n.\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS (IMAGE B (0..n))) <=\n          real_infsum (from 0) (\\i. prob p (B i))
       #|  n:num
       #|  B:num->A->bool
       #|  p:A prob_space
@@ -80341,12 +80341,12 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  prob (p:A prob_space) (UNIONS {(B:num->A->bool) n | n IN (:num)})
       #|  \\n:num. prob (p:A prob_space) (UNIONS (IMAGE (B:num->A->bool) (0..n)))
       #|  sequentially
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n IN (:num)}) <=\n          real_infsum (from 0) (\\i. prob p (B i))
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n IN (:num)}) <=\n          real_infsum (from 0) (\\i. prob p (B i))
       #|  (\\i. prob (p:A prob_space) ((B:num->A->bool) i)) = (\\i. &0)
       #|  (\\i. prob (p:A prob_space) ((B:num->A->bool) i)) = (\\i. &0)
       #|  B:num->A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. prob p (B n) = &0)\n      ==> prob p (UNIONS {B n | n IN (:num)}) = &0
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. prob p (B n) = &0)\n      ==> prob p (UNIONS {B n | n IN (:num)}) = &0
       #|  UNIONS {prob_carrier p DIFF (B:num->A->bool) n | n IN (:num)}
       #|  prob_carrier p DIFF INTERS {(B:num->A->bool) n | n IN (:num)}
       #|  p:A prob_space
@@ -80358,18 +80358,18 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  b = &1 - a ==> a = &1 - b
       #|  prob p (INTERS {(B:num->A->bool) n | n IN (:num)}) =\n      &1 - prob p (prob_carrier p DIFF INTERS {B n | n IN (:num)})
       #|  INTERS {(B:num->A->bool) n | n IN (:num)} IN prob_events p
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. prob p (B n) = &1)\n      ==> prob p (INTERS {B n | n IN (:num)}) = &1
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. prob p (B n) = &1)\n      ==> prob p (INTERS {B n | n IN (:num)}) = &1
       #|  N:num
       #|  N:num
       #|  N:num
       #|  c:real
-      #|  !c f. (!n. c <= f n) /\\ (f ---> &0) sequentially ==> c <= &0
+      #|  forall c f. (forall n. c <= f n) /\\ (f ---> &0) sequentially ==> c <= &0
       #|  k + m:num
       #|  k:num
       #|  k - m:num
       #|  k:num
       #|  s:A->bool
-      #|  !(B:num->A->bool) m.\n      {B n | n >= m} = {B(n + m) | n IN (:num)}
+      #|  forall(B:num->A->bool) m.\n      {B n | n >= m} = {B(n + m) | n IN (:num)}
       #|  0
       #|  l:real
       #|  \\i:num. prob (p:A prob_space) ((B:num->A->bool) i)
@@ -80386,16 +80386,16 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  \\i:num. prob (p:A prob_space) ((B:num->A->bool) i)
       #|  m:num
       #|  real_infsum (from m) (\\i:num. prob (p:A prob_space) ((B:num->A->bool) i)) =\n      real_infsum (from 0) (\\i. prob p (B(i + m)))
-      #|  !p:A prob_space (B:num->A->bool) m.\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) <=\n          real_infsum (from m) (\\i. prob p (B i))
+      #|  forall p:A prob_space (B:num->A->bool) m.\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) <=\n          real_infsum (from m) (\\i. prob p (B i))
       #|  &0 = L - L
       #|  SUC n
       #|  0
       #|  L:real
       #|  f:num->real
-      #|  !n. real_infsum (from (SUC n)) f = L - sum (0..n) f
+      #|  forall n. real_infsum (from (SUC n)) f = L - sum (0..n) f
       #|  (f real_sums L) (from 0)
       #|  L = real_infsum (from 0) f
-      #|  !f. (!i. &0 <= f i) /\\ real_summable (from 0) f\n       ==> ((\\n. real_infsum (from (SUC n)) f) ---> &0) sequentially
+      #|  forall f. (forall i. &0 <= f i) /\\ real_summable (from 0) f\n       ==> ((\\n. real_infsum (from (SUC n)) f) ---> &0) sequentially
       #|  \\i:num. prob (p:A prob_space) ((B:num->A->bool) i)
       #|  SUC N
       #|  B:num->A->bool
@@ -80405,10 +80405,10 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  \\n:num. real_infsum (from (SUC n))\n           (\\i:num. prob (p:A prob_space) ((B:num->A->bool) i))
       #|  prob (p:A prob_space) (limsup_events (B:num->A->bool))
       #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &0
-      #|  indep_events_seq (p:A prob_space) (B:num->A->bool) <=>\n   (!n. B n IN prob_events p) /\\\n   (!S. FINITE S /\\ ~(S = {}) ==>\n        prob p (INTERS (IMAGE B S)) = product S (\\i. prob p (B i)))
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &0
+      #|  indep_events_seq (p:A prob_space) (B:num->A->bool) <=>\n   (forall n. B n IN prob_events p) /\\\n   (forall S. FINITE S /\\ ~(S = {}) ==>\n        prob p (INTERS (IMAGE B S)) = product S (\\i. prob p (B i)))
       #|  m <= SUC n ==> m <= SUC n
-      #|  !(f:num->A->bool) m n.\n      m <= SUC n\n      ==> INTERS(IMAGE f (m..SUC n)) = f(SUC n) INTER INTERS(IMAGE f (m..n))
+      #|  forall(f:num->A->bool) m n.\n      m <= SUC n\n      ==> INTERS(IMAGE f (m..SUC n)) = f(SUC n) INTER INTERS(IMAGE f (m..n))
       #|  m INSERT (idx:num->bool)
       #|  prob p (INTERS(IMAGE (B:num->A->bool) (m INSERT idx))) =\n      product (m INSERT idx) (\\j. prob p (B j))
       #|  idx:num->bool
@@ -80417,7 +80417,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  INTERS(IMAGE (B:num->A->bool) idx) SUBSET prob_carrier (p:A prob_space)
       #|  (prob_carrier p DIFF B m) INTER INTERS(IMAGE (B:num->A->bool) idx) =\n      INTERS(IMAGE B idx) DIFF B m
       #|  INTERS(IMAGE (B:num->A->bool) idx) IN prob_events p
-      #|  !p:A prob_space (B:num->A->bool) m (idx:num->bool).\n      indep_events_seq p B /\\ FINITE idx /\\ ~(idx = {}) /\\ ~(m IN idx)\n      ==> prob p ((prob_carrier p DIFF B m) INTER INTERS(IMAGE B idx)) =\n          (&1 - prob p (B m)) * product idx (\\j. prob p (B j))
+      #|  forall p:A prob_space (B:num->A->bool) m (idx:num->bool).\n      indep_events_seq p B /\\ FINITE idx /\\ ~(idx = {}) /\\ ~(m IN idx)\n      ==> prob p ((prob_carrier p DIFF B m) INTER INTERS(IMAGE B idx)) =\n          (&1 - prob p (B m)) * product idx (\\j. prob p (B j))
       #|  m <= SUC n
       #|  ~(SUC n < SUC n)
       #|  ~(SUC n IN extra)
@@ -80468,8 +80468,8 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  ~(0 IN extra)
       #|  m = 0
       #|  m = 0
-      #|  !n.\n     (!p:A prob_space (B:num->A->bool) m.\n        indep_events_seq p B /\\ m <= n\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n            product(m..n) (\\i. &1 - prob p (B i))) /\\\n     (!p:A prob_space (B:num->A->bool) m (extra:num->bool).\n        indep_events_seq p B /\\ m <= n /\\\n        FINITE extra /\\ ~(extra = {}) /\\ (!j. j IN extra ==> n < j)\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n)) INTER\n                     INTERS(IMAGE B extra)) =\n            product(m..n) (\\i. &1 - prob p (B i)) *\n            product extra (\\j. prob p (B j)))
-      #|  !p:A prob_space (B:num->A->bool) m n.\n      indep_events_seq p B /\\ m <= n\n      ==> prob p (INTERS (IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n          product(m..n) (\\i. &1 - prob p (B i))
+      #|  forall n.\n     (forall p:A prob_space (B:num->A->bool) m.\n        indep_events_seq p B /\\ m <= n\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n            product(m..n) (\\i. &1 - prob p (B i))) /\\\n     (forall p:A prob_space (B:num->A->bool) m (extra:num->bool).\n        indep_events_seq p B /\\ m <= n /\\\n        FINITE extra /\\ ~(extra = {}) /\\ (forall j. j IN extra ==> n < j)\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n)) INTER\n                     INTERS(IMAGE B extra)) =\n            product(m..n) (\\i. &1 - prob p (B i)) *\n            product extra (\\j. prob p (B j)))
+      #|  forall p:A prob_space (B:num->A->bool) m n.\n      indep_events_seq p B /\\ m <= n\n      ==> prob p (INTERS (IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n          product(m..n) (\\i. &1 - prob p (B i))
       #|  (m:num)..(n:num)
       #|  \\i:num. --((f:num->real) i)
       #|  product(m..n) (\\i:num. exp(--(f i:real))) = exp(--(sum(m..n) f))
@@ -80477,7 +80477,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  i:num
       #|  i:num
       #|  product(m..n) (\\i:num. &1 - (f:num->real) i) <=\n      product(m..n) (\\i. exp(--f i))
-      #|  !f m n. (!i. m <= i /\\ i <= n ==> &0 <= f i /\\ f i <= &1)\n            ==> product(m..n) (\\i. &1 - f i) <= exp(--(sum(m..n) f))
+      #|  forall f m n. (forall i. m <= i /\\ i <= n ==> &0 <= f i /\\ f i <= &1)\n            ==> product(m..n) (\\i. &1 - f i) <= exp(--(sum(m..n) f))
       #|  &0 <= x ==> a <= a + x
       #|  &0 <= x /\\ x < M ==> abs x <= abs M
       #|  abs M
@@ -80485,7 +80485,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  ~real_summable (from 0) (f:num->real)
       #|  ?N:num. M <= sum(0..N) (f:num->real)
       #|  M:real
-      #|  !f. (!i. &0 <= f i) /\\ ~real_summable (from 0) f\n       ==> !M. ?N. M <= sum(0..N) f
+      #|  forall f. (forall i. &0 <= f i) /\\ ~real_summable (from 0) f\n       ==> forall M. ?N. M <= sum(0..N) f
       #|  exp(--sum(m..n) (f:num->real)) < exp(log e)
       #|  sum(m + 1..n) (f:num->real) <= sum(m..n) f
       #|  m:num <= n
@@ -80511,7 +80511,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  -- log e + sum(0..m) (f:num->real) + &1
       #|  f:num->real
       #|  e:real
-      #|  !f m. (!i. &0 <= f i /\\ f i <= &1) /\\\n          ~real_summable (from 0) f\n          ==> ((\\n. product(m..n) (\\i. &1 - f i)) ---> &0) sequentially
+      #|  forall f m. (forall i. &0 <= f i /\\ f i <= &1) /\\\n          ~real_summable (from 0) f\n          ==> ((\\n. product(m..n) (\\i. &1 - f i)) ---> &0) sequentially
       #|  (m:num)..n = {}
       #|  prob (p:A prob_space)\n          (INTERS (IMAGE (\\i. prob_carrier p DIFF B i) ((m:num)..n)))
       #|  m:num <= n
@@ -80522,7 +80522,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  &1 - x = &0 <=> x = &1
       #|  prob (p:A prob_space)\n       (prob_carrier p DIFF UNIONS {(B:num->A->bool) n | n >= m}) = &0
       #|  UNIONS {(B:num->A->bool) n | n >= m} IN prob_events (p:A prob_space)
-      #|  !p:A prob_space (B:num->A->bool) m.\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) = &1
+      #|  forall p:A prob_space (B:num->A->bool) m.\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) = &1
       #|  prob (p:A prob_space) (limsup_events (B:num->A->bool))
       #|  &1
       #|  \\m:num. &1
@@ -80530,7 +80530,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  (\\m:num. prob (p:A prob_space) (UNIONS {(B:num->A->bool) n | n >= m})) =\n      (\\m. &1)
       #|  \\m:num. UNIONS {(B:num->A->bool) n | n >= m}
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool).\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &1
+      #|  forall p:A prob_space (B:num->A->bool).\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &1
       #|indep_events =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,bool),bool),bool) (\b:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (((#indep_events:fun(prob_space('A),fun(fun('A,bool),fun(fun('A,bool),bool))) p:prob_space('A)) a:fun('A,bool)) b:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) b:fun('A,bool)) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A)))) ((#=:fun(real,fun(real,bool)) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) ((#INTER:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) a:fun('A,bool)) b:fun('A,bool)))) ((#real_mul:fun(real,fun(real,real)) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) a:fun('A,bool))) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) b:fun('A,bool)))))))))))))
       #|INDEP_EVENTS_SYM =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\b:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (((#indep_events:fun(prob_space('A),fun(fun('A,bool),fun(fun('A,bool),bool))) p:prob_space('A)) a:fun('A,bool)) b:fun('A,bool))) (((#indep_events:fun(prob_space('A),fun(fun('A,bool),fun(fun('A,bool),bool))) p:prob_space('A)) b:fun('A,bool)) a:fun('A,bool)))))))))
       #|INDEP_EVENTS_EMPTY =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A)))) (((#indep_events:fun(prob_space('A),fun(fun('A,bool),fun(fun('A,bool),bool))) p:prob_space('A)) a:fun('A,bool)) #EMPTY:fun('A,bool)))))))

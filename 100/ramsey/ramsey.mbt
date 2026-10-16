@@ -348,7 +348,7 @@ pub fn and_forall_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// AND1_THM
 fn step_14() -> Unit raise {
-  and1_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 /\\ t2 ==> t1")))
+  and1_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 /\\ t2 ==> t1")))
 }
 
 ///|
@@ -363,7 +363,7 @@ pub fn and1_thm() -> @kernel.Thm {
 ///|
 /// AND2_THM
 fn step_15() -> Unit raise {
-  and2_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 /\\ t2 ==> t2")))
+  and2_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 /\\ t2 ==> t2")))
 }
 
 ///|
@@ -378,7 +378,7 @@ pub fn and2_thm() -> @kernel.Thm {
 ///|
 /// AND_IMP_INTRO
 fn step_16() -> Unit raise {
-  and_imp_intro_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t1 ==> t2 ==> t3 = t1 /\\ t2 ==> t3")))
+  and_imp_intro_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 ==> t2 ==> t3 = t1 /\\ t2 ==> t3")))
 }
 
 ///|
@@ -393,7 +393,7 @@ pub fn and_imp_intro() -> @kernel.Thm {
 ///|
 /// AND_INTRO_THM
 fn step_17() -> Unit raise {
-  and_intro_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 ==> t2 ==> t1 /\\ t2")))
+  and_intro_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 ==> t1 /\\ t2")))
 }
 
 ///|
@@ -423,7 +423,7 @@ pub fn bool_eq_distinct() -> @kernel.Thm {
 ///|
 /// EQ_EXPAND
 fn step_19() -> Unit raise {
-  eq_expand_c.set(@class.taut(@parser.parse_term("!t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2")))
+  eq_expand_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2")))
 }
 
 ///|
@@ -438,7 +438,7 @@ pub fn eq_expand() -> @kernel.Thm {
 ///|
 /// EQ_IMP_THM
 fn step_20() -> Unit raise {
-  eq_imp_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)")))
+  eq_imp_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)")))
 }
 
 ///|
@@ -453,7 +453,7 @@ pub fn eq_imp_thm() -> @kernel.Thm {
 ///|
 /// FALSITY
 fn step_21() -> Unit raise {
-  falsity_c.set(@class.taut(@parser.parse_term("!t. F ==> t")))
+  falsity_c.set(@class.taut(@parser.parse_term("forall t. F ==> t")))
 }
 
 ///|
@@ -468,7 +468,7 @@ pub fn falsity() -> @kernel.Thm {
 ///|
 /// F_IMP
 fn step_22() -> Unit raise {
-  f_imp_c.set(@class.taut(@parser.parse_term("!t. ~t ==> t ==> F")))
+  f_imp_c.set(@class.taut(@parser.parse_term("forall t. ~t ==> t ==> F")))
 }
 
 ///|
@@ -483,7 +483,7 @@ pub fn f_imp() -> @kernel.Thm {
 ///|
 /// IMP_DISJ_THM
 fn step_23() -> Unit raise {
-  imp_disj_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
+  imp_disj_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
 }
 
 ///|
@@ -498,7 +498,7 @@ pub fn imp_disj_thm() -> @kernel.Thm {
 ///|
 /// IMP_F
 fn step_24() -> Unit raise {
-  imp_f_c.set(@class.taut(@parser.parse_term("!t. (t ==> F) ==> ~t")))
+  imp_f_c.set(@class.taut(@parser.parse_term("forall t. (t ==> F) ==> ~t")))
 }
 
 ///|
@@ -513,7 +513,7 @@ pub fn imp_f() -> @kernel.Thm {
 ///|
 /// IMP_F_EQ_F
 fn step_25() -> Unit raise {
-  imp_f_eq_f_c.set(@class.taut(@parser.parse_term("!t. t ==> F <=> (t <=> F)")))
+  imp_f_eq_f_c.set(@class.taut(@parser.parse_term("forall t. t ==> F <=> (t <=> F)")))
 }
 
 ///|
@@ -528,7 +528,7 @@ pub fn imp_f_eq_f() -> @kernel.Thm {
 ///|
 /// LEFT_AND_OVER_OR
 fn step_26() -> Unit raise {
-  left_and_over_or_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3")))
+  left_and_over_or_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3")))
 }
 
 ///|
@@ -543,7 +543,7 @@ pub fn left_and_over_or() -> @kernel.Thm {
 ///|
 /// LEFT_OR_OVER_AND
 fn step_27() -> Unit raise {
-  left_or_over_and_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
+  left_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
 }
 
 ///|
@@ -573,7 +573,7 @@ pub fn not_and() -> @kernel.Thm {
 ///|
 /// NOT_F
 fn step_29() -> Unit raise {
-  not_f_c.set(@class.taut(@parser.parse_term("!t. ~t ==> (t <=> F)")))
+  not_f_c.set(@class.taut(@parser.parse_term("forall t. ~t ==> (t <=> F)")))
 }
 
 ///|
@@ -588,7 +588,7 @@ pub fn not_f() -> @kernel.Thm {
 ///|
 /// OR_ELIM_THM
 fn step_30() -> Unit raise {
-  or_elim_thm_c.set(@class.taut(@parser.parse_term("!t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t")))
+  or_elim_thm_c.set(@class.taut(@parser.parse_term("forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t")))
 }
 
 ///|
@@ -603,7 +603,7 @@ pub fn or_elim_thm() -> @kernel.Thm {
 ///|
 /// OR_IMP_THM
 fn step_31() -> Unit raise {
-  or_imp_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1")))
+  or_imp_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1")))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn or_imp_thm() -> @kernel.Thm {
 ///|
 /// OR_INTRO_THM1
 fn step_32() -> Unit raise {
-  or_intro_thm1_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 ==> t1 \\/ t2")))
+  or_intro_thm1_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t1 \\/ t2")))
 }
 
 ///|
@@ -633,7 +633,7 @@ pub fn or_intro_thm1() -> @kernel.Thm {
 ///|
 /// OR_INTRO_THM2
 fn step_33() -> Unit raise {
-  or_intro_thm2_c.set(@class.taut(@parser.parse_term("!t1 t2. t2 ==> t1 \\/ t2")))
+  or_intro_thm2_c.set(@class.taut(@parser.parse_term("forall t1 t2. t2 ==> t1 \\/ t2")))
 }
 
 ///|
@@ -648,7 +648,7 @@ pub fn or_intro_thm2() -> @kernel.Thm {
 ///|
 /// RIGHT_AND_OVER_OR
 fn step_34() -> Unit raise {
-  right_and_over_or_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1")))
+  right_and_over_or_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1")))
 }
 
 ///|
@@ -663,7 +663,7 @@ pub fn right_and_over_or() -> @kernel.Thm {
 ///|
 /// RIGHT_OR_OVER_AND
 fn step_35() -> Unit raise {
-  right_or_over_and_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
+  right_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
 }
 
 ///|
@@ -1145,7 +1145,7 @@ pub fn list_mp(x : @list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm rai
 ///|
 /// DISJ_IMP
 fn step_43() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("!t1 t2. t1 \\/ t2 ==> ~t1 ==> t2"))
+  let pth = @class.taut(@parser.parse_term("forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2"))
   disj_imp_c.set(fn(x113 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x113
     try {
@@ -1170,7 +1170,7 @@ pub fn disj_imp(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// IMP_ELIM
 fn step_44() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("!t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2"))
+  let pth = @class.taut(@parser.parse_term("forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2"))
   imp_elim_c.set(fn(x114 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x114
     try {
@@ -1365,7 +1365,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] remove_l(x146 : TA, x147 : @list.List[T
 ///|
 /// CONJ_DISCH
 fn step_45() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("!t t1 t2. (t ==> (t1 <=> t2)) ==> (t /\\ t1 <=> t /\\ t2)"))
+  let pth = @class.taut(@parser.parse_term("forall t t1 t2. (t ==> (t1 <=> t2)) ==> (t /\\ t1 <=> t /\\ t2)"))
   conj_disch_c.set(fn(x149 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let t = x149
     fn(x150 : @kernel.Thm) -> @kernel.Thm raise {
@@ -2554,7 +2554,7 @@ pub fn less_lemma1() -> @kernel.Thm {
 /// LESS_SUC_REFL
 fn step_63() -> Unit raise {
   let t450 = @simp.rewrite_tac(@list.List([@arith.lt()]))
-  less_suc_refl_c.set(@tactics.prove(@parser.parse_term("!n. n < SUC n"), t450))
+  less_suc_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n < SUC n"), t450))
 }
 
 ///|
@@ -2585,7 +2585,7 @@ pub fn fact_less() -> @kernel.Thm {
 /// LESS_EQ_SUC_REFL
 fn step_65() -> Unit raise {
   let t451 = @simp.rewrite_tac(@list.List([@arith.le(), @arith.le_refl()]))
-  less_eq_suc_refl_c.set(@tactics.prove(@parser.parse_term("!n. n <= SUC n"), t451))
+  less_eq_suc_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n <= SUC n"), t451))
 }
 
 ///|
@@ -2691,7 +2691,7 @@ pub fn less_mono_add() -> @kernel.Thm {
 /// LESS_SUC
 fn step_72() -> Unit raise {
   let t452 = @meson.meson_tac(@list.List([@arith.lt()]))
-  less_suc_c.set(@tactics.prove(@parser.parse_term("!m n. m < n ==> m < (SUC n)"), t452))
+  less_suc_c.set(@tactics.prove(@parser.parse_term("forall m n. m < n ==> m < (SUC n)"), t452))
 }
 
 ///|
@@ -2767,7 +2767,7 @@ pub fn less_add_1() -> @kernel.Thm {
 /// SUC_SUB1
 fn step_77() -> Unit raise {
   let t453 = @simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("1")), @arith.sub_suc(), @arith.sub_0()]))
-  suc_sub1_c.set(@tactics.prove(@parser.parse_term("!m. SUC m - 1 = m"), t453))
+  suc_sub1_c.set(@tactics.prove(@parser.parse_term("forall m. SUC m - 1 = m"), t453))
 }
 
 ///|
@@ -2798,7 +2798,7 @@ pub fn less_mono_eq() -> @kernel.Thm {
 /// LESS_ADD_SUC
 fn step_79() -> Unit raise {
   let t454 = @simp.rewrite_tac(@list.List([@arith.add_clauses(), @arith.lt_suc_le(), @arith.le_add()]))
-  less_add_suc_c.set(@tactics.prove(@parser.parse_term("!m n. m < m + SUC n"), t454))
+  less_add_suc_c.set(@tactics.prove(@parser.parse_term("forall m n. m < m + SUC n"), t454))
 }
 
 ///|
@@ -2965,7 +2965,7 @@ pub fn sub_mono_eq() -> @kernel.Thm {
 fn step_90() -> Unit raise {
   let t455 = @meson.meson_tac(@list.List([@arith.le_lt()]))
   let t456 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.not_le(), @arith.lt()])), t455)
-  not_suc_less_eq_c.set(@tactics.prove(@parser.parse_term("!n m. ~(SUC n <= m) <=> m <= n"), t456))
+  not_suc_less_eq_c.set(@tactics.prove(@parser.parse_term("forall n m. ~(SUC n <= m) <=> m <= n"), t456))
 }
 
 ///|
@@ -2996,7 +2996,7 @@ pub fn suc_not() -> @kernel.Thm {
 /// LESS_LESS_CASES
 fn step_92() -> Unit raise {
   let t457 = @meson.meson_tac(@list.List([@arith.lt_cases()]))
-  less_less_cases_c.set(@tactics.prove(@parser.parse_term("!m n:num. (m = n) \\/ m < n \\/ n < m"), t457))
+  less_less_cases_c.set(@tactics.prove(@parser.parse_term("forall m n:num. (m = n) \\/ m < n \\/ n < m"), t457))
 }
 
 ///|
@@ -3071,7 +3071,7 @@ pub fn less_less_eq_trans() -> @kernel.Thm {
 ///|
 /// SUB_SUB
 fn step_97() -> Unit raise {
-  sub_sub_c.set(@int.arith_rule(@parser.parse_term("!b c. c <= b ==> (!a:num. a - (b - c) = (a + c) - b)")))
+  sub_sub_c.set(@int.arith_rule(@parser.parse_term("forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)")))
 }
 
 ///|
@@ -3086,7 +3086,7 @@ pub fn sub_sub() -> @kernel.Thm {
 ///|
 /// LESS_CASES_IMP
 fn step_98() -> Unit raise {
-  less_cases_imp_c.set(@int.arith_rule(@parser.parse_term("!m n:num. ~(m < n) /\\ ~(m = n) ==> n < m")))
+  less_cases_imp_c.set(@int.arith_rule(@parser.parse_term("forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m")))
 }
 
 ///|
@@ -3101,7 +3101,7 @@ pub fn less_cases_imp() -> @kernel.Thm {
 ///|
 /// SUB_LESS_EQ
 fn step_99() -> Unit raise {
-  sub_less_eq_c.set(@int.arith_rule(@parser.parse_term("!n m:num. (n - m) <= n")))
+  sub_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall n m:num. (n - m) <= n")))
 }
 
 ///|
@@ -3116,7 +3116,7 @@ pub fn sub_less_eq() -> @kernel.Thm {
 ///|
 /// SUB_EQ_EQ_0
 fn step_100() -> Unit raise {
-  sub_eq_eq_0_c.set(@int.arith_rule(@parser.parse_term("!m n:num. (m - n = m) <=> (m = 0) \\/ (n = 0)")))
+  sub_eq_eq_0_c.set(@int.arith_rule(@parser.parse_term("forall m n:num. (m - n = m) <=> (m = 0) \\/ (n = 0)")))
 }
 
 ///|
@@ -3131,7 +3131,7 @@ pub fn sub_eq_eq_0() -> @kernel.Thm {
 ///|
 /// SUB_LEFT_LESS_EQ
 fn step_101() -> Unit raise {
-  sub_left_less_eq_c.set(@int.arith_rule(@parser.parse_term("!m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0")))
+  sub_left_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0")))
 }
 
 ///|
@@ -3146,7 +3146,7 @@ pub fn sub_left_less_eq() -> @kernel.Thm {
 ///|
 /// SUB_LEFT_GREATER_EQ
 fn step_102() -> Unit raise {
-  sub_left_greater_eq_c.set(@int.arith_rule(@parser.parse_term("!m n p:num. m >= (n - p) <=> (m + p) >= n")))
+  sub_left_greater_eq_c.set(@int.arith_rule(@parser.parse_term("forall m n p:num. m >= (n - p) <=> (m + p) >= n")))
 }
 
 ///|
@@ -3176,7 +3176,7 @@ pub fn less_eq_less_trans() -> @kernel.Thm {
 ///|
 /// LESS_0_CASES
 fn step_104() -> Unit raise {
-  less_0_cases_c.set(@int.arith_rule(@parser.parse_term("!m. (0 = m) \\/ 0 < m")))
+  less_0_cases_c.set(@int.arith_rule(@parser.parse_term("forall m. (0 = m) \\/ 0 < m")))
 }
 
 ///|
@@ -3191,7 +3191,7 @@ pub fn less_0_cases() -> @kernel.Thm {
 ///|
 /// LESS_OR
 fn step_105() -> Unit raise {
-  less_or_c.set(@int.arith_rule(@parser.parse_term("!m n. m < n ==> (SUC m) <= n")))
+  less_or_c.set(@int.arith_rule(@parser.parse_term("forall m n. m < n ==> (SUC m) <= n")))
 }
 
 ///|
@@ -3206,7 +3206,7 @@ pub fn less_or() -> @kernel.Thm {
 ///|
 /// SUB
 fn step_106() -> Unit raise {
-  sub_c.set(@int.arith_rule(@parser.parse_term("(!m. 0 - m = 0) /\\\n   (!m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))")))
+  sub_c.set(@int.arith_rule(@parser.parse_term("(forall m. 0 - m = 0) /\\\n   (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))")))
 }
 
 ///|
@@ -3222,7 +3222,7 @@ pub fn sub() -> @kernel.Thm {
 /// LESS_MULT_MONO
 fn step_107() -> Unit raise {
   let t458 = @simp.rewrite_tac(@list.List([@arith.lt_mult_lcancel(), @nums.not_suc()]))
-  less_mult_mono_c.set(@tactics.prove(@parser.parse_term("!m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i"), t458))
+  less_mult_mono_c.set(@tactics.prove(@parser.parse_term("forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i"), t458))
 }
 
 ///|
@@ -3238,7 +3238,7 @@ pub fn less_mult_mono() -> @kernel.Thm {
 /// LESS_MONO_MULT
 fn step_108() -> Unit raise {
   let t459 = @simp.simp_tac(@list.List([@arith.le_mult_rcancel()]))
-  less_mono_mult_c.set(@tactics.prove(@parser.parse_term("!m n p. m <= n ==> (m * p) <= (n * p)"), t459))
+  less_mono_mult_c.set(@tactics.prove(@parser.parse_term("forall m n p. m <= n ==> (m * p) <= (n * p)"), t459))
 }
 
 ///|
@@ -3254,7 +3254,7 @@ pub fn less_mono_mult() -> @kernel.Thm {
 /// LESS_MULT2
 fn step_109() -> Unit raise {
   let t460 = @simp.rewrite_tac(@list.List([@arith.lt_mult()]))
-  less_mult2_c.set(@tactics.prove(@parser.parse_term("!m n. 0 < m /\\ 0 < n ==> 0 < (m * n)"), t460))
+  less_mult2_c.set(@tactics.prove(@parser.parse_term("forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)"), t460))
 }
 
 ///|
@@ -3270,7 +3270,7 @@ pub fn less_mult2() -> @kernel.Thm {
 /// SUBSET_FINITE
 fn step_110() -> Unit raise {
   let t461 = @meson.meson_tac(@list.List([@sets.finite_subset()]))
-  subset_finite_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s ==> (!t. t SUBSET s ==> FINITE t)"), t461))
+  subset_finite_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)"), t461))
 }
 
 ///|
@@ -3286,7 +3286,7 @@ pub fn subset_finite() -> @kernel.Thm {
 /// LESS_EQ_SUC
 fn step_111() -> Unit raise {
   let t462 = @simp.rewrite_tac(@list.List([@arith.le()]))
-  less_eq_suc_c.set(@tactics.prove(@parser.parse_term("!n. m <= SUC n <=> (m = SUC n) \\/ m <= n"), t462))
+  less_eq_suc_c.set(@tactics.prove(@parser.parse_term("forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n"), t462))
 }
 
 ///|
@@ -3343,7 +3343,7 @@ fn step_112() -> Unit raise {
     }
   })
   let t488 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t476), t487)
-  infinite_member_c.set(@tactics.prove(@parser.parse_term("!s. INFINITE(s:A->bool) ==> ?x. x IN s"), t488))
+  infinite_member_c.set(@tactics.prove(@parser.parse_term("forall s. INFINITE(s:A->bool) ==> ?x. x IN s"), t488))
 }
 
 ///|
@@ -3378,7 +3378,7 @@ fn step_113() -> Unit raise {
       }
     })(t492(x493))
   })), t498), t499), t500), t501)
-  infinite_choose_c.set(@tactics.prove(@parser.parse_term("!s:A->bool. INFINITE(s) ==> ((@) s) IN s"), t502))
+  infinite_choose_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool. INFINITE(s) ==> ((@) s) IN s"), t502))
 }
 
 ///|
@@ -3394,7 +3394,7 @@ pub fn infinite_choose() -> @kernel.Thm {
 /// INFINITE_DELETE
 fn step_114() -> Unit raise {
   let t503 = @simp.rewrite_tac(@list.List([@sets.infinite(), @sets.finite_delete()]))
-  infinite_delete_c.set(@tactics.prove(@parser.parse_term("!(t:A->bool) x. INFINITE (t DELETE x) = INFINITE(t)"), t503))
+  infinite_delete_c.set(@tactics.prove(@parser.parse_term("forall(t:A->bool) x. INFINITE (t DELETE x) = INFINITE(t)"), t503))
 }
 
 ///|
@@ -3410,7 +3410,7 @@ pub fn infinite_delete() -> @kernel.Thm {
 /// INFINITE_INSERT
 fn step_115() -> Unit raise {
   let t504 = @simp.rewrite_tac(@list.List([@sets.infinite(), @sets.finite_insert()]))
-  infinite_insert_c.set(@tactics.prove(@parser.parse_term("!(x:A) t. INFINITE(x INSERT t) = INFINITE(t)"), t504))
+  infinite_insert_c.set(@tactics.prove(@parser.parse_term("forall(x:A) t. INFINITE(x INSERT t) = INFINITE(t)"), t504))
 }
 
 ///|
@@ -3426,7 +3426,7 @@ pub fn infinite_insert() -> @kernel.Thm {
 /// SIZE_INSERT
 fn step_116() -> Unit raise {
   let t505 = @simp.simp_tac(@list.List([@sets.has_size(), @sets.card_clauses(), @sets.finite_rules()]))
-  size_insert_c.set(@tactics.prove(@parser.parse_term("!(x:A) t. ~(x IN t) /\\ t HAS_SIZE n ==> (x INSERT t) HAS_SIZE (SUC n)"), t505))
+  size_insert_c.set(@tactics.prove(@parser.parse_term("forall(x:A) t. ~(x IN t) /\\ t HAS_SIZE n ==> (x INSERT t) HAS_SIZE (SUC n)"), t505))
 }
 
 ///|
@@ -3442,7 +3442,7 @@ pub fn size_insert() -> @kernel.Thm {
 /// SIZE_DELETE
 fn step_117() -> Unit raise {
   let t506 = @simp.simp_tac(@list.List([@sets.has_size_suc()]))
-  size_delete_c.set(@tactics.prove(@parser.parse_term("!(x:A) t. x IN t /\\ t HAS_SIZE (SUC n) ==> (t DELETE x) HAS_SIZE n"), t506))
+  size_delete_c.set(@tactics.prove(@parser.parse_term("forall(x:A) t. x IN t /\\ t HAS_SIZE (SUC n) ==> (t DELETE x) HAS_SIZE n"), t506))
 }
 
 ///|
@@ -3458,7 +3458,7 @@ pub fn size_delete() -> @kernel.Thm {
 /// SIZE_EXISTS
 fn step_118() -> Unit raise {
   let t507 = @simp.simp_tac(@list.List([@sets.has_size_suc(), @equal.gsym(@sets.member_not_empty())]))
-  size_exists_c.set(@tactics.prove(@parser.parse_term("!s N. s HAS_SIZE (SUC N) ==> ?x:A. x IN s"), t507))
+  size_exists_c.set(@tactics.prove(@parser.parse_term("forall s N. s HAS_SIZE (SUC N) ==> ?x:A. x IN s"), t507))
 }
 
 ///|
@@ -3477,7 +3477,7 @@ fn step_119() -> Unit raise {
   let t509 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
   let t508 = match_mp_tac(@sets.subset_trans())
   let t511 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t508), t509), t510)
-  subset_delete_c.set(@tactics.prove(@parser.parse_term("!s t (x:A). s SUBSET t ==> (s DELETE x) SUBSET t"), t511))
+  subset_delete_c.set(@tactics.prove(@parser.parse_term("forall s t (x:A). s SUBSET t ==> (s DELETE x) SUBSET t"), t511))
 }
 
 ///|
@@ -3547,7 +3547,7 @@ fn step_120() -> Unit raise {
   let t512 = @simp.rewrite_tac(@list.List([@sets.has_size(), @sets.empty_subset(), @sets.has_size_0()]))
   let t555 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("{}:A->bool")), t512), t554])
   let t556 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @tactics.gen_tac), @tactics.disch_tac), t555)
-  infinite_finite_choice_c.set(@tactics.prove(@parser.parse_term("!n (s:A->bool). INFINITE(s) ==> ?t. t SUBSET s /\\ t HAS_SIZE n"), t556))
+  infinite_finite_choice_c.set(@tactics.prove(@parser.parse_term("forall n (s:A->bool). INFINITE(s) ==> ?t. t SUBSET s /\\ t HAS_SIZE n"), t556))
 }
 
 ///|
@@ -3715,7 +3715,7 @@ fn step_121() -> Unit raise {
       })(x593))
     })(x594)(x594)
   }), t600), t608), t609), t614), @tactics.conj_tac), t667)
-  image_wop_lemma_c.set(@tactics.prove(@parser.parse_term("!N (t:num->bool) (u:A->bool).\n        u SUBSET (IMAGE f t) /\\ u HAS_SIZE (SUC N) ==>\n        ?n v. (u = (f n) INSERT v) /\\\n              !y. y IN v ==> ?m. (y = f m) /\\ n < m"), t668))
+  image_wop_lemma_c.set(@tactics.prove(@parser.parse_term("forall N (t:num->bool) (u:A->bool).\n        u SUBSET (IMAGE f t) /\\ u HAS_SIZE (SUC N) ==>\n        ?n v. (u = (f n) INSERT v) /\\\n              forall y. y IN v ==> ?m. (y = f m) /\\ n < m"), t668))
 }
 
 ///|
@@ -3768,7 +3768,7 @@ fn step_122() -> Unit raise {
     })(@bool.conjunct2(x703))
   })
   let t731 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))), t704), t730])
-  let t732 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!n:A. n IN { x | x IN s /\\ col x <= M } ==> col(n) <= M"), fn(x697 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t732 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall n:A. n IN { x | x IN s /\\ col x <= M } ==> col(n) <= M"), fn(x697 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s698 = @tactics.mp_tac(x697)
     fn(x699 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s698(x699)
@@ -3811,7 +3811,7 @@ fn step_122() -> Unit raise {
   }, @list.List([@parser.parse_term("0"), t673]))
   let t669 = @tactics.repeat_tac(@tactics.strip_tac)
   let t736 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([less_eq_0()])), t669), t674), t675), t735]))
-  colouring_lemma_c.set(@tactics.prove(@parser.parse_term("!M col s. (INFINITE(s) /\\ !n:A. n IN s ==> col(n) <= M) ==>\n          ?c t. t SUBSET s /\\ INFINITE(t) /\\ !n:A. n IN t ==> (col(n) = c)"), t736))
+  colouring_lemma_c.set(@tactics.prove(@parser.parse_term("forall M col s. (INFINITE(s) /\\ forall n:A. n IN s ==> col(n) <= M) ==>\n          ?c t. t SUBSET s /\\ INFINITE(t) /\\ forall n:A. n IN t ==> (col(n) = c)"), t736))
 }
 
 ///|
@@ -3841,7 +3841,7 @@ fn step_123() -> Unit raise {
   let t738 = @parser.parse_term("col:num->num")
   let t739 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("M:num"), t738, t737]), colouring_lemma()))
   let t750 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t739), t740), t743), t748), t749)
-  colouring_thm_c.set(@tactics.prove(@parser.parse_term("!M col. (!n. col n <= M) ==>\n           ?c s. INFINITE(s) /\\ !n:num. n IN s ==> (col(n) = c)"), t750))
+  colouring_thm_c.set(@tactics.prove(@parser.parse_term("forall M col. (forall n. col n <= M) ==>\n           ?c s. INFINITE(s) /\\ forall n:num. n IN s ==> (col(n) = c)"), t750))
 }
 
 ///|
@@ -3969,7 +3969,7 @@ fn step_124() -> Unit raise {
       })(x787))
     })(x788)(x788)
   }), t836)
-  ramsey_lemma1_c.set(@tactics.prove(@parser.parse_term("(!C s. INFINITE(s:A->bool) /\\\n         (!t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n         ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                   (!u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c)))\n  ==> !C s. INFINITE(s:A->bool) /\\\n            (!t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                      (!u. u SUBSET t /\\ u HAS_SIZE N\n                           ==> (C(((@) s) INSERT u) = c))"), t837))
+  ramsey_lemma1_c.set(@tactics.prove(@parser.parse_term("(forall C s. INFINITE(s:A->bool) /\\\n         (forall t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n         ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                   (forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                      (forall u. u SUBSET t /\\ u HAS_SIZE N\n                           ==> (C(((@) s) INSERT u) = c))"), t837))
 }
 
 ///|
@@ -4019,7 +4019,7 @@ fn step_125() -> Unit raise {
       }
     })(((x969 : @kernel.Thm) => @bool.spec(t968, x969))(x970))
   })
-  let t964 = @tactics.undisch_tac(@parser.parse_term("!n:num. ~(((@)(f n):A) IN (f(SUC n)))"))
+  let t964 = @tactics.undisch_tac(@parser.parse_term("forall n:num. ~(((@)(f n):A) IN (f(SUC n)))"))
   let t963 = @simp.asm_rewrite_tac(@list.List([]))
   let t980 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(match_mp_tac(size_insert()), t963), t964), t971), t972), t973), t979)
   let t960 = @simp.asm_rewrite_tac(@list.List([]))
@@ -4170,7 +4170,7 @@ fn step_125() -> Unit raise {
   let t893 = @list.List([@simp.asm_rewrite_tac(@list.List([@sets.subset_refl()])), t892, t891, t890])
   let t851 = @tactics.repeat_tac(@tactics.strip_tac)
   let t996 = @list.List([@tactics.thenl(@tactics.then_tac(match_mp_tac(@nums.num_induction()), t851), t893), t995])
-  let t850 = @tactics.subgoal_then(@parser.parse_term("!n:num. (f n) SUBSET (s:A->bool) /\\\n    ?c. INFINITE(f(SUC n)) /\\ f(SUC n) SUBSET (f n) /\\\n        ~(((@)(f n)) IN (f(SUC n))) /\\\n        !u. u SUBSET (f(SUC n)) /\\ u HAS_SIZE N ==>\n          (C(((@)(f n)) INSERT u) = c:num)"), fn(x847 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t850 = @tactics.subgoal_then(@parser.parse_term("forall n:num. (f n) SUBSET (s:A->bool) /\\\n    ?c. INFINITE(f(SUC n)) /\\ f(SUC n) SUBSET (f n) /\\\n        ~(((@)(f n)) IN (f(SUC n))) /\\\n        forall u. u SUBSET (f(SUC n)) /\\ u HAS_SIZE N ==>\n          (C(((@)(f n)) INSERT u) = c:num)"), fn(x847 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s848 = @tactics.mp_tac(x847)
     fn(x849 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s848(x849)
@@ -4187,10 +4187,10 @@ fn step_125() -> Unit raise {
       })(@equal.beta_rule(x843))
     })(@bool.existence(x844))
   })
-  let t838 = @parser.parse_term("\\s (n:num). @t:A->bool. ?c:num.\n      INFINITE(t) /\\\n      t SUBSET s /\\\n      ~(((@) s) IN t) /\\\n      !u. u SUBSET t /\\ u HAS_SIZE N ==> (C(((@) s) INSERT u) = c)")
+  let t838 = @parser.parse_term("\\s (n:num). @t:A->bool. ?c:num.\n      INFINITE(t) /\\\n      t SUBSET s /\\\n      ~(((@) s) IN t) /\\\n      forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(((@) s) INSERT u) = c)")
   let t839 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:A->bool"), t838]), @nums.num_axiom()))
   let t997 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t839), t845), t846), t850), t996)
-  ramsey_lemma2_c.set(@tactics.prove(@parser.parse_term("(!C s. INFINITE(s:A->bool) /\\\n         (!t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                  (!u. u SUBSET t /\\ u HAS_SIZE N\n                       ==> (C(((@) s) INSERT u) = c)))\n  ==> !C s. INFINITE(s:A->bool) /\\\n            (!t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t x col. (!n. col n <= M) /\\\n                          (!n. (t n) SUBSET s) /\\\n                          (!n. t(SUC n) SUBSET (t n)) /\\\n                          (!n. ~((x n) IN (t n))) /\\\n                          (!n. x(SUC n) IN (t n)) /\\\n                          (!n. (x n) IN s) /\\\n                          (!n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                 ==> (C((x n) INSERT u) = col n))"), t997))
+  ramsey_lemma2_c.set(@tactics.prove(@parser.parse_term("(forall C s. INFINITE(s:A->bool) /\\\n         (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                  (forall u. u SUBSET t /\\ u HAS_SIZE N\n                       ==> (C(((@) s) INSERT u) = c)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t x col. (forall n. col n <= M) /\\\n                          (forall n. (t n) SUBSET s) /\\\n                          (forall n. t(SUC n) SUBSET (t n)) /\\\n                          (forall n. ~((x n) IN (t n))) /\\\n                          (forall n. x(SUC n) IN (t n)) /\\\n                          (forall n. (x n) IN s) /\\\n                          (forall n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                 ==> (C((x n) INSERT u) = col n))"), t997))
 }
 
 ///|
@@ -4367,7 +4367,7 @@ fn step_126() -> Unit raise {
     }
   })(t1086), t1087), t1088), t1093), t1094), t1103), t1108), t1109), t1113])
   let t1115 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1114), @tactics.all_tac])
-  let t1081 = @tactics.subgoal_then(@parser.parse_term("!m n. ((x:num->A) m = x n) <=> (m = n)"), fn(x1078 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1081 = @tactics.subgoal_then(@parser.parse_term("forall m n. ((x:num->A) m = x n) <=> (m = n)"), fn(x1078 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1079 = @tactics.assume_tac(x1078)
     fn(x1080 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1079(x1080)
@@ -4397,7 +4397,7 @@ fn step_126() -> Unit raise {
     t1063(t1062(x1064))
   })
   let t1077 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1065), t1073), t1074), t1075), t1076), @tactics.all_tac])
-  let t1058 = @tactics.subgoal_then(@parser.parse_term("!m n. m < n ==> (x n:A) IN (t m)"), fn(x1055 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1058 = @tactics.subgoal_then(@parser.parse_term("forall m n. m < n ==> (x n:A) IN (t m)"), fn(x1055 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1056 = @tactics.assume_tac(x1055)
     fn(x1057 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1056(x1057)
@@ -4417,7 +4417,7 @@ fn step_126() -> Unit raise {
   }))
   let t1043 = @simp.rewrite_tac(@list.List([less_eq_exists()]))
   let t1054 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1043), t1047), t1049), @nums.induct_tac), t1050), t1051), t1052), t1053), @tactics.all_tac])
-  let t1042 = @tactics.subgoal_then(@parser.parse_term("!m n. m <= n ==> (t n:A->bool) SUBSET (t m)"), fn(x1039 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1042 = @tactics.subgoal_then(@parser.parse_term("forall m n. m <= n ==> (t n:A->bool) SUBSET (t m)"), fn(x1039 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1040 = @tactics.assume_tac(x1039)
     fn(x1041 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1040(x1041)
@@ -4479,7 +4479,7 @@ fn step_126() -> Unit raise {
       }
     })(x1006))
   }), t1014), t1015), t1019), t1023), t1024), t1027), t1028), t1032), t1033), t1038), t1042), t1054), t1058), t1077), t1081), t1115), t1116), t1205)
-  ramsey_lemma3_c.set(@tactics.prove(@parser.parse_term("(!C s. INFINITE(s:A->bool) /\\\n             (!t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n             ==> ?t x col. (!n. col n <= M) /\\\n                           (!n. (t n) SUBSET s) /\\\n                           (!n. t(SUC n) SUBSET (t n)) /\\\n                           (!n. ~((x n) IN (t n))) /\\\n                           (!n. x(SUC n) IN (t n)) /\\\n                           (!n. (x n) IN s) /\\\n                           (!n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                  ==> (C((x n) INSERT u) = col n)))\n  ==> !C s. INFINITE(s:A->bool) /\\\n            (!t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                      (!u. u SUBSET t /\\ u HAS_SIZE (SUC N) ==> (C(u) = c))"), t1206))
+  ramsey_lemma3_c.set(@tactics.prove(@parser.parse_term("(forall C s. INFINITE(s:A->bool) /\\\n             (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n             ==> ?t x col. (forall n. col n <= M) /\\\n                           (forall n. (t n) SUBSET s) /\\\n                           (forall n. t(SUC n) SUBSET (t n)) /\\\n                           (forall n. ~((x n) IN (t n))) /\\\n                           (forall n. x(SUC n) IN (t n)) /\\\n                           (forall n. (x n) IN s) /\\\n                           (forall n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                  ==> (C((x n) INSERT u) = col n)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                      (forall u. u SUBSET t /\\ u HAS_SIZE (SUC N) ==> (C(u) = c))"), t1206))
 }
 
 ///|
@@ -4513,7 +4513,7 @@ fn step_127() -> Unit raise {
   }, @list.List([@parser.parse_term("s:A->bool"), t1210]))
   let t1220 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1211), t1212), t1213), t1214), t1219])
   let t1221 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1220)
-  ramsey_c.set(@tactics.prove(@parser.parse_term("!M N C s.\n        INFINITE(s:A->bool) /\\\n        (!t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                  (!u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c))"), t1221))
+  ramsey_c.set(@tactics.prove(@parser.parse_term("forall M N C s.\n        INFINITE(s:A->bool) /\\\n        (forall t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                  (forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c))"), t1221))
 }
 
 ///|

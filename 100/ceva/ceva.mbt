@@ -40,7 +40,7 @@ fn step_3() -> Unit raise {
   })(t10)
   let t5 = @simp.simp_tac(@list.List([@realarith.real_pow_2()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t5), t11), t12)
-  let lemma = @tactics.prove(@parser.parse_term("!x y. &0 <= x /\\ &0 <= y ==> (x pow 2 = y pow 2 <=> x = y)"), t13)
+  let lemma = @tactics.prove(@parser.parse_term("forall x y. &0 <= x /\\ &0 <= y ==> (x pow 2 = y pow 2 <=> x = y)"), t13)
   let t16 = @simp.simp_tac(@list.List([@vectors.norm_pos_le(), @realax.real_le_mul()]))
   let t15 = @tactics.match_mp_tac(@equal.gsym(lemma))
   let t14 = @equal.gsym(@real.real_pow_mul())
@@ -119,7 +119,7 @@ fn step_4() -> Unit raise {
   let t26 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@real.real_sub_refl(), @calc_int.real_mul_rzero(), @calc_int.real_mul_lzero()])), t25), @tactics.all_tac])
   let t24 = @class.asm_cases_tac(@parser.parse_term("a:real^2 = b"))
   let t63 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t24), t26), t27), @tactics.eq_tac), t37), @tactics.disch_tac), t38), t39), t40), @tactics.disch_tac), t49), t50), @tactics.strip_tac), t51), t52), t56), t57), t61), t62)
-  collinear_c.set(@tactics.prove(@parser.parse_term("!a b c:real^2.\n        collinear {a:real^2,b,c} <=>\n        ((a$1 - b$1) * (b$2 - c$2) = (a$2 - b$2) * (b$1 - c$1))"), t63))
+  collinear_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^2.\n        collinear {a:real^2,b,c} <=>\n        ((a$1 - b$1) * (b$2 - c$2) = (a$2 - b$2) * (b$1 - c$1))"), t63))
 }
 
 ///|
@@ -176,7 +176,7 @@ fn step_5() -> Unit raise {
   }))
   let t64 = @simp.rewrite_tac(@list.List([@vectors.dist(), norm_cross(), collinear(), between_thm()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), @tactics.strip_tac), t74), t79), t80), t89), t90)
-  ceva_weak_c.set(@tactics.prove(@parser.parse_term("!A B C X Y Z P:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (A,C) /\\ between Z (A,B) /\\\n        between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)\n        ==> dist(B,X) * dist(C,Y) * dist(A,Z) =\n            dist(X,C) * dist(Y,A) * dist(Z,B)"), t91))
+  ceva_weak_c.set(@tactics.prove(@parser.parse_term("forall A B C X Y Z P:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (A,C) /\\ between Z (A,B) /\\\n        between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)\n        ==> dist(B,X) * dist(C,Y) * dist(A,Z) =\n            dist(X,C) * dist(Y,A) * dist(Z,B)"), t91))
 }
 
 ///|
@@ -268,7 +268,7 @@ fn step_6() -> Unit raise {
       })(x157))
     }, x158))(x159))
   }))), t160), t163), t164), @tactics.all_tac])
-  let t149 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x. p x /\\ q x ==> r x) /\\ (?x. p x /\\ q x)\n    ==> (?x. p x /\\ q x /\\ r x)")))
+  let t149 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x. p x /\\ q x ==> r x) /\\ (?x. p x /\\ q x)\n    ==> (?x. p x /\\ q x /\\ r x)")))
   let t148 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm2()]))
   let t146 = @simp.asm_rewrite_tac(@list.List([]))
   let t143 = @tactics.exists_tac(@parser.parse_term("w:real"))
@@ -338,7 +338,7 @@ fn step_6() -> Unit raise {
   let t93 = @parser.parse_term("A:real^2 = C")
   let t94 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("A:real^2 = B"), t93, t92]))
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t94), t95), t102), t103), t109), t114), t115), t119), t120), t122), t123), t124), t125), t126), t127), @tactics.eq_tac), t138), @tactics.disch_tac), t139), t141), t147), t148), t149), @tactics.conj_tac), t165), t166), t167), t180), t181), t185), t197), t198), t199), t200), t201), t202), t203), @calc_rat.asm_real_arith_tac)
-  ceva_c.set(@tactics.prove(@parser.parse_term("!A B C X Y Z:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (C,A) /\\ between Z (A,B)\n        ==> (dist(B,X) * dist(C,Y) * dist(A,Z) =\n             dist(X,C) * dist(Y,A) * dist(Z,B) <=>\n             (?P. between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)))"), t204))
+  ceva_c.set(@tactics.prove(@parser.parse_term("forall A B C X Y Z:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (C,A) /\\ between Z (A,B)\n        ==> (dist(B,X) * dist(C,Y) * dist(A,Z) =\n             dist(X,C) * dist(Y,A) * dist(Z,B) <=>\n             (?P. between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)))"), t204))
 }
 
 ///|
@@ -367,7 +367,7 @@ fn step_7() -> Unit raise {
   let t208 = @tactics.disch_then((x207 : @kernel.Thm) => @tactics.x_choose_tac(t206, x207))
   let t205 = @simp.rewrite_tac(@list.List([between_thm()]))
   let t217 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t205), @tactics.eq_tac), t208), t209), t210), t211), t212), t216), @calc_rat.real_arith_tac)
-  between_sym_c.set(@tactics.prove(@parser.parse_term("!u v w. between v (u,w) <=> between v (w,u)"), t217))
+  between_sym_c.set(@tactics.prove(@parser.parse_term("forall u v w. between v (u,w) <=> between v (w,u)"), t217))
 }
 
 ///|
@@ -426,7 +426,7 @@ fn step_8() -> Unit raise {
   let t219 = @simp.once_rewrite_tac(@list.List([between_sym()]))
   let t218 = @tactics.conv_tac(@equal.sym_conv)
   let t255 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t218), t219), t220), t221), t222), t223), t224), @tactics.eq_tac), t232), @tactics.disch_tac), t233), t242), t243), t244), t245), t246), t247), t248), t249), t254), @vectors.vector_arith_tac)
-  between_metrical_c.set(@tactics.prove(@parser.parse_term("!u v w:real^N. between v (u,w) <=> dist(u,v) + dist(v,w) = dist(u,w)"), t255))
+  between_metrical_c.set(@tactics.prove(@parser.parse_term("forall u v w:real^N. between v (u,w) <=> dist(u,v) + dist(v,w) = dist(u,w)"), t255))
 }
 
 ///|

@@ -5577,7 +5577,7 @@ Warning: inventing type variables
 0..0..1..2..5..solved at 13
 Warning: inventing type variables
 100/birthday quotations (49):
-  (s --> t) = {f:A->B | (!x. x IN s ==> f(x) IN t) /\\\n                        (!x. ~(x IN s) ==> f(x) = @y. T)}
+  (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
   ({} --> t) = {(\\x. @y. T)}
   u:A = x
   u:A
@@ -5589,10 +5589,10 @@ Warning: inventing type variables
   f:A->B
   (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
   (x INSERT s) --> t =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\ g IN s --> t}
-  !s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
+  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
   m:num
-  !m n. m <= n ==> ?d. FACT(n) = d * FACT(m)
-  !m n. m <= n ==> FACT n = (FACT(n) DIV FACT(m)) * FACT(m)
+  forall m n. m <= n ==> ?d. FACT(n) = d * FACT(m)
+  forall m n. m <= n ==> FACT n = (FACT(n) DIV FACT(m)) * FACT(m)
   y:B
   0
   n:num
@@ -5611,21 +5611,21 @@ Warning: inventing type variables
   (f:A->B) x
   f:A->B
   (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
-  {f | f IN (x INSERT s) --> t /\\\n    (!u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               !u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}
+  {f | f IN (x INSERT s) --> t /\\\n    (forall u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               forall u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}
   {x | x IN s} = s
-  !s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))
+  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))
   s INTER (t DIFF s) = {}
   s SUBSET t ==> t = s UNION (t DIFF s)
-  !s t:A->bool m n.\n        s SUBSET t /\\ s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> (t DIFF s) HAS_SIZE (n - m)
+  forall s t:A->bool m n.\n        s SUBSET t /\\ s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> (t DIFF s) HAS_SIZE (n - m)
   (if a <= b then x - y else x) = x - (if b < a then 0 else y)
-  {f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}
-  !s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)
+  {f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}
+  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)
   x + 0 = x
   0
   (m + SUC d) - 1 = m + d
   (m + SUC d) - 1 - m = d
-  !m n. m < n\n         ==> (FACT n) DIV (FACT m) = n * FACT(n - 1) DIV FACT(m)
-  !s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)
+  forall m n. m < n\n         ==> (FACT n) DIV (FACT m) = n * FACT(n - 1) DIV FACT(m)
+  forall s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)
 funspace =  |- (#!:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'B),bool),fun(fun(fun('A,'B),bool),bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) (#GSPEC:fun(fun(fun('A,'B),bool),fun(fun('A,'B),bool)) (\GEN%PVAR%372:fun('A,'B). (#?:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (((#SETSPEC:fun(fun('A,'B),fun(bool,fun(fun('A,'B),bool))) GEN%PVAR%372:fun('A,'B)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool)))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (#@:fun(fun('B,bool),'B) (\y:'B. #T:bool)))))))) f:fun('A,'B)))))))))))
 FUNSPACE_EMPTY =  |- ((#=:fun(fun(fun('?142996,'?143000),bool),fun(fun(fun('?142996,'?143000),bool),bool)) ((#-->:fun(fun('?142996,bool),fun(fun('?143000,bool),fun(fun('?142996,'?143000),bool))) #EMPTY:fun('?142996,bool)) t:fun('?143000,bool))) ((#INSERT:fun(fun('?142996,'?143000),fun(fun(fun('?142996,'?143000),bool),fun(fun('?142996,'?143000),bool))) (\x:'?142996. (#@:fun(fun('?143000,bool),'?143000) (\y:'?143000. #T:bool)))) #EMPTY:fun(fun('?142996,'?143000),bool)))
 HAS_SIZE_FUNSPACE =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) s:fun('A,bool)) m:num)) ((#HAS_SIZE:fun(fun('B,bool),fun(num,bool)) t:fun('B,bool)) n:num))) ((#HAS_SIZE:fun(fun(fun('A,'B),bool),fun(num,bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) ((#EXP:fun(num,fun(num,num)) n:num) m:num)))))))))))

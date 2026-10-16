@@ -6673,13 +6673,13 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..11..35..72..124..190..270..solved at 290
 Rqe/defs quotations (28):
-  !s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)
+  forall s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)
   Unknown
   Nonzero
   Neg
   Pos
   Zero
-  (interpsign set ply Zero = (!x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (!x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (!x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (!x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (!x. set x ==> (ply x = ply x)))
+  (interpsign set ply Zero = (forall x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (forall x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (forall x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (forall x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (forall x. set x ==> (ply x = ply x)))
   interpsign
   interpsigns polyl set signl = ALL2 (interpsign set) polyl signl
   a /\\ T <=> a

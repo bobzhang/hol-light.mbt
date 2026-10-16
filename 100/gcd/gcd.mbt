@@ -45,7 +45,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.once_rewrite_tac(@list.List([egcd()]))
   let t1 = @wf.wf_induct_tac(@parser.parse_term("m + n"))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t1), @tactics.gen_tac), t2), t3), t4), t5), t6), @class.cond_cases_tac), t17), t18)
-  egcd_invariant_c.set(@tactics.prove(@parser.parse_term("!m n d. d divides egcd(m,n) <=> d divides m /\\ d divides n"), t19))
+  egcd_invariant_c.set(@tactics.prove(@parser.parse_term("forall m n d. d divides egcd(m,n) <=> d divides m /\\ d divides n"), t19))
 }
 
 ///|
@@ -62,7 +62,7 @@ pub fn egcd_invariant() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([egcd_invariant(), @prime.divides_refl()]))
   let t21 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@prime.gcd_unique())])), t20)
-  egcd_gcd_c.set(@tactics.prove(@parser.parse_term("!m n. egcd(m,n) = gcd(m,n)"), t21))
+  egcd_gcd_c.set(@tactics.prove(@parser.parse_term("forall m n. egcd(m,n) = gcd(m,n)"), t21))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn egcd_gcd() -> @kernel.Thm {
 /// EGCD
 fn step_4() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([egcd_gcd(), @int.gcd()]))
-  egcd_v1_c.set(@tactics.prove(@parser.parse_term("!a b. (egcd (a,b) divides a /\\ egcd (a,b) divides b) /\\\n         (!e. e divides a /\\ e divides b ==> e divides egcd (a,b))"), t22))
+  egcd_v1_c.set(@tactics.prove(@parser.parse_term("forall a b. (egcd (a,b) divides a /\\ egcd (a,b) divides b) /\\\n         (forall e. e divides a /\\ e divides b ==> e divides egcd (a,b))"), t22))
 }
 
 ///|

@@ -26983,9 +26983,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|0..0..1..solved at 4
       #|0..0..solved at 5
       #|Jordan/jordan_curve_theorem quotations (59532):
-      #|  !x y. &0 <= x /\\ x <= y ==> sqrt x <= sqrt y
-      #|  !x y. &0 <= x /\\ x < y ==> sqrt x < sqrt y
-      #|  !x y. &0 <= x /\\ &0 <= y ==> (sqrt x < sqrt y <=> x < y)
+      #|  forall x y. &0 <= x /\\ x <= y ==> sqrt x <= sqrt y
+      #|  forall x y. &0 <= x /\\ x < y ==> sqrt x < sqrt y
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> (sqrt x < sqrt y <=> x < y)
       #|  real_add:real->real->real
       #|  real_sub:real->real->real
       #|  real_mul:real->real->real
@@ -26999,28 +26999,28 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_inv:real->real
       #|  real_abs:real->real
       #|  real_of_num:num->real
-      #|  !x (i:A) (j:B). (x = (i,j)) <=> ((FST x = i) /\\ (SND x = j))
-      #|  !x (y:A#B). (x = y) <=> ((FST x = FST y) /\\ (SND x = SND y))
-      #|  !(a:A) U. ( ~({a} INTER U = EMPTY) <=> U a)
+      #|  forall x (i:A) (j:B). (x = (i,j)) <=> ((FST x = i) /\\ (SND x = j))
+      #|  forall x (y:A#B). (x = y) <=> ((FST x = FST y) /\\ (SND x = SND y))
+      #|  forall(a:A) U. ( ~({a} INTER U = EMPTY) <=> U a)
       #|  {X,Y} Y
-      #|  !(X:A->bool) Y. (X INTER Y) = (INTERS {X,Y})
+      #|  forall(X:A->bool) Y. (X INTER Y) = (INTERS {X,Y})
       #|  A (CHOICE A)
-      #|  !(A:(A->bool)->bool). ~(A =EMPTY) ==>\n     (UNIONS A = (UNIONS (A DELETE CHOICE A)) UNION (CHOICE A))
+      #|  forall(A:(A->bool)->bool). ~(A =EMPTY) ==>\n     (UNIONS A = (UNIONS (A DELETE CHOICE A)) UNION (CHOICE A))
       #|  A (CHOICE A)
-      #|  !(A:(A->bool)) (f:A->B). ~(A= EMPTY) ==>\n     (IMAGE f A =\n        ((IMAGE f (A DELETE CHOICE A)) UNION {(f (CHOICE A))}))
-      #|  !(A:(A->bool)->bool) B.\n    UNIONS (A UNION B) = (UNIONS A) UNION (UNIONS B)
-      #|  !x. (&.0 < x) ==> (&.0 < x/(&.2)) /\\ (x/(&.2)) < x
+      #|  forall(A:(A->bool)) (f:A->B). ~(A= EMPTY) ==>\n     (IMAGE f A =\n        ((IMAGE f (A DELETE CHOICE A)) UNION {(f (CHOICE A))}))
+      #|  forall(A:(A->bool)->bool) B.\n    UNIONS (A UNION B) = (UNIONS A) UNION (UNIONS B)
+      #|  forall x. (&.0 < x) ==> (&.0 < x/(&.2)) /\\ (x/(&.2)) < x
       #|  y
       #|  x
       #|  y
       #|  x
-      #|  !S T. (convex S) /\\ (convex T) ==> (convex (S INTER T))
-      #|  !U (A:A->bool) B. (topology_ U) /\\ (closed_ U A) /\\ (closed_ U B) ==>\n   (closed_ U (A INTER B))
+      #|  forall S T. (convex S) /\\ (convex T) ==> (convex (S INTER T))
+      #|  forall U (A:A->bool) B. (topology_ U) /\\ (closed_ U A) /\\ (closed_ U B) ==>\n   (closed_ U (A INTER B))
       #|  {B | (B SUBSET UNIONS U /\\ open_ U (UNIONS U DIFF B)) /\\ X SUBSET B} = EMPTY 
-      #|  !U (X:A->bool). ~(X SUBSET UNIONS U) ==> (closure U X = UNIV)
+      #|  forall U (X:A->bool). ~(X SUBSET UNIONS U) ==> (closure U X = UNIV)
       #|  Y SUBSET UNIONS  U
       #|  X SUBSET UNIONS  U
-      #|  !(X:A->bool) Y U.\n   (topology_ U)\n    ==> ((closure U (X INTER Y) SUBSET\n   (closure U X) INTER closure U Y))
+      #|  forall(X:A->bool) Y U.\n   (topology_ U)\n    ==> ((closure U (X INTER Y) SUBSET\n   (closure U X) INTER closure U Y))
       #|  z
       #|  r
       #|  u
@@ -27029,46 +27029,46 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  &.1
       #|  x
-      #|  {a | !r. (&.0 < r) ==> (?z. (Z z /\\ open_ball(X,d) a r z))}
+      #|  {a | forall r. (&.0 < r) ==> (?z. (Z z /\\ open_ball(X,d) a r z))}
       #|  topology_ (top_of_metric(X,d)) /\\ (Z SUBSET (UNIONS (top_of_metric (X,d))))
-      #|  !(X:A->bool) d Z .\n    ((metric_space(X,d)) /\\ (Z SUBSET X)) ==>\n     (({a | !r. (&.0 < r) ==> (?z. (Z z /\\ open_ball(X,d) a r z))}\n         = closure (top_of_metric(X,d)) Z))
+      #|  forall(X:A->bool) d Z .\n    ((metric_space(X,d)) /\\ (Z SUBSET X)) ==>\n     (({a | forall r. (&.0 < r) ==> (?z. (Z z /\\ open_ball(X,d) a r z))}\n         = closure (top_of_metric(X,d)) Z))
       #|  TAGB
       #|  TAGB
       #|  UNIONS U DIFF (A UNION B) = (UNIONS U DIFF A) INTER  (UNIONS U DIFF B)
-      #|  !U (A:A->bool) B. (topology_ U) /\\ (closed_ U A) /\\ (closed_ U B) ==>\n     (closed_ U (A UNION B))
-      #|  !x. (&.0 *# x) = (euclid0)
-      #|  !x. (x - euclid0) = x
+      #|  forall U (A:A->bool) B. (topology_ U) /\\ (closed_ U A) /\\ (closed_ U B) ==>\n     (closed_ U (A UNION B))
+      #|  forall x. (&.0 *# x) = (euclid0)
+      #|  forall x. (x - euclid0) = x
       #|  &.0
       #|  t
-      #|  !t x. (euclidean x) ==> (norm (t *# x) = abs(t) * norm x)
+      #|  forall t x. (euclidean x) ==> (norm (t *# x) = abs(t) * norm x)
       #|  closed_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <=. b) }
       #|  open_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <. b) }
       #|  hyperplane n v b =\n  {z | (euclid n z) /\\ (dot v z = b) }
-      #|  !n v b. (closed_half_space n v b SUBSET euclid n)
-      #|  !n v b. (open_half_space n v b SUBSET euclid n)
-      #|  !n v b. (hyperplane n v b SUBSET euclid n)
+      #|  forall n v b. (closed_half_space n v b SUBSET euclid n)
+      #|  forall n v b. (open_half_space n v b SUBSET euclid n)
+      #|  forall n v b. (hyperplane n v b SUBSET euclid n)
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b r. ( &.0 < r) /\\ (euclid n v) ==>\n   (closed_half_space n (r *# v) (r * b) = closed_half_space n v b)
+      #|  forall n v b r. ( &.0 < r) /\\ (euclid n v) ==>\n   (closed_half_space n (r *# v) (r * b) = closed_half_space n v b)
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b r. ( &.0 < r) /\\ (euclid n v) ==>\n   (open_half_space n (r *# v) (r * b) = open_half_space n v b)
+      #|  forall n v b r. ( &.0 < r) /\\ (euclid n v) ==>\n   (open_half_space n (r *# v) (r * b) = open_half_space n v b)
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b r. ~( r = &.0) /\\ (euclid n v) ==>\n   (hyperplane n (r *# v) (r * b)= hyperplane n v  b)
+      #|  forall n v b r. ~( r = &.0) /\\ (euclid n v) ==>\n   (hyperplane n (r *# v) (r * b)= hyperplane n v  b)
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b. (euclid n v) ==>\n     ((euclid n) DIFF (open_half_space n v b) =\n       (closed_half_space n (-- v) (--. b)))
+      #|  forall n v b. (euclid n v) ==>\n     ((euclid n) DIFF (open_half_space n v b) =\n       (closed_half_space n (-- v) (--. b)))
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b. (euclid n v) ==>\n     ((euclid n) DIFF (closed_half_space n v b) =\n       (open_half_space n (-- v) (--. b)))
+      #|  forall n v b. (euclid n v) ==>\n     ((euclid n) DIFF (closed_half_space n v b) =\n       (open_half_space n (-- v) (--. b)))
       #|  (C ==> (a <=> b)) ==> ((C /\\ a) <=> (C /\\ b))
-      #|  !n v b. (euclid n v) ==>\n    (closed_half_space n v b INTER closed_half_space n (-- v) (--b) =\n    hyperplane n v b)
+      #|  forall n v b. (euclid n v) ==>\n    (closed_half_space n v b INTER closed_half_space n (-- v) (--b) =\n    hyperplane n v b)
       #|  ~(&.0 = a) /\\ (&.0 <= a) ==> (&.0 < a)
       #|  b = a * b + ((&.1)* b - a* b)
       #|  &.0 = a
       #|  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
-      #|  !n v b. (euclid n v) ==> (convex (open_half_space n v b))
+      #|  forall n v b. (euclid n v) ==> (convex (open_half_space n v b))
       #|  (a <= &.1) ==> (&.0 <= (&1-a))
       #|  b = a * b + ((&.1)* b - a* b)
       #|  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
-      #|  !n v b. (euclid n v) ==> (convex (closed_half_space n v b))
-      #|  !n v b. (euclid n v) ==> convex(hyperplane n v b)
+      #|  forall n v b. (euclid n v) ==> (convex (closed_half_space n v b))
+      #|  forall n v b. (euclid n v) ==> convex(hyperplane n v b)
       #|  ||. u <=. C ==> (u <=. C)
       #|  n
       #|  (norm v)*. (d_euclid a x)
@@ -27080,9 +27080,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &.0 < (norm v)
       #|  (b - (dot v a))/(norm v)
       #|  v = euclid0
-      #|  !n v b. (euclid n v) ==>\n    (top_of_metric(euclid n,d_euclid)) (open_half_space n v b)
-      #|  !n v b. (euclid n v) ==>\n     closed_ (top_of_metric(euclid n,d_euclid))\n      (closed_half_space n v b)
-      #|  !n v b. (euclid n v) ==>\n     closed_ (top_of_metric(euclid n,d_euclid))\n     (hyperplane n v b)
+      #|  forall n v b. (euclid n v) ==>\n    (top_of_metric(euclid n,d_euclid)) (open_half_space n v b)
+      #|  forall n v b. (euclid n v) ==>\n     closed_ (top_of_metric(euclid n,d_euclid))\n      (closed_half_space n v b)
+      #|  forall n v b. (euclid n v) ==>\n     closed_ (top_of_metric(euclid n,d_euclid))\n     (hyperplane n v b)
       #|  &.0 < x ==> ~(x = &.0)
       #|  ((r / &2) / norm v) * norm v = r/(&.2)
       #|  &.0 < t ==> &.0 <= t
@@ -27097,18 +27097,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u = x - (t)*# v
       #|  t = ((r/(&.2))/(norm v ))
       #|  a < b ==> a <=. b
-      #|  !n v b. (euclid n v) /\\ (~(v = euclid0)) ==>\n   ((closure (top_of_metric(euclid n,d_euclid))\n    (open_half_space n v b)) = (closed_half_space n v b))
+      #|  forall n v b. (euclid n v) /\\ (~(v = euclid0)) ==>\n   ((closure (top_of_metric(euclid n,d_euclid))\n    (open_half_space n v b)) = (closed_half_space n v b))
       #|  ~(B SUBSET UNIONS U)
       #|  B:A->bool
       #|  (B SUBSET (UNIONS U))
       #|  (A SUBSET (UNIONS U))
-      #|  !(A:A->bool) B U. (topology_ U) /\\ (A SUBSET B) ==>\n    (closure U A SUBSET closure U B)
+      #|  forall(A:A->bool) B U. (topology_ U) /\\ (A SUBSET B) ==>\n    (closure U A SUBSET closure U B)
       #|  (A SUBSET closure U A) /\\ (B SUBSET closure U B)
       #|  (~)
       #|  B SUBSET UNIONS U
       #|  A SUBSET UNIONS U
-      #|  !(A:A->bool)  B U. (topology_ U) ==>\n    (closure U (A UNION B) = (closure U A) UNION (closure U B))
-      #|  !U. (topology_ U) ==> (closure U (EMPTY:A->bool) = EMPTY)
+      #|  forall(A:A->bool)  B U. (topology_ U) ==>\n    (closure U (A UNION B) = (closure U A) UNION (closure U B))
+      #|  forall U. (topology_ U) ==> (closure U (EMPTY:A->bool) = EMPTY)
       #|  (IMAGE  (closure U) A) = (IMAGE (closure U) (A DELETE CHOICE A) UNION {(closure U (CHOICE A))})
       #|  UNIONS A = (UNIONS (A DELETE CHOICE A)) UNION (CHOICE A)
       #|  A (CHOICE A)
@@ -27119,25 +27119,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  n
       #|  A
       #|  n = CARD A
-      #|  !(A:(A->bool)->bool) U. (topology_ U) /\\ (FINITE A) ==>\n    (closure U (UNIONS A) = UNIONS (IMAGE (closure U) A))
+      #|  forall(A:(A->bool)->bool) U. (topology_ U) /\\ (FINITE A) ==>\n    (closure U (UNIONS A) = UNIONS (IMAGE (closure U) A))
       #|  x
       #|  y
       #|  x
-      #|  !X d (x:A) y. (metric_space(X,d) /\\ (X x) /\\ (X y)) ==>\n   ((d x y = &.0) <=> (x = y))
+      #|  forall X d (x:A) y. (metric_space(X,d) /\\ (X x) /\\ (X y)) ==>\n   ((d x y = &.0) <=> (x = y))
       #|  y
       #|  x
       #|  d_euclid
       #|  euclid n
-      #|  !n x y. (euclid n x) /\\ (euclid n y)  ==>\n    ((d_euclid x y = &.0) <=> (x = y))
+      #|  forall n x y. (euclid n x) /\\ (euclid n y)  ==>\n    ((d_euclid x y = &.0) <=> (x = y))
       #|  &.0 <= x /\\ ~(x = &.0) ==> (&.0 < x)
-      #|  !x y n. ~(x = y) /\\ euclid n x /\\ euclid n y ==> &0 <. d_euclid x y
+      #|  forall x y n. ~(x = y) /\\ euclid n x /\\ euclid n y ==> &0 <. d_euclid x y
       #|  &0 < t /\\ t <= &1
       #|  v = (euclid_plus (t *# x) ((&1 - t) *# y))
       #|  t
       #|  ~(&.2 = &.0)
       #|  y = ((&.2) *# ((t *# x) + (&.1 - t)*# y)) - x
       #|  t = &.1/(&.2)
-      #|  !n x y. (euclid n x) /\\\n   (!t. (&.0 <. t) /\\ (t <=. &.1) ==>\n         (euclid n (t *# x + (&.1 - t)*# y)))\n     ==>\n   (euclid n y)
+      #|  forall n x y. (euclid n x) /\\\n   (forall t. (&.0 <. t) /\\ (t <=. &.1) ==>\n         (euclid n (t *# x + (&.1 - t)*# y)))\n     ==>\n   (euclid n y)
       #|  b= y x'
       #|  a = x x'
       #|  y = (&.2)*# u - (&.1) *# v
@@ -27148,7 +27148,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid n u
       #|  v = (&.2/(&.3))*# x + (&.1 - (&.2/(&.3))) *# y
       #|  u = (&.1/(&.3))*# x + (&.1 - (&.1/(&.3))) *# y
-      #|  !n x y. (!t . (&.0 < t) /\\ (t < &.1) ==>\n    (euclid n (t *# x + (&.1-t)*# y))) ==> (euclid n x) /\\ (euclid n y)
+      #|  forall n x y. (forall t . (&.0 < t) /\\ (t < &.1) ==>\n    (euclid n (t *# x + (&.1-t)*# y))) ==> (euclid n x) /\\ (euclid n y)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -28001,7 +28001,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C SUBSET (closure (top_of_metric (euclid n,d_euclid)) C)
       #|  x = y
       #|  euclid n x /\\ (euclid n y)
-      #|  !C n x y. (C SUBSET (euclid n)) /\\\n      (!t. (&.0 < t) /\\ (t < &.1) ==> (C (t *# x + (&.1-t)*# y))) ==>\n      (closure (top_of_metric(euclid n,d_euclid)) C y)
+      #|  forall C n x y. (C SUBSET (euclid n)) /\\\n      (forall t. (&.0 < t) /\\ (t < &.1) ==> (C (t *# x + (&.1-t)*# y))) ==>\n      (closure (top_of_metric(euclid n,d_euclid)) C y)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -28219,12 +28219,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( *. )
       #|  point z =\n   (FST z) *# (dirac_delta 0) + (SND z) *# (dirac_delta 1)
       #|  dest_pt p =\n   @u.  p = point u
-      #|  !x y. point(x,y) = x *# (dirac_delta 0) + y *# (dirac_delta 1)
+      #|  forall x y. point(x,y) = x *# (dirac_delta 0) + y *# (dirac_delta 1)
       #|  ~(1=0) /\\ ~(0=1)
-      #|  !p. (point p 0 = FST p) /\\ (point p 1 = SND p)
+      #|  forall p. (point p 0 = FST p) /\\ (point p 1 = SND p)
       #|  (2 <=| m) ==> (~(0=m) /\\ (~(1=m)))
-      #|  !p. euclid 2 (point p)
-      #|  !p q. (point p = point q) <=> (p = q)
+      #|  forall p. euclid 2 (point p)
+      #|  forall p q. (point p = point q) <=> (p = q)
       #|  0
       #|  1
       #|  (2 <=| x) ==> (~(0=x)/\\ ~(1=x))
@@ -28232,20 +28232,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (0=x) ==> ~(1=x)
       #|  (0 = x) \\/ ( 1 = x) \\/ (2 <= x)
       #|  (v 0 ,v 1)
-      #|  !v. (euclid 2 v) ==> ?p. (v = point p)
-      #|  !p. dest_pt(point p) = p
-      #|  !v. (euclid 2 v) <=> (point (dest_pt v) = v)
+      #|  forall v. (euclid 2 v) ==> ?p. (v = point p)
+      #|  forall p. dest_pt(point p) = p
+      #|  forall v. (euclid 2 v) <=> (point (dest_pt v) = v)
       #|  SND z
       #|  FST z
-      #|  !Q z. (?u v. (point z = point (u,v)) /\\ (Q z u v)) <=> (Q z (FST z) (SND z))
+      #|  forall Q z. (?u v. (point z = point (u,v)) /\\ (Q z u v)) <=> (Q z (FST z) (SND z))
       #|  pointI p =\n   point(real_of_int (FST p),real_of_int (SND p))
-      #|  !p. (convex {(pointI p)})
+      #|  forall p. (convex {(pointI p)})
       #|  euclid 2 (a *# (point p) + (b *# (point q)))
-      #|  !p q a b. (?r. (a *# (point p) + (b *# (point q)) = (point r)))
-      #|  !a u v. a *# (point (u,v)) = point(a* u,a* v)
-      #|  !u v u' v'. (point(u,v))+(point(u',v')) = (point(u+u',v+v'))
+      #|  forall p q a b. (?r. (a *# (point p) + (b *# (point q)) = (point r)))
+      #|  forall a u v. a *# (point (u,v)) = point(a* u,a* v)
+      #|  forall u v u' v'. (point(u,v))+(point(u',v')) = (point(u+u',v+v'))
       #|  floor x =\n   @m. (real_of_int m <=. x /\\ (x < (real_of_int (m + &:1))))
-      #|  !m. (real_of_int (m + &:1) = real_of_int m + &.1)
+      #|  forall m. (real_of_int (m + &:1) = real_of_int m + &.1)
       #|  --: (&:(n+| 1))
       #|  -- (&:n)
       #|  &.n = --x
@@ -28255,94 +28255,94 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  &.0 <= x
       #|  &.1
-      #|  !x. (real_of_int (floor x) <=. x) /\\ (x <. (real_of_int (floor x)) + &.1)
+      #|  forall x. (real_of_int (floor x) <=. x) /\\ (x <. (real_of_int (floor x)) + &.1)
       #|  TAGB
       #|  TAGB
       #|  (/\\)
       #|  n:int
       #|  m:int
-      #|  !m n. (n <=: m) /\\ (m <: (n +: (&:1))) <=> (n = m)
+      #|  forall m n. (n <=: m) /\\ (m <: (n +: (&:1))) <=> (n = m)
       #|  floor (real_of_int m) <=: m /\\ (m <: (floor (real_of_int m)) + (&:1))
-      #|  !m. (floor (real_of_int m) = m)
+      #|  forall m. (floor (real_of_int m) = m)
       #|  (+:)
       #|  n:int
       #|  m:int
-      #|  !m n. m <: n + &:1 <=> m <=: n
+      #|  forall m n. m <: n + &:1 <=> m <=: n
       #|  x:real
-      #|  !m x. (real_of_int m <=. x) <=> (m <=: (floor x))
+      #|  forall m x. (real_of_int m <=. x) <=> (m <=: (floor x))
       #|  x:real
       #|  x:real
-      #|  !m x. (x < real_of_int m + &.1) <=> (floor x <=: m)
+      #|  forall m x. (x < real_of_int m + &.1) <=> (floor x <=: m)
       #|  x:real
-      #|  !x y. (x <=. y) ==> (floor x <=: floor y)
+      #|  forall x y. (x <=. y) ==> (floor x <=: floor y)
       #|  real_of_int m + x
       #|  &:1
       #|  z:int
-      #|  !a b. (b <=: a /\\ ~(b <: a)) ==> (a = b)
-      #|  !m x. ((&.0 <=. x) /\\ (x <. &.1)) ==> (floor (real_of_int(m) + x) = m)
-      #|  !x m. (floor x = m) <=> (real_of_int m <=. x /\\ x <. real_of_int m +. &.1)
+      #|  forall a b. (b <=: a /\\ ~(b <: a)) ==> (a = b)
+      #|  forall m x. ((&.0 <=. x) /\\ (x <. &.1)) ==> (floor (real_of_int(m) + x) = m)
+      #|  forall x m. (floor x = m) <=> (real_of_int m <=. x /\\ x <. real_of_int m +. &.1)
       #|  h_edge p =\n   { Z  | ?u v. (Z = point(u,v)) /\\\n    (real_of_int (FST p) <. u) /\\ (u <. (real_of_int ((FST p)+: (&:1)))) /\\\n       (v = real_of_int (SND p)) }
       #|  v_edge p =\n   { Z  | ?u v. (Z = point(u,v)) /\\\n    (real_of_int (SND p) <. v) /\\ (v <. (real_of_int ((SND p) +: (&:1)))) /\\\n       (u = real_of_int (FST p)) }
       #|  squ p =\n   {Z | ?u v. (Z = point(u,v)) /\\\n    (real_of_int (FST p) <. u) /\\ (u <. (real_of_int ((FST p) +: (&:1)))) /\\\n    (real_of_int (SND p) <. v) /\\ (v <. (real_of_int ((SND p) +: (&:1)))) }
       #|  row k = {Z | ?u . (Z = point(u,real_of_int k))}
       #|  col k = {Z | ?v . (Z = point(real_of_int k ,v))}
-      #|  !p q. (pointI p = pointI q) <=> (p = q) 
+      #|  forall p q. (pointI p = pointI q) <=> (p = q) 
       #|  u
-      #|  !p . h_edge p  SUBSET  row (SND p) 
-      #|  !p. h_edge p SUBSET { z | floor (z 0)  = FST p }
-      #|  !a b. ~((row a) INTER (row b) = EMPTY) <=> (a = b)
+      #|  forall p . h_edge p  SUBSET  row (SND p) 
+      #|  forall p. h_edge p SUBSET { z | floor (z 0)  = FST p }
+      #|  forall a b. ~((row a) INTER (row b) = EMPTY) <=> (a = b)
       #|  point (real_of_int (FST q) + x,real_of_int (SND q))
       #|  real_of_int (SND q)
       #|  real_of_int (FST q) + x
       #|  &.1/(&.2)
       #|  ?x. (&.0 < x ) /\\ (x < &.1)
-      #|  !p q. ~(h_edge p INTER h_edge q = EMPTY) <=> (p = q)
+      #|  forall p q. ~(h_edge p INTER h_edge q = EMPTY) <=> (p = q)
       #|  TAGB
       #|  TAGB
-      #|  !p q. ~(h_edge p (pointI q))
+      #|  forall p q. ~(h_edge p (pointI q))
       #|  v
-      #|  !p . v_edge p  SUBSET  col (FST p) 
-      #|  !p. v_edge p SUBSET { z | floor (z 1)  = SND  p }
-      #|  !a b. ~((col a) INTER (col b) = EMPTY) <=> (a = b)
+      #|  forall p . v_edge p  SUBSET  col (FST p) 
+      #|  forall p. v_edge p SUBSET { z | floor (z 1)  = SND  p }
+      #|  forall a b. ~((col a) INTER (col b) = EMPTY) <=> (a = b)
       #|  point (real_of_int (FST q),real_of_int (SND q) +x)
       #|  real_of_int (FST  q)
       #|  real_of_int (SND q) + x
       #|  &.1/(&.2)
       #|  ?x. (&.0 < x ) /\\ (x < &.1)
       #|  a /\\ b ==> b/\\ a
-      #|  !p q. ~(v_edge p INTER v_edge q = EMPTY) <=> (p = q)
+      #|  forall p q. ~(v_edge p INTER v_edge q = EMPTY) <=> (p = q)
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !p q. ~(v_edge p (pointI q))
-      #|  !a b. (row b INTER col a) = { (pointI(a,b)) }
+      #|  forall p q. ~(v_edge p (pointI q))
+      #|  forall a b. (row b INTER col a) = { (pointI(a,b)) }
       #|  u
       #|  h_edge p INTER v_edge q SUBSET (row (SND p)) INTER (col (FST q))
-      #|  !p q. h_edge p INTER v_edge q = EMPTY
-      #|  !p a. (squ p INTER col a) = EMPTY 
-      #|  !p a. (squ p INTER row a) = EMPTY 
-      #|  !p.   (row (SND p)) (pointI p)
-      #|  !p.   (col (FST p)) (pointI p)
+      #|  forall p q. h_edge p INTER v_edge q = EMPTY
+      #|  forall p a. (squ p INTER col a) = EMPTY 
+      #|  forall p a. (squ p INTER row a) = EMPTY 
+      #|  forall p.   (row (SND p)) (pointI p)
+      #|  forall p.   (col (FST p)) (pointI p)
       #|  squ p INTER v_edge q SUBSET squ p INTER col (FST q)
-      #|  !p q. (squ p INTER v_edge q = EMPTY)
+      #|  forall p q. (squ p INTER v_edge q = EMPTY)
       #|  squ p INTER h_edge q SUBSET squ p INTER row (SND  q)
-      #|  !p q. (squ p INTER h_edge q = EMPTY)
+      #|  forall p q. (squ p INTER h_edge q = EMPTY)
       #|  pointI q
       #|  (a ==> ~b) ==> (b ==> ~ a)
       #|  FST q
       #|  p
       #|  q
-      #|  !p q. ~(squ p (pointI q))
-      #|  !p. (squ p SUBSET { z | (floor (z 0)) = (FST p) })
-      #|  !p. (squ p SUBSET { z | (floor (z 1)) = (SND p) })
+      #|  forall p q. ~(squ p (pointI q))
+      #|  forall p. (squ p SUBSET { z | (floor (z 0)) = (FST p) })
+      #|  forall p. (squ p SUBSET { z | (floor (z 1)) = (SND p) })
       #|  p = q
-      #|  !p q. ~(squ p INTER squ q = {}) ==> (squ p = squ q)
+      #|  forall p q. ~(squ p INTER squ q = {}) ==> (squ p = squ q)
       #|  &.0 < &.1/(&.2) /\\ (&.1/(&.2)) < &.1
       #|  a' = real_of_int(SND  q)
       #|  a = real_of_int(FST q)
       #|  real_of_int (SND q) + (&.1/(&.2))
       #|  real_of_int (FST q) + (&.1/(&.2))
-      #|  !p q. ~(squ p INTER squ q = EMPTY) <=> (p = q)
+      #|  forall p q. ~(squ p INTER squ q = EMPTY) <=> (p = q)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -28352,77 +28352,77 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  cell =\n  {z | (?p. (z = { (pointI p) }) \\/ (z = h_edge p) \\/\n              (z = v_edge p) \\/ (z = squ p))}
-      #|  !p. cell {(pointI p)} /\\ (cell (h_edge p)) /\\\n      (cell (v_edge p)) /\\ (cell (squ p))
-      #|  !C. (cell C) <=> (?p. C = ({(pointI p)})) \\/ (?p. C = h_edge p) \\/\n    (?p. C = v_edge p) \\/ (?p. C = squ p)
+      #|  forall p. cell {(pointI p)} /\\ (cell (h_edge p)) /\\\n      (cell (v_edge p)) /\\ (cell (squ p))
+      #|  forall C. (cell C) <=> (?p. C = ({(pointI p)})) \\/ (?p. C = h_edge p) \\/\n    (?p. C = v_edge p) \\/ (?p. C = squ p)
       #|  (a <= b) <=> ((a = b) \\/ (a < b))
       #|  SND z
       #|  FST z
-      #|  !z.  (let (p = (floor(FST z),floor(SND z))) in\n       (({(pointI p)} UNION\n        (h_edge p) UNION\n        (v_edge p) UNION\n        (squ p) ))) (point z) 
-      #|  !z. (let (p = (floor(FST z),floor(SND z))) in\n       (({(pointI p)} UNION\n        (h_edge p) UNION\n        (v_edge p) UNION\n        (squ p) ))) SUBSET (UNIONS cell) 
-      #|  !z. (UNIONS cell (point z))
+      #|  forall z.  (let (p = (floor(FST z),floor(SND z))) in\n       (({(pointI p)} UNION\n        (h_edge p) UNION\n        (v_edge p) UNION\n        (squ p) ))) (point z) 
+      #|  forall z. (let (p = (floor(FST z),floor(SND z))) in\n       (({(pointI p)} UNION\n        (h_edge p) UNION\n        (v_edge p) UNION\n        (squ p) ))) SUBSET (UNIONS cell) 
+      #|  forall z. (UNIONS cell (point z))
       #|  (INTER)
       #|  ((a /\\ b) ==> C) <=> (a ==> b ==> C)
       #|  ((a \\/ b ==> C)) <=> ((a ==> C) /\\ (b ==> C))
-      #|  !C D. (cell C) /\\ (cell D) /\\ ~(C INTER D = EMPTY) ==> (C = D)
+      #|  forall C D. (cell C) /\\ (cell D) /\\ ~(C INTER D = EMPTY) ==> (C = D)
       #|  top2 = top_of_metric (euclid 2,d_euclid)
       #|  adj X Y <=> (~(X = Y) /\\\n   ~(closure top2 X INTER (closure top2 Y) = EMPTY))
       #|  strict_dom X Y <=> (cell X) /\\ (cell Y) /\\\n  (closure top2 Y PSUBSET (closure top2 X))
-      #|  !X Y. (adj X Y) <=> (adj Y X)
-      #|  !X. (~(adj X X))
-      #|  !X Y Z. (strict_dom X Y) /\\ (strict_dom Y Z) ==> (strict_dom X Z)
-      #|  !X. ~(strict_dom X X)
+      #|  forall X Y. (adj X Y) <=> (adj Y X)
+      #|  forall X. (~(adj X X))
+      #|  forall X Y Z. (strict_dom X Y) /\\ (strict_dom Y Z) ==> (strict_dom X Z)
+      #|  forall X. ~(strict_dom X X)
       #|  SUC 0 = 1
       #|  1 = SUC 0
       #|  2 = SUC 1
       #|  dot (point p) (point q) = sum (0,2) (\\i. (point p i)*(point q i))
-      #|  !p q . (dot (point p) (point q)) = (FST p)*(FST q) + (SND p)*(SND q)
-      #|  !r. { z | ?p. ((z = point p) /\\ (FST p <. r))  } =\n     open_half_space 2 (point (&.1,&.0)) r 
-      #|  !r. { z | ?p. ((z = point p) /\\ (r <. FST p ))  } =\n     open_half_space 2 (point (--. (&.1),&.0)) (--. r) 
-      #|  !r. { z | ?p. ((z = point p) /\\ (SND p <. r ))  } =\n     open_half_space 2 (point (&.0,&.1)) ( r) 
-      #|  !r. { z | ?p. ((z = point p) /\\ (r <. SND p  ))  } =\n     open_half_space 2 (point (&.0,--.(&.1))) (--. r) 
-      #|  !r. { z | ?p. ((z = point p) /\\ (FST p <=. r))  } =\n     closed_half_space 2 (point (&.1,&.0)) r 
-      #|  !r. { z | ?p. ((z = point p) /\\ (r <=. FST p))  } =\n     closed_half_space 2 (point (--.(&.1),&.0)) (--. r) 
-      #|  !r. { z | ?p. ((z = point p) /\\ (SND p <=. r))  } =\n     closed_half_space 2 (point (&.0,&.1)) r 
-      #|  !r. { z | ?p. ((z = point p) /\\ (r <=. SND p ))  } =\n     closed_half_space 2 (point (&.0,(--. (&.1)))) (--. r) 
-      #|  !r. { z | ?p. ((z = point p) /\\ (FST p = r))  } =\n     hyperplane 2 (point (&.1,&.0)) r 
-      #|  !r. { z | ?p. ((z = point p) /\\ (SND p = r))  } =\n     hyperplane 2 (point (&.0,&.1)) r 
-      #|  !r. top2 { z | ?p. ((z = point p) /\\ (FST p <. r))  }
-      #|  !r. top2 { z | ?p. ((z = point p) /\\ (r <. FST p ))  }
-      #|  !r. top2 { z | ?p. ((z = point p) /\\ (SND p <. r  ))  }
-      #|  !r. top2 { z | ?p. ((z = point p) /\\ (r <. SND p   ))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (FST p <=. r))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (r <=. FST p ))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (SND p <=. r  ))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (r <=. SND p   ))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (FST p = r))  }
-      #|  !r. closed_ top2 { z | ?p. ((z = point p) /\\ (SND p = r))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (FST p <. r))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (r <. FST p ))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (SND p <. r))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (r <. SND p ))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (FST p <=. r))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (r <=. FST p ))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (SND p <=. r))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (r <=. SND p ))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ ( FST p = r ))  }
-      #|  !r. convex { z | ?p. ((z = point p) /\\ (SND p = r))  }
+      #|  forall p q . (dot (point p) (point q)) = (FST p)*(FST q) + (SND p)*(SND q)
+      #|  forall r. { z | ?p. ((z = point p) /\\ (FST p <. r))  } =\n     open_half_space 2 (point (&.1,&.0)) r 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (r <. FST p ))  } =\n     open_half_space 2 (point (--. (&.1),&.0)) (--. r) 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (SND p <. r ))  } =\n     open_half_space 2 (point (&.0,&.1)) ( r) 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (r <. SND p  ))  } =\n     open_half_space 2 (point (&.0,--.(&.1))) (--. r) 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (FST p <=. r))  } =\n     closed_half_space 2 (point (&.1,&.0)) r 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (r <=. FST p))  } =\n     closed_half_space 2 (point (--.(&.1),&.0)) (--. r) 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (SND p <=. r))  } =\n     closed_half_space 2 (point (&.0,&.1)) r 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (r <=. SND p ))  } =\n     closed_half_space 2 (point (&.0,(--. (&.1)))) (--. r) 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (FST p = r))  } =\n     hyperplane 2 (point (&.1,&.0)) r 
+      #|  forall r. { z | ?p. ((z = point p) /\\ (SND p = r))  } =\n     hyperplane 2 (point (&.0,&.1)) r 
+      #|  forall r. top2 { z | ?p. ((z = point p) /\\ (FST p <. r))  }
+      #|  forall r. top2 { z | ?p. ((z = point p) /\\ (r <. FST p ))  }
+      #|  forall r. top2 { z | ?p. ((z = point p) /\\ (SND p <. r  ))  }
+      #|  forall r. top2 { z | ?p. ((z = point p) /\\ (r <. SND p   ))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (FST p <=. r))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (r <=. FST p ))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (SND p <=. r  ))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (r <=. SND p   ))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (FST p = r))  }
+      #|  forall r. closed_ top2 { z | ?p. ((z = point p) /\\ (SND p = r))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (FST p <. r))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (r <. FST p ))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (SND p <. r))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (r <. SND p ))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (FST p <=. r))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (r <=. FST p ))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (SND p <=. r))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (r <=. SND p ))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ ( FST p = r ))  }
+      #|  forall r. convex { z | ?p. ((z = point p) /\\ (SND p = r))  }
       #|  ~(&.1= &.0)
       #|  ~(point(&.1,&.0) = euclid0)
-      #|  !r. (closure top2 { z | ?p. ((z = point p) /\\ (FST p <. r))  } =\n       { z | ?p. ((z = point p) /\\ (FST p <=. r))  })
+      #|  forall r. (closure top2 { z | ?p. ((z = point p) /\\ (FST p <. r))  } =\n       { z | ?p. ((z = point p) /\\ (FST p <=. r))  })
       #|  0
       #|  ~(--. (&.1)= &.0)
       #|  ~(point(--. (&.1),&.0) = euclid0)
-      #|  !r. (closure top2 { z | ?p. ((z = point p) /\\ (r <. FST p))  } =\n       { z | ?p. ((z = point p) /\\ (r <=. FST p ))  })
+      #|  forall r. (closure top2 { z | ?p. ((z = point p) /\\ (r <. FST p))  } =\n       { z | ?p. ((z = point p) /\\ (r <=. FST p ))  })
       #|  0
       #|  ~(&.1= &.0)
       #|  ~(point(&.0,&.1) = euclid0)
-      #|  !r. (closure top2 { z | ?p. ((z = point p) /\\ (SND  p <. r))  } =\n       { z | ?p. ((z = point p) /\\ (SND  p <=. r))  })
+      #|  forall r. (closure top2 { z | ?p. ((z = point p) /\\ (SND  p <. r))  } =\n       { z | ?p. ((z = point p) /\\ (SND  p <=. r))  })
       #|  1
       #|  ~(--. (&.1)= &.0)
       #|  ~(point(&.0, --. (&.1)) = euclid0)
-      #|  !r. (closure top2 { z | ?p. ((z = point p) /\\ (r <. SND  p))  } =\n       { z | ?p. ((z = point p) /\\ (r <=. SND  p ))  })
+      #|  forall r. (closure top2 { z | ?p. ((z = point p) /\\ (r <. SND  p))  } =\n       { z | ?p. ((z = point p) /\\ (r <=. SND  p ))  })
       #|  1
-      #|  !(x:A) A. ({x} SUBSET A) <=> (A x)
+      #|  forall(x:A) A. ({x} SUBSET A) <=> (A x)
       #|  topology_ top2  
       #|  e1 = point(&.1,&.0)
       #|  e2 = point(&.0,&.1)
@@ -28431,26 +28431,26 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SND  p
       #|  FST p
       #|  (u,real_of_int(SND m))
-      #|  !m. (h_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (FST  m) <. FST p)}\n      INTER {z | ?p. (z = point p) /\\ (FST p <. real_of_int(FST  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (SND p = real_of_int(SND  m))})
-      #|  !m. (convex (h_edge m))
-      #|  !Q p. (?p'. ((p:A) = p') /\\ (Q p')) <=> (Q p)
-      #|  !P x y. (?u v. (((x:A) = u) /\\ ((y:B) = v)) /\\ P u v) <=> (P x y)
+      #|  forall m. (h_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (FST  m) <. FST p)}\n      INTER {z | ?p. (z = point p) /\\ (FST p <. real_of_int(FST  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (SND p = real_of_int(SND  m))})
+      #|  forall m. (convex (h_edge m))
+      #|  forall Q p. (?p'. ((p:A) = p') /\\ (Q p')) <=> (Q p)
+      #|  forall P x y. (?u v. (((x:A) = u) /\\ ((y:B) = v)) /\\ P u v) <=> (P x y)
       #|  x <=. x+ &.1
       #|  (real_of_int(FST m) + &.1,real_of_int(SND m))
       #|  x <=. x+ &.1
       #|  (real_of_int(FST m),real_of_int(SND m))
       #|  a < b ==> a <=. b
-      #|  !m. (hc_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (FST  m) <=. FST p)}\n      INTER {z | ?p. (z = point p) /\\ (FST p <=. real_of_int(FST  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (SND p = real_of_int(SND  m))})
-      #|  !m. (closed_ top2 (hc_edge m))
-      #|  !m. (convex (hc_edge m))
-      #|  !m. (h_edge m SUBSET hc_edge m)
-      #|  !m. (h_edge m) SUBSET (euclid 2)
+      #|  forall m. (hc_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (FST  m) <=. FST p)}\n      INTER {z | ?p. (z = point p) /\\ (FST p <=. real_of_int(FST  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (SND p = real_of_int(SND  m))})
+      #|  forall m. (closed_ top2 (hc_edge m))
+      #|  forall m. (convex (hc_edge m))
+      #|  forall m. (h_edge m SUBSET hc_edge m)
+      #|  forall m. (h_edge m) SUBSET (euclid 2)
       #|  a = real_of_int(FST m)
       #|  pointI m
       #|  a = real_of_int(FST m)
       #|  (pointI m)+point(&.1,&.0)
-      #|  !t u. t*u +. (&.1- t)*u = u
-      #|  !m. (closure top2 (h_edge m)) = hc_edge m
+      #|  forall t u. t*u +. (&.1- t)*u = u
+      #|  forall m. (closure top2 (h_edge m)) = hc_edge m
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -28478,8 +28478,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  (x = 0) \\/ (x = 1) \\/ (2 <= x)
-      #|  !z u v. (z = point(u,v)) <=> (u = z 0) /\\ (v = z 1) /\\ (euclid 2 z)
-      #|  !m. (v_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (SND   m) <. SND  p)}\n      INTER {z | ?p. (z = point p) /\\ (SND  p <. real_of_int(SND  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (FST p = real_of_int(FST  m))})
+      #|  forall z u v. (z = point(u,v)) <=> (u = z 0) /\\ (v = z 1) /\\ (euclid 2 z)
+      #|  forall m. (v_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (SND   m) <. SND  p)}\n      INTER {z | ?p. (z = point p) /\\ (SND  p <. real_of_int(SND  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (FST p = real_of_int(FST  m))})
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -28519,25 +28519,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !m. (convex (v_edge m))
-      #|  !Q p. (?p'. ((p:A) = p') /\\ (Q p')) <=> (Q p)
-      #|  !P x y. (?u v. (((x:A) = u) /\\ ((y:B) = v)) /\\ P u v) <=> (P x y)
+      #|  forall m. (convex (v_edge m))
+      #|  forall Q p. (?p'. ((p:A) = p') /\\ (Q p')) <=> (Q p)
+      #|  forall P x y. (?u v. (((x:A) = u) /\\ ((y:B) = v)) /\\ P u v) <=> (P x y)
       #|  x <=. x+ &.1
       #|  (real_of_int(FST m) ,real_of_int(SND m) + &.1)
       #|  x <=. x+ &.1
       #|  (real_of_int(FST m),real_of_int(SND m))
       #|  a < b ==> a <=. b
-      #|  !m. (vc_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (SND   m) <=. SND  p)}\n      INTER {z | ?p. (z = point p) /\\ (SND p <=. real_of_int(SND  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (FST  p = real_of_int(FST   m))})
-      #|  !m. (closed_ top2 (vc_edge m))
-      #|  !m. (convex (vc_edge m))
-      #|  !m. (v_edge m SUBSET vc_edge m)
-      #|  !m. (v_edge m) SUBSET (euclid 2)
+      #|  forall m. (vc_edge m) =\n   ({z | ?p. (z = point p) /\\ (real_of_int (SND   m) <=. SND  p)}\n      INTER {z | ?p. (z = point p) /\\ (SND p <=. real_of_int(SND  m +: &:1))}\n      INTER {z | ?p. (z = point p) /\\ (FST  p = real_of_int(FST   m))})
+      #|  forall m. (closed_ top2 (vc_edge m))
+      #|  forall m. (convex (vc_edge m))
+      #|  forall m. (v_edge m SUBSET vc_edge m)
+      #|  forall m. (v_edge m) SUBSET (euclid 2)
       #|  a = real_of_int(FST m)
       #|  pointI m
       #|  a = real_of_int(FST m)
       #|  (pointI m)+point(&.0,&.1)
-      #|  !t u. t*u +. (&.1- t)*u = u
-      #|  !m. (closure top2 (v_edge m)) = vc_edge m
+      #|  forall t u. t*u +. (&.1- t)*u = u
+      #|  forall m. (closure top2 (v_edge m)) = vc_edge m
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -28564,50 +28564,50 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !m. (squ m) SUBSET (euclid 2)
-      #|  !X. (cell X) ==> (X SUBSET euclid 2)
+      #|  forall m. (squ m) SUBSET (euclid 2)
+      #|  forall X. (cell X) ==> (X SUBSET euclid 2)
       #|  edge C <=> ?m. ((C = v_edge m) \\/ (C = h_edge m))
-      #|  !m. edge (v_edge m)
-      #|  !m. edge (h_edge m)
+      #|  forall m. edge (v_edge m)
+      #|  forall m. edge (h_edge m)
       #|  num_closure G x =\n      CARD { C | (G C) /\\ (closure top2 C x) }
       #|  num_lower G n =\n   CARD { m | (G (h_edge m)) /\\ (FST m = FST n) /\\ (SND m <=: SND n) }
       #|  set_lower G n =\n    { m | (G (h_edge m)) /\\ (FST m = FST n) /\\ (SND m <=: SND n) }
-      #|  !G n. num_lower G n = CARD (set_lower G n)
+      #|  forall G n. num_lower G n = CARD (set_lower G n)
       #|  even_cell G C <=>\n   (?m. (C = {(pointI m)}) /\\ (EVEN (num_lower G m))) \\/\n   (?m. (C = h_edge m) /\\ (EVEN (num_lower G m))) \\/\n   (?m. (C = v_edge m) /\\ (EVEN (num_lower G m))) \\/\n   (?m. (C = squ m) /\\ (EVEN (num_lower G m)))
-      #|  !X (y:A). (X = {y}) <=> ((X y) /\\ (!u. (X u) ==> (u=y)))
-      #|  !p q. ~(h_edge p = {(pointI q)})
-      #|  !p q. ~(v_edge p = {(pointI q)})
-      #|  !p q. ~(squ p = {(pointI q)})
-      #|  !z. (cell z) ==> ~(z = EMPTY)
-      #|  !p q. ~(h_edge p = v_edge q)
-      #|  !p q. ~(squ p = v_edge q)
-      #|  !p q. ~(squ p = h_edge q)
-      #|  !p q . (h_edge p = h_edge q) <=> (p = q)
-      #|  !p q . (v_edge p = v_edge q) <=> (p = q)
-      #|  !p q . (squ p = squ q) <=> (p = q)
+      #|  forall X (y:A). (X = {y}) <=> ((X y) /\\ (forall u. (X u) ==> (u=y)))
+      #|  forall p q. ~(h_edge p = {(pointI q)})
+      #|  forall p q. ~(v_edge p = {(pointI q)})
+      #|  forall p q. ~(squ p = {(pointI q)})
+      #|  forall z. (cell z) ==> ~(z = EMPTY)
+      #|  forall p q. ~(h_edge p = v_edge q)
+      #|  forall p q. ~(squ p = v_edge q)
+      #|  forall p q. ~(squ p = h_edge q)
+      #|  forall p q . (h_edge p = h_edge q) <=> (p = q)
+      #|  forall p q . (v_edge p = v_edge q) <=> (p = q)
+      #|  forall p q . (squ p = squ q) <=> (p = q)
       #|  INJ h_edge (set_lower G n) G
-      #|  !G n. (FINITE G) ==> (FINITE (set_lower G n))
-      #|  !G m. even_cell G {(pointI m)} <=> EVEN(num_lower G m)
-      #|  !G m. even_cell G (h_edge m) <=> EVEN(num_lower G m)
-      #|  !G m. even_cell G (v_edge m) <=> EVEN(num_lower G m)
-      #|  !G m. even_cell G (squ m) <=> EVEN(num_lower G m)
-      #|  !G m. even_cell G (h_edge m) <=> even_cell G (squ m)
+      #|  forall G n. (FINITE G) ==> (FINITE (set_lower G n))
+      #|  forall G m. even_cell G {(pointI m)} <=> EVEN(num_lower G m)
+      #|  forall G m. even_cell G (h_edge m) <=> EVEN(num_lower G m)
+      #|  forall G m. even_cell G (v_edge m) <=> EVEN(num_lower G m)
+      #|  forall G m. even_cell G (squ m) <=> EVEN(num_lower G m)
+      #|  forall G m. even_cell G (h_edge m) <=> even_cell G (squ m)
       #|  up (m:int#int) = (FST m,SND m +: (&:1))
       #|  down (m:int#int) = (FST m,SND m -: (&:1))
       #|  left (m:int#int) = (FST m -: (&:1),SND m)
       #|  right (m:int#int) = (FST m +: (&:1),SND m)
-      #|  ! x y. (x <. y) <=> ((x <= y) /\\ ~(x = y))
-      #|  !G n. set_lower G (down n) = (set_lower G n) DELETE n
-      #|  !G n. set_lower G n n = (G (h_edge n))
+      #|  forall x y. (x <. y) <=> ((x <= y) /\\ ~(x = y))
+      #|  forall G n. set_lower G (down n) = (set_lower G n) DELETE n
+      #|  forall G n. set_lower G n n = (G (h_edge n))
       #|  b = s DELETE x
       #|  s = (x INSERT (s DELETE x))
-      #|  !(x:A) s. FINITE s /\\ s x ==>\n    ((SUC (CARD (s DELETE x))) = CARD s)
+      #|  forall(x:A) s. FINITE s /\\ s x ==>\n    ((SUC (CARD (s DELETE x))) = CARD s)
       #|  s x
-      #|  !(x:A) s. FINITE s ==>\n     ((EVEN (CARD (s DELETE x)) <=> EVEN (CARD s)) <=> ~(s x))
-      #|  !G m. (FINITE G) ==>\n       ((EVEN (num_lower G (down m)) <=> EVEN (num_lower G m)) <=>\n           ~(set_lower G m m))
-      #|  !G m. (FINITE G) ==>\n        ((even_cell G (squ (down m)) <=> even_cell G (squ m)) <=>\n             ~(set_lower G m m))
+      #|  forall(x:A) s. FINITE s ==>\n     ((EVEN (CARD (s DELETE x)) <=> EVEN (CARD s)) <=> ~(s x))
+      #|  forall G m. (FINITE G) ==>\n       ((EVEN (num_lower G (down m)) <=> EVEN (num_lower G m)) <=>\n           ~(set_lower G m m))
+      #|  forall G m. (FINITE G) ==>\n        ((even_cell G (squ (down m)) <=> even_cell G (squ m)) <=>\n             ~(set_lower G m m))
       #|  2 = SUC 1
-      #|  !(a:A) b. ~(a= b) ==> ({a, b} HAS_SIZE 2)
+      #|  forall(a:A) b. ~(a= b) ==> ({a, b} HAS_SIZE 2)
       #|  ~((u DELETE CHOICE u) (CHOICE u))
       #|  (u DELETE (CHOICE u)) x
       #|  x
@@ -28615,52 +28615,52 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u DELETE CHOICE u HAS_SIZE 1
       #|  CARD (u DELETE CHOICE u) = 1
       #|  ~(u = EMPTY)
-      #|  !u. (u HAS_SIZE 2) <=> (?(a:A) b. (u = {a , b}) /\\ ~(a=b))
-      #|  !(a:A) b t. {a , b} t <=> (t = b) \\/ (t = a)
+      #|  forall u. (u HAS_SIZE 2) <=> (?(a:A) b. (u = {a , b}) /\\ ~(a=b))
+      #|  forall(a:A) b t. {a , b} t <=> (t = b) \\/ (t = a)
       #|  pair_swap u (x:A) = @y. ~(x = y) /\\ (u y)
-      #|  !(a:A) b. ~(a = b) ==>\n       (pair_swap {a,b} a = b) /\\ (pair_swap {a,b} b = a)
-      #|  !u (x:A). (u HAS_SIZE 2)/\\ (u x) ==>\n         (~(pair_swap u x = x)) /\\ (u (pair_swap u x))
-      #|  !u (x:A). (u HAS_SIZE 2) /\\ (u x) ==>\n       (pair_swap u (pair_swap u x) = x)
-      #|  rectagon G <=>\n  (FINITE G) /\\ ~(G = EMPTY ) /\\ (G SUBSET edge) /\\\n      (!m . ({0,2} (num_closure G (pointI m)))) /\\\n      (!S. ((S SUBSET G) /\\ ~(S = EMPTY) /\\\n        (!C C'. (S C) /\\ (G C') /\\ (adj C C') ==> (S C'))) ==>\n        (S = G))
-      #|  segment G <=>\n  (FINITE G) /\\ ~(G = EMPTY ) /\\ (G SUBSET edge) /\\\n      (!m . ({0,1,2} (num_closure G (pointI m)))) /\\\n      (!S. ((S SUBSET G) /\\ ~(S = EMPTY) /\\\n        (!C C'. (S C) /\\ (G C') /\\ (adj C C') ==> (S C'))) ==>\n        (S = G))
+      #|  forall(a:A) b. ~(a = b) ==>\n       (pair_swap {a,b} a = b) /\\ (pair_swap {a,b} b = a)
+      #|  forall u (x:A). (u HAS_SIZE 2)/\\ (u x) ==>\n         (~(pair_swap u x = x)) /\\ (u (pair_swap u x))
+      #|  forall u (x:A). (u HAS_SIZE 2) /\\ (u x) ==>\n       (pair_swap u (pair_swap u x) = x)
+      #|  rectagon G <=>\n  (FINITE G) /\\ ~(G = EMPTY ) /\\ (G SUBSET edge) /\\\n      (forall m . ({0,2} (num_closure G (pointI m)))) /\\\n      (forall S. ((S SUBSET G) /\\ ~(S = EMPTY) /\\\n        (forall C C'. (S C) /\\ (G C') /\\ (adj C C') ==> (S C'))) ==>\n        (S = G))
+      #|  segment G <=>\n  (FINITE G) /\\ ~(G = EMPTY ) /\\ (G SUBSET edge) /\\\n      (forall m . ({0,1,2} (num_closure G (pointI m)))) /\\\n      (forall S. ((S SUBSET G) /\\ ~(S = EMPTY) /\\\n        (forall C C'. (S C) /\\ (G C') /\\ (adj C C') ==> (S C'))) ==>\n        (S = G))
       #|  psegment G <=>\n   segment G /\\ ~(rectagon G)
-      #|  !G. (rectagon G ) ==> (segment G)
+      #|  forall G. (rectagon G ) ==> (segment G)
       #|  endpoint G m <=>\n  (num_closure G (pointI m) = 1)
       #|  midpoint G m <=>\n  (num_closure G (pointI m) = 2)
       #|  m
-      #|  !G. (psegment G) ==> (?m. (endpoint G m))
+      #|  forall G. (psegment G) ==> (?m. (endpoint G m))
       #|  TAGB
       #|  (~(1=2)) /\\ ~(1=0)
-      #|  !G. (rectagon G) ==> ~(?m. (endpoint G m))
+      #|  forall G. (rectagon G) ==> ~(?m. (endpoint G m))
       #|  G'
-      #|  !G G' x. (FINITE G') /\\ (G SUBSET G') ==>\n       (num_closure G x <= num_closure G' x)
-      #|  !G. (?m. (endpoint G m)) /\\ (segment G) ==> (psegment G)
+      #|  forall G G' x. (FINITE G') /\\ (G SUBSET G') ==>\n       (num_closure G x <= num_closure G' x)
+      #|  forall G. (?m. (endpoint G m)) /\\ (segment G) ==> (psegment G)
       #|  G
-      #|  !G x. FINITE G ==>\n     ({C | G C /\\ closure top2 C x} HAS_SIZE (num_closure G x) )
+      #|  forall G x. FINITE G ==>\n     ({C | G C /\\ closure top2 C x} HAS_SIZE (num_closure G x) )
       #|  {C | G C /\\ closure top2 C (pointI m)} HAS_SIZE 1
-      #|  !G m.  (FINITE G) /\\ (endpoint G m) ==> (?! e. (G e) /\\\n     (closure top2 e (pointI m)))
-      #|  !G m. (FINITE G) /\\ (midpoint G m) ==>\n     {C | G C /\\ closure top2 C (pointI m)} HAS_SIZE 2
+      #|  forall G m.  (FINITE G) /\\ (endpoint G m) ==> (?! e. (G e) /\\\n     (closure top2 e (pointI m)))
+      #|  forall G m. (FINITE G) /\\ (midpoint G m) ==>\n     {C | G C /\\ closure top2 C (pointI m)} HAS_SIZE 2
       #|  euclid_plus (pointI m) e1 = pointI (FST m +: (&:1),SND m )
       #|  (FST m +: (&:1),SND m )
       #|  m
       #|  euclid_plus (pointI m) e2 = pointI (FST m,SND m +: (&:1))
       #|  (FST m,SND m +: (&:1))
       #|  m
-      #|  !e. (edge e) ==> ({ m | (closure top2 e (pointI m)) } HAS_SIZE 2)
+      #|  forall e. (edge e) ==> ({ m | (closure top2 e (pointI m)) } HAS_SIZE 2)
       #|  e
       #|  pointI m
       #|  ~(num_closure G (pointI m) = 0)
       #|  m
-      #|  !G e m. (segment G) /\\ (G e) /\\ (closure top2 e (pointI m)) ==>\n      (midpoint G m) \\/ (endpoint G m)
-      #|  !m. ((pointI m) + e2 = pointI (FST m,SND m +: (&:1))) /\\\n      ((pointI m) + e1 = pointI (FST m +: (&:1),SND m))
-      #|  !e. (edge e) ==> (closure top2 e) SUBSET (euclid 2)
+      #|  forall G e m. (segment G) /\\ (G e) /\\ (closure top2 e (pointI m)) ==>\n      (midpoint G m) \\/ (endpoint G m)
+      #|  forall m. ((pointI m) + e2 = pointI (FST m,SND m +: (&:1))) /\\\n      ((pointI m) + e1 = pointI (FST m +: (&:1),SND m))
+      #|  forall e. (edge e) ==> (closure top2 e) SUBSET (euclid 2)
       #|  (point p)
       #|  (closure)
       #|  (~)
       #|  p
       #|  euclid 2 x
-      #|  !x e e'. (edge e) /\\ (edge e') /\\ (~(e=e')) /\\\n    ((closure top2 e INTER closure top2 e') x) ==>\n       (?m. x = pointI m)
-      #|  !e. (edge e) ==> (convex (closure top2 e))
+      #|  forall x e e'. (edge e) /\\ (edge e') /\\ (~(e=e')) /\\\n    ((closure top2 e INTER closure top2 e') x) ==>\n       (?m. x = pointI m)
+      #|  forall e. (edge e) ==> (convex (closure top2 e))
       #|  ((&1 / &2) * b + &1 / &2 * (b + &1)) + (&1 / &2) = b +. &1
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
@@ -28669,7 +28669,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  b = real_of_int(FST  m)
       #|  a = real_of_int(SND m)
-      #|  !m. (h_edge m) (((&.1)/(&.2))*# (pointI m) +\n         ((&.1)/(&.2))*# (pointI m + e1))
+      #|  forall m. (h_edge m) (((&.1)/(&.2))*# (pointI m) +\n         ((&.1)/(&.2))*# (pointI m + e1))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -29023,7 +29023,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  b = real_of_int(FST  m)
       #|  a = real_of_int(SND m)
-      #|  !m. (v_edge m) (((&.1)/(&.2))*# (pointI m) +\n         ((&.1)/(&.2))*# (pointI m + e2))
+      #|  forall m. (v_edge m) (((&.1)/(&.2))*# (pointI m) +\n         ((&.1)/(&.2))*# (pointI m + e2))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -29390,36 +29390,36 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (closure top2 e (pointI n)) /\\ closure top2 e (pointI m)
       #|  (?m. x = pointI m) /\\ (?n. y = pointI n)
       #|  convex (closure top2 e INTER closure top2 e')
-      #|  !x y e e'. (edge e) /\\ (edge e') /\\ (~(e = e')) /\\\n    ((closure top2 e INTER closure top2 e') x) /\\\n    ((closure top2 e INTER closure top2 e') y) ==>\n    ( x = y)
+      #|  forall x y e e'. (edge e) /\\ (edge e') /\\ (~(e = e')) /\\\n    ((closure top2 e INTER closure top2 e') x) /\\\n    ((closure top2 e INTER closure top2 e') y) ==>\n    ( x = y)
       #|  m
       #|  (?m. u = pointI m)
-      #|  !C C'. (edge C) /\\ (edge C') /\\ (adj C C')  ==>\n      (?m. (closure top2 C) INTER (closure top2 C') = {(pointI m)}) 
+      #|  forall C C'. (edge C) /\\ (edge C') /\\ (adj C C')  ==>\n      (?m. (closure top2 C) INTER (closure top2 C') = {(pointI m)}) 
       #|  ~(C = C')
       #|  X C /\\ X C'
       #|  X = {C | G C /\\ closure top2 C (pointI m)}
       #|  pointI m
       #|  m
-      #|  !G C C' m. (segment G) /\\ (G C) /\\ (G C') /\\ (adj C C') /\\\n      (((closure top2 C) INTER (closure top2 C')) (pointI m)) ==>\n    (midpoint G m) 
+      #|  forall G C C' m. (segment G) /\\ (G C) /\\ (G C') /\\ (adj C C') /\\\n      (((closure top2 C) INTER (closure top2 C')) (pointI m)) ==>\n    (midpoint G m) 
       #|  ~(1=2)
-      #|  !G m. ~(endpoint G m /\\ midpoint G m)
-      #|  !X p q (r:A). (X HAS_SIZE 2) /\\ (X p) /\\ (X q) /\\ (X r) /\\ (~(p = r))\n    /\\ (~(q = r)) ==> (p = q)
+      #|  forall G m. ~(endpoint G m /\\ midpoint G m)
+      #|  forall X p q (r:A). (X HAS_SIZE 2) /\\ (X p) /\\ (X q) /\\ (X r) /\\ (~(p = r))\n    /\\ (~(q = r)) ==> (p = q)
       #|  (pointI m)
       #|  endpoint G m
       #|  m
       #|  (?m. (closure top2 e) INTER (closure top2 C') = {(pointI m)})
       #|  {e}
-      #|  !m. (closure top2 e (pointI m)) ==> (endpoint G m)
-      #|  !G e. (segment G) /\\ (G e) /\\ (~(G = {e})) ==>\n      (?m. (closure top2 e (pointI m)) /\\ (midpoint G m))
+      #|  forall m. (closure top2 e (pointI m)) ==> (endpoint G m)
+      #|  forall G e. (segment G) /\\ (G e) /\\ (~(G = {e})) ==>\n      (?m. (closure top2 e (pointI m)) /\\ (midpoint G m))
       #|  x
       #|  u
-      #|  !u x (y:A). (u HAS_SIZE 2) /\\ (u x) /\\ (u y) /\\ ~(x = y) ==>\n    (y = pair_swap u x)
+      #|  forall u x (y:A). (u HAS_SIZE 2) /\\ (u x) /\\ (u y) /\\ ~(x = y) ==>\n    (y = pair_swap u x)
       #|  A /\\ B ==> B /\\ A
       #|  X e'
       #|  X e
       #|  pointI m
       #|  X HAS_SIZE 2
       #|  X = {C | G C /\\ closure top2 C (pointI m)}
-      #|  !G e m e'. (segment G) /\\ (G e) /\\ (midpoint G m) /\\\n     (closure top2 e (pointI m)) /\\\n     (e' = pair_swap {C | G C /\\ closure top2 C (pointI m)} e) ==>\n     ({C | G C /\\ closure top2 C (pointI m)} HAS_SIZE 2) /\\\n             G e' /\\ adj e' e /\\ (closure top2 e' (pointI m)) 
+      #|  forall G e m e'. (segment G) /\\ (G e) /\\ (midpoint G m) /\\\n     (closure top2 e (pointI m)) /\\\n     (e' = pair_swap {C | G C /\\ closure top2 C (pointI m)} e) ==>\n     ({C | G C /\\ closure top2 C (pointI m)} HAS_SIZE 2) /\\\n             G e' /\\ adj e' e /\\ (closure top2 e' (pointI m)) 
       #|  e'' = pair_swap X e
       #|  closure top2 (pair_swap X e) (pointI m')
       #|  X (pair_swap X e)
@@ -29445,13 +29445,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI m'
       #|  FINITE G
       #|  (?m. (closure top2 e (pointI m)) /\\ (midpoint G m))
-      #|  !G e m. (segment G) /\\ (G e) /\\ (~(G = {e})) /\\\n     (endpoint G m) /\\ (closure top2 e (pointI m))\n     ==>\n       (?! e'. (G e') /\\ (adj e e')) 
+      #|  forall G e m. (segment G) /\\ (G e) /\\ (~(G = {e})) /\\\n     (endpoint G m) /\\ (closure top2 e (pointI m))\n     ==>\n       (?! e'. (G e') /\\ (adj e e')) 
       #|  {C | (C = e) /\\ closure top2 C (pointI m)} = {}
       #|  closure top2 e (pointI m)
       #|  h_edge m
       #|  v_edge m
       #|  m
-      #|  !e. (edge e) ==> (psegment {e})
+      #|  forall e. (edge e) ==> (psegment {e})
       #|  e'
       #|  G C /\\ adj e C
       #|  C
@@ -29473,18 +29473,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  m'
       #|  num_closure (G DELETE e) (pointI m')  <=| (num_closure G (pointI m'))
       #|  ~G e
-      #|  !G e m. (segment G) /\\ (endpoint G m) /\\\n        (closure top2 e (pointI m)) /\\ (~(G = {e}))\n                ==> (segment (G DELETE e))
+      #|  forall G e m. (segment G) /\\ (endpoint G m) /\\\n        (closure top2 e (pointI m)) /\\ (~(G = {e}))\n                ==> (segment (G DELETE e))
       #|  other_end e m =\n  pair_swap {m | closure top2 e (pointI m)} m
       #|  X (pair_swap X m)
       #|  X m
       #|  X = {m | closure top2 e (pointI m)}
-      #|  !e m. (edge e) /\\ (closure top2 e (pointI m))==>\n   (closure top2 e (pointI (other_end e m))) /\\\n      (~(other_end e m = m)) /\\\n      (other_end e (other_end e m) = m)
+      #|  forall e m. (edge e) /\\ (closure top2 e (pointI m))==>\n   (closure top2 e (pointI (other_end e m))) /\\\n      (~(other_end e m = m)) /\\\n      (other_end e (other_end e m) = m)
       #|  x = e
       #|  e
       #|  G
       #|  FINITE {C | G C /\\ closure top2 C p}
       #|  {C | (G DELETE e) C /\\ closure top2 C p} = {C | G C /\\ closure top2 C p} DELETE e
-      #|  !G e p. (FINITE G) ==> ((num_closure (G DELETE e) p) =\n    (if ((G e) /\\ (closure top2 e p)) then ((num_closure G p) -| 1)\n       else (num_closure G p)))
+      #|  forall G e p. (FINITE G) ==> ((num_closure (G DELETE e) p) =\n    (if ((G e) /\\ (closure top2 e p)) then ((num_closure G p) -| 1)\n       else (num_closure G p)))
       #|  (x = 2) ==> (x -| 1 = 1)
       #|  x = m'
       #|  X m /\\ X m' /\\ X x /\\ (~(x = m)) /\\ (~(m = m'))
@@ -29497,7 +29497,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  X = {m | closure top2 e (pointI m)}
       #|  edge e
       #|  FINITE G
-      #|  !G m e. (psegment G) /\\ (endpoint G m) /\\ (G e) /\\\n        (closure top2 e (pointI m)) /\\ (~(G = {e})) ==>\n     (endpoint (G DELETE e) =\n       (((other_end e m) INSERT (endpoint G)) DELETE m))
+      #|  forall G m e. (psegment G) /\\ (endpoint G m) /\\ (G e) /\\\n        (closure top2 e (pointI m)) /\\ (~(G = {e})) ==>\n     (endpoint (G DELETE e) =\n       (((other_end e m) INSERT (endpoint G)) DELETE m))
       #|  X m /\\ X m' /\\ X (other_end e m) /\\ (~(m=m')) /\\ (~(m= other_end e m)) /\\ (~(m'=other_end e m))
       #|  X HAS_SIZE 2
       #|  X = { m | closure top2 e (pointI m) }
@@ -29520,53 +29520,53 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE G
       #|  (?m. (endpoint G m))
       #|  ?n. G HAS_SIZE n
-      #|  (!n G. (psegment G) /\\ (G HAS_SIZE n) ==> (endpoint G HAS_SIZE 2)) ==> (!G. (psegment G) ==> endpoint G HAS_SIZE 2)
-      #|  !G. (psegment G) ==> (endpoint G HAS_SIZE 2)
+      #|  (forall n G. (psegment G) /\\ (G HAS_SIZE n) ==> (endpoint G HAS_SIZE 2)) ==> (forall G. (psegment G) ==> endpoint G HAS_SIZE 2)
+      #|  forall G. (psegment G) ==> (endpoint G HAS_SIZE 2)
       #|  TAGB
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !(x:A). {x} HAS_SIZE 1
+      #|  forall(x:A). {x} HAS_SIZE 1
       #|  e
       #|  {C | G C /\\ closure top2 C x} = {e}
       #|  x'
       #|  t = num_closure G x
       #|  x
-      #|  !G x. (FINITE G) ==>\n       ((num_closure G (x) = 1) <=>\n          (?e. (!e'. (G e' /\\ (closure top2 e' (x))) <=> (e = e'))))
-      #|  inductive_set G S <=>\n   S SUBSET G /\\\n              ~(S = {}) /\\\n              (!C C'. S C /\\ G C' /\\ adj C C' ==> S C')
-      #|  !G. (~(G = EMPTY )) ==> (inductive_set G G)
+      #|  forall G x. (FINITE G) ==>\n       ((num_closure G (x) = 1) <=>\n          (?e. (forall e'. (G e' /\\ (closure top2 e' (x))) <=> (e = e'))))
+      #|  inductive_set G S <=>\n   S SUBSET G /\\\n              ~(S = {}) /\\\n              (forall C C'. S C /\\ G C' /\\ adj C C' ==> S C')
+      #|  forall G. (~(G = EMPTY )) ==> (inductive_set G G)
       #|  u
       #|  u
       #|  G
-      #|  !T G. (T SUBSET G) /\\ (~(T = EMPTY )) ==>\n        (inductive_set G\n            (INTERS {S | (T SUBSET S) /\\ (inductive_set G S)}))
+      #|  forall T G. (T SUBSET G) /\\ (~(T = EMPTY )) ==>\n        (inductive_set G\n            (INTERS {S | (T SUBSET S) /\\ (inductive_set G S)}))
       #|  segment_of G e =\n   INTERS { S | S e /\\ inductive_set G S }
       #|  G
       #|  {e}
-      #|  !G e. (G e) ==> (inductive_set G (segment_of G e))
+      #|  forall G e. (G e) ==> (inductive_set G (segment_of G e))
       #|  G
-      #|  !G e. (G e) ==> (segment_of G e ) SUBSET G
+      #|  forall G e. (G e) ==> (segment_of G e ) SUBSET G
       #|  {S | S e /\\ inductive_set G S} = EMPTY 
-      #|  !G e. ~(G e) ==> (segment_of G e = UNIV)
-      #|  !G e. (FINITE G) /\\ (G e) ==> (FINITE (segment_of G e))
+      #|  forall G e. ~(G e) ==> (segment_of G e = UNIV)
+      #|  forall G e. (FINITE G) /\\ (G e) ==> (FINITE (segment_of G e))
       #|  G e
-      #|  !G e.  (segment_of G e e)
-      #|  !G e f. (G e) /\\ (segment_of G e f) ==>\n      (segment_of G f) SUBSET (segment_of G e)
-      #|  !G S S'. (inductive_set G S) /\\\n        (inductive_set G S') /\\ ~(S DIFF S' = {}) ==>\n        (inductive_set G (S DIFF S'))
-      #|  !A (B:A->bool). (A SUBSET B) /\\ (B DIFF A = EMPTY) ==> (A = B)
+      #|  forall G e.  (segment_of G e e)
+      #|  forall G e f. (G e) /\\ (segment_of G e f) ==>\n      (segment_of G f) SUBSET (segment_of G e)
+      #|  forall G S S'. (inductive_set G S) /\\\n        (inductive_set G S') /\\ ~(S DIFF S' = {}) ==>\n        (inductive_set G (S DIFF S'))
+      #|  forall A (B:A->bool). (A SUBSET B) /\\ (B DIFF A = EMPTY) ==> (A = B)
       #|  f
       #|  segment_of G e SUBSET X
       #|  inductive_set G (segment_of G e DIFF segment_of G f)
       #|  X e
       #|  X = (segment_of G e DIFF segment_of G f)
       #|  G f
-      #|  !G e f. (G e) /\\ (segment_of G e f) ==>\n      ((segment_of G e) = (segment_of G f))
+      #|  forall G e f. (G e) /\\ (segment_of G e f) ==>\n      ((segment_of G e) = (segment_of G f))
       #|  TAGB
       #|  segment_of P e = segment_of P u
       #|  inductive_set P S
       #|  segment_of P e = segment_of P C
       #|  R:((num->real)->bool)->bool
       #|  segment_of P C C'
-      #|  ! C C'. S C /\\ P C' /\\ adj C C' ==> S C'
+      #|  forall C C'. S C /\\ P C' /\\ adj C C' ==> S C'
       #|  m
       #|  (pointI m)
       #|  pointI m
@@ -29575,7 +29575,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G SUBSET edge
       #|  FINITE P
       #|  FINITE G
-      #|  !G P e. (segment G) /\\ (P SUBSET G) /\\ (P e) ==>\n      (segment (segment_of P e))
+      #|  forall G P e. (segment G) /\\ (P SUBSET G) /\\ (P e) ==>\n      (segment (segment_of P e))
       #|  C'
       #|  pointI m
       #|  pointI m
@@ -29591,7 +29591,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (?m. closure top2 C INTER closure top2 C' = {(pointI m)})
       #|  edge C /\\ edge C'
       #|  G
-      #|  !G S. (rectagon G) /\\ (segment S) /\\ (G SUBSET S) ==> (G = S)
+      #|  forall G S. (rectagon G) /\\ (segment S) /\\ (G SUBSET S) ==> (G = S)
       #|  ~(x + &.1 <= x)
       #|  (real_of_int(SND m'))
       #|  m'
@@ -29611,8 +29611,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE X /\\ ~(X = {})
       #|  X = {m | (G (v_edge m)) }
       #|  edge e
-      #|  !e. G e ==> (?m. (e= (v_edge m))) 
-      #|  !G. (rectagon G) ==> (?m. (G (h_edge m)))
+      #|  forall e. G e ==> (?m. (e= (v_edge m))) 
+      #|  forall G. (rectagon G) ==> (?m. (G (h_edge m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -29639,8 +29639,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE X /\\ ~(X = {})
       #|  X = {m | (G (h_edge m)) }
       #|  edge e
-      #|  !e. G e ==> (?m. (e= (h_edge m))) 
-      #|  !G. (rectagon G) ==> (?m. (G (v_edge m)))
+      #|  forall e. G e ==> (?m. (e= (h_edge m))) 
+      #|  forall G. (rectagon G) ==> (?m. (G (v_edge m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -29649,7 +29649,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  part_below G m =\n   {C | G C /\\\n          ((?n. (C = v_edge n) /\\ (SND n <=: SND m) /\\ (FST n = FST m)) \\/\n           (?n. (C = h_edge n) /\\ (SND n <=: SND m) /\\\n                 (closure top2 C (pointI (FST m,SND n))))) }
       #|  (x = y+: &:1) <=> (x -: (&:1) = y)
-      #|  !G m n. part_below G m (h_edge n) <=>\n         (set_lower G m n) \\/ (set_lower G (left m) n)
+      #|  forall G m n. part_below G m (h_edge n) <=>\n         (set_lower G m n) \\/ (set_lower G (left m) n)
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -29658,15 +29658,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !G m n. part_below G m (v_edge n) <=>\n         (G (v_edge n)) /\\ (FST n = FST m) /\\ (SND n <=: SND m)
+      #|  forall G m n. part_below G m (v_edge n) <=>\n         (G (v_edge n)) /\\ (FST n = FST m) /\\ (SND n <=: SND m)
       #|  f
       #|  n
       #|  n
       #|  f
-      #|  !(A:A->bool) n. (A HAS_SIZE n) <=> (?f. BIJ f {m | m < n} A)
+      #|  forall(A:A->bool) n. (A HAS_SIZE n) <=> (?f. BIJ f {m | m < n} A)
       #|  INV f A {m | m <| n}
       #|  INV f {m | m <| n} A
-      #|  !(A:A->bool) n. (A HAS_SIZE n) <=> (?f. BIJ f A {m | m < n})
+      #|  forall(A:A->bool) n. (A HAS_SIZE n) <=> (?f. BIJ f A {m | m < n})
       #|  FINITE B /\\ FINITE {j | j <| m}
       #|  FST x
       #|  FST x
@@ -29679,8 +29679,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  (m=0) \\/ 0 < m
       #|  b
-      #|  !b. ?g. (B b) ==> (BIJ g {u | (A u) /\\ (f u = b)} {j | j <| m})
-      #|  !(f:A->B) A B m n.  (B HAS_SIZE n) /\\ (IMAGE f A SUBSET B) /\\\n        (!b. (B b) ==> ({u | (A u) /\\ (f u = b)} HAS_SIZE m)) ==>\n           (A HAS_SIZE m*n)
+      #|  forall b. ?g. (B b) ==> (BIJ g {u | (A u) /\\ (f u = b)} {j | j <| m})
+      #|  forall(f:A->B) A B m n.  (B HAS_SIZE n) /\\ (IMAGE f A SUBSET B) /\\\n        (forall b. (B b) ==> ({u | (A u) /\\ (f u = b)} HAS_SIZE m)) ==>\n           (A HAS_SIZE m*n)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -29710,10 +29710,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !X (Y:A->bool). (FINITE X) /\\ (FINITE Y) /\\ (X INTER Y = EMPTY) ==>\n    ((EVEN (CARD X) <=> EVEN (CARD Y)) <=> (EVEN (CARD (X UNION Y))))
+      #|  forall X (Y:A->bool). (FINITE X) /\\ (FINITE Y) /\\ (X INTER Y = EMPTY) ==>\n    ((EVEN (CARD X) <=> EVEN (CARD Y)) <=> (EVEN (CARD (X UNION Y))))
       #|  terminal_edge G m =\n    @e. (G e) /\\ (closure top2 e (pointI m))
-      #|  !G m. (FINITE G) /\\ (endpoint G m)  ==> ((G (terminal_edge G m)) /\\\n          (closure top2 (terminal_edge G m) (pointI m)) ) 
-      #|  !G m e. (FINITE G) /\\ (endpoint G m) ==>\n       ( (G e) /\\ (closure top2 e (pointI m)) <=> (e = terminal_edge G m))
+      #|  forall G m. (FINITE G) /\\ (endpoint G m)  ==> ((G (terminal_edge G m)) /\\\n          (closure top2 (terminal_edge G m) (pointI m)) ) 
+      #|  forall G m e. (FINITE G) /\\ (endpoint G m) ==>\n       ( (G e) /\\ (closure top2 e (pointI m)) <=> (e = terminal_edge G m))
       #|  e' = terminal_edge P m
       #|  terminal_edge P m
       #|  e''
@@ -29730,11 +29730,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e'
       #|  e'
       #|  FINITE (segment_of P e)
-      #|  !P e m. (P e) /\\ (FINITE P) ==>\n     (endpoint P m /\\\n         (segment_of P (terminal_edge P m) = segment_of P e)\n        <=>\n        endpoint (segment_of P e) m)
+      #|  forall P e m. (P e) /\\ (FINITE P) ==>\n     (endpoint P m /\\\n         (segment_of P (terminal_edge P m) = segment_of P e)\n        <=>\n        endpoint (segment_of P e) m)
       #|  {m | endpoint P m /\\ (segment_of P (terminal_edge P m) = segment_of P e)} = endpoint (segment_of P e)
       #|  segment_of P e = G
       #|  psegment (segment_of P e)
-      #|  !P G. (segment G) /\\ (P SUBSET G) /\\ (~(rectagon P)) ==>\n    (!S. ({ S | (?e. (P e) /\\ (S = segment_of P e)) }  S) ==>\n      ({m | (endpoint P m) /\\ (segment_of P (terminal_edge P m) = S)}\n              HAS_SIZE 2))
+      #|  forall P G. (segment G) /\\ (P SUBSET G) /\\ (~(rectagon P)) ==>\n    (forall S. ({ S | (?e. (P e) /\\ (S = segment_of P e)) }  S) ==>\n      ({m | (endpoint P m) /\\ (segment_of P (terminal_edge P m) = S)}\n              HAS_SIZE 2))
       #|  FINITE P
       #|  terminal_edge P x'
       #|  {S | ?e. P e /\\ (S = segment_of P e)} = IMAGE (\\x. (segment_of P x)) P
@@ -29742,10 +29742,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  B = { S | (?e. (P e) /\\ (S = segment_of P e)) }
       #|  f =  (segment_of P) o (terminal_edge P)
-      #|  !P G. (segment G) /\\ (P SUBSET G) /\\ (~(rectagon P)) ==>\n        (endpoint P HAS_SIZE 2 *|\n           (CARD {S | (?e. (P e) /\\ (S = segment_of P e))})  )
+      #|  forall P G. (segment G) /\\ (P SUBSET G) /\\ (~(rectagon P)) ==>\n        (endpoint P HAS_SIZE 2 *|\n           (CARD {S | (?e. (P e) /\\ (S = segment_of P e))})  )
       #|  {C | G C /\\ closure top2 C x} = {}
       #|  x
-      #|  ! G x.\n     FINITE G ==> ((num_closure G x = 0) <=>\n             (!e. (G e) ==> (~(closure top2 e x))))
+      #|  forall G x.\n     FINITE G ==> ((num_closure G x = 0) <=>\n             (forall e. (G e) ==> (~(closure top2 e x))))
       #|  b
       #|  a
       #|  (?a b. (X = {a, b}) /\\ ~(a = b))
@@ -29754,7 +29754,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  b
       #|  a
       #|  x
-      #|  !G x.\n    FINITE G ==> ((num_closure G x = 2) <=>\n           (?a b. (~(a = b)) /\\\n              ((!e. (G e /\\ closure top2 e x) <=> (( e= a)\\/ (e =b))))))
+      #|  forall G x.\n    FINITE G ==> ((num_closure G x = 2) <=>\n           (?a b. (~(a = b)) /\\\n              ((forall e. (G e /\\ closure top2 e x) <=> (( e= a)\\/ (e =b))))))
       #|  G e'
       #|  e'
       #|  C
@@ -29778,39 +29778,39 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  midpoint G m
       #|  FINITE P
       #|  FINITE G
-      #|  !G P m. (rectagon G) /\\ (P SUBSET G) ==>\n        ((endpoint P m) <=>\n        (?C C'. (P C) /\\ (G C') /\\ (~(P C')) /\\ (~(C = C')) /\\\n           (closure top2 C (pointI m)) /\\ (closure top2 C' (pointI m))))
+      #|  forall G P m. (rectagon G) /\\ (P SUBSET G) ==>\n        ((endpoint P m) <=>\n        (?C C'. (P C) /\\ (G C') /\\ (~(P C')) /\\ (~(C = C')) /\\\n           (closure top2 C (pointI m)) /\\ (closure top2 C' (pointI m))))
       #|  G
-      #|  !G m. (FINITE G) ==> FINITE(part_below G m)
-      #|  !G m. (part_below G m) SUBSET G
-      #|  !m n. (closure top2 (v_edge m) (pointI n) <=>\n          ((n = m) \\/ (n = (FST m,SND m +: (&:1)))))
-      #|  !m n. (closure top2 (h_edge m) (pointI n) <=>\n          ((n = m) \\/ (n = (FST m +: (&:1),SND m ))))
+      #|  forall G m. (FINITE G) ==> FINITE(part_below G m)
+      #|  forall G m. (part_below G m) SUBSET G
+      #|  forall m n. (closure top2 (v_edge m) (pointI n) <=>\n          ((n = m) \\/ (n = (FST m,SND m +: (&:1)))))
+      #|  forall m n. (closure top2 (h_edge m) (pointI n) <=>\n          ((n = m) \\/ (n = (FST m +: (&:1),SND m ))))
       #|  m'
       #|  C'
       #|  C
       #|  edge C /\\ edge C'
       #|  e
-      #|  !e. G e /\\ closure top2 e (pointI x) <=> ((e = C) \\/ (e = C'))
+      #|  forall e. G e /\\ closure top2 e (pointI x) <=> ((e = C) \\/ (e = C'))
       #|  (C' = a) \\/ (C' = b)
       #|  C
       #|  (C = a) \\/ (C = b)
       #|  x
       #|  part_below G m SUBSET G
-      #|  !G m x.  (rectagon G) /\\\n      (endpoint (part_below G m) x)\n       ==>\n      (? C C' m'.\n          ((C = v_edge m') \\/ (C = h_edge m')) /\\\n          (edge C') /\\\n          (!e. G e /\\ closure top2 e (pointI x) <=> (e = C) \\/ (e = C')) /\\\n          (~(G = {})) /\\\n          (G SUBSET edge) /\\\n          (part_below G m C) /\\\n          (G C') /\\\n          (~part_below G m C') /\\\n          (~(C = C')) /\\\n          (closure top2 C (pointI x)) /\\\n          (closure top2 C' (pointI x)) /\\\n         (part_below G m SUBSET G) /\\\n         (endpoint (part_below G m) x))\n          
+      #|  forall G m x.  (rectagon G) /\\\n      (endpoint (part_below G m) x)\n       ==>\n      (? C C' m'.\n          ((C = v_edge m') \\/ (C = h_edge m')) /\\\n          (edge C') /\\\n          (forall e. G e /\\ closure top2 e (pointI x) <=> (e = C) \\/ (e = C')) /\\\n          (~(G = {})) /\\\n          (G SUBSET edge) /\\\n          (part_below G m C) /\\\n          (G C') /\\\n          (~part_below G m C') /\\\n          (~(C = C')) /\\\n          (closure top2 C (pointI x)) /\\\n          (closure top2 C' (pointI x)) /\\\n         (part_below G m SUBSET G) /\\\n         (endpoint (part_below G m) x))\n          
       #|  (FST m' = FST m) \\/ (FST m' = FST m -: &:1)
       #|  (FST x = FST m') \\/ (FST x = FST m' +: (&:1))
       #|  FST x = FST m'
       #|  x <=: z +: y <=> ~(z +: y <: x)
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST m <=: FST x +: &:1) 
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST m <=: FST x +: &:1) 
       #|  (FST m' = FST m) \\/ (FST m' = FST m -: &:1)
       #|  (FST x = FST m') \\/ (FST x = FST m' +: (&:1))
       #|  FST x = FST m'
       #|  x <=: z +: y <=> ~(z +: y <: x)
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST x <=: FST m +: &:1) 
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST x <=: FST m +: &:1) 
       #|  (SND m' <=: SND m)
       #|  SND x = SND m'
       #|  (SND x = SND m') \\/ (SND x = SND m' +: &:1)
       #|  x <=: z +: y <=> ~(z +: y <: x)
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (SND  x <=: SND  m +: &:1) 
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (SND  x <=: SND  m +: &:1) 
       #|  ~(SND m'' <=: SND m)
       #|  (FST m'' = FST m) \\/ (FST m'' = FST m -: &:1)
       #|  SND x = SND m'
@@ -29820,35 +29820,35 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (FST x = FST m') 
       #|  (FST m'' = FST m) /\\ (FST x = FST m'')
       #|  (SND x = SND m') \\/ (SND x = SND m' +: &:1)
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST x = FST m) ==> (SND  x = SND  m +: &:1) 
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n       (FST x = FST m) ==> (SND  x = SND  m +: &:1) 
       #|  (SND m +: &:1 = SND m') /\\ (SND m' <=: SND m)
       #|  FST m' = FST m
       #|  FST m -: &:1 = FST m'
-      #|  (! x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m -: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m -: &:1,SND m +: &:1)))
-      #|  !G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m -: &:1, SND m +: &:1))
+      #|  (forall x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m -: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m -: &:1,SND m +: &:1)))
+      #|  forall G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m -: &:1, SND m +: &:1))
       #|  (SND m +: &:1 = SND m') /\\ (SND m' <=: SND m)
       #|  FST m' = FST m
       #|  FST m -: &:1 = FST m'
-      #|  (! x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m -: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m -: &:1,SND m +: &:1)))
-      #|  !G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m -: &:1, SND m +: &:1))
+      #|  (forall x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m -: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m -: &:1,SND m +: &:1)))
+      #|  forall G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m -: &:1, SND m +: &:1))
       #|  (SND m +: &:1 = SND m') /\\ (SND m' <=: SND m)
       #|  FST m' = FST m
       #|  FST m +: &:1 = FST m'
-      #|  (! x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m +: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m +: &:1,SND m +: &:1)))
-      #|  !G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m +: &:1, SND m +: &:1))
+      #|  (forall x. (rectagon G) /\\ (endpoint (part_below G m) x) ==> ~(x = (FST m +: &:1, SND m +: &:1))) ==> (rectagon G ==> ~( endpoint (part_below G m) (FST m +: &:1,SND m +: &:1)))
+      #|  forall G m . (rectagon G) ==>\n       ~(endpoint (part_below G m) (FST m +: &:1, SND m +: &:1))
       #|  x = (FST m +: &:1, SND m + &:1)
       #|  x <=: m+ &:1 /\\ ~(x = m + &:1) ==> ( x <=: m)
       #|  x = (FST m -: &:1, SND m + &:1)
       #|  x <=: m+ &:1 /\\ ~(x = m + &:1) ==> ( x <=: m)
       #|  (FST x < FST m -: &:1) \\/ (FST x = FST m -: &:1) \\/ (FST x = FST m ) \\/ (FST x = FST m +: &:1) \\/ (FST m +: &:1 <: FST x  )
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n    ((FST x = FST m -: &:1) /\\ (SND x <=: SND  m)) \\/\n    ((FST x = FST m +: &:1) /\\ (SND x <=: SND m)) \\/\n    ((FST x = FST m) /\\ (SND x = SND m +: &:1 )) 
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n    ((FST x = FST m -: &:1) /\\ (SND x <=: SND  m)) \\/\n    ((FST x = FST m +: &:1) /\\ (SND x <=: SND m)) \\/\n    ((FST x = FST m) /\\ (SND x = SND m +: &:1 )) 
       #|  FST x = FST m +: &:1
       #|  FST x = FST m
-      #|  !G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (h_edge n) (pointI x)) /\\ (set_lower G m n ) ==>\n      (x = right  n)
+      #|  forall G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (h_edge n) (pointI x)) /\\ (set_lower G m n ) ==>\n      (x = right  n)
       #|  FST x = FST m
-      #|  !G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (h_edge n) (pointI x)) /\\\n          (set_lower G (left  m) n ) ==>\n      (x =  n)
+      #|  forall G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (h_edge n) (pointI x)) /\\\n          (set_lower G (left  m) n ) ==>\n      (x =  n)
       #|  FST x = FST m
-      #|  !G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (v_edge n) (pointI x)) /\\\n          (part_below G m (v_edge n)) ==>\n      (x = up m) /\\ (m =n)
+      #|  forall G m n x. (rectagon G) /\\ (endpoint (part_below G m) x) /\\\n      (closure top2 (v_edge n) (pointI x)) /\\\n          (part_below G m (v_edge n)) ==>\n      (x = up m) /\\ (m =n)
       #|  ( x= m' ) /\\ (y = m') 
       #|  (x = right  m') /\\ (y = right m')
       #|  (x = up m) /\\ (y = up m)
@@ -29858,16 +29858,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  closure top2 e (pointI x) /\\ closure top2 e (pointI y)
       #|  e = terminal_edge (part_below G m) x
       #|  FINITE (part_below G m)
-      #|  !G m. (rectagon G) ==>\n     (INJ (terminal_edge (part_below G m))\n         (endpoint (part_below G m)) UNIV)
-      #|  !G m e. (FINITE G) /\\\n       (!e'. (G e' /\\ (closure top2 e' (pointI m))) = (e = e')) ==>\n     (endpoint G m) /\\ (e = terminal_edge G m)
+      #|  forall G m. (rectagon G) ==>\n     (INJ (terminal_edge (part_below G m))\n         (endpoint (part_below G m)) UNIV)
+      #|  forall G m e. (FINITE G) /\\\n       (forall e'. (G e' /\\ (closure top2 e' (pointI m))) = (e = e')) ==>\n     (endpoint G m) /\\ (e = terminal_edge G m)
       #|  target_set G m =\n    { e | (?n. (e = h_edge n) /\\ (set_lower G m n)) \\/\n          (?n. (e = h_edge n) /\\ (set_lower G (left m) n)) \\/\n          ((e = v_edge m) /\\ G e)}
-      #|  !G m. target_set G m SUBSET G
-      #|  !G m. target_set G m SUBSET edge
-      #|  !G m n. target_set G m (h_edge n) <=>\n         (set_lower G m n) \\/ (set_lower G (left  m) n)
-      #|  !G m n. target_set G m (v_edge n) <=>\n        (n = m) /\\ G (v_edge n)
-      #|  !G m. (part_below G m SUBSET G)
+      #|  forall G m. target_set G m SUBSET G
+      #|  forall G m. target_set G m SUBSET edge
+      #|  forall G m n. target_set G m (h_edge n) <=>\n         (set_lower G m n) \\/ (set_lower G (left  m) n)
+      #|  forall G m n. target_set G m (v_edge n) <=>\n        (n = m) /\\ G (v_edge n)
+      #|  forall G m. (part_below G m SUBSET G)
       #|  G
-      #|  !G m. (FINITE G ==> FINITE (part_below G m))
+      #|  forall G m. (FINITE G ==> FINITE (part_below G m))
       #|  SND x = SND m +: &:1
       #|  FST x = FST m'
       #|  edge e
@@ -29875,7 +29875,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e = terminal_edge (part_below G m) x
       #|  m
       #|  FINITE G
-      #|  !G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n      (target_set G m (terminal_edge (part_below G m) x))
+      #|  forall G m x. (rectagon G) /\\ (endpoint (part_below G m) x) ==>\n      (target_set G m (terminal_edge (part_below G m) x))
       #|  edge e'
       #|    m'
       #|  ~(x +: &:1 = x)
@@ -29888,14 +29888,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (part_below G m) SUBSET G
       #|  FINITE (part_below G m)
       #|  FINITE G
-      #|  !G m e. (rectagon G) /\\ (target_set G m e) ==>\n       (?x. (endpoint (part_below G m) x) /\\\n          (e = terminal_edge (part_below G m) x))
-      #|  !t t' s (f:A->B). (INJ f s t') /\\ (t SUBSET t') /\\\n         (IMAGE f s SUBSET t) ==> (INJ f s t)
+      #|  forall G m e. (rectagon G) /\\ (target_set G m e) ==>\n       (?x. (endpoint (part_below G m) x) /\\\n          (e = terminal_edge (part_below G m) x))
+      #|  forall t t' s (f:A->B). (INJ f s t') /\\ (t SUBSET t') /\\\n         (IMAGE f s SUBSET t) ==> (INJ f s t)
       #|  UNIV:((num->real)->bool)->bool
-      #|  !G m. (rectagon G) ==>\n     (BIJ (terminal_edge (part_below G m))\n         (endpoint (part_below G m)) (target_set G m))
+      #|  forall G m. (rectagon G) ==>\n     (BIJ (terminal_edge (part_below G m))\n         (endpoint (part_below G m)) (target_set G m))
       #|  G
-      #|  !G m. (FINITE  G) ==> (FINITE (target_set G m))
+      #|  forall G m. (FINITE  G) ==> (FINITE (target_set G m))
       #|  endpoint G = {}
-      #|  !G. (rectagon G) ==> ((endpoint G) HAS_SIZE 0)
+      #|  forall G. (rectagon G) ==> ((endpoint G) HAS_SIZE 0)
       #|  segment G /\\ (P SUBSET G) /\\ ~(rectagon P)
       #|  P = part_below G m
       #|  CARD (endpoint (part_below G m)) =0
@@ -29906,30 +29906,30 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  terminal_edge (part_below G m)
       #|  CARD (endpoint(part_below G m)) = CARD (target_set G m)
-      #|  !G m. (rectagon G) ==> (EVEN (CARD (target_set G m)))
-      #|  !G m. (rectagon G) /\\ ~(G (v_edge m)) ==>\n     (BIJ h_edge (set_lower G (left  m) UNION (set_lower G m))\n           (target_set G m))
-      #|  !G m. (rectagon G) /\\ (G (v_edge m)) ==>\n     (BIJ h_edge (set_lower G (left  m) UNION\n             (set_lower G m) )\n           (target_set G m DELETE (v_edge m)))
+      #|  forall G m. (rectagon G) ==> (EVEN (CARD (target_set G m)))
+      #|  forall G m. (rectagon G) /\\ ~(G (v_edge m)) ==>\n     (BIJ h_edge (set_lower G (left  m) UNION (set_lower G m))\n           (target_set G m))
+      #|  forall G m. (rectagon G) /\\ (G (v_edge m)) ==>\n     (BIJ h_edge (set_lower G (left  m) UNION\n             (set_lower G m) )\n           (target_set G m DELETE (v_edge m)))
       #|  SUC (CARD (target_set G m DELETE (v_edge m))) = CARD (target_set G m )
       #|  target_set G m (v_edge m)
       #|  FINITE (target_set G m)
-      #|  !G m. (rectagon G) /\\ (G (v_edge m)) ==>\n         ~(EVEN(CARD (target_set G m DELETE (v_edge m))))
+      #|  forall G m. (rectagon G) /\\ (G (v_edge m)) ==>\n         ~(EVEN(CARD (target_set G m DELETE (v_edge m))))
       #|  h_edge
       #|  CARD (set_lower G (left  m) UNION (set_lower G m)) = CARD (target_set G m)
       #|  BIJ h_edge (set_lower G (left  m) UNION (set_lower G m)) (target_set G m) 
       #|  ~(z = z -: &:1)
       #|  (EVEN (CARD (set_lower G (left m))) <=> EVEN (CARD (set_lower G m))) <=> (EVEN (CARD ((set_lower G (left m)) UNION (set_lower G m))))
       #|  FINITE G
-      #|  !G m. (rectagon G) /\\ ~(G (v_edge m)) ==>\n     ((even_cell G (squ (left m)) = even_cell G(squ m)))
+      #|  forall G m. (rectagon G) /\\ ~(G (v_edge m)) ==>\n     ((even_cell G (squ (left m)) = even_cell G(squ m)))
       #|  h_edge
       #|  CARD (set_lower G (left  m) UNION (set_lower G m)) = CARD (target_set G m DELETE (v_edge m))
       #|  BIJ h_edge (set_lower G (left  m) UNION (set_lower G m)) (target_set G m DELETE (v_edge m)) 
       #|  ~(z = z -: &:1)
       #|  (EVEN (CARD (set_lower G (left m))) <=> EVEN (CARD (set_lower G m))) <=> (EVEN (CARD ((set_lower G (left m)) UNION (set_lower G m))))
       #|  FINITE G
-      #|  !G m. (rectagon G) /\\ (G (v_edge m)) ==>\n     (~(even_cell G (squ (left m)) = even_cell G(squ m)))
-      #|  !G m. (rectagon G) ==>\n       (((even_cell G (squ (left m)) = even_cell G(squ m))) <=>\n            ~(G (v_edge m)))
+      #|  forall G m. (rectagon G) /\\ (G (v_edge m)) ==>\n     (~(even_cell G (squ (left m)) = even_cell G(squ m)))
+      #|  forall G m. (rectagon G) ==>\n       (((even_cell G (squ (left m)) = even_cell G(squ m))) <=>\n            ~(G (v_edge m)))
       #|  rectangle p q =\n  {Z | ?u v. (Z = point(u,v)) /\\\n    (real_of_int (FST p ) <. u) /\\ (u <. (real_of_int (FST q ))) /\\\n    (real_of_int (SND p ) <. v) /\\ (v <. (real_of_int (SND q))) }
-      #|  !p q. rectangle p q =\n      {z | ?r. (z = point r) /\\ (real_of_int(FST p) <. FST r)} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (FST r ) <. real_of_int(FST q)} INTER\n    {z | ?r. (z = point r) /\\ (SND  r ) <. real_of_int(SND  q)}  
+      #|  forall p q. rectangle p q =\n      {z | ?r. (z = point r) /\\ (real_of_int(FST p) <. FST r)} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (FST r ) <. real_of_int(FST q)} INTER\n    {z | ?r. (z = point r) /\\ (SND  r ) <. real_of_int(SND  q)}  
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30000,50 +30000,50 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !p q. top2 (rectangle p q)
-      #|  !p q. convex (rectangle p q)
-      #|  !p. squ p = rectangle p (FST p +: &:1,SND p +: &:1)
-      #|  !p. squ p =\n   {z | ?r. (z = point r) /\\ (real_of_int(FST p) <. FST r)} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (FST r ) <. real_of_int(FST p +: &:1) } INTER\n    {z | ?r. (z = point r) /\\ (SND  r ) <. real_of_int(SND p +: &:1) }
-      #|  !(A:A->bool) B C. (B SUBSET C) ==> (B INTER A = B INTER C INTER A)
+      #|  forall p q. top2 (rectangle p q)
+      #|  forall p q. convex (rectangle p q)
+      #|  forall p. squ p = rectangle p (FST p +: &:1,SND p +: &:1)
+      #|  forall p. squ p =\n   {z | ?r. (z = point r) /\\ (real_of_int(FST p) <. FST r)} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (FST r ) <. real_of_int(FST p +: &:1) } INTER\n    {z | ?r. (z = point r) /\\ (SND  r ) <. real_of_int(SND p +: &:1) }
+      #|  forall(A:A->bool) B C. (B SUBSET C) ==> (B INTER A = B INTER C INTER A)
       #|  r
-      #|  !u. u <. u + &.1
+      #|  forall u. u <. u + &.1
       #|  x -: &:1 +: &:1 = x
-      #|  !p. squ(down p) =\n     (rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ (SND  r <. real_of_int(SND  p))}
+      #|  forall p. squ(down p) =\n     (rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ (SND  r <. real_of_int(SND  p))}
       #|  a <. b ==> (a - &.1 <. b)
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (SND p -: &:1) < SND r}
       #|  B = {z | ?r. (z = point r) /\\ real_of_int (SND p) < SND r}
-      #|  !p. squ(p) =\n     (rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( real_of_int(SND  p) <. SND  r)}
+      #|  forall p. squ(p) =\n     (rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( real_of_int(SND  p) <. SND  r)}
       #|  x - &.1 <. x /\\ x < x + &.1
-      #|  !A. B INTER C INTER D INTER A = B INTER (C INTER D) INTER A
+      #|  forall A. B INTER C INTER D INTER A = B INTER (C INTER D) INTER A
       #|  D = {z | ?r. (z = point r) /\\ SND r < real_of_int (SND q +: &:1)}
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (SND q -: &:1) < SND r}
       #|  B = {z | ?p. (z = point p) /\\ (SND p = real_of_int (SND q))}
-      #|  !q. h_edge q =\n    (rectangle (FST q , SND q -: &:1) (FST q +: &:1 , SND q +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( SND  r = real_of_int(SND  q))}
+      #|  forall q. h_edge q =\n    (rectangle (FST q , SND q -: &:1) (FST q +: &:1 , SND q +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( SND  r = real_of_int(SND  q))}
       #|  rectangle (FST p,SND p -: &:1) (FST p +: &:1,SND p +: &:1) SUBSET  {z | ?r. z = point r}
-      #|  !x y. (x <. y) \\/ (x = y) \\/ (y <. x)
+      #|  forall x y. (x <. y) \\/ (x = y) \\/ (y <. x)
       #|  ({z | ?r. (z = point r) /\\ SND r < real_of_int (SND p)} UNION  {z | ?r. (z = point r) /\\ (SND r = real_of_int (SND p))} UNION  {z | ?r. (z = point r) /\\ real_of_int (SND p) < SND r}) = {z | ?r. (z = point r)}
-      #|  !p. rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1) =\n     ((squ (down p)) UNION (h_edge p) UNION  (squ p) )
+      #|  forall p. rectangle (FST p , SND p -: &:1) (FST p +: &:1 , SND p +: &:1) =\n     ((squ (down p)) UNION (h_edge p) UNION  (squ p) )
       #|  x <. y ==> x <. y + &.1
       #|  C = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST p +: &:1)}
       #|  B = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST p)}
       #|  x -: &:1 +: &:1 = x
-      #|  !p. squ(left   p) =\n     (rectangle (FST p -: &:1 , SND p)(FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ (FST   r <. real_of_int(FST  p))}
+      #|  forall p. squ(left   p) =\n     (rectangle (FST p -: &:1 , SND p)(FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ (FST   r <. real_of_int(FST  p))}
       #|  a <. b ==> (a - &.1 <. b)
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (FST p -: &:1) < FST r}
       #|  B = {z | ?r. (z = point r) /\\ real_of_int (FST p) < FST r} 
-      #|  !p. squ(p) =\n     (rectangle (FST p -: &:1 , SND p) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( real_of_int(FST   p) <. FST   r)}
+      #|  forall p. squ(p) =\n     (rectangle (FST p -: &:1 , SND p) (FST p +: &:1 , SND p +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( real_of_int(FST   p) <. FST   r)}
       #|  x - &.1 <. x /\\ x < x + &.1
-      #|  !A. B INTER C INTER D INTER A = B INTER (C INTER D) INTER A
+      #|  forall A. B INTER C INTER D INTER A = B INTER (C INTER D) INTER A
       #|  D = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST q +: &:1)}
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (FST q -: &:1) < FST r}
       #|  B = {z | ?p. (z = point p) /\\ (FST  p = real_of_int (FST  q))}
-      #|  !q. v_edge q =\n    (rectangle (FST q -: &:1 , SND q) (FST q +: &:1 , SND q +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( FST   r = real_of_int(FST   q))}
+      #|  forall q. v_edge q =\n    (rectangle (FST q -: &:1 , SND q) (FST q +: &:1 , SND q +: &:1))\n    INTER {z | ?r. (z = point r) /\\ ( FST   r = real_of_int(FST   q))}
       #|  rectangle (FST p -: &:1 ,SND p) (FST p +: &:1,SND p +: &:1) SUBSET  {z | ?r. z = point r}
-      #|  !x y. (x <. y) \\/ (x = y) \\/ (y <. x)
+      #|  forall x y. (x <. y) \\/ (x = y) \\/ (y <. x)
       #|  ({z | ?r. (z = point r) /\\ FST r < real_of_int (FST p)} UNION  {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST p))} UNION  {z | ?r. (z = point r) /\\ real_of_int (FST p) < FST r}) = {z | ?r. (z = point r)}
-      #|  !p. rectangle (FST p -: &:1 , SND p ) (FST p +: &:1 , SND p +: &:1) =\n     ((squ (left p)) UNION (v_edge p) UNION  (squ p) )
+      #|  forall p. rectangle (FST p -: &:1 , SND p ) (FST p +: &:1 , SND p +: &:1) =\n     ((squ (left p)) UNION (v_edge p) UNION  (squ p) )
       #|  long_v p =\n  {z | (?r. (z = point r) /\\ (FST r = real_of_int (FST p)) /\\\n       (real_of_int(SND  p) - &1 <. SND r) /\\\n       (SND r <. real_of_int(SND p) + &1) )}
-      #|  !p. long_v p =\n    {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST p))} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p -: &:1) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (SND  r  <. real_of_int(SND  p +: &:1))} 
+      #|  forall p. long_v p =\n    {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST p))} INTER\n      {z | ?r. (z = point r) /\\ (real_of_int(SND p -: &:1) <. SND r)} INTER\n     {z | ?r. (z = point r) /\\ (SND  r  <. real_of_int(SND  p +: &:1))} 
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -30058,12 +30058,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C = {z | ?r. (z = point r) /\\ SND r < real_of_int (SND q +: &:1)}
       #|  B = {z | ?r. (z = point r) /\\ SND r < real_of_int (SND q)}
       #|  x -: &:1 +: &:1 = x
-      #|  !q. v_edge (down q) =\n     long_v q INTER\n         {z | ?r. (z = point r) /\\ (SND  r  <. real_of_int(SND  q))}
+      #|  forall q. v_edge (down q) =\n     long_v q INTER\n         {z | ?r. (z = point r) /\\ (SND  r  <. real_of_int(SND  q))}
       #|  x <. y ==> x - &1 <. y
       #|  C = {z | ?r. (z = point r) /\\  real_of_int (SND q) - &1 < SND r}
       #|  B = {z | ?r. (z = point r) /\\  real_of_int (SND q) < SND r}
-      #|  !q. v_edge q =\n     long_v q INTER\n         {z | ?r. (z = point r) /\\ (real_of_int(SND  q) <. SND  r  )}
-      #|  !q. {(pointI q)} =\n        {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST q))} INTER\n        {z | ?r. (z = point r) /\\ (real_of_int (SND q) = SND r)}
+      #|  forall q. v_edge q =\n     long_v q INTER\n         {z | ?r. (z = point r) /\\ (real_of_int(SND  q) <. SND  r  )}
+      #|  forall q. {(pointI q)} =\n        {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST q))} INTER\n        {z | ?r. (z = point r) /\\ (real_of_int (SND q) = SND r)}
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30087,9 +30087,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (SND q -: &:1) < SND r}
       #|  B = {z | ?r. (z = point r) /\\ (real_of_int (SND q) = SND r)}
       #|  A = {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST q))}
-      #|  !q. {(pointI q)} = long_v q INTER\n       { z | ?r. (z = point r) /\\ (real_of_int(SND q) = SND r)}
+      #|  forall q. {(pointI q)} = long_v q INTER\n       { z | ?r. (z = point r) /\\ (real_of_int(SND q) = SND r)}
       #|  ({z | ?r. (z = point r) /\\ SND r < real_of_int (SND p)} UNION  {z | ?r. (z = point r) /\\ (real_of_int (SND p) = SND r)} UNION  {z | ?r. (z = point r) /\\ real_of_int (SND p) < SND r}) = {z | ?r. (z = point r)}
-      #|  !p. long_v p =\n      (v_edge (down p)) UNION {(pointI p)} UNION (v_edge p)
+      #|  forall p. long_v p =\n      (v_edge (down p)) UNION {(pointI p)} UNION (v_edge p)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30114,19 +30114,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x <. y ==> x < y + &1
       #|  C = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST p +: &:1)} 
       #|  B  = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST p)}
-      #|  !p. rectangle(FST p - &:1 , SND p - &:1) (FST p , SND p + &:1) =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n     INTER\n  {z | (?r. (z = point r) /\\ (FST r <. real_of_int(FST p)))}
+      #|  forall p. rectangle(FST p - &:1 , SND p - &:1) (FST p , SND p + &:1) =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n     INTER\n  {z | (?r. (z = point r) /\\ (FST r <. real_of_int(FST p)))}
       #|  x < y ==> (x - &1 <. y)
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (FST p -: &:1) < FST r}
       #|  B = {z | ?r. (z = point r) /\\ real_of_int (FST p) < FST r}
-      #|  !p. rectangle(FST p , SND p - &:1) (FST p + &:1 ,SND p + &:1) =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n  INTER\n  {z | (?r. (z = point r) /\\ ( real_of_int(FST p) <. FST r ))}
+      #|  forall p. rectangle(FST p , SND p - &:1) (FST p + &:1 ,SND p + &:1) =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n  INTER\n  {z | (?r. (z = point r) /\\ ( real_of_int(FST p) <. FST r ))}
       #|  (x = y) ==> (x - &.1 <. y /\\ x <. y+ &1)
-      #|  !A. (B INTER C INTER D INTER A) = B INTER (C INTER D) INTER A
+      #|  forall A. (B INTER C INTER D INTER A) = B INTER (C INTER D) INTER A
       #|  D = {z | ?r. (z = point r) /\\ FST r < real_of_int (FST p +: &:1)} 
       #|  C = {z | ?r. (z = point r) /\\ real_of_int (FST p -: &:1) < FST r}
       #|  B = {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST p))} 
-      #|  !p. long_v p =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n  INTER\n    {z | (?r. (z = point r) /\\ (  FST r =  real_of_int(FST p)  ))}
+      #|  forall p. long_v p =\n  rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1)\n  INTER\n    {z | (?r. (z = point r) /\\ (  FST r =  real_of_int(FST p)  ))}
       #|  {z | ?r. (z = point r)} = ({z | ?r. (z = point r) /\\ FST r < real_of_int (FST p)} UNION {z | ?r. (z = point r) /\\ (FST r = real_of_int (FST p))} UNION {z | ?r. (z = point r) /\\ real_of_int (FST p) < FST r})
-      #|  !p. rectangle (FST p -: &:1 , SND p -: &:1)\n     (FST p +: &:1 , SND p + &:1) =\n   rectangle(FST p - &:1 , SND p - &:1) (FST p  , SND p + &:1) UNION\n   long_v p UNION\n   rectangle(FST p , SND p - &:1) (FST p + &:1 ,SND p + &:1)
+      #|  forall p. rectangle (FST p -: &:1 , SND p -: &:1)\n     (FST p +: &:1 , SND p + &:1) =\n   rectangle(FST p - &:1 , SND p - &:1) (FST p  , SND p + &:1) UNION\n   long_v p UNION\n   rectangle(FST p , SND p - &:1) (FST p + &:1 ,SND p + &:1)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30150,13 +30150,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  x -: &:1 +: &:1 = x
       #|  rectangle (FST p -: &:1,SND p -: &:1) (FST p,SND p +: &:1) = rectangle (FST (left  p),SND (left  p) -: &:1) (FST (left  p) +: &:1,SND (left   p) +: &:1)
-      #|  !p. rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1) =\n   squ (FST p -: &:1,SND p -: &:1) UNION squ (FST p -: &:1,SND p ) UNION\n   squ (FST p,SND p -: &:1) UNION squ p UNION\n   h_edge (left  p) UNION h_edge  p UNION\n   v_edge (down p) UNION v_edge p UNION {(pointI p)}
+      #|  forall p. rectangle (FST p -: &:1 , SND p -: &:1) (FST p +: &:1 , SND p + &:1) =\n   squ (FST p -: &:1,SND p -: &:1) UNION squ (FST p -: &:1,SND p ) UNION\n   squ (FST p,SND p -: &:1) UNION squ p UNION\n   h_edge (left  p) UNION h_edge  p UNION\n   v_edge (down p) UNION v_edge p UNION {(pointI p)}
       #|  curve_cell G = G UNION\n   {z | (?n. (z = {(pointI n)}) /\\ (closure top2 (UNIONS G) (pointI n)))}
       #|  x
-      #|  !G. (G SUBSET edge) ==> (curve_cell G SUBSET cell)
+      #|  forall G. (G SUBSET edge) ==> (curve_cell G SUBSET cell)
       #|  closure top2 e SUBSET closure top2 (UNIONS G)
       #|  {(pointI n)}
-      #|  !G n. (FINITE G) /\\ (G SUBSET edge) ==> (curve_cell G {(pointI n)} <=>\n           (?e. (G e /\\ (closure top2 e (pointI n)))))
+      #|  forall G n. (FINITE G) /\\ (G SUBSET edge) ==> (curve_cell G {(pointI n)} <=>\n           (?e. (G e /\\ (closure top2 e (pointI n)))))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30175,10 +30175,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !G n. (segment G) ==> (curve_cell G (h_edge n) = G (h_edge n))
-      #|  !G n. (segment G) ==> (curve_cell G (v_edge n) = G (v_edge n))
-      #|  !C G . (G SUBSET edge) /\\ (curve_cell G C) ==>\n    (?n. (C = {(pointI n)}) \\/ (C = h_edge n) \\/ (C = v_edge n))
-      #|  !G. (G SUBSET (curve_cell G))
+      #|  forall G n. (segment G) ==> (curve_cell G (h_edge n) = G (h_edge n))
+      #|  forall G n. (segment G) ==> (curve_cell G (v_edge n) = G (v_edge n))
+      #|  forall C G . (G SUBSET edge) /\\ (curve_cell G C) ==>\n    (?n. (C = {(pointI n)}) \\/ (C = h_edge n) \\/ (C = v_edge n))
+      #|  forall G. (G SUBSET (curve_cell G))
       #|  A = UNIONS (IMAGE (closure top2) G)
       #|  u
       #|  {x}
@@ -30190,7 +30190,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  edge x'
       #|  G SUBSET edge 
       #|  FINITE G
-      #|  !G. (segment G) ==>\n    (closure top2 (UNIONS G) = (UNIONS (curve_cell G)))
+      #|  forall G. (segment G) ==>\n    (closure top2 (UNIONS G) = (UNIONS (curve_cell G)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30210,48 +30210,48 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !x y. (~x = ~y) <=> (x = y)
-      #|  !x y. (~x = y) <=> (x = ~y)
+      #|  forall x y. (~x = ~y) <=> (x = y)
+      #|  forall x y. (~x = y) <=> (x = ~y)
       #|  t = C
-      #|  !C D. (cell C) /\\ (D SUBSET cell) ==>\n         ((C INTER (UNIONS D) = EMPTY) <=> ~(D C))
+      #|  forall C D. (cell C) /\\ (D SUBSET cell) ==>\n         ((C INTER (UNIONS D) = EMPTY) <=> ~(D C))
       #|  TAGB
-      #|  !G m. (segment G) ==>\n     (((h_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (h_edge m))))
-      #|  !G m. (segment G) ==>\n     (((v_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (v_edge m))))
+      #|  forall G m. (segment G) ==>\n     (((h_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (h_edge m))))
+      #|  forall G m. (segment G) ==>\n     (((v_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (v_edge m))))
       #|  squ m
-      #|  !G m. (segment G) ==> ~curve_cell G (squ m)
+      #|  forall G m. (segment G) ==> ~curve_cell G (squ m)
       #|  (curve_cell G SUBSET cell)
       #|  cell (squ m)
-      #|  !G m. (segment G) ==>\n     (((squ m) INTER (UNIONS (curve_cell G)) = {}))
+      #|  forall G m. (segment G) ==>\n     (((squ m) INTER (UNIONS (curve_cell G)) = {}))
       #|  G SUBSET edge
       #|  UNIONS (curve_cell G) (pointI m) <=> ~({(pointI m)} INTER (UNIONS (curve_cell G)) = EMPTY )
-      #|  !G m. (segment G) ==>\n     (UNIONS (curve_cell G) (pointI m) = curve_cell G {(pointI m)})
+      #|  forall G m. (segment G) ==>\n     (UNIONS (curve_cell G) (pointI m) = curve_cell G {(pointI m)})
       #|  FINITE G /\\ (G SUBSET edge)
-      #|  !G m. (segment G) ==> ((curve_cell G {(pointI m)} <=>\n     ~(num_closure G (pointI m) = 0)))
+      #|  forall G m. (segment G) ==> ((curve_cell G {(pointI m)} <=>\n     ~(num_closure G (pointI m) = 0)))
       #|  par_cell eps G C <=>\n  ((?m. (C = {(pointI m)}) /\\ (eps = EVEN (num_lower G m))) \\/\n         (?m. (C = h_edge m) /\\ (eps = EVEN (num_lower G m))) \\/\n         (?m. (C = v_edge m) /\\ (eps = EVEN (num_lower G m))) \\/\n         (?m. (C = squ m) /\\ (eps= EVEN (num_lower G m)))) /\\\n   (C INTER (UNIONS (curve_cell G)) = EMPTY )
-      #|  !G C eps. (par_cell eps G C) ==>\n          (C INTER (UNIONS (curve_cell G)) = EMPTY )
-      #|  !G eps.  (par_cell eps G SUBSET cell)
-      #|  !G m eps. (segment G) ==> ((par_cell eps G (h_edge m) <=>\n      (~(G (h_edge m))) /\\ (eps = EVEN (num_lower G m))))
+      #|  forall G C eps. (par_cell eps G C) ==>\n          (C INTER (UNIONS (curve_cell G)) = EMPTY )
+      #|  forall G eps.  (par_cell eps G SUBSET cell)
+      #|  forall G m eps. (segment G) ==> ((par_cell eps G (h_edge m) <=>\n      (~(G (h_edge m))) /\\ (eps = EVEN (num_lower G m))))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !G m eps. (segment G) ==> ((par_cell eps G (v_edge m) <=>\n      (~(G (v_edge m))) /\\ (eps = EVEN (num_lower G m))))
+      #|  forall G m eps. (segment G) ==> ((par_cell eps G (v_edge m) <=>\n      (~(G (v_edge m))) /\\ (eps = EVEN (num_lower G m))))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !G m eps. (segment G) ==> ((par_cell eps G (squ m) <=>\n       (eps = EVEN (num_lower G m))))
+      #|  forall G m eps. (segment G) ==> ((par_cell eps G (squ m) <=>\n       (eps = EVEN (num_lower G m))))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !u x. ({(pointI u)} = x) <=> (x = {(pointI u)})
-      #|  !G m eps. (segment G) ==> ((par_cell eps G {(pointI m)} <=>\n      ((num_closure G (pointI m) = 0) /\\\n          (eps = EVEN (num_lower G m)))))
+      #|  forall u x. ({(pointI u)} = x) <=> (x = {(pointI u)})
+      #|  forall G m eps. (segment G) ==> ((par_cell eps G {(pointI m)} <=>\n      ((num_closure G (pointI m) = 0) /\\\n          (eps = EVEN (num_lower G m)))))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30263,9 +30263,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !X (y:A). ({y} = X) <=> X y /\\ (!u. X u ==> (u = y))
+      #|  forall X (y:A). ({y} = X) <=> X y /\\ (forall u. X u ==> (u = y))
       #|  ~(A /\\ B) <=> (A ==> ~B)
-      #|  !G eps. (par_cell eps G INTER par_cell (~eps) G = EMPTY)
+      #|  forall G eps. (par_cell eps G INTER par_cell (~eps) G = EMPTY)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30321,18 +30321,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  segment G
       #|  m
       #|  FINITE G
-      #|  !G eps. (rectagon G) ==> ~(par_cell eps G = EMPTY)
+      #|  forall G eps. (rectagon G) ==> ~(par_cell eps G = EMPTY)
       #|  cell u
       #|  u
       #|  eps
-      #|  !G eps. (rectagon G) ==> ~(UNIONS (par_cell eps G) = EMPTY)
+      #|  forall G eps. (rectagon G) ==> ~(UNIONS (par_cell eps G) = EMPTY)
       #|  TAGB
       #|  ctop G =\n   induced_top top2 (euclid 2 DIFF (UNIONS (curve_cell G)))
       #|  UNIONS (top2) = (euclid 2)
       #|  A
       #|  G SUBSET edge
-      #|  !G. (segment G) ==> (closed_ top2 (UNIONS (curve_cell G)))
-      #|  !G. UNIONS (ctop G) = (euclid 2 DIFF (UNIONS (curve_cell G)))
+      #|  forall G. (segment G) ==> (closed_ top2 (UNIONS (curve_cell G)))
+      #|  forall G. UNIONS (ctop G) = (euclid 2 DIFF (UNIONS (curve_cell G)))
       #|  squ p'
       #|  v_edge p'
       #|  (G (v_edge p'))
@@ -30345,7 +30345,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  ~eps
       #|  eps
-      #|  !G eps. (segment G) ==>\n  ((UNIONS (par_cell eps G) UNION (UNIONS (par_cell (~eps) G))) =\n    (UNIONS (ctop G))) 
+      #|  forall G eps. (segment G) ==>\n  ((UNIONS (par_cell eps G) UNION (UNIONS (par_cell (~eps) G))) =\n    (UNIONS (ctop G))) 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30360,39 +30360,39 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  FINITE G
-      #|  !G m eps. (segment G) /\\ (par_cell eps G (h_edge m)) ==>\n     (par_cell eps G (squ m) /\\ par_cell eps G (squ (down m)))
+      #|  forall G m eps. (segment G) /\\ (par_cell eps G (h_edge m)) ==>\n     (par_cell eps G (squ m) /\\ par_cell eps G (squ (down m)))
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G (v_edge m)) ==>\n     (par_cell eps G (squ m) /\\ par_cell eps G (squ (left m)))
-      #|  !G. (segment G) ==> (FINITE G)
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G (v_edge m)) ==>\n     (par_cell eps G (squ m) /\\ par_cell eps G (squ (left m)))
+      #|  forall G. (segment G) ==> (FINITE G)
       #|  x -: &:1 +: &:1 = x
       #|  h_edge (left  m)
       #|  h_edge ( m)
       #|  v_edge (down m)
       #|  v_edge m
-      #|  !G m. (FINITE G) /\\ (num_closure G (pointI m) = 0) ==>\n    ~G (v_edge m) /\\ ~G (v_edge (down m)) /\\\n          ~G (h_edge m) /\\ ~G(h_edge (left  m))
+      #|  forall G m. (FINITE G) /\\ (num_closure G (pointI m) = 0) ==>\n    ~G (v_edge m) /\\ ~G (v_edge (down m)) /\\\n          ~G (h_edge m) /\\ ~G(h_edge (left  m))
       #|  FINITE G
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (par_cell eps G (h_edge m) /\\ par_cell eps G (h_edge (left m)))
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (par_cell eps G (h_edge m) /\\ par_cell eps G (h_edge (left m)))
       #|  FINITE G
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (par_cell eps G (v_edge m) /\\ par_cell eps G (v_edge (down m)))
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (par_cell eps G (v_edge m) /\\ par_cell eps G (v_edge (down m)))
       #|  par_cell eps G (h_edge (  m))
       #|  par_cell eps G (h_edge (left  m))
       #|   x -: &:1 +: &:1 =x
       #|  rectangle (FST m -: &:1,SND m -: &:1) (FST m,SND m +: &:1) = rectangle (FST (left  m),SND (left  m) -: &:1) (FST (left  m) +: &:1,SND (left  m) +: &:1)
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (rectangle (FST m -: &:1,SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G {(pointI m)}) ==>\n     (rectangle (FST m -: &:1,SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G (h_edge m)) ==>\n     (rectangle (FST m ,SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G (h_edge m)) ==>\n     (rectangle (FST m ,SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
       #|  segment G
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G (v_edge m)) ==>\n     (rectangle (FST m -: &:1 ,SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
-      #|  !G m eps. (rectagon G) /\\ (par_cell eps G (squ m)) ==>\n     (rectangle (FST m  ,SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
-      #|  !m. (rectangle (FST m -: &:1,SND m -: &:1)\n            (FST m +: &:1,SND m +: &:1) (pointI m))
-      #|  !m. (h_edge m SUBSET\n     (rectangle (FST m,SND m -: &:1) (FST m +: &:1,SND m +: &:1)))
-      #|  !m. (v_edge m SUBSET\n     (rectangle (FST m -: &:1 ,SND m) (FST m +: &:1,SND m +: &:1)))
-      #|  !G. topology_ (ctop G)
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G (v_edge m)) ==>\n     (rectangle (FST m -: &:1 ,SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
+      #|  forall G m eps. (rectagon G) /\\ (par_cell eps G (squ m)) ==>\n     (rectangle (FST m  ,SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET (UNIONS (par_cell eps G)))
+      #|  forall m. (rectangle (FST m -: &:1,SND m -: &:1)\n            (FST m +: &:1,SND m +: &:1) (pointI m))
+      #|  forall m. (h_edge m SUBSET\n     (rectangle (FST m,SND m -: &:1) (FST m +: &:1,SND m +: &:1)))
+      #|  forall m. (v_edge m SUBSET\n     (rectangle (FST m -: &:1 ,SND m) (FST m +: &:1,SND m +: &:1)))
+      #|  forall G. topology_ (ctop G)
       #|  B
-      #|  !G B eps. (segment G) /\\ (B SUBSET UNIONS (par_cell eps G)) /\\\n      (top2 B) ==> (ctop G B)
+      #|  forall G B eps. (segment G) /\\ (B SUBSET UNIONS (par_cell eps G)) /\\\n      (top2 B) ==> (ctop G B)
       #|  p
       #|  rectangle (FST p,SND p ) (FST p +: &:1,SND p +: &:1)
       #|  rectangle (FST p -: &:1,SND p ) (FST p +: &:1,SND p +: &:1)
@@ -30401,15 +30401,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?p. (u = {(pointI p)}) \\/ (u = h_edge p) \\/ (u = v_edge p) \\/ (u = squ p)
       #|  G
       #|  segment G
-      #|  !G eps. (rectagon G) ==> (ctop G (UNIONS (par_cell eps G )))
+      #|  forall G eps. (rectagon G) ==> (ctop G (UNIONS (par_cell eps G )))
       #|  TAGB
-      #|  !(U:(A->bool)->bool). connected U EMPTY 
+      #|  forall(U:(A->bool)->bool). connected U EMPTY 
       #|  u
       #|  eps
       #|  G
       #|  u = u'
       #|  cell u /\\ cell u'
-      #|  !G eps. (UNIONS (par_cell eps G) INTER (UNIONS (par_cell (~eps) G)) =\n              EMPTY )
+      #|  forall G eps. (UNIONS (par_cell eps G) INTER (UNIONS (par_cell (~eps) G)) =\n              EMPTY )
       #|  A INTER B = EMPTY
       #|  Z SUBSET (A UNION B)
       #|  ctop G A /\\ ctop G B
@@ -30421,12 +30421,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  component  (ctop G) x x'' /\\ component  (ctop G) x x' 
       #|  segment G
       #|  component  (ctop G) x SUBSET (UNIONS (ctop G))
-      #|  !G eps x. (rectagon G) ==>\n         (component  (ctop G) x SUBSET (UNIONS (par_cell eps G))) \\/\n            (component (ctop G) x SUBSET (UNIONS (par_cell (~eps) G)))
+      #|  forall G eps x. (rectagon G) ==>\n         (component  (ctop G) x SUBSET (UNIONS (par_cell eps G))) \\/\n            (component (ctop G) x SUBSET (UNIONS (par_cell (~eps) G)))
       #|  TAGB
       #|  TAGB
       #|  Z
-      #|  !U Z (x:A). (connected U Z) /\\ (Z x) ==> (Z SUBSET (component U x)) 
-      #|  !x y n. (euclid n x) /\\ (euclid n y) ==>\n    (continuous (joinf (\\u. x)\n        (joinf (\\t. euclid_plus (t *# y) ((&1 - t) *# x)) (\\u. y) (&.1))\n          (&.0))\n   (top_of_metric (UNIV,d_real)) (top_of_metric (euclid n,d_euclid)))
+      #|  forall U Z (x:A). (connected U Z) /\\ (Z x) ==> (Z SUBSET (component U x)) 
+      #|  forall x y n. (euclid n x) /\\ (euclid n y) ==>\n    (continuous (joinf (\\u. x)\n        (joinf (\\t. euclid_plus (t *# y) ((&1 - t) *# x)) (\\u. y) (&.1))\n          (&.0))\n   (top_of_metric (UNIV,d_real)) (top_of_metric (euclid n,d_euclid)))
       #|  &1 - &0 = &1
       #|  a = &.0
       #|  &1 - (&1 - a) = a
@@ -30438,27 +30438,27 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &1 - x''
       #|  ~(&0 <=. x /\\ x < &.0)
       #|  (joinf (\\u. x) (joinf (\\t. euclid_plus (t *# y) ((&1 - t) *# x)) (\\u. y) (&.1)) (&.0))
-      #|  !x y n. (euclid n x) /\\ (euclid n y) ==> (?f.\n     (continuous f\n        (top_of_metric(UNIV,d_real))\n        (top_of_metric (euclid n,d_euclid))) /\\\n     (IMAGE f {t | &.0 <=. t /\\ t <=. &.1}  = mk_segment x y))
-      #|  !n. (convex (euclid n))
+      #|  forall x y n. (euclid n x) /\\ (euclid n y) ==> (?f.\n     (continuous f\n        (top_of_metric(UNIV,d_real))\n        (top_of_metric (euclid n,d_euclid))) /\\\n     (IMAGE f {t | &.0 <=. t /\\ t <=. &.1}  = mk_segment x y))
+      #|  forall n. (convex (euclid n))
       #|  UNIONS (top_of_metric (euclid n,d_euclid) ) = (euclid n)
       #|  (top_of_metric (UNIV,d_real))
       #|  ?f. (continuous f    (top_of_metric(UNIV,d_real))  (top_of_metric (euclid n,d_euclid))) /\\  (IMAGE f {t | &.0 <=. t /\\ t <=. &.1}  = mk_segment x y)
-      #|  !x y n. (euclid n x) /\\ (euclid n y) ==>\n   (connected (top_of_metric(euclid n,d_euclid)) (mk_segment x y))
+      #|  forall x y n. (euclid n x) /\\ (euclid n y) ==>\n   (connected (top_of_metric(euclid n,d_euclid)) (mk_segment x y))
       #|  A
-      #|  !G A. (top2 A /\\ (A SUBSET (UNIONS (ctop G))) ==> ctop G A)
+      #|  forall G A. (top2 A /\\ (A SUBSET (UNIONS (ctop G))) ==> ctop G A)
       #|  A'
       #|  G SUBSET edge
       #|  euclid 2 = UNIONS U
       #|  U = top_of_metric(euclid 2,d_euclid)
-      #|  !G A. (segment G /\\ ctop G A ==> top2 A)
+      #|  forall G A. (segment G /\\ ctop G A ==> top2 A)
       #|  &1 - (&1 - a) = a
       #|  &0 <= a ==> &1 - a <= &1
       #|  a <= &1 ==> &0 <= &1 - a
       #|  &1 - a
-      #|  !x y z. (mk_segment x y z ==> mk_segment y x z)
-      #|  !x y. (mk_segment x y = mk_segment y x)
+      #|  forall x y z. (mk_segment x y z ==> mk_segment y x z)
+      #|  forall x y. (mk_segment x y = mk_segment y x)
       #|  &1
-      #|  !x y. (mk_segment x y x /\\ mk_segment x y y)
+      #|  forall x y. (mk_segment x y x /\\ mk_segment x y y)
       #|  TAGB
       #|  TAGB
       #|  x
@@ -30469,44 +30469,44 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  connected (top_of_metric(euclid 2,d_euclid)) (mk_segment x x')
       #|  mk_segment x x' SUBSET A UNION B
       #|  Z x /\\ Z x'
-      #|  !G Z. (segment G /\\ convex Z) /\\ (Z SUBSET (UNIONS (ctop G))) ==>\n            (connected (ctop G) Z)
+      #|  forall G Z. (segment G /\\ convex Z) /\\ (Z SUBSET (UNIONS (ctop G))) ==>\n            (connected (ctop G) Z)
       #|  TAGB
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !U (x:A) y. component  U x y ==> (component  U x = component  U y)
+      #|  forall U (x:A) y. component  U x y ==> (component  U x = component  U y)
       #|  connected (ctop G) Z
-      #|  !G Z x. (segment G /\\ convex Z /\\ (Z SUBSET (UNIONS (ctop G))) /\\\n     (~(Z INTER (component  (ctop G) x ) = EMPTY))  ==>\n        (Z SUBSET (component  (ctop G) x)))  
-      #|  !C.  (cell C) ==> (convex C)
+      #|  forall G Z x. (segment G /\\ convex Z /\\ (Z SUBSET (UNIONS (ctop G))) /\\\n     (~(Z INTER (component  (ctop G) x ) = EMPTY))  ==>\n        (Z SUBSET (component  (ctop G) x)))  
+      #|  forall C.  (cell C) ==> (convex C)
       #|  cell_of C = { A | (cell A) /\\ (A SUBSET C) }
       #|  point p
       #|  UNIONS (ctop G) (point p)
       #|  u = u'
       #|  u'
       #|  G SUBSET edge
-      #|  u SUBSET (component  (ctop G) x) ==> (!x'. u x' ==> component  (ctop G) x x')
+      #|  u SUBSET (component  (ctop G) x) ==> (forall x'. u x' ==> component  (ctop G) x x')
       #|  u
       #|  p
       #|  (euclid 2 x')
-      #|  !G x. (segment G ==>\n     (UNIONS (cell_of (component  (ctop G) x)) =\n           component  (ctop G) x))
+      #|  forall G x. (segment G ==>\n     (UNIONS (cell_of (component  (ctop G) x)) =\n           component  (ctop G) x))
       #|  TAGB
       #|  abs  (real_of_int m) <= &.0
       #|  &0 <= abs  (real_of_int m)
       #|  n
       #|  ||: m
-      #|  !m. ?i. &i = abs  (real_of_int(m))
+      #|  forall m. ?i. &i = abs  (real_of_int(m))
       #|  num_abs_of_int m = @i. (&i = abs  (real_of_int m))
-      #|  !m. &(num_abs_of_int m) = abs  (real_of_int m)
-      #|  !m n. (num_abs_of_int (m * n) = num_abs_of_int m * num_abs_of_int n)
-      #|  !n. (num_abs_of_int (&: n) = n)
-      #|  !n m. num_abs_of_int (m + n) <=|\n           num_abs_of_int(m) +| num_abs_of_int n
-      #|  !m. (num_abs_of_int m = 0) <=> (m = &:0)
-      #|  !m. (num_abs_of_int (--: m) = num_abs_of_int m)
-      #|  !m. (&:0 <=: m) ==>\n     (SUC (num_abs_of_int m) = num_abs_of_int (m +: &:1))
-      #|  !m. (m <=: &:0) ==>\n     (SUC (num_abs_of_int m) = num_abs_of_int (m -: &:1))
-      #|  !m. (right  (left  m) = m) /\\ (left  (right  m) = m) /\\\n    (up (down m) = m) /\\ (down (up m) = m) /\\\n    (up (right  m) = right  (up m)) /\\ (up (left  m) = left  (up m)) /\\\n    (down (right  m) = right  (down m)) /\\\n    (down (left  m) = (left  (down m)))
+      #|  forall m. &(num_abs_of_int m) = abs  (real_of_int m)
+      #|  forall m n. (num_abs_of_int (m * n) = num_abs_of_int m * num_abs_of_int n)
+      #|  forall n. (num_abs_of_int (&: n) = n)
+      #|  forall n m. num_abs_of_int (m + n) <=|\n           num_abs_of_int(m) +| num_abs_of_int n
+      #|  forall m. (num_abs_of_int m = 0) <=> (m = &:0)
+      #|  forall m. (num_abs_of_int (--: m) = num_abs_of_int m)
+      #|  forall m. (&:0 <=: m) ==>\n     (SUC (num_abs_of_int m) = num_abs_of_int (m +: &:1))
+      #|  forall m. (m <=: &:0) ==>\n     (SUC (num_abs_of_int m) = num_abs_of_int (m -: &:1))
+      #|  forall m. (right  (left  m) = m) /\\ (left  (right  m) = m) /\\\n    (up (down m) = m) /\\ (down (up m) = m) /\\\n    (up (right  m) = right  (up m)) /\\ (up (left  m) = left  (up m)) /\\\n    (down (right  m) = right  (down m)) /\\\n    (down (left  m) = (left  (down m)))
       #|  squc p = {Z | ?u v.\n                  (Z = point (u,v)) /\\\n                  real_of_int (FST p) <= u /\\\n                  u <= real_of_int (FST p +: &:1) /\\\n                  real_of_int (SND p) <= v /\\\n                  v <= real_of_int (SND p +: &:1)}
-      #|  !p. squc p =\n   {z | ?r. (z = point r) /\\ real_of_int (FST p) <= FST r} INTER\n         {z | ?r. (z = point r) /\\ real_of_int (SND p) <= SND r} INTER\n         {z | ?r. (z = point r) /\\ FST r <= real_of_int (FST p +: &:1)} INTER\n         {z | ?r. (z = point r) /\\ SND r <= real_of_int (SND p +: &:1)}
+      #|  forall p. squc p =\n   {z | ?r. (z = point r) /\\ real_of_int (FST p) <= FST r} INTER\n         {z | ?r. (z = point r) /\\ real_of_int (SND p) <= SND r} INTER\n         {z | ?r. (z = point r) /\\ FST r <= real_of_int (FST p +: &:1)} INTER\n         {z | ?r. (z = point r) /\\ SND r <= real_of_int (SND p +: &:1)}
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30577,14 +30577,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !p. closed_ (top2) (squc p)
+      #|  forall p. closed_ (top2) (squc p)
       #|  x < y ==> x <=. y
       #|  v
       #|  u
-      #|  !p. (squ p SUBSET (squc p))
+      #|  forall p. (squ p SUBSET (squc p))
       #|  ~(v = v + &.1)
       #|  (x <=y) <=> (y = x) \\/ (x <. y)
-      #|  !p. squc p INTER\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) = FST r)} =\n   {(pointI p)} UNION (v_edge p) UNION {(pointI (up p))}
+      #|  forall p. squc p INTER\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) = FST r)} =\n   {(pointI p)} UNION (v_edge p) UNION {(pointI (up p))}
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -30659,7 +30659,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  ~(v = v + &.1)
       #|  (x <=y) <=> (y = x) \\/ (x <. y)
-      #|  !p. squc p INTER\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) + &1= FST r )} =\n   {(pointI (right  p))} UNION (v_edge (right  p)) UNION\n     {(pointI (up (right  p)))}
+      #|  forall p. squc p INTER\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) + &1= FST r )} =\n   {(pointI (right  p))} UNION (v_edge (right  p)) UNION\n     {(pointI (up (right  p)))}
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -30738,7 +30738,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?q. x = point q
       #|  ~(v = v + &1)
       #|  (x <= y) <=> (y = x) \\/ (x <. y)
-      #|  !p. squc p INTER\n    {z | ?r. (z = point r) /\\ (FST r <. real_of_int(FST p) + &1 ) /\\\n       (real_of_int(FST p) <. FST r) } =\n    (h_edge p) UNION squ p UNION (h_edge (up p))
+      #|  forall p. squc p INTER\n    {z | ?r. (z = point r) /\\ (FST r <. real_of_int(FST p) + &1 ) /\\\n       (real_of_int(FST p) <. FST r) } =\n    (h_edge p) UNION squ p UNION (h_edge (up p))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -30885,7 +30885,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !p. squc p SUBSET\n    {z | ?r. (z = point r) /\\ (real_of_int(FST p) = FST r)} UNION\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) + &1= FST r )} UNION\n      {z | ?r. (z = point r) /\\ (FST r <. real_of_int(FST p) + &1 ) /\\\n       (real_of_int(FST p) <. FST r) } 
+      #|  forall p. squc p SUBSET\n    {z | ?r. (z = point r) /\\ (real_of_int(FST p) = FST r)} UNION\n     {z | ?r. (z = point r) /\\ (real_of_int(FST p) + &1= FST r )} UNION\n      {z | ?r. (z = point r) /\\ (FST r <. real_of_int(FST p) + &1 ) /\\\n       (real_of_int(FST p) <. FST r) } 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -30908,7 +30908,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  squc p = squc p  INTER ({z | ?r. (z = point r) /\\ (real_of_int(FST p) = FST r)} UNION   {z | ?r. (z = point r) /\\ (real_of_int(FST p) + &1= FST r )} UNION   {z | ?r. (z = point r) /\\ (FST r <. real_of_int(FST p) + &1 ) /\\  (real_of_int(FST p) <. FST r) } )
-      #|  !p. squc p = {(pointI p)} UNION {(pointI (right  p))} UNION\n       {(pointI (up p))} UNION {(pointI (up (right   p)))} UNION\n       (h_edge p) UNION (h_edge (up p)) UNION\n       (v_edge p) UNION (v_edge (right  p)) UNION\n       (squ p)
+      #|  forall p. squc p = {(pointI p)} UNION {(pointI (right  p))} UNION\n       {(pointI (up p))} UNION {(pointI (up (right   p)))} UNION\n       (h_edge p) UNION (h_edge (up p)) UNION\n       (v_edge p) UNION (v_edge (right  p)) UNION\n       (squ p)
       #|  t *(y + &1) + (&1- t)* y
       #|  ( *. )
       #|  ( *. )
@@ -31095,7 +31095,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  point q = point (FST q,SND q)
       #|  point (FST q, SND q + &1)
       #|  ?q. (x = point q)
-      #|  !p. (h_edge p) SUBSET (closure top2 (squ p))
+      #|  forall p. (h_edge p) SUBSET (closure top2 (squ p))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31309,7 +31309,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  point q = point (FST q,SND q)
       #|  point (FST q , SND q - &1)
       #|  ?q. (x = point q)
-      #|  !p. (h_edge (up   p)) SUBSET (closure top2 (squ p))
+      #|  forall p. (h_edge (up   p)) SUBSET (closure top2 (squ p))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31338,7 +31338,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  down p
-      #|  !p. (h_edge p SUBSET (closure top2 (squ (down p))))
+      #|  forall p. (h_edge p SUBSET (closure top2 (squ (down p))))
       #|  t *(y + &1) + (&1- t)* y
       #|  ( *. )
       #|  ( *. )
@@ -31525,7 +31525,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  point q = point (FST q,SND q)
       #|  point (FST q + &1, SND q )
       #|  ?q. (x = point q)
-      #|  !p. (v_edge p) SUBSET (closure top2 (squ p))
+      #|  forall p. (v_edge p) SUBSET (closure top2 (squ p))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31739,7 +31739,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  point q = point (FST q,SND q)
       #|  point (FST q - &1 , SND q )
       #|  ?q. (x = point q)
-      #|  !p. (v_edge (right     p)) SUBSET (closure top2 (squ p))
+      #|  forall p. (v_edge (right     p)) SUBSET (closure top2 (squ p))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31768,17 +31768,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  left  p
-      #|  !p. (v_edge p SUBSET (closure top2 (squ (left  p))))
-      #|  !p. (hc_edge p) SUBSET (closure top2 (squ p))
-      #|  !p. (hc_edge (up p)) SUBSET (closure top2 (squ p))
-      #|  !p. (vc_edge p) SUBSET (closure top2 (squ p))
+      #|  forall p. (v_edge p SUBSET (closure top2 (squ (left  p))))
+      #|  forall p. (hc_edge p) SUBSET (closure top2 (squ p))
+      #|  forall p. (hc_edge (up p)) SUBSET (closure top2 (squ p))
+      #|  forall p. (vc_edge p) SUBSET (closure top2 (squ p))
       #|  p
       #|  p
-      #|  !p. (closure top2 (squ p)) = (squc p)
+      #|  forall p. (closure top2 (squ p)) = (squc p)
       #|  adj_edge x y <=> (~(x = y)) /\\\n  (?e. (edge e) /\\\n   (e SUBSET (closure top2 x)) /\\ (e SUBSET (closure top2 y)))
-      #|  !x y. (adj_edge x y = adj_edge y x)
+      #|  forall x y. (adj_edge x y = adj_edge y x)
       #|  v_edge m
-      #|  !m. (adj_edge (squ m) (squ (left  m)))
+      #|  forall m. (adj_edge (squ m) (squ (left  m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31788,7 +31788,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  v_edge (right  m)
-      #|  !m. (adj_edge (squ m) (squ (right    m)))
+      #|  forall m. (adj_edge (squ m) (squ (right    m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31798,7 +31798,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  h_edge m
-      #|  !m. (adj_edge (squ m) (squ (down  m)))
+      #|  forall m. (adj_edge (squ m) (squ (down  m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31808,7 +31808,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  h_edge (up  m)
-      #|  !m. (adj_edge (squ m) (squ (up    m)))
+      #|  forall m. (adj_edge (squ m) (squ (up    m)))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -31817,8 +31817,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !p q. (rectangle p q SUBSET (euclid 2))
-      #|  !U (x:A). (component  U x SUBSET (UNIONS U))
+      #|  forall p q. (rectangle p q SUBSET (euclid 2))
+      #|  forall U (x:A). (component  U x SUBSET (UNIONS U))
       #|  u
       #|  ~(h_edge m = EMPTY)
       #|  component  (ctop G) x
@@ -31826,7 +31826,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  down m
       #|  m
       #|  ~(squ (down m) x') /\\ ~(squ m x')
-      #|  !G m x. (segment G /\\\n     (h_edge m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\\n     (h_edge m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
       #|  u
       #|  ~(v_edge m = EMPTY)
       #|  component  (ctop G) x
@@ -31834,9 +31834,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  left   m
       #|  m
       #|  ~(squ (left   m) x') /\\ ~(squ m x')
-      #|  !G m x. (segment G /\\\n     (v_edge m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m -: &:1, SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
-      #|  !p. (convex (long_v p))
-      #|  !p. (long_v p SUBSET (euclid 2))
+      #|  forall G m x. (segment G /\\\n     (v_edge m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m -: &:1, SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
+      #|  forall p. (convex (long_v p))
+      #|  forall p. (long_v p SUBSET (euclid 2))
       #|  (pointI m)
       #|  x = x -: &:1 +: &:1
       #|  v_edge (m)
@@ -31849,18 +31849,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(curve_cell G {(pointI m)})
       #|  (ctop G)
       #|  UNIONS (ctop G) (pointI m)
-      #|  !G m x. (segment G /\\ component  (ctop G) x (pointI m)) ==>\n   (long_v m SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\ component  (ctop G) x (pointI m)) ==>\n   (long_v m SUBSET component  (ctop G) x)
       #|  TAGB
       #|  rectangle (FST m,SND m -: &:1) (FST m +: &:1,SND m +: &:1)
       #|  (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1) SUBSET component  (ctop G) x)
-      #|  !G x m. (segment G /\\ (h_edge m SUBSET (component  (ctop G) x)) ==>\n     (squ m SUBSET (component  (ctop G ) x)))
+      #|  forall G x m. (segment G /\\ (h_edge m SUBSET (component  (ctop G) x)) ==>\n     (squ m SUBSET (component  (ctop G ) x)))
       #|  rectangle (FST m -: &:1 ,SND m) (FST m +: &:1,SND m +: &:1)
       #|  (rectangle (FST m -: &:1 , SND m ) (FST m +: &:1,SND m +: &:1) SUBSET component  (ctop G) x)
-      #|  !G x m. (segment G /\\ (v_edge m SUBSET (component  (ctop G) x)) ==>\n     (squ m SUBSET (component  (ctop G ) x)))
+      #|  forall G x m. (segment G /\\ (v_edge m SUBSET (component  (ctop G) x)) ==>\n     (squ m SUBSET (component  (ctop G ) x)))
       #|  long_v m SUBSET component  (ctop G) x
-      #|  !G x m. (segment G /\\ (component  (ctop G) x (pointI m))) ==>\n     (squ m SUBSET (component  (ctop G ) x))
+      #|  forall G x m. (segment G /\\ (component  (ctop G) x (pointI m))) ==>\n     (squ m SUBSET (component  (ctop G ) x))
       #|  x
-      #|  !G x. (segment G /\\ (~(component  (ctop G) x = EMPTY)) ==>\n     (?m. (squ m SUBSET (component  (ctop G ) x))))
+      #|  forall G x. (segment G /\\ (~(component  (ctop G) x = EMPTY)) ==>\n     (?m. (squ m SUBSET (component  (ctop G ) x))))
       #|  ~(squ m = EMPTY )
       #|  u = v_edge m 
       #|  G SUBSET edge
@@ -31868,10 +31868,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  left   m
       #|  m
       #|  ~(squ (left   m) x') /\\ ~(squ m x')
-      #|  !G m x. (segment G /\\ ~(G (v_edge (  m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m -: &:1 ,SND m ) (FST m +: &:1,SND m +: &:1) SUBSET\n component (ctop G) x))
+      #|  forall G m x. (segment G /\\ ~(G (v_edge (  m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m -: &:1 ,SND m ) (FST m +: &:1,SND m +: &:1) SUBSET\n component (ctop G) x))
       #|  v_edge m
       #|  m
-      #|  !G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m -: &:1, SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m -: &:1, SND m ) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
       #|  TAGB
       #|  TAGB
       #|  ~(squ m = EMPTY )
@@ -31884,10 +31884,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x +: &:1) +: &:1 = x +: &:2
       #|  (x +: &:1)-: &:1 = x
       #|  rectangle m (FST m +: &:2,SND m +: &:1) = rectangle (FST (right  m) -: &:1, SND (right  m)) (FST (right  m) +: &:1, SND (right  m) +: &:1)
-      #|  !G m x. (segment G /\\ ~(G (v_edge (right  m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m ) (FST m +: &:2,SND m +: &:1) SUBSET\n component (ctop G) x))
+      #|  forall G m x. (segment G /\\ ~(G (v_edge (right  m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m ) (FST m +: &:2,SND m +: &:1) SUBSET\n component (ctop G) x))
       #|  v_edge (right  m)
       #|  m
-      #|  !G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m ) (FST m +: &:2,SND m +: &:1)\n       SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m ) (FST m +: &:2,SND m +: &:1)\n       SUBSET component  (ctop G) x)
       #|  TAGB
       #|  TAGB
       #|  ~(squ m = EMPTY )
@@ -31897,10 +31897,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  down   m
       #|  m
       #|  ~(squ (down   m) x') /\\ ~(squ m x')
-      #|  !G m x. (segment G /\\ ~(G (h_edge m)) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m -: &:1) (FST m +: &:1,SND m +: &:1) SUBSET\n component (ctop G) x))
+      #|  forall G m x. (segment G /\\ ~(G (h_edge m)) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m -: &:1) (FST m +: &:1,SND m +: &:1) SUBSET\n component (ctop G) x))
       #|  h_edge m
       #|  m
-      #|  !G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1)\n       SUBSET component  (ctop G) x)
       #|  TAGB
       #|  TAGB
       #|  ~(squ m = EMPTY )
@@ -31913,10 +31913,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x +: &:1) +: &:1 = x +: &:2
       #|  (x +: &:1)-: &:1 = x
       #|  rectangle m (FST m +: &:1,SND m +: &:2) = rectangle (FST (up  m) , SND (up  m) -: &:1) (FST (up  m) +: &:1, SND (up  m) +: &:1)
-      #|  !G m x. (segment G /\\ ~(G (h_edge (up m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m ) (FST m +: &:1,SND m +: &:2) SUBSET\n component (ctop G) x))
+      #|  forall G m x. (segment G /\\ ~(G (h_edge (up m))) /\\\n    (squ m SUBSET component (ctop G) x) ==>\n   (rectangle (FST m,SND m ) (FST m +: &:1,SND m +: &:2) SUBSET\n component (ctop G) x))
       #|  h_edge (up  m)
       #|  m
-      #|  !G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m ) (FST m +: &:1,SND m +: &:2)\n       SUBSET component  (ctop G) x)
+      #|  forall G m x. (segment G /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))) /\\\n     (squ m SUBSET component  (ctop G) x)) ==>\n   (rectangle (FST m , SND m ) (FST m +: &:1,SND m +: &:2)\n       SUBSET component  (ctop G) x)
       #|  TAGB
       #|  TAGB
       #|  (x +: &:1) +: &:1 = x +: &:2
@@ -31925,10 +31925,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x +: &:1) +: &:1 = x +: &:2
       #|  (x +: &:1)-: &:1 = x
       #|  rectangle m (FST m +: &:1,SND m +: &:2) = rectangle (FST (up  m) , SND (up  m) -: &:1) (FST (up  m) +: &:1, SND (up  m) +: &:1)
-      #|  !G x m. (segment G /\\ (squ m SUBSET (component  (ctop G) x))  /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x)))))) ==>\n     (squ (left    m) SUBSET (component  (ctop G) x))  /\\\n    (squ (right      m) SUBSET (component  (ctop G) x))  /\\\n    (squ (up  m) SUBSET (component  (ctop G) x))  /\\\n   (squ (down  m) SUBSET (component  (ctop G) x))
+      #|  forall G x m. (segment G /\\ (squ m SUBSET (component  (ctop G) x))  /\\\n    (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x)))))) ==>\n     (squ (left    m) SUBSET (component  (ctop G) x))  /\\\n    (squ (right      m) SUBSET (component  (ctop G) x))  /\\\n    (squ (up  m) SUBSET (component  (ctop G) x))  /\\\n   (squ (down  m) SUBSET (component  (ctop G) x))
       #|  b = 0
       #|  a = 0 
-      #|  !j a b. (SUC j = a+ b) ==> (?k. (SUC k = a) \\/ (SUC k = b))
+      #|  forall j a b. (SUC j = a+ b) ==> (?k. (SUC k = a) \\/ (SUC k = b))
       #|  TAGB
       #|  (SND  m -: &:1 -: SND  n +: &:1) = SND  m -: SND  n
       #|  &:0 <=: (SND  m -: &:1) -: SND  n 
@@ -31946,23 +31946,23 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  right  m
       #|  FST m <: FST n \\/ FST n <: FST m
       #|  ~(num_abs_of_int (FST m -: FST n) = 0)
-      #|  !j m n. ?p.\n    ((SUC j) = (num_abs_of_int (FST m -: FST n) +\n             num_abs_of_int (SND  m -: SND  n))) ==>\n    ((j = (num_abs_of_int (FST p -: FST n) +\n             num_abs_of_int (SND  p -: SND  n))) /\\\n     ((p = left  m) \\/ (p = right  m) \\/ (p = up m) \\/ (p = down m))) 
+      #|  forall j m n. ?p.\n    ((SUC j) = (num_abs_of_int (FST m -: FST n) +\n             num_abs_of_int (SND  m -: SND  n))) ==>\n    ((j = (num_abs_of_int (FST p -: FST n) +\n             num_abs_of_int (SND  p -: SND  n))) /\\\n     ((p = left  m) \\/ (p = right  m) \\/ (p = up m) \\/ (p = down m))) 
       #|  TAGB
       #|  (n = left p) \\/ (n = right p) \\/ (n = up p) \\/ (n = down p)
       #|  p
       #|  TAGB
       #|  n = m
-      #|  (!j n. (j = (num_abs_of_int (FST n -: FST m) + num_abs_of_int (SND  n -: SND  m))) ==> (squ n SUBSET component (ctop G) x)) ==> (squ n SUBSET component (ctop G) x)
-      #|  !G x m. (segment G /\\ (squ m SUBSET (component  (ctop G ) x)) /\\\n  (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x)))))) ==>\n  (!n. (squ n SUBSET (component  (ctop G) x)))\n  
+      #|  (forall j n. (j = (num_abs_of_int (FST n -: FST m) + num_abs_of_int (SND  n -: SND  m))) ==> (squ n SUBSET component (ctop G) x)) ==> (squ n SUBSET component (ctop G) x)
+      #|  forall G x m. (segment G /\\ (squ m SUBSET (component  (ctop G ) x)) /\\\n  (~(?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x)))))) ==>\n  (forall n. (squ n SUBSET (component  (ctop G) x)))\n  
       #|  m'
       #|  e
       #|  ?e. (G e /\\ (edge e))
-      #|  (!n. (squ n SUBSET (component  (ctop G) x)))
-      #|  !G x m. (segment G /\\ (squ m SUBSET (component  (ctop G ) x))) ==>\n     (?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))
+      #|  (forall n. (squ n SUBSET (component  (ctop G) x)))
+      #|  forall G x m. (segment G /\\ (squ m SUBSET (component  (ctop G ) x))) ==>\n     (?p e. (G e /\\ e SUBSET closure top2 (squ p) /\\\n         (squ p SUBSET (component  (ctop G) x))))
       #|  TAGB
       #|  along_seg G e x <=> G e /\\\n     (?p. (e SUBSET closure top2 (squ p) /\\\n          squ p SUBSET (component  (ctop G) x) ))
       #|  m
-      #|  !G m x.  (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (h_edge m))) ==>\n   (?p. (h_edge m) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
+      #|  forall G m x.  (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (h_edge m))) ==>\n   (?p. (h_edge m) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
       #|  X e /\\ X e' /\\ X e''
       #|  X = {C | G C /\\ closure top2 C (pointI m)}
       #|  pointI m
@@ -31972,66 +31972,66 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  m
       #|  num_closure G (pointI m) = 2
-      #|  !G m e e' e''. (segment G /\\ G e /\\ G e' /\\ G e'' /\\ (~(e = e')) /\\\n    (closure top2 e (pointI m)) /\\ (closure top2 e' (pointI m)) /\\\n    (closure top2 e'' (pointI m))   ==> ((e'' = e) \\/ (e'' = e')))\n    
+      #|  forall G m e e' e''. (segment G /\\ G e /\\ G e' /\\ G e'' /\\ (~(e = e')) /\\\n    (closure top2 e (pointI m)) /\\ (closure top2 e' (pointI m)) /\\\n    (closure top2 e'' (pointI m))   ==> ((e'' = e) \\/ (e'' = e')))\n    
       #|  m
       #|  G
       #|  (h_edge m = v_edge m) \\/ (h_edge m = v_edge (down m))
-      #|  !G m. (segment G /\\ G (v_edge m) /\\ G (v_edge (down m)) ==>\n     ~(G (h_edge m)))
+      #|  forall G m. (segment G /\\ G (v_edge m) /\\ G (v_edge (down m)) ==>\n     ~(G (h_edge m)))
       #|  m
       #|  G
       #|  (h_edge (left  m) = v_edge m) \\/ (h_edge (left  m) = v_edge (down m))
       #|  m
       #|  G
       #|  (h_edge m = v_edge m) \\/ (h_edge m = h_edge (left  m))
-      #|  !G m. (segment G /\\ G (v_edge m) /\\ G(h_edge (left  m)) ==>\n     ~(G (h_edge m)) /\\ ~(G (v_edge (down m))))
+      #|  forall G m. (segment G /\\ G (v_edge m) /\\ G(h_edge (left  m)) ==>\n     ~(G (h_edge m)) /\\ ~(G (v_edge (down m))))
       #|  (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1) SUBSET component  (ctop G) x)
       #|  ~(G (h_edge m))
       #|  down m
-      #|  !G m x.  (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (v_edge (down m)))) ==>\n   (?p. (v_edge (down m)) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
+      #|  forall G m x.  (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (v_edge (down m)))) ==>\n   (?p. (v_edge (down m)) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
       #|  (rectangle (FST (down m) -: &:1,SND (down m)) (FST (down m) +: &:1,SND (down m) +: &:1) SUBSET component  (ctop G) x)
       #|  (rectangle (FST m , SND m -: &:1) (FST m +: &:1,SND m +: &:1) SUBSET component  (ctop G) x)
       #|   ~(G (h_edge m)) /\\ ~(G (v_edge (down m)))
       #|  left  (down m)
-      #|  !G m x. (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (h_edge (left   m)))) ==>\n   (?p. (h_edge (left   m)) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
+      #|  forall G m x. (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ (G (h_edge (left   m)))) ==>\n   (?p. (h_edge (left   m)) SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x)))
       #|  (m' = m) \\/ (m' = (left  m))
       #|  m
       #|  (m' = m) \\/ (m' = (down m))
       #|  edge e
       #|  G SUBSET edge
-      #|  !G m x e. (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
+      #|  forall G m x e. (segment G /\\ (squ m SUBSET component  (ctop G) x) /\\\n     (G (v_edge m)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
       #|  reflAf r (x:num->real) = point(&2 * (real_of_int r) - x 0, x 1)
       #|  reflAi r (x:int#int) = ((&:2 *: r) -: FST x,SND x)
       #|  reflBf r (x:num->real) = point( x 0 , &2 * (real_of_int r) - x 1)
       #|  reflBi r (x:int#int) = (FST x, (&:2 *: r) -: SND x)
       #|  reflCf  (x:num->real) = point (x 1, x 0)
       #|  reflCi  (x:int#int) = (SND  x, FST  x)
-      #|  !r m.  (reflAf r (reflAf r (point m)) = (point m))
-      #|  !r m.  (reflBf r (reflBf r (point m)) = (point m))
-      #|  !m.  (reflCf  (reflCf  (point m)) = (point m))
-      #|  !r x.  (reflAi r (reflAi r x) = x)
-      #|  !r x.  (reflBi r (reflBi r x) = x)
-      #|  !x.  (reflCi  (reflCi  x) = x)
+      #|  forall r m.  (reflAf r (reflAf r (point m)) = (point m))
+      #|  forall r m.  (reflBf r (reflBf r (point m)) = (point m))
+      #|  forall m.  (reflCf  (reflCf  (point m)) = (point m))
+      #|  forall r x.  (reflAi r (reflAi r x) = x)
+      #|  forall r x.  (reflBi r (reflBi r x) = x)
+      #|  forall x.  (reflCi  (reflCi  x) = x)
       #|   f (point p)
       #|  f
-      #|  !f. (!m . (f (f (point m)) = (point m))) /\\\n        (!x. (euclid 2 (f x))) ==>\n             (BIJ f (euclid 2) (euclid 2))
-      #|  !r. (BIJ (reflAf r) (euclid 2) (euclid 2))
-      #|  !r. (BIJ (reflBf r) (euclid 2) (euclid 2))
+      #|  forall f. (forall m . (f (f (point m)) = (point m))) /\\\n        (forall x. (euclid 2 (f x))) ==>\n             (BIJ f (euclid 2) (euclid 2))
+      #|  forall r. (BIJ (reflAf r) (euclid 2) (euclid 2))
+      #|  forall r. (BIJ (reflBf r) (euclid 2) (euclid 2))
       #|  (BIJ (reflCf ) (euclid 2) (euclid 2))
       #|  (C ==> (A <=> B)) ==> ( C /\\ A <=> C /\\ B)
       #|  {x | UNIONS U x /\\ v (INV f (UNIONS U) (UNIONS U) x)} = {x | UNIONS U x /\\ v (f x)}
       #|  v
       #|  UNIONS U (f x)
-      #|  !x. (UNIONS U x) ==> (INV f (UNIONS U) (UNIONS U) x = f x)
-      #|  !U (f:A->A). (continuous f U U) /\\ (BIJ f (UNIONS U) (UNIONS U)) /\\\n    (!x. (UNIONS U x ==> (f (f x ) = x))) ==> (homeomorphism f U U)
+      #|  forall x. (UNIONS U x) ==> (INV f (UNIONS U) (UNIONS U) x = f x)
+      #|  forall U (f:A->A). (continuous f U U) /\\ (BIJ f (UNIONS U) (UNIONS U)) /\\\n    (forall x. (UNIONS U x ==> (f (f x ) = x))) ==> (homeomorphism f U U)
       #|  (SUC 0  =1) /\\ (SUC (SUC 0) = 2)
       #|  1 = SUC 0
       #|  2 = SUC 1
       #|  euclid 2 (point r) /\\ euclid 2 (point s)
-      #|  !r s. (d_euclid (point r) (point s) =\n       sqrt ((FST r - FST s) pow 2 + ((SND r - SND s) pow 2)))
+      #|  forall r s. (d_euclid (point r) (point s) =\n       sqrt ((FST r - FST s) pow 2 + ((SND r - SND s) pow 2)))
       #|  (&2 * real_of_int r - FST p - (&2 * real_of_int r - FST p'))  = --. (FST p - FST p') 
       #|  epsilon
       #|  (IMAGE (reflAf r) (euclid 2)) SUBSET (euclid 2) /\\ (metric_space (euclid 2,d_euclid))
-      #|  !r. continuous (reflAf r) top2 top2
+      #|  forall r. continuous (reflAf r) top2 top2
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32043,7 +32043,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (&2 * real_of_int r - SND  p - (&2 * real_of_int r - SND  p'))  = --. (SND  p - SND  p') 
       #|  epsilon
       #|  (IMAGE (reflBf r) (euclid 2)) SUBSET (euclid 2) /\\ (metric_space (euclid 2,d_euclid))
-      #|  !r. continuous (reflBf r) top2 top2
+      #|  forall r. continuous (reflBf r) top2 top2
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32063,14 +32063,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !r. (homeomorphism (reflAf r) top2 top2)
-      #|  !r. (homeomorphism (reflBf r) top2 top2)
+      #|  forall r. (homeomorphism (reflAf r) top2 top2)
+      #|  forall r. (homeomorphism (reflBf r) top2 top2)
       #|   (homeomorphism (reflCf ) top2 top2)
       #|  IMAGE2 (f:A->B) U = IMAGE (IMAGE (f:A->B)) U
       #|  y - (y - x) = x
       #|  &2 * real_of_int r - u
       #|  &2 * real_of_int r - u
-      #|  !m r.  IMAGE (reflAf r) (h_edge m) = h_edge (left  (reflAi r m))
+      #|  forall m r.  IMAGE (reflAf r) (h_edge m) = h_edge (left  (reflAi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32108,7 +32108,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !m r.  IMAGE (reflAf r) (v_edge m) = v_edge (  (reflAi r m))
+      #|  forall m r.  IMAGE (reflAf r) (v_edge m) = v_edge (  (reflAi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32148,11 +32148,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !r e. (edge e ==> edge (IMAGE (reflAf r) e))
+      #|  forall r e. (edge e ==> edge (IMAGE (reflAf r) e))
       #|  y - (y - x) = x
       #|  &2 * real_of_int r - v
       #|  &2 * real_of_int r - v
-      #|  !m r.  IMAGE (reflBf r) (v_edge m) = v_edge (down  (reflBi r m))
+      #|  forall m r.  IMAGE (reflBf r) (v_edge m) = v_edge (down  (reflBi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32192,7 +32192,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !m r.  IMAGE (reflBf r) (h_edge m) = h_edge (  (reflBi r m))
+      #|  forall m r.  IMAGE (reflBf r) (h_edge m) = h_edge (  (reflBi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32230,66 +32230,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !r e. (edge e ==> edge (IMAGE (reflBf r) e))
-      #|  !m .  IMAGE (reflCf) (v_edge m) = h_edge ( (reflCi m))
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  !m .  IMAGE (reflCf) (h_edge m) = v_edge ( (reflCi m))
+      #|  forall r e. (edge e ==> edge (IMAGE (reflBf r) e))
+      #|  forall m .  IMAGE (reflCf) (v_edge m) = h_edge ( (reflCi m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32347,7 +32289,65 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !e. (edge e ==> edge (IMAGE (reflCf ) e))
+      #|  forall m .  IMAGE (reflCf) (h_edge m) = v_edge ( (reflCi m))
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  forall e. (edge e ==> edge (IMAGE (reflCf ) e))
       #|  UNIONS V x'
       #|  x'
       #|  {z | UNIONS U z /\\ x (f z)}
@@ -32367,7 +32367,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f x'
       #|  u:B
       #|  u:B
-      #|  !(f:A->B) U V. (homeomorphism f U V) ==> (BIJ (IMAGE f) U V)
+      #|  forall(f:A->B) U V. (homeomorphism f U V) ==> (BIJ (IMAGE f) U V)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32377,16 +32377,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  x
-      #|  !(f:A->B) U V. (homeomorphism f U V) ==>\n      (IMAGE f (UNIONS U) = (UNIONS V))
+      #|  forall(f:A->B) U V. (homeomorphism f U V) ==>\n      (IMAGE f (UNIONS U) = (UNIONS V))
       #|  preimage (UNIONS U) f (IMAGE f (UNIONS U DIFF A)) = UNIONS U DIFF A
       #|  IMAGE f (UNIONS U DIFF A)
       #|  A
       #|  BIJ f (UNIONS U) (UNIONS V)
-      #|  !(f:A->B) U V A. (homeomorphism f U V /\\ (A SUBSET (UNIONS U)) ==>\n    (closed_ V (IMAGE f A) = closed_ U A))
+      #|  forall(f:A->B) U V A. (homeomorphism f U V /\\ (A SUBSET (UNIONS U)) ==>\n    (closed_ V (IMAGE f A) = closed_ U A))
       #|  x' u
       #|  u
       #|  x'
-      #|  !(f:A->B) A X . (INJ f X UNIV) /\\ (UNIONS A SUBSET X) /\\\n     ~(A = EMPTY) ==>\n   ((IMAGE f) (INTERS A) = (INTERS (IMAGE2 f A)))
+      #|  forall(f:A->B) A X . (INJ f X UNIV) /\\ (UNIONS A SUBSET X) /\\\n     ~(A = EMPTY) ==>\n   ((IMAGE f) (INTERS A) = (INTERS (IMAGE2 f A)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32418,7 +32418,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (UNIONS C SUBSET UNIONS U)
       #|  C = {B | closed_ U B /\\ A SUBSET B}
       #|  INJ f (UNIONS U) (UNIV)
-      #|  !(f:A->B) U V A. (homeomorphism f U V) /\\ (A SUBSET (UNIONS U)) /\\\n     (topology_ U)  ==>\n     (IMAGE f (closure U A) = closure V (IMAGE f A))
+      #|  forall(f:A->B) U V A. (homeomorphism f U V) /\\ (A SUBSET (UNIONS U)) /\\\n     (topology_ U)  ==>\n     (IMAGE f (closure U A) = closure V (IMAGE f A))
       #|  x = x'
       #|  (?x'. A x' /\\ (f x = f x'))
       #|  (?x'. B x' /\\ (f x = f x'))
@@ -32431,16 +32431,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f x 
       #|  y:B
       #|  y:B
-      #|  !(f :A->B) A B X . (A SUBSET X) /\\ (B SUBSET X) /\\\n     (INJ f X UNIV) ==> ((IMAGE f A = IMAGE f B) <=> (A = B))
+      #|  forall(f :A->B) A B X . (A SUBSET X) /\\ (B SUBSET X) /\\\n     (INJ f X UNIV) ==> ((IMAGE f A = IMAGE f B) <=> (A = B))
       #|  TAGB
       #|  TAGB
-      #|  !(f: A->B) X Y. (INJ f X Y) ==> (INJ f X UNIV)
+      #|  forall(f: A->B) X Y. (INJ f X Y) ==> (INJ f X UNIV)
       #|  f u
       #|  INJ f (euclid 2) UNIV
       #|  closure top2 (IMAGE f Y) = IMAGE f (closure top2 Y)
       #|  closure top2 (IMAGE f X) = IMAGE f (closure top2 X)
       #|  X SUBSET (UNIONS top2) /\\ Y SUBSET (UNIONS (top2))
-      #|  !f X Y.  (homeomorphism f top2 top2) /\\ (X SUBSET euclid 2) /\\\n       (Y SUBSET euclid 2)\n       ==> (adj X Y ==> (adj (IMAGE f X) (IMAGE f Y)))
+      #|  forall f X Y.  (homeomorphism f top2 top2) /\\ (X SUBSET euclid 2) /\\\n       (Y SUBSET euclid 2)\n       ==> (adj X Y ==> (adj (IMAGE f X) (IMAGE f Y)))
       #|  UNIONS V (f x)
       #|  f x = f (g (f x))
       #|  f x
@@ -32448,17 +32448,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIONS V
       #|  UNIONS U
       #|  f
-      #|  !x'. (A x' ==> (f (g x') = x'))
+      #|  forall x'. (A x' ==> (f (g x') = x'))
       #|  BIJ g (UNIONS V) (UNIONS U)
       #|  g = INV f (UNIONS U) (UNIONS V)
       #|  A
-      #|  !(f:A->B) U V. homeomorphism f U V ==>\n    (homeomorphism (INV f (UNIONS U) (UNIONS V)) V U)
+      #|  forall(f:A->B) U V. homeomorphism f U V ==>\n    (homeomorphism (INV f (UNIONS U) (UNIONS V)) V U)
       #|  Y (f x)
-      #|  !(f:A->B) X Y x.  (BIJ f X Y /\\ X x) ==> (INV f X Y (f x) = x)
-      #|  !(f:A->B) X Y y. (BIJ f X Y /\\ Y y) ==> (f (INV f X Y y) = y)
+      #|  forall(f:A->B) X Y x.  (BIJ f X Y /\\ X x) ==> (INV f X Y (f x) = x)
+      #|  forall(f:A->B) X Y y. (BIJ f X Y /\\ Y y) ==> (f (INV f X Y y) = y)
       #|  x
       #|  x = x'
-      #|  !(f:A->B) A X Y. (BIJ f X Y) /\\ (A SUBSET X) ==>\n    (IMAGE (INV f X Y) (IMAGE f A) = A)
+      #|  forall(f:A->B) A X Y. (BIJ f X Y) /\\ (A SUBSET X) ==>\n    (IMAGE (INV f X Y) (IMAGE f A) = A)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32473,7 +32473,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f Y
       #|  IMAGE f X
       #|  INV f (euclid 2) (euclid 2)
-      #|  !f X Y. (homeomorphism f top2 top2) /\\ (X SUBSET euclid 2) /\\\n       (Y SUBSET euclid 2)\n       ==> (adj X Y = (adj (IMAGE f X) (IMAGE f Y)))
+      #|  forall f X Y. (homeomorphism f top2 top2) /\\ (X SUBSET euclid 2) /\\\n       (Y SUBSET euclid 2)\n       ==> (adj X Y = (adj (IMAGE f X) (IMAGE f Y)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32481,7 +32481,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  G
-      #|  !G top (x:A). FINITE G ==> (FINITE {C | G C /\\ closure top C x})
+      #|  forall G top (x:A). FINITE G ==> (FINITE {C | G C /\\ closure top C x})
       #|  y
       #|  x'
       #|  x'
@@ -32494,18 +32494,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f x'
       #|  z:B
       #|  z:B
-      #|  !(f:A->B) X Y. (BIJ f X Y ==>\n     (BIJ (IMAGE f) {z | z SUBSET X} { z | z SUBSET Y}))
+      #|  forall(f:A->B) X Y. (BIJ f X Y ==>\n     (BIJ (IMAGE f) {z | z SUBSET X} { z | z SUBSET Y}))
       #|  Y
       #|  X
       #|  f
-      #|  !(f:A->B) X Y A B. (BIJ f X Y /\\ A SUBSET X /\\ B SUBSET X ==>\n     ((IMAGE f A = IMAGE f B) <=> (A = B)))
+      #|  forall(f:A->B) X Y A B. (BIJ f X Y /\\ A SUBSET X /\\ B SUBSET X ==>\n     ((IMAGE f A = IMAGE f B) <=> (A = B)))
       #|  Y
       #|  X
       #|  f
-      #|  !(f:A->B) X Y B. (BIJ f X Y /\\ B SUBSET Y ==>\n    (?A. (A SUBSET X /\\ (IMAGE f A = B))))
+      #|  forall(f:A->B) X Y B. (BIJ f X Y /\\ B SUBSET Y ==>\n    (?A. (A SUBSET X /\\ (IMAGE f A = B))))
       #|  e
-      #|  !G e. (segment G /\\ G e) ==> (e SUBSET (euclid 2))
-      #|  !(f:A->B) X Y x t. INJ f X Y /\\ x SUBSET X /\\ (X t) ==>\n   (IMAGE f x (f t) = x t)
+      #|  forall G e. (segment G /\\ G e) ==> (e SUBSET (euclid 2))
+      #|  forall(f:A->B) X Y x t. INJ f X Y /\\ x SUBSET X /\\ (X t) ==>\n   (IMAGE f x (f t) = x t)
       #|  INJ f (euclid 2) (euclid 2) /\\ (closure top2 x' SUBSET (euclid 2)) /\\ (euclid 2 (pointI m))
       #|  closure top2 (g x') = IMAGE f (closure top2 x')
       #|  x' SUBSET (UNIONS top2)
@@ -32518,11 +32518,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f
       #|  G
       #|  BIJ f (euclid 2) (euclid 2)
-      #|  !G f m. (homeomorphism f top2 top2 /\\ segment G) ==>\n   (num_closure G (pointI m) =\n           (num_closure (IMAGE2 f G) (f (pointI m))))
-      #|  !r m. (reflAf r (pointI m) = pointI (reflAi r m))
-      #|  !r m. (reflBf r (pointI m) = pointI (reflBi r m))
-      #|  !m. (reflCf  (pointI m) = pointI (reflCi m))
-      #|  !e. (edge e ==> e SUBSET (euclid 2))
+      #|  forall G f m. (homeomorphism f top2 top2 /\\ segment G) ==>\n   (num_closure G (pointI m) =\n           (num_closure (IMAGE2 f G) (f (pointI m))))
+      #|  forall r m. (reflAf r (pointI m) = pointI (reflAi r m))
+      #|  forall r m. (reflBf r (pointI m) = pointI (reflBi r m))
+      #|  forall m. (reflCf  (pointI m) = pointI (reflCi m))
+      #|  forall e. (edge e ==> e SUBSET (euclid 2))
       #|  G
       #|  edge
       #|  edge
@@ -32539,7 +32539,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D
       #|  D' = IMAGE (reflAf r) C'
       #|  D = IMAGE (reflAf r) C
-      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (!C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
+      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (forall C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
       #|  Z
       #|  num_closure (IMAGE2 (reflAf r) G) (reflAf r (pointI (reflAi r m))) = num_closure G (pointI (reflAi r m))
       #|  pointI m = reflAf r (pointI (reflAi r m))
@@ -32551,7 +32551,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  INJ (IMAGE (reflAf r)) edge edge
       #|  BIJ (reflAf r) (euclid 2) (euclid 2)
       #|  homeomorphism (reflAf r) top2 top2
-      #|  !G r. (segment G ==> (segment (IMAGE2 (reflAf r) G)))
+      #|  forall G r. (segment G ==> (segment (IMAGE2 (reflAf r) G)))
       #|  G
       #|  edge
       #|  edge
@@ -32568,7 +32568,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D
       #|  D' = IMAGE (reflBf r) C'
       #|  D = IMAGE (reflBf r) C
-      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (!C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
+      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (forall C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
       #|  Z
       #|  num_closure (IMAGE2 (reflBf r) G) (reflBf r (pointI (reflBi r m))) = num_closure G (pointI (reflBi r m))
       #|  pointI m = reflBf r (pointI (reflBi r m))
@@ -32580,7 +32580,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  INJ (IMAGE (reflBf r)) edge edge
       #|  BIJ (reflBf r) (euclid 2) (euclid 2)
       #|  homeomorphism (reflBf r) top2 top2
-      #|  !G r. (segment G ==> (segment (IMAGE2 (reflBf r) G)))
+      #|  forall G r. (segment G ==> (segment (IMAGE2 (reflBf r) G)))
       #|  G
       #|  edge
       #|  edge
@@ -32597,7 +32597,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D
       #|  D' = IMAGE (reflCf) C'
       #|  D = IMAGE (reflCf) C
-      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (!C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
+      #|  Z SUBSET G /\\ ~(Z = {}) /\\ (forall C C'. Z C /\\ G C' /\\ adj C C' ==> Z C')
       #|  Z
       #|  num_closure (IMAGE2 (reflCf) G) (reflCf (pointI (reflCi m))) = num_closure G (pointI (reflCi m))
       #|  pointI m = reflCf (pointI (reflCi m))
@@ -32609,12 +32609,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  INJ (IMAGE (reflCf)) edge edge
       #|  BIJ (reflCf) (euclid 2) (euclid 2)
       #|  homeomorphism (reflCf) top2 top2
-      #|  !G . (segment G ==> (segment (IMAGE2 (reflCf) G)))
-      #|  !x m. (x = point m) <=> (euclid 2 x /\\ (FST m = x 0) /\\ (SND m = x 1))
+      #|  forall G . (segment G ==> (segment (IMAGE2 (reflCf) G)))
+      #|  forall x m. (x = point m) <=> (euclid 2 x /\\ (FST m = x 0) /\\ (SND m = x 1))
       #|  y - (y - x) = x
       #|  &2 * real_of_int r - u
       #|  &2 * real_of_int r - u
-      #|  !m r.  IMAGE (reflAf r) (squ m) = squ (left  (reflAi r m))
+      #|  forall m r.  IMAGE (reflAf r) (squ m) = squ (left  (reflAi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32656,7 +32656,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y - (y - x) = x
       #|  &2 * real_of_int r - v
       #|  &2 * real_of_int r - v
-      #|  !m r.  IMAGE (reflBf r) (squ m) = squ (down  (reflBi r m))
+      #|  forall m r.  IMAGE (reflBf r) (squ m) = squ (down  (reflBi r m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32697,7 +32697,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !m.  IMAGE (reflCf) (squ m) = squ (  (reflCi m))
+      #|  forall m.  IMAGE (reflCf) (squ m) = squ (  (reflCi m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32753,7 +32753,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  powerset (X:A->bool) = { z | z SUBSET X }
-      #|  !(f:A -> B) x. (IMAGE f {x} = {(f x)})
+      #|  forall(f:A -> B) x. (IMAGE f {x} = {(f x)})
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32765,7 +32765,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !(f:A->B)  U.\n     (IMAGE f (UNIONS U) = UNIONS (IMAGE (IMAGE f) U))
+      #|  forall(f:A->B)  U.\n     (IMAGE f (UNIONS U) = UNIONS (IMAGE (IMAGE f) U))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32777,19 +32777,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  edge u
-      #|  !G. (segment G) ==> (closure top2 (UNIONS G) SUBSET euclid 2)
+      #|  forall G. (segment G) ==> (closure top2 (UNIONS G) SUBSET euclid 2)
       #|  reflAi r n
       #|  reflAi r n
       #|  (euclid 2)
       #|  (euclid 2)
       #|  pointI n = reflAf r (pointI n')
       #|  n' = reflAi r n
-      #|  !n. IMAGE (reflAf r) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflAi r n))
+      #|  forall n. IMAGE (reflAf r) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflAi r n))
       #|  closure top2 (IMAGE (reflAf r) (UNIONS G)) = IMAGE (reflAf r) (closure top2 (UNIONS G))
       #|  UNIONS (IMAGE (IMAGE (reflAf r)) G) = IMAGE (reflAf r) (UNIONS G)
       #|  edge u
       #|  UNIONS G SUBSET (euclid 2)
-      #|  !G r. (segment G) ==>\n    (curve_cell (IMAGE2 (reflAf r) G) =\n           IMAGE2 (reflAf r) (curve_cell G))
+      #|  forall G r. (segment G) ==>\n    (curve_cell (IMAGE2 (reflAf r) G) =\n           IMAGE2 (reflAf r) (curve_cell G))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32817,12 +32817,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (euclid 2)
       #|  pointI n = reflBf r (pointI n')
       #|  n' = reflBi r n
-      #|  !n. IMAGE (reflBf r) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflBi r n))
+      #|  forall n. IMAGE (reflBf r) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflBi r n))
       #|  closure top2 (IMAGE (reflBf r) (UNIONS G)) = IMAGE (reflBf r) (closure top2 (UNIONS G))
       #|  UNIONS (IMAGE (IMAGE (reflBf r)) G) = IMAGE (reflBf r) (UNIONS G)
       #|  edge u
       #|  UNIONS G SUBSET (euclid 2)
-      #|  !G r. (segment G) ==>\n    (curve_cell (IMAGE2 (reflBf r) G) =\n           IMAGE2 (reflBf r) (curve_cell G))
+      #|  forall G r. (segment G) ==>\n    (curve_cell (IMAGE2 (reflBf r) G) =\n           IMAGE2 (reflBf r) (curve_cell G))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32858,12 +32858,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (euclid 2)
       #|  pointI n = reflCf (pointI n')
       #|  n' = reflCi n
-      #|  !n. IMAGE (reflCf) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflCi n))
+      #|  forall n. IMAGE (reflCf) (closure top2 (UNIONS G)) (pointI n) = closure top2 (UNIONS G) (pointI (reflCi n))
       #|  closure top2 (IMAGE (reflCf) (UNIONS G)) = IMAGE (reflCf) (closure top2 (UNIONS G))
       #|  UNIONS (IMAGE (IMAGE (reflCf)) G) = IMAGE (reflCf) (UNIONS G)
       #|  edge u
       #|  UNIONS G SUBSET (euclid 2)
-      #|  !G . (segment G) ==>\n    (curve_cell (IMAGE2 (reflCf ) G) =\n           IMAGE2 (reflCf) (curve_cell G))
+      #|  forall G . (segment G) ==>\n    (curve_cell (IMAGE2 (reflCf ) G) =\n           IMAGE2 (reflCf) (curve_cell G))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32890,7 +32890,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  x'
       #|  x' = x''
-      #|  !(f:A->B) X Y A B. (INJ f X Y) /\\ (A SUBSET X) /\\ (B SUBSET X) ==>\n     (IMAGE f (A INTER B) = (IMAGE f A) INTER (IMAGE f B))
+      #|  forall(f:A->B) X Y A B. (INJ f X Y) /\\ (A SUBSET X) /\\ (B SUBSET X) ==>\n     (IMAGE f (A INTER B) = (IMAGE f A) INTER (IMAGE f B))
       #|  t
       #|  t
       #|  ?t. U t /\\ (g t = x')
@@ -32898,9 +32898,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  (UNIONS V)
       #|  (UNIONS U)
-      #|  !t. U t ==> (g (t INTER A)  = g t INTER g A)
+      #|  forall t. U t ==> (g (t INTER A)  = g t INTER g A)
       #|  g = IMAGE f
-      #|  !(f:A->B) U V A.  (homeomorphism f U V) /\\ (A SUBSET (UNIONS U)) ==>\n      (IMAGE2 f (induced_top U A) = induced_top V (IMAGE f A))
+      #|  forall(f:A->B) U V A.  (homeomorphism f U V) /\\ (A SUBSET (UNIONS U)) ==>\n      (IMAGE2 f (induced_top U A) = induced_top V (IMAGE f A))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32919,20 +32919,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  IMAGE2 (reflAf r) (induced_top top2 (euclid 2 DIFF UNIONS (curve_cell G))) = induced_top top2 (IMAGE (reflAf r) (euclid 2 DIFF  (UNIONS (curve_cell G))))
       #|  euclid 2 DIFF UNIONS (curve_cell G) SUBSET (UNIONS top2)
-      #|  !G r. (segment G) ==>\n      (IMAGE2 (reflAf r) (ctop G) = ctop (IMAGE2 (reflAf r) G))
+      #|  forall G r. (segment G) ==>\n      (IMAGE2 (reflAf r) (ctop G) = ctop (IMAGE2 (reflAf r) G))
       #|  cell u
       #|  G SUBSET edge
       #|  IMAGE (reflBf r) (euclid 2 DIFF UNIONS (curve_cell G)) = euclid 2 DIFF (IMAGE (reflBf r) (UNIONS (curve_cell G)))
       #|  r
       #|  IMAGE2 (reflBf r) (induced_top top2 (euclid 2 DIFF UNIONS (curve_cell G))) = induced_top top2 (IMAGE (reflBf r) (euclid 2 DIFF  (UNIONS (curve_cell G))))
       #|  euclid 2 DIFF UNIONS (curve_cell G) SUBSET (UNIONS top2)
-      #|  !G r. (segment G) ==>\n      (IMAGE2 (reflBf r) (ctop G) = ctop (IMAGE2 (reflBf r) G))
+      #|  forall G r. (segment G) ==>\n      (IMAGE2 (reflBf r) (ctop G) = ctop (IMAGE2 (reflBf r) G))
       #|  cell u
       #|  G SUBSET edge
       #|  IMAGE (reflCf) (euclid 2 DIFF UNIONS (curve_cell G)) = euclid 2 DIFF (IMAGE (reflCf) (UNIONS (curve_cell G)))
       #|  IMAGE2 (reflCf) (induced_top top2 (euclid 2 DIFF UNIONS (curve_cell G))) = induced_top top2 (IMAGE (reflCf) (euclid 2 DIFF  (UNIONS (curve_cell G))))
       #|  euclid 2 DIFF UNIONS (curve_cell G) SUBSET (UNIONS top2)
-      #|  !G . (segment G) ==>\n      (IMAGE2 (reflCf) (ctop G) = ctop (IMAGE2 (reflCf) G))
+      #|  forall G . (segment G) ==>\n      (IMAGE2 (reflCf) (ctop G) = ctop (IMAGE2 (reflCf) G))
       #|  U
       #|  x = x''
       #|  UNIONS U x''
@@ -32940,10 +32940,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIONS U x'
       #|  x'
       #|   x
-      #|  !x'. (UNIONS U x') ==> (INV f (UNIONS U) (UNIONS V) (f x') = x')
+      #|  forall x'. (UNIONS U x') ==> (INV f (UNIONS U) (UNIONS V) (f x') = x')
       #|  Z = IMAGE g (IMAGE f Z)
       #|  g = INV f (UNIONS U) (UNIONS V)
-      #|  !(f:A->B) U V Z. (homeomorphism f U V /\\ (Z SUBSET UNIONS U) ==>\n       (connected V (IMAGE f Z) = connected U Z))
+      #|  forall(f:A->B) U V Z. (homeomorphism f U V /\\ (Z SUBSET UNIONS U) ==>\n       (connected V (IMAGE f Z) = connected U Z))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32955,7 +32955,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !U (x:A) . (component  U x = {y | ?Z. connected U Z /\\ Z x /\\ Z y})
+      #|  forall U (x:A) . (component  U x = {y | ?Z. connected U Z /\\ Z x /\\ Z y})
       #|   x = x'''
       #|  x''
       #|  A
@@ -32963,7 +32963,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?A. A SUBSET (UNIONS U) /\\ (IMAGE f A = Z)
       #|  Z SUBSET UNIONS U
       #|  IMAGE f Z
-      #|  !(f:A->B) U V x. (homeomorphism f U V) /\\ (UNIONS U x) ==>\n     (IMAGE f (component U x) = (component  V (f x)))
+      #|  forall(f:A->B) U V x. (homeomorphism f U V) /\\ (UNIONS U x) ==>\n     (IMAGE f (component U x) = (component  V (f x)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -32982,30 +32982,30 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f y (f x) = y x
       #|  {x | UNIONS U x /\\ IMAGE f y (f x)} = y
       #|  v
-      #|  !(f:A->B) U V. (BIJ f (UNIONS U) (UNIONS V)) /\\\n    (BIJ (IMAGE f) U V) ==> (homeomorphism f U V)
+      #|  forall(f:A->B) U V. (BIJ f (UNIONS U) (UNIONS V)) /\\\n    (BIJ (IMAGE f) U V) ==> (homeomorphism f U V)
       #|  g = IMAGE f
       #|  g = IMAGE f
       #|  (UNIONS V)
       #|  (UNIONS U)
       #|  IMAGE f (UNIONS C) (f x) = (UNIONS C) x
       #|  UNIONS C SUBSET UNIONS U
-      #|  !(f:A->B) U V C. (homeomorphism f U V) /\\ (C SUBSET U) ==>\n   (homeomorphism f C (IMAGE2 f C))
+      #|  forall(f:A->B) U V C. (homeomorphism f U V) /\\ (C SUBSET U) ==>\n   (homeomorphism f C (IMAGE2 f C))
       #|  top2
       #|  top2
       #|  ctop (IMAGE2 (reflAf r) G) = IMAGE2 (reflAf r) (ctop G)
-      #|  !(f:A->B) G r x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflAf r) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflAf r) G)) (reflAf r x)))
+      #|  forall(f:A->B) G r x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflAf r) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflAf r) G)) (reflAf r x)))
       #|  top2
       #|  top2
       #|  ctop (IMAGE2 (reflBf r) G) = IMAGE2 (reflBf r) (ctop G)
-      #|  !(f:A->B) G r x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflBf r) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflBf r) G)) (reflBf r x)))
+      #|  forall(f:A->B) G r x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflBf r) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflBf r) G)) (reflBf r x)))
       #|  top2
       #|  top2
       #|  ctop (IMAGE2 (reflCf) G) = IMAGE2 (reflCf) (ctop G)
-      #|  !(f:A->B) G x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflCf) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflCf) G)) (reflCf x)))
-      #|  !(X:A->bool) A B. (X SUBSET (A UNION B)   ==>\n      (~(X INTER A = EMPTY )) \\/ (~(X INTER B = EMPTY)) \\/ (X = EMPTY ))
+      #|  forall(f:A->B) G x. (segment G) /\\ (UNIONS (ctop G) x) ==>\n    (IMAGE (reflCf) (component  (ctop G) x) =\n         (component  (ctop (IMAGE2 (reflCf) G)) (reflCf x)))
+      #|  forall(X:A->bool) A B. (X SUBSET (A UNION B)   ==>\n      (~(X INTER A = EMPTY )) \\/ (~(X INTER B = EMPTY)) \\/ (X = EMPTY ))
       #|  squ m = squ n
-      #|  !m n. ((squ m INTER squ n = {}) <=> ~(m = n))
-      #|  (!m. (~(v_edge m = EMPTY ) /\\ ~(h_edge m = EMPTY )\n       /\\ ~(squ m = EMPTY ) /\\ ~({(pointI m)} = EMPTY ))) /\\\n   (!m n. (v_edge m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER v_edge m = EMPTY ) /\\\n  (h_edge m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER h_edge m = EMPTY ) /\\\n  (squ m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER squ m = EMPTY ) /\\\n       ((v_edge m INTER v_edge n  = EMPTY ) <=> ~(m = n) ) /\\\n   ((h_edge m INTER h_edge n  = EMPTY ) <=> ~(m = n) ) /\\\n  ((squ m INTER squ n  = EMPTY ) <=> ~(m = n) ) /\\\n  (squ m INTER h_edge n = EMPTY ) /\\\n         (h_edge n INTER squ m = EMPTY ) /\\\n  (squ m INTER v_edge n = EMPTY ) /\\\n        ( v_edge n INTER squ m = EMPTY ) /\\\n   (h_edge m INTER v_edge n = EMPTY ) /\\\n        ( v_edge n INTER h_edge m = EMPTY ) /\\\n   (({(pointI n)} INTER {(pointI m)} = EMPTY ) <=> ~(n = m)) /\\\n   (({(pointI n)} = {(pointI m)}  ) <=> (n = m)) /\\\n   ~(h_edge n = {(pointI m)}) /\\\n   ~(v_edge n = {(pointI m)}) /\\\n   ~(squ n = {(pointI m)}) /\\\n   ~( {(pointI m)} = h_edge n) /\\\n~( {(pointI m)} = v_edge n) /\\\n~( {(pointI m)} = squ n) /\\\n~(h_edge m = v_edge n) /\\\n((h_edge m = h_edge n) <=> (m = n)) /\\\n~(h_edge m = squ n) /\\\n~(v_edge m = h_edge n) /\\\n((v_edge m = v_edge n) <=> (m = n)) /\\\n~(v_edge m = squ n) /\\\n~(squ m = h_edge n) /\\\n((squ m = squ n) <=> (m = n)) /\\\n~(squ m = v_edge n) /\\\n~(squ m (pointI n)) /\\\n~(v_edge m (pointI n)) /\\\n~(h_edge m (pointI n)) /\\\n((pointI n = pointI m) <=> (n = m)))  
+      #|  forall m n. ((squ m INTER squ n = {}) <=> ~(m = n))
+      #|  (forall m. (~(v_edge m = EMPTY ) /\\ ~(h_edge m = EMPTY )\n       /\\ ~(squ m = EMPTY ) /\\ ~({(pointI m)} = EMPTY ))) /\\\n   (forall m n. (v_edge m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER v_edge m = EMPTY ) /\\\n  (h_edge m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER h_edge m = EMPTY ) /\\\n  (squ m INTER {(pointI n)} = EMPTY ) /\\\n         ({(pointI n)} INTER squ m = EMPTY ) /\\\n       ((v_edge m INTER v_edge n  = EMPTY ) <=> ~(m = n) ) /\\\n   ((h_edge m INTER h_edge n  = EMPTY ) <=> ~(m = n) ) /\\\n  ((squ m INTER squ n  = EMPTY ) <=> ~(m = n) ) /\\\n  (squ m INTER h_edge n = EMPTY ) /\\\n         (h_edge n INTER squ m = EMPTY ) /\\\n  (squ m INTER v_edge n = EMPTY ) /\\\n        ( v_edge n INTER squ m = EMPTY ) /\\\n   (h_edge m INTER v_edge n = EMPTY ) /\\\n        ( v_edge n INTER h_edge m = EMPTY ) /\\\n   (({(pointI n)} INTER {(pointI m)} = EMPTY ) <=> ~(n = m)) /\\\n   (({(pointI n)} = {(pointI m)}  ) <=> (n = m)) /\\\n   ~(h_edge n = {(pointI m)}) /\\\n   ~(v_edge n = {(pointI m)}) /\\\n   ~(squ n = {(pointI m)}) /\\\n   ~( {(pointI m)} = h_edge n) /\\\n~( {(pointI m)} = v_edge n) /\\\n~( {(pointI m)} = squ n) /\\\n~(h_edge m = v_edge n) /\\\n((h_edge m = h_edge n) <=> (m = n)) /\\\n~(h_edge m = squ n) /\\\n~(v_edge m = h_edge n) /\\\n((v_edge m = v_edge n) <=> (m = n)) /\\\n~(v_edge m = squ n) /\\\n~(squ m = h_edge n) /\\\n((squ m = squ n) <=> (m = n)) /\\\n~(squ m = v_edge n) /\\\n~(squ m (pointI n)) /\\\n~(v_edge m (pointI n)) /\\\n~(h_edge m (pointI n)) /\\\n((pointI n = pointI m) <=> (n = m)))  
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -33013,15 +33013,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !X A (B:A->bool). ~(X INTER (A UNION B) = EMPTY) ==>\n    ~(X INTER A = EMPTY) \\/ ~(X INTER B = EMPTY)
-      #|  !m n. (v_edge m SUBSET squc n) ==> (n = m) \\/ (n = left  m)
-      #|  !m n. (h_edge m SUBSET squc n) ==> (n = m) \\/ (n = down  m)
+      #|  forall X A (B:A->bool). ~(X INTER (A UNION B) = EMPTY) ==>\n    ~(X INTER A = EMPTY) \\/ ~(X INTER B = EMPTY)
+      #|  forall m n. (v_edge m SUBSET squc n) ==> (n = m) \\/ (n = left  m)
+      #|  forall m n. (h_edge m SUBSET squc n) ==> (n = m) \\/ (n = down  m)
       #|  x
-      #|  !U (x:A). (topology_ U) ==> ((component  U x = EMPTY) = ~(UNIONS U x))
-      #|  !(f:A->B) X t. X t ==> (IMAGE f X) (f t)
-      #|  !(f:A->B) X A B. (INJ f X UNIV) /\\ (A SUBSET X ) /\\ (B SUBSET X) /\\\n     (IMAGE f A SUBSET IMAGE f B) ==> (A SUBSET B)
+      #|  forall U (x:A). (topology_ U) ==> ((component  U x = EMPTY) = ~(UNIONS U x))
+      #|  forall(f:A->B) X t. X t ==> (IMAGE f X) (f t)
+      #|  forall(f:A->B) X A B. (INJ f X UNIV) /\\ (A SUBSET X ) /\\ (B SUBSET X) /\\\n     (IMAGE f A SUBSET IMAGE f B) ==> (A SUBSET B)
       #|  closure (top2) (euclid 2) = euclid 2
-      #|  !A. (A SUBSET (euclid 2) ==> (closure top2 A SUBSET (euclid 2)))
+      #|  forall A. (A SUBSET (euclid 2) ==> (closure top2 A SUBSET (euclid 2)))
       #|  UNIONS (ctop G)
       #|  (euclid 2)
       #|  euclid 2
@@ -33052,12 +33052,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G' = IMAGE2 (reflAf (&:0)) G
       #|  e' = IMAGE (reflAf (&:0)) e 
       #|  m
-      #|  !G m n x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (v_edge m SUBSET squc n) /\\\n     (G (v_edge m)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
-      #|  !j m. closure top2 (v_edge j) (pointI m) ==> (j = m) \\/ (j = down m)
+      #|  forall G m n x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (v_edge m SUBSET squc n) /\\\n     (G (v_edge m)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
+      #|  forall j m. closure top2 (v_edge j) (pointI m) ==> (j = m) \\/ (j = down m)
       #|  IMAGE (reflBf r) (closure top2 (squ n)) = closure top2 (IMAGE (reflBf r) (squ n))
-      #|  !r n m. (IMAGE (reflBf r) (squ n) = squ m) ==>\n    (IMAGE (reflBf r) (squc n) = squc m)
+      #|  forall r n m. (IMAGE (reflBf r) (squ n) = squ m) ==>\n    (IMAGE (reflBf r) (squc n) = squc m)
       #|  IMAGE (reflCf) (closure top2 (squ n)) = closure top2 (IMAGE (reflCf) (squ n))
-      #|  !n m. (IMAGE (reflCf) (squ n) = squ m) ==>\n    (IMAGE (reflCf) (squc n) = squc m)
+      #|  forall n m. (IMAGE (reflCf) (squ n) = squ m) ==>\n    (IMAGE (reflCf) (squc n) = squc m)
       #|  UNIONS (ctop G)
       #|  (euclid 2)
       #|  euclid 2
@@ -33088,7 +33088,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x' = reflBf (&:0) x
       #|  G' = IMAGE2 (reflBf (&:0)) G
       #|  e' = IMAGE (reflBf (&:0)) e 
-      #|  !G m n j x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (v_edge j SUBSET squc n) /\\ (closure top2 (v_edge j) (pointI m)) /\\\n    (G (v_edge j)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
+      #|  forall G m n j x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (v_edge j SUBSET squc n) /\\ (closure top2 (v_edge j) (pointI m)) /\\\n    (G (v_edge j)) /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
       #|  UNIONS (ctop G)
       #|  (euclid 2)
       #|  euclid 2
@@ -33104,7 +33104,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  squ p' = IMAGE (reflCf ) (squ p)
       #|  p = reflCi p'
       #|  edge (h_edge m')
-      #|  !e. (edge e) ==> (closure top2 (IMAGE (reflCf ) e) = IMAGE (reflCf) (closure top2 e))
+      #|  forall e. (edge e) ==> (closure top2 (IMAGE (reflCf ) e) = IMAGE (reflCf) (closure top2 e))
       #|  v_edge (reflCi  m') = IMAGE (reflCf ) (h_edge ( m'))
       #|  squc ( (reflCi n)) = IMAGE (reflCf) (squc n)
       #|  reflCf
@@ -33121,7 +33121,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G' = IMAGE2 (reflCf) G
       #|  e' = IMAGE (reflCf) e 
       #|  edge e
-      #|  !G m n e' x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (e' SUBSET squc n) /\\ (closure top2 e' (pointI m)) /\\ (edge e') /\\\n    (G e') /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
+      #|  forall G m n e' x e. (segment G /\\ (squ n SUBSET component  (ctop G) x) /\\\n     (e' SUBSET squc n) /\\ (closure top2 e' (pointI m)) /\\ (edge e') /\\\n    (G e') /\\ G e /\\ (closure top2 e (pointI m)) ==>\n   (?p. e SUBSET closure top2 (squ p) /\\\n       (squ p SUBSET (component  (ctop G) x))))
       #|  C
       #|  p
       #|  m
@@ -33132,11 +33132,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (?p e. G e /\\ e SUBSET closure top2 (squ p) /\\ squ p SUBSET component (ctop G) x)
       #|  (?m. squ m SUBSET (component  (ctop G) x))
       #|  S = { e | (G e /\\ (?p. (e SUBSET squc p) /\\ (squ p SUBSET component  (ctop G) x)) ) } 
-      #|  !G x. (segment G /\\ ~(component  (ctop G) x  = EMPTY) ) ==>\n    inductive_set G\n        { e | (G e /\\ (?p. (e SUBSET squc p) /\\\n              (squ p SUBSET component  (ctop G) x)) ) } 
+      #|  forall G x. (segment G /\\ ~(component  (ctop G) x  = EMPTY) ) ==>\n    inductive_set G\n        { e | (G e /\\ (?p. (e SUBSET squc p) /\\\n              (squ p SUBSET component  (ctop G) x)) ) } 
       #|  inductive_set G S
       #|   S = G
       #|  S = {e | (G e /\\ (?p. (e SUBSET squc p) /\\ (squ p SUBSET component  (ctop G) x)) ) }
-      #|  !G  x e .  (segment G /\\ ~(component  (ctop G) x  = EMPTY)  /\\\n     (G e)) ==>\n   (?p. (e SUBSET squc p) /\\ (squ p SUBSET component  (ctop G) x))
+      #|  forall G  x e .  (segment G /\\ ~(component  (ctop G) x  = EMPTY)  /\\\n     (G e)) ==>\n   (?p. (e SUBSET squc p) /\\ (squ p SUBSET component  (ctop G) x))
       #|  :(A->bool)#(B->bool)#(B->(A->bool))
       #|  :A
       #|  graph_vertex (G:(A,B)graph_t) = FST (dest_graph_t G)
@@ -33144,29 +33144,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_inc (G:(A,B)graph_t) = drop1 (dest_graph_t G)
       #|  graph (G:(A,B)graph_t) <=>\n   (IMAGE (graph_inc G) (graph_edge G)) SUBSET\n   { s | (s SUBSET (graph_vertex G)) /\\ (s HAS_SIZE 2) }
       #|  graph_incident\n   (G:(A,B)graph_t) e x <=>\n   (graph_edge G e) /\\ (graph_inc G e x)
-      #|  graph_iso f (G:(A,B)graph_t) (H:(A',B')graph_t) <=>\n   (?u v. (f = (u,v)) /\\ (BIJ u (graph_vertex G) (graph_vertex H)) /\\\n   (BIJ v (graph_edge G) (graph_edge H)) /\\\n   (!e. (graph_edge G e) ==>\n      (graph_inc H (v e) = IMAGE u (graph_inc G e))))
+      #|  graph_iso f (G:(A,B)graph_t) (H:(A',B')graph_t) <=>\n   (?u v. (f = (u,v)) /\\ (BIJ u (graph_vertex G) (graph_vertex H)) /\\\n   (BIJ v (graph_edge G) (graph_edge H)) /\\\n   (forall e. (graph_edge G e) ==>\n      (graph_inc H (v e) = IMAGE u (graph_inc G e))))
       #|  mk_simple_graph (E:(A->bool)->bool) =\n  mk_graph_t\n  (UNIONS E, (E:(A->bool)->bool),\n   (\\ (x:A->bool) (y:A). (x y)))
       #|  K33 = mk_simple_graph\n   { {1,10}, {2,10}, {3,10},\n     {1,20}, {2,20}, {3,20},\n     {1,30}, {2,30}, {3,30} }
       #|  graph_del (G:(A,B)graph_t) V E =\n  mk_graph_t\n   ((graph_vertex G DIFF V),\n    (graph_edge G DIFF\n        (E UNION { (e:B) | ?(v:A). (V v /\\ graph_incident G e v ) })),\n    (graph_inc G))
-      #|  graph_path (G:(A,B)graph_t) f n <=>\n   (?v e . (f = (v,e)) /\\ (INJ v { m | m <=| n } (graph_vertex G)) /\\\n   (INJ e { m | m <| n } (graph_edge G)) /\\\n   (!i. (i <| n )  ==>\n         (graph_inc G (e i) = {(v  i), (v (SUC i))})))
-      #|  graph_cycle (G:(A,B)graph_t) f n <=>\n   (?v e . (f = (v,e)) /\\ (INJ v { m | m <| n } (graph_vertex G)) /\\\n   (INJ e { m | m <| n } (graph_edge G)) /\\\n   (!i. (i <| n )  ==>\n         (graph_inc G (e i) = {(v  i), (v ((SUC i) %| (n)))})))
-      #|  graph_connected (G:(A,B)graph_t) <=>\n  !v v'. (graph_vertex G v) /\\ (graph_vertex G v') /\\ ~(v = v') ==>\n   (?f n. (graph_path G f n) /\\ (FST f 0 = v) /\\ (FST f n = v'))
-      #|  graph_2_connected (G:(A,B)graph_t) <=>\n  (graph_connected G) /\\\n  (!v. (graph_vertex G v) ==> (graph_connected\n     (graph_del G {v} EMPTY)))
+      #|  graph_path (G:(A,B)graph_t) f n <=>\n   (?v e . (f = (v,e)) /\\ (INJ v { m | m <=| n } (graph_vertex G)) /\\\n   (INJ e { m | m <| n } (graph_edge G)) /\\\n   (forall i. (i <| n )  ==>\n         (graph_inc G (e i) = {(v  i), (v (SUC i))})))
+      #|  graph_cycle (G:(A,B)graph_t) f n <=>\n   (?v e . (f = (v,e)) /\\ (INJ v { m | m <| n } (graph_vertex G)) /\\\n   (INJ e { m | m <| n } (graph_edge G)) /\\\n   (forall i. (i <| n )  ==>\n         (graph_inc G (e i) = {(v  i), (v ((SUC i) %| (n)))})))
+      #|  graph_connected (G:(A,B)graph_t) <=>\n  forall v v'. (graph_vertex G v) /\\ (graph_vertex G v') /\\ ~(v = v') ==>\n   (?f n. (graph_path G f n) /\\ (FST f 0 = v) /\\ (FST f n = v'))
+      #|  graph_2_connected (G:(A,B)graph_t) <=>\n  (graph_connected G) /\\\n  (forall v. (graph_vertex G v) ==> (graph_connected\n     (graph_del G {v} EMPTY)))
       #|  simple_arc (U:(A->bool)->bool) C <=>\n   (?f. (C = IMAGE f { x | &.0 <= x /\\ x <= &.1}) /\\\n   (continuous f (top_of_metric(UNIV,d_real)) U) /\\\n   (INJ f { x | &.0 <= x /\\ x <= &.1} (UNIONS U)))
       #|  simple_closed_curve (U:(A->bool)->bool) C <=>\n   (?f. (C = IMAGE f { x | &.0 <= x /\\ x <= &.1}) /\\\n   (continuous f (top_of_metric(UNIV,d_real)) U) /\\\n   (INJ f { x | &.0 <= x /\\ x < &.1} (UNIONS U)) /\\\n   (f (&.0) = f (&.1)))
       #|  simple_polygonal_arc PE C <=>\n    (simple_arc (top_of_metric(euclid 2,d_euclid)) C) /\\\n    (?E. (C SUBSET UNIONS E) /\\ (FINITE E) /\\ (PE E))
       #|  simple_polygonal_curve PE C <=>\n    (simple_closed_curve (top_of_metric(euclid 2,d_euclid)) C) /\\\n    (?E. (C SUBSET UNIONS E) /\\ (FINITE E) /\\ (PE E))
-      #|  hv_line E <=> (!e. (E e) ==> (?x y. (e = mk_line (point x) (point y)) /\\\n      ((FST x = FST y) \\/ (SND x = SND y))))
+      #|  hv_line E <=> (forall e. (E e) ==> (?x y. (e = mk_line (point x) (point y)) /\\\n      ((FST x = FST y) \\/ (SND x = SND y))))
       #|  p_conn A x y <=> (?C. (simple_polygonal_arc hv_line C) /\\\n     (C SUBSET A) /\\ (C x) /\\ (C y))
       #|  subf A (f:A->B) g x = if (A x) then (f x) else (g x)
-      #|  !x y. (min_real x y <= x) /\\ (min_real x y <= y)
+      #|  forall x y. (min_real x y <= x) /\\ (min_real x y <= y)
       #|  e
       #|  x
       #|  (X DIFF B)
       #|  dX
       #|  X
       #|  (X DIFF B) x
-      #|  !X dX B (x:A).\n     (metric_space (X,dX)) /\\ (closed_ (top_of_metric(X,dX)) B) /\\\n     (~(B x)) /\\ (X x) ==>\n     (?delta. (&0 < delta) /\\ (!y. (dX x y < delta) ==> (~(B y))))
+      #|  forall X dX B (x:A).\n     (metric_space (X,dX)) /\\ (closed_ (top_of_metric(X,dX)) B) /\\\n     (~(B x)) /\\ (X x) ==>\n     (?delta. (&0 < delta) /\\ (forall y. (dX x y < delta) ==> (~(B y))))
       #|  &0 < &1
       #|  &1
       #|  min_real delta delta' <= delta'
@@ -33177,7 +33177,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon
       #|  x
       #|  X
-      #|  (?delta. (&0 < delta) /\\ (!y. (dX x y < delta) ==> (~(A y))))
+      #|  (?delta. (&0 < delta) /\\ (forall y. (dX x y < delta) ==> (~(A y))))
       #|  x
       #|  X x
       #|  min_real delta delta' <= delta'
@@ -33188,7 +33188,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon
       #|  x
       #|  X
-      #|  (?delta. (&0 < delta) /\\ (!y. (dX x y < delta) ==> (~(B y))))
+      #|  (?delta. (&0 < delta) /\\ (forall y. (dX x y < delta) ==> (~(B y))))
       #|  x
       #|  X x
       #|  min_real delta delta' <= delta
@@ -33201,15 +33201,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon
       #|  x
       #|  (A x \\/ ~(A x)) /\\ (B x \\/ (~(B x)))
-      #|  !X dX Y dY A B (f:A->B) g.\n     ((metric_space (X,dX)) /\\ (metric_space (Y,dY)) /\\\n     (closed_ (top_of_metric(X,dX)) A ) /\\\n     (closed_ (top_of_metric(X,dX)) B ) /\\\n     (metric_continuous f (A,dX) (Y,dY)) /\\\n     (metric_continuous g (B,dX) (Y,dY)) /\\\n     (!x. (A x /\\ B x) ==> (f x = g x))) ==>\n     (metric_continuous (subf A f g) (A UNION B,dX) (Y,dY))
+      #|  forall X dX Y dY A B (f:A->B) g.\n     ((metric_space (X,dX)) /\\ (metric_space (Y,dY)) /\\\n     (closed_ (top_of_metric(X,dX)) A ) /\\\n     (closed_ (top_of_metric(X,dX)) B ) /\\\n     (metric_continuous f (A,dX) (Y,dY)) /\\\n     (metric_continuous g (B,dX) (Y,dY)) /\\\n     (forall x. (A x /\\ B x) ==> (f x = g x))) ==>\n     (metric_continuous (subf A f g) (A UNION B,dX) (Y,dY))
       #|  TAGB
       #|  C
-      #|  !A B x y. (A SUBSET B) /\\ (p_conn A x y) ==> (p_conn B x y)
+      #|  forall A B x y. (A SUBSET B) /\\ (p_conn A x y) ==> (p_conn B x y)
       #|  (&1 - (&1 - t)) = t
       #|  (&1 - t)
       #|  (&1 - (&1 - t)) = t
       #|  (&1 - t)
-      #|  !x y. mk_line x y = mk_line y x
+      #|  forall x y. mk_line x y = mk_line y x
       #|  (&1 - (t' + (&1 - t') * t)) = ((&1 - t') * (&1 - t))
       #|  t' + (&1 - t')*t
       #|  ((t' - t)* &1 + t = t') /\\ (&1 - t - (t' - t)* &1 = (&1 - t'))
@@ -33219,7 +33219,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (t' - t)*s
       #|  s = (&1 /(&1 - t))
       #|  ~(t = &1)
-      #|  !x y z. ( ~(x = z) /\\ (mk_line x y z)) ==>\n        (mk_line x y = mk_line x z)
+      #|  forall x y z. ( ~(x = z) /\\ (mk_line x y z)) ==>\n        (mk_line x y = mk_line x z)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -36285,10 +36285,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( +. )
       #|  ( *. )
       #|  x = p
-      #|  !x y p q. (mk_line x y p) /\\ (mk_line x y q) /\\ (~(p = q)) ==>\n    (mk_line x y = mk_line p q)
+      #|  forall x y p q. (mk_line x y p) /\\ (mk_line x y q) /\\ (~(p = q)) ==>\n    (mk_line x y = mk_line p q)
       #|  z
       #|  (?z. (mk_line x y INTER mk_line p q) z)
-      #|  !x y p q. ~(mk_line x y = mk_line p q) ==>\n    (?z. (mk_line x y INTER mk_line p q) SUBSET {z} )
+      #|  forall x y p q. ~(mk_line x y = mk_line p q) ==>\n    (?z. (mk_line x y INTER mk_line p q) SUBSET {z} )
       #|  f
       #|  e
       #|  {z}
@@ -36303,7 +36303,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE EE
       #|  EE = { (e,f) | (E e) /\\ (E f) }
       #|  E2 = { (e,f) | (E e) /\\ (E f) /\\ (~(e = f)) }
-      #|  !E. (FINITE E) /\\ (!e. (E e) ==> (?x y. e = mk_line x y)) ==>\n    (?X. (FINITE X) /\\\n    (!e f z. (E e) /\\ (E f) /\\ ~(e = f) /\\ e z /\\ f z ==> (X z)))
+      #|  forall E. (FINITE E) /\\ (forall e. (E e) ==> (?x y. e = mk_line x y)) ==>\n    (?X. (FINITE X) /\\\n    (forall e f z. (E e) /\\ (E f) /\\ ~(e = f) /\\ e z /\\ f z ==> (X z)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -36344,7 +36344,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !n. (euclid n (euclid0))
+      #|  forall n. (euclid n (euclid0))
       #|  euclid0 = point(&0,&0)
       #|  (1 = SUC 0) /\\ (2 = SUC 1) /\\ (3 = SUC 2) /\\ (4 = SUC 3) /\\ (5 = SUC 4)
       #|  EVEN 0 /\\ ~(EVEN 1) /\\ (EVEN 2) /\\ ~(EVEN 3) /\\\n  (EVEN 4) /\\ ~(EVEN 5)
@@ -36354,13 +36354,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 - x = --x
       #|  0 *| 0 = 0
       #|  d_euclid (euclid_plus x euclid0) (euclid_plus x x'') = d_euclid euclid0 x''
-      #|  !x y.  d_euclid x y = d_euclid (x+euclid0) y 
+      #|  forall x y.  d_euclid x y = d_euclid (x+euclid0) y 
       #|  euclid 2 x''
       #|  x'' = (((&1 - a) * e') *# e1)
       #|  a + &1 - a = &1
-      #|  !x e e'. (&0 < e) /\\ (&0 <= e') /\\ (e' < e) /\\ (euclid 2 x) ==>\n     (mk_segment x (x + e' *# e1) SUBSET\n              (open_ball(euclid 2,d_euclid)) x e)
+      #|  forall x e e'. (&0 < e) /\\ (&0 <= e') /\\ (e' < e) /\\ (euclid 2 x) ==>\n     (mk_segment x (x + e' *# e1) SUBSET\n              (open_ball(euclid 2,d_euclid)) x e)
       #|  abs  (&1 - a) = (&1 - a)
-      #|  !b. d_euclid (b *# x) (b *# y)  = abs  (b) * d_euclid x y
+      #|  forall b. d_euclid (b *# x) (b *# y)  = abs  (b) * d_euclid x y
       #|  n
       #|  d_euclid (euclid_plus (a *# x') ((&1 - a) *# x)) (euclid_plus (a *# x') ((&1 - a) *# y)) = d_euclid ((&1 - a) *# x) ((&1 - a) *# y)
       #|  abs  a = a
@@ -36374,20 +36374,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z = a *# x' + (&1 - a) *# x
       #|  (a + &1 - a = &1) /\\ (&1 * C = C )
       #|  u + v < (a*e) + (&1 - a)*e
-      #|  (!d. (?u v. (d <= u + v) /\\ (u < a*e) /\\ (v <= (&1- a)*e))  ==> (d < e))
+      #|  (forall d. (?u v. (d <= u + v) /\\ (u < a*e) /\\ (v <= (&1- a)*e))  ==> (d < e))
       #|  a = &0
       #|  d_euclid x x'' = d_euclid (a *# x + (&1 - a) *# x) x''
-      #|  !x e n. (convex (open_ball (euclid n,d_euclid) x e))
+      #|  forall x e n. (convex (open_ball (euclid n,d_euclid) x e))
       #|  n
       #|  e
       #|  x
-      #|  !x e n u v.\n     (open_ball(euclid n,d_euclid) x e u) /\\\n     (open_ball(euclid n,d_euclid) x e v) ==>\n     (mk_segment u v SUBSET (open_ball(euclid n,d_euclid) x e))
+      #|  forall x e n u v.\n     (open_ball(euclid n,d_euclid) x e u) /\\\n     (open_ball(euclid n,d_euclid) x e v) ==>\n     (mk_segment u v SUBSET (open_ball(euclid n,d_euclid) x e))
       #|  (a = b) <=> (a - b = &0)
-      #|  !x y. (x = y) <=> (euclid_minus x y = euclid0)
+      #|  forall x y. (x = y) <=> (euclid_minus x y = euclid0)
       #|  x':num
-      #|  !x y u v. (euclid_plus (x + y) (u + v) = (x + u) + (y + v))
-      #|  !x y. (euclid_minus x y = euclid_plus x ((-- &.1) *# y))
-      #|  !t x y . (~(t = &0)) /\\ (t *# x = t *# y) ==> (x = y)
+      #|  forall x y u v. (euclid_plus (x + y) (u + v) = (x + u) + (y + v))
+      #|  forall x y. (euclid_minus x y = euclid_plus x ((-- &.1) *# y))
+      #|  forall t x y . (~(t = &0)) /\\ (t *# x = t *# y) ==> (x = y)
       #|  x':num
       #|  &1 - &0 = &1
       #|  a = &.0
@@ -36413,7 +36413,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x' < &1
       #|  ~(x' < &0)
       #|  (joinf (\\u. x) (joinf (\\t. euclid_plus (t *# y) ((&1 - t) *# x)) (\\u. y) (&.1)) (&.0))
-      #|  !x y n. (euclid n x) /\\ (euclid n y) /\\ ~(x = y) ==> (?f.\n     (continuous f\n        (top_of_metric(UNIV,d_real))\n        (top_of_metric (euclid n,d_euclid))) /\\\n      (INJ f {x | &0 <= x /\\ x <= &1} (euclid n)) /\\\n     (IMAGE f {t | &.0 <=. t /\\ t <=. &.1}  = mk_segment x y))
+      #|  forall x y n. (euclid n x) /\\ (euclid n y) /\\ ~(x = y) ==> (?f.\n     (continuous f\n        (top_of_metric(UNIV,d_real))\n        (top_of_metric (euclid n,d_euclid))) /\\\n      (INJ f {x | &0 <= x /\\ x <= &1} (euclid n)) /\\\n     (IMAGE f {t | &.0 <=. t /\\ t <=. &.1}  = mk_segment x y))
       #|  euclid_plus (point p) (point (e,&0)) = euclid_plus (point (FST p,SND p)) (point (e,&0))
       #|  (FST p + e, SND p)
       #|  p
@@ -36424,7 +36424,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  x + (e *# e1)
       #|  x
-      #|  !x e. (euclid 2 x) /\\ (~(e = &0)) ==>\n    (simple_polygonal_arc hv_line (mk_segment x (x + e *# e1)))
+      #|  forall x e. (euclid 2 x) /\\ (~(e = &0)) ==>\n    (simple_polygonal_arc hv_line (mk_segment x (x + e *# e1)))
       #|  0
       #|  &1
       #|  &0 < x ==> &0 <= x
@@ -36434,16 +36434,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2 x
       #|  mk_segment x (x + (e/(&2))*# e1)
       #|  ?e. (&0 < e) /\\ (open_ball(euclid 2,d_euclid) x e SUBSET A)
-      #|  !A x. (top2 A) /\\ (A x) ==> (p_conn A x x)
-      #|  !A x y. (p_conn A x y ==> p_conn A y x)
+      #|  forall A x. (top2 A) /\\ (A x) ==> (p_conn A x x)
+      #|  forall A x y. (p_conn A x y ==> p_conn A y x)
       #|  delta'
       #|  delta
       #|  x
       #|  epsilon
       #|  f x
-      #|  !(f:A->B) (g:B->C) X dX Y dY Z dZ.\n    (metric_continuous f (X,dX) (Y,dY)) /\\\n    (metric_continuous g (Y,dY) (Z,dZ)) /\\\n    (IMAGE f X SUBSET Y) ==>\n    (metric_continuous (compose g f) (X,dX) (Z,dZ))
+      #|  forall(f:A->B) (g:B->C) X dX Y dY Z dZ.\n    (metric_continuous f (X,dX) (Y,dY)) /\\\n    (metric_continuous g (Y,dY) (Z,dZ)) /\\\n    (IMAGE f X SUBSET Y) ==>\n    (metric_continuous (compose g f) (X,dX) (Z,dZ))
       #|  TAGB
-      #|  !(f:A->B) (g:B->C) X.\n   (IMAGE (compose g f) X) =\n    (IMAGE g (IMAGE f X))
+      #|  forall(f:A->B) (g:B->C) X.\n   (IMAGE (compose g f) X) =\n    (IMAGE g (IMAGE f X))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -36462,9 +36462,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  delta = epsilon/(abs  (a-b))
       #|  epsilon
       #|  b - b = &0
-      #|  !u. u + &1 - u = &1
+      #|  forall u. u + &1 - u = &1
       #|  a = b
-      #|  !a b. metric_continuous (\\t. t * a + (&1 - t)* b)\n     (UNIV,d_real) (UNIV,d_real)
+      #|  forall a b. metric_continuous (\\t. t * a + (&1 - t)* b)\n     (UNIV,d_real) (UNIV,d_real)
       #|  TAGB
       #|  ( *. )
       #|  ( *. )
@@ -37316,7 +37316,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  (b - a)
-      #|  !x a b. (a * x <= b * x /\\ &0 < x) ==> (a <= b)
+      #|  forall x a b. (a * x <= b * x /\\ &0 < x) ==> (a <= b)
       #|  x'*(b - a) = ((d*b - a*c) - (d -c)*x)
       #|  x'
       #|  x' = ((d*b - a*c) - (d -c)*x)/(b - a)
@@ -37331,11 +37331,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ((d-c)*e*a <= ((x' - c) * e) * a + ((d - x') * e) * b) ==> (a <= ((x' - c) * e) * a + ((d - x') * e) * b)
       #|  &0 < e
       #|  (d - c)*e = &1
-      #|  !u. u/(d - c) = u*e
+      #|  forall u. u/(d - c) = u*e
       #|  e = &1/(d-c)
       #|  &0 < (d - c)
       #|  &0 < (b - a)
-      #|  !a b c d. (a < b) /\\ (c < d) ==>\n     (IMAGE (\\t. (t - c)/(d-c) * a + (d - t)/(d - c) *b )\n         {x | c <= x /\\ x <= d } =\n            {y | a <= y /\\ y <= b})
+      #|  forall a b c d. (a < b) /\\ (c < d) ==>\n     (IMAGE (\\t. (t - c)/(d-c) * a + (d - t)/(d - c) *b )\n         {x | c <= x /\\ x <= d } =\n            {y | a <= y /\\ y <= b})
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -42521,7 +42521,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  (b - a)
-      #|  !x a b. (a * x <= b * x /\\ &0 < x) ==> (a <= b)
+      #|  forall x a b. (a * x <= b * x /\\ &0 < x) ==> (a <= b)
       #|  x'*(b - a) = ((b*c - a*d ) + (d -c)*x)
       #|  x'
       #|  x' = ((b*c  - a*d) + (d -c)*x)/(b - a)
@@ -42536,11 +42536,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ((d-c)*e*a <= ((x' - c) * e) * b + ((d - x') * e) * a) ==> (a <= ((x' - c) * e) * b + ((d - x') * e) * a)
       #|  &0 < e
       #|  (d - c)*e = &1
-      #|  !u. u/(d - c) = u*e
+      #|  forall u. u/(d - c) = u*e
       #|  e = &1/(d-c)
       #|  &0 < (d - c)
       #|  &0 < (b - a)
-      #|  !a b c d. (a < b) /\\ (c < d) ==>\n     (IMAGE (\\t. (t - c)/(d-c) * b + (d - t)/(d - c) *a )\n         {x | c <= x /\\ x <= d } =\n            {y | a <= y /\\ y <= b})
+      #|  forall a b c d. (a < b) /\\ (c < d) ==>\n     (IMAGE (\\t. (t - c)/(d-c) * b + (d - t)/(d - c) *a )\n         {x | c <= x /\\ x <= d } =\n            {y | a <= y /\\ y <= b})
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -48053,7 +48053,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(b - a = &0)
       #|  (((x - c) * e) * a + ((d - x) * e) * b) - (((y - c) * e) * a + ((d - y) * e) * b) = e*(b-a)*(y - x)
       #|  (x = y) <=> (x - y = &0)
-      #|  !u. (u/(d-c) = u*e)
+      #|  forall u. (u/(d-c) = u*e)
       #|  e = &1/(d-c)
       #|  &0 < (d - c)
       #|  x
@@ -48061,7 +48061,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  b
       #|  a
-      #|  !a b c d. (a < b) /\\ (c < d) ==>\n     (INJ (\\t. (t - c)/(d-c) * a + (d - t)/(d - c) *b )\n         {x | c <= x /\\ x <= d }\n            {y | a <= y /\\ y <= b})
+      #|  forall a b c d. (a < b) /\\ (c < d) ==>\n     (INJ (\\t. (t - c)/(d-c) * a + (d - t)/(d - c) *b )\n         {x | c <= x /\\ x <= d }\n            {y | a <= y /\\ y <= b})
       #|  (x - c) / (d - c) * a + (d - x) / (d - c) * b
       #|  ( *. )
       #|  ( *. )
@@ -49827,7 +49827,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(a-b = &0)
       #|  (((x - c) * e) * b + ((d - x) * e) * a) - (((y - c) * e) * b + ((d - y) * e) * a) = e*(a-b)*(y - x)
       #|  (x = y) <=> (x - y = &0)
-      #|  !u. (u/(d-c) = u*e)
+      #|  forall u. (u/(d-c) = u*e)
       #|  e = &1/(d-c)
       #|  &0 < (d - c)
       #|  x
@@ -49835,7 +49835,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  b
       #|  a
-      #|  !a b c d. (a < b) /\\ (c < d) ==>\n     (INJ (\\t. (t - c)/(d-c) * b + (d - t)/(d - c) *a )\n         {x | c <= x /\\ x <= d }\n            {y | a <= y /\\ y <= b})
+      #|  forall a b c d. (a < b) /\\ (c < d) ==>\n     (INJ (\\t. (t - c)/(d-c) * b + (d - t)/(d - c) *a )\n         {x | c <= x /\\ x <= d }\n            {y | a <= y /\\ y <= b})
       #|  (x - c) / (d - c) * b + (d - x) / (d - c) * a
       #|  ( *. )
       #|  ( *. )
@@ -51687,7 +51687,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g
       #|  g = (f o f2)
       #|  f2 = (\\t. (t - a)/(b - a) * (c) + (b - t)/(b - a) *(d) )
-      #|  !f a b c d. ( continuous f (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n         (a < b) /\\ (c < d)  ==>\n           (?g. continuous g (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ g {x | a <= x /\\ x <= b} (euclid 2) /\\\n         (f d  = g a) /\\ (f c = g b) /\\\n      (!x y x' y'. (f x = g x') /\\ (f y = g y') /\\\n         (c <= x /\\ x <= d) /\\ (c <= y /\\ y <= d) /\\\n         (a <= x' /\\ x' <= b) /\\ (a <= y' /\\ y' <= b) ==>\n           ((x < y) = (y' < x'))) /\\\n      (IMAGE f { x | c <= x /\\ x <= d } =\n         IMAGE g { x | a <= x /\\ x <= b } )))
+      #|  forall f a b c d. ( continuous f (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n         (a < b) /\\ (c < d)  ==>\n           (?g. continuous g (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ g {x | a <= x /\\ x <= b} (euclid 2) /\\\n         (f d  = g a) /\\ (f c = g b) /\\\n      (forall x y x' y'. (f x = g x') /\\ (f y = g y') /\\\n         (c <= x /\\ x <= d) /\\ (c <= y /\\ y <= d) /\\\n         (a <= x' /\\ x' <= b) /\\ (a <= y' /\\ y' <= b) ==>\n           ((x < y) = (y' < x'))) /\\\n      (IMAGE f { x | c <= x /\\ x <= d } =\n         IMAGE g { x | a <= x /\\ x <= b } )))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -55074,7 +55074,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g
       #|  g = (f o f2)
       #|  f2 = (\\t. (t - a)/(b - a) * (d) + (b - t)/(b - a) *(c) )
-      #|  !f a b c d. ( continuous f (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n         (a < b) /\\ (c < d)  ==>\n           (?g. continuous g (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ g {x | a <= x /\\ x <= b} (euclid 2) /\\\n         (f c  = g a) /\\ (f d = g b) /\\\n      (!x y x' y'. (f x = g x') /\\ (f y = g y') /\\\n         (c <= x /\\ x <= d) /\\ (c <= y /\\ y <= d) /\\\n         (a <= x' /\\ x' <= b) /\\ (a <= y' /\\ y' <= b) ==>\n           ((x < y) = (x' < y'))) /\\\n      (IMAGE f { x | c <= x /\\ x <= d } =\n         IMAGE g { x | a <= x /\\ x <= b } )))
+      #|  forall f a b c d. ( continuous f (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n         (a < b) /\\ (c < d)  ==>\n           (?g. continuous g (top_of_metric (UNIV,d_real)) (top2) /\\\n           INJ g {x | a <= x /\\ x <= b} (euclid 2) /\\\n         (f c  = g a) /\\ (f d = g b) /\\\n      (forall x y x' y'. (f x = g x') /\\ (f y = g y') /\\\n         (c <= x /\\ x <= d) /\\ (c <= y /\\ y <= d) /\\\n         (a <= x' /\\ x' <= b) /\\ (a <= y' /\\ y' <= b) ==>\n           ((x < y) = (x' < y'))) /\\\n      (IMAGE f { x | c <= x /\\ x <= d } =\n         IMAGE g { x | a <= x /\\ x <= b } )))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -58544,16 +58544,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( +. )
       #|  ( *. )
       #|  ( *. )
-      #|  !(f:A->B) X Y. IMAGE f (preimage X f Y) SUBSET Y
-      #|  !(f:A->B) A B X. (preimage X f (A UNION B)) =\n    (preimage X f A UNION preimage X f B)
-      #|  !(X:A->bool) A B. (X = A UNION B) /\\ (A INTER B = EMPTY) ==>\n     (X DIFF B = A)
+      #|  forall(f:A->B) X Y. IMAGE f (preimage X f Y) SUBSET Y
+      #|  forall(f:A->B) A B X. (preimage X f (A UNION B)) =\n    (preimage X f A UNION preimage X f B)
+      #|  forall(X:A->bool) A B. (X = A UNION B) /\\ (A INTER B = EMPTY) ==>\n     (X DIFF B = A)
       #|  C SUBSET UNIONS V
-      #|  !P. C SUBSET P ==> (P DIFF C UNION C = P)
+      #|  forall P. C SUBSET P ==> (P DIFF C UNION C = P)
       #|  UNIONS V DIFF C UNION C = UNIONS V
       #|  (UNIONS U DIFF (preimage (UNIONS U) f C)) = preimage (UNIONS U) f (UNIONS V DIFF C)
-      #|  !U V C (f:A->B). (continuous f U V) /\\ (closed_ V C) /\\\n       (IMAGE f (UNIONS U) SUBSET (UNIONS V)) ==>\n           (closed_ U (preimage (UNIONS U) f C))
-      #|  !y. (A SUBSET B ==> (A y /\\ B y <=> A y))
-      #|  !(f:A->B) Z A B.  (A SUBSET B) ==>\n      (preimage A f Z = A INTER preimage B f Z)
+      #|  forall U V C (f:A->B). (continuous f U V) /\\ (closed_ V C) /\\\n       (IMAGE f (UNIONS U) SUBSET (UNIONS V)) ==>\n           (closed_ U (preimage (UNIONS U) f C))
+      #|  forall y. (A SUBSET B ==> (A y /\\ B y <=> A y))
+      #|  forall(f:A->B) Z A B.  (A SUBSET B) ==>\n      (preimage A f Z = A INTER preimage B f Z)
       #|  epsilon
       #|  IMAGE (\\x. (x *# dirac_delta 0)) (UNIV) SUBSET (euclid 1)
       #|  continuous (\\x. (x *# dirac_delta 0)) (top_of_metric(UNIV,d_real))\n     (top_of_metric(euclid 1,d_euclid)) 
@@ -58566,27 +58566,27 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  top_of_metric(UNIV,d_real)
       #|  X = IMAGE f K
       #|  U
-      #|  (?x. K x /\\ (!y. K y ==> g y 0 <= g x 0 ))
+      #|  (?x. K x /\\ (forall y. K y ==> g y 0 <= g x 0 ))
       #|  g = (\\x. (x *# dirac_delta 0)) o f
-      #|  !(f:A->real) U K.\n    continuous f U (top_of_metric (UNIV,d_real)) /\\\n          compact U K /\\\n          ~(K = {})\n          ==> (?x. K x /\\ (!y. K y ==> f y  <= f x ))
-      #|  !u v. (-- u <= --v) <=> (v <= u)
+      #|  forall(f:A->real) U K.\n    continuous f U (top_of_metric (UNIV,d_real)) /\\\n          compact U K /\\\n          ~(K = {})\n          ==> (?x. K x /\\ (forall y. K y ==> f y  <= f x ))
+      #|  forall u v. (-- u <= --v) <=> (v <= u)
       #|  x
       #|  top_of_metric(UNIV,d_real)
       #|  X = IMAGE f K
       #|  U
-      #|  (?x. K x /\\ (!y. K y ==> g y 0 <= g x 0 ))
+      #|  (?x. K x /\\ (forall y. K y ==> g y 0 <= g x 0 ))
       #|  g = (\\x. (-- x *# dirac_delta 0)) o f
-      #|  !(f:A->real) U K.\n    continuous f U (top_of_metric (UNIV,d_real)) /\\\n          compact U K /\\\n          ~(K = {})\n          ==> (?x. K x /\\ (!y. K y ==> f x  <= f y ))
+      #|  forall(f:A->real) U K.\n    continuous f U (top_of_metric (UNIV,d_real)) /\\\n          compact U K /\\\n          ~(K = {})\n          ==> (?x. K x /\\ (forall y. K y ==> f x  <= f y ))
       #|  {x | v x} = v
       #|  continuous I (top_of_metric(UNIV,d_real))\n     (top_of_metric(UNIV,d_real))
       #|  (top_of_metric(UNIV,d_real))
-      #|  !x y. y <= x <=> (I y <= I x)
-      #|  !(u:real). I u = u
-      #|  !X. (compact (top_of_metric(UNIV,d_real)) X) /\\ ~(X=EMPTY ) ==>\n    (?x. (X x) /\\ (!y. (X y) ==> (y <= x)))
+      #|  forall x y. y <= x <=> (I y <= I x)
+      #|  forall(u:real). I u = u
+      #|  forall X. (compact (top_of_metric(UNIV,d_real)) X) /\\ ~(X=EMPTY ) ==>\n    (?x. (X x) /\\ (forall y. (X y) ==> (y <= x)))
       #|  (top_of_metric(UNIV,d_real))
-      #|  !x y. y <= x <=> (I y <= I x)
-      #|  !(u:real). I u = u
-      #|  !X. (compact (top_of_metric(UNIV,d_real)) X) /\\ ~(X=EMPTY ) ==>\n    (?x. (X x) /\\ (!y. (X y) ==> (x <= y)))
+      #|  forall x y. y <= x <=> (I y <= I x)
+      #|  forall(u:real). I u = u
+      #|  forall X. (compact (top_of_metric(UNIV,d_real)) X) /\\ ~(X=EMPTY ) ==>\n    (?x. (X x) /\\ (forall y. (X y) ==> (x <= y)))
       #|  compact (induced_top U X) X = compact U X
       #|  induced_top U X = U00
       #|  X SUBSET UNIONS U0
@@ -58612,42 +58612,42 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  Y0 SUBSET Y
       #|  (UNIONS (top_of_metric(Y,dY)) = Y) /\\ (UNIONS(top_of_metric(Z,dZ)) = Z)
       #|  X = preimage Y0 f C
-      #|  !C (f:A->B) Y dY Z dZ Y0.\n   metric_space (Y,dY) /\\ metric_space (Z,dZ) /\\\n  (compact (top_of_metric(Y,dY)) Y0) /\\\n  (continuous f (top_of_metric(Y0,dY))\n            (top_of_metric(Z,dZ))) /\\\n  (IMAGE f Y0 SUBSET Z) /\\\n  (closed_ (top_of_metric(Z,dZ)) C) /\\\n  ~(IMAGE f Y0 INTER C = EMPTY) ==>\n  (compact (top_of_metric(Y,dY)) (preimage Y0 f C))
+      #|  forall C (f:A->B) Y dY Z dZ Y0.\n   metric_space (Y,dY) /\\ metric_space (Z,dZ) /\\\n  (compact (top_of_metric(Y,dY)) Y0) /\\\n  (continuous f (top_of_metric(Y0,dY))\n            (top_of_metric(Z,dZ))) /\\\n  (IMAGE f Y0 SUBSET Z) /\\\n  (closed_ (top_of_metric(Z,dZ)) C) /\\\n  ~(IMAGE f Y0 INTER C = EMPTY) ==>\n  (compact (top_of_metric(Y,dY)) (preimage Y0 f C))
       #|  d_euclid
       #|  (euclid n)
-      #|  !C n f a b.\n  (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n            (top_of_metric(euclid n,d_euclid)) /\\\n  (IMAGE f {x | a <= x /\\ x <= b} SUBSET (euclid n)) /\\\n  (closed_ (top_of_metric(euclid n,d_euclid)) C) /\\\n  ~(IMAGE f {x | a <= x /\\ x <= b} INTER C = EMPTY)) ==>\n  (compact (top_of_metric(UNIV,d_real))\n         (preimage {x | a <= x /\\ x <= b} f C))
+      #|  forall C n f a b.\n  (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n            (top_of_metric(euclid n,d_euclid)) /\\\n  (IMAGE f {x | a <= x /\\ x <= b} SUBSET (euclid n)) /\\\n  (closed_ (top_of_metric(euclid n,d_euclid)) C) /\\\n  ~(IMAGE f {x | a <= x /\\ x <= b} INTER C = EMPTY)) ==>\n  (compact (top_of_metric(UNIV,d_real))\n         (preimage {x | a <= x /\\ x <= b} f C))
       #|  s
       #|  x
-      #|  (?x. (X x) /\\ (!y. (X y) ==> (x <= y)))
+      #|  (?x. (X x) /\\ (forall y. (X y) ==> (x <= y)))
       #|  X = preimage {x | a <= x /\\ x <= b } f C
       #|  ~(preimage {x | a <= x /\\ x <= b} f C = EMPTY)
       #|  n
       #|  (compact (top_of_metric(UNIV,d_real)) (preimage {x | a <= x /\\ x <= b} f C))
-      #|  !C n f a b.\n  (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n            (top_of_metric(euclid n,d_euclid)) /\\\n  (IMAGE f {x | a <= x /\\ x <= b} SUBSET (euclid n)) /\\\n  (closed_ (top_of_metric(euclid n,d_euclid)) C) /\\\n  ~(IMAGE f {x | a <= x /\\ x <= b} INTER C = EMPTY)) ==>\n  (?t. (a <= t /\\ t <= b) /\\ (C (f t)) /\\\n    (!s. (a <=s /\\ s < t) ==> ~(C (f s))))
-      #|  !s s' t (f:A->B). INJ f s t /\\ (s' SUBSET s) ==> INJ f s' t
+      #|  forall C n f a b.\n  (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n            (top_of_metric(euclid n,d_euclid)) /\\\n  (IMAGE f {x | a <= x /\\ x <= b} SUBSET (euclid n)) /\\\n  (closed_ (top_of_metric(euclid n,d_euclid)) C) /\\\n  ~(IMAGE f {x | a <= x /\\ x <= b} INTER C = EMPTY)) ==>\n  (?t. (a <= t /\\ t <= b) /\\ (C (f t)) /\\\n    (forall s. (a <=s /\\ s < t) ==> ~(C (f s))))
+      #|  forall s s' t (f:A->B). INJ f s t /\\ (s' SUBSET s) ==> INJ f s' t
       #|  g
       #|  {x | c <= x /\\ x <= d}
       #|   continuous f (top_of_metric (UNIV,d_real)) (top2) /\\ INJ f {x | t <= x /\\ x <= t'} (euclid 2) /\\ (a < b) /\\ (t < t')
-      #|  !a b c d C f t t'. (c <= t /\\ t < t' /\\ t' <= d) /\\ (a < b) /\\\n     (C = IMAGE f { x | c <= x /\\ x <= d }) /\\\n     INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n     continuous f (top_of_metric(UNIV,d_real))\n            (top_of_metric(euclid 2,d_euclid)) ==>\n    (?g.\n  (IMAGE g {x | a <= x /\\ x <= b} = IMAGE f {x | t <= x /\\ x <= t'})  /\\\n     (g a = f t) /\\ (g b = f t') /\\\n       INJ g { x | a <= x /\\ x <= b} (euclid 2) /\\\n       continuous g (top_of_metric(UNIV,d_real))\n            (top_of_metric(euclid 2,d_euclid)))
+      #|  forall a b c d C f t t'. (c <= t /\\ t < t' /\\ t' <= d) /\\ (a < b) /\\\n     (C = IMAGE f { x | c <= x /\\ x <= d }) /\\\n     INJ f {x | c <= x /\\ x <= d} (euclid 2) /\\\n     continuous f (top_of_metric(UNIV,d_real))\n            (top_of_metric(euclid 2,d_euclid)) ==>\n    (?g.\n  (IMAGE g {x | a <= x /\\ x <= b} = IMAGE f {x | t <= x /\\ x <= t'})  /\\\n     (g a = f t) /\\ (g b = f t') /\\\n       INJ g { x | a <= x /\\ x <= b} (euclid 2) /\\\n       continuous g (top_of_metric(UNIV,d_real))\n            (top_of_metric(euclid 2,d_euclid)))
       #|  {x | UNIONS U x /\\ v (f x)}
-      #|  !(f:A->B) U V K. (continuous f U V) /\\ (K SUBSET (UNIONS U)) ==>\n    (continuous f (induced_top U K) V)
+      #|  forall(f:A->B) U V K. (continuous f U V) /\\ (K SUBSET (UNIONS U)) ==>\n    (continuous f (induced_top U K) V)
       #|  f x
       #|  f y
-      #|  !A B Z (f:A->B). (INJ f A Z) /\\ (INJ f B Z) /\\\n     (IMAGE f A INTER IMAGE f B = EMPTY) ==> (INJ f (A UNION B) Z)
+      #|  forall A B Z (f:A->B). (INJ f A Z) /\\ (INJ f B Z) /\\\n     (IMAGE f A INTER IMAGE f B = EMPTY) ==> (INJ f (A UNION B) Z)
       #|  z
-      #|  !z. A z ==> (joinf f g a z = f z)
-      #|  !(f:real->B) g a A.\n    (A SUBSET {x | x < a}) ==> (INJ (joinf f g a) A = INJ f A)
+      #|  forall z. A z ==> (joinf f g a z = f z)
+      #|  forall(f:real->B) g a A.\n    (A SUBSET {x | x < a}) ==> (INJ (joinf f g a) A = INJ f A)
       #|   (z < a) <=> ~(a <= z) 
       #|  z
-      #|  !z. A z ==> (joinf f g a z = g z)
-      #|  !(f:real->B) g a A.\n    (A SUBSET {x | a <= x}) ==> (INJ (joinf f g a) A = INJ g A)
+      #|  forall z. A z ==> (joinf f g a z = g z)
+      #|  forall(f:real->B) g a A.\n    (A SUBSET {x | a <= x}) ==> (INJ (joinf f g a) A = INJ g A)
       #|  z
-      #|  !z. A z ==> (joinf f g a z = f z)
-      #|  !(f:real->B) g a A.\n    (A SUBSET {x | x < a}) ==> (IMAGE (joinf f g a) A = IMAGE f A)
+      #|  forall z. A z ==> (joinf f g a z = f z)
+      #|  forall(f:real->B) g a A.\n    (A SUBSET {x | x < a}) ==> (IMAGE (joinf f g a) A = IMAGE f A)
       #|   (z < a) <=> ~(a <= z) 
       #|  z
-      #|  !z. A z ==> (joinf f g a z = g z)
-      #|  !(f:real->B) g a A.\n    (A SUBSET {x | a <= x}) ==> (IMAGE (joinf f g a) A = IMAGE g A)
+      #|  forall z. A z ==> (joinf f g a z = g z)
+      #|  forall(f:real->B) g a A.\n    (A SUBSET {x | a <= x}) ==> (IMAGE (joinf f g a) A = IMAGE g A)
       #|  E UNION E'
       #|  HCH = IMAGE h {x | &1 / &2 <= x /\\ x <= &1}
       #|  GCG = IMAGE g' {x | &0 <= x /\\ x < &1 / &2}
@@ -58675,7 +58675,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (IMAGE g' {x | &0 <= x /\\ x <= &1 / &2} INTER IMAGE h {x | &1 / &2 <= x /\\ x <= &1})
       #|  (IMAGE g' {x | &0 <= x /\\ x < &1 / &2} INTER IMAGE h {x | &1 / &2 <= x /\\ x <= &1})
       #|  {(g t')} u
-      #|  !B' B (u:num->real). (B' u /\\ B' SUBSET B) ==> (B u)
+      #|  forall B' B (u:num->real). (B' u /\\ B' SUBSET B) ==> (B u)
       #|  (x' = t') \\/ (x' < t')
       #|  IMAGE g {x | &0 <= x /\\ x <= t'} INTER Z
       #|  IMAGE g { x | &0 <= x /\\ x <= t' } SUBSET Cg
@@ -58703,7 +58703,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE h' {x | &1/(&2) <= x /\\ x <= &1} = IMAGE f' {x | tz <= x /\\ x <= t'' }
       #|  h'
       #|  &0 < &1
-      #|  (?h'. continuous h' (top_of_metric (UNIV,d_real)) (top2) /\\           INJ h' {x | (&1/(&2)) <= x /\\ x <= (&1)} (euclid 2) /\\         (h (&1)  = h' (&1/(&2))) /\\ (h (&1/(&2)) = h' (&1)) /\\      (!x y x' y'. (h x = h' x') /\\ (h y = h' y') /\\         ((&1/(&2)) <= x /\\ x <= (&1)) /\\ ((&1/(&2)) <= y /\\ y <= (&1)) /\\         ((&1/(&2)) <= x' /\\ x' <= (&1)) /\\ ((&1/(&2)) <= y' /\\ y' <= (&1)) ==>           ((x < y) <=> (y' < x'))) /\\      (IMAGE h { x | (&1/(&2)) <= x /\\ x <= (&1) } =          IMAGE h' { x | (&1/(&2)) <= x /\\ x <= (&1) } ))
+      #|  (?h'. continuous h' (top_of_metric (UNIV,d_real)) (top2) /\\           INJ h' {x | (&1/(&2)) <= x /\\ x <= (&1)} (euclid 2) /\\         (h (&1)  = h' (&1/(&2))) /\\ (h (&1/(&2)) = h' (&1)) /\\      (forall x y x' y'. (h x = h' x') /\\ (h y = h' y') /\\         ((&1/(&2)) <= x /\\ x <= (&1)) /\\ ((&1/(&2)) <= y /\\ y <= (&1)) /\\         ((&1/(&2)) <= x' /\\ x' <= (&1)) /\\ ((&1/(&2)) <= y' /\\ y' <= (&1)) ==>           ((x < y) <=> (y' < x'))) /\\      (IMAGE h { x | (&1/(&2)) <= x /\\ x <= (&1) } =          IMAGE h' { x | (&1/(&2)) <= x /\\ x <= (&1) } ))
       #|  &0 < &1
       #|  C'
       #|  &1
@@ -58731,16 +58731,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0
       #|  g
       #|  (top_of_metric(UNIV,d_real))
-      #|  !C. (?f a b. (continuous f (top_of_metric(UNIV,d_real)) (top2)) /\\ (INJ f {x | a <= x /\\ x <= b} (euclid 2)) /\\ (IMAGE f {x | a <= x /\\ x <= b} = C)) ==> (closed_ top2 C)
+      #|  forall C. (?f a b. (continuous f (top_of_metric(UNIV,d_real)) (top2)) /\\ (INJ f {x | a <= x /\\ x <= b} (euclid 2)) /\\ (IMAGE f {x | a <= x /\\ x <= b} = C)) ==> (closed_ top2 C)
       #|  induced_top(top_of_metric(UNIV,d_real)) {x | &0 <= x /\\ x <= &1 } = top_of_metric ({x | &0 <= x /\\ x <= &1 },d_real)
       #|  2
-      #|  ?t'. (&0 <= t' /\\ t' <= &1) /\\ (Z (g t')) /\\ (!s. (&0 <=s /\\ s < t') ==> ~(Z (g s)))
+      #|  ?t'. (&0 <= t' /\\ t' <= &1) /\\ (Z (g t')) /\\ (forall s. (&0 <=s /\\ s < t') ==> ~(Z (g s)))
       #|  Z = Cg INTER C'
       #|  Cg = IMAGE g {x | &0 <= x /\\ x <= &1 }
       #|  IMAGE g' {x | &0 <= x /\\ x <= &1} = IMAGE f {x | ty <= x /\\ x <= tx }
       #|  g'
       #|  &0 < &1
-      #|  (?g'. continuous g' (top_of_metric (UNIV,d_real)) (top2) /\\           INJ g' {x | (&0) <= x /\\ x <= (&1)} (euclid 2) /\\         (g (&1)  = g' (&0)) /\\ (g (&0) = g' (&1)) /\\      (!x y x' y'. (g x = g' x') /\\ (g y = g' y') /\\         ((&0) <= x /\\ x <= (&1)) /\\ ((&0) <= y /\\ y <= (&1)) /\\         ((&0) <= x' /\\ x' <= (&1)) /\\ ((&0) <= y' /\\ y' <= (&1)) ==>           ((x < y) <=> (y' < x'))) /\\      (IMAGE g { x | (&0) <= x /\\ x <= (&1) } =          IMAGE g' { x | (&0) <= x /\\ x <= (&1) } ))
+      #|  (?g'. continuous g' (top_of_metric (UNIV,d_real)) (top2) /\\           INJ g' {x | (&0) <= x /\\ x <= (&1)} (euclid 2) /\\         (g (&1)  = g' (&0)) /\\ (g (&0) = g' (&1)) /\\      (forall x y x' y'. (g x = g' x') /\\ (g y = g' y') /\\         ((&0) <= x /\\ x <= (&1)) /\\ ((&0) <= y /\\ y <= (&1)) /\\         ((&0) <= x' /\\ x' <= (&1)) /\\ ((&0) <= y' /\\ y' <= (&1)) ==>           ((x < y) <=> (y' < x'))) /\\      (IMAGE g { x | (&0) <= x /\\ x <= (&1) } =          IMAGE g' { x | (&0) <= x /\\ x <= (&1) } ))
       #|  &0 < &1
       #|  C
       #|  &1
@@ -58765,7 +58765,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f'
       #|  C'
       #|  C' x
-      #|  !A x y z. (p_conn A x y /\\ p_conn A y z ==> p_conn A x z)
+      #|  forall A x y z. (p_conn A x y /\\ p_conn A y z ==> p_conn A x z)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -58786,7 +58786,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  x + (e *# e2)
       #|  x
-      #|  !x e. (euclid 2 x) /\\ (~(e = &0)) ==>\n    (simple_polygonal_arc hv_line (mk_segment x (x + e *# e2)))
+      #|  forall x e. (euclid 2 x) /\\ (~(e = &0)) ==>\n    (simple_polygonal_arc hv_line (mk_segment x (x + e *# e2)))
       #|  1
       #|  y'
       #|  mk_segment y y'
@@ -58808,36 +58808,36 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y' = point(FST p,SND p')
       #|  euclid 2 x /\\ euclid 2 y
       #|  open_ball (euclid 2,d_euclid) x r x
-      #|  ! x y r. (open_ball(euclid 2,d_euclid) x r y) ==>\n      (p_conn (open_ball(euclid 2,d_euclid) x r) x y)
-      #|  !A x. p_conn A x SUBSET (euclid 2)
-      #|  !A x. p_conn A x SUBSET A
+      #|  forall x y r. (open_ball(euclid 2,d_euclid) x r y) ==>\n      (p_conn (open_ball(euclid 2,d_euclid) x r) x y)
+      #|  forall A x. p_conn A x SUBSET (euclid 2)
+      #|  forall A x. p_conn A x SUBSET A
       #|  open_ball (euclid 2,d_euclid) a r
       #|  a
       #|  r
       #|  ?r. (&0 < r) /\\ open_ball (euclid 2,d_euclid) a r SUBSET A
       #|  A a
-      #|  !A x. top2 A ==> (top2 (p_conn A x))
+      #|  forall A x. top2 A ==> (top2 (p_conn A x))
       #|  u
       #|  p_conn A a u
       #|  r
       #|  ?r. (&0 < r) /\\ open_ball (euclid 2,d_euclid) a r SUBSET A
       #|  A
-      #|  !A x.  top2 A ==> (top2 (A DIFF (p_conn A x)))
-      #|  !(x:(num->real)->bool) y. (x SUBSET (y UNION (x DIFF y)))
-      #|  !(w:(num->real)->bool) z. (w INTER (z DIFF w) = EMPTY)
+      #|  forall A x.  top2 A ==> (top2 (A DIFF (p_conn A x)))
+      #|  forall(x:(num->real)->bool) y. (x SUBSET (y UNION (x DIFF y)))
+      #|  forall(w:(num->real)->bool) z. (w INTER (z DIFF w) = EMPTY)
       #|  A DIFF (p_conn A x)
       #|  p_conn A x
-      #|  !A x y. (top2 A /\\ connected top2 A /\\ A x /\\ A y) ==>\n     (p_conn A x y)
-      #|  plane_graph G <=>\n     graph_vertex G SUBSET (euclid 2) /\\\n     graph G /\\\n     graph_edge G SUBSET (simple_arc top2) /\\\n     (!e. (graph_edge G e ==>\n        (graph_inc G e = e INTER (graph_vertex G)))) /\\\n     (!e e'. (graph_edge G e /\\ graph_edge G e' /\\ ~(e = e')) ==>\n        (e INTER e' SUBSET (graph_vertex G)))
+      #|  forall A x y. (top2 A /\\ connected top2 A /\\ A x /\\ A y) ==>\n     (p_conn A x y)
+      #|  plane_graph G <=>\n     graph_vertex G SUBSET (euclid 2) /\\\n     graph G /\\\n     graph_edge G SUBSET (simple_arc top2) /\\\n     (forall e. (graph_edge G e ==>\n        (graph_inc G e = e INTER (graph_vertex G)))) /\\\n     (forall e e'. (graph_edge G e /\\ graph_edge G e' /\\ ~(e = e')) ==>\n        (e INTER e' SUBSET (graph_vertex G)))
       #|  graph_isomorphic (G:(A,B)graph_t) (H:(A',B')graph_t) <=>\n     ?f. (graph_iso f G H)
-      #|  !(x:A->bool). BIJ I x x
+      #|  forall(x:A->bool). BIJ I x x
       #|  (I:A->A,I:B->B)
       #|  I:B->B
       #|  I:A->A
-      #|  !(G:(A,B)graph_t). graph_isomorphic G G
+      #|  forall(G:(A,B)graph_t). graph_isomorphic G G
       #|  TAGB
       #|  TAGB
-      #|  !(G:(A,B)graph_t) e. (graph G /\\ graph_edge G e) ==>\n       (graph_inc G e SUBSET graph_vertex G)
+      #|  forall(G:(A,B)graph_t) e. (graph G /\\ graph_edge G e) ==>\n       (graph_inc G e SUBSET graph_vertex G)
       #|  graph_edge G e'
       #|  BIJ v' (graph_edge H) (graph_edge G)
       #|  e = v e'
@@ -58847,22 +58847,22 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u'
       #|  v' = INV v (graph_edge G) (graph_edge H)
       #|  u' = INV u (graph_vertex G) (graph_vertex H)
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t).\n     graph G /\\ graph_isomorphic G H ==> graph_isomorphic H G
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t).\n     graph G /\\ graph_isomorphic G H ==> graph_isomorphic H G
       #|  TAGB
       #|  TAGB
       #|  graph_edge H (v e)
       #|  (u' o u, v' o v)
       #|  v' o v
       #|  u' o u
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t) (J:(A'',B'')graph_t).\n    graph_isomorphic G H /\\ graph_isomorphic H J ==>\n     graph_isomorphic G J
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t) (J:(A'',B'')graph_t).\n    graph_isomorphic G H /\\ graph_isomorphic H J ==>\n     graph_isomorphic G J
       #|  TAGB
       #|  TAGB
       #|  (graph_inc G y') HAS_SIZE 2
       #|  graph_inc G y' SUBSET graph_vertex G
       #|  graph_inc H x' = IMAGE u (graph_inc G y')
       #|  ?y'. (graph_edge G y' /\\ (v y' = x'))
-      #|  !z. (graph_edge G z ==> graph_inc G z SUBSET graph_vertex G)
-      #|  !(G:(A,B)graph_t) H.\n     graph G /\\ graph_isomorphic G (H:(A',B')graph_t) ==> graph H
+      #|  forall z. (graph_edge G z ==> graph_inc G z SUBSET graph_vertex G)
+      #|  forall(G:(A,B)graph_t) H.\n     graph G /\\ graph_isomorphic G (H:(A',B')graph_t) ==> graph H
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -58882,10 +58882,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  planar_graph (G:(A,B)graph_t) <=>\n      (?H. (plane_graph H) /\\ (graph_isomorphic H G))
-      #|  !G. (plane_graph G) ==> (planar_graph G)
-      #|  !(G:(A,B)graph_t). (planar_graph G ==> graph G)
+      #|  forall G. (plane_graph G) ==> (planar_graph G)
+      #|  forall(G:(A,B)graph_t). (planar_graph G ==> graph G)
       #|  H'
-      #|  !G H. (planar_graph (G:(A,B)graph_t)) /\\ (graph_isomorphic G H) ==>\n    (planar_graph (H:(A',B')graph_t))
+      #|  forall G H. (planar_graph (G:(A,B)graph_t)) /\\ (graph_isomorphic G H) ==>\n    (planar_graph (H:(A',B')graph_t))
       #|  Z (f y)
       #|  (f z <= f y) ==> (y <=| z)
       #|  z
@@ -58894,7 +58894,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE Z /\\ ~(Z = {})
       #|  Z = IMAGE f Y
       #|  f = \\ (t:num). --. (&. t)
-      #|  !Y. FINITE Y /\\ (~(Y= EMPTY)) ==>\n        (?z. (Y z /\\ (!y. Y y ==> y <=| z)))
+      #|  forall Y. FINITE Y /\\ (~(Y= EMPTY)) ==>\n        (?z. (Y z /\\ (forall y. Y y ==> y <=| z)))
       #|  Y (f x)
       #|  f x
       #|  r
@@ -58904,7 +58904,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE Y /\\ (~(Y= EMPTY))
       #|  Y SUBSET {n | n <| N}
       #|  Y = IMAGE f X
-      #|  !(X:A->bool) f.  (?N. (!x. (X x ==> f x <| N))) /\\ ~(X = EMPTY)  ==>\n      (?z. (X z /\\ (!x. (X x ==> f x <=| f z))))
+      #|  forall(X:A->bool) f.  (?N. (forall x. (X x ==> f x <| N))) /\\ ~(X = EMPTY)  ==>\n      (?z. (X z /\\ (forall x. (X x ==> f x <=| f z))))
       #|  ~(f x <| n) ==> (n <=| f x)
       #|  f x
       #|  z
@@ -58912,16 +58912,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f u
       #|  (?n. Y n)
       #|  Y = IMAGE f X
-      #|  !(X:A->bool) f. (~(X = EMPTY)) ==>\n     (?z. (X z  /\\ (!x. (X x ==> f z <=| f x))))
+      #|  forall(X:A->bool) f. (~(X = EMPTY)) ==>\n     (?z. (X z  /\\ (forall x. (X x ==> f z <=| f x))))
       #|  (a <| SUC b) <=> (a <=| b)
       #|  x SUBSET (UNIONS X)
       #|  SUC (CARD (UNIONS X))
-      #|  !(X:(A->bool)->bool).  (~(X = EMPTY) /\\ (FINITE (UNIONS X))) ==>\n    (?z. (X z /\\ (!x. (X x ==> (CARD x <= CARD z)))))
-      #|  !(X:(A->bool)->bool).  ~(X = EMPTY) ==>\n    (?z. (X z /\\ (!x. (X x ==> (CARD z <= CARD x)))))
-      #|  !a b. induced_top (top_of_metric(UNIV,d_real))\n       {x | a <= x /\\ x <= b } =\n     top_of_metric ({x | a <= x /\\ x <= b}, d_real)\n      
-      #|  !f a b. (continuous f (top_of_metric(UNIV,d_real)) top2) ==>\n     (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real)) top2)
-      #|  !(f:A->B) X Y. (INJ f X Y ==> IMAGE f X SUBSET Y)
-      #|  !a b c d. (c <= a) /\\ (b <= d) ==>\n        {x | a <= x /\\ x <= b} SUBSET {x | c <= x /\\ x <= d}
+      #|  forall(X:(A->bool)->bool).  (~(X = EMPTY) /\\ (FINITE (UNIONS X))) ==>\n    (?z. (X z /\\ (forall x. (X x ==> (CARD x <= CARD z)))))
+      #|  forall(X:(A->bool)->bool).  ~(X = EMPTY) ==>\n    (?z. (X z /\\ (forall x. (X x ==> (CARD z <= CARD x)))))
+      #|  forall a b. induced_top (top_of_metric(UNIV,d_real))\n       {x | a <= x /\\ x <= b } =\n     top_of_metric ({x | a <= x /\\ x <= b}, d_real)\n      
+      #|  forall f a b. (continuous f (top_of_metric(UNIV,d_real)) top2) ==>\n     (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real)) top2)
+      #|  forall(f:A->B) X Y. (INJ f X Y ==> IMAGE f X SUBSET Y)
+      #|  forall a b c d. (c <= a) /\\ (b <= d) ==>\n        {x | a <= x /\\ x <= b} SUBSET {x | c <= x /\\ x <= d}
       #|  a
       #|  Ca INTER K
       #|  t'' <= t''
@@ -58942,7 +58942,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  continuous g (top_of_metric (UNIV,d_real)) (top2) /\\  INJ g {x | &0 <= x /\\ x <= t''} (euclid 2) /\\ (a < b) /\\ (&0 < t'')  
       #|  2
       #|  K'
-      #|  ?t''. (&0 <= t'' /\\ t'' <= &1) /\\ (K' (g t'')) /\\ (!s. (&0 <=s /\\ s < t'') ==> ~(K' (g s)))
+      #|  ?t''. (&0 <= t'' /\\ t'' <= &1) /\\ (K' (g t'')) /\\ (forall s. (&0 <=s /\\ s < t'') ==> ~(K' (g s)))
       #|  x'
       #|  Ca SUBSET C
       #|  (t' < t) ==> (t' <= t)
@@ -58976,7 +58976,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  continuous g (top_of_metric (UNIV,d_real)) (top2) /\\  INJ g {x | &0 <= x /\\ x <= t''} (euclid 2) /\\ (a < b) /\\ (&0 < t'')  
       #|  2
       #|  K
-      #|  ?t''. (&0 <= t'' /\\ t'' <= &1) /\\ (K (g t'')) /\\ (!s. (&0 <=s /\\ s < t'') ==> ~(K (g s)))
+      #|  ?t''. (&0 <= t'' /\\ t'' <= &1) /\\ (K (g t'')) /\\ (forall s. (&0 <=s /\\ s < t'') ==> ~(K (g s)))
       #|  x'
       #|  Ca SUBSET C
       #|  (t < t') ==> (t <= t')
@@ -58998,27 +58998,27 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (t < t' \\/ t' < t)
       #|  2
       #|  K'
-      #|  ?t. (&0 <= t /\\ t <= &1) /\\ (K' (f t)) /\\ (!s. (&0 <=s /\\ s < t) ==> ~(K' (f s)))
+      #|  ?t. (&0 <= t /\\ t <= &1) /\\ (K' (f t)) /\\ (forall s. (&0 <=s /\\ s < t) ==> ~(K' (f s)))
       #|  2
       #|  K
-      #|  ?t. (&0 <= t /\\ t <= &1) /\\ (K (f t)) /\\ (!s. (&0 <=s /\\ s < t) ==> ~(K (f s)))
-      #|  !C K K' a b.\n       simple_arc top2 C /\\\n       closed_ top2 K /\\ closed_ top2 K' /\\\n       (C INTER K INTER K' = EMPTY) /\\\n       ~(C INTER K = EMPTY) /\\\n       ~(C INTER K' = EMPTY) /\\\n        (a <. b) ==>\n       (?C' f. (C' = IMAGE f {x | a <= x /\\ x <= b}) /\\ (C' SUBSET C) /\\\n            continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n            INJ f {x | a <= x /\\ x <= b} (euclid 2) /\\\n            (C' INTER K = {(f a)}) /\\\n            (C' INTER K' = {(f b)})\n       )\n       
+      #|  ?t. (&0 <= t /\\ t <= &1) /\\ (K (f t)) /\\ (forall s. (&0 <=s /\\ s < t) ==> ~(K (f s)))
+      #|  forall C K K' a b.\n       simple_arc top2 C /\\\n       closed_ top2 K /\\ closed_ top2 K' /\\\n       (C INTER K INTER K' = EMPTY) /\\\n       ~(C INTER K = EMPTY) /\\\n       ~(C INTER K' = EMPTY) /\\\n        (a <. b) ==>\n       (?C' f. (C' = IMAGE f {x | a <= x /\\ x <= b}) /\\ (C' SUBSET C) /\\\n            continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n            INJ f {x | a <= x /\\ x <= b} (euclid 2) /\\\n            (C' INTER K = {(f a)}) /\\\n            (C' INTER K' = {(f b)})\n       )\n       
       #|  simple_arc_end C v v' <=>\n    (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1 }) /\\\n       continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n       INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n       (f (&0) = v) /\\ (f(&1) = v'))
-      #|  good_plane_graph G <=> plane_graph G /\\\n      (!e v v'. (graph_edge G e /\\ ~(v = v') /\\\n           (graph_inc G e v) /\\ (graph_inc G e v') ==>\n           (simple_arc_end e v v')))
+      #|  good_plane_graph G <=> plane_graph G /\\\n      (forall e v v'. (graph_edge G e /\\ ~(v = v') /\\\n           (graph_inc G e v) /\\ (graph_inc G e v') ==>\n           (simple_arc_end e v v')))
       #|  graph_edge_mod (G:(A,B)graph_t) (f:B->B') =\n     mk_graph_t (graph_vertex G,IMAGE f (graph_edge G),\n       (\\ e' v. (?e. graph_edge G e /\\ graph_inc G e v /\\ (f e = e'))))
-      #|  !(G:(A,B)graph_t) (f:B->B').\n     graph_vertex (graph_edge_mod G f) = graph_vertex G 
-      #|  !(G:(A,B)graph_t) (f:B->B').\n     graph_edge (graph_edge_mod G f) = IMAGE f (graph_edge G )
-      #|  !(G:(A,B)graph_t) (f:B->B') e v.\n     graph_inc (graph_edge_mod G f) e v <=>\n         (?e'. (graph_edge G e' /\\ graph_inc G e' v /\\ (f e' = e)))
-      #|  !(f:A->B) X. (INJ f X UNIV) ==> (BIJ f X (IMAGE f X))
+      #|  forall(G:(A,B)graph_t) (f:B->B').\n     graph_vertex (graph_edge_mod G f) = graph_vertex G 
+      #|  forall(G:(A,B)graph_t) (f:B->B').\n     graph_edge (graph_edge_mod G f) = IMAGE f (graph_edge G )
+      #|  forall(G:(A,B)graph_t) (f:B->B') e v.\n     graph_inc (graph_edge_mod G f) e v <=>\n         (?e'. (graph_edge G e' /\\ graph_inc G e' v /\\ (f e' = e)))
+      #|  forall(f:A->B) X. (INJ f X UNIV) ==> (BIJ f X (IMAGE f X))
       #|  e' = e
       #|  (I:A->A,f:B->B')
       #|  f
       #|  I:A->A
-      #|  ! f (G:(A,B)graph_t). (INJ (f:B->B') (graph_edge G) (UNIV)) ==>\n    (graph_isomorphic G (graph_edge_mod G f))
+      #|  forall f (G:(A,B)graph_t). (INJ (f:B->B') (graph_edge G) (UNIV)) ==>\n    (graph_isomorphic G (graph_edge_mod G f))
       #|  TAGB
       #|  TAGB
       #|  G
-      #|  !f (G:(A,B)graph_t). (graph G) /\\\n      (INJ (f:B->B') (graph_edge G) (UNIV)) ==>\n    (graph (graph_edge_mod G f)) 
+      #|  forall f (G:(A,B)graph_t). (graph G) /\\\n      (INJ (f:B->B') (graph_edge G) (UNIV)) ==>\n    (graph (graph_edge_mod G f)) 
       #|  x' INTER x
       #|  ~(x = x')
       #|  x
@@ -59028,29 +59028,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e'
       #|  e'
       #|  e' = x
-      #|  !G f. (plane_graph G) /\\ (INJ f (graph_edge G) UNIV) /\\\n      (!e e'. (graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        (f e INTER f e' SUBSET e INTER e') )) /\\\n      (!e. (graph_edge G e ==> (simple_arc top2 (f e)))) /\\\n      (!e. (graph_edge G e) ==>\n         (e INTER graph_vertex G = (f e) INTER graph_vertex G)) ==>\n      (plane_graph (graph_edge_mod G f))\n  
+      #|  forall G f. (plane_graph G) /\\ (INJ f (graph_edge G) UNIV) /\\\n      (forall e e'. (graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        (f e INTER f e' SUBSET e INTER e') )) /\\\n      (forall e. (graph_edge G e ==> (simple_arc top2 (f e)))) /\\\n      (forall e. (graph_edge G e) ==>\n         (e INTER graph_vertex G = (f e) INTER graph_vertex G)) ==>\n      (plane_graph (graph_edge_mod G f))\n  
       #|  {u}
       #|  ?u. V u /\\ u x
-      #|  !U (x:A). (UNIONS U x) ==> (compact U {x})
-      #|  !A u v. (A INTER {u} = {v}) ==> ( (v:num->real)=u)
+      #|  forall U (x:A). (UNIONS U x) ==> (compact U {x})
+      #|  forall A u v. (A INTER {u} = {v}) ==> ( (v:num->real)=u)
       #|  f
       #|  C'
       #|  &0 < &1
       #|  simple_arc top2 C /\\ closed_ top2 {v} /\\ closed_ top2 {v'} /\\      (C INTER {v} INTER { v' } = EMPTY) /\\ ~(C INTER {v} = EMPTY) /\\       ~(C INTER {v'} = EMPTY) /\\        (&0 < &1)
       #|  C SUBSET euclid 2
-      #|  !v. (C v) ==> (closed_ top2 {v})
-      #|  !C v v'. (simple_arc top2 C) /\\ (C v) /\\ (C v') /\\ ~(v = v') ==>\n    (?C'. (C' SUBSET C) /\\ (simple_arc_end C' v v'))
-      #|  !(G:(A,B)graph_t) e.\n      (graph G /\\ graph_edge G e) ==> (graph_inc G e HAS_SIZE 2)
+      #|  forall v. (C v) ==> (closed_ top2 {v})
+      #|  forall C v v'. (simple_arc top2 C) /\\ (C v) /\\ (C v') /\\ ~(v = v') ==>\n    (?C'. (C' SUBSET C) /\\ (simple_arc_end C' v v'))
+      #|  forall(G:(A,B)graph_t) e.\n      (graph G /\\ graph_edge G e) ==> (graph_inc G e HAS_SIZE 2)
       #|  g
       #|  &0 < &1
       #|  ( continuous f (top_of_metric (UNIV,d_real)) (top2) /\\ INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\ (&0 < &1) /\\ (&0 < &1))
-      #|  !C' v v'. (simple_arc_end C' v v' ==> simple_arc_end C' v' v)
+      #|  forall C' v v'. (simple_arc_end C' v v' ==> simple_arc_end C' v' v)
       #|  ((v = a) /\\ (v' = b)) \\/ ((v = b) /\\ (v' =a ))
       #|  e'
       #|  graph_inc G e a /\\ graph_inc G e b
       #|  (?e'. (e' SUBSET e) /\\ (simple_arc_end e' a b))
       #|  graph_inc G e HAS_SIZE 2
-      #|  !G e. (plane_graph G /\\ graph_edge G e) ==> (?e'.\n     (e' SUBSET e /\\\n     (!v v'. graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') ==>\n        simple_arc_end e' v v')))
+      #|  forall G e. (plane_graph G /\\ graph_edge G e) ==> (?e'.\n     (e' SUBSET e /\\\n     (forall v v'. graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') ==>\n        simple_arc_end e' v v')))
       #|  ~(&0 = &1)
       #|  ~(&1 = t)
       #|  ~(&0 = t)
@@ -59059,25 +59059,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?t. (&0 < t /\\ t < &1)
       #|  {a,b}
       #|  (f (&0) = f(&1))
-      #|  !x. (&0 <= x /\\ x <= &1) ==> {a,b} (f x)
+      #|  forall x. (&0 <= x /\\ x <= &1) ==> {a,b} (f x)
       #|  simple_arc top2 e
       #|  e INTER e' = e
       #|  graph_inc G e' HAS_SIZE 2
       #|  e' INTER graph_vertex G = graph_inc G e'
       #|  e INTER e' SUBSET e' INTER graph_vertex G
       #|  e INTER e' SUBSET graph_vertex G
-      #|  !G e e'. (plane_graph G /\\ graph_edge G e /\\ graph_edge G e' /\\\n      (e SUBSET e') ==> (e = e'))
+      #|  forall G e e'. (plane_graph G /\\ graph_edge G e /\\ graph_edge G e' /\\\n      (e SUBSET e') ==> (e = e'))
       #|  b
       #|  a
       #|  graph_inc G e HAS_SIZE 2
-      #|  !(G:(A,B)graph_t) e. (graph G /\\ graph_edge G e ==>\n     (?v v'. graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v')))
-      #|  inf (X:real->bool) =\n      @s. ((!x. X x ==> s <= x) /\\ (!y. (!x. X x ==> y <= x) ==> (y <= s)))
+      #|  forall(G:(A,B)graph_t) e. (graph G /\\ graph_edge G e ==>\n     (?v v'. graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v')))
+      #|  inf (X:real->bool) =\n      @s. ((forall x. X x ==> s <= x) /\\ (forall y. (forall x. X x ==> y <= x) ==> (y <= s)))
       #|  :(real->bool)->real
-      #|  !a b. closed_ (top_of_metric(UNIV,d_real)) {x | a <= x /\\ x <= b}
+      #|  forall a b. closed_ (top_of_metric(UNIV,d_real)) {x | a <= x /\\ x <= b}
       #|  UNIV DIFF {x | x <= a } = {x | a < x}
-      #|  !a. closed_ (top_of_metric(UNIV,d_real)) {x | x <= a}
+      #|  forall a. closed_ (top_of_metric(UNIV,d_real)) {x | x <= a}
       #|  UNIV DIFF {x | a <= x } = {x | x < a}
-      #|  !a. closed_ (top_of_metric(UNIV,d_real)) {x | a <= x}
+      #|  forall a. closed_ (top_of_metric(UNIV,d_real)) {x | a <= x}
       #|  closure (top_of_metric (UNIV,d_real)) X 
       #|  XC SUBSET {x | y' <= x}
       #|  closure (top_of_metric (UNIV,d_real)) X SUBSET {x | y' <= x }
@@ -59088,19 +59088,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z
       #|  u <= u
       #|  u
-      #|  (?z. (XC z /\\ (!y. XC y ==> z <= y)))
+      #|  (?z. (XC z /\\ (forall y. XC y ==> z <= y)))
       #|  {x | t <= x /\\ x <= u}
       #|  compact (top_of_metric(UNIV,d_real)) XC
       #|  XC = closure (top_of_metric(UNIV,d_real)) X INTER {x | t <= x /\\ x <= u}
       #|  X SUBSET closure (top_of_metric(UNIV,d_real)) X
       #|  topology_ (top_of_metric(UNIV,d_real))
-      #|  !X. (~(X = EMPTY) /\\ (?t. !x. (X x ==> t <= x))) ==>\n     (!x. X x ==> inf X <= x) /\\\n          (!y. (!x. X x ==> y <= x) ==> (y <= inf X))
+      #|  forall X. (~(X = EMPTY) /\\ (?t. forall x. (X x ==> t <= x))) ==>\n     (forall x. X x ==> inf X <= x) /\\\n          (forall y. (forall x. X x ==> y <= x) ==> (y <= inf X))
       #|  (x + y <= x ==> ~(&0 < y))
       #|  ~(v < u)  ==> u <= v
-      #|  (!x. X x ==> inf X + epsilon <= x)
+      #|  (forall x. X x ==> inf X + epsilon <= x)
       #|  inf X + epsilon
-      #|  (!y. (!x. X x ==> y <= x) ==> (y <= inf X))
-      #|  !X. (~(X = EMPTY) /\\ (?t. !x. (X x ==> t <= x))) ==>\n       (!epsilon. (&0 < epsilon) ==> (?x. X x /\\ (x < inf X + epsilon)))
+      #|  (forall y. (forall x. X x ==> y <= x) ==> (y <= inf X))
+      #|  forall X. (~(X = EMPTY) /\\ (?t. forall x. (X x ==> t <= x))) ==>\n       (forall epsilon. (&0 < epsilon) ==> (?x. X x /\\ (x < inf X + epsilon)))
       #|  supm (X:real->bool) =\n   --. (inf ({x | ?z. X z /\\ (x = --. z)}))
       #|  --x <= y <=> --y <= x
       #|  --y <= inf Y ==> -- inf Y <= y
@@ -59108,26 +59108,26 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  --t <= x <=> (-- x <= t)
       #|  -- t
       #|  -- u
-      #|  (~(Y = EMPTY) /\\ (?t. !x. (Y x ==> t <= x)))
+      #|  (~(Y = EMPTY) /\\ (?t. forall x. (Y x ==> t <= x)))
       #|  (-- (-- u) = u)
-      #|  !u. (Y u = X (-- u)) /\\ (Y (--u ) = X u)
+      #|  forall u. (Y u = X (-- u)) /\\ (Y (--u ) = X u)
       #|  Y = {x | ?z. X z /\\ (x = --z)}
-      #|  !X. (~(X = EMPTY) /\\ (?t. !x. (X x ==> x <= t))) ==>\n     (!x. X x ==> x <= supm X ) /\\\n          (!y. (!x. X x ==> x <= y) ==> (supm X <= y))
+      #|  forall X. (~(X = EMPTY) /\\ (?t. forall x. (X x ==> x <= t))) ==>\n     (forall x. X x ==> x <= supm X ) /\\\n          (forall y. (forall x. X x ==> x <= y) ==> (supm X <= y))
       #|  (x <= x - y  ==> ~(&0 < y))
       #|  ~(v < u)  ==> u <= v
-      #|  (!x. X x ==> x <= supm X - epsilon)
+      #|  (forall x. X x ==> x <= supm X - epsilon)
       #|  supm X - epsilon
-      #|  (!y. (!x. X x ==> x <= y) ==> (supm X <= y))
-      #|  !X. (~(X = EMPTY) /\\ (?t. !x. (X x ==> x <= t))) ==>\n       (!epsilon.(&0 < epsilon) ==> (?x. X x /\\ (supm X - epsilon < x)))
-      #|  !(X:A->bool) K d. (K SUBSET X /\\ metric_space(X,d)) ==>\n        (compact(top_of_metric(X,d)) K = compact(top_of_metric(K,d))K) 
+      #|  (forall y. (forall x. X x ==> x <= y) ==> (supm X <= y))
+      #|  forall X. (~(X = EMPTY) /\\ (?t. forall x. (X x ==> x <= t))) ==>\n       (forall epsilon.(&0 < epsilon) ==> (?x. X x /\\ (supm X - epsilon < x)))
+      #|  forall(X:A->bool) K d. (K SUBSET X /\\ metric_space(X,d)) ==>\n        (compact(top_of_metric(X,d)) K = compact(top_of_metric(K,d))K) 
       #|  1 = 2 **| 0
-      #|  !n. (0 < n) ==> (1 < 2 **| n)
+      #|  forall n. (0 < n) ==> (1 < 2 **| n)
       #|  (~(&:0 <: --: y) <=> (&:0 <=: y))
       #|  C
       #|  C = b -: a
       #|  x < y <=> &1*x < y
       #|  (a <: b) <=> (&:0 <: b -: a)
-      #|  !a b. (a < b) ==> (twopow a < twopow b)
+      #|  forall a b. (a < b) ==> (twopow a < twopow b)
       #|  d x x' <= d x r + d r x'
       #|  d x' r = d r x'
       #|  r = p' (ss' (SUC n +| SUC n'))
@@ -59142,10 +59142,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  twopow( --: (&:(SUC n))) + twopow (--: (&:(SUC n))) = twopow (--: (&:n))
       #|  &0 < &1
       #|  ?n. (&1)* twopow(--: (&:n)) < e
-      #|  !x y. (!e. (&0 <e) ==> (x < y + e)) ==> (x <= y)
+      #|  forall x y. (forall e. (&0 <e) ==> (x < y + e)) ==> (x <= y)
       #|  q'
       #|  q
-      #|  (!y. Y y ==> inf Y <= y)
+      #|  (forall y. Y y ==> inf Y <= y)
       #|  inf Y
       #|  (?t. (t <= y) /\\ (x <= t)) ==> (x <= y)
       #|  x'
@@ -59164,25 +59164,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x <=| SUC x +| y
       #|  SUC(n') + SUC (n)
       #|  twopow (--: (&:(SUC(n))))
-      #|  !n. ?p'. K' p' /\\ d x p' < inf Y + twopow(--: (&:n))
+      #|  forall n. ?p'. K' p' /\\ d x p' < inf Y + twopow(--: (&:n))
       #|  (?ss. subseq ss /\\ converge (K,d) (p o ss))
       #|  totally_bounded(K,d) /\\ totally_bounded(K',d)
       #|  complete (K,d)  /\\ complete (K',d) 
       #|  compact (top_of_metric(K,d)) K /\\ compact (top_of_metric(K',d)) K'
       #|  metric_space (K,d) /\\ metric_space(K',d)
       #|  (?x. Y x /\\ x < inf Y + twopow (--: (&:n)))
-      #|  (!n. ?p. ?p'. K p /\\ K' p' /\\ (d p p' < inf Y + twopow( -- (&:n))))
-      #|  (!epsilon. (&0 < epsilon) ==> (?x. Y x /\\ (x < inf Y + epsilon)))
+      #|  (forall n. ?p. ?p'. K p /\\ K' p' /\\ (d p p' < inf Y + twopow( -- (&:n))))
+      #|  (forall epsilon. (&0 < epsilon) ==> (?x. Y x /\\ (x < inf Y + epsilon)))
       #|  d u' u
       #|  ~(Y= EMPTY)
       #|  q'
       #|  q'
       #|  q
-      #|  !y. (Y y) ==> (&0 <= y)
+      #|  forall y. (Y y) ==> (&0 <= y)
       #|  Y = { z | ?q q'. (K q /\\ K' q' /\\ (z = d q q'))}
       #|  K SUBSET X /\\ K' SUBSET X
       #|  UNIONS (top_of_metric(X,d)) = X
-      #|  !(X:A->bool) d K K'. (metric_space(X,d) /\\\n   ~(K=EMPTY) /\\ ~(K' = EMPTY) /\\\n   (compact (top_of_metric(X,d)) K) /\\ (compact(top_of_metric(X,d))K'))\n   ==> (?p p'. (K p /\\ K' p' /\\ (!q q'. (K q /\\ K' q') ==>\n              (d p p' <= d q q'))))
+      #|  forall(X:A->bool) d K K'. (metric_space(X,d) /\\\n   ~(K=EMPTY) /\\ ~(K' = EMPTY) /\\\n   (compact (top_of_metric(X,d)) K) /\\ (compact(top_of_metric(X,d))K'))\n   ==> (?p p'. (K p /\\ K' p' /\\ (forall q q'. (K q /\\ K' q') ==>\n              (d p p' <= d q q'))))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -59193,22 +59193,22 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  x'' - y
-      #|  !x y. x <= max_real x y  /\\ y <= max_real x y 
-      #|  !x y.  min_real x y <= x /\\ min_real x y <= y
+      #|  forall x y. x <= max_real x y  /\\ y <= max_real x y 
+      #|  forall x y.  min_real x y <= x /\\ min_real x y <= y
       #|  x
       #|  x = u
       #|  max_real t u
-      #|  (?t. !x. (X DELETE u) x ==> x <= t)
+      #|  (?t. forall x. (X DELETE u) x ==> x <= t)
       #|  X DELETE u
-      #|  !n X. (X HAS_SIZE n) ==> (?t. (!x. X x ==> x <= t))
-      #|  !X. (FINITE X) ==> (?t. (!x. X x ==> x <=. t))
+      #|  forall n X. (X HAS_SIZE n) ==> (?t. (forall x. X x ==> x <= t))
+      #|  forall X. (FINITE X) ==> (?t. (forall x. X x ==> x <=. t))
       #|  x
       #|  x = u
       #|  min_real t u
-      #|  (?t. !x. (X DELETE u) x ==> t <= x)
+      #|  (?t. forall x. (X DELETE u) x ==> t <= x)
       #|  X DELETE u
-      #|  !n X. (X HAS_SIZE n) ==> (?t. (!x. X x ==> t <= x))
-      #|  !X. (FINITE X) ==> (?t. (!x. X x ==> t <=. x))
+      #|  forall n X. (X HAS_SIZE n) ==> (?t. (forall x. X x ==> t <= x))
+      #|  forall X. (FINITE X) ==> (?t. (forall x. X x ==> t <=. x))
       #|  u' UNION (X DELETE u)
       #|  u' INSERT W
       #|  u
@@ -59219,30 +59219,30 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  X DELETE u
       #|  X DELETE u HAS_SIZE n
       #|  EMPTY:(A->bool)->bool
-      #|  !n (X:A->bool) U. (X HAS_SIZE n) /\\ (X SUBSET UNIONS U) ==> (compact U X)
-      #|  !(X:A->bool) U. (FINITE X) /\\ (X SUBSET UNIONS U) ==> (compact U X)
+      #|  forall n (X:A->bool) U. (X HAS_SIZE n) /\\ (X SUBSET UNIONS U) ==> (compact U X)
+      #|  forall(X:A->bool) U. (FINITE X) /\\ (X SUBSET UNIONS U) ==> (compact U X)
       #|  x
       #|  x <= supm X /\\ supm X <= x ==> (x = supm X)
       #|  x = supm X
-      #|  (!x. X x ==> x <= supm X ) /\\ (!y. (!x. X x ==> x <= y) ==> (supm X <= y))
-      #|  (?x. X x /\\ (!y. X y ==> y <= x))
-      #|  !X. (compact(top_of_metric(UNIV,d_real)) X) /\\ ~(X = EMPTY) ==>\n          X (supm X)
+      #|  (forall x. X x ==> x <= supm X ) /\\ (forall y. (forall x. X x ==> x <= y) ==> (supm X <= y))
+      #|  (?x. X x /\\ (forall y. X y ==> y <= x))
+      #|  forall X. (compact(top_of_metric(UNIV,d_real)) X) /\\ ~(X = EMPTY) ==>\n          X (supm X)
       #|  x
       #|  x <= inf X /\\ inf X <= x ==> (x = inf X)
       #|  x = inf X
-      #|  (!x. X x ==> inf X <= x ) /\\ (!y. (!x. X x ==> y <= x) ==> ( y <= inf X))
-      #|  (?x. X x /\\ (!y. X y ==> x <= y))
-      #|  !X. (compact(top_of_metric(UNIV,d_real)) X) /\\ ~(X = EMPTY) ==>\n          X (inf X)
-      #|  !X. (FINITE X) /\\ ~(X = EMPTY) ==> X (supm X)
-      #|  !X. (FINITE X) /\\ ~(X = EMPTY) ==> X (inf X)
-      #|  (?t. !x. (X x ==> x <= t))
-      #|  !X. (FINITE X) /\\ ~(X = EMPTY) ==> (!x. X x ==> x <= supm X)
-      #|  (?t. !x. (X x ==> t <= x))
-      #|  !X. (FINITE X) /\\ ~(X = EMPTY) ==> (!x. X x ==> inf X <= x)
-      #|  !(f:A->B) X Y. (INJ f X Y /\\ Y SUBSET IMAGE f X) ==>\n      (BIJ f X Y)
-      #|  !n. {x | x <| SUC n} = {x | x <| n} UNION {n}
-      #|  !(f:A->B) g X Y. (!x. (X x ==> (f x = g x))) ==> (INJ f X Y = INJ g X Y)
-      #|  !(f:A->B) g X . (!x. (X x ==> (f x = g x))) ==> (IMAGE f X  = IMAGE g X)
+      #|  (forall x. X x ==> inf X <= x ) /\\ (forall y. (forall x. X x ==> y <= x) ==> ( y <= inf X))
+      #|  (?x. X x /\\ (forall y. X y ==> x <= y))
+      #|  forall X. (compact(top_of_metric(UNIV,d_real)) X) /\\ ~(X = EMPTY) ==>\n          X (inf X)
+      #|  forall X. (FINITE X) /\\ ~(X = EMPTY) ==> X (supm X)
+      #|  forall X. (FINITE X) /\\ ~(X = EMPTY) ==> X (inf X)
+      #|  (?t. forall x. (X x ==> x <= t))
+      #|  forall X. (FINITE X) /\\ ~(X = EMPTY) ==> (forall x. X x ==> x <= supm X)
+      #|  (?t. forall x. (X x ==> t <= x))
+      #|  forall X. (FINITE X) /\\ ~(X = EMPTY) ==> (forall x. X x ==> inf X <= x)
+      #|  forall(f:A->B) X Y. (INJ f X Y /\\ Y SUBSET IMAGE f X) ==>\n      (BIJ f X Y)
+      #|  forall n. {x | x <| SUC n} = {x | x <| n} UNION {n}
+      #|  forall(f:A->B) g X Y. (forall x. (X x ==> (f x = g x))) ==> (INJ f X Y = INJ g X Y)
+      #|  forall(f:A->B) g X . (forall x. (X x ==> (f x = g x))) ==> (IMAGE f X  = IMAGE g X)
       #|  CARD X
       #|  X
       #|  i <| n /\\ j <| n
@@ -59250,7 +59250,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a < b <=> (a<= b /\\ ~(a = b))
       #|  (v i)
       #|  j = n
-      #|  (!x. X x ==> x <= supm X)
+      #|  (forall x. X x ==> x <= supm X)
       #|  IMAGE v {x| x <| n}
       #|  n
       #|  X = supm X INSERT (X DELETE supm X)
@@ -59260,7 +59260,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v n = supm X
       #|  INJ v {x | x <| n} X = INJ u {x | x <| n} X
       #|  ~(n <| n)
-      #|  !x. ({x | x <| n} x ==> (v x = u x))
+      #|  forall x. ({x | x <| n} x ==> (v x = u x))
       #|  CARD (X DELETE supm X) = n
       #|  v
       #|  v = (\\j. if (j = n) then supm X else u j)
@@ -59269,8 +59269,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  X (supm X)
       #|  ~(j <| 0)
-      #|  !n X. ( (X HAS_SIZE  n) ==> (? u. (BIJ u {x | x <| CARD X} X) /\\  (!i j. (i <| CARD X /\\ (j <| CARD X) /\\ (i <| j) ==> (u i <. u j)))))
-      #|  !X. ( (FINITE X) ==>\n     (? u. (BIJ u {x | x <| CARD X} X) /\\\n        (!i j. (i <| CARD X /\\ (j <| CARD X) /\\ (i <| j) ==>\n         (u i <. u j)))))
+      #|  forall n X. ( (X HAS_SIZE  n) ==> (? u. (BIJ u {x | x <| CARD X} X) /\\  (forall i j. (i <| CARD X /\\ (j <| CARD X) /\\ (i <| j) ==> (u i <. u j)))))
+      #|  forall X. ( (FINITE X) ==>\n     (? u. (BIJ u {x | x <| CARD X} X) /\\\n        (forall i j. (i <| CARD X /\\ (j <| CARD X) /\\ (i <| j) ==>\n         (u i <. u j)))))
       #|  (v:num->real) i
       #|  (v:num->real) i
       #|  (v:num->real) i
@@ -59288,7 +59288,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a <=x /\\ x <= b ==> ~(b < a)
       #|  b <= x /\\ x <= b ==> (x = b)
       #|  (a = b) \\/ (b < a) \\/ (a < b)
-      #|  !A a b. connected (top_of_metric(UNIV,d_real)) A /\\\n          A a /\\ A b ==>\n       {x | a <= x /\\ x <= b } SUBSET A
+      #|  forall A a b. connected (top_of_metric(UNIV,d_real)) A /\\\n          A a /\\ A b ==>\n       {x | a <= x /\\ x <= b } SUBSET A
       #|  x
       #|  {t | a' <= t /\\ t <= x'} SUBSET A
       #|  t - (t -x) = x
@@ -59305,39 +59305,39 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~( x + e/(&2) <= x) <=> (&0 < e/(&2))
       #|  x + e/(&2)
       #|  x
-      #|  !x. A x ==> (?y. A y /\\ ~(y <= x))
+      #|  forall x. A x ==> (?y. A y /\\ ~(y <= x))
       #|  (a < b) ==> (a <= b)
       #|  abs  (e/(&2)) = (e/(&2))
       #|  (x - (x - t)) = t
       #|  ~(x <= x - e/(&2)) <=> (&0 < e/(&2))
       #|  x - e/(&2)
       #|  x
-      #|  !x. A x ==> (?y. A y /\\ ~(x <= y))
-      #|  !x. (A x  ==> ?e. &0 < e /\\ open_ball(UNIV,d_real) x e SUBSET A)
-      #|  (!x. A x ==> inf A <= x)
-      #|  (!x. A x ==> x <= supm A)
-      #|  (!epsilon. &0 < epsilon ==> (?x. A x /\\ x < inf A + epsilon))
-      #|  (!epsilon. &0 < epsilon ==> (?x. A x /\\ supm A - epsilon < x))
-      #|  !A a b. (connected (top_of_metric(UNIV,d_real)) A /\\\n       (top_of_metric(UNIV,d_real) A) /\\\n       (~(A = EMPTY)) /\\\n       A SUBSET {x | a <= x /\\ x <= b}) ==>\n         ( A = {x | inf A < x /\\ x < supm A})
+      #|  forall x. A x ==> (?y. A y /\\ ~(x <= y))
+      #|  forall x. (A x  ==> ?e. &0 < e /\\ open_ball(UNIV,d_real) x e SUBSET A)
+      #|  (forall x. A x ==> inf A <= x)
+      #|  (forall x. A x ==> x <= supm A)
+      #|  (forall epsilon. &0 < epsilon ==> (?x. A x /\\ x < inf A + epsilon))
+      #|  (forall epsilon. &0 < epsilon ==> (?x. A x /\\ supm A - epsilon < x))
+      #|  forall A a b. (connected (top_of_metric(UNIV,d_real)) A /\\\n       (top_of_metric(UNIV,d_real) A) /\\\n       (~(A = EMPTY)) /\\\n       A SUBSET {x | a <= x /\\ x <= b}) ==>\n         ( A = {x | inf A < x /\\ x < supm A})
       #|  (a <= b/(&2)) /\\ (b/(&2) < b)   ==> (a < b)
       #|  z
       #|  r/(&2)
       #|  a < b ==> a <= b
       #|  metric_space (UNIV,d_real) /\\ Z SUBSET UNIV
-      #|  !Z a.\n     (closure(top_of_metric(UNIV,d_real)) Z a <=>\n       (!e. (&0 < e) ==> (?z. Z z /\\ (abs  (a - z) <= e))))
+      #|  forall Z a.\n     (closure(top_of_metric(UNIV,d_real)) Z a <=>\n       (forall e. (&0 < e) ==> (?z. Z z /\\ (abs  (a - z) <= e))))
       #|  a:real
-      #|  !a b c. (a*b)/c = a*(b/c)
+      #|  forall a b c. (a*b)/c = a*(b/c)
       #|  ~(&2 = &0)
       #|  &0 < &2
       #|  (&2*a)/(&2) < (a+b)/(&2)
-      #|  !a b. (a < b) ==> a < (a + b)/(&2) 
+      #|  forall a b. (a < b) ==> a < (a + b)/(&2) 
       #|  ~(&2 = &0)
       #|  &0 < &2
       #|   (a+b)/(&2) < (&2*b)/(&2)
-      #|  !a b. (a < b) ==>  (a + b)/(&2) < b 
+      #|  forall a b. (a < b) ==>  (a + b)/(&2) < b 
       #|  ~(&2 = &0)
       #|  ((&2*a)/(&2) - (a+b)/(&2) = (a - b)/(&2))
-      #|  !a b. (a - (a + b)/(&2) = (a - b)/(&2))
+      #|  forall a b. (a - (a + b)/(&2) = (a - b)/(&2))
       #|  abs (inv(&2)) = inv(&2)
       #|  (a < b) ==> (abs(b - a) = (b-a))
       #|  (a + b) = (b + a)
@@ -59357,30 +59357,30 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 < &2
       #|  (x <= y/(&2) /\\ y/(&2) < y)  ==> (x < y)
       #|  (a + e < b)
-      #|  !e. (&0 < e) ==> (a + e < b) \\/ ((b - a)/(&2) < e)
+      #|  forall e. (&0 < e) ==> (a + e < b) \\/ ((b - a)/(&2) < e)
       #|  {x | a <= x /\\ x <= b} = a INSERT (b INSERT {x | a < x /\\ x < b})
-      #|  !a b. (a < b) ==>\n      (closure (top_of_metric(UNIV,d_real)) {x | a < x /\\ x < b} =\n       {x | a <= x /\\ x <= b}) 
+      #|  forall a b. (a < b) ==>\n      (closure (top_of_metric(UNIV,d_real)) {x | a < x /\\ x < b} =\n       {x | a <= x /\\ x <= b}) 
       #|  b
       #|  a
       #|  b < a
-      #|  !a b c d. {x | a <= x /\\ x <= b} SUBSET  {x | c <= x /\\ x <= d} <=>\n      (b < a) \\/ ((c <= a ) /\\ (b <= d))
-      #|  !(A:A->bool) B. (A = B) <=> (A SUBSET B /\\ B SUBSET A) 
-      #|  !a b c d. ({x | a <= x /\\ x <= b} =  {x | c <= x /\\ x <= d}) <=>\n      ((b < a) /\\ (d < c)) \\/ ((c = a ) /\\ (b = d))
+      #|  forall a b c d. {x | a <= x /\\ x <= b} SUBSET  {x | c <= x /\\ x <= d} <=>\n      (b < a) \\/ ((c <= a ) /\\ (b <= d))
+      #|  forall(A:A->bool) B. (A = B) <=> (A SUBSET B /\\ B SUBSET A) 
+      #|  forall a b c d. ({x | a <= x /\\ x <= b} =  {x | c <= x /\\ x <= d}) <=>\n      ((b < a) /\\ (d < c)) \\/ ((c = a ) /\\ (b = d))
       #|  inf A < supm A
       #|  b
       #|  a
       #|  ( A = {x | inf A < x /\\ x < supm A})
       #|  A SUBSET {x | a <= x /\\ x <= b}
       #|  A = EMPTY
-      #|  !A a b. (connected (top_of_metric(UNIV,d_real)) A /\\\n       (top_of_metric(UNIV,d_real) A) /\\\n    (closure (top_of_metric(UNIV,d_real)) A = {x | a <= x /\\ x <= b}) ==>\n    (A = { x | a < x /\\ x < b }))
+      #|  forall A a b. (connected (top_of_metric(UNIV,d_real)) A /\\\n       (top_of_metric(UNIV,d_real) A) /\\\n    (closure (top_of_metric(UNIV,d_real)) A = {x | a <= x /\\ x <= b}) ==>\n    (A = { x | a < x /\\ x < b }))
       #|  x:real
       #|  &0 <= d /\\ d <= r ==> ~(r < &0)
-      #|  !n a r. (r < &0) ==> (closed_ball(euclid n,d_euclid) a r = EMPTY)
+      #|  forall n a r. (r < &0) ==> (closed_ball(euclid n,d_euclid) a r = EMPTY)
       #|  (x <= &0 /\\ &0 <= x) ==> (x = &0)
-      #|  !n a. (closed_ball(euclid n,d_euclid) a (&0) SUBSET {a})
+      #|  forall n a. (closed_ball(euclid n,d_euclid) a (&0) SUBSET {a})
       #|  (u <= r) ==> (u < r + &1)
       #|  r + &1
-      #|  !n a r. ?r'. closed_ball(euclid n,d_euclid) a r SUBSET\n      open_ball(euclid n,d_euclid) a r'
+      #|  forall n a r. ?r'. closed_ball(euclid n,d_euclid) a r SUBSET\n      open_ball(euclid n,d_euclid) a r'
       #|  u <= r ==> (u < r + &1)
       #|  &0 <= d /\\ d <= r ==> &0 <= r
       #|  d_euclid a a = &0
@@ -59388,70 +59388,70 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a
       #|  open_ball(euclid n,d_euclid) a r SUBSET (euclid n)
       #|  closed_ball(euclid n,d_euclid) a r SUBSET (euclid n)
-      #|  !n a r.  (compact (top_of_metric(euclid n,d_euclid))\n        (closed_ball(euclid n,d_euclid) a r)) 
+      #|  forall n a r.  (compact (top_of_metric(euclid n,d_euclid))\n        (closed_ball(euclid n,d_euclid) a r)) 
       #|  set_dist d (K:A->bool) (K':B->bool) =\n       inf { z | (?p p'. (K p /\\ K' p' /\\ (z = d p p')))}
       #|  d p p'
-      #|  ~(Y = {}) /\\ (?t. !x. Y x ==> t <= x)
+      #|  ~(Y = {}) /\\ (?t. forall x. Y x ==> t <= x)
       #|  Y (d p p')
-      #|  !x. Y x ==> &0 <= x
+      #|  forall x. Y x ==> &0 <= x
       #|  Y = {z | ?p p'. K p /\\ K' p' /\\ (z = d p p')}
-      #|  !(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n      (K' SUBSET X) ==>\n    (!p p'. (K p /\\ K' p' ==> (set_dist d K K' <= d p p')))
-      #|  ~(Y = {}) /\\ (?t. !x. Y x ==> t <= x)
+      #|  forall(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n      (K' SUBSET X) ==>\n    (forall p p'. (K p /\\ K' p' ==> (set_dist d K K' <= d p p')))
+      #|  ~(Y = {}) /\\ (?t. forall x. Y x ==> t <= x)
       #|  d u' u
       #|  ~(Y = {})
-      #|  !x. Y x ==> &0 <= x
+      #|  forall x. Y x ==> &0 <= x
       #|  Y = {z | ?p p'. K p /\\ K' p' /\\ (z = d p p')}
-      #|  !(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n      (K' SUBSET X) ==> (&0 <= set_dist d K K')
+      #|  forall(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n      (K' SUBSET X) ==> (&0 <= set_dist d K K')
       #|  a <= b /\\ b <= a ==> (a = b)
       #|  Y (d p p')
       #|  p'
       #|  p
       #|  X
-      #|  (?p p'. K p /\\ K' p' /\\ (!q q'. K q /\\ K' q' ==> d p p' <= d q q'))
-      #|  ~(Y = {}) /\\ (?t. !x. Y x ==> t <= x)
+      #|  (?p p'. K p /\\ K' p' /\\ (forall q q'. K q /\\ K' q' ==> d p p' <= d q q'))
+      #|  ~(Y = {}) /\\ (?t. forall x. Y x ==> t <= x)
       #|  d u' u
       #|  ~(Y = {})
-      #|  !x. Y x ==> &0 <= x
+      #|  forall x. Y x ==> &0 <= x
       #|  Y = {z | ?p p'. K p /\\ K' p' /\\ (z = d p p')}
-      #|  !(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n    (compact (top_of_metric(X,d)) K) /\\\n    (compact (top_of_metric (X,d)) K') /\\\n      (K' SUBSET X) ==>\n    (?p p'. K p /\\ K' p' /\\ (set_dist d K K' = d p p'))
+      #|  forall(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n    (compact (top_of_metric(X,d)) K) /\\\n    (compact (top_of_metric (X,d)) K') /\\\n      (K' SUBSET X) ==>\n    (?p p'. K p /\\ K' p' /\\ (set_dist d K K' = d p p'))
       #|  top_of_metric(UNIV,d_real)
-      #|  !C. simple_arc top2 C ==> compact top2 C
+      #|  forall C. simple_arc top2 C ==> compact top2 C
       #|  &0
       #|  f (&0)
-      #|  !C. simple_arc top2 C ==> ~(C = EMPTY)
-      #|  !G e. (plane_graph G) /\\ (graph_edge G e) ==>\n      (compact top2 e)
+      #|  forall C. simple_arc top2 C ==> ~(C = EMPTY)
+      #|  forall G e. (plane_graph G) /\\ (graph_edge G e) ==>\n      (compact top2 e)
       #|  graph_inc G u HAS_SIZE 2
       #|  graph_inc G u SUBSET graph_vertex G
-      #|  !G. graph (G:(A,B)graph_t) /\\ ~(graph_edge G = EMPTY) ==>\n   (?v. graph_vertex G v)
+      #|  forall G. graph (G:(A,B)graph_t) /\\ ~(graph_edge G = EMPTY) ==>\n   (?v. graph_vertex G v)
       #|  b
       #|  a
       #|  graph_inc G u HAS_SIZE 2
       #|  graph_inc G u SUBSET graph_vertex G
-      #|  !G. graph (G:(A,B)graph_t) /\\ ~(graph_edge G = EMPTY) ==>\n   (?v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v'))
+      #|  forall G. graph (G:(A,B)graph_t) /\\ ~(graph_edge G = EMPTY) ==>\n   (?v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v'))
       #|  graph_vertex G 
       #|  graph_edge G 
       #|  {(e,v) | graph_edge G e /\\ graph_vertex G v}
       #|  Y = {z | (?e v. graph_edge G e /\\ graph_vertex G v /\\ ~(graph_inc G e v) /\\ (z = (e,v)))}
-      #|  !G. plane_graph G /\\ FINITE (graph_vertex G) /\\ FINITE (graph_edge G)\n       ==>\n    FINITE {z | (?e v. graph_edge G e /\\ graph_vertex G v /\\\n              ~(graph_inc G e v) /\\ (z = (e,v)))}
-      #|  !(A:A->bool) (f:A->B). (IMAGE f A = EMPTY) <=> (A = EMPTY)
+      #|  forall G. plane_graph G /\\ FINITE (graph_vertex G) /\\ FINITE (graph_edge G)\n       ==>\n    FINITE {z | (?e v. graph_edge G e /\\ graph_vertex G v /\\\n              ~(graph_inc G e v) /\\ (z = (e,v)))}
+      #|  forall(A:A->bool) (f:A->B). (IMAGE f A = EMPTY) <=> (A = EMPTY)
       #|  SND x
       #|  FST x
       #|  (u,v)
-      #|  !P. (!x. P x) <=> ! (u:A) (v:B) . P (u,v)
+      #|  forall P. (forall x. P x) <=> forall (u:A) (v:B) . P (u,v)
       #|  X
       #|  X p /\\ X p'
       #|  p = p'
       #|  X
       #|  (?p p'. K p /\\ K' p' /\\ (set_dist d K K' = d p p'))
       #|  ~(x = &0) /\\ (&0 <= x) ==> (&0 < x)
-      #|  !(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n    (compact (top_of_metric(X,d)) K) /\\\n    (compact (top_of_metric (X,d)) K') /\\ (K INTER K' = EMPTY) /\\\n      (K' SUBSET X) ==>\n    (&0 < (set_dist d K K' ))
+      #|  forall(X:A->bool) d K K'. metric_space(X,d) /\\ (K SUBSET X) /\\\n     ~(K = EMPTY) /\\      ~(K' = EMPTY) /\\\n    (compact (top_of_metric(X,d)) K) /\\\n    (compact (top_of_metric (X,d)) K') /\\ (K INTER K' = EMPTY) /\\\n      (K' SUBSET X) ==>\n    (&0 < (set_dist d K K' ))
       #|  d u y = d y u
       #|  d x y <= d x u + d u y
-      #|  !(x:A) y r r' X d. (metric_space(X,d) /\\\n    ~(closed_ball(X,d) x r INTER closed_ball(X,d) y r' = EMPTY) ==>\n   (d x y <= r + r'))
+      #|  forall(x:A) y r r' X d. (metric_space(X,d) /\\\n    ~(closed_ball(X,d) x r INTER closed_ball(X,d) y r' = EMPTY) ==>\n   (d x y <= r + r'))
       #|  d_euclid v u <= r
       #|  set_dist d_euclid {v} e <= d_euclid v u
       #|  euclid 2
-      #|  (!p p'. ({v} p /\\ e p' ==> (set_dist d_euclid {v} e <= d_euclid p p')))
+      #|  (forall p p'. ({v} p /\\ e p' ==> (set_dist d_euclid {v} e <= d_euclid p p')))
       #|  inf C'
       #|  (?t. (r < t /\\ t <= q)) ==> (r < q)
       #|  r < set_dist d_euclid {v} e
@@ -59475,12 +59475,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2
       #|  euclid 2 v' /\\ euclid 2 v''
       #|  (&0 <= y /\\ ~(y = &0) ) ==> &0 < y 
-      #|  !x. C' x ==> (&0 < x)
-      #|  !x. B' x <=> (?e' v'. graph_edge G e' /\\ graph_vertex G v' /\\  ~(graph_inc G e' v') /\\ (x = set_dist d_euclid {  v' } e'))
-      #|  !x. A' x <=> (?v' v''. graph_vertex G v' /\\ graph_vertex G v'' /\\  ~(v' = v'') /\\ (x = d_euclid v' v'' / &2))
-      #|  !e. (graph_edge G e ==> compact top2 e)
-      #|  !v. (graph_vertex G v ==> compact top2 {v})
-      #|  !x. C' x ==> (inf C' <= x)
+      #|  forall x. C' x ==> (&0 < x)
+      #|  forall x. B' x <=> (?e' v'. graph_edge G e' /\\ graph_vertex G v' /\\  ~(graph_inc G e' v') /\\ (x = set_dist d_euclid {  v' } e'))
+      #|  forall x. A' x <=> (?v' v''. graph_vertex G v' /\\ graph_vertex G v'' /\\  ~(v' = v'') /\\ (x = d_euclid v' v'' / &2))
+      #|  forall e. (graph_edge G e ==> compact top2 e)
+      #|  forall v. (graph_vertex G v ==> compact top2 {v})
+      #|  forall x. C' x ==> (inf C' <= x)
       #|  C'(inf C')
       #|  graph_vertex G SUBSET (euclid 2)
       #|  v'
@@ -59500,7 +59500,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  { (v,v') | (graph_vertex G v) /\\ graph_vertex G v'}
       #|  FINITE A
       #|  A = { (v,v') |  (graph_vertex G v) /\\ graph_vertex G v' /\\ ~(v = v') }
-      #|  !G. plane_graph G /\\\n       FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n     ~(graph_edge G = EMPTY)\n      ==> (?r. (&0 < r ) /\\\n     (!v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v') ==>\n        (closed_ball (euclid 2,d_euclid) v r INTER\n            closed_ball (euclid 2,d_euclid) v' r = EMPTY)) /\\\n     (!e v. (graph_edge G e /\\ graph_vertex G v /\\ ~(graph_inc G e v) ==>\n           (e INTER closed_ball (euclid 2,d_euclid) v r = EMPTY) )))
+      #|  forall G. plane_graph G /\\\n       FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n     ~(graph_edge G = EMPTY)\n      ==> (?r. (&0 < r ) /\\\n     (forall v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v') ==>\n        (closed_ball (euclid 2,d_euclid) v r INTER\n            closed_ball (euclid 2,d_euclid) v' r = EMPTY)) /\\\n     (forall e v. (graph_edge G e /\\ graph_vertex G v /\\ ~(graph_inc G e v) ==>\n           (e INTER closed_ball (euclid 2,d_euclid) v r = EMPTY) )))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -59552,9 +59552,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  norm2 x = d_euclid x euclid0
       #|  cis x = point(cos(x),sin(x))
       #|  (x + y) = (y + x)
-      #|  !x. norm2(cis(x)) = &1
-      #|  !x . (euclid 2 x) ==> &0 <= norm2 x
-      #|  !x. (euclid 2 x) /\\ (norm2 x = &0) <=> (x = euclid0)
+      #|  forall x. norm2(cis(x)) = &1
+      #|  forall x . (euclid 2 x) ==> &0 <= norm2 x
+      #|  forall x. (euclid 2 x) /\\ (norm2 x = &0) <=> (x = euclid0)
       #|  0 <| n <=> ~(n = 0)
       #|   ~(&0 <= -- x) <=> (&0 <. x) 
       #|  n <| 2 <=> (n = 0) \\/ (n =1)
@@ -59565,22 +59565,22 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  s t = s t'
       #|  (s t= s t') ==> ((t = t') \\/ (t' = (&2 * pi - t)))
       #|  x - t = (--. t + x)
-      #|  !t. cos (s t) = cos t
-      #|  !t. (&0 <= t /\\ t < (&2 * pi)) ==> (&0 <= s t /\\ s t <= pi)
+      #|  forall t. cos (s t) = cos t
+      #|  forall t. (&0 <= t /\\ t < (&2 * pi)) ==> (&0 <= s t /\\ s t <= pi)
       #|  s = (\\t. (if (t < pi) then t else ((&2)*pi - t)))
-      #|  !t t'. (&0 <= t /\\ t < &2*pi) /\\ (&0 <= t' /\\ t' < &2*pi) ==>\n      ((cis t = cis t') <=> (t = t'))
+      #|  forall t t'. (&0 <= t /\\ t < &2*pi) /\\ (&0 <= t' /\\ t' < &2*pi) ==>\n      ((cis t = cis t') <=> (t = t'))
       #|  acs
       #|  (x + y) = (y + x)
-      #|  !x r. norm2(r *# cis(x)) = abs (r)
+      #|  forall x r. norm2(r *# cis(x)) = abs (r)
       #|  SND p
       #|  FST p
       #|  ?u v. (x = point(u,v))
-      #|  !x r. (euclid 2 x) ==> (norm2(r *# x) = abs (r)*norm2(x))
+      #|  forall x r. (euclid 2 x) ==> (norm2(r *# x) = abs (r)*norm2(x))
       #|  cis x = cis x'
       #|  (r = &0)
       #|  r' = r
       #|  abs  r = abs  r'
-      #|  !x x' r r'. (&0 <= r) /\\ (&0 <= r') /\\ (&0 <= x) /\\ (&0 <= x') /\\\n     (x < &2 *pi) /\\ (x' < &2 * pi) /\\ (r *# cis(x) = r' *# cis(x')) ==>\n     ((r = &0) /\\ (r' = &0)) \\/ ((r = r') /\\ (x = x'))
+      #|  forall x x' r r'. (&0 <= r) /\\ (&0 <= r') /\\ (&0 <= x) /\\ (&0 <= x') /\\\n     (x < &2 *pi) /\\ (x' < &2 * pi) /\\ (r *# cis(x) = r' *# cis(x')) ==>\n     ((r = &0) /\\ (r' = &0)) \\/ ((r = r') /\\ (x = x'))
       #|  norm2
       #|  (a + t*(b-a)) + (&1 - t)*(b - a) = b
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
@@ -59589,7 +59589,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 <= a + t*(b-a)
       #|  x <= x + y <=> (&0 <= y)
       #|  a <= a + t*(b - a)
-      #|  !a b s t. (&0 < a) /\\ (a < b) /\\ (&0 <= t) /\\ (t <= &1) ==>\n    (a <= norm2((a + t*(b-a))*# cis(s))) /\\\n    ( norm2((a + t*(b-a))*# cis(s)) <= b) 
+      #|  forall a b s t. (&0 < a) /\\ (a < b) /\\ (&0 <= t) /\\ (t <= &1) ==>\n    (a <= norm2((a + t*(b-a))*# cis(s))) /\\\n    ( norm2((a + t*(b-a))*# cis(s)) <= b) 
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -60002,28 +60002,28 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( ==> )
       #|  ( <=. ) 
       #|  ( *. )
-      #|  !u v. norm2(point(u,v)) = sqrt(u pow 2 + v pow 2)
+      #|  forall u v. norm2(point(u,v)) = sqrt(u pow 2 + v pow 2)
       #|  &0 <= x /\\ &0 <= y ==> &0 <= x + y
       #|  (sqrt (u pow 2 + v pow 2) pow 2 = u pow 2 + v pow 2)
       #|  SND p
       #|  FST p
       #|  ? u v. x = point (u,v)
-      #|  !x. (euclid 2 x) /\\ (norm2 x = &1) ==>\n    (? t. x =  cis(t))
+      #|  forall x. (euclid 2 x) /\\ (norm2 x = &1) ==>\n    (? t. x =  cis(t))
       #|  \\t. t pow 2
-      #|  ! j t. (cos (t + &j * &2 *pi) = cos(t))
-      #|  ! j t. (sin (t + &j * &2 *pi) = sin(t))
+      #|  forall j t. (cos (t + &j * &2 *pi) = cos(t))
+      #|  forall j t. (sin (t + &j * &2 *pi) = sin(t))
       #|  t - x + x = t
       #|  t - &j * &2 * pi
       #|  j
-      #|  ! j t. (cos (t - &j * &2 *pi) = cos(t))
+      #|  forall j t. (cos (t - &j * &2 *pi) = cos(t))
       #|  t - x + x = t
       #|  t - &j * &2 * pi
       #|  j
-      #|  ! j t. (sin (t - &j * &2 *pi) = sin(t))
+      #|  forall j t. (sin (t - &j * &2 *pi) = sin(t))
       #|  m
-      #|  !m t. (cos (t + real_of_int m * &2 *pi) = cos (t))
+      #|  forall m t. (cos (t + real_of_int m * &2 *pi) = cos (t))
       #|  m
-      #|  !m t. (sin (t + real_of_int m * &2 *pi) = sin (t))
+      #|  forall m t. (sin (t + real_of_int m * &2 *pi) = sin (t))
       #|   (t/(&2*pi))*(&2*pi) - real_of_int f * (&2*pi) < &1* &2*pi
       #|  &0 <= (t/(&2*pi))*(&2*pi) - real_of_int f * (&2*pi)
       #|  t = (t/(&2 *pi))*(&2 *pi)
@@ -60036,10 +60036,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t' = t - real_of_int(f)*(&2)*pi
       #|  f = floor (t/(&2 * pi))
       #|  t/(&2 *pi)
-      #|  !t. ?t'. (cos t = cos t') /\\\n      (sin t = sin t') /\\ (&0 <= t') /\\ (t' < &2 * pi)
+      #|  forall t. ?t'. (cos t = cos t') /\\\n      (sin t = sin t') /\\ (&0 <= t') /\\ (t' < &2 * pi)
       #|  t
       #|  (?t. x = cis t)
-      #|  !x. (euclid 2 x) /\\ (norm2 x = &1) ==>\n    (?t. &0 <= t /\\ t < &2 * pi /\\ (x = cis t))
+      #|  forall x. (euclid 2 x) /\\ (norm2 x = &1) ==>\n    (?t. &0 <= t /\\ t < &2 * pi /\\ (x = cis t))
       #|  t
       #|  (?t. &0 <= t /\\ t < &2 * pi /\\ (y = cis t))
       #|  r
@@ -60056,17 +60056,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0
       #|  x = euclid0
       #|  norm2 x = &0
-      #|  !x. (euclid 2 x) ==>\n    (?r t. (&0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = r *# cis(t))))
-      #|  !(A:A->bool) B A' B'. (A SUBSET A') /\\ (B SUBSET B') ==>\n       (A UNION B) SUBSET (A' UNION B')
-      #|  !(A:A->bool) B A' B'. (A SUBSET A') /\\ (B SUBSET B') ==>\n       (A INTER B) SUBSET (A' INTER B')
+      #|  forall x. (euclid 2 x) ==>\n    (?r t. (&0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = r *# cis(t))))
+      #|  forall(A:A->bool) B A' B'. (A SUBSET A') /\\ (B SUBSET B') ==>\n       (A UNION B) SUBSET (A' UNION B')
+      #|  forall(A:A->bool) B A' B'. (A SUBSET A') /\\ (B SUBSET B') ==>\n       (A INTER B) SUBSET (A' INTER B')
       #|  f
-      #|  !C v v'. simple_arc_end C v v' ==> simple_arc top2 C
+      #|  forall C v v'. simple_arc_end C v v' ==> simple_arc top2 C
       #|  f
       #|  f(&1)
       #|  f(&0)
       #|  C'
       #|  (?C' f. (C' = IMAGE f {x | &0 <= x /\\ x <= &1 }) /\\ C' SUBSET C /\\  continuous f (top_of_metric (UNIV,d_real)) top2 /\\  INJ f {x | &0 <= x /\\ x <= (&1)} (euclid 2) /\\  (C' INTER K = {(f (&0))}) /\\  (C' INTER K' = {(f (&1))}))
-      #|  !C K K' . simple_arc top2 C /\\ closed_ top2 K /\\\n      closed_ top2 K' /\\ (C INTER K INTER K' = EMPTY ) /\\\n     ~(C INTER K = EMPTY ) /\\ ~(C INTER K' = EMPTY) ==>\n    (?C' v v'.   C' SUBSET C /\\ simple_arc_end C' v v' /\\\n         (C' INTER K = {v}) /\\ (C' INTER K' = {v'})) 
+      #|  forall C K K' . simple_arc top2 C /\\ closed_ top2 K /\\\n      closed_ top2 K' /\\ (C INTER K INTER K' = EMPTY ) /\\\n     ~(C INTER K = EMPTY ) /\\ ~(C INTER K' = EMPTY) ==>\n    (?C' v v'.   C' SUBSET C /\\ simple_arc_end C' v v' /\\\n         (C' INTER K = {v}) /\\ (C' INTER K' = {v'})) 
       #|  &1/(&2) < &1 ==> (&1 < &1/ &2 <=> F)
       #|  x
       #|  x
@@ -60090,7 +60090,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  joinf g g' (&1/(&2))
       #|  continuous f' (top_of_metric (UNIV,d_real)) top2 /\\ INJ f' {x | &0 <= x /\\ x <= &1} (euclid 2) /\\  &1/(&2) < &1 /\\  &0 < &1
       #|  continuous f (top_of_metric (UNIV,d_real)) top2 /\\ INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\  &0 < &1/(&2) /\\  &0 < &1
-      #|  !C C' v v' v'' . simple_arc_end C v v' /\\ simple_arc_end C' v' v'' /\\\n   ( C INTER C' = {v'}) ==>\n    simple_arc_end (C UNION C') v v''
+      #|  forall C C' v v' v'' . simple_arc_end C v v' /\\ simple_arc_end C' v' v'' /\\\n   ( C INTER C' = {v'}) ==>\n    simple_arc_end (C UNION C') v v''
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -60117,7 +60117,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {x | UNIONS U x /\\ v (f x) /\\ Y (f x)} = {x | UNIONS U x /\\ v (f x)}
       #|  induced_top V Y (v INTER Y)
       #|  v INTER Y
-      #|  !(f:A->B) U V Y.\n     continuous f U (induced_top V Y) /\\ IMAGE f (UNIONS U) SUBSET Y\n     ==> continuous f U V
+      #|  forall(f:A->B) U V Y.\n     continuous f U (induced_top V Y) /\\ IMAGE f (UNIONS U) SUBSET Y\n     ==> continuous f U V
       #|  continuous f (induced_top (top_of_metric (UNIV,d_real)) {x | &0 <= x /\\ x <= &1}) (top_of_metric(X,d))
       #|  topology_ (top_of_metric ({x | &0 <= x /\\ x <= &1},d_real))
       #|  induced_top (top_of_metric (UNIV,d_real)) {x| &0 <= x /\\ x <= &1} {x | &0 <= x /\\ x <= &1}
@@ -60136,19 +60136,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|   (UNIONS (top_of_metric(C,d)) = C)
       #|  C SUBSET X
       #|  (UNIONS (top_of_metric(X,d)) = X) 
-      #|  !X d (C:A->bool). (simple_arc (top_of_metric(X,d)) C) /\\\n        (metric_space(X,d)) ==>\n    (?f. homeomorphism f\n   (top_of_metric({x | &0 <= x /\\ x <= &1},d_real))\n            (top_of_metric(C,d)))
+      #|  forall X d (C:A->bool). (simple_arc (top_of_metric(X,d)) C) /\\\n        (metric_space(X,d)) ==>\n    (?f. homeomorphism f\n   (top_of_metric({x | &0 <= x /\\ x <= &1},d_real))\n            (top_of_metric(C,d)))
       #|  C
       #|  top_of_metric(C,d) = induced_top(top_of_metric(X,d)) C
       #|  metric_space(C,d)
-      #|  !(f:A->B) U C X d. (metric_space(X,d) /\\\n      continuous f U (top_of_metric (C,d)) /\\\n          IMAGE f (UNIONS U) SUBSET C /\\ C SUBSET X ==>\n    continuous f U (top_of_metric(X,d)))
+      #|  forall(f:A->B) U C X d. (metric_space(X,d) /\\\n      continuous f U (top_of_metric (C,d)) /\\\n          IMAGE f (UNIONS U) SUBSET C /\\ C SUBSET X ==>\n    continuous f U (top_of_metric(X,d)))
       #|  f (&0)  = f(&1)
       #|  &0 = &1
-      #|  !C v v'. simple_arc_end C v v' ==> ~(v = v')
-      #|  !(f:A->B) X Y. BIJ f X Y ==> (IMAGE f X = Y)
+      #|  forall C v v'. simple_arc_end C v v' ==> ~(v = v')
+      #|  forall(f:A->B) X Y. BIJ f X Y ==> (IMAGE f X = Y)
       #|  C
       #|  IMAGE f (UNIONS U)= C
       #|  metric_space(C,d)
-      #|  !(f:A->B) U C X d. (homeomorphism f U (top_of_metric(C,d))) /\\\n     (C SUBSET X) /\\ (metric_space (X,d)) ==>\n    ( continuous f U (top_of_metric(X,d)) /\\ INJ f (UNIONS U) C /\\\n      (IMAGE f (UNIONS U) = C))
+      #|  forall(f:A->B) U C X d. (homeomorphism f U (top_of_metric(C,d))) /\\\n     (C SUBSET X) /\\ (metric_space (X,d)) ==>\n    ( continuous f U (top_of_metric(X,d)) /\\ INJ f (UNIONS U) C /\\\n      (IMAGE f (UNIONS U) = C))
       #|  top_of_metric(C,d)
       #|  (top_of_metric({x | &0 <= x /\\ x <= &1},d_real))
       #|  f
@@ -60164,7 +60164,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|   (UNIONS (top_of_metric(C,d)) = C)
       #|  C SUBSET X
       #|  (UNIONS (top_of_metric(X,d)) = X) 
-      #|  !X d (C:A->bool). (simple_arc (top_of_metric(X,d)) C) /\\\n        (metric_space(X,d)) ==>\n    (?f.\n  (continuous f (top_of_metric(C,d)) (top_of_metric(UNIV,d_real))) /\\\n  (INJ f C UNIV) /\\\n  (IMAGE f C = {x | &0 <= x /\\ x <= &1}))
+      #|  forall X d (C:A->bool). (simple_arc (top_of_metric(X,d)) C) /\\\n        (metric_space(X,d)) ==>\n    (?f.\n  (continuous f (top_of_metric(C,d)) (top_of_metric(UNIV,d_real))) /\\\n  (INJ f C UNIV) /\\\n  (IMAGE f C = {x | &0 <= x /\\ x <= &1}))
       #|  ~(b = x')
       #|  ~(f x' = f b)
       #|  x'
@@ -60198,7 +60198,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f {x | t <= x /\\ x <= r} SUBSET {x | x < f s} \\/ IMAGE f {x | t <= x /\\ x <= r} SUBSET {x | f s < x}
       #|  r
       #|  t
-      #|  !r s t. (a <= r /\\ r <= b /\\ a <= s /\\ s <= b /\\ a <= t /\\ t <= b /\\ (t < r) /\\ (f r < f s) /\\ (f s < f t) ==> (t < s /\\ s < r))
+      #|  forall r s t. (a <= r /\\ r <= b /\\ a <= s /\\ s <= b /\\ a <= t /\\ t <= b /\\ (t < r) /\\ (f r < f s) /\\ (f s < f t) ==> (t < s /\\ s < r))
       #|  r
       #|  f r
       #|  t
@@ -60212,7 +60212,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f {x | r <= x /\\ x <= t} SUBSET {x | x < f s} \\/ IMAGE f {x | r <= x /\\ x <= t} SUBSET {x | f s < x}
       #|  t
       #|  r
-      #|  !r s t. (a <= r /\\ r <= b /\\ a <= s /\\ s <= b /\\ a <= t /\\ t <= b /\\ (r < t) /\\ (f r < f s) /\\ (f s < f t) ==> (r < s /\\ s < t))
+      #|  forall r s t. (a <= r /\\ r <= b /\\ a <= s /\\ s <= b /\\ a <= t /\\ t <= b /\\ (r < t) /\\ (f r < f s) /\\ (f s < f t) ==> (r < s /\\ s < t))
       #|  f x' < c \\/ d < f x'
       #|  ((c = f a) /\\ (d = f b)) \\/ ((c = f b) /\\ (d = f a))
       #|  a < b ==> a <= b
@@ -60236,8 +60236,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  d = max_real (f a) (f b)
       #|  c = min_real (f a) (f b)
       #|  top_of_metric(UNIV,d_real)
-      #|  !a b. connected (top_of_metric(UNIV,d_real)) (IMAGE f {x |  a<= x /\\ x <= b})
-      #|  !a b f. (a < b) /\\\n   (continuous f (top_of_metric(UNIV,d_real))\n        (top_of_metric( UNIV,d_real)))  /\\\n    (INJ f {x | a <= x /\\ x <= b} UNIV) ==>\n   (?c d. (c < d) /\\ ({ c , d} = {(f a),(f b)}) /\\\n    (IMAGE f {x | a <= x /\\ x <= b} =\n       {x | c <= x /\\ x <= d})\n     ) 
+      #|  forall a b. connected (top_of_metric(UNIV,d_real)) (IMAGE f {x |  a<= x /\\ x <= b})
+      #|  forall a b f. (a < b) /\\\n   (continuous f (top_of_metric(UNIV,d_real))\n        (top_of_metric( UNIV,d_real)))  /\\\n    (INJ f {x | a <= x /\\ x <= b} UNIV) ==>\n   (?c d. (c < d) /\\ ({ c , d} = {(f a),(f b)}) /\\\n    (IMAGE f {x | a <= x /\\ x <= b} =\n       {x | c <= x /\\ x <= d})\n     ) 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -60246,15 +60246,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !(f:A->B) X dX Y dY Y'.\n   metric_continuous f (X,dX) (Y,dY) <=>\n   metric_continuous f (X,dX) (Y',dY)
+      #|  forall(f:A->B) X dX Y dY Y'.\n   metric_continuous f (X,dX) (Y,dY) <=>\n   metric_continuous f (X,dX) (Y',dY)
       #|  continuous f (top_of_metric (X,dX)) (top_of_metric (Y,dY)) = metric_continuous f (X,dX) (Y,dY)
       #|  continuous f (top_of_metric (X,dX)) (top_of_metric (Y',dY)) = metric_continuous f (X,dX) (Y',dY)
-      #|  !(f:A->B) X dX Y dY Y'.\n   metric_space(X,dX) /\\ metric_space(Y,dY) /\\ metric_space(Y',dY) /\\\n   continuous f (top_of_metric(X,dX)) (top_of_metric(Y,dY)) /\\\n   IMAGE f X SUBSET Y /\\ IMAGE f X SUBSET Y' ==>\n   continuous f (top_of_metric(X,dX)) (top_of_metric(Y',dY))
-      #|  !(f:A->B) X dX Y dY Y' A.\n   metric_continuous f (X,dX) (Y,dY) /\\ A SUBSET X ==>\n  metric_continuous f (A,dX) (Y',dY)
+      #|  forall(f:A->B) X dX Y dY Y'.\n   metric_space(X,dX) /\\ metric_space(Y,dY) /\\ metric_space(Y',dY) /\\\n   continuous f (top_of_metric(X,dX)) (top_of_metric(Y,dY)) /\\\n   IMAGE f X SUBSET Y /\\ IMAGE f X SUBSET Y' ==>\n   continuous f (top_of_metric(X,dX)) (top_of_metric(Y',dY))
+      #|  forall(f:A->B) X dX Y dY Y' A.\n   metric_continuous f (X,dX) (Y,dY) /\\ A SUBSET X ==>\n  metric_continuous f (A,dX) (Y',dY)
       #|  a < b ==> ~(b < a)
       #|  a < b ==> ~(b < a)
       #|  ((c = a) /\\ (d = b)) \\/ ((c = b) /\\ (d = a))
-      #|  !a b c d . (c < d) /\\ ({c , d} = {a ,b}) ==>\n    (c = min_real a b) /\\ (d = max_real a b)
+      #|  forall a b c d . (c < d) /\\ ({c , d} = {a ,b}) ==>\n    (c = min_real a b) /\\ (d = max_real a b)
       #|  a <= a /\\ a <= b /\\ b <= b
       #|  Y (f a) /\\ Y(f b)
       #|  IMAGE g UNIV SUBSET Y /\\ metric_space (UNIV,d_real) /\\ metric_space (Y,dY)
@@ -60265,10 +60265,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B x
       #|  A x /\\ B' x ==> (x = a)
       #|  A x
-      #|  !x. B' x ==> (g x = f x)
+      #|  forall x. B' x ==> (g x = f x)
       #|  ~(A x)
-      #|  !x. B x ==> (g x = f b)
-      #|  !x. A x ==> (g x = f a)
+      #|  forall x. B x ==> (g x = f b)
+      #|  forall x. A x ==> (g x = f a)
       #|  g = subf A' fA' f
       #|  A' UNION B' = UNIV
       #|  ~(b <= a)
@@ -60281,11 +60281,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A' = A UNION B
       #|  a <= a /\\ a <= b /\\ b <= b
       #|  Y (f a) /\\ Y(f b)
-      #|  !x. x <= a /\\ b <= x <=> F
+      #|  forall x. x <= a /\\ b <= x <=> F
       #|  UNIV:real->bool
       #|  metric_continuous (subf A fA fB) (A UNION B,d_real) (Y,dY)
       #|  epsilon
-      #|  !r A. (Y r) ==> (metric_continuous (\\t. r) (A,d_real) (Y,dY))
+      #|  forall r A. (Y r) ==> (metric_continuous (\\t. r) (A,d_real) (Y,dY))
       #|  fB = (\\(t:real). f b)
       #|  fA  = (\\(t:real). f a)
       #|  B = {x | b <= x}
@@ -60296,7 +60296,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {x | a <= x /\\ x <= b} SUBSET UNIV
       #|  (a+b)/(&2)
       #|  ?t. (a < t /\\ t < b)
-      #|  !a b (f:real->A) Y dY. (a < b) /\\\n   (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n     (top_of_metric(Y,dY))) /\\ (metric_space(Y,dY)) /\\\n   IMAGE f {x | a <= x /\\ x <= b} SUBSET Y ==>\n  (\n   ?g. (continuous g (top_of_metric(UNIV,d_real))\n   (top_of_metric(Y,dY))) /\\\n     (!x. (a <= x /\\ x <= b) ==> (f x = g x)))
+      #|  forall a b (f:real->A) Y dY. (a < b) /\\\n   (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n     (top_of_metric(Y,dY))) /\\ (metric_space(Y,dY)) /\\\n   IMAGE f {x | a <= x /\\ x <= b} SUBSET Y ==>\n  (\n   ?g. (continuous g (top_of_metric(UNIV,d_real))\n   (top_of_metric(Y,dY))) /\\\n     (forall x. (a <= x /\\ x <= b) ==> (f x = g x)))
       #|  TAGB
       #|  (a < b) ==> (a<= a /\\ a <= b /\\ b <= b)
       #|  (f a = g a) /\\ (f b = g b)
@@ -60304,9 +60304,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  INJ g {x | a <= x /\\ x <= b} UNIV= INJ f {x | a <= x /\\ x <= b} UNIV
       #|  (a < b) /\\ (continuous g (top_of_metric(UNIV,d_real))  (top_of_metric( UNIV,d_real)))  /\\ (INJ g {x | a <= x /\\ x <= b} UNIV)
-      #|  ?g. (continuous g (top_of_metric(UNIV,d_real))  (top_of_metric(UNIV,d_real))) /\\ (!x. (a <= x /\\ x <= b) ==> (f x = g x))
-      #|  !a b f. (a < b) /\\\n   (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n        (top_of_metric( UNIV,d_real)))  /\\\n    (INJ f {x | a <= x /\\ x <= b} UNIV) ==>\n   (?c d. (c < d) /\\ ({ c , d} = {(f a),(f b)}) /\\\n    (IMAGE f {x | a <= x /\\ x <= b} =\n       {x | c <= x /\\ x <= d})\n     )
-      #|  !C. (simple_arc top2 C ==> (C SUBSET (euclid 2)))
+      #|  ?g. (continuous g (top_of_metric(UNIV,d_real))  (top_of_metric(UNIV,d_real))) /\\ (forall x. (a <= x /\\ x <= b) ==> (f x = g x))
+      #|  forall a b f. (a < b) /\\\n   (continuous f (top_of_metric({x | a <= x /\\ x <= b},d_real))\n        (top_of_metric( UNIV,d_real)))  /\\\n    (INJ f {x | a <= x /\\ x <= b} UNIV) ==>\n   (?c d. (c < d) /\\ ({ c , d} = {(f a),(f b)}) /\\\n    (IMAGE f {x | a <= x /\\ x <= b} =\n       {x | c <= x /\\ x <= d})\n     )
+      #|  forall C. (simple_arc top2 C ==> (C SUBSET (euclid 2)))
       #|  (c' = min_real (g'(&0)) (g'(&1))) /\\ (d' = max_real(g'(&0)) (g'(&1)))
       #|  (c = min_real (g'(&0)) (g'(&1))) /\\ (d = max_real(g'(&0)) (g'(&1)))
       #|  (g (&0) = g'(&0)) /\\ (g(&1) = g'(&1))
@@ -60339,7 +60339,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  (IMAGE f'' A = IMAGE f'' B) <=> (A = B)
       #|  simple_arc (top_of_metric(euclid 2,d_euclid)) C /\\ (metric_space(euclid 2,d_euclid))
-      #|  !A B C v v'. (simple_arc_end A v v' /\\ simple_arc_end B v v') /\\\n     (simple_arc top2 C) /\\ (A SUBSET C) /\\ (B SUBSET C) ==>\n     (A = B)
+      #|  forall A B C v v'. (simple_arc_end A v v' /\\ simple_arc_end B v v') /\\\n     (simple_arc top2 C) /\\ (A SUBSET C) /\\ (B SUBSET C) ==>\n     (A = B)
       #|  g
       #|  ~( &1 = t)
       #|  {x | &0 <= x /\\ x <= &1}
@@ -60356,7 +60356,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE f {x | t <= x /\\ x <= &1}
       #|  IMAGE f {x | &0 <= x /\\ x <= t}
       #|  ?t. (&0 <= t /\\ t <= &1 /\\ (f t = v''))
-      #|  !C v v' v''. simple_arc_end C v v' /\\ (C v'') /\\ ~(v'' = v) /\\\n    ~(v'' = v') ==>\n    (?C' C''. (simple_arc_end C' v v'') /\\ (simple_arc_end C'' v'' v') /\\\n     (C' INTER C'' = {v''}) /\\ (C' UNION C'' = C))
+      #|  forall C v v' v''. simple_arc_end C v v' /\\ (C v'') /\\ ~(v'' = v) /\\\n    ~(v'' = v') ==>\n    (?C' C''. (simple_arc_end C' v v'') /\\ (simple_arc_end C'' v'' v') /\\\n     (C' INTER C'' = {v''}) /\\ (C' UNION C'' = C))
       #|  x <= &1/(&2) <=> (x < &1/(&2) \\/ (x = &1/(&2)))
       #|  &1 = x
       #|  IMAGE g {x | &0 <= x /\\ x <= &1/(&2)} DELETE (g (&1/(&2)))
@@ -60417,7 +60417,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?t. (&0 <= t /\\ t <= &1 /\\ (f t = v))
       #|  f
       #|  f(&0) = v
-      #|  !C  v. (simple_closed_curve top2 C /\\ C v) ==>\n    (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n               continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n               INJ f {x | &0 <= x /\\ x < &1} (UNIONS top2) /\\\n               (f (&0) = v) /\\\n               (f (&0) = f (&1)))
+      #|  forall C  v. (simple_closed_curve top2 C /\\ C v) ==>\n    (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n               continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n               INJ f {x | &0 <= x /\\ x < &1} (UNIONS top2) /\\\n               (f (&0) = v) /\\\n               (f (&0) = f (&1)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -60433,14 +60433,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ((x = &1) /\\ (y = &1)) \\/ ((x < &1) /\\ (y = &1)) \\/ ((x = &1) /\\ (y < &1)) \\/ ((x < &1) /\\ (y < &1))
       #|  x = &1
       #|  x < &1
-      #|  !(f:real->A) X t. (INJ f {x | &0 <= x /\\ x < &1} X) /\\\n          (f (&0) = f(&1)) /\\ (&0 < t) ==>\n     INJ f {x | t <= x /\\ x <= &1} X
+      #|  forall(f:real->A) X t. (INJ f {x | &0 <= x /\\ x < &1} X) /\\\n          (f (&0) = f(&1)) /\\ (&0 < t) ==>\n     INJ f {x | t <= x /\\ x <= &1} X
       #|  g
       #|  continuous f (top_of_metric (UNIV,d_real)) top2 /\\  INJ f {x | u <= x /\\ x <= v} (euclid 2) /\\  &0 < &1 /\\  u < v
       #|  {x | &0 <= x /\\ x < &1}
       #|  {x | u <= x /\\ x <= &1}
       #|  INJ f { x | u <= x /\\ x <= v } (euclid 2)
       #|  (&0 < u) ==> INJ f { x | u <= x /\\ x <= &1} (euclid 2)
-      #|  !f u v.\n          continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x < &1} (euclid 2) /\\\n              (f (&0) = f (&1)) /\\\n       (&0 <= u /\\ u < v /\\ v <= &1 /\\ (&0 < u \\/ v < &1)) ==>\n     simple_arc_end (IMAGE f {x | u <= x /\\ x <= v}) (f u) (f v)
+      #|  forall f u v.\n          continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x < &1} (euclid 2) /\\\n              (f (&0) = f (&1)) /\\\n       (&0 <= u /\\ u < v /\\ v <= &1 /\\ (&0 < u \\/ v < &1)) ==>\n     simple_arc_end (IMAGE f {x | u <= x /\\ x <= v}) (f u) (f v)
       #|  ({x | &0 <= x /\\ x <= t} INTER {(&0)}) = {(&0)}
       #|  UNIONS top2
       #|  {x | &0 <= x /\\ x < &1}
@@ -60462,17 +60462,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t < &1
       #|  ?t. (&0 <= t /\\ t <= &1 /\\ (f(t) = v'))
       #|  simple_closed_curve top2 C /\\ C v
-      #|  !C v v'. (simple_closed_curve top2 C /\\ C v /\\ C v' /\\ ~(v = v')\n   ==> (?C' C''. simple_arc_end C' v v' /\\ simple_arc_end C'' v v'\n      /\\ (  C' UNION C'' = C) /\\ (C' INTER C'' = {v,v'})))
-      #|  !x. (euclid 2 x) ==> (closed_ top2 {x})
-      #|  !C v v'. (simple_arc_end C v v' ==> closed_ top2 C) 
+      #|  forall C v v'. (simple_closed_curve top2 C /\\ C v /\\ C v' /\\ ~(v = v')\n   ==> (?C' C''. simple_arc_end C' v v' /\\ simple_arc_end C'' v v'\n      /\\ (  C' UNION C'' = C) /\\ (C' INTER C'' = {v,v'})))
+      #|  forall x. (euclid 2 x) ==> (closed_ top2 {x})
+      #|  forall C v v'. (simple_arc_end C v v' ==> closed_ top2 C) 
       #|  &0
-      #|  !C v v'. (simple_arc_end C v v' ==> C v)
+      #|  forall C v v'. (simple_arc_end C v v' ==> C v)
       #|  &1
-      #|  !C v v'. (simple_arc_end C v v' ==> C v')
+      #|  forall C v v'. (simple_arc_end C v v' ==> C v')
       #|  C v
       #|  C SUBSET euclid 2
-      #|  !C v v'. simple_arc_end C v v' ==> closed_ top2 {v}
-      #|  !C v v'. simple_arc_end C v v' ==> closed_ top2 {v'}
+      #|  forall C v v'. simple_arc_end C v v' ==> closed_ top2 {v}
+      #|  forall C v v'. simple_arc_end C v v' ==> closed_ top2 {v'}
       #|  v''
       #|  C2
       #|  C1 UNION K
@@ -60577,7 +60577,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  ~((C1 INTER K) = EMPTY)
       #|  K = C2 UNION C3
-      #|  !A C1 C2 C3 x p1 p2 p3.\n     (C1 UNION C2 UNION C3 SUBSET A) /\\\n     (simple_arc_end C1 x p1) /\\ ~(C1 p2) /\\ ~(C1 p3) /\\\n     (simple_arc_end C2 x p2) /\\ ~(C2 p1) /\\ ~(C2 p3) /\\\n     (simple_arc_end C3 x p3) /\\ ~(C3 p1) /\\ ~(C3 p2) ==>\n     (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     ~(C2' p3) /\\ ~(C3' p2) /\\\n     (C1' INTER C2' = {x'} ) /\\\n     (C1' INTER C3' = {x'} ))\n     
+      #|  forall A C1 C2 C3 x p1 p2 p3.\n     (C1 UNION C2 UNION C3 SUBSET A) /\\\n     (simple_arc_end C1 x p1) /\\ ~(C1 p2) /\\ ~(C1 p3) /\\\n     (simple_arc_end C2 x p2) /\\ ~(C2 p1) /\\ ~(C2 p3) /\\\n     (simple_arc_end C3 x p3) /\\ ~(C3 p1) /\\ ~(C3 p2) ==>\n     (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     ~(C2' p3) /\\ ~(C3' p2) /\\\n     (C1' INTER C2' = {x'} ) /\\\n     (C1' INTER C3' = {x'} ))\n     
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -60632,20 +60632,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {p2}
       #|  C3
       #|  C2
-      #|  !A C1 C2 C3 x p1 p2 p3.\n     (\n     C1 UNION C2 UNION C3 SUBSET A /\\\n     (simple_arc_end C1 x p1) /\\\n     (simple_arc_end C2 x p2) /\\\n     (simple_arc_end C3 x p3) /\\\n     (C1 INTER C2 = {x}) /\\\n     (C1 INTER C3 = {x}) /\\\n     ~(C2 p3) /\\ ~(C3 p2)) ==>\n     (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     (C1' INTER C2' = {x'}) /\\\n     (C2' INTER C3' = {x'}) /\\\n     (C3' INTER C1' = {x'})\n     )
+      #|  forall A C1 C2 C3 x p1 p2 p3.\n     (\n     C1 UNION C2 UNION C3 SUBSET A /\\\n     (simple_arc_end C1 x p1) /\\\n     (simple_arc_end C2 x p2) /\\\n     (simple_arc_end C3 x p3) /\\\n     (C1 INTER C2 = {x}) /\\\n     (C1 INTER C3 = {x}) /\\\n     ~(C2 p3) /\\ ~(C3 p2)) ==>\n     (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     (C1' INTER C2' = {x'}) /\\\n     (C2' INTER C3' = {x'}) /\\\n     (C3' INTER C1' = {x'})\n     )
       #|  TAGB
       #|  x'
       #|  C3'
       #|  C2'
       #|  C1'
-      #|  !A C1 C2 C3 x p1 p2 p3.\n     (C1 UNION C2 UNION C3 SUBSET A) /\\\n     (simple_arc_end C1 x p1) /\\ ~(C1 p2) /\\ ~(C1 p3) /\\\n     (simple_arc_end C2 x p2) /\\ ~(C2 p1) /\\ ~(C2 p3) /\\\n     (simple_arc_end C3 x p3) /\\ ~(C3 p1) /\\ ~(C3 p2) ==>\n  (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     (C1' INTER C2' = {x'}) /\\\n     (C2' INTER C3' = {x'}) /\\\n     (C3' INTER C1' = {x'})\n     )
+      #|  forall A C1 C2 C3 x p1 p2 p3.\n     (C1 UNION C2 UNION C3 SUBSET A) /\\\n     (simple_arc_end C1 x p1) /\\ ~(C1 p2) /\\ ~(C1 p3) /\\\n     (simple_arc_end C2 x p2) /\\ ~(C2 p1) /\\ ~(C2 p3) /\\\n     (simple_arc_end C3 x p3) /\\ ~(C3 p1) /\\ ~(C3 p2) ==>\n  (?x' C1' C2' C3'.\n     (C1' UNION C2' UNION C3' SUBSET A) /\\\n     (simple_arc_end C1' x' p1) /\\\n     (simple_arc_end C2' x' p2) /\\\n     (simple_arc_end C3' x' p3) /\\\n     (C1' INTER C2' = {x'}) /\\\n     (C2' INTER C3' = {x'}) /\\\n     (C3' INTER C1' = {x'})\n     )
       #|  0
       #|  ?x. (\\t. (t < 3)) x
       #|  fXY x
       #|  fXY:A->B
       #|  gYX x
       #|  gYX:B->A
-      #|  !X (fXY:A->B) gYX.\n     (!a. fXY (gYX a) = a)  /\\ (!r. X r = (gYX (fXY r) = r)) ==>\n    (BIJ fXY X UNIV) /\\ (BIJ gYX UNIV X)
+      #|  forall X (fXY:A->B) gYX.\n     (forall a. fXY (gYX a) = a)  /\\ (forall r. X r = (gYX (fXY r) = r)) ==>\n    (BIJ fXY X UNIV) /\\ (BIJ gYX UNIV X)
       #|  (BIJ ABS3 {x | x < 3} UNIV) /\\ (BIJ REP3 UNIV {x | x < 3})
       #|  REP3
       #|  (UNIV:three_t->bool) HAS_SIZE 3
@@ -60653,21 +60653,21 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  compose f ABS3
       #|  {m | m < 3}
       #|  compose f REP3
-      #|  !(A:A->bool).  A HAS_SIZE 3 <=> (?f. BIJ f (UNIV:three_t->bool) A)
+      #|  forall(A:A->bool).  A HAS_SIZE 3 <=> (?f. BIJ f (UNIV:three_t->bool) A)
       #|  UNIV:three_t ->bool
       #|  compose REP3 f
       #|  {m | m < 3}
       #|  compose ABS3 f
-      #|  !(A:A->bool). A HAS_SIZE 3 <=> (?f. BIJ f A (UNIV:three_t->bool) )
+      #|  forall(A:A->bool). A HAS_SIZE 3 <=> (?f. BIJ f A (UNIV:three_t->bool) )
       #|  cartesian (X:A->bool) (Y:B->bool) =\n       { (x,y) | X x /\\ Y y}
-      #|  !X Y (x:A) (y:B).  cartesian X Y (x,y) <=> (X x) /\\ (Y y)
+      #|  forall X Y (x:A) (y:B).  cartesian X Y (x,y) <=> (X x) /\\ (Y y)
       #|  SND x
       #|  FST x
-      #|  !X Y (x:(A#B)).  cartesian X Y x  <=> (X (FST x)) /\\ (Y (SND x))
+      #|  forall X Y (x:(A#B)).  cartesian X Y x  <=> (X (FST x)) /\\ (Y (SND x))
       #|  k33_graph = mk_graph_t (\n           cartesian (UNIV:three_t ->bool) UNIV,\n           cartesian UNIV UNIV,\n           (\\e. { (FST e,T),  (SND e,F)} ) )
-      #|  !(V:A->bool) (E:B->bool) C. graph_edge(mk_graph_t (V,E,C)) = E
-      #|  !(V:A->bool) (E:B->bool) C. graph_vertex(mk_graph_t (V,E,C)) = V
-      #|  !(V:A->bool) (E:B->bool) C. graph_inc(mk_graph_t (V,E,C)) = C
+      #|  forall(V:A->bool) (E:B->bool) C. graph_edge(mk_graph_t (V,E,C)) = E
+      #|  forall(V:A->bool) (E:B->bool) C. graph_vertex(mk_graph_t (V,E,C)) = V
+      #|  forall(V:A->bool) (E:B->bool) C. graph_inc(mk_graph_t (V,E,C)) = C
       #|  (y,F)
       #|  (x'',T)
       #|  graph (k33_graph)
@@ -60690,7 +60690,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g = INV f E (cartesian A B)
       #|  u
       #|  u = ( \\ t. (if (SND t) then (f'' (FST t)) else (f'(FST t))))
-      #|  !(A:A->bool) B (E:B->bool) f.\n      A HAS_SIZE 3 /\\ B HAS_SIZE 3 /\\ (A INTER B = EMPTY) /\\\n      BIJ f E (cartesian A B) ==>\n    (graph_isomorphic k33_graph\n         (mk_graph_t\n             (A UNION B, E,( \\ e. { (FST (f e)), (SND (f e)) }))))
+      #|  forall(A:A->bool) B (E:B->bool) f.\n      A HAS_SIZE 3 /\\ B HAS_SIZE 3 /\\ (A INTER B = EMPTY) /\\\n      BIJ f E (cartesian A B) ==>\n    (graph_isomorphic k33_graph\n         (mk_graph_t\n             (A UNION B, E,( \\ e. { (FST (f e)), (SND (f e)) }))))
       #|  TAGB
       #|  TAGB
       #|  &1 - &0 = &1
@@ -60719,12 +60719,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(&0 < &0) /\\ ~(&1 < &0) /\\ (&0 < &1) /\\ ~(&1 < &1)
       #|  ((if &0 < &0   then x   else if &0 < &1 then euclid_plus (&0 *# y) ((&1 - &0) *# x) else y) =  x) /\\ ((if &1 < &0   then x   else if &1 < &1 then euclid_plus (&1 *# y) ((&1 - &1) *# x) else y) =  y)
       #|  (joinf (\\u. x) (joinf (\\t. euclid_plus (t *# y) ((&1 - t) *# x)) (\\u. y) (&.1)) (&.0))
-      #|  !x y n.\n    euclid n x /\\ euclid n y /\\ ~(x = y)\n          ==> (?f. continuous f (top_of_metric (UNIV,d_real))\n                   (top_of_metric (euclid n,d_euclid)) /\\\n                   INJ f {x | &0 <= x /\\ x <= &1} (euclid n) /\\\n                   (f (&0) = x) /\\ (f (&1) = y) /\\\n                   (IMAGE f {t | &0 <= t /\\ t <= &1} = mk_segment x y))
+      #|  forall x y n.\n    euclid n x /\\ euclid n y /\\ ~(x = y)\n          ==> (?f. continuous f (top_of_metric (UNIV,d_real))\n                   (top_of_metric (euclid n,d_euclid)) /\\\n                   INJ f {x | &0 <= x /\\ x <= &1} (euclid n) /\\\n                   (f (&0) = x) /\\ (f (&1) = y) /\\\n                   (IMAGE f {t | &0 <= t /\\ t <= &1} = mk_segment x y))
       #|  f
       #|  2
       #|  y
       #|  x
-      #|  !x y.\n     (euclid 2 x) /\\ (euclid 2 y) /\\ ~(x = y) ==>\n       simple_arc_end (mk_segment x y) x y
+      #|  forall x y.\n     (euclid 2 x) /\\ (euclid 2 y) /\\ ~(x = y) ==>\n       simple_arc_end (mk_segment x y) x y
       #|  cis (&0) = e1
       #|  cis (pi/(&2)) = e2
       #|  -- &0 = &0
@@ -60732,14 +60732,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  euclid 2(point(x,y)) /\\ euclid 2(point(--x,--y))
       #|  (x' = 0) \\/ (x' = 1) \\/ (2 <=| x')
-      #|  !x y. -- (point (x,y)) = point (--x, --y)
+      #|  forall x y. -- (point (x,y)) = point (--x, --y)
       #|  cis(pi) = -- e1
       #|  (x + y)*z = x*z + y*z
       #|  &3 = &1 + &1 + &1
       #|  &3 *pi/(&2) = pi/(&2) + pi
       #|  cis(&3 *pi/(&2)) = -- e2
       #|  abs  (&1 - a) = (&1 - a)
-      #|  !b. d_euclid (b *# x) (b *# y)  = abs  (b) * d_euclid x y
+      #|  forall b. d_euclid (b *# x) (b *# y)  = abs  (b) * d_euclid x y
       #|  n
       #|  d_euclid (euclid_plus (a *# x') ((&1 - a) *# x)) (euclid_plus (a *# x') ((&1 - a) *# y)) = d_euclid ((&1 - a) *# x) ((&1 - a) *# y)
       #|  abs  a = a
@@ -60753,16 +60753,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z = a *# x' + (&1 - a) *# x
       #|  (a + &1 - a = &1) /\\ (&1 * C = C )
       #|  u + v <= (a*e) + (&1 - a)*e
-      #|  (!d. (?u v. (d <= u + v) /\\ (u <= a*e) /\\ (v <= (&1- a)*e))  ==> (d <= e))
+      #|  (forall d. (?u v. (d <= u + v) /\\ (u <= a*e) /\\ (v <= (&1- a)*e))  ==> (d <= e))
       #|  a = &0
       #|  d_euclid x x'' = d_euclid (a *# x + (&1 - a) *# x) x''
-      #|  !x e n. (convex (closed_ball (euclid n,d_euclid) x e))
+      #|  forall x e n. (convex (closed_ball (euclid n,d_euclid) x e))
       #|  n
       #|  e
       #|  x
-      #|  !x e n u v.\n     (closed_ball(euclid n,d_euclid) x e u) /\\\n     (closed_ball(euclid n,d_euclid) x e v) ==>\n     (mk_segment u v SUBSET (closed_ball(euclid n,d_euclid) x e))
+      #|  forall x e n u v.\n     (closed_ball(euclid n,d_euclid) x e u) /\\\n     (closed_ball(euclid n,d_euclid) x e v) ==>\n     (mk_segment u v SUBSET (closed_ball(euclid n,d_euclid) x e))
       #|  euclid 2 e1 /\\ euclid 2 e2
-      #|  !X Y Z. (X:A->bool) SUBSET Y \\/ (X SUBSET Z) ==> (X SUBSET Y UNION Z)
+      #|  forall X Y Z. (X:A->bool) SUBSET Y \\/ (X SUBSET Z) ==> (X SUBSET Y UNION Z)
       #|  (cis (&i * pi / &2) 0 = &0) \\/ (cis (&i * pi / &2) 1 = &0) ==> hyperplane 2 e2 y z \\/ hyperplane 2 e1 x z
       #|  (x + r*cos(&i *pi/(&2)) , y)
       #|  ( (cis (&i *pi/(&2))) 1 = &0) ==> (hyperplane 2 e2 y z)
@@ -60779,31 +60779,31 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SND p'
       #|  FST p'
       #|  ?x y. p = point (x,y)
-      #|  !p r i. (i < 4) /\\ (&0 <r) /\\ (euclid 2 p) ==>\n    (mk_segment p (p + r *# (cis(&i * pi/(&2))))) SUBSET\n     (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))  
+      #|  forall p r i. (i < 4) /\\ (&0 <r) /\\ (euclid 2 p) ==>\n    (mk_segment p (p + r *# (cis(&i * pi/(&2))))) SUBSET\n     (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))  
       #|  abs  (&1 - a) = (&1 - a)
       #|  d_euclid ((&1 - a) *# p) ((&1 - a) *# q) = abs  (&1- a) * d_euclid p q
       #|  d_euclid (euclid_plus (a *# p) ((&1 - a) *# p)) (euclid_plus (a *# p) ((&1 - a) *# q)) = d_euclid ( ((&1 - a) *# p)) ( ((&1 - a) *# q))
-      #|  !z. d_euclid (a*# p + (&1 - a)*# p) z = d_euclid p z
-      #|  !n a p q . (&0 <= a) /\\ (a <= &1) /\\ (euclid n p) /\\ (euclid n q) ==>\n      (d_euclid p (a*#p + (&1 - a)*#q) = (&1 - a)*(d_euclid p q))
+      #|  forall z. d_euclid (a*# p + (&1 - a)*# p) z = d_euclid p z
+      #|  forall n a p q . (&0 <= a) /\\ (a <= &1) /\\ (euclid n p) /\\ (euclid n q) ==>\n      (d_euclid p (a*#p + (&1 - a)*#q) = (&1 - a)*(d_euclid p q))
       #|  a*y - a*z = a*(y-z)
       #|  (a*b + r*c ) - (a*b + r*d) = r*c - r*d
       #|  x':num
       #|  (~A ==>B) ==> (A \\/ B)
-      #|  ! a p x y. ((a*# p + (&1 - a)*# x) = (a *# p + (&1 - a)*# y)) ==>\n      (a = &1) \\/ (x = y)
+      #|  forall a p x y. ((a*# p + (&1 - a)*# x) = (a *# p + (&1 - a)*# y)) ==>\n      (a = &1) \\/ (x = y)
       #|  a' = a
       #|  p = y
       #|  d_euclid p y = &0
       #|  (&1- a')*d_euclid p y = (&1- a)*d_euclid p x
       #|  ~(a' = &1)
-      #|  !p x y n . (d_euclid p x = d_euclid p y) /\\ ~(x = y) /\\\n       (euclid n x) /\\ (euclid n y) /\\ (euclid n p) ==>\n    (mk_segment p x INTER mk_segment p y = {p})
+      #|  forall p x y n . (d_euclid p x = d_euclid p y) /\\ ~(x = y) /\\\n       (euclid n x) /\\ (euclid n y) /\\ (euclid n p) ==>\n    (mk_segment p x INTER mk_segment p y = {p})
       #|  ~((i=2) /\\ (j = 1))
-      #|  !k. ~((i = k) /\\ (j = k))
+      #|  forall k. ~((i = k) /\\ (j = k))
       #|  (i=0) \\/ (i = 1) \\/ (i=2)
       #|  (i < 3)
       #|  ~(j=0)
       #|  (j = 0) \\/ (j = 1) \\/ (j = 2) \\/ (j = 3)
-      #|  !k. (k < 4) ==> (k = 0) \\/ (k =1)\\/ (k=2) \\/ (k=3)
-      #|  !i j.  (i < j) /\\ (j < 4) ==> ((i=0) /\\ (j=1))\\/ ((i=0) /\\ (j=2)) \\/\n           ((i=0) /\\ (j=3)) \\/ ((i=1) /\\ (j=2)) \\/ ((i=1) /\\ (j=3)) \\/\n         ((i=2)/\\ (j=3))
+      #|  forall k. (k < 4) ==> (k = 0) \\/ (k =1)\\/ (k=2) \\/ (k=3)
+      #|  forall i j.  (i < j) /\\ (j < 4) ==> ((i=0) /\\ (j=1))\\/ ((i=0) /\\ (j=2)) \\/\n           ((i=0) /\\ (j=3)) \\/ ((i=1) /\\ (j=2)) \\/ ((i=1) /\\ (j=3)) \\/\n         ((i=2)/\\ (j=3))
       #|  r
       #|  i
       #|  j
@@ -60817,9 +60817,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &1/r * r = &1
       #|  ( *# ) (&1/r)
       #|  x'
-      #|  !p x y. (euclid_plus p x = euclid_plus p y) ==> (x = y)
-      #|  !i j r p. (i < 4) /\\ (j < 4) /\\ ~(i = j) /\\ (i < j) /\\ (&0 < r) ==> ~((p + r*# (cis(&i * pi/(&2)))) = (p + r*# (cis(&j * pi/(&2)))))
-      #|  !i j r p. (i < 4) /\\ (j < 4) /\\ ~(i = j) /\\ (&0 < r) ==>\n        ~((p + r*# (cis(&i * pi/(&2)))) = (p + r*# (cis(&j * pi/(&2)))))
+      #|  forall p x y. (euclid_plus p x = euclid_plus p y) ==> (x = y)
+      #|  forall i j r p. (i < 4) /\\ (j < 4) /\\ ~(i = j) /\\ (i < j) /\\ (&0 < r) ==> ~((p + r*# (cis(&i * pi/(&2)))) = (p + r*# (cis(&j * pi/(&2)))))
+      #|  forall i j r p. (i < 4) /\\ (j < 4) /\\ ~(i = j) /\\ (&0 < r) ==>\n        ~((p + r*# (cis(&i * pi/(&2)))) = (p + r*# (cis(&j * pi/(&2)))))
       #|  ~(&1 = &0) /\\ ~(&0 = &1) /\\ (-- &0 = &0) /\\ ~(&1 = -- &1) /\\ ~(-- &1 = &0) /\\ ~(&0 = -- &1)
       #|  (&1*x=x) /\\ (&0*x= &0)
       #|  ~(&1 = &0) /\\ ~(&0 = &1) /\\ (-- &0 = &0) /\\ ~(&1 = -- &1) /\\ ~(-- &1 = &0) /\\ ~(&0 = -- &1)
@@ -60834,16 +60834,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (&1*x=x) /\\ (&0*x= &0)
       #|  ~(&1= &0)
       #|  norm2
-      #|  !t. ~(cis(t) = euclid0)
+      #|  forall t. ~(cis(t) = euclid0)
       #|  (abs  r = &0) ==> (r = &0)
       #|  norm2
-      #|  !r t. ~(r = &0) ==> ~(r *# cis(t) =euclid0)
-      #|  !r t. euclid 2 (r *# (cis t))
+      #|  forall r t. ~(r = &0) ==> ~(r *# cis(t) =euclid0)
+      #|  forall r t. euclid 2 (r *# (cis t))
       #|  euclid n
       #|  n
       #|  d_euclid (euclid_plus p euclid0) (euclid_plus p q) = d_euclid euclid0 q
-      #|  !z. d_euclid p z = d_euclid (p + euclid0) z
-      #|  !n p q . (euclid n p) /\\ (euclid n q) ==> (d_euclid p (p+q) =\n      d_euclid q euclid0)
+      #|  forall z. d_euclid p z = d_euclid (p + euclid0) z
+      #|  forall n p q . (euclid n p) /\\ (euclid n q) ==> (d_euclid p (p+q) =\n      d_euclid q euclid0)
       #|  x <= y <=> x <= &1*y
       #|  i
       #|  a
@@ -60862,26 +60862,26 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  abs  r = r
       #|  2
       #|  d_euclid p (p + r *# (cis (&i * pi/(&2)))) = norm2 ( r *# (cis (&i * pi/(&2))))
-      #|  !a i. (&0 <= a) /\\ (a <= &1) ==> (d_euclid p (a*#p + (&1 - a)*#(p + r *# (cis (&i * pi/(&2))))) = (&1 - a)*r)
+      #|  forall a i. (&0 <= a) /\\ (a <= &1) ==> (d_euclid p (a*#p + (&1 - a)*#(p + r *# (cis (&i * pi/(&2))))) = (&1 - a)*r)
       #|  2
-      #|  !a q. (euclid 2 q) /\\ (&0 <= a) /\\ (a <= &1) ==> (d_euclid p (a*#p + (&1 - a)*#(p + q)) = (&1 - a)*(d_euclid p (p + q)))
+      #|  forall a q. (euclid 2 q) /\\ (&0 <= a) /\\ (a <= &1) ==> (d_euclid p (a*#p + (&1 - a)*#(p + q)) = (&1 - a)*(d_euclid p (p + q)))
       #|  2
-      #|  !i. d_euclid p (euclid_plus p (r *# cis (&i * pi / &2))) = d_euclid (r *# cis (&i * pi / &2)) euclid0
+      #|  forall i. d_euclid p (euclid_plus p (r *# cis (&i * pi / &2))) = d_euclid (r *# cis (&i * pi / &2)) euclid0
       #|  2
       #|  x
       #|  z =r *# cis(&i *pi/(&2))
       #|  i
-      #|  !i . euclid 2 (r *# cis (&i * pi/(&2)))
+      #|  forall i . euclid 2 (r *# cis (&i * pi/(&2)))
       #|  &0 < r ==> ~( r= &0)
-      #|  !i. ~(r *# cis (&i * pi/(&2)) = euclid0)
+      #|  forall i. ~(r *# cis (&i * pi/(&2)) = euclid0)
       #|  (\\i. mk_segment p (euclid_plus p (r *# cis (&i * pi / &2))))
-      #|  !r p. (&0 < r) /\\ (euclid 2 p) ==>\n    (?C.\n        (!i. (i< 4) ==>\n           simple_arc_end (C i) p (p + r*# (cis(&i * pi/(&2))))) /\\\n        (!i. (i < 4) ==>\n           (C i = mk_segment p (p + r*# (cis(&i * pi/(&2)))))) /\\\n        (!i j. (i < 4) /\\ (j < 4) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p})) /\\\n        (!i. (i < 4) ==>\n          (C i INTER {x | r <= d_euclid p x } =\n               { (p + r *# (cis(&i* pi/(&2)))) })) /\\\n        (!i. (i< 4) ==>\n           C i SUBSET (closed_ball (euclid 2,d_euclid) p r)) /\\\n        (!i. (i< 4) ==>\n           C i SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))))   
+      #|  forall r p. (&0 < r) /\\ (euclid 2 p) ==>\n    (?C.\n        (forall i. (i< 4) ==>\n           simple_arc_end (C i) p (p + r*# (cis(&i * pi/(&2))))) /\\\n        (forall i. (i < 4) ==>\n           (C i = mk_segment p (p + r*# (cis(&i * pi/(&2)))))) /\\\n        (forall i j. (i < 4) /\\ (j < 4) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p})) /\\\n        (forall i. (i < 4) ==>\n          (C i INTER {x | r <= d_euclid p x } =\n               { (p + r *# (cis(&i* pi/(&2)))) })) /\\\n        (forall i. (i< 4) ==>\n           C i SUBSET (closed_ball (euclid 2,d_euclid) p r)) /\\\n        (forall i. (i< 4) ==>\n           C i SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))))   
       #|  1-1 = 0
       #|  x
       #|  1
       #|  ((\\x. (t * (\\u. (u pow 1)) x)) diffl (t* &1)) x 
       #|  (\\ x. (t * x)) = (\\x. (t * (\\u. (u pow 1)) x))
-      #|  !t x. (( \\ x. (t*x)) diffl t) x
+      #|  forall t x. (( \\ x. (t*x)) diffl t) x
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
       #|  (NUMERAL m) EXP (NUMERAL n)
@@ -62208,11 +62208,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (<.)
       #|  interval
       #|  interval
-      #|  !f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
+      #|  forall f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
       #|  (<.)
       #|  interval
       #|  interval
-      #|  !f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
+      #|  forall f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
       #|  (<.)
       #|  &3 < pi /\\ pi < &22/ (&7)
       #|  &0 < x ==> ~(x = &0)
@@ -62227,12 +62227,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  &0
       #|  f t
-      #|  !x. (f t diffl (t - cos x)) x
-      #|  !t. (&1 < t) ==> (!x. (&0 < x) ==> (&0 < f t x))
+      #|  forall x. (f t diffl (t - cos x)) x
+      #|  forall t. (&1 < t) ==> (forall x. (&0 < x) ==> (&0 < f t x))
       #|  f = ( \\ t x. t * x - sin(x))
       #|  &0 < x
       #|  x = &0
-      #|  !x. (&0 <=x) ==> (sin x <= x)
+      #|  forall x. (&0 <=x) ==> (sin x <= x)
       #|  &3 < pi
       #|  x
       #|  &1
@@ -62240,16 +62240,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 <= sin x
       #|  x <= pi
       #|  abs  x = x
-      #|  !x. (&0 <= x) ==> ((abs  (sin x)) <= abs  x)
+      #|  forall x. (&0 <= x) ==> ((abs  (sin x)) <= abs  x)
       #|  x = --y
       #|  y = --x
       #|  (&0 <= x) \\/ (&0 <= -- x)
-      #|  !x. abs  (sin x) <= abs  x
-      #|  !x. cos (&2 * x) = &1 - &2 * (sin x pow 2)
+      #|  forall x. abs  (sin x) <= abs  x
+      #|  forall x. cos (&2 * x) = &1 - &2 * (sin x pow 2)
       #|  &2 *(x/(&2)) = x
       #|  x/ &2
-      #|  !x. &2 * (sin (x/(&2)) pow 2) = &1 - cos (x)
-      #|  !x y. (x - y) pow 2 = x*x - &2*x*y + y*y
+      #|  forall x. &2 * (sin (x/(&2)) pow 2) = &1 - cos (x)
+      #|  forall x y. (x - y) pow 2 = x*x - &2*x*y + y*y
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -62604,8 +62604,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a = cos x
       #|  x - u*(-- v) = x + u*v
       #|  cos (x - y) = cos (x + (--y))
-      #|  !z. &2 pow 2 * z = &2 *(&2 *z)
-      #|  !x y. (cos x - cos y) pow 2 + (sin x - sin y) pow 2 =\n         (&2 * sin ((x - y)/(&2))) pow 2
+      #|  forall z. &2 pow 2 * z = &2 *(&2 *z)
+      #|  forall x y. (cos x - cos y) pow 2 + (sin x - sin y) pow 2 =\n         (&2 * sin ((x - y)/(&2))) pow 2
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -63805,17 +63805,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( *. )
       #|  ( *. )
       #|  abs  (&2) = &2
-      #|  !x y. d_euclid (cis x) (cis y) = &2 * (abs  (sin ((x-y)/(&2))))
+      #|  forall x y. d_euclid (cis x) (cis y) = &2 * (abs  (sin ((x-y)/(&2))))
       #|  &2 * ((x - y)/(&2)) = (x - y)
-      #|  !z. &2*(abs  z) = abs  (&2 *z)
+      #|  forall z. &2*(abs  z) = abs  (&2 *z)
       #|  &0 <= &2
       #|  &2 * (abs  ((x-y)/(&2)))
-      #|  !x y. d_euclid (cis x) (cis y) <= abs  (x - y)
+      #|  forall x y. d_euclid (cis x) (cis y) <= abs  (x - y)
       #|  &0 <= f x /\\ &0 <= f y
       #|  norm2
       #|  x'
       #|  (f x *# cis (g x)) = (f y *# cis (g y))
-      #|  !f g p. (INJ f {x | &0 <= x /\\ x <= &1} UNIV) /\\\n    (!x. (&0 <= x /\\ x <= &1) ==> (&0 <= f x)) /\\ (euclid 2 p) ==>\n   INJ (\\t. p + (f t)*# (cis (g t))) {x | &0 <= x /\\ x <= &1} (euclid 2)
+      #|  forall f g p. (INJ f {x | &0 <= x /\\ x <= &1} UNIV) /\\\n    (forall x. (&0 <= x /\\ x <= &1) ==> (&0 <= f x)) /\\ (euclid 2 p) ==>\n   INJ (\\t. p + (f t)*# (cis (g t))) {x | &0 <= x /\\ x <= &1} (euclid 2)
       #|  &0 < t ==> &0 <= t
       #|  f y
       #|  f y
@@ -63824,22 +63824,22 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f x = f y
       #|  &0 < f x /\\ &0 < f y
       #|  norm2
-      #|  !f g g'. (INJ f {x | &0 <= x /\\ x <= &1} UNIV) /\\\n    (!x. (&0 <= x /\\ x <= &1) ==> (&0 < f x)) /\\\n    (!x. (&0 <= x /\\ x <= &1) ==> (&0 <= g x /\\ g x < &2 * pi)) /\\\n    (!x. (&0 <= x /\\ x <= &1) ==> (&0 <= g' x /\\ g' x < &2 * pi))\n    ==>\n    (!x y. (&0 <= x /\\ x <= &1 /\\ &0 <= y /\\ y <= &1 /\\\n      ((f x)*# (cis (g x)) = (f y)*# (cis (g' y)))) ==>\n      (x = y) /\\ (g x = g' y)) 
+      #|  forall f g g'. (INJ f {x | &0 <= x /\\ x <= &1} UNIV) /\\\n    (forall x. (&0 <= x /\\ x <= &1) ==> (&0 < f x)) /\\\n    (forall x. (&0 <= x /\\ x <= &1) ==> (&0 <= g x /\\ g x < &2 * pi)) /\\\n    (forall x. (&0 <= x /\\ x <= &1) ==> (&0 <= g' x /\\ g' x < &2 * pi))\n    ==>\n    (forall x y. (&0 <= x /\\ x <= &1 /\\ &0 <= y /\\ y <= &1 /\\\n      ((f x)*# (cis (g x)) = (f y)*# (cis (g' y)))) ==>\n      (x = y) /\\ (g x = g' y)) 
       #|  x + y = y + x
-      #|  !r r' x. (d_euclid (r *# (cis x)) (r' *# (cis x)) = abs  (r - r'))
-      #|  !t. (&0 <= t) ==> (t / (&1 + t) <= &1)
+      #|  forall r r' x. (d_euclid (r *# (cis x)) (r' *# (cis x)) = abs  (r - r'))
+      #|  forall t. (&0 <= t) ==> (t / (&1 + t) <= &1)
       #|  (x*y*z <= z) <=> ((x*y)*(z) <= &1 * (z))
       #|  abs  (g x - g y)
-      #|  !y. (x <= y /\\ y < z) ==> (x <= z)
+      #|  forall y. (x <= y /\\ y < z) ==> (x <= z)
       #|  abs  (f x) * (&1 / (&1 + abs (f x)) * epsilon / &2)
-      #|  !x y z. (x <= z/ &2 /\\ y < z/ &2 ==> x + y < z/ &2 + z/ &2)
+      #|  forall x y z. (x <= z/ &2 /\\ y < z/ &2 ==> x + y < z/ &2 + z/ &2)
       #|  cis (g y)
       #|  cis (g x)
       #|  f x
       #|  2
       #|  euclid 2
       #|  2
-      #|  !z r x r' x'. d_euclid (p + r *# (cis x)) (p + r' *# (cis x')) = d_euclid (r*# (cis x)) (r' *# (cis x'))
+      #|  forall z r x r' x'. d_euclid (p + r *# (cis x)) (p + r' *# (cis x')) = d_euclid (r*# (cis x)) (r' *# (cis x'))
       #|  d_euclid (p + f x *# cis(g x)) (p + f x *# cis(g y)) + d_euclid (p + f x *# cis(g y)) (p + f y *# cis(g y))
       #|  y
       #|  y
@@ -63852,7 +63852,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon/(&2)
       #|  x
       #|  IMAGE (\\t. p + (f t) *# cis(g t)) UNIV SUBSET (euclid 2)
-      #|  !p f g. continuous f (top_of_metric(UNIV,d_real))\n        (top_of_metric(UNIV,d_real)) /\\\n     continuous g (top_of_metric(UNIV,d_real))\n        (top_of_metric(UNIV,d_real)) /\\ (euclid 2 p)  ==>\n     continuous (\\t. p + (f t) *# cis(g t)) (top_of_metric(UNIV,d_real))\n        (top2)
+      #|  forall p f g. continuous f (top_of_metric(UNIV,d_real))\n        (top_of_metric(UNIV,d_real)) /\\\n     continuous g (top_of_metric(UNIV,d_real))\n        (top_of_metric(UNIV,d_real)) /\\ (euclid 2 p)  ==>\n     continuous (\\t. p + (f t) *# cis(g t)) (top_of_metric(UNIV,d_real))\n        (top2)
       #|  TAGB
       #|  (x*a + (&1 - x)*b) + (x*(b - a)) = b
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
@@ -63866,7 +63866,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a + (&1 - x)*(b - a) = (x*a + (&1- x)*b)
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
-      #|  !a b x. (&0 <= x /\\ x <= &1) ==> (min_real a b <= x*a + (&1- x)*b) /\\\n       (x*a + (&1 - x)*b <= max_real a b)
+      #|  forall a b x. (&0 <= x /\\ x <= &1) ==> (min_real a b <= x*a + (&1- x)*b) /\\\n       (x*a + (&1 - x)*b <= max_real a b)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -65364,9 +65364,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( <=. ) 
       #|  ( *. )
       #|  a < b ==> ~(b < a)
-      #|  !a b. min_real a b = min_real b a
+      #|  forall a b. min_real a b = min_real b a
       #|  a < b ==> ~(b < a)
-      #|  !a b. max_real a b = max_real b a
+      #|  forall a b. max_real a b = max_real b a
       #|  &0 < x ==> &0 <= x
       #|  min_real (r/ &2) r
       #|  &0 <= (x' *r + (&1 - x')*(r/(&2)))
@@ -65374,7 +65374,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r/(&2) < r
       #|  2
       #|  d_euclid p (euclid_plus p ((x' * r + (&1 - x') * r / &2) *# cis (g x'))) = d_euclid ((x' * r + (&1 - x') * r / &2) *# cis (g x')) euclid0
-      #|  !r g p. (&0 < r) /\\ (euclid 2 p) ==>\n      (IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1})\n         SUBSET ({ x | (r/(&2) <= d_euclid p x /\\\n                             d_euclid p x <= r)} )
+      #|  forall r g p. (&0 < r) /\\ (euclid 2 p) ==>\n      (IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1})\n         SUBSET ({ x | (r/(&2) <= d_euclid p x /\\\n                             d_euclid p x <= r)} )
       #|  (r/ &2) + x'* (r - (r/(&2))) = (x' * r + (&1 - x') * r / &2)
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
@@ -65394,7 +65394,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  2
       #|  &0
-      #|  !r g p. (&0 < r) /\\ (euclid 2 p) ==>\n      (((IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1})\n     INTER ({ x |  d_euclid p x <= (r/(&2))})) =\n                          { ( p + (r/(&2)) *# (cis (g (&0) ))) })\n     
+      #|  forall r g p. (&0 < r) /\\ (euclid 2 p) ==>\n      (((IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1})\n     INTER ({ x |  d_euclid p x <= (r/(&2))})) =\n                          { ( p + (r/(&2)) *# (cis (g (&0) ))) })\n     
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -65657,7 +65657,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x * r + (&1 - x) * r / &2) - (y * r + (&1 - y) * r / &2) = (x - y)*(r - r/(&2)) 
       #|  ( x = y) <=> (x - y = &0)
       #|  (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))
-      #|  !r g p. (&0 < r) /\\ (euclid 2 p) /\\\n    (continuous g (top_of_metric(UNIV,d_real))\n       (top_of_metric(UNIV,d_real))) ==>\n   (simple_arc_end\n      (IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1}) (p + (r/(&2))*# (cis (g (&0))))\n             (p + (r)*# (cis (g (&1)))))
+      #|  forall r g p. (&0 < r) /\\ (euclid 2 p) /\\\n    (continuous g (top_of_metric(UNIV,d_real))\n       (top_of_metric(UNIV,d_real))) ==>\n   (simple_arc_end\n      (IMAGE (\\t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (g t)))\n           {x | &0 <= x /\\ x <= &1}) (p + (r/(&2))*# (cis (g (&0))))\n             (p + (r)*# (cis (g (&1)))))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -66408,7 +66408,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( *. )
       #|  ( *. )
       #|  segpath x y t = t* x + (&1 - t)*y
-      #|  !x y. segpath x y = (\\ t. t*x + (&1 - t)*y)
+      #|  forall x y. segpath x y = (\\ t. t*x + (&1 - t)*y)
       #|  &0 + t * (x' - x) + (&1 - t)*(y' - y) = (t*(x' - x) + (&1- t)*(y' - y))
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
@@ -66418,7 +66418,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (u + v = u' + v') <=> ((u' - u) + (v' - v) = &0)
       #|  max_real x y
       #|  min_real x y
-      #|  (!x y . (continuous (segpath x y) (top_of_metric(UNIV,d_real))\n       (top_of_metric(UNIV,d_real)))) /\\\n   (!x y b. (&0 <= x /\\ x < b /\\ &0 <= y /\\ y < b ==>\n     (!t. &0 <= t /\\ t <= &1 ==> &0 <= segpath x y t /\\\n       segpath x y t < b))) /\\\n   (!x y x' y' t. (x < x' /\\ y < y' /\\ &0 <= t /\\ t <= &1)\n        ==> ~(segpath x y t = segpath x' y' t))
+      #|  (forall x y . (continuous (segpath x y) (top_of_metric(UNIV,d_real))\n       (top_of_metric(UNIV,d_real)))) /\\\n   (forall x y b. (&0 <= x /\\ x < b /\\ &0 <= y /\\ y < b ==>\n     (forall t. &0 <= t /\\ t <= &1 ==> &0 <= segpath x y t /\\\n       segpath x y t < b))) /\\\n   (forall x y x' y' t. (x < x' /\\ y < y' /\\ &0 <= t /\\ t <= &1)\n        ==> ~(segpath x y t = segpath x' y' t))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -67808,10 +67808,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( ==> )
       #|  ( <=. ) 
       #|  ( *. )
-      #|  !x y. ( segpath x y (&0) = y) /\\ (segpath x y (&1) = x)
+      #|  forall x y. ( segpath x y (&0) = y) /\\ (segpath x y (&1) = x)
       #|  (x' * x + (&1 - x') * y) - (y' * x + (&1 - y') * y) = (x' - y')*(x - y) 
       #|  ( x = y) <=> (x - y = &0)
-      #|  !x y. ~(x = y) ==> INJ (segpath x y) {t | &0 <= t /\\ t <= &1} UNIV
+      #|  forall x y. ~(x = y) ==> INJ (segpath x y) {t | &0 <= t /\\ t <= &1} UNIV
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -68544,7 +68544,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  C
       #|  C = ( \\ i. IMAGE ( \\ t. p + (t*r + (&1 - t)*(r/(&2)))*# (cis (segpath (xx i) (zz i)  t))) {t | &0 <= t /\\ t <= &1})
-      #|  !n r p xx zz. (&0 < r) /\\ (euclid 2 p) /\\\n    (!j. j < n ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\\n   (!j. j < n ==> (&0 <= zz j /\\ zz j < &2 * pi)) /\\\n    (!i j. (i < j) /\\ (j <| n) ==> (xx i < xx j)) /\\\n       (!i j. (i < j) /\\ (j < n) ==> (zz i < zz j))  ==>\n    (?C.\n       (!i. (i < n) ==>\n          simple_arc_end (C i ) (p + (r/ &2)*# (cis(zz i)))\n                                (p + r*# (cis(xx i)))) /\\\n       (!i j. (i < n) /\\ (j < n) /\\ (~(i=j)) ==>\n           (C i INTER C j = EMPTY )) /\\\n       (!i. (i< n) ==>\n           C i SUBSET ({ x | (r/(&2) <= d_euclid p x /\\\n                             d_euclid p x <= r)} )) /\\\n       (!i. (i< n) ==>\n           (C i INTER  ({ x |  d_euclid p x <= (r/(&2))}) =\n                          { ( p + (r/(&2)) *# (cis (zz i ))) }))\n       )\n    
+      #|  forall n r p xx zz. (&0 < r) /\\ (euclid 2 p) /\\\n    (forall j. j < n ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\\n   (forall j. j < n ==> (&0 <= zz j /\\ zz j < &2 * pi)) /\\\n    (forall i j. (i < j) /\\ (j <| n) ==> (xx i < xx j)) /\\\n       (forall i j. (i < j) /\\ (j < n) ==> (zz i < zz j))  ==>\n    (?C.\n       (forall i. (i < n) ==>\n          simple_arc_end (C i ) (p + (r/ &2)*# (cis(zz i)))\n                                (p + r*# (cis(xx i)))) /\\\n       (forall i j. (i < n) /\\ (j < n) /\\ (~(i=j)) ==>\n           (C i INTER C j = EMPTY )) /\\\n       (forall i. (i< n) ==>\n           C i SUBSET ({ x | (r/(&2) <= d_euclid p x /\\\n                             d_euclid p x <= r)} )) /\\\n       (forall i. (i< n) ==>\n           (C i INTER  ({ x |  d_euclid p x <= (r/(&2))}) =\n                          { ( p + (r/(&2)) *# (cis (zz i ))) }))\n       )\n    
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -68879,8 +68879,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( <=. ) 
       #|  ( *. )
       #|  euclid 2
-      #|  !p. (euclid 2 p) ==> (d_euclid p p = &0)
-      #|  !p r. closed_ball (euclid 2,d_euclid) p r p <=> (euclid 2 p) /\\ (&0 <= r)
+      #|  forall p. (euclid 2 p) ==> (d_euclid p p = &0)
+      #|  forall p r. closed_ball (euclid 2,d_euclid) p r p <=> (euclid 2 p) /\\ (&0 <= r)
       #|  C' i
       #|  i
       #|  (C' i UNION C'' i) INTER D = (C' i INTER D)
@@ -68911,14 +68911,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  i
       #|  (a ==> b) ==> (a \\/ b <=> b)
-      #|  !i x. (i <| 4) /\\ ~(D x) ==> ((C' i UNION C'' i) x = C'' i x)
+      #|  forall i x. (i <| 4) /\\ ~(D x) ==> ((C' i UNION C'' i) x = C'' i x)
       #|  i
       #|  (b ==> a) ==> (a \\/ b <=> a)
-      #|  !i x. (i <| 4) /\\ (D x) ==> ((C' i UNION C'' i) x = C' i x)
+      #|  forall i x. (i <| 4) /\\ (D x) ==> ((C' i UNION C'' i) x = C' i x)
       #|  D = closed_ball (euclid 2,d_euclid) p (r /(&2))
       #|  i
       #|  closed_ball (euclid 2,d_euclid) p (r / &2) x
-      #|  !i. (i<| 4) ==> (simple_arc_end (C' i ) p (p + ((r/ &2) *# (cis (&i * pi/(&2))))) /\\   simple_arc_end (C'' i) (p + ((r/ &2) *# (cis (&i * pi/(&2))))) (euclid_plus p (r *# cis (xx i))) /\\ (C' i) SUBSET closed_ball (euclid 2,d_euclid) p (r / &2) /\\  ((C' i) INTER (C'' i) = {(p + ((r/ &2) *# (cis (&i * pi/(&2)))))})) 
+      #|  forall i. (i<| 4) ==> (simple_arc_end (C' i ) p (p + ((r/ &2) *# (cis (&i * pi/(&2))))) /\\   simple_arc_end (C'' i) (p + ((r/ &2) *# (cis (&i * pi/(&2))))) (euclid_plus p (r *# cis (xx i))) /\\ (C' i) SUBSET closed_ball (euclid 2,d_euclid) p (r / &2) /\\  ((C' i) INTER (C'' i) = {(p + ((r/ &2) *# (cis (&i * pi/(&2)))))})) 
       #|  (\\j. C' j UNION C'' j)
       #|  &0 < &j - &i <=> &i < &j
       #|  x*y - z*y = (x - z)*y
@@ -68926,16 +68926,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 < &2
       #|  x*y*z = (x*y)*z
       #|  pi*x = x*pi
-      #|  (&0 < r) /\\ (euclid 2 p) /\\  (!j. j < 4 ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\  (!j. j < 4 ==> (&0 <= zz j /\\ zz j < &2 * pi)) /\\  (!i j. (i < j) /\\ (j < 4) ==> (xx i < xx j)) /\\ (!i j. (i < j) /\\ (j < 4) ==> (zz i < zz j))
+      #|  (&0 < r) /\\ (euclid 2 p) /\\  (forall j. j < 4 ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\  (forall j. j < 4 ==> (&0 <= zz j /\\ zz j < &2 * pi)) /\\  (forall i j. (i < j) /\\ (j < 4) ==> (xx i < xx j)) /\\ (forall i j. (i < j) /\\ (j < 4) ==> (zz i < zz j))
       #|  zz = (\\j. (&j) * pi/(&2))
       #|  C' = C
       #|  (&0 < (r /(&2))) /\\ (euclid 2 p)
-      #|  !r p xx . (&0 < r) /\\ (euclid 2 p) /\\\n  (!j. j < 4 ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\\n    (!i j. (i < j) /\\ (j < 4) ==> (xx i < xx j))\n  ==>\n      (?C.\n       (!i. (i< 4) ==> (?C' C'' v.\n           simple_arc_end C' p v /\\\n           simple_arc_end C'' v (p + r*# (cis(xx i )))  /\\\n           C' SUBSET closed_ball(euclid 2,d_euclid) p (r/ &2) /\\\n           (C' INTER C'' = {v}) /\\\n           (C' UNION C'' = C i )) /\\\n          simple_arc_end (C i ) p  (p + r*# (cis(xx i))) /\\\n           C i SUBSET (closed_ball(euclid 2,d_euclid) p r) /\\\n           C i  INTER (closed_ball(euclid 2,d_euclid) p (r / &2))\n           SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))) /\\\n       (!i j. (i < 4) /\\ (j < 4) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p} )))\n       
+      #|  forall r p xx . (&0 < r) /\\ (euclid 2 p) /\\\n  (forall j. j < 4 ==> (&0 <= xx j /\\ xx j < &2 * pi)) /\\\n    (forall i j. (i < j) /\\ (j < 4) ==> (xx i < xx j))\n  ==>\n      (?C.\n       (forall i. (i< 4) ==> (?C' C'' v.\n           simple_arc_end C' p v /\\\n           simple_arc_end C'' v (p + r*# (cis(xx i )))  /\\\n           C' SUBSET closed_ball(euclid 2,d_euclid) p (r/ &2) /\\\n           (C' INTER C'' = {v}) /\\\n           (C' UNION C'' = C i )) /\\\n          simple_arc_end (C i ) p  (p + r*# (cis(xx i))) /\\\n           C i SUBSET (closed_ball(euclid 2,d_euclid) p r) /\\\n           C i  INTER (closed_ball(euclid 2,d_euclid) p (r / &2))\n           SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))) /\\\n       (forall i j. (i < 4) /\\ (j < 4) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p} )))\n       
       #|  x:num->real
       #|  x:num->real
       #|  x:num->real
-      #|  !x y z. (x = euclid_plus y z) <=> (x - y = z)
-      #|  !(X:A->bool) Y. INFINITE X /\\ X SUBSET Y ==> INFINITE Y
+      #|  forall x y z. (x = euclid_plus y z) <=> (x - y = z)
+      #|  forall(X:A->bool) Y. INFINITE X /\\ X SUBSET Y ==> INFINITE Y
       #|  n
       #|  x
       #|  y
@@ -68945,29 +68945,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x < y \\/ y <| x
       #|  ~(n = 0)
       #|  n **| y <= n **| x
-      #|  ! x y n. (x <| y) /\\ (n **| x = n **| y) ==> ~(1 <| n)
-      #|  !x y n. (1 < n) /\\ (n **| x = n **| y) ==> (x = y)
+      #|  forall x y n. (x <| y) /\\ (n **| x = n **| y) ==> ~(1 <| n)
+      #|  forall x y n. (1 < n) /\\ (n **| x = n **| y) ==> (x = y)
       #|  a + x < b <=> x < (b - a)*(&1)
       #|  a < a + x <=> &0 < x
       #|  INFINITE (UNIV:num->bool) ==> INFINITE (IMAGE f UNIV)
       #|  2
       #|  ~(b - a = &0)
       #|  (a + d = a + d') <=> (d = d')
-      #|  (! x y. (f x = f y) ==> (x = y))
+      #|  (forall x y. (f x = f y) ==> (x = y))
       #|  IMAGE f  UNIV
       #|  f = (\\ n. a + (b-a)/((&2) pow (SUC n)))
-      #|  !a b. a < b ==> (INFINITE {x | a < x /\\ x < b})
+      #|  forall a b. a < b ==> (INFINITE {x | a < x /\\ x < b})
       #|  u INSERT Z
       #|  INFINITE (X DIFF Z)
       #|  X
       #|  EMPTY:A->bool
-      #|  !n (X:A->bool) . (INFINITE X) ==> (?Z. Z SUBSET X /\\ Z HAS_SIZE n)
+      #|  forall n (X:A->bool) . (INFINITE X) ==> (?Z. Z SUBSET X /\\ Z HAS_SIZE n)
       #|  X UNION Z
       #|  d
       #|  INFINITE (Y DIFF X)
-      #|  !(X:A->bool) Y n m . (n <= m) /\\ (X HAS_SIZE n) /\\ (INFINITE Y) /\\\n   (X SUBSET Y) ==> (?Z. (X SUBSET Z /\\ Z SUBSET Y /\\ Z HAS_SIZE m))
+      #|  forall(X:A->bool) Y n m . (n <= m) /\\ (X HAS_SIZE n) /\\ (INFINITE Y) /\\\n   (X SUBSET Y) ==> (?Z. (X SUBSET Z /\\ Z SUBSET Y /\\ Z HAS_SIZE m))
       #|  (x + a = x + b) <=> (a = b)
-      #|  !p q q'. (euclid_plus p q = euclid_plus p q') <=> (q = q')
+      #|  forall p q q'. (euclid_plus p q = euclid_plus p q') <=> (q = q')
       #|  j'
       #|  i'
       #|  (i' <| 4) /\\ (j' <| 4) 
@@ -69012,11 +69012,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid_plus p (r' *# cis t)
       #|  t
       #|  x
-      #|  !x. (X x) ==> (?t. &0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = p + r *# cis t))
-      #|  !x. (X x) ==> (?r t. &0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = p + r *# cis t))
-      #|  !r p X. (&0 < r) /\\ (euclid 2 p) /\\ (FINITE X) /\\ (CARD X <= 4) /\\\n     (X SUBSET {x | (euclid 2 x) /\\ (d_euclid p x = r)}) ==>\n    (?C. (!i. (X i) ==> (?C' C'' v.\n           simple_arc_end C' p v /\\\n           simple_arc_end C'' v i  /\\\n           C' SUBSET closed_ball(euclid 2,d_euclid) p (r/ &2) /\\\n           (C' INTER C'' = {v}) /\\\n           (C' UNION C'' = C i )) /\\\n          simple_arc_end (C i ) p  i /\\\n           C i SUBSET (closed_ball(euclid 2,d_euclid) p r) /\\\n           C i  INTER (closed_ball(euclid 2,d_euclid) p (r / &2))\n           SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))) /\\\n       (!i j. (X i ) /\\ (X j) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p} )))
+      #|  forall x. (X x) ==> (?t. &0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = p + r *# cis t))
+      #|  forall x. (X x) ==> (?r t. &0 <= t /\\ t < &2 * pi /\\ &0 <= r /\\ (x = p + r *# cis t))
+      #|  forall r p X. (&0 < r) /\\ (euclid 2 p) /\\ (FINITE X) /\\ (CARD X <= 4) /\\\n     (X SUBSET {x | (euclid 2 x) /\\ (d_euclid p x = r)}) ==>\n    (?C. (forall i. (X i) ==> (?C' C'' v.\n           simple_arc_end C' p v /\\\n           simple_arc_end C'' v i  /\\\n           C' SUBSET closed_ball(euclid 2,d_euclid) p (r/ &2) /\\\n           (C' INTER C'' = {v}) /\\\n           (C' UNION C'' = C i )) /\\\n          simple_arc_end (C i ) p  i /\\\n           C i SUBSET (closed_ball(euclid 2,d_euclid) p r) /\\\n           C i  INTER (closed_ball(euclid 2,d_euclid) p (r / &2))\n           SUBSET (hyperplane 2 e2 (p 1) UNION\n                     hyperplane 2 e1 (p 0))) /\\\n       (forall i j. (X i ) /\\ (X j) /\\ (~(i=j)) ==>\n           (C i INTER C j = {p} )))
       #|  (top_of_metric(UNIV,d_real))
-      #|  !C. simple_arc top2 C ==> connected top2 C
+      #|  forall C. simple_arc top2 C ==> connected top2 C
       #|  B v
       #|  A v
       #|  C v
@@ -69041,7 +69041,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B = closed_ball(euclid 2, d_euclid) p r
       #|  A = euclid 2 DIFF (closed_ball (euclid 2, d_euclid) p r)
       #|  connected top2 C
-      #|  !C r p v v'. simple_arc_end C v v' /\\ (&0 < r) /\\ (euclid 2 p) /\\\n       (C INTER (closed_ball(euclid 2,d_euclid) p r) = {v}) ==>\n      (d_euclid p v = r)
+      #|  forall C r p v v'. simple_arc_end C v v' /\\ (&0 < r) /\\ (euclid 2 p) /\\\n       (C INTER (closed_ball(euclid 2,d_euclid) p r) = {v}) ==>\n      (d_euclid p v = r)
       #|  B v
       #|  A v
       #|  C v
@@ -69060,7 +69060,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  top2 A
       #|  A = euclid 2 DIFF B
       #|  connected top2 C
-      #|  !C B' B v v'. simple_arc_end C v v'  /\\\n      (top2 B') /\\ (closed_ top2 B) /\\ (B' SUBSET B) /\\\n       (C INTER B = {v}) ==>\n      (~(B' v))
+      #|  forall C B' B v v'. simple_arc_end C v v'  /\\\n      (top2 B') /\\ (closed_ top2 B) /\\ (B' SUBSET B) /\\\n       (C INTER B = {v}) ==>\n      (~(B' v))
       #|  x <= y /\\ ~(x < y) ==> (x = y)
       #|  B v /\\ ~B' v ==> (d_euclid p v = r)
       #|  B v
@@ -69078,11 +69078,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B' SUBSET B
       #|  B' = (euclid 2 DIFF (closed_ball(euclid 2,d_euclid) p r))
       #|  B = (euclid 2 DIFF (open_ball(euclid 2,d_euclid) p r))
-      #|  !C r p v v'. simple_arc_end C v v'  /\\ (&0 < r) /\\ (euclid 2 p) /\\\n      (C INTER (euclid 2 DIFF (open_ball(euclid 2,d_euclid) p r)) = {v})\n     ==>\n      (d_euclid p v = r)
+      #|  forall C r p v v'. simple_arc_end C v v'  /\\ (&0 < r) /\\ (euclid 2 p) /\\\n      (C INTER (euclid 2 DIFF (open_ball(euclid 2,d_euclid) p r)) = {v})\n     ==>\n      (d_euclid p v = r)
       #|  graph_edge_around (G:(A,B)graph_t) v =\n   { e | graph_edge G e /\\ graph_inc G e v}
       #|  x
       #|  G
-      #|  !(G:(A,B)graph_t) v. (graph G) /\\ ~(graph_vertex G v) ==>\n      (graph_edge_around G v = EMPTY)
+      #|  forall(G:(A,B)graph_t) v. (graph G) /\\ ~(graph_vertex G v) ==>\n      (graph_edge_around G v = EMPTY)
       #|  f
       #|  d
       #|  r
@@ -69094,7 +69094,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  v
       #|  ~B ==> (A \\/ B <=> A)
-      #|  !e p.  graph_edge G e /\\ (!v. ~(D v p)) ==> (f e p = d e p)
+      #|  forall e p.  graph_edge G e /\\ (forall v. ~(D v p)) ==> (f e p = d e p)
       #|  v'
       #|  e
       #|  p
@@ -69103,7 +69103,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(v = v')
       #|  p
       #|  d e INTER D v = EMPTY
-      #|  !e v p. (graph_edge G e /\\ (graph_vertex G v) /\\ ~(graph_inc G e v) /\\ (D v p)  ==> ~(f e p))
+      #|  forall e v p. (graph_edge G e /\\ (graph_vertex G v) /\\ ~(graph_inc G e v) /\\ (D v p)  ==> ~(f e p))
       #|  v'
       #|  e
       #|  p
@@ -69116,8 +69116,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  v
       #|  e
-      #|  !e v p. (graph_edge G e /\\ graph_inc G e v) /\\ (D v p) ==> (f e p = NC e v  p)
-      #|  !e. f e = {x | d e x \\/ (?v. graph_inc G e v /\\ NC e v x)}
+      #|  forall e v p. (graph_edge G e /\\ graph_inc G e v) /\\ (D v p) ==> (f e p = NC e v  p)
+      #|  forall e. f e = {x | d e x \\/ (?v. graph_inc G e v /\\ NC e v x)}
       #|  d e INTER d e' = EMPTY 
       #|  d e' (short_end e' v)
       #|  d e (short_end e v)
@@ -69126,10 +69126,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  graph_vertex G v
       #|  v
-      #|  ! v e e'. graph_edge G e /\\ graph_edge G e' /\\ graph_inc G e v /\\ graph_inc G e' v /\\ ~(e = e') ==> (NC e v INTER NC e' v = {v})
+      #|  forall v e e'. graph_edge G e /\\ graph_edge G e' /\\ graph_inc G e v /\\ graph_inc G e' v /\\ ~(e = e') ==> (NC e v INTER NC e' v = {v})
       #|  v
       #|  e
-      #|  !e v. graph_edge G e /\\ graph_inc G e v ==> d e (short_end e v)
+      #|  forall e v. graph_edge G e /\\ graph_inc G e v ==> d e (short_end e v)
       #|  u
       #|  d e INTER D u = EMPTY 
       #|  e
@@ -69142,7 +69142,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  d e INTER d e' SUBSET graph_vertex G
       #|  e'
       #|  e
-      #|  !e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==> (d e INTER d e' = EMPTY)
+      #|  forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==> (d e INTER d e' = EMPTY)
       #|  euclid 2
       #|  d_euclid v v = &0
       #|  e
@@ -69151,35 +69151,35 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D (short_end e v) (short_end e v)
       #|  v
       #|  e
-      #|  !e v. (graph_edge G e /\\ graph_inc G e v ==> ~(graph_vertex G (short_end e v)))
-      #|  !v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v') ==> (D v INTER D v' = EMPTY)
+      #|  forall e v. (graph_edge G e /\\ graph_inc G e v ==> ~(graph_vertex G (short_end e v)))
+      #|  forall v v'. graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v') ==> (D v INTER D v' = EMPTY)
       #|  X v (short_end e v)
       #|  short_end e v
       #|  e
       #|  graph_vertex G v
       #|  v
-      #|  !e v. graph_edge G e /\\ graph_inc G e v ==> (simple_arc_end (NC e v) v (short_end e v)) /\\ (NC e v SUBSET D v) /\\ (hyper (NC e v) v)
+      #|  forall e v. graph_edge G e /\\ graph_inc G e v ==> (simple_arc_end (NC e v) v (short_end e v)) /\\ (NC e v SUBSET D v) /\\ (hyper (NC e v) v)
       #|  hyper = (\\ B v. (B INTER closed_ball (euclid 2,d_euclid) v (r / &2) SUBSET hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0)))
       #|  e
-      #|  !e v. (graph_edge G e /\\ graph_inc G e v ==> X v (short_end e v))
+      #|  forall e v. (graph_edge G e /\\ graph_inc G e v ==> X v (short_end e v))
       #|  e
       #|  G
-      #|  !e v. graph_edge G e /\\ graph_inc G e v ==> graph_vertex G v
+      #|  forall e v. graph_edge G e /\\ graph_inc G e v ==> graph_vertex G v
       #|  v
       #|  e
-      #|  !e v. graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v ==> (d e INTER (D v) = EMPTY)
-      #|  !e . graph_edge G e ==> (d e SUBSET e)
+      #|  forall e v. graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v ==> (d e INTER (D v) = EMPTY)
+      #|  forall e . graph_edge G e ==> (d e SUBSET e)
       #|  NC  = (\\ e v. (C v (short_end e v)))
       #|  f = (\\ e. { x | d e x \\/ (?v. graph_inc G e v /\\ C v (short_end e v) x)})
       #|  v
       #|  (\\j. X v j) = X v
-      #|  !v. (graph_vertex G v) ==> (?C. (!i. X v i                       ==> (?C' C'' v'.                                simple_arc_end C' v v' /\\                                simple_arc_end C'' v' i /\\                                C' SUBSET                                closed_ball (euclid 2,d_euclid) v (r / &2) /\\                                (C' INTER C'' = {v'}) /\\                                (C' UNION C'' = C i)) /\\                           simple_arc_end (C i) v i /\\                           C i SUBSET closed_ball (euclid 2,d_euclid) v r /\\                           C i INTER                           closed_ball (euclid 2,d_euclid) v (r / &2) SUBSET                           hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0)) /\\                  (!i j. X v i /\\ X v j /\\ ~(i = j) ==> (C i INTER C j = {v})))
+      #|  forall v. (graph_vertex G v) ==> (?C. (forall i. X v i                       ==> (?C' C'' v'.                                simple_arc_end C' v v' /\\                                simple_arc_end C'' v' i /\\                                C' SUBSET                                closed_ball (euclid 2,d_euclid) v (r / &2) /\\                                (C' INTER C'' = {v'}) /\\                                (C' UNION C'' = C i)) /\\                           simple_arc_end (C i) v i /\\                           C i SUBSET closed_ball (euclid 2,d_euclid) v r /\\                           C i INTER                           closed_ball (euclid 2,d_euclid) v (r / &2) SUBSET                           hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0)) /\\                  (forall i j. X v i /\\ X v j /\\ ~(i = j) ==> (C i INTER C j = {v})))
       #|  v
       #|  x'
       #|  CARD (graph_edge_around G v)
-      #|  !v. graph_vertex G v ==> (FINITE (X v) /\\ (CARD (X v) <=| 4) /\\ ((X v) SUBSET {x | euclid 2 x /\\ (d_euclid v x = r)}))
+      #|  forall v. graph_vertex G v ==> (FINITE (X v) /\\ (CARD (X v) <=| 4) /\\ ((X v) SUBSET {x | euclid 2 x /\\ (d_euclid v x = r)}))
       #|  graph_edge G 
-      #|  !v. FINITE (graph_edge_around G v)
+      #|  forall v. FINITE (graph_edge_around G v)
       #|  X = (\\ v. (IMAGE (\\ e. short_end e v) (graph_edge_around G v)))
       #|  ?s. (d e INTER D v') s
       #|  short_end e v' = u
@@ -69192,10 +69192,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (d e INTER D v) (short_end e v)
       #|  v
       #|  ?s. (d e INTER D v) s
-      #|  !u. graph_inc G e u ==> (u = v') \\/ (u = v'')
+      #|  forall u. graph_inc G e u ==> (u = v') \\/ (u = v'')
       #|  graph_inc G e HAS_SIZE 2
       #|  e
-      #|  !e v. (graph_edge G e /\\ graph_inc G e v) ==> (d e INTER (D v) = {(short_end e v)}) /\\ (d_euclid v (short_end e v) = r) /\\ (!v'. (graph_inc G e v' /\\ ~(v = v') ==> (simple_arc_end (d e) (short_end e v) (short_end e v'))))
+      #|  forall e v. (graph_edge G e /\\ graph_inc G e v) ==> (d e INTER (D v) = {(short_end e v)}) /\\ (d_euclid v (short_end e v) = r) /\\ (forall v'. (graph_inc G e v' /\\ ~(v = v') ==> (simple_arc_end (d e) (short_end e v) (short_end e v'))))
       #|  short_end = ( \\ e v. @s. (d e INTER (D v)) s)
       #|  v''
       #|  C'
@@ -69214,12 +69214,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  e
       #|  G
-      #|  !e. ?d. (graph_edge G e) ==> (?u u' v v'.  simple_arc_end d u u' /\\ graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') /\\  (d INTER (D v) = {u}) /\\ (d INTER (D v') = {u'}) /\\ (d SUBSET e) /\\ (d_euclid v u = r) /\\ (d_euclid v' u' = r))
-      #|  !v. (euclid 2 v) ==> D v v
-      #|  !u. closed_ top2 (D u)
+      #|  forall e. ?d. (graph_edge G e) ==> (?u u' v v'.  simple_arc_end d u u' /\\ graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') /\\  (d INTER (D v) = {u}) /\\ (d INTER (D v') = {u'}) /\\ (d SUBSET e) /\\ (d_euclid v u = r) /\\ (d_euclid v' u' = r))
+      #|  forall v. (euclid 2 v) ==> D v v
+      #|  forall u. closed_ top2 (D u)
       #|  D = (\\u. (closed_ball (euclid 2,d_euclid ) u r))
       #|  G
-      #|  !G. plane_graph G /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (!v. (CARD (graph_edge_around G v) <=| 4))\n   ==>\n  (?NC D short_end hyper r d f. ((!e p. graph_edge G e /\\ (!v. ~D v p) ==> (f e p = d e p)) /\\\n  (!e v p.\n           graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v /\\ D v p\n           ==> ~f e p) /\\\n  (!e v p.\n           (graph_edge G e /\\ graph_inc G e v) /\\ D v p\n           ==> (f e p = NC e v p)) /\\\n  (!e. f e = {x | d e x \\/ (?v. graph_inc G e v /\\ NC e v x)}) /\\\n  (!v e e'.\n           graph_edge G e /\\\n           graph_edge G e' /\\\n           graph_inc G e v /\\\n           graph_inc G e' v /\\\n           ~(e = e')\n           ==> (NC e v INTER NC e' v = {v})) /\\\n  (!e v. graph_edge G e /\\ graph_inc G e v ==> d e (short_end e v)) /\\\n  (!e e'.\n           graph_edge G e /\\ graph_edge G e' /\\ ~(e = e')\n           ==> (d e INTER d e' = {})) /\\\n  (!e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> ~graph_vertex G (short_end e v)) /\\\n  (!v v'.\n           graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v')\n           ==> (D v INTER D v' = {})) /\\\n  (!e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> simple_arc_end (NC e v) v (short_end e v) /\\\n               NC e v SUBSET D v /\\\n               hyper (NC e v) v) /\\\n  ((\\ B v.\n            B INTER closed_ball (euclid 2,d_euclid) v (r / &2) SUBSET\n            hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0)) =\n       hyper) /\\\n  (!e v. graph_edge G e /\\ graph_inc G e v ==> graph_vertex G v) /\\\n  (!e v.\n           graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v\n           ==> (d e INTER D v = {})) /\\\n  (!e. graph_edge G e ==> d e SUBSET e) /\\\n  (!e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> (d e INTER D v = {(short_end e v)}) /\\\n               (d_euclid v (short_end e v) = r) /\\\n               (!v'. graph_inc G e v' /\\ ~(v = v')\n                     ==> simple_arc_end (d e) (short_end e v)\n                         (short_end e v'))) /\\\n  (!v. euclid 2 v ==> D v v) /\\\n  (!u. closed_ top2 (D u)) /\\\n  (( \\ u. closed_ball (euclid 2,d_euclid) u r) = D) /\\\n  (&0 < r) /\\\n  (plane_graph G)))\n     
+      #|  forall G. plane_graph G /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (forall v. (CARD (graph_edge_around G v) <=| 4))\n   ==>\n  (?NC D short_end hyper r d f. ((forall e p. graph_edge G e /\\ (forall v. ~D v p) ==> (f e p = d e p)) /\\\n  (forall e v p.\n           graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v /\\ D v p\n           ==> ~f e p) /\\\n  (forall e v p.\n           (graph_edge G e /\\ graph_inc G e v) /\\ D v p\n           ==> (f e p = NC e v p)) /\\\n  (forall e. f e = {x | d e x \\/ (?v. graph_inc G e v /\\ NC e v x)}) /\\\n  (forall v e e'.\n           graph_edge G e /\\\n           graph_edge G e' /\\\n           graph_inc G e v /\\\n           graph_inc G e' v /\\\n           ~(e = e')\n           ==> (NC e v INTER NC e' v = {v})) /\\\n  (forall e v. graph_edge G e /\\ graph_inc G e v ==> d e (short_end e v)) /\\\n  (forall e e'.\n           graph_edge G e /\\ graph_edge G e' /\\ ~(e = e')\n           ==> (d e INTER d e' = {})) /\\\n  (forall e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> ~graph_vertex G (short_end e v)) /\\\n  (forall v v'.\n           graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v')\n           ==> (D v INTER D v' = {})) /\\\n  (forall e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> simple_arc_end (NC e v) v (short_end e v) /\\\n               NC e v SUBSET D v /\\\n               hyper (NC e v) v) /\\\n  ((\\ B v.\n            B INTER closed_ball (euclid 2,d_euclid) v (r / &2) SUBSET\n            hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0)) =\n       hyper) /\\\n  (forall e v. graph_edge G e /\\ graph_inc G e v ==> graph_vertex G v) /\\\n  (forall e v.\n           graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v\n           ==> (d e INTER D v = {})) /\\\n  (forall e. graph_edge G e ==> d e SUBSET e) /\\\n  (forall e v.\n           graph_edge G e /\\ graph_inc G e v\n           ==> (d e INTER D v = {(short_end e v)}) /\\\n               (d_euclid v (short_end e v) = r) /\\\n               (forall v'. graph_inc G e v' /\\ ~(v = v')\n                     ==> simple_arc_end (d e) (short_end e v)\n                         (short_end e v'))) /\\\n  (forall v. euclid 2 v ==> D v v) /\\\n  (forall u. closed_ top2 (D u)) /\\\n  (( \\ u. closed_ball (euclid 2,d_euclid) u r) = D) /\\\n  (&0 < r) /\\\n  (plane_graph G)))\n     
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -69228,7 +69228,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  graph_inc G e HAS_SIZE 2
-      #|  !(G:(A,B)graph_t) e v v'.\n  (graph G /\\ (graph_edge G e) /\\ (graph_inc G e v) /\\\n     (graph_inc G e v') /\\ ~(v = v') ==> (graph_inc G e = {v,v'}))
+      #|  forall(G:(A,B)graph_t) e v v'.\n  (graph G /\\ (graph_edge G e) /\\ (graph_inc G e v) /\\\n     (graph_inc G e v') /\\ ~(v = v') ==> (graph_inc G e = {v,v'}))
       #|  v
       #|  x
       #|  x'
@@ -69244,7 +69244,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D v INTER D v'
       #|  x <= u /\\ u < v ==> x <= v
       #|  r /(&2) < r
-      #|  !v. closed_ball (euclid 2, d_euclid) v (r/(&2)) SUBSET D v
+      #|  forall v. closed_ball (euclid 2, d_euclid) v (r/(&2)) SUBSET D v
       #|  e'' =e'
       #|  v'
       #|  v
@@ -69264,7 +69264,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_inc G e x
       #|  D x x
       #|  (A ==> (B <=> C)) ==> (B /\\ A <=> C /\\ A)
-      #|  !e v. (graph_edge G e) ==> ( e INTER graph_vertex G = (f e) INTER (graph_vertex G))
+      #|  forall e v. (graph_edge G e) ==> ( e INTER graph_vertex G = (f e) INTER (graph_vertex G))
       #|  v'
       #|  e
       #|  d e INTER D v' = {(short_end e v')}
@@ -69304,7 +69304,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v'
       #|  v
       #|  f e = (NC e v UNION d e) UNION NC e v'
-      #|  (!e v v'. (graph_edge G e /\\ graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') ==> (simple_arc_end (f e) v v')))
+      #|  (forall e v v'. (graph_edge G e /\\ graph_inc G e v /\\ graph_inc G e v' /\\ ~(v = v') ==> (simple_arc_end (f e) v v')))
       #|  (graph_vertex G (short_end x a))
       #|  (x INTER y) SUBSET (graph_vertex G)
       #|  (x INTER y) (short_end x a)
@@ -69334,24 +69334,24 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_inc G e' v
       #|  f e x = NC e v x
       #|  ?v. (graph_inc G e v /\\ D v x)
-      #|  !e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==> (f e INTER f e' SUBSET e INTER e')
+      #|  forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==> (f e INTER f e' SUBSET e INTER e')
       #|  v
       #|  e
       #|  v
       #|  ~B ==> (A \\/ B <=> A)
-      #|  !e p. graph_edge G e /\\ (!v. graph_inc G e v ==> ~(D v p)) ==> (f e p = d e p)
+      #|  forall e p. graph_edge G e /\\ (forall v. graph_inc G e v ==> ~(D v p)) ==> (f e p = d e p)
       #|  G
-      #|  !G. plane_graph G /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (!v. (CARD (graph_edge_around G v) <=| 4))\n   ==>\n    (?r H . graph_isomorphic G H /\\ good_plane_graph H /\\\n      (&0 < r) /\\\n      (!v v'.\n         graph_vertex H v /\\ graph_vertex H v' /\\ ~(v = v')\n         ==> (closed_ball (euclid 2,d_euclid) v r INTER\n                closed_ball (euclid 2,d_euclid) v' r =\n                {})) /\\\n      (!e v.\n         graph_edge H e /\\ graph_vertex H v /\\ ~graph_inc H e v\n         ==> (e INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\\n      (!e v.\n         graph_edge H e /\\  graph_inc H e v\n         ==> (e INTER closed_ball (euclid 2, d_euclid) v r SUBSET\n            (hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0))))\n    )
+      #|  forall G. plane_graph G /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (forall v. (CARD (graph_edge_around G v) <=| 4))\n   ==>\n    (?r H . graph_isomorphic G H /\\ good_plane_graph H /\\\n      (&0 < r) /\\\n      (forall v v'.\n         graph_vertex H v /\\ graph_vertex H v' /\\ ~(v = v')\n         ==> (closed_ball (euclid 2,d_euclid) v r INTER\n                closed_ball (euclid 2,d_euclid) v' r =\n                {})) /\\\n      (forall e v.\n         graph_edge H e /\\ graph_vertex H v /\\ ~graph_inc H e v\n         ==> (e INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\\n      (forall e v.\n         graph_edge H e /\\  graph_inc H e v\n         ==> (e INTER closed_ball (euclid 2, d_euclid) v r SUBSET\n            (hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0))))\n    )
       #|  TAGB
       #|  TAGB
       #|  hv_finite C <=>\n   (?E. C SUBSET UNIONS E /\\ FINITE E /\\ hv_line E)
       #|  B
       #|  E
-      #|  !A B. hv_finite B /\\ A SUBSET B ==> hv_finite A
+      #|  forall A B. hv_finite B /\\ A SUBSET B ==> hv_finite A
       #|  &1 - (SND p)
       #|  (z, &1 - t)
-      #|  !t. t * z + (&1 - t) * z = z
-      #|  !z. mk_line (point (z, &0)) (point(z, &1)) = hyperplane 2 e1 z
+      #|  forall t. t * z + (&1 - t) * z = z
+      #|  forall z. mk_line (point (z, &0)) (point(z, &1)) = hyperplane 2 e1 z
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -69437,8 +69437,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( *. )
       #|  &1 - (FST  p)
       #|  ( &1 - t, z)
-      #|  !t. t * z + (&1 - t) * z = z
-      #|  !z. mk_line (point (&0, z)) (point(&1, z)) = hyperplane 2 e2 z
+      #|  forall t. t * z + (&1 - t) * z = z
+      #|  forall z. mk_line (point (&0, z)) (point(&1, z)) = hyperplane 2 e2 z
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -69527,8 +69527,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (v 0, &1)
       #|  (v 0, &0)
       #|  {(hyperplane 2 e2 (v 1)), (hyperplane 2 e1 (v 0))}
-      #|  !C.\n  (?v. C SUBSET (hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0))) ==>\n   (hv_finite C)
-      #|  graph_hv_finite_radius G r <=> (good_plane_graph G /\\\n      (&0 < r) /\\\n      (!v v'.\n         graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v')\n         ==> (closed_ball (euclid 2,d_euclid) v r INTER\n                closed_ball (euclid 2,d_euclid) v' r =\n                {})) /\\\n      (!e v.\n         graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v\n         ==> (e INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\\n      (!e v.\n         graph_edge G e /\\  graph_inc G e v\n         ==> (hv_finite (e INTER closed_ball (euclid 2, d_euclid) v r))))\n    
+      #|  forall C.\n  (?v. C SUBSET (hyperplane 2 e2 (v 1) UNION hyperplane 2 e1 (v 0))) ==>\n   (hv_finite C)
+      #|  graph_hv_finite_radius G r <=> (good_plane_graph G /\\\n      (&0 < r) /\\\n      (forall v v'.\n         graph_vertex G v /\\ graph_vertex G v' /\\ ~(v = v')\n         ==> (closed_ball (euclid 2,d_euclid) v r INTER\n                closed_ball (euclid 2,d_euclid) v' r =\n                {})) /\\\n      (forall e v.\n         graph_edge G e /\\ graph_vertex G v /\\ ~graph_inc G e v\n         ==> (e INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\\n      (forall e v.\n         graph_edge G e /\\  graph_inc G e v\n         ==> (hv_finite (e INTER closed_ball (euclid 2, d_euclid) v r))))\n    
       #|  C
       #|  C
       #|  C
@@ -69537,7 +69537,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y
       #|  x
       #|  C
-      #|  !A x y. ~(x = y) ==>\n     (p_conn A x y <=> (?C. (hv_finite C) /\\ (C SUBSET A) /\\\n    (simple_arc_end C x y)))
+      #|  forall A x y. ~(x = y) ==>\n     (p_conn A x y <=> (?C. (hv_finite C) /\\ (C SUBSET A) /\\\n    (simple_arc_end C x y)))
       #|  v
       #|  y
       #|  G
@@ -69545,7 +69545,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y
       #|  y
       #|  (?y. graph_edge G y /\\ (v' y = x))
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t) f v. (graph G) /\\\n     graph_iso f G H /\\ (graph_vertex G v) ==>\n        (graph_edge_around H (FST  f v) =\n            (IMAGE (SND f) (graph_edge_around G v)))
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t) f v. (graph G) /\\\n     graph_iso f G H /\\ (graph_vertex G v) ==>\n        (graph_edge_around H (FST  f v) =\n            (IMAGE (SND f) (graph_edge_around G v)))
       #|  v
       #|  v
       #|  e
@@ -69572,16 +69572,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v
       #|  graph_edge G
       #|  graph_edge H
-      #|  FINITE (graph_edge H) /\\ FINITE (graph_vertex H) /\\ ~(graph_edge H = EMPTY) /\\  (!v. (CARD (graph_edge_around H v) <=| 4))
-      #|  !G. planar_graph (G:(A,B) graph_t) /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (!v. (CARD (graph_edge_around G v) <=| 4)) ==>\n   (?r H.\n       (graph_isomorphic G H /\\ graph_hv_finite_radius H r))
+      #|  FINITE (graph_edge H) /\\ FINITE (graph_vertex H) /\\ ~(graph_edge H = EMPTY) /\\  (forall v. (CARD (graph_edge_around H v) <=| 4))
+      #|  forall G. planar_graph (G:(A,B) graph_t) /\\\n      FINITE (graph_edge G) /\\ FINITE (graph_vertex G) /\\\n      ~(graph_edge G = EMPTY) /\\\n     (forall v. (CARD (graph_edge_around G v) <=| 4)) ==>\n   (?r H.\n       (graph_isomorphic G H /\\ graph_hv_finite_radius H r))
       #|  replace (x:A) y =\n    (\\ z. (if (z  = x) then y else z))
-      #|  !(x:A) y. replace x y x = y
+      #|  forall(x:A) y. replace x y x = y
       #|  graph_replace (G:(A,B)graph_t) e e' =\n     graph_edge_mod G (replace e e')
       #|  ((x' = (x:A)) \\/ ~(x' = x)) /\\ ((y' = x) \\/ ~(y' = x))
-      #|  !(x:A) y Z. ~(Z y) ==> INJ (replace x y) Z UNIV
-      #|  !(G:(A,B)graph_t) e e'.\n      ~(graph_edge G e') ==> graph_isomorphic G (graph_replace G e e')
+      #|  forall(x:A) y Z. ~(Z y) ==> INJ (replace x y) Z UNIV
+      #|  forall(G:(A,B)graph_t) e e'.\n      ~(graph_edge G e') ==> graph_isomorphic G (graph_replace G e e')
       #|  ((e'' = e) \\/ ~(e'' = e)) /\\ ((e''' = e) \\/ ~(e''' = e))
-      #|  !G e e'. plane_graph G /\\ ~(graph_edge G e') /\\\n      (graph_edge G e) /\\\n      (!e''. graph_edge G e'' /\\ ~(e'' = e) ==>\n           (e' INTER e'' SUBSET  e INTER e'')) /\\\n      (simple_arc top2 e') /\\\n      (e INTER graph_vertex G = e' INTER graph_vertex G) ==>\n      plane_graph (graph_replace G e e')
+      #|  forall G e e'. plane_graph G /\\ ~(graph_edge G e') /\\\n      (graph_edge G e) /\\\n      (forall e''. graph_edge G e'' /\\ ~(e'' = e) ==>\n           (e' INTER e'' SUBSET  e INTER e'')) /\\\n      (simple_arc top2 e') /\\\n      (e INTER graph_vertex G = e' INTER graph_vertex G) ==>\n      plane_graph (graph_replace G e e')
       #|  e INTER u = e' INTER u
       #|  graph_inc G e = e INTER graph_vertex G
       #|  x
@@ -69590,7 +69590,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_edge G
       #|  e'
       #|  e
-      #|  !G e e'. (good_plane_graph G) /\\ plane_graph (graph_replace G e e') /\\\n      ~(graph_edge G e') /\\\n   ( e INTER (graph_vertex G) = e' INTER (graph_vertex G)) /\\\n      (!v v'. (graph_vertex G v) /\\ (graph_vertex G v') /\\\n            ~(v = v') /\\ e' v /\\  e' v' ==> simple_arc_end e' v v')\n    ==> (good_plane_graph (graph_replace G e e'))
+      #|  forall G e e'. (good_plane_graph G) /\\ plane_graph (graph_replace G e e') /\\\n      ~(graph_edge G e') /\\\n   ( e INTER (graph_vertex G) = e' INTER (graph_vertex G)) /\\\n      (forall v v'. (graph_vertex G v) /\\ (graph_vertex G v') /\\\n            ~(v = v') /\\ e' v /\\  e' v' ==> simple_arc_end e' v v')\n    ==> (good_plane_graph (graph_replace G e e'))
       #|  e'
       #|  x
       #|  graph_edge G
@@ -69602,10 +69602,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_inc G e = e INTER graph_vertex G
       #|  e
       #|  e''
-      #|  !G r e e'. graph_hv_finite_radius G r /\\ ~(graph_edge G e') /\\\n     good_plane_graph (graph_replace G e e') /\\\n    (e INTER (graph_vertex G) = e' INTER (graph_vertex G)) /\\\n    (!v. graph_vertex G v /\\ ~(e' v) ==>\n        ((e' INTER closed_ball (euclid 2,d_euclid) v r = {}))) /\\\n    (hv_finite e')\n    ==> graph_hv_finite_radius (graph_replace G e e') r
+      #|  forall G r e e'. graph_hv_finite_radius G r /\\ ~(graph_edge G e') /\\\n     good_plane_graph (graph_replace G e e') /\\\n    (e INTER (graph_vertex G) = e' INTER (graph_vertex G)) /\\\n    (forall v. graph_vertex G v /\\ ~(e' v) ==>\n        ((e' INTER closed_ball (euclid 2,d_euclid) v r = {}))) /\\\n    (hv_finite e')\n    ==> graph_hv_finite_radius (graph_replace G e e') r
       #|  TAGB
       #|  TAGB
-      #|  !(x:A) s. FINITE s /\\ (~(s x)) ==> (SUC (CARD s) = CARD(x INSERT s))
+      #|  forall(x:A) s. FINITE s /\\ (~(s x)) ==> (SUC (CARD s) = CARD(x INSERT s))
       #|  x
       #|  x = e
       #|  x = e
@@ -69618,7 +69618,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A = {x | graph_edge (graph_replace G e e') x /\\ ~hv_finite x}
       #|  FINITE (graph_edge (graph_replace G e e'))
       #|  (SUC x = y) ==> (x <| y)
-      #|  !G e e'.\n    (FINITE (graph_edge (G:(A,(num->real)->bool)graph_t))) /\\\n      (graph_edge G e) /\\ ~(graph_edge G e') /\\\n     ~(hv_finite e) /\\ (hv_finite e') ==>\n   (CARD {x | graph_edge (graph_replace G e e') x /\\ ~(hv_finite x)} <\n      CARD{ x | graph_edge G x /\\ ~hv_finite x})\n                                                
+      #|  forall G e e'.\n    (FINITE (graph_edge (G:(A,(num->real)->bool)graph_t))) /\\\n      (graph_edge G e) /\\ ~(graph_edge G e') /\\\n     ~(hv_finite e) /\\ (hv_finite e') ==>\n   (CARD {x | graph_edge (graph_replace G e e') x /\\ ~(hv_finite x)} <\n      CARD{ x | graph_edge G x /\\ ~hv_finite x})\n                                                
       #|  v''
       #|  v'
       #|  v''
@@ -69626,14 +69626,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_inc G e HAS_SIZE 2
       #|  e
       #|  G
-      #|  !(G:(A,B)graph_t) e v. (graph G /\\ graph_edge G e /\\\n         (graph_inc G e v) ==>\n    (?v'. (graph_inc G e v' /\\ ~(v = v'))))
+      #|  forall(G:(A,B)graph_t) e v. (graph G /\\ graph_edge G e /\\\n         (graph_inc G e v) ==>\n    (?v'. (graph_inc G e v' /\\ ~(v = v'))))
       #|  e INTER (closed_ball(euclid 2,d_euclid) v r)
       #|  x
       #|  x = v''
       #|  x = v''
       #|  C' v
       #|  C'
-      #|  !x. C' x ==> euclid 2 x
+      #|  forall x. C' x ==> euclid 2 x
       #|  C' SUBSET closed_ball(euclid 2,d_euclid) v r
       #|  C'
       #|  v
@@ -69652,10 +69652,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v
       #|  v'
       #|  v
-      #|  !v. graph_inc G e v ==> euclid 2 v
+      #|  forall v. graph_inc G e v ==> euclid 2 v
       #|  e
       #|  G
-      #|  !v. graph_inc G e v ==> graph_vertex G v
+      #|  forall v. graph_inc G e v ==> graph_vertex G v
       #|  e
       #|  G
       #|  e
@@ -69678,8 +69678,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (euclid 2 DIFF (open_ball(euclid 2,d_euclid) v r))
       #|  {v}
       #|  e
-      #|  !G r e v. graph_hv_finite_radius G r /\\ graph_inc G e v  /\\\n     graph_edge G e ==>\n     (?C u. (hv_finite C) /\\ (simple_arc_end C v u) /\\ (euclid 2 u) /\\\n        (d_euclid v u = r) /\\ (C SUBSET e) /\\ (C SUBSET (closed_ball(euclid 2,d_euclid) v r)))   
-      #|  !A B U. topology_ U /\\ U A /\\ U (B:A->bool) ==> U(A UNION B)
+      #|  forall G r e v. graph_hv_finite_radius G r /\\ graph_inc G e v  /\\\n     graph_edge G e ==>\n     (?C u. (hv_finite C) /\\ (simple_arc_end C v u) /\\ (euclid 2 u) /\\\n        (d_euclid v u = r) /\\ (C SUBSET e) /\\ (C SUBSET (closed_ball(euclid 2,d_euclid) v r)))   
+      #|  forall A B U. topology_ U /\\ U A /\\ U (B:A->bool) ==> U(A UNION B)
       #|  (IN)
       #|  (~)
       #|  closed_ U( UNIONS (B DELETE CHOICE B) UNION (CHOICE B))
@@ -69693,14 +69693,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  EMPTY
       #|  ~(B = EMPTY)
       #|  B HAS_SIZE 0
-      #|  !n (B:(A->bool)->bool) U. (CARD B = n) /\\  topology_ U /\\ FINITE B /\\ B SUBSET (closed_ U) ==> closed_ U(UNIONS B)
-      #|  !(B:(A->bool)->bool) U.\n     topology_ U /\\ FINITE B /\\ B SUBSET (closed_ U) ==>\n            closed_ U(UNIONS B)
+      #|  forall n (B:(A->bool)->bool) U. (CARD B = n) /\\  topology_ U /\\ FINITE B /\\ B SUBSET (closed_ U) ==> closed_ U(UNIONS B)
+      #|  forall(B:(A->bool)->bool) U.\n     topology_ U /\\ FINITE B /\\ B SUBSET (closed_ U) ==>\n            closed_ U(UNIONS B)
       #|  euclid 2
-      #|  !x. (euclid 2 x) ==> (d_euclid x x = &0)
-      #|  !(Z1:A->bool) Z2 A. (Z1 UNION Z2 = A) ==>\n         (Z1 SUBSET A /\\ Z2 SUBSET A)
+      #|  forall x. (euclid 2 x) ==> (d_euclid x x = &0)
+      #|  forall(Z1:A->bool) Z2 A. (Z1 UNION Z2 = A) ==>\n         (Z1 SUBSET A /\\ Z2 SUBSET A)
       #|  2
       #|  loc_path_conn top2
-      #|  !U. connected (U:(A->bool)->bool) EMPTY 
+      #|  forall U. connected (U:(A->bool)->bool) EMPTY 
       #|  A
       #|  B
       #|  B
@@ -69712,35 +69712,35 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  Z SUBSET (component U x)
       #|  x'
       #|  B' x'
-      #|  !A B. component U x SUBSET A UNION B /\\ (A INTER B = EMPTY) /\\ U B /\\ U A /\\ A x ==> component U x SUBSET A
+      #|  forall A B. component U x SUBSET A UNION B /\\ (A INTER B = EMPTY) /\\ U B /\\ U A /\\ A x ==> component U x SUBSET A
       #|  A x \\/ B x
       #|  component U x x
       #|  ~(UNIONS U x)
-      #|  !U (x:A). (topology_ U) ==> (connected U (component U x))
+      #|  forall U (x:A). (topology_ U) ==> (connected U (component U x))
       #|  x
-      #|  !U (A:A->bool). (topology_ U) /\\ U A ==>\n          (induced_top U A = { B | U B /\\ B SUBSET A })
-      #|  !A'. (U A' ==> U (A' INTER C))
+      #|  forall U (A:A->bool). (topology_ U) /\\ U A ==>\n          (induced_top U A = { B | U B /\\ B SUBSET A })
+      #|  forall A'. (U A' ==> U (A' INTER C))
       #|  B INTER C
       #|  A INTER C
       #|  UNIONS {B | U B /\\ B SUBSET C}
       #|  B
       #|  A
-      #|  !U (C:A->bool) . (topology_ U /\\ U C ) ==>\n           (connected U C = connected (induced_top U C) C)
+      #|  forall U (C:A->bool) . (topology_ U /\\ U C ) ==>\n           (connected U C = connected (induced_top U C) C)
       #|  u INTER C
       #|  x
-      #|  !A'. (U A' ==> U (A' INTER C))
+      #|  forall A'. (U A' ==> U (A' INTER C))
       #|  B INTER C
       #|  A INTER C
       #|  x
-      #|  !U (C:A->bool) Z. (topology_ U /\\ U C /\\ Z SUBSET (UNIONS U))  ==>\n        (connected (induced_top U C) Z <=> (Z SUBSET C) /\\ (connected U Z))
+      #|  forall U (C:A->bool) Z. (topology_ U /\\ U C /\\ Z SUBSET (UNIONS U))  ==>\n        (connected (induced_top U C) Z <=> (Z SUBSET C) /\\ (connected U Z))
       #|  top_of_metric(C,d) = induced_top(top_of_metric(X,d))C
-      #|  !X d (C:A->bool). metric_space (X,d) /\\ C SUBSET X /\\\n    (top_of_metric(X,d)C) ==>\n     (connected(top_of_metric(X,d))C <=> connected(top_of_metric(C,d))C)
+      #|  forall X d (C:A->bool). metric_space (X,d) /\\ C SUBSET X /\\\n    (top_of_metric(X,d)C) ==>\n     (connected(top_of_metric(X,d))C <=> connected(top_of_metric(C,d))C)
       #|  top_of_metric(Y,d) Z
       #|  top_of_metric(Y,d)  = induced_top(top_of_metric(X,d)) Y
       #|  metric_space (Y,d)
       #|  Z SUBSET X
       #|  Y SUBSET X
-      #|  !(X:A->bool) Y Z d. metric_space (X,d) /\\\n     top_of_metric(X,d) Y /\\ top_of_metric(X,d) Z /\\\n       Z SUBSET Y  ==>\n   (connected (top_of_metric(X,d)) Z = connected (top_of_metric(Y,d)) Z)
+      #|  forall(X:A->bool) Y Z d. metric_space (X,d) /\\\n     top_of_metric(X,d) Y /\\ top_of_metric(X,d) Z /\\\n       Z SUBSET Y  ==>\n   (connected (top_of_metric(X,d)) Z = connected (top_of_metric(Y,d)) Z)
       #|  A'
       #|  C'
       #|  v'
@@ -69776,13 +69776,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  A' = component (top_of_metric(A,d_euclid)) v
       #|  A' = path_component(top_of_metric(A,d_euclid)) v
-      #|  !A C v v'. (top2 A) /\\ (C SUBSET A) /\\ (simple_arc_end C v v') ==>\n    (?C'. C' SUBSET A /\\ simple_arc_end C' v v' /\\ hv_finite C')
+      #|  forall A C v v'. (top2 A) /\\ (C SUBSET A) /\\ (simple_arc_end C v v') ==>\n    (?C'. C' SUBSET A /\\ simple_arc_end C' v v' /\\ hv_finite C')
       #|  v''
       #|  v''
-      #|  !v''. graph_vertex G v'' /\\ ~graph_inc G e v'' ==> (A INTER closed_ball (euclid 2,d_euclid) v'' r = {})
+      #|  forall v''. graph_vertex G v'' /\\ ~graph_inc G e v'' ==> (A INTER closed_ball (euclid 2,d_euclid) v'' r = {})
       #|  e'
       #|  e'
-      #|  (!e'. ~(e = e') /\\ (graph_edge G e') ==> (A INTER e' = {}))
+      #|  (forall e'. ~(e = e') /\\ (graph_edge G e') ==> (A INTER e' = {}))
       #|  ~(Chv v) /\\ ~(Chv v')
       #|  ~(A v) /\\ ~(A v')
       #|  Chv
@@ -69869,7 +69869,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_vertex G v'
       #|  graph_vertex G v
       #|  simple_arc_end e v v'
-      #|  !(X:A->bool) Y Z. (X UNION Y = Z) ==> (X SUBSET Z)
+      #|  forall(X:A->bool) Y Z. (X UNION Y = Z) ==> (X SUBSET Z)
       #|  v'
       #|  ~graph_vertex G u'
       #|  v
@@ -69888,7 +69888,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(u'' = v'')
       #|  v''
       #|  u''
-      #|  !u'' v''. graph_vertex G v'' /\\ (d_euclid v'' u'' = r) ==> ~(graph_vertex G u'')
+      #|  forall u'' v''. graph_vertex G v'' /\\ (d_euclid v'' u'' = r) ==> ~(graph_vertex G u'')
       #|  graph_inc G e v'
       #|  graph_inc G e v
       #|  {v,v'} = {v} UNION {v'}
@@ -69908,8 +69908,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  D = (\\ v. (closed_ball(euclid 2,d_euclid) v r))
       #|  e
       #|  G
-      #|  !v''. graph_inc G e v'' ==> graph_vertex G v''
-      #|  !v''. graph_vertex G v'' ==> (euclid 2 v'')
+      #|  forall v''. graph_inc G e v'' ==> graph_vertex G v''
+      #|  forall v''. graph_vertex G v'' ==> (euclid 2 v'')
       #|  u'
       #|  Cv'
       #|  Cv' = C'
@@ -69924,7 +69924,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  r
       #|  G
-      #|  !G r e v v'.\n     graph_hv_finite_radius G r /\\ graph_inc G e v /\\\n     FINITE(graph_edge G) /\\ FINITE(graph_vertex G) /\\\n    graph_edge G e /\\ graph_inc G e v' /\\ ~(v = v') ==>\n   (? Cv u Cv' u' C''.\n        (hv_finite Cv /\\ hv_finite Cv' /\\  (hv_finite C'') /\\\n        ~(graph_vertex G u) /\\\n        ~(graph_vertex G u') /\\\n        simple_arc_end Cv v u /\\\n        simple_arc_end Cv' v' u' /\\\n        simple_arc_end C'' u u' /\\\n         ~C'' v /\\ ~C'' v' /\\\n        (euclid 2 u)  /\\ (euclid 2 u') /\\\n        (d_euclid v u = r) /\\ (d_euclid v' u' = r) /\\\n        (Cv SUBSET e) /\\ (Cv' SUBSET e) /\\\n        (Cv SUBSET  (closed_ball(euclid 2,d_euclid) v r)) /\\\n        (Cv' SUBSET (closed_ball(euclid 2,d_euclid) v' r)) /\\\n   (!e'. (graph_edge G e') /\\ ~(e = e') ==> (C'' INTER e' = EMPTY)) /\\\n   (!v''. graph_vertex G v'' /\\ ~(graph_inc G e v'') ==>\n        (C'' INTER (closed_ball(euclid 2,d_euclid) v'' r) = EMPTY))\n     ))
+      #|  forall G r e v v'.\n     graph_hv_finite_radius G r /\\ graph_inc G e v /\\\n     FINITE(graph_edge G) /\\ FINITE(graph_vertex G) /\\\n    graph_edge G e /\\ graph_inc G e v' /\\ ~(v = v') ==>\n   (? Cv u Cv' u' C''.\n        (hv_finite Cv /\\ hv_finite Cv' /\\  (hv_finite C'') /\\\n        ~(graph_vertex G u) /\\\n        ~(graph_vertex G u') /\\\n        simple_arc_end Cv v u /\\\n        simple_arc_end Cv' v' u' /\\\n        simple_arc_end C'' u u' /\\\n         ~C'' v /\\ ~C'' v' /\\\n        (euclid 2 u)  /\\ (euclid 2 u') /\\\n        (d_euclid v u = r) /\\ (d_euclid v' u' = r) /\\\n        (Cv SUBSET e) /\\ (Cv' SUBSET e) /\\\n        (Cv SUBSET  (closed_ball(euclid 2,d_euclid) v r)) /\\\n        (Cv' SUBSET (closed_ball(euclid 2,d_euclid) v' r)) /\\\n   (forall e'. (graph_edge G e') /\\ ~(e = e') ==> (C'' INTER e' = EMPTY)) /\\\n   (forall v''. graph_vertex G v'' /\\ ~(graph_inc G e v'') ==>\n        (C'' INTER (closed_ball(euclid 2,d_euclid) v'' r) = EMPTY))\n     ))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -69978,7 +69978,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C = e
       #|  e'
       #|  K
-      #|  !e v. graph_edge K e /\\ graph_inc K e v ==> graph_vertex K v
+      #|  forall e v. graph_edge K e /\\ graph_inc K e v ==> graph_vertex K v
       #|  graph K
       #|  C
       #|  v'
@@ -70002,7 +70002,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p_conn (Cv UNION Cv' UNION C'') v v'
       #|  e'
       #|  K
-      #|  !e v. graph_edge K e /\\ graph_inc K e v ==> graph_vertex K v
+      #|  forall e v. graph_edge K e /\\ graph_inc K e v ==> graph_vertex K v
       #|  e
       #|  e INTER graph_vertex K = {v,v'}
       #|  graph_inc K e  = {v,v'}
@@ -70033,7 +70033,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e'
       #|  e
       #|  K
-      #|  ~(? e' . (~graph_edge K e') /\\ hv_finite e' /\\ simple_arc_end e' v v' /\\ (e INTER (graph_vertex K) = (e' INTER (graph_vertex K))) /\\ (!v. graph_vertex K v /\\ ~e' v  ==> (e' INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\ (!e''. graph_edge K e'' /\\ ~(e'' = e)  ==> e' INTER e'' SUBSET e INTER e''))
+      #|  ~(? e' . (~graph_edge K e') /\\ hv_finite e' /\\ simple_arc_end e' v v' /\\ (e INTER (graph_vertex K) = (e' INTER (graph_vertex K))) /\\ (forall v. graph_vertex K v /\\ ~e' v  ==> (e' INTER closed_ball (euclid 2,d_euclid) v r = {})) /\\ (forall e''. graph_edge K e'' /\\ ~(e'' = e)  ==> e' INTER e'' SUBSET e INTER e''))
       #|  FINITE (graph_edge K)
       #|  K
       #|  H
@@ -70051,29 +70051,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c = (\\ (K:(num->real,(num->real)->bool)graph_t). CARD {x | graph_edge K x /\\ ~hv_finite x})
       #|  X = { K | graph_isomorphic H K /\\ graph_hv_finite_radius K r}
       #|  G
-      #|  !(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H. graph_isomorphic G H /\\\n              good_plane_graph H /\\ (!e. graph_edge H e ==>\n           hv_finite e))
-      #|  !A B (x:A). A x /\\ A SUBSET B ==> B x
+      #|  forall(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H. graph_isomorphic G H /\\\n              good_plane_graph H /\\ (forall e. graph_edge H e ==>\n           hv_finite e))
+      #|  forall A B (x:A). A x /\\ A SUBSET B ==> B x
       #|  plane_graph_image (f:(num->real)->(num->real)) G =\n     mk_graph_t\n       (IMAGE f (graph_vertex G),\n        IMAGE2 f (graph_edge G),\n        ( \\ e v. (?e' v'. (graph_edge G e') /\\\n             (IMAGE f e' = e) /\\ (f v' = v) /\\\n            (graph_inc G e' v'))))
-      #|  !f G. (graph_edge (plane_graph_image f G)) =\n         IMAGE2 f (graph_edge G)
-      #|  !f G. (graph_vertex (plane_graph_image f G)) =\n          IMAGE f (graph_vertex G)
-      #|  !f G. (graph_inc (plane_graph_image f G)) =\n     ( \\ e v. (?e' v'. (graph_edge G e') /\\\n             (IMAGE f e' = e) /\\ (f v' = v) /\\\n            (graph_inc G e' v')))
-      #|  !e. graph_edge G e ==> (e SUBSET (euclid 2))
+      #|  forall f G. (graph_edge (plane_graph_image f G)) =\n         IMAGE2 f (graph_edge G)
+      #|  forall f G. (graph_vertex (plane_graph_image f G)) =\n          IMAGE f (graph_vertex G)
+      #|  forall f G. (graph_inc (plane_graph_image f G)) =\n     ( \\ e v. (?e' v'. (graph_edge G e') /\\\n             (IMAGE f e' = e) /\\ (f v' = v) /\\\n            (graph_inc G e' v')))
+      #|  forall e. graph_edge G e ==> (e SUBSET (euclid 2))
       #|  graph_vertex G SUBSET (euclid 2)
-      #|  !f G. homeomorphism f top2 top2 /\\ plane_graph G ==>\n   BIJ f (graph_vertex G) (IMAGE f (graph_vertex G)) /\\\n   BIJ (IMAGE f) (graph_edge G) (IMAGE2 f (graph_edge G))
+      #|  forall f G. homeomorphism f top2 top2 /\\ plane_graph G ==>\n   BIJ f (graph_vertex G) (IMAGE f (graph_vertex G)) /\\\n   BIJ (IMAGE f) (graph_edge G) (IMAGE2 f (graph_edge G))
       #|  e'
       #|  e' = e
       #|  x
-      #|  !e. graph_edge G e ==> (e SUBSET (euclid 2))
+      #|  forall e. graph_edge G e ==> (e SUBSET (euclid 2))
       #|  graph_vertex G SUBSET (euclid 2)
       #|  f,IMAGE f
       #|  IMAGE f
       #|  f
-      #|  !f G. (homeomorphism f top2 top2 /\\ plane_graph G ==>\n      graph_isomorphic G (plane_graph_image f G))
+      #|  forall f G. (homeomorphism f top2 top2 /\\ plane_graph G ==>\n      graph_isomorphic G (plane_graph_image f G))
       #|  TAGB
       #|  TAGB
       #|  &0 < &1
       #|  metric_space(euclid 2,d_euclid)
-      #|  !G. plane_graph G ==> graph_vertex G SUBSET (euclid 2)
+      #|  forall G. plane_graph G ==> graph_vertex G SUBSET (euclid 2)
       #|  &0 <=. &1
       #|  x <=. x 
       #|  g
@@ -70082,8 +70082,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  &1
       #|  &0
-      #|  !C v v'. simple_arc_end C v v' <=>\n       (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n        continuous f\n           (top_of_metric ({x | &0 <= x /\\ x <= &1},d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n              (f (&0) = v) /\\\n              (f (&1) = v'))
-      #|  !G e. (plane_graph G /\\ graph_edge G e) ==> (e SUBSET (euclid 2))
+      #|  forall C v v'. simple_arc_end C v v' <=>\n       (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n        continuous f\n           (top_of_metric ({x | &0 <= x /\\ x <= &1},d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n              (f (&0) = v) /\\\n              (f (&1) = v'))
+      #|  forall G e. (plane_graph G /\\ graph_edge G e) ==> (e SUBSET (euclid 2))
       #|  x'
       #|  x
       #|  x'
@@ -70132,29 +70132,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  v'
       #|  v
-      #|  (!e v v'.  graph_edge (plane_graph_image f G) e /\\  ~(v = v') /\\  graph_inc (plane_graph_image f G) e v /\\  graph_inc (plane_graph_image f G) e v' ==> simple_arc_end e v v')
+      #|  (forall e v v'.  graph_edge (plane_graph_image f G) e /\\  ~(v = v') /\\  graph_inc (plane_graph_image f G) e v /\\  graph_inc (plane_graph_image f G) e v' ==> simple_arc_end e v v')
       #|  G
       #|  f
-      #|  !e. graph_edge G e ==> (e SUBSET (euclid 2))
+      #|  forall e. graph_edge G e ==> (e SUBSET (euclid 2))
       #|  graph_vertex G SUBSET (euclid 2)
       #|  plane_graph_image f G
       #|  G
-      #|  !f G. (homeomorphism f top2 top2 /\\ good_plane_graph G ==>\n     good_plane_graph(plane_graph_image f G))
-      #|  h_compat f <=> !x y. (SND x = SND y) ==>\n   (IMAGE f (mk_line (point x) (point y)) =\n          mk_line (f (point x)) (f (point y)))
-      #|  v_compat f <=> !x y. (FST x = FST y) ==>\n   (IMAGE f (mk_line (point x) (point y)) =\n          mk_line (f (point x)) (f (point y)))
+      #|  forall f G. (homeomorphism f top2 top2 /\\ good_plane_graph G ==>\n     good_plane_graph(plane_graph_image f G))
+      #|  h_compat f <=> forall x y. (SND x = SND y) ==>\n   (IMAGE f (mk_line (point x) (point y)) =\n          mk_line (f (point x)) (f (point y)))
+      #|  v_compat f <=> forall x y. (FST x = FST y) ==>\n   (IMAGE f (mk_line (point x) (point y)) =\n          mk_line (f (point x)) (f (point y)))
       #|  h_translate r p = p + r *# e1
       #|  v_translate r p = p + r *# e2
       #|  r_scale r p =\n        if ( &.0 < p 0) then (point (r * p 0, p 1)) else p
       #|  u_scale r p =\n        if ( &.0 < p 1) then (point ( p 0, r * p 1)) else p
       #|  (A ==> (B <=> C)) ==> (A /\\ B <=> A /\\ C)
       #|  {x | UNIONS U x /\\ v (g x)} = {x | UNIONS U x /\\ v (f x)}
-      #|  !(f:A->B) g U V. (continuous f U V) /\\ (!x. UNIONS U x ==> (f x = g x))\n    ==> (continuous g U V)
+      #|  forall(f:A->B) g U V. (continuous f U V) /\\ (forall x. UNIONS U x ==> (f x = g x))\n    ==> (continuous g U V)
       #|  x - (r *# e1)
       #|  x'
-      #|  !r. BIJ (h_translate r) (euclid 2) (euclid 2)
+      #|  forall r. BIJ (h_translate r) (euclid 2) (euclid 2)
       #|  x - (r *# e2)
       #|  x'
-      #|  !r. BIJ (v_translate r) (euclid 2) (euclid 2)
+      #|  forall r. BIJ (v_translate r) (euclid 2) (euclid 2)
       #|  point p
       #|  (r * &1/r) * FST p = &1 * FST p
       #|  &0 < &1/ r  * FST p
@@ -70165,7 +70165,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FST p
       #|  y
       #|  x
-      #|  !r. (&0 < r) ==> BIJ (r_scale r) (euclid 2) (euclid 2)
+      #|  forall r. (&0 < r) ==> BIJ (r_scale r) (euclid 2) (euclid 2)
       #|  point p
       #|  (r * &1/r) * SND  p = &1 * SND  p
       #|  &0 < &1/ r  * SND  p
@@ -70176,23 +70176,23 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SND p
       #|  y
       #|  x
-      #|  !r. (&0 < r) ==> BIJ (u_scale r) (euclid 2) (euclid 2)
+      #|  forall r. (&0 < r) ==> BIJ (u_scale r) (euclid 2) (euclid 2)
       #|  x
       #|  h_translate (--. r) x
       #|  euclid 2
       #|  euclid 2
       #|  h_translate r
-      #|  !r x. (euclid 2 x) ==>\n   (h_translate (--. r) x = INV (h_translate r) (euclid 2) (euclid 2) x)
+      #|  forall r x. (euclid 2 x) ==>\n   (h_translate (--. r) x = INV (h_translate r) (euclid 2) (euclid 2) x)
       #|  x
       #|  v_translate (--. r) x
       #|  euclid 2
       #|  euclid 2
       #|  v_translate r
-      #|  !r x. (euclid 2 x) ==>\n   (v_translate (--. r) x = INV (v_translate r) (euclid 2) (euclid 2) x)
+      #|  forall r x. (euclid 2 x) ==>\n   (v_translate (--. r) x = INV (v_translate r) (euclid 2) (euclid 2) x)
       #|  (r * &1/r) * x = &1 * x
-      #|  !x r. (&0 < r) ==> (r * (&1/r) * x = x)
-      #|  !r. (&0 < r) ==> (&0 < &1 / r)
-      #|  !x y. &0 <= x pow 2 + y pow 2
+      #|  forall x r. (&0 < r) ==> (r * (&1/r) * x = x)
+      #|  forall r. (&0 < r) ==> (&0 < &1 / r)
+      #|  forall x y. &0 <= x pow 2 + y pow 2
       #|  &0 < (&1 / r) * FST p
       #|  &0 < FST p
       #|  x
@@ -70202,7 +70202,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2
       #|  euclid 2
       #|  r_scale r
-      #|  !r x. (&0 < r) /\\ (euclid 2 x) ==>\n   (r_scale (&1/r) x = INV (r_scale r) (euclid 2) (euclid 2) x)
+      #|  forall r x. (&0 < r) /\\ (euclid 2 x) ==>\n   (r_scale (&1/r) x = INV (r_scale r) (euclid 2) (euclid 2) x)
       #|  &0 < (&1 / r) * SND  p
       #|  &0 < SND p
       #|  x
@@ -70212,8 +70212,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2
       #|  euclid 2
       #|  u_scale r
-      #|  !r x. (&0 < r) /\\ (euclid 2 x) ==>\n   (u_scale (&1/r) x = INV (u_scale r) (euclid 2) (euclid 2) x)
-      #|  !f. (IMAGE f (euclid 2) SUBSET (euclid 2) ==>\n     (continuous f top2 top2 =\n         metric_continuous f (euclid 2,d_euclid) (euclid 2,d_euclid)))
+      #|  forall r x. (&0 < r) /\\ (euclid 2 x) ==>\n   (u_scale (&1/r) x = INV (u_scale r) (euclid 2) (euclid 2) x)
+      #|  forall f. (IMAGE f (euclid 2) SUBSET (euclid 2) ==>\n     (continuous f top2 top2 =\n         metric_continuous f (euclid 2,d_euclid) (euclid 2,d_euclid)))
       #|  r *# e1
       #|  y
       #|  x
@@ -70221,7 +70221,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon
       #|  r
       #|  h_translate r
-      #|  !r. continuous (h_translate r) (top2) (top2)
+      #|  forall r. continuous (h_translate r) (top2) (top2)
       #|  r *# e2
       #|  y
       #|  x
@@ -70229,7 +70229,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  epsilon
       #|  r
       #|  v_translate r
-      #|  !r. continuous (v_translate r) (top2) (top2)
+      #|  forall r. continuous (v_translate r) (top2) (top2)
       #|  -- x -  v = -- (v + x)
       #|  FST p' = -- u
       #|  u = --. (FST p')
@@ -70247,9 +70247,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  &0 < x==> &0 <= x
       #|  abs  (r*x' + y') = r*x' + y'
-      #|  !x y. (&0 <= x) /\\ (&0 <= y) ==> ((r*x + y) pow 2 <= ((&1 + r) pow 2) * ((x + y) pow 2))
-      #|  !x y. (&1 pow 2) *((x - y) pow 2) <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
-      #|  !x y. (r*x - r*y) pow 2 <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
+      #|  forall x y. (&0 <= x) /\\ (&0 <= y) ==> ((r*x + y) pow 2 <= ((&1 + r) pow 2) * ((x + y) pow 2))
+      #|  forall x y. (&1 pow 2) *((x - y) pow 2) <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
+      #|  forall x y. (r*x - r*y) pow 2 <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
       #|  x
       #|  y
       #|  epsilon
@@ -70260,7 +70260,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  r_scale r
       #|  &0 < (&1 + r)
-      #|  !r. (&0 < r) ==> (continuous (r_scale r) top2 top2)
+      #|  forall r. (&0 < r) ==> (continuous (r_scale r) top2 top2)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -70726,9 +70726,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  &0 < x==> &0 <= x
       #|  abs  (r*x' + y') = r*x' + y'
-      #|  !x y. (&0 <= x) /\\ (&0 <= y) ==> ((r*x + y) pow 2 <= ((&1 + r) pow 2) * ((x + y) pow 2))
-      #|  !x y. (&1 pow 2) *((x - y) pow 2) <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
-      #|  !x y. (r*x - r*y) pow 2 <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
+      #|  forall x y. (&0 <= x) /\\ (&0 <= y) ==> ((r*x + y) pow 2 <= ((&1 + r) pow 2) * ((x + y) pow 2))
+      #|  forall x y. (&1 pow 2) *((x - y) pow 2) <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
+      #|  forall x y. (r*x - r*y) pow 2 <= ((&1 + r) pow 2 ) * ((x - y) pow 2)
       #|  x
       #|  y
       #|  epsilon
@@ -70739,7 +70739,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  u_scale r
       #|  &0 < (&1 + r)
-      #|  !r. (&0 < r) ==> (continuous (u_scale r) top2 top2)
+      #|  forall r. (&0 < r) ==> (continuous (u_scale r) top2 top2)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -71189,15 +71189,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ( <=. ) 
       #|  ( *. )
       #|  h_translate (-- r)
-      #|  !r. (homeomorphism (h_translate r) top2 top2)
+      #|  forall r. (homeomorphism (h_translate r) top2 top2)
       #|  v_translate (-- r)
-      #|  !r. (homeomorphism (v_translate r) top2 top2)
+      #|  forall r. (homeomorphism (v_translate r) top2 top2)
       #|  &0 < &1/r
       #|  r_scale (&1/r)
-      #|  !r. (&0 < r) ==> (homeomorphism (r_scale r) top2 top2)
+      #|  forall r. (&0 < r) ==> (homeomorphism (r_scale r) top2 top2)
       #|  &0 < &1/r
       #|  u_scale (&1/r)
-      #|  !r. (&0 < r) ==> (homeomorphism (u_scale r) top2 top2)
+      #|  forall r. (&0 < r) ==> (homeomorphism (u_scale r) top2 top2)
       #|  t
       #|  y = FST y,SND y
       #|  x = FST x,SND x
@@ -71207,28 +71207,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t
       #|  x''
       #|  x'
-      #|  !r. (h_compat (h_translate r))
-      #|  TAGB
-      #|  TAGB
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  TAGB
-      #|  TAGB
-      #|  mark_term:A->A
-      #|  mark_term:A->A
-      #|  TAGB
-      #|  TAGB
-      #|  TAGB
-      #|  t
-      #|  y = FST y,SND y
-      #|  x = FST x,SND x
-      #|  x'
-      #|  y = FST y,SND y
-      #|  x = FST x,SND x
-      #|  t
-      #|  x''
-      #|  x'
-      #|  !r. (v_compat (v_translate r))
+      #|  forall r. (h_compat (h_translate r))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71249,7 +71228,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t
       #|  x''
       #|  x'
-      #|  !r. (v_compat (h_translate r))
+      #|  forall r. (v_compat (v_translate r))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71270,7 +71249,28 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t
       #|  x''
       #|  x'
-      #|  !r. (h_compat (v_translate r))
+      #|  forall r. (v_compat (h_translate r))
+      #|  TAGB
+      #|  TAGB
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  TAGB
+      #|  TAGB
+      #|  mark_term:A->A
+      #|  mark_term:A->A
+      #|  TAGB
+      #|  TAGB
+      #|  TAGB
+      #|  t
+      #|  y = FST y,SND y
+      #|  x = FST x,SND x
+      #|  x'
+      #|  y = FST y,SND y
+      #|  x = FST x,SND x
+      #|  t
+      #|  x''
+      #|  x'
+      #|  forall r. (h_compat (v_translate r))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71283,8 +71283,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  a/c
-      #|  !a  c. ~(c = &0) ==> (?t. c*t = a)
-      #|  !x. mk_line x x = {x}
+      #|  forall a  c. ~(c = &0) ==> (?t. c*t = a)
+      #|  forall x. mk_line x x = {x}
       #|  f (point x')
       #|  x'
       #|  x' = FST x',SND x'
@@ -71313,10 +71313,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  x'
       #|  euclid 2 (f (point x'))
-      #|  !x. f (point x) = (point ( (f (point x)) 0, t + SND x ))
+      #|  forall x. f (point x) = (point ( (f (point x)) 0, t + SND x ))
       #|  point y
       #|  x = y
-      #|  !f t. (BIJ f (euclid 2) (euclid 2) /\\\n          (!x. f (point x) 1 = t + SND x) ==>\n    h_compat f)
+      #|  forall f t. (BIJ f (euclid 2) (euclid 2) /\\\n          (forall x. f (point x) 1 = t + SND x) ==>\n    h_compat f)
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71329,7 +71329,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  &0
-      #|  !r. (&0 < r) ==> (h_compat (r_scale r))
+      #|  forall r. (&0 < r) ==> (h_compat (r_scale r))
       #|  SND y = SND x'
       #|  f (point x')
       #|  x'
@@ -71359,10 +71359,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  x'
       #|  euclid 2 (f (point x'))
-      #|  !x. f (point x) = (point ( (f (point x)) 0, s(SND x) ))
+      #|  forall x. f (point x) = (point ( (f (point x)) 0, s(SND x) ))
       #|  point y
       #|  x = y
-      #|  !f s. (BIJ f (euclid 2) (euclid 2) /\\\n          (!x. f (point x) 1 = s(SND x)) /\\ (INJ s UNIV UNIV) ==>\n    h_compat f)
+      #|  forall f s. (BIJ f (euclid 2) (euclid 2) /\\\n          (forall x. f (point x) 1 = s(SND x)) /\\ (INJ s UNIV UNIV) ==>\n    h_compat f)
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71379,7 +71379,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x = FST x, SND x
       #|  &0 < SND x
       #|  (\\ z. if (&0 < z) then (r*z) else z)
-      #|  !r. (&0 < r) ==> (h_compat (u_scale r))
+      #|  forall r. (&0 < r) ==> (h_compat (u_scale r))
       #|  FST  y = FST  x'
       #|  f (point x')
       #|  x'
@@ -71410,10 +71410,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  x'
       #|  euclid 2 (f (point x'))
-      #|  !x. f (point x) = point(s(FST x),  (f (point x)) 1 )
+      #|  forall x. f (point x) = point(s(FST x),  (f (point x)) 1 )
       #|  point y
       #|  x = y
-      #|  !f s. (BIJ f (euclid 2) (euclid 2) /\\\n          (!x. f (point x) 0 = s(FST  x)) /\\ (INJ s UNIV UNIV) ==>\n    v_compat f)
+      #|  forall f s. (BIJ f (euclid 2) (euclid 2) /\\\n          (forall x. f (point x) 0 = s(FST  x)) /\\ (INJ s UNIV UNIV) ==>\n    v_compat f)
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -71430,33 +71430,33 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x = FST x, SND x
       #|  &0 < FST  x
       #|  (\\ z. if (&0 < z) then (r*z) else z)
-      #|  !r. (&0 < r) ==> (v_compat (r_scale r))
+      #|  forall r. (&0 < r) ==> (v_compat (r_scale r))
       #|  (\\ z.  &0 + z)
-      #|  !r. (&0 < r) ==> (v_compat (u_scale r))
+      #|  forall r. (&0 < r) ==> (v_compat (u_scale r))
       #|  y
       #|  x
-      #|  !A B. (A = B) ==> (A SUBSET (B:A->bool))
+      #|  forall A B. (A = B) ==> (A SUBSET (B:A->bool))
       #|  y
       #|  x = y
-      #|  !x y. (FST x = FST y) ==> (mk_line (point x) (point y) SUBSET\n    hyperplane 2 e1 (FST x))
+      #|  forall x y. (FST x = FST y) ==> (mk_line (point x) (point y) SUBSET\n    hyperplane 2 e1 (FST x))
       #|  y
       #|  x
-      #|  !A B. (A = B) ==> (A SUBSET (B:A->bool))
+      #|  forall A B. (A = B) ==> (A SUBSET (B:A->bool))
       #|  y
       #|  x = y
-      #|  !x y. (SND x = SND y) ==> (mk_line (point x) (point y) SUBSET\n    hyperplane 2 e2 (SND x))
+      #|  forall x y. (SND x = SND y) ==> (mk_line (point x) (point y) SUBSET\n    hyperplane 2 e2 (SND x))
       #|  SND x
       #|  FST y
       #|  e
-      #|  !E e. hv_line E /\\ E e ==> (?z.\n     (e SUBSET hyperplane 2 e1 z) \\/ (e SUBSET  hyperplane 2 e2 z))
+      #|  forall E e. hv_line E /\\ E e ==> (?z.\n     (e SUBSET hyperplane 2 e1 z) \\/ (e SUBSET  hyperplane 2 e2 z))
       #|  u
       #|  IMAGE h E
       #|  z
       #|  z
       #|  e
       #|  E
-      #|  !e. ?h. (E e ==> (e SUBSET h /\\ (?z. (h = hyperplane 2 e1 z) \\/ (h =  hyperplane 2 e2 z))))
-      #|  !E. hv_line E /\\ FINITE E ==> (?E'.\n   (UNIONS E SUBSET UNIONS E') /\\ (FINITE E') /\\\n   (!e. E' e ==>\n     (?z. (e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z))))
+      #|  forall e. ?h. (E e ==> (e SUBSET h /\\ (?z. (h = hyperplane 2 e1 z) \\/ (h =  hyperplane 2 e2 z))))
+      #|  forall E. hv_line E /\\ FINITE E ==> (?E'.\n   (UNIONS E SUBSET UNIONS E') /\\ (FINITE E') /\\\n   (forall e. E' e ==>\n     (?z. (e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z))))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -71467,11 +71467,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t). FINITE(graph_edge G) /\\\n    graph_isomorphic G H ==> FINITE (graph_edge H)
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t). FINITE(graph_vertex G) /\\\n    graph_isomorphic G H ==> FINITE (graph_vertex H)
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t). FINITE(graph_edge G) /\\\n    graph_isomorphic G H ==> FINITE (graph_edge H)
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t). FINITE(graph_vertex G) /\\\n    graph_isomorphic G H ==> FINITE (graph_vertex H)
       #|  v u'
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t). ~(graph_edge G = EMPTY ) /\\\n    graph_isomorphic G H ==> ~(graph_edge H  = EMPTY )
-      #|  !(G:(A,B)graph_t) v.\n        (FINITE (graph_edge G)) ==> (FINITE (graph_edge_around G v))
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t). ~(graph_edge G = EMPTY ) /\\\n    graph_isomorphic G H ==> ~(graph_edge H  = EMPTY )
+      #|  forall(G:(A,B)graph_t) v.\n        (FINITE (graph_edge G)) ==> (FINITE (graph_edge_around G v))
       #|  0 <=| 4
       #|  (graph_edge_around G v')
       #|  SND f
@@ -71482,7 +71482,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v
       #|  ?v'. (graph_vertex G v' /\\ ((FST f) v' = v))
       #|  graph_vertex H v
-      #|  !(G:(A,B)graph_t) (H:(A',B')graph_t). (graph G) /\\\n        (FINITE (graph_edge G)) /\\\n        (!v. CARD (graph_edge_around G v) <=| 4)  /\\\n    graph_isomorphic G H ==> (!v. CARD (graph_edge_around H v) <=| 4)
+      #|  forall(G:(A,B)graph_t) (H:(A',B')graph_t). (graph G) /\\\n        (FINITE (graph_edge G)) /\\\n        (forall v. CARD (graph_edge_around G v) <=| 4)  /\\\n    graph_isomorphic G H ==> (forall v. CARD (graph_edge_around H v) <=| 4)
       #|  x
       #|  u
       #|  C
@@ -71501,12 +71501,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E'
       #|  E e
       #|  e
-      #|  ?E'. !e. (graph_edge H e ==> (e SUBSET UNIONS (E' e)) /\\ (FINITE (E' e)) /\\ (!e'. E' e e' ==> (?z. (e' = hyperplane 2 e1 z) \\/ (e' = hyperplane 2 e2 z))))
+      #|  ?E'. forall e. (graph_edge H e ==> (e SUBSET UNIONS (E' e)) /\\ (FINITE (E' e)) /\\ (forall e'. E' e e' ==> (?z. (e' = hyperplane 2 e1 z) \\/ (e' = hyperplane 2 e2 z))))
       #|  B = IMAGE (\\ v. hyperplane 2 e2 (v 1)) (graph_vertex H)
       #|  A = IMAGE (\\ v. hyperplane 2 e1 (v 0)) (graph_vertex H)
       #|  H
       #|  G
-      #|  !(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H E. graph_isomorphic G H /\\\n           (FINITE E) /\\ (good_plane_graph H) /\\\n        (!e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n        (!v. (graph_vertex H v ==>\n         E (hyperplane 2 e1 (v 0)) /\\ E (hyperplane 2 e2 (v 1)))) /\\\n         (!e. (E e ==>\n            (?z. (e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z)))))
+      #|  forall(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H E. graph_isomorphic G H /\\\n           (FINITE E) /\\ (good_plane_graph H) /\\\n        (forall e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n        (forall v. (graph_vertex H v ==>\n         E (hyperplane 2 e1 (v 0)) /\\ E (hyperplane 2 e2 (v 1)))) /\\\n         (forall e. (E e ==>\n            (?z. (e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z)))))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -71518,16 +71518,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !u v r. (h_translate r (point (u,v)) = point (u+r,v))
-      #|  !u v r. (v_translate r (point (u,v)) = point (u,v + r))
+      #|  forall u v r. (h_translate r (point (u,v)) = point (u+r,v))
+      #|  forall u v r. (v_translate r (point (u,v)) = point (u,v + r))
       #|  z, &1
       #|  z, &0
       #|  (h_translate r)
-      #|  !z r. (IMAGE (h_translate r) (hyperplane 2 e1 z) =\n            (hyperplane 2 e1 (z + r)))
+      #|  forall z r. (IMAGE (h_translate r) (hyperplane 2 e1 z) =\n            (hyperplane 2 e1 (z + r)))
       #|   &1,z
       #|   &0,z
       #|  (h_translate r)
-      #|  !z r. (IMAGE (h_translate r) (hyperplane 2 e2 z) =\n            (hyperplane 2 e2 z))
+      #|  forall z r. (IMAGE (h_translate r) (hyperplane 2 e2 z) =\n            (hyperplane 2 e2 z))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -71539,11 +71539,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &1,z
       #|  &0,z
       #|  (v_translate r)
-      #|  !z r. (IMAGE (v_translate r) (hyperplane 2 e2 z) =\n            (hyperplane 2 e2 (z + r)))
+      #|  forall z r. (IMAGE (v_translate r) (hyperplane 2 e2 z) =\n            (hyperplane 2 e2 (z + r)))
       #|  z,&1
       #|   z,&0
       #|  (v_translate r)
-      #|  !z r. (IMAGE (v_translate r) (hyperplane 2 e1 z) =\n            (hyperplane 2 e1 z))
+      #|  forall z r. (IMAGE (v_translate r) (hyperplane 2 e1 z) =\n            (hyperplane 2 e1 z))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -71553,16 +71553,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  mark_term:A->A
       #|  TAGB
       #|  &0  < u
-      #|  !r u v. (r_scale r (point (u,v))) =\n  point ((if (&0 < u) then r*u else u),v)
+      #|  forall r u v. (r_scale r (point (u,v))) =\n  point ((if (&0 < u) then r*u else u),v)
       #|  &0  < v
-      #|  !r u v. (u_scale r (point (u,v))) =\n  point (u,(if (&0 < v) then r*v else v))
+      #|  forall r u v. (u_scale r (point (u,v))) =\n  point (u,(if (&0 < v) then r*v else v))
       #|  r * &1 = r
       #|  ~(&0 < &0)
       #|  &1,z
       #|   &0,z
       #|  h_compat(r_scale r)
       #|  (r_scale r)
-      #|  !z r. (&0 < r) ==> (IMAGE (r_scale r) (hyperplane 2 e2 z) =\n             (hyperplane 2 e2 z))
+      #|  forall z r. (&0 < r) ==> (IMAGE (r_scale r) (hyperplane 2 e2 z) =\n             (hyperplane 2 e2 z))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -71575,14 +71575,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z,&0
       #|  v_compat(r_scale r)
       #|  (r_scale r)
-      #|  !z r. (&0 < r) ==> (IMAGE (r_scale r) (hyperplane 2 e1 z) =\n             (hyperplane 2 e1 (if &0 < z then r*z else z)))
+      #|  forall z r. (&0 < r) ==> (IMAGE (r_scale r) (hyperplane 2 e1 z) =\n             (hyperplane 2 e1 (if &0 < z then r*z else z)))
       #|  r * &1 = r
       #|  ~(&0 < &0)
       #|  z,&1
       #|   z,&0
       #|  v_compat(u_scale r)
       #|  (u_scale r)
-      #|  !z r. (&0 < r) ==> (IMAGE (u_scale r) (hyperplane 2 e1 z) =\n             (hyperplane 2 e1 z))
+      #|  forall z r. (&0 < r) ==> (IMAGE (u_scale r) (hyperplane 2 e1 z) =\n             (hyperplane 2 e1 z))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -71595,18 +71595,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0,z
       #|  h_compat(u_scale r)
       #|  (u_scale r)
-      #|  !z r. (&0 < r) ==> (IMAGE (u_scale r) (hyperplane 2 e2 z) =\n             (hyperplane 2 e2 (if &0 < z then r*z else z)))
-      #|  !U V W (f:A->B) (g:B->C). homeomorphism f U V /\\ homeomorphism g V W\n   ==>\n   homeomorphism (g o f) U W
+      #|  forall z r. (&0 < r) ==> (IMAGE (u_scale r) (hyperplane 2 e2 z) =\n             (hyperplane 2 e2 (if &0 < z then r*z else z)))
+      #|  forall U V W (f:A->B) (g:B->C). homeomorphism f U V /\\ homeomorphism g V W\n   ==>\n   homeomorphism (g o f) U W
       #|  (?p. (z,&0 = p) /\\ (FST p = z))
       #|  point(z,&0)
-      #|  !z w. (hyperplane 2 e1 z = hyperplane 2 e1 w) ==> (z = w)
+      #|  forall z w. (hyperplane 2 e1 z = hyperplane 2 e1 w) ==> (z = w)
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
       #|  TAGB
       #|  (?p. (z,z = p) /\\ (SND p = z))
       #|  point(z,z)
-      #|  !z w. (hyperplane 2 e2 z = hyperplane 2 e2 w) ==> (z = w)
+      #|  forall z w. (hyperplane 2 e2 z = hyperplane 2 e2 w) ==> (z = w)
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -71638,9 +71638,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g
       #|  g = IMAGE f
       #|  f
-      #|  !z. IMAGE f (hyperplane 2 e2 z) = hyperplane 2 e2 (z - t + &1)
+      #|  forall z. IMAGE f (hyperplane 2 e2 z) = hyperplane 2 e2 (z - t + &1)
       #|  f
-      #|  !z. IMAGE  f (hyperplane 2 e1 z) = hyperplane 2 e1 (z - t' + &1)
+      #|  forall z. IMAGE  f (hyperplane 2 e1 z) = hyperplane 2 e1 (z - t' + &1)
       #|  plane_graph_image f H
       #|  H
       #|  G
@@ -71668,15 +71668,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  EV = E INTER {h | ?z. (h = hyperplane 2 e2 z) }
       #|  EH = E INTER { h | ?z. (h = hyperplane 2 e1 z) }
       #|  G
-      #|  !(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H E. graph_isomorphic G H /\\\n           (FINITE E) /\\ (good_plane_graph H) /\\\n        (!e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n        (!v. (graph_vertex H v ==>\n         E (hyperplane 2 e1 (v 0)) /\\ E (hyperplane 2 e2 (v 1)))) /\\\n         (!e. (E e ==>\n            (?z. (&0 < z) /\\\n               ((e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z))))))
+      #|  forall(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4)\n         ==> (?H E. graph_isomorphic G H /\\\n           (FINITE E) /\\ (good_plane_graph H) /\\\n        (forall e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n        (forall v. (graph_vertex H v ==>\n         E (hyperplane 2 e1 (v 0)) /\\ E (hyperplane 2 e2 (v 1)))) /\\\n         (forall e. (E e ==>\n            (?z. (&0 < z) /\\\n               ((e = hyperplane 2 e1 z) \\/ (e = hyperplane 2 e2 z))))))
       #|  TAGB
       #|  TAGB
       #|  ~(z' + &1 = z')
       #|  (z,z' + &1)
       #|  (?p. ((z = FST p) /\\ (z' + &1 = SND p)) /\\ (FST p = z))
       #|  point(z, z'+ &1)
-      #|  !z z'. ~(hyperplane 2 e1 z = hyperplane 2 e2 z')
-      #|  !G A S. inductive_set G S /\\\n     ~(S INTER A = EMPTY) /\\\n     segment A /\\ A SUBSET G ==> inductive_set A (S INTER A)
+      #|  forall z z'. ~(hyperplane 2 e1 z = hyperplane 2 e2 z')
+      #|  forall G A S. inductive_set G S /\\\n     ~(S INTER A = EMPTY) /\\\n     segment A /\\ A SUBSET G ==> inductive_set A (S INTER A)
       #|  S e /\\ (A UNION B) e' /\\ adj e e'
       #|  e'
       #|  e = e'
@@ -71686,7 +71686,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?e'. B e' /\\ closure top2 e' (pointI m)
       #|  terminal_edge A m
       #|  ?e. A e /\\ closure top2 e (pointI m)
-      #|  !A B S m. inductive_set (A UNION B) S /\\ (endpoint B m) /\\\n   (FINITE A) /\\ (FINITE B) /\\\n   (endpoint A m) /\\ (A SUBSET S) ==> (~(S INTER B = EMPTY)) 
+      #|  forall A B S m. inductive_set (A UNION B) S /\\ (endpoint B m) /\\\n   (FINITE A) /\\ (FINITE B) /\\\n   (endpoint A m) /\\ (A SUBSET S) ==> (~(S INTER B = EMPTY)) 
       #|  B SUBSET S
       #|  (S INTER B) = B
       #|  S
@@ -71701,7 +71701,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  S
       #|  A
       #|  A UNION B
-      #|  !A B S . ~(S INTER A = EMPTY) /\\ (segment B) /\\ (segment A) /\\\n      (?m. endpoint A m /\\ endpoint B m) /\\\n      (inductive_set (A UNION B) S)  ==>\n    (S = (A UNION B))
+      #|  forall A B S . ~(S INTER A = EMPTY) /\\ (segment B) /\\ (segment A) /\\\n      (?m. endpoint A m /\\ endpoint B m) /\\\n      (inductive_set (A UNION B) S)  ==>\n    (S = (A UNION B))
       #|  ~(S INTER B = EMPTY)
       #|  ~(S INTER A = EMPTY)
       #|  inductive_set (A UNION B) S
@@ -71712,18 +71712,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  num_closure A (pointI m') = 0
       #|  B
       #|  A
-      #|  !m. num_closure(A UNION B) (pointI m) =  num_closure A (pointI m) + num_closure B (pointI m)
+      #|  forall m. num_closure(A UNION B) (pointI m) =  num_closure A (pointI m) + num_closure B (pointI m)
       #|  x
       #|  A x
-      #|  !m'. { C | (A UNION B) C /\\ closure top2 C (pointI m')} = {C | A C /\\ closure top2 C (pointI m')} UNION {C | B C /\\ closure top2 C (pointI m')}
+      #|  forall m'. { C | (A UNION B) C /\\ closure top2 C (pointI m')} = {C | A C /\\ closure top2 C (pointI m')} UNION {C | B C /\\ closure top2 C (pointI m')}
       #|  u
       #|  FINITE A /\\ FINITE B
-      #|  !A B m. segment A /\\ segment B /\\\n     endpoint A m /\\ endpoint B m /\\\n     (A INTER B = EMPTY) /\\\n  (!n. (0 < num_closure A (pointI n)) /\\\n          (0 < num_closure B (pointI n)) ==> (n = m) )\n    ==>\n    segment (A UNION B)
+      #|  forall A B m. segment A /\\ segment B /\\\n     endpoint A m /\\ endpoint B m /\\\n     (A INTER B = EMPTY) /\\\n  (forall n. (0 < num_closure A (pointI n)) /\\\n          (0 < num_closure B (pointI n)) ==> (n = m) )\n    ==>\n    segment (A UNION B)
       #|  (~A ==> B) ==> (A \\/ B)
       #|  C
       #|  psegment C
-      #|  !C p q m. segment C /\\ endpoint C q /\\ endpoint C p /\\ endpoint C m /\\\n     ~(m = p) ==>\n      (q = m) \\/ (q = p)
-      #|  !A B. (A ==>B) /\\ (B ==> A) ==> (A = B)
+      #|  forall C p q m. segment C /\\ endpoint C q /\\ endpoint C p /\\ endpoint C m /\\\n     ~(m = p) ==>\n      (q = m) \\/ (q = p)
+      #|  forall A B. (A ==>B) /\\ (B ==> A) ==> (A = B)
       #|  ~(S INTER B = EMPTY)
       #|  ~(S INTER A = EMPTY)
       #|  inductive_set (A UNION B) S
@@ -71737,44 +71737,44 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  num_closure B (pointI m') = 0
       #|  m'
       #|  num_closure A (pointI m') = 0
-      #|  !x. {0, 2} x <=> {0, 1, 2} x /\\ ~(x = 1)
+      #|  forall x. {0, 2} x <=> {0, 1, 2} x /\\ ~(x = 1)
       #|  m'
       #|  m'
-      #|  !m. (num_closure A (pointI m) = 1) <=> (num_closure B (pointI m) = 1)
+      #|  forall m. (num_closure A (pointI m) = 1) <=> (num_closure B (pointI m) = 1)
       #|  B
-      #|  !q. endpoint B q ==> (q = m) \\/ (q = p)
-      #|  !q. endpoint A q ==> (q = m) \\/ (q = p)
+      #|  forall q. endpoint B q ==> (q = m) \\/ (q = p)
+      #|  forall q. endpoint A q ==> (q = m) \\/ (q = p)
       #|  B
       #|  A
-      #|  !m. num_closure(A UNION B) (pointI m) =  num_closure A (pointI m) + num_closure B (pointI m)
+      #|  forall m. num_closure(A UNION B) (pointI m) =  num_closure A (pointI m) + num_closure B (pointI m)
       #|  x
       #|  A x
-      #|  !m'. { C | (A UNION B) C /\\ closure top2 C (pointI m')} = {C | A C /\\ closure top2 C (pointI m')} UNION {C | B C /\\ closure top2 C (pointI m')}
+      #|  forall m'. { C | (A UNION B) C /\\ closure top2 C (pointI m')} = {C | A C /\\ closure top2 C (pointI m')} UNION {C | B C /\\ closure top2 C (pointI m')}
       #|  u
       #|  FINITE A /\\ FINITE B
-      #|  !A B m p. segment A /\\ segment B /\\ ~(m = p) /\\\n     endpoint A m /\\ endpoint B m /\\\n     endpoint A p /\\ endpoint B p /\\\n     (A INTER B = EMPTY) /\\\n  (!n. (0 < num_closure A (pointI n)) /\\ (0 < num_closure B (pointI n)) <=>\n          (((n = m ) \\/ (n = p) )))\n    ==>\n    rectagon (A UNION B)
+      #|  forall A B m p. segment A /\\ segment B /\\ ~(m = p) /\\\n     endpoint A m /\\ endpoint B m /\\\n     endpoint A p /\\ endpoint B p /\\\n     (A INTER B = EMPTY) /\\\n  (forall n. (0 < num_closure A (pointI n)) /\\ (0 < num_closure B (pointI n)) <=>\n          (((n = m ) \\/ (n = p) )))\n    ==>\n    rectagon (A UNION B)
       #|  CARD (IMAGE f A) = CARD A
-      #|  !(f:A->B) A B. INJ f A B /\\ FINITE B ==> (CARD A <= CARD B)
+      #|  forall(f:A->B) A B. INJ f A B /\\ FINITE B ==> (CARD A <= CARD B)
       #|  IMAGE f A = B
       #|  A
       #|  f
-      #|  !A B (f:A->B). INJ f A B /\\ B HAS_SIZE (CARD A) ==> BIJ f A B
-      #|  !(f:A->B). BIJ f EMPTY EMPTY 
-      #|  !(f:A->B) a b. BIJ f {a} {b} <=> (f a = b)
+      #|  forall A B (f:A->B). INJ f A B /\\ B HAS_SIZE (CARD A) ==> BIJ f A B
+      #|  forall(f:A->B). BIJ f EMPTY EMPTY 
+      #|  forall(f:A->B) a b. BIJ f {a} {b} <=> (f a = b)
       #|  CARD {a}
       #|  EMPTY:A->bool
       #|  a
-      #|  !(a:A). (CARD {a} = 1)
-      #|  !(a:A). {a,a} = {a}
+      #|  forall(a:A). (CARD {a} = 1)
+      #|  forall(a:A). {a,a} = {a}
       #|  a
       #|  b
-      #|  !(a:A) b. {a,b} HAS_SIZE 2 ==> ~(a = b)
+      #|  forall(a:A) b. {a,b} HAS_SIZE 2 ==> ~(a = b)
       #|  a'
       #|  b'
       #|  x
       #|  X
-      #|  !X (a:A) b. X HAS_SIZE 2 /\\ X SUBSET {a,b} ==> (X = {a,b})
-      #|  !t t' s (f:A->B). INJ f s t /\\ t SUBSET t' ==> INJ f s t'
+      #|  forall X (a:A) b. X HAS_SIZE 2 /\\ X SUBSET {a,b} ==> (X = {a,b})
+      #|  forall t t' s (f:A->B). INJ f s t /\\ t SUBSET t' ==> INJ f s t'
       #|  y
       #|  b'''
       #|  b'''
@@ -71818,15 +71818,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  m
       #|  e
       #|  terminal_edge E b
-      #|  !e. (adj (terminal_edge E b) e /\\ (E e) ==> (closure top2 e (pointI x)))
+      #|  forall e. (adj (terminal_edge E b) e /\\ (E e) ==> (closure top2 e (pointI x)))
       #|  b'
       #|  a
       #|  (b = b') \\/ (b = a)
-      #|  ?x. !y. (closure top2 (terminal_edge E b) (pointI y) <=> ((y = x) \\/ (y = b)))
+      #|  ?x. forall y. (closure top2 (terminal_edge E b) (pointI y) <=> ((y = x) \\/ (y = b)))
       #|  terminal_edge E b
       #|  b
       #|  E
-      #|  !E b. segment E /\\ endpoint E b /\\ ~(SING E) ==>\n    (?!e.  E e /\\ adj (terminal_edge E b) e )
+      #|  forall E b. segment E /\\ endpoint E b /\\ ~(SING E) ==>\n    (?!e.  E e /\\ adj (terminal_edge E b) e )
       #|  TAGB
       #|  g
       #|  (j = n) \\/ (j <| n)
@@ -71842,12 +71842,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e'
       #|  E (g i'')
       #|  g (i'')
-      #|  !i'. (i' <| n) ==> (adj e (g i') = (e' = (g i')))
+      #|  forall i'. (i' <| n) ==> (adj e (g i') = (e' = (g i')))
       #|  CARD E
       #|  b
       #|  E
       #|  ( i' = n) \\/ (i' <| n)
-      #|  !i. (i <| SUC n) ==> (adj (g n) (g i) = (SUC i = n))
+      #|  forall i. (i <| SUC n) ==> (adj (g n) (g i) = (SUC i = n))
       #|  b'
       #|  E'
       #|  b
@@ -71896,7 +71896,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g
       #|  g n = e
       #|  g
-      #|  !i. (i <| n) ==> (g i = f i)
+      #|  forall i. (i <| n) ==> (g i = f i)
       #|  g = (\\ i.  if (i <| n) then f i else e)
       #|  b'
       #|  a
@@ -71954,12 +71954,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  { p | p < 0} = EMPTY
       #|  f
       #|  f = (\\ (x:num). terminal_edge E a)
-      #|  !n. !E a b. psegment E /\\ (CARD E = n) /\\ (endpoint E a) /\\\n    (endpoint E b) /\\ ~(a = b) ==>\n    (?f. (BIJ f { p | p < n} E) /\\ (f 0 = terminal_edge E a) /\\\n      ((0 < n) ==> (f (n - 1) = terminal_edge E b)) /\\\n      (!i j. (i < CARD E /\\ j < CARD E) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
+      #|  forall n. forall E a b. psegment E /\\ (CARD E = n) /\\ (endpoint E a) /\\\n    (endpoint E b) /\\ ~(a = b) ==>\n    (?f. (BIJ f { p | p < n} E) /\\ (f 0 = terminal_edge E a) /\\\n      ((0 < n) ==> (f (n - 1) = terminal_edge E b)) /\\\n      (forall i j. (i < CARD E /\\ j < CARD E) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
       #|  b
       #|  a
       #|  E
       #|  CARD E
-      #|  !E a b. psegment E /\\ (endpoint E a) /\\\n    (endpoint E b) /\\ ~(a = b) ==>\n    (?f. (BIJ f { p | p < CARD E} E) /\\ (f 0 = terminal_edge E a) /\\\n      ((0 < CARD E) ==> (f (CARD E - 1) = terminal_edge E b)) /\\\n      (!i j. (i < CARD E /\\ j < CARD E) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
+      #|  forall E a b. psegment E /\\ (endpoint E a) /\\\n    (endpoint E b) /\\ ~(a = b) ==>\n    (?f. (BIJ f { p | p < CARD E} E) /\\ (f 0 = terminal_edge E a) /\\\n      ((0 < CARD E) ==> (f (CARD E - 1) = terminal_edge E b)) /\\\n      (forall i j. (i < CARD E /\\ j < CARD E) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
       #|  f
       #|  n
       #|  m
@@ -71968,7 +71968,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a
       #|  ?n. (endpoint A n) /\\ ~(m = n)
       #|  A
-      #|  !A m. psegment A /\\ endpoint A m  ==>\n    (?f. BIJ f {p | p < CARD A} A /\\\n        (f 0 = terminal_edge A m) /\\\n        (!i j. (i < CARD A /\\ j < CARD A) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
+      #|  forall A m. psegment A /\\ endpoint A m  ==>\n    (?f. BIJ f {p | p < CARD A} A /\\\n        (f 0 = terminal_edge A m) /\\\n        (forall i j. (i < CARD A /\\ j < CARD A) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))))
       #|  x'
       #|  X
       #|  E
@@ -71978,7 +71978,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(n' = 0)
       #|  n' - 1
       #|  Z
-      #|  ?n. Z n /\\ (!m. m <| n ==> ~Z m)
+      #|  ?n. Z n /\\ (forall m. m <| n ==> ~Z m)
       #|  Z = ({p | p <| n} DIFF X)
       #|  X
       #|  X = { p | p <| n }
@@ -71989,7 +71989,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i - 1
       #|  ?j. SUC j = i
       #|  i = 0
-      #|  (?i. X i /\\ (!m. m <| i ==> ~X m))
+      #|  (?i. X i /\\ (forall m. m <| i ==> ~X m))
       #|  X
       #|  S (f k)
       #|  X
@@ -72000,7 +72000,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  X
       #|  S (f j)
       #|  j = k
-      #|  !j k. X j /\\ (k <| n) /\\ ((SUC j = k) \\/ (SUC k = j)) ==> (X k)
+      #|  forall j k. X j /\\ (k <| n) /\\ ((SUC j = k) \\/ (SUC k = j)) ==> (X k)
       #|  X
       #|  i
       #|  EMPTY
@@ -72025,7 +72025,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E e' /\\ closure top2 e' (pointI m') /\\ ~(e = e')
       #|  e
       #|  E
-      #|  !e. (E e ==> ?i. (i <| n) /\\ (e = f i))
+      #|  forall e. (E e ==> ?i. (i <| n) /\\ (e = f i))
       #|  e'
       #|  pointI r
       #|  j
@@ -72074,7 +72074,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  FINITE E
       #|  E = IMAGE f {p | p <| n}
-      #|  !f n. (INJ f { p | p < n} (edge)) /\\ (0 < n) /\\\n     (!i j. (i < n /\\ j < n) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))) ==>\n    (psegment (IMAGE f { p | p < n}))
+      #|  forall f n. (INJ f { p | p < n} (edge)) /\\ (0 < n) /\\\n     (forall i j. (i < n /\\ j < n) ==>\n             (adj (f i) (f j) = ((SUC i = j) \\/ (SUC j = i)   ))) ==>\n    (psegment (IMAGE f { p | p < n}))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -72092,7 +72092,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  b
       #|  x
       #|  G
-      #|  !G. rectagon G ==> ~SING G
+      #|  forall G. rectagon G ==> ~SING G
       #|  TAGB
       #|  e'
       #|  pointI m
@@ -72129,9 +72129,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  Tx
       #|  S
       #|  ~(Tx = EMPTY)
-      #|  Tx = { A | ~(A = EMPTY) /\\ A SUBSET S /\\ (!m. {0,2} (num_closure A (pointI m))) }
-      #|  !G S. rectagon G /\\ S SUBSET G /\\ ~(S = EMPTY) /\\\n    (!m. {0,2} (num_closure S (pointI m))) ==> (S = G)
-      #|  !X Y m. (closure top2 X (pointI m) /\\ closure top2 Y (pointI m) /\\\n      ~(X = Y) ==> adj X Y)
+      #|  Tx = { A | ~(A = EMPTY) /\\ A SUBSET S /\\ (forall m. {0,2} (num_closure A (pointI m))) }
+      #|  forall G S. rectagon G /\\ S SUBSET G /\\ ~(S = EMPTY) /\\\n    (forall m. {0,2} (num_closure S (pointI m))) ==> (S = G)
+      #|  forall X Y m. (closure top2 X (pointI m) /\\ closure top2 Y (pointI m) /\\\n      ~(X = Y) ==> adj X Y)
       #|  e
       #|  e'
       #|  x
@@ -72143,13 +72143,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI x
       #|  S
       #|  FINITE S
-      #|  !G S. FINITE G /\\ inductive_set G S ==>\n     (endpoint S SUBSET endpoint G)
+      #|  forall G S. FINITE G /\\ inductive_set G S ==>\n     (endpoint S SUBSET endpoint G)
       #|  e
       #|  e'
       #|  e = e'
       #|  pointI x
       #|  {e}
-      #|  !e. (edge e) ==> (endpoint {e} = {m | closure top2 e (pointI m)})
+      #|  forall e. (edge e) ==> (endpoint {e} = {m | closure top2 e (pointI m)})
       #|  e'
       #|  e' =b
       #|  e' = a
@@ -72232,7 +72232,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  A
       #|  x
-      #|  !A x. (A SUBSET E) /\\ (num_closure A (pointI x) = 1) ==> (num_closure E (pointI x) = 2)
+      #|  forall A x. (A SUBSET E) /\\ (num_closure A (pointI x) = 1) ==> (num_closure E (pointI x) = 2)
       #|  m
       #|  S' = e INSERT S
       #|  ~(num_closure (e INSERT S) (pointI m) = 1)
@@ -72255,7 +72255,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  E DELETE e
       #|  A /\\ B ==> B /\\ A
-      #|  !E e. (rectagon E) /\\ (E e) ==> (psegment (E DELETE e))
+      #|  forall E e. (rectagon E) /\\ (E e) ==> (psegment (E DELETE e))
       #|  f
       #|  m
       #|  E DELETE e
@@ -72307,7 +72307,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  FINITE (E DELETE e)
       #|  FINITE E
-      #|  !E e f. (rectagon E) /\\ E e /\\ E f ==>\n         (adj e f <=>\n    (?a. endpoint (E DELETE e) a /\\ (f = terminal_edge (E DELETE e) a)))
+      #|  forall E e f. (rectagon E) /\\ E e /\\ E f ==>\n         (adj e f <=>\n    (?a. endpoint (E DELETE e) a /\\ (f = terminal_edge (E DELETE e) a)))
       #|  pointI m
       #|  E
       #|  e''
@@ -72316,7 +72316,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  a
       #|  b
-      #|  ?c. (E c /\\ ~(c = e) /\\ closure top2 c (pointI m)) /\\ (!e'. E e' /\\ closure top2 e' (pointI m) <=> (e' = e) \\/ (e' = c))
+      #|  ?c. (E c /\\ ~(c = e) /\\ closure top2 c (pointI m)) /\\ (forall e'. E e' /\\ closure top2 e' (pointI m) <=> (e' = e) \\/ (e' = c))
       #|  (e = a) \\/ (e = b)
       #|  pointI m
       #|  E
@@ -72325,7 +72325,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E DELETE e
       #|  FINITE (E DELETE e)
       #|  FINITE E
-      #|  !E e m. rectagon E /\\ E e /\\ closure top2 e (pointI m) ==>\n       endpoint (E DELETE e ) m
+      #|  forall E e m. rectagon E /\\ E e /\\ closure top2 e (pointI m) ==>\n       endpoint (E DELETE e ) m
       #|  j
       #|  i
       #|  i < CARD E - 1 /\\ j < CARD E - 1
@@ -72360,13 +72360,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g j'
       #|  e
       #|  E
-      #|  !j. (j <| CARD E - 1) ==> (adj e (g j) <=> (j = 0) \\/ (j = CARD E - 2))
+      #|  forall j. (j <| CARD E - 1) ==> (adj e (g j) <=> (j = 0) \\/ (j = CARD E - 2))
       #|  k
       #|  m
       #|  n
       #|  endpoint(E DELETE e)
       #|  E DELETE e
-      #|  !k. endpoint (E DELETE e) k  ==> (k = n) \\/ (k = m)
+      #|  forall k. endpoint (E DELETE e) k  ==> (k = n) \\/ (k = m)
       #|  CARD (E DELETE e) - 1 = CARD E - 2
       #|  m
       #|  E DELETE e
@@ -72391,7 +72391,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {p | p < CARD E - 1} UNION {(CARD E - 1)} = {p | p <| CARD E}
       #|  g
       #|  g
-      #|  (!i. (i < CARD E -| 1) ==> (g i = f i))
+      #|  (forall i. (i < CARD E -| 1) ==> (g i = f i))
       #|  ~(x <| x)
       #|  g
       #|  (g (CARD E - 1) = e)
@@ -72414,7 +72414,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FINITE E
       #|  e
       #|  E
-      #|  !E e m. rectagon E /\\ E e /\\ closure top2 e (pointI m) ==>\n     (?f. BIJ f { p | p < CARD E } E /\\\n         (f (CARD E - 1) = e) /\\ (closure top2 (f 0) (pointI m)) /\\\n      (!i j. (i < CARD E /\\ j < CARD E) ==>\n            (adj (f i) (f j) <=> ((SUC i = j) \\/ (SUC j = i) \\/\n   ((i = 0) /\\ (j = (CARD E -1))) \\/ ((i = CARD E -1) /\\ (j = 0))))))
+      #|  forall E e m. rectagon E /\\ E e /\\ closure top2 e (pointI m) ==>\n     (?f. BIJ f { p | p < CARD E } E /\\\n         (f (CARD E - 1) = e) /\\ (closure top2 (f 0) (pointI m)) /\\\n      (forall i j. (i < CARD E /\\ j < CARD E) ==>\n            (adj (f i) (f j) <=> ((SUC i = j) \\/ (SUC j = i) \\/\n   ((i = 0) /\\ (j = (CARD E -1))) \\/ ((i = CARD E -1) /\\ (j = 0))))))
       #|  (SUC(i + m) = (j +| m)) <=> (SUC i = j)
       #|  j +| m
       #|  i +| m
@@ -72430,34 +72430,34 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  IMAGE f {p | m <=| p /\\ p < n} = IMAGE g {p | p < n - m}
       #|  g = \\ (i: num). f (i + m)
-      #|  ! f m n.\n     INJ f { p | m <= p /\\ p < n} edge /\\\n       m <| n /\\\n       (! i j. m <= i /\\ i < n /\\ m <= j /\\ j < n ==>\n         (adj (f i) (f j) <=> (SUC i = j) \\/ (SUC j = i))) ==>\n      psegment (IMAGE f {p | m <= p /\\ p < n})
+      #|  forall f m n.\n     INJ f { p | m <= p /\\ p < n} edge /\\\n       m <| n /\\\n       (forall i j. m <= i /\\ i < n /\\ m <= j /\\ j < n ==>\n         (adj (f i) (f j) <=> (SUC i = j) \\/ (SUC j = i))) ==>\n      psegment (IMAGE f {p | m <= p /\\ p < n})
       #|  cls E = {m | ?e. E e /\\ closure top2 e (pointI m)}
-      #|  !e. (cls {e} = {m | closure top2 e (pointI m)})
+      #|  forall e. (cls {e} = {m | closure top2 e (pointI m)})
       #|  (FST m, SND n)
       #|  m
       #|  FST n
       #|  m
-      #|  !m n. (cls {(v_edge m)} = cls {(v_edge n)}) ==> (m = n)
+      #|  forall m n. (cls {(v_edge m)} = cls {(v_edge n)}) ==> (m = n)
       #|  (FST n, SND m)
       #|  m
       #|  SND  n
       #|  m
       #|  a /\\ b ==> b /\\ a
-      #|  !m n. (cls {(h_edge m)} = cls {(h_edge n)}) ==> (m = n)
+      #|  forall m n. (cls {(h_edge m)} = cls {(h_edge n)}) ==> (m = n)
       #|  SND m
       #|  SND n = SND m
       #|  (FST n, SND n +: &:1)
       #|  n
-      #|  !m n. ~(cls {(h_edge m)} = cls {(v_edge n)})
-      #|  !e f . (edge e /\\ edge f /\\ (cls {e} = cls {f}) ==> (e = f))
+      #|  forall m n. ~(cls {(h_edge m)} = cls {(v_edge n)})
+      #|  forall e f . (edge e /\\ edge f /\\ (cls {e} = cls {f}) ==> (e = f))
       #|  adjv e f = @m. (closure top2 e (pointI m)) /\\\n                  (closure top2 f (pointI m))
       #|  f
       #|  e
-      #|  !e f. edge e /\\ edge f /\\ adj e f ==>\n        closure top2 e (pointI (adjv e f))
+      #|  forall e f. edge e /\\ edge f /\\ adj e f ==>\n        closure top2 e (pointI (adjv e f))
       #|  f
       #|  e
-      #|  !e f. edge e /\\ edge f /\\ adj e f ==>\n        closure top2 f (pointI (adjv e f))
-      #|  !(X:A->bool) a b. (X HAS_SIZE 2) /\\ X a /\\ X b /\\ ~(a = b) ==>\n      (X = {a,b})
+      #|  forall e f. edge e /\\ edge f /\\ adj e f ==>\n        closure top2 f (pointI (adjv e f))
+      #|  forall(X:A->bool) a b. (X HAS_SIZE 2) /\\ X a /\\ X b /\\ ~(a = b) ==>\n      (X = {a,b})
       #|  f
       #|  f
       #|  e
@@ -72470,12 +72470,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {m | closure top2 f (pointI m)}
       #|  f
       #|  e
-      #|  !e f n. edge e /\\ edge f /\\ adj e f /\\ closure top2 e (pointI n) /\\\n      closure top2 f (pointI n) ==> (n = adjv e f)
+      #|  forall e f n. edge e /\\ edge f /\\ adj e f /\\ closure top2 e (pointI n) /\\\n      closure top2 f (pointI n) ==> (n = adjv e f)
       #|  e
       #|  f
       #|  e
       #|  f
-      #|  !e f. edge e /\\ edge f /\\ adj e f ==>\n    (adjv f e = adjv e f)
+      #|  forall e f. edge e /\\ edge f /\\ adj e f ==>\n    (adjv f e = adjv e f)
       #|  e
       #|  pointI (adjv e f)
       #|  E
@@ -72491,9 +72491,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  closure top2 e (pointI (adjv e f))
       #|  edge e /\\ edge f
       #|  ~(e = f)
-      #|  !E e f. segment E /\\ E e /\\ E f /\\ adj e f ==>\n     ({C| E C /\\ closure top2 C (pointI (adjv e f))} = {e,f} ) 
+      #|  forall E e f. segment E /\\ E e /\\ E f /\\ adj e f ==>\n     ({C| E C /\\ closure top2 C (pointI (adjv e f))} = {e,f} ) 
       #|  ~({C | S C /\\ closure top2 C m} = EMPTY)
-      #|  !S m. (0 <| num_closure S m) ==> (?e. S e /\\ closure top2 e m)
+      #|  forall S m. (0 <| num_closure S m) ==> (?e. S e /\\ closure top2 e m)
       #|  x
       #|  {C | (E DIFF S) C /\\ closure top2 C (pointI k)} = EMPTY 
       #|  0 <| CARD X ==> ~(CARD X = 0)
@@ -72504,7 +72504,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  S
       #|  FINITE E
-      #|  !E S k. rectagon E /\\ S SUBSET E /\\ (0 <| num_closure S (pointI k)) /\\\n   (0 <| num_closure (E DIFF S) (pointI k)) ==>\n   (endpoint S k)
+      #|  forall E S k. rectagon E /\\ S SUBSET E /\\ (0 <| num_closure S (pointI k)) /\\\n   (0 <| num_closure (E DIFF S) (pointI k)) ==>\n   (endpoint S k)
       #|  e''
       #|  e'
       #|  pointI k
@@ -72519,11 +72519,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  S
       #|  FINITE E
-      #|  !E S k. psegment E /\\ S SUBSET E /\\ (0 <| num_closure S (pointI k)) /\\\n   (0 <| num_closure (E DIFF S) (pointI k)) ==>\n   (endpoint S k)
+      #|  forall E S k. psegment E /\\ S SUBSET E /\\ (0 <| num_closure S (pointI k)) /\\\n   (0 <| num_closure (E DIFF S) (pointI k)) ==>\n   (endpoint S k)
       #|  pointI m
       #|  G
       #|  num_closure G (pointI m) = 0
-      #|  !G m.\n      FINITE G /\\ (?e. G e /\\ closure top2 e (pointI m)) ==>\n         (0 <| (num_closure G (pointI m)))
+      #|  forall G m.\n      FINITE G /\\ (?e. G e /\\ closure top2 e (pointI m)) ==>\n         (0 <| (num_closure G (pointI m)))
       #|  k'
       #|  A
       #|  E
@@ -72566,13 +72566,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(j = 0)
       #|  j
       #|  i
-      #|  !x. E x ==> edge x
+      #|  forall x. E x ==> edge x
       #|  B
       #|  ~(i = CARD E -| 1)
       #|  ~(j = CARD E -| 1)
       #|  j
       #|  i
-      #|  !x. E x ==> edge x
+      #|  forall x. E x ==> edge x
       #|  0 <| SUC k
       #|  A
       #|  B
@@ -72606,7 +72606,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  num_closure E (pointI n) = 2
       #|  pointI m'
       #|  0 = (CARD E -| 1)
-      #|  !m. (closure top2 (f 0) (pointI m)) /\\ (closure top2 (f (CARD E - 1)) (pointI m)) ==> (m = adjv (f 0) (f (CARD E -| 1)))
+      #|  forall m. (closure top2 (f 0) (pointI m)) /\\ (closure top2 (f (CARD E - 1)) (pointI m)) ==> (m = adjv (f 0) (f (CARD E -| 1)))
       #|  E
       #|  {C | E C /\\ closure top2 C (pointI m)}
       #|  pointI m
@@ -72615,7 +72615,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  0 < CARD E - 1
       #|  u
       #|  {0,2} (num_closure E (pointI n'))
-      #|  !n. (0 <| num_closure E (pointI n)) ==> (num_closure E (pointI n) = 2)
+      #|  forall n. (0 <| num_closure E (pointI n)) ==> (num_closure E (pointI n) = 2)
       #|  m
       #|  u
       #|  E
@@ -72625,20 +72625,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI m
       #|  E
       #|  FINITE E
-      #|  !E m n. (rectagon E) /\\ (0 < num_closure E (pointI m)) /\\\n     (0 < num_closure E (pointI n)) /\\ ~(m = n) ==>\n    (?A B. psegment A /\\ psegment B /\\ (E = A UNION B) /\\\n       (A INTER B = EMPTY) /\\ (endpoint A = {m,n}) /\\\n       (endpoint B = {m,n}) /\\\n       (!k. (0 < num_closure A (pointI k)) /\\\n          (0 < num_closure B (pointI k)) ==> (k = m) \\/ (k = n) ))\n    
-      #|  !a b c. (a +: c = b) /\\ (&:0 <=: c) ==> (a + (&:0)*c <=: b)
+      #|  forall E m n. (rectagon E) /\\ (0 < num_closure E (pointI m)) /\\\n     (0 < num_closure E (pointI n)) /\\ ~(m = n) ==>\n    (?A B. psegment A /\\ psegment B /\\ (E = A UNION B) /\\\n       (A INTER B = EMPTY) /\\ (endpoint A = {m,n}) /\\\n       (endpoint B = {m,n}) /\\\n       (forall k. (0 < num_closure A (pointI k)) /\\\n          (0 < num_closure B (pointI k)) ==> (k = m) \\/ (k = n) ))\n    
+      #|  forall a b c. (a +: c = b) /\\ (&:0 <=: c) ==> (a + (&:0)*c <=: b)
       #|  a + (&:0)*((b - (a +: &:(SUC n))) + (&:(SUC n))) <=: b
-      #|  !a b n. a +: &:(SUC n) <= b ==> a <= b
+      #|  forall a b n. a +: &:(SUC n) <= b ==> a <= b
       #|  segment_end S a b <=>\n   psegment S /\\ (endpoint S = {a,b})
-      #|  conn E <=> (!a b.\n   (cls E a /\\ cls E b /\\ ~(a = b) ==>\n        (?S. (S SUBSET E /\\ segment_end S a b))))
-      #|  conn2 E <=> (FINITE E) /\\\n   (2 <=| CARD E) /\\ (!a b c. cls E a /\\ cls E b /\\\n   ~(a = b) /\\ ~(b = c) /\\ ~(a = c) ==>\n   (?S. (S SUBSET E /\\ segment_end S a b /\\ ~(cls S c))))
+      #|  conn E <=> (forall a b.\n   (cls E a /\\ cls E b /\\ ~(a = b) ==>\n        (?S. (S SUBSET E /\\ segment_end S a b))))
+      #|  conn2 E <=> (FINITE E) /\\\n   (2 <=| CARD E) /\\ (forall a b c. cls E a /\\ cls E b /\\\n   ~(a = b) /\\ ~(b = c) /\\ ~(a = c) ==>\n   (?S. (S SUBSET E /\\ segment_end S a b /\\ ~(cls S c))))
       #|  {a,b} = {b,a}
-      #|  !S a b. (segment_end S a b = segment_end S b a)
+      #|  forall S a b. (segment_end S a b = segment_end S b a)
       #|  b'
       #|  a'
       #|  endpoint S
       #|  S
-      #|  !S a b. segment_end S a b ==> ~(a = b)
+      #|  forall S a b. segment_end S a b ==> ~(a = b)
       #|  e''
       #|  e'
       #|  u
@@ -72711,16 +72711,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SUC k
       #|  k
       #|  edge (f k) /\\ edge (f (SUC k)) /\\ adj (f k) (f (SUC k))
-      #|  !x. E x ==> edge x
+      #|  forall x. E x ==> edge x
       #|  x''
       #|  x' = x''
       #|  x
       #|  B
       #|  A
-      #|  !x. E x ==> edge x
+      #|  forall x. E x ==> edge x
       #|  B
       #|  psegment B
-      #|  !x. E x ==> edge x
+      #|  forall x. E x ==> edge x
       #|  A
       #|  psegment A
       #|  B
@@ -72757,7 +72757,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a
       #|  E
       #|  ~(a = b)
-      #|  !E a b c. segment_end E a b /\\ cls E c /\\ ~(c = a) /\\ ~(c = b) ==>\n    (?A B. (E = (A UNION B)) /\\ (A INTER B = EMPTY) /\\\n     (cls A INTER cls B = {c}) /\\\n     segment_end A a c /\\ segment_end B c b)
+      #|  forall E a b c. segment_end E a b /\\ cls E c /\\ ~(c = a) /\\ ~(c = b) ==>\n    (?A B. (E = (A UNION B)) /\\ (A INTER B = EMPTY) /\\\n     (cls A INTER cls B = {c}) /\\\n     segment_end A a c /\\ segment_end B c b)
       #|  b
       #|  endpoint S
       #|  c
@@ -72766,8 +72766,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  b
       #|  a
       #|  S
-      #|  !S a b c. (segment_end S a b /\\ segment_end S a c) ==> (b = c)
-      #|  !S a b. segment_end S a b ==> FINITE S
+      #|  forall S a b c. (segment_end S a b /\\ segment_end S a c) ==> (b = c)
+      #|  forall S a b. segment_end S a b ==> FINITE S
       #|  e'
       #|  E
       #|  (x = 0) <=> ~(0 <| x)
@@ -72782,7 +72782,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  S
       #|  FINITE S
       #|  FINITE E
-      #|  !E S k. segment E /\\ S SUBSET E /\\ (endpoint S k) /\\\n     (num_closure (E DIFF S) (pointI k) = 0) ==>\n     (endpoint E k) 
+      #|  forall E S k. segment E /\\ S SUBSET E /\\ (endpoint S k) /\\\n     (num_closure (E DIFF S) (pointI k) = 0) ==>\n     (endpoint E k) 
       #|  terminal_edge B c
       #|  (?e. B e /\\ closure top2 e (pointI c))
       #|  terminal_edge A c
@@ -72818,9 +72818,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  b
       #|  a
       #|  A
-      #|  !A B a b c. segment_end A a b /\\ segment_end B b c /\\\n     (A INTER B = EMPTY) /\\ (cls A INTER cls B = {b}) ==>\n    segment_end (A UNION B) a c 
+      #|  forall A B a b c. segment_end A a b /\\ segment_end B b c /\\\n     (A INTER B = EMPTY) /\\ (cls A INTER cls B = {b}) ==>\n    segment_end (A UNION B) a c 
       #|  e
-      #|  !A B. A SUBSET B ==> cls A SUBSET cls B
+      #|  forall A B. A SUBSET B ==> cls A SUBSET cls B
       #|  cls {u} SUBSET cls B
       #|  cls {u} SUBSET cls A
       #|  cls {u} a' /\\ cls {u} b'
@@ -72829,13 +72829,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (cls {u} ) HAS_SIZE 2
       #|  edge u
       #|  b
-      #|  !A B a b c. segment_end A a b /\\ segment_end B b c /\\\n     (cls A INTER cls B = {b}) ==>\n    segment_end (A UNION B) a c
+      #|  forall A B a b c. segment_end A a b /\\ segment_end B b c /\\\n     (cls A INTER cls B = {b}) ==>\n    segment_end (A UNION B) a c
       #|  terminal_edge A a
-      #|  !A a b. segment_end A a b ==> cls A a
+      #|  forall A a b. segment_end A a b ==> cls A a
       #|  terminal_edge A b
-      #|  !A a b. segment_end A a b ==> cls A b
+      #|  forall A a b. segment_end A a b ==> cls A b
       #|  x <=| y /\\ ~( x = y) ==> (x < y)
-      #|  !(a:A->bool) b. a SUBSET b /\\ ~(a = b) /\\ FINITE b ==>\n          (CARD a < CARD b)
+      #|  forall(a:A->bool) b. a SUBSET b /\\ ~(a = b) /\\ FINITE b ==>\n          (CARD a < CARD b)
       #|  A
       #|  x
       #|  A = EMPTY
@@ -72895,12 +72895,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  S
       #|  FINITE Um
       #|  FINITE Vm
-      #|  ! U V b'. f (U,V,b') = CARD U +| CARD V
+      #|  forall U V b'. f (U,V,b') = CARD U +| CARD V
       #|  b'
       #|  V
       #|  U
       #|  SS
-      #|  !U' V' b''. (SS (U',V',b'') ==> f (Um,Vm,bm) <=| f (U',V',b''))
+      #|  forall U' V' b''. (SS (U',V',b'') ==> f (Um,Vm,bm) <=| f (U',V',b''))
       #|  z
       #|  ?Um Vm bm. z = (Um,Vm,bm)
       #|  f
@@ -72914,7 +72914,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (R,S,b)
       #|  ~(SS = EMPTY)
       #|  SS = { (U,V,b') | segment_end U a b' /\\ segment_end V b' c /\\ (U SUBSET (R UNION S) /\\ V SUBSET (R UNION S) ) }
-      #|  !R S a b c. segment_end R a b /\\ segment_end S b c /\\ ~(a = c) ==>\n     (?U. segment_end U a c /\\ (U SUBSET (R UNION S)))
+      #|  forall R S a b c. segment_end R a b /\\ segment_end S b c /\\ ~(a = c) ==>\n     (?U. segment_end U a c /\\ (U SUBSET (R UNION S)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -72968,7 +72968,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !A B. cls(A UNION B) = cls A UNION cls B
+      #|  forall A B. cls(A UNION B) = cls A UNION cls B
       #|  S
       #|  u
       #|  b
@@ -73001,12 +73001,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u'
       #|  u'
       #|  a'
-      #|  !E E' a b u. ~(a = b) /\\ ~cls E b /\\ ~cls E' a /\\ cls E a /\\ cls E' b /\\ (conn E) /\\ (conn E') /\\ cls E u /\\ cls E' u ==> (?S. S SUBSET (E UNION E') /\\  segment_end S a b)
-      #|  !E E'. conn E /\\ conn E' /\\ ~(cls E INTER cls E' = EMPTY) ==>\n    conn (E UNION E')
+      #|  forall E E' a b u. ~(a = b) /\\ ~cls E b /\\ ~cls E' a /\\ cls E a /\\ cls E' b /\\ (conn E) /\\ (conn E') /\\ cls E u /\\ cls E' u ==> (?S. S SUBSET (E UNION E') /\\  segment_end S a b)
+      #|  forall E E'. conn E /\\ conn E' /\\ ~(cls E INTER cls E' = EMPTY) ==>\n    conn (E UNION E')
       #|  cls EMPTY  = EMPTY 
       #|  edge x /\\ E SUBSET edge
       #|  cls (E UNION {x})
-      #|  !E. FINITE E  ==> (E SUBSET edge ==> FINITE (cls E))
+      #|  forall E. FINITE E  ==> (E SUBSET edge ==> FINITE (cls E))
       #|  UNIV:num->bool
       #|  (&:)
       #|  IMAGE (&:) UNIV
@@ -73016,15 +73016,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  INFINITE (UNIV:int#int->bool)
       #|  INFINITE (UNIV DIFF {m | ?e. E e /\\ closure top2 e (pointI m)})
       #|  E
-      #|  !E. ?c. (FINITE E /\\ E SUBSET edge) ==>   ~cls E c
+      #|  forall E. ?c. (FINITE E /\\ E SUBSET edge) ==>   ~cls E c
       #|  TAGB
       #|  c
       #|  b
       #|  a
       #|  E
       #|  E
-      #|  !E. (E SUBSET edge ) /\\ conn2 E ==> conn E
-      #|  !(X:A -> bool). X HAS_SIZE 1 <=> SING X
+      #|  forall E. (E SUBSET edge ) /\\ conn2 E ==> conn E
+      #|  forall(X:A -> bool). X HAS_SIZE 1 <=> SING X
       #|  c
       #|  b
       #|  a
@@ -73041,15 +73041,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(X HAS_SIZE 1) /\\ ~(X HAS_SIZE 2)
       #|  ~(X HAS_SIZE 0)
       #|  (3 <= x) <=> ~(x = 0) /\\ ~(x = 1) /\\ ~(x = 2)
-      #|  !(X:A->bool). FINITE X ==> ( 3 <= CARD X <=>\n     (?a b c. X a /\\ X b /\\ X c /\\ ~(a = b) /\\ ~(a = c) /\\ ~( b = c)))
+      #|  forall(X:A->bool). FINITE X ==> ( 3 <= CARD X <=>\n     (?a b c. X a /\\ X b /\\ X c /\\ ~(a = b) /\\ ~(a = c) /\\ ~( b = c)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
       #|  f
       #|  IMAGE f {m | m <| n}
       #|  A HAS_SIZE CARD A
-      #|  !(A:A->bool) n. FINITE A /\\ (n <= CARD A) ==>\n       (?B. B SUBSET A /\\ (B HAS_SIZE n))
-      #|  !e. (edge e) ==> (cls {e} HAS_SIZE 2)
+      #|  forall(A:A->bool) n. FINITE A /\\ (n <= CARD A) ==>\n       (?B. B SUBSET A /\\ (B HAS_SIZE n))
+      #|  forall e. (edge e) ==> (cls {e} HAS_SIZE 2)
       #|  a''
       #|  cls {a}
       #|  cls {b}
@@ -73079,14 +73079,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  E
       #|  E
-      #|  !E. (E SUBSET edge) /\\ conn2 E ==> (3 <= CARD (cls E))
+      #|  forall E. (E SUBSET edge) /\\ conn2 E ==> (3 <= CARD (cls E))
       #|  b
       #|  a
-      #|  !X (a:A) b. X HAS_SIZE 2 /\\ {a,b} SUBSET X /\\ ~(a = b) ==>\n           (X = {a,b})
+      #|  forall X (a:A) b. X HAS_SIZE 2 /\\ {a,b} SUBSET X /\\ ~(a = b) ==>\n           (X = {a,b})
       #|  e
       #|  pointI x
       #|  {e}
-      #|  !a b e. closure top2 e (pointI a) /\\ closure top2 e (pointI b) /\\\n     ~(a = b) /\\ (edge e) ==> segment_end {e} a b
+      #|  forall a b e. closure top2 e (pointI a) /\\ closure top2 e (pointI b) /\\\n     ~(a = b) /\\ (edge e) ==> segment_end {e} a b
       #|  e
       #|  E (terminal_edge S m)
       #|  (terminal_edge S m)
@@ -73125,7 +73125,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  ?e. E e /\\ closure top2 e (pointI m)
       #|  FINITE E
-      #|  !E. (E SUBSET edge) /\\ conn2 E ==>\n         (!m. ~(num_closure E (pointI m) = 1))
+      #|  forall E. (E SUBSET edge) /\\ conn2 E ==>\n         (forall m. ~(num_closure E (pointI m) = 1))
       #|  S
       #|  a'
       #|  b'
@@ -73147,7 +73147,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  d
       #|  m
-      #|  !m n. cls A m /\\ ~cls B m /\\ ~cls A n /\\ cls B n /\\ ~(m = n) /\\ ~(m = c) /\\ ~(n = c) ==> (?S. S SUBSET A UNION B /\\ segment_end S m n /\\ ~cls S c)
+      #|  forall m n. cls A m /\\ ~cls B m /\\ ~cls A n /\\ cls B n /\\ ~(m = n) /\\ ~(m = c) /\\ ~(n = c) ==> (?S. S SUBSET A UNION B /\\ segment_end S m n /\\ ~cls S c)
       #|  a
       #|  b
       #|  c
@@ -73165,7 +73165,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  cls A a' /\\ cls A b'
       #|  CARD A
       #|  FINITE A /\\ FINITE B
-      #|  !A B. (A SUBSET edge) /\\ (B SUBSET edge) /\\ (conn2 A) /\\ (conn2 B) /\\\n    (?a b. ~(a = b) /\\ ({a,b} SUBSET (cls A INTER cls B))) ==>\n    (conn2 (A UNION B))
+      #|  forall A B. (A SUBSET edge) /\\ (B SUBSET edge) /\\ (conn2 A) /\\ (conn2 B) /\\\n    (?a b. ~(a = b) /\\ ({a,b} SUBSET (cls A INTER cls B))) ==>\n    (conn2 (A UNION B))
       #|  terminal_edge B m
       #|  terminal_edge A m
       #|  terminal_edge B n
@@ -73182,7 +73182,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  m
       #|  E
       #|  FINITE E
-      #|  !E m n. rectagon E /\\ ~(m = n) /\\ cls E m /\\ cls E n ==>\n    (?A B. segment_end A m n /\\ segment_end B m n /\\\n        (E = A UNION B) /\\ (A INTER B = EMPTY) /\\\n         (cls A INTER cls B = {m,n}))
+      #|  forall E m n. rectagon E /\\ ~(m = n) /\\ cls E m /\\ cls E n ==>\n    (?A B. segment_end A m n /\\ segment_end B m n /\\\n        (E = A UNION B) /\\ (A INTER B = EMPTY) /\\\n         (cls A INTER cls B = {m,n}))
       #|  B
       #|  c
       #|  ~cls B c 
@@ -73196,11 +73196,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(h_edge m = v_edge m')
       #|  E
       #|  E
-      #|  !E. rectagon E ==> conn2 E
+      #|  forall E. rectagon E ==> conn2 E
       #|  rectangle_grid p q = { e |\n     (?m. (e = h_edge m) /\\ FST p <= FST m /\\ (FST m +: &:1 <=: FST q) /\\\n                          SND p <= SND m /\\ SND m <=: SND q) \\/\n     (?m. (e = v_edge m) /\\ FST p <= FST m /\\ FST m <= FST q /\\\n                          SND p <= SND m /\\ SND m +: &:1 <=: SND q) }
-      #|  !p q m. rectangle_grid p q (h_edge m) <=>\n        (FST p <=: FST m) /\\ (FST m +: &:1 <=: FST q) /\\\n        (SND p <=: SND m) /\\ (SND m <=: SND q)
-      #|  !p q m. rectangle_grid p q (v_edge m) <=>\n        (FST p <= FST m /\\ FST m <= FST q /\\\n                 SND p <= SND m /\\ SND m +: &:1 <=: SND q)
-      #|  !p q. rectangle_grid p q SUBSET edge
+      #|  forall p q m. rectangle_grid p q (h_edge m) <=>\n        (FST p <=: FST m) /\\ (FST m +: &:1 <=: FST q) /\\\n        (SND p <=: SND m) /\\ (SND m <=: SND q)
+      #|  forall p q m. rectangle_grid p q (v_edge m) <=>\n        (FST p <= FST m /\\ FST m <= FST q /\\\n                 SND p <= SND m /\\ SND m +: &:1 <=: SND q)
+      #|  forall p q. rectangle_grid p q SUBSET edge
       #|  E
       #|  E
       #|  x
@@ -73209,11 +73209,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  edge x
       #|  E = rectangle_grid p (FST p +: &:1, SND p +: &:1)
-      #|  !p.  (rectangle_grid p (FST p +: &:1, SND p +: &:1)) =\n         {(h_edge p), (h_edge (up p)), (v_edge p), (v_edge (right  p))}
+      #|  forall p.  (rectangle_grid p (FST p +: &:1, SND p +: &:1)) =\n         {(h_edge p), (h_edge (up p)), (v_edge p), (v_edge (right  p))}
       #|  x
       #|  closure top2 (h_edge p) (pointI x) \\/ closure top2 (h_edge (FST p,SND p +: &:1)) (pointI x)
       #|  e
-      #|  !p. cls (rectangle_grid p (FST p +: &:1, SND p +: &:1)) =\n     {(p),(right  p),(up p),  (up (right  p))}
+      #|  forall p. cls (rectangle_grid p (FST p +: &:1, SND p +: &:1)) =\n     {(p),(right  p),(up p),  (up (right  p))}
       #|  p
       #|  B
       #|  m
@@ -73232,14 +73232,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  m
       #|  A
-      #|  !A B m p. segment_end A m p /\\ segment_end B m p /\\\n       (A INTER B = EMPTY) /\\ (cls A INTER cls B = {m,p}) ==>\n       (rectagon (A UNION B))
-      #|  !m. (cls {(h_edge m)} = {m, (right  m)})
+      #|  forall A B m p. segment_end A m p /\\ segment_end B m p /\\\n       (A INTER B = EMPTY) /\\ (cls A INTER cls B = {m,p}) ==>\n       (rectagon (A UNION B))
+      #|  forall m. (cls {(h_edge m)} = {m, (right  m)})
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
       #|  TAGB
       #|  TAGB
-      #|  !m. (cls {(v_edge m)} = {m, (up  m)})
+      #|  forall m. (cls {(v_edge m)} = {m, (up  m)})
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -73271,11 +73271,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {(h_edge p)}
       #|  segment_end {(h_edge p)} p (right  p) /\\ segment_end {(v_edge p)} p (up p) /\\ segment_end { (h_edge (up p)) } (up p) (right  (up p)) /\\ segment_end {(v_edge (right  p))} (right  p) (right  (up p))
       #|  E = rectagon (rectangle_grid p (FST p +: &:1,SND p +: &:1))
-      #|  !p. rectagon ((rectangle_grid p (FST p +: &:1, SND p +: &:1)))
+      #|  forall p. rectagon ((rectangle_grid p (FST p +: &:1, SND p +: &:1)))
       #|  b
       #|  a
       #|  edge u
-      #|  !A B. A SUBSET edge /\\ B SUBSET edge /\\ conn2 A /\\ conn2 B /\\\n    (~(A INTER B = EMPTY)) ==> conn2 (A UNION B)
+      #|  forall A B. A SUBSET edge /\\ B SUBSET edge /\\ conn2 A /\\ conn2 B /\\\n    (~(A INTER B = EMPTY)) ==> conn2 (A UNION B)
       #|  FST p + (&:0)*(&:(SUC n)) <=: FST p + &: (SUC n)
       #|  v_edge (FST p +: &:(SUC n),SND p)
       #|  (FST p +: &:(SUC (SUC n)),SND p +: &:1) = (FST (FST p +: &:(SUC n),SND p) +: &:1, SND (FST p +: &:(SUC n),SND p) +: &:1)
@@ -73290,7 +73290,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  edge x
       #|  rectangle_grid p (FST p +: &:(SUC (SUC n)),SND p +: &:1) = rectangle_grid p (FST p +: &:(SUC n),SND p +: &:1) UNION rectangle_grid (FST p +: &:(SUC n),SND p) (FST p +: &:(SUC (SUC n)),SND p +: &:1)
       #|  SUC 0 = 1
-      #|  !n p. conn2 (rectangle_grid p (FST p +: &:(SUC n), SND p +: &:1))
+      #|  forall n p. conn2 (rectangle_grid p (FST p +: &:(SUC n), SND p +: &:1))
       #|  h_edge (FST p ,SND p + &:(SUC m))
       #|  (FST p +: &:(SUC n),SND p +: &:(SUC (SUC m))) = (FST (FST p,SND p +: &:(SUC m)) +: &:(SUC n), SND (FST p,SND p +: &:(SUC m)) +: &:1)
       #|  (FST p,SND p +: &:(SUC m))
@@ -73305,7 +73305,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  edge x
       #|  rectangle_grid p (FST p +: &:(SUC n),SND p +: &:(SUC (SUC m))) = rectangle_grid p (FST p +: &:(SUC n),SND p +: &:(SUC m)) UNION rectangle_grid (FST p ,SND p + &:(SUC m)) (FST p +: &:(SUC n),SND p +: &:(SUC (SUC m)))
       #|  SUC 0 = 1
-      #|  !m n p. conn2\n        (rectangle_grid p (FST p +: &:(SUC n),SND p +: &:(SUC m)))
+      #|  forall m n p. conn2\n        (rectangle_grid p (FST p +: &:(SUC n),SND p +: &:(SUC m)))
       #|  (S UNION {e} UNION {e'})
       #|  cls S b /\\ cls S c
       #|  ((x = c) \\/ (x = b)) \\/ (x = a)
@@ -73367,9 +73367,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  1
       #|  E
       #|  ?e. E e
-      #|  !E. (E SUBSET edge) /\\ (conn2 E) ==> (?B. (B SUBSET E) /\\ rectagon B)
-      #|  !G n.  (curve_cell G (h_edge n) = G (h_edge n))
-      #|  !G n. (curve_cell G (v_edge n) = G (v_edge n))
+      #|  forall E. (E SUBSET edge) /\\ (conn2 E) ==> (?B. (B SUBSET E) /\\ rectagon B)
+      #|  forall G n.  (curve_cell G (h_edge n) = G (h_edge n))
+      #|  forall G n. (curve_cell G (v_edge n) = G (v_edge n))
       #|  u
       #|  A = UNIONS (IMAGE (closure top2) G)
       #|  u
@@ -73387,7 +73387,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  t
       #|  x'
       #|  edge x'
-      #|  !G. (FINITE  G) /\\ (G SUBSET edge)  ==>\n    (closure top2 (UNIONS G) = (UNIONS (curve_cell G)))
+      #|  forall G. (FINITE  G) /\\ (G SUBSET edge)  ==>\n    (closure top2 (UNIONS G) = (UNIONS (curve_cell G)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -73396,34 +73396,34 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !G m.  (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((h_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (h_edge m))))
-      #|  !G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((v_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (v_edge m))))
+      #|  forall G m.  (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((h_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (h_edge m))))
+      #|  forall G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((v_edge m) INTER (UNIONS (curve_cell G)) = {}) <=>\n         (~(G (v_edge m))))
       #|  squ m
-      #|  !G m. (FINITE  G) /\\ (G SUBSET edge) ==> ~curve_cell G (squ m)
+      #|  forall G m. (FINITE  G) /\\ (G SUBSET edge) ==> ~curve_cell G (squ m)
       #|  (curve_cell G SUBSET cell)
       #|  cell (squ m)
-      #|  !G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((squ m) INTER (UNIONS (curve_cell G)) = {}))
+      #|  forall G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (((squ m) INTER (UNIONS (curve_cell G)) = {}))
       #|  UNIONS (curve_cell G) (pointI m) <=> ~({(pointI m)} INTER (UNIONS (curve_cell G)) = EMPTY )
-      #|  !G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (UNIONS (curve_cell G) (pointI m) = curve_cell G {(pointI m)})
-      #|  !G m. (FINITE  G) /\\ (G SUBSET edge) ==> ((curve_cell G {(pointI m)} <=>\n     ~(num_closure G (pointI m) = 0)))
-      #|  !G. (FINITE  G) /\\ (G SUBSET edge) ==>\n       (closed_ top2 (UNIONS (curve_cell G)))
+      #|  forall G m. (FINITE  G) /\\ (G SUBSET edge) ==>\n     (UNIONS (curve_cell G) (pointI m) = curve_cell G {(pointI m)})
+      #|  forall G m. (FINITE  G) /\\ (G SUBSET edge) ==> ((curve_cell G {(pointI m)} <=>\n     ~(num_closure G (pointI m) = 0)))
+      #|  forall G. (FINITE  G) /\\ (G SUBSET edge) ==>\n       (closed_ top2 (UNIONS (curve_cell G)))
       #|  A'
       #|  U
       #|  U
       #|  euclid 2 = UNIONS U
       #|  U = top_of_metric(euclid 2,d_euclid)
-      #|  !G A. (FINITE  G) /\\ (G SUBSET edge) /\\ ctop G A ==> top2 A
+      #|  forall G A. (FINITE  G) /\\ (G SUBSET edge) /\\ ctop G A ==> top2 A
       #|  top_of_metric (euclid 2,d_euclid) A /\\ top_of_metric (euclid 2,d_euclid) B
       #|  B
       #|  A
       #|  connected (top_of_metric(euclid 2,d_euclid)) (mk_segment x x')
       #|  mk_segment x x' SUBSET A UNION B
       #|  Z x /\\ Z x'
-      #|  !G Z. (FINITE  G) /\\ (G SUBSET edge) /\\ convex Z /\\\n         (Z SUBSET (UNIONS (ctop G))) ==>\n            (connected (ctop G) Z)
+      #|  forall G Z. (FINITE  G) /\\ (G SUBSET edge) /\\ convex Z /\\\n         (Z SUBSET (UNIONS (ctop G))) ==>\n            (connected (ctop G) Z)
       #|  TAGB
       #|  TAGB
       #|  connected (ctop G) Z
-      #|  !G Z x. (FINITE  G) /\\ (G SUBSET edge) /\\ convex Z /\\\n       (Z SUBSET (UNIONS (ctop G))) /\\\n     (~(Z INTER (component  (ctop G) x ) = EMPTY))  ==>\n        (Z SUBSET (component  (ctop G) x))  
+      #|  forall G Z x. (FINITE  G) /\\ (G SUBSET edge) /\\ convex Z /\\\n       (Z SUBSET (UNIONS (ctop G))) /\\\n     (~(Z INTER (component  (ctop G) x ) = EMPTY))  ==>\n        (Z SUBSET (component  (ctop G) x))  
       #|  point p
       #|  UNIONS (ctop G) (point p)
       #|  u = u'
@@ -73433,18 +73433,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  x'
       #|  (euclid 2 x')
-      #|  !G x. ((FINITE  G) /\\ (G SUBSET edge) ==>\n     (UNIONS (cell_of (component  (ctop G) x)) =\n           component  (ctop G) x))
-      #|  unbounded C <=>\n  (?r. !s. (r <=. s) ==> C (point(s,&.0)))
+      #|  forall G x. ((FINITE  G) /\\ (G SUBSET edge) ==>\n     (UNIONS (cell_of (component  (ctop G) x)) =\n           component  (ctop G) x))
+      #|  unbounded C <=>\n  (?r. forall s. (r <=. s) ==> C (point(s,&.0)))
       #|  top2
       #|  curve_cell EMPTY = EMPTY 
       #|  D = {z | ?n. (z = {(pointI n)}) /\\ closure top2 (UNIONS B) (pointI n)}
       #|  C = {z | ?n. (z = {(pointI n)}) /\\ closure top2 (UNIONS A) (pointI n)}
       #|  {z | ?n. (z = {(pointI n)}) /\\  (closure top2 (UNIONS A) UNION closure top2 (UNIONS B)) (pointI n)} = ( {z | ?n. (z = {(pointI n)}) /\\ closure top2 (UNIONS A) (pointI n)}) UNION ({z | ?n. (z = {(pointI n)}) /\\ closure top2 (UNIONS B) (pointI n)})
-      #|  !A B. curve_cell (A UNION B) = curve_cell A UNION curve_cell B
-      #|  !A (x:A). x INSERT A = {x} UNION A
+      #|  forall A B. curve_cell (A UNION B) = curve_cell A UNION curve_cell B
+      #|  forall A (x:A). x INSERT A = {x} UNION A
       #|  h_edge m x
       #|  v_edge m x
-      #|  !e. (edge e) ==> (UNIONS (curve_cell {e}) = closure top2 e)
+      #|  forall e. (edge e) ==> (UNIONS (curve_cell {e}) = closure top2 e)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -73476,12 +73476,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  max_real r r'
       #|  real_of_int (FST m) + (&2)
       #|  real_of_int (FST m) + (&1)
-      #|  ?r. !x'. closure top2 x x' ==> x' 0 < r
+      #|  ?r. forall x'. closure top2 x x' ==> x' 0 < r
       #|  edge x
       #|  G SUBSET edge
       #|  x
-      #|  !G. (FINITE G) ==> ((G SUBSET edge) ==> (?r. !x . (UNIONS (curve_cell G)) x ==> (x 0 <. r)))
-      #|  !G. (FINITE G) /\\ (G SUBSET edge) ==>\n     (?r. !x . (UNIONS (curve_cell G)) x ==> (x 0 <. r))
+      #|  forall G. (FINITE G) ==> ((G SUBSET edge) ==> (?r. forall x . (UNIONS (curve_cell G)) x ==> (x 0 <. r)))
+      #|  forall G. (FINITE G) /\\ (G SUBSET edge) ==>\n     (?r. forall x . (UNIONS (curve_cell G)) x ==> (x 0 <. r))
       #|  (a * a'' + (&1 - a) * a') + ((&1 - a)*(&1 - a')) + a*(&1 - a'') = &1
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
@@ -73489,7 +73489,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
       #|  (A ==> B==>C) ==> (A /\\ B ==> C)
       #|  (a * a'' + (&1 - a) * a')
-      #|  !x y. convex (mk_segment x y)
+      #|  forall x y. convex (mk_segment x y)
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -75375,7 +75375,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a * r + (&1 - a) *s
       #|  &1 * b = b
       #|  a + &1 - a = &1
-      #|  !r s b x. (r <= s) ==> (mk_segment (point(r,b)) (point(s,b)) x <=> (?t. (r <= t /\\ t <= s /\\ (x = point(t,b)))))
+      #|  forall r s b x. (r <= s) ==> (mk_segment (point(r,b)) (point(s,b)) x <=> (?t. (r <= t /\\ t <= s /\\ (x = point(t,b)))))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -77293,24 +77293,24 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r
       #|  point(r, &0)
       #|  G
-      #|  !G. (FINITE G) /\\ (G SUBSET edge) ==>\n      (?x. unbounded (component  (ctop G) x))
+      #|  forall G. (FINITE G) /\\ (G SUBSET edge) ==>\n      (?x. unbounded (component  (ctop G) x))
       #|  max_real r r'
       #|  max_real r r'
-      #|  !G x y. (FINITE G) /\\ (G SUBSET edge) /\\\n      (unbounded (component  (ctop G) x)) /\\\n       (unbounded(component  (ctop G) y)) ==>\n         (component  (ctop G) x = component  (ctop G) y) 
+      #|  forall G x y. (FINITE G) /\\ (G SUBSET edge) /\\\n      (unbounded (component  (ctop G) x)) /\\\n       (unbounded(component  (ctop G) y)) ==>\n         (component  (ctop G) x = component  (ctop G) y) 
       #|  unbounded_set G x = unbounded(component  (ctop G) x)
       #|  bounded_set G x <=> ~(component  (ctop G) x = EMPTY) /\\\n      ~(unbounded (component  (ctop G) x))
-      #|  !G. bounded_set G INTER unbounded_set G = EMPTY 
+      #|  forall G. bounded_set G INTER unbounded_set G = EMPTY 
       #|  ~A \\/ A
       #|  r + &1
       #|  x
       #|  ctop G
       #|  component  (ctop G) x = EMPTY
       #|  G
-      #|  !G. bounded_set G UNION unbounded_set G = UNIONS (ctop G)
-      #|  !G x. (bounded_set G x ==> UNIONS (ctop G) x) 
-      #|  !G x. (unbounded_set G x ==> UNIONS (ctop G) x) 
+      #|  forall G. bounded_set G UNION unbounded_set G = UNIONS (ctop G)
+      #|  forall G x. (bounded_set G x ==> UNIONS (ctop G) x) 
+      #|  forall G x. (unbounded_set G x ==> UNIONS (ctop G) x) 
       #|  G
-      #|  !G. (FINITE G) /\\ (G SUBSET edge) ==>\n        ~(unbounded_set G = EMPTY)
+      #|  forall G. (FINITE G) /\\ (G SUBSET edge) ==>\n        ~(unbounded_set G = EMPTY)
       #|  component  (ctop G) x = component  (ctop G) x'
       #|  x'
       #|  ctop G
@@ -77322,14 +77322,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  x
       #|  G
-      #|  !G. (FINITE G) /\\ (G SUBSET edge) ==>\n      (?x. unbounded_set G = component  (ctop G) x)
+      #|  forall G. (FINITE G) /\\ (G SUBSET edge) ==>\n      (?x. unbounded_set G = component  (ctop G) x)
       #|  TAGB
       #|  x
       #|  ctop G
       #|  (UNIONS (ctop G) x)
       #|  ~(component  (ctop G) x = EMPTY)
       #|  G
-      #|  !G x. (FINITE G) /\\ (G SUBSET edge) /\\\n        (unbounded_set G = component  (ctop G) x) ==>\n           (unbounded_set G x)
+      #|  forall G x. (FINITE G) /\\ (G SUBSET edge) /\\\n        (unbounded_set G = component  (ctop G) x) ==>\n           (unbounded_set G x)
       #|  T
       #|  G
       #|  {(pointI (s,&:0))}
@@ -77352,7 +77352,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI (s, &:0)
       #|  ~(UNIONS (curve_cell G) (pointI (s, &:0)))
       #|  u
-      #|  !t u. t <= u ==> t <. real_of_int( floor u + &:1)
+      #|  forall t u. t <= u ==> t <. real_of_int( floor u + &:1)
       #|  s
       #|  r < real_of_int s /\\ r' < real_of_int s
       #|  s =  floor (max_real r r') + &:1
@@ -77364,7 +77364,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  G
       #|  FINITE G /\\ G SUBSET edge
-      #|  !G. rectagon G ==> (unbounded_set G SUBSET UNIONS (par_cell T G))
+      #|  forall G. rectagon G ==> (unbounded_set G SUBSET UNIONS (par_cell T G))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -77394,7 +77394,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  x
       #|  G
-      #|  !G. rectagon G ==> (UNIONS (par_cell F G) SUBSET  bounded_set G)
+      #|  forall G. rectagon G ==> (UNIONS (par_cell F G) SUBSET  bounded_set G)
       #|  p'
       #|  y
       #|  y
@@ -77408,11 +77408,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p''
       #|  G
       #|  unbounded_set G a
-      #|  !a. bounded_set G a ==> ~(component  (ctop G) a = component  (ctop G) u)
+      #|  forall a. bounded_set G a ==> ~(component  (ctop G) a = component  (ctop G) u)
       #|  u'
       #|  u'
       #|  squ p'''
-      #|  !p a b. squ p SUBSET component  (ctop G) a /\\ squ p SUBSET component  (ctop G) b ==> (component  (ctop G) a = component  (ctop G) b)
+      #|  forall p a b. squ p SUBSET component  (ctop G) a /\\ squ p SUBSET component  (ctop G) b ==> (component  (ctop G) a = component  (ctop G) b)
       #|  (p'' = p) \\/ (p'' = p') \\/ (p' = p)
       #|  h_edge m
       #|  u
@@ -77435,7 +77435,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  x
       #|  G
-      #|  !G x y. (rectagon G) /\\ bounded_set G x /\\ bounded_set G y ==>\n   (component  (ctop G) x = component  (ctop G) y) 
+      #|  forall G x y. (rectagon G) /\\ bounded_set G x /\\ bounded_set G y ==>\n   (component  (ctop G) x = component  (ctop G) y) 
       #|  x
       #|  T
       #|  G
@@ -77456,7 +77456,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?y. UNIONS (par_cell F G) y
       #|  F
       #|  G
-      #|  !G. rectagon G ==> (UNIONS (par_cell F G) =  bounded_set G)
+      #|  forall G. rectagon G ==> (UNIONS (par_cell F G) =  bounded_set G)
       #|  TAGB
       #|  T
       #|  G
@@ -77470,7 +77470,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  G
       #|  G
-      #|  !G. rectagon G ==> (unbounded_set G = UNIONS (par_cell T G))
+      #|  forall G. rectagon G ==> (unbounded_set G = UNIONS (par_cell T G))
       #|  T
       #|  G
       #|  x
@@ -77486,8 +77486,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  UNIONS (par_cell T G) = unbounded_set G
       #|  eps = T
-      #|  !G eps x. (rectagon G) /\\ (UNIONS (par_cell eps G) x) ==>\n      (UNIONS (par_cell eps G) = component  (ctop G) x)
-      #|  !e. (edge e) ==> (cell e)
+      #|  forall G eps x. (rectagon G) /\\ (UNIONS (par_cell eps G) x) ==>\n      (UNIONS (par_cell eps G) = component  (ctop G) x)
+      #|  forall e. (edge e) ==> (cell e)
       #|  edge u
       #|  u'
       #|  u = u'
@@ -77496,12 +77496,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  cell u /\\ cell u'
       #|  u
       #|  UNIONS edge
-      #|  !G A. FINITE G /\\ G SUBSET edge /\\ A SUBSET edge /\\\n        (A INTER G = EMPTY) ==> (UNIONS A SUBSET UNIONS (ctop G))
+      #|  forall G A. FINITE G /\\ G SUBSET edge /\\ A SUBSET edge /\\\n        (A INTER G = EMPTY) ==> (UNIONS A SUBSET UNIONS (ctop G))
       #|  u = {(pointI m)}
       #|  {(pointI m)}
       #|  u
-      #|  !u. cell u /\\ u (pointI m) ==> ( u = {(pointI m)})
-      #|  !G eps m.\n     (par_cell eps G {(pointI m)} =\n         UNIONS (par_cell eps G) (pointI m))
+      #|  forall u. cell u /\\ u (pointI m) ==> ( u = {(pointI m)})
+      #|  forall G eps m.\n     (par_cell eps G {(pointI m)} =\n         UNIONS (par_cell eps G) (pointI m))
       #|  pointI m
       #|  G
       #|  m
@@ -77513,7 +77513,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  G
       #|  UNIONS (ctop G) (pointI m)
-      #|  !G eps m. (rectagon G) ==>\n    ((par_cell eps G {(pointI m)}) \\/ (par_cell (~eps) G {(pointI m)})\n        \\/ (cls G m))
+      #|  forall G eps m. (rectagon G) ==>\n    ((par_cell eps G {(pointI m)}) \\/ (par_cell (~eps) G {(pointI m)})\n        \\/ (cls G m))
       #|  left (FST m' +: &:1,SND m') = m'
       #|  m
       #|  m'
@@ -77528,7 +77528,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  m
       #|  G
-      #|  !G eps m e. (rectagon G) /\\ (par_cell eps G {(pointI m)}) /\\ edge e\n     /\\ closure top2 e (pointI m) ==> (par_cell eps G e)
+      #|  forall G eps m e. (rectagon G) /\\ (par_cell eps G {(pointI m)}) /\\ edge e\n     /\\ closure top2 e (pointI m) ==> (par_cell eps G e)
       #|  eps
       #|  G
       #|  C
@@ -77586,7 +77586,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A
       #|  G
       #|  ?e. A e
-      #|  !G A. rectagon G /\\ segment A /\\ (A INTER G = EMPTY) /\\\n     (cls G INTER cls A SUBSET  endpoint A)\n   ==> (?eps. A SUBSET par_cell eps G)
+      #|  forall G A. rectagon G /\\ segment A /\\ (A INTER G = EMPTY) /\\\n     (cls G INTER cls A SUBSET  endpoint A)\n   ==> (?eps. A SUBSET par_cell eps G)
       #|  u
       #|  u
       #|  ~(B' = EMPTY)
@@ -77614,7 +77614,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (A,b)
       #|  ~(EE = EMPTY)
       #|  EE  = { (B,c) | segment_end B a c /\\ cls E c /\\ B SUBSET A }
-      #|  !E A a b. (E SUBSET edge) /\\ segment_end A a b /\\\n        ~cls E a /\\ cls E b ==>\n    (?B c. segment_end B a c /\\ cls E c /\\ B SUBSET A /\\\n            (cls B INTER cls E = {c}))
+      #|  forall E A a b. (E SUBSET edge) /\\ segment_end A a b /\\\n        ~cls E a /\\ cls E b ==>\n    (?B c. segment_end B a c /\\ cls E c /\\ B SUBSET A /\\\n            (cls B INTER cls E = {c}))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -77633,7 +77633,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  pointI x
       #|  G
-      #|  !G. FINITE G ==> (endpoint G SUBSET cls G)
+      #|  forall G. FINITE G ==> (endpoint G SUBSET cls G)
       #|  endpoint U SUBSET cls U
       #|  FINITE U
       #|  x
@@ -77699,10 +77699,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  edge e
       #|  ?e. G e /\\ ~H e
       #|  cls G SUBSET cls H
-      #|  !G H .  (G SUBSET edge) /\\\n        conn2 G /\\ conn2 H /\\ H SUBSET G /\\ ~(H = G)  ==>\n     (?A. A SUBSET G /\\ (A INTER H = EMPTY) /\\ psegment A /\\\n         (cls H INTER cls A = endpoint A))
+      #|  forall G H .  (G SUBSET edge) /\\\n        conn2 G /\\ conn2 H /\\ H SUBSET G /\\ ~(H = G)  ==>\n     (?A. A SUBSET G /\\ (A INTER H = EMPTY) /\\ psegment A /\\\n         (cls H INTER cls A = endpoint A))
       #|  parity G C = @eps. par_cell eps G C
       #|  u' = C
-      #|  !V C u. cell C /\\ C u /\\ (V SUBSET cell) /\\ (UNIONS V) u ==> V C
+      #|  forall V C u. cell C /\\ C u /\\ (V SUBSET cell) /\\ (UNIONS V) u ==> V C
       #|  G
       #|  u
       #|  eps
@@ -77714,15 +77714,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIONS (ctop G) u
       #|  C
       #|  curve_cell G C
-      #|  !G eps C. segment G /\\ cell C ==>\n      (par_cell eps G C \\/ par_cell (~eps) G C \\/ curve_cell G C)
+      #|  forall G eps C. segment G /\\ cell C ==>\n      (par_cell eps G C \\/ par_cell (~eps) G C \\/ curve_cell G C)
       #|  u
       #|  cell x
-      #|  !G  eps. (G SUBSET edge) ==>\n   (par_cell eps G  INTER curve_cell G = EMPTY )
-      #|  !G e . edge e ==> (curve_cell G e = G e) 
+      #|  forall G  eps. (G SUBSET edge) ==>\n   (par_cell eps G  INTER curve_cell G = EMPTY )
+      #|  forall G e . edge e ==> (curve_cell G e = G e) 
       #|  C
       #|  T
       #|  G
-      #|  !G C. segment G /\\ cell C /\\ ~curve_cell G C ==>\n        par_cell (parity G C) G C
+      #|  forall G C. segment G /\\ cell C /\\ ~curve_cell G C ==>\n        par_cell (parity G C) G C
       #|  eps
       #|  G
       #|  parity G C
@@ -77732,32 +77732,32 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  G
       #|  cell C /\\ ~curve_cell G C
-      #|  !G C eps. segment G  /\\\n        par_cell eps G C ==> (eps = parity G C)
-      #|  !G C. (G SUBSET edge) /\\ cell C ==>\n     ((C INTER UNIONS (curve_cell G) = EMPTY) = (~curve_cell G C))
+      #|  forall G C eps. segment G  /\\\n        par_cell eps G C ==> (eps = parity G C)
+      #|  forall G C. (G SUBSET edge) /\\ cell C ==>\n     ((C INTER UNIONS (curve_cell G) = EMPTY) = (~curve_cell G C))
       #|  h_edge x
       #|  C <=> (FST x = FST m) /\\ SND x <=: SND m
       #|  set_lower B m
       #|  set_lower A m
-      #|  !A B m. FINITE A /\\ FINITE B /\\ (A INTER B = EMPTY) ==>\n    (EVEN (num_lower (A UNION B) m) <=>\n        (EVEN (num_lower A m) = EVEN (num_lower B m)))
-      #|  !(a:bool) b c d. ((a = b) <=> (c = d)) <=> ((a = c) <=> (b = d))
+      #|  forall A B m. FINITE A /\\ FINITE B /\\ (A INTER B = EMPTY) ==>\n    (EVEN (num_lower (A UNION B) m) <=>\n        (EVEN (num_lower A m) = EVEN (num_lower B m)))
+      #|  forall(a:bool) b c d. ((a = b) <=> (c = d)) <=> ((a = c) <=> (b = d))
       #|  {(pointI p)}
       #|  A
-      #|  !A p. segment A /\\ ~(curve_cell A {(pointI p)}) ==>\n        (parity A {(pointI p)} = EVEN (num_lower A p))
+      #|  forall A p. segment A /\\ ~(curve_cell A {(pointI p)}) ==>\n        (parity A {(pointI p)} = EVEN (num_lower A p))
       #|  h_edge p
       #|  A
       #|  h_edge p
       #|  A
-      #|  !A p. segment A /\\ ~A (h_edge p) ==>\n       (parity A (h_edge p) <=> EVEN (num_lower A p))
+      #|  forall A p. segment A /\\ ~A (h_edge p) ==>\n       (parity A (h_edge p) <=> EVEN (num_lower A p))
       #|  v_edge p
       #|  A
       #|  v_edge p
       #|  A
-      #|  !A p. segment A /\\ ~A (v_edge p) ==>\n       (parity A (v_edge p) <=> EVEN (num_lower A p))
+      #|  forall A p. segment A /\\ ~A (v_edge p) ==>\n       (parity A (v_edge p) <=> EVEN (num_lower A p))
       #|  p
       #|  A
       #|  squ p
       #|  A
-      #|  !A p. segment A  ==>\n       (parity A (squ p) <=> EVEN (num_lower A p))
+      #|  forall A p. segment A  ==>\n       (parity A (squ p) <=> EVEN (num_lower A p))
       #|  C
       #|  a /\\ b ==> (a <=> b)
       #|  p
@@ -77772,7 +77772,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  FINITE A /\\ FINITE B
       #|  A UNION B SUBSET edge
-      #|  !A B C. segment A /\\ segment B /\\ segment (A UNION B) /\\\n    (A INTER B = EMPTY) /\\\n    cell C /\\ ~curve_cell A C /\\  ~curve_cell B C ==>\n         (parity (A UNION B) C  <=> (parity A C = parity B C))
+      #|  forall A B C. segment A /\\ segment B /\\ segment (A UNION B) /\\\n    (A INTER B = EMPTY) /\\\n    cell C /\\ ~curve_cell A C /\\  ~curve_cell B C ==>\n         (parity (A UNION B) C  <=> (parity A C = parity B C))
       #|  y
       #|  x
       #|  C
@@ -77829,7 +77829,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  top2 (euclid 2 DIFF UNIONS (curve_cell G))
       #|  G
       #|  G
-      #|  !G x y. (FINITE G /\\ G SUBSET edge ) /\\ ~(x = y) ==>\n      ((component  (ctop G) x y) <=>\n        (?C. simple_arc_end C x y /\\\n             (C INTER (UNIONS (curve_cell G)) = EMPTY)))
+      #|  forall G x y. (FINITE G /\\ G SUBSET edge ) /\\ ~(x = y) ==>\n      ((component  (ctop G) x y) <=>\n        (?C. simple_arc_end C x y /\\\n             (C INTER (UNIONS (curve_cell G)) = EMPTY)))
       #|  B
       #|  A x
       #|  x
@@ -77864,11 +77864,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  top2 (euclid 2 DIFF UNIONS (curve_cell G))
       #|  G
       #|  G
-      #|  !G x . (FINITE G /\\ G SUBSET edge ) ==>\n         top2 (component  (ctop G) x)
+      #|  forall G x . (FINITE G /\\ G SUBSET edge ) ==>\n         top2 (component  (ctop G) x)
       #|  psegment_triple A B C <=>\n       psegment A /\\ psegment B /\\ psegment C /\\\n           rectagon (A UNION B) /\\ rectagon (A UNION C) /\\\n             rectagon(B UNION C) /\\\n          (A INTER B = EMPTY) /\\ (A INTER C = EMPTY) /\\\n          (B INTER C = EMPTY) /\\\n          (cls A INTER cls B = endpoint A) /\\\n          (cls B INTER cls C = endpoint A) /\\\n          (cls A INTER cls C = endpoint A) /\\\n          (endpoint A = endpoint B) /\\ (endpoint B = endpoint C)
-      #|  !A B C. psegment_triple A B C ==> psegment_triple B C A
-      #|  !A B C. psegment_triple A B C ==> psegment_triple C B A
-      #|  !(A:(A->bool)->bool) B. (UNIONS A INTER UNIONS B = EMPTY) /\\\n       (!C. A C ==> ~(C = EMPTY)) ==>\n           (A INTER B = EMPTY)  
+      #|  forall A B C. psegment_triple A B C ==> psegment_triple B C A
+      #|  forall A B C. psegment_triple A B C ==> psegment_triple C B A
+      #|  forall(A:(A->bool)->bool) B. (UNIONS A INTER UNIONS B = EMPTY) /\\\n       (forall C. A C ==> ~(C = EMPTY)) ==>\n           (A INTER B = EMPTY)  
       #|  eps
       #|  G
       #|  u'
@@ -77900,17 +77900,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  edge {}
       #|  C
       #|  (par_cell (~eps) G) = EMPTY
-      #|  !G A eps.\n       FINITE A /\\ A SUBSET edge /\\ rectagon G /\\\n         A SUBSET par_cell eps G ==>\n       (curve_cell A INTER par_cell (~eps) G = EMPTY)
+      #|  forall G A eps.\n       FINITE A /\\ A SUBSET edge /\\ rectagon G /\\\n         A SUBSET par_cell eps G ==>\n       (curve_cell A INTER par_cell (~eps) G = EMPTY)
       #|  cell EMPTY 
       #|  C
       #|  U C
       #|  cell C
       #|  ?C. V C /\\ C u
-      #|  !U V. U SUBSET cell /\\ V SUBSET cell ==> ((U INTER V = EMPTY) <=>\n      (UNIONS U INTER UNIONS V = EMPTY))
+      #|  forall U V. U SUBSET cell /\\ V SUBSET cell ==> ((U INTER V = EMPTY) <=>\n      (UNIONS U INTER UNIONS V = EMPTY))
       #|  G
       #|  curve_cell G
       #|  par_cell eps G
-      #|  !G eps. (G SUBSET edge) ==>\n    (UNIONS (par_cell eps G) INTER UNIONS (curve_cell G) = EMPTY)
+      #|  forall G eps. (G SUBSET edge) ==>\n    (UNIONS (par_cell eps G) INTER UNIONS (curve_cell G) = EMPTY)
       #|  C x /\\ C y
       #|  C
       #|  C INTER UNIONS (curve_cell G)
@@ -77932,7 +77932,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  eps
       #|  G
-      #|  !G eps x y. rectagon G /\\ ~(x = y) ==>\n      ((UNIONS (par_cell eps G) x /\\ UNIONS (par_cell eps G) y) <=>\n        (?C. simple_arc_end C x y /\\\n             (C SUBSET (UNIONS (par_cell eps G)))) )
+      #|  forall G eps x y. rectagon G /\\ ~(x = y) ==>\n      ((UNIONS (par_cell eps G) x /\\ UNIONS (par_cell eps G) y) <=>\n        (?C. simple_arc_end C x y /\\\n             (C SUBSET (UNIONS (par_cell eps G)))) )
       #|  u'
       #|  UNIONS (par_cell eps' (A UNION C))
       #|  UNIONS (par_cell (~eps') (A UNION C))
@@ -77982,20 +77982,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x''
       #|  eps'
       #|  A UNION C
-      #|  !x. cell x /\\ par_cell eps (A UNION B) x ==> par_cell eps' (A UNION C) x \\/ par_cell (~eps') (A UNION C) x
+      #|  forall x. cell x /\\ par_cell eps (A UNION B) x ==> par_cell eps' (A UNION C) x \\/ par_cell (~eps') (A UNION C) x
       #|  cell x' /\\ cell x
-      #|  !A B C eps eps'. psegment_triple A B C /\\\n      C SUBSET par_cell (~eps) (A UNION B)\n      ==>\n     (par_cell eps (A UNION B) SUBSET par_cell eps' (A UNION C) \\/\n      par_cell eps (A UNION B) SUBSET par_cell (~eps') (A UNION C))
+      #|  forall A B C eps eps'. psegment_triple A B C /\\\n      C SUBSET par_cell (~eps) (A UNION B)\n      ==>\n     (par_cell eps (A UNION B) SUBSET par_cell eps' (A UNION C) \\/\n      par_cell eps (A UNION B) SUBSET par_cell (~eps') (A UNION C))
       #|  TAGB
       #|  TAGB
       #|  m
       #|  G
-      #|  !G m. (rectagon G) ==> (parity G (squ m) = even_cell G (squ m))
+      #|  forall G m. (rectagon G) ==> (parity G (squ m) = even_cell G (squ m))
       #|  squ m
       #|  eps
       #|  G
       #|  eps
       #|  G
-      #|  !G m eps. segment G ==>\n    (par_cell (~eps) G (squ m) <=> ~(par_cell eps G (squ m)))
+      #|  forall G m eps. segment G ==>\n    (par_cell (~eps) G (squ m) <=> ~(par_cell eps G (squ m)))
       #|  m
       #|  A UNION C
       #|  m
@@ -78020,12 +78020,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(~eps' = parity (A UNION C) (squ m))
       #|  ~eps = parity (A UNION B) (squ m)
       #|  segment (A UNION B) /\\ segment(A UNION C)
-      #|  !m. par_cell (~eps) (A UNION B) (squ m)  = par_cell (~eps') (A UNION C) (squ m)
+      #|  forall m. par_cell (~eps) (A UNION B) (squ m)  = par_cell (~eps') (A UNION C) (squ m)
       #|  eps = parity (A UNION B) (squ m)
       #|  s
-      #|  !m. (parity (A UNION B) (squ m) = parity(A UNION C) (squ m)) = s
+      #|  forall m. (parity (A UNION B) (squ m) = parity(A UNION C) (squ m)) = s
       #|  s = (eps = eps')
-      #|  !A B C eps eps'. psegment_triple A B C ==>\n     ~(par_cell eps (A UNION B) = par_cell eps' (A UNION C))
+      #|  forall A B C eps eps'. psegment_triple A B C ==>\n     ~(par_cell eps (A UNION B) = par_cell eps' (A UNION C))
       #|  TAGB
       #|  TAGB
       #|  eps'
@@ -78037,7 +78037,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  endpoint A
       #|  C
       #|  (A UNION B)
-      #|  !A B C eps. psegment_triple A B C /\\\n     ~(C SUBSET par_cell eps (A UNION B)) ==>\n    (C SUBSET par_cell (~eps) (A UNION B)) 
+      #|  forall A B C eps. psegment_triple A B C /\\\n     ~(C SUBSET par_cell eps (A UNION B)) ==>\n    (C SUBSET par_cell (~eps) (A UNION B)) 
       #|  T
       #|  A
       #|  T
@@ -78063,7 +78063,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  eps
       #|  A' UNION B'
-      #|  !A B eps. rectagon (A UNION B) /\\ (par_cell eps (A UNION B) u) ==> ~curve_cell A u
+      #|  forall A B eps. rectagon (A UNION B) /\\ (par_cell eps (A UNION B) u) ==> ~curve_cell A u
       #|  cell u
       #|  T
       #|  u
@@ -78104,11 +78104,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  A'
       #|  B'
-      #|  !A B. psegment_triple A B C /\\ (C SUBSET par_cell T (A UNION B)) /\\ (A SUBSET par_cell T (B UNION C)) ==> (par_cell F (A UNION B) SUBSET par_cell T (B UNION C))
+      #|  forall A B. psegment_triple A B C /\\ (C SUBSET par_cell T (A UNION B)) /\\ (A SUBSET par_cell T (B UNION C)) ==> (par_cell F (A UNION B) SUBSET par_cell T (B UNION C))
       #|  B SUBSET par_cell (~F) (C UNION A)
       #|  A SUBSET par_cell (~F) (B UNION C)
       #|  C SUBSET par_cell (~F) (A UNION B)
-      #|  !A B C. psegment_triple A B C ==>\n   (A SUBSET par_cell F (B UNION C)) \\/\n   (B SUBSET par_cell F (A UNION C)) \\/\n   (C SUBSET par_cell F (A UNION B))
+      #|  forall A B C. psegment_triple A B C ==>\n   (A SUBSET par_cell F (B UNION C)) \\/\n   (B SUBSET par_cell F (A UNION C)) \\/\n   (C SUBSET par_cell F (A UNION B))
       #|  eps
       #|  G
       #|  ~UNIONS (ctop G )x
@@ -78123,7 +78123,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  G
       #|  UNIONS (ctop G) x
-      #|  !G eps. (segment G) ==>\n    (euclid 2 DIFF UNIONS(par_cell (~eps) G) =\n         UNIONS(par_cell eps G) UNION UNIONS (curve_cell G))
+      #|  forall G eps. (segment G) ==>\n    (euclid 2 DIFF UNIONS(par_cell (~eps) G) =\n         UNIONS(par_cell eps G) UNION UNIONS (curve_cell G))
       #|  TAGB
       #|  TAGB
       #|  u'
@@ -78144,7 +78144,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (UNIONS (par_cell (~eps) G))
       #|  top2
       #|  closed_ top2 (euclid 2 DIFF (UNIONS (par_cell (~eps) G)))
-      #|  !G C d eps.\n       cell C /\\ cell d /\\ rectagon G /\\ (d SUBSET closure top2 C) /\\\n          par_cell eps G C ==>\n       (par_cell eps G d \\/ curve_cell G d)
+      #|  forall G C d eps.\n       cell C /\\ cell d /\\ rectagon G /\\ (d SUBSET closure top2 C) /\\\n          par_cell eps G C ==>\n       (par_cell eps G d \\/ curve_cell G d)
       #|  (C' UNION C'') INTER UNIONS (curve_cell G)
       #|  C
       #|  C'
@@ -78159,7 +78159,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  x
       #|  a = x
-      #|  !G C a b. FINITE G /\\ G SUBSET edge /\\ simple_arc_end C a b /\\\n      (C INTER UNIONS (curve_cell G) = EMPTY) ==>\n      (C SUBSET (component  (ctop G) a))
+      #|  forall G C a b. FINITE G /\\ G SUBSET edge /\\ simple_arc_end C a b /\\\n      (C INTER UNIONS (curve_cell G) = EMPTY) ==>\n      (C SUBSET (component  (ctop G) a))
       #|  x
       #|  E' DIFF B
       #|  x
@@ -78173,12 +78173,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIONS (ctop E) x
       #|  x
       #|  ctop E
-      #|  !E E' R B x. bounded_set E x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        (bounded_set (E' DIFF B) x \\/ unbounded_set (E' DIFF B) x)
+      #|  forall E E' R B x. bounded_set E x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        (bounded_set (E' DIFF B) x \\/ unbounded_set (E' DIFF B) x)
       #|  C = B DIFF A
       #|  B = A UNION (B DIFF A)
-      #|  !A B. A SUBSET B ==> curve_cell A SUBSET curve_cell B
+      #|  forall A B. A SUBSET B ==> curve_cell A SUBSET curve_cell B
       #|  G
-      #|  !G. (FINITE G /\\ G SUBSET edge ) ==>\n       (?r. !s. (r <= s) ==> unbounded_set G (point(s,&0)))
+      #|  forall G. (FINITE G /\\ G SUBSET edge ) ==>\n       (?r. forall s. (r <= s) ==> unbounded_set G (point(s,&0)))
       #|  C INTER UNIONS (curve_cell (E'' UNION B))
       #|  E''
       #|  E SUBSET E'' UNION B
@@ -78218,7 +78218,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  E''
       #|  s
-      #|  !s. ?C. (r'' <= s) ==> (simple_arc_end C x (point(s,&0))  /\\ (C INTER UNIONS (curve_cell E'') = {}))
+      #|  forall s. ?C. (r'' <= s) ==> (simple_arc_end C x (point(s,&0))  /\\ (C INTER UNIONS (curve_cell E'') = {}))
       #|  E''
       #|  FINITE E'' /\\ E'' SUBSET edge
       #|  x
@@ -78226,10 +78226,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r <= s
       #|  r''
       #|  r'' = &1 + (||. r') + (||. r) + ||. (x 0)
-      #|  ?r. !s. (r <= s) ==> component  (ctop E'') x (point(s,&0)) /\\ ~(x = (point(s,&0))) /\\ unbounded_set R (point(s,&0)) 
+      #|  ?r. forall s. (r <= s) ==> component  (ctop E'') x (point(s,&0)) /\\ ~(x = (point(s,&0))) /\\ unbounded_set R (point(s,&0)) 
       #|  R
       #|  E'' = E' DIFF B
-      #|  !E E' R B x. unbounded_set (E' DIFF B) x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       FINITE B /\\ B SUBSET edge /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        ( unbounded_set (E) x)
+      #|  forall E E' R B x. unbounded_set (E' DIFF B) x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       FINITE B /\\ B SUBSET edge /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        ( unbounded_set (E) x)
       #|  TAGB
       #|  E
       #|  x
@@ -78242,23 +78242,23 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  R
       #|  E'
       #|  E
-      #|  !E E' R B x. bounded_set (E) x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       FINITE B /\\ B SUBSET edge /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        ( bounded_set (E' DIFF B) x)
+      #|  forall E E' R B x. bounded_set (E) x /\\ E SUBSET E' /\\ FINITE E' /\\\n       E' SUBSET edge /\\ rectagon R /\\ R SUBSET E /\\\n       FINITE B /\\ B SUBSET edge /\\\n       ~(UNIONS (curve_cell B) x) /\\\n       B SUBSET par_cell F R /\\ ~(UNIONS (curve_cell E') x) ==>\n        ( bounded_set (E' DIFF B) x)
       #|  x
       #|  EMPTY:((num->real)->bool)->bool
       #|  B
       #|  E'
       #|  E
       #|  E
-      #|  !E E' x. bounded_set E x /\\ E SUBSET E' /\\ (E' SUBSET edge) /\\\n     (FINITE E') /\\\n           conn2 E /\\\n        ~(UNIONS (curve_cell E') x) ==>\n       (bounded_set E' x)
+      #|  forall E E' x. bounded_set E x /\\ E SUBSET E' /\\ (E' SUBSET edge) /\\\n     (FINITE E') /\\\n           conn2 E /\\\n        ~(UNIONS (curve_cell E') x) ==>\n       (bounded_set E' x)
       #|  x
       #|  EMPTY:((num->real)->bool)->bool
       #|  B
       #|  E'
       #|  E
       #|  E
-      #|  !E E' x.  (unbounded_set E' x) /\\ E SUBSET E' /\\ (E' SUBSET edge) /\\\n     (FINITE E') /\\\n           conn2 E /\\\n        ~(UNIONS (curve_cell E') x) ==> unbounded_set E x\n       
-      #|  ! (A:A -> bool) B. (A DIFF B = A) <=> (A INTER B = EMPTY)
-      #|  !(A:A->bool) B. (A UNION B) DIFF A = (B DIFF A)
+      #|  forall E E' x.  (unbounded_set E' x) /\\ E SUBSET E' /\\ (E' SUBSET edge) /\\\n     (FINITE E') /\\\n           conn2 E /\\\n        ~(UNIONS (curve_cell E') x) ==> unbounded_set E x\n       
+      #|  forall (A:A -> bool) B. (A DIFF B = A) <=> (A INTER B = EMPTY)
+      #|  forall(A:A->bool) B. (A UNION B) DIFF A = (B DIFF A)
       #|  B UNION C
       #|  T
       #|  B UNION C
@@ -78277,9 +78277,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B UNION C
       #|  A UNION B UNION C
       #|  A UNION B UNION C
-      #|  !A B C x. psegment_triple A B C /\\\n       A SUBSET par_cell F (B UNION C) /\\\n       unbounded_set (B UNION C) x ==>\n       unbounded_set (A UNION B UNION C) x
+      #|  forall A B C x. psegment_triple A B C /\\\n       A SUBSET par_cell F (B UNION C) /\\\n       unbounded_set (B UNION C) x ==>\n       unbounded_set (A UNION B UNION C) x
       #|  G
-      #|  ! G x. FINITE G /\\\n          G SUBSET edge /\\ unbounded_set G x ==>\n          (unbounded_set G = component (ctop G) x)\n          
+      #|  forall G x. FINITE G /\\\n          G SUBSET edge /\\ unbounded_set G x ==>\n          (unbounded_set G = component (ctop G) x)\n          
       #|  u
       #|  T
       #|  A UNION B
@@ -78332,7 +78332,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B UNION C
       #|  C
       #|  ~(C = EMPTY)
-      #|  !A B C. psegment_triple A B C /\\ A SUBSET par_cell F (B UNION C)\n     ==> C SUBSET par_cell T (A UNION B)
+      #|  forall A B C. psegment_triple A B C /\\ A SUBSET par_cell F (B UNION C)\n     ==> C SUBSET par_cell T (A UNION B)
       #|  pointI v
       #|  R
       #|  v
@@ -78355,13 +78355,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps' = eps
       #|  C
       #|  R
-      #|  !R B C v eps. rectagon R /\\ B SUBSET par_cell eps R /\\\n    (C INTER R = EMPTY) /\\ cls R INTER cls C SUBSET endpoint C /\\\n     cls C v /\\ cls B v /\\ ~cls R v /\\ segment C /\\ B SUBSET edge ==>\n    C SUBSET par_cell eps R
+      #|  forall R B C v eps. rectagon R /\\ B SUBSET par_cell eps R /\\\n    (C INTER R = EMPTY) /\\ cls R INTER cls C SUBSET endpoint C /\\\n     cls C v /\\ cls B v /\\ ~cls R v /\\ segment C /\\ B SUBSET edge ==>\n    C SUBSET par_cell eps R
       #|  ~B e /\\ ~C e
       #|  e
       #|  C
       #|  B
       #|  edge e
-      #|  !A B C e. segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (A SUBSET edge) /\\  A e ==>\n       (parity (B UNION C) e = (parity B e = parity C e))
+      #|  forall A B C e. segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (A SUBSET edge) /\\  A e ==>\n       (parity (B UNION C) e = (parity B e = parity C e))
       #|  T
       #|  e
       #|  B UNION C
@@ -78369,7 +78369,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  B
       #|  A
-      #|  !A B C e.  segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (segment A ) /\\  A e /\\\n   A SUBSET par_cell T (B UNION C) ==> (parity B e = parity C e)
+      #|  forall A B C e.  segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (segment A ) /\\  A e /\\\n   A SUBSET par_cell T (B UNION C) ==> (parity B e = parity C e)
       #|  F
       #|  e
       #|  B UNION C
@@ -78377,7 +78377,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  B
       #|  A
-      #|  !A B C e.  segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (A SUBSET edge) /\\ A e /\\\n   A SUBSET par_cell F (B UNION C) ==> ~(parity B e = parity C e)
+      #|  forall A B C e.  segment B /\\ segment C /\\ (segment (B UNION C)) /\\\n      (B INTER C = EMPTY) /\\ (A INTER B = EMPTY) /\\ (A INTER C = EMPTY)\n     /\\ (A SUBSET edge) /\\ A e /\\\n   A SUBSET par_cell F (B UNION C) ==> ~(parity B e = parity C e)
       #|  e
       #|  parity(A UNION B) e
       #|  A UNION B
@@ -78404,7 +78404,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps = T
       #|  C
       #|  (A UNION B)
-      #|  !A B C D. psegment_triple A B D /\\ segment C /\\\n    cls (A UNION B) INTER cls C SUBSET endpoint C /\\\n    (A INTER C = EMPTY) /\\ (B INTER C = EMPTY) /\\ (C INTER D = EMPTY)\n    /\\ C SUBSET par_cell T (B UNION D) /\\ C SUBSET par_cell T (A UNION D)\n   ==> C SUBSET par_cell T (A UNION B)
+      #|  forall A B C D. psegment_triple A B D /\\ segment C /\\\n    cls (A UNION B) INTER cls C SUBSET endpoint C /\\\n    (A INTER C = EMPTY) /\\ (B INTER C = EMPTY) /\\ (C INTER D = EMPTY)\n    /\\ C SUBSET par_cell T (B UNION D) /\\ C SUBSET par_cell T (A UNION D)\n   ==> C SUBSET par_cell T (A UNION B)
       #|  e
       #|  F
       #|  A UNION B
@@ -78432,10 +78432,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps = F
       #|  C
       #|  (A UNION B)
-      #|  !A B C D. psegment_triple A B D /\\ segment C /\\\n    cls (A UNION B) INTER cls C SUBSET endpoint C /\\\n    (A INTER C = EMPTY) /\\ (B INTER C = EMPTY) /\\ (C INTER D = EMPTY)\n    /\\ C SUBSET par_cell F (B UNION D) /\\ C SUBSET par_cell T (A UNION D)\n   ==> C SUBSET par_cell F (A UNION B)
+      #|  forall A B C D. psegment_triple A B D /\\ segment C /\\\n    cls (A UNION B) INTER cls C SUBSET endpoint C /\\\n    (A INTER C = EMPTY) /\\ (B INTER C = EMPTY) /\\ (C INTER D = EMPTY)\n    /\\ C SUBSET par_cell F (B UNION D) /\\ C SUBSET par_cell T (A UNION D)\n   ==> C SUBSET par_cell F (A UNION B)
       #|  pointI m
       #|  G
-      #|  !G m. segment G ==> (curve_cell G {(pointI m)} = cls G m)
+      #|  forall G m. segment G ==> (curve_cell G {(pointI m)} = cls G m)
       #|  cls U SUBSET cls (S'' UNION S')
       #|  S'' UNION S'
       #|  U
@@ -78587,10 +78587,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a''
       #|  {u'} SUBSET S' /\\ {u'} SUBSET (R UNION J)
       #|  n
-      #|  !n. closure top2 u' (pointI n) ==> (n = b')
+      #|  forall n. closure top2 u' (pointI n) ==> (n = b')
       #|  u'
       #|  S' INTER (R UNION J) = EMPTY
-      #|  !a b S'. (S' SUBSET S) /\\ segment_end S' a b /\\ (cls S' INTER cls (R UNION J) = {b}) ==> cls R b /\\ (S' INTER (R UNION J) = EMPTY)
+      #|  forall a b S'. (S' SUBSET S) /\\ segment_end S' a b /\\ (cls S' INTER cls (R UNION J) = {b}) ==> cls R b /\\ (S' INTER (R UNION J) = EMPTY)
       #|  T
       #|  R
       #|  J
@@ -78652,7 +78652,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  J
       #|  R SUBSET E DIFF J
       #|  J = E INTER par_cell F R
-      #|  !E R. conn2 E /\\ (E SUBSET edge) /\\ rectagon R /\\ R SUBSET E ==>\n     conn2 (E DIFF (E INTER par_cell F R))
+      #|  forall E R. conn2 E /\\ (E SUBSET edge) /\\ rectagon R /\\ R SUBSET E ==>\n     conn2 (E DIFF (E INTER par_cell F R))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -78680,7 +78680,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  (?A B C. psegment_triple A B C /\\ A SUBSET E /\\ B SUBSET E /\\ C SUBSET E)
-      #|  !E. conn2 E /\\ (E SUBSET edge) /\\\n      ~(rectagon E) ==> (?A B C. psegment_triple A B C\n        /\\ A SUBSET E /\\ B SUBSET E /\\ C SUBSET E /\\\n            A SUBSET par_cell F (B UNION C))
+      #|  forall E. conn2 E /\\ (E SUBSET edge) /\\\n      ~(rectagon E) ==> (?A B C. psegment_triple A B C\n        /\\ A SUBSET E /\\ B SUBSET E /\\ C SUBSET E /\\\n            A SUBSET par_cell F (B UNION C))
       #|  u
       #|  A
       #|  ~(A = EMPTY)
@@ -78692,7 +78692,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  J
       #|  x <=| y ==> ~(y < x)
       #|  C DIFF J
-      #|  !A. A SUBSET G ==> UNIONS (curve_cell A) SUBSET UNIONS(curve_cell G)
+      #|  forall A. A SUBSET G ==> UNIONS (curve_cell A) SUBSET UNIONS(curve_cell G)
       #|  x
       #|  G
       #|  ~(UNIONS (curve_cell G) x)
@@ -78714,7 +78714,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  EE
       #|  EE (C DIFF J)
       #|  J = (C INTER par_cell F R )
-      #|  !R. rectagon R /\\ R SUBSET C ==> (C INTER par_cell F R = EMPTY)
+      #|  forall R. rectagon R /\\ R SUBSET C ==> (C INTER par_cell F R = EMPTY)
       #|  EE
       #|  C
       #|  rectagon C
@@ -78723,20 +78723,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  EE
       #|  EE
       #|  EE G
-      #|  EE = {C | conn2 C /\\ (C SUBSET G) /\\ (!x. bounded_set G x ==> bounded_set C x)}
-      #|  !G. conn2 G /\\ G SUBSET edge ==>\n     (?C. rectagon C /\\ C SUBSET G /\\\n          (!x. bounded_set G x ==> bounded_set C x))
+      #|  EE = {C | conn2 C /\\ (C SUBSET G) /\\ (forall x. bounded_set G x ==> bounded_set C x)}
+      #|  forall G. conn2 G /\\ G SUBSET edge ==>\n     (?C. rectagon C /\\ C SUBSET G /\\\n          (forall x. bounded_set G x ==> bounded_set C x))
       #|  G = H UNION (G DIFF H)
-      #|  !H G. (H SUBSET G) ==>\n      UNIONS (curve_cell H) SUBSET UNIONS (curve_cell G)
+      #|  forall H G. (H SUBSET G) ==>\n      UNIONS (curve_cell H) SUBSET UNIONS (curve_cell G)
       #|  x
       #|  G
       #|  G
       #|  H
-      #|  !H G x. bounded_set G x /\\ H SUBSET G ==> ~UNIONS (curve_cell H) x
+      #|  forall H G x. bounded_set G x /\\ H SUBSET G ==> ~UNIONS (curve_cell H) x
       #|  x
       #|  G
       #|  G
       #|  H
-      #|  !H G x. unbounded_set G x /\\ H SUBSET G ==> ~UNIONS (curve_cell H) x
+      #|  forall H G x. unbounded_set G x /\\ H SUBSET G ==> ~UNIONS (curve_cell H) x
       #|  A UNION B UNION C
       #|  x
       #|  C
@@ -78754,9 +78754,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B UNION C
       #|  A UNION B UNION C
       #|  A UNION B UNION C
-      #|  !A B C. psegment_triple A B C /\\ A SUBSET par_cell F (B UNION C) ==>\n       bounded_set (A UNION B UNION C) SUBSET bounded_set (B UNION C)
-      #|  !G x. bounded_set G x ==> euclid 2 x
-      #|  !G x. unbounded_set G x ==> euclid 2 x
+      #|  forall A B C. psegment_triple A B C /\\ A SUBSET par_cell F (B UNION C) ==>\n       bounded_set (A UNION B UNION C) SUBSET bounded_set (B UNION C)
+      #|  forall G x. bounded_set G x ==> euclid 2 x
+      #|  forall G x. unbounded_set G x ==> euclid 2 x
       #|  parity (A UNION C) u = T
       #|  u
       #|  C
@@ -78779,7 +78779,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  T
       #|  A' UNION B'
-      #|  !A B. rectagon (A UNION B) /\\ par_cell T (A UNION B) u ==> ~curve_cell A u
+      #|  forall A B. rectagon (A UNION B) /\\ par_cell T (A UNION B) u ==> ~curve_cell A u
       #|  T
       #|  u
       #|  B UNION C
@@ -78826,11 +78826,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  C
-      #|  !A B C. psegment_triple A B C ==> bounded_set (A UNION B UNION C)\n       SUBSET (bounded_set (A UNION B) UNION bounded_set (B UNION C))
-      #|  rectagon_graph G  <=>\n       graph G /\\\n       graph_edge G SUBSET psegment /\\\n       (!e. graph_edge G e ==> (graph_inc G e = endpoint e)) /\\\n       (!e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n             (e INTER e' = EMPTY)) /\\\n       (!e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n             (cls e INTER cls e' = endpoint e INTER endpoint e'))
+      #|  forall A B C. psegment_triple A B C ==> bounded_set (A UNION B UNION C)\n       SUBSET (bounded_set (A UNION B) UNION bounded_set (B UNION C))
+      #|  rectagon_graph G  <=>\n       graph G /\\\n       graph_edge G SUBSET psegment /\\\n       (forall e. graph_edge G e ==> (graph_inc G e = endpoint e)) /\\\n       (forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n             (e INTER e' = EMPTY)) /\\\n       (forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n             (cls e INTER cls e' = endpoint e INTER endpoint e'))
       #|  rectagonal_graph (G:(A,B)graph_t) <=>\n    (?H. rectagon_graph H /\\ graph_isomorphic H G)
-      #|  k33_rectagon_hyp R f <=>  rectagon R /\\\n   (!(i:three_t) j. ~(i = j) ==> (cls (f i) INTER (cls (f j)) = EMPTY)) /\\\n   (!i j. ~(i = j) ==> ((f i) INTER (f j) = EMPTY)) /\\\n   (!i. ?A B. (R = A UNION B) /\\ psegment_triple A B (f i) /\\\n       (!j. ~(cls (f j) INTER cls A = EMPTY) /\\\n               ~(cls (f j) INTER cls B = EMPTY)) /\\\n       (!j. ~(i = j) ==> (cls (f j) INTER cls A INTER cls B = EMPTY)))
-      #|  !C. C SUBSET (A' UNION B') ==> (C INTER f j = EMPTY)
+      #|  k33_rectagon_hyp R f <=>  rectagon R /\\\n   (forall(i:three_t) j. ~(i = j) ==> (cls (f i) INTER (cls (f j)) = EMPTY)) /\\\n   (forall i j. ~(i = j) ==> ((f i) INTER (f j) = EMPTY)) /\\\n   (forall i. ?A B. (R = A UNION B) /\\ psegment_triple A B (f i) /\\\n       (forall j. ~(cls (f j) INTER cls A = EMPTY) /\\\n               ~(cls (f j) INTER cls B = EMPTY)) /\\\n       (forall j. ~(i = j) ==> (cls (f j) INTER cls A INTER cls B = EMPTY)))
+      #|  forall C. C SUBSET (A' UNION B') ==> (C INTER f j = EMPTY)
       #|  j
       #|  j
       #|  i
@@ -78897,7 +78897,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f i
       #|  R
       #|  i
-      #|  !R f i. k33_rectagon_hyp R f /\\\n      f i SUBSET par_cell F R  ==>\n       (!j. ~(j = i) ==> (f j SUBSET par_cell T R))
+      #|  forall R f i. k33_rectagon_hyp R f /\\\n      f i SUBSET par_cell F R  ==>\n       (forall j. ~(j = i) ==> (f j SUBSET par_cell T R))
       #|  T
       #|  A UNION B
       #|  C
@@ -78910,8 +78910,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  A SUBSET par_cell F (B UNION C)
-      #|  !A B C. psegment_triple A B C /\\ C SUBSET par_cell T (A UNION B) ==>\n    (?A' B'. psegment_triple A' B' C /\\ C SUBSET par_cell T (A' UNION B')\n         /\\ A' SUBSET par_cell F (B' UNION C)\n         /\\ B' SUBSET par_cell T (A' UNION C)\n         /\\ (A UNION B = A' UNION B')\n         /\\ (cls A INTER cls B = cls A' INTER cls B') /\\\n         (!P. (P A  /\\ P B ) ==> P A' /\\ P B'))
-      #|  !C. C SUBSET (A'' UNION B'') ==> (C INTER f j = EMPTY)
+      #|  forall A B C. psegment_triple A B C /\\ C SUBSET par_cell T (A UNION B) ==>\n    (?A' B'. psegment_triple A' B' C /\\ C SUBSET par_cell T (A' UNION B')\n         /\\ A' SUBSET par_cell F (B' UNION C)\n         /\\ B' SUBSET par_cell T (A' UNION C)\n         /\\ (A UNION B = A' UNION B')\n         /\\ (cls A INTER cls B = cls A' INTER cls B') /\\\n         (forall P. (P A  /\\ P B ) ==> P A' /\\ P B'))
+      #|  forall C. C SUBSET (A'' UNION B'') ==> (C INTER f j = EMPTY)
       #|  j
       #|  j
       #|  i
@@ -78970,7 +78970,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B'
       #|  f i UNION A'
       #|  j
-      #|  !j. ~(cls (f j) INTER cls A' = {}) /\\ ~(cls (f j) INTER cls B' = {})
+      #|  forall j. ~(cls (f j) INTER cls A' = {}) /\\ ~(cls (f j) INTER cls B' = {})
       #|  cls A INTER cls B
       #|  A UNION B
       #|  f i
@@ -78978,18 +78978,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A
       #|  R
       #|  i
-      #|  !R f i. k33_rectagon_hyp R f /\\\n      f i SUBSET par_cell T R  ==>\n       (!j. ~(j = i) ==> (f j SUBSET par_cell F R))
+      #|  forall R f i. k33_rectagon_hyp R f /\\\n      f i SUBSET par_cell T R  ==>\n       (forall j. ~(j = i) ==> (f j SUBSET par_cell F R))
       #|  (REP3 (ABS3 0) = 0) /\\ (REP3(ABS3 1) = 1) /\\ (REP3(ABS3 2) = 2)
       #|  ABS3 0
       #|  REP3
       #|  ABS3 1
       #|  i = ABS3 0
-      #|  !i. ?(j:three_t). ~(i = j)
+      #|  forall i. ?(j:three_t). ~(i = j)
       #|  REP3 i
-      #|  !(i:three_t). ?j. (i = ABS3 j) /\\ (j < 3)
+      #|  forall(i:three_t). ?j. (i = ABS3 j) /\\ (j < 3)
       #|  ABS3
-      #|  !i j. (i = j) <=> (REP3 i = REP3 j)
-      #|  !i. (REP3 i < 3)
+      #|  forall i j. (i = j) <=> (REP3 i = REP3 j)
+      #|  forall i. (REP3 i < 3)
       #|   ABS3 k'
       #|  2 < 3
       #|    ~(2 = REP3 i) /\\ ~(2 = REP3 j)
@@ -78998,7 +78998,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  0 < 3
       #|    ~(0 = REP3 i) /\\ ~(0 = REP3 j)
       #|  ?k'. (k' < 3) /\\ ~(k' = REP3 i) /\\ ~(k' = REP3 j)
-      #|  !i j. ?(k:three_t). ~(k = i) /\\ ~(k = j)
+      #|  forall i j. ?(k:three_t). ~(k = i) /\\ ~(k = j)
       #|  F
       #|  T
       #|  x <| 2 <=> (x = 0)\\/ (x = 1)
@@ -79006,11 +79006,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  \\ u.  if u then 0 else 1
       #|  (UNIV:bool->bool) HAS_SIZE 2
       #|  (SUC x = 3) ==> (x = 2)
-      #|  !(i:three_t). (UNIV DELETE i) HAS_SIZE 2
+      #|  forall(i:three_t). (UNIV DELETE i) HAS_SIZE 2
       #|  compose f  f'
-      #|  !(A:A->bool) (B:B->bool) n. A HAS_SIZE n /\\ B HAS_SIZE n ==>\n          (?f. BIJ f A B)
+      #|  forall(A:A->bool) (B:B->bool) n. A HAS_SIZE n /\\ B HAS_SIZE n ==>\n          (?f. BIJ f A B)
       #|  2
-      #|  !i. ?b. BIJ b (UNIV:bool->bool) ((UNIV:three_t->bool) DELETE i)
+      #|  forall i. ?b. BIJ b (UNIV:bool->bool) ((UNIV:three_t->bool) DELETE i)
       #|  REP3
       #|  k
       #|  j
@@ -79029,7 +79029,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  k = ABS3 1
       #|  f j SUBSET par_cell F R
       #|  j = ABS3 0
-      #|  !R f. k33_rectagon_hyp R f ==>\n      (?i. (f i SUBSET par_cell F R))
+      #|  forall R f. k33_rectagon_hyp R f ==>\n      (?i. (f i SUBSET par_cell F R))
       #|  T
       #|  R
       #|  f k
@@ -79050,11 +79050,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  R
       #|  f
       #|  R
-      #|  !R f. ~k33_rectagon_hyp R f
+      #|  forall R f. ~k33_rectagon_hyp R f
       #|  graph_edge (k33_graph) = cartesian UNIV UNIV
       #|  graph_vertex (k33_graph) = cartesian UNIV UNIV
-      #|  !e v. graph_inc (k33_graph) e v <=> (v = (FST e,T)) \\/ (v = (SND e,F))
-      #|  !x. cartesian (UNIV:A->bool) (UNIV:B->bool) x
+      #|  forall e v. graph_inc (k33_graph) e v <=> (v = (FST e,T)) \\/ (v = (SND e,F))
+      #|  forall x. cartesian (UNIV:A->bool) (UNIV:B->bool) x
       #|  u
       #|  u
       #|  u
@@ -79078,12 +79078,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x',F)
       #|  (x',T)
       #|  u
-      #|  !x y. (uB (x) = uB (y)) ==> (x = y)
-      #|  !x y. (uA (x) = uA (y)) ==> (x = y)
+      #|  forall x y. (uB (x) = uB (y)) ==> (x = y)
+      #|  forall x y. (uA (x) = uA (y)) ==> (x = y)
       #|  u
       #|  u
       #|  (i,j)
-      #|  !i j. ~(uA i = uB j)
+      #|  forall i j. ~(uA i = uB j)
       #|  (u,f)
       #|  f
       #|  u
@@ -79109,7 +79109,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (SND i,F)
       #|  uB
       #|  uA
-      #|  !i. graph_edge H (v i)
+      #|  forall i. graph_edge H (v i)
       #|  (x,F) = (y,F)
       #|  uB
       #|  (x,T) = (y,T)
@@ -79121,10 +79121,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v
       #|  k33_graph
       #|  H
-      #|  rectagonal_graph k33_graph <=> (?f uA uB.\n     INJ uA UNIV UNIV /\\\n     INJ uB UNIV UNIV /\\\n     (!(i:three_t#three_t).\n          segment_end (f i) (uA (FST i)) (uB (SND i))) /\\\n     (!i j. ~(f i INTER f j = EMPTY) ==> (i = j)) /\\\n     (!i j. ~(i = j) ==> (cls (f i) INTER cls (f j) =\n           endpoint (f i) INTER endpoint (f j))))\n     
+      #|  rectagonal_graph k33_graph <=> (?f uA uB.\n     INJ uA UNIV UNIV /\\\n     INJ uB UNIV UNIV /\\\n     (forall(i:three_t#three_t).\n          segment_end (f i) (uA (FST i)) (uB (SND i))) /\\\n     (forall i j. ~(f i INTER f j = EMPTY) ==> (i = j)) /\\\n     (forall i j. ~(i = j) ==> (cls (f i) INTER cls (f j) =\n           endpoint (f i) INTER endpoint (f j))))\n     
       #|  TAGB
       #|  TAGB
-      #|  !x a (b:A). (x = a) /\\ (x = b) <=> (x = a) /\\ (a = b)
+      #|  forall x a (b:A). (x = a) /\\ (x = b) <=> (x = a) /\\ (a = b)
       #|  b (~eps),(b eps)
       #|  (i,b eps)
       #|  b (~eps),i
@@ -79145,7 +79145,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f (b (~eps),b eps)
       #|  f (b (~eps),i)
       #|  A
-      #|  !eps. segment_end (A eps) (uA i) (uB i)
+      #|  forall eps. segment_end (A eps) (uA i) (uB i)
       #|  A
       #|  i'
       #|  j
@@ -79158,7 +79158,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e = T
       #|  i''
       #|  i'' = i
-      #|  !i'. (i' = i) \\/ (i' = b T) \\/ (i' = b F)
+      #|  forall i'. (i' = i) \\/ (i' = b T) \\/ (i' = b F)
       #|  u
       #|  R
       #|  A
@@ -79166,7 +79166,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f j
       #|  j
       #|  i'
-      #|  !i j. (f i INTER f j = EMPTY) <=> ~( i = j)
+      #|  forall i j. (f i INTER f j = EMPTY) <=> ~( i = j)
       #|  A
       #|  A T INTER A F = EMPTY 
       #|  uA (b (~eps))
@@ -79188,7 +79188,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  i
       #|  j = i
-      #|  (!j eps. ~(cls (f (j,j)) INTER cls (A eps) = {}))
+      #|  (forall j eps. ~(cls (f (j,j)) INTER cls (A eps) = {}))
       #|  (b (~eps),b eps)
       #|  (i,i)
       #|  (b (~eps),i)
@@ -79196,15 +79196,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (i, b eps)
       #|  (i,i)
       #|  A
-      #|  (!eps. cls (A eps) INTER cls (f (i,i)) = endpoint (f (i,i)))
+      #|  (forall eps. cls (A eps) INTER cls (f (i,i)) = endpoint (f (i,i)))
       #|  A
-      #|  (!eps. A eps INTER f (i,i) = {})
+      #|  (forall eps. A eps INTER f (i,i) = {})
       #|  A
       #|  A = (\\ (e: bool). f(i, b e) UNION f (b (~e),b e) UNION f (b(~e),i))
       #|  j
-      #|  !j. ~(j = i) ==> (?e. (j = b e))
-      #|  !e e'. (b e = b e') <=> (e = e')
-      #|  !e. ~(b e = i)
+      #|  forall j. ~(j = i) ==> (?e. (j = b e))
+      #|  forall e e'. (b e = b e') <=> (e = e')
+      #|  forall e. ~(b e = i)
       #|  i
       #|  R
       #|  uB i
@@ -79221,27 +79221,27 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  endpoint (f (i,i))
       #|  cls (f (j,j)) INTER cls(f (i,i))
-      #|  (!j. ~(i = j) ==> (cls (f (j,j)) INTER cls (A T) INTER cls (A F) = {}))
+      #|  (forall j. ~(i = j) ==> (cls (f (j,j)) INTER cls (A T) INTER cls (A F) = {}))
       #|  A F
       #|  A T
-      #|  ?A. (cls (A T) INTER cls (A F) SUBSET endpoint (f (i,i))) /\\ (A T INTER A F = EMPTY ) /\\ (A T UNION A F = R) /\\ (!eps. psegment (A eps)) /\\ (!j eps. ~(cls (f (j,j)) INTER cls (A eps) = EMPTY)) /\\ (!eps. A eps INTER (f (i,i)) = EMPTY) /\\ (!eps. endpoint (A eps) = endpoint (f(i,i))) /\\ (!eps. (cls (A eps) INTER cls (f(i,i)) = endpoint (f(i,i))))
+      #|  ?A. (cls (A T) INTER cls (A F) SUBSET endpoint (f (i,i))) /\\ (A T INTER A F = EMPTY ) /\\ (A T UNION A F = R) /\\ (forall eps. psegment (A eps)) /\\ (forall j eps. ~(cls (f (j,j)) INTER cls (A eps) = EMPTY)) /\\ (forall eps. A eps INTER (f (i,i)) = EMPTY) /\\ (forall eps. endpoint (A eps) = endpoint (f(i,i))) /\\ (forall eps. (cls (A eps) INTER cls (f(i,i)) = endpoint (f(i,i))))
       #|  (i,i) = (j,j)
-      #|  (!i j. ~(i = j) ==> (f (i,i) INTER f (j,j) = {}))
+      #|  (forall i j. ~(i = j) ==> (f (i,i) INTER f (j,j) = {}))
       #|  x
       #|  j,j
       #|  i,i
       #|  j,j
       #|  (i,i)
-      #|  (!i j. ~(i = j) ==> (cls (f (i,i)) INTER cls (f (j,j)) = {}))
-      #|  !i j. (uB i = uB j) <=> (i = j)
-      #|  !i j. (uA i = uA j) <=> (i = j)
+      #|  (forall i j. ~(i = j) ==> (cls (f (i,i)) INTER cls (f (j,j)) = {}))
+      #|  forall i j. (uB i = uB j) <=> (i = j)
+      #|  forall i j. (uA i = uA j) <=> (i = j)
       #|  i,j
-      #|  !i j. ~(uA i = uB j)
+      #|  forall i j. ~(uA i = uB j)
       #|  R
       #|  R = UNIONS { e | (?i j. ~(i = j) /\\ (e = f (i,j)) ) }
       #|  diag
       #|  diag
-      #|  !i. diag i = f(i,i)
+      #|  forall i. diag i = f(i,i)
       #|  diag  = (\\ (i:three_t). f (i,i))
       #|  ~(rectagonal_graph k33_graph)
       #|  TAGB
@@ -79261,23 +79261,23 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  eps_translate eps  =\n  if eps then h_translate else v_translate
-      #|  !eps r. eps_translate eps r = if eps then h_translate r else\n     v_translate r
-      #|  !eps r. homeomorphism (eps_translate eps r) top2 top2
+      #|  forall eps r. eps_translate eps r = if eps then h_translate r else\n     v_translate r
+      #|  forall eps r. homeomorphism (eps_translate eps r) top2 top2
       #|  eps_hyper eps z =\n  if eps then hyperplane 2 e1 z else hyperplane 2 e2 z
-      #|  !eps r z. IMAGE (eps_translate eps r) (eps_hyper eps z) =\n         (eps_hyper eps (z + r)) 
-      #|  !eps r z. IMAGE (eps_translate eps r) (eps_hyper (~eps) z) =\n         (eps_hyper (~eps) z) 
+      #|  forall eps r z. IMAGE (eps_translate eps r) (eps_hyper eps z) =\n         (eps_hyper eps (z + r)) 
+      #|  forall eps r z. IMAGE (eps_translate eps r) (eps_hyper (~eps) z) =\n         (eps_hyper (~eps) z) 
       #|  eps_scale eps r =\n  if eps then r_scale r else u_scale r
-      #|  !eps r z. (&0 < r) ==>\n         (IMAGE (eps_scale eps r) (eps_hyper (~eps) z) =\n            (eps_hyper (~eps) z)) 
-      #|  !eps r z. (&0 < r) ==>\n         (IMAGE (eps_scale eps r) (eps_hyper (eps) z) =\n            (eps_hyper (eps) (if (&0 < z) then r*z else z))) 
-      #|  !eps r. (&0 < r) ==> homeomorphism (eps_scale eps r) top2 top2
-      #|  graph_support_eps G E <=>\n  good_plane_graph G /\\  FINITE E /\\\n  (!e. (graph_edge G e ==> e SUBSET UNIONS E)) /\\\n  (!v. (graph_vertex G v ==>\n         E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)))) /\\\n  (!e. (E e ==> (?z eps. (e = eps_hyper eps z)))) /\\\n  (!z eps. (z <= &0 /\\ E (eps_hyper eps z) ==> (?j. z = -- &j)))
+      #|  forall eps r z. (&0 < r) ==>\n         (IMAGE (eps_scale eps r) (eps_hyper (~eps) z) =\n            (eps_hyper (~eps) z)) 
+      #|  forall eps r z. (&0 < r) ==>\n         (IMAGE (eps_scale eps r) (eps_hyper (eps) z) =\n            (eps_hyper (eps) (if (&0 < z) then r*z else z))) 
+      #|  forall eps r. (&0 < r) ==> homeomorphism (eps_scale eps r) top2 top2
+      #|  graph_support_eps G E <=>\n  good_plane_graph G /\\  FINITE E /\\\n  (forall e. (graph_edge G e ==> e SUBSET UNIONS E)) /\\\n  (forall v. (graph_vertex G v ==>\n         E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)))) /\\\n  (forall e. (E e ==> (?z eps. (e = eps_hyper eps z)))) /\\\n  (forall z eps. (z <= &0 /\\ E (eps_hyper eps z) ==> (?j. z = -- &j)))
       #|  iso_support_eps_pair (G:(A,B)graph_t) =\n  { (H,E) | (graph_isomorphic G H) /\\  graph_support_eps H E }
-      #|  !z z' eps. ~(eps_hyper eps z = eps_hyper (~eps) z')
+      #|  forall z z' eps. ~(eps_hyper eps z = eps_hyper (~eps) z')
       #|  eps'
       #|  eps' = eps
       #|  eps'
       #|  eps' = ~eps
-      #|  !z z' eps eps'. (eps_hyper eps z = eps_hyper eps' z') <=>\n     ((eps = eps') /\\ (z = z'))
+      #|  forall z z' eps eps'. (eps_hyper eps z = eps_hyper eps' z') <=>\n     ((eps = eps') /\\ (z = z'))
       #|  z'
       #|  eps_hyper eps z
       #|  e
@@ -79286,9 +79286,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  T
       #|  z
       #|  e
-      #|  (!e. E e ==> (?z eps. (&0 < z) /\\ (e = eps_hyper eps z)))
+      #|  (forall e. E e ==> (?z eps. (&0 < z) /\\ (e = eps_hyper eps z)))
       #|  G
-      #|  !(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4) ==>\n     ~(iso_support_eps_pair G = EMPTY) 
+      #|  forall(G:(A,B)graph_t). (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4) ==>\n     ~(iso_support_eps_pair G = EMPTY) 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79300,7 +79300,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  count_iso_eps_pair ((H:(A,B)graph_t),E) =\n   CARD { e | (?z eps. (&0 < z) /\\ E e /\\  (e  = eps_hyper eps z)) }
       #|  E
       #|  E'
-      #|  !(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) ==> FINITE\n   { e | (?z eps. (&0 < z) /\\ E e /\\  (e  = eps_hyper eps z)) }
+      #|  forall(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) ==> FINITE\n   { e | (?z eps. (&0 < z) /\\ E e /\\  (e  = eps_hyper eps z)) }
       #|  ~( z <= &0) ==> (&0 < z)
       #|  A
       #|  eps
@@ -79312,7 +79312,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A
       #|  A HAS_SIZE 0
       #|  A = { e | (?z eps. (&0 < z) /\\ E e /\\  (e  =  eps_hyper eps z)) }
-      #|  !(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) /\\\n   (count_iso_eps_pair (H,E) = 0) ==>\n  good_plane_graph H /\\  FINITE E /\\\n  (!e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n  (!v. (graph_vertex H v ==>\n         E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)))) /\\\n  (!e. (E e ==> (?z eps. (e = eps_hyper eps z) ))) /\\\n  (!z eps. (E (eps_hyper eps z) ==> (?j. z = -- &j)))\n    
+      #|  forall(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) /\\\n   (count_iso_eps_pair (H,E) = 0) ==>\n  good_plane_graph H /\\  FINITE E /\\\n  (forall e. (graph_edge H e ==> e SUBSET UNIONS E)) /\\\n  (forall v. (graph_vertex H v ==>\n         E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)))) /\\\n  (forall e. (E e ==> (?z eps. (e = eps_hyper eps z) ))) /\\\n  (forall z eps. (E (eps_hyper eps z) ==> (?j. z = -- &j)))\n    
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79332,7 +79332,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps_hyper eps z
       #|  eps
       #|  z = inf C
-      #|  (!z. C z ==> inf C <= z)
+      #|  (forall z. C z ==> inf C <= z)
       #|  C (inf C)
       #|  inf C
       #|  A
@@ -79354,7 +79354,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  FINITE A
       #|  A = {e | ?z eps. &0 < z /\\ E e /\\ (e = eps_hyper eps z)}
-      #|  !(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) /\\\n    (0 < count_iso_eps_pair (H,E)) ==>\n    (?z eps. (&0 < z) /\\ E (eps_hyper eps z) /\\\n      (!w. (&0 < w /\\ w < z) ==> ~(E (eps_hyper eps w))))
+      #|  forall(G:(A,B)graph_t) H E. iso_support_eps_pair G (H,E) /\\\n    (0 < count_iso_eps_pair (H,E)) ==>\n    (?z eps. (&0 < z) /\\ E (eps_hyper eps z) /\\\n      (forall w. (&0 < w /\\ w < z) ==> ~(E (eps_hyper eps w))))
       #|  x
       #|  z'
       #|  &0 < r * z'
@@ -79398,7 +79398,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  im = IMAGE (eps_scale eps r)
       #|  r
       #|  eps
-      #|  !G E eps r. (&0 < r) /\\ graph_support_eps G E ==> graph_support_eps\n       (plane_graph_image (eps_scale eps r)G)\n       (IMAGE2 (eps_scale eps r) E)\n          
+      #|  forall G E eps r. (&0 < r) /\\ graph_support_eps G E ==> graph_support_eps\n       (plane_graph_image (eps_scale eps r)G)\n       (IMAGE2 (eps_scale eps r) E)\n          
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79416,7 +79416,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z + &j
       #|  0
       #|  z = &0
-      #|  !a. (z' + (-- a)) + a = z'
+      #|  forall a. (z' + (-- a)) + a = z'
       #|  x
       #|  r
       #|  eps''
@@ -79469,7 +79469,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  im = IMAGE (eps_translate eps r)
       #|  r
       #|  eps
-      #|  !G E eps r.  (?j.  -- &j = r) /\\\n      (!w. (&0 < w /\\ w < -- r) ==> ~(E (eps_hyper eps w)))  /\\\n       graph_support_eps G E ==>\n       graph_support_eps\n       (plane_graph_image (eps_translate eps r)G)\n       (IMAGE2 (eps_translate eps r) E)\n          
+      #|  forall G E eps r.  (?j.  -- &j = r) /\\\n      (forall w. (&0 < w /\\ w < -- r) ==> ~(E (eps_hyper eps w)))  /\\\n       graph_support_eps G E ==>\n       graph_support_eps\n       (plane_graph_image (eps_translate eps r)G)\n       (IMAGE2 (eps_translate eps r) E)\n          
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79511,7 +79511,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  eps
       #|  E
       #|  G
-      #|  !G E eps r. (&0 < r) /\\ graph_support_eps G E ==>\n     (count_iso_eps_pair (G,E) = count_iso_eps_pair\n       ((plane_graph_image(eps_scale eps r) G),\n                (IMAGE2 (eps_scale eps r) E))) 
+      #|  forall G E eps r. (&0 < r) /\\ graph_support_eps G E ==>\n     (count_iso_eps_pair (G,E) = count_iso_eps_pair\n       ((plane_graph_image(eps_scale eps r) G),\n                (IMAGE2 (eps_scale eps r) E))) 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79576,7 +79576,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A
       #|  A (eps_hyper eps (&1))
       #|  A = {e | ?z eps. &0 < z /\\ E e /\\ (e = eps_hyper eps z)}
-      #|  !G E eps .  graph_support_eps G E /\\\n       (!w. (&0 < w /\\ w <  &1) ==> ~(E (eps_hyper eps w))) /\\\n      E (eps_hyper eps (&1))  ==>\n     (count_iso_eps_pair (G,E) = SUC(count_iso_eps_pair\n       ((plane_graph_image(eps_translate eps (-- &1)) G),\n                (IMAGE2 (eps_translate eps (-- &1)) E)))) 
+      #|  forall G E eps .  graph_support_eps G E /\\\n       (forall w. (&0 < w /\\ w <  &1) ==> ~(E (eps_hyper eps w))) /\\\n      E (eps_hyper eps (&1))  ==>\n     (count_iso_eps_pair (G,E) = SUC(count_iso_eps_pair\n       ((plane_graph_image(eps_translate eps (-- &1)) G),\n                (IMAGE2 (eps_translate eps (-- &1)) E)))) 
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79635,7 +79635,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  H
       #|  G
-      #|  !G:(A,B)graph_t H E. iso_support_eps_pair G (H,E) /\\\n    (0 <| count_iso_eps_pair (H,E)) ==>\n    (?H' E'. iso_support_eps_pair G (H',E') /\\\n       (count_iso_eps_pair(H',E') = count_iso_eps_pair(H,E)) /\\\n       (?eps. E' (eps_hyper eps (&1)) /\\\n         (!w. (&0 < w /\\ w < &1) ==> ~(E'(eps_hyper eps w)))))
+      #|  forall G:(A,B)graph_t H E. iso_support_eps_pair G (H,E) /\\\n    (0 <| count_iso_eps_pair (H,E)) ==>\n    (?H' E'. iso_support_eps_pair G (H',E') /\\\n       (count_iso_eps_pair(H',E') = count_iso_eps_pair(H,E)) /\\\n       (?eps. E' (eps_hyper eps (&1)) /\\\n         (forall w. (&0 < w /\\ w < &1) ==> ~(E'(eps_hyper eps w)))))
       #|  -- (-- x) = x
       #|  (plane_graph_image (eps_translate eps (-- &1)) H')
       #|  H'
@@ -79662,7 +79662,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  iso_support_eps_pair G
       #|  G
       #|  c  = count_iso_eps_pair:((num->real,(num->real)->bool)graph_t#(((num->real)->bool)->bool))->num
-      #|  !(G:(A,B)graph_t) . (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4) ==>\n  (?H E. iso_support_eps_pair G (H,E) /\\\n     (count_iso_eps_pair (H,E) = 0))
+      #|  forall(G:(A,B)graph_t) . (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4) ==>\n  (?H E. iso_support_eps_pair G (H,E) /\\\n     (count_iso_eps_pair (H,E) = 0))
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -79682,28 +79682,28 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  H
       #|  G
-      #|  !(G:(A,B)graph_t) . (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4) ==>\n  (?H E.\n     graph_isomorphic G H /\\\n     good_plane_graph H /\\\n     FINITE E /\\\n     (!e. graph_edge H e ==> e SUBSET UNIONS E) /\\\n     (!v. graph_vertex H v\n                  ==> E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1))) /\\\n     (!e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n     (!z eps. E (eps_hyper eps z) ==> (?j. z = -- &j))\n    )
+      #|  forall(G:(A,B)graph_t) . (planar_graph G) /\\\n         FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4) ==>\n  (?H E.\n     graph_isomorphic G H /\\\n     good_plane_graph H /\\\n     FINITE E /\\\n     (forall e. graph_edge H e ==> e SUBSET UNIONS E) /\\\n     (forall v. graph_vertex H v\n                  ==> E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1))) /\\\n     (forall e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n     (forall z eps. E (eps_hyper eps z) ==> (?j. z = -- &j))\n    )
       #|  0 **| 2 = 0
       #|  v
-      #|  !m. h_edge m SUBSET open_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e1) (&1 / &2)
+      #|  forall m. h_edge m SUBSET open_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e1) (&1 / &2)
       #|  0 **| 2 = 0
       #|  u
-      #|  !m. v_edge m SUBSET open_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e2) (&1 / &2)
-      #|  !n m. sqrt ((&n/ &m) pow 2) = &n/ (&m) 
+      #|  forall m. v_edge m SUBSET open_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e2) (&1 / &2)
+      #|  forall n m. sqrt ((&n/ &m) pow 2) = &n/ (&m) 
       #|  EVEN (2 *| n)
       #|  m'
       #|  ODD (2 *| n)
       #|  m
       #|  m
       #|  x
-      #|  !x. ~(&:0 = ||: x) ==> (&:1 <= ||: x)
-      #|  !x. &2 * abs  x = abs  (&2 * x)
+      #|  forall x. ~(&:0 = ||: x) ==> (&:1 <= ||: x)
+      #|  forall x. &2 * abs  x = abs  (&2 * x)
       #|  &2 = abs  (&2)
       #|  &2 * (&1/ &2) = &1
       #|  &2
-      #|  !m. &1 / &2 <= abs  (real_of_int m - &1 / &2)
+      #|  forall m. &1 / &2 <= abs  (real_of_int m - &1 / &2)
       #|  x < y <=> (x <= y /\\ ~(y <= x))
-      #|  !x y. abs  x < abs  y <=> x pow 2 < y pow 2
+      #|  forall x y. abs  x < abs  y <=> x pow 2 < y pow 2
       #|  &1
       #|  x < z /\\ &0 <= y  ==> x < y + z
       #|  floor u' = FST m
@@ -79719,10 +79719,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_of_int (FST m) + &1 < u'
       #|  &1 / &2
       #|  &1 / &2 < (real_of_int (FST m) + &1 / &2) - u'
-      #|  !x y. x < abs  y <=> (&0 <= y /\\ x < y) \\/ (y < &0 /\\ x < -- y)
+      #|  forall x y. x < abs  y <=> (&0 <= y /\\ x < y) \\/ (y < &0 /\\ x < -- y)
       #|  abs  (&1/ &2) = &1 / &2
       #|  (x < u /\\ &0 <= v) ==> x < u + v
-      #|  !x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
+      #|  forall x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
       #|  x <= y ==> ~( y < x)
       #|  u
       #|  v
@@ -79733,13 +79733,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  --((real_of_int (FST m) + &1 / &2) - real_of_int (FST m')) = (real_of_int (FST m' - FST m)) - &1 / &2 
       #|  abs  (&1/ &2) = &1 / &2
       #|  (x <= u /\\ &0 < v) ==> x < u + v
-      #|  !x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
+      #|  forall x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
       #|  x <= y ==> ~( y < x)
       #|  u'
       #|  p
       #|  u
       #|  e
-      #|  !e m. edge e /\\ ~(e INTER closed_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e1) (&1 / &2) = EMPTY) ==>\n       (e = h_edge m)
+      #|  forall e m. edge e /\\ ~(e INTER closed_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e1) (&1 / &2) = EMPTY) ==>\n       (e = h_edge m)
       #|  &1
       #|  x < y /\\ &0 <= z  ==> x < y + z
       #|  floor v = SND  m
@@ -79755,11 +79755,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_of_int (SND  m) + &1 < v
       #|  &1 / &2
       #|  &1 / &2 < (real_of_int (SND  m) + &1 / &2) - v
-      #|  !x y. x < abs  y <=> (&0 <= y /\\ x < y) \\/ (y < &0 /\\ x < -- y)
+      #|  forall x y. x < abs  y <=> (&0 <= y /\\ x < y) \\/ (y < &0 /\\ x < -- y)
       #|  abs  (&1/ &2) = &1 / &2
       #|  (x < v /\\ &0 <= u) ==> x < u + v
       #|  a \\/ b ==> b \\/ a
-      #|  !x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
+      #|  forall x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
       #|  x <= y ==> ~( y < x)
       #|  u'
       #|  u
@@ -79770,14 +79770,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  --((real_of_int (SND m) + &1 / &2) - real_of_int (SND  m')) = (real_of_int (SND  m' - SND  m)) - &1 / &2 
       #|  abs  (&1/ &2) = &1 / &2
       #|  (x <= v /\\ &0 < u) ==> x < u + v
-      #|  !x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
+      #|  forall x. (&1/ &2 < x) <=> sqrt((&1/ &2) pow 2) < x
       #|  x <= y ==> ~( y < x)
       #|  v 
       #|  p
       #|  u
       #|  e
       #|  a \\/ b ==> b \\/ a
-      #|  !e m. edge e /\\ ~(e INTER closed_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e2) (&1 / &2) = EMPTY) ==>\n       (e = v_edge m)
+      #|  forall e m. edge e /\\ ~(e INTER closed_ball\n       (euclid 2,d_euclid)\n       (pointI m + (&1/ &2)*# e2) (&1 / &2) = EMPTY) ==>\n       (e = v_edge m)
       #|  u
       #|  E
       #|  x
@@ -79826,14 +79826,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  h_edge (&:0,&:0)
       #|  C
       #|  C = EMPTY
-      #|  !C. connected top2 C /\\ C SUBSET (UNIONS edge) ==>\n    (?e. edge e /\\ C SUBSET e)
+      #|  forall C. connected top2 C /\\ C SUBSET (UNIONS edge) ==>\n    (?e. edge e /\\ C SUBSET e)
       #|  &1 = &1 pow 2
-      #|  !x. ~(x = &:0) ==> &1 <= (real_of_int x) pow 2
+      #|  forall x. ~(x = &:0) ==> &1 <= (real_of_int x) pow 2
       #|  &1 <= x /\\ &0 <= y ==> &1 <= y + x
       #|  &1 <= x /\\ &0 <= y ==> &1 <= x + y
       #|  &1 = sqrt(&1)
       #|  x < y ==> ~(y <= x)
-      #|  !m n. d_euclid (pointI m) (pointI n) < &1 ==> (m = n)
+      #|  forall m n. d_euclid (pointI m) (pointI n) < &1 ==> (m = n)
       #|  &0 < &1 / &2
       #|  &2 * &1/ &2 = &1
       #|  &2 * &1 / &2 = &1
@@ -79844,7 +79844,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  d_euclid
       #|  euclid 2
       #|  &1/ &2
-      #|  ?eps. !x m n. (&0 <eps ) /\\\n       (open_ball(euclid 2,d_euclid) x eps (pointI m) /\\\n       open_ball(euclid 2,d_euclid) x eps (pointI n) ==>\n        (m = n))  
+      #|  ?eps. forall x m n. (&0 <eps ) /\\\n       (open_ball(euclid 2,d_euclid) x eps (pointI m) /\\\n       open_ball(euclid 2,d_euclid) x eps (pointI n) ==>\n        (m = n))  
       #|  X
       #|  eps
       #|  x'
@@ -79865,7 +79865,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  X
       #|  X
-      #|  !m. ?b. (X m) ==> (B b /\\ b (pointI m))
+      #|  forall m. ?b. (X m) ==> (B b /\\ b (pointI m))
       #|  X
       #|  X = { m | ?b. B b /\\ b (pointI m) }
       #|  eps
@@ -79879,7 +79879,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  e
       #|  e
-      #|  ! e .\n       simple_arc top2 e  ==>\n       (?X. FINITE X /\\ (!m. e (pointI m) ==> X m))
+      #|  forall e .\n       simple_arc top2 e  ==>\n       (?X. FINITE X /\\ (forall m. e (pointI m) ==> X m))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79902,7 +79902,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v'
       #|  v
       #|  e
-      #|  !e v v'. simple_arc_end  e v v' ==>\n    (?X f. (X SUBSET {x | &0 <= x /\\ x <= &1}) /\\ FINITE X /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (!x.   &0 <= x /\\ x <= &1 ==> ( (?m. f x = pointI m) <=> (X x))))
+      #|  forall e v v'. simple_arc_end  e v v' ==>\n    (?X f. (X SUBSET {x | &0 <= x /\\ x <= &1}) /\\ FINITE X /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (forall x.   &0 <= x /\\ x <= &1 ==> ( (?m. f x = pointI m) <=> (X x))))
       #|  x
       #|  x'
       #|  f
@@ -79912,7 +79912,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v'
       #|  v
       #|  e
-      #|  !e v v'. simple_arc_end e v v'==>\n    (?(N:num) t f.\n      (IMAGE t {i | i < N} SUBSET {x | &0 <= x /\\ x <= &1}) /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n      (!i j. (i < j) /\\  (i < N) /\\  (j < N) ==> (t i < t j)) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (!x.   &0 <= x /\\ x <= &1 ==>\n        ( (?m. f x = pointI m) <=> (?k.  (k < N) /\\ (x = t k)))))
+      #|  forall e v v'. simple_arc_end e v v'==>\n    (?(N:num) t f.\n      (IMAGE t {i | i < N} SUBSET {x | &0 <= x /\\ x <= &1}) /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n      (forall i j. (i < j) /\\  (i < N) /\\  (j < N) ==> (t i < t j)) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (forall x.   &0 <= x /\\ x <= &1 ==>\n        ( (?m. f x = pointI m) <=> (?k.  (k < N) /\\ (x = t k)))))
       #|  u''
       #|  u'
       #|  u
@@ -79932,10 +79932,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  BB = {Z | ZZ Z /\\ Z SUBSET B}
       #|  AA = {Z | ZZ Z /\\ Z SUBSET A}
       #|  Z
-      #|  !Z. ZZ Z ==> Z SUBSET A \\/ Z SUBSET B
+      #|  forall Z. ZZ Z ==> Z SUBSET A \\/ Z SUBSET B
       #|  u
       #|  UU = UNIONS U
-      #|  !U (ZZ:(A->bool)->bool). (!Z. ZZ Z ==> connected U Z) /\\\n     (!Z Z'. ZZ Z /\\ ZZ Z' ==> ~(Z INTER Z' = EMPTY)) ==>\n     (connected U (UNIONS ZZ))
+      #|  forall U (ZZ:(A->bool)->bool). (forall Z. ZZ Z ==> connected U Z) /\\\n     (forall Z Z'. ZZ Z /\\ ZZ Z' ==> ~(Z INTER Z' = EMPTY)) ==>\n     (connected U (UNIONS ZZ))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79960,7 +79960,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {x | a < x /\\ x < b} = UNIONS ZZ
       #|  ZZ = {Z | ?a' b'. a < a' /\\ a' < u /\\ u < b' /\\ b' < b /\\ (Z = {x | a' <= x /\\ x <= b'})}
       #|  {x | a < x /\\ x < b} = EMPTY
-      #|  !a b. connected\n       (top_of_metric (UNIV,d_real)) {x | a < x /\\ x < b}
+      #|  forall a b. connected\n       (top_of_metric (UNIV,d_real)) {x | a < x /\\ x < b}
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -79977,8 +79977,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !j. real_of_int (--: (&: j)) = -- (&j)
-      #|  !n a r r'.\n     (r < r') ==> closed_ball (euclid n,d_euclid) a r SUBSET\n          open_ball (euclid n,d_euclid) a r'
+      #|  forall j. real_of_int (--: (&: j)) = -- (&j)
+      #|  forall n a r r'.\n     (r < r') ==> closed_ball (euclid n,d_euclid) a r SUBSET\n          open_ball (euclid n,d_euclid) a r'
       #|  C (pointI n)
       #|  C (pointI m)
       #|  E
@@ -80037,12 +80037,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2
       #|  connected top2 C
       #|  e
-      #|  !C e m n. edge e /\\ simple_arc_end C (pointI m) (pointI n) /\\\n     (!x. C x /\\ ~(x = pointI m) /\\ ~(x = pointI n) ==> e x) ==>\n     (closure top2 e (pointI m))
+      #|  forall C e m n. edge e /\\ simple_arc_end C (pointI m) (pointI n) /\\\n     (forall x. C x /\\ ~(x = pointI m) /\\ ~(x = pointI n) ==> e x) ==>\n     (closure top2 e (pointI m))
       #|  TAGB
       #|  pointI m + e2 = pointI (up m)
-      #|  !m n. vc_edge m (pointI n) <=> (n = m) \\/ (n = up m)
+      #|  forall m n. vc_edge m (pointI n) <=> (n = m) \\/ (n = up m)
       #|  pointI m + e1 = pointI (right m)
-      #|  !m n. hc_edge m (pointI n) <=> (n = m) \\/ (n = right m)
+      #|  forall m n. hc_edge m (pointI n) <=> (n = m) \\/ (n = right m)
       #|  (v * (s - t)) * r + (&1 - v * (s - t)) * s = s + ((s - r)*v)*(t - s)
       #|  (s - r)
       #|  v
@@ -80063,7 +80063,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a * r + (&1 - a) *s
       #|  &1 * b = b
       #|  a + &1 - a = &1
-      #|  !r s b x. (r <= s) ==> (mk_segment (point(b,r)) (point(b,s)) x <=>\n      (?t. (r <= t /\\ t <= s /\\ (x = point(b,t)))))
+      #|  forall r s b x. (r <= s) ==> (mk_segment (point(b,r)) (point(b,s)) x <=>\n      (?t. (r <= t /\\ t <= s /\\ (x = point(b,t)))))
       #|  ( *. )
       #|  ( *. )
       #|  ( *. )
@@ -81966,7 +81966,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_of_int (FST m)
       #|  real_of_int(SND m + &:1)
       #|  real_of_int (SND m)
-      #|  !m. mk_segment (pointI m) (pointI (up m)) = vc_edge m
+      #|  forall m. mk_segment (pointI m) (pointI (up m)) = vc_edge m
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -81989,7 +81989,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_of_int (SND  m)
       #|  real_of_int(FST m + &:1)
       #|  real_of_int (FST m)
-      #|  !m. mk_segment (pointI m) (pointI (right m)) = hc_edge m
+      #|  forall m. mk_segment (pointI m) (pointI (right m)) = hc_edge m
       #|  TAGB
       #|  TAGB
       #|  mark_term:A->A
@@ -82035,7 +82035,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  m
       #|  e
       #|  C
-      #|  !C e m n. edge e /\\ simple_arc_end C (pointI m) (pointI n) /\\\n    (!x. C x /\\ ~(x = pointI m) /\\ ~(x = pointI n) ==> e x) ==>\n    (C = closure top2 e ) 
+      #|  forall C e m n. edge e /\\ simple_arc_end C (pointI m) (pointI n) /\\\n    (forall x. C x /\\ ~(x = pointI m) /\\ ~(x = pointI n) ==> e x) ==>\n    (C = closure top2 e ) 
       #|  g
       #|  x <= x
       #|  t (SUC i)
@@ -82062,7 +82062,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i
       #|  k
       #|  t k
-      #|  !k. k <| N ==> (?m. f (t k) = pointI m)
+      #|  forall k. k <| N ==> (?m. f (t k) = pointI m)
       #|  v'
       #|  v
       #|  C = IMAGE f {x | t i <= x /\\ x <= t (SUC i)}
@@ -82099,7 +82099,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  f x
       #|  e
-      #|  !x. &0 <= x /\\ x <= &1 /\\ ~(IMAGE t {j | j<| N} x) ==> (?e. edge e /\\ (e (f x)))
+      #|  forall x. &0 <= x /\\ x <= &1 /\\ ~(IMAGE t {j | j<| N} x) ==> (?e. edge e /\\ (e (f x)))
       #|  top_of_metric (UNIV,d_real)
       #|  connected top2 (IMAGE f {x | t i < x /\\ x < t (SUC i)})
       #|  SUC i
@@ -82131,7 +82131,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  ?m. v = pointI m
       #|  w
-      #|  !j. (integer (-- &j))
+      #|  forall j. (integer (-- &j))
       #|  (-- &:j, -- &: j')
       #|  ?j. w 1 = -- &j
       #|  (?j. w 0 = -- &j)
@@ -82143,14 +82143,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  z
       #|  eps_hyper T (w 0)
       #|  eps_hyper F (w 1)
-      #|  !w. (euclid 2 w ) /\\ E (eps_hyper T (w 0)) /\\ E (eps_hyper F (w 1)) ==> (?m. (w = pointI m))
+      #|  forall w. (euclid 2 w ) /\\ E (eps_hyper T (w 0)) /\\ E (eps_hyper F (w 1)) ==> (?m. (w = pointI m))
       #|  f
       #|  t
       #|  N
       #|  v'
       #|  v
       #|  e
-      #|  !E e v v'. simple_arc_end e v v' /\\\n      FINITE E /\\\n      e SUBSET UNIONS E /\\\n      E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)) /\\\n      E (eps_hyper T (v' 0)) /\\ E (eps_hyper F (v' 1)) /\\\n      (!e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n      (!z eps. E (eps_hyper eps z) ==> (?j. z = -- &j)) ==>\n      (?(N:num) t f.\n      (IMAGE t {i | i < N} SUBSET {x | &0 <= x /\\ x <= &1}) /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n      (!i j. (i < j) /\\  (i < N) /\\  (j < N) ==> (t i < t j)) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (!x.   &0 <= x /\\ x <= &1 ==>\n        ( (?m. f x = pointI m) = (?k.  (k < N) /\\ (x = t k)))) /\\\n       (&0 = t 0) /\\ (&1 = t (N - 1)) /\\\n      (!i. (SUC i < N) ==> (?ed. (edge ed) /\\\n           (IMAGE f { x | t i <= x /\\ x <= t (SUC i) } =\n             closure top2 ed))))\n   
+      #|  forall E e v v'. simple_arc_end e v v' /\\\n      FINITE E /\\\n      e SUBSET UNIONS E /\\\n      E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)) /\\\n      E (eps_hyper T (v' 0)) /\\ E (eps_hyper F (v' 1)) /\\\n      (forall e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n      (forall z eps. E (eps_hyper eps z) ==> (?j. z = -- &j)) ==>\n      (?(N:num) t f.\n      (IMAGE t {i | i < N} SUBSET {x | &0 <= x /\\ x <= &1}) /\\\n      (f (&0) = v) /\\ (f (&1) = v') /\\\n      (e = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n      (forall i j. (i < j) /\\  (i < N) /\\  (j < N) ==> (t i < t j)) /\\\n              continuous f (top_of_metric (UNIV,d_real)) top2 /\\\n              INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) /\\\n        (forall x.   &0 <= x /\\ x <= &1 ==>\n        ( (?m. f x = pointI m) = (?k.  (k < N) /\\ (x = t k)))) /\\\n       (&0 = t 0) /\\ (&1 = t (N - 1)) /\\\n      (forall i. (SUC i < N) ==> (?ed. (edge ed) /\\\n           (IMAGE f { x | t i <= x /\\ x <= t (SUC i) } =\n             closure top2 ed))))\n   
       #|  TAGB
       #|  TAGB
       #|  ~(SUC i = j)
@@ -82158,7 +82158,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i = j
       #|  ~(SUC j = i)
       #|  i <| j
-      #|  !f n.\n     INJ f {p | p <| n} edge /\\\n          0 <| n /\\\n          (!i j.\n               i <| n /\\ j <| n /\\ (i < j)\n               ==> (adj (f i) (f j) = (SUC i = j) ))\n          ==> psegment (IMAGE f {p | p <| n})
+      #|  forall f n.\n     INJ f {p | p <| n} edge /\\\n          0 <| n /\\\n          (forall i j.\n               i <| n /\\ j <| n /\\ (i < j)\n               ==> (adj (f i) (f j) = (SUC i = j) ))\n          ==> psegment (IMAGE f {p | p <| n})
       #|  x''
       #|  x
       #|  x''
@@ -82242,10 +82242,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 <= t (SUC j) /\\ t (SUC j) <= &1
       #|  j
       #|  &0 <= t j /\\ t j <= &1
-      #|  !x j. j < N -| 1 /\\ t j <= x /\\ x <= t (SUC j) ==> (&0 <= x /\\ x <= &1)
+      #|  forall x j. j < N -| 1 /\\ t j <= x /\\ x <= t (SUC j) ==> (&0 <= x /\\ x <= &1)
       #|  u
       #|  i
-      #|  !i u. (i <| N - 1) ==> (closure top2 (ed i) u <=> (?x. (u = f x) /\\ t i <= x /\\ x <= t (SUC i)))
+      #|  forall i u. (i <| N - 1) ==> (closure top2 (ed i) u <=> (?x. (u = f x) /\\ t i <= x /\\ x <= t (SUC i)))
       #|  x < y ==> x <= y
       #|  x <= x
       #|  t (SUC i)
@@ -82265,12 +82265,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 <= t (SUC j') /\\ t (SUC j') <= &1
       #|  j'
       #|  &0 <= t j' /\\ t j' <= &1
-      #|  !x j. j < N -| 1 /\\ t j <= x /\\ x <= t (SUC j) ==> (&0 <= x /\\ x <= &1)
+      #|  forall x j. j < N -| 1 /\\ t j <= x /\\ x <= t (SUC j) ==> (&0 <= x /\\ x <= &1)
       #|  x = x'
       #|  u
       #|  u
       #|  i'
-      #|  !i u. (i <| N - 1) ==> (closure top2 (ed i) u <=> (?x. (u = f x) /\\ t i <= x /\\ x <= t (SUC i)))
+      #|  forall i u. (i <| N - 1) ==> (closure top2 (ed i) u <=> (?x. (u = f x) /\\ t i <= x /\\ x <= t (SUC i)))
       #|  N -| 1
       #|  ~(0 = N-1) ==> (0 <| N- 1)
       #|  (~(x <| y) /\\ ~(y < x)) ==> (x = y)
@@ -82288,10 +82288,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y'
       #|  x'
       #|  t x' < t y'
-      #|  !x y. x < y /\\ y <| N - 1 ==> ~(ed x = ed y)
+      #|  forall x y. x < y /\\ y <| N - 1 ==> ~(ed x = ed y)
       #|  x
       #|  S
-      #|  (INJ ed {p | p <| N-1 } edge) /\\ ( 0 <| N-1) /\\ (!i j. i <| N-1 /\\ j <| N-1 /\\ i <| j ==> (adj (ed i) (ed j) <=> (SUC i = j)))
+      #|  (INJ ed {p | p <| N-1 } edge) /\\ ( 0 <| N-1) /\\ (forall i j. i <| N-1 /\\ j <| N-1 /\\ i <| j ==> (adj (ed i) (ed j) <=> (SUC i = j)))
       #|  v'
       #|  v' = pointI b
       #|  v
@@ -82305,19 +82305,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~(N = 0) ==> (0 <| N)
       #|  0 <| N
       #|  t i
-      #|  !i. i <| N ==> (?m. f (t i) = pointI m)
+      #|  forall i. i <| N ==> (?m. f (t i) = pointI m)
       #|  S
       #|  S = IMAGE ed {p | p <| N - 1}
       #|  v'
       #|  v
       #|  e
       #|  E
-      #|  !E e v v'. simple_arc_end e v v' /\\\n      FINITE E /\\\n      e SUBSET UNIONS E /\\\n      E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)) /\\\n      E (eps_hyper T (v' 0)) /\\ E (eps_hyper F (v' 1)) /\\\n      (!e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n      (!z eps. E (eps_hyper eps z) ==> (?j. z = -- &j)) ==>\n   (?S a b. segment_end S a b /\\ (v = pointI a) /\\ (v' = pointI b) /\\\n      (e = closure top2 (UNIONS S)))\n   
+      #|  forall E e v v'. simple_arc_end e v v' /\\\n      FINITE E /\\\n      e SUBSET UNIONS E /\\\n      E (eps_hyper T (v 0)) /\\ E (eps_hyper F (v 1)) /\\\n      E (eps_hyper T (v' 0)) /\\ E (eps_hyper F (v' 1)) /\\\n      (forall e. E e ==> (?z eps. e = eps_hyper eps z)) /\\\n      (forall z eps. E (eps_hyper eps z) ==> (?j. z = -- &j)) ==>\n   (?S a b. segment_end S a b /\\ (v = pointI a) /\\ (v' = pointI b) /\\\n      (e = closure top2 (UNIONS S)))\n   
       #|  TAGB
       #|  TAGB
       #|  top2
       #|  S
-      #|  !S. psegment S ==> IMAGE pointI (cls S) SUBSET closure top2 (UNIONS S)
+      #|  forall S. psegment S ==> IMAGE pointI (cls S) SUBSET closure top2 (UNIONS S)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -82329,12 +82329,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a /\\ b ==> b /\\ a
       #|  x' INTER x
       #|  x' INTER x SUBSET graph_vertex H
-      #|  !e. graph_edge H e ==> (graph_inc H e = e INTER graph_vertex H)
+      #|  forall e. graph_edge H e ==> (graph_inc H e = e INTER graph_vertex H)
       #|  IMAGE pointI (endpoint (S x)) = graph_inc H x
       #|  IMAGE pointI (endpoint (S x')) = graph_inc H x'
       #|  UNIV:(num->real)->bool
       #|  UNIV:int#int->bool
-      #|  !A B. (IMAGE pointI (A INTER B) = IMAGE pointI A INTER IMAGE pointI B)
+      #|  forall A B. (IMAGE pointI (A INTER B) = IMAGE pointI A INTER IMAGE pointI B)
       #|  UNIV:int#int ->bool
       #|  pointI
       #|  IMAGE pointI (cls(S x') INTER cls(S x)) SUBSET (IMAGE pointI (endpoint (S x') INTER endpoint (S x)))
@@ -82401,12 +82401,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  graph_isomorphic H J
       #|  J
       #|  J = mk_graph_t (IMAGE a (graph_vertex H), IMAGE S (graph_edge H),endpoint)
-      #|  !v. graph_vertex H v ==> ?a. (v = pointI a)
+      #|  forall v. graph_vertex H v ==> ?a. (v = pointI a)
       #|  w
       #|  (-- &:j, -- &: j')
       #|  ?j. w 1 = -- &j
       #|  (?j. w 0 = -- &j)
-      #|  !w. (euclid 2 w ) /\\ E (eps_hyper T (w 0)) /\\ E (eps_hyper F (w 1)) ==> (?m. (w = pointI m))
+      #|  forall w. (euclid 2 w ) /\\ E (eps_hyper T (w 0)) /\\ E (eps_hyper F (w 1)) ==> (?m. (w = pointI m))
       #|  b
       #|  a
       #|  S
@@ -82423,10 +82423,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  H
       #|  e
-      #|  !e. graph_edge H e ==> (?S a b. segment_end S a b /\\ (graph_inc H e = { (pointI a), (pointI b) }) /\\ (e = closure top2 (UNIONS S)))
+      #|  forall e. graph_edge H e ==> (?S a b. segment_end S a b /\\ (graph_inc H e = { (pointI a), (pointI b) }) /\\ (e = closure top2 (UNIONS S)))
       #|  graph H
       #|  G
-      #|  !(G:(A,B)graph_t). planar_graph G /\\ FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (!v. CARD (graph_edge_around G v) <=| 4) ==>\n      (rectagonal_graph G)
+      #|  forall(G:(A,B)graph_t). planar_graph G /\\ FINITE (graph_edge G) /\\\n         FINITE (graph_vertex G) /\\\n         ~(graph_edge G = {}) /\\\n         (forall v. CARD (graph_edge_around G v) <=| 4) ==>\n      (rectagonal_graph G)
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -82438,7 +82438,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  cartesian A B = {(x,y) | (x IN A) /\\ (y IN B)}
-      #|  !(A:A->bool) (B:B->bool). FINITE A /\\ FINITE B ==>\n          FINITE (cartesian A B)
+      #|  forall(A:A->bool) (B:B->bool). FINITE A /\\ FINITE B ==>\n          FINITE (cartesian A B)
       #|  ABS3 0
       #|  FINITE (UNIV:three_t ->bool)
       #|  UNIV:three_t->bool
@@ -82467,16 +82467,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FST m +: &:2 = a +: &:(SUC 2)
       #|  a = FST m -: &:1
       #|  SUC 2 = 3
-      #|  !m. conn2 (grid33 m)
+      #|  forall m. conn2 (grid33 m)
       #|  floor (f (&x / &N) 0),floor (f (&x / &N) 1)
       #|  FINITE (IMAGE (\\i. grid33 (floor (f (&i / &N) 0),floor (f (&i / &N) 1))) {j | j <=| N}) 
-      #|  !f N. FINITE (grid f N)
-      #|  !m. grid33 m SUBSET edge 
+      #|  forall f N. FINITE (grid f N)
+      #|  forall m. grid33 m SUBSET edge 
       #|  u
-      #|  !f N . grid f N SUBSET edge 
+      #|  forall f N . grid f N SUBSET edge 
       #|  floor x
       #|  x
-      #|  !x m. floor (x + &m) = floor x +: &:m
+      #|  forall x m. floor (x + &m) = floor x +: &:m
       #|  ||: (floor x -: floor y) = (floor y -: floor x)
       #|  floor x  <=: floor y
       #|  abs  (x - y) = (y - x)
@@ -82490,18 +82490,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  y = x
       #|  y + &m
       #|  x
-      #|  !x y m. (y <. x) /\\ (x - y <= &m) ==> (floor x -: floor y <=: &:m)
-      #|  !x y m. (abs  (x -. y) <= &m) ==> (||: (floor x -: floor y) <=: &:m)
+      #|  forall x y m. (y <. x) /\\ (x - y <= &m) ==> (floor x -: floor y <=: &:m)
+      #|  forall x y m. (abs  (x -. y) <= &m) ==> (||: (floor x -: floor y) <=: &:m)
       #|  i
       #|  y
       #|  x
       #|  n
-      #|  !x y i n. (euclid n x) /\\ (euclid n y) /\\ (d_euclid x y < &1) ==>\n     (||: (floor (x i) -: floor (y i)) <=: &:1)
-      #|  !x . x/ &0 = &0 
+      #|  forall x y i n. (euclid n x) /\\ (euclid n y) /\\ (d_euclid x y < &1) ==>\n     (||: (floor (x i) -: floor (y i)) <=: &:1)
+      #|  forall x . x/ &0 = &0 
       #|  x / z = (--x)/(--z)
       #|  &0 < -- z
       #|  &0 < z
-      #|  !x y z. ~(z = &0) ==> ((x / z = y) <=> (x = y * z))
+      #|  forall x y z. ~(z = &0) ==> ((x / z = y) <=> (x = y * z))
       #|  ||: (b - b') <=: &:1
       #|  ||: (a - a') <=: &:1
       #|  2
@@ -82516,7 +82516,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2 (f (&k/ &N))
       #|  &0 < &N
       #|  &N = &0
-      #|  !k. (k <=| N) ==> euclid 2 (f (&k / &N))
+      #|  forall k. (k <=| N) ==> euclid 2 (f (&k / &N))
       #|  a /\\ b ==> b /\\ a
       #|  h_edge (a,b)
       #|  b' = floor (f (&(SUC k) / &N) 1)
@@ -82531,7 +82531,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  {y | ?x. (x = 0) /\\ (y = grid33 (floor (f (&x / &N) 0),floor (f (&x / &N) 1)))} =  {(grid33 (floor (f (&0 / &N) 0), floor (f (&0 / &N) 1)))}
       #|  {j | j <=| 0} = {0}
-      #|  !k f N.\n   (k <= N) /\\ (IMAGE f {x | &0 <= x /\\ x <= &1} SUBSET (euclid 2)) /\\\n   (!i. (i < N) ==> d_euclid  (f (&i / &N)) (f (&(SUC i) / &N)) < &1) ==>\n   conn2 (UNIONS (IMAGE\n    ( \\ i. grid33 (floor (f (&i / &N) 0), floor (f (&i / &N) 1)))\n    {j | j <= k}))
+      #|  forall k f N.\n   (k <= N) /\\ (IMAGE f {x | &0 <= x /\\ x <= &1} SUBSET (euclid 2)) /\\\n   (forall i. (i < N) ==> d_euclid  (f (&i / &N)) (f (&(SUC i) / &N)) < &1) ==>\n   conn2 (UNIONS (IMAGE\n    ( \\ i. grid33 (floor (f (&i / &N) 0), floor (f (&i / &N) 1)))\n    {j | j <= k}))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -82542,7 +82542,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N
       #|  f
       #|  N
-      #|  !f N. (IMAGE f {x | &0 <= x /\\ x <= &1} SUBSET (euclid 2)) /\\\n   (!i. (i < N) ==> d_euclid  (f (&i / &N)) (f (&(SUC i) / &N)) < &1) ==>\n   conn2 (grid f N)
+      #|  forall f N. (IMAGE f {x | &0 <= x /\\ x <= &1} SUBSET (euclid 2)) /\\\n   (forall i. (i < N) ==> d_euclid  (f (&i / &N)) (f (&(SUC i) / &N)) < &1) ==>\n   conn2 (grid f N)
       #|  d_euclid
       #|  d_real
       #|  euclid 2
@@ -82563,17 +82563,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIV:real->bool
       #|  &1
       #|  &0
-      #|  !f . continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   uniformly_continuous f\n        ({x | &0 <= x /\\ x <= &1},d_real)\n        (euclid 2,d_euclid)
-      #|  !a b. &:0 <= a /\\ a <= b ==> num_abs_of_int a <= num_abs_of_int b
-      #|  !n. floor (&n) = &:n
-      #|  !n. floor (-- &n) = -- (&:n)
+      #|  forall f . continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   uniformly_continuous f\n        ({x | &0 <= x /\\ x <= &1},d_real)\n        (euclid 2,d_euclid)
+      #|  forall a b. &:0 <= a /\\ a <= b ==> num_abs_of_int a <= num_abs_of_int b
+      #|  forall n. floor (&n) = &:n
+      #|  forall n. floor (-- &n) = -- (&:n)
       #|  t
       #|  abs  (real_of_int (floor t) - t) = t - real_of_int (floor t)
       #|  real_of_int(floor t) <= t
       #|  t = &n * x 
       #|  &n * u/ &n = u
-      #|  !t. &n * abs  t = abs  (&n *t)
-      #|  !u. &n * abs  (u / &n - x) = abs  (u - &n*x)
+      #|  forall t. &n * abs  t = abs  (&n *t)
+      #|  forall u. &n * abs  (u / &n - x) = abs  (u - &n*x)
       #|  abs  (real_of_int (floor (&n * x))) = (real_of_int (floor (&n *x)))
       #|  &1
       #|  &n
@@ -82587,7 +82587,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  num_abs_of_int (floor (&n*x))
       #|  n
       #|  &1/ delta
-      #|  !delta. (&0 < delta) ==> (?N. !x. ?i.  (0 < N) /\\\n      ((&0 <= x /\\ x <= &1) ==> (i <= N) /\\ abs  (&i/ &N - x) < delta))
+      #|  forall delta. (&0 < delta) ==> (?N. forall x. ?i.  (0 < N) /\\\n      ((&0 <= x /\\ x <= &1) ==> (i <= N) /\\ abs  (&i/ &N - x) < delta))
       #|  &N
       #|  &1
       #|  &i
@@ -82598,12 +82598,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  delta
       #|  &1
       #|  f
-      #|  !f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n    (?N. !x. ?i. (0 < N) /\\ (&0 <= x /\\ x <= &1 ==>\n        (i <= N) /\\\n           open_ball (euclid 2,d_euclid) (f (&i / &N)) (&1) (f x)))
+      #|  forall f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n    (?N. forall x. ?i. (0 < N) /\\ (&0 <= x /\\ x <= &1 ==>\n        (i <= N) /\\\n           open_ball (euclid 2,d_euclid) (f (&i / &N)) (&1) (f x)))
       #|  G
-      #|  !G. unbounded_set G = UNIONS(ctop G) DIFF (bounded_set G)
+      #|  forall G. unbounded_set G = UNIONS(ctop G) DIFF (bounded_set G)
       #|  G
-      #|  !G. bounded_set G = UNIONS(ctop G) DIFF (unbounded_set G)
-      #|  !p q r s. (FST p <=: FST r) /\\ (SND p <= SND r) /\\\n       (FST s <= FST q) /\\ (SND s <= SND q) ==>\n    rectangle_grid r s SUBSET rectangle_grid p q
+      #|  forall G. bounded_set G = UNIONS(ctop G) DIFF (unbounded_set G)
+      #|  forall p q r s. (FST p <=: FST r) /\\ (SND p <= SND r) /\\\n       (FST s <= FST q) /\\ (SND s <= SND q) ==>\n    rectangle_grid r s SUBSET rectangle_grid p q
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -82622,7 +82622,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  {m' | ((m' = up m) \\/ (m' = m)) /\\ (FST m' = FST m) /\\ SND m' <=: SND m} = {m}
       #|  E'
-      #|  !m'. E' (h_edge m') <=> (m' = up m) \\/ (m' = m)
+      #|  forall m'. E' (h_edge m') <=> (m' = up m) \\/ (m' = m)
       #|  point p
       #|  m
       #|  (floor (FST p),floor (SND p)) = m
@@ -82675,7 +82675,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  N
       #|  f
-      #|  !f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   (?N. (0 < N) /\\ ((IMAGE f {x | &0 <= x /\\ x <= &1}) INTER\n         (unbounded_set (grid f N)) =  EMPTY))  
+      #|  forall f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   (?N. (0 < N) /\\ ((IMAGE f {x | &0 <= x /\\ x <= &1}) INTER\n         (unbounded_set (grid f N)) =  EMPTY))  
       #|  TAGB
       #|  TAGB
       #|  u
@@ -82687,7 +82687,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N
       #|  G
       #|  {i | i <=| 0} = {0}
-      #|  !k G N . (k <= N) /\\ (!i. (i <= N) ==> (conn2 (G i))) /\\\n    (!i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (!i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) ==>\n   conn2 (UNIONS (IMAGE G ({i | i <=| k})))
+      #|  forall k G N . (k <= N) /\\ (forall i. (i <= N) ==> (conn2 (G i))) /\\\n    (forall i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (forall i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) ==>\n   conn2 (UNIONS (IMAGE G ({i | i <=| k})))
       #|  S
       #|  CARD S
       #|  S' = (S' DELETE u) UNION {u}
@@ -82695,8 +82695,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  k
       #|  S'
-      #|  !k S. S HAS_SIZE k ==> (A (UNIONS S) = UNIONS (IMAGE A S))
-      #|  !(A:(A->bool)->(B->bool)) S.\n    (FINITE S) /\\ (!a b. A (a UNION b) = A a UNION A b) /\\\n      (A EMPTY = EMPTY) ==>\n       (A (UNIONS S) = UNIONS (IMAGE A S))
+      #|  forall k S. S HAS_SIZE k ==> (A (UNIONS S) = UNIONS (IMAGE A S))
+      #|  forall(A:(A->bool)->(B->bool)) S.\n    (FINITE S) /\\ (forall a b. A (a UNION b) = A a UNION A b) /\\\n      (A EMPTY = EMPTY) ==>\n       (A (UNIONS S) = UNIONS (IMAGE A S))
       #|  j
       #|  i
       #|  j - 1
@@ -82712,18 +82712,18 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  IMAGE G {i | i <=| N}
       #|  A
       #|  A = UNIONS o curve_cell
-      #|  !r. UNIONS (curve_cell r) = (UNIONS o curve_cell) r
+      #|  forall r. UNIONS (curve_cell r) = (UNIONS o curve_cell) r
       #|  ?j. (j <=| N) /\\ UNIONS (curve_cell (G j)) p
       #|  0
-      #|  !G N p. (0 < N) /\\ (!i. (i <= N) ==> (conn2 (G i))) /\\\n    (!i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (!i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n   (!i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) /\\\n   ~(unbounded_set (UNIONS (IMAGE G ({i | i <= N}))) p) ==>\n   (bounded_set (UNIONS (IMAGE G {i | i <=| N})) p)
+      #|  forall G N p. (0 < N) /\\ (forall i. (i <= N) ==> (conn2 (G i))) /\\\n    (forall i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (forall i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n   (forall i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) /\\\n   ~(unbounded_set (UNIONS (IMAGE G ({i | i <= N}))) p) ==>\n   (bounded_set (UNIONS (IMAGE G {i | i <=| N})) p)
       #|  x'
-      #|  !G N. (!i. (i <= N) ==> (G i SUBSET edge )) ==>\n    (UNIONS (IMAGE G {i | i <=| N}) SUBSET edge)
+      #|  forall G N. (forall i. (i <= N) ==> (G i SUBSET edge )) ==>\n    (UNIONS (IMAGE G {i | i <=| N}) SUBSET edge)
       #|  x
       #|  E'
       #|  x
       #|  E'
       #|  E
-      #|  !E E' x.\n          unbounded_set E' x /\\\n          E SUBSET E' /\\\n          E' SUBSET edge /\\\n          FINITE E' /\\\n          conn2 E\n             ==> unbounded_set E x
+      #|  forall E E' x.\n          unbounded_set E' x /\\\n          E SUBSET E' /\\\n          E' SUBSET edge /\\\n          FINITE E' /\\\n          conn2 E\n             ==> unbounded_set E x
       #|  (C'',i''',j''')
       #|  j'''
       #|  i'''
@@ -82768,7 +82768,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ?D i j. z = (D,i,j)
       #|  (\\ (C,i,j). j -| i):(((((num->real)->bool)->bool)#(num#num)) -> num)
       #|  X
-      #|  !x. 0 <=| x
+      #|  forall x. 0 <=| x
       #|  N
       #|  0
       #|  C
@@ -82780,7 +82780,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N
       #|  G
       #|  N
-      #|  !G N p. (0 < N) /\\ (!i. (i <= N) ==> (conn2 (G i))) /\\\n    (!i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (!i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n   (!i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) /\\\n   (bounded_set (UNIONS (IMAGE G ({i | i <= N}))) p) ==>\n    (?C i j . rectagon C /\\ bounded_set C p /\\\n       (SUC i < j) /\\ (j <=| N) /\\\n       (C SUBSET (UNIONS (IMAGE G ({x | (i <=| x) /\\ (x <=| j)})))) /\\\n    (!C' i' j'. rectagon C' /\\ bounded_set  C' p /\\\n       (i' < j') /\\ (j' <=| N) /\\\n       (C' SUBSET (UNIONS (IMAGE G ({x | (i' <=| x /\\ x <=| j')})))) ==>\n       (j - i <= j' - i') /\\\n   ((j - i = j' - i') ==>\n      (CARD (C DIFF (G (SUC i))) <= CARD (C' DIFF (G (SUC i')))))))
+      #|  forall G N p. (0 < N) /\\ (forall i. (i <= N) ==> (conn2 (G i))) /\\\n    (forall i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (forall i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n   (forall i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) /\\\n   (bounded_set (UNIONS (IMAGE G ({i | i <= N}))) p) ==>\n    (?C i j . rectagon C /\\ bounded_set C p /\\\n       (SUC i < j) /\\ (j <=| N) /\\\n       (C SUBSET (UNIONS (IMAGE G ({x | (i <=| x) /\\ (x <=| j)})))) /\\\n    (forall C' i' j'. rectagon C' /\\ bounded_set  C' p /\\\n       (i' < j') /\\ (j' <=| N) /\\\n       (C' SUBSET (UNIONS (IMAGE G ({x | (i' <=| x /\\ x <=| j')})))) ==>\n       (j - i <= j' - i') /\\\n   ((j - i = j' - i') ==>\n      (CARD (C DIFF (G (SUC i))) <= CARD (C' DIFF (G (SUC i')))))))
       #|  a
       #|  a
       #|  a
@@ -82814,7 +82814,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  G
       #|  pointI m
       #|  C
-      #|  !C G m. rectagon G /\\ C SUBSET G /\\ endpoint C m ==>\n    (?!e. G e /\\ ~(C e) /\\ cls {e} m)
+      #|  forall C G m. rectagon G /\\ C SUBSET G /\\ endpoint C m ==>\n    (?!e. G e /\\ ~(C e) /\\ cls {e} m)
       #|  A
       #|  B
       #|  u
@@ -82834,7 +82834,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E
       #|  B' INTER C = EMPTY
       #|  A' SUBSET C
-      #|  !A B. (A INTER B = EMPTY ) /\\ (E = A UNION B) /\\ (segment_end B m n) /\\ (segment_end A m n) /\\ (B SUBSET E) /\\ (A SUBSET E) /\\ ~(C INTER A = EMPTY) ==> (C = A)
+      #|  forall A B. (A INTER B = EMPTY ) /\\ (E = A UNION B) /\\ (segment_end B m n) /\\ (segment_end A m n) /\\ (B SUBSET E) /\\ (A SUBSET E) /\\ ~(C INTER A = EMPTY) ==> (C = A)
       #|  A' INTER C
       #|  C''
       #|  E
@@ -82856,8 +82856,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C'
       #|  edge C' /\\ edge C''
       #|  inductive_set A' (A' INTER C)
-      #|  !A. A SUBSET E /\\ segment_end A m n /\\ ~(A INTER C = EMPTY) ==> (A SUBSET C)
-      #|  !E A B C m n. rectagon E /\\ A SUBSET E /\\ B SUBSET E /\\ C SUBSET E /\\\n    segment_end A m n /\\ segment_end B m n /\\ segment_end C m n /\\\n    (E = A UNION B) /\\ (A INTER B = EMPTY) ==>\n    (C = A) \\/ (C = B)
+      #|  forall A. A SUBSET E /\\ segment_end A m n /\\ ~(A INTER C = EMPTY) ==> (A SUBSET C)
+      #|  forall E A B C m n. rectagon E /\\ A SUBSET E /\\ B SUBSET E /\\ C SUBSET E /\\\n    segment_end A m n /\\ segment_end B m n /\\ segment_end C m n /\\\n    (E = A UNION B) /\\ (A INTER B = EMPTY) ==>\n    (C = A) \\/ (C = B)
       #|  A UNION B
       #|  B
       #|  u
@@ -82914,7 +82914,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e'
       #|  e'
       #|  (e' = a) \\/ (e' = b)
-      #|  ?a b. ~(a = b) /\\ (!e. E e /\\ closure top2 e (pointI x) <=> (e = a) \\/ (e = b)) /\\ (!e. J e /\\ closure top2 e (pointI x) <=> (e = a))
+      #|  ?a b. ~(a = b) /\\ (forall e. E e /\\ closure top2 e (pointI x) <=> (e = a) \\/ (e = b)) /\\ (forall e. J e /\\ closure top2 e (pointI x) <=> (e = a))
       #|  pointI x
       #|  E
       #|  x
@@ -82941,7 +82941,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  X = { A | psegment A /\\ A SUBSET E /\\ (A INTER C = EMPTY) /\\ (endpoint A SUBSET cls C)}
       #|  J = segment_of (E DIFF C) e
       #|  ?e. E e /\\ ~C e
-      #|  !C E . ~(E SUBSET C) /\\ psegment E /\\ rectagon C /\\\n    endpoint E SUBSET cls C  ==>\n   (?E'. E' SUBSET E /\\ psegment E' /\\ (E' INTER C = EMPTY ) /\\\n     (cls E' INTER cls C = endpoint E'))
+      #|  forall C E . ~(E SUBSET C) /\\ psegment E /\\ rectagon C /\\\n    endpoint E SUBSET cls C  ==>\n   (?E'. E' SUBSET E /\\ psegment E' /\\ (E' INTER C = EMPTY ) /\\\n     (cls E' INTER cls C = endpoint E'))
       #|  TAGB
       #|  endpoint E
       #|  E
@@ -82954,7 +82954,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  cls AE c
       #|  J
-      #|  !c. endpoint E c ==> cls J c
+      #|  forall c. endpoint E c ==> cls J c
       #|  e
       #|  pointI c
       #|  AE
@@ -82962,7 +82962,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI c
       #|  E
       #|  AE
-      #|  !c. endpoint E c /\\ cls AE c ==> endpoint AE c
+      #|  forall c. endpoint E c /\\ cls AE c ==> endpoint AE c
       #|  a /\\ b <=> b /\\ a
       #|  ~(a = b)
       #|  u
@@ -83072,7 +83072,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  b''
       #|  a''
       #|  a'' = a'
-      #|  !x. cls J x ==> (x = a') \\/ (?P. segment_end P x a' /\\ P SUBSET J)
+      #|  forall x. cls J x ==> (x = a') \\/ (?P. segment_end P x a' /\\ P SUBSET J)
       #|  conn J
       #|  cls J a' /\\ cls J b'
       #|  cls B a' /\\ cls B b'
@@ -83081,7 +83081,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  J
       #|  B SUBSET J
       #|  J= (E DIFF AE) UNION B
-      #|  !E AE B a b a' b'. segment_end E a b /\\ segment_end AE a' b' /\\\n      segment_end B a' b' /\\ AE SUBSET E ==>\n      (?B'. segment_end B' a b /\\ B' SUBSET (E DIFF AE) UNION B)
+      #|  forall E AE B a b a' b'. segment_end E a b /\\ segment_end AE a' b' /\\\n      segment_end B a' b' /\\ AE SUBSET E ==>\n      (?B'. segment_end B' a b /\\ B' SUBSET (E DIFF AE) UNION B)
       #|  p
       #|  x'
       #|  x
@@ -83247,13 +83247,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  pointI m
       #|  CiS
       #|  i <=| N
-      #|  !r. (r <=| N) ==> (curve_cell (G r) {(pointI m)} <=> (?e. G r e /\\ closure top2 e (pointI m)))
+      #|  forall r. (r <=| N) ==> (curve_cell (G r) {(pointI m)} <=> (?e. G r e /\\ closure top2 e (pointI m)))
       #|  r
-      #|  !r. (r <=| N) ==> (G r SUBSET UNIONS (IMAGE G {i | i <=| N}))
+      #|  forall r. (r <=| N) ==> (G r SUBSET UNIONS (IMAGE G {i | i <=| N}))
       #|  {(pointI m)}
       #|  y
       #|  i
-      #|  !y. (SUC i < y) /\\ (y <=| N) ==> ~(G y e)
+      #|  forall y. (SUC i < y) /\\ (y <=| N) ==> ~(G y e)
       #|  u
       #|  UNIONS (IMAGE G {x | i <=| x /\\ x <=| j}) e
       #|  CiS
@@ -83272,7 +83272,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  m
       #|  C
       #|  CiS
-      #|  !m. endpoint CiS m ==> cls (G (SUC i)) m
+      #|  forall m. endpoint CiS m ==> cls (G (SUC i)) m
       #|  Ci
       #|  CiS SUBSET C
       #|  Ci
@@ -83296,7 +83296,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  CiS = segment_of Ci ei
       #|  Ci
       #|  Ci ei
-      #|  Ci = {e | C e /\\ G i e /\\ (!k. i <| k /\\ k <=| j ==> ~G k e)}
+      #|  Ci = {e | C e /\\ G i e /\\ (forall k. i <| k /\\ k <=| j ==> ~G k e)}
       #|  a <| b ==> a <=| b - 1
       #|  k
       #|  G j x
@@ -83306,7 +83306,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j -1
       #|  i
       #|  C
-      #|  ?ej. C ej /\\ G j ej /\\ (!k. i <= k /\\ k <| j ==> ~G k ej)
+      #|  ?ej. C ej /\\ G j ej /\\ (forall k. i <= k /\\ k <| j ==> ~G k ej)
       #|  a <| b ==> SUC a <=| b
       #|  k
       #|  G i x
@@ -83316,7 +83316,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  SUC i
       #|  C
-      #|  ?ei. C ei /\\ G i ei /\\ (!k. i < k /\\ k <=|j ==> ~G k ei)
+      #|  ?ei. C ei /\\ G i ei /\\ (forall k. i < k /\\ k <=|j ==> ~G k ei)
       #|  p
       #|  N
       #|  G
@@ -83328,7 +83328,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N
       #|  G
       #|  N
-      #|  !G N p. (0 < N) /\\ (!i. (i <= N) ==> (conn2 (G i))) /\\\n    (!i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (!i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n    (!i j. (i < j) /\\ (j <=| N) /\\ ~(SUC i = j) ==>\n         (curve_cell (G i) INTER (curve_cell (G j)) = EMPTY)) /\\\n    (!i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) ==>\n    (unbounded_set (UNIONS (IMAGE G ({i | i <= N}))) p)\n   
+      #|  forall G N p. (0 < N) /\\ (forall i. (i <= N) ==> (conn2 (G i))) /\\\n    (forall i. (i <= N) ==> (G i SUBSET edge )) /\\\n    (forall i. (SUC i <= N) ==> ~(G i INTER G (SUC i) = EMPTY)) /\\\n    (forall i j. (i < j) /\\ (j <=| N) /\\ ~(SUC i = j) ==>\n         (curve_cell (G i) INTER (curve_cell (G j)) = EMPTY)) /\\\n    (forall i. (SUC i <= N) ==> (unbounded_set (G i UNION G (SUC i)) p)) ==>\n    (unbounded_set (UNIONS (IMAGE G ({i | i <= N}))) p)\n   
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -83386,9 +83386,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  x*y = y*x
-      #|  !z x y . (&0 < z) ==> ((x/ z <= y/ z) <=> (x <= y))
+      #|  forall z x y . (&0 < z) ==> ((x/ z <= y/ z) <=> (x <= y))
       #|  x*y = y*x
-      #|  !z x y . (&0 < z) ==> ((x/ z < y/ z) <=> (x < y))
+      #|  forall z x y . (&0 < z) ==> ((x/ z < y/ z) <=> (x < y))
       #|  dij (i,j)
       #|  j
       #|  i
@@ -83426,9 +83426,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  X = IMAGE dij {(i,j) | (SUC i < j /\\ j < N')}
       #|  d'' = inf X
       #|  X = { r  | (?i j. SUC i < j /\\ j <| N' /\\ (r = dij (i,j))) }
-      #|  ?d''. (&0 < d'') /\\  (!i j. (SUC i < j /\\ j <| N') ==> (d'' <= dij (i,j)))
+      #|  ?d''. (&0 < d'') /\\  (forall i j. (SUC i < j /\\ j <| N') ==> (d'' <= dij (i,j)))
       #|  i'
-      #|  !i x. (i <| N') /\\ (B i x) ==> (euclid 2 x)
+      #|  forall i x. (i <| N') /\\ (B i x) ==> (euclid 2 x)
       #|  (i <| N')
       #|  &j/ &N' <= &(SUC i) / (&N')
       #|  x'
@@ -83444,11 +83444,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (euclid 2)
       #|  j = SND k
       #|  i = FST k
-      #|  !k. ?dij. !i j. (k = (i,j)) /\\ SUC i < j /\\ j < N' ==> (&0 < dij /\\ (!x y. B i x /\\ B j y ==> dij <= d_euclid x y))
+      #|  forall k. ?dij. forall i j. (k = (i,j)) /\\ SUC i < j /\\ j < N' ==> (&0 < dij /\\ (forall x y. B i x /\\ B j y ==> dij <= d_euclid x y))
       #|  i
-      #|  !i. (i <| N') ==> ~(B i = EMPTY)
+      #|  forall i. (i <| N') ==> ~(B i = EMPTY)
       #|  i
-      #|  !i. (i <| N') ==> compact top2 (B i)
+      #|  forall i. (i <| N') ==> compact top2 (B i)
       #|  x'
       #|  x''
       #|  x
@@ -83482,8 +83482,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  B
       #|  a
-      #|  (!i. i <| N' ==> simple_arc_end (B i) (a i) (a (SUC i)))
-      #|  !i. &i / &N' < &(SUC i)/ &N'
+      #|  (forall i. i <| N' ==> simple_arc_end (B i) (a i) (a (SUC i)))
+      #|  forall i. &i / &N' < &(SUC i)/ &N'
       #|  x' <= &i/ &N' + &1/ &N'
       #|  i
       #|  i
@@ -83493,17 +83493,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  a
       #|  a i
-      #|  (!i. i <| N' ==> (?x. B i x /\\ B i SUBSET open_ball (euclid 2,d_euclid) x d))
+      #|  (forall i. i <| N' ==> (?x. B i x /\\ B i SUBSET open_ball (euclid 2,d_euclid) x d))
       #|  &0 <= &i / &N' /\\ &(SUC i) / (&N') <= &1
-      #|  !i x. (i <| N') /\\ (&i / &N' <= x) /\\ (x <= &(SUC i) / &N') ==> (&0 <= x /\\ x <= &1)
+      #|  forall i x. (i <| N') /\\ (&i / &N' <= x) /\\ (x <= &(SUC i) / &N') ==> (&0 <= x /\\ x <= &1)
       #|  &N'
       #|  &N'
       #|  &N'
       #|  x
-      #|  !x. (x/ &N' <= &1) <=> (x <= &N')
+      #|  forall x. (x/ &N' <= &1) <=> (x <= &N')
       #|  x
       #|  &0
-      #|  !x. (&0 <= x/ &N') <=> (&0 <= x)
+      #|  forall x. (&0 <= x/ &N') <=> (&0 <= x)
       #|  &N'
       #|  a
       #|  a = (\\ i. f(&i / &N'))
@@ -83513,7 +83513,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N'
       #|  x*y = y*x
       #|  &1/ &N' < &1/ &N
-      #|  !r. (r <= &1/ (&N')) ==> (r < delta)
+      #|  forall r. (r <= &1/ (&N')) ==> (r < delta)
       #|  N'
       #|  &0 < &N'
       #|  N' = 2*N
@@ -83530,7 +83530,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  d
       #|  &8 * d = min_real (d_euclid p''' q) (d_euclid p' p)
-      #|  (!x. C x ==> &8 * d <= d_euclid x p /\\ &8 * d <= d_euclid x q)
+      #|  (forall x. C x ==> &8 * d <= d_euclid x p /\\ &8 * d <= d_euclid x q)
       #|  2
       #|  2
       #|  C
@@ -83553,7 +83553,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  2
       #|  C
-      #|  !C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\\n                           euclid 2 p /\\ euclid 2 q ==>\n  (?d N B a d'. (&0 <. d) /\\ (&0 <. d') /\\ (0 < N) /\\\n    (!i. (i <| N) ==> simple_arc_end (B i) (a i) (a (SUC i))) /\\\n    (C = UNIONS (IMAGE B {i | i <| N})) /\\\n    (!x. C x ==>\n        (&8 * d <= d_euclid x p) /\\ (&8 * d <= d_euclid x q)) /\\\n    (!i j x y. (SUC i < j) /\\ (j <| N) /\\ B i x /\\ B j y ==>\n        (&16 * d' < d_euclid x y)) /\\\n    (!i. (i <| N) ==>\n        (?x. B i x /\\ B i SUBSET (open_ball (euclid 2,d_euclid) x d))))\n    
+      #|  forall C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\\n                           euclid 2 p /\\ euclid 2 q ==>\n  (?d N B a d'. (&0 <. d) /\\ (&0 <. d') /\\ (0 < N) /\\\n    (forall i. (i <| N) ==> simple_arc_end (B i) (a i) (a (SUC i))) /\\\n    (C = UNIONS (IMAGE B {i | i <| N})) /\\\n    (forall x. C x ==>\n        (&8 * d <= d_euclid x p) /\\ (&8 * d <= d_euclid x q)) /\\\n    (forall i j x y. (SUC i < j) /\\ (j <| N) /\\ B i x /\\ B j y ==>\n        (&16 * d' < d_euclid x y)) /\\\n    (forall i. (i <| N) ==>\n        (?x. B i x /\\ B i SUBSET (open_ball (euclid 2,d_euclid) x d))))\n    
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -83611,13 +83611,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  &0 < r ==> ~(r = &0)
-      #|  !x r. (&0 < r) ==> ((r * &1/ r) *# x = x)
+      #|  forall x r. (&0 < r) ==> ((r * &1/ r) *# x = x)
       #|  (&1/ r) *# x
       #|  x * y = y *x
       #|  euclid_scale (&1/ r)
       #|  &0 < r ==> ~(r = &0)
-      #|  !x. (r * &1 / r) *# x = x
-      #|  !r . (&0 < r) ==> BIJ (euclid_scale r) (euclid 2) (euclid 2)
+      #|  forall x. (r * &1 / r) *# x = x
+      #|  forall r . (&0 < r) ==> BIJ (euclid_scale r) (euclid 2) (euclid 2)
       #|  abs  r = r
       #|  y
       #|  x
@@ -83625,24 +83625,24 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  epsilon/r
       #|  ( *# ) r
-      #|  !r. (&0 < r) ==> (continuous (euclid_scale r) top2 top2)
+      #|  forall r. (&0 < r) ==> (continuous (euclid_scale r) top2 top2)
       #|  &0 < r ==> ~(r = &0)
       #|  x
       #|  &1 / r *# x
       #|  (euclid 2)
       #|  (euclid 2)
       #|  ( *# ) r
-      #|  !r x. (&0 < r) /\\ (euclid 2 x) ==>\n     (INV (( *# ) r) (euclid 2) (euclid 2) x = (( *# ) (&1 / r)) x)
+      #|  forall r x. (&0 < r) /\\ (euclid 2 x) ==>\n     (INV (( *# ) r) (euclid 2) (euclid 2) x = (( *# ) (&1 / r)) x)
       #|  &0 < &1 /r
       #|  ( *# ) (&1 / r)
-      #|  !r. (&0 < r) ==> homeomorphism (euclid_scale r) top2 top2
+      #|  forall r. (&0 < r) ==> homeomorphism (euclid_scale r) top2 top2
       #|  (euclid 2)
       #|  top2
       #|  UNIONS (top_of_metric (({x | &0 <= x /\\ x <= &1},d_real))) = {x | &0 <= x /\\ x <= &1}
       #|  UNIV:real->bool
       #|  metric_space ({x | &0 <= x /\\ x <= &1},d_real)
       #|  f o f'
-      #|  !f C a b. simple_arc_end C a b /\\ homeomorphism f top2 top2 ==>\n  simple_arc_end (IMAGE f C) (f a) (f b)
+      #|  forall f C a b. simple_arc_end C a b /\\ homeomorphism f top2 top2 ==>\n  simple_arc_end (IMAGE f C) (f a) (f b)
       #|  C
       #|  f' (&1)
       #|  f' (&0)
@@ -83650,7 +83650,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  f'
       #|  simple_arc_end C (f' (&0)) (f' (&1))
-      #|  !f C. simple_arc top2 C /\\ homeomorphism f top2 top2 ==>\n   simple_arc top2 (IMAGE f C)
+      #|  forall f C. simple_arc top2 C /\\ homeomorphism f top2 top2 ==>\n   simple_arc top2 (IMAGE f C)
       #|  dr
       #|  f
       #|  f
@@ -83664,7 +83664,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i <| N
       #|  B'
       #|  i
-      #|  !i x. (i <| N) /\\ (B i x) ==> (euclid 2 x)
+      #|  forall i x. (i <| N) /\\ (B i x) ==> (euclid 2 x)
       #|  dr
       #|  q'
       #|  p'
@@ -83676,7 +83676,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &1 / r
       #|  2
       #|  f
-      #|  !x y. (euclid 2 x) /\\ (euclid 2 y) ==> (d_euclid (f x) (f y) = (d_euclid x y)/r)
+      #|  forall x y. (euclid 2 x) /\\ (euclid 2 y) ==> (d_euclid (f x) (f y) = (d_euclid x y)/r)
       #|  B'
       #|  C'
       #|  a'
@@ -83697,7 +83697,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A'
       #|  f
       #|  g
-      #|  !x.  (g (f x) = x)
+      #|  forall x.  (g (f x) = x)
       #|  A'
       #|  g
       #|  homeomorphism g top2 top2
@@ -83716,7 +83716,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x = p)
       #|  p'
       #|  C'
-      #|  !x. C x ==> euclid 2 x
+      #|  forall x. C x ==> euclid 2 x
       #|  C'
       #|  f
       #|  homeomorphism f top2 top2
@@ -83743,7 +83743,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  q
       #|  p
       #|  C
-      #|  !C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\ (euclid 2 p) /\\\n    (euclid 2 q) /\\ ~(p = q) /\\\n    (!A. simple_arc_end A p q ==> ~(C INTER A = EMPTY)) ==>\n    (?C' p' q' d N B a d'.\n           simple_arc top2 C' /\\ ~C' p' /\\ ~C' q' /\\ (euclid 2 p') /\\\n        (euclid 2 q') /\\ ~(p' = q') /\\\n      (!A. simple_arc_end A p' q' ==> ~(C' INTER A = EMPTY)) /\\\n      (&1 <=. d) /\\ (&1 <=. d') /\\ (0 < N) /\\\n    (!i. (i <| N) ==> simple_arc_end (B i) (a i) (a (SUC i))) /\\\n    (C' = UNIONS (IMAGE B {i | i <| N})) /\\\n    (!x. C' x ==>\n        (&8 * d <= d_euclid x p') /\\ (&8 * d <= d_euclid x q')) /\\\n    (!i j x y. (SUC i < j) /\\ (j <| N) /\\ B i x /\\ B j y ==>\n        (&16 * d' < d_euclid x y)) /\\\n    (!i. (i <| N) ==>\n        (?x. B i x /\\ B i SUBSET (open_ball (euclid 2,d_euclid) x d))))\n    
+      #|  forall C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\ (euclid 2 p) /\\\n    (euclid 2 q) /\\ ~(p = q) /\\\n    (forall A. simple_arc_end A p q ==> ~(C INTER A = EMPTY)) ==>\n    (?C' p' q' d N B a d'.\n           simple_arc top2 C' /\\ ~C' p' /\\ ~C' q' /\\ (euclid 2 p') /\\\n        (euclid 2 q') /\\ ~(p' = q') /\\\n      (forall A. simple_arc_end A p' q' ==> ~(C' INTER A = EMPTY)) /\\\n      (&1 <=. d) /\\ (&1 <=. d') /\\ (0 < N) /\\\n    (forall i. (i <| N) ==> simple_arc_end (B i) (a i) (a (SUC i))) /\\\n    (C' = UNIONS (IMAGE B {i | i <| N})) /\\\n    (forall x. C' x ==>\n        (&8 * d <= d_euclid x p') /\\ (&8 * d <= d_euclid x q')) /\\\n    (forall i j x y. (SUC i < j) /\\ (j <| N) /\\ B i x /\\ B j y ==>\n        (&16 * d' < d_euclid x y)) /\\\n    (forall i. (i <| N) ==>\n        (?x. B i x /\\ B i SUBSET (open_ball (euclid 2,d_euclid) x d))))\n    
       #|  x * y = y*x
       #|  &0 < &n
       #|  &0 < &(2 *| n)
@@ -83751,16 +83751,16 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &1 / d
       #|  2 * n
       #|  &1/d
-      #|  !d. (&0 < d) ==> (?n. (0 <| n) /\\ (&1/(&n) < d))
-      #|  !i a. &(SUC i) / a = &i/ a + &1/a
+      #|  forall d. (&0 < d) ==> (?n. (0 <| n) /\\ (&1/(&n) < d))
+      #|  forall i a. &(SUC i) / a = &i/ a + &1/a
       #|  &n * delta
       #|  t
       #|  abs  (real_of_int (floor t) - t) = t - real_of_int (floor t)
       #|  real_of_int(floor t) <= t
       #|  t = &N * x 
       #|  &N * u/ &N = u
-      #|  !t. &N * abs  t = abs  (&N *t)
-      #|  !u. &N * abs  (u / &N - x) = abs  (u - &N*x)
+      #|  forall t. &N * abs  t = abs  (&N *t)
+      #|  forall u. &N * abs  (u / &N - x) = abs  (u - &N*x)
       #|  abs  (real_of_int (floor (&N * x))) = (real_of_int (floor (&N *x)))
       #|  &1
       #|  &0 < &N
@@ -83775,7 +83775,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  num_abs_of_int (floor (&N*x))
       #|  n
       #|  &1/ delta
-      #|  !delta. (&0 < delta) ==> (?M. !N. !x. ?i.  (0 < M) /\\\n      ((M <= N) /\\ (&0 <= x /\\ x <= &1) ==>\n      (i <= N) /\\ abs  (&i/ &N - x) < delta))
+      #|  forall delta. (&0 < delta) ==> (?M. forall N. forall x. ?i.  (0 < M) /\\\n      ((M <= N) /\\ (&0 <= x /\\ x <= &1) ==>\n      (i <= N) /\\ abs  (&i/ &N - x) < delta))
       #|  &N
       #|  &1
       #|  &i
@@ -83788,10 +83788,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  delta
       #|  &1
       #|  f
-      #|  !f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n    (?M. !N. !x. ?i. (0 < M) /\\ (( M <= N) /\\ (&0 <= x /\\ x <= &1) ==>\n        (i <= N) /\\\n           open_ball (euclid 2,d_euclid) (f (&i / &N)) (&1) (f x)))
+      #|  forall f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n    (?M. forall N. forall x. ?i. (0 < M) /\\ (( M <= N) /\\ (&0 <= x /\\ x <= &1) ==>\n        (i <= N) /\\\n           open_ball (euclid 2,d_euclid) (f (&i / &N)) (&1) (f x)))
       #|  {m' | ((m' = up m) \\/ (m' = m)) /\\ (FST m' = FST m) /\\ SND m' <=: SND m} = {m}
       #|  E'
-      #|  !m'. E' (h_edge m') <=> (m' = up m) \\/ (m' = m)
+      #|  forall m'. E' (h_edge m') <=> (m' = up m) \\/ (m' = m)
       #|  point p
       #|  m
       #|  (floor (FST p),floor (SND p)) = m
@@ -83846,15 +83846,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  N
       #|  M
       #|  f
-      #|  !f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   (?M. !N. (0 < M) /\\ ((M <= N) ==>\n    ((IMAGE f {x | &0 <= x /\\ x <= &1}) INTER\n         (unbounded_set (grid f N)) =  EMPTY))  )
+      #|  forall f. continuous f (top_of_metric(UNIV,d_real)) top2 /\\\n      INJ f {x | &0 <= x /\\ x <= &1} (euclid 2) ==>\n   (?M. forall N. (0 < M) /\\ ((M <= N) ==>\n    ((IMAGE f {x | &0 <= x /\\ x <= &1}) INTER\n         (unbounded_set (grid f N)) =  EMPTY))  )
       #|  TAGB
       #|  TAGB
       #|  m
-      #|  !m. grid33 m (h_edge m)
+      #|  forall m. grid33 m (h_edge m)
       #|  S
       #|  S = (IMAGE (\\i. grid33 (floor (f (&i / &N) 0),floor (f (&i / &N) 1)))  {j | j <=| N})
-      #|  !f N. curve_cell (grid f N) =\n       UNIONS (IMAGE curve_cell\n       ((IMAGE (\\i. grid33 (floor (f (&i / &N) 0),floor (f (&i / &N) 1)))\n         {j | j <=| N})))
-      #|  !E. FINITE E ==>\n     ( curve_cell (UNIONS E) = UNIONS (IMAGE curve_cell E))
+      #|  forall f N. curve_cell (grid f N) =\n       UNIONS (IMAGE curve_cell\n       ((IMAGE (\\i. grid33 (floor (f (&i / &N) 0),floor (f (&i / &N) 1)))\n         {j | j <=| N})))
+      #|  forall E. FINITE E ==>\n     ( curve_cell (UNIONS E) = UNIONS (IMAGE curve_cell E))
       #|  x'
       #|  x
       #|  x'
@@ -83863,7 +83863,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  m'
       #|  x
-      #|  !p.  grid33 p =\n    (IMAGE h_edge\n       { m | (FST p -: &:1 <=: FST m) /\\ FST m <=: FST p +: &:1 /\\\n              SND p -: &:1 <=: SND m /\\ (SND m <=: SND p +: &:2) })\n   UNION\n    (IMAGE v_edge\n       { m | FST p -: &:1 <=: FST m /\\ FST m <= FST p +: &:2 /\\\n             SND p -: &:1 <=: SND m /\\ SND m <= SND p +: &:1}) 
+      #|  forall p.  grid33 p =\n    (IMAGE h_edge\n       { m | (FST p -: &:1 <=: FST m) /\\ FST m <=: FST p +: &:1 /\\\n              SND p -: &:1 <=: SND m /\\ (SND m <=: SND p +: &:2) })\n   UNION\n    (IMAGE v_edge\n       { m | FST p -: &:1 <=: FST m /\\ FST m <= FST p +: &:2 /\\\n             SND p -: &:1 <=: SND m /\\ SND m <= SND p +: &:1}) 
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -83912,21 +83912,21 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  a
       #|  { t | a <=: t /\\ t <=: b} = EMPTY 
       #|  b <: a
-      #|  !a b. FINITE {t | a <=: t /\\ t <=: b}
+      #|  forall a b. FINITE {t | a <=: t /\\ t <=: b}
       #|  x
-      #|  !y (f:A->bool). (f y) ==> (!x. (x = y) ==> f x)
+      #|  forall y (f:A->bool). (f y) ==> (forall x. (x = y) ==> f x)
       #|  {u | c <=: u /\\ u <=: d}
       #|  {t | a <=: t /\\ t <=: b}
-      #|  ! a b c d. FINITE {m | a <=: FST m /\\ FST m <=: b /\\\n                          c <=: SND m /\\ SND m <=: d}
+      #|  forall a b c d. FINITE {m | a <=: FST m /\\ FST m <=: b /\\\n                          c <=: SND m /\\ SND m <=: d}
       #|  TAGB
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  !p. FINITE (grid33 p)
+      #|  forall p. FINITE (grid33 p)
       #|  i
       #|  i
       #|  (i=0) \\/ (i = 1) \\/ (2 <= i)
-      #|  !x y eps. euclid 2 x /\\ euclid 2 y /\\ (abs  (x 0 - y 0) <= eps) /\\\n    (abs  (x 1 - y 1) <= eps) ==> (d_euclid x y <= sqrt(&2) * eps)
+      #|  forall x y eps. euclid 2 x /\\ euclid 2 y /\\ (abs  (x 0 - y 0) <= eps) /\\\n    (abs  (x 1 - y 1) <= eps) ==> (d_euclid x y <= sqrt(&2) * eps)
       #|  x 1
       #|  x 0
       #|  m
@@ -83954,7 +83954,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (UNIONS (grid33 m)) SUBSET  closed_ball (euclid 2,d_euclid) x (&3) 
       #|  grid33 m
       #|  m = (floor (x 0),floor (x 1))
-      #|  !x y. (euclid 2 x) /\\\n  (UNIONS (curve_cell (grid33 (floor (x 0),floor (x 1)))) y) ==>\n        (d_euclid x y < &4 )
+      #|  forall x y. (euclid 2 x) /\\\n  (UNIONS (curve_cell (grid33 (floor (x 0),floor (x 1)))) y) ==>\n        (d_euclid x y < &4 )
       #|  f ( &x' / &n )
       #|  u'
       #|  x
@@ -83982,14 +83982,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  delta
       #|  &0 < &1
       #|  &1
-      #|  ?N. (!i N'. (N <= N') /\\ (i <| N') ==> d_euclid (f (&i / &N')) (f (&(SUC i) / &N')) < &1)
-      #|  !N' x. (&0 < &N') ==> ((x/ &N' <= &1) <=> (x <= &N'))
+      #|  ?N. (forall i N'. (N <= N') /\\ (i <| N') ==> d_euclid (f (&i / &N')) (f (&(SUC i) / &N')) < &1)
+      #|  forall N' x. (&0 < &N') ==> ((x/ &N' <= &1) <=> (x <= &N'))
       #|  x
       #|  &0
       #|  &N'
-      #|  !N' x. (&0 < &N') ==> ((&0 <= x/ &N') <=> (&0 <= x))
+      #|  forall N' x. (&0 < &N') ==> ((&0 <= x/ &N') <=> (&0 <= x))
       #|  f
-      #|  !C a b. simple_arc_end C a b ==> (?E.\n      E SUBSET edge /\\\n      (C INTER (unbounded_set E) = EMPTY) /\\\n      conn2 E /\\\n      E (h_edge (floor (a 0),floor (a 1))) /\\\n      E (h_edge (floor (b 0),floor (b 1))) /\\\n     (!y. UNIONS (curve_cell E) y ==> (?x. C x /\\ d_euclid x y < &4)))
+      #|  forall C a b. simple_arc_end C a b ==> (?E.\n      E SUBSET edge /\\\n      (C INTER (unbounded_set E) = EMPTY) /\\\n      conn2 E /\\\n      E (h_edge (floor (a 0),floor (a 1))) /\\\n      E (h_edge (floor (b 0),floor (b 1))) /\\\n     (forall y. UNIONS (curve_cell E) y ==> (?x. C x /\\ d_euclid x y < &4)))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -84035,7 +84035,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  p
       #|  E
-      #|  !E p. (FINITE E /\\ E SUBSET edge) ==>\n     (unbounded_set E p <=> (?r. !s. (r <= s) ==>\n          (?C. simple_arc_end C p (point(s,&0)) /\\\n              (C INTER UNIONS (curve_cell E) = EMPTY))))
+      #|  forall E p. (FINITE E /\\ E SUBSET edge) ==>\n     (unbounded_set E p <=> (?r. forall s. (r <= s) ==>\n          (?C. simple_arc_end C p (point(s,&0)) /\\\n              (C INTER UNIONS (curve_cell E) = EMPTY))))
       #|  C
       #|  C'
       #|  c
@@ -84045,7 +84045,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C
       #|  b
       #|  b = c
-      #|  !C a b c. simple_arc_end C a b /\\ C c /\\ ~(c = a) ==>\n    (?C'. C' SUBSET C /\\ simple_arc_end C' a c)
+      #|  forall C a b c. simple_arc_end C a b /\\ C c /\\ ~(c = a) ==>\n    (?C'. C' SUBSET C /\\ simple_arc_end C' a c)
       #|  C'' UNION C'''
       #|  c
       #|  v'
@@ -84073,7 +84073,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  c
       #|  C'
       #|  C' a
-      #|  !C C' a b c. simple_arc_end C a b /\\ simple_arc_end C' b c /\\\n    ~(a = c) ==>\n    (?U. simple_arc_end U a c /\\ U SUBSET (C UNION C'))
+      #|  forall C C' a b c. simple_arc_end C a b /\\ simple_arc_end C' b c /\\\n    ~(a = c) ==>\n    (?U. simple_arc_end U a c /\\ U SUBSET (C UNION C'))
       #|  U
       #|  (point(s,&0))
       #|  p
@@ -84098,7 +84098,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C INTER UNIONS (curve_cell E) = EMPTY
       #|  E
       #|  closure top2 (UNIONS E) SUBSET (closed_ball (euclid 2,d_euclid) x r)
-      #|  !E p q x r. FINITE E /\\ E SUBSET edge /\\\n     (unbounded_set E p) /\\\n     (UNIONS E SUBSET (closed_ball(euclid 2,d_euclid) x r)) /\\\n     (?C. simple_arc_end C p q /\\\n         (C INTER closed_ball(euclid 2,d_euclid) x r = EMPTY)) ==>\n   (unbounded_set E q)
+      #|  forall E p q x r. FINITE E /\\ E SUBSET edge /\\\n     (unbounded_set E p) /\\\n     (UNIONS E SUBSET (closed_ball(euclid 2,d_euclid) x r)) /\\\n     (?C. simple_arc_end C p q /\\\n         (C INTER closed_ball(euclid 2,d_euclid) x r = EMPTY)) ==>\n   (unbounded_set E q)
       #|  mk_segment (point (r,&0)) x
       #|  -- &1
       #|  point(&0,&0)
@@ -84114,7 +84114,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {x | F} = {}
       #|  {x | UNIONS (top_of_metric (UNIV,d_real)) x} = UNIONS (top_of_metric(UNIV,d_real))
       #|  v r
-      #|  !r. continuous (\\t. r) (top_of_metric (UNIV,d_real))\n (top_of_metric (UNIV,d_real))
+      #|  forall r. continuous (\\t. r) (top_of_metric (UNIV,d_real))\n (top_of_metric (UNIV,d_real))
       #|  r * x - r *y = r*. (x - y)
       #|  epsilon/r
       #|  d_real
@@ -84122,7 +84122,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIV:real->bool
       #|  UNIV:real->bool
       #|  ( *. ) r
-      #|  !r. (&0 < r) ==> continuous (( *. ) r)\n  (top_of_metric (UNIV,d_real))\n (top_of_metric (UNIV,d_real)) 
+      #|  forall r. (&0 < r) ==> continuous (( *. ) r)\n  (top_of_metric (UNIV,d_real))\n (top_of_metric (UNIV,d_real)) 
       #|  x
       #|  (r *# cis (theta * x'))
       #|  (&0 *# cis (theta * x'))
@@ -84136,8 +84136,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  g
       #|  r
       #|  theta* &1
-      #|  !x. (x <= &1) ==> (theta* x < &2 * pi)
-      #|  !x. &0 <= x ==> &0 <= theta* x
+      #|  forall x. (x <= &1) ==> (theta* x < &2 * pi)
+      #|  forall x. &0 <= x ==> &0 <= theta* x
       #|  &0 < r ==> &0 <= r
       #|  g
       #|  r
@@ -84165,7 +84165,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  g = ( *. ) theta
       #|  f = (\\ (t:real) . r) 
-      #|  !x theta r. euclid 2 x /\\ &0 < theta /\\ theta < &2 * pi /\\ &0 < r ==>\n   (?C.\n    simple_arc_end C (x + point(r,&0)) (x + r *# (cis theta)) /\\\n    !y. C y ==> (d_euclid x y = r))
+      #|  forall x theta r. euclid 2 x /\\ &0 < theta /\\ theta < &2 * pi /\\ &0 < r ==>\n   (?C.\n    simple_arc_end C (x + point(r,&0)) (x + r *# (cis theta)) /\\\n    forall y. C y ==> (d_euclid x y = r))
       #|  R
       #|  u
       #|  x + &0 = x
@@ -84232,7 +84232,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  point p'
       #|  point(r',&0)
       #|  r' <= x'
-      #|  !x. (FST p' + r <  x) ==> unbounded_set E (point(x,&0))
+      #|  forall x. (FST p' + r <  x) ==> unbounded_set E (point(x,&0))
       #|  x
       #|  u
       #|  euclid 2 x
@@ -84241,7 +84241,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  UNIONS E = EMPTY
       #|  E = EMPTY
       #|  E
-      #|  !E x r p.  (&0 < r) /\\\n        FINITE E /\\ E SUBSET edge /\\ (euclid 2 p) /\\\n        UNIONS E SUBSET (closed_ball (euclid 2,d_euclid) x r) /\\\n        ~(closed_ball (euclid 2,d_euclid) x r p) ==>\n      unbounded_set E p
+      #|  forall E x r p.  (&0 < r) /\\\n        FINITE E /\\ E SUBSET edge /\\ (euclid 2 p) /\\\n        UNIONS E SUBSET (closed_ball (euclid 2,d_euclid) x r) /\\\n        ~(closed_ball (euclid 2,d_euclid) x r p) ==>\n      unbounded_set E p
       #|  q
       #|  p
       #|  x
@@ -84260,9 +84260,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  r''
       #|  r''
       #|  r'' = max_real r r'
-      #|  (?r. !s. r <= s  ==> (?C. simple_arc_end C q (point (s,&0)) /\\ (C INTER UNIONS (curve_cell E) = {})))
-      #|  (?r. !s. r <= s  ==> (?C. simple_arc_end C p (point (s,&0)) /\\ (C INTER UNIONS (curve_cell E) = {})))
-      #|  !E p q. FINITE E /\\ E SUBSET edge /\\ ~(p = q) /\\\n    unbounded_set E p /\\ unbounded_set E q ==>\n    (?C. C SUBSET unbounded_set E /\\ simple_arc_end C p q)
+      #|  (?r. forall s. r <= s  ==> (?C. simple_arc_end C q (point (s,&0)) /\\ (C INTER UNIONS (curve_cell E) = {})))
+      #|  (?r. forall s. r <= s  ==> (?C. simple_arc_end C p (point (s,&0)) /\\ (C INTER UNIONS (curve_cell E) = {})))
+      #|  forall E p q. FINITE E /\\ E SUBSET edge /\\ ~(p = q) /\\\n    unbounded_set E p /\\ unbounded_set E q ==>\n    (?C. C SUBSET unbounded_set E /\\ simple_arc_end C p q)
       #|  SUC i
       #|  x'
       #|  x
@@ -84277,19 +84277,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  G
       #|  edge u
-      #|  !G x. G SUBSET edge /\\ UNIONS G x ==> (euclid 2 x /\\ UNIONS (curve_cell G) x)
+      #|  forall G x. G SUBSET edge /\\ UNIONS G x ==> (euclid 2 x /\\ UNIONS (curve_cell G) x)
       #|  x
       #|  y
       #|  a(SUC i)
       #|  d_euclid
       #|  euclid 2
-      #|  (!x. (euclid 2 x) /\\ (?y. (euclid 2 y) /\\ (d_euclid y x < &4) /\\ (d_euclid (a (SUC i)) y < &2 * d)) ==> (d_euclid (a (SUC i)) x <= &7 *d))
+      #|  (forall x. (euclid 2 x) /\\ (?y. (euclid 2 y) /\\ (d_euclid y x < &4) /\\ (d_euclid (a (SUC i)) y < &2 * d)) ==> (d_euclid (a (SUC i)) x <= &7 *d))
       #|  B i'
       #|  B i'
       #|  x'
       #|  i'
       #|  euclid 2
-      #|  !i x y. (i <| N) /\\ B i x /\\ B i y /\\ (euclid 2 x) /\\ (euclid 2 y) ==> (d_euclid x y < &2 *d)
+      #|  forall i x y. (i <| N) /\\ B i x /\\ B i y /\\ (euclid 2 x) /\\ (euclid 2 y) ==> (d_euclid x y < &2 *d)
       #|  euclid 2 (a(SUC i))
       #|  SUC i
       #|  B (SUC i) (a (SUC i))
@@ -84299,7 +84299,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SUC i
       #|  i
       #|  i'
-      #|  !i x. (i <| N) /\\  (B i x) ==> euclid 2 x
+      #|  forall i x. (i <| N) /\\  (B i x) ==> euclid 2 x
       #|  a/\\ b ==> b/\\ a
       #|  &7 *d
       #|  a(SUC i)
@@ -84309,8 +84309,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i <| N
       #|  i
       #|  i
-      #|  !i. (SUC i <= (N-1)) ==> C' (a (SUC i))
-      #|  !p. (euclid 2 p) /\\ (!i. (SUC i <= (N-1)) ==> (&8 * d <= d_euclid (a (SUC i)) p)) ==> (unbounded_set E' p)
+      #|  forall i. (SUC i <= (N-1)) ==> C' (a (SUC i))
+      #|  forall p. (euclid 2 p) /\\ (forall i. (SUC i <= (N-1)) ==> (&8 * d <= d_euclid (a (SUC i)) p)) ==> (unbounded_set E' p)
       #|  0 <| N -| 1
       #|  x
       #|  d + &4
@@ -84329,7 +84329,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  0
       #|  &7* d
       #|  x
-      #|  !p. (!x. B 0 x ==> &8 *d <= d_euclid x p) /\\ (euclid 2 p) ==> unbounded_set (E 0) p
+      #|  forall p. (forall x. B 0 x ==> &8 *d <= d_euclid x p) /\\ (euclid 2 p) ==> unbounded_set (E 0) p
       #|  0
       #|  C'
       #|  E'
@@ -84377,7 +84377,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i
       #|  euclid 2 x /\\ euclid 2 y
       #|  k
-      #|  !k x. B k x /\\ (k <| N) ==> euclid 2 x
+      #|  forall k x. B k x /\\ (k <| N) ==> euclid 2 x
       #|  y
       #|  x
       #|  j
@@ -84391,25 +84391,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2 u'
       #|  E i
       #|  ~(u = EMPTY)
-      #|  (!i j.  i <| j /\\ j <=| N -| 1 /\\ ~(SUC i = j) ==> (curve_cell (E i) INTER curve_cell (E j) = {}))
+      #|  (forall i j.  i <| j /\\ j <=| N -| 1 /\\ ~(SUC i = j) ==> (curve_cell (E i) INTER curve_cell (E j) = {}))
       #|  SUC i
       #|  i
       #|  h_edge (floor (a (SUC i) 0), floor (a (SUC i) 1))
-      #|  (!i. (SUC i <= N -| 1) ==> ~(E i INTER E (SUC i) = {}))
+      #|  (forall i. (SUC i <= N -| 1) ==> ~(E i INTER E (SUC i) = {}))
       #|  i
-      #|  !i. (i <= N-| 1) ==> (E i SUBSET edge)
+      #|  forall i. (i <= N-| 1) ==> (E i SUBSET edge)
       #|  i
-      #|  (!i. i <=| N- 1 ==> conn2 (E i))
-      #|  !i. (i <=| N- 1) ==> (i <| N)
+      #|  (forall i. i <=| N- 1 ==> conn2 (E i))
+      #|  forall i. (i <=| N- 1) ==> (i <| N)
       #|  N-1
       #|  E
       #|  E
       #|  i
-      #|  !i. (?E. (i <| N) ==> (  E SUBSET edge /\\  (B i INTER (unbounded_set E) = EMPTY) /\\  conn2 E /\\ E (h_edge (floor (a i 0),floor (a i 1))) /\\ E (h_edge (floor (a (SUC i) 0),floor (a (SUC i) 1))) /\\  (!y. UNIONS (curve_cell E) y ==> (?x. B i x /\\ d_euclid x y < &4))))
+      #|  forall i. (?E. (i <| N) ==> (  E SUBSET edge /\\  (B i INTER (unbounded_set E) = EMPTY) /\\  conn2 E /\\ E (h_edge (floor (a i 0),floor (a i 1))) /\\ E (h_edge (floor (a (SUC i) 0),floor (a (SUC i) 1))) /\\  (forall y. UNIONS (curve_cell E) y ==> (?x. B i x /\\ d_euclid x y < &4))))
       #|  q
       #|  p
       #|  C
-      #|  !C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\\n       (euclid 2 p) /\\ ~(p = q) /\\\n   (euclid 2 q) ==> (?A. simple_arc_end A p q /\\ (C INTER A = EMPTY))
+      #|  forall C p q. simple_arc top2 C /\\ ~C p /\\ ~C q /\\\n       (euclid 2 p) /\\ ~(p = q) /\\\n   (euclid 2 q) ==> (?A. simple_arc_end A p q /\\ (C INTER A = EMPTY))
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -84429,10 +84429,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  cut_arc C v w = @B. simple_arc_end B v w /\\ B SUBSET C
-      #|  !B. simple_arc_end B v w = simple_arc_end B w v
-      #|  !C v w. cut_arc C v w = cut_arc C w v
-      #|  !C v w. simple_arc top2 C /\\  C v /\\ C w /\\ ~(v = w) ==>\n        simple_arc_end (cut_arc C v w) v w
-      #|  !C v w. simple_arc top2 C /\\ C v /\\ C w /\\ ~(v = w) ==>\n        cut_arc C v w SUBSET C
+      #|  forall B. simple_arc_end B v w = simple_arc_end B w v
+      #|  forall C v w. cut_arc C v w = cut_arc C w v
+      #|  forall C v w. simple_arc top2 C /\\  C v /\\ C w /\\ ~(v = w) ==>\n        simple_arc_end (cut_arc C v w) v w
+      #|  forall C v w. simple_arc top2 C /\\ C v /\\ C w /\\ ~(v = w) ==>\n        cut_arc C v w SUBSET C
       #|  B
       #|  C w
       #|  w
@@ -84443,7 +84443,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  w
       #|  v
       #|  C
-      #|  !C v w B. simple_arc top2 C /\\ (B SUBSET C) /\\ simple_arc_end B v w\n        ==> (cut_arc C v w = B)
+      #|  forall C v w B. simple_arc top2 C /\\ (B SUBSET C) /\\ simple_arc_end B v w\n        ==> (cut_arc C v w = B)
       #|  C
       #|  cut_arc C u w = C''
       #|  C
@@ -84453,14 +84453,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  w
       #|  v
       #|  C
-      #|  !C u v w. simple_arc_end C v w /\\ C u /\\ ~(u = v) /\\ ~(u = w) ==>\n     (cut_arc C v u INTER cut_arc C u w = {u}) /\\\n     (cut_arc C v u UNION cut_arc C u w = C)
+      #|  forall C u v w. simple_arc_end C v w /\\ C u /\\ ~(u = v) /\\ ~(u = w) ==>\n     (cut_arc C v u INTER cut_arc C u w = {u}) /\\\n     (cut_arc C v u UNION cut_arc C u w = C)
       #|  x' = &1
-      #|  !u. &0 <= u /\\ u < &1 ==> euclid 2 (f u)
-      #|  !C . simple_closed_curve top2 C ==> (C SUBSET euclid 2) 
+      #|  forall u. &0 <= u /\\ u < &1 ==> euclid 2 (f u)
+      #|  forall C . simple_closed_curve top2 C ==> (C SUBSET euclid 2) 
       #|  {x | a < x /\\ x < b} = {x | a < x} INTER {x | x < b}
       #|  a
       #|  b
-      #|  !a b. top_of_metric (UNIV,d_real) {x | a < x /\\ x < b}
+      #|  forall a b. top_of_metric (UNIV,d_real) {x | a < x /\\ x < b}
       #|  (A'' = X) \\/ (A'' = Y)
       #|  (A' = X) \\/ (A' = Y)
       #|  (A = X) \\/ (A = Y)
@@ -84532,8 +84532,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  U'
       #|  U
       #|  {x | &0 < x /\\ x < &1 /\\ v' (f' x)} = {x | &0 < x /\\ x < &1 } INTER {x | v' (f' x)}
-      #|  !v. top2 v ==> top_of_metric(UNIV,d_real) {x | &0 < x /\\ x < &1 /\\ v (f' x)}
-      #|  !B.  simple_arc_end B (f (&0)) (f t) /\\ B SUBSET C ==> (B = IMAGE f {x | &0 <= x /\\ x <= t}) \\/ (B = IMAGE f {x | t <= x /\\ x <= &1})
+      #|  forall v. top2 v ==> top_of_metric(UNIV,d_real) {x | &0 < x /\\ x < &1 /\\ v (f' x)}
+      #|  forall B.  simple_arc_end B (f (&0)) (f t) /\\ B SUBSET C ==> (B = IMAGE f {x | &0 <= x /\\ x <= t}) \\/ (B = IMAGE f {x | t <= x /\\ x <= &1})
       #|  &1
       #|  &0
       #|  &1
@@ -84574,10 +84574,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f( &0)
       #|  r = &0
       #|  closed_ top2 (IMAGE f {x | &0 <= x /\\ x <= r})
-      #|  ! r s. &0 <= r /\\ s <= &1 /\\ r < s  ==>  (?U. top2 U /\\ (IMAGE f {x | r < x /\\ x < s} = U INTER C))
+      #|  forall r s. &0 <= r /\\ s <= &1 /\\ r < s  ==>  (?U. top2 U /\\ (IMAGE f {x | r < x /\\ x < s} = U INTER C))
       #|  C
-      #|  !x. &0 <= x /\\ x <= &1 ==> euclid 2 (f x)
-      #|  !q. {x | q <= x /\\ x <= q} = {q}
+      #|  forall x. &0 <= x /\\ x <= &1 ==> euclid 2 (f x)
+      #|  forall q. {x | q <= x /\\ x <= q} = {q}
       #|  simple_arc_end (IMAGE f {x | t <= x /\\ x <= &1}) (f t) (f (&1))
       #|  simple_arc_end (IMAGE f {x | &0 <= x /\\ x <= t}) (f (&0)) (f t)
       #|  v
@@ -84595,7 +84595,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  w
       #|  A'
       #|  C v /\\ C w /\\ ~(v = w)
-      #|  !A A' A'' C v w. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      simple_arc_end A' v w /\\\n      simple_arc_end A'' v w /\\\n      ~(A' = A'') /\\\n    (A SUBSET C ) /\\ (A' SUBSET C) /\\ (A'' SUBSET C) ==>\n      (A = A') \\/ (A = A'')
+      #|  forall A A' A'' C v w. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      simple_arc_end A' v w /\\\n      simple_arc_end A'' v w /\\\n      ~(A' = A'') /\\\n    (A SUBSET C ) /\\ (A' SUBSET C) /\\ (A'' SUBSET C) ==>\n      (A = A') \\/ (A = A'')
       #|  TAGB
       #|  TAGB
       #|  {x | r < x /\\ x < s}
@@ -84603,19 +84603,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (a + &2*b)/ &3
       #|  (&2*a + b)/ &3
       #|  ?r s. a < r /\\ r < s /\\ s < b
-      #|  !a b. a < b ==> INFINITE {x | a <= x /\\ x <= b}
+      #|  forall a b. a < b ==> INFINITE {x | a <= x /\\ x <= b}
       #|  {x | x IN X /\\ f x IN IMAGE f X} = X
       #|  X
       #|  IMAGE f X
       #|  f
-      #|  !(f:A->B) X. INFINITE X /\\ INJ f X UNIV ==> INFINITE (IMAGE f X)
-      #|  !C. simple_arc top2 C ==> INFINITE C
+      #|  forall(f:A->B) X. INFINITE X /\\ INJ f X UNIV ==> INFINITE (IMAGE f X)
+      #|  forall C. simple_arc top2 C ==> INFINITE C
       #|  A'
       #|  A''
       #|  w
       #|  v
       #|  C
-      #|  !A A' A'' C v w. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      simple_arc_end A' v w /\\\n      simple_arc_end A'' v w /\\\n      (A' INTER A'' = {v,w})  /\\\n    (A SUBSET C ) /\\ (A' SUBSET C) /\\ (A'' SUBSET C) ==>\n      (A = A') \\/ (A = A'')
+      #|  forall A A' A'' C v w. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      simple_arc_end A' v w /\\\n      simple_arc_end A'' v w /\\\n      (A' INTER A'' = {v,w})  /\\\n    (A SUBSET C ) /\\ (A' SUBSET C) /\\ (A'' SUBSET C) ==>\n      (A = A') \\/ (A = A'')
       #|  u
       #|  cut_arc C' p e SUBSET C'
       #|  u = v''
@@ -84713,7 +84713,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  w
       #|  A
       #|  C v /\\ C w /\\ ~(v = w)
-      #|  !A C v w x p. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      A SUBSET C /\\\n      A x /\\ ~(x = v) /\\ ~(x = w) /\\\n      (euclid 2 p) /\\\n      ~C p /\\\n      (?q. ~( p = q) /\\ ~(C q) /\\ (euclid 2 q) /\\\n         (!B. simple_arc_end B p q ==> ~(B INTER C = EMPTY)))   ==>\n    (?E.\n        simple_arc_end E p x /\\\n        E INTER C SUBSET A /\\\n      (!e. E e /\\ ~C e /\\ ~(p = e) ==> (cut_arc E p e INTER C = EMPTY)))
+      #|  forall A C v w x p. simple_closed_curve top2 C /\\\n      simple_arc_end A v w /\\\n      A SUBSET C /\\\n      A x /\\ ~(x = v) /\\ ~(x = w) /\\\n      (euclid 2 p) /\\\n      ~C p /\\\n      (?q. ~( p = q) /\\ ~(C q) /\\ (euclid 2 q) /\\\n         (forall B. simple_arc_end B p q ==> ~(B INTER C = EMPTY)))   ==>\n    (?E.\n        simple_arc_end E p x /\\\n        E INTER C SUBSET A /\\\n      (forall e. E e /\\ ~C e /\\ ~(p = e) ==> (cut_arc E p e INTER C = EMPTY)))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -84724,14 +84724,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  &0 <= x /\\ &0 <= x'
       #|  i
-      #|  !i. (&2 * &(REP3 i) + &2) / (&8) < &1
+      #|  forall i. (&2 * &(REP3 i) + &2) / (&8) < &1
       #|  x = x'
       #|  u
       #|  s
       #|  i
       #|  j
       #|  (REP3 i = REP3 j) \\/ (REP3 j <| REP3 i) \\/ (REP3 i < REP3 j)
-      #|  !i j. (REP3 i < REP3 j) ==> (s i INTER s j = EMPTY)
+      #|  forall i j. (REP3 i < REP3 j) ==> (s i INTER s j = EMPTY)
       #|  (&2 * &(REP3 i) + &2) / &8
       #|  (&2 * &(REP3 i) + &1) / &8 
       #|  f
@@ -84739,25 +84739,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x'
       #|  s
       #|  i
-      #|  !i. (&2 * &(REP3 i) + &2) / &8 <= &1
-      #|  !i. &0 <= (&2 * &(REP3 i) + &1) / &8
+      #|  forall i. (&2 * &(REP3 i) + &2) / &8 <= &1
+      #|  forall i. &0 <= (&2 * &(REP3 i) + &1) / &8
       #|  &0 < &8 /\\ ~(&8 = &0)
       #|  s
       #|  s = (\\ i. IMAGE f {x | ((&2 * &(REP3 i) + &1)/ &8) <= x /\\ x <= ((&2 * &(REP3 i) + &2)/ &8) } )
-      #|  !C. simple_closed_curve top2 C ==>\n     (?s.  (!(i:three_t). (s i SUBSET C) /\\ (simple_arc top2 (s i))) /\\\n          (!i j. ~(s i INTER s j = EMPTY) ==> (i = j)))
+      #|  forall C. simple_closed_curve top2 C ==>\n     (?s.  (forall(i:three_t). (s i SUBSET C) /\\ (simple_arc top2 (s i))) /\\\n          (forall i j. ~(s i INTER s j = EMPTY) ==> (i = j)))
       #|  ABS3 i
-      #|  !i j. ~(REP3 (ABS3 i) = REP3(ABS3 j))==> ~(ABS3 i = ABS3 j)
+      #|  forall i j. ~(REP3 (ABS3 i) = REP3(ABS3 j))==> ~(ABS3 i = ABS3 j)
       #|  ~(ABS3 0 = ABS3 1) /\\ ~(ABS3 0 = ABS3 2) /\\ ~(ABS3 1 = ABS3 2)
       #|  f
       #|  f
       #|  f = (\\ i. (if (i = ABS3 0) then a else (if (i = ABS3 1) then b else c)))
-      #|  !(a:A) b c. ?(f:three_t ->A). (f(ABS3 0) = a) /\\\n         (f(ABS3 1) = b) /\\ (f(ABS3 2) = c)
+      #|  forall(a:A) b c. ?(f:three_t ->A). (f(ABS3 0) = a) /\\\n         (f(ABS3 1) = b) /\\ (f(ABS3 2) = c)
       #|  j
       #|  (j = 0) \\/ (j = 1) \\/ (j = 2)
       #|  i
-      #|  !P. P (ABS3 0) /\\ P(ABS3 1) /\\ P(ABS3 2) ==> (!i. P i)
+      #|  forall P. P (ABS3 0) /\\ P(ABS3 1) /\\ P(ABS3 2) ==> (forall i. P i)
       #|  A
-      #|  !i. (f i SUBSET A)
+      #|  forall i. (f i SUBSET A)
       #|  A
       #|  C3'
       #|  C2'
@@ -84768,8 +84768,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C2'
       #|  C1'
       #|  ABS3 i
-      #|  !i j. ~(REP3 (ABS3 i) = REP3 (ABS3 j))  ==> ~(ABS3 i = ABS3 j)
-      #|  !i j. ~(i = j) ==> ~(C i (p j))
+      #|  forall i j. ~(REP3 (ABS3 i) = REP3 (ABS3 j))  ==> ~(ABS3 i = ABS3 j)
+      #|  forall i j. ~(i = j) ==> ~(C i (p j))
       #|  p(ABS3 2)
       #|  p(ABS3 1)
       #|  p(ABS3 0)
@@ -84779,9 +84779,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  C(ABS3 0)
       #|  A
       #|  A = C(ABS3 0) UNION C(ABS3 1) UNION C(ABS3 2)
-      #|  !C x p.\n      (!(i:three_t). simple_arc_end (C i) x (p i)) /\\\n      (!i j. (C i) (p j) ==> (i = j)) ==>\n   (?C' x.\n      (!i. simple_arc_end (C' i) x (p i)) /\\\n      (!i j. ~(i = j) ==> (C' i INTER C' j = {x})) /\\\n      (!A. (!i. (C i) SUBSET A) ==> (!i. (C' i) SUBSET A)))  
+      #|  forall C x p.\n      (forall(i:three_t). simple_arc_end (C i) x (p i)) /\\\n      (forall i j. (C i) (p j) ==> (i = j)) ==>\n   (?C' x.\n      (forall i. simple_arc_end (C' i) x (p i)) /\\\n      (forall i j. ~(i = j) ==> (C' i INTER C' j = {x})) /\\\n      (forall A. (forall i. (C i) SUBSET A) ==> (forall i. (C' i) SUBSET A)))  
       #|  transpose (Q:A->B->C) i j = Q j i
-      #|  !Q . (transpose (transpose Q))  = (Q:A->B->C) 
+      #|  forall Q . (transpose (transpose Q))  = (Q:A->B->C) 
       #|  i'
       #|  q i' j
       #|  i'
@@ -84818,13 +84818,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  j'
       #|  i'
-      #|  (!i j i' j'. ~(CB' i j INTER CB' i' j' = {}) ==> (j = j'))
+      #|  (forall i j i' j'. ~(CB' i j INTER CB' i' j' = {}) ==> (j = j'))
       #|  u'
       #|  u
       #|  i
       #|  UNIONS (IMAGE (transpose CB j) (UNIV))
       #|  j
-      #|  !i j u. CB' i j u ==> (?i'. CB i' j u)
+      #|  forall i j u. CB' i j u ==> (?i'. CB i' j u)
       #|  CB'
       #|  CBt'
       #|  CB'
@@ -84839,7 +84839,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i
       #|  j
       #|  B i
-      #|  !i. ?CBt' B'. (!j. simple_arc_end (CBt' j) (B') (transpose q i j)) /\\ (!j k. ~(j = k) ==> (CBt' j INTER CBt' k = {(B')})) /\\ (!U. (!j. (transpose CB i j SUBSET U)) ==> (!j. CBt' j SUBSET U))
+      #|  forall i. ?CBt' B'. (forall j. simple_arc_end (CBt' j) (B') (transpose q i j)) /\\ (forall j k. ~(j = k) ==> (CBt' j INTER CBt' k = {(B')})) /\\ (forall U. (forall j. (transpose CB i j SUBSET U)) ==> (forall j. CBt' j SUBSET U))
       #|  j''
       #|  j'''
       #|  u
@@ -84848,14 +84848,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  j'
       #|  i'
-      #|  (!i j i' j'. ~(CA' i j INTER CA' i' j' = {}) ==> (i = i'))
+      #|  (forall i j i' j'. ~(CA' i j INTER CA' i' j' = {}) ==> (i = i'))
       #|  u'
       #|  u
       #|  j
       #|  UNIONS (IMAGE (CA i) (UNIV))
       #|  i
-      #|  !i j u. CA' i j u ==> (?j'. CA i j' u)
-      #|  (!i j. simple_arc_end (CA' i j) (A' i) (q i j))
+      #|  forall i j u. CA' i j u ==> (?j'. CA i j' u)
+      #|  (forall i j. simple_arc_end (CA' i j) (A' i) (q i j))
       #|  CA'
       #|  A'
       #|  j'
@@ -84866,8 +84866,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j'
       #|  i
       #|  A i
-      #|  !i. ?CA' A'. (!j. simple_arc_end (CA' j) (A') (q i j)) /\\ (!j k. ~(j = k) ==> (CA' j INTER CA' k = {(A')})) /\\ (!U. (!j. (CA i j SUBSET U)) ==> (!j. CA' j SUBSET U))
-      #|  (!q A CA B CB.\n      (!(i:three_t) (j:three_t) i' j'.\n          (q i j = q i' j') ==> (i = i') /\\ (j = j')) /\\\n      (!i j. simple_arc_end (CA i j) (A i) (q i j)) /\\\n      (!i j. simple_arc_end (CB i j) (B j) (q i j)) /\\\n      (!i j i' j' u. (CB i j u /\\ CA i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (!i j i' j'. ~(CA i j INTER CA i' j' = EMPTY) ==> (i = i')) /\\\n      (!i j i' j'. ~(CB i j INTER CB i' j' = EMPTY) ==> (j = j'))\n    ==> (?A' CA' B' CB'.\n      (!i j. simple_arc_end (CA' i j) (A' i) (q i j)) /\\\n      (!i j. simple_arc_end (CB' i j) (B' j) (q i j)) /\\\n      (!i j i' j' u. (CB' i j u /\\ CA' i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (!i j i' j'. ~(CA' i j INTER CA' i' j' = EMPTY) ==> (i = i')) /\\\n      (!i j i' j'. ~(CB' i j INTER CB' i' j' = EMPTY) ==> (j = j')) /\\\n      (!i j k. ~(j = k) ==> (CA' i j INTER CA' i k = {(A' i)})) /\\\n      (!i j k. ~(j = k) ==> (CB' j i INTER CB' k i = {(B' i)}))\n      ))\n        
+      #|  forall i. ?CA' A'. (forall j. simple_arc_end (CA' j) (A') (q i j)) /\\ (forall j k. ~(j = k) ==> (CA' j INTER CA' k = {(A')})) /\\ (forall U. (forall j. (CA i j SUBSET U)) ==> (forall j. CA' j SUBSET U))
+      #|  (forall q A CA B CB.\n      (forall(i:three_t) (j:three_t) i' j'.\n          (q i j = q i' j') ==> (i = i') /\\ (j = j')) /\\\n      (forall i j. simple_arc_end (CA i j) (A i) (q i j)) /\\\n      (forall i j. simple_arc_end (CB i j) (B j) (q i j)) /\\\n      (forall i j i' j' u. (CB i j u /\\ CA i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (forall i j i' j'. ~(CA i j INTER CA i' j' = EMPTY) ==> (i = i')) /\\\n      (forall i j i' j'. ~(CB i j INTER CB i' j' = EMPTY) ==> (j = j'))\n    ==> (?A' CA' B' CB'.\n      (forall i j. simple_arc_end (CA' i j) (A' i) (q i j)) /\\\n      (forall i j. simple_arc_end (CB' i j) (B' j) (q i j)) /\\\n      (forall i j i' j' u. (CB' i j u /\\ CA' i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (forall i j i' j'. ~(CA' i j INTER CA' i' j' = EMPTY) ==> (i = i')) /\\\n      (forall i j i' j'. ~(CB' i j INTER CB' i' j' = EMPTY) ==> (j = j')) /\\\n      (forall i j k. ~(j = k) ==> (CA' i j INTER CA' i k = {(A' i)})) /\\\n      (forall i j k. ~(j = k) ==> (CB' j i INTER CB' k i = {(B' i)}))\n      ))\n        
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -84916,7 +84916,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (? i j. x = (i,j))
       #|  g
       #|  E
-      #|  !e. E e ==> (?i j. (e = CE i j))
+      #|  forall e. E e ==> (?i j. (e = CE i j))
       #|  x
       #|  B
       #|  A
@@ -84993,7 +84993,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i
       #|  CE i' j'
       #|  (i = i') \\/ (j = j')
-      #|  !i j. INFINITE (CE i j)
+      #|  forall i j. INFINITE (CE i j)
       #|  y
       #|  ?i j. y = (i,j)
       #|  x
@@ -85014,7 +85014,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  i
       #|  CE
-      #|  !i i' j. ~(i = i') ==>  (CE i j INTER CE i' j = {(B' j)})
+      #|  forall i i' j. ~(i = i') ==>  (CE i j INTER CE i' j = {(B' j)})
       #|  x
       #|  x
       #|  j
@@ -85027,8 +85027,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  i
       #|  CE
-      #|  !i j j'. ~(j = j') ==>  (CE i j INTER CE i j' = {(A' i)})
-      #|  !i j. ~(A' i = B' j)
+      #|  forall i j j'. ~(j = j') ==>  (CE i j INTER CE i j' = {(A' i)})
+      #|  forall i j. ~(A' i = B' j)
       #|  u
       #|  j
       #|  i
@@ -85040,26 +85040,26 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  i
       #|  CE
-      #|  !i j i' j'. ~(CE i j INTER CE i' j' = EMPTY) ==> (i = i') \\/ (j = j')
-      #|  !j j'. (B' j = B' j') ==> (j = j')
-      #|  !i i'. (A' i = A' i') ==> (i = i')
+      #|  forall i j i' j'. ~(CE i j INTER CE i' j' = EMPTY) ==> (i = i') \\/ (j = j')
+      #|  forall j j'. (B' j = B' j') ==> (j = j')
+      #|  forall i i'. (A' i = A' i') ==> (i = i')
       #|  x = j
       #|  u
       #|  CE
       #|  B
-      #|  !i j. CE i j INTER B = {(B' j)}
+      #|  forall i j. CE i j INTER B = {(B' j)}
       #|  x = i
       #|  u
       #|  CE
       #|  A
-      #|  !i j. CE i j INTER A = {(A' i)}
+      #|  forall i j. CE i j INTER A = {(A' i)}
       #|  j'
       #|  B' j'
       #|  j
       #|  i
       #|  j'
       #|  i
-      #|  !i  j j'. ~CA' i j (B' j') 
+      #|  forall i  j j'. ~CA' i j (B' j') 
       #|  i'
       #|  A' i'
       #|  j
@@ -85071,57 +85071,57 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i'
       #|  j
       #|  i
-      #|  !i i' j. ~CB' i j (A' i') 
+      #|  forall i i' j. ~CB' i j (A' i') 
       #|  (B' j')
       #|  i
       #|  i
-      #|  !i j j'. CB' i j (B' j') ==> (j = j')
+      #|  forall i j j'. CB' i j (B' j') ==> (j = j')
       #|  (A' i')
       #|  j
       #|  j
-      #|  !i i' j. CA' i j (A' i') ==> (i = i')
-      #|  !i j. CB' i j (B' j)
-      #|  !i j. CA' i j (A' i)
-      #|  !i j. CB' i j (q i j)
-      #|  !i j. CA' i j (q i j)
+      #|  forall i i' j. CA' i j (A' i') ==> (i = i')
+      #|  forall i j. CB' i j (B' j)
+      #|  forall i j. CA' i j (A' i)
+      #|  forall i j. CB' i j (q i j)
+      #|  forall i j. CA' i j (q i j)
       #|  E = IMAGE (\\ (i,j).  (CE i j)) (cartesian UNIV UNIV)
       #|  B = IMAGE B' UNIV
       #|  A = IMAGE A' UNIV
       #|  x
       #|  q i j
       #|  CE
-      #|  !i j. simple_arc_end (CE i j) (A' i) (B' j)
+      #|  forall i j. simple_arc_end (CE i j) (A' i) (B' j)
       #|  CE
-      #|  !i j. CE i j = CA' i j UNION CB' i j
+      #|  forall i j. CE i j = CA' i j UNION CB' i j
       #|  CE = ( \\i j. CA' i j UNION CB' i j)
       #|  CB
       #|  B
       #|  CA
       #|  A
       #|  q
-      #|  (!q A CA B CB.\n      (!(i:three_t) (j:three_t) i' j'.\n          (q i j = q i' j') ==> (i = i') /\\ (j = j')) /\\\n      (!i j. simple_arc_end (CA i j) (A i) (q i j)) /\\\n      (!i j. simple_arc_end (CB i j) (B j) (q i j)) /\\\n      (!i j i' j' u. (CB i j u /\\ CA i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (!i j i' j'. ~(CA i j INTER CA i' j' = EMPTY) ==> (i = i')) /\\\n      (!i j i' j'. ~(CB i j INTER CB i' j' = EMPTY) ==> (j = j')) ==>\n     F)
+      #|  (forall q A CA B CB.\n      (forall(i:three_t) (j:three_t) i' j'.\n          (q i j = q i' j') ==> (i = i') /\\ (j = j')) /\\\n      (forall i j. simple_arc_end (CA i j) (A i) (q i j)) /\\\n      (forall i j. simple_arc_end (CB i j) (B j) (q i j)) /\\\n      (forall i j i' j' u. (CB i j u /\\ CA i' j' u) ==>\n           (i = i') /\\ (j = j') /\\ (u = q i j)) /\\\n      (forall i j i' j'. ~(CA i j INTER CA i' j' = EMPTY) ==> (i = i')) /\\\n      (forall i j i' j'. ~(CB i j INTER CB i' j' = EMPTY) ==> (j = j')) ==>\n     F)
       #|  u
       #|  w
       #|  v
       #|  {v,w}
       #|  C
       #|  C
-      #|  !C v w. simple_arc_end C v w ==>\n        (?u. (C u /\\ ~(u = v) /\\ ~(u = w)))
+      #|  forall C v w. simple_arc_end C v w ==>\n        (?u. (C u /\\ ~(u = v) /\\ ~(u = w)))
       #|  f(&1)
       #|  f(&0)
       #|  f
-      #|  !C. simple_arc top2 C ==> (?v w. simple_arc_end C v w)
+      #|  forall C. simple_arc top2 C ==> (?v w. simple_arc_end C v w)
       #|  TAGB
       #|  TAGB
       #|  A
-      #|  !A B u v. A SUBSET B /\\ simple_arc top2 A /\\ simple_arc top2 B /\\\n      A u /\\ A v /\\ ~(u = v) ==> (cut_arc B u v = cut_arc A u v)
+      #|  forall A B u v. A SUBSET B /\\ simple_arc top2 A /\\ simple_arc top2 B /\\\n      A u /\\ A v /\\ ~(u = v) ==> (cut_arc B u v = cut_arc A u v)
       #|  u
       #|  w
       #|  w
       #|  v
       #|  u
       #|  C
-      #|  !C u v w. simple_arc_end C v w /\\ C u /\\ ~(u = v) /\\ ~(u = w) ==>\n     ~(cut_arc C v u w)
+      #|  forall C u v w. simple_arc_end C v w /\\ C u /\\ ~(u = v) /\\ ~(u = w) ==>\n     ~(cut_arc C v u w)
       #|  j
       #|  i
       #|  CA i' j'
@@ -85162,9 +85162,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i
       #|  i'
       #|  i = i'
-      #|  (!i j i' j' u. CB i j u /\\ CA i' j' u ==> (i = i') /\\ (j = j') /\\ (u = q i j))
+      #|  (forall i j i' j' u. CB i j u /\\ CA i' j' u ==> (i = i') /\\ (j = j') /\\ (u = q i j))
       #|  CA
-      #|  !i j. CA i j SUBSET E i j
+      #|  forall i j. CA i j SUBSET E i j
       #|  j'
       #|  CB i' j'
       #|  u''
@@ -85178,9 +85178,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  i
       #|  i = i'
-      #|  (!i j i' j'. ~(CB i j INTER CB i' j' = {}) ==> (j = j'))
+      #|  (forall i j i' j'. ~(CB i j INTER CB i' j' = {}) ==> (j = j'))
       #|  CB
-      #|  !i j. CB i j SUBSET E i j
+      #|  forall i j. CB i j SUBSET E i j
       #|  u''
       #|  j'
       #|  j
@@ -85189,34 +85189,34 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  CB
       #|  i'
       #|  i
-      #|  !i i' j j' u. ~(i = i') /\\ CB i j u /\\ E i' j' u ==> (j = j') /\\ s j u
+      #|  forall i i' j j' u. ~(i = i') /\\ CB i j u /\\ E i' j' u ==> (j = j') /\\ s j u
       #|  simple_arc top2 (E i j)
       #|  CB
-      #|  !i j. CB i j = cut_arc (E'' i j) (q i j) (B j)
+      #|  forall i j. CB i j = cut_arc (E'' i j) (q i j) (B j)
       #|  CB
       #|  u''
       #|  q i j
       #|  i
-      #|  !i j j' u. CB i j u /\\ E i j' u ==> (j = j')
+      #|  forall i j j' u. CB i j u /\\ E i j' u ==> (j = j')
       #|  CA
       #|  j
       #|  i
-      #|  !i j. CA i j INTER C = EMPTY
-      #|  (!i j. simple_arc_end (CB i j) (B j) (q i j)) 
+      #|  forall i j. CA i j INTER C = EMPTY
+      #|  (forall i j. simple_arc_end (CB i j) (B j) (q i j)) 
       #|  CB
       #|  B
       #|  CA
       #|  p
       #|  q
       #|  CB
-      #|  !i j. simple_arc_end (CB i j) (q i j) (B j)
+      #|  forall i j. simple_arc_end (CB i j) (q i j) (B j)
       #|  CA
-      #|  !i j. simple_arc_end (CA i j) (p i) (q i j)
-      #|  !i j. ~(q i j = B j)
+      #|  forall i j. simple_arc_end (CA i j) (p i) (q i j)
+      #|  forall i j. ~(q i j = B j)
       #|  j
       #|  j
       #|  i
-      #|  !i j. ~(q i j = p i)
+      #|  forall i j. ~(q i j = p i)
       #|  CB = (\\ i j. cut_arc (E i j) (q i j) (B j))
       #|  CA = (\\ i j. cut_arc (E i j) (p i) (q i j))
       #|  B j
@@ -85237,14 +85237,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  E' i j
       #|  j
       #|  i
-      #|  !i j. ?q. (E' i j q) /\\ (E'' i j q) /\\ (E i j q) /\\ ~(q = u i j) /\\ ~(q = u' i j) /\\ ~(s j q) /\\ (!k. E i k q ==> (j = k))
+      #|  forall i j. ?q. (E' i j q) /\\ (E'' i j q) /\\ (E i j q) /\\ ~(q = u i j) /\\ ~(q = u' i j) /\\ ~(s j q) /\\ (forall k. E i k q ==> (j = k))
       #|  E'' i j
-      #|  !i j. E' i j SUBSET E i j
+      #|  forall i j. E' i j SUBSET E i j
       #|  ua i j
       #|  j
       #|  i
       #|  u'
-      #|  ?u'. !i j. E' i j SUBSET E'' i j /\\ simple_arc_end (E' i j) (u i j) (u' i j) /\\ (E' i j INTER s j = {(u' i j)})
+      #|  ?u'. forall i j. E' i j SUBSET E'' i j /\\ simple_arc_end (E' i j) (u i j) (u' i j) /\\ (E' i j INTER s j = {(u' i j)})
       #|  u i j
       #|  B j
       #|  q
@@ -85257,7 +85257,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  cut_arc (E'' i j) q (B j)
       #|  E'' i j x
       #|  cut_arc (E i j) q (B j)   = cut_arc (E'' i j) q (B j)
-      #|  !i j k q x. E i k x /\\ E'' i j q /\\ ~(q = u i j) /\\ ~(q  = B j) /\\ cut_arc (E i j) (q) (B j) x ==> (j = k)
+      #|  forall i j k q x. E i k x /\\ E'' i j q /\\ ~(q = u i j) /\\ ~(q  = B j) /\\ cut_arc (E i j) (q) (B j) x ==> (j = k)
       #|  B j
       #|  u i j
       #|  j
@@ -85274,7 +85274,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  j
       #|  i
       #|  u'
-      #|  !i j. (?E' ua u'. E' SUBSET (E'' i j) /\\ simple_arc_end E' ua u' /\\ (E' INTER {(u i j)} = {ua}) /\\ (E' INTER (s j) = {u'}))
+      #|  forall i j. (?E' ua u'. E' SUBSET (E'' i j) /\\ simple_arc_end E' ua u' /\\ (E' INTER {(u i j)} = {ua}) /\\ (E' INTER (s j) = {u'}))
       #|  u''
       #|  x'
       #|  x
@@ -85293,7 +85293,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  u
       #|  x
       #|  UNIV:three_t -> bool
-      #|  !i j. ?E'' u u''. E'' SUBSET E i j /\\ simple_arc_end E'' u u'' /\\ (E'' INTER (UNIONS (IMAGE (E i) {k | ~(k = j)})) = {u}) /\\ (E'' INTER {(B j)} = {u''})
+      #|  forall i j. ?E'' u u''. E'' SUBSET E i j /\\ simple_arc_end E'' u u'' /\\ (E'' INTER (UNIONS (IMAGE (E i) {k | ~(k = j)})) = {u}) /\\ (E'' INTER {(B j)} = {u''})
       #|  U
       #|  i'
       #|  i
@@ -85330,31 +85330,31 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  i'
       #|  u
       #|  u = p i
-      #|  !i j i' j' u. E i j u /\\ E i' j' u /\\ ~C u ==> (i = i')
+      #|  forall i j i' j' u. E i j u /\\ E i' j' u /\\ ~C u ==> (i = i')
       #|  j
       #|  i
-      #|  !i j. E i j (p i)
-      #|  !i j. (p i = p j) ==> (i = j)
+      #|  forall i j. E i j (p i)
+      #|  forall i j. (p i = p j) ==> (i = j)
       #|  j'
       #|  i'
       #|  j
       #|  i
-      #|  !i j i' j' u. E i j u /\\ E i' j' u /\\ C u ==> (j = j') /\\ s j u
+      #|  forall i j i' j' u. E i j u /\\ E i' j' u /\\ C u ==> (j = j') /\\ s j u
       #|  p j
       #|  i
       #|  w j
       #|  v j
-      #|  !i j. ?E. simple_arc_end E (p i) (B j) /\\ (E INTER C SUBSET (s j)) /\\ (!e. E e /\\ ~C e /\\ ~(p i = e) ==> (cut_arc E (p i) e INTER C = EMPTY))
-      #|  !i. euclid 2 (p i)
+      #|  forall i j. ?E. simple_arc_end E (p i) (B j) /\\ (E INTER C SUBSET (s j)) /\\ (forall e. E e /\\ ~C e /\\ ~(p i = e) ==> (cut_arc E (p i) e INTER C = EMPTY))
+      #|  forall i. euclid 2 (p i)
       #|  u
       #|  w i
       #|  v i
       #|  s i
-      #|  !i. ?B. s i B /\\ ~(B = v i) /\\ ~(B = w i)
+      #|  forall i. ?B. s i B /\\ ~(B = v i) /\\ ~(B = w i)
       #|  s i
-      #|  !i. ?v w. simple_arc_end (s i) v w
+      #|  forall i. ?v w. simple_arc_end (s i) v w
       #|  C
-      #|  !C p.\n     simple_closed_curve top2 C /\\\n     INJ p (UNIV:three_t ->bool) (euclid 2) /\\\n     (!i. ~C (p i)) /\\\n     (!i j A. simple_arc_end A (p i) (p j) ==> ~(A INTER C = EMPTY))\n     ==> F
+      #|  forall C p.\n     simple_closed_curve top2 C /\\\n     INJ p (UNIV:three_t ->bool) (euclid 2) /\\\n     (forall i. ~C (p i)) /\\\n     (forall i j A. simple_arc_end A (p i) (p j) ==> ~(A INTER C = EMPTY))\n     ==> F
       #|  TAGB
       #|  TAGB
       #|  TAGB
@@ -85395,7 +85395,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x' = &1
       #|  x
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> compact top2 C
+      #|  forall C. simple_closed_curve top2 C ==> compact top2 C
       #|  x
       #|  &0
       #|  f (&0)
@@ -85405,7 +85405,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  coord 1
       #|  2
       #|  1
-      #|  !C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (!q. C q ==> (q 1 <=. p 1)))
+      #|  forall C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (forall q. C q ==> (q 1 <=. p 1)))
       #|  x
       #|  &0
       #|  f (&0)
@@ -85415,7 +85415,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  coord 1
       #|  2
       #|  1
-      #|  !C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (!q. C q ==> (p 1 <=. q 1)))
+      #|  forall C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (forall q. C q ==> (p 1 <=. q 1)))
       #|  x
       #|  &0
       #|  f (&0)
@@ -85425,7 +85425,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  coord 0
       #|  2
       #|  0
-      #|  !C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (!q. C q ==> (q 0 <=. p 0)))
+      #|  forall C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (forall q. C q ==> (q 0 <=. p 0)))
       #|  x
       #|  &0
       #|  f (&0)
@@ -85435,7 +85435,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  coord 0
       #|  2
       #|  0
-      #|  !C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (!q. C q ==> (p 0 <=. q 0)))
+      #|  forall C. simple_closed_curve top2 C ==>\n         (?p. C p /\\ (forall q. C q ==> (p 0 <=. q 0)))
       #|  ymaxQ C = supm { y | ?x. (C (point(x,y))) }
       #|  yminQ C = inf { y | ?x. (C (point(x,y))) }
       #|  xmaxQ C = supm { x | ?y. (C (point(x,y))) }
@@ -85443,13 +85443,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (s <= inf X) /\\ (inf X <= s)
       #|  s
       #|  X
-      #|  !X s. X s /\\ (!t. X t ==> (s <= t)) ==> (s = inf X)
+      #|  forall X s. X s /\\ (forall t. X t ==> (s <= t)) ==> (s = inf X)
       #|  (s <= supm X) /\\ (supm X <= s)
       #|  s
       #|  X
-      #|  !X s. X s /\\ (!t. X t ==> (t <= s)) ==> (s = supm X)
+      #|  forall X s. X s /\\ (forall t. X t ==> (t <= s)) ==> (s = supm X)
       #|  p
-      #|  !p. euclid 2 p ==> (point (p 0, p 1) = p)
+      #|  forall p. euclid 2 p ==> (point (p 0, p 1) = p)
       #|  A = point(x,t)
       #|  t = point(x,t) 1
       #|  C
@@ -85457,7 +85457,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 0
       #|  p
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 1 = ymaxQ C))
+      #|  forall C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 1 = ymaxQ C))
       #|  A = point(x,t)
       #|  t = point(x,t) 1
       #|  C
@@ -85465,7 +85465,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 0
       #|  p
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 1 = yminQ C))
+      #|  forall C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 1 = yminQ C))
       #|  A = point(t,y)
       #|  t = point(t,y) 0
       #|  C
@@ -85473,7 +85473,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 1
       #|  p
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 0 = xmaxQ C))
+      #|  forall C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 0 = xmaxQ C))
       #|  A = point(t,y)
       #|  t = point(t,y) 0
       #|  C
@@ -85481,7 +85481,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 1
       #|  p
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 0 = xminQ C))
+      #|  forall C. simple_closed_curve top2 C ==> (?p. C p /\\ (p 0 = xminQ C))
       #|  p 0
       #|  point(x',x)
       #|  p' 1
@@ -85489,9 +85489,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 1
       #|  {y | ?x. C (point(x,y))}
       #|  C
-      #|  !p. C p ==> euclid 2 p
+      #|  forall p. C p ==> euclid 2 p
       #|  C
-      #|  !C p. simple_closed_curve top2 C /\\ C p ==> (p 1 <= ymaxQ C)
+      #|  forall C p. simple_closed_curve top2 C /\\ C p ==> (p 1 <= ymaxQ C)
       #|  p 0
       #|  point(x',x)
       #|  p' 1
@@ -85499,9 +85499,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 1
       #|  {y | ?x. C (point(x,y))}
       #|  C
-      #|  !p. C p ==> euclid 2 p
+      #|  forall p. C p ==> euclid 2 p
       #|  C
-      #|  !C p. simple_closed_curve top2 C /\\ C p ==> (yminQ C <= p 1)
+      #|  forall C p. simple_closed_curve top2 C /\\ C p ==> (yminQ C <= p 1)
       #|  p 1
       #|  point(x,y)
       #|  p' 0
@@ -85509,9 +85509,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 0
       #|  {x | ?y. C (point(x,y))}
       #|  C
-      #|  !p. C p ==> euclid 2 p
+      #|  forall p. C p ==> euclid 2 p
       #|  C
-      #|  !C p. simple_closed_curve top2 C /\\ C p ==> (p 0 <= xmaxQ C)
+      #|  forall C p. simple_closed_curve top2 C /\\ C p ==> (p 0 <= xmaxQ C)
       #|  p 1
       #|  point(x,y)
       #|  p' 0
@@ -85519,14 +85519,14 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p 0
       #|  {x | ?y. C (point(x,y))}
       #|  C
-      #|  !p. C p ==> euclid 2 p
+      #|  forall p. C p ==> euclid 2 p
       #|  C
-      #|  !C p. simple_closed_curve top2 C /\\ C p ==> (xminQ C <= p 0)
-      #|  !x. x <=. x
+      #|  forall C p. simple_closed_curve top2 C /\\ C p ==> (xminQ C <= p 0)
+      #|  forall x. x <=. x
       #|  &0 < &1 /\\ &0 <= &1 /\\ &0 <= &1 / &2 /\\ &0 < &1 / &2 /\\ &1/ &2 < &1 /\\ &1 / &2 <= &1 
       #|  C
       #|  f (&0)
-      #|  !C. simple_closed_curve top2 C ==> (?p. C p)
+      #|  forall C. simple_closed_curve top2 C ==> (?p. C p)
       #|  f (&0)
       #|  f (&1 / &2)
       #|  p
@@ -85537,15 +85537,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  &0 < &2
       #|  &0 = &1 / &2
       #|  ~(f (&0) = f( &1 / &2))
-      #|  !C p. simple_closed_curve top2 C /\\ C p ==> (?q. C q /\\ ~(q = p))
+      #|  forall C p. simple_closed_curve top2 C /\\ C p ==> (?q. C q /\\ ~(q = p))
       #|  p
       #|  C
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (xminQ C <= xmaxQ C)
+      #|  forall C. simple_closed_curve top2 C ==> (xminQ C <= xmaxQ C)
       #|  p
       #|  C
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (yminQ C <= ymaxQ C)
+      #|  forall C. simple_closed_curve top2 C ==> (yminQ C <= ymaxQ C)
       #|  {p,q}
       #|  C'
       #|  C''
@@ -85566,7 +85566,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  C
       #|  C
-      #|  !C E. simple_closed_curve top2 C /\\ simple_arc top2 E ==>\n     ~(C SUBSET E)
+      #|  forall C E. simple_closed_curve top2 C /\\ simple_arc top2 E ==>\n     ~(C SUBSET E)
       #|  point(xmaxQ C,ymaxQ C)
       #|  point(xmaxQ C,yminQ C)
       #|  mk_segment (point (xminQ C,yminQ C)) (point (xminQ C,ymaxQ C))
@@ -85598,12 +85598,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p = point(xminQ C, yminQ C)
       #|  C
       #|  C (point(xminQ C,yminQ C))
-      #|  !p. C p ==> (yminQ C <= p 1 /\\ p 1 <= ymaxQ C)
+      #|  forall p. C p ==> (yminQ C <= p 1 /\\ p 1 <= ymaxQ C)
       #|  xmaxQ C
       #|  (x = y) <=> (x <= y) /\\ (y <= x)
-      #|  !p. C p ==> (p 0 = xmaxQ C)
+      #|  forall p. C p ==> (p 0 = xmaxQ C)
       #|  C
-      #|  !p. C p ==> (euclid 2 p)
+      #|  forall p. C p ==> (euclid 2 p)
       #|  p
       #|  C
       #|  point(xminQ C,yminQ C)
@@ -85613,12 +85613,12 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (FST p' = p 0) /\\ (SND p' = p 1)
       #|  C
       #|  euclid 2 p
-      #|  !p. C p ==> (p = point(xminQ C,yminQ C))
+      #|  forall p. C p ==> (p = point(xminQ C,yminQ C))
       #|  x < y <=> (x <= y) /\\ ~(x = y)
       #|  yminQ C < ymaxQ C
       #|  C
       #|  x < y <=> (x <= y) /\\ ~(x = y)
-      #|  !C. simple_closed_curve top2 C ==> (xminQ C < xmaxQ C)
+      #|  forall C. simple_closed_curve top2 C ==> (xminQ C < xmaxQ C)
       #|  point(xmaxQ C,ymaxQ C)
       #|  point(xminQ C,ymaxQ C)
       #|  mk_segment (point (xminQ C,yminQ C)) (point (xmaxQ C,yminQ C))
@@ -85651,15 +85651,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p = point(xminQ C, yminQ C)
       #|  C
       #|  C (point(xminQ C,yminQ C))
-      #|  !p. C p ==> (xminQ C <= p 0 /\\ p 0 <= xmaxQ C)
+      #|  forall p. C p ==> (xminQ C <= p 0 /\\ p 0 <= xmaxQ C)
       #|  ymaxQ C
       #|  (x = y) <=> (x <= y) /\\ (y <= x)
-      #|  !p. C p ==> (p 1 = ymaxQ C)
+      #|  forall p. C p ==> (p 1 = ymaxQ C)
       #|  C
-      #|  !p. C p ==> (euclid 2 p)
+      #|  forall p. C p ==> (euclid 2 p)
       #|  C
       #|  x < y <=> (x <= y) /\\ ~(x = y)
-      #|  !C. simple_closed_curve top2 C ==> (yminQ C < ymaxQ C)
+      #|  forall C. simple_closed_curve top2 C ==> (yminQ C < ymaxQ C)
       #|  C
       #|  q
       #|  p
@@ -85667,7 +85667,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  p
       #|  C
       #|  C
-      #|  !C. simple_closed_curve top2 C ==> (closed_ top2 C)
+      #|  forall C. simple_closed_curve top2 C ==> (closed_ top2 C)
       #|  x
       #|  x
       #|  v
@@ -85684,7 +85684,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  C''
       #|  euclid 2 x
-      #|  !x. C'' x ==> (x 1 = ymaxQ Q)
+      #|  forall x. C'' x ==> (x 1 = ymaxQ Q)
       #|  Cf = C' UNION Cu
       #|  Cu
       #|  x
@@ -85696,7 +85696,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x
       #|  C'
       #|  euclid 2 x
-      #|  !x. C' x ==> (x 1 = yminQ Q)
+      #|  forall x. C' x ==> (x 1 = yminQ Q)
       #|  Cb
       #|  C''
       #|  Cb (point p)
@@ -85720,7 +85720,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2 u
       #|  Cu
       #|  C'
-      #|  ((C' UNION Cu) INTER Q = {v}) /\\ ((C' UNION Cu) INTER C'' = {(point(xmaxQ Q + &1,ymaxQ Q))}) /\\ (v 1 = yminQ Q) /\\ (!x. (C' UNION Cu) x ==> (x 1 = yminQ Q) \\/ (xmaxQ Q < x 0))
+      #|  ((C' UNION Cu) INTER Q = {v}) /\\ ((C' UNION Cu) INTER C'' = {(point(xmaxQ Q + &1,ymaxQ Q))}) /\\ (v 1 = yminQ Q) /\\ (forall x. (C' UNION Cu) x ==> (x 1 = yminQ Q) \\/ (xmaxQ Q < x 0))
       #|  Ca
       #|  Ca (point p)
       #|  Cu
@@ -85782,7 +85782,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  xmaxQ Q
       #|  xminQ Q <= xmaxQ Q + &1
       #|  Ca = mk_segment (point(xminQ Q,yminQ Q)) (point(xmaxQ Q + &1,yminQ Q))
-      #|  !Q.  simple_closed_curve top2 Q ==>\n       ?C v1 v2. simple_arc_end C v1 v2 /\\\n       (C INTER Q = {v1,v2}) /\\\n       (v2 1 = yminQ Q) /\\\n       (v1 1 = ymaxQ Q) /\\\n       (!x. C x ==>\n           (x 1 = yminQ Q) \\/ (x 1 = ymaxQ Q) \\/ (xmaxQ Q < x 0))
+      #|  forall Q.  simple_closed_curve top2 Q ==>\n       ?C v1 v2. simple_arc_end C v1 v2 /\\\n       (C INTER Q = {v1,v2}) /\\\n       (v2 1 = yminQ Q) /\\\n       (v1 1 = ymaxQ Q) /\\\n       (forall x. C x ==>\n           (x 1 = yminQ Q) \\/ (x 1 = ymaxQ Q) \\/ (xmaxQ Q < x 0))
       #|  TAGB
       #|  mark_term:A->A
       #|  mark_term:A->A
@@ -85809,7 +85809,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v i
       #|  IMAGE (coord i) C
       #|  u i = coord i u
-      #|  !u. C u ==> (IMAGE (coord i) C) (u i)
+      #|  forall u. C u ==> (IMAGE (coord i) C) (u i)
       #|  C
       #|  top_of_metric(UNIV,d_real)
       #|  top2
@@ -85817,17 +85817,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  2
       #|  i
       #|  C
-      #|  !C v w i y. simple_arc_end C v w /\\ v i <= y /\\ y <= w i ==>\n           (?u. C u /\\ (u i = y)) 
+      #|  forall C v w i y. simple_arc_end C v w /\\ v i <= y /\\ y <= w i ==>\n           (?u. C u /\\ (u i = y)) 
       #|  v''
-      #|  !w v. (D w) /\\ ~(v 1 = ymid) ==> ~(w = v)
+      #|  forall w v. (D w) /\\ ~(v 1 = ymid) ==> ~(w = v)
       #|  D w1 /\\ D w2
-      #|  !w. D w ==> (w 1 = ymid)
+      #|  forall w. D w ==> (w 1 = ymid)
       #|  v2 1
       #|  ~(v2 1 = ymid)
       #|  v1 1
       #|  ~(v1 1 = ymid)
       #|  C x
-      #|  (!x. D x ==> yminQ Q < x 1 /\\ x 1 < ymaxQ Q /\\ x 0 <= xmaxQ Q)
+      #|  (forall x. D x ==> yminQ Q < x 1 /\\ x 1 < ymaxQ Q /\\ x 0 <= xmaxQ Q)
       #|  Q
       #|  D INTER Q = {w1,w2}
       #|  A w1 /\\ B w2
@@ -85860,27 +85860,27 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  Q
       #|  A
-      #|  !E. simple_arc_end E v1 v2 /\\ (E SUBSET Q) ==> (?u. C u /\\ E u)
+      #|  forall E. simple_arc_end E v1 v2 /\\ (E SUBSET Q) ==> (?u. C u /\\ E u)
       #|  v1 1
       #|  x
       #|  v2 1
       #|  x
       #|  x
       #|  (x 1 = ymid)
-      #|  !E v v'. simple_arc_end E v v' ==> closed_ top2 E
+      #|  forall E v v'. simple_arc_end E v v' ==> closed_ top2 E
       #|  B INTER C
       #|  A INTER C
       #|  C
       #|  C
       #|  x
       #|  x
-      #|  !x. C x ==> yminQ Q < x 1 /\\ x 1 < ymaxQ Q /\\ x 0 <= xmaxQ Q
+      #|  forall x. C x ==> yminQ Q < x 1 /\\ x 1 < ymaxQ Q /\\ x 0 <= xmaxQ Q
       #|  C
       #|  x
       #|  x
-      #|  !x. C x ==> (x 1 = ymid)
+      #|  forall x. C x ==> (x 1 = ymid)
       #|  C
-      #|  !x. C x ==> euclid 2 x
+      #|  forall x. C x ==> euclid 2 x
       #|  C
       #|  simple_arc top2 C
       #|  xminQ Q < xmaxQ Q
@@ -85904,8 +85904,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  yminQ Q < ymid /\\ ymid < ymaxQ Q
       #|  yminQ Q < ymaxQ Q
       #|  ymid = (yminQ Q + ymaxQ Q)/(&2)
-      #|  !Q v1 v2. simple_closed_curve top2 Q /\\\n       Q v1 /\\ Q v2 /\\ (v2 1 = yminQ Q) /\\ (v1 1 = ymaxQ Q) ==>\n       (?A B D w1 w2.\n          simple_arc_end A v1 v2 /\\\n          simple_arc_end B v1 v2 /\\\n          (A UNION B = Q) /\\\n          (A INTER B = {v1,v2}) /\\\n          ~(w1 = v1) /\\\n          ~(w1 = v2) /\\\n          ~(w2 = v1) /\\\n          ~(w2 = v2) /\\\n          A w1 /\\ B w2 /\\\n          simple_arc_end D w1 w2 /\\\n          (D INTER Q = {w1,w2}) /\\\n          (!x. D x ==>\n              (yminQ Q < x 1) /\\ (x 1 < ymaxQ Q) /\\ (x 0 <= xmaxQ Q))\n       )
-      #|  one_sided_jordan_curve Q <=>\n   (!v w. euclid 2 v /\\ euclid 2 w /\\ ~Q v /\\ ~Q w /\\ ~(v = w) ==>\n       (?C. simple_arc_end C v w /\\ (C INTER Q = EMPTY)))
+      #|  forall Q v1 v2. simple_closed_curve top2 Q /\\\n       Q v1 /\\ Q v2 /\\ (v2 1 = yminQ Q) /\\ (v1 1 = ymaxQ Q) ==>\n       (?A B D w1 w2.\n          simple_arc_end A v1 v2 /\\\n          simple_arc_end B v1 v2 /\\\n          (A UNION B = Q) /\\\n          (A INTER B = {v1,v2}) /\\\n          ~(w1 = v1) /\\\n          ~(w1 = v2) /\\\n          ~(w2 = v1) /\\\n          ~(w2 = v2) /\\\n          A w1 /\\ B w2 /\\\n          simple_arc_end D w1 w2 /\\\n          (D INTER Q = {w1,w2}) /\\\n          (forall x. D x ==>\n              (yminQ Q < x 1) /\\ (x 1 < ymaxQ Q) /\\ (x 0 <= xmaxQ Q))\n       )
+      #|  one_sided_jordan_curve Q <=>\n   (forall v w. euclid 2 v /\\ euclid 2 w /\\ ~Q v /\\ ~Q w /\\ ~(v = w) ==>\n       (?C. simple_arc_end C v w /\\ (C INTER Q = EMPTY)))
       #|  v
       #|  v'
       #|  E
@@ -85917,10 +85917,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  d
       #|  c
       #|  R
-      #|  !R x. simple_arc top2 R /\\ R x ==> euclid 2 x
+      #|  forall R x. simple_arc top2 R /\\ R x ==> euclid 2 x
       #|  ?d. D d /\\ ~Q d
       #|  ?c. C c /\\ ~Q c
-      #|  !Q C D . simple_closed_curve top2 Q /\\ one_sided_jordan_curve Q /\\\n    ~(C SUBSET Q) /\\ ~(D SUBSET Q) /\\\n    simple_arc top2 C /\\ simple_arc top2 D /\\ (C INTER D = EMPTY) ==>\n   (?E x1 x2. simple_arc_end E x1 x2 /\\\n       (E INTER C = {x2}) /\\ (E INTER D = {x1}) /\\ (E INTER Q = EMPTY))
+      #|  forall Q C D . simple_closed_curve top2 Q /\\ one_sided_jordan_curve Q /\\\n    ~(C SUBSET Q) /\\ ~(D SUBSET Q) /\\\n    simple_arc top2 C /\\ simple_arc top2 D /\\ (C INTER D = EMPTY) ==>\n   (?E x1 x2. simple_arc_end E x1 x2 /\\\n       (E INTER C = {x2}) /\\ (E INTER D = {x1}) /\\ (E INTER Q = EMPTY))
       #|  jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 <=>\n     simple_closed_curve top2 Q /\\\n     simple_arc_end A v1 v2 /\\\n     simple_arc_end B v1 v2 /\\\n     simple_arc_end C v1 v2 /\\\n     simple_arc_end D w1 w2 /\\\n     simple_arc_end E x1 x2 /\\\n          ~(w1 = v1) /\\\n          ~(w1 = v2) /\\\n          ~(w2 = v1) /\\\n          ~(w2 = v2) /\\\n          A w1 /\\ B w2 /\\\n       (A UNION B = Q) /\\\n       (A INTER B = {v1,v2}) /\\\n       (D INTER Q = {w1,w2}) /\\\n       (C INTER D = EMPTY) /\\\n       (C INTER Q = {v1,v2}) /\\\n       (E INTER C = {x2}) /\\\n       (E INTER D = {x1}) /\\\n       (E INTER Q = EMPTY)
       #|  x2
       #|  x1
@@ -85933,7 +85933,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  {y1,y2}
       #|  FINITE R
       #|  R SUBSET {y1,y2}
-      #|  !R y1 y2. (R INTER Q = {y1,y2}) /\\ simple_arc_end R y1 y2 ==> ~(R SUBSET Q)
+      #|  forall R y1 y2. (R INTER Q = {y1,y2}) /\\ simple_arc_end R y1 y2 ==> ~(R SUBSET Q)
       #|  simple_arc top2 D
       #|  simple_arc top2 C
       #|  D
@@ -85950,9 +85950,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v1
       #|  Q
       #|  Q
-      #|  !Q. simple_closed_curve top2 Q /\\ one_sided_jordan_curve Q ==>\n    (?A B C D E v1 v2 w1 w2 x1 x2.\n         jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2)
+      #|  forall Q. simple_closed_curve top2 Q /\\ one_sided_jordan_curve Q ==>\n    (?A B C D E v1 v2 w1 w2 x1 x2.\n         jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2)
       #|  n
-      #|  !X (x:A) n.  ~(X x) /\\ X HAS_SIZE n ==>\n          (x INSERT X HAS_SIZE SUC n)
+      #|  forall X (x:A) n.  ~(X x) /\\ X HAS_SIZE n ==>\n          (x INSERT X HAS_SIZE SUC n)
       #|  x2
       #|  x1
       #|  E
@@ -85962,29 +85962,29 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  ~A x1 /\\ ~A x2 /\\ ~B x1 /\\ ~B x2
       #|  ~Q x1 /\\ ~Q x2
       #|  E x1 /\\ E x2
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ~(Q x1) /\\ ~(Q x2) /\\ ~(A x1) /\\ ~(A x2) /\\ ~(B x1) /\\ ~(B x2) /\\\n       ~C x1 /\\ C x2 /\\ D x1 /\\ ~D x2 /\\ E x1 /\\ E x2
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ~(Q x1) /\\ ~(Q x2) /\\ ~(A x1) /\\ ~(A x2) /\\ ~(B x1) /\\ ~(B x2) /\\\n       ~C x1 /\\ C x2 /\\ D x1 /\\ ~D x2 /\\ E x1 /\\ E x2
       #|  ~E v1 /\\ ~E v2
       #|  Q
       #|  Q v1 /\\ Q v2
       #|  A v1 /\\ A v2 /\\ B v1 /\\ B v2 /\\ C v1 /\\ C v2
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    Q v1 /\\ Q v2 /\\ A v1 /\\ A v2 /\\ B v1 /\\ B v2 /\\ C v1 /\\ C v2 /\\\n    ~D v1 /\\ ~D v2 /\\ ~E v1 /\\ ~E v2
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    Q v1 /\\ Q v2 /\\ A v1 /\\ A v2 /\\ B v1 /\\ B v2 /\\ C v1 /\\ C v2 /\\\n    ~D v1 /\\ ~D v2 /\\ ~E v1 /\\ ~E v2
       #|  ~C w1 /\\ ~C w2
       #|  D w1 /\\ D w2
       #|  ~E w1 /\\ ~E w2
       #|  Q
       #|  Q w1 /\\ Q w2
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n   Q w1 /\\ Q w2 /\\ A w1 /\\ ~A w2 /\\ ~B w1 /\\ B w2 /\\ ~C w1 /\\ ~C w2 /\\\n   D w1 /\\ D w2 /\\ ~E w1 /\\ ~E w2
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n   Q w1 /\\ Q w2 /\\ A w1 /\\ ~A w2 /\\ ~B w1 /\\ B w2 /\\ ~C w1 /\\ ~C w2 /\\\n   D w1 /\\ D w2 /\\ ~E w1 /\\ ~E w2
       #|  3 = SUC 2
       #|  {w1,w2,x2} = x2 INSERT {w1,w2}
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({w1,w2,x2} HAS_SIZE 3)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({w1,w2,x2} HAS_SIZE 3)
       #|  3 = SUC 2
       #|  {v1,v2,x1} = x1 INSERT {v1,v2}
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({v1,v2,x1} HAS_SIZE 3)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({v1,v2,x1} HAS_SIZE 3)
       #|  u
       #|  u
       #|  (u = x2) \\/ (u = x1) \\/ ({w1,w2} u /\\ {v1,v2} u)
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({w1,w2,x2} INTER {v1,v2,x1} = EMPTY)
-      #|  !n X (x:A) . FINITE X /\\ CARD X <=| n ==>\n     FINITE (x INSERT X) /\\ CARD (x INSERT X) <=| SUC n
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      ({w1,w2,x2} INTER {v1,v2,x1} = EMPTY)
+      #|  forall n X (x:A) . FINITE X /\\ CARD X <=| n ==>\n     FINITE (x INSERT X) /\\ CARD (x INSERT X) <=| SUC n
       #|  x1
       #|  {x2,x3,x4,x5,x6,x7,x8,x9}
       #|  SUC(SUC(SUC(SUC(SUC(SUC(SUC(SUC 0)))))))
@@ -86012,7 +86012,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  x9
       #|  EMPTY:A->bool
       #|  0
-      #|  !(x1:A) x2 x3 x4 x5 x6 x7 x8 x9.\n    CARD {x1,x2,x3,x4,x5,x6,x7,x8,x9} <=| 9 /\\\n    FINITE {x1,x2,x3,x4,x5,x6,x7,x8,x9}
+      #|  forall(x1:A) x2 x3 x4 x5 x6 x7 x8 x9.\n    CARD {x1,x2,x3,x4,x5,x6,x7,x8,x9} <=| 9 /\\\n    FINITE {x1,x2,x3,x4,x5,x6,x7,x8,x9}
       #|  Y
       #|  CARD Y <= CARD Z
       #|  Z
@@ -86043,24 +86043,24 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  f
       #|  X
       #|  f
-      #|  !(f:A->B) X Y . FINITE X /\\ CARD X <=| CARD Y /\\\n     (!y. Y y ==> ?x. X x /\\ (f x = y)) ==>\n      BIJ f X Y
+      #|  forall(f:A->B) X Y . FINITE X /\\ CARD X <=| CARD Y /\\\n     (forall y. Y y ==> ?x. X x /\\ (f x = y)) ==>\n      BIJ f X Y
       #|  select_inter A C = @x. A (x:A) /\\ C x
       #|  k33f (A:A->bool) B E = (select_inter A E, select_inter B E)
       #|  incf (f:A-> (B#B)) E = { (FST (f E)) , (SND(f E)) }
-      #|  !(A:A->bool) B E a b. (A INTER E = {a}) /\\ (B INTER E = {b}) ==>\n     (k33f A B E = (a,b))
+      #|  forall(A:A->bool) B E a b. (A INTER E = {a}) /\\ (B INTER E = {b}) ==>\n     (k33f A B E = (a,b))
       #|  b
       #|  a
       #|  E
       #|  B
       #|  A
-      #|  !(A:A->bool) B E a b. (A INTER E = {a}) /\\ (B INTER E = {b}) ==>\n    (incf (k33f A B) E = {a,b})
+      #|  forall(A:A->bool) B E a b. (A INTER E = {a}) /\\ (B INTER E = {b}) ==>\n    (incf (k33f A B) E = {a,b})
       #|  x'
       #|  x
       #|  E
       #|  B
       #|  A
-      #|  !(A:A->bool) B E . SING(A INTER E) /\\ SING(B INTER E) ==>\n    (incf (k33f A B) E = E INTER (A UNION B))
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    ({w1,w2,x2} INTER E = {x2}) /\\\n    ({v1,v2,x1} INTER E = {x1}) 
+      #|  forall(A:A->bool) B E . SING(A INTER E) /\\ SING(B INTER E) ==>\n    (incf (k33f A B) E = E INTER (A UNION B))
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    ({w1,w2,x2} INTER E = {x2}) /\\\n    ({v1,v2,x1} INTER E = {x1}) 
       #|  v2
       #|  u
       #|  u
@@ -86079,7 +86079,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v1
       #|  w
       #|  C
-      #|  !C v1 v2 w A B. simple_arc_end C v1 v2 /\\\n         C w /\\ ~(w = v1) /\\ ~(w = v2) /\\\n         (A INTER C = {v1,v2}) /\\\n         (B INTER C = {w}) ==>\n         (A INTER (cut_arc C v1 w) = {v1}) /\\\n         (B INTER (cut_arc C v1 w) = {w})\n         
+      #|  forall C v1 v2 w A B. simple_arc_end C v1 v2 /\\\n         C w /\\ ~(w = v1) /\\ ~(w = v2) /\\\n         (A INTER C = {v1,v2}) /\\\n         (B INTER C = {w}) ==>\n         (A INTER (cut_arc C v1 w) = {v1}) /\\\n         (B INTER (cut_arc C v1 w) = {w})\n         
       #|  B
       #|  A
       #|  w
@@ -86092,25 +86092,25 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v2
       #|  v1
       #|  C
-      #|  !C v1 v2 w A B. simple_arc_end C v1 v2 /\\\n         C w /\\ ~(w = v1) /\\ ~(w = v2) /\\\n         (A INTER C = {v1,v2}) /\\\n         (B INTER C = {w}) ==>\n         (A INTER (cut_arc C v1 w) = {v1}) /\\\n         (B INTER (cut_arc C v1 w) = {w}) /\\\n         (A INTER (cut_arc C v2 w) = {v2}) /\\\n         (B INTER (cut_arc C v2 w) = {w})
+      #|  forall C v1 v2 w A B. simple_arc_end C v1 v2 /\\\n         C w /\\ ~(w = v1) /\\ ~(w = v2) /\\\n         (A INTER C = {v1,v2}) /\\\n         (B INTER C = {w}) ==>\n         (A INTER (cut_arc C v1 w) = {v1}) /\\\n         (B INTER (cut_arc C v1 w) = {w}) /\\\n         (A INTER (cut_arc C v2 w) = {v2}) /\\\n         (B INTER (cut_arc C v2 w) = {w})
       #|  jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2 =\n       mk_graph_t ({w1,w2,x2} UNION {v1,v2,x1},\n         {E,\n          (cut_arc A v1 w1), (cut_arc A v2 w1),\n          (cut_arc B v1 w2), (cut_arc B v2 w2),\n          (cut_arc C v1 x2), (cut_arc C v2 x2),\n          (cut_arc D w1 x1),( cut_arc D w2 x1)},\n         (\\ e. {(FST (k33f {w1,w2,x2} {v1,v2,x1} e)),\n                (SND (k33f {w1,w2,x2} {v1,v2,x1} e)) }))
       #|  x
       #|  simple_arc top2 A /\\  simple_arc top2 D /\\ simple_arc top2 E
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      {w1,w2,x2} UNION {v1,v2,x1} SUBSET euclid 2
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n      {w1,w2,x2} UNION {v1,v2,x1} SUBSET euclid 2
       #|  w
       #|  v
       #|  C
-      #|  !C v w. simple_arc top2 C /\\ C v /\\ C w /\\ ~(v = w) ==>\n       simple_arc top2 (cut_arc C v w)
+      #|  forall C v w. simple_arc top2 C /\\ C v /\\ C w /\\ ~(v = w) ==>\n       simple_arc top2 (cut_arc C v w)
       #|  {(FST (k33f {w1, w2, x2} {v1, v2, x1} e)), (SND (k33f {w1, w2, x2} {v1, v2, x1} e))} = (incf (k33f {w1, w2,x2} {v1,v2,x1} ) e)
       #|  x
       #|  simple_arc top2 A /\\ simple_arc top2 B /\\ simple_arc top2 C /\\ simple_arc top2 D
       #|  x
       #|  G
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n     (graph G) /\\\n     (!e. graph_edge G e ==> (SING ({w1,w2,x2} INTER e)) /\\\n          (SING ({v1,v2,x1} INTER e))) /\\\n     (!e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        e INTER e' SUBSET graph_vertex G) ==>\n     plane_graph G\n    
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n     (graph G) /\\\n     (forall e. graph_edge G e ==> (SING ({w1,w2,x2} INTER e)) /\\\n          (SING ({v1,v2,x1} INTER e))) /\\\n     (forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        e INTER e' SUBSET graph_vertex G) ==>\n     plane_graph G\n    
       #|  cartesian A B = {(x,y) | A x /\\ B y}
       #|  B
       #|  A
-      #|  !(A:A->bool) (B:B->bool) m n. A HAS_SIZE m /\\ B HAS_SIZE n ==>\n    cartesian A B HAS_SIZE (m *| n)
+      #|  forall(A:A->bool) (B:B->bool) m n. A HAS_SIZE m /\\ B HAS_SIZE n ==>\n    cartesian A B HAS_SIZE (m *| n)
       #|  y
       #|  L
       #|  SND y
@@ -86128,7 +86128,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  L
       #|  e
       #|  e
-      #|  !U V (x:num->real). (U INTER V = {x}) ==> (SING (U INTER V))
+      #|  forall U V (x:num->real). (U INTER V = {x}) ==> (SING (U INTER V))
       #|  L
       #|  a /\\ b ==> b /\\ a
       #|  ~(x1 = w1 ) /\\ ~(x1 = w2)
@@ -86159,7 +86159,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  A
       #|  L = (graph_edge (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2))
       #|  G
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G = (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2))  ==>\n    (BIJ (k33f {w1,w2,x2} {v1,v2,x1})\n      (graph_edge G)\n      (cartesian {w1,w2,x2} {v1,v2,x1})) /\\\n    (!e. graph_edge G e ==> (SING ({w1,w2,x2} INTER e)) /\\\n          (SING ({v1,v2,x1} INTER e))) 
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G = (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2))  ==>\n    (BIJ (k33f {w1,w2,x2} {v1,v2,x1})\n      (graph_edge G)\n      (cartesian {w1,w2,x2} {v1,v2,x1})) /\\\n    (forall e. graph_edge G e ==> (SING ({w1,w2,x2} INTER e)) /\\\n          (SING ({v1,v2,x1} INTER e))) 
       #|  (\\ e. fn e) = fn
       #|  fn = k33f {w1,w2,x2} {v1,v2,x1}
       #|  jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2
@@ -86175,28 +86175,28 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  Q
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    graph_isomorphic k33_graph\n         (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    graph_isomorphic k33_graph\n         (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)
       #|  Q
       #|  Q
       #|  (A INTER C = {v1, v2}) /\\ (B INTER C = {v1, v2})
       #|  Q
       #|  (A INTER E = EMPTY ) /\\ (B INTER E = EMPTY)
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n     (A INTER B = {v1,v2}) /\\\n     (A INTER C = {v1,v2}) /\\\n     (A INTER D = {w1}) /\\\n     (A INTER E = EMPTY) /\\\n     (B INTER C = {v1,v2}) /\\\n     (B INTER D = {w2}) /\\\n     (B INTER E = EMPTY) /\\\n     (C INTER D = EMPTY) /\\\n     (C INTER E = {x2}) /\\\n     (D INTER E = {x1})
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n     (A INTER B = {v1,v2}) /\\\n     (A INTER C = {v1,v2}) /\\\n     (A INTER D = {w1}) /\\\n     (A INTER E = EMPTY) /\\\n     (B INTER C = {v1,v2}) /\\\n     (B INTER D = {w2}) /\\\n     (B INTER E = EMPTY) /\\\n     (C INTER D = EMPTY) /\\\n     (C INTER E = {x2}) /\\\n     (D INTER E = {x1})
       #|  e'
       #|  e
       #|  V
       #|  {v1,v2} SUBSET V /\\ {w1} SUBSET V /\\ EMPTY SUBSET V /\\ {w2} SUBSET V /\\ {x2} SUBSET V /\\ {x1} SUBSET V
       #|  V = {w1, w2, x2} UNION {v1, v2, x1}
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    (!e e'. {A,B,C,D,E} e /\\ {A,B,C,D,E} e' /\\ ~(e = e') ==>\n         (e INTER e' SUBSET ({w1,w2,x2} UNION {v1,v2,x1})))
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    (forall e e'. {A,B,C,D,E} e /\\ {A,B,C,D,E} e' /\\ ~(e = e') ==>\n         (e INTER e' SUBSET ({w1,w2,x2} UNION {v1,v2,x1})))
       #|  G
       #|  G
       #|  G
       #|  k33_graph
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n     (!e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        e INTER e' SUBSET graph_vertex G) ==>\n     plane_graph G
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n     (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n     (forall e e'. graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n        e INTER e' SUBSET graph_vertex G) ==>\n     plane_graph G
       #|  e
       #|  e
       #|  G
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G e.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    (graph_edge G e) ==> (simple_arc top2 e)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G e.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    (graph_edge G e) ==> (simple_arc top2 e)
       #|  {w1, w2, x2} UNION {v1, v2, x1}
       #|  FINITE e
       #|  FINITE ({w1, w2, x2} UNION {v1, v2, x1})
@@ -86216,7 +86216,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  Q
       #|  (U INTER V) SUBSET ({w1,w2,x2} UNION {v1,v2,x1})
       #|  INFINITE e
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G e U V.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    (graph_edge G e) /\\ {A,B,C,D,E} U /\\ {A,B,C,D,E} V /\\\n     (e SUBSET U) /\\ (e SUBSET V) ==> (U = V)  
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G e U V.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    (graph_edge G e) /\\ {A,B,C,D,E} U /\\ {A,B,C,D,E} V /\\\n     (e SUBSET U) /\\ (e SUBSET V) ==> (U = V)  
       #|  D
       #|  C
       #|  B
@@ -86235,8 +86235,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  Q
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n     ~(A = B) /\\ ~(A = C) /\\ ~(A = D) /\\ ~(A = E) /\\ ~(B = C) /\\\n     ~(B = D) /\\ ~(B = E) /\\ ~(C = D) /\\ ~(C = E) /\\ ~(D = E)
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    (E SUBSET E) /\\\n    (cut_arc A v1 w1 SUBSET A) /\\\n    (cut_arc A v2 w1 SUBSET A) /\\\n    (cut_arc B v1 w2 SUBSET B) /\\\n    (cut_arc B v2 w2 SUBSET B) /\\\n    (cut_arc C v1 x2 SUBSET C) /\\\n    (cut_arc C v2 x2 SUBSET C) /\\\n    (cut_arc D w1 x1 SUBSET D) /\\\n    (cut_arc D w2 x1 SUBSET D)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n     ~(A = B) /\\ ~(A = C) /\\ ~(A = D) /\\ ~(A = E) /\\ ~(B = C) /\\\n     ~(B = D) /\\ ~(B = E) /\\ ~(C = D) /\\ ~(C = E) /\\ ~(D = E)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 ==>\n    (E SUBSET E) /\\\n    (cut_arc A v1 w1 SUBSET A) /\\\n    (cut_arc A v2 w1 SUBSET A) /\\\n    (cut_arc B v1 w2 SUBSET B) /\\\n    (cut_arc B v2 w2 SUBSET B) /\\\n    (cut_arc C v1 x2 SUBSET C) /\\\n    (cut_arc C v2 x2 SUBSET C) /\\\n    (cut_arc D w1 x1 SUBSET D) /\\\n    (cut_arc D w2 x1 SUBSET D)
       #|  e
       #|  G
       #|  x2
@@ -86251,7 +86251,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  Q
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G e.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    graph_edge G e ==>\n   (?U. {A,B,C,D,E} U /\\ e SUBSET U)
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G e.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    graph_edge G e ==>\n   (?U. {A,B,C,D,E} U /\\ e SUBSET U)
       #|  e
       #|  G
       #|  e
@@ -86292,7 +86292,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B
       #|  A
       #|  Q
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G e .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    graph_edge G e  ==>\n   (((e SUBSET A) ==> (e = cut_arc A v1 w1) \\/ (e = cut_arc A v2 w1)) /\\\n    ((e SUBSET B) ==> (e = cut_arc B v1 w2) \\/ (e = cut_arc B v2 w2)) /\\\n    ((e SUBSET C) ==> (e = cut_arc C v1 x2) \\/ (e = cut_arc C v2 x2)) /\\\n    ((e SUBSET D) ==> (e = cut_arc D w1 x1) \\/ (e = cut_arc D w2 x1)) /\\\n    ((e SUBSET E) ==> (e = E)))\n    
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G e .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    graph_edge G e  ==>\n   (((e SUBSET A) ==> (e = cut_arc A v1 w1) \\/ (e = cut_arc A v2 w1)) /\\\n    ((e SUBSET B) ==> (e = cut_arc B v1 w2) \\/ (e = cut_arc B v2 w2)) /\\\n    ((e SUBSET C) ==> (e = cut_arc C v1 x2) \\/ (e = cut_arc C v2 x2)) /\\\n    ((e SUBSET D) ==> (e = cut_arc D w1 x1) \\/ (e = cut_arc D w2 x1)) /\\\n    ((e SUBSET E) ==> (e = E)))\n    
       #|  x
       #|  cut_arc R u w
       #|  cut_arc R u w = cut_arc R w u
@@ -86300,9 +86300,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  v
       #|  u
       #|  R
-      #|  !X R u v w.  X u /\\\n     simple_arc_end R v w /\\ R u /\\ ~(u = v) /\\ ~(u = w) ==>\n    (cut_arc R v u INTER cut_arc R w u SUBSET X)
+      #|  forall X R u v w.  X u /\\\n     simple_arc_end R v w /\\ R u /\\ ~(u = v) /\\ ~(u = w) ==>\n    (cut_arc R v u INTER cut_arc R w u SUBSET X)
       #|  G
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n   (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) ==>\n    (cut_arc A v1 w1 INTER cut_arc A v2 w1 SUBSET graph_vertex G) /\\\n    (cut_arc B v1 w2 INTER cut_arc B v2 w2 SUBSET graph_vertex G) /\\\n    (cut_arc C v1 x2 INTER cut_arc C v2 x2 SUBSET graph_vertex G) /\\\n    (cut_arc D w1 x1 INTER cut_arc D w2 x1 SUBSET graph_vertex G)\n   
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n   (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) ==>\n    (cut_arc A v1 w1 INTER cut_arc A v2 w1 SUBSET graph_vertex G) /\\\n    (cut_arc B v1 w2 INTER cut_arc B v2 w2 SUBSET graph_vertex G) /\\\n    (cut_arc C v1 x2 INTER cut_arc C v2 x2 SUBSET graph_vertex G) /\\\n    (cut_arc D w1 x1 INTER cut_arc D w2 x1 SUBSET graph_vertex G)\n   
       #|  U
       #|  G
       #|  e'
@@ -86354,17 +86354,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  e
       #|  ((e = a) /\\ (e' = b)) \\/ ((e = b) /\\ (e' = a))
       #|  ?a b. ((e = a) \\/ (e = b)) /\\ ((e' = a) \\/ (e' = b)) /\\ (a INTER b SUBSET graph_vertex G)
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G U e e'.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    {A,B,C,D,E} U /\\ e SUBSET U /\\ e' SUBSET U /\\\n    graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n    (e INTER e' SUBSET graph_vertex G)\n   
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G U e e'.\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) /\\\n    {A,B,C,D,E} U /\\ e SUBSET U /\\ e' SUBSET U /\\\n    graph_edge G e /\\ graph_edge G e' /\\ ~(e = e') ==>\n    (e INTER e' SUBSET graph_vertex G)\n   
       #|  U INTER U'
       #|  U'
       #|  U = U'
       #|  (?U'. {A,B,C,D,E} U' /\\ e' SUBSET U')
       #|  (?U. {A,B,C,D,E} U /\\ e SUBSET U)
-      #|  !Q A B C D E v1 v2 w1 w2 x1 x2 G .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) ==>\n    plane_graph G
+      #|  forall Q A B C D E v1 v2 w1 w2 x1 x2 G .\n      jordan_curve_k33_data Q A B C D E v1 v2 w1 w2 x1 x2 /\\\n    (G =   (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)) ==>\n    plane_graph G
       #|  graph_isomorphic k33_graph (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)
       #|  plane_graph (jordan_curve_k33 A B C D E v1 v2 w1 w2 x1 x2)
       #|  Q
-      #|  !Q. simple_closed_curve top2 Q ==> ~(one_sided_jordan_curve Q)
+      #|  forall Q. simple_closed_curve top2 Q ==> ~(one_sided_jordan_curve Q)
       #|  y
       #|  x
       #|  C
@@ -86421,9 +86421,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  top2 (euclid 2 DIFF G)
       #|  (euclid 2 DIFF G)
       #|  top2
-      #|  !G x y. (closed_ top2 G ) /\\ ~(x = y) ==>\n      (component  (induced_top top2 (euclid 2 DIFF G)) x y <=>\n        (?C. simple_arc_end C x y /\\\n             (C INTER G = EMPTY)))
+      #|  forall G x y. (closed_ top2 G ) /\\ ~(x = y) ==>\n      (component  (induced_top top2 (euclid 2 DIFF G)) x y <=>\n        (?C. simple_arc_end C x y /\\\n             (C INTER G = EMPTY)))
       #|  Z''
-      #|  !Z. (Z = {v}) \\/ (?w. simple_arc_end Z v w) /\\ (Z INTER C = EMPTY) ==> Z v
+      #|  forall Z. (Z = {v}) \\/ (?w. simple_arc_end Z v w) /\\ (Z INTER C = EMPTY) ==> Z v
       #|  v
       #|  Z
       #|  x
@@ -86469,15 +86469,15 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid 2 INTER (euclid 2 DIFF C) = euclid 2 DIFF C
       #|  (euclid 2 DIFF C)
       #|  top2
-      #|  !C A v. closed_ top2 C /\\ (euclid 2 v) /\\ ~C v /\\\n      (A = component  (induced_top top2 (euclid 2 DIFF C)) v) ==>\n      top2 A /\\ connected top2 A /\\\n     ~(A = EMPTY) /\\ (A INTER C = EMPTY) /\\ A v /\\\n      (A SUBSET euclid 2) /\\\n    (!w. ~(w = v) ==>\n     (A w = (?P. simple_arc_end P v w /\\ (P INTER C = EMPTY))))
-      #|  !i. ~(C (f i))
-      #|  !C' w v. simple_arc_end C' w v = simple_arc_end C' v w
+      #|  forall C A v. closed_ top2 C /\\ (euclid 2 v) /\\ ~C v /\\\n      (A = component  (induced_top top2 (euclid 2 DIFF C)) v) ==>\n      top2 A /\\ connected top2 A /\\\n     ~(A = EMPTY) /\\ (A INTER C = EMPTY) /\\ A v /\\\n      (A SUBSET euclid 2) /\\\n    (forall w. ~(w = v) ==>\n     (A w = (?P. simple_arc_end P v w /\\ (P INTER C = EMPTY))))
+      #|  forall i. ~(C (f i))
+      #|  forall C' w v. simple_arc_end C' w v = simple_arc_end C' v w
       #|  a /\\ b ==> b /\\ a
-      #|  !x A. ~simple_arc_end A x x
-      #|  !C'. simple_arc_end C' w x ==> ~(C' INTER C = EMPTY)
-      #|  !C'. simple_arc_end C' v x ==> ~(C' INTER C = EMPTY)
+      #|  forall x A. ~simple_arc_end A x x
+      #|  forall C'. simple_arc_end C' w x ==> ~(C' INTER C = EMPTY)
+      #|  forall C'. simple_arc_end C' v x ==> ~(C' INTER C = EMPTY)
       #|  ~(x = w) /\\ ~(x = v) /\\ ~(v = w)
-      #|  INJ f UNIV (euclid 2) /\\ (!i. ~C (f i)) /\\ (!i j A. simple_arc_end A (f i) (f j) ==> ~(A INTER C = {}))
+      #|  INJ f UNIV (euclid 2) /\\ (forall i. ~C (f i)) /\\ (forall i j A. simple_arc_end A (f i) (f j) ==> ~(A INTER C = {}))
       #|  x
       #|  w
       #|  v
@@ -86508,13 +86508,13 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  B = component  (induced_top top2 (euclid 2 DIFF C)) w
       #|  A
       #|  A = component  (induced_top top2 (euclid 2 DIFF C)) v
-      #|  euclid 2 v /\\ euclid 2 w /\\ ~C v /\\ ~C w /\\ ~(v = w) /\\ (!C'. simple_arc_end C' v w ==> ~(C' INTER C = EMPTY))
+      #|  euclid 2 v /\\ euclid 2 w /\\ ~C v /\\ ~C w /\\ ~(v = w) /\\ (forall C'. simple_arc_end C' v w ==> ~(C' INTER C = EMPTY))
       #|  C
-      #|  !C. simple_closed_curve top2 C ==>\n     (?A B.  top2 A /\\ top2 B /\\\n       connected top2 A /\\ connected top2 B /\\\n     ~(A = EMPTY) /\\ ~(B = EMPTY) /\\\n      (A INTER B = EMPTY) /\\ (A INTER C = EMPTY) /\\\n          (B INTER C = EMPTY) /\\\n         (A UNION B UNION C = euclid 2))
+      #|  forall C. simple_closed_curve top2 C ==>\n     (?A B.  top2 A /\\ top2 B /\\\n       connected top2 A /\\ connected top2 B /\\\n     ~(A = EMPTY) /\\ ~(B = EMPTY) /\\\n      (A INTER B = EMPTY) /\\ (A INTER C = EMPTY) /\\\n          (B INTER C = EMPTY) /\\\n         (A UNION B UNION C = euclid 2))
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  (!x. euclid 2 x = (!n. 2 <=| n ==> (x n = &0))) /\\\n   (top2 = top_of_metric (euclid 2,d_euclid)) /\\\n   (!(X:A->bool) d. top_of_metric (X,d) =\n         {A | ?F. F SUBSET open_balls (X,d) /\\ (A = UNIONS F) }) /\\\n   (!(X:A->bool) d. open_balls(X,d) =\n         {B | ?x r. (B = open_ball (X,d) x r) }) /\\\n   (!X d (x:A) r. open_ball (X,d) x r =\n         {y | X x /\\ X y /\\ d x y < r}) /\\\n   (!U (Z:A->bool). connected U Z <=>\n         Z SUBSET UNIONS U /\\\n         (!A B.\n              U A /\\ U B /\\ (A INTER B = {}) /\\ Z SUBSET A UNION B\n              ==> Z SUBSET A \\/ Z SUBSET B)) /\\\n   (!(C:A->bool) U. simple_closed_curve U C =\n             (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) U /\\\n              INJ f {x | &0 <= x /\\ x < &1} (UNIONS U) /\\\n              (f (&0) = f (&1)))) /\\\n   (!(f:A->B) U V. continuous f U V =\n         (!v. V v ==> U  { x | (UNIONS U) x /\\ v (f x) })) /\\\n   (!x y. d_real x y = abs  (x - y)) /\\\n   (!x y. euclid 2 x /\\ euclid 2 y\n         ==> (d_euclid x y =\n              sqrt (sum (0,2) (\\i. (x i - y i) * (x i - y i)))))
+      #|  (forall x. euclid 2 x = (forall n. 2 <=| n ==> (x n = &0))) /\\\n   (top2 = top_of_metric (euclid 2,d_euclid)) /\\\n   (forall(X:A->bool) d. top_of_metric (X,d) =\n         {A | ?F. F SUBSET open_balls (X,d) /\\ (A = UNIONS F) }) /\\\n   (forall(X:A->bool) d. open_balls(X,d) =\n         {B | ?x r. (B = open_ball (X,d) x r) }) /\\\n   (forall X d (x:A) r. open_ball (X,d) x r =\n         {y | X x /\\ X y /\\ d x y < r}) /\\\n   (forall U (Z:A->bool). connected U Z <=>\n         Z SUBSET UNIONS U /\\\n         (forall A B.\n              U A /\\ U B /\\ (A INTER B = {}) /\\ Z SUBSET A UNION B\n              ==> Z SUBSET A \\/ Z SUBSET B)) /\\\n   (forall(C:A->bool) U. simple_closed_curve U C =\n             (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) U /\\\n              INJ f {x | &0 <= x /\\ x < &1} (UNIONS U) /\\\n              (f (&0) = f (&1)))) /\\\n   (forall(f:A->B) U V. continuous f U V =\n         (forall v. V v ==> U  { x | (UNIONS U) x /\\ v (f x) })) /\\\n   (forall x y. d_real x y = abs  (x - y)) /\\\n   (forall x y. euclid 2 x /\\ euclid 2 y\n         ==> (d_euclid x y =\n              sqrt (sum (0,2) (\\i. (x i - y i) * (x i - y i)))))
       #|SQRT_MONO_LE' =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real))) ((#real_le:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real)))))))
       #|SQRT_MONO_LT' =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real)))))))
       #|REAL_PROP_LT_SQRT' =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real))) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)))))))

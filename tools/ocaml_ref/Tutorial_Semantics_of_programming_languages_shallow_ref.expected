@@ -12642,33 +12642,33 @@ Tutorial/Semantics_of_programming_languages_shallow quotations (45):
   (c1:(S->bool)->(S->bool)) ;; (c2:(S->bool)->(S->bool)) = c1 o c2
   If e (c:(S->bool)->(S->bool)) q = {s | if e s then c q s else q s}
   Ite e (c1:(S->bool)->(S->bool)) c2 q =\n    {s | if e s then c1 q s else c2 q s}
-  !q s. If e (c ;; while e c) q s ==> while e c q s
-  While e c q =\n    {s | !w. (!s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}
-  monotonic c <=> !q q'. q SUBSET q' ==> (c q) SUBSET (c q')
+  forall q s. If e (c ;; while e c) q s ==> while e c q s
+  While e c q =\n    {s | forall w. (forall s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}
+  monotonic c <=> forall q q'. q SUBSET q' ==> (c q) SUBSET (c q')
   monotonic (Assign f)
   monotonic c ==> monotonic (If e c)
   monotonic c1 /\\ monotonic c2 ==> monotonic (Ite e c1 c2)
   monotonic c1 /\\ monotonic c2 ==> monotonic (c1 ;; c2)
   monotonic c ==> monotonic(While e c)
-  !s:S. (if e s then c w s else q s) ==> w s
-  !e c q:S->bool.\n    monotonic c\n    ==> (!s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (!w'. (!s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (!a. While e c q a ==> w' a)) /\\\n        (!s. While e c q s <=> If e (c ;; While e c) q s)
-  !e c. monotonic c ==> (While e c = If e (c ;; While e c))
+  forall s:S. (if e s then c w s else q s) ==> w s
+  forall e c q:S->bool.\n    monotonic c\n    ==> (forall s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (forall w'. (forall s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (forall a. While e c q a ==> w' a)) /\\\n        (forall s. While e c q s <=> If e (c ;; While e c) q s)
+  forall e c. monotonic c ==> (While e c = If e (c ;; While e c))
   correct p c q <=> p SUBSET (c q)
-  !p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q
-  !p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q
-  !p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q
-  !p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q
-  !p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q
-  !p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q
+  forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q
+  forall p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q
+  forall p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q
+  forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q
+  forall p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q
+  forall p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q
   s:S
   s:S
   s:S
-  !s:S. invariant s ==> While e c q s
-  !(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (!X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q
+  forall s:S. invariant s ==> While e c q s
+  forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q
   assert (p:S->bool) (q:S->bool) = q
   variant ((<<):S->S->bool) (q:S->bool) = q
-  !p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q
-  !(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (!X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q
+  forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q
+  forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q
   monotonic (assert p)
   monotonic (variant p)
   correct\n    (\\(m,n,x,y). T)\n    (Assign (\\(m,n,x,y). m,n,m,n) ;;         // x,y := m,n\n     assert (\\(m,n,x,y). x = m /\\ y = n) ;;\n     While (\\(m,n,x,y). ~(x = 0 \\/ y = 0))\n      (assert (\\(m,n,x,y). gcd(x,y) = gcd(m,n)) ;;\n       variant(MEASURE(\\(m,n,x,y). x + y)) ;;\n       Ite (\\(m,n,x,y). x < y)\n           (Assign (\\(m,n,x,y). m,n,x,y - x))\n           (Assign (\\(m,n,x,y). m,n,x - y,y))) ;;\n     assert (\\(m,n,x,y). (x = 0 \\/ y = 0) /\\ gcd(x,y) = gcd(m,n)) ;;\n     If (\\(m,n,x,y). x = 0) (Assign (\\(m,n,x,y). (m,n,y,y))))\n  (\\(m,n,x,y). gcd(m,n) = x)
@@ -12676,9 +12676,9 @@ Tutorial/Semantics_of_programming_languages_shallow quotations (45):
   x:num
   n:num
   m:num
-  c2 refines c1 <=> !q. c1(q) SUBSET c2(q)
-  !c. c refines c
-  !c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1
+  c2 refines c1 <=> forall q. c1(q) SUBSET c2(q)
+  forall c. c refines c
+  forall c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1
   correct p c1 q /\\ c2 refines c1 ==> correct p c2 q
   c' refines c ==> While e c' refines While e c
   specification(p,q) r = if q SUBSET r then p else {}

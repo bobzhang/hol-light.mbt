@@ -89,7 +89,7 @@ fn step_2() -> Unit raise {
   let t2 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.between_refl_eq()])), @tactics.all_tac])
   let t1 = @class.asm_cases_tac(@parser.parse_term("b:real^N = a"))
   let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), t2), t3), t7), t8), t9), t10), t11), t12), t16), t23), t30), t31), t32), t33), t34), @tactics.strip_tac), t35), t36), t37), t41), t42), t43), t44), t45), t46), t47), t48), t49), @tactics.conj_tac), t51), t52), t53), t54), t55), t56), t57)
-  ddist_increases_online_c.set(@tactics.prove(@parser.parse_term("!a b x:real^N.\n      norm a < &1 /\\ norm b < &1 /\\ norm x < &1 /\\ between x (a,b) /\\ ~(x = b)\n      ==> ddist(a,x) < ddist(a,b)"), t58))
+  ddist_increases_online_c.set(@tactics.prove(@parser.parse_term("forall a b x:real^N.\n      norm a < &1 /\\ norm b < &1 /\\ norm x < &1 /\\ between x (a,b) /\\ ~(x = b)\n      ==> ddist(a,x) < ddist(a,b)"), t58))
 }
 
 ///|
@@ -106,7 +106,7 @@ pub fn ddist_increases_online() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t59 = @tactics.conv_tac(@calc_rat.real_field)
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([ddist(), @vectors.dist_refl(), @vectors.norm_pow_2(), @vectors.norm_lt_square()]))), t59)
-  ddist_refl_c.set(@tactics.prove(@parser.parse_term("!x:real^N. ddist(x,x) = &0"), t60))
+  ddist_refl_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. ddist(x,x) = &0"), t60))
 }
 
 ///|
@@ -122,7 +122,7 @@ pub fn ddist_refl() -> @kernel.Thm {
 /// DDIST_SYM
 fn step_4() -> Unit raise {
   let t61 = @simp.rewrite_tac(@list.List([ddist(), @theorems.conj_aci(), @real.real_mul_ac(), @vectors.dist_sym(), @vectors.dot_sym()]))
-  ddist_sym_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. ddist(x,y) = ddist(y,x)"), t61))
+  ddist_sym_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. ddist(x,y) = ddist(y,x)"), t61))
 }
 
 ///|
@@ -141,7 +141,7 @@ fn step_5() -> Unit raise {
   let t64 = @list.List([@meson.asm_meson_tac(@list.List([ddist_increases_online(), ddist_refl(), @vectors.between_refl()])), t63])
   let t62 = @class.asm_cases_tac(@parser.parse_term("norm(x:real^N) < &1 /\\ norm(y:real^N) < &1"))
   let t65 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t62), t64)
-  ddist_pos_lt_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. ~(x = y) ==> &0 < ddist(x,y)"), t65))
+  ddist_pos_lt_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. ~(x = y) ==> &0 < ddist(x,y)"), t65))
 }
 
 ///|
@@ -159,7 +159,7 @@ fn step_6() -> Unit raise {
   let t67 = @simp.asm_simp_tac(@list.List([ddist_refl(), ddist_pos_lt(), @realarith.real_le_lt()]))
   let t66 = @class.asm_cases_tac(@parser.parse_term("x:real^N = y"))
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t66), t67)
-  ddist_pos_le_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. &0 <= ddist(x,y)"), t68))
+  ddist_pos_le_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. &0 <= ddist(x,y)"), t68))
 }
 
 ///|
@@ -175,7 +175,7 @@ pub fn ddist_pos_le() -> @kernel.Thm {
 /// DDIST_EQ_0
 fn step_7() -> Unit raise {
   let t69 = @meson.meson_tac(@list.List([ddist_refl(), ddist_pos_lt(), @realarith.real_lt_refl()]))
-  ddist_eq_0_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. ddist(x,y) = &0 <=> x = y"), t69))
+  ddist_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. ddist(x,y) = &0 <=> x = y"), t69))
 }
 
 ///|
@@ -194,7 +194,7 @@ fn step_8() -> Unit raise {
   let t70 = @simp.rewrite_tac(@list.List([@vectors.collinear_between_cases()]))
   let t71 = @list.List([@simp.simp_tac(@list.List([@vectors.between_imp_collinear()])), t70])
   let t73 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), @tactics.eq_tac), t71), t72)
-  between_collinear_ddist_eq_c.set(@tactics.prove(@parser.parse_term("!a b x:real^N.\n        norm(a) < &1 /\\ norm(b) < &1 /\\ norm(x) < &1\n        ==> (between x (a,b) <=>\n             collinear {a, x, b} /\\\n             ddist(x,a) <= ddist (a,b) /\\ ddist(x,b) <= ddist(a,b))"), t73))
+  between_collinear_ddist_eq_c.set(@tactics.prove(@parser.parse_term("forall a b x:real^N.\n        norm(a) < &1 /\\ norm(b) < &1 /\\ norm(x) < &1\n        ==> (between x (a,b) <=>\n             collinear {a, x, b} /\\\n             ddist(x,a) <= ddist (a,b) /\\ ddist(x,b) <= ddist(a,b))"), t73))
 }
 
 ///|
@@ -234,7 +234,7 @@ fn step_9() -> Unit raise {
   let t75 = @tactics.exists_tac(@parser.parse_term("\\x:real^N. lift((&1 - a dot x) pow 2 /\n                    ((&1 - norm a pow 2) * (&1 - norm x pow 2)) - &1)"))
   let t74 = @tactics.match_mp_tac(@topology.continuous_transform_at())
   let t95 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t74), t75), t76), t77), @tactics.conj_tac), t94)
-  continuous_at_lift_ddist_c.set(@tactics.prove(@parser.parse_term("!a x:real^N.\n      norm(a) < &1 /\\ norm(x) < &1 ==> (\\x. lift(ddist(a,x))) continuous at x"), t95))
+  continuous_at_lift_ddist_c.set(@tactics.prove(@parser.parse_term("forall a x:real^N.\n      norm(a) < &1 /\\ norm(x) < &1 ==> (\\x. lift(ddist(a,x))) continuous at x"), t95))
 }
 
 ///|
@@ -277,7 +277,7 @@ fn step_10() -> Unit raise {
   let t96 = @parser.parse_term("segment[a:real^N,b]")
   let t97 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\x:real^N. lift(ddist(x,a) - ddist(x,b))"), t96]), @topology.connected_continuous_image()))
   let t121 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t97), @tactics.ants_tac), t120)
-  hyperbolic_midpoint_c.set(@tactics.prove(@parser.parse_term("!a b:real^N.\n        norm a < &1 /\\ norm b < &1\n        ==> ?x. between x (a,b) /\\ ddist(x,a) = ddist(x,b)"), t121))
+  hyperbolic_midpoint_c.set(@tactics.prove(@parser.parse_term("forall a b:real^N.\n        norm a < &1 /\\ norm b < &1\n        ==> ?x. between x (a,b) /\\ ddist(x,a) = ddist(x,b)"), t121))
 }
 
 ///|
@@ -299,7 +299,7 @@ fn step_11() -> Unit raise {
   let t123 = @simp.rewrite_tac(@list.List([@vectors.dot_lzero()]))
   let t122 = @simp.asm_simp_tac(@list.List([ddist(), @vectors.norm_0(), @real.real_lt_01()]))
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t122), t123), t124), t125), t127)
-  ddist_eq_origin_c.set(@tactics.prove(@parser.parse_term("!x:real^N y:real^N.\n        norm x < &1 /\\ norm y < &1\n        ==> (ddist(vec 0,x) = ddist(vec 0,y) <=> norm x = norm y)"), t128))
+  ddist_eq_origin_c.set(@tactics.prove(@parser.parse_term("forall x:real^N y:real^N.\n        norm x < &1 /\\ norm y < &1\n        ==> (ddist(vec 0,x) = ddist(vec 0,y) <=> norm x = norm y)"), t128))
 }
 
 ///|
@@ -324,7 +324,7 @@ fn step_12() -> Unit raise {
   let t130 = @simp.rewrite_tac(@list.List([@vectors.dist_0(), @vectors.norm_0(), @real.real_lt_01()]))
   let t129 = @simp.asm_simp_tac(@list.List([ddist_eq_origin(), @simp.rewrite_rule(@list.List([ddist_sym()]))(ddist_eq_origin())]))
   let t138 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t129), t130), t131), @tactics.strip_tac), t132), t133), t134), t135), t136), t137), @calc_rat.asm_real_arith_tac)
-  ddist_congruent_triples_0_c.set(@tactics.prove(@parser.parse_term("!a b:real^N a' b':real^N.\n        norm a < &1 /\\ norm b < &1 /\\ norm a' < &1 /\\ norm b' < &1\n        ==> (ddist(vec 0,a) = ddist(vec 0,a') /\\ ddist(a,b) = ddist(a',b') /\\\n             ddist(b,vec 0) = ddist(b',vec 0) <=>\n             dist(vec 0,a) = dist(vec 0,a') /\\ dist(a,b) = dist(a',b') /\\\n             dist(b,vec 0) = dist(b',vec 0))"), t138))
+  ddist_congruent_triples_0_c.set(@tactics.prove(@parser.parse_term("forall a b:real^N a' b':real^N.\n        norm a < &1 /\\ norm b < &1 /\\ norm a' < &1 /\\ norm b' < &1\n        ==> (ddist(vec 0,a) = ddist(vec 0,a') /\\ ddist(a,b) = ddist(a',b') /\\\n             ddist(b,vec 0) = ddist(b',vec 0) <=>\n             dist(vec 0,a) = dist(vec 0,a') /\\ dist(a,b) = dist(a',b') /\\\n             dist(b,vec 0) = dist(b',vec 0))"), t138))
 }
 
 ///|
@@ -401,7 +401,7 @@ fn step_15() -> Unit raise {
 fn step_16() -> Unit raise {
   let t142 = @simp.simp_tac(@list.List([@real.real_le_pow_2(), @calc_rat.real_arith(@parser.parse_term("&0 <= x ==> abs(&1 + x) = &1 + x"))]))
   let t143 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([kleinify(), @complexes.complex_norm_mul(), @complexes.complex_norm_cx(), @real.real_abs_div()])), t142), @calc_rat.real_arith_tac)
-  norm_kleinify_c.set(@tactics.prove(@parser.parse_term("!z. norm(kleinify z) = (&2 * norm(z)) / (&1 + norm(z) pow 2)"), t143))
+  norm_kleinify_c.set(@tactics.prove(@parser.parse_term("forall z. norm(kleinify z) = (&2 * norm(z)) / (&1 + norm(z) pow 2)"), t143))
 }
 
 ///|
@@ -419,7 +419,7 @@ fn step_17() -> Unit raise {
   let t145 = @simp.rewrite_tac(@list.List([@realarith.real_pow_2(), @real.real_lt_square()]))
   let t144 = @simp.simp_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&2 * z < (&1 + z pow 2) <=> &0 < (z - &1) pow 2"))]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([norm_kleinify(), @real.real_le_pow_2(), @real.real_lt_ldiv_eq(), @realax.real_mul_lid(), @calc_rat.real_arith(@parser.parse_term("&0 <= x ==> &0 < &1 + x"))])), t144), t145), @calc_rat.real_arith_tac)
-  norm_kleinify_lt_c.set(@tactics.prove(@parser.parse_term("!z. norm(kleinify z) < &1 <=> ~(norm z = &1)"), t146))
+  norm_kleinify_lt_c.set(@tactics.prove(@parser.parse_term("forall z. norm(kleinify z) < &1 <=> ~(norm z = &1)"), t146))
 }
 
 ///|
@@ -450,7 +450,7 @@ fn step_18() -> Unit raise {
   let t148 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("x * y <= &1 * y /\\ y < &1 ==> x * y < &1")))
   let t147 = @simp.rewrite_tac(@list.List([poincarify(), @complexes.complex_norm_mul()]))
   let t162 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t147), t148), t149), t150), t151), t152), t153), t154), t155), t156), @tactics.conj_tac), t158), t159), t161)
-  norm_poincarify_lt_c.set(@tactics.prove(@parser.parse_term("!x. norm(x) < &1 ==> norm(poincarify x) < &1"), t162))
+  norm_poincarify_lt_c.set(@tactics.prove(@parser.parse_term("forall x. norm(x) < &1 ==> norm(poincarify x) < &1"), t162))
 }
 
 ///|
@@ -487,7 +487,7 @@ fn step_19() -> Unit raise {
   let t164 = @tactics.match_mp_tac(@complexes.complex_ring(@parser.parse_term("(~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x")))
   let t163 = @simp.rewrite_tac(@list.List([kleinify(), poincarify()]))
   let t182 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t163), t164), @tactics.disch_tac), t165), t166), t167), t168), t169), t170), @tactics.conj_tac), t180), t181)
-  kleinify_poincarify_c.set(@tactics.prove(@parser.parse_term("!x. norm(x) < &1 ==> kleinify(poincarify x) = x"), t182))
+  kleinify_poincarify_c.set(@tactics.prove(@parser.parse_term("forall x. norm(x) < &1 ==> kleinify(poincarify x) = x"), t182))
 }
 
 ///|
@@ -529,7 +529,7 @@ fn step_20() -> Unit raise {
   let t184 = @tactics.match_mp_tac(@complexes.complex_ring(@parser.parse_term("(~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x")))
   let t183 = @simp.rewrite_tac(@list.List([kleinify(), poincarify()]))
   let t207 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t183), t184), @tactics.disch_tac), t185), t186), t187), t188), t189), t190), t191), t192), t193), t194), t195), t196), t197), t198), t199), t203), t204), t205), t206)
-  poincarify_kleinify_c.set(@tactics.prove(@parser.parse_term("!x. norm(x) < &1 ==> poincarify(kleinify x) = x"), t207))
+  poincarify_kleinify_c.set(@tactics.prove(@parser.parse_term("forall x. norm(x) < &1 ==> poincarify(kleinify x) = x"), t207))
 }
 
 ///|
@@ -571,7 +571,7 @@ fn step_21() -> Unit raise {
   let t209 = @tactics.exists_tac(@parser.parse_term("(&4 * norm(w - z:real^2) pow 2 *\n     ((&1 - norm w pow 2) * (&1 - norm z pow 2) + norm(w - z) pow 2)) /\n    ((&1 - norm w pow 2) pow 2 * (&1 - norm z pow 2) pow 2)"))
   let t208 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t232 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t208), t209), @tactics.conj_tac), t231)
-  ddist_kleinify_c.set(@tactics.prove(@parser.parse_term("!w z. ~(norm w = &1) /\\ ~(norm z = &1)\n         ==> ddist(kleinify w,kleinify z) =\n             &4 * (&1 / &2 + norm(w - z) pow 2 /\n                             ((&1 - norm w pow 2) * (&1 - norm z pow 2))) pow 2\n             - &1"), t232))
+  ddist_kleinify_c.set(@tactics.prove(@parser.parse_term("forall w z. ~(norm w = &1) /\\ ~(norm z = &1)\n         ==> ddist(kleinify w,kleinify z) =\n             &4 * (&1 / &2 + norm(w - z) pow 2 /\n                             ((&1 - norm w pow 2) * (&1 - norm z pow 2))) pow 2\n             - &1"), t232))
 }
 
 ///|
@@ -588,7 +588,7 @@ pub fn ddist_kleinify() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t233 = @tactics.conv_tac(@calc_rat.real_field)
   let t234 = @tactics.then_tac(@simp.simp_tac(@list.List([ddist_kleinify(), @vectors.norm_eq_square(), @equal.gsym(@vectors.norm_pow_2()), @realarith.real_pos()])), t233)
-  ddist_kleinify_eq_c.set(@tactics.prove(@parser.parse_term("!w z w' z'.\n      ~(norm w = &1) /\\ ~(norm z = &1) /\\ ~(norm w' = &1) /\\ ~(norm z' = &1) /\\\n      norm(w - z) pow 2 * (&1 - norm w' pow 2) * (&1 - norm z' pow 2) =\n      norm(w' - z') pow 2 * (&1 - norm w pow 2) * (&1 - norm z pow 2)\n      ==> ddist(kleinify w,kleinify z) = ddist(kleinify w',kleinify z')"), t234))
+  ddist_kleinify_eq_c.set(@tactics.prove(@parser.parse_term("forall w z w' z'.\n      ~(norm w = &1) /\\ ~(norm z = &1) /\\ ~(norm w' = &1) /\\ ~(norm z' = &1) /\\\n      norm(w - z) pow 2 * (&1 - norm w' pow 2) * (&1 - norm z' pow 2) =\n      norm(w' - z') pow 2 * (&1 - norm w pow 2) * (&1 - norm z pow 2)\n      ==> ddist(kleinify w,kleinify z) = ddist(kleinify w',kleinify z')"), t234))
 }
 
 ///|
@@ -604,7 +604,7 @@ pub fn ddist_kleinify_eq() -> @kernel.Thm {
 /// NORM_KLEINIFY_MOEBIUS_LT
 fn step_23() -> Unit raise {
   let t235 = @simp.simp_tac(@list.List([@cauchy.moebius_function_norm_lt_1(), norm_kleinify_lt(), @real.real_lt_imp_ne()]))
-  norm_kleinify_moebius_lt_c.set(@tactics.prove(@parser.parse_term("!w x. norm w < &1 /\\ norm x < &1\n         ==> norm(kleinify(moebius_function (&0) w x)) < &1"), t235))
+  norm_kleinify_moebius_lt_c.set(@tactics.prove(@parser.parse_term("forall w x. norm w < &1 /\\ norm x < &1\n         ==> norm(kleinify(moebius_function (&0) w x)) < &1"), t235))
 }
 
 ///|
@@ -646,7 +646,7 @@ fn step_24() -> Unit raise {
   let t237 = @simp.asm_simp_tac(@list.List([@cauchy.moebius_function_norm_lt_1(), @real.real_lt_imp_ne()]))
   let t236 = @tactics.match_mp_tac(ddist_kleinify_eq())
   let t260 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t236), t237), t238), t239), t259)
-  ddist_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("!w x y. norm w < &1 /\\ norm x < &1 /\\ norm y < &1\n           ==> ddist(kleinify(moebius_function (&0) w x),\n                     kleinify(moebius_function (&0) w y)) =\n               ddist(kleinify x,kleinify y)"), t260))
+  ddist_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("forall w x y. norm w < &1 /\\ norm x < &1 /\\ norm y < &1\n           ==> ddist(kleinify(moebius_function (&0) w x),\n                     kleinify(moebius_function (&0) w y)) =\n               ddist(kleinify x,kleinify y)"), t260))
 }
 
 ///|
@@ -674,7 +674,7 @@ fn step_25() -> Unit raise {
   let t283 = @simp.rewrite_tac(@list.List([@realarith.real_entire(), @class.de_morgan_thm(), @real.real_pow_eq_0(), @calc_num.arith_eq()]))
   let t282 = @tactics.exists_tac(@parser.parse_term("--(Re w pow 2 + Im w pow 2 - &1) pow 3 *\n              ((&1 - Re(x) pow 2 - Im(x) pow 2) *\n               (&1 - Re(w) pow 2 - Im(w) pow 2) +\n               &2 * (Re w - Re x) pow 2 + &2 * (Im w - Im x) pow 2)"))
   let t281 = @tactics.exists_tac(@parser.parse_term("Re x pow 2 + Im x pow 2 + &1"))
-  let t280 = @tactics.match_mp_tac(@calc_rat.real_ring(@parser.parse_term("!a b. a * lhs = b * rhs /\\ ~(a = &0) /\\ ~(b = &0)\n          ==> (lhs = &0 <=> rhs = &0)")))
+  let t280 = @tactics.match_mp_tac(@calc_rat.real_ring(@parser.parse_term("forall a b. a * lhs = b * rhs /\\ ~(a = &0) /\\ ~(b = &0)\n          ==> (lhs = &0 <=> rhs = &0)")))
   let t279 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@realarith.real_sub_0())]))
   let t278 = @simp.rewrite_tac(@list.List([@complexes.complex_sqnorm(), @complexes.complex_sub(), @complexes.complex_mul(), @complexes.complex_add(), @complexes.complex_neg(), @complexes.cnj(), @complexes.cx_def(), @complexes.re(), @complexes.im()]))
   let t277 = @simp.asm_simp_tac(@list.List([@complexes.complex_norm_zero(), @calc_rat.real_field(@parser.parse_term("~(nx = &0) /\\ ~(ny = &0) /\\ ~(nz = &0)\n    ==>(((&1 + (nxw / nx) pow 2) * rz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iy / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * ix / nx pow 2) =\n        ((&1 + (nxw / nx) pow 2) * ry / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * ix / nx pow 2) <=>\n        ((nx pow 2 + nxw pow 2) * rz - (nz pow 2 + nzw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iy - (ny pow 2 + nyw pow 2) * ix) =\n        ((nx pow 2 + nxw pow 2) * ry - (ny pow 2 + nyw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iz - (nz pow 2 + nzw pow 2) * ix))"))]))
@@ -695,7 +695,7 @@ fn step_25() -> Unit raise {
   let t261 = @equal.gsym(@complexes.im_def())
   let t262 = @simp.rewrite_tac(@list.List([@vectors.collinear_3_2d(), kleinify(), @equal.gsym(@complexes.re_def()), t261]))
   let t294 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t262), t263), t265), t266), t267), t268), t269), t276), t277), t278), t279), t280), t281), t282), t283), t284), t293)
-  collinear_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("!w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (collinear {kleinify(moebius_function (&0) w x),\n                             kleinify(moebius_function (&0) w y),\n                             kleinify(moebius_function (&0) w z)} <=>\n                  collinear {kleinify x,kleinify y,kleinify z})"), t294))
+  collinear_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (collinear {kleinify(moebius_function (&0) w x),\n                             kleinify(moebius_function (&0) w y),\n                             kleinify(moebius_function (&0) w z)} <=>\n                  collinear {kleinify x,kleinify y,kleinify z})"), t294))
 }
 
 ///|
@@ -711,7 +711,7 @@ pub fn collinear_kleinify_moebius() -> @kernel.Thm {
 /// BETWEEN_KLEINIFY_MOEBIUS
 fn step_26() -> Unit raise {
   let t295 = @simp.simp_tac(@list.List([between_collinear_ddist_eq(), norm_kleinify_moebius_lt(), norm_kleinify_lt(), @real.real_lt_imp_ne(), collinear_kleinify_moebius(), ddist_kleinify_moebius()]))
-  between_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("!w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (kleinify(moebius_function (&0) w x))\n                          (kleinify(moebius_function (&0) w y),\n                           kleinify(moebius_function (&0) w z)) <=>\n                  between (kleinify x) (kleinify y,kleinify z))"), t295))
+  between_kleinify_moebius_c.set(@tactics.prove(@parser.parse_term("forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (kleinify(moebius_function (&0) w x))\n                          (kleinify(moebius_function (&0) w y),\n                           kleinify(moebius_function (&0) w z)) <=>\n                  between (kleinify x) (kleinify y,kleinify z))"), t295))
 }
 
 ///|
@@ -726,7 +726,7 @@ pub fn between_kleinify_moebius() -> @kernel.Thm {
 ///|
 /// hyperbolic_isometry
 fn step_27() -> Unit raise {
-  hyperbolic_isometry_c.set(@pair.new_definition(@parser.parse_term("hyperbolic_isometry (f:real^2->real^2) <=>\n    (!x. norm x < &1 ==> norm(f x) < &1) /\\\n    (!x y. norm x < &1 /\\ norm y < &1 ==> ddist(f x,f y) = ddist(x,y)) /\\\n    (!x y z. norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (f x) (f y,f z) <=> between x (y,z)))")))
+  hyperbolic_isometry_c.set(@pair.new_definition(@parser.parse_term("hyperbolic_isometry (f:real^2->real^2) <=>\n    (forall x. norm x < &1 ==> norm(f x) < &1) /\\\n    (forall x y. norm x < &1 /\\ norm y < &1 ==> ddist(f x,f y) = ddist(x,y)) /\\\n    (forall x y z. norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (f x) (f y,f z) <=> between x (y,z)))")))
 }
 
 ///|
@@ -752,7 +752,7 @@ fn step_28() -> Unit raise {
   }, @list.List([@parser.parse_term("\\x. kleinify(moebius_function(&0) (poincarify w) (poincarify x))"), t300]))
   let t296 = @simp.simp_tac(@list.List([hyperbolic_isometry()]))
   let t304 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t296), t301), t302), t303)
-  hyperbolic_translation_c.set(@tactics.prove(@parser.parse_term("!w. norm w < &1\n       ==> ?f:real^2->real^2 g:real^2->real^2.\n                hyperbolic_isometry f /\\ hyperbolic_isometry g /\\\n                f(w) = vec 0 /\\ g(vec 0) = w /\\\n                (!x. norm x < &1 ==> f(g x) = x) /\\\n                (!x. norm x < &1 ==> g(f x) = x)"), t304))
+  hyperbolic_translation_c.set(@tactics.prove(@parser.parse_term("forall w. norm w < &1\n       ==> ?f:real^2->real^2 g:real^2->real^2.\n                hyperbolic_isometry f /\\ hyperbolic_isometry g /\\\n                f(w) = vec 0 /\\ g(vec 0) = w /\\\n                (forall x. norm x < &1 ==> f(g x) = x) /\\\n                (forall x. norm x < &1 ==> g(f x) = x)"), t304))
 }
 
 ///|
@@ -815,7 +815,7 @@ pub fn pdist() -> @kernel.Thm {
 /// DEST_PLANE_NORM_LT
 fn step_32() -> Unit raise {
   let t306 = @meson.meson_tac(@list.List([plane_tybij()]))
-  dest_plane_norm_lt_c.set(@tactics.prove(@parser.parse_term("!x. norm(dest_plane x) < &1"), t306))
+  dest_plane_norm_lt_c.set(@tactics.prove(@parser.parse_term("forall x. norm(dest_plane x) < &1"), t306))
 }
 
 ///|
@@ -831,7 +831,7 @@ pub fn dest_plane_norm_lt() -> @kernel.Thm {
 /// DEST_PLANE_EQ
 fn step_33() -> Unit raise {
   let t307 = @meson.meson_tac(@list.List([plane_tybij()]))
-  dest_plane_eq_c.set(@tactics.prove(@parser.parse_term("!x y. dest_plane x = dest_plane y <=> x = y"), t307))
+  dest_plane_eq_c.set(@tactics.prove(@parser.parse_term("forall x y. dest_plane x = dest_plane y <=> x = y"), t307))
 }
 
 ///|
@@ -847,7 +847,7 @@ pub fn dest_plane_eq() -> @kernel.Thm {
 /// FORALL_DEST_PLANE
 fn step_34() -> Unit raise {
   let t308 = @meson.meson_tac(@list.List([plane_tybij()]))
-  forall_dest_plane_c.set(@tactics.prove(@parser.parse_term("!P. (!x. P(dest_plane x)) <=> (!x. norm x < &1 ==> P x)"), t308))
+  forall_dest_plane_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. P(dest_plane x)) <=> (forall x. norm x < &1 ==> P x)"), t308))
 }
 
 ///|
@@ -863,7 +863,7 @@ pub fn forall_dest_plane() -> @kernel.Thm {
 /// EXISTS_DEST_PLANE
 fn step_35() -> Unit raise {
   let t309 = @meson.meson_tac(@list.List([plane_tybij()]))
-  exists_dest_plane_c.set(@tactics.prove(@parser.parse_term("!P. (?x. P(dest_plane x)) <=> (?x. norm x < &1 /\\ P x)"), t309))
+  exists_dest_plane_c.set(@tactics.prove(@parser.parse_term("forall P. (?x. P(dest_plane x)) <=> (?x. norm x < &1 /\\ P x)"), t309))
 }
 
 ///|
@@ -879,7 +879,7 @@ pub fn exists_dest_plane() -> @kernel.Thm {
 /// TARSKI_AXIOM_1_NONEUCLIDEAN
 fn step_36() -> Unit raise {
   let t310 = @simp.rewrite_tac(@list.List([pdist(), ddist_sym()]))
-  tarski_axiom_1_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b. pdist(a,b) = pdist(b,a)"), t310))
+  tarski_axiom_1_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b. pdist(a,b) = pdist(b,a)"), t310))
 }
 
 ///|
@@ -894,7 +894,7 @@ pub fn tarski_axiom_1_noneuclidean() -> @kernel.Thm {
 ///|
 /// TARSKI_AXIOM_2_NONEUCLIDEAN
 fn step_37() -> Unit raise {
-  tarski_axiom_2_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b p q r s.\n        pdist(a,b) = pdist(p,q) /\\ pdist(a,b) = pdist(r,s)\n        ==> pdist(p,q) = pdist(r,s)"), @calc_rat.real_arith_tac))
+  tarski_axiom_2_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b p q r s.\n        pdist(a,b) = pdist(p,q) /\\ pdist(a,b) = pdist(r,s)\n        ==> pdist(p,q) = pdist(r,s)"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -910,7 +910,7 @@ pub fn tarski_axiom_2_noneuclidean() -> @kernel.Thm {
 /// TARSKI_AXIOM_3_NONEUCLIDEAN
 fn step_38() -> Unit raise {
   let t311 = @simp.simp_tac(@list.List([forall_dest_plane(), pdist(), ddist_refl(), ddist_eq_0(), dest_plane_eq()]))
-  tarski_axiom_3_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b c. pdist(a,b) = pdist(c,c) ==> a = b"), t311))
+  tarski_axiom_3_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c. pdist(a,b) = pdist(c,c) ==> a = b"), t311))
 }
 
 ///|
@@ -953,7 +953,7 @@ fn step_39() -> Unit raise {
   let t333 = @meson.meson_tac(@list.List([@vectors.dist_0(), ddist_eq_origin()]))
   let t356 = @list.List([@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("vec 0:real^2"), @tarski.tarski_axiom_4_euclidean())), t333), t355])
   let t332 = @simp.rewrite_tac(@list.List([@vectors.norm_0(), @real.real_lt_01()]))
-  let t331 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("P(vec 0) /\\ (P(vec 0) ==> !x. P x) ==> !x. P x")))
+  let t331 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("P(vec 0) /\\ (P(vec 0) ==> forall x. P x) ==> forall x. P x")))
   let t328 = @parser.parse_term("a:real^2")
   let t329 = @parser.parse_term("q:real^2")
   let t330 = @tactics.map_every(fn(x326 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -978,7 +978,7 @@ fn step_39() -> Unit raise {
   let t313 = @tactics.repeat_tac(@tactics.gen_tac)
   let t312 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm(), @theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc())]))
   let t357 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([pbetween(), pdist(), forall_dest_plane(), exists_dest_plane()])), t312), t313), @tactics.disch_tac), t314), t318), t322), t325), t330), t331), t332), @tactics.conj_tac), t356)
-  tarski_axiom_4_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a q b c. ?x. pbetween a (q,x) /\\ pdist(a,x) = pdist(b,c)"), t357))
+  tarski_axiom_4_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a q b c. ?x. pbetween a (q,x) /\\ pdist(a,x) = pdist(b,c)"), t357))
 }
 
 ///|
@@ -1064,7 +1064,7 @@ fn step_40() -> Unit raise {
   let t359 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("b':real^2"), hyperbolic_translation()))
   let t358 = @tactics.repeat_tac(@tactics.strip_tac)
   let t416 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([forall_dest_plane(), pdist(), pbetween(), @equal.gsym(dest_plane_eq())])), t358), t359), t360), t361), t362), t366), t367), t371), @tactics.ants_tac), t372), t373), @tactics.conj_tac), t374), t378), @tactics.ants_tac), t379), t380), @tactics.conj_tac), t415)
-  tarski_axiom_5_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b c x a' b' c' x'.\n        ~(a = b) /\\\n        pdist(a,b) = pdist(a',b') /\\\n        pdist(a,c) = pdist(a',c') /\\\n        pdist(b,c) = pdist(b',c') /\\\n        pbetween b (a,x) /\\ pbetween b' (a',x') /\\ pdist(b,x) = pdist(b',x')\n        ==> pdist(c,x) = pdist(c',x')"), t416))
+  tarski_axiom_5_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c x a' b' c' x'.\n        ~(a = b) /\\\n        pdist(a,b) = pdist(a',b') /\\\n        pdist(a,c) = pdist(a',c') /\\\n        pdist(b,c) = pdist(b',c') /\\\n        pbetween b (a,x) /\\ pbetween b' (a',x') /\\ pdist(b,x) = pdist(b',x')\n        ==> pdist(c,x) = pdist(c',x')"), t416))
 }
 
 ///|
@@ -1081,7 +1081,7 @@ pub fn tarski_axiom_5_noneuclidean() -> @kernel.Thm {
 fn step_41() -> Unit raise {
   let t417 = @meson.meson_tac(@list.List([@tarski.tarski_axiom_6_euclidean()]))
   let t418 = @tactics.then_tac(@simp.rewrite_tac(@list.List([pbetween(), forall_dest_plane(), @equal.gsym(dest_plane_eq())])), t417)
-  tarski_axiom_6_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b. pbetween b (a,a) ==> a = b"), t418))
+  tarski_axiom_6_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b. pbetween b (a,a) ==> a = b"), t418))
 }
 
 ///|
@@ -1098,7 +1098,7 @@ pub fn tarski_axiom_6_noneuclidean() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let t419 = @meson.meson_tac(@list.List([@convex.between_norm_lt(), @tarski.tarski_axiom_7_euclidean()]))
   let t420 = @tactics.then_tac(@simp.rewrite_tac(@list.List([pbetween(), forall_dest_plane(), exists_dest_plane()])), t419)
-  tarski_axiom_7_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!a b c p q.\n    pbetween p (a,c) /\\ pbetween q (b,c)\n    ==> ?x. pbetween x (p,b) /\\ pbetween x (q,a)"), t420))
+  tarski_axiom_7_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c p q.\n    pbetween p (a,c) /\\ pbetween q (b,c)\n    ==> ?x. pbetween x (p,b) /\\ pbetween x (q,a)"), t420))
 }
 
 ///|
@@ -1206,7 +1206,7 @@ fn step_44() -> Unit raise {
   let t440 = @tactics.repeat_tac(@tactics.strip_tac)
   let t439 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm(), @theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc())]))
   let t484 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([pdist(), pbetween(), forall_dest_plane(), @equal.gsym(dest_plane_eq())])), t439), t440), t442), t443), t444), @tactics.strip_tac), t445), t449), t451), t452), t453), t454), t458), t459), t463), t464), t468), t483)
-  tarski_axiom_9_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!p q a b c.\n        ~(p = q) /\\\n        pdist(a,p) = pdist(a,q) /\\ pdist(b,p) = pdist(b,q) /\\\n        pdist(c,p) = pdist(c,q)\n        ==> pbetween b (a,c) \\/ pbetween c (b,a) \\/ pbetween a (c,b)"), t484))
+  tarski_axiom_9_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall p q a b c.\n        ~(p = q) /\\\n        pdist(a,p) = pdist(a,q) /\\ pdist(b,p) = pdist(b,q) /\\\n        pdist(c,p) = pdist(c,q)\n        ==> pbetween b (a,c) \\/ pbetween c (b,a) \\/ pbetween a (c,b)"), t484))
 }
 
 ///|
@@ -1297,7 +1297,7 @@ fn step_45() -> Unit raise {
     })(((x493 : @kernel.Thm) => @bool.specl(t492, x493))(x494))
   })
   let t548 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([pbetween(), forall_dest_plane(), exists_dest_plane(), @equal.gsym(dest_plane_eq()), @theorems.right_imp_forall_thm(), @theorems.imp_imp()])), t495), t496), @tactics.conj_tac), t539), t540), t541), t542), t543), t545), t546), t547)
-  not_tarski_axiom_10_noneuclidean_c.set(@tactics.prove(@parser.parse_term("~(!a b c d t.\n      pbetween d (a,t) /\\ pbetween d (b,c) /\\ ~(a = d)\n      ==> ?x y. pbetween b (a,x) /\\ pbetween c (a,y) /\\ pbetween t (x,y))"), t548))
+  not_tarski_axiom_10_noneuclidean_c.set(@tactics.prove(@parser.parse_term("~(forall a b c d t.\n      pbetween d (a,t) /\\ pbetween d (b,c) /\\ ~(a = d)\n      ==> ?x y. pbetween b (a,x) /\\ pbetween c (a,y) /\\ pbetween t (x,y))"), t548))
 }
 
 ///|
@@ -1325,7 +1325,7 @@ fn step_46() -> Unit raise {
   let t550 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty()]))
   let t549 = @class.asm_cases_tac(@parser.parse_term("X:plane->bool = {}"))
   let t561 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t549), t550), t551), t552), t553), t554), t556), t557), @tactics.ants_tac), t559), t560)
-  tarski_axiom_11_noneuclidean_c.set(@tactics.prove(@parser.parse_term("!X Y. (?a. !x y. x IN X /\\ y IN Y ==> pbetween x (a,y))\n         ==> (?b. !x y. x IN X /\\ y IN Y ==> pbetween b (x,y))"), t561))
+  tarski_axiom_11_noneuclidean_c.set(@tactics.prove(@parser.parse_term("forall X Y. (?a. forall x y. x IN X /\\ y IN Y ==> pbetween x (a,y))\n         ==> (?b. forall x y. x IN X /\\ y IN Y ==> pbetween b (x,y))"), t561))
 }
 
 ///|

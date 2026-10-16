@@ -44,7 +44,7 @@ fn step_3() -> Unit raise {
       }
     })(((x36 : @kernel.Thm) => @bool.spec(t35, x36))(x37))
   })
-  let t31 = @tactics.undisch_tac(@parser.parse_term("!x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x"))
+  let t31 = @tactics.undisch_tac(@parser.parse_term("forall x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x"))
   let t30 = @tactics.undisch_then(@parser.parse_term("l = &0"), fn(x27 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s28 = @tactics.subst_all_tac(x27)
     fn(x29 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -80,7 +80,7 @@ fn step_3() -> Unit raise {
   let t2 = @parser.parse_term("a:real")
   let t3 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("\\x:real. f(x) * (g(b) - g(a)) - g(x) * (f(b) - f(a))"), t2, t1]), @analysis.mvt()))
   let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3), @tactics.ants_tac), t17), t21), t22), t23), t24), t25), t26), t30), t31), t38), t39), t44), t49), t50), t51), t52), t53), t54), t55), t56), t57)
-  mvt2_c.set(@tactics.prove(@parser.parse_term("!f g a b.\n        a < b /\\\n        (!x. a <= x /\\ x <= b ==> f contl x /\\ g contl x) /\\\n        (!x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x)\n        ==> ?z f' g'. a < z /\\ z < b /\\ (f diffl f') z /\\ (g diffl g') z /\\\n                      (f b - f a) * g' = (g b - g a) * f'"), t58))
+  mvt2_c.set(@tactics.prove(@parser.parse_term("forall f g a b.\n        a < b /\\\n        (forall x. a <= x /\\ x <= b ==> f contl x /\\ g contl x) /\\\n        (forall x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x)\n        ==> ?z f' g'. a < z /\\ z < b /\\ (f diffl f') z /\\ (g diffl g') z /\\\n                      (f b - f a) * g' = (g b - g a) * f'"), t58))
 }
 
 ///|
@@ -184,7 +184,7 @@ fn step_4() -> Unit raise {
       }
     })(((x163 : @kernel.Thm) => @bool.spec(t162, x163))(x164))
   })
-  let t158 = @tactics.undisch_tac(@parser.parse_term("!x. &0 < abs(x - c) /\\ abs(x - c) < r ==> abs(f' x / g' x - L) < e"))
+  let t158 = @tactics.undisch_tac(@parser.parse_term("forall x. &0 < abs(x - c) /\\ abs(x - c) < r ==> abs(f' x / g' x - L) < e"))
   let t157 = @tactics.x_gen_tac(@parser.parse_term("x:real"))
   let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t155 = @tactics.x_gen_tac(@parser.parse_term("k:real"))
@@ -306,14 +306,14 @@ fn step_4() -> Unit raise {
     })(t67(x68))
   })
   let t137 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:real")), t69), @tactics.strip_tac), t136), @tactics.all_tac])
-  let t63 = @tactics.subgoal_then(@parser.parse_term("!x. &0 < abs(x - c) /\\ abs(x - c) < d\n        ==> ?z. &0 < abs(z - c) /\\ abs(z - c) < abs(x - c) /\\\n                f(x) * g'(z) = f'(z) * g(x)"), fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t63 = @tactics.subgoal_then(@parser.parse_term("forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n        ==> ?z. &0 < abs(z - c) /\\ abs(z - c) < abs(x - c) /\\\n                f(x) * g'(z) = f'(z) * g(x)"), fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s61 = ((x59 : @kernel.Thm) => @tactics.label_tac("*", x59))(x60)
     fn(x62 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s61(x62)
     }
   })
   let t231 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t63), t137), t138), t139), @tactics.disch_tac), t140), t141), t148), t149), t150), t152), t153), t154), t155), @tactics.strip_tac), t156), t157), @tactics.strip_tac), t158), t165), @tactics.ants_tac), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t166), t173), @tactics.ants_tac), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t174), t175), t176), @tactics.conj_tac), t177), t178), t184), t185), t230)
-  lhopital_weak_c.set(@tactics.prove(@parser.parse_term("!f g f' g' c L d.\n        &0 < d /\\\n        (!x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        f(c) = &0 /\\ g(c) = &0 /\\ (f --> &0) c /\\ (g --> &0) c /\\\n        ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c"), t231))
+  lhopital_weak_c.set(@tactics.prove(@parser.parse_term("forall f g f' g' c L d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        f(c) = &0 /\\ g(c) = &0 /\\ (f --> &0) c /\\ (g --> &0) c /\\\n        ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c"), t231))
 }
 
 ///|
@@ -354,7 +354,7 @@ fn step_5() -> Unit raise {
   let t237 = @parser.parse_term("\\x:real. if x = c then &0 else g(x)")
   let t238 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("\\x:real. if x = c then &0 else f(x)"), t237, t236, t235, t234, t233, t232]), lhopital_weak()))
   let t257 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t238), t239), t240), @tactics.strip_tac), @tactics.strip_tac), t241), t242), t243), t244), t249), t250), t251), t252), @tactics.disch_tac), t253), t254), t255), t256)
-  lhopital_c.set(@tactics.prove(@parser.parse_term("!f g f' g' c L d.\n        &0 < d /\\\n        (!x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        (f --> &0) c /\\ (g --> &0) c /\\ ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c"), t257))
+  lhopital_c.set(@tactics.prove(@parser.parse_term("forall f g f' g' c L d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        (f --> &0) c /\\ (g --> &0) c /\\ ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c"), t257))
 }
 
 ///|

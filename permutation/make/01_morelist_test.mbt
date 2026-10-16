@@ -5658,14 +5658,14 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|Warning: inventing type variables
       #|Permutation/morelist quotations (65):
       #|  CONS
-      #|  !P. P [] /\\ (!h t. P (h :: t)) ==> !l. P l
-      #|  !l. NULL l <=> l = []
-      #|  !l. NULL l <=> LENGTH l = 0
+      #|  forall P. P [] /\\ (forall h t. P (h :: t)) ==> forall l. P l
+      #|  forall l. NULL l <=> l = []
+      #|  forall l. NULL l <=> LENGTH l = 0
       #|  n<=m ==> n<= SUC m
-      #|  !f l:A list. LENGTH (FILTER f l) <= LENGTH l
+      #|  forall f l:A list. LENGTH (FILTER f l) <= LENGTH l
       #|  LENGTH:A list->num
-      #|  !P. (!l. (!l'. LENGTH l' < LENGTH l ==> P l') ==> P l)\n        ==> (!l:A list. P l)
-      #|  (!x. DELETE1 x [] = []) /\\\n   (!x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)
+      #|  forall P. (forall l. (forall l'. LENGTH l' < LENGTH l ==> P l') ==> P l)\n        ==> (forall l:A list. P l)
+      #|  (forall x. DELETE1 x [] = []) /\\\n   (forall x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)
       #|  :P
       #|  :P
       #|  :P
@@ -5674,16 +5674,16 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  !x l. ~MEM x l ==> DELETE1 x l = l
-      #|  !x l1 l2. DELETE1 x (APPEND l1 l2) =\n              if MEM x l1 then APPEND (DELETE1 x l1) l2\n                          else APPEND l1 (DELETE1 x l2)
-      #|  !P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l
+      #|  forall x l. ~MEM x l ==> DELETE1 x l = l
+      #|  forall x l1 l2. DELETE1 x (APPEND l1 l2) =\n              if MEM x l1 then APPEND (DELETE1 x l1) l2\n                          else APPEND l1 (DELETE1 x l2)
+      #|  forall P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l
       #|  SUC (PRE n)=n <=> ~(n=0)
-      #|  !l x:A. LENGTH (DELETE1 x l) =\n            if MEM x l then PRE (LENGTH l) else LENGTH l
-      #|  !h t x. MEM x (DELETE1 h t) ==> MEM x t
-      #|  !t h x. ~MEM x t ==> ~MEM x (DELETE1 h t)
-      #|  !l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)
-      #|  !P x l. P x /\\ ALL P (DELETE1 x l) ==> ALL P l
-      #|  (!x. COUNT x [] = 0) /\\\n   (!x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)
+      #|  forall l x:A. LENGTH (DELETE1 x l) =\n            if MEM x l then PRE (LENGTH l) else LENGTH l
+      #|  forall h t x. MEM x (DELETE1 h t) ==> MEM x t
+      #|  forall t h x. ~MEM x t ==> ~MEM x (DELETE1 h t)
+      #|  forall l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)
+      #|  forall P x l. P x /\\ ALL P (DELETE1 x l) ==> ALL P l
+      #|  (forall x. COUNT x [] = 0) /\\\n   (forall x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)
       #|  :P
       #|  :P
       #|  :P
@@ -5697,31 +5697,31 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  !x l. COUNT x l = LENGTH (FILTER ((=) x) l)
-      #|  !P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0
-      #|  !x l1 l2. COUNT x (APPEND l1 l2) = COUNT x l1 + COUNT x l2
+      #|  forall x l. COUNT x l = LENGTH (FILTER ((=) x) l)
+      #|  forall P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0
+      #|  forall x l1 l2. COUNT x (APPEND l1 l2) = COUNT x l1 + COUNT x l2
       #|  n<=m ==> n <= SUC m
-      #|  !x l. COUNT x l <= LENGTH l
-      #|  !x l. COUNT x l = 0 <=> ~MEM x l
-      #|  !x l. MEM x l <=> ~(COUNT x l = 0)
-      #|  !y x l. COUNT y (DELETE1 (x:A) l) =\n            if y=x /\\ MEM x l then PRE (COUNT y l) else COUNT y l
-      #|  LIST_UNIQ [] /\\\n   (!x xs. LIST_UNIQ xs /\\ ~MEM x xs ==> LIST_UNIQ (x :: xs))
+      #|  forall x l. COUNT x l <= LENGTH l
+      #|  forall x l. COUNT x l = 0 <=> ~MEM x l
+      #|  forall x l. MEM x l <=> ~(COUNT x l = 0)
+      #|  forall y x l. COUNT y (DELETE1 (x:A) l) =\n            if y=x /\\ MEM x l then PRE (COUNT y l) else COUNT y l
+      #|  LIST_UNIQ [] /\\\n   (forall x xs. LIST_UNIQ xs /\\ ~MEM x xs ==> LIST_UNIQ (x :: xs))
       #|  h :: t
-      #|  LIST_UNIQ [] /\\\n   (!x. LIST_UNIQ [x]) /\\\n   (!x xs. LIST_UNIQ (x :: xs) <=> ~MEM x xs /\\ LIST_UNIQ xs)
+      #|  LIST_UNIQ [] /\\\n   (forall x. LIST_UNIQ [x]) /\\\n   (forall x xs. LIST_UNIQ (x :: xs) <=> ~MEM x xs /\\ LIST_UNIQ xs)
       #|  LIST_UNIQ = PAIRWISE (\\x y. ~(x = y))
       #|  (p <=> q) <=> (p ==> q) /\\ (q ==> p)
       #|  x:A
       #|  h:A
-      #|  !l. LIST_UNIQ l <=> (!x:A. COUNT x l = if MEM x l then 1 else 0)
-      #|  !l x. LIST_UNIQ l ==> LIST_UNIQ (DELETE1 x l)
+      #|  forall l. LIST_UNIQ l <=> (forall x:A. COUNT x l = if MEM x l then 1 else 0)
+      #|  forall l x. LIST_UNIQ l ==> LIST_UNIQ (DELETE1 x l)
       #|  x:A
-      #|  !l x:A. ~MEM x (DELETE1 x l) /\\ LIST_UNIQ (DELETE1 x l)\n            ==> LIST_UNIQ l
-      #|  !l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         !x. ~(MEM x l /\\ MEM x m)
+      #|  forall l x:A. ~MEM x (DELETE1 x l) /\\ LIST_UNIQ (DELETE1 x l)\n            ==> LIST_UNIQ l
+      #|  forall l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         forall x. ~(MEM x l /\\ MEM x m)
       #|  LENGTH (t:A list)
-      #|  !l:A list. CARD (set_of_list l) <= LENGTH l
+      #|  forall l:A list. CARD (set_of_list l) <= LENGTH l
       #|  t:A list
-      #|  !l:A list. LIST_UNIQ l <=> CARD (set_of_list l) = LENGTH l
-      #|  !s. FINITE s ==> LIST_UNIQ(list_of_set s)
+      #|  forall l:A list. LIST_UNIQ l <=> CARD (set_of_list l) = LENGTH l
+      #|  forall s. FINITE s ==> LIST_UNIQ(list_of_set s)
       #|NULL_EQ_NIL =  |- (#!:fun(fun(list('?142976),bool),bool) (\l:list('?142976). ((#=:fun(bool,fun(bool,bool)) (#NULL:fun(list('?142976),bool) l:list('?142976))) ((#=:fun(list('?142976),fun(list('?142976),bool)) l:list('?142976)) #NIL:list('?142976)))))
       #|NULL_LENGTH =  |- (#!:fun(fun(list('?142985),bool),bool) (\l:list('?142985). ((#=:fun(bool,fun(bool,bool)) (#NULL:fun(list('?142985),bool) l:list('?142985))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('?142985),num) l:list('?142985))) (#NUMERAL:fun(num,num) #_0:num)))))
       #|LENGTH_FILTER_LE =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\f:fun('A,bool). (#!:fun(fun(list('A),bool),bool) (\l:list('A). ((#<=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) ((#FILTER:fun(fun('A,bool),fun(list('A),list('A))) f:fun('A,bool)) l:list('A)))) (#LENGTH:fun(list('A),num) l:list('A)))))))

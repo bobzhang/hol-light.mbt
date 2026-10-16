@@ -13,7 +13,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t1 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n")), @iterate.nproduct_clauses(), @iterate.finite_numseg()]))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.fact(), @iterate.numseg_clauses(), @calc_num.arith(), @iterate.nproduct_clauses()]))), t1), t2), @int.arith_tac)
-  fact_nproduct_c.set(@tactics.prove(@parser.parse_term("!n. FACT(n) = nproduct(1..n) (\\i. i)"), t3))
+  fact_nproduct_c.set(@tactics.prove(@parser.parse_term("forall n. FACT(n) = nproduct(1..n) (\\i. i)"), t3))
 }
 
 ///|
@@ -34,7 +34,7 @@ fn step_3() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("1")), @iterate.numseg_clauses()]))
   let t4 = @tactics.disj_cases_tac(@int.arith_rule(@parser.parse_term("n = 0 \\/ 1 <= n")))
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([fact_nproduct()]))), t4), t5), t6), t7), t8), @int.arith_tac)
-  fact_nproduct_alt_c.set(@tactics.prove(@parser.parse_term("!n. FACT(n) = nproduct(2..n) (\\i. i)"), t9))
+  fact_nproduct_alt_c.set(@tactics.prove(@parser.parse_term("forall n. FACT(n) = nproduct(2..n) (\\i. i)"), t9))
 }
 
 ///|
@@ -160,7 +160,7 @@ fn step_4() -> Unit raise {
   let t11 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t10 = @tactics.match_mp_tac(@arith.num_wf())
   let t98 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t10), t11), @tactics.disch_tac), t12), t13), t14), @tactics.strip_tac), t15), t16), t22), t29), t30), t37), t38), t39), t40), t47), @tactics.ants_tac), t86), @tactics.disch_tac), t90), t91), t92), t93), t94), t95), t96), t97)
-  nproduct_pairup_induct_c.set(@tactics.prove(@parser.parse_term("!f r n s. FINITE s /\\ CARD s = n /\\\n             (!x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                    (f(x) * f(y) == 1) (mod r))\n             ==> (nproduct s f == 1) (mod r)"), t98))
+  nproduct_pairup_induct_c.set(@tactics.prove(@parser.parse_term("forall f r n s. FINITE s /\\ CARD s = n /\\\n             (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                    (f(x) * f(y) == 1) (mod r))\n             ==> (nproduct s f == 1) (mod r)"), t98))
 }
 
 ///|
@@ -179,7 +179,7 @@ fn step_5() -> Unit raise {
   let t100 = @tactics.exists_tac(@parser.parse_term("CARD(s:A->bool)"))
   let t99 = @tactics.match_mp_tac(nproduct_pairup_induct())
   let t102 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t99), t100), t101)
-  nproduct_pairup_c.set(@tactics.prove(@parser.parse_term("!f r s. FINITE s /\\\n           (!x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                  (f(x) * f(y) == 1) (mod r))\n           ==> (nproduct s f == 1) (mod r)"), t102))
+  nproduct_pairup_c.set(@tactics.prove(@parser.parse_term("forall f r s. FINITE s /\\\n           (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                  (f(x) * f(y) == 1) (mod r))\n           ==> (nproduct s f == 1) (mod r)"), t102))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_6() -> Unit raise {
   let t104 = @list.List([@meson.asm_meson_tac(@list.List([@prime.prime_0()])), @tactics.all_tac])
   let t103 = @class.asm_cases_tac(@parser.parse_term("p = 0"))
   let t230 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t103), t104), t105), t106), t107), t110), t114), t117), t121), t122), t123), t124), t125), t126), t127), @tactics.strip_tac), t129), t130), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t131), t132), @tactics.conj_tac), t136), t137), t138), t139), t229)
-  wilson_c.set(@tactics.prove(@parser.parse_term("!p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)"), t230))
+  wilson_c.set(@tactics.prove(@parser.parse_term("forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)"), t230))
 }
 
 ///|
@@ -431,7 +431,7 @@ fn step_7() -> Unit raise {
   })
   let t231 = @simp.simp_tac(@list.List([wilson()]))
   let t279 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("n:num")), @tactics.disch_tac), @tactics.eq_tac), t231), t237), t238), t244), t245), t246), t248), t249), t250), t251), t257), t258), t261), t265), t269), @tactics.disch_tac), t273), t278)
-  wilson_eq_c.set(@tactics.prove(@parser.parse_term("!p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))"), t279))
+  wilson_eq_c.set(@tactics.prove(@parser.parse_term("forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))"), t279))
 }
 
 ///|

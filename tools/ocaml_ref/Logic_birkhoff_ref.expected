@@ -10336,9 +10336,9 @@ Warning: inventing type variables
 0..0..1..2..5..8..15..26..47..88..133..202..290..389..514..661..823..1042..1296..1578..1924..2318..2746..3216..3760..4380..5153..6042..solved at 6559
 0..0..1..2..7..16..solved at 22
 Logic/birkhoff quotations (226):
-  !l1 l2. ALL2 P l1 l2 <=> ALL2 (\\x y. P y x) l2 l1
-  !f l1 l2. ALL2 (\\x y. f x = f y) l1 l2 ==> (MAP f l1 = MAP f l2)
-  !i s t. formsubst i (s === t) = (termsubst i s === termsubst i t)
+  forall l1 l2. ALL2 P l1 l2 <=> ALL2 (\\x y. P y x) l2 l1
+  forall f l1 l2. ALL2 (\\x y. f x = f y) l1 l2 ==> (MAP f l1 = MAP f l2)
+  forall i s t. formsubst i (s === t) = (termsubst i s === termsubst i t)
   terms UNIV = UNIV
   Atom p [Fn f (REPLICATE n (V x))]
   functions_form(Atom p [Fn f (REPLICATE n (V x))])
@@ -10351,21 +10351,21 @@ Logic/birkhoff quotations (226):
   p:num
   predicates UNIV = UNIV
   language UNIV = UNIV,UNIV
-  !s t u v. ((s === t) = (u === v)) <=> (s = u) /\\ (t = v)
-  !s t u v. ((s === t) = (u === v)) <=> (u = s) /\\ (v = t)
-  (!s t. s === t IN E ==> E |- s === t) /\\\n   (!t. E |- t === t) /\\\n   (!s t. E |- s === t ==> E |- t === s) /\\\n   (!s t u. E |- s === t /\\ E |- t === u ==> E |- s === u) /\\\n   (!f a b. ALL2 (\\l r. E |- l === r) a b ==> E |- Fn f a === Fn f b) /\\\n   (!s t i. E |- s === t ==> E |- formsubst i (s === t))
-  (!s t i. s === t IN E ==> E |-- formsubst i (s === t)) /\\\n    (!s t i. s === t IN E ==> E |-- formsubst i (t === s)) /\\\n    (!t. E |-- t === t) /\\\n    (!s t u. E |-- s === t /\\ E |-- t === u ==> E |-- s === u) /\\\n    (!f a b. ALL2 (\\l r. E |-- l === r) a b ==> E |-- Fn f a === Fn f b)
-  !E a. E |-- a ==> !s t. (a = (s === t)) ==> E |-- t === s
-  !E a. E |-- a\n         ==> !i s t. (a = (s === t)) ==> (E |-- formsubst i (s === t))
-  (!a. E |- a ==> !s t. (a = (s === t)) ==> E |-- s === t) /\\\n    (!a. E |-- a ==> !s t. (a = (s === t)) ==> E |- s === t)
-  !E s t. (E |-- s === t) <=> (E |- s === t)
-  (!s t i. s === t IN E ==> E |--_axiom formsubst i (s === t)) /\\\n    (!s t i. s === t IN E ==> E |--_axiom formsubst i (t === s))
-  (!s t. E |--_axiom s === t ==> E |--_achain s === t) /\\\n    (!s t. E |--_cong s === t ==> E |--_cchain s === t) /\\\n    (!s t u. E |--_axiom s === t /\\ E |--- t === u ==> E |--_achain s === u) /\\\n    (!s t u. E |--_cong s === t /\\ E |--_achain t === u\n             ==> E |--_cchain s === u) /\\\n    (!f a b. ALL2 (\\l r. E |--- l === r) a b\n             ==> E |--_cong Fn f a === Fn f b) /\\\n    (!s t. (s = t) \\/ E |--_achain s === t \\/ E |--_cchain s === t\n           ==> E |--- s === t)
+  forall s t u v. ((s === t) = (u === v)) <=> (s = u) /\\ (t = v)
+  forall s t u v. ((s === t) = (u === v)) <=> (u = s) /\\ (v = t)
+  (forall s t. s === t IN E ==> E |- s === t) /\\\n   (forall t. E |- t === t) /\\\n   (forall s t. E |- s === t ==> E |- t === s) /\\\n   (forall s t u. E |- s === t /\\ E |- t === u ==> E |- s === u) /\\\n   (forall f a b. ALL2 (\\l r. E |- l === r) a b ==> E |- Fn f a === Fn f b) /\\\n   (forall s t i. E |- s === t ==> E |- formsubst i (s === t))
+  (forall s t i. s === t IN E ==> E |-- formsubst i (s === t)) /\\\n    (forall s t i. s === t IN E ==> E |-- formsubst i (t === s)) /\\\n    (forall t. E |-- t === t) /\\\n    (forall s t u. E |-- s === t /\\ E |-- t === u ==> E |-- s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |-- l === r) a b ==> E |-- Fn f a === Fn f b)
+  forall E a. E |-- a ==> forall s t. (a = (s === t)) ==> E |-- t === s
+  forall E a. E |-- a\n         ==> forall i s t. (a = (s === t)) ==> (E |-- formsubst i (s === t))
+  (forall a. E |- a ==> forall s t. (a = (s === t)) ==> E |-- s === t) /\\\n    (forall a. E |-- a ==> forall s t. (a = (s === t)) ==> E |- s === t)
+  forall E s t. (E |-- s === t) <=> (E |- s === t)
+  (forall s t i. s === t IN E ==> E |--_axiom formsubst i (s === t)) /\\\n    (forall s t i. s === t IN E ==> E |--_axiom formsubst i (t === s))
+  (forall s t. E |--_axiom s === t ==> E |--_achain s === t) /\\\n    (forall s t. E |--_cong s === t ==> E |--_cchain s === t) /\\\n    (forall s t u. E |--_axiom s === t /\\ E |--- t === u ==> E |--_achain s === u) /\\\n    (forall s t u. E |--_cong s === t /\\ E |--_achain t === u\n             ==> E |--_cchain s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |--- l === r) a b\n             ==> E |--_cong Fn f a === Fn f b) /\\\n    (forall s t. (s = t) \\/ E |--_achain s === t \\/ E |--_cchain s === t\n           ==> E |--- s === t)
   a:term list
   b:term list
   c:term list
   ALL2 (\\l r. E |--- l === r) b c
-  ALL2 (\\l r. !u. E |--- r === u ==> E |--- l === u) a b
+  ALL2 (\\l r. forall u. E |--- r === u ==> E |--- l === u) a b
   Fn f c
   a /\\ b /\\ c ==> d <=> a ==> b ==> c ==> d
   c:term list
@@ -10374,42 +10374,42 @@ Logic/birkhoff quotations (226):
   b:term list
   c:term list
   ALL2 (\\l r. E |--- l === r) b c
-  ALL2 (\\l r. !u. E |--- r === u ==> E |--- l === u) a b
+  ALL2 (\\l r. forall u. E |--- r === u ==> E |--- l === u) a b
   a /\\ b /\\ c ==> d <=> a ==> b ==> c ==> d
   c:term list
   a /\\ b <=> ~(a ==> ~b)
   Fn f b
   a /\\ b <=> ~(a ==> ~b)
   u:term
-  !E a. E |-- a\n         ==> E |-- a /\\\n             E |--- a /\\\n             !u s t. (a = (s === t))\n                     ==> E |--- t === u ==> E |--- s === u
-  !a. E |--_axiom a ==> !s t. (a = (s === t)) ==> E |- s === t
-  (!a. E |--_achain a ==> !s t. (a = (s === t)) ==> E |- s === t) /\\\n    (!a. E |--_cchain a ==> !s t. (a = (s === t)) ==> E |- s === t) /\\\n    (!a. E |--_cong a ==> !s t. (a = (s === t)) ==> E |- s === t) /\\\n    (!a. E |--- a ==> !s t. (a = (s === t)) ==> E |- s === t)
-  !E s t. (E |--- s === t) <=> (E |- s === t)
+  forall E a. E |-- a\n         ==> E |-- a /\\\n             E |--- a /\\\n             forall u s t. (a = (s === t))\n                     ==> E |--- t === u ==> E |--- s === u
+  forall a. E |--_axiom a ==> forall s t. (a = (s === t)) ==> E |- s === t
+  (forall a. E |--_achain a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--_cchain a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--_cong a ==> forall s t. (a = (s === t)) ==> E |- s === t) /\\\n    (forall a. E |--- a ==> forall s t. (a = (s === t)) ==> E |- s === t)
+  forall E s t. (E |--- s === t) <=> (E |- s === t)
   (subterms (V x) = {(V x)}) /\\\n   (subterms (Fn f args) =\n        (Fn f args) INSERT (LIST_UNION (MAP subterms args)))
   subtermsa (Atom P args) = LIST_UNION (MAP subterms args)
   subtermss E = UNIONS {subtermsa p | p IN E}
-  !t. t IN subterms t
+  forall t. t IN subterms t
   esubterms E s t =\n        subtermss ((s === t) INSERT {formsubst i p |i,p| p IN E})
-  (!s t. E |--_axiom s === t ==> E |--_sachain s === t) /\\\n    (!s t. E |--_scong s === t ==> E |--_scchain s === t) /\\\n    (!s t u. E |--_axiom s === t /\\ E |---- t === u /\\ t IN esubterms E s u\n             ==> E |--_sachain s === u) /\\\n    (!s t u. E |--_scong s === t /\\ E |--_sachain t === u /\\ t IN esubterms E s u\n             ==> E |--_scchain s === u) /\\\n    (!f a b. ALL2 (\\l r. E |---- l === r) a b\n             ==> E |--_scong Fn f a === Fn f b) /\\\n    (!s t. (s = t) \\/ E |--_sachain s === t \\/ E |--_scchain s === t\n           ==> E |---- s === t)
+  (forall s t. E |--_axiom s === t ==> E |--_sachain s === t) /\\\n    (forall s t. E |--_scong s === t ==> E |--_scchain s === t) /\\\n    (forall s t u. E |--_axiom s === t /\\ E |---- t === u /\\ t IN esubterms E s u\n             ==> E |--_sachain s === u) /\\\n    (forall s t u. E |--_scong s === t /\\ E |--_sachain t === u /\\ t IN esubterms E s u\n             ==> E |--_scchain s === u) /\\\n    (forall f a b. ALL2 (\\l r. E |---- l === r) a b\n             ==> E |--_scong Fn f a === Fn f b) /\\\n    (forall s t. (s = t) \\/ E |--_sachain s === t \\/ E |--_scchain s === t\n           ==> E |---- s === t)
   s === t
   subterms s UNION subterms t
-  !u. u IN subterms s ==> u IN esubterms E s t
+  forall u. u IN subterms s ==> u IN esubterms E s t
   s === t
   subterms s UNION subterms t
-  !u. u IN subterms t ==> u IN esubterms E s t
+  forall u. u IN subterms t ==> u IN esubterms E s t
   subtermsa (formsubst i (s === t))
-  !a. E |--_axiom a\n       ==> !s t. (a = (s === t))\n                 ==> !u v. s IN esubterms E u v
-  !a. E |--_sachain a\n       ==> !s t. (a = (s === t))\n                 ==> !u v. s IN esubterms E u v
+  forall a. E |--_axiom a\n       ==> forall s t. (a = (s === t))\n                 ==> forall u v. s IN esubterms E u v
+  forall a. E |--_sachain a\n       ==> forall s t. (a = (s === t))\n                 ==> forall u v. s IN esubterms E u v
   t:term
   subtermsa (formsubst i (v === w))
   i:num->term
   w:term
   v:term
   t:term
-  (!a. E |--_achain a ==> !s t. (a = (s === t)) ==> E |--_sachain s === t) /\\\n   (!a. E |--_cchain a ==> !s t. (a = (s === t)) ==> E |--_scchain s === t) /\\\n   (!a. E |--_cong a ==> !s t. (a = (s === t)) ==> E |--_scong s === t) /\\\n   (!a. E |--- a ==> !s t. (a = (s === t)) ==> E |---- s === t)
-  (!a. E |--_sachain a ==> !s t. (a = (s === t)) ==> E |--_achain s === t) /\\\n    (!a. E |--_scchain a ==> !s t. (a = (s === t)) ==> E |--_cchain s === t) /\\\n    (!a. E |--_scong a ==> !s t. (a = (s === t)) ==> E |--_cong s === t) /\\\n    (!a. E |---- a ==> !s t. (a = (s === t)) ==> E |--- s === t)
-  !E s t. (E |--- s === t) <=> (E |---- s === t)
-  !E s t. (E |--- s === t) <=> (E |- s === t)
+  (forall a. E |--_achain a ==> forall s t. (a = (s === t)) ==> E |--_sachain s === t) /\\\n   (forall a. E |--_cchain a ==> forall s t. (a = (s === t)) ==> E |--_scchain s === t) /\\\n   (forall a. E |--_cong a ==> forall s t. (a = (s === t)) ==> E |--_scong s === t) /\\\n   (forall a. E |--- a ==> forall s t. (a = (s === t)) ==> E |---- s === t)
+  (forall a. E |--_sachain a ==> forall s t. (a = (s === t)) ==> E |--_achain s === t) /\\\n    (forall a. E |--_scchain a ==> forall s t. (a = (s === t)) ==> E |--_cchain s === t) /\\\n    (forall a. E |--_scong a ==> forall s t. (a = (s === t)) ==> E |--_cong s === t) /\\\n    (forall a. E |---- a ==> forall s t. (a = (s === t)) ==> E |--- s === t)
+  forall E s t. (E |--- s === t) <=> (E |---- s === t)
+  forall E s t. (E |--- s === t) <=> (E |- s === t)
   Eqclause_Func (f,n) =\n      set_of_list\n        (CONS (Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))\n              (MAP (\\(s,t). Not(s === t)) (Varpairs n)))
   Eqclause_Pred (p,n) =\n       set_of_list\n        (CONS (Atom p (MAP SND (Varpairs n)))\n              (CONS (Not(Atom p (MAP FST (Varpairs n))))\n                    (MAP (\\(s,t). Not(s === t)) (Varpairs n))))
   Eqclauses L =\n     {(V 0 === V 0)} INSERT\n     {(Not(V 0 === V 1)), (Not(V 2 === V 1)), (V 0 === V 2)} INSERT\n     ({Eqclause_Func fa | fa IN FST L} UNION\n      {Eqclause_Pred pa | pa IN SND L})
@@ -10419,7 +10419,7 @@ Logic/birkhoff quotations (226):
   (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
   v:num->A
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  !M f n. ~(Dom M :A->bool = {})\n           ==> (M satisfies {(interp(Eqclause_Func (f,n)))} <=>\n                M satisfies {(Eqaxiom_Func (f,n))})
+  forall M f n. ~(Dom M :A->bool = {})\n           ==> (M satisfies {(interp(Eqclause_Func (f,n)))} <=>\n                M satisfies {(Eqaxiom_Func (f,n))})
   Eqaxiom_Pred_imp (p,n) =\n        uclose\n         (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True\n          --> Atom p (MAP FST (Varpairs n))\n              --> Atom p (MAP SND (Varpairs n)))
   a INSERT s = {a} UNION s
   n:num
@@ -10428,7 +10428,7 @@ Logic/birkhoff quotations (226):
   n:num
   n:num
   w:num->A
-  !v:num->A x y. valuation M v\n                   ==> (holds M v (V x === V y) <=> holds M v (V y === V x))
+  forall v:num->A x y. valuation M v\n                   ==> (holds M v (V x === V y) <=> holds M v (V y === V x))
   a /\\ (x <=> b) /\\ (y <=> c) /\\ (d <=> e)\n    ==> x ==> y ==> (a ==> b ==> c ==> d) ==> e
   holds M (v:num->A)\n             (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True)
   Pred M p (MAP (termval M (v:num->A)) (MAP SND (Varpairs n)))
@@ -10440,30 +10440,30 @@ Logic/birkhoff quotations (226):
   (a ==> (b <=> c)) ==> (a ==> b <=> a ==> c)
   v:num->A
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  !v:num->A. valuation M v ==> holds M v (Eqaxiom_Pred_imp(p,n))
-  !p n. (!v:num->A. valuation M v\n                      ==> holds M v (interp(Eqclause_Pred(p,n)))) <=>\n          (!v:num->A. valuation M v\n                      ==> holds M v (Eqaxiom_Pred(p,n)))
+  forall v:num->A. valuation M v ==> holds M v (Eqaxiom_Pred_imp(p,n))
+  forall p n. (forall v:num->A. valuation M v\n                      ==> holds M v (interp(Eqclause_Pred(p,n)))) <=>\n          (forall v:num->A. valuation M v\n                      ==> holds M v (Eqaxiom_Pred(p,n)))
   (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
   (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
   (a' <=> a) /\\ (a ==> (b' <=> b)) ==> (a' /\\ b' <=> a /\\ b)
-  !M L. ~(Dom M :A->bool = {})\n         ==> (M satisfies (IMAGE interp (Eqclauses L)) <=>\n              M satisfies (Eqaxioms L))
+  forall M L. ~(Dom M :A->bool = {})\n         ==> (M satisfies (IMAGE interp (Eqclauses L)) <=>\n              M satisfies (Eqaxioms L))
   \\n. if n = 2 then (w:num->A)(x) else w(y)
   \\n. if n = 2 then (w:num->A)(y) else w(x)
-  !n. functions(set_of_list (MAP (\\(s,t). Not(s === t)) (Varpairs n))) = {}
+  forall n. functions(set_of_list (MAP (\\(s,t). Not(s === t)) (Varpairs n))) = {}
   n:num
   n:num
   (LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = {}) /\\\n    (LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = {})
-  (!f n. functions_term(Fn f (MAP FST (Varpairs n))) = {(f,n)}) /\\\n   (!f n. functions_term(Fn f (MAP SND (Varpairs n))) = {(f,n)})
+  (forall f n. functions_term(Fn f (MAP FST (Varpairs n))) = {(f,n)}) /\\\n   (forall f n. functions_term(Fn f (MAP SND (Varpairs n))) = {(f,n)})
   n:num
   n:num
   (LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = {}) /\\\n    (LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = {})
-  (!p n. functions_form(Atom p (MAP FST (Varpairs n))) = {}) /\\\n   (!p n. functions_form(Atom p (MAP SND (Varpairs n))) = {})
+  (forall p n. functions_form(Atom p (MAP FST (Varpairs n))) = {}) /\\\n   (forall p n. functions_form(Atom p (MAP SND (Varpairs n))) = {})
   n:num
   f:num
-  !fn. functions_form(interp(Eqclause_Func fn)) = {fn}
+  forall fn. functions_form(interp(Eqclause_Func fn)) = {fn}
   n:num
   p:num
-  !pn. functions_form(interp(Eqclause_Pred pn)) = {}
+  forall pn. functions_form(interp(Eqclause_Pred pn)) = {}
   a /\\ b /\\ c <=> a /\\ ~(b ==> ~c)
   (a /\\ b) /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
   a /\\ b <=> ~(a ==> ~b)
@@ -10477,7 +10477,7 @@ Logic/birkhoff quotations (226):
   functions(p INSERT s) = functions(Not(uclose p) INSERT s)
   predicates(p INSERT s) = predicates(Not(uclose p) INSERT s)
   language(p INSERT s) = language (Not(uclose p) INSERT s)
-  (!m. p m /\\ q m /\\ r m /\\ s m ==> t m) <=>\n  ~(?m. p m /\\ q m /\\ r m /\\ s m /\\ ~(t m))
+  (forall m. p m /\\ q m /\\ r m /\\ s m ==> t m) <=>\n  ~(?m. p m /\\ q m /\\ r m /\\ s m /\\ ~(t m))
   (x INSERT s) UNION t = x INSERT (s UNION t)
   (a ==> c) /\\ (b ==> ~c) /\\ (d ==> ~c)\n      ==> ((a \\/ b \\/ d) /\\ c <=> a)
   {p | p IN\n     Atom f (MAP SND (Varpairs n)) INSERT\n       Not (Atom f (MAP FST (Varpairs n))) INSERT\n       set_of_list (MAP (\\(s,t). Not (s === t)) (Varpairs n)) /\\\n       positive p} =\n    {(Atom f (MAP SND (Varpairs n)))}
@@ -10487,7 +10487,7 @@ Logic/birkhoff quotations (226):
   f:num
   {p | p IN {(Not (V 0 === V 1)), (Not (V 2 === V 1)), (V 0 === V 2)} /\\\n           positive p} = {(V 0 === V 2)}
   {p | (p = V 0 === V 0) /\\ positive p} = {(V 0 === V 0)}
-  !L cl. cl IN Eqclauses L ==> definite cl
+  forall L cl. cl IN Eqclauses L ==> definite cl
   ~(p /\\ ~p)
   (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
   IMAGE (~~) (cl DELETE\n        (Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))) =\n     {(s === t) | MEM (s,t) (Varpairs n)}
@@ -10531,7 +10531,7 @@ Logic/birkhoff quotations (226):
   i:num->term
   cl:form->bool
   s === t
-  !n p. ibackchain\n                ({{e} | e IN E} UNION Eqclauses (language ((s === t) INSERT E)))\n                n p\n          ==> !s t. (p = (s === t)) ==> E |- s === t
+  forall n p. ibackchain\n                ({{e} | e IN E} UNION Eqclauses (language ((s === t) INSERT E)))\n                n p\n          ==> forall s t. (p = (s === t)) ==> E |- s === t
   {p | (p = u === v) /\\ positive p} = {(u === v)}
   v:term
   u:term
@@ -10557,11 +10557,11 @@ Logic/birkhoff quotations (226):
   a /\\ b /\\ c <=> a /\\ b /\\ (b ==> c)
   a /\\ b /\\ c /\\ (b ==> d) <=> a /\\ b /\\ c /\\ d
   a /\\ b /\\ c /\\ d <=> a /\\ b /\\ c /\\ (b ==> d)
-  !E s t. (!e. e IN E ==> ?s t. e = (s === t)) /\\\n           (!M. interpretation (language((s === t) INSERT E)) M /\\\n                ~(Dom M :term->bool = {}) /\\\n                normal (functions ((s === t) INSERT E)) M /\\\n                M satisfies E\n                ==> M satisfies {(s === t)})\n           ==> E |- s === t
+  forall E s t. (forall e. e IN E ==> ?s t. e = (s === t)) /\\\n           (forall M. interpretation (language((s === t) INSERT E)) M /\\\n                ~(Dom M :term->bool = {}) /\\\n                normal (functions ((s === t) INSERT E)) M /\\\n                M satisfies E\n                ==> M satisfies {(s === t)})\n           ==> E |- s === t
   UNIV:(num#num)->bool
-  ALL2 (\\l r. !v:num->A. valuation M v\n                             ==> (termval M v l = termval M v r)) a b
-  !M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n        (!v p. valuation M v /\\ p IN E ==> holds M v p)\n        ==> !a. E |- a\n                ==> !s t. (a = (s === t))\n                          ==> !v. valuation M v ==> holds M v (s === t)
-  !E s t. E |- s === t\n           ==> !M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n                        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n                        M satisfies E\n                        ==> M satisfies {(s === t)}
+  ALL2 (\\l r. forall v:num->A. valuation M v\n                             ==> (termval M v l = termval M v r)) a b
+  forall M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n        (forall v p. valuation M v /\\ p IN E ==> holds M v p)\n        ==> forall a. E |- a\n                ==> forall s t. (a = (s === t))\n                          ==> forall v. valuation M v ==> holds M v (s === t)
+  forall E s t. E |- s === t\n           ==> forall M:(A->bool)#(num->((A)list->A))#(num->((A)list->bool)).\n                        normal UNIV (M) /\\ interpretation (UNIV,UNIV) (M) /\\\n                        M satisfies E\n                        ==> M satisfies {(s === t)}
 ALL2_SYM =  |- (#!:fun(fun(list('?244206),bool),bool) (\l1:list('?244206). (#!:fun(fun(list('?244205),bool),bool) (\l2:list('?244205). ((#=:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('?244206,fun('?244205,bool)),fun(list('?244206),fun(list('?244205),bool))) P:fun('?244206,fun('?244205,bool))) l1:list('?244206)) l2:list('?244205))) (((#ALL2:fun(fun('?244205,fun('?244206,bool)),fun(list('?244205),fun(list('?244206),bool))) (\x:'?244205. (\y:'?244206. ((P:fun('?244206,fun('?244205,bool)) y:'?244206) x:'?244205)))) l2:list('?244205)) l1:list('?244206)))))))
 MAP_EQ_ALL2 =  |- (#!:fun(fun(fun('?244235,'?244246),bool),bool) (\f:fun('?244235,'?244246). (#!:fun(fun(list('?244235),bool),bool) (\l1:list('?244235). (#!:fun(fun(list('?244235),bool),bool) (\l2:list('?244235). ((#==>:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('?244235,fun('?244235,bool)),fun(list('?244235),fun(list('?244235),bool))) (\x:'?244235. (\y:'?244235. ((#=:fun('?244246,fun('?244246,bool)) (f:fun('?244235,'?244246) x:'?244235)) (f:fun('?244235,'?244246) y:'?244235))))) l1:list('?244235)) l2:list('?244235))) ((#=:fun(list('?244246),fun(list('?244246),bool)) ((#MAP:fun(fun('?244235,'?244246),fun(list('?244235),list('?244246))) f:fun('?244235,'?244246)) l1:list('?244235))) ((#MAP:fun(fun('?244235,'?244246),fun(list('?244235),list('?244246))) f:fun('?244235,'?244246)) l2:list('?244235))))))))))
 FORMSUBST_EQ =  |- (#!:fun(fun(fun(num,term),bool),bool) (\i:fun(num,term). (#!:fun(fun(term,bool),bool) (\s:term. (#!:fun(fun(term,bool),bool) (\t:term. ((#=:fun(form,fun(form,bool)) ((#formsubst:fun(fun(num,term),fun(form,form)) i:fun(num,term)) ((#===:fun(term,fun(term,form)) s:term) t:term))) ((#===:fun(term,fun(term,form)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) s:term)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) t:term)))))))))

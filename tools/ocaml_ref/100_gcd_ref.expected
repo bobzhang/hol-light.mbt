@@ -12604,9 +12604,9 @@ Warning: inventing type variables
   n = 0
   m = 0
   m + n
-  !m n d. d divides egcd(m,n) <=> d divides m /\\ d divides n
-  !m n. egcd(m,n) = gcd(m,n)
-  !a b. (egcd (a,b) divides a /\\ egcd (a,b) divides b) /\\\n         (!e. e divides a /\\ e divides b ==> e divides egcd (a,b))
+  forall m n d. d divides egcd(m,n) <=> d divides m /\\ d divides n
+  forall m n. egcd(m,n) = gcd(m,n)
+  forall a b. (egcd (a,b) divides a /\\ egcd (a,b) divides b) /\\\n         (forall e. e divides a /\\ e divides b ==> e divides egcd (a,b))
 egcd =  |- ((#=:fun(num,fun(num,bool)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) n:num) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) m:num) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) ((#-:fun(num,fun(num,num)) n:num) m:num)))) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) ((#-:fun(num,fun(num,num)) m:num) n:num)) n:num))))))
 EGCD_INVARIANT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\d:num. ((#=:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) d:num) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) d:num) m:num)) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)))))))))
 EGCD_GCD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))))))

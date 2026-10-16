@@ -4,7 +4,7 @@
 ///|
 /// near_ring_axioms
 fn step_1() -> Unit raise {
-  near_ring_axioms_c.set(@parser.parse_term("(!x. 0 + x = x) /\\\n   (!x. neg x + x = 0) /\\\n   (!x y z. (x + y) + z = x + y + z) /\\\n   (!x y z. (x * y) * z = x * y * z) /\\\n   (!x y z. (x + y) * z = (x * z) + (y * z))"))
+  near_ring_axioms_c.set(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))"))
 }
 
 ///|
@@ -423,7 +423,7 @@ pub fn complete_equations(x113 : @list.List[@kernel.Term], x114 : @list.List[@ke
 ///|
 /// Tutorial/Custom_inference_rules.ml:136
 fn step_2() -> Unit raise {
-  let t118 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("!a b. i(a) * a * b = b")))])
+  let t118 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b. i(a) * a * b = b")))])
   let t116 = @parser.parse_term("i:num->num")
   let t117 = @parser.parse_term("( * ):num->num->num")
   ignore(complete_equations(@list.List([@parser.parse_term("1"), t117, t116]), t118))
@@ -440,7 +440,7 @@ fn step_3() -> Unit raise {
 ///|
 /// Tutorial/Custom_inference_rules.ml:143
 fn step_4() -> Unit raise {
-  let eqs = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(!x. 1 * x = x) /\\ (!x. i(x) * x = 1) /\\\n   (!x y z. (x * y) * z = x * y * z)"))))
+  let eqs = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 1 * x = x) /\\ (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)"))))
   let t122 = @parser.parse_term("i:num->num")
   let t123 = @parser.parse_term("( * ):num->num->num")
   ignore(@lib.map(fn(x121 : @kernel.Thm) -> @kernel.Term raise {
@@ -468,7 +468,7 @@ pub fn complete_tac(x124 : @list.List[@kernel.Term], x125 : @kernel.Thm) -> @tac
 ///|
 /// Tutorial/Custom_inference_rules.ml:153
 fn step_5() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(!x. 1 * x = x) /\\\n   (!x. i(x) * x = 1) /\\\n   (!x y z. (x * y) * z = x * y * z)\n   ==> !x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
+  ignore(@tactics.g(@parser.parse_term("(forall x. 1 * x = x) /\\\n   (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)\n   ==> forall x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn step_7() -> Unit raise {
 ///|
 /// Tutorial/Custom_inference_rules.ml:161
 fn step_8() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(!x. 0 + x = x) /\\\n     (!x. neg x + x = 0) /\\\n     (!x y z. (x + y) + z = x + y + z) /\\\n     (!x y z. (x * y) * z = x * y * z) /\\\n     (!x y z. (x + y) * z = (x * z) + (y * z))\n     ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n          a + b)")))
+  ignore(@tactics.g(@parser.parse_term("(forall x. 0 + x = x) /\\\n     (forall x. neg x + x = 0) /\\\n     (forall x y z. (x + y) + z = x + y + z) /\\\n     (forall x y z. (x * y) * z = x * y * z) /\\\n     (forall x y z. (x + y) * z = (x * z) + (y * z))\n     ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n          a + b)")))
 }
 
 ///|

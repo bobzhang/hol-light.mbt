@@ -11081,27 +11081,27 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  num_of_int(k - lo)
       #|  k:int
       #|  &(num_of_int(hi - lo)) = hi - lo
-      #|  !lo hi:int. lo <= hi\n               ==> {k:int | lo <= k /\\ k <= hi} =\n                   IMAGE (\\j. lo + &j) (0..num_of_int(hi - lo))
+      #|  forall lo hi:int. lo <= hi\n               ==> {k:int | lo <= k /\\ k <= hi} =\n                   IMAGE (\\j. lo + &j) (0..num_of_int(hi - lo))
       #|  &(num_of_int(hi - lo + &1)):int = hi - lo + &1
       #|  &(num_of_int(hi - lo)):int = hi - lo
       #|  CARD(IMAGE (\\j. lo + &j) (0..num_of_int(hi - lo))) =\n                CARD(0..num_of_int(hi - lo))
-      #|  !lo hi:int. lo <= hi ==> CARD {k:int | lo <= k /\\\n  k <= hi} = num_of_int(hi - lo + &1)
-      #|  !lo hi:int. lo <= hi\n               ==> CARD {k:int | lo <= k /\\ k <= hi}\n                   <= num_of_int(hi - lo + &1)
+      #|  forall lo hi:int. lo <= hi ==> CARD {k:int | lo <= k /\\\n  k <= hi} = num_of_int(hi - lo + &1)
+      #|  forall lo hi:int. lo <= hi\n               ==> CARD {k:int | lo <= k /\\ k <= hi}\n                   <= num_of_int(hi - lo + &1)
       #|  k * q:int
       #|  (k:int) <= &0 \\/ &0 < k
-      #|  !k q B:int. &1 <= q /\\ k * q <= B /\\ &0 <= B ==> k <= B
+      #|  forall k q B:int. &1 <= q /\\ k * q <= B /\\ &0 <= B ==> k <= B
       #|  --C:int
       #|  q:int
       #|  --k:int
-      #|  !k q C:int. &1 <= q /\\ C <= k * q /\\ C <= &0 ==> C <= k
+      #|  forall k q C:int. &1 <= q /\\ C <= k * q /\\ C <= &0 ==> C <= k
       #|  s:int->bool = {}
-      #|  !s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?M:int. M IN s /\\ (!x. x IN s ==> x <= M)
+      #|  forall s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?M:int. M IN s /\\ (forall x. x IN s ==> x <= M)
       #|  s:int->bool = {}
-      #|  !s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?N:int. N IN s /\\ (!x. x IN s ==> N <= x)
+      #|  forall s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?N:int. N IN s /\\ (forall x. x IN s ==> N <= x)
       #|  &0:int
       #|  q:int
       #|  (a - b):int
-      #|  !a b q:int. &1 <= q /\\ a * q <= b * q ==> a <= b
+      #|  forall a b q:int. &1 <= q /\\ a * q <= b * q ==> a <= b
       #|  z:int <= M
       #|  z - N:int = q * k
       #|  ((M - N) div q) * q = M - N
@@ -11114,18 +11114,18 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (q:int) divides (z - r)
       #|  (q:int) divides (z - N)
       #|  z:int
-      #|  !S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (!x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r)\n      ==> S SUBSET IMAGE (\\k:int. N + k * q) {k:int | &0 <= k /\\\n       k <= (M - N) div q}
+      #|  forall S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (forall x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r)\n      ==> S SUBSET IMAGE (\\k:int. N + k * q) {k:int | &0 <= k /\\\n       k <= (M - N) div q}
       #|  z:int
       #|  z:int
       #|  z:int
       #|  q * ((M - N) div q) = M - N
       #|  &(num_of_int((M - N) div q - &0 + &1)) = (M - N) div q + &1
       #|  &0 <= (M - N) div q
-      #|  !q M N A:int. &1 <= q /\\ q divides (M - N) /\\ N <= M /\\ M - N <= &2 * A /\\\n  &0 <= A\n                 ==> q * &(num_of_int((M - N) div q - &0 + &1)) <= &2 * A + q
+      #|  forall q M N A:int. &1 <= q /\\ q divides (M - N) /\\ N <= M /\\ M - N <= &2 * A /\\\n  &0 <= A\n                 ==> q * &(num_of_int((M - N) div q - &0 + &1)) <= &2 * A + q
       #|  r:int
       #|  A:int
       #|  CARD(IMAGE (\\k. N + k * q) {k | &0 <= k /\\\n   k <= (M - N) div q})
-      #|  !S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (!x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r) /\\\n      FINITE S\n      ==> q * &(CARD S) <= q * &(CARD {k:int | &0 <= k /\\\n       k <= (M - N) div q})
+      #|  forall S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (forall x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r) /\\\n      FINITE S\n      ==> q * &(CARD S) <= q * &(CARD {k:int | &0 <= k /\\\n       k <= (M - N) div q})
       #|  &1 <= (q:int) ==> &0 <= q
       #|  q * &(num_of_int((M - N) div q - &0 + &1))
       #|  CARD {k | &0 <= k /\\ k <= (M - N) div q} <=\n                  num_of_int((M - N) div q - &0 + &1)
@@ -11146,14 +11146,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  {z:int | --A <= z /\\ z <= A}
       #|  FINITE(S:int->bool)
       #|  S = {z:int | abs z <= A /\\ q divides (z - r)}
-      #|  !A q r:int. &0 <= A /\\ &1 <= q\n               ==> q * &(CARD {z:int | abs z <= A /\\\n                q divides (z - r)}) <= &2 * A + q
-      #|  !a1 a2 d:int. coprime(a1,a2) /\\ a1 divides (a2 * d) ==> a1 divides d
+      #|  forall A q r:int. &0 <= A /\\ &1 <= q\n               ==> q * &(CARD {z:int | abs z <= A /\\\n                q divides (z - r)}) <= &2 * A + q
+      #|  forall a1 a2 d:int. coprime(a1,a2) /\\ a1 divides (a2 * d) ==> a1 divides d
       #|  lincount2 a1 a2 m A =\n    CARD {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\ abs z2 <= A}
       #|  (a1:int) divides (a1 * x)
       #|  (a2:int) * (z2 - z2_0) = a1 * (z1_0 - z1)
       #|  a2:int
       #|  z2:int
-      #|  !a1 a2 m A z2_0 z1_0:int.\n      coprime(a1,a2) /\\ a1 * z1_0 + a2 * z2_0 = m\n      ==> {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\ abs z2 <= A}\n          SUBSET {z:int | abs z <= A /\\ a1 divides (z - z2_0)}
+      #|  forall a1 a2 m A z2_0 z1_0:int.\n      coprime(a1,a2) /\\ a1 * z1_0 + a2 * z2_0 = m\n      ==> {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\ abs z2 <= A}\n          SUBSET {z:int | abs z <= A /\\ a1 divides (z - z2_0)}
       #|  z2_0:int
       #|  abs a1:int
       #|  A:int
@@ -11170,12 +11170,12 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  T2:int->bool = {}
       #|  &1 <= abs(a1:int)
       #|  T2 = {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\\n   abs z2 <= A}
-      #|  !a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &2 * A + abs a1
+      #|  forall a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &2 * A + abs a1
       #|  A:int
       #|  m:int
       #|  a2:int
       #|  a1:int
-      #|  !a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A /\\ abs a1 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &3 * A
+      #|  forall a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A /\\ abs a1 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &3 * A
       #|  (d:int) divides g
       #|  (d:int) divides (a:A->int) x
       #|  v:int
@@ -11186,7 +11186,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (d:int) divides (a:A->int) x /\\\n     d divides g
       #|  d:int
       #|  g:int
-      #|  !b:int. G divides b /\\ b divides c ==> G divides c
+      #|  forall b:int. G divides b /\\ b divides c ==> G divides c
       #|  i:A
       #|  gcd((a:A->int) x, g)
       #|  g:int
@@ -11196,14 +11196,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:A
       #|  (d:int) divides &0
       #|  &0:int
-      #|  !s:A->bool. FINITE s\n     ==> !a:A->int. ?g. (!i. i IN s ==> g divides a i) /\\\n                        (!d. (!i. i IN s ==> d divides a i) ==> d divides g) /\\\n                        &0 <= g
-      #|  lincount (s:A->bool) (a:A->int) (m:int) (A:int) =\n    CARD {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                     (!i. ~(i IN s) ==> z i = &0) /\\\n                     isum s (\\i. a i * z i) = m}
-      #|  setcoprime (s:A->bool) (a:A->int) <=>\n    (!d. (!i. i IN s ==> d divides a i) ==> d divides &1)
+      #|  forall s:A->bool. FINITE s\n     ==> forall a:A->int. ?g. (forall i. i IN s ==> g divides a i) /\\\n                        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides g) /\\\n                        &0 <= g
+      #|  lincount (s:A->bool) (a:A->int) (m:int) (A:int) =\n    CARD {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                     (forall i. ~(i IN s) ==> z i = &0) /\\\n                     isum s (\\i. a i * z i) = m}
+      #|  setcoprime (s:A->bool) (a:A->int) <=>\n    (forall d. (forall i. i IN s ==> d divides a i) ==> d divides &1)
       #|  abs((z:A->int) i) <= A
       #|  i:A
       #|  z:A->int
-      #|  {z:A->int | (!i. i IN s ==> z i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (!i. ~(i IN s) ==> z i = &0)}
-      #|  !s:A->bool a m A. FINITE s\n    ==> FINITE {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                           (!i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m}
+      #|  {z:A->int | (forall i. i IN s ==> z i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (forall i. ~(i IN s) ==> z i = &0)}
+      #|  forall s:A->bool a m A. FINITE s\n    ==> FINITE {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m}
       #|  abs(z:int) <= A ==> --A <= z /\\ z <= A
       #|  {z:int | --A <= z /\\ z <= A}
       #|  (z:A->int) IN SS
@@ -11229,14 +11229,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  z:A->int
       #|  CARD (IMAGE (\\z:A->int. z K) SS)
       #|  z:A->int
-      #|  !z:A->int. z IN SS ==> a H * z H + a K * z K = m /\\\n                           (!i. ~(i IN {H,K}) ==> z i = &0)
-      #|  SS = {z:A->int | (!i. i IN {H,K} ==> abs(z i) <= A) /\\\n                (!i. ~(i IN {H,K}) ==> z i = &0) /\\\n                isum {H,K} (\\i. a i * z i) = m}
+      #|  forall z:A->int. z IN SS ==> a H * z H + a K * z K = m /\\\n                           (forall i. ~(i IN {H,K}) ==> z i = &0)
+      #|  SS = {z:A->int | (forall i. i IN {H,K} ==> abs(z i) <= A) /\\\n                (forall i. ~(i IN {H,K}) ==> z i = &0) /\\\n                isum {H,K} (\\i. a i * z i) = m}
       #|  abs(a (H:A)) * &(lincount2 (a H) (a K) m A)
-      #|  !H K:A a m A:int.\n     ~(H = K) /\\ ~(a H = &0) /\\ &0 <= A /\\ abs(a K) <= abs(a H) /\\\n      abs(a H) <= A /\\\n     coprime(a H, a K)\n     ==> abs(a H) * &(lincount {H,K} a m A) <= &3 * A
+      #|  forall H K:A a m A:int.\n     ~(H = K) /\\ ~(a H = &0) /\\ &0 <= A /\\ abs(a K) <= abs(a H) /\\\n      abs(a H) <= A /\\\n     coprime(a H, a K)\n     ==> abs(a H) * &(lincount {H,K} a m A) <= &3 * A
       #|  K:A
       #|  H:A
       #|  gcd((x:int),y) divides &1 ==> coprime(x,y)
-      #|  !x y:int. (!d. d divides x /\\\n  d divides y ==> d divides &1) ==> coprime(x,y)
+      #|  forall x y:int. (forall d. d divides x /\\\n  d divides y ==> d divides &1) ==> coprime(x,y)
       #|  i:A
       #|  setcoprime {H,K:A} a
       #|  d:int
@@ -11248,13 +11248,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ~(CARD(s DELETE (H:A)) = 0)
       #|  ~(s DELETE (H:A) = {})
       #|  ?K:A. ~(H = K) /\\ s = {H,K}
-      #|  !s:A->bool a m A H.\n     FINITE s /\\ CARD s = 2 /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     (!i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n     (!i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &3 * A
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  !i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
+      #|  forall s:A->bool a m A H.\n     FINITE s /\\ CARD s = 2 /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n     (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &3 * A
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
+      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
       #|  X:X->bool
       #|  FINITE {x:X | x IN X /\\ (f:X->Y) x = y}
       #|  y:Y
@@ -11262,20 +11262,20 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  X:X->bool
       #|  (\\x:X. 1)
       #|  f:X->Y
-      #|  !(f:X->Y) X c D.\n     FINITE X /\\ (!y. c * CARD {x | x IN X /\\ f x = y} <= D)\n     ==> c * CARD X <= CARD (IMAGE f X) * D
+      #|  forall(f:X->Y) X c D.\n     FINITE X /\\ (forall y. c * CARD {x | x IN X /\\ f x = y} <= D)\n     ==> c * CARD X <= CARD (IMAGE f X) * D
       #|  H:A
       #|  s:A->bool
       #|  \\i:A. a i * (z:A->int) i
-      #|  !s:A->bool a z:A->int H. FINITE s /\\ H IN s\n     ==> isum s (\\i. a i * z i) = a H * z H + isum (s DELETE H) (\\i. a i * z\n      i)
+      #|  forall s:A->bool a z:A->int H. FINITE s /\\ H IN s\n     ==> isum s (\\i. a i * z i) = a H * z H + isum (s DELETE H) (\\i. a i * z\n      i)
       #|  &1 <= A ==> &0:int <= A - --A + &1
       #|  &1 <= A ==> &0:int <= &3 * A
       #|  &1 <= A ==> --A:int <= A
-      #|  !A:int. &1 <= A ==> CARD {x:int | --A <= x /\\\n  x <= A} <= num_of_int(&3 * A)
+      #|  forall A:int. &1 <= A ==> CARD {x:int | --A <= x /\\\n  x <= A} <= num_of_int(&3 * A)
       #|  &(num_of_int(&3 * A)):int = &3 * A
       #|  --A <= (x:int) /\\ x <= A <=> abs x <= A
       #|  w:A->int
-      #|  {w:A->int | (!i. i IN t ==> abs(w i) <= A) /\\ (!i. ~(i IN t) ==> w i =\n    &0)} =\n    {w:A->int | (!i. i IN t ==> w i IN {x:int | --A <= x /\\ x <= A}) /\\\n                (!i. ~(i IN t) ==> w i = &0)}
-      #|  !t:A->bool A. FINITE t /\\ &1 <= A\n    ==> &(CARD {w:A->int | (!i. i IN t ==> abs(w i) <= A) /\\\n                           (!i. ~(i IN t) ==> w i = &0)})\n        <= (&3 * A) pow (CARD t)
+      #|  {w:A->int | (forall i. i IN t ==> abs(w i) <= A) /\\ (forall i. ~(i IN t) ==> w i =\n    &0)} =\n    {w:A->int | (forall i. i IN t ==> w i IN {x:int | --A <= x /\\ x <= A}) /\\\n                (forall i. ~(i IN t) ==> w i = &0)}
+      #|  forall t:A->bool A. FINITE t /\\ &1 <= A\n    ==> &(CARD {w:A->int | (forall i. i IN t ==> abs(w i) <= A) /\\\n                           (forall i. ~(i IN t) ==> w i = &0)})\n        <= (&3 * A) pow (CARD t)
       #|  (a:A->int) i = &0
       #|  (d:int) divides d
       #|  i:A = H
@@ -11283,10 +11283,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (a:A->int) H
       #|  setcoprime (s:A->bool) a
       #|  (a:A->int) H divides &1
-      #|  !s:A->bool a H. H IN s /\\ setcoprime s a /\\\n  (!i. i IN s DELETE H ==> a i = &0) /\\\n                   &1 <= abs(a H)\n     ==> abs(a H) = &1
+      #|  forall s:A->bool a H. H IN s /\\ setcoprime s a /\\\n  (forall i. i IN s DELETE H ==> a i = &0) /\\\n                   &1 <= abs(a H)\n     ==> abs(a H) = &1
       #|  (d:int) divides &0
       #|  --A <= (x:int) /\\ x <= A <=> abs x <= A
-      #|  {w:A->int | (!i. i IN (s DELETE H) ==> w i IN {x:int | --A <=\n       x /\\ x <= A}) /\\\n                              (!i. ~(i IN (s DELETE H)) ==> w i = &0)}
+      #|  {w:A->int | (forall i. i IN (s DELETE H) ==> w i IN {x:int | --A <=\n       x /\\ x <= A}) /\\\n                              (forall i. ~(i IN (s DELETE H)) ==> w i = &0)}
       #|  (z:A->int) IN X
       #|  (z:A->int) IN X
       #|  i:A
@@ -11308,18 +11308,18 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  a:A->int
       #|  s:A->bool
       #|  z:A->int
-      #|  !z:A->int. z IN X ==> a H * z H = m
-      #|  X = {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                          (!i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}
-      #|  !s:A->bool a m A H.\n     FINITE s /\\ H IN s /\\ abs(a H) = &1 /\\ (!i. i IN s DELETE H ==> a i = &0)\n     ==> CARD {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                          (!i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n         <= CARD {w:A->int | (!i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                             (!i. ~(i IN (s DELETE H)) ==> w i = &0)}
+      #|  forall z:A->int. z IN X ==> a H * z H = m
+      #|  X = {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}
+      #|  forall s:A->bool a m A H.\n     FINITE s /\\ H IN s /\\ abs(a H) = &1 /\\ (forall i. i IN s DELETE H ==> a i = &0)\n     ==> CARD {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n         <= CARD {w:A->int | (forall i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                             (forall i. ~(i IN (s DELETE H)) ==> w i = &0)}
       #|  H:A
       #|  z:A->int
       #|  CARD(s DELETE (H:A)) = CARD s - 1
       #|  A:int
       #|  s DELETE (H:A)
-      #|  &(CARD {w:A->int | (!i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                                 (!i. ~(i IN (s DELETE H)) ==> w i =\n                                  &0)}):int
+      #|  &(CARD {w:A->int | (forall i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                                 (forall i. ~(i IN (s DELETE H)) ==> w i =\n                                  &0)}):int
       #|  s:A->bool
       #|  abs((a:A->int) H) = &1
-      #|  !s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     H IN s /\\ (!i. i IN s DELETE H ==> a i = &0)\n     ==> abs(a H) * &(lincount s a m A) <= (&3 * A) pow (CARD s - 1)
+      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     H IN s /\\ (forall i. i IN s DELETE H ==> a i = &0)\n     ==> abs(a H) * &(lincount s a m A) <= (&3 * A) pow (CARD s - 1)
       #|  &0 divides (x:int) <=> x = &0
       #|  g divides (a:A->int) j
       #|  ~((a:A->int) j = &0)
@@ -11328,7 +11328,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  g:int
       #|  a:A->int
       #|  t:A->bool
-      #|  !t:A->bool a. FINITE t /\\ (?j. j IN t /\\ ~(a j = &0))\n    ==> ?delta. &1 <= delta /\\ (!i. i IN t ==> delta divides a i) /\\\n                (!d. (!i. i IN t ==> d divides a i) ==> d divides delta)
+      #|  forall t:A->bool a. FINITE t /\\ (?j. j IN t /\\ ~(a j = &0))\n    ==> ?delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i) /\\\n                (forall d. (forall i. i IN t ==> d divides a i) ==> d divides delta)
       #|  A:int
       #|  mp:int
       #|  q:A->int
@@ -11340,7 +11340,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i:A
       #|  z:A->int
       #|  w:A->int
-      #|  {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                              (!i. ~(i IN s) ==> z i = &0) /\\\n                              isum s (\\i. a i * z i) = m}
+      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                              (forall i. ~(i IN s) ==> z i = &0) /\\\n                              isum s (\\i. a i * z i) = m}
       #|  (w:A->int) IN Fset
       #|  (z:A->int) IN Fset
       #|  (z:A->int) i = &0
@@ -11351,7 +11351,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i:A
       #|  i:A
       #|  i:A
-      #|  !i:A. i IN t ==> (z:A->int) i = w i
+      #|  forall i:A. i IN t ==> (z:A->int) i = w i
       #|  w:A->int
       #|  z:A->int
       #|  CARD (IMAGE (\\z:A->int i. if i IN t then z i else &0) Fset)
@@ -11364,14 +11364,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  a:A->int
       #|  s:A->bool
       #|  v:A->int
-      #|  !v:A->int. v IN Fset ==> a H * v H = m - delta * mp
-      #|  Fset = {z:A->int | ((!i. i IN s ==> abs(z i) <= A) /\\\n                           (!i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum t (\\i. q i * z i) = mp}
+      #|  forall v:A->int. v IN Fset ==> a H * v H = m - delta * mp
+      #|  Fset = {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum t (\\i. q i * z i) = mp}
       #|  t = s DELETE (H:A)
-      #|  !s:A->bool a q delta m A H mp.\n     FINITE s /\\ H IN s /\\ ~(a H = &0) /\\\n     (!i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD {z:A->int | ((!i. i IN s ==> abs(z i) <= A) /\\\n                           (!i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum (s DELETE H) (\\i. q i * z i) = mp}\n         <= lincount (s DELETE H) q mp A
+      #|  forall s:A->bool a q delta m A H mp.\n     FINITE s /\\ H IN s /\\ ~(a H = &0) /\\\n     (forall i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum (s DELETE H) (\\i. q i * z i) = mp}\n         <= lincount (s DELETE H) q mp A
       #|  i:A
       #|  isum t (\\i. abs((q:A->int) i)) * A = isum t (\\i. abs(q i) * A)
       #|  isum t (\\i. abs((q:A->int) i * z i))
-      #|  !t:A->bool q z A. FINITE t /\\ &0 <= A /\\ (!i. i IN t ==> abs(z i) <= A)\n    ==> abs(isum t (\\i. q i * z i)) <= isum t (\\i. abs(q i)) * A
+      #|  forall t:A->bool q z A. FINITE t /\\ &0 <= A /\\ (forall i. i IN t ==> abs(z i) <= A)\n    ==> abs(isum t (\\i. q i * z i)) <= isum t (\\i. abs(q i)) * A
       #|  abs(z:int) <= b ==> --b <= z /\\ z <= b
       #|  {z:int | --(Hs * A) <= z /\\ z <= Hs * A}
       #|  A:int
@@ -11391,23 +11391,23 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  mp:int
       #|  Hs = isum t (\\i. abs((q:A->int) i))
       #|  t = s DELETE (H:A)
-      #|  !s:A->bool a q delta m A H.\n     FINITE s /\\ H IN s /\\ &0 <= A /\\ &1 <= isum (s DELETE H) (\\i. abs(q i)) /\\\n     (!i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD (IMAGE (\\z:A->int. isum (s DELETE H) (\\i. q i * z i))\n                {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                            (!i. ~(i IN s) ==> z i = &0) /\\\n                            isum s (\\i. a i * z i) = m})\n         <= lincount2 (a H) delta m (isum (s DELETE H) (\\i. abs(q i)) * A)
+      #|  forall s:A->bool a q delta m A H.\n     FINITE s /\\ H IN s /\\ &0 <= A /\\ &1 <= isum (s DELETE H) (\\i. abs(q i)) /\\\n     (forall i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD (IMAGE (\\z:A->int. isum (s DELETE H) (\\i. q i * z i))\n                {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                            (forall i. ~(i IN s) ==> z i = &0) /\\\n                            isum s (\\i. a i * z i) = m})\n         <= lincount2 (a H) delta m (isum (s DELETE H) (\\i. abs(q i)) * A)
       #|  y:Y
       #|  &(num_of_int c):int = c /\\\n   &(num_of_int D):int = D
       #|  num_of_int D
       #|  num_of_int c
       #|  X:X->bool
       #|  f:X->Y
-      #|  !(f:X->Y) X (c:int) (D:int).\n     FINITE X /\\ &0 <= c /\\ &0 <= D /\\ (!y. c * &(CARD {x | x IN X /\\\n      f x = y}) <= D)\n     ==> c * &(CARD X) <= &(CARD (IMAGE f X)) * D
+      #|  forall(f:X->Y) X (c:int) (D:int).\n     FINITE X /\\ &0 <= c /\\ &0 <= D /\\ (forall y. c * &(CARD {x | x IN X /\\\n      f x = y}) <= D)\n     ==> c * &(CARD X) <= &(CARD (IMAGE f X)) * D
       #|  abs((q:A->int) i)
       #|  i:A
       #|  Ht:A
       #|  Ht:A
       #|  M:int
       #|  IMAGE (\\i:A. abs((q:A->int) i)) t
-      #|  !t:A->bool q. FINITE t /\\ ~(t = {})\n    ==> ?Ht. Ht IN t /\\\n             (!i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))
+      #|  forall t:A->bool q. FINITE t /\\ ~(t = {})\n    ==> ?Ht. Ht IN t /\\\n             (forall i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))
       #|  isum t (\\i:A. abs((q:A->int) Ht))
-      #|  !t:A->bool q Ht.\n     FINITE t /\\ (!i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))\n     ==> isum t (\\i. abs(q i)) <= &(CARD t) * abs(q Ht)
+      #|  forall t:A->bool q Ht.\n     FINITE t /\\ (forall i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))\n     ==> isum t (\\i. abs(q i)) <= &(CARD t) * abs(q Ht)
       #|  &3 * ((Hs:int) * A) = (&3 * A) * Hs /\\\n                           &3 * ((l * Hm) * A) = (&3 * A) * (l * Hm)
       #|  (Hm:int) * (l * F2) * ((&3 * A) * P) =\n    (&3 * ((l * Hm) * A)) * (F2 * P)
       #|  (&3 * ((Hs:int) * A)) * (F2 * P)
@@ -11415,13 +11415,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (Hm:int) * (c * X) = c * (Hm * X)
       #|  (c:int) * (Ic * (F2 * P))
       #|  Hm:int
-      #|  !c X Ic Hm Hs A F2 P l:int.\n     &1 <= Hm /\\ &0 <= c /\\ &0 <= A /\\ &0 <= F2 /\\ &0 <= P /\\ &0 <= Ic /\\\n      &0 <= X /\\\n     Hm * X <= Ic * (F2 * P) /\\ c * Ic <= &3 * (Hs * A) /\\ Hs <= l * Hm\n     ==> c * X <= (l * F2) * ((&3 * A) * P)
+      #|  forall c X Ic Hm Hs A F2 P l:int.\n     &1 <= Hm /\\ &0 <= c /\\ &0 <= A /\\ &0 <= F2 /\\ &0 <= P /\\ &0 <= Ic /\\\n      &0 <= X /\\\n     Hm * X <= Ic * (F2 * P) /\\ c * Ic <= &3 * (Hs * A) /\\ Hs <= l * Hm\n     ==> c * X <= (l * F2) * ((&3 * A) * P)
       #|  CARD(s:A->bool) - 1 =\n   SUC((CARD s - 1) - 1)
       #|  CARD(s:A->bool) - 1 = SUC((CARD s - 1) - 1)
-      #|  !s:A->bool. 3 <= CARD s\n   ==> (&(CARD s - 1):int) * &(FACT((CARD s - 1) - 1)) =\n       &(FACT(CARD s - 1))
+      #|  forall s:A->bool. 3 <= CARD s\n   ==> (&(CARD s - 1):int) * &(FACT((CARD s - 1) - 1)) =\n       &(FACT(CARD s - 1))
       #|  CARD(s:A->bool) - 1 =\n   SUC((CARD s - 1) - 1)
       #|  CARD(s:A->bool) - 1 = SUC((CARD s - 1) - 1)
-      #|  !s:A->bool A:int. 3 <= CARD s\n   ==> (&3 * A) * (&3 * A) pow ((CARD s - 1) - 1) = (&3 * A) pow (CARD s - 1)
+      #|  forall s:A->bool A:int. 3 <= CARD s\n   ==> (&3 * A) * (&3 * A) pow ((CARD s - 1) - 1) = (&3 * A) pow (CARD s - 1)
       #|  Hs <= &(CARD(t:A->bool)) * abs((q:A->int) Ht)
       #|  Hs:int
       #|  abs((q:A->int) Ht)
@@ -11436,7 +11436,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (a:A->int) H
       #|  abs((a:A->int) H) * &(lincount2 ((a:A->int) H) delta m (Hs *\n     A))
       #|  isum (s DELETE H) (\\i. abs((q:A->int) i)) = Hs
-      #|  IMAGE (\\z:A->int. isum (s DELETE H) (\\i. (q:A->int) i * z i))\n                    {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                                (!i. ~(i IN s) ==> z i = &0) /\\\n                                isum s (\\i. a i * z i) = m} =\n                  IMAGE (gproj:(A->int)->int) (Xset:(A->int)->bool)
+      #|  IMAGE (\\z:A->int. isum (s DELETE H) (\\i. (q:A->int) i * z i))\n                    {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                                (forall i. ~(i IN s) ==> z i = &0) /\\\n                                isum s (\\i. a i * z i) = m} =\n                  IMAGE (gproj:(A->int)->int) (Xset:(A->int)->bool)
       #|  H:A
       #|  A:int
       #|  m:int
@@ -11448,7 +11448,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (CARD(s:A->bool)-1)-1 = CARD(t:A->bool) - 1
       #|  delta:int
       #|  abs((q:A->int) Ht) * &(lincount (s DELETE H) (q:A->int) mp\n       A)
-      #|  {x:A->int | x IN Xset /\\ (gproj:(A->int)->int) x = mp} =\n                    {z:A->int | ((!i. i IN s ==> abs(z i) <= A) /\\\n                                 (!i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m) /\\\n                                isum (s DELETE H) (\\i. q i * z i) = mp}
+      #|  {x:A->int | x IN Xset /\\ (gproj:(A->int)->int) x = mp} =\n                    {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m) /\\\n                                isum (s DELETE H) (\\i. q i * z i) = mp}
       #|  mp:int
       #|  abs((q:A->int) Ht) * &(CARD (Xset:(A->int)->bool)) <=\n    &(CARD(IMAGE (gproj:(A->int)->int) Xset)) *\n    (&(FACT((CARD(s:A->bool) - 1)-1)) * (&3 * A) pow ((CARD s - 1) - 1))
       #|  Ht:A
@@ -11459,18 +11459,18 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &1 <= (Hs:int)
       #|  Hs = isum (t:A->bool) (\\i. abs((q:A->int) i))
       #|  gproj = \\z:A->int. isum t (\\i. (q:A->int) i * z i)
-      #|  Xset = {z:A->int | (!i. i IN s ==> abs(z i) <= A) /\\\n                                 (!i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m}
+      #|  Xset = {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m}
       #|  CARD(t:A->bool) = CARD(s:A->bool) - 1
       #|  FINITE (t:A->bool)
-      #|  !s:A->bool a q delta m A H Ht t.\n     FINITE s /\\ 3 <= CARD s /\\ &1 <= A /\\ &1 <= abs(a H) /\\ abs(a H) <= A /\\\n      H IN s /\\\n     s DELETE H = t /\\\n     (!i. i IN t ==> a i = delta * q i) /\\\n     setcoprime t q /\\ coprime(a H, delta) /\\\n     Ht IN t /\\ (!i. i IN t ==> abs(q i) <= abs(q Ht)) /\\ &1 <= abs(q Ht) /\\\n     (!i. i IN t ==> abs(q i) <= A) /\\\n     (!q' m' Ht'. setcoprime t q' /\\\n      (!i. i IN t ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (!i. i IN t ==> abs(q' i) <= A) /\\ Ht' IN t\n                ==> abs(q' Ht') * &(lincount t q' m' A) <=\n                    &(FACT(CARD t - 1)) * (&3 * A) pow (CARD t - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
-      #|  !t:A->bool a delta. &1 <= delta /\\ (!i. i IN t ==> delta divides a i)\n    ==> (!i. i IN t ==> a i = delta * (a i div delta))
+      #|  forall s:A->bool a q delta m A H Ht t.\n     FINITE s /\\ 3 <= CARD s /\\ &1 <= A /\\ &1 <= abs(a H) /\\ abs(a H) <= A /\\\n      H IN s /\\\n     s DELETE H = t /\\\n     (forall i. i IN t ==> a i = delta * q i) /\\\n     setcoprime t q /\\ coprime(a H, delta) /\\\n     Ht IN t /\\ (forall i. i IN t ==> abs(q i) <= abs(q Ht)) /\\ &1 <= abs(q Ht) /\\\n     (forall i. i IN t ==> abs(q i) <= A) /\\\n     (forall q' m' Ht'. setcoprime t q' /\\\n      (forall i. i IN t ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (forall i. i IN t ==> abs(q' i) <= A) /\\ Ht' IN t\n                ==> abs(q' Ht') * &(lincount t q' m' A) <=\n                    &(FACT(CARD t - 1)) * (&3 * A) pow (CARD t - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
+      #|  forall t:A->bool a delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i)\n    ==> (forall i. i IN t ==> a i = delta * (a i div delta))
       #|  &1 <= (delta:int) ==> abs delta = delta
       #|  i:A
       #|  delta:int
       #|  a:A->int
       #|  t:A->bool
       #|  abs((a:A->int) i) = delta * abs(a i div delta)
-      #|  !t:A->bool a delta. &1 <= delta /\\ (!i. i IN t ==> delta divides a i)\n    ==> (!i. i IN t ==> abs(a i div delta) <= abs(a i))
+      #|  forall t:A->bool a delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i)\n    ==> (forall i. i IN t ==> abs(a i div delta) <= abs(a i))
       #|  ~((delta:int) = &0)
       #|  ((delta:int) * d) divides delta
       #|  ~((delta:int) = &0)
@@ -11480,16 +11480,16 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i:A
       #|  ((delta:int) * d) divides delta
       #|  d:int
-      #|  !t:A->bool a delta.\n     &1 <= delta /\\ (!i. i IN t ==> delta divides a i) /\\\n     (!d. (!i. i IN t ==> d divides a i) ==> d divides delta)\n     ==> setcoprime t (\\i. a i div delta)
+      #|  forall t:A->bool a delta.\n     &1 <= delta /\\ (forall i. i IN t ==> delta divides a i) /\\\n     (forall d. (forall i. i IN t ==> d divides a i) ==> d divides delta)\n     ==> setcoprime t (\\i. a i div delta)
       #|  (d:int) divides delta /\\ delta divides ai ==> d divides ai
       #|  i:A = H
       #|  i:A
       #|  setcoprime (s:A->bool) a
       #|  d:int
-      #|  !s:A->bool a delta H.\n     setcoprime s a /\\ H IN s /\\\n     (!i. i IN (s DELETE H) ==> delta divides a i)\n     ==> coprime(a H, delta)
+      #|  forall s:A->bool a delta H.\n     setcoprime s a /\\ H IN s /\\\n     (forall i. i IN (s DELETE H) ==> delta divides a i)\n     ==> coprime(a H, delta)
       #|  ~((aj:int) = &0)
       #|  &1 <= abs(x:int) <=> ~(x = &0)
-      #|  !aj delta qj:int. aj = delta * qj /\\ ~(aj = &0) ==> &1 <= abs qj
+      #|  forall aj delta qj:int. aj = delta * qj /\\ ~(aj = &0) ==> &1 <= abs qj
       #|  s DELETE (H:A)
       #|  Ht:A
       #|  delta:int
@@ -11502,20 +11502,20 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  q:A->int
       #|  s DELETE (H:A)
       #|  i:A IN s DELETE H
-      #|  !i:A. i IN s ==> abs((a:A->int) i) <= A
+      #|  forall i:A. i IN s ==> abs((a:A->int) i) <= A
       #|  abs((a:A->int) i)
       #|  i:A
-      #|  !i:A. i IN s DELETE H ==> abs((q:A->int) i) <= A
-      #|  !i:A. i IN s DELETE H ==> abs((q:A->int) i) <= abs(a i)
+      #|  forall i:A. i IN s DELETE H ==> abs((q:A->int) i) <= A
+      #|  forall i:A. i IN s DELETE H ==> abs((q:A->int) i) <= abs(a i)
       #|  s:A->bool
       #|  coprime((a:A->int) H, delta)
       #|  setcoprime (s DELETE H) (q:A->int)
-      #|  !i:A. i IN s DELETE H ==> (a:A->int) i = delta * q i
+      #|  forall i:A. i IN s DELETE H ==> (a:A->int) i = delta * q i
       #|  q = \\i:A. (a:A->int) i div delta
       #|  delta:int
       #|  a:A->int
       #|  s DELETE (H:A)
-      #|  !s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     abs(a H) <= A /\\ H IN s /\\ (!i. i IN s ==> abs(a i) <= A) /\\\n     (?j. j IN s DELETE H /\\ ~(a j = &0)) /\\\n     (!q' m' Ht'. setcoprime (s DELETE H) q' /\\\n                  (!i. i IN s DELETE H ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (!i. i IN s DELETE H ==> abs(q' i) <= A) /\\\n                   Ht' IN (s DELETE H)\n                ==> abs(q' Ht') * &(lincount (s DELETE H) q' m' A) <=\n                    &(FACT(CARD(s DELETE H) - 1)) * (&3 * A) pow (CARD(s DELETE\n                     H) - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
+      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     abs(a H) <= A /\\ H IN s /\\ (forall i. i IN s ==> abs(a i) <= A) /\\\n     (?j. j IN s DELETE H /\\ ~(a j = &0)) /\\\n     (forall q' m' Ht'. setcoprime (s DELETE H) q' /\\\n                  (forall i. i IN s DELETE H ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (forall i. i IN s DELETE H ==> abs(q' i) <= A) /\\\n                   Ht' IN (s DELETE H)\n                ==> abs(q' Ht') * &(lincount (s DELETE H) q' m' A) <=\n                    &(FACT(CARD(s DELETE H) - 1)) * (&3 * A) pow (CARD(s DELETE\n                     H) - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
       #|  3 <= CARD(s:A->bool)
       #|  CARD(s DELETE (H:A)) = CARD(s:A->bool) - 1
       #|  Ht':A
@@ -11528,9 +11528,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  Ht':A
       #|  m':int
       #|  q':A->int
-      #|  ~(!i:A. i IN s DELETE H ==> (a:A->int) i = &0)
+      #|  ~(forall i:A. i IN s DELETE H ==> (a:A->int) i = &0)
       #|  (&3 * (A:int)) pow (CARD(s:A->bool) - 1)
-      #|  !i:A. i IN s DELETE H ==> (a:A->int) i = &0
+      #|  forall i:A. i IN s DELETE H ==> (a:A->int) i = &0
       #|  ~(CARD(s:A->bool) = 2)
       #|  2 <= CARD(s:A->bool)
       #|  3 <= CARD(s:A->bool)
@@ -11556,7 +11556,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  a:A->int
       #|  s:A->bool
       #|  n:num
-      #|  !n. !s:A->bool a m A H.\n     CARD s = n /\\ FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (!i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (!i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
+      #|  forall n. forall s:A->bool a m A H.\n     CARD s = n /\\ FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
       #|  (d:int) divides &0
       #|  H:A
       #|  A:int
@@ -11564,55 +11564,55 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  a:A->int
       #|  s:A->bool
       #|  CARD(s:A->bool)
-      #|  !s:A->bool a m A H.\n     FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (!i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (!i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
+      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
       #|  abs((a:A->int) i) <= A
       #|  i:A
       #|  a:A->int
-      #|  {a:A->int | (!i. i IN s ==> a i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (!i. ~(i IN s) ==> a i = &0)}
-      #|  !s:A->bool A. FINITE s\n    ==> FINITE {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> a i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (forall i. ~(i IN s) ==> a i = &0)}
+      #|  forall s:A->bool A. FINITE s\n    ==> FINITE {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
       #|  isum s (\\i. (a:A->int) i * z i) = delta * isum s (\\i. q i * z\n   i)
-      #|  !s (a:A->int) q delta z.\n      FINITE s /\\ ~(delta = &0) /\\ (!i. i IN s ==> a i = delta * q i)\n      ==> (isum s (\\i. a i * z i) = &0 <=> isum s (\\i. q i * z i) = &0)
+      #|  forall s (a:A->int) q delta z.\n      FINITE s /\\ ~(delta = &0) /\\ (forall i. i IN s ==> a i = delta * q i)\n      ==> (isum s (\\i. a i * z i) = &0 <=> isum s (\\i. q i * z i) = &0)
       #|  z:A->int
       #|  delta:int
       #|  q:A->int
       #|  a:A->int
       #|  s:A->bool
       #|  z:A->int
-      #|  !s (a:A->int) q delta B.\n      FINITE s /\\ ~(delta = &0) /\\\n      (!i. i IN s ==> a i = delta * q i) /\\ (!i. ~(i IN s) ==> q i = &0)\n      ==> lincount s a (&0) B = lincount s q (&0) B
+      #|  forall s (a:A->int) q delta B.\n      FINITE s /\\ ~(delta = &0) /\\\n      (forall i. i IN s ==> a i = delta * q i) /\\ (forall i. ~(i IN s) ==> q i = &0)\n      ==> lincount s a (&0) B = lincount s q (&0) B
       #|  (delta:int) = &0 /\\ delta divides x ==> x = &0
       #|  ~((delta:int) = &0)
-      #|  !delta x:int. &0 <= delta /\\ delta divides x /\\ ~(x = &0) ==> &1 <= delta
+      #|  forall delta x:int. &0 <= delta /\\ delta divides x /\\ ~(x = &0) ==> &1 <= delta
       #|  (a:int) <= b ==> a + c <= b + c
       #|  ((&n:int) + &1) pow q * (&n + &1) =\n    (&n + &1) pow q * &n + (&n + &1) pow q
       #|  (&n:int) pow (q+1) + &(SUC n) pow q
       #|  1 <= SUC n
-      #|  !q. !n:num. isum(1..n)(\\h. &h pow q) <= &n pow (q+1)
-      #|  !d:num. d * (d - 1) <= d * d
+      #|  forall q. forall n:num. isum(1..n)(\\h. &h pow q) <= &n pow (q+1)
+      #|  forall d:num. d * (d - 1) <= d * d
       #|  d:num
       #|  A:num
-      #|  !A d q:num. (A DIV d) EXP q * d EXP q <= A EXP q
-      #|  !d q:num. 2 <= q ==> d EXP 2 <= d EXP q
+      #|  forall A d q:num. (A DIV d) EXP q * d EXP q <= A EXP q
+      #|  forall d q:num. 2 <= q ==> d EXP 2 <= d EXP q
       #|  d EXP 2
       #|  (A DIV d) EXP q * d EXP q
-      #|  !A d q:num. 2 <= q ==> (A DIV d) EXP q * d * (d - 1) <= A EXP q
-      #|  !n:num. 1 <= n ==> SUC n * (n - 1) + 1 = n * n
+      #|  forall A d q:num. 2 <= q ==> (A DIV d) EXP q * d * (d - 1) <= A EXP q
+      #|  forall n:num. 1 <= n ==> SUC n * (n - 1) + 1 = n * n
       #|  SUC n * (n - 1) * Aq + Aq = (SUC n * (n - 1) + 1) * Aq
       #|  SUC n * ((n - 1) * Aq) + Aq
       #|  SUC n * (n * S) + F1 * SUC n * n
       #|  n = 0
       #|  n * (SUC n * (S + F1)) <= n * (n * Aq)
-      #|  !n S F1 Aq:num. 1 <= n /\\ n * S <= (n - 1) * Aq /\\ F1 * SUC n * n <= Aq\n      ==> SUC n * (S + F1) <= n * Aq
+      #|  forall n S F1 Aq:num. 1 <= n /\\ n * S <= (n - 1) * Aq /\\ F1 * SUC n * n <= Aq\n      ==> SUC n * (S + F1) <= n * Aq
       #|  q:num
       #|  SUC n
       #|  A:num
       #|  n = 0
       #|  1 <= n
       #|  2 <= SUC n <=> 1 <= n
-      #|  !A q:num. 2 <= q ==> !n. n * nsum(2..n)(\\d. (A DIV d) EXP q) <= (n - 1) * A\n  EXP q
+      #|  forall A q:num. 2 <= q ==> forall n. n * nsum(2..n)(\\d. (A DIV d) EXP q) <= (n - 1) * A\n  EXP q
       #|  A = 0
       #|  (A - 1) * A EXP q
       #|  A * S <= A * A EXP q
-      #|  !A q S:num. 1 <= A /\\ A * S <= (A - 1) * A EXP q ==> S <= A EXP q
+      #|  forall A q S:num. 1 <= A /\\ A * S <= (A - 1) * A EXP q ==> S <= A EXP q
       #|  q:num
       #|  A:num
       #|  nsum(2..A)(\\d. (A DIV d) EXP q) <= A EXP q
@@ -11622,23 +11622,23 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\d:num. (A DIV d) EXP q
       #|  1 <= A
       #|  A = 0
-      #|  !A q:num. 2 <= q ==> nsum(1..A)(\\d. (A DIV d) EXP q) <= 2 * A EXP q
-      #|  setgcd (s:A->bool) (a:A->int) =\n    @g. (!i. i IN s ==> g divides a i) /\\\n        (!d. (!i. i IN s ==> d divides a i) ==> d divides g) /\\ &0 <= g
-      #|  !s:A->bool a. FINITE s\n    ==> (!i. i IN s ==> setgcd s a divides a i) /\\\n        (!d. (!i. i IN s ==> d divides a i) ==> d divides setgcd s a) /\\\n        &0 <= setgcd s a
-      #|  setmaxabs (s:A->bool) (a:A->int) =\n    abs(a (@H. H IN s /\\ (!i. i IN s ==> abs(a i) <= abs(a H))))
-      #|  (@H. H IN s /\\\n   (!i. i IN s ==> abs((a:A->int) i) <= abs(a H)))
-      #|  (@H. H IN s /\\\n   (!i. i IN s ==> abs((a:A->int) i) <= abs(a H))) IN s /\\\n    (!i. i IN s ==> abs((a:A->int) i) <= abs(a (@H. H IN s /\\\n     (!i. i IN s ==> abs(a i) <= abs(a H)))))
+      #|  forall A q:num. 2 <= q ==> nsum(1..A)(\\d. (A DIV d) EXP q) <= 2 * A EXP q
+      #|  setgcd (s:A->bool) (a:A->int) =\n    @g. (forall i. i IN s ==> g divides a i) /\\\n        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides g) /\\ &0 <= g
+      #|  forall s:A->bool a. FINITE s\n    ==> (forall i. i IN s ==> setgcd s a divides a i) /\\\n        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides setgcd s a) /\\\n        &0 <= setgcd s a
+      #|  setmaxabs (s:A->bool) (a:A->int) =\n    abs(a (@H. H IN s /\\ (forall i. i IN s ==> abs(a i) <= abs(a H))))
+      #|  (@H. H IN s /\\\n   (forall i. i IN s ==> abs((a:A->int) i) <= abs(a H)))
+      #|  (@H. H IN s /\\\n   (forall i. i IN s ==> abs((a:A->int) i) <= abs(a H))) IN s /\\\n    (forall i. i IN s ==> abs((a:A->int) i) <= abs(a (@H. H IN s /\\\n     (forall i. i IN s ==> abs(a i) <= abs(a H)))))
       #|  a:A->int
       #|  s:A->bool
-      #|  !s:A->bool a. FINITE s /\\ ~(s = {})\n    ==> (!i. i IN s ==> abs(a i) <= setmaxabs s a) /\\\n        (?H. H IN s /\\ setmaxabs s a = abs(a H))
+      #|  forall s:A->bool a. FINITE s /\\ ~(s = {})\n    ==> (forall i. i IN s ==> abs(a i) <= setmaxabs s a) /\\\n        (?H. H IN s /\\ setmaxabs s a = abs(a H))
       #|  &(num_of_int t):int = t
       #|  &(num_of_int(t - --t + &1)):int = t - --t + &1
       #|  t:int
       #|  --t:int
       #|  (--t <= x /\\ x <= t) <=> (--t <= x /\\ x <= t)
       #|  --t <= x <=> x >= --t
-      #|  {b:A->int | (!i. i IN s ==> abs(b i) <= t) /\\ (!i. ~(i IN s) ==> b i =\n    &0)} =\n    {b:A->int | (!i. i IN s ==> b i IN {k:int | --t <= k /\\ k <= t}) /\\\n                (!i. ~(i IN s) ==> b i = &0)}
-      #|  !s:A->bool t. FINITE s /\\ &0 <= t\n    ==> CARD {b:A->int | (!i. i IN s ==> abs(b i) <= t) /\\\n     (!i. ~(i IN s) ==> b i = &0)}\n        = (2 * num_of_int t + 1) EXP CARD s
+      #|  {b:A->int | (forall i. i IN s ==> abs(b i) <= t) /\\ (forall i. ~(i IN s) ==> b i =\n    &0)} =\n    {b:A->int | (forall i. i IN s ==> b i IN {k:int | --t <= k /\\ k <= t}) /\\\n                (forall i. ~(i IN s) ==> b i = &0)}
+      #|  forall s:A->bool t. FINITE s /\\ &0 <= t\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= t) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * num_of_int t + 1) EXP CARD s
       #|  abs((b:A->int) j)
       #|  setmaxabs s (b:A->int) <= &h /\\ &h <= setmaxabs s (b:A->int)
       #|  j:A
@@ -11647,7 +11647,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  H:A
       #|  b:A->int
       #|  s:A->bool
-      #|  !s:A->bool b h. FINITE s /\\ ~(s = {}) /\\ 1 <= h /\\\n  (!i. i IN s ==> abs(b i) <= &h)\n    ==> (setmaxabs s b = &h <=> ~(!i. i IN s ==> abs(b i) <= &h - &1))
+      #|  forall s:A->bool b h. FINITE s /\\ ~(s = {}) /\\ 1 <= h /\\\n  (forall i. i IN s ==> abs(b i) <= &h)\n    ==> (setmaxabs s b = &h <=> ~(forall i. i IN s ==> abs(b i) <= &h - &1))
       #|  h:num
       #|  b:A->int
       #|  s:A->bool
@@ -11655,22 +11655,22 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  b:A->int
       #|  s:A->bool
       #|  b:A->int
-      #|  !s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n     (!i. ~(i IN s) ==> b i = &0)\n                    /\\ setmaxabs s b = &h}\n        = {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n         (!i. ~(i IN s) ==> b i = &0)}\n          DIFF {b:A->int | (!i. i IN s ==> abs(b i) <= &h - &1) /\\\n           (!i. ~(i IN s) ==> b i = &0)}
+      #|  forall s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                    /\\ setmaxabs s b = &h}\n        = {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n         (forall i. ~(i IN s) ==> b i = &0)}\n          DIFF {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n           (forall i. ~(i IN s) ==> b i = &0)}
       #|  &h:int
       #|  s:A->bool
-      #|  !s:A->bool h. FINITE s\n    ==> CARD {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n     (!i. ~(i IN s) ==> b i = &0)}\n        = (2 * h + 1) EXP CARD s
+      #|  forall s:A->bool h. FINITE s\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * h + 1) EXP CARD s
       #|  2 * (h - 1) + 1 = 2 * h - 1
       #|  &h - &1 = &(h - 1):int
       #|  num_of_int(&h - &1) = h - 1
       #|  &1:int <= &h
       #|  &h - &1:int
       #|  s:A->bool
-      #|  !s:A->bool h. FINITE s /\\ 1 <= h\n    ==> CARD {b:A->int | (!i. i IN s ==> abs(b i) <= &h - &1) /\\\n     (!i. ~(i IN s) ==> b i = &0)}\n        = (2 * h - 1) EXP CARD s
+      #|  forall s:A->bool h. FINITE s /\\ 1 <= h\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * h - 1) EXP CARD s
       #|  abs((b:A->int) i) <= &h - &1
       #|  i:A
       #|  b:A->int
-      #|  {b:A->int | (!i. i IN s ==> abs(b i) <= &h - &1) /\\\n    (!i. ~(i IN s) ==> b i = &0)}\n    SUBSET {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n     (!i. ~(i IN s) ==> b i = &0)}
-      #|  !s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> CARD {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n     (!i. ~(i IN s) ==> b i = &0)\n                         /\\ setmaxabs s b = &h}\n        = (2 * h + 1) EXP CARD s - (2 * h - 1) EXP CARD s
+      #|  {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n    (forall i. ~(i IN s) ==> b i = &0)}\n    SUBSET {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}
+      #|  forall s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                         /\\ setmaxabs s b = &h}\n        = (2 * h + 1) EXP CARD s - (2 * h - 1) EXP CARD s
       #|  SUC(n + 1) = (n + 1) + 1
       #|  (a + 2) * Y = a * Y + 2 * Y
       #|  Y = a EXP (n + 1)
@@ -11681,26 +11681,26 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (a + 2) * (a + 2) EXP n = (a + 2) EXP (n + 1)
       #|  (a + 2) * (a EXP (n + 1) + 2 * (n + 1) * (a + 2) EXP n)
       #|  (n + 1) + 1 = SUC(n+1)
-      #|  !n a:num. (a + 2) EXP (n + 1) <= a EXP (n + 1) + 2 * (n + 1) * (a + 2) EXP\n  n
+      #|  forall n a:num. (a + 2) EXP (n + 1) <= a EXP (n + 1) + 2 * (n + 1) * (a + 2) EXP\n  n
       #|  (2 * l * 3 EXP (l - 1)) * h EXP (l - 1) = 2 * l * (3 * h) EXP\n     (l - 1)
       #|  (2 * h - 1) + 2 = 2 * h + 1
       #|  (l - 1) + 1 = l
       #|  2 * h - 1
       #|  l - 1
       #|  2 * l * (2 * h + 1) EXP (l - 1)
-      #|  !l h:num. 1 <= l /\\ 1 <= h\n    ==> (2 * h + 1) EXP l - (2 * h - 1) EXP l <= (2 * l * 3 EXP (l - 1)) * h\n     EXP (l - 1)
+      #|  forall l h:num. 1 <= l /\\ 1 <= h\n    ==> (2 * h + 1) EXP l - (2 * h - 1) EXP l <= (2 * l * 3 EXP (l - 1)) * h\n     EXP (l - 1)
       #|  2 <= CARD(s:A->bool)
-      #|  !s:A->bool. FINITE s /\\ 2 <= CARD s ==> ~(s = {})
+      #|  forall s:A->bool. FINITE s /\\ 2 <= CARD s ==> ~(s = {})
       #|  j:A
       #|  j:A
-      #|  !s:A->bool b. (!i. ~(i IN s) ==> b i = &0) /\\ ~(b = (\\i:A. &0))\n    ==> ?j. j IN s /\\ ~((b:A->int) j = &0)
-      #|  !s:A->bool b. &0 <= setmaxabs s b
+      #|  forall s:A->bool b. (forall i. ~(i IN s) ==> b i = &0) /\\ ~(b = (\\i:A. &0))\n    ==> ?j. j IN s /\\ ~((b:A->int) j = &0)
+      #|  forall s:A->bool b. &0 <= setmaxabs s b
       #|  &(num_of_int(setmaxabs s (b:A->int))):int = setmaxabs s b
-      #|  !s:A->bool b h. num_of_int(setmaxabs s b) = h ==> setmaxabs s b = &h
+      #|  forall s:A->bool b h. num_of_int(setmaxabs s b) = h ==> setmaxabs s b = &h
       #|  abs((b:A->int) j)
       #|  b:A->int
       #|  s:A->bool
-      #|  !s:A->bool b A'. FINITE s /\\ ~(s = {}) /\\\n  (!i. i IN s ==> abs(b i) <= &A') /\\\n                    (?j. j IN s /\\ ~(b j = &0))\n    ==> &1 <= setmaxabs s b /\\ setmaxabs s b <= &A'
+      #|  forall s:A->bool b A'. FINITE s /\\ ~(s = {}) /\\\n  (forall i. i IN s ==> abs(b i) <= &A') /\\\n                    (?j. j IN s /\\ ~(b j = &0))\n    ==> &1 <= setmaxabs s b /\\ setmaxabs s b <= &A'
       #|  setmaxabs s (b:A->int) <= &Ap
       #|  &1 <= setmaxabs s (b:A->int)
       #|  &(num_of_int(setmaxabs s (b:A->int))):int = setmaxabs s b
@@ -11711,11 +11711,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ~(s:A->bool = {})
       #|  b:A->int
       #|  x:num
-      #|  !s:A->bool Ap. FINITE s /\\ 2 <= CARD s\n    ==> !x. (?b:A->int. x = num_of_int(setmaxabs s b) /\\\n             ((!i. i IN s ==> abs(b i) <= &Ap) /\\\n              (!i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n             ~(b = (\\i:A. &0)))\n        ==> 1 <= x /\\ x <= Ap
+      #|  forall s:A->bool Ap. FINITE s /\\ 2 <= CARD s\n    ==> forall x. (?b:A->int. x = num_of_int(setmaxabs s b) /\\\n             ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n              (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n             ~(b = (\\i:A. &0)))\n        ==> 1 <= x /\\ x <= Ap
       #|  (C * K) * h EXP q = (C * h EXP q) * K
       #|  (C * h EXP q * h) * (K DIV h) = (C * h EXP q) * (h * (K DIV\n   h))
       #|  (C * h EXP (q + 1)) * (K DIV h)
-      #|  !cnt C K h q:num. 1 <= h /\\ cnt <= C * h EXP (q + 1)\n    ==> cnt * (K DIV h) <= (C * K) * h EXP q
+      #|  forall cnt C K h q:num. 1 <= h /\\ cnt <= C * h EXP (q + 1)\n    ==> cnt * (K DIV h) <= (C * K) * h EXP q
       #|  1 <= h ==> ~(h = 0)
       #|  &(num_of_int K):int = K
       #|  h * lincount s (b:A->int) (&0) B <= num_of_int K
@@ -11735,21 +11735,21 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  b:A->int
       #|  s:A->bool
       #|  ~(s:A->bool = {})
-      #|  !s:A->bool b B h Ap. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\\n     (!i. i IN s ==> abs(b i) <= &Ap) /\\ (!i. ~(i IN s) ==> b i = &0) /\\\n     setcoprime s b /\\ (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h\n    ==> lincount s b (&0) B\n        <= (num_of_int(&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) DIV\n         h
+      #|  forall s:A->bool b B h Ap. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\\n     (forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i = &0) /\\\n     setcoprime s b /\\ (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h\n    ==> lincount s b (&0) B\n        <= (num_of_int(&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) DIV\n         h
       #|  (l - 2) + 1 = l - 1
       #|  &C * &Kn * &h pow (l - 2) = &((C * Kn) * h EXP (l - 2)):int
       #|  &fib * &(Kn DIV h) = &(fib * (Kn DIV h)):int
-      #|  !fib C Kn h l:num.\n     fib <= C * h EXP (l - 1) /\\ 2 <= l /\\ 1 <= h\n    ==> (&fib:int) * &(Kn DIV h) <= &C * &Kn * &h pow (l - 2)
+      #|  forall fib C Kn h l:num.\n     fib <= C * h EXP (l - 1) /\\ 2 <= l /\\ 1 <= h\n    ==> (&fib:int) * &(Kn DIV h) <= &C * &Kn * &h pow (l - 2)
       #|  &(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)) * (KI:int) *\n    &h pow (CARD s - 2) =\n                &(2 * CARD s * 3 EXP (CARD s - 1)) * &Kn * &h pow (CARD s - 2)
       #|  ~(s:A->bool = {})
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &h) /\\\n         (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &h) /\\\n         (forall i. ~(i IN s) ==> a i = &0)}
       #|  b:A->int
       #|  s:A->bool
       #|  abs((b:A->int) i) <= setmaxabs s b
       #|  i:A
       #|  b:A->int
       #|  b:A->int
-      #|  CARD {b:A->int | (!i. i IN s ==> abs(b i) <= &h) /\\\n     (!i. ~(i IN s) ==> b i = &0)\n                       /\\ setmaxabs s b = &h}
+      #|  CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                       /\\ setmaxabs s b = &h}
       #|  CARD (FIB:(A->int)->bool) <= (2 * CARD(s:A->bool) * 3 EXP (CARD\n   s - 1)) * h EXP (CARD s - 1)
       #|  Ap:num
       #|  h:num
@@ -11759,16 +11759,16 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  b:A->int
       #|  b:A->int
       #|  isum (FIB:(A->int)->bool) (\\b. &(Kn DIV h))
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &Ap) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &Ap) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
       #|  FINITE (FIB:(A->int)->bool)
       #|  ~(s:A->bool = {})
-      #|  !b:A->int. b IN FIB ==>\n     (!i. i IN s ==> abs(b i) <= &Ap) /\\ (!i. ~(i IN s) ==> b i = &0) /\\\n      setcoprime s b /\\\n     (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h
+      #|  forall b:A->int. b IN FIB ==>\n     (forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i = &0) /\\\n      setcoprime s b /\\\n     (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h
       #|  &Kn = KI:int
       #|  &0 <= (KI:int)
-      #|  FIB = {b:A->int | b IN {b:A->int | ((!i. i IN s ==> abs(b i) <=\n   &Ap) /\\\n                    (!i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                     ~(b = (\\i:A. &0))} /\\\n                   num_of_int(setmaxabs s b) = h}
+      #|  FIB = {b:A->int | b IN {b:A->int | ((forall i. i IN s ==> abs(b i) <=\n   &Ap) /\\\n                    (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                     ~(b = (\\i:A. &0))} /\\\n                   num_of_int(setmaxabs s b) = h}
       #|  Kn = num_of_int(KI:int)
       #|  KI:int = &(FACT(CARD(s:A->bool) - 1)) *\n             (&3 * B) pow (CARD s - 1)
-      #|  !s:A->bool Ap B h. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\ h <= Ap\n    ==> isum {b:A->int | b IN {b:A->int | ((!i. i IN s ==> abs(b i) <= &Ap) /\\\n                          (!i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                           ~(b = (\\i:A. &0))} /\\\n                         num_of_int(setmaxabs s b) = h}\n             (\\b. &(lincount s b (&0) B))\n        <= &(2 * CARD s * 3 EXP (CARD s - 1)) *\n           (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1)) * &h pow (CARD s -\n            2)
+      #|  forall s:A->bool Ap B h. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\ h <= Ap\n    ==> isum {b:A->int | b IN {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n                          (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                           ~(b = (\\i:A. &0))} /\\\n                         num_of_int(setmaxabs s b) = h}\n             (\\b. &(lincount s b (&0) B))\n        <= &(2 * CARD s * 3 EXP (CARD s - 1)) *\n           (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1)) * &h pow (CARD s -\n            2)
       #|  (CARD(s:A->bool) - 2) + 1 = CARD s - 1
       #|  Ap:num
       #|  CARD(s:A->bool) - 2
@@ -11782,14 +11782,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  Ap:num
       #|  s:A->bool
       #|  k:num
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &Ap) /\\\n       (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &Ap) /\\\n       (forall i. ~(i IN s) ==> a i = &0)}
       #|  1..Ap
-      #|  {b:A->int | ((!i. i IN s ==> abs(b i) <= &Ap) /\\ (!i. ~(i IN s) ==> b i =\n      &0) /\\\n                   setcoprime s b) /\\ ~(b = (\\i:A. &0))}
+      #|  {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i =\n      &0) /\\\n                   setcoprime s b) /\\ ~(b = (\\i:A. &0))}
       #|  \\b:A->int. (&(lincount s b (&0) B):int)
       #|  \\b:A->int. num_of_int(setmaxabs s b)
-      #|  !s:A->bool Ap B. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B\n    ==> isum {b:A->int | ((!i. i IN s ==> abs(b i) <= &Ap) /\\\n     (!i. ~(i IN s) ==> b i = &0) /\\\n                          setcoprime s b) /\\ ~(b = (\\i:A. &0))}\n             (\\b. &(lincount s b (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &Ap pow (CARD\n             s - 1)
+      #|  forall s:A->bool Ap B. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B\n    ==> isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n     (forall i. ~(i IN s) ==> b i = &0) /\\\n                          setcoprime s b) /\\ ~(b = (\\i:A. &0))}\n             (\\b. &(lincount s b (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &Ap pow (CARD\n             s - 1)
       #|  ~(aj:int = &0)
-      #|  !aj d:int. &1 <= d /\\ ~(aj = &0) /\\\n  aj = d * (aj div d) ==> ~(aj div d = &0)
+      #|  forall aj d:int. &1 <= d /\\ ~(aj = &0) /\\\n  aj = d * (aj div d) ==> ~(aj div d = &0)
       #|  abs(ai div d) = &(num_of_int(abs(ai div\n   d)))
       #|  &(num_of_int d):int = d
       #|  abs(ai div d) = &(num_of_int(abs(ai div d)))
@@ -11799,7 +11799,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (ai:int) = d * (ai div d)
       #|  d * abs(ai div d) = abs(ai:int)
       #|  (d:int) * abs(ai div d) <= &A
-      #|  !ai d:int. !A:num. &1 <= d /\\ abs(ai) <= &A /\\ ai = d * (ai div d)\n    ==> abs(ai div d) <= &(A DIV (num_of_int d))
+      #|  forall ai d:int. forall A:num. &1 <= d /\\ abs(ai) <= &A /\\ ai = d * (ai div d)\n    ==> abs(ai div d) <= &(A DIV (num_of_int d))
       #|  &1 <= (d:int) ==> ~(d = &0)
       #|  d:int
       #|  ~((a:A->int) j div d = &0)
@@ -11813,23 +11813,23 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ((d:int) * e) divides d
       #|  e:int
       #|  (a:A->int) i = d * q i
-      #|  !i:A. i IN s ==> (a:A->int) i = (d:int) * (a i div d)
+      #|  forall i:A. i IN s ==> (a:A->int) i = (d:int) * (a i div d)
       #|  i:A
-      #|  !i:A. ~(i IN s) ==> (q:A->int) i = &0
+      #|  forall i:A. ~(i IN s) ==> (q:A->int) i = &0
       #|  i:A
-      #|  !i:A. i IN s ==> (a:A->int) i = (d:int) * (q:A->int) i
+      #|  forall i:A. i IN s ==> (a:A->int) i = (d:int) * (q:A->int) i
       #|  q = \\i:A. if i IN s then (a:A->int) i div d else &0
       #|  (a:A->int) j
       #|  &1 <= (d:int)
       #|  d = setgcd s (a:A->int)
       #|  a:A->int
       #|  s:A->bool
-      #|  !s:A->bool a A B. FINITE s /\\ 2 <= CARD s /\\\n  (!i. i IN s ==> abs(a i) <= &A) /\\\n     (!i. ~(i IN s) ==> a i = &0) /\\ (?j. j IN s /\\ ~(a j = &0))\n    ==> &1 <= setgcd s a /\\\n        (!i. i IN s ==> a i = setgcd s a * (a i div setgcd s a)) /\\\n        setcoprime s (\\i. if i IN s then a i div setgcd s a else &0) /\\\n        (!i. i IN s ==> abs((if i IN s then a i div setgcd s a else &0))\n                        <= &(A DIV (num_of_int(setgcd s a)))) /\\\n        (!i. ~(i IN s) ==> (if i IN s then a i div setgcd s a else &0) = &0) /\\\n        ~((\\i. if i IN s then a i div setgcd s a else &0) = (\\i:A. &0)) /\\\n        lincount s a (&0) B = lincount s (\\i. if i IN s then a i div setgcd s a\n         else &0) (&0) B
+      #|  forall s:A->bool a A B. FINITE s /\\ 2 <= CARD s /\\\n  (forall i. i IN s ==> abs(a i) <= &A) /\\\n     (forall i. ~(i IN s) ==> a i = &0) /\\ (?j. j IN s /\\ ~(a j = &0))\n    ==> &1 <= setgcd s a /\\\n        (forall i. i IN s ==> a i = setgcd s a * (a i div setgcd s a)) /\\\n        setcoprime s (\\i. if i IN s then a i div setgcd s a else &0) /\\\n        (forall i. i IN s ==> abs((if i IN s then a i div setgcd s a else &0))\n                        <= &(A DIV (num_of_int(setgcd s a)))) /\\\n        (forall i. ~(i IN s) ==> (if i IN s then a i div setgcd s a else &0) = &0) /\\\n        ~((\\i. if i IN s then a i div setgcd s a else &0) = (\\i:A. &0)) /\\\n        lincount s a (&0) B = lincount s (\\i. if i IN s then a i div setgcd s a\n         else &0) (&0) B
       #|  k:A
       #|  i:A
-      #|  !i. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a\n     else &0)) <= &(A DIV (num_of_int(setgcd s a)))
+      #|  forall i. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a\n     else &0)) <= &(A DIV (num_of_int(setgcd s a)))
       #|  i:A
-      #|  !i:A. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a else &0))\n    <= &(A DIV dn)
+      #|  forall i:A. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a else &0))\n    <= &(A DIV dn)
       #|  setgcd s (a:A->int) = &dn
       #|  a:A->int
       #|  s:A->bool
@@ -11840,10 +11840,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ?j:A. j IN s /\\ ~((a:A->int) j = &0)
       #|  \\k:A. if k IN s then (a:A->int) k div setgcd s a else &0
       #|  a:A->int
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &(A DIV dn)) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &A) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &(A DIV dn)) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
       #|  \\b:A->int. (\\k:A. if k IN s then &dn * b k else &0)
-      #|  !s:A->bool A B dn. FINITE s /\\ 2 <= CARD s /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (!i. i IN s ==> abs(a i) <= &A) /\\\n                          (!i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= isum {b:A->int | ((!i. i IN s ==> abs(b i) <= &(A DIV dn)) /\\\n                             (!i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
+      #|  forall s:A->bool A B dn. FINITE s /\\ 2 <= CARD s /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= &A) /\\\n                          (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &(A DIV dn)) /\\\n                             (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
       #|  num_of_int(setgcd s (a:A->int)) =\n    dn
       #|  num_of_int(setgcd s (a:A->int)) =\n    dn
       #|  num_of_int(setgcd s (a:A->int)) =\n    dn
@@ -11869,13 +11869,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ?j:A. j IN s /\\ ~((a:A->int) j = &0)
       #|  a:A->int
       #|  x:num
-      #|  !s:A->bool A. FINITE s /\\ 2 <= CARD s /\\ &1 <= A\n    ==> !x. (?a:A->int. x = num_of_int(setgcd s a) /\\\n             (a IN ({a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n              (!i. ~(i IN s) ==> a i = &0)}\n                    DIFF {(\\i:A. &0)})))\n        ==> 1 <= x /\\ x <= num_of_int A
+      #|  forall s:A->bool A. FINITE s /\\ 2 <= CARD s /\\ &1 <= A\n    ==> forall x. (?a:A->int. x = num_of_int(setgcd s a) /\\\n             (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n              (forall i. ~(i IN s) ==> a i = &0)}\n                    DIFF {(\\i:A. &0)})))\n        ==> 1 <= x /\\ x <= num_of_int A
       #|  &Anat:int
-      #|  isum {b:A->int | ((!i. i IN s ==> abs(b i) <= &(Anat DIV dn)) /\\\n                             (!i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
-      #|  !s:A->bool Anat B dn. FINITE s /\\ 2 <= CARD s /\\ &Anat <= B /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (!i. i IN s ==> abs(a i) <= &Anat)\n     /\\\n                          (!i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &(Anat DIV dn)\n             pow (CARD s - 1)
+      #|  isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &(Anat DIV dn)) /\\\n                             (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
+      #|  forall s:A->bool Anat B dn. FINITE s /\\ 2 <= CARD s /\\ &Anat <= B /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= &Anat)\n     /\\\n                          (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &(Anat DIV dn)\n             pow (CARD s - 1)
       #|  &2 * &An pow q = &(2 * An EXP q):int
       #|  isum(1..An)(\\dn. &(An DIV dn) pow q) = &(nsum(1..An)(\\dn. (An\n   DIV dn) EXP q))
-      #|  !An q:num. 2 <= q ==> isum(1..An)(\\dn. &(An DIV dn) pow q) <= &2 * &An pow\n  q
+      #|  forall An q:num. 2 <= q ==> isum(1..An)(\\dn. &(An DIV dn) pow q) <= &2 * &An pow\n  q
       #|  (x:int) = y ==> x <= y
       #|  ((&(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)):int) *\n               (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) *\n              (&2 * &An pow (CARD s - 1))
       #|  dn:num
@@ -11885,25 +11885,25 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  s:A->bool
       #|  k:num
       #|  1..An
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &An) /\\ (!i. ~(i IN s) ==> a i =\n     &0)} DIFF {(\\i:A. &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &An) /\\ (forall i. ~(i IN s) ==> a i =\n     &0)} DIFF {(\\i:A. &0)}
       #|  \\a:A->int. (&(lincount s a (&0) B):int)
       #|  \\a:A->int. num_of_int(setgcd s a)
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\ (!i. ~(i IN s) ==> a i =\n    &0)} DIFF {(\\i:A. &0)}\n    = {a:A->int | (!i. i IN s ==> abs(a i) <= &An) /\\\n     (!i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\ (forall i. ~(i IN s) ==> a i =\n    &0)} DIFF {(\\i:A. &0)}\n    = {a:A->int | (forall i. i IN s ==> abs(a i) <= &An) /\\\n     (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)}
       #|  (&1:int) <= &An
       #|  2 <= CARD(s:A->bool) - 1
       #|  2 <= CARD(s:A->bool)
       #|  (A:int) = &An
       #|  An = num_of_int A
       #|  (&4:int) * &(CARD(s:A->bool)) * &3 pow (2 * (CARD s - 1)) *\n    &(FACT(CARD s - 1))
-      #|  !s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?Cnz. !A B:int. &1 <= A /\\ A <= B\n            ==> isum ({a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n                                  (!i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A.\n                                   &0)})\n                     (\\a. &(lincount s a (&0) B))\n                <= Cnz * (A * B) pow (CARD s - 1)
+      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?Cnz. forall A B:int. &1 <= A /\\ A <= B\n            ==> isum ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                                  (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A.\n                                   &0)})\n                     (\\a. &(lincount s a (&0) B))\n                <= Cnz * (A * B) pow (CARD s - 1)
       #|  A:int
       #|  s:A->bool
-      #|  !s:A->bool A. FINITE s /\\ &0 <= A\n    ==> CARD {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n                         (!i. ~(i IN s) ==> a i = &0)}\n        <= (2 * num_of_int A + 1) EXP CARD s
+      #|  forall s:A->bool A. FINITE s /\\ &0 <= A\n    ==> CARD {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                         (forall i. ~(i IN s) ==> a i = &0)}\n        <= (2 * num_of_int A + 1) EXP CARD s
       #|  z:A->int
-      #|  {z:A->int | (!i. i IN s ==> abs(z i) <= B) /\\\n                (!i. ~(i IN s) ==> z i = &0) /\\\n                isum s (\\i. &0 * z i) = &0} =\n    {a:A->int | (!i. i IN s ==> abs(a i) <= B) /\\\n                (!i. ~(i IN s) ==> a i = &0)}
-      #|  !s:A->bool B. FINITE s /\\ &0 <= B\n    ==> lincount s (\\i. &0) (&0) B <= (2 * num_of_int B + 1) EXP CARD s
+      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n                (forall i. ~(i IN s) ==> z i = &0) /\\\n                isum s (\\i. &0 * z i) = &0} =\n    {a:A->int | (forall i. i IN s ==> abs(a i) <= B) /\\\n                (forall i. ~(i IN s) ==> a i = &0)}
+      #|  forall s:A->bool B. FINITE s /\\ &0 <= B\n    ==> lincount s (\\i. &0) (&0) B <= (2 * num_of_int B + 1) EXP CARD s
       #|  &(num_of_int B):int = B
-      #|  !B:int n. &0 <= B ==> &((2 * num_of_int B + 1) EXP n) = (&2 * B + &1) pow\n  n
+      #|  forall B:int n. &0 <= B ==> &((2 * num_of_int B + 1) EXP n) = (&2 * B + &1) pow\n  n
       #|  (&3 * &3 pow l1) * (B:int) * B pow l1 =\n    ((&3 * &3 pow l1) * B pow l1) * B /\\\n    ((&3 * &3 pow l1) * C0) * A pow l1 * B pow l1 =\n    ((&3 * &3 pow l1) * B pow l1) * (C0 * A pow l1)
       #|  l1 = CARD(s:A->bool) - 1
       #|  1 <= CARD(s:A->bool)
@@ -11912,22 +11912,22 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= CARD(s:A->bool)
       #|  CARD(s:A->bool) = SUC(CARD s - 1)
       #|  (&3:int) pow (CARD(s:A->bool)) =\n                &3 * &3 pow (CARD s - 1)
-      #|  !s:A->bool A B C0. 1 <= CARD s /\\ (&1:int) <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> (&3 * B) pow (CARD s) <= (&3 pow (CARD s) * C0) * (A * B) pow (CARD s -\n     1)
+      #|  forall s:A->bool A B C0. 1 <= CARD s /\\ (&1:int) <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> (&3 * B) pow (CARD s) <= (&3 pow (CARD s) * C0) * (A * B) pow (CARD s -\n     1)
       #|  &((2 * num_of_int B + 1) EXP CARD(s:A->bool)):int
       #|  (&3 * (B:int)) pow (CARD(s:A->bool))
       #|  &0 <= (B:int)
-      #|  !s:A->bool A B C0. FINITE s /\\ 1 <= CARD s /\\ &1 <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> &(lincount s (\\i. &0) (&0) B) <= (&3 pow (CARD s) * C0) * (A * B) pow\n     (CARD s - 1)
+      #|  forall s:A->bool A B C0. FINITE s /\\ 1 <= CARD s /\\ &1 <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> &(lincount s (\\i. &0) (&0) B) <= (&3 pow (CARD s) * C0) * (A * B) pow\n     (CARD s - 1)
       #|  cz:int = &(lincount s (\\i:A. &0) (&0) B)
-      #|  X = isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n   (!i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))
+      #|  X = isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n   (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))
       #|  {(\\i:A. &0:int)}
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\ (!i. ~(i IN s) ==> a i =\n       &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\ (forall i. ~(i IN s) ==> a i =\n       &0)}
       #|  \\a:A->int. (&(lincount s a (&0) B):int)
       #|  a:A->int
-      #|  {(\\i:A. &0)} SUBSET\n     {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n      (!i. ~(i IN s) ==> a i = &0)}
-      #|  !s:A->bool A B. FINITE s /\\ &1 <= A\n    ==> isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n     (!i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))\n        = &(lincount s (\\i. &0) (&0) B) +\n          isum ({a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n           (!i. ~(i IN s) ==> a i = &0)}\n                DIFF {(\\i:A. &0)}) (\\a. &(lincount s a (&0) B))
+      #|  {(\\i:A. &0)} SUBSET\n     {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n      (forall i. ~(i IN s) ==> a i = &0)}
+      #|  forall s:A->bool A B. FINITE s /\\ &1 <= A\n    ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))\n        = &(lincount s (\\i. &0) (&0) B) +\n          isum ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n           (forall i. ~(i IN s) ==> a i = &0)}\n                DIFF {(\\i:A. &0)}) (\\a. &(lincount s a (&0) B))
       #|  d:num
       #|  a <= b \\/ b <= a:num
-      #|  !a b:num. 2 * a * b <= a * a + b * b
+      #|  forall a b:num. 2 * a * b <= a * a + b * b
       #|  c - y:int
       #|  y:int
       #|  IMAGE (\\x:int. c - x) s = s
@@ -11940,41 +11940,41 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:int
       #|  2 * nsum s (\\x. (A:int->num) x * B(c - x)) =\n      nsum s (\\x. 2 * (A x * B(c - x)))
       #|  nsum s (\\x. (A:int->num) x * A x + B(c - x) * B(c - x))
-      #|  !(A:int->num) (B:int->num) c s.\n        FINITE s /\\\n        (!x. ~(x IN s) ==> A x = 0) /\\ (!x. ~(x IN s) ==> B x = 0) /\\\n        (!x. x IN s ==> c - x IN s)\n        ==> 2 * nsum s (\\x. A x * B(c - x))\n            <= nsum s (\\x. A x * A x) + nsum s (\\x. B x * B x)
+      #|  forall(A:int->num) (B:int->num) c s.\n        FINITE s /\\\n        (forall x. ~(x IN s) ==> A x = 0) /\\ (forall x. ~(x IN s) ==> B x = 0) /\\\n        (forall x. x IN s ==> c - x IN s)\n        ==> 2 * nsum s (\\x. A x * B(c - x))\n            <= nsum s (\\x. A x * A x) + nsum s (\\x. B x * B x)
       #|  ipoly (f:num->int) e (x:int) = isum(0..e)(\\i. f i * x pow i)
       #|  j:num
-      #|  !k c y:int. y * isum(0..k)(\\j. c j * y pow j) = isum(0..k)(\\j. c j * y pow\n  (j+1))
+      #|  forall k c y:int. y * isum(0..k)(\\j. c j * y pow j) = isum(0..k)(\\j. c j * y pow\n  (j+1))
       #|  y:int
       #|  g:num->int
-      #|  !e (g:num->int) y.\n      isum (0..SUC e) (\\j. (if j = 0 then &0 else g (j - 1)) * y pow j) =\n      isum(0..e)(\\j. g j * y pow (j+1))
-      #|  !f e x:int. ipoly f (SUC e) x = ipoly f e x + f(SUC e) * x pow (SUC e)
-      #|  ibox t M =\n  {z:num->int | (!i. i IN 1..t ==> abs(z i) <= M) /\\\n   (!i. ~(i IN 1..t) ==> z i = &0)}
+      #|  forall e (g:num->int) y.\n      isum (0..SUC e) (\\j. (if j = 0 then &0 else g (j - 1)) * y pow j) =\n      isum(0..e)(\\j. g j * y pow (j+1))
+      #|  forall f e x:int. ipoly f (SUC e) x = ipoly f e x + f(SUC e) * x pow (SUC e)
+      #|  ibox t M =\n  {z:num->int | (forall i. i IN 1..t ==> abs(z i) <= M) /\\\n   (forall i. ~(i IN 1..t) ==> z i = &0)}
       #|  abs((z:num->int) i) <= M
       #|  i:num
       #|  z:num->int
-      #|  {z:num->int | (!i. i IN 1..t ==> z i IN {w:int | --M <= w /\\\n   w <= M}) /\\ (!i. ~(i IN 1..t) ==> z i = &0)}
-      #|  !t M. FINITE(ibox t M)
+      #|  {z:num->int | (forall i. i IN 1..t ==> z i IN {w:int | --M <= w /\\\n   w <= M}) /\\ (forall i. ~(i IN 1..t) ==> z i = &0)}
+      #|  forall t M. FINITE(ibox t M)
       #|  ijoin t (u:num->int) (v:num->int) =\n    (\\i. if i IN 1..t then u i else if i IN (t+1)..(2*t) then v(i - t) else\n     &0)
       #|  ihead t (w:num->int) = (\\i. if i IN 1..t then w i\n else &0)
       #|  itail t (w:num->int) = (\\i. if i IN 1..t then w(i +\n t) else &0)
       #|  i:num
-      #|  !t M (u:num->int) (v:num->int). u IN ibox t M /\\\n  v IN ibox t M ==> ijoin t u v IN ibox (2*t) M
+      #|  forall t M (u:num->int) (v:num->int). u IN ibox t M /\\\n  v IN ibox t M ==> ijoin t u v IN ibox (2*t) M
       #|  ~((i + t) IN 1..t) /\\ (i + t) IN (t+1)..(2*t) /\\\n       (i + t) - t = i
       #|  i + t
       #|  i IN 1..t
       #|  i:num
       #|  i IN 1..t
       #|  i:num
-      #|  !t M (u:num->int) v u' v'.\n     1 <= t /\\ u IN ibox t M /\\ v IN ibox t M /\\ u' IN ibox t M /\\\n      v' IN ibox t M /\\\n     ijoin t u v = ijoin t u' v'\n     ==> u = u' /\\ v = v'
+      #|  forall t M (u:num->int) v u' v'.\n     1 <= t /\\ u IN ibox t M /\\ v IN ibox t M /\\ u' IN ibox t M /\\\n      v' IN ibox t M /\\\n     ijoin t u v = ijoin t u' v'\n     ==> u = u' /\\ v = v'
       #|  i:num
-      #|  !t M (w:num->int). w IN ibox (2*t) M ==> ihead t w IN ibox t M
+      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> ihead t w IN ibox t M
       #|  i:num
-      #|  !t M (w:num->int). w IN ibox (2*t) M ==> itail t w IN ibox t M
+      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> itail t w IN ibox t M
       #|  1 <= i - t /\\ i - t <= t
       #|  i:num
-      #|  !t M (w:num->int). w IN ibox (2*t) M ==> ijoin t (ihead t w) (itail t w) =\n  w
+      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> ijoin t (ihead t w) (itail t w) =\n  w
       #|  0 + 1 = 1
-      #|  !f z:int. ipoly f 1 z = f 0 + f 1 * z
+      #|  forall f z:int. ipoly f 1 z = f 0 + f 1 * z
       #|  (2 + 1..2) = {}
       #|  2
       #|  2
@@ -11983,13 +11983,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  2
       #|  1
       #|  g:num->int
-      #|  !g:num->int. isum(1..2) g = g 1 + g 2
+      #|  forall g:num->int. isum(1..2) g = g 1 + g 2
       #|  {v:int | abs v <= P} = {v:int | --P <= v /\\\n    v <= P}
-      #|  !P:int. FINITE {v:int | abs v <= P}
+      #|  forall P:int. FINITE {v:int | abs v <= P}
       #|  &1 <= P ==> &0:int <= P - --P + &1
       #|  &1 <= P ==> --P:int <= P
       #|  {v:int | abs v <= P} = {x:int | --P <= x /\\ x <= P}
-      #|  !P:int. &1 <= P ==> &(CARD {v:int | abs v <= P}) <= &3 * P
+      #|  forall P:int. &1 <= P ==> &(CARD {v:int | abs v <= P}) <= &3 * P
       #|  reparam kk (w:num->int) =\n     (\\i. if i IN 1..kk then w(i+kk)\n          else if i IN (kk+1)..(2*kk) then w(i-kk) - w(i) else &0)
       #|  i:num
       #|  kk + kk = 2 * kk
@@ -11998,13 +11998,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1
       #|  g:num->int
       #|  kk:num
-      #|  !kk (g:num->int). isum((kk+1)..(2*kk)) g = isum(1..kk)(\\i. g(i+kk))
+      #|  forall kk (g:num->int). isum((kk+1)..(2*kk)) g = isum(1..kk)(\\i. g(i+kk))
       #|  abs((w:num->int)(i-kk)) <= P /\\\n   abs((w:num->int) i) <= P
       #|  abs((w:num->int)(i+kk)) <= P
       #|  i:num
       #|  abs((w:num->int)(1+kk)) <= P
       #|  &0 <= (P:int)
-      #|  !kk P (w:num->int). 1 <= kk /\\\n  w IN ibox (2*kk) P ==> reparam kk w IN ibox (2*kk) (&2 * P)
+      #|  forall kk P (w:num->int). 1 <= kk /\\\n  w IN ibox (2*kk) P ==> reparam kk w IN ibox (2*kk) (&2 * P)
       #|  1 <= kk
       #|  ~(i <= kk)
       #|  i <= 2*kk
@@ -12019,15 +12019,15 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i <= kk
       #|  i IN 1..2*kk
       #|  i:num
-      #|  !kk P (w:num->int) w'.\n     1 <= kk /\\ w IN ibox (2*kk) P /\\ w' IN ibox (2*kk) P /\\\n      reparam kk w = reparam kk w'\n     ==> w = w'
-      #|  boxtuples s P =\n    {t | (!i. i IN 1..s ==> (t:num->num) i < P) /\\\n     (!i. ~(i IN 1..s) ==> t i = 0)}
+      #|  forall kk P (w:num->int) w'.\n     1 <= kk /\\ w IN ibox (2*kk) P /\\ w' IN ibox (2*kk) P /\\\n      reparam kk w = reparam kk w'\n     ==> w = w'
+      #|  boxtuples s P =\n    {t | (forall i. i IN 1..s ==> (t:num->num) i < P) /\\\n     (forall i. ~(i IN 1..s) ==> t i = 0)}
       #|  boxsum e s (t:num->num) = nsum(1..s) (\\i. (t i) EXP e)
       #|  rcount e s P m = CARD {t | t IN boxtuples s P /\\ boxsum e s t = m}
-      #|  {f:num->num | (!x. x IN 1..s ==> f x IN {y | y < P}) /\\\n   (!x. ~(x IN 1..s) ==> f x = 0)}
-      #|  !s P. FINITE(boxtuples s P)
+      #|  {f:num->num | (forall x. x IN 1..s ==> f x IN {y | y < P}) /\\\n   (forall x. ~(x IN 1..s) ==> f x = 0)}
+      #|  forall s P. FINITE(boxtuples s P)
       #|  monom e = \\i:num. if i = e then &1:int else &0
       #|  (\\i. (if i = e then &1:int else &0) * z pow i) = (\\i. if i = e\n   then z pow e else &0)
-      #|  !e z:int. ipoly (monom e) e z = z pow e
+      #|  forall e z:int. ipoly (monom e) e z = z pow e
       #|  (t:num->num) i < P
       #|  i:num
       #|  t:num->num
@@ -12037,7 +12037,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t2:num->num
       #|  t1:num->num
       #|  CARD(IMAGE (\\t:num->num. (\\i. &(t i)):num->int) {t | t IN\n   boxtuples s P /\\ boxsum e s t = m})
-      #|  !e s P m. 1 <= P\n    ==> rcount e s P m <= CARD {x | x IN ibox s (&P) /\\\n     isum(1..s)(\\i. ipoly (monom e) e (x i)) = &m}
+      #|  forall e s P m. 1 <= P\n    ==> rcount e s P m <= CARD {x | x IN ibox s (&P) /\\\n     isum(1..s)(\\i. ipoly (monom e) e (x i)) = &m}
       #|  CHQ (t:num) (p:num->num) (b:bool) =\n   \\i. p((if i <= t then i else i-t) + (if b then t else 0))
       #|  CHSG (t:num) = \\i:num. ~(i <= t)
       #|  (leafidx 0 t (pp:num->num->num) (bp:num->bool) = (\\i:num. i)) /\\\n   (leafidx (SUC s) t pp bp =\n      \\i. CHQ t (pp 0) (bp 0) (leafidx s t (\\j. pp(j+1)) (\\j. bp(j+1)) i))
@@ -12055,19 +12055,19 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (SUC(2*m)+1) DIV 2 = m+1
       #|  m:num
       #|  x:num
-      #|  !t. RIFFLE t permutes 1..2*t
+      #|  forall t. RIFFLE t permutes 1..2*t
       #|  (2*m) DIV 2 = m
       #|  (2*m-1+1) DIV 2 = m
-      #|  !t m. 1 <= m /\\ 2*m <= 2*t ==> RIFFLE t (2*m-1) = m /\\\n  RIFFLE t (2*m) = t + m
+      #|  forall t m. 1 <= m /\\ 2*m <= 2*t ==> RIFFLE t (2*m-1) = m /\\\n  RIFFLE t (2*m) = t + m
       #|  t:num
-      #|  !t x y. RIFFLE t x = RIFFLE t y <=> x = y
+      #|  forall t x y. RIFFLE t x = RIFFLE t y <=> x = y
       #|  BLK (B:num) (t:num) = (1..B) UNION (IMAGE (\\j. t+j)\n (1..B))
-      #|  !B t x. x IN BLK B t <=> (1 <= x /\\ x <= B) \\/ (?j. 1 <= j /\\ j <= B /\\\n  x = t+j)
+      #|  forall B t x. x IN BLK B t <=> (1 <= x /\\ x <= B) \\/ (?j. 1 <= j /\\ j <= B /\\\n  x = t+j)
       #|  x - B:num
       #|  x:num <= B
       #|  x:num
-      #|  !B. BLK B B = 1..2*B
-      #|  !e G. TSET e G = BLK e (e*G)
+      #|  forall B. BLK B B = 1..2*B
+      #|  forall e G. TSET e G = BLK e (e*G)
       #|  j:num
       #|  t:num
       #|  2*j
@@ -12089,13 +12089,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  v:num
       #|  (2*c) DIV 2 = c
       #|  c:num
-      #|  !t B. EVEN B /\\ 1 <= B /\\\n  B <= t ==> IMAGE (RIFFLE t) (1..B) = BLK (B DIV 2) t
+      #|  forall t B. EVEN B /\\ 1 <= B /\\\n  B <= t ==> IMAGE (RIFFLE t) (1..B) = BLK (B DIV 2) t
       #|  FF (t:num) = \\y:num. RIFFLE t (if y <= t then y else y - t)
-      #|  !s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             RIFFLE t (if leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i <= t\n                       then leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i\n                       else leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i - t)
-      #|  !s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             FF t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i)
+      #|  forall s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             RIFFLE t (if leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i <= t\n                       then leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i\n                       else leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i - t)
+      #|  forall s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             FF t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i)
       #|  1 <= w ==> (if t + w <= t then t + w else (t + w)\n     - t) = w
       #|  w <= t ==> (if w <= t then w else w - t) = w
-      #|  !t w. 1 <= w /\\ w <= t ==> FF t w = RIFFLE t w /\\\n  FF t (t + w) = RIFFLE t w
+      #|  forall t w. 1 <= w /\\ w <= t ==> FF t w = RIFFLE t w /\\\n  FF t (t + w) = RIFFLE t w
       #|  x:num
       #|  t:num
       #|  x:num
@@ -12107,26 +12107,26 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:num
       #|  x:num
       #|  v:num
-      #|  !t C. 1 <= C /\\\n  C <= t ==> IMAGE (FF t) (BLK C t) = IMAGE (RIFFLE t) (1..C)
-      #|  !t B w y. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ y IN BLK (2*B) t\n            ==> (FF t y = RIFFLE t w <=> (y = w \\/ y = t + w))
+      #|  forall t C. 1 <= C /\\\n  C <= t ==> IMAGE (FF t) (BLK C t) = IMAGE (RIFFLE t) (1..C)
+      #|  forall t B w y. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ y IN BLK (2*B) t\n            ==> (FF t y = RIFFLE t w <=> (y = w \\/ y = t + w))
       #|  j:num
       #|  t:num
       #|  2*j
       #|  v:num
       #|  t:num
       #|  2*v-1
-      #|  !t B v. 1 <= B /\\ 2*B <= t /\\ v IN BLK B t\n           ==> ?w. 1 <= w /\\ w <= 2*B /\\ v = RIFFLE t w
+      #|  forall t B v. 1 <= B /\\ 2*B <= t /\\ v IN BLK B t\n           ==> ?w. 1 <= w /\\ w <= 2*B /\\ v = RIFFLE t w
       #|  t = (2*B) * 2 EXP s
       #|  (2*B) * 1
       #|  t = (2*B) * 2 EXP s
       #|  1 <= n <=> 0 < n
       #|  1 <= 2 EXP s
-      #|  !s t B. t = B * 2 EXP SUC s\n           ==> t = (2*B) * 2 EXP s /\\ (1 <= B ==> (1 <= 2*B /\\ 2*B <= t /\\\n            EVEN(2*B)))
+      #|  forall s t B. t = B * 2 EXP SUC s\n           ==> t = (2*B) * 2 EXP s /\\ (1 <= B ==> (1 <= 2*B /\\ 2*B <= t /\\\n            EVEN(2*B)))
       #|  1 <= n <=> ~(n = 0)
       #|  2*B = (2*B)*1
       #|  1 <= n <=> 0 < n
       #|  1 <= 2 EXP s
-      #|  !B s t. t = (2*B)*2 EXP s /\\ 1 <= B ==> 2*B <= t /\\ 1 <= t
+      #|  forall B s t. t = (2*B)*2 EXP s /\\ 1 <= B ==> 2*B <= t /\\ 1 <= t
       #|  (2*B) DIV 2 = B
       #|  IMAGE (RIFFLE T2) (1..(2*B)) = BLK ((2*B) DIV 2) T2
       #|  IMAGE (FF T2) (BLK (2*B) T2) = IMAGE (RIFFLE T2) (1..(2*B))
@@ -12138,7 +12138,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  s:num
       #|  IMAGE (leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F))\n    (1..2*t) =\n                IMAGE (FF t) (IMAGE (leafidx s t (\\j:num. RIFFLE t) (\\j:num.\n                 F)) (1..2*t))
-      #|  !s t B. t = B * 2 EXP s /\\ 1 <= B\n          ==> IMAGE (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)) (1..2*t) = BLK\n           B t
+      #|  forall s t B. t = B * 2 EXP s /\\ 1 <= B\n          ==> IMAGE (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)) (1..2*t) = BLK\n           B t
       #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w
       #|  i:num
       #|  w:num
@@ -12161,7 +12161,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  s:num
       #|  i:num
-      #|  !i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n    i IN BLK (2*B) t
+      #|  forall i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n    i IN BLK (2*B) t
       #|  t = B * 2 EXP SUC s
       #|  w:num
       #|  v:num
@@ -12179,7 +12179,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  v IN BLK B t
       #|  1 <= v /\\ v <= 2*B
       #|  t:num = B
-      #|  !s t B v. t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n           ==> {i | i IN 1..2*t /\\\n            leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v} HAS_SIZE 2 EXP\n             s
+      #|  forall s t B v. t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n           ==> {i | i IN 1..2*t /\\\n            leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v} HAS_SIZE 2 EXP\n             s
       #|  g IN TSET e G
       #|  g:num
       #|  e:num
@@ -12191,11 +12191,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  e*G = e * 2 EXP k
       #|  2*e*G = 2*(e*G)
-      #|  !e k (G:num).\n    2 <= e /\\ 1 <= G /\\ G = 2 EXP k\n    ==> IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G) =\n     TSET e G /\\\n        (!g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g} = G)
-      #|  !s t i. leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n             CHSG t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i))
+      #|  forall e k (G:num).\n    2 <= e /\\ 1 <= G /\\ G = 2 EXP k\n    ==> IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G) =\n     TSET e G /\\\n        (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g} = G)
+      #|  forall s t i. leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n             CHSG t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i))
       #|  ~(t + w <= t)
       #|  w <= t
-      #|  !s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\\n               i IN 1..2*t /\\\n                leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
+      #|  forall s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\\n               i IN 1..2*t /\\\n                leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
       #|  ~(leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n                  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w)
       #|  i:num
       #|  w:num
@@ -12206,10 +12206,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  w:num
       #|  B:num
       #|  t:num
-      #|  !s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ i IN 1..2*t /\\\n               leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           ~(leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i)) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
+      #|  forall s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ i IN 1..2*t /\\\n               leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           ~(leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i)) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
       #|  2 * 2 * m = 2 * (2 * m)
       #|  ?m. 2 EXP s = 2 * m
-      #|  !s. 1 <= s ==> 2 EXP SUC s DIV 2 = 2 EXP s DIV 2 + 2 EXP s DIV 2
+      #|  forall s. 1 <= s ==> 2 EXP SUC s DIV 2 = 2 EXP s DIV 2 + 2 EXP s DIV 2
       #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w
       #|  i:num
       #|  t+w:num
@@ -12254,7 +12254,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  s:num
       #|  i:num
-      #|  !i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n   i IN BLK (2*B) t
+      #|  forall i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n   i IN BLK (2*B) t
       #|  t = B * 2 EXP SUC s
       #|  w:num
       #|  v:num
@@ -12267,7 +12267,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  s:num
       #|  ~(1 <= 0)
-      #|  !s t B v. 1 <= s /\\ t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n     ==> {i | i IN 1..2*t /\\\n      leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)} HAS_SIZE (2 EXP s\n               DIV 2)\n      /\\ {i | i IN 1..2*t /\\\n       leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i} HAS_SIZE (2 EXP s\n               DIV 2)
+      #|  forall s t B v. 1 <= s /\\ t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n     ==> {i | i IN 1..2*t /\\\n      leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)} HAS_SIZE (2 EXP s\n               DIV 2)\n      /\\ {i | i IN 1..2*t /\\\n       leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i} HAS_SIZE (2 EXP s\n               DIV 2)
       #|  t = (2 * B) * 2 EXP s
       #|  t = (2 * B) * 2 EXP s
       #|  t = (2 * B) * 2 EXP s
@@ -12311,51 +12311,51 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  e*G = e * 2 EXP k
       #|  2*e*G = 2*(e*G)
       #|  1 <= k
-      #|  !e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (!g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
+      #|  forall e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
       #|  G:num
       #|  k:num
       #|  e:num
       #|  G:num
       #|  k:num
       #|  e:num
-      #|  !e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G)\n     = TSET e G /\\\n         (!g. g IN TSET e G\n              ==> CARD {i | i IN 1..2*e*G /\\\n               leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g} = G))\n                /\\\n        (!g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
+      #|  forall e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G)\n     = TSET e G /\\\n         (forall g. g IN TSET e G\n              ==> CARD {i | i IN 1..2*e*G /\\\n               leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g} = G))\n                /\\\n        (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
       #|  jsplit p t (u:num->int) (v:num->int) =\n    (\\i. if i IN 1..p then u i else if i IN (p+1)..(p+t) then v(i - p) else\n     &0)
       #|  jtl p t (w:num->int) = (\\i. if i IN 1..t then w(i +\n p) else &0)
       #|  i:num
-      #|  !p t M (w:num->int). w IN ibox (p+t) M ==> ihead p w IN ibox p M
+      #|  forall p t M (w:num->int). w IN ibox (p+t) M ==> ihead p w IN ibox p M
       #|  i:num
-      #|  !p t M (w:num->int). w IN ibox (p+t) M ==> jtl p t w IN ibox t M
+      #|  forall p t M (w:num->int). w IN ibox (p+t) M ==> jtl p t w IN ibox t M
       #|  i:num
-      #|  !p t M (u:num->int) (v:num->int). u IN ibox p M /\\\n  v IN ibox t M ==> jsplit p t u v IN ibox (p+t) M
+      #|  forall p t M (u:num->int) (v:num->int). u IN ibox p M /\\\n  v IN ibox t M ==> jsplit p t u v IN ibox (p+t) M
       #|  1 <= i - p /\\ i - p <= t
       #|  i:num
-      #|  !p t M (w:num->int).\n    w IN ibox (p+t) M ==> jsplit p t (ihead p w) (jtl p t w) = w
+      #|  forall p t M (w:num->int).\n    w IN ibox (p+t) M ==> jsplit p t (ihead p w) (jtl p t w) = w
       #|  i + p:num
       #|  ~((i + p) IN 1..p) /\\ (i + p) IN (p+1)..(p+t) /\\\n      (i + p) - p = i
       #|  i IN 1..t
       #|  i:num
       #|  i IN 1..p
       #|  i:num
-      #|  !p t M (u:num->int) v u' v'.\n     u IN ibox p M /\\ v IN ibox t M /\\ u' IN ibox p M /\\ v' IN ibox t M /\\\n     jsplit p t u v = jsplit p t u' v'\n     ==> u = u' /\\ v = v'
+      #|  forall p t M (u:num->int) v u' v'.\n     u IN ibox p M /\\ v IN ibox t M /\\ u' IN ibox p M /\\ v' IN ibox t M /\\\n     jsplit p t u v = jsplit p t u' v'\n     ==> u = u' /\\ v = v'
       #|  i:num
       #|  t:num
       #|  1
       #|  \\i. (W:num->int->int) i ((w:num->int) i)
       #|  p:num
-      #|  !p t (w:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+p) (jtl p t w i))
+      #|  forall p t (w:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+p) (jtl p t w i))
       #|  ~(1 <= i+p /\\ i+p <= p) /\\ (p+1 <= i+p /\\ i+p <= p+t) /\\\n   (i+p)-p = i
       #|  i:num
       #|  t:num
       #|  1
       #|  \\i. (W:num->int->int) i (jsplit p t (u:num->int) (v:num->int) i)
       #|  p:num
-      #|  !p t (u:num->int) (v:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i\n  (jsplit p t u v i)) = isum(1..t)(\\i. W (i+p) (v i))
+      #|  forall p t (u:num->int) (v:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i\n  (jsplit p t u v i)) = isum(1..t)(\\i. W (i+p) (v i))
       #|  1..0 = {}
-      #|  !M. ibox 0 M = {(\\i. &0)}
+      #|  forall M. ibox 0 M = {(\\i. &0)}
       #|  (i + p) - p = i /\\\n   (p:num) + i = i + p
       #|  i:num
       #|  (p+1)..(p+t) = (1+p)..(t+p)
-      #|  !(Vm:num->int->int) p t (w:num->int).\n     isum((p+1)..(p+t))(\\i. Vm (i-p) (w i)) = isum(1..t)(\\i. Vm i (w (p+i)))
+      #|  forall(Vm:num->int->int) p t (w:num->int).\n     isum((p+1)..(p+t))(\\i. Vm (i-p) (w i)) = isum(1..t)(\\i. Vm i (w (p+i)))
       #|  M:int
       #|  t:num
       #|  p:num
@@ -12375,13 +12375,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ihead p (w:num->int)
       #|  w:num->int
       #|  {w:num->int | w IN ibox (p+t) M /\\ Q w /\\\n    isum((p+1)..(p+t))(\\i. (W:num->int->int) i (w i)) = b} =\n    IMAGE (\\pr. jsplit p t (FST pr) (SND pr))\n          (({u:num->int | u IN ibox p M /\\ Q u}) CROSS\n           ({v:num->int | v IN ibox t M /\\\n            isum(1..t)(\\i. W (i+p) (v i)) = b}))
-      #|  !(Q:(num->int)->bool) (W:num->int->int) p t M b.\n    (!u v. u IN ibox p M /\\ v IN ibox t M ==> (Q (jsplit p t u v) <=> Q u))\n    ==> CARD {w | w IN ibox (p+t) M /\\ Q w /\\\n     isum((p+1)..(p+t))(\\i. W i (w i)) = b} =\n        CARD {u | u IN ibox p M /\\ Q u} *\n        CARD {v | v IN ibox t M /\\ isum(1..t)(\\i. W (i+p) (v i)) = b}
+      #|  forall(Q:(num->int)->bool) (W:num->int->int) p t M b.\n    (forall u v. u IN ibox p M /\\ v IN ibox t M ==> (Q (jsplit p t u v) <=> Q u))\n    ==> CARD {w | w IN ibox (p+t) M /\\ Q w /\\\n     isum((p+1)..(p+t))(\\i. W i (w i)) = b} =\n        CARD {u | u IN ibox p M /\\ Q u} *\n        CARD {v | v IN ibox t M /\\ isum(1..t)(\\i. W (i+p) (v i)) = b}
       #|  g*t + t = (g+1)*t
       #|  g*t + t:num
       #|  (g*t+i) IN 1..(m*t)
-      #|  !m t (u:num->int) (v:num->int) g i. g < m /\\ 1 <= i /\\ i <= t\n     ==> jsplit (m*t) t u v (g*t+i) = u (g*t+i)
+      #|  forall m t (u:num->int) (v:num->int) g i. g < m /\\ 1 <= i /\\ i <= t\n     ==> jsplit (m*t) t u v (g*t+i) = u (g*t+i)
       #|  i:num
-      #|  !(V:num->num->int->int) t m (u:num->int) (v:num->int) g. g < m\n     ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = isum(1..t)(\\i. V\n      g i (u (g*t+i)))
+      #|  forall(V:num->num->int->int) t m (u:num->int) (v:num->int) g. g < m\n     ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = isum(1..t)(\\i. V\n      g i (u (g*t+i)))
       #|  g:num
       #|  g:num
       #|  v:num->int
@@ -12390,7 +12390,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  V:num->num->int->int
       #|  g:num
-      #|  !(V:num->num->int->int) t (z:num->int) m (u:num->int) (v:num->int).\n     ((!g. g < m ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = z g)\n      <=>\n      (!g. g < m ==> isum(1..t)(\\i. V g i (u (g*t+i))) = z g))
+      #|  forall(V:num->num->int->int) t (z:num->int) m (u:num->int) (v:num->int).\n     ((forall g. g < m ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = z g)\n      <=>\n      (forall g. g < m ==> isum(1..t)(\\i. V g i (u (g*t+i))) = z g))
       #|  v:num->int
       #|  u:num->int
       #|  (z:num->int) m
@@ -12398,27 +12398,27 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  m*t:num
       #|  \\i. (V:num->num->int->int) m (i-(m*t))
-      #|  \\ww:num->int. !g. g < m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (ww\n     (g*t+i))) = (z:num->int) g
+      #|  \\ww:num->int. forall g. g < m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (ww\n     (g*t+i))) = (z:num->int) g
       #|  (w:num->int) IN ibox ((m*t)+t) M
       #|  w:num->int
-      #|  {w:num->int | w IN ibox ((m*t)+t) M /\\\n    (!g. g < SUC m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (w (g*t+i))) =\n     (z:num->int) g)} =\n    {w:num->int | w IN ibox ((m*t)+t) M /\\\n     (\\ww. !g. g < m ==> isum(1..t)(\\i. V g i (ww (g*t+i))) = z g) w /\\\n      isum(((m*t)+1)..((m*t)+t))(\\i. V m (i-(m*t)) (w i)) = z m}
+      #|  {w:num->int | w IN ibox ((m*t)+t) M /\\\n    (forall g. g < SUC m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (w (g*t+i))) =\n     (z:num->int) g)} =\n    {w:num->int | w IN ibox ((m*t)+t) M /\\\n     (\\ww. forall g. g < m ==> isum(1..t)(\\i. V g i (ww (g*t+i))) = z g) w /\\\n      isum(((m*t)+1)..((m*t)+t))(\\i. V m (i-(m*t)) (w i)) = z m}
       #|  {g | g < SUC m} = m INSERT {g | g < m}
       #|  nproduct (m INSERT {g | g < m}) (\\g. CARD{ u:num->int | u IN\n   ibox t M /\\\n    isum(1..t)(\\i. (V:num->num->int->int) g i (u i)) = (z:num->int) g }) =\n    CARD{ u:num->int | u IN ibox t M /\\ isum(1..t)(\\i. V m i (u i)) = z m } *\n    nproduct {g | g < m} (\\g. CARD{ u:num->int | u IN ibox t M /\\\n     isum(1..t)(\\i. V g i (u i)) = z g })
       #|  SUC m * t = (m * t) + t
       #|  {w:num->int | w IN {(\\i. &0)}} = {(\\i. &0)}
-      #|  !(V:num->num->int->int) t M (z:num->int) m.\n    CARD {w | w IN ibox (m*t) M /\\\n     (!g. g < m ==> isum(1..t)(\\i. V g i (w (g*t+i))) = z g)} =\n    nproduct {g | g < m} (\\g. CARD{ u | u IN ibox t M /\\\n     isum(1..t)(\\i. V g i (u i)) = z g })
+      #|  forall(V:num->num->int->int) t M (z:num->int) m.\n    CARD {w | w IN ibox (m*t) M /\\\n     (forall g. g < m ==> isum(1..t)(\\i. V g i (w (g*t+i))) = z g)} =\n    nproduct {g | g < m} (\\g. CARD{ u | u IN ibox t M /\\\n     isum(1..t)(\\i. V g i (u i)) = z g })
       #|  CARD(IMAGE (\\g. e*G + g) (1..e)) = CARD(1..e)
       #|  x:num
       #|  (1..e) INTER (IMAGE (\\g. e*G + g) (1..e)) = {}
       #|  e = e*1
       #|  e <= e*G
-      #|  !e G. 1 <= G ==> CARD(TSET e G) = 2*e
+      #|  forall e G. 1 <= G ==> CARD(TSET e G) = 2*e
       #|  t IN TSET e G
       #|  t:num
       #|  e:num
       #|  e*G:num
       #|  k:num
-      #|  !e k (G:num) t. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ t IN TSET e G\n   ==> {i | i IN 1..2*e*G /\\\n    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = t} HAS_SIZE G
+      #|  forall e k (G:num) t. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ t IN TSET e G\n   ==> {i | i IN 1..2*e*G /\\\n    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = t} HAS_SIZE G
       #|  G = 2 EXP k
       #|  G = 2 EXP k
       #|  {i | i IN 1..2*e*G /\\\n   leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = (lab:num->num) g} HAS_SIZE G
@@ -12427,16 +12427,16 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  lab:num->num
       #|  2*e
       #|  TSET e G
-      #|  !e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?lab. (!g. g < 2*e ==> lab g IN TSET e G) /\\\n             (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n             (!g. g < 2*e ==> ?en. (!r. r < G ==> en r IN {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g}) /\\\n                                   (!i. i IN {i | i IN 1..2*e*G /\\\n                                    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i\n                                     = lab g} ==> ?!r. r < G /\\ en r = i))
+      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?lab. (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n             (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n             (forall g. g < 2*e ==> ?en. (forall r. r < G ==> en r IN {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g}) /\\\n                                   (forall i. i IN {i | i IN 1..2*e*G /\\\n                                    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i\n                                     = lab g} ==> ?!r. r < G /\\ en r = i))
       #|  g:num
       #|  signfam (V:num->int->int) t =\n  \\i x. if i <= t then V i x else --(V (i-t) x)
       #|  childfam (Wf:(num->int)->num->int->int) t (p:num->num) b =\n    if b then (\\hh. signfam (\\j. Wf hh (p(j+t))) t)\n         else (\\hh. signfam (\\k. Wf hh (p k)) t)
       #|  (pleaf 0 (Wf:(num->int)->num->int->int) t (pp:num->num->num) (bp:num->bool) =\n  Wf) /\\\n  (pleaf (SUC s) (Wf:(num->int)->num->int->int) t (pp:num->num->num)\n   (bp:num->bool) =\n     pleaf s (childfam Wf t (pp 0) (bp 0)) t (\\j:num. pp(j+1)) (\\j:num.\n      bp(j+1)))
       #|  SGNRELAB (Wf:(num->int)->num->int->int) (sg:num->bool) (q:num->num) =\n     \\hh i x. if sg i then --(Wf hh (q i) x) else Wf hh (q i) x
-      #|  !(Wf:(num->int)->num->int->int) t p b.\n     childfam Wf t p b = SGNRELAB Wf (CHSG t) (CHQ t p b)
-      #|  !(Wf:(num->int)->num->int->int) sg1 q1 sg2 q2.\n     SGNRELAB (SGNRELAB Wf sg1 q1) sg2 q2 =\n     SGNRELAB Wf (\\i. ~(sg2 i <=> sg1(q2 i))) (\\i. q1(q2 i))
-      #|  !(Wf:(num->int)->num->int->int). SGNRELAB Wf (\\i. F) (\\i. i) = Wf
-      #|  !s (Wf:(num->int)->num->int->int) t pp bp.\n     pleaf s Wf t pp bp = SGNRELAB Wf (leafsg s t pp bp) (leafidx s t pp bp)
+      #|  forall(Wf:(num->int)->num->int->int) t p b.\n     childfam Wf t p b = SGNRELAB Wf (CHSG t) (CHQ t p b)
+      #|  forall(Wf:(num->int)->num->int->int) sg1 q1 sg2 q2.\n     SGNRELAB (SGNRELAB Wf sg1 q1) sg2 q2 =\n     SGNRELAB Wf (\\i. ~(sg2 i <=> sg1(q2 i))) (\\i. q1(q2 i))
+      #|  forall(Wf:(num->int)->num->int->int). SGNRELAB Wf (\\i. F) (\\i. i) = Wf
+      #|  forall s (Wf:(num->int)->num->int->int) t pp bp.\n     pleaf s Wf t pp bp = SGNRELAB Wf (leafsg s t pp bp) (leafidx s t pp bp)
       #|  \\j:num. (bp:num->bool)(j+1)
       #|  \\j:num. (pp:num->num->num)(j+1)
       #|  t:num
@@ -12456,12 +12456,12 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  G:num
       #|  k:num
       #|  e:num
-      #|  !e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?(lab:num->num) (en:num->num->num).\n         (!g. g < 2*e ==> lab g IN TSET e G) /\\\n         (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n         (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n         (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n           en g r = i)
+      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?(lab:num->num) (en:num->num->num).\n         (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n         (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n         (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n         (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n           en g r = i)
       #|  i:num
       #|  G:num
       #|  k:num
       #|  e:num
-      #|  !e k (G:num) i. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ i IN 1..2*e*G\n     ==> leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i IN TSET e G
+      #|  forall e k (G:num) i. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ i IN 1..2*e*G\n     ==> leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i IN TSET e G
       #|  G = 2 EXP k
       #|  G = 2 EXP k
       #|  g1:num = g2
@@ -12473,7 +12473,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  g2:num
       #|  r1:num
       #|  g1:num
-      #|  !e k (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> !g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n      en g1 r1 = en g2 r2 ==> g1 = g2 /\\ r1 = r2
+      #|  forall e k (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> forall g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n      en g1 r1 = en g2 r2 ==> g1 = g2 /\\ r1 = r2
       #|  r1:num
       #|  g1:num
       #|  r2:num
@@ -12488,7 +12488,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= n <=> ~(n=0)
       #|  &1 <= &(4 EXP SUC e):int
       #|  4 EXP SUC(SUC e) = 4 * 4 EXP SUC e
-      #|  !e. &3 * &(4 EXP SUC e) + &1 <= &(4 EXP SUC(SUC e)):int
+      #|  forall e. &3 * &(4 EXP SUC e) + &1 <= &(4 EXP SUC(SUC e)):int
       #|  (&(4 EXP SUC e):int) * P pow (SUC e - j) +\n    &2 * &(4 EXP SUC e) * P pow (SUC e - j) +\n    P pow (SUC e - j) =\n    (&3 * &(4 EXP SUC e) + &1) * P pow (SUC e - j)
       #|  (&(4 EXP SUC e):int) * P pow (SUC e - j) +\n    &2 * &(4 EXP SUC e) * P pow (SUC e - j) +\n    P pow (SUC e - j)
       #|  abs(if j = SUC e then &1 else &0) <= (P:int) pow (SUC e - j)
@@ -12503,7 +12503,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &0 <= (P:int) pow (SUC e - j)
       #|  &0 <= (P:int)
       #|  abs(if j = 0 then &0 else (g0:num->int)(j-1)) + abs(if j <= e\n   then h * g0 j else &0) + abs(if j = SUC e then &1 else &0)
-      #|  !e (g0:num->int) P h j. &1 <= P /\\ abs h <= &2 * P /\\ j <= SUC e /\\\n     (!k. k <= e ==> abs (g0 k) <= &(4 EXP SUC e) * P pow (e - k))\n   ==> abs((if j = 0 then &0 else g0 (j - 1)) + (if j <= e then h * g0 j else\n    &0) + (if j = SUC e then &1 else &0))\n       <= &(4 EXP SUC(SUC e)) * P pow (SUC e - j)
+      #|  forall e (g0:num->int) P h j. &1 <= P /\\ abs h <= &2 * P /\\ j <= SUC e /\\\n     (forall k. k <= e ==> abs (g0 k) <= &(4 EXP SUC e) * P pow (e - k))\n   ==> abs((if j = 0 then &0 else g0 (j - 1)) + (if j <= e then h * g0 j else\n    &0) + (if j = SUC e then &1 else &0))\n       <= &(4 EXP SUC(SUC e)) * P pow (SUC e - j)
       #|  k:num
       #|  k:num
       #|  k:num
@@ -12516,7 +12516,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  k:num
       #|  k:num
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= &2 * B) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &2 * B) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
       #|  i:A
       #|  isum s (\\i. (a:A->int) i * (z i - z0 i)) = isum s (\\i. a i\n       * z i) - isum s (\\i. a i * z0 i)
       #|  (z:A->int) i = &0 /\\ (z0:A->int) i = &0
@@ -12534,17 +12534,17 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  z0:A->int
       #|  MS:(A->int)->bool = {}
       #|  MS:(A->int)->bool = {}
-      #|  {a:A->int | (!i. i IN s ==> abs(a i) <= B) /\\\n     (!i. ~(i IN s) ==> a i = &0)}
+      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= B) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
       #|  FINITE (MS:(A->int)->bool)
-      #|  MS = {z:A->int | (!i. i IN s ==> abs(z i) <= B) /\\\n   (!i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
-      #|  !s:A->bool a m B. FINITE s /\\ &0 <= B\n    ==> lincount s a m B <= lincount s a (&0) (&2 * B)
+      #|  MS = {z:A->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
+      #|  forall s:A->bool a m B. FINITE s /\\ &0 <= B\n    ==> lincount s a m B <= lincount s a (&0) (&2 * B)
       #|  MS:(A->int)->bool
       #|  MS:(A->int)->bool
       #|  MS:(A->int)->bool
       #|  MS:(A->int)->bool
       #|  MS:(A->int)->bool
       #|  a:A->int
-      #|  !s:A->bool A B (mfn:(A->int)->int).\n     FINITE s /\\ &0 <= B\n    ==> isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n     (!i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (mfn a) B))\n        <= isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n         (!i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
+      #|  forall s:A->bool A B (mfn:(A->int)->int).\n     FINITE s /\\ &0 <= B\n    ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (mfn a) B))\n        <= isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n         (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
       #|  2 < CARD(s:A->bool)
       #|  ((&3:int) pow (CARD(s:A->bool)) * &1) *\n    ((A:int) * B) pow (CARD s - 1) +\n    Cnz * (A * B) pow (CARD s - 1)
       #|  B:int
@@ -12553,22 +12553,22 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (&3:int) pow (CARD(s:A->bool)) * &1 + (Cnz:int)
       #|  Cnz:int
       #|  s:A->bool
-      #|  !s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. !A B:int. &1 <= A /\\ A <= B /\\ B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n                                 (!i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (&0) B))\n                <= c * (A * B) pow (CARD s - 1)
+      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. forall A B:int. &1 <= A /\\ A <= B /\\ B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (&0) B))\n                <= c * (A * B) pow (CARD s - 1)
       #|  &2 * B:int
       #|  A:int
-      #|  isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n   (!i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
+      #|  isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n   (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
       #|  mfn:(A->int)->int
       #|  B:int
       #|  A:int
       #|  c:int
       #|  c:int
       #|  s:A->bool
-      #|  !s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. !A B (mfn:(A->int)->int). &1 <= A /\\ A <= &2 * B /\\\n     &2 * B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (!i. i IN s ==> abs(a i) <= A) /\\\n             (!i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (mfn a) B))\n                <= c * (A * (&2 * B)) pow (CARD s - 1)
+      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. forall A B (mfn:(A->int)->int). &1 <= A /\\ A <= &2 * B /\\\n     &2 * B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n             (forall i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (mfn a) B))\n                <= c * (A * (&2 * B)) pow (CARD s - 1)
       #|  amcount (V:num->int->int) t M a =\n  CARD {z | z IN ibox t M /\\ isum(1..t)(\\i. V i (z i)) = a}
       #|  amreps (V:num->int->int) t M =\n  IMAGE (\\z. isum(1..t)(\\i. V i (z i))) (ibox t M)
       #|  mvf t (V:num->int->int) = \\i x. if i <= t then V i x else V (i - t) x
       #|  i:num
-      #|  !t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
+      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
       #|  (i+t)-t = i
       #|  i:num
       #|  t + t = 2 * t
@@ -12577,25 +12577,25 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1
       #|  \\i. (V:num->int->int) (i-t) (ijoin t (u:num->int) (v:num->int) i)
       #|  t:num
-      #|  !t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. V (i-t) (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
+      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. V (i-t) (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
       #|  i:num
       #|  V:num->int->int
       #|  v:num->int
       #|  u:num->int
       #|  t:num
-      #|  !t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
+      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
       #|  i:num
       #|  V:num->int->int
       #|  v:num->int
       #|  u:num->int
       #|  t:num
-      #|  !t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
-      #|  !(V:num->int->int) t M. FINITE(amreps V t M)
+      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
+      #|  forall(V:num->int->int) t M. FINITE(amreps V t M)
       #|  z:num->int
       #|  ~(a IN amreps V t M)
       #|  z:num->int
       #|  {z | z IN ibox t M /\\\n   isum(1..t)(\\i. V i (z i)) = a} = {}
-      #|  !(V:num->int->int) t M a. ~(a IN amreps V t M) ==> amcount V t M a = 0
+      #|  forall(V:num->int->int) t M a. ~(a IN amreps V t M) ==> amcount V t M a = 0
       #|  M:int
       #|  t:num
       #|  v2:num->int
@@ -12619,7 +12619,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ihead t (w:num->int)
       #|  w:num->int
       #|  {w | w IN ibox (2*t) M /\\ isum(1..t)(\\i. mvf t V i (w i)) =\n    a /\\ isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = b} =\n    IMAGE (\\p. ijoin t (FST p) (SND p))\n          (({u | u IN ibox t M /\\ isum(1..t)(\\i. V i (u i)) = a}) CROSS\n           ({v | v IN ibox t M /\\ isum(1..t)(\\i. V i (v i)) = b}))
-      #|  !(V:num->int->int) t M a b.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = a /\\\n                  isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = b} =\n        amcount V t M a * amcount V t M b
+      #|  forall(V:num->int->int) t M a b.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = a /\\\n                  isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = b} =\n        amcount V t M a * amcount V t M b
       #|  w:num->int
       #|  ~(a IN IMAGE (\\w. isum (1..t) (\\i. mvf t V i (w i))) S)
       #|  w:num->int
@@ -12649,20 +12649,20 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ibox (2*t) M
       #|  FINITE {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n      isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y}
       #|  y:int
-      #|  !y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y} (\\w:num->int. 1) = amcount V t\n     M y * amcount V t M y
+      #|  forall y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y} (\\w:num->int. 1) = amcount V t\n     M y * amcount V t M y
       #|  w:num->int
       #|  y:int
-      #|  !y. {x | x IN S /\\\n   isum(1..t)(\\i. mvf t V i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y}
+      #|  forall y. {x | x IN S /\\\n   isum(1..t)(\\i. mvf t V i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y}
       #|  S:(num->int)->bool
       #|  \\w:num->int. 1
       #|  \\w:num->int. isum(1..t)(\\i. mvf t V i (w i))
       #|  ibox (2*t) M
       #|  FINITE (S:(num->int)->bool)
       #|  S = {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. mvf t V i (w i)) = isum((t+1)..(2*t))(\\i. mvf t V i (w\n    i))}
-      #|  !(V:num->int->int) t M.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n                   t V i (w i))} =\n        nsum (amreps V t M) (\\a. amcount V t M a * amcount V t M a)
+      #|  forall(V:num->int->int) t M.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n                   t V i (w i))} =\n        nsum (amreps V t M) (\\a. amcount V t M a * amcount V t M a)
       #|  wtail t (W:num->int->int) = \\i x. W (i+t) x
       #|  i:num
-      #|  !t (w:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ihead t w i)) =\n  isum(1..t)(\\i. W i (w i))
+      #|  forall t (w:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ihead t w i)) =\n  isum(1..t)(\\i. W i (w i))
       #|  i:num
       #|  t + t = 2 * t
       #|  1 + t = t + 1
@@ -12670,9 +12670,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1
       #|  \\i. (W:num->int->int) i ((w:num->int) i)
       #|  t:num
-      #|  !t (w:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+t) (itail t w i))
+      #|  forall t (w:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+t) (itail t w i))
       #|  i:num
-      #|  !t (u:num->int) (v:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ijoin t\n  u v i)) = isum(1..t)(\\i. W i (u i))
+      #|  forall t (u:num->int) (v:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ijoin t\n  u v i)) = isum(1..t)(\\i. W i (u i))
       #|  ~(1 <= i+t /\\ i+t <= t) /\\ (t+1 <= i+t /\\ i+t <= 2*t) /\\\n   (i+t)-t = i
       #|  i:num
       #|  t + t = 2 * t
@@ -12681,7 +12681,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1
       #|  \\i. (W:num->int->int) i (ijoin t (u:num->int) (v:num->int) i)
       #|  t:num
-      #|  !t (u:num->int) (v:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i\n  (ijoin t u v i)) = isum(1..t)(\\i. W (i+t) (v i))
+      #|  forall t (u:num->int) (v:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i\n  (ijoin t u v i)) = isum(1..t)(\\i. W (i+t) (v i))
       #|  M:int
       #|  t:num
       #|  v2:num->int
@@ -12697,7 +12697,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ihead t (w:num->int)
       #|  w:num->int
       #|  {w:num->int | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. (W:num->int->int) i (w i)) = a /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = b} =\n    IMAGE (\\p. ijoin t (FST p) (SND p))\n          (({u:num->int | u IN ibox t M /\\\n           isum(1..t)(\\i. W i (u i)) = a}) CROSS\n           ({v:num->int | v IN ibox t M /\\\n            isum(1..t)(\\i. W (i+t) (v i)) = b}))
-      #|  !(W:num->int->int) t M a b. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..t)(\\i. W i (w i)) = a /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = b} =\n        amcount W t M a * amcount (wtail t W) t M b
+      #|  forall(W:num->int->int) t M a b. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..t)(\\i. W i (w i)) = a /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = b} =\n        amcount W t M a * amcount (wtail t W) t M b
       #|  w:num->int
       #|  ~(a IN IMAGE (\\w. isum (1..t) (\\i. (W:num->int->int) i (w\n          i))) S)
       #|  w:num->int
@@ -12721,21 +12721,21 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ibox (2*t) M
       #|  FINITE {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. (W:num->int->int) i (w i)) = y /\\\n      isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)}
       #|  y:int
-      #|  !y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. (W:num->int->int) i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)} (\\w:num->int. 1) = amcount\n     W t M y * amcount (wtail t W) t M (m - y)
+      #|  forall y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. (W:num->int->int) i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)} (\\w:num->int. 1) = amcount\n     W t M y * amcount (wtail t W) t M (m - y)
       #|  t + t = 2 * t
       #|  1 <= t + 1
       #|  2 * t = t + t
       #|  isum(1..2*t)(\\i. (W:num->int->int) i (w i)) = isum(1..t)(\\i.\n     W i (w i)) + isum((t+1)..(2*t))(\\i. W i (w i))
       #|  w:num->int
       #|  y:int
-      #|  !y. {x | x IN S /\\\n   isum(1..t)(\\i. (W:num->int->int) i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. W i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)}
+      #|  forall y. {x | x IN S /\\\n   isum(1..t)(\\i. (W:num->int->int) i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. W i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)}
       #|  S:(num->int)->bool
       #|  \\w:num->int. 1
       #|  \\w:num->int. isum(1..t)(\\i. (W:num->int->int) i (w i))
       #|  ibox (2*t) M
       #|  FINITE (S:(num->int)->bool)
       #|  S = {w | w IN ibox (2*t) M /\\\n   isum(1..2*t)(\\i. (W:num->int->int) i (w i)) = m}
-      #|  !(W:num->int->int) t M m. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} =\n        nsum (amreps W t M) (\\a. amcount W t M a * amcount\n         (wtail t W) t M (m - a))
+      #|  forall(W:num->int->int) t M m. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} =\n        nsum (amreps W t M) (\\a. amcount W t M a * amcount\n         (wtail t W) t M (m - a))
       #|  m - (m - x) = x:int
       #|  a:int
       #|  a:int
@@ -12749,10 +12749,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  amreps W t M SUBSET (s:int->bool) /\\\n   amreps (wtail t W) t M SUBSET (s:int->bool)
       #|  FINITE (s:int->bool)
       #|  s = amreps W t M UNION amreps (wtail t W) t M UNION IMAGE\n   (\\a:int. m - a) (amreps W t M) UNION IMAGE (\\a:int. m - a) (amreps\n    (wtail t W) t M)
-      #|  !(W:num->int->int) t M m. 1 <= t\n    ==> 2 * CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} <=\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t W i (w i)) = isum((t+1)..(2*t))(\\i. mvf t\n          W i (w i))} +\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n          t (wtail t W) i (w i))}
+      #|  forall(W:num->int->int) t M m. 1 <= t\n    ==> 2 * CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} <=\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t W i (w i)) = isum((t+1)..(2*t))(\\i. mvf t\n          W i (w i))} +\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n          t (wtail t W) i (w i))}
       #|  &0 <= M ==> &0:int <= M - --M + &1
       #|  &0 <= M ==> --M:int <= M
-      #|  !M:int. &0 <= M ==> CARD {w:int | --M <= w /\\\n  w <= M} <= 2 * num_of_int M + 1
+      #|  forall M:int. &0 <= M ==> CARD {w:int | --M <= w /\\\n  w <= M} <= 2 * num_of_int M + 1
       #|  &(2 * num_of_int M + 1):int = &2 * M + &1
       #|  {x:int | --M < x /\\ x <= M} UNION {--M}
       #|  {w:int | --M <= w /\\ w <= M}
@@ -12762,36 +12762,36 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  abs(x:int) <= M <=> --M <= x /\\ x <= M
       #|  (a<=>a') ==> (a/\\b <=> a'/\\b)
       #|  z:num->int
-      #|  ibox t M = {z:num->int | (!i. i IN 1..t ==> z i IN {w:int |\n     --M <= w /\\ w <= M}) /\\ (!i. ~(i IN 1..t) ==> z i = &0)}
+      #|  ibox t M = {z:num->int | (forall i. i IN 1..t ==> z i IN {w:int |\n     --M <= w /\\ w <= M}) /\\ (forall i. ~(i IN 1..t) ==> z i = &0)}
       #|  &((2 * num_of_int M + 1) EXP t):int
-      #|  !t M:int. &0 <= M ==> &(CARD(ibox t M)) <= (&2 * M + &1) pow t
-      #|  !a b e:num. e <= a /\\ a <= b ==> (b - a) + (a - e) = b - e
+      #|  forall t M:int. &0 <= M ==> &(CARD(ibox t M)) <= (&2 * M + &1) pow t
+      #|  forall a b e:num. e <= a /\\ a <= b ==> (b - a) + (a - e) = b - e
       #|  i:A
       #|  FINITE(s:A->bool)
       #|  z:A->int
       #|  nsum (SL:(A->int)->bool) (\\z:A->int. MaxMult EXP\n   (CARD(s:A->bool)))
-      #|  SL = {z:A->int | (!i. i IN s ==> abs(z i) <= Amax) /\\\n   (!i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
-      #|  {z:A->int | (!i. i IN s ==> abs(z i) <= Amax) /\\\n     (!i. ~(i IN s) ==> z i = &0)}
-      #|  FINITE {z:A->int | (!i. i IN s ==> abs(z i) <= Amax) /\\\n   (!i. ~(i IN s) ==> z i = &0) /\\\n    isum s (\\i. a i * z i) = m}
-      #|  !(s:A->bool) (a:A->int) m (Amax:int) (mult:A->int->num) (MaxMult:num).\n     FINITE s /\\ (!i z. mult i z <= MaxMult)\n     ==> nsum {z:A->int | (!i. i IN s ==> abs(z i) <= Amax) /\\\n                          (!i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n              (\\z. nproduct s (\\i. mult i (z i)))\n         <= MaxMult EXP (CARD s) * lincount s a m Amax
+      #|  SL = {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
+      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n     (forall i. ~(i IN s) ==> z i = &0)}
+      #|  FINITE {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\\n    isum s (\\i. a i * z i) = m}
+      #|  forall(s:A->bool) (a:A->int) m (Amax:int) (mult:A->int->num) (MaxMult:num).\n     FINITE s /\\ (forall i z. mult i z <= MaxMult)\n     ==> nsum {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n              (\\z. nproduct s (\\i. mult i (z i)))\n         <= MaxMult EXP (CARD s) * lincount s a m Amax
       #|  gtail k (z:num->int) = (\\i. if 1 <= i then z (i +\n k) else &0)
       #|  gjoin k (u:num->int) (v:num->int) = (\\i. if i IN\n 1..k then u i else v (i - k))
       #|  i:num
-      #|  !i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
+      #|  forall i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
       #|  i:num
-      #|  !k G M (w:num->int). k <= G /\\ w IN ibox G M ==> ihead k w IN ibox k M
+      #|  forall k G M (w:num->int). k <= G /\\ w IN ibox G M ==> ihead k w IN ibox k M
       #|  i+k:num
-      #|  !i. ~(1 <= i /\\ i <= G) ==> (w:num->int) i = &0
+      #|  forall i. ~(1 <= i /\\ i <= G) ==> (w:num->int) i = &0
       #|  i+k:num
-      #|  !i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
+      #|  forall i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
       #|  1 <= i
       #|  i:num
-      #|  !k G M (w:num->int). k <= G /\\ w IN ibox G M ==> gtail k w IN ibox (G-k) M
+      #|  forall k G M (w:num->int). k <= G /\\ w IN ibox G M ==> gtail k w IN ibox (G-k) M
       #|  i:num
       #|  i-k+k = i
       #|  1 <= i-k
       #|  i:num
-      #|  !k G M (w:num->int). k <= G /\\\n  w IN ibox G M ==> gjoin k (ihead k w) (gtail k w) = w
+      #|  forall k G M (w:num->int). k <= G /\\\n  w IN ibox G M ==> gjoin k (ihead k w) (gtail k w) = w
       #|  s:A->bool
       #|  nsum {x | x IN s /\\\n     (f:A->B) x = y} (\\x. 1) = CARD {x | x IN s /\\ f x = y}
       #|  y:B
@@ -12799,7 +12799,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  s:A->bool
       #|  \\x:A. 1
       #|  f:A->B
-      #|  !(f:A->B) s t c. FINITE s /\\ FINITE t /\\ IMAGE f s SUBSET t /\\\n     (!y. CARD {x | x IN s /\\ f x = y} <= c) ==> CARD s <= CARD t * c
+      #|  forall(f:A->B) s t c. FINITE s /\\ FINITE t /\\ IMAGE f s SUBSET t /\\\n     (forall y. CARD {x | x IN s /\\ f x = y} <= c) ==> CARD s <= CARD t * c
       #|  (x:num->int) i = &0 /\\\n   (y:num->int) i = &0
       #|  ~(i IN 1..2)
       #|  i = 2
@@ -12807,7 +12807,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i:num
       #|  (ffam:num->num->int) 2 1 * (x:num->int) 2 = ffam 2 1 *\n    (y:num->int) 2
       #|  (x:num->int) 2 = (y:num->int) 2
-      #|  !(ffam:num->num->int) P m x y:num->int.\n     ~(ffam 2 1 = &0) /\\\n     x IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (x j)) = m /\\\n     y IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (y j)) = m /\\\n     x 1 = y 1\n     ==> x = y
+      #|  forall(ffam:num->num->int) P m x y:num->int.\n     ~(ffam 2 1 = &0) /\\\n     x IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (x j)) = m /\\\n     y IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (y j)) = m /\\\n     x 1 = y 1\n     ==> x = y
       #|  m:int
       #|  m:int
       #|  m:int
@@ -12821,7 +12821,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  m:int
       #|  m:int
       #|  i:num
-      #|  !(V:num->int->int) k (w:num->int). isum(1..k)(\\i. V i (ihead k w i)) =\n  isum(1..k)(\\i. V i (w i))
+      #|  forall(V:num->int->int) k (w:num->int). isum(1..k)(\\i. V i (ihead k w i)) =\n  isum(1..k)(\\i. V i (w i))
       #|  i:num
       #|  1+k = k+1 /\\ (G-k)+k = G
       #|  G-k:num
@@ -12831,7 +12831,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= i
       #|  i:num
       #|  isum(1..(G-k))(\\i. V (i+k) (gtail k w i)) = isum(1..(G-k))(\\i.\n   V (i+k) (w (i+k)))
-      #|  !(V:num->int->int) k G (w:num->int). k <= G\n    ==> isum(1..(G-k))(\\i. V (i+k) (gtail k w i)) = isum((k+1)..G)(\\i. V i (w\n     i))
+      #|  forall(V:num->int->int) k G (w:num->int). k <= G\n    ==> isum(1..(G-k))(\\i. V (i+k) (gtail k w i)) = isum((k+1)..G)(\\i. V i (w\n     i))
       #|  ibox k M
       #|  isum (1..G) (\\i. V i ((w:num->int) i)) = z
       #|  G:num
@@ -12850,7 +12850,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  w2:num->int
       #|  w1:num->int
       #|  CARD(IMAGE (ihead k) {w | (w IN ibox G M /\\\n   isum(1..G)(\\i. V i (w i)) = z) /\\ gtail k w = v})
-      #|  !(V:num->int->int) k G M z v. 1 <= k /\\ k <= G\n    ==> CARD {w | (w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z) /\\\n     gtail k w = v}\n        <= CARD {u | u IN ibox k M /\\\n         isum(1..k)(\\i. V i (u i)) = z - isum(1..(G-k))(\\i. V (i+k) (v i))}
+      #|  forall(V:num->int->int) k G M z v. 1 <= k /\\ k <= G\n    ==> CARD {w | (w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z) /\\\n     gtail k w = v}\n        <= CARD {u | u IN ibox k M /\\\n         isum(1..k)(\\i. V i (u i)) = z - isum(1..(G-k))(\\i. V (i+k) (v i))}
       #|  CARD {u | u IN ibox k M /\\\n       isum(1..k)(\\i. V i (u i)) = z - isum(1..(G-k))(\\i. V (i+k) (vv\n        i))}
       #|  {x | x IN {w | w IN ibox G M /\\\n       isum(1..G)(\\i. V i (w i)) = z} /\\ gtail k x = vv} =\n                    {w | (w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z) /\\\n                     gtail k w = vv}
       #|  vv:num->int
@@ -12861,7 +12861,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ibox (G-k) M
       #|  {w | w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z}
       #|  gtail k :(num->int)->(num->int)
-      #|  !(V:num->int->int) k G M z c. 1 <= k /\\ k <= G /\\\n     (!a. CARD {u | u IN ibox k M /\\ isum(1..k)(\\i. V i (u i)) = a} <= c)\n     ==> CARD {w | w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z}\n         <= CARD (ibox (G-k) M) * c
+      #|  forall(V:num->int->int) k G M z c. 1 <= k /\\ k <= G /\\\n     (forall a. CARD {u | u IN ibox k M /\\ isum(1..k)(\\i. V i (u i)) = a} <= c)\n     ==> CARD {w | w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z}\n         <= CARD (ibox (G-k) M) * c
       #|  findiffset_dp (ffam:num->num->int) e kk P =\n    {p | p IN ibox (2*kk) (&2 * P) /\\\n         isum(1..kk)(\\i. ipoly (ffam i) e (p i + p(i+kk)) - ipoly (ffam i) e (p\n          i)) = &0}
       #|  i:num
       #|  i:num
@@ -12876,8 +12876,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= i
       #|  (1 <= i /\\ i <= kk /\\ ~(1 <= i+kk /\\ i+kk <= kk) /\\\n     (kk+1 <= i+kk /\\ i+kk <= 2*kk) /\\ (i+kk)-kk = i):bool
       #|  i:num
-      #|  !i. i IN 1..kk ==> reparam kk (w:num->int) i = w(i+kk) /\\\n                                   reparam kk w (i+kk) = w i - w(i+kk)
-      #|  !(ffam:num->num->int) e kk P (w:num->int). 1 <= kk /\\ w IN ibox (2*kk) P /\\\n     isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n     isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (reparam kk w i + reparam kk w\n      (i+kk))\n                         - ipoly (ffam i) e (reparam kk w i)) = &0
+      #|  forall i. i IN 1..kk ==> reparam kk (w:num->int) i = w(i+kk) /\\\n                                   reparam kk w (i+kk) = w i - w(i+kk)
+      #|  forall(ffam:num->num->int) e kk P (w:num->int). 1 <= kk /\\ w IN ibox (2*kk) P /\\\n     isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n     isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (reparam kk w i + reparam kk w\n      (i+kk))\n                         - ipoly (ffam i) e (reparam kk w i)) = &0
       #|  ibox (2*kk) (&2 * P)
       #|  P:int
       #|  w:num->int
@@ -12888,7 +12888,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  w':num->int
       #|  w:num->int
       #|  CARD(IMAGE (reparam kk) {w | w IN ibox (2*kk) P /\\\n   isum(1..kk)(\\i. mvf kk (\\j. ipoly ((ffam:num->num->int) j) e) i (w i)) =\n    isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))})
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD {w | w IN ibox (2*kk) P /\\\n                  isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n                  isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w\n                   i))}\n        <= CARD (findiffset_dp ffam e kk P)
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD {w | w IN ibox (2*kk) P /\\\n                  isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n                  isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w\n                   i))}\n        <= CARD (findiffset_dp ffam e kk P)
       #|  (1 <= i /\\ i <= kk /\\ ~(1 <= i+kk /\\ i+kk <= kk) /\\\n       (kk+1 <= i+kk /\\ i+kk <= 2*kk) /\\\n        (i+kk)-kk=i):bool
       #|  i:num
       #|  isum(1..kk)(\\i. ipoly (ffam i) e ((p1:num->int) i +\n       (p2:num->int) i) - ipoly (ffam i) e (p1 i))
@@ -12899,9 +12899,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  itail kk (p:num->int)
       #|  ihead kk (p:num->int)
       #|  p:num->int
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n    ==> findiffset_dp ffam e kk P =\n        IMAGE (\\pr. ijoin kk (FST pr) (SND pr))\n          {yh | FST yh IN ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> findiffset_dp ffam e kk P =\n        IMAGE (\\pr. ijoin kk (FST pr) (SND pr))\n          {yh | FST yh IN ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
       #|  (ibox kk (&2 * P)) CROSS (ibox kk (&2 * P))
-      #|  !(ffam:num->num->int) e kk P. FINITE {yh:(num->int)#(num->int) | FST yh IN\n  ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
+      #|  forall(ffam:num->num->int) e kk P. FINITE {yh:(num->int)#(num->int) | FST yh IN\n  ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
       #|  &2 * P:int
       #|  kk:num
       #|  (u1:num->int) = u2 /\\ (v1:num->int) = v2
@@ -12909,7 +12909,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  u2:num->int
       #|  v1:num->int
       #|  u1:num->int
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD(findiffset_dp ffam e kk P) =\n        CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n         SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD(findiffset_dp ffam e kk P) =\n        CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n         SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
       #|  ibox kk (&2 * P)
       #|  isum(1..kk)(\\i. ipoly (ffam i) e ((a:num->int) i +\n       (hh:num->int) i) - ipoly (ffam i) e (a i)) = &0
       #|  isum(1..kk)(\\i. ipoly (ffam i) e ((a:num->int) i +\n       (b:num->int) i) - ipoly (ffam i) e (a i)) = &0
@@ -12917,7 +12917,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  b:num->int
       #|  a:num->int
       #|  {x:(num->int)#(num->int) |\n       (FST x IN ibox kk (&2 * P) /\\ SND x IN ibox kk (&2 * P) /\\\n        isum(1..kk)(\\i. ipoly (ffam i) e (FST x i + SND x i) - ipoly (ffam i) e\n         (FST x i)) = &0)\n       /\\ SND x = hh} =\n    IMAGE (\\y:num->int. (y,hh))\n      {y:num->int | y IN ibox kk (&2 * P) /\\\n                    isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam\n                     i) e (y i)) = &0}
-      #|  !(ffam:num->num->int) e kk P hh. hh IN ibox kk (&2 * P)\n    ==> CARD {x:(num->int)#(num->int) |\n                (FST x IN ibox kk (&2 * P) /\\ SND x IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (FST x i + SND x i) - ipoly\n                  (ffam i) e (FST x i)) = &0)\n                /\\ SND x = hh}\n        = CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}
+      #|  forall(ffam:num->num->int) e kk P hh. hh IN ibox kk (&2 * P)\n    ==> CARD {x:(num->int)#(num->int) |\n                (FST x IN ibox kk (&2 * P) /\\ SND x IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (FST x i + SND x i) - ipoly\n                  (ffam i) e (FST x i)) = &0)\n                /\\ SND x = hh}\n        = CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}
       #|  (y:num->int,hh:num->int)
       #|  ~((hh:num->int) IN IMAGE\n       (SND:(num->int)#(num->int)->num->int) PS)
       #|  y:num->int
@@ -12945,17 +12945,17 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  SND:(num->int)#(num->int)->(num->int)
       #|  FINITE (PS:((num->int)#(num->int))->bool)
       #|  PS = {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n   SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly ((ffam:num->num->int) i) e (FST yh i +\n                 SND yh i) - ipoly (ffam i) e (FST yh i)) = &0}
-      #|  !(ffam:num->num->int) e kk P.\n    CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n     SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}\n        = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0})
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n    ==> (&(CARD(findiffset_dp ffam e kk P)):int) =\n        &(nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}))
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n                  =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e)\n                  i (w i))}\n       <= CARD (findiffset_dp ffam e kk P)
+      #|  forall(ffam:num->num->int) e kk P.\n    CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n     SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}\n        = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0})
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> (&(CARD(findiffset_dp ffam e kk P)):int) =\n        &(nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}))
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n                  =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e)\n                  i (w i))}\n       <= CARD (findiffset_dp ffam e kk P)
       #|  mvf kk (wtail kk (\\j. ipoly ((ffam:num->num->int) j) e)) = mvf\n   kk (\\j. ipoly ((\\n. ffam(n+kk)) j) e)
-      #|  !(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j) e)) i (w\n                  i)) =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j)\n                  e)) i (w i))}\n       <= CARD (findiffset_dp (\\n. ffam (n+kk)) e kk P)
+      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j) e)) i (w\n                  i)) =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j)\n                  e)) i (w i))}\n       <= CARD (findiffset_dp (\\n. ffam (n+kk)) e kk P)
       #|  &0:int
       #|  M:int
       #|  t:num
       #|  (Wf:(num->int)->num->int->int) hh
       #|  hh:num->int
-      #|  !(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (Wf hh) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (Wf hh) i (w i))})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})
+      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (Wf hh) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (Wf hh) i (w i))})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})
       #|  (i+t)-t = i
       #|  i:num
       #|  t + t = 2 * t
@@ -12965,7 +12965,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\i. mvf t (W:num->int->int) i (w i)
       #|  t:num
       #|  i:num
-      #|  !(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i (w i)) /\\\n     isum(t+1..2*t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i\n      (w(i+t)))
+      #|  forall(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i (w i)) /\\\n     isum(t+1..2*t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i\n      (w(i+t)))
       #|  (i+t)-t = i
       #|  i:num
       #|  t + t = 2 * t
@@ -12975,21 +12975,21 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\i. mvf t (wtail t (W:num->int->int)) i (w i)
       #|  t:num
       #|  i:num
-      #|  !(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t) (w i))\n      /\\\n     isum(t+1..2*t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t)\n      (w(i+t)))
+      #|  forall(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t) (w i))\n      /\\\n     isum(t+1..2*t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t)\n      (w(i+t)))
       #|  j:num
-      #|  !(psi:num->int) d y:int. ipoly (\\i. --(psi i)) d y = --(ipoly psi d y)
+      #|  forall(psi:num->int) d y:int. ipoly (\\i. --(psi i)) d y = --(ipoly psi d y)
       #|  sgnf (phi:num->num->int) (neg:num->bool) j =\n  if neg j then (\\i. --(phi j i)) else phi j
-      #|  !(phi:num->num->int) neg j d y:int.\n     ipoly (sgnf phi neg j) d y = (if neg j then --(ipoly (phi j) d y) else\n      ipoly (phi j) d y)
-      #|  !(phi:num->num->int) neg j d. ~(phi j d = &0) ==> ~(sgnf phi neg j d = &0)
-      #|  !(phi:num->num->int) neg j i. abs(sgnf phi neg j i) = abs(phi j i)
-      #|  !(s:num->bool) (MaxMult:num) A B (mfn:(num->int)->int).\n     isum {a:num->int | (!i. i IN s ==> abs(a i) <= A) /\\\n      (!i. ~(i IN s) ==> a i = &0)}\n          (\\a. &(MaxMult EXP (CARD s)) * &(lincount s a (mfn a) B))\n     = &(MaxMult EXP (CARD s)) *\n       isum {a:num->int | (!i. i IN s ==> abs(a i) <= A) /\\\n        (!i. ~(i IN s) ==> a i = &0)}\n            (\\a. &(lincount s a (mfn a) B))
+      #|  forall(phi:num->num->int) neg j d y:int.\n     ipoly (sgnf phi neg j) d y = (if neg j then --(ipoly (phi j) d y) else\n      ipoly (phi j) d y)
+      #|  forall(phi:num->num->int) neg j d. ~(phi j d = &0) ==> ~(sgnf phi neg j d = &0)
+      #|  forall(phi:num->num->int) neg j i. abs(sgnf phi neg j i) = abs(phi j i)
+      #|  forall(s:num->bool) (MaxMult:num) A B (mfn:(num->int)->int).\n     isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n      (forall i. ~(i IN s) ==> a i = &0)}\n          (\\a. &(MaxMult EXP (CARD s)) * &(lincount s a (mfn a) B))\n     = &(MaxMult EXP (CARD s)) *\n       isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n        (forall i. ~(i IN s) ==> a i = &0)}\n            (\\a. &(lincount s a (mfn a) B))
       #|  ~(i+t <= t) /\\ (i+t)-t = i
       #|  i:num
       #|  t+1 = 1+t /\\ 2*t = t+t
-      #|  !(V:num->int->int) t (w:num->int).\n     isum(t+1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      --(isum(1..t)(\\i. V i (w(i+t))))
+      #|  forall(V:num->int->int) t (w:num->int).\n     isum(t+1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      --(isum(1..t)(\\i. V i (w(i+t))))
       #|  i <= t
       #|  i:num
-      #|  !(V:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      isum(1..t)(\\i. V i (w i))
+      #|  forall(V:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      isum(1..t)(\\i. V i (w i))
       #|  isum(1..t)(\\i. (if i <= t then (V:num->int->int) i (w i) else\n     --(V (i-t) (w i)))) = isum(1..t)(\\i. V i (w i))
       #|  t+t = 2*t
       #|  1 <= t+1
@@ -12997,24 +12997,24 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  isum(1..2*t)(\\i. (if i <= t then (V:num->int->int) i (w i) else --(V (i-t)\n    (w i))))\n    = isum(1..t)(\\i. V i (w i)) + --(isum(1..t)(\\i. V i (w(i+t))))
       #|  (b<=>c) ==> (a/\\b<=>a/\\c)
       #|  w:num->int
-      #|  !(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n               isum(1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w\n                i)))) = &0}
-      #|  !(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n    isum(1..2*t)(\\i. signfam V t i (w i)) = &0}
+      #|  forall(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n               isum(1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w\n                i)))) = &0}
+      #|  forall(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n    isum(1..2*t)(\\i. signfam V t i (w i)) = &0}
       #|  hh:num->int
-      #|  !(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (Wf hh) i (w i)) = isum(t+1..2*t)(\\i.\n              mvf t (Wf hh) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})
+      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (Wf hh) i (w i)) = isum(t+1..2*t)(\\i.\n              mvf t (Wf hh) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})
       #|  M:int
       #|  t:num
       #|  \\j. (Wf:(num->int)->num->int->int) hh (j+t)
       #|  hh:num->int
-      #|  !(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n              isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
+      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n              isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
       #|  HH:(num->int)->bool
       #|  M:int
       #|  t:num
       #|  Wf:(num->int)->num->int->int
-      #|  !(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
+      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
       #|  (2*p)*B = p*B + p*B
       #|  (2*p)*FS = p*(2*FS)
       #|  p*(SH+ST):num
-      #|  !p FS SH ST B:num. 2*FS <= SH+ST /\\ p*SH <= p*B /\\\n  p*ST <= p*B ==> (2*p)*FS <= (2*p)*B
+      #|  forall p FS SH ST B:num. 2*FS <= SH+ST /\\ p*SH <= p*B /\\\n  p*ST <= p*B ==> (2*p)*FS <= (2*p)*B
       #|  i:num
       #|  p permutes 1..n
       #|  (p:num->num) i = i
@@ -13022,7 +13022,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  n:num
       #|  p:num->num
       #|  i:num
-      #|  !(p:num->num) n M (w:num->int).\n     p permutes 1..n /\\ w IN ibox n M ==> (\\i. w(p i)) IN ibox n M
+      #|  forall(p:num->num) n M (w:num->int).\n     p permutes 1..n /\\ w IN ibox n M ==> (\\i. w(p i)) IN ibox n M
       #|  (abs:int->int)
       #|  (abs:int->int)
       #|  (abs:int->int)
@@ -13030,7 +13030,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  p:num->num
       #|  inverse (p:num->num) j
       #|  j:num
-      #|  !(p:num->num) n M (w1:num->int) (w2:num->int).\n     p permutes 1..n /\\ w1 IN ibox n M /\\ w2 IN ibox n M /\\\n     (\\i. w1(p i)) = (\\i. w2(p i)) ==> w1 = w2
+      #|  forall(p:num->num) n M (w1:num->int) (w2:num->int).\n     p permutes 1..n /\\ w1 IN ibox n M /\\ w2 IN ibox n M /\\\n     (\\i. w1(p i)) = (\\i. w2(p i)) ==> w1 = w2
       #|  1..n
       #|  p:num->num
       #|  i:num
@@ -13044,7 +13044,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  i:num
       #|  inverse(p:num->num)
       #|  p:num->num
-      #|  !(p:num->num) n (g:num->int). p permutes 1..n\n     ==> isum(1..n)(\\i. g(p i)) = isum(1..n) g
+      #|  forall(p:num->num) n (g:num->int). p permutes 1..n\n     ==> isum(1..n)(\\i. g(p i)) = isum(1..n) g
       #|  \\i:num. (V:num->int->int) i\n       ((x':num->int) i)
       #|  n:num
       #|  p:num->num
@@ -13062,7 +13062,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:num
       #|  \\j:num. (w:num->int)(inverse (p:num->num) j)
       #|  w:num->int
-      #|  !(p:num->num) n M (V:num->int->int). p permutes 1..n ==>\n     {w | w IN ibox n M /\\ isum(1..n)(\\i. (V:num->int->int) (p i) (w i)) = &0}\n       = IMAGE (\\w. (\\i. w(p i))) {w | w IN ibox n M /\\\n        isum(1..n)(\\j. V j (w j)) = &0}
+      #|  forall(p:num->num) n M (V:num->int->int). p permutes 1..n ==>\n     {w | w IN ibox n M /\\ isum(1..n)(\\i. (V:num->int->int) (p i) (w i)) = &0}\n       = IMAGE (\\w. (\\i. w(p i))) {w | w IN ibox n M /\\\n        isum(1..n)(\\j. V j (w j)) = &0}
       #|  w:num->int
       #|  w:num->int
       #|  w:num->int
@@ -13070,13 +13070,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  M:int
       #|  n:num
       #|  p:num->num
-      #|  !(p:num->num) n M (V:num->int->int).\n     p permutes 1..n\n     ==> CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V i (w i)) = &0}\n       = CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V (p i) (w i)) = &0}
+      #|  forall(p:num->num) n M (V:num->int->int).\n     p permutes 1..n\n     ==> CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V i (w i)) = &0}\n       = CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V (p i) (w i)) = &0}
       #|  (Wf:(num->int)->num->int->int) hh
       #|  M:int
       #|  2*t
       #|  p:num->num
       #|  hh:num->int
-      #|  !(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     p permutes 1..(2*t)\n     ==> nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. Wf hh (p i) (w i)) = &0})
+      #|  forall(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     p permutes 1..(2*t)\n     ==> nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. Wf hh (p i) (w i)) = &0})
       #|  HH:(num->int)->bool
       #|  M:int
       #|  t:num
@@ -13086,14 +13086,14 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  M:int
       #|  t:num
       #|  p:num->num
-      #|  !(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     1 <= t /\\ FINITE HH /\\ p permutes 1..(2*t)\n     ==> 2 * nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (\\k. Wf hh (p k)) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (p(j+t))) t i (w i)) = &0})
+      #|  forall(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     1 <= t /\\ FINITE HH /\\ p permutes 1..(2*t)\n     ==> 2 * nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (\\k. Wf hh (p k)) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (p(j+t))) t i (w i)) = &0})
       #|  j:num
       #|  (pp:num->num->num) 0 = pp' 0 /\\\n   ((bp:num->bool) 0 <=> bp' 0)
-      #|  !s (Wf:(num->int)->num->int->int) t pp pp' bp bp'.\n     (!j. j < s ==> pp j = pp' j) /\\ (!j. j < s ==> (bp j <=> bp' j))\n     ==> pleaf s Wf t pp bp = pleaf s Wf t pp' bp'
+      #|  forall s (Wf:(num->int)->num->int->int) t pp pp' bp bp'.\n     (forall j. j < s ==> pp j = pp' j) /\\ (forall j. j < s ==> (bp j <=> bp' j))\n     ==> pleaf s Wf t pp bp = pleaf s Wf t pp' bp'
       #|  (j+1)-1=j
       #|  ~(j+1=0)
       #|  j:num
-      #|  !s (Wf:(num->int)->num->int->int) t pp b bp.\n     pleaf (SUC s) Wf t pp (\\n. if n = 0 then b else bp(n-1))\n   = pleaf s (childfam Wf t (pp 0) b) t (\\j. pp(j+1)) bp
+      #|  forall s (Wf:(num->int)->num->int->int) t pp b bp.\n     pleaf (SUC s) Wf t pp (\\n. if n = 0 then b else bp(n-1))\n   = pleaf s (childfam Wf t (pp 0) b) t (\\j. pp(j+1)) bp
       #|  T
       #|  F
       #|  nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n   isum(1..2*t)(\\i. signfam (\\j. (Wf:(num->int)->num->int->int) hh ((pp\n    0)(j+t))) t i (w i)) = &0})
@@ -13104,12 +13104,12 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t:num
       #|  (pp:num->num->num) 0
       #|  bp:num->bool
-      #|  !b. 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. childfam (Wf:(num->int)->num->int->int) t (pp 0) b hh\n         i (y i)) = &0}) <= 2 EXP s * B
+      #|  forall b. 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. childfam (Wf:(num->int)->num->int->int) t (pp 0) b hh\n         i (y i)) = &0}) <= 2 EXP s * B
       #|  B:num
       #|  pp:num->num->num
       #|  Wf:(num->int)->num->int->int
       #|  (\\n. F):num->bool
-      #|  !t M HH. 1 <= t /\\ FINITE HH ==>\n   !s (Wf:(num->int)->num->int->int) (pp:num->num->num) B.\n     (!j. (pp j) permutes 1..(2*t))\n     /\\ (!bp:num->bool. nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. pleaf s Wf t pp bp hh i (y i)) = &0}) <= B)\n     ==> 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0}) <= 2 EXP s * B
+      #|  forall t M HH. 1 <= t /\\ FINITE HH ==>\n   forall s (Wf:(num->int)->num->int->int) (pp:num->num->num) B.\n     (forall j. (pp j) permutes 1..(2*t))\n     /\\ (forall bp:num->bool. nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. pleaf s Wf t pp bp hh i (y i)) = &0}) <= B)\n     ==> 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0}) <= 2 EXP s * B
       #|  B:num
       #|  \\j:num. (pp:num->num->num)(j+1)
       #|  childfam (Wf:(num->int)->num->int->int) t (pp 0) b
@@ -13124,9 +13124,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &0 <= M ==> &0:int <= M - --M + &1
       #|  &0 <= M ==> --M:int <= M
       #|  {v:int | abs v <= M} = {k:int | --M <= k /\\ k <= M}
-      #|  !M:int. &0 <= M ==> {v:int | abs v <= M} HAS_SIZE (2 * num_of_int M + 1)
+      #|  forall M:int. &0 <= M ==> {v:int | abs v <= M} HAS_SIZE (2 * num_of_int M + 1)
       #|  a:int
-      #|  !a b:int. &1 <= a /\\ &1 <= b ==> &1 <= a * b
+      #|  forall a b:int. &1 <= a /\\ &1 <= b ==> &1 <= a * b
       #|  2*2*(r+2)*x = (2*(r+2))*(2*x) /\\\n       (r+2)*2*(r+2) = (2*(r+2))*(r+2)
       #|  2*(r+2) = 2*(r+2)*1
       #|  2*(r+2) <= 2*(r+2)*(q+r+1) /\\\n   (r+2)*2*(r+2) <= 2*2*(r+2)*(q+r+1)
@@ -13136,8 +13136,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ?r. e = r+2
       #|  G-(e-1)
       #|  ?q. G = q + (e-1)
-      #|  !(e:num) (G:num). 2 <= e /\\ e-1 <= G\n     ==> (G-(e-1))*(2*e) + (2*e*G - 2*e) = 2*(2*e*G) - e*(2*e)
-      #|  !(e:num) (G:num) (P:int). 2 <= e /\\ e-1 <= G\n     ==> (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) = P pow (2*(2*e*G) -\n      e*(2*e))
+      #|  forall(e:num) (G:num). 2 <= e /\\ e-1 <= G\n     ==> (G-(e-1))*(2*e) + (2*e*G - 2*e) = 2*(2*e*G) - e*(2*e)
+      #|  forall(e:num) (G:num) (P:int). 2 <= e /\\ e-1 <= G\n     ==> (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) = P pow (2*(2*e*G) -\n      e*(2*e))
       #|  e*1
       #|  e <= e*(2*e)
       #|  e*(2*e-1) = e*(2*e) - e
@@ -13145,7 +13145,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (P:int) pow e = P pow 1 * P pow (e-1) /\\\n     (&2:int) pow (e+1) = &2 pow 2 * &2 pow (e-1)
       #|  (&2 * (P:int)) pow (e-1) = &2 pow (e-1) * P pow (e-1)
       #|  ((&2 * (P:int)) * &2 * (&2 * P) pow (e-1)) =\n    &2 pow (e+1) * P pow e
-      #|  !(e:num) (kk:num) (P:int). &1 <= P /\\ 2 <= e /\\ e*(2*e) <= 2*kk\n     ==> P pow (2*kk - e*(2*e)) * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e\n      - 1) = (&2 pow (e+1)) pow (2*e-1) * P pow (2*kk - e)
+      #|  forall(e:num) (kk:num) (P:int). &1 <= P /\\ 2 <= e /\\ e*(2*e) <= 2*kk\n     ==> P pow (2*kk - e*(2*e)) * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e\n      - 1) = (&2 pow (e+1)) pow (2*e-1) * P pow (2*kk - e)
       #|  e*(2*e) = e*(2*e)
       #|  2*(2*e*G) = e*(2*2*G)
       #|  e <= 2*G
@@ -13155,7 +13155,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  P:int
       #|  G:num
       #|  e:num
-      #|  !(e:num) (G:num) (P:int) (Cm:int) (Cf:int).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P\n     ==> (Cm pow (2*e)) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n         (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n       = (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) -\n        e)
+      #|  forall(e:num) (G:num) (P:int) (Cm:int) (Cf:int).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P\n     ==> (Cm pow (2*e)) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n         (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n       = (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) -\n        e)
       #|  a * b * c * d = a * (b * c)\n   * d:int
       #|  Cm * pp * Cf * fam = Cf * (pp * fam) * Cm:int
       #|  Cf:int
@@ -13163,8 +13163,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  P:int
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (P:int) (Cm:int) (Cf:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow\n      (2*(2*e*G) - e)
-      #|  !e. 2 <= e ==> 2 < CARD(1..(2*e))
+      #|  forall e (G:num) (P:int) (Cm:int) (Cf:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow\n      (2*(2*e*G) - e)
+      #|  forall e. 2 <= e ==> 2 < CARD(1..(2*e))
       #|  (\\a. &0):(num->int)->int
       #|  MaxMult:num
       #|  mult:num->int->num
@@ -13173,11 +13173,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  hh:num->int
       #|  s:num->bool
       #|  hh:num->int
-      #|  FINITE {hh:num->int | (!i. i IN s ==> abs(hh i) <= A) /\\\n    (!i. ~(i IN s) ==> hh i = &0)}
-      #|  isum {hh:num->int | (!i. i IN s ==> abs(hh i) <= A) /\\\n   (!i. ~(i IN s) ==> hh i = &0)}\n                   (\\hh. &(MaxMult EXP (CARD(s:num->bool))) * &(lincount s hh\n                    (&0) B))
-      #|  !(s:num->bool) (mult:num->int->num) (MaxMult:num) A B (Cf:int).\n     FINITE s /\\ 2 < CARD s /\\ &1 <= A /\\ A <= &2 * B /\\\n      &2 * B <= A pow (CARD s - 1) /\\\n     (!i z. mult i z <= MaxMult) /\\\n     (!mfn:(num->int)->int.\n         isum {a:num->int | (!i. i IN s ==> abs(a i) <= A) /\\\n          (!i. ~(i IN s) ==> a i = &0)}\n              (\\a. &(lincount s a (mfn a) B))\n         <= Cf * (A * &2 * B) pow (CARD s - 1))\n     ==> &(nsum {hh:num->int | (!i. i IN s ==> abs(hh i) <= A) /\\\n      (!i. ~(i IN s) ==> hh i = &0)}\n                  (\\hh. nsum {z:num->int | (!i. i IN s ==> abs(z i) <= B) /\\\n                   (!i. ~(i IN s) ==> z i = &0) /\\\n                                           isum s (\\i. hh i * z i) = &0}\n                             (\\z. nproduct s (\\i. mult i (z i)))))\n             <= &(MaxMult EXP (CARD s)) * Cf * (A * &2 * B) pow (CARD s - 1)
+      #|  FINITE {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n    (forall i. ~(i IN s) ==> hh i = &0)}
+      #|  isum {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n   (forall i. ~(i IN s) ==> hh i = &0)}\n                   (\\hh. &(MaxMult EXP (CARD(s:num->bool))) * &(lincount s hh\n                    (&0) B))
+      #|  forall(s:num->bool) (mult:num->int->num) (MaxMult:num) A B (Cf:int).\n     FINITE s /\\ 2 < CARD s /\\ &1 <= A /\\ A <= &2 * B /\\\n      &2 * B <= A pow (CARD s - 1) /\\\n     (forall i z. mult i z <= MaxMult) /\\\n     (forall mfn:(num->int)->int.\n         isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n          (forall i. ~(i IN s) ==> a i = &0)}\n              (\\a. &(lincount s a (mfn a) B))\n         <= Cf * (A * &2 * B) pow (CARD s - 1))\n     ==> &(nsum {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n      (forall i. ~(i IN s) ==> hh i = &0)}\n                  (\\hh. nsum {z:num->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n                   (forall i. ~(i IN s) ==> z i = &0) /\\\n                                           isum s (\\i. hh i * z i) = &0}\n                             (\\z. nproduct s (\\i. mult i (z i)))))\n             <= &(MaxMult EXP (CARD s)) * Cf * (A * &2 * B) pow (CARD s - 1)
       #|  (&2:int) pow (e+1) = &2 * &2 * &2 pow (e-1) /\\\n    (P:int) pow e = P * P pow (e-1)
-      #|  !(P:int) (e:num) (W:int). 2 <= e /\\ &1 <= P\n   ==> (&2 * P) * &2 * (W * (&2 * P) pow (e-1)) = W * &2 pow (e+1) * P pow e
+      #|  forall(P:int) (e:num) (W:int). 2 <= e /\\ &1 <= P\n   ==> (&2 * P) * &2 * (W * (&2 * P) pow (e-1)) = W * &2 pow (e+1) * P pow e
       #|  mfn:(num->int)->int
       #|  B:int
       #|  (&2 *\n        P):int
@@ -13191,7 +13191,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1..(2*e)
       #|  &0 <= ((&2 * (P:int)) * &2 * B) pow (2*e-1)
       #|  &1 <= &2 * (P:int) /\\ &2 * P <= &2 * B /\\\n   &2 * B <= (&2 * P) pow (2*e-1)
-      #|  !(mult:num->int->num) (MaxMult:num) (P:int) (e:num) (Cf:int) (Cfp:int)\n  (B:int).\n     2 <= e /\\ &1 <= P /\\ Cf <= Cfp /\\ &2 * P <= &2 * B /\\\n      &2 * B <= (&2 * P) pow (2*e-1) /\\\n     (!i z. mult i z <= MaxMult) /\\\n     (!A B' mfn.\n        &1 <= A /\\ A <= &2 * B' /\\ &2 * B' <= A pow (CARD (1..2 * e) - 1)\n        ==> isum {a | (!i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n         (!i. ~(i IN 1..2 * e) ==> a i = &0)}\n                 (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                  B') pow (CARD (1..2 * e) - 1))\n     ==> &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n      (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= B) /\\\n                 (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                           (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))\n         <= &(MaxMult EXP (2*e)) * Cfp * ((&2 * P) * &2 * B) pow (2*e-1)
+      #|  forall(mult:num->int->num) (MaxMult:num) (P:int) (e:num) (Cf:int) (Cfp:int)\n  (B:int).\n     2 <= e /\\ &1 <= P /\\ Cf <= Cfp /\\ &2 * P <= &2 * B /\\\n      &2 * B <= (&2 * P) pow (2*e-1) /\\\n     (forall i z. mult i z <= MaxMult) /\\\n     (forall A B' mfn.\n        &1 <= A /\\ A <= &2 * B' /\\ &2 * B' <= A pow (CARD (1..2 * e) - 1)\n        ==> isum {a | (forall i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n         (forall i. ~(i IN 1..2 * e) ==> a i = &0)}\n                 (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                  B') pow (CARD (1..2 * e) - 1))\n     ==> &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n      (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= B) /\\\n                 (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                           (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))\n         <= &(MaxMult EXP (2*e)) * Cfp * ((&2 * P) * &2 * B) pow (2*e-1)
       #|  (x:int) = y ==> &FS <= x ==> &FS <= y
       #|  W:int
       #|  e:num
@@ -13202,7 +13202,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  P:int
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (P:int) (Cm:int) (Cf:int) (W:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\ &1 <= W /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (W * (&2 * P) pow (e-1))) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * (Cf * W pow (2*e-1)) * (&2 pow (e+1)) pow\n      (2*e-1)) * P pow (2*(2*e*G) - e)
+      #|  forall e (G:num) (P:int) (Cm:int) (Cf:int) (W:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\ &1 <= W /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (W * (&2 * P) pow (e-1))) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * (Cf * W pow (2*e-1)) * (&2 pow (e+1)) pow\n      (2*e-1)) * P pow (2*(2*e*G) - e)
       #|  FS:num
       #|  g:num
       #|  (\\g. Bvec (y:num->int) g) = (zv:num->int)
@@ -13219,9 +13219,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\y:num->int. (\\g. Bvec y g):num->int
       #|  {y:num->int | y IN S /\\\n    isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n                  {y | y IN S /\\\n                   (\\y. isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) = &0) y}
       #|  CARD {y:num->int | y IN S /\\ isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n    nsum S (\\y:num->int. if isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) = &0\n     then 1 else 0)
-      #|  !(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (m:num).\n     FINITE S\n     ==> CARD {y | y IN S /\\ isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n         nsum (IMAGE (\\y. (\\g. Bvec y g)) S)\n              (\\zv. if isum(0..m-1)(\\g. w g * zv g) = &0\n                    then CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} else 0)
+      #|  forall(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (m:num).\n     FINITE S\n     ==> CARD {y | y IN S /\\ isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n         nsum (IMAGE (\\y. (\\g. Bvec y g)) S)\n              (\\zv. if isum(0..m-1)(\\g. w g * zv g) = &0\n                    then CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} else 0)
       #|  nproduct {g | g < 2*e} (\\g:num. MaxMult)
-      #|  !(cnt:num->num) (MaxMult:num) (e:num).\n     (!g. g < 2*e ==> cnt g <= MaxMult)\n     ==> nproduct {g | g < 2*e} cnt <= MaxMult EXP (2*e)
+      #|  forall(cnt:num->num) (MaxMult:num) (e:num).\n     (forall g. g < 2*e ==> cnt g <= MaxMult)\n     ==> nproduct {g | g < 2*e} cnt <= MaxMult EXP (2*e)
       #|  y0:num->int
       #|  (zv:num->int) IN boxset
       #|  y0:num->int
@@ -13233,19 +13233,19 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  w:num->int
       #|  Bvec:(num->int)->num->int
       #|  S:(num->int)->bool
-      #|  !(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (e:num)\n     (perblk:num->int->num) (MaxMult:num) (boxset:(num->int)->bool).\n      FINITE S /\\ FINITE boxset /\\\n      (!zv. zv IN IMAGE (\\y. (\\g. Bvec y g)) S\n            ==> CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} =\n                nproduct {g | g < 2*e} (\\g. perblk g (zv g))) /\\\n      (!g v. g < 2*e ==> perblk g v <= MaxMult) /\\\n      (!y. y IN S ==> (\\g. Bvec y g) IN boxset)\n      ==> CARD {y | y IN S /\\ isum(0..(2*e)-1)(\\g. w g * Bvec y g) = &0} <=\n          nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0\n                            then MaxMult EXP (2*e) else 0)
+      #|  forall(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (e:num)\n     (perblk:num->int->num) (MaxMult:num) (boxset:(num->int)->bool).\n      FINITE S /\\ FINITE boxset /\\\n      (forall zv. zv IN IMAGE (\\y. (\\g. Bvec y g)) S\n            ==> CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} =\n                nproduct {g | g < 2*e} (\\g. perblk g (zv g))) /\\\n      (forall g v. g < 2*e ==> perblk g v <= MaxMult) /\\\n      (forall y. y IN S ==> (\\g. Bvec y g) IN boxset)\n      ==> CARD {y | y IN S /\\ isum(0..(2*e)-1)(\\g. w g * Bvec y g) = &0} <=\n          nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0\n                            then MaxMult EXP (2*e) else 0)
       #|  zv:num->int
       #|  zv:num->int
       #|  zv:num->int
       #|  g < 2*e
       #|  g:num
-      #|  !(e:num) (w:num->int) (Fv:num->int).\n     0 < e\n     ==> isum(0..(2*e)-1)(\\g. w g * (if g < 2*e then Fv g else &0)) =\n      isum(0..(2*e)-1)(\\g. w g * Fv g)
+      #|  forall(e:num) (w:num->int) (Fv:num->int).\n     0 < e\n     ==> isum(0..(2*e)-1)(\\g. w g * (if g < 2*e then Fv g else &0)) =\n      isum(0..(2*e)-1)(\\g. w g * Fv g)
       #|  g:num
       #|  g:num
       #|  g:num
       #|  (b <=> c) ==> (a /\\ b <=> a /\\ c)
       #|  y:num->int
-      #|  !e (t:num) (M:int) (W:num->num->int->int) (zv:num->int).\n     (!g. ~(g < 2*e) ==> zv g = &0)\n     ==> {y | y IN ibox ((2*e)*t) M /\\\n              (\\g. if g < 2*e then isum(1..t)(\\i. W g i (y (g*t+i))) else &0) =\n               zv} =\n         {y | y IN ibox ((2*e)*t) M /\\\n              (!g. g < 2*e ==> isum(1..t)(\\i. W g i (y (g*t+i))) = zv g)}
+      #|  forall e (t:num) (M:int) (W:num->num->int->int) (zv:num->int).\n     (forall g. ~(g < 2*e) ==> zv g = &0)\n     ==> {y | y IN ibox ((2*e)*t) M /\\\n              (\\g. if g < 2*e then isum(1..t)(\\i. W g i (y (g*t+i))) else &0) =\n               zv} =\n         {y | y IN ibox ((2*e)*t) M /\\\n              (forall g. g < 2*e ==> isum(1..t)(\\i. W g i (y (g*t+i))) = zv g)}
       #|  2*e
       #|  zv:num->int
       #|  M:int
@@ -13253,7 +13253,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\(g:num) (i:num) (x:int). (W:num->num->int->int) g i x
       #|  x0:num->int
       #|  zv IN IMAGE (\\y g. if g < 2*e then isum(1..t)(\\i.\n      (W:num->num->int->int) g i (y (g*t+i))) else &0) (ibox ((2*e)*t) M)
-      #|  !g. ~(g < 2*e) ==> (zv:num->int) g = &0
+      #|  forall g. ~(g < 2*e) ==> (zv:num->int) g = &0
       #|  zv:num->int
       #|  boxset:(num->int)->bool
       #|  MaxMult:num
@@ -13262,19 +13262,19 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  w:num->int
       #|  \\(y:num->int) (g:num). if g < 2*e then isum(1..t)(\\i.\n      (W:num->num->int->int) g i (y (g*t+i))) else &0
       #|  ibox ((2*e)*t) M
-      #|  !e (t:num) (M:int) (W:num->num->int->int) (w:num->int) (MaxMult:num)\n  (boxset:(num->int)->bool).\n     0 < e /\\ FINITE boxset /\\\n     (!g v. g < 2*e ==> CARD {u | u IN ibox t M /\\\n      isum(1..t)(\\i. W g i (u i)) = v} <= MaxMult) /\\\n     (!y. y IN ibox ((2*e)*t) M ==> (\\g. if g < 2*e then isum(1..t)(\\i. W g i\n      (y (g*t+i))) else &0) IN boxset)\n     ==> CARD {y | y IN ibox ((2*e)*t) M /\\\n                   isum(0..(2*e)-1)(\\g. w g * isum(1..t)(\\i. W g i (y\n                    (g*t+i)))) = &0}\n         <= nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0 then\n          MaxMult EXP (2*e) else 0)
+      #|  forall e (t:num) (M:int) (W:num->num->int->int) (w:num->int) (MaxMult:num)\n  (boxset:(num->int)->bool).\n     0 < e /\\ FINITE boxset /\\\n     (forall g v. g < 2*e ==> CARD {u | u IN ibox t M /\\\n      isum(1..t)(\\i. W g i (u i)) = v} <= MaxMult) /\\\n     (forall y. y IN ibox ((2*e)*t) M ==> (\\g. if g < 2*e then isum(1..t)(\\i. W g i\n      (y (g*t+i))) else &0) IN boxset)\n     ==> CARD {y | y IN ibox ((2*e)*t) M /\\\n                   isum(0..(2*e)-1)(\\g. w g * isum(1..t)(\\i. W g i (y\n                    (g*t+i)))) = &0}\n         <= nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0 then\n          MaxMult EXP (2*e) else 0)
       #|  (2 * e) * G = ((2*e-1)+1) * G
-      #|  !e (G:num). 1 <= e ==> (2*e-1)*G + G = 2*e*G
+      #|  forall e (G:num). 1 <= e ==> (2*e-1)*G + G = 2*e*G
       #|  q2-1
       #|  q1:num
       #|  p2-1
       #|  p1:num
       #|  G:num
       #|  p1*G+(p2-1)
-      #|  !p1 p2 q1 q2 (G:num). 1 <= p2 /\\ p2 <= G /\\ 1 <= q2 /\\ q2 <= G /\\\n  p1*G+p2 = q1*G+q2 ==> p1 = q1 /\\ p2 = q2
+      #|  forall p1 p2 q1 q2 (G:num). 1 <= p2 /\\ p2 <= G /\\ 1 <= q2 /\\ q2 <= G /\\\n  p1*G+p2 = q1*G+q2 ==> p1 = q1 /\\ p2 = q2
       #|  G:num
       #|  e:num
-      #|  !p1 p2 e (G:num). 1 <= e /\\ p1 <= 2*e-1 /\\ p2 <= G ==> p1*G+p2 <= 2*e*G
+      #|  forall p1 p2 e (G:num). 1 <= e /\\ p1 <= 2*e-1 /\\ p2 <= G ==> p1*G+p2 <= 2*e*G
       #|  1 <= G ==> ~(G = 0)
       #|  (n-1) DIV G < 2*e
       #|  1 <= G ==> ~(G = 0)
@@ -13287,13 +13287,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  p2:num
       #|  p1:num
       #|  n:num
-      #|  !e (G:num). 1 <= e /\\\n  1 <= G ==> IMAGE (\\(i,j). i*G+j) {i,j | i IN 0..2 * e - 1 /\\\n   j IN 1..G} = 1..2*e*G
+      #|  forall e (G:num). 1 <= e /\\\n  1 <= G ==> IMAGE (\\(i,j). i*G+j) {i,j | i IN 0..2 * e - 1 /\\\n   j IN 1..G} = 1..2*e*G
       #|  G:num
       #|  p2':num
       #|  p1':num
       #|  p2:num
       #|  p1:num
-      #|  !e (G:num). 1 <= G ==> (!x y. x IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n  y IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n   (\\(i,j). i*G+j) x = (\\(i,j). i*G+j) y ==> x = y)
+      #|  forall e (G:num). 1 <= G ==> (forall x y. x IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n  y IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n   (\\(i,j). i*G+j) x = (\\(i,j). i*G+j) y ==> x = y)
       #|  {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G}
       #|  H:num->int
       #|  (\\(i,j). i*G+j):num#num->num
@@ -13304,10 +13304,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\g i. (H:num->int)(g*G+i)
       #|  \\g:num. 1..G
       #|  0..2*e-1
-      #|  !e (G:num) (H:num->int). 1 <= e /\\ 1 <= G ==>\n     isum(1..2*e*G) H = isum(0..2*e-1)(\\g. isum(1..G)(\\i. H(g*G+i)))
+      #|  forall e (G:num) (H:num->int). 1 <= e /\\ 1 <= G ==>\n     isum(1..2*e*G) H = isum(0..2*e-1)(\\g. isum(1..G)(\\i. H(g*G+i)))
       #|  G * 2 * e = 2 * e * G
       #|  ~(G = 0)
-      #|  !x e (G:num). 1 <= G /\\ x IN 1..2*e*G ==> (x-1) DIV G < 2*e /\\\n  (x-1) MOD G < G
+      #|  forall x e (G:num). 1 <= G /\\ x IN 1..2*e*G ==> (x-1) DIV G < 2*e /\\\n  (x-1) MOD G < G
       #|  G:num
       #|  y-1
       #|  G:num
@@ -13331,16 +13331,16 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:num
       #|  lab:num->num
       #|  ss:num
-      #|  !g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n   (en:num->num->num) g1 r1 = en g2 r2 ==> g1 = g2 /\\\n    r1 = r2
-      #|  !e ss (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G) else j)\n      permutes 1..2*e*G
+      #|  forall g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n   (en:num->num->num) g1 r1 = en g2 r2 ==> g1 = g2 /\\\n    r1 = r2
+      #|  forall e ss (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G) else j)\n      permutes 1..2*e*G
       #|  (cpsi:int) * M pow d = (cpsi * M pow (d-j)) * M pow j
       #|  &0 <= (M:int) /\\ &0 <= (cpsi:int) /\\ &0 <= abs x /\\\n    abs x <= M
-      #|  !(fj:int) (x:int) (M:int) (cpsi:int) (d:num) (j:num).\n     &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\ j <= d /\\\n      abs fj <= cpsi * M pow (d - j)\n     ==> abs(fj * x pow j) <= cpsi * M pow d
+      #|  forall(fj:int) (x:int) (M:int) (cpsi:int) (d:num) (j:num).\n     &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\ j <= d /\\\n      abs fj <= cpsi * M pow (d - j)\n     ==> abs(fj * x pow j) <= cpsi * M pow d
       #|  (d+1)-0 = d+1
       #|  j:num
       #|  isum(0..d)(\\j:num. cpsi * M pow d)
       #|  isum(0..d)(\\j. abs((f:num->int) j * x pow j))
-      #|  !(f:num->int) d (x:int) (M:int) (cpsi:int).\n      &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\\n       (!j. j <= d ==> abs(f j) <= cpsi * M pow (d - j))\n      ==> abs(ipoly f d x) <= &(d+1) * cpsi * M pow d
+      #|  forall(f:num->int) d (x:int) (M:int) (cpsi:int).\n      &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\\n       (forall j. j <= d ==> abs(f j) <= cpsi * M pow (d - j))\n      ==> abs(ipoly f d x) <= &(d+1) * cpsi * M pow d
       #|  i-1
       #|  g:num
       #|  G:num
@@ -13362,7 +13362,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  lab:num->num
       #|  ss:num
       #|  (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G) else\n   j) permutes 1..2*e*G
-      #|  !e ss (G:num) (P:int) (PSI:(num->int)->num->num->int) (hh:num->int)\n  (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0} =\n         CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(0..2*e-1)(\\g. hh(lab g) * isum(1..G)(\\i. (if leafsg ss\n                    (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --(ipoly\n                     (PSI hh (lab g)) (e-1) (y(g*G+i))) else ipoly (PSI hh (lab\n                      g)) (e-1) (y(g*G+i))))) = &0}
+      #|  forall e ss (G:num) (P:int) (PSI:(num->int)->num->num->int) (hh:num->int)\n  (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0} =\n         CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(0..2*e-1)(\\g. hh(lab g) * isum(1..G)(\\i. (if leafsg ss\n                    (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --(ipoly\n                     (PSI hh (lab g)) (e-1) (y(g*G+i))) else ipoly (PSI hh (lab\n                      g)) (e-1) (y(g*G+i))))) = &0}
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
@@ -13431,12 +13431,12 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\i:num. if i IN 1..n then (zv:num->int)(i-1) else &0
       #|  zv:num->int
       #|  IMAGE (\\z:num->int. (\\g. z (g+1))) (ibox n B)
-      #|  !(n:num) (B:int). FINITE {zv:num->int | (!g. g < n ==> abs(zv g) <= B) /\\\n  (!g. ~(g < n) ==> zv g = &0)}
+      #|  forall(n:num) (B:int). FINITE {zv:num->int | (forall g. g < n ==> abs(zv g) <= B) /\\\n  (forall g. ~(g < n) ==> zv g = &0)}
       #|  e*1
       #|  x <= e*G ==> e*G+x <= 2*e*G
       #|  e*1
       #|  e*G:num
-      #|  !e (G:num) t. 1 <= G /\\ t IN TSET e G ==> t IN 1..2*e*G
+      #|  forall e (G:num) t. 1 <= G /\\ t IN TSET e G ==> t IN 1..2*e*G
       #|  (G+1)-1 = G
       #|  j:num
       #|  (lab:num->num) g
@@ -13449,29 +13449,29 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  isum(1..G)(\\i:num. &e * cpsi * (&2*P) pow (e-1))
       #|  isum(1..G)(\\i:num. abs(if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j.\n   F) ((en:num->num->num) g (i-1)) then --ipoly (PSI (hh:num->int)\n    ((lab:num->num) g)) (e-1) (y(g*G+i)) else ipoly (PSI hh (lab g)) (e-1)\n     (y(g*G+i))))
       #|  g:num
-      #|  !e ss (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n     (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (!g. g < 2*e ==> lab g IN TSET e G)\n     ==> !y. y IN ibox (2*e*G) (&2*P)\n         ==> (\\g. if g < 2*e then isum(1..G)(\\i. if leafsg ss (e*G) (\\j.\n          RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --ipoly (PSI hh (lab g)) (e-1)\n           (y(g*G+i)) else ipoly (PSI hh (lab g)) (e-1) (y(g*G+i))) else &0)\n             IN {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n              (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}
+      #|  forall e ss (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G)\n     ==> forall y. y IN ibox (2*e*G) (&2*P)\n         ==> (\\g. if g < 2*e then isum(1..G)(\\i. if leafsg ss (e*G) (\\j.\n          RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --ipoly (PSI hh (lab g)) (e-1)\n           (y(g*G+i)) else ipoly (PSI hh (lab g)) (e-1) (y(g*G+i))) else &0)\n             IN {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n              (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}
       #|  rstx (s:num->bool) (x:num->int) = (\\i. if i IN s then x i else &0)
-      #|  rbox (s:num->bool) t (M:int) =\n    {x:num->int | x IN ibox t M /\\ (!i. ~(i IN s) ==> x i = &0)}
+      #|  rbox (s:num->bool) t (M:int) =\n    {x:num->int | x IN ibox t M /\\ (forall i. ~(i IN s) ==> x i = &0)}
       #|  i:num
-      #|  !(s:num->bool) t (M:int) (x:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ x IN ibox t M ==> rstx s x IN rbox s t M
+      #|  forall(s:num->bool) t (M:int) (x:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ x IN ibox t M ==> rstx s x IN rbox s t M
       #|  i:num
       #|  r:num->int
       #|  x:num->int
       #|  r:num->int
-      #|  !(s:num->bool) t (M:int).\n     &0 <= M /\\ s SUBSET (1..t)\n     ==> IMAGE (rstx s) (ibox t M) = rbox s t M
+      #|  forall(s:num->bool) t (M:int).\n     &0 <= M /\\ s SUBSET (1..t)\n     ==> IMAGE (rstx s) (ibox t M) = rbox s t M
       #|  glue (s:num->bool) t (r:num->int) (u:num->int) =\n    (\\i. if i IN s then r i else if i IN ((1..t) DIFF s) then u i else &0)
       #|  i:num
       #|  u:num->int
       #|  i:num
       #|  rstx ((1..t) DIFF s) x
       #|  x:num->int
-      #|  !(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> {x | x IN ibox t M /\\ rstx s x = r} =\n         IMAGE (glue s t r)\n               {u | (!i. i IN ((1..t) DIFF s) ==> u i IN {v:int | abs v <= M})\n                /\\\n                    (!i. ~(i IN ((1..t) DIFF s)) ==> u i = &0)}
+      #|  forall(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> {x | x IN ibox t M /\\ rstx s x = r} =\n         IMAGE (glue s t r)\n               {u | (forall i. i IN ((1..t) DIFF s) ==> u i IN {v:int | abs v <= M})\n                /\\\n                    (forall i. ~(i IN ((1..t) DIFF s)) ==> u i = &0)}
       #|  i:num
       #|  (i:num) IN ((1..t) DIFF s)
       #|  ~((i:num) IN s)
       #|  (i:num) IN ((1..t) DIFF s)
       #|  i:num
-      #|  !(s:num->bool) (t:num) (M:int) (r:num->int) (u:num->int) (u':num->int).\n     (!i:num. ~(i IN ((1..t) DIFF s)) ==> u i = &0) /\\\n     (!i:num. ~(i IN ((1..t) DIFF s)) ==> u' i = &0) /\\\n     glue s t r u = glue s t r u'\n     ==> u = u'
+      #|  forall(s:num->bool) (t:num) (M:int) (r:num->int) (u:num->int) (u':num->int).\n     (forall i:num. ~(i IN ((1..t) DIFF s)) ==> u i = &0) /\\\n     (forall i:num. ~(i IN ((1..t) DIFF s)) ==> u' i = &0) /\\\n     glue s t r u = glue s t r u'\n     ==> u = u'
       #|  (1..t) DIFF s
       #|  CARD((1..t) DIFF s)
       #|  {v:int | abs v <= M}
@@ -13486,7 +13486,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  u':num->int
       #|  u:num->int
       #|  {x | x IN ibox t M /\\ rstx s x =\n    r} HAS_SIZE (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s))
-      #|  !(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> CARD {x | x IN ibox t M /\\ rstx s x = r} =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s))
+      #|  forall(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> CARD {x | x IN ibox t M /\\ rstx s x = r} =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s))
       #|  r:num->int
       #|  M:int
       #|  t:num
@@ -13495,7 +13495,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  FINITE {x:num->int | x IN ibox t M /\\\n   rstx s x = r}
       #|  x:num->int
       #|  nsum {x | x IN ibox t M /\\ rstx s x = r} G =\n    nsum {x | x IN ibox t M /\\ rstx s x = r} (\\x. G r)
-      #|  !(t:num) (M:int) (s:num->bool) (G:(num->int)->num) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (!x. G x = G (rstx s x)) /\\ r IN rbox s t M\n     ==> nsum {x | x IN ibox t M /\\ rstx s x = r} G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) * G r
+      #|  forall(t:num) (M:int) (s:num->bool) (G:(num->int)->num) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (forall x. G x = G (rstx s x)) /\\ r IN rbox s t M\n     ==> nsum {x | x IN ibox t M /\\ rstx s x = r} G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) * G r
       #|  x:num->int
       #|  x:num->int
       #|  x:num->int
@@ -13505,26 +13505,26 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ibox t M
       #|  G:(num->int)->num
       #|  rstx s
-      #|  !(t:num) (M:int) (s:num->bool) (G:(num->int)->num).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (!x. G x = G (rstx s x))\n     ==> nsum (ibox t M) G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) *\n         nsum (rbox s t M) G
+      #|  forall(t:num) (M:int) (s:num->bool) (G:(num->int)->num).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (forall x. G x = G (rstx s x))\n     ==> nsum (ibox t M) G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) *\n         nsum (rbox s t M) G
       #|  LVAL (bp:num->bool) (ss:num) =\n   nsum {j | j < ss} (\\j. if bp j then 2 EXP (ss-1-j) else 0)
       #|  {j | j < 0} = {}
-      #|  !bp. LVAL bp 0 = 0
+      #|  forall bp. LVAL bp 0 = 0
       #|  x-1
       #|  x = 0
       #|  x:num
-      #|  !s. {j | j < SUC s} = 0 INSERT (IMAGE SUC {j | j < s})
+      #|  forall s. {j | j < SUC s} = 0 INSERT (IMAGE SUC {j | j < s})
       #|  SUC(j) = j + 1
       #|  j:num
       #|  SUC s - 1 - 0 = s
       #|  ~(0 IN IMAGE SUC {j | j < s})
-      #|  !bp s. LVAL bp (SUC s) = (if bp 0 then 2 EXP s else 0) + LVAL (\\j. bp(j+1))\n  s
+      #|  forall bp s. LVAL bp (SUC s) = (if bp 0 then 2 EXP s else 0) + LVAL (\\j. bp(j+1))\n  s
       #|  {j | j < s}
       #|  (\\j. if bp j then 2 EXP (SUC s - 1 - j) else 0):num->num
       #|  SUC
       #|  \\j. (bp:num->bool)(j+1)
-      #|  !ss bp. LVAL bp ss < 2 EXP ss
+      #|  forall ss bp. LVAL bp ss < 2 EXP ss
       #|  (1 <= x + 2*d /\\ x + 2*d <= 2*t) /\\ (1 <= x /\\\n   x <= 2*t)
-      #|  !t x d. 1 <= x /\\ x + 2*d <= 2*t ==> RIFFLE t (x + 2*d) = RIFFLE t x + d
+      #|  forall t x d. 1 <= x /\\ x + 2*d <= 2*t ==> RIFFLE t (x + 2*d) = RIFFLE t x + d
       #|  (if bp 0 then t else 0) = (2*B) * (if bp 0 then 2 EXP s else\n   0)
       #|  t = (2*B) * 2 EXP s /\\ LVAL (\\j. (bp:num->bool)(j+1)) s = V\n    ==> (if bp 0 then t else 0) + 2 * B * V = 2 * (B * LVAL bp (SUC s))
       #|  LVAL (\\j. (bp:num->bool)(j+1)) s = V
@@ -13562,7 +13562,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  t = (2*B) * 2 EXP s
       #|  Lf = leafidx s t (\\j:num. RIFFLE t) (\\j. F) i
       #|  Lb = leafidx s t (\\j:num. RIFFLE t) (\\j. bp(j+1)) i
-      #|  !s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> leafidx s t (\\j:num. RIFFLE t) bp i = leafidx s t (\\j:num. RIFFLE t)\n      (\\j. F) i + B * LVAL bp s
+      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> leafidx s t (\\j:num. RIFFLE t) bp i = leafidx s t (\\j:num. RIFFLE t)\n      (\\j. F) i + B * LVAL bp s
       #|  bp:num->bool
       #|  s:num
       #|  B * LVAL bp s + B = B * (LVAL bp s + 1)
@@ -13574,7 +13574,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  s:num
       #|  i:num
       #|  leafidx s t (\\j:num. RIFFLE t) (\\j. F) i IN BLK B t
-      #|  !s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafidx s t (\\j:num. RIFFLE t) bp i <= t <=> leafidx s t (\\j:num.\n      RIFFLE t) (\\j. F) i <= t)
+      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafidx s t (\\j:num. RIFFLE t) bp i <= t <=> leafidx s t (\\j:num.\n      RIFFLE t) (\\j. F) i <= t)
       #|  i IN 1..2 * t
       #|  t = B * 2 EXP s
       #|  t = B * 2 EXP s
@@ -13593,11 +13593,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\j. (bp:num->bool)(j+1)
       #|  leafsg s t (\\j:num. RIFFLE t) (\\j. bp(j+1)) i <=> leafsg s t\n   (\\j:num. RIFFLE t) (\\j. F) i
       #|  t = (2*B) * 2 EXP s
-      #|  !s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafsg s t (\\j:num. RIFFLE t) bp i <=> leafsg s t (\\j:num. RIFFLE t)\n      (\\j. F) i)
+      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafsg s t (\\j:num. RIFFLE t) bp i <=> leafsg s t (\\j:num. RIFFLE t)\n      (\\j. F) i)
       #|  p permutes 1..n
       #|  (p:num->num) i = i
       #|  i:num
-      #|  !p n M hh. p permutes 1..n /\\ hh IN ibox n M ==> (\\i. hh(p i)) IN ibox n M
+      #|  forall p n M hh. p permutes 1..n /\\ hh IN ibox n M ==> (\\i. hh(p i)) IN ibox n M
       #|  g:num->int
       #|  M:int
       #|  n:num
@@ -13606,7 +13606,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (\\i. g(inverse (p:num->num) i)):num->int
       #|  hh:num->int
       #|  g:num->int
-      #|  !p n M. p permutes 1..n ==> IMAGE (\\hh:num->int. (\\i. hh(p i))) (ibox n M) =\n  ibox n M
+      #|  forall p n M. p permutes 1..n ==> IMAGE (\\hh:num->int. (\\i. hh(p i))) (ibox n M) =\n  ibox n M
       #|  inverse (p:num->num) j
       #|  (a:num->int)((p:num->num)(inverse p j)) =\n     (b:num->int)(p(inverse p j))
       #|  j:num
@@ -13617,7 +13617,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (\\hh:num->int. (\\i:num. hh((p:num->num)\n   i))):(num->int)->(num->int)
       #|  p permutes 1..n
       #|  M:int
-      #|  !p n M (Fn:(num->int)->num). p permutes 1..n\n     ==> nsum (ibox n M) Fn = nsum (ibox n M) (\\hh. Fn (\\i. hh(p i)))
+      #|  forall p n M (Fn:(num->int)->num). p permutes 1..n\n     ==> nsum (ibox n M) Fn = nsum (ibox n M) (\\hh. Fn (\\i. hh(p i)))
       #|  hinv:num->num
       #|  (if x IN s then (g:num->num) x else h x) = (if y IN s then g\n       y else h y)
       #|  (hinv:num->num)((h:num->num) x) = x /\\\n       (hinv:num->num)((h:num->num) y) = y
@@ -13647,9 +13647,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  CARD(IMAGE (g:num->num) s) = CARD s
       #|  CARD(u DIFF s) = CARD(u DIFF IMAGE (g:num->num) s)
       #|  FINITE(s:num->bool) /\\\n   FINITE(IMAGE (g:num->num) s)
-      #|  !(u:num->bool) (s:num->bool) (g:num->num).\n    FINITE u /\\ s SUBSET u /\\ (IMAGE g s) SUBSET u /\\\n    (!x y. x IN s /\\ y IN s /\\ g x = g y ==> x = y)\n    ==> ?p. p permutes u /\\ (!x. x IN s ==> p x = g x)
+      #|  forall(u:num->bool) (s:num->bool) (g:num->num).\n    FINITE u /\\ s SUBSET u /\\ (IMAGE g s) SUBSET u /\\\n    (forall x y. x IN s /\\ y IN s /\\ g x = g y ==> x = y)\n    ==> ?p. p permutes u /\\ (forall x. x IN s ==> p x = g x)
       #|  x:num
-      #|  !e G c t. 1 <= G /\\ c + e <= e * G /\\ t IN TSET e G ==> t + c IN 1..2*e*G
+      #|  forall e G c t. 1 <= G /\\ c + e <= e * G /\\ t IN TSET e G ==> t + c IN 1..2*e*G
       #|  bp:num->bool
       #|  ss:num
       #|  e * LVAL bp ss + e = e * (LVAL bp ss + 1)
@@ -13659,7 +13659,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  \\t. t + e * LVAL bp ss
       #|  TSET e G
       #|  1..2*e*G
-      #|  !e G ss bp. 2 <= e /\\ 1 <= G /\\ G = 2 EXP ss\n     ==> ?sigma. sigma permutes 1..2*e*G /\\\n                 (!t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)
+      #|  forall e G ss bp. 2 <= e /\\ 1 <= G /\\ G = 2 EXP ss\n     ==> ?sigma. sigma permutes 1..2*e*G /\\\n                 (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)
       #|  l:num
       #|  (\\l. hh(sigma(inverse (sigma:num->num) l))):num->int = hh
       #|  2*e*G = 2*(e*G)
@@ -13678,7 +13678,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  sigma (leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j. F) i) =\n   leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) bp i
       #|  leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j. F) i IN TSET e G
       #|  i:num
-      #|  !e (ss:num) (G:num) (bp:num->bool) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (sigma:num->num) (y:num->int).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (!t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i) (e-1)\n      y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) =\n         isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI (\\l.\n          hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j.\n           F) (\\l. hh(sigma l)) i (y i))
+      #|  forall e (ss:num) (G:num) (bp:num->bool) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (sigma:num->num) (y:num->int).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i) (e-1)\n      y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) =\n         isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI (\\l.\n          hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j.\n           F) (\\l. hh(sigma l)) i (y i))
       #|  e * LVAL bp ss
       #|  leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j.\n      F) i
       #|  y:num->int
@@ -13693,11 +13693,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  y:num->int
       #|  hh:num->int
       #|  sigma permutes\n   1..2*e*G
-      #|  !e (ss:num) (G:num) (bp:num->bool) (P:int) (PSI:(num->int)->num->num->int)\n  (sigma:num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (!t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n         = nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI\n                    (\\l. hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j.\n                     RIFFLE(e*G)) (\\j. F) hh i (y i)) = &0})
+      #|  forall e (ss:num) (G:num) (bp:num->bool) (P:int) (PSI:(num->int)->num->num->int)\n  (sigma:num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n         = nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI\n                    (\\l. hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j.\n                     RIFFLE(e*G)) (\\j. F) hh i (y i)) = &0})
       #|  y:num
       #|  x:num
       #|  (lab:num->num) x
-      #|  !e (G:num) (lab:num->num).\n     1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> (!x y. x IN {g | g < 2*e} /\\ y IN {g | g < 2*e} /\\\n      lab x = lab y ==> x = y)
+      #|  forall e (G:num) (lab:num->num).\n     1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> (forall x y. x IN {g | g < 2*e} /\\ y IN {g | g < 2*e} /\\\n      lab x = lab y ==> x = y)
       #|  TSET e G
       #|  TSET e G
       #|  TSET e G
@@ -13805,7 +13805,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  g:num
       #|  t:num
       #|  (0..2*e-1) = {g | g < 2*e}
-      #|  !e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) = TSET e G
+      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) = TSET e G
       #|  TSET e G
       #|  TSET e G
       #|  TSET e G
@@ -13863,25 +13863,25 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD(IMAGE lab (0..2*e-1)) = 2*e
+      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD(IMAGE lab (0..2*e-1)) = 2*e
       #|  t:num
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) SUBSET 1..2*e*G
+      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) SUBSET 1..2*e*G
       #|  lab:num->num
       #|  G:num
       #|  e:num
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD((1..2*e*G) DIFF IMAGE lab (0..2*e-1)) = 2*e*G - 2*e
+      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD((1..2*e*G) DIFF IMAGE lab (0..2*e-1)) = 2*e*G - 2*e
       #|  g:num
       #|  (lab:num->num) g IN IMAGE lab (0..2 * e - 1)
       #|  g:num
       #|  isum (0..2 * e - 1) (\\g. rstx (IMAGE lab (0..2 * e - 1)) hh\n   (lab g) * zv g) = isum (0..2 * e - 1) (\\g. hh (lab g) * zv g)
       #|  zv:num->int
-      #|  !e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (hh:num->int).\n     2 <= e\n     ==> (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) hh =\n         (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) (rstx\n                   (IMAGE lab (0..2*e-1)) hh)
+      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (hh:num->int).\n     2 <= e\n     ==> (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) hh =\n         (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) (rstx\n                   (IMAGE lab (0..2*e-1)) hh)
       #|  (i + 1) - 1 = i
       #|  (2*e-1)+1 = 2*e
       #|  i + 1 - 1 = i
@@ -13892,7 +13892,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1
       #|  i:num
       #|  isum(1..2*e)(\\i. hh' i * v(i-1)) = isum(1..2*e)(\\i.\n    (hh:num->int)((lab:num->num)(i-1)) * v(i-1))
-      #|  !e (lab:num->num) (hh:num->int) (hh':num->int) (v:num->int).\n     2 <= e /\\ (!i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> isum(1..2*e)(\\i. hh' i * v(i-1)) = isum(0..2*e-1)(\\g. hh(lab g) * v\n      g)
+      #|  forall e (lab:num->num) (hh:num->int) (hh':num->int) (v:num->int).\n     2 <= e /\\ (forall i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> isum(1..2*e)(\\i. hh' i * v(i-1)) = isum(0..2*e-1)(\\g. hh(lab g) * v\n      g)
       #|  (g+1)-1 = g
       #|  g + 1 IN 1..2 * e
       #|  g:num
@@ -13923,33 +13923,33 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  z:num->int
       #|  \\(z:num->int). (\\g. if g < 2*e then z(g+1) else &0):num->int
       #|  \\(zv:num->int). (\\i. if i IN 1..2*e then zv(i-1) else\n    &0):num->int
-      #|  !e (lab:num->num) (G:num) (Cm0:int) (P:int) (WB:int)\n    (hh:num->int) (hh':num->int).\n     2 <= e /\\ (!i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> nsum {zv | (!g. g < 2*e ==> abs(zv g) <= WB) /\\\n      (!g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)\n         = nsum {z | (!i. i IN 1..2*e ==> abs(z i) <= WB) /\\\n          (!i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                     isum (1..2*e) (\\i. hh' i * z i) = &0}\n                 (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                  (G-(e-1)))))
-      #|  !i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  !i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  !i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  !i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  !i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
-      #|  !i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
-      #|  !i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
+      #|  forall e (lab:num->num) (G:num) (Cm0:int) (P:int) (WB:int)\n    (hh:num->int) (hh':num->int).\n     2 <= e /\\ (forall i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= WB) /\\\n      (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)\n         = nsum {z | (forall i. i IN 1..2*e ==> abs(z i) <= WB) /\\\n          (forall i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                     isum (1..2*e) (\\i. hh' i * z i) = &0}\n                 (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                  (G-(e-1)))))
+      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
+      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
+      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
+      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
+      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
+      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
+      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
       #|  i:num
-      #|  !g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  !g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  !g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  !g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  !g. ~(g < 2 * e) ==> (zv:num->int) g = &0
-      #|  !g. ~(g < 2 * e) ==> (zv:num->int) g = &0
-      #|  !g. ~(g < 2 * e) ==> (zv:num->int) g = &0
+      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
+      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
+      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
+      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
+      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
+      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
+      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
       #|  g:num
       #|  y:num
       #|  x:num
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  (!x y. x IN 0..2 * e - 1 /\\ y IN 0..2 * e - 1 /\\\n   lab x = lab y ==> x = y) /\\\n    (!y. y IN IMAGE (lab:num->num) (0..2 * e - 1) ==> (?x. x IN 0..2 * e - 1 /\\\n     lab x = y))
+      #|  (forall x y. x IN 0..2 * e - 1 /\\ y IN 0..2 * e - 1 /\\\n   lab x = lab y ==> x = y) /\\\n    (forall y. y IN IMAGE (lab:num->num) (0..2 * e - 1) ==> (?x. x IN 0..2 * e - 1 /\\\n     lab x = y))
       #|  IMAGE (lab:num->num) (0..2*e-1)
       #|  0..2*e-1
       #|  lab:num->num
-      #|  !e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> ?labinv. (!t. t IN IMAGE lab (0..2*e-1) ==> labinv t IN (0..2*e-1) /\\\n      lab(labinv t) = t) /\\\n                  (!g. g IN (0..2*e-1) ==> labinv(lab g) = g)
+      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> ?labinv. (forall t. t IN IMAGE lab (0..2*e-1) ==> labinv t IN (0..2*e-1) /\\\n      lab(labinv t) = t) /\\\n                  (forall g. g IN (0..2*e-1) ==> labinv(lab g) = g)
       #|  (\\i. if i IN 1..2*e then (x:num->int)((lab:num->num)(i-1)) else\n            &0):num->int
       #|  x:num->int
       #|  (&G:int) * &e * cpsi * (&2 * P) pow (e-1)
@@ -13983,27 +13983,27 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  !e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> nsum (rbox (IMAGE lab (0..2*e-1)) (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))\n         = nsum {hh | (!i. i IN 1..2*e ==> abs(hh i) <= (&2*P)) /\\\n          (!i. ~(i IN 1..2*e) ==> hh i = &0)}\n                 (\\hh. nsum {z | (!i. i IN 1..2*e ==> abs(z i) <= (&G) * &e *\n                  cpsi * (&2 * P) pow (e-1)) /\\\n                   (!i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                                 isum (1..2*e) (\\i. hh i * z i) = &0}\n                            (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                             (G-(e-1))))))
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  !i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
-      #|  !i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
+      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> nsum (rbox (IMAGE lab (0..2*e-1)) (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))\n         = nsum {hh | (forall i. i IN 1..2*e ==> abs(hh i) <= (&2*P)) /\\\n          (forall i. ~(i IN 1..2*e) ==> hh i = &0)}\n                 (\\hh. nsum {z | (forall i. i IN 1..2*e ==> abs(z i) <= (&G) * &e *\n                  cpsi * (&2 * P) pow (e-1)) /\\\n                   (forall i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                                 isum (1..2*e) (\\i. hh i * z i) = &0}\n                            (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                             (G-(e-1))))))
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
+      #|  forall i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
+      #|  forall i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
       #|  i:num
-      #|  !i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  !i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  !g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
+      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
       #|  &(num_of_int(&2 * P)):int = &2 * P
       #|  &2 * (&2 * P) + &1 = &(2 * num_of_int(&2 * P) + 1):int
       #|  lab:num->num
@@ -14015,11 +14015,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  lab:num->num
       #|  G:num
       #|  e:num
-      #|  (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\\n       (!g. ~(g < 2*e) ==> zv g = &0)} (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) *\n        zv g) = &0 then (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n         0)):(num->int)->num
+      #|  (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\\n       (forall g. ~(g < 2*e) ==> zv g = &0)} (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) *\n        zv g) = &0 then (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n         0)):(num->int)->num
       #|  IMAGE (lab:num->num) (0..2*e-1)
       #|  &2*P:int
       #|  2*e*G
-      #|  !e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (Bn:num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) =\n                       Bn
+      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (Bn:num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) =\n                       Bn
       #|  &Bn:int
       #|  &Bn:int
       #|  &Bn:int
@@ -14439,7 +14439,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (B:int) * (&5 * P) pow (G-k) * (&2 * P) pow (k-(e-1))
       #|  (&2 * (&2 * (P:int)) + &1) pow (G-k) <= (&5 * P) pow (G-k)
       #|  &2 * (&2 * (P:int)) + &1 <= &5 * P
-      #|  !(B:int) (P:int) (e:num) (k:num) (G:num) (Cm0:int).\n     &1 <= B /\\ &1 <= P /\\ e-1 <= k /\\ k <= G /\\\n     B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0\n     ==> B * (&2 * (&2 * P) + &1) pow (G-k) * (&2 * P) pow (k-(e-1))\n         <= Cm0 * P pow (G-(e-1))
+      #|  forall(B:int) (P:int) (e:num) (k:num) (G:num) (Cm0:int).\n     &1 <= B /\\ &1 <= P /\\ e-1 <= k /\\ k <= G /\\\n     B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0\n     ==> B * (&2 * (&2 * P) + &1) pow (G-k) * (&2 * P) pow (k-(e-1))\n         <= Cm0 * P pow (G-(e-1))
       #|  B:num
       #|  pp:num->num->num
       #|  (\\hh (i:num) (y:int). hh i * ipoly (PSI hh i) (e-1)\n     y):(num->int)->num->int->int
@@ -14447,16 +14447,16 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ibox (2*e*G) (&2*P)
       #|  &2*P:int
       #|  e*G:num
-      #|  !e (G:num) (P:int) (PSI:(num->int)->num->num->int) (s:num)\n  (pp:num->num->num) (B:num).\n    1 <= e * G /\\ (!j. pp j permutes 1..(2*e*G)) /\\\n    (!bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI hh i)\n              (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= B)\n    ==> nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n               isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n                <= B
+      #|  forall e (G:num) (P:int) (PSI:(num->int)->num->num->int) (s:num)\n  (pp:num->num->num) (B:num).\n    1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n    (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI hh i)\n              (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= B)\n    ==> nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n               isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n                <= B
       #|  (\\(j:num) (x:num). x):num->num->num
       #|  0
-      #|  !e (G:num) (P:int) (PSI:(num->int)->num->num->int) (Bn:num).\n     1 <= e * G /\\\n     nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n              <= Bn\n     ==> ?(s:num) (pp:num->num->num).\n            1 <= e * G /\\ (!j. pp j permutes 1..(2*e*G)) /\\\n            (!bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n               (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                     isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                      hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
+      #|  forall e (G:num) (P:int) (PSI:(num->int)->num->num->int) (Bn:num).\n     1 <= e * G /\\\n     nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n              <= Bn\n     ==> ?(s:num) (pp:num->num->num).\n            1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n            (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n               (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                     isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                      hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
       #|  2*e*G = 2*(e*G)
       #|  1 <= n <=> ~(n=0)
       #|  1 <= e * G
       #|  (\\j:num. RIFFLE(e*G)):num->num->num
       #|  ss:num
-      #|  !e k (c:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (L:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\ &1 <= P /\\ G = 2 EXP ss /\\\n      (!bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i)\n                 (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0}) <= Bn)\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
+      #|  forall e k (c:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (L:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\ &1 <= P /\\ G = 2 EXP ss /\\\n      (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i)\n                 (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0}) <= Bn)\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
       #|  2*e*(q+1) - 2*e = 2*e*q
       #|  (q+1)-1 = q
       #|  G-1
@@ -14475,13 +14475,13 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &0 <= (P:int) pow (e-1) /\\\n   &0 <= P pow (G-(e-1))
       #|  &0 <= (P:int)
       #|  fam:int = ((&2 * P) * &2 * W * (&2 * P) pow (e-1)) pow (2*e-1)
-      #|  !e (G:num) (P:int) (Cm0:int) (Cf:int) (W:int) (MaxMult:num) (GN:num)\n  (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm0 /\\ &1 <= Cf /\\ &1 <= W /\\\n     &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n     &GN <= &(MaxMult EXP (2*e)) * Cf * ((&2 * P) * &2 * (W * (&2 * P) pow\n      (e-1))) pow (2*e-1) /\\\n     &FS <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) * &GN\n     ==> &FS <= (&5 pow (G-1) * Cm0) pow (2*e) * (P pow (G-(e-1))) pow (2*e) *\n      P pow (2*e*G - 2*e) *\n                (Cf * ((&2 * P) * &2 * W * (&2 * P) pow (e-1)) pow (2*e-1))
+      #|  forall e (G:num) (P:int) (Cm0:int) (Cf:int) (W:int) (MaxMult:num) (GN:num)\n  (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm0 /\\ &1 <= Cf /\\ &1 <= W /\\\n     &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n     &GN <= &(MaxMult EXP (2*e)) * Cf * ((&2 * P) * &2 * (W * (&2 * P) pow\n      (e-1))) pow (2*e-1) /\\\n     &FS <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) * &GN\n     ==> &FS <= (&5 pow (G-1) * Cm0) pow (2*e) * (P pow (G-(e-1))) pow (2*e) *\n      P pow (2*e*G - 2*e) *\n                (Cf * ((&2 * P) * &2 * W * (&2 * P) pow (e-1)) pow (2*e-1))
       #|  &1 * x = x:int
       #|  (&G:int) * &e * cpsi * (&2 * P) pow (e-1) =\n    (&G * &e * cpsi) * (&2 * P) pow (e-1)
       #|  (&2 * (P:int)) pow (e-1)
       #|  &2 * (P:int) <= (&2 * P) pow (e-1)
       #|  &1 <= (&G:int) * &e * cpsi
-      #|  !e (G:num) (cpsi:int) (P:int).\n     2 <= e /\\ 1 <= G /\\ &1 <= cpsi /\\ &1 <= P\n     ==> &2 * P <= &G * &e * cpsi * (&2 * P) pow (e-1)
+      #|  forall e (G:num) (cpsi:int) (P:int).\n     2 <= e /\\ 1 <= G /\\ &1 <= cpsi /\\ &1 <= P\n     ==> &2 * P <= &G * &e * cpsi * (&2 * P) pow (e-1)
       #|  (&4 * &G * &e * (cpsi:int)) pow (4*e*G) =\n    (&4 * &G * &e * cpsi) pow (2*e*G) *\n    (&4 * &G * &e * cpsi) pow (2*e*G)
       #|  &(NB * NB):int
       #|  &0 <= (&4 * &G * &e * (cpsi:int)) pow (2*e*G)
@@ -14498,8 +14498,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  nsum (ibox (2*e*G) (&2 * P)) (\\hh:num->int. NB)
       #|  nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= NB * NB
       #|  NB = CARD(ibox (2*e*G) (&2 * P))
-      #|  !e (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int).\n      2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n      ~(&2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1))\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= (&4 * &G * &e * cpsi) pow (4*e*G)
-      #|  DPWIH2 e <=>\n    ?k. e <= k /\\\n        !(A:int). &1 <= A\n          ==> ?B. &1 <= B /\\\n              !(ffam:num->num->int) P m.\n                  &1 <= P /\\\n                  (!j. j IN 1..k ==> ~(ffam j e = &0)) /\\\n                  (!j j'. j IN 1..k /\\\n                   j' IN 1..k ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                  (!j i. j IN 1..k /\\\n                   i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                  ==> &(CARD {x | x IN ibox k P /\\\n                                  isum(1..k)(\\j. ipoly (ffam j) e (x j)) = m})\n                      <= B * P pow (k - e)
+      #|  forall e (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int).\n      2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n      ~(&2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1))\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= (&4 * &G * &e * cpsi) pow (4*e*G)
+      #|  DPWIH2 e <=>\n    ?k. e <= k /\\\n        forall(A:int). &1 <= A\n          ==> ?B. &1 <= B /\\\n              forall(ffam:num->num->int) P m.\n                  &1 <= P /\\\n                  (forall j. j IN 1..k ==> ~(ffam j e = &0)) /\\\n                  (forall j j'. j IN 1..k /\\\n                   j' IN 1..k ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                  (forall j i. j IN 1..k /\\\n                   i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                  ==> &(CARD {x | x IN ibox k P /\\\n                                  isum(1..k)(\\j. ipoly (ffam j) e (x j)) = m})\n                      <= B * P pow (k - e)
       #|  a:int
       #|  M:int
       #|  ffam:num->num->int
@@ -14512,7 +14512,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  A:int
       #|  k:num
       #|  k:num
-      #|  !d. DPWIH2 d\n    ==> ?k. d <= k /\\\n        !(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        !(ffam:num->num->int) M a. &1 <= M /\\\n            (!j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (!j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (!j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(amcount (\\j. ipoly (ffam j) d) k M a) <= B * M pow (k - d)
+      #|  forall d. DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(ffam:num->num->int) M a. &1 <= M /\\\n            (forall j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (forall j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (forall j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(amcount (\\j. ipoly (ffam j) d) k M a) <= B * M pow (k - d)
       #|  (&2 * (M:int) + &1) pow (G-k) * (B * M pow (k-d))
       #|  M:int
       #|  G-k:num
@@ -14544,7 +14544,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  A:int
       #|  k:num
       #|  k:num
-      #|  !d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        !(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        !(ffam:num->num->int) G M z. k <= G /\\ &1 <= M /\\\n            (!j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (!j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (!j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n             isum(1..G)(\\j. ipoly (ffam j) d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
+      #|  forall d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(ffam:num->num->int) G M z. k <= G /\\ &1 <= M /\\\n            (forall j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (forall j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (forall j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n             isum(1..G)(\\j. ipoly (ffam j) d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
       #|  (w:num->int) j
       #|  d:num
       #|  j:num
@@ -14590,7 +14590,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  DPWIH2\n   d
       #|  1 <= d
-      #|  !d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        !(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        !(psi:num->int) (neg:num->bool) G M z. k <= G /\\ &1 <= M /\\\n            ~(psi d = &0) /\\\n            (!i. i <= d ==> abs(psi i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n                    isum(1..G)(\\j. if neg j then --(ipoly psi d (w j)) else\n                     ipoly psi d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
+      #|  forall d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(psi:num->int) (neg:num->bool) G M z. k <= G /\\ &1 <= M /\\\n            ~(psi d = &0) /\\\n            (forall i. i <= d ==> abs(psi i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n                    isum(1..G)(\\j. if neg j then --(ipoly psi d (w j)) else\n                     ipoly psi d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
       #|  A:int
       #|  z:int
       #|  &2 * P:int
@@ -14603,7 +14603,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &0 <= (Cm0:int)
       #|  &0 <= (&2:int) pow (k-(e-1))
       #|  &0 <= (&5:int) pow (G-k)
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n     (psi:num->int) (neg:num->bool) (z:int).\n      e-1 <= k /\\ &1 <= B /\\ &1 <= cpsi /\\ k <= G /\\ &1 <= P /\\\n      B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      ~(psi (e-1) = &0) /\\\n       (!i. i <= e-1 ==> abs(psi i) <= cpsi * (&2 * P) pow (e-1-i)) /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (zz:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = zz})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n      ==> CARD {w | w IN ibox G (&2 * P) /\\\n                    isum(1..G)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                     ipoly psi (e-1) (w j)) = z}\n          <= num_of_int(Cm0 * P pow (G-(e-1)))
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n     (psi:num->int) (neg:num->bool) (z:int).\n      e-1 <= k /\\ &1 <= B /\\ &1 <= cpsi /\\ k <= G /\\ &1 <= P /\\\n      B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      ~(psi (e-1) = &0) /\\\n       (forall i. i <= e-1 ==> abs(psi i) <= cpsi * (&2 * P) pow (e-1-i)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (zz:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = zz})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n      ==> CARD {w | w IN ibox G (&2 * P) /\\\n                    isum(1..G)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                     ipoly psi (e-1) (w j)) = z}\n          <= num_of_int(Cm0 * P pow (G-(e-1)))
       #|  i:num
       #|  (lab:num->num) g
       #|  hh:num->int
@@ -14621,7 +14621,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  e:num
       #|  (lab:num->num) g IN 1..2*e*G
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num) ss.\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ 1 <= G /\\ &1 <= P /\\\n      &1 <= cpsi /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (!g. g < 2*e ==> lab g IN TSET e G)\n     ==> !g v. g < 2*e\n         ==> CARD {u | u IN ibox G (&2*P) /\\\n          isum(1..G)(\\i. if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g\n           (i-1)) then --ipoly (PSI hh (lab g)) (e-1) (u i) else ipoly (PSI hh\n            (lab g)) (e-1) (u i)) = v}\n             <= num_of_int (Cm0 * P pow (G-(e-1)))
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num) ss.\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ 1 <= G /\\ &1 <= P /\\\n      &1 <= cpsi /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G)\n     ==> forall g v. g < 2*e\n         ==> CARD {u | u IN ibox G (&2*P) /\\\n          isum(1..G)(\\i. if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g\n           (i-1)) then --ipoly (PSI hh (lab g)) (e-1) (u i) else ipoly (PSI hh\n            (lab g)) (e-1) (u i)) = v}\n             <= num_of_int (Cm0 * P pow (G-(e-1)))
       #|  (e:num)-1
       #|  (e:num)-1
       #|  (e:num)-1
@@ -14981,7 +14981,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  e:num
       #|  (2*e)*G = 2*e*G
-      #|  {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n             (e-1)) /\\\n              (!g. ~(g < 2*e) ==> (zv:num->int) g = &0)}
+      #|  {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n             (e-1)) /\\\n              (forall g. ~(g < 2*e) ==> (zv:num->int) g = &0)}
       #|  num_of_int (Cm0 * P pow (G-(e-1)))
       #|  \\g:num. (hh:num->int)((lab:num->num) g)
       #|  \\(g:num) (i:num) (x:int). if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F)\n     ((en:num->num->num) g (i-1)) then --(ipoly (PSI (hh:num->int)\n      ((lab:num->num) g)) (e-1) x) else ipoly (PSI hh (lab g)) (e-1) x
@@ -14996,7 +14996,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  G:num
       #|  ss:num
       #|  e:num
-      #|  !e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0}\n         <= nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)
+      #|  forall e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0}\n         <= nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
@@ -15012,7 +15012,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  B:int
       #|  k:num
       #|  hh:num->int
-      #|  !e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (!g. g < 2*e ==> lab g IN TSET e G) /\\\n     (!t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (!g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (!g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0})\n         <= nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))
+      #|  forall e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0})\n         <= nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
       #|  G = 2 EXP ss
@@ -15058,7 +15058,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  B:int
       #|  k:num
       #|  e:num
-      #|  nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (!g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (!g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n                       0))
+      #|  nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n                       0))
       #|  en:num->num->num
       #|  lab:num->num
       #|  G:num
@@ -15076,10 +15076,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ss:num
       #|  G:num
       #|  e:num
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      e-1 <= ss /\\\n      G = 2 EXP ss /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> (!bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n                     <= Bn)
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      e-1 <= ss /\\\n      G = 2 EXP ss /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n                     <= Bn)
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
       #|  cpsi:int
       #|  cpsi:int
       #|  cpsi:int
@@ -15208,10 +15208,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  cpsi:int
       #|  cpsi:int
       #|  cpsi:int
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  !l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
+      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
       #|  ss:num
       #|  Bn:num
       #|  PSI:(num->int)->num->num->int
@@ -15233,7 +15233,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  B:int
       #|  k:num
       #|  e:num
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
       #|  ss:num
       #|  Bn:num
       #|  PSI:(num->int)->num->num->int
@@ -15245,7 +15245,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  e:num
       #|  1 <= n <=> ~(n=0)
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> ?(s:num) (pp:num->num->num).\n             1 <= e * G /\\ (!j. pp j permutes 1..(2*e*G)) /\\\n             (!bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n                (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                      isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                       hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> ?(s:num) (pp:num->num->num).\n             1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n             (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n                (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                      isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                       hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
       #|  cpsi:int
       #|  Cm0:int
       #|  B:int
@@ -15253,12 +15253,12 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &Bn:int = RHS
       #|  Bn = num_of_int RHS
       #|  &0 <= (RHS:int)
-      #|  RHS:int = (&2 * &2 * P + &1) pow (2 * e * G - 2 * e) *\n    &(nsum\n      {hh | (!i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n            (!i. ~(i IN 1..2 * e) ==> hh i = &0)}\n     (\\hh.\n          nsum\n          {z | (!i. i IN 1..2 * e ==> abs (z i) <= &G * &e * cpsi * (&2 * P)\n           pow (e - 1)) /\\\n               (!i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n               isum (1..2 * e) (\\i. hh i * z i) = &0}\n          (\\z. nproduct (1..2 * e) (\\i. num_of_int (Cm0 * P pow (G - (e -\n           1)))))))
+      #|  RHS:int = (&2 * &2 * P + &1) pow (2 * e * G - 2 * e) *\n    &(nsum\n      {hh | (forall i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n            (forall i. ~(i IN 1..2 * e) ==> hh i = &0)}\n     (\\hh.\n          nsum\n          {z | (forall i. i IN 1..2 * e ==> abs (z i) <= &G * &e * cpsi * (&2 * P)\n           pow (e - 1)) /\\\n               (forall i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n               isum (1..2 * e) (\\i. hh i * z i) = &0}\n          (\\z. nproduct (1..2 * e) (\\i. num_of_int (Cm0 * P pow (G - (e -\n           1)))))))
       #|  &(num_of_int(Cm0 * P pow (G-(e-1)))) = Cm0 * P pow (G-(e-1))
       #|  &0 <= (Cm0:int) * P pow (G-(e-1))
       #|  num_of_int(Cm0 * P pow (G-(e-1)))
       #|  \\(i:num) (z:int). num_of_int(Cm0 * P pow (G-(e-1)))
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j))\n      ==> ?(mult:num->int->num) (MaxMult:num).\n      &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n      (!i z. mult i z <= MaxMult) /\\\n      &(nsum (ibox (2 * e * G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2 * e * G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e - 1) (y i)) =\n                   &0}))\n       <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (!i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (!i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (!i. i IN 1..(2*e) ==> abs(z i) <= &G * &e *\n                   cpsi * (&2 * P) pow (e-1)) /\\\n                    (!i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j))\n      ==> ?(mult:num->int->num) (MaxMult:num).\n      &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n      (forall i z. mult i z <= MaxMult) /\\\n      &(nsum (ibox (2 * e * G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2 * e * G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e - 1) (y i)) =\n                   &0}))\n       <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= &G * &e *\n                   cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))
       #|  G:num
       #|  G:num
       #|  G:num
@@ -15277,7 +15277,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  e:num
       #|  Cf:int
       #|  (&2 * (P:int)) * &2 * (&G * &e * cpsi) * (&2 * P) pow (e - 1) = (&2 *\n   P) * &2 * (&G * &e * cpsi * (&2 * P) pow (e-1))
-      #|  nsum\n  {hh | (!i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n        (!i. ~(i IN 1..2 * e) ==> hh i = &0)}\n (\\hh.\n      nsum\n      {z | (!i.\n                i IN 1..2 * e\n                ==> abs (z i) <= &G * &e * cpsi * (&2 * P) pow (e - 1)) /\\\n           (!i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n           isum (1..2 * e) (\\i. hh i * z i) = &0}\n      (\\z. nproduct (1..2 * e) (\\i:num. mult i (z i))))
+      #|  nsum\n  {hh | (forall i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n        (forall i. ~(i IN 1..2 * e) ==> hh i = &0)}\n (\\hh.\n      nsum\n      {z | (forall i.\n                i IN 1..2 * e\n                ==> abs (z i) <= &G * &e * cpsi * (&2 * P) pow (e - 1)) /\\\n           (forall i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n           isum (1..2 * e) (\\i. hh i * z i) = &0}\n      (\\z. nproduct (1..2 * e) (\\i:num. mult i (z i))))
       #|  MaxMult:num
       #|  2*2*e*G-e = 2*(2*e*G)-e
       #|  MaxMult:num
@@ -15290,7 +15290,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  B:int
       #|  k:num
       #|  e:num
-      #|  !e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (Cfp:int) (Cf:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      &1 <= Cfp /\\ Cf <= Cfp /\\\n      &1 <= &G * &e * cpsi /\\\n      (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (!A B' mfn. &1 <= A /\\ A <= &2 * B' /\\\n       &2 * B' <= A pow (CARD (1..2 * e) - 1)\n          ==> isum {a | (!i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n           (!i. ~(i IN 1..2 * e) ==> a i = &0)}\n                   (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                    B') pow (CARD (1..2 * e) - 1)) /\\\n      &2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1)\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= ((&5 pow (G-1) * Cm0) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n           (2*e-1)) * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) - e)
+      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (Cfp:int) (Cf:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      &1 <= Cfp /\\ Cf <= Cfp /\\\n      &1 <= &G * &e * cpsi /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (forall A B' mfn. &1 <= A /\\ A <= &2 * B' /\\\n       &2 * B' <= A pow (CARD (1..2 * e) - 1)\n          ==> isum {a | (forall i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n           (forall i. ~(i IN 1..2 * e) ==> a i = &0)}\n                   (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                    B') pow (CARD (1..2 * e) - 1)) /\\\n      &2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1)\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= ((&5 pow (G-1) * Cm0) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n           (2*e-1)) * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) - e)
       #|  G:num
       #|  G:num
       #|  G:num
@@ -15329,7 +15329,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  cpsi:int
       #|  Cf:int
       #|  1..(2*e)
-      #|  !e k (G:num). 2 <= e /\\ e-1 <= k /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss)\n    ==> !cpsi:int. &1 <= cpsi\n        ==> !B:int. &1 <= B /\\\n            (!(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG\n             /\\ &1 <= M /\\ ~(psi (e-1) = &0) /\\\n                (!i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n                ==> &(CARD {w | w IN ibox GG M /\\\n                 isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                  ipoly psi (e-1) (w j)) = z})\n                    <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n            ==> ?cc:int. &1 <= cc /\\\n                !(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (!(hh:num->int) i. (!l. l IN 1..(2*e*G) ==> abs(hh l) <= &2\n                     * P) /\\ i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (!(hh:num->int) i j. (!l. l IN 1..(2*e*G) ==> abs(hh l) <=\n                     &2 * P) /\\ i IN 1..(2*e*G) /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox (2*e*G) (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P)\n                            /\\\n                                isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i)\n                                 (e-1) (y i)) = &0}))\n                        <= cc * P pow (2*(2*e*G) - e)
+      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss)\n    ==> forall cpsi:int. &1 <= cpsi\n        ==> forall B:int. &1 <= B /\\\n            (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG\n             /\\ &1 <= M /\\ ~(psi (e-1) = &0) /\\\n                (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n                ==> &(CARD {w | w IN ibox GG M /\\\n                 isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                  ipoly psi (e-1) (w j)) = z})\n                    <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n            ==> ?cc:int. &1 <= cc /\\\n                forall(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2\n                     * P) /\\ i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <=\n                     &2 * P) /\\ i IN 1..(2*e*G) /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox (2*e*G) (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P)\n                            /\\\n                                isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i)\n                                 (e-1) (y i)) = &0}))\n                        <= cc * P pow (2*(2*e*G) - e)
       #|  G:num
       #|  e-1 <= ss
       #|  ss:num
@@ -15358,7 +15358,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= 2 EXP k /\\ k <= 2 EXP k /\\\n   e - 1 <= 2 EXP k
       #|  k:num
       #|  e-1
-      #|  !e. 2 <= e ==> DPWIH2 (e-1)\n     ==> ?kk. e <= 2*kk /\\ 1 <= kk /\\\n            !cpsi:int. &1 <= cpsi\n            ==> ?cc. &1 <= cc /\\\n            !(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (!(hh:num->int) i. (!l. l IN 1..kk ==> abs(hh l) <= &2 * P)\n                     /\\ i IN 1..kk ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (!(hh:num->int) i j. (!l. l IN 1..kk ==> abs(hh l) <= &2 *\n                     P) /\\ i IN 1..kk /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox kk (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                                isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1)\n                                 (y i)) = &0}))\n                        <= cc * P pow (2*kk - e)
+      #|  forall e. 2 <= e ==> DPWIH2 (e-1)\n     ==> ?kk. e <= 2*kk /\\ 1 <= kk /\\\n            forall cpsi:int. &1 <= cpsi\n            ==> ?cc. &1 <= cc /\\\n            forall(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (forall(hh:num->int) i. (forall l. l IN 1..kk ==> abs(hh l) <= &2 * P)\n                     /\\ i IN 1..kk ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (forall(hh:num->int) i j. (forall l. l IN 1..kk ==> abs(hh l) <= &2 *\n                     P) /\\ i IN 1..kk /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox kk (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                                isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1)\n                                 (y i)) = &0}))\n                        <= cc * P pow (2*kk - e)
       #|  cpsi:int
       #|  j:num
       #|  ~(SUC e <= e)
@@ -15375,7 +15375,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  h:int
       #|  P:int
       #|  (\\j. &1):num->int
-      #|  !e P h:int. &1 <= P /\\ abs h <= &2 * P\n   ==> ?g. (!y:int. (y+h) pow (SUC e) = y pow (SUC e) + h * isum(0..e)(\\j. g j\n    * y pow j)) /\\\n           g e = &(SUC e) /\\\n           (!j. j <= e ==> abs(g j) <= &(4 EXP (SUC e)) * P pow (e - j))
+      #|  forall e P h:int. &1 <= P /\\ abs h <= &2 * P\n   ==> ?g. (forall y:int. (y+h) pow (SUC e) = y pow (SUC e) + h * isum(0..e)(\\j. g j\n    * y pow j)) /\\\n           g e = &(SUC e) /\\\n           (forall j. j <= e ==> abs(g j) <= &(4 EXP (SUC e)) * P pow (e - j))
       #|  4 EXP SUC(SUC n) = 4 * 4 EXP SUC n
       #|  &2 * &(4 EXP (SUC n)) * (c:int) * P pow (nn - 1 - j) + &(4 EXP (SUC(SUC n))) *\n       c * P pow (nn - 1 - j) = (&2 * &(4 EXP (SUC n)) + &(4 EXP (SUC(SUC n))))\n        * (c * P pow (nn - 1 - j)) /\\\n       &2 * &(4 EXP SUC (SUC n)) * c * P pow (nn - 1 - j) = (&2 * &(4 EXP\n        SUC(SUC n))) * (c * P pow (nn - 1 - j))
       #|  &2 * &(4 EXP (SUC n)) * (c:int) * P pow (nn - 1 - j) + &(4 EXP\n      (SUC(SUC n))) * c * P pow (nn - 1 - j)
@@ -15415,9 +15415,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= SUC 0
       #|  1
       #|  SUC 0 = 1
-      #|  !z. ipoly (\\j. (f:num->int) 1) 0 z = f 1
+      #|  forall z. ipoly (\\j. (f:num->int) 1) 0 z = f 1
       #|  (\\j. (f:num->int) 1):num->int
-      #|  !n nn f (h:int) c P. &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\ SUC n <= nn /\\\n     (!i. i <= SUC n ==> abs(f i) <= c * P pow (nn - i))\n    ==> ?psi. (!y. ipoly f (SUC n) (y+h) - ipoly f (SUC n) y = h * ipoly psi n\n     y) /\\\n              psi n = &(SUC n) * f (SUC n) /\\\n              (!j. j <= n ==> abs(psi j) <= &2 * &(4 EXP (SUC n)) * c * P pow\n               (nn - 1 - j))
+      #|  forall n nn f (h:int) c P. &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\ SUC n <= nn /\\\n     (forall i. i <= SUC n ==> abs(f i) <= c * P pow (nn - i))\n    ==> ?psi. (forall y. ipoly f (SUC n) (y+h) - ipoly f (SUC n) y = h * ipoly psi n\n     y) /\\\n              psi n = &(SUC n) * f (SUC n) /\\\n              (forall j. j <= n ==> abs(psi j) <= &2 * &(4 EXP (SUC n)) * c * P pow\n               (nn - 1 - j))
       #|  psiP:num->int
       #|  psiP:num->int
       #|  psiP:num->int
@@ -15444,7 +15444,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  n:num
       #|  e - 1
       #|  ?n. e = SUC n
-      #|  !e f (h:int) c P. 2 <= e /\\ &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\\n     (!i. i <= e ==> abs(f i) <= c * P pow (e - i))\n    ==> ?psi. (!y. ipoly f e (y+h) - ipoly f e y = h * ipoly psi (e-1) y) /\\\n              psi (e-1) = &e * f e /\\\n              (!j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n               ((e-1) - j))
+      #|  forall e f (h:int) c P. 2 <= e /\\ &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\\n     (forall i. i <= e ==> abs(f i) <= c * P pow (e - i))\n    ==> ?psi. (forall y. ipoly f e (y+h) - ipoly f e y = h * ipoly psi (e-1) y) /\\\n              psi (e-1) = &e * f e /\\\n              (forall j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n               ((e-1) - j))
       #|  psifam:num->num->int
       #|  psifam:num->num->int
       #|  (\\j. &0):num->int
@@ -15458,8 +15458,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  e:num
       #|  i IN 1..kk
       #|  i:num
-      #|  !i. ?psi. i IN 1..kk\n              ==> (!y. ipoly ((ffam:num->num->int) i) e (y + hh i) - ipoly\n               (ffam i) e y = hh i * ipoly psi (e-1) y) /\\\n                  psi (e-1) = &e * ffam i e /\\\n                  (!j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n                   ((e-1) - j))
-      #|  !(ffam:num->num->int) e kk c P (hh:num->int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n      (!i. i IN 1..kk ==> abs(hh i) <= &2 * P) /\\\n     (!j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?psifam. (!i. i IN 1..kk\n                       ==> (!y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e\n                        y = hh i * ipoly (psifam i) (e-1) y) /\\\n                           psifam i (e-1) = &e * ffam i e /\\\n                           (!j. j <= e-1 ==> abs(psifam i j) <= &2 * &(4 EXP e)\n                            * c * P pow ((e-1) - j)))
+      #|  forall i. ?psi. i IN 1..kk\n              ==> (forall y. ipoly ((ffam:num->num->int) i) e (y + hh i) - ipoly\n               (ffam i) e y = hh i * ipoly psi (e-1) y) /\\\n                  psi (e-1) = &e * ffam i e /\\\n                  (forall j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n                   ((e-1) - j))
+      #|  forall(ffam:num->num->int) e kk c P (hh:num->int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n      (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P) /\\\n     (forall j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?psifam. (forall i. i IN 1..kk\n                       ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e\n                        y = hh i * ipoly (psifam i) (e-1) y) /\\\n                           psifam i (e-1) = &e * ffam i e /\\\n                           (forall j. j <= e-1 ==> abs(psifam i j) <= &2 * &(4 EXP e)\n                            * c * P pow ((e-1) - j)))
       #|  i:num
       #|  i:num
       #|  i:num
@@ -15469,7 +15469,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  (y:num->int) i
       #|  i:num
       #|  i:num
-      #|  !(ffam:num->num->int) (psifam:num->num->int) e kk (hh:num->int)\n  (y:num->int).\n     (!i. i IN 1..kk ==> !z. ipoly (ffam i) e (z + hh i) - ipoly (ffam i) e z =\n      hh i * ipoly (psifam i) (e-1) z)\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i) e (y\n      i)) =\n         isum(1..kk)(\\i. hh i * ipoly (psifam i) (e-1) (y i))
+      #|  forall(ffam:num->num->int) (psifam:num->num->int) e kk (hh:num->int)\n  (y:num->int).\n     (forall i. i IN 1..kk ==> forall z. ipoly (ffam i) e (z + hh i) - ipoly (ffam i) e z =\n      hh i * ipoly (psifam i) (e-1) z)\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i) e (y\n      i)) =\n         isum(1..kk)(\\i. hh i * ipoly (psifam i) (e-1) (y i))
       #|  (\\i j. &0):num->num->int
       #|  psifam:num->num->int
       #|  psifam:num->num->int
@@ -15479,9 +15479,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  kk:num
       #|  e:num
       #|  ffam:num->num->int
-      #|  !i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P
+      #|  forall i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P
       #|  hh:num->int
-      #|  !(ffam:num->num->int) e kk (c:int) (P:int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n     (!j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?PSI. !(hh:num->int). (!i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> !i. i IN 1..kk\n                 ==> (!y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y) /\\\n                     PSI hh i (e-1) = &e * ffam i e /\\\n                     (!j. j <= e-1 ==> abs(PSI hh i j) <= &2 * &(4 EXP e) * c *\n                      P pow ((e-1) - j))
+      #|  forall(ffam:num->num->int) e kk (c:int) (P:int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n     (forall j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?PSI. forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> forall i. i IN 1..kk\n                 ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y) /\\\n                     PSI hh i (e-1) = &e * ffam i e /\\\n                     (forall j. j <= e-1 ==> abs(PSI hh i j) <= &2 * &(4 EXP e) * c *\n                      P pow ((e-1) - j))
       #|  hh:num->int
       #|  y:num->int
       #|  hh:num->int
@@ -15491,11 +15491,11 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  ffam:num->num->int
       #|  i:num
       #|  (hh:num->int) IN ibox kk (&2 * P)
-      #|  (!i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P)
+      #|  (forall i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P)
       #|  (b<=>c) ==> (a/\\b<=>a/\\c)
       #|  y:num->int
       #|  hh:num->int
-      #|  !(ffam:num->num->int) e kk (P:int) (PSI:(num->int)->num->num->int).\n     (!(hh:num->int). (!i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> !i. i IN 1..kk\n                 ==> (!y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y))\n     ==> nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i)\n                  e (y i)) = &0})\n         = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})
+      #|  forall(ffam:num->num->int) e kk (P:int) (PSI:(num->int)->num->num->int).\n     (forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> forall i. i IN 1..kk\n                 ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y))\n     ==> nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i)\n                  e (y i)) = &0})\n         = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})
       #|  &2 * &(4 EXP e) * (A:int) * P pow ((e-1) - j)
       #|  hh:num->int
       #|  abs((PSI:(num->int)->num->num->int) hh i j) <= &2 * &(4 EXP\n     e) * A * P pow ((e-1) - j)
@@ -15509,7 +15509,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  hh:num->int
       #|  i:num
       #|  hh:num->int
-      #|  !(hh:num->int). (!i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n       ==> !i. i IN 1..kk ==> (!y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i)\n        e y = hh i * ipoly ((PSI:(num->int)->num->num->int) hh i) (e-1) y)
+      #|  forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n       ==> forall i. i IN 1..kk ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i)\n        e y = hh i * ipoly ((PSI:(num->int)->num->num->int) hh i) (e-1) y)
       #|  PSI:(num->int)->num->num->int
       #|  P:int
       #|  A:int
@@ -15532,7 +15532,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  kk:num
       #|  kk:num
       #|  e:num
-      #|  !e. 2 <= e ==> DPWIH2 (e-1)\n      ==> ?kk. e <= 2*kk /\\\n             !A:int. &1 <= A ==> ?c. &1 <= c /\\\n             !(ffam:num->num->int) (P:int). &1 <= P /\\\n              (!j. j IN 1..kk ==> ~(ffam j e = &0)) /\\\n                 (!j j'. j IN 1..kk /\\\n                  j' IN 1..kk ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                 (!j i. j IN 1..kk /\\\n                  i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                 ==> &(CARD (findiffset_dp ffam e kk P)) <= c * P pow (2*kk -\n                  e)
+      #|  forall e. 2 <= e ==> DPWIH2 (e-1)\n      ==> ?kk. e <= 2*kk /\\\n             forall A:int. &1 <= A ==> ?c. &1 <= c /\\\n             forall(ffam:num->num->int) (P:int). &1 <= P /\\\n              (forall j. j IN 1..kk ==> ~(ffam j e = &0)) /\\\n                 (forall j j'. j IN 1..kk /\\\n                  j' IN 1..kk ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                 (forall j i. j IN 1..kk /\\\n                  i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                 ==> &(CARD (findiffset_dp ffam e kk P)) <= c * P pow (2*kk -\n                  e)
       #|  cpsi:int
       #|  cpsi:int
       #|  PSI:(num->int)->num->num->int
@@ -15598,7 +15598,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  2*kk
       #|  kk:num
       #|  e:num
-      #|  !e. 2 <= e ==> DPWIH2 (e-1) ==> DPWIH2 e
+      #|  forall e. 2 <= e ==> DPWIH2 (e-1) ==> DPWIH2 e
       #|  A:int
       #|  A:int
       #|  ffam:num->num->int
@@ -15653,7 +15653,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  DPWIH2 1
       #|  SUC e
       #|  e = 0
-      #|  !e. 1 <= e ==> DPWIH2 e
+      #|  forall e. 1 <= e ==> DPWIH2 e
       #|  i:num
       #|  j:num
       #|  j:num
@@ -15680,7 +15680,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  &1:int
       #|  k:num
       #|  e:num
-      #|  !e. 1 <= e\n       ==> ?s c. e <= s /\\ 1 <= c /\\\n                 !P m. rcount e s P m <= c * P EXP (s - e)
+      #|  forall e. 1 <= e\n       ==> ?s c. e <= s /\\ 1 <= c /\\\n                 forall P m. rcount e s P m <= c * P EXP (s - e)
       #|  ffam:num->num->int
       #|  ffam:num->num->int
       #|  ffam:num->num->int
@@ -15688,10 +15688,10 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  epowers e = {x EXP e | x IN (:num)}
       #|  1 <= e ==> ~(e = 0)
       #|  0
-      #|  !e. 1 <= e ==> 0 IN epowers e
+      #|  forall e. 1 <= e ==> 0 IN epowers e
       #|  1
-      #|  !e. 1 IN epowers e
-      #|  waring_repr e g n <=>\n    ?m f. m <= g /\\ (!i. i IN 1..m ==> ?x. f i = x EXP e) /\\\n     n = nsum(1..m) f
+      #|  forall e. 1 IN epowers e
+      #|  waring_repr e g n <=>\n    ?m f. m <= g /\\ (forall i. i IN 1..m ==> ?x. f i = x EXP e) /\\\n     n = nsum(1..m) f
       #|  m + 1 = 1 + m /\\ m + m' = m' + m
       #|  m':num
       #|  m:num
@@ -15705,15 +15705,15 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  m':num
       #|  f:num->num
       #|  m:num
-      #|  !e a b x y. waring_repr e a x /\\ waring_repr e b y\n               ==> waring_repr e (a + b) (x + y)
+      #|  forall e a b x y. waring_repr e a x /\\ waring_repr e b y\n               ==> waring_repr e (a + b) (x + y)
       #|  (\\i. 0):num->num
       #|  0
-      #|  !e. waring_repr e 0 0
+      #|  forall e. waring_repr e 0 0
       #|  sumpow e s = iterate(+++) (1..s) (\\i. epowers e)
-      #|  !e. sumpow e 0 = {0}
+      #|  forall e. sumpow e 0 = {0}
       #|  ~(SUC s <= s)
       #|  1 <= SUC s
-      #|  !e s. sumpow e (SUC s) = epowers e +++ sumpow e s
+      #|  forall e s. sumpow e (SUC s) = epowers e +++ sumpow e s
       #|  nsum(1..s)(\\i. if i = SUC s then x else (g:num->num) i) =\n   nsum(1..s) g
       #|  i IN 1..s
       #|  i:num
@@ -15724,50 +15724,50 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  g:num->num
       #|  y:num
       #|  (\\i. 0):num->num
-      #|  !e s n. 1 <= e /\\ n IN sumpow e s\n           ==> ?f. (!i. i IN 1..s ==> ?x. f i = x EXP e) /\\ n = nsum(1..s) f
+      #|  forall e s n. 1 <= e /\\ n IN sumpow e s\n           ==> ?f. (forall i. i IN 1..s ==> ?x. f i = x EXP e) /\\ n = nsum(1..s) f
       #|  f:num->num
       #|  s:num
       #|  f:num->num
       #|  z:num
       #|  s:num
       #|  e:num
-      #|  !e s z. 1 <= e /\\ z IN sumpow e s ==> waring_repr e s z
+      #|  forall e s z. 1 <= e /\\ z IN sumpow e s ==> waring_repr e s z
       #|  boxreps e s P = {m | ?t. t IN boxtuples s P /\\ boxsum e s t = m}
       #|  {y:num | y < P}
       #|  1..s
       #|  d:num
       #|  0
-      #|  {t | (!i. i IN 1..s ==> (t:num->num) i < P) /\\\n         (!i. ~(i IN 1..s) ==> t i = 0)} =\n    {f | (!x. x IN 1..s ==> (f:num->num) x IN {y | y < P}) /\\\n         (!x. ~(x IN 1..s) ==> f x = 0)}
-      #|  !s P. CARD(boxtuples s P) = P EXP s
+      #|  {t | (forall i. i IN 1..s ==> (t:num->num) i < P) /\\\n         (forall i. ~(i IN 1..s) ==> t i = 0)} =\n    {f | (forall x. x IN 1..s ==> (f:num->num) x IN {y | y < P}) /\\\n         (forall x. ~(x IN 1..s) ==> f x = 0)}
+      #|  forall s P. CARD(boxtuples s P) = P EXP s
       #|  i:num
       #|  nsum(1..s) f
       #|  (f:num->num)(SUC s)
       #|  1 <= SUC s
-      #|  !e s f. (!i. i IN 1..s ==> (f:num->num) i IN epowers e)\n           ==> nsum(1..s) f IN sumpow e s
+      #|  forall e s f. (forall i. i IN 1..s ==> (f:num->num) i IN epowers e)\n           ==> nsum(1..s) f IN sumpow e s
       #|  i:num
       #|  t:num->num
       #|  m:num
-      #|  !e s P. boxreps e s P SUBSET sumpow e s
+      #|  forall e s P. boxreps e s P SUBSET sumpow e s
       #|  i:num
       #|  nsum(1..s) (\\i:num. P EXP e)
-      #|  !e s P t. t IN boxtuples s P ==> boxsum e s t <= s * P EXP e
+      #|  forall e s P t. t IN boxtuples s P ==> boxsum e s t <= s * P EXP e
       #|  t:num->num
       #|  m:num
-      #|  !e s P. boxreps e s P SUBSET 0..(s * P EXP e)
-      #|  !e s P. FINITE(boxreps e s P)
-      #|  !e s P. boxreps e s P = IMAGE (boxsum e s) (boxtuples s P)
+      #|  forall e s P. boxreps e s P SUBSET 0..(s * P EXP e)
+      #|  forall e s P. FINITE(boxreps e s P)
+      #|  forall e s P. boxreps e s P = IMAGE (boxsum e s) (boxtuples s P)
       #|  boxtuples s P
       #|  m:num
       #|  boxtuples s P
       #|  (\\x:num->num. 1)
       #|  boxsum e s
-      #|  !e s P. P EXP s = nsum (boxreps e s P) (\\m. rcount e s P m)
+      #|  forall e s P. P EXP s = nsum (boxreps e s P) (\\m. rcount e s P m)
       #|  1 <= P ==> ~(P = 0)
       #|  a * b <= c * (d * b) <=> a * b <= (c * d) * b
       #|  P EXP s = P EXP e * P EXP (s - e)
       #|  nsum (boxreps e s P) (\\m:num. c * P EXP (s - e))
       #|  P EXP s <= CARD(boxreps e s P) * (c * P EXP (s - e))
-      #|  !e s c P.\n        e <= s /\\ 1 <= P /\\ (!m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * CARD(boxreps e s P)
+      #|  forall e s c P.\n        e <= s /\\ 1 <= P /\\ (forall m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * CARD(boxreps e s P)
       #|  (s:num->bool) INTER (0 INSERT t) =\n     (if 0 IN s then 0 INSERT (s INTER t) else s INTER t)
       #|  0..L = 0 INSERT (1..L)
       #|  P:num
@@ -15777,24 +15777,24 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  CARD(sumpow e s INTER (0..L))
       #|  FINITE(sumpow e s INTER (1..L))
       #|  L = s * P EXP e
-      #|  !e s P. CARD(boxreps e s P) <= count (sumpow e s) (s * P EXP e) + 1
+      #|  forall e s P. CARD(boxreps e s P) <= count (sumpow e s) (s * P EXP e) + 1
       #|  c * CARD(boxreps e s P)
-      #|  !e s c P.\n        e <= s /\\ 1 <= P /\\ (!m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * (count (sumpow e s) (s * P EXP e) + 1)
+      #|  forall e s c P.\n        e <= s /\\ 1 <= P /\\ (forall m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * (count (sumpow e s) (s * P EXP e) + 1)
       #|  (a:num->bool) SUBSET b ==> s INTER a SUBSET s INTER b
-      #|  !s m n. m <= n ==> count s m <= count s n
+      #|  forall s m n. m <= n ==> count s m <= count s n
       #|  i:num
       #|  {i | (1 <= i /\\ i <= s) /\\ i <= k} = 1..k
       #|  k = nsum(1..s) (\\i:num. if i <= k then 1 else 0)
-      #|  !e s k. 1 <= e /\\ k <= s ==> k IN sumpow e s
+      #|  forall e s k. 1 <= e /\\ k <= s ==> k IN sumpow e s
       #|  1 <= n <=> ~(n = 0)
       #|  1 IN (sumpow e s INTER (1..n))
-      #|  !e s n. 1 <= e /\\ 1 <= s /\\ 1 <= n ==> 1 <= count (sumpow e s) n
+      #|  forall e s n. 1 <= e /\\ 1 <= s /\\ 1 <= n ==> 1 <= count (sumpow e s) n
       #|  n = 0
-      #|  !n e. 1 <= e ==> n <= n EXP e
-      #|  !e P. 1 <= P ==> (P + 1) EXP e <= 2 EXP e * P EXP e
+      #|  forall n e. 1 <= e ==> n <= n EXP e
+      #|  forall e P. 1 <= P ==> (P + 1) EXP e <= 2 EXP e * P EXP e
       #|  P < P + 1
       #|  1
-      #|  !x:num. s * x EXP e <= n ==> x <= P
+      #|  forall x:num. s * x EXP e <= n ==> x <= P
       #|  P:num
       #|  P:num
       #|  a = 1 * a
@@ -15803,9 +15803,9 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  x:num
       #|  n:num
       #|  1
-      #|  (?x:num. s * x EXP e <= n) /\\ (?M. !x:num. s * x EXP e <= n ==> x <= M)
+      #|  (?x:num. s * x EXP e <= n) /\\ (?M. forall x:num. s * x EXP e <= n ==> x <= M)
       #|  \\P:num. s * P EXP e <= n
-      #|  !e s n. 1 <= e /\\ 1 <= s /\\ s <= n\n           ==> ?P. 1 <= P /\\ s * P EXP e <= n /\\ n < s * (P + 1) EXP e
+      #|  forall e s n. 1 <= e /\\ 1 <= s /\\ s <= n\n           ==> ?P. 1 <= P /\\ s * P EXP e <= n /\\ n < s * (P + 1) EXP e
       #|  s * (2 EXP e * (2 * c * C))
       #|  s * (2 EXP e * P EXP e)
       #|  s * (P + 1) EXP e
@@ -15841,8 +15841,8 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  1 <= count (sumpow e s) n
       #|  n:num
       #|  B = s * 2 EXP (e + 1) * c
-      #|  !e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (!P m. rcount e s P m <= c * P EXP (s - e))\n        ==> !n. 1 <= n\n                ==> n <= (s * 2 EXP (e + 1) * c) * count (sumpow e s) n
-      #|  !n B c:real. &0 < B /\\ &0 < n /\\ n <= B * c ==> inv B <= c / n
+      #|  forall e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (forall P m. rcount e s P m <= c * P EXP (s - e))\n        ==> forall n. 1 <= n\n                ==> n <= (s * 2 EXP (e + 1) * c) * count (sumpow e s) n
+      #|  forall n B c:real. &0 < B /\\ &0 < n /\\ n <= B * c ==> inv B <= c / n
       #|  n:num
       #|  inv(&B)
       #|  1 <= x <=> ~(x = 0)
@@ -15852,25 +15852,25 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  c:num
       #|  s:num
       #|  e:num
-      #|  !e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (!P m. rcount e s P m <= c * P EXP (s - e))\n        ==> schnirelmann (sumpow e s) > &0
+      #|  forall e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (forall P m. rcount e s P m <= c * P EXP (s - e))\n        ==> schnirelmann (sumpow e s) > &0
       #|  c:num
       #|  s:num
       #|  c:num
       #|  s:num
       #|  e:num
-      #|  !e. 1 <= e ==> ?s. schnirelmann (sumpow e s) > &0
+      #|  forall e. 1 <= e ==> ?s. schnirelmann (sumpow e s) > &0
       #|  k:num
       #|  s:num
       #|  k:num
       #|  sumpow e s
       #|  s:num
       #|  e:num
-      #|  !e. 1 <= e\n       ==> ?s k. !n. ?m f. m <= k /\\ (!i. i IN 1..m ==> f i IN sumpow e s) /\\\n                           n = nsum(1..m) f
-      #|  !e a b n. waring_repr e a n /\\ a <= b ==> waring_repr e b n
+      #|  forall e. 1 <= e\n       ==> ?s k. forall n. ?m f. m <= k /\\ (forall i. i IN 1..m ==> f i IN sumpow e s) /\\\n                           n = nsum(1..m) f
+      #|  forall e a b n. waring_repr e a n /\\ a <= b ==> waring_repr e b n
       #|  i:num
       #|  SUC m * s = m * s + s
       #|  1 <= SUC m
-      #|  !e s m f. (!i. i IN 1..m ==> waring_repr e s (f i))\n             ==> waring_repr e (m * s) (nsum(1..m) f)
+      #|  forall e s m f. (forall i. i IN 1..m ==> waring_repr e s (f i))\n             ==> waring_repr e (m * s) (nsum(1..m) f)
       #|  i:num
       #|  m * s:num
       #|  f:num->num
@@ -15881,7 +15881,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  k:num
       #|  s:num
       #|  e:num
-      #|  !e. 1 <= e ==> ?g. !n. waring_repr e g n
+      #|  forall e. 1 <= e ==> ?g. forall n. waring_repr e g n
       #|  m <= k ==> ((1 <= i /\\ i <= k) /\\ i <= m <=> 1 <= i /\\ i <= m)
       #|  \\i. if i <= m then (g:num->num) i else 0
       #|  g:num->num
@@ -15889,7 +15889,7 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|  m:num
       #|  n:num
       #|  k:num
-      #|  !e. 1 <= e ==> ?k. !n. ?f. n = nsum(1..k) (\\i. f i EXP e)
+      #|  forall e. 1 <= e ==> ?k. forall n. ?f. n = nsum(1..k) (\\i. f i EXP e)
       #|INT_INTERVAL_IMAGE =  |- (#!:fun(fun(int,bool),bool) (\lo:int. (#!:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#=:fun(fun(int,bool),fun(fun(int,bool),bool)) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%715:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%715:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int)))))) ((#IMAGE:fun(fun(num,int),fun(fun(num,bool),fun(int,bool))) (\j:num. ((#int_add:fun(int,fun(int,int)) lo:int) (#int_of_num:fun(num,int) j:num)))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) (#num_of_int:fun(int,num) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int))))))))))
       #|EXACT_INT_INTERVAL_CARD =  |- (#!:fun(fun(int,bool),bool) (\lo:int. (#!:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun(int,bool),num) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%716:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%716:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int))))))) (#num_of_int:fun(int,num) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
       #|INT_INTERVAL_CARD_LE =  |- (#!:fun(fun(int,bool),bool) (\lo:int. (#!:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(int,bool),num) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%717:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%717:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int))))))) (#num_of_int:fun(int,num) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))

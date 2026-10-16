@@ -5526,11 +5526,11 @@ Examples/mccarthy quotations (10):
   (S (LI n) s = update Acc n s)\n        /\\  (S (LOAD r) s = update Acc (s (Reg r)) s)\n        /\\  (S (STO r) s = update (Reg r) (s Acc) s)\n        /\\  (S (ADD r) s = update Acc (s (Reg r) + s Acc) s)
   (S' [] s = s)\n        /\\  (S' (CONS inst rest) s = S' rest (S inst s))
   (C (Lit n) map r = [LI n])\n         /\\  (C (Var v) map r = [LOAD (map v)])\n         /\\  (C (Plus e1 e2) map r =\n                  APPEND\n                      (APPEND (C e1 map r) [STO r])\n                      (APPEND (C e2 map (r + 1)) [ADD r]))
-  !p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)
-  !x y z s. ~(x = y) ==> (update x z s y = s y)
-  !x z s. update x z s x = z
+  forall p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)
+  forall x y z s. ~(x = y) ==> (update x z s y = s y)
+  forall x z s. update x z s x = z
   (x < y ==> x < y + 1 /\\ ~(x = y)) /\\ x < x + 1
-  !e map s s' r.\n      (!v. map v < r) ==>\n      (!v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (!x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))
+  forall e map s s' r.\n      (forall v. map v < r) ==>\n      (forall v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (forall x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))
 string_INDUCT =  |- (#!:fun(fun(fun(string,bool),bool),bool) (\P:fun(string,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(list(int),bool),bool) (\a:list(int). (P:fun(string,bool) (#String:fun(list(int),string) a:list(int)))))) (#!:fun(fun(string,bool),bool) (\x:string. (P:fun(string,bool) x:string))))))
 string_RECURSION =  |- (#!:fun(fun(fun(list(int),'Z),bool),bool) (\f:fun(list(int),'Z). (#?:fun(fun(fun(string,'Z),bool),bool) (\fn:fun(string,'Z). (#!:fun(fun(list(int),bool),bool) (\a:list(int). ((#=:fun('Z,fun('Z,bool)) (fn:fun(string,'Z) (#String:fun(list(int),string) a:list(int)))) (f:fun(list(int),'Z) a:list(int)))))))))
 exp_INDUCT =  |- (#!:fun(fun(fun(exp,bool),bool),bool) (\P:fun(exp,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(exp,bool) (#Lit:fun(num,exp) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(exp,bool) (#Var:fun(list(char),exp) a:list(char)))))) (#!:fun(fun(exp,bool),bool) (\a0:exp. (#!:fun(fun(exp,bool),bool) (\a1:exp. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(exp,bool) a0:exp)) (P:fun(exp,bool) a1:exp))) (P:fun(exp,bool) ((#Plus:fun(exp,fun(exp,exp)) a0:exp) a1:exp)))))))))) (#!:fun(fun(exp,bool),bool) (\x:exp. (P:fun(exp,bool) x:exp))))))

@@ -4,7 +4,7 @@
 ///|
 /// ETA_AX
 fn step_1() -> Unit raise {
-  eta_ax_c.set(@kernel.new_axiom(@parser.parse_term("!t:A->B. (\\x. t x) = t")))
+  eta_ax_c.set(@kernel.new_axiom(@parser.parse_term("forall t:A->B. (\\x. t x) = t")))
 }
 
 ///|
@@ -158,7 +158,7 @@ fn step_3() -> Unit raise {
   )
   eq_ext_c.set(
     @tactics.prove(
-      @parser.parse_term("!(f:A->B) g. (!x. f x = g x) ==> f = g"),
+      @parser.parse_term("forall(f:A->B) g. (forall x. f x = g x) ==> f = g"),
       t16,
     ),
   )
@@ -238,7 +238,7 @@ fn step_4() -> Unit raise {
   )
   fun_eq_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!(f:A->B) g. f = g <=> (!x. f x = g x)"),
+      @parser.parse_term("forall(f:A->B) g. f = g <=> (forall x. f x = g x)"),
       t22,
     ),
   )
@@ -326,7 +326,7 @@ pub fn mk_select(x : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
 /// SELECT_AX
 fn step_10() -> Unit raise {
   select_ax_c.set(
-    @kernel.new_axiom(@parser.parse_term("!P (x:A). P x ==> P((@) P)")),
+    @kernel.new_axiom(@parser.parse_term("forall P (x:A). P x ==> P((@) P)")),
   )
 }
 
@@ -609,7 +609,7 @@ fn step_14() -> Unit raise {
     @tactics.refl_tac,
   )
   select_refl_c.set(
-    @tactics.prove(@parser.parse_term("!x:A. (@y. y = x) = x"), t56),
+    @tactics.prove(@parser.parse_term("forall x:A. (@y. y = x) = x"), t56),
   )
 }
 
@@ -652,7 +652,7 @@ fn step_15() -> Unit raise {
   )
   select_unique_c.set(
     @tactics.prove(
-      @parser.parse_term("!P x. (!y:A. P y = (y = x)) ==> ((@) P = x)"),
+      @parser.parse_term("forall P x. (forall y:A. P y = (y = x)) ==> ((@) P = x)"),
       t66,
     ),
   )
@@ -917,7 +917,7 @@ fn step_18() -> Unit raise {
     ),
     t86,
   )
-  excluded_middle_c.set(@tactics.prove(@parser.parse_term("!t. t \\/ ~t"), t87))
+  excluded_middle_c.set(@tactics.prove(@parser.parse_term("forall t. t \\/ ~t"), t87))
 }
 
 ///|
@@ -945,7 +945,7 @@ fn step_19() -> Unit raise {
     t88,
   )
   bool_cases_ax_c.set(
-    @tactics.prove(@parser.parse_term("!t. (t <=> T) \\/ (t <=> F)"), t89),
+    @tactics.prove(@parser.parse_term("forall t. (t <=> T) \\/ (t <=> F)"), t89),
   )
 }
 
@@ -1350,7 +1350,7 @@ fn step_21() -> Unit raise {
   de_morgan_thm_c.set(
     taut_v1(
       @parser.parse_term(
-        "!t1 t2. (~(t1 /\\ t2) <=> ~t1 \\/ ~t2) /\\ (~(t1 \\/ t2) <=> ~t1 /\\ ~t2)",
+        "forall t1 t2. (~(t1 /\\ t2) <=> ~t1 \\/ ~t2) /\\ (~(t1 \\/ t2) <=> ~t1 /\\ ~t2)",
       ),
     ),
   )
@@ -1370,7 +1370,7 @@ pub fn de_morgan_thm() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   not_clauses_c.set(
     taut_v1(
-      @parser.parse_term("(!t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)"),
+      @parser.parse_term("(forall t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)"),
     ),
   )
 }
@@ -1388,7 +1388,7 @@ pub fn not_clauses() -> @kernel.Thm {
 /// NOT_IMP
 fn step_23() -> Unit raise {
   not_imp_c.set(
-    taut_v1(@parser.parse_term("!t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2")),
+    taut_v1(@parser.parse_term("forall t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2")),
   )
 }
 
@@ -1405,7 +1405,7 @@ pub fn not_imp() -> @kernel.Thm {
 /// CONTRAPOS_THM
 fn step_24() -> Unit raise {
   contrapos_thm_c.set(
-    taut_v1(@parser.parse_term("!t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)")),
+    taut_v1(@parser.parse_term("forall t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)")),
   )
 }
 
@@ -1710,7 +1710,7 @@ fn step_29() -> Unit raise {
   )
   not_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. ~(?x:A. P x) <=> (!x. ~(P x))"),
+      @parser.parse_term("forall P. ~(?x:A. P x) <=> (forall x. ~(P x))"),
       t135,
     ),
   )
@@ -1737,7 +1737,7 @@ fn step_30() -> Unit raise {
   )
   exists_not_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (?x:A. ~(P x)) <=> ~(!x. P x)"),
+      @parser.parse_term("forall P. (?x:A. ~(P x)) <=> ~(forall x. P x)"),
       t137,
     ),
   )
@@ -1758,7 +1758,7 @@ fn step_31() -> Unit raise {
   let t138 = @tactics.match_accept_tac(@equal.gsym(exists_not_thm()))
   not_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. ~(!x. P x) <=> (?x:A. ~(P x))"),
+      @parser.parse_term("forall P. ~(forall x. P x) <=> (?x:A. ~(P x))"),
       t138,
     ),
   )
@@ -1779,7 +1779,7 @@ fn step_32() -> Unit raise {
   let t139 = @tactics.match_accept_tac(@equal.gsym(not_exists_thm()))
   forall_not_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (!x. ~(P x)) <=> ~(?x:A. P x)"),
+      @parser.parse_term("forall P. (forall x. ~(P x)) <=> ~(?x:A. P x)"),
       t139,
     ),
   )
@@ -1814,7 +1814,7 @@ fn step_33() -> Unit raise {
     t142,
   )
   forall_bool_thm_c.set(
-    @tactics.prove(@parser.parse_term("(!b. P b) <=> P T /\\ P F"), t143),
+    @tactics.prove(@parser.parse_term("(forall b. P b) <=> P T /\\ P F"), t143),
   )
 }
 
@@ -1876,7 +1876,7 @@ fn step_35() -> Unit raise {
   )
   left_forall_or_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (!x:A. P x \\/ Q) <=> (!x. P x) \\/ Q"),
+      @parser.parse_term("forall P Q. (forall x:A. P x \\/ Q) <=> (forall x. P x) \\/ Q"),
       t148,
     ),
   )
@@ -1912,7 +1912,7 @@ fn step_36() -> Unit raise {
   )
   right_forall_or_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (!x:A. P \\/ Q x) <=> P \\/ (!x. Q x)"),
+      @parser.parse_term("forall P Q. (forall x:A. P \\/ Q x) <=> P \\/ (forall x. Q x)"),
       t151,
     ),
   )
@@ -1935,7 +1935,7 @@ fn step_37() -> Unit raise {
   let t152 = @tactics.match_accept_tac(@equal.gsym(left_forall_or_thm()))
   left_or_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (!x:A. P x) \\/ Q <=> (!x. P x \\/ Q)"),
+      @parser.parse_term("forall P Q. (forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)"),
       t152,
     ),
   )
@@ -1958,7 +1958,7 @@ fn step_38() -> Unit raise {
   let t153 = @tactics.match_accept_tac(@equal.gsym(right_forall_or_thm()))
   right_or_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. P \\/ (!x:A. Q x) <=> (!x. P \\/ Q x)"),
+      @parser.parse_term("forall P Q. P \\/ (forall x:A. Q x) <=> (forall x. P \\/ Q x)"),
       t153,
     ),
   )
@@ -1990,7 +1990,7 @@ fn step_39() -> Unit raise {
   )
   left_imp_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. ((!x:A. P x) ==> Q) <=> (?x. P x ==> Q)"),
+      @parser.parse_term("forall P Q. ((forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)"),
       t156,
     ),
   )
@@ -2013,7 +2013,7 @@ fn step_40() -> Unit raise {
   let t157 = @tactics.match_accept_tac(@equal.gsym(left_imp_forall_thm()))
   left_exists_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (?x. P x ==> Q) <=> ((!x:A. P x) ==> Q)"),
+      @parser.parse_term("forall P Q. (?x. P x ==> Q) <=> ((forall x:A. P x) ==> Q)"),
       t157,
     ),
   )
@@ -2045,7 +2045,7 @@ fn step_41() -> Unit raise {
   )
   right_imp_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)"),
+      @parser.parse_term("forall P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)"),
       t160,
     ),
   )
@@ -2068,7 +2068,7 @@ fn step_42() -> Unit raise {
   let t161 = @tactics.match_accept_tac(@equal.gsym(right_imp_exists_thm()))
   right_exists_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)"),
+      @parser.parse_term("forall P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)"),
       t161,
     ),
   )
@@ -2113,7 +2113,7 @@ fn step_44() -> Unit raise {
   cond_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)",
+        "forall(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)",
       ),
       t162,
     ),
@@ -2201,7 +2201,7 @@ fn step_46() -> Unit raise {
   cond_expand_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)",
+        "forall b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)",
       ),
       t170,
     ),
@@ -2228,7 +2228,7 @@ fn step_47() -> Unit raise {
   )
   cond_id_c.set(
     @tactics.prove(
-      @parser.parse_term("!b (t:A). (if b then t else t) = t"),
+      @parser.parse_term("forall b (t:A). (if b then t else t) = t"),
       t173,
     ),
   )
@@ -2255,7 +2255,7 @@ fn step_48() -> Unit raise {
   cond_rand_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)",
+        "forall b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)",
       ),
       t176,
     ),
@@ -2283,7 +2283,7 @@ fn step_49() -> Unit raise {
   cond_rator_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)",
+        "forall b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)",
       ),
       t179,
     ),
@@ -2311,7 +2311,7 @@ fn step_50() -> Unit raise {
   cond_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)",
+        "forall b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)",
       ),
       t182,
     ),
@@ -2339,7 +2339,7 @@ fn step_51() -> Unit raise {
   cond_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p x y:A. (if ~p then x else y) = (if p then y else x)",
+        "forall p x y:A. (if ~p then x else y) = (if p then y else x)",
       ),
       t185,
     ),
@@ -2985,7 +2985,7 @@ fn step_58() -> Unit raise {
   )
   skolem_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (!x:A. ?y:B. P x y) <=> (?y. !x. P x (y x))"),
+      @parser.parse_term("forall P. (forall x:A. ?y:B. P x y) <=> (?y. forall x. P x (y x))"),
       t228,
     ),
   )
@@ -3009,7 +3009,7 @@ fn step_59() -> Unit raise {
   skolem_thm_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P R. (!x:A. P x ==> ?y:B. R x y) <=> (?f. !x. P x ==> R x (f x))",
+        "forall P R. (forall x:A. P x ==> ?y:B. R x y) <=> (?f. forall x. P x ==> R x (f x))",
       ),
       t229,
     ),
@@ -3035,7 +3035,7 @@ fn step_60() -> Unit raise {
   unique_skolem_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P:A->B->bool. (!x. ?!y. P x y) <=> ?f. !x y. P x y <=> (f x = y)",
+        "forall P:A->B->bool. (forall x. ?!y. P x y) <=> ?f. forall x y. P x y <=> (f x = y)",
       ),
       t230,
     ),
@@ -3321,7 +3321,7 @@ fn step_61() -> Unit raise {
   )
   unique_skolem_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (!x:A. ?!y:B. P x y) <=> (?!f. !x. P x (f x))"),
+      @parser.parse_term("forall P. (forall x:A. ?!y:B. P x y) <=> (?!f. forall x. P x (f x))"),
       t265,
     ),
   )
@@ -3372,7 +3372,7 @@ fn step_64() -> Unit raise {
     t268,
   )
   bool_induct_c.set(
-    @tactics.prove(@parser.parse_term("!P. P F /\\ P T ==> !x. P x"), t269),
+    @tactics.prove(@parser.parse_term("forall P. P F /\\ P T ==> forall x. P x"), t269),
   )
 }
 
@@ -3397,7 +3397,7 @@ fn step_65() -> Unit raise {
     t271,
   )
   bool_recursion_c.set(
-    @tactics.prove(@parser.parse_term("!a b:A. ?f. f F = a /\\ f T = b"), t272),
+    @tactics.prove(@parser.parse_term("forall a b:A. ?f. f F = a /\\ f T = b"), t272),
   )
 }
 

@@ -5776,20 +5776,20 @@ Generating HOL version of proof
   p:num
   EVEN m
   m:num
-  !n. abs(a(n + 1)) <= abs(a n)
+  forall n. abs(a(n + 1)) <= abs(a n)
   SUC m
   SUC n = 1 + n
   m:num
-  !a. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n)))\n       ==> !m n. (EVEN m ==> &0 <= sum(m,n) a /\\ sum(m,n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m,n) a /\\ sum(m,n) a <= &0)
+  forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. (EVEN m ==> &0 <= sum(m,n) a /\\ sum(m,n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m,n) a /\\ sum(m,n) a <= &0)
   EVEN m
-  !a. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n)))\n       ==> !m n. abs(sum(m,n) a) <= abs(a m)
+  forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. abs(sum(m,n) a) <= abs(a m)
   N:num
   e:real
   e:real
-  !v. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n))) /\\ a tends_num_real &0\n       ==> summable a
+  forall v. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n))) /\\ a tends_num_real &0\n       ==> summable a
   n * 2 = 2 * n
   0 < 2
-  !x. abs(x) < &1\n       ==> (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1))\n           sums (atn x)
+  forall x. abs(x) < &1\n       ==> (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1))\n           sums (atn x)
   &1 < x * e ==> e * x <= y ==> &1 < y
   &1
   0 < n + 1
@@ -5798,7 +5798,7 @@ Generating HOL version of proof
   n < n + 1
   m <= SUC n + 1 <=> m <= n + 1 \\/ m = SUC n + 1
   m <= 0 + 1 <=> m = 0 \\/ m = 1
-  !a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i) - a(i+1)) = a(m) - a(n + 1)
+  forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i) - a(i+1)) = a(m) - a(n + 1)
   (s1 * (v - w) + x) + (s2 + y) * w =\n    (x + y * w) + (v - w) * s1 + w * s2
   m <= SUC(n + 1) /\\ ~(m = SUC(n + 1)) ==> m <= SUC n
   m <= SUC n <=> m <= SUC(n + 1) /\\ ~(m = SUC(n + 1))
@@ -5807,16 +5807,16 @@ Generating HOL version of proof
   m = SUC(n + 1)
   m = 0
   1
-  !a v m n.\n        m <= n + 1\n        ==> sum(m..n+1) (\\i. a i * v i) =\n            sum(m..n) (\\k. sum(m..k) a * (v(k) - v(k+1))) +\n            sum(m..n+1) a * v(n+1)
+  forall a v m n.\n        m <= n + 1\n        ==> sum(m..n+1) (\\i. a i * v i) =\n            sum(m..n) (\\k. sum(m..k) a * (v(k) - v(k+1))) +\n            sum(m..n+1) a * v(n+1)
   k <= n ==> k <= n + 1
   k:num
   sum(m..n) (\\k. u * (v(k) - v(k + 1))) + u * v(n+1)
   sum(m..n) (\\k. l * (v(k) - v(k + 1))) + l * v(n+1)
   m = 0
   m <= i /\\ i = 0 <=> m = 0 /\\ i = 0
-  !a v l u m n.\n        m <= n /\\\n        (!i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (!k. m <= k /\\ k <= n ==> l <= sum(m..k) a /\\ sum(m..k) a <= u)\n        ==> l * v(m) <= sum(m..n) (\\i. a(i) * v(i)) /\\\n            sum(m..n) (\\i. a(i) * v(i)) <= u * v(m)
+  forall a v l u m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> l <= sum(m..k) a /\\ sum(m..k) a <= u)\n        ==> l * v(m) <= sum(m..n) (\\i. a(i) * v(i)) /\\\n            sum(m..n) (\\i. a(i) * v(i)) <= u * v(m)
   --b * k <= a /\\ a <= b * k ==> abs(a) <= b * k
-  !a v b m n.\n        m <= n /\\\n        (!i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (!k. m <= k /\\ k <= n ==> abs(sum(m..k) a) <= b)\n        ==> abs(sum(m..n) (\\i. a(i) * v(i))) <= b * abs(v m)
+  forall a v b m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> abs(sum(m..k) a) <= b)\n        ==> abs(sum(m..n) (\\i. a(i) * v(i))) <= b * abs(v m)
   abs(s1 - sx) < e / &6\n    ==> ~(abs(sx - s) < e / &2) ==> ~(abs(s1 - s) < e / &3)
   abs((slo + shi) - s) < e / &6\n    ==> ~(abs(slo - s) < e / &3) ==> ~(abs(shi) < e / &7)
   N1 + N2:num

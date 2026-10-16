@@ -8702,37 +8702,37 @@ Warning: inventing type variables
 Logic/given quotations (610):
   (FIRSTN 0 l = []) /\\\n   (FIRSTN (SUC n) l = if l = [] then [] else CONS (HD l) (FIRSTN n (TL l)))
   SUC x <= y ==> x <= y
-  !n l. LENGTH l <= n ==> (FIRSTN n l = l)
-  !n. FIRSTN n [] = []
-  !x n l. MEM x (FIRSTN n l) ==> MEM x l
-  !x n l. MEM x (FIRSTN (SUC n) l)\n           ==> MEM x (APPEND (FIRSTN n l) [EL n l])
+  forall n l. LENGTH l <= n ==> (FIRSTN n l = l)
+  forall n. FIRSTN n [] = []
+  forall x n l. MEM x (FIRSTN n l) ==> MEM x l
+  forall x n l. MEM x (FIRSTN (SUC n) l)\n           ==> MEM x (APPEND (FIRSTN n l) [EL n l])
   x <= n ==> x <= SUC n
-  !n l. LENGTH l <= n ==> (FIRSTN (SUC n) l = FIRSTN n l)
+  forall n l. LENGTH l <= n ==> (FIRSTN (SUC n) l = FIRSTN n l)
   tautologous cl <=> ?p. p IN cl /\\ ~~p IN cl
   cl subsumes cl' <=> ?i. IMAGE (formsubst i) cl SUBSET cl'
   V
-  !cl. cl subsumes cl
-  !p. qfree(p)\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
-  !p. p IN cl1\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
+  forall cl. cl subsumes cl
+  forall p. qfree(p)\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
+  forall p. p IN cl1\n        ==> (formsubst (termsubst j o i) p = formsubst j (formsubst i p))
   IMAGE (formsubst j) cl2 SUBSET cl3
   IMAGE (formsubst i) cl1 SUBSET cl2
   termsubst j o (i:num->term)
   j:num->term
   i:num->term
-  !cl1 cl2 cl3. clause cl1 /\\ cl1 subsumes cl2 /\\ cl2 subsumes cl3\n                 ==> cl1 subsumes cl3
-  s SUBSUMES s' <=> !cl'. cl' IN s' ==> ?cl. cl IN s /\\ cl subsumes cl'
-  !s. s SUBSUMES s
+  forall cl1 cl2 cl3. clause cl1 /\\ cl1 subsumes cl2 /\\ cl2 subsumes cl3\n                 ==> cl1 subsumes cl3
+  s SUBSUMES s' <=> forall cl'. cl' IN s' ==> ?cl. cl IN s /\\ cl subsumes cl'
+  forall s. s SUBSUMES s
   s SUBSUMES s' /\\ t SUBSUMES t' ==> (s UNION t) SUBSUMES (s' UNION t')
-  !s t u. (!c. c IN s ==> clause c) /\\ s SUBSUMES t /\\ t SUBSUMES u\n           ==> s SUBSUMES u
-  !s t u. s SUBSUMES t /\\ s SUBSET u ==> u SUBSUMES t
-  (!s. s SUBSUMES {}) /\\\n   (!s. s SUBSUMES (x INSERT t) <=> s SUBSUMES {x} /\\ s SUBSUMES t)
-  !s t. s SUBSET t ==> t SUBSUMES s
+  forall s t u. (forall c. c IN s ==> clause c) /\\ s SUBSUMES t /\\ t SUBSUMES u\n           ==> s SUBSUMES u
+  forall s t u. s SUBSUMES t /\\ s SUBSET u ==> u SUBSUMES t
+  (forall s. s SUBSUMES {}) /\\\n   (forall s. s SUBSUMES (x INSERT t) <=> s SUBSUMES {x} /\\ s SUBSUMES t)
+  forall s t. s SUBSET t ==> t SUBSUMES s
   allresolvents s1 s2 =\n        {c | ?c1 c2. c1 IN s1 /\\ c2 IN s2 /\\ isaresolvent c (c1,c2)}
   allntresolvents s1 s2 =\n        {r | r IN allresolvents s1 s2 /\\ ~(tautologous r)}
   termsubst (termsubst j o i) = termsubst j o termsubst i
   p:form
   p:form
-  !p i j. qfree(p)\n           ==> (formsubst j (formsubst i p) = formsubst (termsubst j o i) p)
+  forall p i j. qfree(p)\n           ==> (formsubst j (formsubst i p) = formsubst (termsubst j o i) p)
   q:form
   q:form
   qfree q
@@ -8753,7 +8753,7 @@ Logic/given quotations (610):
   q IN c2' DIFF IMAGE (formsubst r2) ps2
   qfree q
   formsubst s2 q
-  !p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
   (formsubst s1 (formsubst r1 q) = q) /\\\n                  (formsubst s1 (formsubst r1 r) = r)
   formsubst s1
   r:form
@@ -8765,7 +8765,7 @@ Logic/given quotations (610):
   q:form
   p:form
   p:form IN c2'
-  !p. p IN (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2)\n          ==> qfree p
+  forall p. p IN (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2)\n          ==> qfree p
   IMAGE (formsubst k o formsubst i)\n          (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2) =\n    IMAGE (formsubst k)\n          (c1 DIFF ps0 UNION c2' DIFF IMAGE (formsubst r2) ps2)
   k:num->term
   k = \\x. if x IN FVS(c1) then termsubst j (r1 x)\n                      else termsubst j (s2 x)
@@ -8802,15 +8802,15 @@ Logic/given quotations (610):
   P:form
   Unifies j (ps2 UNION {~~ p | p IN IMAGE (formsubst r1) ps0})
   \\x. if x IN FVS(c1) then termsubst j (r1 x)\n         else termsubst j (s2 x)
-  !i'. Unifies i' (ps0 UNION {~~ p | p IN IMAGE (formsubst r2) ps2})\n            ==> (!p. qfree p\n                     ==> (formsubst i' p = formsubst i' (formsubst i p)))
+  forall i'. Unifies i' (ps0 UNION {~~ p | p IN IMAGE (formsubst r2) ps2})\n            ==> (forall p. qfree p\n                     ==> (formsubst i' p = formsubst i' (formsubst i p)))
   {~~ p | p IN IMAGE (formsubst r1) ps0} =\n                    IMAGE (~~) (IMAGE (formsubst r1) ps0)
   ps2 UNION {~~ p | p IN IMAGE (formsubst r1) ps0}
   {~~ p | p IN IMAGE (formsubst r2) ps2} =\n                    IMAGE (~~) (IMAGE (formsubst r2) ps2)
   ps0 UNION {~~p | p IN IMAGE (formsubst r2) ps2}
   j = mgu (ps2 UNION {~~p | p IN IMAGE (formsubst r1) ps0})
   i = mgu (ps0 UNION {~~p | p IN IMAGE (formsubst r2) ps2})
-  !p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
-  !p. p IN ps0 ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. qfree p ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. p IN ps0 ==> (formsubst s1 (formsubst r1 p) = p)
   p:form
   IMAGE (formsubst s1 o formsubst r1) ps0 = ps0
   ps0:form->bool
@@ -8822,8 +8822,8 @@ Logic/given quotations (610):
   q:form
   formsubst i q = P
   qfree q
-  !p. qfree(p) ==> (formsubst s1 (formsubst r1 p) = p)
-  !p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. qfree(p) ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
   ps1 SUBSET c1':form->bool
   (a ==> a') /\\ (b ==> b') ==> a ==> ~(a' /\\ b') ==> ~b
   x IN FV(formsubst r2 q)
@@ -8860,8 +8860,8 @@ Logic/given quotations (610):
   ~(ps2:form->bool = {})
   ~(ps1:form->bool = {})
   ps2 SUBSET c2:form->bool
-  !p. qfree p\n            ==> (formsubst V p = formsubst s1 (formsubst r1 p))
-  !p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
+  forall p. qfree p\n            ==> (formsubst V p = formsubst s1 (formsubst r1 p))
+  forall p. p IN c1 ==> (formsubst s1 (formsubst r1 p) = p)
   ps1 SUBSET c1':form->bool
   (a /\\ b /\\ c /\\ d /\\ e) /\\ (e ==> f)\n                     ==> (a /\\ b /\\ c /\\ d /\\ e) /\\ f
   IMAGE (formsubst r2) ps2
@@ -8879,40 +8879,40 @@ Logic/given quotations (610):
   c1' = IMAGE (formsubst r1) c1
   r1 = rename c1 (FVS c2)
   isaresolvent cl (c2,c1)
-  !c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent cl (c2,c1)\n        ==> ?cl'. isaresolvent cl' (c1,c2) /\\ cl' subsumes cl
+  forall c1 c2 cl.\n        clause c1 /\\ clause c2 /\\ isaresolvent cl (c2,c1)\n        ==> ?cl'. isaresolvent cl' (c1,c2) /\\ cl' subsumes cl
   c2:form->bool
   c1:form->bool
   c1:form->bool
   c2:form->bool
   cl:form->bool
-  (!c. c IN A ==> clause c) /\\ (!c. c IN B ==> clause c)\n   ==> (allresolvents A B) SUBSUMES (allresolvents B A)
+  (forall c. c IN A ==> clause c) /\\ (forall c. c IN B ==> clause c)\n   ==> (allresolvents A B) SUBSUMES (allresolvents B A)
   (allresolvents (A UNION B) C =\n        (allresolvents A C) UNION (allresolvents B C)) /\\\n   (allresolvents A (B UNION C) =\n        (allresolvents A B) UNION (allresolvents A C))
   A UNION B = (A UNION A) UNION B
   a UNION b UNION c UNION d UNION e UNION f =\n    a UNION b UNION d UNION (c UNION e) UNION f
-  (!c. c IN B ==> clause(c)) /\\\n   (!c. c IN C ==> clause(c))\n   ==> ((allresolvents B (A UNION B)) UNION\n        (allresolvents C (A UNION B UNION C)))\n       SUBSUMES (allresolvents(B UNION C) (A UNION B UNION C))
+  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allresolvents B (A UNION B)) UNION\n        (allresolvents C (A UNION B UNION C)))\n       SUBSUMES (allresolvents(B UNION C) (A UNION B UNION C))
   resolvents cl cls = list_of_set(allresolvents {cl} (set_of_list cls))
-  !c1 c2. clause(c1 UNION c2) <=> clause(c1) /\\ clause(c2)
-  !c1 c2. clause c2 /\\ c1 SUBSET c2 ==> clause c1
-  !c1 c2. clause c1 ==> clause (c1 DIFF c2)
-  !p q r. clause p /\\ clause q /\\ isaresolvent r (p,q) ==> clause r
-  (!c. c IN s ==> clause c) /\\ (!c. c IN t ==> clause c)\n   ==> !c. c IN allresolvents s t ==> clause c
+  forall c1 c2. clause(c1 UNION c2) <=> clause(c1) /\\ clause(c2)
+  forall c1 c2. clause c2 /\\ c1 SUBSET c2 ==> clause c1
+  forall c1 c2. clause c1 ==> clause (c1 DIFF c2)
+  forall p q r. clause p /\\ clause q /\\ isaresolvent r (p,q) ==> clause r
+  (forall c. c IN s ==> clause c) /\\ (forall c. c IN t ==> clause c)\n   ==> forall c. c IN allresolvents s t ==> clause c
   ps1:form->bool,ps2:form->bool
   ps2:form->bool
   ps1:form->bool
   c:form->bool
   IMAGE (\\pss. let i = mgu (FST(pss) UNION {~~ p | p IN SND(pss)}) in\n                     IMAGE (formsubst i)\n                           (c1 DIFF (FST pss) UNION cl2' DIFF (SND pss)))\n          {ps1,ps2 | ps1 IN {ps1 | ps1 SUBSET c1} /\\\n                     ps2 IN {ps2 | ps2 SUBSET cl2'}}
   clause cl2'
-  !c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent c (c1,c2)}
+  forall c1 c2. clause(c1) /\\ clause(c2)\n           ==> FINITE {c | isaresolvent c (c1,c2)}
   u:(form->bool)->bool
   {c | isaresolvent c (c1,c2)}
   c:form->bool
   allresolvents s t =\n        UNIONS (IMAGE (\\cs. {c | isaresolvent c cs})\n                      {c1,c2 | c1 IN s /\\ c2 IN t})
-  !s t. FINITE(s) /\\ FINITE(t) /\\\n         (!c. c IN s ==> clause c) /\\\n         (!c. c IN t ==> clause c)\n         ==> FINITE(allresolvents s t)
+  forall s t. FINITE(s) /\\ FINITE(t) /\\\n         (forall c. c IN s ==> clause c) /\\\n         (forall c. c IN t ==> clause c)\n         ==> FINITE(allresolvents s t)
   (replace cl [] = [cl]) /\\\n   (replace cl (CONS c cls) =\n        if cl subsumes c then CONS cl cls else CONS c (replace cl cls))
   set_of_list(replace cl t) SUBSUMES set_of_list(CONS cl t)
   set_of_list(replace cl t) SUBSUMES\n                    set_of_list(CONS cl t)
   (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  !cl lis. (!c. MEM c lis ==> clause c) /\\ clause cl\n            ==> (!c. MEM c (replace cl lis) ==> clause c) /\\\n                set_of_list(replace cl lis) SUBSUMES set_of_list(CONS cl lis)
+  forall cl lis. (forall c. MEM c lis ==> clause c) /\\ clause cl\n            ==> (forall c. MEM c (replace cl lis) ==> clause c) /\\\n                set_of_list(replace cl lis) SUBSUMES set_of_list(CONS cl lis)
   incorporate gcl cl current =\n        if tautologous cl \\/ EX (\\c. c subsumes cl) (CONS gcl current)\n        then current else replace cl current
   set_of_list(replace cl current) SUBSUMES\n               set_of_list (CONS cl current)
   current:(form->bool)list
@@ -8925,7 +8925,7 @@ Logic/given quotations (610):
   set_of_list(current:(form->bool)list)
   EX (\\c. c subsumes cl) (CONS gcl current)
   tautologous cl
-  !gcl cl current.\n        (!c. MEM c current ==> clause c) /\\ clause gcl /\\ clause cl\n        ==> (!c. MEM c (incorporate gcl cl current) ==> clause c) /\\\n            set_of_list(incorporate gcl cl current)\n                SUBSUMES set_of_list(current) /\\\n            (tautologous cl \\/\n             (gcl INSERT set_of_list(incorporate gcl cl current))\n                SUBSUMES set_of_list(CONS cl current))
+  forall gcl cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause gcl /\\ clause cl\n        ==> (forall c. MEM c (incorporate gcl cl current) ==> clause c) /\\\n            set_of_list(incorporate gcl cl current)\n                SUBSUMES set_of_list(current) /\\\n            (tautologous cl \\/\n             (gcl INSERT set_of_list(incorporate gcl cl current))\n                SUBSUMES set_of_list(CONS cl current))
   insert x l = if MEM x l then l else CONS x l
   step (used,unused) =\n        if unused = [] then (used,unused) else\n        let new = resolvents (HD unused) (CONS (HD unused) used) in\n        (insert (HD unused) used,\n         ITLIST (incorporate (HD unused)) new (TL unused))
   (step(used,[]) = (used,[])) /\\\n   (step(used,CONS cl cls) =\n        let new = resolvents cl (CONS cl used) in\n        insert cl used,ITLIST (incorporate cl) new cls)
@@ -8933,15 +8933,15 @@ Logic/given quotations (610):
   Used init n = set_of_list(FST(given n init))
   Unused init n = set_of_list(SND(given n init))
   (Sub init 0 = {}) /\\\n   (Sub init (SUC n) = if SND(given n init) = [] then Sub init n\n                       else HD(SND(given n init)) INSERT (Sub init n))
-  !i cl. tautologous cl ==> tautologous (IMAGE (formsubst i) cl)
+  forall i cl. tautologous cl ==> tautologous (IMAGE (formsubst i) cl)
   cl subsumes cl' /\\ ~(tautologous cl') ==> ~(tautologous cl)
-  (!c. c IN B ==> clause(c)) /\\\n   (!c. c IN C ==> clause(c))\n   ==> ((allntresolvents B (A UNION B)) UNION\n        (allntresolvents C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents(B UNION C) (A UNION B UNION C))
+  (forall c. c IN B ==> clause(c)) /\\\n   (forall c. c IN C ==> clause(c))\n   ==> ((allntresolvents B (A UNION B)) UNION\n        (allntresolvents C (A UNION B UNION C)))\n       SUBSUMES (allntresolvents(B UNION C) (A UNION B UNION C))
   (allntresolvents (A UNION B) C =\n        (allntresolvents A C) UNION (allntresolvents B C)) /\\\n   (allntresolvents A (B UNION C) =\n        (allntresolvents A B) UNION (allntresolvents A C))
-  !x s. set_of_list(insert x s) = x INSERT set_of_list(s)
-  !P l. set_of_list(FILTER P l) = {x | x IN set_of_list l /\\ P x}
+  forall x s. set_of_list(insert x s) = x INSERT set_of_list(s)
+  forall P l. set_of_list(FILTER P l) = {x | x IN set_of_list l /\\ P x}
   ppp:(form->bool)list#(form->bool)list
   ppp = given n (used,unused)
-  !used unused n.\n        Used(used,unused) n = set_of_list(used) UNION Sub(used,unused) n
+  forall used unused n.\n        Used(used,unused) n = set_of_list(used) UNION Sub(used,unused) n
   x INSERT s = s UNION {x}
   (x INSERT s) UNION t = (s UNION (t UNION {x})) UNION (t UNION {x})
   s UNION t = (s UNION t) UNION t
@@ -8956,12 +8956,12 @@ Logic/given quotations (610):
   h:form->bool
   cl:form->bool
   tautologous h
-  !c. c IN set_of_list (CONS cl cls) ==> clause c
+  forall c. c IN set_of_list (CONS cl cls) ==> clause c
   added:(form->bool)list
   new:(form->bool)list
   (b ==> a /\\ c) ==> a ==> b ==> c
-  !c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-  !c. MEM c new ==> clause c
+  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
+  forall c. MEM c new ==> clause c
   set_of_list(list_of_set\n                        (allresolvents {cl}\n                                       (set_of_list(CONS cl used0)))) =\n                  allresolvents {cl} (set_of_list(CONS cl used0))
   allntresolvents {cl} (set_of_list used0 UNION {cl}) =\n    set_of_list(FILTER (\\c. ~(tautologous c)) new)
   set_of_list(used:(form->bool)list) UNION sub0 =\n                set_of_list(used0)
@@ -8969,23 +8969,23 @@ Logic/given quotations (610):
   ITLIST (incorporate cl) t cls
   h:form->bool
   cl:form->bool
-  !c. c IN set_of_list (CONS cl cls) ==> clause c
+  forall c. c IN set_of_list (CONS cl cls) ==> clause c
   added:(form->bool)list
   new:(form->bool)list
   (b ==> a /\\ c) ==> a ==> b ==> c
-  !c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
-  !c. MEM c new ==> clause c
+  forall c. c IN set_of_list (ITLIST (incorporate cl) new cls)\n                     ==> clause c
+  forall c. MEM c new ==> clause c
   sub0 UNION set_of_list(CONS (cl:form->bool) cls)
   allntresolvents sub0 (set_of_list(used) UNION sub0) UNION\n    allntresolvents {cl} (set_of_list(used) UNION sub0 UNION {cl})
-  !c. c IN set_of_list (CONS cl cls) ==> clause c
+  forall c. c IN set_of_list (CONS cl cls) ==> clause c
   more:(form->bool)list
   new:(form->bool)list
-  !c. MEM c new ==> clause c
+  forall c. MEM c new ==> clause c
   a /\\ (a ==> b) ==> a /\\ b
-  !c. MEM c (list_of_set (allresolvents {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents {cl} (cl INSERT set_of_list used0))
-  !c. MEM c new ==> clause c
+  forall c. MEM c (list_of_set (allresolvents {cl}\n                                (cl INSERT set_of_list used0))) <=>\n                      c IN (allresolvents {cl} (cl INSERT set_of_list used0))
+  forall c. MEM c new ==> clause c
   b /\\ a /\\ c ==> a /\\ b /\\ c
-  !c. c IN set_of_list (CONS cl cls) ==> clause c
+  forall c. c IN set_of_list (CONS cl cls) ==> clause c
   clause cl
   cls:(form->bool)list
   cl:form->bool
@@ -8998,14 +8998,14 @@ Logic/given quotations (610):
   allntresolvents {} (set_of_list used)
   allresolvents {} (set_of_list used) = {}
   allresolvents {} (Used (used,unused) 0)
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n. (!c. c IN Used(used,unused) n ==> clause c) /\\\n                (!c. c IN Unused(used,unused) n ==> clause c) /\\\n                (!c. c IN Sub(used,unused) n ==> clause c) /\\\n                (Sub(used,unused) n UNION Unused(used,unused) n) SUBSUMES\n                allntresolvents\n                        (Sub(used,unused) n)\n                        (set_of_list(used) UNION Sub(used,unused) n)
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. (forall c. c IN Used(used,unused) n ==> clause c) /\\\n                (forall c. c IN Unused(used,unused) n ==> clause c) /\\\n                (forall c. c IN Sub(used,unused) n ==> clause c) /\\\n                (Sub(used,unused) n UNION Unused(used,unused) n) SUBSUMES\n                allntresolvents\n                        (Sub(used,unused) n)\n                        (set_of_list(used) UNION Sub(used,unused) n)
   d:num
   d:num
   d:num
-  !init m n. m <= n ==> (Sub init m) SUBSET (Sub init n)
-  !init m n. m <= n ==> (Sub init n) SUBSUMES (Sub init m)
-  !cl current. LENGTH current <= LENGTH(replace cl current)
-  !gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
+  forall init m n. m <= n ==> (Sub init m) SUBSET (Sub init n)
+  forall init m n. m <= n ==> (Sub init n) SUBSUMES (Sub init m)
+  forall cl current. LENGTH current <= LENGTH(replace cl current)
+  forall gcl cl current. LENGTH current <= LENGTH(incorporate gcl cl current)
   k:(form->bool)list
   (resolvents (HD (CONS h t))\n                (CONS (HD (CONS h t)) (FST (given (m + n) (used,unused)))))
   x <= y ==> SUC x + n <= SUC(y + n)
@@ -9017,16 +9017,16 @@ Logic/given quotations (610):
   given (m + n) (used,unused)
   unused:(form->bool)list
   used:(form->bool)list
-  !init m n.\n        LENGTH(SND(given m init)) <= LENGTH (SND(given (m + n) init)) + n
+  forall init m n.\n        LENGTH(SND(given m init)) <= LENGTH (SND(given (m + n) init)) + n
   given (m + n) (used,unused)
-  !used unused m n.\n        (SND (given m (used,unused)) = [])\n        ==> (SND (given (m + n) (used,unused)) = [])
-  !cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
-  !gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
-  !cl current.\n        (!c. MEM c current ==> clause c) /\\ clause cl\n        ==> !c. MEM c (replace cl current) ==> clause c
-  (!c. MEM c current ==> clause c) /\\ clause cl\n   ==> !c. MEM c (incorporate gcl cl current) ==> clause c
-  (!c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
-  !current gcl new.\n        (!c. MEM c current ==> clause c) /\\\n        (!c. MEM c new ==> clause c)\n        ==> !c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
-  !gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
+  forall used unused m n.\n        (SND (given m (used,unused)) = [])\n        ==> (SND (given (m + n) (used,unused)) = [])
+  forall cl current n.\n        n < LENGTH current\n        ==> (EL n (replace cl current)) subsumes (EL n current)
+  forall gcl cl current n.\n        n < LENGTH current\n        ==> (EL n (incorporate gcl cl current)) subsumes (EL n current)
+  forall cl current.\n        (forall c. MEM c current ==> clause c) /\\ clause cl\n        ==> forall c. MEM c (replace cl current) ==> clause c
+  (forall c. MEM c current ==> clause c) /\\ clause cl\n   ==> forall c. MEM c (incorporate gcl cl current) ==> clause c
+  (forall c. MEM c current ==> clause c) /\\ clause cl /\\ p < LENGTH current\n   ==> clause (EL p (incorporate gcl cl current))
+  forall current gcl new.\n        (forall c. MEM c current ==> clause c) /\\\n        (forall c. MEM c new ==> clause c)\n        ==> forall c. MEM c (ITLIST (incorporate gcl) new current)\n                ==> clause c
+  forall gcl current lis.\n        LENGTH(current) <= LENGTH(ITLIST (incorporate gcl) lis current)
   k:(form->bool)list
   t':(form->bool)list
   p < LENGTH(t:(form->bool)list)
@@ -9037,7 +9037,7 @@ Logic/given quotations (610):
   new:(form->bool)list
   p:num
   n + k:num
-  !c. MEM c new ==> clause c
+  forall c. MEM c new ==> clause c
   l:(form->bool)list
   SND(given m (used,unused))
   ~(SND (given m (used,unused)) = [])
@@ -9046,10 +9046,10 @@ Logic/given quotations (610):
   ~(SND(given m (used,unused)) = [])
   gcl IN Unused(used,unused) m
   clause gcl
-  !c. MEM c (list_of_set (allresolvents {gcl}\n                          (gcl INSERT Used (used,unused) m))) <=>\n                      c IN (allresolvents {gcl}\n                           (gcl INSERT Used (used,unused) m))
+  forall c. MEM c (list_of_set (allresolvents {gcl}\n                          (gcl INSERT Used (used,unused) m))) <=>\n                      c IN (allresolvents {gcl}\n                           (gcl INSERT Used (used,unused) m))
   gcl = HD (SND (given m (used,unused)))
-  !c. MEM c new ==> clause c
-  !c. MEM c (SND (given m (used,unused))) ==> clause c
+  forall c. MEM c new ==> clause c
+  forall c. MEM c (SND (given m (used,unused))) ==> clause c
   SUC (n + k) < LENGTH (SND (given m (used,unused)))
   SUC (n + k) < LENGTH (SND (given m (used,unused)))
   given m (used,unused)
@@ -9065,7 +9065,7 @@ Logic/given quotations (610):
   (used:(form->bool)list,unused:(form->bool)list)
   n:num
   SUC m
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !k m n. n + k < LENGTH(SND(given m (used,unused)))\n                    ==> (EL n (SND(given (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given m (used,unused))))
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall k m n. n + k < LENGTH(SND(given m (used,unused)))\n                    ==> (EL n (SND(given (m + k) (used,unused))))\n                    subsumes (EL (n + k) (SND(given m (used,unused))))
   x INSERT s = {x} UNION s
   ~(LENGTH (SND (given m (used,unused))) <= n)
   unused:(form->bool)list
@@ -9096,24 +9096,24 @@ Logic/given quotations (610):
   LENGTH(SND (given (m + n) (used,unused))) + n
   LENGTH(SND (given m (used,unused))) <= n
   FIRSTN (SUC n) (SND(given m (used,unused))) =\n                  FIRSTN n (SND(given m (used,unused)))
-  !m n. Sub(used,unused) (m + n) SUBSUMES\n          Sub(used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given m (used,unused))))
-  (!c. MEM c used ==> clause c) /\\\n   (!c. MEM c unused ==> clause c)\n   ==> !n. Sub(used,unused)\n              (n + LENGTH(SND(given n (used,unused))))\n           SUBSUMES (Sub (used,unused) n UNION Unused(used,unused) n)
+  forall m n. Sub(used,unused) (m + n) SUBSUMES\n          Sub(used,unused) m UNION\n          set_of_list(FIRSTN n (SND(given m (used,unused))))
+  (forall c. MEM c used ==> clause c) /\\\n   (forall c. MEM c unused ==> clause c)\n   ==> forall n. Sub(used,unused)\n              (n + LENGTH(SND(given n (used,unused))))\n           SUBSUMES (Sub (used,unused) n UNION Unused(used,unused) n)
   x <= n ==> x <= SUC n
   (break init 0 = LENGTH(SND(given 0 init))) /\\\n   (break init (SUC n) =\n        break init n + LENGTH(SND(given (break init n) init)))
   level init n = Sub init (break init n)
   0
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> level(used,unused) 0 SUBSUMES set_of_list(unused)
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> level(used,unused) 0 SUBSUMES set_of_list(unused)
   Sub(used,unused) (break(used,unused) n) UNION\n              Unused(used,unused) (break(used,unused) n)
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n. level(used,unused) (SUC n) SUBSUMES\n                allntresolvents (level(used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level(used,unused) (n))
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !n c. c IN (level(used,unused) n) ==> clause c
-  !init m d. break init m <= break init (m + d)
-  !init m n. m <= n ==> break init m <= break init n
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !m n. m <= n\n                  ==> level(used,unused) m SUBSET level(used,unused) n
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c)\n        ==> !m n. m <= n\n                  ==> level(used,unused) n SUBSUMES level(used,unused) m
-  clause p /\\ (!q. qfree(q) ==> (f q = g q))\n   ==> (IMAGE f p = IMAGE g p)
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n. level(used,unused) (SUC n) SUBSUMES\n                allntresolvents (level(used,unused) (n))\n                                (set_of_list(used) UNION\n                                 level(used,unused) (n))
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall n c. c IN (level(used,unused) n) ==> clause c
+  forall init m d. break init m <= break init (m + d)
+  forall init m n. m <= n ==> break init m <= break init n
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level(used,unused) m SUBSET level(used,unused) n
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c)\n        ==> forall m n. m <= n\n                  ==> level(used,unused) n SUBSUMES level(used,unused) m
+  clause p /\\ (forall q. qfree(q) ==> (f q = g q))\n   ==> (IMAGE f p = IMAGE g p)
   Atom p [t]
   t:term
-  (!p. qfree(p) ==> (formsubst i p = formsubst j p)) <=>\n   (termsubst i = termsubst j)
+  (forall p. qfree(p) ==> (formsubst i p = formsubst j p)) <=>\n   (termsubst i = termsubst j)
   a SUBSET a' /\\ b SUBSET b' ==> (a UNION b) SUBSET (a' UNION b')
   w:form
   w:form
@@ -9127,12 +9127,12 @@ Logic/given quotations (610):
   w:form
   v:form
   u:form
-  (!q. qfree q ==> (formsubst (termsubst i o termsubst ri o si') q =\n                        (formsubst i o formsubst ri o formsubst si') q)) /\\\n      (!q. q IN (q'' DIFF q1'') ==> qfree q)
+  (forall q. qfree q ==> (formsubst (termsubst i o termsubst ri o si') q =\n                        (formsubst i o formsubst ri o formsubst si') q)) /\\\n      (forall q. q IN (q'' DIFF q1'') ==> qfree q)
   IMAGE (formsubst (termsubst i o termsubst ri o si')) (q'' DIFF q1'') =\n    IMAGE (formsubst i o formsubst ri o formsubst si') (q'' DIFF q1'')
   z IN FVS q''
   z:num
   x:form
-  !x. x IN q''\n          ==> (formsubst i' x = formsubst (termsubst i o termsubst ri o si') x)
+  forall x. x IN q''\n          ==> (formsubst i' x = formsubst (termsubst i o termsubst ri o si') x)
   IMAGE (formsubst i') (q'' DIFF q1'') =\n    IMAGE (formsubst (termsubst i o termsubst ri o si')) (q'' DIFF q1'')
   IMAGE (formsubst j) p' SUBSET p
   IMAGE (formsubst (termsubst i o j)) (p' DIFF p1') =\n                  IMAGE (formsubst i o formsubst j) (p' DIFF p1')
@@ -9142,9 +9142,9 @@ Logic/given quotations (610):
   ~(z IN FVS q'')
   z:num
   x:form
-  !x. x IN p' ==> (formsubst i' x = formsubst (termsubst i o j) x)
+  forall x. x IN p' ==> (formsubst i' x = formsubst (termsubst i o j) x)
   IMAGE (formsubst i') (p' DIFF p1') =\n                  IMAGE (formsubst (termsubst i o j)) (p' DIFF p1')
-  !x. x IN (p' DIFF p1' UNION q'' DIFF q1'') ==> qfree x
+  forall x. x IN (p' DIFF p1' UNION q'' DIFF q1'') ==> qfree x
   i':num->term
   IMAGE (formsubst i') (p' DIFF p1' UNION q'' DIFF q1'')
   i':num->term
@@ -9223,7 +9223,7 @@ Logic/given quotations (610):
   p1:form->bool
   q' = IMAGE (formsubst (rename q (FVS p))) q
   isaresolvent r (p,q)
-  !p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ ?r'. isaresolvent r' (p',q) /\\ r' subsumes r
+  forall p p' q r.\n        clause p /\\ clause p' /\\ clause q /\\\n        p' subsumes p /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ ?r'. isaresolvent r' (p',q) /\\ r' subsumes r
   r'':form->bool
   q':form->bool
   p:form->bool
@@ -9237,7 +9237,7 @@ Logic/given quotations (610):
   r:form->bool
   p:form->bool
   q:form->bool
-  !p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent r (p,q)\n        ==> q' subsumes r \\/ ?r'. isaresolvent r' (p,q') /\\ r' subsumes r
+  forall p q q' r.\n        clause p /\\ clause q /\\ clause q' /\\\n        q' subsumes q /\\ isaresolvent r (p,q)\n        ==> q' subsumes r \\/ ?r'. isaresolvent r' (p,q') /\\ r' subsumes r
   r':form->bool
   q':form->bool
   p':form->bool
@@ -9247,29 +9247,29 @@ Logic/given quotations (610):
   q':form->bool
   q:form->bool
   p:form->bool
-  !p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent r' (p',q') /\\ r' subsumes r
-  !s t u.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents s u)) SUBSUMES (allresolvents t u)
-  !s t u.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents s t)) SUBSUMES (allresolvents s u)
+  forall p p' q q' r.\n        clause p /\\ clause p' /\\ clause q /\\ clause q' /\\\n        p' subsumes p /\\ q' subsumes q /\\ isaresolvent r (p,q)\n        ==> p' subsumes r \\/ q' subsumes r \\/\n            ?r'. isaresolvent r' (p',q') /\\ r' subsumes r
+  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      s SUBSUMES t\n      ==> (s UNION (allresolvents s u)) SUBSUMES (allresolvents t u)
+  forall s t u.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN u ==> clause c) /\\\n      t SUBSUMES u\n      ==> (t UNION (allresolvents s t)) SUBSUMES (allresolvents s u)
   s UNION (allresolvents s t')
-  !s t s' t'.\n      (!c. c IN s ==> clause c) /\\\n      (!c. c IN s' ==> clause c) /\\\n      (!c. c IN t ==> clause c) /\\\n      (!c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents s t)) SUBSUMES\n          (allresolvents s' t')
+  forall s t s' t'.\n      (forall c. c IN s ==> clause c) /\\\n      (forall c. c IN s' ==> clause c) /\\\n      (forall c. c IN t ==> clause c) /\\\n      (forall c. c IN t' ==> clause c) /\\\n      s SUBSUMES s' /\\ t SUBSUMES t'\n      ==> (s UNION t UNION (allresolvents s t)) SUBSUMES\n          (allresolvents s' t')
   {~~p | p IN s} = IMAGE (~~) s
   literal x /\\ literal y
   (~~)
   y:form
-  !y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
-  !y. y IN q1' ==> (formsubst i y = formsubst i x)
+  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
+  forall y. y IN q1' ==> (formsubst i y = formsubst i x)
   IMAGE(formsubst (termsubst i o k)) q =\n    IMAGE (formsubst i o formsubst k) q
-  !y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
+  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i (~~x))
   ~~x IN p1
   p1 UNION {~~p | p IN q1'}
   termsubst i o (k:num->term)
   ~~x IN p1
   (~~)
   y:form
-  !y. y IN q1' ==> (formsubst i (~~ y) = formsubst i x)
-  !y. y IN q1' ==> (formsubst i y = formsubst i (~~x))
+  forall y. y IN q1' ==> (formsubst i (~~ y) = formsubst i x)
+  forall y. y IN q1' ==> (formsubst i y = formsubst i (~~x))
   IMAGE(formsubst (termsubst i o k)) q =\n      IMAGE (formsubst i o formsubst k) q
-  !y. y IN q1' ==> (formsubst i (~~y) = formsubst i x)
+  forall y. y IN q1' ==> (formsubst i (~~y) = formsubst i x)
   x:form IN p1
   p1 UNION {~~p | p IN q1'}
   termsubst i o (k:num->term)
@@ -9281,16 +9281,16 @@ Logic/given quotations (610):
   p1:form->bool
   q' = IMAGE (formsubst (rename q (FVS p))) q
   x:form
-  !p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
+  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (p,q)\n      ==> tautologous(r) \\/ q subsumes r
   ~~x
   x:form
   x:form
   ~~x
-  !p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
-  !p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
-  !cl lis c. MEM c (replace cl lis) ==> MEM c lis \\/ (c = cl)
-  !gcl cl lis c.\n        MEM c (incorporate gcl cl lis) ==> MEM c lis \\/ (c = cl)
-  !gcl lis new c.\n        MEM c (ITLIST (incorporate gcl) new lis)\n        ==> MEM c new \\/ MEM c lis
+  forall p q. p subsumes q /\\ tautologous(p) ==> tautologous(q)
+  forall p q r.\n      clause p /\\ clause q /\\\n      tautologous(p) /\\ isaresolvent r (q,p)\n      ==> tautologous(r) \\/ q subsumes r
+  forall cl lis c. MEM c (replace cl lis) ==> MEM c lis \\/ (c = cl)
+  forall gcl cl lis c.\n        MEM c (incorporate gcl cl lis) ==> MEM c lis \\/ (c = cl)
+  forall gcl lis new c.\n        MEM c (ITLIST (incorporate gcl) new lis)\n        ==> MEM c new \\/ MEM c lis
   x < n ==> x < SUC n
   l:(form->bool)list
   SND (given n (used,unused))
@@ -9299,8 +9299,8 @@ Logic/given quotations (610):
   MEM c (SND (given n (used,unused)))
   x < n ==> x < SUC n
   given n (used,unused)
-  !used unused c n.\n        MEM c (SND(given n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
-  !l. ~(l = []) ==> MEM (HD l) l
+  forall used unused c n.\n        MEM c (SND(given n (used,unused)))\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
+  forall l. ~(l = []) ==> MEM (HD l) l
   l:(form->bool)list
   SND (given n (used,unused))
   ~(SND (given n (used,unused)) = [])
@@ -9308,8 +9308,8 @@ Logic/given quotations (610):
   MEM c (SND(given n (used,unused)))
   x < n ==> x < SUC n
   x < n ==> x < SUC n
-  !used unused c n.\n        c IN Sub(used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
-  !used unused c n.\n        c IN level(used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
+  forall used unused c n.\n        c IN Sub(used,unused) n\n        ==> MEM c unused \\/\n            ?m. m < n /\\\n                MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
+  forall used unused c n.\n        c IN level(used,unused) n\n        ==> MEM c unused \\/\n            ?m. MEM c (resolvents\n                         (HD(SND(given m (used,unused))))\n                         (CONS (HD(SND(given m (used,unused))))\n                               (FST(given m (used,unused)))))
 FIRSTN =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?216665),fun(list('?216665),bool)) ((#FIRSTN:fun(num,fun(list('?216665),list('?216665))) (#NUMERAL:fun(num,num) #_0:num)) l:list('?216665))) #NIL:list('?216665))) ((#=:fun(list('?216665),fun(list('?216665),bool)) ((#FIRSTN:fun(num,fun(list('?216665),list('?216665))) (#SUC:fun(num,num) n:num)) l:list('?216665))) (((#COND:fun(bool,fun(list('?216665),fun(list('?216665),list('?216665)))) ((#=:fun(list('?216665),fun(list('?216665),bool)) l:list('?216665)) #NIL:list('?216665))) #NIL:list('?216665)) ((#CONS:fun('?216665,fun(list('?216665),list('?216665))) (#HD:fun(list('?216665),'?216665) l:list('?216665))) ((#FIRSTN:fun(num,fun(list('?216665),list('?216665))) n:num) (#TL:fun(list('?216665),list('?216665)) l:list('?216665)))))))
 FIRSTN_TRIVIAL =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(list('?216691),bool),bool) (\l:list('?216691). ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#LENGTH:fun(list('?216691),num) l:list('?216691))) n:num)) ((#=:fun(list('?216691),fun(list('?216691),bool)) ((#FIRSTN:fun(num,fun(list('?216691),list('?216691))) n:num) l:list('?216691))) l:list('?216691)))))))
 FIRSTN_EMPTY =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(list('?216710),fun(list('?216710),bool)) ((#FIRSTN:fun(num,fun(list('?216710),list('?216710))) n:num) #NIL:list('?216710))) #NIL:list('?216710))))

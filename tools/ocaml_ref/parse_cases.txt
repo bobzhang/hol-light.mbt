@@ -69,7 +69,7 @@ const real_neg : real->real
 const real_lt : real->real->bool
 prefix ~
 binder \
-binder !
+binder forall
 binder ?
 binder ?!
 binder @
@@ -141,8 +141,8 @@ T: 0
 T: 12345678901234567890
 T: 0x1F
 T: 0b101
-T: !x. x = x
-T: !x y. x = y ==> y = x
+T: forall x. x = x
+T: forall x y. x = y ==> y = x
 T: ?x. x < 1
 T: ?!x. x = 0
 T: @x. x < 5
@@ -150,7 +150,7 @@ T: \x. x + 1
 T: \x y. x + y
 T: (\x. x) 1
 T: \(x,y). x + y
-T: !(x,y). x = y
+T: forall(x,y). x = y
 T: x,y
 T: x,y,z
 T: FST (x,y)
@@ -204,7 +204,7 @@ T: f x y z
 T: f (g x) (h y z)
 T: (+)
 T: (+) 1 2
-T: (!)
+T: (forall)
 T: (~)
 T: (x)
 T: ((x))
@@ -236,10 +236,10 @@ T: \x.
 T: 1abc
 T: a $ b
 margin 30
-T: !x y z. x + y + z = z + y + x /\ x * y * z = z * y * x
+T: forall x y z. x + y + z = z + y + x /\ x * y * z = z * y * x
 T: if long_condition_name then first_branch_value else second_branch_value
 margin 78
-T: !aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
+T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
 hide SUC
 T: SUC x
 prioritize int

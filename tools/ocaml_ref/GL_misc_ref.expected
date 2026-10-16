@@ -7901,42 +7901,42 @@ Warning: inventing type variables
 0..0..1..2..5..8..13..18..25..32..43..54..69..84..103..122..solved at 138
 0..0..1..solved at 4
 GL/misc quotations (50):
-  (!f:A->B list. FLATMAP f [] = []) /\\\n   (!f:A->B list h t. FLATMAP f (CONS h t) = APPEND (f h) (FLATMAP f t))
-  !x f:A->B list l. MEM x (FLATMAP f l) <=> ?y. MEM y l /\\ MEM x (f y)
+  (forall f:A->B list. FLATMAP f [] = []) /\\\n   (forall f:A->B list h t. FLATMAP f (CONS h t) = APPEND (f h) (FLATMAP f t))
+  forall x f:A->B list l. MEM x (FLATMAP f l) <=> ?y. MEM y l /\\ MEM x (f y)
   LISTDIFF l m = FILTER (\\x:A. ~MEM x m) l
-  !x:A l m. MEM x (LISTDIFF l m) <=> MEM x l /\\ ~MEM x m
-  l SUBLIST m <=> (!x:A. MEM x l ==> MEM x m)
+  forall x:A l m. MEM x (LISTDIFF l m) <=> MEM x l /\\ ~MEM x m
+  l SUBLIST m <=> (forall x:A. MEM x l ==> MEM x m)
   l:A list
-  !l:A list. l = [] <=> !x. ~(MEM x l)
-  !l:A list. l SUBLIST [] <=> l = []
-  !l:A list. [] SUBLIST l
-  !l:A list. l SUBLIST l
-  !h:A t l. CONS h t SUBLIST l <=> MEM h l /\\ t SUBLIST l
-  !l m n. l SUBLIST m /\\ m SUBLIST n ==> l SUBLIST n
-  !l m:A list.  LISTDIFF m l SUBLIST m
+  forall l:A list. l = [] <=> forall x. ~(MEM x l)
+  forall l:A list. l SUBLIST [] <=> l = []
+  forall l:A list. [] SUBLIST l
+  forall l:A list. l SUBLIST l
+  forall h:A t l. CONS h t SUBLIST l <=> MEM h l /\\ t SUBLIST l
+  forall l m n. l SUBLIST m /\\ m SUBLIST n ==> l SUBLIST n
+  forall l m:A list.  LISTDIFF m l SUBLIST m
   NOREPETITION l <=> PAIRWISE (\\x y:A. ~(x = y)) l
-  NOREPETITION [] /\\\n   (!h:A t. NOREPETITION (CONS h t) <=> ~MEM h t /\\ NOREPETITION t)
-  !s:A->bool. FINITE s ==> NOREPETITION (list_of_set s)
+  NOREPETITION [] /\\\n   (forall h:A t. NOREPETITION (CONS h t) <=> ~MEM h t /\\ NOREPETITION t)
+  forall s:A->bool. FINITE s ==> NOREPETITION (list_of_set s)
   list_of_set (set_of_list l):A list
-  !l:A list. ?m. NOREPETITION m /\\ l SUBLIST m /\\ m SUBLIST l
-  !P l:A list. NOREPETITION l ==> NOREPETITION (FILTER P l)
+  forall l:A list. ?m. NOREPETITION m /\\ l SUBLIST m /\\ m SUBLIST l
+  forall P l:A list. NOREPETITION l ==> NOREPETITION (FILTER P l)
   ~(CARD (s:A->bool) = 0)
   FINITE (s:A->bool)
-  !s a:A n. s DELETE a HAS_SIZE n <=>\n             a IN s /\\ s HAS_SIZE SUC n \\/\n             ~(a IN s) /\\ s HAS_SIZE n
+  forall s a:A n. s DELETE a HAS_SIZE n <=>\n             a IN s /\\ s HAS_SIZE SUC n \\/\n             ~(a IN s) /\\ s HAS_SIZE n
   l:A list
-  {l | LENGTH l = SUC n /\\ (!x:A. MEM x l ==> x IN s)} =\n     IMAGE (UNCURRY CONS)\n           (s CROSS {l | LENGTH l = n /\\ (!x. MEM x l ==> x IN s)})
+  {l | LENGTH l = SUC n /\\ (forall x:A. MEM x l ==> x IN s)} =\n     IMAGE (UNCURRY CONS)\n           (s CROSS {l | LENGTH l = n /\\ (forall x. MEM x l ==> x IN s)})
   m EXP SUC n = m * m EXP n
   {}:A list->bool
   []:A list
   m EXP 0 = SUC 0
-  !s m n.\n     s HAS_SIZE m\n     ==> {l | LENGTH l = n /\\ !x:A. MEM x l ==> x IN s} HAS_SIZE m EXP n
-  !s n. FINITE s ==> FINITE {l | LENGTH l = n /\\ !x:A. MEM x l ==> x IN s}
-  UNIONS (IMAGE (\\k. {l | LENGTH l = k /\\ !x:A. MEM x l ==> x IN s})\n                   (0..n))
-  !s n. FINITE s ==> FINITE {l | LENGTH l <= n /\\ !x:A. MEM x l ==> x IN s}
+  forall s m n.\n     s HAS_SIZE m\n     ==> {l | LENGTH l = n /\\ forall x:A. MEM x l ==> x IN s} HAS_SIZE m EXP n
+  forall s n. FINITE s ==> FINITE {l | LENGTH l = n /\\ forall x:A. MEM x l ==> x IN s}
+  UNIONS (IMAGE (\\k. {l | LENGTH l = k /\\ forall x:A. MEM x l ==> x IN s})\n                   (0..n))
+  forall s n. FINITE s ==> FINITE {l | LENGTH l <= n /\\ forall x:A. MEM x l ==> x IN s}
   s DELETE h:A
-  !n l s. s HAS_SIZE n /\\ (!x:A. MEM x l ==> x IN s) /\\ NOREPETITION l\n           ==> LENGTH l <= n
-  {l | LENGTH l <= CARD s /\\ !x:A. MEM x l ==> x IN s}
-  !s n. FINITE s ==> FINITE {l | NOREPETITION l /\\ !x:A. MEM x l ==> x IN s}
+  forall n l s. s HAS_SIZE n /\\ (forall x:A. MEM x l ==> x IN s) /\\ NOREPETITION l\n           ==> LENGTH l <= n
+  {l | LENGTH l <= CARD s /\\ forall x:A. MEM x l ==> x IN s}
+  forall s n. FINITE s ==> FINITE {l | NOREPETITION l /\\ forall x:A. MEM x l ==> x IN s}
   b0:bool,b1:bool,b2:bool,b3:bool,b4:bool,b5:bool,b6:bool,b7:bool
   c:char
   c:char

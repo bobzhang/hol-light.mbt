@@ -322,7 +322,7 @@ fn step_4() -> Unit raise {
   )
   let t38 = (
     @parser.parse_term(
-      "(~((!) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> !x:A. ~(P x)) /\\\n     (~((?!) P) <=> (!x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))",
+      "(~((forall) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> forall x:A. ~(P x)) /\\\n     (~((?!) P) <=> (forall x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))",
     ),
     t37,
   )
@@ -395,7 +395,7 @@ fn step_4() -> Unit raise {
         )
         let pth_exu = @tactics.prove(
           @parser.parse_term(
-            "((?!) P) <=> (?x:A. P x) /\\ !x y. ~(P x) \\/ ~(P y) \\/ (y = x)",
+            "((?!) P) <=> (?x:A. P x) /\\ forall x y. ~(P x) \\/ ~(P y) \\/ (y = x)",
           ),
           t48,
         )
@@ -2065,7 +2065,7 @@ pub fn select_elim_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 fn step_12() -> Unit raise {
   let t164 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let pth = @tactics.prove(
-    @parser.parse_term("(s = \\x. t x) <=> (!x. s x = t x)"),
+    @parser.parse_term("(s = \\x. t x) <=> (forall x. s x = t x)"),
     t164,
   )
   let half_mk_abs_conv : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
@@ -2128,7 +2128,7 @@ fn step_12() -> Unit raise {
   )
   let pth_1 = @tactics.prove(
     @parser.parse_term(
-      "(!a. (a = c) ==> (P = Q a)) ==> (P <=> !a. (a = c) ==> Q a)",
+      "(forall a. (a = c) ==> (P = Q a)) ==> (P <=> forall a. (a = c) ==> Q a)",
     ),
     t179,
   )
@@ -2460,7 +2460,7 @@ fn step_14() -> Unit raise {
   }
   let t209 = @simp.rewrite_tac(@list.List([@trivia.i_thm()]))
   let th_1 = @tactics.prove(
-    @parser.parse_term("!(f:A->B) x. f x = I f x"),
+    @parser.parse_term("forall(f:A->B) x. f x = I f x"),
     t209,
   )
   let app_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(th_1)

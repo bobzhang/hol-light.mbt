@@ -611,7 +611,7 @@ grobner quotations (29):
   d:A
   n:A
   n0:A
-  !(add:A->A->A) (mul:A->A->A) (n0:A).\n          (!x. mul n0 x = n0) /\\\n          (!x y z. (add x y = add x z) <=> (y = z)) /\\\n          (!w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (!a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (!n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
+  forall(add:A->A->A) (mul:A->A->A) (n0:A).\n          (forall x. mul n0 x = n0) /\\\n          (forall x y z. (add x y = add x z) <=> (y = z)) /\\\n          (forall w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (forall a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (forall n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
   (p ==> F) ==> (~q = p) ==> q
   F
   PRE
@@ -624,14 +624,14 @@ grobner quotations (29):
   a:num
   b:num
   (-):num->num->num
-  (EVEN(x) <=> (!y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (!y. ~(x = SUC(2 * y))))
+  (EVEN(x) <=> (forall y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (forall y. ~(x = SUC(2 * y))))
   a + b + c + d + e = a + c + e + b + d
   (w = x + d) /\\ (y = z + e)\n     ==> ((w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
   z:num
   y:num
   x:num
   w:num
-  (!x. 0 * x = 0) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+  (forall x. 0 * x = 0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
   (EXP):num->num->num
   (*):num->num->num
   (+):num->num->num

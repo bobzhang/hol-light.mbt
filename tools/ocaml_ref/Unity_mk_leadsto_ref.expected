@@ -5733,168 +5733,168 @@ Warning: inventing type variables
 Unity/mk_leadsto quotations (977):
   LUB (P:('a->bool)->bool) = \\s:'a. ?p. (P p) /\\ p s
   In (p:'a->bool) (P:('a->bool)->bool) = P p
-  LeadstoRel R Pr =\n      !(p:'a->bool) q.\n        ((p ENSURES q)Pr                                 ==> R p q Pr) /\\\n        (!r. (R p r Pr /\\ R r q Pr)                      ==> R p q Pr) /\\\n        (!P.  (p = LUB P) /\\ (!p. (p In P) ==> R p q Pr) ==> R p q Pr)
-  LEADSTO (p:'a->bool) q Pr = (!R. (LeadstoRel R Pr) ==> (R p q Pr))
-  !(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p LEADSTO q)Pr
-  !(p:'a->bool) r q Pr.\n        (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr ==> (p LEADSTO q) Pr
-  !(p:'a->bool) r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr ==> (p LEADSTO q) Pr
-  !(p:'a->bool) r q Pr.\n        (p ENSURES r)Pr /\\ (r ENSURES q)Pr ==> (p LEADSTO q) Pr
-  (!p:'a->bool.\n        p In P ==>\n        (!R.\n          (!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))\n        ==>\n       (!p:'a->bool.\n        p In P ==>\n        ((!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)
-  !p (P:('a->bool)->bool) q Pr.\n      ((p = LUB P) /\\ (!p. (p In P) ==> (p LEADSTO q)Pr)) ==> (p LEADSTO q)Pr
+  LeadstoRel R Pr =\n      forall(p:'a->bool) q.\n        ((p ENSURES q)Pr                                 ==> R p q Pr) /\\\n        (forall r. (R p r Pr /\\ R r q Pr)                      ==> R p q Pr) /\\\n        (forall P.  (p = LUB P) /\\ (forall p. (p In P) ==> R p q Pr) ==> R p q Pr)
+  LEADSTO (p:'a->bool) q Pr = (forall R. (LeadstoRel R Pr) ==> (R p q Pr))
+  forall(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p LEADSTO q)Pr
+  forall(p:'a->bool) r q Pr.\n        (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr ==> (p LEADSTO q) Pr
+  forall(p:'a->bool) r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr ==> (p LEADSTO q) Pr
+  forall(p:'a->bool) r q Pr.\n        (p ENSURES r)Pr /\\ (r ENSURES q)Pr ==> (p LEADSTO q) Pr
+  (forall p:'a->bool.\n        p In P ==>\n        (forall R.\n          (forall p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (forall P.\n              (p = LUB P) /\\ (forall p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))\n        ==>\n       (forall p:'a->bool.\n        p In P ==>\n        ((forall p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (forall P.\n              (p = LUB P) /\\ (forall p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (forall P. (p = LUB P) /\\ (forall p'. p' In P ==> R p' q Pr) ==> R p q Pr)
+  forall p (P:('a->bool)->bool) q Pr.\n      ((p = LUB P) /\\ (forall p. (p In P) ==> (p LEADSTO q)Pr)) ==> (p LEADSTO q)Pr
   :bool
   P:('a->bool)->bool
   LUB (P:('a->bool)->bool)
-  !(P:('a->bool)->bool) q Pr.\n       (!p. (p In P) ==> (p LEADSTO q)Pr) ==> ((LUB P) LEADSTO q)Pr
-  !p:'a->bool. p In (\\p. ?i. p = P (i:num)) = (?i. p = P i)
-  !i'. ((P:num->'a->bool) i = P i') ==> q
+  forall(P:('a->bool)->bool) q Pr.\n       (forall p. (p In P) ==> (p LEADSTO q)Pr) ==> ((LUB P) LEADSTO q)Pr
+  forall p:'a->bool. p In (\\p. ?i. p = P (i:num)) = (?i. p = P i)
+  forall i'. ((P:num->'a->bool) i = P i') ==> q
   (P:num->'a->bool) i = P i'
   ?i'. (P:num->'a->bool) i = P i'
-  !(P:num->'a->bool) q i.\n       ((?i'. P i = P i') ==> q) = (!i'. (P i = P i') ==> q)
+  forall(P:num->'a->bool) q i.\n       ((?i'. P i = P i') ==> q) = (forall i'. (P i = P i') ==> q)
   :bool
   :bool
-  !p:'a->bool. (?i:num. p = P i) ==> (p LEADSTO q)Pr
+  forall p:'a->bool. (?i:num. p = P i) ==> (p LEADSTO q)Pr
   (P:num->'a->bool)i
   i:num
-  (!p:'a->bool. (?i. p = P i) ==> (p LEADSTO q)Pr) =\n    (!i:num. ((P i) LEADSTO q)Pr)
+  (forall p:'a->bool. (?i. p = P i) ==> (p LEADSTO q)Pr) =\n    (forall i:num. ((P i) LEADSTO q)Pr)
   (p:'a->bool) s
   p = (P:num->'a->bool)i
   i:num
   x:num
   (P:num->'a->bool)x
-  !s. ((?*) (P:num->'a->bool))s <=> (LUB(\\p. ?i. p = P i))s
+  forall s. ((?*) (P:num->'a->bool))s <=> (LUB(\\p. ?i. p = P i))s
   \\p. ?i. (p = (P:num->'a->bool)i)
-  !(P:num->'a->bool) q Pr.\n        (!i. ((P i) LEADSTO q)Pr) ==> (((?*)  P) LEADSTO q)Pr
+  forall(P:num->'a->bool) q Pr.\n        (forall i. ((P i) LEADSTO q)Pr) ==> (((?*)  P) LEADSTO q)Pr
   (p:'a->bool) s
   (p:'a->bool) = p2
   (p:'a->bool) s
   (p:'a->bool) = p1
   p2:'a->bool
   p1:'a->bool
-  !(p1:'a->bool) p2 s.\n        (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s
+  forall(p1:'a->bool) p2 s.\n        (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s
   s:'a
-  !R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)
-  !p (q:'a->bool) (P:('a->bool)->bool). (p = LUB P) /\\\n                    (!p. P p ==> R p q Pr) ==> R p q (Pr:('a->'a)list)
+  forall R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (forall p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)
+  forall p (q:'a->bool) (P:('a->bool)->bool). (p = LUB P) /\\\n                    (forall p. P p ==> R p q Pr) ==> R p q (Pr:('a->'a)list)
   \\p:'a->bool. (p = p1) \\/ (p = p2)
   q:'a->bool
   (p1:'a->bool) \\/* p2
-  !R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n     R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. P p ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==>\n            R p q Pr)
+  forall R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n     R p1 q Pr ==> R p2 q Pr ==>\n       (forall p q P. (p = LUB P) /\\ (forall p. P p ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (forall P. (p = LUB P) /\\ (forall p'. p' In P ==> R p' q Pr) ==>\n            R p q Pr)
   q:'a->bool
   p:'a->bool
-  !(p1:'a->bool) p2 q Pr.\n        (p1 LEADSTO q)Pr /\\ (p2 LEADSTO q)Pr ==>\n            ((p1 \\/* p2) LEADSTO q)Pr
+  forall(p1:'a->bool) p2 q Pr.\n        (p1 LEADSTO q)Pr /\\ (p2 LEADSTO q)Pr ==>\n            ((p1 \\/* p2) LEADSTO q)Pr
   (if ((p:'a->bool) = p') then T else F)
   p:'a->bool
-  !(p:'a->bool) s. (p s = (\\s. ?p'. (if (p = p') then T else F) /\\ p' s)s)
+  forall(p:'a->bool) s. (p s = (\\s. ?p'. (if (p = p') then T else F) /\\ p' s)s)
   :A
   p:'a->bool
-  !(p:'a->bool) p'. (if (p = p') then T else F) = (p = p')
+  forall(p:'a->bool) p'. (if (p = p') then T else F) = (p = p')
   :A
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n      ((p ENSURES q) Pr \\/\n      (?r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr) \\/\n      (?P:('a->bool)->bool. (p = LUB P) /\\ (!p. (p In P) ==> (p LEADSTO q)Pr)))\n     =\n      (p LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n      ((p ENSURES q) Pr \\/\n      (?r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr) \\/\n      (?P:('a->bool)->bool. (p = LUB P) /\\ (forall p. (p In P) ==> (p LEADSTO q)Pr)))\n     =\n      (p LEADSTO q)Pr
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n        (?P. (p = LUB P) /\\ (!p. p In P ==> (p LEADSTO q)Pr)))\n      =\n        (p LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n        (?P. (p = LUB P) /\\ (forall p. p In P ==> (p LEADSTO q)Pr)))\n      =\n        (p LEADSTO q)Pr
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (r ENSURES q)Pr) \\/\n        (?P. (p = LUB P) /\\ (!p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (r ENSURES q)Pr) \\/\n        (?P. (p = LUB P) /\\ (forall p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?P. (p = LUB P) /\\ (!p. p In P ==> (p LEADSTO q)Pr)))\n      =\n        (p LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (?P. (p = LUB P) /\\ (forall p. p In P ==> (p LEADSTO q)Pr)))\n      =\n        (p LEADSTO q)Pr
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n      (?P. (p = LUB P) /\\\n       (!p. p In P ==> (p LEADSTO q)Pr)) = (p LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n      (?P. (p = LUB P) /\\\n       (forall p. p In P ==> (p LEADSTO q)Pr)) = (p LEADSTO q)Pr
   p:'a->bool
-  !(p:'a->bool) q st Pr.\n        (?r. (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr)) =\n            (p LEADSTO q)(CONS st Pr)
-  !(p:'a->bool) st Pr. (p LEADSTO p) (CONS st Pr)
+  forall(p:'a->bool) q st Pr.\n        (?r. (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr)) =\n            (p LEADSTO q)(CONS st Pr)
+  forall(p:'a->bool) st Pr. (p LEADSTO p) (CONS st Pr)
   p:'a->bool
-  !(p:'a->bool) q st Pr.\n        (?r. (p LEADSTO r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))\n      = (p LEADSTO q)(CONS st Pr)
-  !(p:'a->bool) q st Pr.\n        (?r. (p LEADSTO r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))\n      =\n        (?r. (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))
+  forall(p:'a->bool) q st Pr.\n        (?r. (p LEADSTO r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))\n      = (p LEADSTO q)(CONS st Pr)
+  forall(p:'a->bool) q st Pr.\n        (?r. (p LEADSTO r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))\n      =\n        (?r. (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr))
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !r:'a->bool. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n        (?P. (p = LUB P) /\\ (!p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
+  forall r:'a->bool. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q) Pr \\/\n        (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n        (?P. (p = LUB P) /\\ (forall p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
   ((p:'a->bool) LEADSTO q)Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !r:'a->bool. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr
-  !(p:'a->bool) q Pr.\n       ((!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n       (?P. (p = LUB P) /\\ (!p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
-   (!p:'a->bool. p In P ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))\n       =\n        ((!p. p In P ==> (p LEADSTO q)Pr) /\\\n         (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr))
-  !(p:'a->bool) q.\n               ((p ENSURES q)Pr ==>\n               (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n               (!r.\n                 ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n                  (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr) ==>\n                     (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n               (!P. (p = LUB P) /\\\n                  (!p'. p' In P ==>\n                     (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr)) ==>\n              (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\\n                                     ((p LEADSTO q)Pr ==> X p q Pr)
+  forall r:'a->bool. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr
+  forall(p:'a->bool) q Pr.\n       ((forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr) \\/\n       (?P. (p = LUB P) /\\ (forall p. p In P ==> (p LEADSTO q)Pr))) =\n           (p LEADSTO q)Pr
+   (forall p:'a->bool. p In P ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))\n       =\n        ((forall p. p In P ==> (p LEADSTO q)Pr) /\\\n         (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr))
+  forall(p:'a->bool) q.\n               ((p ENSURES q)Pr ==>\n               (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n               (forall r.\n                 ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n                  (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr) ==>\n                     (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n               (forall P. (p = LUB P) /\\\n                  (forall p'. p' In P ==>\n                     (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr)) ==>\n              (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\\n                                     ((p LEADSTO q)Pr ==> X p q Pr)
   LUB (P:('a->bool)->bool)
   ((LUB P) LEADSTO (q:'a->bool))Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr ==> X p q Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr
-  !X Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n          (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     =\n      (!p q.\n         ((p ENSURES q)Pr ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n           (r LEADSTO q)Pr /\\\n           ((r LEADSTO q)Pr ==> X r q Pr) ==>\n           (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!P.\n           (p = LUB P) /\\\n           (!p'.\n             p' In P ==> (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr))\n                ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)))
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr ==> X p q Pr
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr
+  forall X Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n          (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (forall P.\n          (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n          (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     =\n      (forall p q.\n         ((p ENSURES q)Pr ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (forall r.\n           ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n           (r LEADSTO q)Pr /\\\n           ((r LEADSTO q)Pr ==> X r q Pr) ==>\n           (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (forall P.\n           (p = LUB P) /\\\n           (forall p'.\n             p' In P ==> (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr))\n                ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)))
   :bool
   :bool
   :bool
   :bool
   ((p:'a->bool) LEADSTO q)Pr
   \\(p:'a->bool) q Pr.\n           (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)
-  !X (p:'a->bool) q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n             (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n             (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> (((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
-  (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> X p q Pr) /\\\n         (!r.\n           (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n           (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n         (!P.\n           (!p'. p' In P ==> (p' LEADSTO q)Pr) /\\\n           (!p'. p' In P ==> (p' LEADSTO q)Pr ==> X p' q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n         ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)
+  forall X (p:'a->bool) q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n             (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n        (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n             (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> (((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
+  (forall(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> X p q Pr) /\\\n         (forall r.\n           (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n           (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n         (forall P.\n           (forall p'. p' In P ==> (p' LEADSTO q)Pr) /\\\n           (forall p'. p' In P ==> (p' LEADSTO q)Pr ==> X p' q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n         ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
-  !(p:'a->bool) P (q:'a->bool) Pr.\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\\n        (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
-  !(p:'a->bool) r q Pr.\n        (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n        (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> (p LEADSTO q)Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall(p:'a->bool) P (q:'a->bool) Pr.\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n        (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
+  forall(p:'a->bool) r q Pr.\n        (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n        (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> (p LEADSTO q)Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
   ((p:'a->bool) LEADSTO q)Pr
   \\ (p:'a->bool) q Pr. (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)
-  !X.\n      ((!(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (!p r q Pr. (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n                 (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n       (!(p:'a->bool) P q Pr. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n                  (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> (!p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
-  (!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)\n    =\n    ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr))
-  !p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool)p q Pr
+  forall X.\n      ((forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall p r q Pr. (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n                 (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n       (forall(p:'a->bool) P q Pr. (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n                  (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> (forall p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
+  (forall p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)\n    =\n    ((forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr))
+  forall p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool)p q Pr
   LUB (P:('a->bool)->bool)
-  !p. p In P\n         ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr
-  !X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r. ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n              ==> (p LEADSTO q)Pr /\\ X p q Pr))\n     =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n               ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))
+  forall p. p In P\n         ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr
+  forall X Pr.\n      (forall(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (forall r. ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (forall P. (p = LUB P) /\\ (forall p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n              ==> (p LEADSTO q)Pr /\\ X p q Pr))\n     =\n      (forall p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n               ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))
   :bool
   :bool
   :bool
   ((p:'a->bool) LEADSTO q)Pr
   \\(p:'a->bool) q Pr. (p LEADSTO q)Pr /\\ (X p q Pr)
-  !X (p:'a->bool) q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p LEADSTO r)Pr /\\ (X p r Pr) /\\ (r LEADSTO q)Pr /\\ (X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
+  forall X (p:'a->bool) q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p LEADSTO r)Pr /\\ (X p r Pr) /\\ (r LEADSTO q)Pr /\\ (X r q Pr)\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n        (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
   \\(p:'a->bool) q Pr. (p LEADSTO q)Pr /\\ (X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
-  !(p:'a->bool) P q Pr.\n        (!p:'a->bool.\n           p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n                   ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
-  !(p:'a->bool) r q Pr.\n                (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==>\n                   (p LEADSTO q)Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n     ((!(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n      (!p r q Pr. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n      (!(p:'a->bool) P q Pr.\n         (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> (!p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
+  forall(p:'a->bool) P q Pr.\n        (forall p:'a->bool.\n           p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr) ==>\n                   ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
+  forall(p:'a->bool) r q Pr.\n                (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==>\n                   (p LEADSTO q)Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n     ((forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n      (forall p r q Pr. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n            ==> ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n      (forall(p:'a->bool) P q Pr.\n         (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     ==> (forall p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
   \\(p:'a->bool) (q:'a->bool) (Pr:('a->'a)list). X p q Pr:bool
-  !X (p:'a->bool) q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (X p r Pr) /\\ (X r q Pr) ==> X p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p. p In P ==> X p q Pr) ==> X p q Pr))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
+  forall X (p:'a->bool) q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (X p r Pr) /\\ (X r q Pr) ==> X p q Pr) /\\\n        (forall P. (p = LUB P) /\\ (forall p. p In P ==> X p q Pr) ==> X p q Pr))\n     ==> ((p LEADSTO q)Pr ==> X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
   \\(p:'a->bool) (q:'a->bool) (Pr:('a->'a)list). X p q Pr:bool
   ((p:'a->bool) LEADSTO q)Pr
-  !(p:'a->bool) P (q:'a->bool) (Pr:('a->'a)list).\n               (p = LUB P) /\\ (!p. p In P ==> X p q Pr) ==> X p q Pr
-  !(p:'a->bool) (r:'a->bool) q (Pr:('a->'a)list).\n                X p r Pr /\\ X r q Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n      ((!(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (!p r q Pr. (X p r Pr) /\\ (X r q Pr) ==> (X p q Pr)) /\\\n       (!p P q Pr. (p = LUB P) /\\ (!p. p In P ==> X p q Pr) ==> X p q Pr))\n     ==> (!p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
-  !X Pr.\n      ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)) =\n       (!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)
-  !p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr
-  !p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr
-  !p. p In P\n                 ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr
-  !X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\\n              (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr))\n      =\n       (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                         ==> X p q Pr) /\\\n        (!P. (p = LUB P) /\\\n             (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                         ==> X p q Pr))
+  forall(p:'a->bool) P (q:'a->bool) (Pr:('a->'a)list).\n               (p = LUB P) /\\ (forall p. p In P ==> X p q Pr) ==> X p q Pr
+  forall(p:'a->bool) (r:'a->bool) q (Pr:('a->'a)list).\n                X p r Pr /\\ X r q Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n      ((forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall p r q Pr. (X p r Pr) /\\ (X r q Pr) ==> (X p q Pr)) /\\\n       (forall p P q Pr. (p = LUB P) /\\ (forall p. p In P ==> X p q Pr) ==> X p q Pr))\n     ==> (forall p q Pr. (p LEADSTO q)Pr ==> X p q Pr)
+  forall X Pr.\n      ((forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)) =\n       (forall p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)
+  forall p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr
+  forall p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr
+  forall p. p In P\n                 ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr
+  forall X Pr.\n      (forall(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (forall r.\n           ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (forall P. (p = LUB P) /\\\n              (forall p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr))\n      =\n       (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                         ==> X p q Pr) /\\\n        (forall P. (p = LUB P) /\\\n             (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                         ==> X p q Pr))
   :bool
   :bool
   ((p:'a->bool) LEADSTO q) Pr
   \\(p:'a->bool) q Pr. (p LEADSTO q)Pr /\\ (X p q Pr)
-  !X Pr.\n      (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (!P. (p = LUB P) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     ==> (!p q. (p LEADSTO q) Pr ==> X p q Pr)
-  !p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
+  forall X Pr.\n      (forall(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (forall P. (p = LUB P) /\\\n            (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     ==> (forall p q. (p LEADSTO q) Pr ==> X p q Pr)
+  forall p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr
   LUB (P:('a->bool)->bool)
-  !X Pr.\n     (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (!P. (p = LUB P) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     =\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n          X(LUB P)q Pr))
+  forall X Pr.\n     (forall(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (forall P. (p = LUB P) /\\\n            (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     =\n     (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==>\n          X p q Pr) /\\\n        (forall P.\n          (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr) ==>\n          X(LUB P)q Pr))
   :bool
-  !X Pr.\n      (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X (LUB P) q Pr))\n     ==> (!p q. (p LEADSTO q) Pr ==> X p q Pr)
-  !s:'a. p s ==> q s
+  forall X Pr.\n      (forall(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                        ==> X (LUB P) q Pr))\n     ==> (forall p q. (p LEADSTO q) Pr ==> X p q Pr)
+  forall s:'a. p s ==> q s
   Pr:('a->'a)list
   st:'a->'a
   q:'a->bool
@@ -5902,7 +5902,7 @@ Unity/mk_leadsto quotations (977):
   CONS (st:'a->'a) Pr
   q:'a->bool
   p:'a->bool
-  !(p:'a->bool) q st Pr. (!s. p s ==> q s) ==> (p LEADSTO q) (CONS st Pr)
+  forall(p:'a->bool) q st Pr. (forall s. p s ==> q s) ==> (p LEADSTO q) (CONS st Pr)
   CONS (st:'a->'a) Pr
   (q:'a->bool) \\/* q'
   q:'a->bool
@@ -5913,7 +5913,7 @@ Unity/mk_leadsto quotations (977):
   q:'a->bool
   q':'a->bool
   q:'a->bool
-  !(p:'a->bool) q q' st Pr.\n       (p LEADSTO q)(CONS st Pr) ==> (p LEADSTO (q \\/* q'))(CONS st Pr)
+  forall(p:'a->bool) q q' st Pr.\n       (p LEADSTO q)(CONS st Pr) ==> (p LEADSTO (q \\/* q'))(CONS st Pr)
   CONS (st:'a->'a) Pr
   (q:'a->bool) \\/* q'
   p':'a->bool
@@ -5924,7 +5924,7 @@ Unity/mk_leadsto quotations (977):
   q:'a->bool
   q':'a->bool
   p':'a->bool
-  !(p:'a->bool) q p' q' st Pr.\n      (p LEADSTO q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr)\n          ==> ((p \\/* p') LEADSTO (q \\/* q'))(CONS st Pr)
+  forall(p:'a->bool) q p' q' st Pr.\n      (p LEADSTO q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr)\n          ==> ((p \\/* p') LEADSTO (q \\/* q'))(CONS st Pr)
   (((b:'a->bool) \\/* q) LEADSTO (r \\/* q))(CONS st Pr)
   ((p:'a->bool) LEADSTO (q \\/* b))(CONS st Pr)
   CONS (st:'a->'a) Pr
@@ -5940,17 +5940,17 @@ Unity/mk_leadsto quotations (977):
   r:'a->bool
   b:'a->bool
   q:'a->bool
-  !(p:'a->bool) q b r st Pr.\n       (p LEADSTO (q \\/* b))(CONS st Pr) /\\ (b LEADSTO r)(CONS st Pr)\n           ==> (p LEADSTO (q \\/* r))(CONS st Pr)
+  forall(p:'a->bool) q b r st Pr.\n       (p LEADSTO (q \\/* b))(CONS st Pr) /\\ (b LEADSTO r)(CONS st Pr)\n           ==> (p LEADSTO (q \\/* r))(CONS st Pr)
   \\(p:'a->bool) q Pr.\n        (r UNLESS b) Pr ==> ((p  /\\*  r) LEADSTO ((q  /\\*  r) \\/* b)) Pr
   Pr:('a->'a)list
   CONS (st:'a->'a) Pr
-  (!p'':'a->bool. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) ==>\n       (!p''. p'' In P ==>\n        (p'' LEADSTO q')(CONS st Pr) ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (!p''. p'' In P ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
+  (forall p'':'a->bool. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) ==>\n       (forall p''. p'' In P ==>\n        (p'' LEADSTO q')(CONS st Pr) ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (forall p''. p'' In P ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
   (LUB P):'a->bool
   (LUB P)  /\\*  (r:'a->bool)
   r:'a->bool
   LUB (P:('a->bool)->bool)
-  !(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p  /\\*  r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P)  /\\*  r) LEADSTO q)(CONS st Pr)
-  !(p:'a->bool) P r.\n      p In (\\p''. ?p'. p' In P /\\ (p'' = p'  /\\*  r))\n     =\n      (?p'. p' In P /\\ (p = p'  /\\*  r))
+  forall(P:('a->bool)->bool) r q st Pr.\n    (forall p. p In P ==> ((p  /\\*  r) LEADSTO q)(CONS st Pr)) ==>\n    (forall p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P)  /\\*  r) LEADSTO q)(CONS st Pr)
+  forall(p:'a->bool) P r.\n      p In (\\p''. ?p'. p' In P /\\ (p'' = p'  /\\*  r))\n     =\n      (?p'. p' In P /\\ (p = p'  /\\*  r))
   (p:'a->bool) s
   p = (\\s:'a. p' s /\\ r s)
   (p:'a->bool) s
@@ -5959,14 +5959,14 @@ Unity/mk_leadsto quotations (977):
   p':'a->bool
   p:'a->bool
   \\s:'a. p s /\\ r s
-  !s:'a.\n      ((LUB P)  /\\*  r)s =\n      (LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r)))s
-  !(P:('a->bool)->bool) r q' b st Pr.\n    (!p''. p'' In P ==> ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n      ==>\n        (!p. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n                 (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
+  forall s:'a.\n      ((LUB P)  /\\*  r)s =\n      (LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r)))s
+  forall(P:('a->bool)->bool) r q' b st Pr.\n    (forall p''. p'' In P ==> ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n      ==>\n        (forall p. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n                 (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
   :bool
-  (!p:'a->bool. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n       (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r))) LEADSTO ((q'  /\\*  r) \\/* b))\n        (CONS st Pr)
+  (forall p:'a->bool. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n       (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r))) LEADSTO ((q'  /\\*  r) \\/* b))\n        (CONS st Pr)
   CONS (st:'a->'a) Pr
   (q'  /\\*  r) \\/* (b:'a->bool)
   \\p:'a->bool. ?p'. p' In P /\\ (p = (p'  /\\*  r))
-  !(P:('a->bool)->bool) r q' b st Pr.\n       (!p''.\n        p'' In P ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n           ==> ((((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
+  forall(P:('a->bool)->bool) r q' b st Pr.\n       (forall p''.\n        p'' In P ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n           ==> ((((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
   ((r:'a->bool) UNLESS b)(CONS st Pr)
   (((r':'a->bool)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)
   (((p':'a->bool)  /\\*  r) LEADSTO ((r'  /\\*  r) \\/* b))(CONS st Pr)
@@ -5985,7 +5985,7 @@ Unity/mk_leadsto quotations (977):
   (CONS st Pr):('a->'a)list
   ((q':'a->bool)  /\\*  r) \\/* b
   (r:'a->bool)  /\\*  p'
-  !s:'a. ((r  /\\*  q') \\/* ((p'  /\\*  b) \\/* (b  /\\*  q')))s ==>\n                          ((q'  /\\*  r) \\/* b)s
+  forall s:'a. ((r  /\\*  q') \\/* ((p'  /\\*  b) \\/* (b  /\\*  q')))s ==>\n                          ((q'  /\\*  r) \\/* b)s
   (((r:'a->bool)  /\\*  p') ENSURES\n                  (((r  /\\*  q') \\/* (p'  /\\*  b)) \\/* (b  /\\*  q')))(CONS st Pr)
   (CONS st Pr):('a->'a)list
   ((q':'a->bool)  /\\*  r) \\/* b
@@ -5995,21 +5995,21 @@ Unity/mk_leadsto quotations (977):
   b:'a->bool
   q':'a->bool
   p':'a->bool
-  !(p':'a->bool) q' r b st Pr.\n     ((p' ENSURES q')(CONS st Pr) ==>\n      (r UNLESS b)(CONS st Pr) ==>\n      ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!r'.\n       (p' LEADSTO r')(CONS st Pr) /\\\n       ((p' LEADSTO r')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((p'  /\\*  r) LEADSTO ((r'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n       (r' LEADSTO q')(CONS st Pr) /\\\n       ((r' LEADSTO q')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((r'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (p' LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!P.\n       (!p''. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) /\\\n       (!p''.\n         p'' In P ==>\n         (p'' LEADSTO q')(CONS st Pr) ==>\n         (r UNLESS b)(CONS st Pr) ==>\n         ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB P) LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       (((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
+  forall(p':'a->bool) q' r b st Pr.\n     ((p' ENSURES q')(CONS st Pr) ==>\n      (r UNLESS b)(CONS st Pr) ==>\n      ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (forall r'.\n       (p' LEADSTO r')(CONS st Pr) /\\\n       ((p' LEADSTO r')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((p'  /\\*  r) LEADSTO ((r'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n       (r' LEADSTO q')(CONS st Pr) /\\\n       ((r' LEADSTO q')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((r'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (p' LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (forall P.\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) /\\\n       (forall p''.\n         p'' In P ==>\n         (p'' LEADSTO q')(CONS st Pr) ==>\n         (r UNLESS b)(CONS st Pr) ==>\n         ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB P) LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       (((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))
   q':'a->bool
   p':'a->bool
-  !(p:'a->bool) q r b st Pr.\n    (p LEADSTO q)(CONS st Pr) /\\ (r UNLESS b)(CONS st Pr)\n      ==> ((p  /\\*  r) LEADSTO ((q  /\\*  r) \\/* b))(CONS st Pr)
-  \\(p:'a->bool) (q:'a->bool) (Pr:('a->'a)list). (q = False) ==> (!s. Not p s)
+  forall(p:'a->bool) q r b st Pr.\n    (p LEADSTO q)(CONS st Pr) /\\ (r UNLESS b)(CONS st Pr)\n      ==> ((p  /\\*  r) LEADSTO ((q  /\\*  r) \\/* b))(CONS st Pr)
+  \\(p:'a->bool) (q:'a->bool) (Pr:('a->'a)list). (q = False) ==> (forall s. Not p s)
   Pr:('a->'a)list
   CONS (st:'a->'a) Pr
-  !(r:'a->bool). (!s. Not r s) ==> (!s. r s = False s)
-  !p:'a->bool.\n    (p' = (\\s:'a->'a. ?p. P p /\\ p s)) ==> (!s. p' s = ?p. P p /\\ p s)
+  forall(r:'a->bool). (forall s. Not r s) ==> (forall s. r s = False s)
+  forall p:'a->bool.\n    (p' = (\\s:'a->'a. ?p. P p /\\ p s)) ==> (forall s. p' s = ?p. P p /\\ p s)
   (p':'a->bool)s
-  !p'':'a->bool. P p''\n            ==> ((q':'a->bool) = \\s. F) ==> (!s. ~p'' s)
+  forall p'':'a->bool. P p''\n            ==> ((q':'a->bool) = \\s. F) ==> (forall s. ~p'' s)
   (q':'a->bool) = \\s. F
   ((p':'a->bool) ENSURES q')(CONS st Pr)
   (q':'a->bool) = False
-  !(p':'a->bool) (q':'a->bool).\n     ((p' ENSURES q')(CONS st Pr) ==> (q' = False) ==> (!s. Not p' s)) /\\\n     (!r:'a->bool.\n       ((r = False) ==> (!s. Not p' s)) /\\\n       ((q' = False) ==> (!s. Not r s)) ==>\n       (q' = False) ==> (!s. Not p' s)) /\\\n     (!P:('a->bool)->bool.\n       (p' = LUB P) /\\\n       (!p''. p'' In P ==> (q' = False) ==> (!s. Not p'' s)) ==>\n       (q' = False) ==> (!s. Not p' s))
+  forall(p':'a->bool) (q':'a->bool).\n     ((p' ENSURES q')(CONS st Pr) ==> (q' = False) ==> (forall s. Not p' s)) /\\\n     (forall r:'a->bool.\n       ((r = False) ==> (forall s. Not p' s)) /\\\n       ((q' = False) ==> (forall s. Not r s)) ==>\n       (q' = False) ==> (forall s. Not p' s)) /\\\n     (forall P:('a->bool)->bool.\n       (p' = LUB P) /\\\n       (forall p''. p'' In P ==> (q' = False) ==> (forall s. Not p'' s)) ==>\n       (q' = False) ==> (forall s. Not p' s))
   :bool
   :bool
   :bool
@@ -6019,16 +6019,16 @@ Unity/mk_leadsto quotations (977):
   :bool
   :bool
   False:'a->bool
-  !(p:'a->bool) st Pr.\n       (p LEADSTO False)(CONS st Pr)\n          ==> (?q. (q = False) /\\ (p LEADSTO q)(CONS st Pr))
-  !(p:'a->bool) st Pr. (p LEADSTO False)(CONS st Pr) ==> (!s. Not p s)
+  forall(p:'a->bool) st Pr.\n       (p LEADSTO False)(CONS st Pr)\n          ==> (?q. (q = False) /\\ (p LEADSTO q)(CONS st Pr))
+  forall(p:'a->bool) st Pr. (p LEADSTO False)(CONS st Pr) ==> (forall s. Not p s)
   ((((p:'a->bool)  /\\*  b) \\/* (p  /\\*  (Not b))) LEADSTO q)Pr
   Pr:('a->'a)list
   q:'a->bool
   (p:'a->bool)  /\\*  (Not b)
   (p:'a->bool)  /\\*  b
-  !(p:'a->bool) b q Pr.\n       ((p  /\\*  b) LEADSTO q) Pr /\\ ((p  /\\*  (Not b)) LEADSTO q) Pr\n           ==> (p LEADSTO q) Pr
+  forall(p:'a->bool) b q Pr.\n       ((p  /\\*  b) LEADSTO q) Pr /\\ ((p  /\\*  (Not b)) LEADSTO q) Pr\n           ==> (p LEADSTO q) Pr
   (((p:'a->bool)  /\\*  r) LEADSTO ((q  /\\*  r) \\/* False))(CONS st Pr)
-  !(p:'a->bool) q r st Pr.\n       (p LEADSTO q)(CONS st Pr) /\\ r STABLE (CONS st Pr)\n            ==> ((p  /\\*  r) LEADSTO (q  /\\*  r))(CONS st Pr)
+  forall(p:'a->bool) q r st Pr.\n       (p LEADSTO q)(CONS st Pr) /\\ r STABLE (CONS st Pr)\n            ==> ((p  /\\*  r) LEADSTO (q  /\\*  r))(CONS st Pr)
   q:'a->bool
   p:'a->bool
   Pr:('a->'a)list
@@ -6039,9 +6039,9 @@ Unity/mk_leadsto quotations (977):
   (((p:'a->bool) /\\* (Not q)) LEADSTO\n                 ((q /\\* (Not q)) \\/* q))(CONS st Pr)
   CONS (st:'a->'a) Pr
   Not (q:'a->bool)
-  !(p:'a->bool) q st Pr.\n        (p LEADSTO q)(CONS st  Pr) = ((p  /\\*  (Not q)) LEADSTO q)(CONS st  Pr)
+  forall(p:'a->bool) q st Pr.\n        (p LEADSTO q)(CONS st  Pr) = ((p  /\\*  (Not q)) LEADSTO q)(CONS st  Pr)
   (((p:'a->bool) /\\* (Not b)) LEADSTO (q \\/* q))(CONS st Pr)
-  !(p:'a->bool) b q st Pr.\n     ((p /\\* b) LEADSTO q)(CONS st Pr) /\\\n     ((p /\\* (Not b)) LEADSTO ((p /\\* b) \\/* q))(CONS st Pr)\n          ==> (p LEADSTO q)(CONS st Pr)
+  forall(p:'a->bool) b q st Pr.\n     ((p /\\* b) LEADSTO q)(CONS st Pr) /\\\n     ((p /\\* (Not b)) LEADSTO ((p /\\* b) \\/* q))(CONS st Pr)\n          ==> (p LEADSTO q)(CONS st Pr)
   Not (q:'a->bool)
   r:'a->bool
   (Not (q:'a->bool)) \\/* r
@@ -6050,60 +6050,60 @@ Unity/mk_leadsto quotations (977):
   ((((p:'a->bool) /\\* q) /\\* (Not r)) LEADSTO ((r /\\* (Not r)) \\/* r))\n                                               (CONS st Pr)
   CONS (st:'a->'a) Pr
   Not (r:'a->bool)
-  !(p:'a->bool) q r st Pr.\n          ((p /\\* q) LEADSTO r)(CONS st Pr)\n               ==> (p LEADSTO ((Not q) \\/* r))(CONS st Pr)
+  forall(p:'a->bool) q r st Pr.\n          ((p /\\* q) LEADSTO r)(CONS st Pr)\n               ==> (p LEADSTO ((Not q) \\/* r))(CONS st Pr)
   (((p:'a->bool) /\\* r) LEADSTO ((q /\\* r) \\/* (q /\\* r)))(CONS st Pr)
-  !(p:'a->bool) q r st Pr.\n       (p LEADSTO q)(CONS st Pr) /\\ (r UNLESS (q /\\* r))(CONS st Pr)\n            ==> ((p /\\* r) LEADSTO (q /\\* r))(CONS st Pr)
-  !s:'a. Not (r /\\* (p /\\* (Not q)))s
+  forall(p:'a->bool) q r st Pr.\n       (p LEADSTO q)(CONS st Pr) /\\ (r UNLESS (q /\\* r))(CONS st Pr)\n            ==> ((p /\\* r) LEADSTO (q /\\* r))(CONS st Pr)
+  forall s:'a. Not (r /\\* (p /\\* (Not q)))s
   ((((p:'a->bool) /\\* (Not q)) /\\* r) LEADSTO (False /\\* r))\n                                            (CONS st Pr)
   (((p:'a->bool) /\\* (r /\\* (Not q))) LEADSTO\n           (q /\\* (r /\\* (Not q))))(CONS st Pr)
-  !(p:'a->bool) q r st Pr.\n     (p LEADSTO q)(CONS st Pr) /\\ (r /\\* (Not q)) STABLE (CONS st Pr)\n          ==> (!s. (p /\\* r)s ==> q s)
+  forall(p:'a->bool) q r st Pr.\n     (p LEADSTO q)(CONS st Pr) /\\ (r /\\* (Not q)) STABLE (CONS st Pr)\n          ==> (forall s. (p /\\* r)s ==> q s)
   Pr:('a->'a)list
   st:'a->'a
   p:'a->bool
   (p:'a->bool) /\\* q
   q:'a->bool
   p:'a->bool
-  !(p:'a->bool) r q st Pr. (p LEADSTO r)(CONS st Pr)\n                   ==> ((p /\\* q) LEADSTO r)(CONS st Pr)
-  !st Pr. ((q:'a->bool) LEADSTO r)(CONS st Pr)
-  !(p:'a->bool) q r st Pr.\n        (p LEADSTO q)(CONS st Pr) /\\ (!s. q s ==> r s)\n              ==> (p LEADSTO r)(CONS st Pr)
-  !i. (((P:num->'a->bool) i) LEADSTO q)Pr
+  forall(p:'a->bool) r q st Pr. (p LEADSTO r)(CONS st Pr)\n                   ==> ((p /\\* q) LEADSTO r)(CONS st Pr)
+  forall st Pr. ((q:'a->bool) LEADSTO r)(CONS st Pr)
+  forall(p:'a->bool) q r st Pr.\n        (p LEADSTO q)(CONS st Pr) /\\ (forall s. q s ==> r s)\n              ==> (p LEADSTO r)(CONS st Pr)
+  forall i. (((P:num->'a->bool) i) LEADSTO q)Pr
   SUC i
   (( \\<=/*  (P:num->'a->bool) i) LEADSTO q)Pr
   Pr:('a->'a)list
   q:'a->bool
   (P:num->'a->bool) (SUC i)
    \\<=/*  (P:num->'a->bool) i
-  !(P:num->'a->bool) q Pr.\n      (!i. ((P i) LEADSTO q)Pr) ==> (!i. (( \\<=/*  P i) LEADSTO q)Pr)
-  !(p:'a->bool) q.\n        ((p ENSURES q)(CONS st Pr) ==> R p q(CONS st Pr)) /\\\n        (!r. R p r(CONS st Pr) /\\ R r q(CONS st Pr) ==> R p q(CONS st Pr)) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q(CONS st Pr)) ==>\n                           R p q(CONS st Pr))
+  forall(P:num->'a->bool) q Pr.\n      (forall i. ((P i) LEADSTO q)Pr) ==> (forall i. (( \\<=/*  P i) LEADSTO q)Pr)
+  forall(p:'a->bool) q.\n        ((p ENSURES q)(CONS st Pr) ==> R p q(CONS st Pr)) /\\\n        (forall r. R p r(CONS st Pr) /\\ R r q(CONS st Pr) ==> R p q(CONS st Pr)) /\\\n        (forall P. (p = LUB P) /\\ (forall p'. p' In P ==> R p' q(CONS st Pr)) ==>\n                           R p q(CONS st Pr))
   p:'a->bool
   False:'a->bool
-  !(p:'a->bool) st Pr. (False LEADSTO p) (CONS st Pr)
-  !i. (((P:num->'a->bool) i) LEADSTO q)(CONS st Pr)
+  forall(p:'a->bool) st Pr. (False LEADSTO p) (CONS st Pr)
+  forall i. (((P:num->'a->bool) i) LEADSTO q)(CONS st Pr)
   i:num
   (( \\</*  (P:num->'a->bool) i) LEADSTO q)(CONS st Pr)
   CONS (st:'a->'a) Pr
   q:'a->bool
   (P:num->'a->bool) i
    \\</*  (P:num->'a->bool) i
-  !(P:num->'a->bool) q st Pr.\n      (!i. ((P i) LEADSTO q)(CONS st Pr))\n             ==> (!i. (( \\</*  P i) LEADSTO q)(CONS st Pr))
-  LEADSTO2Fn R = \\(p:'a->bool) q Pr.\n     (p ENSURES q) Pr \\/\n     (?r. (p ENSURES r) Pr /\\ R r q Pr) \\/\n     (?P. (p = LUB P) /\\ (!p. p In P ==> R p q Pr))
-  LEADSTO2 (p:'a->bool) q Pr =\n      !R. (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==> R p q Pr
-  !R (p:'a->bool) (q:'a->bool) (Pr:('a->'a)list).\n       (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==>\n          (!p q. (\\p q Pr. !R. (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr)\n                           ==> R p q Pr) p q Pr\n                   ==> R p q Pr)
+  forall(P:num->'a->bool) q st Pr.\n      (forall i. ((P i) LEADSTO q)(CONS st Pr))\n             ==> (forall i. (( \\</*  P i) LEADSTO q)(CONS st Pr))
+  LEADSTO2Fn R = \\(p:'a->bool) q Pr.\n     (p ENSURES q) Pr \\/\n     (?r. (p ENSURES r) Pr /\\ R r q Pr) \\/\n     (?P. (p = LUB P) /\\ (forall p. p In P ==> R p q Pr))
+  LEADSTO2 (p:'a->bool) q Pr =\n      forall R. (forall p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==> R p q Pr
+  forall R (p:'a->bool) (q:'a->bool) (Pr:('a->'a)list).\n       (forall p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==>\n          (forall p q. (\\p q Pr. forall R. (forall p q. LEADSTO2Fn R p q Pr ==> R p q Pr)\n                           ==> R p q Pr) p q Pr\n                   ==> R p q Pr)
   P:('a->bool)->bool
   r:'a->bool
-  !R1 R2 (Pr:('a->'a)list).\n      (!p q. R1 p q Pr ==> R2 p q Pr)\n            ==> (!p q. LEADSTO2Fn R1 p q Pr ==> LEADSTO2Fn R2 p q Pr)
+  forall R1 R2 (Pr:('a->'a)list).\n      (forall p q. R1 p q Pr ==> R2 p q Pr)\n            ==> (forall p q. LEADSTO2Fn R1 p q Pr ==> LEADSTO2Fn R2 p q Pr)
   :bool
   :bool
   Pr:('a->'a)list
   q:'a->bool
   p:'a->bool
-  LEADSTO2Fn (\\(p:'a->bool) q Pr.\n        !R. (!p' q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n                ==> R p q Pr) p q Pr
-  !(p':'a->bool) q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr
+  LEADSTO2Fn (\\(p:'a->bool) q Pr.\n        forall R. (forall p' q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n                ==> R p q Pr) p q Pr
+  forall(p':'a->bool) q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr
   R:('a->bool)->('a->bool)->(('a->'a)list)->bool
-  \\(p:'a->bool) q Pr. !R. (!p' q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n            ==> R p q Pr
+  \\(p:'a->bool) q Pr. forall R. (forall p' q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n            ==> R p q Pr
   R2:('a->bool)->('a->bool)->(('a->'a)list)->bool
   R1:('a->bool)->('a->bool)->(('a->'a)list)->bool
-  !(p:'a->bool) q Pr.\n       LEADSTO2Fn LEADSTO2 p q Pr ==> LEADSTO2 p q Pr
+  forall(p:'a->bool) q Pr.\n       LEADSTO2Fn LEADSTO2 p q Pr ==> LEADSTO2 p q Pr
   LEADSTO2 (p:'a->bool) q Pr
   LEADSTO2Fn (LEADSTO2:('a->bool)->('a->bool)->(('a->'a)list)->bool)
   q:'a->bool
@@ -6111,124 +6111,124 @@ Unity/mk_leadsto quotations (977):
   Pr:('a->'a)list
   LEADSTO2:('a->bool)->('a->bool)->(('a->'a)list)->bool
   \\p q Pr. LEADSTO2Fn LEADSTO2 (p:'a->bool) q Pr
-  !(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> LEADSTO2Fn LEADSTO2 p q Pr
-  !(p:'a->bool) q Pr. LEADSTO2 p q Pr = LEADSTO2Fn LEADSTO2 p q Pr
+  forall(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> LEADSTO2Fn LEADSTO2 p q Pr
+  forall(p:'a->bool) q Pr. LEADSTO2 p q Pr = LEADSTO2Fn LEADSTO2 p q Pr
   Pr:('a->'a)list
   q:'a->bool
   p:'a->bool
   LEADSTO2Fn R (p:'a->bool) q Pr
   R = LEADSTO2Fn (R:('a->bool)->('a->bool)->(('a->'a)list)->bool)
-  !R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)
+  forall R. (R = LEADSTO2Fn R)\n           ==> (forall(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)
   q:'a->bool
   p:'a->bool
-  !R. (!(p':'a->bool) q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n              ==> R p q Pr
-  !R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> R p q Pr)
+  forall R. (forall(p':'a->bool) q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n              ==> R p q Pr
+  forall R. (R = LEADSTO2Fn R)\n           ==> (forall(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> R p q Pr)
   :bool
-  !(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr
+  forall(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr
   q:'a->bool
   p:'a->bool
-  !R. (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)\n             ==> (!p q Pr. LEADSTO2 p q Pr ==> R p q Pr)
-  LEADSTO2Fam R Pr =\n     !(p:'a->bool) (q:'a->bool).\n         ((p ENSURES q) Pr                 ==> R p q Pr) /\\\n         (!r. (p ENSURES r) Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (!P. (!p. p In P ==> R p q Pr)    ==> R (LUB P) q Pr)
-  !p. (p = LUB (P:('a->bool)->bool)) ==>\n             (R:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr
+  forall R. (forall(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)\n             ==> (forall p q Pr. LEADSTO2 p q Pr ==> R p q Pr)
+  LEADSTO2Fam R Pr =\n     forall(p:'a->bool) (q:'a->bool).\n         ((p ENSURES q) Pr                 ==> R p q Pr) /\\\n         (forall r. (p ENSURES r) Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (forall P. (forall p. p In P ==> R p q Pr)    ==> R (LUB P) q Pr)
+  forall p. (p = LUB (P:('a->bool)->bool)) ==>\n             (R:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr
   LUB (P:('a->bool)->bool)
-  !R Pr.\n      (!(p:'a->bool) q. LEADSTO2Fn R p q Pr ==> R p q Pr) = LEADSTO2Fam R Pr
+  forall R Pr.\n      (forall(p:'a->bool) q. LEADSTO2Fn R p q Pr ==> R p q Pr) = LEADSTO2Fam R Pr
   :bool
-  !(p:'a->bool) q Pr. (p ENSURES q) Pr ==> LEADSTO2 p q Pr
-  !(p:'a->bool) r q Pr.\n        (p ENSURES r) Pr /\\ (LEADSTO2 r q Pr) ==> (LEADSTO2 p q Pr)
-  (!p:'a->bool. p In P ==>\n     (!R.\n       (!p q.\n         ((p ENSURES q)Pr ==> R p q Pr) /\\\n         (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n       R p q Pr)) ==>\n   (!p. p In P ==>\n     (!p q.\n       ((p ENSURES q)Pr ==> R p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n       (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n     R p q Pr)
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)
-  !(P:('a->bool)->bool) q Pr.\n       (!p. p In P ==> LEADSTO2 p q Pr) ==> LEADSTO2 (LUB P) q Pr
-  !(P:('a->bool)->bool) q Pr.\n       (p = LUB P) /\\ (!p. p In P ==> LEADSTO2 p q Pr)\n             ==> LEADSTO2 p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q) Pr ==> LEADSTO2 p q Pr
+  forall(p:'a->bool) r q Pr.\n        (p ENSURES r) Pr /\\ (LEADSTO2 r q Pr) ==> (LEADSTO2 p q Pr)
+  (forall p:'a->bool. p In P ==>\n     (forall R.\n       (forall p q.\n         ((p ENSURES q)Pr ==> R p q Pr) /\\\n         (forall r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (forall P. (forall p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n       R p q Pr)) ==>\n   (forall p. p In P ==>\n     (forall p q.\n       ((p ENSURES q)Pr ==> R p q Pr) /\\\n       (forall r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n       (forall P. (forall p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n     R p q Pr)
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (forall r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (forall P. (forall p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)
+  forall(P:('a->bool)->bool) q Pr.\n       (forall p. p In P ==> LEADSTO2 p q Pr) ==> LEADSTO2 (LUB P) q Pr
+  forall(P:('a->bool)->bool) q Pr.\n       (p = LUB P) /\\ (forall p. p In P ==> LEADSTO2 p q Pr)\n             ==> LEADSTO2 p q Pr
   (p:'a->bool) s
   (p:'a->bool) = p2
   (p:'a->bool) s
   (p:'a->bool) = p1
   p2:'a->bool
   p1:'a->bool
-  !(p1:'a->bool) p2 s. (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s
+  forall(p1:'a->bool) p2 s. (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s
   s:'a
-  !(R:('a->bool)->('a->bool)->(('a->'a)list)->bool) Pr.\n     (!p' q'.\n        (p' ENSURES q') Pr \\/ (?r. (p' ENSURES r) Pr /\\ R r q' Pr) \\/\n        (?P. (p' = LUB P) /\\ (!p. p In P ==> R p q' Pr)) ==> R p' q' Pr)\n      ==> (!p q P. ((p = LUB P) /\\ (!p. p In P ==> R p q Pr)) ==> R p q Pr)
+  forall(R:('a->bool)->('a->bool)->(('a->'a)list)->bool) Pr.\n     (forall p' q'.\n        (p' ENSURES q') Pr \\/ (?r. (p' ENSURES r) Pr /\\ R r q' Pr) \\/\n        (?P. (p' = LUB P) /\\ (forall p. p In P ==> R p q' Pr)) ==> R p' q' Pr)\n      ==> (forall p q P. ((p = LUB P) /\\ (forall p. p In P ==> R p q Pr)) ==> R p q Pr)
   :bool
-  !R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)
-  !p (q:'a->bool) (P:('a->bool)->bool). (p = LUB P) /\\\n                     (!p. P p ==> R p q Pr) ==> R p q (Pr:('a->'a)list)
+  forall R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (forall p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)
+  forall p (q:'a->bool) (P:('a->bool)->bool). (p = LUB P) /\\\n                     (forall p. P p ==> R p q Pr) ==> R p q (Pr:('a->'a)list)
   \\p:'a->bool. (p = p1) \\/ (p = p2)
   q:'a->bool
   (p1:'a->bool) \\/* p2
-  !R (p1:'a->bool) (p2:'a->bool) (q:'a->bool)  (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. p In P ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr
-  !(p1:'a->bool) p2 q Pr.\n       (LEADSTO2 p1 q Pr) /\\ (LEADSTO2 p2 q Pr) ==> LEADSTO2 (p1 \\/* p2) q Pr
+  forall R (p1:'a->bool) (p2:'a->bool) (q:'a->bool)  (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (forall p q P. (p = LUB P) /\\ (forall p. p In P ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr
+  forall(p1:'a->bool) p2 q Pr.\n       (LEADSTO2 p1 q Pr) /\\ (LEADSTO2 p2 q Pr) ==> LEADSTO2 (p1 \\/* p2) q Pr
   LEADSTO2 (p:'a->bool) q Pr
   \\(p:'a->bool) (q:'a->bool) (Pr:('a->'a)list). X p q Pr:bool
-  !X (p:'a->bool) q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p ENSURES r)Pr /\\ X r q Pr ==> (X p q Pr)) /\\\n        (!P. (!p. p In P ==> X p q Pr) ==> (X (LUB P) q Pr)))\n     ==> ((LEADSTO2 p q Pr) ==> X p q Pr)
+  forall X (p:'a->bool) q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p ENSURES r)Pr /\\ X r q Pr ==> (X p q Pr)) /\\\n        (forall P. (forall p. p In P ==> X p q Pr) ==> (X (LUB P) q Pr)))\n     ==> ((LEADSTO2 p q Pr) ==> X p q Pr)
   Pr:('a->'a)list
   q:'a->bool
   p:'a->bool
-  \\p q Pr. !r:'a->bool. LEADSTO2 q r Pr ==> LEADSTO2 p r Pr
-  !(p':'a->bool) q'.\n     ((p' ENSURES q')Pr ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))
-  !(p':'a->bool) q'.\n     (!r.\n       (p' ENSURES r)Pr /\\ (!r'. LEADSTO2 q' r' Pr ==> LEADSTO2 r r' Pr) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))
-  !(q':'a->bool) r Pr.\n     LEADSTO2 q' r Pr ==>\n      (!p'':'a->bool. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr))\n          ==> (!p'':'a->bool. p'' In P ==> LEADSTO2 p'' r Pr)
-  !(p':'a->bool) q'.\n      (!P:('a->bool)->bool.\n       (!p''. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr)) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2(LUB P)r Pr))
-  !(p:'a->bool) r q Pr.\n       (LEADSTO2 p r Pr) /\\ (LEADSTO2 r q Pr) ==> (LEADSTO2 p q Pr)
+  \\p q Pr. forall r:'a->bool. LEADSTO2 q r Pr ==> LEADSTO2 p r Pr
+  forall(p':'a->bool) q'.\n     ((p' ENSURES q')Pr ==> (forall r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))
+  forall(p':'a->bool) q'.\n     (forall r.\n       (p' ENSURES r)Pr /\\ (forall r'. LEADSTO2 q' r' Pr ==> LEADSTO2 r r' Pr) ==>\n       (forall r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))
+  forall(q':'a->bool) r Pr.\n     LEADSTO2 q' r Pr ==>\n      (forall p'':'a->bool. p'' In P ==> (forall r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr))\n          ==> (forall p'':'a->bool. p'' In P ==> LEADSTO2 p'' r Pr)
+  forall(p':'a->bool) q'.\n      (forall P:('a->bool)->bool.\n       (forall p''. p'' In P ==> (forall r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr)) ==>\n       (forall r. LEADSTO2 q' r Pr ==> LEADSTO2(LUB P)r Pr))
+  forall(p:'a->bool) r q Pr.\n       (LEADSTO2 p r Pr) /\\ (LEADSTO2 r q Pr) ==> (LEADSTO2 p q Pr)
   LEADSTO2 (p:'a->bool) q Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q)Pr \\/\n        (?r. (LEADSTO2 p r Pr) /\\ (LEADSTO2 r q Pr)) \\/\n        (?P. (p = (LUB P)) /\\ (!p. p In P ==> LEADSTO2 p q Pr)))\n      =\n       (LEADSTO2 p q Pr)
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q)Pr \\/\n        (?r. (LEADSTO2 p r Pr) /\\ (LEADSTO2 r q Pr)) \\/\n        (?P. (p = (LUB P)) /\\ (forall p. p In P ==> LEADSTO2 p q Pr)))\n      =\n       (LEADSTO2 p q Pr)
   LEADSTO2 (p:'a->bool) q Pr
   (p:'a->bool) = p'
   \\(p':'a->bool). if (p = p') then T else F
-  !(p:'a->bool) q Pr.\n       ((p ENSURES q)Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (LEADSTO2 r q Pr)) \\/\n        (?P. (p = (LUB P)) /\\ (!p. p In P ==> LEADSTO2 p q Pr)))\n      =\n       (LEADSTO2 p q Pr)
-  (!p':'a->bool.\n      p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr))\n    =\n     ((!p'. p' In P ==> LEADSTO2 p' q Pr) /\\\n      (!p'. p' In P ==> LEADSTO2 p' q Pr ==> X p' q Pr))
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr ==> X p q Pr
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr
-  !p':'a->bool. p' In P\n         ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)
-  !p':'a->bool. p' In P\n         ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)
-  !X Pr.\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p ENSURES r)Pr /\\\n          LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q Pr) ==>\n          LEADSTO2 p q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\\n          (!p. p In P ==> LEADSTO2 p q Pr ==> X p q Pr) ==>\n          LEADSTO2(LUB P)q Pr ==>\n          X(LUB P)q Pr))\n    =\n     (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q Pr) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q Pr)))
+  forall(p:'a->bool) q Pr.\n       ((p ENSURES q)Pr \\/\n        (?r. (p ENSURES r)Pr /\\ (LEADSTO2 r q Pr)) \\/\n        (?P. (p = (LUB P)) /\\ (forall p. p In P ==> LEADSTO2 p q Pr)))\n      =\n       (LEADSTO2 p q Pr)
+  (forall p':'a->bool.\n      p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr))\n    =\n     ((forall p'. p' In P ==> LEADSTO2 p' q Pr) /\\\n      (forall p'. p' In P ==> LEADSTO2 p' q Pr ==> X p' q Pr))
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr ==> X p q Pr
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr
+  forall p':'a->bool. p' In P\n         ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)
+  forall p':'a->bool. p' In P\n         ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)
+  forall X Pr.\n     (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p ENSURES r)Pr /\\\n          LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q Pr) ==>\n          LEADSTO2 p q Pr ==>\n          X p q Pr) /\\\n        (forall P.\n          (forall p. p In P ==> LEADSTO2 p q Pr) /\\\n          (forall p. p In P ==> LEADSTO2 p q Pr ==> X p q Pr) ==>\n          LEADSTO2(LUB P)q Pr ==>\n          X(LUB P)q Pr))\n    =\n     (forall(p:'a->bool) q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (forall r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q Pr) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (forall P.\n           (forall p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q Pr)))
   LEADSTO2 (p:'a->bool) q Pr
   \\(p:'a->bool) q Pr. (LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr))
-  !X (p:'a->bool) q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p ENSURES r)Pr /\\ (LEADSTO2 r q Pr) /\\\n             ((LEADSTO2 r q Pr) ==> X r q Pr)\n            ==> ((LEADSTO2 p q Pr) ==> X p q Pr)) /\\\n        (!P. (!p. p In P ==> LEADSTO2 p q Pr) /\\\n             (!p.  p In P ==> LEADSTO2 p q Pr ==> X p q Pr)\n            ==> ((LEADSTO2 (LUB P) q Pr) ==> X (LUB P) q Pr)))\n     ==> ((LEADSTO2 p q Pr) ==> X p q Pr)
-  !R (Pr:('a->'a)list).\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))\n            ==>\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))
-  !p:'a->bool. (p = LUB P) ==> R p (q:'a->bool) (Pr:('a->'a)list)
+  forall X (p:'a->bool) q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p ENSURES r)Pr /\\ (LEADSTO2 r q Pr) /\\\n             ((LEADSTO2 r q Pr) ==> X r q Pr)\n            ==> ((LEADSTO2 p q Pr) ==> X p q Pr)) /\\\n        (forall P. (forall p. p In P ==> LEADSTO2 p q Pr) /\\\n             (forall p.  p In P ==> LEADSTO2 p q Pr ==> X p q Pr)\n            ==> ((LEADSTO2 (LUB P) q Pr) ==> X (LUB P) q Pr)))\n     ==> ((LEADSTO2 p q Pr) ==> X p q Pr)
+  forall R (Pr:('a->'a)list).\n       (forall p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (forall P. (forall p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))\n            ==>\n       (forall p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (forall r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (forall P. (forall p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))
+  forall p:'a->bool. (p = LUB P) ==> R p (q:'a->bool) (Pr:('a->'a)list)
   LUB (P:('a->bool)->bool)
-  (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr))\n   ==>\n    (!p q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr))
-  !(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> (p LEADSTO q) Pr
+  (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (forall P. (p = LUB P) /\\ (forall p'. p' In P ==> R p' q Pr) ==> R p q Pr))\n   ==>\n    (forall p q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (forall r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (forall P. (forall p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr))
+  forall(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> (p LEADSTO q) Pr
   Pr:('a->'a)list
   q:'a->bool
   p:'a->bool
   LEADSTO2:('a->bool)->('a->bool)->(('a->'a)list)->bool
-  !(p:'a->bool) q Pr. (p LEADSTO q)Pr = LEADSTO2 p q Pr
-  !X (p:'a->bool) q Pr.\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr) /\\\n        (!P. (!p. p In P ==> X p q Pr) ==> X (LUB P) q Pr))\n     ==>\n      (p LEADSTO q)Pr ==> X p q Pr
-  !(P:('a->bool)->bool) (q:'a->bool) (Pr:('a->'a)list).\n              (!p. p In P ==> X p q Pr) ==> X(LUB P)q Pr
-  !(p:'a->bool) (r:'a->bool) (q:'a->bool) Pr.\n              (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n    (!p q Pr.   (p ENSURES q)Pr ==> X p q Pr) /\\\n    (!p r q Pr. (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr) /\\\n    (!P q Pr. (!p. p In P ==> X p q Pr) ==> X(LUB P)q Pr)\n   ==>\n     !(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q Pr
-  !X (p:'a->bool) q Pr.\n    (!p q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (!r.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==>\n        (p LEADSTO q)Pr ==> X p q Pr) /\\\n      (!P.\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\\n        (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n        ((LUB P) LEADSTO q)Pr ==> X (LUB P) q Pr))\n      ==>\n        (p LEADSTO q)Pr ==> X p q Pr
-  !(P:('a->bool)->bool) q Pr.\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\\n        (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n        ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
-  !(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==> (p LEADSTO q)Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n    (!p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n    (!p r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==>\n        (p LEADSTO q)Pr ==> X p q Pr) /\\\n    (!P q Pr.\n      (!p. p In P ==> (p LEADSTO q)Pr) /\\\n      (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n      ((LUB P) LEADSTO q)Pr ==> X (LUB P) q Pr)\n      ==>\n        !(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q Pr
-  !P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n          ==> (!p. p In P ==> X p q Pr)
-  !P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n                   (!p. p In P ==> X p q Pr) ==>\n                       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n          ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)
+  forall(p:'a->bool) q Pr. (p LEADSTO q)Pr = LEADSTO2 p q Pr
+  forall X (p:'a->bool) q Pr.\n      (forall p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r. (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr) /\\\n        (forall P. (forall p. p In P ==> X p q Pr) ==> X (LUB P) q Pr))\n     ==>\n      (p LEADSTO q)Pr ==> X p q Pr
+  forall(P:('a->bool)->bool) (q:'a->bool) (Pr:('a->'a)list).\n              (forall p. p In P ==> X p q Pr) ==> X(LUB P)q Pr
+  forall(p:'a->bool) (r:'a->bool) (q:'a->bool) Pr.\n              (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n    (forall p q Pr.   (p ENSURES q)Pr ==> X p q Pr) /\\\n    (forall p r q Pr. (p ENSURES r)Pr /\\ X r q Pr ==> X p q Pr) /\\\n    (forall P q Pr. (forall p. p In P ==> X p q Pr) ==> X(LUB P)q Pr)\n   ==>\n     forall(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q Pr
+  forall X (p:'a->bool) q Pr.\n    (forall p q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (forall r.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==>\n        (p LEADSTO q)Pr ==> X p q Pr) /\\\n      (forall P.\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n        (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n        ((LUB P) LEADSTO q)Pr ==> X (LUB P) q Pr))\n      ==>\n        (p LEADSTO q)Pr ==> X p q Pr
+  forall(P:('a->bool)->bool) q Pr.\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n        (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n        ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr
+  forall(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==> (p LEADSTO q)Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n    (forall p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n    (forall p r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        ((r LEADSTO q)Pr ==> X r q Pr) ==>\n        (p LEADSTO q)Pr ==> X p q Pr) /\\\n    (forall P q Pr.\n      (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n      (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n      ((LUB P) LEADSTO q)Pr ==> X (LUB P) q Pr)\n      ==>\n        forall(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q Pr
+  forall P q Pr. (forall p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n       (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n          ==> (forall p. p In P ==> X p q Pr)
+  forall P q Pr. (forall p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n                   (forall p. p In P ==> X p q Pr) ==>\n                       (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (forall P.\n          (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n          (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n          ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)
   ((LUB (P:('a->bool)->bool)) LEADSTO q)Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr ==> X p q Pr
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n          ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr ==> X p q Pr
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall r.\n          (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (forall P.\n          (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n          (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr) ==>\n          ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr)
   ((p:'a->bool) LEADSTO q)Pr
   (X:('a->bool)->('a->bool)->('a->'a)list->bool) r q Pr
   ((r:'a->bool) LEADSTO q)Pr
   ((p:'a->bool) ENSURES r)Pr
-  ((!(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (!p r q.\n         (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n         (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n         X(LUB P)q Pr))\n     =\n    (!p q.\n     ((p ENSURES q)Pr ==> X p q Pr) /\\\n     (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n                      ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n     (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n                      ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))
-  !P (q:'a->bool).\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n        X(LUB P)q Pr
-  !(p:'a->bool) r q.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr
-  !(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr
-  !X Pr.\n    (!p q. (p ENSURES q)Pr ==> X p q Pr) /\\\n    (!p r q.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n          ==> X p q Pr) /\\\n    (!P q.\n      (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n          ==> X (LUB P) q Pr)\n      ==>\n        !(p:'a->bool) q. (p LEADSTO q)Pr ==> X p q Pr
+  ((forall(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall p r q.\n         (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (forall P q.\n         (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr) ==>\n         X(LUB P)q Pr))\n     =\n    (forall p q.\n     ((p ENSURES q)Pr ==> X p q Pr) /\\\n     (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n                      ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n     (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n          (forall p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n                      ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))
+  forall P (q:'a->bool).\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr) ==>\n        X(LUB P)q Pr
+  forall(p:'a->bool) r q.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr
+  forall(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr
+  forall X Pr.\n    (forall p q. (p ENSURES q)Pr ==> X p q Pr) /\\\n    (forall p r q.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n          ==> X p q Pr) /\\\n    (forall P q.\n      (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n          ==> X (LUB P) q Pr)\n      ==>\n        forall(p:'a->bool) q. (p LEADSTO q)Pr ==> X p q Pr
   CONS (st:'a->'a) Pr
   X:('a->bool)->('a->bool)->('a->'a)list->bool
-  !P (q:'a->bool) st Pr.\n        (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) /\\\n        (!p. p In P ==> X p q(CONS st Pr)) ==> X(LUB P)q(CONS st Pr)
-  !(p:'a->bool) r q st Pr.\n        (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr) /\\\n        X r q(CONS st Pr) ==> X p q(CONS st Pr)
-  !(p:'a->bool) q st Pr. (p ENSURES q)(CONS st Pr) ==> X p q(CONS st Pr)
+  forall P (q:'a->bool) st Pr.\n        (forall p. p In P ==> (p LEADSTO q)(CONS st Pr)) /\\\n        (forall p. p In P ==> X p q(CONS st Pr)) ==> X(LUB P)q(CONS st Pr)
+  forall(p:'a->bool) r q st Pr.\n        (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr) /\\\n        X r q(CONS st Pr) ==> X p q(CONS st Pr)
+  forall(p:'a->bool) q st Pr. (p ENSURES q)(CONS st Pr) ==> X p q(CONS st Pr)
   ((p:'a->bool) LEADSTO q)(CONS st Pr)
-  !X:('a->bool)->('a->bool)->('a->'a)list->bool.\n    (!p q st Pr. (p ENSURES q)(CONS st Pr) ==> X p q (CONS st Pr)) /\\\n    (!p r q st Pr.\n        (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr) /\\\n         X r q (CONS st Pr)\n          ==> X p q (CONS st Pr)) /\\\n    (!P q st Pr.\n      (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) /\\\n      (!p. p In P ==> X p q (CONS st Pr))\n          ==> X (LUB P) q (CONS st Pr))\n      ==>\n        !p q st Pr. (p LEADSTO q)(CONS st Pr) ==> X p q (CONS st Pr)
-  !(p:'a->bool) q Pr X.\n       (!p q. (p ENSURES q) Pr ==> X p q Pr) /\\\n       (!p r q.\n            (p ENSURES r) Pr /\\ (r LEADSTO q) Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n            (!p. p In P ==> (p LEADSTO q) Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X (LUB P) q Pr)\n       ==> ((p LEADSTO q) Pr ==> X p q Pr)
+  forall X:('a->bool)->('a->bool)->('a->'a)list->bool.\n    (forall p q st Pr. (p ENSURES q)(CONS st Pr) ==> X p q (CONS st Pr)) /\\\n    (forall p r q st Pr.\n        (p ENSURES r)(CONS st Pr) /\\ (r LEADSTO q)(CONS st Pr) /\\\n         X r q (CONS st Pr)\n          ==> X p q (CONS st Pr)) /\\\n    (forall P q st Pr.\n      (forall p. p In P ==> (p LEADSTO q)(CONS st Pr)) /\\\n      (forall p. p In P ==> X p q (CONS st Pr))\n          ==> X (LUB P) q (CONS st Pr))\n      ==>\n        forall p q st Pr. (p LEADSTO q)(CONS st Pr) ==> X p q (CONS st Pr)
+  forall(p:'a->bool) q Pr X.\n       (forall p q. (p ENSURES q) Pr ==> X p q Pr) /\\\n       (forall p r q.\n            (p ENSURES r) Pr /\\ (r LEADSTO q) Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (forall P q.\n            (forall p. p In P ==> (p LEADSTO q) Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> X (LUB P) q Pr)\n       ==> ((p LEADSTO q) Pr ==> X p q Pr)
   X:('a->bool)->('a->bool)->('a->'a)list->bool
   (CONS st Pr):('a->'a)list
   q:'a->bool
@@ -6269,7 +6269,7 @@ Unity/mk_leadsto quotations (977):
   ((q':'a->bool) /\\* (p \\/* q)) \\/* r
   (p':'a->bool) /\\* (p \\/* q)
   (p:'a->bool) /\\* p'
-  !s:'a. (p /\\* p')s ==>\n                          ((p \\/* q) /\\* p')s
+  forall s:'a. (p /\\* p')s ==>\n                          ((p \\/* q) /\\* p')s
   p':'a->bool
   (p:'a->bool) \\/* q
   Pr:('a->'a)list
@@ -6302,16 +6302,16 @@ Unity/mk_leadsto quotations (977):
   (CONS st Pr):('a->'a)list
   q:'a->bool
   p:'a->bool
-  !(p:'a->bool) q r st Pr.\n     (p ENSURES q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n         ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
-  !(q:'a->bool) (q':'a->bool) r'' p r s.\n        ((((q /\\* q') \\/* r'') \\/* (p /\\* r)) \\/* ((q' /\\* q) \\/* r''))s =\n        (((q /\\* q') \\/* r'') \\/* (p /\\* r))s
+  forall(p:'a->bool) q r st Pr.\n     (p ENSURES q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n         ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
+  forall(q:'a->bool) (q':'a->bool) r'' p r s.\n        ((((q /\\* q') \\/* r'') \\/* (p /\\* r)) \\/* ((q' /\\* q) \\/* r''))s =\n        (((q /\\* q') \\/* r'') \\/* (p /\\* r))s
   s:'a
-  (!p:'a->bool. p In P ==>\n        (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))\n      ==>\n      (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          (!p. p In P ==>\n                 ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))
+  (forall p:'a->bool. p In P ==>\n        (forall p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (forall p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))\n      ==>\n      (forall p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (forall p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          (forall p. p In P ==>\n                 ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))
   (LUB P):'a->bool
   (LUB P) /\\* (r:'a->bool)
   r:'a->bool
   LUB (P:('a->bool)->bool)
-  !(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p /\\* r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P) /\\* r) LEADSTO q)(CONS st Pr)
-  !(p':'a->bool) P p (p'':'a->bool).\n      p' In (\\p''. ?p'''. p''' In P /\\ (p'' = p /\\* p'''))\n     =\n      (?p'''. p''' In P /\\ (p' = p /\\* p'''))
+  forall(P:('a->bool)->bool) r q st Pr.\n    (forall p. p In P ==> ((p /\\* r) LEADSTO q)(CONS st Pr)) ==>\n    (forall p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P) /\\* r) LEADSTO q)(CONS st Pr)
+  forall(p':'a->bool) P p (p'':'a->bool).\n      p' In (\\p''. ?p'''. p''' In P /\\ (p'' = p /\\* p'''))\n     =\n      (?p'''. p''' In P /\\ (p' = p /\\* p'''))
   (p':'a->bool) s
   p' = (\\s:'a. p s /\\ p'' s)
   (p'':'a->bool) In P
@@ -6320,19 +6320,19 @@ Unity/mk_leadsto quotations (977):
   p' = (\\s:'a. p s /\\ p'' s)
   p':'a->bool
   \\s:'a. p s /\\ p' s
-  !s:'a.\n      (p /\\* (LUB P))s =\n      (LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p')))s
-  !(P:('a->bool)->bool) r' q q' st Pr.\n    (!p'. p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n      ==>\n        (!p'. (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n                             (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))
+  forall s:'a.\n      (p /\\* (LUB P))s =\n      (LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p')))s
+  forall(P:('a->bool)->bool) r' q q' st Pr.\n    (forall p'. p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n      ==>\n        (forall p'. (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n                             (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))
   :bool
-  (!p':'a->bool.\n         (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n         (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n       ((LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p'))) LEADSTO\n        ((q /\\* q') \\/* r'))\n       (CONS st Pr)
+  (forall p':'a->bool.\n         (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n         (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n       ((LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p'))) LEADSTO\n        ((q /\\* q') \\/* r'))\n       (CONS st Pr)
   CONS (st:'a->'a) Pr
   (q /\\* q') \\/* (r':'a->bool)
   \\p'':'a->bool. ?p'. p' In P /\\ (p'' = (p /\\* p'))
-  !(P:('a->bool)->bool) r' q q' st Pr.\n       (!p'.\n        p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n          ==> (((p /\\* (LUB P)) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))
-  (!p:'a->bool.\n        p In P ==>\n        (!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)))\n     ==>\n     ((!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n       (!p. p In P ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))))
+  forall(P:('a->bool)->bool) r' q q' st Pr.\n       (forall p'.\n        p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n          ==> (((p /\\* (LUB P)) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))
+  (forall p:'a->bool.\n        p In P ==>\n        (forall p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)))\n     ==>\n     ((forall p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n       (forall p. p In P ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))))
   p:'a->bool
   p':'a->bool
-  (!p:'a->bool. p In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))\n      ==>\n    (!p. p In P ==> ((p' /\\* p) LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))
-  (!(p:'a->bool) q r'' r'.\n        (r'' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r'')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (!p' q' r'.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          ((r'' /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n       ==>\n        (!(p:'a->bool) q r' r''.\n        (r' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r')(CONS st Pr) ==>\n        (q' UNLESS r'')(CONS st Pr) ==>\n        (q UNLESS r'')(CONS st Pr) ==>\n        (!p' q' r''.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r'')(CONS st Pr) ==>\n          (q' UNLESS r'')(CONS st Pr) ==>\n          ((r' /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr))
+  (forall p:'a->bool. p In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))\n      ==>\n    (forall p. p In P ==> ((p' /\\* p) LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))
+  (forall(p:'a->bool) q r'' r'.\n        (r'' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r'')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (forall p' q' r'.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          ((r'' /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n       ==>\n        (forall(p:'a->bool) q r' r''.\n        (r' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r')(CONS st Pr) ==>\n        (q' UNLESS r'')(CONS st Pr) ==>\n        (q UNLESS r'')(CONS st Pr) ==>\n        (forall p' q' r''.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r'')(CONS st Pr) ==>\n          (q' UNLESS r'')(CONS st Pr) ==>\n          ((r' /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr))
   p':'a->bool
   LUB (P:('a->bool)->bool)
   Pr:('a->'a)list
@@ -6396,39 +6396,39 @@ Unity/mk_leadsto quotations (977):
   ((p:'a->bool) ENSURES r)(CONS st Pr)
   ((q':'a->bool) UNLESS r')(CONS st Pr)
   ((q:'a->bool) UNLESS r')(CONS st Pr)
-  !(p':'a->bool) q' r'.\n        (p' LEADSTO q')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        ((r /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)
-  !(p:'a->bool) q st Pr.\n     (p LEADSTO q)(CONS st Pr) ==>\n       !p' q' r. (p' LEADSTO q')(CONS st Pr)\n           ==> (q UNLESS r)(CONS st Pr) ==> (q' UNLESS r)(CONS st Pr)\n                  ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
-  !(p:'a->bool) q p' q' r st Pr.\n     (p LEADSTO q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n        ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
+  forall(p':'a->bool) q' r'.\n        (p' LEADSTO q')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        ((r /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)
+  forall(p:'a->bool) q st Pr.\n     (p LEADSTO q)(CONS st Pr) ==>\n       forall p' q' r. (p' LEADSTO q')(CONS st Pr)\n           ==> (q UNLESS r)(CONS st Pr) ==> (q' UNLESS r)(CONS st Pr)\n                  ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
+  forall(p:'a->bool) q p' q' r st Pr.\n     (p LEADSTO q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n        ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
   EQmetric (M:'a->num) m = \\s. M s = m
   LESSmetric (M:'a->num) m = \\s. M s < m
   \\n. (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)
-  !(M:'a->num) m. (p /\\* (M EQmetric m)) = ((\\i. p /\\* (M EQmetric i))m)
+  forall(M:'a->num) m. (p /\\* (M EQmetric m)) = ((\\i. p /\\* (M EQmetric i))m)
   n < m
   m:num
   n:num
-  !n. n < (SUC m) ==>\n           (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)
+  forall n. n < (SUC m) ==>\n           (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)
   n:num
-  !(p:'a->bool) q st Pr M m.\n       (!n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n             (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))
+  forall(p:'a->bool) q st Pr M m.\n       (forall n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n             (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))
   ((p /\\* (M EQmetric m)) LEADSTO q)(CONS (st:'a->'a) Pr)
   (( \\</* (\\i. p /\\* (M EQmetric i))m) LEADSTO q)\n                    (CONS (st:'a->'a) Pr)
   CONS (st:'a->'a) Pr
   q:'a->bool
   (p:'a->bool) /\\* (M EQmetric m)
    \\</* (\\i. (p:'a->bool) /\\* (M EQmetric i))m
-  !n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
+  forall n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
   m:num
-  !n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
-  (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))\n                    ==> (( \\</* (\\i. p /\\* (M EQmetric i))m) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
-  !(p:'a->bool) q st Pr M m.\n      (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q) (CONS st Pr)) ==>\n         (( \\</*  (\\i. p /\\* (M EQmetric i))m) LEADSTO q) (CONS st Pr)
+  forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
+  (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))\n                    ==> (( \\</* (\\i. p /\\* (M EQmetric i))m) LEADSTO q)\n                         (CONS (st:'a->'a) Pr)
+  forall(p:'a->bool) q st Pr M m.\n      (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q) (CONS st Pr)) ==>\n         (( \\</*  (\\i. p /\\* (M EQmetric i))m) LEADSTO q) (CONS st Pr)
   (M EQmetric m)(s:'a)
-  !s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
-  !s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
-  !M:'a->num. (!m s. (M LESSmetric m)s = ( \\</*  (\\i. M EQmetric i) m) s)
+  forall s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
+  forall s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s
+  forall M:'a->num. (forall m s. (M LESSmetric m)s = ( \\</*  (\\i. M EQmetric i) m) s)
   m:num
   M:'a->num
-  !(M:'a->num) m. (M LESSmetric m) = ( \\</*  (\\i. M EQmetric i) m)
-  !(p:'a->bool) M q Pr.\n   (!m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))Pr)\n      ==> (!m. ((p /\\* (M EQmetric m)) LEADSTO\n               ((p /\\* ( \\</* (\\i. M EQmetric i)m)) \\/* q))Pr)
-  !(p:'a->bool) M m.\n      ( \\</* (\\i. p /\\* (M EQmetric i))m) = (p /\\* ( \\</* (\\i. M EQmetric i)m))
+  forall(M:'a->num) m. (M LESSmetric m) = ( \\</*  (\\i. M EQmetric i) m)
+  forall(p:'a->bool) M q Pr.\n   (forall m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))Pr)\n      ==> (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n               ((p /\\* ( \\</* (\\i. M EQmetric i)m)) \\/* q))Pr)
+  forall(p:'a->bool) M m.\n      ( \\</* (\\i. p /\\* (M EQmetric i))m) = (p /\\* ( \\</* (\\i. M EQmetric i)m))
   ((p /\\* ( \\</* (\\i. M EQmetric i)m)) LEADSTO q)\n                        (CONS (st:'a->'a) Pr)
   (((p:'a->bool) /\\* (M EQmetric m)) LEADSTO\n                      (q \\/* (p /\\* ( \\</* (\\i. M EQmetric i)m)))) (CONS st Pr)
   Pr:('a->'a)list
@@ -6441,94 +6441,94 @@ Unity/mk_leadsto quotations (977):
   q:'a->bool
   M:'a->num
   p:'a->bool
-  !n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                   (CONS (st:'a->'a) Pr)
-  !(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n       (!m. (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n                   ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
+  forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)\n                   (CONS (st:'a->'a) Pr)
+  forall(p:'a->bool) q st Pr M.\n       (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n       (forall m. (forall n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n                   ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
   m:num
-  !(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n            ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n                (!m. ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
+  forall(p:'a->bool) q st Pr M.\n       (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n            ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n                (forall m. ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))
   x:num
   x:num
-  !(p:'a->bool) M s.\n     (p /\\* ((?*) (\\n. M EQmetric n)))s = ((?*) (\\i. p /\\* (M EQmetric i)))s
+  forall(p:'a->bool) M s.\n     (p /\\* ((?*) (\\n. M EQmetric n)))s = ((?*) (\\i. p /\\* (M EQmetric i)))s
   M:'a->num
   p:'a->bool
   M:'a->num
   p:'a->bool
   (M:'a->num) s
-  !(M:'a->num) s. ((?*)  (\\n. M EQmetric n))s = True s
+  forall(M:'a->num) s. ((?*)  (\\n. M EQmetric n))s = True s
   M:'a->num
   M:'a->num
   \\i:num. (p:'a->bool) /\\* (M EQmetric i)
-  !m. ((p /\\* (M EQmetric m)) LEADSTO\n             ((p /\\* (M LESSmetric m)) \\/* q)) (CONS (st:'a->'a) Pr)
-  !(p:'a->bool) q st Pr M.\n      (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q))(CONS st Pr))\n             ==> ((p /\\* ((?*)  (\\n. M EQmetric n))) LEADSTO q)(CONS st Pr)
+  forall m. ((p /\\* (M EQmetric m)) LEADSTO\n             ((p /\\* (M LESSmetric m)) \\/* q)) (CONS (st:'a->'a) Pr)
+  forall(p:'a->bool) q st Pr M.\n      (forall m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q))(CONS st Pr))\n             ==> ((p /\\* ((?*)  (\\n. M EQmetric n))) LEADSTO q)(CONS st Pr)
   (((p:'a->bool) /\\* ((?*) (\\n. M EQmetric n))) LEADSTO q)(CONS st Pr)
-  !(p:'a->bool) q st Pr M.\n      (!m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))\n                                           (CONS st Pr))\n             ==> (p LEADSTO q)(CONS st Pr)
-  ((!p:'a->bool. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)) =\n    (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q)
-  (!p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) =\n    ((!p'. p' In P ==> (p' LEADSTO q)Pr) /\\ (!p'. p' In P ==> X p' q))
-  !p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->bool) p q
+  forall(p:'a->bool) q st Pr M.\n      (forall m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))\n                                           (CONS st Pr))\n             ==> (p LEADSTO q)(CONS st Pr)
+  ((forall p:'a->bool. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)) =\n    (forall p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q)
+  (forall p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) =\n    ((forall p'. p' In P ==> (p' LEADSTO q)Pr) /\\ (forall p'. p' In P ==> X p' q))
+  forall p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->bool) p q
   LUB (P:('a->bool)->bool)
-  !p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q
-  !p:'a->bool. p In P ==> (p LEADSTO q)Pr
-  !(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q) /\\\n         (!r.\n           (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==>\n           (p LEADSTO q)Pr /\\ X p q) /\\\n         (!P.\n           (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) ==>\n           (p LEADSTO q)Pr /\\ X p q))\n      =\n        (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))
+  forall p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q
+  forall p:'a->bool. p In P ==> (p LEADSTO q)Pr
+  forall(X:('a->bool)->('a->bool)->bool) Pr.\n       (forall p q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q) /\\\n         (forall r.\n           (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==>\n           (p LEADSTO q)Pr /\\ X p q) /\\\n         (forall P.\n           (p = LUB P) /\\ (forall p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) ==>\n           (p LEADSTO q)Pr /\\ X p q))\n      =\n        (forall p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (forall r.\n          (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n        (forall P.\n          (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q) ==>\n          X(LUB P)q))
   :bool
   :bool
   :bool
   ((p:'a->bool) LEADSTO q)Pr
   \\ (p:'a->bool) q Pr. (p LEADSTO q)Pr /\\ (X p q)
-  !X p q Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r. (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                         ==> X p q) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)\n                         ==> X (LUB P) q))\n     ==> ((p LEADSTO q)Pr ==> X p q)
+  forall X p q Pr.\n      (forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (forall r. (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                         ==> X p q) /\\\n        (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)\n                         ==> X (LUB P) q))\n     ==> ((p LEADSTO q)Pr ==> X p q)
   ((p:'a->bool) LEADSTO q)Pr
-  !(P:('a->bool)->bool) q Pr.\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)\n                                                ==> X (LUB P) q
-  !(p:'a->bool) r q Pr.\n               (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                                                ==> X p q
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q
-  !X.\n      (!(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q) /\\\n      (!p r q Pr. (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                                          ==> X p q) /\\\n      (!P q Pr. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)\n                                          ==> X (LUB P) q)\n     ==> (!p q Pr. (p LEADSTO q)Pr ==> X p q)
-  !(X:('a->bool)->('a->bool)->bool) Pr.\n       ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q)) =\n        (!p. p In P ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q))
-  !p':'a->bool. p' In P ==> (LEADSTO2 p' q)Pr /\\\n                                        (LEADSTO2 p' q Pr ==> X p' q)
-  !p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr
+  forall(P:('a->bool)->bool) q Pr.\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)\n                                                ==> X (LUB P) q
+  forall(p:'a->bool) r q Pr.\n               (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                                                ==> X p q
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q
+  forall X.\n      (forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q) /\\\n      (forall p r q Pr. (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q\n                                          ==> X p q) /\\\n      (forall P q Pr. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)\n                                          ==> X (LUB P) q)\n     ==> (forall p q Pr. (p LEADSTO q)Pr ==> X p q)
+  forall(X:('a->bool)->('a->bool)->bool) Pr.\n       ((forall p. p In P ==> LEADSTO2 p q Pr) /\\ (forall p. p In P ==> X p q)) =\n        (forall p. p In P ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q))
+  forall p':'a->bool. p' In P ==> (LEADSTO2 p' q)Pr /\\\n                                        (LEADSTO2 p' q Pr ==> X p' q)
+  forall p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr
   LUB (P:('a->bool)->bool)
-  !p':'a->bool. p' In P ==> (LEADSTO2 p' q)Pr /\\\n                                        (LEADSTO2 p' q Pr ==> X p' q)
-  !p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr
+  forall p':'a->bool. p' In P ==> (LEADSTO2 p' q)Pr /\\\n                                        (LEADSTO2 p' q Pr ==> X p' q)
+  forall p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr
   LUB (P:('a->bool)->bool)
-  !p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr
-  !(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n        (!r.\n          (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q) ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n        (!P.\n          (!p'. p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q))\n        ==> LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q))
+  forall p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr
+  forall(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n        (forall r.\n          (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q) ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n        (forall P.\n          (forall p'. p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q))\n        ==> LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q))
   (X:('a->bool)->('a->bool)->bool) r q
   LEADSTO2 (p:'a->bool) q Pr
   LEADSTO2 (r:'a->bool) q Pr
   ((p:'a->bool) ENSURES r)Pr
-  !(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q)))\n      =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))
+  forall(X:('a->bool)->('a->bool)->bool) Pr.\n       (forall p q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (forall r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (forall P.\n           (forall p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q)))\n      =\n      (forall p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (forall r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q ==> X p q) /\\\n        (forall P.\n          (forall p. p In P ==> LEADSTO2 p q Pr) /\\ (forall p. p In P ==> X p q) ==>\n          X(LUB P)q))
   LEADSTO2 (p:'a->bool) q Pr
   \\(p:'a->bool) q Pr. (LEADSTO2 p q Pr /\\\n                              (LEADSTO2 p q Pr ==> X p q))
-  !(X:('a->bool)->('a->bool)->bool) p q Pr.\n    (!p q. ((p ENSURES q)Pr ==> X p q) /\\\n            (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ (X r q) ==> X p q) /\\\n            (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)\n               ==> X (LUB P) q))\n      ==> ((p LEADSTO q)Pr ==> X p q)
-  !P (q:'a->bool) Pr. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n        (!p. p In P ==> X p q) ==> X (LUB P) q
-  !(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        X r q ==> X p q
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q
-  !X.\n    (!p q Pr. (p ENSURES q)Pr ==> X p q) /\\\n    (!p r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n    (!P q Pr.\n        (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)\n            ==> X (LUB P) q)\n      ==>\n        (!(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q)
+  forall(X:('a->bool)->('a->bool)->bool) p q Pr.\n    (forall p q. ((p ENSURES q)Pr ==> X p q) /\\\n            (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ (X r q) ==> X p q) /\\\n            (forall P. (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)\n               ==> X (LUB P) q))\n      ==> ((p LEADSTO q)Pr ==> X p q)
+  forall P (q:'a->bool) Pr. (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n        (forall p. p In P ==> X p q) ==> X (LUB P) q
+  forall(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n        X r q ==> X p q
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q
+  forall X.\n    (forall p q Pr. (p ENSURES q)Pr ==> X p q) /\\\n    (forall p r q Pr.\n        (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n    (forall P q Pr.\n        (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q)\n            ==> X (LUB P) q)\n      ==>\n        (forall(p:'a->bool) q Pr. (p LEADSTO q)Pr ==> X p q)
   ((p:'a->bool) LEADSTO q)Pr
-  !(p:'a->bool) P q Pr. (p = LUB P) /\\\n                (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                         ==> X p q Pr
-  !(p:'a->bool) r q Pr.\n      (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n        (!p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n        (!p r q Pr. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n        (!p P q Pr. (p = LUB P) /\\\n                  (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr)\n     ==> (!(p:'a->bool) q Pr. (p LEADSTO q) Pr ==> X p q Pr)
-  !X Pr.\n       (!p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr) =\n      ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q Pr))
-  !X Pr.\n      (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n            ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n      =\n      (!p q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))
+  forall(p:'a->bool) P q Pr. (p = LUB P) /\\\n                (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                         ==> X p q Pr
+  forall(p:'a->bool) r q Pr.\n      (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n        (forall p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n        (forall p r q Pr. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n        (forall p P q Pr. (p = LUB P) /\\\n                  (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                        ==> X p q Pr)\n     ==> (forall(p:'a->bool) q Pr. (p LEADSTO q) Pr ==> X p q Pr)
+  forall X Pr.\n       (forall p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr) =\n      ((forall p. p In P ==> LEADSTO2 p q Pr) /\\ (forall p. p In P ==> X p q Pr))
+  forall X Pr.\n      (forall(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n            ==> X p q Pr) /\\\n       (forall P. (p = (LUB P)) /\\\n            (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n      =\n      (forall p q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (forall P. (p = (LUB P)) /\\\n            (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> X p q Pr))
   :bool
   :bool
-  !p. p In P\n            ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr
-  !p. (p = LUB P)\n        ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool)p q Pr
+  forall p. p In P\n            ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr
+  forall p. (p = LUB P)\n        ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool)p q Pr
   LUB (P:('a->bool)->bool)
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr
-  !p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr
-  !X Pr.\n     (!(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (!P. (p = LUB P) /\\\n           (!p. p In P ==> LEADSTO2 p q Pr) /\\\n           (!p. p In P ==> X p q Pr) ==> X p q Pr))\n    =\n     (!p q.\n      ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr\n               ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!P. (!p. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr)\n               ==> LEADSTO2 (LUB P) q Pr /\\ X (LUB P) q Pr))
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr
+  forall p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr
+  forall X Pr.\n     (forall(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (forall r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (forall P. (p = LUB P) /\\\n           (forall p. p In P ==> LEADSTO2 p q Pr) /\\\n           (forall p. p In P ==> X p q Pr) ==> X p q Pr))\n    =\n     (forall p q.\n      ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (forall r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr\n               ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (forall P. (forall p. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr)\n               ==> LEADSTO2 (LUB P) q Pr /\\ X (LUB P) q Pr))
   :bool
   :bool
-  !(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (!P. (p = LUB P) /\\\n           (!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n              X p q Pr)
+  forall(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (forall r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (forall P. (p = LUB P) /\\\n           (forall p. p In P ==> LEADSTO2 p q Pr) /\\ (forall p. p In P ==> X p q Pr) ==>\n              X p q Pr)
   LEADSTO2 (p:'a->bool) q Pr
   \\(p:'a->bool) q Pr. (LEADSTO2 p q Pr) /\\ (X p q Pr)
-  !X Pr.\n     (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n           ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n     ==> (!(p:'a->bool) q. (p LEADSTO q) Pr ==> X p q Pr)
+  forall X Pr.\n     (forall(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (forall r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n           ==> X p q Pr) /\\\n       (forall P. (p = (LUB P)) /\\\n            (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n     ==> (forall(p:'a->bool) q. (p LEADSTO q) Pr ==> X p q Pr)
   ((p:'a->bool) LEADSTO q)Pr
-  !(p:'a->bool) P q Pr. (p = LUB P) /\\\n                                  (!p. p In P ==> (p LEADSTO q)Pr) /\\\n                                  (!p. p In P ==> X p q Pr) ==> X p q Pr
-  !(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n                                   X p r Pr /\\ X r q Pr ==> X p q Pr
-  !(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
-  !X.\n      (!p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n      (!p r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n      (!p P q Pr. (p = (LUB P)) /\\\n                  (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr)\n     ==> (!(p:'a->bool) q Pr. (p LEADSTO q) Pr ==> X p q Pr)
-  !(Q:num->('a->bool)) r s.\n       ((((/<=\\* Q i) \\/* r) /\\* ((Q(SUC i)) \\/* r)) \\/* r)s\n      =\n       ((/<=\\* Q (SUC i)) \\/* r)s
+  forall(p:'a->bool) P q Pr. (p = LUB P) /\\\n                                  (forall p. p In P ==> (p LEADSTO q)Pr) /\\\n                                  (forall p. p In P ==> X p q Pr) ==> X p q Pr
+  forall(p:'a->bool) r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\\n                                   X p r Pr /\\ X r q Pr ==> X p q Pr
+  forall(p:'a->bool) q Pr. (p ENSURES q)Pr ==> X p q Pr
+  forall X.\n      (forall p q Pr. (p ENSURES q)Pr ==> X p q Pr) /\\\n      (forall p r q Pr. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n      (forall p P q Pr. (p = (LUB P)) /\\\n                  (forall p. p In P ==> (p LEADSTO q)Pr) /\\ (forall p. p In P ==> X p q Pr)\n                        ==> X p q Pr)\n     ==> (forall(p:'a->bool) q Pr. (p LEADSTO q) Pr ==> X p q Pr)
+  forall(Q:num->('a->bool)) r s.\n       ((((/<=\\* Q i) \\/* r) /\\* ((Q(SUC i)) \\/* r)) \\/* r)s\n      =\n       ((/<=\\* Q (SUC i)) \\/* r)s
   Pr:('a->'a)list
   st:'a->'a
   r:'a->bool
@@ -6551,12 +6551,12 @@ Unity/mk_leadsto quotations (977):
   r:'a->bool
   /<=\\* (Q:num->('a->bool))i
   ((/<=\\* (Q:num->'a->bool) i) UNLESS r)(CONS st Pr)
-  !i. (((Q:num->('a->bool)) i) UNLESS r)(CONS st Pr)
+  forall i. (((Q:num->('a->bool)) i) UNLESS r)(CONS st Pr)
   SUC i
-  !i. (((P:num->('a->bool)) i) LEADSTO ((Q i) \\/* r))(CONS st Pr)
+  forall i. (((P:num->('a->bool)) i) LEADSTO ((Q i) \\/* r))(CONS st Pr)
   SUC i
-  !i. ((/<=\\* (Q:num->'a->bool) i) UNLESS r)(CONS st Pr)
-  !(P:num->('a->bool)) Q r st Pr.\n       (!i. ((P i) LEADSTO ((Q i) \\/* r)) (CONS st Pr)) /\\\n       (!i. ((Q i) UNLESS r) (CONS st Pr)) ==>\n         (!i. ((/<=\\* P i) LEADSTO ((/<=\\* Q i) \\/* r)) (CONS st Pr))
+  forall i. ((/<=\\* (Q:num->'a->bool) i) UNLESS r)(CONS st Pr)
+  forall(P:num->('a->bool)) Q r st Pr.\n       (forall i. ((P i) LEADSTO ((Q i) \\/* r)) (CONS st Pr)) /\\\n       (forall i. ((Q i) UNLESS r) (CONS st Pr)) ==>\n         (forall i. ((/<=\\* P i) LEADSTO ((/<=\\* Q i) \\/* r)) (CONS st Pr))
   (q:'a->bool) /\\* q'
   r:'a->bool
   q:'a->bool
@@ -6589,7 +6589,7 @@ Unity/mk_leadsto quotations (977):
   ((q:'a->bool) UNLESS r)(CONS st Pr)
   CONS (st:'a->'a) Pr
   r:'a->bool
-  !(p:'a->bool) q r p' q' st Pr.\n         (p  LEADSTO (q  \\/* r))(CONS st Pr) /\\ (q  UNLESS r)(CONS st Pr) /\\\n         (p' LEADSTO (q' \\/* r))(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n             ==>\n                 ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
+  forall(p:'a->bool) q r p' q' st Pr.\n         (p  LEADSTO (q  \\/* r))(CONS st Pr) /\\ (q  UNLESS r)(CONS st Pr) /\\\n         (p' LEADSTO (q' \\/* r))(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n             ==>\n                 ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)
   Pr:('a->'a)list
   st:'a->'a
   q':'a->bool
@@ -6632,13 +6632,13 @@ Unity/mk_leadsto quotations (977):
   ((r:'a->bool) \\/* b) \\/* (r' \\/* b')
   b':'a->bool
   q':'a->bool
-  !s:'a. b' s ==> ((r \\/* b) \\/* (r' \\/* b'))s
+  forall s:'a. b' s ==> ((r \\/* b) \\/* (r' \\/* b'))s
   ((q':'a->bool) UNLESS b')(CONS st Pr)
   CONS (st:'a->'a) Pr
   ((r:'a->bool) \\/* b) \\/* (r' \\/* b')
   b:'a->bool
   q:'a->bool
-  !s:'a. b s ==> ((r \\/* b) \\/* (r' \\/* b'))s
+  forall s:'a. b s ==> ((r \\/* b) \\/* (r' \\/* b'))s
   ((q:'a->bool) UNLESS b)(CONS st Pr)
   (q:'a->bool) /\\* q'
   (((r:'a->bool) \\/* b) \\/* (r' \\/* b'))
@@ -6675,8 +6675,8 @@ Unity/mk_leadsto quotations (977):
   b:'a->bool
   (r:'a->bool) \\/* (r' \\/* b')
   b:'a->bool
-  !(p:'a->bool) q r b p' q' r' b' st Pr.\n       (p  LEADSTO (q  \\/* r))(CONS st Pr)  /\\ (q  UNLESS b)(CONS st Pr) /\\\n       (p' LEADSTO (q' \\/* r'))(CONS st Pr) /\\ (q' UNLESS b')(CONS st Pr)\n         ==>\n         ((p /\\* p') LEADSTO\n          ((q /\\* q') \\/* ((r \\/* b) \\/* (r' \\/* b'))))(CONS st Pr)
-  !(Q:num->('a->bool)) R B i s.\n      ((/<=\\* Q(SUC i))  \\/*\n         (((( \\<=/*  R i) \\/* ( \\<=/*  B i)) \\/* ( \\<=/*  B i))  \\/*\n          ((R(SUC i)) \\/* (B(SUC i)))))s =\n      ((/<=\\* Q(SUC i)) \\/* (( \\<=/*  R(SUC i)) \\/* ( \\<=/*  B(SUC i))))s
+  forall(p:'a->bool) q r b p' q' r' b' st Pr.\n       (p  LEADSTO (q  \\/* r))(CONS st Pr)  /\\ (q  UNLESS b)(CONS st Pr) /\\\n       (p' LEADSTO (q' \\/* r'))(CONS st Pr) /\\ (q' UNLESS b')(CONS st Pr)\n         ==>\n         ((p /\\* p') LEADSTO\n          ((q /\\* q') \\/* ((r \\/* b) \\/* (r' \\/* b'))))(CONS st Pr)
+  forall(Q:num->('a->bool)) R B i s.\n      ((/<=\\* Q(SUC i))  \\/*\n         (((( \\<=/*  R i) \\/* ( \\<=/*  B i)) \\/* ( \\<=/*  B i))  \\/*\n          ((R(SUC i)) \\/* (B(SUC i)))))s =\n      ((/<=\\* Q(SUC i)) \\/* (( \\<=/*  R(SUC i)) \\/* ( \\<=/*  B(SUC i))))s
   Pr:('a->'a)list
   st:'a->'a
   (B:num->('a->bool))(SUC i)
@@ -6696,18 +6696,18 @@ Unity/mk_leadsto quotations (977):
   B:num->('a->bool)
   Q:num->('a->bool)
   i:num
-  !i. (((Q:num->('a->bool)) i) UNLESS (B i))(CONS st Pr)
+  forall i. (((Q:num->('a->bool)) i) UNLESS (B i))(CONS st Pr)
   SUC i
-  !i.(((P:num->('a->bool))i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)
+  forall i.(((P:num->('a->bool))i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)
   SUC i
   (Q:num->('a->bool)) 0 \\/* R 0 \\/* B 0
   (Q:num->('a->bool)) 0 \\/* R 0
   (P:num->('a->bool)) 0
-  !i.(((P:num->('a->bool))i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)
+  forall i.(((P:num->('a->bool))i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)
   0
   ((B:num->('a->bool))0)
   ((Q:num->('a->bool))0) \\/* (R 0)
-  !(P:num->('a->bool)) Q R B st Pr.\n      (!i. ((P i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)) /\\\n        (!i. ((Q i) UNLESS (B i))(CONS st Pr)) ==>\n          (!i. ((/<=\\* P i) LEADSTO\n              ((/<=\\* Q i) \\/* (( \\<=/*  R i) \\/* ( \\<=/*  B i)))) (CONS st Pr))
+  forall(P:num->('a->bool)) Q R B st Pr.\n      (forall i. ((P i) LEADSTO ((Q i) \\/* (R i)))(CONS st Pr)) /\\\n        (forall i. ((Q i) UNLESS (B i))(CONS st Pr)) ==>\n          (forall i. ((/<=\\* P i) LEADSTO\n              ((/<=\\* Q i) \\/* (( \\<=/*  R i) \\/* ( \\<=/*  B i)))) (CONS st Pr))
 LUB =  |- (#!:fun(fun(fun(fun(''a,bool),bool),bool),bool) (\P:fun(fun(''a,bool),bool). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (#LUB:fun(fun(fun(''a,bool),bool),fun(''a,bool)) P:fun(fun(''a,bool),bool))) (\s:''a. (#?:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun(''a,bool),bool) p:fun(''a,bool))) (p:fun(''a,bool) s:''a))))))))
 IN =  |- (#!:fun(fun(fun(fun(''a,bool),bool),bool),bool) (\P:fun(fun(''a,bool),bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) ((#In:fun(fun(''a,bool),fun(fun(fun(''a,bool),bool),bool)) p:fun(''a,bool)) P:fun(fun(''a,bool),bool))) (P:fun(fun(''a,bool),bool) p:fun(''a,bool)))))))
 LeadstoRel =  |- (#!:fun(fun(fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))),bool),bool) (\R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) ((#LeadstoRel:fun(fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))),fun(list(fun(''a,''a)),bool)) R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)))) Pr:list(fun(''a,''a)))) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (((#ENSURES:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) r:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) r:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))) (#!:fun(fun(fun(fun(''a,bool),bool),bool),bool) (\P:fun(fun(''a,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) p:fun(''a,bool)) (#LUB:fun(fun(fun(''a,bool),bool),fun(''a,bool)) P:fun(fun(''a,bool),bool)))) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). ((#==>:fun(bool,fun(bool,bool)) ((#In:fun(fun(''a,bool),fun(fun(fun(''a,bool),bool),bool)) p:fun(''a,bool)) P:fun(fun(''a,bool),bool))) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))))) (((R:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))))))))))))))

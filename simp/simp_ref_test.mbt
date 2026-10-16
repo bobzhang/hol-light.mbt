@@ -57,7 +57,7 @@ test "simp matches simp.ml" {
     .map(sb)
     .join(" ")
   })
-  let big = "!x:A. (P x /\\ (Q x = R x)) /\\ ~(a = b) /\\ ~c /\\ (p ==> (u:A) = v)"
+  let big = "forall x:A. (P x /\\ (Q x = R x)) /\\ ~(a = b) /\\ ~c /\\ (p ==> (u:A) = v)"
   log.attempt("mk_rewrites_false", () => {
     let th = hyp(big)
     slist(@simp.mk_rewrites(false, th, @list.List([])))
@@ -67,16 +67,16 @@ test "simp matches simp.ml" {
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   log.attempt("mk_rewrites_exists", () => {
-    let th = hyp("!x y:A. P x y ==> Q x y ==> (f:A->A) x = g x")
+    let th = hyp("forall x y:A. P x y ==> Q x y ==> (f:A->A) x = g x")
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   cv("REWRITE_CONV", () => {
-    let th = hyp("!x:A. (f:A->A) x = g x")
+    let th = hyp("forall x:A. (f:A->A) x = g x")
     let t = tm("(h:A->A) (f a) = f (f b)")
     @simp.rewrite_conv(ths([th]))(t)
   })
   cv("REWRITE_CONV_fail", () => {
-    let th = hyp("!x:A. (f:A->A) x = g x")
+    let th = hyp("forall x:A. (f:A->A) x = g x")
     let t = tm("(h:A->A) a")
     @simp.rewrite_conv(ths([th]))(t)
   })
@@ -86,7 +86,7 @@ test "simp matches simp.ml" {
     @simp.rewrite_conv(ths([th]))(t)
   })
   cv("REWRITE_CONV_perm", () => {
-    let th = hyp("!x y. (f:A->A->A) x y = f y x")
+    let th = hyp("forall x y. (f:A->A->A) x y = f y x")
     let t = tm("(f:A->A->A) b a = f a b")
     @simp.rewrite_conv(ths([th]))(t)
   })
@@ -106,7 +106,7 @@ test "simp matches simp.ml" {
     @simp.pure_rewrite_conv(ths([th]))(t)
   })
   cv("ONCE_REWRITE_CONV", () => {
-    let th = hyp("!x:A. (f:A->A) x = f (f x)")
+    let th = hyp("forall x:A. (f:A->A) x = f (f x)")
     let t = tm("(f:A->A) a")
     @simp.once_rewrite_conv(ths([th]))(t)
   })
@@ -172,7 +172,7 @@ test "simp matches simp.ml" {
     @simp.rewrites_conv(@nets.empty_net())(t)
   })
   cv("SIMP_CONV_cond", () => {
-    let th1 = hyp("!x:A. P x ==> (f:A->A) x = g x")
+    let th1 = hyp("forall x:A. P x ==> (f:A->A) x = g x")
     let th2 = hyp("(P:A->bool) a")
     let t = tm("(h:A->A) ((f:A->A) a) = f b")
     @simp.simp_conv(ths([th1, th2]))(t)
@@ -188,7 +188,7 @@ test "simp matches simp.ml" {
     @simp.pure_simp_conv(ths([th]))(t)
   })
   cv("ONCE_SIMP_CONV", () => {
-    let th = hyp("!x:A. (f:A->A) x = f (f x)")
+    let th = hyp("forall x:A. (f:A->A) x = f (f x)")
     let t = tm("(f:A->A) a")
     @simp.once_simp_conv(ths([th]))(t)
   })
@@ -214,7 +214,7 @@ test "simp matches simp.ml" {
   })
   cv("SIMP_cong_deep", () => {
     let ss = @simp.ss_of_congs(ths([imp_cong]), @simp.empty_ss)
-    let th = hyp("!x:A. P x ==> (f:A->A) x = g x")
+    let th = hyp("forall x:A. P x ==> (f:A->A) x = g x")
     let t = tm("(P:A->bool) a ==> (f:A->A) a = b")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
@@ -244,44 +244,44 @@ test "simp matches simp.ml" {
       ths([]).map(_ => pr).concat(@list.singleton(@simp.augment(pr, ths([qa])))),
       @simp.empty_ss,
     )
-    let th = hyp("!x:A. Q x ==> (f:A->A) x = g x")
+    let th = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
   cv("prover_none", () => {
-    let th = hyp("!x:A. Q x ==> (f:A->A) x = g x")
+    let th = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(@simp.empty_ss, ths([th]))(t)
   })
   cv("too_deep", () => {
-    let th1 = hyp("!x:A. Q x ==> (f:A->A) x = g x")
-    let th2 = hyp("!x:A. R x ==> Q x")
+    let th1 = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
+    let th2 = hyp("forall x:A. R x ==> Q x")
     let th3 = hyp("(R:A->bool) a")
     let t = tm("(f:A->A) a")
     @simp.once_simplify_conv(@simp.empty_ss, ths([th1, th2, th3]))(t)
   })
   cv("deep_ok", () => {
-    let th1 = hyp("!x:A. Q x ==> (f:A->A) x = g x")
-    let th2 = hyp("!x:A. R x ==> Q x")
+    let th1 = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
+    let th2 = hyp("forall x:A. R x ==> Q x")
     let th3 = hyp("(R:A->bool) a")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(@simp.empty_ss, ths([th1, th2, th3]))(t)
   })
   cv("DEPTH_SQCONV", () => {
-    let th = hyp("!x:A. (f:A->A) x = g x")
+    let th = hyp("forall x:A. (f:A->A) x = g x")
     let ss = @simp.ss_of_thms(ths([th]), @simp.empty_ss)
     let t = tm("(f:A->A) (f a)")
     @simp.depth_sqconv(ss, 3, t)
   })
   cv("REDEPTH_SQCONV", () => {
-    let th1 = hyp("!x:A. (f:A->A) x = g x")
-    let th2 = hyp("!x:A. (h:A->A) (g x) = f x")
+    let th1 = hyp("forall x:A. (f:A->A) x = g x")
+    let th2 = hyp("forall x:A. (h:A->A) (g x) = f x")
     let ss = @simp.ss_of_thms(ths([th1, th2]), @simp.empty_ss)
     let t = tm("(h:A->A) (f a)")
     @simp.redepth_sqconv(ss, 3, t)
   })
   cv("TOP_SWEEP_SQCONV", () => {
-    let th = hyp("!x:A. (f:A->A) x = g (f x)")
+    let th = hyp("forall x:A. (f:A->A) x = g (f x)")
     let ss = @simp.ss_of_thms(ths([th]), @simp.empty_ss)
     let t = tm("(f:A->A) a")
     @simp.top_sweep_sqconv(ss, 3, t)
@@ -296,7 +296,7 @@ test "simp matches simp.ml" {
     @simp.simplify_conv(ss, @list.List([]))(t)
   })
   log.attempt("basic_rewrites", () => {
-    let th = hyp("!x:A. (f:A->A) x = g x")
+    let th = hyp("forall x:A. (f:A->A) x = g x")
     @simp.set_basic_rewrites(ths([th]))
     let th2 = hyp("(a:bool) = b")
     @simp.extend_basic_rewrites(ths([th2]))
@@ -400,7 +400,7 @@ test "simp matches simp.ml" {
       #|simp quotations (3):
       #|  T
       #|  p ==> q ==> r <=> p /\\ q ==> r
-      #|  (!x. P x ==> Q) <=> (?x. P x) ==> Q
+      #|  (forall x. P x ==> Q) <=> (?x. P x) ==> Q
       #|term_order = false true true false false true
       #|Warning: inventing type variables
       #|mk_rewrites_false = [(#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) #T:bool); (#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)); (#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?356,fun('?356,bool)) b:'?356) a:'?356)) #F:bool); (#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356)) #F:bool); (#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) c:bool) #F:bool); (#!:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?348,fun('?348,bool)) (Q:fun('A,'?348) x:'A)) (R:fun('A,'?348) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?356,fun('?356,bool)) a:'?356) b:'?356))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))) #T:bool)]

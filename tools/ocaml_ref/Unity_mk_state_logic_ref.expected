@@ -5535,7 +5535,7 @@ Unity/mk_state_logic quotations (172):
   ~* (p:'a->bool)  = \\s. ~p s
   /\\* (p:'a->bool) (q:'a->bool) = \\s. (p s) /\\ (q s)
   \\/* (p:'a->bool) (q:'a->bool) = \\s. (p s) \\/ (q s)
-  !* (P:'b->('a->bool)) = (\\s. (!x. ((P x)s)))
+  !* (P:'b->('a->bool)) = (\\s. (forall x. ((P x)s)))
   ?* (P:'b->('a->bool)) = (\\s. (?x. ((P x)s)))
   @* P = (\\s:'a. (@x:'b. ((P x)s)))
   ==>* (p:'a->bool) (q:'a->bool) = \\s. (p s) ==> (q s)
@@ -5555,143 +5555,143 @@ Unity/mk_state_logic quotations (172):
   /* (p:'a->num) (q:'a->num) = \\s. (p s) DIV (q s)
   *** (p:'a->num) (q:'a->num) = \\s. (p s) EXP (q s)
   Ind (a:'a->('b->'c)) (i:'a->'b) = \\s. (a s) (i s)
-  !<=* (P:num->('a->bool)) m = (\\s:'a. (!i. i <= m ==> ((P i)s)))
+  !<=* (P:num->('a->bool)) m = (\\s:'a. (forall i. i <= m ==> ((P i)s)))
   ?<=* (P:num->('a->bool)) m = (\\s:'a. (?i. i <= m /\\ ((P i)s)))
   ?<* (P:num->('a->bool)) m = (\\s:'a. (?i. i < m /\\ ((P i)s)))
-  (!P. /<=\\* P 0       = (P:num->('a->bool)) 0) /\\\n     (!P. /<=\\* P (SUC i) = ((/<=\\* P i) /\\* (P (SUC i))))
-  (!P. \\<=/* P 0       = (P:num->('a->bool)) 0) /\\\n     (!P. (\\<=/* P (SUC i)) = ((\\<=/* P i) \\/* (P (SUC i))))
-  (!P. /<\\* P 0       = (False:'a->bool)) /\\\n     (!P. /<\\* P (SUC i) = ((/<\\* P i) /\\* (P i)))
-  (!P. \\</* P 0       = (False:'a->bool)) /\\\n     (!P. \\</* P (SUC i) = ((\\</* P i) \\/* (P i)))
+  (forall P. /<=\\* P 0       = (P:num->('a->bool)) 0) /\\\n     (forall P. /<=\\* P (SUC i) = ((/<=\\* P i) /\\* (P (SUC i))))
+  (forall P. \\<=/* P 0       = (P:num->('a->bool)) 0) /\\\n     (forall P. (\\<=/* P (SUC i)) = ((\\<=/* P i) \\/* (P (SUC i))))
+  (forall P. /<\\* P 0       = (False:'a->bool)) /\\\n     (forall P. /<\\* P (SUC i) = ((/<\\* P i) /\\* (P i)))
+  (forall P. \\</* P 0       = (False:'a->bool)) /\\\n     (forall P. \\</* P (SUC i) = ((\\</* P i) \\/* (P i)))
   s:'a
   p:'a->bool
   q:'a->bool
   r:'a->bool
   i:num
   P:num->('a->bool)
-  !p q p' q' (s:'a).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)
-  !p q p' q' (s:'a).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s
-  !p q r (s:'a).\n         ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))s\n       ==>\n         r s
-  !p q p' q' r r' (s:'a).\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))s\n      ==>\n        ((p /\\* q) \\/* r \\/* r')s
-  !p q r (s:'a).\n        ((p /\\* r) \\/* (((p \\/* q) /\\* (q \\/* r)) \\/* r)) s\n      ==>\n        (q \\/* r) s
-  !p q b r (s:'a).\n        ((r /\\* q) \\/* (p /\\* b) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
-  !p q b r (s:'a).\n        (((r /\\* q) \\/* ((r /\\* p) /\\* b)) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
-  !p q r (s:'a).\n           (r s /\\ q s) \\/ p s\n         ==>\n\t   (q s /\\ r s) \\/ p s
-  !p q r (s:'a).\n         (q s /\\ r s) \\/ p s\n       ==>\n         (r s /\\ q s) \\/ p s
-  !p q r (s:'a).\n         (r s /\\ q s) \\/ p s\n       <=> (q s /\\ r s) \\/ p s
-  !(p:'a->bool) q r. ((r /\\* q) \\/* p) = ((q /\\* r) \\/* p)
-  !p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       ==>\n         (p s /\\ (q s \\/ r s))
-  !p q r (s:'a).\n         (p s /\\ (q s \\/ r s))\n        ==>\n         (p s /\\ (r s \\/ q s))
-  !p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       = (p s /\\ (q s \\/ r s))
-  !(p:'a->bool) q r.\n        p /\\* (r \\/* q)\n      = p /\\* (q \\/* r)
-  !p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       ==>\n         (q s \\/ r s) /\\ p s
-  !p q r (s:'a).\n         (q s \\/ r s) /\\ p s\n       ==>\n         (r s \\/ q s) /\\ p s
-  !p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       <=> (q s \\/ r s) /\\ p s
-  !(p:'a->bool) q r.\n        (r \\/* q) /\\* p\n      = (q \\/* r) /\\* p
-  !p q r (s:'a).\n         (r s \\/ q s) \\/ p s\n       ==>\n         (q s \\/ r s) \\/ p s
-  !p q r (s:'a).\n         (q s \\/ r s) \\/ p s\n       ==>\n         (r s \\/ q s) \\/ p s
-  !(p:'a->bool) q r s. (r s \\/ q s) \\/ p s <=> (q s \\/ r s) \\/ p s
-  !(p:'a->bool) q r. (r \\/* q) \\/* p = (q \\/* r) \\/* p
-  !p q r (s:'a). p s \\/ (r s \\/ q s) ==> p s \\/ (q s \\/ r s)
-  !p q r (s:'a). p s \\/ (q s \\/ r s) ==> p s \\/ (r s \\/ q s)
-  !p q r (s:'a). p s \\/ (r s \\/ q s) <=> p s \\/ (q s \\/ r s) 
-  !(p:'a->bool) q r. p \\/* (r \\/* q) = p \\/* (q \\/* r)
-  !p q r (s:'a). (r s /\\ q s) /\\ p s ==> (q s /\\ r s) /\\ p s
-  !p q r (s:'a). (q s /\\ r s) /\\ p s ==> (r s /\\ q s) /\\ p s
-  !p q r (s:'a). (r s /\\ q s) /\\ p s <=> (q s /\\ r s) /\\ p s
-  !(p:'a->bool) q r. (r /\\* q) /\\* p = (q /\\* r) /\\* p
-  !p q r (s:'a). p s /\\ (r s /\\ q s) ==> p s /\\ (q s /\\ r s)
-  !p q r (s:'a). p s /\\ (q s /\\ r s) ==> p s /\\ (r s /\\ q s)
-  !p q r (s:'a). p s /\\ (r s /\\ q s) <=> p s /\\ (q s /\\ r s) 
-  !(p:'a->bool) q r. p /\\* (r /\\* q) = p /\\* (q /\\* r)
-  !p q r (s:'a). p s \\/ (r s /\\ q s) ==> p s \\/ (q s /\\ r s)
-  !p q r (s:'a). p s \\/ (q s /\\ r s) ==> p s \\/ (r s /\\ q s)
-  !p q r (s:'a). p s \\/ (r s /\\ q s) <=> p s \\/ (q s /\\ r s)
-  !(p:'a->bool) q r. p \\/* (r /\\* q) = p \\/* (q /\\* r)
-  !(p:'a->bool). (Not (Not p)) = p
+  forall p q p' q' (s:'a).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)
+  forall p q p' q' (s:'a).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s
+  forall p q r (s:'a).\n         ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))s\n       ==>\n         r s
+  forall p q p' q' r r' (s:'a).\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))s\n      ==>\n        ((p /\\* q) \\/* r \\/* r')s
+  forall p q r (s:'a).\n        ((p /\\* r) \\/* (((p \\/* q) /\\* (q \\/* r)) \\/* r)) s\n      ==>\n        (q \\/* r) s
+  forall p q b r (s:'a).\n        ((r /\\* q) \\/* (p /\\* b) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
+  forall p q b r (s:'a).\n        (((r /\\* q) \\/* ((r /\\* p) /\\* b)) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
+  forall p q r (s:'a).\n           (r s /\\ q s) \\/ p s\n         ==>\n\t   (q s /\\ r s) \\/ p s
+  forall p q r (s:'a).\n         (q s /\\ r s) \\/ p s\n       ==>\n         (r s /\\ q s) \\/ p s
+  forall p q r (s:'a).\n         (r s /\\ q s) \\/ p s\n       <=> (q s /\\ r s) \\/ p s
+  forall(p:'a->bool) q r. ((r /\\* q) \\/* p) = ((q /\\* r) \\/* p)
+  forall p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       ==>\n         (p s /\\ (q s \\/ r s))
+  forall p q r (s:'a).\n         (p s /\\ (q s \\/ r s))\n        ==>\n         (p s /\\ (r s \\/ q s))
+  forall p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       = (p s /\\ (q s \\/ r s))
+  forall(p:'a->bool) q r.\n        p /\\* (r \\/* q)\n      = p /\\* (q \\/* r)
+  forall p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       ==>\n         (q s \\/ r s) /\\ p s
+  forall p q r (s:'a).\n         (q s \\/ r s) /\\ p s\n       ==>\n         (r s \\/ q s) /\\ p s
+  forall p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       <=> (q s \\/ r s) /\\ p s
+  forall(p:'a->bool) q r.\n        (r \\/* q) /\\* p\n      = (q \\/* r) /\\* p
+  forall p q r (s:'a).\n         (r s \\/ q s) \\/ p s\n       ==>\n         (q s \\/ r s) \\/ p s
+  forall p q r (s:'a).\n         (q s \\/ r s) \\/ p s\n       ==>\n         (r s \\/ q s) \\/ p s
+  forall(p:'a->bool) q r s. (r s \\/ q s) \\/ p s <=> (q s \\/ r s) \\/ p s
+  forall(p:'a->bool) q r. (r \\/* q) \\/* p = (q \\/* r) \\/* p
+  forall p q r (s:'a). p s \\/ (r s \\/ q s) ==> p s \\/ (q s \\/ r s)
+  forall p q r (s:'a). p s \\/ (q s \\/ r s) ==> p s \\/ (r s \\/ q s)
+  forall p q r (s:'a). p s \\/ (r s \\/ q s) <=> p s \\/ (q s \\/ r s) 
+  forall(p:'a->bool) q r. p \\/* (r \\/* q) = p \\/* (q \\/* r)
+  forall p q r (s:'a). (r s /\\ q s) /\\ p s ==> (q s /\\ r s) /\\ p s
+  forall p q r (s:'a). (q s /\\ r s) /\\ p s ==> (r s /\\ q s) /\\ p s
+  forall p q r (s:'a). (r s /\\ q s) /\\ p s <=> (q s /\\ r s) /\\ p s
+  forall(p:'a->bool) q r. (r /\\* q) /\\* p = (q /\\* r) /\\* p
+  forall p q r (s:'a). p s /\\ (r s /\\ q s) ==> p s /\\ (q s /\\ r s)
+  forall p q r (s:'a). p s /\\ (q s /\\ r s) ==> p s /\\ (r s /\\ q s)
+  forall p q r (s:'a). p s /\\ (r s /\\ q s) <=> p s /\\ (q s /\\ r s) 
+  forall(p:'a->bool) q r. p /\\* (r /\\* q) = p /\\* (q /\\* r)
+  forall p q r (s:'a). p s \\/ (r s /\\ q s) ==> p s \\/ (q s /\\ r s)
+  forall p q r (s:'a). p s \\/ (q s /\\ r s) ==> p s \\/ (r s /\\ q s)
+  forall p q r (s:'a). p s \\/ (r s /\\ q s) <=> p s \\/ (q s /\\ r s)
+  forall(p:'a->bool) q r. p \\/* (r /\\* q) = p \\/* (q /\\* r)
+  forall(p:'a->bool). (Not (Not p)) = p
   (q (s:'a)):bool
   (p (s:'a)):bool
-  !p q (s:'a). p s \\/ q s <=> q s \\/ p s
-  !(p:'a->bool) q s. p s \\/ q s <=> q s \\/ p s
-  !(p:'a->bool) q. (p \\/* q) = (q \\/* p)
-  !p:'a->bool. p \\/* p = p
-  !p q  r (s:'a). ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
-  !p q r (s:'a).\n                    ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
-  !(p:'a->bool) q r. (p \\/* q) \\/* r = p \\/* (q \\/* r)
-  !p q (s:'a). p s /\\ q s ==> q s
-  !p q (s:'a). (p /\\* q) s ==> q s
-  !p q (s:'a). p s /\\ q s ==> p s
-  !p q (s:'a). (p /\\* q) s ==> p s
-  !p q (s:'a). p s ==> (p \\/* q) s
-  !p q (s:'a). p s ==> (q \\/* p) s
-  !(p:'a->bool) q r.\n        (!s. p s ==> q s)\n      ==>\n        (!s. (p /\\* r) s ==> (q /\\* r) s)
-  !(p:'a->bool) q r.\n        (!s. p s ==> q s)\n      ==>\n        (!s. (p \\/* r) s ==> (q \\/* r) s)
-  !p:'a->bool. p /\\* p = p
+  forall p q (s:'a). p s \\/ q s <=> q s \\/ p s
+  forall(p:'a->bool) q s. p s \\/ q s <=> q s \\/ p s
+  forall(p:'a->bool) q. (p \\/* q) = (q \\/* p)
+  forall p:'a->bool. p \\/* p = p
+  forall p q  r (s:'a). ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
+  forall p q r (s:'a).\n                    ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
+  forall(p:'a->bool) q r. (p \\/* q) \\/* r = p \\/* (q \\/* r)
+  forall p q (s:'a). p s /\\ q s ==> q s
+  forall p q (s:'a). (p /\\* q) s ==> q s
+  forall p q (s:'a). p s /\\ q s ==> p s
+  forall p q (s:'a). (p /\\* q) s ==> p s
+  forall p q (s:'a). p s ==> (p \\/* q) s
+  forall p q (s:'a). p s ==> (q \\/* p) s
+  forall(p:'a->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p /\\* r) s ==> (q /\\* r) s)
+  forall(p:'a->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p \\/* r) s ==> (q \\/* r) s)
+  forall p:'a->bool. p /\\* p = p
   (q:'a->bool) s
   (p:'a->bool) s
-  !p q (s:'a). (p s /\\ q s) <=> (q s /\\ p s)
-  !p q (s:'a). p s /\\ q s <=> q s /\\ p s
-  !(p:'a->bool) q. (p /\\* q) = (q /\\* p)
-  !p q r (s:'a). ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
-  !p q  r (s:'a).\n                 ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
-  !(p:'a->bool) q r. (p /\\* q) /\\* r = p /\\* (q /\\* r)
+  forall p q (s:'a). (p s /\\ q s) <=> (q s /\\ p s)
+  forall p q (s:'a). p s /\\ q s <=> q s /\\ p s
+  forall(p:'a->bool) q. (p /\\* q) = (q /\\* p)
+  forall p q r (s:'a). ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
+  forall p q  r (s:'a).\n                 ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
+  forall(p:'a->bool) q r. (p /\\* q) /\\* r = p /\\* (q /\\* r)
   Not (True:'a->bool) = False
   Not (False:'a->bool) = True
-  !p:'a->bool. p /\\* True = p
-  !p:'a->bool. p \\/* True = True
-  !p:'a->bool. p /\\* False = False
-  !p:'a->bool. p \\/* False = p
-  !p:'a->bool. p \\/* (Not p) = True
-  !p:'a->bool. p /\\* (Not p) = False
-  !p q. p /\\ ~q \\/ p /\\ q ==> p
-  !p q. p ==> p /\\ ~q \\/ p /\\ q
-  !p q. p /\\ ~q \\/ p /\\ q <=> p
-  !(p:'a->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p
-  !p q. (p \\/ q) /\\ ~q ==> p /\\ ~q
-  !p q. p /\\ ~q ==> (p \\/ q) /\\ ~q
-  !p q. (p \\/ q) /\\ ~q <=> p /\\ ~q
-  !(p:'a->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)
-  !(p:'a->bool) q s. (p s /\\ q s) \\/ q s ==> q s
-  !(p:'a->bool) q s. q s ==> (p s /\\ q s) \\/ q s
-  !(p:'a->bool) q s. (p s /\\ q s) \\/ q s <=> q s
-  !(p:'a->bool) q. (p /\\* q) \\/* q = q
-  !(p:'a->bool) q s. (p s \\/ q s) /\\ q s ==> q s
-  !(p:'a->bool) q s. q s ==> (p s \\/ q s) /\\ q s
-  !(p:'a->bool) q s. (p s \\/ q s) /\\ q s <=> q s
-  !(p:'a->bool) q. (p \\/* q) /\\* q = q
-  !(p:'a->bool) q. Not (p \\/* q) = (Not p) /\\* (Not q)
-  !(p:'a->bool) q. Not (p /\\* q) = (Not p) \\/* (Not q)
-  !(p:'a->bool) q.\n        (!s. (Not p)s ==> q s)\n      = (!s. (p \\/* q)s)
-  !(p:'a->bool) q. (!s. p s ==> q s) = (!s. ((Not p) \\/* q)s)
-  !(p:'a->bool) q. (!s. (p \\/* q)s) = (!s. (Not p)s ==> q s)
-  !(p:'a->bool) q. (!s. ((Not p) \\/* q)s) = (!s. p s ==> q s)
-  !p q r (s:'a).\n         (p s \\/ q s /\\ r s)\n       ==>\n         ((p s \\/ q s) /\\ (p s \\/ r s))
-  !(p:'a->bool) q r s.\n             ((p s \\/ q s) /\\ (p s \\/ r s)) ==> (p s \\/ q s /\\ r s)
-  !(p:'a->bool) q r s.\n            (p s \\/ q s /\\ r s) <=> ((p s \\/ q s) /\\ (p s \\/ r s))
-  !(p:'a->bool) q r. p \\/* (q /\\* r) = (p \\/* q) /\\* (p \\/* r)
-  !(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) ==> (p s /\\ q s \\/ p s /\\ r s)
-  !(p:'a->bool) q r s.\n            (p s /\\ q s \\/ p s /\\ r s) ==> (p s /\\ (q s \\/ r s))
-  !(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) <=> (p s /\\ q s \\/ p s /\\ r s)
-  !(p:'a->bool) q r. p /\\* (q \\/* r) = (p /\\* q) \\/* (p /\\* r)
-  !(p:'a->bool). (!s. (Not p)s) ==> (!s. p s = False s)
+  forall p:'a->bool. p /\\* True = p
+  forall p:'a->bool. p \\/* True = True
+  forall p:'a->bool. p /\\* False = False
+  forall p:'a->bool. p \\/* False = p
+  forall p:'a->bool. p \\/* (Not p) = True
+  forall p:'a->bool. p /\\* (Not p) = False
+  forall p q. p /\\ ~q \\/ p /\\ q ==> p
+  forall p q. p ==> p /\\ ~q \\/ p /\\ q
+  forall p q. p /\\ ~q \\/ p /\\ q <=> p
+  forall(p:'a->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p
+  forall p q. (p \\/ q) /\\ ~q ==> p /\\ ~q
+  forall p q. p /\\ ~q ==> (p \\/ q) /\\ ~q
+  forall p q. (p \\/ q) /\\ ~q <=> p /\\ ~q
+  forall(p:'a->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)
+  forall(p:'a->bool) q s. (p s /\\ q s) \\/ q s ==> q s
+  forall(p:'a->bool) q s. q s ==> (p s /\\ q s) \\/ q s
+  forall(p:'a->bool) q s. (p s /\\ q s) \\/ q s <=> q s
+  forall(p:'a->bool) q. (p /\\* q) \\/* q = q
+  forall(p:'a->bool) q s. (p s \\/ q s) /\\ q s ==> q s
+  forall(p:'a->bool) q s. q s ==> (p s \\/ q s) /\\ q s
+  forall(p:'a->bool) q s. (p s \\/ q s) /\\ q s <=> q s
+  forall(p:'a->bool) q. (p \\/* q) /\\* q = q
+  forall(p:'a->bool) q. Not (p \\/* q) = (Not p) /\\* (Not q)
+  forall(p:'a->bool) q. Not (p /\\* q) = (Not p) \\/* (Not q)
+  forall(p:'a->bool) q.\n        (forall s. (Not p)s ==> q s)\n      = (forall s. (p \\/* q)s)
+  forall(p:'a->bool) q. (forall s. p s ==> q s) = (forall s. ((Not p) \\/* q)s)
+  forall(p:'a->bool) q. (forall s. (p \\/* q)s) = (forall s. (Not p)s ==> q s)
+  forall(p:'a->bool) q. (forall s. ((Not p) \\/* q)s) = (forall s. p s ==> q s)
+  forall p q r (s:'a).\n         (p s \\/ q s /\\ r s)\n       ==>\n         ((p s \\/ q s) /\\ (p s \\/ r s))
+  forall(p:'a->bool) q r s.\n             ((p s \\/ q s) /\\ (p s \\/ r s)) ==> (p s \\/ q s /\\ r s)
+  forall(p:'a->bool) q r s.\n            (p s \\/ q s /\\ r s) <=> ((p s \\/ q s) /\\ (p s \\/ r s))
+  forall(p:'a->bool) q r. p \\/* (q /\\* r) = (p \\/* q) /\\* (p \\/* r)
+  forall(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) ==> (p s /\\ q s \\/ p s /\\ r s)
+  forall(p:'a->bool) q r s.\n            (p s /\\ q s \\/ p s /\\ r s) ==> (p s /\\ (q s \\/ r s))
+  forall(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) <=> (p s /\\ q s \\/ p s /\\ r s)
+  forall(p:'a->bool) q r. p /\\* (q \\/* r) = (p /\\* q) \\/* (p /\\* r)
+  forall(p:'a->bool). (forall s. (Not p)s) ==> (forall s. p s = False s)
   (\\s:'a. p s) = (\\s. False s)
-  !(p:'a->bool). (!s. (Not p)s) ==> (p = False)
-  !(p:'a->bool) q. (!s. (Not (p /\\* q))s) <=> (!s. p s ==> Not q s)
-  !(p:'a->bool) q. (!s. (Not (p /\\* q))s) ==> (!s. p s ==> Not q s)
-  !(p:'a->bool) q. (!s. (Not (p /\\* q))s) ==> (!s. q s ==> Not p s)
-  !(p:'a->bool) q s. p s /\\ (p s \\/ q s) ==> p s
-  !(p:'a->bool) q s. p s ==> p s /\\ (p s \\/ q s)
-  !(p:'a->bool) q s. p s /\\ (p s \\/ q s) <=> p s
-  !(p:'a->bool) q.  (\\s. p s /\\ (p s \\/ q s)) = p
-  !(p:'a->bool) q. p /\\* (p \\/* q) = p
-  !(p:'a->bool) q. p /\\* (q \\/* p) = p /\\* (p \\/* q)
-  !(p:'a->bool) q. (!s. p s) ==> (!s. (p \\/* q) s)
-  !(p:'a->bool) q s. p s ==> (p \\/* q) s
-  !(P:num->('a->bool)) i s. (!i. P i s) <=> (P i s /\\ (!i. P i s))
+  forall(p:'a->bool). (forall s. (Not p)s) ==> (p = False)
+  forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) <=> (forall s. p s ==> Not q s)
+  forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. p s ==> Not q s)
+  forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. q s ==> Not p s)
+  forall(p:'a->bool) q s. p s /\\ (p s \\/ q s) ==> p s
+  forall(p:'a->bool) q s. p s ==> p s /\\ (p s \\/ q s)
+  forall(p:'a->bool) q s. p s /\\ (p s \\/ q s) <=> p s
+  forall(p:'a->bool) q.  (\\s. p s /\\ (p s \\/ q s)) = p
+  forall(p:'a->bool) q. p /\\* (p \\/* q) = p
+  forall(p:'a->bool) q. p /\\* (q \\/* p) = p /\\* (p \\/* q)
+  forall(p:'a->bool) q. (forall s. p s) ==> (forall s. (p \\/* q) s)
+  forall(p:'a->bool) q s. p s ==> (p \\/* q) s
+  forall(P:num->('a->bool)) i s. (forall i. P i s) <=> (P i s /\\ (forall i. P i s))
   i:num
   i:num
   i':num
-  !(P:num->('a->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))
-  !(P:num->('a->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))
+  forall(P:num->('a->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))
+  forall(P:num->('a->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))
   SUC i
   0
   (P (i:num) (s:'a)):bool
@@ -5699,8 +5699,8 @@ Unity/mk_state_logic quotations (172):
   i':num
   0
   \\<=/* (P:num->('a->bool)) i s
-  !P (s:'a). (?i. \\<=/* P i s) = (?i. P i s)
-  !P. ((\\s:'a. ?i. \\<=/* P i s) = ((?*) P))
+  forall P (s:'a). (?i. \\<=/* P i s) = (?i. P i s)
+  forall P. ((\\s:'a. ?i. \\<=/* P i s) = ((?*) P))
 FALSE_def =  |- ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) #False:fun(''a,bool)) (\s:''a. #F:bool))
 TRUE_def =  |- ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) #True:fun(''a,bool)) (\s:''a. #T:bool))
 NOT_def1 =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool))) (\s:''a. (#~:fun(bool,bool) (p:fun(''a,bool) s:''a))))))

@@ -21,22 +21,22 @@ test "meson matches meson.ml" {
       sthm(@tactics.prove(t, @meson.meson_tac(@list.List([]))))
     })
   }
-  ms("mp", "(!x:A. P x ==> Q x) /\\ P a ==> Q a")
-  ms("swap", "(?x:A. !y:B. P x y) ==> (!y. ?x. P x y)")
-  ms("drinker", "?x:A. P x ==> !y. P y")
+  ms("mp", "(forall x:A. P x ==> Q x) /\\ P a ==> Q a")
+  ms("swap", "(?x:A. forall y:B. P x y) ==> (forall y. ?x. P x y)")
+  ms("drinker", "?x:A. P x ==> forall y. P y")
   ms(
-    "trans", "(!x y z:A. R x y /\\ R y z ==> R x z) /\\ R a b /\\ R b c /\\ R c d ==> R a d",
+    "trans", "(forall x y z:A. R x y /\\ R y z ==> R x z) /\\ R a b /\\ R b c /\\ R c d ==> R a d",
   )
-  ms("equality", "(!x:A. f(f x) = x) ==> !y. ?x. f x = y")
-  ms("p18", "?y:A. !x. F y ==> F x")
+  ms("equality", "(forall x:A. f(f x) = x) ==> forall y. ?x. f x = y")
+  ms("p18", "?y:A. forall x. F y ==> F x")
   log.attempt("meson_thms", () => {
-    let a = @kernel.assume_rule(tm("!x:A. P x ==> Q x"))
+    let a = @kernel.assume_rule(tm("forall x:A. P x ==> Q x"))
     let b = @kernel.assume_rule(tm("(P:A->bool) c"))
     let t = tm("(Q:A->bool) c")
     sthm(@tactics.prove(t, @meson.meson_tac(@list.List([a, b]))))
   })
   log.attempt("asm_meson", () => {
-    let t = tm("(!x:A. P x ==> Q x) ==> P a ==> Q a")
+    let t = tm("(forall x:A. P x ==> Q x) ==> P a ==> Q a")
     let tac = @tactics.then_tac(
       @tactics.repeat_tac(@tactics.disch_tac),
       @meson.asm_meson_tac(@list.List([])),

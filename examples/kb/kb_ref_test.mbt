@@ -5849,13 +5849,13 @@ test "Examples/kb matches Examples/kb.ml" {
       #|14 equations and 1000 pending critical pairs
       #|14 equations and 0 pending critical pairs
       #|Examples/kb quotations (32):
-      #|  !a b. i(a) * a * b = b
+      #|  forall a b. i(a) * a * b = b
       #|  i:num->num
       #|  (*):num->num->num
       #|  1
-      #|  !a b c. (a * b) * (b * c) = b
+      #|  forall a b c. (a * b) * (b * c) = b
       #|  (*):num->num->num
-      #|  (!a b:num. a - a * b = b) /\\\n   (!a b:num. a * b - b = a) /\\\n   (!a. a * 1 = a) /\\\n   (!a. 1 * a = a)
+      #|  (forall a b:num. a - a * b = b) /\\\n   (forall a b:num. a * b - b = a) /\\\n   (forall a. a * 1 = a) /\\\n   (forall a. 1 * a = a)
       #|  (-):num->num->num
       #|  (+):num->num->num
       #|  ( * ):num->num->num
@@ -5863,20 +5863,20 @@ test "Examples/kb matches Examples/kb.ml" {
       #|  ((f(f(f(f(f c))))) = c:A) /\\ (f(f(f c)) = c)
       #|  f:A->A
       #|  c:A
-      #|  (!x. 1 * x = x) /\\ (!x. i(x) * x = 1) /\\\n   (!x y z. (x * y) * z = x * y * z)
+      #|  (forall x. 1 * x = x) /\\ (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)
       #|  i:num->num
       #|  (*):num->num->num
       #|  1
-      #|  (!x. 0 + x = x) /\\\n   (!x. neg x + x = 0) /\\\n   (!x y z. (x + y) + z = x + y + z) /\\\n   (!x y z. (x * y) * z = x * y * z) /\\\n   (!x y z. (x + y) * z = (x * z) + (y * z))
+      #|  (forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))
       #|  ( * ):num->num->num
       #|  neg:num->num
       #|  (+):num->num->num
       #|  0
-      #|  (!x. 1 * x = x) /\\\n   (!x. i(x) * x = 1) /\\\n   (!x y z. (x * y) * z = x * y * z)\n   ==> !x y. i(y) * i(i(i(x * i(y)))) * x = 1
+      #|  (forall x. 1 * x = x) /\\\n   (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)\n   ==> forall x y. i(y) * i(i(i(x * i(y)))) * x = 1
       #|  i:num->num
       #|  (*):num->num->num
       #|  1
-      #|  (!x. 0 + x = x) /\\\n   (!x. neg x + x = 0) /\\\n   (!x y z. (x + y) + z = x + y + z) /\\\n   (!x y z. (x * y) * z = x * y * z) /\\\n   (!x y z. (x + y) * z = (x * z) + (y * z))\n   ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n        a + b)
+      #|  (forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))\n   ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n        a + b)
       #|  ( * ):num->num->num
       #|  neg:num->num
       #|  (+):num->num->num

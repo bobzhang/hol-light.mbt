@@ -61,7 +61,7 @@ fn step_1() -> Unit raise {
   mult_eq_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. m * n = 2 <=> m = 1 /\\ n = 2 \\/ m = 2 /\\ n = 1",
+        "forall m n. m * n = 2 <=> m = 1 /\\ n = 2 \\/ m = 2 /\\ n = 1",
       ),
       t11,
     ),
@@ -150,7 +150,7 @@ fn step_3() -> Unit raise {
   let t27 = @tactics.exists_tac(@parser.parse_term("m:num"))
   let t26 = @tactics.match_mp_tac(
     @int.number_rule(
-      @parser.parse_term("!m. (a * m == 1) (mod n) ==> coprime(a,n)"),
+      @parser.parse_term("forall m. (a * m == 1) (mod n) ==> coprime(a,n)"),
     ),
   )
   let t25 = @simp.asm_rewrite_tac(
@@ -262,7 +262,7 @@ fn step_3() -> Unit raise {
   modmul_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. group_carrier(modmul_group n) =\n        if n <= 1 then {1} else {m | m < n /\\ coprime(m,n)}) /\\\n   (!n. group_id(modmul_group n) = 1) /\\\n   (!n. group_inv(modmul_group n) = inverse_mod n) /\\\n   (!n. group_mul(modmul_group n) =\n        if n <= 1 then (\\a b. 1) else (\\a b. (a * b) MOD n))",
+        "(forall n. group_carrier(modmul_group n) =\n        if n <= 1 then {1} else {m | m < n /\\ coprime(m,n)}) /\\\n   (forall n. group_id(modmul_group n) = 1) /\\\n   (forall n. group_inv(modmul_group n) = inverse_mod n) /\\\n   (forall n. group_mul(modmul_group n) =\n        if n <= 1 then (\\a b. 1) else (\\a b. (a * b) MOD n))",
       ),
       t42,
     ),
@@ -316,7 +316,7 @@ fn step_4() -> Unit raise {
   )
   finite_modmul_group_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. FINITE(group_carrier(modmul_group n))"),
+      @parser.parse_term("forall n. FINITE(group_carrier(modmul_group n))"),
       t47,
     ),
   )
@@ -372,7 +372,7 @@ fn step_5() -> Unit raise {
   order_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. CARD(group_carrier(modmul_group n)) =\n       if n = 0 then 1 else phi n",
+        "forall n. CARD(group_carrier(modmul_group n)) =\n       if n = 0 then 1 else phi n",
       ),
       t54,
     ),
@@ -401,7 +401,7 @@ fn step_6() -> Unit raise {
   has_size_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. ~(n = 0) ==> group_carrier(modmul_group n) HAS_SIZE phi n",
+        "forall n. ~(n = 0) ==> group_carrier(modmul_group n) HAS_SIZE phi n",
       ),
       t56,
     ),
@@ -444,7 +444,7 @@ fn step_7() -> Unit raise {
     t59,
   )
   abelian_modmul_group_c.set(
-    @tactics.prove(@parser.parse_term("!n. abelian_group(modmul_group n)"), t60),
+    @tactics.prove(@parser.parse_term("forall n. abelian_group(modmul_group n)"), t60),
   )
 }
 
@@ -529,7 +529,7 @@ fn step_8() -> Unit raise {
   )
   trivial_modmul_group_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. trivial_group(modmul_group n) <=> n <= 2"),
+      @parser.parse_term("forall n. trivial_group(modmul_group n) <=> n <= 2"),
       t70,
     ),
   )
@@ -610,7 +610,7 @@ fn step_9() -> Unit raise {
   group_homomorphism_prod_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. 2 <= m /\\ 2 <= n\n         ==> group_homomorphism (modmul_group(m * n),\n                                 prod_group (modmul_group m)\n                                            (modmul_group n))\n                                (\\a. (a MOD m),(a MOD n))",
+        "forall m n. 2 <= m /\\ 2 <= n\n         ==> group_homomorphism (modmul_group(m * n),\n                                 prod_group (modmul_group m)\n                                            (modmul_group n))\n                                (\\a. (a MOD m),(a MOD n))",
       ),
       t78,
     ),
@@ -947,7 +947,7 @@ fn step_10() -> Unit raise {
   group_isomorphism_prod_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. 2 <= m /\\ 2 <= n /\\ coprime(m,n)\n         ==> group_isomorphism (modmul_group(m * n),\n                                prod_group (modmul_group m)\n                                           (modmul_group n))\n                               (\\a. (a MOD m),(a MOD n))",
+        "forall m n. 2 <= m /\\ 2 <= n /\\ coprime(m,n)\n         ==> group_isomorphism (modmul_group(m * n),\n                                prod_group (modmul_group m)\n                                           (modmul_group n))\n                               (\\a. (a MOD m),(a MOD n))",
       ),
       t104,
     ),
@@ -1167,7 +1167,7 @@ fn step_11() -> Unit raise {
   isomorphic_group_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. coprime(m,n)\n         ==> prod_group (modmul_group m)\n                        (modmul_group n)\n             isomorphic_group (modmul_group (m * n))",
+        "forall m n. coprime(m,n)\n         ==> prod_group (modmul_group m)\n                        (modmul_group n)\n             isomorphic_group (modmul_group (m * n))",
       ),
       t129,
     ),
@@ -1226,7 +1226,7 @@ fn step_12() -> Unit raise {
   group_pow_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n a k. group_pow (modmul_group n) a k =\n           if n <= 1 then 1 else (a EXP k) MOD n",
+        "forall n a k. group_pow (modmul_group n) a k =\n           if n <= 1 then 1 else (a EXP k) MOD n",
       ),
       t135,
     ),
@@ -1369,7 +1369,7 @@ fn step_13() -> Unit raise {
   group_element_order_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n a. a IN group_carrier(modmul_group n)\n         ==> group_element_order (modmul_group n) a = order n a",
+        "forall n a. a IN group_carrier(modmul_group n)\n         ==> group_element_order (modmul_group n) a = order n a",
       ),
       t150,
     ),
@@ -1689,7 +1689,7 @@ fn step_14() -> Unit raise {
   cyclic_modmul_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. cyclic_group(modmul_group n) <=>\n       n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
+        "forall n. cyclic_group(modmul_group n) <=>\n       n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
       ),
       t187,
     ),

@@ -5656,55 +5656,55 @@ test "IEEE/ieee_thms matches IEEE/ieee_thms.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|IEEE/ieee_thms quotations (85):
-      #|  !(fmt:ieee_format).\n  (dest_ieee_format fmt) = (FST (dest_ieee_format fmt),\n                            (FST (SND (dest_ieee_format fmt))),\n                            (FST (SND (SND (dest_ieee_format fmt)))),\n                            (SND (SND (SND (dest_ieee_format fmt)))))
-      #|  !(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (r,p,emin,emax)))
-      #|  !(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             EVEN (FST (r,p,emin,emax)))
-      #|  !(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (SND (r,p,emin,emax))))
-      #|  !(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             (FST (SND (SND (r,p,emin,emax)))) <=\n             (SND (SND (SND (r,p,emin,emax)))))
-      #|  !(fmt:ieee_format). is_valid_ieee_format (dest_ieee_format fmt)
-      #|  !(fmt:ieee_format). 1 < (ieee_r fmt)
+      #|  forall(fmt:ieee_format).\n  (dest_ieee_format fmt) = (FST (dest_ieee_format fmt),\n                            (FST (SND (dest_ieee_format fmt))),\n                            (FST (SND (SND (dest_ieee_format fmt)))),\n                            (SND (SND (SND (dest_ieee_format fmt)))))
+      #|  forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (r,p,emin,emax)))
+      #|  forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             EVEN (FST (r,p,emin,emax)))
+      #|  forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (SND (r,p,emin,emax))))
+      #|  forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             (FST (SND (SND (r,p,emin,emax)))) <=\n             (SND (SND (SND (r,p,emin,emax)))))
+      #|  forall(fmt:ieee_format). is_valid_ieee_format (dest_ieee_format fmt)
+      #|  forall(fmt:ieee_format). 1 < (ieee_r fmt)
       #|  1 < x ==> 0 < x
-      #|  !(fmt:ieee_format). 0 < (ieee_r fmt)
+      #|  forall(fmt:ieee_format). 0 < (ieee_r fmt)
       #|  0 < x ==> ~(x = 0)
-      #|  !(fmt:ieee_format). ~(&(ieee_r fmt) = &0)
-      #|  !(fmt:ieee_format). EVEN (ieee_r fmt)
+      #|  forall(fmt:ieee_format). ~(&(ieee_r fmt) = &0)
+      #|  forall(fmt:ieee_format). EVEN (ieee_r fmt)
       #|  ODD 1
       #|  x = 1
       #|  x = 0
-      #|  !x. ~(x = 0) /\\ EVEN x ==> 2 <= x
-      #|  !(fmt:ieee_format). 2 <= (ieee_r fmt)
+      #|  forall x. ~(x = 0) /\\ EVEN x ==> 2 <= x
+      #|  forall(fmt:ieee_format). 2 <= (ieee_r fmt)
       #|  x = 1
-      #|  !(fmt:ieee_format). 1 < (ieee_p fmt)
+      #|  forall(fmt:ieee_format). 1 < (ieee_p fmt)
       #|  1 < x ==> 1 <= x
-      #|  !(fmt:ieee_format). 1 <= (ieee_p fmt)
+      #|  forall(fmt:ieee_format). 1 <= (ieee_p fmt)
       #|  1 < x ==> 0 < x
-      #|  !(fmt:ieee_format). 0 < (ieee_p fmt)
+      #|  forall(fmt:ieee_format). 0 < (ieee_p fmt)
       #|  0 < n ==> ~(n = 0)
-      #|  !(fmt:ieee_format). ~((ieee_p fmt) = 0)
+      #|  forall(fmt:ieee_format). ~((ieee_p fmt) = 0)
       #|  1 <= n <=> 0 < n
       #|  &0 <= x:int - &1:int <=> &1 <= x
-      #|  !(fmt:ieee_format). &0 <= (&(ieee_p fmt):int) - (&1:int)
-      #|  !(fmt:ieee_format). &(ieee_r fmt) ipow (&(ieee_p fmt) - &1) =\n      &((ieee_r fmt) EXP ((ieee_p fmt) - 1))
+      #|  forall(fmt:ieee_format). &0 <= (&(ieee_p fmt):int) - (&1:int)
+      #|  forall(fmt:ieee_format). &(ieee_r fmt) ipow (&(ieee_p fmt) - &1) =\n      &((ieee_r fmt) EXP ((ieee_p fmt) - 1))
       #|  &0 < (x:real) ==> &0 <= x
-      #|  !(fmt:ieee_format) (e:int). &0 <= &(ieee_r fmt) ipow e
-      #|  !(fmt:ieee_format) (e:int). &0 < &(ieee_r fmt) ipow e
+      #|  forall(fmt:ieee_format) (e:int). &0 <= &(ieee_r fmt) ipow e
+      #|  forall(fmt:ieee_format) (e:int). &0 < &(ieee_r fmt) ipow e
       #|  &0 < (x:real) ==> ~(x = &0)
-      #|  !(fmt:ieee_format) (e:int). ~(&(ieee_r fmt) ipow e = &0)
-      #|  !(fmt:ieee_format) (u:int) (v:int).\n        &(ieee_r fmt) ipow u * &(ieee_r fmt) ipow v =\n      &(ieee_r fmt) ipow (u + v)
-      #|  !(fmt:ieee_format). (ieee_emin fmt) <= (ieee_emax fmt)
+      #|  forall(fmt:ieee_format) (e:int). ~(&(ieee_r fmt) ipow e = &0)
+      #|  forall(fmt:ieee_format) (u:int) (v:int).\n        &(ieee_r fmt) ipow u * &(ieee_r fmt) ipow v =\n      &(ieee_r fmt) ipow (u + v)
+      #|  forall(fmt:ieee_format). (ieee_emin fmt) <= (ieee_emax fmt)
       #|  is_valid_fformat (ieee_r fmt, ieee_p fmt, ieee_emin fmt)
-      #|  !(fmt:ieee_format).\n          (fr (ieee_to_fformat fmt)) = (ieee_r fmt) /\\\n          (fp (ieee_to_fformat fmt)) = (ieee_p fmt) /\\\n          (fe (ieee_to_fformat fmt)) = (ieee_emin fmt)
+      #|  forall(fmt:ieee_format).\n          (fr (ieee_to_fformat fmt)) = (ieee_r fmt) /\\\n          (fp (ieee_to_fformat fmt)) = (ieee_p fmt) /\\\n          (fe (ieee_to_fformat fmt)) = (ieee_emin fmt)
       #|  is_valid_flformat (ieee_r fmt, ieee_p fmt)
-      #|  !(fmt:ieee_format).\n          (flr (ieee_to_flformat fmt)) = (ieee_r fmt) /\\\n          (flp (ieee_to_flformat fmt)) = (ieee_p fmt)
+      #|  forall(fmt:ieee_format).\n          (flr (ieee_to_flformat fmt)) = (ieee_r fmt) /\\\n          (flp (ieee_to_flformat fmt)) = (ieee_p fmt)
       #|  (a:int) <= b ==> (a = b) \\/ (a < b)
-      #|  !(fmt:ieee_format). (ieee_emin fmt) = (ieee_emax fmt) \\/\n      (ieee_emin fmt) < (ieee_emax fmt)
+      #|  forall(fmt:ieee_format). (ieee_emin fmt) = (ieee_emax fmt) \\/\n      (ieee_emin fmt) < (ieee_emax fmt)
       #|  (ieee_p fmt)
-      #|  !(fmt:ieee_format). 1 < (ieee_r fmt) EXP (ieee_p fmt)
+      #|  forall(fmt:ieee_format). 1 < (ieee_r fmt) EXP (ieee_p fmt)
       #|  1 < x ==> 1 <= x
       #|  &0 <= x - &1 <=> &1 <= x
       #|  1 < x ==> 1 <= x
       #|  &(ieee_r fmt EXP ieee_p fmt - 1) =\n            &(ieee_r fmt EXP ieee_p fmt) - &1
-      #|  !(fmt:ieee_format). &0 <= (max_ieee fmt)
+      #|  forall(fmt:ieee_format). &0 <= (max_ieee fmt)
       #|  0 < x ==> x - 1 < x
       #|  &1 <= x - &1 <=> &2 <= x
       #|  &1 < x ==> &1 <= x
@@ -5724,23 +5724,23 @@ test "IEEE/ieee_thms matches IEEE/ieee_thms.ml" {
       #|  1 < x ==> 0 < x - 1
       #|  (ieee_emax fmt)
       #|  (ieee_r fmt) EXP (ieee_p fmt) - 1
-      #|  !(fmt:ieee_format). (is_ieee(fmt) (max_ieee fmt))
+      #|  forall(fmt:ieee_format). (is_ieee(fmt) (max_ieee fmt))
       #|  finf (ieee_to_fformat fmt)
       #|  &0 < abs(x) ==> ~(x = &0)
       #|  &(ieee_r fmt) ipow\n              (greatest_e (ieee_to_flformat fmt) x - &(ieee_p fmt) + &1) =\n            fulp (to_fformat (ieee_to_flformat fmt)\n                             (greatest_e (ieee_to_flformat fmt) x))
       #|  abs(x - y) = abs(y - x)
       #|  abs(x - y) = abs(y - x)
-      #|  !(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_near x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1) / &2
+      #|  forall(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_near x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1) / &2
       #|  finf (ieee_to_fformat fmt)
       #|  &0 < abs(x) ==> ~(x = &0)
       #|  &(ieee_r fmt) ipow\n              (greatest_e (ieee_to_flformat fmt) x - &(ieee_p fmt) + &1) =\n            fulp (to_fformat (ieee_to_flformat fmt)\n                             (greatest_e (ieee_to_flformat fmt) x))
       #|  abs(x - y) = abs(y - x)
       #|  abs(x - y) = abs(y - x)
-      #|  !(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_zero x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1)
+      #|  forall(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_zero x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1)
       #|  finf (ieee_to_fformat fmt)
       #|  &0 < abs(x) ==> ~(x = &0)
-      #|  !(fmt:ieee_format) (x:real).\n          ~(abs(x) <= (finf (ieee_to_fformat fmt))) /\\\n          abs(x) <= (ieee_threshold fmt) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= ieee_eps(fmt)
-      #|  !(fmt:ieee_format) (x:real).\n          (abs(x) <= (finf (ieee_to_fformat fmt))) /\\ ~(x = &0) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= &1
+      #|  forall(fmt:ieee_format) (x:real).\n          ~(abs(x) <= (finf (ieee_to_fformat fmt))) /\\\n          abs(x) <= (ieee_threshold fmt) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= ieee_eps(fmt)
+      #|  forall(fmt:ieee_format) (x:real).\n          (abs(x) <= (finf (ieee_to_fformat fmt))) /\\ ~(x = &0) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= &1
       #|IEEE_FORMAT_SPLIT =  |- (#!:fun(fun(ieee_format,bool),bool) (\fmt:ieee_format. ((#=:fun(prod(num,prod(num,prod(int,int))),fun(prod(num,prod(num,prod(int,int))),bool)) (#dest_ieee_format:fun(ieee_format,prod(num,prod(num,prod(int,int)))) fmt:ieee_format)) ((#,:fun(num,fun(prod(num,prod(int,int)),prod(num,prod(num,prod(int,int))))) (#FST:fun(prod(num,prod(num,prod(int,int))),num) (#dest_ieee_format:fun(ieee_format,prod(num,prod(num,prod(int,int)))) fmt:ieee_format))) ((#,:fun(num,fun(prod(int,int),prod(num,prod(int,int)))) (#FST:fun(prod(num,prod(int,int)),num) (#SND:fun(prod(num,prod(num,prod(int,int))),prod(num,prod(int,int))) (#dest_ieee_format:fun(ieee_format,prod(num,prod(num,prod(int,int)))) fmt:ieee_format)))) ((#,:fun(int,fun(int,prod(int,int))) (#FST:fun(prod(int,int),int) (#SND:fun(prod(num,prod(int,int)),prod(int,int)) (#SND:fun(prod(num,prod(num,prod(int,int))),prod(num,prod(int,int))) (#dest_ieee_format:fun(ieee_format,prod(num,prod(num,prod(int,int)))) fmt:ieee_format))))) (#SND:fun(prod(int,int),int) (#SND:fun(prod(num,prod(int,int)),prod(int,int)) (#SND:fun(prod(num,prod(num,prod(int,int))),prod(num,prod(int,int))) (#dest_ieee_format:fun(ieee_format,prod(num,prod(num,prod(int,int)))) fmt:ieee_format))))))))))
       #|IEEE_FORMAT_VALID_IMP_RADIX_LT_1 =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(int,bool),bool) (\emin:int. (#!:fun(fun(int,bool),bool) (\emax:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_ieee_format:fun(prod(num,prod(num,prod(int,int))),bool) ((#,:fun(num,fun(prod(num,prod(int,int)),prod(num,prod(num,prod(int,int))))) r:num) ((#,:fun(num,fun(prod(int,int),prod(num,prod(int,int)))) p:num) ((#,:fun(int,fun(int,prod(int,int))) emin:int) emax:int))))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,prod(num,prod(int,int))),num) ((#,:fun(num,fun(prod(num,prod(int,int)),prod(num,prod(num,prod(int,int))))) r:num) ((#,:fun(num,fun(prod(int,int),prod(num,prod(int,int)))) p:num) ((#,:fun(int,fun(int,prod(int,int))) emin:int) emax:int))))))))))))))
       #|IEEE_FORMAT_VALID_IMP_RADIX_EVEN =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(int,bool),bool) (\emin:int. (#!:fun(fun(int,bool),bool) (\emax:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_ieee_format:fun(prod(num,prod(num,prod(int,int))),bool) ((#,:fun(num,fun(prod(num,prod(int,int)),prod(num,prod(num,prod(int,int))))) r:num) ((#,:fun(num,fun(prod(int,int),prod(num,prod(int,int)))) p:num) ((#,:fun(int,fun(int,prod(int,int))) emin:int) emax:int))))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,prod(num,prod(int,int))),num) ((#,:fun(num,fun(prod(num,prod(int,int)),prod(num,prod(num,prod(int,int))))) r:num) ((#,:fun(num,fun(prod(int,int),prod(num,prod(int,int)))) p:num) ((#,:fun(int,fun(int,prod(int,int))) emin:int) emax:int))))))))))))))

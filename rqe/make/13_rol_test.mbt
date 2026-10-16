@@ -6730,43 +6730,43 @@ test "Rqe/rol matches Rqe/rol.ml" {
       #|0..0..2..5..22..51..135..307..766..solved at 1050
       #|Rqe/rol quotations (38):
       #|  (real_ordered_list [] <=> T) /\\\n   (real_ordered_list (CONS h t) <=>\n      real_ordered_list t /\\\n      ((t = []) \\/ (h < HD t)))
-      #|  !x. real_ordered_list [x]
-      #|  !l. ~(l = []) /\\ real_ordered_list l ==> real_ordered_list (TL l)
-      #|  !l h n. EL n t = EL (SUC n) (CONS h t)
+      #|  forall x. real_ordered_list [x]
+      #|  forall l. ~(l = []) /\\ real_ordered_list l ==> real_ordered_list (TL l)
+      #|  forall l h n. EL n t = EL (SUC n) (CONS h t)
       #|  0
       #|  SUC n
-      #|  !l. ~(real_ordered_list l) ==> ?n. EL n l >= EL (SUC n) l
-      #|  !h t. real_ordered_list (CONS h t) ==> real_ordered_list t
-      #|  !h t. real_ordered_list (CONS h1 (CONS h2 t)) <=>\n     real_ordered_list (CONS h2 t) /\\ h1 < h2
+      #|  forall l. ~(real_ordered_list l) ==> ?n. EL n l >= EL (SUC n) l
+      #|  forall h t. real_ordered_list (CONS h t) ==> real_ordered_list t
+      #|  forall h t. real_ordered_list (CONS h1 (CONS h2 t)) <=>\n     real_ordered_list (CONS h2 t) /\\ h1 < h2
       #|  t = []
       #|  real_ordered_list t /\\ real_ordered_list l2
       #|  real_ordered_list (APPEND t l2)
-      #|  !l1 l2. real_ordered_list (APPEND l1 l2) ==>\n    real_ordered_list l1 /\\ real_ordered_list l2
-      #|  !h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==> h1 < h2
+      #|  forall l1 l2. real_ordered_list (APPEND l1 l2) ==>\n    real_ordered_list l1 /\\ real_ordered_list l2
+      #|  forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==> h1 < h2
       #|  (p ==> q ==> r) <=> (p /\\ q ==> r)
       #|  real_ordered_list (APPEND t (CONS x l2))
       #|  t = []
-      #|  !x l1 l2.\n    real_ordered_list l1 /\\ real_ordered_list l2 /\\\n    ~(l1 = []) /\\ ~(l2 = []) /\\ LAST l1 < x /\\ x < HD l2 ==>\n      real_ordered_list (APPEND l1 (CONS x l2))
-      #|  !x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)
-      #|  !h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)
+      #|  forall x l1 l2.\n    real_ordered_list l1 /\\ real_ordered_list l2 /\\\n    ~(l1 = []) /\\ ~(l2 = []) /\\ LAST l1 < x /\\ x < HD l2 ==>\n      real_ordered_list (APPEND l1 (CONS x l2))
+      #|  forall x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)
+      #|  forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)
       #|  t = []
-      #|  !x t h. real_ordered_list (CONS h t) /\\ LAST (CONS h t) < x ==> h < x
+      #|  forall x t h. real_ordered_list (CONS h t) /\\ LAST (CONS h t) < x ==> h < x
       #|  t = []
-      #|  !x l. real_ordered_list l /\\ ~(l = []) /\\ LAST l < x ==>\n    real_ordered_list (APPEND l [x])
+      #|  forall x l. real_ordered_list l /\\ ~(l = []) /\\ LAST l < x ==>\n    real_ordered_list (APPEND l [x])
       #|  real_ordered_list [&1; &2; &3; &4]
-      #|  !e x l. e < x /\\ (LAST l = e) ==> LAST l < x
-      #|  !x. ?y. y = x
+      #|  forall e x l. e < x /\\ (LAST l = e) ==> LAST l < x
+      #|  forall x. ?y. y = x
       #|  ?x:real. T
       #|  x + &1
       #|  x - &1
-      #|  !x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)
+      #|  forall x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)
       #|  real_ordered_list []
-      #|  !x y. x < y ==> real_ordered_list [x; y]
-      #|  !x y. x < y ==> real_ordered_list (CONS y t) ==>\n     real_ordered_list (CONS x (CONS y t))
+      #|  forall x y. x < y ==> real_ordered_list [x; y]
+      #|  forall x y. x < y ==> real_ordered_list (CONS y t) ==>\n     real_ordered_list (CONS x (CONS y t))
       #|  []:real list
       #|  real_ordered_list ([]:real list)
-      #|  !y x. x < y \\/ (x = y) \\/ y < x
-      #|  !x y z. y < z ==> (y < x <=> (y < x /\\ x < z) \\/ (x = z) \\/ z < x)
+      #|  forall y x. x < y \\/ (x = y) \\/ y < x
+      #|  forall x y z. y < z ==> (y < x <=> (y < x /\\ x < z) \\/ (x = z) \\/ z < x)
       #|real_ordered_list =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) #NIL:list(real))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real)))) ((#/\:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) t:list(real))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) t:list(real)) #NIL:list(real))) ((#real_lt:fun(real,fun(real,bool)) h:real) (#HD:fun(list(real),real) t:list(real)))))))
       #|ROL_EMPTY =  |- (#real_ordered_list:fun(list(real),bool) #NIL:list(real))
       #|ROL_SING =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#real_ordered_list:fun(list(real),bool) ((#CONS:fun(real,fun(list(real),list(real))) x:real) #NIL:list(real)))))

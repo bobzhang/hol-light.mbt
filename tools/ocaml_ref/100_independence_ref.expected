@@ -87801,15 +87801,15 @@ Generating HOL version of proof
   a * inv x * inv b - &1 < c * inv x * d - &1 <=>\n                          (a / b) / x < (c * d) / x
   norm(a:real^N) pow 2 < &1 /\\ norm(b:real^N) pow 2 < &1 /\\\n    norm(x:real^N) pow 2 < &1
   b:real^N = a
-  !a b x:real^N.\n      norm a < &1 /\\ norm b < &1 /\\ norm x < &1 /\\ between x (a,b) /\\ ~(x = b)\n      ==> ddist(a,x) < ddist(a,b)
-  !x:real^N. ddist(x,x) = &0
-  !x y:real^N. ddist(x,y) = ddist(y,x)
+  forall a b x:real^N.\n      norm a < &1 /\\ norm b < &1 /\\ norm x < &1 /\\ between x (a,b) /\\ ~(x = b)\n      ==> ddist(a,x) < ddist(a,b)
+  forall x:real^N. ddist(x,x) = &0
+  forall x y:real^N. ddist(x,y) = ddist(y,x)
   norm(x:real^N) < &1 /\\ norm(y:real^N) < &1
-  !x y:real^N. ~(x = y) ==> &0 < ddist(x,y)
+  forall x y:real^N. ~(x = y) ==> &0 < ddist(x,y)
   x:real^N = y
-  !x y:real^N. &0 <= ddist(x,y)
-  !x y:real^N. ddist(x,y) = &0 <=> x = y
-  !a b x:real^N.\n        norm(a) < &1 /\\ norm(b) < &1 /\\ norm(x) < &1\n        ==> (between x (a,b) <=>\n             collinear {a, x, b} /\\\n             ddist(x,a) <= ddist (a,b) /\\ ddist(x,b) <= ddist(a,b))
+  forall x y:real^N. &0 <= ddist(x,y)
+  forall x y:real^N. ddist(x,y) = &0 <=> x = y
+  forall a b x:real^N.\n        norm(a) < &1 /\\ norm(b) < &1 /\\ norm(x) < &1\n        ==> (between x (a,b) <=>\n             collinear {a, x, b} /\\\n             ddist(x,a) <= ddist (a,b) /\\ ddist(x,b) <= ddist(a,b))
   x < &1 * &1 ==> ~(&1 - x = &0)
   dist(y,x) < &1 - norm x ==> norm y < &1
   :real
@@ -87817,42 +87817,42 @@ Generating HOL version of proof
   y:real^N
   &1 - norm(x:real^N)
   \\x:real^N. lift((&1 - a dot x) pow 2 /\n                    ((&1 - norm a pow 2) * (&1 - norm x pow 2)) - &1)
-  !a x:real^N.\n      norm(a) < &1 /\\ norm(x) < &1 ==> (\\x. lift(ddist(a,x))) continuous at x
+  forall a x:real^N.\n      norm(a) < &1 /\\ norm(x) < &1 ==> (\\x. lift(ddist(a,x))) continuous at x
   &0 - x <= &0 <=> &0 <= x
   lift(&0)
   b:real^N
   a:real^N
   segment[a:real^N,b]
   \\x:real^N. lift(ddist(x,a) - ddist(x,b))
-  !a b:real^N.\n        norm a < &1 /\\ norm b < &1\n        ==> ?x. between x (a,b) /\\ ddist(x,a) = ddist(x,b)
+  forall a b:real^N.\n        norm a < &1 /\\ norm b < &1\n        ==> ?x. between x (a,b) /\\ ddist(x,a) = ddist(x,b)
   &1 - x = &1 - y <=> x = y
   x - &1 = y - &1 <=> x = y
-  !x:real^N y:real^N.\n        norm x < &1 /\\ norm y < &1\n        ==> (ddist(vec 0,x) = ddist(vec 0,y) <=> norm x = norm y)
+  forall x:real^N y:real^N.\n        norm x < &1 /\\ norm y < &1\n        ==> (ddist(vec 0,x) = ddist(vec 0,y) <=> norm x = norm y)
   norm x < &1 /\\ norm y < &1 ==> x dot y < &1
   x * a * b - &1 = y * a * b - &1 <=> x = y \\/ a = &0 \\/ b = &0
   (a /\\ b ==> (x <=> y)) ==> (a /\\ x /\\ b <=> a /\\ y /\\ b)
-  !a b:real^N a' b':real^N.\n        norm a < &1 /\\ norm b < &1 /\\ norm a' < &1 /\\ norm b' < &1\n        ==> (ddist(vec 0,a) = ddist(vec 0,a') /\\ ddist(a,b) = ddist(a',b') /\\\n             ddist(b,vec 0) = ddist(b',vec 0) <=>\n             dist(vec 0,a) = dist(vec 0,a') /\\ dist(a,b) = dist(a',b') /\\\n             dist(b,vec 0) = dist(b',vec 0))
+  forall a b:real^N a' b':real^N.\n        norm a < &1 /\\ norm b < &1 /\\ norm a' < &1 /\\ norm b' < &1\n        ==> (ddist(vec 0,a) = ddist(vec 0,a') /\\ ddist(a,b) = ddist(a',b') /\\\n             ddist(b,vec 0) = ddist(b',vec 0) <=>\n             dist(vec 0,a) = dist(vec 0,a') /\\ dist(a,b) = dist(a',b') /\\\n             dist(b,vec 0) = dist(b',vec 0))
   kleinify z = Cx(&2 / (&1 + norm(z) pow 2)) * z
   poincarify x = Cx((&1 - sqrt(&1 - norm(x) pow 2)) / norm(x) pow 2) * x
   kleinify (Cx(&0)) = Cx(&0) /\\ poincarify (Cx(&0)) = Cx(&0)
   &0 <= x ==> abs(&1 + x) = &1 + x
-  !z. norm(kleinify z) = (&2 * norm(z)) / (&1 + norm(z) pow 2)
+  forall z. norm(kleinify z) = (&2 * norm(z)) / (&1 + norm(z) pow 2)
   &2 * z < (&1 + z pow 2) <=> &0 < (z - &1) pow 2
   &0 <= x ==> &0 < &1 + x
-  !z. norm(kleinify z) < &1 <=> ~(norm z = &1)
+  forall z. norm(kleinify z) < &1 <=> ~(norm z = &1)
   &1 - x <= &1 <=> &0 <= x
   (&1 - x) pow 2 <= &1 - x <=> &0 <= x * (&1 - x)
   s <= &1 /\\ &1 - x <= s ==> abs(&1 - s) <= x
   x:real^2 = vec 0
   x * y <= &1 * y /\\ y < &1 ==> x * y < &1
-  !x. norm(x) < &1 ==> norm(poincarify x) < &1
+  forall x. norm(x) < &1 ==> norm(poincarify x) < &1
   sqrt(&1 - norm(x:real^2) pow 2) pow 2 = &1 - norm x pow 2
   &1 - x < &1 pow 2 <=> &0 < x
   &0 < y /\\ &2 * y = x ==> &2 * inv(x) * y = &1
   ~(y = &0) ==> (&2 * x * y pow 2) * z * inv(y pow 2) = &2 * x * z
   ~(y = &0)\n    ==> (&1 + (a / y pow 2 * y) pow 2) = (y pow 2 + a pow 2) / y pow 2
   (~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x
-  !x. norm(x) < &1 ==> kleinify(poincarify x) = x
+  forall x. norm(x) < &1 ==> kleinify(poincarify x) = x
   abs(x) < &1 ==> ~(&1 + x = &0)
   ~(&1 + norm(x:complex) pow 2 = &0)
   &2 * x <= &1 * (&1 + x) <=> x <= &1
@@ -87863,7 +87863,7 @@ Generating HOL version of proof
   &0 <= x ==> abs(&1 + x) = &1 + x
   ~(c = &0) /\\ abs d < &1 /\\ a * b = &2 * c pow 2 * (&1 + d)\n    ==> a * inv(&2) pow 2 * b * inv(c) pow 2 * &2 * inv(&1 + d) = &1
   (~(x = Cx(&0)) ==> w * z = Cx(&1)) ==> w * z * x = x
-  !x. norm(x) < &1 ==> poincarify(kleinify x) = x
+  forall x. norm(x) < &1 ==> poincarify(kleinify x) = x
   &1 - x = &0 <=> x = &1
   (~(y = &0) /\\ ~(y' = &0)) /\\ a - y * y' = b\n          ==> a = (b / (y * y') + &1) * y * y'
   (&1 + x) pow 2 - &4 * x = (&1 - x) pow 2
@@ -87873,45 +87873,45 @@ Generating HOL version of proof
   x < &1 ==> ~(&1 - x = &0)
   ~(y = &0) /\\ z = (w + &1) * y ==> z / y - &1 = w
   (&4 * norm(w - z:real^2) pow 2 *\n     ((&1 - norm w pow 2) * (&1 - norm z pow 2) + norm(w - z) pow 2)) /\n    ((&1 - norm w pow 2) pow 2 * (&1 - norm z pow 2) pow 2)
-  !w z. ~(norm w = &1) /\\ ~(norm z = &1)\n         ==> ddist(kleinify w,kleinify z) =\n             &4 * (&1 / &2 + norm(w - z) pow 2 /\n                             ((&1 - norm w pow 2) * (&1 - norm z pow 2))) pow 2\n             - &1
-  !w z w' z'.\n      ~(norm w = &1) /\\ ~(norm z = &1) /\\ ~(norm w' = &1) /\\ ~(norm z' = &1) /\\\n      norm(w - z) pow 2 * (&1 - norm w' pow 2) * (&1 - norm z' pow 2) =\n      norm(w' - z') pow 2 * (&1 - norm w pow 2) * (&1 - norm z pow 2)\n      ==> ddist(kleinify w,kleinify z) = ddist(kleinify w',kleinify z')
-  !w x. norm w < &1 /\\ norm x < &1\n         ==> norm(kleinify(moebius_function (&0) w x)) < &1
+  forall w z. ~(norm w = &1) /\\ ~(norm z = &1)\n         ==> ddist(kleinify w,kleinify z) =\n             &4 * (&1 / &2 + norm(w - z) pow 2 /\n                             ((&1 - norm w pow 2) * (&1 - norm z pow 2))) pow 2\n             - &1
+  forall w z w' z'.\n      ~(norm w = &1) /\\ ~(norm z = &1) /\\ ~(norm w' = &1) /\\ ~(norm z' = &1) /\\\n      norm(w - z) pow 2 * (&1 - norm w' pow 2) * (&1 - norm z' pow 2) =\n      norm(w' - z') pow 2 * (&1 - norm w pow 2) * (&1 - norm z pow 2)\n      ==> ddist(kleinify w,kleinify z) = ddist(kleinify w',kleinify z')
+  forall w x. norm w < &1 /\\ norm x < &1\n         ==> norm(kleinify(moebius_function (&0) w x)) < &1
   x * y:real = w * z ==> (x * i) * y = w * z * i
   ~(y = &0) /\\ ~(y' = &0)\n      ==> (&1 - (x / y) pow 2) * (&1 - (x' / y') pow 2) =\n          ((y pow 2 - x pow 2) * (y' pow 2 - x' pow 2)) / (y * y') pow 2
   ~(Cx(&1) - cnj w * x = Cx(&0)) /\\ ~(Cx(&1) - cnj w * y = Cx(&0))\n      ==> (x - w) / (Cx (&1) - cnj w * x) - (y - w) / (Cx (&1) - cnj w * y) =\n          ((Cx(&1) - w * cnj w) * (x - y)) /\n          ((Cx (&1) - cnj w * x) * (Cx (&1) - cnj w * y))
   norm(x) < norm(y) ==> ~(y = x)
   ~(Cx(&1) - cnj w * x = Cx(&0)) /\\ ~(Cx(&1) - cnj w * y = Cx(&0))
-  !w x y. norm w < &1 /\\ norm x < &1 /\\ norm y < &1\n           ==> ddist(kleinify(moebius_function (&0) w x),\n                     kleinify(moebius_function (&0) w y)) =\n               ddist(kleinify x,kleinify y)
+  forall w x y. norm w < &1 /\\ norm x < &1 /\\ norm y < &1\n           ==> ddist(kleinify(moebius_function (&0) w x),\n                     kleinify(moebius_function (&0) w y)) =\n               ddist(kleinify x,kleinify y)
   &0 < &1 - x - y <=> x + y < &1
   &0 < x /\\ &0 <= y ==> ~(x + y = &0)
   x + y < &1 ==> ~(--(x + y - &1) = &0)
   &0 <= x + y ==> ~(x + y + &1 = &0)
   --(Re w pow 2 + Im w pow 2 - &1) pow 3 *\n              ((&1 - Re(x) pow 2 - Im(x) pow 2) *\n               (&1 - Re(w) pow 2 - Im(w) pow 2) +\n               &2 * (Re w - Re x) pow 2 + &2 * (Im w - Im x) pow 2)
   Re x pow 2 + Im x pow 2 + &1
-  !a b. a * lhs = b * rhs /\\ ~(a = &0) /\\ ~(b = &0)\n          ==> (lhs = &0 <=> rhs = &0)
+  forall a b. a * lhs = b * rhs /\\ ~(a = &0) /\\ ~(b = &0)\n          ==> (lhs = &0 <=> rhs = &0)
   ~(nx = &0) /\\ ~(ny = &0) /\\ ~(nz = &0)\n    ==>(((&1 + (nxw / nx) pow 2) * rz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iy / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * ix / nx pow 2) =\n        ((&1 + (nxw / nx) pow 2) * ry / ny pow 2 -\n         (&1 + (nyw / ny) pow 2) * rx / nx pow 2) *\n        ((&1 + (nxw / nx) pow 2) * iz / nz pow 2 -\n         (&1 + (nzw / nz) pow 2) * ix / nx pow 2) <=>\n        ((nx pow 2 + nxw pow 2) * rz - (nz pow 2 + nzw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iy - (ny pow 2 + nyw pow 2) * ix) =\n        ((nx pow 2 + nxw pow 2) * ry - (ny pow 2 + nyw pow 2) * rx) *\n        ((nx pow 2 + nxw pow 2) * iz - (nz pow 2 + nzw pow 2) * ix))
   abs(&1) = &1 * &1
   norm x < norm y ==> ~(y = x)
   ~(Cx (&1) - cnj w * x = Cx(&0)) /\\ ~(Cx (&1) - cnj w * y = Cx(&0)) /\\\n    ~(Cx (&1) - cnj w * z = Cx(&0))
   ~(nx = &0) /\\ ~(ny = &0) /\\ ~(nz = &0)\n      ==> ((&2 / nz * rz - &2 / nx * rx) * (&2 / ny * iy - &2 / nx * ix) =\n           (&2 / ny * ry - &2 / nx * rx) * (&2 / nz * iz - &2 / nx * ix) <=>\n           (nx * rz - nz * rx) * (nx * iy - ny * ix) =\n           (nx * ry - ny * rx) * (nx * iz - nz * ix))
   &0 <= x ==> ~(&1 + x = &0)
-  !w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (collinear {kleinify(moebius_function (&0) w x),\n                             kleinify(moebius_function (&0) w y),\n                             kleinify(moebius_function (&0) w z)} <=>\n                  collinear {kleinify x,kleinify y,kleinify z})
-  !w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (kleinify(moebius_function (&0) w x))\n                          (kleinify(moebius_function (&0) w y),\n                           kleinify(moebius_function (&0) w z)) <=>\n                  between (kleinify x) (kleinify y,kleinify z))
-  hyperbolic_isometry (f:real^2->real^2) <=>\n    (!x. norm x < &1 ==> norm(f x) < &1) /\\\n    (!x y. norm x < &1 /\\ norm y < &1 ==> ddist(f x,f y) = ddist(x,y)) /\\\n    (!x y z. norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (f x) (f y,f z) <=> between x (y,z)))
+  forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (collinear {kleinify(moebius_function (&0) w x),\n                             kleinify(moebius_function (&0) w y),\n                             kleinify(moebius_function (&0) w z)} <=>\n                  collinear {kleinify x,kleinify y,kleinify z})
+  forall w x y z. norm w < &1 /\\ norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (kleinify(moebius_function (&0) w x))\n                          (kleinify(moebius_function (&0) w y),\n                           kleinify(moebius_function (&0) w z)) <=>\n                  between (kleinify x) (kleinify y,kleinify z))
+  hyperbolic_isometry (f:real^2->real^2) <=>\n    (forall x. norm x < &1 ==> norm(f x) < &1) /\\\n    (forall x y. norm x < &1 /\\ norm y < &1 ==> ddist(f x,f y) = ddist(x,y)) /\\\n    (forall x y z. norm x < &1 /\\ norm y < &1 /\\ norm z < &1\n             ==> (between (f x) (f y,f z) <=> between x (y,z)))
   \\x. kleinify(moebius_function(&0) (--(poincarify w)) (poincarify x))
   \\x. kleinify(moebius_function(&0) (poincarify w) (poincarify x))
-  !w. norm w < &1\n       ==> ?f:real^2->real^2 g:real^2->real^2.\n                hyperbolic_isometry f /\\ hyperbolic_isometry g /\\\n                f(w) = vec 0 /\\ g(vec 0) = w /\\\n                (!x. norm x < &1 ==> f(g x) = x) /\\\n                (!x. norm x < &1 ==> g(f x) = x)
+  forall w. norm w < &1\n       ==> ?f:real^2->real^2 g:real^2->real^2.\n                hyperbolic_isometry f /\\ hyperbolic_isometry g /\\\n                f(w) = vec 0 /\\ g(vec 0) = w /\\\n                (forall x. norm x < &1 ==> f(g x) = x) /\\\n                (forall x. norm x < &1 ==> g(f x) = x)
   vec 0:real^2
   ?x:real^2. norm x < &1
   pbetween y (x,z) <=> between (dest_plane y) (dest_plane x,dest_plane z)
   pdist(x,y) = ddist(dest_plane x,dest_plane y)
-  !x. norm(dest_plane x) < &1
-  !x y. dest_plane x = dest_plane y <=> x = y
-  !P. (!x. P(dest_plane x)) <=> (!x. norm x < &1 ==> P x)
-  !P. (?x. P(dest_plane x)) <=> (?x. norm x < &1 /\\ P x)
-  !a b. pdist(a,b) = pdist(b,a)
-  !a b p q r s.\n        pdist(a,b) = pdist(p,q) /\\ pdist(a,b) = pdist(r,s)\n        ==> pdist(p,q) = pdist(r,s)
-  !a b c. pdist(a,b) = pdist(c,c) ==> a = b
+  forall x. norm(dest_plane x) < &1
+  forall x y. dest_plane x = dest_plane y <=> x = y
+  forall P. (forall x. P(dest_plane x)) <=> (forall x. norm x < &1 ==> P x)
+  forall P. (?x. P(dest_plane x)) <=> (?x. norm x < &1 /\\ P x)
+  forall a b. pdist(a,b) = pdist(b,a)
+  forall a b p q r s.\n        pdist(a,b) = pdist(p,q) /\\ pdist(a,b) = pdist(r,s)\n        ==> pdist(p,q) = pdist(r,s)
+  forall a b c. pdist(a,b) = pdist(c,c) ==> a = b
   (g:real^2->real^2) x
   x:real^2
   d:real^2
@@ -87920,14 +87920,14 @@ Generating HOL version of proof
   f:real^2->real^2
   a:real^2
   vec 0:real^2
-  P(vec 0) /\\ (P(vec 0) ==> !x. P x) ==> !x. P x
+  P(vec 0) /\\ (P(vec 0) ==> forall x. P x) ==> forall x. P x
   a:real^2
   q:real^2
   d:real^2
   norm(a:real^2) < &1 /\\ norm(q:real^2) < &1 /\\ norm(d:real^2) < &1
   b:real^2
   ?d:real^2. norm d < &1 /\\ ddist(b:real^2,c) = ddist(vec 0,d)
-  !a q b c. ?x. pbetween a (q,x) /\\ pdist(a,x) = pdist(b,c)
+  forall a q b c. ?x. pbetween a (q,x) /\\ pdist(a,x) = pdist(b,c)
   ddist((f:real^2->real^2) b,f x) = ddist((g:real^2->real^2) b',g x')
   (g:real^2->real^2) x'
   (g:real^2->real^2) c'
@@ -87955,9 +87955,9 @@ Generating HOL version of proof
   f:real^2->real^2
   b:real^2
   b':real^2
-  !a b c x a' b' c' x'.\n        ~(a = b) /\\\n        pdist(a,b) = pdist(a',b') /\\\n        pdist(a,c) = pdist(a',c') /\\\n        pdist(b,c) = pdist(b',c') /\\\n        pbetween b (a,x) /\\ pbetween b' (a',x') /\\ pdist(b,x) = pdist(b',x')\n        ==> pdist(c,x) = pdist(c',x')
-  !a b. pbetween b (a,a) ==> a = b
-  !a b c p q.\n    pbetween p (a,c) /\\ pbetween q (b,c)\n    ==> ?x. pbetween x (p,b) /\\ pbetween x (q,a)
+  forall a b c x a' b' c' x'.\n        ~(a = b) /\\\n        pdist(a,b) = pdist(a',b') /\\\n        pdist(a,c) = pdist(a',c') /\\\n        pdist(b,c) = pdist(b',c') /\\\n        pbetween b (a,x) /\\ pbetween b' (a',x') /\\ pdist(b,x) = pdist(b',x')\n        ==> pdist(c,x) = pdist(c',x')
+  forall a b. pbetween b (a,a) ==> a = b
+  forall a b c p q.\n    pbetween p (a,c) /\\ pbetween q (b,c)\n    ==> ?x. pbetween x (p,b) /\\ pbetween x (q,a)
   (&1 / &2) % basis 2:real^2
   (&1 / &2) % basis 1:real^2
   vec 0:real^2
@@ -87986,7 +87986,7 @@ Generating HOL version of proof
   x:real^2
   q:real^2
   p:real^2
-  !p q a b c.\n        ~(p = q) /\\\n        pdist(a,p) = pdist(a,q) /\\ pdist(b,p) = pdist(b,q) /\\\n        pdist(c,p) = pdist(c,q)\n        ==> pbetween b (a,c) \\/ pbetween c (b,a) \\/ pbetween a (c,b)
+  forall p q a b c.\n        ~(p = q) /\\\n        pdist(a,p) = pdist(a,q) /\\ pdist(b,p) = pdist(b,q) /\\\n        pdist(c,p) = pdist(c,q)\n        ==> pbetween b (a,c) \\/ pbetween c (b,a) \\/ pbetween a (c,b)
   &1 / &2
   &5 / &12
   a * &0 + y = x + b * &0 ==> abs x + abs y <= (&1 - u) * &1 + u * &1\n         ==> abs x <= abs(&1 / &2) /\\ abs y <= abs(&1 / &2)
@@ -88003,13 +88003,13 @@ Generating HOL version of proof
   &1 / &2 % basis 2:real^2
   &1 / &2 % basis 1:real^2
   vec 0:real^2
-  ~(!a b c d t.\n      pbetween d (a,t) /\\ pbetween d (b,c) /\\ ~(a = d)\n      ==> ?x y. pbetween b (a,x) /\\ pbetween c (a,y) /\\ pbetween t (x,y))
+  ~(forall a b c d t.\n      pbetween d (a,t) /\\ pbetween d (b,c) /\\ ~(a = d)\n      ==> ?x y. pbetween b (a,x) /\\ pbetween c (a,y) /\\ pbetween t (x,y))
   IMAGE dest_plane Y
   IMAGE dest_plane X
   a:real^2
   Y:plane->bool = {}
   X:plane->bool = {}
-  !X Y. (?a. !x y. x IN X /\\ y IN Y ==> pbetween x (a,y))\n         ==> (?b. !x y. x IN X /\\ y IN Y ==> pbetween b (x,y))
+  forall X Y. (?a. forall x y. x IN X /\\ y IN Y ==> pbetween x (a,y))\n         ==> (?b. forall x y. x IN X /\\ y IN Y ==> pbetween b (x,y))
 ddist =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#=:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) y:cart(real,'N)))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) y:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) x:cart(real,'N)) y:cart(real,'N)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) y:cart(real,'N))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) y:cart(real,'N)))))))))
 DDIST_INCREASES_ONLINE =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) a:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) b:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) x:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N)))) (#~:fun(bool,bool) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) x:cart(real,'N)) b:cart(real,'N)))))))) ((#real_lt:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) x:cart(real,'N)))) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N)))))))))))
 DDIST_REFL =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#=:fun(real,fun(real,bool)) (#ddist:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) x:cart(real,'N)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))

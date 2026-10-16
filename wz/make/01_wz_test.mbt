@@ -88455,52 +88455,52 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  ~(x = &0) /\\ ~(x < &0) ==> &0 < x
       #|  (y + &1) * pi = y * pi + pi
       #|  x = &0
-      #|  !x y. x spow (y + &1) = x spow y * x
+      #|  forall x y. x spow (y + &1) = x spow y * x
       #|  ~(x = &0) /\\ ~(x < &0) ==> &0 < x
       #|  (y - &1) * pi = y * pi - pi
       #|  x / &0 = &0
       #|  x = &0
-      #|  !x y. x spow (y - &1) = x spow y / x
+      #|  forall x y. x spow (y - &1) = x spow y / x
       #|  x = &0
-      #|  !x y. x spow y = &0 <=> x = &0 \\/ x < &0 /\\ cos(y * pi) = &0
+      #|  forall x y. x spow y = &0 <=> x = &0 \\/ x < &0 /\\ cos(y * pi) = &0
       #|  inv:real->real
       #|  (/):real->real->real
       #|  rfact x = gamma(x + &1)
       #|  rbinom(n,k) = rfact n / (rfact k * rfact (n - k))
       #|  x:real = -- &1 <=> x + &1 = &0
-      #|  !n. rfact(n + &1) = if n = --(&1) then &1 else (n + &1) * rfact n
-      #|  !n. rfact(n - &1) = rfact n / n
+      #|  forall n. rfact(n + &1) = if n = --(&1) then &1 else (n + &1) * rfact n
+      #|  forall n. rfact(n - &1) = rfact n / n
       #|  (n + &1) - k = (n - k) + &1
-      #|  !k n. ~(n + &1 = &0) /\\ ~(n + &1 = k)\n         ==> rbinom(n + &1,k) = (n + &1) / (n - k + &1) * rbinom (n,k)
+      #|  forall k n. ~(n + &1 = &0) /\\ ~(n + &1 = k)\n         ==> rbinom(n + &1,k) = (n + &1) / (n - k + &1) * rbinom (n,k)
       #|  n - (k + &1) = (n - k) - &1
-      #|  !k n. ~(k + &1 = &0)\n         ==> rbinom(n,k + &1) = (n - k) / (k + &1) * rbinom(n,k)
+      #|  forall k n. ~(k + &1 = &0)\n         ==> rbinom(n,k + &1) = (n - k) / (k + &1) * rbinom(n,k)
       #|  n - &1 - k = n - k - &1
-      #|  !k n. rbinom(n - &1,k) = (n - k) / n * rbinom(n,k)
+      #|  forall k n. rbinom(n - &1,k) = (n - k) / n * rbinom(n,k)
       #|  n - k = -- &1 <=> n + &1 = k
       #|  n - (k - &1) = (n - k) + &1
-      #|  !k n. ~(n + &1 = k) ==> rbinom(n,k - &1) = k / (n - k + &1) * rbinom(n,k)
+      #|  forall k n. ~(n + &1 = k) ==> rbinom(n,k - &1) = k / (n - k + &1) * rbinom(n,k)
       #|  n = --x <=> n + x = &0
       #|  (n + &1) - (k + &1) = n - k
-      #|  !k n. ~(k + &1 = &0) /\\ ~(n + &1 = &0)\n         ==> rbinom(n + &1,k + &1) = (n + &1) / (k + &1) * rbinom(n,k)
+      #|  forall k n. ~(k + &1 = &0) /\\ ~(n + &1 = &0)\n         ==> rbinom(n + &1,k + &1) = (n + &1) / (k + &1) * rbinom(n,k)
       #|  (n - &1) - (k - &1) = n - k
-      #|  !k n. rbinom(n - &1,k - &1) = k / n * rbinom(n,k)
+      #|  forall k n. rbinom(n - &1,k - &1) = k / n * rbinom(n,k)
       #|  gamma
-      #|  !net:(A)net nn n.\n        (nn ---> &n) net ==> ((\\a. rfact(nn a)) ---> &(FACT n)) net
+      #|  forall net:(A)net nn n.\n        (nn ---> &n) net ==> ((\\a. rfact(nn a)) ---> &(FACT n)) net
       #|  inv o gamma
       #|  --x < &0 ==> &0 < x
       #|  (--x + &1) + y = &0 <=> y = x - &1
       #|  m - 1
       #|  m:num
       #|  &0 = inv(gamma(x + &1))
-      #|  !net:(A)net nn x.\n        integer x /\\ x < &0 /\\ (nn ---> x) net\n        ==> ((\\a. inv(rfact(nn a))) ---> &0) net
+      #|  forall net:(A)net nn x.\n        integer x /\\ x < &0 /\\ (nn ---> x) net\n        ==> ((\\a. inv(rfact(nn a))) ---> &0) net
       #|  &n - &k:real
       #|  &0 = (&(FACT n) * inv(&(FACT k))) * &0
-      #|  !net:(A)net nn kk n k.\n        (nn ---> &n) net /\\ (kk ---> &k) net\n        ==> ((\\a. rbinom(nn a,kk a)) ---> &(binom(n,k))) net
+      #|  forall net:(A)net nn kk n k.\n        (nn ---> &n) net /\\ (kk ---> &k) net\n        ==> ((\\a. rbinom(nn a,kk a)) ---> &(binom(n,k))) net
       #|  cos
       #|  ~(t = &0) /\\ ~(t < &0) ==> &0 < t
       #|  t < &0
       #|  t = &0
-      #|  !net:A net f l.\n        (f ---> l) net ==> ((\\x. t spow f x) ---> t spow l) net
+      #|  forall net:A net f l.\n        (f ---> l) net ==> ((\\x. t spow f x) ---> t spow l) net
       #|  cos
       #|  \\x. abs((f:A->real) x - l) < --l
       #|  x < &0 ==> ~(x = &0)
@@ -88511,17 +88511,17 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  \\x. &0 < (f:A->real) x
       #|  \\x:A. (f x) rpow (g x)
       #|  ~(x = &0) ==> &0 < x /\\ ~(x < &0) \\/ x < &0 /\\ ~(&0 < x)
-      #|  !net:A net f g l m.\n        (f ---> l) net /\\ (g ---> m) net /\\ ~(l = &0)\n        ==> ((\\x. (f x) spow (g x)) ---> l spow m) net
+      #|  forall net:A net f g l m.\n        (f ---> l) net /\\ (g ---> m) net /\\ ~(l = &0)\n        ==> ((\\x. (f x) spow (g x)) ---> l spow m) net
       #|  (x + a) - a:real = x
       #|  integer x
-      #|  !x. rfact x = &0 <=> integer x /\\ x < &0
+      #|  forall x. rfact x = &0 <=> integer x /\\ x < &0
       #|  (x + &1) + n = &0 ==> x = --(n + &1)
-      #|  !x. ~(integer x /\\ x <= -- &1) ==> rfact real_continuous atreal x
-      #|  !x. (inv o rfact) real_continuous atreal x
-      #|  !nn s z:real^N.\n        nn real_continuous (at z within s) /\\\n        ~(integer(nn z) /\\ nn z <= -- &1)\n        ==> (\\x. rfact(nn x)) real_continuous (at z within s)
-      #|  !nn s z:real^N.\n        nn real_continuous (at z within s)\n        ==> (\\x. inv(rfact(nn x))) real_continuous (at z within s)
-      #|  !nn kk s a:real^N.\n      nn real_continuous (at a within s) /\\\n      kk real_continuous (at a within s) /\\\n      ~(integer(nn a) /\\ nn a <= -- &1)\n      ==> (\\x. rbinom (nn x,kk x)) real_continuous (at a within s)
-      #|  ratpoly p <=>\n         (!m. rational(p m)) /\\\n         FINITE {m | ~(p m = &0)} /\\\n         (!m. ~(p m = &0) ==> FINITE {i:num | ~(m i = 0)})
+      #|  forall x. ~(integer x /\\ x <= -- &1) ==> rfact real_continuous atreal x
+      #|  forall x. (inv o rfact) real_continuous atreal x
+      #|  forall nn s z:real^N.\n        nn real_continuous (at z within s) /\\\n        ~(integer(nn z) /\\ nn z <= -- &1)\n        ==> (\\x. rfact(nn x)) real_continuous (at z within s)
+      #|  forall nn s z:real^N.\n        nn real_continuous (at z within s)\n        ==> (\\x. inv(rfact(nn x))) real_continuous (at z within s)
+      #|  forall nn kk s a:real^N.\n      nn real_continuous (at a within s) /\\\n      kk real_continuous (at a within s) /\\\n      ~(integer(nn a) /\\ nn a <= -- &1)\n      ==> (\\x. rbinom (nn x,kk x)) real_continuous (at a within s)
+      #|  ratpoly p <=>\n         (forall m. rational(p m)) /\\\n         FINITE {m | ~(p m = &0)} /\\\n         (forall m. ~(p m = &0) ==> FINITE {i:num | ~(m i = 0)})
       #|  f:num->num
       #|  p(f:num->num) = &0
       #|  f:num->num
@@ -88548,13 +88548,13 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  COUNTABLE ratpoly
       #|  poly_eval p x =\n    sum (:num->num) (\\m. p m * product (:num) (\\i. x i pow m i))
       #|  m:num->num
-      #|  !p x. ratpoly p\n         ==> poly_eval p x =\n             sum {m | ~(p m = &0)}\n                 (\\m. p m * product {i | ~(m i = 0)} (\\i. x i pow m i))
+      #|  forall p x. ratpoly p\n         ==> poly_eval p x =\n             sum {m | ~(p m = &0)}\n                 (\\m. p m * product {i | ~(m i = 0)} (\\i. x i pow m i))
       #|  ratpolyfun s f <=>\n    ?p. ratpoly p /\\\n        f = \\(x,y). poly_eval p (\\i. EL i (CONS x (CONS y (list_of_set s))))
       #|  \\p (x,y). poly_eval p (\\i. EL i (CONS x (CONS y (list_of_set s))))
-      #|  !s. COUNTABLE(ratpolyfun s)
+      #|  forall s. COUNTABLE(ratpolyfun s)
       #|  {(\\i:num. 0)}
       #|  \\m. if m = \\i:num. 0 then c else &0
-      #|  !s c. rational c ==> ratpolyfun s (\\(x,y). c)
+      #|  forall s c. rational c ==> ratpolyfun s (\\(x,y). c)
       #|  1
       #|  y:real
       #|  x:real
@@ -88562,7 +88562,7 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  ~(if p then F else T) <=> p
       #|  \\m. if m = \\i. if i = 1 then 1 else 0 then &1 else &0
       #|  \\m. if m = \\i. if i = 0 then 1 else 0 then &1 else &0
-      #|  !s. ratpolyfun s (\\(n,k). n) /\\ ratpolyfun s (\\(n,k). k)
+      #|  forall s. ratpolyfun s (\\(n,k). n) /\\ ratpolyfun s (\\(n,k). k)
       #|  n + 2 = SUC(SUC n)
       #|  y:real
       #|  x:real
@@ -88571,25 +88571,25 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  \\m. if m = \\i. if i = n + 2 then 1 else 0 then &1 else &0
       #|  n:num
       #|  a:real
-      #|  !s a. FINITE s /\\ a IN s ==> ratpolyfun s (\\(x,y). a)
+      #|  forall s a. FINITE s /\\ a IN s ==> ratpolyfun s (\\(x,y). a)
       #|  (\\m. --(p m)):(num->num)->real
-      #|  ?r. ratpoly r /\\ !xs. --(poly_eval p xs) = poly_eval r xs
+      #|  ?r. ratpoly r /\\ forall xs. --(poly_eval p xs) = poly_eval r xs
       #|  p:(num->num)->real
       #|  s:real->bool
       #|  f:real->real->real
-      #|  !p s. ratpolyfun s (\\(n,k). p n k) ==> ratpolyfun s (\\(n,k). --(p n k))
+      #|  forall p s. ratpolyfun s (\\(n,k). p n k) ==> ratpolyfun s (\\(n,k). --(p n k))
       #|  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
       #|  ~(x + y = &0) ==> ~(x = &0) \\/ ~(y = &0)
       #|  {m:num->num | ~(p m = &0)} UNION {m | ~(q m = &0)}
       #|  \\m. (p:(num->num)->real) m + q m
-      #|  ?r. ratpoly r /\\ !xs. poly_eval p xs + poly_eval q xs = poly_eval r xs
+      #|  ?r. ratpoly r /\\ forall xs. poly_eval p xs + poly_eval q xs = poly_eval r xs
       #|  q:(num->num)->real
       #|  p:(num->num)->real
       #|  s:real->bool
       #|  g:real->real->real
       #|  f:real->real->real
-      #|  !p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k + q n k)
-      #|  !p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k - q n k)
+      #|  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k + q n k)
+      #|  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k - q n k)
       #|  {i | i IN UNIV /\\ ~(p i \\/ q i)} = {i | i IN {j | ~q j} /\\ ~p i}
       #|  z:real = x * y ==> (p * x) * q * y = (p * q) * z
       #|  m2:num->num
@@ -88599,11 +88599,11 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  (r ==> (p <=> q)) ==> (p /\\ r <=> r /\\ q)
       #|  m2:num->num
       #|  m1:num->num
-      #|  s = t /\\ (!x. x IN s ==> f x = g x) ==> sum s f = sum t g
+      #|  s = t /\\ (forall x. x IN s ==> f x = g x) ==> sum s f = sum t g
       #|  {x | x IN {a,b | P a b} /\\ Q x} =\n      {a,b | P a b /\\ Q(a,b)}
       #|  m:num->num
       #|  (\\x. P x /\\ Q x) = {x | x IN {y | P y} /\\ Q x}
-      #|  (!f g s t. P f g s t) <=> (!f t g s. P f g s t)
+      #|  (forall f g s t. P f g s t) <=> (forall f t g s. P f g s t)
       #|  (:num->num)
       #|  \\(k:num->num,l) i. k i + l i
       #|  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
@@ -88614,20 +88614,20 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  {k,l | ~(P k \\/ Q l)} =\n          {k,l | k IN {x | ~P x} /\\ l IN {x | ~Q x}}
       #|  IMAGE (\\(k:num->num,l) i. k i + l i)\n                        {k,l | ~(p k * q l = &0)}
       #|  \\m. sum {(k,l) | (\\i. k i + l i) = m}\n                      (\\(k:num->num,l). p k * q l)
-      #|  ?r. ratpoly r /\\ !xs. poly_eval p xs * poly_eval q xs = poly_eval r xs
+      #|  ?r. ratpoly r /\\ forall xs. poly_eval p xs * poly_eval q xs = poly_eval r xs
       #|  q:(num->num)->real
       #|  p:(num->num)->real
       #|  s:real->bool
       #|  g:real->real->real
       #|  f:real->real->real
-      #|  !p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k * q n k)
-      #|  !p r s. ratpolyfun s (\\(n,k). p n k)\n           ==> ratpolyfun s (\\(n,k). (p n k) pow r)
-      #|  ratty s t <=> ?p. ratpolyfun s p /\\ p t = &0 /\\ ~(!w. p w = &0)
+      #|  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k * q n k)
+      #|  forall p r s. ratpolyfun s (\\(n,k). p n k)\n           ==> ratpolyfun s (\\(n,k). (p n k) pow r)
+      #|  ratty s t <=> ?p. ratpolyfun s p /\\ p t = &0 /\\ ~(forall w. p w = &0)
       #|  magical_set s =\n        INTERS { {z | ~((FST p)(FST(SND p) + Re z,SND(SND p) + Im z) = &0)} |\n                 p IN (ratpolyfun s DELETE (\\x. &0)) CROSS\n                      (integer CROSS integer)}
       #|  k:real
       #|  &n:real
       #|  p:real#real->real
-      #|  !s d e n k. integer k /\\ complex(d,e) IN magical_set s\n             ==> ~ratty s (&n + d,k + e)
+      #|  forall s d e n k. integer k /\\ complex(d,e) IN magical_set s\n             ==> ~ratty s (&n + d,k + e)
       #|  j:num
       #|  i:num
       #|  i:num
@@ -88647,7 +88647,7 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  s = UNIV <=> UNIV DIFF s = {}
       #|  closure (magical_set s) = (:complex)
       #|  (s INTER t) DELETE a = (s DELETE a) INTER t
-      #|  !p s. open s /\\ Cx(&0) limit_point_of s\n       ==> ~trivial_limit (at(Cx(&0)) within (s INTER magical_set p))
+      #|  forall p s. open s /\\ Cx(&0) limit_point_of s\n       ==> ~trivial_limit (at(Cx(&0)) within (s INTER magical_set p))
       #|  (a + z) - a:complex = z
       #|  (f ---> l) (at a within {a + z | z IN s}) <=>\n     ((\\w. f(a + w)) ---> l) (at (Cx(&0)) within s)
       #|  j:num
@@ -88673,7 +88673,7 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  at (Cx(&0)) within\n     ((s INTER {z | &0 < Re z}) INTER magical_set e)
       #|  ~((a + 1) + 1 <= a)
       #|  m < n + 1 <=> m <= n
-      #|  (!a. P a ==> Q(a + 1)) ==> ((?a. P a) ==> (?b. Q b))
+      #|  (forall a. P a ==> Q(a + 1)) ==> ((?a. P a) ==> (?b. Q b))
       #|  \\i:num. i
       #|  j:num
       #|  i:num
@@ -88683,34 +88683,34 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  {k | (q:real#real->real)(&n,&k) = &0} =\n        {k | &k IN {x | (q:real#real->real)(&n,x) = &0}}
       #|  FINITE {k | (q:real#real->real)(&n,&k) = &0}
       #|  FINITE {k | ~((f:num->num->real) n k = &0)} /\\\n      FINITE {k | ~((h:num->num->real) n k = &0)}
-      #|  ?m.  ~(q(&n,&m + &1) = &0) /\\\n          (!k. ~(f n k = &0) ==> k < m) /\\\n          (!k. ~(h n k = &0) ==> k < m)
+      #|  ?m.  ~(q(&n,&m + &1) = &0) /\\\n          (forall k. ~(f n k = &0) ==> k < m) /\\\n          (forall k. ~(h n k = &0) ==> k < m)
       #|  (P:num->bool) n
       #|  n:num
-      #|  !P e f h ff hh p q s.\n        open s /\\ Cx(&0) limit_point_of (s INTER {z | &0 < Re z}) /\\\n        ((!n. FINITE {k | ~(f n k = &0)}) /\\\n         (!n. FINITE {k | ~(h n k = &0)})) /\\\n        ((!n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)) within\n                                         { complex(&n,&k) + x | x IN s})) /\\\n         (!n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))\n                                    within { complex(&n,&k) + x | x IN s}))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (!n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (!n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> !n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
+      #|  forall P e f h ff hh p q s.\n        open s /\\ Cx(&0) limit_point_of (s INTER {z | &0 < Re z}) /\\\n        ((forall n. FINITE {k | ~(f n k = &0)}) /\\\n         (forall n. FINITE {k | ~(h n k = &0)})) /\\\n        ((forall n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)) within\n                                         { complex(&n,&k) + x | x IN s})) /\\\n         (forall n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))\n                                    within { complex(&n,&k) + x | x IN s}))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (forall n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (forall n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> forall n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
       #|  w + z:complex = y <=> z = y - w
-      #|  !w. {w + z | z IN (:complex)} = (:complex)
+      #|  forall w. {w + z | z IN (:complex)} = (:complex)
       #|  ~(a IN s) ==> s DELETE a = s
       #|  (:complex)
-      #|  !P e f h ff hh p q.\n        ((!n. FINITE {k | ~(f n k = &0)}) /\\\n         (!n. FINITE {k | ~(h n k = &0)})) /\\\n        ((!n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)))) /\\\n         (!n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (!n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (!n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> !n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
+      #|  forall P e f h ff hh p q.\n        ((forall n. FINITE {k | ~(f n k = &0)}) /\\\n         (forall n. FINITE {k | ~(h n k = &0)})) /\\\n        ((forall n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)))) /\\\n         (forall n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (forall n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (forall n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> forall n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
       #|  k:num
       #|  k:num
       #|  0..n
-      #|  !m n. (!k. k <= m k) ==> FINITE {k | ~(binom(n,m k) = 0)}
-      #|  !f g:A->num.\n        FINITE {k | ~(f k = 0)} /\\ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k + g k = 0)}
-      #|  !f g:A->num.\n        FINITE {k | ~(f k = 0)} \\/ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k * g k = 0)}
-      #|  !f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k + g k = &0)}
-      #|  !f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k - g k = &0)}
-      #|  !f:A->real.\n        FINITE {k | ~(f k = &0)} ==> FINITE {k | ~(inv(f k) = &0)}
-      #|  !f:A->real n.\n        FINITE {k | ~(f k = &0)} /\\ ~(n = 0)\n        ==> FINITE {k | ~(f k pow n = &0)}
-      #|  !f:A->real y.\n        FINITE {k | ~(f k = &0)} /\\ ~(y = &0)\n        ==> FINITE {k | ~(f k spow y = &0)}
-      #|  !f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k * g k = &0)}
-      #|  !f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k / g k = &0)}
-      #|  !f:A->num.\n        FINITE {k | ~(f k = 0)} ==> FINITE {k | ~(&(f k) = &0)}
-      #|  (!n k. ~(k IN s n) ==> f n k = &0)\n     ==> !n. sum (s n) (f n) = sum (s n) (f n)
-      #|  (!n. FINITE {k | ~(f n k = &0)})\n     ==> !n. sum (s n) (f n) = sum (s n) (f n)
-      #|  (!n k. ~(k IN s n) ==> f n k = &0)\n   ==> !n:num. sum (s n) (f n) = sum (:num) (f n)
+      #|  forall m n. (forall k. k <= m k) ==> FINITE {k | ~(binom(n,m k) = 0)}
+      #|  forall f g:A->num.\n        FINITE {k | ~(f k = 0)} /\\ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k + g k = 0)}
+      #|  forall f g:A->num.\n        FINITE {k | ~(f k = 0)} \\/ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k * g k = 0)}
+      #|  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k + g k = &0)}
+      #|  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k - g k = &0)}
+      #|  forall f:A->real.\n        FINITE {k | ~(f k = &0)} ==> FINITE {k | ~(inv(f k) = &0)}
+      #|  forall f:A->real n.\n        FINITE {k | ~(f k = &0)} /\\ ~(n = 0)\n        ==> FINITE {k | ~(f k pow n = &0)}
+      #|  forall f:A->real y.\n        FINITE {k | ~(f k = &0)} /\\ ~(y = &0)\n        ==> FINITE {k | ~(f k spow y = &0)}
+      #|  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k * g k = &0)}
+      #|  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k / g k = &0)}
+      #|  forall f:A->num.\n        FINITE {k | ~(f k = 0)} ==> FINITE {k | ~(&(f k) = &0)}
+      #|  (forall n k. ~(k IN s n) ==> f n k = &0)\n     ==> forall n. sum (s n) (f n) = sum (s n) (f n)
+      #|  (forall n. FINITE {k | ~(f n k = &0)})\n     ==> forall n. sum (s n) (f n) = sum (s n) (f n)
+      #|  (forall n k. ~(k IN s n) ==> f n k = &0)\n   ==> forall n:num. sum (s n) (f n) = sum (:num) (f n)
       #|  a(n:num)..b n
-      #|  (!n k. ~(k IN a n..b n) ==> f n k = &0)\n   ==> !n:num. FINITE {k | ~(f n k = &0)}
+      #|  (forall n k. ~(k IN a n..b n) ==> f n k = &0)\n   ==> forall n:num. FINITE {k | ~(f n k = &0)}
       #|  &p pow n
       #|  &(p EXP n)
       #|  &p * &q
@@ -88726,33 +88726,33 @@ test "WZ/wz matches WZ/wz.ml" {
       #|  (&):num->real
       #|  :real
       #|  (+):num->num->num
-      #|  (!k. ~(k IN s) ==> f k = &0) /\\\n   sum s (\\k. f k) = sum (:num) (\\k. f k) /\\\n   FINITE {k | ~(f k = &0)}\n   ==> !c. (!k. ~(k IN s) ==> c * f k = &0) /\\\n           c * sum s (\\k. f k) = sum (:num) (\\k. c * f k) /\\\n           FINITE {k | ~(c * f k = &0)}
-      #|  ((!k. ~(k IN s) ==> f' k = &0) /\\\n    f = sum (:num) (\\k. f' k) /\\\n    FINITE {k | ~(f' k = &0)}) /\\\n   ((!k. ~(k IN t) ==> g' k = &0) /\\\n    g = sum (:num) (\\k. g' k) /\\\n    FINITE {k | ~(g' k = &0)})\n   ==> ((!k. ~(k IN s UNION t) ==> f' k + g' k = &0) /\\\n         f + g =\n         sum (:num) (\\k. f' k + g' k) /\\\n         FINITE {k | ~(f' k + g' k = &0)})
+      #|  (forall k. ~(k IN s) ==> f k = &0) /\\\n   sum s (\\k. f k) = sum (:num) (\\k. f k) /\\\n   FINITE {k | ~(f k = &0)}\n   ==> forall c. (forall k. ~(k IN s) ==> c * f k = &0) /\\\n           c * sum s (\\k. f k) = sum (:num) (\\k. c * f k) /\\\n           FINITE {k | ~(c * f k = &0)}
+      #|  ((forall k. ~(k IN s) ==> f' k = &0) /\\\n    f = sum (:num) (\\k. f' k) /\\\n    FINITE {k | ~(f' k = &0)}) /\\\n   ((forall k. ~(k IN t) ==> g' k = &0) /\\\n    g = sum (:num) (\\k. g' k) /\\\n    FINITE {k | ~(g' k = &0)})\n   ==> ((forall k. ~(k IN s UNION t) ==> f' k + g' k = &0) /\\\n         f + g =\n         sum (:num) (\\k. f' k + g' k) /\\\n         FINITE {k | ~(f' k + g' k = &0)})
       #|  x + &(SUC n) = (x + &1) + &n /\\\n     x + -- &(SUC n) = (x - &1) + -- &n
       #|  x + -- &0 = x
       #|  rfact x
       #|  rbinom(x,y)
       #|  x spow y
       #|  (\\(n,k). p n k + &1):real#real->real
-      #|  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(!n k. p n k + &1 = &0)\n       ==> rfact(p n k + &1) = (p n k + &1) * rfact(p n k)
+      #|  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(forall n k. p n k + &1 = &0)\n       ==> rfact(p n k + &1) = (p n k + &1) * rfact(p n k)
       #|  ~ratty e (n,k) ==> rfact(p n k - &1) = rfact(p n k) / p n k
       #|  ~ratty e (n,k)\n   ==> rbinom(p n k - &1,q n k) =\n       (p n k - q n k) / p n k * rbinom(p n k,q n k)
       #|  ~ratty e (n,k)\n   ==> rbinom(p n k - &1,q n k - &1) =\n       q n k / p n k * rbinom(p n k,q n k)
       #|  p /\\ ~r ==> ~(p /\\ q /\\ ~r) ==> ~q
-      #|  (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(!n k. p n k + &1 = &0) /\\ ~(!n k. q n k + &1 = &0)\n        ==> rbinom(p n k + &1,q n k + &1) =\n            (p n k + &1) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        (~(!n k. p n k + &1 = &0) /\\ ~(!n k. p n k + &1 = q n k))\n        ==> rbinom(p n k + &1,q n k) =\n            (p n k + &1) / (p n k - q n k + &1) * rbinom (p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(!n k. q n k + &1 = &0)\n        ==> rbinom(p n k,q n k + &1) =\n            (p n k - q n k) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(!n k. p n k + &1 = q n k)\n        ==> rbinom(p n k,q n k - &1) =\n            q n k / (p n k - q n k + &1) * rbinom(p n k,q n k))
+      #|  (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. p n k + &1 = &0) /\\ ~(forall n k. q n k + &1 = &0)\n        ==> rbinom(p n k + &1,q n k + &1) =\n            (p n k + &1) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        (~(forall n k. p n k + &1 = &0) /\\ ~(forall n k. p n k + &1 = q n k))\n        ==> rbinom(p n k + &1,q n k) =\n            (p n k + &1) / (p n k - q n k + &1) * rbinom (p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. q n k + &1 = &0)\n        ==> rbinom(p n k,q n k + &1) =\n            (p n k - q n k) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. p n k + &1 = q n k)\n        ==> rbinom(p n k,q n k - &1) =\n            q n k / (p n k - q n k + &1) * rbinom(p n k,q n k))
       #|  (n:real,k:real)
       #|  (n:real,k:real)
       #|  (n:real,k:real)
       #|  (n:real,k:real)
       #|  (n:real,k:real)
       #|  (n:real,k:real)
-      #|  !x. ~rational x ==> ~(x = &0)
+      #|  forall x. ~rational x ==> ~(x = &0)
       #|  integer x
-      #|  !x. ~(rational x /\\ x <= -- &1) ==> ~(rfact x = &0)
-      #|  !x y. ~(rational x /\\ x <= -- &1) /\\\n         ~(rational y /\\ y <= -- &1) /\\\n         ~(rational(x - y) /\\ x - y <= -- &1)\n         ==> ~(rbinom(x,y) = &0)
+      #|  forall x. ~(rational x /\\ x <= -- &1) ==> ~(rfact x = &0)
+      #|  forall x y. ~(rational x /\\ x <= -- &1) /\\\n         ~(rational y /\\ y <= -- &1) /\\\n         ~(rational(x - y) /\\ x - y <= -- &1)\n         ==> ~(rbinom(x,y) = &0)
       #|  ~(x = &0) /\\ ~rational y ==> ~(x spow y = &0)
       #|  \\(x,y). (p:real->real->real) x y - p n k
-      #|  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(?c. !n k. p n k = c)\n       ==> ~rational(p n k)
+      #|  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(?c. forall n k. p n k = c)\n       ==> ~rational(p n k)
       #|  (&0 <= x /\\ &0 <= y) /\\\n                      (~(x = &0) \\/ ~(y = &0)) ==> ~(x + y = &0)
       #|  real_add
       #|  real_mul

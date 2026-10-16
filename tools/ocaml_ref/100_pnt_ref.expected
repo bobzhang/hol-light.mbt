@@ -90539,11 +90539,11 @@ Generating HOL version of proof
   complex_inv:complex->complex
   2 <= n ==> 1 < n
   2 <= n ==> 0 < n
-  !n s. &0 < Re s /\\ 2 <= n ==> &1 < norm(Cx(&n) cpow s)
+  forall n s. &0 < Re s /\\ 2 <= n ==> &1 < norm(Cx(&n) cpow s)
   norm:complex->real
-  !n s. &0 < Re s /\\ 2 <= n ==> ~(Cx(&n) cpow s = Cx(&1))
+  forall n s. &0 < Re s /\\ 2 <= n ==> ~(Cx(&n) cpow s = Cx(&1))
   0..n
-  !P n. FINITE {m:num | P m /\\ m <= n}
+  forall P n. FINITE {m:num | P m /\\ m <= n}
   prime p
   p:num
   {p | prime p /\\ p <= n} = {p | p IN 1..n /\\ prime p}
@@ -90572,12 +90572,12 @@ Generating HOL version of proof
   segment[Cx(&n),Cx(&n) + Cx(&1)]
   1
   \\n z. if n = 0 then Cx(&1) / z cpow (s - Cx(&1))\n           else if n = 1 then (Cx(&1) - s) / z cpow s\n           else s * (s - Cx(&1)) / z cpow (s + Cx(&1))
-  !s n. ~(n = 0) /\\ &0 <= Re s + &1\n         ==> norm((s - Cx(&1)) / Cx(&n) cpow s -\n                  (Cx(&1) / Cx(&n) cpow (s - Cx(&1)) -\n                   Cx(&1) / Cx(&(n + 1)) cpow (s - Cx(&1)))) <=\n             norm(s * (s - Cx(&1)) / Cx(&n) cpow (s + Cx(&1)))
+  forall s n. ~(n = 0) /\\ &0 <= Re s + &1\n         ==> norm((s - Cx(&1)) / Cx(&n) cpow s -\n                  (Cx(&1) / Cx(&n) cpow (s - Cx(&1)) -\n                   Cx(&1) / Cx(&(n + 1)) cpow (s - Cx(&1)))) <=\n             norm(s * (s - Cx(&1)) / Cx(&n) cpow (s + Cx(&1)))
   (f has_complex_derivative f') net
   (f has_complex_derivative f') net
   exp(&m * log(&n))
-  !m s n. &m <= Re s /\\ ~(n = 0) ==> &n pow m <= norm(Cx(&n) cpow s)
-  !s n m. &m <= Re s /\\ ~(n = 0)\n           ==> norm(Cx(&1) / Cx(&n) cpow s) <= inv(&n pow m)
+  forall m s n. &m <= Re s /\\ ~(n = 0) ==> &n pow m <= norm(Cx(&n) cpow s)
+  forall s n m. &m <= Re s /\\ ~(n = 0)\n           ==> norm(Cx(&1) / Cx(&n) cpow s) <= inv(&n pow m)
   &n pow 2 <= x ==> &n * (&n - &1) <= x
   &2 <= x ==> inv(x - &1) - inv((x + &1) - &1) = inv(x * (x - &1))
   m:num
@@ -90588,7 +90588,7 @@ Generating HOL version of proof
   \\n. lift(inv(&n - &1))
   lift(inv(&n - &1))
   \\n. inv(&n - &1) - inv(&(n + 1) - &1)
-  !n s. &2 <= Re s ==> summable (from n) (\\m. Cx(&1) / Cx(&m) cpow s)
+  forall n s. &2 <= Re s ==> summable (from n) (\\m. Cx(&1) / Cx(&m) cpow s)
   N + 2 <= n ==> N <= n
   &n
   &N
@@ -90608,14 +90608,14 @@ Generating HOL version of proof
   \\n. lift(&1 / exp (Re s * log (&n)))
   n:num
   \\m. Cx(&1) / Cx(&m) cpow s
-  !n s. &0 < Re(s)\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s - Cx(&1) / Cx(&(m + 1)) cpow s)\n              sums Cx(&1) / Cx(&n) cpow s) (from n)
+  forall n s. &0 < Re(s)\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s - Cx(&1) / Cx(&(m + 1)) cpow s)\n              sums Cx(&1) / Cx(&n) cpow s) (from n)
   m:num
   1
   summable (from n)\n     (\\m. lift(((Cx (norm s) * Cx (norm (s - Cx (&1)))) *\n                Cx (&1) / Cx (&m) cpow Cx (Re s + &1))$1))
   &1 <= s ==> &0 <= s + &1
   1
   \\m. norm(s * (s - Cx(&1)) / Cx(&m) cpow (s + Cx(&1)))
-  !n s. &1 <= Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
+  forall n s. &1 <= Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
   ~(s - Cx(&1) = Cx(&0))
   inv(s - Cx(&1))
   &1 < Re s
@@ -90623,8 +90623,8 @@ Generating HOL version of proof
   s - Cx(&1)
   n:num
   n:num
-  !n s. &1 < Re s\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s) sums genzeta n s) (from n)
-  !s. &1 < Re s\n       ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums zeta(s)) (from 1)
+  forall n s. &1 < Re s\n         ==> ((\\m. Cx(&1) / Cx(&m) cpow s) sums genzeta n s) (from n)
+  forall s. &1 < Re s\n       ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums zeta(s)) (from 1)
   z - s:complex
   &1 < Re z
   from 1
@@ -90650,7 +90650,7 @@ Generating HOL version of proof
   {s | Re s > &1}
   \\n z. --clog(Cx(&n)) / Cx(&n) cpow z
   \\n z. Cx(&1) / Cx(&n) cpow z
-  !s. &1 < Re s\n       ==> ((\\n. --clog(Cx(&n)) / Cx(&n) cpow s) sums\n            complex_derivative zeta s) (from 1)
+  forall s. &1 < Re s\n       ==> ((\\n. --clog(Cx(&n)) / Cx(&n) cpow s) sums\n            complex_derivative zeta s) (from 1)
   (f has_complex_derivative f') net
   :real
   :real
@@ -90674,7 +90674,7 @@ Generating HOL version of proof
   a /\\ (a ==> b) ==> a /\\ b
   s:complex
   m:num
-  !n. 1 <= n\n       ==> ?g g'. !s. s IN {s | Re(s) > &0}\n                      ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                           (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                            Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n                           sums g s) (from n) /\\\n                           ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                                 Cx(&m) cpow s -\n                                 (clog(Cx(&(m + 1))) /\n                                  Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                                  clog(Cx(&m)) /\n                                  Cx(&m) cpow (s - Cx(&1))))\n                            sums g' s) (from n) /\\\n                       (g has_complex_derivative g' s) (at s)
+  forall n. 1 <= n\n       ==> ?g g'. forall s. s IN {s | Re(s) > &0}\n                      ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                           (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                            Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n                           sums g s) (from n) /\\\n                           ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                                 Cx(&m) cpow s -\n                                 (clog(Cx(&(m + 1))) /\n                                  Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                                  clog(Cx(&m)) /\n                                  Cx(&m) cpow (s - Cx(&1))))\n                            sums g' s) (from n) /\\\n                       (g has_complex_derivative g' s) (at s)
   (f has_complex_derivative f') net
   :real
   :real
@@ -90683,37 +90683,37 @@ Generating HOL version of proof
   w:complex
   Re z
   g:complex->complex
-  !z. &0 < Re z ==> ((nearzeta n) has_complex_derivative g' z) (at z)
-  !z. &0 < Re z ==> nearzeta n z = g z
-  !s. &0 < Re s\n        ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
+  forall z. &0 < Re z ==> ((nearzeta n) has_complex_derivative g' z) (at z)
+  forall z. &0 < Re z ==> nearzeta n z = g z
+  forall s. &0 < Re s\n        ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
   a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
   g':complex->complex
   g:complex->complex
-  !n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n              (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n               Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums (nearzeta n s)) (from n) /\\\n              ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                    Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) /\n                     Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) /\n                     Cx(&m) cpow (s - Cx(&1))))\n               sums (complex_derivative(nearzeta n) s)) (from n) /\\\n          ((nearzeta n) has_complex_derivative\n           complex_derivative(nearzeta n) s) (at s)
+  forall n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n              (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n               Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums (nearzeta n s)) (from n) /\\\n              ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) /\n                    Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) /\n                     Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) /\n                     Cx(&m) cpow (s - Cx(&1))))\n               sums (complex_derivative(nearzeta n) s)) (from n) /\\\n          ((nearzeta n) has_complex_derivative\n           complex_derivative(nearzeta n) s) (at s)
   s:complex
   n + 1
   from(n + 1) DIFF from n UNION from n DIFF from(n + 1) = {n}
   from(n + 1)
-  !n s. &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
-  !n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) / Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) / Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) / Cx(&m) cpow (s - Cx(&1)))) sums\n            (complex_derivative (nearzeta n) s)) (from n)
-  !n. 1 <= n ==> (nearzeta n) holomorphic_on {s | Re(s) > &0}
-  !n s. 1 <= n /\\ &0 < Re s ==> (nearzeta n) complex_differentiable (at s)
+  forall n s. &0 < Re s\n         ==> ((\\m. (s - Cx(&1)) / Cx(&m) cpow s -\n                   (Cx(&1) / Cx(&m) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(m + 1)) cpow (s - Cx(&1))))\n              sums nearzeta n s) (from n)
+  forall n s. 1 <= n /\\ &0 < Re s\n         ==> ((\\m. (Cx(&1) - (s - Cx(&1)) * clog(Cx(&m))) / Cx(&m) cpow s -\n                    (clog(Cx(&(m + 1))) / Cx(&(m + 1)) cpow (s - Cx(&1)) -\n                     clog(Cx(&m)) / Cx(&m) cpow (s - Cx(&1)))) sums\n            (complex_derivative (nearzeta n) s)) (from n)
+  forall n. 1 <= n ==> (nearzeta n) holomorphic_on {s | Re(s) > &0}
+  forall n s. 1 <= n /\\ &0 < Re s ==> (nearzeta n) complex_differentiable (at s)
   ~(m = 0)
   m:num
   \\n:num. (vec 0:complex)
-  !n. 1 <= n ==> nearzeta n (Cx(&1)) = Cx(&0)
+  forall n. 1 <= n ==> nearzeta n (Cx(&1)) = Cx(&0)
   {s | Re s > &0}
   \\z. (nearzeta 1 z + Cx(&1) / Cx(&1) cpow (z - Cx(&1))) /\n                  (z - Cx(&1))
   zeta holomorphic_on {s | Re(s) > &0 /\\ ~(s = Cx(&1))}
   {s | P s /\\ ~(s = a)} = {s | P s} DELETE a
-  !s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> zeta complex_differentiable at s
+  forall s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> zeta complex_differentiable at s
   n DIV p
   n:num
   p * N:num
   N:num
   &0 < e
   e:real
-  !x p l k.\n      ((\\n. x(p * n)) sums l) k\n      ==> ~(p = 0) /\\\n          (!n. (p * n) IN k <=> n IN k)\n          ==> (x sums l) {n | n IN k /\\ p divides n}
+  forall x p l k.\n      ((\\n. x(p * n)) sums l) k\n      ==> ~(p = 0) /\\\n          (forall n. (p * n) IN k <=> n IN k)\n          ==> (x sums l) {n | n IN k /\\ p divides n}
   s INTER t = {}\n      ==> t INTER u = (((s UNION t) INTER u) DIFF (s INTER u))
   (x sums (k + l)) (s UNION t) /\\ s INTER t = {}\n     ==> (x sums k) s ==> (x sums l) t
   a * x + (Cx(&1) - a) * x = x
@@ -90727,24 +90727,24 @@ Generating HOL version of proof
   a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
   ps:num->bool
   p:num
-  !s ps. &1 < Re s /\\ FINITE ps /\\ (!p. p IN ps ==> prime p)\n          ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums\n               (cproduct ps (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s))\n       {n | 1 <= n /\\ !p. prime p /\\ p divides n ==> ~(p IN ps)}
+  forall s ps. &1 < Re s /\\ FINITE ps /\\ (forall p. p IN ps ==> prime p)\n          ==> ((\\n. Cx(&1) / Cx(&n) cpow s) sums\n               (cproduct ps (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s))\n       {n | 1 <= n /\\ forall p. prime p /\\ p divides n ==> ~(p IN ps)}
   0
   zeta (Cx(Re s))
   \\n. Cx(&1) / Cx(&n) cpow (Cx(Re s))
   from 1
-  !s t. &1 < Re s /\\ ~(0 IN t)\n         ==> summable t (\\n. Cx (&1) / Cx (&n) cpow s)
+  forall s t. &1 < Re s /\\ ~(0 IN t)\n         ==> summable t (\\n. Cx (&1) / Cx (&n) cpow s)
   m:num
   1 <= 0
   1 <= a + b + 1
-  (!x. P x /\\ x = 1 ==> Q x) <=> P 1 ==> Q 1
-  vsum\n     ({m | 1 <= m /\\ (!p. prime p /\\ p divides m ==> n < p)} INTER\n      (0..N1 + N2 + 1))\n     (\\n. Cx (&1) / Cx (&n) cpow s) - Cx(&1) =\n    vsum\n     (({m | 1 <= m /\\ (!p. prime p /\\ p divides m ==> n < p)} INTER\n       (0..N1 + N2 + 1)) DELETE 1)\n     (\\n. Cx (&1) / Cx (&n) cpow s)
+  (forall x. P x /\\ x = 1 ==> Q x) <=> P 1 ==> Q 1
+  vsum\n     ({m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)} INTER\n      (0..N1 + N2 + 1))\n     (\\n. Cx (&1) / Cx (&n) cpow s) - Cx(&1) =\n    vsum\n     (({m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)} INTER\n       (0..N1 + N2 + 1)) DELETE 1)\n     (\\n. Cx (&1) / Cx (&n) cpow s)
   x <= y ==> y < e ==> x < e
   N1 + N2 + 1
   dist(x,z) < e / &2 /\\ dist(y,z) <= dist(x,y) + dist(x,z)\n    ==> dist(x,y) < e / &2 ==> dist(y,z) < e
   N1 + N2 + 1
   N2:num
   e / &2
-  {m | 1 <= m /\\ (!p. prime p /\\ p divides m ==> n < p)}
+  {m | 1 <= m /\\ (forall p. prime p /\\ p divides m ==> n < p)}
   s:complex
   n:num
   N:num
@@ -90754,15 +90754,15 @@ Generating HOL version of proof
   e:real
   0..n
   n:num
-  \\n. infsum {m | 1 <= m /\\ !p. prime p /\\ p divides m\n                                   ==> ~(p IN {p | prime p /\\ p <= n})}\n                (\\n. Cx (&1) / Cx (&n) cpow s)
-  !s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s)\n            --> Cx(&1)) sequentially
+  \\n. infsum {m | 1 <= m /\\ forall p. prime p /\\ p divides m\n                                   ==> ~(p IN {p | prime p /\\ p <= n})}\n                (\\n. Cx (&1) / Cx (&n) cpow s)
+  forall s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. Cx(&1) - inv(Cx(&p) cpow s)) * zeta s)\n            --> Cx(&1)) sequentially
   n:num
   n:num
   &1 / &2
-  !s. &1 < Re s ==> ~(zeta s = Cx(&0))
+  forall s. &1 < Re s ==> ~(zeta s = Cx(&0))
   inv(zeta(s))
   \\x. ((\\n. x) --> x) sq
-  !s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. inv(Cx(&1) - inv(Cx(&p) cpow s))))\n            --> zeta(s)) sequentially
+  forall s. &1 < Re s\n       ==> ((\\n. cproduct {p | prime p /\\ p <= n}\n                          (\\p. inv(Cx(&1) - inv(Cx(&p) cpow s))))\n            --> zeta(s)) sequentially
   0 < i + 1
   1 <= i ==> 0 < i /\\ ~(i = 0)
   n:num
@@ -90815,7 +90815,7 @@ Generating HOL version of proof
   0
   \\n. cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) - inv(Cx(&p) cpow x))) pow 3 *\n        cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) - inv(Cx(&p) cpow (x + ii * y)))) pow 4 *\n        cproduct {p | prime p /\\ p <= n}\n                 (\\p. inv(Cx(&1) -\n                      inv(Cx(&p) cpow (x + Cx(&2) * ii * y)))) pow 2
   sequentially
-  !x y. real x /\\ real y /\\ &1 < Re x\n       ==> &1 <= norm(zeta(x) pow 3 *\n                      zeta(x + ii * y) pow 4 *\n                      zeta(x + Cx(&2) * ii * y) pow 2)
+  forall x y. real x /\\ real y /\\ &1 < Re x\n       ==> &1 <= norm(zeta(x) pow 3 *\n                      zeta(x + ii * y) pow 4 *\n                      zeta(x + Cx(&2) * ii * y) pow 2)
   Cx(&0) = (nearzeta 1 (Cx(&1)) + Cx(&1)) pow 3 * (Cx(&1) - Cx(&1))
   ~(x:complex = a)\n     ==> b * (x - a) - (c / (x - a)) pow 3 * (x - a) pow 4 =\n         (b - c pow 3) * (x - a)
   \\x. (nearzeta 1 (x) + Cx(&1)) pow 3 * (x - Cx(&1))
@@ -90836,8 +90836,8 @@ Generating HOL version of proof
   y = Im s
   s:complex
   &1 <= x <=> &1 < x \\/ x = &1
-  !s. &1 <= Re s ==> ~(zeta s = Cx(&0))
-  !s. &1 <= Re s ==> ~(nearzeta 1 s + Cx (&1) = Cx(&0))
+  forall s. &1 <= Re s ==> ~(zeta s = Cx(&0))
+  forall s. &1 <= Re s ==> ~(nearzeta 1 s + Cx (&1) = Cx(&0))
   1
   inv(&1 / &2)
   w:complex
@@ -90874,10 +90874,10 @@ Generating HOL version of proof
   s:complex
   1 < p <=> 2 <= p
   norm(inv (Cx (&p) cpow s))
-  !y. abs x <= y /\\ y < w ==> x < w
+  forall y. abs x <= y /\\ y < w ==> x < w
   ~(y = Cx(&0)) ==> y * (Cx(&1) - inv(y)) = y - Cx(&1)
   ~(x = Cx(&0)) ==> --(a * x) / x pow 2 = --(a / x)
-  ?logzeta logzeta'.\n        !s. s IN {s | Re s > &1}\n            ==> ((\\p. clog(Cx(&1) - inv(Cx(&p) cpow s)))\n                 sums logzeta(s))\n                {p | prime p} /\\\n                ((\\p. clog(Cx(&p)) / (Cx(&p) cpow s - Cx(&1)))\n                 sums logzeta'(s))\n                {p | prime p} /\\\n                (logzeta has_complex_derivative logzeta'(s)) (at s)
+  ?logzeta logzeta'.\n        forall s. s IN {s | Re s > &1}\n            ==> ((\\p. clog(Cx(&1) - inv(Cx(&p) cpow s)))\n                 sums logzeta(s))\n                {p | prime p} /\\\n                ((\\p. clog(Cx(&p)) / (Cx(&p) cpow s - Cx(&1)))\n                 sums logzeta'(s))\n                {p | prime p} /\\\n                (logzeta has_complex_derivative logzeta'(s)) (at s)
   (f has_complex_derivative f') net
   y:complex
   a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
@@ -90891,31 +90891,31 @@ Generating HOL version of proof
   cexp
   \\n. cexp(vsum({p | prime p} INTER (0..n))\n                 (\\p. --clog(Cx(&1) - inv(Cx(&p) cpow s))))
   sequentially
-  !s. &1 < Re s ==> cexp(--(logzeta s)) = zeta s
+  forall s. &1 < Re s ==> cexp(--(logzeta s)) = zeta s
   Re s - &1
   \\s. cexp(--(logzeta s))
-  !s. &1 < Re s ==> (zeta has_complex_derivative\n                      (--(logzeta'(s)) * zeta(s))) (at s)
-  !s. &1 < Re s\n       ==> complex_derivative zeta s = --(logzeta'(s)) * zeta(s)
+  forall s. &1 < Re s ==> (zeta has_complex_derivative\n                      (--(logzeta'(s)) * zeta(s))) (at s)
+  forall s. &1 < Re s\n       ==> complex_derivative zeta s = --(logzeta'(s)) * zeta(s)
   \\p. clog(Cx(&p)) / (Cx(&p) cpow s - Cx(&1))
   ~(b = Cx(&0)) ==> (--(a / b) = c <=> a = --c * b)
   --(complex_derivative zeta s / zeta s) = logzeta'(s)
-  !s. &1 < Re s\n       ==> ((\\p. Cx(log(&p)) / (Cx(&p) cpow s - Cx(&1))) sums\n            (--(complex_derivative zeta s / zeta s))) {p | prime p}
-  !g. valid_path g ==> valid_path ((--) o g)
-  !g. pathstart((--) o g) = --(pathstart g)
-  !g. pathfinish((--) o g) = --(pathfinish g)
-  !g. path_image((--) o g) = IMAGE (--) (path_image g)
+  forall s. &1 < Re s\n       ==> ((\\p. Cx(log(&p)) / (Cx(&p) cpow s - Cx(&1))) sums\n            (--(complex_derivative zeta s / zeta s))) {p | prime p}
+  forall g. valid_path g ==> valid_path ((--) o g)
+  forall g. pathstart((--) o g) = --(pathstart g)
+  forall g. pathfinish((--) o g) = --(pathfinish g)
+  forall g. path_image((--) o g) = IMAGE (--) (path_image g)
   t:real^1
-  !g z. valid_path g /\\ ((\\z. f(--z)) has_path_integral (--i)) g\n         ==> (f has_path_integral i) ((--) o g)
+  forall g z. valid_path g /\\ ((\\z. f(--z)) has_path_integral (--i)) g\n         ==> (f has_path_integral i) ((--) o g)
   --z - Cx(&0) = --(z - Cx(&0))
   Cx(&0) = --x <=> x = Cx(&0)
-  !g z. valid_path g /\\ ~(Cx(&0) IN path_image g)\n         ==> winding_number((--) o g,Cx(&0)) = winding_number(g,Cx(&0))
-  !g z. valid_path g /\\ (\\z. f(--z)) path_integrable_on g\n         ==> f path_integrable_on ((--) o g)
-  !z R. norm(z) = R\n         ==> Cx(&1) / z + z / Cx(R) pow 2 = Cx(&2 * Re z / R pow 2)
+  forall g z. valid_path g /\\ ~(Cx(&0) IN path_image g)\n         ==> winding_number((--) o g,Cx(&0)) = winding_number(g,Cx(&0))
+  forall g z. valid_path g /\\ (\\z. f(--z)) path_integrable_on g\n         ==> f path_integrable_on ((--) o g)
+  forall z R. norm(z) = R\n         ==> Cx(&1) / z + z / Cx(R) pow 2 = Cx(&2 * Re z / R pow 2)
   norm z = R ==> abs R = R
   :real
   :real
   :real
-  !z R. norm(z) = R\n         ==> norm(Cx(&1) / z + z / Cx(R) pow 2) = &2 * abs(Re z) / R pow 2
+  forall z R. norm(z) = R\n         ==> norm(Cx(&1) / z + z / Cx(R) pow 2) = &2 * abs(Re z) / R pow 2
   &0 < R pow 2 ==> (&2 * x / R pow 2) pow 2 = &4 * x pow 2 / R pow 4
   &0 < R pow 2 /\\ &0 < x pow 2 + R pow 2\n    ==> x pow 2 * (inv (x pow 2 + R pow 2) + inv (R pow 2)) pow 2 +\n        R pow 2 * (inv (R pow 2) - inv (x pow 2 + R pow 2)) pow 2 =\n        (x pow 4 + &5 * R pow 2 * x pow 2 + &4 * R pow 4) /\n        (x pow 2 + R pow 2) pow 2 *\n        (x pow 2 / R pow 4)
   Im z pow 2 = R pow 2
@@ -90927,7 +90927,7 @@ Generating HOL version of proof
   (--x:real) pow 2 = x pow 2
   z:complex
   &0 <= &2 * x <=> &0 <= x
-  !R x z. Re(z) = --x /\\ abs(Im(z)) = R /\\ &0 <= x /\\ &0 < R\n           ==> norm (Cx (&1) / z + z / Cx R pow 2) <= &2 * x / R pow 2
+  forall R x z. Re(z) = --x /\\ abs(Im(z)) = R /\\ &0 <= x /\\ &0 < R\n           ==> norm (Cx (&1) / z + z / Cx R pow 2) <= &2 * x / R pow 2
   &1 <= x
   &0 <= y ==> x - y <= x
   &0 < &n + &1
@@ -90947,7 +90947,7 @@ Generating HOL version of proof
   \\n. n cpow (Cx(x) - Cx(&1))
   &1 <= x
   n = 0 \\/ 1 <= n
-  !n x.\n          &1 <= x\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n + &1)) / x
+  forall n x.\n          &1 <= x\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n + &1)) / x
   (f has_complex_derivative f') net
   &1 <= x ==> &1 + a - x <= a
   2 <= i ==> 0 < i
@@ -90968,7 +90968,7 @@ Generating HOL version of proof
   n = 1
   2 <= n
   n = 0 \\/ 1 <= n
-  !n x.\n          &0 < x /\\ x <= &1\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n)) / x
+  forall n x.\n          &0 < x /\\ x <= &1\n          ==> sum(1..n) (\\n. exp((x - &1) * log(&n))) <=\n                  exp(x * log(&n)) / x
   (f has_complex_derivative f') net
   1 <= n ==> n - 1 + 1 = n
   exp(x * log(&(n - 1) + &1)) / x
@@ -90982,7 +90982,7 @@ Generating HOL version of proof
   0 < k <=> 1 <= k
   m:num
   sum(1..n) (\\n. exp((Re(z) - &1) * log(&n)))
-  !a n. (!m. 1 <= m ==> norm(a(m)) <= &1) /\\\n         1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n         ==> norm(vsum(1..n) (\\n. a(n) / Cx(&n) cpow (w - z)))\n                  <= exp(Re(z) * log(&n)) * (&1 / &n + &1 / Re(z))
+  forall a n. (forall m. 1 <= m ==> norm(a(m)) <= &1) /\\\n         1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n         ==> norm(vsum(1..n) (\\n. a(n) / Cx(&n) cpow (w - z)))\n                  <= exp(Re(z) * log(&n)) * (&1 / &n + &1 / Re(z))
   x = z /\\ &0 <= y ==> x - y <= z
   1 <= n ==> 0 < n
   n + 1 <= m ==> 0 < m
@@ -91009,12 +91009,12 @@ Generating HOL version of proof
   0 < r /\\ 1 <= r
   r:num
   sum(n+1..m) (\\n. &1 / exp((Re(z) + &1) * log(&n)))
-  !a n m. (!m. 1 <= m ==> norm(a(m)) <= &1) /\\\n           1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n           ==> norm(vsum(n+1..m) (\\n. a(n) / Cx(&n) cpow (w + z)))\n                    <= &1 / (Re z * exp(Re z * log(&n)))
+  forall a n m. (forall m. 1 <= m ==> norm(a(m)) <= &1) /\\\n           1 <= n /\\ &1 <= Re w /\\ &0 < Re z\n           ==> norm(vsum(n+1..m) (\\n. a(n) / Cx(&n) cpow (w + z)))\n                    <= &1 / (Re z * exp(Re z * log(&n)))
   (f has_complex_derivative f') net
   1
   Cx d
   abs x = abs(x - &0)
-  !d M R. &0 < d\n           ==> !e. &0 < e\n                   ==> ?N. !n. N <= n\n                               ==> abs(&2 * pi / &n +\n                                       &6 * M * R / (d * exp (d * log (&n))) +\n                                       &4 * M / (R * log (&n)) pow 2) < e
+  forall d M R. &0 < d\n           ==> forall e. &0 < e\n                   ==> ?N. forall n. N <= n\n                               ==> abs(&2 * pi / &n +\n                                       &6 * M * R / (d * exp (d * log (&n))) +\n                                       &4 * M / (R * log (&n)) pow 2) < e
   &0 < R
   d <= R
   &0 < d
@@ -91028,7 +91028,7 @@ Generating HOL version of proof
   a <= b ==> x <= a ==> x <= b
   1
   a /\\ b /\\ c /\\ d /\\ e ==> f <=>\n                             c /\\ d ==> a /\\ b /\\ e ==> f
-  (!x. linepath(complex (&0,R),complex (--d,R)) x =\n          ii * Cx(R) - Cx(d * drop x)) /\\\n     (!x. linepath(Cx (&0),Cx d) x = Cx(d * drop x)) /\\\n     (complex(--d,R) - complex(&0,R) = --Cx(d)) /\\\n     (!x. linepath(complex (--d,--R),complex(&0,--R)) (vec 1 - x) =\n          --ii * Cx(R) - Cx(d * drop x)) /\\\n     (complex(&0,--R) - complex(--d,--R) = Cx(d))
+  (forall x. linepath(complex (&0,R),complex (--d,R)) x =\n          ii * Cx(R) - Cx(d * drop x)) /\\\n     (forall x. linepath(Cx (&0),Cx d) x = Cx(d * drop x)) /\\\n     (complex(--d,R) - complex(&0,R) = --Cx(d)) /\\\n     (forall x. linepath(complex (--d,--R),complex(&0,--R)) (vec 1 - x) =\n          --ii * Cx(R) - Cx(d * drop x)) /\\\n     (complex(&0,--R) - complex(--d,--R) = Cx(d))
   --x + y:real^1 = y - x
   vec 1:real^1
   ~(-- &1 = &0)
@@ -91090,7 +91090,7 @@ Generating HOL version of proof
   integral_fC:complex
   (\\z. f(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2))\n    path_integrable_on B
   1 <= N <=> ~(N = 0)
-  !w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
+  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
   z:complex
   x <= &1 ==> &2 * x <= &2
   &0 < n /\\ &0 < r\n                   ==> (&2 * z * &1 / n / r pow 2) * n * r = &2 * z / r
@@ -91126,15 +91126,15 @@ Generating HOL version of proof
   :real
   1 <= N <=> ~(N = 0)
   norm(vsum(N+1..n) (\\n. a n / Cx(&n) cpow (w + z)))
-  !w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
+  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
   n:num
   N + 1
   &0 < Re z
   Re w = &1
   &0 < z ==> &1 + z > &1
-  !z. Re z > &1 ==> ((\\n. a n / Cx(&n) cpow z) sums f z) (from 1)
+  forall z. Re z > &1 ==> ((\\n. a n / Cx(&n) cpow z) sums f z) (from 1)
   w + z:complex
-  !w. (f:complex->complex) w - S_N w = r_N w
+  forall w. (f:complex->complex) w - S_N w = r_N w
   \\n. vsum(1..n) (\\n. a n / Cx (&n) cpow (w + z)) - S_N(w + z)
   sequentially
   &0 < z /\\ ~(e = &0)\n        ==> &1 / (z * e) * e * &2 * z / R pow 2 = &2 / R pow 2
@@ -91167,15 +91167,15 @@ Generating HOL version of proof
   &4 * pi / R <= &4 * pi * (e / &3) /\\\n      y < &2 / &3 * e * pi\n      ==> &4 * pi / R + y < e * &2 * pi
   &4 * pi / R + &2 * pi / &N +\n              &6 * M * R / (d * exp(d * log(&N))) +\n              &4 * M / (R * log(&N)) pow 2
   &0 < &2 * p <=> &0 < p
-  !w. (f:complex->complex) w - S_N w = r_N w
+  forall w. (f:complex->complex) w - S_N w = r_N w
   ~(z = Cx(&0)) ==> (x = y / z <=> z * x = y)
   r_N(w:complex) = ((integral_rA - integral_sA') + integral_fB) /\n                      (Cx(&2) * Cx(pi) * ii)
-  !w. (f:complex->complex) w - S_N w = r_N w
+  forall w. (f:complex->complex) w - S_N w = r_N w
   A:real^1->complex
   \\z. r_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx R pow 2)
   integral_fA - integral_sA:complex = integral_rA
   integral_rA:complex
-  !w. (f:complex->complex) w - S_N w = r_N w
+  forall w. (f:complex->complex) w - S_N w = r_N w
   (\\z. r_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx(R) pow 2))\n    path_integrable_on A
   (A:real^1->complex) = (--) o (--) o A
   ((\\z. S_N(w - z) * Cx (&N) cpow (--z) * (Cx (&1) / z + z / Cx R pow 2))\n     has_path_integral integral_sA') A
@@ -91196,7 +91196,7 @@ Generating HOL version of proof
   \\z. S_N(w + z) * Cx(&N) cpow z * (Cx(&1) + z pow 2 / Cx(R) pow 2)
   ((\\z. S_N(w + z) * Cx(&N) cpow z * (Cx(&1) / z + z / Cx(R) pow 2))\n    has_path_integral (Cx(&2) * Cx pi * ii * S_N(w))) (A ++ A')
   ~(n = 0) <=> 1 <= n
-  !w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
+  forall w. vsum (1..N) (\\n. a n / Cx (&n) cpow w) = S_N w
   (\\z. S_N (w + z) * Cx (&N) cpow z * (Cx (&1) + z pow 2 * inv (Cx R pow 2)))\n    holomorphic_on (:complex)
   &0 < t
   s SUBSET t ==> ~(x IN t) ==> ~(x IN s)
@@ -91205,7 +91205,7 @@ Generating HOL version of proof
   --Cx(&1)
   x < &1 /\\ y < &1 ==> x + y < &2
   winding_number(A++A',Cx(&0)) = Cx(&1)
-  s SUBSET t ==> (!x. x IN t ==> P x) ==> (!x. x IN s ==> P x)
+  s SUBSET t ==> (forall x. x IN t ==> P x) ==> (forall x. x IN s ==> P x)
   path_image A' SUBSET {z | Re z <= &0 /\\ norm z = R}
   valid_path(A ++ A') /\\\n    pathstart(A ++ A') = complex(&0,--R) /\\\n    pathfinish(A ++ A') = complex(&0,--R) /\\\n    ~(Cx(&0) IN path_image(A ++ A')) /\\\n    path_image(A ++ A') = path_image A UNION path_image A'
   Cx(&0) = --x <=> x = Cx(&0)
@@ -91280,7 +91280,7 @@ Generating HOL version of proof
   a /\\ b ==> c <=> b ==> a ==> c
   IMAGE (\\z. f (w + z):complex)\n                        {z | Re z >= --d /\\ abs (Im z) <= R /\\ Re(z) <= R}
   M:real
-  ?M. &0 < M /\\\n        !z. Re z >= --d /\\ abs (Im z) <= R /\\ Re(z) <= R\n            ==> norm(f(w + z):complex) <= M
+  ?M. &0 < M /\\\n        forall z. Re z >= --d /\\ abs (Im z) <= R /\\ Re(z) <= R\n            ==> norm(f(w + z):complex) <= M
   ~(&0 <= Re z)
   v:complex
   --(x / &2) <= z ==> &2 * --z <= x
@@ -91288,17 +91288,17 @@ Generating HOL version of proof
   &0 < b * b /\\ x <= (b / &2) pow 2 /\\ y <= (b / &2) pow 2\n      ==> x + y < b pow 2
   &0 < e /\\ x < abs e ==> x < e
   v:complex
-  !z. &0 <= Re z ==> &0 < bs z /\\ g holomorphic_on ball (z,bs z)
+  forall z. &0 <= Re z ==> &0 < bs z /\\ g holomorphic_on ball (z,bs z)
   t SUBSET s ==> (x IN s ==> P x) ==> (x IN t ==> P x)
   (v:complex) IN t
   Re v = &0
   v:complex
   abs(Im z) <= R
-  i SUBSET UNIONS s ==> !x. x IN i ==> x IN UNIONS s
+  i SUBSET UNIONS s ==> forall x. x IN i ==> x IN UNIONS s
   complex(&0,Im z)
   &0 <= Re z
   z:complex
-  t SUBSET s ==> (!x. x IN s ==> P x) ==> (!x. x IN t ==> P x)
+  t SUBSET s ==> (forall x. x IN s ==> P x) ==> (forall x. x IN t ==> P x)
   &0 < R
   complex(&0,&0)
   s SUBSET UNIONS (IMAGE g t) ==> ~(s = {}) ==> ~(t = {})
@@ -91306,7 +91306,7 @@ Generating HOL version of proof
   t:complex->bool
   a /\\ b /\\ c /\\ d <=> d /\\ a /\\ b /\\ c
   a /\\ b /\\ c <=> c /\\ b /\\ a
-  (!x. x IN s ==> x IN g x) ==> s SUBSET (UNIONS (IMAGE g s))
+  (forall x. x IN s ==> x IN g x) ==> s SUBSET (UNIONS (IMAGE g s))
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   abs(x - a) < e /\\ abs(y - b) < e <=>\n          a < x + e /\\ a > x - e /\\ b < y + e /\\ b > y - e
   IMAGE (\\z. {w | abs(Re(z - w)) < bs z / &2 /\\ abs(Im(z - w)) < bs z / &2})\n            (interval[complex(&0,--R),complex(&0,R)])
@@ -91318,9 +91318,9 @@ Generating HOL version of proof
   d:real
   &0 <= z ==> &1 <= &1 + z
   w + z:complex
-  !z. &1 <= Re z ==> (?e. &0 < e /\\ f holomorphic_on ball (z,e))
+  forall z. &1 <= Re z ==> (?e. &0 < e /\\ f holomorphic_on ball (z,e))
   z:complex
-  !z. &0 <= Re z ==> ?e. &0 < e /\\ g holomorphic_on ball (z,e)
+  forall z. &0 <= Re z ==> ?e. &0 < e /\\ g holomorphic_on ball (z,e)
   g = \\z. (f:complex->complex) (w + z)
   {z | Re(z) >= --d /\\ abs(Im z) <= R}
   min d R
@@ -91333,7 +91333,7 @@ Generating HOL version of proof
   e:real
   &1 <= w ==> w > &1 \\/ w = &1
   w:complex
-  !f a. (!n. 1 <= n ==> norm(a(n)) <= &1) /\\\n         f analytic_on {z | Re(z) >= &1} /\\\n         (!z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n         ==> !z. Re(z) >= &1\n                 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
+  forall f a. (forall n. 1 <= n ==> norm(a(n)) <= &1) /\\\n         f analytic_on {z | Re(z) >= &1} /\\\n         (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n         ==> forall z. Re(z) >= &1\n                 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
   :real
   :real
   (f has_complex_derivative f') net
@@ -91342,10 +91342,10 @@ Generating HOL version of proof
   &0 < b ==> abs b = b
   \\n:num. inv(Cx(b)) * a n
   \\z:complex. inv(Cx(b)) * f z
-  !f a b. &0 < b /\\\n           (!n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (!z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> !z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
+  forall f a b. &0 < b /\\\n           (forall n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> forall z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
   x <= b ==> x <= abs b + &1
   abs b + &1
-  !f a b. (!n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (!z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> !z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
+  forall f a b. (forall n. 1 <= n ==> norm(a(n)) <= b) /\\\n           f analytic_on {z | Re(z) >= &1} /\\\n           (forall z. Re(z) > &1 ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1))\n           ==> forall z. Re(z) >= &1\n                   ==> ((\\n. a(n) / Cx(&n) cpow z) sums (f z)) (from 1)
   &0 < x /\\ &0 < z ==> inv(x) * x / z = inv(z)
   x <= n * e ==> i * e <= (n + i) * e - x
   n + 1 <= m ==> 0 < m
@@ -91370,7 +91370,7 @@ Generating HOL version of proof
   y <= a - x ==> x + y <= a
   n + 1 <= m
   n + 1 <= m ==> n <= m
-  !n s m. ~(n = 0) /\\ &1 < Re s /\\ n + 1 <= m\n           ==> sum(n..m) (\\x. norm(Cx(&1) / Cx(&x) cpow s))\n                <= (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
+  forall n s m. ~(n = 0) /\\ &1 < Re s /\\ n + 1 <= m\n           ==> sum(n..m) (\\x. norm(Cx(&1) / Cx(&x) cpow s))\n                <= (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
   (f has_complex_derivative f') net
   a <= b ==> x <= a ==> x <= b
   m:num
@@ -91378,7 +91378,7 @@ Generating HOL version of proof
   n:num
   \\m. vsum(n..m) (\\r. Cx(&1) / Cx(&r) cpow s)
   sequentially
-  !n s. ~(n = 0) /\\ &1 < Re s\n         ==> norm(genzeta n s) <=\n                (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
+  forall n s. ~(n = 0) /\\ &1 < Re s\n         ==> norm(genzeta n s) <=\n                (&1 / &n + &1 / (Re s - &1)) * exp((&1 - Re s) * log(&n))
   (&1 - (s + &1)) * x = --(s * x)
   (x + &1) - &1 = x
   a <= b ==> x <= a ==> x <= b
@@ -91390,7 +91390,7 @@ Generating HOL version of proof
   n:num
   \\m. vsum(n..m)\n              (\\r. (s - Cx(&1)) / Cx(&r) cpow s -\n                   (Cx(&1) / Cx(&r) cpow (s - Cx(&1)) -\n                    Cx(&1) / Cx(&(r + 1)) cpow (s - Cx(&1))))
   sequentially
-  !n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s) <=\n                  norm(s * (s - Cx(&1))) *\n                  (&1 / &n + &1 / Re s) / exp(Re s * log(&n))
+  forall n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s) <=\n                  norm(s * (s - Cx(&1))) *\n                  (&1 / &n + &1 / Re s) / exp(Re s * log(&n))
   s:complex
   1 <= n <=> ~(n = 0)
   inv(&1)
@@ -91400,7 +91400,7 @@ Generating HOL version of proof
   :real
   (x pow 3):real = x * x * x
   a <= b ==> x <= a ==> x <= b
-  !n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s)\n                  <= ((norm(s) + &1) pow 3 / Re s) / exp (Re s * log (&n))
+  forall n s. ~(n = 0) /\\ &0 < Re s\n         ==> norm(nearzeta n s)\n                  <= ((norm(s) + &1) pow 3 / Re s) / exp (Re s * log (&n))
   s - z:complex
   2 <= p ==> 1 <= p
   --(a * p) <= --(b * p) <=> b * p <= a * p
@@ -91416,7 +91416,7 @@ Generating HOL version of proof
   :real
   &0 < x * inv(&2) <=> &0 < x
   clog(Cx(&p)) / Cx(&p) cpow (z + z)
-  !y:complex. norm(x) <= &2 * norm(y) /\\ norm(y) <= a\n                ==> norm(x) <= &2 * a
+  forall y:complex. norm(x) <= &2 * norm(y) /\\ norm(y) <= a\n                ==> norm(x) <= &2 * a
   s - z:complex
   2 <= p ==> 1 <= p
   --(a * p) <= --(b * p) <=> b * p <= a * p
@@ -91441,7 +91441,7 @@ Generating HOL version of proof
   min (&1 / &2) ((Re s - &1 / &2) / &2)
   s:complex
   &1 / &2 < x ==> &0 < x
-  ?f. !s. s IN {s | Re(s) > &1 / &2}\n           ==> ((\\p. clog(Cx(&p)) / Cx(&p) * nearzeta p s -\n                     clog(Cx(&p)) / (Cx(&p) cpow s * (Cx(&p) cpow s - Cx(&1))))\n                sums (f s)) {p | prime p} /\\\n               f complex_differentiable (at s)
+  ?f. forall s. s IN {s | Re(s) > &1 / &2}\n           ==> ((\\p. clog(Cx(&p)) / Cx(&p) * nearzeta p s -\n                     clog(Cx(&p)) / (Cx(&p) cpow s * (Cx(&p) cpow s - Cx(&1))))\n                sums (f s)) {p | prime p} /\\\n               f complex_differentiable (at s)
   :real
   :real
   :real
@@ -91458,7 +91458,7 @@ Generating HOL version of proof
   w:complex
   dist(Cx(&1),s)
   \\s. (nearzeta 1 s + Cx(&1)) * inv(s - Cx(&1))
-  !s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> complex_derivative zeta s =\n                complex_derivative (nearzeta 1) s / (s - Cx(&1)) -\n                (nearzeta 1 s + Cx(&1)) / (s - Cx(&1)) pow 2
+  forall s. &0 < Re s /\\ ~(s = Cx(&1))\n       ==> complex_derivative zeta s =\n                complex_derivative (nearzeta 1) s / (s - Cx(&1)) -\n                (nearzeta 1 s + Cx(&1)) / (s - Cx(&1)) pow 2
   (f has_complex_derivative f') net
   ~(w = Cx(&1))
   w:complex
@@ -91496,12 +91496,12 @@ Generating HOL version of proof
   &1 < x ==> &1 / &2 < x
   s = Cx(&1)
   s:complex
-  !s. &1 < Re s\n       ==> ((\\p. clog(Cx(&p)) / Cx(&p) * genzeta p s) sums newman(s))\n           {p | prime p}
+  forall s. &1 < Re s\n       ==> ((\\p. clog(Cx(&p)) / Cx(&p) * genzeta p s) sums newman(s))\n           {p | prime p}
   n = (n + 1) - 1
   \\n. (f sums (a - vsum(m..n) s)) k
   from(n + 1)
   \\k. Cx(&1) / Cx(&k) cpow s
-  !m n s. &1 < Re s /\\ m <= n\n           ==> genzeta m s - vsum(m..n) (\\k. Cx(&1) / Cx(&k) cpow s) =\n               genzeta (n + 1) s
+  forall m n s. &1 < Re s /\\ m <= n\n           ==> genzeta m s - vsum(m..n) (\\k. Cx(&1) / Cx(&k) cpow s) =\n               genzeta (n + 1) s
   \\(x:num,y:num). (y,x)
   vsum (1..n) (\\m. vsum {p | prime p /\\ p <= m} (\\p. f p m)) =\n     vsum {p | prime p /\\ p <= n} (\\p. vsum (p..n) (\\m. f p m))
   (&1 - s) * l <= --((s - &1) * m) <=>\n                            (s - &1) * m <= (s - &1) * l
@@ -91532,9 +91532,9 @@ Generating HOL version of proof
   ((\\n. Cx(&1 + &1 / (Re s - &1)) *\n          (clog(Cx(&n)) + Cx(&24)) / Cx(&n) cpow (s - Cx(&1)))\n     --> Cx(&0)) sequentially
   N0:num
   e / &2
-  !n. {p | prime p} INTER (0..n) = {p | prime p /\\ p <= n}
+  forall n. {p | prime p} INTER (0..n) = {p | prime p /\\ p <= n}
   e:real
-  !s. &1 < Re s\n       ==> ((\\n. vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) /\n                 Cx(&n) cpow s)\n            sums (newman s)) (from 1)
+  forall s. &1 < Re s\n       ==> ((\\n. vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) /\n                 Cx(&n) cpow s)\n            sums (newman s)) (from 1)
   z:complex
   x = y ==> x <= a ==> y <= a
   n:num
@@ -91552,13 +91552,13 @@ Generating HOL version of proof
   ?c. summable (from 1)\n        (\\n. (vsum {p | prime p /\\ p <= n} (\\p. clog(Cx(&p)) / Cx(&p)) -\n              clog(Cx(&n)) + c) / Cx(&n))
   a <= x - y + b <=> a + y <= b + x
   log(&n)
-  !x'. x <= x' /\\ a <= y - x' + b ==> a <= y - x + b
+  forall x'. x <= x' /\\ a <= y - x' + b ==> a <= y - x + b
   --(x + y:real) = --y - x
   a * x <= a * y <=> --a * y <= --a * x
   (log(&N * inv(&M)) + a N) * inv(&n)
   a - (x - y) <= b <=> a + y <= b + x
   log(&n)
-  !x'. x' <= x /\\ a - (x' - m) <= b ==> a - (x - m) <= b
+  forall x'. x' <= x /\\ a - (x' - m) <= b ==> a - (x - m) <= b
   (a M - log(&N * inv(&M))) * inv(&n)
   &0 < &n
   n:num
@@ -91571,15 +91571,15 @@ Generating HOL version of proof
   m < n ==> &0 < n - m + &1
   &0 <= y /\\ (&0 <= x ==> x <= y) ==> x <= y
   (d * &N) / (&N - &M + &1)
-  !m n. &m <= &n ==> a m + log(&m) <= a n + log(&n)
+  forall m n. &m <= &n ==> a m + log(&m) <= a n + log(&n)
   &0 < m /\\ &0 < n\n                             ==> n / m = &1 + (n - m) / m
   d * &N / (&N - &M) + log(&N / &M)
-  !a. a <= b /\\ x <= a /\\ y <= a ==> x <= b /\\ y <= b
+  forall a. a <= b /\\ x <= a /\\ y <= a ==> x <= b /\\ y <= b
   0 < N
   &0 <= d
-  !a M N.\n        abs(sum(M..N) (\\i. a(i) / &i)) <= d\n        ==> 0 < M /\\ M < N /\\ (!n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n            ==> a(M) <= d * &N / (&N - &M) + (&N - &M) / &M /\\\n                --a(N) <= d * &N / (&N - &M) + (&N - &M) / &M
+  forall a M N.\n        abs(sum(M..N) (\\i. a(i) / &i)) <= d\n        ==> 0 < M /\\ M < N /\\ (forall n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n            ==> a(M) <= d * &N / (&N - &M) + (&N - &M) / &M /\\\n                --a(N) <= d * &N / (&N - &M) + (&N - &M) / &M
   min e (&1 / &5)
-  (!e. &0 < e /\\ e < &1 / &4 ==> ?N:num. !n. N <= n ==> f(n) < e)\n     ==> (!e. &0 < e ==> ?N. !n. N <= n ==> f(n) < e)
+  (forall e. &0 < e /\\ e < &1 / &4 ==> ?N:num. forall n. N <= n ==> f(n) < e)\n     ==> (forall e. &0 < e ==> ?N. forall n. N <= n ==> f(n) < e)
   ~(n < 1) ==> 0 < n
   k <= n * e / &4 /\\ &0 < n * e ==> k < e / &2 * n
   1 <= n <=> 0 < n
@@ -91616,7 +91616,7 @@ Generating HOL version of proof
   N0:num
   (e / &8) pow 2
   e:real
-  !a c. ((\\i. a(i) / &i) real_sums c) (from 1) /\\\n         (!n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n         ==> (a ---> &0) sequentially
+  forall a c. ((\\i. a(i) / &i) real_sums c) (from 1) /\\\n         (forall n. a(n) + log(&n) <= a(n + 1) + log(&n + &1))\n         ==> (a ---> &0) sequentially
   prime p
   p:num
   s <= s' ==> (s - l - c) + l <= (s' - l' - c) + l'
@@ -91655,25 +91655,25 @@ Generating HOL version of proof
   (N+1)..n
   \\k. d / &4 * (f (k + 1) - f k)
   \\k. (e k - c:real) * (f (k + 1) - f k)
-  !n. N + 1 <= n\n        ==> abs((sum((N+1)..n) (\\k. e k * (f (k + 1) - f k)) -\n                 e(n) * f(n + 1)) +\n                c * f(N + 1))\n            <= d / &2 * f(n + 1)
+  forall n. N + 1 <= n\n        ==> abs((sum((N+1)..n) (\\k. e k * (f (k + 1) - f k)) -\n                 e(n) * f(n + 1)) +\n                c * f(N + 1))\n            <= d / &2 * f(n + 1)
   M + N <= (n:num) ==> M <= n /\\ N <= n
   N:num
   d / &4
   N:num
-  ?N. (!k. N <= k ==> &0 < f k) /\\\n                    (!k. N <= k ==> f(k) <= f(k + 1)) /\\\n                    (!k. N <= k ==> abs(e k - c) < d / &4)
+  ?N. (forall k. N <= k ==> &0 < f k) /\\\n                    (forall k. N <= k ==> f(k) <= f(k + 1)) /\\\n                    (forall k. N <= k ==> abs(e k - c) < d / &4)
   d:real
-  !k:num. M <= k ==> &0 <= f k
-  !f e c M.\n        (!k. M <= k ==> &0 < f k) /\\\n        (!k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n + 1)) ---> &0) sequentially
+  forall k:num. M <= k ==> &0 <= f k
+  forall f e c M.\n        (forall k. M <= k ==> &0 < f k) /\\\n        (forall k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n + 1)) ---> &0) sequentially
   &0 = &0 * b
   M <= n ==> M <= n + 1
   &0 < a /\\ &0 < b ==> x / b * b / a = x / a
   M:num
   \\n. ((sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n         f(n + 1)) * (f(n + 1) / f(n))
-  !f e b c M.\n        (!k. M <= k ==> &0 < f k) /\\\n        (!k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        ((\\n. f(n + 1) / f n) ---> b) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n)) ---> &0) sequentially
+  forall f e b c M.\n        (forall k. M <= k ==> &0 < f k) /\\\n        (forall k. M <= k ==> f(k) <= f(k + 1)) /\\\n        ((\\k. inv(f k)) ---> &0) sequentially /\\\n        ((\\n. f(n + 1) / f n) ---> b) sequentially /\\\n        (e ---> c) sequentially\n        ==> ((\\n. (sum(1..n) (\\k. e(k) * (f(k + 1) - f(k))) - e(n) * f(n + 1)) /\n                  f(n)) ---> &0) sequentially
   1
   \\n:num. &1
-  !a. ((\\n. (&n + a) / &n) ---> &1) sequentially
-  !a. ((\\n. &n / (&n + &1)) ---> &1) sequentially
+  forall a. ((\\n. (&n + a) / &n) ---> &1) sequentially
+  forall a. ((\\n. &n / (&n + &1)) ---> &1) sequentially
   a <= b ==> a <= abs b
   &2 * log(&2)
   &0 <= x ==> &1 <= &1 + x
@@ -91705,7 +91705,7 @@ Generating HOL version of proof
   Cx(&k)
   Cx(&k + &1)
   \\n z. if n = 0 then clog z\n           else if n = 1 then inv z\n           else --inv(z pow 2)
-  !k. 1 <= k ==> abs((&k + &1) * (log(&k + &1) - log(&k)) - &1)\n                  <= &2 / &k
+  forall k. 1 <= k ==> abs((&k + &1) * (log(&k + &1) - log(&k)) - &1)\n                  <= &2 / &k
   (f has_complex_derivative f') net
   (f has_complex_derivative f') net
   &0 < &1 + abs B
@@ -91718,10 +91718,10 @@ Generating HOL version of proof
   N + 1 <= n ==> N <= n
   &0 < n ==> abs n = n
   e / (&2 * (&1 + abs B)) * sum(N+1..n) x / z n
-  !y'. abs(y) <= y' /\\ abs(x) + y' < e ==> abs(x + y) < e
+  forall y'. abs(y) <= y' /\\ abs(x) + y' < e ==> abs(x + y) < e
   N + 1 <= n ==> N <= n
   &0 < n ==> abs n = n
-  !x. abs(x) / z(n:num) = abs(x / z n)
+  forall x. abs(x) / z(n:num) = abs(x / z n)
   1 <= N + 1 /\\ N <= n
   n:num
   N + 1
@@ -91734,10 +91734,10 @@ Generating HOL version of proof
   ((\\n. y n / x n) ---> &0) sequentially
   eventually (\\n. &0 < x n /\\ &0 < y n /\\ &0 < z n) sequentially
   e:real
-  !x y z B.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        eventually (\\n. abs(sum (1..n) x / z(n)) <= B) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
+  forall x y z B.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        eventually (\\n. abs(sum (1..n) x / z(n)) <= B) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
   ((\\n. sum (1..n) x / z n) ---> l) sequentially
   x:num->real
-  !x y z l.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        ((\\n. sum (1..n) x / z(n)) ---> l) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
+  forall x y z l.\n        eventually (\\n. &0 < x n) sequentially /\\\n        eventually (\\n. &0 < y n) sequentially /\\\n        eventually (\\n. &0 < z n) sequentially /\\\n        ((\\n. inv(z n)) ---> &0) sequentially /\\\n        ((\\n. sum (1..n) x / z(n)) ---> l) sequentially /\\\n        ((\\n. y(n) / x(n)) ---> &0) sequentially\n        ==> ((\\n. sum (1..n) y / z(n)) ---> &0) sequentially
   &2 < x ==> &0 <= x
   l pow 2 <= l / &2 <=> &0 <= (&1 / &2 - l) * l
   l pow 2 <= l / &2\n    ==> inv(&2) * l <= abs(l - l pow 2)
@@ -91809,7 +91809,7 @@ Generating HOL version of proof
   (a ==> b) /\\ a ==> a /\\ b
   z:complex
   n:num
-  (!n. P n ==> Q n) /\\ ((!n. P n ==> R n) ==> s)\n      ==> (!n. P n /\\ Q n ==> R n) ==> s
+  (forall n. P n ==> Q n) /\\ ((forall n. P n ==> R n) ==> s)\n      ==> (forall n. P n /\\ Q n ==> R n) ==> s
   n:num
   16
   \\z. (z + Cx(&1)) / clog(z + Cx(&1))

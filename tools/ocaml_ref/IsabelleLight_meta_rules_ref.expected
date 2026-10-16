@@ -5533,7 +5533,7 @@ IsabelleLight/meta_rules quotations (63):
   (p==>q)===>(p===>q)
   (a===>b)===>(b===>a)===>(a<=>b)
   (a<=>b)===>((a==>b) ===> (b==>a) ===> r) ===> r
-  (!x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r
+  (forall x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r
   a:A
   P (a:A)===> ?x:A. P x
   (p===>F)===> ~p

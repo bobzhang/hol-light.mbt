@@ -28519,39 +28519,39 @@ test "Library/modmul_group matches Library/modmul_group.ml" {
       #|  m = 1
       #|  n = 0
       #|  m = 0
-      #|  !m n. m * n = 2 <=> m = 1 /\\ n = 2 \\/ m = 2 /\\ n = 1
+      #|  forall m n. m * n = 2 <=> m = 1 /\\ n = 2 \\/ m = 2 /\\ n = 1
       #|  modmul_group n =\n        if n <= 1 then singleton_group 1\n        else group({m | m < n /\\ coprime(m,n)},\n                   1,inverse_mod n,(\\a b. (a * b) MOD n))
       #|  2 <= n ==> 1 < n
       #|  2 <= n ==> ~(n = 0)
       #|  m:num
-      #|  !m. (a * m == 1) (mod n) ==> coprime(a,n)
+      #|  forall m. (a * m == 1) (mod n) ==> coprime(a,n)
       #|  m:num
       #|  coprime(1,n)
       #|  1 < n <=> 2 <= n
       #|  ~(n <= 1) <=> 2 <= n
       #|  n <= 1
       #|  n:num
-      #|  (!n. group_carrier(modmul_group n) =\n        if n <= 1 then {1} else {m | m < n /\\ coprime(m,n)}) /\\\n   (!n. group_id(modmul_group n) = 1) /\\\n   (!n. group_inv(modmul_group n) = inverse_mod n) /\\\n   (!n. group_mul(modmul_group n) =\n        if n <= 1 then (\\a b. 1) else (\\a b. (a * b) MOD n))
+      #|  (forall n. group_carrier(modmul_group n) =\n        if n <= 1 then {1} else {m | m < n /\\ coprime(m,n)}) /\\\n   (forall n. group_id(modmul_group n) = 1) /\\\n   (forall n. group_inv(modmul_group n) = inverse_mod n) /\\\n   (forall n. group_mul(modmul_group n) =\n        if n <= 1 then (\\a b. 1) else (\\a b. (a * b) MOD n))
       #|  0..n
-      #|  !n. FINITE(group_carrier(modmul_group n))
+      #|  forall n. FINITE(group_carrier(modmul_group n))
       #|  n <= 1 <=> n = 0 \\/ n = 1
       #|  n = 1
-      #|  !n. CARD(group_carrier(modmul_group n)) =\n       if n = 0 then 1 else phi n
-      #|  !n. ~(n = 0) ==> group_carrier(modmul_group n) HAS_SIZE phi n
-      #|  !n. abelian_group(modmul_group n)
+      #|  forall n. CARD(group_carrier(modmul_group n)) =\n       if n = 0 then 1 else phi n
+      #|  forall n. ~(n = 0) ==> group_carrier(modmul_group n) HAS_SIZE phi n
+      #|  forall n. abelian_group(modmul_group n)
       #|  ~(n <= 2) /\\ 2 <= p ==> (p = 1 <=> n <= 2)
       #|  n = 2
       #|  n = 1
-      #|  !n. trivial_group(modmul_group n) <=> n <= 2
+      #|  forall n. trivial_group(modmul_group n) <=> n <= 2
       #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
       #|  n <= 1 <=> n = 0 \\/ n = 1
-      #|  !m n. 2 <= m /\\ 2 <= n\n         ==> group_homomorphism (modmul_group(m * n),\n                                 prod_group (modmul_group m)\n                                            (modmul_group n))\n                                (\\a. (a MOD m),(a MOD n))
+      #|  forall m n. 2 <= m /\\ 2 <= n\n         ==> group_homomorphism (modmul_group(m * n),\n                                 prod_group (modmul_group m)\n                                            (modmul_group n))\n                                (\\a. (a MOD m),(a MOD n))
       #|  coprime(m:num,n) /\\ (x == y) (mod m) /\\ (x == y) (mod n)\n    ==> (x == y) (mod(m * n))
       #|  m * n:num
       #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
       #|  n <= 1 <=> n = 0 \\/ n = 1
       #|  2 <= n ==> ~(n = 0)
-      #|  !m n. 2 <= m /\\ 2 <= n /\\ coprime(m,n)\n         ==> group_isomorphism (modmul_group(m * n),\n                                prod_group (modmul_group m)\n                                           (modmul_group n))\n                               (\\a. (a MOD m),(a MOD n))
+      #|  forall m n. 2 <= m /\\ 2 <= n /\\ coprime(m,n)\n         ==> group_isomorphism (modmul_group(m * n),\n                                prod_group (modmul_group m)\n                                           (modmul_group n))\n                               (\\a. (a MOD m),(a MOD n))
       #|  \\a. (a MOD m),(a MOD n)
       #|  n <= 2 <=> n = 0 \\/ n = 1 \\/ n = 2
       #|  n = 1
@@ -28559,10 +28559,10 @@ test "Library/modmul_group matches Library/modmul_group.ml" {
       #|  n = 0
       #|  m = 0
       #|  (trivial_group G <=> trivial_group H) /\\\n    (~trivial_group G /\\ ~trivial_group H ==> G isomorphic_group H)\n    ==> G isomorphic_group H
-      #|  !m n. coprime(m,n)\n         ==> prod_group (modmul_group m)\n                        (modmul_group n)\n             isomorphic_group (modmul_group (m * n))
-      #|  !n a k. group_pow (modmul_group n) a k =\n           if n <= 1 then 1 else (a EXP k) MOD n
+      #|  forall m n. coprime(m,n)\n         ==> prod_group (modmul_group m)\n                        (modmul_group n)\n             isomorphic_group (modmul_group (m * n))
+      #|  forall n a k. group_pow (modmul_group n) a k =\n           if n <= 1 then 1 else (a EXP k) MOD n
       #|  k:num
-      #|  !n a. a IN group_carrier(modmul_group n)\n         ==> group_element_order (modmul_group n) a = order n a
+      #|  forall n a. a IN group_carrier(modmul_group n)\n         ==> group_element_order (modmul_group n) a = order n a
       #|  2 < n ==> ~(n = 0)
       #|  (~p ==> ~q) /\\ q ==> p /\\ q
       #|  2 < n ==> ~(n = 0)
@@ -28572,7 +28572,7 @@ test "Library/modmul_group matches Library/modmul_group.ml" {
       #|  n:num
       #|  p /\\ q <=> ~(p ==> ~q)
       #|  n <= 2
-      #|  !n. cyclic_group(modmul_group n) <=>\n       n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)
+      #|  forall n. cyclic_group(modmul_group n) <=>\n       n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)
       #|MULT_EQ_2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
       #|modmul_group =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(group(num),fun(group(num),bool)) (#modmul_group:fun(num,group(num)) n:num)) (((#COND:fun(bool,fun(group(num),fun(group(num),group(num)))) ((#<=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#singleton_group:fun(num,group(num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#group:fun(prod(fun(num,bool),prod(num,prod(fun(num,num),fun(num,fun(num,num))))),group(num)) ((#,:fun(fun(num,bool),fun(prod(num,prod(fun(num,num),fun(num,fun(num,num)))),prod(fun(num,bool),prod(num,prod(fun(num,num),fun(num,fun(num,num))))))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1234:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1234:num) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))) m:num)))))) ((#,:fun(num,fun(prod(fun(num,num),fun(num,fun(num,num))),prod(num,prod(fun(num,num),fun(num,fun(num,num)))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#,:fun(fun(num,num),fun(fun(num,fun(num,num)),prod(fun(num,num),fun(num,fun(num,num))))) (#inverse_mod:fun(num,fun(num,num)) n:num)) (\a:num. (\b:num. ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) b:num)) n:num)))))))))))
       #|MODMUL_GROUP =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#group_carrier:fun(group(num),fun(num,bool)) (#modmul_group:fun(num,group(num)) n:num))) (((#COND:fun(bool,fun(fun(num,bool),fun(fun(num,bool),fun(num,bool)))) ((#<=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1235:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1235:num) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))) m:num)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#group_id:fun(group(num),num) (#modmul_group:fun(num,group(num)) n:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,num),fun(fun(num,num),bool)) (#group_inv:fun(group(num),fun(num,num)) (#modmul_group:fun(num,group(num)) n:num))) (#inverse_mod:fun(num,fun(num,num)) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,fun(num,num)),fun(fun(num,fun(num,num)),bool)) (#group_mul:fun(group(num),fun(num,fun(num,num))) (#modmul_group:fun(num,group(num)) n:num))) (((#COND:fun(bool,fun(fun(num,fun(num,num)),fun(fun(num,fun(num,num)),fun(num,fun(num,num))))) ((#<=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (\a:num. (\b:num. (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (\a:num. (\b:num. ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) b:num)) n:num))))))))))

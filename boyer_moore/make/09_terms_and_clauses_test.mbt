@@ -5580,9 +5580,9 @@ test "Boyer_Moore/terms_and_clauses matches Boyer_Moore/terms_and_clauses.ml" {
       #|  T
       #|  F
       #|  b:bool
-      #|  !b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
+      #|  forall b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
       #|  b:bool
-      #|  !b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
+      #|  forall b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
       #|  b:bool
       #|  (if b then b else F) = b
       #|  b:bool

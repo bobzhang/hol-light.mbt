@@ -6914,7 +6914,7 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|Rqe/inferisign_thms quotations (318):
       #|  x3
       #|  x3
-      #|  x1 < x3 ==> x3 < x2 ==> (!x. x1 < x /\\ x < x2 ==> P x) ==>\n    (!x. x1 < x /\\ x < x3 ==> P x) /\\\n    (!x. (x = x3) ==> P x) /\\\n    (!x. x3 < x /\\ x < x2 ==> P x)
+      #|  x1 < x3 ==> x3 < x2 ==> (forall x. x1 < x /\\ x < x2 ==> P x) ==>\n    (forall x. x1 < x /\\ x < x3 ==> P x) /\\\n    (forall x. (x = x3) ==> P x) /\\\n    (forall x. x3 < x /\\ x < x2 ==> P x)
       #|  x''
       #|  x'
       #|  x < x''' /\\  x''' < y
@@ -6936,8 +6936,8 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  x:real
       #|  p:real list
       #|  x < y <=> ~(y <= x)
-      #|  !x y p. x < y /\\ poly p x < &0 /\\ poly p y < &0 /\\\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (!z. x < z /\\ z < y ==> poly p z < &0)
-      #|  !x y p. x < y ==> poly p x < &0 ==> poly p y < &0 ==>\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (!z. x < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y /\\ poly p x < &0 /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y ==> poly p x < &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)
       #|  x''
       #|  x'
       #|  x < x''' /\\  x''' < y
@@ -6959,8 +6959,8 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  x:real
       #|  p:real list
       #|  x < y <=> ~(y <= x)
-      #|  !x y p. x < y /\\ &0 < poly p x /\\ &0 < poly p y /\\\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (!z. x < z /\\ z < y ==> &0 < poly p z)
-      #|  !x y p. x < y ==> poly p x > &0 ==> poly p y > &0 ==>\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (!z. x < z /\\ z < y ==> poly p z > &0)
+      #|  forall x y p. x < y /\\ &0 < poly p x /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> &0 < poly p z)
+      #|  forall x y p. x < y ==> poly p x > &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z > &0)
       #|  z
       #|  X
       #|  x < M /\\  M < y
@@ -7031,12 +7031,12 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  y:real
       #|  x:real
       #|  p:real list
-      #|  !x y p. x < y /\\ &0 < poly p x /\\ poly p y < &0 /\\\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (!z. x < z /\\ z < X ==> &0 < poly p z) /\\\n              (!z. X < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y /\\ &0 < poly p x /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> &0 < poly p z) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)
       #|  X
       #|  p:real list
       #|  y:real
       #|  x:real
-      #|  !x y p. x < y ==> poly p x > &0 ==> poly p y < &0 ==>\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (!z. (z = X) ==> (poly p z = &0)) /\\\n              (!z. x < z /\\ z < X ==> poly p z > &0) /\\\n              (!z. X < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y ==> poly p x > &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z > &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)
       #|  z
       #|  X
       #|  x < M /\\  M < y
@@ -7107,18 +7107,18 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  y:real
       #|  x:real
       #|  p:real list
-      #|  !x y p. x < y /\\ poly p x < &0 /\\ &0 < poly p y /\\\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (!z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (!z. X < z /\\ z < y ==> &0 < poly p z)
+      #|  forall x y p. x < y /\\ poly p x < &0 /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> &0 < poly p z)
       #|  X
       #|  p:real list
       #|  y:real
       #|  x:real
-      #|  !x y p. x < y ==> poly p x < &0 ==> poly p y > &0 ==>\n            (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (!z. (z = X) ==> (poly p z = &0)) /\\\n              (!z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (!z. X < z /\\ z < y ==> poly p z > &0)
-      #|  (!x. x1 < x /\\ x < x2 ==> poly p x < &0) ==> (!x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
-      #|  (!x. x1 < x /\\ x < x2 ==> poly p x > &0) ==> (!x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
+      #|  forall x y p. x < y ==> poly p x < &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z > &0)
+      #|  (forall x. x1 < x /\\ x < x2 ==> poly p x < &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
+      #|  (forall x. x1 < x /\\ x < x2 ==> poly p x > &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))
       #|  x':real
       #|  &0 < y - x
       #|  poly p y - poly p x = &0
-      #|  !x y p. x < y ==> (poly p x = &0) ==> (poly p y = &0) ==>\n       (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==> F
+      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y = &0) ==>\n       (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==> F
       #|  p:real list
       #|  z
       #|  p:real list
@@ -7147,7 +7147,7 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  p:real list
       #|  x <= y <=> (x < y \\/ (x = y))
       #|  x < y <=> ~(y <= x)
-      #|  !x y p. x < y ==> poly p x < &0 ==> (poly p y = &0) ==>\n     (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (!z. x < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y ==> poly p x < &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)
       #|  z
       #|  p:real list
       #|  y:real
@@ -7175,7 +7175,7 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  p:real list
       #|  x >= y <=> (x > y \\/ (x = y))
       #|  x > y <=> ~(y >= x)
-      #|  !x y p. x < y ==> poly p x > &0 ==> (poly p y = &0) ==>\n     (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (!z. x < z /\\ z < y ==> poly p z > &0)
+      #|  forall x y p. x < y ==> poly p x > &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)
       #|  z
       #|  p:real list
       #|  z:real
@@ -7203,7 +7203,7 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  p:real list
       #|  x <= y <=> (x < y \\/ (x = y))
       #|  x < y <=> ~(y <= x)
-      #|  !x y p. x < y ==> (poly p x = &0) ==> (poly p y < &0) ==>\n     (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (!z. x < z /\\ z < y ==> poly p z < &0)
+      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y < &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)
       #|  z
       #|  p:real list
       #|  z:real
@@ -7229,7 +7229,7 @@ test "Rqe/inferisign_thms matches Rqe/inferisign_thms.ml" {
       #|  p:real list
       #|  x >= y <=> (x > y \\/ (x = y))
       #|  x > y <=> ~(y >= x)
-      #|  !x y p. x < y ==> (poly p x = &0) ==> (poly p y > &0) ==>\n     (!z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (!z. x < z /\\ z < y ==> poly p z > &0)
+      #|  forall x y p. x < y ==> (poly p x = &0) ==> (poly p y > &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)
       #|inferisign_lem00 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x3:real)) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x3:real) x2:real)) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x2:real))) (P:fun(real,bool) x:real))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x1:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x3:real))) (P:fun(real,bool) x:real))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) x:real) x3:real)) (P:fun(real,bool) x:real))))) (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x3:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) x2:real))) (P:fun(real,bool) x:real)))))))))
       #|neg_neg_neq_thm =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(list(real),bool),bool) (\p:list(real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) (#poly_diff:fun(list(real),list(real)) p:list(real))) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))) (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))))))
       #|neg_neg_neq_thm2 =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(list(real),bool),bool) (\p:list(real). ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) (#poly_diff:fun(list(real),list(real)) p:list(real))) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) z:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))

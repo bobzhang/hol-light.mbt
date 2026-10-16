@@ -13,7 +13,7 @@ fn step_2() -> Unit raise {
   permutes_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "p permutes s <=> (!x. ~(x IN s) ==> p(x) = x) /\\ (!y. ?!x. p x = y)",
+        "p permutes s <=> (forall x. ~(x IN s) ==> p(x) = x) /\\ (forall y. ?!x. p x = y)",
       ),
     ),
   )
@@ -55,7 +55,7 @@ fn step_4() -> Unit raise {
   )
   surjective_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!f. (!y. ?x. f x = y) <=> !y. f(inverse f y) = y"),
+      @parser.parse_term("forall f. (forall y. ?x. f x = y) <=> forall y. f(inverse f y) = y"),
       t2,
     ),
   )
@@ -85,7 +85,7 @@ fn step_5() -> Unit raise {
   )
   surjective_inverse_o_c.set(
     @tactics.prove(
-      @parser.parse_term("!f. (!y. ?x. f x = y) <=> (f o inverse f = I)"),
+      @parser.parse_term("forall f. (forall y. ?x. f x = y) <=> (f o inverse f = I)"),
       t3,
     ),
   )
@@ -109,7 +109,7 @@ fn step_6() -> Unit raise {
   injective_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f. (!x x'. f x = f x' ==> x = x') <=> !x. inverse f (f x) = x",
+        "forall f. (forall x x'. f x = f x' ==> x = x') <=> forall x. inverse f (f x) = x",
       ),
       t4,
     ),
@@ -141,7 +141,7 @@ fn step_7() -> Unit raise {
   injective_inverse_o_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f. (!x x'. f x = f x' ==> x = x') <=> (inverse f o f = I)",
+        "forall f. (forall x x'. f x = f x' ==> x = x') <=> (inverse f o f = I)",
       ),
       t5,
     ),
@@ -173,7 +173,7 @@ fn step_8() -> Unit raise {
   )
   inverse_unique_o_c.set(
     @tactics.prove(
-      @parser.parse_term("!f g. f o g = I /\\ g o f = I ==> inverse f = g"),
+      @parser.parse_term("forall f g. f o g = I /\\ g o f = I ==> inverse f = g"),
       t7,
     ),
   )
@@ -234,7 +234,7 @@ fn step_10() -> Unit raise {
   inverse_unique_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->A) g. (!x. f(g x) = x) /\\ (!x. g(f x) = x)\n                ==> inverse f = g",
+        "forall(f:A->A) g. (forall x. f(g x) = x) /\\ (forall x. g(f x) = x)\n                ==> inverse f = g",
       ),
       t15,
     ),
@@ -283,7 +283,7 @@ fn step_12() -> Unit raise {
     ),
     t16,
   )
-  swap_refl_c.set(@tactics.prove(@parser.parse_term("!a. swap(a,a) = I"), t17))
+  swap_refl_c.set(@tactics.prove(@parser.parse_term("forall a. swap(a,a) = I"), t17))
 }
 
 ///|
@@ -306,7 +306,7 @@ fn step_13() -> Unit raise {
     t18,
   )
   swap_sym_c.set(
-    @tactics.prove(@parser.parse_term("!a b. swap(a,b) = swap(b,a)"), t19),
+    @tactics.prove(@parser.parse_term("forall a b. swap(a,b) = swap(b,a)"), t19),
   )
 }
 
@@ -330,7 +330,7 @@ fn step_14() -> Unit raise {
     t20,
   )
   swap_idempotent_c.set(
-    @tactics.prove(@parser.parse_term("!a b. swap(a,b) o swap(a,b) = I"), t21),
+    @tactics.prove(@parser.parse_term("forall a b. swap(a,b) o swap(a,b) = I"), t21),
   )
 }
 
@@ -356,7 +356,7 @@ fn step_15() -> Unit raise {
   )
   inverse_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b. inverse(swap(a,b)) = swap(a,b)"),
+      @parser.parse_term("forall a b. inverse(swap(a,b)) = swap(a,b)"),
       t24,
     ),
   )
@@ -378,7 +378,7 @@ fn step_16() -> Unit raise {
   let t26 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t25)
   swap_galois_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b x y. x = swap(a,b) y <=> y = swap(a,b) x"),
+      @parser.parse_term("forall a b x y. x = swap(a,b) y <=> y = swap(a,b) x"),
       t26,
     ),
   )
@@ -398,7 +398,7 @@ pub fn swap_galois() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([swap()]))
   swap_left_c.set(
-    @tactics.prove(@parser.parse_term("!a b:A. swap(a,b) a = b"), t27),
+    @tactics.prove(@parser.parse_term("forall a b:A. swap(a,b) a = b"), t27),
   )
 }
 
@@ -417,7 +417,7 @@ fn step_18() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([]))
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t28)
   swap_right_c.set(
-    @tactics.prove(@parser.parse_term("!a b:A. swap(a,b) b = a"), t29),
+    @tactics.prove(@parser.parse_term("forall a b:A. swap(a,b) b = a"), t29),
   )
 }
 
@@ -437,7 +437,7 @@ fn step_19() -> Unit raise {
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t30)
   swap_other_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b x:A. ~(x = a) /\\ ~(x = b) ==> swap(a,b) x = x"),
+      @parser.parse_term("forall a b x:A. ~(x = a) /\\ ~(x = b) ==> swap(a,b) x = x"),
       t31,
     ),
   )
@@ -507,7 +507,7 @@ fn step_20() -> Unit raise {
   swap_triple_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n     ==> swap(a,b) o swap(b,c) o swap(a,b) = swap(a,c)",
+        "forall a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n     ==> swap(a,b) o swap(b,c) o swap(a,b) = swap(a,c)",
       ),
       t42,
     ),
@@ -578,7 +578,7 @@ fn step_21() -> Unit raise {
   swap_triple_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a x y:A. ~(a = x) /\\ ~(a = y) /\\ ~(x = y)\n     ==> swap(a,x) o swap(a,y) o swap(a,x) = swap(x,y)",
+        "forall a x y:A. ~(a = x) /\\ ~(a = y) /\\ ~(x = y)\n     ==> swap(a,x) o swap(a,y) o swap(a,x) = swap(x,y)",
       ),
       t53,
     ),
@@ -696,7 +696,7 @@ fn step_22() -> Unit raise {
   involution_size_2_is_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(s:A->bool) (p:A->A).\n        (!x. x IN s ==> p x IN s) /\\\n        (!x. x IN s ==> p(p x) = x) /\\\n        {x | x IN s /\\ ~(p x = x)} HAS_SIZE 2\n        ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b) /\\\n                  !x. x IN s ==> p x = swap(a,b) x",
+        "forall(s:A->bool) (p:A->A).\n        (forall x. x IN s ==> p x IN s) /\\\n        (forall x. x IN s ==> p(p x) = x) /\\\n        {x | x IN s /\\ ~(p x = x)} HAS_SIZE 2\n        ==> ?a b. a IN s /\\ b IN s /\\ ~(a = b) /\\\n                  forall x. x IN s ==> p x = swap(a,b) x",
       ),
       t63,
     ),
@@ -732,7 +732,7 @@ fn step_23() -> Unit raise {
   involution_moves_2_is_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(s:A->bool) (p:A->A).\n     FINITE s /\\\n     (!x. x IN s ==> p x IN s) /\\\n     (!x. x IN s ==> p(p x) = x) /\\\n     CARD {x | x IN s /\\ ~(p x = x)} = 2\n     ==> ?(a:A) (b:A). a IN s /\\ b IN s /\\ ~(a = b) /\\\n                       !x. x IN s ==> p x = swap(a,b) x",
+        "forall(s:A->bool) (p:A->A).\n     FINITE s /\\\n     (forall x. x IN s ==> p x IN s) /\\\n     (forall x. x IN s ==> p(p x) = x) /\\\n     CARD {x | x IN s /\\ ~(p x = x)} = 2\n     ==> ?(a:A) (b:A). a IN s /\\ b IN s /\\ ~(a = b) /\\\n                       forall x. x IN s ==> p x = swap(a,b) x",
       ),
       t67,
     ),
@@ -757,7 +757,7 @@ fn step_24() -> Unit raise {
   let t69 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t68)
   permutes_in_image_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s x. p permutes s ==> (p(x) IN s <=> x IN s)"),
+      @parser.parse_term("forall p s x. p permutes s ==> (p(x) IN s <=> x IN s)"),
       t69,
     ),
   )
@@ -786,7 +786,7 @@ fn step_25() -> Unit raise {
   )
   permutes_image_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s. p permutes s ==> IMAGE p s = s"),
+      @parser.parse_term("forall p s. p permutes s ==> IMAGE p s = s"),
       t71,
     ),
   )
@@ -808,7 +808,7 @@ fn step_26() -> Unit raise {
   let t73 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t72)
   permutes_injective_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s. p permutes s ==> !x y. p(x) = p(y) <=> x = y"),
+      @parser.parse_term("forall p s. p permutes s ==> forall x y. p(x) = p(y) <=> x = y"),
       t73,
     ),
   )
@@ -832,7 +832,7 @@ fn step_27() -> Unit raise {
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t74)
   permutes_surjective_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s. p permutes s ==> !y. ?x. p(x) = y"),
+      @parser.parse_term("forall p s. p permutes s ==> forall y. ?x. p(x) = y"),
       t75,
     ),
   )
@@ -865,7 +865,7 @@ fn step_28() -> Unit raise {
   permutes_inverses_o_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s. p permutes s ==> p o inverse(p) = I /\\ inverse(p) o p = I",
+        "forall p s. p permutes s ==> p o inverse(p) = I /\\ inverse(p) o p = I",
       ),
       t79,
     ),
@@ -965,7 +965,7 @@ fn step_29() -> Unit raise {
   permutes_inverses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s. p permutes s\n         ==> (!x. p(inverse p x) = x) /\\ (!x. inverse p (p x) = x)",
+        "forall p s. p permutes s\n         ==> (forall x. p(inverse p x) = x) /\\ (forall x. inverse p (p x) = x)",
       ),
       t87,
     ),
@@ -993,7 +993,7 @@ fn step_30() -> Unit raise {
   )
   permutes_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s t. p permutes s /\\ s SUBSET t ==> p permutes t"),
+      @parser.parse_term("forall p s t. p permutes s /\\ s SUBSET t ==> p permutes t"),
       t89,
     ),
   )
@@ -1026,7 +1026,7 @@ fn step_31() -> Unit raise {
     t90,
   )
   permutes_empty_c.set(
-    @tactics.prove(@parser.parse_term("!p. p permutes {} <=> p = I"), t91),
+    @tactics.prove(@parser.parse_term("forall p. p permutes {} <=> p = I"), t91),
   )
 }
 
@@ -1055,7 +1055,7 @@ fn step_32() -> Unit raise {
     t92,
   )
   permutes_sing_c.set(
-    @tactics.prove(@parser.parse_term("!p a.  p permutes {a} <=> p = I"), t93),
+    @tactics.prove(@parser.parse_term("forall p a.  p permutes {a} <=> p = I"), t93),
   )
 }
 
@@ -1078,7 +1078,7 @@ fn step_33() -> Unit raise {
   )
   permutes_univ_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. p permutes UNIV <=> !y:A. ?!x. p x = y"),
+      @parser.parse_term("forall p. p permutes UNIV <=> forall y:A. ?!x. p x = y"),
       t95,
     ),
   )
@@ -1104,7 +1104,7 @@ fn step_34() -> Unit raise {
   permutes_inverse_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s. p permutes s ==> !x y. inverse p y = x <=> p x = y",
+        "forall p s. p permutes s ==> forall x y. inverse p y = x <=> p x = y",
       ),
       t97,
     ),
@@ -1132,7 +1132,7 @@ fn step_35() -> Unit raise {
   )
   permutes_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b s. a IN s /\\ b IN s ==> swap(a,b) permutes s"),
+      @parser.parse_term("forall a b s. a IN s /\\ b IN s ==> swap(a,b) permutes s"),
       t99,
     ),
   )
@@ -1158,7 +1158,7 @@ fn step_36() -> Unit raise {
   permutes_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s t. p permutes s /\\ (!x. x IN (s DIFF t) ==> p(x) = x)\n           ==> p permutes t",
+        "forall p s t. p permutes s /\\ (forall x. x IN (s DIFF t) ==> p(x) = x)\n           ==> p permutes t",
       ),
       t101,
     ),
@@ -1187,7 +1187,7 @@ fn step_37() -> Unit raise {
   permutes_bijections_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. (!x. x IN s ==> p x IN s) /\\ (!x. ~(x IN s) ==> p x = x) /\\\n         (!x. x IN s ==> q x IN s) /\\ (!x. ~(x IN s) ==> q x = x) /\\\n         (!x. p(q x) = x) /\\ (!x. q(p x) = x)\n         ==> p permutes s",
+        "forall p q. (forall x. x IN s ==> p x IN s) /\\ (forall x. ~(x IN s) ==> p x = x) /\\\n         (forall x. x IN s ==> q x IN s) /\\ (forall x. ~(x IN s) ==> q x = x) /\\\n         (forall x. p(q x) = x) /\\ (forall x. q(p x) = x)\n         ==> p permutes s",
       ),
       t103,
     ),
@@ -1256,7 +1256,7 @@ fn step_38() -> Unit raise {
   permutes_inverse_function_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s p:A->A.\n        p permutes s <=>\n        ?q. (!x. ~(x IN s) ==> p x = x) /\\\n            (!x. x IN s ==> p x IN s) /\\\n            (!x. x IN s ==> p(q x) = x /\\ q(p x) = x)",
+        "forall s p:A->A.\n        p permutes s <=>\n        ?q. (forall x. ~(x IN s) ==> p x = x) /\\\n            (forall x. x IN s ==> p x IN s) /\\\n            (forall x. x IN s ==> p(q x) = x /\\ q(p x) = x)",
       ),
       t113,
     ),
@@ -1284,7 +1284,7 @@ fn step_39() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "!s. (!y. ~(y IN s) ==> P y) /\\ (!y. y IN s ==> P y) ==> !y. P y",
+        "forall s. (forall y. ~(y IN s) ==> P y) /\\ (forall y. y IN s ==> P y) ==> forall y. P y",
       ),
     ),
   )
@@ -1316,7 +1316,7 @@ fn step_39() -> Unit raise {
   permutes_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(p:A->A) s.\n        p permutes s <=>\n        (!x. x IN s ==> p x IN s) /\\\n        (!x. ~(x IN s) ==> p x = x) /\\\n        (!y. y IN s ==> ?!x. x IN s /\\ p x = y)",
+        "forall(p:A->A) s.\n        p permutes s <=>\n        (forall x. x IN s ==> p x IN s) /\\\n        (forall x. ~(x IN s) ==> p x = x) /\\\n        (forall y. y IN s ==> ?!x. x IN s /\\ p x = y)",
       ),
       t121,
     ),
@@ -1343,7 +1343,7 @@ fn step_40() -> Unit raise {
   permutes_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!Q p s:A->bool.\n        p permutes s /\\ (!x. x IN s ==> (Q(p x) <=> Q x))\n        ==> (\\i. if Q i then p i else i) permutes {x | x IN s /\\ Q x}",
+        "forall Q p s:A->bool.\n        p permutes s /\\ (forall x. x IN s ==> (Q(p x) <=> Q x))\n        ==> (\\i. if Q i then p i else i) permutes {x | x IN s /\\ Q x}",
       ),
       t123,
     ),
@@ -1372,7 +1372,7 @@ fn step_41() -> Unit raise {
   permutes_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!Q p s:A->bool.\n        p permutes s /\\ (!x. x IN s ==> (Q(p x) <=> Q x))\n        ==> (\\i. if Q i then p i else i) permutes s",
+        "forall Q p s:A->bool.\n        p permutes s /\\ (forall x. x IN s ==> (Q(p x) <=> Q x))\n        ==> (\\i. if Q i then p i else i) permutes s",
       ),
       t125,
     ),
@@ -1426,7 +1426,7 @@ fn step_42() -> Unit raise {
   permutes_cartesian_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(p:A->A) (q:B->B) s t.\n        p permutes s /\\ q permutes t\n        ==> (\\(i,j). if i IN s /\\ j IN t then p i,q j else i,j)\n            permutes (s CROSS t)",
+        "forall(p:A->A) (q:B->B) s t.\n        p permutes s /\\ q permutes t\n        ==> (\\(i,j). if i IN s /\\ j IN t then p i,q j else i,j)\n            permutes (s CROSS t)",
       ),
       t131,
     ),
@@ -1455,7 +1455,7 @@ fn step_43() -> Unit raise {
   permutes_transfer_bijections_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) f' p s t.\n        (!x. f'(f x) = x) /\\ (!y. f(f' y) = y) /\\\n        (!x. x IN s ==> f x IN t) /\\\n        (!y. y IN t ==> f' y IN s)\n        ==> ((f' o p o f) permutes s <=> p permutes t)",
+        "forall(f:A->B) f' p s t.\n        (forall x. f'(f x) = x) /\\ (forall y. f(f' y) = y) /\\\n        (forall x. x IN s ==> f x IN t) /\\\n        (forall y. y IN t ==> f' y IN s)\n        ==> ((f' o p o f) permutes s <=> p permutes t)",
       ),
       t133,
     ),
@@ -1484,7 +1484,7 @@ fn step_44() -> Unit raise {
   permutes_transfer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) p q s.\n        p permutes s /\\\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        (!x. x IN s ==> q(f x) = f(p x)) /\\\n        (!y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> q permutes (IMAGE f s)",
+        "forall(f:A->B) p q s.\n        p permutes s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        (forall x. x IN s ==> q(f x) = f(p x)) /\\\n        (forall y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> q permutes (IMAGE f s)",
       ),
       t135,
     ),
@@ -1617,7 +1617,7 @@ fn step_45() -> Unit raise {
     @tactics.all_tac,
   ])
   let t148 = @tactics.subgoal_then(
-    @parser.parse_term("!y:A. inverse (p:A->A) (p y) = y"),
+    @parser.parse_term("forall y:A. inverse (p:A->A) (p y) = y"),
     fn(
       x145 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1676,7 +1676,7 @@ fn step_45() -> Unit raise {
     @tactics.all_tac,
   ])
   let t142 = @tactics.subgoal_then(
-    @parser.parse_term("!y:A. (p:A->A)(inverse p y) = y"),
+    @parser.parse_term("forall y:A. (p:A->A)(inverse p y) = y"),
     fn(
       x139 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1797,7 +1797,7 @@ fn step_45() -> Unit raise {
   swap_conjugate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(p:A->A) s a b. p permutes s\n     ==> p o swap(a,b) o inverse p = swap(p a, p b)",
+        "forall(p:A->A) s a b. p permutes s\n     ==> p o swap(a,b) o inverse p = swap(p a, p b)",
       ),
       t168,
     ),
@@ -1822,7 +1822,7 @@ fn step_46() -> Unit raise {
     t169,
   )
   permutes_id_c.set(
-    @tactics.prove(@parser.parse_term("!s:A->bool. (\\x. x) permutes s"), t170),
+    @tactics.prove(@parser.parse_term("forall s:A->bool. (\\x. x) permutes s"), t170),
   )
 }
 
@@ -1843,7 +1843,7 @@ fn step_47() -> Unit raise {
     @simp.rewrite_tac(@list.List([permutes(), @trivia.i_thm()])),
     t171,
   )
-  permutes_i_c.set(@tactics.prove(@parser.parse_term("!s. I permutes s"), t172))
+  permutes_i_c.set(@tactics.prove(@parser.parse_term("forall s. I permutes s"), t172))
 }
 
 ///|
@@ -1866,7 +1866,7 @@ fn step_48() -> Unit raise {
   permutes_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q s. p permutes s /\\ q permutes s ==> (q o p) permutes s",
+        "forall p q s. p permutes s /\\ q permutes s ==> (q o p) permutes s",
       ),
       t174,
     ),
@@ -2016,7 +2016,7 @@ fn step_49() -> Unit raise {
   )
   permutes_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s. p permutes s ==> inverse(p) permutes s"),
+      @parser.parse_term("forall p s. p permutes s ==> inverse(p) permutes s"),
       t187,
     ),
   )
@@ -2045,7 +2045,7 @@ fn step_50() -> Unit raise {
   )
   permutes_inverse_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. p permutes s ==> inverse(inverse p) = p"),
+      @parser.parse_term("forall p. p permutes s ==> inverse(inverse p) = p"),
       t189,
     ),
   )
@@ -2098,7 +2098,7 @@ fn step_51() -> Unit raise {
   permutes_insert_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p a:A s. p permutes (a INSERT s) ==> (swap(a,p(a)) o p) permutes s",
+        "forall p a:A s. p permutes (a INSERT s) ==> (swap(a,p(a)) o p) permutes s",
       ),
       t195,
     ),
@@ -2784,7 +2784,7 @@ fn step_53() -> Unit raise {
   has_size_permutations_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)",
+        "forall s:A->bool n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)",
       ),
       t269,
     ),
@@ -2810,7 +2810,7 @@ fn step_54() -> Unit raise {
   )
   finite_permutations_c.set(
     @tactics.prove(
-      @parser.parse_term("!s. FINITE s ==> FINITE {p | p permutes s}"),
+      @parser.parse_term("forall s. FINITE s ==> FINITE {p | p permutes s}"),
       t270,
     ),
   )
@@ -2836,7 +2836,7 @@ fn step_55() -> Unit raise {
   card_permutations_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s. FINITE s ==> CARD {p | p permutes s} = FACT(CARD s)",
+        "forall s. FINITE s ==> CARD {p | p permutes s} = FACT(CARD s)",
       ),
       t271,
     ),
@@ -3011,7 +3011,7 @@ fn step_56() -> Unit raise {
   permutes_finite_injective_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool p.\n        FINITE s\n        ==> (p permutes s <=>\n             (!x. ~(x IN s) ==> p x = x) /\\\n             (!x. x IN s ==> p x IN s) /\\\n             (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y))",
+        "forall s:A->bool p.\n        FINITE s\n        ==> (p permutes s <=>\n             (forall x. ~(x IN s) ==> p x = x) /\\\n             (forall x. x IN s ==> p x IN s) /\\\n             (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y))",
       ),
       t288,
     ),
@@ -3186,7 +3186,7 @@ fn step_57() -> Unit raise {
   permutes_finite_surjective_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool p.\n        FINITE s\n        ==> (p permutes s <=>\n             (!x. ~(x IN s) ==> p x = x) /\\ (!x. x IN s ==> p x IN s) /\\\n             (!y. y IN s ==> ?x. x IN s /\\ p x = y))",
+        "forall s:A->bool p.\n        FINITE s\n        ==> (p permutes s <=>\n             (forall x. ~(x IN s) ==> p x = x) /\\ (forall x. x IN s ==> p x IN s) /\\\n             (forall y. y IN s ==> ?x. x IN s /\\ p x = y))",
       ),
       t305,
     ),
@@ -3357,7 +3357,7 @@ fn step_58() -> Unit raise {
   restrict_permutes_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (f:A->A).\n    FINITE t /\\ t SUBSET s /\\ f permutes s /\\ IMAGE f t = t\n    ==> (\\x. if x IN t then f x else x) permutes t",
+        "forall s t (f:A->A).\n    FINITE t /\\ t SUBSET s /\\ f permutes s /\\ IMAGE f t = t\n    ==> (\\x. if x IN t then f x else x) permutes t",
       ),
       t329,
     ),
@@ -3394,7 +3394,7 @@ fn step_59() -> Unit raise {
   )
   restrict_i_c.set(
     @tactics.prove(
-      @parser.parse_term("!t:A->bool. (\\x. if x IN t then I x else x) = I"),
+      @parser.parse_term("forall t:A->bool. (\\x. if x IN t then I x else x) = I"),
       t331,
     ),
   )
@@ -3486,7 +3486,7 @@ fn step_60() -> Unit raise {
   restrict_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (f:A->A) g.\n    t SUBSET s /\\ f permutes s /\\ g permutes s /\\\n    IMAGE f t = t /\\ IMAGE g t = t\n    ==> (\\x. if x IN t then (f o g) x else x) =\n        (\\x. if x IN t then f x else x) o (\\x. if x IN t then g x else x)",
+        "forall s t (f:A->A) g.\n    t SUBSET s /\\ f permutes s /\\ g permutes s /\\\n    IMAGE f t = t /\\ IMAGE g t = t\n    ==> (\\x. if x IN t then (f o g) x else x) =\n        (\\x. if x IN t then f x else x) o (\\x. if x IN t then g x else x)",
       ),
       t343,
     ),
@@ -3898,7 +3898,7 @@ fn step_61() -> Unit raise {
     @tactics.all_tac,
   ])
   let t380 = @tactics.subgoal_then(
-    @parser.parse_term("!y:A. (f:A->A) (inverse f y) = y"),
+    @parser.parse_term("forall y:A. (f:A->A) (inverse f y) = y"),
     fn(
       x377 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4149,7 +4149,7 @@ fn step_61() -> Unit raise {
     @tactics.all_tac,
   ])
   let t355 = @tactics.subgoal_then(
-    @parser.parse_term("!z:A. z IN t ==> inverse f z IN t"),
+    @parser.parse_term("forall z:A. z IN t ==> inverse f z IN t"),
     fn(
       x352 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4298,7 +4298,7 @@ fn step_61() -> Unit raise {
   restrict_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (f:A->A).\n    FINITE t /\\ t SUBSET s /\\ f permutes s /\\ IMAGE f t = t\n    ==> (\\x. if x IN t then inverse f x else x) =\n        inverse (\\x. if x IN t then f x else x)",
+        "forall s t (f:A->A).\n    FINITE t /\\ t SUBSET s /\\ f permutes s /\\ IMAGE f t = t\n    ==> (\\x. if x IN t then inverse f x else x) =\n        inverse (\\x. if x IN t then f x else x)",
       ),
       t424,
     ),
@@ -4348,7 +4348,7 @@ fn step_62() -> Unit raise {
   restrict_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(s:A->bool) a b.\n    a IN s /\\ b IN s\n    ==> (\\x. if x IN s then swap(a,b) x else x) = swap(a,b)",
+        "forall(s:A->bool) a b.\n    a IN s /\\ b IN s\n    ==> (\\x. if x IN s then swap(a,b) x else x) = swap(a,b)",
       ),
       t432,
     ),
@@ -4399,7 +4399,7 @@ fn step_63() -> Unit raise {
   iterate_permute_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f p s. p permutes s ==> iterate op s f = iterate op s (f o p)",
+        "forall op. monoidal op\n        ==> forall f p s. p permutes s ==> iterate op s f = iterate op s (f o p)",
       ),
       t437,
     ),
@@ -4428,7 +4428,7 @@ fn step_64() -> Unit raise {
   )
   nsum_permute_c.set(
     @tactics.prove(
-      @parser.parse_term("!f p s. p permutes s ==> nsum s f = nsum s (f o p)"),
+      @parser.parse_term("forall f p s. p permutes s ==> nsum s f = nsum s (f o p)"),
       t440,
     ),
   )
@@ -4452,7 +4452,7 @@ fn step_65() -> Unit raise {
   nsum_permute_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p m n. p permutes m..n ==> nsum(m..n) f = nsum(m..n) (f o p)",
+        "forall f p m n. p permutes m..n ==> nsum(m..n) f = nsum(m..n) (f o p)",
       ),
       t441,
     ),
@@ -4481,7 +4481,7 @@ fn step_66() -> Unit raise {
   )
   sum_permute_c.set(
     @tactics.prove(
-      @parser.parse_term("!f p s. p permutes s ==> sum s f = sum s (f o p)"),
+      @parser.parse_term("forall f p s. p permutes s ==> sum s f = sum s (f o p)"),
       t444,
     ),
   )
@@ -4505,7 +4505,7 @@ fn step_67() -> Unit raise {
   sum_permute_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p m n. p permutes m..n ==> sum(m..n) f = sum(m..n) (f o p)",
+        "forall f p m n. p permutes m..n ==> sum(m..n) f = sum(m..n) (f o p)",
       ),
       t445,
     ),
@@ -4608,7 +4608,7 @@ fn step_68() -> Unit raise {
   swap_common_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = c) /\\ ~(b = c)\n             ==> swap(a,b) o swap(a,c) = swap(b,c) o swap(a,b)",
+        "forall a b c:A. ~(a = c) /\\ ~(b = c)\n             ==> swap(a,b) o swap(a,c) = swap(b,c) o swap(a,b)",
       ),
       t457,
     ),
@@ -4659,7 +4659,7 @@ fn step_69() -> Unit raise {
   swap_common_p_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = b) /\\ ~(a = c)\n             ==> swap(a,c) o swap(b,c) = swap(b,c) o swap(a,b)",
+        "forall a b c:A. ~(a = b) /\\ ~(a = c)\n             ==> swap(a,c) o swap(b,c) = swap(b,c) o swap(a,b)",
       ),
       t468,
     ),
@@ -4760,7 +4760,7 @@ fn step_70() -> Unit raise {
   swap_independent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d:A. ~(a = c) /\\ ~(a = d) /\\ ~(b = c) /\\ ~(b = d)\n               ==> swap(a,b) o swap(c,d) = swap(c,d) o swap(a,b)",
+        "forall a b c d:A. ~(a = c) /\\ ~(a = d) /\\ ~(b = c) /\\ ~(b = d)\n               ==> swap(a,b) o swap(c,d) = swap(c,d) o swap(a,b)",
       ),
       t480,
     ),
@@ -4811,7 +4811,7 @@ fn step_72() -> Unit raise {
   permutes_three_cycle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c permutes s",
+        "forall s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c permutes s",
       ),
       t483,
     ),
@@ -4847,7 +4847,7 @@ fn step_73() -> Unit raise {
   three_cycle_compose_reverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n    ==> three_cycle a b c o three_cycle a c b = I /\\\n        three_cycle a c b o three_cycle a b c = I",
+        "forall a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n    ==> three_cycle a b c o three_cycle a c b = I /\\\n        three_cycle a c b o three_cycle a b c = I",
       ),
       t485,
     ),
@@ -4898,7 +4898,7 @@ fn step_74() -> Unit raise {
   three_cycle_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n    ==> inverse (three_cycle a b c) = three_cycle a c b",
+        "forall a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n    ==> inverse (three_cycle a b c) = three_cycle a c b",
       ),
       t493,
     ),
@@ -4977,7 +4977,7 @@ fn step_75() -> Unit raise {
   three_cycle_as_commutator_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d e:A.\n     ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\ ~(a = e) /\\\n     ~(b = c) /\\ ~(b = d) /\\ ~(b = e) /\\\n     ~(c = d) /\\ ~(c = e) /\\\n     ~(d = e)\n     ==> three_cycle a b c =\n         (three_cycle d c a) o\n         (three_cycle c b e) o\n         (three_cycle d a c) o\n         (three_cycle c e b)",
+        "forall a b c d e:A.\n     ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\ ~(a = e) /\\\n     ~(b = c) /\\ ~(b = d) /\\ ~(b = e) /\\\n     ~(c = d) /\\ ~(c = e) /\\\n     ~(d = e)\n     ==> three_cycle a b c =\n         (three_cycle d c a) o\n         (three_cycle c b e) o\n         (three_cycle d a c) o\n         (three_cycle c e b)",
       ),
       t507,
     ),
@@ -5127,7 +5127,7 @@ fn step_76() -> Unit raise {
   three_cycle_commutator_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d e:A.\n     ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\ ~(a = e) /\\\n     ~(b = c) /\\ ~(b = d) /\\ ~(b = e) /\\\n     ~(c = d) /\\ ~(c = e) /\\\n     ~(d = e)\n     ==> three_cycle a b c =\n         (inverse(three_cycle d a c)) o\n         (inverse(three_cycle c e b)) o\n         (three_cycle d a c) o\n         (three_cycle c e b)",
+        "forall a b c d e:A.\n     ~(a = b) /\\ ~(a = c) /\\ ~(a = d) /\\ ~(a = e) /\\\n     ~(b = c) /\\ ~(b = d) /\\ ~(b = e) /\\\n     ~(c = d) /\\ ~(c = e) /\\\n     ~(d = e)\n     ==> three_cycle a b c =\n         (inverse(three_cycle d a c)) o\n         (inverse(three_cycle c e b)) o\n         (three_cycle d a c) o\n         (three_cycle c e b)",
       ),
       t522,
     ),
@@ -5158,7 +5158,7 @@ fn step_77() -> Unit raise {
   three_cycle_not_i_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n             ==> ~(three_cycle a b c = I)",
+        "forall a b c:A. ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n             ==> ~(three_cycle a b c = I)",
       ),
       t524,
     ),
@@ -5208,7 +5208,7 @@ pub fn swapseq_cases() -> @kernel.Thm {
 fn step_78() -> Unit raise {
   let (swapseq_rules, swapseq_induct, swapseq_cases) = @ind_defs.new_inductive_definition(
     @parser.parse_term(
-      "(swapseq 0 I) /\\\n  (!a b p n. swapseq n p /\\ ~(a = b) ==> swapseq (SUC n) (swap(a,b) o p))",
+      "(swapseq 0 I) /\\\n  (forall a b p n. swapseq n p /\\ ~(a = b) ==> swapseq (SUC n) (swap(a,b) o p))",
     ),
   )
   swapseq_rules_c.set(swapseq_rules)
@@ -5291,7 +5291,7 @@ fn step_82() -> Unit raise {
   )
   swapseq_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b. swapseq (if a = b then 0 else 1) (swap(a,b))"),
+      @parser.parse_term("forall a b. swapseq (if a = b then 0 else 1) (swap(a,b))"),
       t529,
     ),
   )
@@ -5315,7 +5315,7 @@ fn step_83() -> Unit raise {
     t530,
   )
   permutation_swap_c.set(
-    @tactics.prove(@parser.parse_term("!a b. permutation(swap(a,b))"), t531),
+    @tactics.prove(@parser.parse_term("forall a b. permutation(swap(a,b))"), t531),
   )
 }
 
@@ -5357,7 +5357,7 @@ fn step_84() -> Unit raise {
   swapseq_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p m q. swapseq n p /\\ swapseq m q ==> swapseq (n + m) (p o q)",
+        "forall n p m q. swapseq n p /\\ swapseq m q ==> swapseq (n + m) (p o q)",
       ),
       t535,
     ),
@@ -5386,7 +5386,7 @@ fn step_85() -> Unit raise {
   permutation_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. permutation p /\\ permutation q ==> permutation(p o q)",
+        "forall p q. permutation p /\\ permutation q ==> permutation(p o q)",
       ),
       t537,
     ),
@@ -5429,7 +5429,7 @@ fn step_86() -> Unit raise {
   swapseq_endswap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p a b:A. swapseq n p /\\ ~(a = b) ==> swapseq (SUC n) (p o swap(a,b))",
+        "forall n p a b:A. swapseq n p /\\ ~(a = b) ==> swapseq (SUC n) (p o swap(a,b))",
       ),
       t541,
     ),
@@ -5535,7 +5535,7 @@ fn step_87() -> Unit raise {
   swapseq_inverse_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p:A->A. swapseq n p ==> ?q. swapseq n q /\\ p o q = I /\\ q o p = I",
+        "forall n p:A->A. swapseq n p ==> ?q. swapseq n q /\\ p o q = I /\\ q o p = I",
       ),
       t564,
     ),
@@ -5561,7 +5561,7 @@ fn step_88() -> Unit raise {
   )
   swapseq_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!n p. swapseq n p ==> swapseq n (inverse p)"),
+      @parser.parse_term("forall n p. swapseq n p ==> swapseq n (inverse p)"),
       t565,
     ),
   )
@@ -5588,7 +5588,7 @@ fn step_89() -> Unit raise {
   )
   permutation_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. permutation p ==> permutation(inverse p)"),
+      @parser.parse_term("forall p. permutation p ==> permutation(inverse p)"),
       t567,
     ),
   )
@@ -5623,7 +5623,7 @@ fn step_90() -> Unit raise {
   symmetry_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!a b c d. P a b c d ==> P a b d c) /\\\n   (!a b c d. ~(a = b) /\\ ~(c = d) /\\\n              (a = c /\\ b = d \\/ a = c /\\ ~(b = d) \\/ ~(a = c) /\\ b = d \\/\n               ~(a = c) /\\ ~(a = d) /\\ ~(b = c) /\\ ~(b = d))\n              ==> P a b c d)\n   ==> (!a b c d:A. ~(a = b) /\\ ~(c = d) ==> P a b c d)",
+        "(forall a b c d. P a b c d ==> P a b d c) /\\\n   (forall a b c d. ~(a = b) /\\ ~(c = d) /\\\n              (a = c /\\ b = d \\/ a = c /\\ ~(b = d) \\/ ~(a = c) /\\ b = d \\/\n               ~(a = c) /\\ ~(a = d) /\\ ~(b = c) /\\ ~(b = d))\n              ==> P a b c d)\n   ==> (forall a b c d:A. ~(a = b) /\\ ~(c = d) ==> P a b c d)",
       ),
       t573,
     ),
@@ -5895,7 +5895,7 @@ fn step_91() -> Unit raise {
   swap_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d:A.\n        ~(a = b) /\\ ~(c = d)\n        ==> swap(a,b) o swap(c,d) = I \\/\n            ?x y z. ~(x = a) /\\ ~(y = a) /\\ ~(z = a) /\\ ~(x = y) /\\\n                    swap(a,b) o swap(c,d) = swap(x,y) o swap(a,z)",
+        "forall a b c d:A.\n        ~(a = b) /\\ ~(c = d)\n        ==> swap(a,b) o swap(c,d) = I \\/\n            ?x y z. ~(x = a) /\\ ~(y = a) /\\ ~(z = a) /\\ ~(x = y) /\\\n                    swap(a,b) o swap(c,d) = swap(x,y) o swap(a,z)",
       ),
       t603,
     ),
@@ -6898,7 +6898,7 @@ fn step_92() -> Unit raise {
   fixing_swapseq_decrease_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p a b:A.\n      swapseq n p /\\ ~(a = b) /\\ (swap(a,b) o p) a = a\n      ==> ~(n = 0) /\\ swapseq (n - 1) (swap(a,b) o p)",
+        "forall n p a b:A.\n      swapseq n p /\\ ~(a = b) /\\ (swap(a,b) o p) a = a\n      ==> ~(n = 0) /\\ swapseq (n - 1) (swap(a,b) o p)",
       ),
       t706,
     ),
@@ -7288,7 +7288,7 @@ fn step_93() -> Unit raise {
   )
   swapseq_identity_even_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. swapseq n (I:A->A) ==> EVEN n"),
+      @parser.parse_term("forall n. swapseq n (I:A->A) ==> EVEN n"),
       t749,
     ),
   )
@@ -7555,7 +7555,7 @@ fn step_95() -> Unit raise {
   swapseq_even_even_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p:A->A. swapseq m p /\\ swapseq n p ==> (EVEN m <=> EVEN n)",
+        "forall m n p:A->A. swapseq m p /\\ swapseq n p ==> (EVEN m <=> EVEN n)",
       ),
       t771,
     ),
@@ -7584,7 +7584,7 @@ fn step_96() -> Unit raise {
   evenperm_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p b. swapseq n p /\\ EVEN n = b ==> evenperm p = b",
+        "forall n p b. swapseq n p /\\ EVEN n = b ==> evenperm p = b",
       ),
       t773,
     ),
@@ -7657,7 +7657,7 @@ fn step_99() -> Unit raise {
   )
   evenperm_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b:A. evenperm(swap(a,b)) = (a = b)"),
+      @parser.parse_term("forall a b:A. evenperm(swap(a,b)) = (a = b)"),
       t780,
     ),
   )
@@ -7727,7 +7727,7 @@ fn step_100() -> Unit raise {
   evenperm_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. permutation p /\\ permutation q\n         ==> evenperm (p o q) = (evenperm p = evenperm q)",
+        "forall p q. permutation p /\\ permutation q\n         ==> evenperm (p o q) = (evenperm p = evenperm q)",
       ),
       t788,
     ),
@@ -7763,7 +7763,7 @@ fn step_101() -> Unit raise {
   evenperm_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p. permutation p ==> evenperm(inverse p) = evenperm p",
+        "forall p. permutation p ==> evenperm(inverse p) = evenperm p",
       ),
       t792,
     ),
@@ -7875,7 +7875,7 @@ fn step_102() -> Unit raise {
   )
   permutation_bijective_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. permutation p ==> !y. ?!x. p(x) = y"),
+      @parser.parse_term("forall p. permutation p ==> forall y. ?!x. p(x) = y"),
       t802,
     ),
   )
@@ -7962,7 +7962,7 @@ fn step_103() -> Unit raise {
   )
   permutation_finite_support_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. permutation p ==> FINITE {x:A | ~(p x = x)}"),
+      @parser.parse_term("forall p. permutation p ==> FINITE {x:A | ~(p x = x)}"),
       t814,
     ),
   )
@@ -8027,7 +8027,7 @@ fn step_104() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.undisch_tac(
-                    @parser.parse_term("!y. ?!x. (p:A->A) x = y"),
+                    @parser.parse_term("forall y. ?!x. (p:A->A) x = y"),
                   ),
                   t836,
                 ),
@@ -8206,7 +8206,7 @@ fn step_104() -> Unit raise {
   permutation_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s p:A->A.\n       FINITE s /\\\n       (!y. ?!x. p(x) = y) /\\ (!x. ~(x IN s) ==> p x = x)\n       ==> permutation p",
+        "forall s p:A->A.\n       FINITE s /\\\n       (forall y. ?!x. p(x) = y) /\\ (forall x. ~(x IN s) ==> p x = x)\n       ==> permutation p",
       ),
       t848,
     ),
@@ -8252,7 +8252,7 @@ fn step_105() -> Unit raise {
   permutation_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p. permutation p <=> (!y. ?!x. p(x) = y) /\\ FINITE {x:A | ~(p(x) = x)}",
+        "forall p. permutation p <=> (forall y. ?!x. p(x) = y) /\\ FINITE {x:A | ~(p(x) = x)}",
       ),
       t853,
     ),
@@ -8281,7 +8281,7 @@ fn step_106() -> Unit raise {
   permutation_inverse_works_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p. permutation p ==> inverse p o p = I /\\ p o inverse p = I",
+        "forall p. permutation p ==> inverse p o p = I /\\ p o inverse p = I",
       ),
       t854,
     ),
@@ -8416,7 +8416,7 @@ fn step_107() -> Unit raise {
   permutation_inverse_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. permutation p /\\ permutation q\n         ==> inverse(p o q) = inverse q o inverse p",
+        "forall p q. permutation p /\\ permutation q\n         ==> inverse(p o q) = inverse q o inverse p",
       ),
       t873,
     ),
@@ -8731,7 +8731,7 @@ fn step_108() -> Unit raise {
   permutation_compose_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!p q:A->A. permutation(p) ==> (permutation(p o q) <=> permutation q)) /\\\n   (!p q:A->A. permutation(q) ==> (permutation(p o q) <=> permutation p))",
+        "(forall p q:A->A. permutation(p) ==> (permutation(p o q) <=> permutation q)) /\\\n   (forall p q:A->A. permutation(q) ==> (permutation(p o q) <=> permutation p))",
       ),
       t902,
     ),
@@ -8758,7 +8758,7 @@ fn step_109() -> Unit raise {
   permutation_compose_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!p a b:A. permutation(swap(a,b) o p) <=> permutation p) /\\\n   (!p a b:A. permutation(p o swap(a,b)) <=> permutation p)",
+        "(forall p a b:A. permutation(swap(a,b) o p) <=> permutation p) /\\\n   (forall p a b:A. permutation(p o swap(a,b)) <=> permutation p)",
       ),
       t903,
     ),
@@ -8819,7 +8819,7 @@ fn step_110() -> Unit raise {
   permutation_permutes_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p:A->A. permutation p <=> ?s. FINITE s /\\ p permutes s",
+        "forall p:A->A. permutation p <=> ?s. FINITE s /\\ p permutes s",
       ),
       t911,
     ),
@@ -8860,7 +8860,7 @@ fn step_111() -> Unit raise {
   permutation_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!Q (p:A->A).\n        permutation p /\\ (!x. Q(p x) <=> Q x)\n        ==> permutation (\\i. if Q i then p i else i)",
+        "forall Q (p:A->A).\n        permutation p /\\ (forall x. Q(p x) <=> Q x)\n        ==> permutation (\\i. if Q i then p i else i)",
       ),
       t916,
     ),
@@ -9115,7 +9115,7 @@ fn step_112() -> Unit raise {
   permutes_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P s. FINITE s /\\\n         P I /\\\n         (!a b:A p. a IN s /\\ b IN s /\\ P p /\\ permutation p\n                    ==> P (swap(a,b) o p))\n         ==> (!p. p permutes s ==> P p)",
+        "forall P s. FINITE s /\\\n         P I /\\\n         (forall a b:A p. a IN s /\\ b IN s /\\ P p /\\ permutation p\n                    ==> P (swap(a,b) o p))\n         ==> (forall p. p permutes s ==> P p)",
       ),
       t942,
     ),
@@ -9175,7 +9175,7 @@ fn step_113() -> Unit raise {
   permutes_induct_strong_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P s:A->bool.\n        FINITE s /\\\n        P I /\\\n        (!a b p. a IN s /\\ b IN s /\\ ~(a = b) /\\ P p /\\ p permutes s\n                 ==> P (swap(a,b) o p))\n        ==> !p. p permutes s ==> P p",
+        "forall P s:A->bool.\n        FINITE s /\\\n        P I /\\\n        (forall a b p. a IN s /\\ b IN s /\\ ~(a = b) /\\ P p /\\ p permutes s\n                 ==> P (swap(a,b) o p))\n        ==> forall p. p permutes s ==> P p",
       ),
       t950,
     ),
@@ -9219,7 +9219,7 @@ fn step_115() -> Unit raise {
     @simp.rewrite_tac(@list.List([sign()])),
     @calc_rat.real_arith_tac,
   )
-  sign_nz_c.set(@tactics.prove(@parser.parse_term("!p. ~(sign p = &0)"), t951))
+  sign_nz_c.set(@tactics.prove(@parser.parse_term("forall p. ~(sign p = &0)"), t951))
 }
 
 ///|
@@ -9272,7 +9272,7 @@ fn step_118() -> Unit raise {
   )
   sign_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("!p. permutation p ==> sign(inverse p) = sign p"),
+      @parser.parse_term("forall p. permutation p ==> sign(inverse p) = sign p"),
       t954,
     ),
   )
@@ -9297,7 +9297,7 @@ fn step_119() -> Unit raise {
   sign_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. permutation p /\\ permutation q ==> sign(p o q) = sign(p) * sign(q)",
+        "forall p q. permutation p /\\ permutation q ==> sign(p o q) = sign(p) * sign(q)",
       ),
       t955,
     ),
@@ -9319,7 +9319,7 @@ fn step_120() -> Unit raise {
   let t956 = @simp.rewrite_tac(@list.List([sign(), evenperm_swap()]))
   sign_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b. sign(swap(a,b)) = if a = b then &1 else -- &1"),
+      @parser.parse_term("forall a b. sign(swap(a,b)) = if a = b then &1 else -- &1"),
       t956,
     ),
   )
@@ -9353,7 +9353,7 @@ fn step_121() -> Unit raise {
     t958,
   )
   sign_idempotent_c.set(
-    @tactics.prove(@parser.parse_term("!p. sign(p) * sign(p) = &1"), t959),
+    @tactics.prove(@parser.parse_term("forall p. sign(p) * sign(p) = &1"), t959),
   )
 }
 
@@ -9376,7 +9376,7 @@ fn step_122() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   real_abs_sign_c.set(
-    @tactics.prove(@parser.parse_term("!p. abs(sign p) = &1"), t960),
+    @tactics.prove(@parser.parse_term("forall p. abs(sign p) = &1"), t960),
   )
 }
 
@@ -9409,7 +9409,7 @@ fn step_123() -> Unit raise {
   )
   real_sgn_sign_c.set(
     @tactics.prove(
-      @parser.parse_term("!p:A->A. real_sgn(sign p) = sign p"),
+      @parser.parse_term("forall p:A->A. real_sgn(sign p) = sign p"),
       t963,
     ),
   )
@@ -9905,7 +9905,7 @@ fn step_124() -> Unit raise {
   ])
   let t979 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!p q. (!x. x IN s ==> q (f x) = f (p x)) /\\\n          (!y. ~(y IN IMAGE f s) ==> q y = y) <=>\n          q = \\x. if x IN IMAGE f s then (f:A->B) (p(g x)) else x",
+      "forall p q. (forall x. x IN s ==> q (f x) = f (p x)) /\\\n          (forall y. ~(y IN IMAGE f s) ==> q y = y) <=>\n          q = \\x. if x IN IMAGE f s then (f:A->B) (p(g x)) else x",
     ),
     fn(
       x977 : @kernel.Thm,
@@ -10789,7 +10789,7 @@ fn step_124() -> Unit raise {
   evenperm_transfer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) s p q.\n        FINITE s /\\\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        p permutes s /\\\n        (!x. x IN s ==> q(f x) = f(p x)) /\\\n        (!y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> (evenperm q <=> evenperm p)",
+        "forall(f:A->B) s p q.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        p permutes s /\\\n        (forall x. x IN s ==> q(f x) = f(p x)) /\\\n        (forall y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> (evenperm q <=> evenperm p)",
       ),
       t1062,
     ),
@@ -10891,7 +10891,7 @@ fn step_125() -> Unit raise {
   sign_transfer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) s p q.\n        FINITE s /\\\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        p permutes s /\\\n        (!x. x IN s ==> q(f x) = f(p x)) /\\\n        (!y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> sign q = sign p",
+        "forall(f:A->B) s p q.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        p permutes s /\\\n        (forall x. x IN s ==> q(f x) = f(p x)) /\\\n        (forall y. ~(y IN IMAGE f s) ==> q y = y)\n        ==> sign q = sign p",
       ),
       t1071,
     ),
@@ -11386,7 +11386,7 @@ fn step_126() -> Unit raise {
   )
   let lemma1 = @tactics.prove(
     @parser.parse_term(
-      "!p (s:A->bool) (t:B->bool).\n          p permutes s /\\ FINITE s /\\ FINITE t\n          ==> sign (\\(i,j). if i IN s /\\ j IN t then p i,j else i,j) =\n              sign p pow CARD t",
+      "forall p (s:A->bool) (t:B->bool).\n          p permutes s /\\ FINITE s /\\ FINITE t\n          ==> sign (\\(i,j). if i IN s /\\ j IN t then p i,j else i,j) =\n              sign p pow CARD t",
     ),
     t1118,
   )
@@ -11529,7 +11529,7 @@ fn step_126() -> Unit raise {
   )
   let lemma2 = @tactics.prove(
     @parser.parse_term(
-      "!p (s:A->bool) (t:B->bool).\n          FINITE s /\\ p permutes t /\\ FINITE t\n          ==> sign (\\(i:A,j:B). if i IN s /\\ j IN t then i,p j else i,j) =\n              sign p pow CARD s",
+      "forall p (s:A->bool) (t:B->bool).\n          FINITE s /\\ p permutes t /\\ FINITE t\n          ==> sign (\\(i:A,j:B). if i IN s /\\ j IN t then i,p j else i,j) =\n              sign p pow CARD s",
     ),
     t1136,
   )
@@ -11848,7 +11848,7 @@ fn step_126() -> Unit raise {
   sign_cartesian_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(p:A->A) (q:B->B) s t.\n        FINITE s /\\ FINITE t /\\ p permutes s /\\ q permutes t\n        ==> sign (\\(i,j). if i IN s /\\ j IN t then p i,q j else i,j) =\n            sign p pow CARD t * sign q pow CARD s",
+        "forall(p:A->A) (q:B->B) s t.\n        FINITE s /\\ FINITE t /\\ p permutes s /\\ q permutes t\n        ==> sign (\\(i,j). if i IN s /\\ j IN t then p i,q j else i,j) =\n            sign p pow CARD t * sign q pow CARD s",
       ),
       t1164,
     ),
@@ -11918,7 +11918,7 @@ fn step_127() -> Unit raise {
   permutes_numset_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s:num->bool. p permutes s /\\ (!i. i IN s ==> p(i) <= i) ==> p = I",
+        "forall p s:num->bool. p permutes s /\\ (forall i. i IN s ==> p(i) <= i) ==> p = I",
       ),
       t1173,
     ),
@@ -11965,7 +11965,7 @@ fn step_128() -> Unit raise {
   permutes_numset_ge_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s:num->bool. p permutes s /\\ (!i. i IN s ==> i <= p(i)) ==> p = I",
+        "forall p s:num->bool. p permutes s /\\ (forall i. i IN s ==> i <= p(i)) ==> p = I",
       ),
       t1178,
     ),
@@ -11996,7 +11996,7 @@ fn step_129() -> Unit raise {
   image_inverse_permutations_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. {inverse p | p permutes s} = {p | p permutes s}",
+        "forall s:A->bool. {inverse p | p permutes s} = {p | p permutes s}",
       ),
       t1180,
     ),
@@ -12060,7 +12060,7 @@ fn step_130() -> Unit raise {
   image_compose_permutations_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s q:A->A. q permutes s ==> {q o p | p permutes s} = {p | p permutes s}",
+        "forall s q:A->A. q permutes s ==> {q o p | p permutes s} = {p | p permutes s}",
       ),
       t1187,
     ),
@@ -12128,7 +12128,7 @@ fn step_131() -> Unit raise {
   image_compose_permutations_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s q:A->A. q permutes s ==> {p o q | p permutes s} = {p | p permutes s}",
+        "forall s q:A->A. q permutes s ==> {p o q | p permutes s} = {p | p permutes s}",
       ),
       t1194,
     ),
@@ -12157,7 +12157,7 @@ fn step_132() -> Unit raise {
   permutes_in_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p n i. p permutes 1..n /\\ i IN 1..n ==> 1 <= p(i) /\\ p(i) <= n",
+        "forall p n i. p permutes 1..n /\\ i IN 1..n ==> 1 <= p(i) /\\ p(i) <= n",
       ),
       t1196,
     ),
@@ -12258,7 +12258,7 @@ fn step_133() -> Unit raise {
   sum_permutations_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. sum {p | p permutes m..n} f =\n           sum {p | p permutes m..n} (\\p. f(inverse p))",
+        "forall f m n. sum {p | p permutes m..n} f =\n           sum {p | p permutes m..n} (\\p. f(inverse p))",
       ),
       t1218,
     ),
@@ -12540,7 +12540,7 @@ fn step_134() -> Unit raise {
   sum_permutations_compose_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n q.\n        q permutes m..n\n        ==> sum {p | p permutes m..n} f =\n            sum {p | p permutes m..n} (\\p. f(q o p))",
+        "forall f m n q.\n        q permutes m..n\n        ==> sum {p | p permutes m..n} f =\n            sum {p | p permutes m..n} (\\p. f(q o p))",
       ),
       t1258,
     ),
@@ -12822,7 +12822,7 @@ fn step_135() -> Unit raise {
   sum_permutations_compose_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n q.\n        q permutes m..n\n        ==> sum {p | p permutes m..n} f =\n            sum {p | p permutes m..n} (\\p. f(p o q))",
+        "forall f m n q.\n        q permutes m..n\n        ==> sum {p | p permutes m..n} f =\n            sum {p | p permutes m..n} (\\p. f(p o q))",
       ),
       t1298,
     ),
@@ -12850,7 +12850,7 @@ fn step_136() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(!x. f(f x) = x) ==> (!x y. P x /\\ P y /\\ f x = f y ==> x = y)",
+        "(forall x. f(f x) = x) ==> (forall x y. P x /\\ P y /\\ f x = f y ==> x = y)",
       ),
     ),
   )
@@ -12915,7 +12915,7 @@ fn step_136() -> Unit raise {
         @tactics.match_mp_tac(
           @sets.set_rule(
             @parser.parse_term(
-              "(!x. P x ==> ~P(f x)) ==> {x | P x} INTER IMAGE f {x | P x} = {}",
+              "(forall x. P x ==> ~P(f x)) ==> {x | P x} INTER IMAGE f {x | P x} = {}",
             ),
           ),
         ),
@@ -13137,7 +13137,7 @@ fn step_136() -> Unit raise {
   let t1325 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(!x. P x ==> P(f x)) /\\ (!x. f(f x) = x) /\\\n      (!x. P x ==> Q x \\/ Q(f x))\n      ==> {x | P x} = {x | P x /\\ Q x} UNION IMAGE f {x | P x /\\ Q x}",
+        "(forall x. P x ==> P(f x)) /\\ (forall x. f(f x) = x) /\\\n      (forall x. P x ==> Q x \\/ Q(f x))\n      ==> {x | P x} = {x | P x /\\ Q x} UNION IMAGE f {x | P x /\\ Q x}",
       ),
     ),
   )
@@ -13319,7 +13319,7 @@ fn step_136() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1312 = @tactics.subgoal_then(
-    @parser.parse_term("!Q. FINITE {p:A->A | p permutes s /\\ Q p}"),
+    @parser.parse_term("forall Q. FINITE {p:A->A | p permutes s /\\ Q p}"),
     fn(
       x1309 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13372,7 +13372,7 @@ fn step_136() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1307 = @tactics.subgoal_then(
-    @parser.parse_term("!p:A->A. p permutes s ==> permutation p"),
+    @parser.parse_term("forall p:A->A. p permutes s ==> permutation p"),
     fn(
       x1304 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13472,7 +13472,7 @@ fn step_136() -> Unit raise {
   card_even_permutations_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s /\\ 2 <= CARD s\n               ==> 2 * CARD {p | p permutes s /\\ evenperm p} = FACT(CARD s)",
+        "forall s:A->bool. FINITE s /\\ 2 <= CARD s\n               ==> 2 * CARD {p | p permutes s /\\ evenperm p} = FACT(CARD s)",
       ),
       t1353,
     ),
@@ -13506,7 +13506,7 @@ fn step_137() -> Unit raise {
   permutes_involution_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p s:A->bool. (!x. p(p x) = x) /\\ (!x. ~(x IN s) ==> p x = x)\n                 ==> p permutes s",
+        "forall p s:A->bool. (forall x. p(p x) = x) /\\ (forall x. ~(x IN s) ==> p x = x)\n                 ==> p permutes s",
       ),
       t1357,
     ),
@@ -14110,7 +14110,7 @@ fn step_138() -> Unit raise {
   sign_involution_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p:A->A s. FINITE s /\\ (!x. p(p x) = x) /\\ (!x. ~(x IN s) ==> p x = x)\n              ==> sign p = --(&1) pow (CARD {x | ~(p x = x)} DIV 2)",
+        "forall p:A->A s. FINITE s /\\ (forall x. p(p x) = x) /\\ (forall x. ~(x IN s) ==> p x = x)\n              ==> sign p = --(&1) pow (CARD {x | ~(p x = x)} DIV 2)",
       ),
       t1423,
     ),
@@ -14162,7 +14162,7 @@ fn step_139() -> Unit raise {
   permutes_cyclic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. (\\i. if i < n then (i + 1) MOD n else i) permutes {i | i < n}",
+        "forall n. (\\i. if i < n then (i + 1) MOD n else i) permutes {i | i < n}",
       ),
       t1427,
     ),
@@ -14296,7 +14296,7 @@ fn step_140() -> Unit raise {
   permutes_cyclic_n_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n k. (\\i. if i < n then (i + k) MOD n else i) permutes {i | i < n}",
+        "forall n k. (\\i. if i < n then (i + k) MOD n else i) permutes {i | i < n}",
       ),
       t1443,
     ),
@@ -14334,7 +14334,7 @@ fn step_141() -> Unit raise {
   permutation_cyclic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. permutation (\\i. if i < n then (i + 1) MOD n else i)",
+        "forall n. permutation (\\i. if i < n then (i + 1) MOD n else i)",
       ),
       t1446,
     ),
@@ -14370,7 +14370,7 @@ fn step_142() -> Unit raise {
   permutation_cyclic_n_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n k. permutation (\\i. if i < n then (i + k) MOD n else i)",
+        "forall n k. permutation (\\i. if i < n then (i + k) MOD n else i)",
       ),
       t1450,
     ),
@@ -14561,7 +14561,7 @@ fn step_143() -> Unit raise {
   evenperm_cyclic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. evenperm(\\i. if i < n then (i + 1) MOD n else i) <=> n = 0 \\/ ODD n",
+        "forall n. evenperm(\\i. if i < n then (i + 1) MOD n else i) <=> n = 0 \\/ ODD n",
       ),
       t1469,
     ),
@@ -14715,7 +14715,7 @@ fn step_144() -> Unit raise {
   evenperm_cyclic_n_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n k. evenperm(\\i. if i < n then (i + k) MOD n else i) <=>\n         n = 0 \\/ ODD n \\/ EVEN k",
+        "forall n k. evenperm(\\i. if i < n then (i + k) MOD n else i) <=>\n         n = 0 \\/ ODD n \\/ EVEN k",
       ),
       t1488,
     ),
@@ -14773,7 +14773,7 @@ fn step_145() -> Unit raise {
   sign_cyclic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. sign(\\i. if i < n then (i + 1) MOD n else i) = --(&1) pow (n - 1)",
+        "forall n. sign(\\i. if i < n then (i + 1) MOD n else i) = --(&1) pow (n - 1)",
       ),
       t1493,
     ),
@@ -14832,7 +14832,7 @@ fn step_146() -> Unit raise {
   sign_cyclic_n_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n k. sign(\\i. if i < n then (i + k) MOD n else i) =\n         --(&1) pow (k * (n - 1))",
+        "forall n k. sign(\\i. if i < n then (i + k) MOD n else i) =\n         --(&1) pow (k * (n - 1))",
       ),
       t1500,
     ),
@@ -15216,7 +15216,7 @@ fn step_148() -> Unit raise {
   sum_over_permutations_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f a s. FINITE s /\\ ~(a IN s)\n           ==> sum {p:A->A | p permutes (a INSERT s)} f =\n               sum (a INSERT s)\n                   (\\b. sum {p | p permutes s} (\\q. f(swap(a,b) o q)))",
+        "forall f a s. FINITE s /\\ ~(a IN s)\n           ==> sum {p:A->A | p permutes (a INSERT s)} f =\n               sum (a INSERT s)\n                   (\\b. sum {p | p permutes s} (\\q. f(swap(a,b) o q)))",
       ),
       t1549,
     ),
@@ -15257,7 +15257,7 @@ fn step_149() -> Unit raise {
   sum_over_permutations_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. m <= n\n           ==> sum {p | p permutes (m..n)} f =\n               sum(m..n) (\\i. sum {p | p permutes (m+1..n)}\n                                  (\\q. f(swap(m,i) o q)))",
+        "forall f m n. m <= n\n           ==> sum {p | p permutes (m..n)} f =\n               sum(m..n) (\\i. sum {p | p permutes (m+1..n)}\n                                  (\\q. f(swap(m,i) o q)))",
       ),
       t1553,
     ),

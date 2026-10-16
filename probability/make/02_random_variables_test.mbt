@@ -80161,12 +80161,12 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Probability/random_variables quotations (203):
-      #|  random_variable (p:(A)prob_space) (X:A->real) <=>\n   (!a. {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p)
+      #|  random_variable (p:(A)prob_space) (X:A->real) <=>\n   (forall a. {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p)
       #|  {x:A | x IN prob_carrier p /\\ c:real <= a} = {}
       #|  {x:A | x IN prob_carrier p /\\ c:real <= a} = prob_carrier p
       #|  c:real <= a
       #|  a:real
-      #|  !p:A prob_space c. random_variable p (\\x. c)
+      #|  forall p:A prob_space c. random_variable p (\\x. c)
       #|  indicator_fn (a:A->bool) (x:A) = if x IN a then &1 else &0
       #|  &0 < inv(&n + &1)
       #|  n:num
@@ -80175,22 +80175,22 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  n:num
       #|  a - X(y:A):real
       #|  y:A
-      #|  !p (X:A->real) a.\n     {x | x IN prob_carrier p /\\ X x < a} =\n     UNIONS {{x | x IN prob_carrier p /\\ X x <= a - inv(&n + &1)} | n IN (:num)}
-      #|  !p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p
+      #|  forall p (X:A->real) a.\n     {x | x IN prob_carrier p /\\ X x < a} =\n     UNIONS {{x | x IN prob_carrier p /\\ X x <= a - inv(&n + &1)} | n IN (:num)}
+      #|  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p
       #|  a - inv(&n + &1)
-      #|  !p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x < a} IN prob_events p
+      #|  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x < a} IN prob_events p
       #|  (y:A) IN prob_carrier p
       #|  y:A
       #|  {x:A | x IN prob_carrier p /\\ X x >= a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x < a}
-      #|  !p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x >= a} IN prob_events p
+      #|  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x >= a} IN prob_events p
       #|  (y:A) IN prob_carrier p
       #|  y:A
       #|  {x:A | x IN prob_carrier p /\\ X x > a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x <= a}
-      #|  !p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x > a} IN prob_events p
+      #|  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x > a} IN prob_events p
       #|  (y:A) IN prob_carrier p
       #|  y:A
       #|  {x:A | x IN prob_carrier p /\\ X x IN real_interval(a,b)} =\n     {x | x IN prob_carrier p /\\ X x > a} INTER\n     {x | x IN prob_carrier p /\\ X x < b}
-      #|  !p (X:A->real) a b.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x IN real_interval(a,b)} IN prob_events p
+      #|  forall p (X:A->real) a b.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x IN real_interval(a,b)} IN prob_events p
       #|  j SUBSET IMAGE lift s\n       ==> IMAGE drop j SUBSET IMAGE drop (IMAGE lift s)
       #|  b:real^1
       #|  a:real^1
@@ -80198,32 +80198,32 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  j:real^1->bool
       #|  IMAGE (IMAGE drop) D
       #|  D:(real^1->bool)->bool
-      #|  !s:real->bool.\n       real_open s\n       ==> ?D. COUNTABLE D /\\\n               (!i. i IN D ==> i SUBSET s /\\ ?a b. i = real_interval(a,b)) /\\\n               UNIONS D = s
+      #|  forall s:real->bool.\n       real_open s\n       ==> ?D. COUNTABLE D /\\\n               (forall i. i IN D ==> i SUBSET s /\\ ?a b. i = real_interval(a,b)) /\\\n               UNIONS D = s
       #|  b:real
       #|  a:real
       #|  i:real->bool
       #|  i:real->bool
       #|  {x:A | x IN prob_carrier p /\\ X x IN UNIONS D} =\n     UNIONS (IMAGE (\\i:real->bool. {x:A | x IN prob_carrier p /\\ X x IN i}) D)
       #|  D:(real->bool)->bool
-      #|  !p (X:A->real) t.\n     random_variable p X /\\ real_open t\n     ==> {x | x IN prob_carrier p /\\ X x IN t} IN prob_events p
+      #|  forall p (X:A->real) t.\n     random_variable p X /\\ real_open t\n     ==> {x | x IN prob_carrier p /\\ X x IN t} IN prob_events p
       #|  {y:real | y <= a}
       #|  a:real
       #|  {x:A | x IN prob_carrier p /\\ X x IN UNIONS u} =\n       UNIONS (IMAGE (\\s:real->bool. {x:A | x IN prob_carrier p /\\ X x IN s}) u)
       #|  u:(real->bool)->bool
       #|  {x:A | x IN prob_carrier p /\\ X x IN (:real) DIFF s} =\n       prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x IN s}
       #|  s:real->bool
-      #|  !p (X:A->real).\n     random_variable p X <=>\n     !b. borel_in euclideanreal b\n         ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
+      #|  forall p (X:A->real).\n     random_variable p X <=>\n     forall b. borel_in euclideanreal b\n         ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
       #|  random_variable p (X:A->real)
       #|  {x:A | x IN prob_carrier p /\\ (g:real->real) (X x) IN b} =\n     {x:A | x IN prob_carrier p /\\ X x IN {y:real | y IN (:real) /\\ g y IN b}}
       #|  b:real->bool
       #|  b:real->bool
-      #|  !p (X:A->real) g.\n     random_variable p X /\\\n     borel_measurable_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
-      #|  !p (X:A->real) g.\n     random_variable p X /\\ continuous_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
+      #|  forall p (X:A->real) g.\n     random_variable p X /\\\n     borel_measurable_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
+      #|  forall p (X:A->real) g.\n     random_variable p X /\\ continuous_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
       #|  (y:A) IN prob_carrier p
       #|  y:A
       #|  {x:A | x IN prob_carrier p /\\ X x <= a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x > a}
       #|  a:real
-      #|  !p (X:A->real).\n     (!a. {x | x IN prob_carrier p /\\ X x > a} IN prob_events p)\n     ==> random_variable p X
+      #|  forall p (X:A->real).\n     (forall a. {x | x IN prob_carrier p /\\ X x > a} IN prob_events p)\n     ==> random_variable p X
       #|  &0 < inv(&j + &1) ==> a + inv(&j + &1) <= L ==> L > a
       #|  n:num
       #|  n:num
@@ -80246,33 +80246,33 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  ?j. ~(j = 0) /\\ &0 < inv(&j) /\\ inv(&j) < L(y:A) - a
       #|  y:A
       #|  y:A
-      #|  !p (X:num->A->real) L a.\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> {x | x IN prob_carrier p /\\ L x > a} =\n         UNIONS {INTERS {{x | x IN prob_carrier p /\\ X n x >= a + inv(&j + &1)}\n                         | n IN from N} | j,N | T}
+      #|  forall p (X:num->A->real) L a.\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> {x | x IN prob_carrier p /\\ L x > a} =\n         UNIONS {INTERS {{x | x IN prob_carrier p /\\ X n x >= a + inv(&j + &1)}\n                         | n IN from N} | j,N | T}
       #|  (j:num,N:num)
       #|  IMAGE (\\(j,N). INTERS {{x:A | x IN prob_carrier p /\\\n                 X n x >= a + inv(&j + &1)} | n IN from N}) (:num#num)
       #|  N:num
       #|  {x:A | x IN prob_carrier p /\\ (X:num->A->real) N x >= a + inv(&j + &1)}
       #|  IMAGE (\\n. {x:A | x IN prob_carrier p /\\\n        (X:num->A->real) n x >= a + inv(&j + &1)}) (:num)
       #|  a:real
-      #|  !p (X:num->A->real) L.\n     (!n. random_variable p (X n)) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> random_variable p L
+      #|  forall p (X:num->A->real) L.\n     (forall n. random_variable p (X n)) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> random_variable p L
       #|  \\y:real. --y
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. --(X x))
+      #|  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. --(X x))
       #|  \\y:real. c * y
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X c.\n      random_variable p X /\\ &0 < c\n      ==> random_variable p (\\x. c * X x)
-      #|  !p:A prob_space A.\n      (!n:num. A n IN prob_events p)\n      ==> UNIONS {A n | n IN (:num)} IN prob_events p
-      #|  !p:A prob_space A.\n      (!n:num. A n IN prob_events p)\n      ==> INTERS {A n | n IN (:num)} IN prob_events p
-      #|  !p:A prob_space (A:num->A->bool) n.\n      (!i. i <= n ==> A i IN prob_events p)\n      ==> UNIONS (IMAGE A (0..n)) IN prob_events p
+      #|  forall p:A prob_space X c.\n      random_variable p X /\\ &0 < c\n      ==> random_variable p (\\x. c * X x)
+      #|  forall p:A prob_space A.\n      (forall n:num. A n IN prob_events p)\n      ==> UNIONS {A n | n IN (:num)} IN prob_events p
+      #|  forall p:A prob_space A.\n      (forall n:num. A n IN prob_events p)\n      ==> INTERS {A n | n IN (:num)} IN prob_events p
+      #|  forall p:A prob_space (A:num->A->bool) n.\n      (forall i. i <= n ==> A i IN prob_events p)\n      ==> UNIONS (IMAGE A (0..n)) IN prob_events p
       #|  (b:real) <= c ==> a + b <= c + a
       #|  prob p (A (SUC n):A->bool) +\n                prob p (UNIONS (IMAGE (A:num->A->bool) (0..n)))
       #|  0 <= SUC n
       #|  0 <= SUC n
-      #|  !p:A prob_space (A:num->A->bool) n.\n      (!i. i <= n ==> A i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE A (0..n))) <= sum (0..n) (\\i. prob p (A i))
+      #|  forall p:A prob_space (A:num->A->bool) n.\n      (forall i. i <= n ==> A i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE A (0..n))) <= sum (0..n) (\\i. prob p (A i))
       #|  (A:num->A->bool) n
       #|  m = SUC n
-      #|  !(A:num->A->bool) m n.\n      (!k. A k SUBSET A (SUC k)) /\\ m <= n ==> A m SUBSET A n
+      #|  forall(A:num->A->bool) m n.\n      (forall k. A k SUBSET A (SUC k)) /\\ m <= n ==> A m SUBSET A n
       #|  SUC n
       #|  n:num
       #|  0
@@ -80282,12 +80282,12 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  n:num
       #|  n:num
       #|  x:A
-      #|  !(A:num->A->bool).\n      (!n. A n SUBSET A (SUC n))\n      ==> UNIONS {A n | n IN (:num)} =\n          A 0 UNION UNIONS {A (SUC n) DIFF A n | n IN (:num)}
+      #|  forall(A:num->A->bool).\n      (forall n. A n SUBSET A (SUC n))\n      ==> UNIONS {A n | n IN (:num)} =\n          A 0 UNION UNIONS {A (SUC n) DIFF A n | n IN (:num)}
       #|  (A:num->A->bool) 0 SUBSET A n
       #|  n:num
       #|  (x:A) IN A 0
       #|  x:A
-      #|  !(A:num->A->bool).\n      (!n. A n SUBSET A (SUC n))\n      ==> DISJOINT (A 0) (UNIONS {A (SUC n) DIFF A n | n IN (:num)})
+      #|  forall(A:num->A->bool).\n      (forall n. A n SUBSET A (SUC n))\n      ==> DISJOINT (A 0) (UNIONS {A (SUC n) DIFF A n | n IN (:num)})
       #|  x - a - b = x - (a + b):real
       #|  m:num
       #|  n - 1
@@ -80299,8 +80299,8 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  B:num->A->bool
       #|  p:A prob_space
       #|  e:real
-      #|  !n. prob (p:A prob_space) ((B:num->A->bool) n) =\n                        prob p ((A:num->A->bool) (SUC n)) - prob p (A n)
-      #|  !N. sum (0..N) (\\n. prob (p:A prob_space) ((B:num->A->bool) n)) =\n          prob p ((A:num->A->bool) (SUC N)) - prob p (A 0)
+      #|  forall n. prob (p:A prob_space) ((B:num->A->bool) n) =\n                        prob p ((A:num->A->bool) (SUC n)) - prob p (A n)
+      #|  forall N. sum (0..N) (\\n. prob (p:A prob_space) ((B:num->A->bool) n)) =\n          prob p ((A:num->A->bool) (SUC N)) - prob p (A 0)
       #|  UNIONS {(A:num->A->bool) n | n IN (:num)} =\n                   A 0 UNION UNIONS {(B:num->A->bool) n | n IN (:num)}
       #|  prob (p:A prob_space) (UNIONS {(A:num->A->bool) n | n IN (:num)}) =\n      prob p (A 0) + prob p (UNIONS {(B:num->A->bool) n | n IN (:num)})
       #|  UNIONS {(B:num->A->bool) n | n IN (:num)} IN\n                  prob_events (p:A prob_space)
@@ -80308,10 +80308,10 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  (A:num->A->bool) (SUC i) SUBSET A j
       #|  i:num < j
       #|  x:A
-      #|  !i j. ~(i = j) ==> DISJOINT ((B:num->A->bool) i) (B j)
-      #|  !n:num. (B:num->A->bool) n IN prob_events (p:A prob_space)
+      #|  forall i j. ~(i = j) ==> DISJOINT ((B:num->A->bool) i) (B j)
+      #|  forall n:num. (B:num->A->bool) n IN prob_events (p:A prob_space)
       #|  B = \\n:num. A(SUC n) DIFF (A:num->A->bool) n
-      #|  !p:A prob_space A.\n      (!n. A n IN prob_events p) /\\\n      (!n. A n SUBSET A (SUC n))\n      ==> ((\\n. prob p (A n)) --->\n           prob p (UNIONS {A n | n IN (:num)})) sequentially
+      #|  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall n. A n SUBSET A (SUC n))\n      ==> ((\\n. prob p (A n)) --->\n           prob p (UNIONS {A n | n IN (:num)})) sequentially
       #|  (a - x) - (a - y):real = --(x - y)
       #|  n:num
       #|  n:num
@@ -80332,26 +80332,26 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  x:A
       #|  UNIONS {(C:num->A->bool) n | n IN (:num)} =\n       (A:num->A->bool) 0 DIFF INTERS {A n | n IN (:num)}
       #|  prob (p:A prob_space) (UNIONS {(C:num->A->bool) n | n IN (:num)}) =\n      prob p ((A:num->A->bool) 0) -\n      prob p (INTERS {A n | n IN (:num)})
-      #|  !n. prob (p:A prob_space) ((C:num->A->bool) n) =\n                       prob p ((A:num->A->bool) 0) - prob p (A n)
+      #|  forall n. prob (p:A prob_space) ((C:num->A->bool) n) =\n                       prob p ((A:num->A->bool) 0) - prob p (A n)
       #|  INTERS {(A:num->A->bool) n | n IN (:num)} IN\n                  prob_events (p:A prob_space)
       #|  0
       #|  (A:num->A->bool) 0
       #|  INTERS {(A:num->A->bool) n | n IN (:num)} SUBSET A 0
-      #|  !n. (C:num->A->bool) n SUBSET C(SUC n)
-      #|  !n. (C:num->A->bool) n IN prob_events (p:A prob_space)
-      #|  !n:num. (A:num->A->bool) n SUBSET A 0
+      #|  forall n. (C:num->A->bool) n SUBSET C(SUC n)
+      #|  forall n. (C:num->A->bool) n IN prob_events (p:A prob_space)
+      #|  forall n:num. (A:num->A->bool) n SUBSET A 0
       #|  C = \\n:num. (A:num->A->bool) 0 DIFF A n
-      #|  !p:A prob_space A.\n      (!n. A n IN prob_events p) /\\\n      (!n. A (SUC n) SUBSET A n)\n      ==> ((\\n. prob p (A n)) --->\n           prob p (INTERS {A n | n IN (:num)})) sequentially
+      #|  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall n. A (SUC n) SUBSET A n)\n      ==> ((\\n. prob p (A n)) --->\n           prob p (INTERS {A n | n IN (:num)})) sequentially
       #|  distribution (p:A prob_space) (X:A->real) (b:real->bool) =\n   prob p {x | x IN prob_carrier p /\\ X x IN b}
-      #|  !p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
+      #|  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
       #|  b:real->bool
       #|  b:real->bool
-      #|  !p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> &0 <= distribution p X b
-      #|  !p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> distribution p X b <= &1
+      #|  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> &0 <= distribution p X b
+      #|  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> distribution p X b <= &1
       #|  {x:A | x IN prob_carrier p} = prob_carrier p
-      #|  !p (X:A->real). distribution p X (:real) = &1
-      #|  !p (X:A->real). distribution p X {} = &0
-      #|  !p (X:A->real) b c.\n     random_variable p X /\\ borel_in euclideanreal b /\\\n     borel_in euclideanreal c /\\ b SUBSET c\n     ==> distribution p X b <= distribution p X c
+      #|  forall p (X:A->real). distribution p X (:real) = &1
+      #|  forall p (X:A->real). distribution p X {} = &0
+      #|  forall p (X:A->real) b c.\n     random_variable p X /\\ borel_in euclideanreal b /\\\n     borel_in euclideanreal c /\\ b SUBSET c\n     ==> distribution p X b <= distribution p X c
       #|  j:num
       #|  i:num
       #|  j:num
@@ -80359,11 +80359,11 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  \\n:num. {x:A | x IN prob_carrier p /\\ X x IN (B:num->real->bool) n}
       #|  p:A prob_space
       #|  {x:A | x IN prob_carrier p /\\ X x IN UNIONS {(B:num->real->bool) n | n IN (:num)}} =\n     UNIONS {{x:A | x IN prob_carrier p /\\ X x IN B n} | n IN (:num)}
-      #|  !p (X:A->real) B.\n     random_variable p X /\\ (!n. borel_in euclideanreal (B n)) /\\\n     (!i j. ~(i = j) ==> DISJOINT (B i) (B j))\n     ==> ((\\n. distribution p X (B n)) real_sums\n          distribution p X (UNIONS {B n | n IN (:num)})) (from 0)
+      #|  forall p (X:A->real) B.\n     random_variable p X /\\ (forall n. borel_in euclideanreal (B n)) /\\\n     (forall i j. ~(i = j) ==> DISJOINT (B i) (B j))\n     ==> ((\\n. distribution p X (B n)) real_sums\n          distribution p X (UNIONS {B n | n IN (:num)})) (from 0)
       #|  {w:A | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b} =\n    {w | w IN prob_carrier p /\\ X w <= a} INTER\n    {w | w IN prob_carrier p /\\ Y w <= b}
-      #|  !p (X:A->real) Y a b.\n     random_variable p X /\\ random_variable p Y\n     ==> {w | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b} IN prob_events p
+      #|  forall p (X:A->real) Y a b.\n     random_variable p X /\\ random_variable p Y\n     ==> {w | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b} IN prob_events p
       #|  joint_distribution_fn (p:A prob_space) (X:A->real) (Y:A->real)\n                         (a:real) (b:real) =\n   prob p {w | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b}
-      #|  !p (X:A->real) Y a b.\n     joint_distribution_fn p X Y a b = joint_distribution_fn p Y X b a
+      #|  forall p (X:A->real) Y a b.\n     joint_distribution_fn p X Y a b = joint_distribution_fn p Y X b a
       #|random_variable =  |- (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). ((#=:fun(bool,fun(bool,bool)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real))) (#!:fun(fun(real,bool),bool) (\a:real. ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%9126:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%9126:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) a:real))) x:'A)))))) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A))))))))))
       #|RANDOM_VARIABLE_CONST =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(real,bool),bool) (\c:real. ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) (\x:'A. c:real))))))
       #|indicator_fn =  |- (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#=:fun(real,fun(real,bool)) ((#indicator_fn:fun(fun('A,bool),fun('A,real)) a:fun('A,bool)) x:'A)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) a:fun('A,bool))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))

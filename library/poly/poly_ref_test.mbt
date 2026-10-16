@@ -5855,8 +5855,8 @@ test "Library/poly matches Library/poly.ml" {
       #|  poly_add:real list->real list->real list
       #|  poly_divides:real list->real list->bool
       #|  (poly [] x = &0) /\\\n   (poly (CONS h t) x = h + x * poly t x)
-      #|  !c x. poly [c] x = c
-      #|  !c x. poly [&0; &1] x = x
+      #|  forall c x. poly [c] x = c
+      #|  forall c x. poly [&0; &1] x = x
       #|  ([] ++ l2 = l2) /\\\n   ((CONS h t) ++ l2 =\n        (if l2 = [] then CONS h t\n                    else CONS (h + HD l2) (t ++ TL l2)))
       #|  (c ## [] = []) /\\\n   (c ## (CONS h t) = CONS (c * h) (c ## t))
       #|  neg = (##) (--(&1))
@@ -5864,8 +5864,8 @@ test "Library/poly matches Library/poly.ml" {
       #|  (p exp 0 = [&1]) /\\\n   (p exp (SUC n) = p ** p exp n)
       #|  (poly_diff_aux n [] = []) /\\\n   (poly_diff_aux n (CONS h t) = CONS (&n * h) (poly_diff_aux (SUC n) t))
       #|  diff l = (if l = [] then [] else (poly_diff_aux 1 (TL l)))
-      #|  !l n. LENGTH(poly_diff_aux n l) = LENGTH l
-      #|  !l. LENGTH(poly_diff l) = PRE(LENGTH l)
+      #|  forall l n. LENGTH(poly_diff_aux n l) = LENGTH l
+      #|  forall l. LENGTH(poly_diff l) = PRE(LENGTH l)
       #|  p1:real list
       #|  p1:real list
       #|  ([] ++ p2 = p2) /\\\n   (p1 ++ [] = p1) /\\\n   ((CONS h1 t1) ++ (CONS h2 t2) = CONS (h1 + h2) (t1 ++ t2))
@@ -5873,15 +5873,15 @@ test "Library/poly matches Library/poly.ml" {
       #|  (neg [] = []) /\\\n   (neg (CONS h t) = CONS (--h) (neg t))
       #|  ([] ** p2 = []) /\\\n   ([h1] ** p2 = h1 ## p2) /\\\n   ((CONS h1 (CONS k1 t1)) ** p2 = h1 ## p2 ++ CONS (&0) (CONS k1 t1 ** p2))
       #|  (diff [] = []) /\\\n   (diff [c] = []) /\\\n   (diff (CONS h t) = poly_diff_aux 1 t)
-      #|  !p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x
-      #|  !p c x. poly (c ## p) x = c * poly p x
-      #|  !p x. poly (neg p) x = --(poly p x)
+      #|  forall p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x
+      #|  forall p c x. poly (c ## p) x = c * poly p x
+      #|  forall p x. poly (neg p) x = --(poly p x)
       #|  t:real list
       #|  t:real list
       #|  h:real
       #|  h:real
-      #|  !x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x
-      #|  !p n x. poly (p exp n) x = (poly p x) pow n
+      #|  forall x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x
+      #|  forall p n x. poly (p exp n) x = (poly p x) pow n
       #|  SUC n
       #|  \\x. x pow (SUC n)
       #|  (((\\x. (x pow (SUC n)) * h)) diffl\n                        ((x pow n) * &(SUC n) * h))(x)
@@ -5889,7 +5889,7 @@ test "Library/poly matches Library/poly.ml" {
       #|  SUC n
       #|  x:real
       #|  n:num
-      #|  !l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)
+      #|  forall l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)
       #|  x:real
       #|  h:real
       #|  1
@@ -5898,24 +5898,24 @@ test "Library/poly matches Library/poly.ml" {
       #|  t:(real)list
       #|  x:real
       #|  \\x. poly l x
-      #|  !l x. ((\\x. poly l x) diffl (poly (diff l) x))(x)
+      #|  forall l x. ((\\x. poly l x) diffl (poly (diff l) x))(x)
       #|  poly (diff l) x
-      #|  !l x. (\\x. poly l x) differentiable x
+      #|  forall l x. (\\x. poly l x) differentiable x
       #|  poly (diff l) x
-      #|  !l x. (\\x. poly l x) contl x
+      #|  forall l x. (\\x. poly l x) contl x
       #|  x:real
       #|  x:real
       #|  &0
       #|  b:real
       #|  a:real
       #|  \\x. poly p x
-      #|  !p a b. a < b /\\ poly p a < &0 /\\ poly p b > &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)
+      #|  forall p a b. a < b /\\ poly p a < &0 /\\ poly p b > &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)
       #|  (--x = &0) <=> (x = &0)
       #|  b:real
       #|  a:real
       #|  (--x < &0 <=> x > &0) /\\ (--x > &0 <=> x < &0)
       #|  poly_neg p
-      #|  !p a b. a < b /\\ poly p a > &0 /\\ poly p b < &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)
+      #|  forall p a b. a < b /\\ poly p a > &0 /\\ poly p b < &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)
       #|  x:real
       #|  poly p
       #|  x:real
@@ -5924,7 +5924,7 @@ test "Library/poly matches Library/poly.ml" {
       #|  b:real
       #|  a:real
       #|  poly p
-      #|  !p a b. a < b ==>\n           ?x. a < x /\\ x < b /\\\n              (poly p b - poly p a = (b - a) * poly (diff p) x)
+      #|  forall p a b. a < b ==>\n           ?x. a < x /\\ x < b /\\\n              (poly p b - poly p a = (b - a) * poly (diff p) x)
       #|  z < a
       #|  a + x < z
       #|  &0 < --x
@@ -5948,21 +5948,21 @@ test "Library/poly matches Library/poly.ml" {
       #|  p:real list
       #|  &0
       #|  x:real
-      #|  !p a x. ?y. abs(y) <= abs(x) /\\\n               (poly p (a + x) = poly p a + x * poly (diff p) (a + y))
-      #|  !p. poly (p ++ []) = poly p
-      #|  !p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)
-      #|  !d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)
-      #|  !p1 p2 n. poly (poly_diff_aux n (p1 ++ p2)) =\n             poly (poly_diff_aux n p1 ++ poly_diff_aux n p2)
-      #|  !p c n. poly (poly_diff_aux n (c ## p)) =\n           poly (c ## poly_diff_aux n p)
-      #|  !p n.  poly (poly_diff_aux n (neg p)) =\n          poly (neg (poly_diff_aux n p))
-      #|  !p n. poly (poly_diff_aux (SUC n) p) = poly (poly_diff_aux n p ++ p)
-      #|  !p1 p2. poly (diff (p1 ++ p2)) =\n           poly (diff p1  ++ diff p2)
-      #|  !p c. poly (diff (c ## p)) = poly (c ## diff p)
-      #|  !p. poly (diff (neg p)) = poly (neg (diff p))
-      #|  !t h. poly (diff (CONS h t)) =\n         poly (CONS (&0) (diff t) ++ t)
-      #|  !p1 p2. poly (diff (p1 ** p2)) =\n           poly (p1 ** diff p2 ++ diff p1 ** p2)
-      #|  !p n. poly (diff (p exp (SUC n))) =\n         poly ((&(SUC n) ## (p exp n)) ** diff p)
-      #|  !n a. poly (diff ([--a; &1] exp (SUC n))) =\n         poly (&(SUC n) ## ([--a; &1] exp n))
+      #|  forall p a x. ?y. abs(y) <= abs(x) /\\\n               (poly p (a + x) = poly p a + x * poly (diff p) (a + y))
+      #|  forall p. poly (p ++ []) = poly p
+      #|  forall p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)
+      #|  forall d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)
+      #|  forall p1 p2 n. poly (poly_diff_aux n (p1 ++ p2)) =\n             poly (poly_diff_aux n p1 ++ poly_diff_aux n p2)
+      #|  forall p c n. poly (poly_diff_aux n (c ## p)) =\n           poly (c ## poly_diff_aux n p)
+      #|  forall p n.  poly (poly_diff_aux n (neg p)) =\n          poly (neg (poly_diff_aux n p))
+      #|  forall p n. poly (poly_diff_aux (SUC n) p) = poly (poly_diff_aux n p ++ p)
+      #|  forall p1 p2. poly (diff (p1 ++ p2)) =\n           poly (diff p1  ++ diff p2)
+      #|  forall p c. poly (diff (c ## p)) = poly (c ## diff p)
+      #|  forall p. poly (diff (neg p)) = poly (neg (diff p))
+      #|  forall t h. poly (diff (CONS h t)) =\n         poly (CONS (&0) (diff t) ++ t)
+      #|  forall p1 p2. poly (diff (p1 ** p2)) =\n           poly (p1 ** diff p2 ++ diff p1 ** p2)
+      #|  forall p n. poly (diff (p exp (SUC n))) =\n         poly ((&(SUC n) ## (p exp n)) ** diff p)
+      #|  forall n a. poly (diff ([--a; &1] exp (SUC n))) =\n         poly (&(SUC n) ## ([--a; &1] exp n))
       #|  q:real list
       #|  q:real list
       #|  r * a + k
@@ -5971,7 +5971,7 @@ test "Library/poly matches Library/poly.ml" {
       #|  k:real
       #|  h:real
       #|  []:real list
-      #|  !t h. ?q r. CONS h t = [r] ++ [--a; &1] ** q
+      #|  forall t h. ?q r. CONS h t = [r] ++ [--a; &1] ** q
       #|  --a + a = &0
       #|  q:real list
       #|  q:real list
@@ -5979,9 +5979,9 @@ test "Library/poly matches Library/poly.ml" {
       #|  poly (CONS h t) a = &0
       #|  r = &0
       #|  q:real list
-      #|  !a p. (poly p a = &0) <=> (p = []) \\/ ?q. p = [--a; &1] ** q
-      #|  !p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)
-      #|  !q. LENGTH([--a; &1] ** q) = SUC(LENGTH q)
+      #|  forall a p. (poly p a = &0) <=> (p = []) \\/ ?q. p = [--a; &1] ** q
+      #|  forall p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)
+      #|  forall q. LENGTH([--a; &1] ** q) = SUC(LENGTH q)
       #|  ~(?a. poly p a = &0)
       #|  m:num <= n
       #|  m:num
@@ -5995,23 +5995,23 @@ test "Library/poly matches Library/poly.ml" {
       #|  q:real list
       #|  ?a. poly p a = &0
       #|  ?a. poly p a = &0
-      #|  !n. !p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. !x. (poly p (x) = &0) ==> ?m. m <= n /\\ (x = i m)
+      #|  forall n. forall p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. forall x. (poly p (x) = &0) ==> ?m. m <= n /\\ (x = i m)
       #|  SUC n
-      #|  !p. ~(poly p = poly [])\n       ==> ?i. !x. (poly p(x) = &0) ==> ?n. n <= LENGTH p /\\ (x = i n)
-      #|  !p. ~(poly p = poly [])\n       ==> ?N i. !x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)
-      #|  !u v x. x < v ==> x < abs(v) + abs(u) + &1
-      #|  !x v. x < abs(v) + abs(x) + &1
+      #|  forall p. ~(poly p = poly [])\n       ==> ?i. forall x. (poly p(x) = &0) ==> ?n. n <= LENGTH p /\\ (x = i n)
+      #|  forall p. ~(poly p = poly [])\n       ==> ?N i. forall x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)
+      #|  forall u v x. x < v ==> x < abs(v) + abs(u) + &1
+      #|  forall x v. x < abs(v) + abs(x) + &1
       #|  abs(a) + abs(i(N:num)) + &1
       #|  a:real
       #|  \\z. P z /\\ ~(z = (i:num->real) N)
       #|  P:real->bool
-      #|  !i N P. (!x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. !x. P x ==> x < a
+      #|  forall i N P. (forall x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. forall x. P x ==> x < a
       #|  \\x. poly p x = &0
       #|  N:num
       #|  i:num->real
       #|  N:num
       #|  i:num->real
-      #|  !p. ~(poly p = poly []) <=>\n       ?N i. !x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)
+      #|  forall p. ~(poly p = poly []) <=>\n       ?N i. forall x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)
       #|  ~(m + n < m:num)
       #|  N1 + n:num
       #|  n:num
@@ -6023,19 +6023,19 @@ test "Library/poly matches Library/poly.ml" {
       #|  N1:num
       #|  i2:num->real
       #|  N2:num
-      #|  !p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])
-      #|  !p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])
+      #|  forall p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])
+      #|  forall p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])
       #|  (p + --q = &0) <=> (p = q)
-      #|  !p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)
-      #|  !p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))
-      #|  !p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)
+      #|  forall p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)
+      #|  forall p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))
+      #|  forall p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)
       #|  n:num
       #|  n:num
-      #|  !p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)
+      #|  forall p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)
       #|  &1 - a
-      #|  !a. ~(poly [a ; &1] = poly [])
-      #|  !a n. ~(poly ([a ; &1] exp n) = poly [])
-      #|  !x. (poly t x = &0) ==> x < a
+      #|  forall a. ~(poly [a ; &1] = poly [])
+      #|  forall a n. ~(poly ([a ; &1] exp n) = poly [])
+      #|  forall x. (poly t x = &0) ==> x < a
       #|  abs(a) + &1
       #|  a:real
       #|  \\x. poly t x = &0
@@ -6045,22 +6045,22 @@ test "Library/poly matches Library/poly.ml" {
       #|  N:num
       #|  &0
       #|  h = &0
-      #|  !h t. (poly (CONS h t) = poly []) ==> (h = &0) /\\ (poly t = poly [])
-      #|  !p. (poly p = poly []) <=> ALL (\\c. c = &0) p
-      #|  !p n. ALL (\\c. c = &0) (poly_diff_aux (SUC n) p) <=>\n         ALL (\\c. c = &0) p
+      #|  forall h t. (poly (CONS h t) = poly []) ==> (h = &0) /\\ (poly t = poly [])
+      #|  forall p. (poly p = poly []) <=> ALL (\\c. c = &0) p
+      #|  forall p n. ALL (\\c. c = &0) (poly_diff_aux (SUC n) p) <=>\n         ALL (\\c. c = &0) p
       #|  h:real
       #|  1
       #|  &0
-      #|  !p. (poly (diff p) = poly []) ==> ?h. poly p = poly [h]
+      #|  forall p. (poly (diff p) = poly []) ==> ?h. poly p = poly [h]
       #|  t:real list
       #|  t:real list
       #|  n:num
       #|  1
-      #|  !p. (poly p = poly []) ==> (poly (diff p) = poly [])
+      #|  forall p. (poly p = poly []) ==> (poly (diff p) = poly [])
       #|  (a + --b = &0) <=> (a = b)
       #|  a + --a = &0
       #|  p ++ neg(q)
-      #|  !p q. (poly p = poly q) ==> (poly (diff p) = poly (diff q))
+      #|  forall p q. (poly p = poly q) ==> (poly (diff p) = poly (diff q))
       #|  p1 divides p2 <=> ?q. poly p2 = poly (p1 ** q)
       #|  p ** s
       #|  s ** q
@@ -6070,37 +6070,37 @@ test "Library/poly matches Library/poly.ml" {
       #|  s:real list
       #|  --a
       #|  r:real list
-      #|  !a p q. [a; &1] divides (p ** q) <=>\n          [a; &1] divides p \\/ [a; &1] divides q
+      #|  forall a p q. [a; &1] divides (p ** q) <=>\n          [a; &1] divides p \\/ [a; &1] divides q
       #|  [&1]
-      #|  !p. p divides p
+      #|  forall p. p divides p
       #|  t ** s
       #|  t:real list
       #|  s:real list
-      #|  !p q r. p divides q /\\ q divides r ==> p divides r
+      #|  forall p q r. p divides q /\\ q divides r ==> p divides r
       #|  p:real list
       #|  p exp (m + d)
       #|  d:num
       #|  d:num
       #|  d:num
-      #|  !p m n. m <= n ==> (p exp m) divides (p exp n)
-      #|  !p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q
+      #|  forall p m n. m <= n ==> (p exp m) divides (p exp n)
+      #|  forall p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q
       #|  t ++ s
       #|  t:real list
       #|  s:real list
-      #|  !p q r. p divides q /\\ p divides r ==> p divides (q ++ r)
+      #|  forall p q r. p divides q /\\ p divides r ==> p divides (q ++ r)
       #|  s ++ neg(t)
       #|  t:real list
       #|  s:real list
-      #|  !p q r. p divides q /\\ p divides (q ++ r) ==> p divides r
+      #|  forall p q r. p divides q /\\ p divides (q ++ r) ==> p divides r
       #|  x:real
       #|  x:real
       #|  s:real list
       #|  s:real list
       #|  p divides (q ++ r)
       #|  r:real list
-      #|  !p q r. p divides r /\\ p divides (q ++ r) ==> p divides q
+      #|  forall p q r. p divides r /\\ p divides (q ++ r) ==> p divides q
       #|  []:real list
-      #|  !p q. (poly p = poly []) ==> q divides p
+      #|  forall p q. (poly p = poly []) ==> q divides p
       #|  a + &1
       #|  ~(poly s a = &0)
       #|  n:num
@@ -6119,22 +6119,22 @@ test "Library/poly matches Library/poly.ml" {
       #|  s:real list
       #|  n:num
       #|  q:real list
-      #|  !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                      ~(poly q a = &0)
+      #|  forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                      ~(poly q a = &0)
       #|  q:real list
       #|  poly p a = &0
       #|  poly p a = &0
       #|  p:real list
-      #|  !d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                     ~(poly q a = &0)
-      #|  (!p q. mulexp 0 p q = q) /\\\n     (!p q n. mulexp (SUC n) p q = p ** (mulexp n p q))
-      #|  !a d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; &1] exp n) divides p /\\\n                     ~(([--a; &1] exp (SUC n)) divides p)
-      #|  !p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; &1] exp n) divides p /\\\n                      ~(([--a; &1] exp (SUC n)) divides p)
+      #|  forall d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                     ~(poly q a = &0)
+      #|  (forall p q. mulexp 0 p q = q) /\\\n     (forall p q n. mulexp (SUC n) p q = p ** (mulexp n p q))
+      #|  forall a d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; &1] exp n) divides p /\\\n                     ~(([--a; &1] exp (SUC n)) divides p)
+      #|  forall p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; &1] exp n) divides p /\\\n                      ~(([--a; &1] exp (SUC n)) divides p)
       #|  order a p = @n. ([--a; &1] exp n) divides p /\\\n                   ~(([--a; &1] exp (SUC n)) divides p)
       #|  []:real list
       #|  ~(poly p = poly [])
-      #|  !p a n. ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])
-      #|  !p a. ~(poly p = poly [])\n         ==> ([--a; &1] exp (order a p)) divides p /\\\n             ~(([--a; &1] exp (SUC(order a p))) divides p)
-      #|  !p a n. ~(poly p = poly []) /\\\n           ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p)\n           ==> (n = order a p)
-      #|  !p q a. (poly p = poly q) ==> (order a p = order a q)
+      #|  forall p a n. ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])
+      #|  forall p a. ~(poly p = poly [])\n         ==> ([--a; &1] exp (order a p)) divides p /\\\n             ~(([--a; &1] exp (SUC(order a p))) divides p)
+      #|  forall p a n. ~(poly p = poly []) /\\\n           ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p)\n           ==> (n = order a p)
+      #|  forall p q a. (poly p = poly q) ==> (order a p = order a q)
       #|  s:real list
       #|  n:num
       #|  order a p
@@ -6145,17 +6145,17 @@ test "Library/poly matches Library/poly.ml" {
       #|  q:real list
       #|  p:real list = []
       #|  poly p = poly []
-      #|  !p a. (poly p a = &0) <=> (poly p = poly []) \\/ ~(order a p = 0)
+      #|  forall p a. (poly p a = &0) <=> (poly p = poly []) \\/ ~(order a p = 0)
       #|  []:real list
       #|  poly p = poly []
-      #|  !p a n. ([--a; &1] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p
+      #|  forall p a n. ([--a; &1] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p
       #|  r:real list
       #|  ~([-- a; &1] exp SUC (order a p) divides p)
       #|  r: real list
       #|  q:real list
       #|  q:real list
       #|  a:real
-      #|  !p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; &1] exp (order a p)) ** q)) /\\\n                 ~([--a; &1] divides q)
+      #|  forall p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; &1] exp (order a p)) ** q)) /\\\n                 ~([--a; &1] divides q)
       #|  poly ([-- a; &1] exp (order a q) **\n                        [-- a; &1] exp (order a p) ** r ** s) =\n                  poly ([-- a; &1] exp (order a q) **\n                        [-- a; &1] exp (order a p) **\n                        [-- a; &1] ** t)
       #|  poly ([-- a; &1] exp (order a p) ** r ** s) =\n                  poly ([-- a; &1] exp (order a p) ** ([-- a; &1] ** t))
       #|  t:real list
@@ -6175,23 +6175,23 @@ test "Library/poly matches Library/poly.ml" {
       #|  ~(poly p = poly [])
       #|  a:real
       #|  (order a p + order a q = order a (p ** q)) /\\\n                ~(poly (p ** q) = poly [])
-      #|  !a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)
+      #|  forall a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)
       #|  x:real
-      #|  !a b c. &(SUC n) * a * b * inv(&(SUC n)) * c =\n                          a * b * c
-      #|  !a b. (&(SUC n) * a = &(SUC n) * b) ==> (a = b)
+      #|  forall a b c. &(SUC n) * a * b * inv(&(SUC n)) * c =\n                          a * b * c
+      #|  forall a b. (&(SUC n) * a = &(SUC n) * b) ==> (a = b)
       #|  x:real
       #|  poly ([--a; &1] exp n ** q) =\n         poly ([--a; &1] exp n ** ([-- a; &1] ** (inv (&(SUC n)) ##\n                                   (r ++ neg (diff q)))))
       #|  inv(&(SUC n)) ## (r ++ neg(diff q))
       #|  ~([-- a; &1] divides q)
       #|  r:real list
       #|  [--a; &1] ** (diff q) ++ &(SUC n) ## q
-      #|  !r. r divides (diff p) <=>\n                    r divides (diff ([-- a; &1] exp SUC n ** q))
+      #|  forall r. r divides (diff p) <=>\n                    r divides (diff ([-- a; &1] exp SUC n ** q))
       #|  n:num
       #|  order a p
       #|  a:real
       #|  q:real list
       #|  ~(poly p = poly [])
-      #|  !p a. ~(poly (diff p) = poly []) /\\\n         ~(order a p = 0)\n         ==> (order a p = SUC (order a (diff p)))
+      #|  forall p a. ~(poly (diff p) = poly []) /\\\n         ~(order a p = 0)\n         ==> (order a p = SUC (order a (diff p)))
       #|  r ** g ++ s ** f
       #|  g:real list
       #|  f:real list
@@ -6208,9 +6208,9 @@ test "Library/poly matches Library/poly.ml" {
       #|  order a p = 0
       #|  order a (q ** d)
       #|  order a p = order a q + order a d
-      #|  !p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> !a. order a q = (if order a p = 0 then 0 else 1)
+      #|  forall p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> forall a. order a q = (if order a p = 0 then 0 else 1)
       #|  PRE
-      #|  rsquarefree p <=> ~(poly p = poly []) /\\\n                     !a. (order a p = 0) \\/ (order a p = 1)
+      #|  rsquarefree p <=> ~(poly p = poly []) /\\\n                     forall a. (order a p = 0) \\/ (order a p = 1)
       #|  1
       #|  a:real
       #|  [h:real]
@@ -6219,7 +6219,7 @@ test "Library/poly matches Library/poly.ml" {
       #|  h:real
       #|  poly(diff p) = poly []
       #|  poly p = poly []
-      #|  !p. rsquarefree p <=> !a. ~((poly p a = &0) /\\ (poly (diff p) a = &0))
+      #|  forall p. rsquarefree p <=> forall a. ~((poly p a = &0) /\\ (poly (diff p) a = &0))
       #|  [] : real list
       #|  q:real list = []
       #|  poly q a = &0
@@ -6229,21 +6229,21 @@ test "Library/poly matches Library/poly.ml" {
       #|  a:real
       #|  a:real
       #|  q:real list
-      #|  !p a. rsquarefree p /\\ (poly p a = &0)\n         ==> ?q. (poly p = poly ([--a; &1] ** q)) /\\\n                 ~(poly q a = &0)
+      #|  forall p a. rsquarefree p /\\ (poly p a = &0)\n         ==> ?q. (poly p = poly ([--a; &1] ** q)) /\\\n                 ~(poly q a = &0)
       #|  poly p = poly (q ** d)
       #|  ~(poly p = poly [])
       #|  ~(poly p = poly [])
-      #|  !p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> rsquarefree q /\\ (!a. (poly q a = &0) <=> (poly p a = &0))
+      #|  forall p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> rsquarefree q /\\ (forall a. (poly q a = &0) <=> (poly p a = &0))
       #|  (normalize [] = []) /\\\n   (normalize (CONS h t) =\n      if normalize t = [] then if h = &0 then [] else [h]\n                          else CONS h (normalize t))
       #|  poly (normalize t) = poly t
       #|  h = &0
-      #|  !p. poly (normalize p) = poly p
+      #|  forall p. poly (normalize p) = poly p
       #|  degree p = PRE(LENGTH(normalize p))
       #|  normalize t = []
       #|  p:real list
       #|  p:real list
       #|  normalize p = []
-      #|  !p. (poly p = poly []) ==> (degree p = 0)
+      #|  forall p. (poly p = poly []) ==> (degree p = 0)
       #|  {x:real | ?n. n < SUC N /\\ (x = i n)} =\n                    (i N) INSERT {x:real | ?n. n < N /\\ (x = i n)}
       #|  {x:real | ?n. n < 0 /\\ (x = i n)} = {}
       #|  N:num
@@ -6251,79 +6251,79 @@ test "Library/poly matches Library/poly.ml" {
       #|  {x:real | ?n:num. n < N /\\ (x = i n)}
       #|  i:num->real
       #|  N:num
-      #|  !p. ~(poly p = poly []) ==> FINITE { x | poly p x = &0}
+      #|  forall p. ~(poly p = poly []) ==> FINITE { x | poly p x = &0}
       #|  abs(h) + abs(x * poly t x)
-      #|  !x k p. abs(x) <= k ==> abs(poly p x) <= poly (MAP abs p) k
+      #|  forall x k p. abs(x) <= k ==> abs(poly p x) <= poly (MAP abs p) k
       #|  normalize (CONS h t) =\n      (\\n. if n = [] then if h = &0 then [] else [h] else CONS h n)\n      (normalize t)
-      #|  !h p. ~(p = []) ==> ~((h ## p) = [])
+      #|  forall h p. ~(p = []) ==> ~((h ## p) = [])
       #|  t:(real)list
       #|  t:(real)list
-      #|  !p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> ~((p1 ** p2) = [])
-      #|  !p . ~(p = []) ==> ~(poly_exp p n = [])
+      #|  forall p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> ~((p1 ** p2) = [])
+      #|  forall p . ~(p = []) ==> ~(poly_exp p n = [])
       #|  CONS (h:real) t
-      #|  !n p . ~(p = []) ==> ~((poly_exp p n) = [])
+      #|  forall n p . ~(p = []) ==> ~((poly_exp p n) = [])
       #|  ~([&0;&1] = [])
-      #|  !n. ~((poly_exp [&0;&1] n) = [])
+      #|  forall n. ~((poly_exp [&0;&1] n) = [])
       #|  &1 * h = h
-      #|  !p. &1 ## p = p
-      #|  !p. [&1] ** p = p
+      #|  forall p. &1 ## p = p
+      #|  forall p. [&1] ** p = p
       #|  h * (real_of_num 1) = h
       #|  h + (real_of_num 0) = h
       #|  t:(real)list = []
-      #|  !p. p ** [&1] = p
-      #|  !y . t ++ y = y ++ t
+      #|  forall p. p ** [&1] = p
+      #|  forall y . t ++ y = y ++ t
       #|  t':(real)list
       #|  h':real
       #|  h:real
-      #|  !x y . x ++ y = y ++ x
-      #|  !y z. t ++ y ++ z = (t ++ y) ++ z
+      #|  forall x y . x ++ y = y ++ x
+      #|  forall y z. t ++ y ++ z = (t ++ y) ++ z
       #|  t'':(real)list
       #|  t':(real)list
-      #|  !x y z . x ++ (y ++ z) = (x ++ y) ++ z
+      #|  forall x y z . x ++ (y ++ z) = (x ++ y) ++ z
       #|  (&0) * h + h' = h'
       #|  t:(real)list
       #|  t:(real)list
       #|  h:real
       #|  h:real
-      #|  !p. TL ([&0;&1] ** p) = p
+      #|  forall p. TL ([&0;&1] ** p) = p
       #|  &0 * h + &0 = &0
-      #|  !p. HD ([&0;&1] ** p) = &0
-      #|  !n . TL (poly_exp [&0;&1] (SUC n)) = poly_exp [&0;&1] n
+      #|  forall p. HD ([&0;&1] ** p) = &0
+      #|  forall n . TL (poly_exp [&0;&1] (SUC n)) = poly_exp [&0;&1] n
       #|  &0 * &1 + &0 = &0
-      #|  !n . HD (poly_exp [&0;&1] (SUC n)) = &0
+      #|  forall n . HD (poly_exp [&0;&1] (SUC n)) = &0
       #|  t':(real)list
       #|  h':real
-      #|  !p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> HD (p1 ++ p2) = (HD p1) + (HD p2)
-      #|  !x p . ~(p = []) ==> HD (x ## p) = x * (HD p)
-      #|  !x p . ~(p = []) ==> TL (x ## p) = x ## (TL p)
+      #|  forall p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> HD (p1 ++ p2) = (HD p1) + (HD p2)
+      #|  forall x p . ~(p = []) ==> HD (x ## p) = x * (HD p)
+      #|  forall x p . ~(p = []) ==> TL (x ## p) = x ## (TL p)
       #|  (t:(real)list) = []
-      #|  !p1 p2 . ~(p1 = []) /\\ ~(p2 = [])  ==> HD (p1 ** p2) = (HD p1) * (HD p2)
+      #|  forall p1 p2 . ~(p1 = []) /\\ ~(p2 = [])  ==> HD (p1 ** p2) = (HD p1) * (HD p2)
       #|  (t:(real)list) = []
-      #|  !n p . ~(p = []) ==> HD (poly_exp p n) = (HD p) pow n
-      #|  !x. (!y. x ++ y = y /\\ y ++ x = y)\n                     ==> (!y. (CONS h t) ++ y = y /\\ y ++ (CONS h t) = y)
+      #|  forall n p . ~(p = []) ==> HD (poly_exp p n) = (HD p) pow n
+      #|  forall x. (forall y. x ++ y = y /\\ y ++ x = y)\n                     ==> (forall y. (CONS h t) ++ y = y /\\ y ++ (CONS h t) = y)
       #|  []:(real)list
       #|  []:(real)list
       #|  neutral (++) = []
-      #|  !x. neutral (++) ++ x = x
+      #|  forall x. neutral (++) ++ x = x
       #|  monoidal poly_add
-      #|  !n h h'. (&n * h) + (&n * h') = &n * (h + h')
-      #|  !t1 t2 n. poly_diff_aux n (t1 ++ t2) =\n             (poly_diff_aux n t1) ++ (poly_diff_aux n t2)
-      #|  !h0 t0 h1 t1. ~(((CONS h0 t0) ++ (CONS h1 t1)) = [])
-      #|  !h0 t0 h1 t1.\n          (TL ((CONS h0 t0) ++ (CONS h1 t1))\n        = (TL (CONS h0 t0)) ++ (TL (CONS h1 t1)))
-      #|  !p1 p2. (poly_diff (p1 ++ p2)) = (poly_diff p1  ++ poly_diff p2)
-      #|  !c n. poly_diff_aux n (c ## t) = c ## poly_diff_aux n t
+      #|  forall n h h'. (&n * h) + (&n * h') = &n * (h + h')
+      #|  forall t1 t2 n. poly_diff_aux n (t1 ++ t2) =\n             (poly_diff_aux n t1) ++ (poly_diff_aux n t2)
+      #|  forall h0 t0 h1 t1. ~(((CONS h0 t0) ++ (CONS h1 t1)) = [])
+      #|  forall h0 t0 h1 t1.\n          (TL ((CONS h0 t0) ++ (CONS h1 t1))\n        = (TL (CONS h0 t0)) ++ (TL (CONS h1 t1)))
+      #|  forall p1 p2. (poly_diff (p1 ++ p2)) = (poly_diff p1  ++ poly_diff p2)
+      #|  forall c n. poly_diff_aux n (c ## t) = c ## poly_diff_aux n t
       #|  SUC n
       #|  c:real
       #|  (a:real) * b * c = b * a * c
-      #|  !p c n. poly_diff_aux n (c ## p) = c ## (poly_diff_aux n p)
-      #|  !p c. poly_diff (c ## p) = c ## (poly_diff p)
-      #|  !c p. LENGTH (c ## p) =  LENGTH p
+      #|  forall p c n. poly_diff_aux n (c ## p) = c ## (poly_diff_aux n p)
+      #|  forall p c. poly_diff (c ## p) = c ## (poly_diff p)
+      #|  forall c p. LENGTH (c ## p) =  LENGTH p
       #|  ~(x > y) ==> ~((SUC x) > (SUC y))
       #|  x > y ==> (SUC x) > (SUC y)
       #|  LENGTH (t:(real)list) > LENGTH (t':(real)list)
       #|  MAX x y = if (x > y) then x else y
-      #|  !p q. LENGTH (p ++ q) =  MAX (LENGTH p) (LENGTH q)
-      #|  !h t'. LENGTH (t ** CONS h t') >= LENGTH t
+      #|  forall p q. LENGTH (p ++ q) =  MAX (LENGTH p) (LENGTH q)
+      #|  forall h t'. LENGTH (t ** CONS h t') >= LENGTH t
       #|  t':(real)list
       #|  h':real
       #|  (x:num) >= y <=> SUC x >= SUC y
@@ -6331,14 +6331,14 @@ test "Library/poly matches Library/poly.ml" {
       #|  SUC (LENGTH (t:(real)list))
       #|  LENGTH (h ## (CONS h' t'))
       #|  SUC (LENGTH (t ** (CONS (h':real) t')))
-      #|  !x y. (MAX x y) = x + (y - x)
+      #|  forall x y. (MAX x y) = x + (y - x)
       #|  (t:(real)list) = []
-      #|  !p h t. LENGTH (p ** (CONS h t)) >= LENGTH p
+      #|  forall p h t. LENGTH (p ** (CONS h t)) >= LENGTH p
       #|  (SUC n)
-      #|  !n. poly_exp [&0;&1] (SUC n) = CONS (&0) (poly_exp [&0;&1] n)
-      #|  !q p. ~(q = []) ==> LENGTH (p ** q) >= LENGTH p
+      #|  forall n. poly_exp [&0;&1] (SUC n) = CONS (&0) (poly_exp [&0;&1] n)
+      #|  forall q p. ~(q = []) ==> LENGTH (p ** q) >= LENGTH p
       #|  (SUC x) = (SUC y) <=> x = y
-      #|  !n. LENGTH (poly_exp [&0;&1] n) = SUC n
+      #|  forall n. LENGTH (poly_exp [&0;&1] n) = SUC n
       #|  0 <= 0 + 1 /\\ 0 <= (LENGTH (t:(real)list))
       #|  LENGTH (t:(real)list)
       #|  0
@@ -6355,8 +6355,8 @@ test "Library/poly matches Library/poly.ml" {
       #|  0 + 1 = 1
       #|  0..0
       #|  (t:(real)list) = []
-      #|  !p x.\n     ~(p = []) ==>\n     poly p x = sum (0..(PRE (LENGTH p))) (\\i. (EL i p)*(x pow i))
-      #|  !n x f. iterate (+) (0..n) (\\i.poly (f i) x) =\n           poly (iterate (++) (0..n) f) x
+      #|  forall p x.\n     ~(p = []) ==>\n     poly p x = sum (0..(PRE (LENGTH p))) (\\i. (EL i p)*(x pow i))
+      #|  forall n x f. iterate (+) (0..n) (\\i.poly (f i) x) =\n           poly (iterate (++) (0..n) f) x
       #|  poly_diff:real list->real list
       #|  poly_exp:real list -> num -> real list
       #|  poly_divides:real list->real list->bool

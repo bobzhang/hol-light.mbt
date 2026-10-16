@@ -74620,14 +74620,14 @@ test "Quaternions/qcalc matches Quaternions/qcalc.ml" {
       #|1 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|Quaternions/qcalc quotations (35):
-      #|  !x y z w. cnj(quat(x,y,z,w)) = quat(x, --y, --z, --w)
-      #|  !x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) = quat(y1,y2,y3,y4) <=>\n       x1 = y1 /\\ x2 = y2 /\\ x3 = y3 /\\ x4 = y4
+      #|  forall x y z w. cnj(quat(x,y,z,w)) = quat(x, --y, --z, --w)
+      #|  forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) = quat(y1,y2,y3,y4) <=>\n       x1 = y1 /\\ x2 = y2 /\\ x3 = y3 /\\ x4 = y4
       #|  (F /\\ p <=> F) /\\ (T /\\ p <=> p)
-      #|  !x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) + quat(y1,y2,y3,y4) = quat(x1+y1,x2+y2,x3+y3,x4+y4)
-      #|  !x1 x2 x3 x4. -- quat(x1,x2,x3,x4) = quat(--x1, --x2, --x3, --x4)
-      #|  !x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) - quat(y1,y2,y3,y4) = quat(x1-y1,x2-y2,x3-y3,x4-y4)
-      #|  !x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) * quat(y1,y2,y3,y4) =\n       quat(x1 * y1 - x2 * y2 - x3 * y3 - x4 * y4,\n            x1 * y2 + x2 * y1 + x3 * y4 - x4 * y3,\n            x1 * y3 - x2 * y4 + x3 * y1 + x4 * y2,\n            x1 * y4 + x2 * y3 - x3 * y2 + x4 * y1)
-      #|  !x1 x2 x3 x4.\n       inv (quat(x1,x2,x3,x4)) =\n       quat(  x1 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x2 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x3 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x4 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2))
+      #|  forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) + quat(y1,y2,y3,y4) = quat(x1+y1,x2+y2,x3+y3,x4+y4)
+      #|  forall x1 x2 x3 x4. -- quat(x1,x2,x3,x4) = quat(--x1, --x2, --x3, --x4)
+      #|  forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) - quat(y1,y2,y3,y4) = quat(x1-y1,x2-y2,x3-y3,x4-y4)
+      #|  forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) * quat(y1,y2,y3,y4) =\n       quat(x1 * y1 - x2 * y2 - x3 * y3 - x4 * y4,\n            x1 * y2 + x2 * y1 + x3 * y4 - x4 * y3,\n            x1 * y3 - x2 * y4 + x3 * y1 + x4 * y2,\n            x1 * y4 + x2 * y3 - x3 * y2 + x4 * y1)
+      #|  forall x1 x2 x3 x4.\n       inv (quat(x1,x2,x3,x4)) =\n       quat(  x1 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x2 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x3 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x4 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2))
       #|  n:num
       #|  _0
       #|  x:quat

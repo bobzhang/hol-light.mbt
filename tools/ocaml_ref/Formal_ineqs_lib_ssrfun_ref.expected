@@ -63,24 +63,24 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/lib/ssrfun quotations (72):
-  !f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x
+  forall f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x
   odflt = oapp I
   obind f = oapp f NONE
   omap f = obind (\\x. SOME (f x))
   pcomp f g x = obind f (g x)
-  (!y. odflt x (SOME y) = y) /\\ odflt x NONE = x
-  obind f NONE = NONE /\\ (!x. obind f (SOME x) = f x)
-  omap f NONE = NONE /\\ (!x. omap f (SOME x) = SOME (f x))
+  (forall y. odflt x (SOME y) = y) /\\ odflt x NONE = x
+  obind f NONE = NONE /\\ (forall x. obind f (SOME x) = f x)
+  omap f NONE = NONE /\\ (forall x. omap f (SOME x) = SOME (f x))
   x = y ==> y = x
   x = y ==> y = z ==> x = z
   x = y ==> f x = f y
   x1 = y1 ==> x2 = y2 ==> f x1 x2 = f y1 y2
-  (!x. f x = g x) <=> f = g
+  (forall x. f x = g x) <=> f = g
   :A -> R
-  injective f <=> (!x1 x2. f x1 = f x2 ==> x1 = x2)
-  cancel f g <=> !x. g (f x) = x
-  pcancel f g <=> !x. g (f x) = SOME x
-  ocancel g h <=> !x. oapp h x (g x) = x
+  injective f <=> (forall x1 x2. f x1 = f x2 ==> x1 = x2)
+  cancel f g <=> forall x. g (f x) = x
+  pcancel f g <=> forall x. g (f x) = SOME x
+  ocancel g h <=> forall x. oapp h x (g x) = x
   cancel f g ==> pcancel f (\\y. SOME (g y))
   pcancel f g ==> injective f
   cancel f g ==> injective f
@@ -95,8 +95,8 @@ Formal_ineqs/lib/ssrfun quotations (72):
   injective f ==> injective h ==> injective (f o h)
   cancel f f' ==> cancel h h' ==> cancel (f o h) (h' o f')
   pcancel f f' ==> pcancel h h' ==> pcancel (f o h) (pcomp h' f')
-  injective f ==> (!x. f x = g x) ==> injective g
-  cancel f f' ==> (!x. f x = g x) ==> (!x. f' x = g' x) ==> cancel g g'
+  injective f ==> (forall x. f x = g x) ==> injective g
+  cancel f f' ==> (forall x. f x = g x) ==> (forall x. f' x = g' x) ==> cancel g g'
   cancel f f' ==> injective f' ==> cancel g f' ==> f = g
   :B -> A
   bijective f <=> ?g. cancel f g /\\ cancel g f
@@ -106,35 +106,35 @@ Formal_ineqs/lib/ssrfun quotations (72):
   cancel f f' ==> cancel f f'' ==> f' = f''
   :BB -> AA
   :CC -> BB
-  bijective f ==> !g. (!x. f x = g x) ==> bijective g
+  bijective f ==> forall g. (forall x. f x = g x) ==> bijective g
   r o g
   bijective f ==> bijective h ==> bijective (f o h)
-  bijective f ==> !f'. cancel f f' ==> bijective f'
+  bijective f ==> forall f'. cancel f f' ==> bijective f'
   :A -> A
   involutive f <=> cancel f f
   involutive f
   injective f
   bijective f
-  left_inverse e inv op = !x. op (inv x) x = e
-  right_inverse e inv op = !x. op x (inv x) = e
-  left_injective op = !x. injective (\\y. op y x)
-  right_injective op = !y. injective (op y)
-  right_id e op = !x. op x e = x
-  left_zero z op = !x. op z x = z
-  right_commutative op = !x y z. op (op x y) z = op (op x z) y
-  left_distributive op add = !x y z. op (add x y) z = add (op x z) (op y z)
-  right_loop inv op = !y. cancel (\\x. op x y) (\\x. op x (inv y))
-  rev_right_loop inv op = !y. cancel (\\x. op x (inv y)) (\\x. op x y)
-  left_id e op = !x. op e x = x
-  right_zero z op = !x. op x z = z
-  left_commutative op = !x y z. op x (op y z) = op y (op x z)
-  right_distributive op add = !x y z. op x (add y z) = add (op x y) (op x z)
-  left_loop inv op = !x. cancel (op x) (op (inv x))
-  rev_left_loop inv op = !x. cancel (op (inv x)) (op x)
-  self_inverse e op = !x. op x x = e
-  commutative op = !x y. op x y = op y x
-  idempotent op = !x. op x x = x
-  associative op = !x y z. op x (op y z) = op (op x y) z
+  left_inverse e inv op = forall x. op (inv x) x = e
+  right_inverse e inv op = forall x. op x (inv x) = e
+  left_injective op = forall x. injective (\\y. op y x)
+  right_injective op = forall y. injective (op y)
+  right_id e op = forall x. op x e = x
+  left_zero z op = forall x. op z x = z
+  right_commutative op = forall x y z. op (op x y) z = op (op x z) y
+  left_distributive op add = forall x y z. op (add x y) z = add (op x z) (op y z)
+  right_loop inv op = forall y. cancel (\\x. op x y) (\\x. op x (inv y))
+  rev_right_loop inv op = forall y. cancel (\\x. op x (inv y)) (\\x. op x y)
+  left_id e op = forall x. op e x = x
+  right_zero z op = forall x. op x z = z
+  left_commutative op = forall x y z. op x (op y z) = op y (op x z)
+  right_distributive op add = forall x y z. op x (add y z) = add (op x y) (op x z)
+  left_loop inv op = forall x. cancel (op x) (op (inv x))
+  rev_left_loop inv op = forall x. cancel (op (inv x)) (op x)
+  self_inverse e op = forall x. op x x = e
+  commutative op = forall x y. op x y = op y x
+  idempotent op = forall x. op x x = x
+  associative op = forall x y z. op x (op y z) = op (op x y) z
 Ssrfun.oapp =  |- (#!:fun(fun(fun('?1967453,'?1967447),bool),bool) (\f:fun('?1967453,'?1967447). (#!:fun(fun('?1967447,bool),bool) (\x:'?1967447. (#!:fun(fun('?1967453,bool),bool) (\y:'?1967453. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?1967447,fun('?1967447,bool)) (((#oapp:fun(fun('?1967453,'?1967447),fun('?1967447,fun(option('?1967453),'?1967447))) f:fun('?1967453,'?1967447)) x:'?1967447) (#SOME:fun('?1967453,option('?1967453)) y:'?1967453))) (f:fun('?1967453,'?1967447) y:'?1967453))) ((#=:fun('?1967447,fun('?1967447,bool)) (((#oapp:fun(fun('?1967453,'?1967447),fun('?1967447,fun(option('?1967453),'?1967447))) f:fun('?1967453,'?1967447)) x:'?1967447) #NONE:option('?1967453))) x:'?1967447))))))))
 Ssrfun.odflt =  |- ((#=:fun(fun('?1967461,fun(option('?1967461),'?1967461)),fun(fun('?1967461,fun(option('?1967461),'?1967461)),bool)) #odflt:fun('?1967461,fun(option('?1967461),'?1967461))) (#oapp:fun(fun('?1967461,'?1967461),fun('?1967461,fun(option('?1967461),'?1967461))) #I:fun('?1967461,'?1967461)))
 Ssrfun.obind =  |- (#!:fun(fun(fun('?1967469,option('?1967471)),bool),bool) (\f:fun('?1967469,option('?1967471)). ((#=:fun(fun(option('?1967469),option('?1967471)),fun(fun(option('?1967469),option('?1967471)),bool)) (#obind:fun(fun('?1967469,option('?1967471)),fun(option('?1967469),option('?1967471))) f:fun('?1967469,option('?1967471)))) ((#oapp:fun(fun('?1967469,option('?1967471)),fun(option('?1967471),fun(option('?1967469),option('?1967471)))) f:fun('?1967469,option('?1967471))) #NONE:option('?1967471)))))

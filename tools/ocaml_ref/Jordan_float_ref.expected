@@ -5918,30 +5918,30 @@ Jordan/float quotations (585):
   --. (#3.4)
   DECIMAL
    ( A    ) ==> (~ A ==> B)
-  !n. (twopow (int_of_num n) = (&2) pow n)
-  ! u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
-  !n. (twopow (--(int_of_num n)) = inv((&2) pow n))
+  forall n. (twopow (int_of_num n) = (&2) pow n)
+  forall u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
+  forall n. (twopow (--(int_of_num n)) = inv((&2) pow n))
   a:int
-  !a. (twopow (--: a) = (inv (twopow a)))
+  forall a. (twopow (--: a) = (inv (twopow a)))
   PRE n
   0
   ((a:int) = (&: 0)) \\/ ~((a:int) =(&: 0))
   a:int
-  !a .(?n.( (a = &: n) \\/ (a = --: (&: (n+1)))))
-  !x y. ((x:real = y) <=> (inv(x) = inv (y)))
+  forall a .(?n.( (a = &: n) \\/ (a = --: (&: (n+1)))))
+  forall x y. ((x:real = y) <=> (inv(x) = inv (y)))
   ~((&. 2) = (&. 0))
   (&. 2) pow 1
   a:int
-  !a. (twopow (a +: (&:1)) = twopow (a) *. (twopow (&:1)))
+  forall a. (twopow (a +: (&:1)) = twopow (a) *. (twopow (&:1)))
   ~((&.2) = (&.0))
   (inv(&. 2)*(&. 2) = (&.1)) /\\ ((&. 2)*inv(&. 2) = (&.1))
   twopow (&: 0) = (&. 1)
-  !(x:real). ((&.2)*x = x*(&.2))
+  forall(x:real). ((&.2)*x = x*(&.2))
   b:real = inv(twopow (&: n))
   a:real = twopow (&: m)
   ((&:m)+(&:1)) -: ((&:n) +: (&:1)) = ((&:m)-: (&:n))
-  !m n.( twopow((&:m) - (&: n)) = twopow((&:m))*. twopow(--: (&:n)))
-  !m n. (twopow ((&:m) + (&:n)) = twopow((&:m))*. twopow((&:n)))
+  forall m n.( twopow((&:m) - (&: n)) = twopow((&:m))*. twopow(--: (&:n)))
+  forall m n. (twopow ((&:m) + (&:n)) = twopow((&:m))*. twopow((&:n)))
   e :real = inv ((&. 2) pow m')
   d :real = (&. 2) pow n'
   c :real = (&. 2) pow n
@@ -5949,52 +5949,52 @@ Jordan/float quotations (585):
   &: n -: &: m +: &: n' -: &: m' = (&: (n+n')) -: (&: (m+m'))
   b:int
   a:int
-  !a b. (twopow (a +: b) = twopow(a) *. (twopow(b)))
+  forall a b. (twopow (a +: b) = twopow(a) *. (twopow(b)))
   a:int
-  !a. ||. (twopow a) = (twopow a)
-  !x m n . (x **. m) **. n = x **. (m *| n)
+  forall a. ||. (twopow a) = (twopow a)
+  forall x m n . (x **. m) **. n = x **. (m *| n)
   a:int
-  !a n. (twopow a) pow n = twopow (a *: (&: n))
-  !a m. --. (float a m) = float (--: a) m
-  !a b m n. (float a m) *. (float b n) = (float (a *: b) (m +: n))
-  !a b c m. (float a (m+: (&:c))) +. (float b m)\n     = (float ( (&:(2 EXP c))*a +: b) m)
+  forall a n. (twopow a) pow n = twopow (a *: (&: n))
+  forall a m. --. (float a m) = float (--: a) m
+  forall a b m n. (float a m) *. (float b n) = (float (a *: b) (m +: n))
+  forall a b c m. (float a (m+: (&:c))) +. (float b m)\n     = (float ( (&:(2 EXP c))*a +: b) m)
   a:int
   b:int
   0
   m:int
-  !a b m. (float a  m) +. (float b m) =\n  (float (a+:b) m)
-  !a b m n.  (float b (--:(&: n))) +. (float a (&: m)) = (float a (&: m)) +. (float b (--:(&: n)))
+  forall a b m. (float a  m) +. (float b m) =\n  (float (a+:b) m)
+  forall a b m n.  (float b (--:(&: n))) +. (float a (&: m)) = (float a (&: m)) +. (float b (--:(&: n)))
   &: m = (--:(&: n)) + (&:(m+n))
-  !a b m n. (float a (&: m)) +. (float b (--(&: n))) = (float ( (&:(2 EXP (m+| n)))*a + b) (--:(&: n)))
-  !(m:num) n. (n+m-n) = (m-n)+n
+  forall a b m n. (float a (&: m)) +. (float b (--(&: n))) = (float ( (&:(2 EXP (m+| n)))*a + b) (--:(&: n)))
+  forall(m:num) n. (n+m-n) = (m-n)+n
   &: m = (&: n) + (&: (m-n))
-  !a b m n. ((n <=| m) ==>( (float a (&: m)) +. (float b (&: n)) = (float  ((&:(2 EXP (m -| n))) *a + b) (&: n))))
-  !m n. m<|n ==> m <=|n
-  !a b m n. ((m <| n) ==>( (float a (&: m)) +. (float b (&: n)) = (float  ((&:(2 EXP (n -| m))) *b + a) (&: m))))
+  forall a b m n. ((n <=| m) ==>( (float a (&: m)) +. (float b (&: n)) = (float  ((&:(2 EXP (m -| n))) *a + b) (&: n))))
+  forall m n. m<|n ==> m <=|n
+  forall a b m n. ((m <| n) ==>( (float a (&: m)) +. (float b (&: n)) = (float  ((&:(2 EXP (n -| m))) *b + a) (&: m))))
   --: (&: n) = --: (&: m) + (&: (m-n))
-  !a b m n. ((n <=| m) ==>( (float a (--:(&: m))) +. (float b (--:(&: n)))\n     = (float  ((&:(2 EXP (m -| n))) *b + a) (--:(&: m)))))
-  !m n. m<|n ==> m <=|n
-  !a b m n. ((m <| n) ==>( (float a (--:(&: m))) +. (float b (--:(&: n)))\n     = (float  ((&:(2 EXP (n -| m))) *a + b) (--:(&: n)))))
-  !a b n m. (float a n) -. (float b m)\n     = (float a n) +. (float (--: b) m)
-  !a n. ||. (float a n) = (float (||: a) n)
-  !a n m. (float a n) **. m = (float (a **: m) (n *: (&:m)))
-  !a b. (a -: b) = (a +: (--: b))
-  !n. ||: (&: n) = (&: n)
-  !n. ||: (--: (&: n)) = (&: n)
-  !x y. --: (&: x) +: (&: y) = (&: y) +: (--: (&: x))
-  !x n. (--: (&: x)) **: n = ((--: (&: 1)) **: n) *: ((&: x) **: n)
+  forall a b m n. ((n <=| m) ==>( (float a (--:(&: m))) +. (float b (--:(&: n)))\n     = (float  ((&:(2 EXP (m -| n))) *b + a) (--:(&: m)))))
+  forall m n. m<|n ==> m <=|n
+  forall a b m n. ((m <| n) ==>( (float a (--:(&: m))) +. (float b (--:(&: n)))\n     = (float  ((&:(2 EXP (n -| m))) *a + b) (--:(&: n)))))
+  forall a b n m. (float a n) -. (float b m)\n     = (float a n) +. (float (--: b) m)
+  forall a n. ||. (float a n) = (float (||: a) n)
+  forall a n m. (float a n) **. m = (float (a **: m) (n *: (&:m)))
+  forall a b. (a -: b) = (a +: (--: b))
+  forall n. ||: (&: n) = (&: n)
+  forall n. ||: (--: (&: n)) = (&: n)
+  forall x y. --: (&: x) +: (&: y) = (&: y) +: (--: (&: x))
+  forall x n. (--: (&: x)) **: n = ((--: (&: 1)) **: n) *: ((&: x) **: n)
   b = (&: x)**: (NUMERAL (BIT0 n))
   a = &: 1
-  !x n. (--: (&: x)) **: (NUMERAL (BIT0 n)) =  ((&: x) **: (NUMERAL (BIT0 n)))
+  forall x n. (--: (&: x)) **: (NUMERAL (BIT0 n)) =  ((&: x) **: (NUMERAL (BIT0 n)))
   b = (&: x)**: (NUMERAL (BIT1 n))
   a = &: 1
-  !x n. (--: (&: x)) **: (NUMERAL (BIT1 n)) = --: ((&: x) **: (NUMERAL (BIT1 n)))
+  forall x n. (--: (&: x)) **: (NUMERAL (BIT1 n)) = --: ((&: x) **: (NUMERAL (BIT1 n)))
   &: x +: --: (&: y) = --: (&: y -: &: x)
   x <=| y
   &: (y-x ) = (&: y) - (&: x)
-  !x y. (x < y ==> ((&: x) +: (--: (&: y)) = --: (&: (y - x))))
+  forall x y. (x < y ==> ((&: x) +: (--: (&: y)) = --: (&: (y - x))))
   &: (x - y) = (&: x) - (&: y)
-  !x y. (y <= x ==> ((&: x) +: (--: (&: y)) = (&: (x - y))))
+  forall x y. (y <= x ==> ((&: x) +: (--: (&: y)) = (&: (x - y))))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -6019,8 +6019,8 @@ Jordan/float quotations (585):
   float (&:3) (&:4) *. (float (--: (&:2)) (&:3)) = float (--: (&:6))\n                                                        (&:7)
   --. (float (--: (&:3)) (&:0)) = float (&:3) (&:0)
   (b ==> a==> c) ==> (a /\\ b ==> c)
-  !a b c P. ((a <=. ((P b)) /\\ (!x. (P x) =  x + (P (&. 0))) /\\ (b <=. c)) ==> (a <=. (P c)))
-  !a b c P. (((P(a) <=. b /\\ (!x. (P x) =  x + (P (&. 0))) /\\ (c <=. a)))\n     ==> ((P c) <=. b))
+  forall a b c P. ((a <=. ((P b)) /\\ (forall x. (P x) =  x + (P (&. 0))) /\\ (b <=. c)) ==> (a <=. (P c)))
+  forall a b c P. (((P(a) <=. b /\\ (forall x. (P x) =  x + (P (&. 0))) /\\ (c <=. a)))\n     ==> ((P c) <=. b))
   b':real = abs b
   a':real = abs a
   a:real
@@ -6029,7 +6029,7 @@ Jordan/float quotations (585):
   a = x-.f
   (x+.y) -. (f+.g) = (x-.f) +. (y-.g)
   (A==>B==>C)==>(A/\\ B ==> C)
-  !x f ex y g ey. interval x f ex /\\ interval y g ey ==>\n                         interval (x +. y) (f +. g) (ex +. ey)
+  forall x f ex y g ey. interval x f ex /\\ interval y g ey ==>\n                         interval (x +. y) (f +. g) (ex +. ey)
   :real
   (<=.)
   (<=.)
@@ -6038,15 +6038,15 @@ Jordan/float quotations (585):
   (<=.)
   (<=.)
   (<=.)
-  !x y. -- x -. (-- y) = --. (x -. y)
-  !x f ex. interval x f ex = interval (--. x) (--. f) ex
-  !x y. -- x -. y = --. (x -. (--. y))
-  !x f ex. interval (--. x) f ex = interval x (--. f) ex
-  !x f ex y g ey. interval x f ex /\\ interval y g ey ==> interval (x -. y) (f -. g) (ex +. ey)
-  !x y z. (y <=. z) ==> ((abs x)* y <=. (abs x) *z)
-  !x y z. (y <=. z) ==> ( y * (abs x) <=. z *(abs x))
+  forall x y. -- x -. (-- y) = --. (x -. y)
+  forall x f ex. interval x f ex = interval (--. x) (--. f) ex
+  forall x y. -- x -. y = --. (x -. (--. y))
+  forall x f ex. interval (--. x) f ex = interval x (--. f) ex
+  forall x f ex y g ey. interval x f ex /\\ interval y g ey ==> interval (x -. y) (f -. g) (ex +. ey)
+  forall x y z. (y <=. z) ==> ((abs x)* y <=. (abs x) *z)
+  forall x y z. (y <=. z) ==> ( y * (abs x) <=. z *(abs x))
   abs z <=. w ==> (&.0) <=. w
-  !x y z w. (( x <=. y) /\\ (abs z <=. w)) ==> (x*.w <=. y*.w) 
+  forall x y z w. (( x <=. y) /\\ (abs z <=. w)) ==> (x*.w <=. y*.w) 
   ey:real
   y-.g
   ex:real
@@ -6065,7 +6065,7 @@ Jordan/float quotations (585):
   (x-f)*g +. (x-f)*.(y-g)
   f*.(y-g)
   (x*. y -. f*. g) = (f *.(y -. g) +. (x -. f)*.g +. (x-.f)*.(y-. g))
-  !x f ex y g ey. (interval x f ex) /\\ (interval y g ey) ==>\n         (interval (x *. y) (f *. g) (abs(f)*.ey +. ex*. abs(g) +. ex*.ey))
+  forall x f ex y g ey. (interval x f ex) /\\ (interval y g ey) ==>\n         (interval (x *. y) (f *. g) (abs(f)*.ey +. ex*. abs(g) +. ex*.ey))
   :real
   (<=.)
   (<=.)
@@ -6086,31 +6086,31 @@ Jordan/float quotations (585):
   (<=.)
   (<=.)
   (<=.)
-  !n. (interval(&.n) (float(&:n) (&:0)) (float  (&: 0) (&:0)))
+  forall n. (interval(&.n) (float(&:n) (&:0)) (float  (&: 0) (&:0)))
   abs(x -. g) <=. abs(f-.g) +. abs(x -. f)
-  !x f ex g. (interval x f ex) ==> (interval x g (abs(f-g)+.ex))
+  forall x f ex g. (interval x f ex) ==> (interval x g (abs(f-g)+.ex))
   :real
   (<=.)
   (<=.)
   (<=.)
-  !x f ex ex'. (ex <=. ex') ==> (interval x f ex) ==> (interval x f ex')
+  forall x f ex ex'. (ex <=. ex') ==> (interval x f ex) ==> (interval x f ex')
   :real
   (<=.)
   (<=.)
   (<=.)
-  !x f ex. interval x f ex ==> (x <=. f+.ex)
-  !x f ex. interval x f ex ==> (f-. ex <=. x)
-  !x f ex. interval x f ex ==> (abs(f)-. ex <=. abs(x))
-  !x f ex. interval x f ex ==> (abs(x) <=. abs(f)+. ex)
+  forall x f ex. interval x f ex ==> (x <=. f+.ex)
+  forall x f ex. interval x f ex ==> (f-. ex <=. x)
+  forall x f ex. interval x f ex ==> (abs(f)-. ex <=. abs(x))
+  forall x f ex. interval x f ex ==> (abs(x) <=. abs(f)+. ex)
   &.2 *. (inv (&.2 )) = &. 1
   (b+.a)+. a -. b=a*.(&.2)
   (b+.a)-.(a-.b)=b*.(&.2)
-  let half = float(&:1)(--:(&:1)) in\n    !x xmin xmax. ((xmin <=. x) /\\ (x <=. xmax)) ==>\n      interval x\n         ((xmin+.xmax)*.half)\n         ((xmax-.xmin)*.half)
-  !x f ex.\n  (interval x f ex) ==> (&.0 <=. ex)
+  let half = float(&:1)(--:(&:1)) in\n    forall x xmin xmax. ((xmin <=. x) /\\ (x <=. xmax)) ==>\n      interval x\n         ((xmin+.xmax)*.half)\n         ((xmax-.xmin)*.half)
+  forall x f ex.\n  (interval x f ex) ==> (&.0 <=. ex)
   x-.f
-  !x f n. (interval x f (float (&:0) n)) ==> (x = f)
-  !x y z.(x * z = y * z) ==> (~(z = &0) ==> (x=y))
-  !x. (~(x=(&.0))) ==> (&.0 < abs(x))
+  forall x f n. (interval x f (float (&:0) n)) ==> (x = f)
+  forall x y z.(x * z = y * z) ==> (~(z = &0) ==> (x=y))
+  forall x. (~(x=(&.0))) ==> (&.0 < abs(x))
   z:real
   &.0 < u /\\ ||. z <=. e*. u ==> (&.0) <=. e
   B ==> (A==>B)
@@ -6139,7 +6139,7 @@ Jordan/float quotations (585):
   B ==> (A==>B)
   B ==> (A==>B)
   ~(y= (&.0))
-  !x f ex y g ey h ez.\n  (((interval x f ex) /\\ (interval y g ey) /\\ (ey <. (abs g)) /\\\n  ((ex +. (abs (f -. (h*.g))) +. (abs h)*. ey) <=. (ez*.((abs g) -. ey))))\n  ==> (interval (x / y) h ez))
+  forall x f ex y g ey h ez.\n  (((interval x f ex) /\\ (interval y g ey) /\\ (ey <. (abs g)) /\\\n  ((ex +. (abs (f -. (h*.g))) +. (abs h)*. ey) <=. (ez*.((abs g) -. ey))))\n  ==> (interval (x / y) h ez))
   :real
   (<=.)
   (<=.)
@@ -6158,28 +6158,28 @@ Jordan/float quotations (585):
   (<=.)
   f:real
   x:real
-  !x f ex. interval x f ex ==> (interval (abs x) (abs f) ex)
+  forall x f ex. interval x f ex ==> (interval (abs x) (abs f) ex)
   ssqrt x = if (x <. (&.0)) then (&.0) else sqrt x
   &.0
-  !x. (x <. (&.0)) ==> (ssqrt x = (&.0))
+  forall x. (x <. (&.0)) ==> (ssqrt x = (&.0))
   sqrt x
-  !x. (&.0) <=. x ==> (ssqrt x = (sqrt x))
+  forall x. (&.0) <=. x ==> (ssqrt x = (sqrt x))
   &.0
   x:real
-  !x. (&.0) <=. (ssqrt x)
+  forall x. (&.0) <=. (ssqrt x)
   &.0
-  !x. ssqrt (&.0) = (&.0)
-  &.0
-  x:real
-  !(x:real). (ssqrt(x) = (&.0)) ==> (x <=. (&.0))
+  forall x. ssqrt (&.0) = (&.0)
   &.0
   x:real
-  !x. (x<=. y) ==> (ssqrt x <=. (ssqrt y))
+  forall(x:real). (ssqrt(x) = (&.0)) ==> (x <=. (&.0))
+  &.0
+  x:real
+  forall x. (x<=. y) ==> (ssqrt x <=. (ssqrt y))
   t:real
-  !x t. (&.0 <=. t /\\ (t*t = x)) ==> (t = (ssqrt x))
-  !x. (&.0 <=. x) ==> ((ssqrt x)*.(ssqrt x) = x)
+  forall x t. (&.0 <=. t /\\ (t*t = x)) ==> (t = (ssqrt x))
+  forall x. (&.0 <=. x) ==> ((ssqrt x)*.(ssqrt x) = x)
   x:real
-  !x. (&.0<=. x) ==> (ssqrt (x*.x) = x)
+  forall x. (&.0<=. x) ==> (ssqrt (x*.x) = x)
   B ==> (A==>B)
   B ==> (A==>B)
   B ==> (A==>B)
@@ -6218,7 +6218,7 @@ Jordan/float quotations (585):
   (ssqrt x -. u) = (ssqrt x -. u)*.(&.1)
   x:real
   v:real
-  !x f ex u ey ez v. (interval x f ex) /\\ (interval (u*.u) f ey) /\\\n  (ex +.ey <=. ez*.(v+.u)) /\\ (v*.v <=. f-.ex) /\\ (&.0 <. u) /\\ (&.0 <=. v) ==>\n  (interval (ssqrt x) u ez)
+  forall x f ex u ey ez v. (interval x f ex) /\\ (interval (u*.u) f ey) /\\\n  (ex +.ey <=. ez*.(v+.u)) /\\ (v*.v <=. f-.ex) /\\ (&.0 <. u) /\\ (&.0 <=. v) ==>\n  (interval (ssqrt x) u ez)
   #1 + #2 + c
   a +. b +. c
   b:real
@@ -6227,33 +6227,33 @@ Jordan/float quotations (585):
   #1
   interval ((&.1) +. (&.1))\n       (float (&:3) (&:4) +. (float (&:2) (--: (&:3))))\n       (float (&:1) (&:2) *. (float (&:3) (--: (&:2))))
   interval (&1 + &1) (float (&:3) (&:4) + float (&:2) (--: (&:3)))\n     (float (&:1) (&:2) * float (&:3) (--: (&:2))) =\n     interval (&1 + &1) (float (&:386) (--: (&:3))) (float (&:3) (&:0))
-  !a b a' b'.  (float a b = (float a'  b')) <=>\n        ((float a b) -. (float a' b') = (&.0))
-  !a b a' b'. (float a b <. (float a' b')) <=>\n        ((&.0) <. (float a' b') -. (float a b))
-  !a b a' b'. (float a b <=. (float a' b')) <=>\n        ((&.0) <=. (float a' b') -. (float a b))
+  forall a b a' b'.  (float a b = (float a'  b')) <=>\n        ((float a b) -. (float a' b') = (&.0))
+  forall a b a' b'. (float a b <. (float a' b')) <=>\n        ((&.0) <. (float a' b') -. (float a b))
+  forall a b a' b'. (float a b <=. (float a' b')) <=>\n        ((&.0) <=. (float a' b') -. (float a b))
   a:int
-  !a. (&.0 <. ( twopow a))
+  forall a. (&.0 <. ( twopow a))
   a:int
-  !a. ~(twopow a = (&.0))
-  !a b. (float a b = (&.0)) <=> (a = (&:0))
-  !n. ((&:n = (&:0)) = (n=0))
-  !n. ((--: (&:n) = (&:0))) <=> (n=0)
+  forall a. ~(twopow a = (&.0))
+  forall a b. (float a b = (&.0)) <=> (a = (&:0))
+  forall n. ((&:n = (&:0)) = (n=0))
+  forall n. ((--: (&:n) = (&:0))) <=> (n=0)
   b:int
   b:int
-  !a b. ((&.0) <=. (float a b)) <=> (&:0 <=: a)
-  !n. ((&:0) <=: (--:(&:n))) <=> (n = 0)
-  !a b. ((&.0) <. (float a b)) <=> (&:0 <: a)
-  !n. (&:0) <: (&:n) <=> (~(n=0) )
-  !n. ((&:0) <: (--:(&:n))) <=> F
+  forall a b. ((&.0) <=. (float a b)) <=> (&:0 <=: a)
+  forall n. ((&:0) <=: (--:(&:n))) <=> (n = 0)
+  forall a b. ((&.0) <. (float a b)) <=> (&:0 <: a)
+  forall n. (&:0) <: (&:n) <=> (~(n=0) )
+  forall n. ((&:0) <: (--:(&:n))) <=> F
   ~(y1 = &0) /\\ ~(y2 = &0) ==>\n      ((x1 / y1) - (x2 / y2) = (x1 * y2 - x2 * y1) * inv(y1) * inv(y2))
-  ! a f ex. (interval a f ex <=> (&.0 <= (ex - (abs (a -. f)))))
-  !x:num y:num. (x = y) <=> (y  = x)
-  !x y. --.(x -. y) = (y-x)
-  !x:num y:num. (x = y) = (y  = x)
+  forall a f ex. (interval a f ex <=> (&.0 <= (ex - (abs (a -. f)))))
+  forall x:num y:num. (x = y) <=> (y  = x)
+  forall x y. --.(x -. y) = (y-x)
+  forall x:num y:num. (x = y) = (y  = x)
   n:num
   m:num
-  !m n. abs (&. n -. (&. m)) = &.((m-|n) + (n-|m))
-  !ex ey f g. (&.0 <.\n     (g -. (ey +. ex +. f))) ==> ((f +. ex)<. (g -. ey)) 
-  !a f ex b g ey. ((interval a f ex) /\\ (interval b g ey) /\\\n      (&.0 <. (g -. (ey +. ex +. f)))) ==> (a <. b)
+  forall m n. abs (&. n -. (&. m)) = &.((m-|n) + (n-|m))
+  forall ex ey f g. (&.0 <.\n     (g -. (ey +. ex +. f))) ==> ((f +. ex)<. (g -. ey)) 
+  forall a f ex b g ey. ((interval a f ex) /\\ (interval b g ey) /\\\n      (&.0 <. (g -. (ey +. ex +. f)))) ==> (a <. b)
   abs(u-.f)
   abs (c-.u)
   (?a b.((x <=. (a+.b)) /\\ (a <=. u) /\\ (b <=. v)))  ==> (x <=. (u +. v))
@@ -6261,7 +6261,7 @@ Jordan/float quotations (585):
   u-.f
   c-.u
   c -. f = (c-. u) + (u-. f)
-  !c u k. (abs (c - u) <=. k) ==> (!f g ex ey.((interval u f ex) /\\ (interval k g ey) ==> (interval c f (g+.ey+.ex))))
+  forall c u k. (abs (c - u) <=. k) ==> (forall f g ex ey.((interval u f ex) /\\ (interval k g ey) ==> (interval c f (g+.ey+.ex))))
   interval (&3) (float (&:3) (&:0)) (float (&:0) (&:0))
   &.3
   (NUMERAL m) MOD (NUMERAL n)
@@ -6306,7 +6306,7 @@ Jordan/float quotations (585):
   interval (#7) (float (&:4) (&:1)) (float (&:1) (&:0))
   interval
   interval
-  !f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
+  forall f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
   (<.)
   #0.1 <. (#7)
   &.8
@@ -6347,12 +6347,12 @@ Jordan/float quotations (585):
   &.
   interval
   interval
-  !f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
+  forall f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
   (<.)
   &.3 <. (&.8)
-  !n m p. ((&.p/(&.m)) <= (&.n)) <=> ((&.p/(&.m)) <= (&.n)/(&.1))
-  !n m p. ((&.p) <= ((&.n)/(&.m))) <=> ((&.p/(&.1)) <= (&.n)/(&.m))
-  !a b c d. (\n   ((0<b) /\\ (0<d) /\\ (a*d <=| c*b))\n    ==> (&.a/(&.b) <=. ((&.c)/(&.d))))
+  forall n m p. ((&.p/(&.m)) <= (&.n)) <=> ((&.p/(&.m)) <= (&.n)/(&.1))
+  forall n m p. ((&.p) <= ((&.n)/(&.m))) <=> ((&.p/(&.1)) <= (&.n)/(&.m))
+  forall a b c d. (\n   ((0<b) /\\ (0<d) /\\ (a*d <=| c*b))\n    ==> (&.a/(&.b) <=. ((&.c)/(&.d))))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -6377,7 +6377,7 @@ Jordan/float quotations (585):
   float (&:1) (--: (&:2)) <= (#0.3)
   (float (&:3) (&:0)) +. (float (&:4) (&:0)) <. (float (&:8) (&:1))
   (float (&:3) (&:0)) +. (float (&:4) (&:0)) <. (float (&:8) (&:1))
-  !x f ex.\n   ((f -. ex) <= x) /\\ (x <=. (f +. ex)) ==> (interval x f ex)
+  forall x f ex.\n   ((f -. ex) <= x) /\\ (x <=. (f +. ex)) ==> (interval x f ex)
   #36.1
   DECIMAL
    &: 
@@ -6424,9 +6424,9 @@ Jordan/float quotations (585):
   interval
   interval
   interval
-  !f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
+  forall f g ex ey. (&.0 <. (g -. (ey +. ex +. f)))
   (<.)
-  !n. interval (twopow n) (float (&:1) n) (float (&:0) (&:0))
+  forall n. interval (twopow n) (float (&:1) n) (float (&:0) (&:0))
 twopow =  |- (#!:fun(fun(int,bool),bool) (\x:int. ((#=:fun(real,fun(real,bool)) (#twopow:fun(int,real) x:int)) (((#COND:fun(bool,fun(real,fun(real,real))) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) x:int) (#int_of_num:fun(num,int) n:num))))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#nabs:fun(int,num) x:int))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#nabs:fun(int,num) x:int)))))))
 float =  |- (#!:fun(fun(int,bool),bool) (\x:int. (#!:fun(fun(int,bool),bool) (\n:int. ((#=:fun(real,fun(real,bool)) ((#float:fun(int,fun(int,real)) x:int) n:int)) ((#real_mul:fun(real,fun(real,real)) (#real_of_int:fun(int,real) x:int)) (#twopow:fun(int,real) n:int)))))))
 interval =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\f:real. (#!:fun(fun(real,bool),bool) (\eps:real. ((#=:fun(bool,fun(bool,bool)) (((#interval:fun(real,fun(real,fun(real,bool))) x:real) f:real) eps:real)) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) f:real))) eps:real))))))))

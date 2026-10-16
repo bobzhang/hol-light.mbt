@@ -5618,8 +5618,8 @@ Examples/holby quotations (95):
   p /\\ q
   T
   F
-  (!x. P x /\\ Q x) <=> (!x. P x) /\\ (!x. Q x)
-  ~(!x. P x) <=> (?x. ~(P x))
+  (forall x. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)
+  ~(forall x. P x) <=> (?x. ~(P x))
   ~(p \\/ q) <=> ~p /\\ ~q
   ~(p /\\ q) <=> ~p \\/ ~q
   ~(~p) <=> p
@@ -5628,7 +5628,7 @@ Examples/holby quotations (95):
   p /\\ q
   T
   F
-  (?x. P x) <=> ~(!x. ~(P x))
+  (?x. P x) <=> ~(forall x. ~(P x))
   p \\/ F <=> p
   F \\/ p <=> p
   p \\/ T <=> T
@@ -5675,23 +5675,23 @@ Examples/holby quotations (95):
   (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a)) /\\ ~(f(f(f(a))) = f(a)) ==> ?x. P(f(f(f(x))))
   (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> P(f(f(f(a))))
   (f(f(f(f(a:A)))) = a) /\\ (f(f(f(f(f(f(a)))))) = a) /\\\n   something(irrelevant) /\\ (11 + 12 = 23) /\\\n   (f(f(f(f(b:A)))) = f(f(f(f(f(f(f(f(f(f(c))))))))))) /\\\n   ~(otherthing) /\\ ~(f(a) = a) /\\ ~(f(b) = b) /\\\n   P(f(a))\n   ==> ?x. P(f(f(f(x))))
-  (a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (!x y. ~P (g x y))\n   ==> ~P(a)
-  (!x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)
-  (!x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)
-  (!x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)
+  (a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (forall x y. ~P (g x y))\n   ==> ~P(a)
+  (forall x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)
+  (forall x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)
+  (forall x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)
   (1 + 2 = 2 + 1) ==> ?x:num y. x + y = y + x
   (1 + x = x + 1) ==> ?x:num y. x + y = y + x
-  ?x. P x ==> !y. P y
+  ?x. P x ==> forall y. P y
   1 + 1 = 2
   (\\x. x + 1) 2 = 2 + 1
-  !x. x < 2 ==> 2 * x <= 3
+  forall x. x < 2 ==> 2 * x <= 3
   y IN {x | x < 2} <=> y < 2
-  (!x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a
+  (forall x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a
   (\\(x,y). x + y)(1,2) + 5 = (1 + 2) + 5
   ?x y. x = y
-  (!Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (!Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (!Y X. q(X,Y) ==> q(Y,X)) /\\\n               (!X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)
+  (forall Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (forall Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (forall Y X. q(X,Y) ==> q(Y,X)) /\\\n               (forall X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)
   (1,2) IN {(x,y) | x < y} <=> 1 < 2
-  ?x. !y. P x ==> P y
+  ?x. forall y. P x ==> P y
 prop_1 =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) q:bool)) (#~:fun(bool,bool) p:bool)))
 prop_2 =  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#~:fun(bool,bool) p:bool))) p:bool)
 prop_3 =  |- ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#==>:fun(bool,fun(bool,bool)) q:bool) p:bool))

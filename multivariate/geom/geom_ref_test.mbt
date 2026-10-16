@@ -80183,46 +80183,46 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|Generating HOL version of proof
       #|0..0..1..4..7..17..36..66..solved at 74
       #|Multivariate/geom quotations (415):
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
       #|  vector_angle x y = if x = vec 0 \\/ y = vec 0 then pi / &2\n               else acs((x dot y) / (norm x * norm y))
-      #|  !f x y. linear f /\\ (!x. norm(f x) = norm x)\n           ==> (vector_angle (f x) (f y) = vector_angle x y)
-      #|  !f x y:real^N.\n        orthogonal_transformation f\n        ==> vector_angle (f x) (f y) = vector_angle x y
-      #|  !x. vector_angle x x = if x = vec 0 then pi / &2 else &0
-      #|  !x y. vector_angle x y = vector_angle y x
+      #|  forall f x y. linear f /\\ (forall x. norm(f x) = norm x)\n           ==> (vector_angle (f x) (f y) = vector_angle x y)
+      #|  forall f x y:real^N.\n        orthogonal_transformation f\n        ==> vector_angle (f x) (f y) = vector_angle x y
+      #|  forall x. vector_angle x x = if x = vec 0 then pi / &2 else &0
+      #|  forall x y. vector_angle x y = vector_angle y x
       #|  ~(a = &0) ==> (a * x) * (inv a * y) * z = x * y * z
       #|  x:real^N = vec 0 \\/ y:real^N = vec 0
-      #|  !a x y:real^N.\n        vector_angle (a % x) y =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y
-      #|  !a x y:real^N.\n        vector_angle x (a % y) =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y
+      #|  forall a x y:real^N.\n        vector_angle (a % x) y =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y
+      #|  forall a x y:real^N.\n        vector_angle x (a % y) =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y
       #|  --x = -- &1 % x
-      #|  !x y. vector_angle (--x) y = pi - vector_angle x y
-      #|  !x y. vector_angle x (--y) = pi - vector_angle x y
-      #|  !x y. vector_angle (--x) (--y) = vector_angle x y
+      #|  forall x y. vector_angle (--x) y = pi - vector_angle x y
+      #|  forall x y. vector_angle x (--y) = pi - vector_angle x y
+      #|  forall x y. vector_angle (--x) (--y) = vector_angle x y
       #|  a = &0
-      #|  !a x y:real^N.\n        sin(vector_angle (a % x) y) =\n        if a = &0 then &1 else sin(vector_angle x y)
-      #|  !a x y:real^N.\n        sin(vector_angle x (a % y)) =\n        if a = &0 then &1 else sin(vector_angle x y)
+      #|  forall a x y:real^N.\n        sin(vector_angle (a % x) y) =\n        if a = &0 then &1 else sin(vector_angle x y)
+      #|  forall a x y:real^N.\n        sin(vector_angle x (a % y)) =\n        if a = &0 then &1 else sin(vector_angle x y)
       #|  a * b * c:real = c * a * b
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N. x dot y = norm(x) * norm(y) * cos(vector_angle x y)
-      #|  !x y:real^N. &0 <= vector_angle x y /\\ vector_angle x y <= pi
+      #|  forall x y:real^N. x dot y = norm(x) * norm(y) * cos(vector_angle x y)
+      #|  forall x y:real^N. &0 <= vector_angle x y /\\ vector_angle x y <= pi
       #|  cos
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N. orthogonal x y <=> vector_angle x y = pi / &2
+      #|  forall x y:real^N. orthogonal x y <=> vector_angle x y = pi / &2
       #|  x / &2 = &0 <=> x = &0
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x) % y = norm(y) % x
+      #|  forall x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x) % y = norm(y) % x
       #|  --x = vec 0 <=> x = vec 0
       #|  pi - x = &0 <=> x = pi
       #|  --y:real^N
       #|  x:real^N
-      #|  !x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\\n                norm(x) % y + norm(y) % x = vec 0
-      #|  !x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x + y) = norm x + norm y
+      #|  forall x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\\n                norm(x) % y + norm(y) % x = vec 0
+      #|  forall x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x + y) = norm x + norm y
       #|  pi - x = &0 <=> x = pi
       #|  --y:real^N
       #|  x:real^N
-      #|  !x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x - y) = norm x + norm y
+      #|  forall x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x - y) = norm x + norm y
       #|  :real
       #|  :real
       #|  :real
@@ -80253,14 +80253,14 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  !v w. &0 <= sin(vector_angle v w)
-      #|  !x y. sin(vector_angle x y) = &0 <=>\n           vector_angle x y = &0 \\/ vector_angle x y = pi
+      #|  forall v w. &0 <= sin(vector_angle v w)
+      #|  forall x y. sin(vector_angle x y) = &0 <=>\n           vector_angle x y = &0 \\/ vector_angle x y = pi
       #|  y:real^N
       #|  x:real^N
       #|  asn(sin(pi - vector_angle (x:real^N) y))
-      #|  !x y:real^N.\n        asn(sin(vector_angle x y)) =\n          if vector_angle x y <= pi / &2 then vector_angle x y\n          else pi - vector_angle x y
+      #|  forall x y:real^N.\n        asn(sin(vector_angle x y)) =\n          if vector_angle x y <= pi / &2 then vector_angle x y\n          else pi - vector_angle x y
       #|  asn
-      #|  !x y w z.\n        sin(vector_angle x y) = sin(vector_angle w z) <=>\n            vector_angle x y = vector_angle w z \\/\n            vector_angle x y = pi - vector_angle w z
+      #|  forall x y w z.\n        sin(vector_angle x y) = sin(vector_angle w z) <=>\n            vector_angle x y = vector_angle w z \\/\n            vector_angle x y = pi - vector_angle w z
       #|  norm((g:real^M->real^N) x)
       #|  norm((f:real^M->real^N) x)
       #|  (g:real^M->real^N) continuous (at x within s)
@@ -80269,7 +80269,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  {z | real z /\\ abs(Re z) <= &1}
       #|  (cacs o (\\x. Cx(((f x:real^N) dot g x) / (norm(f x) * norm(g x)))))\n    continuous (at (x:real^M) within s)
       #|  trivial_limit(at (x:real^M) within s)
-      #|  !f:real^M->real^N g x s.\n     ~(f x = vec 0) /\\ ~(g x = vec 0) /\\\n     f continuous (at x within s) /\\\n     g continuous (at x within s)\n     ==> (\\x. Cx(vector_angle (f x) (g x))) continuous (at x within s)
+      #|  forall f:real^M->real^N g x s.\n     ~(f x = vec 0) /\\ ~(g x = vec 0) /\\\n     f continuous (at x within s) /\\\n     g continuous (at x within s)\n     ==> (\\x. Cx(vector_angle (f x) (g x))) continuous (at x within s)
       #|  :real
       #|  :real
       #|  :real
@@ -80281,32 +80281,32 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  norm(x:real^N)
       #|  \\x:real^N. cacs(Cx((c dot x) / (norm c * norm x)))
       #|  c:real^N = vec 0
-      #|  !c x:real^N. ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x)
-      #|  !c x:real^N s.\n     ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x within s)
-      #|  !c x:real^N. ~(x = vec 0) ==> (vector_angle c) real_continuous (at x)
-      #|  !c s x:real^N. ~(x = vec 0)\n                  ==> (vector_angle c) real_continuous (at x within s)
-      #|  !s. ~(vec 0 IN s) ==> (Cx o vector_angle c) continuous_on s
+      #|  forall c x:real^N. ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x)
+      #|  forall c x:real^N s.\n     ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x within s)
+      #|  forall c x:real^N. ~(x = vec 0) ==> (vector_angle c) real_continuous (at x)
+      #|  forall c s x:real^N. ~(x = vec 0)\n                  ==> (vector_angle c) real_continuous (at x within s)
+      #|  forall s. ~(vec 0 IN s) ==> (Cx o vector_angle c) continuous_on s
       #|  cos
       #|  ~(u = &0) /\\ ~(v = &0) /\\ ~(x = &0) /\\ ~(y = &0)\n    ==> (a * u * v = b * x * y <=> a / (x * y) = b / (u * v))
-      #|  !u v x y. ~(u = vec 0) /\\  ~(v = vec 0) /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n             ==> (vector_angle u v = vector_angle x y <=>\n                        (x dot y) * norm(u) * norm(v) =\n                        (u dot v) * norm(x) * norm(y))
-      #|  !u v x y.\n        cos(vector_angle u v) = cos(vector_angle x y) <=>\n        vector_angle u v = vector_angle x y
-      #|  !x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=>\n                vector_angle x y = &0 \\/ vector_angle x y = pi)
-      #|  !x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=> sin(vector_angle x y) = &0)
-      #|  !x y. sin(vector_angle x y) = &0\n         ==> ~(x = vec 0) /\\ ~(y = vec 0) /\\ collinear {vec 0,x,y}
+      #|  forall u v x y. ~(u = vec 0) /\\  ~(v = vec 0) /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n             ==> (vector_angle u v = vector_angle x y <=>\n                        (x dot y) * norm(u) * norm(v) =\n                        (u dot v) * norm(x) * norm(y))
+      #|  forall u v x y.\n        cos(vector_angle u v) = cos(vector_angle x y) <=>\n        vector_angle u v = vector_angle x y
+      #|  forall x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=>\n                vector_angle x y = &0 \\/ vector_angle x y = pi)
+      #|  forall x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=> sin(vector_angle x y) = &0)
+      #|  forall x y. sin(vector_angle x y) = &0\n         ==> ~(x = vec 0) /\\ ~(y = vec 0) /\\ collinear {vec 0,x,y}
       #|  vector_angle (norm(x:real^N) % y) (z:real^N)
-      #|  !x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle x z = vector_angle y z)
-      #|  !x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle z x = vector_angle z y)
+      #|  forall x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle x z = vector_angle y z)
+      #|  forall x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle z x = vector_angle z y)
       #|  z:real^N
       #|  y:real^N
       #|  --x:real^N
-      #|  !x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle x z = pi - vector_angle y z)
-      #|  !x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle z x = pi - vector_angle z y)
+      #|  forall x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle x z = pi - vector_angle y z)
+      #|  forall x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle z x = pi - vector_angle z y)
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N.\n        cos(vector_angle x y) = if x = vec 0 \\/ y = vec 0 then &0\n                                else (x dot y) / (norm x * norm y)
-      #|  !x y:real^N.\n        sin(vector_angle x y) =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else sqrt(&1 - ((x dot y) / (norm x * norm y)) pow 2)
+      #|  forall x y:real^N.\n        cos(vector_angle x y) = if x = vec 0 \\/ y = vec 0 then &0\n                                else (x dot y) / (norm x * norm y)
+      #|  forall x y:real^N.\n        sin(vector_angle x y) =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else sqrt(&1 - ((x dot y) / (norm x * norm y)) pow 2)
       #|  s + c = &1 <=> s = &1 - c
-      #|  !x y:real^N.\n        sin(vector_angle x y) pow 2 =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else &1 - ((x dot y) / (norm x * norm y)) pow 2
+      #|  forall x y:real^N.\n        sin(vector_angle x y) pow 2 =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else &1 - ((x dot y) / (norm x * norm y)) pow 2
       #|  a pow 2 * xy:real = d ==> xy * (a * x) * (a * y) = d * x * y
       #|  y:complex
       #|  x:complex
@@ -80314,32 +80314,32 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  a * x:complex
       #|  y = Cx(&0)
       #|  x = Cx(&0)
-      #|  !a. ~(a = Cx(&0))\n       ==> vector_angle (a * x) (a * y) = vector_angle x y
-      #|  !x. vector_angle x (Cx(&1)) = acs(Re x / norm x)
+      #|  forall a. ~(a = Cx(&0))\n       ==> vector_angle (a * x) (a * y) = vector_angle x y
+      #|  forall x. vector_angle x (Cx(&1)) = acs(Re x / norm x)
       #|  ~(z = &0) ==> (z * x) / z = x
-      #|  !z. ~(z = Cx(&0)) /\\ &0 <= Im z ==> Arg z = vector_angle z (Cx(&1))
+      #|  forall z. ~(z = Cx(&0)) /\\ &0 <= Im z ==> Arg z = vector_angle z (Cx(&1))
       #|  z / w:complex
       #|  w = z * (w / z) /\\ z = z * Cx(&1)
       #|  z = w * (z / w) /\\ w = w * Cx(&1)
-      #|  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> vector_angle w z = if &0 <= Im(z / w) then Arg(z / w)\n                                else &2 * pi - Arg(z / w)
+      #|  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> vector_angle w z = if &0 <= Im(z / w) then Arg(z / w)\n                                else &2 * pi - Arg(z / w)
       #|  basis 1:real^N
       #|  basis 1:real^N
       #|  g:real^N->real^N
       #|  c:real
       #|  f:real^N->real^N
       #|  pi - (pi - x) = x
-      #|  !f:real^N->real^N.\n      linear f /\\ (!x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. ~(c = &0) /\\ orthogonal_transformation g /\\ f = \\z. c % g z
+      #|  forall f:real^N->real^N.\n      linear f /\\ (forall x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. ~(c = &0) /\\ orthogonal_transformation g /\\ f = \\z. c % g z
       #|  \\x. --((g:real^N->real^N) x)
       #|  --c:real
       #|  ~(c = &0) ==> &0 < c \\/ &0 < --c
       #|  g:real^N->real^N
       #|  c:real
-      #|  !f:real^N->real^N.\n      linear f /\\ (!x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. &0 < c /\\ orthogonal_transformation g /\\ f = \\z. c % g z
+      #|  forall f:real^N->real^N.\n      linear f /\\ (forall x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. &0 < c /\\ orthogonal_transformation g /\\ f = \\z. c % g z
       #|  angle(a,b,c) = vector_angle (a - b) (c - b)
-      #|  !f a b c.\n        linear f /\\ (!x. norm(f x) = norm x)\n        ==> angle(f a,f b,f c) = angle(a,b,c)
-      #|  !a b c d. angle(a + b,a + c,a + d) = angle(b,c,d)
+      #|  forall f a b c.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> angle(f a,f b,f c) = angle(a,b,c)
+      #|  forall a b c d. angle(a + b,a + c,a + d) = angle(b,c,d)
       #|  vector_angle x y = angle(x,vec 0,y)
-      #|  !A B C:real^N.\n        angle(A,B,C) = pi <=>\n        ~(A = B) /\\ ~(C = B) /\\ dist(A,C) = dist(A,B) + dist(B,C)
+      #|  forall A B C:real^N.\n        angle(A,B,C) = pi <=>\n        ~(A = B) /\\ ~(C = B) /\\ dist(A,C) = dist(A,B) + dist(B,C)
       #|  :real
       #|  :real
       #|  :real
@@ -80370,48 +80370,48 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  !A B C. &0 <= sin(angle(A,B,C))
-      #|  !A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))
-      #|  !A B. angle(A,A,B) = pi / &2 /\\ angle(B,A,A) = pi / &2
-      #|  !A B. ~(A = B) ==> angle(A,B,A) = &0
-      #|  !A B C. angle(A,B,C) = angle(C,B,A)
-      #|  !A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi
-      #|  !a b c a' b' c'.\n        cos(angle(a,b,c)) = cos(angle(a',b',c')) <=>\n        angle(a,b,c) = angle(a',b',c')
-      #|  !a b c a' b' c'.\n        ~(a = b) /\\ ~(c = b) /\\ ~(a' = b') /\\ ~(c' = b')\n        ==> (angle(a,b,c) = angle(a',b',c') <=>\n                ((a' - b') dot (c' - b')) * norm (a - b) * norm (c - b) =\n                ((a - b) dot (c - b)) * norm (a' - b') * norm (c' - b'))
-      #|  !A B C. sin(angle(A,B,C)) = &0 <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi
-      #|  !A B C A' B' C'. sin(angle(A,B,C)) = sin(angle(A',B',C')) <=>\n                        angle(A,B,C) = angle(A',B',C') \\/\n                        angle(A,B,C) = pi - angle(A',B',C')
-      #|  !A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi)
-      #|  !A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> sin(angle(A,B,C)) = &0)
-      #|  !A B C. sin(angle(A,B,C)) = &0\n           ==> ~(A = B) /\\ ~(B = C) /\\ collinear {A,B,C}
-      #|  !A B C. angle(A,B,C) = &0 ==> angle(A,B,D) = angle(C,B,D)
-      #|  !A B C. angle(A,B,C) = &0 ==> angle(D,B,A) = angle(D,B,C)
-      #|  !A B C. angle(A,B,C) = pi ==> angle(D,B,A) = pi - angle(D,B,C)
-      #|  !A B C. angle(A,B,C) = pi ==> angle(A,B,D) = pi - angle(C,B,D)
-      #|  !a b c. cos(angle(a,b,c)) = if a = b \\/ c = b then &0\n                               else ((a - b) dot (c - b)) /\n                                    (norm(a - b) * norm(c - b))
-      #|  !a b c. sin(angle(a,b,c)) =\n             if a = b \\/ c = b then &1\n             else sqrt(&1 - (((a - b) dot (c - b)) /\n                             (norm(a - b) * norm(c - b))) pow 2)
-      #|  !a b c. sin(angle(a,b,c)) pow 2 =\n             if a = b \\/ c = b then &1\n             else &1 - (((a - b) dot (c - b)) /\n                        (norm(a - b) * norm(c - b))) pow 2
+      #|  forall A B C. &0 <= sin(angle(A,B,C))
+      #|  forall A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))
+      #|  forall A B. angle(A,A,B) = pi / &2 /\\ angle(B,A,A) = pi / &2
+      #|  forall A B. ~(A = B) ==> angle(A,B,A) = &0
+      #|  forall A B C. angle(A,B,C) = angle(C,B,A)
+      #|  forall A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi
+      #|  forall a b c a' b' c'.\n        cos(angle(a,b,c)) = cos(angle(a',b',c')) <=>\n        angle(a,b,c) = angle(a',b',c')
+      #|  forall a b c a' b' c'.\n        ~(a = b) /\\ ~(c = b) /\\ ~(a' = b') /\\ ~(c' = b')\n        ==> (angle(a,b,c) = angle(a',b',c') <=>\n                ((a' - b') dot (c' - b')) * norm (a - b) * norm (c - b) =\n                ((a - b) dot (c - b)) * norm (a' - b') * norm (c' - b'))
+      #|  forall A B C. sin(angle(A,B,C)) = &0 <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi
+      #|  forall A B C A' B' C'. sin(angle(A,B,C)) = sin(angle(A',B',C')) <=>\n                        angle(A,B,C) = angle(A',B',C') \\/\n                        angle(A,B,C) = pi - angle(A',B',C')
+      #|  forall A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi)
+      #|  forall A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> sin(angle(A,B,C)) = &0)
+      #|  forall A B C. sin(angle(A,B,C)) = &0\n           ==> ~(A = B) /\\ ~(B = C) /\\ collinear {A,B,C}
+      #|  forall A B C. angle(A,B,C) = &0 ==> angle(A,B,D) = angle(C,B,D)
+      #|  forall A B C. angle(A,B,C) = &0 ==> angle(D,B,A) = angle(D,B,C)
+      #|  forall A B C. angle(A,B,C) = pi ==> angle(D,B,A) = pi - angle(D,B,C)
+      #|  forall A B C. angle(A,B,C) = pi ==> angle(A,B,D) = pi - angle(C,B,D)
+      #|  forall a b c. cos(angle(a,b,c)) = if a = b \\/ c = b then &0\n                               else ((a - b) dot (c - b)) /\n                                    (norm(a - b) * norm(c - b))
+      #|  forall a b c. sin(angle(a,b,c)) =\n             if a = b \\/ c = b then &1\n             else sqrt(&1 - (((a - b) dot (c - b)) /\n                             (norm(a - b) * norm(c - b))) pow 2)
+      #|  forall a b c. sin(angle(a,b,c)) pow 2 =\n             if a = b \\/ c = b then &1\n             else &1 - (((a - b) dot (c - b)) /\n                        (norm(a - b) * norm(c - b))) pow 2
       #|  ~(b = &0) /\\ b * x = b pow 2 ==> x = b
       #|  B:real^N = vec 0
       #|  A:real^N
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * cos(angle(B,A,C)) = dist(A,B)
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * cos(angle(B,A,C)) = dist(A,B)
       #|  A:real^N = C
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> cos(angle(B,A,C)) = dist(A,B) / dist(A,C)
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> cos(angle(B,A,C)) = dist(A,B) / dist(A,C)
       #|  d + e = h /\\ s + c = &1 /\\ ~(h = &0) ==> h * c = d ==> e = h * s
       #|  x:real = y ==> x pow 2 = y pow 2
       #|  A:real^N = C
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * sin(angle(B,A,C)) = dist(C,B)
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = C)\n        ==> sin(angle(B,A,C)) = dist(C,B) / dist(A,C)
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * sin(angle(B,A,C)) = dist(C,B)
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = C)\n        ==> sin(angle(B,A,C)) = dist(C,B) / dist(A,C)
       #|  cos (angle (B:real^N,A,C)) = &0
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = B)\n        ==> dist(A,B) * tan(angle(B,A,C)) = dist(C,B)
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = B)\n        ==> dist(A,B) * tan(angle(B,A,C)) = dist(C,B)
       #|  A:real^N = B
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> tan(angle(B,A,C)) = dist(C,B) / dist(A,B)
-      #|  !A B C:real^N.\n        dist(B,C) pow 2 = (dist(A,B) pow 2 + dist(A,C) pow 2) -\n                          &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> tan(angle(B,A,C)) = dist(C,B) / dist(A,B)
+      #|  forall A B C:real^N.\n        dist(B,C) pow 2 = (dist(A,B) pow 2 + dist(A,C) pow 2) -\n                          &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))
       #|  a * (&1 - x) * b = c * (&1 - y) * d <=>\n    a * b - a * b * x = c * d - c * d * y
       #|  ~(a = &0) ==> a pow 2 * x = a pow 2 * y ==> x = y
       #|  A:real^N = B
       #|  x + y = &1 ==> x = &1 - y
       #|  2
-      #|  !A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)
+      #|  forall A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)
       #|  angle(B:real^N,C,A)
       #|  angle(A:real^N,B,C)
       #|  angle(B:real^N,A,C)
@@ -80433,7 +80433,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  C:real^N
       #|  B:real^N
       #|  A:real^N
-      #|  !A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1
+      #|  forall A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1
       #|  n < 3 /\\ ~(n = 0) /\\ ~(n = 2) ==> n = 1
       #|  n = &1 ==> n * p = p
       #|  &0 < p ==> ~(p < &0) /\\ ~(p = &0)
@@ -80442,17 +80442,17 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  x:real
       #|  nn:real
       #|  ?n. integer n /\\ x = n * pi
-      #|  !x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi
+      #|  forall x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi
       #|  &0 <= x /\\ x <= p /\\ &0 <= y /\\ y <= p /\\ &0 <= z /\\ z <= p /\\\n    ~(x = p /\\ y = p /\\ z = p)\n    ==> x + y + z < &3 * p
       #|  A:real^N = C
       #|  B:real^N = C
       #|  A:real^N = B
-      #|  !A B C:real^N. ~(A = B /\\ B = C /\\ A = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi
+      #|  forall A B C:real^N. ~(A = B /\\ B = C /\\ A = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi
       #|  x + p + y = p ==> &0 <= x /\\ &0 <= y ==> x = &0 /\\ y = &0
       #|  C:real^N
       #|  B:real^N
       #|  A:real^N
-      #|  !A B C:real^N.\n        angle(A,B,C) = pi\n        ==> angle(B,C,A) = &0 /\\ angle(A,C,B) = &0 /\\\n            angle(B,A,C) = &0 /\\ angle(C,A,B) = &0
+      #|  forall A B C:real^N.\n        angle(A,B,C) = pi\n        ==> angle(B,C,A) = &0 /\\ angle(A,C,B) = &0 /\\\n            angle(B,A,C) = &0 /\\ angle(C,A,B) = &0
       #|  norm(A - B) % (C - B) = norm(C - B) % (A - B) <=>\n      (norm(A - B) - norm(C - B)) % (C - B) = norm(C - B) % (A - C)
       #|  norm(A - B) % (C - B) = norm(C - B) % (A - B) <=>\n      (norm(C - B) - norm(A - B)) % (A - B) = norm(A - B) % (C - A)
       #|  c - b:real^N = a - b <=> a = c
@@ -80467,10 +80467,10 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  A:real^N = C
       #|  B:real^N = C
       #|  A:real^N = B
-      #|  !A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                  (dist(A,B) = dist(A,C) + dist(C,B) \\/\n                   dist(B,C) = dist(A,C) + dist(A,B))
+      #|  forall A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                  (dist(A,B) = dist(A,C) + dist(C,B) \\/\n                   dist(B,C) = dist(A,C) + dist(A,B))
       #|  C:real^N
       #|  A:real^N
-      #|  !A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                   dist(A,C) = abs(dist(A,B) - dist(C,B))
+      #|  forall A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                   dist(A,C) = abs(dist(A,B) - dist(C,B))
       #|  C':real^N
       #|  A':real^N
       #|  B':real^N
@@ -80479,14 +80479,14 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  B:real^M
       #|  dist(B':real^N,C') = &0
       #|  dist(A':real^N,B') = &0
-      #|  !A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> angle(A,B,C) = angle(A',B',C')
+      #|  forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> angle(A,B,C) = angle(A',B',C')
       #|  C':real^N
       #|  A':real^N
       #|  B':real^N
       #|  C:real^M
       #|  A:real^M
       #|  B:real^M
-      #|  !A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,C) = dist(A',C')
+      #|  forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,C) = dist(A',C')
       #|  ~(sin(angle(B':real^N,C',A')) = &0)
       #|  A':real^N
       #|  B':real^N
@@ -80504,7 +80504,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  angle(C:real^M,A,B) = angle(C':real^N,A',B')
       #|  ~(A':real^N = B')
       #|  A:real^M = B
-      #|  !A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C') /\\ dist(B,C) = dist(B',C')
+      #|  forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C') /\\ dist(B,C) = dist(B',C')
       #|  a + b + x = pi /\\ a + b + y = pi ==> x = y
       #|  C':real^N
       #|  B':real^N
@@ -80514,14 +80514,14 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  A:real^M
       #|  ~(A':real^N = B')
       #|  A:real^M = B
-      #|  !A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C')
-      #|  !A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
-      #|  !A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
-      #|  !A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
-      #|  !A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
-      #|  !a b x. angle(a,x,b) = pi <=> ~(x = a) /\\ ~(x = b) /\\ between x (a,b)
-      #|  !a b x. between x (a,b) <=> x = a \\/ x = b \\/ angle(a,x,b) = pi
-      #|  !A B C D:real^N.\n      ~(C = A) /\\ ~(C = B) /\\ between C (A,B)\n      ==> angle(A,C,D) + angle(B,C,D) = pi
+      #|  forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C')
+      #|  forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
+      #|  forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
+      #|  forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
+      #|  forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')
+      #|  forall a b x. angle(a,x,b) = pi <=> ~(x = a) /\\ ~(x = b) /\\ between x (a,b)
+      #|  forall a b x. between x (a,b) <=> x = a \\/ x = b \\/ angle(a,x,b) = pi
+      #|  forall A B C D:real^N.\n      ~(C = A) /\\ ~(C = B) /\\ between C (A,B)\n      ==> angle(A,C,D) + angle(B,C,D) = pi
       #|  angle(C:real^N,A,D) = angle(B,A,D) /\\\n                angle(A,B,D) = angle(C,B,D)
       #|  D:real^N
       #|  C:real^N
@@ -80539,7 +80539,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  C:real^N = B
       #|  C:real^N = A
       #|  A:real^N = B
-      #|  !A B C D:real^N.\n        between C (A,B) /\\ ~(D = A) /\\ ~(D = B)\n        ==> angle(A,D,C) + angle(C,D,B) = angle(A,D,B)
+      #|  forall A B C D:real^N.\n        between C (A,B) /\\ ~(D = A) /\\ ~(D = B)\n        ==> angle(A,D,C) + angle(C,D,B) = angle(A,D,B)
       #|  z:real^N
       #|  x:real^N
       #|  affine hull {vec 0:real^N, z}
@@ -80555,13 +80555,13 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  vec 0:real^N
       #|  y = closest_point (affine hull {vec 0, z}) (x:real^N)
       #|  y:real^N
-      #|  !x y z:real^N.\n        setdist({x},affine hull {y,z}) = dist(x,y) * sin(angle(x,y,z))
+      #|  forall x y z:real^N.\n        setdist({x},affine hull {y,z}) = dist(x,y) * sin(angle(x,y,z))
       #|  ~(b = &0) /\\ ~(c = &0)\n    ==> b pow 2 * c pow 2 * (&1 - (d / (b * c)) pow 2) =\n        b pow 2 * c pow 2 - d pow 2
       #|  c:real^2 = vec 0
       #|  b:real^2 = vec 0
       #|  &0 <= y /\\ abs x = abs y ==> abs x / &2 = y / &2
       #|  a:real^2
-      #|  !a b c:real^2.\n     measure(convex hull {a,b,c}) =\n     (dist(a,b) * dist(a,c) * sin(angle(b,a,c))) / &2
+      #|  forall a b c:real^2.\n     measure(convex hull {a,b,c}) =\n     (dist(a,b) * dist(a,c) * sin(angle(b,a,c))) / &2
       #|  (x2 * x1 - (x2 * x1 + y2 * y1 + z2 * z1)) pow 2 <=\n      (&1 - x2 pow 2) * (&1 - x1 pow 2)\n      <=> &0 <= --(y1 pow 2 + z1 pow 2) *\n                ((x2 * x2 + y2 * y2 + z2 * z2) - &1) +\n                (x2 pow 2 - &1) * ((x1 * x1 + y1 * y1 + z1 * z1) - &1) +\n                (y2 * z1 - y1 * z2) pow 2
       #|  x1 * x1 + y1 * y1 + z1 * z1 = &1 /\\ x2 * x2 + y2 * y2 + z2 * z2 = &1\n     ==> (x2 * x1 - (x2 * x1 + y2 * y1 + z2 * z1)) pow 2 <=\n         (&1 - x2 pow 2) * (&1 - x1 pow 2)
       #|  w:real^3
@@ -80576,7 +80576,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  vb:real
       #|  v:real^3
       #|  p:real^3
-      #|  !p u v w:real^3.\n          norm(u - p) = &1 /\\ norm(v - p) = &1 /\\ norm(w - p) = &1\n          ==> angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
+      #|  forall p u v w:real^3.\n          norm(u - p) = &1 /\\ norm(v - p) = &1 /\\ norm(w - p) = &1\n          ==> angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
       #|  inv(norm w) % w:real^3
       #|  inv(norm v) % v:real^3
       #|  inv(norm u) % u:real^3
@@ -80588,7 +80588,7 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  x = pi / &2 /\\ y = pi / &2 /\\ &0 <= z\n                               ==> x <= y + z
       #|  u:real^3 = vec 0
       #|  p:real^3
-      #|  !p u v w:real^3. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
+      #|  forall p u v w:real^3. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
       #|  f:real^3->real^N
       #|  {u:real^N,v,w} SUBSET IMAGE f (:real^3)
       #|  f:real^3->real^N
@@ -80596,8 +80596,8 @@ test "Multivariate/geom matches Multivariate/geom.ml" {
       #|  subspace(span{u:real^N,v,w}) /\\\n                dim(span{u,v,w}) <= dimindex(:3) /\\\n                dimindex(:3) <= dimindex(:N)
       #|  p:real^N
       #|  dimindex(:3) <= dimindex(:N) \\/ dimindex(:N) <= dimindex(:3)
-      #|  !p u v w:real^N. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
-      #|  !u v w:real^N. vector_angle u w <= vector_angle u v + vector_angle v w
+      #|  forall p u v w:real^N. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)
+      #|  forall u v w:real^N. vector_angle u w <= vector_angle u v + vector_angle v w
       #|PYTHAGORAS =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\A:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\B:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\C:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,'N),fun(cart(real,'N),bool)) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) A:cart(real,'N)) B:cart(real,'N))) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) C:cart(real,'N)) B:cart(real,'N)))) ((#=:fun(real,fun(real,bool)) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) C:cart(real,'N)) A:cart(real,'N)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) B:cart(real,'N)) A:cart(real,'N)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,'N),real) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) C:cart(real,'N)) B:cart(real,'N)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))
       #|vector_angle =  |- (#!:fun(fun(cart(real,'?1834259),bool),bool) (\x:cart(real,'?1834259). (#!:fun(fun(cart(real,'?1834259),bool),bool) (\y:cart(real,'?1834259). ((#=:fun(real,fun(real,bool)) ((#vector_angle:fun(cart(real,'?1834259),fun(cart(real,'?1834259),real)) x:cart(real,'?1834259)) y:cart(real,'?1834259))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'?1834259),fun(cart(real,'?1834259),bool)) x:cart(real,'?1834259)) (#vec:fun(num,cart(real,'?1834259)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'?1834259),fun(cart(real,'?1834259),bool)) y:cart(real,'?1834259)) (#vec:fun(num,cart(real,'?1834259)) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#acs:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?1834259),fun(cart(real,'?1834259),real)) x:cart(real,'?1834259)) y:cart(real,'?1834259))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?1834259),real) x:cart(real,'?1834259))) (#vector_norm:fun(cart(real,'?1834259),real) y:cart(real,'?1834259)))))))))))
       #|VECTOR_ANGLE_LINEAR_IMAGE_EQ =  |- (#!:fun(fun(fun(cart(real,'?1834301),cart(real,'?1834302)),bool),bool) (\f:fun(cart(real,'?1834301),cart(real,'?1834302)). (#!:fun(fun(cart(real,'?1834301),bool),bool) (\x:cart(real,'?1834301). (#!:fun(fun(cart(real,'?1834301),bool),bool) (\y:cart(real,'?1834301). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#linear:fun(fun(cart(real,'?1834301),cart(real,'?1834302)),bool) f:fun(cart(real,'?1834301),cart(real,'?1834302)))) (#!:fun(fun(cart(real,'?1834301),bool),bool) (\x:cart(real,'?1834301). ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,'?1834302),real) (f:fun(cart(real,'?1834301),cart(real,'?1834302)) x:cart(real,'?1834301)))) (#vector_norm:fun(cart(real,'?1834301),real) x:cart(real,'?1834301))))))) ((#=:fun(real,fun(real,bool)) ((#vector_angle:fun(cart(real,'?1834302),fun(cart(real,'?1834302),real)) (f:fun(cart(real,'?1834301),cart(real,'?1834302)) x:cart(real,'?1834301))) (f:fun(cart(real,'?1834301),cart(real,'?1834302)) y:cart(real,'?1834301)))) ((#vector_angle:fun(cart(real,'?1834301),fun(cart(real,'?1834301),real)) x:cart(real,'?1834301)) y:cart(real,'?1834301))))))))))

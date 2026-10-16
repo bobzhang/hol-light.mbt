@@ -111,17 +111,17 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  0
       #|  0
       #|  0
-      #|  !l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l
-      #|  !(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))
+      #|  forall l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l
+      #|  forall(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))
       #|  SUC n < SUC x <=> n < x
-      #|  !(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)
-      #|  !l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1
+      #|  forall(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)
+      #|  forall l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1
       #|  test_domain_xi xz yw <=> FST xz <= FST yw /\\ FST yw <= SND xz /\\ \n  FST yw - FST xz <= SND yw /\\ SND xz - FST yw <= SND yw
       #|  j:num
       #|  j < dimindex (:N)
       #|  j = i - 1
       #|  LENGTH (xz:(real#real)list) = dimindex (:N) /\\ LENGTH (yw:(real#real)list) = dimindex (:N)
-      #|  !xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)
+      #|  forall xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)
       #|  :N
       #|  :N
       #|  :N
@@ -132,23 +132,23 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  :N
       #|  xz = (x,z) /\\ yw = (y,w) /\\\n    x <= y /\\ y <= z /\\ y - x <= w1 /\\ z - y <= w2 /\\ w1 <= w /\\ w2 <= w ==> test_domain_xi xz yw
       #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
-      #|  !i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y
+      #|  forall i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y
       #|  (:real)
       #|  \\x. &n * x pow (n - 1)
       #|  (:real)
-      #|  !n y. nth_diff_strong 2 (\\x. x pow n) y
-      #|  !n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)
-      #|  !n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))
+      #|  forall n y. nth_diff_strong 2 (\\x. x pow n) y
+      #|  forall n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)
+      #|  forall n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))
       #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
-      #|  !f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x
-      #|  !f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)
+      #|  forall f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x
+      #|  forall f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)
       #|  diff2c_domain domain
       #|  (x:real^N, x:real^N)
-      #|  !f. (!domain. diff2c_domain domain f) ==> !x:real^N. diff2c f x
+      #|  forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. diff2c f x
       #|  x:real^N
       #|  x:real^N
       #|  x:real^N, x:real^N
-      #|  !f. (!domain. diff2c_domain domain f) ==> !x:real^N. lift o f differentiable at x
+      #|  forall f. (forall domain. diff2c_domain domain f) ==> forall x:real^N. lift o f differentiable at x
       #|  IN
       #|  i:num
       #|  1 <= i /\\ i <= SUC n <=> (1 <= i /\\ i <= n) \\/ i = SUC n
@@ -160,23 +160,23 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  1 <= i
       #|  1 <= i
       #|  1 <= i
-      #|  (!i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (!i. Q i ==> P i))
-      #|  (!i:num. (i = k ==> P i)) <=> P k
+      #|  (forall i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (forall i. Q i ==> P i))
+      #|  (forall i:num. (i = k ==> P i)) <=> P k
       #|  1 <= i ==> (i + 1) - 1 = SUC (i - 1)
       #|  t':(B)list
-      #|  !(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))
-      #|  !x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y
+      #|  forall(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))
+      #|  forall x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y
       #|  SUC i0 - 1 < SUC i0
       #|  SUC i0 - 1
       #|  SUC i0
       #|  t:(A)list
       #|  t:(A)list
-      #|  !P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)
+      #|  forall P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)
       #|  i:num
       #|  ((i0 + SUC a) - 1 + 1) - i0 = SUC a
       #|  l:(A)list
       #|  l:(A)list
-      #|  !P (l:(A)list) i0. all_n i0 l P <=> (!i. i < LENGTH l ==> P (i0 + i) (EL i l))
+      #|  forall P (l:(A)list) i0. all_n i0 l P <=> (forall i. i < LENGTH l ==> P (i0 + i) (EL i l))
       #|  1 + j - 1 = j /\\ 1 + i - 1 = i
       #|  j - 1
       #|  i - 1
@@ -191,10 +191,10 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  LENGTH (EL (i - 1) dd_bounds_list:(real#real)list) = i
       #|  s:real
       #|  i:num
-      #|  !i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w
+      #|  forall i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w
       #|  ITLIST2 _1 _2 _3 _4
-      #|  !f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error
-      #|  !f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error
+      #|  forall f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error
+      #|  forall f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error
       #|  1 + x - 1 = x
       #|  x - 1
       #|  x:num
@@ -210,15 +210,15 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  diff2c_domain domain (f:real^N->real)
       #|  diff2_domain domain (f:real^N->real)
       #|  ITLIST2 _1 _2 _3 _4
-      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))
+      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))
       #|  lo:real
       #|  f_lo - a:real
-      #|  m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(!p. p IN interval [domain] ==> f p <= hi)
+      #|  m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(forall p. p IN interval [domain] ==> f p <= hi)
       #|  hi:real
       #|  f_hi + a:real
-      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (!p. p IN interval [domain] ==> lo <= f p)
+      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (forall p. p IN interval [domain] ==> lo <= f p)
       #|  diff2c_domain domain (f:real^N->real)
-      #|  !i. 1 <= i ==> 1 + i - 1 = i
+      #|  forall i. 1 <= i ==> 1 + i - 1 = i
       #|  1 <= j /\\ j <= n ==> j - 1 < n
       #|  j - 1
       #|  x:real^N
@@ -237,13 +237,13 @@ test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
       #|  diff2_domain domain (f:real^N->real)
       #|  1 <= i /\\ i <= dimindex (:N)
       #|  ITLIST2 _1 _2 _3 _4
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))
       #|  lo:real
       #|  df_lo - error
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (!x. x IN interval [domain] ==> partial i f x <= hi)
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (forall x. x IN interval [domain] ==> partial i f x <= hi)
       #|  hi:real
       #|  df_hi + error
-      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> lo <= partial i f x)
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (forall x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (forall x. x IN interval [domain] ==> lo <= partial i f x)
       #|  ((P ==> Q) /\\ (P ==> R)) <=> (P ==> Q /\\ R)
       #|  dd_list : (real#real)list
       #|  j IN 1..dimindex (:N)

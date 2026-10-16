@@ -57,7 +57,7 @@ pub fn vec2_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// COLLINEAR_3_2Dzero
 fn step_6() -> Unit raise {
-  collinear_3_2dzero_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2\n  by REWRITE_TAC[COLLINEAR_3_2D] THEN VEC2_TAC;\n")))
+  collinear_3_2dzero_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2\n  by REWRITE_TAC[COLLINEAR_3_2D] THEN VEC2_TAC;\n")))
 }
 
 ///|
@@ -88,7 +88,7 @@ fn step_7() -> Unit raise {
 ///|
 /// Noncollinear_3ImpliesDistinct
 fn step_8() -> Unit raise {
-  noncollinear_3impliesdistinct_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !a b c:real^N. ~collinear {a,b,c}  ==>  ~(a = b) /\\ ~(a = c) /\\ ~(b = c)\n  by COLLINEAR_BETWEEN_CASES, BETWEEN_REFL;\n")))
+  noncollinear_3impliesdistinct_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall a b c:real^N. ~collinear {a,b,c}  ==>  ~(a = b) /\\ ~(a = c) /\\ ~(b = c)\n  by COLLINEAR_BETWEEN_CASES, BETWEEN_REFL;\n")))
 }
 
 ///|
@@ -182,7 +182,7 @@ fn step_13() -> Unit raise {
 ///|
 /// Noncollinear_2Span
 fn step_14() -> Unit raise {
-  noncollinear_2span_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let u v w be real^2;\n  assume ~collinear  {vec 0,v,w}        [H1];\n  thus ? s t. s % v + t % w = u\n\n  proof\n    !n r. ~(r < n)  /\\  r <= MIN n n  ==>  r = n     [easy_arith] by ARITH_RULE;\n    ~(w$1 * v$2 = v$1 * w$2)     [H1'] by H1, COLLINEAR_3_2Dzero;\n    consider M such that\n    M = transp(vector[v;w]):real^2^2     [Mexists];\n    det M = v$1 * w$2 - w$1 * v$2     by -, DIMINDEX_2, SUM_2, TRANSP_COMPONENT, VECTOR_2, LAMBDA_BETA, ARITH, CART_EQ, FORALL_2, DET_2;\n    ~(det M = &0)     by -, H1', REAL_ARITH;\n    consider x s t such that\n    M ** x = u /\\ s = x$1 /\\ t = x$2     by -, easy_arith, DET_EQ_0_RANK, RANK_BOUND, MATRIX_FULL_LINEAR_EQUATIONS;\n     v$1 * s + w$1 * t = u$1  /\\  v$2 * s + w$2 * t = u$2     by Mexists, -, SIMP_TAC[matrix_vector_mul; DIMINDEX_2; SUM_2; TRANSP_COMPONENT; VECTOR_2; LAMBDA_BETA; ARITH; CART_EQ; FORALL_2] THEN MESON_TAC[];\n    s % v + t % w = u     by -, REAL_MUL_SYM, VECTOR_MUL_COMPONENT, VECTOR_ADD_COMPONENT, VEC2_TAC;\n  qed     by -;\n")))
+  noncollinear_2span_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let u v w be real^2;\n  assume ~collinear  {vec 0,v,w}        [H1];\n  thus ? s t. s % v + t % w = u\n\n  proof\n    forall n r. ~(r < n)  /\\  r <= MIN n n  ==>  r = n     [easy_arith] by ARITH_RULE;\n    ~(w$1 * v$2 = v$1 * w$2)     [H1'] by H1, COLLINEAR_3_2Dzero;\n    consider M such that\n    M = transp(vector[v;w]):real^2^2     [Mexists];\n    det M = v$1 * w$2 - w$1 * v$2     by -, DIMINDEX_2, SUM_2, TRANSP_COMPONENT, VECTOR_2, LAMBDA_BETA, ARITH, CART_EQ, FORALL_2, DET_2;\n    ~(det M = &0)     by -, H1', REAL_ARITH;\n    consider x s t such that\n    M ** x = u /\\ s = x$1 /\\ t = x$2     by -, easy_arith, DET_EQ_0_RANK, RANK_BOUND, MATRIX_FULL_LINEAR_EQUATIONS;\n     v$1 * s + w$1 * t = u$1  /\\  v$2 * s + w$2 * t = u$2     by Mexists, -, SIMP_TAC[matrix_vector_mul; DIMINDEX_2; SUM_2; TRANSP_COMPONENT; VECTOR_2; LAMBDA_BETA; ARITH; CART_EQ; FORALL_2] THEN MESON_TAC[];\n    s % v + t % w = u     by -, REAL_MUL_SYM, VECTOR_MUL_COMPONENT, VECTOR_ADD_COMPONENT, VEC2_TAC;\n  qed     by -;\n")))
 }
 
 ///|
@@ -533,7 +533,7 @@ pub fn oriented_area() -> @kernel.Thm {
 ///|
 /// oriented_areaSymmetry
 fn step_36() -> Unit raise {
-  oriented_areasymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !A B C A' B' C':real^2.\n  oriented_area (A,B,C) = oriented_area(A',B',C')  ==>\n  oriented_area (B,C,A) = oriented_area (B',C',A')  /\\\n  oriented_area (C,A,B) = oriented_area (C',A',B')  /\\\n  oriented_area (A,C,B) = oriented_area (A',C',B')  /\\\n  oriented_area (B,A,C) = oriented_area (B',A',C')  /\\\n  oriented_area (C,B,A) = oriented_area (C',B',A')\n  by     REWRITE_TAC[oriented_area] THEN VEC2_TAC;\n")))
+  oriented_areasymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall A B C A' B' C':real^2.\n  oriented_area (A,B,C) = oriented_area(A',B',C')  ==>\n  oriented_area (B,C,A) = oriented_area (B',C',A')  /\\\n  oriented_area (C,A,B) = oriented_area (C',A',B')  /\\\n  oriented_area (A,C,B) = oriented_area (A',C',B')  /\\\n  oriented_area (B,A,C) = oriented_area (B',A',C')  /\\\n  oriented_area (C,B,A) = oriented_area (C',B',A')\n  by     REWRITE_TAC[oriented_area] THEN VEC2_TAC;\n")))
 }
 
 ///|
@@ -564,7 +564,7 @@ fn step_37() -> Unit raise {
 ///|
 /// move
 fn step_38() -> Unit raise {
-  move__c.set(@pair.new_definition(@parser.parse_term("!A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})")))
+  move__c.set(@pair.new_definition(@parser.parse_term("forall A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})")))
 }
 
 ///|
@@ -626,7 +626,7 @@ fn step_41() -> Unit raise {
 ///|
 /// reachable
 fn step_42() -> Unit raise {
-  reachable_c.set(@pair.new_definition(@parser.parse_term("!p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
+  reachable_c.set(@pair.new_definition(@parser.parse_term("forall p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
 }
 
 ///|
@@ -641,7 +641,7 @@ pub fn reachable() -> @kernel.Thm {
 ///|
 /// reachableN
 fn step_43() -> Unit raise {
-  reachablen_c.set(@pair.new_definition(@parser.parse_term("!p p'. !n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
+  reachablen_c.set(@pair.new_definition(@parser.parse_term("forall p p'. forall n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
 }
 
 ///|
@@ -656,7 +656,7 @@ pub fn reachablen() -> @kernel.Thm {
 ///|
 /// ReachLemma
 fn step_44() -> Unit raise {
-  reachlemma_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p p'. reachable p p'  <=>  ?n.  reachableN p p' n\n  by reachable, reachableN;\n")))
+  reachlemma_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p'. reachable p p'  <=>  ?n.  reachableN p p' n\n  by reachable, reachableN;\n")))
 }
 
 ///|
@@ -703,7 +703,7 @@ fn step_46() -> Unit raise {
 ///|
 /// reachableN_CLAUSES
 fn step_47() -> Unit raise {
-  reachablen_clauses_c.set(@miz3.thm(@miz3.parse_qproof(";\n  ! p p'. (reachableN p p' 0  <=>  p = p') /\\\n  ! n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'\n\n  proof\n    let p p' be triple;\n    consider s0 such that\n    s0 = \\m:num. p';\n    reachableN p p' 0  <=>  p = p'     [0CLAUSE] by -, reachableN, LT, LE_0;\n    ! n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'     [Imp1]\n    proof\n      let n be num;\n      assume reachableN p p' (SUC n)     [H1];\n      consider s such that\n      s 0 = p /\\ s (SUC n) = p' /\\ !m. m < SUC n ==> move (s m) (s (SUC m))     [sDef] by H1, LE_0, reachableN;\n      consider q such that q = s n;\n    qed     by sDef, -, LE_0, reachableN, LT;\n    ! n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)\n    proof\n      let n be num;\n      assume ? q. reachableN p q n  /\\ move q p';\n      consider q such that\n      reachableN p q n  /\\ move q p'     [qExists] by -;\n      consider s such that\n      s 0 = p /\\ s n = q /\\ !m. m < n ==> move (s m) (s (SUC m))     [sDef] by -, reachableN, LT, LE_0;\n      consider t such that\n      t = \\m. if m < SUC n then s m else p';\n      t 0 = p /\\ t (SUC n) = p' /\\ !m. m < SUC n ==> move (t m) (t (SUC m))     [tProp] by qExists, sDef, -, LT_0, LT_REFL, LT, LT_SUC;\n    qed     by -, reachableN, LT, LE_0;\n  qed     by 0CLAUSE, Imp1, -;\n")))
+  reachablen_clauses_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p'. (reachableN p p' 0  <=>  p = p') /\\\n  forall n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'\n\n  proof\n    let p p' be triple;\n    consider s0 such that\n    s0 = \\m:num. p';\n    reachableN p p' 0  <=>  p = p'     [0CLAUSE] by -, reachableN, LT, LE_0;\n    forall n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'     [Imp1]\n    proof\n      let n be num;\n      assume reachableN p p' (SUC n)     [H1];\n      consider s such that\n      s 0 = p /\\ s (SUC n) = p' /\\ forall m. m < SUC n ==> move (s m) (s (SUC m))     [sDef] by H1, LE_0, reachableN;\n      consider q such that q = s n;\n    qed     by sDef, -, LE_0, reachableN, LT;\n    forall n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)\n    proof\n      let n be num;\n      assume ? q. reachableN p q n  /\\ move q p';\n      consider q such that\n      reachableN p q n  /\\ move q p'     [qExists] by -;\n      consider s such that\n      s 0 = p /\\ s n = q /\\ forall m. m < n ==> move (s m) (s (SUC m))     [sDef] by -, reachableN, LT, LE_0;\n      consider t such that\n      t = \\m. if m < SUC n then s m else p';\n      t 0 = p /\\ t (SUC n) = p' /\\ forall m. m < SUC n ==> move (t m) (t (SUC m))     [tProp] by qExists, sDef, -, LT_0, LT_REFL, LT, LT_SUC;\n    qed     by -, reachableN, LT, LE_0;\n  qed     by 0CLAUSE, Imp1, -;\n")))
 }
 
 ///|
@@ -798,7 +798,7 @@ fn step_52() -> Unit raise {
 ///|
 /// reachableInvariant
 fn step_53() -> Unit raise {
-  reachableinvariant_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !p p':triple. reachable p p'  ==>\n  oriented_area p = oriented_area p'\n\n  proof\n    !n. !p p'. reachableN p p' n  ==>  oriented_area p = oriented_area p'     by INDUCT_TAC THEN ASM_MESON_TAC[reachableN_CLAUSES; moveInvariant];\n  qed     by -, ReachLemma;\n")))
+  reachableinvariant_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall p p':triple. reachable p p'  ==>\n  oriented_area p = oriented_area p'\n\n  proof\n    forall n. forall p p'. reachableN p p' n  ==>  oriented_area p = oriented_area p'     by INDUCT_TAC THEN ASM_MESON_TAC[reachableN_CLAUSES; moveInvariant];\n  qed     by -, ReachLemma;\n")))
 }
 
 ///|
@@ -860,7 +860,7 @@ pub fn move2cond() -> @kernel.Thm {
 ///|
 /// reachableN_Two
 fn step_57() -> Unit raise {
-  reachablen_two_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P0 P2:triple. reachableN P0 P2 2 <=>\n  ?P1. move P0 P1 /\\ move P1 P2\n  by ONE, TWO, reachableN_CLAUSES;\n")))
+  reachablen_two_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P0 P2:triple. reachableN P0 P2 2 <=>\n  ?P1. move P0 P1 /\\ move P1 P2\n  by ONE, TWO, reachableN_CLAUSES;\n")))
 }
 
 ///|
@@ -923,7 +923,7 @@ fn step_60() -> Unit raise {
 ///|
 /// reachableN_Three
 fn step_61() -> Unit raise {
-  reachablen_three_c.set(@miz3.thm(@miz3.parse_qproof(";\n   !P0 P3:triple. reachableN P0 P3 3  <=>\n   ?P1 P2. move P0 P1 /\\ move P1 P2 /\\ move P2 P3\n\n   proof\n     3 = SUC 2     by ARITH_RULE;\n   qed     by -, reachableN_Two, reachableN_CLAUSES;\n")))
+  reachablen_three_c.set(@miz3.thm(@miz3.parse_qproof(";\n   forall P0 P3:triple. reachableN P0 P3 3  <=>\n   ?P1 P2. move P0 P1 /\\ move P1 P2 /\\ move P2 P3\n\n   proof\n     3 = SUC 2     by ARITH_RULE;\n   qed     by -, reachableN_Two, reachableN_CLAUSES;\n")))
 }
 
 ///|
@@ -954,7 +954,7 @@ fn step_62() -> Unit raise {
 ///|
 /// reachableN_Four
 fn step_63() -> Unit raise {
-  reachablen_four_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P0 P4:triple. reachableN P0 P4 4  <=>\n  ?P1 P2 P3. move P0 P1 /\\ move P1 P2 /\\ move P2 P3 /\\ move P3 P4\n\n   proof\n     4 = SUC 3     by ARITH_RULE;\n  qed     by -, reachableN_Three, reachableN_CLAUSES;\n")))
+  reachablen_four_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P0 P4:triple. reachableN P0 P4 4  <=>\n  ?P1 P2 P3. move P0 P1 /\\ move P1 P2 /\\ move P2 P3 /\\ move P3 P4\n\n   proof\n     4 = SUC 3     by ARITH_RULE;\n  qed     by -, reachableN_Three, reachableN_CLAUSES;\n")))
 }
 
 ///|
@@ -985,7 +985,7 @@ fn step_64() -> Unit raise {
 ///|
 /// moveSymmetry
 fn step_65() -> Unit raise {
-  movesymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let A B C A' B' C' be real^2;\n  assume move (A,B,C) (A',B',C')                                [H1];\n  thus move (B,C,A) (B',C',A') /\\ move (C,A,B) (C',A',B') /\\\n  move (A,C,B) (A',C',B') /\\ move (B,A,C) (B',A',C') /\\ move (C,B,A) (C',B',A')\n\n  proof\n    !A B C A':real^2. collinear {vec 0, C - B, A' - A}  ==>\n    collinear {vec 0, B - C, A' - A}     by REWRITE_TAC[COLLINEAR_3_2Dzero] THEN VEC2_TAC;\n  qed     by H1, -, move;\n")))
+  movesymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let A B C A' B' C' be real^2;\n  assume move (A,B,C) (A',B',C')                                [H1];\n  thus move (B,C,A) (B',C',A') /\\ move (C,A,B) (C',A',B') /\\\n  move (A,C,B) (A',C',B') /\\ move (B,A,C) (B',A',C') /\\ move (C,B,A) (C',B',A')\n\n  proof\n    forall A B C A':real^2. collinear {vec 0, C - B, A' - A}  ==>\n    collinear {vec 0, B - C, A' - A}     by REWRITE_TAC[COLLINEAR_3_2Dzero] THEN VEC2_TAC;\n  qed     by H1, -, move;\n")))
 }
 
 ///|
@@ -1032,7 +1032,7 @@ fn step_67() -> Unit raise {
 ///|
 /// reachableNSymmetry
 fn step_68() -> Unit raise {
-  reachablensymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  ! A B C A' B' C' n. reachableN (A,B,C) (A',B',C') n  ==>\n  reachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\n  reachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\n  reachableN (C,B,A) (C',B',A') n\n\n  proof\n    let A B C be real^2;\n    consider Q such that Q = \\n A' B' C'.\n    reachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\n    reachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\n    reachableN (C,B,A) (C',B',A') n     [Qdef];\n    consider P such that\n    P = \\n. ! A' B' C'. reachableN (A,B,C) (A',B',C') n  ==> Q n A' B' C'    [Pdef];\n    P 0     [Base] by -, Qdef, reachableN_CLAUSES, PAIR_EQ;\n    !n. P n ==> P (SUC n)\n    proof\n      let n be num;\n      assume P n [Pn];\n      ! A' B' C'. reachableN (A,B,C) (A',B',C') (SUC n)  ==> Q (SUC n) A' B' C'\n      proof\n        let A' B' C' be real^2;\n        assume reachableN (A,B,C) (A',B',C') (SUC n);\n        consider X Y Z such that\n        reachableN (A,B,C) (X,Y,Z) n /\\ move (X,Y,Z) (A',B',C')     [XYZdef] by -, reachableN_CLAUSES, PAIR_SURJECTIVE;\n      qed     by -, Qdef, Pdef, Pn, XYZdef, moveSymmetry, reachableN_CLAUSES;\n    qed     by -, Pdef;\n    !n. P n     by Base, -, INDUCT_TAC;\n  qed     by -, Pdef, Qdef;\n")))
+  reachablensymmetry_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall A B C A' B' C' n. reachableN (A,B,C) (A',B',C') n  ==>\n  reachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\n  reachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\n  reachableN (C,B,A) (C',B',A') n\n\n  proof\n    let A B C be real^2;\n    consider Q such that Q = \\n A' B' C'.\n    reachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\n    reachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\n    reachableN (C,B,A) (C',B',A') n     [Qdef];\n    consider P such that\n    P = \\n. forall A' B' C'. reachableN (A,B,C) (A',B',C') n  ==> Q n A' B' C'    [Pdef];\n    P 0     [Base] by -, Qdef, reachableN_CLAUSES, PAIR_EQ;\n    forall n. P n ==> P (SUC n)\n    proof\n      let n be num;\n      assume P n [Pn];\n      forall A' B' C'. reachableN (A,B,C) (A',B',C') (SUC n)  ==> Q (SUC n) A' B' C'\n      proof\n        let A' B' C' be real^2;\n        assume reachableN (A,B,C) (A',B',C') (SUC n);\n        consider X Y Z such that\n        reachableN (A,B,C) (X,Y,Z) n /\\ move (X,Y,Z) (A',B',C')     [XYZdef] by -, reachableN_CLAUSES, PAIR_SURJECTIVE;\n      qed     by -, Qdef, Pdef, Pn, XYZdef, moveSymmetry, reachableN_CLAUSES;\n    qed     by -, Pdef;\n    forall n. P n     by Base, -, INDUCT_TAC;\n  qed     by -, Pdef, Qdef;\n")))
 }
 
 ///|
@@ -1127,7 +1127,7 @@ fn step_73() -> Unit raise {
 ///|
 /// Basic2move_THM
 fn step_74() -> Unit raise {
-  basic2move_thm_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let A B C A' be real^2;\n  assume ~collinear {A,B,C}                                     [H1];\n  assume ~collinear {B,A,A'}                                    [H2];\n  thus ? X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)\n\n  proof\n    !r. r % (A - B) = (--r) % (B - A)  /\\  r % (A - B) = r % (A - B) + &0 % (C - B)     [add0vector_mul] by VEC2_TAC;\n    ~ ? r. A' - A = r % (A - B)     [H2'] by H2, COLLINEAR_3, COLLINEAR_LEMMA, -;\n    consider r t such that\n    A' - A = r % (A - B) + t % (C - B)     [rExists] by H1, COLLINEAR_3, Noncollinear_2Span;\n    ~(t = &0)     [tNonzero] by -, add0vector_mul, H2';\n    consider s X such that\n    s = r / t  /\\  X = C + s % (A - B)     [Xexists] by rExists;\n    A' - A = (t * s) % (A - B) + t % (C - B)     by rExists, -, tNonzero, REAL_DIV_LMUL;\n    A' - A = t % (X - B)     [tProp] by -, Xexists, VEC2_TAC;\n    X - C = (-- s) % (B - A)     by -, Xexists, VEC2_TAC;\n    collinear {vec 0,B - A,X - C}  /\\  collinear {vec 0,X - B,A' - A}     by -, tProp, COLLINEAR_LEMMA;\n  qed     by -, move;\n")))
+  basic2move_thm_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let A B C A' be real^2;\n  assume ~collinear {A,B,C}                                     [H1];\n  assume ~collinear {B,A,A'}                                    [H2];\n  thus ? X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)\n\n  proof\n    forall r. r % (A - B) = (--r) % (B - A)  /\\  r % (A - B) = r % (A - B) + &0 % (C - B)     [add0vector_mul] by VEC2_TAC;\n    ~ ? r. A' - A = r % (A - B)     [H2'] by H2, COLLINEAR_3, COLLINEAR_LEMMA, -;\n    consider r t such that\n    A' - A = r % (A - B) + t % (C - B)     [rExists] by H1, COLLINEAR_3, Noncollinear_2Span;\n    ~(t = &0)     [tNonzero] by -, add0vector_mul, H2';\n    consider s X such that\n    s = r / t  /\\  X = C + s % (A - B)     [Xexists] by rExists;\n    A' - A = (t * s) % (A - B) + t % (C - B)     by rExists, -, tNonzero, REAL_DIV_LMUL;\n    A' - A = t % (X - B)     [tProp] by -, Xexists, VEC2_TAC;\n    X - C = (-- s) % (B - A)     by -, Xexists, VEC2_TAC;\n    collinear {vec 0,B - A,X - C}  /\\  collinear {vec 0,X - B,A' - A}     by -, tProp, COLLINEAR_LEMMA;\n  qed     by -, move;\n")))
 }
 
 ///|
@@ -1709,7 +1709,7 @@ fn step_110() -> Unit raise {
 ///|
 /// reachableN_Five
 fn step_111() -> Unit raise {
-  reachablen_five_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !P0 P5:triple. reachableN P0 P5 5  <=>\n  ?P1 P2 P3 P4. move P0 P1 /\\ move P1 P2 /\\ move P2 P3 /\\ move P3 P4 /\\ move P4 P5\n\n  proof\n    5 = SUC 4     by ARITH_RULE;\n  qed by -, reachableN_CLAUSES, reachableN_Four;\n")))
+  reachablen_five_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall P0 P5:triple. reachableN P0 P5 5  <=>\n  ?P1 P2 P3 P4. move P0 P1 /\\ move P1 P2 /\\ move P2 P3 /\\ move P3 P4 /\\ move P4 P5\n\n  proof\n    5 = SUC 4     by ARITH_RULE;\n  qed by -, reachableN_CLAUSES, reachableN_Four;\n")))
 }
 
 ///|
@@ -1724,7 +1724,7 @@ pub fn reachablen_five() -> @kernel.Thm {
 ///|
 /// EasyCollinearMoves
 fn step_112() -> Unit raise {
-  easycollinearmoves_c.set(@miz3.thm(@miz3.parse_qproof(";\n  (!A A' B:real^2. move (A:real^2,B,B) (A',B,B))  /\\\n  !A B B' C:real^2. collinear {A:real^2,B,C} /\\ collinear {A,B',C}\n  ==>  move (A,B,C) (A,B',C)\n  by     REWRITE_TAC[move; COLLINEAR_3_2D] THEN VEC2_TAC;\n")))
+  easycollinearmoves_c.set(@miz3.thm(@miz3.parse_qproof(";\n  (forall A A' B:real^2. move (A:real^2,B,B) (A',B,B))  /\\\n  forall A B B' C:real^2. collinear {A:real^2,B,C} /\\ collinear {A,B',C}\n  ==>  move (A,B,C) (A,B',C)\n  by     REWRITE_TAC[move; COLLINEAR_3_2D] THEN VEC2_TAC;\n")))
 }
 
 ///|

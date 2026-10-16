@@ -20,9 +20,9 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..1..3..6..13..22..40..76..134..249..solved at 267
 Formal_ineqs/verifier/m_verifier quotations (1060):
-  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (!x. x IN interval [domain] ==> f x <= hi)
-  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (!x. x IN interval [domain] ==> lo <= f x)
-  !a b c d. (!i. i IN 1..dimindex (:N) ==> a$i <= c$i /\\ d$i <= b$i) ==>\n\t\t\t\t  interval [c:real^N,d] SUBSET interval [a,b]
+  (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (forall x. x IN interval [domain] ==> f x <= hi)
+  (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (forall x. x IN interval [domain] ==> lo <= f x)
+  forall a b c d. (forall i. i IN 1..dimindex (:N) ==> a$i <= c$i /\\ d$i <= b$i) ==>\n\t\t\t\t  interval [c:real^N,d] SUBSET interval [a,b]
   i:num
   1 <= i
   (P:num->bool) i
@@ -50,7 +50,7 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   j:num
   i = j:num
   i = j:num
-  !j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = x$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = z$j /\\ y'$j = z$j /\\ w'$j = &0 ==>  \n    m_cell_domain (u,z) y' w' /\\ interval [u,z] SUBSET interval [x,z]
+  forall j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = x$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = z$j /\\ y'$j = z$j /\\ w'$j = &0 ==>  \n    m_cell_domain (u,z) y' w' /\\ interval [u,z] SUBSET interval [x,z]
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
@@ -65,7 +65,7 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   j:num
   i = j:num
   i = j:num
-  !j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = z$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = x$j /\\ y'$j = x$j /\\ w'$j = &0 ==> \n    m_cell_domain (x,u) y' w' /\\ interval [x,u] SUBSET interval [x,z]
+  forall j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = z$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = x$j /\\ y'$j = x$j /\\ w'$j = &0 ==> \n    m_cell_domain (x,u) y' w' /\\ interval [x,u] SUBSET interval [x,z]
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
@@ -365,27 +365,27 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   i:num
   1 <= i
   (P:num->bool) i
-  m_cell_pass f domain <=> (!x. x IN interval [domain] ==> f x < &0)
-  m_cell_list_pass fs domain <=>\n  (!x:real^N. x IN interval [domain] ==> ITLIST (\\f r. f x < &0 \\/ r) fs F)
+  m_cell_pass f domain <=> (forall x. x IN interval [domain] ==> f x < &0)
+  m_cell_list_pass fs domain <=>\n  (forall x:real^N. x IN interval [domain] ==> ITLIST (\\f r. f x < &0 \\/ r) fs F)
   m_cell_pass f domain <=> m_cell_list_pass [f] domain
   m_cell_pass f domain ==> m_cell_list_pass [f] domain
   hi:real
-  (!x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_pass f domain
-  (!x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_list_pass [f] domain
-  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_pass f domain
-  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_list_pass [f] domain
+  (forall x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_pass f domain
+  (forall x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_list_pass [f] domain
+  (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_pass f domain
+  (forall x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_list_pass [f] domain
   interval [domain2] SUBSET interval [domain] /\\\n\t\t\t\t\t\t m_cell_pass f domain ==> m_cell_pass f domain2
   interval [domain2] SUBSET interval [domain] /\\\n\t\t\t\t\t\t m_cell_list_pass fs domain ==> m_cell_list_pass fs domain2
   i = j:num
   ~(a <= b) ==> b <= a:real
   i = j:num
   (y:real^N)$j <= (v:real^N)$j
-  !j x z v u P Q. \n\t\t\t (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t    u$i = x$i /\\ v$i = z$i) ==>\n\t\t\t v$j = u$j ==>\n\t\t\t     (!p. p IN interval [x,v] ==> P p) ==>\n\t\t\t     (!p. p IN interval [u,z] ==> Q p) ==>\n\t\t\t     (!p. p IN interval [x,z:real^N] ==> P p \\/ Q p)
+  forall j x z v u P Q. \n\t\t\t (forall i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t    u$i = x$i /\\ v$i = z$i) ==>\n\t\t\t v$j = u$j ==>\n\t\t\t     (forall p. p IN interval [x,v] ==> P p) ==>\n\t\t\t     (forall p. p IN interval [u,z] ==> Q p) ==>\n\t\t\t     (forall p. p IN interval [x,z:real^N] ==> P p \\/ Q p)
   \\x:real^N. f x < &0
   \\x:real^N. f x < &0
-  !j x z v u f. \n\t\t\t\t     (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_pass f (x,v) ==> \n\t\t\t\t\t m_cell_pass f (u,z) ==>\n\t\t\t\t\t m_cell_pass f (x,z:real^N)
-  !P l1 l2. ITLIST (\\a r. P a \\/ r) (APPEND l1 l2) F\n\t\t\t       <=> ITLIST (\\a r. P a \\/ r) l1 F \\/ ITLIST (\\a r. P a \\/ r) l2 F
-  !j x z v u fs1 fs2. \n\t\t\t\t     (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_list_pass fs1 (x,v) ==> \n\t\t\t\t\t m_cell_list_pass fs2 (u,z) ==>\n\t\t\t\t\t m_cell_list_pass (APPEND fs1 fs2) (x,z:real^N)
+  forall j x z v u f. \n\t\t\t\t     (forall i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_pass f (x,v) ==> \n\t\t\t\t\t m_cell_pass f (u,z) ==>\n\t\t\t\t\t m_cell_pass f (x,z:real^N)
+  forall P l1 l2. ITLIST (\\a r. P a \\/ r) (APPEND l1 l2) F\n\t\t\t       <=> ITLIST (\\a r. P a \\/ r) l1 F \\/ ITLIST (\\a r. P a \\/ r) l2 F
+  forall j x z v u fs1 fs2. \n\t\t\t\t     (forall i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_list_pass fs1 (x,v) ==> \n\t\t\t\t\t m_cell_list_pass fs2 (u,z) ==>\n\t\t\t\t\t m_cell_list_pass (APPEND fs1 fs2) (x,z:real^N)
   i:num
   1 <= i
   (P:num->bool) i
@@ -615,8 +615,8 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   f:real^N->real
   -- &1
   interval [x:real^N,z] = {}
-  !f x z. lift o f continuous_on interval [x,z:real^N] /\\ m_cell_pass f (x,z) ==>\n\t\t\t ?a. a < &0 /\\ !y. y IN interval [x,z] ==> f y <= a
-  !(f:real^N->real) domain. diff2_domain domain f ==>\n\t\t\t\t\t     lift o f continuous_on interval [domain]
+  forall f x z. lift o f continuous_on interval [x,z:real^N] /\\ m_cell_pass f (x,z) ==>\n\t\t\t ?a. a < &0 /\\ forall y. y IN interval [x,z] ==> f y <= a
+  forall(f:real^N->real) domain. diff2_domain domain f ==>\n\t\t\t\t\t     lift o f continuous_on interval [domain]
   a:real
   lo:real
   diff2_domain domain (f:real^N->real)
@@ -636,9 +636,9 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   diff2c_domain domain (f:real^N->real)
   diff2_domain domain (f:real^N->real)
   i:num
-  ~(!i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
+  ~(forall i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
   y:real^N
-  !j x z u domain lo f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t   u$j = z$j ==>\n\t\t\t\t\t       &0 <= lo ==>\n\t\t\t\t\t       (!y. y IN interval [domain] ==> lo <= partial j f y) ==>\n\t\t\t\t\t       m_cell_pass f (u,z) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
+  forall j x z u domain lo f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t   u$j = z$j ==>\n\t\t\t\t\t       &0 <= lo ==>\n\t\t\t\t\t       (forall y. y IN interval [domain] ==> lo <= partial j f y) ==>\n\t\t\t\t\t       m_cell_pass f (u,z) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
   ~P <=> (P <=> F)
   a:real
   hi:real
@@ -659,9 +659,9 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   diff2c_domain domain (f:real^N->real)
   diff2_domain domain (f:real^N->real)
   i:num
-  ~(!i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
+  ~(forall i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
   y:real^N
-  !j x z u domain hi f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t   u$j = x$j ==>\n\t\t\t\t\t       hi <= &0 ==>\n\t\t\t\t\t       (!y. y IN interval [domain] ==> partial j f y <= hi) ==>\n\t\t\t\t\t       m_cell_pass f (x,u) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
+  forall j x z u domain hi f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t   u$j = x$j ==>\n\t\t\t\t\t       hi <= &0 ==>\n\t\t\t\t\t       (forall y. y IN interval [domain] ==> partial j f y <= hi) ==>\n\t\t\t\t\t       m_cell_pass f (x,u) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
   ~P <=> (P <=> F)
   max a a'
   a:real
@@ -691,20 +691,20 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   diff2c_domain (x,z) (f:real^N->real)
   diff2_domain (x,z) (f:real^N->real)
   (y:real^N)$i
-  !i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i
+  forall i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i
   y:real^N
-  !j x z u v lo f. \n\t\tdiff2c_domain (x,z) f ==>\n\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\t\tu$j = x$j ==> v$j = z$j ==>\n\t\t    &0 <= lo ==>\n\t\t    (!y. y IN interval [x,z] ==> lo <= partial2 j j f y) ==>\n\t\t    m_cell_pass f (x,u) ==>\n\t\t    m_cell_pass f (v,z) ==>\n\t\t    m_cell_pass f (x:real^N,z)
+  forall j x z u v lo f. \n\t\tdiff2c_domain (x,z) f ==>\n\t\t(forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\t\tu$j = x$j ==> v$j = z$j ==>\n\t\t    &0 <= lo ==>\n\t\t    (forall y. y IN interval [x,z] ==> lo <= partial2 j j f y) ==>\n\t\t    m_cell_pass f (x,u) ==>\n\t\t    m_cell_pass f (v,z) ==>\n\t\t    m_cell_pass f (x:real^N,z)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   x:A
   x:A
   h:A
-  !P l. ITLIST (\\x r. P x \\/ r) l F <=> ?x:A. MEM x l /\\ P x
-  !fs domain. m_cell_list_pass fs domain <=> \n\t\t\t\t   (!y:real^N. y IN interval [domain] ==> ?f. MEM f fs /\\ f y < &0)
-  !fs fs2 domain. m_cell_list_pass fs domain\n\t\t\t\t      ==> m_cell_list_pass (APPEND fs fs2) domain
+  forall P l. ITLIST (\\x r. P x \\/ r) l F <=> ?x:A. MEM x l /\\ P x
+  forall fs domain. m_cell_list_pass fs domain <=> \n\t\t\t\t   (forall y:real^N. y IN interval [domain] ==> ?f. MEM f fs /\\ f y < &0)
+  forall fs fs2 domain. m_cell_list_pass fs domain\n\t\t\t\t      ==> m_cell_list_pass (APPEND fs fs2) domain
   i:num
   y:real^N
-  !x:real^N. interval [x,x] = {x}
+  forall x:real^N. interval [x,x] = {x}
   f:real^N->real
   &0
   domain:real^N#real^N
@@ -729,7 +729,7 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   interval [xx:real^N,zz] SUBSET interval [domain]
   (zz:real^N) = lambda i. if i = j then (z:real^N)$i else (y:real^N)$i
   (xx:real^N) = lambda i. if i = j then (x:real^N)$i else (y:real^N)$i
-  !j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t\tu$j = z$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (!y. y IN interval [domain] ==> &0 <= partial j f y)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (u,z) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
+  forall j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t\tu$j = z$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (forall y. y IN interval [domain] ==> &0 <= partial j f y)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (u,z) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
   f:real^N->real
   &0
   domain:real^N#real^N
@@ -754,7 +754,7 @@ Formal_ineqs/verifier/m_verifier quotations (1060):
   interval [xx:real^N,zz] SUBSET interval [domain]
   (zz:real^N) = lambda i. if i = j then (z:real^N)$i else (y:real^N)$i
   (xx:real^N) = lambda i. if i = j then (x:real^N)$i else (y:real^N)$i
-  !j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t\tu$j = x$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (!y. y IN interval [domain] ==> partial j f y <= &0)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,u) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
+  forall j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t\tu$j = x$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (forall y. y IN interval [domain] ==> partial j f y <= &0)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,u) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
   0 = _0
   i:num
   1 <= i

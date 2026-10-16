@@ -84552,7 +84552,7 @@ Generating HOL version of proof
 0..0..1..solved at 4
 0..0..1..solved at 4
 Probability/distributions quotations (1528):
-  bernoulli_rv (p:A prob_space) (X:A->real) (q:real) <=>\n   simple_rv p X /\\\n   &0 <= q /\\ q <= &1 /\\\n   (!x. x IN prob_carrier p ==> X x = &0 \\/ X x = &1) /\\\n   prob p {x | x IN prob_carrier p /\\ X x = &1} = q
+  bernoulli_rv (p:A prob_space) (X:A->real) (q:real) <=>\n   simple_rv p X /\\\n   &0 <= q /\\ q <= &1 /\\\n   (forall x. x IN prob_carrier p ==> X x = &0 \\/ X x = &1) /\\\n   prob p {x | x IN prob_carrier p /\\ X x = &1} = q
   simple_rv (p:A prob_space) (X:A->real)
   z:A
   (z:A) IN prob_carrier p
@@ -84563,7 +84563,7 @@ Probability/distributions quotations (1528):
   (z:A) IN prob_carrier p
   z:A
   {x:A | x IN prob_carrier p /\\ X x = &0} =\n      prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x = &1}
-  !p:A prob_space X q.\n      bernoulli_rv p X q\n      ==> prob p {x | x IN prob_carrier p /\\ X x = &0} = &1 - q
+  forall p:A prob_space X q.\n      bernoulli_rv p X q\n      ==> prob p {x | x IN prob_carrier p /\\ X x = &0} = &1 - q
   (z:A) IN prob_carrier p
   z:A
   v:real
@@ -84574,7 +84574,7 @@ Probability/distributions quotations (1528):
   ~((z:A) IN A)
   (z:A) IN A
   z:A
-  !z:A. z IN prob_carrier p ==> X z = indicator_fn A z
+  forall z:A. z IN prob_carrier p ==> X z = indicator_fn A z
   simple_rv (p:A prob_space) (X:A->real)
   z:A
   (z:A) IN prob_carrier p
@@ -84582,7 +84582,7 @@ Probability/distributions quotations (1528):
   {x:A | x IN prob_carrier p /\\ X x = &1} =\n       prob_carrier p DIFF {x | x IN prob_carrier p /\\ (X:A->real) x <= &0}
   (A:A->bool) IN prob_events p
   A = {x:A | x IN prob_carrier p /\\ X x = &1}
-  !p:A prob_space X q.\n      bernoulli_rv p X q ==> simple_expectation p X = q
+  forall p:A prob_space X q.\n      bernoulli_rv p X q ==> simple_expectation p X = q
   (X:A->real) z = v
   z:A
   (X:A->real) z * X z = v
@@ -84598,14 +84598,14 @@ Probability/distributions quotations (1528):
   simple_expectation (p:A prob_space) (\\x:A. X x * X x) =\n      simple_expectation p X
   (\\x:A. (X:A->real) x pow 2) = (\\x. X x * X x)
   simple_expectation (p:A prob_space) X = q
-  !p:A prob_space X q.\n      bernoulli_rv p X q ==> simple_variance p X = q * (&1 - q)
+  forall p:A prob_space X q.\n      bernoulli_rv p X q ==> simple_variance p X = q * (&1 - q)
   a:A->bool
   p:A prob_space
   (z:A) IN a
   (z:A) IN prob_carrier p
   z:A
-  !p:A prob_space a.\n      a IN prob_events p\n      ==> bernoulli_rv p (indicator_fn a) (prob p a)
-  binomial_rv (p:A prob_space) (X:A->real) (n:num) (q:real) <=>\n   simple_rv p X /\\\n   &0 <= q /\\ q <= &1 /\\\n   (!x. x IN prob_carrier p ==> ?k. k <= n /\\ X x = &k) /\\\n   !k. k <= n ==>\n     prob p {x | x IN prob_carrier p /\\ X x = &k} =\n     &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
+  forall p:A prob_space a.\n      a IN prob_events p\n      ==> bernoulli_rv p (indicator_fn a) (prob p a)
+  binomial_rv (p:A prob_space) (X:A->real) (n:num) (q:real) <=>\n   simple_rv p X /\\\n   &0 <= q /\\ q <= &1 /\\\n   (forall x. x IN prob_carrier p ==> ?k. k <= n /\\ X x = &k) /\\\n   forall k. k <= n ==>\n     prob p {x | x IN prob_carrier p /\\ X x = &k} =\n     &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
   simple_rv (p:A prob_space) (X:A->real)
   z:A
   (z:A) IN prob_carrier p
@@ -84622,22 +84622,22 @@ Probability/distributions quotations (1528):
   0
   z:A
   z:A
-  !p:A prob_space X q.\n      bernoulli_rv p X q ==> binomial_rv p X 1 q
+  forall p:A prob_space X q.\n      bernoulli_rv p X q ==> binomial_rv p X 1 q
   k = 0 \\/ SUC(k - 1) = k
   (k * b * xk * y) * x:real = k * b * (x * xk) * y
   k:num
   &1 - q
   q:real
-  !x:real. sum(0..n)\n        (\\k. &(binom(n,k)) * x pow k * (y:real) pow (n - k)) =\n        (x + y) pow n
+  forall x:real. sum(0..n)\n        (\\k. &(binom(n,k)) * x pow k * (y:real) pow (n - k)) =\n        (x + y) pow n
   x:real
   \\x:real. sum(0..n)\n        (\\k. &(binom(n,k)) * x pow k * (y:real) pow (n - k))
-  !x:real y:real.\n       sum(0..n) (\\k. &k * &(binom(n,k)) * x pow (k - 1) * y pow (n - k)) =\n       &n * (x + y) pow (n - 1)
-  !n q. sum(0..n)\n      (\\k. &k * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) = &n * q
+  forall x:real y:real.\n       sum(0..n) (\\k. &k * &(binom(n,k)) * x pow (k - 1) * y pow (n - k)) =\n       &n * (x + y) pow (n - 1)
+  forall n q. sum(0..n)\n      (\\k. &k * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) = &n * q
   q:real
   n:num
-  !n q. sum(0..n)\n      (\\k. (&k - &n * q) pow 2 *\n           &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) =\n      &n * q * (&1 - q)
+  forall n q. sum(0..n)\n      (\\k. (&k - &n * q) pow 2 *\n           &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) =\n      &n * q * (&1 - q)
   k:num
-  !k. k IN 0..n ==>\n       &k * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = &k} =\n       &k * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
+  forall k. k IN 0..n ==>\n       &k * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = &k} =\n       &k * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
   {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} = {}
   v:real
   sum (IMAGE (X:A->real) (prob_carrier p))\n       (\\v. v * prob p {x:A | x IN prob_carrier p /\\ (X:A->real) x = v}) =\n      sum (IMAGE (\\k:num. &k) (0..n))\n       (\\v. v * prob (p:A prob_space)\n                  {x:A | x IN prob_carrier p /\\ (X:A->real) x = v})
@@ -84645,10 +84645,10 @@ Probability/distributions quotations (1528):
   IMAGE (\\k:num. &k) (0..n)
   FINITE (IMAGE (X:A->real) (prob_carrier p))
   IMAGE (X:A->real) (prob_carrier p) SUBSET {&k | k <= n}
-  !p:A prob_space X n q.\n      binomial_rv p X n q ==> simple_expectation p X = &n * q
+  forall p:A prob_space X n q.\n      binomial_rv p X n q ==> simple_expectation p X = &n * q
   sum(0..n) (\\k. &k pow 2 * &(binom(n,k)) * q pow k *\n                      (&1 - q) pow (n - k)) =\n      sum(0..n) (\\k.\n        (&k - &n * q) pow 2 * &(binom(n,k)) * q pow k *\n          (&1 - q) pow (n - k) +\n        &2 * (&n * q) * &k * &(binom(n,k)) * q pow k *\n          (&1 - q) pow (n - k) -\n        (&n * q) pow 2 * &(binom(n,k)) * q pow k *\n          (&1 - q) pow (n - k))
-  !k. k IN 0..n ==>\n       &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) =\n       (&k - &n * q) pow 2 * &(binom(n,k)) * q pow k *\n         (&1 - q) pow (n - k) +\n       &2 * (&n * q) * &k * &(binom(n,k)) * q pow k *\n         (&1 - q) pow (n - k) -\n       (&n * q) pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
-  !n q. sum(0..n)\n      (\\k. &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) =\n      &n * q * (&1 - q) + (&n * q) pow 2
+  forall k. k IN 0..n ==>\n       &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) =\n       (&k - &n * q) pow 2 * &(binom(n,k)) * q pow k *\n         (&1 - q) pow (n - k) +\n       &2 * (&n * q) * &k * &(binom(n,k)) * q pow k *\n         (&1 - q) pow (n - k) -\n       (&n * q) pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
+  forall n q. sum(0..n)\n      (\\k. &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)) =\n      &n * q * (&1 - q) + (&n * q) pow 2
   2
   (X:A->real) z = &k
   z:A
@@ -84656,7 +84656,7 @@ Probability/distributions quotations (1528):
   z:A
   {x:A | x IN prob_carrier p /\\ (X:A->real) x pow 2 = (&k) pow 2} =\n       {x | x IN prob_carrier p /\\ X x = &k}
   k:num
-  !k. k IN 0..n ==>\n       &k pow 2 * prob (p:A prob_space)\n         {x:A | x IN prob_carrier p /\\ (X:A->real) x pow 2 = (&k) pow 2} =\n       &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
+  forall k. k IN 0..n ==>\n       &k pow 2 * prob (p:A prob_space)\n         {x:A | x IN prob_carrier p /\\ (X:A->real) x pow 2 = (&k) pow 2} =\n       &k pow 2 * &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
   2
   &x = &y
   0..n
@@ -84671,15 +84671,15 @@ Probability/distributions quotations (1528):
   {v:real | v IN IMAGE (\\x:A. (X:A->real) x pow 2) (prob_carrier p)} =\n      IMAGE (\\x. X x pow 2) (prob_carrier p)
   simple_expectation (p:A prob_space) (\\x:A. (X:A->real) x pow 2) =\n      &n * q * (&1 - q) + (&n * q) pow 2
   simple_expectation (p:A prob_space) X = &n * q
-  !p:A prob_space X n q.\n      binomial_rv p X n q ==> simple_variance p X = &n * q * (&1 - q)
+  forall p:A prob_space X n q.\n      binomial_rv p X n q ==> simple_variance p X = &n * q * (&1 - q)
   Cx(x:real)
   Cx o (\\n. x pow n / &(FACT n)) =\n     (\\n. Cx(x) pow n / Cx(&(FACT n)))
-  !x. ((\\n. x pow n / &(FACT n)) real_sums exp(x)) (from 0)
+  forall x. ((\\n. x pow n / &(FACT n)) real_sums exp(x)) (from 0)
   poisson_pmf (lam:real) (k:num) = exp(--lam) * lam pow k / &(FACT k)
   &1 = exp(--lam) * exp(lam)
   poisson_pmf lam =\n     (\\k. exp(--lam) * lam pow k / &(FACT k))
-  !lam. (poisson_pmf lam real_sums &1) (from 0)
-  !lam k. &0 <= lam ==> &0 <= poisson_pmf lam k
+  forall lam. (poisson_pmf lam real_sums &1) (from 0)
+  forall lam k. &0 <= lam ==> &0 <= poisson_pmf lam k
   n - 1
   ?m. n = SUC m /\\ N <= m
   n:num
@@ -84687,8 +84687,8 @@ Probability/distributions quotations (1528):
   N:num
   e:real
   e:real
-  !f l. ((\\n. f(SUC n)) ---> l) sequentially ==> (f ---> l) sequentially
-  !c. &0 < c ==> ((\\n. (&1 - c / &n) pow n) ---> exp(--c)) sequentially
+  forall f l. ((\\n. f(SUC n)) ---> l) sequentially ==> (f ---> l) sequentially
+  forall c. &0 < c ==> ((\\n. (&1 - c / &n) pow n) ---> exp(--c)) sequentially
   &0 = &k * &0
   &0
   &1
@@ -84700,7 +84700,7 @@ Probability/distributions quotations (1528):
   n:num
   k + 1
   \\n:num. &1 - &k / &n
-  !k. ((\\n. &(n - k) / &n) ---> &1) sequentially
+  forall k. ((\\n. &(n - k) / &n) ---> &1) sequentially
   (\\n. &(n - k) / (&n * &(SUC k))) =\n      (\\n. (&(n - k) / &n) * inv(&(SUC k)))
   inv(&(FACT k)) * inv(&(SUC k)) =\n      inv(&(FACT k)) * (&1 * inv(&(SUC k)))
   ~(nk = &0) /\\ ~(n = &0) /\\ ~(sk = &0) ==>\n       ((nk' * bnk) / sk) / (n * nk) =\n       (bnk / nk) * (nk' / (n * sk))
@@ -84720,7 +84720,7 @@ Probability/distributions quotations (1528):
   \\n. (&(binom(n,k)) / &n pow k) *\n                    (&(n - k) / (&n * &(SUC k)))
   ((\\n. &(binom(n,SUC k)) / &n pow SUC k) --->\n       inv(&(FACT k)) * inv(&(SUC k))) sequentially
   inv(&(FACT(SUC k))) = inv(&(FACT k)) * inv(&(SUC k))
-  !k. ((\\n. &(binom(n,k)) / &n pow k) ---> inv(&(FACT k))) sequentially
+  forall k. ((\\n. &(binom(n,k)) / &n pow k) ---> inv(&(FACT k))) sequentially
   &1 = &1 pow k
   &0 = lam * &0
   &0
@@ -84750,15 +84750,15 @@ Probability/distributions quotations (1528):
   lam:real
   \\n. (&(binom(n,k)) / &n pow k) *\n     (lam pow k * (&1 - lam / &n) pow (n - k))
   exp(--lam) * lam pow k / &(FACT k) =\n      inv(&(FACT k)) * (lam pow k * exp(--lam))
-  !k lam. &0 < lam ==>\n      ((\\n. &(binom(n,k)) * (lam / &n) pow k *\n            (&1 - lam / &n) pow (n - k))\n       ---> poisson_pmf lam k) sequentially
+  forall k lam. &0 < lam ==>\n      ((\\n. &(binom(n,k)) * (lam / &n) pow k *\n            (&1 - lam / &n) pow (n - k))\n       ---> poisson_pmf lam k) sequentially
   geometric_pmf (p:real) (k:num) = p * (&1 - p) pow k
   geometric_pmf p = (\\k. p * (&1 - p) pow k)
   ~(p = &0)
   &1 - (&1 - p) = p
   p * (&1 - p) pow 0 / (&1 - (&1 - p)) = &1
   ((\\k. p * (&1 - p) pow k) real_sums\n       (p * ((&1 - p) pow 0 / (&1 - (&1 - p))))) (from 0)
-  !p. &0 < p /\\ p <= &1\n        ==> (geometric_pmf p real_sums &1) (from 0)
-  !p k. &0 <= p /\\ p <= &1 ==> &0 <= geometric_pmf p k
+  forall p. &0 < p /\\ p <= &1\n        ==> (geometric_pmf p real_sums &1) (from 0)
+  forall p k. &0 <= p /\\ p <= &1 ==> &0 <= geometric_pmf p k
   &(SUC n) = &n + &1
   SUC n - 1 = n
   abs(x' - x) < abs(x - &1)
@@ -84769,19 +84769,19 @@ Probability/distributions quotations (1528):
   abs(x - &1)
   \\x. (&1 - x pow (SUC n)) / (&1 - x)
   ~(n < 0)
-  !x:real. sum(0..n) (\\k. x pow k) =\n       if x = &1 then &(SUC n) else (&1 - x pow (SUC n)) / (&1 - x)
+  forall x:real. sum(0..n) (\\k. x pow k) =\n       if x = &1 then &(SUC n) else (&1 - x pow (SUC n)) / (&1 - x)
   x:real
   \\x:real. sum(0..n) (\\k. x pow k)
-  !n x:real. ~(x = &1) ==>\n     sum(0..n) (\\k. &k * x pow (k - 1)) =\n     (&1 - &(SUC n) * x pow n + &n * x pow (SUC n)) / (&1 - x) pow 2
+  forall n x:real. ~(x = &1) ==>\n     sum(0..n) (\\k. &k * x pow (k - 1)) =\n     (&1 - &(SUC n) * x pow n + &n * x pow (SUC n)) / (&1 - x) pow 2
   SUC n' - 1 = n'
   n:num
   n:num
   sum(0..n) (\\k. &k * z pow k) =\n      z * sum(0..n) (\\k. &k * z pow (k - 1))
   z:real
   n:num
-  !n z:real. ~(z = &1) ==>\n     sum(0..n) (\\k. &k * z pow k) =\n     z * (&1 - &(SUC n) * z pow n + &n * z pow (SUC n)) /\n     (&1 - z) pow 2
+  forall n z:real. ~(z = &1) ==>\n     sum(0..n) (\\k. &k * z pow k) =\n     z * (&1 - &(SUC n) * z pow n + &n * z pow (SUC n)) /\n     (&1 - z) pow 2
   Cx(z)
-  !z:real. abs z < &1 ==> ((\\n. &n * z pow n) ---> &0) sequentially
+  forall z:real. abs z < &1 ==> ((\\n. &n * z pow n) ---> &0) sequentially
   &0 = x * &0
   (\\n. &n * x * x pow n) = (\\n. x * (&n * x pow n))
   &0
@@ -84801,22 +84801,22 @@ Probability/distributions quotations (1528):
   x / (&1 - x) pow 2 = x * &1 / (&1 - x) pow 2
   ~((&1 - x) pow 2 = &0)
   ~(x = &1)
-  !x. abs(x) < &1 ==>\n     ((\\k. &k * x pow k) real_sums (x / (&1 - x) pow 2)) (from 0)
+  forall x. abs(x) < &1 ==>\n     ((\\k. &k * x pow k) real_sums (x / (&1 - x) pow 2)) (from 0)
   ~(p = &0) ==> p * (&1 - p) / (p * p) = (&1 - p) / p
   ~(p = &0)
   &1 - (&1 - p) = p
   (&1 - p) / p = p * ((&1 - p) / (&1 - (&1 - p)) pow 2)
   (\\k. &k * geometric_pmf p k) = (\\k. p * (&k * (&1 - p) pow k))
-  !p. &0 < p /\\ p <= &1\n        ==> ((\\k. &k * geometric_pmf p k) real_sums (&1 - p) / p) (from 0)
-  !x:real k. 2 <= k ==> x pow k = x pow 2 * x pow (k - 2)
+  forall p. &0 < p /\\ p <= &1\n        ==> ((\\k. &k * geometric_pmf p k) real_sums (&1 - p) / p) (from 0)
+  forall x:real k. 2 <= k ==> x pow k = x pow 2 * x pow (k - 2)
   &1 = sqrt(&1)
   &0 <= x ==> abs x = x
   &0 <= sqrt(abs z)
   sqrt(abs z) * sqrt(abs z) = abs z
   0
   \\n. (&n * sqrt(abs z) pow n) pow 2
-  !z:real. abs z < &1\n            ==> ((\\n. &n pow 2 * z pow n) ---> &0) sequentially
-  !A B C N y:real.\n     B = A * y /\\ C = B * y\n     ==> (--((N + &1) * N * A) + N * (N + &1) * B) * (&1 - y) * (&1 - y) -\n         (&1 - (N + &1) * B + N * C) * &2 * (&1 - y) * -- &1 =\n         (&2 - N * (N + &1) * A +\n          &2 * (N - &1) * (N + &1) * B - N * (N - &1) * C) *\n         (&1 - y)
+  forall z:real. abs z < &1\n            ==> ((\\n. &n pow 2 * z pow n) ---> &0) sequentially
+  forall A B C N y:real.\n     B = A * y /\\ C = B * y\n     ==> (--((N + &1) * N * A) + N * (N + &1) * B) * (&1 - y) * (&1 - y) -\n         (&1 - (N + &1) * B + N * C) * &2 * (&1 - y) * -- &1 =\n         (&2 - N * (N + &1) * A +\n          &2 * (N - &1) * (N + &1) * B - N * (N - &1) * C) *\n         (&1 - y)
   n = SUC(n - 1)
   1 <= n
   n = 0
@@ -84836,19 +84836,19 @@ Probability/distributions quotations (1528):
   &(k - 1) = &k - &1
   1 <= k
   k = 0
-  !x:real. ~(x = &1) ==>\n     sum(0..n) (\\k. &k * x pow (k - 1)) =\n     (&1 - &(SUC n) * x pow n + &n * x pow (SUC n)) / (&1 - x) pow 2
+  forall x:real. ~(x = &1) ==>\n     sum(0..n) (\\k. &k * x pow (k - 1)) =\n     (&1 - &(SUC n) * x pow n + &n * x pow (SUC n)) / (&1 - x) pow 2
   x:real
   \\x:real. sum(0..n) (\\k. &k * x pow (k - 1))
-  !n x:real. ~(x = &1) ==>\n   sum(0..n) (\\k. &k * (&k - &1) * x pow (k - 2)) =\n   (&2 - &n * &(SUC n) * x pow (n - 1) +\n    &2 * (&n - &1) * &(SUC n) * x pow n -\n    &n * (&n - &1) * x pow (SUC n)) / (&1 - x) pow 3
+  forall n x:real. ~(x = &1) ==>\n   sum(0..n) (\\k. &k * (&k - &1) * x pow (k - 2)) =\n   (&2 - &n * &(SUC n) * x pow (n - 1) +\n    &2 * (&n - &1) * &(SUC n) * x pow n -\n    &n * (&n - &1) * x pow (SUC n)) / (&1 - x) pow 3
   2 <= i
   i = 0 \\/ i = 1
   i < 2
   i:num
   (\\k. &k * (&k - &1) * z pow k) =\n     (\\k. z pow 2 * (&k * (&k - &1) * z pow (k - 2)))
-  !n z:real. ~(z = &1) ==>\n   sum(0..n) (\\k. &k * (&k - &1) * z pow k) =\n   z pow 2 * (&2 - &n * &(SUC n) * z pow (n - 1) +\n              &2 * (&n - &1) * &(SUC n) * z pow n -\n              &n * (&n - &1) * z pow (SUC n)) / (&1 - z) pow 3
+  forall n z:real. ~(z = &1) ==>\n   sum(0..n) (\\k. &k * (&k - &1) * z pow k) =\n   z pow 2 * (&2 - &n * &(SUC n) * z pow (n - 1) +\n              &2 * (&n - &1) * &(SUC n) * z pow n -\n              &n * (&n - &1) * z pow (SUC n)) / (&1 - z) pow 3
   n - 1 + 1 = n
   x:real
-  !x:real n. ~(x = &0) /\\ 1 <= n ==> x pow (n - 1) = x pow n * inv x
+  forall x:real n. ~(x = &0) /\\ 1 <= n ==> x pow (n - 1) = x pow n * inv x
   &0 = (-- &2) * &0
   &0 = (-- inv x + x) * &0
   &0 = &0 + &0
@@ -84862,21 +84862,21 @@ Probability/distributions quotations (1528):
   2
   \\n:num. &2
   x = &0
-  !x:real. abs x < &1\n   ==> ((\\n. &2 - &n * &(SUC n) * x pow (n - 1) +\n             &2 * (&n - &1) * &(SUC n) * x pow n -\n             &n * (&n - &1) * x pow (SUC n)) ---> &2) sequentially
+  forall x:real. abs x < &1\n   ==> ((\\n. &2 - &n * &(SUC n) * x pow (n - 1) +\n             &2 * (&n - &1) * &(SUC n) * x pow n -\n             &n * (&n - &1) * x pow (SUC n)) ---> &2) sequentially
   &2 * x pow 2 / (&1 - x) pow 3 =\n                x pow 2 / (&1 - x) pow 3 * &2
   (\\n. x pow 2 * (&2 - &n * &(SUC n) * x pow (n - 1) +\n      &2 * (&n - &1) * &(SUC n) * x pow n -\n      &n * (&n - &1) * x pow (SUC n)) / (&1 - x) pow 3) =\n     (\\n. x pow 2 / (&1 - x) pow 3 *\n      (&2 - &n * &(SUC n) * x pow (n - 1) +\n       &2 * (&n - &1) * &(SUC n) * x pow n -\n       &n * (&n - &1) * x pow (SUC n)))
   ~((&1 - x) pow 3 = &0)
   ~(abs(&1) < &1)
   x = &1
-  !x:real. abs x < &1\n   ==> ((\\k. &k * (&k - &1) * x pow k) real_sums\n        (&2 * x pow 2 / (&1 - x) pow 3)) (from 0)
+  forall x:real. abs x < &1\n   ==> ((\\k. &k * (&k - &1) * x pow k) real_sums\n        (&2 * x pow 2 / (&1 - x) pow 3)) (from 0)
   ~(p = &0) ==>\n      p * &2 * (&1 - p) pow 2 / p pow 3 =\n      &2 * (&1 - p) pow 2 / p pow 2
   &1 - (&1 - p) = p
   &2 * (&1 - p) pow 2 / p pow 2 =\n     p * (&2 * (&1 - p) pow 2 / (&1 - (&1 - p)) pow 3)
   (\\k. &k * (&k - &1) * geometric_pmf p k) =\n     (\\k. p * (&k * (&k - &1) * (&1 - p) pow k))
   ~(p = &0)
-  !p. &0 < p /\\ p <= &1\n   ==> ((\\k. &k * (&k - &1) * geometric_pmf p k) real_sums\n        (&2 * (&1 - p) pow 2 / p pow 2)) (from 0)
+  forall p. &0 < p /\\ p <= &1\n   ==> ((\\k. &k * (&k - &1) * geometric_pmf p k) real_sums\n        (&2 * (&1 - p) pow 2 / p pow 2)) (from 0)
   (\\k. &k pow 2 * geometric_pmf p k) =\n     (\\k. &k * (&k - &1) * geometric_pmf p k +\n          &k * geometric_pmf p k)
-  !p. &0 < p /\\ p <= &1\n   ==> ((\\k. &k pow 2 * geometric_pmf p k) real_sums\n        (&2 * (&1 - p) pow 2 / p pow 2 + (&1 - p) / p)) (from 0)
+  forall p. &0 < p /\\ p <= &1\n   ==> ((\\k. &k pow 2 * geometric_pmf p k) real_sums\n        (&2 * (&1 - p) pow 2 / p pow 2 + (&1 - p) / p)) (from 0)
   ~(p = &0)
   (&1 - p) / p pow 2 =\n     ((&2 * (&1 - p) pow 2 / p pow 2 + (&1 - p) / p) +\n      (-- &2 * (&1 - p) / p) * (&1 - p) / p) +\n     ((&1 - p) / p) pow 2 * &1
   (\\k. (&k - (&1 - p) / p) pow 2 * geometric_pmf p k) =\n     (\\k. (&k pow 2 * geometric_pmf p k +\n           (-- &2 * (&1 - p) / p) * &k * geometric_pmf p k) +\n          ((&1 - p) / p) pow 2 * geometric_pmf p k)
@@ -84888,7 +84888,7 @@ Probability/distributions quotations (1528):
   ((\\k. &k * geometric_pmf p k) real_sums (&1 - p) / p) (from 0)
   ((\\k. &k pow 2 * geometric_pmf p k) real_sums\n     (&2 * (&1 - p) pow 2 / p pow 2 + (&1 - p) / p)) (from 0)
   ~(p = &0)
-  !p. &0 < p /\\ p <= &1\n   ==> ((\\k. (&k - (&1 - p) / p) pow 2 * geometric_pmf p k) real_sums\n        (&1 - p) / p pow 2) (from 0)
+  forall p. &0 < p /\\ p <= &1\n   ==> ((\\k. (&k - (&1 - p) / p) pow 2 * geometric_pmf p k) real_sums\n        (&1 - p) / p pow 2) (from 0)
   &1 = sqrt(&1)
   &0 <= x ==> abs x = x
   &0 <= sqrt(abs z)
@@ -84908,18 +84908,18 @@ Probability/distributions quotations (1528):
   \\n. &n * sqrt(abs z) pow n
   :A
   :num
-  !r z. abs z < &1\n         ==> ((\\n. &n pow r * z pow n) ---> &0) sequentially
+  forall r z. abs z < &1\n         ==> ((\\n. &n pow r * z pow n) ---> &0) sequentially
   n * n EXP k + n EXP k = SUC n * n EXP k
   SUC k
   n EXP (SUC k) + n EXP k
-  !n k. binom(n,k) <= n EXP k
+  forall n k. binom(n,k) <= n EXP k
   FACT m * FACT n * binom(m + n, n) =\n     FACT m * FACT n * binom(m + n, m)
   n + m = m + n:num
   n:num
   m:num
   m:num
   n:num
-  !m n. binom(m + n, m) = binom(m + n, n)
+  forall m n. binom(m + n, m) = binom(m + n, n)
   &0 = &2 pow r * &0
   (2 * N) EXP r
   abs(abs z) = abs z
@@ -84932,16 +84932,16 @@ Probability/distributions quotations (1528):
   \\N. &((N + r) EXP r) * abs(z) pow N
   :A
   :num
-  !r z. abs z < &1\n         ==> ((\\N. &(binom(N + r, r)) * z pow N) ---> &0) sequentially
+  forall r z. abs z < &1\n         ==> ((\\N. &(binom(N + r, r)) * z pow N) ---> &0) sequentially
   FACT n * binom(n,n) = FACT n * 1
   n:num
   0
-  !n. binom(n,n) = 1
+  forall n. binom(n,n) = 1
   SUC N + SUC n = SUC(N + SUC n)
-  !N n. binom(SUC N + SUC n, SUC N) =\n         binom(N + SUC n, SUC N) + binom(N + SUC n, N)
+  forall N n. binom(SUC N + SUC n, SUC N) =\n         binom(N + SUC n, SUC N) + binom(N + SUC n, N)
   N + SUC n = SUC N + n
   &(binom(SUC N + SUC n, SUC N)) =\n                 &(binom(N + SUC n, SUC N)) + &(binom(N + SUC n, N))
-  !n x N.\n    (&1 - x) * sum(0..N) (\\k. &(binom(k + SUC n, k)) * x pow k) =\n    sum(0..N) (\\k. &(binom(k + n, k)) * x pow k) -\n    &(binom(N + SUC n, N)) * x pow (SUC N)
+  forall n x N.\n    (&1 - x) * sum(0..N) (\\k. &(binom(k + SUC n, k)) * x pow k) =\n    sum(0..N) (\\k. &(binom(k + n, k)) * x pow k) -\n    &(binom(N + SUC n, N)) * x pow (SUC N)
   &0 = x * &0
   (\\N. &(binom(N + SUC n, N)) * x pow SUC N) =\n                 (\\N. x * (&(binom(N + SUC n, SUC n)) * x pow N))
   inv((&1 - x) pow SUC(SUC n)) =\n     inv(&1 - x) * (inv((&1 - x) pow SUC n) - &0)
@@ -84954,9 +84954,9 @@ Probability/distributions quotations (1528):
   ~(&1 - x = &0)
   inv((&1 - x) pow SUC 0) = x pow 0 / (&1 - x)
   (\\k. &(binom(k + 0, k)) * x pow k) = (\\k. x pow k)
-  !n x. abs x < &1 ==>\n    ((\\k. &(binom(k + n, k)) * x pow k) real_sums\n     inv((&1 - x) pow (SUC n))) (from 0)
+  forall n x. abs x < &1 ==>\n    ((\\k. &(binom(k + n, k)) * x pow k) real_sums\n     inv((&1 - x) pow (SUC n))) (from 0)
   neg_binomial_pmf r p k =\n     &(binom(k + r - 1, k)) * p pow r * (&1 - p) pow k
-  !r p k. &0 < p /\\ p <= &1 ==> &0 <= neg_binomial_pmf r p k
+  forall r p k. &0 < p /\\ p <= &1 ==> &0 <= neg_binomial_pmf r p k
   (p:real) pow r
   &1 - (&1 - p) = p
   &1 - p
@@ -84965,9 +84965,9 @@ Probability/distributions quotations (1528):
   abs(&1 - p) < &1
   ~(p pow r = &0)
   (\\k. &(binom(k + r - 1, k)) * p pow r * (&1 - p) pow k) =\n                (\\k. p pow r * &(binom(k + r - 1, k)) * (&1 - p) pow k)
-  !r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. neg_binomial_pmf r p k) real_sums &1) (from 0)
+  forall r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. neg_binomial_pmf r p k) real_sums &1) (from 0)
   k + 1 - 1 = k
-  !p k. geometric_pmf p k = neg_binomial_pmf 1 p k
+  forall p k. geometric_pmf p k = neg_binomial_pmf 1 p k
   FACT(r - 1) * (FACT(k - 1) * (k * binom(k + r - 1, k))) =\n     FACT(r - 1) * (FACT(k - 1) * (r * binom(k + r - 1, k - 1)))
   FACT(r - 1) * FACT(k - 1) * (k * binom(k + r - 1, k)) =\n     FACT(k + r - 1) /\\\n     FACT(r - 1) * FACT(k - 1) * (r * binom(k + r - 1, k - 1)) =\n     FACT(k + r - 1)
   SUC(r - 1) = r
@@ -84982,7 +84982,7 @@ Probability/distributions quotations (1528):
   r:num
   k:num
   r - 1
-  !k r. 1 <= k /\\ 1 <= r\n         ==> k * binom(k + r - 1, k) = r * binom(k + r - 1, k - 1)
+  forall k r. 1 <= k /\\ 1 <= r\n         ==> k * binom(k + r - 1, k) = r * binom(k + r - 1, k - 1)
   (((&r * (&1 - p)) * p pow r) * inv p) * inv (p pow r) =\n                 ((&r * (&1 - p)) * inv p) * (p pow r * inv (p pow r))
   p pow r * inv(p pow r) = &1
   ~(p pow r = &0)
@@ -85002,7 +85002,7 @@ Probability/distributions quotations (1528):
   (x + 1) * binom(x + r, x + 1) = r * binom(x + r, x)
   x:num
   (\\x. &(x + 1) * &(binom (x + r,x + 1)) * p pow r * (&1 - p) pow (x + 1)) =\n     (\\x. &r * (&1 - p) * p pow r * (&(binom(x + r, x)) * (&1 - p) pow x))
-  !x:num. (x + 1) + r - 1 = x + r
+  forall x:num. (x + 1) + r - 1 = x + r
   1
   1 = 0 + 1
   &0 * &(binom (0 + r - 1,0)) * p pow r * (&1 - p) pow 0 = &0
@@ -85010,14 +85010,14 @@ Probability/distributions quotations (1528):
   1
   &r * (&1 - p) / p
   \\k. &k * &(binom (k + r - 1,k)) * p pow r * (&1 - p) pow k
-  !r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. &k * neg_binomial_pmf r p k) real_sums &r * (&1 - p) / p)\n             (from 0)
+  forall r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. &k * neg_binomial_pmf r p k) real_sums &r * (&1 - p) / p)\n             (from 0)
   (k - 1) * r * binom(k + r - 1, k - 1) =\n                r * ((k - 1) * binom(k + r - 1, k - 1))
   (k * (k - 1)) * binom(k + r - 1, k) =\n                (k - 1) * (k * binom(k + r - 1, k))
   k - 1 + (r + 1) - 1 = k + r - 1 /\\ k - 1 - 1 = k - 2
   r + 1
   k - 1
   k * binom(k + r - 1, k) = r * binom(k + r - 1, k - 1)
-  !k r. 2 <= k /\\ 1 <= r\n         ==> k * (k - 1) * binom(k + r - 1, k) =\n             r * (r + 1) * binom(k + r - 1, k - 2)
+  forall k r. 2 <= k /\\ 1 <= r\n         ==> k * (k - 1) * binom(k + r - 1, k) =\n             r * (r + 1) * binom(k + r - 1, k - 2)
   ((((&r * (&r + &1)) * (&1 - p) pow 2) * p pow r) * inv (p pow 2)) *\n      inv (p pow r) =\n      (((&r * (&r + &1)) * (&1 - p) pow 2) * inv (p pow 2)) *\n      (p pow r * inv(p pow r))
   p pow r * inv(p pow r) = &1
   SUC(r + 1) = 2 + r
@@ -85040,8 +85040,8 @@ Probability/distributions quotations (1528):
   (x + 2) * (x + 1) * binom(x + r + 1, x + 2) =\n                 r * (r + 1) * binom(x + r + 1, x)
   x:num
   (\\x. &(x + 2) * &(x + 1) * &(binom (x + r + 1,x + 2)) *\n          p pow r * (&1 - p) pow (x + 2)) =\n     (\\x. &r * (&r + &1) * (&1 - p) pow 2 * p pow r *\n          (&(binom(x + (r + 1), x)) * (&1 - p) pow x))
-  !x:num. &(x + 2) - &1 = &(x + 1)
-  !x:num. (x + 2) + r - 1 = x + r + 1
+  forall x:num. &(x + 2) - &1 = &(x + 1)
+  forall x:num. (x + 2) + r - 1 = x + r + 1
   2
   2 = 0 + 2
   1
@@ -85051,7 +85051,7 @@ Probability/distributions quotations (1528):
   &r * (&r + &1) * ((&1 - p) / p) pow 2
   f:num->real
   f = \\k. &k * (&k - &1) * &(binom (k + r - 1,k)) *\n             p pow r * (&1 - p) pow k
-  !r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. &k * (&k - &1) * neg_binomial_pmf r p k) real_sums\n              &r * (&r + &1) * ((&1 - p) / p) pow 2) (from 0)
+  forall r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. &k * (&k - &1) * neg_binomial_pmf r p k) real_sums\n              &r * (&r + &1) * ((&1 - p) / p) pow 2) (from 0)
   ~(p = &0)
   &r * (&1 - p) / p pow 2 =\n     ((&r * (&r + &1) * ((&1 - p) / p) pow 2 + &r * (&1 - p) / p) +\n      (-- &2 * &r * (&1 - p) / p) * &r * (&1 - p) / p) +\n     (&r * (&1 - p) / p) pow 2 * &1
   (\\k. (&k - &r * (&1 - p) / p) pow 2 * neg_binomial_pmf r p k) =\n     (\\k. ((&k * (&k - &1) * neg_binomial_pmf r p k +\n             &k * neg_binomial_pmf r p k) +\n            (-- &2 * &r * (&1 - p) / p) * &k * neg_binomial_pmf r p k) +\n           (&r * (&1 - p) / p) pow 2 * neg_binomial_pmf r p k)
@@ -85064,7 +85064,7 @@ Probability/distributions quotations (1528):
   ((\\k. &k * neg_binomial_pmf r p k) real_sums &r * (&1 - p) / p)\n     (from 0)
   ((\\k. &k * (&k - &1) * neg_binomial_pmf r p k) real_sums\n     &r * (&r + &1) * ((&1 - p) / p) pow 2) (from 0)
   ~(p = &0)
-  !r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. (&k - &r * (&1 - p) / p) pow 2 * neg_binomial_pmf r p k)\n              real_sums &r * (&1 - p) / p pow 2) (from 0)
+  forall r p. 1 <= r /\\ &0 < p /\\ p <= &1\n         ==> ((\\k. (&k - &r * (&1 - p) / p) pow 2 * neg_binomial_pmf r p k)\n              real_sums &r * (&1 - p) / p pow 2) (from 0)
   {x:real}
   (:real)
   (:real) = {t:real | t <= x} UNION {t | x <= t}
@@ -85075,7 +85075,7 @@ Probability/distributions quotations (1528):
   IMAGE ((--):real->real) {t | t <= --x} = {t:real | x <= t}
   (\\t. std_normal_density(--t)) = std_normal_density
   real_integral {t | t <= --x} std_normal_density =\n     real_integral {t:real | x <= t} std_normal_density
-  !x. std_normal_cdf(--x) + std_normal_cdf x = &1
+  forall x. std_normal_cdf(--x) + std_normal_cdf x = &1
   &0
   std_normal_cdf(&0) = &1 / &2
   0
@@ -85118,7 +85118,7 @@ Probability/distributions quotations (1528):
   -- &n:real
   -- &n <= &n:real
   n:num
-  !n:num. real_integral (real_interval[-- &n, &n]) std_normal_density =\n             &2 * std_normal_cdf(&n) - &1
+  forall n:num. real_integral (real_interval[-- &n, &n]) std_normal_density =\n             &2 * std_normal_cdf(&n) - &1
   ((\\n. std_normal_cdf(&n)) ---> &1) sequentially
   N:num
   x:real
@@ -85146,24 +85146,24 @@ Probability/distributions quotations (1528):
   ((x - mu) / sigma) pow 2 / &2 = (x - mu) pow 2 / (&2 * sigma pow 2)
   ~(sigma pow 2 = &0)
   ~(sigma = &0)
-  !mu sigma x. &0 < sigma ==>\n    normal_density mu sigma x =\n    inv(sigma) * std_normal_density((x - mu) / sigma)
-  !x. normal_density (&0) (&1) x = std_normal_density x
-  !x. normal_cdf (&0) (&1) x = std_normal_cdf x
-  !mu sigma x. &0 < sigma ==> &0 < normal_density mu sigma x
-  !mu sigma x. &0 < sigma ==> &0 <= normal_density mu sigma x
-  !mu sigma x. normal_density mu sigma (mu + x) =\n                normal_density mu sigma (mu - x)
+  forall mu sigma x. &0 < sigma ==>\n    normal_density mu sigma x =\n    inv(sigma) * std_normal_density((x - mu) / sigma)
+  forall x. normal_density (&0) (&1) x = std_normal_density x
+  forall x. normal_cdf (&0) (&1) x = std_normal_cdf x
+  forall mu sigma x. &0 < sigma ==> &0 < normal_density mu sigma x
+  forall mu sigma x. &0 < sigma ==> &0 <= normal_density mu sigma x
+  forall mu sigma x. normal_density mu sigma (mu + x) =\n                normal_density mu sigma (mu - x)
   (x - mu:real) / sigma
-  !mu sigma x. &0 < sigma ==>\n    &0 <= normal_cdf mu sigma x /\\ normal_cdf mu sigma x <= &1
-  !mu sigma x y. &0 < sigma /\\ x <= y ==>\n    normal_cdf mu sigma x <= normal_cdf mu sigma y
+  forall mu sigma x. &0 < sigma ==>\n    &0 <= normal_cdf mu sigma x /\\ normal_cdf mu sigma x <= &1
+  forall mu sigma x y. &0 < sigma /\\ x <= y ==>\n    normal_cdf mu sigma x <= normal_cdf mu sigma y
   normal_cdf mu sigma =\n    std_normal_cdf o (\\t. (t - mu) / sigma)
-  !mu sigma x. &0 < sigma ==>\n    normal_cdf mu sigma real_continuous atreal x
+  forall mu sigma x. &0 < sigma ==>\n    normal_cdf mu sigma real_continuous atreal x
   (mu + x) - mu:real = x
   ((mu + x) - mu:real) * inv sigma = x * inv sigma
   mu - x - mu:real = --x
   (mu - x - mu:real) * inv sigma = --(x * inv sigma)
-  !mu sigma x. &0 < sigma ==>\n    normal_cdf mu sigma (mu - x) + normal_cdf mu sigma (mu + x) = &1
+  forall mu sigma x. &0 < sigma ==>\n    normal_cdf mu sigma (mu - x) + normal_cdf mu sigma (mu + x) = &1
   (mu - mu:real) / sigma = &0
-  !mu sigma. &0 < sigma ==>\n    normal_cdf mu sigma mu = &1 / &2
+  forall mu sigma. &0 < sigma ==>\n    normal_cdf mu sigma mu = &1 / &2
   y >= mu + sigma * b
   (y - mu:real) / sigma
   y:real
@@ -85172,7 +85172,7 @@ Probability/distributions quotations (1528):
   e:real
   e:real
   normal_cdf mu sigma = (\\x. std_normal_cdf((x - mu) / sigma))
-  !mu sigma. &0 < sigma ==>\n    (normal_cdf mu sigma ---> &1) at_posinfinity
+  forall mu sigma. &0 < sigma ==>\n    (normal_cdf mu sigma ---> &1) at_posinfinity
   y <= mu + sigma * b
   (y - mu:real) / sigma
   y:real
@@ -85181,7 +85181,7 @@ Probability/distributions quotations (1528):
   e:real
   e:real
   normal_cdf mu sigma = (\\x. std_normal_cdf((x - mu) / sigma))
-  !mu sigma. &0 < sigma ==>\n    (normal_cdf mu sigma ---> &0) at_neginfinity
+  forall mu sigma. &0 < sigma ==>\n    (normal_cdf mu sigma ---> &0) at_neginfinity
   (f has_real_integral i) (:real)
   lift c:real^1
   m:real
@@ -85192,7 +85192,7 @@ Probability/distributions quotations (1528):
   y:real^1
   (:real^1) = IMAGE (\\x. inv m % x + --(inv m % lift c)) (:real^1)
   lift o (\\x. f(m * x + c)) o drop =\n     (\\x:real^1. (lift o f o drop) (m % x + lift c))
-  !f i m c. (f has_real_integral i) (:real) /\\ ~(m = &0) ==>\n    ((\\x. f(m * x + c)) has_real_integral (inv(abs m) * i)) (:real)
+  forall f i m c. (f has_real_integral i) (:real) /\\ ~(m = &0) ==>\n    ((\\x. f(m * x + c)) has_real_integral (inv(abs m) * i)) (:real)
   abs sigma = sigma
   --(mu / sigma):real
   inv(sigma):real
@@ -85204,22 +85204,22 @@ Probability/distributions quotations (1528):
   (\\x. inv sigma * std_normal_density ((x - mu) / sigma)) =\n     (\\x. inv sigma * std_normal_density (inv sigma * x + --(mu / sigma)))
   normal_density mu sigma =\n     (\\x. inv sigma * std_normal_density ((x - mu) / sigma))
   ~(sigma = &0)
-  !mu sigma. &0 < sigma ==>\n    (normal_density mu sigma has_real_integral &1) (:real)
+  forall mu sigma. &0 < sigma ==>\n    (normal_density mu sigma has_real_integral &1) (:real)
   &1
-  !mu sigma. &0 < sigma ==>\n    normal_density mu sigma real_integrable_on (:real)
+  forall mu sigma. &0 < sigma ==>\n    normal_density mu sigma real_integrable_on (:real)
   (\\x:real. mu * std_normal_density x + sigma * x * std_normal_density x) =\n     (\\t. (mu + sigma * t) * std_normal_density t)
   ((\\t. mu * std_normal_density t) has_real_integral mu * &1) (:real) /\\\n     ((\\t. sigma * (t * std_normal_density t)) has_real_integral sigma * &0)\n     (:real)
-  !mu sigma. &0 < sigma ==>\n    ((\\t. (mu + sigma * t) * std_normal_density t) has_real_integral mu)\n    (:real)
+  forall mu sigma. &0 < sigma ==>\n    ((\\t. (mu + sigma * t) * std_normal_density t) has_real_integral mu)\n    (:real)
   ~(sigma = &0)
   inv sigma * (sigma * mu) = mu:real
   abs sigma = sigma
   inv (abs (inv sigma)) * mu = sigma * mu
   ~(sigma = &0)
   x:real
-  !x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
+  forall x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
   ~(sigma = &0)
   x:real
-  !x:real. mu + sigma * (inv sigma * x + --(mu / sigma)) = x
+  forall x:real. mu + sigma * (inv sigma * x + --(mu / sigma)) = x
   --(mu / sigma):real
   inv(sigma):real
   mu:real
@@ -85231,14 +85231,14 @@ Probability/distributions quotations (1528):
   (\\x. x * normal_density mu sigma x) =\n     (\\x. inv(sigma) * (x * std_normal_density((x - mu) / sigma)))
   ~(inv sigma = &0)
   ~(sigma = &0)
-  !mu sigma. &0 < sigma ==>\n    ((\\x. x * normal_density mu sigma x) has_real_integral mu) (:real)
+  forall mu sigma. &0 < sigma ==>\n    ((\\x. x * normal_density mu sigma x) has_real_integral mu) (:real)
   inv(sigma):real
-  !mu sigma. &0 < sigma ==>\n    real_integral (:real) (\\x. x * normal_density mu sigma x) = mu
+  forall mu sigma. &0 < sigma ==>\n    real_integral (:real) (\\x. x * normal_density mu sigma x) = mu
   abs sigma = sigma
   inv (abs (inv sigma)) * &1 = sigma
   ~(sigma = &0)
   x:real
-  !x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
+  forall x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
   --(mu / sigma):real
   inv(sigma):real
   &1
@@ -85250,25 +85250,25 @@ Probability/distributions quotations (1528):
   (\\x. (x - mu) pow 2 * normal_density mu sigma x) =\n     (\\x. sigma pow 2 * (((x - mu) / sigma) pow 2 *\n          (inv sigma * std_normal_density((x - mu) / sigma))))
   ~(inv sigma = &0)
   ~(sigma = &0)
-  !mu sigma. &0 < sigma ==>\n    ((\\x. (x - mu) pow 2 * normal_density mu sigma x) has_real_integral\n     sigma pow 2) (:real)
-  !mu sigma. &0 < sigma ==>\n    real_integral (:real) (\\x. (x - mu) pow 2 * normal_density mu sigma x) =\n    sigma pow 2
+  forall mu sigma. &0 < sigma ==>\n    ((\\x. (x - mu) pow 2 * normal_density mu sigma x) has_real_integral\n     sigma pow 2) (:real)
+  forall mu sigma. &0 < sigma ==>\n    real_integral (:real) (\\x. (x - mu) pow 2 * normal_density mu sigma x) =\n    sigma pow 2
   exponential_density (l:real) (x:real) =\n   if &0 <= x then l * exp(--l * x) else &0
-  !l x. &0 < l ==> &0 <= exponential_density l x
+  forall l x. &0 < l ==> &0 <= exponential_density l x
   &0 <= x
-  !l x. &0 < l /\\ &0 < x ==> &0 < exponential_density l x
-  !l. exponential_density l (&0) = l
-  !l x. ((\\x. --exp(--l * x)) has_real_derivative l * exp(--l * x))\n         (atreal x)
-  !l x s. ((\\x. --exp(--l * x)) has_real_derivative l * exp(--l * x))\n            (atreal x within s)
+  forall l x. &0 < l /\\ &0 < x ==> &0 < exponential_density l x
+  forall l. exponential_density l (&0) = l
+  forall l x. ((\\x. --exp(--l * x)) has_real_derivative l * exp(--l * x))\n         (atreal x)
+  forall l x s. ((\\x. --exp(--l * x)) has_real_derivative l * exp(--l * x))\n            (atreal x within s)
   --exp(--l * a) - --(&1) = &1 - exp(--l * a)
   a:real
   &0
   \\x:real. l * exp(--l * x)
   \\x:real. --exp(--l * x)
-  !l a. &0 <= a ==>\n   ((\\x. l * exp(--l * x)) has_real_integral (&1 - exp(--l * a)))\n   (real_interval[&0,a])
+  forall l a. &0 <= a ==>\n   ((\\x. l * exp(--l * x)) has_real_integral (&1 - exp(--l * a)))\n   (real_interval[&0,a])
   (\\x:real. exp(--l * x)) = (exp o (\\x. --l * x))
-  !l. (\\x. l * exp(--l * x)) real_continuous_on (:real)
+  forall l. (\\x. l * exp(--l * x)) real_continuous_on (:real)
   &1 - exp(--l * a)
-  !l a. &0 <= a ==>\n   (\\x. l * exp(--l * x)) real_integrable_on real_interval[&0,a]
+  forall l a. &0 <= a ==>\n   (\\x. l * exp(--l * x)) real_integrable_on real_interval[&0,a]
   e = inv(inv e:real)
   --l * a = --(l * a:real)
   inv(l * a):real
@@ -85282,11 +85282,11 @@ Probability/distributions quotations (1528):
   a:real
   (&1 / e + &1) / l:real
   e:real
-  !l. &0 < l ==> ((\\a. exp(--l * a)) ---> &0) at_posinfinity
+  forall l. &0 < l ==> ((\\a. exp(--l * a)) ---> &0) at_posinfinity
   &1 = &1 - &0
   l:real
   ((\\k:num. exp(--l * &k)) ---> &0) sequentially
-  !l. &0 < l ==>\n   ((\\k. &1 - exp(--l * &k)) ---> &1) sequentially
+  forall l. &0 < l ==>\n   ((\\k. &1 - exp(--l * &k)) ---> &1) sequentially
   (\\x. if &0 <= x /\\ x <= &k then l * exp(--l * x) else &0) =\n      (\\x. if x IN real_interval[&0,&k] then l * exp(--l * x) else &0)
   k:num
   (\\k. real_integral (:real) ((f:num->real->real) k)) =\n     (\\k. &1 - exp(--l * &k))
@@ -85320,27 +85320,27 @@ Probability/distributions quotations (1528):
   g real_integrable_on (:real) /\\\n     ((\\k. real_integral (:real) (f k)) ---> real_integral (:real) g)\n     sequentially
   f = \\k x:real. if &0 <= x /\\ x <= &k then l * exp(--l * x) else &0
   g = \\x:real. if &0 <= x then l * exp(--l * x) else &0
-  !l. &0 < l ==>\n   ((\\x. l * exp(--l * x)) has_real_integral &1)\n   {x | &0 <= x}
+  forall l. &0 < l ==>\n   ((\\x. l * exp(--l * x)) has_real_integral &1)\n   {x | &0 <= x}
   exponential_cdf (l:real) (x:real) =\n   if &0 <= x then &1 - exp(--l * x) else &0
-  !l. exponential_cdf l (&0) = &0
+  forall l. exponential_cdf l (&0) = &0
   &0 <= l * x
   exp(--l * x) <= &1
-  !l x. &0 < l /\\ &0 <= x ==> &0 <= exponential_cdf l x
+  forall l x. &0 < l /\\ &0 <= x ==> &0 <= exponential_cdf l x
   --l * x:real
-  !l x. &0 < l /\\ &0 <= x ==> exponential_cdf l x <= &1
+  forall l x. &0 < l /\\ &0 <= x ==> exponential_cdf l x <= &1
   &1 - (&1 - x) = x
   &0 <= s + t
-  !l s t. &0 < l /\\ &0 <= s /\\ &0 <= t ==>\n   &1 - exponential_cdf l (s + t) =\n   (&1 - exponential_cdf l s) * (&1 - exponential_cdf l t)
+  forall l s t. &0 < l /\\ &0 <= s /\\ &0 <= t ==>\n   &1 - exponential_cdf l (s + t) =\n   (&1 - exponential_cdf l s) * (&1 - exponential_cdf l t)
   x / &2
   x / &2
   (x / &2) pow 2
   x = x / &2 + x / &2
-  !x. &0 <= x ==> x pow 2 / &4 <= exp x
+  forall x. &0 <= x ==> x pow 2 / &4 <= exp x
   abs(exp(--l)) = exp(--l)
   (\\k. &k * exp(--l * &k)) = (\\k. &k pow 1 * exp(--l) pow k)
-  !l. &0 < l ==> ((\\k:num. &k * exp(--l * &k)) ---> &0) sequentially
+  forall l. &0 < l ==> ((\\k:num. &k * exp(--l * &k)) ---> &0) sequentially
   -- &1 * e = --e
-  !l x. ~(l = &0) ==>\n  ((\\x. --(x + inv l) * exp(--l * x)) has_real_derivative\n   l * x * exp(--l * x)) (atreal x)
+  forall l x. ~(l = &0) ==>\n  ((\\x. --(x + inv l) * exp(--l * x)) has_real_derivative\n   l * x * exp(--l * x)) (atreal x)
   e = exp(--l * a:real)
   --(a + inv l) * exp(--l * a) - --inv l =\n      inv l - (a + inv l) * exp(--l * a:real)
   x:real
@@ -85349,13 +85349,13 @@ Probability/distributions quotations (1528):
   &0
   \\x:real. l * x * exp(--l * x)
   \\x:real. --(x + inv l) * exp(--l * x)
-  !l a. &0 < l /\\ &0 <= a ==>\n  ((\\x. l * x * exp(--l * x)) has_real_integral\n   (inv l - (a + inv l) * exp(--l * a)))\n  (real_interval[&0,a])
+  forall l a. &0 < l /\\ &0 <= a ==>\n  ((\\x. l * x * exp(--l * x)) has_real_integral\n   (inv l - (a + inv l) * exp(--l * a)))\n  (real_interval[&0,a])
   &0 = &0 + &0
   (\\k. (&k + inv l) * exp(--l * &k)) =\n     (\\k. &k * exp(--l * &k) + inv l * exp(--l * &k))
   inv l = inv l - &0
   l:real
   ((\\k:num. exp(--l * &k)) ---> &0) sequentially
-  !l. &0 < l ==>\n  ((\\k:num. inv l - (&k + inv l) * exp(--l * &k)) ---> inv l) sequentially
+  forall l. &0 < l ==>\n  ((\\k:num. inv l - (&k + inv l) * exp(--l * &k)) ---> inv l) sequentially
   (\\x. if &0 <= x /\\ x <= &k then l * x * exp(--l * x) else &0) =\n      (\\x. if x IN real_interval[&0,&k] then l * x * exp(--l * x) else &0)
   k:num
   (\\k. real_integral (:real) ((f:num->real->real) k)) =\n     (\\k. inv l - (&k + inv l) * exp(--l * &k))
@@ -85393,11 +85393,11 @@ Probability/distributions quotations (1528):
   g = \\x:real. if &0 <= x then l * x * exp(--l * x) else &0
   (\\x:real. if &0 <= x then if &0 <= x then x * l * exp(--l * x) else &0\n               else &0) =\n     (\\x. if &0 <= x then x * l * exp(--l * x) else &0)
   x * (if &0 <= x then l * e else &0) =\n    (if &0 <= x then x * l * e else &0)
-  !l. &0 < l ==>\n   ((\\x. x * exponential_density l x) has_real_integral inv l)\n   {x | &0 <= x}
-  !l. &0 < l ==>\n   real_integral {x | &0 <= x} (\\x. x * exponential_density l x) = inv l
+  forall l. &0 < l ==>\n   ((\\x. x * exponential_density l x) has_real_integral inv l)\n   {x | &0 <= x}
+  forall l. &0 < l ==>\n   real_integral {x | &0 <= x} (\\x. x * exponential_density l x) = inv l
   abs(exp(--l)) = exp(--l)
   (\\k. &k pow 2 * exp(--l * &k)) =\n                (\\k. &k pow 2 * exp(--l) pow k)
-  !l. &0 < l\n       ==> ((\\k:num. &k pow 2 * exp(--l * &k)) ---> &0) sequentially
+  forall l. &0 < l\n       ==> ((\\k:num. &k pow 2 * exp(--l * &k)) ---> &0) sequentially
   &0 = &0 + &0
   &0 = &0 + &0
   ((\\k:num. (&2 * inv l pow 2) * exp(--l * &k)) ---> &0) sequentially
@@ -85407,10 +85407,10 @@ Probability/distributions quotations (1528):
   l:real
   ((\\k:num. exp(--l * &k)) ---> &0) sequentially
   &0 < inv l
-  !l. &0 < l ==>\n  ((\\k:num. (&k pow 2 + &2 * &k * inv l + &2 * inv l pow 2) *\n            exp(--l * &k)) ---> &0) sequentially
-  !a b c:real. a * c + b * c = (a + b) * c
+  forall l. &0 < l ==>\n  ((\\k:num. (&k pow 2 + &2 * &k * inv l + &2 * inv l pow 2) *\n            exp(--l * &k)) ---> &0) sequentially
+  forall a b c:real. a * c + b * c = (a + b) * c
   2 - 1 = 1
-  !l x. ~(l = &0) ==>\n  ((\\x. --(x pow 2 + &2 * x * inv l + &2 * inv l pow 2) * exp(--l * x))\n   has_real_derivative\n   l * x pow 2 * exp(--l * x)) (atreal x)
+  forall l x. ~(l = &0) ==>\n  ((\\x. --(x pow 2 + &2 * x * inv l + &2 * inv l pow 2) * exp(--l * x))\n   has_real_derivative\n   l * x pow 2 * exp(--l * x)) (atreal x)
   e = exp(--l * a:real)
   --(a pow 2 + &2 * a * inv l + &2 * inv l pow 2) * exp(--l * a) -\n      --(&2 * inv l pow 2) =\n      &2 * inv l pow 2 -\n      (a pow 2 + &2 * a * inv l + &2 * inv l pow 2) * exp(--l * a:real)
   x:real
@@ -85419,9 +85419,9 @@ Probability/distributions quotations (1528):
   &0
   \\x:real. l * x pow 2 * exp(--l * x)
   \\x:real. --(x pow 2 + &2 * x * inv l + &2 * inv l pow 2) *\n               exp(--l * x)
-  !l a. &0 < l /\\ &0 <= a ==>\n  ((\\x. l * x pow 2 * exp(--l * x)) has_real_integral\n   (&2 * inv l pow 2 -\n    (a pow 2 + &2 * a * inv l + &2 * inv l pow 2) * exp(--l * a)))\n  (real_interval[&0,a])
+  forall l a. &0 < l /\\ &0 <= a ==>\n  ((\\x. l * x pow 2 * exp(--l * x)) has_real_integral\n   (&2 * inv l pow 2 -\n    (a pow 2 + &2 * a * inv l + &2 * inv l pow 2) * exp(--l * a)))\n  (real_interval[&0,a])
   &2 * inv l pow 2 = &2 * inv l pow 2 - &0
-  !l. &0 < l ==>\n  ((\\k:num. &2 * inv l pow 2 -\n    (&k pow 2 + &2 * &k * inv l + &2 * inv l pow 2) * exp(--l * &k))\n   ---> &2 * inv l pow 2) sequentially
+  forall l. &0 < l ==>\n  ((\\k:num. &2 * inv l pow 2 -\n    (&k pow 2 + &2 * &k * inv l + &2 * inv l pow 2) * exp(--l * &k))\n   ---> &2 * inv l pow 2) sequentially
   (\\x. if &0 <= x /\\ x <= &k\n           then l * x pow 2 * exp(--l * x) else &0) =\n      (\\x. if x IN real_interval[&0,&k]\n           then l * x pow 2 * exp(--l * x) else &0)
   k:num
   (\\k. real_integral (:real) ((f:num->real->real) k)) =\n     (\\k. &2 * inv l pow 2 -\n      (&k pow 2 + &2 * &k * inv l + &2 * inv l pow 2) * exp(--l * &k))
@@ -85459,8 +85459,8 @@ Probability/distributions quotations (1528):
   g = \\x:real. if &0 <= x then l * x pow 2 * exp(--l * x) else &0
   (\\x:real. if &0 <= x\n               then if &0 <= x then x pow 2 * l * exp(--l * x) else &0\n               else &0) =\n     (\\x. if &0 <= x then x pow 2 * l * exp(--l * x) else &0)
   x2 * (if &0 <= x then l * e else &0) =\n    (if &0 <= x then x2 * l * e else &0)
-  !l. &0 < l ==>\n   ((\\x. x pow 2 * exponential_density l x) has_real_integral\n    &2 * inv l pow 2)\n   {x | &0 <= x}
-  !l. &0 < l ==>\n   real_integral {x | &0 <= x}\n     (\\x. x pow 2 * exponential_density l x) = &2 * inv l pow 2
+  forall l. &0 < l ==>\n   ((\\x. x pow 2 * exponential_density l x) has_real_integral\n    &2 * inv l pow 2)\n   {x | &0 <= x}
+  forall l. &0 < l ==>\n   real_integral {x | &0 <= x}\n     (\\x. x pow 2 * exponential_density l x) = &2 * inv l pow 2
   ((\\x. x pow 2 * exponential_density l x -\n           &2 * inv l * (x * exponential_density l x) +\n           inv l pow 2 * exponential_density l x) has_real_integral\n     (&2 * inv l pow 2 - &2 * inv l * inv l + inv l pow 2 * &1))\n    {x | &0 <= x}
   \\x:real. l * exp(--l * x)
   (exponential_density l has_real_integral &1) {x | &0 <= x}
@@ -85468,56 +85468,56 @@ Probability/distributions quotations (1528):
   ((\\x. x pow 2 * exponential_density l x) has_real_integral\n     &2 * inv l pow 2) {x | &0 <= x}
   (x - c) * (x - c) = x * x - &2 * c * x + c * c
   (\\x. (x - inv l) pow 2 * exponential_density l x) =\n     (\\x. x pow 2 * exponential_density l x -\n          &2 * inv l * (x * exponential_density l x) +\n          inv l pow 2 * exponential_density l x)
-  !l. &0 < l ==>\n   real_integral {x | &0 <= x}\n     (\\x. (x - inv l) pow 2 * exponential_density l x) = inv l pow 2
+  forall l. &0 < l ==>\n   real_integral {x | &0 <= x}\n     (\\x. (x - inv l) pow 2 * exponential_density l x) = inv l pow 2
   &2 * inv l pow 2 - &2 * inv l * inv l + inv l pow 2 * &1 =\n         inv(l:real) pow 2
   uniform_density (a:real) (b:real) (x:real) =\n   if a <= x /\\ x <= b then inv(b - a) else &0
   uniform_cdf (a:real) (b:real) (x:real) =\n   if x < a then &0\n   else if b <= x then &1\n   else (x - a) / (b - a)
-  !a b x. a < b ==> &0 <= uniform_density a b x
-  !a b x. a < b /\\ a <= x /\\ x <= b ==> &0 < uniform_density a b x
-  !a b x. x < a \\/ b < x ==> uniform_density a b x = &0
-  !a b x. a <= x /\\ x <= b ==> uniform_density a b x = inv(b - a)
+  forall a b x. a < b ==> &0 <= uniform_density a b x
+  forall a b x. a < b /\\ a <= x /\\ x <= b ==> &0 < uniform_density a b x
+  forall a b x. x < a \\/ b < x ==> uniform_density a b x = &0
+  forall a b x. a <= x /\\ x <= b ==> uniform_density a b x = inv(b - a)
   &1 = inv(b - a) * (b - a:real)
   uniform_density a b =\n     (\\x:real. if x IN real_interval[a,b] then inv(b - a) else &0)
   ~(b - a = &0)
-  !a b. a < b ==>\n   (uniform_density a b has_real_integral &1) (:real)
+  forall a b. a < b ==>\n   (uniform_density a b has_real_integral &1) (:real)
   &1
-  !a b. a < b ==> uniform_density a b real_integrable_on (:real)
+  forall a b. a < b ==> uniform_density a b real_integrable_on (:real)
   ~(b <= a)
-  !a b. a < b ==> uniform_cdf a b a = &0
+  forall a b. a < b ==> uniform_cdf a b a = &0
   ~(b < a)
-  !a b. a < b ==> uniform_cdf a b b = &1
+  forall a b. a < b ==> uniform_cdf a b b = &1
   a < b ==> ~(b - a = &0)
   (x - a) * inv(b - a) <= (b - a) * inv(b - a)
   &0 < inv(b - a)
-  !a b x. a < b ==> &0 <= uniform_cdf a b x /\\ uniform_cdf a b x <= &1
+  forall a b x. a < b ==> &0 <= uniform_cdf a b x /\\ uniform_cdf a b x <= &1
   a < b ==> ~(b - a = &0)
   (x - a) * inv(b - a) <= (b - a) * inv(b - a)
   &0 < inv(b - a)
-  !a b x y. a < b /\\ x <= y ==> uniform_cdf a b x <= uniform_cdf a b y
+  forall a b x y. a < b /\\ x <= y ==> uniform_cdf a b x <= uniform_cdf a b y
   b / &2 - a / &2 = (b - a) / &2
   b:real
   a:real
   \\x:real. x
   \\x:real. x pow 2 / &2
-  !a b. a <= b ==>\n   ((\\x. x) has_real_integral (b pow 2 - a pow 2) / &2)\n   (real_interval[a,b])
+  forall a b. a <= b ==>\n   ((\\x. x) has_real_integral (b pow 2 - a pow 2) / &2)\n   (real_interval[a,b])
   ~(b - a = &0) ==>\n      (a + b) / &2 = inv(b - a) * ((b pow 2 - a pow 2) / &2)
   (a + b) / &2 = inv(b - a) * ((b pow 2 - a pow 2) / &2)
   (\\x:real. x * uniform_density a b x) =\n     (\\x. if x IN real_interval[a,b] then inv(b - a) * x else &0)
   ~(b - a = &0)
-  !a b. a < b ==>\n   ((\\x. x * uniform_density a b x) has_real_integral (a + b) / &2)\n   (:real)
-  !a b. a < b ==>\n   real_integral (:real) (\\x. x * uniform_density a b x) = (a + b) / &2
+  forall a b. a < b ==>\n   ((\\x. x * uniform_density a b x) has_real_integral (a + b) / &2)\n   (:real)
+  forall a b. a < b ==>\n   real_integral (:real) (\\x. x * uniform_density a b x) = (a + b) / &2
   b / &3 - a / &3 = (b - a) / &3
   b:real
   a:real
   \\x:real. x pow 2
   \\x:real. x pow 3 / &3
-  !a b. a <= b ==>\n   ((\\x. x pow 2) has_real_integral (b pow 3 - a pow 3) / &3)\n   (real_interval[a,b])
+  forall a b. a <= b ==>\n   ((\\x. x pow 2) has_real_integral (b pow 3 - a pow 3) / &3)\n   (real_interval[a,b])
   ~(b - a = &0) ==>\n      (a pow 2 + a * b + b pow 2) / &3 =\n      inv(b - a) * ((b pow 3 - a pow 3) / &3)
   (a pow 2 + a * b + b pow 2) / &3 =\n     inv(b - a) * ((b pow 3 - a pow 3) / &3)
   (\\x:real. x pow 2 * uniform_density a b x) =\n     (\\x. if x IN real_interval[a,b] then inv(b - a) * x pow 2 else &0)
   ~(b - a = &0)
-  !a b. a < b ==>\n   ((\\x. x pow 2 * uniform_density a b x) has_real_integral\n    (a pow 2 + a * b + b pow 2) / &3) (:real)
-  !a b. a < b ==>\n   real_integral (:real) (\\x. x pow 2 * uniform_density a b x) =\n   (a pow 2 + a * b + b pow 2) / &3
+  forall a b. a < b ==>\n   ((\\x. x pow 2 * uniform_density a b x) has_real_integral\n    (a pow 2 + a * b + b pow 2) / &3) (:real)
+  forall a b. a < b ==>\n   real_integral (:real) (\\x. x pow 2 * uniform_density a b x) =\n   (a pow 2 + a * b + b pow 2) / &3
   ((\\x. x pow 2 * uniform_density a b x -\n           &2 * mu * (x * uniform_density a b x) +\n           mu pow 2 * uniform_density a b x) has_real_integral\n     ((a pow 2 + a * b + b pow 2) / &3 -\n      &2 * mu * ((a + b) / &2) +\n      mu pow 2 * &1))\n    (:real)
   (uniform_density a b has_real_integral &1) (:real)
   ((\\x. x * uniform_density a b x) has_real_integral (a + b) / &2)\n     (:real)
@@ -85526,16 +85526,16 @@ Probability/distributions quotations (1528):
   (\\x. (x - mu) pow 2 * uniform_density a b x) =\n     (\\x. x pow 2 * uniform_density a b x -\n          &2 * mu * (x * uniform_density a b x) +\n          mu pow 2 * uniform_density a b x)
   mu = (a + b) / &2
   ~(b - a = &0)
-  !a b. a < b ==>\n   real_integral (:real)\n     (\\x. (x - (a + b) / &2) pow 2 * uniform_density a b x) =\n   (b - a) pow 2 / &12
+  forall a b. a < b ==>\n   real_integral (:real)\n     (\\x. (x - (a + b) / &2) pow 2 * uniform_density a b x) =\n   (b - a) pow 2 / &12
   (a pow 2 + a * b + b pow 2) / &3 -\n         &2 * ((a + b) / &2) * ((a + b) / &2) +\n         ((a + b) / &2) pow 2 * &1 =\n         (b - a) pow 2 / &12
   abs sigma = sigma
   inv(abs(inv sigma)) * exp(--(sigma pow 2 * t pow 2 / &2)) =\n     sigma * exp(--(sigma pow 2 * t pow 2 / &2))
   ~(sigma = &0)
   x:real
-  !x:real. (t * sigma) * ((x - mu) / sigma) = t * (x - mu)
+  forall x:real. (t * sigma) * ((x - mu) / sigma) = t * (x - mu)
   ~(sigma = &0)
   x:real
-  !x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
+  forall x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
   --(mu / sigma):real
   inv(sigma):real
   exp(--(sigma pow 2 * t pow 2 / &2)):real
@@ -85548,13 +85548,13 @@ Probability/distributions quotations (1528):
   (\\x. normal_density mu sigma x * cos(t * (x - mu))) =\n     (\\x. inv(sigma) * (std_normal_density((x - mu) / sigma) *\n          cos(t * (x - mu))))
   ~(inv sigma = &0)
   ~(sigma = &0)
-  !mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * cos(t * (x - mu)))\n     has_real_integral exp(--(sigma pow 2 * t pow 2 / &2))) (:real)
+  forall mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * cos(t * (x - mu)))\n     has_real_integral exp(--(sigma pow 2 * t pow 2 / &2))) (:real)
   ~(sigma = &0)
   x:real
-  !x:real. (t * sigma) * ((x - mu) / sigma) = t * (x - mu)
+  forall x:real. (t * sigma) * ((x - mu) / sigma) = t * (x - mu)
   ~(sigma = &0)
   x:real
-  !x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
+  forall x:real. inv sigma * x + --(mu / sigma) = (x - mu) / sigma
   --(mu / sigma):real
   inv(sigma):real
   &0:real
@@ -85565,7 +85565,7 @@ Probability/distributions quotations (1528):
   (\\x. normal_density mu sigma x * sin(t * (x - mu))) =\n     (\\x. inv(sigma) * (std_normal_density((x - mu) / sigma) *\n          sin(t * (x - mu))))
   ~(inv sigma = &0)
   ~(sigma = &0)
-  !mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * sin(t * (x - mu)))\n     has_real_integral &0) (:real)
+  forall mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * sin(t * (x - mu)))\n     has_real_integral &0) (:real)
   d * s * sm:real = (d * s) * sm
   d * c * cm:real = (d * c) * cm
   exp(--(sigma pow 2 * t pow 2 / &2)) * cos(mu * t) =\n     exp(--(sigma pow 2 * t pow 2 / &2)) * cos(t * mu) -\n     &0 * sin(t * mu)
@@ -85573,8 +85573,8 @@ Probability/distributions quotations (1528):
   t * mu:real
   t * (x - mu):real
   x:real
-  !x:real. cos(t * x) =\n       cos(t * (x - mu)) * cos(t * mu) - sin(t * (x - mu)) * sin(t * mu)
-  !mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * cos(t * x)) has_real_integral\n     exp(--(sigma pow 2 * t pow 2 / &2)) * cos(mu * t)) (:real)
+  forall x:real. cos(t * x) =\n       cos(t * (x - mu)) * cos(t * mu) - sin(t * (x - mu)) * sin(t * mu)
+  forall mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * cos(t * x)) has_real_integral\n     exp(--(sigma pow 2 * t pow 2 / &2)) * cos(mu * t)) (:real)
   d * c * sm:real = (d * c) * sm
   d * s * cm:real = (d * s) * cm
   exp(--(sigma pow 2 * t pow 2 / &2)) * sin(mu * t) =\n     &0 * cos(t * mu) +\n     exp(--(sigma pow 2 * t pow 2 / &2)) * sin(t * mu)
@@ -85582,44 +85582,44 @@ Probability/distributions quotations (1528):
   t * mu:real
   t * (x - mu):real
   x:real
-  !x:real. sin(t * x) =\n       sin(t * (x - mu)) * cos(t * mu) + cos(t * (x - mu)) * sin(t * mu)
-  !mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * sin(t * x)) has_real_integral\n     exp(--(sigma pow 2 * t pow 2 / &2)) * sin(mu * t)) (:real)
+  forall x:real. sin(t * x) =\n       sin(t * (x - mu)) * cos(t * mu) + cos(t * (x - mu)) * sin(t * mu)
+  forall mu sigma t. &0 < sigma ==>\n    ((\\x. normal_density mu sigma x * sin(t * x)) has_real_integral\n     exp(--(sigma pow 2 * t pow 2 / &2)) * sin(mu * t)) (:real)
   b / t - a / t = (b - a) / t:real
   ~(t = &0)
   b:real
   a:real
   \\x:real. cos(t * x)
   \\x:real. sin(t * x) / t
-  !a b t. a <= b /\\ ~(t = &0) ==>\n    ((\\x. cos(t * x)) has_real_integral\n     (sin(t * b) - sin(t * a)) / t) (real_interval[a,b])
+  forall a b t. a <= b /\\ ~(t = &0) ==>\n    ((\\x. cos(t * x)) has_real_integral\n     (sin(t * b) - sin(t * a)) / t) (real_interval[a,b])
   --(c2:real) / t - --(c1) / t = (c1 - c2) / t
   ~(t = &0)
   b:real
   a:real
   \\x:real. sin(t * x)
   \\x:real. --(cos(t * x)) / t
-  !a b t. a <= b /\\ ~(t = &0) ==>\n    ((\\x. sin(t * x)) has_real_integral\n     (cos(t * a) - cos(t * b)) / t) (real_interval[a,b])
+  forall a b t. a <= b /\\ ~(t = &0) ==>\n    ((\\x. sin(t * x)) has_real_integral\n     (cos(t * a) - cos(t * b)) / t) (real_interval[a,b])
   ~(t = &0)
   ~(b - a = &0)
   (sin(t * b) - sin(t * a)) / (t * (b - a)) =\n     inv(b - a) * ((sin(t * b) - sin(t * a)) / t)
   (\\x:real. uniform_density a b x * cos(t * x)) =\n     (\\x. if x IN real_interval[a,b] then inv(b - a) * cos(t * x) else &0)
   ~(b - a = &0)
-  !a b t. a < b /\\ ~(t = &0) ==>\n    ((\\x. uniform_density a b x * cos(t * x)) has_real_integral\n     (sin(t * b) - sin(t * a)) / (t * (b - a))) (:real)
+  forall a b t. a < b /\\ ~(t = &0) ==>\n    ((\\x. uniform_density a b x * cos(t * x)) has_real_integral\n     (sin(t * b) - sin(t * a)) / (t * (b - a))) (:real)
   ~(t = &0)
   ~(b - a = &0)
   (cos(t * a) - cos(t * b)) / (t * (b - a)) =\n     inv(b - a) * ((cos(t * a) - cos(t * b)) / t)
   (\\x:real. uniform_density a b x * sin(t * x)) =\n     (\\x. if x IN real_interval[a,b] then inv(b - a) * sin(t * x) else &0)
   ~(b - a = &0)
-  !a b t. a < b /\\ ~(t = &0) ==>\n    ((\\x. uniform_density a b x * sin(t * x)) has_real_integral\n     (cos(t * a) - cos(t * b)) / (t * (b - a))) (:real)
+  forall a b t. a < b /\\ ~(t = &0) ==>\n    ((\\x. uniform_density a b x * sin(t * x)) has_real_integral\n     (cos(t * a) - cos(t * b)) / (t * (b - a))) (:real)
   &0 < l
   ~(l pow 2 + t pow 2 = &0)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t x. &0 < l ==>\n    ((\\x. exp(--l * x) * (--l * cos(t * x) + t * sin(t * x)) /\n          (l pow 2 + t pow 2))\n     has_real_derivative (exp(--l * x) * cos(t * x))) (atreal x)
+  forall l t x. &0 < l ==>\n    ((\\x. exp(--l * x) * (--l * cos(t * x) + t * sin(t * x)) /\n          (l pow 2 + t pow 2))\n     has_real_derivative (exp(--l * x) * cos(t * x))) (atreal x)
   &0 < l
   ~(l pow 2 + t pow 2 = &0)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t x. &0 < l ==>\n    ((\\x. exp(--l * x) * (--l * sin(t * x) - t * cos(t * x)) /\n          (l pow 2 + t pow 2))\n     has_real_derivative (exp(--l * x) * sin(t * x))) (atreal x)
+  forall l t x. &0 < l ==>\n    ((\\x. exp(--l * x) * (--l * sin(t * x) - t * cos(t * x)) /\n          (l pow 2 + t pow 2))\n     has_real_derivative (exp(--l * x) * sin(t * x))) (atreal x)
   ~(l pow 2 + t pow 2 = &0)
   exp(--l * k) * (--l * cos(t * k) + t * sin(t * k)) /\n      (l pow 2 + t pow 2) -\n      exp(--l * &0) * (--l * cos(t * &0) + t * sin(t * &0)) /\n      (l pow 2 + t pow 2) =\n      (l - exp(--l * k) * (l * cos(t * k) - t * sin(t * k))) /\n      (l pow 2 + t pow 2)
   k:real
@@ -85628,7 +85628,7 @@ Probability/distributions quotations (1528):
   \\x:real. exp(--l * x) * (--l * cos(t * x) + t * sin(t * x)) /\n              (l pow 2 + t pow 2)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t k. &0 < l /\\ &0 <= k ==>\n    ((\\x. exp(--l * x) * cos(t * x)) has_real_integral\n     (l - exp(--l * k) * (l * cos(t * k) - t * sin(t * k))) /\n     (l pow 2 + t pow 2))\n    (real_interval[&0,k])
+  forall l t k. &0 < l /\\ &0 <= k ==>\n    ((\\x. exp(--l * x) * cos(t * x)) has_real_integral\n     (l - exp(--l * k) * (l * cos(t * k) - t * sin(t * k))) /\n     (l pow 2 + t pow 2))\n    (real_interval[&0,k])
   ~(l pow 2 + t pow 2 = &0)
   exp(--l * k) * (--l * sin(t * k) - t * cos(t * k)) /\n      (l pow 2 + t pow 2) -\n      exp(--l * &0) * (--l * sin(t * &0) - t * cos(t * &0)) /\n      (l pow 2 + t pow 2) =\n      (t - exp(--l * k) * (l * sin(t * k) + t * cos(t * k))) /\n      (l pow 2 + t pow 2)
   k:real
@@ -85637,10 +85637,10 @@ Probability/distributions quotations (1528):
   \\x:real. exp(--l * x) * (--l * sin(t * x) - t * cos(t * x)) /\n              (l pow 2 + t pow 2)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t k. &0 < l /\\ &0 <= k ==>\n    ((\\x. exp(--l * x) * sin(t * x)) has_real_integral\n     (t - exp(--l * k) * (l * sin(t * k) + t * cos(t * k))) /\n     (l pow 2 + t pow 2))\n    (real_interval[&0,k])
+  forall l t k. &0 < l /\\ &0 <= k ==>\n    ((\\x. exp(--l * x) * sin(t * x)) has_real_integral\n     (t - exp(--l * k) * (l * sin(t * k) + t * cos(t * k))) /\n     (l pow 2 + t pow 2))\n    (real_interval[&0,k])
   (\\x:real. if &0 <= x then l * exp(--l * x) else &0) =\n     (\\x. if x IN {x | &0 <= x} then l * exp(--l * x) else &0)
   &1
-  !l. &0 < l ==>\n    (\\x. if &0 <= x then l * exp(--l * x) else &0)\n    real_integrable_on (:real)
+  forall l. &0 < l ==>\n    (\\x. if &0 <= x then l * exp(--l * x) else &0)\n    real_integrable_on (:real)
   l:real
   abs(a * c) <= abs a /\\ abs(b * s) <= abs b\n      ==> abs(a * c - b * s) <= abs a + abs b
   n:num
@@ -85684,7 +85684,7 @@ Probability/distributions quotations (1528):
   (if &0 <= x then l * e else &0) * c =\n     (if &0 <= x then l * e * c else &0)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t. &0 < l ==>\n    ((\\x. exponential_density l x * cos(t * x)) has_real_integral\n     l pow 2 / (l pow 2 + t pow 2)) {x | &0 <= x}
+  forall l t. &0 < l ==>\n    ((\\x. exponential_density l x * cos(t * x)) has_real_integral\n     l pow 2 / (l pow 2 + t pow 2)) {x | &0 <= x}
   l:real
   abs(a * s) <= abs a /\\ abs(b * c) <= abs b\n      ==> abs(a * s + b * c) <= abs a + abs b
   n:num
@@ -85728,7 +85728,7 @@ Probability/distributions quotations (1528):
   (if &0 <= x then l * e else &0) * s =\n     (if &0 <= x then l * e * s else &0)
   &0 < a /\\ &0 <= b ==> ~(a + b = &0)
   ~(l pow 2 + t pow 2 = &0)
-  !l t. &0 < l ==>\n    ((\\x. exponential_density l x * sin(t * x)) has_real_integral\n     l * t / (l pow 2 + t pow 2)) {x | &0 <= x}
+  forall l t. &0 < l ==>\n    ((\\x. exponential_density l x * sin(t * x)) has_real_integral\n     l * t / (l pow 2 + t pow 2)) {x | &0 <= x}
   prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (X:A->real) x = &0} =\n     &1 - q
   1 = SUC 0
   {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} = {}
@@ -85737,7 +85737,7 @@ Probability/distributions quotations (1528):
   0 <= 1
   IMAGE (X:A->real) (prob_carrier p) SUBSET IMAGE (\\k:num. &k) (0..1)
   \\u:real. cos(t * u)
-  !p:A prob_space X q t. bernoulli_rv p X q ==>\n     simple_char_fn_re p X t = (&1 - q) + q * cos t
+  forall p:A prob_space X q t. bernoulli_rv p X q ==>\n     simple_char_fn_re p X t = (&1 - q) + q * cos t
   1 = SUC 0
   {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} = {}
   v:real
@@ -85745,7 +85745,7 @@ Probability/distributions quotations (1528):
   0 <= 1
   IMAGE (X:A->real) (prob_carrier p) SUBSET IMAGE (\\k:num. &k) (0..1)
   \\u:real. sin(t * u)
-  !p:A prob_space X q t. bernoulli_rv p X q ==>\n     simple_char_fn_im p X t = q * sin t
+  forall p:A prob_space X q t. bernoulli_rv p X q ==>\n     simple_char_fn_im p X t = q * sin t
   prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (X:A->real) x = &k} =\n     &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
   k:num
   {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} = {}
@@ -85753,7 +85753,7 @@ Probability/distributions quotations (1528):
   sum (IMAGE (X:A->real) (prob_carrier p))\n       (\\u. cos(t * u) * prob p {x | x IN prob_carrier p /\\ X x = u}) =\n     sum (IMAGE (\\k:num. &k) (0..n))\n       (\\u. cos(t * u) * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = u})
   IMAGE (X:A->real) (prob_carrier p) SUBSET {&k | k <= n}
   \\u:real. cos(t * u)
-  !p:A prob_space X n q t. binomial_rv p X n q ==>\n     simple_char_fn_re p X t =\n     sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                     cos(t * &k))
+  forall p:A prob_space X n q t. binomial_rv p X n q ==>\n     simple_char_fn_re p X t =\n     sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                     cos(t * &k))
   prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (X:A->real) x = &k} =\n     &(binom(n,k)) * q pow k * (&1 - q) pow (n - k)
   k:num
   {x:A | x IN prob_carrier p /\\ (X:A->real) x = v} = {}
@@ -85761,19 +85761,19 @@ Probability/distributions quotations (1528):
   sum (IMAGE (X:A->real) (prob_carrier p))\n       (\\u. sin(t * u) * prob p {x | x IN prob_carrier p /\\ X x = u}) =\n     sum (IMAGE (\\k:num. &k) (0..n))\n       (\\u. sin(t * u) * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = u})
   IMAGE (X:A->real) (prob_carrier p) SUBSET {&k | k <= n}
   \\u:real. sin(t * u)
-  !p:A prob_space X n q t. binomial_rv p X n q ==>\n     simple_char_fn_im p X t =\n     sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                     sin(t * &k))
+  forall p:A prob_space X n q t. binomial_rv p X n q ==>\n     simple_char_fn_im p X t =\n     sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                     sin(t * &k))
   n:num
   \\n:num. exp(--lam) *\n    (Re o (\\n. (Cx lam * cexp (ii * Cx t)) pow n /\n               Cx (&(FACT n)))) n
   exp(--lam) * Re(cexp(Cx(lam) * cexp(ii * Cx(t)))) =\n     exp(lam * (cos t - &1)) * cos(lam * sin t)
   exp(--lam)
   Cx(lam) * cexp(ii * Cx(t))
-  !lam t. &0 <= lam ==>\n    ((\\k. cos(t * &k) * poisson_pmf lam k) real_sums\n     exp(lam * (cos t - &1)) * cos(lam * sin t)) (from 0)
+  forall lam t. &0 <= lam ==>\n    ((\\k. cos(t * &k) * poisson_pmf lam k) real_sums\n     exp(lam * (cos t - &1)) * cos(lam * sin t)) (from 0)
   n:num
   \\n:num. exp(--lam) *\n    (Im o (\\n. (Cx lam * cexp (ii * Cx t)) pow n /\n               Cx (&(FACT n)))) n
   exp(--lam) * Im(cexp(Cx(lam) * cexp(ii * Cx(t)))) =\n     exp(lam * (cos t - &1)) * sin(lam * sin t)
   exp(--lam)
   Cx(lam) * cexp(ii * Cx(t))
-  !lam t. &0 <= lam ==>\n    ((\\k. sin(t * &k) * poisson_pmf lam k) real_sums\n     exp(lam * (cos t - &1)) * sin(lam * sin t)) (from 0)
+  forall lam t. &0 <= lam ==>\n    ((\\k. sin(t * &k) * poisson_pmf lam k) real_sums\n     exp(lam * (cos t - &1)) * sin(lam * sin t)) (from 0)
   n:num
   \\n:num. p *\n    (Re o (\\k. (Cx(&1 - p) * cexp(ii * Cx t)) pow k)) n
   t:real
@@ -85782,7 +85782,7 @@ Probability/distributions quotations (1528):
   p:real
   0
   norm(Cx(&1 - p) * cexp(ii * Cx t)) < &1
-  !p t. &0 < p /\\ p <= &1 ==>\n    ((\\k. cos(t * &k) * geometric_pmf p k) real_sums\n     p * (&1 - (&1 - p) * cos t) /\n     (&1 - &2 * (&1 - p) * cos t + (&1 - p) pow 2)) (from 0)
+  forall p t. &0 < p /\\ p <= &1 ==>\n    ((\\k. cos(t * &k) * geometric_pmf p k) real_sums\n     p * (&1 - (&1 - p) * cos t) /\n     (&1 - &2 * (&1 - p) * cos t + (&1 - p) pow 2)) (from 0)
   n:num
   \\n:num. p *\n    (Im o (\\k. (Cx(&1 - p) * cexp(ii * Cx t)) pow k)) n
   t:real
@@ -85791,17 +85791,17 @@ Probability/distributions quotations (1528):
   p:real
   0
   norm(Cx(&1 - p) * cexp(ii * Cx t)) < &1
-  !p t. &0 < p /\\ p <= &1 ==>\n    ((\\k. sin(t * &k) * geometric_pmf p k) real_sums\n     p * (&1 - p) * sin t /\n     (&1 - &2 * (&1 - p) * cos t + (&1 - p) pow 2)) (from 0)
-  has_density (p:A prob_space) (X:A->real) (f:real->real) <=>\n   random_variable p X /\\\n   (!u. &0 <= f u) /\\\n   (f has_real_integral &1) (:real) /\\\n   (!a b. a <= b ==>\n     prob p {x | x IN prob_carrier p /\\ a < X x /\\ X x <= b} =\n     real_integral (real_interval[a,b]) f) /\\\n   (!g M. (!u. abs(g u) <= M) /\\ g real_continuous_on (:real) /\\\n          random_variable p (\\x. g(X x))\n     ==> integrable p (\\x. g(X x)) /\\\n         expectation p (\\x. g(X x)) =\n         real_integral (:real) (\\u. g u * f u))
-  !p:A prob_space X f. has_density p X f ==> random_variable p X
-  !p:A prob_space X f. has_density p X f ==> !u. &0 <= f u
-  !p:A prob_space X f. has_density p X f\n   ==> (f has_real_integral &1) (:real)
-  !p:A prob_space X f a b.\n   has_density p X f /\\ a <= b\n   ==> prob p {x | x IN prob_carrier p /\\ a < X x /\\ X x <= b} =\n       real_integral (real_interval[a,b]) f
+  forall p t. &0 < p /\\ p <= &1 ==>\n    ((\\k. sin(t * &k) * geometric_pmf p k) real_sums\n     p * (&1 - p) * sin t /\n     (&1 - &2 * (&1 - p) * cos t + (&1 - p) pow 2)) (from 0)
+  has_density (p:A prob_space) (X:A->real) (f:real->real) <=>\n   random_variable p X /\\\n   (forall u. &0 <= f u) /\\\n   (f has_real_integral &1) (:real) /\\\n   (forall a b. a <= b ==>\n     prob p {x | x IN prob_carrier p /\\ a < X x /\\ X x <= b} =\n     real_integral (real_interval[a,b]) f) /\\\n   (forall g M. (forall u. abs(g u) <= M) /\\ g real_continuous_on (:real) /\\\n          random_variable p (\\x. g(X x))\n     ==> integrable p (\\x. g(X x)) /\\\n         expectation p (\\x. g(X x)) =\n         real_integral (:real) (\\u. g u * f u))
+  forall p:A prob_space X f. has_density p X f ==> random_variable p X
+  forall p:A prob_space X f. has_density p X f ==> forall u. &0 <= f u
+  forall p:A prob_space X f. has_density p X f\n   ==> (f has_real_integral &1) (:real)
+  forall p:A prob_space X f a b.\n   has_density p X f /\\ a <= b\n   ==> prob p {x | x IN prob_carrier p /\\ a < X x /\\ X x <= b} =\n       real_integral (real_interval[a,b]) f
   &1
-  !p:A prob_space X f. has_density p X f\n   ==> f real_integrable_on (:real)
+  forall p:A prob_space X f. has_density p X f\n   ==> f real_integrable_on (:real)
   M:real
   g:real->real
-  !p:A prob_space X f g M.\n   has_density p X f /\\\n   (!u. abs(g u) <= M) /\\\n   g real_continuous_on (:real) /\\\n   random_variable p (\\x. g(X x))\n   ==> integrable p (\\x. g(X x)) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
+  forall p:A prob_space X f g M.\n   has_density p X f /\\\n   (forall u. abs(g u) <= M) /\\\n   g real_continuous_on (:real) /\\\n   random_variable p (\\x. g(X x))\n   ==> integrable p (\\x. g(X x)) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
   min ((g:real->real)((X:A->real) x)) (&m) = g(X x)
   &N
   (g:real->real)((X:A->real) x) <= &m
@@ -85819,13 +85819,13 @@ Probability/distributions quotations (1528):
   p:A prob_space
   \\n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n))
   sequentially
-  !n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n         real_integral (:real) (\\u. min (g u) (&n) * f u)
+  forall n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n         real_integral (:real) (\\u. min (g u) (&n) * f u)
   &0 <= x /\\ x <= n ==> abs x <= n
   &k
   &0 <= x /\\ x <= n ==> abs x <= n
   &k
   &0 <= x /\\ x <= y ==> abs x <= y
-  !n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n           real_integral (:real) (\\u. min (g u) (&n) * f u)
+  forall n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n           real_integral (:real) (\\u. min (g u) (&n) * f u)
   expectation p (\\x:A. (g:real->real)((X:A->real) x))
   m:num
   N:num
@@ -85844,11 +85844,11 @@ Probability/distributions quotations (1528):
   f:real->real
   X:A->real
   p:A prob_space
-  !n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n         real_integral (:real) (\\u. min (g u) (&n) * f u)
+  forall n. expectation p (\\x:A. min ((g:real->real)((X:A->real) x)) (&n)) =\n         real_integral (:real) (\\u. min (g u) (&n) * f u)
   (f:real->real) real_integrable_on (:real)
-  !u. &0 <= (f:real->real) u
+  forall u. &0 <= (f:real->real) u
   random_variable p (X:A->real)
-  !p:A prob_space X f g.\n   has_density p X f /\\\n   g real_continuous_on (:real) /\\\n   (!u. &0 <= g u) /\\\n   integrable p (\\x. g(X x))\n   ==> (\\u. g u * f u) real_integrable_on (:real) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
+  forall p:A prob_space X f g.\n   has_density p X f /\\\n   g real_continuous_on (:real) /\\\n   (forall u. &0 <= g u) /\\\n   integrable p (\\x. g(X x))\n   ==> (\\u. g u * f u) real_integrable_on (:real) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
   real_integral (:real) (\\u:real. max ((g:real->real) u) (&0) * (f:real->real) u) -\n       real_integral (:real) (\\u. max (--g u) (&0) * f u) =\n       real_integral (:real) (\\u. max (g u) (&0) * f u - max (--g u) (&0) * f u)
   \\x:A. max (--((g:real->real)((X:A->real) x))) (&0)
   \\x:A. max ((g:real->real)((X:A->real) x)) (&0)
@@ -85865,39 +85865,39 @@ Probability/distributions quotations (1528):
   p:A prob_space
   integrable p (\\x:A. max (--((g:real->real)((X:A->real) x))) (&0))
   integrable p (\\x:A. max ((g:real->real)((X:A->real) x)) (&0))
-  !p:A prob_space X f g.\n   has_density p X f /\\\n   g real_continuous_on (:real) /\\\n   integrable p (\\x. g(X x))\n   ==> (\\u. g u * f u) real_integrable_on (:real) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
+  forall p:A prob_space X f g.\n   has_density p X f /\\\n   g real_continuous_on (:real) /\\\n   integrable p (\\x. g(X x))\n   ==> (\\u. g u * f u) real_integrable_on (:real) /\\\n       expectation p (\\x. g(X x)) =\n       real_integral (:real) (\\u. g u * f u)
   &1
   \\u:real. cos(t * u)
   &1
   \\u:real. cos(t * u)
-  !p:A prob_space X f t.\n   has_density p X f\n   ==> integrable p (\\x. cos(t * X x)) /\\\n       expectation p (\\x. cos(t * X x)) =\n       real_integral (:real) (\\u. cos(t * u) * f u)
+  forall p:A prob_space X f t.\n   has_density p X f\n   ==> integrable p (\\x. cos(t * X x)) /\\\n       expectation p (\\x. cos(t * X x)) =\n       real_integral (:real) (\\u. cos(t * u) * f u)
   &1
   \\u:real. sin(t * u)
   &1
   \\u:real. sin(t * u)
-  !p:A prob_space X f t.\n   has_density p X f\n   ==> integrable p (\\x. sin(t * X x)) /\\\n       expectation p (\\x. sin(t * X x)) =\n       real_integral (:real) (\\u. sin(t * u) * f u)
+  forall p:A prob_space X f t.\n   has_density p X f\n   ==> integrable p (\\x. sin(t * X x)) /\\\n       expectation p (\\x. sin(t * X x)) =\n       real_integral (:real) (\\u. sin(t * u) * f u)
   normal_distributed (p:A prob_space) (X:A->real) mu sigma <=>\n   has_density p X (normal_density mu sigma) /\\ &0 < sigma
   uniform_distributed (p:A prob_space) (X:A->real) a b <=>\n   has_density p X (uniform_density a b) /\\ a < b
   exponential_distributed (p:A prob_space) (X:A->real) l <=>\n   has_density p X (exponential_density l) /\\ &0 < l
   (\\u:real. cos(t * u) * normal_density mu sigma u) =\n                (\\u. normal_density mu sigma u * cos(t * u))
-  !p:A prob_space X mu sigma t.\n   normal_distributed p X mu sigma\n   ==> char_fn_re p X t =\n       exp(--(sigma pow 2 * t pow 2 / &2)) * cos(mu * t)
+  forall p:A prob_space X mu sigma t.\n   normal_distributed p X mu sigma\n   ==> char_fn_re p X t =\n       exp(--(sigma pow 2 * t pow 2 / &2)) * cos(mu * t)
   (\\u:real. sin(t * u) * normal_density mu sigma u) =\n                (\\u. normal_density mu sigma u * sin(t * u))
-  !p:A prob_space X mu sigma t.\n   normal_distributed p X mu sigma\n   ==> char_fn_im p X t =\n       exp(--(sigma pow 2 * t pow 2 / &2)) * sin(mu * t)
+  forall p:A prob_space X mu sigma t.\n   normal_distributed p X mu sigma\n   ==> char_fn_im p X t =\n       exp(--(sigma pow 2 * t pow 2 / &2)) * sin(mu * t)
   (\\u:real. cos(t * u) * uniform_density a b u) =\n                (\\u. uniform_density a b u * cos(t * u))
-  !p:A prob_space X a b t.\n   uniform_distributed p X a b /\\ ~(t = &0)\n   ==> char_fn_re p X t = (sin(t * b) - sin(t * a)) / (t * (b - a))
+  forall p:A prob_space X a b t.\n   uniform_distributed p X a b /\\ ~(t = &0)\n   ==> char_fn_re p X t = (sin(t * b) - sin(t * a)) / (t * (b - a))
   (\\u:real. sin(t * u) * uniform_density a b u) =\n                (\\u. uniform_density a b u * sin(t * u))
-  !p:A prob_space X a b t.\n   uniform_distributed p X a b /\\ ~(t = &0)\n   ==> char_fn_im p X t = (cos(t * a) - cos(t * b)) / (t * (b - a))
+  forall p:A prob_space X a b t.\n   uniform_distributed p X a b /\\ ~(t = &0)\n   ==> char_fn_im p X t = (cos(t * a) - cos(t * b)) / (t * (b - a))
   (\\u:real. cos(t * u) * exponential_density l u) =\n    (\\x. if x IN {x | &0 <= x}\n         then exponential_density l x * cos(t * x) else &0)
-  !p:A prob_space X l t.\n   exponential_distributed p X l\n   ==> char_fn_re p X t = l pow 2 / (l pow 2 + t pow 2)
+  forall p:A prob_space X l t.\n   exponential_distributed p X l\n   ==> char_fn_re p X t = l pow 2 / (l pow 2 + t pow 2)
   (\\u:real. sin(t * u) * exponential_density l u) =\n    (\\x. if x IN {x | &0 <= x}\n         then exponential_density l x * sin(t * x) else &0)
-  !p:A prob_space X l t.\n   exponential_distributed p X l\n   ==> char_fn_im p X t = l * t / (l pow 2 + t pow 2)
+  forall p:A prob_space X l t.\n   exponential_distributed p X l\n   ==> char_fn_im p X t = l * t / (l pow 2 + t pow 2)
   sigma:real
   mu:real
   \\u:real. u
   normal_density mu sigma
   X:A->real
   p:A prob_space
-  !p:A prob_space X mu sigma.\n   normal_distributed p X mu sigma /\\ integrable p X\n   ==> expectation p X = mu
+  forall p:A prob_space X mu sigma.\n   normal_distributed p X mu sigma /\\ integrable p X\n   ==> expectation p X = mu
   sigma:real
   mu:real
   \\u:real. (u - mu) pow 2
@@ -85909,14 +85909,14 @@ Probability/distributions quotations (1528):
   X:A->real
   p:A prob_space
   expectation p (X:A->real) = mu
-  !p:A prob_space X mu sigma.\n   normal_distributed p X mu sigma /\\\n   integrable p X /\\ integrable p (\\x. (X x - mu) pow 2)\n   ==> variance p X = sigma pow 2
+  forall p:A prob_space X mu sigma.\n   normal_distributed p X mu sigma /\\\n   integrable p X /\\ integrable p (\\x. (X x - mu) pow 2)\n   ==> variance p X = sigma pow 2
   b:real
   a:real
   \\u:real. u
   uniform_density a b
   X:A->real
   p:A prob_space
-  !p:A prob_space X a b.\n   uniform_distributed p X a b /\\ integrable p X\n   ==> expectation p X = (a + b) / &2
+  forall p:A prob_space X a b.\n   uniform_distributed p X a b /\\ integrable p X\n   ==> expectation p X = (a + b) / &2
   b:real
   a:real
   \\u:real. (u - (a + b) / &2) pow 2
@@ -85928,14 +85928,14 @@ Probability/distributions quotations (1528):
   X:A->real
   p:A prob_space
   expectation p (X:A->real) = (a + b) / &2
-  !p:A prob_space X a b.\n   uniform_distributed p X a b /\\\n   integrable p X /\\ integrable p (\\x. (X x - (a + b) / &2) pow 2)\n   ==> variance p X = (b - a) pow 2 / &12
+  forall p:A prob_space X a b.\n   uniform_distributed p X a b /\\\n   integrable p X /\\ integrable p (\\x. (X x - (a + b) / &2) pow 2)\n   ==> variance p X = (b - a) pow 2 / &12
   l:real
   (\\u:real. u * exponential_density l u) =\n      (\\u. if u IN {x | &0 <= x} then u * exponential_density l u else &0)
   \\u:real. u
   exponential_density l
   X:A->real
   p:A prob_space
-  !p:A prob_space X l.\n   exponential_distributed p X l /\\ integrable p X\n   ==> expectation p X = inv l
+  forall p:A prob_space X l.\n   exponential_distributed p X l /\\ integrable p X\n   ==> expectation p X = inv l
   l:real
   (\\u:real. (u - inv l) pow 2 * exponential_density l u) =\n       (\\u. if u IN {x | &0 <= x} then (u - inv l) pow 2 * exponential_density l u else &0)
   \\u:real. (u - inv l) pow 2
@@ -85946,11 +85946,11 @@ Probability/distributions quotations (1528):
   X:A->real
   p:A prob_space
   expectation p (X:A->real) = inv l
-  !p:A prob_space X l.\n   exponential_distributed p X l /\\\n   integrable p X /\\ integrable p (\\x. (X x - inv l) pow 2)\n   ==> variance p X = inv l pow 2
+  forall p:A prob_space X l.\n   exponential_distributed p X l /\\\n   integrable p X /\\ integrable p (\\x. (X x - inv l) pow 2)\n   ==> variance p X = inv l pow 2
   ~(fk = &0) /\\ ~(sk = &0)\n     ==> sk * (e * (l * lp) / (sk * fk)) = l * (e * lp / fk)
   ~(&(SUC k) = &0)
   ~(&(FACT k) = &0)
-  !lam k. &(SUC k) * poisson_pmf lam (SUC k) = lam * poisson_pmf lam k
+  forall lam k. &(SUC k) * poisson_pmf lam (SUC k) = lam * poisson_pmf lam k
   from 1
   lam:real
   &1
@@ -85975,7 +85975,7 @@ Probability/distributions quotations (1528):
   lam:real
   \\k:num. &k * poisson_pmf lam k
   1 - 1 = 0
-  !lam. &0 <= lam ==>\n   ((\\k. &k * poisson_pmf lam k) real_sums lam) (from 0)
+  forall lam. &0 <= lam ==>\n   ((\\k. &k * poisson_pmf lam k) real_sums lam) (from 0)
   lam:real
   (lam:real) pow 2
   &(SUC k) * (lam * poisson_pmf lam (SUC k)) =\n      lam * (&(SUC k) * poisson_pmf lam (SUC k))
@@ -85995,13 +85995,13 @@ Probability/distributions quotations (1528):
   2:num
   l:real
   f:num->real
-  !f:num->real l. (f real_sums l) (from 2) /\\ f 0 = &0 /\\ f 1 = &0\n     ==> (f real_sums l) (from 0)
-  !lam. &0 <= lam ==>\n   ((\\k. &k * (&k - &1) * poisson_pmf lam k) real_sums lam pow 2) (from 0)
+  forall f:num->real l. (f real_sums l) (from 2) /\\ f 0 = &0 /\\ f 1 = &0\n     ==> (f real_sums l) (from 0)
+  forall lam. &0 <= lam ==>\n   ((\\k. &k * (&k - &1) * poisson_pmf lam k) real_sums lam pow 2) (from 0)
   k:num
   ((\\k. &k * (&k - &1) * poisson_pmf lam k + &k * poisson_pmf lam k)\n      real_sums (lam pow 2 + lam)) (from 0)
   ((\\k. &k * poisson_pmf lam k) real_sums lam) (from 0)
   ((\\k. &k * (&k - &1) * poisson_pmf lam k) real_sums lam pow 2) (from 0)
-  !lam. &0 <= lam ==>\n   ((\\k. &k pow 2 * poisson_pmf lam k) real_sums (lam pow 2 + lam)) (from 0)
+  forall lam. &0 <= lam ==>\n   ((\\k. &k pow 2 * poisson_pmf lam k) real_sums (lam pow 2 + lam)) (from 0)
   (\\k. (&k - lam) pow 2 * poisson_pmf lam k) =\n     (\\k. (&k pow 2 * poisson_pmf lam k +\n           (-- &2 * lam) * &k * poisson_pmf lam k) +\n          lam pow 2 * poisson_pmf lam k)
   ((lam pow 2 + lam) + (-- &2 * lam) * lam) + lam pow 2 * &1 = lam
   ((\\k. (&k pow 2 * poisson_pmf lam k +\n            (-- &2 * lam) * &k * poisson_pmf lam k) +\n           lam pow 2 * poisson_pmf lam k) real_sums\n     ((lam pow 2 + lam) + (-- &2 * lam) * lam) +\n     lam pow 2 * &1) (from 0)
@@ -86011,44 +86011,44 @@ Probability/distributions quotations (1528):
   (poisson_pmf lam real_sums &1) (from 0)
   ((\\k. &k * poisson_pmf lam k) real_sums lam) (from 0)
   ((\\k. &k pow 2 * poisson_pmf lam k) real_sums (lam pow 2 + lam)) (from 0)
-  !lam. &0 <= lam ==>\n   ((\\k. (&k - lam) pow 2 * poisson_pmf lam k) real_sums lam) (from 0)
-  has_pmf (p:A prob_space) (X:A->real) (pmf:num->real) <=>\n   random_variable p X /\\\n   (!k. &0 <= pmf k) /\\\n   (pmf real_sums &1) (from 0) /\\\n   (!k. prob p {x | x IN prob_carrier p /\\ X x = &k} = pmf k) /\\\n   (!g M. (!u. abs(g u) <= M) /\\ random_variable p (\\x. g(X x))\n     ==> integrable p (\\x. g(X x)) /\\\n         ((\\k. g(&k) * pmf k) real_sums\n          expectation p (\\x. g(X x))) (from 0)) /\\\n   (!g. integrable p (\\x. g(X x))\n     ==> ((\\k. g(&k) * pmf k) real_sums\n          expectation p (\\x. g(X x))) (from 0))
-  !p:A prob_space X pmf. has_pmf p X pmf ==> random_variable p X
-  !p:A prob_space X pmf. has_pmf p X pmf ==> !k. &0 <= pmf k
-  !p:A prob_space X pmf. has_pmf p X pmf\n   ==> (pmf real_sums &1) (from 0)
-  !p:A prob_space X pmf k.\n   has_pmf p X pmf\n   ==> prob p {x | x IN prob_carrier p /\\ X x = &k} = pmf k
+  forall lam. &0 <= lam ==>\n   ((\\k. (&k - lam) pow 2 * poisson_pmf lam k) real_sums lam) (from 0)
+  has_pmf (p:A prob_space) (X:A->real) (pmf:num->real) <=>\n   random_variable p X /\\\n   (forall k. &0 <= pmf k) /\\\n   (pmf real_sums &1) (from 0) /\\\n   (forall k. prob p {x | x IN prob_carrier p /\\ X x = &k} = pmf k) /\\\n   (forall g M. (forall u. abs(g u) <= M) /\\ random_variable p (\\x. g(X x))\n     ==> integrable p (\\x. g(X x)) /\\\n         ((\\k. g(&k) * pmf k) real_sums\n          expectation p (\\x. g(X x))) (from 0)) /\\\n   (forall g. integrable p (\\x. g(X x))\n     ==> ((\\k. g(&k) * pmf k) real_sums\n          expectation p (\\x. g(X x))) (from 0))
+  forall p:A prob_space X pmf. has_pmf p X pmf ==> random_variable p X
+  forall p:A prob_space X pmf. has_pmf p X pmf ==> forall k. &0 <= pmf k
+  forall p:A prob_space X pmf. has_pmf p X pmf\n   ==> (pmf real_sums &1) (from 0)
+  forall p:A prob_space X pmf k.\n   has_pmf p X pmf\n   ==> prob p {x | x IN prob_carrier p /\\ X x = &k} = pmf k
   &1
   \\u:real. cos(t * u)
-  !p:A prob_space X (pmf:num->real) t.\n   has_pmf p X pmf\n   ==> integrable p (\\x. cos(t * X x)) /\\\n       ((\\k. cos(t * &k) * pmf k) real_sums\n        expectation p (\\x. cos(t * X x))) (from 0)
+  forall p:A prob_space X (pmf:num->real) t.\n   has_pmf p X pmf\n   ==> integrable p (\\x. cos(t * X x)) /\\\n       ((\\k. cos(t * &k) * pmf k) real_sums\n        expectation p (\\x. cos(t * X x))) (from 0)
   &1
   \\u:real. sin(t * u)
-  !p:A prob_space X (pmf:num->real) t.\n   has_pmf p X pmf\n   ==> integrable p (\\x. sin(t * X x)) /\\\n       ((\\k. sin(t * &k) * pmf k) real_sums\n        expectation p (\\x. sin(t * X x))) (from 0)
-  !p:A prob_space X (pmf:num->real) g.\n   has_pmf p X pmf /\\ integrable p (\\x. g(X x))\n   ==> ((\\k. g(&k) * pmf k) real_sums\n        expectation p (\\x. g(X x))) (from 0)
+  forall p:A prob_space X (pmf:num->real) t.\n   has_pmf p X pmf\n   ==> integrable p (\\x. sin(t * X x)) /\\\n       ((\\k. sin(t * &k) * pmf k) real_sums\n        expectation p (\\x. sin(t * X x))) (from 0)
+  forall p:A prob_space X (pmf:num->real) g.\n   has_pmf p X pmf /\\ integrable p (\\x. g(X x))\n   ==> ((\\k. g(&k) * pmf k) real_sums\n        expectation p (\\x. g(X x))) (from 0)
   poisson_distributed (p:A prob_space) (X:A->real) lam <=>\n   has_pmf p X (poisson_pmf lam) /\\ &0 <= lam /\\\n   integrable p X /\\\n   integrable p (\\x. (X x - lam) pow 2)
   geometric_distributed (p:A prob_space) (X:A->real) q <=>\n   has_pmf p X (geometric_pmf q) /\\ &0 < q /\\ q <= &1 /\\\n   integrable p X /\\\n   integrable p (\\x. (X x - (&1 - q) / q) pow 2)
   from 0
   \\k:num. cos(t * &k) * poisson_pmf lam k
   t:real
-  !p:A prob_space X lam t.\n   poisson_distributed p X lam\n   ==> char_fn_re p X t =\n       exp(lam * (cos t - &1)) * cos(lam * sin t)
+  forall p:A prob_space X lam t.\n   poisson_distributed p X lam\n   ==> char_fn_re p X t =\n       exp(lam * (cos t - &1)) * cos(lam * sin t)
   from 0
   \\k:num. sin(t * &k) * poisson_pmf lam k
   t:real
-  !p:A prob_space X lam t.\n   poisson_distributed p X lam\n   ==> char_fn_im p X t =\n       exp(lam * (cos t - &1)) * sin(lam * sin t)
+  forall p:A prob_space X lam t.\n   poisson_distributed p X lam\n   ==> char_fn_im p X t =\n       exp(lam * (cos t - &1)) * sin(lam * sin t)
   from 0
   \\k:num. cos(t * &k) * geometric_pmf q k
   t:real
-  !p:A prob_space X q t.\n   geometric_distributed p X q\n   ==> char_fn_re p X t =\n       q * (&1 - (&1 - q) * cos t) /\n       (&1 - &2 * (&1 - q) * cos t + (&1 - q) pow 2)
+  forall p:A prob_space X q t.\n   geometric_distributed p X q\n   ==> char_fn_re p X t =\n       q * (&1 - (&1 - q) * cos t) /\n       (&1 - &2 * (&1 - q) * cos t + (&1 - q) pow 2)
   from 0
   \\k:num. sin(t * &k) * geometric_pmf q k
   t:real
-  !p:A prob_space X q t.\n   geometric_distributed p X q\n   ==> char_fn_im p X t =\n       q * (&1 - q) * sin t /\n       (&1 - &2 * (&1 - q) * cos t + (&1 - q) pow 2)
+  forall p:A prob_space X q t.\n   geometric_distributed p X q\n   ==> char_fn_im p X t =\n       q * (&1 - q) * sin t /\n       (&1 - &2 * (&1 - q) * cos t + (&1 - q) pow 2)
   \\u:real. u
   poisson_pmf lam
   X:A->real
   p:A prob_space
   from 0
   \\k:num. &k * poisson_pmf lam k
-  !p:A prob_space X lam.\n   poisson_distributed p X lam\n   ==> expectation p X = lam
+  forall p:A prob_space X lam.\n   poisson_distributed p X lam\n   ==> expectation p X = lam
   \\u:real. (u - lam) pow 2
   poisson_pmf lam
   X:A->real
@@ -86057,14 +86057,14 @@ Probability/distributions quotations (1528):
   \\k:num. (&k - lam) pow 2 * poisson_pmf lam k
   poisson_distributed p (X:A->real) lam
   expectation p (X:A->real) = lam
-  !p:A prob_space X lam.\n   poisson_distributed p X lam\n   ==> variance p X = lam
+  forall p:A prob_space X lam.\n   poisson_distributed p X lam\n   ==> variance p X = lam
   \\u:real. u
   geometric_pmf q
   X:A->real
   p:A prob_space
   from 0
   \\k:num. &k * geometric_pmf q k
-  !p:A prob_space X q.\n   geometric_distributed p X q\n   ==> expectation p X = (&1 - q) / q
+  forall p:A prob_space X q.\n   geometric_distributed p X q\n   ==> expectation p X = (&1 - q) / q
   \\u:real. (u - (&1 - q) / q) pow 2
   geometric_pmf q
   X:A->real
@@ -86073,13 +86073,13 @@ Probability/distributions quotations (1528):
   \\k:num. (&k - (&1 - q) / q) pow 2 * geometric_pmf q k
   geometric_distributed p (X:A->real) q
   expectation p (X:A->real) = (&1 - q) / q
-  !p:A prob_space X q.\n   geometric_distributed p X q\n   ==> variance p X = (&1 - q) / q pow 2
+  forall p:A prob_space X q.\n   geometric_distributed p X q\n   ==> variance p X = (&1 - q) / q pow 2
   char_fn_re p (X:A->real) t = simple_char_fn_re p X t
   simple_rv p (X:A->real)
-  !p:A prob_space X n q t. binomial_rv p X n q ==>\n   char_fn_re p X t =\n   sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                   cos(t * &k))
+  forall p:A prob_space X n q t. binomial_rv p X n q ==>\n   char_fn_re p X t =\n   sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                   cos(t * &k))
   char_fn_im p (X:A->real) t = simple_char_fn_im p X t
   simple_rv p (X:A->real)
-  !p:A prob_space X n q t. binomial_rv p X n q ==>\n   char_fn_im p X t =\n   sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                   sin(t * &k))
+  forall p:A prob_space X n q t. binomial_rv p X n q ==>\n   char_fn_im p X t =\n   sum (0..n) (\\k. &(binom(n,k)) * q pow k * (&1 - q) pow (n - k) *\n                   sin(t * &k))
 bernoulli_rv =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\q:real. ((#=:fun(bool,fun(bool,bool)) (((#bernoulli_rv:fun(prob_space('A),fun(fun('A,real),fun(real,bool))) p:prob_space('A)) X:fun('A,real)) q:real)) ((#/\:fun(bool,fun(bool,bool)) ((#simple_rv:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) q:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) q:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) ((#=:fun(real,fun(real,bool)) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%12409:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%12409:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#=:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) x:'A))))))) q:real))))))))))))
 BERNOULLI_RV_PROB_ZERO =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\q:real. ((#==>:fun(bool,fun(bool,bool)) (((#bernoulli_rv:fun(prob_space('A),fun(fun('A,real),fun(real,bool))) p:prob_space('A)) X:fun('A,real)) q:real)) ((#=:fun(real,fun(real,bool)) ((#prob:fun(prob_space('A),fun(fun('A,bool),real)) p:prob_space('A)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%12415:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%12415:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#=:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) x:'A))))))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) q:real)))))))))
 BERNOULLI_RV_EXPECTATION =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\q:real. ((#==>:fun(bool,fun(bool,bool)) (((#bernoulli_rv:fun(prob_space('A),fun(fun('A,real),fun(real,bool))) p:prob_space('A)) X:fun('A,real)) q:real)) ((#=:fun(real,fun(real,bool)) ((#simple_expectation:fun(prob_space('A),fun(fun('A,real),real)) p:prob_space('A)) X:fun('A,real))) q:real))))))))

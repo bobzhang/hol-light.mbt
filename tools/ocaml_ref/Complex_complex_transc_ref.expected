@@ -6297,7 +6297,7 @@ Generating HOL version of proof
 Generating HOL version of proof
 Complex/complex_transc quotations (69):
   csqrt(z) = if Im(z) = &0 then\n                if &0 <= Re(z) then complex(sqrt(Re(z)),&0)\n                else complex(&0,sqrt(--Re(z)))\n              else complex(sqrt((norm(z) + Re(z)) / &2),\n                           (Im(z) / abs(Im(z))) *\n                           sqrt((norm(z) - Re(z)) / &2))
-  !z. abs(Re(z)) <= norm(z) /\\ abs(Im(z)) <= norm(z)
+  forall z. abs(Re(z)) <= norm(z) /\\ abs(Im(z)) <= norm(z)
   &2 * (i * a') * a * h = i * (&2 * h) * a * a'
   (a * b) * a' * b = (a * a') * (b * b:real)
   (m + r) - (m - r) = r * &2
@@ -6305,52 +6305,52 @@ Complex/complex_transc quotations (69):
   &0 <= norm(z) + Re(z) /\\ &0 <= norm(z) - Re(z)
   (s * s - (i * s') * (i * s') = s * s - (i * i) * (s' * s')) /\\\n    (s * i * s' + (i * s')* s = &2 * i * s * s')
   ~(&0 <= x) ==> &0 <= --x
-  !z. csqrt(z) pow 2 = z
+  forall z. csqrt(z) pow 2 = z
   cexp z = Cx(exp(Re z)) * complex(cos(Im z),sin(Im z))
-  !x. Cx(exp x) = cexp(Cx x)
+  forall x. Cx(exp x) = cexp(Cx x)
   cexp(Cx(&0)) = Cx(&1)
-  !w z. cexp(w + z) = cexp(w) * cexp(z)
-  !n z. cexp(Cx(&n) * z) = cexp(z) pow n
+  forall w z. cexp(w + z) = cexp(w) * cexp(z)
+  forall n z. cexp(Cx(&n) * z) = cexp(z) pow n
   Im z
-  !z. ~(cexp z = Cx(&0))
-  !z. cexp(--z) * cexp(z) = Cx(&1)
-  !z. cexp(z) * cexp(--z) = Cx(&1)
-  !z. cexp(--z) = inv(cexp z)
-  !w z. cexp(w - z) = cexp(w) / cexp(z)
+  forall z. ~(cexp z = Cx(&0))
+  forall z. cexp(--z) * cexp(z) = Cx(&1)
+  forall z. cexp(z) * cexp(--z) = Cx(&1)
+  forall z. cexp(--z) = inv(cexp z)
+  forall w z. cexp(w - z) = cexp(w) / cexp(z)
   ccos z = (cexp(ii * z) + cexp(--ii * z)) / Cx(&2)
   csin z = (cexp(ii * z) - cexp(--ii * z)) / (Cx(&2) * ii)
-  (!x. Cx(sin x) = csin(Cx x)) /\\ (!x. Cx(cos x) = ccos(Cx x))
+  (forall x. Cx(sin x) = csin(Cx x)) /\\ (forall x. Cx(cos x) = ccos(Cx x))
   csin(Cx(&0)) = Cx(&0)
   ccos(Cx(&0)) = Cx(&1)
   ii * z
-  !z. csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)
-  !w z. csin(w + z) = csin(w) * ccos(z) + ccos(w) * csin(z)
-  !w z. ccos(w + z) = ccos(w) * ccos(z) - csin(w) * csin(z)
-  !z. csin(--z) = --(csin(z))
-  !z. ccos(--z) = ccos(z)
+  forall z. csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)
+  forall w z. csin(w + z) = csin(w) * ccos(z) + ccos(w) * csin(z)
+  forall w z. ccos(w + z) = ccos(w) * ccos(z) - csin(w) * csin(z)
+  forall z. csin(--z) = --(csin(z))
+  forall z. ccos(--z) = ccos(z)
   Cx(&2) * x = x + x
-  !z. csin(Cx(&2) * z) = Cx(&2) * csin(z) * ccos(z)
+  forall z. csin(Cx(&2) * z) = Cx(&2) * csin(z) * ccos(z)
   Cx(&2) * x = x + x
-  !z. ccos(Cx(&2) * z) = (ccos(z) pow 2) - (csin(z) pow 2)
-  !z. cexp(ii * z) = ccos(z) + ii * csin(z)
-  !z n. (ccos z + ii * csin z) pow n =\n         ccos(Cx(&n) * z) + ii * csin(Cx(&n) * z)
-  !P. (?z. P (Re z) (Im z)) <=> ?x y. P x y
+  forall z. ccos(Cx(&2) * z) = (ccos(z) pow 2) - (csin(z) pow 2)
+  forall z. cexp(ii * z) = ccos(z) + ii * csin(z)
+  forall z n. (ccos z + ii * csin z) pow n =\n         ccos(Cx(&n) * z) + ii * csin(Cx(&n) * z)
+  forall P. (?z. P (Re z) (Im z)) <=> ?x y. P x y
   t:real
   t:real
   (pow):real->num->real
   2
-  !z. (norm z = &1) ==> ?x. z = complex(cos(x),sin(x))
+  forall z. (norm z = &1) ==> ?x. z = complex(cos(x),sin(x))
   pi * &n = &n * pi
   abs(x) = &n <=> x = &n \\/ x = -- &n
-  !n. integer n ==> sin((&2 * pi) * n) = &0
+  forall n. integer n ==> sin((&2 * pi) * n) = &0
   pi * &n = &n * pi
   abs(x) = &n <=> x = &n \\/ x = -- &n
-  !n. integer n ==> cos((&2 * pi) * n) = &1
+  forall n. integer n ==> cos((&2 * pi) * n) = &1
   a - (a - b - c):real = b + c
   p - x <= p <=> (&2 * p) * &0 <= x
   --p < p - x <=> x < (&2 * p) * &1
   pi - (&2 * pi) * frac((pi - x) / (&2 * pi))
-  !x. ?y. (--pi < y /\\ y <= pi) /\\ (sin(y) = sin(x) /\\ cos(y) = cos(x))
+  forall x. ?y. (--pi < y /\\ y <= pi) /\\ (sin(y) = sin(x) /\\ cos(y) = cos(x))
   clog z = @w. cexp(w) = z /\\ --pi < Im(w) /\\ Im(w) <= pi
   y:real
   x:real
@@ -6358,13 +6358,13 @@ Complex/complex_transc quotations (69):
   z / Cx(norm z)
   exp(ln(norm(z:complex))) = norm(z)
   ln(norm(z:complex))
-  !z. ~(z = Cx(&0))\n       ==> cexp(clog z) = z /\\ --pi < Im(clog z) /\\ Im(clog z) <= pi
-  !z. ~(z = Cx(&0)) ==> cexp(clog z) = z
+  forall z. ~(z = Cx(&0))\n       ==> cexp(clog z) = z /\\ --pi < Im(clog z) /\\ Im(clog z) <= pi
+  forall z. ~(z = Cx(&0)) ==> cexp(clog z) = z
   unwinding(z) = (z - clog(cexp z)) / (Cx(&2 * pi) * ii)
   ~(ii = Cx(&0))
   Cx(&2 * pi) * ii * unwinding(z) = z - clog(cexp z)
   w + z - ((w + z) - c) = c:complex
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n               clog(w) + clog(z) -\n               Cx(&2 * pi) * ii * unwinding(clog w + clog z)
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n               clog(w) + clog(z) -\n               Cx(&2 * pi) * ii * unwinding(clog w + clog z)
 csqrt =  |- (#!:fun(fun(complex,bool),bool) (\z:complex. ((#=:fun(complex,fun(complex,bool)) (#csqrt:fun(complex,complex) z:complex)) (((#COND:fun(bool,fun(complex,fun(complex,complex))) ((#=:fun(real,fun(real,bool)) (#Im:fun(complex,real) z:complex)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (((#COND:fun(bool,fun(complex,fun(complex,complex))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#Re:fun(complex,real) z:complex))) (#complex:fun(prod(real,real),complex) ((#,:fun(real,fun(real,prod(real,real))) (#sqrt:fun(real,real) (#Re:fun(complex,real) z:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#complex:fun(prod(real,real),complex) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) (#Re:fun(complex,real) z:complex))))))) (#complex:fun(prod(real,real),complex) ((#,:fun(real,fun(real,prod(real,real))) (#sqrt:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#complex_norm:fun(complex,real) z:complex)) (#Re:fun(complex,real) z:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_mul:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) (#Im:fun(complex,real) z:complex)) (#real_abs:fun(real,real) (#Im:fun(complex,real) z:complex)))) (#sqrt:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (#complex_norm:fun(complex,real) z:complex)) (#Re:fun(complex,real) z:complex))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))
 COMPLEX_NORM_GE_RE_IM =  |- (#!:fun(fun(complex,bool),bool) (\z:complex. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Re:fun(complex,real) z:complex))) (#complex_norm:fun(complex,real) z:complex))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Im:fun(complex,real) z:complex))) (#complex_norm:fun(complex,real) z:complex)))))
 CSQRT =  |- (#!:fun(fun(complex,bool),bool) (\z:complex. ((#=:fun(complex,fun(complex,bool)) ((#complex_pow:fun(complex,fun(num,complex)) (#csqrt:fun(complex,complex) z:complex)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) z:complex)))

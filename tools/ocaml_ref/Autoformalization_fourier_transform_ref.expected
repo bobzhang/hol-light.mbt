@@ -79978,35 +79978,35 @@ Autoformalization/fourier_transform quotations (2067):
   fourier_kernel (y:real) (x:real) = cexp(--(ii * Cx y * Cx x))
   (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (c * f(drop x))) =\n      (\\x. c * (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)))
   integral (:real^1)\n             (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (c * f(drop x))) =\n    c * integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-  !f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. c * f x) y = c * fourier f y
+  forall f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. c * f x) y = c * fourier f y
   (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (f(drop x) + g(drop x))) =\n      (\\x. (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) +\n           (cexp(--(ii * Cx y * Cx(drop x))) * g(drop x)))
   integral (:real^1)\n             (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (f(drop x) + g(drop x))) =\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) +\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * g(drop x))
-  !f g y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * g(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. f x + g x) y = fourier f y + fourier g y
-  !y. fourier (\\x. Cx(&0)) y = Cx(&0)
+  forall f g y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * g(drop x))\n        integrable_on (:real^1)\n        ==> fourier (\\x. f x + g x) y = fourier f y + fourier g y
+  forall y. fourier (\\x. Cx(&0)) y = Cx(&0)
   IMAGE (\\x:real^1. lift c + x) (:real^1) = (:real^1)
   lift c
   (:real^1)
   \\x:real^1. (G:real->complex)(drop x)
-  !G:real->complex c.\n     integral (:real^1) (\\x. G(c + drop x)) =\n     integral (:real^1) (\\x. G(drop x))
+  forall G:real->complex c.\n     integral (:real^1) (\\x. G(c + drop x)) =\n     integral (:real^1) (\\x. G(drop x))
   cexp(--(ii * Cx y * Cx(drop x - c))) =\n                  cexp(ii * Cx c * Cx y) *\n                  cexp(--(ii * Cx y * Cx(drop x)))
-  !x:real^1. cexp(--(ii * Cx y * Cx(drop x - c))) * f(drop x) =\n               cexp(ii * Cx c * Cx y) *\n               (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-  !c x:real. (c + x) - c = x
+  forall x:real^1. cexp(--(ii * Cx y * Cx(drop x - c))) * f(drop x) =\n               cexp(ii * Cx c * Cx y) *\n               (cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
+  forall c x:real. (c + x) - c = x
   integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x + c)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(--(ii * Cx y * Cx(u - c))) * (f:real->complex)\n                u)(c + drop x))
   integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x + c)) =\n    cexp(ii * Cx c * Cx y) *\n    integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))
-  !f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(x + c)) y = cexp(ii * Cx c * Cx y) * fourier f y
+  forall f c y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(x + c)) y = cexp(ii * Cx c * Cx y) * fourier f y
   x:real^1
-  !f c y. fourier (\\x. cexp(ii * Cx c * Cx x) * f x) y = fourier f (y - c)
+  forall f c y. fourier (\\x. cexp(ii * Cx c * Cx x) * f x) y = fourier f (y - c)
   --(ii * Cx y * Cx x) = ii * Cx(--(y * x))
-  !y x. norm(cexp(--(ii * Cx y * Cx x))) = &1
+  forall y x. norm(cexp(--(ii * Cx y * Cx x))) = &1
   x:real^1
   norm(Cx(&1) / Cx(sqrt(&2 * pi))) = &1 / sqrt(&2 * pi)
-  !f y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> norm(fourier f y) <=\n       (&1 / sqrt(&2 * pi)) *\n       drop(integral (:real^1) (\\x. lift(norm(f(drop x)))))
+  forall f y.\n        (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1) /\\\n        (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> norm(fourier f y) <=\n       (&1 / sqrt(&2 * pi)) *\n       drop(integral (:real^1) (\\x. lift(norm(f(drop x)))))
   IMAGE (--) (:real^1) = (:real^1)
   (:real^1)
   \\x:real^1. (G:real->complex)(drop x)
-  !G:real->complex.\n     integral (:real^1) (\\x. G(--(drop x))) =\n     integral (:real^1) (\\x. G(drop x))
+  forall G:real->complex.\n     integral (:real^1) (\\x. G(--(drop x))) =\n     integral (:real^1) (\\x. G(drop x))
   integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(--drop x)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(ii * Cx y * Cx u) * (f:real->complex) u)(--(drop x)))
-  !f y. fourier (\\x. f(--x)) y = fourier f (--y)
+  forall f y. fourier (\\x. f(--x)) y = fourier f (--y)
   &0 < c ==> abs c = c
   c % z:real^1
   z:real^1
@@ -80016,18 +80016,18 @@ Autoformalization/fourier_transform quotations (2067):
   (:real^1)
   integral (:real^1) (\\x:real^1. (G:real->complex)(drop x))
   \\x:real^1. (G:real->complex)(drop x)
-  !G:real->complex c. &0 < c /\\ (\\x. G(drop x)) integrable_on (:real^1)\n   ==> integral (:real^1) (\\x. G(c * drop x)) =\n       (&1 / c) % integral (:real^1) (\\x. G(drop x))
+  forall G:real->complex c. &0 < c /\\ (\\x. G(drop x)) integrable_on (:real^1)\n   ==> integral (:real^1) (\\x. G(c * drop x)) =\n       (&1 / c) % integral (:real^1) (\\x. G(drop x))
   z:complex
   integral (:real^1)\n                     (\\x. cexp(--(ii * Cx (y/c) * Cx(drop x))) *\n                          (f:real->complex)(drop x))
   Cx(y / c) * Cx c = Cx y
   integral (:real^1) (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(c * drop x)) =\n    integral (:real^1)\n      (\\x. (\\u. cexp(--(ii * Cx (y/c) * Cx u)) * (f:real->complex)\n                u)(c * drop x))
-  !f c y.\n        &0 < c /\\\n        (\\x. cexp(--(ii * Cx (y/c) * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(c * x)) y = Cx(&1 / c) * fourier f (y / c)
+  forall f c y.\n        &0 < c /\\\n        (\\x. cexp(--(ii * Cx (y/c) * Cx(drop x))) * f(drop x))\n        integrable_on (:real^1)\n   ==> fourier (\\x. f(c * x)) y = Cx(&1 / c) * fourier f (y / c)
   ii * Cx a * Cx x = (ii * Cx x) * Cx a
-  !x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. --(ii * Cx (yy k) * Cx x)) --> --(ii * Cx y * Cx x))\n       sequentially
+  forall x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. --(ii * Cx (yy k) * Cx x)) --> --(ii * Cx y * Cx x))\n       sequentially
   \\k. --(ii * Cx ((yy:num->real) k) * Cx x)
   --(ii * Cx y * Cx x)
   cexp
-  !x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. cexp(--(ii * Cx (yy k) * Cx x))) -->\n        cexp(--(ii * Cx y * Cx x))) sequentially
+  forall x:real yy y. (yy ---> y) sequentially\n   ==> ((\\k. cexp(--(ii * Cx (yy k) * Cx x))) -->\n        cexp(--(ii * Cx y * Cx x))) sequentially
   a * b = b * a
   --(ii * Cx (yy(k:num)) * Cx(drop(x:real^1))) =\n                      ii * Cx(--(yy k * drop x))
   norm(cexp(--(ii * Cx (yy(k:num)) * Cx(drop(x:real^1))))) = &1
@@ -80035,27 +80035,27 @@ Autoformalization/fourier_transform quotations (2067):
   \\x. lift(norm((f:real->complex)(drop x)))
   \\x. cexp(--(ii * Cx y * Cx(drop x))) * (f:real->complex)(drop x)
   \\k x. cexp(--(ii * Cx ((yy:num->real) k) * Cx(drop x))) *\n           (f:real->complex)(drop x)
-  !f y. (!y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> !yy. (yy ---> y) sequentially\n       ==> ((\\k. integral (:real^1)\n                          (\\x. cexp(--(ii * Cx (yy k) * Cx(drop x))) *\n                               f(drop x)))\n            --> integral (:real^1)\n                         (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)))\n           sequentially
+  forall f y. (forall y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> forall yy. (yy ---> y) sequentially\n       ==> ((\\k. integral (:real^1)\n                          (\\x. cexp(--(ii * Cx (yy k) * Cx(drop x))) *\n                               f(drop x)))\n            --> integral (:real^1)\n                         (\\x. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)))\n           sequentially
   y:real
   f:real->complex
   yy:num->real
-  !f y. (!y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> !yy. (yy ---> y) sequentially\n       ==> ((\\k. fourier f (yy k)) --> fourier f y) sequentially
+  forall f y. (forall y'. (\\x. cexp(--(ii * Cx y' * Cx(drop x))) * f(drop x))\n               integrable_on (:real^1)) /\\\n         (\\x. lift(norm(f(drop x)))) integrable_on (:real^1)\n   ==> forall yy. (yy ---> y) sequentially\n       ==> ((\\k. fourier f (yy k)) --> fourier f y) sequentially
   ~(ii * Cx b = Cx(&0))
-  !b y. ~(b = &0)\n     ==> ((\\y. cexp(ii * Cx b * Cx(drop y)) / (ii * Cx b))\n          has_vector_derivative\n          cexp(ii * Cx b * Cx(drop y))) (at y)
+  forall b y. ~(b = &0)\n     ==> ((\\y. cexp(ii * Cx b * Cx(drop y)) / (ii * Cx b))\n          has_vector_derivative\n          cexp(ii * Cx b * Cx(drop y))) (at y)
   (f has_complex_derivative f') net
   ii * Cx(&2) * Q * inv ii = Cx(&2) * Q
   (P + ii * Q) - (P + ii * --Q) = ii * (Cx(&2) * Q)
-  !P Q w. ~(w = Cx(&0))\n     ==> (P + ii * Q) / (ii * w) - (P + ii * (--Q)) / (ii * w) =\n         Cx(&2) * Q / w
+  forall P Q w. ~(w = Cx(&0))\n     ==> (P + ii * Q) / (ii * w) - (P + ii * (--Q)) / (ii * w) =\n         Cx(&2) * Q / w
   Cx b
   Cx(sin(a*b))
   Cx(cos(a*b))
   ii * Cx b * Cx a = ii * Cx(a * b) /\\\n                ii * Cx b * Cx(--a) = ii * Cx(--(a * b))
-  !a b. ~(b = &0)\n     ==> cexp(ii * Cx b * Cx a) / (ii * Cx b) -\n         cexp(ii * Cx b * Cx(--a)) / (ii * Cx b) =\n         Cx(&2 * sin(a * b) / b)
+  forall a b. ~(b = &0)\n     ==> cexp(ii * Cx b * Cx a) / (ii * Cx b) -\n         cexp(ii * Cx b * Cx(--a)) / (ii * Cx b) =\n         Cx(&2 * sin(a * b) / b)
   lift a
   lift(--a)
   \\y. cexp(ii * Cx b * Cx(drop y))
   \\y. cexp(ii * Cx b * Cx(drop y)) / (ii * Cx b)
-  !a b. &0 <= a /\\ ~(b = &0)\n     ==> integral (interval[lift(--a), lift a])\n                  (\\y. cexp(ii * Cx b * Cx(drop y))) =\n         Cx(&2 * sin(a * b) / b)
+  forall a b. &0 <= a /\\ ~(b = &0)\n     ==> integral (interval[lift(--a), lift a])\n                  (\\y. cexp(ii * Cx b * Cx(drop y))) =\n         Cx(&2 * sin(a * b) / b)
   sinc x = if x = &0 then &1 else sin x / x
   x':real
   abs x
@@ -80064,34 +80064,34 @@ Autoformalization/fourier_transform quotations (2067):
   \\x. sin x / x
   sinc(&0) = &1
   x = &0
-  !x. sinc real_continuous atreal x
-  !s. sinc real_continuous_on s
-  !a b. sinc real_integrable_on real_interval[a,b]
+  forall x. sinc real_continuous atreal x
+  forall s. sinc real_continuous_on s
+  forall a b. sinc real_integrable_on real_interval[a,b]
   (\\t. sinc(c * t)) = sinc o (\\t. c * t)
-  !c a b. (\\t. sinc(c * t)) real_integrable_on real_interval[a,b]
+  forall c a b. (\\t. sinc(c * t)) real_integrable_on real_interval[a,b]
   ~(c = &0) /\\ ~(x = &0) ==> sin (c * x) / x = c * sin (c * x) / (c * x)
   {&0}
   \\t. c * sinc(c * t)
-  !c a b. &0 < c ==> (\\t. sin(c * t) / t) real_integrable_on\n   real_interval[a,b]
+  forall c a b. &0 < c ==> (\\t. sin(c * t) / t) real_integrable_on\n   real_interval[a,b]
   c:real
   c:real
   b:real
   a:real
   \\x:real. --(inv x)
   sin
-  !a b. &0 < a /\\ a <= b\n   ==> ?c. c IN real_interval[a,b] /\\\n           real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n           --(inv a) * real_integral (real_interval[a,c]) sin +\n           --(inv b) * real_integral (real_interval[c,b]) sin
+  forall a b. &0 < a /\\ a <= b\n   ==> ?c. c IN real_interval[a,b] /\\\n           real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n           --(inv a) * real_integral (real_interval[a,c]) sin +\n           --(inv b) * real_integral (real_interval[c,b]) sin
   --cos c - --cos a = cos a - cos c
   c:real
   a:real
   sin
   \\x. --(cos x)
-  !a c. a <= c ==> real_integral (real_interval[a,c]) sin = cos a - cos c
-  !a b. &0 < a ==> (\\x. sin x / x) real_integrable_on real_interval[a,b]
+  forall a c. a <= c ==> real_integral (real_interval[a,c]) sin = cos a - cos c
+  forall a b. &0 < a ==> (\\x. sin x / x) real_integrable_on real_interval[a,b]
   (\\x. --(inv x) * sin x) = (\\x. --(sin x / x))
-  !a b. &0 < a\n   ==> real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n       --(real_integral (real_interval[a,b]) (\\x. sin x / x))
+  forall a b. &0 < a\n   ==> real_integral (real_interval[a,b]) (\\x. --(inv x) * sin x) =\n       --(real_integral (real_interval[a,b]) (\\x. sin x / x))
   abs i = i
   abs i * &2
-  !i d:real. &0 < i /\\ abs d <= &2 ==> abs(i * d) <= &2 * i
+  forall i d:real. &0 < i /\\ abs d <= &2 ==> abs(i * d) <= &2 * i
   abs u <= &2 * inv a /\\ abs v <= &2 * inv b ==> abs(u + v) <= &2 * inv a +\n     &2 * inv b
   c:real
   b:real
@@ -80107,17 +80107,17 @@ Autoformalization/fourier_transform quotations (2067):
   c:real
   b:real
   a:real
-  !a b. &0 < a /\\ a <= b\n   ==> abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &2 * inv a +\n     &2 * inv b
+  forall a b. &0 < a /\\ a <= b\n   ==> abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &2 * inv a +\n     &2 * inv b
   real_interval[a:real,b]
   {&0}
   \\x. sin x / x
   sinc
-  !a b. (\\x. sin x / x) real_integrable_on real_interval[a,b]
+  forall a b. (\\x. sin x / x) real_integrable_on real_interval[a,b]
   ~(c = &0) ==> inv c * --(c * p) = --p
   ~(c = &0) ==> inv c * (c * p) = p
   &0 <= inv c
   ~(c = &0) /\\ &0 <= c * p
-  !c p. &0 < c /\\ &0 <= p\n     ==> IMAGE (\\x. inv c * x) (real_interval[--(c*p),c*p]) =\n       real_interval[--p,p]
+  forall c p. &0 < c /\\ &0 <= p\n     ==> IMAGE (\\x. inv c * x) (real_interval[--(c*p),c*p]) =\n       real_interval[--p,p]
   ~(c = &0) /\\ ~(x = &0) ==> sin (c * x) / x = c * sin (c * x) / (c * x)
   {&0}
   \\x. c * sin (c * x) / (c * x)
@@ -80129,15 +80129,15 @@ Autoformalization/fourier_transform quotations (2067):
   --(c*p):real
   real_integral (real_interval[--(c*p),c*p]) (\\x. sin x / x)
   \\x. sin x / x
-  !c p. &0 < c /\\ &0 <= p\n     ==> real_integral (real_interval[--(c*p), c*p]) (\\x. sin x / x) =\n         real_integral (real_interval[--p,p]) (\\t. sin(c * t) / t)
+  forall c p. &0 < c /\\ &0 <= p\n     ==> real_integral (real_interval[--(c*p), c*p]) (\\x. sin x / x) =\n         real_integral (real_interval[--p,p]) (\\t. sin(c * t) / t)
   &0 <= --(sin u) ==> sin u <= &0
   s <= &0 ==> abs s = --s
   ~(&0 <= u) ==> abs u = --u
   &0 <= u ==> abs u = u
   &0 <= u
-  !u. abs u <= pi ==> abs(sin u) = sin(abs u)
+  forall u. abs u <= pi ==> abs(sin u) = sin(abs u)
   abs(sin(t / &2)) = sin(abs(t / &2))
-  !t. &1 <= abs t /\\ abs t <= pi ==> sin(&1 / &2) <= abs(sin(t / &2))
+  forall t. &1 <= abs t /\\ abs t <= pi ==> sin(&1 / &2) <= abs(sin(t / &2))
   n:real
   n:real
   x / &2
@@ -80159,44 +80159,44 @@ Autoformalization/fourier_transform quotations (2067):
   inv(&0) - inv(&2 * sin(&0 / &2)) = &0
   t = &0
   &0 <= &2 * inv(sin(&1 / &2))
-  !t. t IN real_interval[--pi,pi]\n       ==> abs(inv t - inv(&2 * sin(t / &2))) <= &2 + &2 * inv(sin(&1 / &2))
+  forall t. t IN real_interval[--pi,pi]\n       ==> abs(inv t - inv(&2 * sin(t / &2))) <= &2 + &2 * inv(sin(&1 / &2))
   x:real
   &0
   &2 + &2 * inv(sin(&1 / &2)) + &1
   (\\t. (inv t - inv(&2 * sin(t / &2))) * &1) absolutely_real_integrable_on\n    real_interval[--pi,pi]
   (\\t. inv t - inv(&2 * sin(t / &2))) absolutely_real_integrable_on\n   real_interval[--pi,pi]
   &1
-  !n. (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))))\n       real_integrable_on real_interval[--pi,pi]
+  forall n. (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))))\n       real_integrable_on real_interval[--pi,pi]
   n:num
   {&0}
   dirichlet_kernel n
-  !n. (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2)))\n       real_integrable_on real_interval[--pi,pi]
+  forall n. (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2)))\n       real_integrable_on real_interval[--pi,pi]
   real_interval[--pi,pi]
   n:num
   \\x:real. &1
-  !n. real_integral (real_interval[--pi,pi])\n         (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2))) = pi
+  forall n. real_integral (real_interval[--pi,pi])\n         (\\t. sin((&n + &1 / &2) * t) / (&2 * sin(t / &2))) = pi
   pi
   &0
   \\n:num. pi
   \\n. real_integral (real_interval[--pi,pi])\n          (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))))
   sequentially
-  !s a b:real. s * (a - b) + s * b = s * a
+  forall s a b:real. s * (a - b) + s * b = s * a
   t:real
   real_integral (real_interval[--pi,pi])\n                    (\\t. sin((&n + &1 / &2) * t) / t) =\n      real_integral (real_interval[--pi,pi])\n        (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2))) +\n             sin((&n + &1 / &2) * t) / (&2 * sin(t / &2)))
-  !n. real_integral (real_interval[--pi,pi])\n                      (\\t. sin((&n + &1 / &2) * t) / t) =\n        real_integral (real_interval[--pi,pi])\n          (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2)))) + pi
+  forall n. real_integral (real_interval[--pi,pi])\n                      (\\t. sin((&n + &1 / &2) * t) / t) =\n        real_integral (real_interval[--pi,pi])\n          (\\t. sin((&n + &1 / &2) * t) * (inv t - inv(&2 * sin(t / &2)))) + pi
   ((\\n. real_integral (real_interval[--pi,pi])\n                       (\\t. sin((&n + &1 / &2) * t) / t))\n    ---> pi) sequentially
   a:real
   &0:real
   \\x. sin x / x
-  !a. real_integral (real_interval[--a,&0]) (\\x. sin x / x) =\n       real_integral (real_interval[&0,a]) (\\x. sin x / x)
+  forall a. real_integral (real_interval[--a,&0]) (\\x. sin x / x) =\n       real_integral (real_interval[&0,a]) (\\x. sin x / x)
   &0 <= a ==> --a <= &0
   &0:real
   a:real
   --a:real
   \\x. sin x / x
-  !a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\x. sin x / x) =\n           &2 * real_integral (real_interval[&0,a]) (\\x. sin x / x)
+  forall a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\x. sin x / x) =\n           &2 * real_integral (real_interval[&0,a]) (\\x. sin x / x)
   &1 / &2
-  !n. real_integral\n         (real_interval[--((&n + &1 / &2) * pi), (&n + &1 / &2) * pi])\n         (\\x. sin x / x) =\n       real_integral (real_interval[--pi,pi])\n                     (\\t. sin((&n + &1 / &2) * t) / t)
+  forall n. real_integral\n         (real_interval[--((&n + &1 / &2) * pi), (&n + &1 / &2) * pi])\n         (\\x. sin x / x) =\n       real_integral (real_interval[--pi,pi])\n                     (\\t. sin((&n + &1 / &2) * t) / t)
   ((\\n. real_integral\n           (real_interval[--((&n + &1 / &2) * pi), (&n + &1 / &2) * pi])\n           (\\x. sin x / x)) ---> pi) sequentially
   &8 / b = &2 * (&2 * inv b + &2 * inv b)
   inv a <= inv b
@@ -80208,7 +80208,7 @@ Autoformalization/fourier_transform quotations (2067):
   \\x. sin x / x
   real_integral (real_interval[&0,a]) (\\x. sin x / x) -\n    real_integral (real_interval[&0,b]) (\\x. sin x / x) =\n    real_integral (real_interval[b,a]) (\\x. sin x / x)
   &0 <= a /\\ &0 <= b
-  !a b. &0 < b /\\ b <= a\n   ==> abs(real_integral (real_interval[--a,a]) (\\x. sin x / x) -\n           real_integral (real_interval[--b,b]) (\\x. sin x / x)) <= &8 / b
+  forall a b. &0 < b /\\ b <= a\n   ==> abs(real_integral (real_interval[--a,a]) (\\x. sin x / x) -\n           real_integral (real_interval[--b,b]) (\\x. sin x / x)) <= &8 / b
   &2 * x - &2 * y = &2 * (x - y)
   &16 <= b * e
   &8 / b <= e / &2
@@ -80251,31 +80251,31 @@ Autoformalization/fourier_transform quotations (2067):
   (abs B + &1) / b
   B:real
   e:real
-  !b. &0 < b\n   ==> ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        pi)\n       at_posinfinity
+  forall b. &0 < b\n   ==> ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        pi)\n       at_posinfinity
   t:real
   real_interval[--a,a]
   \\t. sin(--b * t) / t
-  !b a. b < &0\n     ==> real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t) =\n         --(real_integral (real_interval[--a,a]) (\\t. sin(--b * t) / t))
+  forall b a. b < &0\n     ==> real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t) =\n         --(real_integral (real_interval[--a,a]) (\\t. sin(--b * t) / t))
   b < &0 ==> ~(&0 < b)
   &0 < b \\/ b < &0 \\/ b = &0
-  !b. ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        (if &0 < b then pi else if b < &0 then --pi else &0)) at_posinfinity
+  forall b. ((\\a. real_integral (real_interval[--a,a]) (\\t. sin(b * t) / t)) --->\n        (if &0 < b then pi else if b < &0 then --pi else &0)) at_posinfinity
   lift o (\\u. H(u + c)) o drop =\n                (\\x. (lift o H o drop)(lift c + x))
-  !H c i. ((\\u. H(u + c)) has_real_integral i) (:real) <=>\n           (H has_real_integral i) (:real)
-  !H c. (\\u. H(u + c)) real_integrable_on (:real) <=>\n         H real_integrable_on (:real)
-  !H c. real_integral (:real) (\\u. H(u + c)) = real_integral (:real) H
+  forall H c i. ((\\u. H(u + c)) has_real_integral i) (:real) <=>\n           (H has_real_integral i) (:real)
+  forall H c. (\\u. H(u + c)) real_integrable_on (:real) <=>\n         H real_integrable_on (:real)
+  forall H c. real_integral (:real) (\\u. H(u + c)) = real_integral (:real) H
   lift o (\\u. H(u + c)) o drop =\n                (\\x. (lift o H o drop)(lift c + x))
-  !H c. (\\u. H(u + c)) absolutely_real_integrable_on (:real) <=>\n         H absolutely_real_integrable_on (:real)
-  !H c. H absolutely_real_integrable_on (:real)\n     ==> (\\u. abs(H(u + c) - H u)) real_integrable_on (:real)
+  forall H c. (\\u. H(u + c)) absolutely_real_integrable_on (:real) <=>\n         H absolutely_real_integrable_on (:real)
+  forall H c. H absolutely_real_integrable_on (:real)\n     ==> (\\u. abs(H(u + c) - H u)) real_integrable_on (:real)
   x:real^1
   drop(a:real^1)
   H:real->real
   a:real^1
   (\\a. integral (:real^1) (\\x. lift(abs(H(drop(a + x)) - H(drop x))))) =\n    (\\x. lift(real_integral (:real) (\\u. abs(H(u + drop x) - H u))))
-  !H. H absolutely_real_integrable_on (:real)\n   ==> ((\\c. real_integral (:real) (\\u. abs(H(u + c) - H u))) ---> &0)\n       (atreal(&0))
+  forall H. H absolutely_real_integrable_on (:real)\n   ==> ((\\c. real_integral (:real) (\\u. abs(H(u + c) - H u))) ---> &0)\n       (atreal(&0))
   &1
-  !H a. H absolutely_real_integrable_on (:real)\n     ==> (\\u. H u * sin(a * u)) absolutely_real_integrable_on (:real)
+  forall H a. H absolutely_real_integrable_on (:real)\n     ==> (\\u. H u * sin(a * u)) absolutely_real_integrable_on (:real)
   x - pi = --pi + x
-  !x. sin(x - pi) = --sin x
+  forall x. sin(x - pi) = --sin x
   u - pi / a = u + (--(pi / a))
   a * (pi / a) = pi
   a * (u - pi / a) = (a * u) - pi
@@ -80284,16 +80284,16 @@ Autoformalization/fourier_transform quotations (2067):
   (\\u. H (u + --(pi / a)) * sin (a * (u + --(pi / a)))) =\n    (\\u. --(H(u - pi / a) * sin(a * u)))
   --(pi / a)
   \\u. H(u) * sin(a * u)
-  !H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n     ==> real_integral (:real) (\\u. H u * sin(a * u)) =\n         --(real_integral (:real) (\\u. H(u - pi / a) * sin(a * u)))
+  forall H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n     ==> real_integral (:real) (\\u. H u * sin(a * u)) =\n         --(real_integral (:real) (\\u. H(u - pi / a) * sin(a * u)))
   u - pi / a = u + --(pi / a)
   real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u)) =\n    real_integral (:real) (\\u. H u * sin(a * u)) -\n    real_integral (:real) (\\u. H(u - pi / a) * sin(a * u))
   a:real
   H:real->real
-  !H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n   ==> &2 * real_integral (:real) (\\u. H u * sin(a * u)) =\n       real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))
+  forall H a. ~(a = &0) /\\ H absolutely_real_integrable_on (:real)\n   ==> &2 * real_integral (:real) (\\u. H u * sin(a * u)) =\n       real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))
   u:real
   u - pi / a = u + --(pi / a)
   (\\u. H u - H(u - pi / a)) absolutely_real_integrable_on (:real)
-  !H a. H absolutely_real_integrable_on (:real)\n   ==> abs(real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))) <=\n       real_integral (:real) (\\u. abs(H u - H(u - pi / a)))
+  forall H a. H absolutely_real_integrable_on (:real)\n   ==> abs(real_integral (:real) (\\u. (H u - H(u - pi / a)) * sin(a * u))) <=\n       real_integral (:real) (\\u. abs(H u - H(u - pi / a)))
   u + --(pi / a) = u - pi / a
   u:real
   real_integral (:real) (\\u. abs(H u - H(u - pi / a))) =\n    real_integral (:real) (\\u. abs(H (u + --(pi / a)) - H u))
@@ -80313,11 +80313,11 @@ Autoformalization/fourier_transform quotations (2067):
   d:real
   e:real
   e:real
-  !H. H absolutely_real_integrable_on (:real)\n   ==> ((\\a. real_integral (:real) (\\u. H u * sin(a * u))) ---> &0)\n       at_posinfinity
+  forall H. H absolutely_real_integrable_on (:real)\n   ==> ((\\a. real_integral (:real) (\\u. H u * sin(a * u))) ---> &0)\n       at_posinfinity
   {z:real^(1,1)finite_sum | drop(fstcart z) IN real_interval[--a,a]} =\n    (interval[lift(--a), lift a]) PCROSS (:real^1)
-  !a. lebesgue_measurable\n        {z:real^(1,1)finite_sum | drop(fstcart z) IN real_interval[--a,a]}
+  forall a. lebesgue_measurable\n        {z:real^(1,1)finite_sum | drop(fstcart z) IN real_interval[--a,a]}
   (\\z:real^(1,1)finite_sum. cexp(ii * Cx x * Cx(drop(fstcart z)))) =\n    cexp o (\\z. (ii * Cx x) * Cx(drop(fstcart z)))
-  !x. (\\z:real^(1,1)finite_sum. cexp(ii * Cx x * Cx(drop(fstcart z))))\n       continuous_on (:real^(1,1)finite_sum)
+  forall x. (\\z:real^(1,1)finite_sum. cexp(ii * Cx x * Cx(drop(fstcart z))))\n       continuous_on (:real^(1,1)finite_sum)
   (\\z:real^(1,1)finite_sum.\n        cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z))))) =\n    cexp o (\\z. --(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z))))
   (\\z:real^(1,1)finite_sum.\n        cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))))\n   continuous_on (:real^(1,1)finite_sum)
   \\z. (f:real->complex)(drop z)
@@ -80325,10 +80325,10 @@ Autoformalization/fourier_transform quotations (2067):
   :1
   :M
   :1
-  !(f:real->complex) a x.\n     (\\z. f(drop z)) measurable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx x * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) measurable_on (:real^(1,1)finite_sum)
+  forall(f:real->complex) a x.\n     (\\z. f(drop z)) measurable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx x * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) measurable_on (:real^(1,1)finite_sum)
   ii * Cx x * Cx y = ii * Cx(x * y)
   norm(cexp(ii * Cx x * Cx y)) = &1 /\\\n    norm(cexp(--(ii * Cx y * Cx t))) = &1
-  !x y t (f:real->complex).\n     norm(cexp(ii * Cx x * Cx y) * cexp(--(ii * Cx y * Cx t)) * f t) =\n     norm(f t)
+  forall x y t (f:real->complex).\n     norm(cexp(ii * Cx x * Cx y) * cexp(--(ii * Cx y * Cx t)) * f t) =\n     norm(f t)
   --(ii * Cx d * Cx(drop y)) = ii * Cx(--(d * drop y))
   y:real^1
   &1
@@ -80337,42 +80337,42 @@ Autoformalization/fourier_transform quotations (2067):
   \\y:real^1. (f:real->complex)(drop y)
   \\y:real^1. cexp(--(ii * Cx d * Cx(drop y)))
   ( * ):complex->complex->complex
-  !(f:real->complex) d.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(--(ii * Cx d * Cx(drop y))) * f(drop y))\n         absolutely_integrable_on (:real^1)
+  forall(f:real->complex) d.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(--(ii * Cx d * Cx(drop y))) * f(drop y))\n         absolutely_integrable_on (:real^1)
   drop(x0:real^1) IN real_interval[--a,a]
-  !(f:real->complex) a x x0.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                            Cx(drop(sndcart(pastecart x0 y))))) *\n                   f(drop(sndcart(pastecart x0 y)))\n              else vec 0) absolutely_integrable_on (:real^1)
-  !(f:real->complex) a x x0.\n     integral (:real^1) (\\y. lift(norm(\n         if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n         then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n              cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                       Cx(drop(sndcart(pastecart x0 y))))) *\n              f(drop(sndcart(pastecart x0 y)))\n         else vec 0))) =\n     (if drop x0 IN real_interval[--a,a]\n      then integral (:real^1) (\\y. lift(norm(f(drop y)))) else vec 0)
+  forall(f:real->complex) a x x0.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                            Cx(drop(sndcart(pastecart x0 y))))) *\n                   f(drop(sndcart(pastecart x0 y)))\n              else vec 0) absolutely_integrable_on (:real^1)
+  forall(f:real->complex) a x x0.\n     integral (:real^1) (\\y. lift(norm(\n         if drop(fstcart(pastecart (x0:real^1) y)) IN real_interval[--a,a]\n         then cexp(ii * Cx x * Cx(drop(fstcart(pastecart x0 y)))) *\n              cexp(--(ii * Cx(drop(fstcart(pastecart x0 y))) *\n                       Cx(drop(sndcart(pastecart x0 y))))) *\n              f(drop(sndcart(pastecart x0 y)))\n         else vec 0))) =\n     (if drop x0 IN real_interval[--a,a]\n      then integral (:real^1) (\\y. lift(norm(f(drop y)))) else vec 0)
   (if drop x0 IN real_interval[--a,a] then (C:real^1) else vec 0) =\n    (if x0 IN interval[lift(--a), lift a] then C else vec 0)
-  !a (C:real^1).\n        (\\x0:real^1. if drop x0 IN real_interval[--a,a] then C else vec 0)\n        integrable_on (:real^1)
+  forall a (C:real^1).\n        (\\x0:real^1. if drop x0 IN real_interval[--a,a] then C else vec 0)\n        integrable_on (:real^1)
   {x | ~((\\y. (if drop(fstcart(pastecart (x:real^1) y)) IN\n                       real_interval[--a,a]\n                   then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                        cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                                 Cx(drop(sndcart(pastecart x y))))) *\n                        f(drop(sndcart(pastecart x y)))\n                   else vec 0)) absolutely_integrable_on (:real^1))} = {}
   :N
   :1
   :M
   :1
   \\z:real^(1,1)finite_sum.\n       if drop(fstcart z) IN real_interval[--a,a]\n       then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            f(drop(sndcart z))\n       else vec 0
-  !(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) absolutely_integrable_on (:real^(1,1)finite_sum)
+  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            if drop(fstcart z) IN real_interval[--a,a]\n            then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n                 cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                 f(drop(sndcart z))\n            else vec 0) absolutely_integrable_on (:real^(1,1)finite_sum)
   :N
   :1
   :M
   :1
   \\z:real^(1,1)finite_sum.\n       if drop(fstcart z) IN real_interval[--a,a]\n       then cexp(ii * Cx w * Cx(drop(fstcart z))) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            f(drop(sndcart z))\n       else vec 0
-  !(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0))
+  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0))
   ~(z = Cx(&0)) ==> z * Cx(&1)/z = Cx(&1)
   Cx(sqrt(&2 * pi)) * Cx(&1) / Cx(sqrt(&2 * pi)) = Cx(&1)
-  !(f:real->complex) x0.\n     integral (:real^1)\n       (\\y. cexp(--(ii * Cx(drop x0) * Cx(drop y))) * f(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier f (drop x0)
-  !w t x. cexp(ii * Cx w * Cx x) * cexp(--(ii * Cx x * Cx t)) =\n           cexp(ii * Cx(w - t) * Cx x)
+  forall(f:real->complex) x0.\n     integral (:real^1)\n       (\\y. cexp(--(ii * Cx(drop x0) * Cx(drop y))) * f(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier f (drop x0)
+  forall w t x. cexp(ii * Cx w * Cx x) * cexp(--(ii * Cx x * Cx t)) =\n           cexp(ii * Cx(w - t) * Cx x)
   (\\x:real^1. cexp(ii * Cx b * Cx(drop x))) =\n                cexp o (\\x. (ii * Cx b) * Cx(drop x))
   (\\x:real^1. if drop x IN real_interval[--a,a]\n                then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n    (\\x. if x IN interval[lift(--a), lift a]\n         then cexp(ii * Cx b * Cx(drop x)) else vec 0)
-  !a b. (\\x:real^1. if drop x IN real_interval[--a,a]\n                     then cexp(ii * Cx b * Cx(drop x)) else vec 0)\n         integrable_on (:real^1)
+  forall a b. (\\x:real^1. if drop x IN real_interval[--a,a]\n                     then cexp(ii * Cx b * Cx(drop x)) else vec 0)\n         integrable_on (:real^1)
   (\\x:real^1. if drop x IN real_interval[--a,a]\n                then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n    (\\x. if x IN interval[lift(--a), lift a]\n         then cexp(ii * Cx b * Cx(drop x)) else vec 0)
-  !a b. &0 <= a /\\ ~(b = &0)\n   ==> integral (:real^1) (\\x. if drop x IN real_interval[--a,a]\n                               then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n       Cx(&2 * sin(a * b) / b)
-  !x. (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) * f t else vec 0) =\n        (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) else vec 0) *\n        (f:real->complex) t
-  !(f:real->complex) a w t y. &0 <= a /\\ ~(w - t = &0)\n   ==> integral (:real^1)\n         (\\x. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                 real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) * Cx t)) * f t\n              else vec 0) =\n       Cx(&2 * sin((w - t) * a) / (w - t)) * f t
+  forall a b. &0 <= a /\\ ~(b = &0)\n   ==> integral (:real^1) (\\x. if drop x IN real_interval[--a,a]\n                               then cexp(ii * Cx b * Cx(drop x)) else vec 0) =\n       Cx(&2 * sin(a * b) / b)
+  forall x. (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) * f t else vec 0) =\n        (if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx(w - t) * Cx(drop x)) else vec 0) *\n        (f:real->complex) t
+  forall(f:real->complex) a w t y. &0 <= a /\\ ~(w - t = &0)\n   ==> integral (:real^1)\n         (\\x. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                 real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) * Cx t)) * f t\n              else vec 0) =\n       Cx(&2 * sin((w - t) * a) / (w - t)) * f t
   cexp(ii * Cx w * Cx(drop(x:real^1)))
   (:real^1)
   \\y:real^1. cexp(--(ii * Cx(drop(x:real^1)) * Cx(drop y))) *\n                             (f:real->complex)(drop y)
-  !(f:real->complex) a w x.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\y. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                   real_interval[--a,a]\n                then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                     cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                              Cx(drop(sndcart(pastecart x y))))) *\n                     f(drop(sndcart(pastecart x y)))\n                else vec 0) =\n         (if drop x IN real_interval[--a,a]\n          then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n               fourier f (drop x)\n          else vec 0)
+  forall(f:real->complex) a w x.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\y. if drop(fstcart(pastecart (x:real^1) (y:real^1))) IN\n                   real_interval[--a,a]\n                then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                     cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                              Cx(drop(sndcart(pastecart x y))))) *\n                     f(drop(sndcart(pastecart x y)))\n                else vec 0) =\n         (if drop x IN real_interval[--a,a]\n          then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n               fourier f (drop x)\n          else vec 0)
   (\\x. if drop x IN real_interval[--a,a]\n         then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n              fourier f (drop x)\n         else vec 0) =\n    (\\x:real^1. if x IN interval[lift(--a),lift a]\n         then cexp(ii * Cx w * Cx(drop x)) * Cx(sqrt(&2 * pi)) *\n              fourier f (drop x)\n         else vec 0)
-  !(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y))
+  forall(f:real->complex) a w.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1)\n           (\\x. integral (:real^1) (\\y.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y))
   ~(y = lift w)
   y:real^1
   drop(y:real^1)
@@ -80381,40 +80381,40 @@ Autoformalization/fourier_transform quotations (2067):
   f:real->complex
   y:real^1
   {lift w}
-  !(f:real->complex) a w.\n     &0 <= a\n     ==> integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
+  forall(f:real->complex) a w.\n     &0 <= a\n     ==> integral (:real^1)\n           (\\y. integral (:real^1) (\\x.\n              if drop(fstcart(pastecart (x:real^1) y)) IN real_interval[--a,a]\n              then cexp(ii * Cx w * Cx(drop(fstcart(pastecart x y)))) *\n                   cexp(--(ii * Cx(drop(fstcart(pastecart x y))) *\n                            Cx(drop(sndcart(pastecart x y))))) *\n                   f(drop(sndcart(pastecart x y)))\n              else vec 0)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
   w:real
   a:real
   f:real->complex
   w:real
   a:real
   f:real->complex
-  !(f:real->complex) a w.\n     &0 <= a /\\ (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
+  forall(f:real->complex) a w.\n     &0 <= a /\\ (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (interval[lift(--a), lift a])\n           (\\y. cexp(ii * Cx w * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                fourier f (drop y)) =\n         integral (:real^1)\n           (\\y. Cx(&2 * sin((w - drop y) * a) / (w - drop y)) * f(drop y))
   (\\u:real^1. lift(sin(a * drop u))) =\n                lift o (\\t. sin(a * t)) o drop
-  !a. (\\u:real^1. Cx(sin(a * drop u))) continuous_on (:real^1)
+  forall a. (\\u:real^1. Cx(sin(a * drop u))) continuous_on (:real^1)
   a * drop(x:real^1)
   &1
   (:real^1)
   \\u:real^1. (H:real->complex)(drop u)
   \\u:real^1. Cx(sin(a * drop u))
   ( * ):complex->complex->complex
-  !(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Cx(sin(a * drop u)) * H(drop u)) integrable_on (:real^1)
-  !(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Re(H u)) absolutely_real_integrable_on (:real)
-  !(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Im(H u)) absolutely_real_integrable_on (:real)
+  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Cx(sin(a * drop u)) * H(drop u)) integrable_on (:real^1)
+  forall(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Re(H u)) absolutely_real_integrable_on (:real)
+  forall(H:real->complex). (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\u. Im(H u)) absolutely_real_integrable_on (:real)
   \\u. Cx(sin(a * drop u)) * (H:real->complex)(drop u)
   k:num
   1
   s:real^1->bool
   (:real^1)
   (\\u. Re((H:real->complex) u) * sin(a * u)) real_integrable_on (:real)
-  !(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$1 =\n       real_integral (:real) (\\u. Re(H u) * sin(a * u))
+  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$1 =\n       real_integral (:real) (\\u. Re(H u) * sin(a * u))
   \\u. Cx(sin(a * drop u)) * (H:real->complex)(drop u)
   k:num
   2
   s:real^1->bool
   (:real^1)
   (\\u. Im((H:real->complex) u) * sin(a * u)) real_integrable_on (:real)
-  !(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$2 =\n       real_integral (:real) (\\u. Im(H u) * sin(a * u))
-  !(H:real->complex).\n     (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u))) -->\n       vec 0)\n         at_posinfinity
+  forall(H:real->complex) a. (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n   ==> (integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u)))$2 =\n       real_integral (:real) (\\u. Im(H u) * sin(a * u))
+  forall(H:real->complex).\n     (\\z. H(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1) (\\u. Cx(sin(a * drop u)) * H(drop u))) -->\n       vec 0)\n         at_posinfinity
   &1
   a:real
   a:real
@@ -80429,32 +80429,32 @@ Autoformalization/fourier_transform quotations (2067):
   --(&1)
   (:real^1)
   \\z:real^1. (f:real->complex)(drop z)
-  !(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. f(x - drop z)) absolutely_integrable_on (:real^1)
+  forall(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. f(x - drop z)) absolutely_integrable_on (:real^1)
   ~(v = &0)
   &2 * K = &2 * inv v * (K * v)
-  !v n K:real. &0 < v /\\ n <= K * v ==> &2 * inv v * n <= &2 * K
+  forall v n K:real. &0 < v /\\ n <= K * v ==> &2 * inv v * n <= &2 * K
   \\x:real. x
   (\\z:real^1. lift(&2 * inv(drop z))) = lift o (\\u. &2 * inv u) o drop
   (\\z:real^1. Cx(&2 * inv(drop z))) = (\\w. Cx(drop w)) o (\\z. lift(&2 *\n    inv(drop z)))
   (\\z:real^1. Cx(&2 * inv(drop z))) measurable_on (:real^1)
   {z:real^1 | abs(drop z) <= &1} = interval[lift(--(&1)), lift(&1)]
   lebesgue_measurable {z:real^1 | abs(drop z) <= &1}
-  !(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. Cx(&2 * inv(drop z)) *\n            (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n       measurable_on (:real^1)
+  forall(f:real->complex) x. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z. Cx(&2 * inv(drop z)) *\n            (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n       measurable_on (:real^1)
   (\\z:real^1. lift(c * (if abs(drop z) <= r then &1 else &0))) =\n    (\\z. if z IN interval[lift(--r), lift r] then lift c else vec 0)
-  !c r. (\\z:real^1. lift(c * (if abs(drop z) <= r then &1 else &0)))\n   integrable_on (:real^1)
-  !(f:real->complex) x K d. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z:real^1. lift(&2 * K * (if abs(drop z) <= d then &1 else &0)) +\n                   lift(&2 / d * norm(f(x - drop z))) +\n                   lift(&2 / d * norm(f x) * (if abs(drop z) <= &1 then &1 else\n                     &0)))\n       integrable_on (:real^1)
-  !u (w:complex). norm(Cx(&2 * inv u) * w) = &2 * inv(abs u) * norm w
+  forall c r. (\\z:real^1. lift(c * (if abs(drop z) <= r then &1 else &0)))\n   integrable_on (:real^1)
+  forall(f:real->complex) x K d. (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n   ==> (\\z:real^1. lift(&2 * K * (if abs(drop z) <= d then &1 else &0)) +\n                   lift(&2 / d * norm(f(x - drop z))) +\n                   lift(&2 / d * norm(f x) * (if abs(drop z) <= &1 then &1 else\n                     &0)))\n       integrable_on (:real^1)
+  forall u (w:complex). norm(Cx(&2 * inv u) * w) = &2 * inv(abs u) * norm w
   &0 <= t2 /\\ &0 <= t3 ==> &2 * K <= &2 * K + t2 +\n      t3
   K:real
   norm((f:real->complex)(x - u) - f x)
   abs u
   &2 * K
   abs u <= &1
-  !(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\ ~(u = &0) /\\ abs u <= d /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
+  forall(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\ ~(u = &0) /\\ abs u <= d /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
   &2 / d * (norm((f:real->complex)(x - u)) + norm(if abs u <= &1\n    then f x else vec 0))
   &2 * inv(abs u) <= &2 / d
   (&2 * inv(abs u)) *\n              (norm((f:real->complex)(x - u)) + norm(if abs u <= &1 then f x\n                else vec 0))
-  !(f:real->complex) x K d u.\n     &0 < d /\\ ~(u = &0) /\\ ~(abs u <= d)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
+  forall(f:real->complex) x K d u.\n     &0 < d /\\ ~(u = &0) /\\ ~(abs u <= d)\n     ==> &2 * inv(abs u) * norm(f(x - u) - (if abs u <= &1 then f x else vec\n       0))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
   :real
   :real
   :real
@@ -80473,55 +80473,55 @@ Autoformalization/fourier_transform quotations (2067):
   f:real->complex
   abs u <= d
   u = &0
-  !(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> norm(Cx(&2 * inv u) * (f(x - u) - (if abs u <= &1 then f x else vec\n       0)))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
+  forall(f:real->complex) x K d u.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v)\n     ==> norm(Cx(&2 * inv u) * (f(x - u) - (if abs u <= &1 then f x else vec\n       0)))\n         <= &2 * K * (if abs u <= d then &1 else &0) +\n            &2 / d * norm(f(x - u)) +\n            &2 / d * norm(f x) * (if abs u <= &1 then &1 else &0)
   \\z:real^1. lift(&2 * K * (if abs(drop z) <= d then &1 else &0)) +\n               lift(&2 / d * norm((f:real->complex)(x - drop z))) +\n               lift(&2 / d * norm(f x) * (if abs(drop z) <= &1 then &1 else\n                 &0))
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. Cx(&2 * inv(drop z)) *\n              (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n         absolutely_integrable_on (:real^1)
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. Cx(&2 * inv(drop z)) *\n              (f(x - drop z) - (if abs(drop z) <= &1 then f x else vec 0)))\n         absolutely_integrable_on (:real^1)
   d:real
   K:real
   x:real
   f:real->complex
   \\u. Cx(&2 * inv u) *\n                    ((f:real->complex)(x - u) - (if abs u <= &1 then f x else\n                      vec 0))
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx(sin(a * drop u)) *\n                     (Cx(&2 * inv(drop u)) *\n                      (f(x - drop u) - (if abs(drop u) <= &1 then f x else vec\n                        0)))))\n          --> vec 0) at_posinfinity
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx(sin(a * drop u)) *\n                     (Cx(&2 * inv(drop u)) *\n                      (f(x - drop u) - (if abs(drop u) <= &1 then f x else vec\n                        0)))))\n          --> vec 0) at_posinfinity
   c:real^1
   (:real^1)
   H:real^1->real^N
   (c:real^1) + --x = c - x
   (:real^1)
   \\x:real^1. (H:real^1->real^N)(c + x)
-  !(H:real^1->real^N) c.\n     integral (:real^1) (\\u. H(c - u)) = integral (:real^1) H
+  forall(H:real^1->real^N) c.\n     integral (:real^1) (\\u. H(c - u)) = integral (:real^1) H
   (x:real) - (x - u) = u
   lift x
   \\y. Cx (&2 * sin ((x - drop y) * a) / (x - drop y)) *\n          (f:real->complex) (drop y)
-  !(f:real->complex) x a.\n     integral (:real^1)\n       (\\y. Cx (&2 * sin ((x - drop y) * a) / (x - drop y)) * f (drop y)) =\n     integral (:real^1)\n       (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u))
-  !(f:real->complex) x a u:real^1.\n     Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u) =\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0))) +\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (if abs (drop u) <= &1 then f x else vec 0))
+  forall(f:real->complex) x a.\n     integral (:real^1)\n       (\\y. Cx (&2 * sin ((x - drop y) * a) / (x - drop y)) * f (drop y)) =\n     integral (:real^1)\n       (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u))
+  forall(f:real->complex) x a u:real^1.\n     Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u) =\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0))) +\n     Cx (sin (a * drop u)) *\n       (Cx (&2 * inv (drop u)) *\n        (if abs (drop u) <= &1 then f x else vec 0))
   (\\z. Cx(drop z)):real^1->complex
   IMAGE lift s
   lift(real_integral s (g:real->real))
   lift o (g:real->real) o drop
-  !(g:real->real) s.\n     g real_integrable_on s\n     ==> integral (IMAGE lift s) (\\u. Cx(g(drop u))) =\n         Cx(real_integral s g)
+  forall(g:real->real) s.\n     g real_integrable_on s\n     ==> integral (IMAGE lift s) (\\u. Cx(g(drop u))) =\n         Cx(real_integral s g)
   lift(y:real)
   IMAGE lift s
   (\\z. Cx(drop z)):real^1->complex
   lift o (g:real->real) o drop
   y:real
-  !(g:real->real) s.\n     g real_integrable_on s\n     ==> (\\u. Cx(g(drop u))) integrable_on (IMAGE lift s)
-  !A B c P:bool. A * (B * (if P then c else vec 0)) =\n                  (if P then A * (B * c) else vec 0)
-  !(fx:complex) a u:real^1.\n     Cx (sin (a * drop u)) * (Cx (&2 * inv (drop u)) * fx) =\n     fx * Cx(&2 * sin (a * drop u) / drop u)
+  forall(g:real->real) s.\n     g real_integrable_on s\n     ==> (\\u. Cx(g(drop u))) integrable_on (IMAGE lift s)
+  forall A B c P:bool. A * (B * (if P then c else vec 0)) =\n                  (if P then A * (B * c) else vec 0)
+  forall(fx:complex) a u:real^1.\n     Cx (sin (a * drop u)) * (Cx (&2 * inv (drop u)) * fx) =\n     fx * Cx(&2 * sin (a * drop u) / drop u)
   real_interval[-- &1,&1]
   \\u:real. &2 * sin(a * u) / u
   (\\u:real. &2 * sin(a * u) / u) real_integrable_on real_interval[-- &1,&1]
-  !u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
-  !(f:real->complex) x a.\n     &0 < a\n     ==> integral (:real^1)\n           (\\u. Cx (sin (a * drop u)) *\n                (Cx (&2 * inv (drop u)) *\n                 (if abs (drop u) <= &1 then f x else vec 0))) =\n         f x *\n         Cx(real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) /\n           u))
+  forall u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
+  forall(f:real->complex) x a.\n     &0 < a\n     ==> integral (:real^1)\n           (\\u. Cx (sin (a * drop u)) *\n                (Cx (&2 * inv (drop u)) *\n                 (if abs (drop u) <= &1 then f x else vec 0))) =\n         f x *\n         Cx(real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) /\n           u))
   (\\u. sin(c * u) / u) = (\\u. --(sin(--c * u) / u))
   c = &0 \\/ &0 < c \\/ &0 < --c
-  !a b c:real. (\\u. sin(c * u) / u) real_integrable_on real_interval[a,b]
-  !a. real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) / u) =\n          &2 * real_integral (real_interval[-- &1,&1]) (\\u. sin(a * u) / u)
+  forall a b c:real. (\\u. sin(c * u) / u) real_integrable_on real_interval[a,b]
+  forall a. real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) / u) =\n          &2 * real_integral (real_interval[-- &1,&1]) (\\u. sin(a * u) / u)
   a:real
   &1
   \\a. (f:real->complex) x *\n        Cx(real_integral (real_interval[-- &1,&1]) (\\u. &2 * sin(a * u) / u))
-  !(f:real->complex) x.\n     ((\\a. integral (:real^1)\n             (\\u. Cx (sin (a * drop u)) *\n                  (Cx (&2 * inv (drop u)) *\n                   (if abs (drop u) <= &1 then f x else vec 0))))\n      --> f x * Cx(&2 * pi)) at_posinfinity
-  !u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
-  !(f:real->complex) x a.\n     (\\u. Cx (sin (a * drop u)) *\n          (Cx (&2 * inv (drop u)) *\n           (if abs (drop u) <= &1 then f x else vec 0))) integrable_on\n             (:real^1)
+  forall(f:real->complex) x.\n     ((\\a. integral (:real^1)\n             (\\u. Cx (sin (a * drop u)) *\n                  (Cx (&2 * inv (drop u)) *\n                   (if abs (drop u) <= &1 then f x else vec 0))))\n      --> f x * Cx(&2 * pi)) at_posinfinity
+  forall u:real^1. abs(drop u) <= &1 <=> u IN interval[lift(-- &1),lift(&1)]
+  forall(f:real->complex) x a.\n     (\\u. Cx (sin (a * drop u)) *\n          (Cx (&2 * inv (drop u)) *\n           (if abs (drop u) <= &1 then f x else vec 0))) integrable_on\n             (:real^1)
   d:real
   K:real
   x:real
@@ -80532,8 +80532,8 @@ Autoformalization/fourier_transform quotations (2067):
   f:real->complex
   a:real
   \\u. Cx (&2 * inv u) *\n            ((f:real->complex)(x - u) - (if abs u <= &1 then f x else vec 0))
-  !a. integral (:real^1)\n         (\\u. Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0)))\n                 +\n              Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (if abs (drop u) <= &1 then f x else vec 0))) =\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec\n                  0)))) +\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (if abs (drop u) <= &1 then f x else vec 0)))
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
+  forall a. integral (:real^1)\n         (\\u. Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec 0)))\n                 +\n              Cx (sin (a * drop u)) *\n              (Cx (&2 * inv (drop u)) *\n               (if abs (drop u) <= &1 then f x else vec 0))) =\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (f (x - drop u) - (if abs (drop u) <= &1 then f x else vec\n                  0)))) +\n        integral (:real^1)\n          (\\u. Cx (sin (a * drop u)) *\n               (Cx (&2 * inv (drop u)) *\n                (if abs (drop u) <= &1 then f x else vec 0)))
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (:real^1)\n                (\\u. Cx (&2 * sin (a * drop u) / drop u) * f (x - drop u)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
   d:real
   K:real
   x:real
@@ -80545,31 +80545,31 @@ Autoformalization/fourier_transform quotations (2067):
   a:real
   &0
   \\a. integral (:real^1)\n          (\\u. Cx (&2 * sin (a * drop u) / drop u) * (f:real->complex) (x -\n            drop u))
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a])\n                (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                     fourier f (drop y)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a])\n                (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n                     fourier f (drop y)))\n          --> f x * Cx(&2 * pi)) at_posinfinity
   \\k:num. drop(xx k)
   drop aa
   f:real->complex
   aa:real^1
   xx:num->real^1
-  !(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) continuous_on (:real^1)
+  forall(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) continuous_on (:real^1)
   (:real^1)
   interval[lift(--a),lift a]
   \\y:real^1. y
-  !(f:real->complex) x a.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on interval[lift(--a),lift a]
+  forall(f:real->complex) x a.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on interval[lift(--a),lift a]
   &0 < sqrt(&2 * pi)
   &2 * pi
   Cx(inv(&2 * pi)) * Cx(sqrt(&2 * pi)) = Cx(inv(sqrt(&2 * pi)))
   inv(&2 * pi) * (&2 * pi) = &1
   ic * (fx * tp) = (ic * tp) * fx
-  !fx. Cx(inv(&2 * pi)) * (fx * Cx(&2 * pi)) = fx
+  forall fx. Cx(inv(&2 * pi)) * (fx * Cx(&2 * pi)) = fx
   Cx(inv(&2 * pi))
   cexp e * Cx s * ff = Cx s * (cexp e * ff)
-  !a. integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n               (fourier:(real->complex)->real->complex) f (drop y)) =\n        Cx(sqrt(&2 * pi)) *\n        integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))
+  forall a. integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) *\n               (fourier:(real->complex)->real->complex) f (drop y)) =\n        Cx(sqrt(&2 * pi)) *\n        integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))
   d:real
   K:real
   x:real
   f:real->complex
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. Cx(inv(sqrt(&2 * pi))) *\n               integral (interval[lift(--a),lift a])\n                 (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)))\n          --> f x) at_posinfinity
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ((\\a. Cx(inv(sqrt(&2 * pi))) *\n               integral (interval[lift(--a),lift a])\n                 (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)))\n          --> f x) at_posinfinity
   lift a
   lift(--a)
   a:real
@@ -80577,21 +80577,21 @@ Autoformalization/fourier_transform quotations (2067):
   B:real
   e:real
   e:real
-  !(g:real^1->complex).\n     g integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a]) g) --> integral (:real^1)\n       g)\n         at_posinfinity
+  forall(g:real^1->complex).\n     g integrable_on (:real^1)\n     ==> ((\\a. integral (interval[lift(--a),lift a]) g) --> integral (:real^1)\n       g)\n         at_posinfinity
   --x:real
   fourier (f:real->complex)
   y:real^1
   \\y. cexp(--(ii * Cx(--x) * Cx(drop y))) *\n        (fourier:(real->complex)->real->complex) f (drop y)
-  !(f:real->complex) x.\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on (:real^1)
+  forall(f:real->complex) x.\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y))\n         integrable_on (:real^1)
   d:real
   K:real
   \\a. Cx(inv(sqrt(&2 * pi))) *\n        integral (interval[lift(--a),lift a])\n          (\\y. cexp(ii * Cx x * Cx(drop y)) *\n               (fourier:(real->complex)->real->complex) f (drop y))
   at_posinfinity
-  !(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (!v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1)\n           (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)) =\n         f x
-  !(f:real^1->real^N) d e net.\n     d = e ==> (f has_vector_derivative d) net ==> (f has_vector_derivative e)\n       net
-  !(f:real->real) d e net.\n     d = e ==> (f has_real_derivative d) net ==> (f has_real_derivative e)\n       net
+  forall(f:real->complex) x K d.\n     &0 < d /\\ d <= &1 /\\ &0 <= K /\\\n     (forall v. abs v <= d ==> norm(f(x - v) - f x) <= K * abs v) /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1)\n           (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier f (drop y)) =\n         f x
+  forall(f:real^1->real^N) d e net.\n     d = e ==> (f has_vector_derivative d) net ==> (f has_vector_derivative e)\n       net
+  forall(f:real->real) d e net.\n     d = e ==> (f has_real_derivative d) net ==> (f has_real_derivative e)\n       net
   &2 * M < (N - B) * P
-  !M N B P:real. &0 <= M /\\ &0 < P /\\ (&2 * M) / P < N - B\n     ==> M < (N - B) * P
+  forall M N B P:real. &0 <= M /\\ &0 < P /\\ (&2 * M) / P < N - B\n     ==> M < (N - B) * P
   M < (N - B) * (norm(L:complex) / &2)
   norm(fz - L) < norm L / &2 ==> norm L / &2 <= norm fz
   :real
@@ -80618,21 +80618,21 @@ Autoformalization/fourier_transform quotations (2067):
   B:real
   norm(L:complex) / &2
   ~(&0 < n) /\\ &0 <= n ==> n = &0
-  !(f:real->complex) L.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (f --> L) at_posinfinity\n     ==> L = vec 0
-  !y a:real^1.\n     ((\\z. cexp(--(ii * Cx y * Cx(drop z)))) has_vector_derivative\n      (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop a))))) (at a)
+  forall(f:real->complex) L.\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (f --> L) at_posinfinity\n     ==> L = vec 0
+  forall y a:real^1.\n     ((\\z. cexp(--(ii * Cx y * Cx(drop z)))) has_vector_derivative\n      (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop a))))) (at a)
   (f has_complex_derivative f') net
   drop(x:real^1)
   (ffp:real->complex)(drop x)
   x:real^1
-  !(ff:real->complex) (ffp:real->complex).\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. ff(drop z)) continuous_on (:real^1)
+  forall(ff:real->complex) (ffp:real->complex).\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. ff(drop z)) continuous_on (:real^1)
   ffp:real->complex
   (:real^1)
   interval[lift(--a),lift a]
   \\z:real^1. z
-  !(ff:real->complex) (ffp:real->complex) y a.\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n         integrable_on interval[lift(--a),lift a]
-  !A B C D:complex. A = B - C /\\ A = D ==> C = B + --D
+  forall(ff:real->complex) (ffp:real->complex) y a.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n         integrable_on interval[lift(--a),lift a]
+  forall A B C D:complex. A = B - C /\\ A = D ==> C = B + --D
   ffp:real->complex
-  !(ff:real->complex) (ffp:real->complex) y a.\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> integral (interval[lift(--a),lift a])\n          (\\z. (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop z)))) * ff(drop z))\n            =\n         --(ii * Cx y) * integral (interval[lift(--a),lift a])\n          (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
+  forall(ff:real->complex) (ffp:real->complex) y a.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x)))\n     ==> integral (interval[lift(--a),lift a])\n          (\\z. (--(ii * Cx y) * cexp(--(ii * Cx y * Cx(drop z)))) * ff(drop z))\n            =\n         --(ii * Cx y) * integral (interval[lift(--a),lift a])\n          (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
   a:real
   y:real
   ffp:real->complex
@@ -80647,11 +80647,11 @@ Autoformalization/fourier_transform quotations (2067):
   \\z:real^1. (ff:real->complex)(drop z)
   \\z:real^1. cexp(--(ii * Cx y * Cx(drop z)))
   ( * ):complex->complex->complex
-  !(ff:real->complex) (ffp:real->complex) y a.\n     &0 <= a /\\\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        integrable_on interval[lift(--a),lift a]\n     ==> integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z)) =\n         (cexp(--(ii * Cx y * Cx a)) * ff a -\n          cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) +\n         (ii * Cx y) *\n         integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
+  forall(ff:real->complex) (ffp:real->complex) y a.\n     &0 <= a /\\\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        integrable_on interval[lift(--a),lift a]\n     ==> integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z)) =\n         (cexp(--(ii * Cx y * Cx a)) * ff a -\n          cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) +\n         (ii * Cx y) *\n         integral (interval[lift(--a),lift a])\n           (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))
   &1
-  !(ff:real->complex) y.\n     (ff --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx a)) * ff a) --> vec 0) at_posinfinity
+  forall(ff:real->complex) y.\n     (ff --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx a)) * ff a) --> vec 0) at_posinfinity
   &1
-  !(ff:real->complex) y.\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) --> vec 0)\n       at_posinfinity
+  forall(ff:real->complex) y.\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity\n     ==> ((\\a. cexp(--(ii * Cx y * Cx(--a))) * ff(--a)) --> vec 0)\n       at_posinfinity
   vec 0:complex = vec 0 - vec 0
   (:real^1)
   a:real
@@ -80662,14 +80662,14 @@ Autoformalization/fourier_transform quotations (2067):
   at_posinfinity
   \\a. integral (interval[lift(--a),lift a])\n          (\\z. cexp(--(ii * Cx y * Cx(drop z))) * (ffp:real->complex)(drop z))
   at_posinfinity
-  !(ff:real->complex) (ffp:real->complex) y.\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop\n       z)) =\n         (ii * Cx y) *\n         integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop\n           z))
-  !c e w:complex. c * (e * w) = e * (c * w)
+  forall(ff:real->complex) (ffp:real->complex) y.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop\n       z)) =\n         (ii * Cx y) *\n         integral (:real^1) (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop\n           z))
+  forall c e w:complex. c * (e * w) = e * (c * w)
   y:real
   ffp:real->complex
   ff:real->complex
-  !(ff:real->complex) (ffp:real->complex) y.\n     (!x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> fourier ffp y = (ii * Cx y) * fourier ff y
+  forall(ff:real->complex) (ffp:real->complex) y.\n     (forall x. ((\\z. ff(drop z)) has_vector_derivative (ffp x)) (at(lift x))) /\\\n     (ff --> vec 0) at_posinfinity /\\\n     ((\\a. ff(--a)) --> vec 0) at_posinfinity /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ffp(drop z))\n        absolutely_integrable_on (:real^1) /\\\n     (\\z. cexp(--(ii * Cx y * Cx(drop z))) * ff(drop z))\n        absolutely_integrable_on (:real^1)\n     ==> fourier ffp y = (ii * Cx y) * fourier ff y
   &2 * atn a = atn a - atn(--a)
-  !a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\y. inv(&1 + y pow 2)) = &2 *\n         atn a
+  forall a. &0 <= a\n       ==> real_integral (real_interval[--a,a]) (\\y. inv(&1 + y pow 2)) = &2 *\n         atn a
   &k:real
   abs y <= k <=> --k <= y /\\ y <= k
   (\\y. if abs y <= &k then inv(&1 + y pow 2) else &0) =\n        (\\y. if y IN real_interval[-- &k, &k] then inv(&1 + y pow 2) else &0)
@@ -80693,16 +80693,16 @@ Autoformalization/fourier_transform quotations (2067):
   \\k y. if abs y <= &k then inv(&1 + y pow 2) else &0
   (\\y. inv(&1 + y pow 2)) real_integrable_on (:real)
   (ii * Cx y) * (ii * Cx y) = (ii * ii) * Cx(y pow 2)
-  !y. (ii * Cx y) * (ii * Cx y) = --(Cx(y pow 2))
+  forall y. (ii * Cx y) * (ii * Cx y) = --(Cx(y pow 2))
   y:real
   &0 < &1 + y pow 2
   y:real
   norm(--(Cx(y pow 2)) * w) = y pow 2 * norm w
-  !(w:complex) y K.\n     norm w <= K /\\ norm(--(Cx(y pow 2)) * w) <= K\n     ==> norm w <= (&2 * K) * inv(&1 + y pow 2)
+  forall(w:complex) y K.\n     norm w <= K /\\ norm(--(Cx(y pow 2)) * w) <= K\n     ==> norm w <= (&2 * K) * inv(&1 + y pow 2)
   &1 / sqrt(&2 * pi) *\n              drop(integral (:real^1) (\\x. lift(norm((f:real->complex)(drop\n                x)))))
-  !(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ?K. !y. norm(fourier f y) <= K
+  forall(f:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1)\n     ==> ?K. forall y. norm(fourier f y) <= K
   (\\y. (&2 * K) * inv(&1 + y pow 2)) real_integrable_on (:real)
-  !K. (\\z:real^1. lift((&2 * K) * inv(&1 + drop z pow 2))) integrable_on\n   (:real^1)
+  forall K. (\\z:real^1. lift((&2 * K) * inv(&1 + drop z pow 2))) integrable_on\n   (:real^1)
   K2:real
   drop(z:real^1)
   K1:real
@@ -80713,18 +80713,18 @@ Autoformalization/fourier_transform quotations (2067):
   K1:real
   f:real->complex
   fourier f' y = (ii * Cx y) * fourier f y /\\\n      fourier f'' y = (ii * Cx y) * fourier f' y
-  !y. fourier f'' y = --(Cx(y pow 2)) * fourier f y
-  !(g:real->complex) y.\n        (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n        ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * g(drop z))\n            absolutely_integrable_on (:real^1)
-  !(f:real->complex) (f':real->complex) (f'':real->complex).\n     (!x. ((\\z. f(drop z)) has_vector_derivative (f' x)) (at(lift x))) /\\\n     (!x. ((\\z. f'(drop z)) has_vector_derivative (f'' x)) (at(lift x))) /\\\n     (f --> vec 0) at_posinfinity /\\ ((\\a. f(--a)) --> vec 0) at_posinfinity /\\\n     (f' --> vec 0) at_posinfinity /\\ ((\\a. f'(--a)) --> vec 0) at_posinfinity\n       /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f'(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f''(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)
-  schwartz (h:real->complex) <=>\n    ?d:num->real->complex.\n        d 0 = h /\\\n        (!n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x))\n          (at(lift x))) /\\\n        (!k m. ?B. !x. abs(x) pow k * norm(d m x) <= B)
+  forall y. fourier f'' y = --(Cx(y pow 2)) * fourier f y
+  forall(g:real->complex) y.\n        (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n        ==> (\\z. cexp(--(ii * Cx y * Cx(drop z))) * g(drop z))\n            absolutely_integrable_on (:real^1)
+  forall(f:real->complex) (f':real->complex) (f'':real->complex).\n     (forall x. ((\\z. f(drop z)) has_vector_derivative (f' x)) (at(lift x))) /\\\n     (forall x. ((\\z. f'(drop z)) has_vector_derivative (f'' x)) (at(lift x))) /\\\n     (f --> vec 0) at_posinfinity /\\ ((\\a. f(--a)) --> vec 0) at_posinfinity /\\\n     (f' --> vec 0) at_posinfinity /\\ ((\\a. f'(--a)) --> vec 0) at_posinfinity\n       /\\\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f'(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. f''(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. fourier f (drop z)) absolutely_integrable_on (:real^1)
+  schwartz (h:real->complex) <=>\n    ?d:num->real->complex.\n        d 0 = h /\\\n        (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x))\n          (at(lift x))) /\\\n        (forall k m. ?B. forall x. abs(x) pow k * norm(d m x) <= B)
   x:real
   &0 < &1 + x pow 2
   x:real
-  !(g:real->complex) B0 B2 x.\n     (!x. abs(x) pow 0 * norm(g x) <= B0) /\\\n     (!x. abs(x) pow 2 * norm(g x) <= B2)\n     ==> norm(g x) <= (B0 + B2) * inv(&1 + x pow 2)
+  forall(g:real->complex) B0 B2 x.\n     (forall x. abs(x) pow 0 * norm(g x) <= B0) /\\\n     (forall x. abs(x) pow 2 * norm(g x) <= B2)\n     ==> norm(g x) <= (B0 + B2) * inv(&1 + x pow 2)
   drop z
-  !x. abs(x) pow 2 * norm((d:num->real->complex) 0 x) <= B2
+  forall x. abs(x) pow 2 * norm((d:num->real->complex) 0 x) <= B2
   x:real
-  !x. abs(x) pow 0 * norm((d:num->real->complex) 0 x) <= B0
+  forall x. abs(x) pow 0 * norm((d:num->real->complex) 0 x) <= B0
   x:real
   x:real
   (abs B0 + abs B2) * inv(&1 + drop z pow 2)
@@ -80737,10 +80737,10 @@ Autoformalization/fourier_transform quotations (2067):
   0
   0
   B0:real
-  !(h:real->complex). schwartz h\n     ==> (\\z. h(drop z)) absolutely_integrable_on (:real^1)
+  forall(h:real->complex). schwartz h\n     ==> (\\z. h(drop z)) absolutely_integrable_on (:real^1)
   lift w
   lift u
-  !x. abs(x) pow 0 * norm((d:num->real->complex)(SUC 0) x) <= B
+  forall x. abs(x) pow 0 * norm((d:num->real->complex)(SUC 0) x) <= B
   drop x
   drop x
   0
@@ -80754,17 +80754,17 @@ Autoformalization/fourier_transform quotations (2067):
   SUC 0
   0
   B:real
-  !(h:real->complex). schwartz h\n     ==> ?K. &0 <= K /\\ !u w. norm(h u - h w) <= K * abs(u - w)
+  forall(h:real->complex). schwartz h\n     ==> ?K. &0 <= K /\\ forall u w. norm(h u - h w) <= K * abs(u - w)
   abs B + &1 <= x * e
   x * n <= B
-  !B:real. B <= abs B
+  forall B:real. B <= abs B
   B:real
   x * n < x * e
   e:real
   x:real
   abs B + &1
   abs B + &1 <= x * e
-  !x e B n:real. &0 < e /\\ &0 < x /\\ &0 <= n /\\ x * n <= B /\\ (abs B + &1) / e\n   <= x\n                 ==> n < e
+  forall x e B n:real. &0 < e /\\ &0 < x /\\ &0 <= n /\\ x * n <= B /\\ (abs B + &1) / e\n   <= x\n                 ==> n < e
   &0 < x ==> abs x = x
   SUC 0 = 1
   x:real
@@ -80778,7 +80778,7 @@ Autoformalization/fourier_transform quotations (2067):
   0
   SUC 0
   B:real
-  !(h:real->complex). schwartz h ==> (h --> vec 0) at_posinfinity
+  forall(h:real->complex). schwartz h ==> (h --> vec 0) at_posinfinity
   &0 < x ==> abs x = x
   SUC 0 = 1
   --x:real
@@ -80792,10 +80792,10 @@ Autoformalization/fourier_transform quotations (2067):
   0
   SUC 0
   B:real
-  !(h:real->complex). schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
+  forall(h:real->complex). schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
   SUC 0 = 1
   \\n. (d:num->real->complex)(SUC n)
-  !(d:num->real->complex).\n     (!n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x)) (at(lift\n       x))) /\\\n     (!k m. ?B. !x. abs(x) pow k * norm(d m x) <= B)\n     ==> schwartz (d 1)
+  forall(d:num->real->complex).\n     (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d (SUC n) x)) (at(lift\n       x))) /\\\n     (forall k m. ?B. forall x. abs(x) pow k * norm(d m x) <= B)\n     ==> schwartz (d 1)
   SUC m
   k:num
   SUC 1 = 2
@@ -80807,7 +80807,7 @@ Autoformalization/fourier_transform quotations (2067):
   (d:num->real->complex)(SUC(SUC 0))
   (d:num->real->complex)(SUC 0)
   d:num->real->complex
-  !(h:real->complex). schwartz h\n     ==> (\\z. fourier h (drop z)) absolutely_integrable_on (:real^1)
+  forall(h:real->complex). schwartz h\n     ==> (\\z. fourier h (drop z)) absolutely_integrable_on (:real^1)
   x:real
   SUC n
   x:real
@@ -80825,10 +80825,10 @@ Autoformalization/fourier_transform quotations (2067):
   &1
   K:real
   K:real
-  !(h:real->complex) x. schwartz h\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1) (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier h (drop\n           y)) =\n         h x
+  forall(h:real->complex) x. schwartz h\n     ==> Cx(inv(sqrt(&2 * pi))) *\n         integral (:real^1) (\\y. cexp(ii * Cx x * Cx(drop y)) * fourier h (drop\n           y)) =\n         h x
   i = 1
-  !a:real. !v:real^1. a % v = drop v % lift a
-  !x:real^1. integral (:real^1)\n          (\\y. lift(norm(f(drop x) *\n                        cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)))) =\n          norm(f(drop x)) % integral (:real^1) (\\y. lift(norm(g(drop y))))
+  forall a:real. forall v:real^1. a % v = drop v % lift a
+  forall x:real^1. integral (:real^1)\n          (\\y. lift(norm(f(drop x) *\n                        cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)))) =\n          norm(f(drop x)) % integral (:real^1) (\\y. lift(norm(g(drop y))))
   x:real^1
   {x:real^1 | ~((\\y. f(drop x) *\n                     cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y))\n                    absolutely_integrable_on (:real^1))} = {}
   \\w:real^1. (g:real->complex)(drop w)
@@ -80854,56 +80854,56 @@ Autoformalization/fourier_transform quotations (2067):
   (\\x:real^1. lift(norm((f:real->complex)(drop x))))\n     integrable_on (:real^1)
   (\\z. (g:real->complex)(drop z)) absolutely_integrable_on\n      (:real^1)
   (\\x:real^1. lift(norm((g:real->complex)(drop x))))\n     integrable_on (:real^1)
-  !(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            f(drop(fstcart z)) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            g(drop(sndcart z))) absolutely_integrable_on\n              (:real^(1,1)finite_sum)
+  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z:real^(1,1)finite_sum.\n            f(drop(fstcart z)) *\n            cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n            g(drop(sndcart z))) absolutely_integrable_on\n              (:real^(1,1)finite_sum)
   ~(s = Cx(&0)) ==> s * Cx(&1) / s = Cx(&1)
   Cx(sqrt(&2 * pi)) * Cx(&1) / Cx(sqrt(&2 * pi)) = Cx(&1)
-  !(g:real->complex) x.\n     integral (:real^1) (\\y. cexp(--(ii * Cx x * Cx(drop y))) * g(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier g x
-  !(g:real->complex) c x.\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\y. c * cexp(--(ii * Cx x * Cx(drop y))) * g(drop\n       y)) =\n         c * Cx(sqrt(&2 * pi)) * fourier g x
+  forall(g:real->complex) x.\n     integral (:real^1) (\\y. cexp(--(ii * Cx x * Cx(drop y))) * g(drop y)) =\n     Cx(sqrt(&2 * pi)) * fourier g x
+  forall(g:real->complex) c x.\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\y. c * cexp(--(ii * Cx x * Cx(drop y))) * g(drop\n       y)) =\n         c * Cx(sqrt(&2 * pi)) * fourier g x
   K:real
   K:real
   (:real^1)
   \\z:real^1. (f:real->complex)(drop z)
   \\z:real^1. fourier g (drop z)
   ( * ):complex->complex->complex
-  !(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. f(drop z) * fourier g (drop z)) absolutely_integrable_on\n       (:real^1)
+  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> (\\z. f(drop z) * fourier g (drop z)) absolutely_integrable_on\n       (:real^1)
   (f * s) * gh = s * (f * gh)
   :N
   :1
   :M
   :1
   \\z:real^(1,1)finite_sum. f(drop(fstcart z)) *\n       cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n         g(drop(sndcart z))
-  !(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. f(drop z) * fourier g (drop z))
+  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. f(drop z) * fourier g (drop z))
   (g * s) * fh = s * (g * fh)
   ii * Cx(drop x) * Cx(drop y) = ii * Cx(drop y) * Cx(drop x)
-  !y:real^1. integral (:real^1)\n        (\\x. f(drop x) * cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)) =\n        integral (:real^1)\n        (\\x. g(drop y) * cexp(--(ii * Cx(drop y) * Cx(drop x))) * f(drop x))
+  forall y:real^1. integral (:real^1)\n        (\\x. f(drop x) * cexp(--(ii * Cx(drop x) * Cx(drop y))) * g(drop y)) =\n        integral (:real^1)\n        (\\x. g(drop y) * cexp(--(ii * Cx(drop y) * Cx(drop x))) * f(drop x))
   :N
   :1
   :M
   :1
   \\z:real^(1,1)finite_sum. f(drop(fstcart z)) *\n       cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n         g(drop(sndcart z))
-  !(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. g(drop z) * fourier f (drop z))
+  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^(1,1)finite_sum)\n           (\\z. f(drop(fstcart z)) *\n                cexp(--(ii * Cx(drop(fstcart z)) * Cx(drop(sndcart z)))) *\n                g(drop(sndcart z))) =\n         Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\z. g(drop z) * fourier f (drop z))
   ~(Cx(sqrt(&2 * pi)) = Cx(&0))
   g:real->complex
   f:real->complex
   g:real->complex
   f:real->complex
-  !(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. f(drop z) * fourier g (drop z)) =\n         integral (:real^1) (\\z. fourier f (drop z) * g(drop z))
+  forall(f:real->complex) (g:real->complex).\n     (\\z. f(drop z)) absolutely_integrable_on (:real^1) /\\\n     (\\z. g(drop z)) absolutely_integrable_on (:real^1)\n     ==> integral (:real^1) (\\z. f(drop z) * fourier g (drop z)) =\n         integral (:real^1) (\\z. fourier f (drop z) * g(drop z))
   (a - b) / &2
   cexp(ii * Cx a) - cexp(ii * Cx b) =\n    cexp(ii * Cx b) * (cexp(ii * Cx(a - b)) - Cx(&1))
-  !a b:real. norm(cexp(ii * Cx a) - cexp(ii * Cx b)) <= abs(a - b)
+  forall a b:real. norm(cexp(ii * Cx a) - cexp(ii * Cx b)) <= abs(a - b)
   Cx x
-  !x. ((\\n. x pow n / &(FACT n)) real_sums exp x) (from 0)
+  forall x. ((\\n. x pow n / &(FACT n)) real_sums exp x) (from 0)
   s = e ==> t <= s ==> t <= e
   exp x
   {k:num}
   from 0
   \\n. x pow n / &(FACT n)
-  !x k. &0 <= x ==> x pow k / &(FACT k) <= exp x
+  forall x k. &0 <= x ==> x pow k / &(FACT k) <= exp x
   ((\\x. inv x) ---> &0) at_posinfinity
   ~(e = &0) /\\ ~(x = &0) ==>\n     (p * inv e) * (e * x) = p * x /\\ (f * inv x) * (e * x) = e * f
   e * x:real
   ~(e = &0) /\\ ~(x = &0)
-  !p x e f. &0 < x /\\ &0 < e /\\ p * x <= e * f ==> p * inv e <= f * inv x
+  forall p x e f. &0 < x /\\ &0 < e /\\ p * x <= e * f ==> p * inv e <= f * inv x
   &0 < &(FACT(n+1))
   n+1
   x:real
@@ -80912,9 +80912,9 @@ Autoformalization/fourier_transform quotations (2067):
   x:real
   &1
   \\x. &(FACT(n+1)) * inv x
-  !n. ((\\x. x pow n / exp x) ---> &0) at_posinfinity
+  forall n. ((\\x. x pow n / exp x) ---> &0) at_posinfinity
   n:num
-  !n. ((\\t. t pow n * exp(--t)) ---> &0) at_posinfinity
+  forall n. ((\\t. t pow n * exp(--t)) ---> &0) at_posinfinity
   a = b ==> a <= b
   inv(inv(t pow N) * inv(&(FACT N)))
   inv(exp(inv t)) <= &(FACT N) * t pow N
@@ -80922,20 +80922,20 @@ Autoformalization/fourier_transform quotations (2067):
   &0 < exp(inv t)
   N:num
   inv t:real
-  !N t. &0 < t ==> exp(--(inv t)) <= &(FACT N) * t pow N
+  forall N t. &0 < t ==> exp(--(inv t)) <= &(FACT N) * t pow N
   (C2:real) * t pow N2
   (C1:real) * t pow N1
   abs(f(lift t):real) <= C1 * t pow (MAX N1 N2) /\\\n                abs(g(lift t):real) <= C2 * t pow (MAX N1 N2)
   t:real
   MAX N1 N2
   C1 + C2:real
-  !(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (!t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (!t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               !t. &1 <= t ==> abs(f(lift t) + g(lift t)) <= C * t pow N
+  forall(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (forall t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (forall t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               forall t. &1 <= t ==> abs(f(lift t) + g(lift t)) <= C * t pow N
   a = b ==> a <= b
   (C1 * t pow N1) * (C2 * t pow N2):real
   t:real
   N1 + N2:num
   C1 * C2:real
-  !(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (!t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (!t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               !t. &1 <= t ==> abs(f(lift t) * g(lift t)) <= C * t pow N
+  forall(f:real^1->real) g C1 N1 C2 N2.\n     &0 <= C1 /\\ (forall t. &1 <= t ==> abs(f(lift t)) <= C1 * t pow N1) /\\\n     &0 <= C2 /\\ (forall t. &1 <= t ==> abs(g(lift t)) <= C2 * t pow N2)\n     ==> ?C N. &0 <= C /\\\n               forall t. &1 <= t ==> abs(f(lift t) * g(lift t)) <= C * t pow N
   N2:num
   C2:real
   N1:num
@@ -80961,14 +80961,14 @@ Autoformalization/fourier_transform quotations (2067):
   c:real
   1
   &1
-  !p:real^1->real. real_polynomial_function p\n     ==> ?C N. &0 <= C /\\ !t. &1 <= t ==> abs(p(lift t)) <= C * t pow N
+  forall p:real^1->real. real_polynomial_function p\n     ==> ?C N. &0 <= C /\\ forall t. &1 <= t ==> abs(p(lift t)) <= C * t pow N
   abs(exp(--t)) = exp(--t)
   t:real
   &1
   \\t. C * (t pow N * exp(--t))
   N:num
   C:real
-  !p:real^1->real. real_polynomial_function p\n     ==> ((\\t. p(lift t) * exp(--t)) ---> &0) at_posinfinity
+  forall p:real^1->real. real_polynomial_function p\n     ==> ((\\t. p(lift t) * exp(--t)) ---> &0) at_posinfinity
   x:real
   abs(x) > R
   x:real
@@ -80976,11 +80976,11 @@ Autoformalization/fourier_transform quotations (2067):
   x0:real
   real_interval[--R,R]
   g:real->real
-  !g:real->real R.\n     &0 <= R /\\ g real_continuous_on real_interval[--R,R] /\\\n     (!x. abs(x) > R ==> g x = &0) /\\ (!x. &0 <= g x)\n     ==> ?B. !x. g x <= B
+  forall g:real->real R.\n     &0 <= R /\\ g real_continuous_on real_interval[--R,R] /\\\n     (forall x. abs(x) > R ==> g x = &0) /\\ (forall x. &0 <= g x)\n     ==> ?B. forall x. g x <= B
   \\z. (dm:real->complex)(drop z)
   at(lift x)
   x:real
-  !(dm:real->complex) dm1 s.\n     (!x. ((\\z. dm(drop z)) has_vector_derivative (dm1 x)) (at(lift x)))\n     ==> (\\x. norm(dm x)) real_continuous_on s
+  forall(dm:real->complex) dm1 s.\n     (forall x. ((\\z. dm(drop z)) has_vector_derivative (dm1 x)) (at(lift x)))\n     ==> (\\x. norm(dm x)) real_continuous_on s
   (d:num->real->complex) m x = Cx(&0)
   (d:num->real->complex)(SUC m)
   real_interval[--R,R]
@@ -80992,26 +80992,26 @@ Autoformalization/fourier_transform quotations (2067):
   m:num
   k:num
   d:num->real->complex
-  !d:num->real->complex. !R.\n     &0 <= R /\\\n     (!n x. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) x))(at(lift x)))\n       /\\\n     (!m x. abs(x) > R ==> d m x = Cx(&0))\n     ==> schwartz (d 0)
+  forall d:num->real->complex. forall R.\n     &0 <= R /\\\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) x))(at(lift x)))\n       /\\\n     (forall m x. abs(x) > R ==> d m x = Cx(&0))\n     ==> schwartz (d 0)
   x:real
   &1
   \\x:real. x
   ((P:real->real) o inv has_real_derivative (P1(inv x) * (--(inv(x pow 2)))))\n    (atreal x)
   ~(x = &0)
-  !(P:real->real) P1 x.\n     &0 < x /\\ (!y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x)) has_real_derivative (--(inv(x pow 2)) * P1(inv x)))\n         (atreal x)
-  !x. &0 < x\n     ==> ((\\x. exp(--(inv x))) has_real_derivative (exp(--(inv x)) * inv(x pow\n       2)))\n         (atreal x)
+  forall(P:real->real) P1 x.\n     &0 < x /\\ (forall y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x)) has_real_derivative (--(inv(x pow 2)) * P1(inv x)))\n         (atreal x)
+  forall x. &0 < x\n     ==> ((\\x. exp(--(inv x))) has_real_derivative (exp(--(inv x)) * inv(x pow\n       2)))\n         (atreal x)
   x:real
   x:real
   P1:real->real
   P:real->real
   ((\\x. (P:real->real)(inv x) * exp(--(inv x))) has_real_derivative\n     ((P(inv x)) * (exp(--(inv x)) * inv(x pow 2)) +\n      (--(inv(x pow 2)) * P1(inv x)) * exp(--(inv x)))) (atreal x)
   ~(x = &0)
-  !(P:real->real) P1 x.\n     &0 < x /\\ (!y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x) * exp(--(inv x))) has_real_derivative\n          (inv(x pow 2) * (P(inv x) - P1(inv x)) * exp(--(inv x))))\n         (atreal x)
+  forall(P:real->real) P1 x.\n     &0 < x /\\ (forall y. (P has_real_derivative P1 y) (atreal y))\n     ==> ((\\x. P(inv x) * exp(--(inv x))) has_real_derivative\n          (inv(x pow 2) * (P(inv x) - P1(inv x)) * exp(--(inv x))))\n         (atreal x)
   f = g /\\ a = b\n     ==> (f has_derivative a) net ==> (g has_derivative b) net
   Cx(&1)
-  !g:real->real. !g' x.\n     (g has_real_derivative g') (atreal x)\n     ==> ((\\z. Cx(g(drop z))) has_vector_derivative (Cx g')) (at(lift x))
-  !c a ff b:real. (c * a) * (ff * b) = (c * ff) * (a * b)
-  !c a ff b x:real. a * b = x ==> (c * a) * (ff * b) = (c * ff) * x
+  forall g:real->real. forall g' x.\n     (g has_real_derivative g') (atreal x)\n     ==> ((\\z. Cx(g(drop z))) has_vector_derivative (Cx g')) (at(lift x))
+  forall c a ff b:real. (c * a) * (ff * b) = (c * ff) * (a * b)
+  forall c a ff b x:real. a * b = x ==> (c * a) * (ff * b) = (c * ff) * x
   ~(x = &0) ==> inv(x pow K) * (x pow K * x) = x
   a = b ==> a <= b
   (C * inv x pow K) * (&(FACT(K+1)) * x pow (K+1))
@@ -81020,11 +81020,11 @@ Autoformalization/fourier_transform quotations (2067):
   (C * inv x pow K) * exp(--(inv x))
   abs(exp(--(inv x))) = exp(--(inv x))
   inv(x:real)
-  !(Q:real->real) C K x.\n     &0 <= C /\\ (!t. &1 <= t ==> abs((\\z:real^1. Q(drop z))(lift t)) <= C * t\n       pow K) /\\\n     &0 < x /\\ x < &1 /\\ &1 <= inv x\n     ==> abs(Q(inv x) * exp(--(inv x))) <= (C * &(FACT(K+1))) * x
+  forall(Q:real->real) C K x.\n     &0 <= C /\\ (forall t. &1 <= t ==> abs((\\z:real^1. Q(drop z))(lift t)) <= C * t\n       pow K) /\\\n     &0 < x /\\ x < &1 /\\ &1 <= inv x\n     ==> abs(Q(inv x) * exp(--(inv x))) <= (C * &(FACT(K+1))) * x
   c:real
   \\x:real. x
   atreal(&0) within s
-  !c s. ((\\x:real. c * x) ---> &0) (atreal(&0) within s)
+  forall c s. ((\\x:real. c * x) ---> &0) (atreal(&0) within s)
   x:real
   K:num
   C:real
@@ -81034,140 +81034,140 @@ Autoformalization/fourier_transform quotations (2067):
   \\x:real. (C * &(FACT(K+1))) * x
   K:num
   C:real
-  !Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\x. Q(inv x) * exp(--(inv x))) ---> &0)\n         (atreal(&0) within {x | &0 < x})
+  forall Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\x. Q(inv x) * exp(--(inv x))) ---> &0)\n         (atreal(&0) within {x | &0 < x})
   cphi (x:real) = if &0 < x then Cx(exp(--(inv x))) else Cx(&0)
-  bumpP (f:real->complex) <=>\n    ?Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z)) /\\\n                   (!x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n                   (!x. x <= &0 ==> f x = Cx(&0))
+  bumpP (f:real->complex) <=>\n    ?Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z)) /\\\n                   (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n                   (forall x. x <= &0 ==> f x = Cx(&0))
   t:real^1->bool
   s:real^1->bool
-  !f:real^1->real^N f' a s t.\n     (f has_vector_derivative f') (at a within s) /\\\n     (f has_vector_derivative f') (at a within t) /\\\n     s UNION t = (:real^1)\n     ==> (f has_vector_derivative f') (at a)
+  forall f:real^1->real^N f' a s t.\n     (f has_vector_derivative f') (at a within s) /\\\n     (f has_vector_derivative f') (at a within t) /\\\n     s UNION t = (:real^1)\n     ==> (f has_vector_derivative f') (at a)
   z:real^1
   &1
   \\z:real^1. vec 0:complex
-  !f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | drop z <= &0})
+  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | drop z <= &0})
   drop = \\z:real^1. z$1
   real_polynomial_function (drop:real^1->real)
   drop z
   z:real^1
   {z:real^1 | &0 <= drop z} DELETE lift(&0) = IMAGE lift {x | &0 < x}
   &0 < drop x'
-  !(f:real->complex) Q x'.\n     (!x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     x' IN {z | &0 <= drop z} /\\ &0 < dist(x',lift(&0)) /\\ dist(x',lift(&0)) <\n       &1\n     ==> Cx (inv (drop x') * Q (inv (drop x')) * exp (--inv (drop x'))) =\n         inv (drop (x' - lift (&0))) % f (drop x')
+  forall(f:real->complex) Q x'.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     x' IN {z | &0 <= drop z} /\\ &0 < dist(x',lift(&0)) /\\ dist(x',lift(&0)) <\n       &1\n     ==> Cx (inv (drop x') * Q (inv (drop x')) * exp (--inv (drop x'))) =\n         inv (drop (x' - lift (&0))) % f (drop x')
   \\u:real. u * Q u
-  !Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\y. Cx(inv(drop y) * Q(inv(drop y)) * exp(--(inv(drop y))))) -->\n       Cx(&0))\n         (at(lift(&0)) within {z | &0 <= drop z})
+  forall Q:real->real. real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\y. Cx(inv(drop y) * Q(inv(drop y)) * exp(--(inv(drop y))))) -->\n       Cx(&0))\n         (at(lift(&0)) within {z | &0 <= drop z})
   &1
   \\y:real^1. Cx(inv(drop y) * (Q(inv(drop y)) * exp(--(inv(drop\n    y)))))
   (f:real->complex)(&0) = Cx(&0)
-  !f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | &0 <= drop z})
+  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0)))\n         (at(lift(&0)) within {z | &0 <= drop z})
   {z:real^1 | &0 <= drop z}
   {z:real^1 | drop z <= &0}
-  !f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift(&0)))
+  forall f:real->complex. bumpP f\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift(&0)))
   x:real
   Q1:real->real
   Q:real->real
   x:real
   inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x))
   \\w. Q(inv w) * exp(--(inv w))
-  !(Q:real->real) Q1 x.\n     (!y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. Cx(Q(inv(drop z)) * exp(--(inv(drop z))))) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
+  forall(Q:real->real) Q1 x.\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. Cx(Q(inv(drop z)) * exp(--(inv(drop z))))) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
   z:real^1
   x:real
   \\z. Cx(Q(inv(drop z)) * exp(--(inv(drop z))))
-  !(f:real->complex) Q Q1 x.\n     (!x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (!y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
+  forall(f:real->complex) Q Q1 x.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\ &0 < x\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))))\n         (at(lift x))
   z:real^1
   --x:real
   \\z:real^1. vec 0:complex
-  !(f:real->complex) x.\n     (!y. y <= &0 ==> f y = Cx(&0)) /\\ x < &0\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift x))
+  forall(f:real->complex) x.\n     (forall y. y <= &0 ==> f y = Cx(&0)) /\\ x < &0\n     ==> ((\\z. f(drop z)) has_vector_derivative (Cx(&0))) (at(lift x))
   (Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))):complex =\n        Cx(inv(x pow 2) * (Q(inv x) - Q1(inv x)) * exp(--(inv x)))
   Q:real->real
   ~(&0 < x)
   x < &0 \\/ x = &0 \\/ &0 < x
-  !(f:real->complex) Q Q1 x.\n     (!x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (!x. x <= &0 ==> f x = Cx(&0)) /\\\n     (!y. (Q has_real_derivative Q1 y) (atreal y)) /\\\n     real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (if &0 < x\n           then Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))\n           else Cx(&0)))\n         (at(lift x))
+  forall(f:real->complex) Q Q1 x.\n     (forall x. &0 < x ==> f x = Cx(Q(inv x) * exp(--(inv x)))) /\\\n     (forall x. x <= &0 ==> f x = Cx(&0)) /\\\n     (forall y. (Q has_real_derivative Q1 y) (atreal y)) /\\\n     real_polynomial_function (\\z:real^1. Q(drop z))\n     ==> ((\\z. f(drop z)) has_vector_derivative\n          (if &0 < x\n           then Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))\n           else Cx(&0)))\n         (at(lift x))
   \\u:real. u pow 2 * (Q u - Q1 u)
   \\x. if &0 < x\n        then Cx((inv x pow 2 * (Q(inv x) - Q1(inv x))) * exp(--(inv x)))\n        else Cx(&0)
   real_polynomial_function (\\z:real^1. Q1 (drop z))
   y:real
   y:real
-  !y. ((Q:real->real) has_real_derivative (Q1 y)) (atreal y)
+  forall y. ((Q:real->real) has_real_derivative (Q1 y)) (atreal y)
   Q1 = \\u:real. (Q1c:real^1->real)(lift u)
   Q1c:real^1->real
-  !f:real->complex. bumpP f\n     ==> ?g. bumpP g /\\\n             (!x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x)))
+  forall f:real->complex. bumpP f\n     ==> ?g. bumpP g /\\\n             (forall x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x)))
   \\u:real. &1
   bumpP cphi
   cphi
-  \\(n:num) (f:real->complex) (g:real->complex).\n        !x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x))
+  \\(n:num) (f:real->complex) (g:real->complex).\n        forall x. ((\\z. f(drop z)) has_vector_derivative (g x)) (at(lift x))
   \\(n:num) (f:real->complex). bumpP f
-  ?d:num->real->complex.\n     d 0 = cphi /\\\n     (!n. bumpP (d n)) /\\\n     (!n x. ((\\z. d n (drop z)) has_vector_derivative (d(SUC n) x)) (at(lift\n       x)))
+  ?d:num->real->complex.\n     d 0 = cphi /\\\n     (forall n. bumpP (d n)) /\\\n     (forall n x. ((\\z. d n (drop z)) has_vector_derivative (d(SUC n) x)) (at(lift\n       x)))
   lift x
   b':complex
   a':complex
   \\z. (b:real->complex)(drop z)
   \\z. (a:real->complex)(drop z)
   ( * ):complex->complex->complex
-  !(a:real->complex) b a' b' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x)) /\\\n     ((\\z. b(drop z)) has_vector_derivative b') (at(lift x))\n     ==> ((\\z. a(drop z) * b(drop z)) has_vector_derivative\n          (a(x) * b' + a' * b(x))) (at(lift x))
+  forall(a:real->complex) b a' b' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x)) /\\\n     ((\\z. b(drop z)) has_vector_derivative b') (at(lift x))\n     ==> ((\\z. a(drop z) * b(drop z)) has_vector_derivative\n          (a(x) * b' + a' * b(x))) (at(lift x))
   x:real^1
   f':num->complex
   f:num->real^1->complex
   t:num->bool
   a:num
-  !s. FINITE s ==> !(f:num->real^1->complex) f' x.\n     (!i. i IN s ==> ((f i) has_vector_derivative (f' i)) (at x))\n     ==> ((\\z. vsum s (\\i. f i z)) has_vector_derivative (vsum s f')) (at x)
+  forall s. FINITE s ==> forall(f:num->real^1->complex) f' x.\n     (forall i. i IN s ==> ((f i) has_vector_derivative (f' i)) (at x))\n     ==> ((\\z. vsum s (\\i. f i z)) has_vector_derivative (vsum s f')) (at x)
   1 <= SUC(SUC n)
   1 <= SUC n
-  !(g:num->complex) n. vsum(0..n)(\\k. g(SUC k)) = vsum(1..SUC n) g
+  forall(g:num->complex) n. vsum(0..n)(\\k. g(SUC k)) = vsum(1..SUC n) g
   k:num
   n:num
   \\k. Cx(&(binom(SUC n,k))) * (C:num->complex) k
   0 <= SUC n
-  !(C:num->complex) n.\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * C k) =\n     C 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k)) + &(binom(n,k))) * C(SUC k))
+  forall(C:num->complex) n.\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * C k) =\n     C 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k)) + &(binom(n,k))) * C(SUC k))
   1 <= SUC n
   binom(n,SUC n) = 0
   0 <= n:num
   n:num
   \\k. Cx(&(binom(n,k))) * (B:num->complex) k
-  !(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) =\n     B 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k))) * B(SUC k))
+  forall(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) =\n     B 0 + vsum(0..n)(\\k. Cx(&(binom(n,SUC k))) * B(SUC k))
   vsum(0..n)(\\k. Cx(&(binom(n,SUC k)) + &(binom(n,k))) * (B:num->complex)(SUC\n     k)) =\n    vsum(0..n)(\\k. Cx(&(binom(n,SUC k))) * B(SUC k)) +\n    vsum(0..n)(\\k. Cx(&(binom(n,k))) * B(SUC k))
-  !(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) +\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B (SUC k)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * B k)
+  forall(B:num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B k) +\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * B (SUC k)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * B k)
   x:real
   a':complex
   Cx(&0)
   a:real->complex
   \\u:real. c:complex
-  !c (a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. c * a(drop z)) has_vector_derivative (c * a')) (at(lift x))
+  forall c (a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. c * a(drop z)) has_vector_derivative (c * a')) (at(lift x))
   i <= n ==> SUC(n - i) = SUC n - i
   i:num
-  !(A:num->num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC(n-k))) =\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC n - k))
+  forall(A:num->num->complex) n.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC(n-k))) =\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) * A k (SUC n - k))
   x:real
   (e:num->real->complex)(SUC(n-k)) x
   (d:num->real->complex)(SUC k) x
   (e:num->real->complex)(n-k)
   (d:num->real->complex) k
-  !(d:num->real->complex) e n k x.\n     (!m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (!m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop z))\n          has_vector_derivative\n          (Cx(&(binom(n,k))) * (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k)\n            x)))\n         (at(lift x))
+  forall(d:num->real->complex) e n k x.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop z))\n          has_vector_derivative\n          (Cx(&(binom(n,k))) * (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k)\n            x)))\n         (at(lift x))
   k:num
   a = a' /\\ b = b' /\\ c = c'\n     ==> (a' + b' = c') ==> (a + b = c)
   n:num
   \\k. (d:num->real->complex) k x * (e:num->real->complex) (SUC n\n    - k) x
   \\k j. (d:num->real->complex) k x *\n    (e:num->real->complex) j x
-  !(d:num->real->complex) e n x.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) *\n                    (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k) x)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)
+  forall(d:num->real->complex) e n x.\n     vsum(0..n)(\\k. Cx(&(binom(n,k))) *\n                    (d k x * e(SUC(n-k)) x + d(SUC k) x * e(n-k) x)) =\n     vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)
   n:num
   lift x
   \\k. Cx(&(binom(n,k))) * ((d:num->real->complex) k x * e(SUC(n-k)) x +\n                              d(SUC k) x * e(n-k) x)
   \\k z. Cx(&(binom(n,k))) * (d:num->real->complex) k (drop z) * e (n-k)(drop\n     z)
   0..n
-  !(d:num->real->complex) e n x.\n     (!m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (!m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. vsum(0..n)(\\k. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop\n       z)))\n          has_vector_derivative\n          (vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)))\n         (at(lift x))
+  forall(d:num->real->complex) e n x.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ((\\z. vsum(0..n)(\\k. Cx(&(binom(n,k))) * d k (drop z) * e (n-k)(drop\n       z)))\n          has_vector_derivative\n          (vsum(0..SUC n)(\\k. Cx(&(binom(SUC n,k))) * d k x * e (SUC n-k) x)))\n         (at(lift x))
   \\n x. vsum(0..n)(\\k. Cx(&(binom(n,k))) * (d:num->real->complex) k\n    x * e (n-k) x)
-  !(d:num->real->complex) e.\n     (!m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (!m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ?p:num->real->complex.\n           (!x. p 0 x = d 0 x * e 0 x) /\\\n           (!n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n)\n             y))(at(lift y)))
+  forall(d:num->real->complex) e.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n       /\\\n     (forall m y. ((\\z. e m(drop z)) has_vector_derivative (e(SUC m) y))(at(lift y)))\n     ==> ?p:num->real->complex.\n           (forall x. p 0 x = d 0 x * e 0 x) /\\\n           (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n)\n             y))(at(lift y)))
   (lift s):real^1 = vec 0 + s % vec 1
   (\\z:real^1. lift(c + s * drop z)) = (\\z:real^1. lift c + s % z)
-  !c s x. ((\\z:real^1. lift(c + s * drop z)) has_vector_derivative (lift s))\n   (at(lift x))
+  forall c s x. ((\\z:real^1. lift(c + s * drop z)) has_vector_derivative (lift s))\n   (at(lift x))
   lift x
   g':complex
   lift s
   \\w:real^1. (g:real->complex)(drop w)
   \\z:real^1. lift(c + s * drop z)
-  !(g:real->complex) g' c s x.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift(c + s * x)))\n     ==> ((\\z. g(c + s * drop z)) has_vector_derivative (s % g')) (at(lift\n       x))
+  forall(g:real->complex) g' c s x.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift(c + s * x)))\n     ==> ((\\z. g(c + s * drop z)) has_vector_derivative (s % g')) (at(lift\n       x))
   y:real
   s:real
   c:real
   Cx s pow m * (d:num->real->complex)(SUC m)(c + s * y)
   \\w. Cx s pow m * (d:num->real->complex) m w
-  !(d:num->real->complex) c s.\n     (!m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n     ==> (!m y. ((\\z. (\\n x. Cx s pow n * d n (c + s * x)) m (drop z))\n                 has_vector_derivative\n                 ((\\n x. Cx s pow n * d n (c + s * x)) (SUC m) y))(at(lift\n                   y)))
+  forall(d:num->real->complex) c s.\n     (forall m y. ((\\z. d m(drop z)) has_vector_derivative (d(SUC m) y))(at(lift y)))\n     ==> (forall m y. ((\\z. (\\n x. Cx s pow n * d n (c + s * x)) m (drop z))\n                 has_vector_derivative\n                 ((\\n x. Cx s pow n * d n (c + s * x)) (SUC m) y))(at(lift\n                   y)))
   &1 + -- &1 * x = &1 - x
   p:num->real->complex
   p:num->real->complex
@@ -81180,7 +81180,7 @@ Autoformalization/fourier_transform quotations (2067):
   &1
   d:num->real->complex
   d:num->real->complex
-  ?p:num->real->complex.\n     (!x. p 0 x = cphi(&1 + x) * cphi(&1 - x)) /\\\n     (!n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift\n       y)))
+  ?p:num->real->complex.\n     (forall x. p 0 x = cphi(&1 + x) * cphi(&1 - x)) /\\\n     (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift\n       y)))
   z:real^1
   abs x - R
   \\z:real^1. vec 0:complex
@@ -81189,7 +81189,7 @@ Autoformalization/fourier_transform quotations (2067):
   lift x
   \\z. (p:num->real->complex) n (drop z)
   x:real
-  !(p:num->real->complex) R.\n     &0 <= R /\\ (!x. R < abs x ==> p 0 x = Cx(&0)) /\\\n     (!n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift y)))\n     ==> !n x. R < abs x ==> p n x = Cx(&0)
+  forall(p:num->real->complex) R.\n     &0 <= R /\\ (forall x. R < abs x ==> p 0 x = Cx(&0)) /\\\n     (forall n y. ((\\z. p n(drop z)) has_vector_derivative (p(SUC n) y))(at(lift y)))\n     ==> forall n x. R < abs x ==> p n x = Cx(&0)
   x:real
   &1
   p:num->real->complex
@@ -81198,7 +81198,7 @@ Autoformalization/fourier_transform quotations (2067):
   p:num->real->complex
   schwartz (\\x. cphi(&1 + x) * cphi(&1 - x))
   yy:num->real^1
-  !(g:real->complex) g' y0 yy.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift y0)) /\\\n     (!n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. inv(drop(yy n) - y0) % (g(drop(yy n)) - g y0)) --> g')\n       sequentially
+  forall(g:real->complex) g' y0 yy.\n     ((\\z. g(drop z)) has_vector_derivative g') (at(lift y0)) /\\\n     (forall n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. inv(drop(yy n) - y0) % (g(drop(yy n)) - g y0)) --> g')\n       sequentially
   lift b
   lift a
   w:real^1
@@ -81206,7 +81206,7 @@ Autoformalization/fourier_transform quotations (2067):
   (:real^1)
   \\z. (g':real->complex)(drop z)
   \\z. (g:real->complex)(drop z)
-  !(g:real->complex) g' B a b.\n     (!y. ((\\z. g(drop z)) has_vector_derivative (g' y)) (at(lift y))) /\\\n     (!y. norm(g' y) <= B)\n     ==> norm(g a - g b) <= B * abs(a - b)
+  forall(g:real->complex) g' B a b.\n     (forall y. ((\\z. g(drop z)) has_vector_derivative (g' y)) (at(lift y))) /\\\n     (forall y. norm(g' y) <= B)\n     ==> norm(g a - g b) <= B * abs(a - b)
   ~(d = &0) ==> inv(abs d) * (dmx * abs d) =\n      dmx
   inv(abs(drop(yy(n:num)) - y0)) * ((dm:real->real) x *\n    abs(drop(yy(n:num)) - y0))
   y0:real
@@ -81216,8 +81216,8 @@ Autoformalization/fourier_transform quotations (2067):
   \\t. (ff:real->real->complex) t x
   ~((yy:num->real^1) n = lift y0)
   ~(drop(yy(n:num)) - y0 = &0)
-  !(ff:real->real->complex) gg dm y0 (yy:num->real^1) n (x:real).\n     (!y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (!y (x:real). norm(gg y x) <= dm x) /\\ ~(yy n = lift y0)\n     ==> norm(inv(drop(yy n) - y0) % (ff (drop(yy n)) x - ff y0 x)) <= dm x
-  !(ff:real->real->complex) a b c.\n     (\\x:real^1. ff a (drop x)) absolutely_integrable_on (:real^1) /\\\n     (\\x:real^1. ff b (drop x)) absolutely_integrable_on (:real^1)\n     ==> c % (integral (:real^1) (\\x. ff a (drop x)) -\n              integral (:real^1) (\\x. ff b (drop x))) =\n         integral (:real^1) (\\x. c % (ff a (drop x) - ff b (drop x)))
+  forall(ff:real->real->complex) gg dm y0 (yy:num->real^1) n (x:real).\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\ ~(yy n = lift y0)\n     ==> norm(inv(drop(yy n) - y0) % (ff (drop(yy n)) x - ff y0 x)) <= dm x
+  forall(ff:real->real->complex) a b c.\n     (\\x:real^1. ff a (drop x)) absolutely_integrable_on (:real^1) /\\\n     (\\x:real^1. ff b (drop x)) absolutely_integrable_on (:real^1)\n     ==> c % (integral (:real^1) (\\x. ff a (drop x)) -\n              integral (:real^1) (\\x. ff b (drop x))) =\n         integral (:real^1) (\\x. c % (ff a (drop x) - ff b (drop x)))
   yy:num->real^1
   y0:real
   (gg:real->real->complex) y0 (drop x)
@@ -81228,12 +81228,12 @@ Autoformalization/fourier_transform quotations (2067):
   \\x:real^1. lift(dm(drop x))
   \\x:real^1. (gg:real->real->complex) y0 (drop x)
   \\n x:real^1. inv(drop(yy(n:num)) - y0) % (ff (drop(yy n)) (drop x) - ff y0\n     (drop x)):complex
-  !(ff:real->real->complex) gg dm y0 (yy:num->real^1).\n     (!y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (!y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (!y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1) /\\\n     (!n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. integral (:real^1)\n                 (\\x. inv(drop(yy n) - y0) % (ff (drop(yy n)) (drop x) - ff y0\n                   (drop x))))\n          --> integral (:real^1) (\\x. gg y0 (drop x))) sequentially
+  forall(ff:real->real->complex) gg dm y0 (yy:num->real^1).\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1) /\\\n     (forall n. ~(yy n = lift y0)) /\\ (yy --> lift y0) sequentially\n     ==> ((\\n. integral (:real^1)\n                 (\\x. inv(drop(yy n) - y0) % (ff (drop(yy n)) (drop x) - ff y0\n                   (drop x))))\n          --> integral (:real^1) (\\x. gg y0 (drop x))) sequentially
   dm:real->real
-  !n. inv(drop(yy(n:num) - lift y0)) %\n        (integral (:real^1) (\\x. ff (drop(yy n)) (drop x)) -\n         integral (:real^1) (\\x. ff (drop(lift y0)) (drop x))) =\n        integral (:real^1) (\\x. inv(drop(yy n) - y0) %\n                                (ff (drop(yy n)) (drop x) - ff y0 (drop x)))
+  forall n. inv(drop(yy(n:num) - lift y0)) %\n        (integral (:real^1) (\\x. ff (drop(yy n)) (drop x)) -\n         integral (:real^1) (\\x. ff (drop(lift y0)) (drop x))) =\n        integral (:real^1) (\\x. inv(drop(yy n) - y0) %\n                                (ff (drop(yy n)) (drop x) - ff y0 (drop x)))
   yy:num->real^1
-  !(ff:real->real->complex) gg dm y0.\n     (!y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (!y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (!y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. ff (drop z) (drop x)))\n       has_vector_derivative\n          (integral (:real^1) (\\x. gg y0 (drop x)))) (at(lift y0))
-  !(x:real) a:real^1.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x))) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx(drop a) * Cx x)))) (at a)
+  forall(ff:real->real->complex) gg dm y0.\n     (forall y (x:real). ((\\z. ff (drop z) x) has_vector_derivative (gg y x))\n       (at(lift y))) /\\\n     (forall y. (\\x:real^1. ff y (drop x)) absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. gg y0 (drop x)) absolutely_integrable_on (:real^1) /\\\n     (forall y (x:real). norm(gg y x) <= dm x) /\\\n     (\\x:real^1. lift(dm(drop x))) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. ff (drop z) (drop x)))\n       has_vector_derivative\n          (integral (:real^1) (\\x. gg y0 (drop x)))) (at(lift y0))
+  forall(x:real) a:real^1.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x))) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx(drop a) * Cx x)))) (at a)
   (f has_complex_derivative f') net
   lift y
   x:real
@@ -81243,43 +81243,43 @@ Autoformalization/fourier_transform quotations (2067):
   \\z:real^1. (f:real->complex) x
   \\z. cexp(--(ii * Cx(drop z) * Cx x))
   ( * ):complex->complex->complex
-  !(f:real->complex) (x:real) y.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x)) * f x) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x)) (at(lift y))
-  !(f:real->complex) (x:real) y.\n     norm(--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x) <= norm(Cx x * f\n       x)
+  forall(f:real->complex) (x:real) y.\n     ((\\z. cexp(--(ii * Cx(drop z) * Cx x)) * f x) has_vector_derivative\n      (--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x)) (at(lift y))
+  forall(f:real->complex) (x:real) y.\n     norm(--(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * f x) <= norm(Cx x * f\n       x)
   f = g ==> f absolutely_integrable_on s ==> g\n    absolutely_integrable_on s
   --ii
   y0:real
   \\t. Cx t * (f:real->complex) t
-  !(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> (\\x:real^1. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop x))) *\n       f(drop x))\n         absolutely_integrable_on (:real^1)
+  forall(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> (\\x:real^1. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop x))) *\n       f(drop x))\n         absolutely_integrable_on (:real^1)
   y0:real
   \\x. norm(Cx x * (f:real->complex) x)
   \\y x. --(ii * Cx x) * cexp(--(ii * Cx y * Cx x)) * (f:real->complex) x
   \\y x. cexp(--(ii * Cx y * Cx x)) * (f:real->complex) x
-  !(f:real->complex) y0.\n     (!y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. cexp(--(ii * Cx(drop z) * Cx(drop x))) *\n       f(drop x)))\n          has_vector_derivative\n          (integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n            Cx(drop x))) * f(drop x))))\n         (at(lift y0))
+  forall(f:real->complex) y0.\n     (forall y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. integral (:real^1) (\\x. cexp(--(ii * Cx(drop z) * Cx(drop x))) *\n       f(drop x)))\n          has_vector_derivative\n          (integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n            Cx(drop x))) * f(drop x))))\n         (at(lift y0))
   y0:real
   \\t. Cx t * (f:real->complex) t
   integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop\n     x))) * f(drop x)) =\n    --ii * integral (:real^1) (\\x. cexp(--(ii * Cx y0 * Cx(drop x))) * (Cx(drop\n      x) * f(drop x)))
-  !(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> Cx(&1) / Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n           Cx(drop x))) * f(drop x)) =\n         --ii * fourier (\\x. Cx x * f x) y0
+  forall(f:real->complex) y0.\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> Cx(&1) / Cx(sqrt(&2 * pi)) *\n         integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 *\n           Cx(drop x))) * f(drop x)) =\n         --ii * fourier (\\x. Cx x * f x) y0
   --ii * fourier (\\x. Cx x * (f:real->complex) x) y0 =\n    Cx(&1) / Cx(sqrt(&2 * pi)) *\n    integral (:real^1) (\\x. --(ii * Cx(drop x)) * cexp(--(ii * Cx y0 * Cx(drop\n      x))) * f(drop x))
-  !(f:real->complex) y0.\n     (!y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. fourier f (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * f x) y0)) (at(lift y0))
+  forall(f:real->complex) y0.\n     (forall y. (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x))\n       absolutely_integrable_on (:real^1)) /\\\n     (\\x:real^1. Cx(drop x) * f(drop x)) absolutely_integrable_on (:real^1)\n     ==> ((\\z. fourier f (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * f x) y0)) (at(lift y0))
   cnj
   (:real^1)
   \\x. cexp(--(ii * Cx y * Cx(drop x))) *\n      (f:real->complex)(drop x)
-  !(f:real->complex) y.\n     (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> cnj(fourier f y) =\n         Cx(&1)/Cx(sqrt(&2*pi)) *\n         integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop x)) * cnj(f(drop\n           x)))
-  !(f:real->complex) y. fourier f (--y) =\n     Cx(&1)/Cx(sqrt(&2*pi)) * integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop\n       x)) * f(drop x))
+  forall(f:real->complex) y.\n     (\\x:real^1. cexp(--(ii * Cx y * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> cnj(fourier f y) =\n         Cx(&1)/Cx(sqrt(&2*pi)) *\n         integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop x)) * cnj(f(drop\n           x)))
+  forall(f:real->complex) y. fourier f (--y) =\n     Cx(&1)/Cx(sqrt(&2*pi)) * integral (:real^1) (\\x. cexp(ii * Cx y * Cx(drop\n       x)) * f(drop x))
   z:real
   f:real->complex
   z:real
   \\x. cnj((f:real->complex) x)
-  !(f:real->complex) z.\n     (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> fourier (\\x. cnj(f(--x))) z = cnj(fourier f z)
+  forall(f:real->complex) z.\n     (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * f(drop x)) integrable_on\n       (:real^1)\n     ==> fourier (\\x. cnj(f(--x))) z = cnj(fourier f z)
   z:real
   h:real->complex
   z:real
   fourier(h:real->complex)
-  !(h:real->complex) z. schwartz h ==> fourier (fourier h) (--z) = h z
+  forall(h:real->complex) z. schwartz h ==> fourier (fourier h) (--z) = h z
   IMAGE (--) (:real^1) = (:real^1)
   (\\z:real^1. cnj(h(--(drop z)))) = cnj o (\\z:real^1. h(drop(--z)))
-  !(h:real->complex). (\\z:real^1. h(drop z)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\z:real^1. cnj(h(--(drop z)))) absolutely_integrable_on (:real^1)
-  !(h:real->complex) z. (\\x:real^1. h(drop x)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * h(drop x))\n       integrable_on (:real^1)
+  forall(h:real->complex). (\\z:real^1. h(drop z)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\z:real^1. cnj(h(--(drop z)))) absolutely_integrable_on (:real^1)
+  forall(h:real->complex) z. (\\x:real^1. h(drop x)) absolutely_integrable_on\n   (:real^1)\n     ==> (\\x:real^1. cexp(--(ii * Cx z * Cx(drop x))) * h(drop x))\n       integrable_on (:real^1)
   \\t. (h:real->complex) t * cnj(h t)
   z:real^1
   integral (:real^1) (\\z. fourier (fourier h) (drop z) *\n     cnj((h:real->complex)(--(drop z)))) =\n    integral (:real^1) (\\z. h(--(drop z)) * cnj(h(--(drop z))))
@@ -81287,12 +81287,12 @@ Autoformalization/fourier_transform quotations (2067):
   integral (:real^1) (\\z. fourier h (drop z) * fourier (\\x.\n     cnj((h:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. fourier h (drop z) * cnj(fourier h (drop z)))
   \\x. cnj((h:real->complex)(--x))
   fourier(h:real->complex)
-  !(h:real->complex). schwartz h\n     ==> integral (:real^1) (\\z. fourier h (drop z) * cnj(fourier h (drop z)))\n       =\n         integral (:real^1) (\\z. h(drop z) * cnj(h(drop z)))
-  !s p (a:real^M->real^N) b.\n     lnorm s p (\\x. a x - b x) = lnorm s p (\\x. b x - a x)
+  forall(h:real->complex). schwartz h\n     ==> integral (:real^1) (\\z. fourier h (drop z) * cnj(fourier h (drop z)))\n       =\n         integral (:real^1) (\\z. h(drop z) * cnj(h(drop z)))
+  forall s p (a:real^M->real^N) b.\n     lnorm s p (\\x. a x - b x) = lnorm s p (\\x. b x - a x)
   i = 1
   (:real^M)
   (\\x:real^M. lift (norm (if x IN t then (f:real^M->real^N) x else vec 0)\n       rpow p)) =\n      (\\x. if x IN t then lift(norm(f x) rpow p) else vec 0)
-  !(f:real^M->real^N) t p.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ lebesgue_measurable t\n     ==> (\\x. if x IN t then f x else vec 0) IN lspace (:real^M) p
+  forall(f:real^M->real^N) t p.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ lebesgue_measurable t\n     ==> (\\x. if x IN t then f x else vec 0) IN lspace (:real^M) p
   &N:real
   norm(x:real^M) < &n
   n:num
@@ -81307,7 +81307,7 @@ Autoformalization/fourier_transform quotations (2067):
   f:real^M->real^N
   \\n:num. \\x:real^M. if x IN ball(vec 0,&n) then (f:real^M->real^N) x else\n     vec 0
   (\\n. lnorm (:real^M) p\n         (\\x. (f:real^M->real^N) x - (if x IN ball(vec 0,&n) then f x else vec\n           0))) =\n    (\\n. lnorm (:real^M) p\n         (\\x. (if x IN ball(vec 0,&n) then f x else vec 0) - f x))
-  !(f:real^M->real^N) p.\n     &0 < p /\\ f IN lspace (:real^M) p\n     ==> ((\\n. lnorm (:real^M) p\n              (\\x. f x - (if x IN ball(vec 0,&n) then f x else vec 0))) --->\n                &0)\n         sequentially
+  forall(f:real^M->real^N) p.\n     &0 < p /\\ f IN lspace (:real^M) p\n     ==> ((\\n. lnorm (:real^M) p\n              (\\x. f x - (if x IN ball(vec 0,&n) then f x else vec 0))) --->\n                &0)\n         sequentially
   &0 <= lnorm (:real^M) p\n          (\\x. (f:real^M->real^N) x - (if x IN ball(vec 0,&N) then f x else vec\n            0))
   x:real^M
   &N:real
@@ -81317,13 +81317,13 @@ Autoformalization/fourier_transform quotations (2067):
   e:real
   p:real
   f:real^M->real^N
-  !(f:real^M->real^N) p e.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ &0 < e\n     ==> ?g R. g IN lspace (:real^M) p /\\\n               (!x. R < norm x ==> g x = vec 0) /\\\n               lnorm (:real^M) p (\\x. f x - g x) < e
+  forall(f:real^M->real^N) p e.\n     &0 < p /\\ f IN lspace (:real^M) p /\\ &0 < e\n     ==> ?g R. g IN lspace (:real^M) p /\\\n               (forall x. R < norm x ==> g x = vec 0) /\\\n               lnorm (:real^M) p (\\x. f x - g x) < e
   rphi (x:real) = if &0 < x then exp(--(inv x)) else &0
   rpsi (x:real) = rphi(&1 + x) * rphi(&1 - x)
-  !x. cphi x = Cx(rphi x)
-  !x. cphi(&1 + x) * cphi(&1 - x) = Cx(rpsi x)
-  !x. &0 <= rpsi x
-  !x. &1 < abs x ==> rpsi x = &0
+  forall x. cphi x = Cx(rphi x)
+  forall x. cphi(&1 + x) * cphi(&1 - x) = Cx(rpsi x)
+  forall x. &0 <= rpsi x
+  forall x. &1 < abs x ==> rpsi x = &0
   SUC 0 = 1
   drop(x:real^1)
   0
@@ -81343,20 +81343,20 @@ Autoformalization/fourier_transform quotations (2067):
   exp(-- &4) = exp(-- &2) * exp(-- &2)
   &0 < &1 + x /\\ &0 < &1 - x
   x:real
-  !x. x IN real_interval[-- &1 / &2, &1 / &2] ==> exp(-- &4) <= rpsi x
+  forall x. x IN real_interval[-- &1 / &2, &1 / &2] ==> exp(-- &4) <= rpsi x
   -- &4
   -- &1 / &2 <= &1 / &2
   real_integral (real_interval[-- &1 / &2, &1 / &2]) (\\x.\n        exp(-- &4))
   exp(-- &4) <= real_integral (real_interval[-- &1 / &2, &1 / &2]) rpsi /\\\n    real_integral (real_interval[-- &1 / &2, &1 / &2]) rpsi <=\n    real_integral (:real) rpsi
   &0 < real_integral (:real) rpsi
-  !x. x <= -- &1 ==> rpsi x = &0
+  forall x. x <= -- &1 ==> rpsi x = &0
   rtheta (t:real) = inv(real_integral (:real) rpsi) *\n                     real_integral (real_interval[-- &2, t]) rpsi
   rtheta = \\t. inv(real_integral (:real) rpsi) * real_integral\n   (real_interval[-- &2, t]) rpsi
   (:real)
-  !t. rpsi real_integrable_on real_interval[-- &2, t]
+  forall t. rpsi real_integrable_on real_interval[-- &2, t]
   x:real
   real_integral (real_interval[-- &2, t]) rpsi = &0
-  !t. t <= -- &1 ==> rtheta t = &0
+  forall t. t <= -- &1 ==> rtheta t = &0
   t:real
   (:real)
   t + &1
@@ -81367,41 +81367,41 @@ Autoformalization/fourier_transform quotations (2067):
   t:real
   rpsi t
   \\u. real_integral (real_interval [-- &2,u]) rpsi
-  !t. -- &2 < t\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
+  forall t. -- &2 < t\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
   x:real
   -- &1 - t
   \\t:real. &0
   rpsi t = &0
   inv(real_integral (:real) rpsi) * rpsi t = &0
-  !t. t < -- &1\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
+  forall t. t < -- &1\n       ==> (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi\n         t))\n           (atreal t)
   t < -- &1 \\/ -- &2 < t
-  !t. (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi t))\n       (atreal t)
+  forall t. (rtheta has_real_derivative (inv(real_integral (:real) rpsi) * rpsi t))\n       (atreal t)
   x:real
   real_interval[-- &2, t]
   real_integral (real_interval[-- &2, t]) rpsi = real_integral (:real) rpsi
-  !t. &1 <= t ==> rtheta t = &1
+  forall t. &1 <= t ==> rtheta t = &1
   inv(real_integral (:real) rpsi) * real_integral (real_interval[-- &2, t])\n       rpsi <=\n      inv(real_integral (:real) rpsi) * real_integral (:real) rpsi
   &0 <= real_integral (real_interval[-- &2, t]) rpsi /\\\n                real_integral (real_interval[-- &2, t]) rpsi <= real_integral\n                  (:real) rpsi
   &0 < real_integral (:real) rpsi
-  !t. &0 <= rtheta t /\\ rtheta t <= &1
+  forall t. &0 <= rtheta t /\\ rtheta t <= &1
   p n = (p:num->real->complex)(SUC(n - 1))
   n = 0
   y:real
   n:num
   \\n. if n = 0 then (\\x. Cx(rtheta x))\n        else (\\x. Cx(inv(real_integral (:real) rpsi)) *\n          (p:num->real->complex)(n - 1) x)
   p:num->real->complex
-  ?d:num->real->complex.\n     d 0 = (\\x. Cx(rtheta x)) /\\\n     (!n y. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) y))(at(lift\n       y)))
+  ?d:num->real->complex.\n     d 0 = (\\x. Cx(rtheta x)) /\\\n     (forall n y. ((\\z. d n(drop z)) has_vector_derivative (d(SUC n) y))(at(lift\n       y)))
   eta (R:real) (x:real) = rtheta(x + (R + &1)) * rtheta((R + &1) - x)
   rtheta((R + &1) - x) = &0
   rtheta(x + (R + &1)) = &0
   x < &0 \\/ &0 <= x
-  !R x. &0 <= R /\\ R + &2 < abs x ==> eta R x = &0
+  forall R x. &0 <= R /\\ R + &2 < abs x ==> eta R x = &0
   rtheta(x + (R + &1)) = &1 /\\ rtheta((R + &1) - x) = &1
-  !R x. abs x <= R ==> eta R x = &1
+  forall R x. abs x <= R ==> eta R x = &1
   rtheta(x + (R + &1)) * &1
   (R + &1) - x
   x + (R + &1)
-  !R x. &0 <= eta R x /\\ eta R x <= &1
+  forall R x. &0 <= eta R x /\\ eta R x <= &1
   (R + &1) + -- &1 * x = (R + &1) - x
   (R + &1) + &1 * x = x + R + &1
   x:real
@@ -81416,17 +81416,17 @@ Autoformalization/fourier_transform quotations (2067):
   R + &1
   d:num->real->complex
   d:num->real->complex
-  !R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(rtheta(x + (R + &1))) * Cx(rtheta((R + &1) - x))) /\\\n        (!n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
+  forall R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(rtheta(x + (R + &1))) * Cx(rtheta((R + &1) - x))) /\\\n        (forall n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
   q:num->real->complex
   R:real
   q:num->real->complex
-  !R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(eta R x)) /\\\n        (!n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
+  forall R. ?q:num->real->complex.\n        q 0 = (\\x. Cx(eta R x)) /\\\n        (forall n y. ((\\z. q n(drop z)) has_vector_derivative (q(SUC n) y))(at(lift\n          y)))
   \\n:num. \\x:real. (f:num->real^1->real^2) n (lift x)
   f:num->real^1->real^2
   P:real^1->real^2
-  \\(n:num) (Q:real^1->real^2) (Q':real^1->real^2).\n        !x. (Q has_vector_derivative (Q' x)) (at x)
+  \\(n:num) (Q:real^1->real^2) (Q':real^1->real^2).\n        forall x. (Q has_vector_derivative (Q' x)) (at x)
   \\(n:num) (Q:real^1->real^2). vector_polynomial_function Q
-  !P:real^1->real^2. vector_polynomial_function P\n     ==> ?e:num->real->complex.\n           e 0 = (\\x. P(lift x)) /\\\n           (!n y. ((\\z. e n(drop z)) has_vector_derivative (e(SUC n)\n             y))(at(lift y)))
+  forall P:real^1->real^2. vector_polynomial_function P\n     ==> ?e:num->real->complex.\n           e 0 = (\\x. P(lift x)) /\\\n           (forall n y. ((\\z. e n(drop z)) has_vector_derivative (e(SUC n)\n             y))(at(lift y)))
   eta R x = &0
   x:real
   R + &2
@@ -81437,30 +81437,30 @@ Autoformalization/fourier_transform quotations (2067):
   en:num->real->complex
   R:real
   q:num->real->complex
-  !R (P:real^1->real^2). &0 <= R /\\ vector_polynomial_function P\n     ==> schwartz (\\x. Cx(eta R x) * P(lift x))
+  forall R (P:real^1->real^2). &0 <= R /\\ vector_polynomial_function P\n     ==> schwartz (\\x. Cx(eta R x) * P(lift x))
   SUC 0 = 1
   drop(x:real^1)
   0
   \\h'. drop h' % (d:num->real->complex) 1 (drop x)
   x:real^1
-  !h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) continuous_on\n   (:real^1)
+  forall h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) continuous_on\n   (:real^1)
   x:real
   x:real
   B:real
   B:real
   0
   0
-  !h:real->complex. schwartz h ==> ?B. !x. norm(h x) <= B
+  forall h:real->complex. schwartz h ==> ?B. forall x. norm(h x) <= B
   norm((h:real->complex)(drop z)) pow 2 =\n       norm(h(drop z)) * norm(h(drop z))
   z:real^1
   \\z:real^1. B % lift(norm((h:real->complex)(drop z)))
   (\\z:real^1. (h:real->complex)(drop z)) measurable_on (:real^1)
   B:real
-  !h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) IN lspace (:real^1)\n   (&2)
+  forall h:real->complex. schwartz h ==> (\\z:real^1. h(drop z)) IN lspace (:real^1)\n   (&2)
   x:real^1
   s:real^1->bool
   \\x:real^1. lift(norm((phi:real^1->real^2) x) rpow p)
-  !(phi:real^1->real^2) s p.\n     &0 < p /\\ (!x. ~(x IN s) ==> phi x = vec 0)\n     ==> lnorm (:real^1) p phi = lnorm s p phi
+  forall(phi:real^1->real^2) s p.\n     &0 < p /\\ (forall x. ~(x IN s) ==> phi x = vec 0)\n     ==> lnorm (:real^1) p phi = lnorm s p phi
   drop x
   abs R
   x:real^1
@@ -81491,7 +81491,7 @@ Autoformalization/fourier_transform quotations (2067):
   eta (abs R) (drop x) = &1
   norm(x:real^1) <= abs R
   x:real^1
-  !x:real^1. Cx(eta (abs R) (drop x)) * (g:real^1->real^2) x = g x
+  forall x:real^1. Cx(eta (abs R) (drop x)) * (g:real^1->real^2) x = g x
   \\x. Cx(eta (abs R) x) * (P:real^1->real^2)(lift x)
   P:real^1->real^2
   (:real^1)
@@ -81508,7 +81508,7 @@ Autoformalization/fourier_transform quotations (2067):
   e / &2
   &2
   f:real^1->real^2
-  !f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> !e. &0 < e\n             ==> ?h. schwartz h /\\\n                     lnorm (:real^1) (&2) (\\x. f x - (\\z. h(drop z)) x) < e
+  forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> forall e. &0 < e\n             ==> ?h. schwartz h /\\\n                     lnorm (:real^1) (&2) (\\x. f x - (\\z. h(drop z)) x) < e
   abs x pow k * norm((d:num->real->complex) m x) +\n                abs x pow k * norm((e:num->real->complex) m x)
   x:real
   B1 + B2:real
@@ -81523,7 +81523,7 @@ Autoformalization/fourier_transform quotations (2067):
   \\n:num. \\x:real. (d:num->real->complex) n x +\n    (e:num->real->complex) n x
   e:num->real->complex
   d:num->real->complex
-  !h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x + h2\n   x)
+  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x + h2\n   x)
   :real
   :real
   B:real
@@ -81533,27 +81533,27 @@ Autoformalization/fourier_transform quotations (2067):
   k:num
   \\n:num. \\x:real. --((d:num->real->complex) n x)
   d:num->real->complex
-  !h:real->complex. schwartz h ==> schwartz (\\x. --(h x))
+  forall h:real->complex. schwartz h ==> schwartz (\\x. --(h x))
   (\\x. h1 x - h2 x) = (\\x:real. h1 x + (\\x. --(h2 x)) x)
-  !h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x - h2\n   x)
+  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2 ==> schwartz (\\x. h1 x - h2\n   x)
   norm(fourier f (drop z)) pow 2 =\n                  norm(fourier f (drop z)) * norm(fourier f (drop z))
   z:real^1
   \\z:real^1. K % lift(norm(fourier f (drop z)))
   (\\z:real^1. fourier f (drop z)) measurable_on (:real^1)
   K:real
-  !f:real->complex. schwartz f ==> (\\z. fourier f (drop z)) IN lspace\n   (:real^1) (&2)
+  forall f:real->complex. schwartz f ==> (\\z. fourier f (drop z)) IN lspace\n   (:real^1) (&2)
   2
   (\\z:real^1. (h:real->complex) (drop z)) IN lspace (:real^1) (&2) /\\\n    (\\z:real^1. fourier (h:real->complex) (drop z)) IN lspace (:real^1) (&2)
-  !h:real->complex. schwartz h\n     ==> lnorm (:real^1) (&2) (\\z. fourier h (drop z)) =\n         lnorm (:real^1) (&2) (\\z. h (drop z))
-  !h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x)) integrable_on\n       (:real^1)
+  forall h:real->complex. schwartz h\n     ==> lnorm (:real^1) (&2) (\\z. fourier h (drop z)) =\n         lnorm (:real^1) (&2) (\\z. h (drop z))
+  forall h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x)) integrable_on\n       (:real^1)
   fourier (\\x. --Cx(&1) * h2 x) y = --Cx(&1) * fourier h2 y
   (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (\\x. --Cx(&1) * h2 x)(drop x))\n         =\n        (\\x. --Cx(&1) * (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h2(drop x)) x)
   (\\x. h1 x - h2 x) = (\\x:real. h1 x + (\\x. --Cx(&1) * h2 x) x)
-  !h1 h2:real->complex. schwartz h1 /\\ schwartz h2\n     ==> !y. fourier (\\x. h1 x - h2 x) y = fourier h1 y - fourier h2 y
+  forall h1 h2:real->complex. schwartz h1 /\\ schwartz h2\n     ==> forall y. fourier (\\x. h1 x - h2 x) y = fourier h1 y - fourier h2 y
   &0 <= &2
   &1 <= &2
   (\\x. (a:real^M->real^N) x - c x) =\n                (\\x. (\\x. a x - b x) x + (\\x. b x - c x) x)
-  !s (a:real^M->real^N) b c.\n        a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n        ==> lnorm s (&2) (\\x. a x - c x) <=\n            lnorm s (&2) (\\x. a x - b x) + lnorm s (&2) (\\x. b x - c x)
+  forall s (a:real^M->real^N) b c.\n        a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n        ==> lnorm s (&2) (\\x. a x - c x) <=\n            lnorm s (&2) (\\x. a x - b x) + lnorm s (&2) (\\x. b x - c x)
   l = m ==> m <= r ==> l <= r
   lnorm s (&2) (\\x. (b:real^M->real^N) x - a x) =\n                    lnorm s (&2) (\\x. a x - b x)
   &0 <= &2
@@ -81570,20 +81570,20 @@ Autoformalization/fourier_transform quotations (2067):
   &2
   s:real^M->bool
   lnorm s (&2) (a:real^M->real^N) <= lnorm s (&2) b + lnorm s (&2) (\\x. a x\n    - b x) /\\\n                lnorm s (&2) (b:real^M->real^N) <= lnorm s (&2) a + lnorm s\n                  (&2) (\\x. a x - b x)
-  !s (a:real^M->real^N) b.\n        a IN lspace s (&2) /\\ b IN lspace s (&2)\n        ==> abs(lnorm s (&2) a - lnorm s (&2) b) <= lnorm s (&2) (\\x. a x - b\n          x)
+  forall s (a:real^M->real^N) b.\n        a IN lspace s (&2) /\\ b IN lspace s (&2)\n        ==> abs(lnorm s (&2) a - lnorm s (&2) b) <= lnorm s (&2) (\\x. a x - b\n          x)
   \\x. (a:real->complex) x - b x
   (\\z. fourier a (drop z) - fourier b (drop z)) =\n    (\\z. fourier (\\x. a x - b x) (drop z))
   b:real->complex
   a:real->complex
-  !a b:real->complex. schwartz a /\\ schwartz b\n     ==> lnorm (:real^1) (&2) (\\z. fourier a (drop z) - fourier b (drop z)) =\n         lnorm (:real^1) (&2) (\\z. a (drop z) - b (drop z))
+  forall a b:real->complex. schwartz a /\\ schwartz b\n     ==> lnorm (:real^1) (&2) (\\z. fourier a (drop z) - fourier b (drop z)) =\n         lnorm (:real^1) (&2) (\\z. a (drop z) - b (drop z))
   fn:num->real->complex
   &0 <= &n ==> &0 < &n + &1
   inv(&n + &1)
   n:num
-  !f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> ?fn:num->real->complex.\n           (!n. schwartz (fn n)) /\\\n           (!n. lnorm (:real^1) (&2) (\\z. f z - fn n (drop z)) < inv(&n +\n             &1))
+  forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> ?fn:num->real->complex.\n           (forall n. schwartz (fn n)) /\\\n           (forall n. lnorm (:real^1) (&2) (\\z. f z - fn n (drop z)) < inv(&n +\n             &1))
   abs(a - b:real)
   ~(&0 < abs(a - b)) ==> a = b
-  !a b:real. (!e. &0 < e ==> abs(a - b) < e) ==> a = b
+  forall a b:real. (forall e. &0 < e ==> abs(a - b) < e) ==> a = b
   c:real
   lnorm (:real^1) (&2) (g:real^1->complex)
   \\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n)
@@ -81598,7 +81598,7 @@ Autoformalization/fourier_transform quotations (2067):
   e:real
   e:real
   ((\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n))\n     ---> lnorm (:real^1) (&2) (g:real^1->complex)) sequentially
-  !(gn:num->real^1->complex) g c.\n     (!n. gn n IN lspace (:real^1) (&2)) /\\ g IN lspace (:real^1) (&2) /\\\n     (!e. &0 < e ==> ?N. !n. n >= N\n          ==> lnorm (:real^1) (&2) (\\x. gn n x - g x) < e) /\\\n     ((\\n. lnorm (:real^1) (&2) (gn n)) ---> c) sequentially\n     ==> lnorm (:real^1) (&2) g = c
+  forall(gn:num->real^1->complex) g c.\n     (forall n. gn n IN lspace (:real^1) (&2)) /\\ g IN lspace (:real^1) (&2) /\\\n     (forall e. &0 < e ==> ?N. forall n. n >= N\n          ==> lnorm (:real^1) (&2) (\\x. gn n x - g x) < e) /\\\n     ((\\n. lnorm (:real^1) (&2) (gn n)) ---> c) sequentially\n     ==> lnorm (:real^1) (&2) g = c
   \\t. (f:real->complex) t * cnj(g t)
   z:real^1
   integral (:real^1) (\\z. fourier (fourier f) (drop z) * (\\x.\n     cnj((g:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. f(--(drop z)) * cnj(g(--(drop z))))
@@ -81606,7 +81606,7 @@ Autoformalization/fourier_transform quotations (2067):
   integral (:real^1) (\\z. fourier f (drop z) * fourier (\\x.\n     cnj((g:real->complex)(--x))) (drop z)) =\n    integral (:real^1) (\\z. fourier f (drop z) * cnj(fourier g (drop z)))
   \\x. cnj((g:real->complex)(--x))
   fourier(f:real->complex)
-  !(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) =\n         integral (:real^1) (\\z. fourier f (drop z) * cnj(fourier g (drop\n           z)))
+  forall(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) =\n         integral (:real^1) (\\z. fourier f (drop z) * cnj(fourier g (drop\n           z)))
   schwartz(g:real->complex)
   schwartz(f:real->complex)
   schwartz(f:real->complex)
@@ -81619,7 +81619,7 @@ Autoformalization/fourier_transform quotations (2067):
   n:num
   d:num->real->complex
   d:num->real->complex
-  !h:real->complex. schwartz h\n     ==> ?d. d 0 = h /\\ (!n. schwartz (d n)) /\\\n             (!n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n)\n               x)(at(lift x)))
+  forall h:real->complex. schwartz h\n     ==> ?d. d 0 = h /\\ (forall n. schwartz (d n)) /\\\n             (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n)\n               x)(at(lift x)))
   lift x
   \\z. (d:num->real->complex) 0 (drop z)
   x:real
@@ -81627,9 +81627,9 @@ Autoformalization/fourier_transform quotations (2067):
   SUC 0 = 1
   x:real
   0
-  !x. ((\\z. (d:num->real->complex) 0 (drop z)) has_vector_derivative d 1\n    x)(at(lift x))
+  forall x. ((\\z. (d:num->real->complex) 0 (drop z)) has_vector_derivative d 1\n    x)(at(lift x))
   d:num->real->complex
-  !h h':real->complex.\n     schwartz h /\\ (!x. ((\\z. h(drop z)) has_vector_derivative h' x)(at(lift\n       x)))\n     ==> schwartz h'
+  forall h h':real->complex.\n     schwartz h /\\ (forall x. ((\\z. h(drop z)) has_vector_derivative h' x)(at(lift\n       x)))\n     ==> schwartz h'
   x:real
   &1
   \\t:real. t
@@ -81639,14 +81639,14 @@ Autoformalization/fourier_transform quotations (2067):
   \\z:real^1. (a:real->complex)(drop z)
   \\z:real^1. Cx(drop z)
   ( * ):complex->complex->complex
-  !(a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. Cx(drop z) * a(drop z)) has_vector_derivative\n          (a x + Cx x * a')) (at(lift x))
+  forall(a:real->complex) a' x.\n     ((\\z. a(drop z)) has_vector_derivative a') (at(lift x))\n     ==> ((\\z. Cx(drop z) * a(drop z)) has_vector_derivative\n          (a x + Cx x * a')) (at(lift x))
   (d:num->real->complex) m = d(SUC(m-1))
-  !(d:num->real->complex) m x.\n     ~(m = 0) /\\\n     (!n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> ((\\z. Cx(&m) * d(m-1)(drop z)) has_vector_derivative Cx(&m) * d m\n       x)(at(lift x))
+  forall(d:num->real->complex) m x.\n     ~(m = 0) /\\\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> ((\\z. Cx(&m) * d(m-1)(drop z)) has_vector_derivative Cx(&m) * d m\n       x)(at(lift x))
   m = 0
   Cx x * d(SUC m) x + Cx(&(SUC m)) * (d:num->real->complex) m x =\n    ((d:num->real->complex) m x + Cx x * d(SUC m) x) + Cx(&m) * d m x
   x:real
   m:num
-  !(d:num->real->complex).\n     (!n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> !m x. ((\\z. Cx(drop z) * d m (drop z) + Cx(&m) * d(m-1)(drop z))\n                has_vector_derivative\n                (Cx x * d(SUC m) x + Cx(&(SUC m)) * d((SUC m)-1) x))(at(lift\n                  x))
+  forall(d:num->real->complex).\n     (forall n x. ((\\z. d n(drop z)) has_vector_derivative d(SUC n) x)(at(lift x)))\n     ==> forall m x. ((\\z. Cx(drop z) * d m (drop z) + Cx(&m) * d(m-1)(drop z))\n                has_vector_derivative\n                (Cx x * d(SUC m) x + Cx(&(SUC m)) * d((SUC m)-1) x))(at(lift\n                  x))
   &m * (abs x pow k * norm((d:num->real->complex)(m-1) x))
   abs x pow (SUC k) * norm((d:num->real->complex) m x)
   norm(Cx x * (d:num->real->complex) m x) + norm(Cx(&m) *\n          d(m-1) x)
@@ -81666,25 +81666,25 @@ Autoformalization/fourier_transform quotations (2067):
   k:num
   \\m. \\x. Cx x * (d:num->real->complex) m x + Cx(&m) * d(m-1) x
   d:num->real->complex
-  !h:real->complex. schwartz h ==> schwartz (\\x. Cx x * h x)
+  forall h:real->complex. schwartz h ==> schwartz (\\x. Cx x * h x)
   g:real->complex
-  !g:real->complex y0. schwartz g\n     ==> ((\\z. fourier g (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * g x) y0)) (at(lift y0))
+  forall g:real->complex y0. schwartz g\n     ==> ((\\z. fourier g (drop z)) has_vector_derivative\n          (--ii * fourier (\\x. Cx x * g x) y0)) (at(lift y0))
   h:real->complex
   schwartz (h':real->complex)
-  !(h:real->complex) h' y. schwartz h /\\\n     (!x. ((\\z. h(drop z)) has_vector_derivative (h' x)) (at(lift x)))\n     ==> fourier h' y = (ii * Cx y) * fourier h y
+  forall(h:real->complex) h' y. schwartz h /\\\n     (forall x. ((\\z. h(drop z)) has_vector_derivative (h' x)) (at(lift x)))\n     ==> fourier h' y = (ii * Cx y) * fourier h y
   gg:num->real->complex
   \\t. Cx t * (f:real->complex) t
   f:real->complex
   g:real->complex
   \\(n:num) (f:real->complex) (f':real->complex). f' = (\\t. Cx t * f t)
   \\(n:num) (f:real->complex). schwartz f
-  !g:real->complex. schwartz g\n     ==> ?gg. gg 0 = g /\\ (!n. schwartz(gg n)) /\\\n              (!n. gg(SUC n) = (\\t. Cx t * gg n t))
+  forall g:real->complex. schwartz g\n     ==> ?gg. gg 0 = g /\\ (forall n. schwartz(gg n)) /\\\n              (forall n. gg(SUC n) = (\\t. Cx t * gg n t))
   y:real
   (gg:num->real->complex) n
   (--ii) pow SUC n * fourier ((gg:num->real->complex)(SUC n)) y =\n      (--ii) pow n * (--ii * fourier (\\t. Cx t * gg n t) y)
   \\n. \\y. (--ii) pow n * fourier ((gg:num->real->complex) n) y
   gg:num->real->complex
-  !g:real->complex. schwartz g\n     ==> ?D. D 0 = (\\y. fourier g y) /\\\n             (!n y. ((\\z. D n (drop z)) has_vector_derivative D(SUC n)\n               y)(at(lift y)))
+  forall g:real->complex. schwartz g\n     ==> ?D. D 0 = (\\y. fourier g y) /\\\n             (forall n y. ((\\z. D n (drop z)) has_vector_derivative D(SUC n)\n               y)(at(lift y)))
   &0 < x ==> abs x = x
   e:real
   &0 < x /\\ inv e < x
@@ -81693,7 +81693,7 @@ Autoformalization/fourier_transform quotations (2067):
   e:real
   ((\\x:real. inv(abs x)) ---> &0) at_posinfinity
   vec 0:real^1 = B % vec 0
-  !B. ((\\x. lift(B * inv(abs x))) --> vec 0) at_posinfinity
+  forall B. ((\\x. lift(B * inv(abs x))) --> vec 0) at_posinfinity
   x:real
   &0 < abs x
   x:real
@@ -81703,7 +81703,7 @@ Autoformalization/fourier_transform quotations (2067):
   1
   B:real
   d:num->real->complex
-  !h:real->complex. schwartz h ==> (h --> vec 0) at_posinfinity
+  forall h:real->complex. schwartz h ==> (h --> vec 0) at_posinfinity
   --x:real
   abs x = abs(--x)
   x:real
@@ -81720,10 +81720,10 @@ Autoformalization/fourier_transform quotations (2067):
   &0 + -- &1 * x = --x
   \\n:num. \\x. Cx(-- &1) pow n * (d:num->real->complex) n (&0 + --\n    &1 * x)
   d:num->real->complex
-  !h:real->complex. schwartz h ==> schwartz (\\x. h(--x))
+  forall h:real->complex. schwartz h ==> schwartz (\\x. h(--x))
   \\x. (h:real->complex)(--x)
-  !h:real->complex. schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
-  !h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x))\n       absolutely_integrable_on (:real^1)
+  forall h:real->complex. schwartz h ==> ((\\a. h(--a)) --> vec 0) at_posinfinity
+  forall h:real->complex y. schwartz h\n     ==> (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h(drop x))\n       absolutely_integrable_on (:real^1)
   SUC 0 = 1
   x:real
   0
@@ -81731,7 +81731,7 @@ Autoformalization/fourier_transform quotations (2067):
   y:real
   (d:num->real->complex) 1
   d:num->real->complex
-  !h:real->complex. schwartz h\n     ==> ?hp. schwartz hp /\\ !y. fourier hp y = (ii * Cx y) * fourier h y
+  forall h:real->complex. schwartz h\n     ==> ?hp. schwartz hp /\\ forall y. fourier hp y = (ii * Cx y) * fourier h y
   (d:num->real->complex) 0 = h
   (d:num->real->complex) 0 = h
   (d:num->real->complex) 0 = h
@@ -81740,7 +81740,7 @@ Autoformalization/fourier_transform quotations (2067):
   B:real
   hp:real->complex
   hp:real->complex
-  !k. !h:real->complex. schwartz h\n       ==> ?B. !y. abs y pow k * norm(fourier h y) <= B
+  forall k. forall h:real->complex. schwartz h\n       ==> ?B. forall y. abs y pow k * norm(fourier h y) <= B
   x:real
   B:real
   (gg:num->real->complex) m
@@ -81752,7 +81752,7 @@ Autoformalization/fourier_transform quotations (2067):
   (--ii) pow SUC n * fourier ((gg:num->real->complex)(SUC n)) x =\n      (--ii) pow n * (--ii * fourier (\\t. Cx t * gg n t) x)
   \\n. \\y. (--ii) pow n * fourier ((gg:num->real->complex) n) y
   gg:num->real->complex
-  !g:real->complex. schwartz g ==> schwartz (fourier g)
+  forall g:real->complex. schwartz g ==> schwartz (fourier g)
   (:real^1)
   \\z:real^1. cnj(fourier h (drop z))
   f:real^1->complex
@@ -81763,8 +81763,8 @@ Autoformalization/fourier_transform quotations (2067):
   schwartz (fourier h)
   h:real->complex
   (fn:num->real->complex) n
-  !n. integral (:real^1) (\\z. (gn:num->real^1->complex) n z * h(drop z)) =\n        integral (:real^1) (\\z. (fn:num->real->complex) n (drop z) * fourier h\n          (drop z))
-  !a:real^1->complex. integral (:real^1) (\\z. a z * h(drop z)) =\n                          lproduct (:real^1) a (\\z. cnj(h(drop z)))
+  forall n. integral (:real^1) (\\z. (gn:num->real^1->complex) n z * h(drop z)) =\n        integral (:real^1) (\\z. (fn:num->real->complex) n (drop z) * fourier h\n          (drop z))
+  forall a:real^1->complex. integral (:real^1) (\\z. a z * h(drop z)) =\n                          lproduct (:real^1) a (\\z. cnj(h(drop z)))
   (\\z:real^1. cnj(h(drop z))) IN lspace (:real^1) (&2)
   \\n. integral (:real^1) (\\z. (gn:num->real^1->complex) n z *\n    h(drop z))
   sequentially
@@ -81781,7 +81781,7 @@ Autoformalization/fourier_transform quotations (2067):
   e:real
   (\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n)) =\n      (\\n. lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z)))
   ((\\n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n))\n     ---> lnorm (:real^1) (&2) (f:real^1->complex)) sequentially
-  !n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n) =\n        lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z))
+  forall n. lnorm (:real^1) (&2) ((gn:num->real^1->complex) n) =\n        lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z))
   g:real^1->complex
   g:real^1->complex
   &1 <= &2
@@ -81799,8 +81799,8 @@ Autoformalization/fourier_transform quotations (2067):
   N:num
   e / &2
   e:real
-  !e. &0 < e ==> ?N. !m n. m >= N /\\ n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) <\n          e
-  !m n. lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) =\n          lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) m (drop z) - fn n\n            (drop z))
+  forall e. &0 < e ==> ?N. forall m n. m >= N /\\ n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) <\n          e
+  forall m n. lnorm (:real^1) (&2) (\\z. (gn:num->real^1->complex) m z - gn n z) =\n          lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) m (drop z) - fn n\n            (drop z))
   inv(&N)
   inv(&n + &1)
   lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z) - f z) =\n                  lnorm (:real^1) (&2) (\\z. f z - fn n (drop z))
@@ -81809,33 +81809,33 @@ Autoformalization/fourier_transform quotations (2067):
   N:num
   e:real
   e:real
-  !e. &0 < e ==> ?N. !n. n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z) - f z)\n          < e
-  !n. (\\z:real^1. (fn:num->real->complex) n (drop z))\n         IN lspace (:real^1) (&2)
-  !n. (gn:num->real^1->complex) n IN lspace (:real^1) (&2)
+  forall e. &0 < e ==> ?N. forall n. n >= N\n        ==> lnorm (:real^1) (&2) (\\z. (fn:num->real->complex) n (drop z) - f z)\n          < e
+  forall n. (\\z:real^1. (fn:num->real->complex) n (drop z))\n         IN lspace (:real^1) (&2)
+  forall n. (gn:num->real^1->complex) n IN lspace (:real^1) (&2)
   gn = \\n. \\z:real^1. fourier ((fn:num->real->complex) n) (drop z)
   fn:num->real->complex
-  !f:real^1->complex. f IN lspace (:real^1) (&2)\n     ==> ?g:real^1->complex. g IN lspace (:real^1) (&2) /\\\n             lnorm (:real^1) (&2) g = lnorm (:real^1) (&2) f /\\\n             (!h. schwartz h\n                  ==> integral (:real^1) (\\z. g z * h(drop z)) =\n                      integral (:real^1) (\\z. f z * fourier h (drop z)))
+  forall f:real^1->complex. f IN lspace (:real^1) (&2)\n     ==> ?g:real^1->complex. g IN lspace (:real^1) (&2) /\\\n             lnorm (:real^1) (&2) g = lnorm (:real^1) (&2) f /\\\n             (forall h. schwartz h\n                  ==> integral (:real^1) (\\z. g z * h(drop z)) =\n                      integral (:real^1) (\\z. f z * fourier h (drop z)))
   c % x + b:real^1
   x:real^1
-  !c:real b:real^1. ~(c = &0)\n     ==> IMAGE (\\x. inv c % x + --(inv c % b)) (:real^1) = (:real^1)
+  forall c:real b:real^1. ~(c = &0)\n     ==> IMAGE (\\x. inv c % x + --(inv c % b)) (:real^1) = (:real^1)
   b:real^1
   c:real
   (:real^1)
   integral (:real^1) (ff:real^1->real^N)
   ff:real^1->real^N
-  !(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> integral (:real^1) (\\x. ff(c % x + b)) = inv(abs c) % integral\n       (:real^1) ff
+  forall(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> integral (:real^1) (\\x. ff(c % x + b)) = inv(abs c) % integral\n       (:real^1) ff
   b:real^1
   c:real
   (:real^1)
   integral (:real^1) (ff:real^1->real^N)
   ff:real^1->real^N
-  !(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> (\\x. ff(c % x + b)) integrable_on (:real^1)
+  forall(ff:real^1->real^N) c b. ~(c = &0) /\\ ff integrable_on (:real^1)\n     ==> (\\x. ff(c % x + b)) integrable_on (:real^1)
   &0 <= x ==> y <= x + y
   C <= t ==> max C t = t
   &0 <= y ==> x <= x + y
   t <= C ==> max C t = C
   t <= C \\/ C <= t
-  !C t k. &0 <= C /\\ &0 <= t ==> (max C t) pow k <= C pow k + t pow k
+  forall C t k. &0 <= C /\\ &0 <= t ==> (max C t) pow k <= C pow k + t pow k
   (C:real) pow k + t pow k
   (max C t) pow k
   &2 pow k
@@ -81843,14 +81843,14 @@ Autoformalization/fourier_transform quotations (2067):
   t:real
   C:real
   (&2 * max C t) pow k
-  !C t k. &0 <= C /\\ &0 <= t\n     ==> (C + t) pow k <= &2 pow k * (C pow k + t pow k)
+  forall C t k. &0 <= C /\\ &0 <= t\n     ==> (C + t) pow k <= &2 pow k * (C pow k + t pow k)
   (abs(c + s * x) + abs c) pow k
   &2 pow k * (abs(c + s * x) pow k + abs c pow k)
   abs((c + s * x) - c) pow k
   inv(abs s) pow k
   ~(s = &0)
   abs x = inv(abs s) * abs((c + s * x) - c)
-  !s c k x. ~(s = &0)\n     ==> abs x pow k <= inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k +\n       abs c pow k))
+  forall s c k x. ~(s = &0)\n     ==> abs x pow k <= inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k +\n       abs c pow k))
   B0:real
   N:real
   abs c pow k
@@ -81864,7 +81864,7 @@ Autoformalization/fourier_transform quotations (2067):
   inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k + abs c pow k))
   abs x pow k
   (inv(abs s pow k) * (&2 pow k * (abs(c + s * x) pow k + abs c pow\n    k))) * N
-  !s c k x N B0 Bk.\n     ~(s = &0) /\\ &0 <= N /\\\n     abs(c + s * x) pow k * N <= Bk /\\ N <= B0\n     ==> abs x pow k * N <=\n         inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k * B0))
+  forall s c k x N B0 Bk.\n     ~(s = &0) /\\ &0 <= N /\\\n     abs(c + s * x) pow k * N <= Bk /\\ N <= B0\n     ==> abs x pow k * N <=\n         inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k * B0))
   x = y ==> a <= x ==> a <= y
   inv(abs s pow k) * (&2 pow k * (Bk + abs c pow k * B0))
   abs x pow k * norm((d:num->real->complex) m (c + s * x))
@@ -81885,11 +81885,11 @@ Autoformalization/fourier_transform quotations (2067):
   d:num->real->complex
   \\n:num. \\x. Cx s pow n * (d:num->real->complex) n (c + s * x)
   d:num->real->complex
-  !phi:real->complex s c. schwartz phi /\\ ~(s = &0)\n     ==> schwartz (\\x. phi(c + s * x))
+  forall phi:real->complex s c. schwartz phi /\\ ~(s = &0)\n     ==> schwartz (\\x. phi(c + s * x))
   B:real
   abs x pow k * norm((d:num->real->complex) m x)
   norm(c:complex)
-  !a b cc:real. a * b * cc = b * (a *\n      cc)
+  forall a b cc:real. a * b * cc = b * (a *\n      cc)
   x:real
   norm(c:complex) * B
   m:num
@@ -81897,33 +81897,33 @@ Autoformalization/fourier_transform quotations (2067):
   B:real
   \\n x. c * (d:num->real->complex) n x
   d:num->real->complex
-  !(h:real->complex) c. schwartz h ==> schwartz (\\x. c * h x)
+  forall(h:real->complex) c. schwartz h ==> schwartz (\\x. c * h x)
   y:real
   phi:real->complex
   y:real
   fourier(phi:real->complex)
-  !phi:real->complex. schwartz phi\n     ==> (!y. fourier (\\x. fourier phi (--x)) y = phi y)
+  forall phi:real->complex. schwartz phi\n     ==> (forall y. fourier (\\x. fourier phi (--x)) y = phi y)
   (\\u. (psi:real->complex)(u + b)) = (\\u. psi(b + &1 * u))
   x:real
   b:real
   psi:real->complex
   x:real
   (\\x. cexp(ii * Cx b * Cx x) * (phi:real->complex) x) = fourier (\\u. psi(u +\n     b))
-  !x. fourier (psi:real->complex) x = phi x
+  forall x. fourier (psi:real->complex) x = phi x
   schwartz (psi:real->complex)
   psi = \\x. fourier (phi:real->complex) (--x)
-  !phi:real->complex b. schwartz phi\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi x)
+  forall phi:real->complex b. schwartz phi\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi x)
   (\\x. (phi:real->complex)(mJ * (x - a))) = (\\x. phi(--(mJ * a) + mJ * x))
-  !(phi:real->complex) mJ a b. schwartz phi /\\ ~(mJ = &0)\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi(mJ * (x - a)))
+  forall(phi:real->complex) mJ a b. schwartz phi /\\ ~(mJ = &0)\n     ==> schwartz (\\x. cexp(ii * Cx b * Cx x) * phi(mJ * (x - a)))
   ~(sqrt mJ = &0)
   mJ = sqrt mJ * sqrt mJ
   mJ = sqrt mJ * sqrt mJ
   ~(sqrt mJ = &0)
-  !mJ. &0 < mJ ==> sqrt mJ * (&1 / mJ) = &1 / sqrt mJ
+  forall mJ. &0 < mJ ==> sqrt mJ * (&1 / mJ) = &1 / sqrt mJ
   drop z
   z:real^1
   (\\z. fourier (f:real->complex) (drop z) * cnj(fourier (g:real->complex)\n     (drop z))) =\n    (\\z:real^1. Cx(&0))
-  !(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g /\\\n     (!u. fourier f u = Cx(&0) \\/ fourier g u = Cx(&0))\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) = Cx(&0)
+  forall(f:real->complex) (g:real->complex). schwartz f /\\ schwartz g /\\\n     (forall u. fourier f u = Cx(&0) \\/ fourier g u = Cx(&0))\n     ==> integral (:real^1) (\\z. f(drop z) * cnj(g(drop z))) = Cx(&0)
   convol (f:real->complex) (g:real->complex) (x:real) =\n    integral (:real^1) (\\t. f(x - drop t) * g(drop t))
   schwartz (g:real->complex)
   t:real^1
@@ -81934,7 +81934,7 @@ Autoformalization/fourier_transform quotations (2067):
   x:real
   -- &1:real
   f:real->complex
-  ?B. !u. norm((f:real->complex)(x - u)) <= B
+  ?B. forall u. norm((f:real->complex)(x - u)) <= B
   schwartz (\\u. (f:real->complex)(x -\n      u))
   ~(-- &1 = &0)
   x + -- &1 * u = x - u
@@ -81946,47 +81946,47 @@ Autoformalization/fourier_transform quotations (2067):
   \\t:real^1. (g:real->complex)(drop t)
   \\t:real^1. (f:real->complex)(x - drop t)
   ( * ):complex->complex->complex
-  !(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) absolutely_integrable_on (:real^1)
-  !(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) integrable_on (:real^1)
+  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) absolutely_integrable_on (:real^1)
+  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> (\\t. f(x - drop t) * g(drop t)) integrable_on (:real^1)
   t:real^1
   x:real
   g:real->complex
   f:real->complex
-  !(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> norm(convol f g x)\n         <= drop(integral (:real^1) (\\t. lift(norm(f(x - drop t)) * norm(g(drop\n           t)))))
+  forall(f:real->complex) g x. schwartz f /\\ schwartz g\n     ==> norm(convol f g x)\n         <= drop(integral (:real^1) (\\t. lift(norm(f(x - drop t)) * norm(g(drop\n           t)))))
   y - a:real^N
   y:real^N
-  !a:real^N. IMAGE (\\x. a + x) (:real^N) = (:real^N)
+  forall a:real^N. IMAGE (\\x. a + x) (:real^N) = (:real^N)
   a:real^1
   (:real^1)
   \\x:real^1. lift(norm((f:real^1->complex) x))
-  !(f:real^1->complex) a.\n     integral (:real^1) (\\x. lift(norm(f(a + x)))) =\n     integral (:real^1) (\\x. lift(norm(f x)))
-  !(f:real->complex) w. schwartz f\n     ==> (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop u))\n       absolutely_integrable_on (:real^1)
-  !a b c p q:complex. a * b = c ==> (a * p) * (b * q) = c * (p * q)
+  forall(f:real^1->complex) a.\n     integral (:real^1) (\\x. lift(norm(f(a + x)))) =\n     integral (:real^1) (\\x. lift(norm(f x)))
+  forall(f:real->complex) w. schwartz f\n     ==> (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop u))\n       absolutely_integrable_on (:real^1)
+  forall a b c p q:complex. a * b = c ==> (a * p) * (b * q) = c * (p * q)
   drop(x:real^1)
   g:real->complex
   f:real->complex
   (\\y:real^1. (f:real->complex)(drop x - drop y) * g(drop y)) integrable_on\n     (:real^1)
   y:real^1
   integral (:real^1)\n     (\\y. cexp(--(ii * Cx w * Cx(drop x))) *\n          ((f:real->complex)(drop x - drop y) * (g:real->complex)(drop y)))
-  !(f:real->complex) g w x:real^1. schwartz f /\\ schwartz g\n    ==> integral (:real^1) (\\y. (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop\n      u)) (x - y) *\n                                (\\u. cexp(--(ii * Cx w * Cx(drop u))) * g(drop\n                                  u)) y) =\n        cexp(--(ii * Cx w * Cx(drop x))) * convol f g (drop x)
+  forall(f:real->complex) g w x:real^1. schwartz f /\\ schwartz g\n    ==> integral (:real^1) (\\y. (\\u. cexp(--(ii * Cx w * Cx(drop u))) * f(drop\n      u)) (x - y) *\n                                (\\u. cexp(--(ii * Cx w * Cx(drop u))) * g(drop\n                                  u)) y) =\n        cexp(--(ii * Cx w * Cx(drop x))) * convol f g (drop x)
   \\u:real^1. cexp(--(ii * Cx w * Cx(drop u))) * (g:real->complex)(drop u)
   \\u:real^1. cexp(--(ii * Cx w * Cx(drop u))) * (f:real->complex)(drop u)
   ( * ):complex->complex->complex
   x:real^1
   integral (:real^1) (\\x. cexp(--(ii * Cx w * Cx(drop x))) * convol f g (drop\n     x)) =\n    integral (:real^1)\n      (\\x. integral (:real^1)\n        (\\y. (\\u. cexp(--(ii * Cx w * Cx(drop u))) * (f:real->complex)(drop u))\n          (x - y) *\n             (\\u. cexp(--(ii * Cx w * Cx(drop u))) * (g:real->complex)(drop u))\n               y))
-  !(f:real->complex) g w. schwartz f /\\ schwartz g\n     ==> fourier (convol f g) w = Cx(sqrt(&2 * pi)) * fourier f w * fourier g\n       w
+  forall(f:real->complex) g w. schwartz f /\\ schwartz g\n     ==> fourier (convol f g) w = Cx(sqrt(&2 * pi)) * fourier f w * fourier g\n       w
   v:real^1
   B:real
   B:real
   schwartz (g:real->complex)
-  !g:real->complex. schwartz g\n     ==> (\\v. g(drop v)) measurable_on (:real^1) /\\ bounded (IMAGE (\\v. g(drop\n       v)) (:real^1))
+  forall g:real->complex. schwartz g\n     ==> (\\v. g(drop v)) measurable_on (:real^1) /\\ bounded (IMAGE (\\v. g(drop\n       v)) (:real^1))
   schwartz\n      (g:real->complex)
   schwartz\n      (g:real->complex)
   schwartz (f:real->complex)
   y:real^1
   x:real^1
   (\\x. convol f g (drop x)) =\n    (\\x. integral (:real^1) (\\y. (\\v. (f:real->complex)(drop v)) (x - y) *\n                                 (\\v. (g:real->complex)(drop v)) y))
-  !(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\x. convol f g (drop x)) continuous_on (:real^1)
+  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\x. convol f g (drop x)) continuous_on (:real^1)
   (\\t. lift((Kf * abs(u - w)) * norm((g:real->complex)(drop t)))) =\n      (\\t. (Kf * abs(u - w)) % lift(norm((g:real->complex)(drop t))))
   Kf * abs(u - w) * n = (Kf * abs(u - w)) * n
   abs((u - drop t) - (w - drop t)) = abs(u - w)
@@ -82009,7 +82009,7 @@ Autoformalization/fourier_transform quotations (2067):
   (\\t. lift(norm((g:real->complex)(drop t)))) integrable_on (:real^1)
   Kf:real
   f:real->complex
-  !(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> ?K. &0 <= K /\\\n             !u w. norm(convol f g u - convol f g w) <= K * abs(u - w)
+  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> ?K. &0 <= K /\\\n             forall u w. norm(convol f g u - convol f g w) <= K * abs(u - w)
   drop z
   g:real->complex
   f:real->complex
@@ -82020,7 +82020,7 @@ Autoformalization/fourier_transform quotations (2067):
   \\z. lift(norm((f:real->complex)(drop z)))
   \\x y. lift(drop x * drop y)
   \\z. integral (:real^1)\n          (\\t. lift(norm((f:real->complex)(drop z - drop t)) *\n                    norm((g:real->complex)(drop t))))
-  !(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\z. convol f g (drop z)) absolutely_integrable_on (:real^1)
+  forall(f:real->complex) g. schwartz f /\\ schwartz g\n     ==> (\\z. convol f g (drop z)) absolutely_integrable_on (:real^1)
   Cx(inv(sqrt(&2 * pi))) * Cx(sqrt(&2 * pi)) = Cx(&1)
   a * s * b = s * a * b
   integral (:real^1)\n      (\\y. cexp(ii * Cx x * Cx(drop y)) * Cx(sqrt(&2 * pi)) * fourier gtm (drop\n        y)) =\n    Cx(sqrt(&2 * pi)) * II
@@ -82037,8 +82037,8 @@ Autoformalization/fourier_transform quotations (2067):
   Kc:real
   cg:real->complex
   cf:real->complex
-  !(cf:real->complex) cg (gtm:real->complex).\n     schwartz cf /\\ schwartz cg /\\ schwartz gtm /\\\n     (!w. fourier (convol cf cg) w = Cx(sqrt(&2 * pi)) * fourier gtm w)\n     ==> !x. convol cf cg x = Cx(sqrt(&2 * pi)) * gtm x
-  !u w. norm(convol cf cg u - convol cf cg w) <= Kc * abs(u\n              - w)
+  forall(cf:real->complex) cg (gtm:real->complex).\n     schwartz cf /\\ schwartz cg /\\ schwartz gtm /\\\n     (forall w. fourier (convol cf cg) w = Cx(sqrt(&2 * pi)) * fourier gtm w)\n     ==> forall x. convol cf cg x = Cx(sqrt(&2 * pi)) * gtm x
+  forall u w. norm(convol cf cg u - convol cf cg w) <= Kc * abs(u\n              - w)
   x:real
   x - v:real
 fourier =  |- (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(fun(real,cart(real,tybit0(1))),bool),bool) (\f:fun(real,cart(real,tybit0(1))). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#fourier:fun(fun(real,cart(real,tybit0(1))),fun(real,cart(real,tybit0(1)))) f:fun(real,cart(real,tybit0(1)))) y:real)) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#Cx:fun(real,cart(real,tybit0(1))) (#sqrt:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) #pi:real))))) ((#integral:fun(fun(cart(real,1),bool),fun(fun(cart(real,1),cart(real,tybit0(1))),cart(real,tybit0(1)))) #UNIV:fun(cart(real,1),bool)) (\x:cart(real,1). ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #ii:cart(real,tybit0(1))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) y:real)) (#Cx:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1)))))))) (f:fun(real,cart(real,tybit0(1))) (#drop:fun(cart(real,1),real) x:cart(real,1))))))))))))

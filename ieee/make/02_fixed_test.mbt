@@ -5595,9 +5595,9 @@ test "IEEE/fixed matches IEEE/fixed.ml" {
       #|  finf (fmt:fformat) = (&(fr fmt) ipow (fe fmt))
       #|  fixed (fmt:fformat) = { x | is_fixed(fmt) x }
       #|  is_lb (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ y <= x)
-      #|  is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (!y'. is_lb(fmt) x y' ==> y' <= y))
+      #|  is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (forall y'. is_lb(fmt) x y' ==> y' <= y))
       #|  is_ub (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ x <= y)
-      #|  is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (!y'. is_ub(fmt) x y' ==> y <= y'))
+      #|  is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (forall y'. is_ub(fmt) x y' ==> y <= y'))
       #|  glb (fmt:fformat) (x:real) = sup({y:real | y IN (fixed fmt) /\\ y <= x})
       #|  lub (fmt:fformat) (x:real) = inf({y:real | y IN (fixed fmt) /\\ x <= y})
       #|  ((fround (fmt:fformat) (To_near) (x:real) =\n        (let lo = (glb(fmt) x)\n         and hi = (lub(fmt) x)\n         in\n           (if (closer lo hi x)\n            then\n              lo\n            else if (closer hi lo x)\n            then\n              hi\n            else if (EVEN (ff(fmt) lo))\n            then\n              lo\n            else\n              hi))) /\\\n\n      (fround (fmt:fformat) (To_zero) (x:real) =\n          (if (&0 <= x)\n           then (glb(fmt) x)\n           else (lub(fmt) x))) /\\\n\n      (fround (fmt:fformat) (To_pinf) (x:real) =\n          (lub(fmt) x)) /\\\n\n      (fround (fmt:fformat) (To_ninf) (x:real) =\n          (glb(fmt) x)))

@@ -5528,9 +5528,9 @@ Warning: inventing type variables
 0..0..2..5..16..39..110..265..743..1896..5059..13331..solved at 41921
 0..0..0..2..4..6..solved at 26
 Tutorial/Sets_and_functions quotations (16):
-  (!y. ?x. g x = y) <=> (?f. g o f = I)
-  (!x x'. f x = f x' ==> x = x') <=> (!y:B. ?u:A. !x. f x = y ==> u = x)
-  (!x y. f x = f y ==> x = y) <=> (?g. g o f = I)
+  (forall y. ?x. g x = y) <=> (?f. g o f = I)
+  (forall x x'. f x = f x' ==> x = x') <=> (forall y:B. ?u:A. forall x. f x = y ==> u = x)
+  (forall x y. f x = f y ==> x = y) <=> (?g. g o f = I)
   cantor(x,y) = ((x + y) EXP 2 + 3 * x + y) DIV 2
   a:num <= b /\\ c <= d ==> a + c <= b + d + e
   (x + y + 1) EXP 2 + (x + y + 1)
@@ -5541,9 +5541,9 @@ Tutorial/Sets_and_functions quotations (16):
   cantor(x,y) = cantor(x',y') ==> x + y = x' + y'
   (a + b + 2 * x) DIV 2 = (a + b) DIV 2 + x
   3 * x + y = (x + y) + 2 * x
-  !w z. cantor w = cantor z ==> w = z
+  forall w z. cantor w = cantor z ==> w = z
   \\x:A. ~(g x x)
-  ~(?f:(A->bool)->A. (!x y. f(x) = f(y) ==> x = y))
+  ~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))
 SURJECTIVE_IFF_RIGHT_INVERSE =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('?142959,bool),bool) (\y:'?142959. (#?:fun(fun('?142946,bool),bool) (\x:'?142946. ((#=:fun('?142959,fun('?142959,bool)) (g:fun('?142946,'?142959) x:'?142946)) y:'?142959)))))) (#?:fun(fun(fun('?142959,'?142946),bool),bool) (\f:fun('?142959,'?142946). ((#=:fun(fun('?142959,'?142959),fun(fun('?142959,'?142959),bool)) ((#o:fun(fun('?142946,'?142959),fun(fun('?142959,'?142946),fun('?142959,'?142959))) g:fun('?142946,'?142959)) f:fun('?142959,'?142946))) #I:fun('?142959,'?142959)))))
 INJECTIVE_IFF_LEFT_INVERSE =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('?143035,bool),bool) (\x:'?143035. (#!:fun(fun('?143035,bool),bool) (\y:'?143035. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?143015,fun('?143015,bool)) (f:fun('?143035,'?143015) x:'?143035)) (f:fun('?143035,'?143015) y:'?143035))) ((#=:fun('?143035,fun('?143035,bool)) x:'?143035) y:'?143035))))))) (#?:fun(fun(fun('?143015,'?143035),bool),bool) (\g:fun('?143015,'?143035). ((#=:fun(fun('?143035,'?143035),fun(fun('?143035,'?143035),bool)) ((#o:fun(fun('?143015,'?143035),fun(fun('?143035,'?143015),fun('?143035,'?143035))) g:fun('?143015,'?143035)) f:fun('?143035,'?143015))) #I:fun('?143035,'?143035)))))
 cantor =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(num,fun(num,bool)) (#cantor:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) x:num) y:num))) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) y:num))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

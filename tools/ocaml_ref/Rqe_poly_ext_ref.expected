@@ -6678,7 +6678,7 @@ Rqe/poly_ext quotations (61):
   SUC n
   x:real
   n:num
-  !l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)
+  forall l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)
   x:real
   h:real
   1
@@ -6687,7 +6687,7 @@ Rqe/poly_ext quotations (61):
   t:(real)list
   x:real
   \\x. poly l x
-  !l x. ((\\x. poly l x) diffl (poly (poly_diff l) x))(x)
+  forall l x. ((\\x. poly l x) diffl (poly (poly_diff l) x))(x)
   (pol1 + (d + y * q) = (pol1 + d) + y * q) /\\\n     ((c + x * p) + pol2 = (c + pol2) + x * p) /\\\n     ((c + x * p) + (d + x * q) = (c + d) + x * (p + q)) /\\\n     (c + x * &0 = c)
   (+)
   --(c + x * p) = --c + x * --p
@@ -6721,13 +6721,13 @@ Rqe/poly_ext quotations (61):
   (>):real->real->bool
   (<):real->real->bool
   poly_diff
-  !x y. x < y <=> x - y < &0
-  !x y. x <= y <=> x - y <= &0
-  !x y. (x = y) <=> (x - y = &0)
+  forall x y. x < y <=> x - y < &0
+  forall x y. x <= y <=> x - y <= &0
+  forall x y. (x = y) <=> (x - y = &0)
   n + SUC m = SUC (n + m)
-  !x n m. (x pow n) * x pow m = x pow (n + m)
+  forall x n m. (x pow n) * x pow m = x pow (n + m)
   x * x = x pow 2
-  !x. x = x pow 1
+  forall x. x = x pow 1
 POLY =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) #NIL:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) __c__:real) #NIL:list(real))) x:real)) __c__:real)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) __h__:real) __t__:list(real))) x:real)) ((#real_add:fun(real,fun(real,real)) __h__:real) ((#real_mul:fun(real,fun(real,real)) x:real) ((#poly:fun(list(real),fun(real,real)) __t__:list(real)) x:real))))))
 POLY_DIFF_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) #NIL:list(real))) #NIL:list(real))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) ((#CONS:fun(real,fun(list(real),list(real))) c:real) #NIL:list(real)))) #NIL:list(real))) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real)))) ((#poly_diff_aux:fun(num,fun(list(real),list(real))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) t:list(real)))))
 POLY_DIFF_LEMMA =  |- (#!:fun(fun(list(real),bool),bool) (\l:list(real). (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\x:real. (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#SUC:fun(num,num) n:num))) ((#poly:fun(list(real),fun(real,real)) l:list(real)) x:real)))) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) n:num)) ((#poly:fun(list(real),fun(real,real)) ((#poly_diff_aux:fun(num,fun(list(real),list(real))) (#SUC:fun(num,num) n:num)) l:list(real))) x:real))) x:real)))))))

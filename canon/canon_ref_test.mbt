@@ -22,13 +22,13 @@ test "canon matches canon.ml" {
       sthm(c(t))
     })
   }
-  let fol = "(!x:A. P x ==> (?y. Q x y)) /\\ ~(?z. R z /\\ (P z <=> Q z z))"
+  let fol = "(forall x:A. P x ==> (?y. Q x y)) /\\ ~(?z. R z /\\ (P z <=> Q z z))"
   cv("PRESIMP_CONV", @canon.presimp_conv, "~(a /\\ ~b) ==> (T /\\ c) \\/ F")
   cv("NNF_CONV", @canon.nnf_conv, fol)
   cv("NNFC_CONV", @canon.nnfc_conv, "~(p <=> q) \\/ (r <=> ~s)")
   cv("NNF_CONV_eq", @canon.nnf_conv, "~(p <=> q) \\/ (r <=> ~s)")
-  cv("SKOLEM_CONV", @canon.skolem_conv, "!x:A. ?y:B. P x y /\\ (?z:C. Q x z)")
-  cv("PRENEX_CONV", @canon.prenex_conv, "(!x:A. P x) /\\ (?y:A. Q y) ==> R")
+  cv("SKOLEM_CONV", @canon.skolem_conv, "forall x:A. ?y:B. P x y /\\ (?z:C. Q x z)")
+  cv("PRENEX_CONV", @canon.prenex_conv, "(forall x:A. P x) /\\ (?y:A. Q y) ==> R")
   cv("WEAK_DNF_CONV", @canon.weak_dnf_conv, "(a \\/ b) /\\ (c \\/ d)")
   cv("DNF_CONV", @canon.dnf_conv, "(a \\/ b) /\\ (c \\/ a)")
   cv("WEAK_CNF_CONV", @canon.weak_cnf_conv, "(a /\\ b) \\/ (c /\\ d)")
@@ -67,7 +67,7 @@ test "canon matches canon.ml" {
     "[" + gls.map(g => stm(g.1)).to_array().join("; ") + "]"
   })
   log.attempt("ASM_FOL_TAC", () => {
-    let w = tm("(!x:A. P x) ==> P a")
+    let w = tm("(forall x:A. P x) ==> P a")
     let tac = @tactics.then_tac(@tactics.disch_tac, g => @canon.asm_fol_tac(g))
     let (_, gls, _) = tac((@list.List([]), w))
     "[" +
@@ -304,9 +304,9 @@ test "canon matches canon.ml" {
       #|  ~(p <=> q) <=> p /\\ ~q \\/ ~p /\\ q
       #|  (p <=> q) <=> (p \\/ ~q) /\\ (~p \\/ q)
       #|  ~(p <=> q) <=> (p \\/ q) /\\ (~p \\/ ~q)
-      #|  (~((!) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> !x:A. ~(P x)) /\\\n     (~((?!) P) <=> (!x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))
+      #|  (~((forall) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> forall x:A. ~(P x)) /\\\n     (~((?!) P) <=> (forall x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))
       #|  a /\\ b ==> c <=> ~a \\/ ~b \\/ c
-      #|  ((?!) P) <=> (?x:A. P x) /\\ !x y. ~(P x) \\/ ~(P y) \\/ (y = x)
+      #|  ((?!) P) <=> (?x:A. P x) /\\ forall x y. ~(P x) \\/ ~(P y) \\/ (y = x)
       #|  p:bool
       #|  q:bool
       #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
@@ -325,15 +325,15 @@ test "canon matches canon.ml" {
       #|  P:A->bool
       #|  P:A->bool
       #|  P:A->bool
-      #|  (s = \\x. t x) <=> (!x. s x = t x)
-      #|  (!a. (a = c) ==> (P = Q a)) ==> (P <=> !a. (a = c) ==> Q a)
+      #|  (s = \\x. t x) <=> (forall x. s x = t x)
+      #|  (forall a. (a = c) ==> (P = Q a)) ==> (P <=> forall a. (a = c) ==> Q a)
       #|  b:bool
       #|  ((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = (b /\\ x1 \\/ ~b /\\ x0)
       #|  b:bool
       #|  ((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = ((~b \\/ x1) /\\ (b \\/ x0))
       #|  F
       #|  T
-      #|  !(f:A->B) x. f x = I f x
+      #|  forall(f:A->B) x. f x = I f x
       #|PRESIMP_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) b:bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) c:bool)) #F:bool))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) b:bool)))) c:bool))
       #|NNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))))) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\z:'A. ((#/\:fun(bool,fun(bool,bool)) (R:fun('A,bool) z:'A)) ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) z:'A)) ((Q:fun('A,fun('A,bool)) z:'A) z:'A)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun('A,bool) x:'A))) (#?:fun(fun('A,bool),bool) (\y:'A. ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))))) (#!:fun(fun('A,bool),bool) (\z:'A. ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (R:fun('A,bool) z:'A))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) z:'A)) ((Q:fun('A,fun('A,bool)) z:'A) z:'A))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun('A,bool) z:'A))) (#~:fun(bool,bool) ((Q:fun('A,fun('A,bool)) z:'A) z:'A)))))))))
       #|NNFC_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#=:fun(bool,fun(bool,bool)) r:bool) (#~:fun(bool,bool) s:bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) (#~:fun(bool,bool) q:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) r:bool) s:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) r:bool)) (#~:fun(bool,bool) s:bool)))))

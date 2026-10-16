@@ -5524,30 +5524,30 @@ Generating HOL version of proof
 0..0..solved at 2
 0..0..solved at 2
 IEEE/fixed_thms quotations (590):
-  !(fmt:fformat).\n  (dest_fformat fmt) = (FST (dest_fformat fmt),\n                        (FST (SND (dest_fformat fmt)),\n                         SND (SND (dest_fformat fmt))))
-  !(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      1 < (FST (r,p,e)))
-  !(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))
-  !(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))
-  !(fmt:fformat). is_valid_fformat (dest_fformat fmt)
-  !(fmt:fformat). 1 < (fr fmt)
+  forall(fmt:fformat).\n  (dest_fformat fmt) = (FST (dest_fformat fmt),\n                        (FST (SND (dest_fformat fmt)),\n                         SND (SND (dest_fformat fmt))))
+  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      1 < (FST (r,p,e)))
+  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))
+  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))
+  forall(fmt:fformat). is_valid_fformat (dest_fformat fmt)
+  forall(fmt:fformat). 1 < (fr fmt)
   1 < x ==> 0 < x
-  !(fmt:fformat). 0 < (fr fmt)
+  forall(fmt:fformat). 0 < (fr fmt)
   0 < x ==> ~(x = 0)
-  !(fmt:fformat). ~(&(fr fmt) = &0)
-  !(fmt:fformat). EVEN (fr fmt)
-  !(fmt:fformat). 0 < (fp fmt)
+  forall(fmt:fformat). ~(&(fr fmt) = &0)
+  forall(fmt:fformat). EVEN (fr fmt)
+  forall(fmt:fformat). 0 < (fp fmt)
   1 <= n <=> 0 < n
   &0 <= x:int - &1:int <=> &1 <= x
-  !(fmt:fformat). &0 <= (&(fp fmt):int) - (&1:int)
-  !(fmt:fformat). &(fr fmt) ipow (&(fp fmt) - &1) =\n      &((fr fmt) EXP ((fp fmt) - 1))
+  forall(fmt:fformat). &0 <= (&(fp fmt):int) - (&1:int)
+  forall(fmt:fformat). &(fr fmt) ipow (&(fp fmt) - &1) =\n      &((fr fmt) EXP ((fp fmt) - 1))
   &0 < (x:real) ==> &0 <= x
-  !(fmt:fformat) (e:int). &0 <= &(fr fmt) ipow e
-  !(fmt:fformat) (e:int). &0 < &(fr fmt) ipow e
+  forall(fmt:fformat) (e:int). &0 <= &(fr fmt) ipow e
+  forall(fmt:fformat) (e:int). &0 < &(fr fmt) ipow e
   &0 < (x:real) ==> ~(x = &0)
-  !(fmt:fformat) (e:int). ~(&(fr fmt) ipow e = &0)
-  !(fmt:fformat) (u:int) (v:int).\n        &(fr fmt) ipow u * &(fr fmt) ipow v = &(fr fmt) ipow (u + v)
+  forall(fmt:fformat) (e:int). ~(&(fr fmt) ipow e = &0)
+  forall(fmt:fformat) (u:int) (v:int).\n        &(fr fmt) ipow u * &(fr fmt) ipow v = &(fr fmt) ipow (u + v)
   abs(-- x) = abs(x)
-  !(fmt:fformat) (x:real). (x IN (fixed fmt)) <=> (-- x IN (fixed fmt))
+  forall(fmt:fformat) (x:real). (x IN (fixed fmt)) <=> (-- x IN (fixed fmt))
   fmt:fformat
   (fe fmt)
   &0 < (x:real) ==> &0 <= x
@@ -5558,15 +5558,15 @@ IEEE/fixed_thms quotations (590):
   (x:num) <= x
   (fr (fmt:fformat)) EXP ((fp fmt) - 1)
   (finf fmt) IN (fixed fmt)
-  !(fmt:fformat). ((finf fmt) IN (fixed fmt) /\\\n                            (-- (finf fmt)) IN (fixed fmt))
+  forall(fmt:fformat). ((finf fmt) IN (fixed fmt) /\\\n                            (-- (finf fmt)) IN (fixed fmt))
   fmt:fformat
   0:num
-  !(fmt:fformat). &0 IN (fixed fmt)
+  forall(fmt:fformat). &0 IN (fixed fmt)
   (fe fmt) - &(fp fmt) + &1
   fmt:fformat
   &0 <= (x:real) ==> abs(x) = x
   1:num
-  !(fmt:fformat). (fulp fmt) IN (fixed fmt)
+  forall(fmt:fformat). (fulp fmt) IN (fixed fmt)
   (z:real) <= abs(z)
   abs(x)
   -- (z:real) <= abs(z)
@@ -5575,21 +5575,21 @@ IEEE/fixed_thms quotations (590):
   (x:real) * y <= z * y <=> y * x <= y * z
   (fe fmt) = (&(fp fmt) - &1) + (fe fmt) - &(fp fmt) + &1
   &f * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1) <=\n                       (finf fmt)
-  !(fmt:fformat) (x:real). x IN (fixed fmt) ==> -- (finf fmt) <= x /\\\n          x <= (finf fmt)
+  forall(fmt:fformat) (x:real). x IN (fixed fmt) ==> -- (finf fmt) <= x /\\\n          x <= (finf fmt)
   ~(f = 0) ==> 0 < f
-  !(fmt:fformat) (u:real) (f:num).\n          ~(u = &0) /\\ (is_frac(fmt) u f) ==> 0 < f
+  forall(fmt:fformat) (u:real) (f:num).\n          ~(u = &0) /\\ (is_frac(fmt) u f) ==> 0 < f
   ~((u:real) = &0) <=> ~(abs(u) = &0)
   f:num
   ff(fmt) x
-  !(fmt:fformat) (x:real). (x IN (fixed fmt)) ==>\n          (?(f:num). ff(fmt) x = f /\\ is_frac(fmt) x f)
+  forall(fmt:fformat) (x:real). (x IN (fixed fmt)) ==>\n          (?(f:num). ff(fmt) x = f /\\ is_frac(fmt) x f)
   fmt:fformat
   &0 < (x:real) ==> ~(x = &0)
   &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  !(fmt:fformat) (x:real) (f1:num) (f2:num).\n          (is_frac(fmt) x f1) /\\ (is_frac(fmt) x f2) ==> f1 = f2
+  forall(fmt:fformat) (x:real) (f1:num) (f2:num).\n          (is_frac(fmt) x f1) /\\ (is_frac(fmt) x f2) ==> f1 = f2
   fmt:fformat
-  !(fmt:fformat). &0 <= (fulp fmt)
+  forall(fmt:fformat). &0 <= (fulp fmt)
   fmt:fformat
-  !(fmt:fformat). &0 < (fulp fmt)
+  forall(fmt:fformat). &0 < (fulp fmt)
   (x:int) - y + z - x + y = z
   fmt:fformat
   &(fr fmt)
@@ -5603,9 +5603,9 @@ IEEE/fixed_thms quotations (590):
   1 = (fr fmt) EXP 0
   x:real = &1 * x
   &((fr fmt) EXP ((fp fmt) - 1)) *\n                      &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  !(fmt:fformat). (fulp fmt) <= (finf fmt)
+  forall(fmt:fformat). (fulp fmt) <= (finf fmt)
   is_frac(fmt) x (ff(fmt) x)
-  !(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) x <= (fr fmt) EXP ((fp fmt) - 1)
+  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) x <= (fr fmt) EXP ((fp fmt) - 1)
   (e:int) - &1 + e2 - e + &1 = e2
   fmt:fformat
   &(fr fmt)
@@ -5614,7 +5614,7 @@ IEEE/fixed_thms quotations (590):
   (fr fmt)
   &(ff fmt x) * &(fr fmt) ipow (fe fmt - &(fp fmt) + &1) < (finf fmt)
   is_frac(fmt) x (ff(fmt) x)
-  !(fmt:fformat) (x:real). is_fixed(fmt) x /\\ abs(x) < (finf fmt) ==>\n          ff(fmt) x < (fr fmt) EXP ((fp fmt) - 1)
+  forall(fmt:fformat) (x:real). is_fixed(fmt) x /\\ abs(x) < (finf fmt) ==>\n          ff(fmt) x < (fr fmt) EXP ((fp fmt) - 1)
   &0 <= (x:real) ==> x = abs(x)
   (finf fmt) = abs((finf fmt))
   (e:int) - &1 + e2 - e + &1 = e2
@@ -5624,21 +5624,21 @@ IEEE/fixed_thms quotations (590):
   fmt:fformat
   (fr fmt)
   is_frac(fmt) (finf fmt) (ff(fmt) (finf fmt))
-  !(fmt:fformat). ff(fmt) (finf fmt) = (fr fmt) EXP ((fp fmt) - 1)
+  forall(fmt:fformat). ff(fmt) (finf fmt) = (fr fmt) EXP ((fp fmt) - 1)
   x:real
   fmt:fformat
   abs(--x) = abs(x)
   is_frac(fmt) x (ff(fmt) (-- x))
   is_frac(fmt) x (ff(fmt) x)
-  !(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) (-- x) = ff(fmt) x
+  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) (-- x) = ff(fmt) x
   is_frac(fmt) x (ff(fmt) x)
-  !(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          abs(x) = &(ff(fmt) x) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
+  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          abs(x) = &(ff(fmt) x) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
   &0 * (x:real) = abs(&0)
   &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1) = &0
-  !(b:bool). (~b) /\\ (a \\/ b) ==> a
+  forall(b:bool). (~b) /\\ (a \\/ b) ==> a
   is_frac(fmt) (&0) (ff(fmt) (&0))
   fmt:fformat
-  !(fmt:fformat). ff(fmt) (&0) = 0
+  forall(fmt:fformat). ff(fmt) (&0) = 0
   fixed_corr (fmt:fformat) (n:num) =\n  (if (n = 0)\n   then\n     &0\n   else if (ODD n)\n   then\n     -- &((n + 1) DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)\n   else\n     &(n DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))
   fixed_preimage (fmt:fformat) =\n  { n:num | 0 <= n /\\ n <= 2 * (fr fmt) EXP ((fp fmt) - 1) }
   x = -- abs(x)
@@ -5650,7 +5650,7 @@ IEEE/fixed_thms quotations (590):
   f = 0
   2 * f
   &0 <= x
-  !(fmt:fformat) (x:real). x IN (fixed fmt) ==>\n          ?(n:num). n IN (fixed_preimage fmt) /\\ (fixed_corr fmt n) = x
+  forall(fmt:fformat) (x:real). x IN (fixed fmt) ==>\n          ?(n:num). n IN (fixed_preimage fmt) /\\ (fixed_corr fmt n) = x
   &0 * x = &0
   ~(&0 <= x)
   ~(&0 <= x) ==> ~(x = &0)
@@ -5660,43 +5660,43 @@ IEEE/fixed_thms quotations (590):
   ~a /\\ a <=> F
   {y | ?n. n IN fixed_preimage fmt /\\\n                           y = fixed_corr fmt n}
   fmt:fformat
-  !(fmt:fformat). (fixed fmt) SUBSET\n          {(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n               y = (fixed_corr fmt n)}
-  !(fmt:fformat).\n                     FINITE({(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n                          y = (fixed_corr fmt n)})
-  !(fmt:fformat). FINITE(fixed_preimage fmt)
-  !(fmt:fformat). FINITE(fixed fmt)
+  forall(fmt:fformat). (fixed fmt) SUBSET\n          {(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n               y = (fixed_corr fmt n)}
+  forall(fmt:fformat).\n                     FINITE({(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n                          y = (fixed_corr fmt n)})
+  forall(fmt:fformat). FINITE(fixed_preimage fmt)
+  forall(fmt:fformat). FINITE(fixed fmt)
   (fp fmt) - 1 = 0
   fmt:fformat
   &0 * x = &0
   0:num
   (&0):real
-  !(fmt:fformat). ~((fixed fmt) = {})
+  forall(fmt:fformat). ~((fixed fmt) = {})
   sup ({z | z IN (fixed fmt) /\\ z <= (x:real)})
   --(finf fmt)
   ~({z | z IN (fixed fmt) /\\ z <= x} = {})
   a /\\ b ==> a
   (fixed fmt)
   FINITE({z | z IN (fixed fmt) /\\ z <= x})
-  !(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (glb(fmt) x) = y /\\ (is_glb(fmt) x y)
+  forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (glb(fmt) x) = y /\\ (is_glb(fmt) x y)
   inf ({z | z IN (fixed fmt) /\\ x <= (z:real)})
   (finf fmt)
   ~({z | z IN (fixed fmt) /\\ x <= z} = {})
   a /\\ b ==> a
   (fixed fmt)
   FINITE({z | z IN (fixed fmt) /\\ x <= z})
-  !(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (lub(fmt) x) = y /\\ (is_lub(fmt) x y)
+  forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (lub(fmt) x) = y /\\ (is_lub(fmt) x y)
   y2:real <= y1
   y1:real <= y2
-  !(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_glb(fmt) x y1 /\\ is_glb(fmt) x y2 ==>\n           y1 = y2
+  forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_glb(fmt) x y1 /\\ is_glb(fmt) x y2 ==>\n           y1 = y2
   y2:real <= y1
   y1:real <= y2
-  !(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_lub(fmt) x y1 /\\ is_lub(fmt) x y2 ==>\n           y1 = y2
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (glb(fmt) x) IN (fixed fmt)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (lub(fmt) x) IN (fixed fmt)
+  forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_lub(fmt) x y1 /\\ is_lub(fmt) x y2 ==>\n           y1 = y2
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (glb(fmt) x) IN (fixed fmt)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (lub(fmt) x) IN (fixed fmt)
   (&x:real) * y + y = (&x + &1) * y
-  !(fmt:fformat) (u:real) (f:num).\n          &0 <= u /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              &(f + 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
+  forall(fmt:fformat) (u:real) (f:num).\n          &0 <= u /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              &(f + 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
   &0 <= (x:real) ==> abs(x) = x
   -- ((&x:real) * y) + y = -- (&x - &1) * y
-  !(fmt:fformat) (u:real) (f:num).\n          u < &0 /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              -- &(f - 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
+  forall(fmt:fformat) (u:real) (f:num).\n          u < &0 /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              -- &(f - 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
   (x:real) < &0 ==> (abs(x) = z <=> x = -- z)
   (u:real) < &0 ==> ~(u = &0)
   0 < f ==> 1 <= f
@@ -5723,7 +5723,7 @@ IEEE/fixed_thms quotations (590):
   &0 <= (u:real) /\\ (is_frac(fmt) u f1)
   &0 <= (u:real)
   &0 <= (u:real)
-  !(fmt:fformat) (u:real) (v:real).\n          (u IN (fixed fmt)) /\\ (v IN (fixed fmt)) /\\\n          (u <= v) /\\ (v <= u + (fulp fmt)) ==>\n          (v = u \\/ v = u + (fulp fmt))
+  forall(fmt:fformat) (u:real) (v:real).\n          (u IN (fixed fmt)) /\\ (v IN (fixed fmt)) /\\\n          (u <= v) /\\ (v <= u + (fulp fmt)) ==>\n          (v = u \\/ v = u + (fulp fmt))
   f1:num
   f2:num
   &0 <= (x:real) ==> abs(x) = x
@@ -5785,7 +5785,7 @@ IEEE/fixed_thms quotations (590):
   y1 < (finf fmt)
   &0 <= (y1:real)
   &0 <= (y1:real)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          glb(fmt) x <= lub(fmt) x /\\ lub(fmt) x <= glb(fmt) x + (fulp fmt)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          glb(fmt) x <= lub(fmt) x /\\ lub(fmt) x <= glb(fmt) x + (fulp fmt)
   fmt:fformat
   y1:real
   fmt:fformat
@@ -5794,13 +5794,13 @@ IEEE/fixed_thms quotations (590):
   &0 <= (x:real) ==> abs(x) = x
   f1:num
   a /\\ b /\\ c /\\ d <=> (a /\\ b) /\\ (c /\\ d)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          lub(fmt) x = glb(fmt) x \\/ lub(fmt) x = glb(fmt) x + (fulp fmt)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          lub(fmt) x = glb(fmt) x \\/ lub(fmt) x = glb(fmt) x + (fulp fmt)
   fmt:fformat
   &0 <= (x:real) ==> abs(x) = x
   ((x:real) + y) - x = y
   fmt:fformat
   abs((x:real) - x) = &0
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(lub(fmt) x - glb(fmt) x) <= (fulp fmt)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(lub(fmt) x - glb(fmt) x) <= (fulp fmt)
   fmt:fformat
   (-- a) * (b:real) <= &0 <=> &0 <= (a * b)
   lub(fmt) x = glb(fmt) x + (fulp fmt)
@@ -5811,7 +5811,7 @@ IEEE/fixed_thms quotations (590):
   &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
   x:real
   glb(fmt) x
-  !x. &0 <= x /\\ x <= y ==> &0 <= (y:real)
+  forall x. &0 <= x /\\ x <= y ==> &0 <= (y:real)
   &0 <= lub(fmt) x
   fmt:fformat
   &0 < (x:real) ==> ~(x = &0)
@@ -5827,7 +5827,7 @@ IEEE/fixed_thms quotations (590):
   lub(fmt) x
   fmt:fformat
   (f1:num) = f'
-  !(fmt:fformat) (x:real) (f1:num) (f2:num). abs(x) <= (finf fmt) ==>\n          ((is_frac(fmt) (lub(fmt) x) f1) /\\ (is_frac(fmt) (glb(fmt) x) f2) ==>\n          (f1 = f2 /\\ (lub(fmt) x = glb(fmt) x)) \\/ f1 = f2 + 1 \\/\n            f1 = f2 - 1)
+  forall(fmt:fformat) (x:real) (f1:num) (f2:num). abs(x) <= (finf fmt) ==>\n          ((is_frac(fmt) (lub(fmt) x) f1) /\\ (is_frac(fmt) (glb(fmt) x) f2) ==>\n          (f1 = f2 /\\ (lub(fmt) x = glb(fmt) x)) \\/ f1 = f2 + 1 \\/\n            f1 = f2 - 1)
   fmt:fformat
   &0 <= (glb fmt x)
   x = y /\\ &0 <= x ==> &0 <= (y:real)
@@ -5840,33 +5840,33 @@ IEEE/fixed_thms quotations (590):
   ~((x:real) < y \\/ z < x) <=> (y <= x /\\ x <= z)
   lub(fmt) x = glb(fmt) x + (fulp fmt)
   s < glb(fmt) x \\/ lub(fmt) x < s
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (!(s:real). s IN (fixed fmt) ==>\n             s <= glb(fmt) x \\/ lub(fmt) x <= s)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (forall(s:real). s IN (fixed fmt) ==>\n             s <= glb(fmt) x \\/ lub(fmt) x <= s)
   (s:real) IN (fixed fmt)
   fmt:fformat
   is_lb(fmt) x (&0)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (glb(fmt) x)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (glb(fmt) x)
   x:real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (glb(fmt) x) <= &0
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (glb(fmt) x) <= &0
   x:real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (lub(fmt) x)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (lub(fmt) x)
   is_ub(fmt) x (&0)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (lub(fmt) x) <= &0
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (lub(fmt) x) <= &0
   abs(y - z) = z - (y:real)
   abs(x - z) = z - (x:real)
   x < (z:real)
-  !(x:real) (y:real) (z:real). x < y /\\ y <= z ==>\n          closer y x z
+  forall(x:real) (y:real) (z:real). x < y /\\ y <= z ==>\n          closer y x z
   abs(y - z) = z - (y:real)
   abs(x - z) = z - (x:real)
   x < (z:real)
-  !(x:real) (y:real) (z:real). x <= y /\\ y < z ==>\n          closer y z x
-  !(x:real) (y:real). closer y y x <=> F
-  !(a:real) (x:real) (y:real). (closer x y a) ==> ~(closer y x a)
-  !(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ (closer y z a) ==> (closer x z a)
-  !(a:real) (x:real) (y:real) (z:real).\n          ~(closer x y a) /\\ ~(closer y x a) /\\ (closer y z a) ==>\n          (closer x z a)
-  !(a:real) (x:real) (y:real).\n          (closer x y a \\/ ~closer y x a) /\\ x <= a /\\ a <= y ==>\n          abs(x - a) <= abs(y - x) / &2
-  !(a:real) (x:real) (y:real).\n          (closer y x a \\/ ~closer x y a) /\\ x <= a /\\ a <= y ==>\n              abs(y - a) <= abs(y - x) / &2
-  is_closest (fmt:fformat) (x:real) (y:real) =\n         (!(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))
-  to_even (fmt:fformat) (x:real) (y:real) = (!(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))
+  forall(x:real) (y:real) (z:real). x <= y /\\ y < z ==>\n          closer y z x
+  forall(x:real) (y:real). closer y y x <=> F
+  forall(a:real) (x:real) (y:real). (closer x y a) ==> ~(closer y x a)
+  forall(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ (closer y z a) ==> (closer x z a)
+  forall(a:real) (x:real) (y:real) (z:real).\n          ~(closer x y a) /\\ ~(closer y x a) /\\ (closer y z a) ==>\n          (closer x z a)
+  forall(a:real) (x:real) (y:real).\n          (closer x y a \\/ ~closer y x a) /\\ x <= a /\\ a <= y ==>\n          abs(x - a) <= abs(y - x) / &2
+  forall(a:real) (x:real) (y:real).\n          (closer y x a \\/ ~closer x y a) /\\ x <= a /\\ a <= y ==>\n              abs(y - a) <= abs(y - x) / &2
+  is_closest (fmt:fformat) (x:real) (y:real) =\n         (forall(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))
+  to_even (fmt:fformat) (x:real) (y:real) = (forall(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))
   s = lub(fmt) x
   y:real
   s = glb(fmt) x
@@ -5884,7 +5884,7 @@ IEEE/fixed_thms quotations (590):
   y:real
   lub(fmt) x = hi
   glb(fmt) x = lo
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\ is_closest(fmt) x y
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\ is_closest(fmt) x y
   fmt:fformat
   fmt:fformat
   fmt:fformat
@@ -5921,7 +5921,7 @@ IEEE/fixed_thms quotations (590):
   y:real
   lub(fmt) x = hi
   glb(fmt) x = lo
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_even(fmt) x y
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_even(fmt) x y
   fmt:fformat
   a /\\ ~a <=> F
   fmt:fformat
@@ -5939,49 +5939,49 @@ IEEE/fixed_thms quotations (590):
   fmt:fformat
   fmt:fformat
   y:real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     is_closest(fmt) x y /\\\n                     to_even(fmt) x y
-  to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     is_closest(fmt) x y /\\\n                     to_even(fmt) x y
+  to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
   ~(&0 <= (x:real)) ==> x <= &0
   is_ub(fmt) x (&0)
   y':real
   is_lb(fmt) x (&0)
   y:real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_zero x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_zero(fmt) x y
-  to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_zero x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_zero(fmt) x y
+  to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
   y':real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_pinf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_pinf(fmt) x y
-  to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_pinf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_pinf(fmt) x y
+  to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)
   y:real
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_ninf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_ninf(fmt) x y
-  !(fmt:fformat) (x:real) (m:roundmode) (y:real).\n          fround(fmt) m x = y ==>\n             y = glb(fmt) x \\/ y = lub(fmt) x
-  !(fmt:fformat) (x:real) (m:roundmode).\n          fround(fmt) m x = glb(fmt) x \\/ fround(fmt) m x = lub(fmt) x
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_ninf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_ninf(fmt) x y
+  forall(fmt:fformat) (x:real) (m:roundmode) (y:real).\n          fround(fmt) m x = y ==>\n             y = glb(fmt) x \\/ y = lub(fmt) x
+  forall(fmt:fformat) (x:real) (m:roundmode).\n          fround(fmt) m x = glb(fmt) x \\/ fround(fmt) m x = lub(fmt) x
   m:roundmode
   x:real
   fmt:fformat
-  !(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          &0 <= x ==>\n          &0 <= (fround(fmt) m x)
+  forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          &0 <= x ==>\n          &0 <= (fround(fmt) m x)
   m:roundmode
   x:real
   fmt:fformat
-  !(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          x <= &0 ==>\n          (fround(fmt) m x) <= &0
+  forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          x <= &0 ==>\n          (fround(fmt) m x) <= &0
   m:roundmode
   x:real
   fmt:fformat
   lub(fmt) x
-  !(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ x <= y ==>\n          (fround(fmt) m x) <= y
+  forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ x <= y ==>\n          (fround(fmt) m x) <= y
   m:roundmode
   x:real
   fmt:fformat
   glb(fmt) x
-  !(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ y <= x ==>\n          y <= (fround(fmt) m x)
+  forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ y <= x ==>\n          y <= (fround(fmt) m x)
   abs(&0) = &0
   (fround(fmt) m (&0)) <= &0
   abs(&0) = &0
   &0 <= (fround(fmt) m (&0))
-  !(fmt:fformat) (m:roundmode). (fround(fmt) m (&0)) = &0
+  forall(fmt:fformat) (m:roundmode). (fround(fmt) m (&0)) = &0
   m:roundmode
   x:real
   fmt:fformat
-  !(fmt:fformat) (x:real) (m:roundmode).\n          abs(x) <= (finf fmt) ==> is_fixed(fmt) (fround(fmt) m x)
+  forall(fmt:fformat) (x:real) (m:roundmode).\n          abs(x) <= (finf fmt) ==> is_fixed(fmt) (fround(fmt) m x)
   fmt:fformat
   &0 <= (x:real) ==> abs(x) = x
   ((y:real) + x) - y = x
@@ -5990,7 +5990,7 @@ IEEE/fixed_thms quotations (590):
   abs(y' - y) / &2
   (x:real) <= y /\\ ~(x = y) ==> x < y
   x:real
-  !(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)
+  forall(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)
   ~(y' = (y:real))
   fmt:fformat
   &0 <= (x:real) ==> &0 <= x / &2
@@ -6004,13 +6004,13 @@ IEEE/fixed_thms quotations (590):
   abs(y' - y) / &2
   (y:real) <= x /\\ ~(x = y) ==> y < x
   x:real
-  !(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)
+  forall(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)
   ~(y' = (y:real))
   fmt:fformat
   &0 <= (x:real) ==> &0 <= x / &2
   abs((y:real) - y) = &0
   (x:real) = (y:real)
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_near x - x) <= (fulp fmt) / &2
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_near x - x) <= (fulp fmt) / &2
   y'' = glb(fmt) x
   ~(y' = (y:real))
   y'' = lub(fmt) x
@@ -6019,7 +6019,7 @@ IEEE/fixed_thms quotations (590):
   abs(y' - (y:real))
   (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
   abs(y' - (y:real))
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_zero x - x) <= fulp fmt
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_zero x - x) <= fulp fmt
   x:real
   fmt:fformat
   x:real
@@ -6028,7 +6028,7 @@ IEEE/fixed_thms quotations (590):
   abs(y' - (y:real))
   (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
   abs(y' - (y:real))
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_pinf x - x) <= fulp fmt
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_pinf x - x) <= fulp fmt
   x:real
   fmt:fformat
   x:real
@@ -6037,7 +6037,7 @@ IEEE/fixed_thms quotations (590):
   abs(y' - (y:real))
   (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
   abs(y' - (y:real))
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_ninf x - x) <= fulp fmt
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_ninf x - x) <= fulp fmt
   x:real
   fmt:fformat
   x:real
@@ -6051,7 +6051,7 @@ IEEE/fixed_thms quotations (590):
   (x:real) - y < y' - x <=> &2 * x - y < y'
   (closer (glb(fmt) x) (lub(fmt) x) x)
   lub(fmt) x = glb(fmt) x
-  !(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ x < glb(fmt) x + (fulp fmt) / &2 ==>\n          (fround(fmt) To_near x) = glb(fmt) x
+  forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ x < glb(fmt) x + (fulp fmt) / &2 ==>\n          (fround(fmt) To_near x) = glb(fmt) x
   (y:real) <= x ==> abs(y - x) = x - y
   (y:real) <= x ==> abs(x - y) = x - y
   (x:real) - z < y <=> x - y < z
@@ -6060,13 +6060,13 @@ IEEE/fixed_thms quotations (590):
   (y':real) - x < x - y <=> y' - x < (y' - y) / &2
   (closer (lub(fmt) x) (glb(fmt) x) x)
   lub(fmt) x = glb(fmt) x
-  !(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ lub(fmt) x - (fulp fmt) / &2 < x ==>\n          (fround(fmt) To_near x) = lub(fmt) x
+  forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ lub(fmt) x - (fulp fmt) / &2 < x ==>\n          (fround(fmt) To_near x) = lub(fmt) x
   (y:real) <= x ==> abs(y - x) = x - y
   (y:real) <= x ==> abs(x - y) = x - y
   &0 - (x:real) = -- x
   lub(fmt) x - (fulp fmt) / &2 < x
   (-- (fulp fmt)) / &2
-  !y. (x:real) < y /\\ y <= z ==> x < z
+  forall y. (x:real) < y /\\ y <= z ==> x < z
   (x:real) < y ==> ~(y = x)
   ~(y' = -- (fulp fmt))
   -- (x:real) + x = &0
@@ -6083,7 +6083,7 @@ IEEE/fixed_thms quotations (590):
   x < glb(fmt) x + (fulp fmt) / &2
   (x:real) / &2 < x <=> &0 < x
   (fulp fmt) / &2
-  !y. (x:real) <= y /\\ y < z ==> x < z
+  forall y. (x:real) <= y /\\ y < z ==> x < z
   &0 + x = (x:real)
   (x:real) < y ==> ~(x = y)
   ~(y' = &0 + (fulp fmt))
@@ -6094,7 +6094,7 @@ IEEE/fixed_thms quotations (590):
   fmt:fformat
   fulp fmt
   abs(x) <= (finf fmt)
-  !(fmt:fformat) (x:real).\n          abs(x) < (fulp fmt) / &2 ==> (fround(fmt) To_near x) = &0
+  forall(fmt:fformat) (x:real).\n          abs(x) < (fulp fmt) / &2 ==> (fround(fmt) To_near x) = &0
   &0 <= (y':real)
   fmt:fformat
   &0 <= (x:real)
@@ -6113,7 +6113,7 @@ IEEE/fixed_thms quotations (590):
   (&0 - x) / x = -- (x / x)
   abs(x) < (fulp fmt) / &2
   abs(x) < (fulp fmt) / &2
-  !(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ ~(x = &0) ==>\n          (rerror x (fround(fmt) To_near x)) <= &1
+  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ ~(x = &0) ==>\n          (rerror x (fround(fmt) To_near x)) <= &1
 FFORMAT_SPLIT =  |- (#!:fun(fun(fformat,bool),bool) (\fmt:fformat. ((#=:fun(prod(num,prod(num,int)),fun(prod(num,prod(num,int)),bool)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat)) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) (#FST:fun(prod(num,prod(num,int)),num) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat))) ((#,:fun(num,fun(int,prod(num,int))) (#FST:fun(prod(num,int),num) (#SND:fun(prod(num,prod(num,int)),prod(num,int)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat)))) (#SND:fun(prod(num,int),int) (#SND:fun(prod(num,prod(num,int)),prod(num,int)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat))))))))
 FFORMAT_VALID_IMP_RADIX_LT_1 =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_fformat:fun(prod(num,prod(num,int)),bool) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,prod(num,int)),num) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))))))))))
 FFORMAT_VALID_IMP_RADIX_EVEN =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_fformat:fun(prod(num,prod(num,int)),bool) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,prod(num,int)),num) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))))))))))

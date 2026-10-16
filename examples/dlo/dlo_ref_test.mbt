@@ -5764,15 +5764,15 @@ test "Examples/dlo matches Examples/dlo.ml" {
       #|Examples/dlo quotations (278):
       #|  T
       #|  (<)
-      #|  !x. ~(~ x) <=> x
-      #|  !a b. (a ==> b) <=> (~a \\/ b)
-      #|  !a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)
-      #|  !a b. ~(a /\\ b) <=> (~a \\/ ~b)
-      #|  !a b. ~(a \\/ b) <=> (~a /\\ ~b)
-      #|  !a b. ~(a ==> b) <=> (a /\\ ~b)
-      #|  !a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)
-      #|  !p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)
-      #|  ~(?!x. P x) <=> (!x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
+      #|  forall x. ~(~ x) <=> x
+      #|  forall a b. (a ==> b) <=> (~a \\/ b)
+      #|  forall a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)
+      #|  forall a b. ~(a /\\ b) <=> (~a \\/ ~b)
+      #|  forall a b. ~(a \\/ b) <=> (~a /\\ ~b)
+      #|  forall a b. ~(a ==> b) <=> (a /\\ ~b)
+      #|  forall a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)
+      #|  forall p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)
+      #|  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
       #|  ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
       #|  (p = q) <=> (p /\\ q) \\/ (~p /\\ ~q)
       #|  ~(p = q) <=> (p /\\ ~q) \\/ (~p /\\ q)
@@ -5785,63 +5785,63 @@ test "Examples/dlo matches Examples/dlo.ml" {
       #|  (\\/)
       #|  (MINL [] default = default) /\\\n   (MINL (CONS h t) default = min h (MINL t default))
       #|  (MAXL [] default = default) /\\\n   (MAXL (CONS h t) default = max h (MAXL t default))
-      #|  !x y z. max x y < z <=> x < z /\\ y < z
-      #|  !x y z. x < real_min y z <=> x < y /\\ x < z
+      #|  forall x y z. max x y < z <=> x < z /\\ y < z
+      #|  forall x y z. x < real_min y z <=> x < y /\\ x < z
       #|  t:real list
       #|  t:real list
-      #|  !left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x
+      #|  forall left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x
       #|  t:real list
       #|  t:real list
-      #|  !right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right
+      #|  forall right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right
       #|  (x + y) / &2
-      #|  !x y. x < y ==> ?z. x < z /\\ z < y
+      #|  forall x y. x < y ==> ?z. x < z /\\ z < y
       #|  x + &1
-      #|  !x. ?y. x < y
+      #|  forall x. ?y. x < y
       #|  x - &1
-      #|  !x. ?y. y < x
+      #|  forall x. ?y. y < x
       #|  ~(s = t) <=> (s < t \\/ t < s)
       #|  ~(s < t) <=> ((s = t) \\/ (t < s))
-      #|  !l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T
-      #|  !r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T
-      #|  !l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)
+      #|  forall l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T
+      #|  forall r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T
+      #|  forall l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)
       #|  :real
       #|  a /\\ T <=> a
       #|  ((?x. x = x) <=> T) /\\\n     ((?x. x = t) <=> T) /\\\n     ((?x. t = x) <=> T) /\\\n     ((?x. (x = t) /\\ P x) <=> P t) /\\\n     ((?x. (t = x) /\\ P x) <=> P t)
       #|  (?x. (x = x) /\\ P x) <=> (?x. P x)
-      #|  !P. (!x. P x) <=> ~ (?x. ~ P x)
+      #|  forall P. (forall x. P x) <=> ~ (?x. ~ P x)
       #|  (~)
       #|  (\\/)
       #|  T
       #|  F
-      #|  !x y. x <= y \\/ x < y
-      #|  !x y. x <= y \\/ x > y
-      #|  !a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)
-      #|  !x. x < a ==> x <= b
-      #|  !x. x < a ==> x < b
-      #|  !a b. (!x. x < a ==> x < b) <=> (a <= b)
+      #|  forall x y. x <= y \\/ x < y
+      #|  forall x y. x <= y \\/ x > y
+      #|  forall a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)
+      #|  forall x. x < a ==> x <= b
+      #|  forall x. x < a ==> x < b
+      #|  forall a b. (forall x. x < a ==> x < b) <=> (a <= b)
       #|  ?z. z < x /\\ x < y
-      #|  !x y . x < y
-      #|  !y. x < y /\\ y < z ==> w < z
-      #|  !x y z. ?u. u < x /\\ u < y /\\ u < z
+      #|  forall x y . x < y
+      #|  forall y. x < y /\\ y < z ==> w < z
+      #|  forall x y z. ?u. u < x /\\ u < y /\\ u < z
       #|  ?z. x < z /\\ z <= y
       #|  ?z. x <= z /\\ z <= y
       #|  ?z. x < z /\\ z < y
       #|  ?x.(x = x) /\\ (x = y)
       #|  ?x. x = x:real
-      #|  !x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)
-      #|  !x y. x < y ==> ?z. x < z /\\ z < y
-      #|  !x y. ?z. z < x /\\ z < y
-      #|  !x y. ?z. z < x /\\ x < y
+      #|  forall x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)
+      #|  forall x y. x < y ==> ?z. x < z /\\ z < y
+      #|  forall x y. ?z. z < x /\\ z < y
+      #|  forall x y. ?z. z < x /\\ x < y
       #|  ?x y. x < y /\\ y < x
-      #|  !x y. x < y \\/ (x = y) \\/ y < x
-      #|  !x y. x < y \\/ (x = y) \\/ y < x
-      #|  !x y z. x < y /\\ y < z ==> x < z
-      #|  !x. ?y. x < y
-      #|  !a b. (!x. (x < a) <=> (x < b)) <=> (a = b)
-      #|  !x. x < a ==> x < b
+      #|  forall x y. x < y \\/ (x = y) \\/ y < x
+      #|  forall x y. x < y \\/ (x = y) \\/ y < x
+      #|  forall x y z. x < y /\\ y < z ==> x < z
+      #|  forall x. ?y. x < y
+      #|  forall a b. (forall x. (x < a) <=> (x < b)) <=> (a = b)
+      #|  forall x. x < a ==> x < b
       #|  ?z. x < z /\\ z < y
       #|  ?z. x < x /\\ z < y
-      #|  !x y. ?z. z < x /\\ z < y
+      #|  forall x y. ?z. z < x /\\ z < y
       #|  s > t <=> t < s
       #|  s >= t <=> ~(s < t)
       #|  s <= t <=> ~(t < s)

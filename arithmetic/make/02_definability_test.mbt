@@ -13132,7 +13132,7 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|0..0..0..0..solved at 4
       #|Arithmetic/definability quotations (169):
       #|  NPAIR x y = (x + y) EXP 2 + x + 1
-      #|  !x y. ~(NPAIR x y = 0)
+      #|  forall x y. ~(NPAIR x y = 0)
       #|  SUC(x1 + y1) * SUC(x1 + y1)
       #|  x + y + 1 < u + v + 1 <=> x + y < u + v
       #|  x1 + y1 < x2 + y2 ==> NPAIR x1 y1 < NPAIR x2 y2
@@ -13142,19 +13142,19 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  (NPAIR x y = NPAIR x' y') <=> (x = x') /\\ (y = y')
       #|  (x + y) + x + 1
       #|  x < a + x + 1
-      #|  !x y. x < NPAIR x y /\\ y < NPAIR x y
+      #|  forall x y. x < NPAIR x y /\\ y < NPAIR x y
       #|  primepow p x <=> prime(p) /\\ ?n. x = p EXP n
       #|  ~(m = 0) ==> 1 <= m
       #|  m = 0
       #|  m divides n <=> ?x. x <= n /\\ n = m * x
       #|  p = 1
       #|  p = 0
-      #|  prime(p) <=> 2 <= p /\\ !n. n < p ==> n divides p ==> n = 1
+      #|  prime(p) <=> 2 <= p /\\ forall n. n < p ==> n divides p ==> n = 1
       #|  x = 0
       #|  prime(p)
-      #|  primepow p x <=>\n        prime(p) /\\ ~(x = 0) /\\\n        !z. z <= x ==> z divides x ==> z = 1 \\/ p divides z
+      #|  primepow p x <=>\n        prime(p) /\\ ~(x = 0) /\\\n        forall z. z <= x ==> z divides x ==> z = 1 \\/ p divides z
       #|  (PSEQ p f m 0 = 0) /\\\n   (PSEQ p f m (SUC n) = f m + p * PSEQ p f (SUC m) n)
-      #|  !f p n m r.\n        PSEQ p f m (n + r) = PSEQ p f m n + p EXP n * PSEQ p f (m + n) r
+      #|  forall f p n m r.\n        PSEQ p f m (n + r) = PSEQ p f m n + p EXP n * PSEQ p f (m + n) r
       #|  1
       #|  PSEQ p f m 1 = f m
       #|  x < p ==> x + 1 <= p
@@ -13167,7 +13167,7 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  p:num
       #|  f:num->num
       #|  p = 0
-      #|  !n. ~(p = 0) /\\ (!i. i < n ==> f i < p) ==> PSEQ p f 0 n < p EXP n
+      #|  forall n. ~(p = 0) /\\ (forall i. i < n ==> f i < p) ==> PSEQ p f 0 n < p EXP n
       #|  1 <= x <=> ~(x = 0)
       #|  1 * a <= c ==> a <= b + c
       #|  i < n ==> i + 1 <= n
@@ -13201,7 +13201,7 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  p:num
       #|  f:num->num
       #|  PSEQ p f 0 (SUC n)
-      #|  !i. i <= n ==> f i < p
+      #|  forall i. i <= n ==> f i < p
       #|  ~(p = 0)
       #|  ibig:num
       #|  p:num
@@ -13215,8 +13215,8 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  j:num
       #|  n:num
       #|  n:num
-      #|  ?j. j <= n /\\ !i. i <= n ==> f i <= f j
-      #|  (f 0 = x) /\\\n   (f n = y) /\\\n   (!i. i < n ==> R (f i) (f(SUC i)))\n   ==> ?p. (?i. i <= n /\\ p <= SUC(FACT(f i))) /\\\n           prime p /\\\n           (?m. m < p EXP (SUC n) /\\\n                x < p /\\ y < p /\\\n                (?qx. m = x + p * qx) /\\\n                (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n                !q. q < p EXP n\n                    ==> primepow p q\n                        ==> ?r. r < q /\\\n                                ?a. a < p /\\\n                                    ?b. b < p /\\\n                                        R a b /\\\n                                        ?s. s <= m /\\\n                                            (m =\n                                             r + q * (a + p * (b + p * s))))
+      #|  ?j. j <= n /\\ forall i. i <= n ==> f i <= f j
+      #|  (f 0 = x) /\\\n   (f n = y) /\\\n   (forall i. i < n ==> R (f i) (f(SUC i)))\n   ==> ?p. (?i. i <= n /\\ p <= SUC(FACT(f i))) /\\\n           prime p /\\\n           (?m. m < p EXP (SUC n) /\\\n                x < p /\\ y < p /\\\n                (?qx. m = x + p * qx) /\\\n                (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n                forall q. q < p EXP n\n                    ==> primepow p q\n                        ==> ?r. r < q /\\\n                                ?a. a < p /\\\n                                    ?b. b < p /\\\n                                        R a b /\\\n                                        ?s. s <= m /\\\n                                            (m =\n                                             r + q * (a + p * (b + p * s))))
       #|  a < p
       #|  p + q * p = (q + 1) * p
       #|  p EXP i + a * p EXP i
@@ -13235,14 +13235,14 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  qx:num
       #|  ~(p = 0)
       #|  \\i. (m DIV (p EXP i)) MOD p
-      #|  prime p /\\ x < p /\\ y < p /\\\n   (?qx. m = x + p * qx) /\\\n   (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n   (!q. q < p EXP n\n        ==> primepow p q\n            ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                          r < q /\\ a < p /\\ b < p /\\ R a b)\n   ==> RELPOW n R x y
-      #|  RELPOW n R x y <=>\n        ?m p. prime p /\\ x < p /\\ y < p /\\\n              (?qx. m = x + p * qx) /\\\n              (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n              !q. q < p EXP n\n                  ==> primepow p q\n                      ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                    r < q /\\ a < p /\\ b < p /\\ R a b
+      #|  prime p /\\ x < p /\\ y < p /\\\n   (?qx. m = x + p * qx) /\\\n   (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n   (forall q. q < p EXP n\n        ==> primepow p q\n            ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                          r < q /\\ a < p /\\ b < p /\\ R a b)\n   ==> RELPOW n R x y
+      #|  RELPOW n R x y <=>\n        ?m p. prime p /\\ x < p /\\ y < p /\\\n              (?qx. m = x + p * qx) /\\\n              (?ry. ry < p EXP n /\\ (m = ry + p EXP n * y)) /\\\n              forall q. q < p EXP n\n                  ==> primepow p q\n                      ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                    r < q /\\ a < p /\\ b < p /\\ R a b
       #|  (a /\\ b) /\\ c <=> b /\\ a /\\ c
       #|  p EXP n
       #|  n:num
-      #|  RTC R x y <=>\n        ?m p Q. primepow p Q /\\ x < p /\\ y < p /\\\n                (?s. m = x + p * s) /\\\n                (?r. r < Q /\\ (m = r + Q * y)) /\\\n                !q. q < Q\n                    ==> primepow p q\n                        ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                      r < q /\\ a < p /\\ b < p /\\ R a b
+      #|  RTC R x y <=>\n        ?m p Q. primepow p Q /\\ x < p /\\ y < p /\\\n                (?s. m = x + p * s) /\\\n                (?r. r < Q /\\ (m = r + Q * y)) /\\\n                forall q. q < Q\n                    ==> primepow p q\n                        ==> ?r a b s. (m = r + q * (a + p * (b + p * s))) /\\\n                                      r < q /\\ a < p /\\ b < p /\\ R a b
       #|  arith_pair s t = (s ++ t) ** (s ++ t) ++ s ++ Suc Z
-      #|  !s t v. termval v (arith_pair s t) = NPAIR (termval v s) (termval v t)
+      #|  forall s t v. termval v (arith_pair s t) = NPAIR (termval v s) (termval v t)
       #|  FVT(arith_pair s t) = FVT(s) UNION FVT(t)
       #|  (+):num->num->num
       #|  (*):num->num->num
@@ -13274,32 +13274,32 @@ test "Arithmetic/definability matches Arithmetic/definability.ml" {
       #|  holds v
       #|  v:num->num
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_divides s t) = FVT(s) UNION FVT(t)
+      #|  forall s t. FV(arith_divides s t) = FVT(s) UNION FVT(t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !t. FV(arith_prime t) = FVT(t)
+      #|  forall t. FV(arith_prime t) = FVT(t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !s t. FV(arith_primepow s t) = FVT(s) UNION FVT(t)
-      #|  !v s t. holds v (R s t) <=> r (termval v s) (termval v t)
+      #|  forall s t. FV(arith_primepow s t) = FVT(s) UNION FVT(t)
+      #|  forall v s t. holds v (R s t) <=> r (termval v s) (termval v t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !R. (!s t. FV(R s t) = FVT(s) UNION FVT(t))\n       ==> !s t. FV(arith_rtc R s t) = FVT(s) UNION FVT(t)
-      #|  (!v x y. holds v (f x y) <=> f' (termval v x) (termval v y))\n     ==> !g. (!n. g n = formsubst ((0 |-> n) V)\n                                  (arith_rtc f (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> !v n. holds v (g n) <=> RTC f' 0 (NPAIR (termval v n) 0)
+      #|  forall R. (forall s t. FV(R s t) = FVT(s) UNION FVT(t))\n       ==> forall s t. FV(arith_rtc R s t) = FVT(s) UNION FVT(t)
+      #|  (forall v x y. holds v (f x y) <=> f' (termval v x) (termval v y))\n     ==> forall g. (forall n. g n = formsubst ((0 |-> n) V)\n                                  (arith_rtc f (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> forall v n. holds v (g n) <=> RTC f' 0 (NPAIR (termval v n) 0)
       #|  RTCP R m x y <=> RTC (R m) x y
       #|  R:num->num->bool
       #|  (R:num->num->num->bool) m
-      #|  !v m s t. holds v (R m s t) <=>\n                   r (termval v m) (termval v s) (termval v t)
+      #|  forall v m s t. holds v (R m s t) <=>\n                   r (termval v m) (termval v s) (termval v t)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !R. (!s t u. FV(R s t u) = FVT(s) UNION FVT(t) UNION FVT(u))\n       ==> !s t u. FV(arith_rtcp R s t u) = FVT(s) UNION FVT(t) UNION FVT(u)
-      #|  (!v m x y. holds v (f m x y) <=>\n                f' (termval v m) (termval v x) (termval v y))\n     ==> !g. (!m n. g m n = formsubst ((1 |-> m) ((0 |-> n) V))\n                                  (arith_rtcp f (V 1) (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> !v m n. holds v (g m n) <=>\n                          RTC (f' (termval v m)) 0 (NPAIR (termval v n) 0)
+      #|  forall R. (forall s t u. FV(R s t u) = FVT(s) UNION FVT(t) UNION FVT(u))\n       ==> forall s t u. FV(arith_rtcp R s t u) = FVT(s) UNION FVT(t) UNION FVT(u)
+      #|  (forall v m x y. holds v (f m x y) <=>\n                f' (termval v m) (termval v x) (termval v y))\n     ==> forall g. (forall m n. g m n = formsubst ((1 |-> m) ((0 |-> n) V))\n                                  (arith_rtcp f (V 1) (numeral 0)\n                                               (arith_pair (V 0) (numeral 0))))\n             ==> forall v m n. holds v (g m n) <=>\n                          RTC (f' (termval v m)) 0 (NPAIR (termval v n) 0)
       #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  (fn 0 = e) /\\\n   (!n. fn (SUC n) = f (fn n) n)\n   ==> !x y. RTC (\\x y. ?n r. (x = NPAIR n r) /\\ (y = NPAIR (SUC n) (f r n)))\n                 (NPAIR 0 e) (NPAIR x y) <=>\n             (fn(x) = y)
+      #|  (fn 0 = e) /\\\n   (forall n. fn (SUC n) = f (fn n) n)\n   ==> forall x y. RTC (\\x y. ?n r. (x = NPAIR n r) /\\ (y = NPAIR (SUC n) (f r n)))\n                 (NPAIR 0 e) (NPAIR x y) <=>\n             (fn(x) = y)
       #|  arith_primrecstep R s t =\n        (formsubst ((0 |-> s) ((1 |-> t) V))\n                  (?? 2 (?? 3 (?? 4\n                  (V 0 === arith_pair (V 2) (V 3) &&\n                   V 1 === arith_pair (Suc(V 2)) (V 4) &&\n                   R (V 3) (V 2) (V 4))))))
-      #|  (!v x y z. holds v (R x y z) <=>\n              (f (termval v x) (termval v y) = termval v z))\n    ==> !v s t. holds v (arith_primrecstep R s t) <=>\n                ?n r. (termval v s = NPAIR n r) /\\\n                      (termval v t = NPAIR (SUC n) (f r n))
+      #|  (forall v x y z. holds v (R x y z) <=>\n              (f (termval v x) (termval v y) = termval v z))\n    ==> forall v s t. holds v (arith_primrecstep R s t) <=>\n                ?n r. (termval v s = NPAIR n r) /\\\n                      (termval v t = NPAIR (SUC n) (f r n))
       #|  ~a ==> (a \\/ b <=> b)
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-      #|  !R. (!s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n       ==> !s t. FV(arith_primrecstep R s t) = FVT(s) UNION FVT(t)
+      #|  forall R. (forall s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n       ==> forall s t. FV(arith_primrecstep R s t) = FVT(s) UNION FVT(t)
       #|  arith_primrec R c s t =\n        arith_rtc (arith_primrecstep R)\n            (arith_pair Z c) (arith_pair s t)
-      #|  !fn e f R c.\n        (fn 0 = e) /\\ (!n. fn (SUC n) = f (fn n) n) /\\\n        (!v. termval v c = e) /\\\n                  (!v x y z. holds v (R x y z) <=>\n                             (f (termval v x) (termval v y) = termval v z))\n                  ==> !v s t. holds v (arith_primrec R c s t) <=>\n                               (fn(termval v s) = termval v t)
-      #|  !R c. (FVT c = {}) /\\\n         (!s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n         ==> !s t. FV(arith_primrec R c s t) = FVT(s) UNION FVT(t)
+      #|  forall fn e f R c.\n        (fn 0 = e) /\\ (forall n. fn (SUC n) = f (fn n) n) /\\\n        (forall v. termval v c = e) /\\\n                  (forall v x y z. holds v (R x y z) <=>\n                             (f (termval v x) (termval v y) = termval v z))\n                  ==> forall v s t. holds v (arith_primrec R c s t) <=>\n                               (fn(termval v s) = termval v t)
+      #|  forall R c. (FVT c = {}) /\\\n         (forall s t u. FV(R s t u) SUBSET (FVT(s) UNION FVT(t) UNION FVT(u)))\n         ==> forall s t. FV(arith_primrec R c s t) = FVT(s) UNION FVT(t)
       #|NPAIR =  |- (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\x:num. ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|NPAIR_NONZERO =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
       #|NPAIR_INJ_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) x1:num) y1:num)) ((#+:fun(num,fun(num,num)) x2:num) y2:num))) ((#<:fun(num,fun(num,bool)) ((#NPAIR:fun(num,fun(num,num)) x1:num) y1:num)) ((#NPAIR:fun(num,fun(num,num)) x2:num) y2:num)))

@@ -88401,7 +88401,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  bernoulli 4 (&0)
       #|  frac x
       #|  5
-      #|  !x. x IN real_interval[&m,&n]\n          ==> abs(bernoulli 5 (frac x) / x pow 6) <= inv(&12 * x pow 6)
+      #|  forall x. x IN real_interval[&m,&n]\n          ==> abs(bernoulli 5 (frac x) / x pow 6) <= inv(&12 * x pow 6)
       #|  inv(-- &60) * x - inv(-- &60) * y = (y - x) / &60
       #|  ~(x = &0)
       #|  &n
@@ -88431,18 +88431,18 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  m - 1
       #|  1:num
       #|  \\k. inv(&k)
-      #|  !m n. 1 <= m /\\ m <= n\n           ==> abs((sum (1..n) (\\k. inv(&k)) - log(&n)) -\n                   ((sum (1..m - 1) (\\k. inv(&k)) - log(&m)) +\n                    (inv(&m) + inv(&n)) / &2 +\n                    &1 / &12 * (inv(&m pow 2) - inv(&n pow 2)) +\n                    -- &1 / &120 * (inv(&m pow 4) - inv(&n pow 4))))\n                <= inv(&60 * &m pow 5)
+      #|  forall m n. 1 <= m /\\ m <= n\n           ==> abs((sum (1..n) (\\k. inv(&k)) - log(&n)) -\n                   ((sum (1..m - 1) (\\k. inv(&k)) - log(&m)) +\n                    (inv(&m) + inv(&n)) / &2 +\n                    &1 / &12 * (inv(&m pow 2) - inv(&n pow 2)) +\n                    -- &1 / &120 * (inv(&m pow 4) - inv(&n pow 4))))\n                <= inv(&60 * &m pow 5)
       #|  (\\n. f n - g n):num->real
       #|  sequentially
       #|  sequentially
       #|  abs(l - m) <= d ==> abs (m - k) <= e - d ==> abs (l - k) <= e
-      #|  !f g l m d e k.\n          (f ---> l) sequentially\n          ==> (g ---> m) sequentially /\\\n              eventually (\\n. abs(f n - g n) <= d) sequentially /\\\n              abs(m - k) <= e - d\n              ==> abs(l - k) <= e
+      #|  forall f g l m d e k.\n          (f ---> l) sequentially\n          ==> (g ---> m) sequentially /\\\n              eventually (\\n. abs(f n - g n) <= d) sequentially /\\\n              abs(m - k) <= e - d\n              ==> abs(l - k) <= e
       #|  &0 < &2
       #|  log(&64) = &6 * log(&2)
       #|  64
       #|  (?a. P a a /\\ Q a) ==> ?a. (?b. P a b) /\\ Q a
       #|  x / &2 = inv(&2) * x
-      #|  (!n. P n) /\\ (?n. Q n) ==> (?n. P n /\\ Q n)
+      #|  (forall n. P n) /\\ (?n. Q n) ==> (?n. P n /\\ Q n)
       #|  \\m. inv (&60 * &m pow 5)
       #|  \\m. (sum(1..m - 1) (\\k. inv(&k)) - log(&m)) +\n         inv(&m) / &2 +\n         &1 / &12 * inv(&m pow 2) +\n         -- &1 / &120 * inv(&m pow 4)
       #|  \\m n. (sum(1..m - 1) (\\k. inv(&k)) - log(&m)) +\n           (inv(&m) + inv(&n)) / &2 +\n           &1 / &12 * (inv(&m pow 2) - inv(&n pow 2)) +\n           -- &1 / &120 * (inv(&m pow 4) - inv(&n pow 4))
@@ -88479,14 +88479,14 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z:complex
       #|  \\z. (ll:complex->complex->complex) z z - clog z
       #|  z + x = Cx(&0) <=> z = --x
-      #|  !n. ~(z + Cx(&n) = Cx(&0))
+      #|  forall n. ~(z + Cx(&n) = Cx(&0))
       #|  z:complex
       #|  w - z - v:complex = (w - v) - z
       #|  (ll:complex->complex->complex) z z - clog z
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  z:complex
       #|  z:complex
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. z * clog(Cx(&n)) -\n                  vsum (1..n) (\\m. clog((Cx(&m) + z) / Cx(&m)))) --> ll z z)\n            sequentially
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. z * clog(Cx(&n)) -\n                  vsum (1..n) (\\m. clog((Cx(&m) + z) / Cx(&m)))) --> ll z z)\n            sequentially
       #|  ll:complex->complex->complex
       #|  dd:complex->real
       #|  inv x = &1 / x
@@ -88517,7 +88517,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  (x + a) - ((x + y) + a):complex = --y
       #|  1 <= m + 1 /\\ m <= n
       #|  (x + &1) - &1 = x
-      #|  !n. 1 <= n\n          ==> z * clog(Cx(&n)) - vsum(1..n) (\\m. clog((Cx(&m) + z) / Cx(&m))) =\n              vsum(1..n) (\\m. z * (clog(Cx(&(m + 1) - &1)) -\n                                   clog(Cx(&m - &1))) -\n                              clog((Cx(&m) + z) / Cx(&m))) +\n              z * clog(Cx(&0))
+      #|  forall n. 1 <= n\n          ==> z * clog(Cx(&n)) - vsum(1..n) (\\m. clog((Cx(&m) + z) / Cx(&m))) =\n              vsum(1..n) (\\m. z * (clog(Cx(&(m + 1) - &1)) -\n                                   clog(Cx(&m - &1))) -\n                              clog((Cx(&m) + z) / Cx(&m))) +\n              z * clog(Cx(&0))
       #|  MAX 1 (m + 1) = m + 1
       #|  n:num
       #|  m + 1
@@ -88534,13 +88534,13 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  e:real
       #|  d:real
       #|  y:complex
-      #|  !y.  (!n. ~(y + Cx(&n) = Cx(&0)))\n         ==> ?d l. &0 < d /\\\n                   !e. &0 < e\n                       ==> ?N. !n z. N <= n /\\ z IN cball(y,d)\n                                   ==> dist(z * clog(Cx(&n)) -\n                                            vsum(1..n)\n                                             (\\m. clog((Cx(&m) + z) / Cx(&m))),\n                                            l z) < e
+      #|  forall y.  (forall n. ~(y + Cx(&n) = Cx(&0)))\n         ==> ?d l. &0 < d /\\\n                   forall e. &0 < e\n                       ==> ?N. forall n z. N <= n /\\ z IN cball(y,d)\n                                   ==> dist(z * clog(Cx(&n)) -\n                                            vsum(1..n)\n                                             (\\m. clog((Cx(&m) + z) / Cx(&m))),\n                                            l z) < e
       #|  --x - --y:complex = y - x
       #|  x + y = Cx(&0) <=> x = --y
       #|  &1
-      #|  {z | !n. P n z} = UNIV DIFF {z | ?n. ~P n z}
-      #|  open {z | !n. ~(z + Cx(&n) = Cx(&0))}
-      #|  (!z. (!n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. z * clog(Cx(&n)) - clog z -\n                  vsum(1..n) (\\m. clog((Cx(&m) + z) / Cx(&m))))\n             --> lgamma(z)) sequentially) /\\\n   (!z. (Im z = &0 ==> &0 < Re z) ==> lgamma complex_differentiable at z)
+      #|  {z | forall n. P n z} = UNIV DIFF {z | ?n. ~P n z}
+      #|  open {z | forall n. ~(z + Cx(&n) = Cx(&0))}
+      #|  (forall z. (forall n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. z * clog(Cx(&n)) - clog z -\n                  vsum(1..n) (\\m. clog((Cx(&m) + z) / Cx(&m))))\n             --> lgamma(z)) sequentially) /\\\n   (forall z. (Im z = &0 ==> &0 < Re z) ==> lgamma complex_differentiable at z)
       #|  :real
       #|  :real
       #|  :real
@@ -88562,7 +88562,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  a:complex = d - c ==> x - y - a = (x + c) - (y + d)
       #|  n:num
       #|  1
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. (z * clog(Cx(&n)) + clog(Cx(&(FACT n)))) -\n                  vsum(0..n) (\\m. clog(Cx(&m) + z)))\n             --> lgamma(z)) sequentially
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. (z * clog(Cx(&n)) + clog(Cx(&(FACT n)))) -\n                  vsum(0..n) (\\m. clog(Cx(&m) + z)))\n             --> lgamma(z)) sequentially
       #|  \\n. n + 1
       #|  f:num->complex
       #|  sequentially
@@ -88578,7 +88578,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  1 + m = m + 1
       #|  &0 < &1 + &m
       #|  ~(m = Cx(&0)) ==> Cx(&1) + z / m = (z + m) / m
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. vsum(1..n) (\\m. z * clog(Cx(&1) + Cx(&1) / Cx(&m)) -\n                                  clog(Cx(&1) + z / Cx(&m))) -\n                  clog(z))\n             --> lgamma(z)) sequentially
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0)))\n        ==> ((\\n. vsum(1..n) (\\m. z * clog(Cx(&1) + Cx(&1) / Cx(&m)) -\n                                  clog(Cx(&1) + z / Cx(&m))) -\n                  clog(z))\n             --> lgamma(z)) sequentially
       #|  cgamma(z) = lim sequentially (\\n. (Cx(&n) cpow z * Cx(&(FACT n))) /\n                                    cproduct(0..n) (\\m. z + Cx(&m)))
       #|  sequentially
       #|  q /\\ (q ==> p) ==> p /\\ q
@@ -88596,7 +88596,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  N:num
       #|  ?n. y + Cx(&n) = Cx(&0)
       #|  y:complex
-      #|  (!z. ((\\n. (Cx(&n) cpow z * Cx(&(FACT n))) / cproduct(0..n) (\\m. z + Cx(&m)))\n         --> cgamma(z)) sequentially) /\\\n   (!z. cgamma(z) = Cx(&0) <=> ?n. z + Cx(&n) = Cx(&0)) /\\\n   (!z. cgamma(z) = if ?n. z + Cx(&n) = Cx(&0) then Cx(&0)\n                    else cexp(lgamma z))
+      #|  (forall z. ((\\n. (Cx(&n) cpow z * Cx(&(FACT n))) / cproduct(0..n) (\\m. z + Cx(&m)))\n         --> cgamma(z)) sequentially) /\\\n   (forall z. cgamma(z) = Cx(&0) <=> ?n. z + Cx(&n) = Cx(&0)) /\\\n   (forall z. cgamma(z) = if ?n. z + Cx(&n) = Cx(&0) then Cx(&0)\n                    else cexp(lgamma z))
       #|  &1 / &2 <= &1 - x <=> x <= inv(&2)
       #|  Cx(inv(&n))
       #|  0
@@ -88620,10 +88620,10 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  sequentially
       #|  (a * b) / c = Cx(&1) /\\ ~(a = Cx(&0)) /\\ ~(c = Cx(&0)) ==> b = c / a
       #|  ~(z = Cx(&0))
-      #|  !n. ~((z + Cx(&1)) + Cx(&n) = Cx(&0))
+      #|  forall n. ~((z + Cx(&1)) + Cx(&n) = Cx(&0))
       #|  z = Cx(&0)
       #|  ?n.  z + Cx(&n) = Cx(&0)
-      #|  !z. cgamma(z) = cgamma(z + Cx(&1)) / z
+      #|  forall z. cgamma(z) = cgamma(z + Cx(&1)) / z
       #|  1
       #|  l:complex
       #|  f:num->complex
@@ -88644,12 +88644,12 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  Cx(&1)
       #|  cgamma(Cx(&1)) = Cx(&1)
       #|  a = b / c /\\ ~(c = Cx(&0)) ==> b = c * a
-      #|  !z. cgamma(z + Cx(&1)) = if z = Cx(&0) then Cx(&1) else z * cgamma(z)
-      #|  !n. cgamma(Cx(&(n + 1))) = Cx(&(FACT n))
-      #|  !n. cgamma(--(Cx(&n))) = Cx(&0)
+      #|  forall z. cgamma(z + Cx(&1)) = if z = Cx(&0) then Cx(&1) else z * cgamma(z)
+      #|  forall n. cgamma(Cx(&(n + 1))) = Cx(&(FACT n))
+      #|  forall n. cgamma(--(Cx(&n))) = Cx(&0)
       #|  &1
       #|  \\z. cgamma(z + Cx(&1)) / z
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0))) /\\\n         cgamma complex_differentiable at (z + Cx(&1))\n         ==> cgamma complex_differentiable at z
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0))) /\\\n         cgamma complex_differentiable at (z + Cx(&1))\n         ==> cgamma complex_differentiable at z
       #|  n + 1 <= N + m
       #|  (N + m) - (n + 1)
       #|  m:num
@@ -88665,18 +88665,18 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  --x - --y:complex = y - x
       #|  x + y = Cx(&0) <=> x = --y
       #|  &1
-      #|  {z | !n. P n z} = UNIV DIFF {z | ?n. ~P n z}
-      #|  open {z | !n. ~(z + Cx(&n) = Cx(&0))}
+      #|  {z | forall n. P n z} = UNIV DIFF {z | ?n. ~P n z}
+      #|  open {z | forall n. ~(z + Cx(&n) = Cx(&0))}
       #|  \\z. cexp(lgamma z)
-      #|  !n. n <= N ==> cgamma complex_differentiable (at (z + Cx(&N) - Cx(&n)))
+      #|  forall n. n <= N ==> cgamma complex_differentiable (at (z + Cx(&N) - Cx(&n)))
       #|  N:num
       #|  abs(Re z) + &1
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0))) ==> cgamma complex_differentiable at z
-      #|  !z s. (!n. ~(z + Cx(&n) = Cx(&0)))\n         ==> cgamma complex_differentiable at z within s
-      #|  !s. s SUBSET {z | !n. ~(z + Cx(&n) = Cx(&0))}\n       ==> cgamma holomorphic_on s
-      #|  !z. (!n. ~(z + Cx(&n) = Cx(&0))) ==> cgamma continuous at z
-      #|  !z s. (!n. ~(z + Cx(&n) = Cx(&0)))\n         ==> cgamma continuous at z within s
-      #|  !s. s SUBSET {z | !n. ~(z + Cx(&n) = Cx(&0))}\n       ==> cgamma continuous_on s
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0))) ==> cgamma complex_differentiable at z
+      #|  forall z s. (forall n. ~(z + Cx(&n) = Cx(&0)))\n         ==> cgamma complex_differentiable at z within s
+      #|  forall s. s SUBSET {z | forall n. ~(z + Cx(&n) = Cx(&0))}\n       ==> cgamma holomorphic_on s
+      #|  forall z. (forall n. ~(z + Cx(&n) = Cx(&0))) ==> cgamma continuous at z
+      #|  forall z s. (forall n. ~(z + Cx(&n) = Cx(&0)))\n         ==> cgamma continuous at z within s
+      #|  forall s. s SUBSET {z | forall n. ~(z + Cx(&n) = Cx(&0))}\n       ==> cgamma continuous_on s
       #|  &1
       #|  (z + Cx(&1)) + w = z + (w + Cx(&1))
       #|  \\z.  z + Cx(&1)
@@ -88685,27 +88685,27 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  (\\z. cgamma (z + Cx(&1))) continuous at (Cx(&0))
       #|  Cx(&1)
       #|  \\z. cgamma(z + Cx(&1))
-      #|  !n. ((\\z. (z + Cx(&n)) * cgamma z) --> --Cx(&1) pow n / Cx(&(FACT n)))\n       (at(--Cx(&n)))
+      #|  forall n. ((\\z. (z + Cx(&n)) * cgamma z) --> --Cx(&1) pow n / Cx(&(FACT n)))\n       (at(--Cx(&n)))
       #|  n:num
       #|  1
       #|  z:complex
       #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
       #|  cnj z
-      #|  !z. cnj(cgamma z) = cgamma(cnj z)
-      #|  !z. real z ==> real(cgamma z)
+      #|  forall z. cnj(cgamma z) = cgamma(cnj z)
+      #|  forall z. real z ==> real(cgamma z)
       #|  n:num
       #|  1
       #|  p /\\ q /\\ r ==> s <=> p /\\ r ==> q ==> s
       #|  Cx x
       #|  x:real
-      #|  !z. real z /\\ &0 <= Re z ==> &0 <= Re(cgamma z)
+      #|  forall z. real z /\\ &0 <= Re z ==> &0 <= Re(cgamma z)
       #|  n:num
       #|  n:num
       #|  &2 * (&1 / &2 + n) = &2 * n + &1
       #|  z + n = Cx(&0) <=> Cx(&2) * z + Cx(&2) * n = Cx(&0)
       #|  z = Cx(&0) /\\ ((w = Cx(&0)) \\/ (y = Cx(&0)))\n      ==> w * y = p * q * z
       #|  ~(p = Cx(&0)) /\\ ~(z2 = Cx(&0))\n      ==> a = (z * z') / (p * z2) ==> z * z' = p * a * z2
-      #|  !n. ~(Cx(&2) * z + Cx(&n) = Cx(&0))
+      #|  forall n. ~(Cx(&2) * z + Cx(&n) = Cx(&0))
       #|  z:complex
       #|  x * a * b * c * d * e * f:complex = (c * e) * a * b * d * f * x
       #|  (z + m) * ((z + Cx(&1 / &2)) + m) =\n      inv(Cx(&4)) *\n      (Cx(&2) * z + Cx(&2) * m) * (Cx(&2) * z + Cx(&2) * m + Cx(&1))
@@ -88722,12 +88722,12 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\n. 2 * n
       #|  Cx(&2) * z
       #|  \\n. (Cx(&n) cpow Cx(&1 / &2) * inv (Cx(&2))) *\n          (Cx(&(FACT n)) pow 2 * inv (Cx(&(FACT (2 * n))))) *\n          Cx(&4) pow (n + 1) *\n          inv(Cx(&(2 * n + 1)))
-      #|  ?f. !z. (!n. ~(Cx(&2) * z + Cx(&n) = Cx(&0)))\n            ==> (f --> (cgamma(z) * cgamma(z + Cx(&1 / &2))) /\n                     (Cx(&2) cpow (Cx(&1) - Cx(&2) * z) * cgamma(Cx(&2) * z)))\n                sequentially
-      #|  !z. cgamma(z) * cgamma(z + Cx(&1) / Cx(&2)) =\n       Cx(&2) cpow (Cx(&1) - Cx(&2) * z) *\n       cgamma(Cx(&1) / Cx(&2)) * cgamma(Cx(&2) * z)
+      #|  ?f. forall z. (forall n. ~(Cx(&2) * z + Cx(&n) = Cx(&0)))\n            ==> (f --> (cgamma(z) * cgamma(z + Cx(&1 / &2))) /\n                     (Cx(&2) cpow (Cx(&1) - Cx(&2) * z) * cgamma(Cx(&2) * z)))\n                sequentially
+      #|  forall z. cgamma(z) * cgamma(z + Cx(&1) / Cx(&2)) =\n       Cx(&2) cpow (Cx(&1) - Cx(&2) * z) *\n       cgamma(Cx(&1) / Cx(&2)) * cgamma(Cx(&2) * z)
       #|  Cx(&1 / &2)
       #|  Cx(&1 / &2)
       #|  z:complex
-      #|  !w z. (?n. integer n /\\ w = Cx n) /\\ (?n. integer n /\\ z = Cx n) /\\\n           dist(w,z) < &1\n           ==> w = z
+      #|  forall w z. (?n. integer n /\\ w = Cx n) /\\ (?n. integer n /\\ z = Cx n) /\\\n           dist(w,z) < &1\n           ==> w = z
       #|  real y /\\ ~real x ==> ~(x = y)
       #|  abs
       #|  m:real
@@ -88747,11 +88747,11 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z:complex
       #|  a:complex
       #|  n = &0
-      #|  !z:complex. cexp(h z) = g z
+      #|  forall z:complex. cexp(h z) = g z
       #|  n:real
       #|  a * b = b <=> a = Cx(&1) \\/ b = Cx(&0)
-      #|  !x. (h:complex->complex) x = a * x + b
-      #|  !z:complex. cexp (h z) = g z
+      #|  forall x. (h:complex->complex) x = a * x + b
+      #|  forall z:complex. cexp (h z) = g z
       #|  Cx(&0)
       #|  &1
       #|  b:complex
@@ -88767,7 +88767,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  :real
       #|  :real
       #|  (h'':complex->complex) w
-      #|  !w:complex. norm(w) <= norm(w) / &2 /\\ norm(z) <= norm(w)\n                    ==> z = vec 0
+      #|  forall w:complex. norm(w) <= norm(w) / &2 /\\ norm(z) <= norm(w)\n                    ==> z = vec 0
       #|  :real
       #|  :real
       #|  w:complex
@@ -88775,14 +88775,14 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\z. norm((h'':complex->complex) z)
       #|  Cx(&0)
       #|  cball(Cx(&0),&1)
-      #|  !z. z IN (:complex) ==> h''(z) = Cx(&0)
+      #|  forall z. z IN (:complex) ==> h''(z) = Cx(&0)
       #|  (:complex)
       #|  h'':complex->complex
       #|  h':complex->complex
       #|  z:complex
       #|  \\z. (h'(z / Cx(&2)) + h'((z + Cx(&1)) / Cx(&2))) / Cx(&2)
       #|  z:complex
-      #|  !z. (h''(z / Cx(&2)) + h''((z + Cx(&1)) / Cx(&2))) / Cx(&4) = h''(z)
+      #|  forall z. (h''(z / Cx(&2)) + h''((z + Cx(&1)) / Cx(&2))) / Cx(&4) = h''(z)
       #|  h'':complex->complex
       #|  (:complex)
       #|  h':complex->complex
@@ -88792,16 +88792,16 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z:complex
       #|  \\z. g (z / Cx(&2)) * g ((z + Cx(&1)) / Cx(&2)):complex
       #|  g(z / Cx(&2)) * g((z + Cx(&1)) / Cx(&2))
-      #|  !a. ~(a = Cx(&0)) /\\ a * x = a * y ==> x = y
+      #|  forall a. ~(a = Cx(&0)) /\\ a * x = a * y ==> x = y
       #|  z:complex
-      #|  !z. (h'(z / Cx(&2)) + h'((z + Cx(&1)) / Cx(&2))) / Cx(&2) = h'(z)
+      #|  forall z. (h'(z / Cx(&2)) + h'((z + Cx(&1)) / Cx(&2))) / Cx(&2) = h'(z)
       #|  h':complex->complex
       #|  (:complex)
       #|  h:complex->complex
       #|  z + a =  Cx(&0) <=> z = --a
       #|  a - z + b = Cx(&0) <=> z = a + b
       #|  z:complex
-      #|  ?h. h holomorphic_on (:complex) /\\\n        !z. z IN (:complex) ==> g z = cexp(h z)
+      #|  ?h. h holomorphic_on (:complex) /\\\n        forall z. z IN (:complex) ==> g z = cexp(h z)
       #|  &1 / &2 * x = x / &2
       #|  complex_mul
       #|  ==>
@@ -88817,9 +88817,9 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z:complex
       #|  &1
       #|  s = {} ==> t DIFF s = t
-      #|  closure {z | !n. ~(integer n /\\ z = Cx n)}
-      #|  !s. s = UNIV /\\ (!x. x IN s ==> P x) ==> !x. P x
-      #|  !z. g(z / Cx(&2)) * g((z + Cx(&1)) / Cx(&2)) =\n        cgamma(Cx(&1 / &2)) pow 2 * g(z)
+      #|  closure {z | forall n. ~(integer n /\\ z = Cx n)}
+      #|  forall s. s = UNIV /\\ (forall x. x IN s ==> P x) ==> forall x. P x
+      #|  forall z. g(z / Cx(&2)) * g((z + Cx(&1)) / Cx(&2)) =\n        cgamma(Cx(&1 / &2)) pow 2 * g(z)
       #|  (z - w) + w:complex = z
       #|  &1
       #|  (g:complex->complex) o (\\z. z - Cx n)
@@ -88854,19 +88854,19 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  &1
       #|  closed {z | ?n. integer n /\\ z = Cx n}
       #|  \\z. cgamma z * cgamma(Cx(&1) - z) * csin(Cx pi * z)
-      #|  !z. ~(?n. integer n /\\ z = Cx n)\n                    ==> g complex_differentiable (at z)
+      #|  forall z. ~(?n. integer n /\\ z = Cx n)\n                    ==> g complex_differentiable (at z)
       #|  (z - w) + w:complex = z
       #|  abs x = a ==> x = a \\/ x = --a
-      #|  !n z. g(z + Cx(&n)):complex = g z
-      #|  !n z. integer n ==> g(z + Cx n):complex = g z
+      #|  forall n z. g(z + Cx(&n)):complex = g z
+      #|  forall n z. integer n ==> g(z + Cx n):complex = g z
       #|  --z + Cx(&1) = Cx(&1) - z
       #|  a - (z + a):complex = --z
       #|  (n + &1) - &1 = n
       #|  z + Cx(&1) = w <=> z = w - Cx(&1)
       #|  (p <=> p') /\\ a = a' /\\ b = b'\n                    ==> (if p then a else b) = (if p' then a' else b')
-      #|  !z. g(z + Cx(&1)):complex = g(z)
+      #|  forall z. g(z + Cx(&1)):complex = g(z)
       #|  g = \\z. if ?n. integer n /\\ z = Cx n then Cx pi\n            else cgamma(z) * cgamma(Cx(&1) - z) * csin(Cx pi * z)
-      #|  !z. cgamma(z) * cgamma(Cx(&1) - z) = Cx pi / csin(Cx pi * z)
+      #|  forall z. cgamma(z) * cgamma(Cx(&1) - z) = Cx pi / csin(Cx pi * z)
       #|  (f has_complex_derivative f') net\n    ==> f' = g'\n        ==> (f has_complex_derivative g') net
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net\n    ==> f' = g'\n        ==> (f has_complex_derivative g') net
@@ -88892,7 +88892,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  Cx(&1) - Cx(&1) / Cx(&2) = Cx(&1) / Cx(&2)
       #|  Cx(&1) / Cx(&2)
       #|  cgamma(Cx(&1) / Cx(&2)) = Cx(sqrt pi)
-      #|  !z. cgamma(z) * cgamma(z + Cx(&1) / Cx(&2)) =\n       Cx(&2) cpow (Cx(&1) - Cx(&2) * z) * Cx(sqrt pi) * cgamma(Cx(&2) * z)
+      #|  forall z. cgamma(z) * cgamma(z + Cx(&1) / Cx(&2)) =\n       Cx(&2) cpow (Cx(&1) - Cx(&2) * z) * Cx(sqrt pi) * cgamma(Cx(&2) * z)
       #|  ~(p = Cx(&0)) ==> p * (Cx(&1) + z * inv p) = z + p
       #|  d * e:complex = c ==> (a * b) * c = (d * a) * b * e
       #|  1 <= SUC n
@@ -88908,21 +88908,21 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  c * c' = Cx(&1) ==> (a * b * c) * (c' * d) * e = ((a * d) * b * e)
       #|  1
       #|  \\n. (cexp(--Cx euler_mascheroni * z) *\n                   cproduct(1..n) (\\k. cexp(z * inv(Cx(&k)))) *\n                   cexp(--Cx(log(&n)) * z)) *\n                  (Cx(&n) cpow z / z *\n                   cproduct (1..n) (\\k. inv(Cx(&1) + z * inv(Cx(&k)))))
-      #|  !z. ((\\n. cexp(--(Cx euler_mascheroni) * z) / z *\n             cproduct(1..n) (\\k. cexp(z / Cx(&k)) / (Cx(&1) + z / Cx(&k))))\n       --> cgamma z) sequentially
+      #|  forall z. ((\\n. cexp(--(Cx euler_mascheroni) * z) / z *\n             cproduct(1..n) (\\k. cexp(z / Cx(&k)) / (Cx(&1) + z / Cx(&k))))\n       --> cgamma z) sequentially
       #|  inv(--Cx(&1) pow n / Cx(&(FACT n)))
       #|  x - --z:complex = x + z
       #|  n:num
       #|  z + w = Cx(&0) <=> z = --w
-      #|  !n. ~(z + Cx(&n) = Cx(&0))
-      #|  !z. (inv o cgamma) complex_differentiable (at z)
-      #|  !z s. (inv o cgamma) complex_differentiable at z within s
-      #|  !s. (inv o cgamma) holomorphic_on s
-      #|  !z. (inv o cgamma) continuous at z
-      #|  !z s. (inv o cgamma) continuous at z within s
-      #|  !s. (inv o cgamma) continuous_on s
+      #|  forall n. ~(z + Cx(&n) = Cx(&0))
+      #|  forall z. (inv o cgamma) complex_differentiable (at z)
+      #|  forall z s. (inv o cgamma) complex_differentiable at z within s
+      #|  forall s. (inv o cgamma) holomorphic_on s
+      #|  forall z. (inv o cgamma) continuous at z
+      #|  forall z s. (inv o cgamma) continuous at z within s
+      #|  forall s. (inv o cgamma) continuous_on s
       #|  cgamma z = Cx(&0)
-      #|  !n. ~(z + Cx(&n) = Cx(&0))
-      #|  !z. ((\\n. cproduct(0..n) (\\m. z + Cx(&m)) /\n            (Cx(&n) cpow z * Cx(&(FACT n)))) --> inv(cgamma z))\n       sequentially
+      #|  forall n. ~(z + Cx(&n) = Cx(&0))
+      #|  forall z. ((\\n. cproduct(0..n) (\\m. z + Cx(&m)) /\n            (Cx(&n) cpow z * Cx(&(FACT n)))) --> inv(cgamma z))\n       sequentially
       #|  inv z * a * b:complex = a / z * b
       #|  x + n = Cx(&0) /\\ ~(n = Cx(&0)) ==> Cx(&1) + x / n = Cx(&0)
       #|  N:num
@@ -88932,48 +88932,48 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  N:num
       #|  N:num
       #|  ?n. z + Cx(&n) = Cx(&0)
-      #|  !n. ((\\n. (z * cexp(Cx euler_mascheroni * z) *\n             cproduct(1..n) (\\k. (Cx(&1) + z / Cx(&k)) / cexp(z / Cx(&k)))))\n        --> inv(cgamma z)) sequentially
+      #|  forall n. ((\\n. (z * cexp(Cx euler_mascheroni * z) *\n             cproduct(1..n) (\\k. (Cx(&1) + z / Cx(&k)) / cexp(z / Cx(&k)))))\n        --> inv(cgamma z)) sequentially
       #|  gamma(x) = Re(cgamma(Cx x))
-      #|  !x. Cx(gamma x) = cgamma(Cx x)
+      #|  forall x. Cx(gamma x) = cgamma(Cx x)
       #|  1
       #|  Cx x
       #|  x:real
-      #|  !x. ((\\n. (&n rpow x * &(FACT n)) / product(0..n) (\\m. x + &m))\n        ---> gamma(x)) sequentially
-      #|  !x. gamma(x) = &0 <=> ?n. x + &n = &0
-      #|  !x. (!n. ~(x + &n = &0)) ==> gamma real_differentiable atreal x
-      #|  !x s. (!n. ~(x + &n = &0)) ==> gamma real_differentiable atreal x within s
-      #|  !s. s SUBSET {x | !n. ~(x + &n = &0)} ==> gamma real_differentiable_on s
-      #|  !x. (!n. ~(x + &n = &0)) ==> gamma real_continuous atreal x
-      #|  !x s. (!n. ~(x + &n = &0)) ==> gamma real_continuous atreal x within s
-      #|  !s. s SUBSET {x | !n. ~(x + &n = &0)} ==> gamma real_continuous_on s
+      #|  forall x. ((\\n. (&n rpow x * &(FACT n)) / product(0..n) (\\m. x + &m))\n        ---> gamma(x)) sequentially
+      #|  forall x. gamma(x) = &0 <=> ?n. x + &n = &0
+      #|  forall x. (forall n. ~(x + &n = &0)) ==> gamma real_differentiable atreal x
+      #|  forall x s. (forall n. ~(x + &n = &0)) ==> gamma real_differentiable atreal x within s
+      #|  forall s. s SUBSET {x | forall n. ~(x + &n = &0)} ==> gamma real_differentiable_on s
+      #|  forall x. (forall n. ~(x + &n = &0)) ==> gamma real_continuous atreal x
+      #|  forall x s. (forall n. ~(x + &n = &0)) ==> gamma real_continuous atreal x within s
+      #|  forall s. s SUBSET {x | forall n. ~(x + &n = &0)} ==> gamma real_continuous_on s
       #|  &1
       #|  \\x. Re(inv(cgamma(Cx x)))
-      #|  !x. (inv o gamma) real_differentiable (atreal x)
-      #|  !x s. (inv o gamma) real_differentiable atreal x within s
-      #|  !s. (inv o gamma) real_differentiable_on s
-      #|  !x. (inv o gamma) real_continuous atreal x
-      #|  !x s. (inv o gamma) real_continuous atreal x within s
-      #|  !s. (inv o gamma) real_continuous_on s
-      #|  !x. gamma(x) = gamma(x + &1) / x
+      #|  forall x. (inv o gamma) real_differentiable (atreal x)
+      #|  forall x s. (inv o gamma) real_differentiable atreal x within s
+      #|  forall s. (inv o gamma) real_differentiable_on s
+      #|  forall x. (inv o gamma) real_continuous atreal x
+      #|  forall x s. (inv o gamma) real_continuous atreal x within s
+      #|  forall s. (inv o gamma) real_continuous_on s
+      #|  forall x. gamma(x) = gamma(x + &1) / x
       #|  gamma(&1) = &1
-      #|  !x. gamma(x + &1) = if x = &0 then &1 else x * gamma(x)
-      #|  !n. gamma(&(n + 1)) = &(FACT n)
-      #|  !n. gamma(--(&n)) = &0
+      #|  forall x. gamma(x + &1) = if x = &0 then &1 else x * gamma(x)
+      #|  forall n. gamma(&(n + 1)) = &(FACT n)
+      #|  forall n. gamma(--(&n)) = &0
       #|  --Cx(&n)
       #|  (:complex)
       #|  (\\z. (Cx(Re z) + Cx(&n)) * cgamma(Cx(Re z))) =\n    (\\z. (z + Cx(&n)) * cgamma z) o (Cx o Re)
-      #|  !n. ((\\x. (x + &n) * gamma x) ---> -- &1 pow n / &(FACT n))\n       (atreal(-- &n))
-      #|  !x. &0 <= x ==> &0 <= gamma x
+      #|  forall n. ((\\x. (x + &n) * gamma x) ---> -- &1 pow n / &(FACT n))\n       (atreal(-- &n))
+      #|  forall x. &0 <= x ==> &0 <= gamma x
       #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  !x. &0 < x ==> &0 < gamma x
-      #|  !x. gamma(x) * gamma(x + &1 / &2) =\n       &2 rpow (&1 - &2 * x) *  gamma(&1 / &2) * gamma(&2 * x)
-      #|  !x. gamma(x) * gamma(&1 - x) = pi / sin(pi * x)
+      #|  forall x. &0 < x ==> &0 < gamma x
+      #|  forall x. gamma(x) * gamma(x + &1 / &2) =\n       &2 rpow (&1 - &2 * x) *  gamma(&1 / &2) * gamma(&2 * x)
+      #|  forall x. gamma(x) * gamma(&1 - x) = pi / sin(pi * x)
       #|  gamma(&1 / &2) = sqrt pi
-      #|  !x. gamma(x) * gamma(x + &1 / &2) =\n       &2 rpow (&1 - &2 * x) * sqrt pi * gamma(&2 * x)
+      #|  forall x. gamma(x) * gamma(x + &1 / &2) =\n       &2 rpow (&1 - &2 * x) * sqrt pi * gamma(&2 * x)
       #|  1
       #|  Cx x
       #|  x:real
-      #|  !x. ((\\n. exp(--(euler_mascheroni) * x) / x *\n             product(1..n) (\\k. exp(x / &k) / (&1 + x / &k)))\n       ---> gamma x) sequentially
+      #|  forall x. ((\\n. exp(--(euler_mascheroni) * x) / x *\n             product(1..n) (\\k. exp(x / &k) / (&1 + x / &k)))\n       ---> gamma x) sequentially
       #|  (x + &k) * (y + &k) <= ((x + y) / &2 + &k) pow 2 <=>\n      &0 <= (x - y) pow 2
       #|  k:num
       #|  n:num
@@ -88981,7 +88981,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\n x. (&n rpow x * &(FACT n)) / product(0..n) (\\m. x + &m)
       #|  sequentially
       #|  {x | &0 < x}
-      #|  !s. (!x. x IN s ==> &0 < x) ==> gamma real_log_convex_on s
+      #|  forall s. (forall x. x IN s ==> &0 < x) ==> gamma real_log_convex_on s
       #|  &0 < &n
       #|  2 <= n ==> SUC(n - 1) = n
       #|  FACT n = FACT(SUC(n - 1))
@@ -89001,19 +89001,19 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  (n + &1) + x = (n + x) + &1
       #|  (&0 + &1) + x = x + &1
       #|  n = 0
-      #|  !n. 0 < n ==> f(&n + x) = product(0..n-1) (\\k. x + &k) * f(x)
+      #|  forall n. 0 < n ==> f(&n + x) = product(0..n-1) (\\k. x + &k) * f(x)
       #|  &2 <= &n /\\ &0 < x ==> &0 < &n + x
       #|  ~(n = 0) ==> SUC(n - 1) = n
       #|  ~(n = 0) ==> SUC n - 1 = SUC(n - 1)
       #|  n = 0
-      #|  !n. 0 < n ==> f(&n) = &(FACT(n - 1))
+      #|  forall n. 0 < n ==> f(&n) = &(FACT(n - 1))
       #|  2 <= n ==> 1 <= n
       #|  &0 < x /\\ &2 <= y ==> x / (x / (y - &1)) = y - &1
       #|  &2 <= x ==> &0 < x
       #|  &2 <= n
       #|  &2 <= n ==> &0 < n - &1
       #|  (f:real->real) n = f((n - &1) + &1)
-      #|  !n. &2 <= n ==> f(n - &1) = f(n) / (n - &1)
+      #|  forall n. &2 <= n ==> f(n - &1) = f(n) / (n - &1)
       #|  &0 < x ==> (n * x) / x = n
       #|  &2 <= x ==> &0 < x /\\ &0 < x + &1 /\\ &0 < x - &1
       #|  &0 < x ==> abs((n + x) - n) = x
@@ -89034,7 +89034,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  log o f:real->real
       #|  {x | &0 < x}
       #|  f:real->real
-      #|  !n. &2 <= &n\n        ==> log(f(&n)) - log(f(&n - &1))\n              <= (log(f(&n + x)) - log(f(&n))) / x /\\\n            (log(f(&n + x)) - log(f(&n))) / x\n              <= log(f(&n + &1)) - log(f(&n))
+      #|  forall n. &2 <= &n\n        ==> log(f(&n)) - log(f(&n - &1))\n              <= (log(f(&n + x)) - log(f(&n))) / x /\\\n            (log(f(&n + x)) - log(f(&n))) / x\n              <= log(f(&n + &1)) - log(f(&n))
       #|  2
       #|  \\n. x * inv(&n)
       #|  \\n. f(x) / ((&n rpow x * &(FACT n)) / product (0..n) (\\m. x + &m))
@@ -89052,9 +89052,9 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  x:real
       #|  x:real
       #|  (n + &1) + x = (n + x) + &1
-      #|  !y. &0 < y /\\ y <= &1 ==> !n. f(&n + y) = gamma(&n + y)
-      #|  !x. &0 < x /\\ x <= &1 ==> f x = gamma x
-      #|  !f:real->real.\n        f(&1) = &1 /\\ (!x. &0 < x ==> f(x + &1) = x * f(x)) /\\\n        (!x. &0 < x ==> &0 < f x) /\\ f real_log_convex_on {x | &0 < x}\n        ==> !x. &0 < x ==> f x = gamma x
+      #|  forall y. &0 < y /\\ y <= &1 ==> forall n. f(&n + y) = gamma(&n + y)
+      #|  forall x. &0 < x /\\ x <= &1 ==> f x = gamma x
+      #|  forall f:real->real.\n        f(&1) = &1 /\\ (forall x. &0 < x ==> f(x + &1) = x * f(x)) /\\\n        (forall x. &0 < x ==> &0 < f x) /\\ f real_log_convex_on {x | &0 < x}\n        ==> forall x. &0 < x ==> f x = gamma x
       #|  2 <= n ==> 0 < n /\\ 0 < n - 1
       #|  2 <= n ==> 0 < n
       #|  (\\a. Cx(drop a) cpow z) = (\\w. w cpow z) o Cx o drop
@@ -89070,7 +89070,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\t. Cx(exp(Re z * log(drop t)))
       #|  t:real^1 = vec 0
       #|  t:real^1
-      #|  !z a b. &0 < Re z /\\ &0 <= drop a\n             ==> (\\t. Cx(drop t) cpow z) continuous_on interval [a,b]
+      #|  forall z a b. &0 < Re z /\\ &0 <= drop a\n             ==> (\\t. Cx(drop t) cpow z) continuous_on interval [a,b]
       #|  n + 1 = 1 + n
       #|  1
       #|  m:num
@@ -89099,7 +89099,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\t. Cx(drop t) cpow z / z
       #|  z = Cx(&0)
       #|  z:complex
-      #|  !n z. &0 < Re z\n           ==> ((\\t. Cx(drop t) cpow (z - Cx(&1)) * Cx(&1 - drop t) pow n)\n                has_integral Cx(&(FACT n)) / cproduct (0..n) (\\m. z + Cx(&m)))\n                (interval[vec 0,vec 1])
+      #|  forall n z. &0 < Re z\n           ==> ((\\t. Cx(drop t) cpow (z - Cx(&1)) * Cx(&1 - drop t) pow n)\n                has_integral Cx(&(FACT n)) / cproduct (0..n) (\\m. z + Cx(&m)))\n                (interval[vec 0,vec 1])
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
@@ -89115,8 +89115,8 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  {vec 0:real^1}
       #|  \\t:real^1. Cx(&0)
       #|  n = 0
-      #|  !z n. &0 < Re z\n           ==> ((\\t. if drop t <= &n\n                     then Cx(drop t) cpow (z - Cx(&1)) *\n                          Cx(&1 - drop t / &n) pow n\n                     else Cx(&0))\n                has_integral (Cx(&n) cpow z * Cx(&(FACT n))) /\n                             cproduct (0..n) (\\m. z + Cx(&m)))\n               {t | &0 <= drop t}
-      #|  !z. lift(Re z) = (lift o Re) z
+      #|  forall z n. &0 < Re z\n           ==> ((\\t. if drop t <= &n\n                     then Cx(drop t) cpow (z - Cx(&1)) *\n                          Cx(&1 - drop t / &n) pow n\n                     else Cx(&0))\n                has_integral (Cx(&n) cpow z * Cx(&(FACT n))) /\n                             cproduct (0..n) (\\m. z + Cx(&m)))\n               {t | &0 <= drop t}
+      #|  forall z. lift(Re z) = (lift o Re) z
       #|  f integrable_on s\n     ==> (\\x:real^N. lift(Re(f x))) integrable_on s /\\\n         integral s (\\x. lift(Re(f x))) = lift(Re(integral s f))
       #|  Cx(Re z)
       #|  &1 - t * inv x = &1 + --t / x
@@ -89147,16 +89147,16 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\t. lift(Re(Cx(drop t) cpow (Cx(Re z) - Cx(&1)) / cexp(Cx(drop t))))
       #|  \\t. Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t))
       #|  \\n t. if drop t <= &n\n           then Cx(drop t) cpow (z - Cx(&1)) * Cx(&1 - drop t / &n) pow n\n           else Cx(&0)
-      #|  !z. &0 < Re z\n       ==> ((\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t)))\n            has_integral cgamma(z))\n           {t | &0 <= drop t}
-      #|  !z. &0 < Re z\n       ==> integral {t | &0 <= drop t}\n                    (\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t))) =\n           cgamma(z)
-      #|  !z. &0 < Re z\n       ==> (\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t))) integrable_on\n           {t | &0 <= drop t}
+      #|  forall z. &0 < Re z\n       ==> ((\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t)))\n            has_integral cgamma(z))\n           {t | &0 <= drop t}
+      #|  forall z. &0 < Re z\n       ==> integral {t | &0 <= drop t}\n                    (\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t))) =\n           cgamma(z)
+      #|  forall z. &0 < Re z\n       ==> (\\t.  Cx(drop t) cpow (z - Cx(&1)) / cexp(Cx(drop t))) integrable_on\n           {t | &0 <= drop t}
       #|  {vec 0:real^1}
       #|  IMAGE lift {t | &0 <= t} = {t | &0 <= drop t}
       #|  lift o Re
       #|  Cx x
-      #|  !x. &0 < x\n       ==> ((\\t. t rpow (x - &1) / exp t) has_real_integral gamma(x))\n           {t | &0 <= t}
-      #|  !x. &0 < x\n       ==> real_integral {t | &0 <= t} (\\t. t rpow (x - &1) / exp t) =\n           gamma(x)
-      #|  !x. &0 < x\n       ==> (\\t. t rpow (x - &1) / exp t) real_integrable_on {t | &0 <= t}
+      #|  forall x. &0 < x\n       ==> ((\\t. t rpow (x - &1) / exp t) has_real_integral gamma(x))\n           {t | &0 <= t}
+      #|  forall x. &0 < x\n       ==> real_integral {t | &0 <= t} (\\t. t rpow (x - &1) / exp t) =\n           gamma(x)
+      #|  forall x. &0 < x\n       ==> (\\t. t rpow (x - &1) / exp t) real_integrable_on {t | &0 <= t}
       #|  x <= z ==> x <= max y z
       #|  x <= y ==> x <= max y z
       #|  --(log t) <= &1
@@ -89174,10 +89174,10 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  n:num
       #|  x:real
       #|  x:real
-      #|  !x. &0 < x\n        ==> (\\t. --log t rpow x) real_integrable_on real_interval[&0,&1]
+      #|  forall x. &0 < x\n        ==> (\\t. --log t rpow x) real_integrable_on real_interval[&0,&1]
       #|  &n = &(SUC n) - &1
       #|  n:num
-      #|  !n. (\\t. --log t pow n) real_integrable_on real_interval[&0,&1]
+      #|  forall n. (\\t. --log t pow n) real_integrable_on real_interval[&0,&1]
       #|  {&0}
       #|  t:real
       #|  &0
@@ -89204,15 +89204,15 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\t:real. t
       #|  \\t. inv(x) * (--log t) rpow x
       #|  x = &0
-      #|  !x. &0 < x\n        ==> ((\\t. (--log t) rpow (x - &1))\n             real_integrable_on real_interval[&0,&1] <=>\n             (\\t. (--log t) rpow x)\n             real_integrable_on real_interval[&0,&1])
-      #|  !x. &0 < x\n       ==> (\\t. (--log t) rpow (x - &1))\n                real_integrable_on real_interval[&0,&1]
+      #|  forall x. &0 < x\n        ==> ((\\t. (--log t) rpow (x - &1))\n             real_integrable_on real_interval[&0,&1] <=>\n             (\\t. (--log t) rpow x)\n             real_integrable_on real_interval[&0,&1])
+      #|  forall x. &0 < x\n       ==> (\\t. (--log t) rpow (x - &1))\n                real_integrable_on real_interval[&0,&1]
       #|  &0 < x /\\ x < &1
       #|  x:real
       #|  (\\t. --clog (Cx(drop t)) cpow (z - Cx(&1))) =\n      ((\\w. w cpow (z - Cx(&1))) o (--) o clog) o (\\x. Cx(drop x))
       #|  {vec 0:real^1,vec 1}
       #|  {vec 0:real^1,vec 1}
       #|  \\t. lift((--log(drop t)) rpow (Re z - &1))
-      #|  !z. &0 < Re z\n       ==> (\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1)))\n           integrable_on interval[vec 0,vec 1]
+      #|  forall z. &0 < Re z\n       ==> (\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1)))\n           integrable_on interval[vec 0,vec 1]
       #|  i = j ==> norm(i - g) < e ==> dist(j,g) < e
       #|  :real
       #|  :real
@@ -89243,16 +89243,16 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  {a,b} SUBSET interval[a,b] /\\ ~(a = b)\n      ==> ~(?x. interval[a,b] = {x})
       #|  a /\\ b /\\ c ==> d <=> b ==> a /\\ c ==> d
       #|  vec 0:real^1
-      #|  !z. &0 < Re z\n       ==> ((\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1)))\n            has_integral cgamma(z)) (interval[vec 0,vec 1])
-      #|  !z. &0 < Re z\n       ==> integral (interval[vec 0,vec 1])\n                    (\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1))) =\n           cgamma(z)
+      #|  forall z. &0 < Re z\n       ==> ((\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1)))\n            has_integral cgamma(z)) (interval[vec 0,vec 1])
+      #|  forall z. &0 < Re z\n       ==> integral (interval[vec 0,vec 1])\n                    (\\t. (--clog(Cx(drop t))) cpow (z - Cx(&1))) =\n           cgamma(z)
       #|  &0 < --log y
       #|  &0 < y
       #|  y:real
       #|  {vec 0:real^1,vec 1}
       #|  lift o Re
       #|  Cx x
-      #|  !x. &0 < x\n       ==> ((\\t. (--log t) rpow (x - &1)) has_real_integral gamma(x))\n           (real_interval[&0,&1])
-      #|  !x. &0 < x\n       ==> real_integral (real_interval[&0,&1])\n                         (\\t. (--log t) rpow (x - &1)) =\n           gamma(x)
+      #|  forall x. &0 < x\n       ==> ((\\t. (--log t) rpow (x - &1)) has_real_integral gamma(x))\n           (real_interval[&0,&1])
+      #|  forall x. &0 < x\n       ==> real_integral (real_interval[&0,&1])\n                         (\\t. (--log t) rpow (x - &1)) =\n           gamma(x)
       #|  (2 * p + 2) - 1 = 2 * p + 1
       #|  ~(2 * p + 2 = 1)
       #|  ~(k = 0) /\\ ~(k = 1) ==> k - 1 = SUC(k - 2)
@@ -89271,7 +89271,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  0
       #|  \\n w. if n = 0 then (z + w) * clog(z + w) - (z + w)\n             else if n = 1 then clog(z + w)\n             else Cx(--(&1) pow n * &(FACT(n - 2))) /\n                  (z + w) pow (n - 1)
       #|  Cx(&n) + z = z + Cx(&n)
-      #|  !p n z. (Im z = &0 ==> &0 < Re z)\n             ==> (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                   Cx(&(FACT(2 * p))) / (z + Cx(drop x)) pow (2 * p + 1))\n                 integrable_on interval [lift(&0),lift(&n)] /\\\n                 vsum(0..n) (\\m. clog(Cx(&m) + z)) =\n                 (z + Cx(&n) + Cx(&1) / Cx(&2)) * clog(z + Cx(&n)) -\n                 (z - Cx(&1) / Cx(&2)) * clog(z) - Cx(&n) +\n                 vsum(1..p)\n                  (\\k. Cx(bernoulli (2 * k) (&0) / &(FACT(2 * k))) *\n                       (Cx(&(FACT(2 * k - 2))) / (z + Cx(&n)) pow (2 * k - 1) -\n                        Cx(&(FACT(2 * k - 2))) / z pow (2 * k - 1))) +\n                 integral (interval[lift(&0),lift(&n)])\n                   (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                        Cx(&(FACT(2 * p))) / (z + Cx(drop x)) pow (2 * p + 1)) /\n                 Cx(&(FACT(2 * p + 1)))
+      #|  forall p n z. (Im z = &0 ==> &0 < Re z)\n             ==> (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                   Cx(&(FACT(2 * p))) / (z + Cx(drop x)) pow (2 * p + 1))\n                 integrable_on interval [lift(&0),lift(&n)] /\\\n                 vsum(0..n) (\\m. clog(Cx(&m) + z)) =\n                 (z + Cx(&n) + Cx(&1) / Cx(&2)) * clog(z + Cx(&n)) -\n                 (z - Cx(&1) / Cx(&2)) * clog(z) - Cx(&n) +\n                 vsum(1..p)\n                  (\\k. Cx(bernoulli (2 * k) (&0) / &(FACT(2 * k))) *\n                       (Cx(&(FACT(2 * k - 2))) / (z + Cx(&n)) pow (2 * k - 1) -\n                        Cx(&(FACT(2 * k - 2))) / z pow (2 * k - 1))) +\n                 integral (interval[lift(&0),lift(&n)])\n                   (\\x. Cx(bernoulli (2 * p + 1) (frac(drop x))) *\n                        Cx(&(FACT(2 * p))) / (z + Cx(drop x)) pow (2 * p + 1)) /\n                 Cx(&(FACT(2 * p + 1)))
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
       #|  (f has_complex_derivative f') net
@@ -89286,8 +89286,8 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  lift(max (&0) (abs (Im z) - Re z))
       #|  \\x. lift(inv(Re z + drop x) pow n)
       #|  \\x. lift(inv((&1 - &n) * (Re z + drop x) pow (n - 1)))
-      #|  !b. &0 <= drop b /\\ abs (Im z) - Re z <= drop b\n           ==> ((\\x. lift(inv (Re z + drop x) pow n)) has_integral\n                lift\n                (inv((&1 - &n) * (Re z + drop b) pow (n - 1)) -\n                 inv((&1 - &n) *\n                     (Re z + max(&0) (abs(Im z) - Re z)) pow (n - 1))))\n               (interval[lift(max (&0) (abs (Im z) - Re z)),b])
-      #|  !a. {t | abs(Im z) - Re z <= drop t} INTER interval[vec 0,a] =\n          interval[lift(max (&0) (abs (Im z) - Re z)),a]
+      #|  forall b. &0 <= drop b /\\ abs (Im z) - Re z <= drop b\n           ==> ((\\x. lift(inv (Re z + drop x) pow n)) has_integral\n                lift\n                (inv((&1 - &n) * (Re z + drop b) pow (n - 1)) -\n                 inv((&1 - &n) *\n                     (Re z + max(&0) (abs(Im z) - Re z)) pow (n - 1))))\n               (interval[lift(max (&0) (abs (Im z) - Re z)),b])
+      #|  forall a. {t | abs(Im z) - Re z <= drop t} INTER interval[vec 0,a] =\n          interval[lift(max (&0) (abs (Im z) - Re z)),a]
       #|  {lift(abs(Im z) - Re z)}
       #|  {t | abs(Im z) - Re z <= drop t} INTER {t | &0 <= drop t}
       #|  {t | &0 <= drop t /\\ Re z + drop t <= abs (Im z)} =\n        interval[vec 0,lift(abs(Im z) - Re z)]
@@ -89295,8 +89295,8 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z + Cx x
       #|  x:real
       #|  \\t. lift(inv(max (abs(Im z)) (Re z + drop t)) pow n)
-      #|  !z n. 2 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. inv(z + Cx(drop t)) pow n)\n               absolutely_integrable_on {t | &0 <= drop t}
-      #|  !z n. 2 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n               integrable_on {t | &0 <= drop t}
+      #|  forall z n. 2 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. inv(z + Cx(drop t)) pow n)\n               absolutely_integrable_on {t | &0 <= drop t}
+      #|  forall z n. 2 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n               integrable_on {t | &0 <= drop t}
       #|  ~(a = Cx(&0)) /\\ ~(b = Cx(&0)) ==> a * inv(b * a) = inv b
       #|  x * y:complex = z ==> (x * i) * y = i * z
       #|  n:num
@@ -89330,9 +89330,9 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  bernoulli 1 x
       #|  x:real
       #|  &1 / &2
-      #|  !z p. (Im z = &0 ==> &0 < Re z) /\\ 1 <= p\n           ==> ((\\t. Cx(bernoulli 1 (frac(drop t))) / (z + Cx(drop t)))\n                has_integral\n                (integral {t | &0 <= drop t}\n                          (\\t. Cx(bernoulli (2 * p + 1) (frac(drop t))) /\n                               (z + Cx(drop t)) pow (2 * p + 1)) /\n                 Cx(&(2 * p + 1)) -\n                 vsum(1..p) (\\k. Cx(bernoulli (2 * k) (&0) /\n                                    (&4 * &k pow 2 - &2 * &k)) /\n                                 z pow (2 * k - 1))))\n                {t | &0 <= drop t}
+      #|  forall z p. (Im z = &0 ==> &0 < Re z) /\\ 1 <= p\n           ==> ((\\t. Cx(bernoulli 1 (frac(drop t))) / (z + Cx(drop t)))\n                has_integral\n                (integral {t | &0 <= drop t}\n                          (\\t. Cx(bernoulli (2 * p + 1) (frac(drop t))) /\n                               (z + Cx(drop t)) pow (2 * p + 1)) /\n                 Cx(&(2 * p + 1)) -\n                 vsum(1..p) (\\k. Cx(bernoulli (2 * k) (&0) /\n                                    (&4 * &k pow 2 - &2 * &k)) /\n                                 z pow (2 * k - 1))))\n                {t | &0 <= drop t}
       #|  1 <= n ==> n = 1 \\/ 2 <= n
-      #|  !z n. 1 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n               integrable_on {t | &0 <= drop t}
+      #|  forall z n. 1 <= n /\\ (Im z = &0 ==> &0 < Re z)\n           ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n               integrable_on {t | &0 <= drop t}
       #|  z + x:complex = (z + x) pow 1
       #|  (p <=> q /\\ r) ==> (p ==> r)
       #|  (a + h) * x - y:complex = h * x + a * x - y
@@ -89350,8 +89350,8 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\n. z * clog (Cx(&n)) - clog (Cx(&n + &1)) +\n          ((Cx(&1) + Cx(&n) + Cx(&1) / Cx(&2)) * clog (Cx(&1) + Cx(&n)) -\n           (Cx(&1) - Cx(&1) / Cx(&2)) * clog (Cx(&1)) -\n           Cx(&n) +\n           integral (interval [lift (&0),lift (&n)])\n           (\\x. Cx(bernoulli 1 (frac (drop x))) *\n                Cx(&1) / (Cx(&1) + Cx(drop x)) pow 1) /\n           Cx(&1)) -\n          ((z + Cx(&n) + Cx(&1) / Cx(&2)) * clog (z + Cx(&n)) -\n           (z - Cx(&1) / Cx(&2)) * clog z -\n           Cx(&n) +\n           integral (interval [lift (&0),lift (&n)])\n           (\\x. Cx(bernoulli 1 (frac (drop x))) *\n                Cx(&1) / (z + Cx(drop x)) pow 1) /\n           Cx(&1))
       #|  sequentially
       #|  ~(z = Cx(&0))
-      #|  !n. ~(z + Cx(&n) = Cx(&0))
-      #|  !z. (Im z = &0 ==> &0 < Re z)\n         ==> lgamma(z) =\n             ((z - Cx(&1) / Cx(&2)) * clog(z) - z + Cx(&1)) +\n             (integral {t | &0 <= drop t}\n                       (\\t. Cx(bernoulli 1 (frac(drop t))) /\n                            (Cx(&1) + Cx(drop t))) -\n              integral {t | &0 <= drop t}\n                       (\\t. Cx(bernoulli 1 (frac(drop t))) /\n                            (z + Cx(drop t))))
+      #|  forall n. ~(z + Cx(&n) = Cx(&0))
+      #|  forall z. (Im z = &0 ==> &0 < Re z)\n         ==> lgamma(z) =\n             ((z - Cx(&1) / Cx(&2)) * clog(z) - z + Cx(&1)) +\n             (integral {t | &0 <= drop t}\n                       (\\t. Cx(bernoulli 1 (frac(drop t))) /\n                            (Cx(&1) + Cx(drop t))) -\n              integral {t | &0 <= drop t}\n                       (\\t. Cx(bernoulli 1 (frac(drop t))) /\n                            (z + Cx(drop t))))
       #|  &1 pow 2 <= y pow 2 /\\ &0 <= (x - &1) pow 2\n       ==> (&1 + x) pow 2 / &2 <= x pow 2 + y pow 2
       #|  &0 <= x / &2 <=> &0 <= x
       #|  inv(&2) * y * x = y * x / &2
@@ -89423,7 +89423,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  z:complex
       #|  p = 0
       #|  (x + Cx(&1)) + (a - Cx(&1)) - b = (x + a) - b
-      #|  (!z n. 1 <= n /\\ (Im z = &0 ==> &0 < Re z)\n          ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n              integrable_on {t | &0 <= drop t}) /\\\n   (!z p.\n      (Im z = &0 ==> &0 < Re z)\n      ==> lgamma(z) =\n          ((z - Cx(&1) / Cx(&2)) * clog(z) - z + Cx(log(&2 * pi) / &2)) +\n          vsum(1..p) (\\k. Cx(bernoulli (2 * k) (&0) /\n                             (&4 * &k pow 2 - &2 * &k)) / z pow (2 * k - 1)) -\n          integral {t | &0 <= drop t}\n                   (\\t. Cx(bernoulli (2 * p + 1) (frac(drop t))) /\n                        (z + Cx(drop t)) pow (2 * p + 1)) /\n          Cx(&(2 * p + 1)))
+      #|  (forall z n. 1 <= n /\\ (Im z = &0 ==> &0 < Re z)\n          ==> (\\t. Cx(bernoulli n (frac (drop t))) / (z + Cx(drop t)) pow n)\n              integrable_on {t | &0 <= drop t}) /\\\n   (forall z p.\n      (Im z = &0 ==> &0 < Re z)\n      ==> lgamma(z) =\n          ((z - Cx(&1) / Cx(&2)) * clog(z) - z + Cx(log(&2 * pi) / &2)) +\n          vsum(1..p) (\\k. Cx(bernoulli (2 * k) (&0) /\n                             (&4 * &k pow 2 - &2 * &k)) / z pow (2 * k - 1)) -\n          integral {t | &0 <= drop t}\n                   (\\t. Cx(bernoulli (2 * p + 1) (frac(drop t))) /\n                        (z + Cx(drop t)) pow (2 * p + 1)) /\n          Cx(&(2 * p + 1)))
       #|  1
       #|  1 <= 2 * p + 1
       #|  2 * p + 1
@@ -89434,7 +89434,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  Cx x
       #|  Re
       #|  Cx x
-      #|  !x p. &0 < x\n         ==> log(gamma x) =\n             ((x - &1 / &2) * log(x) - x + log(&2 * pi) / &2) +\n             sum(1..p) (\\k. bernoulli (2 * k) (&0) /\n                            (&4 * &k pow 2 - &2 * &k) / x pow (2 * k - 1)) -\n             real_integral {t | &0 <= t}\n                           (\\t. bernoulli (2 * p + 1) (frac t) /\n                                (x + t) pow (2 * p + 1)) /\n             &(2 * p + 1)
+      #|  forall x p. &0 < x\n         ==> log(gamma x) =\n             ((x - &1 / &2) * log(x) - x + log(&2 * pi) / &2) +\n             sum(1..p) (\\k. bernoulli (2 * k) (&0) /\n                            (&4 * &k pow 2 - &2 * &k) / x pow (2 * k - 1)) -\n             real_integral {t | &0 <= t}\n                           (\\t. bernoulli (2 * p + 1) (frac t) /\n                                (x + t) pow (2 * p + 1)) /\n             &(2 * p + 1)
       #|  ~(Cx(&k) = Cx(&0))
       #|  k:num
       #|  n + Cx(&1) - z = (n + Cx(&1)) - z
@@ -89461,9 +89461,9 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  csin (Cx pi * w) = Cx pi * csin(Cx pi * w) / Cx pi
       #|  Cx pi * w = z
       #|  w = z / Cx pi
-      #|  !z. ((\\n. z * cproduct(1..n) (\\m. Cx(&1) - (z / Cx(pi * &m)) pow 2))\n       --> csin(z)) sequentially
+      #|  forall z. ((\\n. z * cproduct(1..n) (\\m. Cx(&1) - (z / Cx(pi * &m)) pow 2))\n       --> csin(z)) sequentially
       #|  Cx x
-      #|  !x. ((\\n. x * product(1..n) (\\m. &1 - (x / (pi * &m)) pow 2)) ---> sin(x))\n       sequentially
+      #|  forall x. ((\\n. x * product(1..n) (\\m. &1 - (x / (pi * &m)) pow 2)) ---> sin(x))\n       sequentially
       #|  n:num
       #|  1
       #|  ~(pi = &0) ==> (pi * x) * inv pi = x /\\\n                   (inv pi * &2) * (pi * inv(&2)) * y = y
@@ -89502,8 +89502,8 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  \\x. &2 * x
       #|  \\x:real. x pow 2
       #|  \\t. t rpow (&1 / &2 - &1) / exp t / &2
-      #|  !a b. &0 <= a /\\ a <= b\n          ==> ((\\x. exp(--(x pow 2))) has_real_integral\n               real_integral (real_interval[a pow 2,b pow 2])\n                             (\\t. t rpow (-- &1 / &2) / exp t / &2))\n              (real_interval[a,b])
-      #|  (!a. P (max (&0) a)) <=> (!a. &0 <= a ==> P a)
+      #|  forall a b. &0 <= a /\\ a <= b\n          ==> ((\\x. exp(--(x pow 2))) has_real_integral\n               real_integral (real_interval[a pow 2,b pow 2])\n                             (\\t. t rpow (-- &1 / &2) / exp t / &2))\n              (real_interval[a,b])
+      #|  (forall a. P (max (&0) a)) <=> (forall a. &0 <= a ==> P a)
       #|  a <= max a b /\\ (&0 <= a ==> max (&0) a = a)
       #|  ?a. a <= B
       #|  max (&0) a = &0 /\\ &0 < B /\\ a <= --B /\\ B <= b <=>\n    a <= --B /\\ &0 < B /\\ B <= b
@@ -89513,7 +89513,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  p /\\ q <=> ~(p ==> ~q)
       #|  inv(&2)
       #|  &1 / &2
-      #|  s INTER IMAGE f s SUBSET {a} <=> !x. x IN s /\\ f x IN s ==> f x = a
+      #|  s INTER IMAGE f s SUBSET {a} <=> forall x. x IN s /\\ f x IN s ==> f x = a
       #|  {&0}
       #|  sqrt x = sqrt x / &2 + sqrt x / &2
       #|  x:real = --y <=> --x = y

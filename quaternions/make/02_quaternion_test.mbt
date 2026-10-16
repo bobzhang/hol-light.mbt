@@ -74896,219 +74896,219 @@ test "Quaternions/quaternion matches Quaternions/quaternion.ml" {
       #|  kk = quat(&0,&0,&0,&1)
       #|  p * q =\n   quat(Re p *  Re q - Im1 p * Im1 q - Im2 p * Im2 q - Im3 p * Im3 q,\n        Re p * Im1 q + Im1 p *  Re q + Im2 p * Im3 q - Im3 p * Im2 q,\n        Re p * Im2 q - Im1 p * Im3 q + Im2 p *  Re q + Im3 p * Im1 q,\n        Re p * Im3 q + Im1 p * Im2 q - Im2 p * Im1 q + Im3 p *  Re q)
       #|  inv q =\n   quat(    Re q  / (Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2),\n        --(Im1 q) / (Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2),\n        --(Im2 q) / (Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2),\n        --(Im3 q) / (Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2))
-      #|  (q pow 0 = Hx(&1)) /\\\n   (!n. q pow (SUC n) = q * q pow n)
+      #|  (q pow 0 = Hx(&1)) /\\\n   (forall n. q pow (SUC n) = q * q pow n)
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|   Re(quat(x,y,z,w)) = x /\\\n   Im1(quat(x,y,z,w)) = y /\\\n   Im2(quat(x,y,z,w)) = z /\\\n   Im3(quat(x,y,z,w)) = w
-      #|  (!a.  Re(Hx a) = a) /\\\n   (!a. Im1(Hx a) = &0) /\\\n   (!a. Im2(Hx a) = &0) /\\\n   (!a. Im3(Hx a) = &0)
+      #|  (forall a.  Re(Hx a) = a) /\\\n   (forall a. Im1(Hx a) = &0) /\\\n   (forall a. Im2(Hx a) = &0) /\\\n   (forall a. Im3(Hx a) = &0)
       #|  Re(ii:quat) = &0 /\\\n   Im1(ii:quat) = &1 /\\\n   Im2(ii:quat) = &0 /\\\n   Im3(ii:quat) = &0 /\\\n    Re(jj:quat) = &0 /\\\n   Im1(jj:quat) = &0 /\\\n   Im2(jj:quat) = &1 /\\\n   Im3(jj:quat) = &0 /\\\n    Re(kk:quat) = &0 /\\\n   Im1(kk:quat) = &0 /\\\n   Im2(kk:quat) = &0 /\\\n   Im3(kk:quat) = &1
-      #|  !p q. p = q <=>\n         Re p = Re q /\\ Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q
-      #|  !q. quat(Re(q),Im1(q),Im2(q),Im3(q)) = q
-      #|  !x y z w:real. x + y + z + w = &0\n                   ==> &0 <= x /\\ &0 <= y /\\ &0 <= z /\\ &0 <= w\n                   ==> x = &0 /\\ y = &0  /\\ z = &0 /\\ w = &0
+      #|  forall p q. p = q <=>\n         Re p = Re q /\\ Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q
+      #|  forall q. quat(Re(q),Im1(q),Im2(q),Im3(q)) = q
+      #|  forall x y z w:real. x + y + z + w = &0\n                   ==> &0 <= x /\\ &0 <= y /\\ &0 <= z /\\ &0 <= w\n                   ==> x = &0 /\\ y = &0  /\\ z = &0 /\\ w = &0
       #|  q = Hx(&0) <=> Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2 = &0
-      #|  (!q. P q) <=> (!x y z w. P(quat(x,y,z,w)))
+      #|  (forall q. P q) <=> (forall x y z w. P(quat(x,y,z,w)))
       #|  (?q. P q) <=> (?x y z w. P(quat(x,y,z,w)))
       #|  --q = quat(--(Re q),--(Im1 q),--(Im2 q),--(Im3 q))
       #|  p + q = quat(Re p + Re q,Im1 p + Im1 q,Im2 p + Im2 q,Im3 p + Im3 q)
       #|  (p:quat) - q = p + --q
       #|  norm q = sqrt(Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2)
       #|  norm q pow 2 = Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2
-      #|  (!a. norm (Hx a) = abs a)
+      #|  (forall a. norm (Hx a) = abs a)
       #|  norm (ii:quat) = &1 /\\\n   norm (jj:quat) = &1 /\\\n   norm (kk:quat) = &1
-      #|  !x y. x + y = y + x
-      #|  !x y z. x + y + z = (x + y) + z
-      #|  !x. Hx(&0) + x = x
-      #|  !x. --x + x = Hx(&0)
-      #|  !q a. q * Hx a = Hx a * q
-      #|  !x y z. x * y * z = (x * y) * z
-      #|  !x. Hx(&1) * x = x
-      #|  !x y z. x * (y + z) = x * y + x * z
+      #|  forall x y. x + y = y + x
+      #|  forall x y z. x + y + z = (x + y) + z
+      #|  forall x. Hx(&0) + x = x
+      #|  forall x. --x + x = Hx(&0)
+      #|  forall q a. q * Hx a = Hx a * q
+      #|  forall x y z. x * y * z = (x * y) * z
+      #|  forall x. Hx(&1) * x = x
+      #|  forall x y z. x * (y + z) = x * y + x * z
       #|  (p + q:quat = q + p) /\\\n   ((p + q) + r = p + q + r) /\\\n   (p + q + r = q + p + r)
-      #|  !x. x + Hx(&0) = x
-      #|  !x. x * Hx(&1) = x
-      #|  !x. x + --x = Hx(&0)
-      #|  !x y z. (x + y) * z = x * z + y * z
-      #|  !x y z. (x + y = x + z) <=> (y = z)
-      #|  !x y z. (x + z = y + z) <=> (x = y)
-      #|  !x. x * Hx(&0) = Hx(&0)
-      #|  !x. Hx(&0) * x = Hx(&0)
-      #|  !x. --(--x) = x
-      #|  !x y. x * --y = --(x * y)
-      #|  !x y. --x * y = --(x * y)
-      #|  !x y. --(x + y) = --x + --y
+      #|  forall x. x + Hx(&0) = x
+      #|  forall x. x * Hx(&1) = x
+      #|  forall x. x + --x = Hx(&0)
+      #|  forall x y z. (x + y) * z = x * z + y * z
+      #|  forall x y z. (x + y = x + z) <=> (y = z)
+      #|  forall x y z. (x + z = y + z) <=> (x = y)
+      #|  forall x. x * Hx(&0) = Hx(&0)
+      #|  forall x. Hx(&0) * x = Hx(&0)
+      #|  forall x. --(--x) = x
+      #|  forall x y. x * --y = --(x * y)
+      #|  forall x y. --x * y = --(x * y)
+      #|  forall x y. --(x + y) = --x + --y
       #|  --Hx(&0) = Hx(&0)
-      #|  !x y. (x + y = x) <=> (y = Hx(&0))
-      #|  !x y. (x + y = y) <=> (x = Hx(&0))
-      #|  !x y. (x + y = Hx(&0)) <=> (x = --y)
-      #|  !x y. (x + y = Hx(&0)) <=> (y = --x)
-      #|  !x y. --(x * y) = --x * y
-      #|  !x y. --(x * y) = x * --y
-      #|  !x y. --x * --y = x * y
-      #|  !x y. x - y + y = x
-      #|  !x y. y + x - y = x
-      #|  !x. x - x = Hx(&0)
-      #|  !x y. (x - y = Hx(&0)) <=> (x = y)
-      #|  !x. (--x = Hx(&0)) <=> (x = Hx(&0))
-      #|  !x y. --(x - y) = y - x
-      #|  !x y. (x + y) - x = y
-      #|  !x y. (--x = y) <=> (x = --y)
-      #|  !x. --x = --Hx(&1) * x
-      #|  !x y. x - y - x = --y
-      #|  !a b c d. (a + b) - (c + d) = a - c + b - d
-      #|  !x. Hx(&0) - x = --x
-      #|  !x. x - Hx(&0) = x
-      #|  !x y. --x - y = --(x + y)
-      #|  !x y. x - --y = x + y
-      #|  !x y. --x - --y = y - x
-      #|  !a b c. a - b + b - c = a - c
-      #|  !x y z. (x = y - z) <=> (x + z = y)
-      #|  !x y z. (x - y = z) <=> (x = z + y)
-      #|  !x y. x - (x - y) = y
-      #|  !x y. x - (x + y) = --y
-      #|  !x y. (--x = --y) <=> (x = y)
-      #|  !x y z. x * (y - z) = x * y - x * z
-      #|  !x y z. (x - y) * z = x * z - y * z
-      #|  !x. Hx(&2) * x = x + x
+      #|  forall x y. (x + y = x) <=> (y = Hx(&0))
+      #|  forall x y. (x + y = y) <=> (x = Hx(&0))
+      #|  forall x y. (x + y = Hx(&0)) <=> (x = --y)
+      #|  forall x y. (x + y = Hx(&0)) <=> (y = --x)
+      #|  forall x y. --(x * y) = --x * y
+      #|  forall x y. --(x * y) = x * --y
+      #|  forall x y. --x * --y = x * y
+      #|  forall x y. x - y + y = x
+      #|  forall x y. y + x - y = x
+      #|  forall x. x - x = Hx(&0)
+      #|  forall x y. (x - y = Hx(&0)) <=> (x = y)
+      #|  forall x. (--x = Hx(&0)) <=> (x = Hx(&0))
+      #|  forall x y. --(x - y) = y - x
+      #|  forall x y. (x + y) - x = y
+      #|  forall x y. (--x = y) <=> (x = --y)
+      #|  forall x. --x = --Hx(&1) * x
+      #|  forall x y. x - y - x = --y
+      #|  forall a b c d. (a + b) - (c + d) = a - c + b - d
+      #|  forall x. Hx(&0) - x = --x
+      #|  forall x. x - Hx(&0) = x
+      #|  forall x y. --x - y = --(x + y)
+      #|  forall x y. x - --y = x + y
+      #|  forall x y. --x - --y = y - x
+      #|  forall a b c. a - b + b - c = a - c
+      #|  forall x y z. (x = y - z) <=> (x + z = y)
+      #|  forall x y z. (x - y = z) <=> (x = z + y)
+      #|  forall x y. x - (x - y) = y
+      #|  forall x y. x - (x + y) = --y
+      #|  forall x y. (--x = --y) <=> (x = y)
+      #|  forall x y z. x * (y - z) = x * y - x * z
+      #|  forall x y z. (x - y) * z = x * z - y * z
+      #|  forall x. Hx(&2) * x = x + x
       #|  ~(ii = Hx(&0))
       #|  ~(jj = Hx(&0))
       #|  ~(kk = Hx(&0))
-      #|  !q. ~(q = Hx(&0)) ==> (inv(q) * q = Hx(&1))
-      #|  !x y. (x * y = Hx(&0)) <=> (x = Hx(&0)) \\/ (y = Hx(&0))
-      #|  !q. ~(q = Hx(&0)) ==> (q * inv(q) = Hx(&1))
-      #|  !x y. (Hx(x) = Hx(y)) <=> (x = y)
-      #|  !x. Hx(--x) = --(Hx(x))
-      #|  !x y. Hx(x + y) = Hx(x) + Hx(y)
-      #|  !x y. Hx(x - y) = Hx(x) - Hx(y)
+      #|  forall q. ~(q = Hx(&0)) ==> (inv(q) * q = Hx(&1))
+      #|  forall x y. (x * y = Hx(&0)) <=> (x = Hx(&0)) \\/ (y = Hx(&0))
+      #|  forall q. ~(q = Hx(&0)) ==> (q * inv(q) = Hx(&1))
+      #|  forall x y. (Hx(x) = Hx(y)) <=> (x = y)
+      #|  forall x. Hx(--x) = --(Hx(x))
+      #|  forall x y. Hx(x + y) = Hx(x) + Hx(y)
+      #|  forall x y. Hx(x - y) = Hx(x) - Hx(y)
       #|  x = &0
-      #|  !x. Hx(inv x) = inv(Hx x)
-      #|  !x y. Hx(x * y) = Hx(x) * Hx(y)
-      #|  !x n. Hx(x pow n) = Hx(x) pow n
-      #|  !x. Hx(abs x) = Hx(norm(Hx(x)))
-      #|  (!x y:quat. Re(x + y) = Re(x) + Re(y)) /\\\n   (!x y:quat. Im1(x + y) = Im1(x) + Im1(y)) /\\\n   (!x y:quat. Im2(x + y) = Im2(x) + Im2(y)) /\\\n   (!x y:quat. Im3(x + y) = Im3(x) + Im3(y))
-      #|  (!x:quat. Re(--x) = --Re(x)) /\\\n   (!x:quat. Im1(--x) = --Im1(x)) /\\\n   (!x:quat. Im2(--x) = --Im2(x)) /\\\n   (!x:quat. Im3(--x) = --Im3(x))
-      #|  (!x y:quat. Re(x - y) = Re(x) - Re(y)) /\\\n   (!x y:quat. Im1(x - y) = Im1(x) - Im1(y)) /\\\n   (!x y:quat. Im2(x - y) = Im2(x) - Im2(y)) /\\\n   (!x y:quat. Im3(x - y) = Im3(x) - Im3(y))
-      #|  !q. q = Hx(Re q) + ii * Hx(Im1 q) + jj * Hx(Im2 q) + kk * Hx(Im3 q)
-      #|  !x y z w. quat(x,y,z,w) = Hx(x) + ii * Hx(y) + jj * Hx(z) + kk * Hx(w)
-      #|  (!q:quat.  Re(q * ii) = --Im1 q /\\  Re(ii * q) = --Im1 q) /\\\n   (!q:quat. Im1(q * ii) =    Re q /\\ Im1(ii * q) =    Re q) /\\\n   (!q:quat. Im2(q * ii) =   Im3 q /\\ Im2(ii * q) = --Im3 q) /\\\n   (!q:quat. Im3(q * ii) = --Im2 q /\\ Im3(ii * q) =   Im2 q) /\\\n   (!q:quat.  Re(q * jj) = --Im2 q /\\  Re(jj * q) = --Im2 q) /\\\n   (!q:quat. Im1(q * jj) = --Im3 q /\\ Im1(jj * q) =   Im3 q) /\\\n   (!q:quat. Im2(q * jj) =    Re q /\\ Im2(jj * q) =    Re q) /\\\n   (!q:quat. Im3(q * jj) =   Im1 q /\\ Im3(jj * q) = --Im1 q) /\\\n   (!q:quat.  Re(q * kk) = --Im3 q /\\  Re(kk * q) = --Im3 q) /\\\n   (!q:quat. Im1(q * kk) =   Im2 q /\\ Im1(kk * q) = --Im2 q) /\\\n   (!q:quat. Im2(q * kk) = --Im1 q /\\ Im2(kk * q) =   Im1 q) /\\\n   (!q:quat. Im3(q * kk) =    Re q /\\ Im3(kk * q) =    Re q)
-      #|  (!a q:quat.  Re(a % q) = a * Re q) /\\\n   (!a q:quat. Im1(a % q) = a * Im1 q) /\\\n   (!a q:quat. Im2(a % q) = a * Im2 q) /\\\n   (!a q:quat. Im3(a % q) = a * Im3 q)
-      #|  (!x q.  Re(Hx(x) * q) = x *  Re q) /\\ (!x q.  Re(q * Hx(x)) =  Re q * x) /\\\n   (!x q. Im1(Hx(x) * q) = x * Im1 q) /\\ (!x q. Im1(q * Hx(x)) = Im1 q * x) /\\\n   (!x q. Im2(Hx(x) * q) = x * Im2 q) /\\ (!x q. Im2(q * Hx(x)) = Im2 q * x) /\\\n   (!x q. Im3(Hx(x) * q) = x * Im3 q) /\\ (!x q. Im3(q * Hx(x)) = Im3 q * x)
+      #|  forall x. Hx(inv x) = inv(Hx x)
+      #|  forall x y. Hx(x * y) = Hx(x) * Hx(y)
+      #|  forall x n. Hx(x pow n) = Hx(x) pow n
+      #|  forall x. Hx(abs x) = Hx(norm(Hx(x)))
+      #|  (forall x y:quat. Re(x + y) = Re(x) + Re(y)) /\\\n   (forall x y:quat. Im1(x + y) = Im1(x) + Im1(y)) /\\\n   (forall x y:quat. Im2(x + y) = Im2(x) + Im2(y)) /\\\n   (forall x y:quat. Im3(x + y) = Im3(x) + Im3(y))
+      #|  (forall x:quat. Re(--x) = --Re(x)) /\\\n   (forall x:quat. Im1(--x) = --Im1(x)) /\\\n   (forall x:quat. Im2(--x) = --Im2(x)) /\\\n   (forall x:quat. Im3(--x) = --Im3(x))
+      #|  (forall x y:quat. Re(x - y) = Re(x) - Re(y)) /\\\n   (forall x y:quat. Im1(x - y) = Im1(x) - Im1(y)) /\\\n   (forall x y:quat. Im2(x - y) = Im2(x) - Im2(y)) /\\\n   (forall x y:quat. Im3(x - y) = Im3(x) - Im3(y))
+      #|  forall q. q = Hx(Re q) + ii * Hx(Im1 q) + jj * Hx(Im2 q) + kk * Hx(Im3 q)
+      #|  forall x y z w. quat(x,y,z,w) = Hx(x) + ii * Hx(y) + jj * Hx(z) + kk * Hx(w)
+      #|  (forall q:quat.  Re(q * ii) = --Im1 q /\\  Re(ii * q) = --Im1 q) /\\\n   (forall q:quat. Im1(q * ii) =    Re q /\\ Im1(ii * q) =    Re q) /\\\n   (forall q:quat. Im2(q * ii) =   Im3 q /\\ Im2(ii * q) = --Im3 q) /\\\n   (forall q:quat. Im3(q * ii) = --Im2 q /\\ Im3(ii * q) =   Im2 q) /\\\n   (forall q:quat.  Re(q * jj) = --Im2 q /\\  Re(jj * q) = --Im2 q) /\\\n   (forall q:quat. Im1(q * jj) = --Im3 q /\\ Im1(jj * q) =   Im3 q) /\\\n   (forall q:quat. Im2(q * jj) =    Re q /\\ Im2(jj * q) =    Re q) /\\\n   (forall q:quat. Im3(q * jj) =   Im1 q /\\ Im3(jj * q) = --Im1 q) /\\\n   (forall q:quat.  Re(q * kk) = --Im3 q /\\  Re(kk * q) = --Im3 q) /\\\n   (forall q:quat. Im1(q * kk) =   Im2 q /\\ Im1(kk * q) = --Im2 q) /\\\n   (forall q:quat. Im2(q * kk) = --Im1 q /\\ Im2(kk * q) =   Im1 q) /\\\n   (forall q:quat. Im3(q * kk) =    Re q /\\ Im3(kk * q) =    Re q)
+      #|  (forall a q:quat.  Re(a % q) = a * Re q) /\\\n   (forall a q:quat. Im1(a % q) = a * Im1 q) /\\\n   (forall a q:quat. Im2(a % q) = a * Im2 q) /\\\n   (forall a q:quat. Im3(a % q) = a * Im3 q)
+      #|  (forall x q.  Re(Hx(x) * q) = x *  Re q) /\\ (forall x q.  Re(q * Hx(x)) =  Re q * x) /\\\n   (forall x q. Im1(Hx(x) * q) = x * Im1 q) /\\ (forall x q. Im1(q * Hx(x)) = Im1 q * x) /\\\n   (forall x q. Im2(Hx(x) * q) = x * Im2 q) /\\ (forall x q. Im2(q * Hx(x)) = Im2 q * x) /\\\n   (forall x q. Im3(Hx(x) * q) = x * Im3 q) /\\ (forall x q. Im3(q * Hx(x)) = Im3 q * x)
       #|  Hx
       #|  Hx
       #|  Hx
       #|  x:real
       #|  n:num
-      #|  !x n. x pow (SUC n) = x pow n * x
-      #|  !p q n. p * q = q * p ==> p * q pow n = q pow n * p
-      #|  !p q m. p * q = q * p ==> p pow m * q = q * p pow m
-      #|  !p q m n. p * q = q * p ==> p pow m * q pow n = q pow n * p pow m
-      #|  (!x y z. x + (y + z) = (x + y) + z) /\\\n   (!x y. x + y = y + x) /\\\n   (!x. Hx(&0) + x = x) /\\\n   (!x. --x = Hx(-- &1) * x) /\\\n   (!x y. x - y = x + Hx(-- &1) * y) /\\\n   (!x y z. x * (y * z) = (x * y) * z) /\\\n   (!x. Hx(&1) * x = x) /\\\n   (!x. x * Hx(&1) = x) /\\\n   (!x. Hx(&0) * x = Hx(&0)) /\\\n   (!x. x * Hx(&0) = Hx(&0)) /\\\n   (!x y z. x * (y + z) = x * y + x * z) /\\\n   (!x y z. (y + z) * x = y * x + z * x) /\\\n   (!x. x pow 0 = Hx(&1)) /\\\n   (!x n. x pow (SUC n) = x * x pow n) /\\\n   (!x n. x pow (SUC n) = x pow n * x)
+      #|  forall x n. x pow (SUC n) = x pow n * x
+      #|  forall p q n. p * q = q * p ==> p * q pow n = q pow n * p
+      #|  forall p q m. p * q = q * p ==> p pow m * q = q * p pow m
+      #|  forall p q m n. p * q = q * p ==> p pow m * q pow n = q pow n * p pow m
+      #|  (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. Hx(&0) + x = x) /\\\n   (forall x. --x = Hx(-- &1) * x) /\\\n   (forall x y. x - y = x + Hx(-- &1) * y) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x. Hx(&1) * x = x) /\\\n   (forall x. x * Hx(&1) = x) /\\\n   (forall x. Hx(&0) * x = Hx(&0)) /\\\n   (forall x. x * Hx(&0) = Hx(&0)) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x y z. (y + z) * x = y * x + z * x) /\\\n   (forall x. x pow 0 = Hx(&1)) /\\\n   (forall x n. x pow (SUC n) = x * x pow n) /\\\n   (forall x n. x pow (SUC n) = x pow n * x)
       #|  inv(Hx(&0)) = Hx(&0)
       #|  inv(Hx(&1)) = Hx(&1)
       #|  x * (y - z) = Hx(&0)
-      #|  !x y z. (x * y = x * z) <=> (x = Hx(&0)) \\/ (y = z)
+      #|  forall x y z. (x * y = x * z) <=> (x = Hx(&0)) \\/ (y = z)
       #|  (x - y) * z = Hx(&0)
-      #|  !x y z. (x * z = y * z) <=> (x = y) \\/ (z = Hx(&0))
+      #|  forall x y z. (x * z = y * z) <=> (x = y) \\/ (z = Hx(&0))
       #|  (inv x * x:quat) * y
-      #|  !x y z. ~(x = Hx(&0)) /\\ x * y = x * z ==> y = z
+      #|  forall x y z. ~(x = Hx(&0)) /\\ x * y = x * z ==> y = z
       #|  y * (x * inv x:quat)
-      #|  !x y z. ~(x = Hx(&0)) /\\ y * x = z * x ==> y = z
+      #|  forall x y z. ~(x = Hx(&0)) /\\ y * x = z * x ==> y = z
       #|  p:quat
       #|  q:quat
       #|  q = Hx(&0)
       #|  p = Hx(&0)
-      #|  !p q. inv(p * q) = inv(q) * inv(p)
-      #|  !x n. (inv x) pow n = inv(x pow n)
+      #|  forall p q. inv(p * q) = inv(q) * inv(p)
+      #|  forall x n. (inv x) pow n = inv(x pow n)
       #|  inv q * q = Hx(&0)
       #|  q = Hx(&0)
-      #|  !q. inv q = Hx(&0) <=> q = Hx(&0)
+      #|  forall q. inv q = Hx(&0) <=> q = Hx(&0)
       #|  inv q
       #|  q = Hx(&0)
-      #|  !q:quat. inv(inv q) = q
-      #|  !x m n. x pow (m + n) = x pow m * x pow n
-      #|  !x m n. (x pow m) pow n = x pow (m * n)
+      #|  forall q:quat. inv(inv q) = q
+      #|  forall x m n. x pow (m + n) = x pow m * x pow n
+      #|  forall x m n. (x pow m) pow n = x pow (m * n)
       #|  1
-      #|  !x. x pow 1 = x
+      #|  forall x. x pow 1 = x
       #|  2
-      #|  !x. x pow 2 = x * x
+      #|  forall x. x pow 2 = x * x
       #|  EVEN n
-      #|  !x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-      #|  !n. Hx(&1) pow n = Hx(&1)
-      #|  !n x y. x * y = y * x ==> x * y pow n = y pow n * x
-      #|  !n x y. x * y = y * x ==> (x * y) pow n = (x pow n) * (y pow n)
+      #|  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
+      #|  forall n. Hx(&1) pow n = Hx(&1)
+      #|  forall n x y. x * y = y * x ==> x * y pow n = y pow n * x
+      #|  forall n x y. x * y = y * x ==> (x * y) pow n = (x pow n) * (y pow n)
       #|  ii pow 2 = --Hx(&1) /\\\n   jj pow 2 = --Hx(&1) /\\\n   kk pow 2 = --Hx(&1)
-      #|  !x n. (x pow n = Hx(&0)) <=> (x = Hx(&0)) /\\ ~(n = 0)
-      #|  !n. Hx(&0) pow n = if n = 0 then Hx(&1) else Hx(&0)
+      #|  forall x n. (x pow n = Hx(&0)) <=> (x = Hx(&0)) /\\ ~(n = 0)
+      #|  forall n. Hx(&0) pow n = if n = 0 then Hx(&1) else Hx(&0)
       #|  inv ii:quat = --ii /\\\n   inv jj:quat = --jj /\\\n   inv kk:quat = --kk
       #|  vec 0 = Hx(&0)
-      #|  !q. (norm q = &0) <=> (q = Hx(&0))
-      #|  !n. norm(Hx(&n)) = &n
+      #|  forall q. (norm q = &0) <=> (q = Hx(&0))
+      #|  forall n. norm(Hx(&n)) = &n
       #|  norm(Hx(&0)) = &0
-      #|  !q. &0 < norm(q) <=> ~(q = Hx(&0))
-      #|  !p q. norm(p * q) = norm(p) * norm(q)
-      #|  !q n. norm(q pow n) = norm(q) pow n
+      #|  forall q. &0 < norm(q) <=> ~(q = Hx(&0))
+      #|  forall p q. norm(p * q) = norm(p) * norm(q)
+      #|  forall q n. norm(q pow n) = norm(q) pow n
       #|  x * x + y * y + z * z + w * w = &0
-      #|  !q. norm(inv q) = inv(norm q)
-      #|  !p q. norm(p) <= norm(p + q) + norm(q)
+      #|  forall q. norm(inv q) = inv(norm q)
+      #|  forall p q. norm(p) <= norm(p + q) + norm(q)
       #|  a - b <= x /\\ b - a <= x ==> abs(a - b) <= x:real
-      #|  !p q. abs(norm p - norm q) <= norm(p - q)
+      #|  forall p q. abs(norm p - norm q) <= norm(p - q)
       #|  norm:quat->real
-      #|  !q n. q pow n = Hx(&1) ==> norm(q) = &1 \\/ n = 0
+      #|  forall q n. q pow n = Hx(&1) ==> norm(q) = &1 \\/ n = 0
       #|  cnj(q:quat) = quat(Re(q),--Im1(q),--Im2(q),--Im3(q))
-      #|  !p q:quat. cnj(p) = cnj(q) <=> (p = q)
-      #|  !q:quat. cnj(cnj q) = q
-      #|  !x. cnj(Hx x) = Hx x
-      #|  !q:quat. norm(cnj q) = norm(q)
-      #|  !q:quat. cnj(--q) = --(cnj q)
-      #|  !q:quat. cnj(inv q) = inv(cnj q)
-      #|  !p q:quat. cnj(p + q) = cnj(p) + cnj(q)
-      #|  !p q:quat. cnj(p - q) = cnj(p) - cnj(q)
-      #|  !p q:quat. cnj(p * q) = cnj(q) * cnj(p)
-      #|  !q:quat n. cnj(q pow n) = cnj(q) pow n
-      #|  (!q:quat.  Re(cnj q) =    Re q) /\\\n   (!q:quat. Im1(cnj q) = --Im1 q) /\\\n   (!q:quat. Im2(cnj q) = --Im2 q) /\\\n   (!q:quat. Im3(cnj q) = --Im3 q)
+      #|  forall p q:quat. cnj(p) = cnj(q) <=> (p = q)
+      #|  forall q:quat. cnj(cnj q) = q
+      #|  forall x. cnj(Hx x) = Hx x
+      #|  forall q:quat. norm(cnj q) = norm(q)
+      #|  forall q:quat. cnj(--q) = --(cnj q)
+      #|  forall q:quat. cnj(inv q) = inv(cnj q)
+      #|  forall p q:quat. cnj(p + q) = cnj(p) + cnj(q)
+      #|  forall p q:quat. cnj(p - q) = cnj(p) - cnj(q)
+      #|  forall p q:quat. cnj(p * q) = cnj(q) * cnj(p)
+      #|  forall q:quat n. cnj(q pow n) = cnj(q) pow n
+      #|  (forall q:quat.  Re(cnj q) =    Re q) /\\\n   (forall q:quat. Im1(cnj q) = --Im1 q) /\\\n   (forall q:quat. Im2(cnj q) = --Im2 q) /\\\n   (forall q:quat. Im3(cnj q) = --Im3 q)
       #|  cnj ii:quat = --ii /\\\n   cnj jj:quat = --jj /\\\n   cnj kk:quat = --kk
-      #|  !x q. cnj q = Hx x <=> q = Hx x
-      #|  !q. cnj q = Hx(&0) <=> q = Hx(&0)
-      #|  (!q. q + cnj q = Hx(&2 * Re q)) /\\ (!q. cnj q + q = Hx(&2 * Re q))
-      #|  !q. Hx(Re q) = inv(Hx(&2)) * (q + cnj q)
-      #|  !q:quat. cnj q * q = q * cnj q
-      #|  !q. Hx(norm q) pow 2 = q * cnj q
-      #|  !q. Hx(norm q) pow 2 = cnj q * q
-      #|  !q. cnj q * q = Hx(norm(q)) pow 2 /\\ q * cnj q = Hx(norm(q)) pow 2
-      #|  !q. inv q = inv (Hx(norm q pow 2)) * cnj q
-      #|  !q. norm q = &1 ==> inv q = cnj q
-      #|  !c x. c % x = Hx(c) * x
-      #|  !c. linear (\\x. c * x)
-      #|  !c. linear (\\x. x * c)
+      #|  forall x q. cnj q = Hx x <=> q = Hx x
+      #|  forall q. cnj q = Hx(&0) <=> q = Hx(&0)
+      #|  (forall q. q + cnj q = Hx(&2 * Re q)) /\\ (forall q. cnj q + q = Hx(&2 * Re q))
+      #|  forall q. Hx(Re q) = inv(Hx(&2)) * (q + cnj q)
+      #|  forall q:quat. cnj q * q = q * cnj q
+      #|  forall q. Hx(norm q) pow 2 = q * cnj q
+      #|  forall q. Hx(norm q) pow 2 = cnj q * q
+      #|  forall q. cnj q * q = Hx(norm(q)) pow 2 /\\ q * cnj q = Hx(norm(q)) pow 2
+      #|  forall q. inv q = inv (Hx(norm q pow 2)) * cnj q
+      #|  forall q. norm q = &1 ==> inv q = cnj q
+      #|  forall c x. c % x = Hx(c) * x
+      #|  forall c. linear (\\x. c * x)
+      #|  forall c. linear (\\x. x * c)
       #|  bilinear( * )
-      #|  !x. x % Hx(&1) = Hx x
-      #|  !q:quat. &1 % q = q
-      #|  !p q. p dot q =\n         Re p * Re q + Im1 p * Im1 q + Im2 p * Im2 q + Im3 p * Im3 q
-      #|  (!f s:A->bool. FINITE s ==>  Re(vsum s f) = sum s (\\x.  Re(f x))) /\\\n   (!f s:A->bool. FINITE s ==> Im1(vsum s f) = sum s (\\x. Im1(f x))) /\\\n   (!f s:A->bool. FINITE s ==> Im2(vsum s f) = sum s (\\x. Im2(f x))) /\\\n   (!f s:A->bool. FINITE s ==> Im3(vsum s f) = sum s (\\x. Im3(f x)))
-      #|  !c f s. FINITE(s) ==> vsum s (\\x:A. c * f x) = c * vsum s f
-      #|  !c f s. FINITE(s) ==> vsum s (\\x:A. f x * c) = vsum s f * c
-      #|  !f:A->real s. FINITE s ==> vsum s (\\a. Hx(f a)) = Hx(sum s f)
-      #|  !f s. FINITE s ==> cnj(vsum s f) = vsum s (\\x:A. cnj(f x))
-      #|  !f m n. vsum (m..n) (\\a. Hx(f a)) = Hx(sum (m..n) f)
+      #|  forall x. x % Hx(&1) = Hx x
+      #|  forall q:quat. &1 % q = q
+      #|  forall p q. p dot q =\n         Re p * Re q + Im1 p * Im1 q + Im2 p * Im2 q + Im3 p * Im3 q
+      #|  (forall f s:A->bool. FINITE s ==>  Re(vsum s f) = sum s (\\x.  Re(f x))) /\\\n   (forall f s:A->bool. FINITE s ==> Im1(vsum s f) = sum s (\\x. Im1(f x))) /\\\n   (forall f s:A->bool. FINITE s ==> Im2(vsum s f) = sum s (\\x. Im2(f x))) /\\\n   (forall f s:A->bool. FINITE s ==> Im3(vsum s f) = sum s (\\x. Im3(f x)))
+      #|  forall c f s. FINITE(s) ==> vsum s (\\x:A. c * f x) = c * vsum s f
+      #|  forall c f s. FINITE(s) ==> vsum s (\\x:A. f x * c) = vsum s f * c
+      #|  forall f:A->real s. FINITE s ==> vsum s (\\a. Hx(f a)) = Hx(sum s f)
+      #|  forall f s. FINITE s ==> cnj(vsum s f) = vsum s (\\x:A. cnj(f x))
+      #|  forall f m n. vsum (m..n) (\\a. Hx(f a)) = Hx(sum (m..n) f)
       #|  real(q:quat) <=> Im1 q = &0 /\\ Im2 q = &0 /\\ Im3 q = &0
-      #|  !q. real q <=> Hx(Re q) = q
-      #|  !q:quat. real q <=> cnj q = q
-      #|  !q:quat. real q <=> ?x. q = Hx x
-      #|  (!q:quat. real q ==> P q) <=> (!x. P(Hx x))
+      #|  forall q. real q <=> Hx(Re q) = q
+      #|  forall q:quat. real q <=> cnj q = q
+      #|  forall q:quat. real q <=> ?x. q = Hx x
+      #|  (forall q:quat. real q ==> P q) <=> (forall x. P(Hx x))
       #|  (?q:quat. real q /\\ P q) <=> (?x. P(Hx x))
-      #|  !x. real(Hx x)
-      #|  !x q. real(Hx x * q) <=> x = &0 \\/ real q
-      #|  !p q. real p /\\ real q ==> real(p + q)
-      #|  !q:quat. real q ==> real(--q)
-      #|  !p q. real p /\\ real q ==> real(p - q)
-      #|  !p q. real p /\\ real q ==> real(p * q)
-      #|  !q:quat n. real q ==> real(q pow n)
-      #|  !q:quat. real q ==> real(inv q)
-      #|  !q. real(inv q) = real q
-      #|  !f s. FINITE s /\\ (!a:A. a IN s ==> real(f a)) ==> real(vsum s f)
-      #|  !a b x:quat. x IN segment[a,b] /\\ real a /\\ real b ==> real x
+      #|  forall x. real(Hx x)
+      #|  forall x q. real(Hx x * q) <=> x = &0 \\/ real q
+      #|  forall p q. real p /\\ real q ==> real(p + q)
+      #|  forall q:quat. real q ==> real(--q)
+      #|  forall p q. real p /\\ real q ==> real(p - q)
+      #|  forall p q. real p /\\ real q ==> real(p * q)
+      #|  forall q:quat n. real q ==> real(q pow n)
+      #|  forall q:quat. real q ==> real(inv q)
+      #|  forall q. real(inv q) = real q
+      #|  forall f s. FINITE s /\\ (forall a:A. a IN s ==> real(f a)) ==> real(vsum s f)
+      #|  forall a b x:quat. x IN segment[a,b] /\\ real a /\\ real b ==> real x
       #|  ~(a:real = b)
       #|  (a - x:real) / (a - b)
       #|  &0 < a - b
@@ -75124,27 +75124,27 @@ test "Quaternions/quaternion matches Quaternions/quaternion.ml" {
       #|  x:real = b
       #|  (&1 - u) * b + u * b = b
       #|  a:real = b
-      #|  !a b x. Hx(x) IN segment[Hx(a),Hx(b)] <=>\n           a <= x /\\ x <= b \\/ b <= x /\\ x <= a
+      #|  forall a b x. Hx(x) IN segment[Hx(a),Hx(b)] <=>\n           a <= x /\\ x <= b \\/ b <= x /\\ x <= a
       #|  real (x:quat)
-      #|  !a b x:quat.\n     x IN segment[Hx a,Hx b] <=>\n     real(x) /\\ (a <= Re x /\\ Re x <= b \\/ b <= Re x /\\ Re x <= a)
+      #|  forall a b x:quat.\n     x IN segment[Hx a,Hx b] <=>\n     real(x) /\\ (a <= Re x /\\ Re x <= b \\/ b <= Re x /\\ Re x <= a)
       #|  &0 <= x /\\ &0 <= y /\\ ~(x = &0 /\\ y = &0) ==> &0 < x + y
-      #|  !a b x:quat. x IN segment[a,b] /\\ &0 < Re a /\\ &0 < Re b ==> &0 < Re x
+      #|  forall a b x:quat. x IN segment[a,b] /\\ &0 < Re a /\\ &0 < Re b ==> &0 < Re x
       #|  convex (real:quat->bool)
-      #|  !s. IMAGE Hx s = {q | real q /\\ Re(q) IN s}
-      #|  !q. real q ==> norm(q) = abs(Re q)
-      #|  !q:quat. real q /\\ &0 <= Re q ==> norm(q) = Re(q)
-      #|  !f s. FINITE s /\\ (!x:A. x IN s ==> real(f x) /\\ &0 <= Re(f x))\n         ==> norm(vsum s f) = sum s (\\x. Re(f x))
+      #|  forall s. IMAGE Hx s = {q | real q /\\ Re(q) IN s}
+      #|  forall q. real q ==> norm(q) = abs(Re q)
+      #|  forall q:quat. real q /\\ &0 <= Re q ==> norm(q) = Re(q)
+      #|  forall f s. FINITE s /\\ (forall x:A. x IN s ==> real(f x) /\\ &0 <= Re(f x))\n         ==> norm(vsum s f) = sum s (\\x. Re(f x))
       #|  x:real = y ==> y <= x
       #|  sum s (\\x. Re((g:A->quat) x))
       #|  sum s (\\x. norm((f:A->quat) x))
-      #|  !s f:A->quat g:A->quat.\n        FINITE s /\\ (!x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum s f) <= norm(vsum s g)
+      #|  forall s f:A->quat g:A->quat.\n        FINITE s /\\ (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum s f) <= norm(vsum s g)
       #|  norm(vsum t (g:A->quat)) = sum t (\\x. Re(g x)) /\\\n    norm(vsum s g) = sum s (\\x. Re(g x))
       #|  norm(vsum t (g:A->quat))
-      #|  !f:A->quat g:A->quat s t.\n        FINITE s /\\ t SUBSET s /\\\n        (!x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum t f) <= norm(vsum s g)
-      #|  !x y. Re x = Re y /\\ norm x pow 2 = norm y pow 2\n           ==> y * (y - x) = (y - x) * cnj x
+      #|  forall f:A->quat g:A->quat s t.\n        FINITE s /\\ t SUBSET s /\\\n        (forall x. x IN s ==> real(g x) /\\ norm(f x) <= Re(g x))\n        ==> norm(vsum t f) <= norm(vsum s g)
+      #|  forall x y. Re x = Re y /\\ norm x pow 2 = norm y pow 2\n           ==> y * (y - x) = (y - x) * cnj x
       #|  y - x
       #|  ~(y - x = Hx(&0))
-      #|  !x y. ~(x = y) /\\ Re x = Re y /\\ norm x pow 2 = norm y pow 2\n         ==> inv  (y - x) * y * (y - x) = cnj x
+      #|  forall x y. ~(x = y) /\\ Re x = Re y /\\ norm x pow 2 = norm y pow 2\n         ==> inv  (y - x) * y * (y - x) = cnj x
       #|QUAT_RE_DEF =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1))))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) x:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|QUAT_IM1_DEF =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) (#Im1:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1))))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) x:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|QUAT_IM2_DEF =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) (#Im2:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1))))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) x:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

@@ -79638,35 +79638,35 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|0..0..solved at 2
       #|Autoformalization/sarkovskii quotations (2475):
       #|  periodic_point (f:A->A) n x <=> ITER n f x = x
-      #|  minimal_period (f:A->A) n x <=>\n        0 < n /\\\n        periodic_point f n x /\\\n        !m. 0 < m /\\ m < n ==> ~periodic_point f m x
+      #|  minimal_period (f:A->A) n x <=>\n        0 < n /\\\n        periodic_point f n x /\\\n        forall m. 0 < m /\\ m < n ==> ~periodic_point f m x
       #|  has_period (f:A->A) n <=> ?x. minimal_period f n x
-      #|  !f:A->A x. periodic_point f 0 x
-      #|  !f:A->A n x m.\n        periodic_point f n x ==> periodic_point f (m * n) x
+      #|  forall f:A->A x. periodic_point f 0 x
+      #|  forall f:A->A n x m.\n        periodic_point f n x ==> periodic_point f (m * n) x
       #|  (n:num) + m = m + n
-      #|  !f:A->A n x m.\n        periodic_point f n x ==> ITER (n + m) f x = ITER m f x
-      #|  !f:A->A n x i.\n        periodic_point f n x\n        ==> periodic_point f n (ITER i f x)
+      #|  forall f:A->A n x m.\n        periodic_point f n x ==> ITER (n + m) f x = ITER m f x
+      #|  forall f:A->A n x i.\n        periodic_point f n x\n        ==> periodic_point f n (ITER i f x)
       #|  ITER (n - 1) (f:A->A) (f y) = y
       #|  ITER (n - 1) (f:A->A) (f x) = x
       #|  (n:num) - 1 + 1 = n
-      #|  !f:A->A n x y.\n        0 < n /\\\n        periodic_point f n x /\\\n        periodic_point f n y\n        ==> (f x = f y <=> x = y)
+      #|  forall f:A->A n x y.\n        0 < n /\\\n        periodic_point f n x /\\\n        periodic_point f n y\n        ==> (f x = f y <=> x = y)
       #|  ITER (k:num) (f:A->A) (y:A)
       #|  ITER (k:num) (f:A->A) (x:A)
       #|  n:num
       #|  f:A->A
       #|  y:A
       #|  x:A
-      #|  !f:A->A n k x y.\n        0 < (n:num) /\\\n        periodic_point (f:A->A) n (x:A) /\\\n        periodic_point f n (y:A)\n        ==> (ITER (k:num) f x = ITER k f y <=> x = y)
-      #|  !f:A->A k m x.\n        periodic_point (ITER k f) m x <=>\n        periodic_point f (m * k) x
+      #|  forall f:A->A n k x y.\n        0 < (n:num) /\\\n        periodic_point (f:A->A) n (x:A) /\\\n        periodic_point f n (y:A)\n        ==> (ITER (k:num) f x = ITER k f y <=> x = y)
+      #|  forall f:A->A k m x.\n        periodic_point (ITER k f) m x <=>\n        periodic_point f (m * k) x
       #|  ITER (m DIV n * n + m MOD n) (f:A->A) x
       #|  periodic_point (f:A->A) (m DIV n * n) x
       #|  n:num
       #|  m:num
-      #|  !f:A->A n x m.\n        0 < n /\\ periodic_point f n x\n        ==> ITER m f x = ITER (m MOD n) f x
+      #|  forall f:A->A n x m.\n        0 < n /\\ periodic_point f n x\n        ==> ITER m f x = ITER (m MOD n) f x
       #|  \\k:num. ITER k (f:A->A) x
       #|  ITER (n + (j - i)) (f:A->A) x = ITER (j - i) f x
       #|  ((n:num) - i) + i = n /\\\n    (n - i) + j = n + (j - i)
       #|  ITER ((n:num) - i) (f:A->A) (ITER i f x) =\n    ITER (n - i) f (ITER j f x)
-      #|  !f:A->A n x i j.\n        periodic_point f n x /\\\n        i <= j /\\\n        j <= n /\\\n        ITER i f x = ITER j f x\n        ==> periodic_point f (j - i) x
+      #|  forall f:A->A n x i j.\n        periodic_point f n x /\\\n        i <= j /\\\n        j <= n /\\\n        ITER i f x = ITER j f x\n        ==> periodic_point f (j - i) x
       #|  m:num
       #|  m:num
       #|  n:num
@@ -79680,12 +79680,12 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:A->A
       #|  periodic_point (f:A->A) (m MOD n) x
       #|  m:num
-      #|  !f:A->A n x.\n        minimal_period f n x <=>\n        0 < n /\\ !m. periodic_point f m x <=> n divides m
-      #|  !f:A->A n x. minimal_period f n x ==> 0 < n
+      #|  forall f:A->A n x.\n        minimal_period f n x <=>\n        0 < n /\\ forall m. periodic_point f m x <=> n divides m
+      #|  forall f:A->A n x. minimal_period f n x ==> 0 < n
       #|  x:A
-      #|  !f:A->A n. has_period f n ==> 0 < n
-      #|  !f:A->A n x. minimal_period f n x ==> periodic_point f n x
-      #|  !f:A->A n x m.\n        minimal_period f n x\n        ==> (periodic_point f m x <=> n divides m)
+      #|  forall f:A->A n. has_period f n ==> 0 < n
+      #|  forall f:A->A n x. minimal_period f n x ==> periodic_point f n x
+      #|  forall f:A->A n x m.\n        minimal_period f n x\n        ==> (periodic_point f m x <=> n divides m)
       #|  m:num
       #|  x:A
       #|  n:num
@@ -79704,7 +79704,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (k:num) + m = m + k
       #|  ITER k (f:A->A) (ITER m f x) =\n        ITER m f (ITER k f x)
       #|  m:num
-      #|  !f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period f n (ITER k f x)
+      #|  forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period f n (ITER k f x)
       #|  (n:num) divides (j - i)
       #|  j - i:num
       #|  x:A
@@ -79717,7 +79717,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  n:num
       #|  f:A->A
       #|  periodic_point (f:A->A) (j - i) x
-      #|  !f:A->A n x i j.\n        minimal_period f n x /\\\n        i <= j /\\\n        j < n /\\\n        ITER i f x = ITER j f x\n        ==> i = j
+      #|  forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i <= j /\\\n        j < n /\\\n        ITER i f x = ITER j f x\n        ==> i = j
       #|  i:num
       #|  j:num
       #|  x:A
@@ -79730,8 +79730,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  n:num
       #|  f:A->A
       #|  (i:num) <= j
-      #|  !f:A->A n x i j.\n        minimal_period f n x /\\\n        i < n /\\\n        j < n\n        ==> (ITER i f x = ITER j f x <=> i = j)
-      #|  !f:A->A m n x.\n        minimal_period f m x /\\ minimal_period f n x\n        ==> m = n
+      #|  forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i < n /\\\n        j < n\n        ==> (ITER i f x = ITER j f x <=> i = j)
+      #|  forall f:A->A m n x.\n        minimal_period f m x /\\ minimal_period f n x\n        ==> m = n
       #|  m:num
       #|  n = 0
       #|  m:num
@@ -79740,7 +79740,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:A
       #|  f:A->A
       #|  (=):A->A->bool
-      #|  !f:A->A x m.\n        0 < m /\\ periodic_point f m x\n        ==> ?n. n divides m /\\ minimal_period f n x
+      #|  forall f:A->A x m.\n        0 < m /\\ periodic_point f m x\n        ==> ?n. n divides m /\\ minimal_period f n x
       #|  m:num
       #|  gcd(n,k)
       #|  n:num
@@ -79749,15 +79749,15 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  n DIV gcd(n,k) = 0
       #|  n DIV gcd(n,k) * gcd(n,k) = n
       #|  gcd(n,k) divides n
-      #|  !f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period (ITER k f) (n DIV gcd(n,k)) x
-      #|  !f:A->A n k.\n        has_period f n\n        ==> has_period (ITER k f) (n DIV gcd(n,k))
+      #|  forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period (ITER k f) (n DIV gcd(n,k)) x
+      #|  forall f:A->A n k.\n        has_period f n\n        ==> has_period (ITER k f) (n DIV gcd(n,k))
       #|  (m:num) - (m - r) = r
       #|  (d:num) divides (m - (m - r))
-      #|  !d m r.\n        d divides m /\\ 0 < r /\\ r < d /\\ r <= m\n        ==> ~(d divides (m - r))
+      #|  forall d m r.\n        d divides m /\\ 0 < r /\\ r < d /\\ r <= m\n        ==> ~(d divides (m - r))
       #|  r:num
       #|  m:num
       #|  m - r:num
-      #|  !m r.\n        0 < r /\\ 2 * r < m\n        ==> ~((m - r) divides m)
+      #|  forall m r.\n        0 < r /\\ 2 * r < m\n        ==> ~((m - r) divides m)
       #|  j:num
       #|  i:num
       #|  x:A
@@ -79766,7 +79766,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  j:num
       #|  i:num
       #|  CARD {i:num | i < n}
-      #|  !f:A->A n x.\n        minimal_period f n x\n        ==> CARD (IMAGE (\\i. ITER i f x) {i | i < n}) = n
+      #|  forall f:A->A n x.\n        minimal_period f n x\n        ==> CARD (IMAGE (\\i. ITER i f x) {i | i < n}) = n
       #|  (SUC i) MOD n
       #|  f(ITER i (f:A->A) x) = ITER ((SUC i) MOD n) f x
       #|  (SUC i) MOD n < n
@@ -79774,9 +79774,9 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  periodic_point (f:A->A) n x
       #|  0 < (n:num)
       #|  i:num
-      #|  !f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> f y IN IMAGE (\\i. ITER i f x) {i | i < n}
+      #|  forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> f y IN IMAGE (\\i. ITER i f x) {i | i < n}
       #|  i:num
-      #|  !f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> minimal_period f n y
+      #|  forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> minimal_period f n y
       #|  k - 1 + 1 = k
       #|  k - 1
       #|  k:num
@@ -79792,14 +79792,14 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (<=):real->real->bool
       #|  (s:real->bool) HAS_SIZE n
       #|  s:real->bool = IMAGE (\\i. ITER i (f:real->real) x) {i | i < n}
-      #|  !f:real->real n x.\n        minimal_period f n x\n        ==> ?z.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              IMAGE z {i | i < n} =\n              IMAGE (\\i. ITER i f x) {i | i < n}
+      #|  forall f:real->real n x.\n        minimal_period f n x\n        ==> ?z.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              IMAGE z {i | i < n} =\n              IMAGE (\\i. ITER i f x) {i | i < n}
       #|  i:num
       #|  j:num
       #|  j:num
       #|  i:num
       #|  (i:num) < j
       #|  (i:num) = j
-      #|  !z:num->real n i j.\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i < n /\\\n        j < n\n        ==> (z i = z j <=> i = j)
+      #|  forall z:num->real n i j.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i < n /\\\n        j < n\n        ==> (z i = z j <=> i = j)
       #|  j:num
       #|  j:num
       #|  (f:real->real)((z:num->real) i) IN\n      IMAGE (\\k. ITER k f x) {k | k < n}
@@ -79809,11 +79809,11 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  p:num->num
       #|  p:num->num =\n    \\i. @j:num. j < n /\\ (f:real->real)((z:num->real) i) = z j
-      #|  !f:real->real n x z.\n        minimal_period f n x /\\\n        IMAGE z {i | i < n} = IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> ?p:num->num.\n              !i. i < n ==> p i < n /\\ f(z i) = z(p i)
+      #|  forall f:real->real n x z.\n        minimal_period f n x /\\\n        IMAGE z {i | i < n} = IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> ?p:num->num.\n              forall i. i < n ==> p i < n /\\ f(z i) = z(p i)
       #|  ITER k (p:num->num) i
       #|  i:num
       #|  i:num
-      #|  !f:A->A z p n.\n        (!i:num.\n             i < n\n             ==> (p:num->num) i < n /\\\n                 f((z:num->A) i) = z(p i))\n        ==> !k i:num.\n              i < n\n              ==> ITER k p i < n /\\\n                  ITER k f (z i) = z(ITER k p i)
+      #|  forall f:A->A z p n.\n        (forall i:num.\n             i < n\n             ==> (p:num->num) i < n /\\\n                 f((z:num->A) i) = z(p i))\n        ==> forall k i:num.\n              i < n\n              ==> ITER k p i < n /\\\n                  ITER k f (z i) = z(ITER k p i)
       #|  m:num
       #|  (z:num->real) i
       #|  n:num
@@ -79837,11 +79837,11 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  (z:num->real) i IN\n    IMAGE (\\k. ITER k (f:real->real) x) {k | k < n}
       #|  i:num
-      #|  !f:real->real n x z p.\n        minimal_period f n x /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        IMAGE z {i | i < n} =\n        IMAGE (\\i. ITER i f x) {i | i < n} /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i))\n        ==> !i. i < n ==> minimal_period p n i
+      #|  forall f:real->real n x z p.\n        minimal_period f n x /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        IMAGE z {i | i < n} =\n        IMAGE (\\i. ITER i f x) {i | i < n} /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i))\n        ==> forall i. i < n ==> minimal_period p n i
       #|  adjacent_interval_cover p i j <=>\n        (p i <= j /\\ j + 1 <= p(i + 1)) \\/\n        (p(i + 1) <= j /\\ j + 1 <= p i)
-      #|  !p n i j.\n        p i < n /\\\n        p(i + 1) < n /\\\n        adjacent_interval_cover p i j\n        ==> j + 1 < n
-      #|  !p i j.\n        adjacent_interval_cover p i j <=>\n        MIN (p i) (p(i + 1)) <= j /\\\n        j < MAX (p i) (p(i + 1))
-      #|  !p i j k l.\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p i k /\\\n        j <= l /\\\n        l <= k\n        ==> adjacent_interval_cover p i l
+      #|  forall p n i j.\n        p i < n /\\\n        p(i + 1) < n /\\\n        adjacent_interval_cover p i j\n        ==> j + 1 < n
+      #|  forall p i j.\n        adjacent_interval_cover p i j <=>\n        MIN (p i) (p(i + 1)) <= j /\\\n        j < MAX (p i) (p(i + 1))
+      #|  forall p i j k l.\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p i k /\\\n        j <= l /\\\n        l <= k\n        ==> adjacent_interval_cover p i l
       #|  j:num
       #|  a:num
       #|  p:num->num
@@ -79871,8 +79871,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  j:num
       #|  a:num
       #|  p:num->num
-      #|  !d p a j.\n        ((p a <= j /\\ j < p(a + SUC d)) \\/\n         (p(a + SUC d) <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < a + SUC d /\\\n              adjacent_interval_cover p i j
-      #|  !p a b j.\n        a < b /\\\n        ((p a <= j /\\ j < p b) \\/ (p b <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < b /\\\n              adjacent_interval_cover p i j
+      #|  forall d p a j.\n        ((p a <= j /\\ j < p(a + SUC d)) \\/\n         (p(a + SUC d) <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < a + SUC d /\\\n              adjacent_interval_cover p i j
+      #|  forall p a b j.\n        a < b /\\\n        ((p a <= j /\\ j < p b) \\/ (p b <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < b /\\\n              adjacent_interval_cover p i j
       #|  h:num
       #|  h:num
       #|  l:num
@@ -79892,7 +79892,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  adjacent_interval_cover (p:num->num) b l
       #|  a:num
       #|  adjacent_interval_cover (p:num->num) a l
-      #|  !p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        j <= l /\\\n        l <= k\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
+      #|  forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        j <= l /\\\n        l <= k\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
       #|  h:num
       #|  h:num
       #|  l:num
@@ -79912,9 +79912,9 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  adjacent_interval_cover (p:num->num) b l
       #|  a:num
       #|  adjacent_interval_cover (p:num->num) a l
-      #|  !p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        k <= l /\\\n        l <= j\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
-      #|  (adjacent_interval_reachable p 0 i j <=> j = i) /\\\n    (!k. adjacent_interval_reachable p (SUC k) i j <=>\n         ?h. adjacent_interval_reachable p k i h /\\\n             adjacent_interval_cover p h j)
-      #|  !p i j.\n        adjacent_interval_reachable p 1 i j <=>\n        adjacent_interval_cover p i j
+      #|  forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        k <= l /\\\n        l <= j\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
+      #|  (adjacent_interval_reachable p 0 i j <=> j = i) /\\\n    (forall k. adjacent_interval_reachable p (SUC k) i j <=>\n         ?h. adjacent_interval_reachable p k i h /\\\n             adjacent_interval_cover p h j)
+      #|  forall p i j.\n        adjacent_interval_reachable p 1 i j <=>\n        adjacent_interval_cover p i j
       #|  h + 1
       #|  h:num
       #|  j:num
@@ -79928,7 +79928,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  j:num
       #|  i:num
-      #|  !p n k i j.\n        (!r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        adjacent_interval_reachable p k i j\n        ==> j + 1 < n
+      #|  forall p n k i j.\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        adjacent_interval_reachable p k i j\n        ==> j + 1 < n
       #|  l:num
       #|  l:num
       #|  h:num
@@ -79938,7 +79938,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  j:num
       #|  h:num
       #|  i:num
-      #|  !p k i h j.\n        adjacent_interval_cover p i h /\\\n        adjacent_interval_reachable p k h j\n        ==> adjacent_interval_reachable p (SUC k) i j
+      #|  forall p k i h j.\n        adjacent_interval_cover p i h /\\\n        adjacent_interval_reachable p k h j\n        ==> adjacent_interval_reachable p (SUC k) i j
       #|  m:num
       #|  m:num
       #|  j:num
@@ -79948,13 +79948,13 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  h:num
       #|  j:num
       #|  i:num
-      #|  !p k l i j h.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p l j h\n        ==> adjacent_interval_reachable p (k + l) i h
+      #|  forall p k l i j h.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p l j h\n        ==> adjacent_interval_reachable p (k + l) i h
       #|  j:num
       #|  i:num
       #|  i:num
       #|  k:num
       #|  p:num->num
-      #|  !p k i j.\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_reachable p k i j\n        ==> adjacent_interval_reachable p (SUC k) i j
+      #|  forall p k i j.\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_reachable p k i j\n        ==> adjacent_interval_reachable p (SUC k) i j
       #|  h:num
       #|  h:num
       #|  h:num
@@ -79989,7 +79989,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  l:num
       #|  j:num
       #|  i:num
-      #|  !p k i j l m.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p k i l /\\\n        j <= m /\\\n        m <= l\n        ==> adjacent_interval_reachable p k i m
+      #|  forall p k i j l m.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p k i l /\\\n        j <= m /\\\n        m <= l\n        ==> adjacent_interval_reachable p k i m
       #|  k:num
       #|  r:num
       #|  q:num->num
@@ -80016,7 +80016,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\r:num. (i:num)
       #|  j:num
       #|  i:num
-      #|  !p k i j.\n        adjacent_interval_reachable p k i j <=>\n        ?q. q 0 = i /\\\n            q k = j /\\\n            !r. r < k\n                ==> adjacent_interval_cover p (q r) (q(SUC r))
+      #|  forall p k i j.\n        adjacent_interval_reachable p k i j <=>\n        ?q. q 0 = i /\\\n            q k = j /\\\n            forall r. r < k\n                ==> adjacent_interval_cover p (q r) (q(SUC r))
       #|  (q:num->num) r + 1
       #|  (q:num->num) r
       #|  (q:num->num)(SUC r)
@@ -80025,7 +80025,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  r <= k ==> (q:num->num) r + 1 < n
       #|  (q:num->num) r + 1 < n
-      #|  !p n k i (q:num->num).\n        (!r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        q 0 = i /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> !r. r <= k ==> q r + 1 < n
+      #|  forall p n k i (q:num->num).\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        q 0 = i /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> forall r. r <= k ==> q r + 1 < n
       #|  SUC k
       #|  u:A->bool
       #|  k:num
@@ -80035,21 +80035,21 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  0
       #|  CARD((s:num->A->bool) 0)
       #|  \\m. ?k. m = CARD((s:num->A->bool) k)
-      #|  !s:num->A->bool u.\n        FINITE u /\\\n        (!k. s k SUBSET u) /\\\n        (!k. s k SUBSET s(SUC k))\n        ==> ?k. s(SUC k) = s k
+      #|  forall s:num->A->bool u.\n        FINITE u /\\\n        (forall k. s k SUBSET u) /\\\n        (forall k. s k SUBSET s(SUC k))\n        ==> ?k. s(SUC k) = s k
       #|  CARD(IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}) <=\n    CARD(a..b)
       #|  a:num
       #|  CARD(IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}) = n
       #|  IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}\n    SUBSET (a..b)
-      #|  !r. a <= r /\\ r <= b\n             ==> a <= (p:num->num) r /\\ p r <= b
+      #|  forall r. a <= r /\\ r <= b\n             ==> a <= (p:num->num) r /\\ p r <= b
       #|  ITER m (p:num->num) a
-      #|  !m. ITER m (p:num->num) a IN (a..b)
+      #|  forall m. ITER m (p:num->num) a IN (a..b)
       #|  r:num
       #|  (b:num) - 1 + 1 = b
       #|  (b:num) - 1 + 1 = b
       #|  b - 1
       #|  (r:num) = b
       #|  r:num
-      #|  !r. a <= r /\\ r <= b\n        ==> a <= (p:num->num) r /\\ p r <= b
+      #|  forall r. a <= r /\\ r <= b\n        ==> a <= (p:num->num) r /\\ p r <= b
       #|  (p:num->num) h - 1
       #|  h:num
       #|  a <= (p:num->num) h - 1 /\\ p h - 1 < b
@@ -80072,8 +80072,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  ~((p:num->num) h = p(h + 1))
       #|  h:num
-      #|  !h. a <= h /\\ h < b\n        ==> a <= (p:num->num) h /\\\n            p h <= b /\\\n            a <= p(h + 1) /\\\n            p(h + 1) <= b
-      #|  !p n a b.\n        a < b /\\\n        b < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i) /\\\n        (!i j.\n             a <= i /\\\n             i < b /\\\n             adjacent_interval_cover p i j\n             ==> a <= j /\\ j < b)\n        ==> a = 0 /\\ b + 1 = n
+      #|  forall h. a <= h /\\ h < b\n        ==> a <= (p:num->num) h /\\\n            p h <= b /\\\n            a <= p(h + 1) /\\\n            p(h + 1) <= b
+      #|  forall p n a b.\n        a < b /\\\n        b < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i) /\\\n        (forall i j.\n             a <= i /\\\n             i < b /\\\n             adjacent_interval_cover p i j\n             ==> a <= j /\\ j < b)\n        ==> a = 0 /\\ b + 1 = n
       #|  h + 1 < n /\\\n    adjacent_interval_reachable (p:num->num) k i h
       #|  h:num
       #|  k:num
@@ -80115,7 +80115,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (h:num) < a
       #|  (a:num) <= h
       #|  h:num
-      #|  !h.\n        (h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h <=>\n         a <= h /\\ h <= b)
+      #|  forall h.\n        (h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h <=>\n         a <= h /\\ h <= b)
       #|  h:num
       #|  n:num
       #|  i:num
@@ -80136,15 +80136,15 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (l:num) + 1 < n
       #|  l:num
       #|  h:num
-      #|  !h l.\n        h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h /\\\n        adjacent_interval_cover p h l\n        ==> l + 1 < n /\\\n            adjacent_interval_reachable p k i l
+      #|  forall h l.\n        h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h /\\\n        adjacent_interval_cover p h l\n        ==> l + 1 < n /\\\n            adjacent_interval_reachable p k i l
       #|  k:num
       #|  h:num
       #|  m:num
       #|  m:num
       #|  0..n
       #|  \\k. {h | h + 1 < n /\\\n              adjacent_interval_reachable (p:num->num) k i h}
-      #|  !m. adjacent_interval_reachable (p:num->num) m i i
-      #|  !p n i j.\n        (!r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(j = i) /\\\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_cover p i j\n        ==> ?k.\n              !h. h + 1 < n\n                  ==> adjacent_interval_reachable p k i h
+      #|  forall m. adjacent_interval_reachable (p:num->num) m i i
+      #|  forall p n i j.\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(j = i) /\\\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_cover p i j\n        ==> ?k.\n              forall h. h + 1 < n\n                  ==> adjacent_interval_reachable p k i h
       #|  i + 1
       #|  i - 1
       #|  2 = SUC(SUC 0)
@@ -80172,7 +80172,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  i:num
       #|  (p:num->num) i < n /\\\n    minimal_period p n i /\\\n    p(i + 1) < n
-      #|  !p n i.\n        2 < n /\\\n        (!r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        adjacent_interval_cover p i i\n        ==> ?j.\n              j + 1 < n /\\\n              ~(j = i) /\\\n              adjacent_interval_cover p i j
+      #|  forall p n i.\n        2 < n /\\\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        adjacent_interval_cover p i i\n        ==> ?j.\n              j + 1 < n /\\\n              ~(j = i) /\\\n              adjacent_interval_cover p i j
       #|  (i:num) < (p:num->num) i
       #|  (p:num->num) (i + 1) <= i
       #|  (i:num) + 1 < n
@@ -80180,7 +80180,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  ~((p:num->num) (i + 1) = i + 1)
       #|  ~((p:num->num) (i + 1) <= i)
       #|  (i:num) + 1 < n
-      #|  !j. j < n /\\ j < (p:num->num) j ==> j <= i
+      #|  forall j. j < n /\\ j < (p:num->num) j ==> j <= i
       #|  i + 1
       #|  1
       #|  0
@@ -80207,10 +80207,10 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  0
       #|  \\j:num. j < n /\\ j < (p:num->num) j
-      #|  ?i:num.\n        (i < n /\\ i < (p:num->num) i) /\\\n        !j. j < n /\\ j < p j ==> j <= i
+      #|  ?i:num.\n        (i < n /\\ i < (p:num->num) i) /\\\n        forall j. j < n /\\ j < p j ==> j <= i
       #|  0
       #|  (p:num->num) 0 < n /\\ minimal_period p n 0
-      #|  !p n.\n        1 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i.\n              i + 1 < n /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i
+      #|  forall p n.\n        1 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i.\n              i + 1 < n /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i
       #|  i + 1
       #|  EVEN n
       #|  (n:num) = 2 * (i + 1)
@@ -80237,7 +80237,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  s:num
       #|  r:num
-      #|  !r s.\n        r < n /\\ s < n /\\ (p:num->num) r = p s\n        ==> r = s
+      #|  forall r s.\n        r < n /\\ s < n /\\ (p:num->num) r = p s\n        ==> r = s
       #|  h:num
       #|  ?j. j + 1 < n /\\\n          ~(j = i) /\\\n          adjacent_interval_cover (p:num->num) j i
       #|  h:num
@@ -80248,7 +80248,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  (p:num->num) r <= i
       #|  r:num
-      #|  !r. i + 1 <= r /\\ r < n ==> (p:num->num) r <= i
+      #|  forall r. i + 1 <= r /\\ r < n ==> (p:num->num) r <= i
       #|  h:num
       #|  ?j. j + 1 < n /\\\n          ~(j = i) /\\\n          adjacent_interval_cover (p:num->num) j i
       #|  h:num
@@ -80259,7 +80259,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i < (p:num->num) r
       #|  (r:num) = i
       #|  r:num
-      #|  !r. r <= i ==> i < (p:num->num) r
+      #|  forall r. r <= i ==> i < (p:num->num) r
       #|  j:num
       #|  i:num
       #|  j:num
@@ -80272,7 +80272,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  n:num
       #|  p:num->num
-      #|  !p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i j.\n              i + 1 < n /\\\n              j + 1 < n /\\\n              ~(j = i) /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i /\\\n              adjacent_interval_cover p i i /\\\n              adjacent_interval_cover p j i
+      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i j.\n              i + 1 < n /\\\n              j + 1 < n /\\\n              ~(j = i) /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i /\\\n              adjacent_interval_cover p i i /\\\n              adjacent_interval_cover p j i
       #|  (r:num) = m
       #|  SUC(r:num) < SUC m
       #|  (r:num) < m
@@ -80321,7 +80321,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  n:num
       #|  p:num->num
-      #|  !p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
+      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
       #|  s:num
       #|  (q:num->A) r
       #|  (~p ==> F) <=> p
@@ -80341,8 +80341,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  r:num
       #|  q:num->A
       #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
-      #|  !v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
+      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
+      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
       #|  ~((i:num) <= r) /\\ ~(SUC i <= r)
       #|  s:num
       #|  SUC r + (s - r) = SUC s
@@ -80364,9 +80364,9 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  r:num
       #|  q:num->A
       #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
-      #|  !v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
-      #|  !r s k:num.\n               r < s /\\ s < k ==> s - r <= k
+      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
+      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
+      #|  forall r s k:num.\n               r < s /\\ s < k ==> s - r <= k
       #|  k:num
       #|  s:num
       #|  r:num
@@ -80408,7 +80408,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  i:num
       #|  i:num
-      #|  (!i. i <= l ==> v((h:num->A) i)) /\\\n      (!i. i < l\n           ==> (if i <= r then i else i + d) < k) /\\\n      (!i j. i < j /\\ j < l\n             ==> (if i <= r then i else i + d) <\n                 (if j <= r then j else j + d))
+      #|  (forall i. i <= l ==> v((h:num->A) i)) /\\\n      (forall i. i < l\n           ==> (if i <= r then i else i + d) < k) /\\\n      (forall i j. i < j /\\ j < l\n             ==> (if i <= r then i else i + d) <\n                 (if j <= r then j else j + d))
       #|  h = \\i:num. if i <= r then (q:num->A) i else q(i + d)
       #|  SUC r + d = s
       #|  0 < (d:num) /\\ d <= k /\\ 1 < l /\\ l < k /\\ l + d = k
@@ -80418,8 +80418,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  r:num
       #|  q:num->A
       #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
-      #|  !v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k ==> ~e (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k ==> ~e (q r) (q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))
+      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
+      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k ==> ~e (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k ==> ~e (q r) (q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
       #|  (l:num) < k
       #|  l:num
       #|  (i:num) < l
@@ -80452,11 +80452,11 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\i. if i < k then (q:num->A)(SUC i)\n        else if i = k then q 0 else q 1
       #|  (j:num) = k
       #|  j:num
-      #|  !j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
+      #|  forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
       #|  1
       #|  0
       #|  ~((q:num->A) 0 = q 1)
-      #|  !v e k (q:num->A).\n        1 < k /\\\n        (!i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (!i. i <= k + 1 ==> v(r i)) /\\\n              r 0 = r(k + 1) /\\\n              (!i. 0 < i /\\ i < k + 1 ==> ~(r i = r 0)) /\\\n              (!i. i < k + 1 ==> e (r i) (r(SUC i)))
+      #|  forall v e k (q:num->A).\n        1 < k /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + 1 ==> v(r i)) /\\\n              r 0 = r(k + 1) /\\\n              (forall i. 0 < i /\\ i < k + 1 ==> ~(r i = r 0)) /\\\n              (forall i. i < k + 1 ==> e (r i) (r(SUC i)))
       #|  0
       #|  SUC(i:num) < k + t
       #|  i < k + t /\\ ~(i < k) /\\ ~(SUC i < k)
@@ -80476,28 +80476,28 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\i. if i < k then (q:num->A)(SUC i)\n        else if i < k + t then q 0 else q 1
       #|  (j:num) = k
       #|  j:num
-      #|  !j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
+      #|  forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
       #|  1
       #|  0
       #|  ~((q:num->A) 0 = q 1)
-      #|  !v e k (q:num->A) t.\n        1 < k /\\\n        0 < t /\\\n        (!i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (!i. i <= k + t ==> v(r i)) /\\\n              r 0 = r(k + t) /\\\n              (!i. 0 < i /\\ i < k + t ==> ~(r i = r 0)) /\\\n              (!i. i < k + t ==> e (r i) (r(SUC i)))
+      #|  forall v e k (q:num->A) t.\n        1 < k /\\\n        0 < t /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + t ==> v(r i)) /\\\n              r 0 = r(k + t) /\\\n              (forall i. 0 < i /\\ i < k + t ==> ~(r i = r 0)) /\\\n              (forall i. i < k + t ==> e (r i) (r(SUC i)))
       #|  SUC 0 = 1
       #|  j:num
       #|  i:num
       #|  q:num->num
       #|  {i:num | i < k}
-      #|  !q (k:num).\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> !x. x < k ==> ?i. i < k /\\ q i = x
-      #|  !r s:num. r < s ==> s = r + 1 \\/ r + 1 < s
+      #|  forall q (k:num).\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> forall x. x < k ==> ?i. i < k /\\ q i = x
+      #|  forall r s:num. r < s ==> s = r + 1 \\/ r + 1 < s
       #|  x:num
       #|  k:num
       #|  q:num->num
-      #|  !p q k r x.\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        x < k /\\\n        adjacent_interval_cover p (q r) x /\\\n        (!s. s <= r ==> ~(q s = x))\n        ==> x = q(r + 1)
-      #|  !s r:num. s <= r ==> s < r + 1
-      #|  !x. a <= x /\\ x <= b\n             ==> ?s. s <= r /\\ (q:num->num) s = x
+      #|  forall p q k r x.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        x < k /\\\n        adjacent_interval_cover p (q r) x /\\\n        (forall s. s <= r ==> ~(q s = x))\n        ==> x = q(r + 1)
+      #|  forall s r:num. s <= r ==> s < r + 1
+      #|  forall x. a <= x /\\ x <= b\n             ==> ?s. s <= r /\\ (q:num->num) s = x
       #|  (q:num->num) (r + 1)
       #|  b < (q:num->num) (r + 1)
       #|  (q:num->num) (r + 1) < a
-      #|  !(q:num->num) k r a b.\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        r + 1 < k /\\\n        (!s. s <= r ==> a <= q s /\\ q s <= b) /\\\n        (!x. a <= x /\\ x <= b ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) < a \\/ b < q(r + 1)
+      #|  forall(q:num->num) k r a b.\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        r + 1 < k /\\\n        (forall s. s <= r ==> a <= q s /\\ q s <= b) /\\\n        (forall x. a <= x /\\ x <= b ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) < a \\/ b < q(r + 1)
       #|  s:num
       #|  s:num
       #|  x:num
@@ -80541,7 +80541,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (q:num->num) (r + 1) < lo \\/ hi < q(r + 1)
       #|  r:num
       #|  (hi:num) < k
-      #|  !p q k r a lo hi.\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = hi /\\\n        p hi = lo /\\\n        lo <= a /\\ a <= hi /\\\n        (!s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (!x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> 0 < lo /\\\n            q(r + 1) = lo - 1 /\\\n            p(hi + 1) = lo - 1 /\\\n            (!s. s <= r + 1 ==> lo - 1 <= q s /\\ q s <= hi) /\\\n            (!x. lo - 1 <= x /\\ x <= hi\n                 ==> ?s. s <= r + 1 /\\ q s = x)
+      #|  forall p q k r a lo hi.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = hi /\\\n        p hi = lo /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> 0 < lo /\\\n            q(r + 1) = lo - 1 /\\\n            p(hi + 1) = lo - 1 /\\\n            (forall s. s <= r + 1 ==> lo - 1 <= q s /\\ q s <= hi) /\\\n            (forall x. lo - 1 <= x /\\ x <= hi\n                 ==> ?s. s <= r + 1 /\\ q s = x)
       #|  s:num
       #|  s:num
       #|  x:num
@@ -80591,7 +80591,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (q:num->num) (r + 1) < k
       #|  r:num
       #|  (lo:num) < k
-      #|  !p q k r a lo hi.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = lo /\\\n        p(lo + 1) = hi + 1 /\\\n        lo <= a /\\ a <= hi /\\\n        (!s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (!x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) = hi + 1 /\\\n            p lo = hi + 2 /\\\n            (!s. s <= r + 1 ==> lo <= q s /\\ q s <= hi + 1) /\\\n            (!x. lo <= x /\\ x <= hi + 1\n                 ==> ?s. s <= r + 1 /\\ q s = x)
+      #|  forall p q k r a lo hi.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = lo /\\\n        p(lo + 1) = hi + 1 /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) = hi + 1 /\\\n            p lo = hi + 2 /\\\n            (forall s. s <= r + 1 ==> lo <= q s /\\ q s <= hi + 1) /\\\n            (forall x. lo <= x /\\ x <= hi + 1\n                 ==> ?s. s <= r + 1 /\\ q s = x)
       #|  0
       #|  1
       #|  (x:num) = a - 1
@@ -80636,7 +80636,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (p:num->num) (a + 1) <= q 1 /\\ q 1 + 1 <= p a
       #|  (a:num) + 1 <= (p:num->num) a
       #|  (q:num->num) 1 < a
-      #|  !pa pa1 q a:num.\n          q < a /\\ a + 1 <= pa\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
+      #|  forall pa pa1 q a:num.\n          q < a /\\ a + 1 <= pa\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
       #|  a:num
       #|  (q:num->num) 1
       #|  (p:num->num) (a + 1)
@@ -80645,7 +80645,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (q:num->num) 1 < k
       #|  0
       #|  (a:num) < k
-      #|  !p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> 0 < a /\\\n            q 1 = a - 1 /\\\n            p(a + 1) = a - 1 /\\\n            p a = a + 1 /\\\n            (!s. s <= 1 ==> a - 1 <= q s /\\ q s <= a) /\\\n            (!x. a - 1 <= x /\\ x <= a\n                 ==> ?s. s <= 1 /\\ q s = x)
+      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> 0 < a /\\\n            q 1 = a - 1 /\\\n            p(a + 1) = a - 1 /\\\n            p a = a + 1 /\\\n            (forall s. s <= 1 ==> a - 1 <= q s /\\ q s <= a) /\\\n            (forall x. a - 1 <= x /\\ x <= a\n                 ==> ?s. s <= 1 /\\ q s = x)
       #|  0
       #|  1
       #|  (x:num) = a + 1
@@ -80692,7 +80692,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (p:num->num) (a + 1) <= q 1 /\\ q 1 + 1 <= p a
       #|  (a:num) < (q:num->num) 1
       #|  (p:num->num) (a + 1) <= a
-      #|  !pa pa1 q a:num.\n          pa1 <= a /\\ a < q\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
+      #|  forall pa pa1 q a:num.\n          pa1 <= a /\\ a < q\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
       #|  a:num
       #|  (q:num->num) 1
       #|  (p:num->num) (a + 1)
@@ -80701,7 +80701,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (q:num->num) 1 < k
       #|  0
       #|  (a:num) < k
-      #|  !p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1 /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> q 1 = a + 1 /\\\n            p(a + 1) = a /\\\n            p a = a + 2 /\\\n            (!s. s <= 1 ==> a <= q s /\\ q s <= a + 1) /\\\n            (!x. a <= x /\\ x <= a + 1\n                 ==> ?s. s <= 1 /\\ q s = x)
+      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1 /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> q 1 = a + 1 /\\\n            p(a + 1) = a /\\\n            p a = a + 2 /\\\n            (forall s. s <= 1 ==> a <= q s /\\ q s <= a + 1) /\\\n            (forall x. a <= x /\\ x <= a + 1\n                 ==> ?s. s <= 1 /\\ q s = x)
       #|  s <= (2 * t + 2) + 1 ==> s <= 2 * SUC t + 1
       #|  s:num
       #|  x <= a + SUC t ==> x <= a + t + 1
@@ -80760,7 +80760,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  k:num
       #|  q:num->num
       #|  p:num->num
-      #|  !p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> !t. 2 * t + 1 < k\n                ==> t < a /\\\n                    q(2 * t) = a + t /\\\n                    q(2 * t + 1) = a - t - 1 /\\\n                    p(a - t) = a + t + 1 /\\\n                    p(a + t + 1) = a - t - 1 /\\\n                    (!s. s <= 2 * t + 1\n                         ==> a - t - 1 <= q s /\\ q s <= a + t) /\\\n                    (!x. a - t - 1 <= x /\\ x <= a + t\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
+      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> forall t. 2 * t + 1 < k\n                ==> t < a /\\\n                    q(2 * t) = a + t /\\\n                    q(2 * t + 1) = a - t - 1 /\\\n                    p(a - t) = a + t + 1 /\\\n                    p(a + t + 1) = a - t - 1 /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t - 1 <= q s /\\ q s <= a + t) /\\\n                    (forall x. a - t - 1 <= x /\\ x <= a + t\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
       #|  s <= (2 * t + 2) + 1 ==> s <= 2 * SUC t + 1
       #|  s:num
       #|  x <= a + SUC t + 1 ==> x <= (a + t + 1) + 1
@@ -80818,7 +80818,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  k:num
       #|  q:num->num
       #|  p:num->num
-      #|  !p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> !t. 2 * t + 1 < k\n                ==> t <= a /\\\n                    q(2 * t) = a - t /\\\n                    q(2 * t + 1) = a + t + 1 /\\\n                    p(a - t) = a + t + 2 /\\\n                    p(a + t + 1) = a - t /\\\n                    (!s. s <= 2 * t + 1\n                         ==> a - t <= q s /\\ q s <= a + t + 1) /\\\n                    (!x. a - t <= x /\\ x <= a + t + 1\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
+      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> forall t. 2 * t + 1 < k\n                ==> t <= a /\\\n                    q(2 * t) = a - t /\\\n                    q(2 * t + 1) = a + t + 1 /\\\n                    p(a - t) = a + t + 2 /\\\n                    p(a + t + 1) = a - t /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t <= q s /\\ q s <= a + t + 1) /\\\n                    (forall x. a - t <= x /\\ x <= a + t + 1\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
       #|  r < m ==> 2 * r + 1 < 2 * m
       #|  r:num
       #|  r:num
@@ -80848,7 +80848,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  2 * (m:num)
       #|  q:num->num
       #|  p:num->num
-      #|  !p q m a.\n        (!i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (!i. i < 2 * m ==> q i < 2 * m) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> a = m /\\\n            q(2 * m - 1) = 0 /\\\n            p 1 = 2 * m /\\\n            (!r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
+      #|  forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> a = m /\\\n            q(2 * m - 1) = 0 /\\\n            p 1 = 2 * m /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
       #|  r < m ==> 2 * r + 1 < 2 * m
       #|  r:num
       #|  r:num
@@ -80876,7 +80876,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  2 * (m:num)
       #|  q:num->num
       #|  p:num->num
-      #|  !p q m a.\n        (!i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (!i. i < 2 * m ==> q i < 2 * m) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> a = m - 1 /\\\n            q(2 * m - 1) = 2 * m - 1 /\\\n            p(2 * m - 1) = 0 /\\\n            (!r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
+      #|  forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> a = m - 1 /\\\n            q(2 * m - 1) = 2 * m - 1 /\\\n            p(2 * m - 1) = 0 /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
       #|  r + (i + 1) - 1 = (r + i - 1) + 1
       #|  ~(i + 1 = 0)
       #|  r + 1 - 1 = r
@@ -80888,7 +80888,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  ~((k:num) - r = 0)
       #|  i:num
       #|  \\i. if i = 0 then (q:num->A)(k - 1)\n        else q(r + i - 1)
-      #|  !v e (q:num->A) k r.\n        0 < k /\\\n        r < k /\\\n        (!i. i < k ==> v(q i)) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        e (q(k - 1)) (q r) /\\\n        (!i. i < k ==> e (q i) (q(i + 1)))\n        ==> ?u.\n              (!i. i <= k - r ==> v(u i)) /\\\n              u 0 = u(k - r) /\\\n              (!i. 0 < i /\\ i < k - r ==> ~(u i = u 0)) /\\\n              (!i. i < k - r ==> e (u i) (u(i + 1)))
+      #|  forall v e (q:num->A) k r.\n        0 < k /\\\n        r < k /\\\n        (forall i. i < k ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        e (q(k - 1)) (q r) /\\\n        (forall i. i < k ==> e (q i) (q(i + 1)))\n        ==> ?u.\n              (forall i. i <= k - r ==> v(u i)) /\\\n              u 0 = u(k - r) /\\\n              (forall i. 0 < i /\\ i < k - r ==> ~(u i = u 0)) /\\\n              (forall i. i < k - r ==> e (u i) (u(i + 1)))
       #|  u:num->A
       #|  s <= m ==> 2 * m - 2 * (m - s) = 2 * s
       #|  2 * m - 2 * (m - s) = 2 * s
@@ -80902,7 +80902,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  e:A->A->bool
       #|  v:A->bool
       #|  s:num
-      #|  !v e (q:num->A) m.\n        0 < m /\\\n        (!i. i < 2 * m ==> v(q i)) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i. i < 2 * m ==> e (q i) (q(i + 1))) /\\\n        (!r. r < m ==> e (q(2 * m - 1)) (q(2 * r)))\n        ==> !s. 0 < s /\\ s <= m\n                ==> ?u.\n                      (!i. i <= 2 * s ==> v(u i)) /\\\n                      u 0 = u(2 * s) /\\\n                      (!i. 0 < i /\\ i < 2 * s\n                           ==> ~(u i = u 0)) /\\\n                      (!i. i < 2 * s ==> e (u i) (u(i + 1)))
+      #|  forall v e (q:num->A) m.\n        0 < m /\\\n        (forall i. i < 2 * m ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i. i < 2 * m ==> e (q i) (q(i + 1))) /\\\n        (forall r. r < m ==> e (q(2 * m - 1)) (q(2 * r)))\n        ==> forall s. 0 < s /\\ s <= m\n                ==> ?u.\n                      (forall i. i <= 2 * s ==> v(u i)) /\\\n                      u 0 = u(2 * s) /\\\n                      (forall i. 0 < i /\\ i < 2 * s\n                           ==> ~(u i = u 0)) /\\\n                      (forall i. i < 2 * s ==> e (u i) (u(i + 1)))
       #|  {j:num | j < n}
       #|  IMAGE (q:num->num) {i | i < k}
       #|  IMAGE (q:num->num) {i | i < k} SUBSET {j | j < n}
@@ -80917,13 +80917,13 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  CARD {i:num | i < k}
       #|  CARD(IMAGE (q:num->num) {i | i < k}) = k
-      #|  !q (k:num) (n:num).\n        (!i. i < k ==> q i < n) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k <= n
+      #|  forall q (k:num) (n:num).\n        (forall i. i < k ==> q i < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k <= n
       #|  i:num
       #|  i:num
       #|  n - 1
       #|  k:num
       #|  q:num->num
-      #|  !q (k:num) (n:num).\n        0 < k /\\\n        (!i. i < k ==> q i + 1 < n) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k < n
+      #|  forall q (k:num) (n:num).\n        0 < k /\\\n        (forall i. i < k ==> q i + 1 < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k < n
       #|  q:num->num
       #|  k:num
       #|  (q:num->num) k = a
@@ -80945,10 +80945,10 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  l:num
       #|  n:num
       #|  p:num->num
-      #|  !p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              k < n /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
+      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
       #|  IMAGE lift {x | x IN s /\\ (f:real->real) x = y} =\n      {x | x IN IMAGE lift s /\\ (lift o f o drop) x = lift y}
       #|  s:real->bool
-      #|  !f s y.\n        real_compact s /\\ f real_continuous_on s\n        ==> real_compact {x | x IN s /\\ f x = y}
+      #|  forall f s y.\n        real_compact s /\\ f real_continuous_on s\n        ==> real_compact {x | x IN s /\\ f x = y}
       #|  x:real
       #|  x:real
       #|  y:real
@@ -80960,7 +80960,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  a:real
       #|  f:real->real
       #|  y:real
-      #|  !f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        ((f a <= c /\\ d <= f b) \\/ (f b <= c /\\ d <= f a))\n        ==> real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])
+      #|  forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        ((f a <= c /\\ d <= f b) \\/ (f b <= c /\\ d <= f a))\n        ==> real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])
       #|  (z:num->real) (j + 1) < z i
       #|  (j:num) + 1 = i
       #|  (j:num) + 1 = i
@@ -80969,7 +80969,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (i:num) + 1 = j
       #|  (i:num) + 1 = j
       #|  (i:num) < j
-      #|  !z n i j x.\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        x IN real_interval[z i,z(i + 1)] /\\\n        x IN real_interval[z j,z(j + 1)]\n        ==> (i + 1 = j /\\ x = z j) \\/\n            (j + 1 = i /\\ x = z i)
+      #|  forall z n i j x.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        x IN real_interval[z i,z(i + 1)] /\\\n        x IN real_interval[z j,z(j + 1)]\n        ==> (i + 1 = j /\\ x = z j) \\/\n            (j + 1 = i /\\ x = z i)
       #|  (p:num->num) i
       #|  j + 1
       #|  j:num
@@ -80988,8 +80988,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (r:num) = s
       #|  s:num
       #|  r:num
-      #|  !r s. r <= s /\\ s < n ==> (z:num->real) r <= z s
-      #|  !f z p n i j.\n        f real_continuous_on (:real) /\\\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        p i < n /\\\n        p(i + 1) < n /\\\n        f(z i) = z(p i) /\\\n        f(z(i + 1)) = z(p(i + 1)) /\\\n        adjacent_interval_cover p i j\n        ==> real_interval[z j,z(j + 1)]\n            SUBSET IMAGE f (real_interval[z i,z(i + 1)])
+      #|  forall r s. r <= s /\\ s < n ==> (z:num->real) r <= z s
+      #|  forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        p i < n /\\\n        p(i + 1) < n /\\\n        f(z i) = z(p i) /\\\n        f(z(i + 1)) = z(p(i + 1)) /\\\n        adjacent_interval_cover p i j\n        ==> real_interval[z j,z(j + 1)]\n            SUBSET IMAGE f (real_interval[z i,z(i + 1)])
       #|  i:num
       #|  i:num
       #|  n:num
@@ -81009,7 +81009,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  i:num
       #|  n:num
       #|  p:num->num
-      #|  !f z p n.\n        f real_continuous_on (:real) /\\\n        1 < n /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n\n             ==> p i < n /\\\n                 minimal_period p n i /\\\n                 f(z i) = z(p i))\n        ==> ?i.\n              i + 1 < n /\\\n              real_interval[z i,z(i + 1)]\n              SUBSET IMAGE f (real_interval[z i,z(i + 1)])
+      #|  forall f z p n.\n        f real_continuous_on (:real) /\\\n        1 < n /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n\n             ==> p i < n /\\\n                 minimal_period p n i /\\\n                 f(z i) = z(p i))\n        ==> ?i.\n              i + 1 < n /\\\n              real_interval[z i,z(i + 1)]\n              SUBSET IMAGE f (real_interval[z i,z(i + 1)])
       #|  v:real
       #|  u:real
       #|  real_interval[u,y]
@@ -81034,7 +81034,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:real->real
       #|  c <= (f:real->real) z
       #|  z:real
-      #|  !z. z IN real_interval[u,v]\n        ==> c <= (f:real->real) z /\\ f z <= d
+      #|  forall z. z IN real_interval[u,v]\n        ==> c <= (f:real->real) z /\\ f z <= d
       #|  v:real
       #|  u:real
       #|  y:real
@@ -81045,7 +81045,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:real
       #|  {z | z IN real_interval[x,y] /\\ (f:real->real) z = c}
       #|  real_compact\n      {z | z IN real_interval[x,y] /\\ (f:real->real) z = c}
-      #|  !f x y c d.\n        x < y /\\\n        c < d /\\\n        f real_continuous_on real_interval[x,y] /\\\n        f x = c /\\\n        f y = d\n        ==> ?u v.\n              x <= u /\\ u <= v /\\ v <= y /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
+      #|  forall f x y c d.\n        x < y /\\\n        c < d /\\\n        f real_continuous_on real_interval[x,y] /\\\n        f x = c /\\\n        f y = d\n        ==> ?u v.\n              x <= u /\\ u <= v /\\ v <= y /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
       #|  w:real
       #|  w:real
       #|  IMAGE (\\z:real. --z)
@@ -81083,7 +81083,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:real
       #|  d:real
       #|  c:real = d
-      #|  !f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a,b] /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
+      #|  forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a,b] /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
       #|  z:real
       #|  z:real
       #|  y:real
@@ -81093,7 +81093,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  IMAGE (\\z. (f:real->real) z - z) s
       #|  &0 IN real_interval[(f:real->real) x - x,f y - y]
       #|  is_realinterval (IMAGE (\\z. (f:real->real) z - z) s)
-      #|  !f s.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        (?x. x IN s /\\ f x <= x) /\\\n        (?y. y IN s /\\ y <= f y)\n        ==> ?x. x IN s /\\ f x = x
+      #|  forall f s.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        (?x. x IN s /\\ f x <= x) /\\\n        (?y. y IN s /\\ y <= f y)\n        ==> ?x. x IN s /\\ f x = x
       #|  &0
       #|  x:real
       #|  x:real
@@ -81101,10 +81101,10 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:real
       #|  x:real
       #|  a:real
-      #|  !f a b.\n        a <= b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[a,b] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?x. x IN real_interval[a,b] /\\ f x = x
+      #|  forall f a b.\n        a <= b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[a,b] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?x. x IN real_interval[a,b] /\\ f x = x
       #|  IMAGE (f:real->real) s
       #|  (:real)
-      #|  !f n s.\n        f real_continuous_on (:real)\n        ==> ITER n f real_continuous_on s
+      #|  forall f n s.\n        f real_continuous_on (:real)\n        ==> ITER n f real_continuous_on s
       #|  j:num
       #|  j:num
       #|  i:num
@@ -81136,7 +81136,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (a:num->real) 0
       #|  b:num->real
       #|  a:num->real
-      #|  !f n a b.\n        f real_continuous_on (:real) /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i]))\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a 0,b 0] /\\\n              IMAGE (ITER n f) (real_interval[u,v]) =\n              real_interval[a n,b n] /\\\n              !i. i <= n\n                  ==> IMAGE (ITER i f) (real_interval[u,v])\n                      SUBSET real_interval[a i,b i]
+      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i]))\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a 0,b 0] /\\\n              IMAGE (ITER n f) (real_interval[u,v]) =\n              real_interval[a n,b n] /\\\n              forall i. i <= n\n                  ==> IMAGE (ITER i f) (real_interval[u,v])\n                      SUBSET real_interval[a i,b i]
       #|  0 < SUC n
       #|  x:real
       #|  i:num
@@ -81153,7 +81153,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  a:num->real
       #|  n:num
       #|  f:real->real
-      #|  !f n a b.\n        f real_continuous_on (:real) /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0\n        ==> ?x.\n              x IN real_interval[a 0,b 0] /\\\n              ITER n f x = x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]
+      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0\n        ==> ?x.\n              x IN real_interval[a 0,b 0] /\\\n              ITER n f x = x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
       #|  x:real
       #|  0 < (d:num) /\\ d < n /\\\n      x IN real_interval[(a:num->real) 0,b 0] /\\\n      x IN real_interval[a d,b d]
       #|  x IN real_interval[(a:num->real) d,b d]
@@ -81170,7 +81170,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  a:num->real
       #|  n:num
       #|  f:real->real
-      #|  !f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (!i x.\n             0 < i /\\ i < n /\\\n             x IN real_interval[a 0,b 0] /\\\n             x IN real_interval[a i,b i]\n             ==> ~(ITER i f x = x))\n        ==> ?x.\n              minimal_period f n x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]
+      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i x.\n             0 < i /\\ i < n /\\\n             x IN real_interval[a 0,b 0] /\\\n             x IN real_interval[a i,b i]\n             ==> ~(ITER i f x = x))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
       #|  x:real
       #|  i:num
       #|  x:real
@@ -81211,7 +81211,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\i:num. (z:num->real)((q:num->num) i)
       #|  k:num
       #|  f:real->real
-      #|  !f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
+      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
       #|  x:real
       #|  x:real
       #|  n:num
@@ -81260,7 +81260,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\i:num. (z:num->real)((q:num->num) i)
       #|  k:num
       #|  f:real->real
-      #|  !f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        ~(n divides k) /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
+      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        ~(n divides k) /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
       #|  i:num
       #|  0
       #|  i:num
@@ -81270,13 +81270,13 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  z:num->real
       #|  f:real->real
-      #|  !f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
+      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
       #|  DISJOINT (s:real->bool) t\n     ==> ~((x:real) IN s /\\ x IN t)
       #|  i:num
       #|  DISJOINT (real_interval[(a:num->real) 0,b 0])\n             (real_interval[a i,b i])
       #|  x:real
       #|  i:num
-      #|  !f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (!i. 0 < i /\\ i < n\n             ==> DISJOINT (real_interval[a 0,b 0])\n                          (real_interval[a i,b i]))\n        ==> ?x.\n              minimal_period f n x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]
+      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i. 0 < i /\\ i < n\n             ==> DISJOINT (real_interval[a 0,b 0])\n                          (real_interval[a i,b i]))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
       #|  q:num->num
       #|  k:num
       #|  p:num->num
@@ -81289,16 +81289,16 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  n:num
       #|  f:real->real
       #|  i:num
-      #|  !i. i < n\n        ==> minimal_period (f:real->real) n ((z:num->real) i)
+      #|  forall i. i < n\n        ==> minimal_period (f:real->real) n ((z:num->real) i)
       #|  i:num
       #|  i:num
-      #|  !i. i < n\n        ==> (p:num->num) i < n /\\ minimal_period p n i
+      #|  forall i. i < n\n        ==> (p:num->num) i < n /\\ minimal_period p n i
       #|  p:num->num
       #|  z:num->real
       #|  x:real
       #|  n:num
       #|  f:real->real
-      #|  !i. i < n ==> minimal_period (p:num->num) n i
+      #|  forall i. i < n ==> minimal_period (p:num->num) n i
       #|  z:num->real
       #|  x:real
       #|  n:num
@@ -81307,7 +81307,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:real
       #|  n:num
       #|  f:real->real
-      #|  !f n.\n        ODD n /\\\n        2 < n /\\\n        has_period f n\n        ==> ?z p k q.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              1 < k /\\\n              k < n /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
+      #|  forall f n.\n        ODD n /\\\n        2 < n /\\\n        has_period f n\n        ==> ?z p k q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
       #|  x:real
       #|  r:num->num
       #|  m:num
@@ -81325,7 +81325,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (k:num) < m
       #|  n:num
       #|  f:real->real
-      #|  !f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m /\\\n        ~(n divides m)\n        ==> has_period f m
+      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m /\\\n        ~(n divides m)\n        ==> has_period f m
       #|  m:num
       #|  m - 2:num
       #|  f:real->real
@@ -81365,7 +81365,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  n:num
       #|  f:real->real
       #|  (n:num) divides m
-      #|  !f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m\n        ==> has_period f m
+      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m\n        ==> has_period f m
       #|  q:num->num
       #|  p:num->num
       #|  z:num->real
@@ -81398,7 +81398,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:real->real
       #|  n:num
       #|  f:real->real
-      #|  !f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (!m. ODD m /\\ 1 < m /\\ m < n ==> ~has_period f m)\n        ==> ?z p q.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              (!r. r <= n - 1 ==> q r + 1 < n) /\\\n              q 0 = q(n - 1) /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < n - 1 ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < n - 1\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < n - 1\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < n - 1\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
+      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall m. ODD m /\\ 1 < m /\\ m < n ==> ~has_period f m)\n        ==> ?z p q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              (forall r. r <= n - 1 ==> q r + 1 < n) /\\\n              q 0 = q(n - 1) /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < n - 1 ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < n - 1\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < n - 1\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < n - 1\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
       #|  i:num
       #|  i:num
       #|  i:num
@@ -81421,7 +81421,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  x:real
       #|  n:num
       #|  f:real->real
-      #|  !f n.\n        has_period (f:real->real) n\n        ==> ?z p.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n ==> p i < n /\\ minimal_period p n i)
+      #|  forall f n.\n        has_period (f:real->real) n\n        ==> ?z p.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n ==> p i < n /\\ minimal_period p n i)
       #|  (p:num->num) (p (p (p 0))) = 0
       #|  ~((p:num->num) 0 = 0)
       #|  ~((p:num->num) (p 0) = 0)
@@ -81464,7 +81464,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (p:num->num) (p (p (p 0))) = 0
       #|  0
       #|  minimal_period (p:num->num) 4 0
-      #|  !p.\n        (!i. i < 4 ==> p i < 4 /\\ minimal_period p 4 i)\n        ==> (adjacent_interval_cover p 0 1 /\\\n             adjacent_interval_cover p 1 0) \\/\n            (adjacent_interval_cover p 0 2 /\\\n             adjacent_interval_cover p 2 0) \\/\n            (adjacent_interval_cover p 1 2 /\\\n             adjacent_interval_cover p 2 1)
+      #|  forall p.\n        (forall i. i < 4 ==> p i < 4 /\\ minimal_period p 4 i)\n        ==> (adjacent_interval_cover p 0 1 /\\\n             adjacent_interval_cover p 1 0) \\/\n            (adjacent_interval_cover p 0 2 /\\\n             adjacent_interval_cover p 2 0) \\/\n            (adjacent_interval_cover p 1 2 /\\\n             adjacent_interval_cover p 2 1)
       #|  (r:num) = 0 \\/ r = 1
       #|  r:num
       #|  (r:num) = 0 /\\ s = 1
@@ -81476,7 +81476,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  z:num->real
       #|  f:real->real
-      #|  !f z p n i j.\n        f real_continuous_on (:real) /\\\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        (!r. r < n ==> p r < n /\\ f(z r) = z(p r)) /\\\n        (!r. r < n ==> minimal_period f n (z r)) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p j i\n        ==> ?x. minimal_period f 2 x
+      #|  forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        (forall r. r < n ==> p r < n /\\ f(z r) = z(p r)) /\\\n        (forall r. r < n ==> minimal_period f n (z r)) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p j i\n        ==> ?x. minimal_period f 2 x
       #|  2
       #|  1
       #|  4
@@ -81498,15 +81498,15 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  p:num->num
       #|  4
       #|  f:real->real
-      #|  !f. f real_continuous_on (:real) /\\ has_period f 4\n       ==> has_period f 2
+      #|  forall f. f real_continuous_on (:real) /\\ has_period f 4\n       ==> has_period f 2
       #|  n:num
       #|  (x:num->real) k
       #|  (k:num) = 0
-      #|  !k. 0 < k /\\ k <= n ==> (x:num->real) 0 < x k
+      #|  forall k. 0 < k /\\ k <= n ==> (x:num->real) 0 < x k
       #|  i:num
-      #|  !i. i < n ==> (x:num->real) i < x(SUC i)
+      #|  forall i. i < n ==> (x:num->real) i < x(SUC i)
       #|  ?i:num. i < n /\\ (x:num->real)(SUC i) <= x i
-      #|  !x n.\n        0 < n /\\ x n = x 0\n        ==> ?i. i < n /\\ x(SUC i) <= x i
+      #|  forall x n.\n        0 < n /\\ x n = x 0\n        ==> ?i. i < n /\\ x(SUC i) <= x i
       #|  m:num
       #|  z:real
       #|  z:real
@@ -81519,7 +81519,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  \\i:num. ITER i (f:real->real) x
       #|  ?i. i < n /\\\n        (f:real->real)(ITER i f x) <= ITER i f x
       #|  0 < (n:num) /\\ periodic_point (f:real->real) n x
-      #|  !f n.\n        f real_continuous_on (:real) /\\ has_period f n\n        ==> has_period f 1
+      #|  forall f n.\n        f real_continuous_on (:real) /\\ has_period f n\n        ==> has_period f 1
       #|  x:real
       #|  s <= m ==> 2 * s < 2 * m + 1
       #|  0 < s ==> 0 < 2 * s
@@ -81547,22 +81547,22 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  q:num->num
       #|  p:num->num
       #|  (q:num->num) 1 < q 0
-      #|  !r. r < m\n        ==> adjacent_interval_cover (p:num->num)\n             (q(2 * m - 1)) (q(2 * r))
+      #|  forall r. r < m\n        ==> adjacent_interval_cover (p:num->num)\n             (q(2 * m - 1)) (q(2 * r))
       #|  1
       #|  0
       #|  ~((q:num->num) 0 = q 1)
       #|  i:num
       #|  i:num
-      #|  !i. i < 2 * m ==> (q:num->num) i < 2 * m
+      #|  forall i. i < 2 * m ==> (q:num->num) i < 2 * m
       #|  i:num
       #|  i:num
-      #|  !i. i <= 2 * m ==> (p:num->num) i <= 2 * m
+      #|  forall i. i <= 2 * m ==> (p:num->num) i <= 2 * m
       #|  (2 * m + 1) - 1 = 2 * m
       #|  0 < m ==> 2 < 2 * m + 1
       #|  m:num
       #|  2 * (m:num) + 1
       #|  f:real->real
-      #|  !f m.\n        f real_continuous_on (:real) /\\\n        0 < m /\\\n        has_period f (2 * m + 1) /\\\n        (!d. ODD d /\\ 1 < d /\\ d < 2 * m + 1\n             ==> ~has_period f d)\n        ==> !s. 0 < s /\\ s <= m ==> has_period f (2 * s)
+      #|  forall f m.\n        f real_continuous_on (:real) /\\\n        0 < m /\\\n        has_period f (2 * m + 1) /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < 2 * m + 1\n             ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ s <= m ==> has_period f (2 * s)
       #|  i < 2 * m ==> i <= 2 * m
       #|  i:num
       #|  s:num
@@ -81570,7 +81570,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  m:num
       #|  f:real->real
       #|  m:num
-      #|  !f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (!d. ODD d /\\ 1 < d /\\ d < n ==> ~has_period f d)\n        ==> !s. 0 < s /\\ 2 * s < n ==> has_period f (2 * s)
+      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < n ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ 2 * s < n ==> has_period f (2 * s)
       #|  EVEN d
       #|  ~((m:num) = d)
       #|  m:num
@@ -81581,13 +81581,13 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:real->real
       #|  s:num
       #|  (m:num) < d
-      #|  !e. ODD e /\\ 1 < e /\\ e < d\n        ==> ~has_period (f:real->real) e
+      #|  forall e. ODD e /\\ 1 < e /\\ e < d\n        ==> ~has_period (f:real->real) e
       #|  ODD 2
       #|  1 < d /\\ ~(d = 2) ==> 2 < d
       #|  2 < (d:num)
       #|  n:num
       #|  \\d:num. ODD d /\\ 1 < d /\\ has_period (f:real->real) d
-      #|  !f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        1 < n /\\\n        has_period f n /\\\n        EVEN m /\\\n        0 < m\n        ==> has_period f m
+      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        1 < n /\\\n        has_period f n /\\\n        EVEN m /\\\n        0 < m\n        ==> has_period f m
       #|  (n:num) = m
       #|  x:A
       #|  n DIV 2 * 2 = n
@@ -81604,7 +81604,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:A->A
       #|  periodic_point (f:A->A) (m * 2) x
       #|  0 < (m:num)
-      #|  !f:A->A m.\n        has_period (ITER 2 f) m\n        ==> (ODD m /\\ has_period f m) \\/ has_period f (2 * m)
+      #|  forall f:A->A m.\n        has_period (ITER 2 f) m\n        ==> (ODD m /\\ has_period f m) \\/ has_period f (2 * m)
       #|  2 * m
       #|  m:num
       #|  f:real->real
@@ -81615,7 +81615,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  2 < (m:num)
       #|  m:num
       #|  f:real->real
-      #|  !f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER 2 f) m\n        ==> has_period f (2 * m)
+      #|  forall f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER 2 f) m\n        ==> has_period f (2 * m)
       #|  ~(2 EXP a = 0)
       #|  2 EXP a
       #|  2 EXP a
@@ -81626,7 +81626,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  2 EXP a
       #|  (2 EXP a) * m
       #|  f:A->A
-      #|  !f:A->A a m.\n        has_period f ((2 EXP a) * m)\n        ==> has_period (ITER (2 EXP a) f) m
+      #|  forall f:A->A a m.\n        has_period f ((2 EXP a) * m)\n        ==> has_period (ITER (2 EXP a) f) m
       #|  m:num
       #|  2 EXP a
       #|  m:num
@@ -81645,7 +81645,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  m:num
       #|  f:real->real
       #|  ITER 1 (f:real->real) = f
-      #|  !a f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER (2 EXP a) f) m\n        ==> has_period f ((2 EXP a) * m)
+      #|  forall a f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER (2 EXP a) f) m\n        ==> has_period f ((2 EXP a) * m)
       #|  (2 EXP b) * 2 = 2 EXP SUC b
       #|  2
       #|  f:real->real
@@ -81662,19 +81662,19 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  2
       #|  f:real->real
       #|  (a:num) = 0
-      #|  !f a.\n        f real_continuous_on (:real) /\\\n        has_period f (2 EXP (SUC a))\n        ==> has_period f (2 EXP a)
+      #|  forall f a.\n        f real_continuous_on (:real) /\\\n        has_period f (2 EXP (SUC a))\n        ==> has_period f (2 EXP a)
       #|  b:num
       #|  (b:num) = SUC a
       #|  b:num
       #|  (b:num) = 0
       #|  b:num
-      #|  !f a b.\n        f real_continuous_on (:real) /\\\n        b <= a /\\\n        has_period f (2 EXP a)\n        ==> has_period f (2 EXP b)
-      #|  !n. ODD n ==> 0 < n
+      #|  forall f a b.\n        f real_continuous_on (:real) /\\\n        b <= a /\\\n        has_period f (2 EXP a)\n        ==> has_period f (2 EXP b)
+      #|  forall n. ODD n ==> 0 < n
       #|  1 < n /\\ ~(n = 2) ==> 2 < n
-      #|  !n. ODD n /\\ 1 < n ==> 2 < n
+      #|  forall n. ODD n /\\ 1 < n ==> 2 < n
       #|  0 < n /\\ ~(n = 1) ==> 1 < n
-      #|  !n. EVEN n /\\ 0 < n ==> 1 < n
-      #|  !a b. a <= b\n          ==> 2 EXP a * 2 EXP (b - a) = 2 EXP b
+      #|  forall n. EVEN n /\\ 0 < n ==> 1 < n
+      #|  forall a b. a <= b\n          ==> 2 EXP a * 2 EXP (b - a) = 2 EXP b
       #|  v:num
       #|  f:real->real
       #|  b:num
@@ -81723,13 +81723,13 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:real->real
       #|  has_period (ITER (2 EXP a) (f:real->real)) u
       #|  (ITER (2 EXP a) f) real_continuous_on (:real)
-      #|  !f a u b v.\n        f real_continuous_on (:real) /\\\n        ODD u /\\\n        1 < u /\\\n        ODD v /\\\n        has_period f (2 EXP a * u) /\\\n        (v = 1 \\/ a < b \\/ a = b /\\ u < v)\n        ==> has_period f (2 EXP b * v)
+      #|  forall f a u b v.\n        f real_continuous_on (:real) /\\\n        ODD u /\\\n        1 < u /\\\n        ODD v /\\\n        has_period f (2 EXP a * u) /\\\n        (v = 1 \\/ a < b \\/ a = b /\\ u < v)\n        ==> has_period f (2 EXP b * v)
       #|  sarkovskii_precedes m n <=>\n    ?a b u v.\n        ODD u /\\\n        ODD v /\\\n        m = 2 EXP a * u /\\\n        n = 2 EXP b * v /\\\n        ((1 < u /\\\n          (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n         (u = 1 /\\ v = 1 /\\ b < a))
-      #|  !m n.\n        sarkovskii_precedes m n\n        ==> 0 < m /\\ 0 < n
+      #|  forall m n.\n        sarkovskii_precedes m n\n        ==> 0 < m /\\ 0 < n
       #|  (c:num) = 0
       #|  (c:num) = 0
       #|  u = 2 EXP c * v
-      #|  !a b u v.\n        ODD u /\\\n        2 EXP a * u = 2 EXP b * v /\\\n        a <= b\n        ==> b <= a
+      #|  forall a b u v.\n        ODD u /\\\n        2 EXP a * u = 2 EXP b * v /\\\n        a <= b\n        ==> b <= a
       #|  u:num
       #|  v:num
       #|  a:num
@@ -81743,19 +81743,19 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  b:num
       #|  a:num
       #|  (a:num) = b
-      #|  !a b u v.\n        ODD u /\\\n        ODD v /\\\n        2 EXP a * u = 2 EXP b * v\n        ==> a = b /\\ u = v
+      #|  forall a b u v.\n        ODD u /\\\n        ODD v /\\\n        2 EXP a * u = 2 EXP b * v\n        ==> a = b /\\ u = v
       #|  v:num
       #|  u:num
       #|  b:num
       #|  a:num
       #|  (b:num) = d /\\ (v:num) = x
       #|  (a:num) = c /\\ (u:num) = w
-      #|  !a b u v.\n        ODD u /\\\n        ODD v\n        ==> (sarkovskii_precedes (2 EXP a * u) (2 EXP b * v) <=>\n             (1 < u /\\\n              (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n             (u = 1 /\\ v = 1 /\\ b < a))
+      #|  forall a b u v.\n        ODD u /\\\n        ODD v\n        ==> (sarkovskii_precedes (2 EXP a * u) (2 EXP b * v) <=>\n             (1 < u /\\\n              (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n             (u = 1 /\\ v = 1 /\\ b < a))
       #|  (a:num) = b /\\ (u:num) = v
-      #|  !n. ~sarkovskii_precedes n n
+      #|  forall n. ~sarkovskii_precedes n n
       #|  (b:num) = c /\\ (v:num) = w
-      #|  !m n p.\n        sarkovskii_precedes m n /\\\n        sarkovskii_precedes n p\n        ==> sarkovskii_precedes m p
-      #|  !m n.\n        sarkovskii_precedes m n\n        ==> ~sarkovskii_precedes n m
+      #|  forall m n p.\n        sarkovskii_precedes m n /\\\n        sarkovskii_precedes n p\n        ==> sarkovskii_precedes m p
+      #|  forall m n.\n        sarkovskii_precedes m n\n        ==> ~sarkovskii_precedes n m
       #|  (u:num) = v
       #|  (a:num) = b
       #|  (v:num) = 1
@@ -81763,26 +81763,26 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  0 < u /\\ 0 < v
       #|  n:num
       #|  m:num
-      #|  !m n.\n        0 < m /\\\n        0 < n\n        ==> m = n \\/\n            sarkovskii_precedes m n \\/\n            sarkovskii_precedes n m
+      #|  forall m n.\n        0 < m /\\\n        0 < n\n        ==> m = n \\/\n            sarkovskii_precedes m n \\/\n            sarkovskii_precedes n m
       #|  u:num
       #|  3
       #|  v:num
       #|  0
       #|  b:num
       #|  (b:num) = 0 /\\ (v:num) = 3
-      #|  !n. ~sarkovskii_precedes n 3
+      #|  forall n. ~sarkovskii_precedes n 3
       #|  n:num
       #|  3
-      #|  !n.\n        0 < n\n        ==> (sarkovskii_precedes 3 n <=> ~(n = 3))
+      #|  forall n.\n        0 < n\n        ==> (sarkovskii_precedes 3 n <=> ~(n = 3))
       #|  1
       #|  u:num
       #|  0
       #|  a:num
       #|  (a:num) = 0 /\\ (u:num) = 1
-      #|  !n. ~sarkovskii_precedes 1 n
+      #|  forall n. ~sarkovskii_precedes 1 n
       #|  1
       #|  n:num
-      #|  !n.\n        0 < n\n        ==> (sarkovskii_precedes n 1 <=> ~(n = 1))
+      #|  forall n.\n        0 < n\n        ==> (sarkovskii_precedes n 1 <=> ~(n = 1))
       #|  m = 2 EXP a * 1
       #|  b:num
       #|  a:num
@@ -81793,15 +81793,15 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  u:num
       #|  a:num
       #|  f:real->real
-      #|  !f m n.\n        f real_continuous_on (:real) /\\\n        sarkovskii_precedes m n /\\\n        has_period f m\n        ==> has_period f n
+      #|  forall f m n.\n        f real_continuous_on (:real) /\\\n        sarkovskii_precedes m n /\\\n        has_period f m\n        ==> has_period f n
       #|  n:num
       #|  m:num
       #|  f:real->real
-      #|  !f m n.\n        f real_continuous_on (:real) /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period f m\n        ==> has_period f n
+      #|  forall f m n.\n        f real_continuous_on (:real) /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period f m\n        ==> has_period f n
       #|  n:num
       #|  3
       #|  f:real->real
-      #|  !f n.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        has_period f 3\n        ==> has_period f n
+      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        has_period f 3\n        ==> has_period f n
       #|  has_period_on (f:A->A) n s <=>\n        ?x. x IN s /\\ minimal_period f n x
       #|  e:real
       #|  a:real
@@ -81811,11 +81811,11 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  a:real
       #|  e:real
       #|  a:real
-      #|  !f s.\n        f real_continuous_on s <=>\n        continuous_map\n         (subtopology euclideanreal s,euclideanreal) f
-      #|  !s t h k.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) <=>\n        h real_continuous_on s /\\\n        IMAGE h s SUBSET t /\\\n        k real_continuous_on t /\\\n        IMAGE k t SUBSET s /\\\n        (!x. x IN s ==> k(h x) = x) /\\\n        (!y. y IN t ==> h(k y) = y)
+      #|  forall f s.\n        f real_continuous_on s <=>\n        continuous_map\n         (subtopology euclideanreal s,euclideanreal) f
+      #|  forall s t h k.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) <=>\n        h real_continuous_on s /\\\n        IMAGE h s SUBSET t /\\\n        k real_continuous_on t /\\\n        IMAGE k t SUBSET s /\\\n        (forall x. x IN s ==> k(h x) = x) /\\\n        (forall y. y IN t ==> h(k y) = y)
       #|  x:real
       #|  x:real
-      #|  !f h k s t.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> !n x.\n              x IN s\n              ==> ITER n (h o f o k) (h x) = h(ITER n f x) /\\\n                  ITER n f x IN s
+      #|  forall f h k s t.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> forall n x.\n              x IN s\n              ==> ITER n (h o f o k) (h x) = h(ITER n f x) /\\\n                  ITER n f x IN s
       #|  (h:real->real) (ITER m f x) = h x
       #|  k:real->real
       #|  x:real
@@ -81826,8 +81826,8 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  h:real->real
       #|  f:real->real
       #|  m:num
-      #|  !m. periodic_point ((h:real->real) o f o k) m (h x) <=>\n        periodic_point f m x
-      #|  !f h k s t n x.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s /\\\n        x IN s\n        ==> (minimal_period (h o f o k) n (h x) <=>\n             minimal_period f n x)
+      #|  forall m. periodic_point ((h:real->real) o f o k) m (h x) <=>\n        periodic_point f m x
+      #|  forall f h k s t n x.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s /\\\n        x IN s\n        ==> (minimal_period (h o f o k) n (h x) <=>\n             minimal_period f n x)
       #|  (k:real->real) y
       #|  n:num
       #|  t:real->bool
@@ -81844,29 +81844,29 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  h:real->real
       #|  f:real->real
       #|  (h:real->real) x
-      #|  !f h k s t n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> (has_period_on f n s <=>\n             has_period_on (h o f o k) n t)
+      #|  forall f h k s t n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> (has_period_on f n s <=>\n             has_period_on (h o f o k) n t)
       #|  x:real
       #|  g:real->real
       #|  s:real->bool
       #|  s:real->bool
       #|  f:real->real
       #|  euclideanreal
-      #|  !f s.\n        real_closed s /\\\n        is_realinterval s /\\\n        ~(s = {}) /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s\n        ==> ?g.\n              g real_continuous_on (:real) /\\\n              IMAGE g (:real) SUBSET s /\\\n              (!x. x IN s ==> g x = f x)
+      #|  forall f s.\n        real_closed s /\\\n        is_realinterval s /\\\n        ~(s = {}) /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s\n        ==> ?g.\n              g real_continuous_on (:real) /\\\n              IMAGE g (:real) SUBSET s /\\\n              (forall x. x IN s ==> g x = f x)
       #|  x:A
       #|  x:A
-      #|  !f g s.\n        IMAGE f (:A) SUBSET s /\\\n        (!x. x IN s ==> f x = g x)\n        ==> !n x.\n              x IN s\n              ==> ITER n f x = ITER n g x /\\\n                  ITER n f x IN s
+      #|  forall f g s.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> forall n x.\n              x IN s\n              ==> ITER n f x = ITER n g x /\\\n                  ITER n f x IN s
       #|  x:A
       #|  m:num
       #|  s:A->bool
       #|  g:A->A
       #|  f:A->A
       #|  m:num
-      #|  !m. periodic_point (f:A->A) m (x:A) <=>\n        periodic_point g m x
-      #|  !f g s n x.\n        IMAGE f (:A) SUBSET s /\\\n        (!y. y IN s ==> f y = g y) /\\\n        x IN s\n        ==> (minimal_period f n x <=> minimal_period g n x)
+      #|  forall m. periodic_point (f:A->A) m (x:A) <=>\n        periodic_point g m x
+      #|  forall f g s n x.\n        IMAGE f (:A) SUBSET s /\\\n        (forall y. y IN s ==> f y = g y) /\\\n        x IN s\n        ==> (minimal_period f n x <=> minimal_period g n x)
       #|  ITER m (f:A->A) x
       #|  m:num
       #|  n:num
-      #|  !f:A->A s n x.\n        IMAGE f (:A) SUBSET s /\\\n        0 < n /\\\n        periodic_point f n x\n        ==> x IN s
+      #|  forall f:A->A s n x.\n        IMAGE f (:A) SUBSET s /\\\n        0 < n /\\\n        periodic_point f n x\n        ==> x IN s
       #|  x:A
       #|  n:num
       #|  s:A->bool
@@ -81884,7 +81884,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  s:A->bool
       #|  f:A->A
       #|  (x:A) IN s
-      #|  !f g s n.\n        IMAGE f (:A) SUBSET s /\\\n        (!x. x IN s ==> f x = g x)\n        ==> (has_period f n <=> has_period_on g n s)
+      #|  forall f g s n.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> (has_period f n <=> has_period_on g n s)
       #|  n:num
       #|  s:real->bool
       #|  f:real->real
@@ -81901,7 +81901,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  s:real->bool
       #|  f:real->real
       #|  ~(s:real->bool = {})
-      #|  !f s m n.\n        real_closed s /\\\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
+      #|  forall f s m n.\n        real_closed s /\\\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
       #|  n:num
       #|  t:real->bool
       #|  s:real->bool
@@ -81930,12 +81930,12 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  IMAGE (k:real->real) t
       #|  s:real->bool
       #|  ((h:real->real) o (f:real->real) o (k:real->real))\n    real_continuous_on (t:real->bool)
-      #|  !f s t h k m n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        real_closed t /\\\n        is_realinterval t /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
+      #|  forall f s t h k m n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        real_closed t /\\\n        is_realinterval t /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
       #|  x:real
       #|  x:real
       #|  (((c:real) * (x:real) + (d:real)) - d) / c = x
       #|  x:real
-      #|  !s c d.\n        ~(c = &0)\n        ==> homeomorphic_maps\n             (subtopology euclideanreal s,\n              subtopology euclideanreal\n               (IMAGE (\\x. c * x + d) s))\n             ((\\x. c * x + d),(\\y. (y - d) / c))
+      #|  forall s c d.\n        ~(c = &0)\n        ==> homeomorphic_maps\n             (subtopology euclideanreal s,\n              subtopology euclideanreal\n               (IMAGE (\\x. c * x + d) s))\n             ((\\x. c * x + d),(\\y. (y - d) / c))
       #|  homeomorphic_maps\n    (subtopology euclideanreal (:real),\n     subtopology euclideanreal {x | &0 < x})\n    (exp,log)
       #|  abs y = y
       #|  abs y = y
@@ -81979,7 +81979,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  --(inv((b:real) - (a:real)) * (a:real))
       #|  inv((b:real) - (a:real))
       #|  {x:real | a < x /\\ x < b}
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 < y /\\ y < &1}) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 < y /\\ y < &1}) (h,k)
       #|  ((b:real) - (a:real)) * (y:real) < b - a
       #|  &0 <= ((b:real) - (a:real)) * (y:real)
       #|  (a:real) + ((b:real) - a) * (y:real)
@@ -81993,7 +81993,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  --(inv((b:real) - (a:real)) * (a:real))
       #|  inv((b:real) - (a:real))
       #|  {x:real | a <= x /\\ x < b}
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
       #|  &0 <= ((b:real) - (a:real)) * (y:real)
       #|  ((b:real) - (a:real)) * (y:real) < b - a
       #|  (b:real) - ((b:real) - a) * (y:real)
@@ -82007,25 +82007,25 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  inv((b:real) - (a:real)) * (b:real)
       #|  --inv((b:real) - (a:real))
       #|  {x:real | a < x /\\ x <= b}
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
       #|  subtopology euclideanreal {x:real | &0 < x /\\ x < &1}
       #|  (k:real->real) o (k':real->real)
       #|  (h':real->real) o (h:real->real)
       #|  b:real
       #|  a:real
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal (:real)) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal (:real)) (h,k)
       #|  subtopology euclideanreal {x:real | &0 <= x /\\ x < &1}
       #|  (k:real->real) o (\\x. x / (&1 + abs x))
       #|  (\\y. y / (&1 - abs y)) o (h:real->real)
       #|  b:real
       #|  a:real
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
       #|  subtopology euclideanreal {x:real | &0 <= x /\\ x < &1}
       #|  (k:real->real) o (\\x. x / (&1 + abs x))
       #|  (\\y. y / (&1 - abs y)) o (h:real->real)
       #|  b:real
       #|  a:real
-      #|  !a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
+      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
       #|  subtopology euclideanreal {x:real | &0 < x}
       #|  (\\y:real. (y - --(a:real)) / &1) o exp
       #|  log o (\\x:real. &1 * x + --a)
@@ -82037,7 +82037,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  --(a:real)
       #|  &1
       #|  {x:real | a < x}
-      #|  !a.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | a < x},\n            subtopology euclideanreal (:real)) (h,k)
+      #|  forall a.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | a < x},\n            subtopology euclideanreal (:real)) (h,k)
       #|  subtopology euclideanreal {x:real | &0 < x}
       #|  (\\y:real. (y - (b:real)) / -- &1) o exp
       #|  log o (\\x:real. -- &1 * x + b)
@@ -82049,7 +82049,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (b:real)
       #|  -- &1
       #|  {x:real | x < b}
-      #|  !b.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | x < b},\n            subtopology euclideanreal (:real)) (h,k)
+      #|  forall b.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | x < b},\n            subtopology euclideanreal (:real)) (h,k)
       #|  I:real->real
       #|  I:real->real
       #|  real_interval[a,b]
@@ -82096,7 +82096,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  I:real->real
       #|  (:real)
       #|  s:real->bool
-      #|  !s.\n        is_realinterval s /\\\n        ~(s = {})\n        ==> ?t h k.\n              real_closed t /\\\n              is_realinterval t /\\\n              homeomorphic_maps\n               (subtopology euclideanreal s,\n                subtopology euclideanreal t) (h,k)
+      #|  forall s.\n        is_realinterval s /\\\n        ~(s = {})\n        ==> ?t h k.\n              real_closed t /\\\n              is_realinterval t /\\\n              homeomorphic_maps\n               (subtopology euclideanreal s,\n                subtopology euclideanreal t) (h,k)
       #|  n:num
       #|  m:num
       #|  k:real->real
@@ -82106,12 +82106,12 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  f:real->real
       #|  s:real->bool
       #|  ~(s:real->bool = {})
-      #|  !f s m n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
+      #|  forall f s m n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
       #|  n:num
       #|  3
       #|  s:real->bool
       #|  f:real->real
-      #|  !f s n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        0 < n /\\\n        has_period_on f 3 s\n        ==> has_period_on f n s
+      #|  forall f s n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        0 < n /\\\n        has_period_on f 3 s\n        ==> has_period_on f n s
       #|periodic_point =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) ((#=:fun('A,fun('A,bool)) (((#ITER:fun(num,fun(fun('A,'A),fun('A,'A))) n:num) f:fun('A,'A)) x:'A)) x:'A))))))))
       #|minimal_period =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) (((#minimal_period:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) ((#/\:fun(bool,fun(bool,bool)) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) (#~:fun(bool,bool) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) m:num) x:'A))))))))))))))
       #|has_period =  |- (#!:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#has_period:fun(fun('A,'A),fun(num,bool)) f:fun('A,'A)) n:num)) (#?:fun(fun('A,bool),bool) (\x:'A. (((#minimal_period:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A))))))))

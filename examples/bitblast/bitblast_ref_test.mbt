@@ -6930,41 +6930,41 @@ test "Examples/bitblast matches Examples/bitblast.ml" {
       #|  T
       #|  word_not (word_or x (word_neg x)):int64 =\n  word_sub (word_and x (word_neg x)) (word 1)
       #|  T
-      #|  !x y:int64.\n    val(word_add x y) < val x <=> ~(val(word_add x y) = val(x) + val(y))
+      #|  forall x y:int64.\n    val(word_add x y) < val x <=> ~(val(word_add x y) = val(x) + val(y))
       #|  T
-      #|  !x y:int64.\n    val(word_add x y) >= val y <=> val(word_add x y) = val(x) + val(y)
+      #|  forall x y:int64.\n    val(word_add x y) >= val y <=> val(word_add x y) = val(x) + val(y)
       #|  T
       #|  word_sub (word_xor ((word_zx:int32->int64) x) (word 0x80000000))\n           (word 0x80000000) =\n  word_sx x
       #|  T
       #|  let m:int64 = word_neg(word(bitval b)) in\n  word_sub (word_xor x m) m = word_xor (word_add x m) m
       #|  T
-      #|  !x:int64.\n     (word_ushr (word_or (word_neg x) x) 63 = word 1 <=> ~(x = word 0)) /\\\n     (word_ushr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)
+      #|  forall x:int64.\n     (word_ushr (word_or (word_neg x) x) 63 = word 1 <=> ~(x = word 0)) /\\\n     (word_ushr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)
       #|  T
       #|  T
-      #|  !x:int64.\n     (word_ishr (word_or (word_neg x) x) 63 = word 0xFFFFFFFFFFFFFFFF <=>\n      ~(x = word 0)) /\\\n     (word_ishr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)
+      #|  forall x:int64.\n     (word_ishr (word_or (word_neg x) x) 63 = word 0xFFFFFFFFFFFFFFFF <=>\n      ~(x = word 0)) /\\\n     (word_ishr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)
       #|  T
       #|  T
-      #|  !x:int64.\n   let x2  = word_sub x (word_ushr (word_and x (word 0xAAAAAAAAAAAAAAAA)) 1) in\n   let x4  = word_add (word_and x2 (word 0x3333333333333333))\n                      (word_ushr (word_and x2 (word 0xCCCCCCCCCCCCCCCC)) 2) in\n   let x8  = word_and (word_add x4 (word_ushr x4 4))\n                      (word 0x0F0F0F0F0F0F0F0F) in\n   let x64 = word_mul x8 (word 0x101010101010101) in\n   let y = word_ushr x64 56 in\n   y = word(word_popcount x)
+      #|  forall x:int64.\n   let x2  = word_sub x (word_ushr (word_and x (word 0xAAAAAAAAAAAAAAAA)) 1) in\n   let x4  = word_add (word_and x2 (word 0x3333333333333333))\n                      (word_ushr (word_and x2 (word 0xCCCCCCCCCCCCCCCC)) 2) in\n   let x8  = word_and (word_add x4 (word_ushr x4 4))\n                      (word 0x0F0F0F0F0F0F0F0F) in\n   let x64 = word_mul x8 (word 0x101010101010101) in\n   let y = word_ushr x64 56 in\n   y = word(word_popcount x)
       #|  T
-      #|  !x:15 word.\n        let u:int64 = word_mul (word_zx x) (word 0x0002000400080010) in\n        let v = word_and u (word 0x1111111111111111) in\n        let w = word_mul v (word 0x1111111111111111) in\n        let y = word_ushr w 60 in\n        y = word(word_popcount x)
+      #|  forall x:15 word.\n        let u:int64 = word_mul (word_zx x) (word 0x0002000400080010) in\n        let v = word_and u (word 0x1111111111111111) in\n        let w = word_mul v (word 0x1111111111111111) in\n        let y = word_ushr w 60 in\n        y = word(word_popcount x)
       #|  T
-      #|  !x:nybble y:nybble. val x * val y = 13 ==> val x = 1 \\/ val y = 1
+      #|  forall x:nybble y:nybble. val x * val y = 13 ==> val x = 1 \\/ val y = 1
       #|  T
-      #|  !x:byte y:byte. val x * val y = 241 ==> val x = 1 \\/ val y = 1
+      #|  forall x:byte y:byte. val x * val y = 241 ==> val x = 1 \\/ val y = 1
       #|  T
-      #|  !x:int64.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_xor x1 (word_ushr x1 2) in\n        let x4 = word_xor x2 (word_ushr x2 4) in\n        let x8 = word_xor x4 (word_ushr x4 8) in\n        let x16 = word_xor x8 (word_ushr x8 16) in\n        let x32 = word_xor x16 (word_ushr x16 32) in\n        let y = word_and x32 (word 1) in\n        y = word(bitval(word_oddparity x))
+      #|  forall x:int64.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_xor x1 (word_ushr x1 2) in\n        let x4 = word_xor x2 (word_ushr x2 4) in\n        let x8 = word_xor x4 (word_ushr x4 8) in\n        let x16 = word_xor x8 (word_ushr x8 16) in\n        let x32 = word_xor x16 (word_ushr x16 32) in\n        let y = word_and x32 (word 1) in\n        y = word(bitval(word_oddparity x))
       #|  T
-      #|  !x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x11111111) in\n        let y = word_and (word_ushr x4 28) (word 1) in\n        y = word(bitval(word_oddparity x))
+      #|  forall x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x11111111) in\n        let y = word_and (word_ushr x4 28) (word 1) in\n        y = word(bitval(word_oddparity x))
       #|  T
-      #|  !x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x88888888) in\n        let y = word_ushr x4 31 in\n        y = word(bitval(word_oddparity x))
+      #|  forall x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x88888888) in\n        let y = word_ushr x4 31 in\n        y = word(bitval(word_oddparity x))
       #|  T
-      #|  !x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))
+      #|  forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))
       #|  T
-      #|  !x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :int128 =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))
+      #|  forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :int128 =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))
       #|  T
-      #|  !x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_add (word_ushr x 1) (word_ushr y 1))\n                          (word_and (word_and x y) (word 1)))
+      #|  forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_add (word_ushr x 1) (word_ushr y 1))\n                          (word_and (word_and x y) (word 1)))
       #|  T
-      #|  !x:int64. let x' = word_not x in\n            word_and x' (word_neg x') =\n            word_and (word_xor x (word_add x (word 1))) (word_not x)
+      #|  forall x:int64. let x' = word_not x in\n            word_and x' (word_neg x') =\n            word_and (word_xor x (word_add x (word 1))) (word_not x)
       #|  T
       #|  let gray = \\x:int64. word_xor x (word_ushr x 1) in\n        gray x = gray y ==> x = y
       #|  T
@@ -6984,55 +6984,55 @@ test "Examples/bitblast matches Examples/bitblast.ml" {
       #|  T
       #|  let gray = \\x:byte. word_xor x (word_ushr x 1) in\n  gray(gray(gray(gray(gray(gray(gray(gray x))))))) = x
       #|  T
-      #|  !x y:int64. word_clz(word_or x y) <= word_clz x
+      #|  forall x y:int64. word_clz(word_or x y) <= word_clz x
       #|  T
-      #|  !x:int32. word_popcount(word_add x (word 1)) = 1\n            ==> word_ctz x = 0 \\/ word_ctz x = 32
+      #|  forall x:int32. word_popcount(word_add x (word 1)) = 1\n            ==> word_ctz x = 0 \\/ word_ctz x = 32
       #|  T
-      #|  !x:int32. ~(x = word 0)\n            ==> word_popcount(word_sub x (word 1)) + 1 =\n                word_popcount x + word_ctz x
+      #|  forall x:int32. ~(x = word 0)\n            ==> word_popcount(word_sub x (word 1)) + 1 =\n                word_popcount x + word_ctz x
       #|  T
-      #|  !x:int32. word_clz x + word_popcount x + word_ctz x = 32 <=>\n           ~(x = word 0) /\\\n           word_and (word_add (word_or x (word_sub x (word 1))) (word 1)) x =\n           word 0
+      #|  forall x:int32. word_clz x + word_popcount x + word_ctz x = 32 <=>\n           ~(x = word 0) /\\\n           word_and (word_add (word_or x (word_sub x (word 1))) (word 1)) x =\n           word 0
       #|  T
-      #|  !x:int32. word_popcount x = 0 \\/ word_popcount x = 1 <=>\n            word_and x (word_sub x (word 1)) = word 0
+      #|  forall x:int32. word_popcount x = 0 \\/ word_popcount x = 1 <=>\n            word_and x (word_sub x (word 1)) = word 0
       #|  T
-      #|  !x:int32. word_popcount x = 1 <=>\n            word_or (word_not(word_ishr (word_or x (word_neg x)) 31))\n                    (word_and x (word_sub x (word 1))) =\n            word 0
+      #|  forall x:int32. word_popcount x = 1 <=>\n            word_or (word_not(word_ishr (word_or x (word_neg x)) 31))\n                    (word_and x (word_sub x (word 1))) =\n            word 0
       #|  T
-      #|  !x:int32. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))
+      #|  forall x:int32. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))
       #|  T
-      #|  !x:int64. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))
+      #|  forall x:int64. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))
       #|  T
-      #|  !x y:int64.\n        word_clz x = word_clz y <=> val(word_xor x y) <= val(word_and x y)
+      #|  forall x y:int64.\n        word_clz x = word_clz y <=> val(word_xor x y) <= val(word_and x y)
       #|  T
-      #|  !x y:int64.\n        word_clz x < word_clz y <=> val(word_and x (word_not y)) > val y
+      #|  forall x y:int64.\n        word_clz x < word_clz y <=> val(word_and x (word_not y)) > val y
       #|  T
-      #|  !x y:int64.\n        word_clz x <= word_clz y <=> val(word_and (word_not x) y) <= val x
+      #|  forall x y:int64.\n        word_clz x <= word_clz y <=> val(word_and (word_not x) y) <= val x
       #|  T
-      #|  !x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_add (word_and x (word_not h)) (word_and y (word_not h))\n    and t = word_and (word_xor x y) h in\n    let z = word_xor s t in\n    !i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_add (word_subword x (8*i,8)) (word_subword y (8*i,8))
+      #|  forall x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_add (word_and x (word_not h)) (word_and y (word_not h))\n    and t = word_and (word_xor x y) h in\n    let z = word_xor s t in\n    forall i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_add (word_subword x (8*i,8)) (word_subword y (8*i,8))
       #|  T
-      #|  !x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_sub (word_or x h) (word_and y (word_not h))\n    and t = word_and (word_xor x (word_not y)) h in\n    let z = word_xor s t in\n    !i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_sub (word_subword x (8*i,8)) (word_subword y (8*i,8))
+      #|  forall x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_sub (word_or x h) (word_and y (word_not h))\n    and t = word_and (word_xor x (word_not y)) h in\n    let z = word_xor s t in\n    forall i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_sub (word_subword x (8*i,8)) (word_subword y (8*i,8))
       #|  T
-      #|  !x y:int64.\n    let l = word 0x0101010101010101 in\n    let z = word_add (word_and x y)\n                     (word_ushr (word_and (word_xor x y) (word_not l)) 1) in\n    !i. i < 8\n        ==> word_zx (word_subword z (8*i,8) :byte):9 word =\n            word_ushr (word_add (word_zx (word_subword x (8*i,8) :byte))\n                                (word_zx (word_subword y (8*i,8) :byte))) 1
+      #|  forall x y:int64.\n    let l = word 0x0101010101010101 in\n    let z = word_add (word_and x y)\n                     (word_ushr (word_and (word_xor x y) (word_not l)) 1) in\n    forall i. i < 8\n        ==> word_zx (word_subword z (8*i,8) :byte):9 word =\n            word_ushr (word_add (word_zx (word_subword x (8*i,8) :byte))\n                                (word_zx (word_subword y (8*i,8) :byte))) 1
       #|  T
-      #|  !x y:int64.\n    let m = word 0x7F7F7F7F7F7F7F7F in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_not (word_or (word_or d m) w) in\n    !i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))
+      #|  forall x y:int64.\n    let m = word 0x7F7F7F7F7F7F7F7F in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_not (word_or (word_or d m) w) in\n    forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))
       #|  T
-      #|  !x y:int64.\n    let h = word 0x8080808080808080 in\n    let d = word_xor x y in\n    let w = word_and (word_sub (word_or (word_ushr d 1) h) d) h in\n    let z = word_sub (word_shl w 1) (word_ushr w 7) in\n    !i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0xFF <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))
+      #|  forall x y:int64.\n    let h = word 0x8080808080808080 in\n    let d = word_xor x y in\n    let w = word_and (word_sub (word_or (word_ushr d 1) h) d) h in\n    let z = word_sub (word_shl w 1) (word_ushr w 7) in\n    forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0xFF <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))
       #|  T
-      #|  !x y:int64.\n    let h = word 0x8080808080808080 in\n    let m = word_not h in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_and (word_or w d) h in\n   !i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8)) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8)))
+      #|  forall x y:int64.\n    let h = word 0x8080808080808080 in\n    let m = word_not h in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_and (word_or w d) h in\n   forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8)) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8)))
       #|  T
-      #|  let h = word 0x8080808080808080\n  and l = word 0x0101010101010101 in\n  word_and h (word_and (word_sub x l) (word_not x)):int64 = word 0 <=>\n  !i. i < 8\n      ==> ~(word_subword x (8*i,8) :byte = word 0)
+      #|  let h = word 0x8080808080808080\n  and l = word 0x0101010101010101 in\n  word_and h (word_and (word_sub x l) (word_not x)):int64 = word 0 <=>\n  forall i. i < 8\n      ==> ~(word_subword x (8*i,8) :byte = word 0)
       #|  T
-      #|  !a:int32.\n        let w = word_xor (word_add a (word 0x06666666)) a in\n        let z = word_and w (word 0x11111110) in\n        ((!i. i < 7\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)
+      #|  forall a:int32.\n        let w = word_xor (word_add a (word 0x06666666)) a in\n        let z = word_and w (word 0x11111110) in\n        ((forall i. i < 7\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)
       #|  T
-      #|  !a:int32.\n        let a' = word_ushr a 1 in\n        let w = word_xor (word_add a' (word 0x33333333)) a' in\n        let z = word_and w (word 0x88888888) in\n        ((!i. i < 8\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)
+      #|  forall a:int32.\n        let a' = word_ushr a 1 in\n        let w = word_xor (word_add a' (word 0x33333333)) a' in\n        let z = word_and w (word 0x88888888) in\n        ((forall i. i < 8\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)
       #|  T
-      #|  !a:5 word.\n        let x = word_xor (word_sub a (word_shl a 2)) (word 2) in\n        bit 0 a ==> word_mul a x = word_neg(word 1)
+      #|  forall a:5 word.\n        let x = word_xor (word_sub a (word_shl a 2)) (word 2) in\n        bit 0 a ==> word_mul a x = word_neg(word 1)
       #|  T
-      #|  !a:4 word.\n   let x = word_sub (word_shl (word_and (word_sub (word 1) a) (word 4)) 1) a in\n   bit 0 a ==> word_mul a x = word_neg(word 1)
+      #|  forall a:4 word.\n   let x = word_sub (word_shl (word_and (word_sub (word 1) a) (word 4)) 1) a in\n   bit 0 a ==> word_mul a x = word_neg(word 1)
       #|  T
-      #|  !x:int64.\n        let x1 = word_or x (word_ushr x 1) in\n        let x2 = word_or x1 (word_ushr x1 2) in\n        let x4 = word_or x2 (word_ushr x2 4) in\n        let x8 = word_or x4 (word_ushr x4 8) in\n        let x16 = word_or x8 (word_ushr x8 16) in\n        let x32 = word_or x16 (word_ushr x16 32) in\n        word_popcount(word_not x32) = word_clz x
+      #|  forall x:int64.\n        let x1 = word_or x (word_ushr x 1) in\n        let x2 = word_or x1 (word_ushr x1 2) in\n        let x4 = word_or x2 (word_ushr x2 4) in\n        let x8 = word_or x4 (word_ushr x4 8) in\n        let x16 = word_or x8 (word_ushr x8 16) in\n        let x32 = word_or x16 (word_ushr x16 32) in\n        word_popcount(word_not x32) = word_clz x
       #|  T
-      #|  !x:int64.\n        let x1 = word_or x (word_ushr x 32) in\n        let x2 = word_or x1 (word_ushr x1 16) in\n        let x4 = word_or x2 (word_ushr x2 8) in\n        let x8 = word_or x4 (word_ushr x4 4) in\n        let x16 = word_or x8 (word_ushr x8 2) in\n        let x32 = word_or x16 (word_ushr x16 1) in\n        word_popcount(word_not x32) = word_clz x
+      #|  forall x:int64.\n        let x1 = word_or x (word_ushr x 32) in\n        let x2 = word_or x1 (word_ushr x1 16) in\n        let x4 = word_or x2 (word_ushr x2 8) in\n        let x8 = word_or x4 (word_ushr x4 4) in\n        let x16 = word_or x8 (word_ushr x8 2) in\n        let x32 = word_or x16 (word_ushr x16 1) in\n        word_popcount(word_not x32) = word_clz x
       #|  T
-      #|  !x:int64.\n   (if x = word 0 then word 64 else\n    let n = word 0 in\n    let x0,n0 = if val x <= 0x00000000FFFFFFFF\n                then word_shl x 32,word_add n (word 32) else x,n in\n    let x1,n1 = if val x0 <= 0x0000FFFFFFFFFFFF\n                then word_shl x0 16,word_add n0 (word 16) else x0,n0 in\n    let x2,n2 = if val x1 <= 0x00FFFFFFFFFFFFFF\n                then word_shl x1 8,word_add n1 (word 8) else x1,n1 in\n    let x3,n3 = if val x2 <= 0x0FFFFFFFFFFFFFFF\n                then word_shl x2 4,word_add n2 (word 4) else x2,n2 in\n    let x4,n4 = if val x3 <= 0x3FFFFFFFFFFFFFFF\n                then word_shl x3 2,word_add n3 (word 2) else x3,n3 in\n    if val x4 <= 0x7FFFFFFFFFFFFFFF then word_add n4 (word 1) else n4):int64 =\n   word(word_clz x)
+      #|  forall x:int64.\n   (if x = word 0 then word 64 else\n    let n = word 0 in\n    let x0,n0 = if val x <= 0x00000000FFFFFFFF\n                then word_shl x 32,word_add n (word 32) else x,n in\n    let x1,n1 = if val x0 <= 0x0000FFFFFFFFFFFF\n                then word_shl x0 16,word_add n0 (word 16) else x0,n0 in\n    let x2,n2 = if val x1 <= 0x00FFFFFFFFFFFFFF\n                then word_shl x1 8,word_add n1 (word 8) else x1,n1 in\n    let x3,n3 = if val x2 <= 0x0FFFFFFFFFFFFFFF\n                then word_shl x2 4,word_add n2 (word 4) else x2,n2 in\n    let x4,n4 = if val x3 <= 0x3FFFFFFFFFFFFFFF\n                then word_shl x3 2,word_add n3 (word 2) else x3,n3 in\n    if val x4 <= 0x7FFFFFFFFFFFFFFF then word_add n4 (word 1) else n4):int64 =\n   word(word_clz x)
       #|  T
       #|  T
       #|  T
@@ -7098,7 +7098,7 @@ test "Examples/bitblast matches Examples/bitblast.ml" {
       #|  T
       #|  T
       #|  T
-      #|  !x:int64.\n        let MASK32 = word 0xFFFFFFFF00000000\n        and MASK16 = word 0xFFFF0000FFFF0000\n        and MASK8 = word 0xFF00FF00FF00FF00\n        and MASK4 = word 0xF0F0F0F0F0F0F0F0\n        and MASK2 = word 0xCCCCCCCCCCCCCCCC\n        and MASK1 = word 0xAAAAAAAAAAAAAAAA in\n        (if x = word 0 then 64 else\n         (if val(word_and x MASK32) < val(word_and x (word_not MASK32))\n          then 32 else 0) +\n         (if val(word_and x MASK16) < val(word_and x (word_not MASK16))\n          then 16 else 0) +\n         (if val(word_and x MASK8) < val(word_and x (word_not MASK8))\n          then 8 else 0) +\n         (if val(word_and x MASK4) < val(word_and x (word_not MASK4))\n          then 4 else 0) +\n         (if val(word_and x MASK2) < val(word_and x (word_not MASK2))\n          then 2 else 0) +\n         (if val(word_and x MASK1) < val(word_and x (word_not MASK1))\n          then 1 else 0)) =\n    word_clz x
+      #|  forall x:int64.\n        let MASK32 = word 0xFFFFFFFF00000000\n        and MASK16 = word 0xFFFF0000FFFF0000\n        and MASK8 = word 0xFF00FF00FF00FF00\n        and MASK4 = word 0xF0F0F0F0F0F0F0F0\n        and MASK2 = word 0xCCCCCCCCCCCCCCCC\n        and MASK1 = word 0xAAAAAAAAAAAAAAAA in\n        (if x = word 0 then 64 else\n         (if val(word_and x MASK32) < val(word_and x (word_not MASK32))\n          then 32 else 0) +\n         (if val(word_and x MASK16) < val(word_and x (word_not MASK16))\n          then 16 else 0) +\n         (if val(word_and x MASK8) < val(word_and x (word_not MASK8))\n          then 8 else 0) +\n         (if val(word_and x MASK4) < val(word_and x (word_not MASK4))\n          then 4 else 0) +\n         (if val(word_and x MASK2) < val(word_and x (word_not MASK2))\n          then 2 else 0) +\n         (if val(word_and x MASK1) < val(word_and x (word_not MASK1))\n          then 1 else 0)) =\n    word_clz x
       #|  T
       #|  T
       #|  T
@@ -7164,13 +7164,13 @@ test "Examples/bitblast matches Examples/bitblast.ml" {
       #|  T
       #|  T
       #|  T
-      #|  !x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l = word_reversefields 1 x
+      #|  forall x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l = word_reversefields 1 x
       #|  T
-      #|  !x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_and (word_ushr m 32) (word 0xFF) in\n     l = word_zx(word_reversefields 1 x)
+      #|  forall x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_and (word_ushr m 32) (word 0xFF) in\n     l = word_zx(word_reversefields 1 x)
       #|  T
-      #|  !x:byte.\n     let f = word_mul (word_zx x) (word 0x40100401:int64) in\n     let s = word_and f (word 0x884422011) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l =\n     word_or (word_and x (word 1))\n        (word_shl\n          (word_zx(word_reversefields 1 (word_zx (word_ushr x 1):7 word))) 1)
+      #|  forall x:byte.\n     let f = word_mul (word_zx x) (word 0x40100401:int64) in\n     let s = word_and f (word 0x884422011) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l =\n     word_or (word_and x (word 1))\n        (word_shl\n          (word_zx(word_reversefields 1 (word_zx (word_ushr x 1):7 word))) 1)
       #|  T
-      #|  !a:int32.\n    let ML_DSA_Q = &8380417 in\n    let t = word_ishr (word_add a (word_shl (word 1) 22)) 23 in\n    let r = word_sub a (word_mul t (iword ML_DSA_Q)) in\n    ival(a) < &0x7fc00000\n    ==> ival(a) - ML_DSA_Q * ival t = ival r /\\\n        --(&6283009) <= ival r /\\ ival r <= &6283008
+      #|  forall a:int32.\n    let ML_DSA_Q = &8380417 in\n    let t = word_ishr (word_add a (word_shl (word 1) 22)) 23 in\n    let r = word_sub a (word_mul t (iword ML_DSA_Q)) in\n    ival(a) < &0x7fc00000\n    ==> ival(a) - ML_DSA_Q * ival t = ival r /\\\n        --(&6283009) <= ival r /\\ ival r <= &6283008
       #|  T
       #|types = word/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
       #|constants = simd16 usimd16 simd8 usimd8 simd4 usimd4 simd2 usimd2 word_jrol word_jror word_jrem word_jdiv word_jushr word_jshr word_jshl aligned word_pmul word_bytereverse word_reversefields word_clz word_ctz word_duplicate word_insert word_subword word_join word_cor word_cand word_sxfrom word_sx word_zx word_igt word_ilt word_ige word_ile word_ugt word_ult word_uge word_ule word_rol word_ror word_ishr word_ushr word_shl word_imin word_umin word_imax word_umax word_umod word_udiv word_mul word_neg word_sub word_add word_xor word_or word_and word_not bitwise2 bitwise1 irelational2 relational2 imodular modular word_oddparity word_evenparity word_popcount iword_saturate word_saturate word_INT_MAX word_INT_MIN word_UINT_MAX num_shift_add bits_of_num numbit word_sgn iword ival word val word_of_bits bits_of_word bit bitvector mk_word bitval superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =

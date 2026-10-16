@@ -5579,10 +5579,10 @@ test "Tutorial/Embedding_of_logics_shallow matches Tutorial/Embedding_of_logics_
       #|  p || q = \\t:num. p t \\/ q t
       #|  p --> q = \\t:num. p t ==> q t
       #|  p <-> q = \\t:num. p t <=> q t
-      #|  forever p = \\t:num. !t'. t <= t' ==> p t'
+      #|  forever p = \\t:num. forall t'. t <= t' ==> p t'
       #|  sometime p = \\t:num. ?t'. t <= t' /\\ p t'
       #|  next p = \\t:num. p(t + 1)
-      #|  p until q =\n    \\t:num. ?t'. t <= t' /\\ (!t''. t <= t'' /\\ t'' < t' ==> p t'') /\\ q t'
+      #|  p until q =\n    \\t:num. ?t'. t <= t' /\\ (forall t''. t <= t'' /\\ t'' < t' ==> p t'') /\\ q t'
       #|false_def =  |- ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) #False:fun(num,bool)) (\t:num. #F:bool))
       #|true_def =  |- ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) #True:fun(num,bool)) (\t:num. #T:bool))
       #|not_def =  |- ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#Not:fun(fun(num,bool),fun(num,bool)) p:fun(num,bool))) (\t:num. (#~:fun(bool,bool) (p:fun(num,bool) t:num))))

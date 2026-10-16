@@ -186,7 +186,7 @@ fn step_23() -> Unit raise {
   let t10 = @parser.parse_term("y:real")
   let t11 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("--x"), t10]), @realax.real_le_mul()))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t11), t13), @calc_rat.real_arith_tac)
-  trivial_v5_c.set(@tactics.prove(@parser.parse_term("!x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t14))
+  trivial_v5_c.set(@tactics.prove(@parser.parse_term("forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t14))
 }
 
 ///|
@@ -205,7 +205,7 @@ fn step_24() -> Unit raise {
   let t17 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("--x"), t16]), @realax.real_le_mul()))
   let t15 = @tactics.repeat_tac(@tactics.gen_tac)
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@real.real_wlog_le()), @tactics.conj_tac), t15), t17), @calc_rat.real_arith_tac)
-  trivial_c.set(@tactics.prove(@parser.parse_term("!x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t18))
+  trivial_c.set(@tactics.prove(@parser.parse_term("forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t18))
 }
 
 ///|
@@ -221,7 +221,7 @@ pub fn trivial() -> @kernel.Thm {
 /// SUM_OF_NUMBERS
 fn step_25() -> Unit raise {
   let t19 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_numbers_c.set(@tactics.prove(@parser.parse_term("!n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2"), t19))
+  sum_of_numbers_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2"), t19))
 }
 
 ///|
@@ -237,7 +237,7 @@ pub fn sum_of_numbers() -> @kernel.Thm {
 /// SUM_OF_SQUARES
 fn step_26() -> Unit raise {
   let t20 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_squares_c.set(@tactics.prove(@parser.parse_term("!n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6"), t20))
+  sum_of_squares_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6"), t20))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn sum_of_squares() -> @kernel.Thm {
 /// SUM_OF_CUBES
 fn step_27() -> Unit raise {
   let t21 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_cubes_c.set(@tactics.prove(@parser.parse_term("!n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4"), t21))
+  sum_of_cubes_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4"), t21))
 }
 
 ///|

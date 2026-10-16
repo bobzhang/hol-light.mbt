@@ -81372,7 +81372,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  complex_div:complex->complex->complex
       #|  complex_pow:complex->num->complex
       #|  complex_inv:complex->complex
-      #|  !f x. vsum (1..x) (\\n. vsum {d | d divides n} (f n)) =\n         vsum (1..x) (\\n. vsum (1..(x DIV n)) (\\k. f (k * n) n))
+      #|  forall f x. vsum (1..x) (\\n. vsum {d | d divides n} (f n)) =\n         vsum (1..x) (\\n. vsum (1..(x DIV n)) (\\k. f (k * n) n))
       #|  &1 / &2
       #|  &4 = &2 * &2
       #|  &1 = &1 / &2 + &1 / &2
@@ -81392,30 +81392,30 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  Cx(&n)
       #|  \\z. (Cx(&1) - clog(z)) / z pow 2
       #|  \\z. clog z / z
-      #|  !n. 4 <= n ==> log(&n + &1) / (&n + &1) <= log(&n) / &n
+      #|  forall n. 4 <= n ==> log(&n + &1) / (&n + &1) <= log(&n) / &n
       #|  (f has_complex_derivative f') net
       #|  cexp(clog a / Cx(&n))
-      #|  (!x. ~Q x ==> ~P x) /\\ (?x. P x) ==> (?x. P x /\\ Q x)
+      #|  (forall x. ~Q x ==> ~P x) /\\ (?x. P x) ==> (?x. P x /\\ Q x)
       #|  2 <= n ==> ~(n = 1)
       #|  cexp(Cx(&2) * Cx pi * ii * Cx(&1 / &n))
       #|  a = Cx(&1)
       #|  Cx(&0)
       #|  a = Cx(&0)
       #|  2 <= n ==> ~(n = 0)
-      #|  !a n. 2 <= n ==> ?z. z pow n = a /\\ ~(z = Cx(&1))
-      #|  dirichlet_character d (c:num->complex) <=>\n        (!n. c(n + d) = c(n)) /\\\n        (!n. c(n) = Cx(&0) <=> ~coprime(n,d)) /\\\n        (!m n. c(m * n) = c(m) * c(n))
-      #|  !d c n. dirichlet_character d c ==> c(n + d) = c(n)
-      #|  !d c n. dirichlet_character d c ==> (c(n) = Cx(&0) <=> ~coprime(n,d))
-      #|  !d c m n. dirichlet_character d c ==> c(m * n) = c(m) * c(n)
+      #|  forall a n. 2 <= n ==> ?z. z pow n = a /\\ ~(z = Cx(&1))
+      #|  dirichlet_character d (c:num->complex) <=>\n        (forall n. c(n + d) = c(n)) /\\\n        (forall n. c(n) = Cx(&0) <=> ~coprime(n,d)) /\\\n        (forall m n. c(m * n) = c(m) * c(n))
+      #|  forall d c n. dirichlet_character d c ==> c(n + d) = c(n)
+      #|  forall d c n. dirichlet_character d c ==> (c(n) = Cx(&0) <=> ~coprime(n,d))
+      #|  forall d c m n. dirichlet_character d c ==> c(m * n) = c(m) * c(n)
       #|  a = a * a <=> a = Cx(&0) \\/ a = Cx(&1)
       #|  1
-      #|  !d c. dirichlet_character d c ==> c(1) = Cx(&1)
-      #|  !d c m n. dirichlet_character d c ==> c(m EXP n) = c(m) pow n
+      #|  forall d c. dirichlet_character d c ==> c(1) = Cx(&1)
+      #|  forall d c m n. dirichlet_character d c ==> c(m EXP n) = c(m) pow n
       #|  (mk + d) + n:num = (mk + n) + d
-      #|  !d c m n. dirichlet_character d c ==> c(m * d + n) = c(n)
-      #|  !d c m n.\n        dirichlet_character d c /\\ (m == n) (mod d) ==> c(m) = c(n)
+      #|  forall d c m n. dirichlet_character d c ==> c(m * d + n) = c(n)
+      #|  forall d c m n.\n        dirichlet_character d c /\\ (m == n) (mod d) ==> c(m) = c(n)
       #|  d:num
-      #|  !d c n. dirichlet_character d c /\\ coprime(d,n)\n           ==> c(n) pow phi(d) = Cx(&1)
+      #|  forall d c n. dirichlet_character d c /\\ coprime(d,n)\n           ==> c(n) pow phi(d) = Cx(&1)
       #|  phi d
       #|  norm((c:num->complex) n)
       #|  norm:complex->real
@@ -81423,67 +81423,67 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  c:num->complex
       #|  d:num
       #|  d = 0
-      #|  !d c n. dirichlet_character d c\n           ==> norm(c n) = if coprime(d,n) then &1 else &0
+      #|  forall d c n. dirichlet_character d c\n           ==> norm(c n) = if coprime(d,n) then &1 else &0
       #|  chi_0 d n = if coprime(n,d) then Cx(&1) else Cx(&0)
       #|  coprime(m * n,d) <=> coprime(m,d) /\\ coprime(n,d)
       #|  coprime(n + d,d) <=> coprime(n,d)
       #|  dirichlet_character d (chi_0 d)
-      #|  !d c. dirichlet_character d c\n         ==> (c = chi_0 d <=> !n. coprime(n,d) ==> c(n) = Cx(&1))
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?n. coprime(n,d) /\\ ~(c n = Cx(&0)) /\\ ~(c n = Cx(&1))
+      #|  forall d c. dirichlet_character d c\n         ==> (c = chi_0 d <=> forall n. coprime(n,d) ==> c(n) = Cx(&1))
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?n. coprime(n,d) /\\ ~(c n = Cx(&0)) /\\ ~(c n = Cx(&1))
       #|  n:num
-      #|  !c. dirichlet_character 0 c <=> c = chi_0 0
+      #|  forall c. dirichlet_character 0 c <=> c = chi_0 0
       #|  0
       #|  x = x * x <=> x = Cx(&0) \\/ x = Cx(&1)
       #|  1
       #|  1
-      #|  !c. dirichlet_character 1 c <=> !n. c n = Cx(&1)
+      #|  forall c. dirichlet_character 1 c <=> forall n. c n = Cx(&1)
       #|  d = 1
       #|  ~(p /\\ ~p)
       #|  d = 0
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(d = 0) /\\ ~(d = 1)
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(d = 0) /\\ ~(d = 1)
       #|  r:num = d
       #|  coprime(r,d)
       #|  r = 0
       #|  r:num
       #|  {n | coprime(n,d) /\\ n < d}
-      #|  !t. vsum t f = vsum s f /\\ vsum t g = vsum s g /\\ vsum t f = vsum t g\n        ==> vsum s f = vsum s g
+      #|  forall t. vsum t f = vsum s f /\\ vsum t g = vsum s g /\\ vsum t f = vsum t g\n        ==> vsum s f = vsum s g
       #|  (c:num->complex) m
-      #|  !x. x * c = c /\\ ~(x = Cx(&1)) ==> c = Cx(&0)
+      #|  forall x. x * c = c /\\ ~(x = Cx(&1)) ==> c = Cx(&0)
       #|  m:num
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..d) c = Cx(&0)
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..d) c = Cx(&0)
       #|  d:num
       #|  1 <= n + 1
-      #|  !d c n. dirichlet_character d c /\\ ~(c = chi_0 d)\n           ==> vsum(1..d*n) c = Cx(&0)
+      #|  forall d c n. dirichlet_character d c /\\ ~(c = chi_0 d)\n           ==> vsum(1..d*n) c = Cx(&0)
       #|  d:num
       #|  1 <= n + 1
       #|  n:num
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..n) c = vsum(1..(n MOD d)) c
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..n) c = vsum(1..(n MOD d)) c
       #|  d:num
       #|  m:num
       #|  \\n:num. if n < d then c(n) else Cx(&0)
       #|  c:num->complex
-      #|  IMAGE (\\c n. c(n MOD d))\n                    {c | (!m. m IN {m | m < d}\n                             ==> c(m) IN (Cx(&0) INSERT\n                                          {z | z pow (phi d) = Cx(&1)})) /\\\n                         (!m. ~(m IN {m | m < d})\n                              ==> c(m) = Cx(&0))}
+      #|  IMAGE (\\c n. c(n MOD d))\n                    {c | (forall m. m IN {m | m < d}\n                             ==> c(m) IN (Cx(&0) INSERT\n                                          {z | z pow (phi d) = Cx(&1)})) /\\\n                         (forall m. ~(m IN {m | m < d})\n                              ==> c(m) = Cx(&0))}
       #|  {x | x = a} = {a}
       #|  d = 0
-      #|  !d. FINITE {c | dirichlet_character d c}
+      #|  forall d. FINITE {c | dirichlet_character d c}
       #|  inv z = w /\\ ~(z = Cx(&0)) ==> w * z = Cx(&1) /\\ z * w = Cx(&1)
-      #|  !d c n. dirichlet_character d c /\\ ~(c n = Cx(&0))\n           ==> cnj(c n) * c n = Cx(&1) /\\ c n * cnj(c n) = Cx(&1)
-      #|  !d c. dirichlet_character d c ==> dirichlet_character d (\\n. cnj(c n))
-      #|  !d c1 c2. dirichlet_character d c1 /\\ dirichlet_character d c2\n             ==> dirichlet_character d (\\n. c1(n) * c2(n))
-      #|  !d c. dirichlet_character d c ==> (\\n. cnj(c n) * c n) = chi_0 d
+      #|  forall d c n. dirichlet_character d c /\\ ~(c n = Cx(&0))\n           ==> cnj(c n) * c n = Cx(&1) /\\ c n * cnj(c n) = Cx(&1)
+      #|  forall d c. dirichlet_character d c ==> dirichlet_character d (\\n. cnj(c n))
+      #|  forall d c1 c2. dirichlet_character d c1 /\\ dirichlet_character d c2\n             ==> dirichlet_character d (\\n. c1(n) * c2(n))
+      #|  forall d c. dirichlet_character d c ==> (\\n. cnj(c n) * c n) = chi_0 d
       #|  coprime(x,d)
       #|  x:num
-      #|  !d c. dirichlet_character d c\n         ==> vsum (1..d) c = if c = chi_0 d then Cx(&(phi d)) else Cx(&0)
+      #|  forall d c. dirichlet_character d c\n         ==> vsum (1..d) c = if c = chi_0 d then Cx(&(phi d)) else Cx(&0)
       #|  a * b = Cx(&1) ==> a * b * x = a * b * y ==> x = y
       #|  m:num
       #|  coprime(m,d)
       #|  m:num
       #|  (\\c n. cnj(c'(n:num)) * c n)
       #|  a * x = x <=> a = Cx(&1) \\/ x = Cx(&0)
-      #|  !c'. dirichlet_character d c'\n          ==> vsum {c | dirichlet_character d c}\n                   ((\\c. c(n)) o (\\c n. c'(n) * c(n))) =\n              vsum {c | dirichlet_character d c} (\\c. c(n))
+      #|  forall c'. dirichlet_character d c'\n          ==> vsum {c | dirichlet_character d c}\n                   ((\\c. c(n)) o (\\c n. c'(n) * c(n))) =\n              vsum {c | dirichlet_character d c} (\\c. c(n))
       #|  coprime(n,d)
-      #|  !d n. vsum {c | dirichlet_character d c} (\\x. x n) = Cx(&0) \\/\n         coprime(n,d) /\\ !c. dirichlet_character d c ==> c(n) = Cx(&1)
-      #|  !d n. real(vsum {c | dirichlet_character d c} (\\c. c n)) /\\\n         &0 <= Re(vsum {c | dirichlet_character d c} (\\c. c n))
+      #|  forall d n. vsum {c | dirichlet_character d c} (\\x. x n) = Cx(&0) \\/\n         coprime(n,d) /\\ forall c. dirichlet_character d c ==> c(n) = Cx(&1)
+      #|  forall d n. real(vsum {c | dirichlet_character d c} (\\c. c n)) /\\\n         &0 <= Re(vsum {c | dirichlet_character d c} (\\c. c n))
       #|  g(((x * y) MOD d * a EXP (k + j)) MOD d):complex
       #|  j:num
       #|  y:num
@@ -81493,7 +81493,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  r:num
       #|  z pow m = f(am:num)
       #|  am:num
-      #|  !x:num. x IN h ==> ~(f x = Cx (&0))
+      #|  forall x:num. x IN h ==> ~(f x = Cx (&0))
       #|  k:num
       #|  k + a * k = (a + 1) * k
       #|  k + (phi d - 1) * k = phi(d) * k
@@ -81503,7 +81503,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  (z * a EXP ((phi d - 1) * k)) MOD d
       #|  z:num
       #|  x:num
-      #|  !x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
+      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
       #|  k:num
       #|  x:num
       #|  y:num
@@ -81520,7 +81520,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  ~(z = Cx(&1))
       #|  1
       #|  1
-      #|  !x y. x IN h /\\ y IN h ==> f ((x * y) MOD d) = f x * f y
+      #|  forall x y. x IN h /\\ y IN h ==> f ((x * y) MOD d) = f x * f y
       #|  1
       #|  1
       #|  0
@@ -81539,10 +81539,10 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  1 <= d
       #|  f((am * (am EXP s) MOD d) MOD d):complex
       #|  1
-      #|  !x:num. x IN h ==> ~(f x = Cx (&0))
+      #|  forall x:num. x IN h ==> ~(f x = Cx (&0))
       #|  1
       #|  1
-      #|  !x y. x IN h /\\ y IN h ==> f ((x * y) MOD d):complex = f x * f y
+      #|  forall x y. x IN h /\\ y IN h ==> f ((x * y) MOD d):complex = f x * f y
       #|  s:num
       #|  r:num
       #|  (x * a EXP k == y * a EXP (k + m * r)) (mod d)
@@ -81556,7 +81556,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  (z * x) MOD d
       #|  z:num
       #|  y:num
-      #|  !x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
+      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
       #|  m divides i
       #|  i:num
       #|  k:num <= j
@@ -81564,16 +81564,16 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  x:num
       #|  j:num
       #|  k:num
-      #|  (!x k y j. P x k y j) <=> (!k j x y. P x k y j)
-      #|  (!y. ?z. !x k. p x /\\ f x k = y ==> z = g x k) <=>\n      (!x k x' k'. p x /\\ p x' /\\ f x k = f x' k' ==> g x k = g x' k')
-      #|  (?g. !x a. p x ==> g(f a x) = h a x) <=>\n                         (?g. !y x a. p x /\\ f a x = y ==> g y = h a x)
-      #|  ?g. !x k. x IN h ==> g((x * a EXP k) MOD d) = f(x) * z pow k
+      #|  (forall x k y j. P x k y j) <=> (forall k j x y. P x k y j)
+      #|  (forall y. ?z. forall x k. p x /\\ f x k = y ==> z = g x k) <=>\n      (forall x k x' k'. p x /\\ p x' /\\ f x k = f x' k' ==> g x k = g x' k')
+      #|  (?g. forall x a. p x ==> g(f a x) = h a x) <=>\n                         (?g. forall y x a. p x /\\ f a x = y ==> g y = h a x)
+      #|  ?g. forall x k. x IN h ==> g((x * a EXP k) MOD d) = f(x) * z pow k
       #|  z:complex
       #|  m:num
       #|  (f:num->complex) am
       #|  a EXP (m * r DIV m) MOD d * y
       #|  (y * e * a == z) (mod n)\n      ==> (e * y == 1) (mod n) ==> (a == z) (mod n)
-      #|  !a. (x:num == y) (mod n) ==> (a * x == a * y) (mod n)
+      #|  forall a. (x:num == y) (mod n) ==> (a * x == a * y) (mod n)
       #|  y:num
       #|  m:num
       #|  r:num
@@ -81581,10 +81581,10 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  y:num
       #|  (a EXP m) EXP (r DIV m) MOD d = (am EXP (r DIV m)) MOD d
       #|  (a EXP (m * r DIV m)) MOD d
-      #|  !x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
+      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
       #|  (a EXP (r MOD m)) MOD d
       #|  n = 0 <=> ~(0 < n)
-      #|  !r x. x IN h /\\ (a EXP r == x) (mod d) ==> m divides r
+      #|  forall r x. x IN h /\\ (a EXP r == x) (mod d) ==> m divides r
       #|  ~(a /\\ b /\\ c) <=> b /\\ c ==> ~a
       #|  r MOD m
       #|  r:num
@@ -81594,12 +81594,12 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  m:num
       #|  1 <= d
       #|  ((x * (x EXP s) MOD d) MOD d) IN h
-      #|  !x s. x IN h ==> ((x EXP s) MOD d) IN h
+      #|  forall x s. x IN h ==> ((x EXP s) MOD d) IN h
       #|  1
       #|  phi d
       #|  ?m x. 0 < m /\\ x IN h /\\ (a EXP m == x) (mod d)
       #|  1 < d
-      #|  !f h a d.\n        h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n        (1 IN h) /\\\n        (!x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n        (!x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n        (!x. x IN h ==> ~(f x = Cx(&0))) /\\\n        (!x y. x IN h /\\ y IN h\n                 ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n        a IN {x | x < d /\\ coprime(x,d)} DIFF h\n        ==> ?f' h'. (a INSERT h) SUBSET h' /\\\n                    h' SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                    (!x. x IN h ==> f'(x) = f(x)) /\\\n                    ~(f' a = Cx(&1)) /\\\n                    1 IN h' /\\\n                    (!x y. x IN h' /\\ y IN h' ==> ((x * y) MOD d) IN h') /\\\n                    (!x. x IN h' ==> ?y. y IN h' /\\ (x * y == 1) (mod d)) /\\\n                    (!x. x IN h' ==> ~(f' x = Cx(&0))) /\\\n                    (!x y. x IN h' /\\ y IN h'\n                           ==> f'((x * y) MOD d) = f'(x) * f'(y))
+      #|  forall f h a d.\n        h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n        (1 IN h) /\\\n        (forall x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n        (forall x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n        (forall x. x IN h ==> ~(f x = Cx(&0))) /\\\n        (forall x y. x IN h /\\ y IN h\n                 ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n        a IN {x | x < d /\\ coprime(x,d)} DIFF h\n        ==> ?f' h'. (a INSERT h) SUBSET h' /\\\n                    h' SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                    (forall x. x IN h ==> f'(x) = f(x)) /\\\n                    ~(f' a = Cx(&1)) /\\\n                    1 IN h' /\\\n                    (forall x y. x IN h' /\\ y IN h' ==> ((x * y) MOD d) IN h') /\\\n                    (forall x. x IN h' ==> ?y. y IN h' /\\ (x * y == 1) (mod d)) /\\\n                    (forall x. x IN h' ==> ~(f' x = Cx(&0))) /\\\n                    (forall x y. x IN h' /\\ y IN h'\n                           ==> f'((x * y) MOD d) = f'(x) * f'(y))
       #|  f(((x MOD d) * (y MOD d)) MOD d):complex
       #|  coprime(y,d)
       #|  coprime(x,d)
@@ -81639,7 +81639,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  f0:num->complex
       #|  m = 0
       #|  m:num
-      #|  !m. m <= CARD {x | x < d /\\ coprime(x,d)}\n        ==> ?f h. h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                 (1 IN h) /\\ (n MOD d) IN h /\\\n                 (!x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n                 (!x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n                 ~(f(n MOD d) = Cx(&1)) /\\\n                 (!x. x IN h ==> ~(f x = Cx(&0))) /\\\n                 (!x y. x IN h /\\ y IN h\n                          ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n                 m <= CARD h
+      #|  forall m. m <= CARD {x | x < d /\\ coprime(x,d)}\n        ==> ?f h. h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                 (1 IN h) /\\ (n MOD d) IN h /\\\n                 (forall x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n                 (forall x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n                 ~(f(n MOD d) = Cx(&1)) /\\\n                 (forall x. x IN h ==> ~(f x = Cx(&0))) /\\\n                 (forall x y. x IN h /\\ y IN h\n                          ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n                 m <= CARD h
       #|  h0:num->bool
       #|  f0:num->complex
       #|  d:num
@@ -81648,7 +81648,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  \\n:num. Cx(&1)
       #|  chi_0 d
       #|  coprime(n,d)
-      #|  !d n. 1 < d /\\ ~((n == 1) (mod d))\n          ==> ?c. dirichlet_character d c /\\ ~(c n = Cx(&1))
+      #|  forall d n. 1 < d /\\ ~((n == 1) (mod d))\n          ==> ?c. dirichlet_character d c /\\ ~(c n = Cx(&1))
       #|  ~(d = 0) /\\ ~(d = 1) ==> 1 < d
       #|  n:num
       #|  d:num
@@ -81657,7 +81657,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  d = 1
       #|  {x | x = a} = {a}
       #|  d = 0
-      #|  !d n. vsum {c | dirichlet_character d c} (\\c. c n) =\n                if (n == 1) (mod d)\n                then Cx(&(CARD {c | dirichlet_character d c}))\n                else Cx(&0)
+      #|  forall d n. vsum {c | dirichlet_character d c} (\\c. c n) =\n                if (n == 1) (mod d)\n                then Cx(&(CARD {c | dirichlet_character d c}))\n                else Cx(&0)
       #|  d:num
       #|  (d == 1) (mod d) <=> d divides 1
       #|  k:num = d
@@ -81667,16 +81667,16 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  1..d
       #|  {c | dirichlet_character d c}
       #|  \\c n. (c:num->complex) n
-      #|  !d n. 1 <= d\n         ==> vsum {c | dirichlet_character d c} (\\c. c(n)) =\n                if (n == 1) (mod d) then Cx(&(phi d)) else Cx(&0)
+      #|  forall d n. 1 <= d\n         ==> vsum {c | dirichlet_character d c} (\\c. c(n)) =\n                if (n == 1) (mod d) then Cx(&(phi d)) else Cx(&0)
       #|  Lfunction c = infsum (from 1) (\\n. c(n) / Cx(&n))
       #|  n MOD d
       #|  n:num
       #|  IMAGE (\\n. vsum(1..n) c:complex) (0..d)
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded {vsum (1..n) c | n IN (:num)}
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded {vsum (1..n) c | n IN (:num)}
       #|  1
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ((\\n. c(n) / Cx(&n)) sums (Lfunction c)) (from 1)
-      #|  !d n. cnj(chi_0 d n) = chi_0 d n
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> Lfunction (\\n. cnj(c n)) = cnj(Lfunction c)
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ((\\n. c(n) / Cx(&n)) sums (Lfunction c)) (from 1)
+      #|  forall d n. cnj(chi_0 d n) = chi_0 d n
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> Lfunction (\\n. cnj(c n)) = cnj(Lfunction c)
       #|  1 <= k + 1
       #|  1 <= k ==> 1 <= k + 1
       #|  k + 1 <= m ==> k <= m
@@ -81692,7 +81692,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  1
       #|  \\n. inv(Cx(&n))
       #|  c:num->complex
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 !n. 1 <= n\n                     ==> norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                          <= B / (&n + &1)
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 forall n. 1 <= n\n                     ==> norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                          <= B / (&n + &1)
       #|  &0 < &n + &1
       #|  a <= b ==> x <= a ==> x <= b
       #|  n:num
@@ -81700,7 +81700,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  n:num
       #|  max B (norm(Lfunction c))
       #|  B:real
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 !n. norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                         <= B / (&n + &1)
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 forall n. norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                         <= B / (&n + &1)
       #|  n:num
       #|  x:num
       #|  1 <= x
@@ -81717,15 +81717,15 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  c:num->complex
       #|  d:num
       #|  (ck * cn) * cm * k * n:complex = (ck * k) * (cn * cm * n)
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) -\n                vsum(1..x) (\\n. c(n) * Cx(log(&n) / &n)) | x IN (:num)}
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) -\n                vsum(1..x) (\\n. c(n) * Cx(log(&n) / &n)) | x IN (:num)}
       #|  1
       #|  1
       #|  4
-      #|  !c d. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> summable (from 1) (\\n. c(n) * Cx(log(&n) / &n))
+      #|  forall c d. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> summable (from 1) (\\n. c(n) * Cx(log(&n) / &n))
       #|  n:num
       #|  n:num
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) | x IN (:num)}
-      #|  !d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ ~(Lfunction c = Cx(&0))\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) | x IN (:num)}
+      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ ~(Lfunction c = Cx(&0))\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
       #|  a = &0 ==> a - b = --b
       #|  d = 0
       #|  q = 0
@@ -81734,7 +81734,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  sum {d | d divides n} (\\x. mobius x * (log(&n) - log(&x)))
       #|  \\n. log(&n)
       #|  \\n. mangoldt n
-      #|  !n. 1 <= n\n       ==> mangoldt(n) = --(sum {d | d divides n} (\\d. mobius(d) * log(&d)))
+      #|  forall n. 1 <= n\n       ==> mangoldt(n) = --(sum {d | d divides n} (\\d. mobius(d) * log(&d)))
       #|  c:num->complex
       #|  d:num
       #|  m = 0
@@ -81743,13 +81743,13 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  vsum (1..x)\n         (\\n. c n / Cx(&n) * vsum {d | d divides n}\n               (\\d. Cx(mobius d * log(&x))))
       #|  c / d * x - c * --y / d:complex = c / d * (x + y)
       #|  c - b = a ==> (a:complex) + b = c
-      #|  !d c x.\n        dirichlet_character d c /\\ ~(c = chi_0 d) /\\ 1 <= x\n        ==> Cx(log(&x)) + vsum (1..x) (\\n. c(n) * Cx(mangoldt n / &n)) =\n            vsum (1..x) (\\n. c(n) / Cx(&n) *\n                             vsum {d | d divides n}\n                                  (\\d. Cx(mobius(d) * log(&x / &d))))
+      #|  forall d c x.\n        dirichlet_character d c /\\ ~(c = chi_0 d) /\\ 1 <= x\n        ==> Cx(log(&x)) + vsum (1..x) (\\n. c(n) * Cx(mangoldt n / &n)) =\n            vsum (1..x) (\\n. c(n) / Cx(&n) *\n                             vsum {d | d divides n}\n                                  (\\d. Cx(mobius(d) * log(&x / &d))))
       #|  &1 <= x /\\ l <= x ==> &2 * l + abs(x) + &1 <= &4 * x
       #|  &2 * l + abs(x) + &1 <= b\n    ==> abs(lf - (xl - x + &1)) <= &2 * l\n        ==> xl - lf <= b
       #|  sum (1..x) (\\n. abs(log(&x / &n)))
       #|  x = 0
       #|  x:num
-      #|  !x. abs(sum(1..x) (\\n. log(&x / &n) / &x)) <= &4
+      #|  forall x. abs(sum(1..x) (\\n. log(&x / &n) / &x)) <= &4
       #|  n:num
       #|  x:num
       #|  n:num
@@ -81770,7 +81770,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  B:real
       #|  c:num->complex
       #|  d:num
-      #|  !d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ Lfunction c = Cx(&0)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) +\n                    Cx(log(&x)) | x IN (:num)}
+      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ Lfunction c = Cx(&0)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) +\n                    Cx(log(&x)) | x IN (:num)}
       #|  k = SUC(k - 1)
       #|  q:num
       #|  &0 <= y /\\ x = y ==> abs x = y
@@ -81799,20 +81799,20 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  2 <= p /\\ 1 <= p /\\ 1 < p
       #|  p:num
       #|  sum {p | prime p /\\ p divides d}\n                  (\\p. sum {k | 1 <= k /\\ p EXP k <= x}\n                           (\\k. log(&p) / &p pow k))
-      #|  !d. 1 <= d\n       ==> norm(vsum(1..x) (\\n. (chi_0 d n - Cx(&1)) * Cx(mangoldt n / &n)))\n            <= sum {p | prime p /\\ p divides d} (\\p. log(&p))
+      #|  forall d. 1 <= d\n       ==> norm(vsum(1..x) (\\n. (chi_0 d n - Cx(&1)) * Cx(mangoldt n / &n)))\n            <= sum {p | prime p /\\ p divides d} (\\p. log(&p))
       #|  c * x - (c - Cx(&1)) * x = x
       #|  vsum(1..x) (\\n. (chi_0 d n - Cx(&1)) * Cx(mangoldt n / &n))
-      #|  !s'. norm(s') <= p /\\ norm(s - s' - l) <= &21\n        ==> norm(s - l) <= abs p + &21
+      #|  forall s'. norm(s') <= p /\\ norm(s - s' - l) <= &21\n        ==> norm(s - l) <= abs p + &21
       #|  :real
       #|  :real
       #|  x <= a + b ==> x <= a + abs y + b
       #|  x = 0
       #|  x:num
       #|  abs(sum {p | prime p /\\ p divides d} (\\p. log(&p))) +\n    abs(log(&0)) + &21
-      #|  !d. 1 <= d\n       ==> bounded { vsum(1..x) (\\n. chi_0 d n * Cx(mangoldt n / &n)) -\n                     Cx(log(&x)) | x IN (:num)}
-      #|  !n. nsum(0..n) (\\i. i) = (n * (n + 1)) DIV 2
-      #|  !s. FINITE s ==> product s (\\i. z pow (f i)) = z pow (nsum s f)
-      #|  !z i. product (0..n) (\\i. z pow i) = z pow ((n * (n + 1)) DIV 2)
+      #|  forall d. 1 <= d\n       ==> bounded { vsum(1..x) (\\n. chi_0 d n * Cx(mangoldt n / &n)) -\n                     Cx(log(&x)) | x IN (:num)}
+      #|  forall n. nsum(0..n) (\\i. i) = (n * (n + 1)) DIV 2
+      #|  forall s. FINITE s ==> product s (\\i. z pow (f i)) = z pow (nsum s f)
+      #|  forall z i. product (0..n) (\\i. z pow i) = z pow ((n * (n + 1)) DIV 2)
       #|  &0 < &n + &1
       #|  EVEN(n * (n + 1))
       #|  2 * (n * (n + 1)) DIV 2 = n * (n + 1)
@@ -81821,28 +81821,28 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  1 <= n + 1
       #|  \\k. (t:real) pow (k - 1)
       #|  n + 1
-      #|  !n t. &0 <= t\n         ==> (&n + &1) pow 2 * t pow n <= (sum(0..n) (\\k. t pow k)) pow 2
+      #|  forall n t. &0 <= t\n         ==> (&n + &1) pow 2 * t pow n <= (sum(0..n) (\\k. t pow k)) pow 2
       #|  {m | ?i. P i /\\ m = f i} = IMAGE f {i | P i}
-      #|  !f p k. prime p\n           ==> sum {m | m divides (p EXP k)} c = sum(0..k) (\\i. c(p EXP i))
+      #|  forall f p k. prime p\n           ==> sum {m | m divides (p EXP k)} c = sum(0..k) (\\i. c(p EXP i))
       #|  {m | ?i. P i /\\ m = f i} = IMAGE f {i | P i}
-      #|  !f p k. prime p\n           ==> vsum {m | m divides (p EXP k)} c = vsum(0..k) (\\i. c(p EXP i))
+      #|  forall f p k. prime p\n           ==> vsum {m | m divides (p EXP k)} c = vsum(0..k) (\\i. c(p EXP i))
       #|  i = 0
       #|  i:num
       #|  y:num
       #|  vsum {1} c : complex
-      #|  !d c p k. dirichlet_character d c /\\ prime p /\\ p divides d\n             ==> vsum {m | m divides (p EXP k)} c = Cx(&1)
+      #|  forall d c p k. dirichlet_character d c /\\ prime p /\\ p divides d\n             ==> vsum {m | m divides (p EXP k)} c = Cx(&1)
       #|  t:real
       #|  n:num
       #|  n:num
       #|  n:num
-      #|  !d c. dirichlet_character d c /\\ (!n. real(c n))\n         ==> !n. c n = --Cx(&1) \\/ c n = Cx(&0) \\/ c n = Cx(&1)
+      #|  forall d c. dirichlet_character d c /\\ (forall n. real(c n))\n         ==> forall n. c n = --Cx(&1) \\/ c n = Cx(&0) \\/ c n = Cx(&1)
       #|  r:num
       #|  k:num
       #|  (s = if EVEN k then &1 else &0) ==> &0 <= s
       #|  p:num
       #|  c:num->complex
       #|  d:num
-      #|  !d c p k. dirichlet_character d c /\\ (!n. real(c n)) /\\ prime p\n             ==> &0 <= Re(vsum {m | m divides (p EXP k)} c)
+      #|  forall d c p k. dirichlet_character d c /\\ (forall n. real(c n)) /\\ prime p\n             ==> &0 <= Re(vsum {m | m divides (p EXP k)} c)
       #|  1 < n ==> ~(n = 0)
       #|  b:num
       #|  a:num
@@ -81853,10 +81853,10 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  n:num
       #|  1 < n
       #|  ~(n = 0) ==> n = 1 \\/ 1 < n
-      #|  !d c n. dirichlet_character d c /\\ (!n. real(c n)) /\\ ~(n = 0)\n           ==> &0 <= Re(vsum {m | m divides n} c)
+      #|  forall d c n. dirichlet_character d c /\\ (forall n. real(c n)) /\\ ~(n = 0)\n           ==> &0 <= Re(vsum {m | m divides n} c)
       #|  &0 <= n * x * x ==> &1 - (n + &1) * x <= (&1 - x) * (&1 - n * x)
       #|  (&1 - x) * (&1 - &n * x)
-      #|  !x n. &0 <= x /\\ x <= &1 ==> &1 - &n * x <= (&1 - x) pow n
+      #|  forall x n. &0 <= x /\\ x <= &1 ==> &1 - &n * x <= (&1 - x) pow n
       #|  x = y /\\ a <= b ==> b <= x ==> a <= y
       #|  &0 <= &n + &1
       #|  a /\\ b /\\ c /\\ d ==> e <=> b /\\ d ==> a /\\ c ==> e
@@ -81881,7 +81881,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  abs t < &1 ==> &0 < &1 - t
       #|  n:num
       #|  &0 <= x ==> &0 < &1 + x
-      #|  !n. &0 < sum(0..n) (\\m. t pow m)
+      #|  forall n. &0 < sum(0..n) (\\m. t pow m)
       #|  t:real
       #|  norm(Cx(&1)) < &1
       #|  (b:complex->num->complex) z 1 = Cx(&1)
@@ -81896,7 +81896,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  z:complex
       #|  &2 * B
       #|  B:real
-      #|  (!x a b. x = f a b ==> p a b) <=> (!a b. p a b)
+      #|  (forall x a b. x = f a b ==> p a b) <=> (forall a b. p a b)
       #|  c:num->complex
       #|  d:num
       #|  x * y <= &1 ==> &1 / &2 <= &1 - x * y / &2
@@ -81960,14 +81960,14 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  x:num
       #|  \\x. vsum (1..x)\n                       (\\n. z pow x * c n *\n                            z pow (n - x MOD n) / (Cx(&1) - z pow n))
       #|  (zx * i - (zx - w) * i) = w * i
-      #|  !k. 1 <= k ==> ~(z pow k = Cx(&1))
+      #|  forall k. 1 <= k ==> ~(z pow k = Cx(&1))
       #|  n < 1 <=> n = 0
       #|  z:complex
-      #|  !z. norm(z) < &1\n                    ==> ((\\n. vsum {d | d divides n} (\\d. c d) * z pow n) sums\n                         f(z)) (from 1)
+      #|  forall z. norm(z) < &1\n                    ==> ((\\n. vsum {d | d divides n} (\\d. c d) * z pow n) sums\n                         f(z)) (from 1)
       #|  c:num->complex
       #|  d:num
       #|  Cx(&0) = Cx(&0) * inv(Cx(&1) - z)
-      #|  !z:complex. norm(z) < &1 ==> ((\\n. c(n) * b z n) sums --(f z)) (from 1)
+      #|  forall z:complex. norm(z) < &1 ==> ((\\n. c(n) * b z n) sums --(f z)) (from 1)
       #|  b = \\z n. inv(Cx(&n) * (Cx(&1) - z)) -\n                        z pow n / (Cx(&1) - z pow n)
       #|  f:complex->complex
       #|  norm(z:complex) pow N
@@ -81985,18 +81985,18 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  \\n:num. Cx(&0)
       #|  2
       #|  z = Cx(&0)
-      #|  !z. norm(z) < &1\n        ==> summable (from 1) (\\n. c(n) * z pow n / (Cx(&1) - z pow n))
+      #|  forall z. norm(z) < &1\n        ==> summable (from 1) (\\n. c(n) * z pow n / (Cx(&1) - z pow n))
       #|  c:num->complex
       #|  d:num
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d) /\\ (!n. real(c n))\n         ==> ~(Lfunction c = Cx(&0))
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d) /\\ (forall n. real(c n))\n         ==> ~(Lfunction c = Cx(&0))
       #|  log(exp((B + &1) / --Re a))
       #|  B < l * --a /\\ &0 <= f ==> B < abs(f - l * a)
       #|  abs(Re(f n - Cx(log(&n)) * a)) <= B
       #|  n:num
       #|  exp((B + &1) / --(Re a))
       #|  B:real
-      #|  !f a. bounded {f x - Cx(log(&x)) * a | x IN (:num)}\n         ==> (!x. &0 <= Re(f x)) ==> &0 <= Re a
-      #|  {a,b,c} SUBSET s\n     ==> FINITE s\n         ==> !f. sum s f = sum (s DIFF {a,b,c}) f + sum {a,b,c} f
+      #|  forall f a. bounded {f x - Cx(log(&x)) * a | x IN (:num)}\n         ==> (forall x. &0 <= Re(f x)) ==> &0 <= Re a
+      #|  {a,b,c} SUBSET s\n     ==> FINITE s\n         ==> forall f. sum s f = sum (s DIFF {a,b,c}) f + sum {a,b,c} f
       #|  c:num->complex
       #|  d:num
       #|  ~(c = \\n:num. cnj(c n))
@@ -82015,30 +82015,30 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  (:num)
       #|  \\x c. vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) -\n           Cx(log(&x)) *\n           (if c = chi_0 d then Cx(&1)\n            else if Lfunction c = Cx(&0) then --Cx(&1)\n            else Cx(&0))
       #|  d = 0
-      #|  !d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(Lfunction c = Cx(&0))
+      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(Lfunction c = Cx(&0))
       #|  d:num
-      #|  !d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
+      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
       #|  c:num->complex
       #|  d:num
       #|  c = chi_0 d
       #|  c:num->complex
-      #|  !x. Cx(log(&x)) =\n                        vsum {c | dirichlet_character d c}\n                             (\\c. if c = chi_0 d then Cx(log(&x)) else Cx(&0))
-      #|  !d l. 1 <= d /\\ coprime(l,d)\n         ==> bounded { vsum {c | dirichlet_character d c}\n                            (\\c. c(l) *\n                                 vsum(1..x) (\\n. c n * Cx (mangoldt n / &n))) -\n                       Cx(log(&x)) | x IN (:num)}
+      #|  forall x. Cx(log(&x)) =\n                        vsum {c | dirichlet_character d c}\n                             (\\c. if c = chi_0 d then Cx(log(&x)) else Cx(&0))
+      #|  forall d l. 1 <= d /\\ coprime(l,d)\n         ==> bounded { vsum {c | dirichlet_character d c}\n                            (\\c. c(l) *\n                                 vsum(1..x) (\\n. c n * Cx (mangoldt n / &n))) -\n                       Cx(log(&x)) | x IN (:num)}
       #|  (k * l == 1) (mod d)
       #|  (l * n == 1) (mod d) <=> (n == k) (mod d)
       #|  d:num
       #|  n:num
       #|  x:num
-      #|  (!x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
+      #|  (forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
       #|  (k * l == 1) (mod d)
       #|  l:num
       #|  d:num
       #|  ?l. (k * l == 1) (mod d)
-      #|  !d k. 1 <= d /\\ coprime(k,d)\n         ==> bounded { Cx(&(phi d)) * vsum {n | n IN 1..x /\\ (n == k) (mod d)}\n                                           (\\n. Cx(mangoldt n / &n)) -\n                       Cx(log(&x)) | x IN (:num)}
+      #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> bounded { Cx(&(phi d)) * vsum {n | n IN 1..x /\\ (n == k) (mod d)}\n                                           (\\n. Cx(mangoldt n / &n)) -\n                       Cx(log(&x)) | x IN (:num)}
       #|  n:num
       #|  B / &(phi d)
       #|  B:real
-      #|  !d k. 1 <= d /\\ coprime (k,d)\n         ==> ?B. &0 < B /\\\n                 !x. abs(sum {n | n IN 1..x /\\ (n == k) (mod d)}\n                             (\\n. mangoldt n / &n) -\n                         log(&x) / &(phi d)) <= B
+      #|  forall d k. 1 <= d /\\ coprime (k,d)\n         ==> ?B. &0 < B /\\\n                 forall x. abs(sum {n | n IN 1..x /\\ (n == k) (mod d)}\n                             (\\n. mangoldt n / &n) -\n                         log(&x) / &(phi d)) <= B
       #|  {n | n IN 1..x /\\ (n == k) (mod d)}
       #|  x:num
       #|  abs(x - y) <= a ==> abs(x - z) <= b ==> abs(y - z) <= b + a
@@ -82046,7 +82046,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  x:num
       #|  B + &3
       #|  B:real
-      #|  !d k. 1 <= d /\\ coprime(k,d)\n         ==> ?B. &0 < B /\\\n                 !x. abs(sum {p | p IN 1..x /\\ prime p /\\ (p == k) (mod d)}\n                             (\\p. log(&p) / &p) -\n                         log(&x) / &(phi d)) <= B
+      #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> ?B. &0 < B /\\\n                 forall x. abs(sum {p | p IN 1..x /\\ prime p /\\ (p == k) (mod d)}\n                             (\\p. log(&p) / &p) -\n                         log(&x) / &(phi d)) <= B
       #|  x <= a ==> x = y ==> y <= a
       #|  abs(x - y) <= b ==> y < &1 + b + x
       #|  m:num
@@ -82057,7 +82057,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  d:num
       #|  n:num
       #|  \\n:num. n
-      #|  !d k. 1 <= d /\\ coprime(k,d)\n         ==> INFINITE {p | prime p /\\ (p == k) (mod d)}
+      #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> INFINITE {p | prime p /\\ (p == k) (mod d)}
       #|VSUM_VSUM_DIVISORS =  |- (#!:fun(fun(fun(num,fun(num,cart(real,'?1752815))),bool),bool) (\f:fun(num,fun(num,cart(real,'?1752815))). (#!:fun(fun(num,bool),bool) (\x:num. ((#=:fun(cart(real,'?1752815),fun(cart(real,'?1752815),bool)) ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1752815)),cart(real,'?1752815))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) x:num)) (\n:num. ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1752815)),cart(real,'?1752815))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%8870:num. (#?:fun(fun(num,bool),bool) (\d:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%8870:num) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)) d:num)))))) (f:fun(num,fun(num,cart(real,'?1752815))) n:num))))) ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1752815)),cart(real,'?1752815))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) x:num)) (\n:num. ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1752815)),cart(real,'?1752815))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#DIV:fun(num,fun(num,num)) x:num) n:num))) (\k:num. ((f:fun(num,fun(num,cart(real,'?1752815))) ((#*:fun(num,fun(num,num)) k:num) n:num)) n:num))))))))))
       #|REAL_EXP_1_LE_4 =  |- ((#real_le:fun(real,fun(real,bool)) (#exp:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|DECREASING_LOG_OVER_N =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#real_le:fun(real,fun(real,bool)) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) (#real_of_num:fun(num,real) n:num))) (#real_of_num:fun(num,real) n:num))))))

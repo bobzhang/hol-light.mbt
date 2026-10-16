@@ -5679,16 +5679,16 @@ test "Tutorial/Inductive_datatypes matches Tutorial/Inductive_datatypes.ml" {
       #|  (ON)
       #|  T
       #|  (ON)
-      #|  (!p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7
-      #|  (!p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7
+      #|  (forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7
+      #|  (forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7
       #|  (~p <=> ~q) ==> (p <=> q)
       #|  (?p. P p) <=> P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                 P Point_5 \\/ P Point_6 \\/ P Point_7
       #|  (~p <=> ~q) ==> (p <=> q)
       #|  (?p. P p) <=> P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                 P Line_5 \\/ P Line_6 \\/ P Line_7
-      #|  !p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          !l'. p ON l' /\\ p' ON l' ==> l' = l
-      #|  !l l'. ?p. p ON l /\\ p ON l'
+      #|  forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          forall l'. p ON l' /\\ p' ON l' ==> l' = l
+      #|  forall l l'. ?p. p ON l /\\ p ON l'
       #|  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)
-      #|  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l
+      #|  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l
       #|line_INDUCT =  |- (#!:fun(fun(fun(line,bool),bool),bool) (\P:fun(line,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_1:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_2:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_3:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_4:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_5:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_6:line)) (P:fun(line,bool) #Line_7:line)))))))) (#!:fun(fun(line,bool),bool) (\x:line. (P:fun(line,bool) x:line))))))
       #|line_RECURSION =  |- (#!:fun(fun('Z,bool),bool) (\f0:'Z. (#!:fun(fun('Z,bool),bool) (\f1:'Z. (#!:fun(fun('Z,bool),bool) (\f2:'Z. (#!:fun(fun('Z,bool),bool) (\f3:'Z. (#!:fun(fun('Z,bool),bool) (\f4:'Z. (#!:fun(fun('Z,bool),bool) (\f5:'Z. (#!:fun(fun('Z,bool),bool) (\f6:'Z. (#?:fun(fun(fun(line,'Z),bool),bool) (\fn:fun(line,'Z). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_1:line)) f0:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_2:line)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_3:line)) f2:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_4:line)) f3:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_5:line)) f4:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_6:line)) f5:'Z)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_7:line)) f6:'Z)))))))))))))))))))))))
       #|point_INDUCT =  |- (#!:fun(fun(fun(point,bool),bool),bool) (\P:fun(point,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_1:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_2:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_3:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_4:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_5:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_6:point)) (P:fun(point,bool) #Point_7:point)))))))) (#!:fun(fun(point,bool),bool) (\x:point. (P:fun(point,bool) x:point))))))

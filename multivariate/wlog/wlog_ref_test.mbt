@@ -49802,13 +49802,13 @@ test "Multivariate/wlog matches Multivariate/wlog.ml" {
       #|0..0..solved at 2
       #|Multivariate/wlog quotations (81):
       #|  plane x = (?u v w. ~(collinear {u,v,w}) /\\ x = affine hull {u,v,w})
-      #|  !a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s
-      #|  !a:real^N s. plane s ==> plane(IMAGE (\\x. a + x) s)
+      #|  forall a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s
+      #|  forall a:real^N s. plane s ==> plane(IMAGE (\\x. a + x) s)
       #|  {f a,f b,f c} = IMAGE f {a,b,c}
       #|  {u,v,w} SUBSET IMAGE (f:real^M->real^N) p
       #|  ?u. u IN IMAGE f (:real^M) /\\\n        ?v. v IN IMAGE f (:real^M) /\\\n            ?w. w IN IMAGE (f:real^M->real^N) (:real^M) /\\\n                ~collinear {u, v, w} /\\ IMAGE f p = affine hull {u, v, w}
-      #|  !f:real^M->real^N p.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (plane(IMAGE f p) <=> plane p)
-      #|  !f:real^M->real^N p.\n        linear f /\\ plane p /\\ (!x y. f x = f y ==> x = y)\n        ==> plane(IMAGE f p)
+      #|  forall f:real^M->real^N p.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (plane(IMAGE f p) <=> plane p)
+      #|  forall f:real^M->real^N p.\n        linear f /\\ plane p /\\ (forall x y. f x = f y ==> x = y)\n        ==> plane(IMAGE f p)
       #|  span {z:real^3 | z$3 = &0} = {z:real^3 | z$3 = &0}
       #|  b - a:real^3 = c - a <=> b = c
       #|  ~(a = b) ==> {a,b} DELETE a = {b}
@@ -49836,36 +49836,36 @@ test "Multivariate/wlog matches Multivariate/wlog.ml" {
       #|  c:real^3
       #|  b:real^3
       #|  a:real^3
-      #|  !s. plane s\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE f (IMAGE (\\x. a + x) s) = {z:real^3 | z$3 = &0}
+      #|  forall s. plane s\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE f (IMAGE (\\x. a + x) s) = {z:real^3 | z$3 = &0}
       #|  det(matrix(f:real^3->real^3))
-      #|  !f. f * g = &1 /\\ f = &1 ==> g = &1
+      #|  forall f. f * g = &1 /\\ f = &1 ==> g = &1
       #|  --a + a + x:real^3 = x
       #|  g:real^3->real^3
       #|  --a:real^3
       #|  g:real^3->real^3
       #|  f:real^3->real^3
       #|  a:real^3
-      #|  !p. plane p\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE (\\x. a + x) (IMAGE f {z:real^3 | z$3 = &0}) = p
+      #|  forall p. plane p\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE (\\x. a + x) (IMAGE f {z:real^3 | z$3 = &0}) = p
       #|  (p ==> (x <=> x')) /\\ (~p ==> (x <=> T)) ==> (x' ==> x)
       #|  a + (x - a:real^N) = x
       #|  (\\x. a + x) o (f:real^N->real^N)
-      #|  !a f. orthogonal_transformation (f:real^N->real^N)\n           ==> ((!P. (!x. P x) <=> (!x. P (a + f x))) /\\\n                (!P. (?x. P x) <=> (?x. P (a + f x))) /\\\n                (!Q. (!s. Q s) <=> (!s. Q (IMAGE (\\x. a + x) (IMAGE f s)))) /\\\n                (!Q. (?s. Q s) <=> (?s. Q (IMAGE (\\x. a + x) (IMAGE f s))))) /\\\n               (!P. {x | P x} =\n                    IMAGE (\\x. a + x) (IMAGE f {x | P(a + f x)}))
-      #|  !a f. {} = IMAGE (\\x:real^3. a + x) (IMAGE f {})
-      #|  !f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)
-      #|  (!a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> !a f. q a f ==> p' a f))
+      #|  forall a f. orthogonal_transformation (f:real^N->real^N)\n           ==> ((forall P. (forall x. P x) <=> (forall x. P (a + f x))) /\\\n                (forall P. (?x. P x) <=> (?x. P (a + f x))) /\\\n                (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE (\\x. a + x) (IMAGE f s)))) /\\\n                (forall Q. (?s. Q s) <=> (?s. Q (IMAGE (\\x. a + x) (IMAGE f s))))) /\\\n               (forall P. {x | P x} =\n                    IMAGE (\\x. a + x) (IMAGE f {x | P(a + f x)}))
+      #|  forall a f. {} = IMAGE (\\x:real^3. a + x) (IMAGE f {})
+      #|  forall f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (forall x y. f x = f y ==> x = y) /\\\n            (forall y. ?x. f x = y) /\\\n            (forall x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)
+      #|  (forall a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> forall a f. q a f ==> p' a f))
       #|  (pad2d3d:real^2->real^3) x = lambda i. if i < 3 then x$i else &0
       #|  i <= 3 <=> i <= 2 \\/ i = 3
       #|  i < 3 <=> i <= 2
       #|  (lambda i. (y:real^3)$i):real^2
-      #|  !P. (!y:real^3. y$3 = &0 ==> P y) <=> (!x. P(pad2d3d x))
-      #|  (?y. P y) <=> ~(!x. ~P x)
-      #|  (!P. (!y:real^3. y$3 = &0 ==> P y) <=> (!x. P(pad2d3d x))) /\\\n   (!P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))
+      #|  forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))
+      #|  (?y. P y) <=> ~(forall x. ~P x)
+      #|  (forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))) /\\\n   (forall P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))
       #|  i < 3 ==> i <= 2
       #|  linear pad2d3d
       #|  i <= 2 ==> i <= 3
       #|  i < 3 <=> i <= 2
-      #|  !x y. pad2d3d x = pad2d3d y ==> x = y
-      #|  !x. norm(pad2d3d x) = norm x
+      #|  forall x y. pad2d3d x = pad2d3d y ==> x = y
+      #|  forall x. norm(pad2d3d x) = norm x
       #|  :real^2
       #|  pad2d3d
       #|  {} = IMAGE pad2d3d {} /\\\n     vec 0 = pad2d3d(vec 0)
@@ -49875,13 +49875,13 @@ test "Multivariate/wlog matches Multivariate/wlog.ml" {
       #|  \\x:real^N. x
       #|  a:real^N
       #|  dimindex(:N) = 1
-      #|  !a:real^N.\n        ?b f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f b = a /\\\n              (!k. 1 < k /\\ k <= dimindex(:N) ==> b$k = &0)
-      #|  !f. orthogonal_transformation (f:real^N->real^N)\n         ==> (vec 0 = f(vec 0) /\\ {} = IMAGE f {}) /\\\n             ((!P. (!x. P x) <=> (!x. P (f x))) /\\\n              (!P. (?x. P x) <=> (?x. P (f x))) /\\\n              (!Q. (!s. Q s) <=> (!s. Q (IMAGE f s))) /\\\n              (!Q. (?s. Q s) <=> (?s. Q (IMAGE f s)))) /\\\n             (!P. {x | P x} = IMAGE f {x | P(f x)})
-      #|  !f:real^N->real^N.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:N) ==> det(matrix f) = &1)
+      #|  forall a:real^N.\n        ?b f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\ f b = a /\\\n              (forall k. 1 < k /\\ k <= dimindex(:N) ==> b$k = &0)
+      #|  forall f. orthogonal_transformation (f:real^N->real^N)\n         ==> (vec 0 = f(vec 0) /\\ {} = IMAGE f {}) /\\\n             ((forall P. (forall x. P x) <=> (forall x. P (f x))) /\\\n              (forall P. (?x. P x) <=> (?x. P (f x))) /\\\n              (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE f s))) /\\\n              (forall Q. (?s. Q s) <=> (?s. Q (IMAGE f s)))) /\\\n             (forall P. {x | P x} = IMAGE f {x | P(f x)})
+      #|  forall f:real^N->real^N.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (forall x y. f x = f y ==> x = y) /\\\n            (forall y. ?x. f x = y) /\\\n            (forall x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:N) ==> det(matrix f) = &1)
       #|  1 < 2 /\\ 1 < 3
       #|  k <= 2 <=> k = 2 \\/ ~(1 < k)
       #|  k <= 3 <=> k = 3 \\/ k <= 2
-      #|  ((!k. 1 < k /\\ k <= dimindex(:2) ==> b$k = &0) <=> b$2 = &0) /\\\n     ((!k. 1 < k /\\ k <= dimindex(:3) ==> b$k = &0) <=> b$2 = &0 /\\ b$3 = &0)
+      #|  ((forall k. 1 < k /\\ k <= dimindex(:2) ==> b$k = &0) <=> b$2 = &0) /\\\n     ((forall k. 1 < k /\\ k <= dimindex(:3) ==> b$k = &0) <=> b$2 = &0 /\\ b$3 = &0)
       #|plane =  |- (#!:fun(fun(fun(cart(real,'?1074736),bool),bool),bool) (\x:fun(cart(real,'?1074736),bool). ((#=:fun(bool,fun(bool,bool)) (#plane:fun(fun(cart(real,'?1074736),bool),bool) x:fun(cart(real,'?1074736),bool))) (#?:fun(fun(cart(real,'?1074736),bool),bool) (\u:cart(real,'?1074736). (#?:fun(fun(cart(real,'?1074736),bool),bool) (\v:cart(real,'?1074736). (#?:fun(fun(cart(real,'?1074736),bool),bool) (\w:cart(real,'?1074736). ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#collinear:fun(fun(cart(real,'?1074736),bool),bool) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) u:cart(real,'?1074736)) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) v:cart(real,'?1074736)) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) w:cart(real,'?1074736)) #EMPTY:fun(cart(real,'?1074736),bool))))))) ((#=:fun(fun(cart(real,'?1074736),bool),fun(fun(cart(real,'?1074736),bool),bool)) x:fun(cart(real,'?1074736),bool)) ((#hull:fun(fun(fun(cart(real,'?1074736),bool),bool),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) #affine:fun(fun(cart(real,'?1074736),bool),bool)) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) u:cart(real,'?1074736)) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) v:cart(real,'?1074736)) ((#INSERT:fun(cart(real,'?1074736),fun(fun(cart(real,'?1074736),bool),fun(cart(real,'?1074736),bool))) w:cart(real,'?1074736)) #EMPTY:fun(cart(real,'?1074736),bool))))))))))))))))
       #|PLANE_TRANSLATION_EQ =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) (#plane:fun(fun(cart(real,'N),bool),bool) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) s:fun(cart(real,'N),bool)))) (#plane:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool)))))))
       #|PLANE_TRANSLATION =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#plane:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) (#plane:fun(fun(cart(real,'N),bool),bool) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) s:fun(cart(real,'N),bool))))))))

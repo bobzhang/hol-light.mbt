@@ -47399,13 +47399,13 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  (montgomery_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (montgomery_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_mul f b (ring_pow f y 2) =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_pow f x 2)) x))
       #|  montgomery_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(b = ring_0 f) /\\ ~(ring_pow f a 2 = ring_of_num f 4)
       #|  (montgomery_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (montgomery_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))
-      #|  (!y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))
+      #|  (forall y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (forall x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (forall x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))
       #|  montgomery_group (f:A ring,a:A,b:A) =\n        group(montgomery_curve(f,a,b),\n              NONE,\n              montgomery_neg(f,a,b),\n              montgomery_add(f,a,b))
       #|  IMAGE SOME {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f} UNION\n    {NONE}
-      #|  !f a b:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(montgomery_curve(f,a,b))
+      #|  forall f a b:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(montgomery_curve(f,a,b))
       #|  IMAGE SOME\n     {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n              ring_pow f y 2 =\n              ring_div f (ring_add f (ring_pow f x 3)\n                           (ring_add f (ring_mul f a (ring_pow f x 2)) x)) b}\n    UNION {NONE}
-      #|  !s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n
-      #|  !f a b:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n             ==> CARD(montgomery_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1
+      #|  forall s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n
+      #|  forall f a b:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n             ==> CARD(montgomery_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47424,7 +47424,7 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  ring_1 f:A
       #|  (~p ==> q) /\\ (p ==> ~q) ==> (~p <=> q)
       #|  p ==> (q <=> r) <=> (r ==> p ==> q) /\\ (q ==> p ==> r)
-      #|  !f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f\n        ==> (montgomery_strongly_nonsingular(f,a,b) <=>\n             !x y. montgomery_curve(f,a,b) (SOME(x,y))\n                   ==> (y = ring_0 f <=> x = ring_0 f))
+      #|  forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f\n        ==> (montgomery_strongly_nonsingular(f,a,b) <=>\n             forall x y. montgomery_curve(f,a,b) (SOME(x,y))\n                   ==> (y = ring_0 f <=> x = ring_0 f))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47464,17 +47464,17 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  (x:A) IN ring_carrier f
       #|  x:A
       #|  ring_0 f:A
-      #|  !f a b:A.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_strongly_nonsingular(f,a,b)\n        ==> montgomery_nonsingular(f,a,b)
-      #|  !f a b p. montgomery_curve(f,a,b) p ==> montgomery_point f p
-      #|  !(f:A ring) a b p.\n        montgomery_point f p\n        ==> montgomery_point f (montgomery_neg (f,a,b) p)
-      #|  !(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_point f p /\\ montgomery_point f q\n        ==> montgomery_point f (montgomery_add (f,a,b) p q)
-      #|  !f a b:A. montgomery_curve(f,a,b) NONE
-      #|  !f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_curve(f,a,b) (montgomery_neg (f,a,b) p)
+      #|  forall f a b:A.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_strongly_nonsingular(f,a,b)\n        ==> montgomery_nonsingular(f,a,b)
+      #|  forall f a b p. montgomery_curve(f,a,b) p ==> montgomery_point f p
+      #|  forall(f:A ring) a b p.\n        montgomery_point f p\n        ==> montgomery_point f (montgomery_neg (f,a,b) p)
+      #|  forall(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_point f p /\\ montgomery_point f q\n        ==> montgomery_point f (montgomery_add (f,a,b) p q)
+      #|  forall f a b:A. montgomery_curve(f,a,b) NONE
+      #|  forall f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_curve(f,a,b) (montgomery_neg (f,a,b) p)
       #|  y2:A
       #|  x2:A
       #|  y1:A
       #|  x1:A
-      #|  !f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_curve(f,a,b) (montgomery_add (f,a,b) p q)
+      #|  forall f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_curve(f,a,b) (montgomery_add (f,a,b) p q)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47511,7 +47511,7 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  x:A
       #|  y:A
       #|  x:A
-      #|  !f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_add(f,a,b) (montgomery_neg (f,a,b) p) p = NONE
+      #|  forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_add(f,a,b) (montgomery_neg (f,a,b) p) p = NONE
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47531,7 +47531,7 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  x2:A
       #|  y1:A
       #|  x1:A
-      #|  !f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_add (f,a,b) p q = montgomery_add (f,a,b) q p
+      #|  forall f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_add (f,a,b) p q = montgomery_add (f,a,b) q p
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47623,7 +47623,7 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          montgomery_nonsingular(f,a,b) /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          montgomery_curve(f,a,b) (SOME(x1,y1)) /\\\n          montgomery_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = montgomery_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))
+      #|  forall f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          montgomery_nonsingular(f,a,b) /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          montgomery_curve(f,a,b) (SOME(x1,y1)) /\\\n          montgomery_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = montgomery_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -47654,7 +47654,7 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  b:A
       #|  a:A
       #|  f:A ring
-      #|  !f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) q /\\\n        montgomery_curve(f,a,b) r\n        ==> montgomery_add (f,a,b) p (montgomery_add (f,a,b) q r) =\n            montgomery_add (f,a,b) (montgomery_add (f,a,b) p q) r
+      #|  forall f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) q /\\\n        montgomery_curve(f,a,b) r\n        ==> montgomery_add (f,a,b) p (montgomery_add (f,a,b) q r) =\n            montgomery_add (f,a,b) (montgomery_add (f,a,b) p q) r
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -48908,9 +48908,9 @@ test "EC/montgomery matches EC/montgomery.ml" {
       #|  (x:A) IN ring_carrier f
       #|  x:A
       #|  x = a /\\ x = y ==> x = a /\\ y = a
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_carrier(montgomery_group(f,a,b)) = montgomery_curve(f,a,b) /\\\n          group_id(montgomery_group(f,a,b)) = NONE /\\\n          group_inv(montgomery_group(f,a,b)) = montgomery_neg(f,a,b) /\\\n          group_mul(montgomery_group(f,a,b)) = montgomery_add(f,a,b)
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> abelian_group(montgomery_group(f,a,b))
-      #|  !(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b)\n        ==> group_pow (montgomery_group(f,a,b)) (SOME (ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_carrier(montgomery_group(f,a,b)) = montgomery_curve(f,a,b) /\\\n          group_id(montgomery_group(f,a,b)) = NONE /\\\n          group_inv(montgomery_group(f,a,b)) = montgomery_neg(f,a,b) /\\\n          group_mul(montgomery_group(f,a,b)) = montgomery_add(f,a,b)
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> abelian_group(montgomery_group(f,a,b))
+      #|  forall(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b)\n        ==> group_pow (montgomery_group(f,a,b)) (SOME (ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)
       #|montgomery_point =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#montgomery_point:fun(ring('A),fun(option(prod('A,'A)),bool)) f:ring('A)) #NONE:option(prod('A,'A)))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) ((#montgomery_point:fun(ring('A),fun(option(prod('A,'A)),bool)) f:ring('A)) (#SOME:fun(prod('A,'A),option(prod('A,'A))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A))))))
       #|montgomery_curve =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#montgomery_curve:fun(prod(ring('A),prod('A,'A)),fun(option(prod('A,'A)),bool)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) #NONE:option(prod('A,'A)))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) ((#montgomery_curve:fun(prod(ring('A),prod('A,'A)),fun(option(prod('A,'A)),bool)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) (#SOME:fun(prod('A,'A),option(prod('A,'A))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) b:'A) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) x:'A) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) x:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) x:'A)))))))
       #|montgomery_nonsingular =  |- ((#=:fun(bool,fun(bool,bool)) (#montgomery_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) b:'A) (#ring_0:fun(ring('A),'A) f:ring('A))))) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) a:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

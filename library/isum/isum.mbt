@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
   )
   isum_support_c.set(
     @tactics.prove(
-      @parser.parse_term("!f s. isum (support (+) f s) f = isum s f"),
+      @parser.parse_term("forall f s. isum (support (+) f s) f = isum s f"),
       t1,
     ),
   )
@@ -208,7 +208,7 @@ fn step_2() -> Unit raise {
   int_isum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->int s. real_of_int(isum s f) = sum s (\\x. real_of_int(f x))",
+        "forall f:A->int s. real_of_int(isum s f) = sum s (\\x. real_of_int(f x))",
       ),
       t21,
     ),
@@ -1698,7 +1698,7 @@ fn step_86() -> Unit raise {
   isum_isum_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> isum s (\\i. isum (t i) (x i)) =\n            isum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
+        "forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> isum s (\\i. isum (t i) (x i)) =\n            isum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
       ),
       t39,
     ),
@@ -1737,7 +1737,7 @@ fn step_87() -> Unit raise {
   admissible_isum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. isum(a(x)..b(x)) (h f x))",
+        "forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. isum(a(x)..b(x)) (h f x))",
       ),
       t43,
     ),
@@ -1764,7 +1764,7 @@ fn step_88() -> Unit raise {
   int_sub_pow_l1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. 1 <= n ==> &1 - x pow n = (&1 - x) * isum (0..n - 1) (\\i. x pow i)",
+        "forall x n. 1 <= n ==> &1 - x pow n = (&1 - x) * isum (0..n - 1) (\\i. x pow i)",
       ),
       t44,
     ),
@@ -1789,7 +1789,7 @@ fn step_89() -> Unit raise {
   int_sub_pow_r1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. 1 <= n ==> x pow n - &1 = (x - &1) * isum (0..n - 1) (\\i. x pow i)",
+        "forall x n. 1 <= n ==> x pow n - &1 = (x - &1) * isum (0..n - 1) (\\i. x pow i)",
       ),
       t45,
     ),
@@ -1817,7 +1817,7 @@ fn step_90() -> Unit raise {
   isum_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->int s. support (+) f (:A) SUBSET s ==> isum s f = isum (:A) f",
+        "forall f:A->int s. support (+) f (:A) SUBSET s ==> isum s f = isum (:A) f",
       ),
       t48,
     ),
@@ -1921,7 +1921,7 @@ fn step_91() -> Unit raise {
   isum_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->int s.\n        P(&0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(isum s f)",
+        "forall P f:A->int s.\n        P(&0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)",
       ),
       t58,
     ),
@@ -1975,7 +1975,7 @@ fn step_92() -> Unit raise {
   isum_related_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->int) g s.\n        R (&0) (&0) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)",
+        "forall R (f:A->int) g s.\n        R (&0) (&0) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)",
       ),
       t64,
     ),
@@ -2081,7 +2081,7 @@ fn step_93() -> Unit raise {
   isum_closed_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(isum s f)",
+        "forall P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)",
       ),
       t74,
     ),
@@ -2137,7 +2137,7 @@ fn step_94() -> Unit raise {
   isum_related_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->int) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)",
+        "forall R (f:A->int) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)",
       ),
       t80,
     ),
@@ -2290,7 +2290,7 @@ fn step_96() -> Unit raise {
   )
   let th = @tactics.prove(
     @parser.parse_term(
-      "(!f g s.   (!x. x IN s ==> f(x) = g(x))\n              ==> isum s (\\i. f(i)) = isum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> isum(a..b) (\\i. f(i)) = isum(a..b) g) /\\\n   (!f g p.   (!x. p x ==> f x = g x)\n              ==> isum {y | p y} (\\i. f(i)) = isum {y | p y} g)",
+      "(forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n              ==> isum s (\\i. f(i)) = isum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> isum(a..b) (\\i. f(i)) = isum(a..b) g) /\\\n   (forall f g p.   (forall x. p x ==> f x = g x)\n              ==> isum {y | p y} (\\i. f(i)) = isum {y | p y} g)",
     ),
     t89,
   )

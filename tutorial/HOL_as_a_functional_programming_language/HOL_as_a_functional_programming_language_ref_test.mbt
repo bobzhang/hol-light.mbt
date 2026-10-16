@@ -5705,7 +5705,7 @@ test "Tutorial/HOL_as_a_functional_programming_language matches Tutorial/HOL_as_
       #|CPU time (user): <t>
       #|CPU time (user): <t>
       #|Tutorial/HOL_as_a_functional_programming_language quotations (170):
-      #|  ?norm. (norm False = False) /\\\n         (norm True = True) /\\\n         (!i. norm (Atomic i) = Atomic i) /\\\n         (!y z. norm (Ite False y z) = norm z) /\\\n         (!y z. norm (Ite True y z) = norm y) /\\\n         (!i y z. norm (Ite (Atomic i) y z) =\n                    Ite (Atomic i) (norm y) (norm z)) /\\\n         (!u v w y z. norm (Ite (Ite u v w) y z) =\n                        norm (Ite u (Ite v y z) (Ite w y z)))
+      #|  ?norm. (norm False = False) /\\\n         (norm True = True) /\\\n         (forall i. norm (Atomic i) = Atomic i) /\\\n         (forall y z. norm (Ite False y z) = norm z) /\\\n         (forall y z. norm (Ite True y z) = norm y) /\\\n         (forall i y z. norm (Ite (Atomic i) y z) =\n                    Ite (Atomic i) (norm y) (norm z)) /\\\n         (forall u v w y z. norm (Ite (Ite u v w) y z) =\n                        norm (Ite u (Ite v y z) (Ite w y z)))
       #|  :P
       #|  :P
       #|  :P
@@ -5734,9 +5734,9 @@ test "Tutorial/HOL_as_a_functional_programming_language matches Tutorial/HOL_as_
       #|  (+):num->num->num
       #|  MEASURE sizeof
       #|  sizeof
-      #|  !e. ~(sizeof e = 0)
+      #|  forall e. ~(sizeof e = 0)
       #|  ~(b = 0) /\\ ~(c = 0) ==> a < (b + a) + c
-      #|  !P. P False /\\\n       P True /\\\n       (!i. P(Atomic i)) /\\\n       (!y z. P z ==> P(Ite False y z)) /\\\n       (!y z. P y ==> P(Ite True y z)) /\\\n       (!i y z. P y /\\ P z ==> P (Ite (Atomic i) y z)) /\\\n       (!u v w x y z. P(Ite u (Ite v y z) (Ite w y z))\n                      ==> P(Ite (Ite u v w) y z))\n       ==> !e. P e
+      #|  forall P. P False /\\\n       P True /\\\n       (forall i. P(Atomic i)) /\\\n       (forall y z. P z ==> P(Ite False y z)) /\\\n       (forall y z. P y ==> P(Ite True y z)) /\\\n       (forall i y z. P y /\\ P z ==> P (Ite (Atomic i) y z)) /\\\n       (forall u v w x y z. P(Ite u (Ite v y z) (Ite w y z))\n                      ==> P(Ite (Ite u v w) y z))\n       ==> forall e. P e
       #|  (normalized False <=> T) /\\\n  (normalized True <=> T) /\\\n  (normalized(Atomic a) <=> T) /\\\n  (normalized(Ite False x y) <=> F) /\\\n  (normalized(Ite True x y) <=> F) /\\\n  (normalized(Ite (Atomic a) x y) <=> normalized x /\\ normalized y) /\\\n  (normalized(Ite (Ite u v w) x y) <=> F)
       #|  :P
       #|  :P
@@ -5747,8 +5747,8 @@ test "Tutorial/HOL_as_a_functional_programming_language matches Tutorial/HOL_as_
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  !e. normalized(norm e)
-      #|  P False /\\\n   P True /\\\n   (!i. P (Atomic i)) /\\\n   (!i x y. P x /\\ P y ==> P (Ite (Atomic i) x y))\n   ==> !e. normalized e ==> P e
+      #|  forall e. normalized(norm e)
+      #|  P False /\\\n   P True /\\\n   (forall i. P (Atomic i)) /\\\n   (forall i x y. P x /\\ P y ==> P (Ite (Atomic i) x y))\n   ==> forall e. normalized e ==> P e
       #|  (holds v False <=> F) /\\\n  (holds v True <=> T) /\\\n  (holds v (Atomic i) <=> v(i)) /\\\n  (holds v (Ite b x y) <=> if holds v b then holds v x else holds v y)
       #|  :P
       #|  :P
@@ -5767,7 +5767,7 @@ test "Tutorial/HOL_as_a_functional_programming_language matches Tutorial/HOL_as_
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  !e v. holds v (norm e) <=> holds v e
+      #|  forall e v. holds v (norm e) <=> holds v e
       #|  (taut (t,f) False <=> F) /\\\n  (taut (t,f) True <=> T) /\\\n  (taut (t,f) (Atomic i) <=> MEM i t) /\\\n  (taut (t,f) (Ite (Atomic i) x y) <=>\n      if MEM i t then taut (t,f) x\n      else if MEM i f then taut (t,f) y\n      else taut (CONS i t,f) x /\\ taut (t,CONS i f) y)
       #|  :P
       #|  :P
@@ -5864,15 +5864,15 @@ test "Tutorial/HOL_as_a_functional_programming_language matches Tutorial/HOL_as_
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  tautology e = taut([],[]) (norm e)
-      #|  (!a. ~(a = i /\\ MEM a f)) <=> ~(MEM i f)
-      #|  (!a. ~(MEM a t /\\ a = i)) <=> ~(MEM i t)
+      #|  (forall a. ~(a = i /\\ MEM a f)) <=> ~(MEM i f)
+      #|  (forall a. ~(MEM a t /\\ a = i)) <=> ~(MEM i t)
       #|  \\a:num. MEM a t
-      #|  !e. normalized e\n       ==> !f t. (!a. ~(MEM a t /\\ MEM a f))\n                 ==> (taut (t,f) e <=>\n                      !v. (!a. MEM a t ==> v(a)) /\\ (!a. MEM a f ==> ~v(a))\n                          ==> holds v e)
-      #|  !e. tautology e <=> !v. holds v e
-      #|  !v. (F <=> holds v False) /\\\n       (T <=> holds v True) /\\\n       (!i. v i <=> holds v (Atomic i)) /\\\n       (!p. ~holds v p <=> holds v (Ite p False True)) /\\\n       (!p q. (holds v p /\\ holds v q) <=> holds v (Ite p q False)) /\\\n       (!p q. (holds v p \\/ holds v q) <=> holds v (Ite p True q)) /\\\n       (!p q. (holds v p <=> holds v q) <=>\n                   holds v (Ite p q (Ite q False True))) /\\\n       (!p q. holds v p ==> holds v q <=> holds v (Ite p q True))
+      #|  forall e. normalized e\n       ==> forall f t. (forall a. ~(MEM a t /\\ MEM a f))\n                 ==> (taut (t,f) e <=>\n                      forall v. (forall a. MEM a t ==> v(a)) /\\ (forall a. MEM a f ==> ~v(a))\n                          ==> holds v e)
+      #|  forall e. tautology e <=> forall v. holds v e
+      #|  forall v. (F <=> holds v False) /\\\n       (T <=> holds v True) /\\\n       (forall i. v i <=> holds v (Atomic i)) /\\\n       (forall p. ~holds v p <=> holds v (Ite p False True)) /\\\n       (forall p q. (holds v p /\\ holds v q) <=> holds v (Ite p q False)) /\\\n       (forall p q. (holds v p \\/ holds v q) <=> holds v (Ite p True q)) /\\\n       (forall p q. (holds v p <=> holds v q) <=>\n                   holds v (Ite p q (Ite q False True))) /\\\n       (forall p q. holds v p ==> holds v q <=> holds v (Ite p q True))
       #|  (F /\\ a <=> F) /\\ (T /\\ a <=> a)
       #|  (F \\/ a <=> a) /\\ (T \\/ a <=> T)
-      #|  !v. v 1 \\/ v 2 \\/ v 3 \\/ v 4 \\/ v 5 \\/ v 6 \\/\n       ~v 1 \\/ ~v 2 \\/ ~v 3 \\/ ~v 4 \\/ ~v 5 \\/ ~v 6
+      #|  forall v. v 1 \\/ v 2 \\/ v 3 \\/ v 4 \\/ v 5 \\/ v 6 \\/\n       ~v 1 \\/ ~v 2 \\/ ~v 3 \\/ ~v 4 \\/ ~v 5 \\/ ~v 6
       #|  v:num->bool
       #|  v:num->bool
       #|ite_INDUCT =  |- (#!:fun(fun(fun(ite,bool),bool),bool) (\P:fun(ite,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) #False:ite)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) #True:ite)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(ite,bool) (#Atomic:fun(num,ite) a:num))))) (#!:fun(fun(ite,bool),bool) (\a0:ite. (#!:fun(fun(ite,bool),bool) (\a1:ite. (#!:fun(fun(ite,bool),bool) (\a2:ite. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) a0:ite)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) a1:ite)) (P:fun(ite,bool) a2:ite)))) (P:fun(ite,bool) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) a0:ite) a1:ite) a2:ite))))))))))))) (#!:fun(fun(ite,bool),bool) (\x:ite. (P:fun(ite,bool) x:ite))))))

@@ -5579,13 +5579,13 @@ test "Tutorial/Tactics_and_tacticals matches Tutorial/Tactics_and_tacticals.ml" 
       #|  x:real
       #|  y:real
       #|  --x
-      #|  !x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
+      #|  forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
       #|  y:real
       #|  --x
-      #|  !x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
-      #|  !n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2
-      #|  !n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6
-      #|  !n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4
+      #|  forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
+      #|  forall n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2
+      #|  forall n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6
+      #|  forall n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4
       #|trivial =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_mul:fun(real,fun(real,real)) x:real) y:real))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)))))))
       #|SUM_OF_NUMBERS =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. i:num))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|SUM_OF_SQUARES =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#*:fun(num,fun(num,num)) i:num) i:num)))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

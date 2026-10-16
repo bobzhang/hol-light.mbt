@@ -13,7 +13,7 @@ fn step_1() -> Unit raise {
 ///|
 /// miz3/Samples/samples.ml:3
 fn step_2() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\n  !R. (!x. R x x) /\\ (!x y z. R x y /\\ R y z ==> R x z)\n       ==> ((!m n. m <= n ==> R m n) <=> (!n. R n (SUC n)))\n  proof\n   let R be num->num->bool;\n   assume !x. R x x [1];\n   assume !x y z. R x y /\\ R y z ==> R x z [2];\n   !n. n <= SUC n by ARITH_TAC;\n   (!m n. m <= n ==> R m n) ==> (!n. R n (SUC n)) [3] by SIMP_TAC;\n   now\n    assume !n. R n (SUC n) [4];\n    !m n d. n = m + d ==> R m (m + d)\n    proof\n     let m be num;\n     R m m by MESON_TAC,1;\n     R m (m + 0) [5] by REWRITE_TAC,ADD_CLAUSES;\n     !d. R m (m + d) ==> R m (m + SUC d)\n     proof\n      let d be num;\n      assume R m (m + d);\n      R m (SUC (m + d)) by MESON_TAC,2,4;\n     qed by REWRITE_TAC,ADD_CLAUSES;\n     !d. R m (m + d) by INDUCT_TAC,5;\n     !d n. n = m + d ==> R m (m + d)\n      by REWRITE_TAC,LEFT_FORALL_IMP_THM,EXISTS_REFL,ADD_CLAUSES;\n    qed by ONCE_REWRITE_TAC,SWAP_FORALL_THM;\n    thus !m n. m <= n ==> R m n by SIMP_TAC,LE_EXISTS,LEFT_IMP_EXISTS_THM;\n   end;\n  qed by EQ_TAC,3")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\n  forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z)\n       ==> ((forall m n. m <= n ==> R m n) <=> (forall n. R n (SUC n)))\n  proof\n   let R be num->num->bool;\n   assume forall x. R x x [1];\n   assume forall x y z. R x y /\\ R y z ==> R x z [2];\n   forall n. n <= SUC n by ARITH_TAC;\n   (forall m n. m <= n ==> R m n) ==> (forall n. R n (SUC n)) [3] by SIMP_TAC;\n   now\n    assume forall n. R n (SUC n) [4];\n    forall m n d. n = m + d ==> R m (m + d)\n    proof\n     let m be num;\n     R m m by MESON_TAC,1;\n     R m (m + 0) [5] by REWRITE_TAC,ADD_CLAUSES;\n     forall d. R m (m + d) ==> R m (m + SUC d)\n     proof\n      let d be num;\n      assume R m (m + d);\n      R m (SUC (m + d)) by MESON_TAC,2,4;\n     qed by REWRITE_TAC,ADD_CLAUSES;\n     forall d. R m (m + d) by INDUCT_TAC,5;\n     forall d n. n = m + d ==> R m (m + d)\n      by REWRITE_TAC,LEFT_FORALL_IMP_THM,EXISTS_REFL,ADD_CLAUSES;\n    qed by ONCE_REWRITE_TAC,SWAP_FORALL_THM;\n    thus forall m n. m <= n ==> R m n by SIMP_TAC,LE_EXISTS,LEFT_IMP_EXISTS_THM;\n   end;\n  qed by EQ_TAC,3")))
 }
 
 ///|
@@ -227,7 +227,7 @@ fn step_15() -> Unit raise {
 ///|
 /// miz3/Samples/samples.ml:33
 fn step_16() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\n  !s. INFINITE s ==> ?x:A. x IN s\n  proof\n    let s be A->bool;\n    assume INFINITE s;\n    ~(s = {}) by INFINITE_NONEMPTY;\n    consider x such that\n      ~(x IN s <=> x IN {}) [1] by EXTENSION;\n    take x;\n    ~(x IN {}) by NOT_IN_EMPTY;\n  qed by 1")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\n  forall s. INFINITE s ==> ?x:A. x IN s\n  proof\n    let s be A->bool;\n    assume INFINITE s;\n    ~(s = {}) by INFINITE_NONEMPTY;\n    consider x such that\n      ~(x IN s <=> x IN {}) [1] by EXTENSION;\n    take x;\n    ~(x IN {}) by NOT_IN_EMPTY;\n  qed by 1")))
 }
 
 ///|
@@ -281,7 +281,7 @@ fn step_19() -> Unit raise {
 ///|
 /// NOT_EVEN
 fn step_20() -> Unit raise {
-  not_even_c.set(@miz3.thm(@miz3.parse_qproof(";\n  !n. ~EVEN n <=> ODD n\n  proof\n    ~EVEN 0 <=> ODD 0 [1] by EVEN,ODD;\n    !n. (~EVEN n <=> ODD n) ==> (~EVEN (SUC n) <=> ODD (SUC n))\n      by EVEN,ODD;\n  qed by 1,INDUCT_TAC")))
+  not_even_c.set(@miz3.thm(@miz3.parse_qproof(";\n  forall n. ~EVEN n <=> ODD n\n  proof\n    ~EVEN 0 <=> ODD 0 [1] by EVEN,ODD;\n    forall n. (~EVEN n <=> ODD n) ==> (~EVEN (SUC n) <=> ODD (SUC n))\n      by EVEN,ODD;\n  qed by 1,INDUCT_TAC")))
 }
 
 ///|

@@ -520,7 +520,7 @@ fn step_29() -> Unit raise {
   let t51 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@analysis.real_lt_sub_ladd(), @realax.real_add_lid()])), t20), t50])
   let t16 = @rqe_tactics_ext.claim(@parser.parse_term("&0 < y - x"))
   let t52 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t16), t51)
-  real_dense_c.set(@tactics.prove(@parser.parse_term("!x y. x < y ==> ?z. x < z /\\ z < y"), t52))
+  real_dense_c.set(@tactics.prove(@parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y"), t52))
 }
 
 ///|
@@ -536,7 +536,7 @@ pub fn real_dense() -> @kernel.Thm {
 /// REAL_LT_EXISTS
 fn step_30() -> Unit raise {
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @rqe_tactics_ext.exists_tac(@parser.parse_term("x + &1"))), @calc_rat.real_arith_tac)
-  real_lt_exists_c.set(@tactics.prove(@parser.parse_term("!x. ?y. x < y"), t53))
+  real_lt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. x < y"), t53))
 }
 
 ///|
@@ -552,7 +552,7 @@ pub fn real_lt_exists() -> @kernel.Thm {
 /// REAL_GT_EXISTS
 fn step_31() -> Unit raise {
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @rqe_tactics_ext.exists_tac(@parser.parse_term("x - &1"))), @calc_rat.real_arith_tac)
-  real_gt_exists_c.set(@tactics.prove(@parser.parse_term("!x. ?y. y < x"), t54))
+  real_gt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. y < x"), t54))
 }
 
 ///|
@@ -568,7 +568,7 @@ pub fn real_gt_exists() -> @kernel.Thm {
 /// REAL_DIV_DISTRIB_L
 fn step_32() -> Unit raise {
   let t55 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_div(), @real.real_inv_mul()])), @calc_rat.real_arith_tac])
-  real_div_distrib_l_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. x / (y * z) = (x / y) * (&1 / z)"), t55))
+  real_div_distrib_l_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. x / (y * z) = (x / y) * (&1 / z)"), t55))
 }
 
 ///|
@@ -584,7 +584,7 @@ pub fn real_div_distrib_l() -> @kernel.Thm {
 /// REAL_DIV_DISTRIB_R
 fn step_33() -> Unit raise {
   let t56 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_div(), @real.real_inv_mul()])), @calc_rat.real_arith_tac])
-  real_div_distrib_r_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. x / (y * z) = (&1 / y) * (x / z)"), t56))
+  real_div_distrib_r_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. x / (y * z) = (&1 / y) * (x / z)"), t56))
 }
 
 ///|
@@ -600,7 +600,7 @@ pub fn real_div_distrib_r() -> @kernel.Thm {
 /// REAL_DIV_DISTRIB_2
 fn step_34() -> Unit raise {
   let t57 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_div(), @real.real_inv_mul()])), @calc_rat.real_arith_tac])
-  real_div_distrib_2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. (x * w) / (y * z) = (x / y) * (w / z)"), t57))
+  real_div_distrib_2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. (x * w) / (y * z) = (x / y) * (w / z)"), t57))
 }
 
 ///|
@@ -616,7 +616,7 @@ pub fn real_div_distrib_2() -> @kernel.Thm {
 /// REAL_DIV_ADD_DISTRIB
 fn step_35() -> Unit raise {
   let t58 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_div(), @real.real_inv_mul()])), @calc_rat.real_arith_tac])
-  real_div_add_distrib_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. (x + y) / z = (x / z) + (y / z)"), t58))
+  real_div_add_distrib_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. (x + y) / z = (x / z) + (y / z)"), t58))
 }
 
 ///|
@@ -634,7 +634,7 @@ fn step_36() -> Unit raise {
   let t59 = @meson.asm_meson_tac(@list.List([@realax.real_mul_linv(), @realax.real_mul_sym()]))
   let t60 = @simp.rewrite_tac(@list.List([@realax.real_div()]))
   let t61 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t60, t59])
-  div_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. ~(x = &0) ==> (x / x = &1)"), t61))
+  div_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. ~(x = &0) ==> (x / x = &1)"), t61))
 }
 
 ///|
@@ -650,7 +650,7 @@ pub fn div_id() -> @kernel.Thm {
 /// POS_POW
 fn step_37() -> Unit raise {
   let t62 = @list.List([@meson.meson_tac(@list.List([@real.real_pow_lt(), @real.real_lt_mul()]))])
-  pos_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c x. &0 < c /\\ &0 < x ==> &0 < c * x pow k"), t62))
+  pos_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c x. &0 < c /\\ &0 < x ==> &0 < c * x pow k"), t62))
 }
 
 ///|
@@ -666,7 +666,7 @@ pub fn pos_pow() -> @kernel.Thm {
 /// POS_NAT_POW
 fn step_38() -> Unit raise {
   let t63 = @list.List([@meson.meson_tac(@list.List([@real.real_pow_lt(), @real.real_lt_mul(), @analysis.real_lt()]))])
-  pos_nat_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c n. 0 < n /\\ &0 < c ==> &0 < c * &n pow k"), t63))
+  pos_nat_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c n. 0 < n /\\ &0 < c ==> &0 < c * &n pow k"), t63))
 }
 
 ///|
@@ -682,7 +682,7 @@ pub fn pos_nat_pow() -> @kernel.Thm {
 /// REAL_NUM_LE_0
 fn step_39() -> Unit raise {
   let t64 = @list.List([@nums.induct_tac, @calc_rat.real_arith_tac, @simp.rewrite_tac(@list.List([@analysis.real()])), @calc_rat.real_arith_tac])
-  real_num_le_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!n. &0 <= (&n)"), t64))
+  real_num_le_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n. &0 <= (&n)"), t64))
 }
 
 ///|
@@ -712,7 +712,7 @@ fn step_40() -> Unit raise {
       s66(x67)
     }
   })(t68), t74, t73, t72])
-  real_arch_simple_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. ?n. x < &n"), t75))
+  real_arch_simple_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. ?n. x < &n"), t75))
 }
 
 ///|
@@ -788,7 +788,7 @@ fn step_41() -> Unit raise {
   let t121 = @rqe_tactics_ext.cases_on(@parser.parse_term("n = 0"))
   let t122 = @simp.rewrite_tac(@list.List([@realax.real_pow()]))
   let t123 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac, @nums.induct_tac, @int.arith_tac, t122, @tactics.strip_tac, t121, t120, t119, t118, t117, t116, t115, @tactics.strip_tac, t114, t113, @tactics.conj_tac, t112, @tactics.strip_tac, t111, t110, t109, t108, t107, t106, t105, @tactics.conj_tac, t104, t103, t102, t101, t100, @tactics.conj_tac, t99, t98])
-  binomial_lemma_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. &0 < x /\\ &0 < y\n           ==> !n. 0 < n ==> x pow n + y pow n <= (x + y) pow n"), t123))
+  binomial_lemma_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. &0 < x /\\ &0 < y\n           ==> forall n. 0 < n ==> x pow n + y pow n <= (x + y) pow n"), t123))
 }
 
 ///|
@@ -841,7 +841,7 @@ fn step_42() -> Unit raise {
   let t151 = @tactics.pop_assum(@tactics.disj_cases_tac)
   let t152 = @rqe_tactics_ext.cases_on(@parser.parse_term("(x = &0) \\/ (y = &0)"))
   let t153 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac, t152, t151, t150, t149, t148, t147, @tactics.strip_tac, t146, t145, t144, t143, t142, @tactics.strip_tac, t141, t140, t139, t138, t137])
-  binomial_lemma_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. &0 <= x /\\ &0 <= y\n           ==> !n. 0 < n ==> x pow n + y pow n <= (x + y) pow n"), t153))
+  binomial_lemma_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. &0 <= x /\\ &0 <= y\n           ==> forall n. 0 < n ==> x pow n + y pow n <= (x + y) pow n"), t153))
 }
 
 ///|
@@ -856,7 +856,7 @@ pub fn binomial_lemma() -> @kernel.Thm {
 ///|
 /// NEG_ABS
 fn step_43() -> Unit raise {
-  neg_abs_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. -- (abs x) <= &0"), @list.List([@calc_rat.real_arith_tac])))
+  neg_abs_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. -- (abs x) <= &0"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -966,7 +966,7 @@ fn step_44() -> Unit raise {
   let t222 = @rqe_tactics_ext.rewrite_assums((@list.List([@analysis.real_not_lt(), @class.de_morgan_thm()])).concat(@rewrites.real_rewrites().val))
   let t223 = @tactics.repeat_tac(@tactics.strip_tac)
   let t224 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac, t223, @rqe_tactics_ext.ccontr_tac, t222, t221, t220, t219, t218, t217, t216, t215, t214, t213, @rewrites.real_simp_tac, t212, t211, t210, @rewrites.real_simp_tac, t209, @rewrites.real_simp_tac, t208, t207, t206, t205, t204, t203, t202, t201, t200, t199, @tactics.strip_tac, t198, t197, @rewrites.real_simp_tac, t196, @rewrites.real_simp_tac, t195, @calc_rat.real_arith_tac, t194, t193, @tactics.strip_tac, t192, t191, @rewrites.real_simp_tac, t190, @rewrites.real_simp_tac, t189, @calc_rat.real_arith_tac])
-  real_mul_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. x * y < &0 <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)"), t224))
+  real_mul_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. x * y < &0 <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)"), t224))
 }
 
 ///|
@@ -1023,7 +1023,7 @@ fn step_45() -> Unit raise {
   let t254 = @rqe_tactics_ext.once_rewrite_assums(@list.List([@int.arith_rule(@parser.parse_term("x < y <=> -- y < -- x"))]))
   let t255 = @tactics.repeat_tac(@tactics.strip_tac)
   let t256 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac, t255, t254, t253, t252, t251, @tactics.disj1_tac, t250, t249, t248, t247, t246, t245, t244, t243, t242, t241])
-  real_mul_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. &0 < x * y <=> (x < &0 /\\ y < &0) \\/ (&0 < x /\\ &0 < y)"), t256))
+  real_mul_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. &0 < x * y <=> (x < &0 /\\ y < &0) \\/ (&0 < x /\\ &0 < y)"), t256))
 }
 
 ///|
@@ -1042,7 +1042,7 @@ fn step_46() -> Unit raise {
   let t258 = @tactics.match_mp_tac(@real.real_lt_inv2())
   let t259 = @simp.rewrite_tac(@list.List([@realax.real_div()]))
   let t260 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t259, @rewrites.real_simp_tac, t258, t257])
-  real_div_inv_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!y z. &0 < y /\\ y < z ==> &1 / z < &1 / y"), t260))
+  real_div_inv_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z. &0 < y /\\ y < z ==> &1 / z < &1 / y"), t260))
 }
 
 ///|
@@ -1065,7 +1065,7 @@ fn step_47() -> Unit raise {
   let t266 = @rqe_tactics_ext.exists_tac(@parser.parse_term("inv x"))
   let t267 = @tactics.match_mp_tac(@real.real_lt_lcancel_imp())
   let t268 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t267, t266, t265, @rewrites.real_solve_tac, t264, t263, @rewrites.real_simp_tac, t262, t261])
-  real_div_denom_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. &0 < x /\\ &0 < y /\\ y < z ==> x / z < x / y"), t268))
+  real_div_denom_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. &0 < x /\\ &0 < y /\\ y < z ==> x / z < x / y"), t268))
 }
 
 ///|
@@ -1093,7 +1093,7 @@ fn step_48() -> Unit raise {
   let t279 = @simp.asm_rewrite_tac(@list.List([]))
   let t280 = @rqe_tactics_ext.cases_on(@parser.parse_term("x = &0"))
   let t281 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t280, t279, t278, t277, t276, t275, t274, t273, t272, t271, @rewrites.real_simp_tac, t270, t269])
-  real_div_denom_le_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. &0 <= x /\\ &0 < y /\\ y <= z ==> x / z <= x / y"), t281))
+  real_div_denom_le_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. &0 <= x /\\ &0 < y /\\ y <= z ==> x / z <= x / y"), t281))
 }
 
 ///|
@@ -1110,7 +1110,7 @@ pub fn real_div_denom_le() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   let t282 = @simp.rewrite_tac(@list.List([@real.real_inv_neg()]))
   let t283 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_div()])), t282, @calc_rat.real_arith_tac])
-  real_neg_div_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. -- x / -- y = x / y"), t283))
+  real_neg_div_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. -- x / -- y = x / y"), t283))
 }
 
 ///|
@@ -1125,7 +1125,7 @@ pub fn real_neg_div() -> @kernel.Thm {
 ///|
 /// REAL_GT_IMP_NZ
 fn step_50() -> Unit raise {
-  real_gt_imp_nz_c.set(@tactics.prove(@parser.parse_term("!x. x < &0 ==> ~(x = &0)"), @calc_rat.real_arith_tac))
+  real_gt_imp_nz_c.set(@tactics.prove(@parser.parse_term("forall x. x < &0 ==> ~(x = &0)"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -1140,7 +1140,7 @@ pub fn real_gt_imp_nz() -> @kernel.Thm {
 ///|
 /// REAL_NEG_NZ
 fn step_51() -> Unit raise {
-  real_neg_nz_c.set(@tactics.prove(@parser.parse_term("!x. x < &0 ==> ~(x = &0)"), @calc_rat.real_arith_tac))
+  real_neg_nz_c.set(@tactics.prove(@parser.parse_term("forall x. x < &0 ==> ~(x = &0)"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ fn step_52() -> Unit raise {
     @tactics.then_tac(@rqe_tactics_ext.rewrite_assums(@list.List([x])), t286)
   })
   let t301 = @list.List([@tactics.strip_tac, @nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.even(), @arith.odd(), @realax.real_pow()])), @calc_rat.real_arith_tac, t300, t299, t298, t297, t296, t295, t294, t293, t292, t291, t290, t289, t288, t287])
-  parity_pow_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a n. a < &0 ==> (EVEN n ==> a pow n > &0) /\\ (ODD n ==> a pow n < &0)"), t301))
+  parity_pow_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n. a < &0 ==> (EVEN n ==> a pow n > &0) /\\ (ODD n ==> a pow n < &0)"), t301))
 }
 
 ///|
@@ -1207,7 +1207,7 @@ fn step_53() -> Unit raise {
   let t315 = @rqe_tactics_ext.claim(@parser.parse_term("a < &0 \\/ a > &0 \\/ (a = &0)"))
   let t316 = @rqe_tactics_ext.repeat_n(2L, @tactics.strip_tac)
   let t317 = @list.List([@simp.rewrite_tac(@list.List([@basic.neq()])), t316, t315, @calc_rat.real_arith_tac, t314, @tactics.strip_tac, t313, t312, t311, t310, t309, t308, t307, t306, t305])
-  even_odd_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a n.  a <> &0 ==>\n          (EVEN n ==> a pow n > &0) /\\\n          (ODD n ==> a < &0 ==> a pow n < &0) /\\\n          (ODD n ==> a > &0 ==> a pow n > &0)"), t317))
+  even_odd_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n.  a <> &0 ==>\n          (EVEN n ==> a pow n > &0) /\\\n          (ODD n ==> a < &0 ==> a pow n < &0) /\\\n          (ODD n ==> a > &0 ==> a pow n > &0)"), t317))
 }
 
 ///|

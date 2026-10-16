@@ -5947,16 +5947,16 @@ test "Unity/mk_unity_prog matches Unity/mk_unity_prog.ml" {
       #|  INSIDE_REL (pc:(stype->num)#((stype->num)->stype->stype->stype))\n               (label:(num#num)) =\n         (VAR_EXP pc >=* K (FST label)) /\\*\n         (VAR_EXP pc  <* K (SND label))
       #|  FollowAbs (pc:stype->num) (l:num) (u:num) = (pc >=* K l)
       #|  FOLLOW_REL (pc:(stype->num)#((stype->num)->stype->stype->stype))\n               (label:(num#num)) =\n       VAR_EXP pc >=* K (SND label)
-      #|  RESTRICTED_UNLESS_STMT v p q st =\n       (!s:'state. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))
+      #|  RESTRICTED_UNLESS_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))
       #|  (RESTRICTED_UNLESS (v:'state->bool) p q []           = T) /\\\n   (RESTRICTED_UNLESS (v:'state->bool) p q (CONS st Pr) =\n     (RESTRICTED_UNLESS_STMT v p q st /\\ RESTRICTED_UNLESS v p q Pr))
-      #|  RESTRICTED_STABLE_STMT v p st =\n       (!s:'state. p s /\\ v s ==> p (st s))
+      #|  RESTRICTED_STABLE_STMT v p st =\n       (forall s:'state. p s /\\ v s ==> p (st s))
       #|  (RESTRICTED_STABLE (v:'state->bool) p [] = T) /\\\n   (RESTRICTED_STABLE (v:'state->bool) p (CONS st Pr) =\n     (RESTRICTED_STABLE_STMT v p st /\\ RESTRICTED_STABLE      v p Pr))
-      #|  RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (!s:'state. p s /\\ v s /\\ ~(q s) ==> q (st s))
+      #|  RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> q (st s))
       #|  (RESTRICTED_EXISTS_TRANSITION (v:'state->bool) p q [] = F) /\\\n   (RESTRICTED_EXISTS_TRANSITION (v:'state->bool) p q (CONS st Pr) =\n      (RESTRICTED_EXISTS_TRANSITION_STMT v p q st \\/\n       RESTRICTED_EXISTS_TRANSITION      v p q Pr))
       #|  RESTRICTED_ENSURES (v:'state->bool) p q Pr =\n      (RESTRICTED_UNLESS            v p q Pr /\\\n       RESTRICTED_EXISTS_TRANSITION v p q Pr)
       #|  RESTRICTED_LEADSTO (v:'state->bool) p q Pr =\n        (((p /\\* v) LEADSTO q) Pr)
-      #|  VALID (p:'state->bool) = !s. p s
-      #|  (TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((!s. p s ==> q(st s)) /\\ TRIPLE p q Pr))
+      #|  VALID (p:'state->bool) = forall s. p s
+      #|  (TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((forall s. p s ==> q(st s)) /\\ TRIPLE p q Pr))
       #|  (SUMMA0 lwb 0 f b = 0) /\\\n   (SUMMA0 lwb (SUC n) f b =\n          ((if (f lwb) then (b lwb) else 0) + (SUMMA0 (SUC lwb) n f b)))
       #|  SUMMA lwb upb f b = SUMMA0 lwb ((1 + upb)-lwb) f b
       #|  SUMMA_S lwb upb f b (s:'state) =\n          SUMMA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)

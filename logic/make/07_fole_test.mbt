@@ -7961,26 +7961,26 @@ test "Logic/fole matches Logic/fole.ml" {
       #|Logic/fole quotations (273):
       #|  s === t = Atom 0 [s; t]
       #|  uclose p = ITLIST (!!) (list_of_set(FV p)) p
-      #|  normal fns M <=>\n        !s t v. valuation(M) v /\\\n                s IN terms fns /\\\n                t IN terms fns\n                ==> (holds M v (s === t) <=> (termval M v s = termval M v t))
+      #|  normal fns M <=>\n        forall s t v. valuation(M) v /\\\n                s IN terms fns /\\\n                t IN terms fns\n                ==> (holds M v (s === t) <=> (termval M v s = termval M v t))
       #|  (Varpairs 0 = []) /\\\n   (Varpairs (SUC n) = CONS (V(2 * n),V(2 * n + 1)) (Varpairs n))
       #|  Eqaxiom_Func (f,n) =\n     uclose (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True\n             --> Fn f (MAP FST (Varpairs n)) === Fn f (MAP SND (Varpairs n)))
       #|  Eqaxiom_Pred (p,n) =\n     uclose (ITLIST (&&) (MAP (\\(s,t). s === t) (Varpairs n)) True\n             --> (Atom p (MAP FST (Varpairs n))\n                  <-> Atom p (MAP SND (Varpairs n))))
       #|  Eqaxioms L = { (!! 0 (V 0 === V 0)) } UNION\n                { (!!0 (!!1 (!!2\n                        (V 0 === V 1 --> (V 2 === V 1 --> V 0 === V 2))))) } UNION\n                { Eqaxiom_Func fa | fa IN (FST L) } UNION\n                { Eqaxiom_Pred pa | pa IN (SND L) }
       #|  (DOWNFROM 0 = []) /\\\n   (DOWNFROM (SUC n) = CONS n (DOWNFROM n))
-      #|  !M s t. M satisfies (s UNION t) <=> M satisfies s /\\ M satisfies t
+      #|  forall M s t. M satisfies (s UNION t) <=> M satisfies s /\\ M satisfies t
       #|  l:num list
       #|  list_of_set(FV p)
-      #|  !M x p. (!v:num->A. valuation(M) v ==> holds M v p)\n           ==> !v. valuation(M) v ==> holds M v (uclose p)
+      #|  forall M x p. (forall v:num->A. valuation(M) v ==> holds M v p)\n           ==> forall v. valuation(M) v ==> holds M v (uclose p)
       #|  l:num list
       #|  list_of_set(FV p)
-      #|  !M. ~(Dom M :A->bool = {})\n       ==> !p. (!v. valuation(M) v ==> holds M v (uclose p)) <=>\n               (!v. valuation(M) v ==> holds M v p)
-      #|  !l p. FV(ITLIST !! l p) = FV(p) DIFF (set_of_list l)
-      #|  !p. FV(uclose p) = EMPTY
+      #|  forall M. ~(Dom M :A->bool = {})\n       ==> forall p. (forall v. valuation(M) v ==> holds M v (uclose p)) <=>\n               (forall v. valuation(M) v ==> holds M v p)
+      #|  forall l p. FV(ITLIST !! l p) = FV(p) DIFF (set_of_list l)
+      #|  forall p. FV(uclose p) = EMPTY
       #|  l:num list
       #|  list_of_set(FV p)
       #|  holds M (v:num->A) (uclose p)
-      #|  !w:num->A. valuation(M) w ==> holds M w (uclose p)
-      #|  !M (v:num->A) p.\n       holds M v (uclose p)\n       ==> ~(Dom M = EMPTY)\n           ==> !w. valuation(M) w ==> holds M w p
+      #|  forall w:num->A. valuation(M) w ==> holds M w (uclose p)
+      #|  forall M (v:num->A) p.\n       holds M v (uclose p)\n       ==> ~(Dom M = EMPTY)\n           ==> forall w. valuation(M) w ==> holds M w p
       #|  (a /\\ (b \\/ c) ==> d) <=> (a /\\ c ==> d) /\\ (a /\\ b ==> d)
       #|  ~(Dom M :A->bool = {})\n   ==> (M satisfies E /\\ ~(M satisfies {p}) <=>\n        M satisfies (Not (uclose p) INSERT E))
       #|  l:num list
@@ -7989,42 +7989,42 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  l:num list
       #|  list_of_set (FV p)
       #|  predicates_form(uclose p) = predicates_form p
-      #|  !l. holds M v (ITLIST (&&) l True) <=> ALL (holds M v) l
-      #|  !n. LENGTH (Varpairs n) = n
-      #|  !n. MAP FST (Varpairs n) = MAP (\\n. V(2 * n)) (DOWNFROM n)
-      #|  !n. MAP SND (Varpairs n) = MAP (\\n. V(2 * n + 1)) (DOWNFROM n)
+      #|  forall l. holds M v (ITLIST (&&) l True) <=> ALL (holds M v) l
+      #|  forall n. LENGTH (Varpairs n) = n
+      #|  forall n. MAP FST (Varpairs n) = MAP (\\n. V(2 * n)) (DOWNFROM n)
+      #|  forall n. MAP SND (Varpairs n) = MAP (\\n. V(2 * n + 1)) (DOWNFROM n)
       #|  1
-      #|  (!n. (2 * n) DIV 2 = n) /\\\n   (!n. (2 * n + 1) DIV 2 = n)
-      #|  !z. (\\(x,y). P x y) z = P (FST z) (SND z)
-      #|  !n. ALL P (Varpairs n) <=>\n        ALL (\\n. P (V (2 * n),V (2 * n + 1))) (DOWNFROM n)
-      #|  !n. ALL (\\p. Pred M a [termval M v (FST p); termval M v (SND p)])\n              (Varpairs n) <=>\n       ALL2 (\\x y. Pred M a [x;y])\n               (MAP (termval M v) (MAP FST (Varpairs n)))\n               (MAP (termval M v) (MAP SND (Varpairs n)))
-      #|  !l. ALL2 (\\x y. P x y) (MAP f l) (MAP g l) <=>\n       ALL (\\x. P (f x) (g x)) l
-      #|  !n. ALL P (DOWNFROM n) <=> !k. k < n ==> P k
+      #|  (forall n. (2 * n) DIV 2 = n) /\\\n   (forall n. (2 * n + 1) DIV 2 = n)
+      #|  forall z. (\\(x,y). P x y) z = P (FST z) (SND z)
+      #|  forall n. ALL P (Varpairs n) <=>\n        ALL (\\n. P (V (2 * n),V (2 * n + 1))) (DOWNFROM n)
+      #|  forall n. ALL (\\p. Pred M a [termval M v (FST p); termval M v (SND p)])\n              (Varpairs n) <=>\n       ALL2 (\\x y. Pred M a [x;y])\n               (MAP (termval M v) (MAP FST (Varpairs n)))\n               (MAP (termval M v) (MAP SND (Varpairs n)))
+      #|  forall l. ALL2 (\\x y. P x y) (MAP f l) (MAP g l) <=>\n       ALL (\\x. P (f x) (g x)) l
+      #|  forall n. ALL P (DOWNFROM n) <=> forall k. k < n ==> P k
       #|  (m + SUC n) - 1 = m + n
       #|  SUC n - 1 = n
-      #|  !k n. k < n ==> (SUC n - 1 - k = SUC (n - 1 - k))
+      #|  forall k n. k < n ==> (SUC n - 1 - k = SUC (n - 1 - k))
       #|  n:num
       #|  LENGTH (t:A list)
       #|  (SUC n - 1) - n = 0
-      #|  !l:A list. MAP (\\n. EL ((LENGTH l - 1) - n) l) (DOWNFROM (LENGTH l)) = l
+      #|  forall l:A list. MAP (\\n. EL ((LENGTH l - 1) - n) l) (DOWNFROM (LENGTH l)) = l
       #|  SUC L <= K ==> L <= K /\\ ~(K <= L)
-      #|  !L K. L <= K\n           ==> (MAP (\\n. if K <= n then a else f n) (DOWNFROM L) =\n                MAP f (DOWNFROM L))
+      #|  forall L K. L <= K\n           ==> (MAP (\\n. if K <= n then a else f n) (DOWNFROM L) =\n                MAP f (DOWNFROM L))
       #|  2 * x <= 2 * y + 1 <=> x <= y
-      #|  !M a f1 f2.\n        (MAP (termval M (\\n. if 2 * LENGTH l <= n then a\n                             else if EVEN(n)\n                             then f1 (EL ((LENGTH l - 1) - (n DIV 2)) l)\n                             else f2 (EL ((LENGTH l - 1) - (n DIV 2)) l)))\n             (MAP FST (Varpairs (LENGTH l))) = MAP f1 l) /\\\n        (MAP (termval M (\\n. if 2 * LENGTH l <= n then a\n                             else if EVEN(n)\n                             then f1 (EL ((LENGTH l - 1) - (n DIV 2)) l)\n                             else f2 (EL ((LENGTH l - 1) - (n DIV 2)) l)))\n             (MAP SND (Varpairs (LENGTH l))) = MAP f2 l)
+      #|  forall M a f1 f2.\n        (MAP (termval M (\\n. if 2 * LENGTH l <= n then a\n                             else if EVEN(n)\n                             then f1 (EL ((LENGTH l - 1) - (n DIV 2)) l)\n                             else f2 (EL ((LENGTH l - 1) - (n DIV 2)) l)))\n             (MAP FST (Varpairs (LENGTH l))) = MAP f1 l) /\\\n        (MAP (termval M (\\n. if 2 * LENGTH l <= n then a\n                             else if EVEN(n)\n                             then f1 (EL ((LENGTH l - 1) - (n DIV 2)) l)\n                             else f2 (EL ((LENGTH l - 1) - (n DIV 2)) l)))\n             (MAP SND (Varpairs (LENGTH l))) = MAP f2 l)
       #|  (a INSERT b) SUBSET s <=> a IN s /\\ b SUBSET s
       #|  s UNION t SUBSET u <=> s SUBSET u /\\ t SUBSET u
-      #|  !l. LIST_UNION l SUBSET s <=> ALL (\\x. x SUBSET s) l
+      #|  forall l. LIST_UNION l SUBSET s <=> ALL (\\x. x SUBSET s) l
       #|  l:term list
       #|  l:term list
-      #|  !s t. terms (functions s) t <=> functions_term t SUBSET (functions s)
-      #|  !s t. terms (functions s) t ==> functions_term t SUBSET (functions s)
-      #|  !l n. ALL (terms (functions s)) l /\\ n < LENGTH l\n         ==> functions_term (EL n l) SUBSET functions s
+      #|  forall s t. terms (functions s) t <=> functions_term t SUBSET (functions s)
+      #|  forall s t. terms (functions s) t ==> functions_term t SUBSET (functions s)
+      #|  forall l n. ALL (terms (functions s)) l /\\ n < LENGTH l\n         ==> functions_term (EL n l) SUBSET functions s
       #|  a SUBSET s /\\ b SUBSET s ==> (a UNION b) SUBSET s
       #|  a IN s /\\ b SUBSET s ==> (a INSERT b) SUBSET s
-      #|  !l. ALL (\\x. x SUBSET s) l ==> LIST_UNION l SUBSET s
+      #|  forall l. ALL (\\x. x SUBSET s) l ==> LIST_UNION l SUBSET s
       #|  {x} SUBSET s <=> x IN s
       #|  s UNION t SUBSET u <=> s SUBSET u /\\ t SUBSET u
-      #|  !l. LIST_UNION l SUBSET s <=> ALL (\\x. x SUBSET s) l
+      #|  forall l. LIST_UNION l SUBSET s <=> ALL (\\x. x SUBSET s) l
       #|  (s UNION t) SUBSET u <=> s SUBSET u /\\ t SUBSET u
       #|  canonize o valmod (x,a) v = valmod (x,canonize a) (canonize o v)
       #|  p:form IN s
@@ -8074,11 +8074,11 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                 satisfies {Eqaxiom_Pred pa | pa IN SND (language s)}
       #|  l:term list
       #|  p:num
-      #|  !P. (!a:A. a IN Dom(M') ==> P a) <=>\n                        (!a:A. a IN Dom(M) ==> P(canonize a))
-      #|  !p v. valuation M (v:num->A) /\\\n          (functions_form p) SUBSET (functions s) /\\\n          (predicates_form p) SUBSET (predicates s)\n          ==> (holds M' ((canonize:A->A) o v) p <=> holds M v p)
+      #|  forall P. (forall a:A. a IN Dom(M') ==> P a) <=>\n                        (forall a:A. a IN Dom(M) ==> P(canonize a))
+      #|  forall p v. valuation M (v:num->A) /\\\n          (functions_form p) SUBSET (functions s) /\\\n          (predicates_form p) SUBSET (predicates s)\n          ==> (holds M' ((canonize:A->A) o v) p <=> holds M v p)
       #|  interpretation (language s)\n                     (M:(A->bool)#(num->A list->A)#(num->A list->bool))
       #|  functions s
-      #|  !a b. (a = canonize b) /\\ b IN Dom(M)\n                            ==> (equiv:A->A->bool) b a
+      #|  forall a b. (a = canonize b) /\\ b IN Dom(M)\n                            ==> (equiv:A->A->bool) b a
       #|  (equiv:A->A->bool) (termval M v x)\n                                         (termval M' (canonize o v) x)
       #|  \\t. terms (functions s) t /\\\n                        (t IN terms (functions s)\n                         ==> (termval M' (canonize o v) t =\n                              (canonize:A->A) (termval M v t)))
       #|  ~(2 * n <= k) ==> n - 1 - m < n
@@ -8107,7 +8107,7 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  ALL (terms fns) l'
       #|  MEM (tt:term) l'
       #|  tt:term
-      #|  \\u. !fns. terms fns u ==> functions_term u SUBSET fns
+      #|  \\u. forall fns. terms fns u ==> functions_term u SUBSET fns
       #|  L:term list
       #|  g:num
       #|  u:term
@@ -8125,7 +8125,7 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  interpretation (language s)\n                   (M:(A->bool)#(num->A list->A)#(num->A list->bool))
       #|  functions s
       #|  f:num
-      #|  !t v. valuation M (v:num->A) /\\\n                      t IN terms (functions s)\n                      ==> (termval M' (canonize o v) t =\n                           (canonize:A->A) (termval M v t))
+      #|  forall t v. valuation M (v:num->A) /\\\n                      t IN terms (functions s)\n                      ==> (termval M' (canonize o v) t =\n                           (canonize:A->A) (termval M v t))
       #|  (equiv:A->A->bool) (Fun M f l) (canonize (Fun M f l))
       #|  a /\\ (a ==> b) ==> a /\\ b
       #|  !! 0 (V 0 === V 0)
@@ -8137,19 +8137,19 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  a:A
       #|  ~(Dom M :A->bool = EMPTY)
       #|  ~(Dom M' :A->bool = EMPTY)
-      #|  !a:A b. equiv a b ==> (canonize a :A = canonize b)
-      #|  !a:A b. equiv a b ==> equiv b a
+      #|  forall a:A b. equiv a b ==> (canonize a :A = canonize b)
+      #|  forall a:A b. equiv a b ==> equiv b a
       #|  !!0 (!!1 (!!2 (V 0 === V 1 --> (V 2 === V 1 --> V 0 === V 2))))
       #|  valmod (0,a) (valmod (1,b) (\\n. c:A))
       #|  (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                 satisfies\n                 { (!!0 (!!1 (!!2\n                      (V 0 === V 1 --> (V 2 === V 1 --> V 0 === V 2))))) }
-      #|  !a:A b c. equiv a b ==> equiv c b ==> equiv a c
-      #|  !a:A. equiv a (canonize a :A) <=> a IN Dom(M)
+      #|  forall a:A b c. equiv a b ==> equiv c b ==> equiv a c
+      #|  forall a:A. equiv a (canonize a :A) <=> a IN Dom(M)
       #|  a:A
       #|  a:A IN Dom(M)
       #|  !!0 (Atom 0 [V 0; V 0])
       #|  \\x:num. a:A
       #|  (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                 satisfies { (!!0 (V 0 === V 0)) }
-      #|  !a:A. equiv a a <=> a IN Dom(M)
+      #|  forall a:A. equiv a a <=> a IN Dom(M)
       #|  M':(A->bool)#(num->A list->A)#(num->A list->bool)
       #|  M' = { a:A | a IN Dom(M) /\\ (a = canonize a) },\n                   (\\f l. canonize(Fun(M) f l)),Pred(M)
       #|  canonize = \\a:A. @b:A. equiv a b
@@ -8173,13 +8173,13 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  valuation M (v:num->A)
       #|  M:(A->bool)#(num->A list->A)#(num->A list->bool)
       #|  (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language s) M /\\\n        ~(Dom M = EMPTY) /\\\n        normal (functions s) M /\\\n        M satisfies s) <=>\n   (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language s) M /\\\n        ~(Dom M = EMPTY) /\\\n        M satisfies (s UNION Eqaxioms (language s)))
-      #|  !s t. t SUBSET s ==> functions t SUBSET functions s
+      #|  forall s t. t SUBSET s ==> functions t SUBSET functions s
       #|  v:num->A
       #|  v:num->A
       #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
       #|  Dom(M):A->bool,\n              (\\g zs. if (g,LENGTH zs) IN functions s then Fun(M) g zs\n                      else @a. a IN Dom(M)),\n              Pred(M)
-      #|  !s s' t.\n        t SUBSET s /\\\n        (?M. interpretation (language s) M /\\\n             ~(Dom M :A->bool = EMPTY) /\\\n             M satisfies t)\n        ==> ?M. interpretation (language s') M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                M satisfies t
-      #|  !s s' t.\n        s' SUBSET s /\\\n        (?M. interpretation (language s) M /\\\n             ~(Dom M :A->bool = EMPTY) /\\\n             M satisfies t)\n        ==> ?M. interpretation (language s') M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                M satisfies t
+      #|  forall s s' t.\n        t SUBSET s /\\\n        (?M. interpretation (language s) M /\\\n             ~(Dom M :A->bool = EMPTY) /\\\n             M satisfies t)\n        ==> ?M. interpretation (language s') M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                M satisfies t
+      #|  forall s s' t.\n        s' SUBSET s /\\\n        (?M. interpretation (language s) M /\\\n             ~(Dom M :A->bool = EMPTY) /\\\n             M satisfies t)\n        ==> ?M. interpretation (language s') M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                M satisfies t
       #|  functions(p INSERT s) = functions_form p UNION functions s
       #|  functions (s UNION t) = functions s UNION functions t
       #|  predicates (s UNION t) = predicates s UNION predicates t
@@ -8189,23 +8189,23 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  n:num
       #|  n:num
       #|  functions_term (Fn p (MAP FST (Varpairs n))) = {(p,n)}
-      #|  !n. LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = EMPTY
-      #|  !n. LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = EMPTY
+      #|  forall n. LIST_UNION (MAP functions_term (MAP FST (Varpairs n))) = EMPTY
+      #|  forall n. LIST_UNION (MAP functions_term (MAP SND (Varpairs n))) = EMPTY
       #|  n:num
       #|  n:num
       #|  functions_term (Fn p (MAP SND (Varpairs n))) = {(p,n)}
-      #|  !n. functions_form(ITLIST (&&) (MAP (\\(s,t). Atom 0 [s; t])\n                                       (Varpairs n)) True) = EMPTY
-      #|  !fa. functions_form (Eqaxiom_Func fa) = {fa}
-      #|  !pa. functions_form (Eqaxiom_Pred pa) = EMPTY
+      #|  forall n. functions_form(ITLIST (&&) (MAP (\\(s,t). Atom 0 [s; t])\n                                       (Varpairs n)) True) = EMPTY
+      #|  forall fa. functions_form (Eqaxiom_Func fa) = {fa}
+      #|  forall pa. functions_form (Eqaxiom_Pred pa) = EMPTY
       #|  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
       #|  functions (Eqaxioms (language s)) = functions s
       #|  interpretation (language s) M =\n   interpretation (language (s UNION (Eqaxioms (language s)))) M
-      #|  !f1 f2. f1 SUBSET f2 ==> terms f1 SUBSET terms f2
+      #|  forall f1 f2. f1 SUBSET f2 ==> terms f1 SUBSET terms f2
       #|  Eqaxioms (language (s UNION t)) =\n   Eqaxioms (language s) UNION Eqaxioms (language t)
       #|  s SUBSET t ==> Eqaxioms (language s) SUBSET Eqaxioms (language t)
       #|  p IN Eqaxioms (language s)\n   ==> (s = EMPTY) \\/ ?q. q IN s /\\ p IN Eqaxioms (language {q})
-      #|  (!t. P t ==> !M. Q t M ==> R t M)\n     ==> (!t. P t ==> ?M. Q t M) ==> (!t. P t ==> ?M. R t M)
-      #|  (!t. FINITE t /\\ t SUBSET s\n        ==> ?M. interpretation (language s) M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                normal (functions s) M /\\\n                M satisfies t)\n   ==> (!t. FINITE t /\\ t SUBSET s\n            ==> ?M. interpretation (language t) M /\\\n                    ~(Dom M :A->bool = EMPTY) /\\\n                    normal (functions t) M /\\\n                    M satisfies t)
+      #|  (forall t. P t ==> forall M. Q t M ==> R t M)\n     ==> (forall t. P t ==> ?M. Q t M) ==> (forall t. P t ==> ?M. R t M)
+      #|  (forall t. FINITE t /\\ t SUBSET s\n        ==> ?M. interpretation (language s) M /\\\n                ~(Dom M :A->bool = EMPTY) /\\\n                normal (functions s) M /\\\n                M satisfies t)\n   ==> (forall t. FINITE t /\\ t SUBSET s\n            ==> ?M. interpretation (language t) M /\\\n                    ~(Dom M :A->bool = EMPTY) /\\\n                    normal (functions t) M /\\\n                    M satisfies t)
       #|  (x INSERT s SUBSET t <=> x IN t /\\ s SUBSET t) /\\\n     (u UNION s SUBSET t <=> u SUBSET t /\\ s SUBSET t)
       #|  t SUBSET Eqaxioms (language s0)
       #|  {(q:form)} UNION s0
@@ -8228,10 +8228,10 @@ test "Logic/fole matches Logic/fole.ml" {
       #|  s0:form->bool
       #|  e:form->bool
       #|  b:form->bool
-      #|  !t. FINITE t /\\ t SUBSET s UNION (Eqaxioms (language s))\n       ==> ?u. t SUBSET (u UNION (Eqaxioms (language u))) /\\\n               FINITE u /\\ u SUBSET s
+      #|  forall t. FINITE t /\\ t SUBSET s UNION (Eqaxioms (language s))\n       ==> ?u. t SUBSET (u UNION (Eqaxioms (language u))) /\\\n               FINITE u /\\ u SUBSET s
       #|  s:form->bool
       #|  s UNION (Eqaxioms (language s))
-      #|  (!t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language s) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       normal (functions s) M /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language s) C /\\\n           ~(Dom(C):term->bool = EMPTY) /\\\n           normal (functions s) C /\\\n           C satisfies s
+      #|  (forall t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language s) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       normal (functions s) M /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language s) C /\\\n           ~(Dom(C):term->bool = EMPTY) /\\\n           normal (functions s) C /\\\n           C satisfies s
       #|Equal_DEF =  |- (#!:fun(fun(term,bool),bool) (\s:term. (#!:fun(fun(term,bool),bool) (\t:term. ((#=:fun(form,fun(form,bool)) ((#===:fun(term,fun(term,form)) s:term) t:term)) ((#Atom:fun(num,fun(list(term),form)) (#NUMERAL:fun(num,num) #_0:num)) ((#CONS:fun(term,fun(list(term),list(term))) s:term) ((#CONS:fun(term,fun(list(term),list(term))) t:term) #NIL:list(term)))))))))
       #|uclose =  |- (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(form,fun(form,bool)) (#uclose:fun(form,form) p:form)) (((#ITLIST:fun(fun(num,fun(form,form)),fun(list(num),fun(form,form))) #!!:fun(num,fun(form,form))) (#list_of_set:fun(fun(num,bool),list(num)) (#FV:fun(form,fun(num,bool)) p:form))) p:form))))
       #|normal =  |- (#!:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#!:fun(fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),bool),bool) (\M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))). ((#=:fun(bool,fun(bool,bool)) ((#normal:fun(fun(prod(num,num),bool),fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),bool)) fns:fun(prod(num,num),bool)) M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))))) (#!:fun(fun(term,bool),bool) (\s:term. (#!:fun(fun(term,bool),bool) (\t:term. (#!:fun(fun(fun(num,'?202186),bool),bool) (\v:fun(num,'?202186). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),fun(fun(num,'?202186),bool)) M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool))))) v:fun(num,'?202186))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(term,fun(fun(term,bool),bool)) s:term) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)))) ((#IN:fun(term,fun(fun(term,bool),bool)) t:term) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)))))) ((#=:fun(bool,fun(bool,bool)) (((#holds:fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),fun(fun(num,'?202186),fun(form,bool))) M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool))))) v:fun(num,'?202186)) ((#===:fun(term,fun(term,form)) s:term) t:term))) ((#=:fun('?202186,fun('?202186,bool)) (((#termval:fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),fun(fun(num,'?202186),fun(term,'?202186))) M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool))))) v:fun(num,'?202186)) s:term)) (((#termval:fun(prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool)))),fun(fun(num,'?202186),fun(term,'?202186))) M:prod(fun('?202186,bool),prod(fun(num,fun(list('?202186),'?202186)),fun(num,fun(list('?202186),bool))))) v:fun(num,'?202186)) t:term)))))))))))))))

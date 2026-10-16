@@ -5570,17 +5570,17 @@ test "Minisat/sat_script matches Minisat/sat_script.ml" {
       #|Warning: inventing type variables
       #|0..0..0..solved at 3
       #|Minisat/sat_script quotations (11):
-      #|  !a b c. a /\\ b ==> c <=> a ==> b ==> c
-      #|  !a b c. a /\\ b ==> c <=> (a<=>T) ==> b ==> c
-      #|  !a b c. ~a /\\ b ==> c <=> (a<=>F) ==> b ==> c
-      #|  !a. (~a /\\ a) <=> F
-      #|  !a. a ==> ~a ==> F
+      #|  forall a b c. a /\\ b ==> c <=> a ==> b ==> c
+      #|  forall a b c. a /\\ b ==> c <=> (a<=>T) ==> b ==> c
+      #|  forall a b c. ~a /\\ b ==> c <=> (a<=>F) ==> b ==> c
+      #|  forall a. (~a /\\ a) <=> F
+      #|  forall a. a ==> ~a ==> F
       #|  (~(a \\/ b) ==> F) = (~a ==> ~b ==> F)
       #|  (~(a \\/ b) ==> F) = ((a==>F) ==> ~b ==> F)
       #|  (~(~a \\/ b) ==> F) = (a ==> ~b ==> F)
       #|  (~a ==> F) ==> (a==>F) ==> F
       #|  (~a ==> F) <=> a
-      #|  !t. (t ==> F) <=> (t <=> F)
+      #|  forall t. (t ==> F) <=> (t <=> F)
       #|AND_IMP =  |- (#!:fun(fun(bool,bool),bool) (\a:bool. (#!:fun(fun(bool,bool),bool) (\b:bool. (#!:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))
       #|AND_IMP2 =  |- (#!:fun(fun(bool,bool),bool) (\a:bool. (#!:fun(fun(bool,bool),bool) (\b:bool. (#!:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) #T:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))
       #|AND_IMP3 =  |- (#!:fun(fun(bool,bool),bool) (\a:bool. (#!:fun(fun(bool,bool),bool) (\b:bool. (#!:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) a:bool)) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) #F:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))

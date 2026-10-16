@@ -48,7 +48,7 @@ pub fn div_tac(x1 : @kernel.Term) -> @tactics.Tactic raise {
 fn step_5() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc()]))
   let t6 = @list.List([div_tac(@parser.parse_term("m'*m")), t5])
-  divide_divide_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("!a b c. (((a || b) /\\ (b || c)) ==> (a || c))"), t6))
+  divide_divide_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b c. (((a || b) /\\ (b || c)) ==> (a || c))"), t6))
 }
 
 ///|
@@ -87,7 +87,7 @@ fn step_6() -> Unit raise {
     }), t12)
   })
   let t25 = @list.List([div_tac(@parser.parse_term("1")), t24, t23, t22, @int.arith_tac, t21, t20, t19, t18])
-  divide_eq_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("! a b. (((a || b) /\\ (b || a)) ==> (a = b))"), t25))
+  divide_eq_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b. (((a || b) /\\ (b || a)) ==> (a = b))"), t25))
 }
 
 ///|
@@ -104,7 +104,7 @@ pub fn divide_eq() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t26 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @arith.right_add_distrib()]))
   let t27 = @list.List([div_tac(@parser.parse_term("m+m'")), t26])
-  divide_sum_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("!a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))"), t27))
+  divide_sum_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))"), t27))
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_8() -> Unit raise {
   }))
   let t31 = @simp.rewrite_tac(@list.List([@arith.right_sub_distrib()]))
   let t32 = @list.List([div_tac(@parser.parse_term("m'-m")), t31, t30, @int.arith_tac])
-  divide_summand_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("!a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))"), t32))
+  divide_summand_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))"), t32))
 }
 
 ///|
@@ -142,7 +142,7 @@ pub fn divide_summand() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t33 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc()]))
   let t34 = @list.List([div_tac(@parser.parse_term("b*m")), t33])
-  divide_prod_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("!a b h. (((h|| a) ==> (h || (b*a))))"), t34))
+  divide_prod_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| a) ==> (h || (b*a))))"), t34))
 }
 
 ///|
@@ -159,7 +159,7 @@ pub fn divide_prod() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t35 = @simp.asm_rewrite_tac(@list.List([@arith.mult_ac()]))
   let t36 = @list.List([div_tac(@parser.parse_term("b*m")), t35])
-  divide_prod2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("!a b h. (((h|| a) ==> (h || (a*b))))"), t36))
+  divide_prod2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| a) ==> (h || (a*b))))"), t36))
 }
 
 ///|
@@ -174,7 +174,7 @@ pub fn divide_prod2() -> @kernel.Thm {
 ///|
 /// GCD
 fn step_11() -> Unit raise {
-  gcd_c.set(@pair.new_definition(@parser.parse_term("GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (!h. (((h || a) /\\ (h || b)) ==> (h || g))))")))
+  gcd_c.set(@pair.new_definition(@parser.parse_term("GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (forall h. (((h || a) /\\ (h || b)) ==> (h || g))))")))
 }
 
 ///|
@@ -201,7 +201,7 @@ fn step_12() -> Unit raise {
   let t44 = @simp.rewrite_tac(@list.List([divide()]))
   let t43 = @tactics.pop_assum(@tactics.match_mp_tac)
   let t42 = @tactics_ext.taut_tac(@parser.parse_term(" (A ==> B) ==> ((C /\\ D/\\ A)==> B)"))
-  let gdivy_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("(y||a) /\\ (y ||b) /\\ (!h. (((h||a)/\\(h||b))==> (h||y)))")), t42), @tactics.disch_tac), t43), t44), @tactics.conj_tac), t45)
+  let gdivy_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("(y||a) /\\ (y ||b) /\\ (forall h. (((h||a)/\\(h||b))==> (h||y)))")), t42), @tactics.disch_tac), t43), t44), @tactics.conj_tac), t45)
   let t51 = @tactics.asm_tac(@meson.meson_tac)(@list.List([divide_summand()]))
   let t52 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide_sum(), divide_prod()])), t51])
   let t50 = @tactics_ext.subgoal_tac(@parser.parse_term(" (h || (r*a + s*b))/\\ (h || (r'*a+s'*b))"))
@@ -213,7 +213,7 @@ fn step_12() -> Unit raise {
   }
   let yghyp_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.pop_assum(x)), @tactics.conj_tac), t48), @tactics.conj_tac), t49), @tactics.gen_tac), @tactics.disch_tac), t50), t52)
   let t53 = @tactics.thenl(tac1, @list.List([@tactics.thenl(ygbranch, @list.List([ydivg_branch, gdivy_branch])), yghyp_branch]))
-  gcd_certificate_c.set(@tactics_refine.prove(@parser.parse_term("!a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))"), t53))
+  gcd_certificate_c.set(@tactics_refine.prove(@parser.parse_term("forall a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))"), t53))
 }
 
 ///|

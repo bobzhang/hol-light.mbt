@@ -81493,45 +81493,45 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|0..0..1..solved at 4
       #|Probability/martingales quotations (732):
       #|  sub_sigma_algebra (p:A prob_space) (G:(A->bool)->bool) <=>\n   sigma_algebra G /\\\n   G SUBSET prob_events p /\\\n   UNIONS G = prob_carrier p
-      #|  !p:A prob_space G.\n     sub_sigma_algebra p G ==> prob_carrier p IN G
-      #|  !p:A prob_space G a.\n     sub_sigma_algebra p G /\\ a IN G ==> a IN prob_events p
-      #|  measurable_wrt (p:A prob_space) (G:(A->bool)->bool) (X:A->real) <=>\n   !v. {x | x IN prob_carrier p /\\ X x <= v} IN G
-      #|  !p:A prob_space G X.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> random_variable p X
-      #|  !p:A prob_space X.\n     measurable_wrt p (prob_events p) X <=> random_variable p X
+      #|  forall p:A prob_space G.\n     sub_sigma_algebra p G ==> prob_carrier p IN G
+      #|  forall p:A prob_space G a.\n     sub_sigma_algebra p G /\\ a IN G ==> a IN prob_events p
+      #|  measurable_wrt (p:A prob_space) (G:(A->bool)->bool) (X:A->real) <=>\n   forall v. {x | x IN prob_carrier p /\\ X x <= v} IN G
+      #|  forall p:A prob_space G X.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> random_variable p X
+      #|  forall p:A prob_space X.\n     measurable_wrt p (prob_events p) X <=> random_variable p X
       #|  {x:A | x IN prob_carrier p /\\ c <= v} = {}
       #|  {x:A | x IN prob_carrier p /\\ c <= v} = prob_carrier p
       #|  c <= v
       #|  v:real
-      #|  !p:A prob_space G c.\n     sub_sigma_algebra p G ==> measurable_wrt p G (\\x. c)
+      #|  forall p:A prob_space G c.\n     sub_sigma_algebra p G ==> measurable_wrt p G (\\x. c)
       #|  simple_rv_wrt (p:A prob_space) (G:(A->bool)->bool) (X:A->real) <=>\n   measurable_wrt p G X /\\\n   FINITE {X x | x IN prob_carrier p}
-      #|  !p:A prob_space G X.\n     sub_sigma_algebra p G /\\ simple_rv_wrt p G X ==> simple_rv p X
-      #|  !p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a INTER b IN G
-      #|  !p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a UNION b IN G
-      #|  !p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a DIFF b IN G
+      #|  forall p:A prob_space G X.\n     sub_sigma_algebra p G /\\ simple_rv_wrt p G X ==> simple_rv p X
+      #|  forall p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a INTER b IN G
+      #|  forall p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a UNION b IN G
+      #|  forall p:A prob_space G a b.\n     sub_sigma_algebra p G /\\ a IN G /\\ b IN G ==> a DIFF b IN G
       #|  prob_carrier (p:A prob_space) = UNIONS G
-      #|  !p:A prob_space G a.\n     sub_sigma_algebra p G /\\ a IN G ==> (prob_carrier p DIFF a) IN G
-      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool) <=>\n   (!n. sub_sigma_algebra p (FF n)) /\\\n   (!m n. m <= n ==> FF m SUBSET FF n)
-      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   !n. measurable_wrt p (FF n) (X n)
-      #|  simple_adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   adapted p FF X /\\\n   (!n. FINITE {X n x | x IN prob_carrier p})
+      #|  forall p:A prob_space G a.\n     sub_sigma_algebra p G /\\ a IN G ==> (prob_carrier p DIFF a) IN G
+      #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool) <=>\n   (forall n. sub_sigma_algebra p (FF n)) /\\\n   (forall m n. m <= n ==> FF m SUBSET FF n)
+      #|  adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   forall n. measurable_wrt p (FF n) (X n)
+      #|  simple_adapted (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   adapted p FF X /\\\n   (forall n. FINITE {X n x | x IN prob_carrier p})
       #|  natural_filtration (p:A prob_space) (X:num->A->real) (n:num) =\n   sigma_generated (prob_carrier p)\n     (UNIONS (IMAGE (\\k. {{x | x IN prob_carrier p /\\ X k x <= v} | v IN (:real)}) (0..n)))
-      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (!n. simple_rv p (X n)) /\\\n   (!n a. a IN FF n\n     ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n         simple_expectation p (\\x. X n x * indicator_fn a x))
-      #|  simple_submartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (!n. simple_rv p (X n)) /\\\n   (!n a. a IN FF n\n     ==> simple_expectation p (\\x. X n x * indicator_fn a x) <=\n         simple_expectation p (\\x. X (SUC n) x * indicator_fn a x))
-      #|  simple_supermartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (!n. simple_rv p (X n)) /\\\n   (!n a. a IN FF n\n     ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) <=\n         simple_expectation p (\\x. X n x * indicator_fn a x))
-      #|  !p:A prob_space FF X.\n     simple_martingale p FF X ==> simple_submartingale p FF X
-      #|  !p:A prob_space FF X.\n     simple_martingale p FF X ==> simple_supermartingale p FF X
-      #|  !p:A prob_space FF X.\n     simple_martingale p FF X <=>\n     simple_submartingale p FF X /\\ simple_supermartingale p FF X
-      #|  !p:A prob_space FF m n.\n     filtration p FF /\\ m <= n ==> FF m SUBSET FF n
+      #|  simple_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (forall n. simple_rv p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n         simple_expectation p (\\x. X n x * indicator_fn a x))
+      #|  simple_submartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (forall n. simple_rv p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> simple_expectation p (\\x. X n x * indicator_fn a x) <=\n         simple_expectation p (\\x. X (SUC n) x * indicator_fn a x))
+      #|  simple_supermartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   simple_adapted p FF X /\\\n   (forall n. simple_rv p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) <=\n         simple_expectation p (\\x. X n x * indicator_fn a x))
+      #|  forall p:A prob_space FF X.\n     simple_martingale p FF X ==> simple_submartingale p FF X
+      #|  forall p:A prob_space FF X.\n     simple_martingale p FF X ==> simple_supermartingale p FF X
+      #|  forall p:A prob_space FF X.\n     simple_martingale p FF X <=>\n     simple_submartingale p FF X /\\ simple_supermartingale p FF X
+      #|  forall p:A prob_space FF m n.\n     filtration p FF /\\ m <= n ==> FF m SUBSET FF n
       #|  {(c:real) | x | x IN prob_carrier (p:A prob_space)} SUBSET {c}
-      #|  !p:A prob_space FF c.\n     filtration p FF\n     ==> simple_martingale p FF (\\n x. c)
-      #|  stopping_time (p:A prob_space) (FF:num->(A->bool)->bool) (tau:A->num) <=>\n   !n. {x | x IN prob_carrier p /\\ tau x <= n} IN FF n
-      #|  bounded_stopping_time (p:A prob_space) (FF:num->(A->bool)->bool) (tau:A->num) (N:num) <=>\n   stopping_time p FF tau /\\\n   (!x. x IN prob_carrier p ==> tau x <= N)
+      #|  forall p:A prob_space FF c.\n     filtration p FF\n     ==> simple_martingale p FF (\\n x. c)
+      #|  stopping_time (p:A prob_space) (FF:num->(A->bool)->bool) (tau:A->num) <=>\n   forall n. {x | x IN prob_carrier p /\\ tau x <= n} IN FF n
+      #|  bounded_stopping_time (p:A prob_space) (FF:num->(A->bool)->bool) (tau:A->num) (N:num) <=>\n   stopping_time p FF tau /\\\n   (forall x. x IN prob_carrier p ==> tau x <= N)
       #|  prob_carrier (p:A prob_space) IN FF (n:num)
       #|  simple_expectation p ((X:num->A->real) (SUC n)) =\n     simple_expectation p (X n)
-      #|  !p:A prob_space FF X.\n     simple_martingale p FF X\n     ==> !n. simple_expectation p (X n) = simple_expectation p (X 0)
+      #|  forall p:A prob_space FF X.\n     simple_martingale p FF X\n     ==> forall n. simple_expectation p (X n) = simple_expectation p (X 0)
       #|  prob_carrier (p:A prob_space) IN FF (n:num)
-      #|  !p:A prob_space FF X.\n     simple_submartingale p FF X\n     ==> !n. simple_expectation p (X n) <= simple_expectation p (X (SUC n))
+      #|  forall p:A prob_space FF X.\n     simple_submartingale p FF X\n     ==> forall n. simple_expectation p (X n) <= simple_expectation p (X (SUC n))
       #|  prob_carrier (p:A prob_space) IN FF (n:num)
-      #|  !p:A prob_space FF X.\n     simple_supermartingale p FF X\n     ==> !n. simple_expectation p (X (SUC n)) <= simple_expectation p (X n)
+      #|  forall p:A prob_space FF X.\n     simple_supermartingale p FF X\n     ==> forall n. simple_expectation p (X (SUC n)) <= simple_expectation p (X n)
       #|  simple_submartingale (p:A prob_space) FF (X:num->A->real)
       #|  m + j:num
       #|  simple_expectation p ((X:num->A->real) (m + j))
@@ -81539,7 +81539,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  k:num
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X.\n     simple_submartingale p FF X\n     ==> !m n. m <= n ==> simple_expectation p (X m) <= simple_expectation p (X n)
+      #|  forall p:A prob_space FF X.\n     simple_submartingale p FF X\n     ==> forall m n. m <= n ==> simple_expectation p (X m) <= simple_expectation p (X n)
       #|  simple_supermartingale (p:A prob_space) FF (X:num->A->real)
       #|  m + j:num
       #|  simple_expectation p ((X:num->A->real) (m + j))
@@ -81547,28 +81547,28 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  k:num
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X.\n     simple_supermartingale p FF X\n     ==> !m n. m <= n ==> simple_expectation p (X n) <= simple_expectation p (X m)
-      #|  !p:A prob_space FF X.\n     simple_martingale p FF X\n     ==> !n a. a IN FF n\n         ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n             simple_expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall p:A prob_space FF X.\n     simple_supermartingale p FF X\n     ==> forall m n. m <= n ==> simple_expectation p (X n) <= simple_expectation p (X m)
+      #|  forall p:A prob_space FF X.\n     simple_martingale p FF X\n     ==> forall n a. a IN FF n\n         ==> simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n             simple_expectation p (\\x. X n x * indicator_fn a x)
       #|  martingale_transform (H:num->A->real) (X:num->A->real) (n:num) (x:A) =\n   sum(0..n-1) (\\i. H i x * (X (i + 1) x - X i x))
-      #|  predictable (p:A prob_space) (FF:num->(A->bool)->bool) (H:num->A->real) <=>\n   simple_rv_wrt p (FF 0) (H 0) /\\\n   (!n. simple_rv_wrt p (FF n) (H (SUC n)))
+      #|  predictable (p:A prob_space) (FF:num->(A->bool)->bool) (H:num->A->real) <=>\n   simple_rv_wrt p (FF 0) (H 0) /\\\n   (forall n. simple_rv_wrt p (FF n) (H (SUC n)))
       #|  stopped_process (X:num->A->real) (tau:A->num) (n:num) (x:A) =\n   X (MIN n (tau x)) x
       #|  prob_carrier (p:A prob_space) DIFF\n     {x | x IN prob_carrier p /\\ (tau:A->num) x <= n} IN\n     (FF:num->(A->bool)->bool) n
-      #|  !p:A prob_space FF tau.\n     stopping_time p FF tau /\\ filtration p FF\n     ==> !n. {x | x IN prob_carrier p /\\ tau x > n} IN FF n
-      #|  !X:num->A->real tau x. stopped_process X tau 0 x = X 0 x
+      #|  forall p:A prob_space FF tau.\n     stopping_time p FF tau /\\ filtration p FF\n     ==> forall n. {x | x IN prob_carrier p /\\ tau x > n} IN FF n
+      #|  forall X:num->A->real tau x. stopped_process X tau 0 x = X 0 x
       #|  MIN n ((tau:A->num) x) = (tau:A->num) x
       #|  MIN (SUC n) ((tau:A->num) x) = (tau:A->num) x
       #|  MIN n ((tau:A->num) x) = n
       #|  MIN (SUC n) ((tau:A->num) x) = SUC n
       #|  (tau:A->num) x > n
-      #|  !X:num->A->real tau n x.\n     stopped_process X tau (SUC n) x - stopped_process X tau n x =\n     if tau x > n then X (SUC n) x - X n x else &0
+      #|  forall X:num->A->real tau n x.\n     stopped_process X tau (SUC n) x - stopped_process X tau n x =\n     if tau x > n then X (SUC n) x - X n x else &0
       #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (tau:A->num) x > n} IN\n     (FF:num->(A->bool)->bool) n
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (tau:A->num) x > n} IN\n     prob_events p
-      #|  !p:A prob_space FF tau.\n     stopping_time p FF tau /\\ filtration p FF\n     ==> !n. simple_rv p\n              (indicator_fn {x | x IN prob_carrier p /\\ tau x > n})
+      #|  forall p:A prob_space FF tau.\n     stopping_time p FF tau /\\ filtration p FF\n     ==> forall n. simple_rv p\n              (indicator_fn {x | x IN prob_carrier p /\\ tau x > n})
       #|  {(f:A->real) x | x IN prob_carrier (p:A prob_space)} =\n     {(g:A->real) x | x IN prob_carrier p}
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (f:A->real) x <= a} =\n     {x | x IN prob_carrier p /\\ (g:A->real) x <= a}
       #|  a:real
-      #|  !p:A prob_space f g.\n     (!x. x IN prob_carrier p ==> f x = g x) /\\ simple_rv p g\n     ==> simple_rv p f
+      #|  forall p:A prob_space f g.\n     (forall x. x IN prob_carrier p ==> f x = g x) /\\ simple_rv p g\n     ==> simple_rv p f
       #|  x:A
       #|  n:num
       #|  (tau:A->num)
@@ -81576,7 +81576,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  x:A
       #|  \\x:A. stopped_process (X:num->A->real) (tau:A->num) n x +\n     ((X (SUC n) x - X n x) *\n      indicator_fn {y | y IN prob_carrier (p:A prob_space) /\\ tau y > n} x)
       #|  stopped_process (X:num->A->real) (tau:A->num) 0 = X 0
-      #|  !p:A prob_space FF X tau.\n     (!n. simple_rv p (X n)) /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> !n. simple_rv p (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau.\n     (forall n. simple_rv p (X n)) /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> forall n. simple_rv p (stopped_process X tau n)
       #|  \\x:A. ((X:num->A->real) (SUC n) x - X n x) *\n         indicator_fn {y | y IN prob_carrier (p:A prob_space) /\\\n           (tau:A->num) y > n} x
       #|  stopped_process (X:num->A->real) (tau:A->num) n
       #|  p:A prob_space
@@ -81598,11 +81598,11 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) (SUC n) x *\n            indicator_fn {y | y IN prob_carrier p /\\ (tau:A->num) y > n} x) =\n      simple_expectation p\n       (\\x. X n x * indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x)
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (tau:A->num) x > n} IN\n      (FF:num->(A->bool)->bool) n
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !n a. a IN (FF:num->(A->bool)->bool) n\n     ==> simple_expectation (p:A prob_space)\n           (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) =\n         simple_expectation p (\\x. X n x * indicator_fn a x)
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n a. a IN (FF:num->(A->bool)->bool) n\n     ==> simple_expectation (p:A prob_space)\n           (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) =\n         simple_expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  !p:A prob_space FF X tau N.\n     simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> !n. simple_expectation p (stopped_process X tau n) =\n             simple_expectation p (X 0)
-      #|  !n' (a:A->bool). a IN (FF:num->(A->bool)->bool) n' ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (X:num->A->real) n' x * indicator_fn a x) <=\n        simple_expectation p (\\x. X (SUC n') x * indicator_fn a x)
+      #|  forall p:A prob_space FF X tau N.\n     simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> forall n. simple_expectation p (stopped_process X tau n) =\n             simple_expectation p (X 0)
+      #|  forall n' (a:A->bool). a IN (FF:num->(A->bool)->bool) n' ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (X:num->A->real) n' x * indicator_fn a x) <=\n        simple_expectation p (\\x. X (SUC n') x * indicator_fn a x)
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (tau:A->num) x > n} IN\n        (FF:num->(A->bool)->bool) n
       #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC n) x *\n            indicator_fn {y | y IN prob_carrier p /\\ (tau:A->num) y > n} x -\n            X n x * indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x) =\n        simple_expectation p\n         (\\x. X (SUC n) x *\n            indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x) -\n        simple_expectation p\n         (\\x. X n x *\n            indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x)
       #|  simple_rv (p:A prob_space)\n       (\\x. (X:num->A->real) n x *\n            indicator_fn {y | y IN prob_carrier p /\\ (tau:A->num) y > n} x)
@@ -81625,10 +81625,10 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  simple_expectation (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  simple_expectation (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) 0) =\n     simple_expectation p (X 0)
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  !p:A prob_space FF X tau N.\n     simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> !n. simple_expectation p (X 0) <=\n             simple_expectation p (stopped_process X tau n)
-      #|  !n' (a:A->bool). a IN (FF:num->(A->bool)->bool) n' ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (X:num->A->real) (SUC n') x * indicator_fn a x) <=\n        simple_expectation p (\\x. X n' x * indicator_fn a x)
+      #|  forall p:A prob_space FF X tau N.\n     simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> forall n. simple_expectation p (X 0) <=\n             simple_expectation p (stopped_process X tau n)
+      #|  forall n' (a:A->bool). a IN (FF:num->(A->bool)->bool) n' ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (X:num->A->real) (SUC n') x * indicator_fn a x) <=\n        simple_expectation p (\\x. X n' x * indicator_fn a x)
       #|  {x | x IN prob_carrier (p:A prob_space) /\\ (tau:A->num) x > n} IN\n        (FF:num->(A->bool)->bool) n
       #|  a - b <= &0 <=> a <= b
       #|  simple_expectation (p:A prob_space)\n         (\\x. (X:num->A->real) (SUC n) x *\n            indicator_fn {y | y IN prob_carrier p /\\ (tau:A->num) y > n} x -\n            X n x * indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x) =\n        simple_expectation p\n         (\\x. X (SUC n) x *\n            indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x) -\n        simple_expectation p\n         (\\x. X n x *\n            indicator_fn {y | y IN prob_carrier p /\\ tau y > n} x)
@@ -81652,10 +81652,10 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  simple_expectation (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  simple_expectation (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) 0) =\n     simple_expectation p (X 0)
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  !p:A prob_space FF X tau N.\n     simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> !n. simple_expectation p (stopped_process X tau n) <=\n             simple_expectation p (X 0)
-      #|  !p:A prob_space G1 G2 X.\n     measurable_wrt p G1 X /\\ G1 SUBSET G2\n     ==> measurable_wrt p G2 X
+      #|  forall p:A prob_space FF X tau N.\n     simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> forall n. simple_expectation p (stopped_process X tau n) <=\n             simple_expectation p (X 0)
+      #|  forall p:A prob_space G1 G2 X.\n     measurable_wrt p G1 X /\\ G1 SUBSET G2\n     ==> measurable_wrt p G2 X
       #|  p:A prob_space
       #|  p:A prob_space
       #|  p:A prob_space
@@ -81664,13 +81664,13 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ (if x IN s then f x else g x) <= v} =\n     (s INTER {x | x IN prob_carrier p /\\ (f:A->real) x <= v}) UNION\n     ((prob_carrier p DIFF s) INTER\n      {x | x IN prob_carrier p /\\ (g:A->real) x <= v})
       #|  v:real
-      #|  !p:A prob_space G (s:A->bool) f g.\n     sub_sigma_algebra p G /\\ s IN G /\\\n     measurable_wrt p G f /\\ measurable_wrt p G g\n     ==> measurable_wrt p G (\\x. if x IN s then f x else g x)
+      #|  forall p:A prob_space G (s:A->bool) f g.\n     sub_sigma_algebra p G /\\ s IN G /\\\n     measurable_wrt p G f /\\ measurable_wrt p G g\n     ==> measurable_wrt p G (\\x. if x IN s then f x else g x)
       #|  (x:A) IN b
       #|  (x:A) IN a
-      #|  !a b (x:A). indicator_fn (a INTER b) x =\n                indicator_fn a x * indicator_fn b x
+      #|  forall a b (x:A). indicator_fn (a INTER b) x =\n                indicator_fn a x * indicator_fn b x
       #|  {x:A | x IN prob_carrier p /\\ f x <= v} =\n     {x | x IN prob_carrier p /\\ (g:A->real) x <= v}
       #|  v:real
-      #|  !p:A prob_space G f g.\n     measurable_wrt p G g /\\\n     (!x. x IN prob_carrier p ==> f x = g x)\n     ==> measurable_wrt p G f
+      #|  forall p:A prob_space G f g.\n     measurable_wrt p G g /\\\n     (forall x. x IN prob_carrier p ==> f x = g x)\n     ==> measurable_wrt p G f
       #|  MIN (SUC n) ((tau:A->num) x) = MIN n (tau x)
       #|  MIN (SUC n) ((tau:A->num) x) = SUC n
       #|  (tau:A->num) x > n
@@ -81688,15 +81688,15 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  sub_sigma_algebra (p:A prob_space) (FF (SUC n):(A->bool)->bool)
       #|  \\x:A. if x IN {y | y IN prob_carrier p /\\ (tau:A->num) y > n}\n     then (X:num->A->real) (SUC n) x\n     else stopped_process X tau n x
       #|  stopped_process (X:num->A->real) (tau:A->num) 0 = X 0
-      #|  !p:A prob_space FF X tau.\n     adapted p FF X /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> !n. measurable_wrt p (FF n) (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau.\n     adapted p FF X /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> forall n. measurable_wrt p (FF n) (stopped_process X tau n)
       #|  n:num
-      #|  !n. simple_rv (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) n)
+      #|  forall n. simple_rv (p:A prob_space)\n     (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  FF:num->(A->bool)->bool
-      #|  !n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
+      #|  forall n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  (FF:num->(A->bool)->bool) n
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
-      #|  !p:A prob_space FF X tau.\n     simple_adapted p FF X /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> simple_adapted p FF (stopped_process X tau)
-      #|  !n' (s:A->bool). s IN (FF:num->(A->bool)->bool) n' ==>\n     simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n' x * indicator_fn s x) <=\n     simple_expectation p (\\x. X (SUC n') x * indicator_fn s x)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall p:A prob_space FF X tau.\n     simple_adapted p FF X /\\ stopping_time p FF tau /\\ filtration p FF\n     ==> simple_adapted p FF (stopped_process X tau)
+      #|  forall n' (s:A->bool). s IN (FF:num->(A->bool)->bool) n' ==>\n     simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n' x * indicator_fn s x) <=\n     simple_expectation p (\\x. X (SUC n') x * indicator_fn s x)
       #|  simple_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) (SUC n) x * indicator_fn (B:A->bool) x -\n           X n x * indicator_fn B x) =\n     simple_expectation p (\\x. X (SUC n) x * indicator_fn B x) -\n     simple_expectation p (\\x. X n x * indicator_fn B x)
       #|  (FF:num->(A->bool)->bool) n
       #|  simple_rv (p:A prob_space)\n    (\\x. (X:num->A->real) n x * indicator_fn (B:A->bool) x)
@@ -81725,14 +81725,14 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  sub_sigma_algebra (p:A prob_space)\n    ((FF:num->(A->bool)->bool) n)
       #|  {y:A | y IN prob_carrier p /\\ (tau:A->num) y > n} IN\n     (FF:num->(A->bool)->bool) n
       #|  FF:num->(A->bool)->bool
-      #|  !n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
+      #|  forall n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  simple_adapted (p:A prob_space) FF\n    (stopped_process (X:num->A->real) (tau:A->num))
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  simple_adapted (p:A prob_space) FF (X:num->A->real)
       #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  !p:A prob_space FF X tau N.\n     simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_submartingale p FF (stopped_process X tau)
-      #|  !n' (s:A->bool). s IN (FF:num->(A->bool)->bool) n' ==>\n     simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) (SUC n') x * indicator_fn s x) <=\n     simple_expectation p (\\x. X n' x * indicator_fn s x)
+      #|  forall p:A prob_space FF X tau N.\n     simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_submartingale p FF (stopped_process X tau)
+      #|  forall n' (s:A->bool). s IN (FF:num->(A->bool)->bool) n' ==>\n     simple_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) (SUC n') x * indicator_fn s x) <=\n     simple_expectation p (\\x. X n' x * indicator_fn s x)
       #|  a - b <= &0 <=> a <= b
       #|  simple_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) (SUC n) x * indicator_fn (B:A->bool) x -\n           X n x * indicator_fn B x) =\n     simple_expectation p (\\x. X (SUC n) x * indicator_fn B x) -\n     simple_expectation p (\\x. X n x * indicator_fn B x)
       #|  (FF:num->(A->bool)->bool) n
@@ -81762,16 +81762,16 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  sub_sigma_algebra (p:A prob_space)\n    ((FF:num->(A->bool)->bool) n)
       #|  {y:A | y IN prob_carrier p /\\ (tau:A->num) y > n} IN\n     (FF:num->(A->bool)->bool) n
       #|  FF:num->(A->bool)->bool
-      #|  !n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
+      #|  forall n. simple_rv (p:A prob_space)\n    (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  simple_adapted (p:A prob_space) FF\n    (stopped_process (X:num->A->real) (tau:A->num))
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  simple_adapted (p:A prob_space) FF (X:num->A->real)
       #|  filtration (p:A prob_space) (FF:num->(A->bool)->bool)
-      #|  !p:A prob_space FF X tau N.\n     simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_supermartingale p FF (stopped_process X tau)
+      #|  forall p:A prob_space FF X tau N.\n     simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_supermartingale p FF (stopped_process X tau)
       #|  N:num
       #|  N:num
-      #|  !p:A prob_space FF X tau N.\n     simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_martingale p FF (stopped_process X tau)
+      #|  forall p:A prob_space FF X tau N.\n     simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n     ==> simple_martingale p FF (stopped_process X tau)
       #|  a:A->bool
       #|  m + j:num
       #|  simple_submartingale (p:A prob_space) FF (X:num->A->real)
@@ -81786,7 +81786,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  k:num
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X m n a.\n     simple_submartingale p FF X /\\ a IN FF m /\\ m <= n\n     ==> simple_expectation p (\\x. X m x * indicator_fn a x) <=\n         simple_expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall p:A prob_space FF X m n a.\n     simple_submartingale p FF X /\\ a IN FF m /\\ m <= n\n     ==> simple_expectation p (\\x. X m x * indicator_fn a x) <=\n         simple_expectation p (\\x. X n x * indicator_fn a x)
       #|  (running_max (X:num->A->real) 0 x = X 0 x) /\\\n   (running_max X (SUC n) x = real_max (running_max X n x) (X (SUC n) x))
       #|  :P
       #|  :P
@@ -81796,7 +81796,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  !a b c:real. real_max a b >= c <=> a >= c \\/ b >= c
+      #|  forall a b c:real. real_max a b >= c <=> a >= c \\/ b >= c
       #|  c - inv(&n + &1)
       #|  measurable_wrt (p:A prob_space) G X
       #|  n:num
@@ -81804,20 +81804,20 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  prob_carrier (p:A prob_space)
       #|  c:real
       #|  X:A->real
-      #|  !x c:real. x >= c <=> ~(x < c)
+      #|  forall x c:real. x >= c <=> ~(x < c)
       #|  UNIONS (G:(A->bool)->bool) = prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ X x >= c} =\n     UNIONS G DIFF {x | x IN prob_carrier p /\\ X x < c}
-      #|  !p:A prob_space G X c.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> {x | x IN prob_carrier p /\\ X x >= c} IN G
+      #|  forall p:A prob_space G X c.\n     sub_sigma_algebra p G /\\ measurable_wrt p G X\n     ==> {x | x IN prob_carrier p /\\ X x >= c} IN G
       #|  adapted (p:A prob_space) FF X
       #|  (FF:num->(A->bool)->bool) n SUBSET FF (SUC n)
       #|  {x:A | x IN prob_carrier p /\\ running_max X (SUC n) x >= c} =\n      {x | x IN prob_carrier p /\\ running_max X n x >= c} UNION\n      {x | x IN prob_carrier p /\\ X (SUC n) x >= c}
       #|  adapted (p:A prob_space) FF X
       #|  n:num
       #|  n:num
-      #|  !p:A prob_space FF X c n.\n     filtration p FF /\\ adapted p FF X\n     ==> {x | x IN prob_carrier p /\\ running_max X n x >= c} IN FF n
+      #|  forall p:A prob_space FF X c n.\n     filtration p FF /\\ adapted p FF X\n     ==> {x | x IN prob_carrier p /\\ running_max X n x >= c} IN FF n
       #|  (x:A) IN b
       #|  (x:A) IN a
-      #|  !a b (x:A). DISJOINT a b\n     ==> indicator_fn (a UNION b) x = indicator_fn a x + indicator_fn b x
+      #|  forall a b (x:A). DISJOINT a b\n     ==> indicator_fn (a UNION b) x = indicator_fn a x + indicator_fn b x
       #|  (y:A) IN B
       #|  y:A
       #|  simple_expectation (p:A prob_space) (\\x. c * indicator_fn B x) =\n         c * simple_expectation p (indicator_fn B)
@@ -81848,10 +81848,10 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  simple_expectation (p:A prob_space)\n         (\\x. c * indicator_fn {y | y IN prob_carrier p /\\ X 0 y >= c} x) =\n       c * prob p {y | y IN prob_carrier p /\\ X 0 y >= c}
       #|  simple_expectation (p:A prob_space)\n     (\\x. c * indicator_fn {y | y IN prob_carrier p /\\ X 0 y >= c} x)
       #|  {y:A | y IN prob_carrier p /\\ X 0 y >= c} IN prob_events p
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  adapted (p:A prob_space) FF X
       #|  filtration (p:A prob_space) FF
-      #|  !p:A prob_space FF X c n.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (!m x. x IN prob_carrier p ==> &0 <= X m x)\n     ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c} <=\n         simple_expectation p\n           (\\x. X n x * indicator_fn\n                  {y | y IN prob_carrier p /\\ running_max X n y >= c} x)
+      #|  forall p:A prob_space FF X c n.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (forall m x. x IN prob_carrier p ==> &0 <= X m x)\n     ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c} <=\n         simple_expectation p\n           (\\x. X n x * indicator_fn\n                  {y | y IN prob_carrier p /\\ running_max X n y >= c} x)
       #|  0
       #|  SUC n
       #|  SUC n
@@ -81864,10 +81864,10 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  n:num
       #|  y:A
       #|  {y:A | y IN prob_carrier p /\\ running_max X n y >= c} IN\n        (FF:num->(A->bool)->bool) n
-      #|  !n. simple_rv (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((X:num->A->real) n)
       #|  (FF:num->(A->bool)->bool)
       #|  simple_expectation (p:A prob_space)\n    (\\x. X n x * indicator_fn\n           {y | y IN prob_carrier p /\\ running_max X n y >= c} x)
-      #|  !p:A prob_space FF X c n.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (!m x. x IN prob_carrier p ==> &0 <= X m x)\n     ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c}\n         <= simple_expectation p (X n)
+      #|  forall p:A prob_space FF X c n.\n     simple_submartingale p FF X /\\ &0 < c /\\\n     (forall m x. x IN prob_carrier p ==> &0 <= X m x)\n     ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c}\n         <= simple_expectation p (X n)
       #|  tau:A->num
       #|  X:num->A->real
       #|  FF:num->(A->bool)->bool
@@ -81879,21 +81879,21 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  X:num->A->real
       #|  FF:num->(A->bool)->bool
       #|  p:A prob_space
-      #|  !p:A prob_space FF X tau N.\n    simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (stopped_process X tau n) = expectation p (X 0)
+      #|  forall p:A prob_space FF X tau N.\n    simple_martingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (stopped_process X tau n) = expectation p (X 0)
       #|  FF:num->(A->bool)->bool
       #|  expectation (p:A prob_space) ((X:num->A->real) n) =\n                simple_expectation p (X n)
-      #|  !p:A prob_space FF X c n.\n    simple_submartingale p FF X /\\\n    &0 < c /\\\n    (!m x. x IN prob_carrier p ==> &0 <= X m x)\n    ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c} <=\n        expectation p (X n)
+      #|  forall p:A prob_space FF X c n.\n    simple_submartingale p FF X /\\\n    &0 < c /\\\n    (forall m x. x IN prob_carrier p ==> &0 <= X m x)\n    ==> c * prob p {x | x IN prob_carrier p /\\ running_max X n x >= c} <=\n        expectation p (X n)
       #|  a = b ==> a ==> b
       #|  UNIONS ((FF:num->(A->bool)->bool) n) = prob_carrier (p:A prob_space)
       #|  UNIONS ((FF:num->(A->bool)->bool) n) DIFF {x:A | x IN prob_carrier p /\\ (tau:A->num) x <= n} IN FF n
       #|  {x:A | x IN prob_carrier p /\\ (tau:A->num) x <= n} IN (FF:num->(A->bool)->bool) n
       #|  sub_sigma_algebra (p:A prob_space) ((FF:num->(A->bool)->bool) n)
-      #|  !p:A prob_space FF (tau:A->num) n.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ tau x > n} IN FF n
+      #|  forall p:A prob_space FF (tau:A->num) n.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ tau x > n} IN FF n
       #|  x':A
       #|  {f x:real | x:A IN prob_carrier p} = {g x | x IN prob_carrier p}
       #|  {x:A | x IN prob_carrier p /\\ f x <= v} = {x | x IN prob_carrier p /\\ g x <= v}
       #|  v:real
-      #|  !p:A prob_space f g.\n     simple_rv p g /\\ (!x. x IN prob_carrier p ==> f x = g x)\n     ==> simple_rv p f
+      #|  forall p:A prob_space f g.\n     simple_rv p g /\\ (forall x. x IN prob_carrier p ==> f x = g x)\n     ==> simple_rv p f
       #|  ~(x':num <= tau (x:B))
       #|  sum ((tau (x:B) + 1)..M) (\\i. f i * (if i <= tau x then &1 else &0)) = &0
       #|  x':num <= tau (x:B)
@@ -81902,7 +81902,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  DISJOINT (0..tau (x:B)) ((tau x + 1)..M)
       #|  i:num
       #|  0..M = (0..(tau (x:B))) UNION (((tau x) + 1)..M)
-      #|  !f (tau:B->num) M (x:B).\n     tau x <= M\n     ==> sum(0..tau x) (\\i. f i) =\n         sum(0..M) (\\i. f i * (if i <= tau x then &1 else &0))
+      #|  forall f (tau:B->num) M (x:B).\n     tau x <= M\n     ==> sum(0..tau x) (\\i. f i) =\n         sum(0..M) (\\i. f i * (if i <= tau x then &1 else &0))
       #|  i:num
       #|  tau:A->num
       #|  FF:num->(A->bool)->bool
@@ -81911,16 +81911,16 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ SUC i <= tau x} = {x | x IN prob_carrier p /\\ tau x > i}
       #|  {x:A | x IN prob_carrier p /\\ 0 <= tau x} = prob_carrier p
-      #|  !p:A prob_space FF (tau:A->num) i.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ i <= tau x} IN prob_events p
+      #|  forall p:A prob_space FF (tau:A->num) i.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ i <= tau x} IN prob_events p
       #|  (x:A) IN prob_carrier p
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ SUC n <= tau x} = {x | x IN prob_carrier p /\\ tau x > n}
-      #|  !p:A prob_space FF (tau:A->num) n.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ SUC n <= tau x} IN FF n
+      #|  forall p:A prob_space FF (tau:A->num) n.\n     filtration p FF /\\ stopping_time p FF tau\n     ==> {x | x IN prob_carrier p /\\ SUC n <= tau x} IN FF n
       #|  {y:A | y IN prob_carrier p /\\ 0 <= (tau:A->num) y} = prob_carrier p
       #|  prob (p:A prob_space) {y | y IN prob_carrier p /\\ 0 <= (tau:A->num) y} = &1
       #|  simple_expectation (p:A prob_space) (\\x. (X:num->A->real) 0 x *\n     indicator_fn {y | y IN prob_carrier p /\\ 0 <= tau y} x) = simple_expectation p (X 0)
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n     (X:num->A->real) 0 x * indicator_fn {y | y IN prob_carrier p /\\ 0 <= (tau:A->num) y} x = X 0 x
+      #|  forall x:A. x IN prob_carrier p ==>\n     (X:num->A->real) 0 x * indicator_fn {y | y IN prob_carrier p /\\ 0 <= (tau:A->num) y} x = X 0 x
       #|  i = 0
       #|  {y:A | y IN prob_carrier p /\\ SUC n <= (tau:A->num) y} IN (FF:num->(A->bool)->bool) n
       #|  (i:num) <= M
@@ -81928,7 +81928,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  n:num
       #|  ?n. i = SUC n
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !p:A prob_space FF (X:num->A->real) (tau:A->num) (M:num) (mu:real) i.\n     filtration p FF /\\\n     (!n. n <= M ==> simple_rv p (X n)) /\\\n     (!n. n <= M ==> simple_expectation p (X n) = mu) /\\\n     (!n. n <= M ==> !a. a IN FF n ==>\n       simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) = mu * prob p a) /\\\n     bounded_stopping_time p FF tau M /\\\n     i <= M\n     ==> simple_expectation p\n           (\\x. X i x * indicator_fn {y | y IN prob_carrier p /\\ i <= tau y} x) =\n         mu * prob p {y | y IN prob_carrier p /\\ i <= tau y}
+      #|  forall p:A prob_space FF (X:num->A->real) (tau:A->num) (M:num) (mu:real) i.\n     filtration p FF /\\\n     (forall n. n <= M ==> simple_rv p (X n)) /\\\n     (forall n. n <= M ==> simple_expectation p (X n) = mu) /\\\n     (forall n. n <= M ==> forall a. a IN FF n ==>\n       simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) = mu * prob p a) /\\\n     bounded_stopping_time p FF tau M /\\\n     i <= M\n     ==> simple_expectation p\n           (\\x. X i x * indicator_fn {y | y IN prob_carrier p /\\ i <= tau y} x) =\n         mu * prob p {y | y IN prob_carrier p /\\ i <= tau y}
       #|  sum ((tau (x:A) + 1)..M) (\\i. indicator_fn {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y} x) = &0
       #|  (x:A) IN prob_carrier p
       #|  sum (0..tau (x:A)) (\\i. indicator_fn {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y} x) = sum (0..tau x) (\\i. &1)
@@ -81936,7 +81936,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  DISJOINT (0..tau (x:A)) ((tau x + 1)..M)
       #|  i:num
       #|  0..M = (0..tau (x:A)) UNION ((tau x + 1)..M)
-      #|  !p:A prob_space (tau:A->num) M x.\n     x IN prob_carrier p /\\ tau x <= M\n     ==> sum(0..M) (\\i. indicator_fn {y | y IN prob_carrier p /\\ i <= tau y} x) = &(SUC(tau x))
+      #|  forall p:A prob_space (tau:A->num) M x.\n     x IN prob_carrier p /\\ tau x <= M\n     ==> sum(0..M) (\\i. indicator_fn {y | y IN prob_carrier p /\\ i <= tau y} x) = &(SUC(tau x))
       #|  indicator_fn {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y}
       #|  M:num
       #|  \\i (x:A). indicator_fn {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y} x
@@ -81956,7 +81956,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  X:num->A->real
       #|  FF:num->(A->bool)->bool
       #|  p:A prob_space
-      #|  !i. i <= M ==> simple_expectation (p:A prob_space)\n    (\\x. (X:num->A->real) i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x) =\n    mu * prob p {y | y IN prob_carrier p /\\ i <= tau y}
+      #|  forall i. i <= M ==> simple_expectation (p:A prob_space)\n    (\\x. (X:num->A->real) i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x) =\n    mu * prob p {y | y IN prob_carrier p /\\ i <= tau y}
       #|  M:num
       #|  \\i (x:A). (X:num->A->real) i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x
       #|  p:A prob_space
@@ -81968,83 +81968,83 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  \\i. (X:num->A->real) i x
       #|  (tau:A->num) x <= M
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n    sum(0..tau x) (\\i. (X:num->A->real) i x) =\n    sum(0..M) (\\i. X i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x)
+      #|  forall x:A. x IN prob_carrier p ==>\n    sum(0..tau x) (\\i. (X:num->A->real) i x) =\n    sum(0..M) (\\i. X i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x)
       #|  indicator_fn {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y}
       #|  (X:num->A->real) i
       #|  p:A prob_space
-      #|  !i. i <= M ==> simple_rv (p:A prob_space) (\\x. (X:num->A->real) i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x)
+      #|  forall i. i <= M ==> simple_rv (p:A prob_space) (\\x. (X:num->A->real) i x * indicator_fn {y | y IN prob_carrier p /\\ i <= (tau:A->num) y} x)
       #|  i:num
       #|  tau:A->num
       #|  FF:num->(A->bool)->bool
       #|  p:A prob_space
-      #|  !i. {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y} IN prob_events p
+      #|  forall i. {y:A | y IN prob_carrier p /\\ i <= (tau:A->num) y} IN prob_events p
       #|  bounded_stopping_time (p:A prob_space) FF (tau:A->num) M
-      #|  stopping_time (p:A prob_space) FF (tau:A->num) /\\ (!x. x IN prob_carrier p ==> tau x <= M)
-      #|  !p:A prob_space FF (X:num->A->real) (tau:A->num) (M:num) (mu:real).\n     filtration p FF /\\\n     (!n. n <= M ==> simple_rv p (X n)) /\\\n     (!n. n <= M ==> simple_expectation p (X n) = mu) /\\\n     (!n. n <= M ==> !a. a IN FF n ==>\n       simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n       mu * prob p a) /\\\n     bounded_stopping_time p FF tau M\n     ==> simple_expectation p (\\x. sum(0..tau x) (\\i. X i x)) =\n         mu * simple_expectation p (\\x. &(SUC(tau x)))
-      #|  decreasing_filtration (p:A prob_space) (FF:num->(A->bool)->bool) <=>\n   (!n. sub_sigma_algebra p (FF n)) /\\\n   (!m n. m <= n ==> FF n SUBSET FF m)
-      #|  simple_backward_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   decreasing_filtration p FF /\\\n   simple_adapted p FF X /\\\n   (!n. simple_rv p (X n)) /\\\n   (!n a. a IN FF (SUC n) ==>\n     simple_expectation p (\\x. X n x * indicator_fn a x) =\n     simple_expectation p (\\x. X (SUC n) x * indicator_fn a x))
-      #|  martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (!n. integrable p (X n)) /\\\n   (!n a. a IN FF n\n     ==> expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n         expectation p (\\x. X n x * indicator_fn a x))
-      #|  submartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (!n. integrable p (X n)) /\\\n   (!n a. a IN FF n\n     ==> expectation p (\\x. X n x * indicator_fn a x) <=\n         expectation p (\\x. X (SUC n) x * indicator_fn a x))
-      #|  supermartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (!n. integrable p (X n)) /\\\n   (!n a. a IN FF n\n     ==> expectation p (\\x. X (SUC n) x * indicator_fn a x) <=\n         expectation p (\\x. X n x * indicator_fn a x))
-      #|  backward_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   decreasing_filtration p FF /\\\n   adapted p FF X /\\\n   (!n. integrable p (X n)) /\\\n   (!n a. a IN FF (SUC n) ==>\n     expectation p (\\x. X n x * indicator_fn a x) =\n     expectation p (\\x. X (SUC n) x * indicator_fn a x))
+      #|  stopping_time (p:A prob_space) FF (tau:A->num) /\\ (forall x. x IN prob_carrier p ==> tau x <= M)
+      #|  forall p:A prob_space FF (X:num->A->real) (tau:A->num) (M:num) (mu:real).\n     filtration p FF /\\\n     (forall n. n <= M ==> simple_rv p (X n)) /\\\n     (forall n. n <= M ==> simple_expectation p (X n) = mu) /\\\n     (forall n. n <= M ==> forall a. a IN FF n ==>\n       simple_expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n       mu * prob p a) /\\\n     bounded_stopping_time p FF tau M\n     ==> simple_expectation p (\\x. sum(0..tau x) (\\i. X i x)) =\n         mu * simple_expectation p (\\x. &(SUC(tau x)))
+      #|  decreasing_filtration (p:A prob_space) (FF:num->(A->bool)->bool) <=>\n   (forall n. sub_sigma_algebra p (FF n)) /\\\n   (forall m n. m <= n ==> FF n SUBSET FF m)
+      #|  simple_backward_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   decreasing_filtration p FF /\\\n   simple_adapted p FF X /\\\n   (forall n. simple_rv p (X n)) /\\\n   (forall n a. a IN FF (SUC n) ==>\n     simple_expectation p (\\x. X n x * indicator_fn a x) =\n     simple_expectation p (\\x. X (SUC n) x * indicator_fn a x))
+      #|  martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (forall n. integrable p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> expectation p (\\x. X (SUC n) x * indicator_fn a x) =\n         expectation p (\\x. X n x * indicator_fn a x))
+      #|  submartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (forall n. integrable p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> expectation p (\\x. X n x * indicator_fn a x) <=\n         expectation p (\\x. X (SUC n) x * indicator_fn a x))
+      #|  supermartingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   filtration p FF /\\\n   adapted p FF X /\\\n   (forall n. integrable p (X n)) /\\\n   (forall n a. a IN FF n\n     ==> expectation p (\\x. X (SUC n) x * indicator_fn a x) <=\n         expectation p (\\x. X n x * indicator_fn a x))
+      #|  backward_martingale (p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) <=>\n   decreasing_filtration p FF /\\\n   adapted p FF X /\\\n   (forall n. integrable p (X n)) /\\\n   (forall n a. a IN FF (SUC n) ==>\n     expectation p (\\x. X n x * indicator_fn a x) =\n     expectation p (\\x. X (SUC n) x * indicator_fn a x))
       #|  nn_expectation (p:A prob_space)\n    (\\x. max (--(f x * indicator_fn (prob_carrier p) x)) (&0)) =\n    nn_expectation p (\\x. max (--f x) (&0))
       #|  nn_expectation (p:A prob_space)\n    (\\x. max (f x * indicator_fn (prob_carrier p) x) (&0)) =\n    nn_expectation p (\\x. max (f x) (&0))
-      #|  !p:A prob_space f. integrable p f\n   ==> expectation p (\\x. f x * indicator_fn (prob_carrier p) x) =\n       expectation p f
+      #|  forall p:A prob_space f. integrable p f\n   ==> expectation p (\\x. f x * indicator_fn (prob_carrier p) x) =\n       expectation p f
       #|  simple_rv (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x) /\\\n    simple_rv p (\\x. X n x * indicator_fn a x)
       #|  filtration (p:A prob_space) FF
       #|  (FF:num->(A->bool)->bool) n
       #|  (a:A->bool) IN prob_events p
-      #|  !p:A prob_space FF X. simple_martingale p FF X ==> martingale p FF X
+      #|  forall p:A prob_space FF X. simple_martingale p FF X ==> martingale p FF X
       #|  simple_rv (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x) /\\\n    simple_rv p (\\x. X n x * indicator_fn a x)
       #|  filtration (p:A prob_space) FF
       #|  (FF:num->(A->bool)->bool) n
       #|  (a:A->bool) IN prob_events p
-      #|  !p:A prob_space FF X. simple_submartingale p FF X ==> submartingale p FF X
+      #|  forall p:A prob_space FF X. simple_submartingale p FF X ==> submartingale p FF X
       #|  simple_rv (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x) /\\\n    simple_rv p (\\x. X n x * indicator_fn a x)
       #|  filtration (p:A prob_space) FF
       #|  (FF:num->(A->bool)->bool) n
       #|  (a:A->bool) IN prob_events p
-      #|  !p:A prob_space FF X. simple_supermartingale p FF X ==> supermartingale p FF X
+      #|  forall p:A prob_space FF X. simple_supermartingale p FF X ==> supermartingale p FF X
       #|  simple_rv (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (a:A->bool) x) /\\\n    simple_rv p (\\x. X n x * indicator_fn a x)
       #|  decreasing_filtration (p:A prob_space) FF
       #|  (FF:num->(A->bool)->bool) (SUC n)
       #|  (a:A->bool) IN prob_events p
-      #|  !p:A prob_space FF X.\n     simple_backward_martingale p FF X ==> backward_martingale p FF X
-      #|  !p:A prob_space FF X.\n     martingale p FF X ==> submartingale p FF X
-      #|  !p:A prob_space FF X.\n     martingale p FF X ==> supermartingale p FF X
-      #|  !p:A prob_space FF X.\n     martingale p FF X <=>\n     submartingale p FF X /\\ supermartingale p FF X
+      #|  forall p:A prob_space FF X.\n     simple_backward_martingale p FF X ==> backward_martingale p FF X
+      #|  forall p:A prob_space FF X.\n     martingale p FF X ==> submartingale p FF X
+      #|  forall p:A prob_space FF X.\n     martingale p FF X ==> supermartingale p FF X
+      #|  forall p:A prob_space FF X.\n     martingale p FF X <=>\n     submartingale p FF X /\\ supermartingale p FF X
       #|  expectation (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (prob_carrier p) x) =\n    expectation p (X (SUC n))
       #|  expectation (p:A prob_space)\n    (\\x. (X:num->A->real) n x * indicator_fn (prob_carrier p) x) =\n    expectation p (X n)
       #|  prob_carrier (p:A prob_space)
       #|  n:num
       #|  filtration (p:A prob_space) FF
       #|  prob_carrier (p:A prob_space) IN FF (n:num)
-      #|  !p:A prob_space FF X. submartingale p FF X\n     ==> !n. expectation p (X n) <= expectation p (X (SUC n))
+      #|  forall p:A prob_space FF X. submartingale p FF X\n     ==> forall n. expectation p (X n) <= expectation p (X (SUC n))
       #|  expectation (p:A prob_space) ((X:num->A->real) (m + k))
       #|  k:num
       #|  k:num
       #|  m:num <= m + k
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X. submartingale p FF X\n     ==> !m n. m <= n ==> expectation p (X m) <= expectation p (X n)
+      #|  forall p:A prob_space FF X. submartingale p FF X\n     ==> forall m n. m <= n ==> expectation p (X m) <= expectation p (X n)
       #|  expectation (p:A prob_space)\n    (\\x. (X:num->A->real) (SUC n) x * indicator_fn (prob_carrier p) x) =\n    expectation p (X (SUC n))
       #|  expectation (p:A prob_space)\n    (\\x. (X:num->A->real) n x * indicator_fn (prob_carrier p) x) =\n    expectation p (X n)
       #|  prob_carrier (p:A prob_space)
       #|  n:num
       #|  filtration (p:A prob_space) FF
       #|  prob_carrier (p:A prob_space) IN FF (n:num)
-      #|  !p:A prob_space FF X. supermartingale p FF X\n     ==> !n. expectation p (X (SUC n)) <= expectation p (X n)
+      #|  forall p:A prob_space FF X. supermartingale p FF X\n     ==> forall n. expectation p (X (SUC n)) <= expectation p (X n)
       #|  expectation (p:A prob_space) ((X:num->A->real) (m + k))
       #|  k:num
       #|  k:num
       #|  m:num <= m + k
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X. supermartingale p FF X\n     ==> !m n. m <= n ==> expectation p (X n) <= expectation p (X m)
+      #|  forall p:A prob_space FF X. supermartingale p FF X\n     ==> forall m n. m <= n ==> expectation p (X n) <= expectation p (X m)
       #|  n:num
       #|  m:num
-      #|  !p:A prob_space FF X. martingale p FF X\n     ==> !m n. expectation p (X m) = expectation p (X n)
-      #|  !p:A prob_space FF c. filtration p FF\n     ==> martingale p FF (\\n x. c)
+      #|  forall p:A prob_space FF X. martingale p FF X\n     ==> forall m n. expectation p (X m) = expectation p (X n)
+      #|  forall p:A prob_space FF c. filtration p FF\n     ==> martingale p FF (\\n x. c)
       #|  v:real
       #|  random_variable (p:A prob_space) (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  filtration (p:A prob_space) FF
@@ -82072,7 +82072,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  adapted (p:A prob_space) FF (X:num->A->real)
       #|  n:num
       #|  n:num
-      #|  !p:A prob_space FF X tau n.\n    adapted p FF X /\\ filtration p FF /\\ stopping_time p FF tau\n    ==> random_variable p (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau n.\n    adapted p FF X /\\ filtration p FF /\\ stopping_time p FF tau\n    ==> random_variable p (stopped_process X tau n)
       #|  MIN n ((tau:A->num) x) = tau x
       #|  MIN (SUC n) ((tau:A->num) x) = tau x
       #|  MIN (SUC n) ((tau:A->num) x) = SUC n
@@ -82084,7 +82084,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  n:num
       #|  n:num
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !p:A prob_space FF X tau N n.\n    adapted p FF X /\\ filtration p FF /\\\n    bounded_stopping_time p FF tau N /\\\n    (!k. integrable p (X k))\n    ==> integrable p (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau N n.\n    adapted p FF X /\\ filtration p FF /\\\n    bounded_stopping_time p FF tau N /\\\n    (forall k. integrable p (X k))\n    ==> integrable p (stopped_process X tau n)
       #|  integrable (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn (A:A->bool) x) /\\\n                 integrable p (\\x. X n x * indicator_fn A x)
       #|  (\\x:A. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) =\n      (\\x. X (SUC n) x * indicator_fn A x - X n x * indicator_fn A x)
       #|  expectation (p:A prob_space) (\\x. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) = &0
@@ -82104,12 +82104,12 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  (A:A->bool) IN prob_events (p:A prob_space)
       #|  (A:A->bool) IN (FF:num->(A->bool)->bool) n
       #|  A = {x:A | x IN prob_carrier p /\\ (tau:A->num) x > n}
-      #|  !n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) =\n        expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) =\n        expectation p (\\x. X n x * indicator_fn a x)
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !k. integrable (p:A prob_space) ((X:num->A->real) k)
+      #|  forall k. integrable (p:A prob_space) ((X:num->A->real) k)
       #|  adapted (p:A prob_space) FF (X:num->A->real)
       #|  filtration (p:A prob_space) FF
-      #|  !p:A prob_space FF X tau N.\n    martingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (stopped_process X tau n) = expectation p (X 0)
+      #|  forall p:A prob_space FF X tau N.\n    martingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (stopped_process X tau n) = expectation p (X 0)
       #|  (\\x:A. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) =\n       (\\x. X (SUC n) x * indicator_fn A x - X n x * indicator_fn A x)
       #|  expectation (p:A prob_space) (\\x. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) =\n      expectation p (\\x. X (SUC n) x * indicator_fn A x) -\n      expectation p (\\x. X n x * indicator_fn A x)
       #|  integrable (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn (A:A->bool) x) /\\\n                 integrable p (\\x. X n x * indicator_fn A x)
@@ -82133,12 +82133,12 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  A = {x:A | x IN prob_carrier p /\\ (tau:A->num) x > n}
       #|  expectation (p:A prob_space) (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  stopped_process (X:num->A->real) (tau:A->num) 0 = X 0
-      #|  !n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) n x * indicator_fn a x) <=\n        expectation p (\\x. X (SUC n) x * indicator_fn a x)
+      #|  forall n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) n x * indicator_fn a x) <=\n        expectation p (\\x. X (SUC n) x * indicator_fn a x)
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !k. integrable (p:A prob_space) ((X:num->A->real) k)
+      #|  forall k. integrable (p:A prob_space) ((X:num->A->real) k)
       #|  adapted (p:A prob_space) FF (X:num->A->real)
       #|  filtration (p:A prob_space) FF
-      #|  !p:A prob_space FF X tau N.\n    submartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (X 0) <= expectation p (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau N.\n    submartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (X 0) <= expectation p (stopped_process X tau n)
       #|  (\\x:A. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) =\n       (\\x. X (SUC n) x * indicator_fn A x - X n x * indicator_fn A x)
       #|  expectation (p:A prob_space) (\\x. ((X:num->A->real) (SUC n) x - X n x) * indicator_fn (A:A->bool) x) =\n      expectation p (\\x. X (SUC n) x * indicator_fn A x) -\n      expectation p (\\x. X n x * indicator_fn A x)
       #|  integrable (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn (A:A->bool) x) /\\\n                 integrable p (\\x. X n x * indicator_fn A x)
@@ -82162,18 +82162,18 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  A = {x:A | x IN prob_carrier p /\\ (tau:A->num) x > n}
       #|  expectation (p:A prob_space) (stopped_process (X:num->A->real) (tau:A->num) n)
       #|  stopped_process (X:num->A->real) (tau:A->num) 0 = X 0
-      #|  !n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) <=\n        expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall n a. a IN (FF:num->(A->bool)->bool) n\n    ==> expectation (p:A prob_space) (\\x. (X:num->A->real) (SUC n) x * indicator_fn a x) <=\n        expectation p (\\x. X n x * indicator_fn a x)
       #|  stopping_time (p:A prob_space) FF (tau:A->num)
-      #|  !k. integrable (p:A prob_space) ((X:num->A->real) k)
+      #|  forall k. integrable (p:A prob_space) ((X:num->A->real) k)
       #|  adapted (p:A prob_space) FF (X:num->A->real)
       #|  filtration (p:A prob_space) FF
-      #|  !p:A prob_space FF X tau N.\n    supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (stopped_process X tau n) <= expectation p (X 0)
+      #|  forall p:A prob_space FF X tau N.\n    supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (stopped_process X tau n) <= expectation p (X 0)
       #|  N:num
       #|  FF:num->(A->bool)->bool
-      #|  !p:A prob_space FF X tau N.\n    simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (X 0) <= expectation p (stopped_process X tau n)
+      #|  forall p:A prob_space FF X tau N.\n    simple_submartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (X 0) <= expectation p (stopped_process X tau n)
       #|  N:num
       #|  FF:num->(A->bool)->bool
-      #|  !p:A prob_space FF X tau N.\n    simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> !n. expectation p (stopped_process X tau n) <= expectation p (X 0)
+      #|  forall p:A prob_space FF X tau N.\n    simple_supermartingale p FF X /\\ bounded_stopping_time p FF tau N\n    ==> forall n. expectation p (stopped_process X tau n) <= expectation p (X 0)
       #|  m + k:num
       #|  m:num
       #|  filtration (p:A prob_space) FF
@@ -82184,7 +82184,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  m:num <= m + k
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X. martingale p FF X\n    ==> !m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x)
+      #|  forall p:A prob_space FF X. martingale p FF X\n    ==> forall m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x)
       #|  m + k:num
       #|  m:num
       #|  filtration (p:A prob_space) FF
@@ -82196,7 +82196,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  m:num <= m + k
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X. submartingale p FF X\n    ==> !m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X m x * indicator_fn a x) <=\n          expectation p (\\x. X n x * indicator_fn a x)
+      #|  forall p:A prob_space FF X. submartingale p FF X\n    ==> forall m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X m x * indicator_fn a x) <=\n          expectation p (\\x. X n x * indicator_fn a x)
       #|  m + k:num
       #|  m:num
       #|  filtration (p:A prob_space) FF
@@ -82208,7 +82208,7 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  m:num <= m + k
       #|  n - m:num
       #|  ?k. n = m + k:num
-      #|  !p:A prob_space FF X. supermartingale p FF X\n    ==> !m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) <=\n          expectation p (\\x. X m x * indicator_fn a x)
+      #|  forall p:A prob_space FF X. supermartingale p FF X\n    ==> forall m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) <=\n          expectation p (\\x. X m x * indicator_fn a x)
       #|  a:A->bool
       #|  m:num
       #|  n:num
@@ -82219,11 +82219,11 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  MIN m n = m
       #|  n:num
       #|  m:num
-      #|  !p:A prob_space FF X. martingale p FF X\n    ==> !m n a. a IN FF (MIN m n)\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x)
+      #|  forall p:A prob_space FF X. martingale p FF X\n    ==> forall m n a. a IN FF (MIN m n)\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x)
       #|  a:A->bool
       #|  SUC n
       #|  n:num
-      #|  !p:A prob_space FF X.\n    martingale p FF X <=>\n    filtration p FF /\\ adapted p FF X /\\ (!n. integrable p (X n)) /\\\n    (!m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x))
+      #|  forall p:A prob_space FF X.\n    martingale p FF X <=>\n    filtration p FF /\\ adapted p FF X /\\ (forall n. integrable p (X n)) /\\\n    (forall m n a. m <= n /\\ a IN FF m\n      ==> expectation p (\\x. X n x * indicator_fn a x) =\n          expectation p (\\x. X m x * indicator_fn a x))
       #|sub_sigma_algebra =  |- (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\G:fun(fun('A,bool),bool). (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). ((#=:fun(bool,fun(bool,bool)) ((#sub_sigma_algebra:fun(prob_space('A),fun(fun(fun('A,bool),bool),bool)) p:prob_space('A)) G:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) (#sigma_algebra:fun(fun(fun('A,bool),bool),bool) G:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) G:fun(fun('A,bool),bool)) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) G:fun(fun('A,bool),bool))) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A))))))))))
       #|SUB_SIGMA_ALGEBRA_CARRIER_IN =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\G:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#sub_sigma_algebra:fun(prob_space('A),fun(fun(fun('A,bool),bool),bool)) p:prob_space('A)) G:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A))) G:fun(fun('A,bool),bool)))))))
       #|SUB_SIGMA_ALGEBRA_IN_EVENTS =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\G:fun(fun('A,bool),bool). (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#sub_sigma_algebra:fun(prob_space('A),fun(fun(fun('A,bool),bool),bool)) p:prob_space('A)) G:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) G:fun(fun('A,bool),bool)))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A))))))))))

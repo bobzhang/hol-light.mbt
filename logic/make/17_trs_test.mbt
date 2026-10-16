@@ -10418,7 +10418,7 @@ test "Logic/trs matches Logic/trs.ml" {
       #|0..0..solved at 3
       #|0..0..solved at 2
       #|Logic/trs quotations (116):
-      #|  (!i l r.\n         (l,r) IN rws ==> TRS rws (termsubst i l) (termsubst i r)) /\\\n   (!s t f largs rargs.\n         TRS rws s t ==> TRS rws (Fn f (APPEND largs (CONS s rargs)))\n                                 (Fn f (APPEND largs (CONS t rargs))))
+      #|  (forall i l r.\n         (l,r) IN rws ==> TRS rws (termsubst i l) (termsubst i r)) /\\\n   (forall s t f largs rargs.\n         TRS rws s t ==> TRS rws (Fn f (APPEND largs (CONS s rargs)))\n                                 (Fn f (APPEND largs (CONS t rargs))))
       #|  z:A = y
       #|  z:A
       #|  v:A
@@ -10429,10 +10429,10 @@ test "Logic/trs matches Logic/trs.ml" {
       #|  v:A
       #|  u:A
       #|  x:A
-      #|  !x:A y:A. R x y ==> (?y':A. S x y')
+      #|  forall x:A y:A. R x y ==> (?y':A. S x y')
       #|  u:A
       #|  x:A
-      #|  !R S. SN R /\\\n         CR(RTC R) /\\\n         (!x y. S x y ==> TC R x y) /\\\n         (!x y. R x y ==> ?y'. S x y')\n         ==> !y:A. NORMAL(R) y ==> !x. RTC R x y ==> RTC S x y
+      #|  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> forall y:A. NORMAL(R) y ==> forall x. RTC R x y ==> RTC S x y
       #|  S:A->A->bool
       #|  R:A->A->bool
       #|  z:A
@@ -10447,32 +10447,32 @@ test "Logic/trs matches Logic/trs.ml" {
       #|  x:A
       #|  INV(TC(R:A->A->bool))
       #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  !R S. SN R /\\\n         CR(RTC R) /\\\n         (!x:A y. S x y ==> TC R x y) /\\\n         (!x:A y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S)
+      #|  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x:A y. S x y ==> TC R x y) /\\\n         (forall x:A y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S)
       #|  w:A
       #|  S:A->A->bool
       #|  R:A->A->bool
       #|  w:A
       #|  z:A
-      #|  !x:A y. TC S x y ==> TC R x y
-      #|  !x:A y. RTC S x y ==> RTC R x y
+      #|  forall x:A y. TC S x y ==> TC R x y
+      #|  forall x:A y. RTC S x y ==> RTC R x y
       #|  z:A
-      #|  !R S. SN R /\\\n         CR(RTC R) /\\\n         (!x y. S x y ==> TC R x y) /\\\n         (!x y. R x y ==> ?y'. S x y')\n         ==> (!x:A y. JOINABLE S x y = JOINABLE R x y)
+      #|  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. JOINABLE S x y = JOINABLE R x y)
       #|  S:A->A->bool
       #|  R:A->A->bool
       #|  S:A->A->bool
       #|  R:A->A->bool
-      #|  !R S. SN R /\\\n         CR(RTC R) /\\\n         (!x y. S x y ==> TC R x y) /\\\n         (!x y. R x y ==> ?y'. S x y')\n         ==> (!x:A y. RSTC S x y = RSTC R x y)
+      #|  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. RSTC S x y = RSTC R x y)
       #|  R:A->A->bool
-      #|  !R S. SN R /\\\n         CR(RTC R) /\\\n         (!x y. S x y ==> TC R x y) /\\\n         (!x y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S) /\\ (!x:A y. RSTC S x y = RSTC R x y)
+      #|  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S) /\\ (forall x:A y. RSTC S x y = RSTC R x y)
       #|  u:A
       #|  u:A
       #|  (S':A->A->bool) x y
       #|  y:A
       #|  x:A
-      #|  !R S S'.\n        SN(\\x y. R x y \\/ S x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (!s:A t. S s t ==> ?t'. S' s t') /\\\n        (!s t. S' s t ==> ?u. S s u /\\ RTC (\\x y. R x y \\/ S x y) u t)\n        ==> SN(\\x y. R x y \\/ S' x y) /\\\n            CR(RTC(\\x y. R x y \\/ S' x y)) /\\\n            (!x y. RSTC(\\x y. R x y \\/ S' x y) x y =\n                   RSTC(\\x y. R x y \\/ S x y) x y)
+      #|  forall R S S'.\n        SN(\\x y. R x y \\/ S x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s:A t. S s t ==> ?t'. S' s t') /\\\n        (forall s t. S' s t ==> ?u. S s u /\\ RTC (\\x y. R x y \\/ S x y) u t)\n        ==> SN(\\x y. R x y \\/ S' x y) /\\\n            CR(RTC(\\x y. R x y \\/ S' x y)) /\\\n            (forall x y. RSTC(\\x y. R x y \\/ S' x y) x y =\n                   RSTC(\\x y. R x y \\/ S x y) x y)
       #|  y:A
       #|  x:A
-      #|  !R S. SN(\\x y. R x y \\/ S x y) /\\\n         CR(RTC(\\x y. R x y \\/ S x y)) /\\\n         (!x:A y. S x y ==> ?z. R x z)\n         ==> SN(R) /\\ CR(RTC R) /\\\n             (!x y. RSTC(R) x y = RSTC(\\x y. R x y \\/ S x y) x y)
+      #|  forall R S. SN(\\x y. R x y \\/ S x y) /\\\n         CR(RTC(\\x y. R x y \\/ S x y)) /\\\n         (forall x:A y. S x y ==> ?z. R x z)\n         ==> SN(R) /\\ CR(RTC R) /\\\n             (forall x y. RSTC(R) x y = RSTC(\\x y. R x y \\/ S x y) x y)
       #|  s:A
       #|  s':A
       #|  RTC R (s:A) s'
@@ -10530,7 +10530,7 @@ test "Logic/trs matches Logic/trs.ml" {
       #|  u:A
       #|  u:A
       #|  s:A
-      #|  !R S S' t.\n        SN(\\x y. R x y \\/ S x y \\/ S' x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (!s t. S s t\n               ==> ?s' t'. RTC R s s' /\\ RTC R t t' /\\\n                           (S' s' t' \\/ S' t' s')) /\\\n        NORMAL(\\x y. R x y \\/ S x y) t\n        ==> !s:A. RTC (\\x y. R x y \\/ S x y) s t\n                  ==> RTC (\\x y. R x y \\/ S' x y) s t
+      #|  forall R S S' t.\n        SN(\\x y. R x y \\/ S x y \\/ S' x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s t. S s t\n               ==> ?s' t'. RTC R s s' /\\ RTC R t t' /\\\n                           (S' s' t' \\/ S' t' s')) /\\\n        NORMAL(\\x y. R x y \\/ S x y) t\n        ==> forall s:A. RTC (\\x y. R x y \\/ S x y) s t\n                  ==> RTC (\\x y. R x y \\/ S' x y) s t
       #|  u:A
       #|  u:A
       #|  u:A

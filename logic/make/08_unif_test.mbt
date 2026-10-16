@@ -8254,22 +8254,22 @@ test "Logic/unif matches Logic/unif.ml" {
       #|0..0..2..6..18..61..129..390..828..solved at 953
       #|0..0..1..4..9..22..42..90..165..solved at 213
       #|Logic/unif quotations (666):
-      #|  !P Q l. EX P l /\\ Q <=> EX (\\x. P x /\\ Q) l
-      #|  !l. (!x. ~(P x) ==> (Q x <=> R x)) ==> (~EX P l ==> (EX Q l <=> EX R l))
-      #|  !l. ALL (\\x. f x = g x) l ==> (EX f l <=> EX g l)
-      #|  !d. RTC(<<) ((u:num->A)(n + d))(u n) 
+      #|  forall P Q l. EX P l /\\ Q <=> EX (\\x. P x /\\ Q) l
+      #|  forall l. (forall x. ~(P x) ==> (Q x <=> R x)) ==> (~EX P l ==> (EX Q l <=> EX R l))
+      #|  forall l. ALL (\\x. f x = g x) l ==> (EX f l <=> EX g l)
+      #|  forall d. RTC(<<) ((u:num->A)(n + d))(u n) 
       #|  d:num
       #|  n:num
-      #|  !m n. m < n ==> TC(<<) ((u:num->A) n) (u m)
+      #|  forall m n. m < n ==> TC(<<) ((u:num->A) n) (u m)
       #|  {n | (u:num->A)(n) IN s} = UNIV:num->bool
       #|  FINITE(s:A->bool)
       #|  s:A->bool
       #|  u:num->A
-      #|  !n. (u:num->A)(n) IN s
+      #|  forall n. (u:num->A)(n) IN s
       #|  u:num->A
-      #|  !(<<) s. FINITE s /\\\n            (!x:A. ~(TC(<<) x x)) /\\ (!x y. x << y ==> y IN s)\n            ==> WF(<<)
+      #|  forall(<<) s. FINITE s /\\\n            (forall x:A. ~(TC(<<) x x)) /\\ (forall x y. x << y ==> y IN s)\n            ==> WF(<<)
       #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-      #|  !x:A y. TC (\\u v. R v u) x y <=> TC R y x
+      #|  forall x:A y. TC (\\u v. R v u) x y <=> TC R y x
       #|  \\y:A. P(y) /\\ TC R y a
       #|  a:A
       #|  (b ==> c) ==> (a ==> b) ==> (a ==> c)
@@ -8297,7 +8297,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  a:A
       #|  \\x:A. ?y:A. s(x,y) \\/ s(y,x)
       #|  s:A#A->bool
-      #|  WF(\\x y. R x y \\/ S x y) /\\ (!x y z. ~(P x y /\\ P y z))\n   ==> WF(\\(x1:A,y1) (x2,y2). S x1 x2 /\\ S y1 y2 \\/\n                              R x1 x2 /\\ (y1 = y2) \\/\n                              P x2 y2 /\\ (x1 = y2) /\\ (x2 = y1))
+      #|  WF(\\x y. R x y \\/ S x y) /\\ (forall x y z. ~(P x y /\\ P y z))\n   ==> WF(\\(x1:A,y1) (x2,y2). S x1 x2 /\\ S y1 y2 \\/\n                              R x1 x2 /\\ (y1 = y2) \\/\n                              P x2 y2 /\\ (x1 = y2) /\\ (x2 = y1))
       #|  l:(A)list
       #|  l:(A)list
       #|  {a:A | MEM a (CONS h t)} = h INSERT {a | MEM a t}
@@ -8310,7 +8310,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  multiplicity (multiset (\\x:A. LENGTH (FILTER ((=) x) l))) a =\n        LENGTH (FILTER ((=) a) l)
       #|  :A
       #|  :(A)list
-      #|  !a:A l. ~(LENGTH (FILTER ((=) a) l) = 0) ==> MEM a l
+      #|  forall a:A l. ~(LENGTH (FILTER ((=) a) l) = 0) ==> MEM a l
       #|  multiset(\\x:A. LENGTH (FILTER ((=) x) m))
       #|  a:A
       #|  multiset(\\x:A. LENGTH (FILTER ((=) x) l))
@@ -8318,7 +8318,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  l:(A)list
       #|  a:A
       #|  \\l. multiset(\\x:A. LENGTH (FILTER ((=) x) l))
-      #|  WF(R)\n   ==> WF(\\l1 l2. ?h:A t l0.\n             (l2 = CONS h t) /\\ (l1 = APPEND l0 t) /\\\n             (!k. MEM k l0 ==> R k h))
+      #|  WF(R)\n   ==> WF(\\l1 l2. ?h:A t l0.\n             (l2 = CONS h t) /\\ (l1 = APPEND l0 t) /\\\n             (forall k. MEM k l0 ==> R k h))
       #|  b:A
       #|  b:A
       #|  a:A
@@ -8332,7 +8332,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  P:A->bool
       #|  m:A->num
       #|  P:A->bool
-      #|  !R (m:A->num).\n        WF(R) /\\ (!x y. R x y ==> m x <= m y)\n        ==> WF(\\x y. MEASURE m x y \\/ R x y)
+      #|  forall R (m:A->num).\n        WF(R) /\\ (forall x y. R x y ==> m x <= m y)\n        ==> WF(\\x y. MEASURE m x y \\/ R x y)
       #|  (s:num->A#B) (SUC n)
       #|  (s:num->A#B) n
       #|  n:num
@@ -8347,9 +8347,9 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  0
       #|  FST((s:num->A#B) 0)
       #|  s:num->A#B
-      #|  (!x. P x ==> WF(R x))\n   ==> WF(\\(x',y') (x:A,y:B). P(x) /\\ (x' = x) /\\ R x y' y)
+      #|  (forall x. P x ==> WF(R x))\n   ==> WF(\\(x',y') (x:A,y:B). P(x) /\\ (x' = x) /\\ R x y' y)
       #|  OCC env (x:num) y <=> ?t. MEM (x,t) env /\\ y IN FVT(t)
-      #|  LOOPFREE env <=> !z. ~(TC (OCC env) z z)
+      #|  LOOPFREE env <=> forall z. ~(TC (OCC env) z z)
       #|  s:term
       #|  OCC (CONS (x,t) env) v z
       #|  y:num
@@ -8362,7 +8362,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  s:term
       #|  OCC (CONS (x,t) env) u v
       #|  a /\\ ~b ==> c <=> a ==> ~b ==> c
-      #|  !env x t u v.\n        TC(OCC (CONS (x,t) env)) u v /\\ ~(TC(OCC env) u v)\n        ==> ?y. RTC(OCC env) u x /\\ y IN FVT(t) /\\ RTC(OCC env) y v
+      #|  forall env x t u v.\n        TC(OCC (CONS (x,t) env)) u v /\\ ~(TC(OCC env) u v)\n        ==> ?y. RTC(OCC env) u x /\\ y IN FVT(t) /\\ RTC(OCC env) y v
       #|  LOOPFREE env /\\ ~(?y. y IN FVT(t) /\\ RTC (OCC env) y x)\n   ==> LOOPFREE (CONS (x,t) env)
       #|  RTC (OCC env) y x
       #|  t:term
@@ -8374,15 +8374,15 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  set_of_list (MAP FST (env:(num#term)list))
-      #|  !env. LOOPFREE env ==> WF(\\x y. OCC env y x)
+      #|  forall env. LOOPFREE env ==> WF(\\x y. OCC env y x)
       #|  \\n. s(SUC n):term
       #|  x:num->num
       #|  x:num->num
       #|  s:num->term
       #|  ~a ==> ~b <=> b ==> a
-      #|  !env. LOOPFREE(env) ==> WF(\\s t. ?y. y IN FVT(t) /\\ MEM (y,s) env)
-      #|  !env x.\n     LOOPFREE(env)\n     ==> ?loopcheck. !t.\n               loopcheck t <=>\n                  ?y. y IN FVT(t) /\\\n                            ((y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck s)
-      #|  !env x.\n        LOOPFREE(env)\n        ==> (!x y. loopcheck env x (V y) <=>\n                   (y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck env x s) /\\\n            (!f args. loopcheck env x (Fn f args) <=>\n                   EX (loopcheck env x) args)
+      #|  forall env. LOOPFREE(env) ==> WF(\\s t. ?y. y IN FVT(t) /\\ MEM (y,s) env)
+      #|  forall env x.\n     LOOPFREE(env)\n     ==> ?loopcheck. forall t.\n               loopcheck t <=>\n                  ?y. y IN FVT(t) /\\\n                            ((y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck s)
+      #|  forall env x.\n        LOOPFREE(env)\n        ==> (forall x y. loopcheck env x (V y) <=>\n                   (y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck env x s) /\\\n            (forall f args. loopcheck env x (Fn f args) <=>\n                   EX (loopcheck env x) args)
       #|  y:num
       #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
       #|  x:num = y
@@ -8391,14 +8391,14 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  t:term
       #|  t:term
       #|  ?y. y IN FVT t /\\ RTC (OCC env) y x
-      #|  !env x t. LOOPFREE(env)\n             ==> (loopcheck env x t <=> ~LOOPFREE (CONS (x,t) env))
+      #|  forall env x t. LOOPFREE(env)\n             ==> (loopcheck env x t <=> ~LOOPFREE (CONS (x,t) env))
       #|  rightsubst (x,t) (y:num,s) =\n     y,termsubst (\\z. if z = x then t else V(z)) s
       #|  b:bool
       #|  (if b then x else y) = (if ~b then y else x)
-      #|  ?SOLVE. !pr. SOLVE pr =\n                  if SND pr = [] then FST pr\n                  else SOLVE (CONS (HD(SND pr))\n                                   (MAP (rightsubst (HD(SND pr))) (FST pr)),\n                              MAP (rightsubst (HD(SND pr))) (TL(SND pr)))
+      #|  ?SOLVE. forall pr. SOLVE pr =\n                  if SND pr = [] then FST pr\n                  else SOLVE (CONS (HD(SND pr))\n                                   (MAP (rightsubst (HD(SND pr))) (FST pr)),\n                              MAP (rightsubst (HD(SND pr))) (TL(SND pr)))
       #|  SOLVE sol uns = SOLVEC (sol,uns)
-      #|  (!sol. SOLVE sol [] = sol) /\\\n   (!sol p oth. SOLVE sol (CONS p oth) =\n                SOLVE (CONS p (MAP (rightsubst p) sol))\n                      (MAP (rightsubst p) oth))
-      #|  CONFLICTFREE l <=> !x. LENGTH (FILTER (\\(y:num,s:term). y = x) l) <= 1
+      #|  (forall sol. SOLVE sol [] = sol) /\\\n   (forall sol p oth. SOLVE sol (CONS p oth) =\n                SOLVE (CONS p (MAP (rightsubst p) sol))\n                      (MAP (rightsubst p) oth))
+      #|  CONFLICTFREE l <=> forall x. LENGTH (FILTER (\\(y:num,s:term). y = x) l) <= 1
       #|  x:num
       #|  z:num
       #|  v IN FVT p
@@ -8410,9 +8410,9 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  oth:(num#term)list
       #|  t:term
       #|  x:num
-      #|  !p oth x y.\n        TC(OCC (MAP (rightsubst p) oth)) x y ==> TC(OCC (CONS p oth)) x y
-      #|  !p oth. LOOPFREE(CONS p oth) ==> LOOPFREE(MAP (rightsubst p) oth)
-      #|  !p x. (\\(y,s). y = x) o rightsubst p = (\\(y,s). y = x)
+      #|  forall p oth x y.\n        TC(OCC (MAP (rightsubst p) oth)) x y ==> TC(OCC (CONS p oth)) x y
+      #|  forall p oth. LOOPFREE(CONS p oth) ==> LOOPFREE(MAP (rightsubst p) oth)
+      #|  forall p x. (\\(y,s). y = x) o rightsubst p = (\\(y,s). y = x)
       #|  CONFLICTFREE(APPEND sol (CONS p oth))\n   ==> CONFLICTFREE(APPEND (CONS p (MAP (rightsubst p) sol))\n                           (MAP (rightsubst p) oth))
       #|  w:num
       #|  r = SND(p:num#term)
@@ -8427,9 +8427,9 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  z:num
       #|  MEM (y,s)\n       (APPEND (CONS (x,t) (MAP (rightsubst (x,t)) sol))\n       (MAP (rightsubst (x,t)) oth))
       #|  p:num#term
-      #|  !x. (?t. MEM (x,t) (CONS p (MAP (rightsubst p) sol))) <=>\n                    (?t. MEM (x,t) (CONS p sol))
-      #|  LOOPFREE(CONS p oth) /\\\n   (!x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol (CONS p oth))\n              ==> ~(x IN FVT(s)))\n   ==> (!x y s t. MEM (x,t) (CONS p (MAP (rightsubst p) sol)) /\\\n                  MEM (y,s) (APPEND (CONS p (MAP (rightsubst p) sol))\n                                    (MAP (rightsubst p) oth))\n                  ==> ~(x IN FVT(s)))
-      #|  (!x t y s. P y s /\\ (x = y) /\\ (t = f s) ==> Q x t) <=>\n     (!x t s. P x s ==> Q x (f s))
+      #|  forall x. (?t. MEM (x,t) (CONS p (MAP (rightsubst p) sol))) <=>\n                    (?t. MEM (x,t) (CONS p sol))
+      #|  LOOPFREE(CONS p oth) /\\\n   (forall x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol (CONS p oth))\n              ==> ~(x IN FVT(s)))\n   ==> (forall x y s t. MEM (x,t) (CONS p (MAP (rightsubst p) sol)) /\\\n                  MEM (y,s) (APPEND (CONS p (MAP (rightsubst p) sol))\n                                    (MAP (rightsubst p) oth))\n                  ==> ~(x IN FVT(s)))
+      #|  (forall x t y s. P y s /\\ (x = y) /\\ (t = f s) ==> Q x t) <=>\n     (forall x t s. P x s ==> Q x (f s))
       #|  (\\x. termsubst i (if x = y then s else V x)) = i
       #|  s:term
       #|  y:num
@@ -8440,11 +8440,11 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  l:(num#term)list
       #|  APPEND sol (oth:(num#term)list)
       #|  a \\/ b \\/ c <=> b \\/ a \\/ c
-      #|  (!x t. MEM (x,t) (APPEND sol (CONS p oth))\n          ==> (i(x) = termsubst i t)) <=>\n   (!x t. MEM (x,t) (APPEND (CONS p (MAP (rightsubst p) sol))\n                            (MAP (rightsubst p) oth))\n          ==> (i(x) = termsubst i t))
+      #|  (forall x t. MEM (x,t) (APPEND sol (CONS p oth))\n          ==> (i(x) = termsubst i t)) <=>\n   (forall x t. MEM (x,t) (APPEND (CONS p (MAP (rightsubst p) sol))\n                            (MAP (rightsubst p) oth))\n          ==> (i(x) = termsubst i t))
       #|  sol:(num#term)list
-      #|  !n env sol. (LENGTH env = n) /\\\n               LOOPFREE(env) /\\\n               CONFLICTFREE(APPEND sol env) /\\\n               (!x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol env)\n                          ==> ~(x IN FVT(s)))\n               ==> CONFLICTFREE(SOLVE sol env) /\\\n                   (!i. (!x t. MEM (x,t) (APPEND sol env)\n                               ==> (i x = termsubst i t)) <=>\n                        (!x t. MEM (x,t) (SOLVE sol env)\n                               ==> (i x = termsubst i t))) /\\\n                   !x y s t. MEM (x,t) (SOLVE sol env) /\\\n                             MEM (y,s) (SOLVE sol env)\n                             ==> ~(x IN FVT(s))
-      #|  !x:num t:term. MEM (x,t) env = MEM (x,t) (APPEND [] env)
-      #|  !env.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> CONFLICTFREE(SOLVE [] env) /\\\n            (!i. (!x t. MEM (x,t) env ==> (i x = termsubst i t)) <=>\n                 (!x t. MEM (x,t) (SOLVE [] env) ==> (i x = termsubst i t))) /\\\n            !x y s t. MEM (x,t) (SOLVE [] env) /\\ MEM (y,s) (SOLVE [] env)\n                      ==> ~(x IN FVT s)
+      #|  forall n env sol. (LENGTH env = n) /\\\n               LOOPFREE(env) /\\\n               CONFLICTFREE(APPEND sol env) /\\\n               (forall x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol env)\n                          ==> ~(x IN FVT(s)))\n               ==> CONFLICTFREE(SOLVE sol env) /\\\n                   (forall i. (forall x t. MEM (x,t) (APPEND sol env)\n                               ==> (i x = termsubst i t)) <=>\n                        (forall x t. MEM (x,t) (SOLVE sol env)\n                               ==> (i x = termsubst i t))) /\\\n                   forall x y s t. MEM (x,t) (SOLVE sol env) /\\\n                             MEM (y,s) (SOLVE sol env)\n                             ==> ~(x IN FVT(s))
+      #|  forall x:num t:term. MEM (x,t) env = MEM (x,t) (APPEND [] env)
+      #|  forall env.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> CONFLICTFREE(SOLVE [] env) /\\\n            (forall i. (forall x t. MEM (x,t) env ==> (i x = termsubst i t)) <=>\n                 (forall x t. MEM (x,t) (SOLVE [] env) ==> (i x = termsubst i t))) /\\\n            forall x y s t. MEM (x,t) (SOLVE [] env) /\\ MEM (y,s) (SOLVE [] env)\n                      ==> ~(x IN FVT s)
       #|  y:num = z
       #|  s:term
       #|  y:num
@@ -8453,13 +8453,13 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  z:num
-      #|  !x. LENGTH (FILTER (\\(y:num,s:term). y = x) env) <= 1
+      #|  forall x. LENGTH (FILTER (\\(y:num,s:term). y = x) env) <= 1
       #|  MEM z (MAP FST (env:(num#term)list))
       #|  w:num
       #|  (@y. (z = y) /\\ MEM y (MAP FST (env:(num#term)list))) = z
       #|  z:num
       #|  z:num
-      #|  !env x. LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ?istriv. !t. istriv t =\n     if t = V x then TT\n     else if ?y. (t = V y) /\\ MEM y (MAP FST env)\n          then istriv (ASSOC (@y. (t = V y) /\\ MEM y (MAP FST env)) env)\n     else if x IN FVT(t) then Exception\n     else if ?y s. y IN FVT(t) /\\ MEM (y,s) env /\\ ~(istriv s = FF)\n          then Exception else FF
+      #|  forall env x. LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ?istriv. forall t. istriv t =\n     if t = V x then TT\n     else if ?y. (t = V y) /\\ MEM y (MAP FST env)\n          then istriv (ASSOC (@y. (t = V y) /\\ MEM y (MAP FST env)) env)\n     else if x IN FVT(t) then Exception\n     else if ?y s. y IN FVT(t) /\\ MEM (y,s) env /\\ ~(istriv s = FF)\n          then Exception else FF
       #|  CONFLICTFREE t
       #|  MEM (y:num,s:term)
       #|  ~(SUC n <= 1) <=> ~(n = 0)
@@ -8473,7 +8473,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  MEM y (MAP FST (env:(num#term)list))
-      #|  !s. MEM (y:num,s:term) env <=> (s = ASSOC y env)
+      #|  forall s. MEM (y:num,s:term) env <=> (s = ASSOC y env)
       #|  w:num
       #|  (@z. (y = z) /\\ MEM z (MAP FST (env:(num#term)list))) = y
       #|  y:num
@@ -8490,9 +8490,9 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  a ==> ~a ==> b
       #|  ~MEM y (MAP FST (env:(num#term)list))
       #|  w:num
-      #|  !env x.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> (!x y. istriv env x (V y) =\n                        if y = x then TT\n                        else if MEM y (MAP FST env) then\n                           istriv env x (ASSOC y env)\n                        else FF) /\\\n            (!f args. istriv env x (Fn f args) =\n                        if EX (\\a. ~(istriv env x a = FF)) args\n                        then Exception else FF)
+      #|  forall env x.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> (forall x y. istriv env x (V y) =\n                        if y = x then TT\n                        else if MEM y (MAP FST env) then\n                           istriv env x (ASSOC y env)\n                        else FF) /\\\n            (forall f args. istriv env x (Fn f args) =\n                        if EX (\\a. ~(istriv env x a = FF)) args\n                        then Exception else FF)
       #|  EQV env x y = MEM (x,V y) env
-      #|  !env x y. EQV env x y ==> OCC env x y
+      #|  forall env x y. EQV env x y ==> OCC env x y
       #|  z:num
       #|  z:num
       #|  ?y. (s = V y) /\\ RTC (EQV env) y x
@@ -8522,7 +8522,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  MEM z (MAP FST (env:(num#term)list))
-      #|  !s. MEM (z:num,s:term) env = (s = ASSOC z env)
+      #|  forall s. MEM (z:num,s:term) env = (s = ASSOC z env)
       #|  x:num = z
       #|  y:num = z
       #|  s:term
@@ -8541,11 +8541,11 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  ?y. (t = V y) /\\ MEM y (MAP FST (env:(num#term)list))
       #|  t = V x
       #|  t:term
-      #|  !env x t. LOOPFREE(env) /\\ CONFLICTFREE(env)\n             ==> (istriv env x t =\n                    if ?y. (t = V y) /\\ RTC (EQV env) y x then TT\n                    else if ?y. y IN FVT t /\\ RTC (OCC env) y x then Exception\n                    else FF)
+      #|  forall env x t. LOOPFREE(env) /\\ CONFLICTFREE(env)\n             ==> (istriv env x t =\n                    if ?y. (t = V y) /\\ RTC (EQV env) y x then TT\n                    else if ?y. y IN FVT t /\\ RTC (OCC env) y x then Exception\n                    else FF)
       #|  SUB1 s t <=> ?f args. (t = Fn f args) /\\ MEM s args
       #|  WF(SUB1)
       #|  ?y. RTC SUB1 (V x) y /\\ MEM y l
-      #|  !x t. RTC(SUB1) (V x) t <=> x IN FVT(t)
+      #|  forall x t. RTC(SUB1) (V x) t <=> x IN FVT(t)
       #|  LOOPFREE(env) ==> WF(\\s t. ?x. MEM (x,s) env /\\ RTC(SUB1) (V x) t)
       #|  LOOPFREE(env)\n   ==> WF(\\s t. (?x. (t = V x) /\\ MEM (x,s) env) \\/\n                (?f args. (t = Fn f args) /\\ MEM s args))
       #|  (termcases cv cf (V v) = cv v) /\\\n   (termcases cv cf (Fn f args) = cf f args)
@@ -8556,7 +8556,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  MLEFT (env,eqs) =\n       CARD(FVT(Fn 0 (MAP FST eqs)) UNION\n            FVT(Fn 0 (MAP SND eqs)) UNION\n            FVT(Fn 0 (MAP SND env)) UNION\n            FVT(Fn 0 (MAP (V o FST) env))) -\n       CARD(FVT(Fn 0 (MAP (V o FST) env)))
       #|  CRIGHT (env',eqs') (env,eqs) <=>\n         LOOPFREE(env) /\\\n         (env' = env) /\\\n         ((?f args1 args2 oth.\n                (LENGTH args1 = LENGTH args2) /\\\n                (eqs = CONS (Fn f args1,Fn f args2) oth) /\\\n                (eqs' = APPEND (ZIP args1 args2) oth)) \\/\n          (?x t oth. (eqs = CONS (V x,t) oth) /\\\n                     (MEM x (MAP FST env) /\\\n                      (eqs' = CONS (ASSOC x env,t) oth) \\/\n                      ~(MEM x (MAP FST env)) /\\\n                      (istriv env x t = TT) /\\\n                      (eqs' = oth))) \\/\n          (?x f args oth. (eqs = CONS (Fn f args,V x) oth) /\\\n                          (eqs' = CONS (V x,Fn f args) oth)))
       #|  CALLORDER (env',eqs') (env,eqs) <=>\n        MEASURE MLEFT (env',eqs') (env,eqs) \\/\n        CRIGHT (env',eqs') (env,eqs)
-      #|  !g:A#B->C. (\\(p1,p2). g (p1,p2)) = g
+      #|  forall g:A#B->C. (\\(p1,p2). g (p1,p2)) = g
       #|  u:term
       #|  s:term
       #|  [V x,Fn f args]
@@ -8633,14 +8633,14 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env1:(num#term)list
       #|  unify2:(num#term)list#(term#term)list->((num#term)list)option
       #|  unify1:(num#term)list#(term#term)list->((num#term)list)option
-      #|  ?unify.\n      !pr. unify pr =\n              if ~LOOPFREE(FST pr) then NONE\n              else if SND pr = [] then SOME(FST pr)\n              else tpcases\n                        (\\f fargs g gargs.\n                                if (f = g) /\\ (LENGTH fargs = LENGTH gargs)\n                                then unify (FST pr,APPEND (ZIP fargs gargs)\n                                                          (TL(SND pr)))\n                                else NONE)\n                        (\\x t. if MEM x (MAP FST (FST pr)) then\n                                  unify (FST pr,CONS (ASSOC x (FST pr),t)\n                                                     (TL(SND pr)))\n                               else if istriv (FST pr) x t = Exception then\n                                  NONE\n                               else if istriv (FST pr) x t = TT then\n                                  unify(FST pr,TL(SND pr))\n                               else\n                                  unify(CONS (x,t) (FST pr),TL(SND pr)))\n                        (\\f args x. unify (FST pr,\n                                           CONS (V x,Fn f args)\n                                                (TL(SND pr))))\n                        (HD(SND pr))
+      #|  ?unify.\n      forall pr. unify pr =\n              if ~LOOPFREE(FST pr) then NONE\n              else if SND pr = [] then SOME(FST pr)\n              else tpcases\n                        (\\f fargs g gargs.\n                                if (f = g) /\\ (LENGTH fargs = LENGTH gargs)\n                                then unify (FST pr,APPEND (ZIP fargs gargs)\n                                                          (TL(SND pr)))\n                                else NONE)\n                        (\\x t. if MEM x (MAP FST (FST pr)) then\n                                  unify (FST pr,CONS (ASSOC x (FST pr),t)\n                                                     (TL(SND pr)))\n                               else if istriv (FST pr) x t = Exception then\n                                  NONE\n                               else if istriv (FST pr) x t = TT then\n                                  unify(FST pr,TL(SND pr))\n                               else\n                                  unify(CONS (x,t) (FST pr),TL(SND pr)))\n                        (\\f args x. unify (FST pr,\n                                           CONS (V x,Fn f args)\n                                                (TL(SND pr))))\n                        (HD(SND pr))
       #|  LOOPFREE(env)\n   ==> (unify (env,CONS (Fn f fargs,Fn g gargs) oth) =\n            if (f = g) /\\ (LENGTH fargs = LENGTH gargs)\n            then unify (env,APPEND (ZIP fargs gargs) oth)\n            else NONE) /\\\n       (unify (env,CONS (V x,t) oth) =\n            if MEM x (MAP FST env) then unify (env,CONS (ASSOC x env,t) oth)\n            else if istriv env x t = Exception then NONE\n            else if istriv env x t = TT then unify (env,oth)\n            else unify (CONS (x,t) env,oth)) /\\\n       (unify (env,CONS (Fn f fargs,V x) oth) =\n        unify (env,CONS (V x,Fn f fargs) oth))
       #|  unifies i l <=> ALL (\\(s,t). termsubst i s = termsubst i t) l
       #|  a ==> ~b <=> b ==> ~a
-      #|  !s t. TC SUB1 s t ==> ~(s = t)
+      #|  forall s t. TC SUB1 s t ==> ~(s = t)
       #|  MAP (termsubst i) args
       #|  f:num
-      #|  ALL (\\t. !y. y IN FVT t ==> RTC SUB1 (i y) (termsubst i t)) args
+      #|  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (i y) (termsubst i t)) args
       #|  termsubst i s
       #|  s:term
       #|  z:num
@@ -8653,8 +8653,8 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  y IN FVT(t)
       #|  (x:num,t:term)
       #|  t:term
-      #|  !env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> !x y. RTC (OCC env) x y ==> RTC SUB1 (i y) (i x)
-      #|  ALL (\\t. !y. y IN FVT t ==> RTC SUB1 (V y) t) args
+      #|  forall env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> forall x y. RTC (OCC env) x y ==> RTC SUB1 (i y) (i x)
+      #|  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
       #|  s:term
       #|  s:term
       #|  z:num
@@ -8666,26 +8666,26 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  f:num
       #|  u:term
       #|  s:term
-      #|  !s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
-      #|  !t y. y IN FVT t ==> RTC SUB1 (V y) t
-      #|  !t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
+      #|  forall s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
+      #|  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
+      #|  forall t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
       #|  (x:num,t:term)
       #|  t:term
       #|  (i:num->term) y
-      #|  !env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> !x y. RTC (OCC env) x y\n                  ==> RTC (EQV env) x y \\/ TC SUB1 (i y) (i x)
+      #|  forall env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> forall x y. RTC (OCC env) x y\n                  ==> RTC (EQV env) x y \\/ TC SUB1 (i y) (i x)
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  ALL (\\(p1,p2). i p1 = termsubst i p2) env
       #|  v:num
       #|  u:num
-      #|  !x y. RTC (EQV env) x y ==> (i x :term = i y)
+      #|  forall x y. RTC (EQV env) x y ==> (i x :term = i y)
       #|  x:num
       #|  x:num
       #|  ?y. (t = V y) /\\ RTC (EQV env) y x
       #|  (a /\\ b <=> b) <=> (b ==> a)
       #|  i:num->term
-      #|  !env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = TT)\n   ==> !i. unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)) =\n           unifies i (MAP (\\(x,t). V x,t) env)
-      #|  ALL (\\t. !y. y IN FVT t ==> RTC SUB1 (V y) t) args
+      #|  forall env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = TT)\n   ==> forall i. unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)) =\n           unifies i (MAP (\\(x,t). V x,t) env)
+      #|  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
       #|  s:term
       #|  s:term
       #|  z:num
@@ -8697,12 +8697,12 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  f:num
       #|  u:term
       #|  s:term
-      #|  !s t. RTC SUB1 s t ==> RTC SUB1 (termsubst i s) (termsubst i t)
-      #|  !t y. y IN FVT t ==> RTC SUB1 (V y) t
+      #|  forall s t. RTC SUB1 s t ==> RTC SUB1 (termsubst i s) (termsubst i t)
+      #|  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
       #|  x:num
       #|  y:num
       #|  (i:num->term) y
-      #|  ALL (\\t. !y. y IN FVT t ==> RTC SUB1 (V y) t) args
+      #|  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
       #|  s:term
       #|  s:term
       #|  z:num
@@ -8714,9 +8714,9 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  f:num
       #|  u:term
       #|  s:term
-      #|  !s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
-      #|  !t y. y IN FVT t ==> RTC SUB1 (V y) t
-      #|  !t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
+      #|  forall s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
+      #|  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
+      #|  forall t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
       #|  (i:num->term) y
       #|  RTC (EQV env) y x
       #|  y:num
@@ -8724,18 +8724,18 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  ?y. y IN FVT t /\\ RTC (OCC env) y x
       #|  (b ==> ~a) ==> ~(a /\\ b)
       #|  i:num->term
-      #|  !env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = Exception)\n        ==> !i. ~(unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)))
+      #|  forall env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = Exception)\n        ==> forall i. ~(unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)))
       #|  fargs:term list
       #|  fargs:term list
       #|  gargs:term list
       #|  gargs:term list
       #|  i:num->term
-      #|  !i. unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (APPEND (ZIP fargs gargs) oth)) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (CONS (Fn g fargs,Fn g gargs) oth))
+      #|  forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (APPEND (ZIP fargs gargs) oth)) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (CONS (Fn g fargs,Fn g gargs) oth))
       #|  APPEND (ZIP fargs gargs) (oth:(term#term)list)
       #|  env:(num#term)list
       #|  CONS (V x,Fn f fargs) oth
       #|  env:(num#term)list
-      #|  !i. unifies i (APPEND (MAP (\\(x,t). V x,t) (CONS (x,t) env)) oth) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
+      #|  forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) (CONS (x,t) env)) oth) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
       #|  h:num#term
       #|  env:(num#term)list
       #|  env:(num#term)list
@@ -8763,7 +8763,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  t:term
       #|  x:num
       #|  env:(num#term)list
-      #|  !i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) oth)
+      #|  forall i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) oth)
       #|  oth:(term#term)list
       #|  env:(num#term)list
       #|  istriv env x t = TT
@@ -8780,7 +8780,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  MEM x (MAP FST (env:(num#term)list))
       #|  (a ==> (b <=> b')) ==> (a /\\ b /\\ c <=> a /\\ b' /\\ c)
       #|  i:num->term
-      #|  !i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (ASSOC x env,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
+      #|  forall i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (ASSOC x env,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
       #|  CONS (ASSOC (x:num) env,t) (oth:(term#term)list)
       #|  env:(num#term)list
       #|  MEM x (MAP FST (env:(num#term)list))
@@ -8801,7 +8801,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env':(num#term)list
       #|  eqs:(term#term)list
       #|  env:(num#term)list
-      #|  !pr. LOOPFREE(FST pr) /\\ CONFLICTFREE(FST pr)\n        ==> ((unify pr = NONE)\n             ==> !i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                         (SND pr)))) /\\\n            !ans. (unify pr = SOME ans)\n                  ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n                      !i. unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                            (SND pr)) =\n                          unifies i (MAP (\\(x,t). V x,t) ans)
+      #|  forall pr. LOOPFREE(FST pr) /\\ CONFLICTFREE(FST pr)\n        ==> ((unify pr = NONE)\n             ==> forall i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                         (SND pr)))) /\\\n            forall ans. (unify pr = SOME ans)\n                  ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n                      forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                            (SND pr)) =\n                          unifies i (MAP (\\(x,t). V x,t) ans)
       #|  THE(SOME x) = x
       #|  unifier env =\n     let sol = SOLVE [] env in ITLIST valmod sol V
       #|  MEM (x:num,t':term)
@@ -8815,7 +8815,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  env:(num#term)list
       #|  env:(num#term)list
       #|  x:num
-      #|  !env x. CONFLICTFREE(env)\n           ==> !t. (ITLIST valmod env V x = t) <=>\n                   MEM (x,t) env \\/ (t = V x) /\\ ~(MEM x (MAP FST env))
+      #|  forall env x. CONFLICTFREE(env)\n           ==> forall t. (ITLIST valmod env V x = t) <=>\n                   MEM (x,t) env \\/ (t = V x) /\\ ~(MEM x (MAP FST env))
       #|  z:num
       #|  termsubst i t = t
       #|  t:term
@@ -8823,7 +8823,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  i:num->term
       #|  i = ITLIST valmod sol V
       #|  env:(num#term)list
-      #|  !env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> unifies (unifier env) (MAP (\\(x,t). V x,t) env)
+      #|  forall env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> unifies (unifier env) (MAP (\\(x,t). V x,t) env)
       #|  y = z:num
       #|  s:term
       #|  z:num
@@ -8834,8 +8834,8 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  unifies i (MAP (\\(x,t). V x,t) env)
       #|  y:num
       #|  s:term
-      #|  !env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> !i. unifies i (MAP (\\(x,t). V x,t) env)\n                 ==> (termsubst i =\n                      termsubst i o\n                      termsubst (ITLIST valmod env V))
-      #|  !i. unifies i (MAP (\\(x,t). V x,t) ans) =\n                    unifies i (MAP (\\(x,t). V x,t) sol)
+      #|  forall env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> forall i. unifies i (MAP (\\(x,t). V x,t) env)\n                 ==> (termsubst i =\n                      termsubst i o\n                      termsubst (ITLIST valmod env V))
+      #|  forall i. unifies i (MAP (\\(x,t). V x,t) ans) =\n                    unifies i (MAP (\\(x,t). V x,t) sol)
       #|  z:num
       #|  LOOPFREE(sol)
       #|  sol:(num#term)list
@@ -8843,19 +8843,19 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  ans:(num#term)list
       #|  ans:(num#term)list
       #|  env:(num#term)list,eqs:(term#term)list
-      #|  !env eqs.\n     LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ((unify (env,eqs) = NONE)\n          ==> !i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs))) /\\\n         ((unify (env,eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) (APPEND (MAP (\\(x,t). V x,t) env) eqs) /\\\n              !i. unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs)\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
+      #|  forall env eqs.\n     LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ((unify (env,eqs) = NONE)\n          ==> forall i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs))) /\\\n         ((unify (env,eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) (APPEND (MAP (\\(x,t). V x,t) env) eqs) /\\\n              forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs)\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
       #|  []:(num#term)list
-      #|  !eqs. ((unify ([],eqs) = NONE) ==> !i. ~(unifies i eqs)) /\\\n         ((unify ([],eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) eqs /\\\n              !i. unifies i eqs\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
-      #|  Unifies i s <=> !p q. p IN s /\\ q IN s ==> (formsubst i p = formsubst i q)
-      #|  Unifies i s <=> ?q. !p. p IN s ==> (formsubst i p = q)
+      #|  forall eqs. ((unify ([],eqs) = NONE) ==> forall i. ~(unifies i eqs)) /\\\n         ((unify ([],eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) eqs /\\\n              forall i. unifies i eqs\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
+      #|  Unifies i s <=> forall p q. p IN s /\\ q IN s ==> (formsubst i p = formsubst i q)
+      #|  Unifies i s <=> ?q. forall p. p IN s ==> (formsubst i p = q)
       #|  [Fn 0 [], Fn 1 []]
-      #|  ?l. !i. ~(unifies i l)
+      #|  ?l. forall i. ~(unifies i l)
       #|  APPEND (l1:(term#term)list) l2
       #|  l2:(term#term)list
       #|  s:form
       #|  l1:(term#term)list
       #|  r:form
-      #|  !q. qfree q\n          ==> (?l. !i. (formsubst i p = formsubst i q) <=> unifies i l)
+      #|  forall q. qfree q\n          ==> (?l. forall i. (formsubst i p = formsubst i q) <=> unifies i l)
       #|  s:form
       #|  r:form
       #|  fargs:term list
@@ -8874,7 +8874,7 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  p:form
       #|  fargs:term list
       #|  f:num
-      #|  !p q. qfree(p) /\\ qfree(q)\n         ==> ?l. !i. (formsubst i p = formsubst i q) <=> unifies i l
+      #|  forall p q. qfree(p) /\\ qfree(q)\n         ==> ?l. forall i. (formsubst i p = formsubst i q) <=> unifies i l
       #|  APPEND (l:(term#term)list) m
       #|  m:(term#term)list
       #|  q:form
@@ -8888,10 +8888,10 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  B:(form#form)->bool
       #|  B:(form#form)->bool
       #|  FINITE(B:(form#form)->bool)
-      #|  !p q. (p,q) IN B ==> qfree p /\\ qfree q
-      #|  !i. Unifies i A =\n                    !p q. (p,q) IN B ==> (formsubst i p = formsubst i q)
+      #|  forall p q. (p,q) IN B ==> qfree p /\\ qfree q
+      #|  forall i. Unifies i A =\n                    forall p q. (p,q) IN B ==> (formsubst i p = formsubst i q)
       #|  B = {(x:form,y) | x IN A /\\ y IN A}
-      #|  !A. FINITE A /\\ (!p. p IN A ==> qfree p)\n       ==> ?l. !i. Unifies i A = unifies i l
+      #|  forall A. FINITE A /\\ (forall p. p IN A ==> qfree p)\n       ==> ?l. forall i. Unifies i A = unifies i l
       #|  j:num->term
       #|  u:(num#term)list
       #|  u:(num#term)list
@@ -8902,22 +8902,22 @@ test "Logic/unif matches Logic/unif.ml" {
       #|  unifier(THE(unify([],l)))
       #|  i:num->term
       #|  l:(term#term)list
-      #|  FINITE s /\\ (!p. p IN s ==> qfree p)\n   ==> ((?i. Unifies i s) <=>\n        (?i. Unifies i s /\\\n             !j. Unifies j s\n                 ==> !p. qfree p\n                         ==> (formsubst j p = formsubst j (formsubst i p))))
-      #|  mgu s = @i. Unifies i s /\\\n               !j. Unifies j s\n                   ==> !p. qfree p\n                           ==> (formsubst j p =\n                                formsubst j (formsubst i p))
-      #|  !s. FINITE s /\\ (!p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> Unifies (mgu s) s /\\\n           !i. Unifies i s\n               ==> !p. qfree p\n                       ==> (formsubst i p =\n                            formsubst i (formsubst (mgu s) p))
+      #|  FINITE s /\\ (forall p. p IN s ==> qfree p)\n   ==> ((?i. Unifies i s) <=>\n        (?i. Unifies i s /\\\n             forall j. Unifies j s\n                 ==> forall p. qfree p\n                         ==> (formsubst j p = formsubst j (formsubst i p))))
+      #|  mgu s = @i. Unifies i s /\\\n               forall j. Unifies j s\n                   ==> forall p. qfree p\n                           ==> (formsubst j p =\n                                formsubst j (formsubst i p))
+      #|  forall s. FINITE s /\\ (forall p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> Unifies (mgu s) s /\\\n           forall i. Unifies i s\n               ==> forall p. qfree p\n                       ==> (formsubst i p =\n                            formsubst i (formsubst (mgu s) p))
       #|  Atom p [t]
       #|  t:term
-      #|  (!p. qfree(p) ==> (formsubst i p = formsubst j (formsubst k p))) <=>\n   (termsubst i = termsubst j o termsubst k)
-      #|  ismgu s i <=> Unifies i s /\\\n                 !j. Unifies j s\n                     ==> ?k. (termsubst j = termsubst k o termsubst i)
-      #|  ismgu s i <=> Unifies i s /\\\n                 !j. Unifies j s\n                     ==> ?k. !p. qfree(p)\n                                 ==> (formsubst j p =\n                                      formsubst k (formsubst i p))
-      #|  !s. FINITE(s) /\\ (!p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> ismgu s (mgu s)
+      #|  (forall p. qfree(p) ==> (formsubst i p = formsubst j (formsubst k p))) <=>\n   (termsubst i = termsubst j o termsubst k)
+      #|  ismgu s i <=> Unifies i s /\\\n                 forall j. Unifies j s\n                     ==> ?k. (termsubst j = termsubst k o termsubst i)
+      #|  ismgu s i <=> Unifies i s /\\\n                 forall j. Unifies j s\n                     ==> ?k. forall p. qfree(p)\n                                 ==> (formsubst j p =\n                                      formsubst k (formsubst i p))
+      #|  forall s. FINITE(s) /\\ (forall p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> ismgu s (mgu s)
       #|  renaming i <=> ?j. (termsubst j o termsubst i = I) /\\\n                      (termsubst i o termsubst j = I)
       #|  x2:num
       #|  x1:num
       #|  V x
       #|  x:num
       #|  j:num->term
-      #|  renaming i ==> (!x. ?y. i(x) = V y) /\\\n                  (!x x'. (i(x') = i(x)) ==> (x' = x))
+      #|  renaming i ==> (forall x. ?y. i(x) = V y) /\\\n                  (forall x x'. (i(x') = i(x)) ==> (x' = x))
       #|  V x2
       #|  V x1
       #|LEFT_AND_EX_THM =  |- (#!:fun(fun(fun('?206013,bool),bool),bool) (\P:fun('?206013,bool). (#!:fun(fun(bool,bool),bool) (\Q:bool. (#!:fun(fun(list('?206013),bool),bool) (\l:list('?206013). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#EX:fun(fun('?206013,bool),fun(list('?206013),bool)) P:fun('?206013,bool)) l:list('?206013))) Q:bool)) ((#EX:fun(fun('?206013,bool),fun(list('?206013),bool)) (\x:'?206013. ((#/\:fun(bool,fun(bool,bool)) (P:fun('?206013,bool) x:'?206013)) Q:bool))) l:list('?206013)))))))))

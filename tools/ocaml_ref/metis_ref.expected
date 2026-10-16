@@ -197,12 +197,12 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 metis quotations (6):
-  !a. a ==> ~a ==> F
-  !a b. a \\/ b ==> ~a ==> b
-  !a c. a ==> ~a \\/ c ==> c
-  !a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c
-  !a b. ~a ==> b <=>  a \\/ b
-  !a b.  a ==> b <=> ~a \\/ b
+  forall a. a ==> ~a ==> F
+  forall a b. a \\/ b ==> ~a ==> b
+  forall a c. a ==> ~a \\/ c ==> c
+  forall a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c
+  forall a b. ~a ==> b <=>  a \\/ b
+  forall a b.  a ==> b <=> ~a \\/ b
 refl =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x:'A))))
 drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#!:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
 trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. (#!:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((R:fun('A,fun('A,bool)) x:'A) x:'A))))

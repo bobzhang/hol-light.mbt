@@ -5771,32 +5771,32 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|0..0..3..6..9..solved at 14
       #|Unity/mk_unless quotations (298):
       #|  UNLESS_STMT (p:'a->bool) q st =\n      \\s:'a. (p s /\\ ~q s) ==> (p (st s) \\/ q (st s))
-      #|  (!p q. UNLESS p q  []                   <=> T) /\\\n    (!p q. UNLESS p q (CONS (st:'a->'a) Pr) <=>\n     ((!s:'a. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))
+      #|  (forall p q. UNLESS p q  []                   <=> T) /\\\n    (forall p q. UNLESS p q (CONS (st:'a->'a) Pr) <=>\n     ((forall s:'a. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))
       #|  STABLE_STMT (p:'a->bool) st = \\s:'a. p s ==> p (st s)
       #|  STABLE (p:'a->bool) Pr = (p UNLESS False) Pr
-      #|  INVARIANT p (p0, Pr) = ((!s:'a. p0 s ==> p s) /\\ (p STABLE Pr))
+      #|  INVARIANT p (p0, Pr) = ((forall s:'a. p0 s ==> p s) /\\ (p STABLE Pr))
       #|  s:'a
       #|  p:'a->bool
       #|  q:'a->bool
       #|  r:'a->bool
       #|  P:num->'a->bool
-      #|  !p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)
-      #|  !t1 t2 t3. t1 \\/ t2 \\/ t3 <=> ~(~t1 /\\ ~t2) \\/ t3
-      #|  !p p' q q'.\n     ((p \\/ p') /\\ (p \\/ ~q') /\\ (p' \\/ ~q) /\\ (~q \\/ ~q')) =\n     ((p /\\ ~q) \\/ (p' /\\ ~q'))
+      #|  forall p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)
+      #|  forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> ~(~t1 /\\ ~t2) \\/ t3
+      #|  forall p p' q q'.\n     ((p \\/ p') /\\ (p \\/ ~q') /\\ (p' \\/ ~q) /\\ (~q \\/ ~q')) =\n     ((p /\\ ~q) \\/ (p' /\\ ~q'))
       #|  (\\s:'a. p s /\\ ~(p s) ==> p (st s))s
-      #|  !p st (s:'a). (p UNLESS_STMT p)st s
-      #|  !s:'a. q s ==> r s
+      #|  forall p st (s:'a). (p UNLESS_STMT p)st s
+      #|  forall s:'a. q s ==> r s
       #|  (st:'a->'a) s
       #|  (q:'a->bool) ((st:'a->'a) s)
-      #|  !s:'a. p s /\\ ~q s ==> p (st s) \\/ q (st s)
+      #|  forall s:'a. p s /\\ ~q s ==> p (st s) \\/ q (st s)
       #|  s:'a
       #|  ~q (s:'a)
       #|  (p:'a->bool) s
-      #|  !s:'a. q s ==> r s
+      #|  forall s:'a. q s ==> r s
       #|  s:'a
       #|  ~r (s:'a)
-      #|  !(p:'a->bool) q r st.\n      ((!s. (p UNLESS_STMT q) st s) /\\ (!s. (q s) ==> (r s))) ==>\n       (!s. (p UNLESS_STMT r) st s)
-      #|  !p q p' q' (st:'a->'a).\n    ((!s. (p UNLESS_STMT q) st s) /\\ (!s. (p' UNLESS_STMT q') st s)) ==>\n     (!s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)
+      #|  forall(p:'a->bool) q r st.\n      ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (q s) ==> (r s))) ==>\n       (forall s. (p UNLESS_STMT r) st s)
+      #|  forall p q p' q' (st:'a->'a).\n    ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n     (forall s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)
       #|  (p:'a->bool) s
       #|  (q:'a->bool) s
       #|  (p:'a->bool) ((st:'a->'a) s)
@@ -5805,30 +5805,30 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  (q':'a->bool) s
       #|  (p':'a->bool) ((st:'a->'a) s)
       #|  (q':'a->bool) ((st:'a->'a) s)
-      #|  (!s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-      #|  (!s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s))
-      #|  (!s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (!s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-      #|  (!s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (!s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-      #|  !p q p' q' (st:'a->'a).\n     ((!s. (p UNLESS_STMT q) st s) /\\ (!s. (p' UNLESS_STMT q') st s)) ==>\n      (!s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)
-      #|  !p q p' q' (st:'a->'a).\n     ((!s. (p UNLESS_STMT q) st s) /\\ (!s. (p' UNLESS_STMT q') st s)) ==>\n      (!s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)
-      #|  !p q r. (p ==> q) ==> (p \\/ r ==> q \\/ r)
+      #|  (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
+      #|  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s))
+      #|  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
+      #|  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
+      #|  forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)
+      #|  forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)
+      #|  forall p q r. (p ==> q) ==> (p \\/ r ==> q \\/ r)
       #|  n:num
       #|  n:num
       #|  n:num
-      #|  !(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)
+      #|  forall(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)
       #|  n:num
-      #|  !(P:num->('a->bool)) q st.\n          (!m. (!s. ((P m) UNLESS_STMT q)st s)) ==>\n               (!s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)
-      #|  !(p:'a->bool) q r (st:'a->'a).\n      (!s. (p UNLESS_STMT q) st s) ==>\n         (!s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)
-      #|  !(p:'a->bool) Pr. (p UNLESS p) Pr
-      #|  !(p:'a->bool) Pr. (p UNLESS (Not p)) Pr
-      #|  !(p:'a->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (!s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)
-      #|  !(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)
-      #|  !(p:'a->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)
+      #|  forall(P:num->('a->bool)) q st.\n          (forall m. (forall s. ((P m) UNLESS_STMT q)st s)) ==>\n               (forall s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)
+      #|  forall(p:'a->bool) q r (st:'a->'a).\n      (forall s. (p UNLESS_STMT q) st s) ==>\n         (forall s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)
+      #|  forall(p:'a->bool) Pr. (p UNLESS p) Pr
+      #|  forall(p:'a->bool) Pr. (p UNLESS (Not p)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (forall s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)
+      #|  forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)
+      #|  forall(p:'a->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)
       #|  Pr:('a->'a)list
       #|  (q:'a->bool) \\/* q'
       #|  ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))
       #|  (p:'a->bool) /\\* p'
-      #|  !s. ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s
+      #|  forall s. ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s
       #|  (((p:'a->bool) /\\* p') UNLESS\n\t     (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')))Pr
       #|  q':'a->bool
       #|  p':'a->bool
@@ -5836,12 +5836,12 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  p:'a->bool
       #|  ((p':'a->bool) UNLESS q')Pr
       #|  ((p:'a->bool) UNLESS q)Pr
-      #|  !(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)
+      #|  forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)
       #|  Pr:('a->'a)list
       #|  (q:'a->bool) \\/* q'
       #|  (((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')
       #|  (p:'a->bool) \\/* p'
-      #|  !s. ((((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s
+      #|  forall s. ((((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s
       #|  (((p:'a->bool) \\/* p') UNLESS\n               ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n               Pr
       #|  q':'a->bool
       #|  p':'a->bool
@@ -5849,11 +5849,11 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  p:'a->bool
       #|  ((p':'a->bool) UNLESS q')Pr
       #|  ((p:'a->bool) UNLESS q)Pr
-      #|  !(p:'a->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)
+      #|  forall(p:'a->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)
       #|  r:'a->bool
       #|  ((((Not (p:'a->bool)) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n               (q /\\* r))
       #|  ((p:'a->bool) \\/* q)
-      #|  !s:'a. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s
+      #|  forall s:'a. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s
       #|  (((p:'a->bool) \\/* q) UNLESS\n           ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))) Pr
       #|  r:'a->bool
       #|  q:'a->bool
@@ -5864,21 +5864,21 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  p:'a->bool
       #|  ((q:'a->bool) UNLESS r)Pr
       #|  ((p:'a->bool) UNLESS q)Pr
-      #|  !(p:'a->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)
+      #|  forall(p:'a->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)
       #|  Pr:('a->'a)list
       #|  q:'a->bool
       #|  p:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. p s ==> q s
+      #|  forall s:'a. p s ==> q s
       #|  ((p:'a->bool) UNLESS p)Pr
-      #|  !(p:'a->bool) q Pr. (!s. p s ==> q s) ==> ((p UNLESS q) Pr)
+      #|  forall(p:'a->bool) q Pr. (forall s. p s ==> q s) ==> ((p UNLESS q) Pr)
       #|  Pr:('a->'a)list
       #|  q:'a->bool
       #|  Not (p:'a->bool)
       #|  p:'a->bool
-      #|  !s:'a. (Not p) s ==> q s
+      #|  forall s:'a. (Not p) s ==> q s
       #|  ((p:'a->bool) UNLESS (Not p))Pr
-      #|  !(p:'a->bool) q Pr. (!s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)
+      #|  forall(p:'a->bool) q Pr. (forall s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)
       #|  q:'a->bool
       #|  (q:'a->bool) \\/* r
       #|  (((p:'a->bool) /\\* (Not q)) UNLESS\n                    ((q \\/* r) \\/* q))Pr
@@ -5892,7 +5892,7 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  ((Not (q:'a->bool)) UNLESS (Not(Not q)))Pr
       #|  Pr:('a->'a)list
       #|  Not (q:'a->bool)
-      #|  !(p:'a->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr
       #|  ((((p:'a->bool) /\\* (Not q)) \\/* (p /\\* q)) UNLESS\n        ((q \\/* r) \\/* q))Pr
       #|  Pr:('a->'a)list
       #|  q:'a->bool
@@ -5905,14 +5905,14 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  q:'a->bool
       #|  (p:'a->bool) /\\* q
       #|  (p:'a->bool) /\\* q
-      #|  !s:'a. (p /\\* q)s ==> q s
+      #|  forall s:'a. (p /\\* q)s ==> q s
       #|  (((p:'a->bool) /\\* q) UNLESS (p /\\* q))Pr
       #|  q:'a->bool
       #|  p:'a->bool
       #|  Pr:('a->'a)list
       #|  (p:'a->bool) /\\* q
-      #|  !(p:'a->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr
-      #|  !(p:'a->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr
       #|  q:'a->bool
       #|  r:'a->bool
       #|  q:'a->bool
@@ -5926,7 +5926,7 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  (((p:'a->bool) \\/* q) UNLESS r)Pr
       #|  ((Not (q:'a->bool)) UNLESS (Not(Not q)))Pr
       #|  Not (q:'a->bool)
-      #|  !(p:'a->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr
       #|  (((p:'a->bool) /\\* p) UNLESS (p \\/* (Not p)))Pr
       #|  (Not (p:'a->bool))
       #|  p:'a->bool
@@ -5934,7 +5934,7 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  p:'a->bool
       #|  ((p:'a->bool) UNLESS (Not p))Pr
       #|  ((p:'a->bool) UNLESS p)Pr
-      #|  !(p:'a->bool) Pr. (p UNLESS True) Pr
+      #|  forall(p:'a->bool) Pr. (p UNLESS True) Pr
       #|  (((Not (p:'a->bool)) \\/* p) UNLESS (p \\/* p))Pr
       #|  p:'a->bool
       #|  p:'a->bool
@@ -5944,7 +5944,7 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  ((Not (p:'a->bool)) UNLESS p)Pr
       #|  ((Not (p:'a->bool)) UNLESS (Not(Not p)))Pr
       #|  (Not (p:'a->bool))
-      #|  !(p:'a->bool) Pr. (True UNLESS p) Pr
+      #|  forall(p:'a->bool) Pr. (True UNLESS p) Pr
       #|  (((Not (p:'a->bool)) /\\* p) UNLESS (p \\/* p))Pr
       #|  p:'a->bool
       #|  p:'a->bool
@@ -5954,16 +5954,16 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  ((Not (p:'a->bool)) UNLESS p)Pr
       #|  ((Not (p:'a->bool)) UNLESS (Not(Not p)))Pr
       #|  (Not (p:'a->bool))
-      #|  !(p:'a->bool) Pr. (False UNLESS p) Pr
-      #|  !(p:'a->bool) q p'.\n     (!s. p s /\\ ~q s) ==> (!s. p' s) ==> (!s. p s \\/ q s) ==>\n         (!s. p s /\\ ~q s ==> p' s /\\ ~q s)
-      #|  !(p:'a->bool) q p'.\n     (!s. p s /\\ ~q s) ==> (!s. p' s) ==> (!s. p s \\/ q s) ==>\n         (!s. p' s /\\ ~q s ==> p s /\\ ~q s)
-      #|  !(p:'a->bool) q p'.\n     (!s. p s /\\ ~q s) ==> (!s. p' s) ==> (!s. p s \\/ q s) ==>\n         (!s. p s /\\ ~q s <=> p' s /\\ ~q s)
-      #|  !(p:'a->bool) q p' Pr.\n       (!s. p s /\\ ~q s) ==> (!s. p' s) ==> (!s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)
+      #|  forall(p:'a->bool) Pr. (False UNLESS p) Pr
+      #|  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s ==> p' s /\\ ~q s)
+      #|  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p' s /\\ ~q s ==> p s /\\ ~q s)
+      #|  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s <=> p' s /\\ ~q s)
+      #|  forall(p:'a->bool) q p' Pr.\n       (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)
       #|  ((((p:'a->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n                ((p /\\* q) \\/* (r \\/* r')))Pr
       #|  (((p:'a->bool) /\\* q) \\/* (r \\/* r'))
       #|  ((((Not((p:'a->bool) \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n          ((q \\/* r) /\\* (p \\/* r')))
       #|  (((p:'a->bool) \\/* p') \\/* (q \\/* q'))
-      #|  !s:'a. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s
+      #|  forall s:'a. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s
       #|  ((((p:'a->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))) Pr
       #|  r':'a->bool
       #|  r:'a->bool
@@ -5976,17 +5976,17 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  ((q:'a->bool) \\/* q')
       #|  ((q:'a->bool) \\/* r)
       #|  ((p:'a->bool) \\/* p')
-      #|  !(p:'a->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr
+      #|  forall(p:'a->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr
       #|  ((p:'a->bool) UNLESS (q \\/* False))Pr
       #|  Pr:('a->'a)list
       #|  False:'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr
-      #|  !s:'a. Not (p:'a->bool) s
+      #|  forall(p:'a->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr
+      #|  forall s:'a. Not (p:'a->bool) s
       #|  s:'a
-      #|  !(p:'a->bool) Pr. (!s. (Not p)s) ==> p STABLE Pr
-      #|  !(p:'a->bool) Pr. (!s. (Not p)s) ==> (Not p) STABLE Pr
+      #|  forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> p STABLE Pr
+      #|  forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> (Not p) STABLE Pr
       #|  ((((q:'a->bool) \\/* p) \\/* (p /\\* q)) UNLESS False)Pr
       #|  Pr:('a->'a)list
       #|  False:'a->bool
@@ -6005,7 +6005,7 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  ((p:'a->bool) /\\* q) STABLE Pr
       #|  Pr:('a->'a)list
       #|  ((p:'a->bool) /\\* q)
-      #|  !(p:'a->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (!s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr
+      #|  forall(p:'a->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (forall s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr
       #|  ((((p:'a->bool) /\\* q) \\/* (p /\\* (Not q))) UNLESS\n                 ((((Not(p /\\* q)) /\\* (p /\\* (Not q))) \\/*\n                   ((Not(p /\\* (Not q))) /\\* False)) \\/*\n                    (False /\\* (p /\\* (Not q)))))Pr
       #|  Pr:('a->'a)list
       #|  (p:'a->bool) /\\* (Not q)
@@ -6022,52 +6022,52 @@ test "Unity/mk_unless matches Unity/mk_unless.ml" {
       #|  q:'a->bool
       #|  Not (q:'a->bool)
       #|  p:'a->bool
-      #|  !(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr
-      #|  !p q. p /\\ (~p \\/ ~q) <=> p /\\ ~q
-      #|  !p q. p \\/ (p /\\ q) <=> p
-      #|  !P Q. (!(i:num). (P i) /\\ (Q i)) <=> ((!i. P i) /\\ (!i. Q i))
-      #|  !(P:num->('a->bool)) Q st.\n            (!i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (!s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)
-      #|  !i:num. (!s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t
-      #|  !(P:num->('a->bool)) Q Pr.\n       (!i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr
+      #|  forall(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr
+      #|  forall p q. p /\\ (~p \\/ ~q) <=> p /\\ ~q
+      #|  forall p q. p \\/ (p /\\ q) <=> p
+      #|  forall P Q. (forall(i:num). (P i) /\\ (Q i)) <=> ((forall i. P i) /\\ (forall i. Q i))
+      #|  forall(P:num->('a->bool)) Q st.\n            (forall i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (forall s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)
+      #|  forall i:num. (forall s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t
+      #|  forall(P:num->('a->bool)) Q Pr.\n       (forall i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr
       #|  Pr:('a->'a)list
       #|  (Q:num->('a->bool))(SUC i)
       #|  (P:num->('a->bool))(SUC i)
       #|  \\<=/* (Q:num->('a->bool)) i
       #|  /<=\\* (P:num->('a->bool)) i
-      #|  !i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr
+      #|  forall i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr
       #|  SUC i
-      #|  !(P:num->('a->bool)) Q Pr.\n    (!i. ((P i) UNLESS (Q i))Pr) ==>\n      (!i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)
+      #|  forall(P:num->('a->bool)) Q Pr.\n    (forall i. ((P i) UNLESS (Q i))Pr) ==>\n      (forall i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)
       #|  Pr:('a->'a)list
       #|  q:'a->bool
       #|  (P:num->('a->bool))(SUC i)
       #|  q:'a->bool
       #|  /<=\\* (P:num->('a->bool)) i
-      #|  !i. (((P:num->('a->bool)) i) UNLESS q)Pr
+      #|  forall i. (((P:num->('a->bool)) i) UNLESS q)Pr
       #|  SUC i
-      #|  !(P:num->('a->bool)) q Pr.\n       (!i. ((P i) UNLESS q)Pr) ==> (!i. ((/<=\\* P i) UNLESS q)Pr)
-      #|  !(P:num->('a->bool)) Q st.\n         (!i s. ((P i) UNLESS_STMT q) st s) ==>\n            (!s. (((?*) P) UNLESS_STMT q) st s)
-      #|  !m:num. (!s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t
-      #|  !(P:num->('a->bool)) q Pr.\n        (!m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr
-      #|  !Pr. (False:'a->bool) STABLE Pr
+      #|  forall(P:num->('a->bool)) q Pr.\n       (forall i. ((P i) UNLESS q)Pr) ==> (forall i. ((/<=\\* P i) UNLESS q)Pr)
+      #|  forall(P:num->('a->bool)) Q st.\n         (forall i s. ((P i) UNLESS_STMT q) st s) ==>\n            (forall s. (((?*) P) UNLESS_STMT q) st s)
+      #|  forall m:num. (forall s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t
+      #|  forall(P:num->('a->bool)) q Pr.\n        (forall m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr
+      #|  forall Pr. (False:'a->bool) STABLE Pr
       #|  Pr:('a->'a)list
       #|  False:'a->bool
       #|  q:'a->bool
       #|  False:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)
+      #|  forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)
       #|  Pr:('a->'a)list
       #|  False:'a->bool
       #|  q:'a->bool
       #|  False:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)
+      #|  forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)
       #|  Pr:('a->'a)list
       #|  False:'a->bool
       #|  r:'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr
-      #|  !(p:'a->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr
+      #|  forall(p:'a->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr
       #|UNLESS_STMT =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a))) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) (st:fun(''a,''a) s:''a))) (q:fun(''a,bool) (st:fun(''a,''a) s:''a))))))))))))
       #|UNLESS =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) #NIL:list(fun(''a,''a)))) #T:bool)))))) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#CONS:fun(fun(''a,''a),fun(list(fun(''a,''a)),list(fun(''a,''a)))) st:fun(''a,''a)) Pr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
       #|STABLE_STMT =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) ((#STABLE_STMT:fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool))) p:fun(''a,bool)) st:fun(''a,''a))) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (p:fun(''a,bool) (st:fun(''a,''a) s:''a)))))))))

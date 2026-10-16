@@ -5826,7 +5826,7 @@ test "100/divharmonic matches 100/divharmonic.ml" {
       #|  (N + 1) + (N + 1)
       #|  N + 1
       #|  &1 / &4
-      #|  ~(?s. !e. &0 < e\n             ==> ?N. !n. N <= n ==> abs(sum(1..n) (\\i. &1 / &i) - s) < e)
+      #|  ~(?s. forall e. &0 < e\n             ==> ?N. forall n. N <= n ==> abs(sum(1..n) (\\i. &1 / &i) - s) < e)
       #|  ~(convergent (\\n. sum(1..n) (\\i. &1 / &i)))
       #|  m:num
       #|  2
@@ -5834,7 +5834,7 @@ test "100/divharmonic matches 100/divharmonic.ml" {
       #|  sum(2 EXP m + 1..2 EXP (SUC m))(\\n. &1 / &(2 EXP (SUC m)))
       #|  a <= x ==> b - a <= y ==> b <= x + y
       #|  1 <= 2 EXP m + 1
-      #|  !m. sum(1..2 EXP m) (\\n. &1 / &n) >= &m / &2
+      #|  forall m. sum(1..2 EXP m) (\\n. &1 / &n) >= &m / &2
       #|  x / &2
       #|  &0 < x /\\ x < &1 ==> ln(&1 + x) >= x / &2
       #|HARMONIC_DIVERGES =  |- (#~:fun(bool,bool) (#?:fun(fun(real,bool),bool) (\s:real. (#!:fun(fun(real,bool),bool) (\e:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) e:real)) (#?:fun(fun(num,bool),bool) (\N:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) N:num) n:num)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) i:num))))) s:real))) e:real))))))))))))

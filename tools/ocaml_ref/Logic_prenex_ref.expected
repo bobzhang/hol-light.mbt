@@ -7342,18 +7342,18 @@ Warning: inventing type variables
 0..0..2..4..13..solved at 18
 Logic/prenex quotations (113):
   (qfree False <=> T) /\\\n   (qfree (Atom n l) <=> T) /\\\n   (qfree (p --> q) <=> qfree p /\\ qfree q) /\\\n   (qfree (!!x p) <=> F)
-  (qfree False <=> T) /\\\n   (qfree True <=> T) /\\\n   (!a l. qfree (Atom a l) <=> T) /\\\n   (!p. qfree (Not p) <=> qfree p) /\\\n   (!p q. qfree (p || q) <=> qfree p /\\ qfree q) /\\\n   (!p q. qfree (p && q) <=> qfree p /\\ qfree q) /\\\n   (!p q. qfree (p --> q) <=> qfree p /\\ qfree q) /\\\n   (!p q. qfree (p <-> q) <=> qfree p /\\ qfree q) /\\\n   (!x p. qfree (!! x p) <=> F) /\\\n   (!x p. qfree (?? x p) <=> F)
-  !p v. qfree (formsubst v p) <=> qfree p
-  !p. qfree(p) <=> (BV(p) = EMPTY)
-  (!p. qfree p ==> prenex p) /\\\n   (!x p. prenex p ==> prenex (!!x p)) /\\\n   (!x p. prenex p ==> prenex (??x p))
-  (!p. qfree p ==> universal p) /\\\n   (!x p. universal p ==> universal (!!x p))
-  !P. (!p. qfree p ==> P p) /\\\n       (!x p. P p ==> P (!! x p)) /\\\n       (!x p. P p ==> P (Not p))\n       ==> !a. prenex a ==> P a
-  (prenex False <=> T) /\\\n   (prenex True <=> T) /\\\n   (!a l. prenex (Atom a l) <=> T) /\\\n   (!p. prenex (Not p) <=> qfree p \\/ (?q x. (Not p = ??x q) /\\ prenex q)) /\\\n   (!p q. prenex (p || q) <=> qfree p /\\ qfree q) /\\\n   (!p q. prenex (p && q) <=> qfree p /\\ qfree q) /\\\n   (!p q. prenex (p --> q) <=> qfree p /\\ qfree q \\/\n                             (?r x. (p --> q = ??x r) /\\ prenex r)) /\\\n   (!p q. prenex (p <-> q) <=> qfree p /\\ qfree q) /\\\n   (!x p. prenex (!! x p) <=> prenex p) /\\\n   (!x p. prenex (?? x p) <=> prenex p)
-  !p i. ((formsubst i p = False) <=> (p = False)) /\\\n         ((?a l. formsubst i p = Atom a l) <=> (?a l. p = Atom a l)) /\\\n         ((?q r. formsubst i p = q --> r) <=> (?q r. p = q --> r)) /\\\n         ((?x q. formsubst i p = !!x q) <=> (?x q. p = !!x q))
+  (qfree False <=> T) /\\\n   (qfree True <=> T) /\\\n   (forall a l. qfree (Atom a l) <=> T) /\\\n   (forall p. qfree (Not p) <=> qfree p) /\\\n   (forall p q. qfree (p || q) <=> qfree p /\\ qfree q) /\\\n   (forall p q. qfree (p && q) <=> qfree p /\\ qfree q) /\\\n   (forall p q. qfree (p --> q) <=> qfree p /\\ qfree q) /\\\n   (forall p q. qfree (p <-> q) <=> qfree p /\\ qfree q) /\\\n   (forall x p. qfree (!! x p) <=> F) /\\\n   (forall x p. qfree (?? x p) <=> F)
+  forall p v. qfree (formsubst v p) <=> qfree p
+  forall p. qfree(p) <=> (BV(p) = EMPTY)
+  (forall p. qfree p ==> prenex p) /\\\n   (forall x p. prenex p ==> prenex (!!x p)) /\\\n   (forall x p. prenex p ==> prenex (??x p))
+  (forall p. qfree p ==> universal p) /\\\n   (forall x p. universal p ==> universal (!!x p))
+  forall P. (forall p. qfree p ==> P p) /\\\n       (forall x p. P p ==> P (!! x p)) /\\\n       (forall x p. P p ==> P (Not p))\n       ==> forall a. prenex a ==> P a
+  (prenex False <=> T) /\\\n   (prenex True <=> T) /\\\n   (forall a l. prenex (Atom a l) <=> T) /\\\n   (forall p. prenex (Not p) <=> qfree p \\/ (?q x. (Not p = ??x q) /\\ prenex q)) /\\\n   (forall p q. prenex (p || q) <=> qfree p /\\ qfree q) /\\\n   (forall p q. prenex (p && q) <=> qfree p /\\ qfree q) /\\\n   (forall p q. prenex (p --> q) <=> qfree p /\\ qfree q \\/\n                             (?r x. (p --> q = ??x r) /\\ prenex r)) /\\\n   (forall p q. prenex (p <-> q) <=> qfree p /\\ qfree q) /\\\n   (forall x p. prenex (!! x p) <=> prenex p) /\\\n   (forall x p. prenex (?? x p) <=> prenex p)
+  forall p i. ((formsubst i p = False) <=> (p = False)) /\\\n         ((?a l. formsubst i p = Atom a l) <=> (?a l. p = Atom a l)) /\\\n         ((?q r. formsubst i p = q --> r) <=> (?q r. p = q --> r)) /\\\n         ((?x q. formsubst i p = !!x q) <=> (?x q. p = !!x q))
   False
   q:form
   q:form
-  !p i. (?q. formsubst i p = Not q) <=> (?q. p = Not q)
+  forall p i. (?q. formsubst i p = Not q) <=> (?q. p = Not q)
   s:form
   y:num
   Not q
@@ -7361,7 +7361,7 @@ Logic/prenex quotations (113):
   r:form
   r:form
   !! x (Not q)
-  !p i. (?x q. formsubst i p = ??x q) <=> (?x q. p = ??x q)
+  forall p i. (?x q. formsubst i p = ??x q) <=> (?x q. p = ??x q)
   ?? x p = formsubst i (?? y r)
   r:form
   y:num
@@ -7376,34 +7376,34 @@ Logic/prenex quotations (113):
   x:num
   i:num->term
   q:form
-  !p. prenex p ==> !i q. (p = formsubst i q) ==> prenex q
+  forall p. prenex p ==> forall i q. (p = formsubst i q) ==> prenex q
   p:form
   p:form
   i:num->term
   i:num->term
-  !p i. prenex(formsubst i p) = prenex p
+  forall p i. prenex(formsubst i p) = prenex p
   (size False = 1) /\\\n   (size (Atom p l) = 1) /\\\n   (size (q --> r) = size q + size r) /\\\n   (size (!!x q) = 1 + size q)
-  (size False = 1) /\\\n   (size True = 2) /\\\n   (!a l. size (Atom a l) = 1) /\\\n   (!p. size (Not p) = 1 + size p) /\\\n   (!p q. size (p || q) = size p + 2 * size q) /\\\n   (!p q. size (p && q) = size p + 2 * size q + 4) /\\\n   (!p q. size (p --> q) = size p + size q) /\\\n   (!p q. size (p <-> q) = 3 * size p + 3 * size q + 4) /\\\n   (!x p.size (!! x p) = 1 + size p) /\\\n   (!x p. size (?? x p) = 3 + size p)
-  !p i. size (formsubst i p) = size p
+  (size False = 1) /\\\n   (size True = 2) /\\\n   (forall a l. size (Atom a l) = 1) /\\\n   (forall p. size (Not p) = 1 + size p) /\\\n   (forall p q. size (p || q) = size p + 2 * size q) /\\\n   (forall p q. size (p && q) = size p + 2 * size q + 4) /\\\n   (forall p q. size (p --> q) = size p + size q) /\\\n   (forall p q. size (p <-> q) = 3 * size p + 3 * size q + 4) /\\\n   (forall x p.size (!! x p) = 1 + size p) /\\\n   (forall x p. size (?? x p) = 3 + size p)
+  forall p i. size (formsubst i p) = size p
   PPAT A B C r =\n     if ?x p. r = !!x p then\n                    A (@x. ?p. r = !!x p)\n                      (@p. r = !!(@x. ?p. r = !!x p) p)\n                  else if ?x p. r = ??x p then\n                    B (@x. ?p. r = ??x p)\n                      (@p. r = ??(@x. ?p. r = ??x p) p)\n                  else C r
-  !x y p q. ((!!x p = !!y q) <=> (x = y) /\\ (p = q)) /\\\n             ((??x p = ??y q) <=> (x = y) /\\ (p = q)) /\\\n             ~(!!x p = ??y q)
-  !A B C. (!x p. PPAT A B C (!!x p) = A x p :A) /\\\n           (!x p. PPAT A B C (??x p) = B x p) /\\\n           !r. ~(?x p. r = !!x p) /\\ ~(?x p. r = ??x p)\n               ==> (PPAT A B C  r = C r)
-  !H. (!f g x. (!z. size z < size x ==> (f z = g z)) ==> (H f x = H g x))\n       ==> (?f. !x. f x = H f x)
+  forall x y p q. ((!!x p = !!y q) <=> (x = y) /\\ (p = q)) /\\\n             ((??x p = ??y q) <=> (x = y) /\\ (p = q)) /\\\n             ~(!!x p = ??y q)
+  forall A B C. (forall x p. PPAT A B C (!!x p) = A x p :A) /\\\n           (forall x p. PPAT A B C (??x p) = B x p) /\\\n           forall r. ~(?x p. r = !!x p) /\\ ~(?x p. r = ??x p)\n               ==> (PPAT A B C  r = C r)
+  forall H. (forall f g x. (forall z. size z < size x ==> (f z = g z)) ==> (H f x = H g x))\n       ==> (?f. forall x. f x = H f x)
   qfree q
   Prenex_right:form->form->form
   Prenex_right:form->form->form
   ?x p. r = !!x p
-  !p. ?Prenex_right. !r. Prenex_right r =\n           PPAT (\\x q. let y = VARIANT(FV(p) UNION FV(!!x q)) in\n                 !!y (Prenex_right (formsubst (valmod (x,V y) V) q)))\n                (\\x q. let y = VARIANT(FV(p) UNION FV(??x q)) in\n                 ??y (Prenex_right (formsubst (valmod (x,V y) V) q)))\n                (\\q. p --> q) r
-  ?Prenex_right.\n        (!p x q. Prenex_right p (!!x q) =\n                   let y = VARIANT(FV(p) UNION FV(!!x q)) in\n                   !!y (Prenex_right p (formsubst (valmod (x,V y) V) q))) /\\\n        (!p x q. Prenex_right p (??x q) =\n                   let y = VARIANT(FV(p) UNION FV(??x q)) in\n                   ??y (Prenex_right p (formsubst (valmod (x,V y) V) q))) /\\\n        (!p q. qfree q ==> (Prenex_right p q = p --> q))
+  forall p. ?Prenex_right. forall r. Prenex_right r =\n           PPAT (\\x q. let y = VARIANT(FV(p) UNION FV(!!x q)) in\n                 !!y (Prenex_right (formsubst (valmod (x,V y) V) q)))\n                (\\x q. let y = VARIANT(FV(p) UNION FV(??x q)) in\n                 ??y (Prenex_right (formsubst (valmod (x,V y) V) q)))\n                (\\q. p --> q) r
+  ?Prenex_right.\n        (forall p x q. Prenex_right p (!!x q) =\n                   let y = VARIANT(FV(p) UNION FV(!!x q)) in\n                   !!y (Prenex_right p (formsubst (valmod (x,V y) V) q))) /\\\n        (forall p x q. Prenex_right p (??x q) =\n                   let y = VARIANT(FV(p) UNION FV(??x q)) in\n                   ??y (Prenex_right p (formsubst (valmod (x,V y) V) q))) /\\\n        (forall p q. qfree q ==> (Prenex_right p q = p --> q))
   qfree q
   \\q p. (Prenex_left:form->form->form) p q
   Prenex_left:form->form->form
   ?x p. r = !!x p
-  !p. ?Prenex_left. !r. Prenex_left r =\n           PPAT (\\x q. let y = VARIANT(FV(!!x q) UNION FV(p)) in\n                 ??y (Prenex_left (formsubst (valmod (x,V y) V) q)))\n                (\\x q. let y = VARIANT(FV(??x q) UNION FV(p)) in\n                 !!y (Prenex_left (formsubst (valmod (x,V y) V) q)))\n                (\\q. Prenex_right q p) r
-  ?Prenex_left.\n        (!p x q. Prenex_left (!!x q) p =\n                   let y = VARIANT(FV(!!x q) UNION FV(p)) in\n                   ??y (Prenex_left (formsubst (valmod (x,V y) V) q) p)) /\\\n        (!p x q. Prenex_left (??x q) p =\n                   let y = VARIANT(FV(??x q) UNION FV(p)) in\n                   !!y (Prenex_left (formsubst (valmod (x,V y) V) q) p)) /\\\n        (!p q. qfree q ==> (Prenex_left q p = Prenex_right q p))
+  forall p. ?Prenex_left. forall r. Prenex_left r =\n           PPAT (\\x q. let y = VARIANT(FV(!!x q) UNION FV(p)) in\n                 ??y (Prenex_left (formsubst (valmod (x,V y) V) q)))\n                (\\x q. let y = VARIANT(FV(??x q) UNION FV(p)) in\n                 !!y (Prenex_left (formsubst (valmod (x,V y) V) q)))\n                (\\q. Prenex_right q p) r
+  ?Prenex_left.\n        (forall p x q. Prenex_left (!!x q) p =\n                   let y = VARIANT(FV(!!x q) UNION FV(p)) in\n                   ??y (Prenex_left (formsubst (valmod (x,V y) V) q) p)) /\\\n        (forall p x q. Prenex_left (??x q) p =\n                   let y = VARIANT(FV(??x q) UNION FV(p)) in\n                   !!y (Prenex_left (formsubst (valmod (x,V y) V) q) p)) /\\\n        (forall p q. qfree q ==> (Prenex_left q p = Prenex_right q p))
   (Prenex False = False) /\\\n   (Prenex (Atom a l) = Atom a l) /\\\n   (Prenex (p --> q) = Prenex_left (Prenex p) (Prenex q)) /\\\n   (Prenex (!!x p) = !!x (Prenex p))
   holds M (v:num->A) p
-  !v a:A. holds M (valmod (y,a) v) p = holds M v p
+  forall v a:A. holds M (valmod (y,a) v) p = holds M v p
   ~(y IN FV(!!x q))
   z:num
   (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
@@ -7413,7 +7413,7 @@ Logic/prenex quotations (113):
   y = VARIANT (FV(p) UNION FV(!!x q))
   ~(Dom M :A->bool = EMPTY)\n   ==> (holds M v (p --> !!x q) <=>\n        holds M v (!! (VARIANT (FV(p) UNION FV(!!x q)))\n                      (p --> formsubst (valmod\n                               (x,V(VARIANT (FV(p) UNION FV(!!x q)))) V) q)))
   holds M (v:num->A) p
-  !v a:A. holds M (valmod (y,a) v) p = holds M v p
+  forall v a:A. holds M (valmod (y,a) v) p = holds M v p
   ~(y IN FV(??x q))
   z:num
   (a ==> (b <=> c)) ==> ((a /\\ b) <=> (a /\\ c))
@@ -7443,17 +7443,17 @@ Logic/prenex quotations (113):
   language {(p --> ??x q)} =\n   language {(?? (VARIANT (FV(p) UNION FV(??x q)))\n           (p --> formsubst (valmod\n                   (x,V(VARIANT (FV(p) UNION FV(??x q)))) V) q))}
   language {(!!x p --> q)} =\n   language {(?? (VARIANT (FV(!!x p) UNION FV(q)))\n                      (formsubst (valmod\n                        (x,V(VARIANT (FV(!!x p) UNION FV(q)))) V) p --> q))}
   language {(??x p --> q)} =\n   language {(!! (VARIANT (FV(??x p) UNION FV(q)))\n                      (formsubst (valmod\n                        (x,V(VARIANT (FV(??x p) UNION FV(q)))) V) p --> q))}
-  P /\\\n   (FV r1 = FV r2) /\\\n   (language {r1} = language {r2}) /\\\n   (!M v. ~(Dom M :A->bool = EMPTY) ==> (holds M v p <=> holds M v q))\n   ==> P /\\\n       (FV(!!z r1) = FV(!!z r2)) /\\\n       (language {(!!z r1)} = language {(!!z r2)}) /\\\n       !M v. ~(Dom M :A->bool = EMPTY)\n               ==> (holds M v (!!x p) <=> holds M v (!!x q))
-  P /\\\n   (FV r1 = FV r2) /\\\n   (language {r1} = language {r2}) /\\\n   (!M v. ~(Dom M :A->bool = EMPTY) ==> (holds M v p <=> holds M v q))\n   ==> P /\\\n       (FV(??z r1) = FV(??z r2)) /\\\n       (language {(??z r1)} = language {(??z r2)}) /\\\n       !M v. ~(Dom M :A->bool = EMPTY)\n               ==> (holds M v (??x p) <=> holds M v (??x q))
+  P /\\\n   (FV r1 = FV r2) /\\\n   (language {r1} = language {r2}) /\\\n   (forall M v. ~(Dom M :A->bool = EMPTY) ==> (holds M v p <=> holds M v q))\n   ==> P /\\\n       (FV(!!z r1) = FV(!!z r2)) /\\\n       (language {(!!z r1)} = language {(!!z r2)}) /\\\n       forall M v. ~(Dom M :A->bool = EMPTY)\n               ==> (holds M v (!!x p) <=> holds M v (!!x q))
+  P /\\\n   (FV r1 = FV r2) /\\\n   (language {r1} = language {r2}) /\\\n   (forall M v. ~(Dom M :A->bool = EMPTY) ==> (holds M v p <=> holds M v q))\n   ==> P /\\\n       (FV(??z r1) = FV(??z r2)) /\\\n       (language {(??z r1)} = language {(??z r2)}) /\\\n       forall M v. ~(Dom M :A->bool = EMPTY)\n               ==> (holds M v (??x p) <=> holds M v (??x q))
   size q = n
   size p'
-  !p. qfree p\n        ==> !n q. prenex(q) /\\ (size(q) = n)\n                  ==> prenex (Prenex_right p q) /\\\n                      (FV(Prenex_right p q) = FV(p --> q)) /\\\n                      (language {(Prenex_right p q)} = language {(p --> q)}) /\\\n                      (!M v. ~(Dom M :A->bool = EMPTY)\n                              ==> (holds M v (Prenex_right p q) <=>\n                                   holds M v (p --> q)))
-  !p q. qfree p /\\ prenex q\n         ==> prenex (Prenex_right p q) /\\\n             (FV(Prenex_right p q) = FV(p --> q)) /\\\n             (language {(Prenex_right p q)} = language {(p --> q)}) /\\\n             (!M v. ~(Dom M :A->bool = EMPTY)\n                    ==> (holds M v (Prenex_right p q) <=>\n                         holds M v (p --> q)))
+  forall p. qfree p\n        ==> forall n q. prenex(q) /\\ (size(q) = n)\n                  ==> prenex (Prenex_right p q) /\\\n                      (FV(Prenex_right p q) = FV(p --> q)) /\\\n                      (language {(Prenex_right p q)} = language {(p --> q)}) /\\\n                      (forall M v. ~(Dom M :A->bool = EMPTY)\n                              ==> (holds M v (Prenex_right p q) <=>\n                                   holds M v (p --> q)))
+  forall p q. qfree p /\\ prenex q\n         ==> prenex (Prenex_right p q) /\\\n             (FV(Prenex_right p q) = FV(p --> q)) /\\\n             (language {(Prenex_right p q)} = language {(p --> q)}) /\\\n             (forall M v. ~(Dom M :A->bool = EMPTY)\n                    ==> (holds M v (Prenex_right p q) <=>\n                         holds M v (p --> q)))
   size p = n
   size p'
-  !q. prenex(q)\n        ==> !n p. prenex(p) /\\ (size(p) = n)\n                  ==> prenex (Prenex_left p q) /\\\n                      (FV(Prenex_left p q) = FV(p --> q)) /\\\n                      (language {(Prenex_left p q)} = language {(p --> q)}) /\\\n                      (!M v. ~(Dom M :A->bool = EMPTY)\n                              ==> (holds M v (Prenex_left p q) <=>\n                                   holds M v (p --> q)))
-  !p q. prenex p /\\ prenex q\n         ==> prenex (Prenex_left p q) /\\\n             (FV(Prenex_left p q) = FV(p --> q)) /\\\n             (language {(Prenex_left p q)} = language {(p --> q)}) /\\\n             (!M v. ~(Dom M :A->bool = EMPTY)\n                    ==> (holds M v (Prenex_left p q) <=> holds M v (p --> q)))
-  !p. prenex(Prenex p) /\\\n       (FV(Prenex p) = FV(p)) /\\\n       (language {(Prenex p)} = language {p}) /\\\n       !M v. ~(Dom M = EMPTY)\n             ==> (holds M (v:num->A) (Prenex p) <=> holds M v p)
+  forall q. prenex(q)\n        ==> forall n p. prenex(p) /\\ (size(p) = n)\n                  ==> prenex (Prenex_left p q) /\\\n                      (FV(Prenex_left p q) = FV(p --> q)) /\\\n                      (language {(Prenex_left p q)} = language {(p --> q)}) /\\\n                      (forall M v. ~(Dom M :A->bool = EMPTY)\n                              ==> (holds M v (Prenex_left p q) <=>\n                                   holds M v (p --> q)))
+  forall p q. prenex p /\\ prenex q\n         ==> prenex (Prenex_left p q) /\\\n             (FV(Prenex_left p q) = FV(p --> q)) /\\\n             (language {(Prenex_left p q)} = language {(p --> q)}) /\\\n             (forall M v. ~(Dom M :A->bool = EMPTY)\n                    ==> (holds M v (Prenex_left p q) <=> holds M v (p --> q)))
+  forall p. prenex(Prenex p) /\\\n       (FV(Prenex p) = FV(p)) /\\\n       (language {(Prenex p)} = language {p}) /\\\n       forall M v. ~(Dom M = EMPTY)\n             ==> (holds M (v:num->A) (Prenex p) <=> holds M v p)
 qfree =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) #False:form)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) n:num) l:list(term)))) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#-->:fun(form,fun(form,form)) p:form) q:form))) ((#/\:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) p:form)) (#qfree:fun(form,bool) q:form)))) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) p:form))) #F:bool))))
 QFREE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) #False:form)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) #True:form)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(list(term),bool),bool) (\l:list(term). ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#Atom:fun(num,fun(list(term),form)) a:num) l:list(term)))) #T:bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) (#Not:fun(form,form) p:form))) (#qfree:fun(form,bool) p:form))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(form,bool),bool) (\q:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#||:fun(form,fun(form,form)) p:form) q:form))) ((#/\:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) p:form)) (#qfree:fun(form,bool) q:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(form,bool),bool) (\q:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#&&:fun(form,fun(form,form)) p:form) q:form))) ((#/\:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) p:form)) (#qfree:fun(form,bool) q:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(form,bool),bool) (\q:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#-->:fun(form,fun(form,form)) p:form) q:form))) ((#/\:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) p:form)) (#qfree:fun(form,bool) q:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(form,bool),bool) (\q:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#<->:fun(form,fun(form,form)) p:form) q:form))) ((#/\:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) p:form)) (#qfree:fun(form,bool) q:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#!!:fun(num,fun(form,form)) x:num) p:form))) #F:bool)))))) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#??:fun(num,fun(form,form)) x:num) p:form))) #F:bool))))))))))))))
 QFREE_FORMSUBST =  |- (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(fun(num,term),bool),bool) (\v:fun(num,term). ((#=:fun(bool,fun(bool,bool)) (#qfree:fun(form,bool) ((#formsubst:fun(fun(num,term),fun(form,form)) v:fun(num,term)) p:form))) (#qfree:fun(form,bool) p:form))))))

@@ -5667,14 +5667,14 @@ test "miz3/Samples/icms matches miz3/Samples/icms.ml" {
       #|  &1 + (n + &1) * x <= (&1 + x) * (&1 + n * x) <=> &0 <= n * x * x
       #|  &0 <= x ==> &0 <= &1 + x
       #|  (&1 + x) * (&1 + &n * x)
-      #|  !x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n
+      #|  forall x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n
       #|  &1 < x ==> &0 <= x - &1
       #|  x < y ==> x < &1 + y
       #|  &1 + &n * (x - &1)
       #|  n:num
       #|  y:real
       #|  x - &1
-      #|  !x y. &1 < x ==> ?n. y < x pow n
+      #|  forall x y. &1 < x ==> ?n. y < x pow n
       #|  :error
       #|  &1 < k ==> &0 < k
       #|  :error

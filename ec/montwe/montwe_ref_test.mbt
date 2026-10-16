@@ -69023,16 +69023,16 @@ test "EC/montwe matches EC/montwe.ml" {
       #|0..0..1..3..solved at 7
       #|EC/montwe quotations (294):
       #|  wcurve_of_mcurve(f,(a:A),b) =\n   (f,\n    ring_div f (ring_sub f (ring_of_num f 1)\n                           (ring_div f (ring_pow f a 2) (ring_of_num f 3)))\n               (ring_pow f b 2),\n    ring_div f (ring_mul f a (ring_sub f (ring_mul f (ring_of_num f 2)\n                                                     (ring_pow f a 2))\n                                         (ring_of_num f 9)))\n               (ring_mul f (ring_of_num f 27) (ring_pow f b 3)))
-      #|  !f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n        ==> (weierstrass_nonsingular(wcurve_of_mcurve(f,a,b)) <=>\n             ~(ring_pow f a 2 = ring_of_num f 4))
+      #|  forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n        ==> (weierstrass_nonsingular(wcurve_of_mcurve(f,a,b)) <=>\n             ~(ring_pow f a 2 = ring_of_num f 4))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b)\n        ==> weierstrass_nonsingular(wcurve_of_mcurve(f,a,b))
+      #|  forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b)\n        ==> weierstrass_nonsingular(wcurve_of_mcurve(f,a,b))
       #|  weierstrass_of_montgomery(f,a:A,b) NONE = NONE /\\\n  weierstrass_of_montgomery(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_div f (ring_add f x (ring_div f a (ring_of_num f 3))) b,\n       ring_div f y b)
       #|  montgomery_of_weierstrass(f,a:A,b) NONE = NONE /\\\n  montgomery_of_weierstrass(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_sub f (ring_mul f b x) (ring_div f a (ring_of_num f 3)),\n       ring_mul f b y)
-      #|  !f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_point f p\n        ==> montgomery_of_weierstrass(f,a,b)\n              (weierstrass_of_montgomery(f,a,b) p) = p
+      #|  forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_point f p\n        ==> montgomery_of_weierstrass(f,a,b)\n              (weierstrass_of_montgomery(f,a,b) p) = p
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69051,7 +69051,7 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_point f p\n        ==> weierstrass_of_montgomery(f,a,b)\n              (montgomery_of_weierstrass(f,a,b) p) = p
+      #|  forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_point f p\n        ==> weierstrass_of_montgomery(f,a,b)\n              (montgomery_of_weierstrass(f,a,b) p) = p
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69070,7 +69070,7 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_curve (wcurve_of_mcurve(f,a,b))\n                              (weierstrass_of_montgomery(f,a,b) p)
+      #|  forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_curve (wcurve_of_mcurve(f,a,b))\n                              (weierstrass_of_montgomery(f,a,b) p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69080,7 +69080,7 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f (a:A) b p.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_curve (wcurve_of_mcurve(f,a,b)) p\n        ==> montgomery_curve(f,a,b) (montgomery_of_weierstrass(f,a,b) p)
+      #|  forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_curve (wcurve_of_mcurve(f,a,b)) p\n        ==> montgomery_curve(f,a,b) (montgomery_of_weierstrass(f,a,b) p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69090,7 +69090,7 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_neg(f,a,b) p) =\n            weierstrass_neg (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)
+      #|  forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_neg(f,a,b) p) =\n            weierstrass_neg (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69100,95 +69100,7 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_add(f,a,b) p q) =\n            weierstrass_add (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)\n                            (weierstrass_of_montgomery(f,a,b) q)
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  forall f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_add(f,a,b) p q) =\n            weierstrass_add (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)\n                            (weierstrass_of_montgomery(f,a,b) q)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -69277,6 +69189,25 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
       #|  (x:A) IN ring_carrier f
@@ -69308,14 +69239,83 @@ test "EC/montwe matches EC/montwe.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  (!x. weierstrass_curve (wcurve_of_mcurve (f,(a:A),b)) x\n         ==> weierstrass_point f x) /\\\n    (!y. montgomery_curve (f,a,b) y ==> montgomery_point f y)
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (forall x. weierstrass_curve (wcurve_of_mcurve (f,(a:A),b)) x\n         ==> weierstrass_point f x) /\\\n    (forall y. montgomery_curve (f,a,b) y ==> montgomery_point f y)
       #|  b:A
       #|  a:A
       #|  f:A ring
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (montgomery_group(f,a,b),weierstrass_group(wcurve_of_mcurve(f,a,b)))\n           (weierstrass_of_montgomery(f,a,b),\n            montgomery_of_weierstrass(f,a,b))
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (weierstrass_group(wcurve_of_mcurve(f,a,b)),montgomery_group(f,a,b))\n           (montgomery_of_weierstrass(f,a,b),\n            weierstrass_of_montgomery(f,a,b))
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (montgomery_group(f,a,b)) isomorphic_group\n          (weierstrass_group(wcurve_of_mcurve(f,a,b)))
-      #|  !f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (weierstrass_group(wcurve_of_mcurve(f,a,b))) isomorphic_group\n          (montgomery_group(f,a,b))
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (montgomery_group(f,a,b),weierstrass_group(wcurve_of_mcurve(f,a,b)))\n           (weierstrass_of_montgomery(f,a,b),\n            montgomery_of_weierstrass(f,a,b))
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (weierstrass_group(wcurve_of_mcurve(f,a,b)),montgomery_group(f,a,b))\n           (montgomery_of_weierstrass(f,a,b),\n            weierstrass_of_montgomery(f,a,b))
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (montgomery_group(f,a,b)) isomorphic_group\n          (weierstrass_group(wcurve_of_mcurve(f,a,b)))
+      #|  forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (weierstrass_group(wcurve_of_mcurve(f,a,b))) isomorphic_group\n          (montgomery_group(f,a,b))
       #|wcurve_of_mcurve =  |- ((#=:fun(prod(ring('A),prod('A,'A)),fun(prod(ring('A),prod('A,'A)),bool)) (#wcurve_of_mcurve:fun(prod(ring('A),prod('A,'A)),prod(ring('A),prod('A,'A))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A)))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) a:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) b:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) (((#ring_sub:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) a:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) b:'A) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|WCURVE_OF_MCURVE_NONSINGULAR_EQ =  |- (#!:fun(fun(ring('A),bool),bool) (\f:ring('A). (#!:fun(fun('A,bool),bool) (\a:'A. (#!:fun(fun('A,bool),bool) (\b:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) a:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) b:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) b:'A) (#ring_0:fun(ring('A),'A) f:ring('A)))))))))) ((#=:fun(bool,fun(bool,bool)) (#weierstrass_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) (#wcurve_of_mcurve:fun(prod(ring('A),prod('A,'A)),prod(ring('A),prod('A,'A))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))))) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) a:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#ring_of_num:fun(ring('A),fun(num,'A)) f:ring('A)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))
       #|WCURVE_OF_MCURVE_NONSINGULAR =  |- (#!:fun(fun(ring('A),bool),bool) (\f:ring('A). (#!:fun(fun('A,bool),bool) (\a:'A. (#!:fun(fun('A,bool),bool) (\b:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) a:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) b:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) (#montgomery_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))))))))) (#weierstrass_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) (#wcurve_of_mcurve:fun(prod(ring('A),prod('A,'A)),prod(ring('A),prod('A,'A))) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A)))))))))))

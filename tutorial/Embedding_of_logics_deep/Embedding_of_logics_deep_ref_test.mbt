@@ -5632,7 +5632,7 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|0..0..2..12..30..56..93..157..253..373..522..703..solved at 745
       #|0..0..1..6..15..28..46..75..114..163..224..301..solved at 325
       #|Tutorial/Embedding_of_logics_deep quotations (73):
-      #|  (holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        !w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')
+      #|  (holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        forall w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')
       #|  :P
       #|  :P
       #|  :P
@@ -5679,11 +5679,11 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  holds_in (W,R) p = !V w. w IN W ==> holds (W,R) V p w
-      #|  L |= p <=> !f. L f ==> holds_in f p
-      #|  S4(W,R) <=> ~(W = {}) /\\ (!x y. R x y ==> x IN W /\\ y IN W) /\\\n              (!x. x IN W ==> R x x) /\\\n              (!x y z. R x y /\\ R y z ==> R x z)
-      #|  LTL(W,R) <=> (W = UNIV) /\\ !x y:num. R x y <=> x <= y
-      #|  GL(W,R) <=> ~(W = {}) /\\ (!x y. R x y ==> x IN W /\\ y IN W) /\\\n              WF(\\x y. R y x) /\\ (!x y z:num. R x y /\\ R y z ==> R x z)
+      #|  holds_in (W,R) p = forall V w. w IN W ==> holds (W,R) V p w
+      #|  L |= p <=> forall f. L f ==> holds_in f p
+      #|  S4(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              (forall x. x IN W ==> R x x) /\\\n              (forall x y z. R x y /\\ R y z ==> R x z)
+      #|  LTL(W,R) <=> (W = UNIV) /\\ forall x y:num. R x y <=> x <= y
+      #|  GL(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              WF(\\x y. R y x) /\\ (forall x y z:num. R x y /\\ R y z ==> R x z)
       #|  L |= Box True
       #|  L |= Box(A --> B) --> Box A --> Box B
       #|  L |= Diamond(A --> B) --> Box A --> Diamond B
@@ -5692,19 +5692,19 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|  L |= Diamond(A || B) --> Diamond A || Diamond B
       #|  \\a:string. (p:W->bool)
       #|  Atom a
-      #|  !W R P. (!A V. P(holds (W,R) V A)) <=> (!p:W->bool. P p)
-      #|  !W R. (!w:W. w IN W ==> R w w) <=> !A. holds_in (W,R) (Box A --> A)
-      #|  !W R. (!w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (!A. holds_in (W,R) (Box A --> Box(Box A)))
-      #|  !W R. (!w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (!A. holds_in (W,R) (Box A --> Diamond A))
+      #|  forall W R P. (forall A V. P(holds (W,R) V A)) <=> (forall p:W->bool. P p)
+      #|  forall W R. (forall w:W. w IN W ==> R w w) <=> forall A. holds_in (W,R) (Box A --> A)
+      #|  forall W R. (forall w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (forall A. holds_in (W,R) (Box A --> Box(Box A)))
+      #|  forall W R. (forall w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (forall A. holds_in (W,R) (Box A --> Diamond A))
       #|  w:W
       #|  \\v:W. v = w
-      #|  !W R. (!w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (!A. holds_in (W,R) (A --> Box(Diamond A)))
-      #|  \\x:W. !w:W. x IN W /\\ R w x ==> P x
+      #|  forall W R. (forall w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (forall A. holds_in (W,R) (A --> Box(Diamond A)))
+      #|  \\x:W. forall w:W. x IN W /\\ R w x ==> P x
       #|  P:W->bool
       #|  w:W
-      #|  \\v:W. v IN W /\\ R w v /\\ !w''. w'' IN W /\\ R v w'' ==> R w w''
+      #|  \\v:W. v IN W /\\ R w v /\\ forall w''. w'' IN W /\\ R v w'' ==> R w w''
       #|  w:W
-      #|  !W R. (!x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n         WF(\\x y. x IN W /\\ y IN W /\\ R y x) <=>\n         (!A. holds_in (W,R) (Box(Box A --> A) --> Box A))
+      #|  forall W R. (forall x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n         WF(\\x y. x IN W /\\ y IN W /\\ R y x) <=>\n         (forall A. holds_in (W,R) (Box(Box A --> A) --> Box A))
       #|string_INDUCT =  |- (#!:fun(fun(fun(string,bool),bool),bool) (\P:fun(string,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(string,bool) (#String:fun(num,string) a:num))))) (#!:fun(fun(string,bool),bool) (\x:string. (P:fun(string,bool) x:string))))))
       #|string_RECURSION =  |- (#!:fun(fun(fun(num,'Z),bool),bool) (\f:fun(num,'Z). (#?:fun(fun(fun(string,'Z),bool),bool) (\fn:fun(string,'Z). (#!:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(string,'Z) (#String:fun(num,string) a:num))) (f:fun(num,'Z) a:num))))))))
       #|form_INDUCT =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\P:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #False:form)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #True:form)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(form,bool) (#Atom:fun(list(char),form) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Not:fun(form,form) a:form)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#&&:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#||:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#-->:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a0:form. (#!:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#<->:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Box:fun(form,form) a:form)))))) (#!:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Diamond:fun(form,form) a:form))))))))))))))) (#!:fun(fun(form,bool),bool) (\x:form. (P:fun(form,bool) x:form))))))

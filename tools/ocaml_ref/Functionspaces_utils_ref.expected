@@ -79017,8 +79017,8 @@ Warning: inventing type variables
 0..0..1..solved at 5
 0..0..solved at 2
 Functionspaces/utils quotations (3):
-  !P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)
-  !P Q.(~P <=> ~Q) <=> (P <=> Q)
+  forall P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)
+  forall P Q.(~P <=> ~Q) <=> (P <=> Q)
   (/\\)
 EQ_TO_IMP =  |- (#!:fun(fun(bool,bool),bool) (\P:bool. (#!:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#==>:fun(bool,fun(bool,bool)) Q:bool) P:bool)))))))
 EQ_NOT =  |- (#!:fun(fun(bool,bool),bool) (\P:bool. (#!:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) P:bool)) (#~:fun(bool,bool) Q:bool))) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))

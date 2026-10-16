@@ -36791,7 +36791,7 @@ test "EC/edwards448 matches EC/edwards448.ml" {
       #|  H_448 IN group_carrier edwards448_group
       #|  group_element_order edwards448_group H_448 = n_448
       #|  group_id edwards448_group
-      #|  !a'. a' IN G /\\ (x IN G ==> (P x <=> x = a')) /\\ a' = a\n         ==> (x IN G /\\ P x <=> x = a)
+      #|  forall a'. a' IN G /\\ (x IN G ==> (P x <=> x = a')) /\\ a' = a\n         ==> (x IN G /\\ P x <=> x = a)
       #|  y:int
       #|  x:int
       #|  {p | p IN group_carrier edwards448_group /\\\n        group_element_order edwards448_group p = 1} = {(&0,&1)}

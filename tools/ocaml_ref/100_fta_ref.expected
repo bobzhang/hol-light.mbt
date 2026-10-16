@@ -12631,26 +12631,26 @@ Warning: inventing type variables
 0..0..7..solved at 10
 100/fta quotations (46):
   nproduct = iterate ( * )
-  (!f. nproduct {} f = 1) /\\\n   (!x f s. FINITE(s)\n            ==> (nproduct (x INSERT s) f =\n                 if x IN s then nproduct s f else f(x) * nproduct s f))
-  !s f. FINITE s ==> (nproduct s f = 1 <=> !x. x IN s ==> f(x) = 1)
+  (forall f. nproduct {} f = 1) /\\\n   (forall x f s. FINITE(s)\n            ==> (nproduct (x INSERT s) f =\n                 if x IN s then nproduct s f else f(x) * nproduct s f))
+  forall s f. FINITE s ==> (nproduct s f = 1 <=> forall x. x IN s ==> f(x) = 1)
   s = (x:A) INSERT (s DELETE x)
   ~(x IN s) ==> s DELETE x = s
-  !x:A f s. FINITE s\n             ==> nproduct s f =\n                 (if x IN s then f(x) else 1) * nproduct (s DELETE x) f
-  !x:A f s. nproduct s f =\n             if FINITE s then\n               (if x IN s then f(x) else 1) * nproduct (s DELETE x) f\n             else nproduct s f
-  !f g s. FINITE s /\\ (!x. x IN s ==> f x = g x)\n           ==> nproduct s f = nproduct s g
-  !f g s t. FINITE s /\\ s = t /\\ (!x. x IN s ==> f x = g x)\n             ==> nproduct s f = nproduct t g
-  !p s f. prime p /\\ FINITE s /\\ p divides (nproduct s f)\n           ==> ?x. x IN s /\\ p divides (f x)
+  forall x:A f s. FINITE s\n             ==> nproduct s f =\n                 (if x IN s then f(x) else 1) * nproduct (s DELETE x) f
+  forall x:A f s. nproduct s f =\n             if FINITE s then\n               (if x IN s then f(x) else 1) * nproduct (s DELETE x) f\n             else nproduct s f
+  forall f g s. FINITE s /\\ (forall x. x IN s ==> f x = g x)\n           ==> nproduct s f = nproduct s g
+  forall f g s t. FINITE s /\\ s = t /\\ (forall x. x IN s ==> f x = g x)\n             ==> nproduct s f = nproduct t g
+  forall p s f. prime p /\\ FINITE s /\\ p divides (nproduct s f)\n           ==> ?x. x IN s /\\ p divides (f x)
   \\p. p EXP (f p)
   s DELETE (p:num)
   p:num
   ~(j = 0) ==> j = SUC(j - 1)
   j = 0
-  !s p m f j.\n        p EXP j * nproduct (s DELETE p) (\\p. p EXP (f p)) = p * m\n        ==> prime p /\\ FINITE s /\\ (!x. x IN s ==> prime x)\n            ==> ~(j = 0) /\\\n                p EXP (j - 1) * nproduct (s DELETE p) (\\p. p EXP (f p)) = m
+  forall s p m f j.\n        p EXP j * nproduct (s DELETE p) (\\p. p EXP (f p)) = p * m\n        ==> prime p /\\ FINITE s /\\ (forall x. x IN s ==> prime x)\n            ==> ~(j = 0) /\\\n                p EXP (j - 1) * nproduct (s DELETE p) (\\p. p EXP (f p)) = m
   {p:num | ~(k p = 0)}
   {p:num | ~(j p = 0)}
   ~(k(p:num) = 0)
   ~(j(p:num) = 0)
-  !j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p
+  forall j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p
   \\i:num. if i = p then k(i) - 1 else k(i)
   \\i:num. if i = p then j(i) - 1 else j(i)
   k:num->num
@@ -12675,7 +12675,7 @@ Warning: inventing type variables
   n = 1
   n:num
   n = nproduct s f <=> nproduct s f = n
-  !n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (!p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))
+  forall n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (forall p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))
 nproduct =  |- ((#=:fun(fun(fun('?156906,bool),fun(fun('?156906,num),num)),fun(fun(fun('?156906,bool),fun(fun('?156906,num),num)),bool)) #nproduct:fun(fun('?156906,bool),fun(fun('?156906,num),num))) (#iterate:fun(fun(num,fun(num,num)),fun(fun('?156906,bool),fun(fun('?156906,num),num))) #*:fun(num,fun(num,num))))
 NPRODUCT_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('?156922,num),bool),bool) (\f:fun('?156922,num). ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?156922,bool),fun(fun('?156922,num),num)) #EMPTY:fun('?156922,bool)) f:fun('?156922,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#!:fun(fun('?156961,bool),bool) (\x:'?156961. (#!:fun(fun(fun('?156961,num),bool),bool) (\f:fun('?156961,num). (#!:fun(fun(fun('?156961,bool),bool),bool) (\s:fun('?156961,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?156961,bool),bool) s:fun('?156961,bool))) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?156961,bool),fun(fun('?156961,num),num)) ((#INSERT:fun('?156961,fun(fun('?156961,bool),fun('?156961,bool))) x:'?156961) s:fun('?156961,bool))) f:fun('?156961,num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#IN:fun('?156961,fun(fun('?156961,bool),bool)) x:'?156961) s:fun('?156961,bool))) ((#nproduct:fun(fun('?156961,bool),fun(fun('?156961,num),num)) s:fun('?156961,bool)) f:fun('?156961,num))) ((#*:fun(num,fun(num,num)) (f:fun('?156961,num) x:'?156961)) ((#nproduct:fun(fun('?156961,bool),fun(fun('?156961,num),num)) s:fun('?156961,bool)) f:fun('?156961,num)))))))))))))
 NPRODUCT_EQ_1_EQ =  |- (#!:fun(fun(fun('?156998,bool),bool),bool) (\s:fun('?156998,bool). (#!:fun(fun(fun('?156998,num),bool),bool) (\f:fun('?156998,num). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?156998,bool),bool) s:fun('?156998,bool))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?156998,bool),fun(fun('?156998,num),num)) s:fun('?156998,bool)) f:fun('?156998,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#!:fun(fun('?156998,bool),bool) (\x:'?156998. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?156998,fun(fun('?156998,bool),bool)) x:'?156998) s:fun('?156998,bool))) ((#=:fun(num,fun(num,bool)) (f:fun('?156998,num) x:'?156998)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))

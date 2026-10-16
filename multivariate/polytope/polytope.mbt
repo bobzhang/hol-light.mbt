@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// face_of
 fn step_2() -> Unit raise {
-  face_of_c.set(@pair.new_definition(@parser.parse_term("t face_of s <=>\n        t SUBSET s /\\ convex t /\\\n        !a b x. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b)\n                ==> a IN t /\\ b IN t")))
+  face_of_c.set(@pair.new_definition(@parser.parse_term("t face_of s <=>\n        t SUBSET s /\\ convex t /\\\n        forall a b x. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b)\n                ==> a IN t /\\ b IN t")))
 }
 
 ///|
@@ -26,7 +26,7 @@ pub fn face_of() -> @kernel.Thm {
 /// FACE_OF_TRANSLATION_EQ
 fn step_3() -> Unit raise {
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of()])), (x1 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x1))
-  face_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) face_of (IMAGE (\\x. a + x) s) <=> f face_of s"), t2))
+  face_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) face_of (IMAGE (\\x. a + x) s) <=> f face_of s"), t2))
 }
 
 ///|
@@ -54,7 +54,7 @@ fn step_5() -> Unit raise {
   let t7 = @tactics.mp_tac(@lib.end_itlist(@bool.conj, @lib.mapfilter((x5 : @kernel.Thm) => @bool.ispec(t4, x5), t6)))
   let t3 = @tactics.repeat_tac(@tactics.strip_tac)
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([face_of(), @theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_image()])), t3), t7), t8), @tactics.disch_tac), t9)
-  face_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N c s.\n      linear f /\\ (!x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) face_of (IMAGE f s) <=> c face_of s)"), t10))
+  face_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) face_of (IMAGE f s) <=> c face_of s)"), t10))
 }
 
 ///|
@@ -77,7 +77,7 @@ fn step_6() -> Unit raise {
 fn step_7() -> Unit raise {
   let t11 = @sets.set_tac(@list.List([]))
   let t12 = @tactics.then_tac(@simp.simp_tac(@list.List([face_of()])), t11)
-  face_of_refl_c.set(@tactics.prove(@parser.parse_term("!s. convex s ==> s face_of s"), t12))
+  face_of_refl_c.set(@tactics.prove(@parser.parse_term("forall s. convex s ==> s face_of s"), t12))
 }
 
 ///|
@@ -94,7 +94,7 @@ pub fn face_of_refl() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t13 = @sets.set_tac(@list.List([]))
   let t14 = @tactics.then_tac(@simp.simp_tac(@list.List([face_of()])), t13)
-  face_of_refl_eq_c.set(@tactics.prove(@parser.parse_term("!s. s face_of s <=> convex s"), t14))
+  face_of_refl_eq_c.set(@tactics.prove(@parser.parse_term("forall s. s face_of s <=> convex s"), t14))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn face_of_refl_eq() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t15 = @sets.set_tac(@list.List([]))
   let t16 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of(), @convex.convex_empty()])), t15)
-  empty_face_of_c.set(@tactics.prove(@parser.parse_term("!s. {} face_of s"), t16))
+  empty_face_of_c.set(@tactics.prove(@parser.parse_term("forall s. {} face_of s"), t16))
 }
 
 ///|
@@ -128,7 +128,7 @@ pub fn empty_face_of() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t17 = @meson.meson_tac(@list.List([@convex.convex_empty()]))
   let t18 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of(), @sets.subset_empty(), @sets.not_in_empty()])), t17)
-  face_of_empty_c.set(@tactics.prove(@parser.parse_term("!s. s face_of {} <=> s = {}"), t18))
+  face_of_empty_c.set(@tactics.prove(@parser.parse_term("forall s. s face_of {} <=> s = {}"), t18))
 }
 
 ///|
@@ -145,7 +145,7 @@ pub fn face_of_empty() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t19 = @sets.set_tac(@list.List([]))
   let t20 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of()])), t19)
-  face_of_trans_c.set(@tactics.prove(@parser.parse_term("!s t u. s face_of t /\\ t face_of u\n           ==> s face_of u"), t20))
+  face_of_trans_c.set(@tactics.prove(@parser.parse_term("forall s t u. s face_of t /\\ t face_of u\n           ==> s face_of u"), t20))
 }
 
 ///|
@@ -162,7 +162,7 @@ pub fn face_of_trans() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t21 = @sets.set_tac(@list.List([]))
   let t22 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of()])), t21)
-  face_of_face_c.set(@tactics.prove(@parser.parse_term("!f s t.\n        t face_of s\n        ==> (f face_of t <=> f face_of s /\\ f SUBSET t)"), t22))
+  face_of_face_c.set(@tactics.prove(@parser.parse_term("forall f s t.\n        t face_of s\n        ==> (f face_of t <=> f face_of s /\\ f SUBSET t)"), t22))
 }
 
 ///|
@@ -179,7 +179,7 @@ pub fn face_of_face() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t23 = @sets.set_tac(@list.List([]))
   let t24 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of()])), t23)
-  face_of_subset_c.set(@tactics.prove(@parser.parse_term("!f s t. f face_of s /\\ f SUBSET t /\\ t SUBSET s ==> f face_of t"), t24))
+  face_of_subset_c.set(@tactics.prove(@parser.parse_term("forall f s t. f face_of s /\\ f SUBSET t /\\ t SUBSET s ==> f face_of t"), t24))
 }
 
 ///|
@@ -200,7 +200,7 @@ fn step_14() -> Unit raise {
   let t26 = @tactics.repeat_tac(@tactics.conj_tac)
   let t25 = @simp.rewrite_tac(@list.List([face_of(), @sets.in_inter()]))
   let t30 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t25), @tactics.strip_tac), t26), t29)
-  face_of_slice_c.set(@tactics.prove(@parser.parse_term("!f s t.\n        f face_of s /\\ convex t\n        ==> (f INTER t) face_of (s INTER t)"), t30))
+  face_of_slice_c.set(@tactics.prove(@parser.parse_term("forall f s t.\n        f face_of s /\\ convex t\n        ==> (f INTER t) face_of (s INTER t)"), t30))
 }
 
 ///|
@@ -217,7 +217,7 @@ pub fn face_of_slice() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t31 = @sets.set_tac(@list.List([]))
   let t32 = @tactics.then_tac(@simp.simp_tac(@list.List([face_of(), @convex.convex_inter()])), t31)
-  face_of_inter_c.set(@tactics.prove(@parser.parse_term("!s t1 t2. t1 face_of s /\\ t2 face_of s\n             ==> (t1 INTER t2) face_of s"), t32))
+  face_of_inter_c.set(@tactics.prove(@parser.parse_term("forall s t1 t2. t1 face_of s /\\ t2 face_of s\n             ==> (t1 INTER t2) face_of s"), t32))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_16() -> Unit raise {
   let t37 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t36, t35, t34])
   let t33 = @tactics.repeat_tac(@tactics.strip_tac)
   let t38 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([face_of()])), t33), t37)
-  face_of_inters_c.set(@tactics.prove(@parser.parse_term("!P s. ~(P = {}) /\\ (!t. t IN P ==> t face_of s)\n         ==> (INTERS P) face_of s"), t38))
+  face_of_inters_c.set(@tactics.prove(@parser.parse_term("forall P s. ~(P = {}) /\\ (forall t. t IN P ==> t face_of s)\n         ==> (INTERS P) face_of s"), t38))
 }
 
 ///|
@@ -255,7 +255,7 @@ pub fn face_of_inters() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([@convex.convex_inter()]))
   let t40 = @tactics.then_tac(@simp.rewrite_tac(@list.List([face_of(), @sets.subset(), @sets.in_inter()])), t39)
-  face_of_inter_inter_c.set(@tactics.prove(@parser.parse_term("!f t f' t'.\n     f face_of t /\\ f' face_of t' ==> (f INTER f') face_of (t INTER t')"), t40))
+  face_of_inter_inter_c.set(@tactics.prove(@parser.parse_term("forall f t f' t'.\n     f face_of t /\\ f' face_of t' ==> (f INTER f') face_of (t INTER t')"), t40))
 }
 
 ///|
@@ -329,7 +329,7 @@ fn step_18() -> Unit raise {
   let t110 = @simp.asm_rewrite_tac(@list.List([]))
   let t109 = @class.asm_cases_tac(@parser.parse_term("(a:real^N) IN affine hull t"))
   let t108 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t107 = @tactics.subgoal_then(@parser.parse_term("!a b x:real^N. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b) /\\\n                     (a IN affine hull t ==> b IN affine hull t)\n                     ==> a IN t /\\ b IN t"), fn(x105 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t107 = @tactics.subgoal_then(@parser.parse_term("forall a b x:real^N. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b) /\\\n                     (a IN affine hull t ==> b IN affine hull t)\n                     ==> a IN t /\\ b IN t"), fn(x105 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x105
     @meson.meson_tac(@list.List([th, @topology.segment_sym()]))
   })
@@ -408,7 +408,7 @@ fn step_18() -> Unit raise {
   let t42 = @class.asm_cases_tac(@parser.parse_term("(t:real^N->bool) SUBSET s"))
   let t41 = @simp.rewrite_tac(@list.List([face_of()]))
   let t161 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t41), t42), t43), @tactics.eq_tac), @tactics.strip_tac), t160)
-  face_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex s\n        ==> (t face_of s <=>\n             t SUBSET s /\\\n             convex(s DIFF t) /\\\n             t = (affine hull t) INTER s)"), t161))
+  face_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex s\n        ==> (t face_of s <=>\n             t SUBSET s /\\\n             convex(s DIFF t) /\\\n             t = (affine hull t) INTER s)"), t161))
 }
 
 ///|
@@ -446,7 +446,7 @@ fn step_19() -> Unit raise {
   let t162 = @parser.parse_term("d:real")
   let t163 = @parser.parse_term("c:real^N")
   let t184 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("s:real^N->bool"), t163, t162])), t164), @tactics.strip_tac), t165), t168), @tactics.strip_tac), t169), t170), t171), t172), t173), t174), t175), t176), @tactics.conj_tac), @tactics.disch_tac), t177), t178), t179), t180), t182), t183)
-  face_of_inter_supporting_hyperplane_le_strong_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (!x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t184))
+  face_of_inter_supporting_hyperplane_le_strong_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t184))
 }
 
 ///|
@@ -467,7 +467,7 @@ fn step_20() -> Unit raise {
   let t188 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t187, t186]), face_of_inter_supporting_hyperplane_le_strong()))
   let t185 = @tactics.repeat_tac(@tactics.strip_tac)
   let t190 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_ge()])), t185), t188), t189)
-  face_of_inter_supporting_hyperplane_ge_strong_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (!x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t190))
+  face_of_inter_supporting_hyperplane_ge_strong_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t190))
 }
 
 ///|
@@ -483,7 +483,7 @@ pub fn face_of_inter_supporting_hyperplane_ge_strong() -> @kernel.Thm {
 /// FACE_OF_INTER_SUPPORTING_HYPERPLANE_LE
 fn step_21() -> Unit raise {
   let t191 = @simp.simp_tac(@list.List([face_of_inter_supporting_hyperplane_le_strong(), @convex.convex_inter(), @convex.convex_hyperplane()]))
-  face_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex s /\\ (!x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t191))
+  face_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t191))
 }
 
 ///|
@@ -499,7 +499,7 @@ pub fn face_of_inter_supporting_hyperplane_le() -> @kernel.Thm {
 /// FACE_OF_INTER_SUPPORTING_HYPERPLANE_GE
 fn step_22() -> Unit raise {
   let t192 = @simp.simp_tac(@list.List([face_of_inter_supporting_hyperplane_ge_strong(), @convex.convex_inter(), @convex.convex_hyperplane()]))
-  face_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex s /\\ (!x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t192))
+  face_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s"), t192))
 }
 
 ///|
@@ -515,7 +515,7 @@ pub fn face_of_inter_supporting_hyperplane_ge() -> @kernel.Thm {
 /// FACE_OF_IMP_SUBSET
 fn step_23() -> Unit raise {
   let t193 = @simp.simp_tac(@list.List([face_of()]))
-  face_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("!s t. t face_of s ==> t SUBSET s"), t193))
+  face_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("forall s t. t face_of s ==> t SUBSET s"), t193))
 }
 
 ///|
@@ -531,7 +531,7 @@ pub fn face_of_imp_subset() -> @kernel.Thm {
 /// FACE_OF_IMP_CONVEX
 fn step_24() -> Unit raise {
   let t194 = @simp.simp_tac(@list.List([face_of()]))
-  face_of_imp_convex_c.set(@tactics.prove(@parser.parse_term("!s t. t face_of s ==> convex t"), t194))
+  face_of_imp_convex_c.set(@tactics.prove(@parser.parse_term("forall s t. t face_of s ==> convex t"), t194))
 }
 
 ///|
@@ -561,7 +561,7 @@ fn step_25() -> Unit raise {
     }
   })))
   let t205 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t201), t202), @tactics.strip_tac), t203), t204)
-  face_of_imp_closed_c.set(@tactics.prove(@parser.parse_term("!s t. convex s /\\ closed s /\\ t face_of s ==> closed t"), t205))
+  face_of_imp_closed_c.set(@tactics.prove(@parser.parse_term("forall s t. convex s /\\ closed s /\\ t face_of s ==> closed t"), t205))
 }
 
 ///|
@@ -578,7 +578,7 @@ pub fn face_of_imp_closed() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t206 = @meson.asm_meson_tac(@list.List([@topology.bounded_subset(), face_of_imp_subset(), face_of_imp_closed()]))
   let t207 = @tactics.then_tac(@simp.simp_tac(@list.List([@topology.compact_eq_bounded_closed()])), t206)
-  face_of_imp_compact_c.set(@tactics.prove(@parser.parse_term("!s t. convex s /\\ compact s /\\ t face_of s ==> compact t"), t207))
+  face_of_imp_compact_c.set(@tactics.prove(@parser.parse_term("forall s t. convex s /\\ compact s /\\ t face_of s ==> compact t"), t207))
 }
 
 ///|
@@ -601,7 +601,7 @@ fn step_27() -> Unit raise {
   let t210 = @list.List([@tactics.exists_tac(@parser.parse_term("c1:real^N->bool")), t209])
   let t208 = @tactics.match_mp_tac(face_of_subset())
   let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t208), t210), t211), t213), t214)
-  face_of_inter_subface_c.set(@tactics.prove(@parser.parse_term("!c1 c2 d1 d2:real^N->bool.\n        (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2 /\\\n        d1 face_of c1 /\\ d2 face_of c2\n        ==> (d1 INTER d2) face_of d1 /\\ (d1 INTER d2) face_of d2"), t215))
+  face_of_inter_subface_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 d1 d2:real^N->bool.\n        (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2 /\\\n        d1 face_of c1 /\\ d2 face_of c2\n        ==> (d1 INTER d2) face_of d1 /\\ (d1 INTER d2) face_of d2"), t215))
 }
 
 ///|
@@ -716,7 +716,7 @@ fn step_28() -> Unit raise {
   let t217 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t216 = @tactics.repeat_tac(@tactics.strip_tac)
   let t294 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.disjoint()])), t216), t217), t218), @tactics.disch_tac), t225), t226), t227), t228), t235), t239), t246), t247), t248), t249), t250), t257), @tactics.ants_tac), t293)
-  subset_of_face_of_c.set(@tactics.prove(@parser.parse_term("!s t u:real^N->bool.\n      t face_of s /\\ u SUBSET s /\\\n      ~(DISJOINT t (relative_interior u))\n      ==> u SUBSET t"), t294))
+  subset_of_face_of_c.set(@tactics.prove(@parser.parse_term("forall s t u:real^N->bool.\n      t face_of s /\\ u SUBSET s /\\\n      ~(DISJOINT t (relative_interior u))\n      ==> u SUBSET t"), t294))
 }
 
 ///|
@@ -739,7 +739,7 @@ fn step_29() -> Unit raise {
   let t296 = @tactics.match_mp_tac(subset_of_face_of())
   let t295 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t302 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t295), @tactics.conj_tac), t296), t297), t298), t300), t301)
-  face_of_eq_c.set(@tactics.prove(@parser.parse_term("!s t u:real^N->bool.\n        t face_of s /\\ u face_of s /\\\n        ~(DISJOINT (relative_interior t) (relative_interior u))\n        ==> t = u"), t302))
+  face_of_eq_c.set(@tactics.prove(@parser.parse_term("forall s t u:real^N->bool.\n        t face_of s /\\ u face_of s /\\\n        ~(DISJOINT (relative_interior t) (relative_interior u))\n        ==> t = u"), t302))
 }
 
 ///|
@@ -768,7 +768,7 @@ fn step_30() -> Unit raise {
   let t304 = @parser.parse_term("f:real^N->bool")
   let t305 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t304, t303]), subset_of_face_of()))
   let t313 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t305), t311), t312)
-  face_of_disjoint_relative_interior_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER relative_interior s = {}"), t313))
+  face_of_disjoint_relative_interior_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER relative_interior s = {}"), t313))
 }
 
 ///|
@@ -795,7 +795,7 @@ fn step_31() -> Unit raise {
     })(t317(x318))
   })
   let t322 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t319), t320), t321)
-  face_of_disjoint_interior_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER interior s = {}"), t322))
+  face_of_disjoint_interior_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER interior s = {}"), t322))
 }
 
 ///|
@@ -819,7 +819,7 @@ fn step_32() -> Unit raise {
   let t324 = @tactics.exists_tac(@parser.parse_term("s:real^N->bool"))
   let t323 = @tactics.match_mp_tac(subset_of_face_of())
   let t331 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t323), t324), t325), t327), t328), t329), t330)
-  subset_of_face_of_affine_hull_c.set(@tactics.prove(@parser.parse_term("!s t u:real^N->bool.\n        t face_of s /\\ convex s /\\ u SUBSET s /\\\n        ~DISJOINT (affine hull t) (relative_interior u)\n        ==> u SUBSET t"), t331))
+  subset_of_face_of_affine_hull_c.set(@tactics.prove(@parser.parse_term("forall s t u:real^N->bool.\n        t face_of s /\\ convex s /\\ u SUBSET s /\\\n        ~DISJOINT (affine hull t) (relative_interior u)\n        ==> u SUBSET t"), t331))
 }
 
 ///|
@@ -848,7 +848,7 @@ fn step_33() -> Unit raise {
   let t333 = @parser.parse_term("f:real^N->bool")
   let t334 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t333, t332]), subset_of_face_of_affine_hull()))
   let t342 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t334), t340), t341)
-  affine_hull_face_of_disjoint_relative_interior_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s)\n        ==> affine hull f INTER relative_interior s = {}"), t342))
+  affine_hull_face_of_disjoint_relative_interior_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s)\n        ==> affine hull f INTER relative_interior s = {}"), t342))
 }
 
 ///|
@@ -864,7 +864,7 @@ pub fn affine_hull_face_of_disjoint_relative_interior() -> @kernel.Thm {
 /// FACE_OF_SUBSET_RELATIVE_BOUNDARY
 fn step_34() -> Unit raise {
   let t343 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET u DIFF t <=> s SUBSET u /\\ s INTER t = {}")), face_of_disjoint_relative_interior(), face_of_imp_subset()]))
-  face_of_subset_relative_boundary_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET (s DIFF relative_interior s)"), t343))
+  face_of_subset_relative_boundary_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET (s DIFF relative_interior s)"), t343))
 }
 
 ///|
@@ -892,7 +892,7 @@ fn step_35() -> Unit raise {
     })(t347(x348))
   })
   let t353 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t349), t350), t351), t352)
-  face_of_subset_relative_frontier_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET relative_frontier s"), t353))
+  face_of_subset_relative_frontier_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET relative_frontier s"), t353))
 }
 
 ///|
@@ -908,7 +908,7 @@ pub fn face_of_subset_relative_frontier() -> @kernel.Thm {
 /// FACE_OF_SUBSET_RELATIVE_FRONTIER_AFF_DIM
 fn step_36() -> Unit raise {
   let t354 = @meson.meson_tac(@list.List([face_of_subset_relative_frontier(), @int.int_lt_refl()]))
-  face_of_subset_relative_frontier_aff_dim_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        f face_of s /\\ aff_dim f < aff_dim s\n        ==> f SUBSET relative_frontier s"), t354))
+  face_of_subset_relative_frontier_aff_dim_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        f face_of s /\\ aff_dim f < aff_dim s\n        ==> f SUBSET relative_frontier s"), t354))
 }
 
 ///|
@@ -931,7 +931,7 @@ fn step_37() -> Unit raise {
   let t361 = @list.List([@tactics.then_tac(@simp.asm_simp_tac(@list.List([@topology.frontier(), @sets.diff_empty()])), t356), t360])
   let t355 = @class.asm_cases_tac(@parser.parse_term("interior s:real^N->bool = {}"))
   let t362 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t355), t361)
-  face_of_subset_frontier_aff_dim_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        f face_of s /\\ aff_dim f < &(dimindex(:N))\n        ==> f SUBSET frontier s"), t362))
+  face_of_subset_frontier_aff_dim_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        f face_of s /\\ aff_dim f < &(dimindex(:N))\n        ==> f SUBSET frontier s"), t362))
 }
 
 ///|
@@ -969,7 +969,7 @@ fn step_38() -> Unit raise {
   let t364 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @class.contrapos_thm()]))
   let t363 = @simp.simp_tac(@list.List([@int.int_lt_le(), face_of_imp_subset(), @convex.aff_dim_subset()]))
   let t382 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t363), t364), t365), t381)
-  face_of_aff_dim_lt_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s) ==> aff_dim f < aff_dim s"), t382))
+  face_of_aff_dim_lt_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s) ==> aff_dim f < aff_dim s"), t382))
 }
 
 ///|
@@ -999,7 +999,7 @@ fn step_39() -> Unit raise {
   })
   let t383 = @tactics.repeat_tac(@tactics.strip_tac)
   let t394 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.affine_alt()])), t383), t386), t387), @tactics.disj1_tac), t392), t393)
-  let lemma = @tactics.prove(@parser.parse_term("!s x y:real^N.\n          affine s /\\ ~(k = &0) /\\ ~(k = &1) /\\ x IN s /\\ inv(&1 - k) % y IN s\n          ==> inv(k) % (x - y) IN s"), t394)
+  let lemma = @tactics.prove(@parser.parse_term("forall s x y:real^N.\n          affine s /\\ ~(k = &0) /\\ ~(k = &1) /\\ x IN s /\\ inv(&1 - k) % y IN s\n          ==> inv(k) % (x - y) IN s"), t394)
   let t563 = @simp.asm_simp_tac(@list.List([@iterate.sum_add(), @equal.gsym(@realax.real_mul_assoc()), @iterate.sum_lmul()]))
   let t562 = @simp.rewrite_tac(@list.List([@vectors.vector_add_rdistrib()]))
   let t564 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("c"), t562), t563), @tactics.all_tac])
@@ -1141,7 +1141,7 @@ fn step_39() -> Unit raise {
   let t453 = @simp.expand_tac("c")
   let t451 = @meson.asm_meson_tac(@list.List([@sets.finite_diff(), @sets.in_diff()]))
   let t452 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@iterate.sum_pos_eq_0()), t451), @tactics.all_tac])
-  let t468 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!x:real^N. x IN (s DIFF f) ==> c x = &0"), fn(x448 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t468 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall x:real^N. x IN (s DIFF f) ==> c x = &0"), fn(x448 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s449 = @tactics.mp_tac(x448)
     fn(x450 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s449(x450)
@@ -1154,7 +1154,7 @@ fn step_39() -> Unit raise {
   let t442 = @simp.rewrite_tac(@list.List([]))
   let t441 = @simp.expand_tac("c")
   let t446 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t441), t442), t443), @tactics.conj_tac), t444), t445), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
-  let t440 = @tactics.subgoal_then(@parser.parse_term("!x:real^N. x IN s ==> &0 <= c x"), fn(x437 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t440 = @tactics.subgoal_then(@parser.parse_term("forall x:real^N. x IN s ==> &0 <= c x"), fn(x437 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s438 = @tactics.assume_tac(x437)
     fn(x439 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s438(x439)
@@ -1219,7 +1219,7 @@ fn step_39() -> Unit raise {
   })
   let t395 = @simp.rewrite_tac(@list.List([face_of()]))
   let t565 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t395), t399), t400), t407), t408), t411), @tactics.strip_tac), t418), t422), t426), t427), t432), t433), t434), t435), t436), t440), t446), t447), t468), t469), t473), t477), t478), t516), t523), t524), t525), @tactics.conj_tac), t540), t541), t542), t546), t547), t548), t549), t550), t551), t555), t556), t557), t561), t564), @calc_rat.real_arith_tac)
-  face_of_convex_hulls_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        FINITE s /\\ f SUBSET s /\\\n        DISJOINT (affine hull f) (convex hull (s DIFF f))\n        ==> (convex hull f) face_of (convex hull s)"), t565))
+  face_of_convex_hulls_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        FINITE s /\\ f SUBSET s /\\\n        DISJOINT (affine hull f) (convex hull (s DIFF f))\n        ==> (convex hull f) face_of (convex hull s)"), t565))
 }
 
 ///|
@@ -1247,7 +1247,7 @@ fn step_40() -> Unit raise {
   let t567 = @tactics.exists_tac(@parser.parse_term("convex hull s:real^N->bool"))
   let t566 = @tactics.match_mp_tac(face_of_trans())
   let t577 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t566), t567), t568), t569), t570), t573), t574), t575), t576)
-  face_of_convex_hull_insert_c.set(@tactics.prove(@parser.parse_term("!f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s) /\\ f face_of (convex hull s)\n        ==> f face_of (convex hull (a INSERT s))"), t577))
+  face_of_convex_hull_insert_c.set(@tactics.prove(@parser.parse_term("forall f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s) /\\ f face_of (convex hull s)\n        ==> f face_of (convex hull (a INSERT s))"), t577))
 }
 
 ///|
@@ -1332,7 +1332,7 @@ fn step_41() -> Unit raise {
   let t579 = @simp.asm_rewrite_tac(@list.List([]))
   let t578 = @class.asm_cases_tac(@parser.parse_term("f:real^N->bool = {}"))
   let t631 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t578), t579), t586), t589), t595), t596), t597), t598), t599), @tactics.disch_tac), t600), t601), t608), t619), t623), t624), t625), @tactics.conj_tac), t630)
-  face_of_affine_trivial_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        affine s /\\ f face_of s ==> f = {} \\/ f = s"), t631))
+  face_of_affine_trivial_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        affine s /\\ f face_of s ==> f = {} \\/ f = s"), t631))
 }
 
 ///|
@@ -1348,7 +1348,7 @@ pub fn face_of_affine_trivial() -> @kernel.Thm {
 /// FACE_OF_AFFINE_EQ
 fn step_42() -> Unit raise {
   let t632 = @meson.meson_tac(@list.List([face_of_affine_trivial(), empty_face_of(), face_of_refl(), @convex.affine_imp_convex()]))
-  face_of_affine_eq_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f. affine s ==> (f face_of s <=> f = {} \\/ f = s)"), t632))
+  face_of_affine_eq_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f. affine s ==> (f face_of s <=> f = {} \\/ f = s)"), t632))
 }
 
 ///|
@@ -1397,7 +1397,7 @@ fn step_43() -> Unit raise {
   let t832 = @tactics.match_mp_tac(face_of_aff_dim_lt())
   let t831 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC n <= k + 1 ==> n <= k + 1"))]))
   let t830 = @tactics.exists_tac(@parser.parse_term("aff_dim(INTERS(d(n:num)):real^N->bool)"))
-  let t829 = @tactics.match_mp_tac(@int.int_arith(@parser.parse_term("!d':int. d < d' /\\ d' < m - n ==> d < m - (n + &1)")))
+  let t829 = @tactics.match_mp_tac(@int.int_arith(@parser.parse_term("forall d':int. d < d' /\\ d' < m - n ==> d < m - (n + &1)")))
   let t849 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_of_num_suc())]))), t829), t830), t831), t832), t834), @tactics.conj_tac), t839), t842), t844), t845), @tactics.conj_tac), t846), t847), t848)
   let t826 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t823 = @drule.match_mp(face_of_imp_subset())
@@ -1410,7 +1410,7 @@ fn step_43() -> Unit raise {
     })(t823(x824))
   })
   let t819 = @tactics.exists_tac(@parser.parse_term("e:real^N->bool"))
-  let t818 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!t. t PSUBSET s /\\ u SUBSET t ==> ~(u = s)")))
+  let t818 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall t. t PSUBSET s /\\ u SUBSET t ==> ~(u = s)")))
   let t817 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.strip_tac])
   let t813 = @parser.parse_term("e:real^N->bool")
   let t816 = @tactics.first_x_assum(fn(x815 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1446,7 +1446,7 @@ fn step_43() -> Unit raise {
   let t792 = @tactics.exists_tac(@parser.parse_term("aff_dim(s:real^N->bool)"))
   let t791 = @tactics.match_mp_tac(@int.int_lte_trans())
   let t850 = @list.List([@tactics.thenl(@nums.induct_tac, @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @simp.rewrite_tac(@list.List([@int.int_sub_rzero()]))), t791), t792), t793), t794), t795), @tactics.conj_tac), t828), t849])), @tactics.all_tac])
-  let t790 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N) + 1\n        ==> aff_dim(INTERS(d n):real^N->bool) < &(dimindex(:N)) - &n"), fn(x787 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t790 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N) + 1\n        ==> aff_dim(INTERS(d n):real^N->bool) < &(dimindex(:N)) - &n"), fn(x787 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s788 = @tactics.mp_tac(x787)
     fn(x789 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s788(x789)
@@ -1477,7 +1477,7 @@ fn step_43() -> Unit raise {
   })
   let t767 = @simp.asm_rewrite_tac(@list.List([@sets.inters_insert()]))
   let t784 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t767), t774), @tactics.ants_tac), t775), t782), t783), @int.asm_arith_tac), @tactics.all_tac])
-  let t766 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N)\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)"), fn(x763 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t766 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N)\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)"), fn(x763 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s764 = @tactics.assume_tac(x763)
     fn(x765 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s764(x765)
@@ -1512,7 +1512,7 @@ fn step_43() -> Unit raise {
   let t742 = @tactics.repeat_tac(@tactics.strip_tac)
   let t741 = @simp.asm_simp_tac(@list.List([@sets.insert_subset(), @sets.card_clauses(), @sets.finite_insert(), @sets.finite_empty(), @sets.empty_subset(), @int.arith_rule(@parser.parse_term("SUC n <= m + 1 ==> n <= m + 1"))]))
   let t762 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([]))), t741), t742), t743), t750), t759), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.strip_tac])), t760), @tactics.ants_tac), t761), @tactics.all_tac])
-  let t740 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N) + 1\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1"), fn(x737 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t740 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N) + 1\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1"), fn(x737 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s738 = @tactics.assume_tac(x737)
     fn(x739 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s738(x739)
@@ -1520,13 +1520,13 @@ fn step_43() -> Unit raise {
   })
   let t735 = @sets.set_tac(@list.List([]))
   let t736 = @list.List([@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([]))), t735), @tactics.all_tac])
-  let t734 = @tactics.subgoal_then(@parser.parse_term("!n:num. ~(d n:(real^N->bool)->bool = {})"), fn(x731 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t734 = @tactics.subgoal_then(@parser.parse_term("forall n:num. ~(d n:(real^N->bool)->bool = {})"), fn(x731 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s732 = @tactics.assume_tac(x731)
     fn(x733 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s732(x733)
     }
   })
-  let t729 = @parser.parse_term("d 0 = {c {} :real^N->bool} /\\ !n. d(SUC n) = c(d n) INSERT d n")
+  let t729 = @parser.parse_term("d 0 = {c {} :real^N->bool} /\\ forall n. d(SUC n) = c(d n) INSERT d n")
   let t730 = @tactics.choose_tac(@recursion.prove_recursive_functions_exist(@nums.num_recursion())(t729))
   let t728 = @tactics.x_gen_tac(@parser.parse_term("c:((real^N->bool)->bool)->real^N->bool"))
   let t727 = @simp.rewrite_tac(@list.List([@class.skolem_thm(), @theorems.left_imp_exists_thm()]))
@@ -1570,7 +1570,7 @@ fn step_43() -> Unit raise {
       }
     })(t704(x705))
   }), t706), @tactics.gen_tac), t707), t714), t715), t716)])
-  let t699 = @class.asm_cases_tac(@parser.parse_term("!f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')"))
+  let t699 = @class.asm_cases_tac(@parser.parse_term("forall f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')"))
   let t698 = @tactics.repeat_tac(@tactics.strip_tac)
   let t696 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t695 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inters(), @sets.in_delete()]))
@@ -1650,13 +1650,13 @@ fn step_43() -> Unit raise {
   let t638 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t637)])
   let t636 = @class.asm_cases_tac(@parser.parse_term("(s:real^N->bool) IN f"))
   let t697 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t636), t638), t648), t651), t659), t660), t661), t662), @tactics.strip_tac), t663), t667), t675), t676), t677), t684), t685), t691), t692), t693), t694), t695), t696)])
-  let t864 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!s f:(real^N->bool)->bool.\n        convex s /\\ (!c. c IN f ==> c face_of s /\\ ~(c = s))\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f"), fn(x633 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t864 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall s f:(real^N->bool)->bool.\n        convex s /\\ (forall c. c IN f ==> c face_of s /\\ ~(c = s))\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f"), fn(x633 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s634 = @tactics.assume_tac(x633)
     fn(x635 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s634(x635)
     }
   }), t697), t698), t699), t717), t726), t727), t728), @tactics.disch_tac), t730), t734), t736), t740), t762), t766), t784), t786), t790), t850), t857), t858), t859), t860), t862), t863)
-  inters_faces_finite_bound_c.set(@tactics.prove(@parser.parse_term("!s f:(real^N->bool)->bool.\n        convex s /\\ (!c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f"), t864))
+  inters_faces_finite_bound_c.set(@tactics.prove(@parser.parse_term("forall s f:(real^N->bool)->bool.\n        convex s /\\ (forall c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f"), t864))
 }
 
 ///|
@@ -1705,10 +1705,10 @@ fn step_44() -> Unit raise {
   let t961 = @tactics.match_mp_tac(face_of_aff_dim_lt())
   let t960 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC n <= k + 2 ==> n <= k + 2"))]))
   let t959 = @tactics.exists_tac(@parser.parse_term("aff_dim(INTERS(d(n:num)):real^N->bool)"))
-  let t958 = @tactics.match_mp_tac(@int.int_arith(@parser.parse_term("!d':int. d < d' /\\ d' <= m - n ==> d <= m - (n + &1)")))
+  let t958 = @tactics.match_mp_tac(@int.int_arith(@parser.parse_term("forall d':int. d < d' /\\ d' <= m - n ==> d <= m - (n + &1)")))
   let t957 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_of_num_suc())]))
   let t978 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@int.int_sub_rzero(), @convex.aff_dim_le_univ()]))), @tactics.disch_tac), t957), t958), t959), t960), t961), t963), @tactics.conj_tac), t968), t971), t973), t974), @tactics.conj_tac), t975), t976), t977), @tactics.all_tac])
-  let t956 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N) + 2\n        ==> aff_dim(INTERS(d n):real^N->bool) <= &(dimindex(:N)) - &n"), fn(x953 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t956 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N) + 2\n        ==> aff_dim(INTERS(d n):real^N->bool) <= &(dimindex(:N)) - &n"), fn(x953 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s954 = @tactics.mp_tac(x953)
     fn(x955 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s954(x955)
@@ -1739,7 +1739,7 @@ fn step_44() -> Unit raise {
   })
   let t933 = @simp.asm_rewrite_tac(@list.List([@sets.inters_insert()]))
   let t950 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t933), t940), @tactics.ants_tac), t941), t948), t949), @int.asm_arith_tac), @tactics.all_tac])
-  let t932 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N) + 1\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)"), fn(x929 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t932 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N) + 1\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)"), fn(x929 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s930 = @tactics.assume_tac(x929)
     fn(x931 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s930(x931)
@@ -1774,7 +1774,7 @@ fn step_44() -> Unit raise {
   let t908 = @tactics.repeat_tac(@tactics.strip_tac)
   let t907 = @simp.asm_simp_tac(@list.List([@sets.insert_subset(), @sets.card_clauses(), @sets.finite_insert(), @sets.finite_empty(), @sets.empty_subset(), @int.arith_rule(@parser.parse_term("SUC n <= m + 2 ==> n <= m + 2"))]))
   let t928 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([]))), t907), t908), t909), t916), t925), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.strip_tac])), t926), @tactics.ants_tac), t927), @tactics.all_tac])
-  let t906 = @tactics.subgoal_then(@parser.parse_term("!n. n <= dimindex(:N) + 2\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1"), fn(x903 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t906 = @tactics.subgoal_then(@parser.parse_term("forall n. n <= dimindex(:N) + 2\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1"), fn(x903 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s904 = @tactics.assume_tac(x903)
     fn(x905 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s904(x905)
@@ -1782,13 +1782,13 @@ fn step_44() -> Unit raise {
   })
   let t901 = @sets.set_tac(@list.List([]))
   let t902 = @list.List([@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([]))), t901), @tactics.all_tac])
-  let t900 = @tactics.subgoal_then(@parser.parse_term("!n:num. ~(d n:(real^N->bool)->bool = {})"), fn(x897 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t900 = @tactics.subgoal_then(@parser.parse_term("forall n:num. ~(d n:(real^N->bool)->bool = {})"), fn(x897 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s898 = @tactics.assume_tac(x897)
     fn(x899 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s898(x899)
     }
   })
-  let t895 = @parser.parse_term("d 0 = {c {} :real^N->bool} /\\ !n. d(SUC n) = c(d n) INSERT d n")
+  let t895 = @parser.parse_term("d 0 = {c {} :real^N->bool} /\\ forall n. d(SUC n) = c(d n) INSERT d n")
   let t896 = @tactics.choose_tac(@recursion.prove_recursive_functions_exist(@nums.num_recursion())(t895))
   let t894 = @tactics.x_gen_tac(@parser.parse_term("c:((real^N->bool)->bool)->real^N->bool"))
   let t893 = @simp.rewrite_tac(@list.List([@class.skolem_thm(), @theorems.left_imp_exists_thm()]))
@@ -1832,9 +1832,9 @@ fn step_44() -> Unit raise {
       }
     })(t870(x871))
   }), t872), @tactics.gen_tac), t873), t880), t881), t882)])
-  let t865 = @class.asm_cases_tac(@parser.parse_term("!f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')"))
+  let t865 = @class.asm_cases_tac(@parser.parse_term("forall f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')"))
   let t992 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t865), t883), t892), t893), t894), @tactics.disch_tac), t896), t900), t902), t906), t928), t932), t950), t952), t956), t978), t985), t986), t987), t988), t990), t991)
-  inters_faces_finite_altbound_c.set(@tactics.prove(@parser.parse_term("!s f:(real^N->bool)->bool.\n        (!c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2 /\\\n                 INTERS f' = INTERS f"), t992))
+  inters_faces_finite_altbound_c.set(@tactics.prove(@parser.parse_term("forall s f:(real^N->bool)->bool.\n        (forall c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2 /\\\n                 INTERS f' = INTERS f"), t992))
 }
 
 ///|
@@ -1857,7 +1857,7 @@ fn step_45() -> Unit raise {
   let t994 = @tactics.match_mp_tac(@sets.surjective_image_eq())
   let t993 = @tactics.conv_tac(@equal.sym_conv)
   let t1000 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t993), t994), t995), t996), t997), t998), t999)
-  faces_of_translation_c.set(@tactics.prove(@parser.parse_term("!s a:real^N.\n        {f | f face_of IMAGE (\\x. a + x) s} =\n        IMAGE (IMAGE (\\x. a + x)) {f | f face_of s}"), t1000))
+  faces_of_translation_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N.\n        {f | f face_of IMAGE (\\x. a + x) s} =\n        IMAGE (IMAGE (\\x. a + x)) {f | f face_of s}"), t1000))
 }
 
 ///|
@@ -1875,7 +1875,7 @@ fn step_46() -> Unit raise {
   let t1009 = @tactics.first_assum(fn(x1004 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1004
     let t1006 = @bool.conjunct2(th)
-    let t1007 = @drule.match_mp(@sets.set_rule(@parser.parse_term("(!x y. f x = f y ==> x = y)  ==> (!s x. f x IN IMAGE f s <=> x IN s)")))(t1006)
+    let t1007 = @drule.match_mp(@sets.set_rule(@parser.parse_term("(forall x y. f x = f y ==> x = y)  ==> (forall s x. f x IN IMAGE f s <=> x IN s)")))(t1006)
     let t1008 = @drule.match_mp(@topology.open_segment_linear_image())(th)
     @simp.rewrite_tac(@list.List([@drule.match_mp(@convex.convex_linear_image_eq())(th), t1008, t1007]))
   })
@@ -1883,7 +1883,7 @@ fn step_46() -> Unit raise {
   let t1002 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("IMAGE f {x | P x} = {f x | P x}"))]))
   let t1001 = @simp.rewrite_tac(@list.List([face_of(), @sets.subset_image(), @sets.set_rule(@parser.parse_term("{y | (?x. P x /\\ y = f x) /\\ Q y} = {f x |x| P x /\\ Q(f x)}"))]))
   let t1010 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t1001), t1002), t1003), t1009)
-  faces_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> {t | t face_of (IMAGE f s)} = IMAGE (IMAGE f) {t | t face_of s}"), t1010))
+  faces_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> {t | t face_of (IMAGE f s)} = IMAGE (IMAGE f) {t | t face_of s}"), t1010))
 }
 
 ///|
@@ -1966,7 +1966,7 @@ fn step_47() -> Unit raise {
   let t1013 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:real^N"), t1012]))
   let t1011 = @simp.rewrite_tac(@list.List([face_of(), @convex.conic()]))
   let t1065 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1011), @tactics.strip_tac), t1013), @tactics.strip_tac), t1014), t1015), t1016), t1017), t1021), t1064)
-  face_of_conic_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool. conic s /\\ f face_of s ==> conic f"), t1065))
+  face_of_conic_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool. conic s /\\ f face_of s ==> conic f"), t1065))
 }
 
 ///|
@@ -1996,7 +1996,7 @@ fn step_48() -> Unit raise {
   let t1067 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t1066 = @simp.simp_tac(@list.List([face_of(), @convex.convex_pcross(), @cart.pcross_mono()]))
   let t1080 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1066), t1067), t1068), t1069), t1070), t1071), t1075), t1077), t1078), t1079)
-  face_of_pcross_c.set(@tactics.prove(@parser.parse_term("!f s:real^M->bool f' s':real^N->bool.\n        f face_of s /\\ f' face_of s' ==> (f PCROSS f') face_of (s PCROSS s')"), t1080))
+  face_of_pcross_c.set(@tactics.prove(@parser.parse_term("forall f s:real^M->bool f' s':real^N->bool.\n        f face_of s /\\ f' face_of s' ==> (f PCROSS f') face_of (s PCROSS s')"), t1080))
 }
 
 ///|
@@ -2187,7 +2187,7 @@ fn step_49() -> Unit raise {
   let t1082 = @class.asm_cases_tac(@parser.parse_term("c:real^(M,N)finite_sum->bool = {}"))
   let t1081 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.strip_tac, @simp.asm_simp_tac(@list.List([face_of_pcross()])))])
   let t1222 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1081), t1082), t1083), t1089), t1094), t1095), @tactics.conj_tac), t1104), t1108), t1109), t1110), t1119), t1128), t1129), t1135), t1136), @tactics.conj_tac), t1208), t1209), @tactics.strip_tac), t1210), t1217), t1218), t1220), t1221)
-  face_of_pcross_decomp_c.set(@tactics.prove(@parser.parse_term("!s:real^M->bool s':real^N->bool c.\n        c face_of (s PCROSS s') <=>\n        ?f f'. f face_of s /\\ f' face_of s' /\\ c = f PCROSS f'"), t1222))
+  face_of_pcross_decomp_c.set(@tactics.prove(@parser.parse_term("forall s:real^M->bool s':real^N->bool c.\n        c face_of (s PCROSS s') <=>\n        ?f f'. f face_of s /\\ f' face_of s' /\\ c = f PCROSS f'"), t1222))
 }
 
 ///|
@@ -2208,7 +2208,7 @@ fn step_50() -> Unit raise {
   let t1223 = @parser.parse_term("f':real^N->bool = {}")
   let t1224 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("f:real^M->bool = {}"), t1223]))
   let t1228 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1224), t1225), t1226), t1227)
-  face_of_pcross_eq_c.set(@tactics.prove(@parser.parse_term("!f s:real^M->bool f' s':real^N->bool.\n        (f PCROSS f') face_of (s PCROSS s') <=>\n        f = {} \\/ f' = {} \\/ f face_of s /\\ f' face_of s'"), t1228))
+  face_of_pcross_eq_c.set(@tactics.prove(@parser.parse_term("forall f s:real^M->bool f' s':real^N->bool.\n        (f PCROSS f') face_of (s PCROSS s') <=>\n        f = {} \\/ f' = {} \\/ f face_of s /\\ f' face_of s'"), t1228))
 }
 
 ///|
@@ -2228,7 +2228,7 @@ fn step_51() -> Unit raise {
   let t1230 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | P x} INTER {x | Q x}"))]))
   let t1229 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a:real = b <=> a <= b /\\ a = b"))]))
   let t1233 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1229), t1230), t1231), t1232)
-  hyperplane_face_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("!a:real^N b. {x | a dot x = b} face_of {x | a dot x <= b}"), t1233))
+  hyperplane_face_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("forall a:real^N b. {x | a dot x = b} face_of {x | a dot x <= b}"), t1233))
 }
 
 ///|
@@ -2248,7 +2248,7 @@ fn step_52() -> Unit raise {
   let t1235 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | P x} INTER {x | Q x}"))]))
   let t1234 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a:real = b <=> a >= b /\\ a = b"))]))
   let t1238 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1234), t1235), t1236), t1237)
-  hyperplane_face_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("!a:real^N b. {x | a dot x = b} face_of {x | a dot x >= b}"), t1238))
+  hyperplane_face_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("forall a:real^N b. {x | a dot x = b} face_of {x | a dot x >= b}"), t1238))
 }
 
 ///|
@@ -2285,7 +2285,7 @@ fn step_53() -> Unit raise {
   let t1242 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@vectors.dot_lzero(), @sets.set_rule(@parser.parse_term("{x | p} = if p then UNIV else {}"))])), t1240), t1241), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
   let t1239 = @class.asm_cases_tac(@parser.parse_term("a:real^N = vec 0"))
   let t1258 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1239), t1242), @tactics.eq_tac), @tactics.strip_tac), t1243), t1244), @tactics.disch_tac), t1248), t1257)
-  face_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("!f a:real^N b.\n         f face_of {x | a dot x <= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x <= b}"), t1258))
+  face_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("forall f a:real^N b.\n         f face_of {x | a dot x <= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x <= b}"), t1258))
 }
 
 ///|
@@ -2305,7 +2305,7 @@ fn step_54() -> Unit raise {
   let t1260 = @parser.parse_term("--a:real^N")
   let t1261 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real^N->bool"), t1260, t1259]), face_of_halfspace_le()))
   let t1263 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1261), t1262)
-  face_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("!f a:real^N b.\n         f face_of {x | a dot x >= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x >= b}"), t1263))
+  face_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("forall f a:real^N b.\n         f face_of {x | a dot x >= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x >= b}"), t1263))
 }
 
 ///|
@@ -2323,7 +2323,7 @@ fn step_55() -> Unit raise {
   let t1277 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm(), @real.real_lt_imp_ne()]))
   let t1276 = @simp.asm_simp_tac(@list.List([@sets.in_inter(), @simp.rewrite_rule(@list.List([@sets.subset()]))(@convex.relative_interior_subset())]))
   let t1275 = @tactics.x_gen_tac(@parser.parse_term("y:real^N"))
-  let t1278 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. x IN i ==> x IN s /\\ ~(x IN t)) ==> ~(i = {}) ==> ~(t = s)"))), t1275), @tactics.disch_tac), t1276), t1277)
+  let t1278 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. x IN i ==> x IN s /\\ ~(x IN t)) ==> ~(i = {}) ==> ~(t = s)"))), t1275), @tactics.disch_tac), t1276), t1277)
   let t1274 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1279 = @list.List([@tactics.then_tac(@simp.asm_simp_tac(@list.List([@convex.relative_interior_eq_empty()])), t1274), t1278])
   let t1280 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(relative_interior s:real^N->bool = {})"), fn(x1271 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2341,7 +2341,7 @@ fn step_55() -> Unit raise {
   let t1264 = @parser.parse_term("x:real^N")
   let t1265 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t1264]), @convex.supporting_hyperplane_relative_frontier()))
   let t1282 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1265), t1266), t1267), t1268), t1269), @tactics.conj_tac), t1281)
-  relative_boundary_point_in_proper_face_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ x IN f"), t1282))
+  relative_boundary_point_in_proper_face_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ x IN f"), t1282))
 }
 
 ///|
@@ -2382,7 +2382,7 @@ fn step_56() -> Unit raise {
   let t1284 = @simp.asm_simp_tac(@list.List([@convex.relative_frontier(), @sets.unions_gspec(), @sets.in_elim_thm(), @topology.closure_closed(), @sets.in_diff()]))
   let t1283 = @simp.once_rewrite_tac(@list.List([@sets.extension()]))
   let t1301 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1283), t1284), t1285), @tactics.eq_tac), t1286), t1293), t1299), t1300)
-  relative_frontier_of_convex_closed_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ closed s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}"), t1301))
+  relative_frontier_of_convex_closed_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}"), t1301))
 }
 
 ///|
@@ -2426,7 +2426,7 @@ fn step_57() -> Unit raise {
   let t1303 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")))
   let t1302 = @tactics.exists_tac(@parser.parse_term("INTERS {f | f face_of s /\\ (x:real^N) IN f}"))
   let t1326 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1302), t1303), @tactics.conj_tac), t1307), t1308), @tactics.conj_tac), t1309), t1315), t1316), @tactics.conj_tac), t1317), t1318), t1321), t1322), t1323), t1324), t1325)
-  in_relative_interior_of_face_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool x.\n        convex s /\\ x IN s ==> ?f. f face_of s /\\ x IN relative_interior f"), t1326))
+  in_relative_interior_of_face_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool x.\n        convex s /\\ x IN s ==> ?f. f face_of s /\\ x IN relative_interior f"), t1326))
 }
 
 ///|
@@ -2444,7 +2444,7 @@ fn step_58() -> Unit raise {
   let t1328 = @meson.asm_meson_tac(@list.List([in_relative_interior_of_face(), face_of_imp_subset(), @sets.subset(), @convex.relative_interior_subset()]))
   let t1327 = @simp.rewrite_tac(@list.List([@sets.unions_gspec(), @sets.extension(), @sets.in_elim_thm()]))
   let t1329 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1327), t1328)
-  convex_facial_partition_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s ==> UNIONS {relative_interior f | f face_of s} = s"), t1329))
+  convex_facial_partition_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s ==> UNIONS {relative_interior f | f face_of s} = s"), t1329))
 }
 
 ///|
@@ -2466,7 +2466,7 @@ fn step_59() -> Unit raise {
   let t1331 = @simp.asm_simp_tac(@list.List([in_relative_interior_of_face()]))
   let t1330 = @simp.rewrite_tac(@list.List([@bool.exists_unique_def()]))
   let t1336 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1330), t1331), t1332), t1333), t1334), t1335)
-  in_relative_interior_of_unique_face_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool x.\n        convex s /\\ x IN s ==> ?!f. f face_of s /\\ x IN relative_interior f"), t1336))
+  in_relative_interior_of_unique_face_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool x.\n        convex s /\\ x IN s ==> ?!f. f face_of s /\\ x IN relative_interior f"), t1336))
 }
 
 ///|
@@ -2504,7 +2504,7 @@ fn step_60() -> Unit raise {
     }
   })))
   let t1355 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1343), t1344), t1345), t1346), @tactics.strip_tac), t1348), @tactics.ants_tac), t1349), t1350), @tactics.gen_tac), @tactics.strip_tac), t1351), t1352), t1353), t1354)
-  relative_interior_subset_of_proper_face_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex s /\\ t SUBSET s /\\\n        ~(relative_interior t DIFF relative_interior s = {})\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f"), t1355))
+  relative_interior_subset_of_proper_face_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex s /\\ t SUBSET s /\\\n        ~(relative_interior t DIFF relative_interior s = {})\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f"), t1355))
 }
 
 ///|
@@ -2527,7 +2527,7 @@ fn step_61() -> Unit raise {
   let t1362 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("{}:real^N->bool")), t1357), t1361])
   let t1356 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1363 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1356), t1362)
-  convex_relative_boundary_subset_of_proper_face_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\\n        convex t /\\ t SUBSET s DIFF relative_interior s\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f"), t1363))
+  convex_relative_boundary_subset_of_proper_face_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\\n        convex t /\\ t SUBSET s DIFF relative_interior s\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f"), t1363))
 }
 
 ///|
@@ -2566,7 +2566,7 @@ fn step_62() -> Unit raise {
   })
   let t1364 = @simp.asm_simp_tac(@list.List([@convex.relative_frontier(), @topology.closure_closed()]))
   let t1381 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1364), t1374), t1375), @tactics.conj_tac), t1380)
-  relative_frontier_facial_partition_alt_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f | f face_of s /\\ ~(f = s)} =\n            relative_frontier s"), t1381))
+  relative_frontier_facial_partition_alt_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f | f face_of s /\\ ~(f = s)} =\n            relative_frontier s"), t1381))
 }
 
 ///|
@@ -2582,10 +2582,10 @@ pub fn relative_frontier_facial_partition_alt() -> @kernel.Thm {
 /// RELATIVE_FRONTIER_FACIAL_PARTITION
 fn step_63() -> Unit raise {
   let t1384 = @meson.asm_meson_tac(@list.List([face_of_aff_dim_lt(), @int.int_lt_refl(), face_of_refl()]))
-  let t1383 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. P x ==> (Q x <=> R x))\n    ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}")))
+  let t1383 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. P x ==> (Q x <=> R x))\n    ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}")))
   let t1382 = @simp.asm_simp_tac(@list.List([@equal.gsym(relative_frontier_facial_partition_alt())]))
   let t1385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1382), @tactics.ap_term_tac), t1383), t1384)
-  relative_frontier_facial_partition_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f |\n                     f face_of s /\\ aff_dim f < aff_dim s} =\n            relative_frontier s"), t1385))
+  relative_frontier_facial_partition_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f |\n                     f face_of s /\\ aff_dim f < aff_dim s} =\n            relative_frontier s"), t1385))
 }
 
 ///|
@@ -2645,7 +2645,7 @@ fn step_64() -> Unit raise {
   let t1387 = @simp.rewrite_tac(@list.List([@sets.unions_subset(), @sets.forall_in_gspec()]))
   let t1386 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq())]))
   let t1420 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1386), t1387), @tactics.conj_tac), t1388), t1389), t1399), t1400), t1401), t1405), t1406), t1407), @tactics.conj_tac), t1408), t1409), @tactics.disch_tac), t1410), t1411), t1415), t1417), t1418), t1419)
-  frontier_of_convex_closed_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ closed s\n        ==> frontier s =\n            UNIONS {f | f face_of s /\\ aff_dim f < &(dimindex(:N))}"), t1420))
+  frontier_of_convex_closed_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> frontier s =\n            UNIONS {f | f face_of s /\\ aff_dim f < &(dimindex(:N))}"), t1420))
 }
 
 ///|
@@ -2732,7 +2732,7 @@ fn step_65() -> Unit raise {
   let t1426 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.exists_tac(@parser.parse_term("{}:real^N->bool"))), t1422), t1423), t1424), t1425), @tactics.all_tac])
   let t1421 = @class.asm_cases_tac(@parser.parse_term("relative_interior f:real^N->bool = {}"))
   let t1477 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1421), t1426), t1433), t1434), t1443), t1444), t1451), t1452), t1453), t1462), t1463), t1464), t1465), t1466), t1467), t1468), @tactics.strip_tac), t1469), t1470), t1471), t1472), t1474), @tactics.ants_tac), t1476)
-  face_of_inter_as_inter_of_face_c.set(@tactics.prove(@parser.parse_term("!s t f:real^N->bool.\n        convex s /\\ convex t /\\ f face_of (s INTER t)\n        ==> ?k l. k face_of s /\\ l face_of t /\\ k INTER l = f"), t1477))
+  face_of_inter_as_inter_of_face_c.set(@tactics.prove(@parser.parse_term("forall s t f:real^N->bool.\n        convex s /\\ convex t /\\ f face_of (s INTER t)\n        ==> ?k l. k face_of s /\\ l face_of t /\\ k INTER l = f"), t1477))
 }
 
 ///|
@@ -2769,7 +2769,7 @@ pub fn exposed_face_of() -> @kernel.Thm {
 /// EXPOSED_FACE_OF_IMP_FACE_OF
 fn step_68() -> Unit raise {
   let t1478 = @simp.simp_tac(@list.List([exposed_face_of()]))
-  exposed_face_of_imp_face_of_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool. t exposed_face_of s ==> t face_of s"), t1478))
+  exposed_face_of_imp_face_of_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool. t exposed_face_of s ==> t face_of s"), t1478))
 }
 
 ///|
@@ -2795,7 +2795,7 @@ fn step_69() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("vec 0:real^N"), t1482]))
   let t1487 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([exposed_face_of(), empty_face_of()]))), t1483), t1484), t1485), t1486)
-  empty_exposed_face_of_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. {} exposed_face_of s"), t1487))
+  empty_exposed_face_of_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. {} exposed_face_of s"), t1487))
 }
 
 ///|
@@ -2823,7 +2823,7 @@ fn step_70() -> Unit raise {
   let t1489 = @simp.asm_rewrite_tac(@list.List([]))
   let t1488 = @class.asm_cases_tac(@parser.parse_term("convex(s:real^N->bool)"))
   let t1498 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([exposed_face_of(), face_of_refl_eq()]))), t1488), t1489), t1494), t1495), t1496), t1497)
-  exposed_face_of_refl_eq_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. s exposed_face_of s <=> convex s"), t1498))
+  exposed_face_of_refl_eq_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. s exposed_face_of s <=> convex s"), t1498))
 }
 
 ///|
@@ -2839,7 +2839,7 @@ pub fn exposed_face_of_refl_eq() -> @kernel.Thm {
 /// EXPOSED_FACE_OF_REFL
 fn step_71() -> Unit raise {
   let t1499 = @simp.rewrite_tac(@list.List([exposed_face_of_refl_eq()]))
-  exposed_face_of_refl_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. convex s ==> s exposed_face_of s"), t1499))
+  exposed_face_of_refl_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. convex s ==> s exposed_face_of s"), t1499))
 }
 
 ///|
@@ -2888,7 +2888,7 @@ fn step_72() -> Unit raise {
   let t1501 = @simp.asm_rewrite_tac(@list.List([empty_exposed_face_of(), empty_face_of()]))
   let t1500 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1527 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1500), t1501), t1502), t1503), t1504), @tactics.ap_term_tac), @tactics.eq_tac), t1506), t1508), @tactics.strip_tac), t1509), t1514), t1515), t1516), t1520), t1524), t1525), t1526)
-  exposed_face_of_v1_c.set(@tactics.prove(@parser.parse_term("!s t. t exposed_face_of s <=>\n             t face_of s /\\\n             (t = {} \\/ t = s \\/\n              ?a b. ~(a = vec 0) /\\\n                    s SUBSET {x:real^N | a dot x <= b} /\\\n                    t = s INTER {x | a dot x = b})"), t1527))
+  exposed_face_of_v1_c.set(@tactics.prove(@parser.parse_term("forall s t. t exposed_face_of s <=>\n             t face_of s /\\\n             (t = {} \\/ t = s \\/\n              ?a b. ~(a = vec 0) /\\\n                    s SUBSET {x:real^N | a dot x <= b} /\\\n                    t = s INTER {x | a dot x = b})"), t1527))
 }
 
 ///|
@@ -2938,7 +2938,7 @@ fn step_73() -> Unit raise {
   let t1529 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\x:real^N. a + x"), @vectors.quantify_surjection_thm()))
   let t1528 = @simp.rewrite_tac(@list.List([exposed_face_of(), face_of_translation_eq()]))
   let t1555 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1528), t1529), t1530), @tactics.ants_tac), t1531), t1541), t1542), t1543), t1544), t1546), @tactics.ap_term_tac), @tactics.ap_term_tac), t1548), t1549), t1550), @tactics.eq_tac), t1551), t1553), t1554)
-  exposed_face_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) exposed_face_of (IMAGE (\\x. a + x) s) <=>\n        f exposed_face_of s"), t1555))
+  exposed_face_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) exposed_face_of (IMAGE (\\x. a + x) s) <=>\n        f exposed_face_of s"), t1555))
 }
 
 ///|
@@ -2998,7 +2998,7 @@ fn step_75() -> Unit raise {
   let t1557 = @list.List([@meson.asm_meson_tac(@list.List([face_of_linear_image()])), @tactics.all_tac])
   let t1556 = @simp.rewrite_tac(@list.List([exposed_face_of()]))
   let t1589 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1556), @tactics.binop_tac), t1557), t1558), t1559), t1569), t1570), t1571), t1575), t1576), @tactics.disch_tac), t1577), t1578), @tactics.ap_term_tac), @tactics.abs_tac), @tactics.eq_tac), t1588)
-  exposed_face_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N c s.\n      linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n      ==> ((IMAGE f c) exposed_face_of (IMAGE f s) <=> c exposed_face_of s)"), t1589))
+  exposed_face_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n      ==> ((IMAGE f c) exposed_face_of (IMAGE f s) <=> c exposed_face_of s)"), t1589))
 }
 
 ///|
@@ -3015,7 +3015,7 @@ pub fn exposed_face_of_linear_image() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   let t1590 = @sets.set_tac(@list.List([]))
   let t1591 = @tactics.then_tac(@simp.simp_tac(@list.List([face_of_inter_supporting_hyperplane_le(), exposed_face_of()])), t1590)
-  exposed_face_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex s /\\ (!x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s"), t1591))
+  exposed_face_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s"), t1591))
 }
 
 ///|
@@ -3036,7 +3036,7 @@ fn step_77() -> Unit raise {
   let t1595 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t1594, t1593]), exposed_face_of_inter_supporting_hyperplane_le()))
   let t1592 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1597 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_ge()])), t1592), t1595), t1596)
-  exposed_face_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("!s a:real^N b.\n        convex s /\\ (!x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s"), t1597))
+  exposed_face_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s"), t1597))
 }
 
 ///|
@@ -3063,7 +3063,7 @@ fn step_78() -> Unit raise {
   }))
   let t1614 = @tactics.x_gen_tac(@parser.parse_term("x:real^N"))
   let t1613 = @simp.asm_simp_tac(@list.List([@vectors.dot_ladd(), @real.real_le_add2(), @sets.in_elim_thm()]))
-  let t1612 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(s INTER t1) INTER (s INTER t2) = s INTER u <=>\n    !x. x IN s ==> (x IN t1 /\\ x IN t2 <=> x IN u)"))]))
+  let t1612 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(s INTER t1) INTER (s INTER t2) = s INTER u <=>\n    forall x. x IN s ==> (x IN t1 /\\ x IN t2 <=> x IN u)"))]))
   let t1610 = @parser.parse_term("b + b':real")
   let t1611 = @tactics.map_every(fn(x1607 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1608 = @tactics.exists_tac(x1607)
@@ -3081,7 +3081,7 @@ fn step_78() -> Unit raise {
   let t1599 = @simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm()]))
   let t1598 = @simp.simp_tac(@list.List([exposed_face_of(), face_of_inter()]))
   let t1623 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1598), t1599), t1600), t1604), t1605), @tactics.strip_tac), t1606), t1611), t1612), t1613), t1614), @tactics.disch_tac), t1621), t1622), @calc_rat.real_arith_tac)
-  exposed_face_of_inter_c.set(@tactics.prove(@parser.parse_term("!s t u:real^N->bool.\n        t exposed_face_of s /\\ u exposed_face_of s\n        ==> (t INTER u) exposed_face_of s"), t1623))
+  exposed_face_of_inter_c.set(@tactics.prove(@parser.parse_term("forall s t u:real^N->bool.\n        t exposed_face_of s /\\ u exposed_face_of s\n        ==> (t INTER u) exposed_face_of s"), t1623))
 }
 
 ///|
@@ -3115,7 +3115,7 @@ fn step_79() -> Unit raise {
   let t1662 = @tactics.spec_tac(@parser.parse_term("Q:(real^N->bool)->bool"), t1661)
   let t1659 = @tactics.undisch_tac(@parser.parse_term("FINITE(Q:(real^N->bool)->bool)"))
   let t1660 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t1659])
-  let t1658 = @tactics.subgoal_then(@parser.parse_term("!t:real^N->bool. t IN Q ==> t exposed_face_of s"), fn(x1655 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1658 = @tactics.subgoal_then(@parser.parse_term("forall t:real^N->bool. t IN Q ==> t exposed_face_of s"), fn(x1655 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1656 = @tactics.mp_tac(x1655)
     fn(x1657 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1656(x1657)
@@ -3153,7 +3153,7 @@ fn step_79() -> Unit raise {
       }
     })(t1639(x1640))
   })
-  let t1634 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("INTERS s = UNIV <=> !t. t IN s ==> t = UNIV"))]))
+  let t1634 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("INTERS s = UNIV <=> forall t. t IN s ==> t = UNIV"))]))
   let t1677 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@sets.inters_0()])), t1634), t1641), t1642), t1676])
   let t1633 = @class.asm_cases_tac(@parser.parse_term("Q:(real^N->bool)->bool = {}"))
   let t1632 = @tactics.first_x_assum(fn(x1631 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3169,7 +3169,7 @@ fn step_79() -> Unit raise {
   let t1624 = @parser.parse_term("P:(real^N->bool)->bool")
   let t1625 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t1624]), inters_faces_finite_altbound()))
   let t1678 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1625), @tactics.ants_tac), t1626), t1627), t1632), t1633), t1677)
-  exposed_face_of_inters_c.set(@tactics.prove(@parser.parse_term("!P s:real^N->bool.\n        ~(P = {}) /\\ (!t. t IN P ==> t exposed_face_of s)\n        ==> INTERS P exposed_face_of s"), t1678))
+  exposed_face_of_inters_c.set(@tactics.prove(@parser.parse_term("forall P s:real^N->bool.\n        ~(P = {}) /\\ (forall t. t IN P ==> t exposed_face_of s)\n        ==> INTERS P exposed_face_of s"), t1678))
 }
 
 ///|
@@ -3332,7 +3332,7 @@ fn step_80() -> Unit raise {
     })(t1683(x1684))
   })
   let t1793 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1685), t1692), t1693), t1696), t1697), t1703), t1704), t1706), t1707), t1714), t1718), t1719), t1726), t1727), t1728), t1730), @tactics.strip_tac), t1735), t1736), t1737), t1738), t1762), t1763), @tactics.conj_tac), t1764), t1766), t1768), @tactics.disch_tac), @tactics.disch_tac), t1769), @tactics.disch_tac), t1774), t1775), t1783), t1791), t1792), @calc_rat.asm_real_arith_tac)
-  exposed_face_of_sums_c.set(@tactics.prove(@parser.parse_term("!s t f:real^N->bool.\n        convex s /\\ convex t /\\\n        f exposed_face_of {x + y | x IN s /\\ y IN t}\n        ==> ?k l. k exposed_face_of s /\\ l exposed_face_of t /\\\n                  f = {x + y | x IN k /\\ y IN l}"), t1793))
+  exposed_face_of_sums_c.set(@tactics.prove(@parser.parse_term("forall s t f:real^N->bool.\n        convex s /\\ convex t /\\\n        f exposed_face_of {x + y | x IN s /\\ y IN t}\n        ==> ?k l. k exposed_face_of s /\\ l exposed_face_of t /\\\n                  f = {x + y | x IN k /\\ y IN l}"), t1793))
 }
 
 ///|
@@ -3363,7 +3363,7 @@ fn step_81() -> Unit raise {
   let t1857 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("s SUBSET s' /\\ s SUBSET (UNIV DIFF {x | P x}) UNION {x | Q x}\n        ==> s SUBSET (UNIV DIFF (s' INTER {x | P x})) UNION\n                     (s' INTER {x | Q x})")))
   let t1856 = @simp.asm_rewrite_tac(@list.List([@misc.hull_subset()]))
   let t1855 = @tactics.exists_tac(@parser.parse_term("affine hull s:real^N->bool"))
-  let t1854 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!s'. s SUBSET s' /\\\n            s SUBSET (UNIV DIFF (s' INTER {x | P x})) UNION\n                     (s' INTER {x | Q x})\n            ==> s SUBSET {x | ~P x \\/ Q x}")))
+  let t1854 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall s'. s SUBSET s' /\\\n            s SUBSET (UNIV DIFF (s' INTER {x | P x})) UNION\n                     (s' INTER {x | Q x})\n            ==> s SUBSET {x | ~P x \\/ Q x}")))
   let t1870 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("b <= a <=> ~(a <= b) \\/ a = b"))])), t1854), t1855), t1856), t1857), t1858), t1859), t1860), t1861), t1862), @calc_rat.real_arith_tac), t1869, t1868, t1867])
   let t1853 = @tactics.repeat_tac(@tactics.conj_tac)
   let t1852 = @simp.asm_rewrite_tac(@list.List([@vectors.dot_lneg(), @calc_int.real_le_neg2(), @real.real_eq_neg2()]))
@@ -3446,7 +3446,7 @@ fn step_81() -> Unit raise {
   let t1797 = @list.List([@simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()])), t1796])
   let t1794 = @simp.rewrite_tac(@list.List([exposed_face_of()]))
   let t1874 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1794), @tactics.ap_term_tac), @tactics.eq_tac), t1797), t1799), @tactics.strip_tac), t1802), t1803), t1807), t1873)
-  exposed_face_of_parallel_c.set(@tactics.prove(@parser.parse_term("!t s. t exposed_face_of s <=>\n         t face_of s /\\\n          ?a b. s SUBSET {x:real^N | a dot x <= b} /\\\n                t = s INTER {x | a dot x = b} /\\\n                (~(t = {}) /\\ ~(t = s) ==> ~(a = vec 0)) /\\\n                (!w. w IN affine hull s /\\ ~(t = s)\n                     ==> (w + a) IN affine hull s)"), t1874))
+  exposed_face_of_parallel_c.set(@tactics.prove(@parser.parse_term("forall t s. t exposed_face_of s <=>\n         t face_of s /\\\n          ?a b. s SUBSET {x:real^N | a dot x <= b} /\\\n                t = s INTER {x | a dot x = b} /\\\n                (~(t = {}) /\\ ~(t = s) ==> ~(a = vec 0)) /\\\n                (forall w. w IN affine hull s /\\ ~(t = s)\n                     ==> (w + a) IN affine hull s)"), t1874))
 }
 
 ///|
@@ -3483,7 +3483,7 @@ fn step_82() -> Unit raise {
   let t1875 = @parser.parse_term("x:real^N")
   let t1876 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t1875]), @convex.supporting_hyperplane_relative_boundary()))
   let t1894 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1876), t1877), t1878), t1879), t1880), @tactics.conj_tac), t1893)
-  relative_boundary_point_in_exposed_face_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n           convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n           ==> ?f. f exposed_face_of s /\\ ~(f = s) /\\ x IN f"), t1894))
+  relative_boundary_point_in_exposed_face_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n           convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n           ==> ?f. f exposed_face_of s /\\ ~(f = s) /\\ x IN f"), t1894))
 }
 
 ///|
@@ -3504,7 +3504,7 @@ fn step_83() -> Unit raise {
 ///|
 /// extreme_point_of
 fn step_84() -> Unit raise {
-  extreme_point_of_c.set(@pair.new_definition(@parser.parse_term("x extreme_point_of s <=>\n    x IN s /\\ !a b. a IN s /\\ b IN s ==> ~(x IN segment(a,b))")))
+  extreme_point_of_c.set(@pair.new_definition(@parser.parse_term("x extreme_point_of s <=>\n    x IN s /\\ forall a b. a IN s /\\ b IN s ==> ~(x IN segment(a,b))")))
 }
 
 ///|
@@ -3536,7 +3536,7 @@ fn step_85() -> Unit raise {
   let t1896 = @simp.asm_rewrite_tac(@list.List([extreme_point_of()]))
   let t1895 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1909 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_diff()])), t1895), t1896), t1898), @tactics.strip_tac), t1906), t1907), t1908)
-  extreme_point_relative_frontier_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n       convex s /\\ x IN s DIFF relative_interior s /\\\n       (!a b. {a,b} SUBSET s DIFF relative_interior s ==> ~(x IN segment(a,b)))\n       ==> x extreme_point_of s"), t1909))
+  extreme_point_relative_frontier_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n       convex s /\\ x IN s DIFF relative_interior s /\\\n       (forall a b. {a,b} SUBSET s DIFF relative_interior s ==> ~(x IN segment(a,b)))\n       ==> x extreme_point_of s"), t1909))
 }
 
 ///|
@@ -3554,7 +3554,7 @@ fn step_86() -> Unit raise {
   let t1911 = @sets.set_tac(@list.List([]))
   let t1910 = @simp.rewrite_tac(@list.List([@sets.in_diff(), @sets.in_delete(), @sets.in_insert(), @sets.not_in_empty(), @sets.subset_delete()]))
   let t1912 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.convex_contains_segment(), extreme_point_of(), @topology.open_segment()])), t1910), t1911)
-  extreme_point_of_stillconvex_imp_c.set(@tactics.prove(@parser.parse_term("!s x:real^N. x IN s /\\ convex(s DELETE x) ==> x extreme_point_of s"), t1912))
+  extreme_point_of_stillconvex_imp_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N. x IN s /\\ convex(s DELETE x) ==> x extreme_point_of s"), t1912))
 }
 
 ///|
@@ -3571,7 +3571,7 @@ pub fn extreme_point_of_stillconvex_imp() -> @kernel.Thm {
 fn step_87() -> Unit raise {
   let t1913 = @sets.set_tac(@list.List([]))
   let t1914 = @tactics.then_tac(@simp.rewrite_tac(@list.List([extreme_point_of(), @topology.open_segment(), @convex.convex_contains_segment()])), t1913)
-  extreme_points_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex s /\\ t SUBSET {x | x extreme_point_of s} ==> convex(s DIFF t)"), t1914))
+  extreme_points_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex s /\\ t SUBSET {x | x extreme_point_of s} ==> convex(s DIFF t)"), t1914))
 }
 
 ///|
@@ -3589,7 +3589,7 @@ fn step_88() -> Unit raise {
   let t1916 = @sets.set_tac(@list.List([]))
   let t1915 = @simp.rewrite_tac(@list.List([@sets.in_diff(), @sets.in_delete(), @sets.in_insert(), @sets.not_in_empty(), @sets.subset_delete()]))
   let t1917 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.convex_contains_segment(), extreme_point_of(), @topology.open_segment()])), t1915), t1916)
-  extreme_point_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        convex s ==> (x extreme_point_of s <=> x IN s /\\ convex(s DELETE x))"), t1917))
+  extreme_point_of_stillconvex_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        convex s ==> (x extreme_point_of s <=> x IN s /\\ convex(s DELETE x))"), t1917))
 }
 
 ///|
@@ -3606,7 +3606,7 @@ pub fn extreme_point_of_stillconvex() -> @kernel.Thm {
 fn step_89() -> Unit raise {
   let t1918 = @meson.meson_tac(@list.List([@topology.segment_refl(), @sets.not_in_empty()]))
   let t1919 = @tactics.then_tac(@simp.simp_tac(@list.List([face_of(), extreme_point_of(), @sets.sing_subset(), @convex.convex_sing(), @sets.in_sing()])), t1918)
-  face_of_sing_c.set(@tactics.prove(@parser.parse_term("!x s. {x} face_of s <=> x extreme_point_of s"), t1919))
+  face_of_sing_c.set(@tactics.prove(@parser.parse_term("forall x s. {x} face_of s <=> x extreme_point_of s"), t1919))
 }
 
 ///|
@@ -3624,7 +3624,7 @@ fn step_90() -> Unit raise {
   let t1921 = @meson.meson_tac(@list.List([face_of_sing()]))
   let t1920 = @simp.rewrite_tac(@list.List([@convex.aff_dim_eq_0()]))
   let t1922 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1920), t1921)
-  face_of_aff_dim_0_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        f face_of s /\\ aff_dim f = &0 <=> ?a. a extreme_point_of s /\\ f = {a}"), t1922))
+  face_of_aff_dim_0_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        f face_of s /\\ aff_dim f = &0 <=> ?a. a extreme_point_of s /\\ f = {a}"), t1922))
 }
 
 ///|
@@ -3652,7 +3652,7 @@ fn step_91() -> Unit raise {
   let t1924 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t1923 = @tactics.conv_tac(@equal.once_depth_conv(@equal.sym_conv))
   let t1932 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1923), t1924), t1930), t1931)
-  extreme_point_not_in_relative_interior_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x})\n        ==> ~(x IN relative_interior s)"), t1932))
+  extreme_point_not_in_relative_interior_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x})\n        ==> ~(x IN relative_interior s)"), t1932))
 }
 
 ///|
@@ -3680,7 +3680,7 @@ fn step_92() -> Unit raise {
   let t1934 = @simp.asm_simp_tac(@list.List([@topology.empty_interior_finite(), @sets.finite_sing(), @sets.not_in_empty()]))
   let t1933 = @class.asm_cases_tac(@parser.parse_term("s = {x:real^N}"))
   let t1942 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t1933), t1934), t1940), t1941)
-  extreme_point_not_in_interior_c.set(@tactics.prove(@parser.parse_term("!s x:real^N. x extreme_point_of s ==> ~(x IN interior s)"), t1942))
+  extreme_point_not_in_interior_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N. x extreme_point_of s ==> ~(x IN interior s)"), t1942))
 }
 
 ///|
@@ -3697,7 +3697,7 @@ pub fn extreme_point_not_in_interior() -> @kernel.Thm {
 fn step_93() -> Unit raise {
   let t1943 = @simp.simp_tac(@list.List([extreme_point_of(), @simp.rewrite_rule(@list.List([@sets.subset()]))(@topology.closure_subset())]))
   let t1944 = @tactics.then_tac(@simp.simp_tac(@list.List([extreme_point_not_in_relative_interior(), @convex.relative_frontier(), @sets.in_diff()])), t1943)
-  extreme_point_in_relative_frontier_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x}) ==> x IN relative_frontier s"), t1944))
+  extreme_point_in_relative_frontier_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x}) ==> x IN relative_frontier s"), t1944))
 }
 
 ///|
@@ -3714,7 +3714,7 @@ pub fn extreme_point_in_relative_frontier() -> @kernel.Thm {
 fn step_94() -> Unit raise {
   let t1945 = @simp.simp_tac(@list.List([extreme_point_of(), @topology.closure_inc()]))
   let t1946 = @tactics.then_tac(@simp.simp_tac(@list.List([@topology.frontier(), @sets.in_diff(), extreme_point_not_in_interior()])), t1945)
-  extreme_point_in_frontier_c.set(@tactics.prove(@parser.parse_term("!s x:real^N. x extreme_point_of s ==> x IN frontier s"), t1946))
+  extreme_point_in_frontier_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N. x extreme_point_of s ==> x IN frontier s"), t1946))
 }
 
 ///|
@@ -3731,7 +3731,7 @@ pub fn extreme_point_in_frontier() -> @kernel.Thm {
 fn step_95() -> Unit raise {
   let t1947 = @equal.gsym(@sets.sing_subset())
   let t1948 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing()), t1947, face_of_face()]))
-  extreme_point_of_face_c.set(@tactics.prove(@parser.parse_term("!f s v. f face_of s\n           ==> (v extreme_point_of f <=> v extreme_point_of s /\\ v IN f)"), t1948))
+  extreme_point_of_face_c.set(@tactics.prove(@parser.parse_term("forall f s v. f face_of s\n           ==> (v extreme_point_of f <=> v extreme_point_of s /\\ v IN f)"), t1948))
 }
 
 ///|
@@ -3813,7 +3813,7 @@ fn step_96() -> Unit raise {
   let t1951 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:real^N"), t1950]))
   let t1949 = @simp.rewrite_tac(@list.List([extreme_point_of()]))
   let t2001 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1949), @tactics.ap_term_tac), @tactics.eq_tac), @tactics.disch_tac), t1951), @tactics.disch_tac), t1960), t1961), t1965), t1966), t1974), t1975), t1976), t2000)
-  extreme_point_of_midpoint_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        convex s\n        ==> (x extreme_point_of s <=>\n             x IN s /\\\n             !a b. a IN s /\\ b IN s /\\ x = midpoint(a,b) ==> x = a /\\ x = b)"), t2001))
+  extreme_point_of_midpoint_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        convex s\n        ==> (x extreme_point_of s <=>\n             x IN s /\\\n             forall a b. a IN s /\\ b IN s /\\ x = midpoint(a,b) ==> x = a /\\ x = b)"), t2001))
 }
 
 ///|
@@ -3836,7 +3836,7 @@ fn step_97() -> Unit raise {
   let t2005 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("convex:(real^N->bool)->bool"), t2004, t2003]), @misc.hull_minimal()))
   let t2002 = @simp.simp_tac(@list.List([extreme_point_of_stillconvex(), @convex.convex_convex_hull()]))
   let t2009 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2002), t2005), t2007), t2008)
-  extreme_point_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("!x:real^N s. x extreme_point_of (convex hull s) ==> x IN s"), t2009))
+  extreme_point_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall x:real^N s. x extreme_point_of (convex hull s) ==> x IN s"), t2009))
 }
 
 ///|
@@ -3852,7 +3852,7 @@ pub fn extreme_point_of_convex_hull() -> @kernel.Thm {
 /// EXTREME_POINTS_OF_CONVEX_HULL
 fn step_98() -> Unit raise {
   let t2010 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), extreme_point_of_convex_hull()]))
-  extreme_points_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("!s. {x | x extreme_point_of (convex hull s)} SUBSET s"), t2010))
+  extreme_points_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall s. {x | x extreme_point_of (convex hull s)} SUBSET s"), t2010))
 }
 
 ///|
@@ -3868,7 +3868,7 @@ pub fn extreme_points_of_convex_hull() -> @kernel.Thm {
 /// EXTREME_POINT_OF_EMPTY
 fn step_99() -> Unit raise {
   let t2011 = @simp.rewrite_tac(@list.List([extreme_point_of(), @sets.not_in_empty()]))
-  extreme_point_of_empty_c.set(@tactics.prove(@parser.parse_term("!x. ~(x extreme_point_of {})"), t2011))
+  extreme_point_of_empty_c.set(@tactics.prove(@parser.parse_term("forall x. ~(x extreme_point_of {})"), t2011))
 }
 
 ///|
@@ -3885,7 +3885,7 @@ pub fn extreme_point_of_empty() -> @kernel.Thm {
 fn step_100() -> Unit raise {
   let t2012 = @meson.meson_tac(@list.List([@topology.segment_refl(), @sets.not_in_empty()]))
   let t2013 = @tactics.then_tac(@simp.rewrite_tac(@list.List([extreme_point_of(), @sets.in_sing()])), t2012)
-  extreme_point_of_sing_c.set(@tactics.prove(@parser.parse_term("!a x. x extreme_point_of {a} <=> x = a"), t2013))
+  extreme_point_of_sing_c.set(@tactics.prove(@parser.parse_term("forall a x. x extreme_point_of {a} <=> x = a"), t2013))
 }
 
 ///|
@@ -3901,7 +3901,7 @@ pub fn extreme_point_of_sing() -> @kernel.Thm {
 /// EXTREME_POINT_OF_TRANSLATION_EQ
 fn step_101() -> Unit raise {
   let t2015 = @tactics.then_tac(@simp.rewrite_tac(@list.List([extreme_point_of()])), (x2014 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x2014))
-  extreme_point_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a:real^N x s.\n           (a + x) extreme_point_of (IMAGE (\\x. a + x) s) <=>\n           x extreme_point_of s"), t2015))
+  extreme_point_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a:real^N x s.\n           (a + x) extreme_point_of (IMAGE (\\x. a + x) s) <=>\n           x extreme_point_of s"), t2015))
 }
 
 ///|
@@ -3924,7 +3924,7 @@ fn step_102() -> Unit raise {
 fn step_103() -> Unit raise {
   let t2016 = @determinants.geom_transform_tac(@list.List([]))
   let t2017 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())])), t2016)
-  extreme_point_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N.\n      linear f /\\ (!x y. f x = f y ==> x = y)\n      ==> ((f x) extreme_point_of (IMAGE f s) <=> x extreme_point_of s)"), t2017))
+  extreme_point_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((f x) extreme_point_of (IMAGE f s) <=> x extreme_point_of s)"), t2017))
 }
 
 ///|
@@ -3950,7 +3950,7 @@ fn step_105() -> Unit raise {
   let t2019 = @tactics.match_mp_tac(@sets.surjective_image_eq())
   let t2018 = @tactics.conv_tac(@equal.sym_conv)
   let t2022 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2018), t2019), t2020), t2021)
-  extreme_points_of_translation_c.set(@tactics.prove(@parser.parse_term("!a s. {x:real^N | x extreme_point_of (IMAGE (\\x. a + x) s)} =\n         IMAGE (\\x. a + x) {x | x extreme_point_of s}"), t2022))
+  extreme_points_of_translation_c.set(@tactics.prove(@parser.parse_term("forall a s. {x:real^N | x extreme_point_of (IMAGE (\\x. a + x) s)} =\n         IMAGE (\\x. a + x) {x | x extreme_point_of s}"), t2022))
 }
 
 ///|
@@ -3967,7 +3967,7 @@ pub fn extreme_points_of_translation() -> @kernel.Thm {
 fn step_106() -> Unit raise {
   let t2023 = @meson.meson_tac(@list.List([]))
   let t2024 = @tactics.then_tac(@simp.rewrite_tac(@list.List([extreme_point_of(), @sets.in_inter()])), t2023)
-  extreme_point_of_inter_c.set(@tactics.prove(@parser.parse_term("!x s t. x extreme_point_of s /\\ x extreme_point_of t\n           ==> x extreme_point_of (s INTER t)"), t2024))
+  extreme_point_of_inter_c.set(@tactics.prove(@parser.parse_term("forall x s t. x extreme_point_of s /\\ x extreme_point_of t\n           ==> x extreme_point_of (s INTER t)"), t2024))
 }
 
 ///|
@@ -3984,7 +3984,7 @@ pub fn extreme_point_of_inter() -> @kernel.Thm {
 fn step_107() -> Unit raise {
   let t2025 = @meson.meson_tac(@list.List([]))
   let t2026 = @tactics.then_tac(@simp.rewrite_tac(@list.List([extreme_point_of(), @sets.in_inter()])), t2025)
-  extreme_point_of_inter_gen_c.set(@tactics.prove(@parser.parse_term("!x s t. (x extreme_point_of s \\/ x extreme_point_of t) /\\ x IN s INTER t\n           ==> x extreme_point_of (s INTER t)"), t2026))
+  extreme_point_of_inter_gen_c.set(@tactics.prove(@parser.parse_term("forall x s t. (x extreme_point_of s \\/ x extreme_point_of t) /\\ x IN s INTER t\n           ==> x extreme_point_of (s INTER t)"), t2026))
 }
 
 ///|
@@ -4013,7 +4013,7 @@ fn step_108() -> Unit raise {
     })(t2030(x2031))
   })
   let t2037 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t2032), t2033), t2034), t2035), t2036)
-  extreme_points_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> {y | y extreme_point_of (IMAGE f s)} =\n            IMAGE f {x | x extreme_point_of s}"), t2037))
+  extreme_points_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> {y | y extreme_point_of (IMAGE f s)} =\n            IMAGE f {x | x extreme_point_of s}"), t2037))
 }
 
 ///|
@@ -4040,7 +4040,7 @@ fn step_109() -> Unit raise {
   })
   let t2038 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t2046 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2038), t2043), t2044), t2045)
-  extreme_point_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("!s a b c. (!x. x IN s ==> a dot x <= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s"), t2046))
+  extreme_point_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("forall s a b c. (forall x. x IN s ==> a dot x <= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s"), t2046))
 }
 
 ///|
@@ -4067,7 +4067,7 @@ fn step_110() -> Unit raise {
   })
   let t2047 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t2055 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2047), t2052), t2053), t2054)
-  extreme_point_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("!s a b c. (!x. x IN s ==> a dot x >= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s"), t2055))
+  extreme_point_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("forall s a b c. (forall x. x IN s ==> a dot x >= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s"), t2055))
 }
 
 ///|
@@ -4094,7 +4094,7 @@ fn step_111() -> Unit raise {
   let t2058 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([face_of_sing()])), t2057), @tactics.all_tac])
   let t2056 = @simp.rewrite_tac(@list.List([exposed_face_of()]))
   let t2065 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2056), @tactics.conj_tac), t2058), t2063), t2064)
-  exposed_point_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("!s a b c:real^N.\n        (!x. x IN s ==> a dot x <= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s"), t2065))
+  exposed_point_of_inter_supporting_hyperplane_le_c.set(@tactics.prove(@parser.parse_term("forall s a b c:real^N.\n        (forall x. x IN s ==> a dot x <= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s"), t2065))
 }
 
 ///|
@@ -4116,7 +4116,7 @@ fn step_112() -> Unit raise {
   let t2070 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t2069, t2068, t2067]), exposed_point_of_inter_supporting_hyperplane_le()))
   let t2066 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2072 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_ge()])), t2066), t2070), t2071)
-  exposed_point_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("!s a b c:real^N.\n        (!x. x IN s ==> a dot x >= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s"), t2072))
+  exposed_point_of_inter_supporting_hyperplane_ge_c.set(@tactics.prove(@parser.parse_term("forall s a b c:real^N.\n        (forall x. x IN s ==> a dot x >= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s"), t2072))
 }
 
 ///|
@@ -4164,7 +4164,7 @@ fn step_113() -> Unit raise {
   let t2074 = @simp.rewrite_tac(@list.List([@vectors.dist_0(), @vectors.norm_le()]))
   let t2073 = @determinants.geom_origin_tac(@parser.parse_term("a:real^N"))
   let t2101 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2073), t2074), t2075), t2076), t2081), @tactics.conj_tac), t2098), t2099), t2100), @calc_rat.real_arith_tac)
-  exposed_point_of_furthest_point_c.set(@tactics.prove(@parser.parse_term("!s a b:real^N.\n        b IN s /\\ (!x. x IN s ==> dist(a,x) <= dist(a,b))\n        ==> {b} exposed_face_of s"), t2101))
+  exposed_point_of_furthest_point_c.set(@tactics.prove(@parser.parse_term("forall s a b:real^N.\n        b IN s /\\ (forall x. x IN s ==> dist(a,x) <= dist(a,b))\n        ==> {b} exposed_face_of s"), t2101))
 }
 
 ///|
@@ -4222,7 +4222,7 @@ fn step_114() -> Unit raise {
   let t2103 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("2 < n <=> 3 <= n"))]))
   let t2102 = @class.taut(@parser.parse_term("a /\\ ~b <=> ~(a ==> b)"))
   let t2137 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@arith.not_lt()), t2102])), t2103), t2104), t2110), t2111), t2112), t2113), t2117), t2118), t2122), t2123), t2124), t2125), t2126), t2130), t2136)
-  collinear_extreme_points_c.set(@tactics.prove(@parser.parse_term("!s. collinear s\n       ==> FINITE {x:real^N | x extreme_point_of s} /\\\n           CARD {x | x extreme_point_of s} <= 2"), t2137))
+  collinear_extreme_points_c.set(@tactics.prove(@parser.parse_term("forall s. collinear s\n       ==> FINITE {x:real^N | x extreme_point_of s} /\\\n           CARD {x | x extreme_point_of s} <= 2"), t2137))
 }
 
 ///|
@@ -4250,7 +4250,7 @@ fn step_115() -> Unit raise {
   })
   let t2138 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t2147 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2138), t2144), t2145), t2146)
-  extreme_point_of_conic_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        conic s /\\ x extreme_point_of s ==> x = vec 0"), t2147))
+  extreme_point_of_conic_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        conic s /\\ x extreme_point_of s ==> x = vec 0"), t2147))
 }
 
 ///|
@@ -4275,7 +4275,7 @@ fn step_116() -> Unit raise {
   let t2149 = @simp.asm_simp_tac(@list.List([@misc.hull_inc()]))
   let t2148 = @class.asm_cases_tac(@parser.parse_term("(a:real^N) IN s"))
   let t2157 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2148), t2149), @tactics.strip_tac), t2151), t2152), t2153), t2154), t2155), t2156)
-  extreme_point_of_convex_hull_insert_c.set(@tactics.prove(@parser.parse_term("!s a:real^N.\n        FINITE s /\\ ~(a IN convex hull s)\n        ==> a extreme_point_of (convex hull (a INSERT s))"), t2157))
+  extreme_point_of_convex_hull_insert_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N.\n        FINITE s /\\ ~(a IN convex hull s)\n        ==> a extreme_point_of (convex hull (a INSERT s))"), t2157))
 }
 
 ///|
@@ -4463,7 +4463,7 @@ fn step_117() -> Unit raise {
   let t2159 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @convex.conic_hull_explicit()]))
   let t2158 = @simp.simp_tac(@list.List([face_of(), @misc.hull_mono(), @convex.convex_conic_hull()]))
   let t2296 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2158), @tactics.strip_tac), t2159), t2160), t2162), @tactics.strip_tac), t2164), @tactics.strip_tac), t2166), @tactics.strip_tac), t2167), t2219), t2220), t2246), t2247), t2271), @tactics.disch_tac), t2277), t2278), @tactics.ants_tac), t2295)
-  face_of_conic_hull_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n      f face_of s /\\ ~(vec 0 IN affine hull s)\n      ==> (conic hull f) face_of (conic hull s)"), t2296))
+  face_of_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n      f face_of s /\\ ~(vec 0 IN affine hull s)\n      ==> (conic hull f) face_of (conic hull s)"), t2296))
 }
 
 ///|
@@ -4529,7 +4529,7 @@ fn step_118() -> Unit raise {
   let t2315 = @parser.parse_term("x:real^N")
   let t2316 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("c:real"), t2315]))
   let t2355 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.conic_hull_explicit(), @theorems.imp_conj(), @sets.forall_in_gspec()])), t2316), t2317), t2318), t2319), t2324), t2325), t2331), t2332), t2333), t2341), t2342), t2343), t2354])
-  let t2356 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!x:real^N. x IN conic hull s /\\ x IN f /\\ ~(x = vec 0)\n                   ==> x IN conic hull (f INTER affine hull s)"), fn(x2312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2356 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall x:real^N. x IN conic hull s /\\ x IN f /\\ ~(x = vec 0)\n                   ==> x IN conic hull (f INTER affine hull s)"), fn(x2312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2313 = @tactics.assume_tac(x2312)
     fn(x2314 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2313(x2314)
@@ -4557,7 +4557,7 @@ fn step_118() -> Unit raise {
   let t2298 = @simp.asm_rewrite_tac(@list.List([]))
   let t2297 = @class.asm_cases_tac(@parser.parse_term("f = {vec 0:real^N}"))
   let t2360 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2297), t2298), t2299), @tactics.conj_tac), t2359)
-  face_of_conic_hull_rev_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        f face_of (conic hull s) /\\ ~(vec 0 IN affine hull s)\n        ==> f = {vec 0} \\/ ?f'. f' face_of s /\\ conic hull f' = f"), t2360))
+  face_of_conic_hull_rev_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        f face_of (conic hull s) /\\ ~(vec 0 IN affine hull s)\n        ==> f = {vec 0} \\/ ?f'. f' face_of s /\\ conic hull f' = f"), t2360))
 }
 
 ///|
@@ -4592,7 +4592,7 @@ fn step_119() -> Unit raise {
   let t2414 = @simp.rewrite_tac(@list.List([@class.contrapos_thm()]))
   let t2413 = @simp.rewrite_tac(@list.List([@convex.affine_hull_0_2_explicit(), @topology.in_segment(), @vectors.vector_mul_assoc()]))
   let t2412 = @simp.asm_simp_tac(@list.List([@misc.hull_mono(), @sets.insert_subset(), @sets.empty_subset()]))
-  let t2409 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~(z IN s) ==> !t. t SUBSET s ==> ~(z IN t)")))
+  let t2409 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~(z IN s) ==> forall t. t SUBSET s ==> ~(z IN t)")))
   let t2406 = @parser.parse_term("affine hull {u:real^N,v}")
   let t2411 = @tactics.first_x_assum(fn(x2410 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x2408 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4664,7 +4664,7 @@ fn step_119() -> Unit raise {
     })(t2365(x2366))
   })), t2372), t2380), t2381), t2387), t2388), t2389), t2390), t2391), t2392), t2428])
   let t2430 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t2429)
-  extreme_point_of_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        ~(vec 0 IN affine hull s)\n        ==> (x extreme_point_of conic hull s <=> x = vec 0 /\\ ~(s = {}))"), t2430))
+  extreme_point_of_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        ~(vec 0 IN affine hull s)\n        ==> (x extreme_point_of conic hull s <=> x = vec 0 /\\ ~(s = {}))"), t2430))
 }
 
 ///|
@@ -4696,7 +4696,7 @@ fn step_120() -> Unit raise {
   let t2440 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2431), t2437), t2438), t2439])
   let t2443 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}")), t2440), t2442, t2441])
   let t2444 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), @tactics.strip_tac), t2443)
-  face_of_conic_hull_eq_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n     ~(vec 0 IN affine hull s)\n     ==> (f face_of (conic hull s) <=>\n          f = {vec 0} /\\ ~(s = {}) \\/ ?f'. f' face_of s /\\ conic hull f' = f)"), t2444))
+  face_of_conic_hull_eq_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n     ~(vec 0 IN affine hull s)\n     ==> (f face_of (conic hull s) <=>\n          f = {vec 0} /\\ ~(s = {}) \\/ ?f'. f' face_of s /\\ conic hull f' = f)"), t2444))
 }
 
 ///|
@@ -4722,7 +4722,7 @@ fn step_121() -> Unit raise {
   let t2453 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("a:real^N")), t2445), t2446), t2447), t2448), @tactics.strip_tac), t2449), t2450), t2451), t2452)
   let t2454 = @list.List([@meson.meson_tac(@list.List([extreme_point_in_frontier(), @topology.frontier_cball()])), t2453])
   let t2455 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t2454)
-  extreme_point_of_cball_c.set(@tactics.prove(@parser.parse_term("!a r x:real^N.\n        x extreme_point_of cball(a,r) <=> x IN sphere(a,r)"), t2455))
+  extreme_point_of_cball_c.set(@tactics.prove(@parser.parse_term("forall a r x:real^N.\n        x extreme_point_of cball(a,r) <=> x IN sphere(a,r)"), t2455))
 }
 
 ///|
@@ -4795,7 +4795,7 @@ fn step_122() -> Unit raise {
   let t2459 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\z. drop(fstcart z) % (sndcart z:real^N)"), t2458, t2457]), @topology.proper_map()))
   let t2456 = @simp.rewrite_tac(@list.List([@convex.conic_hull_as_image()]))
   let t2506 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2456), t2459), t2460), t2466), @tactics.ants_tac), t2467), t2468), t2469), @tactics.strip_tac), t2470), @tactics.conj_tac), t2474), t2476), t2477), t2478), t2479), t2480), t2481), t2482), t2483), t2484), t2486), @tactics.strip_tac), t2490), t2491), t2492), t2499), t2500), t2501), t2502), t2503), t2504), t2505)
-  closed_in_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        compact t /\\ ~(vec 0 IN t) /\\ t SUBSET s\n        ==> closed_in (subtopology euclidean (conic hull s))\n                      (conic hull t)"), t2506))
+  closed_in_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        compact t /\\ ~(vec 0 IN t) /\\ t SUBSET s\n        ==> closed_in (subtopology euclidean (conic hull s))\n                      (conic hull t)"), t2506))
 }
 
 ///|
@@ -4816,7 +4816,7 @@ fn step_123() -> Unit raise {
   let t2509 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("(:real^N)"), t2508]), closed_in_conic_hull()))
   let t2507 = @simp.asm_simp_tac(@list.List([@convex.conic_hull_eq_affine_hull(), @convex.closed_affine_hull()]))
   let t2512 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2507), t2509), t2510), t2511)
-  closed_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n     vec 0 IN relative_interior s \\/ compact s /\\ ~(vec 0 IN s)\n     ==> closed(conic hull s)"), t2512))
+  closed_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n     vec 0 IN relative_interior s \\/ compact s /\\ ~(vec 0 IN s)\n     ==> closed(conic hull s)"), t2512))
 }
 
 ///|
@@ -4843,7 +4843,7 @@ fn step_124() -> Unit raise {
   let t2513 = @parser.parse_term("c:real")
   let t2514 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:real^N"), t2513]))
   let t2523 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.conic(), @topology.closure_sequential()])), @tactics.gen_tac), @tactics.disch_tac), t2514), t2520), t2521), t2522)
-  conic_closure_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. conic s ==> conic(closure s)"), t2523))
+  conic_closure_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. conic s ==> conic(closure s)"), t2523))
 }
 
 ///|
@@ -4879,7 +4879,7 @@ fn step_125() -> Unit raise {
   let t2524 = @tactics.conv_tac(@equal.sym_conv)
   let t2541 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@convex.conic_hull_eq_affine_hull(), @convex.closed_affine_hull(), @topology.closure_closed()])), t2524), t2528), t2529), t2530), t2531), t2540])
   let t2542 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t2541)
-  closure_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        vec 0 IN relative_interior s \\/ bounded s /\\ ~(vec 0 IN closure s)\n        ==> closure(conic hull s) = conic hull (closure s)"), t2542))
+  closure_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        vec 0 IN relative_interior s \\/ bounded s /\\ ~(vec 0 IN closure s)\n        ==> closure(conic hull s) = conic hull (closure s)"), t2542))
 }
 
 ///|
@@ -4925,7 +4925,7 @@ fn step_126() -> Unit raise {
     }
   })
   let t2568 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2546), t2549), t2550), t2551), t2552), t2553), @tactics.disch_tac), t2556), t2557), t2558), t2559), t2565), t2566), t2567)
-  open_in_same_conic_hull_c.set(@tactics.prove(@parser.parse_term("!u s:real^N->bool.\n        conic u /\\ open_in (subtopology euclidean u) s\n        ==> open_in (subtopology euclidean u) (conic hull s DELETE vec 0)"), t2568))
+  open_in_same_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall u s:real^N->bool.\n        conic u /\\ open_in (subtopology euclidean u) s\n        ==> open_in (subtopology euclidean u) (conic hull s DELETE vec 0)"), t2568))
 }
 
 ///|
@@ -4944,7 +4944,7 @@ fn step_127() -> Unit raise {
   let t2569 = @parser.parse_term("s:real^N->bool")
   let t2570 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("(:real^N)"), t2569]), open_in_same_conic_hull()))
   let t2572 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2570), t2571)
-  open_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. open s ==> open(conic hull s DELETE vec 0)"), t2572))
+  open_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. open s ==> open(conic hull s DELETE vec 0)"), t2572))
 }
 
 ///|
@@ -5008,14 +5008,14 @@ fn step_128() -> Unit raise {
   let t2724 = @simp.rewrite_tac(@list.List([@vectors.span_explicit(), @convex.affine_hull_explicit(), @theorems.imp_conj()]))
   let t2723 = @tactics.x_gen_tac(@parser.parse_term("z:real^N"))
   let t2722 = @list.List([@tactics.all_tac, @simp.asm_simp_tac(@list.List([@vectors.span_mul(), @vectors.dot_rmul(), @real.real_div_rmul(), @real.real_lt_imp_nz()]))])
-  let t2721 = @tactics.subgoal_then(@parser.parse_term("!z:real^N. z IN span u /\\ a dot z = b ==> z IN affine hull u"), @tactics.match_mp_tac)
+  let t2721 = @tactics.subgoal_then(@parser.parse_term("forall z:real^N. z IN span u /\\ a dot z = b ==> z IN affine hull u"), @tactics.match_mp_tac)
   let t2720 = @simp.asm_rewrite_tac(@list.List([]))
   let t2719 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t2718 = @simp.asm_simp_tac(@list.List([@vectors.vector_mul_assoc(), @vectors.vector_mul_lid(), @calc_rat.real_field(@parser.parse_term("&0 < a /\\ &0 < b ==> a / b * b / a = &1"))]))
   let t2716 = @simp.asm_simp_tac(@list.List([@real.real_lt_div(), @realarith.real_lt_imp_le()]))
   let t2715 = @simp.asm_simp_tac(@list.List([@real.real_lt_mul()]))
   let t2714 = @tactics.exists_tac(@parser.parse_term("c * b:real"))
-  let t2717 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("!y. &0 < y /\\ abs(x - y) < y ==> &0 < x"))), t2714), t2715), t2716])
+  let t2717 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("forall y. &0 < y /\\ abs(x - y) < y ==> &0 < x"))), t2714), t2715), t2716])
   let t2713 = @tactics.subgoal_then(@parser.parse_term("&0 < (a:real^N) dot y"), fn(x2710 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2711 = @tactics.assume_tac(x2710)
     fn(x2712 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -5115,7 +5115,7 @@ fn step_128() -> Unit raise {
     }
   })
   let t2638 = @list.List([@meson.asm_meson_tac(@list.List([@sets.subset()])), @tactics.all_tac])
-  let t2637 = @tactics.subgoal_then(@parser.parse_term("!x:real^N. x IN s ==> a dot x = b"), fn(x2634 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2637 = @tactics.subgoal_then(@parser.parse_term("forall x:real^N. x IN s ==> a dot x = b"), fn(x2634 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2635 = @tactics.assume_tac(x2634)
     fn(x2636 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2635(x2636)
@@ -5198,7 +5198,7 @@ fn step_128() -> Unit raise {
   let t2574 = @simp.asm_rewrite_tac(@list.List([@convex.conic_hull_empty(), @sets.empty_delete(), @metric.open_in_empty()]))
   let t2573 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t2762 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2573), t2574), t2575), t2576), t2577), t2578), t2761)
-  open_in_conic_hull_c.set(@tactics.prove(@parser.parse_term("!u s:real^N->bool.\n        open_in (subtopology euclidean (affine hull u)) s\n        ==> open_in (subtopology euclidean (affine hull (conic hull u)))\n                    (conic hull s DELETE vec 0)"), t2762))
+  open_in_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall u s:real^N->bool.\n        open_in (subtopology euclidean (affine hull u)) s\n        ==> open_in (subtopology euclidean (affine hull (conic hull u)))\n                    (conic hull s DELETE vec 0)"), t2762))
 }
 
 ///|
@@ -5251,7 +5251,7 @@ fn step_129() -> Unit raise {
   let t2765 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:real^N"), t2764]))
   let t2763 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2796 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.conic(), @topology.in_interior(), @sets.subset(), @topology.in_ball(), @vectors.dist(), @sets.in_insert()])), t2763), @tactics.strip_tac), t2765), t2766), t2767), t2768), t2769), t2770), t2774), t2775), t2776), t2777), @tactics.disch_tac), t2785), t2786), t2787), t2788), t2789), t2790), t2791), @tactics.conj_tac), t2792), t2793), t2794), t2795)
-  conic_interior_insert_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. conic s ==> conic(vec 0 INSERT interior s)"), t2796))
+  conic_interior_insert_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. conic s ==> conic(vec 0 INSERT interior s)"), t2796))
 }
 
 ///|
@@ -5267,7 +5267,7 @@ pub fn conic_interior_insert() -> @kernel.Thm {
 /// CONIC_INTERIOR
 fn step_130() -> Unit raise {
   let t2797 = @meson.meson_tac(@list.List([@sets.set_rule(@parser.parse_term("a IN s ==> a INSERT s = s")), conic_interior_insert()]))
-  conic_interior_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. conic s /\\ vec 0 IN interior s ==> conic(interior s)"), t2797))
+  conic_interior_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. conic s /\\ vec 0 IN interior s ==> conic(interior s)"), t2797))
 }
 
 ///|
@@ -5338,7 +5338,7 @@ fn step_131() -> Unit raise {
   let t2800 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:real^N"), t2799]))
   let t2798 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2845 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.conic(), @convex.in_relative_interior(), @sets.subset(), @sets.in_inter(), @topology.in_ball(), @vectors.dist(), @sets.in_insert()])), t2798), @tactics.strip_tac), t2800), t2801), t2802), t2803), t2804), t2805), t2812), t2813), t2814), t2815), @tactics.disch_tac), t2823), t2824), @tactics.ants_tac), t2825), t2833), t2834), t2835), t2836), t2837), @tactics.conj_tac), t2838), t2839), t2840), @tactics.conj_tac), t2841), t2842), t2843), t2844)
-  conic_relative_interior_insert_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. conic s ==> conic(vec 0 INSERT relative_interior s)"), t2845))
+  conic_relative_interior_insert_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. conic s ==> conic(vec 0 INSERT relative_interior s)"), t2845))
 }
 
 ///|
@@ -5354,7 +5354,7 @@ pub fn conic_relative_interior_insert() -> @kernel.Thm {
 /// CONIC_RELATIVE_INTERIOR
 fn step_132() -> Unit raise {
   let t2846 = @meson.meson_tac(@list.List([@sets.set_rule(@parser.parse_term("a IN s ==> a INSERT s = s")), conic_relative_interior_insert()]))
-  conic_relative_interior_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        conic s /\\ vec 0 IN relative_interior s\n        ==> conic(relative_interior s)"), t2846))
+  conic_relative_interior_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        conic s /\\ vec 0 IN relative_interior s\n        ==> conic(relative_interior s)"), t2846))
 }
 
 ///|
@@ -5376,7 +5376,7 @@ fn step_133() -> Unit raise {
   let t2852 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("s SUBSET t ==> s DELETE a SUBSET t"))), t2848), t2849), t2851])
   let t2847 = @tactics.match_mp_tac(@convex.relative_interior_maximal())
   let t2853 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2847), @tactics.conj_tac), t2852)
-  conic_hull_relative_interior_subset_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        conic hull (relative_interior s) DELETE (vec 0) SUBSET\n        relative_interior(conic hull s)"), t2853))
+  conic_hull_relative_interior_subset_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        conic hull (relative_interior s) DELETE (vec 0) SUBSET\n        relative_interior(conic hull s)"), t2853))
 }
 
 ///|
@@ -5448,14 +5448,14 @@ fn step_134() -> Unit raise {
   let t2860 = @parser.parse_term("x:real^N")
   let t2861 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:real"), t2860]))
   let t2859 = @simp.rewrite_tac(@list.List([@convex.conic_hull_explicit(), @sets.forall_in_gspec()]))
-  let t2856 = @drule.match_mp(@sets.set_rule(@parser.parse_term("c SUBSET k ==> (!x. x IN k ==> x IN c ==> x IN u) ==> c SUBSET u")))
+  let t2856 = @drule.match_mp(@sets.set_rule(@parser.parse_term("c SUBSET k ==> (forall x. x IN k ==> x IN c ==> x IN u) ==> c SUBSET u")))
   let t2858 = @tactics.first_assum(fn(x2857 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t2856(x2857))
   })
   let t2855 = @simp.asm_simp_tac(@list.List([@misc.hull_minimal(), @sets.inter_subset()]))
   let t2854 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq())]))
   let t2907 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2854), t2855), t2858), t2859), t2861), t2862), t2906)
-  conic_subset_as_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s c:real^N->bool.\n        conic c /\\ ~(c = {vec 0}) /\\ c SUBSET conic hull s\n        ==> conic hull (s INTER c) = c"), t2907))
+  conic_subset_as_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s c:real^N->bool.\n        conic c /\\ ~(c = {vec 0}) /\\ c SUBSET conic hull s\n        ==> conic hull (s INTER c) = c"), t2907))
 }
 
 ///|
@@ -5527,7 +5527,7 @@ fn step_135() -> Unit raise {
   let t2909 = @simp.rewrite_tac(@list.List([conic_hull_relative_interior_subset()]))
   let t2908 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t2959 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2908), t2909), t2910), t2911), t2912), t2913), t2917), t2920), t2921), t2922), t2924), @tactics.conj_tac), t2958)
-  relative_interior_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> relative_interior(conic hull s) =\n            conic hull (relative_interior s) DELETE (vec 0)"), t2959))
+  relative_interior_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> relative_interior(conic hull s) =\n            conic hull (relative_interior s) DELETE (vec 0)"), t2959))
 }
 
 ///|
@@ -5547,7 +5547,7 @@ fn step_136() -> Unit raise {
   let t2961 = @simp.asm_simp_tac(@list.List([relative_interior_conic_hull()]))
   let t2960 = @simp.asm_rewrite_tac(@list.List([@convex.relative_interior_empty(), @convex.conic_hull_empty()]))
   let t2964 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t2960), t2961), t2962), t2963)
-  conic_hull_relative_interior_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_interior s) =\n            if relative_interior s = {} then {}\n            else (vec 0) INSERT relative_interior(conic hull s)"), t2964))
+  conic_hull_relative_interior_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_interior s) =\n            if relative_interior s = {} then {}\n            else (vec 0) INSERT relative_interior(conic hull s)"), t2964))
 }
 
 ///|
@@ -5606,7 +5606,7 @@ fn step_137() -> Unit raise {
   let t2966 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_diff(), @sets.in_delete(), @convex.conic_hull_explicit(), @sets.in_elim_thm()]))
   let t2965 = @simp.asm_rewrite_tac(@list.List([@sets.diff_eq_empty(), @convex.conic_hull_empty()]))
   let t3003 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t2965), t2966), t2967), t2968), t2969), t2973), @tactics.eq_tac), t2975), t2977), @tactics.strip_tac), @tactics.conj_tac), t2979), t2981), t2982), @tactics.strip_tac), t2986), t3002)
-  conic_hull_diff_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~(vec 0 IN affine hull s) /\\ t SUBSET s\n        ==> conic hull (s DIFF t) =\n            if t = s then {}\n            else conic hull s DIFF (conic hull t DELETE vec 0)"), t3003))
+  conic_hull_diff_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~(vec 0 IN affine hull s) /\\ t SUBSET s\n        ==> conic hull (s DIFF t) =\n            if t = s then {}\n            else conic hull s DIFF (conic hull t DELETE vec 0)"), t3003))
 }
 
 ///|
@@ -5623,7 +5623,7 @@ pub fn conic_hull_diff() -> @kernel.Thm {
 fn step_138() -> Unit raise {
   let t3042 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t3041 = @tactics.match_mp_tac(@misc.hull_mono())
-  let t3039 = @drule.match_mp(@sets.set_rule(@parser.parse_term("!q t. ~(z IN s) ==> t SUBSET s ==> z IN t ==> q")))
+  let t3039 = @drule.match_mp(@sets.set_rule(@parser.parse_term("forall q t. ~(z IN s) ==> t SUBSET s ==> z IN t ==> q")))
   let t3043 = @tactics.then_tac(@tactics.then_tac(@tactics.first_assum(fn(x3040 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t3039(x3040))
   }), t3041), t3042)
@@ -5670,7 +5670,7 @@ fn step_138() -> Unit raise {
   let t3005 = @simp.asm_rewrite_tac(@list.List([@convex.conic_hull_empty()]))
   let t3004 = @class.asm_cases_tac(@parser.parse_term("s INTER t:real^N->bool = {}"))
   let t3045 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3004), t3005), t3006), t3007), t3008), @tactics.eq_tac), t3009), t3010), t3012), t3013), t3015), t3016), t3017), t3020), t3021), t3026), t3030), t3044)
-  conic_hull_inter_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull (s INTER t) =\n            if s INTER t = {} then {}\n            else conic hull s INTER conic hull t"), t3045))
+  conic_hull_inter_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull (s INTER t) =\n            if s INTER t = {} then {}\n            else conic hull s INTER conic hull t"), t3045))
 }
 
 ///|
@@ -5806,7 +5806,7 @@ fn step_139() -> Unit raise {
   let t3047 = @simp.asm_rewrite_tac(@list.List([@convex.conic_hull_empty(), @sets.inter_empty()]))
   let t3046 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t3151 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3046), t3047), t3048), t3049), t3050), @tactics.conj_tac), t3053), t3054), @tactics.conj_tac), t3055), t3057), @tactics.conj_tac), t3059), t3060), t3061), t3062), t3063), t3064), t3066), t3067), t3069), t3070), t3071), t3074), t3075), t3080), t3086), t3095), t3096), t3097), @tactics.conj_tac), t3110), t3113), t3114), t3115), @tactics.conj_tac), t3118), t3125), t3126), t3127), t3131), t3135), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t3136), t3137), t3138), @tactics.conj_tac), t3139), t3140), t3147), t3148), t3149), t3150)
-  inter_conic_hull_subsets_convex_relative_frontier_c.set(@tactics.prove(@parser.parse_term("!s t u:real^N->bool.\n        convex u /\\ vec 0 IN relative_interior u /\\\n        s UNION t SUBSET relative_frontier u\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)"), t3151))
+  inter_conic_hull_subsets_convex_relative_frontier_c.set(@tactics.prove(@parser.parse_term("forall s t u:real^N->bool.\n        convex u /\\ vec 0 IN relative_interior u /\\\n        s UNION t SUBSET relative_frontier u\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)"), t3151))
 }
 
 ///|
@@ -5889,7 +5889,7 @@ fn step_140() -> Unit raise {
     }
   })
   let t3200 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3155), t3157), t3158), t3159), t3160), t3161), t3199)
-  relative_frontier_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> relative_frontier(conic hull s) =\n            if ?a. s = {a} then {vec 0}\n            else conic hull (relative_frontier s)"), t3200))
+  relative_frontier_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> relative_frontier(conic hull s) =\n            if ?a. s = {a} then {vec 0}\n            else conic hull (relative_frontier s)"), t3200))
 }
 
 ///|
@@ -5913,7 +5913,7 @@ fn step_141() -> Unit raise {
   }))
   let t3201 = @simp.asm_simp_tac(@list.List([relative_frontier_conic_hull()]))
   let t3207 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t3201), t3205), t3206)
-  conic_hull_relative_frontier_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_frontier s) =\n            if ?a. s = {a} then {}\n            else relative_frontier(conic hull s)"), t3207))
+  conic_hull_relative_frontier_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_frontier s) =\n            if ?a. s = {a} then {}\n            else relative_frontier(conic hull s)"), t3207))
 }
 
 ///|
@@ -5965,7 +5965,7 @@ fn step_142() -> Unit raise {
   let t3208 = @parser.parse_term("affine hull (s UNION t):real^N->bool")
   let t3209 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{vec 0:real^N}"), t3208]), @convex.separating_hyperplane_affine_affine()))
   let t3239 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3209), t3210), t3211), t3212), t3213), t3214), t3215), t3218), t3219), t3220), @tactics.strip_tac), t3221), t3222), t3223), t3227), t3228), t3229), t3235), t3236), t3237), t3238)
-  inter_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)"), t3239))
+  inter_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)"), t3239))
 }
 
 ///|
@@ -6012,7 +6012,7 @@ fn step_143() -> Unit raise {
   let t3241 = @simp.asm_rewrite_tac(@list.List([@convex.conic_hull_empty(), @convex.relative_interior_empty(), @sets.not_in_empty()]))
   let t3240 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t3269 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3240), t3241), t3242), t3244), t3245), t3246), t3247), t3248), t3249), @tactics.strip_tac), t3253), t3254), t3255), t3256), t3257), t3258), t3259), @tactics.strip_tac), t3260), t3261), @tactics.conj_tac), t3268)
-  relative_interior_conic_hull_0_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s\n        ==> (vec 0 IN relative_interior(conic hull s) <=>\n             vec 0 IN relative_interior s)"), t3269))
+  relative_interior_conic_hull_0_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s\n        ==> (vec 0 IN relative_interior(conic hull s) <=>\n             vec 0 IN relative_interior s)"), t3269))
 }
 
 ///|
@@ -6050,7 +6050,7 @@ pub fn facet_of() -> @kernel.Thm {
 fn step_146() -> Unit raise {
   let t3270 = @tactics.conv_tac(@class.taut)
   let t3271 = @tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of(), face_of_empty()])), t3270)
-  facet_of_empty_c.set(@tactics.prove(@parser.parse_term("!s. ~(s facet_of {})"), t3271))
+  facet_of_empty_c.set(@tactics.prove(@parser.parse_term("forall s. ~(s facet_of {})"), t3271))
 }
 
 ///|
@@ -6066,7 +6066,7 @@ pub fn facet_of_empty() -> @kernel.Thm {
 /// FACET_OF_REFL
 fn step_147() -> Unit raise {
   let t3272 = @simp.rewrite_tac(@list.List([facet_of(), @int.int_arith(@parser.parse_term("~(x:int = x - &1)"))]))
-  facet_of_refl_c.set(@tactics.prove(@parser.parse_term("!s. ~(s facet_of s)"), t3272))
+  facet_of_refl_c.set(@tactics.prove(@parser.parse_term("forall s. ~(s facet_of s)"), t3272))
 }
 
 ///|
@@ -6082,7 +6082,7 @@ pub fn facet_of_refl() -> @kernel.Thm {
 /// FACET_OF_IMP_FACE_OF
 fn step_148() -> Unit raise {
   let t3273 = @simp.simp_tac(@list.List([facet_of()]))
-  facet_of_imp_face_of_c.set(@tactics.prove(@parser.parse_term("!f s. f facet_of s ==> f face_of s"), t3273))
+  facet_of_imp_face_of_c.set(@tactics.prove(@parser.parse_term("forall f s. f facet_of s ==> f face_of s"), t3273))
 }
 
 ///|
@@ -6098,7 +6098,7 @@ pub fn facet_of_imp_face_of() -> @kernel.Thm {
 /// FACET_OF_IMP_SUBSET
 fn step_149() -> Unit raise {
   let t3274 = @simp.simp_tac(@list.List([facet_of_imp_face_of(), face_of_imp_subset()]))
-  facet_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("!f s. f facet_of s ==> f SUBSET s"), t3274))
+  facet_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("forall f s. f facet_of s ==> f SUBSET s"), t3274))
 }
 
 ///|
@@ -6115,7 +6115,7 @@ pub fn facet_of_imp_subset() -> @kernel.Thm {
 fn step_150() -> Unit raise {
   let t3275 = @meson.meson_tac(@list.List([@int.int_arith(@parser.parse_term("~(x - &1:int = x)"))]))
   let t3276 = @tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), t3275)
-  facet_of_imp_proper_c.set(@tactics.prove(@parser.parse_term("!f s. f facet_of s ==> ~(f = {}) /\\ ~(f = s)"), t3276))
+  facet_of_imp_proper_c.set(@tactics.prove(@parser.parse_term("forall f s. f facet_of s ==> ~(f = {}) /\\ ~(f = s)"), t3276))
 }
 
 ///|
@@ -6131,7 +6131,7 @@ pub fn facet_of_imp_proper() -> @kernel.Thm {
 /// FACET_OF_TRANSLATION_EQ
 fn step_151() -> Unit raise {
   let t3278 = @tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), (x3277 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x3277))
-  facet_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a:real^N f s.\n        (IMAGE (\\x. a + x) f) facet_of (IMAGE (\\x. a + x) s) <=> f facet_of s"), t3278))
+  facet_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a:real^N f s.\n        (IMAGE (\\x. a + x) f) facet_of (IMAGE (\\x. a + x) s) <=> f facet_of s"), t3278))
 }
 
 ///|
@@ -6154,7 +6154,7 @@ fn step_152() -> Unit raise {
 fn step_153() -> Unit raise {
   let t3279 = @determinants.geom_transform_tac(@list.List([]))
   let t3280 = @tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), t3279)
-  facet_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N c s.\n      linear f /\\ (!x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) facet_of (IMAGE f s) <=> c facet_of s)"), t3280))
+  facet_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) facet_of (IMAGE f s) <=> c facet_of s)"), t3280))
 }
 
 ///|
@@ -6176,7 +6176,7 @@ fn step_154() -> Unit raise {
 /// HYPERPLANE_FACET_OF_HALFSPACE_LE
 fn step_155() -> Unit raise {
   let t3281 = @simp.simp_tac(@list.List([facet_of(), hyperplane_face_of_halfspace_le(), @vectors.hyperplane_eq_empty(), @convex.aff_dim_hyperplane(), @convex.aff_dim_halfspace_le()]))
-  hyperplane_facet_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("!a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x <= b}"), t3281))
+  hyperplane_facet_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("forall a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x <= b}"), t3281))
 }
 
 ///|
@@ -6192,7 +6192,7 @@ pub fn hyperplane_facet_of_halfspace_le() -> @kernel.Thm {
 /// HYPERPLANE_FACET_OF_HALFSPACE_GE
 fn step_156() -> Unit raise {
   let t3282 = @simp.simp_tac(@list.List([facet_of(), hyperplane_face_of_halfspace_ge(), @vectors.hyperplane_eq_empty(), @convex.aff_dim_hyperplane(), @convex.aff_dim_halfspace_ge()]))
-  hyperplane_facet_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("!a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x >= b}"), t3282))
+  hyperplane_facet_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("forall a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x >= b}"), t3282))
 }
 
 ///|
@@ -6231,7 +6231,7 @@ fn step_157() -> Unit raise {
   let t3284 = @simp.simp_tac(@list.List([@convex.aff_dim_halfspace_le(), facet_of(), face_of_halfspace_le()]))
   let t3283 = @simp.asm_simp_tac(@list.List([hyperplane_facet_of_halfspace_le()]))
   let t3302 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t3283), t3284), t3285), t3286), t3301)
-  facet_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("!f a:real^N b.\n        f facet_of {x | a dot x <= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}"), t3302))
+  facet_of_halfspace_le_c.set(@tactics.prove(@parser.parse_term("forall f a:real^N b.\n        f facet_of {x | a dot x <= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}"), t3302))
 }
 
 ///|
@@ -6251,7 +6251,7 @@ fn step_158() -> Unit raise {
   let t3304 = @parser.parse_term("--a:real^N")
   let t3305 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real^N->bool"), t3304, t3303]), facet_of_halfspace_le()))
   let t3307 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3305), t3306)
-  facet_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("!f a:real^N b.\n        f facet_of {x | a dot x >= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}"), t3307))
+  facet_of_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("forall f a:real^N b.\n        f facet_of {x | a dot x >= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}"), t3307))
 }
 
 ///|
@@ -6283,7 +6283,7 @@ fn step_159() -> Unit raise {
     })(((x3342 : @kernel.Thm) => @bool.spec(t3341, x3342))(x3343))
   })
   let t3337 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("~p ==> p ==> q")))
-  let t3334 = @drule.match_mp(@int.int_arith(@parser.parse_term("t:int = s - &1 ==> !f. t < f /\\ f < s ==> F")))
+  let t3334 = @drule.match_mp(@int.int_arith(@parser.parse_term("t:int = s - &1 ==> forall f. t < f /\\ f < s ==> F")))
   let t3336 = @tactics.first_x_assum(fn(x3335 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x3331 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s3332 = @tactics.mp_tac(x3331)
@@ -6318,7 +6318,7 @@ fn step_159() -> Unit raise {
   })
   let t3308 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3352 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), t3308), t3312), t3314), t3315), @tactics.disch_tac), t3317), t3318), @tactics.ants_tac), t3323), t3326), @tactics.ants_tac), t3328), t3329), t3330), t3336), t3337), t3344), t3345), @tactics.conj_tac), t3346), t3347), @tactics.conj_tac), t3348), t3349), t3350), t3351)
-  exposed_facet_of_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool. convex s /\\ t facet_of s ==> t exposed_face_of s"), t3352))
+  exposed_facet_of_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool. convex s /\\ t facet_of s ==> t exposed_face_of s"), t3352))
 }
 
 ///|
@@ -6383,7 +6383,7 @@ fn step_160() -> Unit raise {
   let t3358 = @list.List([@meson.asm_meson_tac(@list.List([@convex.relative_interior_eq_empty(), facet_of_empty()])), t3357])
   let t3353 = @class.asm_cases_tac(@parser.parse_term("relative_interior s:real^N->bool = {}"))
   let t3396 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3353), t3358), t3359), t3360), t3361), t3362), t3364), t3365), @tactics.ants_tac), t3370), t3374), t3379), @class.cond_cases_tac), t3380), t3381), t3382), t3383), t3384), t3385), t3386), t3387), t3388), t3389), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t3390), @class.cond_cases_tac), t3391), t3392), t3393), t3394), @tactics.conj_tac), @list.List([@tactics.all_tac, @int.int_arith_tac])), t3395)
-  open_in_relative_frontier_interior_facet_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool.\n        convex s /\\ f facet_of s\n        ==> open_in (subtopology euclidean (relative_frontier s))\n                    (relative_interior f)"), t3396))
+  open_in_relative_frontier_interior_facet_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool.\n        convex s /\\ f facet_of s\n        ==> open_in (subtopology euclidean (relative_frontier s))\n                    (relative_interior f)"), t3396))
 }
 
 ///|
@@ -6410,7 +6410,7 @@ fn step_161() -> Unit raise {
   let t3434 = @simp.rewrite_tac(@list.List([@convex.relative_frontier(), @topology.closed_in_refl(), @sets.set_rule(@parser.parse_term("(s DIFF i) DIFF i = s DIFF i"))]))
   let t3435 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f x | x = a} = {f a}")), @sets.unions_1()])), t3434)
   let t3436 = @list.List([@meson.asm_meson_tac(@list.List([face_of_aff_dim_lt(), @int.int_lt_refl(), face_of_refl()])), t3435])
-  let t3445 = @list.List([@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!f:real^N->bool. f face_of s /\\ aff_dim f = &1 <=> f = s"), fn(x3432 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3445 = @list.List([@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall f:real^N->bool. f face_of s /\\ aff_dim f = &1 <=> f = s"), fn(x3432 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x3432
     @simp.rewrite_tac(@list.List([th]))
   }), t3436), t3444])
@@ -6460,7 +6460,7 @@ fn step_161() -> Unit raise {
     })(t3400(x3401))
   })
   let t3448 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3402), t3403), @tactics.strip_tac), t3404), t3409), t3413), t3447)
-  closed_extreme_points_2d_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        closed s /\\ convex s /\\ aff_dim s <= &2\n        ==> closed {x | x extreme_point_of s}"), t3448))
+  closed_extreme_points_2d_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        closed s /\\ convex s /\\ aff_dim s <= &2\n        ==> closed {x | x extreme_point_of s}"), t3448))
 }
 
 ///|
@@ -6497,7 +6497,7 @@ pub fn edge_of() -> @kernel.Thm {
 /// EDGE_OF_TRANSLATION_EQ
 fn step_164() -> Unit raise {
   let t3450 = @tactics.then_tac(@simp.rewrite_tac(@list.List([edge_of()])), (x3449 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x3449))
-  edge_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a:real^N f s.\n        (IMAGE (\\x. a + x) f) edge_of (IMAGE (\\x. a + x) s) <=> f edge_of s"), t3450))
+  edge_of_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a:real^N f s.\n        (IMAGE (\\x. a + x) f) edge_of (IMAGE (\\x. a + x) s) <=> f edge_of s"), t3450))
 }
 
 ///|
@@ -6520,7 +6520,7 @@ fn step_165() -> Unit raise {
 fn step_166() -> Unit raise {
   let t3451 = @determinants.geom_transform_tac(@list.List([]))
   let t3452 = @tactics.then_tac(@simp.rewrite_tac(@list.List([edge_of()])), t3451)
-  edge_of_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N c s.\n      linear f /\\ (!x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) edge_of (IMAGE f s) <=> c edge_of s)"), t3452))
+  edge_of_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) edge_of (IMAGE f s) <=> c edge_of s)"), t3452))
 }
 
 ///|
@@ -6542,7 +6542,7 @@ fn step_167() -> Unit raise {
 /// EDGE_OF_IMP_SUBSET
 fn step_168() -> Unit raise {
   let t3453 = @simp.simp_tac(@list.List([edge_of(), face_of()]))
-  edge_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("!s t. s edge_of t ==> s SUBSET t"), t3453))
+  edge_of_imp_subset_c.set(@tactics.prove(@parser.parse_term("forall s t. s edge_of t ==> s SUBSET t"), t3453))
 }
 
 ///|
@@ -6601,7 +6601,7 @@ fn step_169() -> Unit raise {
   let t3454 = @parser.parse_term("vec 0:real^N")
   let t3455 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t3454]), @topology.distance_attains_sup()))
   let t3491 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3455), t3456), t3457), t3458), @tactics.strip_tac), t3459), t3461), t3462), t3465), t3466), t3467), t3468), t3469), t3470), t3471), t3472), t3473), @tactics.conj_tac), @tactics.disch_tac), t3483), t3484), t3485), t3486), t3487), t3489), t3490)
-  extreme_point_exists_convex_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        compact s /\\ convex s /\\ ~(s = {}) ==> ?x. x extreme_point_of s"), t3491))
+  extreme_point_exists_convex_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        compact s /\\ convex s /\\ ~(s = {}) ==> ?x. x extreme_point_of s"), t3491))
 }
 
 ///|
@@ -6681,7 +6681,7 @@ fn step_170() -> Unit raise {
   let t3492 = @simp.rewrite_tac(@list.List([@convex.convex_hull_empty(), @topology.closure_empty()]))
   let t3493 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([extreme_point_of(), @sets.not_in_empty(), @sets.empty_gspec()])), t3492), @tactics.all_tac])
   let t3553 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))), t3493), @tactics.strip_tac), t3494), @tactics.conj_tac), t3498), t3499), t3500), @tactics.disch_tac), t3501), @tactics.disch_tac), t3503), t3504), t3505), t3507), t3508), t3510), t3511), t3512), t3513), t3516), t3522), t3526), t3552)
-  krein_milman_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = closure(convex hull {x | x extreme_point_of s})"), t3553))
+  krein_milman_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = closure(convex hull {x | x extreme_point_of s})"), t3553))
 }
 
 ///|
@@ -6721,7 +6721,7 @@ fn step_171() -> Unit raise {
   let t3623 = @simp.rewrite_tac(@list.List([@vectors.subspace(), @vectors.dot_rzero(), @vectors.dot_radd(), @vectors.dot_rmul(), @sets.in_elim_thm()]))
   let t3622 = @simp.simp_tac(@list.List([@sets.in_inter(), @sets.in_elim_thm()]))
   let t3621 = @tactics.match_mp_tac(@vectors.span_induct())
-  let t3620 = @tactics.subgoal_then(@parser.parse_term("!x:real^N. x IN span (s INTER {x | a dot x = &0}) ==> a dot x = &0"), fn(x3618 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3620 = @tactics.subgoal_then(@parser.parse_term("forall x:real^N. x IN span (s INTER {x | a dot x = &0}) ==> a dot x = &0"), fn(x3618 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x3618
     @meson.asm_meson_tac(@list.List([th_1, @realarith.real_lt_refl()]))
   })
@@ -6804,13 +6804,13 @@ fn step_171() -> Unit raise {
   let t3576 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("s:real^N->bool"), krein_milman())), t3558), @tactics.disch_tac), t3559), t3573), t3574), t3575), @tactics.all_tac])
   let t3557 = @class.asm_cases_tac(@parser.parse_term("(vec 0:real^N) IN relative_interior s"))
   let t3625 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @wf.wf_induct_tac(@parser.parse_term("dim(s:real^N->bool)"))), @tactics.strip_tac), t3557), t3576), t3580), t3582), t3584), t3585), t3586), t3589), t3590), @tactics.disch_tac), t3594), t3599), t3600), t3601), t3602), t3603), @tactics.disch_tac), t3605), t3606), t3613), t3614), t3615), @tactics.disch_tac), t3616), @tactics.conj_tac), t3617), t3620), t3621), t3622), t3623), t3624), @tactics.all_tac])
-  let t3645 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ compact s /\\ (vec 0) IN s\n        ==> (vec 0) IN convex hull {x | x extreme_point_of s}"), fn(x3554 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3645 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ compact s /\\ (vec 0) IN s\n        ==> (vec 0) IN convex hull {x | x extreme_point_of s}"), fn(x3554 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3555 = @tactics.assume_tac(x3554)
     fn(x3556 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s3555(x3556)
     }
   }), t3625), t3626), t3627), @tactics.conj_tac), t3644)
-  krein_milman_minkowski_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = convex hull {x | x extreme_point_of s}"), t3645))
+  krein_milman_minkowski_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = convex hull {x | x extreme_point_of s}"), t3645))
 }
 
 ///|
@@ -6835,7 +6835,7 @@ fn step_172() -> Unit raise {
   let t3646 = @simp.rewrite_tac(@list.List([@misc.hull_subset(), extreme_points_of_convex_hull()]))
   let t3654 = @list.List([@tactics.then_tac(@simp.expand_tac("s"), t3646), t3653])
   let t3655 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), @tactics.strip_tac), t3654)
-  krein_milman_eq_c.set(@tactics.prove(@parser.parse_term("!s e:real^N->bool.\n        compact s /\\ convex s\n        ==> (convex hull e = s <=>\n             e SUBSET s /\\ {x | x extreme_point_of s} SUBSET e)"), t3655))
+  krein_milman_eq_c.set(@tactics.prove(@parser.parse_term("forall s e:real^N->bool.\n        compact s /\\ convex s\n        ==> (convex hull e = s <=>\n             e SUBSET s /\\ {x | x extreme_point_of s} SUBSET e)"), t3655))
 }
 
 ///|
@@ -6851,7 +6851,7 @@ pub fn krein_milman_eq() -> @kernel.Thm {
 /// KREIN_MILMAN_POLYTOPE
 fn step_173() -> Unit raise {
   let t3656 = @simp.simp_tac(@list.List([krein_milman_minkowski(), @convex.convex_convex_hull(), @convex.compact_convex_hull(), @topology.finite_imp_compact()]))
-  krein_milman_polytope_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s\n       ==> convex hull s =\n           convex hull {x | x extreme_point_of (convex hull s)}"), t3656))
+  krein_milman_polytope_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s\n       ==> convex hull s =\n           convex hull {x | x extreme_point_of (convex hull s)}"), t3656))
 }
 
 ///|
@@ -6881,7 +6881,7 @@ fn step_174() -> Unit raise {
     })(((x3661 : @kernel.Thm) => @bool.spec(t3660, x3661))(x3662))
   })
   let t3669 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3663), t3664), t3665), t3666), t3667), t3668)
-  extreme_points_of_convex_hull_eq_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        compact s /\\\n        (!t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> {x | x extreme_point_of (convex hull s)} = s"), t3669))
+  extreme_points_of_convex_hull_eq_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        compact s /\\\n        (forall t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> {x | x extreme_point_of (convex hull s)} = s"), t3669))
 }
 
 ///|
@@ -6907,7 +6907,7 @@ fn step_175() -> Unit raise {
     })(t3673(x3674))
   })
   let t3677 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3675), t3676)
-  extreme_point_of_convex_hull_eq_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        compact s /\\\n        (!t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3677))
+  extreme_point_of_convex_hull_eq_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        compact s /\\\n        (forall t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3677))
 }
 
 ///|
@@ -6955,7 +6955,7 @@ fn step_176() -> Unit raise {
   let t3679 = @simp.asm_rewrite_tac(@list.List([@sets.psubset_alt()]))
   let t3678 = @tactics.match_mp_tac(extreme_point_of_convex_hull_eq())
   let t3705 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3678), t3679), t3680), t3686), @tactics.disch_tac), t3693), t3694), t3698), t3699), t3700), t3701), @tactics.conj_tac), t3704)
-  extreme_point_of_convex_hull_convex_independent_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n        compact s /\\\n        (!a. a IN s ==> ~(a IN convex hull (s DELETE a)))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3705))
+  extreme_point_of_convex_hull_convex_independent_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n        compact s /\\\n        (forall a. a IN s ==> ~(a IN convex hull (s DELETE a)))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3705))
 }
 
 ///|
@@ -6988,7 +6988,7 @@ fn step_177() -> Unit raise {
   let t3707 = @simp.asm_simp_tac(@list.List([@convex.affine_independent_imp_finite(), @topology.finite_imp_compact()]))
   let t3706 = @tactics.match_mp_tac(extreme_point_of_convex_hull_convex_independent())
   let t3718 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3706), t3707), t3716), t3717)
-  extreme_point_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("!s x. ~affine_dependent s\n         ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3718))
+  extreme_point_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("forall s x. ~affine_dependent s\n         ==> (x extreme_point_of (convex hull s) <=> x IN s)"), t3718))
 }
 
 ///|
@@ -7004,7 +7004,7 @@ pub fn extreme_point_of_convex_hull_affine_independent() -> @kernel.Thm {
 /// EXTREME_POINTS_OF_CONVEX_HULL_AFFINE_INDEPENDENT
 fn step_178() -> Unit raise {
   let t3719 = @simp.simp_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), extreme_point_of_convex_hull_affine_independent()]))
-  extreme_points_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        ~affine_dependent s ==> {x | x extreme_point_of convex hull s} = s"), t3719))
+  extreme_points_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        ~affine_dependent s ==> {x | x extreme_point_of convex hull s} = s"), t3719))
 }
 
 ///|
@@ -7022,7 +7022,7 @@ fn step_179() -> Unit raise {
   let t3721 = @meson.asm_meson_tac(@list.List([extreme_point_of_convex_hull_affine_independent()]))
   let t3720 = @simp.rewrite_tac(@list.List([@sets.extension()]))
   let t3722 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3720), t3721)
-  simplex_vertices_unique_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~affine_dependent s /\\ ~affine_dependent t /\\\n        convex hull s = convex hull t\n        ==> s = t"), t3722))
+  simplex_vertices_unique_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~affine_dependent s /\\ ~affine_dependent t /\\\n        convex hull s = convex hull t\n        ==> s = t"), t3722))
 }
 
 ///|
@@ -7039,7 +7039,7 @@ pub fn simplex_vertices_unique() -> @kernel.Thm {
 fn step_180() -> Unit raise {
   let t3723 = @simp.simp_tac(@list.List([extreme_point_of_convex_hull_affine_independent(), @convex.affine_independent_2()]))
   let t3724 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("x = a \\/ x = b <=> x IN {a,b}"))])), t3723)
-  extreme_point_of_convex_hull_2_c.set(@tactics.prove(@parser.parse_term("!a b x. x extreme_point_of (convex hull {a,b}) <=> x = a \\/ x = b"), t3724))
+  extreme_point_of_convex_hull_2_c.set(@tactics.prove(@parser.parse_term("forall a b x. x extreme_point_of (convex hull {a,b}) <=> x = a \\/ x = b"), t3724))
 }
 
 ///|
@@ -7055,7 +7055,7 @@ pub fn extreme_point_of_convex_hull_2() -> @kernel.Thm {
 /// EXTREME_POINT_OF_SEGMENT
 fn step_181() -> Unit raise {
   let t3725 = @simp.rewrite_tac(@list.List([@convex.segment_convex_hull(), extreme_point_of_convex_hull_2()]))
-  extreme_point_of_segment_c.set(@tactics.prove(@parser.parse_term("!a b x:real^N. x extreme_point_of segment[a,b] <=> x = a \\/ x = b"), t3725))
+  extreme_point_of_segment_c.set(@tactics.prove(@parser.parse_term("forall a b x:real^N. x extreme_point_of segment[a,b] <=> x = a \\/ x = b"), t3725))
 }
 
 ///|
@@ -7078,7 +7078,7 @@ fn step_182() -> Unit raise {
   let t3727 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t3726 = @tactics.exists_tac(@parser.parse_term("{x:real^N | x extreme_point_of t}"))
   let t3733 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3726), t3727), @tactics.conj_tac), t3732)
-  face_of_convex_hull_subset_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        compact s /\\ t face_of (convex hull s)\n        ==> ?s'. s' SUBSET s /\\ t = convex hull s'"), t3733))
+  face_of_convex_hull_subset_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        compact s /\\ t face_of (convex hull s)\n        ==> ?s'. s' SUBSET s /\\ t = convex hull s'"), t3733))
 }
 
 ///|
@@ -7098,13 +7098,13 @@ fn step_183() -> Unit raise {
   let t3739 = @tactics.match_mp_tac(@convex.disjoint_affine_hull())
   let t3738 = @simp.rewrite_tac(@list.List([@convex.convex_hull_subset_affine_hull()]))
   let t3737 = @tactics.exists_tac(@parser.parse_term("affine hull (s DIFF c:real^N->bool)"))
-  let t3736 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("\n     !t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u")))
+  let t3736 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("\n     forall t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u")))
   let t3735 = @simp.asm_simp_tac(@list.List([@convex.affine_independent_imp_finite()]))
   let t3734 = @tactics.match_mp_tac(face_of_convex_hulls())
   let t3742 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.asm_rewrite_tac(@list.List([]))), t3734), t3735), t3736), t3737), t3738), t3739), t3740), t3741)
   let t3743 = @list.List([@meson.asm_meson_tac(@list.List([@convex.affine_independent_imp_finite(), @topology.finite_imp_compact(), face_of_convex_hull_subset()])), t3742])
   let t3744 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t3743)
-  face_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t face_of (convex hull s) <=>\n             ?c. c SUBSET s /\\ t = convex hull c)"), t3744))
+  face_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t face_of (convex hull s) <=>\n             ?c. c SUBSET s /\\ t = convex hull c)"), t3744))
 }
 
 ///|
@@ -7233,7 +7233,7 @@ fn step_184() -> Unit raise {
   let t3746 = @simp.rewrite_tac(@list.List([@convex.aff_dim_convex_hull()]))
   let t3745 = @simp.asm_simp_tac(@list.List([facet_of(), face_of_convex_hull_affine_independent()]))
   let t3828 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3745), t3746), @tactics.eq_tac), t3827)
-  facet_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             ~(t = {}) /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))"), t3828))
+  facet_of_convex_hull_affine_independent_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             ~(t = {}) /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))"), t3828))
 }
 
 ///|
@@ -7271,7 +7271,7 @@ fn step_185() -> Unit raise {
   let t3830 = @simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm()]))
   let t3829 = @simp.asm_simp_tac(@list.List([facet_of_convex_hull_affine_independent()]))
   let t3848 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3829), t3830), @tactics.ap_term_tac), t3832), t3833), t3834), t3835), t3836), t3837), t3841), t3847)
-  facet_of_convex_hull_affine_independent_alt_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             2 <= CARD s /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))"), t3848))
+  facet_of_convex_hull_affine_independent_alt_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             2 <= CARD s /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))"), t3848))
 }
 
 ///|
@@ -7292,7 +7292,7 @@ fn step_186() -> Unit raise {
   let t3850 = @tactics.match_mp_tac(face_of_trans())
   let t3849 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t3854 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3849), t3850), t3851), t3852), t3853)
-  segment_face_of_c.set(@tactics.prove(@parser.parse_term("!s a b:real^N.\n    segment[a,b] face_of s ==> a extreme_point_of s /\\ b extreme_point_of s"), t3854))
+  segment_face_of_c.set(@tactics.prove(@parser.parse_term("forall s a b:real^N.\n    segment[a,b] face_of s ==> a extreme_point_of s /\\ b extreme_point_of s"), t3854))
 }
 
 ///|
@@ -7317,7 +7317,7 @@ fn step_187() -> Unit raise {
   })
   let t3855 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([edge_of(), segment_face_of()]))])
   let t3862 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), @tactics.conj_tac), t3855), t3859), t3860), t3861), @int.int_arith_tac)
-  segment_edge_of_c.set(@tactics.prove(@parser.parse_term("!s a b:real^N.\n        segment[a,b] edge_of s\n        ==> ~(a = b) /\\ a extreme_point_of s /\\ b extreme_point_of s"), t3862))
+  segment_edge_of_c.set(@tactics.prove(@parser.parse_term("forall s a b:real^N.\n        segment[a,b] edge_of s\n        ==> ~(a = b) /\\ a extreme_point_of s /\\ b extreme_point_of s"), t3862))
 }
 
 ///|
@@ -7409,7 +7409,7 @@ fn step_188() -> Unit raise {
   let t3864 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("a INSERT s = {a} UNION s"))]))
   let t3863 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@convex.affine_hull_convex_hull())]))
   let t3921 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3863), @tactics.strip_tac), t3864), t3865), t3866), @tactics.ants_tac), t3867), t3873), t3880), t3881), t3882), @tactics.disch_tac), t3886), t3899), t3900), t3901), @tactics.strip_tac), t3902), t3903), @tactics.eq_tac), t3920)
-  extreme_point_of_convex_hull_insert_eq_c.set(@tactics.prove(@parser.parse_term("!s a x:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (x extreme_point_of (convex hull (a INSERT s)) <=>\n             x = a \\/ x extreme_point_of (convex hull s))"), t3921))
+  extreme_point_of_convex_hull_insert_eq_c.set(@tactics.prove(@parser.parse_term("forall s a x:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (x extreme_point_of (convex hull (a INSERT s)) <=>\n             x = a \\/ x extreme_point_of (convex hull s))"), t3921))
 }
 
 ///|
@@ -7439,7 +7439,7 @@ fn step_189() -> Unit raise {
   let t3938 = @simp.rewrite_tac(@list.List([@convex.affine_hull_3(), @sets.in_elim_thm()]))
   let t3937 = @simp.asm_simp_tac(@list.List([@misc.hull_minimal(), @sets.insert_subset(), @sets.empty_subset()]))
   let t3936 = @tactics.exists_tac(@parser.parse_term("affine hull {a:real^N,b,c}"))
-  let t3935 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!t. x IN t /\\ t SUBSET s ==> x IN s")))
+  let t3935 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall t. x IN t /\\ t SUBSET s ==> x IN s")))
   let t3934 = @simp.rewrite_tac(@list.List([@vectors.vector_add_ldistrib(), @vectors.vector_mul_assoc()]))
   let t3933 = @tactics.disch_then(fn(x3930 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3931 = @tactics.subst1_tac(x3930)
@@ -7458,7 +7458,7 @@ fn step_189() -> Unit raise {
     })(((x3926 : @kernel.Thm) => @equal.ap_term(t3925, x3926))(x3927))
   })
   let t3949 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3928), t3929), t3933), t3934), t3935), t3936), t3937), t3938), t3944), t3945), t3946), t3947), t3948)
-  let lemma = @tactics.prove(@parser.parse_term("!a b c p:real^N u v w x.\n          x % p = u % a + v % b + w % c\n          ==> !s. u + v + w = x /\\ ~(x = &0) /\\ affine s /\\\n                  a IN s /\\ b IN s /\\ c IN s\n                  ==> p IN s"), t3949)
+  let lemma = @tactics.prove(@parser.parse_term("forall a b c p:real^N u v w x.\n          x % p = u % a + v % b + w % c\n          ==> forall s. u + v + w = x /\\ ~(x = &0) /\\ affine s /\\\n                  a IN s /\\ b IN s /\\ c IN s\n                  ==> p IN s"), t3949)
   let t4208 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t4207 = @simp.asm_rewrite_tac(@list.List([]))
   let t4206 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@sets.subset()]))(@convex.convex_hull_subset_affine_hull()))
@@ -7786,7 +7786,7 @@ fn step_189() -> Unit raise {
     })(t3953(x3954))
   })), t3955), t3956), t3960), t3961), t3966), @tactics.disj2_tac), t3967), @tactics.conj_tac), t3986), @tactics.all_tac])
   let t4211 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t3987), t3991), t3997), t4004), t4006), t4007), t4008), t4011), t4012), t4016), t4017), @tactics.conj_tac), t4023), t4024), t4025), t4026), t4027), @tactics.strip_tac), t4028), @tactics.strip_tac), t4029), @tactics.strip_tac), t4030), @tactics.strip_tac), t4031), @tactics.strip_tac), t4032), @tactics.strip_tac), t4036), t4040), t4041), t4048), t4055), t4062), t4063), t4064), t4210)
-  face_of_convex_hull_insert_eq_c.set(@tactics.prove(@parser.parse_term("!f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (f face_of (convex hull (a INSERT s)) <=>\n             f face_of (convex hull s) \\/\n             ?f'. f' face_of (convex hull s) /\\\n                  f = convex hull (a INSERT f'))"), t4211))
+  face_of_convex_hull_insert_eq_c.set(@tactics.prove(@parser.parse_term("forall f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (f face_of (convex hull (a INSERT s)) <=>\n             f face_of (convex hull s) \\/\n             ?f'. f' face_of (convex hull s) /\\\n                  f = convex hull (a INSERT f'))"), t4211))
 }
 
 ///|
@@ -7802,7 +7802,7 @@ pub fn face_of_convex_hull_insert_eq() -> @kernel.Thm {
 /// CONVEX_HULL_REDUNDANT_SUBSET_GEN
 fn step_190() -> Unit raise {
   let t4234 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4232 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~DISJOINT {x | P x} t ==> (!x. x IN t ==> ~P x) ==> Q")))
+  let t4232 = @drule.match_mp(@sets.set_rule(@parser.parse_term("~DISJOINT {x | P x} t ==> (forall x. x IN t ==> ~P x) ==> Q")))
   let t4235 = @tactics.then_tac(@tactics.first_x_assum(fn(x4233 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t4232(x4233))
   }), t4234)
@@ -7818,7 +7818,7 @@ fn step_190() -> Unit raise {
   let t4224 = @simp.rewrite_tac(@list.List([@misc.hull_subset()]))
   let t4223 = @parser.parse_term("convex hull s:real^N->bool")
   let t4236 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.trans_tac(@sets.subset_trans())(t4223), t4224), t4225), t4226), t4230), t4231), t4235])
-  let t4220 = @drule.match_mp(@sets.set_rule(@parser.parse_term("e SUBSET s ==> !t. e SUBSET t \\/ ~DISJOINT e (s DIFF t)")))
+  let t4220 = @drule.match_mp(@sets.set_rule(@parser.parse_term("e SUBSET s ==> forall t. e SUBSET t \\/ ~DISJOINT e (s DIFF t)")))
   let t4217 = @parser.parse_term("t:real^N->bool")
   let t4222 = @tactics.disch_then(fn(x4221 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x4219 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -7831,7 +7831,7 @@ fn step_190() -> Unit raise {
   let t4213 = @simp.asm_simp_tac(@list.List([@misc.hull_mono()]))
   let t4212 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t4237 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4212), t4213), t4214), t4215), t4216), t4222), t4236)
-  convex_hull_redundant_subset_gen_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        DISJOINT (s DIFF t) {x | x extreme_point_of convex hull s}\n        ==> convex hull s = convex hull t"), t4237))
+  convex_hull_redundant_subset_gen_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        DISJOINT (s DIFF t) {x | x extreme_point_of convex hull s}\n        ==> convex hull s = convex hull t"), t4237))
 }
 
 ///|
@@ -7851,7 +7851,7 @@ fn step_191() -> Unit raise {
   let t4239 = @simp.asm_rewrite_tac(@list.List([]))
   let t4238 = @tactics.match_mp_tac(convex_hull_redundant_subset_gen())
   let t4242 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4238), t4239), t4240), t4241)
-  convex_hull_redundant_subset_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        s DIFF t SUBSET interior(convex hull s)\n        ==> convex hull s = convex hull t"), t4242))
+  convex_hull_redundant_subset_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        s DIFF t SUBSET interior(convex hull s)\n        ==> convex hull s = convex hull t"), t4242))
 }
 
 ///|
@@ -7877,7 +7877,7 @@ fn step_192() -> Unit raise {
   })
   let t4243 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("t:real^N->bool"), extreme_points_of_convex_hull()))
   let t4250 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4243), t4248), t4249)
-  convex_hull_redundant_subset_rev_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex hull s = convex hull t\n        ==> DISJOINT (s DIFF t) {x | x extreme_point_of (convex hull s)}"), t4250))
+  convex_hull_redundant_subset_rev_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex hull s = convex hull t\n        ==> DISJOINT (s DIFF t) {x | x extreme_point_of (convex hull s)}"), t4250))
 }
 
 ///|
@@ -7969,7 +7969,7 @@ fn step_193() -> Unit raise {
   let t4253 = @list.List([@tactics.then_tac(@simp.asm_simp_tac(@list.List([@convex.convex_hull_sing(), @sets.in_sing()])), t4252), @tactics.disch_tac])
   let t4251 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t4313 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4251), t4253), t4254), t4255), t4256), t4257), t4266), t4267), t4268), t4269), t4271), t4272), t4274), t4275), t4276), @tactics.disch_tac), @tactics.disch_tac), t4277), t4281), t4299), t4303), t4306), t4307), t4309), t4310), t4311), t4312)
-  convex_hull_insert_redundant_point_c.set(@tactics.prove(@parser.parse_term("!s a b c:real^N.\n        a IN convex hull (c INSERT s) /\\\n        b IN convex hull (c INSERT s) /\\\n        c IN segment(a,b)\n        ==> convex hull (c INSERT s) = convex hull s"), t4313))
+  convex_hull_insert_redundant_point_c.set(@tactics.prove(@parser.parse_term("forall s a b c:real^N.\n        a IN convex hull (c INSERT s) /\\\n        b IN convex hull (c INSERT s) /\\\n        c IN segment(a,b)\n        ==> convex hull (c INSERT s) = convex hull s"), t4313))
 }
 
 ///|
@@ -8017,7 +8017,7 @@ fn step_194() -> Unit raise {
     })(@equal.sym(x4317))
   }), t4323), t4324), t4336])
   let t4338 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t4337)
-  convex_hull_redundant_point_c.set(@tactics.prove(@parser.parse_term("!s a:real^N. convex hull (s DELETE a) = convex hull s <=>\n                ~(a extreme_point_of convex hull s)"), t4338))
+  convex_hull_redundant_point_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N. convex hull (s DELETE a) = convex hull s <=>\n                ~(a extreme_point_of convex hull s)"), t4338))
 }
 
 ///|
@@ -8157,7 +8157,7 @@ fn step_195() -> Unit raise {
   let t4340 = @simp.asm_rewrite_tac(@list.List([@topology.hausdist_empty(), @realax.real_le_refl()]))
   let t4339 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t4453 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4339), t4340), t4341), t4342), t4343), t4344), t4349), t4351), t4355), t4366), t4367), @tactics.conj_tac), t4370), t4371), t4372), t4373), t4374), t4375), t4376), t4379), t4380), @tactics.strip_tac), t4381), t4396), t4452)
-  hausdist_frontiers_convex_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        convex s /\\ convex t /\\ bounded s /\\ bounded t\n        ==> hausdist(frontier s,frontier t) = hausdist(s,t)"), t4453))
+  hausdist_frontiers_convex_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        convex s /\\ convex t /\\ bounded s /\\ bounded t\n        ==> hausdist(frontier s,frontier t) = hausdist(s,t)"), t4453))
 }
 
 ///|
@@ -8193,7 +8193,7 @@ fn step_196() -> Unit raise {
   let t4455 = @simp.asm_rewrite_tac(@list.List([@topology.hausdist_empty(), @topology.setdist_empty(), @realarith.real_lt_refl()]))
   let t4454 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t4470 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4454), t4455), t4456), t4457), t4464), t4465), t4466), @tactics.strip_tac), t4467), t4468), t4469)
-  hausdist_still_outside_c.set(@tactics.prove(@parser.parse_term("!s t x:real^N.\n\n        bounded s /\\ bounded t /\\ hausdist(s,t) < setdist({x},s)\n        ==> ~(x IN t)"), t4470))
+  hausdist_still_outside_c.set(@tactics.prove(@parser.parse_term("forall s t x:real^N.\n\n        bounded s /\\ bounded t /\\ hausdist(s,t) < setdist({x},s)\n        ==> ~(x IN t)"), t4470))
 }
 
 ///|
@@ -8221,7 +8221,7 @@ fn step_197() -> Unit raise {
   let t4475 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("t:real^N->bool"), t4474, t4473, t4472]), @convex.hausdist_complements_convex_explicit()))
   let t4471 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(~p ==> F) ==> p")))
   let t4483 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4471), @tactics.disch_tac), t4475), t4476), @tactics.conj_tac), t4477), t4478), t4479), t4480), t4481), t4482)
-  hausdist_still_inside_c.set(@tactics.prove(@parser.parse_term("!s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN t"), t4483))
+  hausdist_still_inside_c.set(@tactics.prove(@parser.parse_term("forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN t"), t4483))
 }
 
 ///|
@@ -8250,7 +8250,7 @@ fn step_198() -> Unit raise {
   let t4485 = @tactics.exists_tac(@parser.parse_term("setdist({x},(:real^N) DIFF s) - hausdist(s:real^N->bool,t)"))
   let t4484 = @simp.rewrite_tac(@list.List([@topology.in_interior()]))
   let t4496 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4484), t4485), t4486), t4487), t4488), @tactics.disch_tac), t4489), t4490), t4491), t4494), t4495)
-  hausdist_still_inside_interior_c.set(@tactics.prove(@parser.parse_term("!s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN interior t"), t4496))
+  hausdist_still_inside_interior_c.set(@tactics.prove(@parser.parse_term("forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN interior t"), t4496))
 }
 
 ///|
@@ -8305,7 +8305,7 @@ fn step_199() -> Unit raise {
     })(t4501(x4502))
   })
   let t4529 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t4503), t4504), t4508), t4509), t4510), @tactics.strip_tac), t4511), t4512), @tactics.strip_tac), t4513), t4514), t4515), t4516), t4517), t4520), t4521), t4522), t4523), t4524), t4526), t4527), t4528)
-  hausdist_still_nonempty_interior_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n      bounded s /\\ convex s /\\ ~(interior s = {})\n      ==> ?e. &0 < e /\\\n              !s'. bounded s' /\\ convex s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                   ==> ~(interior s' = {})"), t4529))
+  hausdist_still_nonempty_interior_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n      bounded s /\\ convex s /\\ ~(interior s = {})\n      ==> ?e. &0 < e /\\\n              forall s'. bounded s' /\\ convex s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                   ==> ~(interior s' = {})"), t4529))
 }
 
 ///|
@@ -8404,7 +8404,7 @@ fn step_200() -> Unit raise {
     }
   })
   let t4596 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t4533), t4535), t4548), t4549), @tactics.strip_tac), t4595)
-  hausdist_still_same_place_strong_c.set(@tactics.prove(@parser.parse_term("!s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> ~(x IN frontier s) /\\ ~(x IN frontier t) /\\ (x IN t <=> x IN s)"), t4596))
+  hausdist_still_same_place_strong_c.set(@tactics.prove(@parser.parse_term("forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> ~(x IN frontier s) /\\ ~(x IN frontier t) /\\ (x IN t <=> x IN s)"), t4596))
 }
 
 ///|
@@ -8430,7 +8430,7 @@ fn step_201() -> Unit raise {
     })(t4600(x4601))
   })
   let t4604 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4602), t4603)
-  hausdist_still_same_place_c.set(@tactics.prove(@parser.parse_term("!s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> (x IN t <=> x IN s)"), t4604))
+  hausdist_still_same_place_c.set(@tactics.prove(@parser.parse_term("forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> (x IN t <=> x IN s)"), t4604))
 }
 
 ///|
@@ -8493,9 +8493,9 @@ fn step_202() -> Unit raise {
   let t4608 = @simp.asm_simp_tac(@list.List([@convex.convex_hull_insert_alt()]))
   let t4607 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4606 = @simp.rewrite_tac(@list.List([@equal.gsym(@misc.hull_insert()), @convex.convex_hull_eq_empty()]))
-  let t4605 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([@misc.hull_hull(), @convex.convex_convex_hull(), @misc.hull_p()]), @parser.parse_term("(!s. convex s ==> p s) <=> (!s. p (convex hull s))"))]))
+  let t4605 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([@misc.hull_hull(), @convex.convex_convex_hull(), @misc.hull_p()]), @parser.parse_term("(forall s. convex s ==> p s) <=> (forall s. p (convex hull s))"))]))
   let t4648 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@theorems.imp_conj()])), t4605), t4606), t4607), t4608), t4609), t4610), @tactics.eq_tac), t4611), t4613), @tactics.strip_tac), t4614), t4616), t4617), t4618), t4647)
-  let lemma = @tactics.prove(@parser.parse_term("!a x:real^N s.\n          convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n          a * norm(x) < setdist({vec 0},s)\n          ==> (x IN conic hull s <=>\n               a % x IN convex hull (vec 0 INSERT s))"), t4648)
+  let lemma = @tactics.prove(@parser.parse_term("forall a x:real^N s.\n          convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n          a * norm(x) < setdist({vec 0},s)\n          ==> (x IN conic hull s <=>\n               a % x IN convex hull (vec 0 INSERT s))"), t4648)
   let t4654 = @simp.asm_simp_tac(@list.List([@equal.gsym(@convex.convex_hull_closure()), @topology.bounded_insert(), @topology.closure_insert()]))
   let t4653 = @simp.asm_simp_tac(@list.List([closure_conic_hull()]))
   let t4652 = @simp.asm_simp_tac(@list.List([@topology.setdist_closure(), @topology.closure_eq_empty(), @convex.convex_closure()]))
@@ -8503,7 +8503,7 @@ fn step_202() -> Unit raise {
   let t4650 = @parser.parse_term("x:real^N")
   let t4651 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("a:real"), t4650, t4649]), lemma))
   let t4655 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4651), t4652), t4653), t4654)
-  let clemma = @tactics.prove(@parser.parse_term("!a x:real^N s.\n        convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n        &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n        a * norm(x) < setdist({vec 0},s)\n        ==> (x IN closure(conic hull s) <=>\n             a % x IN closure(convex hull (vec 0 INSERT s)))"), t4655)
+  let clemma = @tactics.prove(@parser.parse_term("forall a x:real^N s.\n        convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n        &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n        a * norm(x) < setdist({vec 0},s)\n        ==> (x IN closure(conic hull s) <=>\n             a % x IN closure(convex hull (vec 0 INSERT s)))"), t4655)
   let t4680 = @tactics.conv_tac(@vectors.norm_arith)
   let t4679 = @simp.rewrite_tac(@list.List([@topology.in_ball()]))
   let t4678 = @tactics.undisch_tac(@parser.parse_term("y IN ball(x:real^N,norm x)"))
@@ -8511,14 +8511,14 @@ fn step_202() -> Unit raise {
   let t4676 = @tactics.match_mp_tac(lemma)
   let t4675 = @simp.rewrite_tac(@list.List([@topology.ball_min_inter(), @sets.in_inter()]))
   let t4674 = @tactics.x_gen_tac(@parser.parse_term("y:real^N"))
-  let t4673 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x. P x ==> (Q x <=> R x))\n        ==> ((!x. P x ==> Q x) <=> (!x. P x ==> R x))")))
+  let t4673 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x. P x ==> (Q x <=> R x))\n        ==> ((forall x. P x ==> Q x) <=> (forall x. P x ==> R x))")))
   let t4672 = @simp.asm_rewrite_tac(@list.List([@real.real_lt_min(), @real.real_min_le(), @realax.real_le_refl(), @vectors.norm_pos_lt()]))
   let t4671 = @tactics.exists_tac(@parser.parse_term("min d (min e (norm(x:real^N)))"))
   let t4670 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image()]))
   let t4669 = @tactics.x_gen_tac(@parser.parse_term("e:real"))
   let t4668 = @list.List([@meson.meson_tac(@list.List([@topology.subset_ball(), @sets.subset_trans()])), @tactics.all_tac])
   let t4667 = @simp.asm_simp_tac(@list.List([@topology.ball_scaling(), @real.real_lt_mul_eq(), @real.real_le_lmul_eq(), @real.real_lt_imp_nz(), @real.real_lt_rdiv_eq(), @calc_int.real_mul_lzero(), @real.real_div_lmul()]))
-  let t4681 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!e. &0 < e <=> &0 < a * e) /\\ (!e. &0 < e <=> &0 < e / a) /\\\n        (!e. a * e / a = e) /\\ (!d e. a * d <= a * e <=> d <= e) /\\\n        ((!d e. d <= e ==> P e ==> P d) /\\ (!d e. d <= e ==> Q e ==> Q d)) /\\\n        (!e. &0 < e ==> ?d. &0 < d /\\ d <= e /\\ (P d <=> Q(a * d)))\n        ==> ((?e. &0 < e /\\ P e) <=> (?e. &0 < e /\\ Q e))"))), t4667), @tactics.conj_tac), t4668), t4669), @tactics.disch_tac), t4670), t4671), t4672), t4673), t4674), t4675), @tactics.strip_tac), t4676), t4677), t4678), t4679), t4680)
+  let t4681 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall e. &0 < e <=> &0 < a * e) /\\ (forall e. &0 < e <=> &0 < e / a) /\\\n        (forall e. a * e / a = e) /\\ (forall d e. a * d <= a * e <=> d <= e) /\\\n        ((forall d e. d <= e ==> P e ==> P d) /\\ (forall d e. d <= e ==> Q e ==> Q d)) /\\\n        (forall e. &0 < e ==> ?d. &0 < d /\\ d <= e /\\ (P d <=> Q(a * d)))\n        ==> ((?e. &0 < e /\\ P e) <=> (?e. &0 < e /\\ Q e))"))), t4667), @tactics.conj_tac), t4668), t4669), @tactics.disch_tac), t4670), t4671), t4672), t4673), t4674), t4675), @tactics.strip_tac), t4676), t4677), t4678), t4679), t4680)
   let t4666 = @tactics.conv_tac(@vectors.norm_arith)
   let t4665 = @simp.asm_simp_tac(@list.List([@real.real_le_lmul_eq()]))
   let t4664 = @simp.gen_rewrite_tac(fn(x4661 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -8531,14 +8531,14 @@ fn step_202() -> Unit raise {
   let t4659 = @list.List([@calc_rat.asm_real_arith_tac, @tactics.x_gen_tac(@parser.parse_term("y:real^N"))])
   let t4658 = @simp.asm_simp_tac(@list.List([@real.real_lt_rdiv_eq(), @topology.in_ball(), @real.real_lt_sub_ladd()]))
   let t4682 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("setdist({vec 0:real^N},s) / a - norm(x:real^N)")), t4658), @tactics.conj_tac), t4659), t4660), t4664), t4665), t4666), t4681])
-  let t4657 = @tactics.subgoal_then(@parser.parse_term("?d. &0 < d /\\\n        !y. y IN ball(x:real^N,d) ==> a * norm y < setdist({vec 0:real^N},s)"), @tactics.strip_assume_tac)
+  let t4657 = @tactics.subgoal_then(@parser.parse_term("?d. &0 < d /\\\n        forall y. y IN ball(x:real^N,d) ==> a * norm y < setdist({vec 0:real^N},s)"), @tactics.strip_assume_tac)
   let t4656 = @simp.rewrite_tac(@list.List([@topology.in_interior()]))
   let t4683 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4656), t4657), t4682)
-  let ilemma = @tactics.prove(@parser.parse_term("!a x:real^N s.\n       convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN interior(conic hull s) <=>\n            a % x IN interior(convex hull (vec 0 INSERT s)))"), t4683)
+  let ilemma = @tactics.prove(@parser.parse_term("forall a x:real^N s.\n       convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN interior(conic hull s) <=>\n            a % x IN interior(convex hull (vec 0 INSERT s)))"), t4683)
   let t4684 = @equal.gsym(clemma)
   let t4685 = @simp.simp_tac(@list.List([@equal.gsym(ilemma), t4684]))
   let t4686 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.frontier(), @sets.in_diff()])), t4685)
-  let flemma = @tactics.prove(@parser.parse_term("!a x:real^N s.\n       convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n       &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN frontier(conic hull s) <=>\n            a % x IN frontier(convex hull (vec 0 INSERT s)))"), t4686)
+  let flemma = @tactics.prove(@parser.parse_term("forall a x:real^N s.\n       convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n       &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN frontier(conic hull s) <=>\n            a % x IN frontier(convex hull (vec 0 INSERT s)))"), t4686)
   let t4763 = @simp.asm_rewrite_tac(@list.List([@topology.bounded_closure_eq(), @topology.hausdist_closure()]))
   let t4762 = @tactics.exists_tac(@parser.parse_term("s:real^N->bool"))
   let t4761 = @tactics.match_mp_tac(hausdist_still_outside())
@@ -8630,7 +8630,7 @@ fn step_202() -> Unit raise {
   let t4695 = @simp.asm_simp_tac(@list.List([@misc.real_half(), @real.real_div_rmul(), @real.real_lt_imp_nz(), @vectors.norm_pos_lt(), @real.real_lt_div(), @calc_rat.real_arith(@parser.parse_term("x / &2 < x <=> &0 < x"))]))
   let t4694 = @tactics.exists_tac(@parser.parse_term("setdist({vec 0:real^N},s) / &2"))
   let t4702 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("setdist({vec 0:real^N},s) / &2 / norm(x:real^N)")), t4694), t4695), t4696), @tactics.strip_tac), t4699), t4700), t4701), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
-  let t4693 = @tactics.subgoal_then(@parser.parse_term("?a d. &0 < a /\\ &0 < d /\\\n          a * norm(x:real^N) < setdist({vec 0:real^N},s) /\\\n          !s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < d\n               ==> a * norm(x) < setdist({vec 0:real^N},s')"), @tactics.strip_assume_tac)
+  let t4693 = @tactics.subgoal_then(@parser.parse_term("?a d. &0 < a /\\ &0 < d /\\\n          a * norm(x:real^N) < setdist({vec 0:real^N},s) /\\\n          forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < d\n               ==> a * norm(x) < setdist({vec 0:real^N},s')"), @tactics.strip_assume_tac)
   let t4691 = @meson.asm_meson_tac(@list.List([@topology.setdist_eq_0_sing()]))
   let t4692 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@realarith.real_lt_le(), @topology.setdist_pos_le()])), t4691), @tactics.all_tac])
   let t4690 = @tactics.subgoal_then(@parser.parse_term("&0 < setdist({vec 0:real^N},s)"), fn(x4687 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -8640,7 +8640,7 @@ fn step_202() -> Unit raise {
     }
   })
   let t4764 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4690), t4692), t4693), t4702), t4703), t4704), @tactics.conj_tac), t4710), t4711), @tactics.strip_tac), t4714), t4715), @tactics.ants_tac), t4743), t4745), t4746), t4748), t4755), t4758), t4759), @tactics.ants_tac), t4760), t4761), t4762), t4763)
-  hausdist_still_same_place_conic_hull_strong_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x = vec 0) /\\ ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               !s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> ~(x IN frontier(conic hull s')) /\\\n                        (x IN conic hull s' <=> x IN conic hull s)"), t4764))
+  hausdist_still_same_place_conic_hull_strong_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x = vec 0) /\\ ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> ~(x IN frontier(conic hull s')) /\\\n                        (x IN conic hull s' <=> x IN conic hull s)"), t4764))
 }
 
 ///|
@@ -8672,7 +8672,7 @@ fn step_203() -> Unit raise {
   let t4766 = @simp.asm_simp_tac(@list.List([@convex.conic_hull_contains_0()]))
   let t4765 = @class.asm_cases_tac(@parser.parse_term("x:real^N = vec 0"))
   let t4779 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4765), t4766), t4767), t4771), t4778)
-  hausdist_still_same_place_conic_hull_c.set(@tactics.prove(@parser.parse_term("!s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               !s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> (x IN conic hull s' <=> x IN conic hull s)"), t4779))
+  hausdist_still_same_place_conic_hull_c.set(@tactics.prove(@parser.parse_term("forall s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> (x IN conic hull s' <=> x IN conic hull s)"), t4779))
 }
 
 ///|
@@ -8707,7 +8707,7 @@ fn step_204() -> Unit raise {
     })(t4807(x4808))
   })
   let t4802 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4799 = @drule.match_mp(@calc_rat.real_arith(@parser.parse_term("a <= b ==> !c. b < c ==> a < c")))
+  let t4799 = @drule.match_mp(@calc_rat.real_arith(@parser.parse_term("a <= b ==> forall c. b < c ==> a < c")))
   let t4796 = @parser.parse_term("e:real")
   let t4801 = @tactics.disch_then(fn(x4800 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x4798 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -8735,7 +8735,7 @@ fn step_204() -> Unit raise {
   let t4781 = @tactics.x_gen_tac(@parser.parse_term("x:real^N"))
   let t4780 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t4819 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4780), t4781), t4784), t4785), t4789), t4790), t4791), @tactics.conj_tac), t4792), t4801), t4802), t4809), t4810), @tactics.ants_tac), t4811), t4812), t4813), t4814), @tactics.strip_tac), t4815), t4816), t4817), t4818)
-  convex_symdiff_close_to_frontier_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool e.\n        bounded s /\\ convex s /\\ ~(s = {}) /\\\n        bounded t /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < e\n        ==> (s DIFF t) UNION (t DIFF s) SUBSET\n            {u + v:real^N | u IN frontier s /\\ v IN ball(vec 0,e)}"), t4819))
+  convex_symdiff_close_to_frontier_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool e.\n        bounded s /\\ convex s /\\ ~(s = {}) /\\\n        bounded t /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < e\n        ==> (s DIFF t) UNION (t DIFF s) SUBSET\n            {u + v:real^N | u IN frontier s /\\ v IN ball(vec 0,e)}"), t4819))
 }
 
 ///|
@@ -8766,7 +8766,7 @@ pub fn polytope() -> @kernel.Thm {
 /// POLYTOPE_TRANSLATION_EQ
 fn step_206() -> Unit raise {
   let t4821 = @tactics.then_tac(@simp.rewrite_tac(@list.List([polytope()])), (x4820 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x4820))
-  polytope_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a s. polytope (IMAGE (\\x:real^N. a + x) s) <=> polytope s"), t4821))
+  polytope_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a s. polytope (IMAGE (\\x:real^N. a + x) s) <=> polytope s"), t4821))
 }
 
 ///|
@@ -8803,7 +8803,7 @@ fn step_208() -> Unit raise {
     }
   }))
   let t4833 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4828), t4829), t4830), t4831), t4832)
-  polytope_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N p.\n        linear f /\\ polytope p ==> polytope(IMAGE f p)"), t4833))
+  polytope_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N p.\n        linear f /\\ polytope p ==> polytope(IMAGE f p)"), t4833))
 }
 
 ///|
@@ -8843,7 +8843,7 @@ fn step_209() -> Unit raise {
   let t4835 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("f:real^M->real^N"), @vectors.quantify_surjection_thm()))
   let t4834 = @simp.rewrite_tac(@list.List([polytope()]))
   let t4853 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4834), t4835), t4836), t4846), t4850), t4851), @tactics.disch_tac), t4852)
-  polytope_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n        ==> (polytope (IMAGE f s) <=> polytope s)"), t4853))
+  polytope_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (polytope (IMAGE f s) <=> polytope s)"), t4853))
 }
 
 ///|
@@ -8876,7 +8876,7 @@ pub fn polytope_empty() -> @kernel.Thm {
 /// POLYTOPE_NEGATIONS
 fn step_211() -> Unit raise {
   let t4856 = @simp.simp_tac(@list.List([polytope_linear_image(), @vectors.linear_negation()]))
-  polytope_negations_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s ==> polytope(IMAGE (--) s)"), t4856))
+  polytope_negations_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s ==> polytope(IMAGE (--) s)"), t4856))
 }
 
 ///|
@@ -8893,7 +8893,7 @@ pub fn polytope_negations() -> @kernel.Thm {
 fn step_212() -> Unit raise {
   let t4857 = @meson.meson_tac(@list.List([]))
   let t4858 = @tactics.then_tac(@simp.rewrite_tac(@list.List([polytope()])), t4857)
-  polytope_convex_hull_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s ==> polytope(convex hull s)"), t4858))
+  polytope_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> polytope(convex hull s)"), t4858))
 }
 
 ///|
@@ -8912,7 +8912,7 @@ fn step_213() -> Unit raise {
   let t4860 = @tactics.exists_tac(@parser.parse_term("{a:real^N,b}"))
   let t4859 = @simp.rewrite_tac(@list.List([polytope()]))
   let t4862 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4859), t4860), t4861)
-  polytope_segment_c.set(@tactics.prove(@parser.parse_term("!a b:real^N. polytope(segment[a,b])"), t4862))
+  polytope_segment_c.set(@tactics.prove(@parser.parse_term("forall a b:real^N. polytope(segment[a,b])"), t4862))
 }
 
 ///|
@@ -8930,7 +8930,7 @@ fn step_214() -> Unit raise {
   let t4864 = @meson.meson_tac(@list.List([@convex.convex_hull_pcross(), @cart.finite_pcross()]))
   let t4863 = @simp.rewrite_tac(@list.List([polytope()]))
   let t4865 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4863), t4864)
-  polytope_pcross_c.set(@tactics.prove(@parser.parse_term("!s:real^M->bool t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope(s PCROSS t)"), t4865))
+  polytope_pcross_c.set(@tactics.prove(@parser.parse_term("forall s:real^M->bool t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope(s PCROSS t)"), t4865))
 }
 
 ///|
@@ -8961,7 +8961,7 @@ fn step_215() -> Unit raise {
   let t4867 = @simp.asm_rewrite_tac(@list.List([@cart.pcross_empty(), polytope_empty()]))
   let t4866 = @class.asm_cases_tac(@parser.parse_term("s:real^M->bool = {}"))
   let t4881 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4866), t4867), t4868), t4869), @tactics.eq_tac), t4870), t4871), t4877), t4878), @tactics.ap_term_tac), t4879), t4880)
-  polytope_pcross_eq_c.set(@tactics.prove(@parser.parse_term("!s:real^M->bool t:real^N->bool.\n        polytope(s PCROSS t) <=>\n        s = {} \\/ t = {} \\/ polytope s /\\ polytope t"), t4881))
+  polytope_pcross_eq_c.set(@tactics.prove(@parser.parse_term("forall s:real^M->bool t:real^N->bool.\n        polytope(s PCROSS t) <=>\n        s = {} \\/ t = {} \\/ polytope s /\\ polytope t"), t4881))
 }
 
 ///|
@@ -8978,7 +8978,7 @@ pub fn polytope_pcross_eq() -> @kernel.Thm {
 fn step_216() -> Unit raise {
   let t4882 = @meson.meson_tac(@list.List([@sets.finite_subset(), face_of_convex_hull_subset(), @topology.finite_imp_compact()]))
   let t4883 = @tactics.then_tac(@simp.rewrite_tac(@list.List([polytope()])), t4882)
-  face_of_polytope_polytope_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool. polytope s /\\ f face_of s ==> polytope f"), t4883))
+  face_of_polytope_polytope_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool. polytope s /\\ f face_of s ==> polytope f"), t4883))
 }
 
 ///|
@@ -9004,7 +9004,7 @@ fn step_217() -> Unit raise {
   let t4885 = @simp.asm_rewrite_tac(@list.List([]))
   let t4884 = @tactics.x_gen_tac(@parser.parse_term("v:real^N->bool"))
   let t4893 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polytope(), @theorems.left_imp_exists_thm()]))), t4884), @tactics.strip_tac), t4885), t4886), t4887), t4888), t4890), t4891), t4892)
-  finite_polytope_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s ==> FINITE {f | f face_of s}"), t4893))
+  finite_polytope_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s ==> FINITE {f | f face_of s}"), t4893))
 }
 
 ///|
@@ -9022,7 +9022,7 @@ fn step_218() -> Unit raise {
   let t4895 = @simp.simp_tac(@list.List([@sets.finite_restrict(), finite_polytope_faces()]))
   let t4894 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}"))]))
   let t4896 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), t4894), t4895)
-  finite_polytope_facets_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s ==> FINITE {f | f facet_of s}"), t4896))
+  finite_polytope_facets_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s ==> FINITE {f | f facet_of s}"), t4896))
 }
 
 ///|
@@ -9039,7 +9039,7 @@ pub fn finite_polytope_facets() -> @kernel.Thm {
 fn step_219() -> Unit raise {
   let t4897 = @meson.meson_tac(@list.List([@convex.closed_interval_as_convex_hull()]))
   let t4898 = @tactics.then_tac(@simp.rewrite_tac(@list.List([polytope()])), t4897)
-  polytope_interval_c.set(@tactics.prove(@parser.parse_term("!a b. polytope(interval[a,b])"), t4898))
+  polytope_interval_c.set(@tactics.prove(@parser.parse_term("forall a b. polytope(interval[a,b])"), t4898))
 }
 
 ///|
@@ -9055,7 +9055,7 @@ pub fn polytope_interval() -> @kernel.Thm {
 /// POLYTOPE_SING
 fn step_220() -> Unit raise {
   let t4899 = @meson.meson_tac(@list.List([polytope_interval(), @vectors.interval_sing()]))
-  polytope_sing_c.set(@tactics.prove(@parser.parse_term("!a. polytope {a}"), t4899))
+  polytope_sing_c.set(@tactics.prove(@parser.parse_term("forall a. polytope {a}"), t4899))
 }
 
 ///|
@@ -9075,7 +9075,7 @@ fn step_221() -> Unit raise {
   let t4901 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("u:real^N->bool"))(@tactics.strip_assume_tac))
   let t4900 = @simp.rewrite_tac(@list.List([polytope()]))
   let t4904 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4900), t4901), t4902), t4903)
-  polytope_scaling_c.set(@tactics.prove(@parser.parse_term("!c s:real^N->bool. polytope s ==> polytope (IMAGE (\\x. c % x) s)"), t4904))
+  polytope_scaling_c.set(@tactics.prove(@parser.parse_term("forall c s:real^N->bool. polytope s ==> polytope (IMAGE (\\x. c % x) s)"), t4904))
 }
 
 ///|
@@ -9110,7 +9110,7 @@ fn step_222() -> Unit raise {
   let t4906 = @simp.asm_rewrite_tac(@list.List([]))
   let t4905 = @class.asm_cases_tac(@parser.parse_term("c = &0"))
   let t4921 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4905), t4906), t4920)
-  polytope_scaling_eq_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool c.\n        polytope (IMAGE (\\x. c % x) s) <=> c = &0 \\/ polytope s"), t4921))
+  polytope_scaling_eq_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool c.\n        polytope (IMAGE (\\x. c % x) s) <=> c = &0 \\/ polytope s"), t4921))
 }
 
 ///|
@@ -9126,7 +9126,7 @@ pub fn polytope_scaling_eq() -> @kernel.Thm {
 /// POLYTOPE_AFFINITY_EQ
 fn step_223() -> Unit raise {
   let t4922 = @simp.rewrite_tac(@list.List([@vectors.affinity_scaling_translation(), polytope_translation_eq(), polytope_scaling_eq(), @sets.image_o()]))
-  polytope_affinity_eq_c.set(@tactics.prove(@parser.parse_term("!s m c:real^N.\n        polytope (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ polytope s"), t4922))
+  polytope_affinity_eq_c.set(@tactics.prove(@parser.parse_term("forall s m c:real^N.\n        polytope (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ polytope s"), t4922))
 }
 
 ///|
@@ -9142,7 +9142,7 @@ pub fn polytope_affinity_eq() -> @kernel.Thm {
 /// POLYTOPE_AFFINITY
 fn step_224() -> Unit raise {
   let t4923 = @simp.simp_tac(@list.List([polytope_affinity_eq()]))
-  polytope_affinity_c.set(@tactics.prove(@parser.parse_term("!s m c:real^N. polytope s ==> polytope (IMAGE (\\x. m % x + c) s)"), t4923))
+  polytope_affinity_c.set(@tactics.prove(@parser.parse_term("forall s m c:real^N. polytope s ==> polytope (IMAGE (\\x. m % x + c) s)"), t4923))
 }
 
 ///|
@@ -9163,7 +9163,7 @@ fn step_225() -> Unit raise {
   let t4926 = @tactics.disch_then(@tactics.conjuncts_then2(@tactics.x_choose_then(@parser.parse_term("u:real^N->bool"))(@tactics.strip_assume_tac), t4925))
   let t4924 = @simp.rewrite_tac(@list.List([polytope()]))
   let t4929 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4924), t4926), t4927), t4928)
-  polytope_sums_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope {x + y | x IN s /\\ y IN t}"), t4929))
+  polytope_sums_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope {x + y | x IN s /\\ y IN t}"), t4929))
 }
 
 ///|
@@ -9179,7 +9179,7 @@ pub fn polytope_sums() -> @kernel.Thm {
 /// POLYTOPE_IMP_COMPACT
 fn step_226() -> Unit raise {
   let t4930 = @simp.simp_tac(@list.List([polytope(), @theorems.left_imp_exists_thm(), @convex.compact_convex_hull(), @topology.finite_imp_compact(), @sets.finite_insert(), @sets.finite_empty()]))
-  polytope_imp_compact_c.set(@tactics.prove(@parser.parse_term("!s. polytope s ==> compact s"), t4930))
+  polytope_imp_compact_c.set(@tactics.prove(@parser.parse_term("forall s. polytope s ==> compact s"), t4930))
 }
 
 ///|
@@ -9195,7 +9195,7 @@ pub fn polytope_imp_compact() -> @kernel.Thm {
 /// POLYTOPE_IMP_CONVEX
 fn step_227() -> Unit raise {
   let t4931 = @simp.simp_tac(@list.List([polytope(), @theorems.left_imp_exists_thm(), @convex.convex_convex_hull()]))
-  polytope_imp_convex_c.set(@tactics.prove(@parser.parse_term("!s. polytope s ==> convex s"), t4931))
+  polytope_imp_convex_c.set(@tactics.prove(@parser.parse_term("forall s. polytope s ==> convex s"), t4931))
 }
 
 ///|
@@ -9211,7 +9211,7 @@ pub fn polytope_imp_convex() -> @kernel.Thm {
 /// POLYTOPE_IMP_CLOSED
 fn step_228() -> Unit raise {
   let t4932 = @simp.simp_tac(@list.List([polytope_imp_compact(), @topology.compact_imp_closed()]))
-  polytope_imp_closed_c.set(@tactics.prove(@parser.parse_term("!s. polytope s ==> closed s"), t4932))
+  polytope_imp_closed_c.set(@tactics.prove(@parser.parse_term("forall s. polytope s ==> closed s"), t4932))
 }
 
 ///|
@@ -9227,7 +9227,7 @@ pub fn polytope_imp_closed() -> @kernel.Thm {
 /// POLYTOPE_IMP_BOUNDED
 fn step_229() -> Unit raise {
   let t4933 = @simp.simp_tac(@list.List([polytope_imp_compact(), @topology.compact_imp_bounded()]))
-  polytope_imp_bounded_c.set(@tactics.prove(@parser.parse_term("!s. polytope s ==> bounded s"), t4933))
+  polytope_imp_bounded_c.set(@tactics.prove(@parser.parse_term("forall s. polytope s ==> bounded s"), t4933))
 }
 
 ///|
@@ -9243,7 +9243,7 @@ pub fn polytope_imp_bounded() -> @kernel.Thm {
 /// POLYTOPE_1
 fn step_230() -> Unit raise {
   let t4934 = @meson.meson_tac(@list.List([@topology.is_interval_compact(), polytope_imp_compact(), polytope_imp_convex(), @convex.is_interval_convex_1(), polytope_interval()]))
-  polytope_1_c.set(@tactics.prove(@parser.parse_term("!s:real^1->bool. polytope s <=> ?a b. s = interval[a,b]"), t4934))
+  polytope_1_c.set(@tactics.prove(@parser.parse_term("forall s:real^1->bool. polytope s <=> ?a b. s = interval[a,b]"), t4934))
 }
 
 ///|
@@ -9275,7 +9275,7 @@ fn step_231() -> Unit raise {
   let t4936 = @simp.asm_rewrite_tac(@list.List([polytope_segment(), @convex.aff_dim_segment()]))
   let t4935 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4951 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t4935), t4936), t4937), t4938), t4939), t4940), t4941), t4942), t4943), @tactics.disch_tac), t4944), t4945), t4946), t4947), t4948), t4949), t4950)
-  polytope_aff_dim_1_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool.\n        polytope p /\\ aff_dim p = &1 <=> ?a b. ~(a = b) /\\ p = segment[a,b]"), t4951))
+  polytope_aff_dim_1_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool.\n        polytope p /\\ aff_dim p = &1 <=> ?a b. ~(a = b) /\\ p = segment[a,b]"), t4951))
 }
 
 ///|
@@ -9301,7 +9301,7 @@ fn step_232() -> Unit raise {
   let t4953 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("c:real^N->bool"))(@tactics.strip_assume_tac))
   let t4952 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), polytope()]))
   let t4962 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4952), t4953), t4954), @tactics.disch_tac), t4955), t4956), t4957), t4960), t4961)
-  face_of_polytope_insert_eq_c.set(@tactics.prove(@parser.parse_term("!f s a:real^N.\n         polytope s /\\ ~(a IN affine hull s)\n         ==> (f face_of convex hull (a INSERT s) <=>\n              f face_of s \\/\n              (?f'. f' face_of s /\\ f = convex hull (a INSERT f')))"), t4962))
+  face_of_polytope_insert_eq_c.set(@tactics.prove(@parser.parse_term("forall f s a:real^N.\n         polytope s /\\ ~(a IN affine hull s)\n         ==> (f face_of convex hull (a INSERT s) <=>\n              f face_of s \\/\n              (?f'. f' face_of s /\\ f = convex hull (a INSERT f')))"), t4962))
 }
 
 ///|
@@ -9382,7 +9382,7 @@ fn step_233() -> Unit raise {
   let t4965 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("{}:real^N->bool")), t4964), @tactics.all_tac])
   let t4963 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t5021 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4963), t4965), t4966), t4967), t4974), t4975), @tactics.ants_tac), t4987), t4988), t4989), t4990), t4991), @tactics.strip_tac), t4992), t4993), @tactics.conj_tac), t4994), t4997), t4998), t4999), @tactics.conj_tac), t5001), t5002), @tactics.disch_tac), t5003), t5004), t5011), t5012), t5013), t5014), t5015), t5017), t5018), t5019), t5020)
-  convex_inner_approximation_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ convex hull k SUBSET s /\\\n                hausdist(convex hull k,s) < e /\\\n                (k = {} ==> s = {})"), t5021))
+  convex_inner_approximation_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ convex hull k SUBSET s /\\\n                hausdist(convex hull k,s) < e /\\\n                (k = {} ==> s = {})"), t5021))
 }
 
 ///|
@@ -9527,7 +9527,7 @@ fn step_234() -> Unit raise {
   let t5024 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("{}:real^N->bool")), t5023), @tactics.all_tac])
   let t5022 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t5132 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5022), t5024), t5026), t5027), t5029), t5030), t5031), @tactics.strip_tac), t5032), t5039), t5040), t5041), t5043), t5044), @tactics.ants_tac), t5049), @tactics.ants_tac), t5056), @tactics.conj_tac), t5131)
-  convex_outer_approximation_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ s SUBSET convex hull k /\\\n                hausdist(convex hull k,s) < e"), t5132))
+  convex_outer_approximation_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ s SUBSET convex hull k /\\\n                hausdist(convex hull k,s) < e"), t5132))
 }
 
 ///|
@@ -9550,7 +9550,7 @@ fn step_235() -> Unit raise {
     t5134(t5133(x5135))
   })
   let t5139 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t5136), t5137), t5138)
-  convex_inner_polytope_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ p SUBSET s /\\ hausdist(p,s) < e /\\\n                (p = {} ==> s = {})"), t5139))
+  convex_inner_polytope_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ p SUBSET s /\\ hausdist(p,s) < e /\\\n                (p = {} ==> s = {})"), t5139))
 }
 
 ///|
@@ -9573,7 +9573,7 @@ fn step_236() -> Unit raise {
     t5141(t5140(x5142))
   })
   let t5146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t5143), t5144), t5145)
-  convex_outer_polytope_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ s SUBSET p /\\ hausdist(p,s) < e"), t5146))
+  convex_outer_polytope_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ s SUBSET p /\\ hausdist(p,s) < e"), t5146))
 }
 
 ///|
@@ -9588,7 +9588,7 @@ pub fn convex_outer_polytope() -> @kernel.Thm {
 ///|
 /// polyhedron
 fn step_237() -> Unit raise {
-  polyhedron_c.set(@pair.new_definition(@parser.parse_term("polyhedron s <=>\n        ?f. FINITE f /\\\n            s = INTERS f /\\\n            (!h. h IN f ==> ?a b. ~(a = vec 0) /\\ h = {x | a dot x <= b})")))
+  polyhedron_c.set(@pair.new_definition(@parser.parse_term("polyhedron s <=>\n        ?f. FINITE f /\\\n            s = INTERS f /\\\n            (forall h. h IN f ==> ?a b. ~(a = vec 0) /\\ h = {x | a dot x <= b})")))
 }
 
 ///|
@@ -9613,7 +9613,7 @@ fn step_238() -> Unit raise {
   let t5152 = @tactics.disch_then(@tactics.conjuncts_then2((x5149 : @kernel.Thm) => @tactics.x_choose_tac(t5148, x5149), (x5151 : @kernel.Thm) => @tactics.x_choose_tac(t5150, x5151)))
   let t5147 = @simp.rewrite_tac(@list.List([polyhedron()]))
   let t5158 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5147), t5152), t5153), t5154), t5155), t5156), t5157)
-  polyhedron_inter_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        polyhedron s /\\ polyhedron t ==> polyhedron (s INTER t)"), t5158))
+  polyhedron_inter_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        polyhedron s /\\ polyhedron t ==> polyhedron (s INTER t)"), t5158))
 }
 
 ///|
@@ -9665,7 +9665,7 @@ fn step_240() -> Unit raise {
   let t5163 = @simp.simp_tac(@list.List([@sets.finite_image(), @iterate.finite_numseg(), @sets.forall_in_image()]))
   let t5162 = @tactics.exists_tac(@parser.parse_term("IMAGE (\\i. {x:real^N | &0 <= x$i}) (1..dimindex(:N))"))
   let t5177 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([polyhedron()])), t5162), t5163), @tactics.conj_tac), t5176)
-  polyhedron_positive_orthant_c.set(@tactics.prove(@parser.parse_term("polyhedron {x:real^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}"), t5177))
+  polyhedron_positive_orthant_c.set(@tactics.prove(@parser.parse_term("polyhedron {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}"), t5177))
 }
 
 ///|
@@ -9684,7 +9684,7 @@ fn step_241() -> Unit raise {
   let t5179 = @simp.rewrite_tac(@list.List([@sets.not_in_empty(), @sets.inters_0(), polyhedron_univ()]))
   let t5178 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t5181 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj()])), t5178), t5179), t5180)
-  polyhedron_inters_c.set(@tactics.prove(@parser.parse_term("!f:(real^N->bool)->bool.\n        FINITE f /\\ (!s. s IN f ==> polyhedron s) ==> polyhedron(INTERS f)"), t5181))
+  polyhedron_inters_c.set(@tactics.prove(@parser.parse_term("forall f:(real^N->bool)->bool.\n        FINITE f /\\ (forall s. s IN f ==> polyhedron s) ==> polyhedron(INTERS f)"), t5181))
 }
 
 ///|
@@ -9749,7 +9749,7 @@ fn step_243() -> Unit raise {
   let t5209 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@vectors.dot_lzero(), @sets.set_rule(@parser.parse_term("{x | p} = if p then UNIV else {}"))])), @class.cond_cases_tac), t5199), t5208])
   let t5198 = @class.asm_cases_tac(@parser.parse_term("a:real^N = vec 0"))
   let t5210 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5198), t5209)
-  polyhedron_halfspace_le_c.set(@tactics.prove(@parser.parse_term("!a b. polyhedron {x:real^N | a dot x <= b}"), t5210))
+  polyhedron_halfspace_le_c.set(@tactics.prove(@parser.parse_term("forall a b. polyhedron {x:real^N | a dot x <= b}"), t5210))
 }
 
 ///|
@@ -9766,7 +9766,7 @@ pub fn polyhedron_halfspace_le() -> @kernel.Thm {
 fn step_244() -> Unit raise {
   let t5211 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_lneg()), polyhedron_halfspace_le()]))
   let t5212 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a:real >= b <=> --a <= --b"))])), t5211)
-  polyhedron_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("!a b. polyhedron {x:real^N | a dot x >= b}"), t5212))
+  polyhedron_halfspace_ge_c.set(@tactics.prove(@parser.parse_term("forall a b. polyhedron {x:real^N | a dot x >= b}"), t5212))
 }
 
 ///|
@@ -9784,7 +9784,7 @@ fn step_245() -> Unit raise {
   let t5214 = @simp.simp_tac(@list.List([polyhedron_inter(), polyhedron_halfspace_le(), polyhedron_halfspace_ge()]))
   let t5213 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | P x} INTER {x | Q x}"))]))
   let t5215 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x:real = b <=> x <= b /\\ x >= b"))])), t5213), t5214)
-  polyhedron_hyperplane_c.set(@tactics.prove(@parser.parse_term("!a b. polyhedron {x:real^N | a dot x = b}"), t5215))
+  polyhedron_hyperplane_c.set(@tactics.prove(@parser.parse_term("forall a b. polyhedron {x:real^N | a dot x = b}"), t5215))
 }
 
 ///|
@@ -9825,7 +9825,7 @@ fn step_246() -> Unit raise {
   let t5217 = @simp.asm_simp_tac(@list.List([@misc.hull_p(), @class.right_imp_exists_thm(), @class.skolem_thm()]))
   let t5216 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("s:real^N->bool"), @convex.affine_hull_finite_intersection_hyperplanes()))
   let t5236 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5216), t5217), @tactics.strip_tac), t5218), t5219), t5220), t5221), @tactics.disch_tac), t5228), t5229), t5234), t5235)
-  affine_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. affine s ==> polyhedron s"), t5236))
+  affine_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. affine s ==> polyhedron s"), t5236))
 }
 
 ///|
@@ -9864,7 +9864,7 @@ fn step_247() -> Unit raise {
   let t5238 = @simp.asm_rewrite_tac(@list.List([]))
   let t5237 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5255 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([polyhedron(), @class.right_imp_exists_thm(), @class.skolem_thm()])), t5237), t5238), t5239), t5240), @tactics.disch_tac), t5247), t5248), t5253), t5254)
-  polyhedron_imp_closed_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> closed s"), t5255))
+  polyhedron_imp_closed_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> closed s"), t5255))
 }
 
 ///|
@@ -9903,7 +9903,7 @@ fn step_248() -> Unit raise {
   let t5257 = @simp.asm_rewrite_tac(@list.List([]))
   let t5256 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5274 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([polyhedron(), @class.right_imp_exists_thm(), @class.skolem_thm()])), t5256), t5257), t5258), t5259), @tactics.disch_tac), t5266), t5267), t5272), t5273)
-  polyhedron_imp_convex_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> convex s"), t5274))
+  polyhedron_imp_convex_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> convex s"), t5274))
 }
 
 ///|
@@ -9919,7 +9919,7 @@ pub fn polyhedron_imp_convex() -> @kernel.Thm {
 /// POLYHEDRON_AFFINE_HULL
 fn step_249() -> Unit raise {
   let t5275 = @simp.simp_tac(@list.List([affine_imp_polyhedron(), @convex.affine_affine_hull()]))
-  polyhedron_affine_hull_c.set(@tactics.prove(@parser.parse_term("!s. polyhedron(affine hull s)"), t5275))
+  polyhedron_affine_hull_c.set(@tactics.prove(@parser.parse_term("forall s. polyhedron(affine hull s)"), t5275))
 }
 
 ///|
@@ -9953,7 +9953,7 @@ fn step_250() -> Unit raise {
   let t5276 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t5291 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([polyhedron()])), t5276), @tactics.gen_tac), @tactics.strip_tac), t5277), t5281), t5282), t5283), t5284), t5290])
   let t5292 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t5291)
-  polyhedron_inter_affine_c.set(@tactics.prove(@parser.parse_term("!s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (!h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b})"), t5292))
+  polyhedron_inter_affine_c.set(@tactics.prove(@parser.parse_term("forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b})"), t5292))
 }
 
 ///|
@@ -10022,7 +10022,7 @@ fn step_251() -> Unit raise {
   let t5372 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t5371 = @simp.asm_rewrite_tac(@list.List([@sets.inters_2()]))
   let t5370 = @tactics.exists_tac(@parser.parse_term("{affine hull s,h:real^N->bool}"))
-  let t5369 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!t. t SUBSET s /\\ INTERS t = {} ==> INTERS s = {}")))
+  let t5369 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall t. t SUBSET s /\\ INTERS t = {} ==> INTERS s = {}")))
   let t5368 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.inters_insert())]))
   let t5367 = @simp.expand_tac("s")
   let t5366 = @tactics.undisch_tac(@parser.parse_term("~(s:real^N->bool = {})"))
@@ -10058,7 +10058,7 @@ fn step_251() -> Unit raise {
     })(((x5346 : @kernel.Thm) => @bool.spec(t5345, x5346))(x5347))
   })
   let t5373 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t5348), t5349), t5358), t5361), t5362), t5363), t5364), @tactics.conj_tac), t5365), @tactics.disch_tac), t5366), t5367), t5368), t5369), t5370), t5371), t5372), @tactics.all_tac])
-  let t5341 = @tactics.subgoal_then(@parser.parse_term("!h. h IN f /\\ ~(affine hull s SUBSET h)\n        ==> ?a' b'. ~(a' = vec 0) /\\\n                  affine hull s INTER {x:real^N | a' dot x <= b'} =\n                  affine hull s INTER h /\\\n                  !w. w IN affine hull s ==> (w + a') IN affine hull s"), fn(x5338 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5341 = @tactics.subgoal_then(@parser.parse_term("forall h. h IN f /\\ ~(affine hull s SUBSET h)\n        ==> ?a' b'. ~(a' = vec 0) /\\\n                  affine hull s INTER {x:real^N | a' dot x <= b'} =\n                  affine hull s INTER h /\\\n                  forall w. w IN affine hull s ==> (w + a') IN affine hull s"), fn(x5338 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5339 = @tactics.mp_tac(x5338)
     fn(x5340 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5339(x5340)
@@ -10130,7 +10130,7 @@ fn step_251() -> Unit raise {
   let t5293 = @meson.meson_tac(@list.List([]))
   let t5294 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t5293)])
   let t5413 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polyhedron_inter_affine()]))), @tactics.eq_tac), t5294), t5298), t5299), t5303), t5304), t5313), t5321), t5329), t5330), t5332), t5337), t5341), t5373), t5381), t5382), t5387), t5389), @tactics.disch_tac), t5390), t5391), t5392), @tactics.conj_tac), t5399), t5405), t5407), t5408), t5409), t5410), t5411), @tactics.ap_term_tac), @tactics.abs_tac), t5412)
-  polyhedron_inter_affine_parallel_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (!h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (!x. x IN affine hull s\n                                ==> (x + a) IN affine hull s))"), t5413))
+  polyhedron_inter_affine_parallel_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (forall x. x IN affine hull s\n                                ==> (x + a) IN affine hull s))"), t5413))
 }
 
 ///|
@@ -10219,7 +10219,7 @@ fn step_252() -> Unit raise {
   let t5414 = @meson.meson_tac(@list.List([]))
   let t5415 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t5414)])
   let t5470 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polyhedron_inter_affine_parallel()]))), @tactics.eq_tac), t5415), t5419), t5423), t5431), t5432), t5433), t5434), @tactics.strip_tac), t5435), @tactics.conj_tac), t5439), t5440), @tactics.disch_tac), t5447), @tactics.ants_tac), t5448), t5449), t5456), t5457), @tactics.conj_tac), t5458), @tactics.conj_tac), t5469)
-  polyhedron_inter_affine_parallel_minimal_c.set(@tactics.prove(@parser.parse_term("!s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (!h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (!x. x IN affine hull s\n                                ==> (x + a) IN affine hull s)) /\\\n            !f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')"), t5470))
+  polyhedron_inter_affine_parallel_minimal_c.set(@tactics.prove(@parser.parse_term("forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (forall x. x IN affine hull s\n                                ==> (x + a) IN affine hull s)) /\\\n            forall f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')"), t5470))
 }
 
 ///|
@@ -10240,7 +10240,7 @@ fn step_253() -> Unit raise {
   let t5471 = @simp.rewrite_tac(@list.List([polyhedron_inter_affine()]))
   let t5472 = @list.List([@simp.rewrite_tac(@list.List([polyhedron_inter_affine_parallel_minimal()])), t5471])
   let t5476 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t5472), t5473), t5474), t5475)
-  polyhedron_inter_affine_minimal_c.set(@tactics.prove(@parser.parse_term("!s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (!h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b}) /\\\n            !f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')"), t5476))
+  polyhedron_inter_affine_minimal_c.set(@tactics.prove(@parser.parse_term("forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b}) /\\\n            forall f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')"), t5476))
 }
 
 ///|
@@ -10356,7 +10356,7 @@ fn step_254() -> Unit raise {
     })(t5524(x5525))
   })
   let t5516 = @simp.rewrite_tac(@list.List([@topology.interior_subset()]))
-  let t5515 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!s. s IN f ==> i s SUBSET s)\n        ==> INTERS (IMAGE i f) INTER t SUBSET t INTER INTERS f")))
+  let t5515 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall s. s IN f ==> i s SUBSET s)\n        ==> INTERS (IMAGE i f) INTER t SUBSET t INTER INTERS f")))
   let t5517 = @tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(fn(x5510 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x5510
     @simp.gen_rewrite_tac(fn(x5512 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -10415,7 +10415,7 @@ fn step_254() -> Unit raise {
     }
   }))
   let t5600 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5483), t5488), t5490), t5491), t5492), @tactics.eq_tac), t5519), @tactics.disch_tac), t5526), @tactics.disch_tac), t5527), t5528), @tactics.disch_tac), t5535), @tactics.ants_tac), t5537), t5544), t5545), t5549), t5558), t5562), t5563), t5564), t5588), t5589), t5590), t5591), t5592), t5593), t5594), t5595), t5596), t5598), t5599)
-  relative_interior_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (!h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> relative_interior s =\n                {x | x IN s /\\ !h. h IN f ==> a h dot x < b h}"), t5600))
+  relative_interior_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> relative_interior s =\n                {x | x IN s /\\ forall h. h IN f ==> a h dot x < b h}"), t5600))
 }
 
 ///|
@@ -10482,7 +10482,7 @@ fn step_255() -> Unit raise {
   })
   let t6025 = @simp.asm_rewrite_tac(@list.List([]))
   let t6021 = @parser.parse_term("i:real^N->bool")
-  let t6024 = @tactics.undisch_then(@parser.parse_term("!t:real^N->bool. t IN f ==> x IN t"), fn(x6023 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6024 = @tactics.undisch_then(@parser.parse_term("forall t:real^N->bool. t IN f ==> x IN t"), fn(x6023 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x6018 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s6019 = @tactics.mp_tac(x6018)
       fn(x6020 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -10689,7 +10689,7 @@ fn step_255() -> Unit raise {
   let t5859 = @tactics.exists_tac(@parser.parse_term("&1"))
   let t5861 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@equal.gsym(@sets.in_delete()), @sets.not_in_empty()])), t5859), t5860), @tactics.all_tac])
   let t5877 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("f DELETE (h:real^N->bool) = {}")), t5861), t5862), t5863), @tactics.conj_tac), t5868), t5869), @tactics.strip_tac), t5870), t5876), @tactics.all_tac])
-  let t5858 = @tactics.subgoal_then(@parser.parse_term("?t. &0 < t /\\\n          !j. j IN f /\\ ~(j:real^N->bool = h)\n              ==> t * (a j dot y - a j dot w) <= b j - a j dot (w:real^N)"), @tactics.strip_assume_tac)
+  let t5858 = @tactics.subgoal_then(@parser.parse_term("?t. &0 < t /\\\n          forall j. j IN f /\\ ~(j:real^N->bool = h)\n              ==> t * (a j dot y - a j dot w) <= b j - a j dot (w:real^N)"), @tactics.strip_assume_tac)
   let t5857 = @tactics.x_gen_tac(@parser.parse_term("y:real^N"))
   let t5856 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inter(), @sets.in_elim_thm()]))
   let t5853 = @sets.set_tac(@list.List([]))
@@ -10809,13 +10809,13 @@ fn step_255() -> Unit raise {
       }
     })(((x5769 : @kernel.Thm) => @bool.spec(t5768, x5769))(x5770))
   })
-  let t5764 = @tactics.undisch_tac(@parser.parse_term("!t:real^N->bool. t IN f /\\ ~(t = h) ==> z IN t"))
+  let t5764 = @tactics.undisch_tac(@parser.parse_term("forall t:real^N->bool. t IN f /\\ ~(t = h) ==> z IN t"))
   let t5763 = @simp.asm_simp_tac(@list.List([@real.real_le_lmul_eq(), @realarith.real_lt_imp_le(), @real.real_lt_lmul_eq(), @realarith.real_sub_lt()]))
   let t5762 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("(&1 - l) * x < (&1 - l) * z /\\ l * y <= l * z\n        ==> (&1 - l) * x + l * y < z")))
   let t5761 = @simp.rewrite_tac(@list.List([@vectors.dot_radd(), @vectors.dot_rmul()]))
   let t5760 = @simp.expand_tac("w")
   let t5773 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:real^N->bool")), @tactics.strip_tac), t5760), t5761), t5762), t5763), t5764), t5771), t5772), @tactics.all_tac])
-  let t5759 = @tactics.subgoal_then(@parser.parse_term("!i. i IN f /\\ ~(i = h) ==> (a:(real^N->bool)->real^N) i dot w < b i"), fn(x5756 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5759 = @tactics.subgoal_then(@parser.parse_term("forall i. i IN f /\\ ~(i = h) ==> (a:(real^N->bool)->real^N) i dot w < b i"), fn(x5756 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5757 = @tactics.assume_tac(x5756)
     fn(x5758 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5757(x5758)
@@ -10967,7 +10967,7 @@ fn step_255() -> Unit raise {
   let t5672 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(face_of_inter_supporting_hyperplane_le()), @tactics.conj_tac), t5671), @tactics.all_tac])
   let t5643 = @simp.rewrite_tac(@list.List([facet_of()]))
   let t5927 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5643), @tactics.conj_tac), t5672), t5673), t5674), t5675), t5678), t5685), @tactics.disch_tac), t5692), @tactics.ants_tac), t5694), t5701), t5702), t5706), t5715), t5719), t5720), t5724), t5725), @tactics.ants_tac), t5729), t5733), t5740), t5741), t5746), t5750), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t5751), t5752), t5754), t5755), t5759), t5773), t5777), t5782), t5786), t5837), @tactics.conj_tac), t5838), t5839), t5843), t5846), t5847), t5848), t5849), t5855), t5856), t5857), @tactics.strip_tac), t5858), t5877), t5878), t5882), t5885), t5886), @tactics.conj_tac), t5887), t5888), t5889), @tactics.conj_tac), t5893), t5899), t5900), @tactics.conj_tac), t5903), t5904), @tactics.disch_tac), t5915), t5919), t5920), t5921), t5922), t5923), t5924), t5925), t5926), @tactics.all_tac])
-  let t5642 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool.\n       h IN f ==> (s INTER {x:real^N | a h dot x = b h}) facet_of s"), fn(x5639 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5642 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool.\n       h IN f ==> (s INTER {x:real^N | a h dot x = b h}) facet_of s"), fn(x5639 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5640 = ((x5638 : @kernel.Thm) => @tactics.label_tac("face", x5638))(x5639)
     fn(x5641 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5640(x5641)
@@ -11023,7 +11023,7 @@ fn step_255() -> Unit raise {
   let t5624 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@sets.inter_empty(), @convex.affine_hull_empty(), @sets.set_rule(@parser.parse_term("~(s PSUBSET s)")), facet_of_empty()])), t5602), t5603), t5610), t5613), t5622), t5623), @tactics.strip_tac])
   let t5601 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t6066 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5601), t5624), t5628), t5631), t5637), t5642), t5927), t5928), @tactics.eq_tac), t5929), t5930), @tactics.strip_tac), t5936), t5940), t5941), t5942), t5945), t5949), t5950), @tactics.ants_tac), t5954), t5958), t5965), t5966), t5970), t5971), t5975), t5981), t5985), t5991), t5992), t5996), t6006), t6007), @tactics.strip_tac), t6008), t6009), t6010), t6011), @tactics.strip_tac), t6012), t6016), t6035), t6039), t6047), t6051), t6056), t6057), @tactics.disch_tac), t6061), t6065)
-  facet_of_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (!h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> !c. c facet_of s <=>\n                ?h. h IN f /\\ c = s INTER {x | a h dot x = b h}"), t6066))
+  facet_of_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c facet_of s <=>\n                ?h. h IN f /\\ c = s INTER {x | a h dot x = b h}"), t6066))
 }
 
 ///|
@@ -11062,7 +11062,7 @@ fn step_256() -> Unit raise {
   })
   let t6230 = @simp.asm_rewrite_tac(@list.List([]))
   let t6226 = @parser.parse_term("i:real^N->bool")
-  let t6229 = @tactics.undisch_then(@parser.parse_term("!t:real^N->bool. t IN f ==> x IN t"), fn(x6228 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6229 = @tactics.undisch_then(@parser.parse_term("forall t:real^N->bool. t IN f ==> x IN t"), fn(x6228 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x6223 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s6224 = @tactics.mp_tac(x6223)
       fn(x6225 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -11206,7 +11206,7 @@ fn step_256() -> Unit raise {
   let t6145 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(polyhedron_imp_convex()), t6118), t6119), t6120), t6144])
   let t6117 = @tactics.match_mp_tac(face_of_inter_supporting_hyperplane_le())
   let t6146 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6117), @tactics.conj_tac), t6145), @tactics.all_tac])
-  let t6116 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s"), fn(x6113 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6116 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s"), fn(x6113 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6114 = @tactics.assume_tac(x6113)
     fn(x6115 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6114(x6115)
@@ -11279,7 +11279,7 @@ fn step_256() -> Unit raise {
   }), t6074), t6075), @tactics.all_tac])
   let t6067 = @class.asm_cases_tac(@parser.parse_term("f:(real^N->bool)->bool = {}"))
   let t6249 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6067), t6076), t6080), t6086), t6087), t6093), t6099), t6103), t6106), t6112), t6116), t6146), t6150), t6151), t6152), t6155), t6159), t6160), @tactics.ants_tac), t6164), t6168), t6175), t6176), t6180), t6186), t6190), t6196), t6197), t6201), t6211), t6212), @tactics.strip_tac), t6213), t6214), t6215), t6216), @tactics.strip_tac), t6217), t6221), t6240), t6241), t6242), t6243), t6244), t6245), t6246), t6247), t6248)
-  face_of_polyhedron_subset_explicit_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (!h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> !c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> ?h. h IN f /\\ c SUBSET (s INTER {x | a h dot x = b h})"), t6249))
+  face_of_polyhedron_subset_explicit_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> ?h. h IN f /\\ c SUBSET (s INTER {x | a h dot x = b h})"), t6249))
 }
 
 ///|
@@ -11297,7 +11297,7 @@ fn step_257() -> Unit raise {
   let t6251 = @sets.set_tac(@list.List([]))
   let t6250 = @simp.rewrite_tac(@list.List([@sets.inters_image()]))
   let t6252 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@sets.simple_image_gen()])), t6250), t6251)
-  let lemma = @tactics.prove(@parser.parse_term("!t s. (!a. P a ==> t SUBSET s INTER INTERS {f x | P x})\n           ==> t SUBSET INTERS {s INTER f x | P x}"), t6252)
+  let lemma = @tactics.prove(@parser.parse_term("forall t s. (forall a. P a ==> t SUBSET s INTER INTERS {f x | P x})\n           ==> t SUBSET INTERS {s INTER f x | P x}"), t6252)
   let t6432 = @tactics.asm_tac(@sets.set_tac)(@list.List([@realax.real_le_refl()]))
   let t6431 = @tactics.exists_tac(@parser.parse_term("j:real^N->bool"))
   let t6430 = @simp.rewrite_tac(@list.List([@sets.exists_in_gspec()]))
@@ -11312,14 +11312,14 @@ fn step_257() -> Unit raise {
     }
   })
   let t6421 = @tactics.x_gen_tac(@parser.parse_term("j:real^N->bool"))
-  let t6420 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> !t. t IN f ==> s SUBSET t"))]))
+  let t6420 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> forall t. t IN f ==> s SUBSET t"))]))
   let t6417 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t6416 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inters(), @sets.forall_in_gspec()]))
   let t6415 = @simp.rewrite_tac(@list.List([@convex.affine_hyperplane()]))
   let t6414 = @tactics.match_mp_tac(@misc.hull_minimal())
   let t6413 = @tactics.x_gen_tac(@parser.parse_term("j:real^N->bool"))
   let t6412 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
-  let t6418 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> !t. t IN f ==> s SUBSET t"))])), t6412), t6413), @tactics.strip_tac), t6414), t6415), t6416), t6417)
+  let t6418 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> forall t. t IN f ==> s SUBSET t"))])), t6412), t6413), @tactics.strip_tac), t6414), t6415), t6416), t6417)
   let t6411 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t6410 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inters(), @sets.forall_in_gspec()]))
   let t6419 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.hull_mono()), t6410), t6411), t6418, @tactics.all_tac])
@@ -11352,7 +11352,7 @@ fn step_257() -> Unit raise {
   let t6388 = @tactics.match_mp_tac(@topology.open_inters())
   let t6387 = @simp.simp_tac(@list.List([@sets.in_inters(), @sets.forall_in_image(), @sets.in_elim_thm()]))
   let t6386 = @tactics.match_mp_tac(@meson.meson(@list.List([@topology.open_contains_ball()]), @parser.parse_term("open s /\\ x IN s ==> ?e. &0 < e /\\ ball(x,e) SUBSET s")))
-  let t6391 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(!h. P h ==> s SUBSET t h) <=> s SUBSET INTERS (IMAGE t {h | P h})"))])), t6386), t6387), t6388), t6389), t6390), @tactics.all_tac])
+  let t6391 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(forall h. P h ==> s SUBSET t h) <=> s SUBSET INTERS (IMAGE t {h | P h})"))])), t6386), t6387), t6388), t6389), t6390), @tactics.all_tac])
   let t6384 = @tactics.choose_then(@tactics.conjuncts_then2(fn(x6377 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6378 = @tactics.assume_tac(x6377)
     fn(x6379 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -11364,7 +11364,7 @@ fn step_257() -> Unit raise {
       s6382(x6383)
     }
   }))
-  let t6385 = @tactics.subgoal_then(@parser.parse_term("?e. &0 < e /\\ !h. h IN f /\\ a(h:real^N->bool) dot z < b h\n                      ==> ball(z,e) SUBSET {w:real^N | a h dot w < b h}"), t6384)
+  let t6385 = @tactics.subgoal_then(@parser.parse_term("?e. &0 < e /\\ forall h. h IN f /\\ a(h:real^N->bool) dot z < b h\n                      ==> ball(z,e) SUBSET {w:real^N | a h dot w < b h}"), t6384)
   let t6376 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t6375 = @tactics.exists_tac(@parser.parse_term("z:real^N"))
   let t6374 = @simp.rewrite_tac(@list.List([@sets.disjoint(), @equal.gsym(@sets.member_not_empty()), @sets.in_inter()]))
@@ -11380,7 +11380,7 @@ fn step_257() -> Unit raise {
   }), t6366), t6367), t6371])
   let t6363 = @simp.asm_rewrite_tac(@list.List([]))
   let t6362 = @tactics.x_gen_tac(@parser.parse_term("h:real^N->bool"))
-  let t6373 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. P x <=> Q x) ==> {f x | P x} = {f x | Q x}"))), t6362), @tactics.eq_tac), @tactics.strip_tac), t6363), t6372), @tactics.all_tac])
+  let t6373 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. P x <=> Q x) ==> {f x | P x} = {f x | Q x}"))), t6362), @tactics.eq_tac), @tactics.strip_tac), t6363), t6372), @tactics.all_tac])
   let t6361 = @tactics.subgoal_then(@parser.parse_term("{s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ c SUBSET (s INTER {x:real^N | a h dot x = b h})} =\n    {s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ z IN s INTER {x:real^N | a h dot x = b h}}"), fn(x6358 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6359 = @tactics.subst1_tac(x6358)
     fn(x6360 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -11466,7 +11466,7 @@ fn step_257() -> Unit raise {
   let t6321 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(polyhedron_imp_convex()), t6294), t6295), t6296), t6320])
   let t6293 = @tactics.match_mp_tac(face_of_inter_supporting_hyperplane_le())
   let t6322 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6293), @tactics.conj_tac), t6321), @tactics.all_tac])
-  let t6292 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s"), fn(x6289 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6292 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s"), fn(x6289 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6290 = @tactics.assume_tac(x6289)
     fn(x6291 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6290(x6291)
@@ -11524,7 +11524,7 @@ fn step_257() -> Unit raise {
     @tactics.then_tac(@tactics.strip_assume_tac(th), t6255)
   })
   let t6433 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6256), t6262), t6263), t6269), t6275), t6279), t6282), t6288), t6292), t6322), t6326), t6327), t6328), t6329), @tactics.disch_tac), t6333), t6338), t6339), t6340), t6341), @tactics.conj_tac), t6357), t6361), t6373), t6374), t6375), t6376), t6385), t6391), t6392), t6393), t6394), t6395), t6396), t6397), @tactics.strip_tac), t6407), t6408), t6409), t6419), t6420), t6421), @tactics.disch_tac), t6425), t6427), @tactics.strip_tac), t6428), t6429), t6430), t6431), t6432)
-  face_of_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (!h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> !c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> c = INTERS {s INTER {x | a h dot x = b h} |h|\n                                h IN f /\\\n                                c SUBSET (s INTER {x | a h dot x = b h})}"), t6433))
+  face_of_polyhedron_explicit_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> c = INTERS {s INTER {x | a h dot x = b h} |h|\n                                h IN f /\\\n                                c SUBSET (s INTER {x | a h dot x = b h})}"), t6433))
 }
 
 ///|
@@ -11600,7 +11600,7 @@ fn step_258() -> Unit raise {
     })(t6438(x6439))
   })
   let t6480 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6440), t6448), t6449), t6452), @tactics.strip_tac), t6456), @tactics.ants_tac), t6458), t6465), t6466), t6467), t6468), t6469), t6470), t6476), t6477), t6478), t6479)
-  facet_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool c.\n        polyhedron s /\\ c facet_of s\n        ==> ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  c = s INTER {x | a dot x = b}"), t6480))
+  facet_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool c.\n        polyhedron s /\\ c facet_of s\n        ==> ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  c = s INTER {x | a dot x = b}"), t6480))
 }
 
 ///|
@@ -11673,7 +11673,7 @@ fn step_259() -> Unit raise {
     })(t6485(x6486))
   })
   let t6527 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6487), t6488), t6489), t6492), @tactics.strip_tac), t6496), @tactics.ants_tac), t6498), t6501), t6505), @tactics.ants_tac), t6507), t6514), t6515), t6521), @tactics.ap_term_tac), t6523), t6524), t6525), t6526)
-  face_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> c = INTERS {f | f facet_of s /\\ c SUBSET f}"), t6527))
+  face_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> c = INTERS {f | f facet_of s /\\ c SUBSET f}"), t6527))
 }
 
 ///|
@@ -11702,7 +11702,7 @@ fn step_260() -> Unit raise {
     })(t6531(x6532))
   })
   let t6538 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6533), t6535), t6536), t6537)
-  face_of_polyhedron_subset_facet_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. f facet_of s /\\ c SUBSET f"), t6538))
+  face_of_polyhedron_subset_facet_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. f facet_of s /\\ c SUBSET f"), t6538))
 }
 
 ///|
@@ -11727,7 +11727,7 @@ fn step_261() -> Unit raise {
   let t6539 = @parser.parse_term("c:real^N->bool")
   let t6540 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t6539]), face_of_polyhedron_subset_facet()))
   let t6548 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6540), t6541), t6542), t6543), t6544), t6545), t6546), t6547)
-  face_of_polyhedron_face_of_facet_c.set(@tactics.prove(@parser.parse_term("!s c:real^N->bool.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. c face_of f /\\ f facet_of s"), t6548))
+  face_of_polyhedron_face_of_facet_c.set(@tactics.prove(@parser.parse_term("forall s c:real^N->bool.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. c face_of f /\\ f facet_of s"), t6548))
 }
 
 ///|
@@ -11762,7 +11762,7 @@ fn step_262() -> Unit raise {
   let t6550 = @class.asm_cases_tac(@parser.parse_term("f:real^N->bool = {}"))
   let t6549 = @list.List([@simp.simp_tac(@list.List([exposed_face_of()])), @tactics.all_tac])
   let t6566 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t6549), @tactics.disch_tac), t6550), t6551), t6552), t6553), t6555), t6556), t6560), t6561), t6562), t6563), t6564), t6565)
-  exposed_face_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s f:real^N->bool. polyhedron s ==> (f exposed_face_of s <=> f face_of s)"), t6566))
+  exposed_face_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s f:real^N->bool. polyhedron s ==> (f exposed_face_of s <=> f face_of s)"), t6566))
 }
 
 ///|
@@ -11828,7 +11828,7 @@ fn step_263() -> Unit raise {
     })(t6571(x6572))
   })
   let t6609 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6573), t6574), t6575), t6578), @tactics.strip_tac), t6582), @tactics.ants_tac), t6584), t6591), t6592), t6593), t6594), t6595), t6596), t6600), t6601), t6602), t6603), t6604), t6605), t6606), t6607), t6608)
-  face_of_polyhedron_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool c. polyhedron s /\\ c face_of s ==> polyhedron c"), t6609))
+  face_of_polyhedron_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool c. polyhedron s /\\ c face_of s ==> polyhedron c"), t6609))
 }
 
 ///|
@@ -11892,7 +11892,7 @@ fn step_264() -> Unit raise {
       s6624(x6625)
     }
   }, @list.List([@parser.parse_term("{}:real^N->bool"), t6626]))
-  let t6622 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_delete()]), @parser.parse_term("!a b. FINITE (s DELETE a DELETE b) ==> FINITE s")))
+  let t6622 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_delete()]), @parser.parse_term("forall a b. FINITE (s DELETE a DELETE b) ==> FINITE s")))
   let t6619 = @parser.parse_term("b:(real^N->bool)->real")
   let t6620 = @parser.parse_term("a:(real^N->bool)->real^N")
   let t6621 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:(real^N->bool)->bool"), t6620, t6619]))
@@ -11910,7 +11910,7 @@ fn step_264() -> Unit raise {
     })(t6614(x6615))
   })
   let t6661 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6616), t6617), t6618), t6621), @tactics.strip_tac), t6622), t6627), t6628), t6629), t6637), t6638), t6640), t6641), t6645), @tactics.ants_tac), t6647), t6648), t6649), t6652), t6653), @tactics.disch_tac), t6654), @tactics.conj_tac), t6655), t6656), t6660)
-  finite_polyhedron_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> FINITE {f | f face_of s}"), t6661))
+  finite_polyhedron_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> FINITE {f | f face_of s}"), t6661))
 }
 
 ///|
@@ -11926,7 +11926,7 @@ pub fn finite_polyhedron_faces() -> @kernel.Thm {
 /// FINITE_POLYHEDRON_EXPOSED_FACES
 fn step_265() -> Unit raise {
   let t6662 = @simp.simp_tac(@list.List([exposed_face_of_polyhedron(), finite_polyhedron_faces()]))
-  finite_polyhedron_exposed_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> FINITE {f | f exposed_face_of s}"), t6662))
+  finite_polyhedron_exposed_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> FINITE {f | f exposed_face_of s}"), t6662))
 }
 
 ///|
@@ -11963,14 +11963,14 @@ fn step_266() -> Unit raise {
     })(t6674(x6675))
   })
   let t6669 = @simp.asm_rewrite_tac(@list.List([@sets.empty_gspec(), @sets.finite_empty()]))
-  let t6668 = @class.asm_cases_tac(@parser.parse_term("!a:real^N. ~({a} = f)"))
+  let t6668 = @class.asm_cases_tac(@parser.parse_term("forall a:real^N. ~({a} = f)"))
   let t6667 = @tactics.x_gen_tac(@parser.parse_term("f:real^N->bool"))
   let t6666 = @simp.asm_simp_tac(@list.List([finite_polyhedron_faces()]))
   let t6665 = @tactics.match_mp_tac(@sets.finite_finite_preimage())
   let t6664 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{v} face_of s <=> {v} IN {f | f face_of s}"))]))
   let t6663 = @simp.rewrite_tac(@list.List([@equal.gsym(face_of_sing())]))
   let t6684 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6663), t6664), t6665), t6666), t6667), @tactics.disch_tac), t6668), t6669), t6676), t6677), @tactics.gen_tac), t6682), t6683)
-  finite_polyhedron_extreme_points_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> FINITE {v | v extreme_point_of s}"), t6684))
+  finite_polyhedron_extreme_points_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> FINITE {v | v extreme_point_of s}"), t6684))
 }
 
 ///|
@@ -11988,7 +11988,7 @@ fn step_267() -> Unit raise {
   let t6686 = @simp.simp_tac(@list.List([@sets.finite_restrict(), finite_polyhedron_faces()]))
   let t6685 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}"))]))
   let t6687 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([facet_of()])), t6685), t6686)
-  finite_polyhedron_facets_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> FINITE {f | f facet_of s}"), t6687))
+  finite_polyhedron_facets_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> FINITE {f | f facet_of s}"), t6687))
 }
 
 ///|
@@ -12036,7 +12036,7 @@ fn step_268() -> Unit raise {
   })
   let t6732 = @simp.rewrite_tac(@list.List([@equal.gsym(@realarith.real_le_lt())]))
   let t6731 = @tactics.x_gen_tac(@parser.parse_term("h:real^N->bool"))
-  let t6730 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. P x ==> Q x \\/ R x) ==> (!x. P x ==> Q x) \\/ (?x. P x /\\ R x)")))
+  let t6730 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. P x ==> Q x \\/ R x) ==> (forall x. P x ==> Q x) \\/ (?x. P x /\\ R x)")))
   let t6729 = @simp.asm_rewrite_tac(@list.List([@theorems.unwind_thm2(), @sets.in_elim_thm(), @sets.in_inter()]))
   let t6728 = @simp.once_rewrite_tac(@list.List([@theorems.swap_exists_thm()]))
   let t6727 = @simp.rewrite_tac(@list.List([@theorems.left_and_exists_thm(), @class.taut(@parser.parse_term("(a /\\ b) /\\ c <=> b /\\ a /\\ c"))]))
@@ -12044,7 +12044,7 @@ fn step_268() -> Unit raise {
   let t6758 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:real^N")), @tactics.disch_tac), t6726), t6727), t6728), t6729), t6730), t6731), @tactics.disch_tac), t6732), t6736), t6737), t6738), t6745), t6749), t6752), t6757])
   let t6725 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm(), @theorems.imp_conj(), @sets.forall_in_gspec()]))
   let t6724 = @simp.rewrite_tac(@list.List([@sets.forall_in_unions()]))
-  let t6723 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. x IN s ==> P x \\/ x IN t) /\\ (!x. x IN t ==> ~P x)\n    ==> {x | x IN s /\\ P x} = s DIFF t")))
+  let t6723 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. x IN s ==> P x \\/ x IN t) /\\ (forall x. x IN t ==> ~P x)\n    ==> {x | x IN s /\\ P x} = s DIFF t")))
   let t6722 = @simp.asm_rewrite_tac(@list.List([]))
   let t6721 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.disch_tac])
   let t6719 = @tactics.disch_then(fn(x6716 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -12092,7 +12092,7 @@ fn step_268() -> Unit raise {
     })(t6692(x6693))
   })
   let t6759 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6694), t6702), t6703), t6706), @tactics.strip_tac), t6710), t6714), t6715), @tactics.ants_tac), t6720), @tactics.ants_tac), t6721), t6722), t6723), t6724), t6725), @tactics.conj_tac), t6758)
-  relative_interior_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s\n        ==> relative_interior s = s DIFF UNIONS {f | f facet_of s}"), t6759))
+  relative_interior_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s\n        ==> relative_interior s = s DIFF UNIONS {f | f facet_of s}"), t6759))
 }
 
 ///|
@@ -12112,7 +12112,7 @@ fn step_269() -> Unit raise {
   let t6761 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("f SUBSET s ==> s DIFF (s DIFF f) = f")))
   let t6760 = @simp.asm_simp_tac(@list.List([relative_interior_of_polyhedron()]))
   let t6764 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6760), t6761), t6762), t6763)
-  relative_boundary_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s\n        ==> s DIFF relative_interior s = UNIONS {f | f facet_of s}"), t6764))
+  relative_boundary_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s\n        ==> s DIFF relative_interior s = UNIONS {f | f facet_of s}"), t6764))
 }
 
 ///|
@@ -12129,7 +12129,7 @@ pub fn relative_boundary_of_polyhedron() -> @kernel.Thm {
 fn step_270() -> Unit raise {
   let t6765 = @simp.rewrite_tac(@list.List([relative_boundary_of_polyhedron()]))
   let t6766 = @tactics.then_tac(@simp.simp_tac(@list.List([@convex.relative_frontier(), polyhedron_imp_closed(), @topology.closure_closed()])), t6765)
-  relative_frontier_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s ==> relative_frontier s = UNIONS {f | f facet_of s}"), t6766))
+  relative_frontier_of_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s ==> relative_frontier s = UNIONS {f | f facet_of s}"), t6766))
 }
 
 ///|
@@ -12145,7 +12145,7 @@ pub fn relative_frontier_of_polyhedron() -> @kernel.Thm {
 /// RELATIVE_FRONTIER_OF_POLYHEDRON_ALT
 fn step_271() -> Unit raise {
   let t6767 = @simp.asm_simp_tac(@list.List([relative_frontier_of_convex_closed(), polyhedron_imp_closed(), polyhedron_imp_convex()]))
-  relative_frontier_of_polyhedron_alt_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}"), t6767))
+  relative_frontier_of_polyhedron_alt_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}"), t6767))
 }
 
 ///|
@@ -12299,7 +12299,7 @@ fn step_272() -> Unit raise {
   let t6772 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@convex.affine_hull_empty(), @sets.inter_empty(), @sets.psubset_irrefl()])), t6769), t6770), t6771), @tactics.strip_tac])
   let t6768 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t6883 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6768), t6772), t6776), t6779), t6783), t6789), t6793), t6797), @tactics.ants_tac), t6803), t6804), t6805), t6806), @tactics.disch_tac), t6813), @tactics.ants_tac), t6815), t6822), t6823), @tactics.strip_tac), t6825), t6826), @tactics.ants_tac), t6833), t6834), t6835), t6836), t6843), t6847), t6848), t6852), @tactics.ants_tac), t6857), t6858), t6859), t6860), t6861), t6868), t6869), t6871), t6875), t6878), t6879), t6880), t6881), t6882)
-  facets_of_polyhedron_explicit_distinct_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (!h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> !h1 h2. h1 IN f /\\ h2 IN f /\\\n                    s INTER {x | a h1 dot x = b h1} =\n                    s INTER {x | a h2 dot x = b h2}\n                    ==> h1 = h2"), t6883))
+  facets_of_polyhedron_explicit_distinct_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall h1 h2. h1 IN f /\\ h2 IN f /\\\n                    s INTER {x | a h1 dot x = b h1} =\n                    s INTER {x | a h2 dot x = b h2}\n                    ==> h1 = h2"), t6883))
 }
 
 ///|
@@ -12348,10 +12348,10 @@ fn step_273() -> Unit raise {
     })(t6891(x6892))
   })
   let t6886 = @list.List([@meson.asm_meson_tac(@list.List([@sets.subset_refl()])), @tactics.all_tac])
-  let t6885 = @class.asm_cases_tac(@parser.parse_term("!f'. f' PSUBSET f\n         ==> (s:real^N->bool) PSUBSET affine hull s INTER INTERS f'"))
+  let t6885 = @class.asm_cases_tac(@parser.parse_term("forall f'. f' PSUBSET f\n         ==> (s:real^N->bool) PSUBSET affine hull s INTER INTERS f'"))
   let t6884 = @wf.wf_induct_tac(@parser.parse_term("CARD(f:(real^N->bool)->bool)"))
   let t6914 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6884), @tactics.strip_tac), t6885), t6886), t6893), t6894), t6895), @tactics.strip_tac), t6902), t6903), @tactics.ants_tac), t6913)
-  polyhedron_minimal_lemma_c.set(@tactics.prove(@parser.parse_term("!f s:real^N->bool.\n        FINITE f /\\\n        affine hull s INTER INTERS f = s\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\\n                 affine hull s INTER INTERS f' = s /\\\n                 (!f''. f'' PSUBSET f'\n                        ==> s PSUBSET affine hull s INTER INTERS f'')"), t6914))
+  polyhedron_minimal_lemma_c.set(@tactics.prove(@parser.parse_term("forall f s:real^N->bool.\n        FINITE f /\\\n        affine hull s INTER INTERS f = s\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\\n                 affine hull s INTER INTERS f' = s /\\\n                 (forall f''. f'' PSUBSET f'\n                        ==> s PSUBSET affine hull s INTER INTERS f'')"), t6914))
 }
 
 ///|
@@ -12389,7 +12389,7 @@ fn step_274() -> Unit raise {
   let t6916 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:(real^N->bool)->bool"), t6915]), polyhedron_minimal_lemma()))
   let t6934 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("f:(real^N->bool)->bool"))(@tactics.strip_assume_tac)), t6916), @tactics.ants_tac), t6926), t6933])
   let t6935 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polyhedron()]))), @tactics.eq_tac), t6934)
-  polyhedron_v1_c.set(@tactics.prove(@parser.parse_term("!s. polyhedron s <=>\n        ?f. FINITE f /\\\n            affine hull s INTER INTERS f = s /\\\n            (!f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f') /\\\n            (!h. h IN f\n                 ==> (?a:real^N b. ~(a = vec 0) /\\ h = {x | a dot x <= b}))"), t6935))
+  polyhedron_v1_c.set(@tactics.prove(@parser.parse_term("forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            affine hull s INTER INTERS f = s /\\\n            (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f') /\\\n            (forall h. h IN f\n                 ==> (?a:real^N b. ~(a = vec 0) /\\ h = {x | a dot x <= b}))"), t6935))
 }
 
 ///|
@@ -12548,7 +12548,7 @@ fn step_275() -> Unit raise {
   let t6980 = @tactics.x_gen_tac(@parser.parse_term("p:real^N"))
   let t6979 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inter(), @sets.in_inters(), @sets.forall_in_gspec()]))
   let t6978 = @simp.asm_rewrite_tac(@list.List([@sets.forall_in_gspec()]))
-  let t6977 = @simp.rewrite_tac(@list.List([@sets.subset_inter(), @misc.hull_subset(), @sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> !h. h IN f ==> s SUBSET h"))]))
+  let t6977 = @simp.rewrite_tac(@list.List([@sets.subset_inter(), @misc.hull_subset(), @sets.set_rule(@parser.parse_term("s SUBSET INTERS f <=> forall h. h IN f ==> s SUBSET h"))]))
   let t6976 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t6974 = @simp.asm_simp_tac(@list.List([@sets.finite_image(), @sets.forall_in_image(), polyhedron_halfspace_le()]))
   let t6973 = @simp.once_rewrite_tac(@list.List([@sets.simple_image()]))
@@ -12583,7 +12583,7 @@ fn step_275() -> Unit raise {
   let t6952 = @meson.meson_tac(@list.List([]))
   let t6951 = @simp.rewrite_tac(@list.List([exposed_face_of_v1(), @sets.in_elim_thm()]))
   let t6953 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("f"), t6951), t6952), @tactics.all_tac])
-  let t6950 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool.\n        h IN f\n        ==> h face_of s /\\\n            ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  h = s INTER {x | a dot x = b}"), fn(x6947 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6950 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool.\n        h IN f\n        ==> h face_of s /\\\n            ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  h = s INTER {x | a dot x = b}"), fn(x6947 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6948 = @tactics.mp_tac(x6947)
     fn(x6949 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6948(x6949)
@@ -12603,7 +12603,7 @@ fn step_275() -> Unit raise {
   let t6937 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t6936 = @simp.asm_simp_tac(@list.List([polyhedron_imp_closed(), polyhedron_imp_convex(), finite_polyhedron_exposed_faces()]))
   let t7102 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), @tactics.strip_tac), t6936), t6937), t6938), t6939), t6943), t6946), t6950), t6953), t6954), t6961), t6965), t6966), t6970), t6975), t6976), t6977), t6978), t6979), t6980), t6981), @tactics.disch_tac), t6982), @tactics.disch_tac), t6986), t6994), t6998), t7042), t7043), t7044), t7065), t7069), t7073), t7074), t7085), t7086), t7092), t7093), t7097), t7100), t7101)
-  polyhedron_eq_finite_exposed_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n    polyhedron s <=> closed s /\\ convex s /\\ FINITE {f | f exposed_face_of s}"), t7102))
+  polyhedron_eq_finite_exposed_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n    polyhedron s <=> closed s /\\ convex s /\\ FINITE {f | f exposed_face_of s}"), t7102))
 }
 
 ///|
@@ -12626,7 +12626,7 @@ fn step_276() -> Unit raise {
   let t7104 = @simp.rewrite_tac(@list.List([polyhedron_eq_finite_exposed_faces()]))
   let t7103 = @simp.asm_simp_tac(@list.List([polyhedron_imp_closed(), polyhedron_imp_convex(), finite_polyhedron_faces()]))
   let t7110 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), @tactics.strip_tac), t7103), t7104), t7105), t7106), t7107), t7108), t7109)
-  polyhedron_eq_finite_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s <=>\n        closed s /\\ convex s /\\ FINITE {f | f face_of s}"), t7110))
+  polyhedron_eq_finite_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s <=>\n        closed s /\\ convex s /\\ FINITE {f | f face_of s}"), t7110))
 }
 
 ///|
@@ -12642,7 +12642,7 @@ pub fn polyhedron_eq_finite_faces() -> @kernel.Thm {
 /// POLYHEDRON_TRANSLATION_EQ
 fn step_277() -> Unit raise {
   let t7129 = @simp.rewrite_tac(@list.List([@sets.injective_image()]))
-  let t7128 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x y. Q x y ==> R x y) ==> (!x y. P x /\\ P y /\\ Q x y ==> R x y)")))
+  let t7128 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. Q x y ==> R x y) ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)")))
   let t7127 = @tactics.match_mp_tac(@sets.finite_image_inj_eq())
   let t7126 = @simp.rewrite_tac(@list.List([face_of_translation_eq()]))
   let t7125 = @tactics.disch_then(fn(x7116 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -12667,7 +12667,7 @@ fn step_277() -> Unit raise {
   let t7112 = @simp.rewrite_tac(@list.List([@topology.closed_translation_eq()]))
   let t7111 = @simp.rewrite_tac(@list.List([polyhedron_eq_finite_faces()]))
   let t7130 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7111), t7112), @tactics.ap_term_tac), t7113), @tactics.ap_term_tac), t7114), t7115), t7125), t7126), t7127), t7128), t7129), @vectors.vector_arith_tac)
-  polyhedron_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a s. polyhedron (IMAGE (\\x:real^N. a + x) s) <=> polyhedron s"), t7130))
+  polyhedron_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a s. polyhedron (IMAGE (\\x:real^N. a + x) s) <=> polyhedron s"), t7130))
 }
 
 ///|
@@ -12726,7 +12726,7 @@ fn step_279() -> Unit raise {
   let t7132 = @list.List([@meson.asm_meson_tac(@list.List([@topology.closed_injective_linear_image_eq()])), @tactics.all_tac])
   let t7131 = @simp.rewrite_tac(@list.List([polyhedron_eq_finite_faces()]))
   let t7158 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7131), @tactics.binop_tac), t7132), @tactics.binop_tac), t7133), t7134), t7135), t7145), t7146), t7147), @tactics.disch_tac), t7148), t7149), t7156), t7157)
-  polyhedron_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n        ==> (polyhedron (IMAGE f s) <=> polyhedron s)"), t7158))
+  polyhedron_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (polyhedron (IMAGE f s) <=> polyhedron s)"), t7158))
 }
 
 ///|
@@ -12752,7 +12752,7 @@ fn step_281() -> Unit raise {
   let t7160 = @tactics.match_mp_tac(polyhedron_linear_image_eq())
   let t7159 = @tactics.conv_tac(@equal.sym_conv)
   let t7163 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@theorems.eq_imp())), t7159), t7160), t7161), t7162), @vectors.vector_arith_tac)
-  polyhedron_negations_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polyhedron s ==> polyhedron(IMAGE (--) s)"), t7163))
+  polyhedron_negations_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polyhedron s ==> polyhedron(IMAGE (--) s)"), t7163))
 }
 
 ///|
@@ -12810,7 +12810,7 @@ fn step_282() -> Unit raise {
     })(x7172))
   }, @list.List([polyhedron()]))
   let t7195 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7173), @tactics.strip_tac), t7177), t7178), t7179), t7180), t7181), @tactics.disch_tac), t7188), t7189), @tactics.strip_tac), t7190), t7193), t7194)
-  polyhedron_linear_preimage_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron {x | f x IN s}"), t7195))
+  polyhedron_linear_preimage_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron {x | f x IN s}"), t7195))
 }
 
 ///|
@@ -12832,7 +12832,7 @@ fn step_283() -> Unit raise {
   let t7200 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.rewrite_tac(@list.List([polytope()]))), t7196), t7197), t7198), t7199)
   let t7201 = @list.List([@simp.simp_tac(@list.List([finite_polytope_faces(), polyhedron_eq_finite_faces(), polytope_imp_closed(), polytope_imp_convex(), polytope_imp_bounded()])), t7200])
   let t7202 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t7201)
-  polytope_eq_bounded_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s <=> polyhedron s /\\ bounded s"), t7202))
+  polytope_eq_bounded_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s <=> polyhedron s /\\ bounded s"), t7202))
 }
 
 ///|
@@ -12848,7 +12848,7 @@ pub fn polytope_eq_bounded_polyhedron() -> @kernel.Thm {
 /// POLYTOPE_INTER
 fn step_284() -> Unit raise {
   let t7203 = @simp.simp_tac(@list.List([polytope_eq_bounded_polyhedron(), polyhedron_inter(), @topology.bounded_inter()]))
-  polytope_inter_c.set(@tactics.prove(@parser.parse_term("!s t. polytope s /\\ polytope t ==> polytope(s INTER t)"), t7203))
+  polytope_inter_c.set(@tactics.prove(@parser.parse_term("forall s t. polytope s /\\ polytope t ==> polytope(s INTER t)"), t7203))
 }
 
 ///|
@@ -12865,7 +12865,7 @@ pub fn polytope_inter() -> @kernel.Thm {
 fn step_285() -> Unit raise {
   let t7204 = @meson.meson_tac(@list.List([@topology.bounded_subset(), @sets.inter_subset()]))
   let t7205 = @tactics.then_tac(@simp.simp_tac(@list.List([polytope_eq_bounded_polyhedron(), polyhedron_inter()])), t7204)
-  polytope_inter_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool. polytope s /\\ polyhedron t ==> polytope(s INTER t)"), t7205))
+  polytope_inter_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool. polytope s /\\ polyhedron t ==> polytope(s INTER t)"), t7205))
 }
 
 ///|
@@ -12882,7 +12882,7 @@ pub fn polytope_inter_polyhedron() -> @kernel.Thm {
 fn step_286() -> Unit raise {
   let t7206 = @meson.meson_tac(@list.List([@topology.bounded_subset(), @sets.inter_subset()]))
   let t7207 = @tactics.then_tac(@simp.simp_tac(@list.List([polytope_eq_bounded_polyhedron(), polyhedron_inter()])), t7206)
-  polyhedron_inter_polytope_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool. polyhedron s /\\ polytope t ==> polytope(s INTER t)"), t7207))
+  polyhedron_inter_polytope_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool. polyhedron s /\\ polytope t ==> polytope(s INTER t)"), t7207))
 }
 
 ///|
@@ -12898,7 +12898,7 @@ pub fn polyhedron_inter_polytope() -> @kernel.Thm {
 /// POLYTOPE_IMP_POLYHEDRON
 fn step_287() -> Unit raise {
   let t7208 = @simp.simp_tac(@list.List([polytope_eq_bounded_polyhedron()]))
-  polytope_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("!p. polytope p ==> polyhedron p"), t7208))
+  polytope_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall p. polytope p ==> polyhedron p"), t7208))
 }
 
 ///|
@@ -12925,7 +12925,7 @@ fn step_288() -> Unit raise {
   let t7210 = @tactics.conv_tac(@int.int_reduce_conv)
   let t7209 = @simp.asm_rewrite_tac(@list.List([@convex.aff_dim_empty()]))
   let t7221 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("p:real^N->bool = {}"))), t7209), t7210), @tactics.strip_tac), t7211), t7212), t7215), t7217), @tactics.ants_tac), t7218), t7219), t7220)
-  polytope_facet_exists_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool. polytope p /\\ &0 < aff_dim p ==> ?f. f facet_of p"), t7221))
+  polytope_facet_exists_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool. polytope p /\\ &0 < aff_dim p ==> ?f. f facet_of p"), t7221))
 }
 
 ///|
@@ -12941,7 +12941,7 @@ pub fn polytope_facet_exists() -> @kernel.Thm {
 /// POLYHEDRON_INTERVAL
 fn step_289() -> Unit raise {
   let t7222 = @meson.meson_tac(@list.List([polytope_imp_polyhedron(), polytope_interval()]))
-  polyhedron_interval_c.set(@tactics.prove(@parser.parse_term("!a b. polyhedron(interval[a,b])"), t7222))
+  polyhedron_interval_c.set(@tactics.prove(@parser.parse_term("forall a b. polyhedron(interval[a,b])"), t7222))
 }
 
 ///|
@@ -12957,7 +12957,7 @@ pub fn polyhedron_interval() -> @kernel.Thm {
 /// POLYHEDRON_CONVEX_HULL
 fn step_290() -> Unit raise {
   let t7223 = @simp.simp_tac(@list.List([polytope_convex_hull(), polytope_imp_polyhedron()]))
-  polyhedron_convex_hull_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s ==> polyhedron(convex hull s)"), t7223))
+  polyhedron_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> polyhedron(convex hull s)"), t7223))
 }
 
 ///|
@@ -13071,7 +13071,7 @@ fn step_291() -> Unit raise {
   let t7334 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t7346 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@convex.convex_hull_2(), @vectors.vector_mul_rzero(), @vectors.vector_add_lid()])), t7334), t7339), t7340), t7341), t7342), t7343), t7344), t7345)])
   let t7333 = @tactics.exists_tac(@parser.parse_term("convex hull {vec 0:real^N,u % t % v}"))
-  let t7332 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!t. t SUBSET s /\\ x IN t ==> x IN s")))
+  let t7332 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall t. t SUBSET s /\\ x IN t ==> x IN s")))
   let t7330 = @simp.asm_rewrite_tac(@list.List([@real.real_lt_inv_eq()]))
   let t7329 = @simp.rewrite_tac(@list.List([@real.real_not_le()]))
   let t7328 = @tactics.undisch_tac(@parser.parse_term("inv t <= &0"))
@@ -13208,7 +13208,7 @@ fn step_291() -> Unit raise {
   let t7225 = @tactics.x_gen_tac(@parser.parse_term("a:real^N"))
   let t7224 = @simp.rewrite_tac(@list.List([]))
   let t7414 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_prove_cases()), t7224), t7225), t7226), t7227), t7228), t7229), t7231), t7232), t7234), t7235), @tactics.disch_tac), t7236), @tactics.strip_tac), t7240), t7241), @tactics.conj_tac), t7256), t7257), t7258), @tactics.disch_tac), t7259), t7264), t7265), t7283), t7287), t7288), t7290), @tactics.ants_tac), t7308), t7312), t7315), t7321), t7322), t7331), t7332), t7333), @tactics.conj_tac), t7346), t7350), t7364), t7365), t7373), t7374), t7375), t7379), t7384), t7391), t7392), t7393), t7394), t7395), t7413)
-  polytope_union_convex_hull_facets_c.set(@tactics.prove(@parser.parse_term("!s p:real^N->bool.\n        polytope p /\\ &0 < aff_dim p /\\ ~(s = {}) /\\ s SUBSET p\n        ==> p = UNIONS { convex hull (s UNION f) | f facet_of p}"), t7414))
+  polytope_union_convex_hull_facets_c.set(@tactics.prove(@parser.parse_term("forall s p:real^N->bool.\n        polytope p /\\ &0 < aff_dim p /\\ ~(s = {}) /\\ s SUBSET p\n        ==> p = UNIONS { convex hull (s UNION f) | f facet_of p}"), t7414))
 }
 
 ///|
@@ -13261,7 +13261,7 @@ fn step_292() -> Unit raise {
   let t7592 = @simp.rewrite_tac(@list.List([@convex.convex_convex_cone_hull()]))
   let t7622 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.hull_minimal()), t7592), t7593), t7621])
   let t7591 = @tactics.exists_tac(@parser.parse_term("convex hull ((vec 0:real^N) INSERT s)"))
-  let t7590 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!s t. s SUBSET t /\\ x IN s ==> x IN t")))
+  let t7590 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall s t. s SUBSET t /\\ x IN s ==> x IN t")))
   let t7589 = @simp.asm_simp_tac(@list.List([@real.real_le_inv_eq(), @sets.real_le_inf_finite(), @sets.finite_image(), @sets.image_eq_empty(), @realarith.real_lt_imp_le(), @sets.forall_in_image()]))
   let t7588 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@convex.conic()]))(@convex.conic_convex_cone_hull()))
   let t7586 = @simp.asm_simp_tac(@list.List([@sets.forall_in_image()]))
@@ -13368,7 +13368,7 @@ fn step_292() -> Unit raise {
   let t7510 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("&1")), t7509), @tactics.all_tac])
   let t7508 = @class.asm_cases_tac(@parser.parse_term("(b:(real^N->bool)->real) h = &0"))
   let t7571 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("h:real^N->bool")), @tactics.disch_tac), t7508), t7510), t7514), t7550), t7554), t7570), @tactics.all_tac])
-  let t7507 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool. h IN f ==> ?t. &0 < t /\\ (t % x) IN h"), fn(x7504 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7507 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool. h IN f ==> ?t. &0 < t /\\ (t % x) IN h"), fn(x7504 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7505 = @tactics.mp_tac(x7504)
     fn(x7506 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7505(x7506)
@@ -13487,7 +13487,7 @@ fn step_292() -> Unit raise {
   let t7415 = @simp.asm_simp_tac(@list.List([polytope_imp_polyhedron(), polytope_sing()]))
   let t7416 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@convex.convex_cone_hull_empty()])), t7415), @tactics.all_tac])
   let t7623 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))), @tactics.disch_tac), t7416), t7420), t7433), t7437), t7458), t7459), t7460), @tactics.conj_tac), t7476), t7477), @tactics.conj_tac), t7501), t7502), t7503), @tactics.disch_tac), t7507), t7571), t7572), t7573), @tactics.disch_tac), t7577), t7587), t7588), t7589), t7590), t7591), @tactics.conj_tac), t7622)
-  polyhedron_convex_cone_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. FINITE s ==> polyhedron(convex_cone hull s)"), t7623))
+  polyhedron_convex_cone_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. FINITE s ==> polyhedron(convex_cone hull s)"), t7623))
 }
 
 ///|
@@ -13503,7 +13503,7 @@ pub fn polyhedron_convex_cone_hull() -> @kernel.Thm {
 /// CLOSED_CONVEX_CONE_HULL
 fn step_293() -> Unit raise {
   let t7624 = @meson.meson_tac(@list.List([polyhedron_imp_closed(), polyhedron_convex_cone_hull()]))
-  closed_convex_cone_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. FINITE s ==> closed(convex_cone hull s)"), t7624))
+  closed_convex_cone_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. FINITE s ==> closed(convex_cone hull s)"), t7624))
 }
 
 ///|
@@ -13525,7 +13525,7 @@ fn step_294() -> Unit raise {
   let t7626 = @class.asm_cases_tac(@parser.parse_term("c:real^N->bool = {}"))
   let t7625 = @tactics.x_gen_tac(@parser.parse_term("c:real^N->bool"))
   let t7631 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polytope(), @theorems.left_imp_exists_thm()]))), t7625), @tactics.strip_tac), t7626), t7627), t7628), t7629), t7630)
-  polyhedron_convex_cone_hull_polytope_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s ==> polyhedron(convex_cone hull s)"), t7631))
+  polyhedron_convex_cone_hull_polytope_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s ==> polyhedron(convex_cone hull s)"), t7631))
 }
 
 ///|
@@ -13546,7 +13546,7 @@ fn step_295() -> Unit raise {
   let t7633 = @class.asm_cases_tac(@parser.parse_term("c:real^N->bool = {}"))
   let t7632 = @tactics.x_gen_tac(@parser.parse_term("c:real^N->bool"))
   let t7637 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([polytope(), @theorems.left_imp_exists_thm()]))), t7632), @tactics.strip_tac), t7633), t7634), t7635), t7636)
-  polyhedron_conic_hull_polytope_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. polytope s ==> polyhedron(conic hull s)"), t7637))
+  polyhedron_conic_hull_polytope_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. polytope s ==> polyhedron(conic hull s)"), t7637))
 }
 
 ///|
@@ -13565,7 +13565,7 @@ fn step_296() -> Unit raise {
   let t7639 = @tactics.match_mp_tac(polyhedron_imp_closed())
   let t7638 = @simp.asm_simp_tac(@list.List([closed_conic_hull()]))
   let t7641 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7638), t7639), t7640)
-  closed_conic_hull_strong_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n    vec 0 IN relative_interior s \\/ polytope s \\/ compact s /\\ ~(vec 0 IN s)\n    ==> closed(conic hull s)"), t7641))
+  closed_conic_hull_strong_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n    vec 0 IN relative_interior s \\/ polytope s \\/ compact s /\\ ~(vec 0 IN s)\n    ==> closed(conic hull s)"), t7641))
 }
 
 ///|
@@ -13597,7 +13597,7 @@ fn step_297() -> Unit raise {
   let t7643 = @simp.asm_rewrite_tac(@list.List([@convex.convex_cone_hull_empty(), @topology.closed_sing()]))
   let t7642 = @class.asm_cases_tac(@parser.parse_term("s:real^N->bool = {}"))
   let t7655 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7642), t7643), t7647), t7648), t7649), t7653), t7654)
-  closed_convex_cone_hull_strong_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        FINITE s \\/\n        polytope s \\/\n        vec 0 IN relative_interior (convex hull s) \\/\n        compact s /\\ ~(vec 0 IN convex hull s)\n        ==> closed(convex_cone hull s)"), t7655))
+  closed_convex_cone_hull_strong_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        FINITE s \\/\n        polytope s \\/\n        vec 0 IN relative_interior (convex hull s) \\/\n        compact s /\\ ~(vec 0 IN convex hull s)\n        ==> closed(convex_cone hull s)"), t7655))
 }
 
 ///|
@@ -13630,7 +13630,7 @@ fn step_298() -> Unit raise {
   })
   let t7708 = @simp.rewrite_tac(@list.List([@convex.convex_hull_subset_convex_cone_hull()]))
   let t7707 = @tactics.exists_tac(@parser.parse_term("convex hull c:real^N->bool"))
-  let t7706 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!s. x IN s /\\ s SUBSET t ==> x IN t")))
+  let t7706 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall s. x IN s /\\ s SUBSET t ==> x IN t")))
   let t7705 = @simp.asm_simp_tac(@list.List([@real.real_le_inv_eq(), @realarith.real_lt_imp_le()]))
   let t7704 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@convex.conic()]))(@convex.conic_convex_cone_hull()))
   let t7703 = @list.List([@simp.asm_simp_tac(@list.List([@vectors.vector_mul_assoc(), @realax.real_mul_linv(), @vectors.vector_mul_lid(), @real.real_lt_imp_nz()])), @tactics.all_tac])
@@ -13690,7 +13690,7 @@ fn step_298() -> Unit raise {
   let t7660 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("interval[--vec 1:real^N,vec 1:real^N]")), t7657), t7658), t7659), @tactics.all_tac])
   let t7656 = @tactics.subgoal_then(@parser.parse_term("?p:real^N->bool. polytope p /\\ vec 0 IN interior p"), @tactics.strip_assume_tac)
   let t7720 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7656), t7660), t7664), t7669), t7670), @tactics.strip_tac), t7671), t7672), @tactics.conj_tac), t7677), t7678), t7679), @tactics.disch_tac), t7680), t7698), t7702), t7703), t7704), t7705), t7706), t7707), t7708), t7713), t7714), t7718), t7719)
-  finitely_generated_conic_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s /\\ conic s /\\ ~(s = {})\n        ==> ?c. FINITE c /\\ s = convex_cone hull c"), t7720))
+  finitely_generated_conic_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s /\\ conic s /\\ ~(s = {})\n        ==> ?c. FINITE c /\\ s = convex_cone hull c"), t7720))
 }
 
 ///|
@@ -13721,7 +13721,7 @@ fn step_299() -> Unit raise {
   let t7722 = @tactics.repeat_tac(@tactics.conj_tac)
   let t7721 = @simp.rewrite_tac(@list.List([polyhedron_eq_finite_exposed_faces()]))
   let t7736 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7721), t7722), t7735)
-  polyhedron_polytope_sums_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    polyhedron s /\\ polytope t ==> polyhedron {x + y | x IN s /\\ y IN t}"), t7736))
+  polyhedron_polytope_sums_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    polyhedron s /\\ polytope t ==> polyhedron {x + y | x IN s /\\ y IN t}"), t7736))
 }
 
 ///|
@@ -13756,7 +13756,7 @@ fn step_300() -> Unit raise {
   let t7915 = @simp.rewrite_tac(@list.List([@convex.convex(), @sets.in_elim_thm()]))
   let t7914 = @simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.drop_eq()), @vectors.drop_vec()]))
   let t7918 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.hull_induct()), t7914), t7915), t7916), t7917), @tactics.all_tac])
-  let t7913 = @tactics.subgoal_then(@parser.parse_term("!y:real^(N,1)finite_sum. y IN convex hull u ==> sndcart y = vec 1"), fn(x7910 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7913 = @tactics.subgoal_then(@parser.parse_term("forall y:real^(N,1)finite_sum. y IN convex hull u ==> sndcart y = vec 1"), fn(x7910 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7911 = ((x7909 : @kernel.Thm) => @tactics.label_tac("*", x7909))(x7910)
     fn(x7912 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7911(x7912)
@@ -13879,7 +13879,7 @@ fn step_300() -> Unit raise {
     }
   })
   let t7817 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t7813), t7815), t7816), @tactics.all_tac])
-  let t7809 = @tactics.subgoal_then(@parser.parse_term("!x:real^(N,1)finite_sum. x IN c ==> &0 <= drop(sndcart x)"), fn(x7806 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7809 = @tactics.subgoal_then(@parser.parse_term("forall x:real^(N,1)finite_sum. x IN c ==> &0 <= drop(sndcart x)"), fn(x7806 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7807 = @tactics.assume_tac(x7806)
     fn(x7808 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7807(x7808)
@@ -13926,8 +13926,8 @@ fn step_300() -> Unit raise {
   let t7772 = @tactics.repeat_tac(@tactics.conj_tac)
   let t7848 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.expand_tac("s'"), t7772), t7798), t7847])
   let t7933 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("s':real^(N,1)finite_sum->bool"), finitely_generated_conic_polyhedron())), @tactics.ants_tac), t7848), t7932])
-  let t7771 = @tactics.subgoal_then(@parser.parse_term("?t u. FINITE t /\\ FINITE u /\\\n          (!y:real^(N,1)finite_sum. y IN t ==> drop(sndcart y) = &0) /\\\n          (!y. y IN u ==> drop(sndcart y) = &1) /\\\n          s' = convex_cone hull (t UNION u)"), @tactics.strip_assume_tac)
-  let t7770 = @simp.abbrev_tac(@parser.parse_term("s':real^(N,1)finite_sum->bool =\n        {x | &0 <= drop(sndcart x) /\\\n             !h:real^N->bool.\n                h IN f ==> a h dot (fstcart x) <= b h * drop(sndcart x)}"))
+  let t7771 = @tactics.subgoal_then(@parser.parse_term("?t u. FINITE t /\\ FINITE u /\\\n          (forall y:real^(N,1)finite_sum. y IN t ==> drop(sndcart y) = &0) /\\\n          (forall y. y IN u ==> drop(sndcart y) = &1) /\\\n          s' = convex_cone hull (t UNION u)"), @tactics.strip_assume_tac)
+  let t7770 = @simp.abbrev_tac(@parser.parse_term("s':real^(N,1)finite_sum->bool =\n        {x | &0 <= drop(sndcart x) /\\\n             forall h:real^N->bool.\n                h IN f ==> a h dot (fstcart x) <= b h * drop(sndcart x)}"))
   let t7769 = @simp.once_rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("h = {x | P x} <=> {x | P x} = h"))]))
   let t7767 = @parser.parse_term("b:(real^N->bool)->real")
   let t7768 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:(real^N->bool)->real^N"), t7767]))
@@ -13976,7 +13976,7 @@ fn step_300() -> Unit raise {
   let t7739 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.asm_rewrite_tac(@list.List([]))), t7737), t7738)
   let t7740 = @list.List([@simp.rewrite_tac(@list.List([polyhedron(), @theorems.left_imp_exists_thm()])), t7739])
   let t7934 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t7740), t7741), t7742), t7749), t7757), t7765), t7766), t7768), t7769), @tactics.disch_tac), t7770), t7771), t7933)
-  polyhedron_as_cone_plus_conv_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s <=> ?t u. FINITE t /\\ FINITE u /\\\n                               s = {x + y | x IN convex_cone hull t /\\\n                                            y IN convex hull u}"), t7934))
+  polyhedron_as_cone_plus_conv_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s <=> ?t u. FINITE t /\\ FINITE u /\\\n                               s = {x + y | x IN convex_cone hull t /\\\n                                            y IN convex hull u}"), t7934))
 }
 
 ///|
@@ -14021,7 +14021,7 @@ fn step_301() -> Unit raise {
     }
   }))
   let t7957 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7941), t7942), t7944), @tactics.strip_tac), t7945), t7946), t7947), t7948), t7949), t7955), t7956)
-  polyhedron_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron(IMAGE f s)"), t7957))
+  polyhedron_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron(IMAGE f s)"), t7957))
 }
 
 ///|
@@ -14052,7 +14052,7 @@ fn step_302() -> Unit raise {
   let t7959 = @simp.rewrite_tac(@list.List([@theorems.left_and_exists_thm(), @theorems.left_imp_exists_thm()]))
   let t7958 = @simp.rewrite_tac(@list.List([polyhedron_as_cone_plus_conv()]))
   let t7973 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7958), t7959), t7960), t7964), @tactics.strip_tac), t7965), t7966), t7967), t7968), t7969), t7970), t7971), t7972)
-  polyhedron_sums_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    polyhedron s /\\ polyhedron t ==> polyhedron {x + y | x IN s /\\ y IN t}"), t7973))
+  polyhedron_sums_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    polyhedron s /\\ polyhedron t ==> polyhedron {x + y | x IN s /\\ y IN t}"), t7973))
 }
 
 ///|
@@ -14180,7 +14180,7 @@ fn step_303() -> Unit raise {
   })
   let t7974 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([polyhedron_convex_cone_hull(), @convex.convex_cone_convex_cone_hull()]))])
   let t8065 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t7974), @tactics.strip_tac), t7981), t7982), t7984), t7985), t7990), t7991), t7992), t7993), @tactics.conj_tac), t8003), t8004), t8005), @tactics.conj_tac), t8006), @tactics.disch_tac), t8014), t8020), t8026), t8030), t8037), t8040), t8041), t8042), @tactics.disch_tac), t8043), @tactics.conj_tac), t8064)
-  polyhedral_convex_cone_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        polyhedron s /\\ convex_cone s <=>\n        ?k. FINITE k /\\ s = convex_cone hull k"), t8065))
+  polyhedral_convex_cone_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        polyhedron s /\\ convex_cone s <=>\n        ?k. FINITE k /\\ s = convex_cone hull k"), t8065))
 }
 
 ///|
@@ -14239,7 +14239,7 @@ fn step_304() -> Unit raise {
   let t8120 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @theorems.conj_assoc()])), @tactics.conj_tac), t8083), t8084), t8085), t8086), t8087), t8088), t8119])
   let t8082 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
   let t8081 = @parser.parse_term("b:real^M")
-  let t8121 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{(A:real^N^M) ** (x:real^N) |\n        !i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}"), t8081]), @convex.separating_hyperplane_closed_point()))), t8082), @tactics.ants_tac), t8120)
+  let t8121 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{(A:real^N^M) ** (x:real^N) |\n        forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}"), t8081]), @convex.separating_hyperplane_closed_point()))), t8082), @tactics.ants_tac), t8120)
   let t8080 = @simp.asm_simp_tac(@list.List([@realax.real_le_mul(), @iterate.in_numseg(), @iterate.finite_numseg()]))
   let t8079 = @tactics.match_mp_tac(@iterate.sum_pos_le())
   let t8078 = @simp.rewrite_tac(@list.List([@vectors.vector_matrix_mul_transp(), @vectors.dot()]))
@@ -14260,7 +14260,7 @@ fn step_304() -> Unit raise {
   let t8122 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8070), t8071), t8072), t8073), t8076), t8077), t8078), t8079), t8080), t8121])
   let t8066 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(q ==> ~p) /\\ (~p ==> q) ==> (p <=> ~q)")))
   let t8123 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8066), @tactics.conj_tac), t8122)
-  farkas_lemma_c.set(@tactics.prove(@parser.parse_term("!A:real^N^M b.\n        (?x:real^N.\n            A ** x = b /\\\n            (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)) <=>\n        ~(?y:real^M.\n            b dot y < &0 /\\\n            (!i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= (transp A ** y)$i))"), t8123))
+  farkas_lemma_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^M b.\n        (?x:real^N.\n            A ** x = b /\\\n            (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)) <=>\n        ~(?y:real^M.\n            b dot y < &0 /\\\n            (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= (transp A ** y)$i))"), t8123))
 }
 
 ///|
@@ -14343,7 +14343,7 @@ fn step_305() -> Unit raise {
   let t8202 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @theorems.conj_assoc()])), @tactics.conj_tac), t8157), t8201])
   let t8144 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
   let t8143 = @parser.parse_term("b:real^M")
-  let t8203 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{(A:real^N^M) ** (x:real^N) + s |x,s|\n        !i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= s$i}"), t8143]), @convex.separating_hyperplane_closed_point())), t8144), @tactics.ants_tac), t8202)
+  let t8203 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{(A:real^N^M) ** (x:real^N) + s |x,s|\n        forall i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= s$i}"), t8143]), @convex.separating_hyperplane_closed_point())), t8144), @tactics.ants_tac), t8202)
   let t8140 = @simp.asm_rewrite_tac(@list.List([@vectors.dot_lzero()]))
   let t8139 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_lmul_matrix())]))
   let t8138 = @simp.gen_rewrite_tac(fn(x8135 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -14369,7 +14369,7 @@ fn step_305() -> Unit raise {
   let t8125 = @tactics.repeat_tac(@tactics.strip_tac)
   let t8124 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("~(p /\\ q) /\\ (~p ==> q) ==> (p <=> ~q)")))
   let t8205 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8124), t8125), t8204)
-  farkas_lemma_alt_c.set(@tactics.prove(@parser.parse_term("!A:real^N^M b.\n        (?x:real^N.\n            (!i. 1 <= i /\\ i <= dimindex(:M) ==> (A ** x)$i <= b$i)) <=>\n        ~(?y:real^M.\n            (!i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= y$i) /\\\n            y ** A = vec 0 /\\ b dot y < &0)"), t8205))
+  farkas_lemma_alt_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^M b.\n        (?x:real^N.\n            (forall i. 1 <= i /\\ i <= dimindex(:M) ==> (A ** x)$i <= b$i)) <=>\n        ~(?y:real^M.\n            (forall i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= y$i) /\\\n            y ** A = vec 0 /\\ b dot y < &0)"), t8205))
 }
 
 ///|
@@ -14471,7 +14471,7 @@ fn step_306() -> Unit raise {
   let t8285 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@convex.convex_sums(), @convex.convex_negations(), polyhedron_imp_convex()])), @tactics.conj_tac), t8216), t8284])
   let t8206 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("{x + y:real^N | x IN s /\\ y IN IMAGE (--) t}"), @convex.separating_hyperplane_closed_0()))
   let t8286 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8206), @tactics.ants_tac), t8285)
-  separating_hyperplane_polyhedra_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n        polyhedron s /\\ polyhedron t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b. ~(a = vec 0) /\\\n                  (!x. x IN s ==> a dot x < b) /\\\n                  (!x. x IN t ==> a dot x > b)"), t8286))
+  separating_hyperplane_polyhedra_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n        polyhedron s /\\ polyhedron t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b. ~(a = vec 0) /\\\n                  (forall x. x IN s ==> a dot x < b) /\\\n                  (forall x. x IN t ==> a dot x > b)"), t8286))
 }
 
 ///|
@@ -14517,7 +14517,7 @@ fn step_307() -> Unit raise {
     })(t8290(x8291))
   })
   let t8312 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8292), t8297), t8311)
-  relative_boundary_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        ~affine_dependent s\n        ==> (convex hull s) DIFF relative_interior(convex hull s) =\n            UNIONS { convex hull (s DELETE a) | a | a IN s}"), t8312))
+  relative_boundary_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        ~affine_dependent s\n        ==> (convex hull s) DIFF relative_interior(convex hull s) =\n            UNIONS { convex hull (s DELETE a) | a | a IN s}"), t8312))
 }
 
 ///|
@@ -14635,7 +14635,7 @@ fn step_308() -> Unit raise {
   let t8314 = @class.asm_cases_tac(@parser.parse_term("affine_dependent(s:real^N->bool)"))
   let t8313 = @tactics.repeat_tac(@tactics.strip_tac)
   let t8400 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size()])), t8313), t8314), t8399)
-  frontier_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        s HAS_SIZE (dimindex(:N) + 1)\n        ==> frontier(convex hull s) =\n               UNIONS { convex hull (s DELETE a) | a | a IN s}"), t8400))
+  frontier_of_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        s HAS_SIZE (dimindex(:N) + 1)\n        ==> frontier(convex hull s) =\n               UNIONS { convex hull (s DELETE a) | a | a IN s}"), t8400))
 }
 
 ///|
@@ -14673,7 +14673,7 @@ fn step_309() -> Unit raise {
   })
   let t8401 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("s UNION t UNION u = t UNION u UNION s"))]))
   let t8418 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8401), t8410), t8411), @tactics.strip_tac), t8412), t8413), t8414), t8415), t8416), t8417)
-  relative_boundary_of_triangle_c.set(@tactics.prove(@parser.parse_term("!a b c:real^N.\n        ~collinear {a,b,c}\n        ==> convex hull {a,b,c} DIFF relative_interior(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8418))
+  relative_boundary_of_triangle_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^N.\n        ~collinear {a,b,c}\n        ==> convex hull {a,b,c} DIFF relative_interior(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8418))
 }
 
 ///|
@@ -14692,7 +14692,7 @@ fn step_310() -> Unit raise {
   let t8420 = @tactics.match_mp_tac(@topology.closure_closed())
   let t8419 = @simp.asm_simp_tac(@list.List([@equal.gsym(relative_boundary_of_triangle()), @convex.relative_frontier()]))
   let t8422 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8419), @tactics.ap_thm_tac), @tactics.ap_term_tac), t8420), t8421)
-  relative_frontier_of_triangle_c.set(@tactics.prove(@parser.parse_term("!a b c:real^N.\n        ~collinear {a,b,c}\n        ==> relative_frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8422))
+  relative_frontier_of_triangle_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^N.\n        ~collinear {a,b,c}\n        ==> relative_frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8422))
 }
 
 ///|
@@ -14737,7 +14737,7 @@ fn step_311() -> Unit raise {
   let t8424 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("s UNION t UNION u = t UNION u UNION s"))]))
   let t8423 = @simp.rewrite_tac(@list.List([@convex.segment_convex_hull()]))
   let t8449 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8423), t8424), t8435), t8439), t8448)
-  frontier_of_triangle_c.set(@tactics.prove(@parser.parse_term("!a b c:real^2.\n        frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8449))
+  frontier_of_triangle_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^2.\n        frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]"), t8449))
 }
 
 ///|
@@ -14759,7 +14759,7 @@ fn step_312() -> Unit raise {
   let t8451 = @tactics.match_mp_tac(@paths.inside_frontier_eq_interior())
   let t8450 = @simp.rewrite_tac(@list.List([@equal.gsym(frontier_of_triangle())]))
   let t8456 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8450), t8451), t8452), t8453), t8454), t8455)
-  inside_of_triangle_c.set(@tactics.prove(@parser.parse_term("!a b c:real^2.\n        inside(segment[a,b] UNION segment[b,c] UNION segment[c,a]) =\n                interior(convex hull {a,b,c})"), t8456))
+  inside_of_triangle_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^2.\n        inside(segment[a,b] UNION segment[b,c] UNION segment[c,a]) =\n                interior(convex hull {a,b,c})"), t8456))
 }
 
 ///|
@@ -14780,7 +14780,7 @@ fn step_313() -> Unit raise {
   let t8458 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("i SUBSET s /\\ c = s ==> i = s DIFF (c DIFF i)")))
   let t8457 = @simp.rewrite_tac(@list.List([@equal.gsym(frontier_of_triangle()), @topology.frontier()]))
   let t8462 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8457), t8458), t8459), t8460), t8461)
-  interior_of_triangle_c.set(@tactics.prove(@parser.parse_term("!a b c:real^2.\n        interior(convex hull {a,b,c}) =\n        (convex hull {a,b,c}) DIFF\n        (segment[a,b] UNION segment[b,c] UNION segment[c,a])"), t8462))
+  interior_of_triangle_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^2.\n        interior(convex hull {a,b,c}) =\n        (convex hull {a,b,c}) DIFF\n        (segment[a,b] UNION segment[b,c] UNION segment[c,a])"), t8462))
 }
 
 ///|
@@ -14857,7 +14857,7 @@ fn step_314() -> Unit raise {
   let t8915 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), @tactics.gen_tac))
   let t8914 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(p ==> q) /\\ (p ==> r) ==> p ==> q /\\ r")))
   let t8919 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8914), @tactics.conj_tac), t8915), t8916), @tactics.disch_tac), t8917), t8918), @tactics.all_tac])
-  let t8913 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!a1 a2 a3. P a1 a2 a3 ==> P a2 a1 a3 /\\ P a3 a1 a2) /\\\n    (!a1 a2 a3. Q a1 a2 a3 ==> ~(P a1 a2 a3))\n    ==> !a3 a2 a1. P a1 a2 a3\n                   ==> ~(Q a1 a2 a3 \\/ Q a2 a1 a3 \\/ Q a3 a1 a2)")))
+  let t8913 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall a1 a2 a3. P a1 a2 a3 ==> P a2 a1 a3 /\\ P a3 a1 a2) /\\\n    (forall a1 a2 a3. Q a1 a2 a3 ==> ~(P a1 a2 a3))\n    ==> forall a3 a2 a1. P a1 a2 a3\n                   ==> ~(Q a1 a2 a3 \\/ Q a2 a1 a3 \\/ Q a3 a1 a2)")))
   let t8912 = @simp.rewrite_tac(@list.List([@theorems.left_forall_imp_thm()]))
   let t8904 = @tactics.pop_assum_list(fn(x8903 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x8901 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -15015,7 +15015,7 @@ fn step_314() -> Unit raise {
   let t8785 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
   let t8784 = @tactics.subgoal_then(@parser.parse_term("?z:real^N. z IN r"), @tactics.choose_tac)
   let t8783 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t8782 = @tactics.subgoal_then(@parser.parse_term("!x. x IN r ==> (a h1) dot (x:real^N) = b h1 /\\\n                   (a h2) dot x = b h2 /\\\n                   (a (h3:real^N->bool)) dot x = b h3"), fn(x8779 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8782 = @tactics.subgoal_then(@parser.parse_term("forall x. x IN r ==> (a h1) dot (x:real^N) = b h1 /\\\n                   (a h2) dot x = b h2 /\\\n                   (a (h3:real^N->bool)) dot x = b h3"), fn(x8779 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8780 = @tactics.mp_tac(x8779)
     fn(x8781 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8780(x8781)
@@ -15437,7 +15437,7 @@ fn step_314() -> Unit raise {
       }, @lib.subtract(fv, av).concat(av))
     })(x8911)(x8911)
   }), t8912), t8913), @tactics.conj_tac), t8919), t8920), t8923), t8924), t8925), t8926), t8938), t8939), t8951), @tactics.strip_tac), t8952), t8972)
-  polyhedron_ridge_two_facets_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool r.\n    polyhedron p /\\ r face_of p /\\ ~(r = {}) /\\ aff_dim r = aff_dim p - &2\n    ==> ?f1 f2. f1 face_of p /\\ aff_dim f1 = aff_dim p - &1 /\\\n                f2 face_of p /\\ aff_dim f2 = aff_dim p - &1 /\\\n                 ~(f1 = f2) /\\ r SUBSET f1 /\\ r SUBSET f2 /\\ f1 INTER f2 = r /\\\n                !f. f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f\n                    ==> f = f1 \\/ f = f2"), t8973))
+  polyhedron_ridge_two_facets_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool r.\n    polyhedron p /\\ r face_of p /\\ ~(r = {}) /\\ aff_dim r = aff_dim p - &2\n    ==> ?f1 f2. f1 face_of p /\\ aff_dim f1 = aff_dim p - &1 /\\\n                f2 face_of p /\\ aff_dim f2 = aff_dim p - &1 /\\\n                 ~(f1 = f2) /\\ r SUBSET f1 /\\ r SUBSET f2 /\\ f1 INTER f2 = r /\\\n                forall f. f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f\n                    ==> f = f1 \\/ f = f2"), t8973))
 }
 
 ///|
@@ -15460,7 +15460,7 @@ fn step_315() -> Unit raise {
   let t8975 = @tactics.exists_tac(@parser.parse_term("aff_dim(convex hull {v:real^N | v extreme_point_of p}) + &1"))
   let t8974 = @tactics.match_mp_tac(@int.int_le_trans())
   let t8981 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8974), t8975), @tactics.conj_tac), t8980)
-  polytope_vertex_lower_bound_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool.\n        polytope p ==> aff_dim p + &1 <= &(CARD {v | v extreme_point_of p})"), t8981))
+  polytope_vertex_lower_bound_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool.\n        polytope p ==> aff_dim p + &1 <= &(CARD {v | v extreme_point_of p})"), t8981))
 }
 
 ///|
@@ -15709,7 +15709,7 @@ fn step_316() -> Unit raise {
   let t9037 = @simp.rewrite_tac(@list.List([@sets.in_inter(), @sets.in_inters()]))
   let t9036 = @simp.expand_tac("p")
   let t9066 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("(vec 0:real^N) IN p")), t9036), t9037), t9042), t9043), t9044), t9045), t9046), t9053), t9054), t9064), t9065), @tactics.all_tac])
-  let t9035 = @tactics.subgoal_then(@parser.parse_term("!h:real^N->bool. h IN H ==> &0 <= b h"), fn(x9032 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t9035 = @tactics.subgoal_then(@parser.parse_term("forall h:real^N->bool. h IN H ==> &0 <= b h"), fn(x9032 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s9033 = @tactics.assume_tac(x9032)
     fn(x9034 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s9033(x9034)
@@ -15778,7 +15778,7 @@ fn step_316() -> Unit raise {
   let t8983 = @tactics.conv_tac(@int.int_reduce_conv)
   let t8982 = @simp.asm_simp_tac(@list.List([@convex.aff_dim_empty(), facet_of_empty(), @sets.empty_gspec(), @sets.card_clauses()]))
   let t9222 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("p:real^N->bool = {}"))), t8982), t8983), @tactics.strip_tac), t8986), t8993), t8997), t9005), t9006), t9007), t9008), t9009), t9010), t9011), t9012), t9013), @tactics.disch_tac), t9014), t9015), t9016), t9017), t9018), t9021), t9022), t9023), t9024), @tactics.strip_tac), t9028), t9029), t9031), t9035), t9066), t9067), t9068), @tactics.conj_tac), t9221)
-  polytope_facet_lower_bound_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool.\n        polytope p /\\ ~(aff_dim p = &0)\n        ==> aff_dim p + &1 <= &(CARD {f | f facet_of p})"), t9222))
+  polytope_facet_lower_bound_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool.\n        polytope p /\\ ~(aff_dim p = &0)\n        ==> aff_dim p + &1 <= &(CARD {f | f facet_of p})"), t9222))
 }
 
 ///|
@@ -15816,7 +15816,7 @@ pub fn simplex() -> @kernel.Thm {
 fn step_319() -> Unit raise {
   let t9223 = @simp.once_rewrite_tac(@list.List([@meson.meson(@list.List([@sets.has_size(), @convex.affine_independent_imp_finite()]), @parser.parse_term("~affine_dependent c /\\ P(CARD c) <=>\n    ~affine_dependent c /\\ ?n. c HAS_SIZE n /\\ P n"))]))
   let t9225 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([simplex()])), t9223), (x9224 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x9224))
-  simplex_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a:real^N s n. n simplex (IMAGE (\\x. a + x) s) <=> n simplex s"), t9225))
+  simplex_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a:real^N s n. n simplex (IMAGE (\\x. a + x) s) <=> n simplex s"), t9225))
 }
 
 ///|
@@ -15862,11 +15862,11 @@ fn step_321() -> Unit raise {
     }
   }), t9233), t9238), t9239), t9247])
   let t9229 = @tactics.exists_tac(@parser.parse_term("IMAGE (f:real^M->real^N)"))
-  let t9228 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("!f. (!a. P(f a) <=> Q a) /\\ (!b. P b ==> ?a. b = f a)\n        ==> ((?b. P b) <=> (?a. Q a))")))
+  let t9228 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall f. (forall a. P(f a) <=> Q a) /\\ (forall b. P b ==> ?a. b = f a)\n        ==> ((?b. P b) <=> (?a. Q a))")))
   let t9227 = @simp.once_rewrite_tac(@list.List([@meson.meson(@list.List([@sets.has_size(), @convex.affine_independent_imp_finite()]), @parser.parse_term("~affine_dependent c /\\ P(CARD c) <=>\n    ~affine_dependent c /\\ ?n. c HAS_SIZE n /\\ P n"))]))
   let t9226 = @simp.rewrite_tac(@list.List([simplex()]))
   let t9249 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t9226), t9227), t9228), t9229), @tactics.conj_tac), t9248)
-  simplex_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N s n.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (n simplex (IMAGE f s) <=> n simplex s)"), t9249))
+  simplex_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N s n.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (n simplex (IMAGE f s) <=> n simplex s)"), t9249))
 }
 
 ///|
@@ -15906,7 +15906,7 @@ pub fn simplex_v1() -> @kernel.Thm {
 fn step_324() -> Unit raise {
   let t9252 = @meson.meson_tac(@list.List([]))
   let t9253 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplex()])), t9252)
-  simplex_convex_hull_c.set(@tactics.prove(@parser.parse_term("!c:real^N->bool n.\n    ~affine_dependent c /\\ &(CARD c) = n + &1 ==> n simplex (convex hull c)"), t9253))
+  simplex_convex_hull_c.set(@tactics.prove(@parser.parse_term("forall c:real^N->bool n.\n    ~affine_dependent c /\\ &(CARD c) = n + &1 ==> n simplex (convex hull c)"), t9253))
 }
 
 ///|
@@ -15923,7 +15923,7 @@ pub fn simplex_convex_hull() -> @kernel.Thm {
 fn step_325() -> Unit raise {
   let t9254 = @meson.meson_tac(@list.List([@convex.affine_independent_imp_finite()]))
   let t9255 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplex(), polytope()])), t9254)
-  simplex_imp_polytope_c.set(@tactics.prove(@parser.parse_term("!n s. n simplex s ==> polytope s"), t9255))
+  simplex_imp_polytope_c.set(@tactics.prove(@parser.parse_term("forall n s. n simplex s ==> polytope s"), t9255))
 }
 
 ///|
@@ -15939,7 +15939,7 @@ pub fn simplex_imp_polytope() -> @kernel.Thm {
 /// SIMPLEX_IMP_POLYHEDRON
 fn step_326() -> Unit raise {
   let t9256 = @meson.meson_tac(@list.List([simplex_imp_polytope(), polytope_imp_polyhedron()]))
-  simplex_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("!s n. n simplex s ==> polyhedron s"), t9256))
+  simplex_imp_polyhedron_c.set(@tactics.prove(@parser.parse_term("forall s n. n simplex s ==> polyhedron s"), t9256))
 }
 
 ///|
@@ -15955,7 +15955,7 @@ pub fn simplex_imp_polyhedron() -> @kernel.Thm {
 /// SIMPLEX_IMP_CONVEX
 fn step_327() -> Unit raise {
   let t9257 = @meson.meson_tac(@list.List([simplex_imp_polytope(), polytope_imp_convex()]))
-  simplex_imp_convex_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool n. n simplex s ==> convex s"), t9257))
+  simplex_imp_convex_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool n. n simplex s ==> convex s"), t9257))
 }
 
 ///|
@@ -15971,7 +15971,7 @@ pub fn simplex_imp_convex() -> @kernel.Thm {
 /// SIMPLEX_IMP_COMPACT
 fn step_328() -> Unit raise {
   let t9258 = @meson.meson_tac(@list.List([simplex_imp_polytope(), polytope_imp_compact()]))
-  simplex_imp_compact_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool n. n simplex s ==> compact s"), t9258))
+  simplex_imp_compact_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool n. n simplex s ==> compact s"), t9258))
 }
 
 ///|
@@ -15987,7 +15987,7 @@ pub fn simplex_imp_compact() -> @kernel.Thm {
 /// SIMPLEX_IMP_CLOSED
 fn step_329() -> Unit raise {
   let t9259 = @meson.meson_tac(@list.List([simplex_imp_polytope(), polytope_imp_closed()]))
-  simplex_imp_closed_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool n. n simplex s ==> closed s"), t9259))
+  simplex_imp_closed_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool n. n simplex s ==> closed s"), t9259))
 }
 
 ///|
@@ -16003,7 +16003,7 @@ pub fn simplex_imp_closed() -> @kernel.Thm {
 /// SIMPLEX_DIM_GE
 fn step_330() -> Unit raise {
   let t9260 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplex()])), @int.int_arith_tac)
-  simplex_dim_ge_c.set(@tactics.prove(@parser.parse_term("!n s. n simplex s ==> -- &1 <= n"), t9260))
+  simplex_dim_ge_c.set(@tactics.prove(@parser.parse_term("forall n s. n simplex s ==> -- &1 <= n"), t9260))
 }
 
 ///|
@@ -16036,7 +16036,7 @@ fn step_331() -> Unit raise {
     })(x9267))
   }, @list.List([@theorems.eq_sym_eq()]))
   let t9273 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([simplex_v1()]))), t9268), t9269), t9270), t9271), t9272), @int.int_arith_tac)
-  simplex_empty_c.set(@tactics.prove(@parser.parse_term("!n. n simplex {} <=> n = -- &1"), t9273))
+  simplex_empty_c.set(@tactics.prove(@parser.parse_term("forall n. n simplex {} <=> n = -- &1"), t9273))
 }
 
 ///|
@@ -16058,7 +16058,7 @@ fn step_332() -> Unit raise {
   let t9275 = @simp.simp_tac(@list.List([@sets.card_eq_0()]))
   let t9274 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b <=> ~(a ==> ~b)"))]))
   let t9280 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([simplex_v1(), @int.int_add_linv(), @int.int_of_num_eq()]))), t9274), t9275), t9276), t9277), t9278), t9279)
-  simplex_minus_1_c.set(@tactics.prove(@parser.parse_term("!s. (-- &1) simplex s <=> s = {}"), t9280))
+  simplex_minus_1_c.set(@tactics.prove(@parser.parse_term("forall s. (-- &1) simplex s <=> s = {}"), t9280))
 }
 
 ///|
@@ -16076,7 +16076,7 @@ fn step_333() -> Unit raise {
   let t9282 = @simp.asm_simp_tac(@list.List([@convex.aff_dim_convex_hull(), @convex.aff_dim_affine_independent()]))
   let t9281 = @tactics.repeat_tac(@tactics.strip_tac)
   let t9283 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([simplex(), @int.int_arith(@parser.parse_term("x:int = n + &1 <=> n = x - &1"))])), t9281), t9282)
-  aff_dim_simplex_c.set(@tactics.prove(@parser.parse_term("!s n. n simplex s ==> aff_dim s = n"), t9283))
+  aff_dim_simplex_c.set(@tactics.prove(@parser.parse_term("forall s n. n simplex s ==> aff_dim s = n"), t9283))
 }
 
 ///|
@@ -16187,7 +16187,7 @@ fn step_334() -> Unit raise {
   let t9285 = @tactics.x_gen_tac(@parser.parse_term("c:real^N->bool"))
   let t9284 = @simp.rewrite_tac(@list.List([simplex_v1(), @theorems.left_imp_exists_thm()]))
   let t9352 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9284), t9285), t9287), t9290), t9295), t9296), t9297), t9298), @tactics.disch_tac), t9302), t9351)
-  simplex_extreme_points_c.set(@tactics.prove(@parser.parse_term("!n s:real^N->bool.\n       n simplex s\n       ==> FINITE {v | v extreme_point_of s} /\\\n           ~(affine_dependent {v | v extreme_point_of s}) /\\\n           &(CARD {v | v extreme_point_of s}) = n + &1 /\\\n           s = convex hull {v | v extreme_point_of s}"), t9352))
+  simplex_extreme_points_c.set(@tactics.prove(@parser.parse_term("forall n s:real^N->bool.\n       n simplex s\n       ==> FINITE {v | v extreme_point_of s} /\\\n           ~(affine_dependent {v | v extreme_point_of s}) /\\\n           &(CARD {v | v extreme_point_of s}) = n + &1 /\\\n           s = convex hull {v | v extreme_point_of s}"), t9352))
 }
 
 ///|
@@ -16240,7 +16240,7 @@ fn step_335() -> Unit raise {
     })(t9357(x9358))
   })
   let t9381 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9359), t9360), t9361), @tactics.strip_tac), t9365), t9366), t9367), t9368), t9369), @tactics.conj_tac), t9380)
-  simplex_face_of_simplex_c.set(@tactics.prove(@parser.parse_term("!n s f:real^N->bool.\n        n simplex s /\\ f face_of s ==> ?m. m <= n /\\ m simplex f"), t9381))
+  simplex_face_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall n s f:real^N->bool.\n        n simplex s /\\ f face_of s ==> ?m. m <= n /\\ m simplex f"), t9381))
 }
 
 ///|
@@ -16285,7 +16285,7 @@ fn step_336() -> Unit raise {
     })(t9385(x9386))
   })
   let t9402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9387), t9388), t9395), t9399), t9400), t9401)
-  face_of_simplex_subset_c.set(@tactics.prove(@parser.parse_term("!n s f:real^N->bool.\n        n simplex s /\\ f face_of s\n        ==> ?c. c SUBSET {x | x extreme_point_of s} /\\ f = convex hull c"), t9402))
+  face_of_simplex_subset_c.set(@tactics.prove(@parser.parse_term("forall n s f:real^N->bool.\n        n simplex s /\\ f face_of s\n        ==> ?c. c SUBSET {x | x extreme_point_of s} /\\ f = convex hull c"), t9402))
 }
 
 ///|
@@ -16306,7 +16306,7 @@ fn step_337() -> Unit raise {
   let t9423 = @tactics.match_mp_tac(@convex.disjoint_affine_hull())
   let t9422 = @simp.rewrite_tac(@list.List([@convex.convex_hull_subset_affine_hull()]))
   let t9421 = @tactics.exists_tac(@parser.parse_term("affine hull ({v:real^N | v extreme_point_of s} DIFF c)"))
-  let t9420 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u")))
+  let t9420 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u")))
   let t9419 = @simp.asm_rewrite_tac(@list.List([]))
   let t9418 = @tactics.match_mp_tac(face_of_convex_hulls())
   let t9417 = @tactics.disch_then(fn(x9414 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -16332,7 +16332,7 @@ fn step_337() -> Unit raise {
     })(t9406(x9407))
   })
   let t9427 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9408), t9409), t9413), t9417), t9418), t9419), t9420), t9421), t9422), t9423), t9424), t9425), t9426)
-  subset_face_of_simplex_c.set(@tactics.prove(@parser.parse_term("!s n c:real^N->bool.\n      n simplex s /\\ c SUBSET {x | x extreme_point_of s}\n      ==> (convex hull c) face_of s"), t9427))
+  subset_face_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall s n c:real^N->bool.\n      n simplex s /\\ c SUBSET {x | x extreme_point_of s}\n      ==> (convex hull c) face_of s"), t9427))
 }
 
 ///|
@@ -16353,7 +16353,7 @@ fn step_338() -> Unit raise {
     x9428
   }, @list.List([@sets.extension()]))
   let t9432 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9429), t9430), t9431)
-  faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("!n s. n simplex s\n         ==> {f | f face_of s} =\n             {convex hull c | c SUBSET {v | v extreme_point_of s}}"), t9432))
+  faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall n s. n simplex s\n         ==> {f | f face_of s} =\n             {convex hull c | c SUBSET {v | v extreme_point_of s}}"), t9432))
 }
 
 ///|
@@ -16379,7 +16379,7 @@ fn step_339() -> Unit raise {
       s9477(x9478)
     }
   }, @list.List([@parser.parse_term("convex hull a:real^N->bool"), t9480, t9479]))
-  let t9475 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!s t u. x IN s /\\ s SUBSET t /\\ t SUBSET u /\\ u SUBSET v ==> x IN v")))
+  let t9475 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall s t u. x IN s /\\ s SUBSET t /\\ t SUBSET u /\\ u SUBSET v ==> x IN v")))
   let t9474 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
   let t9473 = @simp.rewrite_tac(@list.List([]))
   let t9472 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())]))
@@ -16410,7 +16410,7 @@ fn step_339() -> Unit raise {
   let t9454 = @tactics.x_gen_tac(@parser.parse_term("x:real^N"))
   let t9453 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t9452 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t9451 = @tactics.subgoal_then(@parser.parse_term("!a b. a SUBSET {v:real^N | v extreme_point_of s} /\\\n          b SUBSET {v | v extreme_point_of s} /\\\n          convex hull a SUBSET convex hull b\n          ==> a SUBSET b"), fn(x9449 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t9451 = @tactics.subgoal_then(@parser.parse_term("forall a b. a SUBSET {v:real^N | v extreme_point_of s} /\\\n          b SUBSET {v | v extreme_point_of s} /\\\n          convex hull a SUBSET convex hull b\n          ==> a SUBSET b"), fn(x9449 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x9449
     @meson.meson_tac(@list.List([th]))
   })
@@ -16436,7 +16436,7 @@ fn step_339() -> Unit raise {
     })(t9436(x9437))
   })
   let t9485 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t9438), t9442), t9443), t9444), t9445), @tactics.conj_tac), t9448), t9451), t9452), t9453), t9454), @tactics.disch_tac), t9463), t9464), t9471), t9472), @tactics.disch_tac), t9473), @tactics.conj_tac), t9474), t9475), t9481), t9482), t9483), t9484)
-  has_size_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("!n s:real^N->bool.\n        n simplex s\n        ==> {f | f face_of s} HAS_SIZE 2 EXP (num_of_int(n + &1))"), t9485))
+  has_size_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall n s:real^N->bool.\n        n simplex s\n        ==> {f | f face_of s} HAS_SIZE 2 EXP (num_of_int(n + &1))"), t9485))
 }
 
 ///|
@@ -16462,7 +16462,7 @@ fn step_340() -> Unit raise {
     })(t9489(x9490))
   })
   let t9493 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9491), t9492)
-  finite_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("!n s. n simplex s ==> FINITE {f | f face_of s}"), t9493))
+  finite_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall n s. n simplex s ==> FINITE {f | f face_of s}"), t9493))
 }
 
 ///|
@@ -16488,7 +16488,7 @@ fn step_341() -> Unit raise {
     })(t9497(x9498))
   })
   let t9501 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9499), t9500)
-  card_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("!n s. n simplex s ==> CARD {f | f face_of s} = 2 EXP (num_of_int(n + &1))"), t9501))
+  card_faces_of_simplex_c.set(@tactics.prove(@parser.parse_term("forall n s. n simplex s ==> CARD {f | f face_of s} = 2 EXP (num_of_int(n + &1))"), t9501))
 }
 
 ///|
@@ -16567,7 +16567,7 @@ fn step_342() -> Unit raise {
   }))
   let t9502 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("--(&1):int <= n <=> n = --(&1) \\/ &0 <= n"))]))
   let t9548 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("d:int")), t9502), t9506), t9507), t9514), t9518), t9519), @tactics.disch_tac), t9525), t9526), t9527), t9528), t9529), @tactics.strip_tac), t9530), t9531), t9532), t9538), t9544), t9545), t9546), t9547)
-  choose_simplex_c.set(@tactics.prove(@parser.parse_term("!n. --(&1) <= n /\\ n <= &(dimindex(:N)) ==> ?s:real^N->bool. n simplex s"), t9548))
+  choose_simplex_c.set(@tactics.prove(@parser.parse_term("forall n. --(&1) <= n /\\ n <= &(dimindex(:N)) ==> ?s:real^N->bool. n simplex s"), t9548))
 }
 
 ///|
@@ -16620,7 +16620,7 @@ fn step_343() -> Unit raise {
   let t9552 = @tactics.disch_then((x9551 : @kernel.Thm) => @tactics.x_choose_tac(t9550, x9551))
   let t9549 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("n:int"), choose_simplex()))
   let t9579 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9549), @tactics.ants_tac), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), t9552), t9556), t9578)
-  choose_surrounding_simplex_c.set(@tactics.prove(@parser.parse_term("!a:real^N n.\n        &0 <= n /\\ n <= &(dimindex (:N))\n        ==>  ?s. n simplex s /\\ a IN relative_interior s"), t9579))
+  choose_surrounding_simplex_c.set(@tactics.prove(@parser.parse_term("forall a:real^N n.\n        &0 <= n /\\ n <= &(dimindex (:N))\n        ==>  ?s. n simplex s /\\ a IN relative_interior s"), t9579))
 }
 
 ///|
@@ -16640,7 +16640,7 @@ fn step_344() -> Unit raise {
   let t9581 = @simp.rewrite_tac(@list.List([@int.int_pos(), @int.int_le_refl()]))
   let t9580 = @parser.parse_term("&(dimindex(:N)):int")
   let t9584 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("a:real^N"), t9580]), choose_surrounding_simplex()))), t9581), t9582), t9583)
-  choose_surrounding_simplex_full_c.set(@tactics.prove(@parser.parse_term("!a:real^N. ?s. &(dimindex(:N)) simplex s /\\ a IN interior s"), t9584))
+  choose_surrounding_simplex_full_c.set(@tactics.prove(@parser.parse_term("forall a:real^N. ?s. &(dimindex(:N)) simplex s /\\ a IN interior s"), t9584))
 }
 
 ///|
@@ -16656,7 +16656,7 @@ pub fn choose_surrounding_simplex_full() -> @kernel.Thm {
 /// CHOOSE_POLYTOPE
 fn step_345() -> Unit raise {
   let t9585 = @meson.meson_tac(@list.List([choose_simplex(), simplex_imp_polytope(), aff_dim_simplex()]))
-  choose_polytope_c.set(@tactics.prove(@parser.parse_term("!n. --(&1) <= n /\\ n <= &(dimindex(:N))\n       ==> ?s:real^N->bool. polytope s /\\ aff_dim s = n"), t9585))
+  choose_polytope_c.set(@tactics.prove(@parser.parse_term("forall n. --(&1) <= n /\\ n <= &(dimindex(:N))\n       ==> ?s:real^N->bool. polytope s /\\ aff_dim s = n"), t9585))
 }
 
 ///|
@@ -16692,7 +16692,7 @@ fn step_346() -> Unit raise {
     })(t9589(x9590))
   }), t9591), t9599])
   let t9601 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t9600)
-  simplex_sing_c.set(@tactics.prove(@parser.parse_term("!n a:real^N. n simplex {a} <=> n = &0"), t9601))
+  simplex_sing_c.set(@tactics.prove(@parser.parse_term("forall n a:real^N. n simplex {a} <=> n = &0"), t9601))
 }
 
 ///|
@@ -16715,7 +16715,7 @@ fn step_347() -> Unit raise {
   let t9603 = @simp.rewrite_tac(@list.List([simplex(), @int.int_add_lid(), @int.int_of_num_eq()]))
   let t9602 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([simplex_sing()]))])
   let t9609 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t9602), t9603), t9604), t9605), t9606), @tactics.strip_tac), t9607), t9608)
-  simplex_zero_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool. &0 simplex s <=> ?a. s = {a}"), t9609))
+  simplex_zero_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool. &0 simplex s <=> ?a. s = {a}"), t9609))
 }
 
 ///|
@@ -16737,7 +16737,7 @@ fn step_348() -> Unit raise {
   let t9611 = @simp.rewrite_tac(@list.List([simplex()]))
   let t9610 = @simp.asm_rewrite_tac(@list.List([@topology.segment_refl(), simplex_sing()]))
   let t9616 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @class.cond_cases_tac), t9610), t9611), t9612), t9613), t9614), t9615), @int.int_arith_tac)
-  simplex_segment_cases_c.set(@tactics.prove(@parser.parse_term("!a b:real^N. (if a = b then &0 else &1) simplex segment[a,b]"), t9616))
+  simplex_segment_cases_c.set(@tactics.prove(@parser.parse_term("forall a b:real^N. (if a = b then &0 else &1) simplex segment[a,b]"), t9616))
 }
 
 ///|
@@ -16753,7 +16753,7 @@ pub fn simplex_segment_cases() -> @kernel.Thm {
 /// SIMPLEX_SEGMENT
 fn step_349() -> Unit raise {
   let t9617 = @meson.meson_tac(@list.List([simplex_segment_cases()]))
-  simplex_segment_c.set(@tactics.prove(@parser.parse_term("!a b. ?n. n simplex segment[a,b]"), t9617))
+  simplex_segment_c.set(@tactics.prove(@parser.parse_term("forall a b. ?n. n simplex segment[a,b]"), t9617))
 }
 
 ///|
@@ -16773,7 +16773,7 @@ fn step_350() -> Unit raise {
   let t9619 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real^N->bool"), @convex.compact_convex_collinear_segment()))
   let t9618 = @simp.asm_rewrite_tac(@list.List([simplex_empty(), @theorems.exists_refl(), @equal.gsym(@convex.collinear_aff_dim())]))
   let t9622 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("p:real^N->bool = {}"))), t9618), @tactics.strip_tac), t9619), t9620), t9621)
-  polytope_lowdim_imp_simplex_c.set(@tactics.prove(@parser.parse_term("!p:real^N->bool. polytope p /\\ aff_dim p <= &1 ==> ?n. n simplex p"), t9622))
+  polytope_lowdim_imp_simplex_c.set(@tactics.prove(@parser.parse_term("forall p:real^N->bool. polytope p /\\ aff_dim p <= &1 ==> ?n. n simplex p"), t9622))
 }
 
 ///|
@@ -16811,7 +16811,7 @@ fn step_351() -> Unit raise {
     })(t9627(x9628))
   })
   let t9641 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9629), t9630), t9631), t9632), t9633), t9634), t9635), t9636), t9637), @tactics.disch_tac), t9638), t9639), t9640)
-  simplex_insert_dimplus1_c.set(@tactics.prove(@parser.parse_term("!n s a:real^N.\n        n simplex s /\\ ~(a IN affine hull s)\n        ==> (n + &1) simplex (convex hull (a INSERT s))"), t9641))
+  simplex_insert_dimplus1_c.set(@tactics.prove(@parser.parse_term("forall n s a:real^N.\n        n simplex s /\\ ~(a IN affine hull s)\n        ==> (n + &1) simplex (convex hull (a INSERT s))"), t9641))
 }
 
 ///|
@@ -16827,7 +16827,7 @@ pub fn simplex_insert_dimplus1() -> @kernel.Thm {
 /// SIMPLEX_INSERT
 fn step_352() -> Unit raise {
   let t9642 = @meson.meson_tac(@list.List([simplex_insert_dimplus1()]))
-  simplex_insert_c.set(@tactics.prove(@parser.parse_term("!s a:real^N.\n        (?n. n simplex s) /\\ ~(a IN affine hull s)\n        ==> ?n. n simplex (convex hull (a INSERT s))"), t9642))
+  simplex_insert_c.set(@tactics.prove(@parser.parse_term("forall s a:real^N.\n        (?n. n simplex s) /\\ ~(a IN affine hull s)\n        ==> ?n. n simplex (convex hull (a INSERT s))"), t9642))
 }
 
 ///|
@@ -16847,7 +16847,7 @@ fn step_353() -> Unit raise {
   let t9645 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.rewrite_tac(@list.List([simplex()]))), t9643), t9644)
   let t9646 = @list.List([@meson.meson_tac(@list.List([simplex_extreme_points(), simplex_imp_convex(), simplex_imp_compact()])), t9645])
   let t9647 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t9646)
-  simplex_alt_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool i.\n        i simplex s <=>\n          convex s /\\ compact s /\\\n          FINITE {v | v extreme_point_of s} /\\\n          &(CARD {v | v extreme_point_of s}) = i + &1 /\\\n          ~affine_dependent {v | v extreme_point_of s}"), t9647))
+  simplex_alt_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool i.\n        i simplex s <=>\n          convex s /\\ compact s /\\\n          FINITE {v | v extreme_point_of s} /\\\n          &(CARD {v | v extreme_point_of s}) = i + &1 /\\\n          ~affine_dependent {v | v extreme_point_of s}"), t9647))
 }
 
 ///|
@@ -16864,7 +16864,7 @@ pub fn simplex_alt() -> @kernel.Thm {
 fn step_354() -> Unit raise {
   let t9648 = @tactics.conv_tac(@class.taut)
   let t9649 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplex_alt(), @int.int_sub_add(), @int.int_of_num_eq(), @sets.has_size()])), t9648)
-  simplex_alt1_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        (&n - &1) simplex s <=>\n          convex s /\\ compact s /\\\n          {v | v extreme_point_of s} HAS_SIZE n /\\\n          ~affine_dependent {v | v extreme_point_of s}"), t9649))
+  simplex_alt1_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        (&n - &1) simplex s <=>\n          convex s /\\ compact s /\\\n          {v | v extreme_point_of s} HAS_SIZE n /\\\n          ~affine_dependent {v | v extreme_point_of s}"), t9649))
 }
 
 ///|
@@ -16882,7 +16882,7 @@ fn step_355() -> Unit raise {
   let t9651 = @meson.meson_tac(@list.List([@convex.affine_hull_convex_hull()]))
   let t9650 = @simp.rewrite_tac(@list.List([@vectors.independent(), @convex.dependent_affine_dependent_cases(), simplex_alt1()]))
   let t9652 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispec(@parser.parse_term("s:real^N->bool"), krein_milman_minkowski()))), t9650), t9651)
-  simplex_0_not_in_affine_hull_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        (&n - &1) simplex s /\\ ~(vec 0 IN affine hull s) <=>\n        convex s /\\ compact s /\\\n        {v | v extreme_point_of s} HAS_SIZE n /\\\n        independent {v | v extreme_point_of s}"), t9652))
+  simplex_0_not_in_affine_hull_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        (&n - &1) simplex s /\\ ~(vec 0 IN affine hull s) <=>\n        convex s /\\ compact s /\\\n        {v | v extreme_point_of s} HAS_SIZE n /\\\n        independent {v | v extreme_point_of s}"), t9652))
 }
 
 ///|
@@ -16922,7 +16922,7 @@ fn step_356() -> Unit raise {
   let t9654 = @tactics.match_mp_tac(extreme_point_exists_convex())
   let t9653 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.member_not_empty()), @sets.in_elim_thm()]))
   let t9671 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t9653), t9654), t9655), t9670)
-  simplex_extreme_points_nonempty_c.set(@tactics.prove(@parser.parse_term("!c. &(dimindex (:N)) - &1 simplex c ==> ~({v | v extreme_point_of c} = {})"), t9671))
+  simplex_extreme_points_nonempty_c.set(@tactics.prove(@parser.parse_term("forall c. &(dimindex (:N)) - &1 simplex c ==> ~({v | v extreme_point_of c} = {})"), t9671))
 }
 
 ///|
@@ -16937,7 +16937,7 @@ pub fn simplex_extreme_points_nonempty() -> @kernel.Thm {
 ///|
 /// simplicial_complex
 fn step_357() -> Unit raise {
-  simplicial_complex_c.set(@pair.new_definition(@parser.parse_term("simplicial_complex c <=>\n        FINITE c /\\\n        (!s. s IN c ==> ?n. n simplex s) /\\\n        (!f s. s IN c /\\ f face_of s ==> f IN c) /\\\n        (!s s'. s IN c /\\ s' IN c\n                ==> (s INTER s') face_of s /\\ (s INTER s') face_of s')")))
+  simplicial_complex_c.set(@pair.new_definition(@parser.parse_term("simplicial_complex c <=>\n        FINITE c /\\\n        (forall s. s IN c ==> ?n. n simplex s) /\\\n        (forall f s. s IN c /\\ f face_of s ==> f IN c) /\\\n        (forall s s'. s IN c /\\ s' IN c\n                ==> (s INTER s') face_of s /\\ (s INTER s') face_of s')")))
 }
 
 ///|
@@ -16952,7 +16952,7 @@ pub fn simplicial_complex() -> @kernel.Thm {
 ///|
 /// triangulation
 fn step_358() -> Unit raise {
-  triangulation_c.set(@pair.new_definition(@parser.parse_term("triangulation(tr:(real^N->bool)->bool) <=>\n        FINITE tr /\\\n        (!t. t IN tr ==> ?n. n simplex t) /\\\n        (!t t'. t IN tr /\\ t' IN tr\n                ==> (t INTER t') face_of t /\\ (t INTER t') face_of t')")))
+  triangulation_c.set(@pair.new_definition(@parser.parse_term("triangulation(tr:(real^N->bool)->bool) <=>\n        FINITE tr /\\\n        (forall t. t IN tr ==> ?n. n simplex t) /\\\n        (forall t t'. t IN tr /\\ t' IN tr\n                ==> (t INTER t') face_of t /\\ (t INTER t') face_of t')")))
 }
 
 ///|
@@ -16968,7 +16968,7 @@ pub fn triangulation() -> @kernel.Thm {
 /// SIMPLICIAL_COMPLEX_TRANSLATION
 fn step_359() -> Unit raise {
   let t9673 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplicial_complex()])), (x9672 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x9672))
-  simplicial_complex_translation_c.set(@tactics.prove(@parser.parse_term("!a:real^N tr.\n   simplicial_complex(IMAGE (IMAGE (\\x. a + x)) tr) <=> simplicial_complex tr"), t9673))
+  simplicial_complex_translation_c.set(@tactics.prove(@parser.parse_term("forall a:real^N tr.\n   simplicial_complex(IMAGE (IMAGE (\\x. a + x)) tr) <=> simplicial_complex tr"), t9673))
 }
 
 ///|
@@ -16991,7 +16991,7 @@ fn step_360() -> Unit raise {
 fn step_361() -> Unit raise {
   let t9674 = @determinants.geom_transform_tac(@list.List([]))
   let t9675 = @tactics.then_tac(@simp.rewrite_tac(@list.List([simplicial_complex()])), t9674)
-  simplicial_complex_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N tr.\n       linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n       ==> (simplicial_complex(IMAGE (IMAGE f) tr) <=> simplicial_complex tr)"), t9675))
+  simplicial_complex_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N tr.\n       linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n       ==> (simplicial_complex(IMAGE (IMAGE f) tr) <=> simplicial_complex tr)"), t9675))
 }
 
 ///|
@@ -17013,7 +17013,7 @@ fn step_362() -> Unit raise {
 /// TRIANGULATION_TRANSLATION
 fn step_363() -> Unit raise {
   let t9677 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation()])), (x9676 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x9676))
-  triangulation_translation_c.set(@tactics.prove(@parser.parse_term("!a:real^N tr.\n        triangulation(IMAGE (IMAGE (\\x. a + x)) tr) <=> triangulation tr"), t9677))
+  triangulation_translation_c.set(@tactics.prove(@parser.parse_term("forall a:real^N tr.\n        triangulation(IMAGE (IMAGE (\\x. a + x)) tr) <=> triangulation tr"), t9677))
 }
 
 ///|
@@ -17036,7 +17036,7 @@ fn step_364() -> Unit raise {
 fn step_365() -> Unit raise {
   let t9678 = @determinants.geom_transform_tac(@list.List([]))
   let t9679 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation()])), t9678)
-  triangulation_linear_image_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N tr.\n        linear f /\\ (!x y. f x = f y ==> x = y) /\\ (!y. ?x. f x = y)\n        ==> (triangulation(IMAGE (IMAGE f) tr) <=> triangulation tr)"), t9679))
+  triangulation_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N tr.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (triangulation(IMAGE (IMAGE f) tr) <=> triangulation tr)"), t9679))
 }
 
 ///|
@@ -17059,7 +17059,7 @@ fn step_366() -> Unit raise {
 fn step_367() -> Unit raise {
   let t9680 = @meson.meson_tac(@list.List([]))
   let t9681 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation(), simplicial_complex()])), t9680)
-  simplicial_complex_imp_triangulation_c.set(@tactics.prove(@parser.parse_term("!tr. simplicial_complex tr ==> triangulation tr"), t9681))
+  simplicial_complex_imp_triangulation_c.set(@tactics.prove(@parser.parse_term("forall tr. simplicial_complex tr ==> triangulation tr"), t9681))
 }
 
 ///|
@@ -17076,7 +17076,7 @@ pub fn simplicial_complex_imp_triangulation() -> @kernel.Thm {
 fn step_368() -> Unit raise {
   let t9682 = @meson.meson_tac(@list.List([@sets.subset(), @sets.finite_subset()]))
   let t9683 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation()])), t9682)
-  triangulation_subset_c.set(@tactics.prove(@parser.parse_term("!tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ tr' SUBSET tr ==> triangulation tr'"), t9683))
+  triangulation_subset_c.set(@tactics.prove(@parser.parse_term("forall tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ tr' SUBSET tr ==> triangulation tr'"), t9683))
 }
 
 ///|
@@ -17093,7 +17093,7 @@ pub fn triangulation_subset() -> @kernel.Thm {
 fn step_369() -> Unit raise {
   let t9684 = @meson.meson_tac(@list.List([@sets.inter_comm()]))
   let t9685 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation(), @sets.finite_union(), @sets.in_union()])), t9684)
-  triangulation_union_c.set(@tactics.prove(@parser.parse_term("!tr1 tr2.\n        triangulation(tr1 UNION tr2) <=>\n        triangulation tr1 /\\ triangulation tr2 /\\\n        (!s t. s IN tr1 /\\ t IN tr2\n               ==> s INTER t face_of s /\\ s INTER t face_of t)"), t9685))
+  triangulation_union_c.set(@tactics.prove(@parser.parse_term("forall tr1 tr2.\n        triangulation(tr1 UNION tr2) <=>\n        triangulation tr1 /\\ triangulation tr2 /\\\n        (forall s t. s IN tr1 /\\ t IN tr2\n               ==> s INTER t face_of s /\\ s INTER t face_of t)"), t9685))
 }
 
 ///|
@@ -17179,7 +17179,7 @@ fn step_370() -> Unit raise {
   })
   let t9686 = @tactics.repeat_tac(@tactics.strip_tac)
   let t9742 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation()])), t9686), t9694), t9695), @tactics.strip_tac), t9706), t9707), t9708), @tactics.disch_tac), t9709), @tactics.disch_tac), t9712), t9715), t9716), t9718), t9720), t9721), @tactics.conj_tac), t9724), t9725), t9726), @tactics.conj_tac), t9741)
-  triangulation_inter_simplex_c.set(@tactics.prove(@parser.parse_term("!tr t t':real^N->bool.\n        triangulation tr /\\ t IN tr /\\ t' IN tr\n        ==> t INTER t' = convex hull ({x | x extreme_point_of t} INTER\n                                      {x | x extreme_point_of t'})"), t9742))
+  triangulation_inter_simplex_c.set(@tactics.prove(@parser.parse_term("forall tr t t':real^N->bool.\n        triangulation tr /\\ t IN tr /\\ t' IN tr\n        ==> t INTER t' = convex hull ({x | x extreme_point_of t} INTER\n                                      {x | x extreme_point_of t'})"), t9742))
 }
 
 ///|
@@ -17214,7 +17214,7 @@ fn step_371() -> Unit raise {
   let t9749 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t9748 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()]))
   let t9760 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation(), simplicial_complex()])), t9748), t9749), @tactics.gen_tac), t9750), t9751), @tactics.strip_tac), t9752), t9759)
-  triangulation_simplicial_complex_c.set(@tactics.prove(@parser.parse_term("!tr. triangulation tr\n        ==> simplicial_complex {f:real^N->bool | ?t. t IN tr /\\ f face_of t}"), t9760))
+  triangulation_simplicial_complex_c.set(@tactics.prove(@parser.parse_term("forall tr. triangulation tr\n        ==> simplicial_complex {f:real^N->bool | ?t. t IN tr /\\ f face_of t}"), t9760))
 }
 
 ///|
@@ -17242,7 +17242,7 @@ fn step_372() -> Unit raise {
   let t9762 = @tactics.repeat_tac(@tactics.conj_tac)
   let t9761 = @simp.rewrite_tac(@list.List([triangulation(), @sets.in_elim_thm()]))
   let t9773 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9761), @tactics.strip_tac), t9762), t9772)
-  triangulation_simplex_faces_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool n d.\n        n simplex s ==> triangulation {c | c face_of s /\\ aff_dim c = d}"), t9773))
+  triangulation_simplex_faces_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool n d.\n        n simplex s ==> triangulation {c | c face_of s /\\ aff_dim c = d}"), t9773))
 }
 
 ///|
@@ -17264,7 +17264,7 @@ fn step_373() -> Unit raise {
   let t9775 = @tactics.match_mp_tac(triangulation_subset())
   let t9774 = @simp.rewrite_tac(@list.List([facet_of()]))
   let t9780 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9774), t9775), t9776), @tactics.conj_tac), t9777), t9778), t9779)
-  triangulation_simplex_facets_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool n. n simplex s ==> triangulation {c | c facet_of s}"), t9780))
+  triangulation_simplex_facets_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool n. n simplex s ==> triangulation {c | c facet_of s}"), t9780))
 }
 
 ///|
@@ -17303,7 +17303,7 @@ fn step_374() -> Unit raise {
   })
   let t9781 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("c INTER d:real^N->bool"), face_of_disjoint_relative_interior()))
   let t9797 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9781), t9785), t9786), t9795), t9796)
-  cell_complex_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("!c d:real^N->bool.\n        c INTER d face_of c /\\ c INTER d face_of d /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9797))
+  cell_complex_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("forall c d:real^N->bool.\n        c INTER d face_of c /\\ c INTER d face_of d /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9797))
 }
 
 ///|
@@ -17320,7 +17320,7 @@ pub fn cell_complex_disjoint_relative_interiors() -> @kernel.Thm {
 fn step_375() -> Unit raise {
   let t9798 = @meson.meson_tac(@list.List([cell_complex_disjoint_relative_interiors()]))
   let t9799 = @tactics.then_tac(@simp.rewrite_tac(@list.List([triangulation()])), t9798)
-  triangulation_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("!t c d:real^N->bool.\n        triangulation t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9799))
+  triangulation_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("forall t c d:real^N->bool.\n        triangulation t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9799))
 }
 
 ///|
@@ -17336,7 +17336,7 @@ pub fn triangulation_disjoint_relative_interiors() -> @kernel.Thm {
 /// SIMPLICIAL_COMPLEX_DISJOINT_RELATIVE_INTERIORS
 fn step_376() -> Unit raise {
   let t9800 = @meson.meson_tac(@list.List([triangulation_disjoint_relative_interiors(), simplicial_complex_imp_triangulation()]))
-  simplicial_complex_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("!t c d:real^N->bool.\n        simplicial_complex t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9800))
+  simplicial_complex_disjoint_relative_interiors_c.set(@tactics.prove(@parser.parse_term("forall t c d:real^N->bool.\n        simplicial_complex t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}"), t9800))
 }
 
 ///|
@@ -17371,7 +17371,7 @@ fn step_377() -> Unit raise {
   let t9802 = @tactics.repeat_tac(@tactics.strip_tac)
   let t9801 = @determinants.geom_origin_tac(@parser.parse_term("z:real^N"))
   let t9820 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9801), t9802), t9804), t9805), t9806), t9807), t9812), t9814), t9815), t9816), t9817), t9818), t9819)
-  not_in_affine_hull_surface_triangulation_c.set(@tactics.prove(@parser.parse_term("!t u z. convex u /\\ bounded u /\\ z IN interior u /\\\n           triangulation t /\\ UNIONS t SUBSET frontier u\n           ==> !c:real^N->bool. c IN t ==> ~(z IN affine hull c)"), t9820))
+  not_in_affine_hull_surface_triangulation_c.set(@tactics.prove(@parser.parse_term("forall t u z. convex u /\\ bounded u /\\ z IN interior u /\\\n           triangulation t /\\ UNIONS t SUBSET frontier u\n           ==> forall c:real^N->bool. c IN t ==> ~(z IN affine hull c)"), t9820))
 }
 
 ///|
@@ -17398,7 +17398,7 @@ fn step_378() -> Unit raise {
   let t9822 = @tactics.repeat_tac(@tactics.conj_tac)
   let t9821 = @simp.rewrite_tac(@list.List([triangulation()]))
   let t9832 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9821), @tactics.strip_tac), t9822), t9831)
-  triangulation_subfaces_c.set(@tactics.prove(@parser.parse_term("!tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ (!c'. c' IN tr' ==> ?c. c IN tr /\\ c' face_of c)\n        ==> triangulation tr'"), t9832))
+  triangulation_subfaces_c.set(@tactics.prove(@parser.parse_term("forall tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ (forall c'. c' IN tr' ==> ?c. c IN tr /\\ c' face_of c)\n        ==> triangulation tr'"), t9832))
 }
 
 ///|
@@ -17450,7 +17450,7 @@ fn step_379() -> Unit raise {
   let t9882 = @simp.asm_rewrite_tac(@list.List([]))
   let t9877 = @parser.parse_term("x:real^N")
   let t9878 = @list.List([@parser.parse_term("c:real^N->bool"), t9877])
-  let t9881 = @tactics.undisch_then(@parser.parse_term("!c x:real^N. c IN m /\\ x IN c ==> ?d. d IN n /\\ x IN d /\\ d SUBSET c"), fn(x9880 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t9881 = @tactics.undisch_then(@parser.parse_term("forall c x:real^N. c IN m /\\ x IN c ==> ?d. d IN n /\\ x IN d /\\ d SUBSET c"), fn(x9880 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x9874 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s9875 = @tactics.mp_tac(x9874)
       fn(x9876 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -17466,7 +17466,7 @@ fn step_379() -> Unit raise {
   let t9910 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.forall_in_union(), @sets.forall_in_gspec()])), t9870)
   let t9911 = @simp.asm_simp_tac(@list.List([@sets.finite_union(), @sets.simple_image(), @sets.finite_image()]))
   let t9869 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.in_elim_thm()]))
-  let t9868 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. x IN s) ==> t INTER s = t")))
+  let t9868 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. x IN s) ==> t INTER s = t")))
   let t9867 = @equal.gsym(@sets.union_over_inter())
   let t9912 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.unions_union(), @equal.gsym(@sets.inter_unions()), t9867])), t9868), t9869), @calc_rat.real_arith_tac), t9911, t9910, t9909, t9908, t9907, t9906, t9905])
   let t9866 = @tactics.repeat_tac(@tactics.conj_tac)
@@ -17506,7 +17506,7 @@ fn step_379() -> Unit raise {
   let t9841 = @simp.rewrite_tac(@list.List([@sets.not_in_empty(), @pair.forall_pair_thm()]))
   let t9840 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t9913 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t9840), t9841), @tactics.conj_tac), t9844), t9847), t9849), t9853), t9861), t9863), t9864), t9865), t9866), t9912)
-  let lemma2 = @tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c. c IN m ==> aff_dim c <= d) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> !i. FINITE i\n                ==> ?m'. UNIONS m' = UNIONS m /\\\n                         FINITE m' /\\\n                         (!c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n                         (!c x. c IN m /\\ x IN c\n                                ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n                         (!c. c IN m' ==> polytope c) /\\\n                         (!c. c IN m' ==> aff_dim c <= d) /\\\n                         (!c1 c2. c1 IN m' /\\ c2 IN m'\n                                  ==> c1 INTER c2 face_of c1 /\\\n                                      c1 INTER c2 face_of c2) /\\\n                         (!c x y. c IN m' /\\ x IN c /\\ y IN c\n                                  ==> !a b. (a,b) IN i\n                                            ==> a dot x <= b /\\ a dot y <= b \\/\n                                                a dot x >= b /\\ a dot y >= b)"), t9913)
+  let lemma2 = @tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c <= d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> forall i. FINITE i\n                ==> ?m'. UNIONS m' = UNIONS m /\\\n                         FINITE m' /\\\n                         (forall c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n                         (forall c x. c IN m /\\ x IN c\n                                ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n                         (forall c. c IN m' ==> polytope c) /\\\n                         (forall c. c IN m' ==> aff_dim c <= d) /\\\n                         (forall c1 c2. c1 IN m' /\\ c2 IN m'\n                                  ==> c1 INTER c2 face_of c1 /\\\n                                      c1 INTER c2 face_of c2) /\\\n                         (forall c x y. c IN m' /\\ x IN c /\\ y IN c\n                                  ==> forall a b. (a,b) IN i\n                                            ==> a dot x <= b /\\ a dot y <= b \\/\n                                                a dot x >= b /\\ a dot y >= b)"), t9913)
   let t10018 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t10017 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t10016 = @tactics.match_mp_tac(@realarith.real_lt_imp_le())
@@ -17643,7 +17643,7 @@ fn step_379() -> Unit raise {
       })(x10012))
     })(x10013)(x10013)
   }), t10014), t10015), t10016), t10017), t10018)
-  cell_complex_subdivision_exists_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool d e.\n     &0 < e /\\\n     FINITE m /\\\n     (!c. c IN m ==> polytope c) /\\\n     (!c. c IN m ==> aff_dim c <= d) /\\\n     (!c1 c2. c1 IN m /\\ c2 IN m\n              ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n     ==> ?m'. (!c. c IN m' ==> diameter c < e) /\\\n              UNIONS m' = UNIONS m /\\\n              FINITE m' /\\\n              (!c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n              (!c x. c IN m /\\ x IN c\n                     ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n              (!c. c IN m' ==> polytope c) /\\\n              (!c. c IN m' ==> aff_dim c <= d) /\\\n              (!c1 c2. c1 IN m' /\\ c2 IN m'\n                       ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)"), t10019))
+  cell_complex_subdivision_exists_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool d e.\n     &0 < e /\\\n     FINITE m /\\\n     (forall c. c IN m ==> polytope c) /\\\n     (forall c. c IN m ==> aff_dim c <= d) /\\\n     (forall c1 c2. c1 IN m /\\ c2 IN m\n              ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n     ==> ?m'. (forall c. c IN m' ==> diameter c < e) /\\\n              UNIONS m' = UNIONS m /\\\n              FINITE m' /\\\n              (forall c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n              (forall c x. c IN m /\\ x IN c\n                     ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n              (forall c. c IN m' ==> polytope c) /\\\n              (forall c. c IN m' ==> aff_dim c <= d) /\\\n              (forall c1 c2. c1 IN m' /\\ c2 IN m'\n                       ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)"), t10019))
 }
 
 ///|
@@ -17756,7 +17756,7 @@ fn step_380() -> Unit raise {
   let t10021 = @simp.rewrite_tac(@list.List([@sets.subset_inter()]))
   let t10020 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq())]))
   let t10106 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10020), t10021), t10022), t10023), t10024), t10025), t10026), t10027), t10028), t10029), t10030), t10032), t10033), t10044), t10045), t10046), t10050), t10051), @tactics.conj_tac), t10063), t10067), t10070), @tactics.strip_tac), t10105)
-  let lemma1 = @tactics.prove(@parser.parse_term("!s t u z:real^N.\n          convex s /\\ convex t /\\ convex u /\\ z IN relative_interior s /\\\n          t SUBSET relative_frontier s /\\ u SUBSET relative_frontier s\n          ==> convex hull (z INSERT t) INTER convex hull (z INSERT u) =\n              convex hull (z INSERT (t INTER u))"), t10106)
+  let lemma1 = @tactics.prove(@parser.parse_term("forall s t u z:real^N.\n          convex s /\\ convex t /\\ convex u /\\ z IN relative_interior s /\\\n          t SUBSET relative_frontier s /\\ u SUBSET relative_frontier s\n          ==> convex hull (z INSERT t) INTER convex hull (z INSERT u) =\n              convex hull (z INSERT (t INTER u))"), t10106)
   let t10763 = @sets.set_tac(@list.List([]))
   let t10762 = @simp.asm_simp_tac(@list.List([@convex.relative_frontier(), @topology.closure_closed()]))
   let t10760 = @parser.parse_term("relative_frontier c:real^N->bool")
@@ -18061,7 +18061,7 @@ fn step_380() -> Unit raise {
   let t10512 = @parser.parse_term("relative_frontier d:real^N->bool")
   let t10515 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.trans_tac(@sets.subset_trans())(t10512), t10513), t10514), @tactics.all_tac])
   let t10511 = @tactics.exists_tac(@parser.parse_term("d:real^N->bool"))
-  let t10510 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d")))
+  let t10510 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d")))
   let t10508 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t10507 = @simp.asm_simp_tac(@list.List([@convex.relative_frontier(), @topology.closure_closed()]))
   let t10506 = @parser.parse_term("relative_frontier c:real^N->bool")
@@ -18111,7 +18111,7 @@ fn step_380() -> Unit raise {
   let t10468 = @simp.asm_simp_tac(@list.List([@sets.insert_subset()]))
   let t10474 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.hull_minimal()), t10468), @tactics.conj_tac), t10469), t10471), t10472), t10473), @tactics.all_tac])
   let t10467 = @tactics.exists_tac(@parser.parse_term("c:real^N->bool"))
-  let t10466 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d")))
+  let t10466 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d")))
   let t10464 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t10463 = @simp.asm_simp_tac(@list.List([@convex.relative_frontier(), @topology.closure_closed()]))
   let t10462 = @parser.parse_term("relative_frontier d:real^N->bool")
@@ -18279,7 +18279,7 @@ fn step_380() -> Unit raise {
   let t10344 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()]))
   let t10342 = @simp.asm_rewrite_tac(@list.List([]))
   let t10343 = @list.List([@meson.meson_tac(@list.List([@sets.inter_comm()])), t10342])
-  let t10341 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x y. R x y ==> R y x) /\\\n          (!x y. P x /\\ P y ==> R x y) /\\\n          (!x y. P x /\\ Q y ==> R x y) /\\\n          (!x y. Q x /\\ Q y ==> R x y)\n          ==> !x y. (P x \\/ Q x) /\\ (P y \\/ Q y) ==> R x y")))
+  let t10341 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. R x y ==> R y x) /\\\n          (forall x y. P x /\\ P y ==> R x y) /\\\n          (forall x y. P x /\\ Q y ==> R x y) /\\\n          (forall x y. Q x /\\ Q y ==> R x y)\n          ==> forall x y. (P x \\/ Q x) /\\ (P y \\/ Q y) ==> R x y")))
   let t10767 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_union()])), t10341), @tactics.conj_tac), t10343), t10344), t10345), @tactics.conj_tac), t10435), t10439), @tactics.strip_tac), t10440), t10444), t10445), t10446), t10612), @tactics.conj_tac), t10613), t10626), t10627), t10653)
   let t10338 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t10337 = @tactics.exists_tac(@parser.parse_term("j:real^N->bool"))
@@ -18431,7 +18431,7 @@ fn step_380() -> Unit raise {
   let t10230 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("?l:real^N->bool. l IN sk /\\ k SUBSET l"), @tactics.strip_assume_tac), t10212), t10213), @tactics.conj_tac), t10215), @tactics.conj_tac), t10224), t10229])
   let t10211 = @tactics.subgoal_then(@parser.parse_term("?f:real^N->bool. f face_of c /\\ ~(f = c) /\\ k SUBSET f"), @tactics.strip_assume_tac)
   let t10231 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10211), t10230), @tactics.all_tac])
-  let t10210 = @tactics.subgoal_then(@parser.parse_term("!c k. c IN fat /\\ k IN sc /\\ k SUBSET relative_frontier c\n             ==> affine hull k INTER relative_interior c:real^N->bool = {}"), fn(x10207 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10210 = @tactics.subgoal_then(@parser.parse_term("forall c k. c IN fat /\\ k IN sc /\\ k SUBSET relative_frontier c\n             ==> affine hull k INTER relative_interior c:real^N->bool = {}"), fn(x10207 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10208 = ((x10206 : @kernel.Thm) => @tactics.label_tac("-", x10206))(x10207)
     fn(x10209 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s10208(x10209)
@@ -18462,7 +18462,7 @@ fn step_380() -> Unit raise {
   let t10186 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
   let t10185 = @tactics.subgoal_then(@parser.parse_term("?r. r simplex (k:real^N->bool)"), @tactics.choose_tac)
   let t10205 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10185), t10186), t10187), t10188), t10195), t10196), t10197), t10198), t10199), t10200), t10201), t10202), t10203), t10204), @tactics.all_tac])
-  let t10184 = @tactics.subgoal_then(@parser.parse_term("!k. k IN sc ==> ?t. ~affine_dependent t /\\\n                          CARD t <= n /\\ aff_dim k < &n /\\\n                          k:real^N->bool = convex hull t"), fn(x10181 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10184 = @tactics.subgoal_then(@parser.parse_term("forall k. k IN sc ==> ?t. ~affine_dependent t /\\\n                          CARD t <= n /\\ aff_dim k < &n /\\\n                          k:real^N->bool = convex hull t"), fn(x10181 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10182 = ((x10180 : @kernel.Thm) => @tactics.label_tac("*", x10180))(x10181)
     fn(x10183 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s10182(x10183)
@@ -18480,7 +18480,7 @@ fn step_380() -> Unit raise {
   let t10178 = @list.List([@meson.meson_tac(@list.List([polytope_imp_convex(), polytope_imp_closed()])), t10177, t10176])
   let t10168 = @tactics.repeat_tac(@tactics.conj_tac)
   let t10179 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@class.taut(@parser.parse_term("(p ==> q /\\ r) /\\ p /\\ (q ==> s) ==> p /\\ q /\\ r /\\ s"))), t10168), t10178), @tactics.all_tac])
-  let t10167 = @tactics.subgoal_then(@parser.parse_term("(!c:real^N->bool. c IN fat ==> polytope c) /\\\n      (!c. c IN fat ==> convex c) /\\\n      (!c. c IN fat ==> closed c) /\\\n      (!c. c IN fat ==> (@z. z IN relative_interior c) IN relative_interior c)"), @tactics.strip_assume_tac)
+  let t10167 = @tactics.subgoal_then(@parser.parse_term("(forall c:real^N->bool. c IN fat ==> polytope c) /\\\n      (forall c. c IN fat ==> convex c) /\\\n      (forall c. c IN fat ==> closed c) /\\\n      (forall c. c IN fat ==> (@z. z IN relative_interior c) IN relative_interior c)"), @tactics.strip_assume_tac)
   let t10166 = @simp.abbrev_tac(@parser.parse_term("fat = {c:real^N->bool | c IN m /\\ aff_dim c = &n}"))
   let t10165 = @simp.rewrite_tac(@list.List([simplicial_complex(), @equal.gsym(@theorems.conj_assoc())]))
   let t10162 = @simp.gen_rewrite_rule(fn(x10161 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -18498,7 +18498,7 @@ fn step_380() -> Unit raise {
   let t10153 = @class.asm_cases_tac(@parser.parse_term("FINITE(t:(real^N->bool)->bool)"))
   let t10152 = @tactics.x_gen_tac(@parser.parse_term("t:(real^N->bool)->bool"))
   let t10160 = @list.List([@tactics.all_tac, @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t10152), t10153), t10154), t10156), t10157), @tactics.conj_tac), t10159)])
-  let t10151 = @tactics.subgoal_then(@parser.parse_term("?t. simplicial_complex t /\\\n         (!k. k IN t ==> aff_dim k <= &n) /\\\n         (!c. c IN m ==> (?f. f SUBSET t /\\ c = UNIONS f)) /\\\n         (!k. k IN t ==> (?c:real^N->bool. c IN m /\\ k SUBSET c))"), fn(x10148 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10151 = @tactics.subgoal_then(@parser.parse_term("?t. simplicial_complex t /\\\n         (forall k. k IN t ==> aff_dim k <= &n) /\\\n         (forall c. c IN m ==> (?f. f SUBSET t /\\ c = UNIONS f)) /\\\n         (forall k. k IN t ==> (?c:real^N->bool. c IN m /\\ k SUBSET c))"), fn(x10148 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10149 = @tactics.mp_tac(x10148)
     fn(x10150 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s10149(x10150)
@@ -18553,11 +18553,11 @@ fn step_380() -> Unit raise {
   let t10108 = @tactics.x_gen_tac(@parser.parse_term("m:(real^N->bool)->bool"))
   let t10107 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t10771 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), t10107), @tactics.disch_tac), t10108), @tactics.strip_tac), t10109), t10122), t10129), t10130), t10131), t10138), t10139), t10140), @tactics.ants_tac), t10147), t10151), t10160), t10164), t10165), t10166), t10167), t10179), t10184), t10205), t10210), t10231), t10232), t10233), t10770)
-  let lemma2 = @tactics.prove(@parser.parse_term("!n m:(real^N->bool)->bool.\n          FINITE m /\\\n          (!c. c IN m ==> polytope c) /\\\n          (!c. c IN m ==> aff_dim c <= &n) /\\\n          (!c f. c IN m /\\ f face_of c ==> f IN m) /\\\n          (!c1 c2. c1 IN m /\\ c2 IN m\n                   ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n          ==> ?t. simplicial_complex t /\\\n                  (!k. k IN t ==> aff_dim k <= &n) /\\\n                  UNIONS t = UNIONS m /\\\n                  (!c. c IN m\n                       ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                  (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10771)
+  let lemma2 = @tactics.prove(@parser.parse_term("forall n m:(real^N->bool)->bool.\n          FINITE m /\\\n          (forall c. c IN m ==> polytope c) /\\\n          (forall c. c IN m ==> aff_dim c <= &n) /\\\n          (forall c f. c IN m /\\ f face_of c ==> f IN m) /\\\n          (forall c1 c2. c1 IN m /\\ c2 IN m\n                   ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n          ==> ?t. simplicial_complex t /\\\n                  (forall k. k IN t ==> aff_dim k <= &n) /\\\n                  UNIONS t = UNIONS m /\\\n                  (forall c. c IN m\n                       ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                  (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10771)
   let t10808 = @meson.meson_tac(@list.List([@sets.sing_subset(), @sets.unions_1(), @sets.finite_sing()]))
   let t10809 = @tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([@sets.subset_refl()]))])), t10808)
   let t10807 = @meson.asm_meson_tac(@list.List([@int.int_le_trans(), @convex.aff_dim_pos_le()]))
-  let t10810 = @list.List([@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!c:real^N->bool. c IN m ==> c = {}"), fn(x10804 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10810 = @list.List([@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall c:real^N->bool. c IN m ==> c = {}"), fn(x10804 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x10804
     let t10806 = @meson.meson_tac(@list.List([th_1]))
     @tactics.then_tac(@simp.simp_tac(@list.List([th_1, @theorems.imp_conj(), simplex_empty(), face_of_empty()])), t10806)
@@ -18603,7 +18603,7 @@ fn step_380() -> Unit raise {
   }), t10782), @tactics.strip_tac), t10784), t10785), @tactics.ants_tac), t10786), @tactics.ants_tac), t10787), @tactics.ants_tac), t10788), @tactics.ants_tac), t10789), @tactics.ants_tac), t10791), @tactics.ants_tac), t10792), t10793), t10794), t10795), t10796), t10797), @tactics.strip_tac), t10798), t10799), @tactics.conj_tac), t10800), @tactics.conj_tac), t10802), t10811])
   let t10772 = @class.asm_cases_tac(@parser.parse_term("&0:int <= d"))
   let t10813 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t10772), t10812)
-  simplicial_subdivision_of_cell_complex_lowdim_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c. c IN m ==> aff_dim c <= d) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (!k. k IN t ==> aff_dim k <= d) /\\\n                UNIONS t = UNIONS m /\\\n                (!c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10813))
+  simplicial_subdivision_of_cell_complex_lowdim_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c <= d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (forall k. k IN t ==> aff_dim k <= d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10813))
 }
 
 ///|
@@ -18622,7 +18622,7 @@ fn step_381() -> Unit raise {
   let t10814 = @parser.parse_term("&(dimindex(:N)):int")
   let t10815 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("m:(real^N->bool)->bool"), t10814]), simplicial_subdivision_of_cell_complex_lowdim()))
   let t10817 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10815), t10816)
-  simplicial_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool.\n        FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                UNIONS t = UNIONS m /\\\n                (!c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10817))
+  simplicial_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10817))
 }
 
 ///|
@@ -18676,7 +18676,7 @@ fn step_382() -> Unit raise {
   let t10819 = @parser.parse_term("&(dimindex(:N)):int")
   let t10820 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("m:(real^N->bool)->bool"), t10819, t10818]), cell_complex_subdivision_exists()))
   let t10854 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10820), t10821), t10822), t10823), t10824), t10825), t10826), @tactics.strip_tac), t10827), t10828), t10830), t10831), @tactics.disch_tac), t10832), t10833), t10834), t10835), t10836), t10837), @tactics.conj_tac), t10839), t10840), t10841), @tactics.strip_tac), t10842), t10843), t10844), t10845), t10849), t10851), t10852), t10853)
-  fine_simplicial_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool e.\n        &0 < e /\\ FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (!k. k IN t ==> diameter k < e) /\\\n                UNIONS t = UNIONS m /\\\n                (!c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10854))
+  fine_simplicial_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool e.\n        &0 < e /\\ FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (forall k. k IN t ==> diameter k < e) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10854))
 }
 
 ///|
@@ -18697,7 +18697,7 @@ fn step_383() -> Unit raise {
   let t10855 = @parser.parse_term("t:real^N->bool")
   let t10856 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:real^N->bool"), t10855]), @topology.closure_interior_union_closed()))
   let t10860 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10856), @tactics.ants_tac), t10857), t10858), t10859)
-  let lemma = @tactics.prove(@parser.parse_term("!s t:real^N->bool.\n          closed t /\\\n          closure(interior(s UNION t)) = s UNION t /\\\n          closure(interior s) = s /\\ closure(interior t) = {}\n          ==> s UNION t = s"), t10860)
+  let lemma = @tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n          closed t /\\\n          closure(interior(s UNION t)) = s UNION t /\\\n          closure(interior s) = s /\\ closure(interior t) = {}\n          ==> s UNION t = s"), t10860)
   let t10876 = @simp.asm_simp_tac(@list.List([@card.finite_imp_countable(), @sets.finite_restrict(), @sets.in_elim_thm()]))
   let t10875 = @tactics.match_mp_tac(@topology.nowhere_dense_countable_unions_closed())
   let t10877 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.closure_eq_empty()])), t10875), t10876)
@@ -18720,7 +18720,7 @@ fn step_383() -> Unit raise {
     }
   })
   let t10880 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10864), t10867), t10868), t10869), t10871), t10872), t10879)
-  regular_closed_unions_fat_cells_univ_c.set(@tactics.prove(@parser.parse_term("!s u:real^N->bool.\n        closure(interior u) = u /\\\n        FINITE s /\\ (!c. c IN s ==> closed c /\\ convex c) /\\ UNIONS s = u\n        ==> UNIONS {c | c IN s /\\ ~(interior c = {})} = u"), t10880))
+  regular_closed_unions_fat_cells_univ_c.set(@tactics.prove(@parser.parse_term("forall s u:real^N->bool.\n        closure(interior u) = u /\\\n        FINITE s /\\ (forall c. c IN s ==> closed c /\\ convex c) /\\ UNIONS s = u\n        ==> UNIONS {c | c IN s /\\ ~(interior c = {})} = u"), t10880))
 }
 
 ///|
@@ -18808,7 +18808,7 @@ fn step_384() -> Unit raise {
   let t10891 = @simp.asm_simp_tac(@list.List([@topology.closed_unions(), @sets.finite_restrict(), @sets.forall_in_gspec()]))
   let t10890 = @tactics.match_mp_tac(@meson.meson(@list.List([@topology.closure_closed()]), @parser.parse_term("closed s /\\ u SUBSET closure s ==> u SUBSET s")))
   let t10889 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
-  let t10888 = @class.asm_cases_tac(@parser.parse_term("!c. c IN s ==> aff_dim(c:real^N->bool) = aff_dim(u:real^N->bool)"))
+  let t10888 = @class.asm_cases_tac(@parser.parse_term("forall c. c IN s ==> aff_dim(c:real^N->bool) = aff_dim(u:real^N->bool)"))
   let t10887 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), @tactics.all_tac])
   let t10886 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t10885 = @list.List([@meson.asm_meson_tac(@list.List([@topology.closed_unions()])), @tactics.all_tac])
@@ -18819,7 +18819,7 @@ fn step_384() -> Unit raise {
     }
   })
   let t10950 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10884), t10885), t10886), @tactics.conj_tac), t10887), t10888), t10889), t10890), t10891), t10893), @tactics.conj_tac), t10949)
-  convex_unions_fulldim_cells_c.set(@tactics.prove(@parser.parse_term("!s u:real^N->bool.\n        FINITE s /\\ (!c. c IN s ==> closed c /\\ convex c) /\\\n        UNIONS s = u /\\ convex u\n        ==> UNIONS {c | c IN s /\\ aff_dim c = aff_dim u} = u"), t10950))
+  convex_unions_fulldim_cells_c.set(@tactics.prove(@parser.parse_term("forall s u:real^N->bool.\n        FINITE s /\\ (forall c. c IN s ==> closed c /\\ convex c) /\\\n        UNIONS s = u /\\ convex u\n        ==> UNIONS {c | c IN s /\\ aff_dim c = aff_dim u} = u"), t10950))
 }
 
 ///|
@@ -18853,7 +18853,7 @@ fn step_385() -> Unit raise {
   }))
   let t10966 = @simp.asm_rewrite_tac(@list.List([]))
   let t10962 = @parser.parse_term("c:real^N->bool")
-  let t10965 = @tactics.undisch_then(@parser.parse_term("!c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f"), fn(x10964 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10965 = @tactics.undisch_then(@parser.parse_term("forall c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f"), fn(x10964 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x10959 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s10960 = @tactics.mp_tac(x10959)
       fn(x10961 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -18870,7 +18870,7 @@ fn step_385() -> Unit raise {
   let t10952 = @simp.asm_rewrite_tac(@list.List([simplicial_complex(), triangulation()]))
   let t10951 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("m:(real^N->bool)->bool"), simplicial_subdivision_of_cell_complex()))
   let t10981 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10951), t10952), t10953), t10954), t10955), t10956), @tactics.conj_tac), t10957), t10958), @tactics.disch_tac), t10965), t10966), t10968), t10969), t10970), @tactics.conj_tac), t10972), t10976), t10978), t10979), t10980)
-  triangular_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c. c IN m ==> aff_dim c = d) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (!k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (!c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10981))
+  triangular_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c = d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (forall k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t10981))
 }
 
 ///|
@@ -18904,7 +18904,7 @@ fn step_386() -> Unit raise {
   }))
   let t10998 = @simp.asm_rewrite_tac(@list.List([]))
   let t10994 = @parser.parse_term("c:real^N->bool")
-  let t10997 = @tactics.undisch_then(@parser.parse_term("!c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f"), fn(x10996 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t10997 = @tactics.undisch_then(@parser.parse_term("forall c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f"), fn(x10996 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x10991 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s10992 = @tactics.mp_tac(x10991)
       fn(x10993 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -18922,7 +18922,7 @@ fn step_386() -> Unit raise {
   let t10982 = @parser.parse_term("e:real")
   let t10983 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("m:(real^N->bool)->bool"), t10982]), fine_simplicial_subdivision_of_cell_complex()))
   let t11013 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10983), t10984), t10985), t10986), t10987), t10988), @tactics.conj_tac), t10989), t10990), @tactics.disch_tac), t10997), t10998), t11000), t11001), t11002), @tactics.conj_tac), t11004), t11008), t11010), t11011), t11012)
-  fine_triangular_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("!m:(real^N->bool)->bool d e.\n        &0 < e /\\ FINITE m /\\\n        (!c. c IN m ==> polytope c) /\\\n        (!c. c IN m ==> aff_dim c = d) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (!k. k IN t ==> diameter k < e) /\\\n                (!k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (!c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (!k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t11013))
+  fine_triangular_subdivision_of_cell_complex_c.set(@tactics.prove(@parser.parse_term("forall m:(real^N->bool)->bool d e.\n        &0 < e /\\ FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c = d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (forall k. k IN t ==> diameter k < e) /\\\n                (forall k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)"), t11013))
 }
 
 ///|

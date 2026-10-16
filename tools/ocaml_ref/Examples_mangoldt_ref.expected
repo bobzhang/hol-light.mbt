@@ -79644,20 +79644,20 @@ Generating HOL version of proof
 0..0..solved at 2
 Examples/mangoldt quotations (209):
   1 <= SUC n
-  !n. log(&(FACT n)) = sum(1..n) (\\d. log(&d))
+  forall n. log(&(FACT n)) = sum(1..n) (\\d. log(&d))
   n < 1 <=> n = 0
   d = 1 * d
   1 <= n <=> ~(n = 0)
   \\m:num. m * d
   \\m:num. m DIV d
-  !n d. ~(d = 0)\n         ==> sum(1..n) (\\m. if d divides m then &1 else &0) = floor(&n / &d)
+  forall n d. ~(d = 0)\n         ==> sum(1..n) (\\m. if d divides m then &1 else &0) = floor(&n / &d)
   &1
   inv(&2)
   &1 / &2 <= log(&2) /\\ log(&2) <= &1
   ~(n = 0)
   n = &1 + (n  - &1)
   x <= y - &1 ==> x <= y
-  !n. ~(n = 0) ==> log(&n) <= &n
+  forall n. ~(n = 0) ==> log(&n) <= &n
   &0 <= log(&n)
   log(&2)
   inv(&2)
@@ -79696,7 +79696,7 @@ Examples/mangoldt quotations (209):
   abs(x - y) <= e <=> x <= y + e /\\ y - e <= x
   1
   n = 1
-  !n. ~(n = 0)\n       ==> abs(log(&(FACT n)) - (&n * log(&n) - &n + &1)) <= &2 * log(&n)
+  forall n. ~(n = 0)\n       ==> abs(log(&(FACT n)) - (&n * log(&n) - &n + &1)) <= &2 * log(&n)
   (f has_complex_derivative f') net
   (f has_complex_derivative f') net
   mangoldt n = if ?p k. 1 <= k /\\ prime p /\\ n = p EXP k\n               then log(&(@p. prime p /\\ p divides n))\n               else &0
@@ -79704,9 +79704,9 @@ Examples/mangoldt quotations (209):
   mangoldt 1 = &0
   ~(a /\\ b ==> ~(c /\\ d)) <=> d /\\ c /\\ a /\\ b
   a /\\ b /\\ c <=> ~(a /\\ b ==> ~c)
-  !p k. prime p ==> mangoldt(p EXP k) = if 1 <= k then log(&p) else &0
+  forall p k. prime p ==> mangoldt(p EXP k) = if 1 <= k then log(&p) else &0
   ?p k. 1 <= k /\\ prime p /\\ n = p EXP k
-  !n. &0 <= mangoldt n
+  forall n. &0 <= mangoldt n
   2 <= p ==> ~(p = 0) /\\ ~(p = 1)
   {d | ?i. i <= k /\\ d = p EXP i} =\n                        IMAGE (\\i. p EXP i) {i | i <= k}
   d:num
@@ -79719,12 +79719,12 @@ Examples/mangoldt quotations (209):
   ~(1 <= 0)
   {x | x = a} = {a}
   n = 1
-  !n. ~(n = 0) ==> log(&n) = sum {d | d divides n} (\\d. mangoldt(d))
+  forall n. ~(n = 0) ==> log(&n) = sum {d | d divides n} (\\d. mangoldt(d))
   d:num
   m:num
   sum (1..n) (\\m. sum (1..n)\n     (\\d. mangoldt d * (if d divides m then &1 else &0)))
   sum(1..n) (\\m. sum {d | d divides m} (\\d. mangoldt d))
-  !n. log(&(FACT n)) = sum(1..n) (\\d. mangoldt(d) * floor(&n / &d))
+  forall n. log(&(FACT n)) = sum(1..n) (\\d. mangoldt(d) * floor(&n / &d))
   1 <= n <=> ~(n = 0)
   &6 * &n + (&2 * log(&2) - &1) * &n + (&2 * log(&2)) * &n
   &6 * log(&n) + (&2 * log(&2) - &1) * &1 + (&2 * log(&2)) * &n
@@ -79743,9 +79743,9 @@ Examples/mangoldt quotations (209):
   sum (n+1..2*n)\n        (\\d. mangoldt(d) * (floor(&(2 * n) / &d) - &2 * floor(&n / &d)))
   ~(n = 0) ==> 1 <= n + 1 /\\ n <= 2 * n
   sum (n+1..2 * n) (\\d. mangoldt d)
-  !n. ~(n = 0)\n       ==> sum(1..2*n) (\\d. mangoldt(d)) -\n           sum(1..n) (\\d. mangoldt(d)) <= &9 * &n
+  forall n. ~(n = 0)\n       ==> sum(1..2*n) (\\d. mangoldt(d)) -\n           sum(1..n) (\\d. mangoldt(d)) <= &9 * &n
   s1 <= &9 * e ==> s2 - s1 <= &9 * e ==> s2 <= &9 * &2 * e
-  !n. sum(1..2 EXP n) (\\d. mangoldt(d)) <= &9 * &(2 EXP n)
+  forall n. sum(1..2 EXP n) (\\d. mangoldt(d)) <= &9 * &(2 EXP n)
   k - 1
   ~(k = 0) ==> k = SUC(k - 1)
   k = 0
@@ -79753,10 +79753,10 @@ Examples/mangoldt quotations (209):
   sum(1..2 EXP k) (\\d. mangoldt d)
   n:num
   n:num
-  ?k. n <= 2 EXP k /\\ !l. l < k ==> ~(n <= 2 EXP l)
+  ?k. n <= 2 EXP k /\\ forall l. l < k ==> ~(n <= 2 EXP l)
   sum(1..1) (\\d. mangoldt d)
   n <= 1
-  !n. sum(1..n) (\\d. mangoldt(d)) <= &18 * &n
+  forall n. sum(1..n) (\\d. mangoldt(d)) <= &18 * &n
   x <= (k - &2) * n /\\ l <= n ==> x <= k * n - &2 * l
   &n / &i
   i:num
@@ -79768,7 +79768,7 @@ Examples/mangoldt quotations (209):
   &1 <= x ==> abs(x - &1) <= x
   abs(n - &1) <= n /\\ abs(s' - s) <= (k - &1) * n - a\n    ==> abs(s' - (nl - n + &1)) <= a\n        ==> abs(s - nl) <= n * k
   &n
-  !n. ~(n = 0) ==> abs(sum(1..n) (\\d. mangoldt(d) / &d) - log(&n)) <= &21
+  forall n. ~(n = 0) ==> abs(sum(1..n) (\\d. mangoldt(d) / &d) - log(&n)) <= &21
   3 <= n ==> 1 <= n /\\ 1 < n
   x - &1 <= x
   --x <= &0 <=> &0 <= x
@@ -79844,14 +79844,14 @@ Examples/mangoldt quotations (209):
   FINITE(s:num->bool)
   abs(sum (1..n) (\\d. mangoldt d / &d) -\n                  sum {p | prime p /\\ p IN 1..n} (\\p. log (&p) / &p))
   n = 0
-  !n s. s SUBSET (1..n)\n         ==> abs (sum s (\\d. mangoldt d / &d) -\n                  sum {p | prime p /\\ p IN s} (\\p. log (&p) / &p)) <= &3
+  forall n s. s SUBSET (1..n)\n         ==> abs (sum s (\\d. mangoldt d / &d) -\n                  sum {p | prime p /\\ p IN s} (\\p. log (&p) / &p)) <= &3
   (f has_complex_derivative f') net
   (f has_complex_derivative f') net
   n:num
   2 <= p ==> 1 <= p
   {p | prime p /\\ p <= n} = {p | prime p /\\ p IN 1..n}
   abs(s1 - s2) <= k - e ==> abs(s1 - l) <= e ==> abs(s2 - l) <= k
-  !n. ~(n = 0)\n       ==> abs(sum {p | prime p /\\ p <= n}\n                   (\\p. log(&p) / &p) - log(&n)) <= &24
+  forall n. ~(n = 0)\n       ==> abs(sum {p | prime p /\\ p <= n}\n                   (\\p. log(&p) / &p) - log(&n)) <= &24
 LOG_FACT =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#log:fun(real,real) (#real_of_num:fun(num,real) (#FACT:fun(num,num) n:num)))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\d:num. (#log:fun(real,real) (#real_of_num:fun(num,real) d:num)))))))
 SUM_DIVISORS_FLOOR_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) d:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\m:num. (((#COND:fun(bool,fun(real,fun(real,real))) ((#num_divides:fun(num,fun(num,bool)) d:num) m:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (#floor:fun(real,real) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) d:num)))))))))
 LOG_2_BOUNDS =  |- ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#log:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_le:fun(real,fun(real,bool)) (#log:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))

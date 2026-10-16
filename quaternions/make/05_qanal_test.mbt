@@ -74743,10 +74743,10 @@ test "Quaternions/qanal matches Quaternions/qanal.ml" {
       #|  quat_ii:quat
       #|  quat_cnj:quat->quat
       #|  quat_real:quat->bool
-      #|  !q. norm q pow 2 = Re(cnj q * q)
-      #|  !x n. inv (x pow n) = inv x pow n
-      #|  !x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)
-      #|  !net:(A)net P f g l m b1 b2.\n     eventually (\\x. !n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. !n. P n ==> norm(m n) <= b2) net /\\\n     (!e. &0 < e\n          ==> eventually (\\x. !n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (!e. &0 < e\n          ==> eventually (\\x. !n. P n ==> norm(g n x - m n) < e) net)\n     ==> !e. &0 < e\n             ==> eventually\n                  (\\x. !n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net
+      #|  forall q. norm q pow 2 = Re(cnj q * q)
+      #|  forall x n. inv (x pow n) = inv x pow n
+      #|  forall x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)
+      #|  forall net:(A)net P f g l m b1 b2.\n     eventually (\\x. forall n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. forall n. P n ==> norm(m n) <= b2) net /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n. P n ==> norm(g n x - m n) < e) net)\n     ==> forall e. &0 < e\n             ==> eventually\n                  (\\x. forall n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net
       #|  b <= norm l /\\ norm(f - l) < b / &2 ==> b / &2 <= norm f
       #|  :real
       #|  :real
@@ -74757,121 +74757,121 @@ test "Quaternions/qanal matches Quaternions/qanal.ml" {
       #|  norm ((l:B->quat) n)
       #|  q:quat
       #|  p:quat
-      #|  !p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q
+      #|  forall p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q
       #|  ~((f:B->A->quat) n x = Hx(&0)) /\\ ~(l n = Hx(&0))
       #|  n:B
       #|  n:B
       #|  x:A
       #|  (p ==> q /\\ r) <=> (p ==> q) /\\ (p ==> r)
-      #|  \\x. !n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2
-      #|  !net:(A)net P f l b.\n     (!e. &0 < e\n          ==> eventually (\\x. !n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. !n. P n ==> b <= norm(l n)) net\n     ==> !e. &0 < e\n             ==> eventually\n                 (\\x. !n. P n ==> norm(inv(f n x) - inv(l n)) < e) net
-      #|  !net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net
+      #|  \\x. forall n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2
+      #|  forall net:(A)net P f l b.\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. forall n. P n ==> b <= norm(l n)) net\n     ==> forall e. &0 < e\n             ==> eventually\n                 (\\x. forall n. P n ==> norm(inv(f n x) - inv(l n)) < e) net
+      #|  forall net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net
       #|  norm(l:quat)
       #|  \\n:one. (l:quat)
       #|  \\n:one. (f:A->quat)
       #|  \\x:one. T
       #|  net:(A)net
-      #|  !net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net
-      #|  !net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net
-      #|  !f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net
-      #|  !f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net
-      #|  !net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net
-      #|  !net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net
-      #|  !net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net
-      #|  !net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net
+      #|  forall net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net
+      #|  forall net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net
+      #|  forall f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net
+      #|  forall f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net
+      #|  forall net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net
+      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net
+      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net
+      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net
       #|  Hx(&0) = c * Hx(&0)
-      #|  !net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net
+      #|  forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net
       #|  Hx(&0) = Hx(&0) * c
-      #|  !net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net
+      #|  forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net
       #|  n:num
-      #|  !net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net
-      #|  !net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net
-      #|  !f s. (!n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s
+      #|  forall net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net
+      #|  forall net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net
+      #|  forall f s. (forall n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s
       #|  B:real
-      #|  !f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
+      #|  forall f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
       #|  B:real
-      #|  !net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
+      #|  forall net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
       #|  1
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b
       #|  2
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b
       #|  3
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b
       #|  4
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b
       #|  1
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)
       #|  2
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)
       #|  3
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)
       #|  4
       #|  b:real
       #|  l:quat
       #|  f:A->quat
       #|  net:(A)net
-      #|  !net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)
-      #|  !f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s
+      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)
+      #|  forall f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s
       #|  ((\\x. (\\y. y * c) (f x)) sums (\\y. y * c) l) s
-      #|  !f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s
-      #|  !f c s. summable s f ==> summable s (\\x. c * f x)
-      #|  !f c s. summable s f ==> summable s (\\x. f x * c)
-      #|  !net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net
-      #|  !net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net
-      #|  !net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net
-      #|  !f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)
-      #|  !f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)
-      #|  !f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s
-      #|  !f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s
-      #|  !f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s
-      #|  !f:real^N->quat.\n     f continuous_on s /\\\n     (!x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s
-      #|  !f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s
+      #|  forall f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s
+      #|  forall f c s. summable s f ==> summable s (\\x. c * f x)
+      #|  forall f c s. summable s f ==> summable s (\\x. f x * c)
+      #|  forall net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net
+      #|  forall net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net
+      #|  forall net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net
+      #|  forall f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)
+      #|  forall f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)
+      #|  forall f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s
+      #|  forall f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s
+      #|  forall f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s
+      #|  forall f:real^N->quat.\n     f continuous_on s /\\\n     (forall x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s
+      #|  forall f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s
       #|  norm(a - b:real^N) < d ==> abs(norm a - norm b) < d
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  !z:real^N. (\\z. Hx(norm z)) continuous at z
-      #|  !z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)
-      #|  !s. (\\z:real^N. Hx(norm z)) continuous_on s
-      #|  !c z:real^N. (\\z. Hx(c dot z)) continuous at z
-      #|  !c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)
-      #|  !s c:real^N. (\\z. Hx(c dot z)) continuous_on s
-      #|  !net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net
-      #|  !f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s
-      #|  !f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net
-      #|  !f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s
+      #|  forall z:real^N. (\\z. Hx(norm z)) continuous at z
+      #|  forall z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)
+      #|  forall s. (\\z:real^N. Hx(norm z)) continuous_on s
+      #|  forall c z:real^N. (\\z. Hx(c dot z)) continuous at z
+      #|  forall c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)
+      #|  forall s c:real^N. (\\z. Hx(c dot z)) continuous_on s
+      #|  forall net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net
+      #|  forall f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s
+      #|  forall f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net
+      #|  forall f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s
       #|  linear(Hx o  Re) /\\\n   linear(Hx o Im1) /\\\n   linear(Hx o Im2) /\\\n   linear(Hx o Im3)
-      #|  (!q. (Hx o  Re) continuous at q) /\\\n   (!q. (Hx o Im1) continuous at q) /\\\n   (!q. (Hx o Im2) continuous at q) /\\\n   (!q. (Hx o Im3) continuous at q)
-      #|  (!s. (Hx o  Re) continuous_on s) /\\\n   (!s. (Hx o Im1) continuous_on s) /\\\n   (!s. (Hx o Im2) continuous_on s) /\\\n   (!s. (Hx o Im3) continuous_on s)
+      #|  (forall q. (Hx o  Re) continuous at q) /\\\n   (forall q. (Hx o Im1) continuous at q) /\\\n   (forall q. (Hx o Im2) continuous at q) /\\\n   (forall q. (Hx o Im3) continuous at q)
+      #|  (forall s. (Hx o  Re) continuous_on s) /\\\n   (forall s. (Hx o Im1) continuous_on s) /\\\n   (forall s. (Hx o Im2) continuous_on s) /\\\n   (forall s. (Hx o Im3) continuous_on s)
       #|QUAT_SQNORM_MUL =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) ((#quat_mul:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1))))) (#quat_cnj:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) q:cart(real,tybit0(tybit0(1))))) q:cart(real,tybit0(tybit0(1))))))))
       #|QUAT_INV_POW =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),bool)) (#quat_inv:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) x:cart(real,tybit0(tybit0(1)))) n:num))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) (#quat_inv:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) x:cart(real,tybit0(tybit0(1))))) n:num))))))
       #|QUAT_NORM_IMG =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),bool)) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) x:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#vector_neg:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) (#Hx:fun(real,cart(real,tybit0(tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

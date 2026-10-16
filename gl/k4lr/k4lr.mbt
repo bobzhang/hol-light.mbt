@@ -31,7 +31,7 @@ pub fn k4lraxiom_cases() -> @kernel.Thm {
 ///|
 /// K4LRaxiom_RULES, K4LRaxiom_INDUCT, K4LRaxiom_CASES
 fn step_1() -> Unit raise {
-  let (k4lraxiom_rules, k4lraxiom_induct, k4lraxiom_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!p q. K4LRaxiom (p --> (q --> p))) /\\\n   (!p q r. K4LRaxiom ((p --> q --> r) --> (p --> q) --> (p --> r))) /\\\n   (!p. K4LRaxiom (((p --> False) --> False) --> p)) /\\\n   (!p q. K4LRaxiom ((p <-> q) --> p --> q)) /\\\n   (!p q. K4LRaxiom ((p <-> q) --> q --> p)) /\\\n   (!p q. K4LRaxiom ((p --> q) --> (q --> p) --> (p <-> q))) /\\\n   K4LRaxiom (True <-> False --> False) /\\\n   (!p. K4LRaxiom (Not p <-> p --> False)) /\\\n   (!p q. K4LRaxiom (p && q <-> (p --> q --> False) --> False)) /\\\n   (!p q. K4LRaxiom (p || q <-> Not(Not p && Not q))) /\\\n   (!p q. K4LRaxiom (Box (p --> q) --> Box p --> Box q)) /\\\n   (!p. K4LRaxiom (Box p --> Box (Box p)))"))
+  let (k4lraxiom_rules, k4lraxiom_induct, k4lraxiom_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall p q. K4LRaxiom (p --> (q --> p))) /\\\n   (forall p q r. K4LRaxiom ((p --> q --> r) --> (p --> q) --> (p --> r))) /\\\n   (forall p. K4LRaxiom (((p --> False) --> False) --> p)) /\\\n   (forall p q. K4LRaxiom ((p <-> q) --> p --> q)) /\\\n   (forall p q. K4LRaxiom ((p <-> q) --> q --> p)) /\\\n   (forall p q. K4LRaxiom ((p --> q) --> (q --> p) --> (p <-> q))) /\\\n   K4LRaxiom (True <-> False --> False) /\\\n   (forall p. K4LRaxiom (Not p <-> p --> False)) /\\\n   (forall p q. K4LRaxiom (p && q <-> (p --> q --> False) --> False)) /\\\n   (forall p q. K4LRaxiom (p || q <-> Not(Not p && Not q))) /\\\n   (forall p q. K4LRaxiom (Box (p --> q) --> Box p --> Box q)) /\\\n   (forall p. K4LRaxiom (Box p --> Box (Box p)))"))
   k4lraxiom_rules_c.set(k4lraxiom_rules)
   k4lraxiom_induct_c.set(k4lraxiom_induct)
   k4lraxiom_cases_c.set(k4lraxiom_cases)
@@ -67,7 +67,7 @@ pub fn k4lrproves_cases() -> @kernel.Thm {
 ///|
 /// K4LRproves_RULES, K4LRproves_INDUCT, K4LRproves_CASES
 fn step_2() -> Unit raise {
-  let (k4lrproves_rules, k4lrproves_induct, k4lrproves_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!p. K4LRaxiom p ==> |~ p) /\\\n   (!p q. |~ (p --> q) /\\ |~ p ==> |~ q) /\\\n   (!p. |~ p ==> |~ (Box p)) /\\\n   (!p . |~ (Box p --> p) ==> |~ p)"))
+  let (k4lrproves_rules, k4lrproves_induct, k4lrproves_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall p. K4LRaxiom p ==> |~ p) /\\\n   (forall p q. |~ (p --> q) /\\ |~ p ==> |~ q) /\\\n   (forall p. |~ p ==> |~ (Box p)) /\\\n   (forall p . |~ (Box p --> p) ==> |~ p)"))
   k4lrproves_rules_c.set(k4lrproves_rules)
   k4lrproves_induct_c.set(k4lrproves_induct)
   k4lrproves_cases_c.set(k4lrproves_cases)
@@ -77,7 +77,7 @@ fn step_2() -> Unit raise {
 /// K4LR_axiom_addimp
 fn step_3() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_addimp_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> (q --> p))"), t1))
+  k4lr_axiom_addimp_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> (q --> p))"), t1))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn k4lr_axiom_addimp() -> @kernel.Thm {
 /// K4LR_axiom_distribimp
 fn step_4() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_distribimp_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p --> q --> r) --> (p --> q) --> (p --> r))"), t2))
+  k4lr_axiom_distribimp_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p --> q --> r) --> (p --> q) --> (p --> r))"), t2))
 }
 
 ///|
@@ -109,7 +109,7 @@ pub fn k4lr_axiom_distribimp() -> @kernel.Thm {
 /// K4LR_axiom_doubleneg
 fn step_5() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_doubleneg_c.set(@tactics.prove(@parser.parse_term("!p. |~ (((p --> False) --> False) --> p)"), t3))
+  k4lr_axiom_doubleneg_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (((p --> False) --> False) --> p)"), t3))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn k4lr_axiom_doubleneg() -> @kernel.Thm {
 /// K4LR_axiom_iffimp1
 fn step_6() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_iffimp1_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p <-> q) --> p --> q)"), t4))
+  k4lr_axiom_iffimp1_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p <-> q) --> p --> q)"), t4))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn k4lr_axiom_iffimp1() -> @kernel.Thm {
 /// K4LR_axiom_iffimp2
 fn step_7() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_iffimp2_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p <-> q) --> q --> p)"), t5))
+  k4lr_axiom_iffimp2_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p <-> q) --> q --> p)"), t5))
 }
 
 ///|
@@ -157,7 +157,7 @@ pub fn k4lr_axiom_iffimp2() -> @kernel.Thm {
 /// K4LR_axiom_impiff
 fn step_8() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_impiff_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p --> q) --> (q --> p) --> (p <-> q))"), t6))
+  k4lr_axiom_impiff_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p --> q) --> (q --> p) --> (p <-> q))"), t6))
 }
 
 ///|
@@ -189,7 +189,7 @@ pub fn k4lr_axiom_true() -> @kernel.Thm {
 /// K4LR_axiom_not
 fn step_10() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_not_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Not p <-> (p --> False))"), t8))
+  k4lr_axiom_not_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Not p <-> (p --> False))"), t8))
 }
 
 ///|
@@ -205,7 +205,7 @@ pub fn k4lr_axiom_not() -> @kernel.Thm {
 /// K4LR_axiom_and
 fn step_11() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_and_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p && q) <-> (p --> q --> False) --> False)"), t9))
+  k4lr_axiom_and_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p && q) <-> (p --> q --> False) --> False)"), t9))
 }
 
 ///|
@@ -221,7 +221,7 @@ pub fn k4lr_axiom_and() -> @kernel.Thm {
 /// K4LR_axiom_or
 fn step_12() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_or_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p || q) <-> Not(Not p && Not q))"), t10))
+  k4lr_axiom_or_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p || q) <-> Not(Not p && Not q))"), t10))
 }
 
 ///|
@@ -237,7 +237,7 @@ pub fn k4lr_axiom_or() -> @kernel.Thm {
 /// K4LR_axiom_boximp
 fn step_13() -> Unit raise {
   let t11 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_boximp_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Box (p --> q) --> Box p --> Box q)"), t11))
+  k4lr_axiom_boximp_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Box (p --> q) --> Box p --> Box q)"), t11))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn k4lr_axiom_boximp() -> @kernel.Thm {
 /// K4LR_axiom_4
 fn step_14() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules()]))
-  k4lr_axiom_4_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Box p --> Box (Box p))"), t12))
+  k4lr_axiom_4_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Box p --> Box (Box p))"), t12))
 }
 
 ///|
@@ -269,7 +269,7 @@ pub fn k4lr_axiom_4() -> @kernel.Thm {
 /// K4LR_modusponens
 fn step_15() -> Unit raise {
   let t13 = @meson.meson_tac(@list.List([k4lrproves_rules()]))
-  k4lr_modusponens_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p --> q) /\\ |~ p ==> |~ q"), t13))
+  k4lr_modusponens_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p --> q) /\\ |~ p ==> |~ q"), t13))
 }
 
 ///|
@@ -285,7 +285,7 @@ pub fn k4lr_modusponens() -> @kernel.Thm {
 /// K4LR_necessitation
 fn step_16() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([k4lrproves_rules()]))
-  k4lr_necessitation_c.set(@tactics.prove(@parser.parse_term("!p. |~ p ==> |~ (Box p)"), t14))
+  k4lr_necessitation_c.set(@tactics.prove(@parser.parse_term("forall p. |~ p ==> |~ (Box p)"), t14))
 }
 
 ///|
@@ -301,7 +301,7 @@ pub fn k4lr_necessitation() -> @kernel.Thm {
 /// K4LR_lobrule
 fn step_17() -> Unit raise {
   let t15 = @meson.meson_tac(@list.List([k4lrproves_rules()]))
-  k4lr_lobrule_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Box p --> p) ==> |~ p"), t15))
+  k4lr_lobrule_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Box p --> p) ==> |~ p"), t15))
 }
 
 ///|
@@ -317,7 +317,7 @@ pub fn k4lr_lobrule() -> @kernel.Thm {
 /// K4LR_iff_imp1
 fn step_18() -> Unit raise {
   let t16 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_iffimp1()]))
-  k4lr_iff_imp1_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) ==> |~ (p --> q)"), t16))
+  k4lr_iff_imp1_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) ==> |~ (p --> q)"), t16))
 }
 
 ///|
@@ -333,7 +333,7 @@ pub fn k4lr_iff_imp1() -> @kernel.Thm {
 /// K4LR_iff_imp2
 fn step_19() -> Unit raise {
   let t17 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_iffimp2()]))
-  k4lr_iff_imp2_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) ==> |~ (q --> p)"), t17))
+  k4lr_iff_imp2_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) ==> |~ (q --> p)"), t17))
 }
 
 ///|
@@ -349,7 +349,7 @@ pub fn k4lr_iff_imp2() -> @kernel.Thm {
 /// K4LR_imp_antisym
 fn step_20() -> Unit raise {
   let t18 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_impiff()]))
-  k4lr_imp_antisym_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) /\\ |~ (q --> p) ==> |~ (p <-> q)"), t18))
+  k4lr_imp_antisym_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) /\\ |~ (q --> p) ==> |~ (p <-> q)"), t18))
 }
 
 ///|
@@ -365,7 +365,7 @@ pub fn k4lr_imp_antisym() -> @kernel.Thm {
 /// K4LR_add_assum
 fn step_21() -> Unit raise {
   let t19 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_addimp()]))
-  k4lr_add_assum_c.set(@tactics.prove(@parser.parse_term("!p q. |~ q ==> |~ (p --> q)"), t19))
+  k4lr_add_assum_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ q ==> |~ (p --> q)"), t19))
 }
 
 ///|
@@ -381,7 +381,7 @@ pub fn k4lr_add_assum() -> @kernel.Thm {
 /// K4LR_imp_refl_th
 fn step_22() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_distribimp(), k4lr_axiom_addimp()]))
-  k4lr_imp_refl_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p --> p)"), t20))
+  k4lr_imp_refl_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p --> p)"), t20))
 }
 
 ///|
@@ -397,7 +397,7 @@ pub fn k4lr_imp_refl_th() -> @kernel.Thm {
 /// K4LR_imp_add_assum
 fn step_23() -> Unit raise {
   let t21 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_distribimp(), k4lr_add_assum()]))
-  k4lr_imp_add_assum_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (q --> r) ==> |~ ((p --> q) --> (p --> r))"), t21))
+  k4lr_imp_add_assum_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (q --> r) ==> |~ ((p --> q) --> (p --> r))"), t21))
 }
 
 ///|
@@ -413,7 +413,7 @@ pub fn k4lr_imp_add_assum() -> @kernel.Thm {
 /// K4LR_imp_unduplicate
 fn step_24() -> Unit raise {
   let t22 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_distribimp(), k4lr_imp_refl_th()]))
-  k4lr_imp_unduplicate_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> p --> q) ==> |~ (p --> q)"), t22))
+  k4lr_imp_unduplicate_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> p --> q) ==> |~ (p --> q)"), t22))
 }
 
 ///|
@@ -429,7 +429,7 @@ pub fn k4lr_imp_unduplicate() -> @kernel.Thm {
 /// K4LR_imp_trans
 fn step_25() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_imp_add_assum()]))
-  k4lr_imp_trans_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) /\\ |~ (q --> r) ==> |~ (p --> r)"), t23))
+  k4lr_imp_trans_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) /\\ |~ (q --> r) ==> |~ (p --> r)"), t23))
 }
 
 ///|
@@ -445,7 +445,7 @@ pub fn k4lr_imp_trans() -> @kernel.Thm {
 /// K4LR_imp_swap
 fn step_26() -> Unit raise {
   let t24 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_axiom_addimp(), k4lr_modusponens(), k4lr_axiom_distribimp()]))
-  k4lr_imp_swap_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q --> r) ==> |~ (q --> p --> r)"), t24))
+  k4lr_imp_swap_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q --> r) ==> |~ (q --> p --> r)"), t24))
 }
 
 ///|
@@ -461,7 +461,7 @@ pub fn k4lr_imp_swap() -> @kernel.Thm {
 /// K4LR_imp_trans_chain_2
 fn step_27() -> Unit raise {
   let t25 = @meson.asm_meson_tac(@list.List([k4lr_imp_trans(), k4lr_imp_swap(), k4lr_imp_unduplicate()]))
-  k4lr_imp_trans_chain_2_c.set(@tactics.prove(@parser.parse_term("!p q1 q2 r. |~ (p --> q1) /\\ |~ (p --> q2) /\\ |~ (q1 --> q2 --> r)\n               ==> |~ (p --> r)"), t25))
+  k4lr_imp_trans_chain_2_c.set(@tactics.prove(@parser.parse_term("forall p q1 q2 r. |~ (p --> q1) /\\ |~ (p --> q2) /\\ |~ (q1 --> q2 --> r)\n               ==> |~ (p --> r)"), t25))
 }
 
 ///|
@@ -477,7 +477,7 @@ pub fn k4lr_imp_trans_chain_2() -> @kernel.Thm {
 /// K4LR_imp_trans_th
 fn step_28() -> Unit raise {
   let t26 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_axiom_addimp(), k4lr_axiom_distribimp()]))
-  k4lr_imp_trans_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((q --> r) --> (p --> q) --> (p --> r))"), t26))
+  k4lr_imp_trans_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((q --> r) --> (p --> q) --> (p --> r))"), t26))
 }
 
 ///|
@@ -493,7 +493,7 @@ pub fn k4lr_imp_trans_th() -> @kernel.Thm {
 /// K4LR_imp_add_concl
 fn step_29() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_imp_swap(), k4lr_imp_trans_th()]))
-  k4lr_imp_add_concl_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q) ==> |~ ((q --> r) --> (p --> r))"), t27))
+  k4lr_imp_add_concl_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q) ==> |~ ((q --> r) --> (p --> r))"), t27))
 }
 
 ///|
@@ -509,7 +509,7 @@ pub fn k4lr_imp_add_concl() -> @kernel.Thm {
 /// K4LR_imp_trans2
 fn step_30() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([k4lr_imp_add_assum(), k4lr_modusponens(), k4lr_imp_trans_th()]))
-  k4lr_imp_trans2_c.set(@tactics.prove(@parser.parse_term("!p q r s. |~ (p --> q --> r) /\\ |~ (r --> s) ==> |~ (p --> q --> s)"), t28))
+  k4lr_imp_trans2_c.set(@tactics.prove(@parser.parse_term("forall p q r s. |~ (p --> q --> r) /\\ |~ (r --> s) ==> |~ (p --> q --> s)"), t28))
 }
 
 ///|
@@ -525,7 +525,7 @@ pub fn k4lr_imp_trans2() -> @kernel.Thm {
 /// K4LR_imp_swap_th
 fn step_31() -> Unit raise {
   let t29 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_axiom_distribimp(), k4lr_imp_add_concl(), k4lr_axiom_addimp()]))
-  k4lr_imp_swap_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p --> q --> r) --> (q --> p --> r))"), t29))
+  k4lr_imp_swap_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p --> q --> r) --> (q --> p --> r))"), t29))
 }
 
 ///|
@@ -541,7 +541,7 @@ pub fn k4lr_imp_swap_th() -> @kernel.Thm {
 /// K4LR_contrapos
 fn step_32() -> Unit raise {
   let t30 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_iff_imp1(), k4lr_axiom_not(), k4lr_imp_add_concl(), k4lr_iff_imp2()]))
-  k4lr_contrapos_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) ==> |~ (Not q --> Not p)"), t30))
+  k4lr_contrapos_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) ==> |~ (Not q --> Not p)"), t30))
 }
 
 ///|
@@ -557,7 +557,7 @@ pub fn k4lr_contrapos() -> @kernel.Thm {
 /// K4LR_imp_truefalse_th
 fn step_33() -> Unit raise {
   let t31 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_imp_trans_th(), k4lr_imp_swap_th()]))
-  k4lr_imp_truefalse_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((q --> False) --> p --> (p --> q) --> False)"), t31))
+  k4lr_imp_truefalse_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((q --> False) --> p --> (p --> q) --> False)"), t31))
 }
 
 ///|
@@ -573,7 +573,7 @@ pub fn k4lr_imp_truefalse_th() -> @kernel.Thm {
 /// K4LR_imp_insert
 fn step_34() -> Unit raise {
   let t32 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_axiom_addimp()]))
-  k4lr_imp_insert_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> r) ==> |~ (p --> q --> r)"), t32))
+  k4lr_imp_insert_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> r) ==> |~ (p --> q --> r)"), t32))
 }
 
 ///|
@@ -605,7 +605,7 @@ pub fn k4lr_imp_mono_th_v1() -> @kernel.Thm {
 /// K4LR_ex_falso_th
 fn step_36() -> Unit raise {
   let t34 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_axiom_addimp(), k4lr_axiom_doubleneg()]))
-  k4lr_ex_falso_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (False --> p)"), t34))
+  k4lr_ex_falso_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (False --> p)"), t34))
 }
 
 ///|
@@ -621,7 +621,7 @@ pub fn k4lr_ex_falso_th() -> @kernel.Thm {
 /// K4LR_ex_falso
 fn step_37() -> Unit raise {
   let t35 = @meson.meson_tac(@list.List([k4lr_ex_falso_th(), k4lr_modusponens()]))
-  k4lr_ex_falso_c.set(@tactics.prove(@parser.parse_term("!p. |~ False ==> |~ p"), t35))
+  k4lr_ex_falso_c.set(@tactics.prove(@parser.parse_term("forall p. |~ False ==> |~ p"), t35))
 }
 
 ///|
@@ -637,7 +637,7 @@ pub fn k4lr_ex_falso() -> @kernel.Thm {
 /// K4LR_imp_contr_th
 fn step_38() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([k4lr_imp_add_assum(), k4lr_ex_falso_th()]))
-  k4lr_imp_contr_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p --> False) --> (p --> q))"), t36))
+  k4lr_imp_contr_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p --> False) --> (p --> q))"), t36))
 }
 
 ///|
@@ -653,7 +653,7 @@ pub fn k4lr_imp_contr_th() -> @kernel.Thm {
 /// K4LR_contrad
 fn step_39() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_distribimp(), k4lr_imp_refl_th(), k4lr_axiom_doubleneg()]))
-  k4lr_contrad_c.set(@tactics.prove(@parser.parse_term("!p. |~ ((p --> False) --> p) ==> |~ p"), t37))
+  k4lr_contrad_c.set(@tactics.prove(@parser.parse_term("forall p. |~ ((p --> False) --> p) ==> |~ p"), t37))
 }
 
 ///|
@@ -669,7 +669,7 @@ pub fn k4lr_contrad() -> @kernel.Thm {
 /// K4LR_bool_cases
 fn step_40() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([k4lr_contrad(), k4lr_imp_trans(), k4lr_imp_add_concl()]))
-  k4lr_bool_cases_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) /\\ |~ ((p --> False) --> q) ==> |~ q"), t38))
+  k4lr_bool_cases_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) /\\ |~ ((p --> False) --> q) ==> |~ q"), t38))
 }
 
 ///|
@@ -685,7 +685,7 @@ pub fn k4lr_bool_cases() -> @kernel.Thm {
 /// K4LR_imp_false_rule
 fn step_41() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([k4lr_imp_add_concl(), k4lr_imp_add_assum(), k4lr_ex_falso_th(), k4lr_axiom_addimp(), k4lr_imp_swap(), k4lr_imp_trans(), k4lr_axiom_doubleneg(), k4lr_imp_unduplicate()]))
-  k4lr_imp_false_rule_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((q --> False) --> p --> r)\n           ==> |~ (((p --> q) --> False) --> r)"), t39))
+  k4lr_imp_false_rule_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((q --> False) --> p --> r)\n           ==> |~ (((p --> q) --> False) --> r)"), t39))
 }
 
 ///|
@@ -701,7 +701,7 @@ pub fn k4lr_imp_false_rule() -> @kernel.Thm {
 /// K4LR_imp_true_rule
 fn step_42() -> Unit raise {
   let t40 = @meson.meson_tac(@list.List([k4lr_imp_insert(), k4lr_imp_swap(), k4lr_modusponens(), k4lr_imp_trans_th(), k4lr_bool_cases()]))
-  k4lr_imp_true_rule_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p --> False) --> r) /\\ |~ (q --> r)\n           ==> |~ ((p --> q) --> r)"), t40))
+  k4lr_imp_true_rule_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p --> False) --> r) /\\ |~ (q --> r)\n           ==> |~ ((p --> q) --> r)"), t40))
 }
 
 ///|
@@ -733,7 +733,7 @@ pub fn k4lr_truth_th() -> @kernel.Thm {
 /// K4LR_and_left_th
 fn step_44() -> Unit raise {
   let t42 = @meson.meson_tac(@list.List([k4lr_imp_add_assum(), k4lr_axiom_addimp(), k4lr_imp_trans(), k4lr_imp_add_concl(), k4lr_axiom_doubleneg(), k4lr_imp_trans(), k4lr_iff_imp1(), k4lr_axiom_and()]))
-  k4lr_and_left_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p && q --> p)"), t42))
+  k4lr_and_left_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p && q --> p)"), t42))
 }
 
 ///|
@@ -749,7 +749,7 @@ pub fn k4lr_and_left_th() -> @kernel.Thm {
 /// K4LR_and_right_th
 fn step_45() -> Unit raise {
   let t43 = @meson.meson_tac(@list.List([k4lr_axiom_addimp(), k4lr_imp_trans(), k4lr_imp_add_concl(), k4lr_axiom_doubleneg(), k4lr_iff_imp1(), k4lr_axiom_and()]))
-  k4lr_and_right_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p && q --> q)"), t43))
+  k4lr_and_right_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p && q --> q)"), t43))
 }
 
 ///|
@@ -765,7 +765,7 @@ pub fn k4lr_and_right_th() -> @kernel.Thm {
 /// K4LR_and_pair_th
 fn step_46() -> Unit raise {
   let t44 = @meson.meson_tac(@list.List([k4lr_iff_imp2(), k4lr_axiom_and(), k4lr_imp_swap_th(), k4lr_imp_add_assum(), k4lr_imp_trans2(), k4lr_modusponens(), k4lr_imp_swap(), k4lr_imp_refl_th()]))
-  k4lr_and_pair_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q --> p && q)"), t44))
+  k4lr_and_pair_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q --> p && q)"), t44))
 }
 
 ///|
@@ -781,7 +781,7 @@ pub fn k4lr_and_pair_th() -> @kernel.Thm {
 /// K4LR_and
 fn step_47() -> Unit raise {
   let t45 = @meson.meson_tac(@list.List([k4lr_and_left_th(), k4lr_and_right_th(), k4lr_and_pair_th(), k4lr_modusponens()]))
-  k4lr_and_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p && q) <=> |~ p /\\ |~ q"), t45))
+  k4lr_and_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p && q) <=> |~ p /\\ |~ q"), t45))
 }
 
 ///|
@@ -797,7 +797,7 @@ pub fn k4lr_and() -> @kernel.Thm {
 /// K4LR_and_elim
 fn step_48() -> Unit raise {
   let t46 = @meson.meson_tac(@list.List([k4lr_and_left_th(), k4lr_and_right_th(), k4lr_imp_trans()]))
-  k4lr_and_elim_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (r --> p && q) ==> |~ (r --> q)  /\\ |~ (r --> p)"), t46))
+  k4lr_and_elim_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (r --> p && q) ==> |~ (r --> q)  /\\ |~ (r --> p)"), t46))
 }
 
 ///|
@@ -813,7 +813,7 @@ pub fn k4lr_and_elim() -> @kernel.Thm {
 /// K4LR_shunt
 fn step_49() -> Unit raise {
   let t47 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_imp_add_assum(), k4lr_and_pair_th()]))
-  k4lr_shunt_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p && q --> r) ==> |~ (p --> q --> r)"), t47))
+  k4lr_shunt_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p && q --> r) ==> |~ (p --> q --> r)"), t47))
 }
 
 ///|
@@ -829,7 +829,7 @@ pub fn k4lr_shunt() -> @kernel.Thm {
 /// K4LR_ante_conj
 fn step_50() -> Unit raise {
   let t48 = @meson.meson_tac(@list.List([k4lr_imp_trans_chain_2(), k4lr_and_left_th(), k4lr_and_right_th()]))
-  k4lr_ante_conj_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q --> r) ==> |~ (p && q --> r)"), t48))
+  k4lr_ante_conj_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q --> r) ==> |~ (p && q --> r)"), t48))
 }
 
 ///|
@@ -845,7 +845,7 @@ pub fn k4lr_ante_conj() -> @kernel.Thm {
 /// K4LR_modusponens_th
 fn step_51() -> Unit raise {
   let t49 = @meson.meson_tac(@list.List([k4lr_imp_refl_th(), k4lr_ante_conj()]))
-  k4lr_modusponens_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p --> q) && p --> q)"), t49))
+  k4lr_modusponens_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p --> q) && p --> q)"), t49))
 }
 
 ///|
@@ -861,7 +861,7 @@ pub fn k4lr_modusponens_th() -> @kernel.Thm {
 /// K4LR_not_not_false_th
 fn step_52() -> Unit raise {
   let t50 = @meson.meson_tac(@list.List([k4lr_imp_antisym(), k4lr_axiom_doubleneg(), k4lr_imp_swap(), k4lr_imp_refl_th()]))
-  k4lr_not_not_false_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ ((p --> False) --> False <-> p)"), t50))
+  k4lr_not_not_false_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ ((p --> False) --> False <-> p)"), t50))
 }
 
 ///|
@@ -877,7 +877,7 @@ pub fn k4lr_not_not_false_th() -> @kernel.Thm {
 /// K4LR_iff_sym
 fn step_53() -> Unit raise {
   let t51 = @meson.meson_tac(@list.List([k4lr_iff_imp1(), k4lr_iff_imp2(), k4lr_imp_antisym()]))
-  k4lr_iff_sym_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) <=> |~ (q <-> p)"), t51))
+  k4lr_iff_sym_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) <=> |~ (q <-> p)"), t51))
 }
 
 ///|
@@ -893,7 +893,7 @@ pub fn k4lr_iff_sym() -> @kernel.Thm {
 /// K4LR_iff_trans
 fn step_54() -> Unit raise {
   let t52 = @meson.meson_tac(@list.List([k4lr_iff_imp1(), k4lr_iff_imp2(), k4lr_imp_trans(), k4lr_imp_antisym()]))
-  k4lr_iff_trans_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p <-> q) /\\ |~ (q <-> r) ==> |~ (p <-> r)"), t52))
+  k4lr_iff_trans_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p <-> q) /\\ |~ (q <-> r) ==> |~ (p <-> r)"), t52))
 }
 
 ///|
@@ -909,7 +909,7 @@ pub fn k4lr_iff_trans() -> @kernel.Thm {
 /// K4LR_not_not_th
 fn step_55() -> Unit raise {
   let t53 = @meson.meson_tac(@list.List([k4lr_iff_trans(), k4lr_not_not_false_th(), k4lr_axiom_not(), k4lr_imp_antisym(), k4lr_imp_add_concl(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
-  k4lr_not_not_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Not (Not p) <-> p)"), t53))
+  k4lr_not_not_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Not (Not p) <-> p)"), t53))
 }
 
 ///|
@@ -925,7 +925,7 @@ pub fn k4lr_not_not_th() -> @kernel.Thm {
 /// K4LR_contrapos_eq
 fn step_56() -> Unit raise {
   let t54 = @meson.meson_tac(@list.List([k4lr_contrapos(), k4lr_not_not_th(), k4lr_iff_imp1(), k4lr_iff_imp2(), k4lr_imp_trans()]))
-  k4lr_contrapos_eq_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Not p --> Not q) <=> |~ (q --> p)"), t54))
+  k4lr_contrapos_eq_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Not p --> Not q) <=> |~ (q --> p)"), t54))
 }
 
 ///|
@@ -941,7 +941,7 @@ pub fn k4lr_contrapos_eq() -> @kernel.Thm {
 /// K4LR_or_left_th
 fn step_57() -> Unit raise {
   let t55 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_not_not_th(), k4lr_iff_imp2(), k4lr_and_right_th(), k4lr_contrapos(), k4lr_axiom_or()]))
-  k4lr_or_left_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (q --> p || q)"), t55))
+  k4lr_or_left_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (q --> p || q)"), t55))
 }
 
 ///|
@@ -957,7 +957,7 @@ pub fn k4lr_or_left_th() -> @kernel.Thm {
 /// K4LR_or_right_th
 fn step_58() -> Unit raise {
   let t56 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_not_not_th(), k4lr_iff_imp2(), k4lr_and_left_th(), k4lr_contrapos(), k4lr_axiom_or()]))
-  k4lr_or_right_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> p || q)"), t56))
+  k4lr_or_right_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> p || q)"), t56))
 }
 
 ///|
@@ -975,7 +975,7 @@ fn step_59() -> Unit raise {
   let t58 = @meson.meson_tac(@list.List([k4lr_imp_trans(), k4lr_imp_trans_chain_2(), k4lr_and_pair_th(), k4lr_contrapos_eq(), k4lr_not_not_th(), k4lr_axiom_or(), k4lr_iff_imp1(), k4lr_iff_imp2(), k4lr_imp_trans()]))
   let t57 = @simp.once_rewrite_tac(@list.List([@equal.gsym(k4lr_contrapos_eq())]))
   let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t57), t58)
-  k4lr_ante_disj_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> r) /\\ |~ (q --> r) ==> |~ (p || q --> r)"), t59))
+  k4lr_ante_disj_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> r) /\\ |~ (q --> r) ==> |~ (p || q --> r)"), t59))
 }
 
 ///|
@@ -991,7 +991,7 @@ pub fn k4lr_ante_disj() -> @kernel.Thm {
 /// K4LR_iff_def_th
 fn step_60() -> Unit raise {
   let t60 = @meson.meson_tac(@list.List([k4lr_imp_antisym(), k4lr_imp_trans_chain_2(), k4lr_axiom_iffimp1(), k4lr_axiom_iffimp2(), k4lr_and_pair_th(), k4lr_axiom_impiff(), k4lr_imp_trans_chain_2(), k4lr_and_left_th(), k4lr_and_right_th()]))
-  k4lr_iff_def_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p <-> q) <-> (p --> q) && (q --> p))"), t60))
+  k4lr_iff_def_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p <-> q) <-> (p --> q) && (q --> p))"), t60))
 }
 
 ///|
@@ -1007,7 +1007,7 @@ pub fn k4lr_iff_def_th() -> @kernel.Thm {
 /// K4LR_iff_refl_th
 fn step_61() -> Unit raise {
   let t61 = @meson.meson_tac(@list.List([k4lr_imp_antisym(), k4lr_imp_refl_th()]))
-  k4lr_iff_refl_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p <-> p)"), t61))
+  k4lr_iff_refl_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p <-> p)"), t61))
 }
 
 ///|
@@ -1023,7 +1023,7 @@ pub fn k4lr_iff_refl_th() -> @kernel.Thm {
 /// K4LR_imp_box
 fn step_62() -> Unit raise {
   let t62 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_necessitation(), k4lr_axiom_boximp()]))
-  k4lr_imp_box_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) ==> |~ (Box p --> Box q)"), t62))
+  k4lr_imp_box_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) ==> |~ (Box p --> Box q)"), t62))
 }
 
 ///|
@@ -1039,7 +1039,7 @@ pub fn k4lr_imp_box() -> @kernel.Thm {
 /// K4LR_box_moduspones
 fn step_63() -> Unit raise {
   let t63 = @meson.meson_tac(@list.List([k4lr_imp_box(), k4lr_modusponens()]))
-  k4lr_box_moduspones_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p --> q) /\\ |~ (Box p) ==> |~ (Box q)"), t63))
+  k4lr_box_moduspones_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p --> q) /\\ |~ (Box p) ==> |~ (Box q)"), t63))
 }
 
 ///|
@@ -1055,7 +1055,7 @@ pub fn k4lr_box_moduspones() -> @kernel.Thm {
 /// K4LR_box_and
 fn step_64() -> Unit raise {
   let t64 = @meson.meson_tac(@list.List([k4lr_and_left_th(), k4lr_and_right_th(), k4lr_imp_box(), k4lr_box_moduspones(), k4lr_and()]))
-  k4lr_box_and_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Box(p && q)) ==> |~ (Box p && Box q)"), t64))
+  k4lr_box_and_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Box(p && q)) ==> |~ (Box p && Box q)"), t64))
 }
 
 ///|
@@ -1071,7 +1071,7 @@ pub fn k4lr_box_and() -> @kernel.Thm {
 /// K4LR_box_and_inv
 fn step_65() -> Unit raise {
   let t65 = @meson.meson_tac(@list.List([k4lr_and_pair_th(), k4lr_imp_box(), k4lr_axiom_boximp(), k4lr_imp_trans(), k4lr_ante_conj(), k4lr_modusponens()]))
-  k4lr_box_and_inv_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Box p && Box q) ==> |~ (Box (p && q))"), t65))
+  k4lr_box_and_inv_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Box p && Box q) ==> |~ (Box (p && q))"), t65))
 }
 
 ///|
@@ -1087,7 +1087,7 @@ pub fn k4lr_box_and_inv() -> @kernel.Thm {
 /// K4LR_and_comm
 fn step_66() -> Unit raise {
   let t66 = @meson.meson_tac(@list.List([k4lr_and()]))
-  k4lr_and_comm_c.set(@tactics.prove(@parser.parse_term("!p q . |~ (p && q) <=> |~ (q && p)"), t66))
+  k4lr_and_comm_c.set(@tactics.prove(@parser.parse_term("forall p q . |~ (p && q) <=> |~ (q && p)"), t66))
 }
 
 ///|
@@ -1103,7 +1103,7 @@ pub fn k4lr_and_comm() -> @kernel.Thm {
 /// K4LR_and_assoc
 fn step_67() -> Unit raise {
   let t67 = @meson.meson_tac(@list.List([k4lr_and()]))
-  k4lr_and_assoc_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p && q) && r) <=> |~ (p && (q && r))"), t67))
+  k4lr_and_assoc_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p && q) && r) <=> |~ (p && (q && r))"), t67))
 }
 
 ///|
@@ -1119,7 +1119,7 @@ pub fn k4lr_and_assoc() -> @kernel.Thm {
 /// K4LR_disj_imp
 fn step_68() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([k4lr_ante_disj(), k4lr_or_right_th(), k4lr_or_left_th(), k4lr_imp_trans()]))
-  k4lr_disj_imp_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p || q --> r) <=> |~ (p --> r) /\\ |~ (q --> r)"), t68))
+  k4lr_disj_imp_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p || q --> r) <=> |~ (p --> r) /\\ |~ (q --> r)"), t68))
 }
 
 ///|
@@ -1135,7 +1135,7 @@ pub fn k4lr_disj_imp() -> @kernel.Thm {
 /// K4LR_or_elim
 fn step_69() -> Unit raise {
   let t69 = @meson.meson_tac(@list.List([k4lr_disj_imp(), k4lr_modusponens()]))
-  k4lr_or_elim_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p || q) /\\ |~ (p --> r) /\\ |~ (q --> r) ==> |~ r"), t69))
+  k4lr_or_elim_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p || q) /\\ |~ (p --> r) /\\ |~ (q --> r) ==> |~ r"), t69))
 }
 
 ///|
@@ -1151,7 +1151,7 @@ pub fn k4lr_or_elim() -> @kernel.Thm {
 /// K4LR_or_comm
 fn step_70() -> Unit raise {
   let t70 = @meson.meson_tac(@list.List([k4lr_or_right_th(), k4lr_or_left_th(), k4lr_modusponens(), k4lr_disj_imp()]))
-  k4lr_or_comm_c.set(@tactics.prove(@parser.parse_term("!p q . |~ (p || q) <=> |~ (q || p)"), t70))
+  k4lr_or_comm_c.set(@tactics.prove(@parser.parse_term("forall p q . |~ (p || q) <=> |~ (q || p)"), t70))
 }
 
 ///|
@@ -1167,7 +1167,7 @@ pub fn k4lr_or_comm() -> @kernel.Thm {
 /// K4LR_or_assoc
 fn step_71() -> Unit raise {
   let t71 = @meson.meson_tac(@list.List([k4lr_or_right_th(), k4lr_or_left_th(), k4lr_modusponens(), k4lr_disj_imp()]))
-  k4lr_or_assoc_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || q) || r) <=> |~ (p || (q || r))"), t71))
+  k4lr_or_assoc_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || q) || r) <=> |~ (p || (q || r))"), t71))
 }
 
 ///|
@@ -1183,7 +1183,7 @@ pub fn k4lr_or_assoc() -> @kernel.Thm {
 /// K4LR_or_intror
 fn step_72() -> Unit raise {
   let t72 = @meson.meson_tac(@list.List([k4lr_or_left_th(), k4lr_modusponens()]))
-  k4lr_or_intror_c.set(@tactics.prove(@parser.parse_term("!p q. |~ q ==> |~ (p || q)"), t72))
+  k4lr_or_intror_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ q ==> |~ (p || q)"), t72))
 }
 
 ///|
@@ -1199,7 +1199,7 @@ pub fn k4lr_or_intror() -> @kernel.Thm {
 /// K4LR_or_introl
 fn step_73() -> Unit raise {
   let t73 = @meson.meson_tac(@list.List([k4lr_or_right_th(), k4lr_modusponens()]))
-  k4lr_or_introl_c.set(@tactics.prove(@parser.parse_term("!p q. |~ p ==> |~ (p || q)"), t73))
+  k4lr_or_introl_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ p ==> |~ (p || q)"), t73))
 }
 
 ///|
@@ -1215,7 +1215,7 @@ pub fn k4lr_or_introl() -> @kernel.Thm {
 /// K4LR_or_transl
 fn step_74() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([k4lr_or_right_th(), k4lr_imp_trans()]))
-  k4lr_or_transl_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q) ==> |~ (p --> q || r)"), t74))
+  k4lr_or_transl_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q) ==> |~ (p --> q || r)"), t74))
 }
 
 ///|
@@ -1231,7 +1231,7 @@ pub fn k4lr_or_transl() -> @kernel.Thm {
 /// K4LR_or_transr
 fn step_75() -> Unit raise {
   let t75 = @meson.meson_tac(@list.List([k4lr_or_left_th(), k4lr_imp_trans()]))
-  k4lr_or_transr_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> r) ==> |~ (p --> q || r)"), t75))
+  k4lr_or_transr_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> r) ==> |~ (p --> q || r)"), t75))
 }
 
 ///|
@@ -1247,7 +1247,7 @@ pub fn k4lr_or_transr() -> @kernel.Thm {
 /// K4LR_frege
 fn step_76() -> Unit raise {
   let t76 = @meson.meson_tac(@list.List([k4lr_axiom_distribimp(), k4lr_modusponens(), k4lr_shunt(), k4lr_ante_conj()]))
-  k4lr_frege_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q --> r) /\\ |~ (p --> q) ==> |~ (p --> r)"), t76))
+  k4lr_frege_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q --> r) /\\ |~ (p --> q) ==> |~ (p --> r)"), t76))
 }
 
 ///|
@@ -1263,7 +1263,7 @@ pub fn k4lr_frege() -> @kernel.Thm {
 /// K4LR_and_intro
 fn step_77() -> Unit raise {
   let t77 = @meson.meson_tac(@list.List([k4lr_and_pair_th(), k4lr_imp_trans_chain_2()]))
-  k4lr_and_intro_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q) /\\ |~ (p --> r) ==> |~ (p --> q && r)"), t77))
+  k4lr_and_intro_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q) /\\ |~ (p --> r) ==> |~ (p --> q && r)"), t77))
 }
 
 ///|
@@ -1279,7 +1279,7 @@ pub fn k4lr_and_intro() -> @kernel.Thm {
 /// K4LR_not_def
 fn step_78() -> Unit raise {
   let t78 = @meson.meson_tac(@list.List([k4lr_axiom_not(), k4lr_modusponens(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
-  k4lr_not_def_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Not p) <=> |~ (p --> False)"), t78))
+  k4lr_not_def_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Not p) <=> |~ (p --> False)"), t78))
 }
 
 ///|
@@ -1295,7 +1295,7 @@ pub fn k4lr_not_def() -> @kernel.Thm {
 /// K4LR_NC
 fn step_79() -> Unit raise {
   let t79 = @meson.meson_tac(@list.List([k4lr_not_def(), k4lr_modusponens(), k4lr_and(), k4lr_ex_falso()]))
-  k4lr_nc_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p  && Not p) <=> |~ False"), t79))
+  k4lr_nc_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p  && Not p) <=> |~ False"), t79))
 }
 
 ///|
@@ -1311,7 +1311,7 @@ pub fn k4lr_nc() -> @kernel.Thm {
 /// K4LR_nc_th
 fn step_80() -> Unit raise {
   let t80 = @meson.meson_tac(@list.List([k4lr_ante_conj(), k4lr_imp_swap(), k4lr_axiom_not(), k4lr_axiom_iffimp1(), k4lr_modusponens()]))
-  k4lr_nc_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p && Not p --> False)"), t80))
+  k4lr_nc_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p && Not p --> False)"), t80))
 }
 
 ///|
@@ -1329,7 +1329,7 @@ fn step_81() -> Unit raise {
   let t81 = @meson.meson_tac(@list.List([k4lr_add_assum()]))
   let t82 = @list.List([@meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_truth_th()])), t81])
   let t83 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([k4lr_truth_th(), k4lr_add_assum(), k4lr_not_def(), k4lr_ex_falso_th()])), @tactics.gen_tac), @tactics.eq_tac), t82)
-  k4lr_imp_clauses_c.set(@tactics.prove(@parser.parse_term("(!p. |~ (p --> True)) /\\\n   (!p. |~ (p --> False) <=> |~ (Not p)) /\\\n   (!p. |~ (True --> p) <=> |~ p) /\\\n   (!p. |~ (False --> p))"), t83))
+  k4lr_imp_clauses_c.set(@tactics.prove(@parser.parse_term("(forall p. |~ (p --> True)) /\\\n   (forall p. |~ (p --> False) <=> |~ (Not p)) /\\\n   (forall p. |~ (True --> p) <=> |~ p) /\\\n   (forall p. |~ (False --> p))"), t83))
 }
 
 ///|
@@ -1348,7 +1348,7 @@ fn step_82() -> Unit raise {
   let t85 = @tactics.match_mp_tac(k4lr_and_intro())
   let t84 = @list.List([@tactics.match_accept_tac(k4lr_and_right_th()), @tactics.all_tac])
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(k4lr_imp_antisym())), @tactics.conj_tac), t84), t85), t86)
-  k4lr_and_left_true_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (True && p <-> p)"), t87))
+  k4lr_and_left_true_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (True && p <-> p)"), t87))
 }
 
 ///|
@@ -1377,7 +1377,7 @@ fn step_83() -> Unit raise {
   let t89 = @tactics.match_mp_tac(k4lr_or_elim())
   let t88 = @simp.once_rewrite_tac(@list.List([k4lr_and()]))
   let t101 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t88), @tactics.strip_tac), t89), t90), t91), t92), @tactics.conj_tac), t100)
-  k4lr_or_and_distr_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || q) && r) ==> |~ ((p && r) || (q && r))"), t101))
+  k4lr_or_and_distr_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || q) && r) ==> |~ ((p && r) || (q && r))"), t101))
 }
 
 ///|
@@ -1405,7 +1405,7 @@ fn step_84() -> Unit raise {
   let t103 = @tactics.match_mp_tac(k4lr_or_elim())
   let t102 = @simp.once_rewrite_tac(@list.List([k4lr_and()]))
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t102), @tactics.disch_tac), @tactics.conj_tac), t103), t108), t109), t110), t111)
-  k4lr_and_or_distr_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p && q) || r) ==> |~ ((p || r) && (q || r))"), t112))
+  k4lr_and_or_distr_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p && q) || r) ==> |~ ((p || r) && (q || r))"), t112))
 }
 
 ///|
@@ -1439,7 +1439,7 @@ fn step_85() -> Unit raise {
   }, @list.List([@parser.parse_term("p && r"), t117]))
   let t113 = @tactics.match_mp_tac(k4lr_or_elim())
   let t128 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t113), t118), t119), t121), @tactics.conj_tac), t122), @tactics.conj_tac), t123), t127)
-  k4lr_or_and_distr_inv_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p && r) || (q && r)) ==> |~ ((p || q) && r)"), t128))
+  k4lr_or_and_distr_inv_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p && r) || (q && r)) ==> |~ ((p || q) && r)"), t128))
 }
 
 ///|
@@ -1455,7 +1455,7 @@ pub fn k4lr_or_and_distr_inv() -> @kernel.Thm {
 /// K4LR_or_and_distr_equiv
 fn step_86() -> Unit raise {
   let t129 = @meson.meson_tac(@list.List([k4lr_or_and_distr(), k4lr_or_and_distr_inv()]))
-  k4lr_or_and_distr_equiv_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || q) && r) <=> |~ ((p && r) || (q && r))"), t129))
+  k4lr_or_and_distr_equiv_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || q) && r) <=> |~ ((p && r) || (q && r))"), t129))
 }
 
 ///|
@@ -1483,7 +1483,7 @@ fn step_87() -> Unit raise {
   let t131 = @theorems.intro_tac("pr qr")
   let t130 = @simp.rewrite_tac(@list.List([k4lr_and()]))
   let t141 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t130), t131), t133), t134), t136), @tactics.conj_tac), t138), t139), t140)
-  k4lr_and_or_distr_inv_prelim_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || r) && (q || r)) ==> |~ (q --> (p && q) || r)"), t141))
+  k4lr_and_or_distr_inv_prelim_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || r) && (q || r)) ==> |~ (q --> (p && q) || r)"), t141))
 }
 
 ///|
@@ -1519,7 +1519,7 @@ fn step_88() -> Unit raise {
   let t143 = @theorems.intro_tac("pr qr")
   let t142 = @simp.rewrite_tac(@list.List([k4lr_and()]))
   let t160 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t142), t143), t145), t146), t148), t149), t151), t152), t154), @tactics.conj_tac), t159)
-  k4lr_and_or_distr_inv_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || r) && (q || r)) ==> |~ ((p && q) || r)"), t160))
+  k4lr_and_or_distr_inv_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || r) && (q || r)) ==> |~ ((p && q) || r)"), t160))
 }
 
 ///|
@@ -1535,7 +1535,7 @@ pub fn k4lr_and_or_distr_inv() -> @kernel.Thm {
 /// K4LR_and_or_distr_equiv
 fn step_89() -> Unit raise {
   let t161 = @meson.meson_tac(@list.List([k4lr_and_or_distr(), k4lr_and_or_distr_inv()]))
-  k4lr_and_or_distr_equiv_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p && q) || r) <=> |~ ((p || r) && (q || r))"), t161))
+  k4lr_and_or_distr_equiv_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p && q) || r) <=> |~ ((p || r) && (q || r))"), t161))
 }
 
 ///|
@@ -1551,7 +1551,7 @@ pub fn k4lr_and_or_distr_equiv() -> @kernel.Thm {
 /// K4LR_DOUBLENEG_CL
 fn step_90() -> Unit raise {
   let t162 = @meson.meson_tac(@list.List([k4lr_not_not_th(), k4lr_modusponens(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
-  k4lr_doubleneg_cl_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Not(Not p)) ==> |~ p"), t162))
+  k4lr_doubleneg_cl_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Not(Not p)) ==> |~ p"), t162))
 }
 
 ///|
@@ -1567,7 +1567,7 @@ pub fn k4lr_doubleneg_cl() -> @kernel.Thm {
 /// K4LR_DOUBLENEG
 fn step_91() -> Unit raise {
   let t163 = @meson.meson_tac(@list.List([k4lr_not_not_th(), k4lr_modusponens(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
-  k4lr_doubleneg_c.set(@tactics.prove(@parser.parse_term("!p. |~ p ==> |~ (Not(Not p))"), t163))
+  k4lr_doubleneg_c.set(@tactics.prove(@parser.parse_term("forall p. |~ p ==> |~ (Not(Not p))"), t163))
 }
 
 ///|
@@ -1583,7 +1583,7 @@ pub fn k4lr_doubleneg() -> @kernel.Thm {
 /// K4LR_and_eq_or
 fn step_92() -> Unit raise {
   let t164 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_axiom_or(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
-  k4lr_and_eq_or_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p || q) <=> |~ (Not(Not p && Not q))"), t164))
+  k4lr_and_eq_or_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p || q) <=> |~ (Not(Not p && Not q))"), t164))
 }
 
 ///|
@@ -1601,7 +1601,7 @@ fn step_93() -> Unit raise {
   let t166 = @meson.meson_tac(@list.List([k4lr_nc_th()]))
   let t165 = @simp.rewrite_tac(@list.List([k4lr_not_def()]))
   let t167 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([k4lr_and_eq_or()]))), t165), t166)
-  k4lr_tnd_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p || Not p)"), t167))
+  k4lr_tnd_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p || Not p)"), t167))
 }
 
 ///|
@@ -1617,7 +1617,7 @@ pub fn k4lr_tnd_th() -> @kernel.Thm {
 /// K4LR_iff_mp
 fn step_94() -> Unit raise {
   let t168 = @meson.meson_tac(@list.List([k4lr_iff_imp1(), k4lr_modusponens()]))
-  k4lr_iff_mp_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) /\\ |~ p ==> |~ q"), t168))
+  k4lr_iff_mp_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) /\\ |~ p ==> |~ q"), t168))
 }
 
 ///|
@@ -1635,7 +1635,7 @@ fn step_95() -> Unit raise {
   let t170 = @meson.asm_meson_tac(@list.List([k4lr_iff_mp(), k4lr_iff_sym()]))
   let t169 = @simp.rewrite_tac(@list.List([k4lr_and()]))
   let t171 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t169), t170)
-  k4lr_and_subst_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> (|~ (p && q) <=> |~ (p' && q'))"), t171))
+  k4lr_and_subst_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> (|~ (p && q) <=> |~ (p' && q'))"), t171))
 }
 
 ///|
@@ -1653,7 +1653,7 @@ fn step_96() -> Unit raise {
   let t173 = @tactics.match_accept_tac(k4lr_imp_mono_th_v1())
   let t172 = @tactics.match_mp_tac(k4lr_ante_conj())
   let t174 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t172), t173)
-  k4lr_imp_mono_th_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ ((p' --> p) && (q --> q') --> (p --> q) --> (p' --> q'))"), t174))
+  k4lr_imp_mono_th_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ ((p' --> p) && (q --> q') --> (p --> q) --> (p' --> q'))"), t174))
 }
 
 ///|
@@ -1670,7 +1670,7 @@ pub fn k4lr_imp_mono_th() -> @kernel.Thm {
 fn step_97() -> Unit raise {
   let t175 = @meson.meson_tac(@list.List([k4lr_modusponens(), k4lr_imp_mono_th()]))
   let t176 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(k4lr_and())])), t175)
-  k4lr_imp_mono_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ (p' --> p) /\\ |~ (q --> q')\n               ==> |~ ((p --> q) --> (p' --> q'))"), t176))
+  k4lr_imp_mono_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ (p' --> p) /\\ |~ (q --> q')\n               ==> |~ ((p --> q) --> (p' --> q'))"), t176))
 }
 
 ///|
@@ -1686,7 +1686,7 @@ pub fn k4lr_imp_mono() -> @kernel.Thm {
 /// K4LR_iff
 fn step_98() -> Unit raise {
   let t177 = @meson.meson_tac(@list.List([k4lr_iff_imp1(), k4lr_iff_imp2(), k4lr_modusponens()]))
-  k4lr_iff_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) ==> (|~ p <=> |~ q)"), t177))
+  k4lr_iff_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) ==> (|~ p <=> |~ q)"), t177))
 }
 
 ///|
@@ -1704,7 +1704,7 @@ fn step_99() -> Unit raise {
   let t178 = @tactics.match_accept_tac(k4lr_imp_antisym())
   let t179 = @list.List([@meson.meson_tac(@list.List([k4lr_iff_imp1(), k4lr_iff_imp2()])), t178])
   let t180 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t179)
-  k4lr_iff_def_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) <=> |~ (p --> q) /\\ |~ (q --> p)"), t180))
+  k4lr_iff_def_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) <=> |~ (p --> q) /\\ |~ (q --> p)"), t180))
 }
 
 ///|
@@ -1720,7 +1720,7 @@ pub fn k4lr_iff_def() -> @kernel.Thm {
 /// K4LR_not_subst
 fn step_100() -> Unit raise {
   let t181 = @meson.meson_tac(@list.List([k4lr_iff_def(), k4lr_iff_imp2(), k4lr_contrapos()]))
-  k4lr_not_subst_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p <-> q) ==> |~ (Not p <-> Not q)"), t181))
+  k4lr_not_subst_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p <-> q) ==> |~ (Not p <-> Not q)"), t181))
 }
 
 ///|
@@ -1741,7 +1741,7 @@ fn step_101() -> Unit raise {
   let t183 = @tactics.match_mp_tac(k4lr_and_intro())
   let t182 = @list.List([@tactics.match_accept_tac(k4lr_and_left_th()), @tactics.all_tac])
   let t187 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([k4lr_iff_def()]))), @tactics.conj_tac), t182), t183), t184), t185), t186)
-  k4lr_and_rigth_true_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p && True <-> p)"), t187))
+  k4lr_and_rigth_true_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p && True <-> p)"), t187))
 }
 
 ///|
@@ -1757,11 +1757,11 @@ pub fn k4lr_and_rigth_true_th() -> @kernel.Thm {
 /// K4LR_and_comm_th
 fn step_102() -> Unit raise {
   let t190 = @meson.meson_tac(@list.List([k4lr_and_intro(), k4lr_and_left_th(), k4lr_and_right_th()]))
-  let t191 = @tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!p q. |~ (p && q --> q && p)"), fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t191 = @tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall p q. |~ (p && q --> q && p)"), fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x188
     @meson.meson_tac(@list.List([th, k4lr_iff_def()]))
   }), t190)
-  k4lr_and_comm_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (p && q <-> q && p)"), t191))
+  k4lr_and_comm_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (p && q <-> q && p)"), t191))
 }
 
 ///|
@@ -1780,7 +1780,7 @@ fn step_103() -> Unit raise {
   let t193 = @tactics.match_mp_tac(k4lr_and_intro())
   let t192 = @tactics.match_mp_tac(k4lr_imp_antisym())
   let t195 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t192), @tactics.conj_tac), t193), t194)
-  k4lr_and_assoc_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p && q) && r <-> p && (q && r))"), t195))
+  k4lr_and_assoc_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p && q) && r <-> p && (q && r))"), t195))
 }
 
 ///|
@@ -1805,11 +1805,11 @@ fn step_104() -> Unit raise {
   let t207 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(k4lr_imp_trans()), t200), t201), t202), t206])
   let t199 = @tactics.match_mp_tac(k4lr_and_intro())
   let t198 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t208 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n                 ==> |~ (p && q --> p' && q')"), fn(x196 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t208 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n                 ==> |~ (p && q --> p' && q')"), fn(x196 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x196
     @meson.meson_tac(@list.List([th, k4lr_iff_def()]))
   }), t198), t199), @tactics.conj_tac), t207)
-  k4lr_and_subst_th_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ (p && q <-> p' && q')"), t208))
+  k4lr_and_subst_th_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ (p && q <-> p' && q')"), t208))
 }
 
 ///|
@@ -1827,7 +1827,7 @@ fn step_105() -> Unit raise {
   let t221 = @meson.asm_meson_tac(@list.List([k4lr_iff_imp1(), k4lr_iff_sym()]))
   let t220 = @tactics.match_mp_tac(k4lr_imp_mono())
   let t219 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t218 = @tactics.subgoal_then(@parser.parse_term("!p q p' q'.\n                  |~ (p <-> p') /\\ |~ (q <-> q')\n                  ==> |~ ((p --> q) --> (p' --> q'))"), fn(x216 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t218 = @tactics.subgoal_then(@parser.parse_term("forall p q p' q'.\n                  |~ (p <-> p') /\\ |~ (q <-> q')\n                  ==> |~ ((p --> q) --> (p' --> q'))"), fn(x216 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x216
     @meson.meson_tac(@list.List([th, k4lr_iff_sym()]))
   })
@@ -1841,7 +1841,7 @@ fn step_105() -> Unit raise {
   })
   let t209 = @simp.rewrite_tac(@list.List([k4lr_iff_def()]))
   let t222 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t209), t215), t218), t219), @tactics.strip_tac), t220), t221)
-  k4lr_imp_subst_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ ((p --> q) <-> (p' --> q'))"), t222))
+  k4lr_imp_subst_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ ((p --> q) <-> (p' --> q'))"), t222))
 }
 
 ///|
@@ -1865,7 +1865,7 @@ fn step_106() -> Unit raise {
   let t224 = @tactics.exists_tac(@parser.parse_term("Not (Not (Not p) && Not (Not q))"))
   let t223 = @tactics.match_mp_tac(k4lr_iff_trans())
   let t231 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t223), t224), @tactics.conj_tac), t230)
-  k4lr_de_morgan_and_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Not (p && q) <-> Not p || Not q)"), t231))
+  k4lr_de_morgan_and_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Not (p && q) <-> Not p || Not q)"), t231))
 }
 
 ///|
@@ -1888,7 +1888,7 @@ fn step_107() -> Unit raise {
   let t233 = @tactics.exists_tac(@parser.parse_term("(p --> q) && (q --> p)"))
   let t232 = @tactics.match_mp_tac(k4lr_iff_trans())
   let t239 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t232), t233), t234), t235), t236), t237), t238)
-  k4lr_iff_sym_th_v1_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p <-> q) <-> (q <-> p))"), t239))
+  k4lr_iff_sym_th_v1_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p <-> q) <-> (q <-> p))"), t239))
 }
 
 ///|
@@ -1924,8 +1924,8 @@ fn step_108() -> Unit raise {
   let t240 = @tactics.exists_tac(@parser.parse_term("True --> p"))
   let t249 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(k4lr_imp_trans()), t240), @tactics.conj_tac), t241), t242), t243), t244), t245), t246), t247), t248), @tactics.all_tac])
   let t256 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(k4lr_imp_antisym())), @tactics.conj_tac), t249), t250), t251), @tactics.conj_tac), t252), t253), t254), t255), @tactics.all_tac])
-  let t261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@theorems.claim_tac("1", @parser.parse_term("!p. |~ ((p <-> True) <-> p)")), t256), t257), @tactics.gen_tac), t258), t259), t260)
-  k4lr_iff_true_th_c.set(@tactics.prove(@parser.parse_term("(!p. |~ ((p <-> True) <-> p)) /\\\n   (!p. |~ ((True <-> p) <-> p))"), t261))
+  let t261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@theorems.claim_tac("1", @parser.parse_term("forall p. |~ ((p <-> True) <-> p)")), t256), t257), @tactics.gen_tac), t258), t259), t260)
+  k4lr_iff_true_th_c.set(@tactics.prove(@parser.parse_term("(forall p. |~ ((p <-> True) <-> p)) /\\\n   (forall p. |~ ((True <-> p) <-> p))"), t261))
 }
 
 ///|
@@ -1951,11 +1951,11 @@ fn step_109() -> Unit raise {
   let t266 = @tactics.match_mp_tac(k4lr_frege())
   let t265 = @simp.rewrite_tac(@list.List([k4lr_disj_imp()]))
   let t264 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t275 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n                 ==> |~ (p || q --> p' || q')"), fn(x262 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t275 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n                 ==> |~ (p || q --> p' || q')"), fn(x262 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x262
     @meson.meson_tac(@list.List([th, k4lr_iff_sym(), k4lr_iff_def()]))
   }), t264), t265), @tactics.conj_tac), t266), t274)
-  k4lr_or_subst_th_c.set(@tactics.prove(@parser.parse_term("!p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ (p || q <-> p' || q')"), t275))
+  k4lr_or_subst_th_c.set(@tactics.prove(@parser.parse_term("forall p p' q q'. |~ (p <-> p') /\\ |~ (q <-> q')\n               ==> |~ (p || q <-> p' || q')"), t275))
 }
 
 ///|
@@ -1973,7 +1973,7 @@ fn step_110() -> Unit raise {
   let t277 = @simp.asm_rewrite_tac(@list.List([k4lr_iff_refl_th()]))
   let t276 = @tactics.match_mp_tac(k4lr_or_subst_th())
   let t278 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t276), t277)
-  k4lr_or_subst_right_c.set(@tactics.prove(@parser.parse_term("!p q1 q2. |~ (q1 <-> q2) ==> |~ (p || q1 <-> p || q2)"), t278))
+  k4lr_or_subst_right_c.set(@tactics.prove(@parser.parse_term("forall p q1 q2. |~ (q1 <-> q2) ==> |~ (p || q1 <-> p || q2)"), t278))
 }
 
 ///|
@@ -1991,7 +1991,7 @@ fn step_111() -> Unit raise {
   let t279 = @tactics.match_accept_tac(k4lr_or_right_th())
   let t280 = @list.List([@simp.rewrite_tac(@list.List([k4lr_disj_imp(), k4lr_imp_refl_th(), k4lr_ex_falso_th()])), t279])
   let t281 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([k4lr_iff_def()]))), @tactics.conj_tac), t280)
-  k4lr_or_rid_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (p || False <-> p)"), t281))
+  k4lr_or_rid_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (p || False <-> p)"), t281))
 }
 
 ///|
@@ -2009,7 +2009,7 @@ fn step_112() -> Unit raise {
   let t282 = @tactics.match_accept_tac(k4lr_or_left_th())
   let t283 = @list.List([@simp.rewrite_tac(@list.List([k4lr_disj_imp(), k4lr_imp_refl_th(), k4lr_ex_falso_th()])), t282])
   let t284 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([k4lr_iff_def()]))), @tactics.conj_tac), t283)
-  k4lr_or_lid_th_c.set(@tactics.prove(@parser.parse_term("!p. |~ (False || p <-> p)"), t284))
+  k4lr_or_lid_th_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (False || p <-> p)"), t284))
 }
 
 ///|
@@ -2027,7 +2027,7 @@ fn step_113() -> Unit raise {
   let t286 = @meson.meson_tac(@list.List([k4lr_or_left_th(), k4lr_or_right_th(), k4lr_imp_trans()]))
   let t285 = @simp.rewrite_tac(@list.List([k4lr_disj_imp()]))
   let t287 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t285), t286)
-  k4lr_or_assoc_left_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p || (q || r) --> (p || q) || r)"), t287))
+  k4lr_or_assoc_left_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p || (q || r) --> (p || q) || r)"), t287))
 }
 
 ///|
@@ -2045,7 +2045,7 @@ fn step_114() -> Unit raise {
   let t289 = @meson.meson_tac(@list.List([k4lr_or_left_th(), k4lr_or_right_th(), k4lr_imp_trans()]))
   let t288 = @simp.rewrite_tac(@list.List([k4lr_disj_imp()]))
   let t290 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t288), t289)
-  k4lr_or_assoc_right_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ ((p || q) || r --> p || (q || r))"), t290))
+  k4lr_or_assoc_right_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ ((p || q) || r --> p || (q || r))"), t290))
 }
 
 ///|
@@ -2061,7 +2061,7 @@ pub fn k4lr_or_assoc_right_th() -> @kernel.Thm {
 /// K4LR_or_assoc_th
 fn step_115() -> Unit raise {
   let t291 = @simp.rewrite_tac(@list.List([k4lr_iff_def(), k4lr_or_assoc_left_th(), k4lr_or_assoc_right_th()]))
-  k4lr_or_assoc_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p || (q || r) <-> (p || q) || r)"), t291))
+  k4lr_or_assoc_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p || (q || r) <-> (p || q) || r)"), t291))
 }
 
 ///|
@@ -2094,7 +2094,7 @@ fn step_116() -> Unit raise {
   let t293 = @tactics.repeat_tac(@tactics.conj_tac)
   let t292 = @simp.rewrite_tac(@list.List([k4lr_iff_def(), k4lr_disj_imp()]))
   let t309 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t292), t293), t294), t295), t296), t308)
-  k4lr_and_or_ldistrib_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p && (q || r) <-> p && q || p && r)"), t309))
+  k4lr_and_or_ldistrib_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p && (q || r) <-> p && q || p && r)"), t309))
 }
 
 ///|
@@ -2152,7 +2152,7 @@ fn step_118() -> Unit raise {
   let t326 = @tactics.match_mp_tac(k4lr_and_intro())
   let t325 = @tactics.match_mp_tac(k4lr_shunt())
   let t324 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t323 = @tactics.subgoal_then(@parser.parse_term("!p q1 q2. |~ ((q1 <-> q2) --> (p && q1 --> p && q2))"), fn(x320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t323 = @tactics.subgoal_then(@parser.parse_term("forall p q1 q2. |~ ((q1 <-> q2) --> (p && q1 --> p && q2))"), fn(x320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x320
     let t322 = @meson.meson_tac(@list.List([th, k4lr_and_comm_th(), k4lr_imp_trans(), k4lr_iff_def_th(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
     @tactics.then_tac(@tactics.match_mp_tac(k4lr_and_intro()), t322)
@@ -2162,7 +2162,7 @@ fn step_118() -> Unit raise {
   let t317 = @tactics.exists_tac(@parser.parse_term("(p && q1 --> p && q2) && (p && q2 --> p && q1)"))
   let t316 = @tactics.match_mp_tac(k4lr_imp_trans())
   let t346 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t316), t317), @tactics.conj_tac), t319), t323), t324), t325), t326), @tactics.conj_tac), t327), t328), t329), @tactics.conj_tac), t345)
-  k4lr_and_subst_right_th_c.set(@tactics.prove(@parser.parse_term("!p q1 q2. |~ ((q1 <-> q2) --> (p && q1 <-> p && q2))"), t346))
+  k4lr_and_subst_right_th_c.set(@tactics.prove(@parser.parse_term("forall p q1 q2. |~ ((q1 <-> q2) --> (p && q1 <-> p && q2))"), t346))
 }
 
 ///|
@@ -2199,7 +2199,7 @@ fn step_119() -> Unit raise {
   let t357 = @tactics.match_mp_tac(k4lr_and_intro())
   let t356 = @tactics.match_mp_tac(k4lr_shunt())
   let t355 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t354 = @tactics.subgoal_then(@parser.parse_term("!p1 p2 q. |~ ((p1 <-> p2) --> (p1 && q --> p2 && q))"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t354 = @tactics.subgoal_then(@parser.parse_term("forall p1 p2 q. |~ ((p1 <-> p2) --> (p1 && q --> p2 && q))"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x351
     let t353 = @meson.meson_tac(@list.List([th, k4lr_and_comm_th(), k4lr_imp_trans(), k4lr_iff_def_th(), k4lr_iff_imp1(), k4lr_iff_imp2()]))
     @tactics.then_tac(@tactics.match_mp_tac(k4lr_and_intro()), t353)
@@ -2209,7 +2209,7 @@ fn step_119() -> Unit raise {
   let t348 = @tactics.exists_tac(@parser.parse_term("(p1 && q --> p2 && q) && (p2 && q --> p1 && q)"))
   let t347 = @tactics.match_mp_tac(k4lr_imp_trans())
   let t377 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t347), t348), @tactics.conj_tac), t350), t354), t355), t356), t357), @tactics.conj_tac), t358), t359), t360), @tactics.conj_tac), t376)
-  k4lr_and_subst_left_th_c.set(@tactics.prove(@parser.parse_term("!p1 p2 q. |~ ((p1 <-> p2) --> (p1 && q <-> p2 && q))"), t377))
+  k4lr_and_subst_left_th_c.set(@tactics.prove(@parser.parse_term("forall p1 p2 q. |~ ((p1 <-> p2) --> (p1 && q <-> p2 && q))"), t377))
 }
 
 ///|
@@ -2235,7 +2235,7 @@ fn step_120() -> Unit raise {
   let t379 = @tactics.match_mp_tac(k4lr_imp_trans())
   let t378 = @tactics.match_mp_tac(k4lr_imp_swap())
   let t388 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t378), t379), t380), @tactics.conj_tac), t387)
-  k4lr_contrapos_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p --> q) --> (Not q --> Not p))"), t388))
+  k4lr_contrapos_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p --> q) --> (Not q --> Not p))"), t388))
 }
 
 ///|
@@ -2256,11 +2256,11 @@ fn step_121() -> Unit raise {
   let t393 = @list.List([@tactics.match_accept_tac(k4lr_contrapos_th()), @tactics.all_tac])
   let t392 = @tactics.exists_tac(@parser.parse_term("Not (Not p) --> Not (Not q)"))
   let t391 = @tactics.match_mp_tac(k4lr_imp_trans())
-  let t397 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!p q. |~ ((Not q --> Not p) --> (p --> q))"), fn(x389 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t397 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall p q. |~ ((Not q --> Not p) --> (p --> q))"), fn(x389 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x389
     @meson.meson_tac(@list.List([th, k4lr_iff_def(), k4lr_contrapos_th()]))
   }), @tactics.gen_tac), @tactics.gen_tac), t391), t392), @tactics.conj_tac), t393), t394), t395), t396)
-  k4lr_contrapos_eq_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p --> q) <-> (Not q --> Not p))"), t397))
+  k4lr_contrapos_eq_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p --> q) <-> (Not q --> Not p))"), t397))
 }
 
 ///|
@@ -2283,7 +2283,7 @@ fn step_122() -> Unit raise {
   let t399 = @tactics.exists_tac(@parser.parse_term("(p --> q) && (q --> p)"))
   let t398 = @tactics.match_mp_tac(k4lr_imp_trans())
   let t405 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t398), t399), @tactics.conj_tac), t400), t401), t402), @tactics.conj_tac), t404)
-  k4lr_iff_sym_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ ((p <-> q) --> (q <-> p))"), t405))
+  k4lr_iff_sym_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ ((p <-> q) --> (q <-> p))"), t405))
 }
 
 ///|
@@ -2304,7 +2304,7 @@ fn step_123() -> Unit raise {
   let t407 = @tactics.exists_tac(@parser.parse_term("Not (Not (Not p && Not q))"))
   let t406 = @tactics.match_mp_tac(k4lr_iff_trans())
   let t411 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t406), t407), @tactics.conj_tac), t410)
-  k4lr_de_morgan_or_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Not (p || q) <-> Not p && Not q)"), t411))
+  k4lr_de_morgan_or_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Not (p || q) <-> Not p && Not q)"), t411))
 }
 
 ///|
@@ -2333,7 +2333,7 @@ fn step_124() -> Unit raise {
   let t413 = @tactics.exists_tac(@parser.parse_term("(p --> Not q --> False) --> False"))
   let t412 = @tactics.match_mp_tac(k4lr_iff_trans())
   let t425 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t412), t413), @tactics.conj_tac), t414), t415), t416), @tactics.conj_tac), t417), t418), t419), @tactics.conj_tac), t420), t421), t422), @tactics.conj_tac), t424)
-  k4lr_crysippus_th_c.set(@tactics.prove(@parser.parse_term("!p q. |~ (Not (p --> q) <-> p && Not q)"), t425))
+  k4lr_crysippus_th_c.set(@tactics.prove(@parser.parse_term("forall p q. |~ (Not (p --> q) <-> p && Not q)"), t425))
 }
 
 ///|
@@ -2349,7 +2349,7 @@ pub fn k4lr_crysippus_th() -> @kernel.Thm {
 /// K4LR_frege_th
 fn step_125() -> Unit raise {
   let t426 = @meson.meson_tac(@list.List([k4lr_axiom_distribimp(), k4lr_modusponens()]))
-  k4lr_frege_th_c.set(@tactics.prove(@parser.parse_term("!p q r. |~ (p --> q --> r) ==> |~((p --> q) --> (p --> r))"), t426))
+  k4lr_frege_th_c.set(@tactics.prove(@parser.parse_term("forall p q r. |~ (p --> q --> r) ==> |~((p --> q) --> (p --> r))"), t426))
 }
 
 ///|
@@ -2366,7 +2366,7 @@ pub fn k4lr_frege_th() -> @kernel.Thm {
 fn step_126() -> Unit raise {
   let t427 = @meson.meson_tac(@list.List([@gl.glproves_rules(), @gl.glaxiom_rules(), @gl.gl_schema_4()]))
   let t428 = @tactics.then_tac(@tactics.match_mp_tac(k4lraxiom_induct()), t427)
-  gl_proves_k4lraxioms_c.set(@tactics.prove(@parser.parse_term("!p. K4LRaxiom p ==> |-- p"), t428))
+  gl_proves_k4lraxioms_c.set(@tactics.prove(@parser.parse_term("forall p. K4LRaxiom p ==> |-- p"), t428))
 }
 
 ///|
@@ -2382,7 +2382,7 @@ pub fn gl_proves_k4lraxioms() -> @kernel.Thm {
 /// GL_proves_Lob_rule
 fn step_127() -> Unit raise {
   let t429 = @meson.meson_tac(@list.List([@gl.gl_necessitation(), @gl.gl_modusponens(), @gl.gl_axiom_lob()]))
-  gl_proves_lob_rule_c.set(@tactics.prove(@parser.parse_term("!p. |-- (Box p --> p) ==> |-- p"), t429))
+  gl_proves_lob_rule_c.set(@tactics.prove(@parser.parse_term("forall p. |-- (Box p --> p) ==> |-- p"), t429))
 }
 
 ///|
@@ -2399,7 +2399,7 @@ pub fn gl_proves_lob_rule() -> @kernel.Thm {
 fn step_128() -> Unit raise {
   let t430 = @meson.meson_tac(@list.List([gl_proves_k4lraxioms(), @gl.gl_modusponens(), @gl.gl_necessitation(), gl_proves_lob_rule()]))
   let t431 = @tactics.then_tac(@tactics.match_mp_tac(k4lrproves_induct()), t430)
-  k4lrproves_subset_glproves_c.set(@tactics.prove(@parser.parse_term("!p. |~ p ==> |-- p"), t431))
+  k4lrproves_subset_glproves_c.set(@tactics.prove(@parser.parse_term("forall p. |~ p ==> |-- p"), t431))
 }
 
 ///|
@@ -2425,7 +2425,7 @@ fn step_129() -> Unit raise {
   let t433 = @tactics.exists_tac(@parser.parse_term("Box (Box p --> p) --> Box (Box p)"))
   let t432 = @tactics.match_mp_tac(k4lr_imp_trans())
   let t442 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(k4lr_lobrule())), t432), t433), @tactics.conj_tac), t441)
-  k4lr_proves_lob_axiom_c.set(@tactics.prove(@parser.parse_term("!p. |~ (Box (Box p --> p) --> Box p)"), t442))
+  k4lr_proves_lob_axiom_c.set(@tactics.prove(@parser.parse_term("forall p. |~ (Box (Box p --> p) --> Box p)"), t442))
 }
 
 ///|
@@ -2442,7 +2442,7 @@ pub fn k4lr_proves_lob_axiom() -> @kernel.Thm {
 fn step_130() -> Unit raise {
   let t443 = @meson.meson_tac(@list.List([k4lrproves_rules(), k4lraxiom_rules(), k4lr_proves_lob_axiom()]))
   let t444 = @tactics.then_tac(@tactics.match_mp_tac(@gl.glaxiom_induct()), t443)
-  k4lr_proves_glaxioms_c.set(@tactics.prove(@parser.parse_term("!p. GLaxiom p ==> |~ p"), t444))
+  k4lr_proves_glaxioms_c.set(@tactics.prove(@parser.parse_term("forall p. GLaxiom p ==> |~ p"), t444))
 }
 
 ///|
@@ -2459,7 +2459,7 @@ pub fn k4lr_proves_glaxioms() -> @kernel.Thm {
 fn step_131() -> Unit raise {
   let t445 = @meson.meson_tac(@list.List([k4lr_proves_glaxioms(), k4lr_modusponens(), k4lr_necessitation(), k4lr_proves_lob_axiom()]))
   let t446 = @tactics.then_tac(@tactics.match_mp_tac(@gl.glproves_induct()), t445)
-  glproves_subset_k4lrproves_c.set(@tactics.prove(@parser.parse_term("!p. |-- p ==> |~ p"), t446))
+  glproves_subset_k4lrproves_c.set(@tactics.prove(@parser.parse_term("forall p. |-- p ==> |~ p"), t446))
 }
 
 ///|
@@ -2475,7 +2475,7 @@ pub fn glproves_subset_k4lrproves() -> @kernel.Thm {
 /// GL_equiv_K4LR
 fn step_132() -> Unit raise {
   let t447 = @meson.meson_tac(@list.List([glproves_subset_k4lrproves(), k4lrproves_subset_glproves()]))
-  gl_equiv_k4lr_c.set(@tactics.prove(@parser.parse_term("!p. |-- p <=> |~ p"), t447))
+  gl_equiv_k4lr_c.set(@tactics.prove(@parser.parse_term("forall p. |-- p <=> |~ p"), t447))
 }
 
 ///|

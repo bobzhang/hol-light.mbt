@@ -79257,12 +79257,12 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  lspace s p =\n   {f:real^M->real^N | f measurable_on s /\\\n                       (\\x. lift(norm(f x) rpow p)) integrable_on s}
       #|  lspace s p =\n   {f | (f:real^M->real^N) measurable_on s /\\\n        (\\x. lift(norm(f x) rpow p)) absolutely_integrable_on s}
       #|  measurable(s:real^M->bool)
-      #|  !s. lspace s (&0) =\n          if measurable s then {f:real^M->real^N | f measurable_on s} else {}
-      #|  !s p c. measurable s ==> (\\x. c) IN lspace s p
-      #|  !s p. ~(p = &0) ==> (\\x. vec 0) IN lspace s p
-      #|  !s p c f:real^M->real^N.\n        f IN lspace s p ==> (\\x. c % f x) IN lspace s p
+      #|  forall s. lspace s (&0) =\n          if measurable s then {f:real^M->real^N | f measurable_on s} else {}
+      #|  forall s p c. measurable s ==> (\\x. c) IN lspace s p
+      #|  forall s p. ~(p = &0) ==> (\\x. vec 0) IN lspace s p
+      #|  forall s p c f:real^M->real^N.\n        f IN lspace s p ==> (\\x. c % f x) IN lspace s p
       #|  --x:real^N = --(&1) % x
-      #|  !s p f:real^M->real^N. f IN lspace s p ==> (\\x. --(f x)) IN lspace s p
+      #|  forall s p f:real^M->real^N. f IN lspace s p ==> (\\x. --(f x)) IN lspace s p
       #|  (&2 * z) rpow p
       #|  w:real
       #|  norm((f:real^M->real^N) x)
@@ -79274,58 +79274,58 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  \\x. lift(&2 rpow p * (norm((f:real^M->real^N) x) rpow p +\n                                    norm((g:real^M->real^N) x) rpow p))
       #|  measurable(s:real^M->bool)
       #|  p = &0
-      #|  !s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) + g(x)) IN lspace s p
-      #|  !s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) - g(x)) IN lspace s p
-      #|  !s p f. f IN lspace s p ==> (\\x. lift(norm(f x) rpow p)) integrable_on s
-      #|  !s p f. f IN lspace s p ==> (\\x. lift(norm(f x))) IN lspace s p
-      #|  !s p f:A->real^M->real^N t.\n        &0 < p /\\ FINITE t /\\ (!i. i IN t ==> (f i) IN lspace s p)\n        ==> (\\x. vsum t (\\i. f i x)) IN lspace s p
+      #|  forall s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) + g(x)) IN lspace s p
+      #|  forall s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) - g(x)) IN lspace s p
+      #|  forall s p f. f IN lspace s p ==> (\\x. lift(norm(f x) rpow p)) integrable_on s
+      #|  forall s p f. f IN lspace s p ==> (\\x. lift(norm(f x))) IN lspace s p
+      #|  forall s p f:A->real^M->real^N t.\n        &0 < p /\\ FINITE t /\\ (forall i. i IN t ==> (f i) IN lspace s p)\n        ==> (\\x. vsum t (\\i. f i x)) IN lspace s p
       #|  abs(x) <= y /\\ abs(x') <= y' ==> abs(max x x') <= max y y'
       #|  x:real^M
       #|  \\x. lift(&(dimindex(:N)) rpow p *\n             max (norm((f:real^M->real^N) x) rpow p)\n                 (norm((g:real^M->real^N) x) rpow p))
-      #|  !s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. max (f x$i) (g x$i)):real^M->real^N) IN lspace s p
+      #|  forall s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. max (f x$i) (g x$i)):real^M->real^N) IN lspace s p
       #|  abs(x) <= y /\\ abs(x') <= y' ==> abs(min x x') <= max y y'
       #|  x:real^M
       #|  \\x. lift(&(dimindex(:N)) rpow p *\n             max (norm((f:real^M->real^N) x) rpow p)\n                 (norm((g:real^M->real^N) x) rpow p))
-      #|  !s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. min (f x$i) (g x$i)):real^M->real^N) IN lspace s p
+      #|  forall s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. min (f x$i) (g x$i)):real^M->real^N) IN lspace s p
       #|  \\x. lift(norm((g:real^M->real^P) x) rpow p)
-      #|  !s p f:real^M->real^N g:real^M->real^P.\n        &0 < p /\\ f measurable_on s /\\ g IN lspace s p /\\\n        (!x. x IN s ==> norm(f x) <= norm(g x))\n        ==> f IN lspace s p
+      #|  forall s p f:real^M->real^N g:real^M->real^P.\n        &0 < p /\\ f measurable_on s /\\ g IN lspace s p /\\\n        (forall x. x IN s ==> norm(f x) <= norm(g x))\n        ==> f IN lspace s p
       #|  (?x. P(\\a. lift x)) ==> (?x. P x)
       #|  :P
       #|  :1
-      #|  !s p f:real^M->real^N.\n        &0 < p /\\ f measurable_on s /\\ measurable s /\\ bounded(IMAGE f s)\n        ==> f IN lspace s p
+      #|  forall s p f:real^M->real^N.\n        &0 < p /\\ f measurable_on s /\\ measurable s /\\ bounded(IMAGE f s)\n        ==> f IN lspace s p
       #|  \\x. lift(norm((f:real^M->real^N) x) rpow p / p) +\n                  lift(norm((g:real^M->real^N) x) rpow q / q)
-      #|  !s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s
-      #|  !f:real^M->real^N s. f IN lspace s (&1) <=> f absolutely_integrable_on s
+      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s
+      #|  forall f:real^M->real^N s. f IN lspace s (&1) <=> f absolutely_integrable_on s
       #|  x <= y ==> x <= max y z
       #|  x <= y ==> x <= max z y
       #|  norm((f:real^M->real^N) x)
       #|  &1
       #|  x:real^M
       #|  \\x. lift(max (&1) (norm((f:real^M->real^N) x) rpow q))
-      #|  !f:real^M->real^N s p q.\n        f IN lspace s q /\\ measurable s /\\ &0 < p /\\ p <= q\n        ==> f IN lspace s p
+      #|  forall f:real^M->real^N s p q.\n        f IN lspace s q /\\ measurable s /\\ &0 < p /\\ p <= q\n        ==> f IN lspace s p
       #|  q:real
-      #|  !s p q. measurable s /\\ &0 < p /\\ p <= q\n           ==> (lspace s q :(real^M->real^N)->bool) SUBSET (lspace s p)
-      #|  !(f:real^M->real^N) s t p.\n        f IN lspace t p /\\ lebesgue_measurable s /\\ s SUBSET t\n        ==> f IN lspace s p
+      #|  forall s p q. measurable s /\\ &0 < p /\\ p <= q\n           ==> (lspace s q :(real^M->real^N)->bool) SUBSET (lspace s p)
+      #|  forall(f:real^M->real^N) s t p.\n        f IN lspace t p /\\ lebesgue_measurable s /\\ s SUBSET t\n        ==> f IN lspace s p
       #|  lnorm s p f = drop(integral s (\\x. lift(norm(f x) rpow p))) rpow (inv p)
-      #|  !s p. ~(p = &0) ==> lnorm s p (\\x. vec 0) = &0
-      #|  !s p c:real^N.\n      measurable s /\\ &0 < p\n      ==> lnorm s p (\\x:real^M. c) = measure s rpow (inv p) * norm c
+      #|  forall s p. ~(p = &0) ==> lnorm s p (\\x. vec 0) = &0
+      #|  forall s p c:real^N.\n      measurable s /\\ &0 < p\n      ==> lnorm s p (\\x:real^M. c) = measure s rpow (inv p) * norm c
       #|  t:real^M->bool
-      #|  !f:real^M->real^N g:real^M->real^P s t p.\n        &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p /\\\n        negligible t /\\ (!x. x IN s DIFF t ==> norm(f x) <= norm(g x))\n        ==> lnorm s p f <= lnorm s p g
-      #|  !s p f:real^M->real^N. lnorm s p (\\x. --(f x)) = lnorm s p f
-      #|  !s p f c. f IN lspace s p /\\ ~(p = &0)\n             ==> lnorm s p (\\x. c % f x) = abs(c) * lnorm s p f
-      #|  !s p f. ~(p = &0) /\\ f IN lspace s p\n           ==> (lnorm s p f = &0 <=>\n                negligible {x | x IN s /\\ ~(f x = vec 0)})
-      #|  !s p f. f IN lspace s p ==> &0 <= lnorm s p f
-      #|  !s p f. lnorm s p (\\x. lift(norm(f x))) = lnorm s p f
-      #|  !s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> (lnorm s p f) rpow p =\n            drop(integral s (\\x. lift(norm(f x) rpow p)))
-      #|  !s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> integral s (\\x. lift(norm(f x) rpow p)) =\n            lift((lnorm s p f) rpow p)
+      #|  forall f:real^M->real^N g:real^M->real^P s t p.\n        &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p /\\\n        negligible t /\\ (forall x. x IN s DIFF t ==> norm(f x) <= norm(g x))\n        ==> lnorm s p f <= lnorm s p g
+      #|  forall s p f:real^M->real^N. lnorm s p (\\x. --(f x)) = lnorm s p f
+      #|  forall s p f c. f IN lspace s p /\\ ~(p = &0)\n             ==> lnorm s p (\\x. c % f x) = abs(c) * lnorm s p f
+      #|  forall s p f. ~(p = &0) /\\ f IN lspace s p\n           ==> (lnorm s p f = &0 <=>\n                negligible {x | x IN s /\\ ~(f x = vec 0)})
+      #|  forall s p f. f IN lspace s p ==> &0 <= lnorm s p f
+      #|  forall s p f. lnorm s p (\\x. lift(norm(f x))) = lnorm s p f
+      #|  forall s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> (lnorm s p f) rpow p =\n            drop(integral s (\\x. lift(norm(f x) rpow p)))
+      #|  forall s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> integral s (\\x. lift(norm(f x) rpow p)) =\n            lift((lnorm s p f) rpow p)
       #|  &0 < x ==> abs x = x
       #|  (a * b) * (c * d:real) = (a * c) * (b * d)
       #|  drop(integral s\n   (\\x. lift(norm(inv(lnorm s p f) % (f:real^M->real^N) x) rpow p / p +\n             norm(inv(lnorm s q g) % (g:real^M->real^N) x) rpow q / q)))
       #|  &0 <= y /\\ x = &0 ==> x <= y
       #|  &0 <= x <=> x = &0 \\/ &0 < x
       #|  &0 <= lnorm s p (f:real^M->real^N) /\\\n                &0 <= lnorm s q (g:real^M->real^N)
-      #|  !s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
-      #|  !s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s /\\\n            drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
+      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
+      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s /\\\n            drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
       #|  &1 < p ==> &0 <= p
       #|  ((\\x. f x + g x):real^M->real^N) IN lspace s p
       #|  i2 <= i1 ==> i1 <= f * y + g * y ==> i2 <= y * (f + g)
@@ -79361,13 +79361,13 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  &1 < p
       #|  x rpow (inv(&1)) = x
       #|  p = &1
-      #|  !s p f:real^M->real^N g:real^M->real^N.\n        f IN lspace s p /\\ g IN lspace s p /\\ &1 <= p\n        ==> lnorm s p (\\x. f x + g x) <= lnorm s p f + lnorm s p g
+      #|  forall s p f:real^M->real^N g:real^M->real^N.\n        f IN lspace s p /\\ g IN lspace s p /\\ &1 <= p\n        ==> lnorm s p (\\x. f x + g x) <= lnorm s p f + lnorm s p g
       #|  &1 <= p ==> &0 < p
       #|  a <= x + y ==> y <= z ==> a <= x + z
       #|  u:A->bool
       #|  i:A
       #|  &1 <= p ==> ~(p = &0)
-      #|  !s p f:A->real^M->real^N t.\n        &1 <= p /\\ FINITE t /\\ (!i. i IN t ==> (f i) IN lspace s p)\n        ==> lnorm s p (\\x. vsum t (\\i. f i x)) <= sum t (\\i. lnorm s p (f i))
+      #|  forall s p f:A->real^M->real^N t.\n        &1 <= p /\\ FINITE t /\\ (forall i. i IN t ==> (f i) IN lspace s p)\n        ==> lnorm s p (\\x. vsum t (\\i. f i x)) <= sum t (\\i. lnorm s p (f i))
       #|  &1 < p ==> &0 <= p
       #|  a':real <= a /\\ b <= b' ==> a <= b ==> a' <= b'
       #|  &1 < p ==> inv(p / (p - &1)) * p = p - &1
@@ -79386,26 +79386,26 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  x <= a ==> x <= abs a
       #|  p = &1
       #|  &1 <= p <=> p = &1 \\/ &1 < p
-      #|  !(f:real^M->real^N) s p.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p\n        ==> f absolutely_integrable_on s /\\\n            norm(integral s f) rpow p\n            <= measure s rpow (p - &1) *\n               norm(integral s (\\x. lift(norm(f x) rpow p)))
+      #|  forall(f:real^M->real^N) s p.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p\n        ==> f absolutely_integrable_on s /\\\n            norm(integral s f) rpow p\n            <= measure s rpow (p - &1) *\n               norm(integral s (\\x. lift(norm(f x) rpow p)))
       #|  lproduct (s:real^N->bool) (f:real^N->complex) (g:real^N->complex) =\n    integral s (\\x. f x * cnj(g x))
       #|  cnj
       #|  s:real^N->bool
       #|  \\x. (f:real^N->complex) x * cnj(g x)
       #|  (\\x. (g:real^N->complex) x * cnj(f x)) = (\\x. cnj(f x * cnj(g x)))
-      #|  !s (f:real^N->complex) g.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s f g = cnj(lproduct s g f)
+      #|  forall s (f:real^N->complex) g.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s f g = cnj(lproduct s g f)
       #|  linear (\\y:real^1. Cx(drop y))
       #|  \\y:real^1. Cx(drop y)
       #|  s:real^N->bool
       #|  gg:real^N->real^1
-      #|  !s (gg:real^N->real^1). gg integrable_on s\n     ==> integral s (\\x. Cx(drop(gg x))) = Cx(drop(integral s gg))
+      #|  forall s (gg:real^N->real^1). gg integrable_on s\n     ==> integral s (\\x. Cx(drop(gg x))) = Cx(drop(integral s gg))
       #|  (\\x. (f:real^N->complex) x * cnj(f x)) =\n                (\\x. Cx(drop(lift(norm(f x) pow 2))))
-      #|  !s (f:real^N->complex).\n     (\\x. lift(norm(f x) pow 2)) integrable_on s\n     ==> lproduct s f f = Cx(drop(integral s (\\x. lift(norm(f x) pow 2))))
+      #|  forall s (f:real^N->complex).\n     (\\x. lift(norm(f x) pow 2)) integrable_on s\n     ==> lproduct s f f = Cx(drop(integral s (\\x. lift(norm(f x) pow 2))))
       #|  ~(&2 = &0)
       #|  f:real^N->complex
       #|  &2
       #|  s:real^N->bool
       #|  (\\x. lift(norm((f:real^N->complex) x) pow 2)) integrable_on s
-      #|  !s (f:real^N->complex). f IN lspace s (&2)\n     ==> lproduct s f f = Cx((lnorm s (&2) f) pow 2)
+      #|  forall s (f:real^N->complex). f IN lspace s (&2)\n     ==> lproduct s f f = Cx((lnorm s (&2) f) pow 2)
       #|  g:real^N->complex
       #|  f:real^N->complex
       #|  &2
@@ -79417,27 +79417,27 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  &2
       #|  s:real^N->bool
       #|  drop(integral s\n      (\\x. lift(norm((f:real^N->complex) x) * norm((g:real^N->complex) x))))
-      #|  !s (f:real^N->complex) g.\n     f IN lspace s (&2) /\\ g IN lspace s (&2) /\\\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> norm(lproduct s f g) <= lnorm s (&2) f * lnorm s (&2) g
+      #|  forall s (f:real^N->complex) g.\n     f IN lspace s (&2) /\\ g IN lspace s (&2) /\\\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> norm(lproduct s f g) <= lnorm s (&2) f * lnorm s (&2) g
       #|  (\\x. (f:real^N->complex) x * cnj(c * h x)) =\n                (\\x. cnj c * (f x * cnj(h x)))
-      #|  !s (f:real^N->complex) (h:real^N->complex) c.\n     (\\x. f x * cnj(h x)) integrable_on s\n     ==> lproduct s f (\\x. c * h x) = cnj c * lproduct s f h
+      #|  forall s (f:real^N->complex) (h:real^N->complex) c.\n     (\\x. f x * cnj(h x)) integrable_on s\n     ==> lproduct s f (\\x. c * h x) = cnj c * lproduct s f h
       #|  k:A->bool
       #|  s:real^N->bool
       #|  \\(i:A) (x:real^N). (f:real^N->complex) x * cnj(g i x)
       #|  x:real^N
       #|  (\\x. (f:real^N->complex) x * cnj(vsum k (\\i. (g:A->real^N->complex) i x))) =\n    (\\x. vsum k (\\i. f x * cnj(g i x)))
-      #|  !s (f:real^N->complex) (g:A->real^N->complex) k.\n     FINITE k /\\ (!i. i IN k ==> (\\x. f x * cnj(g i x)) integrable_on s)\n     ==> lproduct s f (\\x. vsum k (\\i. g i x)) =\n         vsum k (\\i. lproduct s f (g i))
+      #|  forall s (f:real^N->complex) (g:A->real^N->complex) k.\n     FINITE k /\\ (forall i. i IN k ==> (\\x. f x * cnj(g i x)) integrable_on s)\n     ==> lproduct s f (\\x. vsum k (\\i. g i x)) =\n         vsum k (\\i. lproduct s f (g i))
       #|  (\\x. (c * (f:real^N->complex) x) * cnj(g x)) =\n                (\\x. c * (f x * cnj(g x)))
-      #|  !s (f:real^N->complex) (g:real^N->complex) c.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s (\\x. c * f x) g = c * lproduct s f g
+      #|  forall s (f:real^N->complex) (g:real^N->complex) c.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s (\\x. c * f x) g = c * lproduct s f g
       #|  k:A->bool
       #|  s:real^N->bool
       #|  \\(i:A) (x:real^N). (g:A->real^N->complex) i x * cnj(h x)
       #|  x:real^N
       #|  (\\x. vsum k (\\i. (g:A->real^N->complex) i x) * cnj(h x)) =\n    (\\x. vsum k (\\i. g i x * cnj(h x)))
-      #|  !s (g:A->real^N->complex) (h:real^N->complex) k.\n     FINITE k /\\ (!i. i IN k ==> (\\x. g i x * cnj(h x)) integrable_on s)\n     ==> lproduct s (\\x. vsum k (\\i. g i x)) h =\n         vsum k (\\i. lproduct s (g i) h)
+      #|  forall s (g:A->real^N->complex) (h:real^N->complex) k.\n     FINITE k /\\ (forall i. i IN k ==> (\\x. g i x * cnj(h x)) integrable_on s)\n     ==> lproduct s (\\x. vsum k (\\i. g i x)) h =\n         vsum k (\\i. lproduct s (g i) h)
       #|  (\\x. lift(norm((c:complex) * h x) rpow p)) =\n    (\\x. (norm c rpow p) % lift(norm((h:real^N->complex) x) rpow p))
-      #|  !(h:real^N->complex) (c:complex) p.\n     h IN lspace (:real^N) p ==> (\\x. c * h x) IN lspace (:real^N) p
+      #|  forall(h:real^N->complex) (c:complex) p.\n     h IN lspace (:real^N) p ==> (\\x. c * h x) IN lspace (:real^N) p
       #|  (\\x. if x IN s then cnj((g:real^N->complex) x) else vec 0) =\n    cnj o (\\x. if x IN s then g x else vec 0)
-      #|  !(g:real^N->complex) s. g measurable_on s\n     ==> (\\x. cnj(g x)) measurable_on s
+      #|  forall(g:real^N->complex) s. g measurable_on s\n     ==> (\\x. cnj(g x)) measurable_on s
       #|  inv(&2)+inv(&2)= &1
       #|  &0 < &2
       #|  g:real^N->complex
@@ -79446,8 +79446,8 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  &2
       #|  s:real^N->bool
       #|  \\x:real^N. lift(norm((f:real^N->complex) x) * norm((g:real^N->complex) x))
-      #|  !s (f:real^N->complex) (g:real^N->complex).\n     f IN lspace s (&2) /\\ g IN lspace s (&2)\n     ==> (\\x. f x * cnj(g x)) integrable_on s
-      #|  !(f:real^N->complex) s. f IN lspace s (&2)\n     ==> (\\x. cnj(f x)) IN lspace s (&2)
+      #|  forall s (f:real^N->complex) (g:real^N->complex).\n     f IN lspace s (&2) /\\ g IN lspace s (&2)\n     ==> (\\x. f x * cnj(g x)) integrable_on s
+      #|  forall(f:real^N->complex) s. f IN lspace s (&2)\n     ==> (\\x. cnj(f x)) IN lspace s (&2)
       #|  x:real^N
       #|  c:real^N->complex
       #|  b:real^N->complex
@@ -79455,7 +79455,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  c:real^N->complex
       #|  a:real^N->complex
       #|  s:real^N->bool
-      #|  !(a:real^N->complex) b c (s:real^N->bool).\n     a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n     ==> lproduct s a c - lproduct s b c =\n         lproduct s (\\x. a x - b x) c
+      #|  forall(a:real^N->complex) b c (s:real^N->bool).\n     a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n     ==> lproduct s a c - lproduct s b c =\n         lproduct s (\\x. a x - b x) c
       #|  e = (e / (lnorm s (&2) (h:real^N->complex) + &1)) *\n                        (lnorm s (&2) h + &1)
       #|  lnorm s (&2) (\\x. (gn:num->real^N->complex) n x - g x) *\n                (lnorm s (&2) (h:real^N->complex) + &1)
       #|  lnorm s (&2) (\\x. (gn:num->real^N->complex) n x - g x) *\n              lnorm s (&2) (h:real^N->complex)
@@ -79467,13 +79467,13 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  &0 < lnorm s (&2) (h:real^N->complex) + &1
       #|  &0 <= lnorm s (&2) (h:real^N->complex)
       #|  e:real
-      #|  !(gn:num->real^N->complex) (g:real^N->complex) (h:real^N->complex)\n     (s:real^N->bool).\n     (!n. gn n IN lspace s (&2)) /\\ g IN lspace s (&2) /\\\n     h IN lspace s (&2) /\\\n     (!e. &0 < e ==> ?M. !n. n >= M\n          ==> lnorm s (&2) (\\x. gn n x - g x) < e)\n     ==> ((\\n. lproduct s (gn n) h) --> lproduct s g h)\n         sequentially
+      #|  forall(gn:num->real^N->complex) (g:real^N->complex) (h:real^N->complex)\n     (s:real^N->bool).\n     (forall n. gn n IN lspace s (&2)) /\\ g IN lspace s (&2) /\\\n     h IN lspace s (&2) /\\\n     (forall e. &0 < e ==> ?M. forall n. n >= M\n          ==> lnorm s (&2) (\\x. gn n x - g x) < e)\n     ==> ((\\n. lproduct s (gn n) h) --> lproduct s g h)\n         sequentially
       #|  lproduct s d m = cnj(lproduct s (m:real^N->complex) d)
       #|  k:num
       #|  (\\n. lproduct s d (mn n)) =\n    (\\n. cnj(lproduct s ((mn:num->real^N->complex) n) d))
-      #|  !(mn:num->real^N->complex) (m:real^N->complex) (d:real^N->complex)\n     (s:real^N->bool).\n     (!n. mn n IN lspace s (&2)) /\\ m IN lspace s (&2) /\\\n     d IN lspace s (&2) /\\\n     (!e. &0 < e ==> ?M. !n. n >= M\n          ==> lnorm s (&2) (\\x. mn n x - m x) < e)\n     ==> ((\\n. lproduct s d (mn n)) --> lproduct s d m)\n         sequentially
+      #|  forall(mn:num->real^N->complex) (m:real^N->complex) (d:real^N->complex)\n     (s:real^N->bool).\n     (forall n. mn n IN lspace s (&2)) /\\ m IN lspace s (&2) /\\\n     d IN lspace s (&2) /\\\n     (forall e. &0 < e ==> ?M. forall n. n >= M\n          ==> lnorm s (&2) (\\x. mn n x - m x) < e)\n     ==> ((\\n. lproduct s d (mn n)) --> lproduct s d m)\n         sequentially
       #|  abs(x) < e ==> x < e
-      #|  !f:real^M->real^1. integral (s DIFF k) f = integral s f
+      #|  forall f:real^M->real^1. integral (s DIFF k) f = integral s f
       #|  inv p:real
       #|  x:real^M
       #|  norm(x:real^N) <= a /\\ norm(y) <= a ==> norm(x - y) <= &2 * a
@@ -79491,8 +79491,8 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  \\n x. lift(norm(vsum (0..n) (\\i. (f:num->real^M->real^N) i x) - l x)\n                    rpow p)
       #|  \\k. lift(drop((g:num->real^M->real^1) k x) rpow p)
       #|  sequentially
-      #|  !x:real^M. x IN s DIFF k ==> &0 <= drop(hp x)
-      #|  !x:real^M. x IN s DIFF k ==> &0 <= drop(h x)
+      #|  forall x:real^M. x IN s DIFF k ==> &0 <= drop(hp x)
+      #|  forall x:real^M. x IN s DIFF k ==> &0 <= drop(h x)
       #|  &1 <= p ==> ~(p = &0)
       #|  \\k. lift(drop((g:num->real^M->real^1) k x) rpow p)
       #|  sequentially
@@ -79510,23 +79510,23 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  a /\\ (a ==> b) ==> a /\\ b
       #|  \\n. vsum ((:num) INTER (0..n))\n                         (\\i. (f:num->real^M->real^N) i x)
       #|  sequentially
-      #|  !x. x IN s DIFF k ==> norm((l:real^M->real^N) x) <= drop(h x)
+      #|  forall x. x IN s DIFF k ==> norm((l:real^M->real^N) x) <= drop(h x)
       #|  n:num <= m
       #|  m:num
       #|  n:num
       #|  \\n. vsum (0..n)\n                   (\\i. lift(norm((f:num->real^M->real^N) i x)))
       #|  sequentially
-      #|  !n x. x IN s DIFF k\n          ==> norm(vsum (0..n) (\\i. (f:num->real^M->real^N) i x)) <= drop(h x)
+      #|  forall n x. x IN s DIFF k\n          ==> norm(vsum (0..n) (\\i. (f:num->real^M->real^N) i x)) <= drop(h x)
       #|  l:real^M->real^N
       #|  (h:real^M->real^1) x
-      #|  !x. x IN s DIFF k ==> summable (:num) (\\i. (f:num->real^M->real^N) i x)
+      #|  forall x. x IN s DIFF k ==> summable (:num) (\\i. (f:num->real^M->real^N) i x)
       #|  &1 <= p ==> ~(p = &0)
       #|  (hp:real^M->real^1) x
       #|  \\i. lift(drop((g:num->real^M->real^1) i x) rpow p)
       #|  sequentially
       #|  lift o (\\x. x rpow (inv p)) o drop
       #|  x:real^M
-      #|  !x. x IN s DIFF k ==> ((\\i. g i x) --> ((h:real^M->real^1) x)) sequentially
+      #|  forall x. x IN s DIFF k ==> ((\\i. g i x) --> ((h:real^M->real^1) x)) sequentially
       #|  h:real^M->real^1 = \\x. lift(drop(hp x) rpow (inv p))
       #|  k:real^M->bool
       #|  hp:real^M->real^1
@@ -79535,17 +79535,17 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  &1 <= p ==> ~(p = &0)
       #|  n:num
       #|  M rpow p
-      #|  !k x. drop((g:num->real^M->real^1) k x) = norm(g k x)
+      #|  forall k x. drop((g:num->real^M->real^1) k x) = norm(g k x)
       #|  b /\\ a /\\ c ==> a /\\ b /\\ c
       #|  s:real^M->bool
       #|  \\i:num x:real^M. lift(drop(g i x) rpow p)
-      #|  !n:num x:real^M. &0 <= drop(g n x)
-      #|  !n:num. (g n:real^M->real^1) IN lspace s p
+      #|  forall n:num x:real^M. &0 <= drop(g n x)
+      #|  forall n:num. (g n:real^M->real^1) IN lspace s p
       #|  s = UNIV INTER s
-      #|  !n:num. lnorm s p (g n:real^M->real^1) <= M
+      #|  forall n:num. lnorm s p (g n:real^M->real^1) <= M
       #|  g = \\n x:real^M. vsum(0..n) (\\i. lift(norm(f i x:real^N)))
       #|  M = real_infsum (:num) (\\i. lnorm s p (f i:real^M->real^N))
-      #|  !f:num->real^M->real^N p s.\n        &1 <= p /\\\n        (!i. f i IN lspace s p) /\\\n        real_summable (:num) (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                !e. &0 < e  ==> eventually\n                                  (\\n. lnorm s p (\\x. vsum (0..n) (\\i. f i x) -\n                                                      g(x)) < e)\n                                  sequentially
+      #|  forall f:num->real^M->real^N p s.\n        &1 <= p /\\\n        (forall i. f i IN lspace s p) /\\\n        real_summable (:num) (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                forall e. &0 < e  ==> eventually\n                                  (\\n. lnorm s p (\\x. vsum (0..n) (\\i. f i x) -\n                                                      g(x)) < e)\n                                  sequentially
       #|  s INTER t = {x | x IN t /\\ x IN s}
       #|  x:real^M
       #|  &1 <= p ==> ~(p = &0)
@@ -79564,7 +79564,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  s:real^M->bool
       #|  p:real
       #|  (\\n:num x. if n IN t then f n x else vec 0):num->real^M->real^N
-      #|  !f:num->real^M->real^N p s t.\n        &1 <= p /\\\n        (!i. i IN t ==> f i IN lspace s p) /\\\n        real_summable t (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                ((\\n. lnorm s p (\\x. vsum (t INTER (0..n)) (\\i. f i x) - g x))\n                 ---> &0) sequentially
+      #|  forall f:num->real^M->real^N p s t.\n        &1 <= p /\\\n        (forall i. i IN t ==> f i IN lspace s p) /\\\n        real_summable t (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                ((\\n. lnorm s p (\\x. vsum (t INTER (0..n)) (\\i. f i x) - g x))\n                 ---> &0) sequentially
       #|  &1 <= p ==> &0 <= p
       #|  x < e / &2 /\\ y < e / &2 ==> z <= x + y ==> z < e
       #|  &1 <= p ==> &0 <= p
@@ -79599,17 +79599,17 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  n:num
       #|  n:num
       #|  n < MAX (n + 1) m
-      #|  k 0 = N 0 /\\\n      !n. k(SUC n) = MAX (k n + 1) (MAX (N n) (N(SUC n)))
+      #|  k 0 = N 0 /\\\n      forall n. k(SUC n) = MAX (k n + 1) (MAX (N n) (N(SUC n)))
       #|  N:num->num
       #|  inv(&2 pow n)
       #|  n:num
-      #|  ?k:num->num.\n        (!n. k n < k (SUC n)) /\\\n        (!n. lnorm s p ((\\x. f (k(SUC n)) x - f (k n) x):real^M->real^N)\n             < inv(&2 pow n))
-      #|  !f:num->real^M->real^N p s.\n        &1 <= p /\\ (!n. (f n) IN lspace s p) /\\\n        (!e. &0 < e\n             ==> ?N. !m n. m >= N /\\ n >= N\n                           ==> lnorm s p (\\x. f m x - f n x) < e)\n        ==> ?g. g IN lspace s p /\\\n                !e. &0 < e\n                    ==> ?N. !n. n >= N\n                                ==> lnorm s p (\\x. f n x - g x) < e
+      #|  ?k:num->num.\n        (forall n. k n < k (SUC n)) /\\\n        (forall n. lnorm s p ((\\x. f (k(SUC n)) x - f (k n) x):real^M->real^N)\n             < inv(&2 pow n))
+      #|  forall f:num->real^M->real^N p s.\n        &1 <= p /\\ (forall n. (f n) IN lspace s p) /\\\n        (forall e. &0 < e\n             ==> ?N. forall m n. m >= N /\\ n >= N\n                           ==> lnorm s p (\\x. f m x - f n x) < e)\n        ==> ?g. g IN lspace s p /\\\n                forall e. &0 < e\n                    ==> ?N. forall n. n >= N\n                                ==> lnorm s p (\\x. f n x - g x) < e
       #|  k:num
       #|  lift o (\\x. x rpow inv p) o  drop
       #|  (lift o (\\x. x rpow p) o  drop) o (lift o (norm:real^N->real))
       #|  x:real^M
-      #|  !x. x IN s DIFF k\n            ==> ((\\n. (f:num->real^M->real^N) n x) --> g x) sequentially
+      #|  forall x. x IN s DIFF k\n            ==> ((\\n. (f:num->real^M->real^N) n x) --> g x) sequentially
       #|  x:real^M
       #|  norm(x:real^N) <= norm(z) /\\ norm(y) <= norm z\n         ==> norm(x - y) <= norm(&2 % z:real^N)
       #|  :real
@@ -79627,7 +79627,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  \\n. (f:num->real^M->real^N) n x
       #|  sequentially
       #|  x:real^M
-      #|  !x. x IN s DIFF k\n        ==> norm((g:real^M->real^N) x) <= norm((h:real^M->real^N) x)
+      #|  forall x. x IN s DIFF k\n        ==> norm((g:real^M->real^N) x) <= norm((h:real^M->real^N) x)
       #|  a ==> b ==> c <=> b ==> a ==> c
       #|  k:real^M->bool
       #|  f:num->real^M->real^N
@@ -79643,7 +79643,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  \\x. lift(norm((h:real^M->real^N) x) rpow p)
       #|  \\x. lift(norm((g:real^M->real^N) x) rpow p)
       #|  \\n x. lift(norm((f:num->real^M->real^N) n x) rpow p)
-      #|  !f:num->real^M->real^N g h:real^M->real^N s p k.\n        &0 < p /\\\n        (!n. (f n) IN lspace s p) /\\ h IN lspace s p /\\\n        (!n x. x IN s ==> norm(f n x) <= norm(h x)) /\\\n        negligible k /\\\n        (!x. x IN s DIFF k ==> ((\\n. f n x) --> g(x)) sequentially)\n        ==> g IN lspace s p /\\\n            ((\\n. lnorm s p (\\x. f n x - g x)) ---> &0) sequentially
+      #|  forall f:num->real^M->real^N g h:real^M->real^N s p k.\n        &0 < p /\\\n        (forall n. (f n) IN lspace s p) /\\ h IN lspace s p /\\\n        (forall n x. x IN s ==> norm(f n x) <= norm(h x)) /\\\n        negligible k /\\\n        (forall x. x IN s DIFF k ==> ((\\n. f n x) --> g(x)) sequentially)\n        ==> g IN lspace s p /\\\n            ((\\n. lnorm s p (\\x. f n x - g x)) ---> &0) sequentially
       #|  abs(x) < e ==> x < e
       #|  x:real^M
       #|  &(dimindex(:N)) * &n
@@ -79675,7 +79675,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  f:real^M->real^N
       #|  f:real^M->real^N
       #|  (\\n x. (lambda i. max (--(&n)) (min (&n) ((f:real^M->real^N)(x)$i))))\n     :num->real^M->real^N
-      #|  !f:real^M->real^N s p e.\n        &0 < p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g IN lspace s p /\\\n                bounded (IMAGE g s) /\\\n                lnorm s p (\\x. f x - g x) < e
+      #|  forall f:real^M->real^N s p e.\n        &0 < p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g IN lspace s p /\\\n                bounded (IMAGE g s) /\\\n                lnorm s p (\\x. f x - g x) < e
       #|  abs x < e ==> x < e
       #|  y < e / &2 /\\ z < e / &2 ==> x <= y + z ==> x < e
       #|  (\\x. f x - (g:num->real^M->real^N) n x) =\n    (\\x. (f x - h x) + --(g n x - h x))
@@ -79693,7 +79693,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  :P
       #|  :N
       #|  n:num
-      #|  !n. ((g:num->real^M->real^N) n) IN lspace s p
+      #|  forall n. ((g:num->real^M->real^N) n) IN lspace s p
       #|  k:num
       #|  x:real^M
       #|  k:num
@@ -79715,7 +79715,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  g:num->real^M->real^N
       #|  k:real^M->bool
       #|  (h:real^M->real^N) measurable_on s
-      #|  ?k g. negligible k /\\\n          (!n. g n continuous_on (:real^M)) /\\\n          (!n x. x IN s ==> norm(g n x:real^N) <= norm(B % vec 1:real^N)) /\\\n          (!x. x IN (s DIFF k)  ==> ((\\n. g n x) --> h x) sequentially)
+      #|  ?k g. negligible k /\\\n          (forall n. g n continuous_on (:real^M)) /\\\n          (forall n x. x IN s ==> norm(g n x:real^N) <= norm(B % vec 1:real^N)) /\\\n          (forall x. x IN (s DIFF k)  ==> ((\\n. g n x) --> h x) sequentially)
       #|  B:real
       #|  h:real^M->real^N
       #|  e / &2
@@ -79723,7 +79723,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  s:real^M->bool
       #|  f:real^M->real^N
       #|  &1 <= p ==> &0 < p
-      #|  !f:real^M->real^N s p e.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g continuous_on (:real^M) /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
+      #|  forall f:real^M->real^N s p e.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g continuous_on (:real^M) /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
       #|  m * e / &2 <= e / &2 * n <=> e * m <= e * n
       #|  &0 <= x ==> &0 < x + &1
       #|  abs x = if &0 < x then x else --x
@@ -79749,7 +79749,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  p:real
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s p e.\n        &1 <= p /\\ bounded s /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. vector_polynomial_function g /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
+      #|  forall f:real^M->real^N s p e.\n        &1 <= p /\\ bounded s /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. vector_polynomial_function g /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
       #|lspace =  |- (#!:fun(fun(real,bool),bool) (\p:real. (#!:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) p:real)) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%9017:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%9017:fun(cart(real,'M),cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) ((#integrable_on:fun(fun(cart(real,'M),cart(real,1)),fun(fun(cart(real,'M),bool),bool)) (\x:cart(real,'M). (#lift:fun(real,cart(real,1)) ((#rpow:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M)))) p:real)))) s:fun(cart(real,'M),bool)))) f:fun(cart(real,'M),cart(real,'N))))))))))))
       #|LSPACE_ALT =  |- ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) p:real)) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%9018:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%9018:fun(cart(real,'M),cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) ((#absolutely_integrable_on:fun(fun(cart(real,'M),cart(real,1)),fun(fun(cart(real,'M),bool),bool)) (\x:cart(real,'M). (#lift:fun(real,cart(real,1)) ((#rpow:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M)))) p:real)))) s:fun(cart(real,'M),bool)))) f:fun(cart(real,'M),cart(real,'N))))))))
       #|LSPACE_ZERO =  |- (#!:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (((#COND:fun(bool,fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)))) (#measurable:fun(fun(cart(real,'M),bool),bool) s:fun(cart(real,'M),bool))) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%9019:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%9019:fun(cart(real,'M),cart(real,'N))) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) f:fun(cart(real,'M),cart(real,'N)))))))) #EMPTY:fun(fun(cart(real,'M),cart(real,'N)),bool)))))

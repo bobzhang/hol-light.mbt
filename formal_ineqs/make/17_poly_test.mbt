@@ -82,34 +82,34 @@ test "Formal_ineqs/trig/poly matches Formal_ineqs/trig/poly.ml" {
       #|  poly_f cs x = ITLIST (\\c s. c + x * s) cs (&0)
       #|  poly_f_even cs x = poly_f cs (x * x)
       #|  poly_f_odd cs x = x * poly_f_even cs x
-      #|  !x. poly_f [] x = &0
-      #|  !x h t. poly_f (CONS h t) x = h + x * poly_f t x
-      #|  !x. poly_f_even [] x = &0
-      #|  !x h t. poly_f_even (CONS h t) x = h + (x * x) * poly_f_even t x
-      #|  !x. poly_f_odd [] x = &0
-      #|  !x b a. poly_f (APPEND a b) x = poly_f a x + x pow (LENGTH a) * poly_f b x
-      #|  !x b a. poly_f_even (APPEND a b) x \n\t\t\t       = poly_f_even a x + x pow (2 * LENGTH a) * poly_f_even b x
-      #|  !x b a. poly_f_odd (APPEND a b) x \n\t\t\t      = poly_f_odd a x + x pow (2 * LENGTH a) * poly_f_odd b x
-      #|  !x. interval_arith (poly_f [] x) (&0, &0)
-      #|  !c x. poly_f [c] x = c
-      #|  !c x. poly_f_even [c] x = c
-      #|  !c x. poly_f_odd [c] x = c * x
-      #|  !x. interval_arith (poly_f [] x) (real_zero, &0)
-      #|  !c x bounds. interval_arith c bounds\n\t\t\t\t ==> interval_arith (poly_f [c] x) bounds
+      #|  forall x. poly_f [] x = &0
+      #|  forall x h t. poly_f (CONS h t) x = h + x * poly_f t x
+      #|  forall x. poly_f_even [] x = &0
+      #|  forall x h t. poly_f_even (CONS h t) x = h + (x * x) * poly_f_even t x
+      #|  forall x. poly_f_odd [] x = &0
+      #|  forall x b a. poly_f (APPEND a b) x = poly_f a x + x pow (LENGTH a) * poly_f b x
+      #|  forall x b a. poly_f_even (APPEND a b) x \n\t\t\t       = poly_f_even a x + x pow (2 * LENGTH a) * poly_f_even b x
+      #|  forall x b a. poly_f_odd (APPEND a b) x \n\t\t\t      = poly_f_odd a x + x pow (2 * LENGTH a) * poly_f_odd b x
+      #|  forall x. interval_arith (poly_f [] x) (&0, &0)
+      #|  forall c x. poly_f [c] x = c
+      #|  forall c x. poly_f_even [c] x = c
+      #|  forall c x. poly_f_odd [c] x = c * x
+      #|  forall x. interval_arith (poly_f [] x) (real_zero, &0)
+      #|  forall c x bounds. interval_arith c bounds\n\t\t\t\t ==> interval_arith (poly_f [c] x) bounds
       #|  c * a:real
       #|  b + m:real
-      #|  !x h t a b c m r.  \n\t\t\t\t       interval_arith (poly_f t x) (real_zero, a) /\\\n\t\t\t\t       interval_arith h (real_zero, b) /\\\n\t\t\t\t       interval_arith x (real_zero, c) /\\\n\t\t\t\t       c * a <= m /\\\n\t\t\t\t       b + m <= r\n\t\t\t\t       ==> interval_arith (poly_f (CONS h t) x) (real_zero, r)
-      #|  !x. interval_arith (&0) (real_zero, poly_f [] x)
-      #|  !c b x. interval_arith b (real_zero, c)\n\t\t\t\t==> interval_arith b (real_zero, poly_f [c] x)
+      #|  forall x h t a b c m r.  \n\t\t\t\t       interval_arith (poly_f t x) (real_zero, a) /\\\n\t\t\t\t       interval_arith h (real_zero, b) /\\\n\t\t\t\t       interval_arith x (real_zero, c) /\\\n\t\t\t\t       c * a <= m /\\\n\t\t\t\t       b + m <= r\n\t\t\t\t       ==> interval_arith (poly_f (CONS h t) x) (real_zero, r)
+      #|  forall x. interval_arith (&0) (real_zero, poly_f [] x)
+      #|  forall c b x. interval_arith b (real_zero, c)\n\t\t\t\t==> interval_arith b (real_zero, poly_f [c] x)
       #|  c * a:real
       #|  b + m:real
-      #|  !x h t a b c m r.  \n\t\t\t\t      interval_arith a (real_zero, poly_f t x) /\\\n\t\t\t\t      interval_arith b (real_zero, h) /\\\n\t\t\t\t      interval_arith c (real_zero, x) /\\\n\t\t\t\t      m <= c * a /\\\n\t\t\t\t      r <= b + m /\\\n\t\t\t\t      real_zero <= r\n\t\t\t\t       ==> interval_arith r (real_zero, poly_f (CONS h t) x)
-      #|  !a x n. sum (0..n) (\\i. a i * x pow i) = poly_f (TABLE a (SUC n)) x
-      #|  !a x n. sum (0..n) (\\i. a i * x pow (2 * i)) \n\t\t\t       = poly_f_even (TABLE a (SUC n)) x
-      #|  !a x n. sum (0..n) (\\i. a i * x pow (2 * i + 1)) \n\t\t\t       = poly_f_odd (TABLE a (SUC n)) x
+      #|  forall x h t a b c m r.  \n\t\t\t\t      interval_arith a (real_zero, poly_f t x) /\\\n\t\t\t\t      interval_arith b (real_zero, h) /\\\n\t\t\t\t      interval_arith c (real_zero, x) /\\\n\t\t\t\t      m <= c * a /\\\n\t\t\t\t      r <= b + m /\\\n\t\t\t\t      real_zero <= r\n\t\t\t\t       ==> interval_arith r (real_zero, poly_f (CONS h t) x)
+      #|  forall a x n. sum (0..n) (\\i. a i * x pow i) = poly_f (TABLE a (SUC n)) x
+      #|  forall a x n. sum (0..n) (\\i. a i * x pow (2 * i)) \n\t\t\t       = poly_f_even (TABLE a (SUC n)) x
+      #|  forall a x n. sum (0..n) (\\i. a i * x pow (2 * i + 1)) \n\t\t\t       = poly_f_odd (TABLE a (SUC n)) x
       #|  (k + 1) + 1 = k + 2
-      #|  !k. P k /\\ P (k + 1)
-      #|  !P. P 0 /\\ P 1 /\\ (!k. P k /\\ P (k + 1) ==> P (k + 2)) ==> (!k. P k)
+      #|  forall k. P k /\\ P (k + 1)
+      #|  forall P. P 0 /\\ P 1 /\\ (forall k. P k /\\ P (k + 1) ==> P (k + 2)) ==> (forall k. P k)
       #|  x pow (2 * (m + 1)) * a * x = (x pow (2 * (m + 1)) * x pow 1) * a
       #|  m + 1
       #|  ~EVEN (2 * (m + 1) + 1)
@@ -122,7 +122,7 @@ test "Formal_ineqs/trig/poly matches Formal_ineqs/trig/poly.ml" {
       #|  EVEN n
       #|  2 * m = m * 2
       #|  ~(2 = 0)
-      #|  ~(2 = 0) /\\ (!m. (2 * m) DIV 2 = m) /\\ (!m. (2 * m + 1) DIV 2 = m)
+      #|  ~(2 = 0) /\\ (forall m. (2 * m) DIV 2 = m) /\\ (forall m. (2 * m + 1) DIV 2 = m)
       #|  ~(2 = 0)
       #|  SUC (SUC (SUC n)) = 1 * 2 + SUC n
       #|  SUC (SUC (SUC n)) DIV 2 = SUC (SUC n DIV 2)
@@ -130,9 +130,9 @@ test "Formal_ineqs/trig/poly matches Formal_ineqs/trig/poly.ml" {
       #|  SUC (SUC n) = 1 * 2 + n
       #|  SUC (SUC n) DIV 2 + 1 = SUC (n DIV 2 + 1)
       #|  n + 2 = SUC (SUC n)
-      #|  !a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow i)\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) x\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) x
-      #|  !a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i))\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x)
-      #|  !a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i + 1))\n\t\t\t\t= x * (poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x))
+      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow i)\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) x\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) x
+      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i))\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x)
+      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i + 1))\n\t\t\t\t= x * (poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x))
       #|Poly.real_zero =  |- ((#=:fun(real,fun(real,bool)) #real_zero:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))
       #|Poly.poly_f =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(list(real),bool),bool) (\cs:list(real). ((#=:fun(real,fun(real,bool)) ((#poly_f:fun(list(real),fun(real,real)) cs:list(real)) x:real)) (((#ITLIST:fun(fun(real,fun(real,real)),fun(list(real),fun(real,real))) (\c:real. (\s:real. ((#real_add:fun(real,fun(real,real)) c:real) ((#real_mul:fun(real,fun(real,real)) x:real) s:real))))) cs:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
       #|Poly.poly_f_even =  |- (#!:fun(fun(list(real),bool),bool) (\cs:list(real). (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#poly_f_even:fun(list(real),fun(real,real)) cs:list(real)) x:real)) ((#poly_f:fun(list(real),fun(real,real)) cs:list(real)) ((#real_mul:fun(real,fun(real,real)) x:real) x:real)))))))

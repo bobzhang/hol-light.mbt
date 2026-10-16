@@ -23,7 +23,7 @@ pub fn try_rule(x1 : (@kernel.Thm) -> @kernel.Thm raise, x2 : @kernel.Thm) -> @k
 /// REAL_MUL_RTIMES
 fn step_2() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([@real.real_eq_mul_rcancel()]))
-  real_mul_rtimes_c.set(@tactics_refine.prove(@parser.parse_term("!x a b.\n                (((~(x=(&0))==>(a*x = b*x)) /\\ ~(x=(&0))) ==>  (a = b))"), t3))
+  real_mul_rtimes_c.set(@tactics_refine.prove(@parser.parse_term("forall x a b.\n                (((~(x=(&0))==>(a*x = b*x)) /\\ ~(x=(&0))) ==>  (a = b))"), t3))
 }
 
 ///|
@@ -55,7 +55,7 @@ fn step_3() -> Unit raise {
   let t16 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("~(x = (&1))")), t15)])
   let tac3 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(@parser.parse_term("&1 - x"), real_mul_rtimes())), @tactics.conj_tac), t16), t17), t18), @tactics.disch_tac), t19), t20)
   let t21 = @tactics.then_tac(@tactics.then_tac(tac1, tac2), tac3)
-  geometric_sum_c.set(@tactics_refine.prove(@parser.parse_term("!m n x.(~(x=(&1)) ==>\n        (sum(m,n) (\\k.(x pow k)) = ((x pow m) - (x pow (m+n)))/((&1)-x)))"), t21))
+  geometric_sum_c.set(@tactics_refine.prove(@parser.parse_term("forall m n x.(~(x=(&1)) ==>\n        (sum(m,n) (\\k.(x pow k)) = ((x pow m) - (x pow (m+n)))/((&1)-x)))"), t21))
 }
 
 ///|

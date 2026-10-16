@@ -74813,55 +74813,55 @@ Generating HOL version of proof
 Generating HOL version of proof
 Quaternions/qisom quotations (59):
   HIm(q:quat) : real^3 = vector[q$2;q$3;q$4]
-  !x y z w. HIm(quat(x,y,z,w)):real^3 = vector[y;z;w]
-  (!q. HIm q $ 1 = Im1 q) /\\\n   (!q. HIm q $ 2 = Im2 q) /\\\n   (!q. HIm q $ 3 = Im3 q)
-  !p q. HIm p = HIm q <=> Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q
-  !a. HIm(Hx a) = vec 0
-  !q. HIm(cnj q) = -- HIm q
-  (!a q. HIm(Hx a * q) = a % HIm q) /\\\n   (!a q. HIm(q * Hx a) = a % HIm q)
-  !p q. HIm(p + q) = HIm p + HIm q
-  !q. HIm(--q) = --HIm q
-  !p q. HIm(p - q) = HIm p - HIm q
-  !f s. FINITE s ==> HIm(vsum s f) = vsum s (\\x:A. HIm(f x))
-  !c q. c % HIm q = HIm(Hx c * q)
+  forall x y z w. HIm(quat(x,y,z,w)):real^3 = vector[y;z;w]
+  (forall q. HIm q $ 1 = Im1 q) /\\\n   (forall q. HIm q $ 2 = Im2 q) /\\\n   (forall q. HIm q $ 3 = Im3 q)
+  forall p q. HIm p = HIm q <=> Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q
+  forall a. HIm(Hx a) = vec 0
+  forall q. HIm(cnj q) = -- HIm q
+  (forall a q. HIm(Hx a * q) = a % HIm q) /\\\n   (forall a q. HIm(q * Hx a) = a % HIm q)
+  forall p q. HIm(p + q) = HIm p + HIm q
+  forall q. HIm(--q) = --HIm q
+  forall p q. HIm(p - q) = HIm p - HIm q
+  forall f s. FINITE s ==> HIm(vsum s f) = vsum s (\\x:A. HIm(f x))
+  forall c q. c % HIm q = HIm(Hx c * q)
   linear(HIm)
   Hv(x:real^3) = quat(&0,x$1,x$2,x$3)
-  (!x. Re(Hv(x)) = &0) /\\\n   (!x. Im1(Hv(x)) = x$1) /\\\n   (!x. Im2(Hv(x)) = x$2) /\\\n   (!x. Im3(Hv(x)) = x$3)
-  !n. Hv(vec n) = quat(&0, &n, &n, &n)
-  !v. Hv v = Hx(&0) <=> v = vec 0
+  (forall x. Re(Hv(x)) = &0) /\\\n   (forall x. Im1(Hv(x)) = x$1) /\\\n   (forall x. Im2(Hv(x)) = x$2) /\\\n   (forall x. Im3(Hv(x)) = x$3)
+  forall n. Hv(vec n) = quat(&0, &n, &n, &n)
+  forall v. Hv v = Hx(&0) <=> v = vec 0
   Hv(vec 0) = Hx(&0)
-  !x y z. Hv(vector[x;y;z]) = quat(&0,x,y,z)
+  forall x y z. Hv(vector[x;y;z]) = quat(&0,x,y,z)
   Hv(basis 1) = ii /\\ Hv(basis 2) = jj /\\ Hv(basis 3) = kk
-  !x y. Hv(x + y) = Hv x + Hv y
-  !x. Hv(--x) = --Hv x
-  !x y. Hv(x - y) = Hv x - Hv y
-  !a x. Hv(a % x) = Hx a * Hv x
-  !f s. FINITE s ==> Hv(vsum s f) = vsum s (\\x:A. Hv(f x))
-  !x y. Hv x = Hv y <=> x = y
+  forall x y. Hv(x + y) = Hv x + Hv y
+  forall x. Hv(--x) = --Hv x
+  forall x y. Hv(x - y) = Hv x - Hv y
+  forall a x. Hv(a % x) = Hx a * Hv x
+  forall f s. FINITE s ==> Hv(vsum s f) = vsum s (\\x:A. Hv(f x))
+  forall x y. Hv x = Hv y <=> x = y
   linear(Hv)
-  !x. HIm(Hv x) = x
-  !v. cnj(Hv v) = --Hv v
-  !q. Hv(HIm q) = quat(&0, Im1 q, Im2 q, Im3 q)
-  !q. Hv(HIm q) = q <=> Re q = &0
-  !u v. Hv u dot Hv v = u dot v
-  !v. norm (Hv v) = norm v
-  !x y. Hv x * Hv y = Hv(x cross y) - Hx (x dot y)
-  !q. norm q = &1\n       ==> orthogonal_transformation (\\x. HIm(cnj q * Hv x * q))
+  forall x. HIm(Hv x) = x
+  forall v. cnj(Hv v) = --Hv v
+  forall q. Hv(HIm q) = quat(&0, Im1 q, Im2 q, Im3 q)
+  forall q. Hv(HIm q) = q <=> Re q = &0
+  forall u v. Hv u dot Hv v = u dot v
+  forall v. norm (Hv v) = norm v
+  forall x y. Hv x * Hv y = Hv(x cross y) - Hx (x dot y)
+  forall q. norm q = &1\n       ==> orthogonal_transformation (\\x. HIm(cnj q * Hv x * q))
   inv (Hx (norm q)) * q
   norm (q:quat)
   ?c p. q = Hx c * p /\\ norm p = &1
-  !q. ~(q = Hx(&0))\n       ==> orthogonal_transformation (\\x. HIm(inv q * Hv x * q))
+  forall q. ~(q = Hx(&0))\n       ==> orthogonal_transformation (\\x. HIm(inv q * Hv x * q))
   v:real^3 dot v = &1
-  !v x. norm v = &1 ==> reflect_along v x = HIm(Hv v * Hv x * Hv v)
+  forall v x. norm v = &1 ==> reflect_along v x = HIm(Hv v * Hv x * Hv v)
   inv (Hv u) = --Hv u
   ~(c = &0) ==> -- &1 * c * inv c = -- &1
   inv (norm (v:real^3)) % v
   norm (v:real^3)
   ?c u:real^3. v = c % u /\\ norm u = &1
-  !v. ~(v = vec 0)\n       ==> reflect_along v = \\x. -- HIm(inv (Hv v) * Hv x * Hv v)
+  forall v. ~(v = vec 0)\n       ==> reflect_along v = \\x. -- HIm(inv (Hv v) * Hv x * Hv v)
   q * p : quat
   p = Hx(inv (norm h)) * Hv h
-  !x. Hv(HIm((inv q * Hv x) * q)) = (inv q * Hv x) * q
+  forall x. Hv(HIm((inv q * Hv x) * q)) = (inv q * Hv x) * q
   g = ITLIST (\\v:real^3 h. reflect_along v o h) t I
   Hx(&1)
   n:num
@@ -74870,7 +74870,7 @@ Quaternions/qisom quotations (59):
   n = LENGTH (l:(real^3)list)
   3
   f:real^3->real^3
-  !f. orthogonal_transformation f\n       ==> (?q. norm q = &1 /\\\n                ((!x. f x = HIm(inv q * Hv x * q)) \\/\n                 (!x. f x = -- HIm(inv q * Hv x * q))))
+  forall f. orthogonal_transformation f\n       ==> (?q. norm q = &1 /\\\n                ((forall x. f x = HIm(inv q * Hv x * q)) \\/\n                 (forall x. f x = -- HIm(inv q * Hv x * q))))
 HIM_DEF =  |- (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#HIm:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit1(1))) q:cart(real,tybit0(tybit0(1))))) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) q:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#CONS:fun(real,fun(list(real),list(real))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) q:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#CONS:fun(real,fun(list(real),list(real))) ((#$:fun(cart(real,tybit0(tybit0(1))),fun(num,real)) q:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) #NIL:list(real))))))))
 HIM =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(real,bool),bool) (\z:real. (#!:fun(fun(real,bool),bool) (\w:real. ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#HIm:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit1(1))) (#quat:fun(prod(real,prod(real,prod(real,real))),cart(real,tybit0(tybit0(1)))) ((#,:fun(real,fun(prod(real,prod(real,real)),prod(real,prod(real,prod(real,real))))) x:real) ((#,:fun(real,fun(prod(real,real),prod(real,prod(real,real)))) y:real) ((#,:fun(real,fun(real,prod(real,real))) z:real) w:real)))))) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) y:real) ((#CONS:fun(real,fun(list(real),list(real))) z:real) ((#CONS:fun(real,fun(list(real),list(real))) w:real) #NIL:list(real))))))))))))))
 HIM_COMPONENT =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#HIm:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit1(1))) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#Im1:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#HIm:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit1(1))) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#Im2:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1)))))))) (#!:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#HIm:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit1(1))) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#Im3:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1)))))))))

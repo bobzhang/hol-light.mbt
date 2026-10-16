@@ -5672,45 +5672,45 @@ test "Library/components matches Library/components.ml" {
       #|0..0..solved at 2
       #|Library/components quotations (40):
       #|  ?rw:(S->V)#(V->S->S). T
-      #|  !rw rw'. component rw = component rw' <=> rw = rw'
-      #|  (!c:(S,V)component. P c) <=> !r w. P(component(r,w))
+      #|  forall rw rw'. component rw = component rw' <=> rw = rw'
+      #|  (forall c:(S,V)component. P c) <=> forall r w. P(component(r,w))
       #|  (?c:(S,V)component. P c) <=> ?r w. P(component(r,w))
       #|  read (c:(S,V)component) = FST(dest_component c)
       #|  write (c:(S,V)component) = SND(dest_component c)
-      #|  !(r:S->V) w. read(component(r,w)) = r
-      #|  !(r:S->V) w. write(component(r,w)) = w
-      #|  !c1 c2. c1 = c2 <=> read c1 = read c2 /\\ write c1 = write c2
+      #|  forall(r:S->V) w. read(component(r,w)) = r
+      #|  forall(r:S->V) w. write(component(r,w)) = w
+      #|  forall c1 c2. c1 = c2 <=> read c1 = read c2 /\\ write c1 = write c2
       #|  entirety = component((\\s:S. s),(\\x:S s:S. x))
-      #|  read entirety = I /\\ (!s. read entirety s = s)
-      #|  (!y. write entirety y = \\s. y) /\\ (!s y. write entirety y s = y)
-      #|  !y s. read entirety (write entirety y s) = y
+      #|  read entirety = I /\\ (forall s. read entirety s = s)
+      #|  (forall y. write entirety y = \\s. y) /\\ (forall s y. write entirety y s = y)
+      #|  forall y s. read entirety (write entirety y s) = y
       #|  (c1:(S,T)component) :> (c2:(T,U)component) =\n        component((read c2 o read c1),\n                  (\\v s. write c1 (write c2 v (read c1 s)) s))
-      #|  !sc1 sc2 sc3. sc1 :> (sc2 :> sc3) = (sc1 :> sc2) :> sc3
-      #|  !sc1 sc2 s. read (sc1 :> sc2) s = read sc2 (read sc1 s)
-      #|  !sc1 sc2 s x. write (sc1 :> sc2) x s =\n                 write sc1 (write sc2 x (read sc1 s)) s
-      #|  (!c. c :> entirety = c) /\\ (!c. entirety :> c = c)
-      #|  !sc1 sc2.\n        (!y s. read sc1 (write sc1 y s) = y) /\\\n        (!y s. read sc2 (write sc2 y s) = y)\n        ==> !y s. read (sc1 :> sc2) (write (sc1 :> sc2) y s) = y
-      #|  read_over_write (c:(S,A)component) <=>\n        !y s. read c (write c y s) = y
-      #|  write_over_write (c:(S,A)component) <=>\n        !y z s. write c z (write c y s) = write c z s
-      #|  write_over_read (c:(S,A)component) <=>\n     !s. write c (read c s) s = s
-      #|  weak_read_over_write (c:(S,A)component) <=>\n        ?f. !y s. read c (write c y s) = f y
-      #|  valid_component c <=>\n        (!y s. read c (write c y s) = y) /\\\n        (!y z s. write c z (write c y s) = write c z s)
-      #|  !c1 c2. valid_component c1 /\\ valid_component c2\n           ==> valid_component(c1 :> c2)
+      #|  forall sc1 sc2 sc3. sc1 :> (sc2 :> sc3) = (sc1 :> sc2) :> sc3
+      #|  forall sc1 sc2 s. read (sc1 :> sc2) s = read sc2 (read sc1 s)
+      #|  forall sc1 sc2 s x. write (sc1 :> sc2) x s =\n                 write sc1 (write sc2 x (read sc1 s)) s
+      #|  (forall c. c :> entirety = c) /\\ (forall c. entirety :> c = c)
+      #|  forall sc1 sc2.\n        (forall y s. read sc1 (write sc1 y s) = y) /\\\n        (forall y s. read sc2 (write sc2 y s) = y)\n        ==> forall y s. read (sc1 :> sc2) (write (sc1 :> sc2) y s) = y
+      #|  read_over_write (c:(S,A)component) <=>\n        forall y s. read c (write c y s) = y
+      #|  write_over_write (c:(S,A)component) <=>\n        forall y z s. write c z (write c y s) = write c z s
+      #|  write_over_read (c:(S,A)component) <=>\n     forall s. write c (read c s) s = s
+      #|  weak_read_over_write (c:(S,A)component) <=>\n        ?f. forall y s. read c (write c y s) = f y
+      #|  valid_component c <=>\n        (forall y s. read c (write c y s) = y) /\\\n        (forall y z s. write c z (write c y s) = write c z s)
+      #|  forall c1 c2. valid_component c1 /\\ valid_component c2\n           ==> valid_component(c1 :> c2)
       #|  valid_component entirety
-      #|  weakly_valid_component c <=>\n        (?f. !y s. read c (write c y s) = f y) /\\\n        (!y z s. write c z (write c y s) = write c z s)
+      #|  weakly_valid_component c <=>\n        (?f. forall y s. read c (write c y s) = f y) /\\\n        (forall y z s. write c z (write c y s) = write c z s)
       #|  \\x:V. x
-      #|  !c:(S,V)component. valid_component c ==> weakly_valid_component c
+      #|  forall c:(S,V)component. valid_component c ==> weakly_valid_component c
       #|  weakly_valid_component entirety
-      #|  strongly_valid_component c <=>\n        (!y s. read c (write c y s) = y) /\\\n        (!s. write c (read c s) s = s) /\\\n        (!y z s. write c z (write c y s) = write c z s)
-      #|  !c:(S,V)component. strongly_valid_component c ==> valid_component c
-      #|  !c1 c2. strongly_valid_component c1 /\\ strongly_valid_component c2\n           ==> strongly_valid_component(c1 :> c2)
+      #|  strongly_valid_component c <=>\n        (forall y s. read c (write c y s) = y) /\\\n        (forall s. write c (read c s) s = s) /\\\n        (forall y z s. write c z (write c y s) = write c z s)
+      #|  forall c:(S,V)component. strongly_valid_component c ==> valid_component c
+      #|  forall c1 c2. strongly_valid_component c1 /\\ strongly_valid_component c2\n           ==> strongly_valid_component(c1 :> c2)
       #|  strongly_valid_component entirety
-      #|  extensionally_valid_component (c:(S,A)component) <=>\n        (?f. !y s. read c (write c y s) = f y) /\\\n        (!s. write c (read c s) s = s) /\\\n        (!y z s. write c z (write c y s) = write c z s)
+      #|  extensionally_valid_component (c:(S,A)component) <=>\n        (?f. forall y s. read c (write c y s) = f y) /\\\n        (forall s. write c (read c s) s = s) /\\\n        (forall y z s. write c z (write c y s) = write c z s)
       #|  \\x:V. x
-      #|  !c:(S,V)component.\n        strongly_valid_component c ==> extensionally_valid_component c
+      #|  forall c:(S,V)component.\n        strongly_valid_component c ==> extensionally_valid_component c
       #|  extensionally_valid_component entirety
-      #|  orthogonal_components sc1 sc2 <=>\n        (!y z s. write sc1 y (write sc2 z s) =\n                 write sc2 z (write sc1 y s)) /\\\n        (!y s. read sc2 (write sc1 y s) = read sc2 s) /\\\n        (!z s. read sc1 (write sc2 z s) = read sc1 s)
-      #|  !sc1 sc2. orthogonal_components sc1 sc2 <=> orthogonal_components sc2 sc1
+      #|  orthogonal_components sc1 sc2 <=>\n        (forall y z s. write sc1 y (write sc2 z s) =\n                 write sc2 z (write sc1 y s)) /\\\n        (forall y s. read sc2 (write sc1 y s) = read sc2 s) /\\\n        (forall z s. read sc1 (write sc2 z s) = read sc1 s)
+      #|  forall sc1 sc2. orthogonal_components sc1 sc2 <=> orthogonal_components sc2 sc1
       #|component_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(component('S,'V),bool),bool) (\a:component('S,'V). ((#=:fun(component('S,'V),fun(component('S,'V),bool)) (#component:fun(prod(fun('S,'V),fun('V,fun('S,'S))),component('S,'V)) (#dest_component:fun(component('S,'V),prod(fun('S,'V),fun('V,fun('S,'S)))) a:component('S,'V)))) a:component('S,'V))))) (#!:fun(fun(prod(fun('S,'V),fun('V,fun('S,'S))),bool),bool) (\r:prod(fun('S,'V),fun('V,fun('S,'S))). ((#=:fun(prod(fun('S,'V),fun('V,fun('S,'S))),fun(prod(fun('S,'V),fun('V,fun('S,'S))),bool)) (#dest_component:fun(component('S,'V),prod(fun('S,'V),fun('V,fun('S,'S)))) (#component:fun(prod(fun('S,'V),fun('V,fun('S,'S))),component('S,'V)) r:prod(fun('S,'V),fun('V,fun('S,'S)))))) r:prod(fun('S,'V),fun('V,fun('S,'S)))))))
       #|COMPONENT_INJ =  |- (#!:fun(fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),bool),bool) (\rw:prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))). (#!:fun(fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),bool),bool) (\rw':prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))). ((#=:fun(bool,fun(bool,bool)) ((#=:fun(component('?142955,'?142956),fun(component('?142955,'?142956),bool)) (#component:fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),component('?142955,'?142956)) rw:prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))))) (#component:fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),component('?142955,'?142956)) rw':prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955)))))) ((#=:fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),fun(prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955))),bool)) rw:prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955)))) rw':prod(fun('?142955,'?142956),fun('?142956,fun('?142955,'?142955)))))))))
       #|FORALL_COMPONENT =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(component('S,'V),bool),bool) (\c:component('S,'V). (P:fun(component('S,'V),bool) c:component('S,'V))))) (#!:fun(fun(fun('S,'V),bool),bool) (\r:fun('S,'V). (#!:fun(fun(fun('V,fun('S,'S)),bool),bool) (\w:fun('V,fun('S,'S)). (P:fun(component('S,'V),bool) (#component:fun(prod(fun('S,'V),fun('V,fun('S,'S))),component('S,'V)) ((#,:fun(fun('S,'V),fun(fun('V,fun('S,'S)),prod(fun('S,'V),fun('V,fun('S,'S))))) r:fun('S,'V)) w:fun('V,fun('S,'S))))))))))

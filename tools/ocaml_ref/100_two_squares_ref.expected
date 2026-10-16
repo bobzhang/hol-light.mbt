@@ -12626,17 +12626,17 @@ Warning: inventing type variables
 0..0..1..2..3..10..18..26..solved at 35
 0..0..1..2..7..13..solved at 21
 100/two_squares quotations (71):
-  involution f s = !x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
-  !f s. involution f s ==> (IMAGE f s = s)
+  involution f s = forall x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
+  forall f s. involution f s ==> (IMAGE f s = s)
   involution f s /\\ a IN s /\\ (f a = a) ==> involution f (s DELETE a)
   involution f s /\\ a IN s ==> involution f (s DIFF {a, (f a)})
   involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}
-  !f s t. involution f s /\\ (!x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
-  !s. FINITE(s) /\\ involution f s /\\ (!x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
+  forall f s t. involution f s /\\ (forall x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
+  forall s. FINITE(s) /\\ involution f s /\\ (forall x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
   s = (a:A) INSERT (s DELETE a)
   FINITE(s) /\\ involution f s /\\ (?!a:A. a IN s /\\ (f a = a))\n   ==> ODD(CARD s)
-  !n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
-  !f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
+  forall n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
+  forall f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
   zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}
   zag(x,y,z) =\n        if x + z < y then (x + 2 * z,z,y - (x + z))\n        else if x < 2 * y then (2 * y - x, y, (x + z) - y)\n        else (x - 2 * y,(x + z) - y, y)
   tag((x,y,z):num#num#num) = (x,z,y)
@@ -12646,18 +12646,18 @@ Warning: inventing type variables
   n:num
   n = 1
   n = 0
-  !n. ~prime(n * n)
+  forall n. ~prime(n * n)
   n = 0
   2 * 2
   2
-  !n. ~prime(4 * n)
+  forall n. ~prime(4 * n)
   ~(0 < x) = (x = 0)
   prime(x EXP 2 + 4 * y * z) ==> 0 < x /\\ 0 < y /\\ 0 < z
   z:num
   y:num
   x:num
-  !p. prime(p) ==> involution zag (zset(p))
-  !a. involution tag (zset a)
+  forall p. prime(p) ==> involution zag (zset(p))
+  forall a. involution tag (zset a)
   (zag(x,y,z) = (x,y,z)) ==> (y = x)
   0 < a ==> 1 <= 4 * a
   y <= 4 * a * y <=> 1 * y <= (4 * a) * y
@@ -12675,7 +12675,7 @@ Warning: inventing type variables
   x:num
   a /\\ b ==> c <=> b ==> a ==> c
   p + 1
-  !p. prime(p) ==> FINITE(zset p)
+  forall p. prime(p) ==> FINITE(zset p)
   x = 1
   4 * k + 1 = x * (4 * z + x)
   ~(z = 0)
@@ -12696,7 +12696,7 @@ Warning: inventing type variables
   zag
   4 * x * y = (2 * x) * (2 * y)
   ?t. t IN zset(p) /\\ (tag(t) = t)
-  !p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
+  forall p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
 involution =  |- (#!:fun(fun(fun('?156925,bool),bool),bool) (\s:fun('?156925,bool). (#!:fun(fun(fun('?156925,'?156925),bool),bool) (\f:fun('?156925,'?156925). ((#=:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?156925,'?156925),fun(fun('?156925,bool),bool)) f:fun('?156925,'?156925)) s:fun('?156925,bool))) (#!:fun(fun('?156925,bool),bool) (\x:'?156925. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?156925,fun(fun('?156925,bool),bool)) x:'?156925) s:fun('?156925,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?156925,fun(fun('?156925,bool),bool)) (f:fun('?156925,'?156925) x:'?156925)) s:fun('?156925,bool))) ((#=:fun('?156925,fun('?156925,bool)) (f:fun('?156925,'?156925) (f:fun('?156925,'?156925) x:'?156925))) x:'?156925))))))))))
 INVOLUTION_IMAGE =  |- (#!:fun(fun(fun('?156939,'?156939),bool),bool) (\f:fun('?156939,'?156939). (#!:fun(fun(fun('?156939,bool),bool),bool) (\s:fun('?156939,bool). ((#==>:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?156939,'?156939),fun(fun('?156939,bool),bool)) f:fun('?156939,'?156939)) s:fun('?156939,bool))) ((#=:fun(fun('?156939,bool),fun(fun('?156939,bool),bool)) ((#IMAGE:fun(fun('?156939,'?156939),fun(fun('?156939,bool),fun('?156939,bool))) f:fun('?156939,'?156939)) s:fun('?156939,bool))) s:fun('?156939,bool)))))))
 INVOLUTION_DELETE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?156967,'?156967),fun(fun('?156967,bool),bool)) f:fun('?156967,'?156967)) s:fun('?156967,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?156967,fun(fun('?156967,bool),bool)) a:'?156967) s:fun('?156967,bool))) ((#=:fun('?156967,fun('?156967,bool)) (f:fun('?156967,'?156967) a:'?156967)) a:'?156967)))) ((#involution:fun(fun('?156967,'?156967),fun(fun('?156967,bool),bool)) f:fun('?156967,'?156967)) ((#DELETE:fun(fun('?156967,bool),fun('?156967,fun('?156967,bool))) s:fun('?156967,bool)) a:'?156967)))

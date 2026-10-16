@@ -98,7 +98,7 @@ fn step_9() -> Unit raise {
 ///|
 /// holds
 fn step_10() -> Unit raise {
-  holds_c.set(@define.define_(@parser.parse_term("(holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        !w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')")))
+  holds_c.set(@define.define_(@parser.parse_term("(holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        forall w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')")))
 }
 
 ///|
@@ -113,7 +113,7 @@ pub fn holds() -> @kernel.Thm {
 ///|
 /// holds_in
 fn step_11() -> Unit raise {
-  holds_in_c.set(@pair.new_definition(@parser.parse_term("holds_in (W,R) p = !V w. w IN W ==> holds (W,R) V p w")))
+  holds_in_c.set(@pair.new_definition(@parser.parse_term("holds_in (W,R) p = forall V w. w IN W ==> holds (W,R) V p w")))
 }
 
 ///|
@@ -134,7 +134,7 @@ fn step_12() -> Unit raise {
 ///|
 /// valid
 fn step_13() -> Unit raise {
-  valid_c.set(@pair.new_definition(@parser.parse_term("L |= p <=> !f. L f ==> holds_in f p")))
+  valid_c.set(@pair.new_definition(@parser.parse_term("L |= p <=> forall f. L f ==> holds_in f p")))
 }
 
 ///|
@@ -149,7 +149,7 @@ pub fn valid() -> @kernel.Thm {
 ///|
 /// S4
 fn step_14() -> Unit raise {
-  s4_c.set(@pair.new_definition(@parser.parse_term("S4(W,R) <=> ~(W = {}) /\\ (!x y. R x y ==> x IN W /\\ y IN W) /\\\n              (!x. x IN W ==> R x x) /\\\n              (!x y z. R x y /\\ R y z ==> R x z)")))
+  s4_c.set(@pair.new_definition(@parser.parse_term("S4(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              (forall x. x IN W ==> R x x) /\\\n              (forall x y z. R x y /\\ R y z ==> R x z)")))
 }
 
 ///|
@@ -164,7 +164,7 @@ pub fn s4() -> @kernel.Thm {
 ///|
 /// LTL
 fn step_15() -> Unit raise {
-  ltl_c.set(@pair.new_definition(@parser.parse_term("LTL(W,R) <=> (W = UNIV) /\\ !x y:num. R x y <=> x <= y")))
+  ltl_c.set(@pair.new_definition(@parser.parse_term("LTL(W,R) <=> (W = UNIV) /\\ forall x y:num. R x y <=> x <= y")))
 }
 
 ///|
@@ -179,7 +179,7 @@ pub fn ltl() -> @kernel.Thm {
 ///|
 /// GL
 fn step_16() -> Unit raise {
-  gl_c.set(@pair.new_definition(@parser.parse_term("GL(W,R) <=> ~(W = {}) /\\ (!x y. R x y ==> x IN W /\\ y IN W) /\\\n              WF(\\x y. R y x) /\\ (!x y z:num. R x y /\\ R y z ==> R x z)")))
+  gl_c.set(@pair.new_definition(@parser.parse_term("GL(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              WF(\\x y. R y x) /\\ (forall x y z:num. R x y /\\ R y z ==> R x z)")))
 }
 
 ///|
@@ -335,7 +335,7 @@ fn step_24() -> Unit raise {
   let t3 = @simp.simp_tac(@list.List([]))
   let t4 = @list.List([@tactics.then_tac(@tactics.disch_tac, @tactics.gen_tac), t3])
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t4), t12), t20), t21), t22)
-  holds_forall_lemma_c.set(@tactics.prove(@parser.parse_term("!W R P. (!A V. P(holds (W,R) V A)) <=> (!p:W->bool. P p)"), t23))
+  holds_forall_lemma_c.set(@tactics.prove(@parser.parse_term("forall W R P. (forall A V. P(holds (W,R) V A)) <=> (forall p:W->bool. P p)"), t23))
 }
 
 ///|
@@ -372,7 +372,7 @@ pub fn modal_schema_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// MODAL_REFL
 fn step_26() -> Unit raise {
   let t29 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
-  modal_refl_c.set(@tactics.prove(@parser.parse_term("!W R. (!w:W. w IN W ==> R w w) <=> !A. holds_in (W,R) (Box A --> A)"), t29))
+  modal_refl_c.set(@tactics.prove(@parser.parse_term("forall W R. (forall w:W. w IN W ==> R w w) <=> forall A. holds_in (W,R) (Box A --> A)"), t29))
 }
 
 ///|
@@ -388,7 +388,7 @@ pub fn modal_refl() -> @kernel.Thm {
 /// MODAL_TRANS
 fn step_27() -> Unit raise {
   let t30 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
-  modal_trans_c.set(@tactics.prove(@parser.parse_term("!W R. (!w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (!A. holds_in (W,R) (Box A --> Box(Box A)))"), t30))
+  modal_trans_c.set(@tactics.prove(@parser.parse_term("forall W R. (forall w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (forall A. holds_in (W,R) (Box A --> Box(Box A)))"), t30))
 }
 
 ///|
@@ -404,7 +404,7 @@ pub fn modal_trans() -> @kernel.Thm {
 /// MODAL_SERIAL
 fn step_28() -> Unit raise {
   let t31 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
-  modal_serial_c.set(@tactics.prove(@parser.parse_term("!W R. (!w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (!A. holds_in (W,R) (Box A --> Diamond A))"), t31))
+  modal_serial_c.set(@tactics.prove(@parser.parse_term("forall W R. (forall w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (forall A. holds_in (W,R) (Box A --> Diamond A))"), t31))
 }
 
 ///|
@@ -433,7 +433,7 @@ fn step_29() -> Unit raise {
   let t32 = @tactics.repeat_tac(@tactics.strip_tac)
   let t33 = @list.List([@meson.meson_tac(@list.List([])), t32])
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(modal_schema_tac, @tactics.eq_tac), t33), t41), t42)
-  modal_sym_c.set(@tactics.prove(@parser.parse_term("!W R. (!w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (!A. holds_in (W,R) (A --> Box(Diamond A)))"), t43))
+  modal_sym_c.set(@tactics.prove(@parser.parse_term("forall W R. (forall w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (forall A. holds_in (W,R) (A --> Box(Diamond A)))"), t43))
 }
 
 ///|
@@ -450,7 +450,7 @@ pub fn modal_sym() -> @kernel.Thm {
 fn step_30() -> Unit raise {
   let t66 = @meson.asm_meson_tac(@list.List([]))
   let t62 = @tactics.match_mp_tac(@theorems.mono_forall())
-  let t58 = @parser.parse_term("\\x:W. !w:W. x IN W /\\ R w x ==> P x")
+  let t58 = @parser.parse_term("\\x:W. forall w:W. x IN W /\\ R w x ==> P x")
   let t61 = @tactics.first_x_assum(fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x55 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s56 = @tactics.mp_tac(x55)
@@ -461,7 +461,7 @@ fn step_30() -> Unit raise {
   })
   let t63 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("P:W->bool")), @tactics.disch_tac), t61), t62)
   let t50 = @parser.parse_term("w:W")
-  let t51 = @list.List([@parser.parse_term("\\v:W. v IN W /\\ R w v /\\ !w''. w'' IN W /\\ R v w'' ==> R w w''"), t50])
+  let t51 = @list.List([@parser.parse_term("\\v:W. v IN W /\\ R w v /\\ forall w''. w'' IN W /\\ R v w'' ==> R w w''"), t50])
   let t54 = @tactics.first_x_assum(fn(x53 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x47 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s48 = @tactics.mp_tac(x47)
@@ -476,7 +476,7 @@ fn step_30() -> Unit raise {
   let t65 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t45), t46), t64, t63])
   let t44 = @tactics.repeat_tac(@tactics.conj_tac)
   let t67 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(modal_schema_tac, @simp.rewrite_tac(@list.List([@wf.wf_ind()]))), @tactics.eq_tac), @tactics.strip_tac), t44), t65), t66)
-  modal_wftrans_c.set(@tactics.prove(@parser.parse_term("!W R. (!x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n         WF(\\x y. x IN W /\\ y IN W /\\ R y x) <=>\n         (!A. holds_in (W,R) (Box(Box A --> A) --> Box A))"), t67))
+  modal_wftrans_c.set(@tactics.prove(@parser.parse_term("forall W R. (forall x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n         WF(\\x y. x IN W /\\ y IN W /\\ R y x) <=>\n         (forall A. holds_in (W,R) (Box(Box A --> A) --> Box A))"), t67))
 }
 
 ///|

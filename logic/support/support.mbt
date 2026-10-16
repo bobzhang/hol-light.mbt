@@ -8,7 +8,7 @@ fn step_1() -> Unit raise {
   let t2 = @simp.asm_simp_tac(@list.List([]))
   let t1 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@resolution.literal(), @resolution.atom_v1()])), t1), t2), t3)
-  negate_literal_c.set(@tactics.prove(@parser.parse_term("!q. literal q ==> literal(~~q)"), t4))
+  negate_literal_c.set(@tactics.prove(@parser.parse_term("forall q. literal q ==> literal(~~q)"), t4))
 }
 
 ///|
@@ -25,7 +25,7 @@ pub fn negate_literal() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([@sets.delete_subset(), @sets.finite_subset()]))
   let t6 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@resolution.clause(), @resolution.resolve(), @sets.finite_union(), @sets.in_union(), @sets.in_delete()])), t5)
-  resolve_clause_c.set(@tactics.prove(@parser.parse_term("!c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)"), t6))
+  resolve_clause_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)"), t6))
 }
 
 ///|
@@ -44,7 +44,7 @@ fn step_3() -> Unit raise {
   let t8 = @tactics.match_mp_tac(@resolution.presproof_induct())
   let t7 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj()])), @tactics.gen_tac), t7), @tactics.disch_tac), t8), t9)
-  presproof_clause_c.set(@tactics.prove(@parser.parse_term("!hyps cl. (!c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl"), t10))
+  presproof_clause_c.set(@tactics.prove(@parser.parse_term("forall hyps cl. (forall c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl"), t10))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn presproof_clause() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t11 = @meson.meson_tac(@list.List([]))
   let t12 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @resolution.resolve(), @sets.in_union(), @sets.in_delete()])), t11)
-  resolve_mono_c.set(@tactics.prove(@parser.parse_term("!c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')"), t12))
+  resolve_mono_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')"), t12))
 }
 
 ///|
@@ -77,7 +77,7 @@ pub fn resolve_mono() -> @kernel.Thm {
 /// RESOLVE_SYM
 fn step_5() -> Unit raise {
   let t13 = @simp.simp_tac(@list.List([@resolution.resolve(), @resolution.negate_negate(), @sets.union_aci()]))
-  resolve_sym_c.set(@tactics.prove(@parser.parse_term("!c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)"), t13))
+  resolve_sym_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)"), t13))
 }
 
 ///|
@@ -114,7 +114,7 @@ fn step_6() -> Unit raise {
   }))
   let t14 = @tactics.repeat_tac(@tactics.gen_tac)
   let t29 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@given.tautologous(), @sets.subset(), @resolution.resolve(), @sets.in_delete(), @sets.in_union(), @resolution.clause()])), t14), t21), t22), t23), t27), t28)
-  resolve_taut_l_c.set(@tactics.prove(@parser.parse_term("!c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)"), t29))
+  resolve_taut_l_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)"), t29))
 }
 
 ///|
@@ -162,7 +162,7 @@ fn step_7() -> Unit raise {
   }))
   let t30 = @tactics.repeat_tac(@tactics.gen_tac)
   let t52 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@given.tautologous(), @sets.subset(), @resolution.resolve(), @sets.in_delete(), @sets.in_union(), @resolution.clause()])), t30), t37), t44), t45), t46), t50), t51)
-  resolve_taut_r_c.set(@tactics.prove(@parser.parse_term("!c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)"), t52))
+  resolve_taut_r_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)"), t52))
 }
 
 ///|
@@ -179,7 +179,7 @@ pub fn resolve_taut_r() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t53 = @meson.meson_tac(@list.List([]))
   let t54 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@given.tautologous(), @sets.subset()])), t53)
-  subset_taut_c.set(@tactics.prove(@parser.parse_term("!c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2"), t54))
+  subset_taut_c.set(@tactics.prove(@parser.parse_term("forall c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2"), t54))
 }
 
 ///|
@@ -221,7 +221,7 @@ pub fn npresproof_cases() -> @kernel.Thm {
 ///|
 /// npresproof_RULES, npresproof_INDUCT, npresproof_CASES
 fn step_9() -> Unit raise {
-  let (npresproof_rules, npresproof_induct, npresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!cl. cl IN hyps ==> npresproof hyps cl 1) /\\\n    (!p n1 n2 cl1 cl2.\n                npresproof hyps cl1 n1 /\\\n                npresproof hyps cl2 n2 /\\\n                p IN cl1 /\\\n                ~~ p IN cl2\n                ==> npresproof hyps (resolve p cl1 cl2) (n1 + n2 + 1))"))
+  let (npresproof_rules, npresproof_induct, npresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall cl. cl IN hyps ==> npresproof hyps cl 1) /\\\n    (forall p n1 n2 cl1 cl2.\n                npresproof hyps cl1 n1 /\\\n                npresproof hyps cl2 n2 /\\\n                p IN cl1 /\\\n                ~~ p IN cl2\n                ==> npresproof hyps (resolve p cl1 cl2) (n1 + n2 + 1))"))
   npresproof_rules_c.set(npresproof_rules)
   npresproof_induct_c.set(npresproof_induct)
   npresproof_cases_c.set(npresproof_cases)
@@ -236,7 +236,7 @@ fn step_10() -> Unit raise {
   let t59 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@resolution.presproof_induct()), t56), t58])
   let t55 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm(), @theorems.left_imp_exists_thm()]))
   let t60 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(a <=> b) <=> (a ==> b) /\\ (b ==> a)"))]))), t55), @tactics.conj_tac), t59)
-  npresproof_c.set(@tactics.prove(@parser.parse_term("!hyps cl. presproof hyps cl <=> ?n. npresproof hyps cl n"), t60))
+  npresproof_c.set(@tactics.prove(@parser.parse_term("forall hyps cl. presproof hyps cl <=> ?n. npresproof hyps cl n"), t60))
 }
 
 ///|
@@ -252,7 +252,7 @@ pub fn npresproof() -> @kernel.Thm {
 /// NPRESPROOF_CLAUSE
 fn step_11() -> Unit raise {
   let t61 = @meson.meson_tac(@list.List([npresproof(), presproof_clause()]))
-  npresproof_clause_c.set(@tactics.prove(@parser.parse_term("!hyps cl n. (!c. c IN hyps ==> clause c) /\\ npresproof hyps cl n\n                ==> clause cl"), t61))
+  npresproof_clause_c.set(@tactics.prove(@parser.parse_term("forall hyps cl n. (forall c. c IN hyps ==> clause c) /\\ npresproof hyps cl n\n                ==> clause cl"), t61))
 }
 
 ///|
@@ -294,7 +294,7 @@ pub fn psresproof_cases() -> @kernel.Thm {
 ///|
 /// psresproof_RULES, psresproof_INDUCT, psresproof_CASES
 fn step_12() -> Unit raise {
-  let (psresproof_rules, psresproof_induct, psresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!c. c IN hyps /\\ ~(tautologous c)\n         ==> psresproof hyps sos (c IN sos) c) /\\\n    (!c1 c2 s1 s2 p.\n        psresproof hyps sos s1 c1 /\\\n        psresproof hyps sos s2 c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ (s1 \\/ s2) /\\ ~tautologous(resolve p c1 c2)\n        ==> psresproof hyps sos T (resolve p c1 c2))"))
+  let (psresproof_rules, psresproof_induct, psresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall c. c IN hyps /\\ ~(tautologous c)\n         ==> psresproof hyps sos (c IN sos) c) /\\\n    (forall c1 c2 s1 s2 p.\n        psresproof hyps sos s1 c1 /\\\n        psresproof hyps sos s2 c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ (s1 \\/ s2) /\\ ~tautologous(resolve p c1 c2)\n        ==> psresproof hyps sos T (resolve p c1 c2))"))
   psresproof_rules_c.set(psresproof_rules)
   psresproof_induct_c.set(psresproof_induct)
   psresproof_cases_c.set(psresproof_cases)
@@ -306,7 +306,7 @@ fn step_13() -> Unit raise {
   let t63 = @simp.asm_simp_tac(@list.List([resolve_clause()]))
   let t62 = @tactics.match_mp_tac(psresproof_induct())
   let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t62), t63)
-  psresproof_clause_c.set(@tactics.prove(@parser.parse_term("!hyps sos. (!c. c IN hyps ==> clause(c))\n              ==> !s cl. psresproof hyps sos s cl ==> clause cl"), t64))
+  psresproof_clause_c.set(@tactics.prove(@parser.parse_term("forall hyps sos. (forall c. c IN hyps ==> clause(c))\n              ==> forall s cl. psresproof hyps sos s cl ==> clause cl"), t64))
 }
 
 ///|
@@ -736,7 +736,7 @@ fn step_14() -> Unit raise {
   let t66 = @list.List([@meson.asm_meson_tac(@list.List([psresproof_clause(), npresproof_clause(), @sets.in_diff()])), @tactics.all_tac])
   let t65 = @tactics.subgoal_then(@parser.parse_term("clause A /\\ clause B /\\ clause C"), @tactics.strip_assume_tac)
   let t388 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t65), t66), t67), t68), t69), t70), t71), t101), t105), t115), t119), t129), t133), t145), t146), t151), t152), t192), t199), t200), t209), t210), t215), t216), t226), t230), t284), @tactics.disch_tac), t291), t300), t301), @tactics.ants_tac), t302), t306), t313), t339), t340), t341), t351), t358), t359), t368), t375), t376), t385), t386), t387)
-  support_asymmetric_c.set(@tactics.prove(@parser.parse_term("!hyps sos A B C p q nb nc.\n      (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      ~~p IN B /\\ ~(q = ~~p) /\\\n      (!m. m < nb + nc + 1\n              ==> (!c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)"), t388))
+  support_asymmetric_c.set(@tactics.prove(@parser.parse_term("forall hyps sos A B C p q nb nc.\n      (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      ~~p IN B /\\ ~(q = ~~p) /\\\n      (forall m. m < nb + nc + 1\n              ==> (forall c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)"), t388))
 }
 
 ///|
@@ -805,7 +805,7 @@ fn step_15() -> Unit raise {
   })
   let t389 = @tactics.mp_tac(@kernel.assume_rule(@parser.parse_term("~~p IN (resolve q B C)")))
   let t432 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t389), t395), @tactics.strip_tac), t431)
-  support_symmetric_c.set(@tactics.prove(@parser.parse_term("!hyps sos A B C p q nb nc.\n      (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      (!m. m < nb + nc + 1\n              ==> (!c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)"), t432))
+  support_symmetric_c.set(@tactics.prove(@parser.parse_term("forall hyps sos A B C p q nb nc.\n      (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      (forall m. m < nb + nc + 1\n              ==> (forall c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)"), t432))
 }
 
 ///|
@@ -914,7 +914,7 @@ fn step_16() -> Unit raise {
   let t434 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t433 = @tactics.match_mp_tac(@arith.num_wf())
   let t505 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t433), t434), @tactics.strip_tac), t437), @tactics.strip_tac), t438), t442), t446), t474), t475), t480), t487), t494), @tactics.strip_tac), t503), t504)
-  support_lemma_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n        (!c. c IN hyps ==> clause c /\\ ~tautologous c)\n        ==> !n c1 c2 p.\n                psresproof hyps sos T c1 /\\\n                npresproof (hyps DIFF sos) c2 n /\\\n                p IN c1 /\\ ~~p IN c2 /\\\n                ~(tautologous(resolve p c1 c2))\n                ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                          (psresproof hyps sos T cl' \\/\n                           ?m. m < n /\\ npresproof (hyps DIFF sos) cl' m)"), t505))
+  support_lemma_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n        (forall c. c IN hyps ==> clause c /\\ ~tautologous c)\n        ==> forall n c1 c2 p.\n                psresproof hyps sos T c1 /\\\n                npresproof (hyps DIFF sos) c2 n /\\\n                p IN c1 /\\ ~~p IN c2 /\\\n                ~(tautologous(resolve p c1 c2))\n                ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                          (psresproof hyps sos T cl' \\/\n                           ?m. m < n /\\ npresproof (hyps DIFF sos) cl' m)"), t505))
 }
 
 ///|
@@ -960,7 +960,7 @@ fn step_17() -> Unit raise {
   let t506 = @parser.parse_term("sos:(form->bool)->bool")
   let t507 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("hyps:(form->bool)->bool"), t506]), support_lemma()))
   let t531 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t507), t508), t515), t518), t528), t529), t530)
-  support_induct_lemma_c.set(@tactics.prove(@parser.parse_term("!hyps sos p c1 c2.\n        (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n        psresproof hyps sos T c1 /\\\n        presproof (hyps DIFF sos) c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ ~(tautologous(resolve p c1 c2))\n        ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                  (presproof (hyps DIFF sos) cl' \\/\n                   psresproof hyps sos T cl')"), t531))
+  support_induct_lemma_c.set(@tactics.prove(@parser.parse_term("forall hyps sos p c1 c2.\n        (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n        psresproof hyps sos T c1 /\\\n        presproof (hyps DIFF sos) c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ ~(tautologous(resolve p c1 c2))\n        ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                  (presproof (hyps DIFF sos) cl' \\/\n                   psresproof hyps sos T cl')"), t531))
 }
 
 ///|
@@ -1089,7 +1089,7 @@ fn step_18() -> Unit raise {
   let t550 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("cl:form->bool")), t533), t534), t535), t536), t537), t538), @tactics.disj2_tac), t540), t548), t549), @tactics.all_tac])
   let t532 = @tactics.match_mp_tac(@resolution.presproof_induct())
   let t626 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t532), @tactics.conj_tac), t550), t553), t557), t558), @tactics.disch_tac), t559), t565), t566), t567), t574), t581), t586), t591), t592), t596), t597), t601), t602), t603), t625)
-  support_induct_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n     (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n     ==> !cl. presproof hyps cl\n              ==> clause cl /\\\n                  (~(tautologous cl)\n                   ==> ?cl'. cl' SUBSET cl /\\\n                                 (presproof (hyps DIFF sos) cl' \\/\n                                  psresproof hyps sos T cl'))"), t626))
+  support_induct_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n     (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n     ==> forall cl. presproof hyps cl\n              ==> clause cl /\\\n                  (~(tautologous cl)\n                   ==> ?cl'. cl' SUBSET cl /\\\n                                 (presproof (hyps DIFF sos) cl' \\/\n                                  psresproof hyps sos T cl'))"), t626))
 }
 
 ///|
@@ -1109,7 +1109,7 @@ fn step_19() -> Unit raise {
   let t627 = @parser.parse_term("sos:(form->bool)->bool")
   let t628 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("hyps:(form->bool)->bool"), t627]), support_induct()))
   let t631 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t628), t629), t630)
-  support_c.set(@tactics.prove(@parser.parse_term("!sos hyps cl.\n     (!c. c IN hyps ==> clause c /\\ ~(tautologous c)) /\\\n     presproof hyps cl /\\ ~(tautologous cl)\n     ==> ?cl'. cl' SUBSET cl /\\\n               (presproof (hyps DIFF sos) cl' \\/ psresproof hyps sos T cl')"), t631))
+  support_c.set(@tactics.prove(@parser.parse_term("forall sos hyps cl.\n     (forall c. c IN hyps ==> clause c /\\ ~(tautologous c)) /\\\n     presproof hyps cl /\\ ~(tautologous cl)\n     ==> ?cl'. cl' SUBSET cl /\\\n               (presproof (hyps DIFF sos) cl' \\/ psresproof hyps sos T cl')"), t631))
 }
 
 ///|
@@ -1151,7 +1151,7 @@ pub fn spresproof_cases() -> @kernel.Thm {
 ///|
 /// spresproof_RULES, spresproof_INDUCT, spresproof_CASES
 fn step_20() -> Unit raise {
-  let (spresproof_rules, spresproof_induct, spresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> spresproof hyps sos c) /\\\n    (!c1 c2 p.\n             spresproof hyps sos c1 /\\\n             (spresproof hyps sos c2 \\/ c2 IN hyps) /\\\n             p IN c1 /\\ ~~p IN c2 /\\\n             ~(tautologous(resolve p c1 c2))\n             ==> spresproof hyps sos (resolve p c1 c2))"))
+  let (spresproof_rules, spresproof_induct, spresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> spresproof hyps sos c) /\\\n    (forall c1 c2 p.\n             spresproof hyps sos c1 /\\\n             (spresproof hyps sos c2 \\/ c2 IN hyps) /\\\n             p IN c1 /\\ ~~p IN c2 /\\\n             ~(tautologous(resolve p c1 c2))\n             ==> spresproof hyps sos (resolve p c1 c2))"))
   spresproof_rules_c.set(spresproof_rules)
   spresproof_induct_c.set(spresproof_induct)
   spresproof_cases_c.set(spresproof_cases)
@@ -1195,7 +1195,7 @@ fn step_21() -> Unit raise {
   let t664 = @meson.asm_meson_tac(@list.List([spresproof_rules()]))
   let t665 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t664), @tactics.all_tac])
   let t663 = @tactics.match_mp_tac(psresproof_induct())
-  let t662 = @tactics.subgoal_then(@parser.parse_term("!s cl. psresproof hyps sos s cl\n           ==> (if s then spresproof hyps sos cl\n                else cl IN hyps /\\ ~(cl IN sos) /\\ ~(tautologous cl))"), fn(x659 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t662 = @tactics.subgoal_then(@parser.parse_term("forall s cl. psresproof hyps sos s cl\n           ==> (if s then spresproof hyps sos cl\n                else cl IN hyps /\\ ~(cl IN sos) /\\ ~(tautologous cl))"), fn(x659 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x659
     let t661 = @simp.rewrite_tac(@list.List([]))
     @tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("T"), th)), t661)
@@ -1233,7 +1233,7 @@ fn step_21() -> Unit raise {
   let t633 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
   let t632 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(a <=> b) <=> (a ==> b) /\\ (b ==> a)"))]))
   let t692 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.disch_tac), t632), t633), @tactics.conj_tac), t658), t662), t663), @tactics.conj_tac), t665), t666), t670), t671), t677), t679), t680), t682), t683), t687), t688), t689), t690), t691)
-  spresproof_psresproof_c.set(@tactics.prove(@parser.parse_term("!hyps sos. (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n              ==> !cl. spresproof hyps sos cl = psresproof hyps sos T cl"), t692))
+  spresproof_psresproof_c.set(@tactics.prove(@parser.parse_term("forall hyps sos. (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n              ==> forall cl. spresproof hyps sos cl = psresproof hyps sos T cl"), t692))
 }
 
 ///|
@@ -1252,7 +1252,7 @@ fn step_22() -> Unit raise {
   let t694 = @simp.asm_simp_tac(@list.List([resolve_clause(), @sets.in_diff()]))
   let t693 = @tactics.match_mp_tac(spresproof_induct())
   let t696 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t693), t694), t695)
-  spresproof_clause_nontaut_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n        (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n        ==> !c. spresproof hyps sos c ==> clause c /\\ ~(tautologous c)"), t696))
+  spresproof_clause_nontaut_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n        (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n        ==> forall c. spresproof hyps sos c ==> clause c /\\ ~(tautologous c)"), t696))
 }
 
 ///|
@@ -1271,7 +1271,7 @@ fn step_23() -> Unit raise {
   let t698 = @simp.asm_simp_tac(@list.List([resolve_clause(), @sets.in_diff()]))
   let t697 = @tactics.match_mp_tac(spresproof_induct())
   let t700 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t697), t698), t699)
-  spresproof_clause_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n        (!c. c IN hyps ==> clause c)\n        ==> !c. spresproof hyps sos c ==> clause c"), t700))
+  spresproof_clause_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n        (forall c. c IN hyps ==> clause c)\n        ==> forall c. spresproof hyps sos c ==> clause c"), t700))
 }
 
 ///|
@@ -1291,7 +1291,7 @@ fn step_24() -> Unit raise {
   let t702 = @simp.rewrite_tac(@list.List([@sets.subset(), @theorems.right_forall_imp_thm()]))
   let t701 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj_alt()]))
   let t705 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), t701), t702), @tactics.disch_tac), t703), t704)
-  spresproof_mono_c.set(@tactics.prove(@parser.parse_term("!hyps1 hyps2 sos cl.\n      spresproof hyps1 sos cl /\\ hyps1 SUBSET hyps2\n      ==> spresproof hyps2 sos cl"), t705))
+  spresproof_mono_c.set(@tactics.prove(@parser.parse_term("forall hyps1 hyps2 sos cl.\n      spresproof hyps1 sos cl /\\ hyps1 SUBSET hyps2\n      ==> spresproof hyps2 sos cl"), t705))
 }
 
 ///|
@@ -1311,7 +1311,7 @@ fn step_25() -> Unit raise {
   let t707 = @tactics.repeat_tac(@tactics.gen_tac)
   let t706 = @simp.rewrite_tac(@list.List([@sets.subset(), @theorems.right_forall_imp_thm()]))
   let t710 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b /\\ c ==> d <=> b /\\ c ==> a ==> d"))])), t706), t707), @tactics.strip_tac), t708), t709)
-  spresproof_mono_sos_c.set(@tactics.prove(@parser.parse_term("!hyps1 hyps2 sos1 sos2 cl.\n      spresproof hyps1 sos1 cl /\\ hyps1 SUBSET hyps2 /\\ sos1 SUBSET sos2\n      ==> spresproof hyps2 sos2 cl"), t710))
+  spresproof_mono_sos_c.set(@tactics.prove(@parser.parse_term("forall hyps1 hyps2 sos1 sos2 cl.\n      spresproof hyps1 sos1 cl /\\ hyps1 SUBSET hyps2 /\\ sos1 SUBSET sos2\n      ==> spresproof hyps2 sos2 cl"), t710))
 }
 
 ///|
@@ -1328,7 +1328,7 @@ pub fn spresproof_mono_sos() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t711 = @meson.meson_tac(@list.List([@resolution.pholds_negate()]))
   let t712 = @tactics.then_tac(@simp.simp_tac(@list.List([@resolution.clause(), @given.tautologous(), @resolution.pholds_interp()])), t711)
-  tautologous_satisfied_c.set(@tactics.prove(@parser.parse_term("!c d. clause c /\\ tautologous c ==> pholds d (interp c)"), t712))
+  tautologous_satisfied_c.set(@tactics.prove(@parser.parse_term("forall c d. clause c /\\ tautologous c ==> pholds d (interp c)"), t712))
 }
 
 ///|
@@ -1344,7 +1344,7 @@ pub fn tautologous_satisfied() -> @kernel.Thm {
 /// PRESPROOF_SOUND
 fn step_27() -> Unit raise {
   let t713 = @meson.meson_tac(@list.List([@fol_prop.psatisfiable_mono(), @linear.ppresproof_sound(), @sets.image_subset(), @linear.ppresproof()]))
-  presproof_sound_c.set(@tactics.prove(@parser.parse_term("!asm. (!c. c IN asm ==> clause c) /\\ presproof asm {}\n         ==> ~psatisfiable (IMAGE interp asm)"), t713))
+  presproof_sound_c.set(@tactics.prove(@parser.parse_term("forall asm. (forall c. c IN asm ==> clause c) /\\ presproof asm {}\n         ==> ~psatisfiable (IMAGE interp asm)"), t713))
 }
 
 ///|
@@ -1410,7 +1410,7 @@ fn step_28() -> Unit raise {
   let t715 = @parser.parse_term("{c | c IN hyps /\\ ~(tautologous c)}")
   let t716 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("sos:(form->bool)->bool"), t715, t714]), support()))
   let t759 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t716), @tactics.ants_tac), t733), t734), @tactics.strip_tac), t746), t750), t756), t757), t758)
-  spresproof_refutation_complete_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n        (!c. c IN hyps ==> clause c) /\\\n        ~(psatisfiable {interp cl | cl IN hyps}) /\\\n        psatisfiable {interp cl | cl IN (hyps DIFF sos)}\n        ==> spresproof hyps sos {}"), t759))
+  spresproof_refutation_complete_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n        (forall c. c IN hyps ==> clause c) /\\\n        ~(psatisfiable {interp cl | cl IN hyps}) /\\\n        psatisfiable {interp cl | cl IN (hyps DIFF sos)}\n        ==> spresproof hyps sos {}"), t759))
 }
 
 ///|
@@ -1452,7 +1452,7 @@ pub fn sresproof_cases() -> @kernel.Thm {
 ///|
 /// sresproof_RULES, sresproof_INDUCT, sresproof_CASES
 fn step_29() -> Unit raise {
-  let (sresproof_rules, sresproof_induct, sresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> sresproof hyps sos c) /\\\n    (!cl1 cl2 cl2' ps1 ps2 i.\n       sresproof hyps sos cl1 /\\\n       (sresproof hyps sos cl2 \\/ cl2 IN hyps) /\\\n       (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n       ps1 SUBSET cl1 /\\\n       ps2 SUBSET cl2' /\\\n       ~(ps1 = {}) /\\\n       ~(ps2 = {}) /\\\n       (?i. Unifies i (ps1 UNION {~~ p | p IN ps2})) /\\\n       (mgu (ps1 UNION {~~ p | p IN ps2}) = i) /\\\n       ~(tautologous(IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))\n       ==> sresproof hyps sos\n           (IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))"))
+  let (sresproof_rules, sresproof_induct, sresproof_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> sresproof hyps sos c) /\\\n    (forall cl1 cl2 cl2' ps1 ps2 i.\n       sresproof hyps sos cl1 /\\\n       (sresproof hyps sos cl2 \\/ cl2 IN hyps) /\\\n       (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n       ps1 SUBSET cl1 /\\\n       ps2 SUBSET cl2' /\\\n       ~(ps1 = {}) /\\\n       ~(ps2 = {}) /\\\n       (?i. Unifies i (ps1 UNION {~~ p | p IN ps2})) /\\\n       (mgu (ps1 UNION {~~ p | p IN ps2}) = i) /\\\n       ~(tautologous(IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))\n       ==> sresproof hyps sos\n           (IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))"))
   sresproof_rules_c.set(sresproof_rules)
   sresproof_induct_c.set(sresproof_induct)
   sresproof_cases_c.set(sresproof_cases)
@@ -1464,7 +1464,7 @@ fn step_30() -> Unit raise {
   let t761 = @meson.asm_meson_tac(@list.List([@given.clause_union(), @given.clause_diff(), @resolution.image_formsubst_clause()]))
   let t760 = @tactics.match_mp_tac(sresproof_induct())
   let t762 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t760), t761)
-  sresproof_clause_c.set(@tactics.prove(@parser.parse_term("!hyps sos.\n     (!c. c IN hyps ==> clause c)\n     ==> !c. sresproof hyps sos c ==> clause c"), t762))
+  sresproof_clause_c.set(@tactics.prove(@parser.parse_term("forall hyps sos.\n     (forall c. c IN hyps ==> clause c)\n     ==> forall c. sresproof hyps sos c ==> clause c"), t762))
 }
 
 ///|
@@ -1483,7 +1483,7 @@ fn step_31() -> Unit raise {
   let t764 = @simp.asm_rewrite_tac(@list.List([]))
   let t763 = @tactics.repeat_tac(@tactics.strip_tac)
   let t766 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.rewrite_tac(@list.List([@fol_prop.psatisfies(), @sets.in_elim_thm()]))), @tactics.gen_tac), @tactics.eq_tac), t763), t764), t765)
-  psatisfies_image_lemma_c.set(@tactics.prove(@parser.parse_term("(!c. c IN s ==> clause c)\n   ==> !d. d psatisfies {formsubst v p | prop v /\\ p IN IMAGE interp s} <=>\n           d psatisfies {interp cl | cl IN\n                       {IMAGE (formsubst v) c | prop v /\\ c IN s}}"), t766))
+  psatisfies_image_lemma_c.set(@tactics.prove(@parser.parse_term("(forall c. c IN s ==> clause c)\n   ==> forall d. d psatisfies {formsubst v p | prop v /\\ p IN IMAGE interp s} <=>\n           d psatisfies {interp cl | cl IN\n                       {IMAGE (formsubst v) c | prop v /\\ c IN s}}"), t766))
 }
 
 ///|
@@ -1715,7 +1715,7 @@ fn step_32() -> Unit raise {
       }
     })(((x859 : @kernel.Thm) => @bool.spec(t858, x859))(x860))
   }), t861), t862)])
-  let t854 = @tactics.subgoal_then(@parser.parse_term("!cl0. spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n           {IMAGE (formsubst v) cl | v,cl | cl IN sos} cl0\n           ==> ?cl. sresproof hyps sos cl /\\ cl0 instance_of cl"), fn(x851 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t854 = @tactics.subgoal_then(@parser.parse_term("forall cl0. spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n           {IMAGE (formsubst v) cl | v,cl | cl IN sos} cl0\n           ==> ?cl. sresproof hyps sos cl /\\ cl0 instance_of cl"), fn(x851 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s852 = @tactics.mp_tac(x851)
     fn(x853 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s852(x853)
@@ -1739,8 +1739,8 @@ fn step_32() -> Unit raise {
   let t834 = @meson.meson_tac(@list.List([]))
   let t837 = @list.List([@tactics.all_tac, @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()])), t834), t836])
   let t833 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t832 = @tactics.exists_tac(@parser.parse_term("{IMAGE (formsubst v) c | v,c |\n         (!x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN sos}"))
-  let t831 = @tactics.exists_tac(@parser.parse_term("{IMAGE (formsubst v) c | v,c |\n         (!x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN hyps}"))
+  let t832 = @tactics.exists_tac(@parser.parse_term("{IMAGE (formsubst v) c | v,c |\n         (forall x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN sos}"))
+  let t831 = @tactics.exists_tac(@parser.parse_term("{IMAGE (formsubst v) c | v,c |\n         (forall x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN hyps}"))
   let t850 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(spresproof_mono_sos()), t831), t832), t833), t837), t838), t839), t842), t845), t846), t847), t848), t849), @tactics.all_tac])
   let t830 = @tactics.subgoal_then(@parser.parse_term("spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n               {IMAGE (formsubst v) cl | v,cl | cl IN sos} {}"), fn(x827 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s828 = @tactics.mp_tac(x827)
@@ -1810,7 +1810,7 @@ fn step_32() -> Unit raise {
       }
     })(t779(x780))
   }), t787), t788), t795), t800), t807), t808), @tactics.ants_tac), t812), t816), t817), t818), t819), t820), t821), t822), @tactics.all_tac])
-  let t775 = @tactics.subgoal_then(@parser.parse_term("?d. d psatisfies\n          {formsubst v p | v,p |\n               (!x. v x IN herbase (functions (IMAGE interp hyps))) /\\\n               p IN IMAGE interp (hyps DIFF sos)}"), fn(x772 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t775 = @tactics.subgoal_then(@parser.parse_term("?d. d psatisfies\n          {formsubst v p | v,p |\n               (forall x. v x IN herbase (functions (IMAGE interp hyps))) /\\\n               p IN IMAGE interp (hyps DIFF sos)}"), fn(x772 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s773 = @tactics.mp_tac(x772)
     fn(x774 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s773(x774)
@@ -1822,7 +1822,7 @@ fn step_32() -> Unit raise {
   let t768 = @tactics.mp_tac(@bool.spec(@parser.parse_term("IMAGE interp hyps"), @herbrand.herbrand_theorem()))
   let t767 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1020 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset()])), t767), t768), t769), @tactics.ants_tac), t771), t775), t823), t824), t826), @tactics.disch_tac), @tactics.disch_tac), t830), t850), t854), t863), t864), @tactics.conj_tac), t866), t869), t873), t877), t878), t886), t887), t891), t892), t893), t894), t898), t904), t905), t907), @tactics.ants_tac), t908), t909), t916), t924), t929), @tactics.ants_tac), t930), t957), t962), t969), t976), t977), @tactics.ants_tac), t990), t994), t995), t996), t997), t998), t1004), t1011), t1012), t1013), @tactics.gen_tac), t1018), t1019)
-  sos_resolution_complete_c.set(@tactics.prove(@parser.parse_term("(!cl. cl IN hyps ==> clause cl) /\\ sos SUBSET hyps /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps)) /\\\n   (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp (hyps DIFF sos)))\n   ==> sresproof hyps sos {}"), t1020))
+  sos_resolution_complete_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN hyps ==> clause cl) /\\ sos SUBSET hyps /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps)) /\\\n   (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp (hyps DIFF sos)))\n   ==> sresproof hyps sos {}"), t1020))
 }
 
 ///|
@@ -2077,7 +2077,7 @@ fn step_33() -> Unit raise {
   let t1022 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t1021 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d"))]))
   let t1212 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t1021), t1022), @tactics.disch_tac), t1023), @tactics.conj_tac), t1034), t1040), t1049), t1053), t1057), t1075), t1078), t1082), t1090), t1091), t1094), t1098), t1099), t1100), @tactics.conj_tac), t1101), @tactics.disch_tac), @tactics.strip_tac), t1151), t1156), @tactics.ants_tac), t1168), t1175), t1176), t1183), t1184), t1185), t1186), t1195), t1196), t1203), @tactics.ants_tac), t1210), t1211)
-  sos_given_general_c.set(@tactics.prove(@parser.parse_term("!used unused cl.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) cl\n        ==> clause cl /\\\n            ?n cl'. cl' subsumes cl /\\ cl' IN level(used,unused) n"), t1212))
+  sos_given_general_c.set(@tactics.prove(@parser.parse_term("forall used unused cl.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) cl\n        ==> clause cl /\\\n            ?n cl'. cl' subsumes cl /\\ cl' IN level(used,unused) n"), t1212))
 }
 
 ///|
@@ -2094,7 +2094,7 @@ pub fn sos_given_general() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t1213 = @meson.meson_tac(@list.List([]))
   let t1214 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@given.subsumes(), @sets.in_image(), @sets.not_in_empty(), @sets.extension(), @sets.subset()])), t1213)
-  subsumes_empty_c.set(@tactics.prove(@parser.parse_term("!c. (c subsumes {}) = (c = {})"), t1214))
+  subsumes_empty_c.set(@tactics.prove(@parser.parse_term("forall c. (c subsumes {}) = (c = {})"), t1214))
 }
 
 ///|
@@ -2120,7 +2120,7 @@ fn step_35() -> Unit raise {
     })(t1218(x1219))
   })
   let t1222 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1220), t1221)
-  sos_given_c.set(@tactics.prove(@parser.parse_term("!used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) {}\n        ==> ?n. {} IN level(used,unused) n"), t1222))
+  sos_given_c.set(@tactics.prove(@parser.parse_term("forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) {}\n        ==> ?n. {} IN level(used,unused) n"), t1222))
 }
 
 ///|

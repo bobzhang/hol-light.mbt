@@ -79572,81 +79572,81 @@ Warning: inventing type variables
 0..0..1..2..3..solved at 8
 0..0..1..2..3..solved at 8
 100/fourier quotations (1302):
-  !n. sum(0..n) (\\r. &r) = (&n * (&n + &1)) / &2
+  forall n. sum(0..n) (\\r. &r) = (&n * (&n + &1)) / &2
   a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-  !f a. f real_integrable_on real_interval[--a,a]\n         ==> f real_integrable_on real_interval[&0,a] /\\\n             (\\x. f(--x)) real_integrable_on real_interval[&0,a] /\\\n             (\\x. f x + f(--x)) real_integrable_on real_interval[&0,a]
+  forall f a. f real_integrable_on real_interval[--a,a]\n         ==> f real_integrable_on real_interval[&0,a] /\\\n             (\\x. f(--x)) real_integrable_on real_interval[&0,a] /\\\n             (\\x. f x + f(--x)) real_integrable_on real_interval[&0,a]
   ~(&0 <= a) ==> a <= --a /\\ a <= &0
   &0:real
   a:real
   --a:real
   f:real->real
   &0 <= a
-  !f a. f real_integrable_on real_interval[--a,a]\n         ==> real_integral (real_interval[--a,a]) f =\n             real_integral (real_interval[&0,a])\n                           (\\x. f x + f(--x))
+  forall f a. f real_integrable_on real_interval[--a,a]\n         ==> real_integral (real_interval[--a,a]) f =\n             real_integral (real_interval[&0,a])\n                           (\\x. f x + f(--x))
   f square_integrable_on s <=>\n     f real_measurable_on s /\\ (\\x. f(x) pow 2) real_integrable_on s
-  !f s. f square_integrable_on s ==> f real_measurable_on s
-  !f s. f square_integrable_on s <=>\n         (lift o f o drop) IN lspace (IMAGE lift s) (&2)
-  !s. (\\x. &0) square_integrable_on s
-  !f s. (\\x. --(f x)) square_integrable_on s <=> f square_integrable_on s
-  !f s. f square_integrable_on s ==> (\\x. --(f x)) square_integrable_on s
-  !f s c. f square_integrable_on s ==> (\\x. c * f(x)) square_integrable_on s
-  !f s c. f square_integrable_on s ==> (\\x. f(x) * c) square_integrable_on s
+  forall f s. f square_integrable_on s ==> f real_measurable_on s
+  forall f s. f square_integrable_on s <=>\n         (lift o f o drop) IN lspace (IMAGE lift s) (&2)
+  forall s. (\\x. &0) square_integrable_on s
+  forall f s. (\\x. --(f x)) square_integrable_on s <=> f square_integrable_on s
+  forall f s. f square_integrable_on s ==> (\\x. --(f x)) square_integrable_on s
+  forall f s c. f square_integrable_on s ==> (\\x. c * f(x)) square_integrable_on s
+  forall f s c. f square_integrable_on s ==> (\\x. f(x) * c) square_integrable_on s
   lift o g o drop
   lift o f o drop
   &2
   &2
   IMAGE lift s
-  !f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) absolutely_real_integrable_on s
-  !f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) real_integrable_on s
+  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) absolutely_real_integrable_on s
+  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) * g(x)) real_integrable_on s
   (x + y) pow 2 = (x pow 2 + y pow 2) + &2 * x * y
-  !f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) + g(x)) square_integrable_on s
-  !f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) - g(x)) square_integrable_on s
-  !f g s. f square_integrable_on s ==> (\\x. abs(f x)) square_integrable_on s
-  !f s t. FINITE t /\\ (!i. i IN t ==> (f i) square_integrable_on s)\n           ==> (\\x. sum t (\\i. f i x)) square_integrable_on s
-  !f a b. f real_continuous_on real_interval[a,b]\n           ==> f square_integrable_on real_interval[a,b]
+  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) + g(x)) square_integrable_on s
+  forall f g s. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (\\x. f(x) - g(x)) square_integrable_on s
+  forall f g s. f square_integrable_on s ==> (\\x. abs(f x)) square_integrable_on s
+  forall f s t. FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s)\n           ==> (\\x. sum t (\\i. f i x)) square_integrable_on s
+  forall f a b. f real_continuous_on real_interval[a,b]\n           ==> f square_integrable_on real_interval[a,b]
   &2
-  !f s. f square_integrable_on s /\\ real_measurable s\n         ==> f absolutely_real_integrable_on s
-  !f s. f square_integrable_on s /\\ real_measurable s\n         ==> f real_integrable_on s
+  forall f s. f square_integrable_on s /\\ real_measurable s\n         ==> f absolutely_real_integrable_on s
+  forall f s. f square_integrable_on s /\\ real_measurable s\n         ==> f real_integrable_on s
   l2product s f g = real_integral s (\\x. f(x) * g(x))
   l2norm s f = sqrt(l2product s f f)
-  !f s. f square_integrable_on s\n         ==> l2norm s f = lnorm (IMAGE lift s) (&2) (lift o f o drop)
-  !s f g. l2product s f g = l2product s g f
-  !s f. f square_integrable_on s ==> &0 <= l2product s f f
-  !s f. f square_integrable_on s ==> (l2norm s f) pow 2 = l2product s f f
-  !s f. f square_integrable_on s ==> &0 <= l2norm s f
-  !s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f <= l2norm s g <=>\n                l2product s f f <= l2product s g g)
-  !s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f = l2norm s g <=>\n                l2product s f f = l2product s g g)
+  forall f s. f square_integrable_on s\n         ==> l2norm s f = lnorm (IMAGE lift s) (&2) (lift o f o drop)
+  forall s f g. l2product s f g = l2product s g f
+  forall s f. f square_integrable_on s ==> &0 <= l2product s f f
+  forall s f. f square_integrable_on s ==> (l2norm s f) pow 2 = l2product s f f
+  forall s f. f square_integrable_on s ==> &0 <= l2norm s f
+  forall s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f <= l2norm s g <=>\n                l2product s f f <= l2product s g g)
+  forall s f g. f square_integrable_on s /\\ g square_integrable_on s\n           ==> (l2norm s f = l2norm s g <=>\n                l2product s f f = l2product s g g)
   lift o g o drop
   lift o f o drop
   &2
   &2
   IMAGE lift s
-  !f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s (\\x. abs(f x)) (\\x. abs(g x))\n               <= l2norm s f * l2norm s g
+  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s (\\x. abs(f x)) (\\x. abs(g x))\n               <= l2norm s f * l2norm s g
   l2product s (\\x. abs(f x)) (\\x. abs(g x))
-  !f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> abs(l2product s f g) <= l2norm s f * l2norm s g
+  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> abs(l2product s f g) <= l2norm s f * l2norm s g
   abs x <= a ==> x <= a
-  !f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s f g <= l2norm s f * l2norm s g
+  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2product s f g <= l2norm s f * l2norm s g
   lift o g o drop
   lift o f o drop
   &2
   IMAGE lift s
-  !f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2norm s (\\x. f x + g x) <= l2norm s f + l2norm s g
-  !s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x + g x) h =\n            l2product s f h + l2product s g h
-  !s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x + h x) =\n            l2product s f g + l2product s f h
-  !s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x - g x) h =\n            l2product s f h - l2product s g h
-  !s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x - h x) =\n            l2product s f g - l2product s f h
-  !s f. l2product s (\\x. &0) f = &0
-  !s f. l2product s f (\\x. &0) = &0
+  forall f g s. f square_integrable_on s /\\\n           g square_integrable_on s\n           ==> l2norm s (\\x. f x + g x) <= l2norm s f + l2norm s g
+  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x + g x) h =\n            l2product s f h + l2product s g h
+  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x + h x) =\n            l2product s f g + l2product s f h
+  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s (\\x. f x - g x) h =\n            l2product s f h - l2product s g h
+  forall s f g h.\n        f square_integrable_on s /\\\n        g square_integrable_on s /\\\n        h square_integrable_on s\n        ==> l2product s f (\\x. g x - h x) =\n            l2product s f g - l2product s f h
+  forall s f. l2product s (\\x. &0) f = &0
+  forall s f. l2product s f (\\x. &0) = &0
   g square_integrable_on s
-  !s f g t.\n        FINITE t /\\ (!i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s (\\x. sum t (\\i. f i x)) g =\n            sum t (\\i. l2product s (f i) g)
-  !s f g t.\n        FINITE t /\\ (!i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s g (\\x. sum t (\\i. f i x)) =\n            sum t (\\i. l2product s g (f i))
-  !s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s (\\x. c * f x) g = c * l2product s f g
-  !s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s f (\\x. c * g x) = c * l2product s f g
-  !f s c. f square_integrable_on s\n           ==> l2norm s (\\x. c * f(x)) = abs(c) * l2norm s f
-  !f s c. f square_integrable_on s\n           ==> l2norm s (\\x. f(x) * c) = l2norm s f * abs(c)
+  forall s f g t.\n        FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s (\\x. sum t (\\i. f i x)) g =\n            sum t (\\i. l2product s (f i) g)
+  forall s f g t.\n        FINITE t /\\ (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n        g square_integrable_on s\n        ==> l2product s g (\\x. sum t (\\i. f i x)) =\n            sum t (\\i. l2product s g (f i))
+  forall s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s (\\x. c * f x) g = c * l2product s f g
+  forall s c f g.\n        f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2product s f (\\x. c * g x) = c * l2product s f g
+  forall f s c. f square_integrable_on s\n           ==> l2norm s (\\x. c * f(x)) = abs(c) * l2norm s f
+  forall f s c. f square_integrable_on s\n           ==> l2norm s (\\x. f(x) * c) = l2norm s f * abs(c)
   --x:real = --(&1) * x
-  !f s. f square_integrable_on s ==> l2norm s (\\x. --(f x)) = l2norm s f
-  !f g s.  f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2norm s (\\x. f x - g x) = l2norm s (\\x. g x - f x)
-  !f. (\\x. lift(f(drop x))) = (lift o f o drop)
+  forall f s. f square_integrable_on s ==> l2norm s (\\x. --(f x)) = l2norm s f
+  forall f g s.  f square_integrable_on s /\\ g square_integrable_on s\n        ==> l2norm s (\\x. f x - g x) = l2norm s (\\x. g x - f x)
+  forall f. (\\x. lift(f(drop x))) = (lift o f o drop)
   h square_integrable_on s
   h = drop o g o lift
   g = (lift o (drop o g o lift) o drop)
@@ -79660,10 +79660,10 @@ Warning: inventing type variables
   IMAGE lift s
   &2
   \\n:num. (lift o f n o drop)
-  !f s t.\n     (!i. i IN t ==> (f i) square_integrable_on s) /\\\n     real_summable t (\\i. l2norm s (f i))\n     ==> ?g. g square_integrable_on s /\\\n             ((\\n. l2norm s (\\x. sum (t INTER (0..n)) (\\i. f i x) - g x))\n              ---> &0) sequentially
+  forall f s t.\n     (forall i. i IN t ==> (f i) square_integrable_on s) /\\\n     real_summable t (\\i. l2norm s (f i))\n     ==> ?g. g square_integrable_on s /\\\n             ((\\n. l2norm s (\\x. sum (t INTER (0..n)) (\\i. f i x) - g x))\n              ---> &0) sequentially
   h:real->real
   &0 <= x ==> abs(x - &0) = x
-  !f g. (\\x. (lift o f o drop) x - (lift o g o drop) x) =\n                       (lift o (\\y. f y - g y) o drop)
+  forall f g. (\\x. (lift o f o drop) x - (lift o g o drop) x) =\n                       (lift o (\\y. f y - g y) o drop)
   h square_integrable_on s
   h = drop o g o lift
   g = (lift o (drop o g o lift) o drop)
@@ -79671,7 +79671,7 @@ Warning: inventing type variables
   IMAGE lift s
   &2
   \\n:num. lift o f n o drop
-  !f s. (!i. f i square_integrable_on s) /\\\n         (!e. &0 < e ==> ?N. !m n. m >= N /\\ n >= N\n                                   ==> l2norm s (\\x. f m x - f n x) < e)\n         ==> ?g. g square_integrable_on s /\\\n                 ((\\n. l2norm s (\\x. f n x - g x)) ---> &0) sequentially
+  forall f s. (forall i. f i square_integrable_on s) /\\\n         (forall e. &0 < e ==> ?N. forall m n. m >= N /\\ n >= N\n                                   ==> l2norm s (\\x. f m x - f n x) < e)\n         ==> ?g. g square_integrable_on s /\\\n                 ((\\n. l2norm s (\\x. f n x - g x)) ---> &0) sequentially
   h:real->real
   x < e ==> x = y ==> y < e
   a /\\ (a ==> b) ==> a /\\ b
@@ -79681,21 +79681,21 @@ Warning: inventing type variables
   &2:real
   IMAGE lift s
   lift o f o drop
-  !f s e. real_measurable s /\\ f square_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g square_integrable_on s /\\\n                   l2norm s (\\x. f x - g x) < e
+  forall f s e. real_measurable s /\\ f square_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g square_integrable_on s /\\\n                   l2norm s (\\x. f x - g x) < e
   abs x <= x <=> &0 <= x
-  !f s. real_measurable s /\\ f square_integrable_on s\n         ==> f absolutely_real_integrable_on s /\\\n             (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
-  orthonormal_system s w <=>\n        !m n. l2product s (w m) (w n) = if m = n then &1 else &0
+  forall f s. real_measurable s /\\ f square_integrable_on s\n         ==> f absolutely_real_integrable_on s /\\\n             (real_integral s f) pow 2\n             <= real_measure s * real_integral s (\\x. f x pow 2)
+  orthonormal_system s w <=>\n        forall m n. l2product s (w m) (w n) = if m = n then &1 else &0
   orthonormal_coefficient s w f (n:num) = l2product s (w n) f
-  !s w. orthonormal_system s w ==> !i. l2norm s (w i) = &1
+  forall s w. orthonormal_system s w ==> forall i. l2norm s (w i) = &1
   x' = x /\\ b - &2 * x = c ==> a - x - (x' - b) = a + c
   (\\x. sum t (\\i:num. a i * w i x)) square_integrable_on s
-  !s w a f t.\n        orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> l2norm s (\\x. f(x) - sum t (\\i. a i * w i x)) pow 2 =\n            (l2norm s f) pow 2 + sum t (\\i. (a i) pow 2) -\n            &2 * sum t (\\i. a i * orthonormal_coefficient s w f i)
+  forall s w a f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> l2norm s (\\x. f(x) - sum t (\\i. a i * w i x)) pow 2 =\n            (l2norm s f) pow 2 + sum t (\\i. (a i) pow 2) -\n            &2 * sum t (\\i. a i * orthonormal_coefficient s w f i)
   b pow 2 - &2 * b * b <= a pow 2 - &2 * a * b <=> &0 <= (a - b) pow 2
-  !s w a f t.\n        orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==>  l2norm s (\\x. f(x) -\n                           sum t (\\i. orthonormal_coefficient s w f i * w i x))\n             <= l2norm s (\\x. f(x) - sum t (\\i. a i * w i x))
+  forall s w a f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==>  l2norm s (\\x. f(x) -\n                           sum t (\\i. orthonormal_coefficient s w f i * w i x))\n             <= l2norm s (\\x. f(x) - sum t (\\i. a i * w i x))
   &0 <= p ==> p = x - y ==> y <= x
   a + b - &2 * b = a - b
   orthonormal_coefficient s w f
-  !s w f t.\n        orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> sum t (\\i. (orthonormal_coefficient s w f i) pow 2)\n             <= l2norm s f pow 2
+  forall s w f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s /\\ FINITE t\n        ==> sum t (\\i. (orthonormal_coefficient s w f i) pow 2)\n             <= l2norm s f pow 2
   s SUBSET t ==> u INTER s SUBSET u INTER t
   &0 <= x /\\ x <= y ==> abs(x) <= y
   t INTER (0..n)
@@ -79705,17 +79705,17 @@ Warning: inventing type variables
   n:num
   l2norm s f pow 2
   \\n. sum(t INTER (0..n)) (\\i. (orthonormal_coefficient s w f i) pow 2)
-  !s w f t.\n        orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> real_summable t (\\i. (orthonormal_coefficient s w f i) pow 2)
+  forall s w f t.\n        orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> real_summable t (\\i. (orthonormal_coefficient s w f i) pow 2)
   a + b - &2 * b = a - b
   orthonormal_coefficient s w f
-  !s w a f t.\n    orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s /\\ FINITE t\n    ==> l2norm s (\\x. f x -\n                      sum t (\\i. orthonormal_coefficient s w f i * w i x))\n        pow 2 =\n        l2norm s f pow 2 - sum t (\\i. orthonormal_coefficient s w f i pow 2)
+  forall s w a f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s /\\ FINITE t\n    ==> l2norm s (\\x. f x -\n                      sum t (\\i. orthonormal_coefficient s w f i * w i x))\n        pow 2 =\n        l2norm s f pow 2 - sum t (\\i. orthonormal_coefficient s w f i pow 2)
   x <= abs x
   x <= y ==> y < e ==> x < e
   (i:num) IN t
   i:num
   a - b:real = c <=> b + c = a
   h:num->real
-  !f. sum (t INTER (0..n)) f - sum (t INTER (0..m)) f =\n        sum (t INTER (m+1..n)) f
+  forall f. sum (t INTER (0..n)) f - sum (t INTER (0..m)) f =\n        sum (t INTER (m+1..n)) f
   m:num
   n:num
   2
@@ -79727,7 +79727,7 @@ Warning: inventing type variables
   (e:real) pow 2
   t:num->bool
   e:real
-  !s w f t.\n    orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            ((\\n. l2norm s\n                    (\\x. sum (t INTER (0..n))\n                             (\\i. orthonormal_coefficient s w f i * w i x) -\n                         g(x))) ---> &0) sequentially
+  forall s w f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            ((\\n. l2norm s\n                    (\\x. sum (t INTER (0..n))\n                             (\\i. orthonormal_coefficient s w f i * w i x) -\n                         g(x))) ---> &0) sequentially
   n:num
   j:num
   i:num
@@ -79736,7 +79736,7 @@ Warning: inventing type variables
   i:num
   g:real->real
   t:num->bool
-  !s w f t.\n    orthonormal_system s w /\\ (!i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            (!i. i IN t\n                 ==> orthonormal_coefficient s w (\\x. f x - g x) i = &0) /\\\n            ((\\n. l2norm s\n                   (\\x. sum (t INTER (0..n))\n                            (\\i. orthonormal_coefficient s w f i * w i x) -\n                        g(x))) ---> &0) sequentially
+  forall s w f t.\n    orthonormal_system s w /\\ (forall i. (w i) square_integrable_on s) /\\\n    f square_integrable_on s\n    ==> ?g. g square_integrable_on s /\\\n            (forall i. i IN t\n                 ==> orthonormal_coefficient s w (\\x. f x - g x) i = &0) /\\\n            ((\\n. l2norm s\n                   (\\x. sum (t INTER (0..n))\n                            (\\i. orthonormal_coefficient s w f i * w i x) -\n                        g(x))) ---> &0) sequentially
   x:real
   &0 <= pi ==> --pi <= pi
   pi
@@ -79744,9 +79744,9 @@ Warning: inventing type variables
   \\x. sin(&n * x)
   \\x. --(inv(&n) * cos(&n * x))
   n = 0
-  !n. ((\\x. sin(&n * x)) has_real_integral &0) (real_interval[--pi,pi])
-  !c. (\\x. sin(c * x)) real_integrable_on real_interval[--pi,pi]
-  !n. real_integral (real_interval[--pi,pi]) (\\x. sin(&n * x)) = &0
+  forall n. ((\\x. sin(&n * x)) has_real_integral &0) (real_interval[--pi,pi])
+  forall c. (\\x. sin(c * x)) real_integrable_on real_interval[--pi,pi]
+  forall n. real_integral (real_interval[--pi,pi]) (\\x. sin(&n * x)) = &0
   x:real
   &0 <= pi ==> --pi <= pi
   pi
@@ -79755,26 +79755,26 @@ Warning: inventing type variables
   \\x. inv(&n) * sin(&n * x)
   &2 * pi = &1 * (pi - --pi)
   n = 0
-  !n. ((\\x. cos(&n * x)) has_real_integral (if n = 0 then &2 * pi else &0))\n       (real_interval[--pi,pi])
-  !c. (\\x. cos(c * x)) real_integrable_on real_interval[--pi,pi]
-  !n. real_integral (real_interval[--pi,pi]) (\\x. cos(&n * x)) =\n       if n = 0 then &2 * pi else &0
+  forall n. ((\\x. cos(&n * x)) has_real_integral (if n = 0 then &2 * pi else &0))\n       (real_interval[--pi,pi])
+  forall c. (\\x. cos(c * x)) real_integrable_on real_interval[--pi,pi]
+  forall n. real_integral (real_interval[--pi,pi]) (\\x. cos(&n * x)) =\n       if n = 0 then &2 * pi else &0
   (a + a) * inv(&2) = a
   n = 0
   n:num <= m ==> (m - n = 0 <=> m = n)
   m:num
   n:num
-  !m n. real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * cos(&n * x)) =\n                (if m = n then if n = 0 then &2 * pi else pi else &0) /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * sin(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * cos(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * sin(&n * x)) =\n              (if m = n /\\ ~(n = 0) then pi else &0)
-  !m n a b.\n      (\\x. cos(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. cos(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b]
+  forall m n. real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * cos(&n * x)) =\n                (if m = n then if n = 0 then &2 * pi else pi else &0) /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. cos(&m * x) * sin(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * cos(&n * x)) = &0 /\\\n         real_integral (real_interval[--pi,pi])\n           (\\x. sin(&m * x) * sin(&n * x)) =\n              (if m = n /\\ ~(n = 0) then pi else &0)
+  forall m n a b.\n      (\\x. cos(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. cos(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * cos(&n * x)) real_integrable_on real_interval[a,b] /\\\n      (\\x. sin(&m * x) * sin(&n * x)) real_integrable_on real_interval[a,b]
   trigonometric_set n =\n    if n = 0 then \\x. &1 / sqrt(&2 * pi)\n    else if ODD n then \\x. sin(&(n DIV 2 + 1) * x) / sqrt(pi)\n    else \\x. cos(&(n DIV 2) * x) / sqrt(pi)
   (2 * n + 2) DIV 2 = n + 1
   (2 * n + 1) DIV 2 = n
   trigonometric_set 0 = (\\x. cos(&0 * x) / sqrt(&2 * pi)) /\\\n   trigonometric_set (2 * n + 1) = (\\x. sin(&(n + 1) * x) / sqrt(pi)) /\\\n   trigonometric_set (2 * n + 2) = (\\x. cos(&(n + 1) * x) / sqrt(pi))
   2 * SUC k = 2 * k + 2
-  !k. trigonometric_set(2 * k) =\n        if k = 0 then \\x. &1 / sqrt(&2 * pi)\n        else \\x. cos(&k * x) / sqrt pi
+  forall k. trigonometric_set(2 * k) =\n        if k = 0 then \\x. &1 / sqrt(&2 * pi)\n        else \\x. cos(&k * x) / sqrt pi
   SUC(2 * n) = 2 * n + 1 /\\ SUC(2 * n + 1) = 2 * n + 2
   n:num
   n:num
-  (!n:num. P 0) /\\ (!n. P(2 * n + 1)) /\\ (!n. P(2 * n + 2)) ==> !n. P n
+  (forall n:num. P 0) /\\ (forall n. P(2 * n + 1)) /\\ (forall n. P(2 * n + 2)) ==> forall n. P n
   0 = a + b <=> a = 0 /\\ b = 0
   F ==> p
   m:num = n
@@ -79782,7 +79782,7 @@ Warning: inventing type variables
   n:num
   m:num
   orthonormal_system (real_interval[--pi,pi]) trigonometric_set
-  !i. (trigonometric_set i) square_integrable_on real_interval[--pi,pi]
+  forall i. (trigonometric_set i) square_integrable_on real_interval[--pi,pi]
   norm(z:complex) = &1
   (x + pi) + pi = x + &2 * pi
   w = Cx(&0)
@@ -79790,7 +79790,7 @@ Warning: inventing type variables
   &1
   Cx o f o (\\x. x + pi) o Im o clog o (--)
   &0 <= Re z \\/ Re z < &0
-  !f. f real_continuous_on (:real) /\\ (!x. f(x + &2 * pi) = f x)\n         ==> !z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
+  forall f. f real_continuous_on (:real) /\\ (forall x. f(x + &2 * pi) = f x)\n         ==> forall z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
   w = Cx(&0)
   w:complex
   &1
@@ -79802,7 +79802,7 @@ Warning: inventing type variables
   pi
   --pi
   f:real->real
-  !f. f real_continuous_on real_interval[--pi,pi] /\\ f(--pi) = f pi\n         ==> !z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
+  forall f. f real_continuous_on real_interval[--pi,pi] /\\ f(--pi) = f pi\n         ==> forall z. norm z = &1\n                 ==> (f o Im o clog) real_continuous\n                     at z within {w | norm w = &1}
   r = --pi
   r = --pi
   x = x' ==> abs(x - y) < e ==> abs(x' - y) < e
@@ -79813,32 +79813,32 @@ Warning: inventing type variables
   n:num
   cos x = cos(&1 * x) /\\ sin x = sin(&1 * x)
   g:complex->real
-  !f:complex->real. poly2 f ==> trigpoly(\\x.  f(cexp(ii * Cx x)))
+  forall f:complex->real. poly2 f ==> trigpoly(\\x.  f(cexp(ii * Cx x)))
   (ai * si + bi * ci) * (aj * sj + bj * cj):real =\n     ((ai * aj) * (si * sj) + (bi * bj) * (ci * cj)) +\n     ((ai * bj) * (si * cj) + (aj * bi) * (ci * sj))
   j:num
   i:num
-  !f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x * g x)
+  forall f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x * g x)
   x - y:real = x + --(&1) * y
   x / &2 = inv(&2) * x
-  !i j. trigpoly(\\x. sin(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. sin(&i * x) * cos(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * cos(&j * x))
+  forall i j. trigpoly(\\x. sin(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. sin(&i * x) * cos(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * sin(&j * x)) /\\\n          trigpoly(\\x. cos(&i * x) * cos(&j * x))
   \\i:num. if i = k then &1 else &0
   \\i:num. &0
   k:num
   k:num
-  !i. trigpoly(\\x. cos(&i * x))
+  forall i. trigpoly(\\x. cos(&i * x))
   \\i:num. &0
   \\i:num. if i = k then &1 else &0
   k:num
   k:num
-  !i. trigpoly(\\x. sin(&i * x))
+  forall i. trigpoly(\\x. sin(&i * x))
   \\i. c * (b:num->real) i
   \\i. c * (a:num->real) i
   n:num
   b:num->real
   a:num->real
   n:num
-  !f:real->real c. trigpoly f ==> trigpoly (\\x. c * f x)
-  !f s:num->bool. FINITE s /\\ (!i. i IN s ==> trigpoly(f i))\n                    ==> trigpoly(\\x:real. sum s (\\i. f i x))
+  forall f:real->real c. trigpoly f ==> trigpoly (\\x. c * f x)
+  forall f s:num->bool. FINITE s /\\ (forall i. i IN s ==> trigpoly(f i))\n                    ==> trigpoly(\\x:real. sum s (\\i. f i x))
   s = t ==> sum s f = sum t f
   a:real = e /\\ b = g /\\ c = f /\\ d = h\n      ==> (a + b) + (c + d) = (e + f) + (g + h)
   (\\n. (if n <= n1 then b1 n else &0) +\n            (if n <= n2 then b2 n else &0)):num->real
@@ -79850,12 +79850,12 @@ Warning: inventing type variables
   b1:num->real
   a1:num->real
   n1:num
-  !f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x + g x)
+  forall f g:real->real. trigpoly f /\\ trigpoly g ==> trigpoly(\\x. f x + g x)
   (\\n. c):num->real
   (\\n. &0):num->real
   0
   c:real
-  !c:real. trigpoly(\\x:real. c)
+  forall c:real. trigpoly(\\x:real. c)
   trigpoly =\n     \\f. ?n a b.\n         f = \\x. sum(0..n) (\\k. a k * sin(&k * x) +  b k * cos(&k * x))
   g:complex->real
   e:real
@@ -79864,12 +79864,12 @@ Warning: inventing type variables
   Re
   z:complex
   w:complex
-  (!x f. P f ==> R f x) ==> (!f. P f ==> !x. Q x ==> R f x)
+  (forall x f. P f ==> R f x) ==> (forall f. P f ==> forall x. Q x ==> R f x)
   {x | p x} = {x | x IN UNIV /\\ p x}
   {z:complex | norm z = &1}
   poly2:(complex->real)->bool
-  (!c. poly2 (\\x. c)) /\\\n    (!p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x + q x)) /\\\n    (!p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x * q x)) /\\\n    poly2 Re /\\ poly2 Im
-  !f e. f real_continuous_on real_interval[--pi,pi] /\\\n         f(--pi) = f pi /\\ &0 < e\n         ==> ?n a b.\n                !x. x IN real_interval[--pi,pi]\n                    ==> abs(f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
+  (forall c. poly2 (\\x. c)) /\\\n    (forall p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x + q x)) /\\\n    (forall p q. poly2 p /\\ poly2 q ==> poly2 (\\x. p x * q x)) /\\\n    poly2 Re /\\ poly2 Im
+  forall f e. f real_continuous_on real_interval[--pi,pi] /\\\n         f(--pi) = f pi /\\ &0 < e\n         ==> ?n a b.\n                forall x. x IN real_interval[--pi,pi]\n                    ==> abs(f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
   {a:real}
   real_interval[a,b]
   abs(i - l) < e ==> &0 <= i /\\ l = &0 ==> i < e
@@ -79913,8 +79913,8 @@ Warning: inventing type variables
   a + inv(&n + &1) <= b
   a < a + inv(&n + &1)
   n:num
-  !n. (\\x. if x <= a + inv(&n + &1)\n             then ((&n + &1) * d) * ((a + inv(&n + &1)) - x) else &0)\n        real_continuous_on real_interval[a,b]
-  !a b d e.\n        a < b /\\ &0 < e\n        ==> ?f. f real_continuous_on real_interval[a,b] /\\\n                f(a) = d /\\ f(b) = &0 /\\\n                l2norm (real_interval[a,b]) f < e
+  forall n. (\\x. if x <= a + inv(&n + &1)\n             then ((&n + &1) * d) * ((a + inv(&n + &1)) - x) else &0)\n        real_continuous_on real_interval[a,b]
+  forall a b d e.\n        a < b /\\ &0 < e\n        ==> ?f. f real_continuous_on real_interval[a,b] /\\\n                f(a) = d /\\ f(b) = &0 /\\\n                l2norm (real_interval[a,b]) f < e
   y < e / &2 /\\ z < e / &2 ==> x <= y + z ==> x < e
   f - (g + h):real = (f - g) + --h
   (:real)
@@ -79929,7 +79929,7 @@ Warning: inventing type variables
   e / &2
   real_interval[a,b]
   f:real->real
-  !f a b e.\n        f square_integrable_on real_interval[a,b] /\\ a < b /\\ &0 < e\n        ==> ?g. g real_continuous_on real_interval[a,b] /\\\n                g b = g a /\\\n                g square_integrable_on real_interval[a,b] /\\\n                l2norm (real_interval[a,b]) (\\x. f x - g x) < e
+  forall f a b e.\n        f square_integrable_on real_interval[a,b] /\\ a < b /\\ &0 < e\n        ==> ?g. g real_continuous_on real_interval[a,b] /\\\n                g b = g a /\\\n                g square_integrable_on real_interval[a,b] /\\\n                l2norm (real_interval[a,b]) (\\x. f x - g x) < e
   --pi <= pi <=> &0 <= pi
   abs x < e ==> abs(x) <= abs e
   x:real
@@ -79938,7 +79938,7 @@ Warning: inventing type variables
   x < e / &2 /\\ y <= e / &2 ==> x + y < e
   (f - g) + (g - h):real = f - h
   l2norm (real_interval[--pi,pi]) (\\x. f x - g x) +\n              l2norm (real_interval[--pi,pi]) (\\x. g x - sum(0..n)\n                   (\\k. u k * sin(&k * x) + v k * cos(&k * x)))
-  !n u v. (\\x. sum(0..n) (\\k. u k * sin(&k * x) + v k * cos(&k * x)))\n            square_integrable_on (real_interval[--pi,pi])
+  forall n u v. (\\x. sum(0..n) (\\k. u k * sin(&k * x) + v k * cos(&k * x)))\n            square_integrable_on (real_interval[--pi,pi])
   v:num->real
   u:num->real
   n:num
@@ -79950,7 +79950,7 @@ Warning: inventing type variables
   pi
   --pi
   f:real->real
-  !f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a b.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
+  forall f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a b.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x - sum(0..n) (\\k. a k * sin(&k * x) +\n                                                 b k * cos(&k * x))) < e
   &0 < s ==> (s * b) * c / s = b * c
   SUC(2 * SUC i - 1) DIV 2 = SUC i
   1 <= i /\\ i <= n ==> 2 * i - 1 <= 2 * n
@@ -79971,7 +79971,7 @@ Warning: inventing type variables
   b:num->real
   a:num->real
   n:num
-  !f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x -\n                            sum(0..n) (\\k. a k * trigonometric_set k x))\n                < e
+  forall f e. f square_integrable_on real_interval[--pi,pi] /\\ &0 < e\n         ==> ?n a.\n                l2norm (real_interval[--pi,pi])\n                       (\\x. f x -\n                            sum(0..n) (\\k. a k * trigonometric_set k x))\n                < e
   fourier_coefficient =\n    orthonormal_coefficient (real_interval[--pi,pi]) trigonometric_set
   x:real
   x < e ==> y = x ==> y < e
@@ -79987,7 +79987,7 @@ Warning: inventing type variables
   e:real
   f:real->real
   e:real
-  !f. f square_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. l2norm (real_interval[--pi,pi])\n                        (\\x. f(x) - sum(0..n) (\\i. fourier_coefficient f i *\n                                                   trigonometric_set i x)))\n            ---> &0) sequentially
+  forall f. f square_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. l2norm (real_interval[--pi,pi])\n                        (\\x. f(x) - sum(0..n) (\\i. fourier_coefficient f i *\n                                                   trigonometric_set i x)))\n            ---> &0) sequentially
   &1 <= x ==> &1 <= &1 * abs x
   &1
   &0 < &2 * x <=> &0 < x
@@ -79998,17 +79998,17 @@ Warning: inventing type variables
   n:num
   n:num
   (:real)
-  !f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
-  !f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             real_integrable_on real_interval[--pi,pi]
+  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
+  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. trigonometric_set n x * f x)\n             real_integrable_on real_interval[--pi,pi]
   n:num
   n:num
   &1
   n:num
   n:num
   (:real)
-  (!f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. sin(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi]) /\\\n   (!f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. cos(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi])
-  !f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (!k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (!k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
-  !f. f square_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (!k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (!k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
+  (forall f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. sin(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi]) /\\\n   (forall f k. f absolutely_real_integrable_on real_interval[--pi,pi]\n          ==> (\\x. cos(k * x) * f x) absolutely_real_integrable_on\n              real_interval[--pi,pi])
+  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (forall k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (forall k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
+  forall f. f square_integrable_on real_interval[--pi,pi]\n       ==> f real_integrable_on real_interval[--pi,pi] /\\\n           (forall k. (\\x. cos(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi]) /\\\n           (forall k. (\\x. sin(k * x) * f x) real_integrable_on\n                real_interval[--pi,pi])
   (\\x. f x - (drop o g o lift) x) absolutely_real_integrable_on s
   x < e ==> x = y ==> y < e
   a /\\ (a ==> b) ==> a /\\ b
@@ -80018,9 +80018,9 @@ Warning: inventing type variables
   &1:real
   IMAGE lift s
   lift o f o drop
-  !f s e. real_measurable s /\\ f absolutely_real_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g absolutely_real_integrable_on s /\\\n                   real_integral s (\\x. abs(f x - g x)) < e
+  forall f s e. real_measurable s /\\ f absolutely_real_integrable_on s /\\ &0 < e\n           ==> ?g. g real_continuous_on (:real) /\\\n                   g absolutely_real_integrable_on s /\\\n                   real_integral s (\\x. abs(f x - g x)) < e
   (:num)
-  !s w f.\n        orthonormal_system s w /\\\n        (!i. w i square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> (orthonormal_coefficient s w f ---> &0) sequentially
+  forall s w f.\n        orthonormal_system s w /\\\n        (forall i. w i square_integrable_on s) /\\\n        f square_integrable_on s\n        ==> (orthonormal_coefficient s w f ---> &0) sequentially
   &1 <= x ==> &1 <= &1 * abs x
   &1
   &0 < &2 * x <=> &0 < x
@@ -80043,7 +80043,7 @@ Warning: inventing type variables
   real_interval[--pi,pi]
   f:real->real
   e:real
-  !f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> (fourier_coefficient f ---> &0) sequentially
+  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> (fourier_coefficient f ---> &0) sequentially
   &0 <= x /\\ x <= &4 ==> inv(&4) * abs x <= &1
   d <= e ==> x < d ==> x < e
   &0 < x ==> &0 < abs x
@@ -80054,7 +80054,7 @@ Warning: inventing type variables
   N:num
   e / &4
   e:real
-  !f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. sin(&n * x) * f x)) ---> &0)\n              sequentially
+  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. sin(&n * x) * f x)) ---> &0)\n              sequentially
   &0 <= x /\\ x <= &4 ==> inv(&4) * abs x <= &1
   d <= e ==> x < d ==> x < e
   &0 < x ==> &0 < abs x
@@ -80065,10 +80065,10 @@ Warning: inventing type variables
   N:num
   e / &4
   e:real
-  !f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. cos(&n * x) * f x)) ---> &0)\n              sequentially
+  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                 (\\x. cos(&n * x) * f x)) ---> &0)\n              sequentially
   n:num
   (\\n. real_integral (real_interval[--pi,pi])\n                          (\\x. sin(&n * x) * cos(&1 / &2 * x) * f x) +\n                   real_integral (real_interval[--pi,pi])\n                          (\\x. cos(&n * x) * sin(&1 / &2 * x) * f x))
-  !f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                               (\\x. sin((&n + &1 / &2) * x) * f x)) ---> &0)\n              sequentially
+  forall f. f absolutely_real_integrable_on real_interval[--pi,pi]\n       ==> ((\\n. real_integral (real_interval[--pi,pi])\n                               (\\x. sin((&n + &1 / &2) * x) * f x)) ---> &0)\n              sequentially
   e:real
   &1 <= x ==> &1 <= &1 * abs x
   &1
@@ -80087,20 +80087,20 @@ Warning: inventing type variables
   N1:num
   e / &2
   e:real
-  !f n t l.\n        f absolutely_real_integrable_on real_interval [--pi,pi]\n        ==> (((\\n. sum(0..2*n) (\\k. fourier_coefficient f k *\n                                    trigonometric_set k t)) ---> l)\n             sequentially <=>\n             ((\\n. sum(0..n) (\\k. fourier_coefficient f k *\n                                  trigonometric_set k t)) ---> l)\n             sequentially)
+  forall f n t l.\n        f absolutely_real_integrable_on real_interval [--pi,pi]\n        ==> (((\\n. sum(0..2*n) (\\k. fourier_coefficient f k *\n                                    trigonometric_set k t)) ---> l)\n             sequentially <=>\n             ((\\n. sum(0..n) (\\k. fourier_coefficient f k *\n                                  trigonometric_set k t)) ---> l)\n             sequentially)
   x <= 2 * n DIV 2 + 1 /\\ ~(x <= n) ==> x = 2 * n DIV 2 + 1
   sum (2 * 0..2 * (n DIV 2) + 1)\n                 (\\k. fourier_coefficient f k * trigonometric_set k (&0))
-  !f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     sum (0..n DIV 2)\n         (\\k. fourier_coefficient f (2 * k) * trigonometric_set (2 * k) (&0))
+  forall f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     sum (0..n DIV 2)\n         (\\k. fourier_coefficient f (2 * k) * trigonometric_set (2 * k) (&0))
   2 * SUC i = 2 * i + 2
-  !f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     (fourier_coefficient f 0 / sqrt(&2) +\n      sum (1..n DIV 2) (\\k. fourier_coefficient f (2 * k))) / sqrt pi
+  forall f n.\n     sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n     (fourier_coefficient f 0 / sqrt(&2) +\n      sum (1..n DIV 2) (\\k. fourier_coefficient f (2 * k))) / sqrt pi
   (i * x) * i:real = x * i * i
   (a * b) * c:real = b * a * c
   2 * SUC i = 2 * i + 2
   ((a * b) * c) * d:real = b * a * c * d
-  !f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          (real_integral(real_interval[--pi,pi]) f / &2 +\n           sum(1..n DIV 2) (\\k. real_integral (real_interval[--pi,pi])\n                                              (\\x. cos(&k * x) * f x))) / pi
-  !f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum(0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          real_integral(real_interval[--pi,pi])\n           (\\x. (&1 / &2 + sum(1..n DIV 2) (\\k. cos(&k * x))) * f x) / pi
-  !f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x + g x) i =\n                fourier_coefficient f i + fourier_coefficient g i
-  !f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x - g x) i =\n                fourier_coefficient f i - fourier_coefficient g i
+  forall f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum (0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          (real_integral(real_interval[--pi,pi]) f / &2 +\n           sum(1..n DIV 2) (\\k. real_integral (real_interval[--pi,pi])\n                                              (\\x. cos(&k * x) * f x))) / pi
+  forall f n.\n      f absolutely_real_integrable_on real_interval[--pi,pi]\n      ==> sum(0..n) (\\k. fourier_coefficient f k * trigonometric_set k (&0)) =\n          real_integral(real_interval[--pi,pi])\n           (\\x. (&1 / &2 + sum(1..n DIV 2) (\\k. cos(&k * x))) * f x) / pi
+  forall f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x + g x) i =\n                fourier_coefficient f i + fourier_coefficient g i
+  forall f g i. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           g absolutely_real_integrable_on real_interval[--pi,pi]\n           ==> fourier_coefficient (\\x. f x - g x) i =\n                fourier_coefficient f i - fourier_coefficient g i
   inv(sqrt pi) * c
   n + 1
   n:num
@@ -80110,25 +80110,25 @@ Warning: inventing type variables
   &0 < s /\\ s pow 2 = &2 * pi ==> &2 * pi * inv(s) * c = c * s
   inv(sqrt(&2 * pi)) * c
   0
-  !c i. fourier_coefficient (\\x. c) i =\n         if i = 0 then c * sqrt(&2 * pi) else &0
+  forall c i. fourier_coefficient (\\x. c) i =\n         if i = 0 then c * sqrt(&2 * pi) else &0
   (x + -- &n * a) + &n * a = x
-  !x n. f(x + &n * a) = (f:real->real) x
-  !f:real->real a.\n        (!x. f(x + a) = f x) <=> (!x n. integer n ==> f(x + n * a) = f x)
+  forall x n. f(x + &n * a) = (f:real->real) x
+  forall f:real->real a.\n        (forall x. f(x + a) = f x) <=> (forall x n. integer n ==> f(x + n * a) = f x)
   x - c:real = y <=> x = y + c
   c:real
   &1
-  !f i a b c. (f has_real_integral i) (real_interval[a,b])\n                ==> ((\\x. f(x + c)) has_real_integral i)\n                    (real_interval[a - c,b - c])
+  forall f i a b c. (f has_real_integral i) (real_interval[a,b])\n                ==> ((\\x. f(x + c)) has_real_integral i)\n                    (real_interval[a - c,b - c])
   x + a - b:real
   x:real
   a - (a - b):real = b /\\ (a + c) - (a - b) = b + c
   a - b:real
-  !f i a b c.\n        (!x. f(x + (b - a)) = f(x)) /\\\n        (f has_real_integral i) (real_interval[a,a+c])\n        ==> (f has_real_integral i) (real_interval[b,b+c])
+  forall f i a b c.\n        (forall x. f(x + (b - a)) = f(x)) /\\\n        (f has_real_integral i) (real_interval[a,a+c])\n        ==> (f has_real_integral i) (real_interval[b,b+c])
   real_interval[a,b]
   a /\\ b /\\ c /\\ d ==> e <=>\n                  c /\\ d ==> a /\\ b ==> e
   a:real
   ((f has_real_integral (real_integral(real_interval[a,a+c]) f))\n     (real_interval[a,a+c]) /\\\n     (f has_real_integral (real_integral(real_interval[a+c,b]) f))\n     (real_interval[a+c,b])) /\\\n    ((f has_real_integral (real_integral(real_interval[a+c,b]) f))\n     (real_interval[a+c,b]) /\\\n     (f has_real_integral (real_integral(real_interval[a,a+c]) f))\n     (real_interval[b,b+c]))
   a:real = (a + c) - c /\\ b = (b + c) - c
-  !f i a b c.\n        (!x. f(x + (b - a)) = f x) /\\ &0 <= c /\\ a + c <= b /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
+  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\ &0 <= c /\\ a + c <= b /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
   --(--a - --b):real = a - b
   --x + (a - b):real
   x:real
@@ -80138,17 +80138,17 @@ Warning: inventing type variables
   i:real
   \\x. (f:real->real)(--x)
   &0 <= c
-  !f i a b c.\n        (!x. f(x + (b - a)) = f x) /\\ abs(c) <= b - a /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
+  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\ abs(c) <= b - a /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i)\n             (real_interval[a,b])
   a < b ==> x + (b - a) * (c / (b - a) - f) =\n                (x + c) + --f * (b - a)
   x:real
   a < b /\\ (b - a) * f < (b - a) * &1\n      ==> abs(b - a) * f <= b - a
   ((\\x. f(x + (b - a) * frac(c / (b - a)))) has_real_integral i)\n    (real_interval[a,b])
   b <= a \\/ a < b
-  !f i a b c.\n        (!x. f(x + (b - a)) = f x) /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i) (real_interval[a,b])
-  !f a b c.\n        (!x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) real_integrable_on real_interval[a,b]
+  forall f i a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        (f has_real_integral i) (real_interval[a,b])\n        ==> ((\\x. f(x + c)) has_real_integral i) (real_interval[a,b])
+  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) real_integrable_on real_interval[a,b]
   f:real->real
-  !f a b c.\n        (!x. f(x + (b - a)) = f x) /\\\n        f absolutely_real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) absolutely_real_integrable_on real_interval[a,b]
-  !f a b c.\n        (!x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> real_integral (real_interval[a,b]) (\\x. f(x + c)) =\n            real_integral (real_interval[a,b]) f
+  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f absolutely_real_integrable_on real_interval[a,b]\n        ==> (\\x. f(x + c)) absolutely_real_integrable_on real_interval[a,b]
+  forall f a b c.\n        (forall x. f(x + (b - a)) = f x) /\\\n        f real_integrable_on real_interval[a,b]\n        ==> real_integral (real_interval[a,b]) (\\x. f(x + c)) =\n            real_integral (real_interval[a,b]) f
   (a * b) * c:real = a * c * b
   (x + t) - t:real = x
   n * ((x + &2 * pi) - t) = (&2 * n) * pi + n * (x - t)
@@ -80171,7 +80171,7 @@ Warning: inventing type variables
   (:real)
   a * b * c:real = (a * c) * b
   (a * b) * c:real = b * a * c
-  !f n t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           (!x. f(x + &2 * pi) = f x)\n           ==> fourier_coefficient (\\x. f(x + t)) (2 * n + 2) *\n               trigonometric_set (2 * n + 2) (&0) =\n               fourier_coefficient f (2 * n + 1) *\n               trigonometric_set (2 * n + 1) t +\n               fourier_coefficient f (2 * n + 2) *\n               trigonometric_set (2 * n + 2) t
+  forall f n t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n           (forall x. f(x + &2 * pi) = f x)\n           ==> fourier_coefficient (\\x. f(x + t)) (2 * n + 2) *\n               trigonometric_set (2 * n + 2) (&0) =\n               fourier_coefficient f (2 * n + 1) *\n               trigonometric_set (2 * n + 1) t +\n               fourier_coefficient f (2 * n + 2) *\n               trigonometric_set (2 * n + 2) t
   (k + 1) + 1 = k + 2
   k:num
   1..2*n = 2*0+1..(2*(n-1)+1)+1
@@ -80181,14 +80181,14 @@ Warning: inventing type variables
   pi
   --pi
   \\x:real. &1 / sqrt(&2 * pi) * f x
-  !f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..2*n) (\\k. fourier_coefficient (\\x. f (x + t)) k *\n                             trigonometric_set k (&0))
+  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..2*n) (\\k. fourier_coefficient (\\x. f (x + t)) k *\n                             trigonometric_set k (&0))
   sum(0..n) (\\k. fourier_coefficient (\\x. f (x + t)) (2 * k) *\n                   trigonometric_set (2 * k) (&0) +\n                   fourier_coefficient (\\x. f (x + t)) (2 * k + 1) *\n                   trigonometric_set (2 * k + 1) (&0))
-  !f n t.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..n) (\\k. fourier_coefficient (\\x. f (x + t)) (2 * k) *\n                           trigonometric_set (2 * k) (&0))
+  forall f n t.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k *\n                             trigonometric_set k t) =\n            sum(0..n) (\\k. fourier_coefficient (\\x. f (x + t)) (2 * k) *\n                           trigonometric_set (2 * k) (&0))
   dirichlet_kernel n x =\n        if x = &0 then &n + &1 / &2\n        else sin((&n + &1 / &2) * x) / (&2 * sin(x / &2))
   ~(x * inv(&2) = &0)
   ~(x = &0) ==> inv(&2 * x) * x = inv(&2)
-  !x. abs(x) < &2 * pi ==> dirichlet_kernel 0 x = &1 / &2
-  !n x. dirichlet_kernel n (--x) = dirichlet_kernel n x
+  forall x. abs(x) < &2 * pi ==> dirichlet_kernel 0 x = &1 / &2
+  forall n x. dirichlet_kernel n (--x) = dirichlet_kernel n x
   f real_differentiable (atreal a) /\\ f(a) = b\n     ==> (f ---> b) (atreal a)
   &1
   \\x. cos(x / &2)
@@ -80202,18 +80202,18 @@ Warning: inventing type variables
   x = &0
   x:real
   k:num
-  !n. (dirichlet_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
+  forall n. (dirichlet_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
   real_interval(--(&2 * pi),&2 * pi)
-  !n. (dirichlet_kernel n) real_continuous_on real_interval[--pi,pi]
-  !f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. dirichlet_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
+  forall n. (dirichlet_kernel n) real_continuous_on real_interval[--pi,pi]
+  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. dirichlet_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
   (&n + &1) * x - x / &2 = (&n + &1 / &2) * x
   &1 * x - x / &2 = x / &2
-  !k x. &k * x + x * inv(&2) = (&(k + 1) * x - x * inv(&2))
+  forall k x. &k * x + x * inv(&2) = (&(k + 1) * x - x * inv(&2))
   n = 0 \\/ 1 <= n
-  !n x. (&1 / &2 + sum(1..n) (\\k. cos(&k * x))) * sin(x / &2) =\n         sin((&n + &1 / &2) * x) / &2
+  forall n x. (&1 / &2 + sum(1..n) (\\k. cos(&k * x))) * sin(x / &2) =\n         sin((&n + &1 / &2) * x) / &2
   x / &2
   ~(y = &0) /\\ z * y = x / &2 ==> x / (&2 * y) = z
-  !n x. ~(x = &0) /\\ abs(x) < &2 * pi\n         ==> dirichlet_kernel n x = &1 / &2 + sum(1..n) (\\k. cos(&k * x))
+  forall n x. ~(x = &0) /\\ abs(x) < &2 * pi\n         ==> dirichlet_kernel n x = &1 / &2 + sum(1..n) (\\k. cos(&k * x))
   k:num
   k:num
   pi = (&1 / &2) * (pi - --pi)
@@ -80221,7 +80221,7 @@ Warning: inventing type variables
   &0 < pi /\\ --pi <= x /\\ x <= pi ==> abs(x) < &2 * pi
   {&0}
   \\x. &1 / &2 + sum(1..n) (\\k. cos(&k * x))
-  !n. (dirichlet_kernel n has_real_integral pi) (real_interval[--pi,pi])
+  forall n. (dirichlet_kernel n has_real_integral pi) (real_interval[--pi,pi])
   x = pi ==> x = &2 * y ==> y = pi / &2
   &0
   pi
@@ -80234,7 +80234,7 @@ Warning: inventing type variables
   pi
   --pi
   dirichlet_kernel n
-  !n. (dirichlet_kernel n has_real_integral (pi / &2))\n       (real_interval[&0,pi])
+  forall n. (dirichlet_kernel n has_real_integral (pi / &2))\n       (real_interval[&0,pi])
   s * s:real = p ==> p * f * c = (c * s) * f * s
   k:num
   ~(y = &0) ==> (x / (&2 * y) = z <=> z * y = x / &2)
@@ -80253,11 +80253,11 @@ Warning: inventing type variables
   --pi
   f:real->real
   fourier_coefficient (\\x. f(x + t)) 0 * &1 / sqrt(&2 * pi) +\n    sum (1..n) (\\k. fourier_coefficient (\\x. f(x + t)) (2 * k) / sqrt pi)
-  !f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) =\n            real_integral (real_interval[--pi,pi])\n                          (\\x. dirichlet_kernel n x * f(x + t)) / pi
+  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) =\n            real_integral (real_interval[--pi,pi])\n                          (\\x. dirichlet_kernel n x * f(x + t)) / pi
   l = (l * pi) / pi
-  !f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x + t)))\n             ---> pi * l) sequentially)
+  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x + t)))\n             ---> pi * l) sequentially)
   {&0}
-  !n. real_integral (real_interval [--pi,pi])\n                        (\\x. dirichlet_kernel n x * (f(x + t) - f(t))) =\n          real_integral (real_interval [--pi,pi])\n                        (\\x. sin((&n + &1 / &2) * x) *\n                             inv(&2) * (f(x + t) - f(t)) / sin(x / &2))
+  forall n. real_integral (real_interval [--pi,pi])\n                        (\\x. dirichlet_kernel n x * (f(x + t) - f(t))) =\n          real_integral (real_interval [--pi,pi])\n                        (\\x. sin((&n + &1 / &2) * x) *\n                             inv(&2) * (f(x + t) - f(t)) / sin(x / &2))
   pi - --pi = &2 * pi
   t:real
   pi
@@ -80279,7 +80279,7 @@ Warning: inventing type variables
   &0
   t:real
   \\x. (f:real->real)(x) - f(t)
-  !f t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (\\x. (f(x + t) - f(t)) / sin(x / &2))\n        absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f(t)) sequentially
+  forall f t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (\\x. (f(x + t) - f(t)) / sin(x / &2))\n        absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f(t)) sequentially
   &2 * pi * m = &2 * pi * n <=> pi = &0 \\/ m = n
   y / &2 = n * pi <=> &2 * pi * n = y
   {x | sin(x / &2) = &0} = IMAGE (\\n. &2 * pi * n) integer
@@ -80319,12 +80319,12 @@ Warning: inventing type variables
   e:real
   &1 / &4
   ((\\x. sin(x / &2)) has_real_derivative w) (atreal (&0))
-  ?e. &0 < e /\\\n         !x. abs(x) < e\n             ==> abs((f (x + t) - f t) / sin (x / &2))\n                 <= &4 * abs M * abs(x) rpow (a - &1)
-  !f d M a t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ &0 < a /\\\n        (!x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t) rpow a)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
+  ?e. &0 < e /\\\n         forall x. abs(x) < e\n             ==> abs((f (x + t) - f t) / sin (x / &2))\n                 <= &4 * abs M * abs(x) rpow (a - &1)
+  forall f d M a t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ &0 < a /\\\n        (forall x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t) rpow a)\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
   &1
   M:real
   d:real
-  !f d M t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ (!x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t))\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
+  forall f d M t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\\n        &0 < d /\\ (forall x. abs(x - t) < d ==> abs(f x - f t) <= M * abs(x - t))\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> f t) sequentially
   x:real
   x < t ==> &0 < abs(x - t)
   x:real
@@ -80339,15 +80339,15 @@ Warning: inventing type variables
   &1
   B2:real
   B1:real
-  !f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (!x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t within {x | t < x}) /\\\n         f real_differentiable (atreal t within {x | x < t})\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
+  forall f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t within {x | t < x}) /\\\n         f real_differentiable (atreal t within {x | x < t})\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
   f real_differentiable (atreal t)
-  !f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (!x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
+  forall f t. f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f(x)) /\\\n         f real_differentiable (atreal t)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> f t) sequentially
   pi - --pi = &2 * pi
   pi - --pi = &2 * pi
-  !f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x))\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
+  forall f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x))\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
   real_interval[--pi,pi]
   (a /\\ b /\\ c) /\\ (a /\\ b /\\ c ==> d /\\ e)\n    ==> a /\\ b /\\ c /\\ d /\\ e
-  !f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
+  forall f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. dirichlet_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. dirichlet_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
   c:real
   pi
   n:num
@@ -80363,8 +80363,8 @@ Warning: inventing type variables
   --pi
   f:real->real
   &0 < pi ==> x = y + pi * l ==> x / pi - l = y / pi
-  !f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) -\n            l =\n            real_integral (real_interval[&0,pi])\n                          (\\x. dirichlet_kernel n x *\n                               ((f(t + x) + f(t - x)) - &2 * l)) / pi
-  !f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
+  forall f n t.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> sum(0..2*n) (\\k. fourier_coefficient f k * trigonometric_set k t) -\n            l =\n            real_integral (real_interval[&0,pi])\n                          (\\x. dirichlet_kernel n x *\n                               ((f(t + x) + f(t - x)) - &2 * l)) / pi
+  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
   x:real
   &2 * pi * m = &2 * pi * n <=> pi = &0 \\/ m = n
   y / &2 = n * pi <=> &2 * pi * n = y
@@ -80377,13 +80377,13 @@ Warning: inventing type variables
   x:real
   real_bounded (IMAGE (\\x. inv(sin(x / &2)))\n                (real_interval[--pi,pi] DIFF real_interval(--d,d)))
   {&0}
-  !n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs x < d then &0 else f(x) - g(x))) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. sin((&n + &1 / &2) * x) *\n                           inv(&2) *\n                           (if abs x < d then &0 else f(x) - g(x)) /\n                           sin(x / &2))
+  forall n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs x < d then &0 else f(x) - g(x))) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. sin((&n + &1 / &2) * x) *\n                           inv(&2) *\n                           (if abs x < d then &0 else f(x) - g(x)) /\n                           sin(x / &2))
   &0 = x - y <=> x = y
   x:real
   {}:real->bool
   n:num
-  !n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * f(x)) -\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * g(x)) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs(x) < d then &0 else f(x) - g(x)))
-  !d f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ (!x. abs(x) < d ==> f x = g x)\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * g(x)))\n             ---> &0) sequentially
+  forall n. real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * f(x)) -\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x * g(x)) =\n        real_integral (real_interval[--pi,pi])\n                      (\\x. dirichlet_kernel n x *\n                           (if abs(x) < d then &0 else f(x) - g(x)))
+  forall d f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ (forall x. abs(x) < d ==> f x = g x)\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * g(x)))\n             ---> &0) sequentially
   real_interval[--d,d] SUBSET real_interval[--pi,pi]
   a * (if p then b else &0) = if p then a * b else &0
   &0 < d /\\ d <= pi\n        ==> ((--pi <= x /\\ x <= pi) /\\ --d <= x /\\ x <= d <=>\n             --d <= x /\\ x <= d)
@@ -80391,44 +80391,44 @@ Warning: inventing type variables
   \\x. if x IN real_interval[--d,d] then f x else &0
   f:real->real
   d:real
-  !d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--d,d])\n                                (\\x. dirichlet_kernel n x * f(x)))\n             ---> &0) sequentially
+  forall d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[--pi,pi])\n                                (\\x. dirichlet_kernel n x * f(x)) -\n                  real_integral (real_interval[--d,d])\n                                (\\x. dirichlet_kernel n x * f(x)))\n             ---> &0) sequentially
   pi - --pi = &2 * pi
   pi - --pi = &2 * pi
   d:real
-  !t d c f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x)) /\\ (!x. g(x + &2 * pi) = g(x)) /\\\n        &0 < d /\\ (!x. abs(x - t) < d ==> f x = g x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> c) sequentially <=>\n             ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient g k * trigonometric_set k t))\n              ---> c) sequentially)
+  forall t d c f g.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        g absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ (forall x. g(x + &2 * pi) = g(x)) /\\\n        &0 < d /\\ (forall x. abs(x - t) < d ==> f x = g x)\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> c) sequentially <=>\n             ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient g k * trigonometric_set k t))\n              ---> c) sequentially)
   n:num
   n:num
-  !n. (\\x. dirichlet_kernel n x * f x) absolutely_real_integrable_on\n        real_interval[--d,d]
+  forall n. (\\x. dirichlet_kernel n x * f x) absolutely_real_integrable_on\n        real_interval[--d,d]
   n:num
   f:real->real
   n:num
   f:real->real
   d:real
-  !d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))) -\n                  real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))))\n             ---> &0) sequentially
+  forall d f.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        &0 < d /\\ d <= pi\n        ==> ((\\n. real_integral (real_interval[&0,pi])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))) -\n                  real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x * (f(x) + f(--x))))\n             ---> &0) sequentially
   pi - --pi = &2 * pi
-  !x. (f:real->real)(t - x) = f(t + --x)
+  forall x. (f:real->real)(t - x) = f(t + --x)
   (x + y) - &2 * l = (x - l) + (y - l)
-  !f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
+  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. dirichlet_kernel n x *\n                                     ((f(t + x) + f(t - x)) - &2 * l)))\n             ---> &0) sequentially)
   {&0}
-  !f n s. real_integral s (\\x. dirichlet_kernel n x * f x) =\n           real_integral s (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) *\n                                f x)
+  forall f n s. real_integral s (\\x. dirichlet_kernel n x * f x) =\n           real_integral s (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) *\n                                f x)
   {&0}
-  !f n s. (\\x. dirichlet_kernel n x * f x) real_integrable_on s <=>\n           (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) * f x)\n           real_integrable_on s
+  forall f n s. (\\x. dirichlet_kernel n x * f x) real_integrable_on s <=>\n           (\\x. sin((&n + &1 / &2) * x) / (&2 * sin(x / &2)) * f x)\n           real_integrable_on s
   Cx x
   0
-  !x. abs(sin(x) - x) <= abs(x) pow 3
+  forall x. abs(sin(x) - x) <= abs(x) pow 3
   abs x
-  !x. ~(x = &0) ==> abs(sin(x) / x - &1) <= x pow 2
+  forall x. ~(x = &0) ==> abs(sin(x) / x - &1) <= x pow 2
   &4 * x pow 3 <= x <=> x * x pow 2 <= x * (&1 / &2) pow 2
   &4 * x3 <= abs x ==> abs(s - x) <= x3 ==> abs(x) / &2 <= abs s
   x:real
-  !x. abs(x) <= &1 / &2  ==> abs(x) / &2 <= abs(sin x)
+  forall x. abs(x) <= &1 / &2  ==> abs(x) / &2 <= abs(sin x)
   x:real
   (x:real) pow 2
   abs(&1 - s * inv x) = abs(s / x - &1)
   x:real
   sin x = &0
   abs(sin x)
-  !x. ~(x = &0) /\\ abs x <= &1 / &2\n       ==> abs(inv(sin x) - inv x) <= &2 * abs x
+  forall x. ~(x = &0) /\\ abs x <= &1 / &2\n       ==> abs(inv(sin x) - inv x) <= &2 * abs x
   &2 * abs(x / &2)
   abs(is - &2 * ix) <= &1 ==> abs(inv(&2) * is - ix) <= max B (&2)
   x = &0
@@ -80472,7 +80472,7 @@ Warning: inventing type variables
   l:real
   t:real
   f:real->real
-  !f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. sin((&n + &1 / &2) * x) *\n                                     ((f(t + x) + f(t - x)) - &2 * l) / x))\n             ---> &0) sequentially)
+  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\ &0 < d /\\ d <= pi\n        ==> (((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k t))\n              ---> l) sequentially <=>\n            ((\\n. real_integral (real_interval[&0,d])\n                                (\\x. sin((&n + &1 / &2) * x) *\n                                     ((f(t + x) + f(t - x)) - &2 * l) / x))\n             ---> &0) sequentially)
   x * y <= y <=> x * y <= &1 * y
   &0 <= x ==> abs x = x
   x:real
@@ -80499,7 +80499,7 @@ Warning: inventing type variables
   (if P x then if Q x then &0 else a x else &0) =\n                         (if P x /\\ ~Q x then a x else &0)
   \\x. if abs x < dd then &0\n                    else ((f:real->real)(t + x) - l) / x
   &1
-  (!n. (\\x. sin((&n + &1 / &2) * x) *\n           ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[&0,dd]) /\\\n    (!n. (\\x. sin((&n + &1 / &2) * x) *\n          ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[dd,pi])
+  (forall n. (\\x. sin((&n + &1 / &2) * x) *\n           ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[&0,dd]) /\\\n    (forall n. (\\x. sin((&n + &1 / &2) * x) *\n          ((f(t + x) + f(t - x)) - &2 * l) / x) absolutely_real_integrable_on\n         real_interval[dd,pi])
   real_interval[--pi,pi]
   x:real
   inv dd:real
@@ -80528,14 +80528,14 @@ Warning: inventing type variables
   l:real
   t:real
   f:real->real
-  !f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        (\\x. abs((f(t + x) + f(t - x)) - &2 * l) / x)\n        real_integrable_on real_interval[&0,d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> l) sequentially
+  forall f t l d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        (\\x. abs((f(t + x) + f(t - x)) - &2 * l) / x)\n        real_integrable_on real_interval[&0,d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k t))\n             ---> l) sequentially
   abs x <= &1 /\\ abs y <= &1 ==> abs(--y - --x) <= &2
   b:real
   a:real
   \\x. sin x
   \\x. --(cos x)
   a <= b
-  !a b. (\\x. sin x) real_integrable_on (real_interval[a,b]) /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin x)) <= &2
+  forall a b. (\\x. sin x) real_integrable_on (real_interval[a,b]) /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin x)) <= &2
   inv b <= inv a /\\ abs x <= inv a * &2 /\\ abs y <= inv b * &2\n          ==> abs(x + y) <= &4 / a
   --(--(inv y) * x):real = x / y
   c:real
@@ -80544,22 +80544,22 @@ Warning: inventing type variables
   \\x:real. --(inv x)
   \\x. sin x
   a <= b
-  !a b. &0 < a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &4 / a
+  forall a b. &0 < a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &4 / a
   x pow 5 / &24 <= x pow 3 / &6 <=>\n      x pow 3 * x pow 2 <= x pow 3 * &2 pow 2
   e <= t ==> abs(sin x - (x + --t)) <= e ==> sin x <= x
   Cx x
   1
   x <= &1
-  !x. &0 <= x ==> sin(x) <= x
+  forall x. &0 <= x ==> sin(x) <= x
   s <= x /\\ &0 <= s ==> abs s <= abs x
   &0 <= x /\\ ~(x = &0) ==> &0 < abs x
   x = &0
-  !x. &0 <= x /\\ x <= &2 ==> abs(sin x / x) <= &1
+  forall x. &0 <= x /\\ x <= &2 ==> abs(sin x / x) <= &1
   real_integral (real_interval [a,b]) (\\x. &1)
   (\\x. &1):real->real
   a /\\ (a ==> b) ==> a /\\ b
   a <= b
-  !a b. &0 <= a /\\ b <= &2\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &2
+  forall a b. &0 <= a /\\ b <= &2\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b])\n                                 (\\x. sin x / x)) <= &2
   &0 < &2
   &2 = &4 / &2
   abs(x) <= &2 /\\ abs(y) <= &2 ==> abs(x + y) <= &4
@@ -80578,7 +80578,7 @@ Warning: inventing type variables
   &2 <= a
   x <= &2 ==> x <= &4
   b <= &2
-  !a b. &0 <= a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &4
+  forall a b. &0 <= a\n           ==> (\\x. sin x / x) real_integrable_on real_interval[a,b] /\\\n               abs(real_integral (real_interval[a,b]) (\\x. sin x / x)) <= &4
   &0 < c ==> c * inv c * i = i /\\ abs c = c
   &0 < c ==> c * s * inv c * inv x = s * inv x
   &0 < c ==> inv c * c * a = a
@@ -80587,22 +80587,22 @@ Warning: inventing type variables
   c * b:real
   c * a:real
   a <= b
-  !a b c.\n       &0 <= a /\\ &0 < c\n       ==> (\\x. sin(c * x) / x) real_integrable_on real_interval[a,b] /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin(c * x) / x)) <= &4
+  forall a b c.\n       &0 <= a /\\ &0 < c\n       ==> (\\x. sin(c * x) / x) real_integrable_on real_interval[a,b] /\\\n           abs(real_integral (real_interval[a,b]) (\\x. sin(c * x) / x)) <= &4
   d:real
-  !f l d. &0 < d\n             ==> ((f ---> l) (atreal (&0) within real_interval[&0,d]) <=>\n                  (f ---> l) (atreal (&0) within {x | &0 <= x}))
+  forall f l d. &0 < d\n             ==> ((f ---> l) (atreal (&0) within real_interval[&0,d]) <=>\n                  (f ---> l) (atreal (&0) within {x | &0 <= x}))
   k:real
   x + y = z ==> abs(x) <= e / &2 ==> abs(y) < e / &2 ==> abs(z) < e
   n:num
   n:num
   N:num
   e / &2
-  !x. (--pi <= x /\\ x <= pi) /\\ k <= x /\\ x <= d <=>\n                    k <= x /\\ x <= d
+  forall x. (--pi <= x /\\ x <= pi) /\\ k <= x /\\ x <= d <=>\n                    k <= x /\\ x <= d
   (if P then if Q then x else &0 else &0) =\n                       (if P /\\ Q then x else &0)
   (if P then s * (if Q then a else &0) else &0) =\n    (if P /\\ Q then s * a else &0)
   abs(if p then x else &0) = if p then abs x else &0
   \\x. if k <= x /\\ x <= d then h x / x else &0
   &1
-  !n. (\\x. sin((&n + &1 / &2) * x) * h x / x) absolutely_real_integrable_on\n        real_interval[k,d]
+  forall n. (\\x. sin((&n + &1 / &2) * x) * h x / x) absolutely_real_integrable_on\n        real_interval[k,d]
   real_interval[--pi,pi]
   inv k:real
   (\\x. h x / x) absolutely_real_integrable_on real_interval[k,d]
@@ -80680,8 +80680,8 @@ Warning: inventing type variables
   d:real
   &0
   h:real->real
-  ?h1 h2.\n         (!x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h1 x <= h1 y) /\\\n         (!x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h2 x <= h2 y) /\\\n         (h1 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (h2 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (!x. h x = h1 x - h2 x)
-  ?k. &0 < k /\\ k < d /\\\n        !n. (\\x. sin ((&n + &1 / &2) * x) * h x / x)\n            real_integrable_on real_interval[&0,k] /\\\n            abs(real_integral (real_interval[&0,k])\n                              (\\x. sin ((&n + &1 / &2) * x) * h x / x))\n              <= e / &2
+  ?h1 h2.\n         (forall x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h1 x <= h1 y) /\\\n         (forall x y. x IN real_interval[&0,d] /\\ y IN real_interval[&0,d] /\\ x <= y\n                ==> h2 x <= h2 y) /\\\n         (h1 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (h2 ---> &0) (atreal (&0) within {x | &0 <= x}) /\\\n         (forall x. h x = h1 x - h2 x)
+  ?k. &0 < k /\\ k < d /\\\n        forall n. (\\x. sin ((&n + &1 / &2) * x) * h x / x)\n            real_integrable_on real_interval[&0,k] /\\\n            abs(real_integral (real_interval[&0,k])\n                              (\\x. sin ((&n + &1 / &2) * x) * h x / x))\n              <= e / &2
   e:real
   d1:real
   &0 < e
@@ -80728,7 +80728,7 @@ Warning: inventing type variables
   d0:real
   t:real
   f:real->real
-  !f x d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        f has_bounded_real_variation_on real_interval[x - d,x + d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k x))\n             ---> ((reallim (atreal x within {l | l <= x}) f +\n                    reallim (atreal x within {r | r >= x}) f) / &2))\n            sequentially
+  forall f x d.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f x) /\\\n        &0 < d /\\\n        f has_bounded_real_variation_on real_interval[x - d,x + d]\n        ==> ((\\n. sum (0..n)\n                      (\\k. fourier_coefficient f k * trigonometric_set k x))\n             ---> ((reallim (atreal x within {l | l <= x}) f +\n                    reallim (atreal x within {r | r >= x}) f) / &2))\n            sequentially
   min d0 d1
   t - x:real
   x:real
@@ -80747,7 +80747,7 @@ Warning: inventing type variables
   --(&((2 + 2 * m) + 1) * pi)
   f:real->real
   n:num
-  !m n. f has_bounded_real_variation_on\n            real_interval[--(&(2 * m + 1)) * pi,&(2 * n + 1) * pi]
+  forall m n. f has_bounded_real_variation_on\n            real_interval[--(&(2 * m + 1)) * pi,&(2 * n + 1) * pi]
   ((&2 + &2 * n) + &1) * pi = (&2 * (n + &1) + &1) * pi
   (&2 * n + &1) * pi = (&2 * (n + &1) - &1) * pi
   --pi = --(&1) * pi
@@ -80755,15 +80755,15 @@ Warning: inventing type variables
   &((2 + 2 * n) + 1) * pi
   --pi
   f:real->real
-  !n. f has_bounded_real_variation_on\n          real_interval[--pi,&(2 * n + 1) * pi]
+  forall n. f has_bounded_real_variation_on\n          real_interval[--pi,&(2 * n + 1) * pi]
   x + n * &2 * pi = &2 * n * pi + x
   --n:real
   x:real
   x:real
   &2 * --n * pi
-  !n. integer n\n          ==> f has_bounded_real_variation_on\n              real_interval [(&2 * n - &1) * pi,(&2 * n + &1) * pi]
+  forall n. integer n\n          ==> f has_bounded_real_variation_on\n              real_interval [(&2 * n - &1) * pi,(&2 * n + &1) * pi]
   &1
-  !f x. f has_bounded_real_variation_on real_interval[--pi,pi] /\\\n         (!x. f(x + &2 * pi) = f x)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k x))\n              ---> ((reallim (atreal x within {l | l <= x}) f +\n                     reallim (atreal x within {r | r >= x}) f) / &2))\n             sequentially
+  forall f x. f has_bounded_real_variation_on real_interval[--pi,pi] /\\\n         (forall x. f(x + &2 * pi) = f x)\n         ==> ((\\n. sum (0..n)\n                       (\\k. fourier_coefficient f k * trigonometric_set k x))\n              ---> ((reallim (atreal x within {l | l <= x}) f +\n                     reallim (atreal x within {r | r >= x}) f) / &2))\n             sequentially
   fejer_kernel n x = if n = 0 then &0\n                      else sum(0..n-1) (\\r. dirichlet_kernel r x) / &n
   x / &2 + (&n + &1 / &2) * x = (&n + &1) * x
   x / &2 - (&n + &1 / &2) * x = --(&n * x)
@@ -80774,32 +80774,32 @@ Warning: inventing type variables
   n = 0
   fejer_kernel n x =\n        if n = 0 then &0\n        else if x = &0 then &n / &2\n        else sin(&n / &2 * x) pow 2 / (&2 * &n * sin(x / &2) pow 2)
   n = 0
-  !n. (fejer_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
+  forall n. (fejer_kernel n) real_continuous_on\n       real_interval(--(&2 * pi),&2 * pi)
   real_interval(--(&2 * pi),&2 * pi)
-  !n. (fejer_kernel n) real_continuous_on real_interval[--pi,pi]
-  !f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. fejer_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
+  forall n. (fejer_kernel n) real_continuous_on real_interval[--pi,pi]
+  forall f n. f absolutely_real_integrable_on real_interval[--pi,pi]\n         ==> (\\x. fejer_kernel n x * f x)\n             absolutely_real_integrable_on real_interval[--pi,pi]
   pi - --pi = &2 * pi
   pi - --pi = &2 * pi
-  !f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x))\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
+  forall f n c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x))\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[--pi,pi] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[--pi,pi]
   real_interval[--pi,pi]
   (a /\\ b /\\ c) /\\ (a /\\ b /\\ c ==> d /\\ e)\n    ==> a /\\ b /\\ c /\\ d /\\ e
-  !f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
+  forall f n d c.\n        f absolutely_real_integrable_on real_interval [--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f(x)) /\\ d <= pi\n        ==> (\\x. fejer_kernel n x * f(t + x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * f(t - x))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * c)\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * (f(t + x) + f(t - x)))\n            absolutely_real_integrable_on real_interval[&0,d] /\\\n            (\\x. fejer_kernel n x * ((f(t + x) + f(t - x)) - c))\n            absolutely_real_integrable_on real_interval[&0,d]
   ~(n = &0) ==> s * f = n * s / n * f
   x:real
   n - 1
   0
   l:real
   ~(n = &0) ==> (x / n - l = y <=> x - n * l = n * y)
-  !f n t.\n     f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n     (!x. f (x + &2 * pi) = f x) /\\\n     0 < n\n     ==> sum(0..n-1) (\\r. sum (0..2*r)\n                              (\\k. fourier_coefficient f k *\n                                   trigonometric_set k t)) / &n - l =\n         real_integral (real_interval[&0,pi])\n                       (\\x. fejer_kernel n x *\n                            ((f(t + x) + f(t - x)) - &2 * l)) / pi
+  forall f n t.\n     f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n     (forall x. f (x + &2 * pi) = f x) /\\\n     0 < n\n     ==> sum(0..n-1) (\\r. sum (0..2*r)\n                              (\\k. fourier_coefficient f k *\n                                   trigonometric_set k t)) / &n - l =\n         real_integral (real_interval[&0,pi])\n                       (\\x. fejer_kernel n x *\n                            ((f(t + x) + f(t - x)) - &2 * l)) / pi
   1
-  !f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum(0..n-1) (\\r. sum (0..2*r)\n                                        (\\k. fourier_coefficient f k *\n                                             trigonometric_set k t)) / &n)\n               ---> l) sequentially <=>\n             ((\\n. real_integral (real_interval[&0,pi])\n                                 (\\x. fejer_kernel n x *\n                                      ((f(t + x) + f(t - x)) - &2 * l)))\n              ---> &0) sequentially)
+  forall f t l.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f (x + &2 * pi) = f x)\n        ==> (((\\n. sum(0..n-1) (\\r. sum (0..2*r)\n                                        (\\k. fourier_coefficient f k *\n                                             trigonometric_set k t)) / &n)\n               ---> l) sequentially <=>\n             ((\\n. real_integral (real_interval[&0,pi])\n                                 (\\x. fejer_kernel n x *\n                                      ((f(t + x) + f(t - x)) - &2 * l)))\n              ---> &0) sequentially)
   pi = sum(0..n-1) (\\r. pi) / &n
   n = 0
-  !n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi))\n       (real_interval[--pi,pi])
+  forall n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi))\n       (real_interval[--pi,pi])
   pi / &2 = sum(0..n-1) (\\r. pi / &2) / &n
   n = 0
-  !n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi / &2))\n       (real_interval[&0,pi])
-  !n x. &0 <= fejer_kernel n x
+  forall n. (fejer_kernel n has_real_integral (if n = 0 then &0 else pi / &2))\n       (real_interval[&0,pi])
+  forall n x. &0 <= fejer_kernel n x
   &0 < pi ==> pi / &2 * e / &2 / pi = e / &4
   e / &2 / pi
   real_interval[&0,pi]
@@ -80849,7 +80849,7 @@ Warning: inventing type variables
   k:real
   e / &2 / pi
   (h ---> &0) (atreal (&0) within {x | &0 <= x})
-  ?k. &0 < k /\\ k < pi /\\\n        (!x. &0 < x /\\ x <= k ==> abs(h x) < e / &2 / pi)
+  ?k. &0 < k /\\ k < pi /\\\n        (forall x. &0 < x /\\ x <= k ==> abs(h x) < e / &2 / pi)
   e:real
   d1:real
   &0 < e
@@ -80867,13 +80867,13 @@ Warning: inventing type variables
   l:real
   t:real
   f:real->real
-  !f x l r.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (!x. f(x + &2 * pi) = f x) /\\\n        (f ---> l) (atreal x within {x' | x' <= x}) /\\\n        (f ---> r) (atreal x within {x' | x' >= x})\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> (l + r) / &2)\n            sequentially
+  forall f x l r.\n        f absolutely_real_integrable_on real_interval[--pi,pi] /\\\n        (forall x. f(x + &2 * pi) = f x) /\\\n        (f ---> l) (atreal x within {x' | x' <= x}) /\\\n        (f ---> r) (atreal x within {x' | x' >= x})\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> (l + r) / &2)\n            sequentially
   t - x:real
   x:real
   t + x:real
   x:real
   x = (x + x) / &2
-  !f x l r.\n        f real_continuous_on (:real) /\\ (!x. f(x + &2 * pi) = f x)\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> f(x))\n            sequentially
+  forall f x l r.\n        f real_continuous_on (:real) /\\ (forall x. f(x + &2 * pi) = f x)\n        ==> ((\\n. sum(0..n-1) (\\m. sum (0..2*m)\n                                       (\\k. fourier_coefficient f k *\n                                            trigonometric_set k x)) / &n)\n             ---> f(x))\n            sequentially
 SUM_NUMBERS =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\r:num. (#real_of_num:fun(num,real) r:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 REAL_INTEGRABLE_REFLECT_AND_ADD =  |- (#!:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#!:fun(fun(real,bool),bool) (\a:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. (f:fun(real,real) (#real_neg:fun(real,real) x:real)))) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real)))))) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. ((#real_add:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (f:fun(real,real) (#real_neg:fun(real,real) x:real))))) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real))))))))))))
 REAL_INTEGRAL_REFLECT_AND_ADD =  |- (#!:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#!:fun(fun(real,bool),bool) (\a:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) f:fun(real,real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real)))))) ((#=:fun(real,fun(real,bool)) ((#real_integral:fun(fun(real,bool),fun(fun(real,real),real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_neg:fun(real,real) a:real)) a:real)) #NIL:list(prod(real,real))))) f:fun(real,real))) ((#real_integral:fun(fun(real,bool),fun(fun(real,real),real)) (#closed_real_interval:fun(list(prod(real,real)),fun(real,bool)) ((#CONS:fun(prod(real,real),fun(list(prod(real,real)),list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) #NIL:list(prod(real,real))))) (\x:real. ((#real_add:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (f:fun(real,real) (#real_neg:fun(real,real) x:real)))))))))))

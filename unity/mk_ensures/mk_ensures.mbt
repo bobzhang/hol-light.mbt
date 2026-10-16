@@ -4,7 +4,7 @@
 ///|
 /// EXIST_TRANSITION_term
 fn step_1() -> Unit raise {
-  exist_transition_term_c.set(@parser.parse_term("(!p q. EXIST_TRANSITION (p:'a->bool) q []         <=> F) /\\\n    (!p q. EXIST_TRANSITION p q (CONS (st:'a->'a) Pr) <=>\n\t  ((!s. (p s /\\ ~q s) ==> q (st s)) \\/ (EXIST_TRANSITION p q Pr)))"))
+  exist_transition_term_c.set(@parser.parse_term("(forall p q. EXIST_TRANSITION (p:'a->bool) q []         <=> F) /\\\n    (forall p q. EXIST_TRANSITION p q (CONS (st:'a->'a) Pr) <=>\n\t  ((forall s. (p s /\\ ~q s) ==> q (st s)) \\/ (EXIST_TRANSITION p q Pr)))"))
 }
 
 ///|
@@ -40,7 +40,7 @@ fn step_3() -> Unit raise {
 ///|
 /// ENSURES
 fn step_4() -> Unit raise {
-  ensures_c.set(@aux_definitions.new_infix_definition("ENSURES", "<=>", @parser.parse_term("!(p:'a->bool) q (Pr:('a->'a)list).\n       ENSURES p q Pr = (((p UNLESS q) Pr) /\\ ((p EXIST_TRANSITION q) Pr))"), @mk_unless.tl_fix()))
+  ensures_c.set(@aux_definitions.new_infix_definition("ENSURES", "<=>", @parser.parse_term("forall(p:'a->bool) q (Pr:('a->'a)list).\n       ENSURES p q Pr = (((p UNLESS q) Pr) /\\ ((p EXIST_TRANSITION q) Pr))"), @mk_unless.tl_fix()))
 }
 
 ///|
@@ -55,7 +55,7 @@ pub fn ensures() -> @kernel.Thm {
 ///|
 /// ENSURES_STMT
 fn step_5() -> Unit raise {
-  ensures_stmt_c.set(@aux_definitions.new_infix_definition("ENSURES_STMT", "<=>", @parser.parse_term("!(p:'a->bool) q (st:'a->'a).\n        ENSURES_STMT p q st = (\\s. p s /\\ ~(q s) ==> q (st s))"), @mk_unless.tl_fix()))
+  ensures_stmt_c.set(@aux_definitions.new_infix_definition("ENSURES_STMT", "<=>", @parser.parse_term("forall(p:'a->bool) q (st:'a->'a).\n        ENSURES_STMT p q st = (\\s. p s /\\ ~(q s) ==> q (st s))"), @mk_unless.tl_fix()))
 }
 
 ///|
@@ -70,11 +70,11 @@ pub fn ensures_stmt() -> @kernel.Thm {
 ///|
 /// ENSURES_lemma0
 fn step_6() -> Unit raise {
-  let t2 = @kernel.assume_rule(@parser.parse_term("!s:'a. q s ==> r s"))
+  let t2 = @kernel.assume_rule(@parser.parse_term("forall s:'a. q s ==> r s"))
   let t3 = @tactics.assume_tac(@bool.spec(@parser.parse_term("(st:'a->'a) s"), t2))
-  let t1 = @tactics.assume_tac(@aux_definitions.contrapos(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("!s:'a. q s ==> r s")))))
+  let t1 = @tactics.assume_tac(@aux_definitions.contrapos(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall s:'a. q s ==> r s")))))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), t3), @hol88.res_tac), @hol88.res_tac)
-  ensures_lemma0_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q r st.\n          ((!s. p s /\\ ~q s ==> q (st s)) /\\ (!s. q s ==> r s)) ==>\n           (!s. p s /\\ ~r s ==> r (st s))")), t4))
+  ensures_lemma0_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r st.\n          ((forall s. p s /\\ ~q s ==> q (st s)) /\\ (forall s. q s ==> r s)) ==>\n           (forall s. p s /\\ ~r s ==> r (st s))")), t4))
 }
 
 ///|
@@ -89,7 +89,7 @@ pub fn ensures_lemma0() -> @kernel.Thm {
 ///|
 /// Unity/mk_ensures.ml:64
 fn step_7() -> Unit raise {
-  ignore(@tactics.set_goal(@list.List([]), @parser.parse_term("!(p:'a->bool) p' q q' h.\n     (!s. (p  UNLESS_STMT q)  h s)     ==>\n     (!s. (p' UNLESS_STMT q') h s)     ==>\n     (!s. p' s /\\ ~q' s ==> q' (h s))  ==>\n     (!s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s) ==>\n     (((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))")))
+  ignore(@tactics.set_goal(@list.List([]), @parser.parse_term("forall(p:'a->bool) p' q q' h.\n     (forall s. (p  UNLESS_STMT q)  h s)     ==>\n     (forall s. (p' UNLESS_STMT q') h s)     ==>\n     (forall s. p' s /\\ ~q' s ==> q' (h s))  ==>\n     (forall s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s) ==>\n     (((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))")))
 }
 
 ///|
@@ -98,7 +98,7 @@ fn step_8() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([]))
   let t5 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t7 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.unless_stmt(), @mk_state_logic.and_def(), @mk_state_logic.or_def()])), t5), t6)
-  ensures_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) p' q q' h.\n      (!s. (p  UNLESS_STMT q)  h s)     ==>\n      (!s. (p' UNLESS_STMT q') h s)     ==>\n      (!s. p' s /\\ ~q' s ==> q' (h s))  ==>\n      (!s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s\n               ==> ((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))")), t7))
+  ensures_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) p' q q' h.\n      (forall s. (p  UNLESS_STMT q)  h s)     ==>\n      (forall s. (p' UNLESS_STMT q') h s)     ==>\n      (forall s. p' s /\\ ~q' s ==> q' (h s))  ==>\n      (forall s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s\n               ==> ((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))")), t7))
 }
 
 ///|
@@ -117,7 +117,7 @@ fn step_9() -> Unit raise {
   let t9 = @tactics.repeat_tac(@tactics.strip_tac)
   let t8 = @equal.sym(@bool.spec_all(@theorems.disj_assoc()))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@bool.gen_all(@equal.sym(@bool.spec_all(@theorems.conj_assoc()))), t8, @class.not_clauses(), @class.de_morgan_thm()])), t9), @hol88.res_tac), t10)
-  ensures_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q r st.\n       (!s. p s /\\ ~q s ==> q (st s)) ==>\n         (!s. (p s \\/ r s) /\\ ~(q s \\/ r s) ==> q (st s) \\/ r (st s))")), t11))
+  ensures_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r st.\n       (forall s. p s /\\ ~q s ==> q (st s)) ==>\n         (forall s. (p s \\/ r s) /\\ ~(q s \\/ r s) ==> q (st s) \\/ r (st s))")), t11))
 }
 
 ///|
@@ -133,7 +133,7 @@ pub fn ensures_lemma2() -> @kernel.Thm {
 /// ENSURES_lemma3
 fn step_10() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([@mk_state_logic.and_compl_or_lemma()]))
-  ensures_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q r Pr. (p ENSURES (q \\/* r)) Pr ==>\n              (((p /\\* (Not q)) \\/* (p /\\* q)) ENSURES (q \\/* r)) Pr")), t12))
+  ensures_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r Pr. (p ENSURES (q \\/* r)) Pr ==>\n              (((p /\\* (Not q)) \\/* (p /\\* q)) ENSURES (q \\/* r)) Pr")), t12))
 }
 
 ///|
@@ -151,7 +151,7 @@ fn step_11() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([]))
   let t13 = @simp.rewrite_tac(@list.List([@mk_state_logic.or_def()]))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t14)
-  ensures_lemma4_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q r (st:'a->'a).\n         (!s. p s /\\ ~q s ==> q (st s)) ==>\n            (!s. (p \\/* r) s /\\ ~(q \\/* r) s ==> (q \\/* r) (st s))")), t15))
+  ensures_lemma4_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r (st:'a->'a).\n         (forall s. p s /\\ ~q s ==> q (st s)) ==>\n            (forall s. (p \\/* r) s /\\ ~(q \\/* r) s ==> (q \\/* r) (st s))")), t15))
 }
 
 ///|
@@ -170,12 +170,12 @@ fn step_12() -> Unit raise {
   let t20 = @parser.parse_term("r:'a->bool")
   let t21 = @parser.parse_term("q:'a->bool")
   let t22 = @bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t21, t20, t19]), ensures_lemma0())
-  let t18 = @kernel.assume_rule(@parser.parse_term("!s:'a. q s ==> r s"))
-  let t23 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. p s /\\ ~q s ==> q (h s)")), t18]))(t22)]))
+  let t18 = @kernel.assume_rule(@parser.parse_term("forall s:'a. q s ==> r s"))
+  let t23 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. p s /\\ ~q s ==> q (h s)")), t18]))(t22)]))
   let t17 = @simp.asm_rewrite_tac(@list.List([]))
   let t16 = @simp.rewrite_tac(@list.List([exist_transition()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t16), @tactics.strip_tac), @hol88.res_tac), t17), t23)
-  exist_transition_thm1_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm1", @parser.parse_term("!(p:'a->bool) q r Pr.\n     ((p EXIST_TRANSITION q) Pr /\\ (!s. (q s) ==> (r s))) ==>\n       ((p EXIST_TRANSITION r) Pr)"), t24))
+  exist_transition_thm1_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm1", @parser.parse_term("forall(p:'a->bool) q r Pr.\n     ((p EXIST_TRANSITION q) Pr /\\ (forall s. (q s) ==> (r s))) ==>\n       ((p EXIST_TRANSITION r) Pr)"), t24))
 }
 
 ///|
@@ -192,14 +192,14 @@ pub fn exist_transition_thm1() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t30 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t29 = @simp.rewrite_tac(@list.List([@mk_state_logic.not_def1()]))
-  let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("!s:'a. (Not (p:'a->bool)) s")), t29), t30)
+  let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("forall s:'a. (Not (p:'a->bool)) s")), t29), t30)
   let t28 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t27 = @simp.rewrite_tac(@list.List([@mk_state_logic.false_def()]))
-  let t32 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("!s:'a. ((p:'a->bool) s) /\\ ~(False s)\n                          ==> (False ((h:'a->'a) s))")), t27), t28), t31])
+  let t32 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("forall s:'a. ((p:'a->bool) s) /\\ ~(False s)\n                          ==> (False ((h:'a->'a) s))")), t27), t28), t31])
   let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @simp.rewrite_tac(@list.List([exist_transition(), @mk_state_logic.not_def1()]))
   let t33 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t25), @tactics.strip_tac), @hol88.res_tac), t26), t32)
-  exist_transition_thm2_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm2", @parser.parse_term("!(p:'a->bool) Pr.\n     ((p EXIST_TRANSITION False) Pr) ==> !s. (Not p) s"), t33))
+  exist_transition_thm2_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm2", @parser.parse_term("forall(p:'a->bool) Pr.\n     ((p EXIST_TRANSITION False) Pr) ==> forall s. (Not p) s"), t33))
 }
 
 ///|
@@ -216,7 +216,7 @@ pub fn exist_transition_thm2() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([exist_transition(), @mk_state_logic.false_def()]))
   let t35 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34)
-  exist_transition_thm3_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm3", @parser.parse_term("!(p:'a->bool) st Pr. (False EXIST_TRANSITION p) (CONS st Pr)"), t35))
+  exist_transition_thm3_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm3", @parser.parse_term("forall(p:'a->bool) st Pr. (False EXIST_TRANSITION p) (CONS st Pr)"), t35))
 }
 
 ///|
@@ -235,11 +235,11 @@ fn step_15() -> Unit raise {
   let t39 = @parser.parse_term("r:'a->bool")
   let t40 = @parser.parse_term("q:'a->bool")
   let t41 = @bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t40, t39, t38]), ensures_lemma4())
-  let t42 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)"))]))(t41)]))
+  let t42 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)"))]))(t41)]))
   let t37 = @simp.asm_rewrite_tac(@list.List([]))
   let t36 = @simp.rewrite_tac(@list.List([exist_transition()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t36), @tactics.strip_tac), @hol88.res_tac), t37), t42)
-  exist_transition_thm4_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm4", @parser.parse_term("!(p:'a->bool) q r Pr.\n         (p EXIST_TRANSITION q) Pr ==>\n            ((p \\/* r) EXIST_TRANSITION (q \\/* r)) Pr"), t43))
+  exist_transition_thm4_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm4", @parser.parse_term("forall(p:'a->bool) q r Pr.\n         (p EXIST_TRANSITION q) Pr ==>\n            ((p \\/* r) EXIST_TRANSITION (q \\/* r)) Pr"), t43))
 }
 
 ///|
@@ -255,7 +255,7 @@ pub fn exist_transition_thm4() -> @kernel.Thm {
 /// APPEND_lemma01
 fn step_16() -> Unit raise {
   let t44 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([@lists.append()])))
-  append_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(l:('a)list). (APPEND l []) = l")), t44))
+  append_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(l:('a)list). (APPEND l []) = l")), t44))
 }
 
 ///|
@@ -273,7 +273,7 @@ fn step_17() -> Unit raise {
   let t46 = @simp.asm_rewrite_tac(@list.List([]))
   let t45 = @simp.rewrite_tac(@list.List([exist_transition()]))
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t45), @tactics.strip_tac), t46)
-  exist_transition_thm5_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm5", @parser.parse_term("!(p:'a->bool) q st Pr.\n       (!s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (CONS st Pr)"), t47))
+  exist_transition_thm5_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm5", @parser.parse_term("forall(p:'a->bool) q st Pr.\n       (forall s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (CONS st Pr)"), t47))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn exist_transition_thm5() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t48 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t48)
-  append_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!st (l:('a)list).  (APPEND [st] l) = (CONS st l)")), t49))
+  append_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall st (l:('a)list).  (APPEND [st] l) = (CONS st l)")), t49))
 }
 
 ///|
@@ -309,7 +309,7 @@ fn step_19() -> Unit raise {
   let t51 = @tactics.repeat_tac(@tactics.strip_tac)
   let t50 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @lists.list_induct_tac), t50), t51), @hol88.res_tac), t52)
-  append_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!st (l1:('a)list) l2.\n       (APPEND (APPEND l1 [st]) l2) = (APPEND l1 (CONS st l2))")), t53))
+  append_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall st (l1:('a)list) l2.\n       (APPEND (APPEND l1 [st]) l2) = (APPEND l1 (CONS st l2))")), t53))
 }
 
 ///|
@@ -328,7 +328,7 @@ fn step_20() -> Unit raise {
   let t55 = @tactics.repeat_tac(@tactics.strip_tac)
   let t54 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t57 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @lists.list_induct_tac), t54), t55), @hol88.res_tac), t56)
-  append_lemma04_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!st (l1:('a)list) l2.\n       (APPEND (CONS st l1) l2) = (CONS st (APPEND l1 l2))")), t57))
+  append_lemma04_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall st (l1:('a)list) l2.\n       (APPEND (CONS st l1) l2) = (CONS st (APPEND l1 l2))")), t57))
 }
 
 ///|
@@ -347,7 +347,7 @@ fn step_21() -> Unit raise {
   let t59 = @tactics.repeat_tac(@tactics.strip_tac)
   let t58 = @simp.rewrite_tac(@list.List([exist_transition(), @lists.append()]))
   let t61 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), @lists.list_induct_tac), t58), t59), @hol88.res_tac), t60)
-  exist_transition_thm6_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm6", @parser.parse_term("!(p:'a->bool) q st Pr1 Pr2.\n       (!s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (APPEND Pr1 (CONS st Pr2))"), t61))
+  exist_transition_thm6_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm6", @parser.parse_term("forall(p:'a->bool) q st Pr1 Pr2.\n       (forall s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (APPEND Pr1 (CONS st Pr2))"), t61))
 }
 
 ///|
@@ -366,7 +366,7 @@ fn step_22() -> Unit raise {
   let t63 = @tactics.repeat_tac(@tactics.strip_tac)
   let t62 = @simp.rewrite_tac(@list.List([exist_transition(), @lists.append()]))
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), @lists.list_induct_tac), t62), t63), @hol88.res_tac), t64)
-  exist_transition_thm7_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm7", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t65))
+  exist_transition_thm7_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm7", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t65))
 }
 
 ///|
@@ -381,7 +381,7 @@ pub fn exist_transition_thm7() -> @kernel.Thm {
 ///|
 /// EXIST_TRANSITION_thm8
 fn step_23() -> Unit raise {
-  let t73 = @kernel.assume_rule(@parser.parse_term("!GPr:('a->'a)list. (p EXIST_TRANSITION q) (APPEND GPr t)"))
+  let t73 = @kernel.assume_rule(@parser.parse_term("forall GPr:('a->'a)list. (p EXIST_TRANSITION q) (APPEND GPr t)"))
   let t74 = @bool.specl(@list.List([@parser.parse_term("(APPEND (t':('a->'a)list) [h])")]), t73)
   let t75 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([append_lemma03()]))(t74)]))
   let t69 = @parser.parse_term("t:('a->'a)list")
@@ -393,7 +393,7 @@ fn step_23() -> Unit raise {
   let t67 = @tactics.repeat_tac(@tactics.strip_tac)
   let t66 = @simp.rewrite_tac(@list.List([append_lemma01(), exist_transition(), @lists.append()]))
   let t77 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), @lists.list_induct_tac), t66), t67), @hol88.res_tac), t68), t76)
-  exist_transition_thm8_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm8", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND GPr FPr)"), t77))
+  exist_transition_thm8_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm8", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND GPr FPr)"), t77))
 }
 
 ///|
@@ -412,7 +412,7 @@ fn step_24() -> Unit raise {
   let t79 = @tactics.repeat_tac(@tactics.strip_tac)
   let t78 = @simp.rewrite_tac(@list.List([append_lemma01(), exist_transition(), @lists.append()]))
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t78), t79), @hol88.res_tac), t80)
-  exist_transition_thm9_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm9", @parser.parse_term("!(p:'a->bool) q st FPr GPr.\n     (p EXIST_TRANSITION q) (APPEND FPr GPr)\n              ==> (p EXIST_TRANSITION q) (APPEND FPr (CONS st GPr))"), t81))
+  exist_transition_thm9_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm9", @parser.parse_term("forall(p:'a->bool) q st FPr GPr.\n     (p EXIST_TRANSITION q) (APPEND FPr GPr)\n              ==> (p EXIST_TRANSITION q) (APPEND FPr (CONS st GPr))"), t81))
 }
 
 ///|
@@ -430,7 +430,7 @@ fn step_25() -> Unit raise {
   let t83 = @simp.asm_rewrite_tac(@list.List([]))
   let t82 = @simp.asm_rewrite_tac(@list.List([append_lemma01(), @lists.append(), exist_transition()]))
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t82), @tactics.strip_tac), t83)
-  exist_transition_thm10_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm10", @parser.parse_term("!(p:'a->bool) q st Pr.\n       (p EXIST_TRANSITION q) Pr ==> (p EXIST_TRANSITION q) (CONS st Pr)"), t84))
+  exist_transition_thm10_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm10", @parser.parse_term("forall(p:'a->bool) q st Pr.\n       (p EXIST_TRANSITION q) Pr ==> (p EXIST_TRANSITION q) (CONS st Pr)"), t84))
 }
 
 ///|
@@ -460,7 +460,7 @@ fn step_26() -> Unit raise {
   let t86 = @simp.asm_rewrite_tac(@list.List([append_lemma01(), @lists.append(), exist_transition()]))
   let t85 = @simp.asm_rewrite_tac(@list.List([append_lemma01(), @lists.append(), exist_transition()]))
   let t99 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t85), @tactics.eq_tac), @tactics.strip_tac), @hol88.res_tac), t86), t98)
-  exist_transition_thm11_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm11", @parser.parse_term("!(p:'a->bool) q st Pr.\n      (p EXIST_TRANSITION q) (APPEND [st] Pr) =\n      (p EXIST_TRANSITION q) (APPEND  Pr [st])"), t99))
+  exist_transition_thm11_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm11", @parser.parse_term("forall(p:'a->bool) q st Pr.\n      (p EXIST_TRANSITION q) (APPEND [st] Pr) =\n      (p EXIST_TRANSITION q) (APPEND  Pr [st])"), t99))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn step_27() -> Unit raise {
   let t101 = @tactics.repeat_tac(@tactics.strip_tac)
   let t100 = @simp.asm_rewrite_tac(@list.List([append_lemma01(), @lists.append(), exist_transition()]))
   let t113 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t100), t101), @hol88.res_tac), t102), t112)
-  exist_transition_thm12a_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12a", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND FPr GPr) ==>\n      (p EXIST_TRANSITION q) (APPEND GPr FPr)"), t113))
+  exist_transition_thm12a_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12a", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND FPr GPr) ==>\n      (p EXIST_TRANSITION q) (APPEND GPr FPr)"), t113))
 }
 
 ///|
@@ -518,7 +518,7 @@ fn step_28() -> Unit raise {
   let t115 = @tactics.repeat_tac(@tactics.strip_tac)
   let t114 = @simp.asm_rewrite_tac(@list.List([append_lemma01(), @lists.append(), exist_transition()]))
   let t127 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t114), t115), @hol88.res_tac), t116), t126)
-  exist_transition_thm12b_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12b", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) ==>\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t127))
+  exist_transition_thm12b_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12b", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) ==>\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t127))
 }
 
 ///|
@@ -537,7 +537,7 @@ fn step_29() -> Unit raise {
   let t130 = @simp.rewrite_tac(@list.List([@bool.undisch_all(@bool.spec_all(exist_transition_thm12a())), t129]))
   let t128 = @tactics.repeat_tac(@tactics.strip_tac)
   let t131 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t128), @hol88.res_tac), t130)
-  exist_transition_thm12_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) =\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t131))
+  exist_transition_thm12_c.set(@aux_definitions.prove_thm("EXIST_TRANSITION_thm12", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) =\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)"), t131))
 }
 
 ///|
@@ -554,7 +554,7 @@ pub fn exist_transition_thm12() -> @kernel.Thm {
 fn step_30() -> Unit raise {
   let t132 = @simp.rewrite_tac(@list.List([@mk_unless.unless(), exist_transition()]))
   let t133 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ensures()])), @tactics.strip_tac), t132)
-  ensures_thm0_c.set(@aux_definitions.prove_thm("ENSURES_thm0", @parser.parse_term("!(p:'a->bool) q. (p ENSURES q) [] = F"), t133))
+  ensures_thm0_c.set(@aux_definitions.prove_thm("ENSURES_thm0", @parser.parse_term("forall(p:'a->bool) q. (p ENSURES q) [] = F"), t133))
 }
 
 ///|
@@ -574,7 +574,7 @@ fn step_31() -> Unit raise {
   let t135 = @simp.rewrite_tac(@list.List([@mk_unless.unless_thm1(), @mk_unless.unless_stmt()]))
   let t134 = @simp.rewrite_tac(@list.List([@mk_unless.unless(), exist_transition()]))
   let t138 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ensures()])), @tactics.strip_tac), t134), t135), t136), t137)
-  ensures_thm1_c.set(@aux_definitions.prove_thm("ENSURES_thm1", @parser.parse_term("!(p:'a->bool) st Pr. (p ENSURES p) (CONS st Pr)"), t138))
+  ensures_thm1_c.set(@aux_definitions.prove_thm("ENSURES_thm1", @parser.parse_term("forall(p:'a->bool) st Pr. (p ENSURES p) (CONS st Pr)"), t138))
 }
 
 ///|
@@ -591,13 +591,13 @@ pub fn ensures_thm1() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   let t143 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.spec_all(exist_transition_thm1())))
   let t142 = @bool.spec(@parser.parse_term("((p:'a->bool) EXIST_TRANSITION q) Pr"), @hol88.and_intro_thm())
-  let t144 = @tactics.then_tac(@tactics.assume_tac(@bool.undisch_all(@bool.spec(@parser.parse_term("!s:'a. q s ==> r s"), t142))), t143)
+  let t144 = @tactics.then_tac(@tactics.assume_tac(@bool.undisch_all(@bool.spec(@parser.parse_term("forall s:'a. q s ==> r s"), t142))), t143)
   let t141 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.spec_all(@mk_unless.unless_thm3())))
   let t140 = @bool.spec(@parser.parse_term("((p:'a->bool) UNLESS q) Pr"), @hol88.and_intro_thm())
-  let t145 = @list.List([@tactics.then_tac(@tactics.assume_tac(@bool.undisch_all(@bool.spec(@parser.parse_term("!s:'a. q s ==> r s"), t140))), t141), t144])
+  let t145 = @list.List([@tactics.then_tac(@tactics.assume_tac(@bool.undisch_all(@bool.spec(@parser.parse_term("forall s:'a. q s ==> r s"), t140))), t141), t144])
   let t139 = @tactics.repeat_tac(@tactics.strip_tac)
   let t146 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([ensures()])), t139), t145)
-  ensures_thm2_c.set(@aux_definitions.prove_thm("ENSURES_thm2", @parser.parse_term("!(p:'a->bool) q r Pr.\n         ((p ENSURES q) Pr /\\ (!s:'a. (q s) ==> (r s)))\n        ==>\n\t ((p ENSURES r) Pr)"), t146))
+  ensures_thm2_c.set(@aux_definitions.prove_thm("ENSURES_thm2", @parser.parse_term("forall(p:'a->bool) q r Pr.\n         ((p ENSURES q) Pr /\\ (forall s:'a. (q s) ==> (r s)))\n        ==>\n\t ((p ENSURES r) Pr)"), t146))
 }
 
 ///|
@@ -614,11 +614,11 @@ pub fn ensures_thm2() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   let t150 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t149 = @simp.rewrite_tac(@list.List([@mk_state_logic.false_def(), @mk_state_logic.not_def1()]))
-  let t152 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("!s:'a. (p:'a->bool) s /\\ ~(False s) ==> False ((h:'a->'a) s)")), t149), t150), (x151 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(exist_transition_thm2(), x151)])
+  let t152 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("forall s:'a. (p:'a->bool) s /\\ ~(False s) ==> False ((h:'a->'a) s)")), t149), t150), (x151 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(exist_transition_thm2(), x151)])
   let t148 = @simp.asm_rewrite_tac(@list.List([]))
   let t147 = @simp.asm_rewrite_tac(@list.List([ensures(), @mk_unless.unless(), exist_transition()]))
   let t153 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t147), @tactics.strip_tac), t148), t152)
-  ensures_thm3_c.set(@aux_definitions.prove_thm("ENSURES_thm3", @parser.parse_term("!(p:'a->bool) Pr. ((p ENSURES False) Pr) ==> !s. (Not p)s"), t153))
+  ensures_thm3_c.set(@aux_definitions.prove_thm("ENSURES_thm3", @parser.parse_term("forall(p:'a->bool) Pr. ((p ENSURES False) Pr) ==> forall s. (Not p)s"), t153))
 }
 
 ///|
@@ -644,12 +644,12 @@ fn step_34() -> Unit raise {
   let t175 = @parser.parse_term("p':'a->bool")
   let t176 = @parser.parse_term("q:'a->bool")
   let t177 = @bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t176, t175, t174, t173]), @mk_unless.unless_stmt_thm3())
-  let t172 = @kernel.assume_rule(@parser.parse_term("!s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
-  let t184 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s")), t172]))(t177)]))
+  let t172 = @kernel.assume_rule(@parser.parse_term("forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
+  let t184 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s")), t172]))(t177)]))
   let t171 = @bool.spec_all(ensures_lemma1())
-  let t169 = @kernel.assume_rule(@parser.parse_term("!s:'a. (p':'a->bool) s /\\ ~(q' s) ==> q' ((h:'a->'a) s)"))
-  let t170 = @kernel.assume_rule(@parser.parse_term("!s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
-  let t185 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. ((p:'a->bool) UNLESS_STMT q) (h:'a->'a) s")), t170, t169]))(t171)]))
+  let t169 = @kernel.assume_rule(@parser.parse_term("forall s:'a. (p':'a->bool) s /\\ ~(q' s) ==> q' ((h:'a->'a) s)"))
+  let t170 = @kernel.assume_rule(@parser.parse_term("forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
+  let t185 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. ((p:'a->bool) UNLESS_STMT q) (h:'a->'a) s")), t170, t169]))(t171)]))
   let t164 = @parser.parse_term("t:('a->'a)list")
   let t165 = @parser.parse_term("q':'a->bool")
   let t166 = @parser.parse_term("p':'a->bool")
@@ -662,13 +662,13 @@ fn step_34() -> Unit raise {
   let t160 = @parser.parse_term("p':'a->bool")
   let t161 = @parser.parse_term("q:'a->bool")
   let t162 = @bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t161, t160, t159, t158]), @mk_unless.unless_stmt_thm3())
-  let t157 = @kernel.assume_rule(@parser.parse_term("!s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
-  let t187 = @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s")), t157]))(t162)])), t186, t185, t184, t183, t182])
+  let t157 = @kernel.assume_rule(@parser.parse_term("forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s"))
+  let t187 = @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s")), t157]))(t162)])), t186, t185, t184, t183, t182])
   let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t155 = @tactics.repeat_tac(@tactics.strip_tac)
   let t154 = @simp.rewrite_tac(@list.List([ensures(), @mk_unless.unless(), exist_transition()]))
   let t188 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t154), t155), t156), t187)
-  ensures_thm4_c.set(@aux_definitions.prove_thm("ENSURES_thm4", @parser.parse_term("!(p:'a->bool) q p' q' Pr.\n    (p UNLESS q) Pr /\\ (p' ENSURES q') Pr ==>\n      ((p /\\* p') ENSURES (((p /\\* q') \\/*  (p' /\\* q)) \\/*  (q /\\* q')))\n        Pr"), t188))
+  ensures_thm4_c.set(@aux_definitions.prove_thm("ENSURES_thm4", @parser.parse_term("forall(p:'a->bool) q p' q' Pr.\n    (p UNLESS q) Pr /\\ (p' ENSURES q') Pr ==>\n      ((p /\\* p') ENSURES (((p /\\* q') \\/*  (p' /\\* q)) \\/*  (q /\\* q')))\n        Pr"), t188))
 }
 
 ///|
@@ -690,14 +690,14 @@ fn step_35() -> Unit raise {
   let t195 = @parser.parse_term("r:'a->bool")
   let t196 = @parser.parse_term("q:'a->bool")
   let t197 = @bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t196, t195, t194]), ensures_lemma4())
-  let t204 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("!s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)"))]))(t197)]))
+  let t204 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("forall s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)"))]))(t197)]))
   let t205 = @tactics.then_tac((x193 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_unless.unless_cor23(), x193), @simp.asm_rewrite_tac(@list.List([])))
   let t206 = @list.List([@tactics.then_tac((x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_unless.unless_stmt_thm6(), x192), @simp.asm_rewrite_tac(@list.List([]))), t205, t204, t203, t202, t201])
   let t191 = @simp.asm_rewrite_tac(@list.List([]))
   let t190 = @tactics.repeat_tac(@tactics.strip_tac)
   let t189 = @simp.rewrite_tac(@list.List([ensures(), @mk_unless.unless(), exist_transition()]))
   let t207 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t189), t190), t191), t206)
-  ensures_thm5_c.set(@aux_definitions.prove_thm("ENSURES_thm5", @parser.parse_term("!(p:'a->bool) q r Pr.\n      ((p ENSURES q) Pr) ==> (((p \\/* r) ENSURES (q \\/* r)) Pr)"), t207))
+  ensures_thm5_c.set(@aux_definitions.prove_thm("ENSURES_thm5", @parser.parse_term("forall(p:'a->bool) q r Pr.\n      ((p ENSURES q) Pr) ==> (((p \\/* r) ENSURES (q \\/* r)) Pr)"), t207))
 }
 
 ///|
@@ -716,11 +716,11 @@ fn step_36() -> Unit raise {
   let t212 = @parser.parse_term("q:'a->bool")
   let t213 = @parser.parse_term("p:'a->bool")
   let t214 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t213, t212, t211]), ensures_thm2())))
-  let t209 = @parser.parse_term("!s:'a. p s ==> q s")
+  let t209 = @parser.parse_term("forall s:'a. p s ==> q s")
   let t210 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) ENSURES p)(CONS st Pr)"), t209]), @hol88.and_intro_thm())))
   let t208 = @tactics.assume_tac(@bool.spec_all(ensures_thm1()))
   let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t208), t210), t214)
-  ensures_cor1_c.set(@aux_definitions.prove_thm("ENSURES_cor1", @parser.parse_term("!(p:'a->bool) q st Pr.\n    (!s. p s ==> q s) ==> (p ENSURES q) (CONS st Pr)"), t215))
+  ensures_cor1_c.set(@aux_definitions.prove_thm("ENSURES_cor1", @parser.parse_term("forall(p:'a->bool) q st Pr.\n    (forall s. p s ==> q s) ==> (p ENSURES q) (CONS st Pr)"), t215))
 }
 
 ///|
@@ -737,7 +737,7 @@ pub fn ensures_cor1() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let t216 = @tactics.repeat_tac(@tactics.strip_tac)
   let t217 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ensures()])), t216)
-  ensures_cor2_c.set(@aux_definitions.prove_thm("ENSURES_cor2", @parser.parse_term("!(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p UNLESS q) Pr"), t217))
+  ensures_cor2_c.set(@aux_definitions.prove_thm("ENSURES_cor2", @parser.parse_term("forall(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p UNLESS q) Pr"), t217))
 }
 
 ///|
@@ -756,7 +756,7 @@ fn step_38() -> Unit raise {
   let t245 = @parser.parse_term("((q:'a->bool) \\/*  r)")
   let t246 = @parser.parse_term("(((p:'a->bool) /\\* r) \\/* (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))")
   let t247 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t246, t245, t244]), ensures_thm2())))
-  let t242 = @parser.parse_term("!s:'a. ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))s ==>\n\t (q \\/*  r)s")
+  let t242 = @parser.parse_term("forall s:'a. ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))s ==>\n\t (q \\/*  r)s")
   let t243 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) ENSURES\n      ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/*  r)))Pr"), t242]), @hol88.and_intro_thm())))
   let t239 = @parser.parse_term("r:'a->bool")
   let t240 = @parser.parse_term("q:'a->bool")
@@ -783,7 +783,7 @@ fn step_38() -> Unit raise {
   let t219 = @parser.parse_term("r:'a->bool")
   let t220 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) \\/*  q)"), t219, t218]), ensures_cor2())))
   let t248 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t220), t224), t226), t231), t232), t233), t234), t236), t237), t238), @tactics.disch_tac), t241), t243), t247)
-  ensures_cor3_c.set(@aux_definitions.prove_thm("ENSURES_cor3", @parser.parse_term("!(p:'a->bool) q r Pr.\n        ((p \\/*  q) ENSURES r)Pr ==> (p ENSURES (q \\/*  r))Pr"), t248))
+  ensures_cor3_c.set(@aux_definitions.prove_thm("ENSURES_cor3", @parser.parse_term("forall(p:'a->bool) q r Pr.\n        ((p \\/*  q) ENSURES r)Pr ==> (p ENSURES (q \\/*  r))Pr"), t248))
 }
 
 ///|
@@ -807,7 +807,7 @@ fn step_39() -> Unit raise {
   let t253 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) /\\* (Not  q))"), t252, t251, t250]), ensures_cor3())))
   let t249 = @tactics.assume_tac(@bool.undisch_all(@bool.spec_all(ensures_lemma3())))
   let t257 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t249), t253), t254), t255), t256)
-  ensures_cor4_c.set(@aux_definitions.prove_thm("ENSURES_cor4", @parser.parse_term("!(p:'a->bool) q r Pr. (p ENSURES (q \\/*  r)) Pr ==>\n              ((p /\\* (Not  q)) ENSURES (q \\/*  r)) Pr"), t257))
+  ensures_cor4_c.set(@aux_definitions.prove_thm("ENSURES_cor4", @parser.parse_term("forall(p:'a->bool) q r Pr. (p ENSURES (q \\/*  r)) Pr ==>\n              ((p /\\* (Not  q)) ENSURES (q \\/*  r)) Pr"), t257))
 }
 
 ///|
@@ -828,7 +828,7 @@ fn step_40() -> Unit raise {
   let t258 = @parser.parse_term("r:'a->bool")
   let t259 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("q:'a->bool"), t258]), @mk_state_logic.imply_weak_lemma_b()))
   let t263 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t259), t262), @hol88.res_tac)
-  ensures_cor5_c.set(@aux_definitions.prove_thm("ENSURES_cor5", @parser.parse_term("!(p:'a->bool) q r Pr.\n         (p ENSURES q) Pr ==> (p ENSURES (q \\/*  r)) Pr"), t263))
+  ensures_cor5_c.set(@aux_definitions.prove_thm("ENSURES_cor5", @parser.parse_term("forall(p:'a->bool) q r Pr.\n         (p ENSURES q) Pr ==> (p ENSURES (q \\/*  r)) Pr"), t263))
 }
 
 ///|
@@ -844,7 +844,7 @@ pub fn ensures_cor5() -> @kernel.Thm {
 /// ENSURES_cor6
 fn step_41() -> Unit raise {
   let t264 = @simp.rewrite_tac(@list.List([ensures(), @mk_unless.unless_cor7(), exist_transition_thm3()]))
-  ensures_cor6_c.set(@aux_definitions.prove_thm("ENSURES_cor6", @parser.parse_term("!(p:'a->bool) st Pr. (False ENSURES p) (CONS st Pr)"), t264))
+  ensures_cor6_c.set(@aux_definitions.prove_thm("ENSURES_cor6", @parser.parse_term("forall(p:'a->bool) st Pr. (False ENSURES p) (CONS st Pr)"), t264))
 }
 
 ///|
@@ -871,7 +871,7 @@ fn step_42() -> Unit raise {
   let t266 = @tactics.repeat_tac(@tactics.strip_tac)
   let t265 = @simp.rewrite_tac(@list.List([@mk_unless.stable()]))
   let t277 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t265), t266), (x276 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(t275, x276))
-  ensures_cor7_c.set(@aux_definitions.prove_thm("ENSURES_cor7", @parser.parse_term("!(p:'a->bool) q r Pr.\n        (p ENSURES q) Pr /\\ (r STABLE Pr)\n       ==>\n\t((p /\\* r) ENSURES (q /\\*\n r))Pr"), t277))
+  ensures_cor7_c.set(@aux_definitions.prove_thm("ENSURES_cor7", @parser.parse_term("forall(p:'a->bool) q r Pr.\n        (p ENSURES q) Pr /\\ (r STABLE Pr)\n       ==>\n\t((p /\\* r) ENSURES (q /\\*\n r))Pr"), t277))
 }
 
 ///|

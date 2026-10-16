@@ -106652,73 +106652,73 @@ test "100/desargues matches 100/desargues.ml" {
       #|100/desargues quotations (73):
       #|  CARD {u:real^3,v}
       #|  {u:real^3,v}
-      #|  !u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
+      #|  forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
       #|  ?x:real^3. ~(x = vec 0)
       #|  x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
       #|  x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-      #|  ((!x. P(dest_dir x)) <=> (!x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-      #|  (!x. x || x) /\\\n   (!x y. x || y <=> y || x) /\\\n   (!x y z. x || y /\\ y || z ==> x || z)
-      #|  !x y. ((||) x = (||) y) <=> x || y
+      #|  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
+      #|  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
+      #|  forall x y. ((||) x = (||) y) <=> x || y
       #|  p':real^3
       #|  p:real^3
-      #|  !p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             !l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-      #|  !l l'. ?p. p _|_ l /\\ p _|_ l'
+      #|  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
+      #|  forall l l'. ?p. p _|_ l /\\ p _|_ l'
       #|  basis 3 :real^3
       #|  basis 2 : real^3
       #|  basis 1 :real^3
       #|  ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
       #|  orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-      #|  !l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
+      #|  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
       #|  a + b:real^3
-      #|  !x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-      #|  !l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
+      #|  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
+      #|  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
       #|  (||)
-      #|  !x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
+      #|  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
       #|  ?x:line. T
       #|  p on l <=> perpl (dest_point p) l
-      #|  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((!p. P (dest_point p)) <=> (!l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-      #|  !p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          !l'. p on l' /\\ p' on l' ==> (l' = l)
-      #|  !l l'. ?p. p on l /\\ p on l'
+      #|  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
+      #|  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
+      #|  forall l l'. ?p. p on l /\\ p on l'
       #|  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-      #|  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
+      #|  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
       #|  projl x = mk_line((||) (mk_dir x))
       #|  projp x = mk_point(projl x)
       #|  dest_dir d
       #|  ?d. l = mk_line((||) d)
-      #|  !l. ?x. ~(x = vec 0) /\\ l = projl x
-      #|  !p. ?x. ~(x = vec 0) /\\ p = projp x
+      #|  forall l. ?x. ~(x = vec 0) /\\ l = projl x
+      #|  forall p. ?x. ~(x = vec 0) /\\ p = projp x
       #|  homop p = homol(dest_point p)
       #|  p = mk_point l <=> dest_point p = l
-      #|  !p. ~(homop p = vec 0) /\\ p = projp(homop p)
+      #|  forall p. ~(homop p = vec 0) /\\ p = projp(homop p)
       #|  parallel x y <=> x cross y = vec 0
-      #|  !p l. p on l <=> orthogonal (homop p) (homol l)
+      #|  forall p l. p on l <=> orthogonal (homop p) (homol l)
       #|  mk_line((||) l) = mk_line((||) l') <=> (||) l = (||) l'
-      #|  !l l'. l = l' <=> parallel (homol l) (homol l')
-      #|  !p p'. p = p' <=> parallel (homop p) (homop p')
+      #|  forall l l'. l = l' <=> parallel (homol l) (homol l')
+      #|  forall p p'. p = p' <=> parallel (homop p) (homop p')
       #|  dest_line(mk_line((||) l)) = (||) l
       #|  dest_line
       #|  projl x
       #|  x:real^3 = vec 0
-      #|  !x. parallel x (homol(projl x))
-      #|  !x. parallel x (homop(projp x))
+      #|  forall x. parallel x (homol(projl x))
+      #|  forall x. parallel x (homop(projp x))
       #|  c = &0
       #|  c:real
       #|  x:real^3 = vec 0
-      #|  !x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
+      #|  forall x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
       #|  bracket[a;b;c] = det(vector[homop a;homop b;homop c])
-      #|  COLLINEAR s <=> ?l. !p. p IN s ==> p on l
-      #|  !a. COLLINEAR {a}
+      #|  COLLINEAR s <=> ?l. forall p. p IN s ==> p on l
+      #|  forall a. COLLINEAR {a}
       #|  a:point = b
-      #|  !a b. COLLINEAR{a,b}
-      #|  !a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
-      #|  !a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
+      #|  forall a b. COLLINEAR{a,b}
+      #|  forall a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
+      #|  forall a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
       #|  homop p1 cross homop p2
       #|  mk_line((||) (mk_dir(homop p1 cross homop p2)))
       #|  p1:point = p2
-      #|  !p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
+      #|  forall p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
       #|  bracket[x;y;z] = --bracket[x;z;y] /\\\n   bracket[x;y;z] = bracket[y;z;x] /\\\n   bracket[x;y;z] = bracket[z;x;y]
       #|  bracket[B;Q;S] * bracket[A';R;S] =\n              bracket[B;R;S] * bracket[A';Q;S]
-      #|  !b. (a ==> b) /\\ (b ==> c) ==> a ==> c
+      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
       #|  a = b /\\ x:real = y ==> a * x = b * y
       #|  (c ==> d ==> b ==> e) ==> ((a ==> b) /\\ c ==> a /\\ d ==> e)
       #|  (bracket[P;A';A] = &0\n     ==> bracket[P;A';R] * bracket[P;A;C] =\n         bracket[P;A';C] * bracket[P;A;R]) /\\\n    (bracket[P;B;B'] = &0\n     ==> bracket[P;B;Q] * bracket[P;B';C'] =\n         bracket[P;B;C'] * bracket[P;B';Q]) /\\\n    (bracket[P;C';C] = &0\n     ==> bracket[P;C';B] * bracket[P;C;A'] =\n         bracket[P;C';A'] * bracket[P;C;B]) /\\\n    (bracket[B;C;Q] = &0\n     ==> bracket[B;C;P] * bracket[B;Q;S] =\n         bracket[B;C;S] * bracket[B;Q;P]) /\\\n    (bracket[B';C';Q] = &0\n     ==> bracket[B';C';A'] * bracket[B';Q;P] =\n         bracket[B';C';P] * bracket[B';Q;A']) /\\\n    (bracket[A;R;C] = &0\n     ==> bracket[A;R;P] * bracket[A;C;B] =\n         bracket[A;R;B] * bracket[A;C;P]) /\\\n    (bracket[A';C';R] = &0\n     ==> bracket[A';C';P] * bracket[A';R;S] =\n         bracket[A';C';S] * bracket[A';R;P]) /\\\n    (bracket[B;S;A] = &0\n     ==> bracket[B;S;C] * bracket[B;A;R] =\n         bracket[B;S;R] * bracket[B;A;C]) /\\\n    (bracket[A';S;B'] = &0\n     ==> bracket[A';S;C'] * bracket[A';B';Q] =\n         bracket[A';S;Q] * bracket[A';B';C'])

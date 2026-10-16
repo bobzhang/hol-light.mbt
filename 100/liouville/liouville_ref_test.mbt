@@ -6060,12 +6060,12 @@ test "100/liouville matches 100/liouville.ml" {
       #|100/liouville quotations (135):
       #|  algebraic(x) <=> ?p. ALL integer p /\\ ~(poly p = poly []) /\\ poly p x = &0
       #|  transcendental(x) <=> ~(algebraic x)
-      #|  !x. integer x /\\ abs(x) < &1 ==> x = &0
+      #|  forall x. integer x /\\ abs(x) < &1 ==> x = &0
       #|  1 <= n <=> 0 < n
       #|  x * 1 <= a ==> x <= a
-      #|  !n. n <= FACT n
+      #|  forall n. n <= FACT n
       #|  n <= x ==> 1 * x < y ==> SUC n <= y
-      #|  !a. 1 < a ==> !n. n <= a EXP n
+      #|  forall a. 1 < a ==> forall n. n <= a EXP n
       #|  d * abs(f'(z:real))
       #|  x:real
       #|  a:real
@@ -6077,26 +6077,26 @@ test "100/liouville matches 100/liouville.ml" {
       #|  f:real->real
       #|  x = a \\/ x < a \\/ a < x
       #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  !f f' a d M.\n        &0 < M /\\ &0 < d /\\\n        (!x. abs(x - a) <= d ==> (f diffl f'(x)) x /\\ abs(f' x) < M)\n        ==> !x. abs(x - a) <= d ==> abs(f x - f a) < M * d
+      #|  forall f f' a d M.\n        &0 < M /\\ &0 < d /\\\n        (forall x. abs(x - a) <= d ==> (f diffl f'(x)) x /\\ abs(f' x) < M)\n        ==> forall x. abs(x - a) <= d ==> abs(f x - f a) < M * d
       #|  (q * qp) * (h + pq * pol) = q * h * qp + (q * pq) * (qp * pol)
       #|  q = 0
-      #|  !p q l. ALL integer l ==> integer(&q pow (LENGTH l) * poly l (&p / &q))
+      #|  forall p q l. ALL integer l ==> integer(&q pow (LENGTH l) * poly l (&p / &q))
       #|  min d (abs(x - a))
-      #|  !a s. FINITE s\n         ==> ~(a IN s) ==> ?d. &0 < d /\\ !x. x IN s ==> d <= abs(x - a)
+      #|  forall a s. FINITE s\n         ==> ~(a IN s) ==> ?d. &0 < d /\\ forall x. x IN s ==> d <= abs(x - a)
       #|  {x | poly p x = &0} DELETE x
       #|  x:real
-      #|  !p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 !x'. &0 < abs(x' - x) /\\ abs(x' - x) < d\n                      ==> ~(poly p x' = &0)
+      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 forall x'. &0 < abs(x' - x) /\\ abs(x' - x) < d\n                      ==> ~(poly p x' = &0)
       #|  &0 < d ==> &0 < d / &2 /\\ (x <= d / &2 ==> x < d)
       #|  d / &2
       #|  d:real
-      #|  !p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 !x'. &0 < abs(x' - x) /\\ abs(x' - x) <= d\n                      ==> ~(poly p x' = &0)
+      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= d\n                      ==> ~(poly p x' = &0)
       #|  M:real
       #|  &1 + abs M
       #|  M:real
       #|  x + d
       #|  x - d
       #|  poly p
-      #|  !p d x. ?M. &0 < M /\\ !x'. abs(x' - x) <= d ==> abs(poly p x') < M
+      #|  forall p d x. ?M. &0 < M /\\ forall x'. abs(x' - x) <= d ==> abs(poly p x') < M
       #|  M:real
       #|  y:real
       #|  min d (inv M)
@@ -6107,7 +6107,7 @@ test "100/liouville matches 100/liouville.ml" {
       #|  d:real
       #|  x:real
       #|  p:real list
-      #|  !p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?c. &0 < c /\\\n                 (!x'. abs(x' - x) <= c\n                       ==> abs(poly(poly_diff p) x') < &1 / c) /\\\n                 (!x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c\n                       ==> ~(poly p x' = &0))
+      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?c. &0 < c /\\\n                 (forall x'. abs(x' - x) <= c\n                       ==> abs(poly(poly_diff p) x') < &1 / c) /\\\n                 (forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c\n                       ==> ~(poly p x' = &0))
       #|  &p / &q
       #|  ~(q = 0)
       #|  x <= d ==> d <= e ==> x <= e
@@ -6120,7 +6120,7 @@ test "100/liouville matches 100/liouville.ml" {
       #|  ~(q = 0)
       #|  abs(x - y) <= d ==> d <= e ==> abs(y - x) <= e
       #|  &p / &q
-      #|  !x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c ==> ~(poly l x' = &0)
+      #|  forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c ==> ~(poly l x' = &0)
       #|  &p / &q = x
       #|  q:num
       #|  p:num
@@ -6129,8 +6129,8 @@ test "100/liouville matches 100/liouville.ml" {
       #|  l:real list
       #|  LENGTH(l:real list)
       #|  l:real list
-      #|  !x. algebraic x\n       ==> ?n c. c > &0 /\\\n                 !p q. ~(q = 0) ==> &p / &q = x \\/\n                                    abs(x - &p / &q) > c / &q pow n
-      #|  !x. algebraic x /\\ ~rational x\n       ==> ?n c. c > &0 /\\ !p q. ~(q = 0) ==> abs(x - &p / &q) > c / &q pow n
+      #|  forall x. algebraic x\n       ==> ?n c. c > &0 /\\\n                 forall p q. ~(q = 0) ==> &p / &q = x \\/\n                                    abs(x - &p / &q) > c / &q pow n
+      #|  forall x. algebraic x /\\ ~rational x\n       ==> ?n c. c > &0 /\\ forall p q. ~(q = 0) ==> abs(x - &p / &q) > c / &q pow n
       #|  liouville = suminf (\\n. &1 / &10 pow (FACT n))
       #|  1 * x <= SUC n * x /\\ ~(n * x = 0) ==> 1 <= SUC n * x - x
       #|  &10 pow 1
@@ -6138,10 +6138,10 @@ test "100/liouville matches 100/liouville.ml" {
       #|  n + 1
       #|  n + SUC d = (n + 1) + d
       #|  y <= x ==> &1 * x + y <= &2 * x
-      #|  !d n. ~(n = 0)\n         ==> sum(n..n+d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
+      #|  forall d n. ~(n = 0)\n         ==> sum(n..n+d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
       #|  ~(d = 0) ==> (n + d) - 1 = n + (d - 1)
       #|  d = 0
-      #|  !n d. ~(n = 0)\n         ==> sum(n,d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
+      #|  forall n d. ~(n = 0)\n         ==> sum(n,d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
       #|  10 EXP m
       #|  m:num
       #|  inv(e) <= &N
@@ -6160,16 +6160,16 @@ test "100/liouville matches 100/liouville.ml" {
       #|  n:num
       #|  \\n:num. sum(0,n) (\\k. &1 / &10 pow FACT k)
       #|  \\j:num. sum(0,n) (\\k. &1 / &10 pow FACT k)
-      #|  !n. sum(0,n) (\\k. &1 / &10 pow FACT k) <= liouville
+      #|  forall n. sum(0,n) (\\k. &1 / &10 pow FACT k) <= liouville
       #|  &0 < e ==> x + e <= y ==> x < y
       #|  SUC n
-      #|  !n. sum(0,n) (\\k. &1 / &10 pow FACT k) < liouville
+      #|  forall n. sum(0,n) (\\k. &1 / &10 pow FACT k) < liouville
       #|  d:num
       #|  m:num
       #|  n:num
       #|  \\j:num. sum (0,n) (\\k. &1 / &10 pow FACT k) + &2 / &10 pow FACT n
       #|  \\n. sum(0,n) (\\k. &1 / &10 pow FACT k)
-      #|  !n. ~(n = 0)\n       ==> liouville\n             <= sum(0,n) (\\k. &1 / &10 pow FACT k) + &2 / &10 pow (FACT n)
+      #|  forall n. ~(n = 0)\n       ==> liouville\n             <= sum(0,n) (\\k. &1 / &10 pow FACT k) + &2 / &10 pow (FACT n)
       #|  1 <= x <=> 0 < x
       #|  k = k * 1
       #|  k + f * m <= SUC(m + k) * f <=> k <= (k + 1) * f

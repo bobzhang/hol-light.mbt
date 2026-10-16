@@ -10292,10 +10292,10 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|0..0..1..2..3..8..17..26..43..60..77..94..111..128..157..186..215..268..321..374..467..560..653..754..855..956..1121..1286..1451..solved at 1491
       #|0..0..1..2..3..6..15..24..39..solved at 49
       #|Logic/prolog quotations (257):
-      #|  M satisfies (IMAGE f s) <=>\n   !x v. valuation(M) v /\\ x IN s ==> holds M v (f x)
+      #|  M satisfies (IMAGE f s) <=>\n   forall x v. valuation(M) v /\\ x IN s ==> holds M v (f x)
       #|  definite(cl) <=> clause(cl) /\\ (CARD {p | p IN cl /\\ positive p} = 1)
       #|  horn(cl) <=> clause(cl) /\\ CARD {p | p IN cl /\\ positive p} <= 1
-      #|  !cl. definite(cl) ==> horn(cl)
+      #|  forall cl. definite(cl) ==> horn(cl)
       #|  falsify ff cl = if definite(cl) then cl else ff INSERT cl
       #|  FINITE(cl) ==> FINITE(falsify ff cl)
       #|  x <= 1 /\\ ~(x = 1) ==> (x = 0)
@@ -10339,19 +10339,19 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  v:num->A
       #|  cl:form->bool
       #|  (Dom M):A->bool = {}
-      #|  (!c. c IN s ==> clause c) /\\\n   ~((Atom ff []) IN UNIONS s) /\\ ~(Not(Atom ff []) IN UNIONS s)\n   ==> (~(satisfiable (U:A->bool) (IMAGE interp s)) <=>\n        !M. ~(Dom M = {}) /\\\n            M satisfies (IMAGE interp (IMAGE (falsify (Atom ff [])) s))\n            ==> !v:num->A. valuation(M) v ==> holds M v (Atom ff []))
-      #|  minmodel s =\n     herbase(functions s),\n     Fn,\n     (\\p zs. !H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\\n                 H satisfies s\n                 ==> Pred(H) p zs)
+      #|  (forall c. c IN s ==> clause c) /\\\n   ~((Atom ff []) IN UNIONS s) /\\ ~(Not(Atom ff []) IN UNIONS s)\n   ==> (~(satisfiable (U:A->bool) (IMAGE interp s)) <=>\n        forall M. ~(Dom M = {}) /\\\n            M satisfies (IMAGE interp (IMAGE (falsify (Atom ff [])) s))\n            ==> forall v:num->A. valuation(M) v ==> holds M v (Atom ff []))
+      #|  minmodel s =\n     herbase(functions s),\n     Fn,\n     (\\p zs. forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\\n                 H satisfies s\n                 ==> Pred(H) p zs)
       #|  v:num->term
       #|  v:num->term
       #|  t:term
       #|  v:num->term
-      #|  termval\n    (herbase (functions s),\n     Fn,\n     (\\p zs.\n          !H. (Dom H = herbase (functions s)) /\\ (Fun H = Fn) /\\ H satisfies s\n              ==> Pred H p zs)) =\n    termval H
+      #|  termval\n    (herbase (functions s),\n     Fn,\n     (\\p zs.\n          forall H. (Dom H = herbase (functions s)) /\\ (Fun H = Fn) /\\ H satisfies s\n              ==> Pred H p zs)) =\n    termval H
       #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
       #|  H:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
       #|  args:term list
       #|  p:num
-      #|  !p v s.\n        atom p\n        ==> (holds (minmodel s) v p <=>\n             !H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\ H satisfies s\n                 ==> holds H v p)
-      #|  !M v asm c.\n        holds M v (ITLIST (-->) asm c) <=>\n        (?p. MEM p asm /\\ ~(holds M v p)) \\/ holds M v c
+      #|  forall p v s.\n        atom p\n        ==> (holds (minmodel s) v p <=>\n             forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\ H satisfies s\n                 ==> holds H v p)
+      #|  forall M v asm c.\n        holds M v (ITLIST (-->) asm c) <=>\n        (?p. MEM p asm /\\ ~(holds M v p)) \\/ holds M v c
       #|  breakhorn(cl) =\n        if definite cl then\n          let p = @p. p IN cl /\\ positive p in\n          MAP (~~) (list_of_set(cl DELETE p)),p\n        else MAP (~~) (list_of_set cl),False
       #|  hypotheses cl = FST(breakhorn cl)
       #|  conclusion cl = SND(breakhorn cl)
@@ -10360,7 +10360,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  literal (Not q)
       #|  q:form
       #|  r:form
-      #|  !q. q IN (cl DELETE p) ==> literal q /\\ ~(positive q)
+      #|  forall q. q IN (cl DELETE p) ==> literal q /\\ ~(positive q)
       #|  ALL (\\p. literal p /\\ negative p)\n                      (list_of_set(cl DELETE p))
       #|  p:form
       #|  ~({p | p IN cl /\\ positive p} = {})
@@ -10377,12 +10377,12 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  {p | p IN cl /\\ positive p} = {}
       #|  ALL (\\p. literal p /\\ negative p) (list_of_set cl)
       #|  x <= 1 ==> (x = 0) \\/ (x = 1)
-      #|  !cl. horn(cl)\n        ==> ALL atom (hypotheses cl) /\\\n            (if definite(cl) then atom(conclusion cl)\n             else (conclusion cl = False)) /\\\n            !M (v:num->A).\n                holds M v (interp cl) <=>\n                holds M v (ITLIST (-->) (hypotheses cl) (conclusion cl))
+      #|  forall cl. horn(cl)\n        ==> ALL atom (hypotheses cl) /\\\n            (if definite(cl) then atom(conclusion cl)\n             else (conclusion cl = False)) /\\\n            forall M (v:num->A).\n                holds M v (interp cl) <=>\n                holds M v (ITLIST (-->) (hypotheses cl) (conclusion cl))
       #|  valuation (minmodel (IMAGE interp s)) v
       #|  holds H (v:num->term) (ITLIST (-->) asm c)
       #|  H:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
       #|  holds (minmodel (IMAGE interp s)) v
-      #|  ALL (\\c. !H. (Dom H = herbase (functions (IMAGE interp s))) /\\\n                 (Fun H = Fn) /\\\n                 H satisfies IMAGE interp s\n                 ==> holds H v c) asm
+      #|  ALL (\\c. forall H. (Dom H = herbase (functions (IMAGE interp s))) /\\\n                 (Fun H = Fn) /\\\n                 H satisfies IMAGE interp s\n                 ==> holds H v c) asm
       #|  ~(a /\\ ~b) <=> a ==> b
       #|  a \\/ b <=> ~a ==> b
       #|  v:num->term
@@ -10393,19 +10393,19 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  horn cl
       #|  definite cl
       #|  cl:form->bool
-      #|  (!cl. cl IN s ==> definite(cl))\n   ==> minmodel(IMAGE interp s) satisfies (IMAGE interp s)
+      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> minmodel(IMAGE interp s) satisfies (IMAGE interp s)
       #|  cl:form->bool
       #|  CARD {p, (q:form)}
       #|  2 <= a ==> ~(a = 1)
       #|  a ==> b <=> ~b ==> ~a
       #|  definite cl
       #|  q:form
-      #|  !cl p. definite cl /\\ p IN cl /\\ positive p\n          ==> (conclusion cl = p)
+      #|  forall cl p. definite cl /\\ p IN cl /\\ positive p\n          ==> (conclusion cl = p)
       #|  {p | p IN cl /\\ positive p} = {p}
-      #|  !cl p. clause cl /\\ p IN cl /\\ positive p /\\\n          (!q. q IN cl /\\ ~(q = p) ==> negative q)\n          ==> (conclusion cl = p)
-      #|  !cl. definite cl\n        ==> (set_of_list(hypotheses cl) =\n             IMAGE (~~) (cl DELETE (conclusion cl)))
-      #|  !cl i ns. cl IN s /\\\n               (!x. i(x) IN herbase(functions(IMAGE interp s))) /\\\n               ALL2 (gbackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> gbackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
-      #|  !l1 l2. ALL2 (\\n. P) l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\ ALL P l2
+      #|  forall cl p. clause cl /\\ p IN cl /\\ positive p /\\\n          (forall q. q IN cl /\\ ~(q = p) ==> negative q)\n          ==> (conclusion cl = p)
+      #|  forall cl. definite cl\n        ==> (set_of_list(hypotheses cl) =\n             IMAGE (~~) (cl DELETE (conclusion cl)))
+      #|  forall cl i ns. cl IN s /\\\n               (forall x. i(x) IN herbase(functions(IMAGE interp s))) /\\\n               ALL2 (gbackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> gbackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
+      #|  forall l1 l2. ALL2 (\\n. P) l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\ ALL P l2
       #|  interpretation (functions(IMAGE interp s),predicates(IMAGE interp s))\n                   (minmodel (IMAGE interp s))
       #|  t:term
       #|  (i:num->term) x
@@ -10420,7 +10420,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  ns:num list
       #|  i:num->term
       #|  cl:form->bool
-      #|  (!cl. cl IN s ==> definite(cl)) /\\ valuation (minmodel (IMAGE interp s)) v\n   ==> !n p. gbackchain s n p ==> holds (minmodel(IMAGE interp s)) v p
+      #|  (forall cl. cl IN s ==> definite(cl)) /\\ valuation (minmodel (IMAGE interp s)) v\n   ==> forall n p. gbackchain s n p ==> holds (minmodel(IMAGE interp s)) v p
       #|  ITLIST (+) ns 1
       #|  ns:num list
       #|  CONS (n:num) ns
@@ -10430,7 +10430,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  l:form list
       #|  hypotheses cl
       #|  ?ns. ALL2 (gbackchain s) ns (MAP (formsubst v) (hypotheses cl))
-      #|  !b. (a ==> b) /\\ (b ==> c) ==> a ==> c
+      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
       #|  ALL atom (hypotheses cl)
       #|  ALL (holds gbmod v) (hypotheses cl) <=>\n    ALL (\\p. ?n. gbackchain s n (formsubst v p)) (hypotheses cl)
       #|  holds gbmod v (conclusion cl) <=>\n    ?n. gbackchain s n (formsubst v (conclusion cl))
@@ -10439,7 +10439,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  t:term
       #|  t:term
       #|  t:term
-      #|  !p. atom p ==> (holds gbmod v p <=>\n                    ?n. gbackchain s n (formsubst v p))
+      #|  forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. gbackchain s n (formsubst v p))
       #|  gbmod = herbase (functions (IMAGE interp s)),\n                      Fn,\n                      (\\p tms. ?n. gbackchain s n (Atom p tms))
       #|  ~(a /\\ ~b) <=> a ==> b
       #|  a \\/ b <=> ~a ==> b
@@ -10457,7 +10457,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  P:num
       #|  herbase(functions(IMAGE interp s)),Fn,\n    (\\p tms. ?n. gbackchain s n (Atom p tms))
       #|  v:num->term
-      #|  (!cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\ (FV p = {}) /\\ (!v. holds (minmodel (IMAGE interp s)) v p)\n   ==> ?n. gbackchain s n p
+      #|  (forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\ (FV p = {}) /\\ (forall v. holds (minmodel (IMAGE interp s)) v p)\n   ==> ?n. gbackchain s n p
       #|  p:form
       #|  p:form
       #|  ?n. gbackchain s n p
@@ -10465,24 +10465,24 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  functions(IMAGE interp s),predicates summat
       #|  w:num->term
       #|  ?w. valuation (minmodel (IMAGE interp s)) w
-      #|  !s p. (!cl. cl IN s ==> definite cl) /\\ atom p /\\ (FV p = {})\n         ==> !v. holds (minmodel (IMAGE interp s)) v p <=> ?n. gbackchain s n p
-      #|  iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. !C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (!v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)
+      #|  forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p /\\ (FV p = {})\n         ==> forall v. holds (minmodel (IMAGE interp s)) v p <=> ?n. gbackchain s n p
+      #|  iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. forall C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)
       #|  w:num->term
       #|  w:num->term
       #|  t:term
       #|  w:num->term
-      #|  termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          !C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (!v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C
+      #|  termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          forall C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C
       #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
       #|  C:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
       #|  args:term list
       #|  p:num
-      #|  !p v s.\n      atom p\n      ==> (holds (iminmodel s) v p <=>\n           !C. (Dom(C) = terms(functions s)) /\\\n               (Fun(C) = Fn) /\\\n               (!v q. q IN s /\\ valuation C v ==> holds C v q)\n               ==> holds C v p)
+      #|  forall p v s.\n      atom p\n      ==> (holds (iminmodel s) v p <=>\n           forall C. (Dom(C) = terms(functions s)) /\\\n               (Fun(C) = Fn) /\\\n               (forall v q. q IN s /\\ valuation C v ==> holds C v q)\n               ==> holds C v p)
       #|  holds C (v:num->term) (ITLIST (-->) asm c)
       #|  C:(term->bool)#((num->((term)list->term))#(num->((term)list->bool)))
       #|  atom p
       #|  p:form
       #|  holds (iminmodel (IMAGE interp s)) v
-      #|  ALL (\\c. !C. (Dom C = terms (functions (IMAGE interp s))) /\\\n                 (Fun C = Fn) /\\\n                 (!v p. p IN (IMAGE interp s) /\\ valuation C v ==> holds C v p)\n                 ==> holds C v c) asm
+      #|  ALL (\\c. forall C. (Dom C = terms (functions (IMAGE interp s))) /\\\n                 (Fun C = Fn) /\\\n                 (forall v p. p IN (IMAGE interp s) /\\ valuation C v ==> holds C v p)\n                 ==> holds C v c) asm
       #|  ~(a /\\ ~b) <=> a ==> b
       #|  a \\/ b <=> ~a ==> b
       #|  v:num->term
@@ -10493,10 +10493,10 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  horn cl
       #|  definite cl
       #|  cl:form->bool
-      #|  (!cl. cl IN s ==> definite(cl))\n   ==> !v p. p IN s /\\ (!x. v(x) IN terms(functions(IMAGE interp s)))\n             ==> holds (iminmodel(IMAGE interp s)) v (interp p)
-      #|  !s. interpretation(language s) (iminmodel s)
-      #|  !cl i ns. cl IN s /\\ (!x. i(x) IN terms(functions(IMAGE interp s))) /\\\n               ALL2 (ibackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> ibackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
-      #|  ALL\n       (\\p. (!x. v x IN terms (functions (IMAGE interp s)))\n            ==> holds (iminmodel (IMAGE interp s)) v p)\n       (MAP (formsubst i) (hypotheses cl))
+      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> forall v p. p IN s /\\ (forall x. v(x) IN terms(functions(IMAGE interp s)))\n             ==> holds (iminmodel(IMAGE interp s)) v (interp p)
+      #|  forall s. interpretation(language s) (iminmodel s)
+      #|  forall cl i ns. cl IN s /\\ (forall x. i(x) IN terms(functions(IMAGE interp s))) /\\\n               ALL2 (ibackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> ibackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))
+      #|  ALL\n       (\\p. (forall x. v x IN terms (functions (IMAGE interp s)))\n            ==> holds (iminmodel (IMAGE interp s)) v p)\n       (MAP (formsubst i) (hypotheses cl))
       #|  i(x:num) IN terms(FST(language(IMAGE interp s)))
       #|  IMAGE interp s
       #|  {}:(num#num)->bool
@@ -10511,7 +10511,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  ns:num list
       #|  i:num->term
       #|  cl:form->bool
-      #|  (!cl. cl IN s ==> definite(cl))\n   ==> !v n p. ibackchain s n p /\\\n               (!x. v(x) IN terms(functions(IMAGE interp s)))\n               ==> holds (iminmodel(IMAGE interp s)) v p
+      #|  (forall cl. cl IN s ==> definite(cl))\n   ==> forall v n p. ibackchain s n p /\\\n               (forall x. v(x) IN terms(functions(IMAGE interp s)))\n               ==> holds (iminmodel(IMAGE interp s)) v p
       #|  valuation gbmod (v:num->term)
       #|  ITLIST (+) ns 1
       #|  ns:num list
@@ -10522,7 +10522,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  l:form list
       #|  hypotheses cl
       #|  ?ns. ALL2 (ibackchain s) ns (MAP (formsubst v) (hypotheses cl))
-      #|  !b. (a ==> b) /\\ (b ==> c) ==> a ==> c
+      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
       #|  ALL atom (hypotheses cl)
       #|  ALL (holds gbmod v) (hypotheses cl) <=>\n    ALL (\\p. ?n. ibackchain s n (formsubst v p)) (hypotheses cl)
       #|  holds gbmod v (conclusion cl) <=>\n    ?n. ibackchain s n (formsubst v (conclusion cl))
@@ -10531,7 +10531,7 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  t:term
       #|  t:term
       #|  t:term
-      #|  !p. atom p ==> (holds gbmod v p <=>\n                    ?n. ibackchain s n (formsubst v p))
+      #|  forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. ibackchain s n (formsubst v p))
       #|  gbmod = terms (functions (IMAGE interp s)),\n                      Fn,\n                      (\\p tms. ?n. ibackchain s n (Atom p tms))
       #|  ~(a /\\ ~b) <=> a ==> b
       #|  a \\/ b <=> ~a ==> b
@@ -10547,8 +10547,8 @@ test "Logic/prolog matches Logic/prolog.ml" {
       #|  P:num
       #|  terms(functions(IMAGE interp s)),Fn,\n    (\\p tms. ?n. ibackchain s n (Atom p tms))
       #|  V
-      #|  (!cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\\n   (!v. (!x. v(x) IN terms(functions(IMAGE interp s)))\n        ==> holds (iminmodel (IMAGE interp s)) v p)\n   ==> ?n. ibackchain s n p
-      #|  !s p. (!cl. cl IN s ==> definite cl) /\\ atom p\n         ==> ((!v. (!x. v(x) IN terms(functions(IMAGE interp s)))\n                   ==> holds (iminmodel(IMAGE interp s)) v p) <=>\n              ?n. ibackchain s n p)
+      #|  (forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\\n   (forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n        ==> holds (iminmodel (IMAGE interp s)) v p)\n   ==> ?n. ibackchain s n p
+      #|  forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p\n         ==> ((forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n                   ==> holds (iminmodel(IMAGE interp s)) v p) <=>\n              ?n. ibackchain s n p)
       #|SATISFIES_IMAGE =  |- ((#=:fun(bool,fun(bool,bool)) ((#satisfies:fun(prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool)))),fun(fun(form,bool),bool)) M:prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool))))) ((#IMAGE:fun(fun('?241207,form),fun(fun('?241207,bool),fun(form,bool))) f:fun('?241207,form)) s:fun('?241207,bool)))) (#!:fun(fun('?241207,bool),bool) (\x:'?241207. (#!:fun(fun(fun(num,'?241180),bool),bool) (\v:fun(num,'?241180). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool)))),fun(fun(num,'?241180),bool)) M:prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool))))) v:fun(num,'?241180))) ((#IN:fun('?241207,fun(fun('?241207,bool),bool)) x:'?241207) s:fun('?241207,bool)))) (((#holds:fun(prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool)))),fun(fun(num,'?241180),fun(form,bool))) M:prod(fun('?241180,bool),prod(fun(num,fun(list('?241180),'?241180)),fun(num,fun(list('?241180),bool))))) v:fun(num,'?241180)) (f:fun('?241207,form) x:'?241207))))))))
       #|definite =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#definite:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun(form,bool),num) (#GSPEC:fun(fun(form,bool),fun(form,bool)) (\GEN%PVAR%652:form. (#?:fun(fun(form,bool),bool) (\p:form. (((#SETSPEC:fun(form,fun(bool,fun(form,bool))) GEN%PVAR%652:form) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#positive:fun(form,bool) p:form))) p:form))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|horn =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#=:fun(bool,fun(bool,bool)) (#horn:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool))) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(form,bool),num) (#GSPEC:fun(fun(form,bool),fun(form,bool)) (\GEN%PVAR%653:form. (#?:fun(fun(form,bool),bool) (\p:form. (((#SETSPEC:fun(form,fun(bool,fun(form,bool))) GEN%PVAR%653:form) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(form,fun(fun(form,bool),bool)) p:form) cl:fun(form,bool))) (#positive:fun(form,bool) p:form))) p:form))))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

@@ -4,11 +4,11 @@ Formal_ineqs/trig/cos_bounds_eval quotations (21302):
   m * b:real
   p1 - x * p2:real
   a - n:real
-  !c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r
+  forall c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r
   m * b:real
   p1 - x * p2:real
   a - n:real
-  !c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c
+  forall c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c
   poly_f
   (21291 more times)
 types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

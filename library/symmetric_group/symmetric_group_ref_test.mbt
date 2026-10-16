@@ -20723,21 +20723,21 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|0..0..solved at 2
       #|Library/symmetric_group quotations (292):
       #|  symmetric_group (s:A->bool) =\n    group({p:A->A | p permutes s}, I:(A->A), (inverse:(A->A)->A->A), (o))
-      #|  (!s:A->bool.\n     group_carrier(symmetric_group s) = {p | p permutes s}) /\\\n   (!s:A->bool. group_id(symmetric_group s) = I) /\\\n   (!s:A->bool. group_inv(symmetric_group s) = (inverse:(A->A)->A->A)) /\\\n   (!s:A->bool. group_mul(symmetric_group s) = (o))
-      #|  !s:A->bool. FINITE s ==> FINITE(group_carrier(symmetric_group s))
-      #|  !s:A->bool. FINITE s\n    ==> CARD(group_carrier(symmetric_group s)) = FACT(CARD s)
-      #|  !s (p:A->A) q. group_mul (symmetric_group s) p q = p o q
-      #|  !s (p:A->A). group_inv (symmetric_group s) p = inverse p
-      #|  !s:A->bool. group_id (symmetric_group s) = I
-      #|  !s a b:A. a IN s /\\ b IN s\n             ==> swap(a,b) IN group_carrier(symmetric_group s)
-      #|  !s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c IN\n                   group_carrier(symmetric_group s)
+      #|  (forall s:A->bool.\n     group_carrier(symmetric_group s) = {p | p permutes s}) /\\\n   (forall s:A->bool. group_id(symmetric_group s) = I) /\\\n   (forall s:A->bool. group_inv(symmetric_group s) = (inverse:(A->A)->A->A)) /\\\n   (forall s:A->bool. group_mul(symmetric_group s) = (o))
+      #|  forall s:A->bool. FINITE s ==> FINITE(group_carrier(symmetric_group s))
+      #|  forall s:A->bool. FINITE s\n    ==> CARD(group_carrier(symmetric_group s)) = FACT(CARD s)
+      #|  forall s (p:A->A) q. group_mul (symmetric_group s) p q = p o q
+      #|  forall s (p:A->A). group_inv (symmetric_group s) p = inverse p
+      #|  forall s:A->bool. group_id (symmetric_group s) = I
+      #|  forall s a b:A. a IN s /\\ b IN s\n             ==> swap(a,b) IN group_carrier(symmetric_group s)
+      #|  forall s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c IN\n                   group_carrier(symmetric_group s)
       #|  group_mul G (group_inv G a:A)
       #|  a:A
-      #|  !G:A group.\n        group_monomorphism (G,symmetric_group(group_carrier G))\n                           (\\a x. if x IN group_carrier G\n                                  then group_mul G a x else x)
+      #|  forall G:A group.\n        group_monomorphism (G,symmetric_group(group_carrier G))\n                           (\\a x. if x IN group_carrier G\n                                  then group_mul G a x else x)
       #|  \\(a:A) (x:A). if x IN group_carrier (G:A group)\n                      then group_mul G a x else x
       #|  group_image ((G:A group),\n                 symmetric_group(group_carrier (G:A group)))\n                (\\(a:A) (x:A). if x IN group_carrier G\n                                then group_mul G a x else x)
-      #|  !G:A group.\n        ?h. h subgroup_of symmetric_group(group_carrier G) /\\\n            subgroup_generated (symmetric_group(group_carrier G)) h\n            isomorphic_group G
-      #|  !s:A->bool. group_action (symmetric_group s) s (\\f x. (f:A->A) x)
+      #|  forall G:A group.\n        ?h. h subgroup_of symmetric_group(group_carrier G) /\\\n            subgroup_generated (symmetric_group(group_carrier G)) h\n            isomorphic_group G
+      #|  forall s:A->bool. group_action (symmetric_group s) s (\\f x. (f:A->A) x)
       #|  three_cycle a b (c:A) =\n    inverse(three_cycle d a c) o\n    (inverse(three_cycle c e b) o\n    (three_cycle d a c o three_cycle c e b))
       #|  three_cycle c e (b:A)
       #|  three_cycle d a (c:A)
@@ -20754,7 +20754,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  a:A
       #|  ~(s SUBSET {a,b,c:A})\n       ==> ?d. d IN s /\\ ~(d = a) /\\ ~(d = b) /\\ ~(d = c)
       #|  ?d:A. d IN s /\\ ~(d = a) /\\ ~(d = b) /\\ ~(d = c)
-      #|  !s:A->bool (H:(A->A) group) (n:(A->A)->bool).\n     5 <= CARD s /\\ FINITE s /\\\n     n normal_subgroup_of H /\\\n     abelian_group(quotient_group H n) /\\\n     group_mul H = (o) /\\ group_inv H = (inverse:(A->A)->A->A) /\\\n     (!a b c. a IN s /\\ b IN s /\\ c IN s /\\\n              ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n              ==> three_cycle a b c IN group_carrier H)\n     ==> (!a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                   ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n                   ==> three_cycle a b c IN n)
+      #|  forall s:A->bool (H:(A->A) group) (n:(A->A)->bool).\n     5 <= CARD s /\\ FINITE s /\\\n     n normal_subgroup_of H /\\\n     abelian_group(quotient_group H n) /\\\n     group_mul H = (o) /\\ group_inv H = (inverse:(A->A)->A->A) /\\\n     (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\\n              ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n              ==> three_cycle a b c IN group_carrier H)\n     ==> (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                   ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n                   ==> three_cycle a b c IN n)
       #|  z:A
       #|  y:A
       #|  x:A
@@ -20780,15 +20780,15 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  (c:num->(A->A)->bool) (SUC i) normal_subgroup_of\n         subgroup_generated (symmetric_group (s:A->bool)) (c i) /\\\n         abelian_group(quotient_group\n           (subgroup_generated (symmetric_group s) (c i)) (c(SUC i)))
       #|  i < (k:num)
       #|  i <= (k:num)
-      #|  !i. i <= k\n         ==> (c:num->(A->A)->bool) i subgroup_of symmetric_group (s:A->bool) /\\\n             (!a b c'. a IN s /\\ b IN s /\\ c' IN s /\\\n                       ~(a = b) /\\ ~(b = c') /\\ ~(a = c')\n                       ==> three_cycle a b c' IN c i)
+      #|  forall i. i <= k\n         ==> (c:num->(A->A)->bool) i subgroup_of symmetric_group (s:A->bool) /\\\n             (forall a b c'. a IN s /\\ b IN s /\\ c' IN s /\\\n                       ~(a = b) /\\ ~(b = c') /\\ ~(a = c')\n                       ==> three_cycle a b c' IN c i)
       #|  c:num->(A->A)->bool
       #|  k:num
-      #|  !s:A->bool. FINITE s /\\ 5 <= CARD s\n               ==> ~(solvable_group(symmetric_group s))
+      #|  forall s:A->bool. FINITE s /\\ 5 <= CARD s\n               ==> ~(solvable_group(symmetric_group s))
       #|  swap(x:A,y) = swap(a,x) o swap(a,y) o swap(a,x)
       #|  x:A = y
       #|  y:A = a
       #|  x:A = a
-      #|  !s (a:A) h.\n    a IN s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (!x. x IN s /\\ ~(x = a) ==> swap(a,x) IN h)\n    ==> (!x y. x IN s /\\ y IN s /\\ ~(x = y) ==> swap(x,y) IN h)
+      #|  forall s (a:A) h.\n    a IN s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (forall x. x IN s /\\ ~(x = a) ==> swap(a,x) IN h)\n    ==> (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> swap(x,y) IN h)
       #|  g:A->A
       #|  f:A->A
       #|  t:A->bool
@@ -20803,9 +20803,9 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  t:A->bool
       #|  s:A->bool
       #|  f:A->A
-      #|  !f:A->A. f IN h ==> f permutes s
+      #|  forall f:A->A. f IN h ==> f permutes s
       #|  group_carrier(subgroup_generated (symmetric_group s) (h:(A->A)->bool)) = h
-      #|  !s t (h:(A->A)->bool).\n    FINITE t /\\ t SUBSET s /\\\n    h subgroup_of symmetric_group s /\\\n    (!f. f IN h ==> IMAGE f t = t)\n    ==> group_homomorphism\n         (subgroup_generated (symmetric_group s) h,\n          symmetric_group t)\n         (\\f:A->A. \\x:A. if x IN t then f x else x)
+      #|  forall s t (h:(A->A)->bool).\n    FINITE t /\\ t SUBSET s /\\\n    h subgroup_of symmetric_group s /\\\n    (forall f. f IN h ==> IMAGE f t = t)\n    ==> group_homomorphism\n         (subgroup_generated (symmetric_group s) h,\n          symmetric_group t)\n         (\\f:A->A. \\x:A. if x IN t then f x else x)
       #|  (p:A->A) o (q:A->A) =\n         group_mul (symmetric_group (s:A->bool)) p q
       #|  t:A->bool
       #|  (p:A->A) IN group_carrier(symmetric_group (s:A->bool)) /\\\n                     (q:A->A) IN group_carrier(symmetric_group (s:A->bool))
@@ -20815,10 +20815,10 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  t:A->bool
       #|  (p:A->A) IN group_carrier(symmetric_group (s:A->bool))
       #|  p:A->A
-      #|  !s t (h:(A->A)->bool).\n    t SUBSET s /\\\n    h subgroup_of (symmetric_group s)\n    ==> (h INTER group_carrier(symmetric_group t)) subgroup_of\n        (symmetric_group t)
-      #|  !s (h:(A->A)->bool).\n    FINITE s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (!a b. a IN s /\\ b IN s /\\ ~(a = b) ==> swap(a,b) IN h)\n    ==> group_carrier(symmetric_group s) SUBSET h
-      #|  !s t (sigma:A->A) n.\n     group_pow (symmetric_group s) sigma n =\n     group_pow (symmetric_group t) sigma n
-      #|  !s (sigma:A->A) n a.\n     sigma permutes s /\\ a IN s\n     ==> group_pow (symmetric_group s) sigma n a IN s
+      #|  forall s t (h:(A->A)->bool).\n    t SUBSET s /\\\n    h subgroup_of (symmetric_group s)\n    ==> (h INTER group_carrier(symmetric_group t)) subgroup_of\n        (symmetric_group t)
+      #|  forall s (h:(A->A)->bool).\n    FINITE s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (forall a b. a IN s /\\ b IN s /\\ ~(a = b) ==> swap(a,b) IN h)\n    ==> group_carrier(symmetric_group s) SUBSET h
+      #|  forall s t (sigma:A->A) n.\n     group_pow (symmetric_group s) sigma n =\n     group_pow (symmetric_group t) sigma n
+      #|  forall s (sigma:A->A) n a.\n     sigma permutes s /\\ a IN s\n     ==> group_pow (symmetric_group s) sigma n a IN s
       #|  ~(p = 0) /\\ ~(p = 1) ==> ~(p <= p - 1)
       #|  sigma:A->A
       #|  symmetric_group(s DELETE (a:A))
@@ -20838,7 +20838,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  (sigma:A->A) IN\n    group_carrier(symmetric_group(s DELETE (a:A)))
       #|  s:A->bool
       #|  (sigma:A->A) permutes (s DELETE (a:A))
-      #|  !s (sigma:A->A) a.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s\n     ==> ~(sigma a = a)
+      #|  forall s (sigma:A->A) a.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s\n     ==> ~(sigma a = a)
       #|  d:num
       #|  CARD(s:A->bool)
       #|  gcd(CARD(s:A->bool), d) = 1
@@ -20846,7 +20846,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  d:num
       #|  sigma:A->A
       #|  symmetric_group(s:A->bool)
-      #|  !s (sigma:A->A) d.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     0 < d /\\ d < CARD s\n     ==> group_element_order (symmetric_group s)\n           (group_pow (symmetric_group s) sigma d) = CARD s
+      #|  forall s (sigma:A->A) d.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     0 < d /\\ d < CARD s\n     ==> group_element_order (symmetric_group s)\n           (group_pow (symmetric_group s) sigma d) = CARD s
       #|  a:A
       #|  group_pow (symmetric_group (s:A->bool)) (sigma:A->A) d
       #|  s:A->bool
@@ -20887,7 +20887,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  CARD {k:num | k < CARD(s:A->bool)}
       #|  x:A
       #|  IMAGE (\\k. group_pow (symmetric_group (s:A->bool)) (sigma:A->A) k a)\n           {k | k < CARD s} = s
-      #|  !s (sigma:A->A) a x.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s /\\ x IN s\n     ==> ?k. k < CARD s /\\\n             group_pow (symmetric_group s) sigma k a = x
+      #|  forall s (sigma:A->A) a x.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s /\\ x IN s\n     ==> ?k. k < CARD s /\\\n             group_pow (symmetric_group s) sigma k a = x
       #|  a:A
       #|  group_pow (symmetric_group (s:A->bool)) (sigma:A->A) (j - i) (a:A)
       #|  a:A
@@ -20903,7 +20903,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  sigma:A->A
       #|  symmetric_group(s:A->bool)
       #|  group_pow (symmetric_group (s:A->bool)) (sigma:A->A) k permutes s
-      #|  !s (sigma:A->A) a b h k.\n     FINITE s /\\\n     h subgroup_of symmetric_group s /\\\n     sigma permutes s /\\\n     sigma IN h /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s\n     ==> swap(group_pow (symmetric_group s) sigma k a,\n              group_pow (symmetric_group s) sigma k b) IN h
+      #|  forall s (sigma:A->A) a b h k.\n     FINITE s /\\\n     h subgroup_of symmetric_group s /\\\n     sigma permutes s /\\\n     sigma IN h /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s\n     ==> swap(group_pow (symmetric_group s) sigma k a,\n              group_pow (symmetric_group s) sigma k b) IN h
       #|  swap(a:A, (tau:A->A) x0) =\n    group_mul (symmetric_group (s:A->bool))\n      (swap(a,x0))\n      (group_mul (symmetric_group s) (swap(x0, tau x0)) (swap(a:A,x0)))
       #|  tau:A->A
       #|  symmetric_group(s:A->bool)
@@ -20945,7 +20945,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  group_pow (symmetric_group (s:A->bool)) (tau:A->A) (SUC k) a =\n     tau(group_pow (symmetric_group s) tau k a)
       #|  swap(a:A, group_pow (symmetric_group (s:A->bool)) (tau:A->A) k a) IN h
       #|  k = 0
-      #|  !k. 0 < k /\\ k < CARD(s:A->bool)\n         ==> swap(a:A, group_pow (symmetric_group s) (tau:A->A) k a) IN h
+      #|  forall k. 0 < k /\\ k < CARD(s:A->bool)\n         ==> swap(a:A, group_pow (symmetric_group s) (tau:A->A) k a) IN h
       #|  group_pow (symmetric_group (s:A->bool)) (tau:A->A) n a = c
       #|  group_pow (symmetric_group (s:A->bool)) (tau:A->A) n a = c
       #|  n = 0
@@ -20981,11 +20981,11 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  (x':A) = a
       #|  y':A
       #|  x':A
-      #|  !x:A. x IN s /\\ ~(x = a) ==> swap(a,x) IN h
+      #|  forall x:A. x IN s /\\ ~(x = a) ==> swap(a,x) IN h
       #|  h:(A->A)->bool
       #|  symmetric_group(s:A->bool)
       #|  (sigma:A->A) permutes s
-      #|  !s (sigma:A->A) a b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     sigma IN h /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h
+      #|  forall s (sigma:A->A) a b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     sigma IN h /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h
       #|  b:A
       #|  a:A
       #|  sigma:A->A
@@ -21013,7 +21013,7 @@ test "Library/symmetric_group matches Library/symmetric_group.ml" {
       #|  H:(A->A)group = subgroup_generated (symmetric_group s) h
       #|  group_carrier(symmetric_group(s:A->bool))
       #|  FINITE(h:(A->A)->bool)
-      #|  !s (a:A) b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     (!x y. x IN s /\\ y IN s ==> ?sigma. sigma IN h /\\ sigma x = y) /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h
+      #|  forall s (a:A) b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     (forall x y. x IN s /\\ y IN s ==> ?sigma. sigma IN h /\\ sigma x = y) /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h
       #|symmetric_group =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(group(fun('A,'A)),fun(group(fun('A,'A)),bool)) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool))) (#group:fun(prod(fun(fun('A,'A),bool),prod(fun('A,'A),prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))))),group(fun('A,'A))) ((#,:fun(fun(fun('A,'A),bool),fun(prod(fun('A,'A),prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))))),prod(fun(fun('A,'A),bool),prod(fun('A,'A),prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))))))) (#GSPEC:fun(fun(fun('A,'A),bool),fun(fun('A,'A),bool)) (\GEN%PVAR%1102:fun('A,'A). (#?:fun(fun(fun('A,'A),bool),bool) (\p:fun('A,'A). (((#SETSPEC:fun(fun('A,'A),fun(bool,fun(fun('A,'A),bool))) GEN%PVAR%1102:fun('A,'A)) ((#permutes:fun(fun('A,'A),fun(fun('A,bool),bool)) p:fun('A,'A)) s:fun('A,bool))) p:fun('A,'A))))))) ((#,:fun(fun('A,'A),fun(prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))),prod(fun('A,'A),prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))))))) #I:fun('A,'A)) ((#,:fun(fun(fun('A,'A),fun('A,'A)),fun(fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))),prod(fun(fun('A,'A),fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))))) #inverse:fun(fun('A,'A),fun('A,'A))) #o:fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))))))))))
       #|SYMMETRIC_GROUP =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'A),bool),fun(fun(fun('A,'A),bool),bool)) (#group_carrier:fun(group(fun('A,'A)),fun(fun('A,'A),bool)) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool)))) (#GSPEC:fun(fun(fun('A,'A),bool),fun(fun('A,'A),bool)) (\GEN%PVAR%1103:fun('A,'A). (#?:fun(fun(fun('A,'A),bool),bool) (\p:fun('A,'A). (((#SETSPEC:fun(fun('A,'A),fun(bool,fun(fun('A,'A),bool))) GEN%PVAR%1103:fun('A,'A)) ((#permutes:fun(fun('A,'A),fun(fun('A,bool),bool)) p:fun('A,'A)) s:fun('A,bool))) p:fun('A,'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) (#group_id:fun(group(fun('A,'A)),fun('A,'A)) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool)))) #I:fun('A,'A))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'A),fun('A,'A)),fun(fun(fun('A,'A),fun('A,'A)),bool)) (#group_inv:fun(group(fun('A,'A)),fun(fun('A,'A),fun('A,'A))) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool)))) #inverse:fun(fun('A,'A),fun('A,'A)))))) (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))),fun(fun(fun('A,'A),fun(fun('A,'A),fun('A,'A))),bool)) (#group_mul:fun(group(fun('A,'A)),fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool)))) #o:fun(fun('A,'A),fun(fun('A,'A),fun('A,'A)))))))))
       #|FINITE_SYMMETRIC_GROUP =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) (#FINITE:fun(fun(fun('A,'A),bool),bool) (#group_carrier:fun(group(fun('A,'A)),fun(fun('A,'A),bool)) (#symmetric_group:fun(fun('A,bool),group(fun('A,'A))) s:fun('A,bool)))))))

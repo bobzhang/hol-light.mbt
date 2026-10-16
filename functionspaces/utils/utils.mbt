@@ -4,7 +4,7 @@
 ///|
 /// EQ_TO_IMP
 fn step_1() -> Unit raise {
-  eq_to_imp_c.set(@class.taut(@parser.parse_term("!P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)")))
+  eq_to_imp_c.set(@class.taut(@parser.parse_term("forall P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn eq_to_imp() -> @kernel.Thm {
 ///|
 /// EQ_NOT
 fn step_2() -> Unit raise {
-  eq_not_c.set(@class.taut(@parser.parse_term("!P Q.(~P <=> ~Q) <=> (P <=> Q)")))
+  eq_not_c.set(@class.taut(@parser.parse_term("forall P Q.(~P <=> ~Q) <=> (P <=> Q)")))
 }
 
 ///|

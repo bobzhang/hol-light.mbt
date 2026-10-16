@@ -22093,23 +22093,23 @@ Examples/zolotarev quotations (77):
   zolotarev(a,n) = \\m. if m < n then (a * m) MOD n else m
   coprime(a:num,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
   n:num
-  !a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | m < n}
+  forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | m < n}
   ~(0 < m) <=> m = 0
   m:num
   {m:num | m < n}
-  !a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | 0 < m /\\ m < n}
+  forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | 0 < m /\\ m < n}
   {m:num | m < n}
-  !a n. coprime(a,n) ==> permutation (zolotarev(a,n))
-  !a n. zolotarev(a MOD n,n) = zolotarev(a,n)
-  !a b n. (a == b) (mod n) ==> zolotarev(a,n) = zolotarev(b,n)
+  forall a n. coprime(a,n) ==> permutation (zolotarev(a,n))
+  forall a n. zolotarev(a MOD n,n) = zolotarev(a,n)
+  forall a b n. (a == b) (mod n) ==> zolotarev(a,n) = zolotarev(b,n)
   zolotarevu(a,n) = \\m. if coprime(m,n) /\\ m < n then (a * m) MOD n else m
   coprime(a:num,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
   n:num
   {x | P x /\\ Q x} = {x | x IN {y | Q y} /\\ P x}
-  !a n. coprime(a,n)\n         ==> (zolotarevu(a,n)) permutes {m | coprime(m,n) /\\ m < n}
+  forall a n. coprime(a,n)\n         ==> (zolotarevu(a,n)) permutes {m | coprime(m,n) /\\ m < n}
   {m:num | m IN {m | m < n} /\\ coprime(m,n)}
-  !a n. coprime(a,n) ==> permutation (zolotarevu(a,n))
-  !a n. zolotarevu(a MOD n,n) = zolotarevu(a,n)
+  forall a n. coprime(a,n) ==> permutation (zolotarevu(a,n))
+  forall a n. zolotarevu(a MOD n,n) = zolotarevu(a,n)
   {i | i < phi n}
   \\i. (g EXP i) MOD n
   evenperm(\\i. if i < phi n then (i + k) MOD phi n else i)
@@ -22119,12 +22119,12 @@ Examples/zolotarev quotations (77):
   g:num
   n:num
   n = 0
-  !a n. 3 <= n /\\ coprime(a,n) /\\ (?g. order n g = phi n)\n         ==> (evenperm(zolotarevu(a,n)) <=> ?x. (x EXP 2 == a) (mod n))
+  forall a n. 3 <= n /\\ coprime(a,n) /\\ (?g. order n g = phi n)\n         ==> (evenperm(zolotarevu(a,n)) <=> ?x. (x EXP 2 == a) (mod n))
   n:num < p
   n:num
-  !a p. prime p ==> zolotarev(a,p) = zolotarevu(a,p)
+  forall a p. prime p ==> zolotarev(a,p) = zolotarevu(a,p)
   m < 1 <=> m = 0
-  !a. zolotarev(a,1) = I
+  forall a. zolotarev(a,1) = I
   p ==> ~p ==> q
   j:num
   i:num
@@ -22143,7 +22143,7 @@ Examples/zolotarev quotations (77):
   zolotarev (a,p EXP SUC k) =\n    zolotarevu(a,p EXP SUC k) o\n    (\\i. if p divides i then zolotarev(a,p EXP SUC k) i else i)
   k:num
   p = 0
-  !a p k.\n        prime p /\\ ODD p /\\ coprime(a,p)\n        ==> real_of_int(jacobi(a,p EXP k)) = sign(zolotarev(a,p EXP k))
+  forall a p k.\n        prime p /\\ ODD p /\\ coprime(a,p)\n        ==> real_of_int(jacobi(a,p EXP k)) = sign(zolotarev(a,p EXP k))
   j:num
   i:num
   n:num
@@ -22166,7 +22166,7 @@ Examples/zolotarev quotations (77):
   k = 0
   k:num
   p:num
-  !a n. ODD n /\\ coprime(a,n)\n         ==> real_of_int(jacobi(a,n)) = sign(zolotarev(a,n))
+  forall a n. ODD n /\\ coprime(a,n)\n         ==> real_of_int(jacobi(a,n)) = sign(zolotarev(a,n))
 zolotarev =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,num),fun(fun(num,num),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (\m:num. (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) m:num)) n:num)) m:num)))))))
 PERMUTES_ZOLOTAREV =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) ((#permutes:fun(fun(num,num),fun(fun(num,bool),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%676:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%676:num) ((#<:fun(num,fun(num,bool)) m:num) n:num)) m:num)))))))))))
 PERMUTES_ZOLOTAREV_ALT =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) ((#permutes:fun(fun(num,num),fun(fun(num,bool),bool)) (#zolotarev:fun(prod(num,num),fun(num,num)) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%678:num. (#?:fun(fun(num,bool),bool) (\m:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%678:num) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) m:num)))))))))))

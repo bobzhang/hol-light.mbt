@@ -46237,51 +46237,51 @@ test "Multivariate/cross matches Multivariate/cross.ml" {
       #|0..0..1..solved at 4
       #|Multivariate/cross quotations (46):
       #|  (a:real^3) cross (b:real^3) =\n    vector [a$2 * b$3 - a$3 * b$2;\n            a$3 * b$1 - a$1 * b$3;\n            a$1 * b$2 - a$2 * b$1] :real^3
-      #|  !x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n         orthogonal x (x cross y) /\\ orthogonal y (x cross y)
-      #|  !x. (vec 0) cross x = vec 0
-      #|  !x. x cross (vec 0) = vec 0
-      #|  !x y. (x cross y) = --(y cross x)
-      #|  !x. x cross x = vec 0
-      #|  !x y z. (x + y) cross z = (x cross z) + (y cross z)
-      #|  !x y z. x cross (y + z) = (x cross y) + (x cross z)
-      #|  !c x y. (c % x) cross y = c % (x cross y)
-      #|  !c x y. x cross (c % y) = c % (x cross y)
-      #|  !x y. (--x) cross y = --(x cross y)
-      #|  !x y. x cross (--y) = --(x cross y)
-      #|  !x y z. (x - y) cross z = x cross z - y cross z
-      #|  !x y z. x cross (y - z) = x cross y - x cross z
-      #|  !x y z.\n    x cross (y cross z) + y cross (z cross x) + z cross (x cross y) = vec 0
-      #|  !x y z. x cross (y cross z) = (x dot z) % y - (x dot y) % z
-      #|  !x y z.  (x cross y) dot z = (y cross z) dot x
-      #|  (!x y. x dot (x cross y) = &0) /\\\n   (!x y. x dot (y cross x) = &0) /\\\n   (!x y. (x cross y) dot y = &0) /\\\n   (!x y. (y cross x) dot y = &0)
-      #|  !x y. (x cross y)$1 = x$2 * y$3 - y$2 * x$3 /\\\n         (x cross y)$2 = x$3 * y$1 - y$3 * x$1 /\\\n         (x cross y)$3 = x$1 * y$2 - y$1 * x$2
+      #|  forall x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n         orthogonal x (x cross y) /\\ orthogonal y (x cross y)
+      #|  forall x. (vec 0) cross x = vec 0
+      #|  forall x. x cross (vec 0) = vec 0
+      #|  forall x y. (x cross y) = --(y cross x)
+      #|  forall x. x cross x = vec 0
+      #|  forall x y z. (x + y) cross z = (x cross z) + (y cross z)
+      #|  forall x y z. x cross (y + z) = (x cross y) + (x cross z)
+      #|  forall c x y. (c % x) cross y = c % (x cross y)
+      #|  forall c x y. x cross (c % y) = c % (x cross y)
+      #|  forall x y. (--x) cross y = --(x cross y)
+      #|  forall x y. x cross (--y) = --(x cross y)
+      #|  forall x y z. (x - y) cross z = x cross z - y cross z
+      #|  forall x y z. x cross (y - z) = x cross y - x cross z
+      #|  forall x y z.\n    x cross (y cross z) + y cross (z cross x) + z cross (x cross y) = vec 0
+      #|  forall x y z. x cross (y cross z) = (x dot z) % y - (x dot y) % z
+      #|  forall x y z.  (x cross y) dot z = (y cross z) dot x
+      #|  (forall x y. x dot (x cross y) = &0) /\\\n   (forall x y. x dot (y cross x) = &0) /\\\n   (forall x y. (x cross y) dot y = &0) /\\\n   (forall x y. (y cross x) dot y = &0)
+      #|  forall x y. (x cross y)$1 = x$2 * y$3 - y$2 * x$3 /\\\n         (x cross y)$2 = x$3 * y$1 - y$3 * x$1 /\\\n         (x cross y)$3 = x$1 * y$2 - y$1 * x$2
       #|  (basis 1) cross (basis 2) = basis 3 /\\\n   (basis 2) cross (basis 1) = --(basis 3) /\\\n   (basis 2) cross (basis 3) = basis 1 /\\\n   (basis 3) cross (basis 2) = --(basis 1) /\\\n   (basis 3) cross (basis 1) = basis 2 /\\\n   (basis 1) cross (basis 3) = --(basis 2)
-      #|  !u. ~(u = vec 0)\n       ==> ~(u cross basis 1 = vec 0) \\/\n           ~(u cross basis 2 = vec 0) \\/\n           ~(u cross basis 3 = vec 0)
-      #|  !x y z.\n     x dot y = x dot z /\\ x cross y = x cross z /\\ ~(x = vec 0) ==> y = z
-      #|  !x y. norm(x cross y) pow 2 + (x dot y) pow 2 = (norm(x) * norm y) pow 2
-      #|  !x y z. x dot (y cross z) = det(vector[x;y;z]:real^3^3)
-      #|  !w x y z. (w cross x) cross (y cross z) =\n                det(vector[w;x;z]:real^3^3) % y -\n                det(vector[w;x;y]:real^3^3) % z
-      #|  !w x y z. (w cross x) dot (y cross z) =\n                (w dot y) * (x dot z) - (w dot z) * (x dot y)
-      #|  !x y. norm(x cross y) pow 2 =\n           norm(x) pow 2 * norm(y) pow 2 - (x dot y) pow 2
+      #|  forall u. ~(u = vec 0)\n       ==> ~(u cross basis 1 = vec 0) \\/\n           ~(u cross basis 2 = vec 0) \\/\n           ~(u cross basis 3 = vec 0)
+      #|  forall x y z.\n     x dot y = x dot z /\\ x cross y = x cross z /\\ ~(x = vec 0) ==> y = z
+      #|  forall x y. norm(x cross y) pow 2 + (x dot y) pow 2 = (norm(x) * norm y) pow 2
+      #|  forall x y z. x dot (y cross z) = det(vector[x;y;z]:real^3^3)
+      #|  forall w x y z. (w cross x) cross (y cross z) =\n                det(vector[w;x;z]:real^3^3) % y -\n                det(vector[w;x;y]:real^3^3) % z
+      #|  forall w x y z. (w cross x) dot (y cross z) =\n                (w dot y) * (x dot z) - (w dot z) * (x dot y)
+      #|  forall x y. norm(x cross y) pow 2 =\n           norm(x) pow 2 * norm(y) pow 2 - (x dot y) pow 2
       #|  x = &0 <=> x pow 2 = &0
-      #|  !x y. x cross y = vec 0 <=> collinear{vec 0,x,y}
-      #|  (!x. vec 0 cross x = vec 0) /\\\n   (!x. x cross vec 0 = vec 0)
-      #|  (!x y. x cross y = x <=> x = vec 0) /\\\n   (!x y. x cross y = y <=> y = vec 0)
+      #|  forall x y. x cross y = vec 0 <=> collinear{vec 0,x,y}
+      #|  (forall x. vec 0 cross x = vec 0) /\\\n   (forall x. x cross vec 0 = vec 0)
+      #|  (forall x y. x cross y = x <=> x = vec 0) /\\\n   (forall x y. x cross y = y <=> y = vec 0)
       #|  y:real^3 = vec 0
       #|  x:real^3 = vec 0
-      #|  !x y. x dot y = &0 /\\ x cross y = vec 0 <=> x = vec 0 \\/ y = vec 0
+      #|  forall x y. x dot y = &0 /\\ x cross y = vec 0 <=> x = vec 0 \\/ y = vec 0
       #|  bilinear(cross)
-      #|  !A x y. transp A ** ((A ** x) cross (A ** y)) = det A % (x cross y)
+      #|  forall A x y. transp A ** ((A ** x) cross (A ** y)) = det A % (x cross y)
       #|  matrix_vector_mul (A:real^3^3)
-      #|  !A x y. orthogonal_matrix A\n           ==> (A ** x) cross (A ** y) = det A % (A ** (x cross y))
-      #|  !A x y. rotation_matrix A\n           ==> (A ** x) cross (A ** y) =  A ** (x cross y)
-      #|  !A x y. rotoinversion_matrix A\n           ==> (A ** x) cross (A ** y) =  --(A ** (x cross y))
+      #|  forall A x y. orthogonal_matrix A\n           ==> (A ** x) cross (A ** y) = det A % (A ** (x cross y))
+      #|  forall A x y. rotation_matrix A\n           ==> (A ** x) cross (A ** y) =  A ** (x cross y)
+      #|  forall A x y. rotoinversion_matrix A\n           ==> (A ** x) cross (A ** y) =  --(A ** (x cross y))
       #|  matrix(f:real^3->real^3)
-      #|  !f x y.\n        orthogonal_transformation f\n        ==> (f x) cross (f y) = det(matrix f) % f(x cross y)
-      #|  !f x y. linear f /\\ (!x. norm(f x) = norm x) /\\ det(matrix f) = &1\n           ==> (f x) cross (f y) = f(x cross y)
-      #|  !net:(A)net f g.\n        f continuous net /\\ g continuous net\n        ==> (\\x. (f x) cross (g x)) continuous net
-      #|  !f:real^N->real^3 g s.\n        f continuous_on s /\\ g continuous_on s\n        ==> (\\x. (f x) cross (g x)) continuous_on s
-      #|  !f x y. linear f /\\ (!x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:3) ==> det(matrix f) = &1)\n           ==> (f x) cross (f y) = f(x cross y)
+      #|  forall f x y.\n        orthogonal_transformation f\n        ==> (f x) cross (f y) = det(matrix f) % f(x cross y)
+      #|  forall f x y. linear f /\\ (forall x. norm(f x) = norm x) /\\ det(matrix f) = &1\n           ==> (f x) cross (f y) = f(x cross y)
+      #|  forall net:(A)net f g.\n        f continuous net /\\ g continuous net\n        ==> (\\x. (f x) cross (g x)) continuous net
+      #|  forall f:real^N->real^3 g s.\n        f continuous_on s /\\ g continuous_on s\n        ==> (\\x. (f x) cross (g x)) continuous_on s
+      #|  forall f x y. linear f /\\ (forall x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:3) ==> det(matrix f) = &1)\n           ==> (f x) cross (f y) = f(x cross y)
       #|cross =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\a:cart(real,tybit1(1)). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\b:cart(real,tybit1(1)). ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) a:cart(real,tybit1(1))) b:cart(real,tybit1(1)))) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#CONS:fun(real,fun(list(real),list(real))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#CONS:fun(real,fun(list(real),list(real))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) a:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) b:cart(real,tybit1(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) #NIL:list(real))))))))))
       #|ORTHOGONAL_CROSS =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\y:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1)))) x:cart(real,tybit1(1)))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1)))) y:cart(real,tybit1(1)))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) x:cart(real,tybit1(1))) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1))))) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) y:cart(real,tybit1(1))) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1)))))))))))
       #|CROSS_LZERO =  |- (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))) x:cart(real,tybit1(1)))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num)))))

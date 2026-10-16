@@ -75,26 +75,26 @@ test "Formal_ineqs/arith/float_theory matches Formal_ineqs/arith/float_theory.ml
       #|  arith_base:num
       #|  ~(arith_base = 0)
       #|  (&n * b) / c = &n * (b / c)
-      #|  !s n e. float_num s n e = (if s then -- &1 else &1) * &n *\n      if (min_exp <= e) then &arith_base pow (e - min_exp) else inv (&arith_base pow (min_exp - e))
+      #|  forall s n e. float_num s n e = (if s then -- &1 else &1) * &n *\n      if (min_exp <= e) then &arith_base pow (e - min_exp) else inv (&arith_base pow (min_exp - e))
       #|  &0
       #|  min_exp
       #|  EXP
       #|  &
       #|  (~)
       #|  &n = float_num F n min_exp
-      #|  !s n e. --float_num s n e = float_num (~s) n e
+      #|  forall s n e. --float_num s n e = float_num (~s) n e
       #|  T
       #|  F
-      #|  !n e. &0 <= float_num F n e
+      #|  forall n e. &0 <= float_num F n e
       #|  -- &1 * a * b <= &0 <=> &0 <= a * b
-      #|  !n e. float_num T n e <= &0
-      #|  !s n e. float_num s n e = &0 <=> n = 0
+      #|  forall n e. float_num T n e <= &0
+      #|  forall s n e. float_num s n e = &0 <=> n = 0
       #|  num_exp n1 e1 <= num_exp n2 e2\n                                      ==> float_num F n1 e1 <= float_num F n2 e2
       #|  num_exp n1 e1 <= num_exp n2 e2\n                                        ==> float_num T n2 e2 <= float_num T n1 e1
       #|  float_num F n1 e1
       #|  float_num T n2 e2
       #|  interval_arith x (float_num F n1 e1, float_num T n2 e2) ==> x = &0
-      #|  !s e. float_num s 0 e = &0
+      #|  forall s e. float_num s 0 e = &0
       #|  s:bool
       #|  abs (float_num s n e) = float_num F n e
       #|Float_theory.min_exp_def =  |- ((#=:fun(num,fun(num,bool)) #min_exp:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

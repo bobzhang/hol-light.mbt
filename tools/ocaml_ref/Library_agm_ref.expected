@@ -5666,10 +5666,10 @@ Generating HOL version of proof
 0..0..1..2..4..6..8..11..14..17..solved at 27
 Library/agm quotations (46):
   1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
-  !P. (!i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2
+  forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2
   1..2 = {1,2}
   x * y <= ((x + y) / &2) pow 2 <=> &0 <= (x - y) * (x - y)
-  !x y. x * y <= ((x + y) / &2) pow 2
+  forall x y. x * y <= ((x + y) / &2) pow 2
   1 <= n + 1
   sum(1..2*n) f = sum(1..n) f + sum(n+1..2*n) f
   1 <= n + 1
@@ -5681,7 +5681,7 @@ Library/agm quotations (46):
   1 = 0 + 1 /\\ 2 = 1 + 1
   P(0) /\\ P(1)
   n:num
-  !P. P 2 /\\ (!n. P n ==> P(2 * n)) /\\ (!n. P(n + 1) ==> P n) ==> !n. P n
+  forall P. P 2 /\\ (forall n. P n ==> P(2 * n)) /\\ (forall n. P(n + 1) ==> P n) ==> forall n. P n
   1 <= SUC n
   1 + n = SUC n
   n:num
@@ -5710,7 +5710,7 @@ Library/agm quotations (46):
   (sum(1..n) a / &n) pow n * (sum(n+1..2*n) a / &n) pow n
   a:num->real
   n:num
-  !n a. 1 <= n /\\ (!i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
+  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
 FORALL_2 =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 NUMSEG_2 =  |- ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) #EMPTY:fun(num,bool))))
 AGM_2 =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) x:real) y:real)) ((#real_pow:fun(real,fun(num,real)) ((#real_div:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) x:real) y:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

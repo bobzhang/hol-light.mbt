@@ -39989,7 +39989,7 @@ Generating HOL version of proof
 0..0..0..2..4..6..8..10..solved at 18
 Examples/inverse_bug_puzzle_tac quotations (137):
   :real^2#real^2#real^2
-  !y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2
+  forall y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2
   ~collinear {a,b,c}  ==>  ~(a = b) /\\ ~(a = c) /\\ ~(b = c)
   {A,C,B} SUBSET {A,B,C} /\\  {B,A,C} SUBSET {A,B,C} /\\\n  {B,C,A} SUBSET {A,B,C} /\\  {C,A,B} SUBSET {A,B,C} /\\  {C,B,A} SUBSET {A,B,C}
   collinear {A,B,C}\n         ==> collinear {A,C,B} /\\ collinear {B,A,C} /\\\n             collinear {B,C,A} /\\ collinear {C,A,B} /\\ collinear {C,B,A}
@@ -39999,33 +39999,33 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   ~(r < n)  /\\  r <= MIN n n  ==>  r = n
   (M:real^2^2) ** (x:real^2) = u
   x
-  ~(det (M:real^2^2) = &0) /\\\n  (! x. (M ** x)$1 = (v:real^2)$1 * x$1 + (w:real^2)$1 * x$2  /\\\n  (M ** x)$2 = v$2 * x$1 + w$2 * x$2)
+  ~(det (M:real^2^2) = &0) /\\\n  (forall x. (M ** x)$1 = (v:real^2)$1 * x$1 + (w:real^2)$1 * x$2  /\\\n  (M ** x)$2 = v$2 * x$1 + w$2 * x$2)
   M = transp(vector[v:real^2;w:real^2]):real^2^2
   M
   ~(v$1 * w$2 - (w:real^2)$1 * (v:real^2)$2 = &0)
-  !u v w:real^2. ~collinear  {vec 0,v,w} ==> ? s t. s % v + t % w = u
+  forall u v w:real^2. ~collinear  {vec 0,v,w} ==> ? s t. s % v + t % w = u
   oriented_area (a:real^2,b:real^2,c:real^2) =\n  ((b$1 - a$1) * (c$2 - a$2) - (c$1 - a$1) * (b$2 - a$2)) / &2
   oriented_area (A,B,C) = oriented_area(A',B',C')  ==>\n  oriented_area (B,C,A) = oriented_area (B',C',A')  /\\\n  oriented_area (C,A,B) = oriented_area (C',A',B')  /\\\n  oriented_area (A,C,B) = oriented_area (A',C',B')  /\\\n  oriented_area (B,A,C) = oriented_area (B',A',C')  /\\\n  oriented_area (C,B,A) = oriented_area (C',B',A')
-  !A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})
-  !p p'. move p p' ==> oriented_area p = oriented_area p'
-  !p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
-  !p p'. !n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
-  !p p'. reachable p p'  <=>  ?n.  reachableN p p' n
+  forall A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})
+  forall p p'. move p p' ==> oriented_area p = oriented_area p'
+  forall p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
+  forall p p'. forall n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
+  forall p p'. reachable p p'  <=>  ?n.  reachableN p p' n
   \\m. if m < SUC n then s m else p':triple
-  s 0 = p /\\ s n = q /\\ !m. m < n ==> move (s m) (s (SUC m))
+  s 0 = p /\\ s n = q /\\ forall m. m < n ==> move (s m) (s (SUC m))
   s
-  !n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)
+  forall n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)
   q:triple = s n
   q
-  s 0 = p /\\ s (SUC n) = p' /\\ !m. m < SUC n ==> move (s m) (s (SUC m))
+  s 0 = p /\\ s (SUC n) = p' /\\ forall m. m < SUC n ==> move (s m) (s (SUC m))
   s
-  ! n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'
+  forall n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'
   reachableN p p' 0  <=>  p = p'
   s0 =  \\m:num. p':triple
   s0
-  ! p p'. (reachableN p p' 0  <=>  p = p') /\\\n  ! n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'
-  !p p'. reachable p p'  ==>  oriented_area p = oriented_area p'
-  ! A B A' B':real^2. move2Cond A B A' B'  <=>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'}   \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}
+  forall p p'. (reachableN p p' 0  <=>  p = p') /\\\n  forall n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'
+  forall p p'. reachable p p'  ==>  oriented_area p = oriented_area p'
+  forall A B A' B':real^2. move2Cond A B A' B'  <=>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'}   \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}
   reachableN P0 P1 1 <=> move P0 P1
   reachableN P0 P2 2 <=> ?P1. move P0 P1 /\\ move P1 P2
   3 = SUC 2
@@ -40034,7 +40034,7 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   reachableN P0 P4 4  <=>  ?P1 P2 P3. move P0 P1 /\\ move P1 P2 /\\\n  move P2 P3 /\\ move P3 P4
   5 = SUC 4
   reachableN P0 P5 5  <=>  ?P1 P2 P3 P4. move P0 P1 /\\ move P1 P2 /\\\n  move P2 P3 /\\ move P3 P4 /\\ move P4 P5
-  !A B C A':real^2. collinear {vec 0, C - B, A' - A}\n  ==> collinear {vec 0, B - C, A' - A}
+  forall A B C A':real^2. collinear {vec 0, C - B, A' - A}\n  ==> collinear {vec 0, B - C, A' - A}
   move (A,B,C) (A',B',C') ==>\n  move (B,C,A) (B',C',A') /\\ move (C,A,B) (C',A',B') /\\\n  move (A,C,B) (A',C',B') /\\ move (B,A,C) (B',A',C') /\\ move (C,B,A) (C',B',A')
   (Z,Y,X):triple
   (Y,X,Z):triple
@@ -40044,8 +40044,8 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   Z:real^2
   Y:real^2
   X:real^2
-  ! n. ! A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ==>\nreachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\nreachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\nreachableN (C,B,A) (C',B',A') n
-  ! A B C A' B' C.\n        oriented_area (A,B,C) = oriented_area (A',B',C')\n        ==> (collinear {A,B,C} <=> collinear {A',B',C'})
+  forall n. forall A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ==>\nreachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\nreachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\nreachableN (C,B,A) (C',B',A') n
+  forall A B C A' B' C.\n        oriented_area (A,B,C) = oriented_area (A',B',C')\n        ==> (collinear {A,B,C} <=> collinear {A',B',C'})
   collinear {vec 0,B - (A:real^2),X - C}  /\\  collinear {vec 0,X - B,A' - A}
   A' - (A:real^2) = t % (X - B) /\\ X - C = (-- s) % (B - (A:real^2))
   A' - (A:real^2) = (t * s) % (A - B) + t % (C - B)
@@ -40057,8 +40057,8 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   r
   t
   ~ ? r. A' - (A:real^2) = r % (A - B)
-  !r. r % ((A:real^2) - B) = (--r) % (B - A)  /\\\n  r % (A - B) = r % (A - B) + &0 % (C - B)
-  ! A B C A'. ~collinear {A,B,C} /\\ ~collinear {B,A,A'} ==>\n  ?X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)
+  forall r. r % ((A:real^2) - B) = (--r) % (B - A)  /\\\n  r % (A - B) = r % (A - B) + &0 % (C - B)
+  forall A B C A'. ~collinear {A,B,C} /\\ ~collinear {B,A,A'} ==>\n  ?X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)
   move (A',B,X) (A',B,Y)  /\\  move (A',B,Y) (A',B',Y)
   move (B,A',X) (B,A',Y)  /\\  move (B,A',Y) (B',A',Y)
   Y
@@ -40066,35 +40066,35 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   ~collinear {(A:real^2),B,X} /\\ ~collinear {A',B,X}
   move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)
   X
-  !A B C A' B'. ~collinear {A,B,C} ==>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'} ==>\n  ? X Y. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)  /\\\n  move (A',B,X) (A',B,Y)  /\\  move (A',B,Y) (A',B',Y)
+  forall A B C A' B'. ~collinear {A,B,C} ==>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'} ==>\n  ? X Y. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)  /\\\n  move (A',B,X) (A',B,Y)  /\\  move (A',B,Y) (A',B',Y)
   move (B,A,C) (B,A,X)  /\\  move (B,A,X) (B',A,X)  /\\\n  move (B',A,X) (B',A,Y)  /\\  move (B',A,Y) (B',A',Y)
   X
   Y
   ~collinear {B,(A:real^2),C}
   ~collinear {B,(A:real^2),C}
   ~collinear {B,(A:real^2),A'} /\\ ~collinear {A',B,B'}  \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}
-  !A B C A' B'. ~collinear {A,B,C} /\\ move2Cond A B A' B' ==>\n  ? Y. reachableN (A,B,C) (A',B',Y) 4
+  forall A B C A' B'. ~collinear {A,B,C} /\\ move2Cond A B A' B' ==>\n  ? Y. reachableN (A,B,C) (A',B',Y) 4
   collinear {B,(A:real^2),A'} /\\ collinear {A,B,B'}  \\/\n  collinear {B,A,A'} /\\ collinear {B',A,A'}  \\/\n  collinear {A',B,B'} /\\ collinear {A,B,B'}  \\/\n  collinear {A',B,B'} /\\ collinear {B',A,A'}
   {(A:real^2),B,A',B'} SUBSET {A,A',B,B'}  /\\\n  {A,B,A',B'} SUBSET {B,B',A',A}  /\\  {A,B,A',B'} SUBSET {A',B',B,A}
   ~((A:real^2) = B) /\\ ~((A':real^2) = B')
-  !A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}
+  forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}
   collinear {(A:real^2),B,C}
   collinear {(A:real^2),B,A',B'} /\\ collinear {B,C,B',C'}
   ~move2Cond A B A' B'  /\\\n  ~move2Cond B C B' C'
   F
   {(A:real^2),B,B'} SUBSET {A,B,A',B'} /\\ {B,B',C} SUBSET {B,C,B',C'}
-  !A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~(C = C')  ==>\n  move2Cond A B A' B' \\/ move2Cond B C B' C'
+  forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~(C = C')  ==>\n  move2Cond A B A' B' \\/ move2Cond B C B' C'
   collinear {(B:real^2),B',A} /\\ collinear {B,B',C}
   move (B,C,A) (B,C,X) /\\ move (B,C,X) (B',C',X)
   X
   ~collinear {C,B,B'}  \\/\n  move2Cond A B A' B'  \\/\n  collinear {C,B,B'} /\\ ~move2Cond A B A' B'
   {B,B',(A:real^2)} SUBSET {A,B,A',B'}  /\\  {A,B,C} SUBSET {B,B',A,C}
-  !A B C A' B' C'.  ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n C = C' /\\ ~(A = A') /\\ ~(B = B') ==>\n  ? Y. reachableN (A,B,C) (Y,B',C') 2  \\/ reachableN (A,B,C) (A',B',Y) 4
+  forall A B C A' B' C'.  ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n C = C' /\\ ~(A = A') /\\ ~(B = B') ==>\n  ? Y. reachableN (A,B,C) (Y,B',C') 2  \\/ reachableN (A,B,C) (A',B',Y) 4
   4
   ((A:real^2) = A' /\\ (B:real^2) = B' /\\ (C:real^2) = C'  \\/\n  A = A' /\\ B = B' /\\ ~(C = C')  \\/  A = A' /\\ ~(B = B') /\\ C = C' \\/\n  ~(A = A') /\\ B = B' /\\ C = C')  \\/\n  (A = A' /\\ ~(B = B') /\\ ~(C = C')  \\/\n  ~(A = A') /\\ B = B' /\\ ~(C = C')  \\/  ~(A = A') /\\ ~(B = B') /\\ C = C')  \\/\n  ~(A = A') /\\ ~(B = B') /\\ ~(C = C')
   0 < 5 /\\ 2 < 5 /\\ 3 < 5 /\\ 4 < 5
   ~collinear {B,C,(A:real^2)} /\\\n  ~collinear{B',C',(A':real^2)} /\\ ~collinear {C,A,B} /\\ ~collinear {C',A',B'}
-  !A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n  ? n. n < 5 /\\ ? Y. reachableN (A,B,C) (A',B',Y) n  \\/\n  reachableN (A,B,C) (A',Y,C') n  \\/ reachableN (A,B,C) (Y,B',C') n
+  forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n  ? n. n < 5 /\\ ? Y. reachableN (A,B,C) (A',B',Y) n  \\/\n  reachableN (A,B,C) (A',Y,C') n  \\/ reachableN (A,B,C) (Y,B',C') n
   oriented_area (A,B,C) = oriented_area (A,B,C') ==>\n  move (A,B,C) (A,B,C')
   move (Y,B',C') (A',B',C')
   oriented_area (B',C',Y) = oriented_area (B',C',A')
@@ -40108,7 +40108,7 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   Y
   ~((A:real^2) = B) /\\ ~(A = C) /\\ ~(B = C) /\\\n  ~((A':real^2) = B') /\\ ~(A' = C') /\\ ~(B' = C')
   ~collinear {(A':real^2),B',C'}
-  !A B C A' B' C'. ~collinear {A,B,C} ==>\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ? n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n
+  forall A B C A' B' C'. ~collinear {A,B,C} ==>\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ? n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n
   ~reachableN p0 p4 4
   oriented_area p0 = oriented_area p4
   p0:triple = vector [&0;&0],vector [&0;&1],vector [&1;&0]  /\\\n  p4:triple = vector [&1;&1],vector [&1;&2],vector [&2;&1]
@@ -40123,8 +40123,8 @@ Examples/inverse_bug_puzzle_tac quotations (137):
   P4
   collinear {(A':real^2),B',C'}
   ~collinear {(A:real^2),B,C}  \\/  collinear {A,B,C}
-  (!X Y:real^2. collinear {X,Y,Y}) /\\\n  (!A B A'. move (A,B,B) (A',B,B))  /\\\n  !A B C B'. (collinear {A,B,C} /\\ collinear {A,B',C}  ==>\n  move (A,B,C) (A,B',C))
-  !A B C A' B' C'.\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ?n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n
+  (forall X Y:real^2. collinear {X,Y,Y}) /\\\n  (forall A B A'. move (A,B,B) (A',B,B))  /\\\n  forall A B C B'. (collinear {A,B,C} /\\ collinear {A,B',C}  ==>\n  move (A,B,C) (A,B',C))
+  forall A B C A' B' C'.\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ?n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n
 COLLINEAR_3_2Dzero =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\y:cart(real,tybit0(1)). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,tybit0(1)),bool),bool) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) (#vec:fun(num,cart(real,tybit0(1))) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) y:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) z:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool)))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) y:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_mul:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) y:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) z:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 Noncollinear_3ImpliesDistinct =  |- ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#collinear:fun(fun(cart(real,'?755672),bool),bool) ((#INSERT:fun(cart(real,'?755672),fun(fun(cart(real,'?755672),bool),fun(cart(real,'?755672),bool))) a:cart(real,'?755672)) ((#INSERT:fun(cart(real,'?755672),fun(fun(cart(real,'?755672),bool),fun(cart(real,'?755672),bool))) b:cart(real,'?755672)) ((#INSERT:fun(cart(real,'?755672),fun(fun(cart(real,'?755672),bool),fun(cart(real,'?755672),bool))) c:cart(real,'?755672)) #EMPTY:fun(cart(real,'?755672),bool))))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,'?755672),fun(cart(real,'?755672),bool)) a:cart(real,'?755672)) b:cart(real,'?755672)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,'?755672),fun(cart(real,'?755672),bool)) a:cart(real,'?755672)) c:cart(real,'?755672)))) (#~:fun(bool,bool) ((#=:fun(cart(real,'?755672),fun(cart(real,'?755672),bool)) b:cart(real,'?755672)) c:cart(real,'?755672))))))
 collinearSymmetry =  |- ((#==>:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool)))))) (#collinear:fun(fun(cart(real,'?755827),bool),bool) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) C:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) B:cart(real,'?755827)) ((#INSERT:fun(cart(real,'?755827),fun(fun(cart(real,'?755827),bool),fun(cart(real,'?755827),bool))) A:cart(real,'?755827)) #EMPTY:fun(cart(real,'?755827),bool))))))))))

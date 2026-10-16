@@ -373,15 +373,15 @@ test "class matches class.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|class quotations (100):
-      #|  !t:A->B. (\\x. t x) = t
+      #|  forall t:A->B. (\\x. t x) = t
       #|  t:A->B
       #|  (\\x. (t:A->B) x) = t
       #|  x:A
       #|  x:A
-      #|  !(f:A->B) g. (!x. f x = g x) ==> f = g
-      #|  !(f:A->B) g. f = g <=> (!x. f x = g x)
+      #|  forall(f:A->B) g. (forall x. f x = g x) ==> f = g
+      #|  forall(f:A->B) g. f = g <=> (forall x. f x = g x)
       #|  :(A->bool)->A
-      #|  !P (x:A). P x ==> P((@) P)
+      #|  forall P (x:A). P x ==> P((@) P)
       #|  ((@) P):A
       #|  P:A->bool
       #|  (?) = \\P:A->bool. P ((@) P)
@@ -390,20 +390,20 @@ test "class matches class.ml" {
       #|  P:A->bool
       #|  (P:A->bool)((@) P) = (?) P
       #|  x:A
-      #|  !x:A. (@y. y = x) = x
-      #|  !P x. (!y:A. P y = (y = x)) ==> ((@) P = x)
+      #|  forall x:A. (@y. y = x) = x
+      #|  forall P x. (forall y:A. P y = (y = x)) ==> ((@) P = x)
       #|  p \\/ T <=> T
       #|  ~(T <=> F)
       #|  T
       #|  F
       #|  (((@x. (x <=> F) \\/ t) <=> F) \\/ t) /\\ (((@x. (x <=> T) \\/ t) <=> T) \\/ t)
-      #|  !t. t \\/ ~t
+      #|  forall t. t \\/ ~t
       #|  t:bool
-      #|  !t. (t <=> T) \\/ (t <=> F)
-      #|  !t1 t2. (~(t1 /\\ t2) <=> ~t1 \\/ ~t2) /\\ (~(t1 \\/ t2) <=> ~t1 /\\ ~t2)
-      #|  (!t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)
-      #|  !t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2
-      #|  !t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)
+      #|  forall t. (t <=> T) \\/ (t <=> F)
+      #|  forall t1 t2. (~(t1 /\\ t2) <=> ~t1 \\/ ~t2) /\\ (~(t1 \\/ t2) <=> ~t1 /\\ ~t2)
+      #|  (forall t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)
+      #|  forall t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2
+      #|  forall t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)
       #|  P:bool
       #|  (~P ==> F) ==> P
       #|  a:bool
@@ -413,41 +413,41 @@ test "class matches class.ml" {
       #|  p <=> ~p ==> F
       #|  x:A
       #|  ~(?x:A. P x)
-      #|  !P. ~(?x:A. P x) <=> (!x. ~(P x))
+      #|  forall P. ~(?x:A. P x) <=> (forall x. ~(P x))
       #|  (a <=> ~b) <=> (~a <=> b)
-      #|  !P. (?x:A. ~(P x)) <=> ~(!x. P x)
-      #|  !P. ~(!x. P x) <=> (?x:A. ~(P x))
-      #|  !P. (!x. ~(P x)) <=> ~(?x:A. P x)
+      #|  forall P. (?x:A. ~(P x)) <=> ~(forall x. P x)
+      #|  forall P. ~(forall x. P x) <=> (?x:A. ~(P x))
+      #|  forall P. (forall x. ~(P x)) <=> ~(?x:A. P x)
       #|  b:bool
-      #|  (!b. P b) <=> P T /\\ P F
+      #|  (forall b. P b) <=> P T /\\ P F
       #|  (~p <=> ~q) ==> (p <=> q)
       #|  (?b. P b) <=> P T \\/ P F
       #|  (a <=> b) <=> (~a <=> ~b)
-      #|  !P Q. (!x:A. P x \\/ Q) <=> (!x. P x) \\/ Q
+      #|  forall P Q. (forall x:A. P x \\/ Q) <=> (forall x. P x) \\/ Q
       #|  (a <=> b) <=> (~a <=> ~b)
-      #|  !P Q. (!x:A. P \\/ Q x) <=> P \\/ (!x. Q x)
-      #|  !P Q. (!x:A. P x) \\/ Q <=> (!x. P x \\/ Q)
-      #|  !P Q. P \\/ (!x:A. Q x) <=> (!x. P \\/ Q x)
+      #|  forall P Q. (forall x:A. P \\/ Q x) <=> P \\/ (forall x. Q x)
+      #|  forall P Q. (forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)
+      #|  forall P Q. P \\/ (forall x:A. Q x) <=> (forall x. P \\/ Q x)
       #|  (a <=> b) <=> (~a <=> ~b)
-      #|  !P Q. ((!x:A. P x) ==> Q) <=> (?x. P x ==> Q)
-      #|  !P Q. (?x. P x ==> Q) <=> ((!x:A. P x) ==> Q)
+      #|  forall P Q. ((forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)
+      #|  forall P Q. (?x. P x ==> Q) <=> ((forall x:A. P x) ==> Q)
       #|  (a <=> b) <=> (~a <=> ~b)
-      #|  !P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)
-      #|  !P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)
+      #|  forall P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)
+      #|  forall P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)
       #|  COND = \\t t1 t2. @x:A. ((t <=> T) ==> (x = t1)) /\\\n                          ((t <=> F) ==> (x = t2))
-      #|  !(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)
+      #|  forall(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)
       #|  b:bool
-      #|  !b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)
+      #|  forall b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)
       #|  b:bool
-      #|  !b (t:A). (if b then t else t) = t
+      #|  forall b (t:A). (if b then t else t) = t
       #|  b:bool
-      #|  !b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)
+      #|  forall b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)
       #|  b:bool
-      #|  !b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)
+      #|  forall b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)
       #|  b:bool
-      #|  !b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)
+      #|  forall b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)
       #|  p:bool
-      #|  !p x y:A. (if ~p then x else y) = (if p then y else x)
+      #|  forall p x y:A. (if ~p then x else y) = (if p then y else x)
       #|  b:bool
       #|  (A ==> B) /\\ (C ==> D) ==> (if b then A else C) ==> (if b then B else D)
       #|  c:bool
@@ -455,9 +455,9 @@ test "class matches class.ml" {
       #|  ~ ~ p <=> p
       #|  (y:A->B) x
       #|  \\x:A. @y:B. P x y
-      #|  !P. (!x:A. ?y:B. P x y) <=> (?y. !x. P x (y x))
-      #|  !P R. (!x:A. P x ==> ?y:B. R x y) <=> (?f. !x. P x ==> R x (f x))
-      #|  !P:A->B->bool. (!x. ?!y. P x y) <=> ?f. !x y. P x y <=> (f x = y)
+      #|  forall P. (forall x:A. ?y:B. P x y) <=> (?y. forall x. P x (y x))
+      #|  forall P R. (forall x:A. P x ==> ?y:B. R x y) <=> (?f. forall x. P x ==> R x (f x))
+      #|  forall P:A->B->bool. (forall x. ?!y. P x y) <=> ?f. forall x y. P x y <=> (f x = y)
       #|  x:A
       #|  (\\z. if z = x then y1 else (f:A->B) z) =\n                  (\\z. if z = x then y2 else (f:A->B) z)
       #|  f:A->B
@@ -466,13 +466,13 @@ test "class matches class.ml" {
       #|  x:A
       #|  x:A
       #|  x:A
-      #|  !P. (!x:A. ?!y:B. P x y) <=> (?!f. !x. P x (f x))
+      #|  forall P. (forall x:A. ?!y:B. P x y) <=> (?!f. forall x. P x (f x))
       #|  (g = g') ==>\n        (g' ==> (t = t')) ==>\n        (~g' ==> (e = e')) ==>\n        ((if g then t else e) = (if g' then t' else e'))
       #|  (if x = x then y else z) = y
       #|  x:bool
-      #|  !P. P F /\\ P T ==> !x. P x
+      #|  forall P. P F /\\ P T ==> forall x. P x
       #|  \\x. if x then b:A else a
-      #|  !a b:A. ?f. f F = a /\\ f T = b
+      #|  forall a b:A. ?f. f F = a /\\ f T = b
       #|ETA_AX =  |- (#!:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
       #|EQ_EXT =  |- (#!:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (g:fun('A,'B) x:'A))))) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) f:fun('A,'B)) g:fun('A,'B)))))))
       #|FUN_EQ_THM =  |- (#!:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) f:fun('A,'B)) g:fun('A,'B))) (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (g:fun('A,'B) x:'A)))))))))

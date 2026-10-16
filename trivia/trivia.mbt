@@ -53,7 +53,7 @@ fn step_4() -> Unit raise {
   )
   o_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!f:B->C. !g:A->B. !x:A. (f o g) x = f(g(x))"),
+      @parser.parse_term("forall f:B->C. forall g:A->B. forall x:A. (f o g) x = f(g(x))"),
       t3,
     ),
   )
@@ -82,7 +82,7 @@ fn step_5() -> Unit raise {
   )
   o_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("!f:C->D. !g:B->C. !h:A->B. f o (g o h) = (f o g) o h"),
+      @parser.parse_term("forall f:C->D. forall g:B->C. forall h:A->B. f o (g o h) = (f o g) o h"),
       t6,
     ),
   )
@@ -101,7 +101,7 @@ pub fn o_assoc() -> @kernel.Thm {
 /// I_THM
 fn step_6() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([i_def()]))
-  i_thm_c.set(@tactics.prove(@parser.parse_term("!x:A. I x = x"), t7))
+  i_thm_c.set(@tactics.prove(@parser.parse_term("forall x:A. I x = x"), t7))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_7() -> Unit raise {
   let t9 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8)
   i_o_id_c.set(
     @tactics.prove(
-      @parser.parse_term("!f:A->B. (I o f = f) /\\ (f o I = f)"),
+      @parser.parse_term("forall f:A->B. (I o f = f) /\\ (f o I = f)"),
       t9,
     ),
   )
@@ -216,7 +216,7 @@ fn step_11() -> Unit raise {
     ),
     t15,
   )
-  one_c.set(@tactics.prove(@parser.parse_term("!v:1. v = one"), t16))
+  one_c.set(@tactics.prove(@parser.parse_term("forall v:1. v = one"), t16))
 }
 
 ///|
@@ -243,7 +243,7 @@ fn step_12() -> Unit raise {
     ),
     @tactics.refl_tac,
   )
-  one_axiom_c.set(@tactics.prove(@parser.parse_term("!f g. f = (g:A->1)"), t19))
+  one_axiom_c.set(@tactics.prove(@parser.parse_term("forall f g. f = (g:A->1)"), t19))
 }
 
 ///|
@@ -261,7 +261,7 @@ fn step_13() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([]))
   let t21 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([one()])), t20)
   one_induct_c.set(
-    @tactics.prove(@parser.parse_term("!P. P one ==> !x. P x"), t21),
+    @tactics.prove(@parser.parse_term("forall P. P one ==> forall x. P x"), t21),
   )
 }
 
@@ -288,7 +288,7 @@ fn step_14() -> Unit raise {
     @tactics.refl_tac,
   )
   one_recursion_c.set(
-    @tactics.prove(@parser.parse_term("!e:A. ?fn. fn one = e"), t22),
+    @tactics.prove(@parser.parse_term("forall e:A. ?fn. fn one = e"), t22),
   )
 }
 
@@ -327,7 +327,7 @@ fn step_15() -> Unit raise {
     t26,
   )
   one_axiom_v1_c.set(
-    @tactics.prove(@parser.parse_term("!e:A. ?!fn. fn one = e"), t27),
+    @tactics.prove(@parser.parse_term("forall e:A. ?!fn. fn one = e"), t27),
   )
 }
 
@@ -397,7 +397,7 @@ fn step_16() -> Unit raise {
     t31,
   )
   forall_one_thm_c.set(
-    @tactics.prove(@parser.parse_term("(!x. P x) <=> P one"), t32),
+    @tactics.prove(@parser.parse_term("(forall x. P x) <=> P one"), t32),
   )
 }
 
@@ -457,7 +457,7 @@ fn step_18() -> Unit raise {
     @tactics.refl_tac,
   )
   eta_one_c.set(
-    @tactics.prove(@parser.parse_term("!f:1->A. (\\x. f one) = f"), t38),
+    @tactics.prove(@parser.parse_term("forall f:1->A. (\\x. f one) = f"), t38),
   )
 }
 

@@ -5785,25 +5785,25 @@ Jordan/num_ext_gcd quotations (53):
   DIVIDE a b = ?m. (b = m*a )
   DIVIDE:num->num->bool
   m'*m
-  !a b c. (((a || b) /\\ (b || c)) ==> (a || c))
+  forall a b c. (((a || b) /\\ (b || c)) ==> (a || c))
   (b = m*m'*b) = (1*b = m*m'*b)
   b=0
   1
-  ! a b. (((a || b) /\\ (b || a)) ==> (a = b))
+  forall a b. (((a || b) /\\ (b || a)) ==> (a = b))
   m+m'
-  !a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))
+  forall a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))
   m'-m
-  !a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))
+  forall a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))
   b*m
-  !a b h. (((h|| a) ==> (h || (b*a))))
+  forall a b h. (((h|| a) ==> (h || (b*a))))
   b*m
-  !a b h. (((h|| a) ==> (h || (a*b))))
-  GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (!h. (((h || a) /\\ (h || b)) ==> (h || g))))
+  forall a b h. (((h|| a) ==> (h || (a*b))))
+  GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (forall h. (((h || a) /\\ (h || b)) ==> (h || g))))
    (y || (r*a + s*b))/\\ (y || (r'*a +s'*b))
    (A ==> B) ==> ((C /\\ D/\\ A)==> B)
-  (y||a) /\\ (y ||b) /\\ (!h. (((h||a)/\\(h||b))==> (h||y)))
+  (y||a) /\\ (y ||b) /\\ (forall h. (((h||a)/\\(h||b))==> (h||y)))
    (h || (r*a + s*b))/\\ (h || (r'*a+s'*b))
-  !a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))
+  forall a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))
   GCD 0 0 = 0
   GCD 0 0=0
   GCD 0 1 = 1

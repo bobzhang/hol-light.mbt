@@ -55,7 +55,7 @@ pub fn mk_lt(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
 ///|
 /// DOUBLE_NEG_CONV
 fn step_4() -> Unit raise {
-  let dn_thm = @class.taut(@parser.parse_term("!x. ~(~ x) <=> x"))
+  let dn_thm = @class.taut(@parser.parse_term("forall x. ~(~ x) <=> x"))
   let dn_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x10 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x10
     let tm_p = @basics.dest_neg(@basics.dest_neg(tm))
@@ -76,7 +76,7 @@ pub fn double_neg_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// IMP_CONV
 fn step_5() -> Unit raise {
-  let i_thm = @class.taut(@parser.parse_term("!a b. (a ==> b) <=> (~a \\/ b)"))
+  let i_thm = @class.taut(@parser.parse_term("forall a b. (a ==> b) <=> (~a \\/ b)"))
   let i_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x11 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x11
     let (a, b) = @basics.dest_imp(tm)
@@ -97,7 +97,7 @@ pub fn imp_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// BEQ_CONV
 fn step_6() -> Unit raise {
-  let beq_thm = @class.taut(@parser.parse_term("!a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)"))
+  let beq_thm = @class.taut(@parser.parse_term("forall a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)"))
   let beq_conv_1 : (@kernel.Term) -> @kernel.Thm raise = fn(x12 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x12
     let (a, b) = @kernel.dest_eq(tm)
@@ -118,7 +118,7 @@ pub fn beq_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_AND_CONV
 fn step_7() -> Unit raise {
-  let na_thm = @class.taut(@parser.parse_term("!a b. ~(a /\\ b) <=> (~a \\/ ~b)"))
+  let na_thm = @class.taut(@parser.parse_term("forall a b. ~(a /\\ b) <=> (~a \\/ ~b)"))
   let na_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x13 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x13
     let (a, b) = @basics.dest_conj(@basics.dest_neg(tm))
@@ -139,7 +139,7 @@ pub fn neg_and_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_OR_CONV
 fn step_8() -> Unit raise {
-  let no_thm = @class.taut(@parser.parse_term("!a b. ~(a \\/ b) <=> (~a /\\ ~b)"))
+  let no_thm = @class.taut(@parser.parse_term("forall a b. ~(a \\/ b) <=> (~a /\\ ~b)"))
   let no_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x14 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x14
     let (a, b) = @basics.dest_disj(@basics.dest_neg(tm))
@@ -160,7 +160,7 @@ pub fn neg_or_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_IMP_CONV
 fn step_9() -> Unit raise {
-  let ni_thm = @class.taut(@parser.parse_term("!a b. ~(a ==> b) <=> (a /\\ ~b)"))
+  let ni_thm = @class.taut(@parser.parse_term("forall a b. ~(a ==> b) <=> (a /\\ ~b)"))
   let ni_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x15 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x15
     let (a, b) = @basics.dest_imp(@basics.dest_neg(tm))
@@ -181,7 +181,7 @@ pub fn neg_imp_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NEG_BEQ_CONV
 fn step_10() -> Unit raise {
-  let nbeq_thm = @class.taut(@parser.parse_term("!a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)"))
+  let nbeq_thm = @class.taut(@parser.parse_term("forall a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)"))
   let nbeq_conv : (@kernel.Term) -> @kernel.Thm raise = fn(x16 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x16
     let (a, b) = @kernel.dest_eq(@basics.dest_neg(tm))
@@ -236,7 +236,7 @@ pub fn is_cases(x : @kernel.Term) -> Bool raise {
 ///|
 /// CASES_CONV
 fn step_12() -> Unit raise {
-  let c_thm = @class.taut(@parser.parse_term("!p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)"))
+  let c_thm = @class.taut(@parser.parse_term("forall p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)"))
   let cc : (@kernel.Term) -> @kernel.Thm raise = fn(x19 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x19
     let (p, q0, q1) = dest_cases(tm)
@@ -259,7 +259,7 @@ pub fn cases_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_13() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp(), @theorems.conj_assoc()]))
   let t21 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.exists_unique_thm(), @class.de_morgan_thm(), @class.not_exists_thm()])), t20)
-  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (!x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t21)
+  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t21)
   let t22 = @class.taut(@parser.parse_term("~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r"))
   let t23 = @class.taut(@parser.parse_term("(p = q) <=> (p /\\ q) \\/ (~p /\\ ~q)"))
   let t24 = @class.taut(@parser.parse_term("~(p = q) <=> (p /\\ ~q) \\/ (~p /\\ q)"))
@@ -436,7 +436,7 @@ pub fn maxl() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t45 = @meson.meson_tac(@list.List([@realarith.real_let_trans(), @realax.real_le_total()]))
   let t46 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_max()])), t45)
-  max_lt_c.set(@tactics.prove(@parser.parse_term("!x y z. max x y < z <=> x < z /\\ y < z"), t46))
+  max_lt_c.set(@tactics.prove(@parser.parse_term("forall x y z. max x y < z <=> x < z /\\ y < z"), t46))
 }
 
 ///|
@@ -453,7 +453,7 @@ pub fn max_lt() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t47 = @meson.meson_tac(@list.List([@realarith.real_lte_trans(), @realax.real_le_total()]))
   let t48 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_min()])), t47)
-  min_gt_c.set(@tactics.prove(@parser.parse_term("!x y z. x < real_min y z <=> x < y /\\ x < z"), t48))
+  min_gt_c.set(@tactics.prove(@parser.parse_term("forall x y z. x < real_min y z <=> x < y /\\ x < z"), t48))
 }
 
 ///|
@@ -474,7 +474,7 @@ fn step_19() -> Unit raise {
   let t51 = @tactics.spec_tac(@parser.parse_term("t:real list"), t50)
   let t49 = @simp.rewrite_tac(@list.List([maxl(), @lists.all()]))
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t49), t51), @lists.list_induct_tac), t52), t53)
-  all_lt_lemma_c.set(@tactics.prove(@parser.parse_term("!left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x"), t54))
+  all_lt_lemma_c.set(@tactics.prove(@parser.parse_term("forall left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x"), t54))
 }
 
 ///|
@@ -495,7 +495,7 @@ fn step_20() -> Unit raise {
   let t57 = @tactics.spec_tac(@parser.parse_term("t:real list"), t56)
   let t55 = @simp.rewrite_tac(@list.List([minl(), @lists.all()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t55), t57), @lists.list_induct_tac), t58), t59)
-  all_gt_lemma_c.set(@tactics.prove(@parser.parse_term("!right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right"), t60))
+  all_gt_lemma_c.set(@tactics.prove(@parser.parse_term("forall right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right"), t60))
 }
 
 ///|
@@ -519,7 +519,7 @@ fn step_21() -> Unit raise {
   let t62 = @simp.simp_tac(@list.List([@real.real_lt_ldiv_eq(), @real.real_lt_rdiv_eq(), @real.real_of_num_lt(), @calc_num.arith()]))
   let t61 = @tactics.exists_tac(@parser.parse_term("(x + y) / &2"))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t61), t62), t66), @calc_rat.real_arith_tac)
-  real_dense_c.set(@tactics.prove(@parser.parse_term("!x y. x < y ==> ?z. x < z /\\ z < y"), t67))
+  real_dense_c.set(@tactics.prove(@parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y"), t67))
 }
 
 ///|
@@ -535,7 +535,7 @@ pub fn real_dense() -> @kernel.Thm {
 /// REAL_LT_EXISTS
 fn step_22() -> Unit raise {
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("x + &1"))), @calc_rat.real_arith_tac)
-  real_lt_exists_c.set(@tactics.prove(@parser.parse_term("!x. ?y. x < y"), t68))
+  real_lt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. x < y"), t68))
 }
 
 ///|
@@ -551,7 +551,7 @@ pub fn real_lt_exists() -> @kernel.Thm {
 /// REAL_GT_EXISTS
 fn step_23() -> Unit raise {
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("x - &1"))), @calc_rat.real_arith_tac)
-  real_gt_exists_c.set(@tactics.prove(@parser.parse_term("!x. ?y. y < x"), t69))
+  real_gt_exists_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. y < x"), t69))
 }
 
 ///|
@@ -584,7 +584,7 @@ pub fn lfn_dlo_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_25() -> Unit raise {
   let t71 = @meson.meson_tac(@list.List([real_lt_exists()]))
   let t72 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_lt_lemma()])), t71)
-  proforma_left_c.set(@tactics.prove(@parser.parse_term("!l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T"), t72))
+  proforma_left_c.set(@tactics.prove(@parser.parse_term("forall l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T"), t72))
 }
 
 ///|
@@ -601,7 +601,7 @@ pub fn proforma_left() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t73 = @meson.meson_tac(@list.List([real_gt_exists()]))
   let t74 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_gt_lemma()])), t73)
-  proforma_right_c.set(@tactics.prove(@parser.parse_term("!r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T"), t74))
+  proforma_right_c.set(@tactics.prove(@parser.parse_term("forall r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T"), t74))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn proforma_right() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t75 = @meson.meson_tac(@list.List([real_dense(), @realarith.real_lt_trans()]))
   let t76 = @tactics.then_tac(@simp.rewrite_tac(@list.List([all_lt_lemma(), all_gt_lemma()])), t75)
-  proforma_both_c.set(@tactics.prove(@parser.parse_term("!l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)"), t76))
+  proforma_both_c.set(@tactics.prove(@parser.parse_term("forall l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)"), t76))
 }
 
 ///|
@@ -823,7 +823,7 @@ pub fn dest_binop_op(x100 : @kernel.Term) -> ((@kernel.Term, @kernel.Term, @kern
 /// forall_thm
 fn step_33() -> Unit raise {
   let t101 = @meson.meson_tac(@list.List([]))
-  forall_thm_c.set(@tactics.prove(@parser.parse_term("!P. (!x. P x) <=> ~ (?x. ~ P x)"), t101))
+  forall_thm_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. P x) <=> ~ (?x. ~ P x)"), t101))
 }
 
 ///|
@@ -1057,35 +1057,35 @@ pub fn qelim_dlo_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// tests
 fn step_42() -> Unit raise {
-  let t127 = @parser.parse_term("!x y. x <= y \\/ x < y")
-  let t128 = @parser.parse_term("!x y. x <= y \\/ x > y")
-  let t129 = @parser.parse_term("!a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)")
-  let t130 = @parser.parse_term("!x. x < a ==> x <= b")
-  let t131 = @parser.parse_term("!x. x < a ==> x < b")
-  let t132 = @parser.parse_term("!a b. (!x. x < a ==> x < b) <=> (a <= b)")
+  let t127 = @parser.parse_term("forall x y. x <= y \\/ x < y")
+  let t128 = @parser.parse_term("forall x y. x <= y \\/ x > y")
+  let t129 = @parser.parse_term("forall a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)")
+  let t130 = @parser.parse_term("forall x. x < a ==> x <= b")
+  let t131 = @parser.parse_term("forall x. x < a ==> x < b")
+  let t132 = @parser.parse_term("forall a b. (forall x. x < a ==> x < b) <=> (a <= b)")
   let t133 = @parser.parse_term("?z. z < x /\\ x < y")
-  let t134 = @parser.parse_term("!x y . x < y")
-  let t135 = @parser.parse_term("!y. x < y /\\ y < z ==> w < z")
-  let t136 = @parser.parse_term("!x y z. ?u. u < x /\\ u < y /\\ u < z")
+  let t134 = @parser.parse_term("forall x y . x < y")
+  let t135 = @parser.parse_term("forall y. x < y /\\ y < z ==> w < z")
+  let t136 = @parser.parse_term("forall x y z. ?u. u < x /\\ u < y /\\ u < z")
   let t137 = @parser.parse_term("?z. x < z /\\ z <= y")
   let t138 = @parser.parse_term("?z. x <= z /\\ z <= y")
   let t139 = @parser.parse_term("?z. x < z /\\ z < y")
   let t140 = @parser.parse_term("?x.(x = x) /\\ (x = y)")
   let t141 = @parser.parse_term("?x. x = x:real")
-  let t142 = @parser.parse_term("!x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)")
-  let t143 = @parser.parse_term("!x y. x < y ==> ?z. x < z /\\ z < y")
-  let t144 = @parser.parse_term("!x y. ?z. z < x /\\ z < y")
-  let t145 = @parser.parse_term("!x y. ?z. z < x /\\ x < y")
+  let t142 = @parser.parse_term("forall x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)")
+  let t143 = @parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y")
+  let t144 = @parser.parse_term("forall x y. ?z. z < x /\\ z < y")
+  let t145 = @parser.parse_term("forall x y. ?z. z < x /\\ x < y")
   let t146 = @parser.parse_term("?x y. x < y /\\ y < x")
-  let t147 = @parser.parse_term("!x y. x < y \\/ (x = y) \\/ y < x")
-  let t148 = @parser.parse_term("!x y. x < y \\/ (x = y) \\/ y < x")
-  let t149 = @parser.parse_term("!x y z. x < y /\\ y < z ==> x < z")
-  let t150 = @parser.parse_term("!x. ?y. x < y")
-  let t151 = @parser.parse_term("!a b. (!x. (x < a) <=> (x < b)) <=> (a = b)")
-  let t152 = @parser.parse_term("!x. x < a ==> x < b")
+  let t147 = @parser.parse_term("forall x y. x < y \\/ (x = y) \\/ y < x")
+  let t148 = @parser.parse_term("forall x y. x < y \\/ (x = y) \\/ y < x")
+  let t149 = @parser.parse_term("forall x y z. x < y /\\ y < z ==> x < z")
+  let t150 = @parser.parse_term("forall x. ?y. x < y")
+  let t151 = @parser.parse_term("forall a b. (forall x. (x < a) <=> (x < b)) <=> (a = b)")
+  let t152 = @parser.parse_term("forall x. x < a ==> x < b")
   let t153 = @parser.parse_term("?z. x < z /\\ z < y")
   let t154 = @parser.parse_term("?z. x < x /\\ z < y")
-  tests_c.set(@list.List([@parser.parse_term("!x y. ?z. z < x /\\ z < y"), t154, t153, t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139, t138, t137, t136, t135, t134, t133, t132, t131, t130, t129, t128, t127]))
+  tests_c.set(@list.List([@parser.parse_term("forall x y. ?z. z < x /\\ z < y"), t154, t153, t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, t140, t139, t138, t137, t136, t135, t134, t133, t132, t131, t130, t129, t128, t127]))
 }
 
 ///|

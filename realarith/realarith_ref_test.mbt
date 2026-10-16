@@ -984,48 +984,48 @@ test "realarith matches realarith.ml" {
       #|0..0..2..4..10..18..34..76..138..336..872..2366..solved at 5076
       #|CPU time (user): <t>
       #|realarith quotations (86):
-      #|  !x y. x < y \\/ y <= x
-      #|  !x y. x <= y \\/ y < x
-      #|  !x y. x < y ==> x <= y
-      #|  !x y z. x < y /\\ y <= z ==> x < z
-      #|  !x y z. x <= y /\\ y < z ==> x < z
-      #|  !x y z. x < y /\\ y < z ==> x < z
-      #|  !x y. &0 <= x /\\ &0 <= y ==> &0 <= x + y
-      #|  !x y. ~(x < y /\\ y <= x)
-      #|  !x y. &0 <= (x - y) <=> y <= x
-      #|  !x y. --(x - y) = y - x
-      #|  !x y. x <= y <=> x < y \\/ (x = y)
-      #|  !x y. &0 < (x - y) <=> y < x
-      #|  !x y. ~(x < y) <=> y <= x
-      #|  !x y. (x - y = &0) <=> (x = y)
-      #|  !x y. x < y <=> x <= y /\\ ~(x = y)
-      #|  !x. ~(x < x)
-      #|  !x y. &0 < x /\\ &0 <= y ==> &0 < x + y
-      #|  !x y. &0 <= x /\\ &0 < y ==> &0 < x + y
-      #|  !x y. &0 < x /\\ &0 < y ==> &0 < x + y
+      #|  forall x y. x < y \\/ y <= x
+      #|  forall x y. x <= y \\/ y < x
+      #|  forall x y. x < y ==> x <= y
+      #|  forall x y z. x < y /\\ y <= z ==> x < z
+      #|  forall x y z. x <= y /\\ y < z ==> x < z
+      #|  forall x y z. x < y /\\ y < z ==> x < z
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> &0 <= x + y
+      #|  forall x y. ~(x < y /\\ y <= x)
+      #|  forall x y. &0 <= (x - y) <=> y <= x
+      #|  forall x y. --(x - y) = y - x
+      #|  forall x y. x <= y <=> x < y \\/ (x = y)
+      #|  forall x y. &0 < (x - y) <=> y < x
+      #|  forall x y. ~(x < y) <=> y <= x
+      #|  forall x y. (x - y = &0) <=> (x = y)
+      #|  forall x y. x < y <=> x <= y /\\ ~(x = y)
+      #|  forall x. ~(x < x)
+      #|  forall x y. &0 < x /\\ &0 <= y ==> &0 < x + y
+      #|  forall x y. &0 <= x /\\ &0 < y ==> &0 < x + y
+      #|  forall x y. &0 < x /\\ &0 < y ==> &0 < x + y
       #|  (*) (inv x)
       #|  x = &0
-      #|  !x y. (x * y = &0) <=> (x = &0) \\/ (y = &0)
-      #|  !x. &0 <= x \\/ &0 <= --x
+      #|  forall x y. (x * y = &0) <=> (x = &0) \\/ (y = &0)
+      #|  forall x. &0 <= x \\/ &0 <= --x
       #|  x:real
-      #|  !x. &0 <= x * x
-      #|  !x. x * &1 = x
+      #|  forall x. &0 <= x * x
+      #|  forall x. x * &1 = x
       #|  1
       #|  2
-      #|  !x. x pow 2 = x * x
-      #|  (!x y z. x + (y + z) = (x + y) + z) /\\\n   (!x y. x + y = y + x) /\\\n   (!x. &0 + x = x) /\\\n   (!x y z. x * (y * z) = (x * y) * z) /\\\n   (!x y. x * y = y * x) /\\\n   (!x. &1 * x = x) /\\\n   (!x. &0 * x = &0) /\\\n   (!x y z. x * (y + z) = x * y + x * z) /\\\n   (!x. x pow 0 = &1) /\\\n   (!x n. x pow (SUC n) = x * x pow n)
-      #|  (!x. --x = --(&1) * x) /\\\n   (!x y. x - y = x + --(&1) * y)
-      #|  !n. &0 <= &n
+      #|  forall x. x pow 2 = x * x
+      #|  (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. &0 + x = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x y. x * y = y * x) /\\\n   (forall x. &1 * x = x) /\\\n   (forall x. &0 * x = &0) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x. x pow 0 = &1) /\\\n   (forall x n. x pow (SUC n) = x * x pow n)
+      #|  (forall x. --x = --(&1) * x) /\\\n   (forall x y. x - y = x + --(&1) * y)
+      #|  forall n. &0 <= &n
       #|  &n = &0
-      #|  !n. ~(&n = &0) <=> (&0 < &n)
+      #|  forall n. ~(&n = &0) <=> (&0 < &n)
       #|  SUC n
-      #|  !n. &0 < &(SUC n)
+      #|  forall n. &0 < &(SUC n)
       #|  (x < y <=> y - x > &0) /\\\n     (x <= y <=> y - x >= &0) /\\\n     (x > y <=> x - y > &0) /\\\n     (x >= y <=> x - y >= &0) /\\\n     ((x = y) <=> (x - y = &0)) /\\\n     (~(x < y) <=> x - y >= &0) /\\\n     (~(x <= y) <=> x - y > &0) /\\\n     (~(x > y) <=> y - x >= &0) /\\\n     (~(x >= y) <=> y - x > &0) /\\\n     (~(x = y) <=> x - y > &0 \\/ --(x - y) > &0)
       #|  (~p ==> F) ==> p
       #|  ((x = &0) /\\ (y = &0) ==> (x + y = &0)) /\\\n     ((x = &0) /\\ y >= &0 ==> x + y >= &0) /\\\n     ((x = &0) /\\ y > &0 ==> x + y > &0) /\\\n     (x >= &0 /\\ (y = &0) ==> x + y >= &0) /\\\n     (x >= &0 /\\ y >= &0 ==> x + y >= &0) /\\\n     (x >= &0 /\\ y > &0 ==> x + y > &0) /\\\n     (x > &0 /\\ (y = &0) ==> x + y > &0) /\\\n     (x > &0 /\\ y >= &0 ==> x + y > &0) /\\\n     (x > &0 /\\ y > &0 ==> x + y > &0)
       #|  ((x = &0) /\\ (y = &0) ==> (x * y = &0)) /\\\n     ((x = &0) /\\ y >= &0 ==> (x * y = &0)) /\\\n     ((x = &0) /\\ y > &0 ==> (x * y = &0)) /\\\n     (x >= &0 /\\ (y = &0) ==> (x * y = &0)) /\\\n     (x >= &0 /\\ y >= &0 ==> x * y >= &0) /\\\n     (x >= &0 /\\ y > &0 ==> x * y >= &0) /\\\n     (x > &0 /\\ (y = &0) ==> (x * y = &0)) /\\\n     (x > &0 /\\ y >= &0 ==> x * y >= &0) /\\\n     (x > &0 /\\ y > &0 ==> x * y > &0)
-      #|  (y = &0) ==> !x. x * y = &0
-      #|  !x. x * x >= &0
+      #|  (y = &0) ==> forall x. x * y = &0
+      #|  forall x. x * x >= &0
       #|  x:real
       #|  y:real
       #|  (--):real->real

@@ -67,7 +67,7 @@ fn step_2() -> Unit raise {
   let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t29 = @class.asm_cases_tac(@parser.parse_term("EVEN m"))
   let t25 = @parser.parse_term("m:num")
-  let t28 = @tactics.undisch_then(@parser.parse_term("!n. abs(a(n + 1)) <= abs(a n)"), fn(x27 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t28 = @tactics.undisch_then(@parser.parse_term("forall n. abs(a(n + 1)) <= abs(a n)"), fn(x27 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x22 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s23 = @tactics.mp_tac(x22)
       fn(x24 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -102,7 +102,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@arith.odd(), @arith.even()]))
   let t1 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t69 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t1), @nums.induct_tac), t2), t4), t5), t7), t19), t20), t21), t28), t29), t30), t68)
-  alternating_sum_bounds_c.set(@tactics.prove(@parser.parse_term("!a. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n)))\n       ==> !m n. (EVEN m ==> &0 <= sum(m,n) a /\\ sum(m,n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m,n) a /\\ sum(m,n) a <= &0)"), t69))
+  alternating_sum_bounds_c.set(@tactics.prove(@parser.parse_term("forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. (EVEN m ==> &0 <= sum(m,n) a /\\ sum(m,n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m,n) a /\\ sum(m,n) a <= &0)"), t69))
 }
 
 ///|
@@ -130,7 +130,7 @@ fn step_3() -> Unit raise {
       }
     })(t73(x74))
   })), t75), t76), t77), t78), @calc_rat.real_arith_tac)
-  alternating_sum_bound_c.set(@tactics.prove(@parser.parse_term("!a. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n)))\n       ==> !m n. abs(sum(m,n) a) <= abs(a m)"), t79))
+  alternating_sum_bound_c.set(@tactics.prove(@parser.parse_term("forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. abs(sum(m,n) a) <= abs(a m)"), t79))
 }
 
 ///|
@@ -167,7 +167,7 @@ fn step_4() -> Unit raise {
   let t81 = @tactics.x_gen_tac(@parser.parse_term("e:real"))
   let t80 = @simp.rewrite_tac(@list.List([@analysis.ser_cauchy()]))
   let t97 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t80), t81), @tactics.strip_tac), t91), t92), t93), t94), t95), t96)
-  summable_alternating_c.set(@tactics.prove(@parser.parse_term("!v. (!n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (!n. abs(a(n + 1)) <= abs(a(n))) /\\ a tends_num_real &0\n       ==> summable a"), t97))
+  summable_alternating_c.set(@tactics.prove(@parser.parse_term("forall v. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n))) /\\ a tends_num_real &0\n       ==> summable a"), t97))
 }
 
 ///|
@@ -233,7 +233,7 @@ fn step_5() -> Unit raise {
     })(t101(x102))
   })
   let t131 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t103), t114), t120), t127), t128), t129), t130)
-  real_atn_powser_alt_c.set(@tactics.prove(@parser.parse_term("!x. abs(x) < &1\n       ==> (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1))\n           sums (atn x)"), t131))
+  real_atn_powser_alt_c.set(@tactics.prove(@parser.parse_term("forall x. abs(x) < &1\n       ==> (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1))\n           sums (atn x)"), t131))
 }
 
 ///|
@@ -305,7 +305,7 @@ fn step_7() -> Unit raise {
   let t162 = @simp.asm_rewrite_tac(@list.List([@iterate.sum_sing_numseg()]))
   let t164 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("m <= 0 + 1 <=> m = 0 \\/ m = 1"))])), @tactics.strip_tac), t162), t163), @tactics.all_tac])
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t164), t165), @tactics.strip_tac), t166), t167), t168), @calc_rat.real_arith_tac)
-  sum_differences_c.set(@tactics.prove(@parser.parse_term("!a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i) - a(i+1)) = a(m) - a(n + 1)"), t169))
+  sum_differences_c.set(@tactics.prove(@parser.parse_term("forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i) - a(i+1)) = a(m) - a(n + 1)"), t169))
 }
 
 ///|
@@ -365,7 +365,7 @@ fn step_8() -> Unit raise {
   let t170 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
   let t172 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @calc_num.num_conv(@parser.parse_term("1")), @arith.add_clauses()])), t170), t171), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t205 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), @nums.induct_tac), t172), t173), @tactics.disch_tac), t182), t183), t185), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t189), t190), t191), t192), t193), t194), t195), t196), t197), t201), t203), t204), @calc_rat.real_arith_tac)
-  sum_rearrange_lemma_c.set(@tactics.prove(@parser.parse_term("!a v m n.\n        m <= n + 1\n        ==> sum(m..n+1) (\\i. a i * v i) =\n            sum(m..n) (\\k. sum(m..k) a * (v(k) - v(k+1))) +\n            sum(m..n+1) a * v(n+1)"), t205))
+  sum_rearrange_lemma_c.set(@tactics.prove(@parser.parse_term("forall a v m n.\n        m <= n + 1\n        ==> sum(m..n+1) (\\i. a i * v i) =\n            sum(m..n) (\\k. sum(m..k) a * (v(k) - v(k+1))) +\n            sum(m..n+1) a * v(n+1)"), t205))
 }
 
 ///|
@@ -405,7 +405,7 @@ fn step_9() -> Unit raise {
   let t206 = @simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("m <= i /\\ i = 0 <=> m = 0 /\\ i = 0"))]))
   let t214 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.le(), @iterate.sum_clauses_numseg()])), t206), t207), t208), t209), t210), t213])
   let t229 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.replicate_tac(5, @tactics.gen_tac), @nums.induct_tac), t214), t215), @tactics.strip_tac), @tactics.conj_tac), t221), t222), t223), t224), t225), @tactics.strip_tac), t226), t227), t228)
-  sum_bounds_lemma_c.set(@tactics.prove(@parser.parse_term("!a v l u m n.\n        m <= n /\\\n        (!i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (!k. m <= k /\\ k <= n ==> l <= sum(m..k) a /\\ sum(m..k) a <= u)\n        ==> l * v(m) <= sum(m..n) (\\i. a(i) * v(i)) /\\\n            sum(m..n) (\\i. a(i) * v(i)) <= u * v(m)"), t229))
+  sum_bounds_lemma_c.set(@tactics.prove(@parser.parse_term("forall a v l u m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> l <= sum(m..k) a /\\ sum(m..k) a <= u)\n        ==> l * v(m) <= sum(m..n) (\\i. a(i) * v(i)) /\\\n            sum(m..n) (\\i. a(i) * v(i)) <= u * v(m)"), t229))
 }
 
 ///|
@@ -425,7 +425,7 @@ fn step_10() -> Unit raise {
   let t231 = @simp.asm_simp_tac(@list.List([@arith.le_refl(), @realax.real_abs()]))
   let t230 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("--b * k <= a /\\ a <= b * k ==> abs(a) <= b * k")))
   let t234 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t230), t231), t232), t233)
-  sum_bound_lemma_c.set(@tactics.prove(@parser.parse_term("!a v b m n.\n        m <= n /\\\n        (!i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (!k. m <= k /\\ k <= n ==> abs(sum(m..k) a) <= b)\n        ==> abs(sum(m..n) (\\i. a(i) * v(i))) <= b * abs(v m)"), t234))
+  sum_bound_lemma_c.set(@tactics.prove(@parser.parse_term("forall a v b m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> abs(sum(m..k) a) <= b)\n        ==> abs(sum(m..n) (\\i. a(i) * v(i))) <= b * abs(v m)"), t234))
 }
 
 ///|

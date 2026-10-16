@@ -26,26 +26,26 @@ bool quotations (95):
   p <=> q
   p ==> q
   q ==> r
-  (!) = \\P:A->bool. P = \\x. T
+  (forall) = \\P:A->bool. P = \\x. T
   P:A->bool
   x:A
-  (!)(P:A->bool)
+  (forall)(P:A->bool)
   P:A->bool
   x:A
   P:A->bool
-  (?) = \\P:A->bool. !q. (!x. P x ==> q) ==> q
+  (?) = \\P:A->bool. forall q. (forall x. P x ==> q) ==> q
   P:A->bool
   x:A
-  !x:A. P x ==> Q
+  forall x:A. P x ==> Q
   x:A
   (P:A->bool) x
-  !x:A. P x ==> Q
+  forall x:A. P x ==> Q
   Q:bool
   P:A->bool
   Q:bool
   Q:bool
   (?) (P:A->bool)
-  (\\/) = \\p q. !r. (p ==> r) ==> (q ==> r) ==> r
+  (\\/) = \\p q. forall r. (p ==> r) ==> (q ==> r) ==> r
   P:bool
   Q:bool
   P:bool
@@ -71,7 +71,7 @@ bool quotations (95):
   Q:bool
   P \\/ Q
   R:bool
-  F = !p:bool. p
+  F = forall p:bool. p
   (~) = \\p. p ==> F
   (~)
   P:bool
@@ -87,11 +87,11 @@ bool quotations (95):
   P:bool
   F
   F
-  (?!) = \\P:A->bool. ((?) P) /\\ (!x y. P x /\\ P y ==> x = y)
+  (?!) = \\P:A->bool. ((?) P) /\\ (forall x y. P x /\\ P y ==> x = y)
   P:A->bool
   T
   F
-  (!):(A->bool)->bool
+  (forall):(A->bool)->bool
   (?):(A->bool)->bool
   (?!):(A->bool)->bool
 constants = ?! ~ F \/ ? ! ==> /\ T =

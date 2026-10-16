@@ -79035,7 +79035,7 @@ Generating HOL version of proof
   &0 <= x ==> --x <= x
   t:real
   \\t. &2 * sqrt(&1 - t pow 2)
-  !t. abs(t) <= &1 <=> t IN real_interval[-- &1,&1]
+  forall t. abs(t) <= &1 <=> t IN real_interval[-- &1,&1]
   1
   :N
   :2
@@ -79054,8 +79054,8 @@ Generating HOL version of proof
   cball(vec 0:real^2,&1)
   &0 < r
   r = &0
-  !z:real^2 r. &0 <= r ==> measure(cball(z,r)) = pi * r pow 2
-  !z:real^2 r. &0 <= r ==> measure(ball(z,r)) = pi * r pow 2
+  forall z:real^2 r. &0 <= r ==> measure(cball(z,r)) = pi * r pow 2
+  forall z:real^2 r. &0 <= r ==> measure(ball(z,r)) = pi * r pow 2
   r:real
   --r:real
   \\t. pi * (r pow 2 - t pow 2)
@@ -79063,15 +79063,15 @@ Generating HOL version of proof
   abs x <= r ==> abs x <= abs r
   t:real
   \\t. pi * (r pow 2 - t pow 2)
-  !t. abs(t) <= r <=> t IN real_interval[--r,r]
+  forall t. abs(t) <= r <=> t IN real_interval[--r,r]
   1
   :N
   :3
   :M
   :2
   z:real^3
-  !z:real^3 r. &0 <= r ==> measure(cball(z,r)) = &4 / &3 * pi * r pow 3
-  !z:real^3 r. &0 <= r ==> measure(ball(z,r)) =  &4 / &3 * pi * r pow 3
+  forall z:real^3 r. &0 <= r ==> measure(cball(z,r)) = &4 / &3 * pi * r pow 3
+  forall z:real^3 r. &0 <= r ==> measure(ball(z,r)) =  &4 / &3 * pi * r pow 3
 AREA_UNIT_CBALL =  |- ((#=:fun(real,fun(real,bool)) (#measure:fun(fun(cart(real,tybit0(1)),bool),real) (#cball:fun(prod(cart(real,tybit0(1)),real),fun(cart(real,tybit0(1)),bool)) ((#,:fun(cart(real,tybit0(1)),fun(real,prod(cart(real,tybit0(1)),real))) (#vec:fun(num,cart(real,tybit0(1))) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) #pi:real)
 AREA_CBALL =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). (#!:fun(fun(real,bool),bool) (\r:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#=:fun(real,fun(real,bool)) (#measure:fun(fun(cart(real,tybit0(1)),bool),real) (#cball:fun(prod(cart(real,tybit0(1)),real),fun(cart(real,tybit0(1)),bool)) ((#,:fun(cart(real,tybit0(1)),fun(real,prod(cart(real,tybit0(1)),real))) z:cart(real,tybit0(1))) r:real)))) ((#real_mul:fun(real,fun(real,real)) #pi:real) ((#real_pow:fun(real,fun(num,real)) r:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 AREA_BALL =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). (#!:fun(fun(real,bool),bool) (\r:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#=:fun(real,fun(real,bool)) (#measure:fun(fun(cart(real,tybit0(1)),bool),real) (#ball:fun(prod(cart(real,tybit0(1)),real),fun(cart(real,tybit0(1)),bool)) ((#,:fun(cart(real,tybit0(1)),fun(real,prod(cart(real,tybit0(1)),real))) z:cart(real,tybit0(1))) r:real)))) ((#real_mul:fun(real,fun(real,real)) #pi:real) ((#real_pow:fun(real,fun(num,real)) r:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))

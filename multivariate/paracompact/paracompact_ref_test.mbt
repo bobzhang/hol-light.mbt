@@ -21054,22 +21054,22 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..2..solved at 6
       #|Multivariate/paracompact quotations (1856):
-      #|  countably_paracompact_space (top:A topology) <=>\n        !U. COUNTABLE U /\\\n            (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n            ==> ?V. (!v. v IN V ==> open_in top v) /\\\n                    UNIONS V = topspace top /\\\n                    (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                    locally_finite_in top V
+      #|  countably_paracompact_space (top:A topology) <=>\n        forall U. COUNTABLE U /\\\n            (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n            ==> ?V. (forall v. v IN V ==> open_in top v) /\\\n                    UNIONS V = topspace top /\\\n                    (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                    locally_finite_in top V
       #|  U:(A->bool)->bool
-      #|  !top:A topology.\n        paracompact_space top ==> countably_paracompact_space top
-      #|  !top:A topology.\n        metrizable_space top ==> countably_paracompact_space top
-      #|  !f:num->(A->bool).\n          (!n. f(SUC n) SUBSET f n) ==> !m n. m <= n ==> f n SUBSET f m
+      #|  forall top:A topology.\n        paracompact_space top ==> countably_paracompact_space top
+      #|  forall top:A topology.\n        metrizable_space top ==> countably_paracompact_space top
+      #|  forall f:num->(A->bool).\n          (forall n. f(SUC n) SUBSET f n) ==> forall m n. m <= n ==> f n SUBSET f m
       #|  ~((y:A) IN UNIONS {v:A->bool | v IN V /\\\n         ~(v INTER (f:num->(A->bool)) (n0:num) = {})})
       #|  n0:num
       #|  UNIONS {v:A->bool | v IN V /\\\n             ~(v INTER (f:num->(A->bool)) (n0:num) = {})}
       #|  n0:num
       #|  y:A
       #|  y:A
-      #|  (!x:A. ~(x IN s)) ==> s = {}
+      #|  (forall x:A. ~(x IN s)) ==> s = {}
       #|  (f:num->(A->bool)) N SUBSET f((nv:(A->bool)->num) w)
       #|  ~((w:A->bool) INTER (f:num->(A->bool)) N = {})
       #|  w:A->bool
-      #|  !v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))\n              ((nv:(A->bool)->num) v)
+      #|  forall v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))\n              ((nv:(A->bool)->num) v)
       #|  (f:num->(A->bool)) N SUBSET f(nv(w:A->bool))
       #|  w:A->bool
       #|  w:A->bool
@@ -21089,7 +21089,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  0
       #|  (x:A) IN topspace top
       #|  x:A
-      #|  !x:A. ?n:num. ~(x IN UNIONS {v:A->bool | v IN V /\\\n                      ~(v INTER (f:num->(A->bool)) n = {})})
+      #|  forall x:A. ?n:num. ~(x IN UNIONS {v:A->bool | v IN V /\\\n                      ~(v INTER (f:num->(A->bool)) n = {})})
       #|  x:A
       #|  v0:A->bool
       #|  v0:A->bool
@@ -21098,14 +21098,14 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (x:A) IN topspace top
       #|  x:A
       #|  n:num
-      #|  !x:A. ?n:num. ~(x IN f n)
+      #|  forall x:A. ?n:num. ~(x IN f n)
       #|  \\n:num. UNIONS {v:A->bool | v IN V /\\\n                     ~(v INTER (f:num->(A->bool)) n = {})}
       #|  0
       #|  v:A->bool
       #|  (v:A->bool) IN V
       #|  v:A->bool
       #|  nv:(A->bool)->num
-      #|  ?nv:(A->bool)->num. !v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))(nv v)
+      #|  ?nv:(A->bool)->num. forall v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))(nv v)
       #|  V:(A->bool)->bool
       #|  m:num
       #|  m:num
@@ -21114,9 +21114,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (s:A->bool) SUBSET t ==> t DIFF s SUBSET t
       #|  IMAGE (\\n:num. topspace top DIFF (f:num->(A->bool)) n) (:num)
       #|  INTERS {(f:num->(A->bool)) n | n IN (:num)} = {}
-      #|  !x:A. ?n:num. ~(x IN f n)
+      #|  forall x:A. ?n:num. ~(x IN f n)
       #|  f:num->(A->bool)
-      #|  !top:A topology.\n        countably_paracompact_space top\n        ==> !f. (!n. closed_in top (f n)) /\\\n                (!n. f(SUC n) SUBSET f n) /\\\n                INTERS {f n | n IN (:num)} = {}\n                ==> ?g. (!n. open_in top (g n)) /\\\n                        (!n. f n SUBSET g n) /\\\n                        INTERS {g n | n IN (:num)} = {}
+      #|  forall top:A topology.\n        countably_paracompact_space top\n        ==> forall f. (forall n. closed_in top (f n)) /\\\n                (forall n. f(SUC n) SUBSET f n) /\\\n                INTERS {f n | n IN (:num)} = {}\n                ==> ?g. (forall n. open_in top (g n)) /\\\n                        (forall n. f n SUBSET g n) /\\\n                        INTERS {g n | n IN (:num)} = {}
       #|  N:num
       #|  (nv:(A->bool)->num) w
       #|  n0:num
@@ -21157,7 +21157,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  IMAGE (\\n:num. (u:num->A->bool) n INTER\n      INTERS(IMAGE (H:num->A->bool) {i:num | i < n})) (:num)
       #|  n:num
       #|  H:num->A->bool
-      #|  ?H:num->A->bool. !n. open_in top (H n) /\\\n      topspace top DIFF UNIONS(IMAGE (u:num->A->bool) {i | i <= n})\n        SUBSET H n /\\\n      top closure_of H n SUBSET (g:num->A->bool) n
+      #|  ?H:num->A->bool. forall n. open_in top (H n) /\\\n      topspace top DIFF UNIONS(IMAGE (u:num->A->bool) {i | i <= n})\n        SUBSET H n /\\\n      top closure_of H n SUBSET (g:num->A->bool) n
       #|  g:num->A->bool
       #|  0
       #|  k:num
@@ -21173,11 +21173,11 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  {}:(A->bool)->bool
       #|  U:(A->bool)->bool = {}
       #|  U:(A->bool)->bool
-      #|  !top:A topology.\n        normal_space top /\\\n        (!f. (!n. closed_in top (f n)) /\\\n             (!n. f(SUC n) SUBSET f n) /\\\n             INTERS {f n | n IN (:num)} = {}\n             ==> ?g. (!n. open_in top (g n)) /\\\n                     (!n. f n SUBSET g n) /\\\n                     INTERS {g n | n IN (:num)} = {})\n        ==> countably_paracompact_space top
+      #|  forall top:A topology.\n        normal_space top /\\\n        (forall f. (forall n. closed_in top (f n)) /\\\n             (forall n. f(SUC n) SUBSET f n) /\\\n             INTERS {f n | n IN (:num)} = {}\n             ==> ?g. (forall n. open_in top (g n)) /\\\n                     (forall n. f n SUBSET g n) /\\\n                     INTERS {g n | n IN (:num)} = {})\n        ==> countably_paracompact_space top
       #|  {}:A->bool
       #|  {}:A->bool
       #|  {}:A->bool
-      #|  !top:A topology.\n        normal_space top\n        ==> (countably_paracompact_space top <=>\n             !f. (!n. closed_in top (f n)) /\\\n                 (!n. f(SUC n) SUBSET f n) /\\\n                 INTERS {f n | n IN (:num)} = {}\n                 ==> ?g. (!n. open_in top (g n)) /\\\n                         (!n. f n SUBSET g n) /\\\n                         INTERS {g n | n IN (:num)} = {})
+      #|  forall top:A topology.\n        normal_space top\n        ==> (countably_paracompact_space top <=>\n             forall f. (forall n. closed_in top (f n)) /\\\n                 (forall n. f(SUC n) SUBSET f n) /\\\n                 INTERS {f n | n IN (:num)} = {}\n                 ==> ?g. (forall n. open_in top (g n)) /\\\n                         (forall n. f n SUBSET g n) /\\\n                         INTERS {g n | n IN (:num)} = {})
       #|  {(s:A->bool) INTER v | v IN V}
       #|  (v:A->bool) SUBSET (f:(A->bool)->(A->bool)) x
       #|  x:A->bool
@@ -21200,13 +21200,13 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  COUNTABLE(U:(A->bool)->bool)
       #|  V:(A->bool)->bool
       #|  closed_in top (s:A->bool)
-      #|  !u:A->bool. u IN U ==> open_in top ((f:(A->bool)->(A->bool)) u) /\\\n                              u = s INTER f u
+      #|  forall u:A->bool. u IN U ==> open_in top ((f:(A->bool)->(A->bool)) u) /\\\n                              u = s INTER f u
       #|  u:A->bool
       #|  u:A->bool
-      #|  !u:A->bool. u IN U ==> (f:(A->bool)->(A->bool)) u SUBSET topspace top
+      #|  forall u:A->bool. u IN U ==> (f:(A->bool)->(A->bool)) u SUBSET topspace top
       #|  COUNTABLE(U:(A->bool)->bool)
       #|  u:A->bool
-      #|  !u:A->bool. u IN U ==> u SUBSET (f:(A->bool)->(A->bool)) u
+      #|  forall u:A->bool. u IN U ==> u SUBSET (f:(A->bool)->(A->bool)) u
       #|  (s:A->bool) SUBSET topspace top
       #|  x:A->bool
       #|  (topspace top DIFF s:A->bool) INSERT IMAGE (f:(A->bool)->(A->bool)) U
@@ -21215,9 +21215,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (u:A->bool) IN U
       #|  u:A->bool
       #|  f:(A->bool)->(A->bool)
-      #|  ?f:(A->bool)->(A->bool).\n       !u. u IN U ==> open_in top (f u) /\\ u = s INTER f u
+      #|  ?f:(A->bool)->(A->bool).\n       forall u. u IN U ==> open_in top (f u) /\\ u = s INTER f u
       #|  U:(A->bool)->bool
-      #|  !top s:A->bool.\n        countably_paracompact_space top /\\ closed_in top s\n        ==> countably_paracompact_space(subtopology top s)
+      #|  forall top s:A->bool.\n        countably_paracompact_space top /\\ closed_in top s\n        ==> countably_paracompact_space(subtopology top s)
       #|  U:((A#B)->bool)->bool
       #|  w':A->bool
       #|  z:A->bool
@@ -21246,7 +21246,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  c:A->bool
       #|  z:A->bool
       #|  z:A->bool
-      #|  ?xw:(A->bool)->A. !z. z IN Z\n       ==> xw z IN topspace top /\\\n           z SUBSET (W:(((A#B)->bool)->bool)->(A->bool))\n                    ((Ux:A->((A#B)->bool)->bool)(xw z))
+      #|  ?xw:(A->bool)->A. forall z. z IN Z\n       ==> xw z IN topspace top /\\\n           z SUBSET (W:(((A#B)->bool)->bool)->(A->bool))\n                    ((Ux:A->((A#B)->bool)->bool)(xw z))
       #|  Z:(A->bool)->bool
       #|  x:A
       #|  x:A
@@ -21260,7 +21260,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  y:A
       #|  y:A
       #|  q:A
-      #|  !p:A. p IN topspace top\n            ==> (W:(((A#B)->bool)->bool)->(A->bool))\n                ((Ux:A->((A#B)->bool)->bool) p) CROSS\n                topspace (top':B topology) SUBSET UNIONS (Ux p)
+      #|  forall p:A. p IN topspace top\n            ==> (W:(((A#B)->bool)->bool)->(A->bool))\n                ((Ux:A->((A#B)->bool)->bool) p) CROSS\n                topspace (top':B topology) SUBSET UNIONS (Ux p)
       #|  IMAGE (W:(((A#B)->bool)->bool)->(A->bool))\n           (IMAGE (Ux:A->((A#B)->bool)->bool) (topspace top))
       #|  COUNTABLE(U:((A#B)->bool)->bool)
       #|  y:A
@@ -21275,7 +21275,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  b:B
       #|  a:A
       #|  p:A
-      #|  !p:A. p IN topspace top\n           ==> (W:(((A#B)->bool)->bool)->(A->bool))(Ux p) CROSS topspace top'\n               SUBSET UNIONS ((Ux:A->((A#B)->bool)->bool) p)
+      #|  forall p:A. p IN topspace top\n           ==> (W:(((A#B)->bool)->bool)->(A->bool))(Ux p) CROSS topspace top'\n               SUBSET UNIONS ((Ux:A->((A#B)->bool)->bool) p)
       #|  W = \\(G:((A#B)->bool)->bool).\n       UNIONS {(V:A->(A->bool)) x | x | x IN topspace top /\\\n               (Ux:A->((A#B)->bool)->bool) x = G}
       #|  Ux:A->((A#B)->bool)->bool
       #|  V:A->(A->bool)
@@ -21283,9 +21283,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  b:B
       #|  a:A
       #|  x:A
-      #|  !x:A. x IN topspace top\n           ==> ?v (Ux:((A#B)->bool)->bool). open_in top v /\\ x IN v /\\\n                      FINITE Ux /\\ Ux SUBSET U /\\\n                      (v:A->bool) CROSS topspace top' SUBSET UNIONS Ux
+      #|  forall x:A. x IN topspace top\n           ==> ?v (Ux:((A#B)->bool)->bool). open_in top v /\\ x IN v /\\\n                      FINITE Ux /\\ Ux SUBSET U /\\\n                      (v:A->bool) CROSS topspace top' SUBSET UNIONS Ux
       #|  U:((A#B)->bool)->bool
-      #|  !(top:A topology) (top':B topology).\n        countably_paracompact_space top /\\ compact_space top'\n        ==> countably_paracompact_space(prod_topology top top')
+      #|  forall(top:A topology) (top':B topology).\n        countably_paracompact_space top /\\ compact_space top'\n        ==> countably_paracompact_space(prod_topology top top')
       #|  UNIONS ((Sn:num->(A->bool)->bool) n)
       #|  top:A topology
       #|  n:num
@@ -21319,23 +21319,23 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  topspace top DIFF C:A->bool
       #|  regular_space (top:A topology)
       #|  x:A
-      #|  !x:A. x IN topspace top /\\ ~(x IN C)\n           ==> ?m:num. x IN UNIONS ((Sn:num->(A->bool)->bool) m)
+      #|  forall x:A. x IN topspace top /\\ ~(x IN C)\n           ==> ?m:num. x IN UNIONS ((Sn:num->(A->bool)->bool) m)
       #|  b:A->bool
       #|  n:num
-      #|  !n:num. top closure_of\n             (UNIONS ((Sn:num->(A->bool)->bool) n)) INTER C = {}
+      #|  forall n:num. top closure_of\n             (UNIONS ((Sn:num->(A->bool)->bool) n)) INTER C = {}
       #|  (Sn:num->(A->bool)->bool) n SUBSET (Bn:num->(A->bool)->bool) n
       #|  n:num
-      #|  !n:num. locally_finite_in top ((Sn:num->(A->bool)->bool) n)
+      #|  forall n:num. locally_finite_in top ((Sn:num->(A->bool)->bool) n)
       #|  Sn = \\n:num. {b:A->bool | b IN Bn n /\\\n                                top closure_of b INTER C = {}}
       #|  Bn:num->(A->bool)->bool
-      #|  !top:A topology C (B:(A->bool)->bool).\n        regular_space top /\\\n        closed_in top C /\\\n        (!b. b IN B ==> open_in top b) /\\\n        (!x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> gdelta_in top C
+      #|  forall top:A topology C (B:(A->bool)->bool).\n        regular_space top /\\\n        closed_in top C /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> gdelta_in top C
       #|  x:A
       #|  N:num
       #|  N:num
       #|  abs((g:A->real) x)
       #|  (~p ==> F) ==> p
-      #|  !m. sum(0..m)\n               (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) = &0
-      #|  !n:num. (fn:num->A->real) n x = &0
+      #|  forall m. sum(0..m)\n               (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) = &0
+      #|  forall n:num. (fn:num->A->real) n x = &0
       #|  (x:A) IN A
       #|  &0 <= sum(0..N + n)\n           (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))
       #|  \\k:num. (fn:num->A->real) k (x:A) * inv(&2) pow (k + 1)
@@ -21368,7 +21368,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  0
       #|  inv(&2)
       #|  sum(0..m) (\\k. inv(&2) pow (k + 1))
-      #|  !m. &0 <= sum(0..m)\n              (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) /\\\n            sum(0..m)\n              (\\k. fn k x * inv(&2) pow (k+1)) <= &1
+      #|  forall m. &0 <= sum(0..m)\n              (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) /\\\n            sum(0..m)\n              (\\k. fn k x * inv(&2) pow (k+1)) <= &1
       #|  x:A
       #|  g:A->real
       #|  m:num
@@ -21394,31 +21394,31 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  inv(&2)
       #|  e:real
       #|  g:A->real
-      #|  ?g:A->real. continuous_map(top,euclideanreal) g /\\\n       (!e. &0 < e\n            ==> eventually\n                  (\\n. !(x:A). x IN topspace top\n                       ==> abs(g x - sum (0..n)\n                              (\\k. (fn:num->A->real) k x *\n                                   inv(&2) pow (k + 1))) < e)\n                  sequentially)
+      #|  ?g:A->real. continuous_map(top,euclideanreal) g /\\\n       (forall e. &0 < e\n            ==> eventually\n                  (\\n. forall(x:A). x IN topspace top\n                       ==> abs(g x - sum (0..n)\n                              (\\k. (fn:num->A->real) k x *\n                                   inv(&2) pow (k + 1))) < e)\n                  sequentially)
       #|  (\\n x:A. sum(0..n)\n       (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))):num->A->real
       #|  real_euclidean_metric
       #|  top:A topology
-      #|  !n. continuous_map(top:A topology, euclideanreal)\n          (\\x. sum(0..n) (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1)))
+      #|  forall n. continuous_map(top:A topology, euclideanreal)\n          (\\x. sum(0..n) (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1)))
       #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn:num->A->real) n)
       #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn:num->A->real) n)
-      #|  (!n:num. continuous_map(top,euclideanreal) ((fn:num->A->real) n)) /\\\n     (!n x:A. x IN topspace top ==> &0 <= fn n x /\\ fn n x <= &1)
+      #|  (forall n:num. continuous_map(top,euclideanreal) ((fn:num->A->real) n)) /\\\n     (forall n x:A. x IN topspace top ==> &0 <= fn n x /\\ fn n x <= &1)
       #|  fn:num->A->real
       #|  &1
       #|  &0
       #|  topspace top DIFF (U:num->A->bool) n
       #|  A:A->bool
       #|  top:A topology
-      #|  !n. ?fn:A->real.\n       continuous_map\n         (top, subtopology euclideanreal (real_interval[&0,&1])) fn /\\\n       (!x. x IN A ==> fn x = &0) /\\\n       (!x. x IN topspace top DIFF (U:num->A->bool) n ==> fn x = &1)
-      #|  !n:num. (A:A->bool) SUBSET U n
+      #|  forall n. ?fn:A->real.\n       continuous_map\n         (top, subtopology euclideanreal (real_interval[&0,&1])) fn /\\\n       (forall x. x IN A ==> fn x = &0) /\\\n       (forall x. x IN topspace top DIFF (U:num->A->bool) n ==> fn x = &1)
+      #|  forall n:num. (A:A->bool) SUBSET U n
       #|  {(U:num->A->bool) n | n IN (:num)} = topspace top INSERT u
       #|  (A:A->bool) = INTERS {U n | n IN (:num)}
       #|  (U:num->A->bool) n IN (topspace top:A->bool) INSERT u
-      #|  !n:num. open_in top ((U:num->A->bool) n)
+      #|  forall n:num. open_in top ((U:num->A->bool) n)
       #|  U:num->A->bool
       #|  (topspace top:A->bool) INSERT u
       #|  u:(A->bool)->bool
       #|  gdelta_in (top:A topology) (A:A->bool)
-      #|  !top:A topology A.\n        normal_space top /\\ closed_in top A /\\ gdelta_in top A\n        ==> ?f. continuous_map(top,euclideanreal) f /\\\n                (!x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n                (!x. x IN topspace top ==> (f x = &0 <=> x IN A))
+      #|  forall top:A topology A.\n        normal_space top /\\ closed_in top A /\\ gdelta_in top A\n        ==> ?f. continuous_map(top,euclideanreal) f /\\\n                (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n                (forall x. x IN topspace top ==> (f x = &0 <=> x IN A))
       #|  b:A->bool
       #|  m:num
       #|  UNIONS {b':A->bool | b' IN (Bn:num->(A->bool)->bool) m /\\\n                            top closure_of b' SUBSET W}
@@ -21440,17 +21440,17 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  regular_space (top:A topology)
       #|  x:A
       #|  (Bn:num->(A->bool)->bool) n
-      #|  !n. locally_finite_in top\n         {b:A->bool | b IN (Bn:num->(A->bool)->bool) n /\\\n                      top closure_of b SUBSET W}
+      #|  forall n. locally_finite_in top\n         {b:A->bool | b IN (Bn:num->(A->bool)->bool) n /\\\n                      top closure_of b SUBSET W}
       #|  \\n. UNIONS {b:A->bool | b IN (Bn:num->(A->bool)->bool) n /\\\n                          top closure_of b SUBSET W}
       #|  n:num
       #|  (Bn:num->(A->bool)->bool) (n:num)
-      #|  !n:num (b:A->bool). b IN (Bn:num->(A->bool)->bool) n ==> open_in top b
+      #|  forall n:num (b:A->bool). b IN (Bn:num->(A->bool)->bool) n ==> open_in top b
       #|  Bn:num->(A->bool)->bool
-      #|  !top:A topology B W.\n        regular_space top /\\ open_in top W /\\\n        (!b. b IN B ==> open_in top b) /\\\n        (!x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> ?En. (!n. open_in top (En n)) /\\\n                 (!n. top closure_of (En n) SUBSET W) /\\\n                 W SUBSET UNIONS {En n | n IN (:num)}
+      #|  forall top:A topology B W.\n        regular_space top /\\ open_in top W /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> ?En. (forall n. open_in top (En n)) /\\\n                 (forall n. top closure_of (En n) SUBSET W) /\\\n                 W SUBSET UNIONS {En n | n IN (:num)}
       #|  (V:num->A->bool) p
       #|  top:A topology
       #|  p:num
-      #|  !k. k IN 0..m\n           ==> ~((x:A) IN top closure_of ((V:num->A->bool) k))
+      #|  forall k. k IN 0..m\n           ==> ~((x:A) IN top closure_of ((V:num->A->bool) k))
       #|  (U:num->A->bool) m
       #|  top:A topology
       #|  m:num
@@ -21461,22 +21461,22 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  top closure_of ((U:num->A->bool) k)
       #|  k:num
       #|  (x:A) IN (V':num->A->bool) p
-      #|  (x:A) IN (V:num->A->bool) p /\\\n      (!k. k IN (0..p)\n           ==> ~(x IN top closure_of ((U:num->A->bool) k)))
+      #|  (x:A) IN (V:num->A->bool) p /\\\n      (forall k. k IN (0..p)\n           ==> ~(x IN top closure_of ((U:num->A->bool) k)))
       #|  k:num
       #|  ?k':num. top closure_of ((V:num->A->bool) k) =\n                top closure_of (V k') /\\ k' IN 0..m
       #|  top closure_of ((V:num->A->bool) k)
       #|  k:num
       #|  (x:A) IN (U':num->A->bool) m
-      #|  (x:A) IN (U:num->A->bool) m /\\\n      (!k. k IN (0..m)\n           ==> ~(x IN top closure_of ((V:num->A->bool) k)))
+      #|  (x:A) IN (U:num->A->bool) m /\\\n      (forall k. k IN (0..m)\n           ==> ~(x IN top closure_of ((V:num->A->bool) k)))
       #|  p:num
       #|  sv:A->bool
       #|  m:num
       #|  su:A->bool
       #|  x:A
-      #|  DISJOINT s t <=> !x:A. x IN s ==> ~(x IN t)
+      #|  DISJOINT s t <=> forall x:A. x IN s ==> ~(x IN t)
       #|  x:A
       #|  k:num
-      #|  !n:num. top closure_of (U:num->A->bool) n\n              SUBSET topspace top DIFF t
+      #|  forall n:num. top closure_of (U:num->A->bool) n\n              SUBSET topspace top DIFF t
       #|  k:num
       #|  c:A->bool
       #|  m:num
@@ -21489,7 +21489,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  x:A
       #|  x:A
       #|  k:num
-      #|  !n:num. top closure_of (V:num->A->bool) n\n              SUBSET topspace top DIFF s
+      #|  forall n:num. top closure_of (V:num->A->bool) n\n              SUBSET topspace top DIFF s
       #|  k:num
       #|  c:A->bool
       #|  m:num
@@ -21500,8 +21500,8 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (x:A) IN topspace top DIFF t
       #|  (x:A) IN UNIONS {(U:num->A->bool) n | n IN (:num)}
       #|  x:A
-      #|  !n. open_in top ((V':num->A->bool) n)
-      #|  !n. open_in top ((U':num->A->bool) n)
+      #|  forall n. open_in top ((V':num->A->bool) n)
+      #|  forall n. open_in top ((U':num->A->bool) n)
       #|  UNIONS {(V':num->A->bool) n | n IN (:num)}
       #|  UNIONS {(U':num->A->bool) n | n IN (:num)}
       #|  V' = \\n. (V:num->A->bool) n DIFF\n              UNIONS (IMAGE (\\k. top closure_of ((U:num->A->bool) k))\n                            (0..n))
@@ -21518,7 +21518,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  top:A topology
       #|  t:A->bool
       #|  s:A->bool
-      #|  !top:A topology B.\n        regular_space top /\\\n        (!b. b IN B ==> open_in top b) /\\\n        (!x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> normal_space top
+      #|  forall top:A topology B.\n        regular_space top /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> normal_space top
       #|  n:num
       #|  (En:num->A->bool) m
       #|  top:A topology
@@ -21537,7 +21537,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  topspace top DIFF s:A->bool
       #|  B:(A->bool)->bool
       #|  top:A topology
-      #|  !top:A topology B s.\n     regular_space top /\\\n     (!b. b IN B ==> open_in top b) /\\\n     (!x u. open_in top u /\\ x IN u\n            ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n     sigma_locally_finite_in top B /\\\n     closed_in top s\n     ==> gdelta_in top s
+      #|  forall top:A topology B s.\n     regular_space top /\\\n     (forall b. b IN B ==> open_in top b) /\\\n     (forall x u. open_in top u /\\ x IN u\n            ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n     sigma_locally_finite_in top B /\\\n     closed_in top s\n     ==> gdelta_in top s
       #|  M + n0:num
       #|  x:A
       #|  M + n0:num
@@ -21547,7 +21547,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  j:num
       #|  sum {n0} (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
       #|  n:num
-      #|  !n. n0 <= n ==>\n         inv(&2 pow (n0 + 1)) <=\n         sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
+      #|  forall n. n0 <= n ==>\n         inv(&2 pow (n0 + 1)) <=\n         sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
       #|  x:A
       #|  n0:num
       #|  (h:num->A->real) n0 x = &1
@@ -21560,7 +21560,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  ~(&0 < abs((g:A->real) x))
       #|  (h:num->A->real) i x = &0
       #|  i:num
-      #|  !n. sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k+1))) = &0
+      #|  forall n. sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k+1))) = &0
       #|  (x:A) IN topspace top
       #|  x:A
       #|  &0 <= y ==> &1 - y <= &1
@@ -21595,7 +21595,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  m':num
       #|  &0 <= y ==> x - y <= x
       #|  (\\k. inv(&2) pow (k + 1)) =\n       (\\k. inv(&2) pow k - inv(&2) pow (k + 1))
-      #|  !a b. sum(a..b) (\\k. inv(&2) pow (k + 1)) <= inv(&2) pow a
+      #|  forall a b. sum(a..b) (\\k. inv(&2) pow (k + 1)) <= inv(&2) pow a
       #|  N:num
       #|  N:num
       #|  e:real
@@ -21615,34 +21615,34 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  s:A->bool
       #|  top:A topology
       #|  n:num
-      #|  !n:num. ?f:A->real.\n       continuous_map(top, euclideanreal) f /\\\n       (!x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n       (!x. x IN s ==> f x = &0) /\\\n       (!x. x IN topspace top DIFF (c:num->A->bool) n ==> f x = &1)
-      #|  ?h:num->A->real.\n     (!n. continuous_map(top, euclideanreal) (h n)) /\\\n     (!n x:A. x IN topspace top ==> &0 <= h n x /\\ h n x <= &1) /\\\n     (!n x:A. x IN s ==> h n x = &0) /\\\n     (!n x:A. x IN topspace top DIFF (c:num->A->bool) n ==> h n x = &1)
-      #|  !n:num. (s:A->bool) SUBSET (c:num->A->bool) n
+      #|  forall n:num. ?f:A->real.\n       continuous_map(top, euclideanreal) f /\\\n       (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n       (forall x. x IN s ==> f x = &0) /\\\n       (forall x. x IN topspace top DIFF (c:num->A->bool) n ==> f x = &1)
+      #|  ?h:num->A->real.\n     (forall n. continuous_map(top, euclideanreal) (h n)) /\\\n     (forall n x:A. x IN topspace top ==> &0 <= h n x /\\ h n x <= &1) /\\\n     (forall n x:A. x IN s ==> h n x = &0) /\\\n     (forall n x:A. x IN topspace top DIFF (c:num->A->bool) n ==> h n x = &1)
+      #|  forall n:num. (s:A->bool) SUBSET (c:num->A->bool) n
       #|  (s:A->bool) SUBSET topspace top
       #|  c:num->A->bool
-      #|  !top:A topology s.\n     normal_space top /\\ closed_in top s /\\ gdelta_in top s\n     ==> ?f. continuous_map(top, euclideanreal) f /\\\n             (!x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n             (!x. x IN s ==> f x = &0) /\\\n             (!x. x IN topspace top DIFF s ==> &0 < f x)
+      #|  forall top:A topology s.\n     normal_space top /\\ closed_in top s /\\ gdelta_in top s\n     ==> ?f. continuous_map(top, euclideanreal) f /\\\n             (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n             (forall x. x IN s ==> f x = &0) /\\\n             (forall x. x IN topspace top DIFF s ==> &0 < f x)
       #|  &0 <= x ==> abs x = x
       #|  ~(&0 < abs x) ==> x = &0
       #|  t':real
       #|  d - abs(t0 - a)
       #|  t0:real
-      #|  !a:real d. &0 < d ==> real_open {t | abs(t - a) < d}
+      #|  forall a:real d. &0 < d ==> real_open {t | abs(t - a) < d}
       #|  mdist(metric(topspace top:A->bool,d:A#A->real)) = (d:A#A->real)
       #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
       #|  mball(metric(topspace top:A->bool,d:A#A->real)) (x:A,r) SUBSET\n       (u:A->bool)
       #|  z:A
       #|  x:A
-      #|  !a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
-      #|  !x:A r. x IN topspace top /\\ &0 < r\n      ==> open_in top {y:A | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
+      #|  forall a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
+      #|  forall x:A r. x IN topspace top /\\ &0 < r\n      ==> open_in top {y:A | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
       #|  {y:A | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
       #|  r:real
       #|  x:A
-      #|  !x:A. x IN u\n      ==> ?r. &0 < r /\\\n          mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
+      #|  forall x:A. x IN u\n      ==> ?r. &0 < r /\\\n          mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
       #|  (x:A) IN topspace top
       #|  x:A
       #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
       #|  open_in (mtopology(metric(topspace top:A->bool,d:A#A->real)))\n               (u:A->bool)
-      #|  (u:A->bool) SUBSET topspace top /\\\n      !x. x IN u ==>\n        ?r. &0 < r /\\\n            mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
+      #|  (u:A->bool) SUBSET topspace top /\\\n      forall x. x IN u ==>\n        ?r. &0 < r /\\\n            mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
       #|  b0:A->bool
       #|  n0:num
       #|  b':A->bool
@@ -21650,7 +21650,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n              g b' y * inv(&(SUC n')))
       #|  y:A
       #|  x:A
-      #|  !x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
+      #|  forall x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
       #|  b':A->bool
       #|  n':num
       #|  w:real
@@ -21659,15 +21659,15 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  sup {abs ((g:(A->bool)->A->real) b x * inv (&(SUC n)) -\n                  g b y * inv (&(SUC n))) |\n             n,b | b IN Bn n} <\n        (g:(A->bool)->A->real) b0 x * inv (&(SUC n0))
       #|  F
       #|  y:A
-      #|  !x:A. x IN topspace top /\\ ~(x IN b0) ==>\n        (g:(A->bool)->A->real) b0 x = &0
+      #|  forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n        (g:(A->bool)->A->real) b0 x = &0
       #|  (g:(A->bool)->A->real) b0 y = &0
       #|  (y:A) IN b0
       #|  y:A
       #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0))
       #|  &0 < (g:(A->bool)->A->real) b0 x
       #|  b0:A->bool
-      #|  !b:A->bool. b IN B ==>\n      continuous_map(top,euclideanreal) (g b) /\\\n      (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n      (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n      (!x. x IN b ==> &0 < g b x)
-      #|  (!x:A. x IN topspace top /\\ ~(x IN b0) ==>\n         (g:(A->bool)->A->real) b0 x = &0) /\\\n       (!x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x)
+      #|  forall b:A->bool. b IN B ==>\n      continuous_map(top,euclideanreal) (g b) /\\\n      (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n      (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n      (forall x. x IN b ==> &0 < g b x)
+      #|  (forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n         (g:(A->bool)->A->real) b0 x = &0) /\\\n       (forall x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x)
       #|  mm:num
       #|  mm:num
       #|  s:(A->bool)->bool
@@ -21677,11 +21677,11 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  b0:A->bool
       #|  u:A->bool
       #|  x:A
-      #|  !x:A u:A->bool. open_in top u /\\ x IN u\n      ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u
+      #|  forall x:A u:A->bool. open_in top u /\\ x IN u\n      ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u
       #|  (x:A) IN topspace top
       #|  x:A
       #|  u:A->bool
-      #|  !z:A. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
+      #|  forall z:A. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
       #|  (d:A#A->real)(y0,z) < eps
       #|  mdist(metric(topspace top:A->bool,d:A#A->real)) = (d:A#A->real)
       #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
@@ -21713,9 +21713,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  w:real
       #|  z:A
       #|  y0:A
-      #|  !x:A y:A.\n         ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n                g b y * inv(&(SUC n))) |\n            n,b | b IN Bn n} = {})
+      #|  forall x:A y:A.\n         ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n                g b y * inv(&(SUC n))) |\n            n,b | b IN Bn n} = {})
       #|  eps / &2
-      #|  !x:A y:A. (d:A#A->real)(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A y:A. (d:A#A->real)(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
       #|  z:A
       #|  m:num
       #|  m:num
@@ -21728,21 +21728,21 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  &0 < eps
       #|  z:A
       #|  b0:A->bool
-      #|  !b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (forall x. x IN b ==> &0 < g b x)
       #|  (g:(A->bool)->A->real) b0 z = &0
       #|  y0:A
       #|  b0:A->bool
-      #|  !b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (forall x. x IN b ==> &0 < g b x)
       #|  (g:(A->bool)->A->real) b0 y0 = &0
       #|  b0:A->bool
       #|  nn:num
-      #|  !n:num (b:A->bool). b IN Bn n ==> b IN B
+      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
       #|  (b0:A->bool) IN B
       #|  z:A
       #|  (b0:A->bool) INTER (LF:num->A->bool) nn = {}
       #|  ~((z:A) IN b0)
       #|  nn:num
-      #|  !n:num. open_in top ((LF:num->A->bool) n) /\\\n           y0 IN LF n /\\\n           FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n           y0 IN LF n /\\\n           FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  y0:A
       #|  (b0:A->bool) INTER (LF:num->A->bool) nn = {}
       #|  ~((y0:A) IN b0)
@@ -21751,35 +21751,35 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (z:A) IN (Wb:(A->bool)->A->bool) b0
       #|  z:A
       #|  b0:A->bool
-      #|  !b:A->bool. b IN Fb ==>\n           open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n           !z:A. z IN Wb b /\\ z IN topspace top\n             ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
+      #|  forall b:A->bool. b IN Fb ==>\n           open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n           forall z:A. z IN Wb b /\\ z IN topspace top\n             ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
       #|  abs((g:(A->bool)->A->real) b0 z - g b0 y0)
       #|  (b0:A->bool) IN Fb
       #|  abs((g:(A->bool)->A->real) b0 z * inv(&(SUC nn)) -\n              g b0 y0 * inv(&(SUC nn))) =\n          abs(g b0 z - g b0 y0) * inv(&(SUC nn))
       #|  b0:A->bool
       #|  z:A
       #|  b0:A->bool
-      #|  !b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          !z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
+      #|  forall b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          forall z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
       #|  b0:A->bool
       #|  nn:num
-      #|  !n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  b0:A->bool
-      #|  !b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          !z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
+      #|  forall b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          forall z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
       #|  b0:A->bool
       #|  nn:num
-      #|  !n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  (LF:num->A->bool) nn INTER\n         INTERS(IMAGE (Wb:(A->bool)->A->bool) Fb)
       #|  &0 < eps
       #|  z:A
       #|  b:A->bool
-      #|  !b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
       #|  (g:(A->bool)->A->real) b z = &0
       #|  y0:A
       #|  b:A->bool
-      #|  !b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
       #|  (g:(A->bool)->A->real) b y0 = &0
       #|  b:A->bool
       #|  nn:num
-      #|  !n:num (b:A->bool). b IN Bn n ==> b IN B
+      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
       #|  (b:A->bool) IN B
       #|  z:A
       #|  (b:A->bool) INTER (LF:num->A->bool) nn = {}
@@ -21793,7 +21793,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  b:A->bool
       #|  z:A
       #|  nn:num
-      #|  !n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  (LF:num->A->bool) nn
       #|  Fb:(A->bool)->bool = {}
       #|  Wb:(A->bool)->A->bool
@@ -21808,39 +21808,39 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (g:(A->bool)->A->real) b0
       #|  open_in top {z:A | z IN topspace top /\\\n           abs((g:(A->bool)->A->real) b0 z - g b0 y0) < eps / &2}
       #|  b0:A->bool
-      #|  !b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
       #|  continuous_map(top,euclideanreal) ((g:(A->bool)->A->real) b0)
       #|  (b0:A->bool) IN Fb
       #|  b0:A->bool
       #|  nn:num
-      #|  !n:num (b:A->bool). b IN Bn n ==> b IN B
+      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
       #|  (b0:A->bool) IN B
       #|  b0:A->bool
-      #|  !b:A->bool. b IN Fb ==>\n          ?Wb:A->bool. open_in top Wb /\\ y0 IN Wb /\\\n            !z:A. z IN Wb /\\ z IN topspace top\n              ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
+      #|  forall b:A->bool. b IN Fb ==>\n          ?Wb:A->bool. open_in top Wb /\\ y0 IN Wb /\\\n            forall z:A. z IN Wb /\\ z IN topspace top\n              ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
       #|  nn:num
-      #|  !n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  FINITE (Fb:(A->bool)->bool)
       #|  Fb = {b:A->bool | b IN (Bn:num->(A->bool)->bool) nn /\\\n                           ~(b INTER (LF:num->A->bool) nn = {})}
       #|  nn:num
-      #|  !n:num. n <= N0 ==>\n         ?Vn:A->bool. open_in top Vn /\\ y0 IN Vn /\\\n           !z:A (b:A->bool). z IN Vn /\\ z IN topspace top /\\\n                 b IN (Bn:num->(A->bool)->bool) n\n             ==> abs((g:(A->bool)->A->real) b z * inv(&(SUC n)) -\n                     g b y0 * inv(&(SUC n))) <= eps / &2
+      #|  forall n:num. n <= N0 ==>\n         ?Vn:A->bool. open_in top Vn /\\ y0 IN Vn /\\\n           forall z:A (b:A->bool). z IN Vn /\\ z IN topspace top /\\\n                 b IN (Bn:num->(A->bool)->bool) n\n             ==> abs((g:(A->bool)->A->real) b z * inv(&(SUC n)) -\n                     g b y0 * inv(&(SUC n))) <= eps / &2
       #|  V:A->bool
-      #|  ?V:A->bool. open_in top V /\\ y0 IN V /\\\n        !z. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
+      #|  ?V:A->bool. open_in top V /\\ y0 IN V /\\\n        forall z. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
       #|  y0:A
       #|  locally_finite_in top ((Bn:num->(A->bool)->bool) nn)
       #|  nn:num
       #|  LF:num->A->bool
-      #|  ?LF:num->A->bool. !n. open_in top (LF n) /\\ y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
+      #|  ?LF:num->A->bool. forall n. open_in top (LF n) /\\ y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
       #|  &0 < eps
       #|  ?N0:num. ~(N0 = 0) /\\ &0 < inv(&N0) /\\ inv(&N0) < eps / &4
       #|  (d:A#A->real)(x,y0) < r
       #|  &0 < eps
       #|  eps = r - (d:A#A->real)(x,y0)
       #|  y0:A
-      #|  !x:A r. x IN topspace top /\\ &0 < r\n       ==> open_in top {y | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
+      #|  forall x:A r. x IN topspace top /\\ &0 < r\n       ==> open_in top {y | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
       #|  a:A
       #|  metric(topspace top:A->bool,d:A#A->real)
       #|  a:A
-      #|  !a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
+      #|  forall a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
       #|  mdist(metric(topspace top:A->bool, d:A#A->real)) = d:A#A->real
       #|  mspace(metric(topspace top:A->bool, d:A#A->real)) = topspace top
       #|  top:A topology = mtopology(metric(topspace top:A->bool, d:A#A->real))
@@ -21851,7 +21851,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  abs((g:(A->bool)->A->real) b'' y * inv(&(SUC n'')) -\n               g b'' z * inv(&(SUC n'')))
       #|  z:A
       #|  y:A
-      #|  !x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
+      #|  forall x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
       #|  b'':A->bool
       #|  n'':num
       #|  v:real
@@ -21863,7 +21863,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  abs((g:(A->bool)->A->real) b'' x * inv(&(SUC n'')) -\n               g b'' y * inv(&(SUC n'')))
       #|  y:A
       #|  x:A
-      #|  !x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
+      #|  forall x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
       #|  b'':A->bool
       #|  n'':num
       #|  v:real
@@ -21874,17 +21874,17 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  w:real
       #|  z:A
       #|  x:A
-      #|  !x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
-      #|  !x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  !x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
+      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
       #|  b':A->bool
       #|  n':num
       #|  w:real
       #|  x:A
       #|  x:A
-      #|  !x:A y:A.\n        ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n               g b y * inv(&(SUC n))) |\n           n,b | b IN Bn n} = {})
+      #|  forall x:A y:A.\n        ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n               g b y * inv(&(SUC n))) |\n           n,b | b IN Bn n} = {})
       #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  !x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
       #|  b0:A->bool
       #|  n0:num
       #|  b':A->bool
@@ -21892,7 +21892,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n              g b' y * inv(&(SUC n')))
       #|  y:A
       #|  x:A
-      #|  !x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
+      #|  forall x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
       #|  b':A->bool
       #|  n':num
       #|  w:real
@@ -21902,13 +21902,13 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0)) =\n         abs(g b0 x * inv(&(SUC n0)) - g b0 y * inv(&(SUC n0)))
       #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0))
       #|  y:A
-      #|  !x:A. x IN topspace top /\\ ~(x IN b0) ==>\n               (g:(A->bool)->A->real) b0 x = &0
+      #|  forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n               (g:(A->bool)->A->real) b0 x = &0
       #|  (g:(A->bool)->A->real) b0 y = &0
       #|  x:A
-      #|  !x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x
+      #|  forall x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x
       #|  &0 < (g:(A->bool)->A->real) b0 x
       #|  b0:A->bool
-      #|  !b:A->bool. b IN B ==>\n       continuous_map(top,euclideanreal) (g b) /\\\n       (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n       (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n       (!x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool. b IN B ==>\n       continuous_map(top,euclideanreal) (g b) /\\\n       (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n       (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n       (forall x. x IN b ==> &0 < g b x)
       #|  m:num
       #|  m:num
       #|  s:(A->bool)->bool
@@ -21920,8 +21920,8 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  b0:A->bool
       #|  topspace top DIFF {y:A}
       #|  x:A
-      #|  !x:A u. open_in top u /\\ x IN u ==>\n       ?b. b IN B /\\ x IN b /\\ b SUBSET u
-      #|  !x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A u. open_in top u /\\ x IN u ==>\n       ?b. b IN B /\\ x IN b /\\ b SUBSET u
+      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
       #|  &0 < (d:A#A->real)(x,y)
       #|  x:A = y
       #|  b':A->bool
@@ -21929,15 +21929,15 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n            g b' y * inv(&(SUC n')))
       #|  y:A
       #|  x:A
-      #|  !x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                 g b y * inv(&(SUC n))) |\n             n,b | b IN Bn n}\n       ==> z <= &1
+      #|  forall x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                 g b y * inv(&(SUC n))) |\n             n,b | b IN Bn n}\n       ==> z <= &1
       #|  b':A->bool
       #|  n':num
       #|  w:real
       #|  y:A
       #|  x:A
-      #|  !x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
+      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
       #|  &0 <= x /\\ x <= &1 ==> &0 <= x
-      #|  !x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
+      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
       #|  is_metric_space(topspace top:A->bool, d:A#A->real)
       #|  inv(&(SUC n')) <= &1
       #|  &0 <= inv(&(SUC n'))
@@ -21956,33 +21956,33 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  &0 <= inv(&(SUC n')) /\\ inv(&(SUC n')) <= &1
       #|  y:A
       #|  b':A->bool
-      #|  !b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
+      #|  forall b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
       #|  &0 <= (g:(A->bool)->A->real) b' y /\\ g b' y <= &1
       #|  x:A
       #|  b':A->bool
-      #|  !b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
+      #|  forall b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
       #|  &0 <= (g:(A->bool)->A->real) b' x /\\ g b' x <= &1
       #|  b':A->bool
       #|  n':num
-      #|  !n:num (b:A->bool). b IN Bn n ==> b IN B
+      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
       #|  (b':A->bool) IN B
       #|  &0 <= u /\\ u <= &1 /\\ &0 <= v /\\ v <= &1 ==> abs(u - v) <= &1
       #|  b':A->bool
       #|  n':num
-      #|  !x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                  g b y * inv(&(SUC n))) |\n              n,b | b IN Bn n}\n       ==> z <= &1
+      #|  forall x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                  g b y * inv(&(SUC n))) |\n              n,b | b IN Bn n}\n       ==> z <= &1
       #|  x:A
       #|  b:A->bool
-      #|  !b:A->bool. b IN B\n     ==> continuous_map(top,euclideanreal) (g b) /\\\n         (!x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n         (!x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n         (!x. x IN b ==> &0 < g b x)
-      #|  !b:A->bool x:A.\n       b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
+      #|  forall b:A->bool. b IN B\n     ==> continuous_map(top,euclideanreal) (g b) /\\\n         (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n         (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n         (forall x. x IN b ==> &0 < g b x)
+      #|  forall b:A->bool x:A.\n       b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
       #|  n:num
       #|  (Bn:num->(A->bool)->bool) n
       #|  B = UNIONS {(Bn:num->(A->bool)->bool) n | n IN (:num)}
-      #|  !n:num (b:A->bool). b IN Bn n ==> b IN B
+      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
       #|  ~(J:num#(A->bool)->bool = {})
-      #|  !x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
+      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
       #|  \\p:A#A.\n     sup {abs(g (b:A->bool) (FST p) * inv(&(SUC n)) -\n              g b (SND p) * inv(&(SUC n))) |\n          n,b | b IN Bn n}
       #|  d:A#A->real
-      #|  ?d:A#A->real. !x y.\n       d(x,y) = sup {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                         g b y * inv(&(SUC n))) |\n                     n,b | b IN Bn n}
+      #|  ?d:A#A->real. forall x y.\n       d(x,y) = sup {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                         g b y * inv(&(SUC n))) |\n                     n,b | b IN Bn n}
       #|  b0:A->bool
       #|  n0:num
       #|  n0:num,(b0:A->bool)
@@ -22000,7 +22000,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  g:(A->bool)->A->real
       #|  (b:A->bool) SUBSET topspace top
       #|  (x:A) IN b
-      #|  !x:A. x IN topspace top DIFF (topspace top DIFF b) ==> &0 < f x
+      #|  forall x:A. x IN topspace top DIFF (topspace top DIFF b) ==> &0 < f x
       #|  x:A
       #|  f:A->real
       #|  f:A->real
@@ -22009,9 +22009,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (b:A->bool) SUBSET topspace top
       #|  open_in top (b:A->bool)
       #|  b:A->bool
-      #|  !b:A->bool. b IN B ==>\n        ?f. continuous_map(top, euclideanreal) f /\\\n            (!x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n            (!x. x IN topspace top /\\ ~(x IN b) ==> f x = &0) /\\\n            (!x. x IN b ==> &0 < f x)
+      #|  forall b:A->bool. b IN B ==>\n        ?f. continuous_map(top, euclideanreal) f /\\\n            (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n            (forall x. x IN topspace top /\\ ~(x IN b) ==> f x = &0) /\\\n            (forall x. x IN b ==> &0 < f x)
       #|  B:(A->bool)->bool
-      #|  !s:A->bool. closed_in top s ==> gdelta_in top s
+      #|  forall s:A->bool. closed_in top s ==> gdelta_in top s
       #|  B:(A->bool)->bool
       #|  normal_space (top:A topology)
       #|  Bn:num->(A->bool)->bool
@@ -22019,7 +22019,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  Bn:num->(A->bool)->bool
       #|  top:A topology = discrete_topology ({}:A->bool)
       #|  topspace top:A->bool = {}
-      #|  !top:A topology.\n        regular_space top /\\ hausdorff_space top /\\\n        (?B. (!b. b IN B ==> open_in top b) /\\\n             (!x u. open_in top u /\\ x IN u\n                    ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n             sigma_locally_finite_in top B)\n        ==> metrizable_space top
+      #|  forall top:A topology.\n        regular_space top /\\ hausdorff_space top /\\\n        (?B. (forall b. b IN B ==> open_in top b) /\\\n             (forall x u. open_in top u /\\ x IN u\n                    ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n             sigma_locally_finite_in top B)\n        ==> metrizable_space top
       #|  (d:A#A->real)(x,y) = &0
       #|  metric(topspace top:A->bool, d:A#A->real)
       #|  nn':num
@@ -22076,7 +22076,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  subtopology top (c:A->bool) =\n       mtopology ((mc:(A->bool)->A metric) c)
       #|  open_in (mtopology((mc:(A->bool)->A metric) c))\n      (u INTER c:A->bool)
       #|  c:A->bool
-      #|  !c:A->bool. c IN CC /\\ x IN c\n       ==> ?e. &0 < e /\\\n               mball ((mc:(A->bool)->A metric) c) ((x:A),e) SUBSET u INTER c
+      #|  forall c:A->bool. c IN CC /\\ x IN c\n       ==> ?e. &0 < e /\\\n               mball ((mc:(A->bool)->A metric) c) ((x:A),e) SUBSET u INTER c
       #|  w:A->bool
       #|  x:A
       #|  (x:A) IN topspace top
@@ -22108,31 +22108,31 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  c:A->bool
       #|  {mball ((mc:(A->bool)->A metric) c) ((x:A), inv(&(m + 1))) |\n       c IN CC /\\ x IN c}
       #|  m:num
-      #|  !m:num. ?Dm:(A->bool)->bool.\n       (!d. d IN Dm ==> open_in top d) /\\\n       UNIONS Dm = topspace top /\\\n       (!d. d IN Dm ==>\n            ?c (x:A). c IN CC /\\ x IN c /\\\n                      d SUBSET mball ((mc:(A->bool)->A metric) c)\n                                     (x, inv(&(m + 1)))) /\\\n       locally_finite_in top Dm
+      #|  forall m:num. ?Dm:(A->bool)->bool.\n       (forall d. d IN Dm ==> open_in top d) /\\\n       UNIONS Dm = topspace top /\\\n       (forall d. d IN Dm ==>\n            ?c (x:A). c IN CC /\\ x IN c /\\\n                      d SUBSET mball ((mc:(A->bool)->A metric) c)\n                                     (x, inv(&(m + 1)))) /\\\n       locally_finite_in top Dm
       #|  topspace top INTER (c:A->bool) = c
       #|  (c:A->bool) SUBSET topspace top
       #|  subtopology top (c:A->bool) =\n     mtopology ((mc:(A->bool)->A metric) c)
       #|  c:A->bool
-      #|  !c:A->bool. c IN CC ==> mspace((mc:(A->bool)->A metric) c) = c
-      #|  ?mc:(A->bool)->A metric.\n       !c. c IN CC ==> subtopology top c = mtopology (mc c)
+      #|  forall c:A->bool. c IN CC ==> mspace((mc:(A->bool)->A metric) c) = c
+      #|  ?mc:(A->bool)->A metric.\n       forall c. c IN CC ==> subtopology top c = mtopology (mc c)
       #|  subtopology (subtopology top u) (c:A->bool) =\n                  subtopology top c
       #|  u:A->bool
       #|  c:A->bool
       #|  c:A->bool
-      #|  !c:A->bool. c IN CC ==> metrizable_space(subtopology top c)
+      #|  forall c:A->bool. c IN CC ==> metrizable_space(subtopology top c)
       #|  CC:(A->bool)->bool
       #|  u:A->bool
       #|  x:A
       #|  {u:A->bool | open_in top u /\\ metrizable_space(subtopology top u)}
-      #|  !top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (!x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> ?B. (!b. b IN B ==> open_in top b) /\\\n                (!x u. open_in top u /\\ x IN u\n                       ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n                sigma_locally_finite_in top B
+      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (forall x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> ?B. (forall b. b IN B ==> open_in top b) /\\\n                (forall x u. open_in top u /\\ x IN u\n                       ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n                sigma_locally_finite_in top B
       #|  topspace:(A)topology->A->bool
-      #|  collectionwise_normal_space (top:A topology) <=>\n        !F. (!c. c IN F ==> closed_in top c) /\\\n            pairwise DISJOINT F /\\\n            locally_finite_in top F\n            ==> ?G. (!c. c IN F ==> open_in top (G c) /\\ c SUBSET G c) /\\\n                    pairwise (\\c d. DISJOINT (G c) (G d)) F
-      #|  !s t a b:A->bool.\n          s SUBSET a /\\ t SUBSET b /\\ DISJOINT a b ==> DISJOINT s t
+      #|  collectionwise_normal_space (top:A topology) <=>\n        forall F. (forall c. c IN F ==> closed_in top c) /\\\n            pairwise DISJOINT F /\\\n            locally_finite_in top F\n            ==> ?G. (forall c. c IN F ==> open_in top (G c) /\\ c SUBSET G c) /\\\n                    pairwise (\\c d. DISJOINT (G c) (G d)) F
+      #|  forall s t a b:A->bool.\n          s SUBSET a /\\ t SUBSET b /\\ DISJOINT a b ==> DISJOINT s t
       #|  c:A->bool
       #|  x:A
       #|  (H:(A->bool)->(A->bool)) c
       #|  top closure_of ((H:(A->bool)->(A->bool)) c)
-      #|  !u:A->bool. s SUBSET u /\\ DISJOINT u t ==> DISJOINT s t
+      #|  forall u:A->bool. s SUBSET u /\\ DISJOINT u t ==> DISJOINT s t
       #|  d:A->bool
       #|  c:A->bool
       #|  c:A->bool
@@ -22143,7 +22143,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  \\c:A->bool. (H:(A->bool)->(A->bool)) c DIFF\n       UNIONS {(top:A topology) closure_of H d |\n               d IN (fam:(A->bool)->bool) /\\ ~(d = c)}
       #|  {top closure_of (H:(A->bool)->(A->bool)) d |\n       d IN (fam:(A->bool)->bool)}
       #|  c:A->bool
-      #|  !c:A->bool. c IN fam\n     ==> closed_in top\n           (UNIONS {top closure_of (H:(A->bool)->(A->bool)) d |\n                    d IN (fam:(A->bool)->bool) /\\ ~(d = c)})
+      #|  forall c:A->bool. c IN fam\n     ==> closed_in top\n           (UNIONS {top closure_of (H:(A->bool)->(A->bool)) d |\n                    d IN (fam:(A->bool)->bool) /\\ ~(d = c)})
       #|  ~(c':A->bool = c)
       #|  (c:A->bool) IN fam
       #|  ~(w INTER c:A->bool = {})
@@ -22170,17 +22170,17 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  locally_finite_in top\n      {top closure_of (H:(A->bool)->(A->bool)) c |\n       c IN (fam:(A->bool)->bool)}
       #|  UNIONS((fam:(A->bool)->bool) DELETE c)
       #|  topspace top DIFF UNIONS((fam:(A->bool)->bool) DELETE c)
-      #|  !c d:A->bool. c IN fam /\\ d IN fam /\\ ~(c = d)\n     ==> DISJOINT (top closure_of ((H:(A->bool)->(A->bool)) c)) d
+      #|  forall c d:A->bool. c IN fam /\\ d IN fam /\\ ~(c = d)\n     ==> DISJOINT (top closure_of ((H:(A->bool)->(A->bool)) c)) d
       #|  UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
       #|  c:A->bool
-      #|  !c:A->bool. c IN fam\n     ==> top closure_of ((H:(A->bool)->(A->bool)) c) SUBSET\n         topspace top DIFF UNIONS(fam DELETE c)
+      #|  forall c:A->bool. c IN fam\n     ==> top closure_of ((H:(A->bool)->(A->bool)) c) SUBSET\n         topspace top DIFF UNIONS(fam DELETE c)
       #|  H:(A->bool)->(A->bool)
       #|  w:A->bool
       #|  w:A->bool
       #|  (x:A) IN UNIONS W
       #|  x:A
       #|  c:A->bool
-      #|  !c:A->bool. c IN fam\n     ==> ?v. open_in top v /\\ c SUBSET v /\\\n             top closure_of v SUBSET\n               UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
+      #|  forall c:A->bool. c IN fam\n     ==> ?v. open_in top v /\\ c SUBSET v /\\\n             top closure_of v SUBSET\n               UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
       #|  c:A->bool
       #|  y:A
       #|  (c:A->bool) SUBSET UNIONS(fam DELETE c')
@@ -22195,7 +22195,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (u:A->bool) IN (topspace top DIFF UNIONS (fam:(A->bool)->bool)) INSERT\n       IMAGE (\\c. topspace top DIFF UNIONS(fam DELETE c)) fam
       #|  u:A->bool
       #|  w:A->bool
-      #|  !w c:A->bool. w IN W /\\ c IN fam /\\ ~(w INTER c = {})\n     ==> w SUBSET topspace top DIFF UNIONS(fam DELETE c)
+      #|  forall w c:A->bool. w IN W /\\ c IN fam /\\ ~(w INTER c = {})\n     ==> w SUBSET topspace top DIFF UNIONS(fam DELETE c)
       #|  W:(A->bool)->bool
       #|  topspace top DIFF UNIONS (fam:(A->bool)->bool)
       #|  c:A->bool
@@ -22211,14 +22211,14 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  d:A->bool
       #|  x:A
       #|  c:A->bool
-      #|  !c:A->bool. c IN fam\n     ==> c SUBSET (topspace top DIFF UNIONS(fam DELETE c))
+      #|  forall c:A->bool. c IN fam\n     ==> c SUBSET (topspace top DIFF UNIONS(fam DELETE c))
       #|  closed_in top (UNIONS (fam:(A->bool)->bool))
       #|  fam:(A->bool)->bool
       #|  c:A->bool
-      #|  !c:A->bool. c IN fam ==> closed_in top (UNIONS(fam DELETE c))
+      #|  forall c:A->bool. c IN fam ==> closed_in top (UNIONS(fam DELETE c))
       #|  normal_space (top:A topology)
       #|  fam:(A->bool)->bool
-      #|  !top:A topology.\n        paracompact_space top /\\ hausdorff_space top\n        ==> collectionwise_normal_space top
+      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top\n        ==> collectionwise_normal_space top
       #|  pairwise (\\c d. DISJOINT ((G:(A->bool)->(A->bool)) c) (G d))\n             {s, t}
       #|  (G:(A->bool)->(A->bool)) t
       #|  (G:(A->bool)->(A->bool)) s
@@ -22229,12 +22229,12 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  s:A->bool = t
       #|  t:A->bool
       #|  s:A->bool
-      #|  !top:A topology.\n        collectionwise_normal_space top /\\ t1_space top\n        ==> normal_space top
-      #|  !top:A topology.\n        metrizable_space top ==> collectionwise_normal_space top
+      #|  forall top:A topology.\n        collectionwise_normal_space top /\\ t1_space top\n        ==> normal_space top
+      #|  forall top:A topology.\n        metrizable_space top ==> collectionwise_normal_space top
       #|  d:A->bool
       #|  c:A->bool
       #|  pairwise (\\c d. DISJOINT ((G:(A->bool)->(A->bool)) c) (G d)) CC
-      #|  !a b c:A->bool. DISJOINT a b ==> DISJOINT (a INTER c) (b INTER c)
+      #|  forall a b c:A->bool. DISJOINT a b ==> DISJOINT (a INTER c) (b INTER c)
       #|  d:A->bool
       #|  c:A->bool
       #|  c:A->bool
@@ -22247,21 +22247,21 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  locally_finite_in top (CC:(A->bool)->bool)
       #|  c:A->bool
       #|  c:A->bool
-      #|  !c:A->bool. c IN CC ==> closed_in top c /\\ c SUBSET s
+      #|  forall c:A->bool. c IN CC ==> closed_in top c /\\ c SUBSET s
       #|  CC:(A->bool)->bool
-      #|  !top s:A->bool.\n        collectionwise_normal_space top /\\ closed_in top s\n        ==> collectionwise_normal_space(subtopology top s)
+      #|  forall top s:A->bool.\n        collectionwise_normal_space top /\\ closed_in top s\n        ==> collectionwise_normal_space(subtopology top s)
       #|  top:A topology
-      #|  !top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (!x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> metrizable_space top
+      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (forall x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> metrizable_space top
       #|  realcompact_space (top:A topology) <=>\n        completely_regular_space top /\\\n        ?f:A->A->real.\n            embedding_map(top, product_topology (topspace top) (\\i. euclideanreal)) f /\\\n            closed_in (product_topology (topspace top) (\\i. euclideanreal))\n                      (IMAGE f (topspace top))
-      #|  locally_metrizable_space (top:A topology) <=>\n  !x. x IN topspace top\n      ==> ?U. open_in top U /\\ x IN U /\\ metrizable_space (subtopology top U)
+      #|  locally_metrizable_space (top:A topology) <=>\n  forall x. x IN topspace top\n      ==> ?U. open_in top U /\\ x IN U /\\ metrizable_space (subtopology top U)
       #|  topspace top:A->bool
       #|  x:A
-      #|  !top:A topology.\n        metrizable_space top <=>\n        paracompact_space top /\\ hausdorff_space top /\\ locally_metrizable_space top
-      #|  !top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        locally_metrizable_space top /\\ second_countable top\n        ==> metrizable_space top
+      #|  forall top:A topology.\n        metrizable_space top <=>\n        paracompact_space top /\\ hausdorff_space top /\\ locally_metrizable_space top
+      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        locally_metrizable_space top /\\ second_countable top\n        ==> metrizable_space top
       #|  m:num
       #|  y:A
       #|  (s:A->bool) SUBSET t ==> s INTER (u DIFF t) = {}
-      #|  !(f:num->A->bool) m n.\n        m < n\n        ==> f m INTER (f n DIFF UNIONS {f k | k < n}) = {}
+      #|  forall(f:num->A->bool) m n.\n        m < n\n        ==> f m INTER (f n DIFF UNIONS {f k | k < n}) = {}
       #|  (u:A->bool) INTER (f:num->A->bool) m = {}
       #|  ((f:num->A->bool) n DIFF UNIONS {f k | k < n}) INTER f m = {}
       #|  (f:num->A->bool) m INTER (f n DIFF UNIONS {f k | k < n}) = {}
@@ -22272,16 +22272,16 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (f:num->A->bool) m
       #|  (x:A) IN UNIONS {f n | n IN (:num)}
       #|  \\p:num. (x:A) IN f p
-      #|  ?m:num. (x:A) IN f m /\\ (!k. k < m ==> ~(x IN f k))
+      #|  ?m:num. (x:A) IN f m /\\ (forall k. k < m ==> ~(x IN f k))
       #|  x:A
       #|  n:num
       #|  (f:num->A->bool) n
       #|  n:num
-      #|  !top:A topology f.\n        (!n. open_in top (f n)) /\\\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> locally_finite_in top\n              {f n DIFF UNIONS {f k | k < n} | n IN (:num)}
+      #|  forall top:A topology f.\n        (forall n. open_in top (f n)) /\\\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> locally_finite_in top\n              {f n DIFF UNIONS {f k | k < n} | n IN (:num)}
       #|  m:num
       #|  (f:num->A->bool) m DIFF UNIONS {f k | k < m}
       #|  \\p:num. (x:A) IN f p
-      #|  ?m:num. (x:A) IN f m /\\ (!k. k < m ==> ~(x IN f k))
+      #|  ?m:num. (x:A) IN f m /\\ (forall k. k < m ==> ~(x IN f k))
       #|  n':num
       #|  s:A->bool
       #|  x:A IN UNIONS {f n | n IN (:num)}
@@ -22290,7 +22290,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  n:num
       #|  s:A->bool
       #|  x:A
-      #|  !top:A topology f.\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> UNIONS {f n DIFF UNIONS {f k | k < n} | n IN (:num)} =\n            topspace top
+      #|  forall top:A topology f.\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> UNIONS {f n DIFF UNIONS {f k | k < n} | n IN (:num)} =\n            topspace top
       #|  INTERS(IMAGE (Wfn:num->A->bool) N0) SUBSET Wfn n0
       #|  s:A->bool
       #|  n0:num
@@ -22310,12 +22310,12 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  N0:num->bool = {}
       #|  Wfn:num->A->bool
       #|  x:A
-      #|  !n:num. ?W:A->bool. open_in top W /\\ x IN W /\\\n       FINITE {s:A->bool | s IN (f:num->(A->bool)->bool) n /\\\n                            ~(s INTER W = {})}
+      #|  forall n:num. ?W:A->bool. open_in top W /\\ x IN W /\\\n       FINITE {s:A->bool | s IN (f:num->(A->bool)->bool) n /\\\n                            ~(s INTER W = {})}
       #|  {u:A->bool | u IN {(A:num->A->bool) k | k IN (:num)} /\\\n                     ~(u INTER W0 = {})}
       #|  n2:num
       #|  n1:num
       #|  n1:num = n2
-      #|  !n1 n2:num. n1 IN N0 /\\ n2 IN N0 /\\\n                   (A:num->A->bool) n1 = A n2 ==> n1 = n2
+      #|  forall n1 n2:num. n1 IN N0 /\\ n2 IN N0 /\\\n                   (A:num->A->bool) n1 = A n2 ==> n1 = n2
       #|  FINITE (N0:num->bool)
       #|  N0 = {n:num | ~((A:num->A->bool) n INTER W0 = {})}
       #|  W0:A->bool
@@ -22323,12 +22323,12 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  x:A
       #|  n:num
       #|  s:A->bool
-      #|  !s:A->bool. s IN UNIONS {(f:num->(A->bool)->bool) n | n IN (:num)} <=>\n                 ?n. s IN f n
-      #|  !n. (A:num->A->bool) n SUBSET topspace top
-      #|  !top:A topology A f.\n        locally_finite_in top {A n | n IN (:num)} /\\\n        (!n. locally_finite_in top ((f:num->(A->bool)->bool) n)) /\\\n        (!n (s:A->bool). s IN f n ==> s SUBSET A n) /\\\n        (!m n. ~(m = n) ==> A m INTER A n = {})\n        ==> locally_finite_in top (UNIONS {f n | n IN (:num)})
+      #|  forall s:A->bool. s IN UNIONS {(f:num->(A->bool)->bool) n | n IN (:num)} <=>\n                 ?n. s IN f n
+      #|  forall n. (A:num->A->bool) n SUBSET topspace top
+      #|  forall top:A topology A f.\n        locally_finite_in top {A n | n IN (:num)} /\\\n        (forall n. locally_finite_in top ((f:num->(A->bool)->bool) n)) /\\\n        (forall n (s:A->bool). s IN f n ==> s SUBSET A n) /\\\n        (forall m n. ~(m = n) ==> A m INTER A n = {})\n        ==> locally_finite_in top (UNIONS {f n | n IN (:num)})
       #|  n:num
       #|  {b:A->bool | open_in top b /\\\n                   ?u. u IN U /\\ top closure_of b SUBSET u}
-      #|  !top:A topology U.\n        regular_space top /\\\n        (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?W. (!w. w IN W ==> open_in top w) /\\\n                UNIONS W = topspace top /\\\n                (!w. w IN W ==> ?u. u IN U /\\ top closure_of w SUBSET u)
+      #|  forall top:A topology U.\n        regular_space top /\\\n        (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?W. (forall w. w IN W ==> open_in top w) /\\\n                UNIONS W = topspace top /\\\n                (forall w. w IN W ==> ?u. u IN U /\\ top closure_of w SUBSET u)
       #|  (O:A->bool) SUBSET top closure_of O
       #|  (v:A->bool) SUBSET CX
       #|  DISJOINT CX (top closure_of (O:A->bool))
@@ -22351,7 +22351,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  CX = UNIONS {v:A->bool | v IN V /\\ ~(x IN v)}
       #|  x:A
       #|  v:A->bool
-      #|  !top:A topology V.\n        regular_space top /\\\n        (!v. v IN V ==> closed_in top v) /\\\n        UNIONS V = topspace top /\\\n        (!W. W SUBSET V ==> closed_in top (UNIONS W)) /\\\n        (!x. x IN topspace top ==> FINITE {v | v IN V /\\ x IN v})\n        ==> locally_finite_in top V
+      #|  forall top:A topology V.\n        regular_space top /\\\n        (forall v. v IN V ==> closed_in top v) /\\\n        UNIONS V = topspace top /\\\n        (forall W. W SUBSET V ==> closed_in top (UNIONS W)) /\\\n        (forall x. x IN topspace top ==> FINITE {v | v IN V /\\ x IN v})\n        ==> locally_finite_in top V
       #|  top:A topology
       #|  top closure_of (r:A->bool)
       #|  u:A->bool
@@ -22387,7 +22387,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  S:num->A->bool
       #|  top:A topology
       #|  locally_finite_in top\n       (UNIONS {(Dn:num->(A->bool)->bool) n | n IN (:num)})
-      #|  !n:num (s:A->bool). s IN (Dn:num->(A->bool)->bool) n\n                          ==> s SUBSET (S:num->A->bool) n
+      #|  forall n:num (s:A->bool). s IN (Dn:num->(A->bool)->bool) n\n                          ==> s SUBSET (S:num->A->bool) n
       #|  (s:A->bool) = r INTER (S:num->A->bool) n
       #|  ~((s:A->bool) INTER (O:A->bool) = {})
       #|  r:A->bool
@@ -22402,7 +22402,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  n:num
       #|  r:A->bool
       #|  r:A->bool
-      #|  !n:num. locally_finite_in top ((Dn:num->(A->bool)->bool) n)
+      #|  forall n:num. locally_finite_in top ((Dn:num->(A->bool)->bool) n)
       #|  Dn = \\n:num. {r INTER (S:num->A->bool) n |\n                    r | r IN (fn:num->(A->bool)->bool) n}
       #|  (s:A->bool) INTER t = {} ==> t INTER (s DIFF a) = {}
       #|  m:num
@@ -22413,7 +22413,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  m:num
       #|  P:num->A->bool
       #|  ~(m:num = n) ==> m < n \\/ n < m
-      #|  !m n:num. ~(m = n) ==> (S:num->A->bool) m INTER S n = {}
+      #|  forall m n:num. ~(m = n) ==> (S:num->A->bool) m INTER S n = {}
       #|  top:A topology
       #|  UNIONS {(S:num->A->bool) n | n IN (:num)} = topspace top
       #|  top:A topology
@@ -22428,11 +22428,11 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (x:A) IN UNIONS R
       #|  x:A
       #|  UNIONS {(P:num->A->bool) n | n IN (:num)} = topspace top
-      #|  !n:num. open_in top ((P:num->A->bool) n)
+      #|  forall n:num. open_in top ((P:num->A->bool) n)
       #|  P = \\n:num. UNIONS ((fn:num->(A->bool)->bool) n)
-      #|  !n:num. (fn:num->(A->bool)->bool) n SUBSET R
+      #|  forall n:num. (fn:num->(A->bool)->bool) n SUBSET R
       #|  fn:num->(A->bool)->bool
-      #|  !top:A topology U R.\n        (!r. r IN R ==> open_in top r) /\\\n        UNIONS R = topspace top /\\\n        (!r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n        sigma_locally_finite_in top R\n        ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                UNIONS V = topspace top /\\\n                (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                locally_finite_in top V
+      #|  forall top:A topology U R.\n        (forall r. r IN R ==> open_in top r) /\\\n        UNIONS R = topspace top /\\\n        (forall r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n        sigma_locally_finite_in top R\n        ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                UNIONS V = topspace top /\\\n                (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                locally_finite_in top V
       #|  w:A->bool
       #|  (f:(A->bool)->(A->bool)) w
       #|  UNIONS {v':A->bool | v' IN V /\\\n            (f:(A->bool)->(A->bool)) v' =\n            (f:(A->bool)->(A->bool)) w}
@@ -22455,10 +22455,10 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  u:A->bool
       #|  \\u:A->bool. UNIONS {v:A->bool | v IN V /\\\n                         (f:(A->bool)->(A->bool)) v = u}
       #|  f:(A->bool)->(A->bool)
-      #|  ?f:(A->bool)->(A->bool). !v. v IN V ==> f v IN U /\\ v SUBSET f v
+      #|  ?f:(A->bool)->(A->bool). forall v. v IN V ==> f v IN U /\\ v SUBSET f v
       #|  V:(A->bool)->bool
       #|  U:(A->bool)->bool
-      #|  !top:A topology U.\n        (!U'. (!u. u IN U' ==> open_in top u) /\\ UNIONS U' = topspace top\n              ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                      UNIONS V = topspace top /\\\n                      (!v. v IN V ==> ?u. u IN U' /\\ v SUBSET u) /\\\n                      (!W. W SUBSET V ==> closed_in top (UNIONS W))) /\\\n        (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?c. (!u. u IN U ==> closed_in top (c u)) /\\\n                (!u. u IN U ==> c u SUBSET u) /\\\n                UNIONS {c u | u IN U} = topspace top /\\\n                (!S. S SUBSET U\n                     ==> closed_in top (UNIONS {c u | u IN S}))
+      #|  forall top:A topology U.\n        (forall U'. (forall u. u IN U' ==> open_in top u) /\\ UNIONS U' = topspace top\n              ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                      UNIONS V = topspace top /\\\n                      (forall v. v IN V ==> ?u. u IN U' /\\ v SUBSET u) /\\\n                      (forall W. W SUBSET V ==> closed_in top (UNIONS W))) /\\\n        (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?c. (forall u. u IN U ==> closed_in top (c u)) /\\\n                (forall u. u IN U ==> c u SUBSET u) /\\\n                UNIONS {c u | u IN U} = topspace top /\\\n                (forall S. S SUBSET U\n                     ==> closed_in top (UNIONS {c u | u IN S}))
       #|  UNIONS (V DIFF V1) SUBSET topspace top DIFF (t:A->bool)
       #|  (w:A->bool) IN V1
       #|  w:A->bool
@@ -22469,7 +22469,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  UNIONS V1 UNION UNIONS (V DIFF V1:(A->bool)->bool) =\n       topspace top:A->bool
       #|  v:A->bool
       #|  v:A->bool
-      #|  !v:A->bool. v IN V DIFF V1\n                  ==> v SUBSET topspace top DIFF t
+      #|  forall v:A->bool. v IN V DIFF V1\n                  ==> v SUBSET topspace top DIFF t
       #|  closed_in top (UNIONS (V DIFF V1):A->bool)
       #|  closed_in top (UNIONS V1:A->bool)
       #|  V1 SUBSET (V:(A->bool)->bool)
@@ -22477,17 +22477,17 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  u:A->bool
       #|  v:A->bool
       #|  v:A->bool
-      #|  !v:A->bool. v IN V\n                  ==> v SUBSET topspace top DIFF s \\/\n                      v SUBSET topspace top DIFF t
+      #|  forall v:A->bool. v IN V\n                  ==> v SUBSET topspace top DIFF s \\/\n                      v SUBSET topspace top DIFF t
       #|  V:(A->bool)->bool
       #|  {topspace top DIFF s, topspace top DIFF t}:(A->bool)->bool
       #|  s SUBSET topspace (top:A topology) /\\ t SUBSET topspace top
       #|  t:A->bool
       #|  s:A->bool
-      #|  !top:A topology.\n        (!U. (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (!W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> normal_space top
+      #|  forall top:A topology.\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (forall W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> normal_space top
       #|  {a:A}
       #|  a:A
       #|  s:A->bool = {}
-      #|  !s:A->bool. (!x y. x IN s /\\ y IN s ==> x = y) ==> FINITE s
+      #|  forall s:A->bool. (forall x y. x IN s /\\ y IN s ==> x = y) ==> FINITE s
       #|  ~(t INTER (topspace top DIFF top closure_of R:A->bool) =\n               {})
       #|  R:A->bool
       #|  (f:K->A->bool) k0 INTER R SUBSET top closure_of R
@@ -22538,7 +22538,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  ~((f:K->A->bool) k0 INTER f k' = {})
       #|  (~p ==> F) ==> p
       #|  k':K
-      #|  !k':K. k' IN s /\\ ~((f:K->A->bool) k0 INTER f k' = {})\n                         ==> k' = k0
+      #|  forall k':K. k' IN s /\\ ~((f:K->A->bool) k0 INTER f k' = {})\n                         ==> k' = k0
       #|  k2:K
       #|  k1:K
       #|  (f:K->A->bool) k0
@@ -22552,8 +22552,8 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  v0:A->bool
       #|  x:A
       #|  open_in top (S':A->bool)
-      #|  S':A->bool = {x | ?v. open_in top v /\\ x IN v /\\\n       !k1:K k2:K. k1 IN s /\\ k2 IN s /\\\n       ~(v INTER (f:K->A->bool) k1 = {}) /\\\n       ~(v INTER f k2 = {}) ==> k1 = k2}
-      #|  !top:A topology (s:K->bool) (f:K->A->bool) (d:K->A->bool).\n    normal_space top /\\\n    (!k. k IN s ==> open_in top (f k)) /\\\n    pairwise (\\a b. DISJOINT (f a:A->bool) (f b)) s /\\\n    (!k. k IN s ==> d k SUBSET f k) /\\\n    closed_in top (UNIONS {d k | k IN s})\n    ==> ?w:K->A->bool.\n          (!k. k IN s ==> open_in top (w k)) /\\\n          (!k. k IN s ==> d k SUBSET w k) /\\\n          (!k. k IN s ==> w k SUBSET f k) /\\\n          locally_finite_in top {w k | k IN s}
+      #|  S':A->bool = {x | ?v. open_in top v /\\ x IN v /\\\n       forall k1:K k2:K. k1 IN s /\\ k2 IN s /\\\n       ~(v INTER (f:K->A->bool) k1 = {}) /\\\n       ~(v INTER f k2 = {}) ==> k1 = k2}
+      #|  forall top:A topology (s:K->bool) (f:K->A->bool) (d:K->A->bool).\n    normal_space top /\\\n    (forall k. k IN s ==> open_in top (f k)) /\\\n    pairwise (\\a b. DISJOINT (f a:A->bool) (f b)) s /\\\n    (forall k. k IN s ==> d k SUBSET f k) /\\\n    closed_in top (UNIONS {d k | k IN s})\n    ==> ?w:K->A->bool.\n          (forall k. k IN s ==> open_in top (w k)) /\\\n          (forall k. k IN s ==> d k SUBSET w k) /\\\n          (forall k. k IN s ==> w k SUBSET f k) /\\\n          locally_finite_in top {w k | k IN s}
       #|  W:(A->bool)->bool
       #|  W:(A->bool)->bool
       #|  U:(A->bool)->bool
@@ -22563,7 +22563,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  B:(A->bool)->bool
       #|  top:A topology
       #|  U:(A->bool)->bool
-      #|  !top:A topology.\n        regular_space top /\\\n        (!U. (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     locally_finite_in top V)\n        ==> paracompact_space top
+      #|  forall top:A topology.\n        regular_space top /\\\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     locally_finite_in top V)\n        ==> paracompact_space top
       #|  R:(A->bool)->bool
       #|  U:(A->bool)->bool
       #|  top:A topology
@@ -22601,7 +22601,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  W:(A->bool)->bool
       #|  top:A topology
       #|  nn:num
-      #|  !n:num. ?EE:(A->bool)->(A->bool).\n         (!w:A->bool. w IN W ==> open_in top (EE w)) /\\\n         (!w:A->bool. w IN W ==>\n            cc ((VV:num->(A->bool)->(A->bool)) (SUC n) w) SUBSET EE w) /\\\n         (!w:A->bool. w IN W ==> EE w SUBSET VV (SUC n) w) /\\\n         locally_finite_in top {EE w | w IN W}
+      #|  forall n:num. ?EE:(A->bool)->(A->bool).\n         (forall w:A->bool. w IN W ==> open_in top (EE w)) /\\\n         (forall w:A->bool. w IN W ==>\n            cc ((VV:num->(A->bool)->(A->bool)) (SUC n) w) SUBSET EE w) /\\\n         (forall w:A->bool. w IN W ==> EE w SUBSET VV (SUC n) w) /\\\n         locally_finite_in top {EE w | w IN W}
       #|  cc:(A->bool)->(A->bool)
       #|  w0:A->bool
       #|  n0:num
@@ -22649,21 +22649,21 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (mn:num->(A->bool)) (SUC k)
       #|  k:num
       #|  SUC k
-      #|  !k:num. (ord:(A->bool)->(A->bool)->bool)\n           ((mn:num->(A->bool)) (SUC k)) (mn k)
+      #|  forall k:num. (ord:(A->bool)->(A->bool)->bool)\n           ((mn:num->(A->bool)) (SUC k)) (mn k)
       #|  mn:num->(A->bool)
       #|  (x:A) IN UNIONS\n                 {(C:num->(A->bool)->(A->bool)) n w | w IN W}
       #|  n:num
       #|  {w:A->bool | w IN W /\\\n             (x:A) IN (C:num->(A->bool)->(A->bool)) n w}
-      #|  !n:num. ?w0:A->bool. w0 IN W /\\\n           (x:A) IN (C:num->(A->bool)->(A->bool)) n w0 /\\\n           !v. v IN W /\\ x IN C n v ==>\n             (ord:(A->bool)->(A->bool)->bool) w0 v
+      #|  forall n:num. ?w0:A->bool. w0 IN W /\\\n           (x:A) IN (C:num->(A->bool)->(A->bool)) n w0 /\\\n           forall v. v IN W /\\ x IN C n v ==>\n             (ord:(A->bool)->(A->bool)->bool) w0 v
       #|  x:A
-      #|  !x:A. x IN topspace top ==>\n        ?n:num w:A->bool. w IN W /\\\n          x IN (VV:num->(A->bool)->(A->bool)) (SUC n) w
+      #|  forall x:A. x IN topspace top ==>\n        ?n:num w:A->bool. w IN W /\\\n          x IN (VV:num->(A->bool)->(A->bool)) (SUC n) w
       #|  (VV:num->(A->bool)->(A->bool)) n w2 INTER\n         (C:num->(A->bool)->(A->bool)) n w1 = {}
       #|  w1:A->bool
       #|  (C:num->(A->bool)->(A->bool)) n w1
       #|  y:A
       #|  (C:num->(A->bool)->(A->bool)) n w1 SUBSET\n         UNIONS {C n v | v IN W /\\ ~(v = w2)}
       #|  (VV:num->(A->bool)->(A->bool)) n w1 SUBSET\n         (C:num->(A->bool)->(A->bool)) n w1
-      #|  !n:num w1 w2:A->bool. w1 IN W /\\ w2 IN W /\\ ~(w1 = w2)\n         ==> (VV:num->(A->bool)->(A->bool)) n w1 INTER VV n w2 = {}
+      #|  forall n:num w1 w2:A->bool. w1 IN W /\\ w2 IN W /\\ ~(w1 = w2)\n         ==> (VV:num->(A->bool)->(A->bool)) n w1 INTER VV n w2 = {}
       #|  v:A->bool
       #|  (C:num->(A->bool)->(A->bool)) n v
       #|  (y:A) IN\n         UNIONS {(C:num->(A->bool)->(A->bool)) n v' |\n                 v' IN W /\\ ~(v' = w)}
@@ -22673,11 +22673,11 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  ?v:A->bool. v IN W /\\\n            (y:A) IN (C:num->(A->bool)->(A->bool)) n v
       #|  n:num
       #|  y:A
-      #|  !n:num w:A->bool. w IN W ==>\n        (VV:num->(A->bool)->(A->bool)) n w SUBSET C n w
+      #|  forall n:num w:A->bool. w IN W ==>\n        (VV:num->(A->bool)->(A->bool)) n w SUBSET C n w
       #|  {(C:num->(A->bool)->(A->bool)) n w' |\n           w' IN {v:A->bool | v IN W /\\ ~(v = w)}} =\n         {C n v | v IN W /\\ ~(v = w)}
       #|  {v:A->bool | v IN W /\\ ~(v = w)}
       #|  n:num
-      #|  !n:num w:A->bool. w IN W ==>\n        open_in top ((VV:num->(A->bool)->(A->bool)) n w)
+      #|  forall n:num w:A->bool. w IN W ==>\n        open_in top ((VV:num->(A->bool)->(A->bool)) n w)
       #|  VV = \\(n:num) (w:A->bool).\n      topspace top DIFF\n        UNIONS {(C:num->(A->bool)->(A->bool)) n v | v IN W /\\\n                ~(v = w)}
       #|  w2:A->bool
       #|  (C:num->(A->bool)->(A->bool)) n w2
@@ -22686,7 +22686,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  w1:A->bool
       #|  n:num
       #|  (C:num->(A->bool)->(A->bool)) (SUC n) w1 SUBSET\n         w1 DIFF UNIONS {C n v | v IN W /\\\n           (ord:(A->bool)->(A->bool)->bool) v w1 /\\ ~(v = w1)}
-      #|  !n:num w1 w2:A->bool.\n         w1 IN W /\\ w2 IN W /\\\n         (ord:(A->bool)->(A->bool)->bool) w2 w1 /\\ ~(w2 = w1)\n         ==> (C:num->(A->bool)->(A->bool)) (SUC n) w1 INTER\n             C n w2 = {}
+      #|  forall n:num w1 w2:A->bool.\n         w1 IN W /\\ w2 IN W /\\\n         (ord:(A->bool)->(A->bool)->bool) w2 w1 /\\ ~(w2 = w1)\n         ==> (C:num->(A->bool)->(A->bool)) (SUC n) w1 INTER\n             C n w2 = {}
       #|  a:A
       #|  UNIONS {UNIONS {v:A->bool | v IN V2 /\\\n             (g2:(A->bool)->(A->bool)) v = w'} |\n            w' | (w':A->bool) IN ss} =\n           UNIONS {v:A->bool | v IN V2 /\\ g2 v IN ss}
       #|  ss:(A->bool)->bool
@@ -22712,7 +22712,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (v:A->bool) IN V2
       #|  v:A->bool
       #|  g2:(A->bool)->(A->bool)
-      #|  ?g2:(A->bool)->(A->bool). !v:A->bool. v IN V2 ==>\n           g2 v IN W /\\\n           v SUBSET g2 v DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n u |\n              u IN W /\\\n              (ord:(A->bool)->(A->bool)->bool) u (g2 v) /\\\n              ~(u = g2 v)}
+      #|  ?g2:(A->bool)->(A->bool). forall v:A->bool. v IN V2 ==>\n           g2 v IN W /\\\n           v SUBSET g2 v DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n u |\n              u IN W /\\\n              (ord:(A->bool)->(A->bool)->bool) u (g2 v) /\\\n              ~(u = g2 v)}
       #|  V2:(A->bool)->bool
       #|  woset(ord:(A->bool)->(A->bool)->bool)
       #|  vv:A->bool
@@ -22730,14 +22730,14 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  {v:A->bool | v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v w' /\\\n                 ~(v = w')}
       #|  w':A->bool
       #|  {w' DIFF UNIONS\n           {(C:num->(A->bool)->(A->bool)) n v | v |\n            v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w' /\\\n            ~(v = w')} |\n          w' | (w':A->bool) IN W}
-      #|  ?c':(A->bool)->(A->bool).\n           (!w'. w' IN W ==> closed_in top (c' w')) /\\\n           (!w':A->bool. w' IN W ==>\n              c' w' SUBSET w' DIFF UNIONS\n                {(C:num->(A->bool)->(A->bool)) n v | v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v w' /\\ ~(v = w')}) /\\\n           UNIONS {c' w' | w' IN W} = topspace top /\\\n           (!ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w' | w' IN ss}))
+      #|  ?c':(A->bool)->(A->bool).\n           (forall w'. w' IN W ==> closed_in top (c' w')) /\\\n           (forall w':A->bool. w' IN W ==>\n              c' w' SUBSET w' DIFF UNIONS\n                {(C:num->(A->bool)->(A->bool)) n v | v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v w' /\\ ~(v = w')}) /\\\n           UNIONS {c' w' | w' IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w' | w' IN ss}))
       #|  n:num
-      #|  !n:num w:A->bool. w IN W ==>\n        (C:num->(A->bool)->(A->bool)) (SUC n) w SUBSET\n        w DIFF UNIONS {C n v | v IN W /\\\n          (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}
+      #|  forall n:num w:A->bool. w IN W ==>\n        (C:num->(A->bool)->(A->bool)) (SUC n) w SUBSET\n        w DIFF UNIONS {C n v | v IN W /\\\n          (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}
       #|  w DIFF UNIONS\n            {(C:num->(A->bool)->(A->bool)) n v |\n             v IN W /\\\n             (ord:(A->bool)->(A->bool)->bool) v w /\\\n             ~(v = w)}
       #|  w:A->bool
       #|  c':(A->bool)->(A->bool)
-      #|  ?c':(A->bool)->(A->bool).\n               (!w. w IN W ==> closed_in top (c' w)) /\\\n               (!w:A->bool. w IN W ==>\n                  c' w SUBSET w DIFF UNIONS\n                    {(C:num->(A->bool)->(A->bool)) n v |\n                     v IN W /\\\n                     (ord:(A->bool)->(A->bool)->bool) v w /\\\n                     ~(v = w)}) /\\\n               UNIONS {c' w | w IN W} = topspace top /\\\n               (!ss:(A->bool)->bool. ss SUBSET W ==>\n                  closed_in top (UNIONS {c' w | w IN ss}))
-      #|  (!w:A->bool. w IN W ==>\n             closed_in top\n               ((nxt:((A->bool)->(A->bool))->(A->bool)->(A->bool))\n                ((C:num->(A->bool)->(A->bool)) n) w)) /\\\n           (!w:A->bool. w IN W ==>\n             nxt (C n) w SUBSET w DIFF UNIONS\n               {C n v | v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {nxt (C n) w | w IN W} = topspace top /\\\n           (!ss:(A->bool)->bool. ss SUBSET W ==>\n             closed_in top (UNIONS {nxt (C n) w | w IN ss}))
+      #|  ?c':(A->bool)->(A->bool).\n               (forall w. w IN W ==> closed_in top (c' w)) /\\\n               (forall w:A->bool. w IN W ==>\n                  c' w SUBSET w DIFF UNIONS\n                    {(C:num->(A->bool)->(A->bool)) n v |\n                     v IN W /\\\n                     (ord:(A->bool)->(A->bool)->bool) v w /\\\n                     ~(v = w)}) /\\\n               UNIONS {c' w | w IN W} = topspace top /\\\n               (forall ss:(A->bool)->bool. ss SUBSET W ==>\n                  closed_in top (UNIONS {c' w | w IN ss}))
+      #|  (forall w:A->bool. w IN W ==>\n             closed_in top\n               ((nxt:((A->bool)->(A->bool))->(A->bool)->(A->bool))\n                ((C:num->(A->bool)->(A->bool)) n) w)) /\\\n           (forall w:A->bool. w IN W ==>\n             nxt (C n) w SUBSET w DIFF UNIONS\n               {C n v | v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {nxt (C n) w | w IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n             closed_in top (UNIONS {nxt (C n) w | w IN ss}))
       #|  vv:A->bool
       #|  (g:(A->bool)->(A->bool)) vv
       #|  UNIONS {v':A->bool | v' IN V /\\\n                    (g:(A->bool)->(A->bool)) v' =\n                    (g:(A->bool)->(A->bool)) vv}
@@ -22769,10 +22769,10 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (v:A->bool) IN V
       #|  v:A->bool
       #|  g:(A->bool)->(A->bool)
-      #|  ?g:(A->bool)->(A->bool). !v:A->bool. v IN V ==>\n               g v IN W /\\\n               v SUBSET g v DIFF UNIONS\n                 {(C:num->(A->bool)->(A->bool)) n u |\n                  u IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) u (g v) /\\\n                  ~(u = g v)}
+      #|  ?g:(A->bool)->(A->bool). forall v:A->bool. v IN V ==>\n               g v IN W /\\\n               v SUBSET g v DIFF UNIONS\n                 {(C:num->(A->bool)->(A->bool)) n u |\n                  u IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) u (g v) /\\\n                  ~(u = g v)}
       #|  V:(A->bool)->bool
       #|  {w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)} |\n              w | (w:A->bool) IN W}
-      #|  ?c':(A->bool)->(A->bool).\n             (!w. w IN W ==> closed_in top (c' w)) /\\\n             (!w:A->bool. w IN W ==>\n                c' w SUBSET w DIFF UNIONS\n                  {(C:num->(A->bool)->(A->bool)) n v |\n                   v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v w /\\\n                   ~(v = w)}) /\\\n             UNIONS {c' w | w IN W} = topspace top /\\\n             (!ss:(A->bool)->bool. ss SUBSET W ==>\n                closed_in top (UNIONS {c' w | w IN ss}))
+      #|  ?c':(A->bool)->(A->bool).\n             (forall w. w IN W ==> closed_in top (c' w)) /\\\n             (forall w:A->bool. w IN W ==>\n                c' w SUBSET w DIFF UNIONS\n                  {(C:num->(A->bool)->(A->bool)) n v |\n                   v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v w /\\\n                   ~(v = w)}) /\\\n             UNIONS {c' w | w IN W} = topspace top /\\\n             (forall ss:(A->bool)->bool. ss SUBSET W ==>\n                closed_in top (UNIONS {c' w | w IN ss}))
       #|  woset(ord:(A->bool)->(A->bool)->bool)
       #|  vv:A->bool
       #|  ss:A->bool
@@ -22788,24 +22788,24 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  ww:A->bool
       #|  {v:A->bool | v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v w /\\\n                   ~(v = w)}
       #|  w:A->bool
-      #|  (!w:A->bool. w IN W ==>\n             open_in top (w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)})) /\\\n           UNIONS {w DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n v | v |\n              v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n              ~(v = w)} | w | w IN W} = topspace top
-      #|  !n:num.\n        (!w:A->bool. w IN W ==> closed_in top (C n w)) /\\\n        (!w:A->bool. w IN W ==> C n w SUBSET w) /\\\n        UNIONS {(C:num->(A->bool)->(A->bool)) n w | w IN W} =\n          topspace top /\\\n        (!ss:(A->bool)->bool. ss SUBSET W ==>\n           closed_in top (UNIONS {C n w | w IN ss}))
+      #|  (forall w:A->bool. w IN W ==>\n             open_in top (w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)})) /\\\n           UNIONS {w DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n v | v |\n              v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n              ~(v = w)} | w | w IN W} = topspace top
+      #|  forall n:num.\n        (forall w:A->bool. w IN W ==> closed_in top (C n w)) /\\\n        (forall w:A->bool. w IN W ==> C n w SUBSET w) /\\\n        UNIONS {(C:num->(A->bool)->(A->bool)) n w | w IN W} =\n          topspace top /\\\n        (forall ss:(A->bool)->bool. ss SUBSET W ==>\n           closed_in top (UNIONS {C n w | w IN ss}))
       #|  C:num->(A->bool)->(A->bool)
       #|  \\(c:(A->bool)->(A->bool)) (n:num).\n          (nxt:((A->bool)->(A->bool))->(A->bool)->(A->bool)) c
       #|  c0:(A->bool)->(A->bool)
-      #|  nxt = \\(c:(A->bool)->(A->bool)).\n         @c':(A->bool)->(A->bool).\n           (!w:A->bool. w IN W ==> closed_in top (c' w)) /\\\n           (!w:A->bool. w IN W ==>\n              c' w SUBSET w DIFF\n                UNIONS {c v | v IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {c' w | w IN W} = topspace top /\\\n           (!ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w | w IN ss}))
+      #|  nxt = \\(c:(A->bool)->(A->bool)).\n         @c':(A->bool)->(A->bool).\n           (forall w:A->bool. w IN W ==> closed_in top (c' w)) /\\\n           (forall w:A->bool. w IN W ==>\n              c' w SUBSET w DIFF\n                UNIONS {c v | v IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {c' w | w IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w | w IN ss}))
       #|  c0:(A->bool)->(A->bool)
       #|  W:(A->bool)->bool
       #|  top:A topology
       #|  ord:(A->bool)->(A->bool)->bool
       #|  W:(A->bool)->bool
       #|  normal_space (top:A topology)
-      #|  ?R:(A->bool)->bool.\n       (!r. r IN R ==> open_in top r) /\\\n       UNIONS R = topspace top /\\\n       (!r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n       sigma_locally_finite_in top R
+      #|  ?R:(A->bool)->bool.\n       (forall r. r IN R ==> open_in top r) /\\\n       UNIONS R = topspace top /\\\n       (forall r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n       sigma_locally_finite_in top R
       #|  W:(A->bool)->bool
       #|  U:(A->bool)->bool
       #|  top:A topology
       #|  U:(A->bool)->bool
-      #|  !top:A topology.\n        regular_space top /\\\n        (!U. (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (!W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> paracompact_space top
+      #|  forall top:A topology.\n        regular_space top /\\\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (forall W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> paracompact_space top
       #|  n:num
       #|  n:num
       #|  (w:A->bool) IN W
@@ -22845,7 +22845,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  V:(A->bool)->bool
       #|  U:(A->bool)->bool
       #|  U:(A->bool)->bool
-      #|  !top:A topology.\n        regular_space top\n        ==> (paracompact_space top <=>\n             !U. (!u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n                 ==> ?V. (!v. v IN V ==> closed_in top v) /\\\n                         UNIONS V = topspace top /\\\n                         (!v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                         (!W. W SUBSET V ==> closed_in top (UNIONS W)))
+      #|  forall top:A topology.\n        regular_space top\n        ==> (paracompact_space top <=>\n             forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n                 ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                         UNIONS V = topspace top /\\\n                         (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                         (forall W. W SUBSET V ==> closed_in top (UNIONS W)))
       #|  regular_space (top':B topology)
       #|  top:A topology
       #|  f:A->B
@@ -22907,9 +22907,9 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  u:B->bool
       #|  {({x | x IN topspace top /\\ (f:A->B) x IN u}) | u IN U}
       #|  U:(B->bool)->bool
-      #|  !U:(B->bool)->bool.\n         (!u:B->bool. u IN U ==> open_in top' u) /\\\n         UNIONS U = topspace top'\n         ==> ?V:(B->bool)->bool.\n                 (!v:B->bool. v IN V ==> closed_in top' v) /\\\n                 UNIONS V = topspace top' /\\\n                 (!v:B->bool. v IN V ==> ?u:B->bool. u IN U /\\ v SUBSET u) /\\\n                 (!W:(B->bool)->bool. W SUBSET V ==> closed_in top' (UNIONS W))
+      #|  forall U:(B->bool)->bool.\n         (forall u:B->bool. u IN U ==> open_in top' u) /\\\n         UNIONS U = topspace top'\n         ==> ?V:(B->bool)->bool.\n                 (forall v:B->bool. v IN V ==> closed_in top' v) /\\\n                 UNIONS V = topspace top' /\\\n                 (forall v:B->bool. v IN V ==> ?u:B->bool. u IN U /\\ v SUBSET u) /\\\n                 (forall W:(B->bool)->bool. W SUBSET V ==> closed_in top' (UNIONS W))
       #|  regular_space (top:A topology)
-      #|  !top top' (f:A->B).\n        paracompact_space top /\\ hausdorff_space top /\\\n        continuous_map(top,top') f /\\\n        closed_map(top,top') f /\\\n        IMAGE f (topspace top) = topspace top'\n        ==> paracompact_space top'
+      #|  forall top top' (f:A->B).\n        paracompact_space top /\\ hausdorff_space top /\\\n        continuous_map(top,top') f /\\\n        closed_map(top,top') f /\\\n        IMAGE f (topspace top) = topspace top'\n        ==> paracompact_space top'
       #|countably_paracompact_space =  |- (#!:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#=:fun(bool,fun(bool,bool)) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A))) (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\U:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#COUNTABLE:fun(fun(fun('A,bool),bool),bool) U:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) u:fun('A,bool)) U:fun(fun('A,bool),bool))) ((#open_in:fun(topology('A),fun(fun('A,bool),bool)) top:topology('A)) u:fun('A,bool)))))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) U:fun(fun('A,bool),bool))) (#topspace:fun(topology('A),fun('A,bool)) top:topology('A)))))) (#?:fun(fun(fun(fun('A,bool),bool),bool),bool) (\V:fun(fun('A,bool),bool). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\v:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) v:fun('A,bool)) V:fun(fun('A,bool),bool))) ((#open_in:fun(topology('A),fun(fun('A,bool),bool)) top:topology('A)) v:fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) V:fun(fun('A,bool),bool))) (#topspace:fun(topology('A),fun('A,bool)) top:topology('A)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\v:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) v:fun('A,bool)) V:fun(fun('A,bool),bool))) (#?:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) u:fun('A,bool)) U:fun(fun('A,bool),bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) v:fun('A,bool)) u:fun('A,bool))))))))) ((#locally_finite_in:fun(topology('A),fun(fun(fun('A,bool),bool),bool)) top:topology('A)) V:fun(fun('A,bool),bool)))))))))))))
       #|PARACOMPACT_IMP_COUNTABLY_PARACOMPACT_SPACE =  |- (#!:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#==>:fun(bool,fun(bool,bool)) (#paracompact_space:fun(topology('A),bool) top:topology('A))) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A)))))
       #|METRIZABLE_IMP_COUNTABLY_PARACOMPACT_SPACE =  |- (#!:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#==>:fun(bool,fun(bool,bool)) (#metrizable_space:fun(topology('A),bool) top:topology('A))) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A)))))

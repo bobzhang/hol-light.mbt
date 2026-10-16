@@ -5580,16 +5580,16 @@ test "Examples/safetyliveness matches Examples/safetyliveness.ml" {
       #|0..0..1..4..8..18..36..63..98..149..205..288..412..566..780..1068..1414..solved at 1641
       #|0..0..0..2..4..6..17..31..53..90..solved at 117
       #|Examples/safetyliveness quotations (10):
-      #|  safety (p:(num->S)->bool) <=>\n        !s. ~(p s) ==> ?n. !s'. (!m. m <= n ==> s(m) = s'(m)) ==> ~(p s')
-      #|  liveness (p:(num->S)->bool) <=>\n        !s n. ?s'. (!m. m <= n ==> s(m) = s'(m)) /\\ p s'
+      #|  safety (p:(num->S)->bool) <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m <= n ==> s(m) = s'(m)) ==> ~(p s')
+      #|  liveness (p:(num->S)->bool) <=>\n        forall s n. ?s'. (forall m. m <= n ==> s(m) = s'(m)) /\\ p s'
       #|  m < n ==> m < SUC n
-      #|  !p:(num->S)->bool.\n        safety p <=>\n        !s. ~(p s) ==> ?n. !s'. (!m. m < n ==> s(m) = s'(m)) ==> ~(p s')
+      #|  forall p:(num->S)->bool.\n        safety p <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m < n ==> s(m) = s'(m)) ==> ~(p s')
       #|  m < n ==> m < SUC n
-      #|  !p:(num->S)->bool.\n        liveness p <=>\n        !s n. ?s'. (!m. m < n ==> s(m) = s'(m)) /\\ p s'
+      #|  forall p:(num->S)->bool.\n        liveness p <=>\n        forall s n. ?s'. (forall m. m < n ==> s(m) = s'(m)) /\\ p s'
       #|  \\s:num->S. P s \\/ ~Q s
       #|  \\s:num->S. P s \\/ Q s
-      #|  Q = \\s:num->S. !i. ?b. (!j. j <= i ==> b j = s j) /\\ P b
-      #|  !P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (!x. S x /\\ L x <=> P x)
+      #|  Q = \\s:num->S. forall i. ?b. (forall j. j <= i ==> b j = s j) /\\ P b
+      #|  forall P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (forall x. S x /\\ L x <=> P x)
       #|safety =  |- (#!:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#safety:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#!:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s:fun(num,'S)))) (#?:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))))
       #|liveness =  |- (#!:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#liveness:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#!:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). (#!:fun(fun(num,bool),bool) (\n:num. (#?:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))
       #|SAFETY =  |- (#!:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#safety:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#!:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s:fun(num,'S)))) (#?:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))))

@@ -1,13 +1,13 @@
 Formal_ineqs/lib/ssreflect/ssreflect quotations (9):
-  !v P. ssreflect_eq (v:A) (P:bool) = P
+  forall v P. ssreflect_eq (v:A) (P:bool) = P
   (A /\\ B ==> C) ==> (A ==> B ==> C)
   F
   (A ==> B ==> C) ==> (A /\\ B ==> C)
   ((T ==> A) <=> A) /\\ ((T /\\ A) = A) /\\ ((A /\\ T) = A)
   l:(A)list
-  !P. P [] /\\ (!(h:A) t. P (CONS h t)) ==> (!l. P l)
+  forall P. P [] /\\ (forall(h:A) t. P (CONS h t)) ==> (forall l. P l)
   m:num
-  !P. P 0 /\\ (!n. P (SUC n)) ==> (!m. P m)
+  forall P. P 0 /\\ (forall n. P (SUC n)) ==> (forall m. P m)
 Ssreflect.ssreflect_eq_def =  |- (#!:fun(fun('A,bool),bool) (\v:'A. (#!:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#ssreflect_eq:fun('A,fun(bool,bool)) v:'A) P:bool)) P:bool)))))
 Ssreflect.bool_cases =  |- (#!:fun(fun(fun(bool,bool),bool),bool) (\P:fun(bool,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(bool,bool) #T:bool)) (P:fun(bool,bool) #F:bool))) (#!:fun(fun(bool,bool),bool) (\x:bool. (P:fun(bool,bool) x:bool))))))
 Ssreflect.list_cases =  |- (#!:fun(fun(fun(list('A),bool),bool),bool) (\P:fun(list('A),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(list('A),bool) #NIL:list('A))) (#!:fun(fun('A,bool),bool) (\h:'A. (#!:fun(fun(list('A),bool),bool) (\t:list('A). (P:fun(list('A),bool) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) t:list('A))))))))) (#!:fun(fun(list('A),bool),bool) (\l:list('A). (P:fun(list('A),bool) l:list('A)))))))

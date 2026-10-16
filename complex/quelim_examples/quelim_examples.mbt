@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   let t2 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v1_c.set(@lib.time(fn(x1 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x1.0, x1.1)
-  }, (@parser.parse_term("!x y. (x pow 2 = Cx(&2)) /\\ (y pow 2 = Cx(&3))\n         ==> ((x * y) pow 2 = Cx(&6))"), t2)))
+  }, (@parser.parse_term("forall x y. (x pow 2 = Cx(&2)) /\\ (y pow 2 = Cx(&3))\n         ==> ((x * y) pow 2 = Cx(&6))"), t2)))
 }
 
 ///|
@@ -25,7 +25,7 @@ fn step_2() -> Unit raise {
   let t4 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v2_c.set(@lib.time(fn(x3 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x3.0, x3.1)
-  }, (@parser.parse_term("!x a. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))"), t4)))
+  }, (@parser.parse_term("forall x a. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))"), t4)))
 }
 
 ///|
@@ -43,7 +43,7 @@ fn step_3() -> Unit raise {
   let t6 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v3_c.set(@lib.time(fn(x5 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x5.0, x5.1)
-  }, (@parser.parse_term("!a x. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))"), t6)))
+  }, (@parser.parse_term("forall a x. (a pow 2 = Cx(&2)) /\\ (x pow 2 + a * x + Cx(&1) = Cx(&0))\n         ==> (x pow 4 + Cx(&1) = Cx(&0))"), t6)))
 }
 
 ///|
@@ -79,7 +79,7 @@ fn step_5() -> Unit raise {
   let t10 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v5_c.set(@lib.time(fn(x9 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x9.0, x9.1)
-  }, (@parser.parse_term("!x. ?y. x pow 2 = y pow 3"), t10)))
+  }, (@parser.parse_term("forall x. ?y. x pow 2 = y pow 3"), t10)))
 }
 
 ///|
@@ -97,7 +97,7 @@ fn step_6() -> Unit raise {
   let t12 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v6_c.set(@lib.time(fn(x11 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x11.0, x11.1)
-  }, (@parser.parse_term("!x y z a b. (a + b) * (x - y + z) - (a - b) * (x + y + z) =\n               Cx(&2) * (b * x + b * z - a * y)"), t12)))
+  }, (@parser.parse_term("forall x y z a b. (a + b) * (x - y + z) - (a - b) * (x + y + z) =\n               Cx(&2) * (b * x + b * z - a * y)"), t12)))
 }
 
 ///|
@@ -115,7 +115,7 @@ fn step_7() -> Unit raise {
   let t14 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v7_c.set(@lib.time(fn(x13 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x13.0, x13.1)
-  }, (@parser.parse_term("!a b. ~(a = b) ==> ?x y. (y * x pow 2 = a) /\\ (y * x pow 2 + x = b)"), t14)))
+  }, (@parser.parse_term("forall a b. ~(a = b) ==> ?x y. (y * x pow 2 = a) /\\ (y * x pow 2 + x = b)"), t14)))
 }
 
 ///|
@@ -133,7 +133,7 @@ fn step_8() -> Unit raise {
   let t16 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v8_c.set(@lib.time(fn(x15 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x15.0, x15.1)
-  }, (@parser.parse_term("!a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n               (a * y pow 2 + b * y + c = Cx(&0)) /\\\n               ~(x = y)\n               ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0))"), t16)))
+  }, (@parser.parse_term("forall a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n               (a * y pow 2 + b * y + c = Cx(&0)) /\\\n               ~(x = y)\n               ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0))"), t16)))
 }
 
 ///|
@@ -151,7 +151,7 @@ fn step_9() -> Unit raise {
   let t18 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v9_c.set(@lib.time(fn(x17 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x17.0, x17.1)
-  }, (@parser.parse_term("~(!a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n                 (a * y pow 2 + b * y + c = Cx(&0))\n                 ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0)))"), t18)))
+  }, (@parser.parse_term("~(forall a b c x y. (a * x pow 2 + b * x + c = Cx(&0)) /\\\n                 (a * y pow 2 + b * y + c = Cx(&0))\n                 ==> (a * x * y = c) /\\ (a * (x + y) + b = Cx(&0)))"), t18)))
 }
 
 ///|
@@ -169,7 +169,7 @@ fn step_10() -> Unit raise {
   let t20 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v10_c.set(@lib.time(fn(x19 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x19.0, x19.1)
-  }, (@parser.parse_term("!y_1 y_2 y_3 y_4.\n     (y_1 = Cx(&2) * y_3) /\\\n     (y_2 = Cx(&2) * y_4) /\\\n     (y_1 * y_3 = y_2 * y_4)\n     ==> (y_1 pow 2 = y_2 pow 2)"), t20)))
+  }, (@parser.parse_term("forall y_1 y_2 y_3 y_4.\n     (y_1 = Cx(&2) * y_3) /\\\n     (y_2 = Cx(&2) * y_4) /\\\n     (y_1 * y_3 = y_2 * y_4)\n     ==> (y_1 pow 2 = y_2 pow 2)"), t20)))
 }
 
 ///|
@@ -187,7 +187,7 @@ fn step_11() -> Unit raise {
   let t22 = @tactics.conv_tac(@quelim.full_complex_quelim_conv)
   th_v11_c.set(@lib.time(fn(x21 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x21.0, x21.1)
-  }, (@parser.parse_term("!a1 b1 c1 a2 b2 c2.\n        ~(a1 * b2 = a2 * b1)\n        ==> ?x y. (a1 * x + b1 * y = c1) /\\ (a2 * x + b2 * y = c2)"), t22)))
+  }, (@parser.parse_term("forall a1 b1 c1 a2 b2 c2.\n        ~(a1 * b2 = a2 * b1)\n        ==> ?x y. (a1 * x + b1 * y = c1) /\\ (a2 * x + b2 * y = c2)"), t22)))
 }
 
 ///|

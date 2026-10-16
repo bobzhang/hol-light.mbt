@@ -118,7 +118,7 @@ fn step_1() -> Unit raise {
   })
   let t73 = @tactics.repeat_tac(@tactics.strip_tac)
   let t74 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign()])), t73, t72, t71, t70, t69, @tactics.strip_tac, t68, t67, @tactics.strip_tac, t66, t65, t64, t63, t62, t61, t60, t59, t58, @tactics.strip_tac, t57, t56, @tactics.strip_tac, t55, t54, t53, t52, t51, t50, t49, t48, t47, @tactics.strip_tac, t46, t45, @tactics.strip_tac, t44, t43, t42, t41, t40])
-  even_div_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!set p q c d a n.\n     (!x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     EVEN n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))"), t74))
+  even_div_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     EVEN n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))"), t74))
 }
 
 ///|
@@ -242,7 +242,7 @@ fn step_2() -> Unit raise {
   let t141 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t142 = @rqe_tactics_ext.repeat_n(9L, @tactics.strip_tac)
   let t143 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign()])), t142, t141, t140, @tactics.strip_tac, t139, t138, t137, t136, t135, @tactics.strip_tac, t134, t133, t132, t131, t130, t129, t128, t127, t126, @tactics.strip_tac, t125, t124, t123, t122, t121, t120, t119, t118, t117, @tactics.strip_tac, t116, t115, t114])
-  gt_div_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!set p q c d a n.\n     (!x. a pow n * p x = c x * q x + d x) ==>\n     a > &0 ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))"), t143))
+  gt_div_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a > &0 ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set d Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set d Zero)  ==>\n         (interpsign set p Zero))"), t143))
 }
 
 ///|
@@ -366,7 +366,7 @@ fn step_3() -> Unit raise {
   let t210 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n < &0"))
   let t211 = @rqe_tactics_ext.repeat_n(10L, @tactics.strip_tac)
   let t212 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @poly.poly_neg_v1()])), t211, t210, t209, @tactics.strip_tac, @rewrites.real_simp_tac, t208, t207, t206, t205, t204, @tactics.strip_tac, t203, t202, t201, t200, t199, t198, t197, t196, t195, @tactics.strip_tac, t194, t193, t192, t191, t190, t189, t188, t187, t186, @tactics.strip_tac, t185, t184, t183])
-  neg_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!set p q c d a n.\n     (!x. a pow n * p x = c x * q x + d x) ==>\n     a < &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Zero)  ==>\n         (interpsign set p Zero))"), t212))
+  neg_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a < &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. -- d x) Zero)  ==>\n         (interpsign set p Zero))"), t212))
 }
 
 ///|
@@ -747,7 +747,7 @@ fn step_4() -> Unit raise {
   let t458 = @rqe_tactics_ext.claim(@parser.parse_term("a < &0 \\/ a > &0 \\/ (a = &0)"))
   let t459 = @rqe_tactics_ext.repeat_n(10L, @tactics.strip_tac)
   let t460 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @poly.poly_cmul_v1()])), t459, t458, @calc_rat.real_arith_tac, t457, t456, @rqe_tactics_ext.label_all_tac, @tactics.strip_tac, t455, t454, @tactics.strip_tac, t453, t452, t451, t450, t449, @tactics.strip_tac, t448, t447, t446, t445, t444, t443, t442, t441, t440, t439, t438, t437, t436, t435, t434, t433, t432, t431, t430, t429, t428, @tactics.strip_tac, t427, t426, t425, t424, t423, t422, t421, t420, t419, t418, @tactics.strip_tac, t417, t416, t415, t414, t413, t412, t411, t410, t409, @tactics.strip_tac, t408, t407, @tactics.strip_tac, t406, t405, t404, t403, t402, @tactics.strip_tac, t401, t400, t399, t398, t397, @tactics.strip_tac, t396, t395, t394, t393, t392, t391, t390, t389, t388, t387, t386, t385, t384, t383, t382, t381, t380, t379, t378, t377, t376, t375, t374, t373, t372, @tactics.strip_tac, t371, t370, t369, t368, t367, t366, t365, t364, t363, t362, @tactics.strip_tac, t361, t360, t359, t358, t357, t356, t355, t354, t353, @tactics.strip_tac, t352, t351, @tactics.strip_tac, t350, t349, t348])
-  neq_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!set p q c d a n.\n     (!x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Zero)  ==>\n         (interpsign set p Zero))"), t460))
+  neq_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall set p q c d a n.\n     (forall x. a pow n * p x = c x * q x + d x) ==>\n     a <> &0 ==>\n     ODD n ==>\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Neg)  ==>\n         (interpsign set p Neg)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Pos)  ==>\n         (interpsign set p Pos)) /\\\n       ((interpsign set q Zero) ==>\n        (interpsign set (\\x. a * d x) Zero)  ==>\n         (interpsign set p Zero))"), t460))
 }
 
 ///|
@@ -767,7 +767,7 @@ fn step_5() -> Unit raise {
   let t463 = @meson.asm_meson_tac(@list.List([@rqe_real.real_mul_gt(), @realax.real_gt()]))
   let t464 = @tactics.repeat_tac(@tactics.strip_tac)
   let t465 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @poly.poly_neg_v1()])), t464, t463, t462, t461])
-  neq_mult_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a q d d' set.\n     a < &0 ==>\n       ((interpsign set d Neg)  ==>\n        (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))"), t465))
+  neq_mult_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a q d d' set.\n     a < &0 ==>\n       ((interpsign set d Neg)  ==>\n        (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))"), t465))
 }
 
 ///|
@@ -784,7 +784,7 @@ pub fn neq_mult_lt_lem() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t466 = @meson.meson_tac(@list.List([@rqe_real.real_mul_lt(), @realarith.real_entire(), @real.real_not_eq(), @rqe_real.real_mul_gt(), @realax.real_gt()]))
   let t467 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@defs.interpsign(), @poly.poly_neg_v1()])), t466)])
-  neq_mult_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a q d d' set.\n     a > &0 ==>\n       ((interpsign set d Neg)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))"), t467))
+  neq_mult_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a q d d' set.\n     a > &0 ==>\n       ((interpsign set d Neg)  ==>\n         (interpsign set (\\x. a * d x) Neg)) /\\\n       ((interpsign set d Pos)  ==>\n         (interpsign set (\\x. a * d x) Pos)) /\\\n       ((interpsign set d Zero)  ==>\n         (interpsign set (\\x. a * d x) Zero))"), t467))
 }
 
 ///|
@@ -800,7 +800,7 @@ pub fn neq_mult_gt_lem() -> @kernel.Thm {
 /// unknown_thm
 fn step_7() -> Unit raise {
   let t468 = @meson.meson_tac(@list.List([@defs.interpsign()]))
-  unknown_thm_c.set(@tactics.prove(@parser.parse_term("!set p. (interpsign set p Unknown)"), t468))
+  unknown_thm_c.set(@tactics.prove(@parser.parse_term("forall set p. (interpsign set p Unknown)"), t468))
 }
 
 ///|
@@ -816,7 +816,7 @@ pub fn unknown_thm() -> @kernel.Thm {
 /// ips_gt_nz_thm
 fn step_8() -> Unit raise {
   let t469 = @list.List([@simp.rewrite_tac(@list.List([@basic.neq()])), @calc_rat.real_arith_tac])
-  ips_gt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. x > &0 ==> x <> &0"), t469))
+  ips_gt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. x > &0 ==> x <> &0"), t469))
 }
 
 ///|
@@ -832,7 +832,7 @@ pub fn ips_gt_nz_thm() -> @kernel.Thm {
 /// ips_lt_nz_thm
 fn step_9() -> Unit raise {
   let t470 = @list.List([@simp.rewrite_tac(@list.List([@basic.neq()])), @calc_rat.real_arith_tac])
-  ips_lt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. x < &0 ==> x <> &0"), t470))
+  ips_lt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. x < &0 ==> x <> &0"), t470))
 }
 
 ///|

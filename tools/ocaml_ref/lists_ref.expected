@@ -844,13 +844,13 @@ Warning: inventing type variables
 0..0..2..solved at 5
 0..0..solved at 2
 lists quotations (4286):
-  !P:(A)list->bool. P [] /\\ (!h t. P t ==> P (CONS h t)) ==> !l. P l
+  forall P:(A)list->bool. P [] /\\ (forall h t. P t ==> P (CONS h t)) ==> forall l. P l
   HD(CONS (h:A) t) = h
   TL(CONS (h:A) t) = t
-  (!l:(A)list. APPEND [] l = l) /\\\n   (!h t l. APPEND (CONS h t) l = CONS h (APPEND t l))
+  (forall l:(A)list. APPEND [] l = l) /\\\n   (forall h t l. APPEND (CONS h t) l = CONS h (APPEND t l))
   (REVERSE [] = []) /\\\n   (REVERSE (CONS (x:A) l) = APPEND (REVERSE l) [x])
-  (LENGTH [] = 0) /\\\n   (!h:A. !t. LENGTH (CONS h t) = SUC (LENGTH t))
-  (!f:A->B. MAP f NIL = NIL) /\\\n   (!f h t. MAP f (CONS h t) = CONS (f h) (MAP f t))
+  (LENGTH [] = 0) /\\\n   (forall h:A. forall t. LENGTH (CONS h t) = SUC (LENGTH t))
+  (forall f:A->B. MAP f NIL = NIL) /\\\n   (forall f h t. MAP f (CONS h t) = CONS (f h) (MAP f t))
   LAST (CONS (h:A) t) = if t = [] then h else LAST t
   (BUTLAST [] = []) /\\\n  (BUTLAST (CONS (h:A) t) = if t = [] then [] else CONS h (BUTLAST t))
   (REPLICATE 0 (x:A) = []) /\\\n   (REPLICATE (SUC n) x = CONS x (REPLICATE n x))
@@ -873,132 +873,132 @@ lists quotations (4286):
   (ALLPAIRS (f:A->B->bool) [] l <=> T) /\\\n   (ALLPAIRS f (CONS h t) l <=> ALL (f h) l /\\ ALLPAIRS f t l)
   (PAIRWISE (r:A->A->bool) [] <=> T) /\\\n   (PAIRWISE (r:A->A->bool) (CONS h t) <=> ALL (r h) t /\\ PAIRWISE r t)
   list_of_seq (s:num->A) 0 = [] /\\\n  list_of_seq s (SUC n) = APPEND (list_of_seq s n) [s n]
-  !(h:A) t. ~(CONS h t = [])
+  forall(h:A) t. ~(CONS h t = [])
   (LAST [h:A] = h) /\\\n   (LAST (CONS h (CONS k t)) = LAST (CONS k t))
-  !l:A list. APPEND l [] = l
-  !(l:A list) m n. APPEND l (APPEND m n) = APPEND (APPEND l m) n
-  !(l:A list) m. REVERSE (APPEND l m) = APPEND (REVERSE m) (REVERSE l)
-  !l:A list. REVERSE(REVERSE l) = l
-  !l:A list. REVERSE l = [] <=> l = []
-  !(h1:A) h2 t1 t2. (CONS h1 t1 = CONS h2 t2) <=> (h1 = h2) /\\ (t1 = t2)
-  !l:(A)list. (l = []) \\/ ?h t. l = CONS h t
-  (!n. P n) <=> P 0 /\\ (!n. P(SUC n))
-  !l1 l2:A list.\n        l1 = l2 <=>\n        LENGTH l1 = LENGTH l2 /\\ !n. n < LENGTH l2 ==> EL n l1 = EL n l2
-  !(l:A list) m. LENGTH(APPEND l m) = LENGTH l + LENGTH m
-  !f:A->B. !l1 l2. MAP f (APPEND l1 l2) = APPEND (MAP f l1) (MAP f l2)
-  !l. !f:A->B. LENGTH (MAP f l) = LENGTH l
-  !l:A list. (LENGTH l = 0) <=> (l = [])
-  !(l:A list) n. LENGTH l = SUC n <=> ?h t. (l = CONS h t) /\\ (LENGTH t = n)
-  !l:A list. LENGTH(REVERSE l) = LENGTH l
-  !f:A->B. !g:B->C. !l. MAP (g o f) l = MAP g (MAP f l)
-  !(f:A->B) g l. ALL (\\x. f x = g x) l ==> (MAP f l = MAP g l)
-  !P Q l:A list. (!x. MEM x l /\\ P x ==> Q x) /\\ ALL P l ==> ALL Q l
-  !P l:A list. ~(EX P l) <=> ALL (\\x. ~(P x)) l
-  !P l:A list. ~(ALL P l) <=> EX (\\x. ~(P x)) l
-  !P (f:A->B) l. ALL P (MAP f l) <=> ALL (P o f) l
-  !l:A list.\n        ALL R l /\\ (!x. R x ==> (P x <=> Q x)) ==> (ALL P l <=> ALL Q l)
-  !l:A list. ALL (\\x. T) l
-  !(f:A->B) l m. ALL2 (\\x y. f x = f y) l m ==> MAP f l = MAP f m
-  !P (f:A->B) l. ALL2 P (MAP f l) l <=> ALL (\\a. P (f a) a) l
-  !l (f:A->A). ALL (\\x. f(x) = x) l ==> (MAP f l = l)
-  !l m P Q. ALL2 (\\(x:A) (y:B). P x /\\ Q x y) l m <=> ALL P l /\\ ALL2 Q l m
-  !(f:A->B->B) a l1 l2.\n        ITLIST f (APPEND l1 l2) a = ITLIST f l1 (ITLIST f l2 a)
-  !(f:A->B->B) l. ITLIST f (APPEND l [a]) b = ITLIST f l (f a b)
-  !P Q (l:A list). ALL (\\x. P x ==> Q x) l /\\ ALL P l ==> ALL Q l
-  !l:A list. ALL P l /\\ ALL Q l <=> ALL (\\x. P x /\\ Q x) l
-  !P Q (l:A list). (!x. MEM x l /\\ P x ==> Q x) /\\ EX P l ==> EX Q l
-  !P (l:A list). (!x. MEM x l ==> P x) <=> ALL P l
-  !n x:A. LENGTH(REPLICATE n x) = n
-  !n x y:A. MEM x (REPLICATE n y) <=> x = y /\\ ~(n = 0)
-  !P (f:A->B) l. EX P (MAP f l) <=> EX (P o f) l
-  !(P:A->B->bool) l. (?x. EX (P x) l) <=> EX (\\s. ?x. P x s) l
-  !(P:A->B->bool) l. (!x. ALL (P x) l) <=> ALL (\\s. !x. P x s) l
-  !(x:A) l1 l2. MEM x (APPEND l1 l2) <=> MEM x l1 \\/ MEM x l2
-  !(f:A->B) y l. MEM y (MAP f l) <=> ?x. MEM x l /\\ (y = f x)
-  !(P:A->bool) l1 l2.\n        FILTER P (APPEND l1 l2) = APPEND (FILTER P l1) (FILTER P l2)
-  !P (f:A->B) l. FILTER P (MAP f l) = MAP f (FILTER (P o f) l)
-  !P l (x:A). MEM x (FILTER P l) <=> P x /\\ MEM x l
-  !P l:A list. LENGTH(FILTER P l) <= LENGTH l
-  !P (l:A list). (?x. P x /\\ MEM x l) <=> EX P l
-  !(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> MAP FST (ZIP l1 l2) = l1
-  !(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> MAP SND (ZIP l1 l2) = l2
-  !(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> LENGTH(ZIP l1 l2) = LENGTH l2
-  !(l:(A#B)list) x. MEM (x,ASSOC x l) l <=> MEM x (MAP FST l)
-  !P l1 l2:A list. ALL P (APPEND l1 l2) <=> ALL P l1 /\\ ALL P l2
-  !(l:A list) n. n < LENGTH l ==> MEM (EL n l) l
+  forall l:A list. APPEND l [] = l
+  forall(l:A list) m n. APPEND l (APPEND m n) = APPEND (APPEND l m) n
+  forall(l:A list) m. REVERSE (APPEND l m) = APPEND (REVERSE m) (REVERSE l)
+  forall l:A list. REVERSE(REVERSE l) = l
+  forall l:A list. REVERSE l = [] <=> l = []
+  forall(h1:A) h2 t1 t2. (CONS h1 t1 = CONS h2 t2) <=> (h1 = h2) /\\ (t1 = t2)
+  forall l:(A)list. (l = []) \\/ ?h t. l = CONS h t
+  (forall n. P n) <=> P 0 /\\ (forall n. P(SUC n))
+  forall l1 l2:A list.\n        l1 = l2 <=>\n        LENGTH l1 = LENGTH l2 /\\ forall n. n < LENGTH l2 ==> EL n l1 = EL n l2
+  forall(l:A list) m. LENGTH(APPEND l m) = LENGTH l + LENGTH m
+  forall f:A->B. forall l1 l2. MAP f (APPEND l1 l2) = APPEND (MAP f l1) (MAP f l2)
+  forall l. forall f:A->B. LENGTH (MAP f l) = LENGTH l
+  forall l:A list. (LENGTH l = 0) <=> (l = [])
+  forall(l:A list) n. LENGTH l = SUC n <=> ?h t. (l = CONS h t) /\\ (LENGTH t = n)
+  forall l:A list. LENGTH(REVERSE l) = LENGTH l
+  forall f:A->B. forall g:B->C. forall l. MAP (g o f) l = MAP g (MAP f l)
+  forall(f:A->B) g l. ALL (\\x. f x = g x) l ==> (MAP f l = MAP g l)
+  forall P Q l:A list. (forall x. MEM x l /\\ P x ==> Q x) /\\ ALL P l ==> ALL Q l
+  forall P l:A list. ~(EX P l) <=> ALL (\\x. ~(P x)) l
+  forall P l:A list. ~(ALL P l) <=> EX (\\x. ~(P x)) l
+  forall P (f:A->B) l. ALL P (MAP f l) <=> ALL (P o f) l
+  forall l:A list.\n        ALL R l /\\ (forall x. R x ==> (P x <=> Q x)) ==> (ALL P l <=> ALL Q l)
+  forall l:A list. ALL (\\x. T) l
+  forall(f:A->B) l m. ALL2 (\\x y. f x = f y) l m ==> MAP f l = MAP f m
+  forall P (f:A->B) l. ALL2 P (MAP f l) l <=> ALL (\\a. P (f a) a) l
+  forall l (f:A->A). ALL (\\x. f(x) = x) l ==> (MAP f l = l)
+  forall l m P Q. ALL2 (\\(x:A) (y:B). P x /\\ Q x y) l m <=> ALL P l /\\ ALL2 Q l m
+  forall(f:A->B->B) a l1 l2.\n        ITLIST f (APPEND l1 l2) a = ITLIST f l1 (ITLIST f l2 a)
+  forall(f:A->B->B) l. ITLIST f (APPEND l [a]) b = ITLIST f l (f a b)
+  forall P Q (l:A list). ALL (\\x. P x ==> Q x) l /\\ ALL P l ==> ALL Q l
+  forall l:A list. ALL P l /\\ ALL Q l <=> ALL (\\x. P x /\\ Q x) l
+  forall P Q (l:A list). (forall x. MEM x l /\\ P x ==> Q x) /\\ EX P l ==> EX Q l
+  forall P (l:A list). (forall x. MEM x l ==> P x) <=> ALL P l
+  forall n x:A. LENGTH(REPLICATE n x) = n
+  forall n x y:A. MEM x (REPLICATE n y) <=> x = y /\\ ~(n = 0)
+  forall P (f:A->B) l. EX P (MAP f l) <=> EX (P o f) l
+  forall(P:A->B->bool) l. (?x. EX (P x) l) <=> EX (\\s. ?x. P x s) l
+  forall(P:A->B->bool) l. (forall x. ALL (P x) l) <=> ALL (\\s. forall x. P x s) l
+  forall(x:A) l1 l2. MEM x (APPEND l1 l2) <=> MEM x l1 \\/ MEM x l2
+  forall(f:A->B) y l. MEM y (MAP f l) <=> ?x. MEM x l /\\ (y = f x)
+  forall(P:A->bool) l1 l2.\n        FILTER P (APPEND l1 l2) = APPEND (FILTER P l1) (FILTER P l2)
+  forall P (f:A->B) l. FILTER P (MAP f l) = MAP f (FILTER (P o f) l)
+  forall P l (x:A). MEM x (FILTER P l) <=> P x /\\ MEM x l
+  forall P l:A list. LENGTH(FILTER P l) <= LENGTH l
+  forall P (l:A list). (?x. P x /\\ MEM x l) <=> EX P l
+  forall(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> MAP FST (ZIP l1 l2) = l1
+  forall(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> MAP SND (ZIP l1 l2) = l2
+  forall(l1:A list) (l2:B list).\n    LENGTH l1 = LENGTH l2 ==> LENGTH(ZIP l1 l2) = LENGTH l2
+  forall(l:(A#B)list) x. MEM (x,ASSOC x l) l <=> MEM x (MAP FST l)
+  forall P l1 l2:A list. ALL P (APPEND l1 l2) <=> ALL P l1 /\\ ALL P l2
+  forall(l:A list) n. n < LENGTH l ==> MEM (EL n l) l
   (?i. P i) <=> P 0 \\/ (?i. P(SUC i))
-  !(l:A list) x. MEM x l <=> ?i. i < LENGTH l /\\ x = EL i l
-  !P (l:A list). (!i. i < LENGTH l ==> P (EL i l)) <=> ALL P l
-  !(f:A->B) (g:C->D) l m.\n        ALL2 P (MAP f l) (MAP g m) = ALL2 (\\x y. P (f x) (g y)) l m
-  !(P:A->B->bool) Q l m.\n        ALL2 P l m /\\ ALL2 Q l m <=> ALL2 (\\x y. P x y /\\ Q x y) l m
-  !(P:A->B->bool) l m. ALLPAIRS P l m <=> ALLPAIRS (\\x y. P y x) m l
-  !(P:A->B->bool) l m.\n        (!x y. MEM x l /\\ MEM y m ==> P x y) <=> ALLPAIRS P l m
-  !P (f:A->B) (g:C->D) l m.\n        ALLPAIRS P (MAP f l) (MAP g m) <=>\n        ALLPAIRS (\\x y. P (f x) (g y)) l m
-  !l m. !P Q. ALL P (l:A list) /\\ ALL Q (m:B list) /\\\n               (!p q. P p /\\ Q q ==> (R p q <=> R' p q))\n               ==> (ALLPAIRS R l m <=> ALLPAIRS R' l m)
-  !P (l:A list). ALL2 P l l <=> ALL (\\x. P x x) l
-  !l m:A list. (APPEND l m = []) <=> (l = []) /\\ (m = [])
-  !l1 l2 l3:A list. APPEND l1 l2 = APPEND l1 l3 <=> l2 = l3
+  forall(l:A list) x. MEM x l <=> ?i. i < LENGTH l /\\ x = EL i l
+  forall P (l:A list). (forall i. i < LENGTH l ==> P (EL i l)) <=> ALL P l
+  forall(f:A->B) (g:C->D) l m.\n        ALL2 P (MAP f l) (MAP g m) = ALL2 (\\x y. P (f x) (g y)) l m
+  forall(P:A->B->bool) Q l m.\n        ALL2 P l m /\\ ALL2 Q l m <=> ALL2 (\\x y. P x y /\\ Q x y) l m
+  forall(P:A->B->bool) l m. ALLPAIRS P l m <=> ALLPAIRS (\\x y. P y x) m l
+  forall(P:A->B->bool) l m.\n        (forall x y. MEM x l /\\ MEM y m ==> P x y) <=> ALLPAIRS P l m
+  forall P (f:A->B) (g:C->D) l m.\n        ALLPAIRS P (MAP f l) (MAP g m) <=>\n        ALLPAIRS (\\x y. P (f x) (g y)) l m
+  forall l m. forall P Q. ALL P (l:A list) /\\ ALL Q (m:B list) /\\\n               (forall p q. P p /\\ Q q ==> (R p q <=> R' p q))\n               ==> (ALLPAIRS R l m <=> ALLPAIRS R' l m)
+  forall P (l:A list). ALL2 P l l <=> ALL (\\x. P x x) l
+  forall l m:A list. (APPEND l m = []) <=> (l = []) /\\ (m = [])
+  forall l1 l2 l3:A list. APPEND l1 l2 = APPEND l1 l3 <=> l2 = l3
   l = l' <=> REVERSE l = REVERSE l'
-  !l1 l2 l3:A list. APPEND l1 l3 = APPEND l2 l3 <=> l1 = l2
-  !(f:A->B->C) l m. LENGTH l = LENGTH m ==> LENGTH(MAP2 f l m) = LENGTH m
-  !(f:A->B->C) l m k.\n        k < LENGTH l /\\ k < LENGTH m\n        ==> EL k (MAP2 f l m) = f (EL k l) (EL k m)
-  !(f:A->B) l. MAP f l = [] <=> l = []
+  forall l1 l2 l3:A list. APPEND l1 l3 = APPEND l2 l3 <=> l1 = l2
+  forall(f:A->B->C) l m. LENGTH l = LENGTH m ==> LENGTH(MAP2 f l m) = LENGTH m
+  forall(f:A->B->C) l m k.\n        k < LENGTH l /\\ k < LENGTH m\n        ==> EL k (MAP2 f l m) = f (EL k l) (EL k m)
+  forall(f:A->B) l. MAP f l = [] <=> l = []
   [y:A]
   [x:A]
   y:A
   x:A
-  !f:A->B. (!l m. MAP f l = MAP f m ==> l = m) <=>\n            (!x y. f x = f y ==> x = y)
+  forall f:A->B. (forall l m. MAP f l = MAP f m ==> l = m) <=>\n            (forall x y. f x = f y ==> x = y)
   [y:B]
   y:B
-  !f:A->B. (!m. ?l. MAP f l = m) <=> (!y. ?x. f x = y)
-  !l. MAP (\\x:A. x) l = l
+  forall f:A->B. (forall m. ?l. MAP f l = m) <=> (forall y. ?x. f x = y)
+  forall l. MAP (\\x:A. x) l = l
   MAP (I:A->A) = I
-  BUTLAST([]:A list) = [] /\\\n   (!a:A. BUTLAST [a] = []) /\\\n   (!(a:A) h t. BUTLAST(CONS a (CONS h t)) = CONS a (BUTLAST(CONS h t)))
+  BUTLAST([]:A list) = [] /\\\n   (forall a:A. BUTLAST [a] = []) /\\\n   (forall(a:A) h t. BUTLAST(CONS a (CONS h t)) = CONS a (BUTLAST(CONS h t)))
   (if p then T else q) <=> ~p ==> q
-  !l m:A list. BUTLAST(APPEND l m) =\n                if m = [] then BUTLAST l else APPEND l (BUTLAST m)
-  !l:A list. ~(l = []) ==> APPEND (BUTLAST l) [LAST l] = l
-  !p q:A list. LAST(APPEND p q) = if q = [] then LAST p else LAST q
-  !l:A list. ~(l = []) ==> LENGTH(TL l) = LENGTH l - 1
-  !l:A list. ~(l = []) ==> LAST(REVERSE l) = HD l
-  !l:A list. ~(l = []) ==> HD(REVERSE l) = LAST l
-  !k l m:A list.\n        EL k (APPEND l m) = if k < LENGTH l then EL k l\n                            else EL (k - LENGTH l) m
-  !n. EL n (TL l):A = EL (n + 1) l
-  !n (h:A) t. EL n (CONS h t) = if n = 0 then h else EL (n - 1) t
-  !l:A list. ~(l = []) ==> LAST l = EL (LENGTH l - 1) l
-  !l m:A list. HD(APPEND l m) = if l = [] then HD m else HD l
-  !l:A list. ~(l = []) ==> l = CONS (HD l) (TL l)
-  !(f:A->B) n l. n < LENGTH l ==> EL n (MAP f l) = f(EL n l)
-  !(f:A->B) l. REVERSE(MAP f l) = MAP f (REVERSE l)
-  !P Q l:A list. ALL P (FILTER Q l) <=> ALL (\\x. Q x ==> P x) l
-  !(h:A) t. APPEND [h] t = CONS h t
+  forall l m:A list. BUTLAST(APPEND l m) =\n                if m = [] then BUTLAST l else APPEND l (BUTLAST m)
+  forall l:A list. ~(l = []) ==> APPEND (BUTLAST l) [LAST l] = l
+  forall p q:A list. LAST(APPEND p q) = if q = [] then LAST p else LAST q
+  forall l:A list. ~(l = []) ==> LENGTH(TL l) = LENGTH l - 1
+  forall l:A list. ~(l = []) ==> LAST(REVERSE l) = HD l
+  forall l:A list. ~(l = []) ==> HD(REVERSE l) = LAST l
+  forall k l m:A list.\n        EL k (APPEND l m) = if k < LENGTH l then EL k l\n                            else EL (k - LENGTH l) m
+  forall n. EL n (TL l):A = EL (n + 1) l
+  forall n (h:A) t. EL n (CONS h t) = if n = 0 then h else EL (n - 1) t
+  forall l:A list. ~(l = []) ==> LAST l = EL (LENGTH l - 1) l
+  forall l m:A list. HD(APPEND l m) = if l = [] then HD m else HD l
+  forall l:A list. ~(l = []) ==> l = CONS (HD l) (TL l)
+  forall(f:A->B) n l. n < LENGTH l ==> EL n (MAP f l) = f(EL n l)
+  forall(f:A->B) l. REVERSE(MAP f l) = MAP f (REVERSE l)
+  forall P Q l:A list. ALL P (FILTER Q l) <=> ALL (\\x. Q x ==> P x) l
+  forall(h:A) t. APPEND [h] t = CONS h t
   x:A = y
   l:A list
   y:A
   x:A
   (p <=> q) <=> (p ==> q) /\\ (q ==> p)
-  !x:A l. MEM x l <=> ?l1 l2. ~(MEM x l1) /\\ l = APPEND l1 (CONS x l2)
+  forall x:A l. MEM x l <=> ?l1 l2. ~(MEM x l1) /\\ l = APPEND l1 (CONS x l2)
   (p <=> q) <=> (p ==> q) /\\ (q ==> p)
-  !x:A l. MEM x l <=> ?l1 l2. l = APPEND l1 (CONS x l2)
-  !R:A->A->bool l m.\n        PAIRWISE R (APPEND l m) <=>\n        PAIRWISE R l /\\ PAIRWISE R m /\\ (!x y. MEM x l /\\ MEM y m ==> R x y)
-  !R f:A->B l.\n        PAIRWISE R (MAP f l) <=> PAIRWISE (\\x y. R (f x) (f y)) l
-  !R:A->A->bool R' l.\n        PAIRWISE R l /\\ (!x y. MEM x l /\\ MEM y l /\\ R x y ==> R' x y)\n        ==> PAIRWISE R' l
+  forall x:A l. MEM x l <=> ?l1 l2. l = APPEND l1 (CONS x l2)
+  forall R:A->A->bool l m.\n        PAIRWISE R (APPEND l m) <=>\n        PAIRWISE R l /\\ PAIRWISE R m /\\ (forall x y. MEM x l /\\ MEM y m ==> R x y)
+  forall R f:A->B l.\n        PAIRWISE R (MAP f l) <=> PAIRWISE (\\x y. R (f x) (f y)) l
+  forall R:A->A->bool R' l.\n        PAIRWISE R l /\\ (forall x y. MEM x l /\\ MEM y l /\\ R x y ==> R' x y)\n        ==> PAIRWISE R' l
   (p /\\ q /\\ r /\\ s <=> p /\\ r /\\ s) <=>\n                    p /\\ s ==> r ==> q
-  !R x y:A l.\n      (!x y z. R x y /\\ R y z ==> R x z)\n      ==> (PAIRWISE R (CONS x (CONS y l)) <=> R x y /\\ PAIRWISE R (CONS y l))
-  !s:num->A n. LENGTH(list_of_seq s n) = n
-  !s:num->A m n. m < n ==> EL m (list_of_seq s n) = s m
-  !s:num->A n. list_of_seq s n = [] <=> n = 0
-  !l:A list. list_of_seq (\\i. EL i l) (LENGTH l) = l
-  !(l:A list) n. LENGTH l = n <=> l = list_of_seq (\\i. EL i l) n
-  !f (g:A->B) n. MAP g (list_of_seq f n) = list_of_seq (g o f) n
-  (!(f:num->A). list_of_seq f 0 = []) /\\\n   (!(f:num->A) n.\n        list_of_seq f (SUC n) = CONS (f 0) (list_of_seq (f o SUC) n))
+  forall R x y:A l.\n      (forall x y z. R x y /\\ R y z ==> R x z)\n      ==> (PAIRWISE R (CONS x (CONS y l)) <=> R x y /\\ PAIRWISE R (CONS y l))
+  forall s:num->A n. LENGTH(list_of_seq s n) = n
+  forall s:num->A m n. m < n ==> EL m (list_of_seq s n) = s m
+  forall s:num->A n. list_of_seq s n = [] <=> n = 0
+  forall l:A list. list_of_seq (\\i. EL i l) (LENGTH l) = l
+  forall(l:A list) n. LENGTH l = n <=> l = list_of_seq (\\i. EL i l) n
+  forall f (g:A->B) n. MAP g (list_of_seq f n) = list_of_seq (g o f) n
+  (forall(f:num->A). list_of_seq f 0 = []) /\\\n   (forall(f:num->A) n.\n        list_of_seq f (SUC n) = CONS (f 0) (list_of_seq (f o SUC) n))
   l:A list
   l:A list
-  (!x:A. P x ==> Q x) ==> ALL P l ==> ALL Q l
+  (forall x:A. P x ==> Q x) ==> ALL P l ==> ALL Q l
   l:A list
   l:A list
   l':B list
   l':B list
-  (!x y. (P:A->B->bool) x y ==> Q x y) ==> ALL2 P l l' ==> ALL2 Q l l'
+  (forall x y. (P:A->B->bool) x y ==> Q x y) ==> ALL2 P l l' ==> ALL2 Q l l'
   LENGTH(t:A list) = LENGTH t + 0 /\\\n     LENGTH([]:A list) + n = n /\\\n     LENGTH(CONS (h:A) t) + n = LENGTH t + SUC n
   EL 0 (CONS (h:A) t) = h /\\\n      (n = SUC m ==> EL n (CONS h t) = EL m t)
   l:A list = APPEND l [] /\\\n     APPEND (REVERSE []) l:A list = l /\\\n     APPEND (REVERSE (CONS h t)) l = APPEND (REVERSE t) (CONS h l)

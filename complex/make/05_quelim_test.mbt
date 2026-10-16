@@ -6439,7 +6439,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  (--a + z * Cx(&1) = Cx(&0)) <=> (z = a)
       #|  ~a ==> (a \\/ b ==> b)
       #|  z:complex
-      #|  !x. (poly p x = Cx(&0)) ==> (poly([--a; Cx (&1)] ** r) x = Cx(&0))
+      #|  forall x. (poly p x = Cx(&0)) ==> (poly([--a; Cx (&1)] ** r) x = Cx(&0))
       #|  z:complex
       #|  r:complex list
       #|  s:complex list
@@ -6482,7 +6482,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  q:complex list
       #|  p:complex list
       #|  n:num
-      #|  !n p q. (!x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) /\\\n           (degree p = n) /\\ ~(n = 0)\n           ==> p divides (q exp n)
+      #|  forall n p q. (forall x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) /\\\n           (degree p = n) /\\ ~(n = 0)\n           ==> p divides (q exp n)
       #|  [inv(k)]
       #|  k:complex
       #|  p:complex list
@@ -6497,14 +6497,14 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  degree p
       #|  degree p = 0
       #|  poly p = poly []
-      #|  !p q. (!x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) <=>\n         p divides (q exp (degree p)) \\/\n         ((poly p = poly []) /\\ (poly q = poly []))
+      #|  forall p q. (forall x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) <=>\n         p divides (q exp (degree p)) \\/\n         ((poly p = poly []) /\\ (poly q = poly []))
       #|  z:complex
       #|  l:complex list
       #|  normalize p
       #|  (x = y) ==> (x = 0) ==> (y = 0)
       #|  degree [poly p (Cx(&0))] = 0
       #|  Cx(&0)
-      #|  !p. constant(poly p) <=> (degree p = 0)
+      #|  forall p. constant(poly p) <=> (degree p = 0)
       #|  degree r + 1 = SUC n
       #|  ~b ==> ~a <=> a ==> b
       #|  ~(poly (r ** q) = poly [])
@@ -6519,9 +6519,9 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  r:complex list
       #|  a:complex
       #|  p:complex list
-      #|  !n p q. (degree(p) = n)\n           ==> n <= degree(p ** q) \\/ (poly(p ** q) = poly [])
+      #|  forall n p q. (degree(p) = n)\n           ==> n <= degree(p ** q) \\/ (poly(p ** q) = poly [])
       #|  r:complex list
-      #|  !p q. p divides q ==> degree(p) <= degree(q) \\/ (poly q = poly [])
+      #|  forall p q. p divides q ==> degree(p) <= degree(q) \\/ (poly q = poly [])
       #|  Cx(&0) = poly [] x
       #|  c = poly [c] x
       #|  x = poly [Cx(&0); Cx(&1)] x
@@ -6539,7 +6539,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  x * y
       #|  x pow n
       #|  (poly p x = Cx(&0)) ==> (poly (CONS (Cx(&0)) p) x = Cx(&0))
-      #|  (p = Cx(&0)) /\\ ~(a = Cx(&0))\n     ==> !q b. (q = Cx(&0)) <=> (a * q - b * p = Cx(&0))
+      #|  (p = Cx(&0)) /\\ ~(a = Cx(&0))\n     ==> forall q b. (q = Cx(&0)) <=> (a * q - b * p = Cx(&0))
       #|  (poly [] x = Cx(&0)) /\\\n     (poly [c] x = c)
       #|  (p ==> (q <=> q1)) /\\ (~p ==> (q <=> q2))\n         ==> (q <=> (p /\\ q1 \\/ ~p /\\ q2))
       #|  p <=> (~p <=> F)
@@ -6550,7 +6550,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  [a] ** r
       #|  a:complex
       #|  r:complex list
-      #|  p divides q ==> !a. p divides (a ## q)
+      #|  p divides q ==> forall a. p divides (a ## q)
       #|  m <= n ==> PRE m <= n - 1
       #|  lq < lp ==> ~(lq = 0) /\\ dq <= lq - 1 ==> dq < lp - 1
       #|  (~b ==> ~a) ==> (a \\/ b ==> b)
@@ -6564,7 +6564,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  a ## s ++ --(Cx(&1)) ## t
       #|  s:complex list
       #|  t:complex list
-      #|  ~(a = Cx(&0))\n     ==> p divides p'\n         ==> (!x. a * poly q x - poly p' x = poly r x)\n             ==> (p divides q <=> p divides r)
+      #|  ~(a = Cx(&0))\n     ==> p divides p'\n         ==> (forall x. a * poly q x - poly p' x = poly r x)\n             ==> (p divides q <=> p divides r)
       #|  Cx(&0)
       #|  ((?x. (poly p x = Cx(&0)) /\\ ~(poly [] x = Cx(&0))) <=> F) /\\\n     ((?x. ~(poly [] x = Cx(&0))) <=> F) /\\\n     ((?x. ~(poly [c] x = Cx(&0))) <=> ~(c = Cx(&0))) /\\\n     ((?x. (poly [] x = Cx(&0))) <=> T) /\\\n     ((?x. (poly [c] x = Cx(&0))) <=> (c = Cx(&0)))
       #|  p:complex list
@@ -6582,7 +6582,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  q:complex list
       #|  CONS (a:complex) p
       #|  ~(LAST(CONS a p) = Cx(&0))\n     ==> ((?x. (poly (CONS a p) x = Cx(&0)) /\\ ~(poly q x = Cx(&0))) <=>\n          ~((CONS a p) divides (q exp (LENGTH p))))
-      #|  (!x. (poly (q exp n) x = poly r x))\n       ==> (p divides (q exp n) <=> p divides r)
+      #|  (forall x. (poly (q exp n) x = poly r x))\n       ==> (p divides (q exp n) <=> p divides r)
       #|  poly
       #|  ~(poly p x = Cx(&0)) /\\ ~(poly q x = Cx(&0)) <=>\n     ~(poly p x * poly q x = Cx(&0))
       #|  ((p <=> T) <=> (~p <=> F)) /\\ ((p <=> F) <=> (~p <=> T))
@@ -6594,7 +6594,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  ((poly [c] x = y) <=> (c = y)) /\\\n       (~(poly [c] x = y) <=> ~(c = y))
       #|  (p /\\ F <=> F) /\\ (p /\\ T <=> p) /\\\n           (F /\\ p <=> F) /\\ (T /\\ p <=> p)
       #|  F
-      #|  ~(?!x. P x) <=> (!x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
+      #|  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
       #|  ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
       #|  (p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)
       #|  ~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)
@@ -6603,7 +6603,7 @@ test "Complex/quelim matches Complex/quelim.ml" {
       #|  ~(p \\/ q) <=> ~p /\\ ~q
       #|  ~(p /\\ q) <=> ~p \\/ ~q
       #|  ~(~p) <=> p
-      #|  (!x. P x) <=> ~(?x. ~(P x))
+      #|  (forall x. P x) <=> ~(?x. ~(P x))
       #|  (x = y) <=> (x - y = Cx(&0))
       #|  Cx(&0)
       #|  :complex

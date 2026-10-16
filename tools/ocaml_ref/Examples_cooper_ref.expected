@@ -5641,19 +5641,19 @@ Examples/cooper quotations (314):
   (*)
   (+)
   a divides b <=> ?x. b = a * x
-  !a b. ?c. !x. x < c ==> x < a /\\ x < b
-  !d a b. d divides a /\\ d divides b ==> d divides (a + b)
-  !d a b. d divides a /\\ d divides b ==> d divides (a - b)
+  forall a b. ?c. forall x. x < c ==> x < a /\\ x < b
+  forall d a b. d divides a /\\ d divides b ==> d divides (a + b)
+  forall d a b. d divides a /\\ d divides b ==> d divides (a - b)
   (a + b) - a = b
-  !d a b. d divides a /\\ d divides (a + b) ==> d divides b
+  forall d a b. d divides a /\\ d divides (a + b) ==> d divides b
   (a + b) - b = a
-  !d a b. d divides b /\\ d divides (a + b) ==> d divides a
+  forall d a b. d divides b /\\ d divides (a + b) ==> d divides a
   a * b * c = b * a * c
-  !d a x. d divides a ==> d divides (x * a)
-  !d a. d divides (--a) <=> d divides a
-  !d a. (--d) divides a <=> d divides a
+  forall d a x. d divides a ==> d divides (x * a)
+  forall d a. d divides (--a) <=> d divides a
+  forall d a. (--d) divides a <=> d divides a
   x - y < c * d <=> x + --c * d < y
-  !x y d. &0 < d ==> ?c. x + c * d < y
+  forall x y d. &0 < d ==> ?c. x + c * d < y
   SUC n - 1 = n
   n:num
   n:num
@@ -5670,7 +5670,7 @@ Examples/cooper quotations (314):
   c0:int
   &0
   x:int
-  !d x. &0 < d ==> ?c. &1 <= x + c * d /\\ x + c * d <= d
+  forall d x. &0 < d ==> ?c. &1 <= x + c * d /\\ x + c * d <= d
   (interp x (Lt e) <=> x + e < &0) /\\\n   (interp x (Gt e) <=> x + e > &0) /\\\n   (interp x (Eq e) <=> (x + e = &0)) /\\\n   (interp x (Ne e) <=> ~(x + e = &0)) /\\\n   (interp x (Divides c e) <=> c divides (x + e)) /\\\n   (interp x (Ndivides c e) <=> ~(c divides (x + e))) /\\\n   (interp x (And p q) <=> interp x p /\\ interp x q) /\\\n   (interp x (Or p q) <=> interp x p \\/ interp x q) /\\\n   (interp x (Nox P) <=> P)
   (minusinf (Lt e) = Nox T) /\\\n  (minusinf (Gt e) = Nox F) /\\\n  (minusinf (Eq e) = Nox F) /\\\n  (minusinf (Ne e) = Nox T) /\\\n  (minusinf (Divides c e) = Divides c e) /\\\n  (minusinf (Ndivides c e) = Ndivides c e) /\\\n  (minusinf (And p q) = And (minusinf p) (minusinf q)) /\\\n  (minusinf (Or p q) = Or (minusinf p) (minusinf q)) /\\\n  (minusinf (Nox P) = Nox P)
   (plusinf (Lt e) = Nox F) /\\\n  (plusinf (Gt e) = Nox T) /\\\n  (plusinf (Eq e) = Nox F) /\\\n  (plusinf (Ne e) = Nox T) /\\\n  (plusinf (Divides c e) = Divides c e) /\\\n  (plusinf (Ndivides c e) = Ndivides c e) /\\\n  (plusinf (And p q) = And (plusinf p) (plusinf q)) /\\\n  (plusinf (Or p q) = Or (plusinf p) (plusinf q)) /\\\n  (plusinf (Nox P) = Nox P)
@@ -5680,23 +5680,23 @@ Examples/cooper quotations (314):
   z < y /\\ y < x - &n ==> z < x - (&n + &1)
   x - (x - y) = y
   x - y
-  !n. ?y. y < x - &n /\\ P y
+  forall n. ?y. y < x - &n /\\ P y
   x < y \\/ &0 <= x - y
   y:int
   ~(p /\\ q) <=> p ==> ~q
   (~b ==> a) ==> a \\/ b
   x:int
-  (?x. P x) <=> (!y. ?x. x < y /\\ P x) \\/ (?x. P x /\\ !y. y < x ==> ~P y)
+  (?x. P x) <=> (forall y. ?x. x < y /\\ P x) \\/ (?x. P x /\\ forall y. y < x ==> ~P y)
   b:int
   a:int
   b:int
   a:int
   x < --a ==> x + a < &0
   (a /\\ b /\\ c /\\ d) /\\ (e /\\ f) ==> a /\\ b /\\ c /\\ d /\\ e /\\ f
-  !p. ?y. !x. x < y ==> (interp x p <=> interp x (minusinf p))
+  forall p. ?y. forall x. x < y ==> (interp x p <=> interp x (minusinf p))
   (x + d) + y = (x + y) + d
-  !p c d x. alldivide d p\n             ==> (interp x (minusinf p) <=> interp (x + c * d) (minusinf p))
-  alldivide d p /\\ &0 < d\n   ==> ((!y. ?x. x < y /\\ interp x p) <=>\n        ?j. &1 <= j /\\ j <= d /\\ interp j (minusinf p))
+  forall p c d x. alldivide d p\n             ==> (interp x (minusinf p) <=> interp (x + c * d) (minusinf p))
+  alldivide d p /\\ &0 < d\n   ==> ((forall y. ?x. x < y /\\ interp x p) <=>\n        ?j. &1 <= j /\\ j <= d /\\ interp j (minusinf p))
   (x - y) + y = x
   (x - y) + z = (x + z) - y
   (x - y) + z = (x + z) - y
@@ -5712,27 +5712,27 @@ Examples/cooper quotations (314):
   ~a \\/ a
   (a /\\ b /\\ c /\\ d /\\ e /\\ f) /\\ g /\\ h\n                     ==> a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h
   a /\\ b ==> c <=> b ==> a ==> c
-  !d p. alldivide d p /\\ &0 < d\n         ==> !x. interp x p /\\ ~(interp (x - d) p)\n                 ==> ?j b. &1 <= j /\\ j <= d /\\ b IN bset p /\\ (x = b + j)
+  forall d p. alldivide d p /\\ &0 < d\n         ==> forall x. interp x p /\\ ~(interp (x - d) p)\n                 ==> ?j b. &1 <= j /\\ j <= d /\\ b IN bset p /\\ (x = b + j)
   x:int
   p:cform
   d:int
   &0 < d ==> x - d < x
   x - d
   x:int
-  ?x. interp x p /\\ !y. y < x ==> ~(interp y p)
-  !y. ?x. x < y /\\ interp x p
-  !a1 a2. (a <=> a1 \\/ a2) /\\ (a1 <=> b) /\\ (a2 ==> c) /\\ (c ==> a)\n            ==> (a <=> b \\/ c)
+  ?x. interp x p /\\ forall y. y < x ==> ~(interp y p)
+  forall y. ?x. x < y /\\ interp x p
+  forall a1 a2. (a <=> a1 \\/ a2) /\\ (a1 <=> b) /\\ (a2 ==> c) /\\ (c ==> a)\n            ==> (a <=> b \\/ c)
   a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-  !p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (minusinf p) \\/\n                   ?b. b IN bset p /\\ interp (b + j) p))
+  forall p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (minusinf p) \\/\n                   ?b. b IN bset p /\\ interp (b + j) p))
   (mirror (Lt e) = Gt(--e)) /\\\n  (mirror (Gt e) = Lt(--e)) /\\\n  (mirror (Eq e) = Eq(--e)) /\\\n  (mirror (Ne e) = Ne(--e)) /\\\n  (mirror (Divides c e) = Divides c (--e)) /\\\n  (mirror (Ndivides c e) = Ndivides c (--e)) /\\\n  (mirror (And p q) = And (mirror p) (mirror q)) /\\\n  (mirror (Or p q) = Or (mirror p) (mirror q)) /\\\n  (mirror (Nox P) = Nox P)
-  !p x. interp (--x) (mirror p) <=> interp x p
-  !p x. interp x (mirror p) <=> interp (--x) p
-  !p. bset(mirror p) = IMAGE (--) (aset p)
-  !p. minusinf (mirror p) = mirror (plusinf p)
-  !p. plusinf p = mirror(minusinf (mirror p))
-  !p d. alldivide d (mirror p) = alldivide d p
+  forall p x. interp (--x) (mirror p) <=> interp x p
+  forall p x. interp x (mirror p) <=> interp (--x) p
+  forall p. bset(mirror p) = IMAGE (--) (aset p)
+  forall p. minusinf (mirror p) = mirror (plusinf p)
+  forall p. plusinf p = mirror(minusinf (mirror p))
+  forall p d. alldivide d (mirror p) = alldivide d p
   (?x. P(--x)) <=> (?x. P(x))
-  (!x. P(--x)) <=> (!x. P x)
+  (forall x. P(--x)) <=> (forall x. P x)
   ~(d:int = j)
   j <= d
   &1 <= j
@@ -5744,12 +5744,12 @@ Examples/cooper quotations (314):
   d:int
   --(&2)
   d:int = j
-  !P d. (!c x. P(x + c * d) <=> P(x)) /\\ (?j. &1 <= j /\\ j <= d /\\ P(--j))\n         ==> ?j. &1 <= j /\\ j <= d /\\ P(j)
+  forall P d. (forall c x. P(x + c * d) <=> P(x)) /\\ (?j. &1 <= j /\\ j <= d /\\ P(--j))\n         ==> ?j. &1 <= j /\\ j <= d /\\ P(j)
   --(x + c * d) = --x + --c * d
   d:int
   \\x. P(--x):bool
   P:int->bool
-  !P d. (!c x. P(x + c * d) <=> P(x))\n         ==> ((?j. &1 <= j /\\ j <= d /\\ P(--j)) <=>\n              (?j. &1 <= j /\\ j <= d /\\ P(j)))
+  forall P d. (forall c x. P(x + c * d) <=> P(x))\n         ==> ((?j. &1 <= j /\\ j <= d /\\ P(--j)) <=>\n              (?j. &1 <= j /\\ j <= d /\\ P(j)))
   q:cform
   mirror p
   --(b + j) = --b - j
@@ -5757,7 +5757,7 @@ Examples/cooper quotations (314):
   a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
   d:int
   mirror p
-  !p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (plusinf p) \\/\n                   ?a. a IN aset p /\\ interp (a - j) p))
+  forall p d. alldivide d p /\\ &0 < d\n         ==> ((?x. interp x p) <=>\n              ?j. &1 <= j /\\ j <= d /\\\n                  (interp j (plusinf p) \\/\n                   ?a. a IN aset p /\\ interp (a - j) p))
   (?x. P(&1 * x)) <=> ?x. P(x)
   (?x. P(c * x)) <=> ?x. c divides x /\\ P(x)
   &
@@ -5795,8 +5795,8 @@ Examples/cooper quotations (314):
   (*)
   (pow)
   (-)
-  (!x y z. x + (y + z) = (x + y) + z) /\\\n     (!x y. x + y = y + x) /\\\n     (!x. &0 + x = x) /\\\n     (!x y z. x * (y * z) = (x * y) * z) /\\\n     (!x y. x * y = y * x) /\\\n     (!x. &1 * x = x) /\\\n     (!x. &0 * x = &0) /\\\n     (!x y z. x * (y + z) = x * y + x * z) /\\\n     (!x. x pow 0 = &1) /\\\n     (!x n. x pow (SUC n) = x * x pow n)
-  (!x. --x = --(&1) * x) /\\\n     (!x y. x - y = x + --(&1) * y)
+  (forall x y z. x + (y + z) = (x + y) + z) /\\\n     (forall x y. x + y = y + x) /\\\n     (forall x. &0 + x = x) /\\\n     (forall x y z. x * (y * z) = (x * y) * z) /\\\n     (forall x y. x * y = y * x) /\\\n     (forall x. &1 * x = x) /\\\n     (forall x. &0 * x = &0) /\\\n     (forall x y z. x * (y + z) = x * y + x * z) /\\\n     (forall x. x pow 0 = &1) /\\\n     (forall x n. x pow (SUC n) = x * x pow n)
+  (forall x. --x = --(&1) * x) /\\\n     (forall x y. x - y = x + --(&1) * y)
   p:num
   q:num
   0
@@ -5893,29 +5893,29 @@ Examples/cooper quotations (314):
   ~(p \\/ q) <=> ~p /\\ ~q
   ~(p /\\ q) <=> ~p \\/ ~q
   ~(~ p) <=> p
-  (!x. P x) <=> ~(?x. ~(P x))
+  (forall x. P x) <=> ~(?x. ~(P x))
   (~)
   min m n = if m <= n then m else n
   max m n = if m <= n then n else m
-  !x y. x < y ==> &2 * x + &1 < &2 * y
-  !x y. ~(&2 * x + &1 = &2 * y)
+  forall x y. x < y ==> &2 * x + &1 < &2 * y
+  forall x y. ~(&2 * x + &1 = &2 * y)
   ?x y. x > &0 /\\ y >= &0 /\\ (&3 * x - &5 * y = &1)
   ?x y z. &4 * x - &6 * y = &1
-  !x. b < x ==> a <= x
-  !x. a < &3 * x ==> b < &3 * x
-  !x y. x <= y ==> &2 * x + &1 < &2 * y
+  forall x. b < x ==> a <= x
+  forall x. a < &3 * x ==> b < &3 * x
+  forall x y. x <= y ==> &2 * x + &1 < &2 * y
   (?d. y = &65 * d) ==> (?d. y = &5 * d)
-  !y. (?d. y = &65 * d) ==> (?d. y = &5 * d)
-  !x y. ~(&2 * x + &1 = &2 * y)
-  !x y z. (&2 * x + &1 = &2 * y) ==> x + y + z > &129
-  !x. a < x ==> b < x
-  !x. a <= x ==> b < x
-  !a b. ?x. a < &20 * x /\\ &20 * x < b
+  forall y. (?d. y = &65 * d) ==> (?d. y = &5 * d)
+  forall x y. ~(&2 * x + &1 = &2 * y)
+  forall x y z. (&2 * x + &1 = &2 * y) ==> x + y + z > &129
+  forall x. a < x ==> b < x
+  forall x. a <= x ==> b < x
+  forall a b. ?x. a < &20 * x /\\ &20 * x < b
   ?x. a < &20 * x /\\ &20 * x < b
-  !b. ?x. a < &20 * x /\\ &20 * x < b
-  !a. ?b. a < &4 * b + &3 * a \\/ (~(a < b) /\\ a > b + &1)
-  ?y. !x. x + &5 * y > &1 /\\ &13 * x - y > &1 /\\ x + &2 < &0
-  !x y. x >= &0 /\\ y >= &0\n                  ==> &12 * x - &8 * y < &0 \\/ &12 * x - &8 * y > &2
+  forall b. ?x. a < &20 * x /\\ &20 * x < b
+  forall a. ?b. a < &4 * b + &3 * a \\/ (~(a < b) /\\ a > b + &1)
+  ?y. forall x. x + &5 * y > &1 /\\ &13 * x - y > &1 /\\ x + &2 < &0
+  forall x y. x >= &0 /\\ y >= &0\n                  ==> &12 * x - &8 * y < &0 \\/ &12 * x - &8 * y > &2
   ?x y. &5 * x + &3 * y = &1
   ?x y. &5 * x + &10 * y = &1
   ?x y. x >= &0 /\\ y >= &0 /\\ (&5 * x - &6 * y = &1)
@@ -5923,19 +5923,19 @@ Examples/cooper quotations (314):
   ?x y. x >= &0 /\\ y >= &0 /\\ (&5 * x - &3 * y = &1)
   ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x - &5 * y = &1)
   ?x y. x >= &0 /\\ y >= &0 /\\ (&6 * x - &3 * y = &1)
-  !x y. ~(x = &0) ==> &5 * y < &6 * x \\/ &5 * y > &6 * x
-  !x y. ~(&5 divides x) /\\ ~(&6 divides y) ==> ~(&6 * x = &5 * y)
-  !x y. ~(&5 divides x) ==> ~(&6 * x = &5 * y)
-  !x y. ~(&6 * x = &5 * y)
-  !x y. (&6 * x = &5 * y) ==> (?d. y = &3 * d)
+  forall x y. ~(x = &0) ==> &5 * y < &6 * x \\/ &5 * y > &6 * x
+  forall x y. ~(&5 divides x) /\\ ~(&6 divides y) ==> ~(&6 * x = &5 * y)
+  forall x y. ~(&5 divides x) ==> ~(&6 * x = &5 * y)
+  forall x y. ~(&6 * x = &5 * y)
+  forall x y. (&6 * x = &5 * y) ==> (?d. y = &3 * d)
   (&6 * x = &5 * y) ==> (?d. y = &3 * d)
-  !z. z > &7 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
-  !z. z > &2 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
-  !z. z <= &7 ==>\n         ((?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)) <=>\n          ~(?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = &7 - z)))
-  !x. ~(&2 divides x) /\\ &3 divides (x - &1) <=>\n                      &12 divides (x - &1) \\/ &12 divides (x - &7)
-  !x. ~(?m. x = &2 * m) /\\ (?m. x = &3 * m + &1) <=>\n                     (?m. x = &12 * m + &1) \\/ (?m. x = &12 * m + &7)
-  !x. ~(&2 divides x)\n      ==> &4 divides (x - &1) \\/\n          &8 divides (x - &1) \\/\n          &8 divides (x - &3) \\/\n          &6 divides (x - &1) \\/\n          &14 divides (x - &1) \\/\n          &14 divides (x - &9) \\/\n          &14 divides (x - &11) \\/\n          &24 divides (x - &5) \\/\n          &24 divides (x - &11)
-  !a b v_1 v_2 v_3.\n    (a + &2 = b) /\\ (v_3 = b - a + &1) /\\ (v_2 = b - &2) /\\ (v_1 = &3) ==> F
+  forall z. z > &7 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
+  forall z. z > &2 ==> ?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)
+  forall z. z <= &7 ==>\n         ((?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = z)) <=>\n          ~(?x y. x >= &0 /\\ y >= &0 /\\ (&3 * x + &5 * y = &7 - z)))
+  forall x. ~(&2 divides x) /\\ &3 divides (x - &1) <=>\n                      &12 divides (x - &1) \\/ &12 divides (x - &7)
+  forall x. ~(?m. x = &2 * m) /\\ (?m. x = &3 * m + &1) <=>\n                     (?m. x = &12 * m + &1) \\/ (?m. x = &12 * m + &7)
+  forall x. ~(&2 divides x)\n      ==> &4 divides (x - &1) \\/\n          &8 divides (x - &1) \\/\n          &8 divides (x - &3) \\/\n          &6 divides (x - &1) \\/\n          &14 divides (x - &1) \\/\n          &14 divides (x - &9) \\/\n          &14 divides (x - &11) \\/\n          &24 divides (x - &5) \\/\n          &24 divides (x - &11)
+  forall a b v_1 v_2 v_3.\n    (a + &2 = b) /\\ (v_3 = b - a + &1) /\\ (v_2 = b - &2) /\\ (v_1 = &3) ==> F
   ?a b. ~(a = &1) /\\ ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n              (a = b)
   ?a b. a > &1 /\\ b > &1 /\\\n             ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n             (a = b)
   ?b. a > &1 /\\ b > &1 /\\\n      ((&2 * b = a) \\/ (&2 * b = &3 * a + &1)) /\\\n      ((&2 * a = b) \\/ (&2 * a = &3 * b + &1))
@@ -5944,14 +5944,14 @@ Examples/cooper quotations (314):
   ?x. &5 * x + x + x < x \\/\n      (y = &7 - x) /\\\n      &33 + z < x /\\\n      x + &1 <= &2 * y \\/\n      &3 divides (&4 * x + z) /\\\n      (x + y + z = &7 * z)
   ?x. x + &1 < &2 * y /\\\n          &3 divides (&4 * x + z) /\\\n          (&6 * x + y + z = &7 * z)
   ?x. &5 * x + x + x < x \\/\n          (y = &7 - x) /\\\n          &33 + z < x /\\\n          x + &1 < &2 * y \\/\n          &3 divides (&4 * x + z) /\\\n          (x + y + z = &7 * z)
-  !x. x >= &8 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &5 * v)
-  !x. x >= &10 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
-  !x. x >= &30 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
+  forall x. x >= &8 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &5 * v)
+  forall x. x >= &10 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
+  forall x. x >= &30 ==> ?u v. u >= &0 /\\ v >= &0 /\\\n                                         (x = &3 * u + &7 * v)
   abs(x) < &1 ==> (x = &0)
   ODD n ==> 2 * n DIV 2 < n
-  !n. EVEN(n) ==> (2 * n DIV 2 = n)
-  !n. ODD n <=> 2 * n DIV 2 < n
-  !n. n >= 8 ==> ?a b. n = 3 * a + 5 * b
+  forall n. EVEN(n) ==> (2 * n DIV 2 = n)
+  forall n. ODD n <=> 2 * n DIV 2 < n
+  forall n. n >= 8 ==> ?a b. n = 3 * a + 5 * b
 divides =  |- (#!:fun(fun(int,bool),bool) (\b:int. (#!:fun(fun(int,bool),bool) (\a:int. ((#=:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) a:int) b:int)) (#?:fun(fun(int,bool),bool) (\x:int. ((#=:fun(int,fun(int,bool)) b:int) ((#int_mul:fun(int,fun(int,int)) a:int) x:int)))))))))
 INT_DOWN2 =  |- (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\b:int. (#?:fun(fun(int,bool),bool) (\c:int. (#!:fun(fun(int,bool),bool) (\x:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) x:int) c:int)) ((#/\:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) x:int) a:int)) ((#int_lt:fun(int,fun(int,bool)) x:int) b:int)))))))))))
 DIVIDES_ADD =  |- (#!:fun(fun(int,bool),bool) (\d:int. (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) d:int) a:int)) ((#int_divides:fun(int,fun(int,bool)) d:int) b:int))) ((#int_divides:fun(int,fun(int,bool)) d:int) ((#int_add:fun(int,fun(int,int)) a:int) b:int)))))))))

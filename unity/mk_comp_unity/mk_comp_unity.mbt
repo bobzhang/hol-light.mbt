@@ -14,7 +14,7 @@ fn step_1() -> Unit raise {
   let t1 = @parser.parse_term("GPr:('a->'a)list")
   let t2 = @tactics.spec_tac(@parser.parse_term("GPr:('a->'a)list"), t1)
   let t10 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2), t4), @lists.list_induct_tac), t9)
-  comp_unless_thm1_lemma_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) ==> (p UNLESS q) FPr /\\ (p UNLESS q) GPr")), t10))
+  comp_unless_thm1_lemma_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) ==> (p UNLESS q) FPr /\\ (p UNLESS q) GPr")), t10))
 }
 
 ///|
@@ -39,7 +39,7 @@ fn step_2() -> Unit raise {
   let t11 = @parser.parse_term("GPr:('a->'a)list")
   let t12 = @tactics.spec_tac(@parser.parse_term("GPr:('a->'a)list"), t11)
   let t20 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t12), t14), @lists.list_induct_tac), t19)
-  comp_unless_thm1_lemma_2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q FPr GPr.\n     (p UNLESS q) FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)")), t20))
+  comp_unless_thm1_lemma_2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n     (p UNLESS q) FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)")), t20))
 }
 
 ///|
@@ -57,7 +57,7 @@ fn step_3() -> Unit raise {
   let t21 = @bool.spec_all(comp_unless_thm1_lemma_2())
   let t22 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(comp_unless_thm1_lemma_1()), t21))
   let t23 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t22)
-  comp_unless_thm1_c.set(@aux_definitions.prove_thm("COMP_UNLESS_thm1", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) <=> (p UNLESS q) FPr /\\ (p UNLESS q) GPr"), t23))
+  comp_unless_thm1_c.set(@aux_definitions.prove_thm("COMP_UNLESS_thm1", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) <=> (p UNLESS q) FPr /\\ (p UNLESS q) GPr"), t23))
 }
 
 ///|
@@ -96,7 +96,7 @@ fn step_4() -> Unit raise {
   let t24 = @parser.parse_term("GPr:('a->'a)list")
   let t25 = @tactics.spec_tac(@parser.parse_term("GPr:('a->'a)list"), t24)
   let t47 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t25), t27), @lists.list_induct_tac), t46)
-  comp_ensures_thm1_lemma_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q FPr GPr.\n    (p ENSURES q) (APPEND FPr GPr) ==> (p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n                                       (p ENSURES q) GPr /\\ (p UNLESS q) FPr")), t47))
+  comp_ensures_thm1_lemma_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n    (p ENSURES q) (APPEND FPr GPr) ==> (p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n                                       (p ENSURES q) GPr /\\ (p UNLESS q) FPr")), t47))
 }
 
 ///|
@@ -126,7 +126,7 @@ fn step_5() -> Unit raise {
   let t49 = @tactics.repeat_tac(@tactics.strip_tac)
   let t48 = @simp.rewrite_tac(@list.List([@mk_ensures.ensures(), @mk_ensures.exist_transition(), @mk_unless.unless(), @lists.append()]))
   let t62 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t48), t49), @hol88.res_tac), t50), t52), t61)
-  comp_ensures_thm1_lemma_2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q FPr GPr.\n    ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n     (p ENSURES q) GPr /\\ (p UNLESS q) FPr)\n           ==> (p ENSURES q) (APPEND FPr GPr)")), t62))
+  comp_ensures_thm1_lemma_2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n    ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n     (p ENSURES q) GPr /\\ (p UNLESS q) FPr)\n           ==> (p ENSURES q) (APPEND FPr GPr)")), t62))
 }
 
 ///|
@@ -144,7 +144,7 @@ fn step_6() -> Unit raise {
   let t63 = @bool.spec_all(comp_ensures_thm1_lemma_2())
   let t64 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(comp_ensures_thm1_lemma_1()), t63))
   let t65 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64)
-  comp_ensures_thm1_c.set(@aux_definitions.prove_thm("COMP_ENSURES_thm1", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p ENSURES q) (APPEND FPr GPr) <=>\n         ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n          (p ENSURES q) GPr /\\ (p UNLESS q) FPr)"), t65))
+  comp_ensures_thm1_c.set(@aux_definitions.prove_thm("COMP_ENSURES_thm1", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) (APPEND FPr GPr) <=>\n         ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n          (p ENSURES q) GPr /\\ (p UNLESS q) FPr)"), t65))
 }
 
 ///|
@@ -163,7 +163,7 @@ fn step_7() -> Unit raise {
   let t66 = @kernel.assume_rule(@parser.parse_term("((p:'a->bool) UNLESS q)GPr"))
   let t68 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("((p:'a->bool) ENSURES q)FPr")), t66]))(t67))
   let t69 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t68)
-  comp_ensures_cor0_c.set(@aux_definitions.prove_thm("COMP_ENSURES_cor0", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p ENSURES q) FPr /\\ (p UNLESS q) GPr\n         ==> (p ENSURES q) (APPEND FPr GPr)"), t69))
+  comp_ensures_cor0_c.set(@aux_definitions.prove_thm("COMP_ENSURES_cor0", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) FPr /\\ (p UNLESS q) GPr\n         ==> (p ENSURES q) (APPEND FPr GPr)"), t69))
 }
 
 ///|
@@ -182,7 +182,7 @@ fn step_8() -> Unit raise {
   let t70 = @kernel.assume_rule(@parser.parse_term("((p:'a->bool) UNLESS q)FPr"))
   let t72 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("((p:'a->bool) ENSURES q)GPr")), t70]))(t71))
   let t73 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t72)
-  comp_ensures_cor1_c.set(@aux_definitions.prove_thm("COMP_ENSURES_cor1", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n      (p ENSURES q) GPr /\\ (p UNLESS q) FPr\n         ==> (p ENSURES q) (APPEND FPr GPr)"), t73))
+  comp_ensures_cor1_c.set(@aux_definitions.prove_thm("COMP_ENSURES_cor1", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n      (p ENSURES q) GPr /\\ (p UNLESS q) FPr\n         ==> (p ENSURES q) (APPEND FPr GPr)"), t73))
 }
 
 ///|
@@ -201,7 +201,7 @@ fn step_9() -> Unit raise {
   let t75 = @tactics.repeat_tac(@tactics.strip_tac)
   let t74 = @tactics.repeat_tac(@tactics.gen_tac)
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.invariant(), @mk_unless.stable(), comp_unless_thm1()])), t74), @tactics.eq_tac), t75), @hol88.res_tac), t76)
-  comp_unity_cor0_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor0", @parser.parse_term("!(p0:'a->bool) p FPr GPr.\n       (p INVARIANT (p0, APPEND FPr GPr)) =\n          (p INVARIANT (p0,FPr) /\\ p INVARIANT (p0,GPr))"), t77))
+  comp_unity_cor0_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor0", @parser.parse_term("forall(p0:'a->bool) p FPr GPr.\n       (p INVARIANT (p0, APPEND FPr GPr)) =\n          (p INVARIANT (p0,FPr) /\\ p INVARIANT (p0,GPr))"), t77))
 }
 
 ///|
@@ -217,7 +217,7 @@ pub fn comp_unity_cor0() -> @kernel.Thm {
 /// COMP_UNITY_cor1
 fn step_10() -> Unit raise {
   let t78 = @simp.rewrite_tac(@list.List([@mk_unless.stable(), comp_unless_thm1()]))
-  comp_unity_cor1_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor1", @parser.parse_term("!(p:'a->bool) FPr GPr.\n           (p STABLE (APPEND FPr GPr)) = (p STABLE FPr /\\ p STABLE GPr)"), t78))
+  comp_unity_cor1_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor1", @parser.parse_term("forall(p:'a->bool) FPr GPr.\n           (p STABLE (APPEND FPr GPr)) = (p STABLE FPr /\\ p STABLE GPr)"), t78))
 }
 
 ///|
@@ -244,7 +244,7 @@ fn step_11() -> Unit raise {
   let t89 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t88])
   let t79 = @tactics.repeat_tac(@tactics.strip_tac)
   let t90 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.stable(), comp_unless_thm1()])), t79), t89)
-  comp_unity_cor2_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor2", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n         (p UNLESS q) FPr /\\ p STABLE GPr ==>(p UNLESS q) (APPEND FPr GPr)"), t90))
+  comp_unity_cor2_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor2", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n         (p UNLESS q) FPr /\\ p STABLE GPr ==>(p UNLESS q) (APPEND FPr GPr)"), t90))
 }
 
 ///|
@@ -263,7 +263,7 @@ fn step_12() -> Unit raise {
   let t93 = @list.List([@hol88.res_tac, @simp.asm_rewrite_tac(@list.List([])), t92])
   let t91 = @tactics.repeat_tac(@tactics.strip_tac)
   let t94 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.invariant(), @mk_unless.stable(), comp_unless_thm1()])), t91), t93)
-  comp_unity_cor3_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor3", @parser.parse_term("!(p0:'a->bool) p FPr GPr.\n       p INVARIANT (p0, FPr) /\\ p STABLE GPr ==>\n                    p INVARIANT (p0, (APPEND FPr GPr))"), t94))
+  comp_unity_cor3_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor3", @parser.parse_term("forall(p0:'a->bool) p FPr GPr.\n       p INVARIANT (p0, FPr) /\\ p STABLE GPr ==>\n                    p INVARIANT (p0, (APPEND FPr GPr))"), t94))
 }
 
 ///|
@@ -300,7 +300,7 @@ fn step_13() -> Unit raise {
   let t96 = @parser.parse_term("q:'a->bool")
   let t97 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t96, t95]), @mk_ensures.ensures_cor2())))
   let t116 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t97), t99), t103), t104), t105), t106), t107), @tactics.strip_tac), t108), t110), @lists.list_induct_tac), t115)
-  comp_unity_cor4_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor4", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n        (p ENSURES q) FPr /\\ p STABLE GPr ==> (p ENSURES q) (APPEND FPr GPr)"), t116))
+  comp_unity_cor4_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor4", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n        (p ENSURES q) FPr /\\ p STABLE GPr ==> (p ENSURES q) (APPEND FPr GPr)"), t116))
 }
 
 ///|
@@ -317,7 +317,7 @@ pub fn comp_unity_cor4() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t117 = @tactics.repeat_tac(@tactics.strip_tac)
   let t118 = @tactics.then_tac(@simp.rewrite_tac(@list.List([comp_unless_thm1()])), t117)
-  comp_unity_cor5_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor5", @parser.parse_term("!(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) GPr"), t118))
+  comp_unity_cor5_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor5", @parser.parse_term("forall(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) GPr"), t118))
 }
 
 ///|
@@ -334,7 +334,7 @@ pub fn comp_unity_cor5() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t119 = @tactics.repeat_tac(@tactics.strip_tac)
   let t120 = @tactics.then_tac(@simp.rewrite_tac(@list.List([comp_unless_thm1()])), t119)
-  comp_unity_cor6_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor6", @parser.parse_term("!(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) FPr"), t120))
+  comp_unity_cor6_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor6", @parser.parse_term("forall(p:'a->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) FPr"), t120))
 }
 
 ///|
@@ -351,7 +351,7 @@ pub fn comp_unity_cor6() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t121 = @tactics.repeat_tac(@tactics.strip_tac)
   let t122 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.unless()])), t121)
-  comp_unity_cor7_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor7", @parser.parse_term("!(p:'a->bool) q st FPr. (p UNLESS q)(CONS st FPr) ==> (p UNLESS q) FPr"), t122))
+  comp_unity_cor7_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor7", @parser.parse_term("forall(p:'a->bool) q st FPr. (p UNLESS q)(CONS st FPr) ==> (p UNLESS q) FPr"), t122))
 }
 
 ///|
@@ -375,7 +375,7 @@ fn step_17() -> Unit raise {
   let t124 = @tactics.repeat_tac(@tactics.strip_tac)
   let t123 = @simp.rewrite_tac(@list.List([@lists.append(), @mk_ensures.ensures(), @mk_unless.unless(), @mk_ensures.exist_transition()]))
   let t131 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t123), t124), @hol88.res_tac), t125), t130)
-  comp_unity_cor8_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor8", @parser.parse_term("!(p:'a->bool) FPr GPr.\n        (p ENSURES (Not p)) FPr ==> (p ENSURES (Not p)) (APPEND FPr GPr)"), t131))
+  comp_unity_cor8_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor8", @parser.parse_term("forall(p:'a->bool) FPr GPr.\n        (p ENSURES (Not p)) FPr ==> (p ENSURES (Not p)) (APPEND FPr GPr)"), t131))
 }
 
 ///|
@@ -401,7 +401,7 @@ fn step_18() -> Unit raise {
   let t141 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("((p:'a->bool) UNLESS False)FPr")), t134), @lists.list_induct_tac), t139), t140])
   let t132 = @tactics.repeat_tac(@tactics.strip_tac)
   let t142 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_unless.stable(), comp_unless_thm1()])), t132), t141)
-  comp_unity_cor9_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor9", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n         p STABLE FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)"), t142))
+  comp_unity_cor9_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor9", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n         p STABLE FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)"), t142))
 }
 
 ///|
@@ -420,7 +420,7 @@ fn step_19() -> Unit raise {
   let t144 = @tactics.repeat_tac(@tactics.strip_tac)
   let t143 = @simp.rewrite_tac(@list.List([comp_unless_thm1()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t143), @tactics.eq_tac), t144), t145)
-  comp_unity_cor10_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor10", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n         (p UNLESS q) (APPEND FPr GPr) = (p UNLESS q) (APPEND GPr FPr)"), t146))
+  comp_unity_cor10_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor10", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n         (p UNLESS q) (APPEND FPr GPr) = (p UNLESS q) (APPEND GPr FPr)"), t146))
 }
 
 ///|
@@ -439,7 +439,7 @@ fn step_20() -> Unit raise {
   let t148 = @tactics.repeat_tac(@tactics.strip_tac)
   let t147 = @simp.rewrite_tac(@list.List([comp_ensures_thm1()]))
   let t150 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t147), @tactics.eq_tac), t148), t149)
-  comp_unity_cor11_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor11", @parser.parse_term("!(p:'a->bool) q FPr GPr.\n         (p ENSURES q) (APPEND FPr GPr) = (p ENSURES q) (APPEND GPr FPr)"), t150))
+  comp_unity_cor11_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor11", @parser.parse_term("forall(p:'a->bool) q FPr GPr.\n         (p ENSURES q) (APPEND FPr GPr) = (p ENSURES q) (APPEND GPr FPr)"), t150))
 }
 
 ///|
@@ -475,7 +475,7 @@ fn step_22() -> Unit raise {
   let t154 = @kernel.assume_rule(@parser.parse_term("((p':'a->bool) ENSURES q')(APPEND Pr1 Pr2)"))
   let t155 = @tactics.assume_tac(@simp.once_rewrite_rule(@list.List([comp_unity_cor11()]))(t154))
   let t157 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t155), (x156 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_leadsto.leadsto_thm0(), x156))
-  comp_unity_cor12_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q' Pr1 Pr2.\n      (p' ENSURES q')(APPEND Pr1 Pr2) ==> (p' LEADSTO q')(APPEND Pr2 Pr1)")), t157))
+  comp_unity_cor12_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p':'a->bool) q' Pr1 Pr2.\n      (p' ENSURES q')(APPEND Pr1 Pr2) ==> (p' LEADSTO q')(APPEND Pr2 Pr1)")), t157))
 }
 
 ///|
@@ -491,7 +491,7 @@ pub fn comp_unity_cor12_lemma01() -> @kernel.Thm {
 /// COMP_UNITY_cor12_lemma02
 fn step_23() -> Unit raise {
   let t159 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x158 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_leadsto.leadsto_thm1(), x158))
-  comp_unity_cor12_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q' Pr1 Pr2.\n     (!r.\n       (p' LEADSTO r)(APPEND Pr1 Pr2) /\\ (p' LEADSTO r)(APPEND Pr2 Pr1) /\\\n       (r LEADSTO q')(APPEND Pr1 Pr2) /\\ (r LEADSTO q')(APPEND Pr2 Pr1)\n          ==> (p' LEADSTO q')(APPEND Pr2 Pr1))")), t159))
+  comp_unity_cor12_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p':'a->bool) q' Pr1 Pr2.\n     (forall r.\n       (p' LEADSTO r)(APPEND Pr1 Pr2) /\\ (p' LEADSTO r)(APPEND Pr2 Pr1) /\\\n       (r LEADSTO q')(APPEND Pr1 Pr2) /\\ (r LEADSTO q')(APPEND Pr2 Pr1)\n          ==> (p' LEADSTO q')(APPEND Pr2 Pr1))")), t159))
 }
 
 ///|
@@ -507,7 +507,7 @@ pub fn comp_unity_cor12_lemma02() -> @kernel.Thm {
 /// COMP_UNITY_cor12_lemma03
 fn step_24() -> Unit raise {
   let t161 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x160 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_leadsto.leadsto_thm3a(), x160))
-  comp_unity_cor12_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q' Pr1 Pr2.\n     (!P:('a->bool)->bool.\n       (!p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr1 Pr2)) /\\\n       (!p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr2 Pr1))\n            ==> ((LUB P) LEADSTO q')(APPEND Pr2 Pr1))")), t161))
+  comp_unity_cor12_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p':'a->bool) q' Pr1 Pr2.\n     (forall P:('a->bool)->bool.\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr1 Pr2)) /\\\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr2 Pr1))\n            ==> ((LUB P) LEADSTO q')(APPEND Pr2 Pr1))")), t161))
 }
 
 ///|
@@ -540,7 +540,7 @@ pub fn comp_unity_cor12_lemma04() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t163 = @simp.rewrite_tac(@list.List([comp_unity_cor12_lemma04()]))
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t163)
-  comp_unity_cor12_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor12", @parser.parse_term("!(p:'a->bool) q Pr1 Pr2.\n       (p LEADSTO q)(APPEND Pr1 Pr2) = (p LEADSTO q)(APPEND Pr2 Pr1)"), t164))
+  comp_unity_cor12_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor12", @parser.parse_term("forall(p:'a->bool) q Pr1 Pr2.\n       (p LEADSTO q)(APPEND Pr1 Pr2) = (p LEADSTO q)(APPEND Pr2 Pr1)"), t164))
 }
 
 ///|
@@ -559,7 +559,7 @@ fn step_27() -> Unit raise {
   let t166 = @simp.once_rewrite_tac(@list.List([comp_unity_cor10()]))
   let t165 = @simp.rewrite_tac(@list.List([@mk_unless.stable()]))
   let t168 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t165), @tactics.eq_tac), @tactics.strip_tac), t166), t167)
-  comp_unity_cor13_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor13", @parser.parse_term("!(p:'a->bool) FPr GPr.\n      (p STABLE (APPEND FPr GPr)) = (p STABLE (APPEND GPr FPr))"), t168))
+  comp_unity_cor13_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor13", @parser.parse_term("forall(p:'a->bool) FPr GPr.\n      (p STABLE (APPEND FPr GPr)) = (p STABLE (APPEND GPr FPr))"), t168))
 }
 
 ///|
@@ -578,7 +578,7 @@ fn step_28() -> Unit raise {
   let t170 = @simp.once_rewrite_tac(@list.List([comp_unity_cor13()]))
   let t169 = @simp.rewrite_tac(@list.List([@mk_unless.invariant()]))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t169), @tactics.eq_tac), @tactics.strip_tac), t170), t171)
-  comp_unity_cor14_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor14", @parser.parse_term("!(p0:'a->bool) p FPr GPr.\n      (p INVARIANT (p0, (APPEND FPr GPr)))\n    =\n      (p INVARIANT (p0, (APPEND GPr FPr)))"), t172))
+  comp_unity_cor14_c.set(@aux_definitions.prove_thm("COMP_UNITY_cor14", @parser.parse_term("forall(p0:'a->bool) p FPr GPr.\n      (p INVARIANT (p0, (APPEND FPr GPr)))\n    =\n      (p INVARIANT (p0, (APPEND GPr FPr)))"), t172))
 }
 
 ///|

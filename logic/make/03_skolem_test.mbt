@@ -7585,11 +7585,11 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|Logic/skolem quotations (253):
       #|  preds:num#num->bool
       #|  termval M (v:num->A) t
-      #|  !p t x M v preds:num#num->bool.\n        interpretation (functions_term t,preds) M /\\\n        valuation(M) (v:num->A) /\\\n        holds M v (formsubst (valmod (x,t) V) p)\n        ==> holds M v (??x p)
+      #|  forall p t x M v preds:num#num->bool.\n        interpretation (functions_term t,preds) M /\\\n        valuation(M) (v:num->A) /\\\n        holds M v (formsubst (valmod (x,t) V) p)\n        ==> holds M v (??x p)
       #|  Skolem1 f x p =\n     formsubst (valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p
-      #|  !l. LIST_UNION (MAP (\\x. {x}) l) = set_of_list l
-      #|  !s. FINITE(s) ==> (LIST_UNION (MAP (\\x. {x}) (list_of_set s)) = s)
-      #|  holds M v p /\\\n     (Dom M = Dom M') /\\\n     (!P zs. Pred M P zs = Pred M' P zs) /\\\n     (!f zs.\n          f,LENGTH zs IN functions_form p ==> (Fun M f zs = Fun M' f zs))\n     ==> holds M' v p
+      #|  forall l. LIST_UNION (MAP (\\x. {x}) l) = set_of_list l
+      #|  forall s. FINITE(s) ==> (LIST_UNION (MAP (\\x. {x}) (list_of_set s)) = s)
+      #|  holds M v p /\\\n     (Dom M = Dom M') /\\\n     (forall P zs. Pred M P zs = Pred M' P zs) /\\\n     (forall f zs.\n          f,LENGTH zs IN functions_form p ==> (Fun M f zs = Fun M' f zs))\n     ==> holds M' v p
       #|  interpretation\n       (language\n       (formsubst (valmod (x,Fn f (MAP V (list_of_set (FV (?? x p))))) V)\n        p INSERT\n        EMPTY))\n       (N:(A->bool)#((num->((A)list->A))#(num->((A)list->bool))))
       #|  predicates_form (formsubst\n           (valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p)
       #|  Fn f (MAP V (list_of_set (FV (?? x p))))
@@ -7601,25 +7601,25 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  z:num
       #|  a:A
       #|  (@a:A. a IN Dom M /\\ holds M (valmod (x,a) v) p) IN Dom(M) /\\\n        holds M (valmod (x,(@a. a IN Dom M /\\ holds M (valmod (x,a) v) p)) v) p
-      #|  !a. holds M (valmod (x,a)\n                         (ITLIST valmod\n                            (MAP2 (\\x a. x,a) (list_of_set (FV (??x p)))\n                                     (MAP (\\y. v y) (list_of_set(FV(??x p)))))\n                  (\\z. @c. c IN Dom(M)))) p = holds M (valmod (x,a:A) v) p
+      #|  forall a. holds M (valmod (x,a)\n                         (ITLIST valmod\n                            (MAP2 (\\x a. x,a) (list_of_set (FV (??x p)))\n                                     (MAP (\\y. v y) (list_of_set(FV(??x p)))))\n                  (\\z. @c. c IN Dom(M)))) p = holds M (valmod (x,a:A) v) p
       #|  ~(f,CARD (FV (?? x p)) IN functions_form (?? x p))
       #|  (f',LENGTH (zs:A list)) IN functions_form p
       #|  LENGTH(list_of_set(FV(??x p))) = CARD(FV (??x p))
       #|  v:num->A
-      #|  !p. UNIONS {functions_form q | q = p } =\n                           functions_form p
+      #|  forall p. UNIONS {functions_form q | q = p } =\n                           functions_form p
       #|  zs:A list
       #|  zs:A list
       #|  xs:num list
       #|  list_of_set(FV(??x p))
       #|  LENGTH(list_of_set(FV(??x p))) = LENGTH (zs:A list)
       #|  ALL (\\x:A. x IN Dom M) zs
-      #|  !v. valuation M v ==> holds M (v:num->A) (??x p)
+      #|  forall v. valuation M v ==> holds M (v:num->A) (??x p)
       #|  ?a:A. a IN Dom M /\\\n                            holds M (valmod (x,a)\n                             (ITLIST valmod (MAP2 (\\x a. x,a)\n                               (list_of_set (FV (?? x p))) zs)\n                                  (\\z. @c. c IN Dom(M)))) p
       #|  zs:A list
       #|  g:num
-      #|  !l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
+      #|  forall l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
       #|  fa:num#num
-      #|  !p. UNIONS {functions_form q | q = p } =\n                           functions_form p
+      #|  forall p. UNIONS {functions_form q | q = p } =\n                           functions_form p
       #|  l:num list
       #|  list_of_set(FV(??x p))
       #|  FV(??x p) = set_of_list(list_of_set(FV(??x p)))
@@ -7630,7 +7630,7 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  functions\n         {(formsubst(valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p)}\n        = ((f,CARD(FV(??x p))) INSERT functions_form p)
       #|  Dom(M):A->bool,\n                 (\\g zs. if (g = f) /\\ (LENGTH zs = CARD(FV(??x p)))\n                         then @a. a IN Dom(M) /\\\n                                  holds M\n                                   (valmod (x,a)\n                                      (ITLIST valmod\n                                              (MAP2 (\\x a. (x,a))\n                                                    (list_of_set(FV(??x p)))\n                                                    zs)\n                                              (\\z. @c. c IN Dom(M)))) p\n                         else Fun(M) g zs),\n                Pred(M)
       #|  LENGTH(list_of_set(FV(??x p))) = CARD(FV(??x p))
-      #|  !l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
+      #|  forall l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
       #|  x IN FV p
       #|  ??x p
       #|  x < 3 + x
@@ -7642,11 +7642,11 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  ~(x IN FV(p))
       #|  Skolem1 f x p = p
       #|  x IN FV(p)
-      #|  !f x p.\n     prenex(??x p) /\\\n     ~((f,CARD(FV(??x p))) IN functions_form(??x p))\n     ==> prenex(Skolem1 f x p) /\\\n         (FV(Skolem1 f x p) = FV(??x p)) /\\\n         size(Skolem1 f x p) < size(??x p) /\\\n         (predicates_form (Skolem1 f x p) = predicates_form(??x p)) /\\\n         (functions_form(??x p) SUBSET functions_form (Skolem1 f x p)) /\\\n         (functions_form (Skolem1 f x p) SUBSET ((f,CARD(FV(??x p))) INSERT\n                                  functions_form(??x p))) /\\\n         (!M. interpretation (language {p}) M /\\\n              ~(Dom(M) = EMPTY) /\\\n              (!v:num->A. valuation(M) v ==> holds M v (??x p))\n              ==> ?M'. (Dom(M') = Dom(M)) /\\\n                       (Pred(M') = Pred(M)) /\\\n                       (!g zs. ~(g = f) \\/ ~(LENGTH zs = CARD(FV(??x p)))\n                               ==> (Fun(M') g zs = Fun(M) g zs)) /\\\n                       interpretation (language {(Skolem1 f x p)}) M' /\\\n                       (!v. valuation(M') v ==> holds M' v (Skolem1 f x p))) /\\\n         (!N. interpretation (language {(Skolem1 f x p)}) N /\\\n              ~(Dom(N) = EMPTY)\n              ==> !v:num->A. valuation(N) (v:num->A) /\\\n                             holds N v (Skolem1 f x p) ==> holds N v (??x p))
+      #|  forall f x p.\n     prenex(??x p) /\\\n     ~((f,CARD(FV(??x p))) IN functions_form(??x p))\n     ==> prenex(Skolem1 f x p) /\\\n         (FV(Skolem1 f x p) = FV(??x p)) /\\\n         size(Skolem1 f x p) < size(??x p) /\\\n         (predicates_form (Skolem1 f x p) = predicates_form(??x p)) /\\\n         (functions_form(??x p) SUBSET functions_form (Skolem1 f x p)) /\\\n         (functions_form (Skolem1 f x p) SUBSET ((f,CARD(FV(??x p))) INSERT\n                                  functions_form(??x p))) /\\\n         (forall M. interpretation (language {p}) M /\\\n              ~(Dom(M) = EMPTY) /\\\n              (forall v:num->A. valuation(M) v ==> holds M v (??x p))\n              ==> ?M'. (Dom(M') = Dom(M)) /\\\n                       (Pred(M') = Pred(M)) /\\\n                       (forall g zs. ~(g = f) \\/ ~(LENGTH zs = CARD(FV(??x p)))\n                               ==> (Fun(M') g zs = Fun(M) g zs)) /\\\n                       interpretation (language {(Skolem1 f x p)}) M' /\\\n                       (forall v. valuation(M') v ==> holds M' v (Skolem1 f x p))) /\\\n         (forall N. interpretation (language {(Skolem1 f x p)}) N /\\\n              ~(Dom(N) = EMPTY)\n              ==> forall v:num->A. valuation(N) (v:num->A) /\\\n                             holds N v (Skolem1 f x p) ==> holds N v (??x p))
       #|  ?x p. r = !!x p
       #|  k:num
-      #|  !J. ?Skolems. !r.\n    Skolems r = \\k. PPAT (\\x q. !!x (Skolems q k))\n                         (\\x q. Skolems (Skolem1 (NUMPAIR J k) x q) (SUC k))\n                         (\\p. p) r
-      #|  ?Skolems. !J r k.\n        Skolems J r k =\n          PPAT (\\x q. !!x (Skolems J q k))\n               (\\x q. Skolems J (Skolem1 (NUMPAIR J k) x q) (SUC k))\n               (\\p. p) r
+      #|  forall J. ?Skolems. forall r.\n    Skolems r = \\k. PPAT (\\x q. !!x (Skolems q k))\n                         (\\x q. Skolems (Skolem1 (NUMPAIR J k) x q) (SUC k))\n                         (\\p. p) r
+      #|  ?Skolems. forall J r k.\n        Skolems J r k =\n          PPAT (\\x q. !!x (Skolems J q k))\n               (\\x q. Skolems J (Skolem1 (NUMPAIR J k) x q) (SUC k))\n               (\\p. p) r
       #|  interpretation (language {s})\n     (N:(A->bool)#(num->A list->A)#(num->A list->bool))
       #|  v:num->A
       #|  v:num->A
@@ -7655,9 +7655,9 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  ~(Fun M1 g (zs:A list) = Fun M0 g zs) \\/\n                  ~(Fun M0 g zs = Fun M g zs)
       #|  M1:(A->bool)#(num->A list->A)#(num->A list->bool)
       #|  M1:(A->bool)#(num->A list->A)#(num->A\n                                  list->bool)
-      #|  interpretation (language {q}) M0 /\\\n      ~(Dom M0 = EMPTY) /\\\n      (!v:num->A. valuation M0 v ==> holds M0 v q)
+      #|  interpretation (language {q}) M0 /\\\n      ~(Dom M0 = EMPTY) /\\\n      (forall v:num->A. valuation M0 v ==> holds M0 v q)
       #|  M0:(A->bool)#(num->A list->A)#(num->A\n                                  list->bool)
-      #|  interpretation (language {r}) M /\\\n      ~(Dom M = EMPTY) /\\\n      !v:num->A. valuation M v ==> holds M v (?? x r)
+      #|  interpretation (language {r}) M /\\\n      ~(Dom M = EMPTY) /\\\n      forall v:num->A. valuation M v ==> holds M v (?? x r)
       #|  SUC k <= l ==> k <= l
       #|  functions_form q SUBSET\n          (NUMPAIR J k,CARD (FV (?? x r))) INSERT functions_form (?? x r)
       #|  functions_form s SUBSET\n                 {NUMPAIR j l,m | j,l,m | (j = J) /\\ SUC k <= l} UNION\n                 functions_form q
@@ -7672,9 +7672,9 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  x:num
       #|  NUMPAIR J k
       #|  holds N (v:num->A) (!!x q)
-      #|  (!x. p x ==> q x) ==> (?x. p x) ==> ?x. q x
+      #|  (forall x. p x ==> q x) ==> (?x. p x) ==> ?x. q x
       #|  (v:num->A) x
-      #|  interpretation (language (r INSERT EMPTY)) M /\\\n        ~(Dom M = EMPTY) /\\\n        (!v:num->A. valuation M v ==> holds M v r)
+      #|  interpretation (language (r INSERT EMPTY)) M /\\\n        ~(Dom M = EMPTY) /\\\n        (forall v:num->A. valuation M v ==> holds M v r)
       #|  q = Skolems J r k
       #|  ?z s. !!x r = !!z s
       #|  Skolems J (!!x r) k = !!x (Skolems J r k)
@@ -7689,52 +7689,52 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  ~(?x q. p = !!x q) /\\ ~(?x q. p = ??x q)
       #|  Skolems J p k = p
       #|  n:num
-      #|  !n J k p.\n           (size(p) = n) /\\\n           prenex(p) /\\\n           (!l m. (NUMPAIR J l,m) IN functions_form p ==> l < k)\n           ==> universal((Skolems J p k)) /\\\n               (FV((Skolems J p k)) = FV(p)) /\\\n               (predicates_form (Skolems J p k) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems J p k) /\\\n                functions_form (Skolems J p k) SUBSET\n                 {NUMPAIR j l,m | j,l,m | (j = J) /\\ k <= l} UNION\n                 functions_form p /\\\n                (!M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (!v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (!g zs. ~(Fun(M') g zs = Fun(M) g zs)\n                                    ==> ?l. k <= l /\\ (g = NUMPAIR J l)) /\\\n                              interpretation (language {(Skolems J p k)}) M' /\\\n                              (!v. valuation M' v\n                                   ==> holds M' v (Skolems J p k))) /\\\n               (!N. interpretation (language {(Skolems J p k)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> !v:num->A. valuation(N) v /\\ holds N v (Skolems J p k)\n                               ==> holds N v p)
+      #|  forall n J k p.\n           (size(p) = n) /\\\n           prenex(p) /\\\n           (forall l m. (NUMPAIR J l,m) IN functions_form p ==> l < k)\n           ==> universal((Skolems J p k)) /\\\n               (FV((Skolems J p k)) = FV(p)) /\\\n               (predicates_form (Skolems J p k) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems J p k) /\\\n                functions_form (Skolems J p k) SUBSET\n                 {NUMPAIR j l,m | j,l,m | (j = J) /\\ k <= l} UNION\n                 functions_form p /\\\n                (forall M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (forall v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (forall g zs. ~(Fun(M') g zs = Fun(M) g zs)\n                                    ==> ?l. k <= l /\\ (g = NUMPAIR J l)) /\\\n                              interpretation (language {(Skolems J p k)}) M' /\\\n                              (forall v. valuation M' v\n                                   ==> holds M' v (Skolems J p k))) /\\\n               (forall N. interpretation (language {(Skolems J p k)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> forall v:num->A. valuation(N) v /\\ holds N v (Skolems J p k)\n                               ==> holds N v p)
       #|  p:form
       #|  0
       #|  K:num
       #|  size p
-      #|  !p.\n    prenex(p)\n    ==> !K. (!l m. ~(NUMPAIR K l,m IN functions_form p))\n            ==> universal(Skolems K p 0) /\\\n                (FV(Skolems K p 0) = FV(p)) /\\\n                (predicates_form (Skolems K p 0) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems K p 0) /\\\n                functions_form (Skolems K p 0) SUBSET\n                 {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n                (!M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (!v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (!g zs. ~(Fun M' g zs = Fun M g zs)\n                                      ==> (?l. g =\n                                              NUMPAIR K l)) /\\\n                              interpretation (language {(Skolems K p 0)}) M' /\\\n                              (!v. valuation M' v\n                                   ==> holds M' v (Skolems K p 0))) /\\\n                (!N. interpretation (language {(Skolems K p 0)}) N /\\\n                     ~(Dom N = EMPTY)\n                     ==> !v:num->A. valuation(N) v /\\ holds N v (Skolems K p 0)\n                                    ==> holds N v p)
+      #|  forall p.\n    prenex(p)\n    ==> forall K. (forall l m. ~(NUMPAIR K l,m IN functions_form p))\n            ==> universal(Skolems K p 0) /\\\n                (FV(Skolems K p 0) = FV(p)) /\\\n                (predicates_form (Skolems K p 0) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems K p 0) /\\\n                functions_form (Skolems K p 0) SUBSET\n                 {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n                (forall M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (forall v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                                      ==> (?l. g =\n                                              NUMPAIR K l)) /\\\n                              interpretation (language {(Skolems K p 0)}) M' /\\\n                              (forall v. valuation M' v\n                                   ==> holds M' v (Skolems K p 0))) /\\\n                (forall N. interpretation (language {(Skolems K p 0)}) N /\\\n                     ~(Dom N = EMPTY)\n                     ==> forall v:num->A. valuation(N) v /\\ holds N v (Skolems K p 0)\n                                    ==> holds N v p)
       #|  Skopre K p = Skolems K (Prenex p) 0
       #|  (a ==> (b = c)) ==> (a ==> b <=> a ==> c)
       #|  (functions_form r = functions_form p) /\\\n                (predicates_form r = predicates_form p)
       #|  r = Prenex p
       #|  p:form
-      #|  !p K.\n      (!l m. ~(NUMPAIR K l,m IN functions_form p))\n       ==> universal(Skopre K p) /\\\n           (FV(Skopre K p) = FV(p)) /\\\n           (predicates_form (Skopre K p) = predicates_form p) /\\\n           functions_form p SUBSET functions_form (Skopre K p) /\\\n           functions_form (Skopre K p) SUBSET\n            {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n           (!M. interpretation (language {p}) M /\\\n                ~(Dom M = EMPTY) /\\\n                (!v:num->A. valuation M v ==> holds M v p)\n                ==> ?M'. (Dom M' = Dom M) /\\\n                         (Pred M' = Pred M) /\\\n                         (!g zs. ~(Fun M' g zs = Fun M g zs)\n                                 ==> (?l. g =\n                                         NUMPAIR K l)) /\\\n                         interpretation (language {(Skopre K p)}) M' /\\\n                         (!v. valuation M' v ==> holds M' v (Skopre K p))) /\\\n           (!N. interpretation (language {(Skopre K p)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> !v:num->A. valuation(N) v /\\ holds N v (Skopre K p)\n                               ==> holds N v p)
+      #|  forall p K.\n      (forall l m. ~(NUMPAIR K l,m IN functions_form p))\n       ==> universal(Skopre K p) /\\\n           (FV(Skopre K p) = FV(p)) /\\\n           (predicates_form (Skopre K p) = predicates_form p) /\\\n           functions_form p SUBSET functions_form (Skopre K p) /\\\n           functions_form (Skopre K p) SUBSET\n            {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n           (forall M. interpretation (language {p}) M /\\\n                ~(Dom M = EMPTY) /\\\n                (forall v:num->A. valuation M v ==> holds M v p)\n                ==> ?M'. (Dom M' = Dom M) /\\\n                         (Pred M' = Pred M) /\\\n                         (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                                 ==> (?l. g =\n                                         NUMPAIR K l)) /\\\n                         interpretation (language {(Skopre K p)}) M' /\\\n                         (forall v. valuation M' v ==> holds M' v (Skopre K p))) /\\\n           (forall N. interpretation (language {(Skopre K p)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> forall v:num->A. valuation(N) v /\\ holds N v (Skopre K p)\n                               ==> holds N v p)
       #|  p:form
       #|  r:form
       #|  bumpmod(M) = Dom(M),(\\k zs. Fun(M) (NUMSND k) zs),Pred(M)
       #|  (bumpterm (V x) = V x) /\\\n   (bumpterm (Fn k l) = Fn (NUMPAIR 0 k) (MAP bumpterm l))
       #|  (bumpform False = False) /\\\n   (bumpform (Atom p l) = Atom p (MAP bumpterm l)) /\\\n   (bumpform (q --> r) = bumpform q --> bumpform r) /\\\n   (bumpform (!!x r) = !!x (bumpform r))
-      #|  !M v t. termval M v t = termval (bumpmod M) v (bumpterm t)
-      #|  !M p v. holds M v p = holds (bumpmod M) v (bumpform p)
+      #|  forall M v t. termval M v t = termval (bumpmod M) v (bumpterm t)
+      #|  forall M p v. holds M v p = holds (bumpmod M) v (bumpform p)
       #|  l:term list
       #|  l:term list
       #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
       #|  t:term
       #|  h:term
       #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-      #|  !p f m.\n        f,m IN functions_form(bumpform p)\n        ==> ?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p
+      #|  forall p f m.\n        f,m IN functions_form(bumpform p)\n        ==> ?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p
       #|  interpretation (language {p}) M\n   ==> interpretation (language {(bumpform p)}) (bumpmod M)
       #|  (unbumpterm (V x) = V x) /\\\n   (unbumpterm (Fn k l) = Fn (NUMSND k) (MAP unbumpterm l))
       #|  (unbumpform False = False) /\\\n   (unbumpform (Atom p l) = Atom p (MAP unbumpterm l)) /\\\n   (unbumpform (q --> r) = unbumpform q --> unbumpform r) /\\\n   (unbumpform (!!x r) = !!x (unbumpform r))
-      #|  !t. unbumpterm(bumpterm t) = t
-      #|  !p. unbumpform (bumpform p) = p
+      #|  forall t. unbumpterm(bumpterm t) = t
+      #|  forall p. unbumpform (bumpform p) = p
       #|  unbumpmod(M) = Dom(M),(\\k zs. Fun(M) (NUMPAIR 0 k) zs),Pred(M)
-      #|  !M v t. termval M v (bumpterm t) = termval (unbumpmod M) v t
-      #|  !M p (v:num->A). holds M v (bumpform p) = holds (unbumpmod M) v p
+      #|  forall M v t. termval M v (bumpterm t) = termval (unbumpmod M) v t
+      #|  forall M p (v:num->A). holds M v (bumpform p) = holds (unbumpmod M) v p
       #|  (NUMLIST [] = 0) /\\\n   (NUMLIST (CONS h t) = NUMPAIR h (NUMLIST t) + 1)
-      #|  !l1 l2. (NUMLIST l1 = NUMLIST l2) = (l1 = l2)
-      #|  (!x. num_of_term (V x) = NUMPAIR 0 x) /\\\n   (!f l. num_of_term (Fn f l) =\n            NUMPAIR 1 (NUMPAIR f (NUMLIST(MAP num_of_term l))))
+      #|  forall l1 l2. (NUMLIST l1 = NUMLIST l2) = (l1 = l2)
+      #|  (forall x. num_of_term (V x) = NUMPAIR 0 x) /\\\n   (forall f l. num_of_term (Fn f l) =\n            NUMPAIR 1 (NUMPAIR f (NUMLIST(MAP num_of_term l))))
       #|  l:term list
       #|  l:term list
       #|  l':term list
       #|  l':term list
-      #|  ALL (\\s. !t. (num_of_term s = num_of_term t) = (s = t)) l
-      #|  !s t. (num_of_term s = num_of_term t) = (s = t)
+      #|  ALL (\\s. forall t. (num_of_term s = num_of_term t) = (s = t)) l
+      #|  forall s t. (num_of_term s = num_of_term t) = (s = t)
       #|  (num_of_form False = NUMPAIR 0 0) /\\\n   (num_of_form (Atom p l) =\n        NUMPAIR 1 (NUMPAIR p (NUMLIST(MAP num_of_term l)))) /\\\n   (num_of_form (q --> r) =\n        NUMPAIR 2 (NUMPAIR (num_of_form q) (num_of_form r))) /\\\n   (num_of_form (!!x q) = NUMPAIR 3 (NUMPAIR x (num_of_form q)))
-      #|  !l1 l2. (NUMLIST (MAP num_of_term l1) = NUMLIST (MAP num_of_term l2)) =\n           (l1 = l2)
-      #|  !q r. (num_of_form q = num_of_form r) = (q = r)
+      #|  forall l1 l2. (NUMLIST (MAP num_of_term l1) = NUMLIST (MAP num_of_term l2)) =\n           (l1 = l2)
+      #|  forall q r. (num_of_form q = num_of_form r) = (q = r)
       #|  form_of_num x = @p. num_of_form p = x
       #|  form_of_num(num_of_form p) = p
       #|  SKOLEMIZE p = Skopre (num_of_form(bumpform p) + 1) (bumpform p)
@@ -7753,7 +7753,7 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  p:form
       #|  x:num
       #|  num_of_form(bumpform p)
-      #|  !p. universal(SKOLEMIZE p) /\\\n       (FV(SKOLEMIZE p) = FV(bumpform p)) /\\\n       (predicates_form (SKOLEMIZE p) = predicates_form (bumpform p)) /\\\n       functions_form (bumpform p) SUBSET functions_form (SKOLEMIZE p) /\\\n       functions_form (SKOLEMIZE p) SUBSET\n        {NUMPAIR k l,m | k,l,m | k = num_of_form(bumpform p) + 1} UNION\n        functions_form (bumpform p) /\\\n       (!M. interpretation (language {(bumpform p)}) M /\\\n            ~(Dom M = EMPTY) /\\\n            (!v:num->A. valuation M v ==> holds M v (bumpform p))\n            ==> ?M'. (Dom M' = Dom M) /\\\n                     (Pred M' = Pred M) /\\\n                     (!g zs. ~(Fun M' g zs = Fun M g zs)\n                             ==> (?l. g =\n                                     NUMPAIR (num_of_form(bumpform p) + 1)\n                                             l)) /\\\n                     interpretation (language {(SKOLEMIZE p)}) M' /\\\n                     (!v. valuation M' v ==> holds M' v (SKOLEMIZE p))) /\\\n       (!N. interpretation (language {(SKOLEMIZE p)}) N /\\\n            ~(Dom(N) = EMPTY)\n            ==> !v:num->A. valuation(N) v /\\ holds N v (SKOLEMIZE p)\n                           ==> holds N v (bumpform p))
+      #|  forall p. universal(SKOLEMIZE p) /\\\n       (FV(SKOLEMIZE p) = FV(bumpform p)) /\\\n       (predicates_form (SKOLEMIZE p) = predicates_form (bumpform p)) /\\\n       functions_form (bumpform p) SUBSET functions_form (SKOLEMIZE p) /\\\n       functions_form (SKOLEMIZE p) SUBSET\n        {NUMPAIR k l,m | k,l,m | k = num_of_form(bumpform p) + 1} UNION\n        functions_form (bumpform p) /\\\n       (forall M. interpretation (language {(bumpform p)}) M /\\\n            ~(Dom M = EMPTY) /\\\n            (forall v:num->A. valuation M v ==> holds M v (bumpform p))\n            ==> ?M'. (Dom M' = Dom M) /\\\n                     (Pred M' = Pred M) /\\\n                     (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                             ==> (?l. g =\n                                     NUMPAIR (num_of_form(bumpform p) + 1)\n                                             l)) /\\\n                     interpretation (language {(SKOLEMIZE p)}) M' /\\\n                     (forall v. valuation M' v ==> holds M' v (SKOLEMIZE p))) /\\\n       (forall N. interpretation (language {(SKOLEMIZE p)}) N /\\\n            ~(Dom(N) = EMPTY)\n            ==> forall v:num->A. valuation(N) v /\\ holds N v (SKOLEMIZE p)\n                           ==> holds N v (bumpform p))
       #|  l:term list
       #|  l:term list
       #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
@@ -7763,10 +7763,10 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  p:form
       #|  p:form
       #|  (a ==> a') /\\ (b ==> b') ==> a \\/ b ==> b' \\/ a'
-      #|  !p f m.\n        f,m IN functions_form(SKOLEMIZE p)\n        ==> (?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p) \\/\n            (?l. (f = NUMPAIR (num_of_form (bumpform p) + 1) l))
-      #|  SKOMOD1 p M =\n     if (!v. valuation M v ==> holds M v p)\n     then @M'. (Dom M' = Dom (bumpmod M)) /\\\n               (Pred M' = Pred (bumpmod M)) /\\\n               (!g zs.\n                    ~(Fun M' g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               interpretation (language {(SKOLEMIZE p)}) M' /\\\n               (!v:num->A. valuation M' v\n                           ==> holds M' v (SKOLEMIZE p))\n     else (Dom M,(\\g zs. @a:A. a IN Dom(M)),Pred M)
+      #|  forall p f m.\n        f,m IN functions_form(SKOLEMIZE p)\n        ==> (?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p) \\/\n            (?l. (f = NUMPAIR (num_of_form (bumpform p) + 1) l))
+      #|  SKOMOD1 p M =\n     if (forall v. valuation M v ==> holds M v p)\n     then @M'. (Dom M' = Dom (bumpmod M)) /\\\n               (Pred M' = Pred (bumpmod M)) /\\\n               (forall g zs.\n                    ~(Fun M' g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               interpretation (language {(SKOLEMIZE p)}) M' /\\\n               (forall v:num->A. valuation M' v\n                           ==> holds M' v (SKOLEMIZE p))\n     else (Dom M,(\\g zs. @a:A. a IN Dom(M)),Pred M)
       #|  d /\\ p /\\ i /\\ g /\\ v <=>\n                                  d /\\ p /\\ g /\\ i /\\ v
-      #|  !M p.\n      interpretation (language {p}) M /\\\n      ~(Dom M = EMPTY)\n      ==> (Dom (SKOMOD1 p M) = Dom (bumpmod M)) /\\\n          (Pred (SKOMOD1 p M) = Pred (bumpmod M)) /\\\n          interpretation (language {(SKOLEMIZE p)}) (SKOMOD1 p M) /\\\n          ((!v:num->A. valuation M v ==> holds M v p)\n           ==> (!g zs.\n                    ~(Fun (SKOMOD1 p M) g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               (!v:num->A. valuation (SKOMOD1 p M) v\n                 ==> holds (SKOMOD1 p M) v (SKOLEMIZE p)))
+      #|  forall M p.\n      interpretation (language {p}) M /\\\n      ~(Dom M = EMPTY)\n      ==> (Dom (SKOMOD1 p M) = Dom (bumpmod M)) /\\\n          (Pred (SKOMOD1 p M) = Pred (bumpmod M)) /\\\n          interpretation (language {(SKOLEMIZE p)}) (SKOMOD1 p M) /\\\n          ((forall v:num->A. valuation M v ==> holds M v p)\n           ==> (forall g zs.\n                    ~(Fun (SKOMOD1 p M) g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               (forall v:num->A. valuation (SKOMOD1 p M) v\n                 ==> holds (SKOMOD1 p M) v (SKOLEMIZE p)))
       #|  SKOMOD M =\n     (Dom M,\n      (\\g zs. if NUMFST g = 0 then Fun M (NUMSND g) zs\n              else Fun (SKOMOD1 (unbumpform(form_of_num (PRE(NUMFST g)))) M)\n                       g zs),\n      Pred M)
       #|  ~(x + 1 = 0)
       #|  interpretation (language {p}) M /\\\n   ~(Dom M :A->bool = EMPTY)\n   ==> interpretation (language {(SKOLEMIZE p)}) (SKOMOD M)
@@ -7778,7 +7778,7 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  SKOMOD (M:(A->bool)#(num->A list->A)#(num->A list->bool))
       #|  ty:A
       #|  @x:A. T
-      #|  !v. valuation (bumpmod M) (v:num->A)\n          ==> holds (bumpmod M) v (bumpform p)
+      #|  forall v. valuation (bumpmod M) (v:num->A)\n          ==> holds (bumpmod M) v (bumpform p)
       #|  ~(x + 1 = 0)
       #|  ~(0 = x + 1)
       #|  zs:A list
@@ -7791,10 +7791,10 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  valuation (SKOMOD1 p M) (v:num->A)
       #|  holds (SKOMOD1 p M) (v:num->A) (SKOLEMIZE p)
       #|  v:num->A
-      #|  interpretation(language {p}) M /\\\n   ~(Dom M = EMPTY)\n   ==> ((!v:num->A. valuation(M) v ==> holds M v p) <=>\n        (!v:num->A. valuation(SKOMOD M) v\n                    ==> holds (SKOMOD M) v (SKOLEMIZE p)))
+      #|  interpretation(language {p}) M /\\\n   ~(Dom M = EMPTY)\n   ==> ((forall v:num->A. valuation(M) v ==> holds M v p) <=>\n        (forall v:num->A. valuation(SKOMOD M) v\n                    ==> holds (SKOMOD M) v (SKOLEMIZE p)))
       #|  f':form
       #|  p:form
-      #|  !p. p IN s ==> interpretation (language {p}) (unbumpmod\n        (M:(A->bool)#(num->A list->A)#(num->A list->bool)))
+      #|  forall p. p IN s ==> interpretation (language {p}) (unbumpmod\n        (M:(A->bool)#(num->A list->A)#(num->A list->bool)))
       #|  l:term list
       #|  l:term list
       #|  t:term
@@ -7807,7 +7807,7 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  f,LENGTH(l:A list) IN LIST_UNION (MAP functions_term a1)
       #|  P:A->bool
       #|  \\x:A. x IN Dom M
-      #|  !p. interpretation (language {(bumpform p)})\n                      (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                    ==> interpretation (language {p}) (unbumpmod M)
+      #|  forall p. interpretation (language {(bumpform p)})\n                      (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                    ==> interpretation (language {p}) (unbumpmod M)
       #|  ty:A
       #|  @x:A. T
       #|  p:form
@@ -7827,13 +7827,13 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|  (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language s) M /\\\n        M satisfies s) <=>\n   (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language {SKOLEMIZE p | p IN s}) M /\\\n        M satisfies {SKOLEMIZE p | p IN s})
       #|  P:term->bool
       #|  (specialize False = False) /\\\n   (specialize (Atom p l) = Atom p l) /\\\n   (specialize (q --> r) = q --> r) /\\\n   (specialize (!!x r) = specialize r)
-      #|  !p. (!v:num->A. valuation M v ==> holds M v p) <=>\n        (!v:num->A. valuation M v ==> holds M v (specialize p))
-      #|  !M s. ~(Dom M:A->bool = EMPTY)\n         ==> (M satisfies s <=> M satisfies {specialize p | p IN s})
-      #|  !p. universal p ==> qfree(specialize p)
-      #|  (!p. functions_form(specialize p) = functions_form p) /\\\n    (!p. predicates_form(specialize p) = predicates_form p)
-      #|  !s. language {specialize p | p IN s} = language s
+      #|  forall p. (forall v:num->A. valuation M v ==> holds M v p) <=>\n        (forall v:num->A. valuation M v ==> holds M v (specialize p))
+      #|  forall M s. ~(Dom M:A->bool = EMPTY)\n         ==> (M satisfies s <=> M satisfies {specialize p | p IN s})
+      #|  forall p. universal p ==> qfree(specialize p)
+      #|  (forall p. functions_form(specialize p) = functions_form p) /\\\n    (forall p. predicates_form(specialize p) = predicates_form p)
+      #|  forall s. language {specialize p | p IN s} = language s
       #|  SKOLEM p = specialize(SKOLEMIZE p)
-      #|  !p. qfree(SKOLEM p)
+      #|  forall p. qfree(SKOLEM p)
       #|  (a ==> (b = c)) ==> (a /\\ b <=> a /\\ c)
       #|  (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language s) M /\\\n        M satisfies s) =\n   (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language {SKOLEM p | p IN s}) M /\\\n        M satisfies {SKOLEM p | p IN s})
       #|HOLDS_EXISTS_LEMMA =  |- (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(term,bool),bool) (\t:term. (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool),bool) (\M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))). (#!:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (#!:fun(fun(fun(prod(num,num),bool),bool),bool) (\preds:fun(prod(num,num),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#interpretation:fun(prod(fun(prod(num,num),bool),fun(prod(num,num),bool)),fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool)) ((#,:fun(fun(prod(num,num),bool),fun(fun(prod(num,num),bool),prod(fun(prod(num,num),bool),fun(prod(num,num),bool)))) (#functions_term:fun(term,fun(prod(num,num),bool)) t:term)) preds:fun(prod(num,num),bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),bool)) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#formsubst:fun(fun(num,term),fun(form,form)) ((#valmod:fun(prod(num,term),fun(fun(num,term),fun(num,term))) ((#,:fun(num,fun(term,prod(num,term))) x:num) t:term)) #V:fun(num,term))) p:form))))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#??:fun(num,fun(form,form)) x:num) p:form)))))))))))))))

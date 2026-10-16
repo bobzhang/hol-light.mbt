@@ -32,7 +32,7 @@ fn step_1() -> Unit raise {
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([]))
   let t2 = @list.List([@tactics.match_mp_tac(sign_induct()), t1])
-  sign_cases_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)"), t2))
+  sign_cases_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)"), t2))
 }
 
 ///|
@@ -107,7 +107,7 @@ fn step_3() -> Unit raise {
 ///|
 /// interpsign
 fn step_4() -> Unit raise {
-  let t7 = @parser.parse_term("(interpsign set ply Zero = (!x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (!x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (!x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (!x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (!x. set x ==> (ply x = ply x)))")
+  let t7 = @parser.parse_term("(interpsign set ply Zero = (forall x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (forall x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (forall x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (forall x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (forall x. set x ==> (ply x = ply x)))")
   interpsign_c.set(@recursion.new_recursive_definition(sign_recursion())(t7))
 }
 

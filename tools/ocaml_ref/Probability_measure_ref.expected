@@ -79962,39 +79962,39 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..solved at 3
 Probability/measure quotations (568):
-  sigma_algebra (f:(A->bool)->bool) <=>\n   UNIONS f IN f /\\\n   (!a. a IN f ==> (UNIONS f DIFF a) IN f) /\\\n   (!s. s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f)
-  !(f:(A->bool)->bool) a. a IN f ==> a SUBSET UNIONS f
-  !(f:(A->bool)->bool). sigma_algebra f ==> UNIONS f IN f
+  sigma_algebra (f:(A->bool)->bool) <=>\n   UNIONS f IN f /\\\n   (forall a. a IN f ==> (UNIONS f DIFF a) IN f) /\\\n   (forall s. s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f)
+  forall(f:(A->bool)->bool) a. a IN f ==> a SUBSET UNIONS f
+  forall(f:(A->bool)->bool). sigma_algebra f ==> UNIONS f IN f
   {}:A->bool = UNIONS f DIFF UNIONS f
-  !(f:(A->bool)->bool). sigma_algebra f ==> {} IN f
-  !(f:(A->bool)->bool) a.\n      sigma_algebra f /\\ a IN f ==> (UNIONS f DIFF a) IN f
-  !(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f
+  forall(f:(A->bool)->bool). sigma_algebra f ==> {} IN f
+  forall(f:(A->bool)->bool) a.\n      sigma_algebra f /\\ a IN f ==> (UNIONS f DIFF a) IN f
+  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s ==> UNIONS s IN f
   (a:A->bool) UNION b = UNIONS {a, b}
-  !(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a UNION b) IN f
+  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a UNION b) IN f
   b:A->bool
   f:(A->bool)->bool
   a:A->bool
   f:(A->bool)->bool
   (a:A->bool) INTER b =\n     UNIONS f DIFF ((UNIONS f DIFF a) UNION (UNIONS f DIFF b))
-  !(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a INTER b) IN f
+  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a INTER b) IN f
   a:A->bool
   f:(A->bool)->bool
   (a:A->bool) DIFF b = a INTER (UNIONS f DIFF b)
-  !(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a DIFF b) IN f
-  !(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s ==> UNIONS s IN f
+  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f ==> (a DIFF b) IN f
+  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s ==> UNIONS s IN f
   x:A
-  !(u:A->bool) s.\n      ~(s = {}) /\\ (!a. a IN s ==> a SUBSET u)\n      ==> INTERS s = u DIFF UNIONS (IMAGE (\\a. u DIFF a) s)
+  forall(u:A->bool) s.\n      ~(s = {}) /\\ (forall a. a IN s ==> a SUBSET u)\n      ==> INTERS s = u DIFF UNIONS (IMAGE (\\a. u DIFF a) s)
   INTERS s :A->bool = UNIONS f DIFF UNIONS (IMAGE (\\a. UNIONS f DIFF a) s)
-  !(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s /\\ ~(s = {})\n      ==> INTERS s IN f
+  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ FINITE s /\\ ~(s = {})\n      ==> INTERS s IN f
   INTERS s :A->bool = UNIONS f DIFF UNIONS (IMAGE (\\a. UNIONS f DIFF a) s)
-  !(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN f
-  !(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f\n      ==> ((a DIFF b) UNION (b DIFF a)) IN f
+  forall(f:(A->bool)->bool) s.\n      sigma_algebra f /\\ s SUBSET f /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN f
+  forall(f:(A->bool)->bool) a b.\n      sigma_algebra f /\\ a IN f /\\ b IN f\n      ==> ((a DIFF b) UNION (b DIFF a)) IN f
   (x:A->bool) IN s ==> x SUBSET UNIONS s
   UNIONS {s:A->bool | borel_in top s} = topspace top
-  !top:A topology. sigma_algebra {s | borel_in top s}
+  forall top:A topology. sigma_algebra {s | borel_in top s}
   ~({}:A->bool = {ARB:A})
   UNIONS {(A:num->A->bool) n | n IN (:num)} = {}
-  !n:num. (A:num->A->bool) n = {}
+  forall n:num. (A:num->A->bool) n = {}
   ~({}:A->bool = {ARB:A})
   x:num
   x:num
@@ -80007,11 +80007,11 @@ Probability/measure quotations (568):
   n:num
   n:num
   n:num
-  !n:num. ~(n = k) ==> (A:num->A->bool) n = {}
+  forall n:num. ~(n = k) ==> (A:num->A->bool) n = {}
   k:num
   ?k:num. (A:num->A->bool) k = {ARB:A}
-  !n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
-  !n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
+  forall n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
+  forall n:num. (A:num->A->bool) n = {} \\/ A n = {ARB:A}
   ~({}:A->bool = {ARB:A})
   (UNIONS s:A->bool) = {} \\/ UNIONS s = {ARB:A}
   UNIONS {({ARB:A}):A->bool, ({}:A->bool)}
@@ -80019,31 +80019,31 @@ Probability/measure quotations (568):
   {ARB:A} DIFF {ARB:A} = {}
   (\\a:A->bool. if a = {ARB:A} then &1 else &0)
   {({ARB:A}):A->bool, ({}:A->bool)}
-  ?ev:((A->bool)->bool) p:((A->bool)->real).\n          sigma_algebra ev /\\\n          (!a. a IN ev ==> &0 <= p a) /\\\n          p (UNIONS ev) = &1 /\\\n          p {} = &0 /\\\n          (!A:num->A->bool.\n             (!n. A n IN ev) /\\\n             (!i j. ~(i = j) ==> DISJOINT (A i) (A j))\n             ==> ((\\n. p(A n)) real_sums\n                  p(UNIONS {A n | n IN (:num)})) (from 0))
+  ?ev:((A->bool)->bool) p:((A->bool)->real).\n          sigma_algebra ev /\\\n          (forall a. a IN ev ==> &0 <= p a) /\\\n          p (UNIONS ev) = &1 /\\\n          p {} = &0 /\\\n          (forall A:num->A->bool.\n             (forall n. A n IN ev) /\\\n             (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n             ==> ((\\n. p(A n)) real_sums\n                  p(UNIONS {A n | n IN (:num)})) (from 0))
   ~(n:num = k)
   ~(n:num = k)
   prob_events (p:(A)prob_space) = FST(prob_space_operations p)
   prob (p:(A)prob_space) = SND(prob_space_operations p)
   prob_carrier (p:(A)prob_space) = UNIONS(prob_events p)
-  (!a. mk(dest a) = a) /\\ (!r. P r <=> dest(mk r) = r)\n   ==> !a. P(dest a)
+  (forall a. mk(dest a) = a) /\\ (forall r. P r <=> dest(mk r) = r)\n   ==> forall a. P(dest a)
   p:A prob_space
-  !p:A prob_space. sigma_algebra (prob_events p)
+  forall p:A prob_space. sigma_algebra (prob_events p)
   p:A prob_space
-  !p:A prob_space a. a IN prob_events p ==> &0 <= prob p a
+  forall p:A prob_space a. a IN prob_events p ==> &0 <= prob p a
   p:A prob_space
-  !p:A prob_space. prob p (prob_carrier p) = &1
+  forall p:A prob_space. prob p (prob_carrier p) = &1
   p:A prob_space
-  !p:A prob_space. prob p {} = &0
+  forall p:A prob_space. prob p {} = &0
   p:A prob_space
-  !p:A prob_space A.\n      (!n. A n IN prob_events p) /\\\n      (!i j. ~(i = j) ==> DISJOINT (A i) (A j))\n      ==> ((\\n. prob p (A n)) real_sums\n           prob p (UNIONS {A n | n IN (:num)})) (from 0)
+  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n      ==> ((\\n. prob p (A n)) real_sums\n           prob p (UNIONS {A n | n IN (:num)})) (from 0)
   p:A prob_space
-  !p:A prob_space. prob_carrier p IN prob_events p
-  !p:A prob_space. {} IN prob_events p
-  !p:A prob_space a. a IN prob_events p\n      ==> (prob_carrier p DIFF a) IN prob_events p
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a UNION b) IN prob_events p
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a INTER b) IN prob_events p
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a DIFF b) IN prob_events p
-  !p:A prob_space a. a IN prob_events p ==> a SUBSET prob_carrier p
+  forall p:A prob_space. prob_carrier p IN prob_events p
+  forall p:A prob_space. {} IN prob_events p
+  forall p:A prob_space a. a IN prob_events p\n      ==> (prob_carrier p DIFF a) IN prob_events p
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a UNION b) IN prob_events p
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a INTER b) IN prob_events p
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> (a DIFF b) IN prob_events p
+  forall p:A prob_space a. a IN prob_events p ==> a SUBSET prob_carrier p
   ~(i = 0) /\\ ~(i = 1)
   i:num
   sum (2..N) (\\n. prob (p:A prob_space)\n     (if n = 0 then a else if n = 1 then b else ({}:A->bool))) = &0
@@ -80072,23 +80072,23 @@ Probability/measure quotations (568):
   n:num
   (\\n. if n = 0 then a\n                       else if n = 1 then b\n                       else ({}:A->bool)):num->A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n      ==> prob p (a UNION b) = prob p a + prob p b
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n      ==> prob p (a UNION b) = prob p a + prob p b
   prob_carrier p = a UNION (prob_carrier p DIFF a:A->bool)
   prob p (prob_carrier p:A->bool) =\n      prob p a + prob p (prob_carrier p DIFF a)
   a:A->bool SUBSET prob_carrier p
-  !p:A prob_space a.\n      a IN prob_events p ==> prob p (prob_carrier p DIFF a) = &1 - prob p a
+  forall p:A prob_space a.\n      a IN prob_events p ==> prob p (prob_carrier p DIFF a) = &1 - prob p a
   &0 <= y ==> &1 = x + y ==> x <= &1
   &1 = prob p a + prob p (prob_carrier p DIFF a:A->bool)
-  !p:A prob_space a. a IN prob_events p ==> prob p a <= &1
+  forall p:A prob_space a. a IN prob_events p ==> prob p a <= &1
   &0 <= y ==> x <= x + y
   prob p (a UNION (b DIFF a):A->bool) = prob p a + prob p (b DIFF a)
   b = a UNION (b DIFF a:A->bool)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p a <= prob p b
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p a <= prob p b
   b = (a INTER b) UNION (b DIFF a):A->bool
   prob p (b:A->bool) = prob p (a INTER b) + prob p (b DIFF a)
   prob p (a UNION (b DIFF a):A->bool) = prob p a + prob p (b DIFF a)
   a UNION b = a UNION (b DIFF a):A->bool
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) = prob p a + prob p b - prob p (a INTER b)
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) = prob p a + prob p b - prob p (a INTER b)
   ((a:A->bool) INTER b) INTER (a INTER c) = a INTER (b INTER c)
   a INTER c:A->bool
   a INTER b:A->bool
@@ -80100,57 +80100,57 @@ Probability/measure quotations (568):
   b UNION c:A->bool
   a:A->bool
   p:A prob_space
-  !p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) =\n          prob p a + prob p b + prob p c -\n          prob p (a INTER b) - prob p (a INTER c) - prob p (b INTER c) +\n          prob p (a INTER b INTER c)
+  forall p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) =\n          prob p a + prob p b + prob p c -\n          prob p (a INTER b) - prob p (a INTER c) - prob p (b INTER c) +\n          prob p (a INTER b INTER c)
   &0 <= z ==> x + y - z <= x + y
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) <= prob p a + prob p b
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a UNION b) <= prob p a + prob p b
   &0 <= ac /\\ &0 <= bc /\\ abc <= ab\n      ==> a + b + c - ab - ac - bc + abc <= a + b + c
-  !p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) <= prob p a + prob p b + prob p c
+  forall p:A prob_space a b c.\n      a IN prob_events p /\\ b IN prob_events p /\\ c IN prob_events p\n      ==> prob p (a UNION b UNION c) <= prob p a + prob p b + prob p c
   \\s:A->bool. s IN prob_events p
-  !p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) =\n          sum {B | B SUBSET A /\\ ~(B = {})}\n              (\\B. (-- &1) pow (CARD B + 1) * prob p (INTERS B))
+  forall p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) =\n          sum {B | B SUBSET A /\\ ~(B = {})}\n              (\\B. (-- &1) pow (CARD B + 1) * prob p (INTERS B))
   prob p (x:A->bool) + prob p (UNIONS A)
-  !p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) <= sum A (prob p)
+  forall p:A prob_space A.\n      FINITE A /\\ A SUBSET prob_events p\n      ==> prob p (UNIONS A) <= sum A (prob p)
   prob p ((a INTER b) UNION (a DIFF b):A->bool) =\n      prob p (a INTER b) + prob p (a DIFF b)
   a:A->bool = (a INTER b) UNION (a DIFF b)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a DIFF b) = prob p a - prob p (a INTER b)
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p (a DIFF b) = prob p a - prob p (a INTER b)
   prob (p:A prob_space)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p (b DIFF a) = prob p b - prob p a
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ a SUBSET b\n      ==> prob p (b DIFF a) = prob p b - prob p a
   p:A prob_space
-  !p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s\n      ==> UNIONS s IN prob_events p
-  !p:A prob_space s.\n      s SUBSET prob_events p /\\ FINITE s\n      ==> UNIONS s IN prob_events p
+  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s\n      ==> UNIONS s IN prob_events p
+  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ FINITE s\n      ==> UNIONS s IN prob_events p
   INTERS s:A->bool =\n      prob_carrier p DIFF UNIONS (IMAGE (\\a. prob_carrier p DIFF a) s)
-  !p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN prob_events p
+  forall p:A prob_space s.\n      s SUBSET prob_events p /\\ COUNTABLE s /\\ ~(s = {})\n      ==> INTERS s IN prob_events p
   cond_prob (p:(A)prob_space) a b = prob p (a INTER b) / prob p b
   prob p ((b:A->bool) INTER a) / prob p a * prob p a =\n      prob p (b INTER a)
   prob p ((a:A->bool) INTER b) / prob p b * prob p b =\n      prob p (a INTER b)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      ~(prob p a = &0) /\\ ~(prob p b = &0)\n      ==> cond_prob p a b * prob p b = cond_prob p b a * prob p a
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> &0 <= cond_prob p a b /\\ cond_prob p a b <= &1
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      ~(prob p a = &0) /\\ ~(prob p b = &0)\n      ==> cond_prob p a b * prob p b = cond_prob p b a * prob p a
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> &0 <= cond_prob p a b /\\ cond_prob p a b <= &1
   c SUBSET prob_carrier (p:A prob_space)
   c:A->bool = (c INTER a) UNION (c INTER b)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      a UNION b = prob_carrier p /\\ DISJOINT a b\n      ==> !c. c IN prob_events p\n              ==> prob p c = prob p (c INTER a) + prob p (c INTER b)
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      a UNION b = prob_carrier p /\\ DISJOINT a b\n      ==> forall c. c IN prob_events p\n              ==> prob p c = prob p (c INTER a) + prob p (c INTER b)
   b:A->bool
   a:A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &0 /\\ prob p b = &0\n      ==> prob p (a UNION b) = &0
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &0 /\\ prob p b = &0\n      ==> prob p (a UNION b) = &0
   a UNION b:A->bool
   p:A prob_space
   b:A->bool
   a:A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &1 /\\ prob p b = &1\n      ==> prob p (a INTER b) = &1
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\\n      prob p a = &1 /\\ prob p b = &1\n      ==> prob p (a INTER b) = &1
   a:A->bool
   a INTER b:A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> prob p (a INTER b) = &0
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> prob p (a INTER b) = &0
   a UNION b:A->bool
   a:A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> prob p (a UNION b) = &1
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> prob p (a UNION b) = &1
   a UNION b:A->bool
   p:A prob_space
   b:A->bool
   a:A->bool
   p:A prob_space
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p a + prob p b - &1 <= prob p (a INTER b)
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p a + prob p b - &1 <= prob p (a INTER b)
   b INTER a = a INTER b:A->bool
   a:A->bool
   b:A->bool
@@ -80162,11 +80162,11 @@ Probability/measure quotations (568):
   a DIFF b:A->bool
   p:A prob_space
   DISJOINT (a DIFF b) (b DIFF a:A->bool)
-  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p ((a DIFF b) UNION (b DIFF a)) =\n          prob p a + prob p b - &2 * prob p (a INTER b)
-  signed_measure (p:A prob_space) (mu:(A->bool)->real) <=>\n   mu {} = &0 /\\\n   (!A. (!n. A n IN prob_events p) /\\\n        (!i j. ~(i = j) ==> DISJOINT (A i) (A j))\n        ==> ((\\n. mu(A n)) real_sums mu(UNIONS {A n | n IN (:num)})) (from 0))
-  positive_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (!B. B IN prob_events p /\\ B SUBSET A ==> &0 <= mu B)
-  negative_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (!B. B IN prob_events p /\\ B SUBSET A ==> mu B <= &0)
-  !p:A prob_space mu. signed_measure p mu ==> mu {} = &0
+  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p\n      ==> prob p ((a DIFF b) UNION (b DIFF a)) =\n          prob p a + prob p b - &2 * prob p (a INTER b)
+  signed_measure (p:A prob_space) (mu:(A->bool)->real) <=>\n   mu {} = &0 /\\\n   (forall A. (forall n. A n IN prob_events p) /\\\n        (forall i j. ~(i = j) ==> DISJOINT (A i) (A j))\n        ==> ((\\n. mu(A n)) real_sums mu(UNIONS {A n | n IN (:num)})) (from 0))
+  positive_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (forall B. B IN prob_events p /\\ B SUBSET A ==> &0 <= mu B)
+  negative_set (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) <=>\n   A IN prob_events p /\\\n   (forall B. B IN prob_events p /\\ B SUBSET A ==> mu B <= &0)
+  forall p:A prob_space mu. signed_measure p mu ==> mu {} = &0
   ~(i = 0) /\\ ~(i = 1)
   i:num
   sum (2..N) (\\n. (mu:(A->bool)->real)\n    (if n = 0 then a else if n = 1 then b else ({}:A->bool))) = &0
@@ -80194,21 +80194,21 @@ Probability/measure quotations (568):
   i:num
   n:num
   (\\n. if n = 0 then a\n          else if n = 1 then b\n          else ({}:A->bool)):num->A->bool
-  !p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n     ==> mu(a UNION b) = mu a + mu b
+  forall p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ DISJOINT a b\n     ==> mu(a UNION b) = mu a + mu b
   b UNION (a DIFF b) = a:A->bool
   a DIFF b:A->bool
   b:A->bool
   mu:(A->bool)->real
   p:A prob_space
-  !p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n     ==> mu(a DIFF b) = mu a - mu b
+  forall p:A prob_space mu a b.\n     signed_measure p mu /\\\n     a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n     ==> mu(a DIFF b) = mu a - mu b
   p:A prob_space
-  !p:A prob_space. signed_measure p (prob p)
+  forall p:A prob_space. signed_measure p (prob p)
   B = {}:A->bool
-  !p:A prob_space mu. signed_measure p mu ==> positive_set p mu {}
+  forall p:A prob_space mu. signed_measure p mu ==> positive_set p mu {}
   B = {}:A->bool
-  !p:A prob_space mu. signed_measure p mu ==> negative_set p mu {}
-  !p:A prob_space mu A B.\n     positive_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> positive_set p mu B
-  !p:A prob_space mu A B.\n     negative_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> negative_set p mu B
+  forall p:A prob_space mu. signed_measure p mu ==> negative_set p mu {}
+  forall p:A prob_space mu A B.\n     positive_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> positive_set p mu B
+  forall p:A prob_space mu A B.\n     negative_set p mu A /\\ B IN prob_events p /\\ B SUBSET A\n     ==> negative_set p mu B
   B' INTER (B DIFF A) SUBSET B:A->bool
   B' INTER A SUBSET A:A->bool
   B' INTER (B DIFF A):A->bool
@@ -80218,7 +80218,7 @@ Probability/measure quotations (568):
   B' INTER (B DIFF A) IN prob_events (p:A prob_space)
   B' INTER A IN prob_events (p:A prob_space)
   B' = (B' INTER A) UNION (B' INTER (B DIFF A)):A->bool
-  !p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\ positive_set p mu B\n     ==> positive_set p mu (A UNION B)
+  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\ positive_set p mu B\n     ==> positive_set p mu (A UNION B)
   B' INTER (B DIFF A) SUBSET B:A->bool
   B' INTER A SUBSET A:A->bool
   a <= &0 /\\ b <= &0 ==> a + b <= &0
@@ -80229,8 +80229,8 @@ Probability/measure quotations (568):
   B' INTER (B DIFF A) IN prob_events (p:A prob_space)
   B' INTER A IN prob_events (p:A prob_space)
   B' = (B' INTER A) UNION (B' INTER (B DIFF A)):A->bool
-  !p:A prob_space mu A B.\n     signed_measure p mu /\\ negative_set p mu A /\\ negative_set p mu B\n     ==> negative_set p mu (A UNION B)
-  !p:A prob_space A n.\n     (!m. A m IN prob_events p)\n     ==> UNIONS(IMAGE A (0..n)) IN prob_events p
+  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ negative_set p mu A /\\ negative_set p mu B\n     ==> negative_set p mu (A UNION B)
+  forall p:A prob_space A n.\n     (forall m. A m IN prob_events p)\n     ==> UNIONS(IMAGE A (0..n)) IN prob_events p
   mu(B:A->bool):real
   &0:real
   from 0
@@ -80238,8 +80238,8 @@ Probability/measure quotations (568):
   \\n:num. &0:real
   D:num->A->bool
   n:num
-  !n:num. &0 <= mu((D:num->A->bool) n)
-  !n. (D:num->A->bool) n SUBSET A n
+  forall n:num. &0 <= mu((D:num->A->bool) n)
+  forall n. (D:num->A->bool) n SUBSET A n
   r:num
   r:num
   \\n:num. (x:A) IN A n
@@ -80256,27 +80256,27 @@ Probability/measure quotations (568):
   x:A
   j:num
   i:num
-  !i j. ~(i = j) ==> DISJOINT ((D:num->A->bool) i) (D j)
+  forall i j. ~(i = j) ==> DISJOINT ((D:num->A->bool) i) (D j)
   IMAGE (A:num->A->bool) {j:num | j < n}
   n:num
-  !n:num. (D:num->A->bool) n IN prob_events p
+  forall n:num. (D:num->A->bool) n IN prob_events p
   D = \\n:num. B INTER ((A:num->A->bool) n DIFF\n                  UNIONS {A j | j:num < n}):A->bool
-  !n:num. (A:num->A->bool) n IN prob_events p
-  !p:A prob_space mu A.\n     signed_measure p mu /\\ (!n. positive_set p mu (A n))\n     ==> positive_set p mu (UNIONS {A n | n IN (:num)})
+  forall n:num. (A:num->A->bool) n IN prob_events p
+  forall p:A prob_space mu A.\n     signed_measure p mu /\\ (forall n. positive_set p mu (A n))\n     ==> positive_set p mu (UNIONS {A n | n IN (:num)})
   (minimal) (\\n:num. (x:A) IN A n)
   &0 <= mu(A DIFF B:A->bool)
   B:A->bool
   A:A->bool
   mu:(A->bool)->real
   p:A prob_space
-  !p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\\n     B IN prob_events p /\\ B SUBSET A\n     ==> &0 <= mu B /\\ mu B <= mu A
+  forall p:A prob_space mu A B.\n     signed_measure p mu /\\ positive_set p mu A /\\\n     B IN prob_events p /\\ B SUBSET A\n     ==> &0 <= mu B /\\ mu B <= mu A
   ~(n = 0) ==> 1 <= n
   &(n - 1 + 1) = &n
   B:A->bool
   n - 1
   n:num
   &0 < --((mu:(A->bool)->real) B)
-  !p:A prob_space mu S.\n     S IN prob_events p /\\ ~(positive_set p mu S)\n     ==> ?k D:A->bool. D IN prob_events p /\\ D SUBSET S /\\\n         (mu:(A->bool)->real) D <= --inv(&(k + 1))
+  forall p:A prob_space mu S.\n     S IN prob_events p /\\ ~(positive_set p mu S)\n     ==> ?k D:A->bool. D IN prob_events p /\\ D SUBSET S /\\\n         (mu:(A->bool)->real) D <= --inv(&(k + 1))
   N:num
   N:num
   N:num
@@ -80292,7 +80292,7 @@ Probability/measure quotations (568):
   ?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n      C SUBSET (R:num->A->bool) n /\\\n      (mu:(A->bool)->real) C <= --inv(&(k + 1))
   n:num
   (C:num->A->bool) n = R n DIFF R(SUC n)
-  !n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= --inv(&m)
+  forall n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= --inv(&m)
   ~(m = 0) ==> 1 <= m
   &(m - 1 + 1) = &m
   E:A->bool
@@ -80302,17 +80302,17 @@ Probability/measure quotations (568):
   E:A->bool
   m - 1
   \\k:num. ?D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&(k + 1))
-  !n:num. (minimal)(\\k. ?D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&(k + 1))) <= m - 1
+  forall n:num. (minimal)(\\k. ?D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&(k + 1))) <= m - 1
   ~(m = 0) ==> 1 <= m
   &(m - 1 + 1) = &m
   E:A->bool
   m - 1
-  !n:num. hasneg((R:num->A->bool) n):bool
+  forall n:num. hasneg((R:num->A->bool) n):bool
   (mu:(A->bool)->real) E <= --inv(&m)
   m:num
   &0 < --((mu:(A->bool)->real) E)
   A DIFF UC:A->bool
-  !n:num. (E:A->bool) SUBSET (R:num->A->bool) n
+  forall n:num. (E:A->bool) SUBSET (R:num->A->bool) n
   E:A->bool
   A DIFF UC:A->bool
   UC:A->bool
@@ -80334,14 +80334,14 @@ Probability/measure quotations (568):
   hasneg((R:num->A->bool) n):bool
   n:num
   (C:num->A->bool) n = R n DIFF R(SUC n)
-  !n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= &0
+  forall n:num. (mu:(A->bool)->real)((C:num->A->bool) n) <= &0
   (C:num->A->bool) n = R n DIFF R(SUC n)
   n:num
   ~((x:A) IN UC:A->bool)
   (x:A) IN R(SUC n):A->bool
   (x:A) IN R(n:num)
   x:A
-  !n:num. A DIFF UC SUBSET (R:num->A->bool) n
+  forall n:num. A DIFF UC SUBSET (R:num->A->bool) n
   A DIFF UC IN prob_events (p:A prob_space)
   UC SUBSET A:A->bool
   (UC:A->bool) IN prob_events p
@@ -80349,7 +80349,7 @@ Probability/measure quotations (568):
   C:num->A->bool
   ((\\n. (mu:(A->bool)->real)((C:num->A->bool) n))\n      real_sums mu(UNIONS {C n | n IN (:num)})) (from 0)
   (R:num->A->bool) n
-  !n:num. (C:num->A->bool) n SUBSET A
+  forall n:num. (C:num->A->bool) n SUBSET A
   i:num
   SUC j
   j:num
@@ -80358,43 +80358,43 @@ Probability/measure quotations (568):
   i:num
   ~((a /\\ ~b) /\\ c /\\ ~d) <=> a /\\ c ==> b \\/ d
   x:A
-  !i j:num. ~(i = j) ==> DISJOINT ((C:num->A->bool) i) (C j)
-  !n:num. (C:num->A->bool) n IN prob_events p
+  forall i j:num. ~(i = j) ==> DISJOINT ((C:num->A->bool) i) (C j)
+  forall n:num. (C:num->A->bool) n IN prob_events p
   C = \\n:num. (R:num->A->bool) n DIFF R(SUC n)
   (R:num->A->bool) n
-  !m n:num. m <= n ==> (R:num->A->bool) n SUBSET R m
-  !n:num. (R:num->A->bool)(SUC n) SUBSET R n
+  forall m n:num. m <= n ==> (R:num->A->bool) n SUBSET R m
+  forall n:num. (R:num->A->bool)(SUC n) SUBSET R n
   (R:num->A->bool) n
   hasneg((R:num->A->bool) n):bool
-  !n:num. (R:num->A->bool) n IN prob_events p /\\ R n SUBSET A
+  forall n:num. (R:num->A->bool) n IN prob_events p /\\ R n SUBSET A
   E:A->bool
   \\D:A->bool. D IN prob_events (p:A prob_space) /\\\n       D SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) D <= --inv(&((minimal)\n         (\\k:num. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n               mu E <= --inv(&(k + 1))) + 1))
   \\k:num. ?E:A->bool. E IN prob_events (p:A prob_space) /\\\n       E SUBSET (R:num->A->bool) n /\\\n       (mu:(A->bool)->real) E <= --inv(&(k + 1))
-  !n:num. (hasneg:(A->bool)->bool)((R:num->A->bool) n)\n     ==> (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           (mu:(A->bool)->real) D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         IN prob_events p /\\\n         (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           mu D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         SUBSET R n /\\\n         mu(@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n              mu D <= --inv(&((minimal)\n                (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                      mu E <= --inv(&(k + 1))) + 1)))\n         <= --inv(&((minimal)\n              (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                    mu E <= --inv(&(k + 1))) + 1))
+  forall n:num. (hasneg:(A->bool)->bool)((R:num->A->bool) n)\n     ==> (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           (mu:(A->bool)->real) D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         IN prob_events p /\\\n         (@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n           mu D <= --inv(&((minimal)\n             (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                   mu E <= --inv(&(k + 1))) + 1)))\n         SUBSET R n /\\\n         mu(@D:A->bool. D IN prob_events p /\\ D SUBSET R n /\\\n              mu D <= --inv(&((minimal)\n                (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                      mu E <= --inv(&(k + 1))) + 1)))\n         <= --inv(&((minimal)\n              (\\k. ?E:A->bool. E IN prob_events p /\\ E SUBSET R n /\\\n                    mu E <= --inv(&(k + 1))) + 1))
   hasneg = \\S:A->bool.\n       ?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n       C SUBSET S /\\ (mu:(A->bool)->real) C <= --inv(&(k + 1))
   R:num->A->bool
   \\(S:A->bool) (n:num).\n       if (?k:num. ?C:A->bool. C IN prob_events (p:A prob_space) /\\\n           C SUBSET S /\\ (mu:(A->bool)->real) C <= --inv(&(k + 1)))\n       then S DIFF (@D:A->bool. D IN prob_events p /\\ D SUBSET S /\\\n                    mu D <= --inv(&((minimal)\n                      (\\k:num. ?E:A->bool. E IN prob_events p /\\\n                               E SUBSET S /\\ mu E <= --inv(&(k + 1))) + 1)))\n       else S
   A:A->bool
   A:A->bool
   positive_set (p:A prob_space) mu (A:A->bool)
-  !p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p /\\ &0 < mu A\n     ==> ?B. B IN prob_events p /\\ B SUBSET A /\\\n             positive_set p mu B /\\ &0 < mu B
+  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p /\\ &0 < mu A\n     ==> ?B. B IN prob_events p /\\ B SUBSET A /\\\n             positive_set p mu B /\\ &0 < mu B
   (mu:(A->bool)->real)(P:A->bool) <= &N
   N:num
   N:num
   (mu:(A->bool)->real)(P:A->bool)
   (mu:(A->bool)->real)((E:num->A->bool) n)
-  !n:num. &n < (mu:(A->bool)->real)(P:A->bool)
+  forall n:num. &n < (mu:(A->bool)->real)(P:A->bool)
   (E:num->A->bool) n
   P:A->bool
   mu:(A->bool)->real
   p:A prob_space
-  !n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <=\n    mu(P:A->bool)
+  forall n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <=\n    mu(P:A->bool)
   positive_set (p:A prob_space) mu P
   P = UNIONS {(E:num->A->bool) n | n IN (:num)}
   E:num->A->bool
-  !n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n    &n < mu E
+  forall n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n    &n < mu E
   (~p ==> F) ==> p
-  !p:A prob_space mu. signed_measure p mu\n     ==> ?B. !E:A->bool. positive_set p mu E ==> mu E <= B
+  forall p:A prob_space mu. signed_measure p mu\n     ==> ?B. forall E:A->bool. positive_set p mu E ==> mu E <= B
   (P:A->bool) SUBSET prob_carrier p
   &0 < (mu:(A->bool)->real)(Q:A->bool)
   (mu:(A->bool)->real)(P:A->bool) = s
@@ -80426,7 +80426,7 @@ Probability/measure quotations (568):
   P:A->bool
   mu:(A->bool)->real
   p:A prob_space
-  !n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <= mu(P:A->bool)
+  forall n:num. (mu:(A->bool)->real)((E:num->A->bool) n) <= mu(P:A->bool)
   a <= b /\\ b <= a ==> a = b
   (mu:(A->bool)->real) P = s
   UNIONS {(E:num->A->bool) n | n IN (:num)} =\n     UNIONS {(Pn:num->A->bool) n | n IN (:num)}
@@ -80435,26 +80435,26 @@ Probability/measure quotations (568):
   x:A
   UNIONS {(Pn:num->A->bool) n | n IN (:num)} =\n     UNIONS {(E:num->A->bool) n | n IN (:num)}
   UNIONS(IMAGE (E:num->A->bool) (0..n)) = (Pn:num->A->bool) n
-  !n:num. positive_set (p:A prob_space) mu ((Pn:num->A->bool) n)
+  forall n:num. positive_set (p:A prob_space) mu ((Pn:num->A->bool) n)
   Pn = \\n:num. UNIONS(IMAGE (E:num->A->bool) (0..n))
   E:num->A->bool
   s - x < s <=> &0 < x
   s - inv(&(n + 1)) < s
   s - inv(&(n + 1))
   {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}
-  !n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n      s - inv(&(n + 1)) < mu E
+  forall n:num. ?E:A->bool. positive_set (p:A prob_space) mu E /\\\n      s - inv(&(n + 1)) < mu E
   &0 <= s
-  !E:A->bool. positive_set (p:A prob_space) mu E ==> mu E <= s
+  forall E:A->bool. positive_set (p:A prob_space) mu E ==> mu E <= s
   B:real
   B:real
   mu:(A->bool)->real
   p:A prob_space
-  ?B. !x:real. x IN {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}\n    ==> x <= B
+  ?B. forall x:real. x IN {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}\n    ==> x <= B
   {}:A->bool
   &0
   ~({mu(E:A->bool) | E | positive_set (p:A prob_space) mu E} = {})
   s = sup {mu(E:A->bool) | E | positive_set (p:A prob_space) mu E}
-  !p:A prob_space mu.\n     signed_measure p mu\n     ==> ?P N. positive_set p mu P /\\ negative_set p mu N /\\\n               DISJOINT P N /\\ P UNION N = prob_carrier p
+  forall p:A prob_space mu.\n     signed_measure p mu\n     ==> ?P N. positive_set p mu P /\\ negative_set p mu N /\\\n               DISJOINT P N /\\ P UNION N = prob_carrier p
   hahn_pos_set (p:A prob_space) (mu:(A->bool)->real) =\n   @P. positive_set p mu P /\\\n       negative_set p mu (prob_carrier p DIFF P) /\\\n       P SUBSET prob_carrier p
   prob_carrier (p:A prob_space) DIFF P = N:A->bool
   P:A->bool
@@ -80462,16 +80462,16 @@ Probability/measure quotations (568):
   P:A->bool
   mu:(A->bool)->real
   p:A prob_space
-  !p:A prob_space mu. signed_measure p mu\n     ==> positive_set p mu (hahn_pos_set p mu) /\\\n         negative_set p mu (prob_carrier p DIFF hahn_pos_set p mu) /\\\n         hahn_pos_set p mu SUBSET prob_carrier p
+  forall p:A prob_space mu. signed_measure p mu\n     ==> positive_set p mu (hahn_pos_set p mu) /\\\n         negative_set p mu (prob_carrier p DIFF hahn_pos_set p mu) /\\\n         hahn_pos_set p mu SUBSET prob_carrier p
   jordan_pos (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) =\n   mu(A INTER hahn_pos_set p mu)
   jordan_neg (p:A prob_space) (mu:(A->bool)->real) (A:A->bool) =\n   --(mu(A INTER (prob_carrier p DIFF hahn_pos_set p mu)))
   mu:(A->bool)->real
   p:A prob_space
-  !p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_pos p mu A
+  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_pos p mu A
   mu:(A->bool)->real
   p:A prob_space
   &0 <= --x <=> x <= &0
-  !p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_neg p mu A
+  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> &0 <= jordan_neg p mu A
   p:A prob_space
   (A:A->bool) SUBSET prob_carrier p
   (A:A->bool) = (A INTER P) UNION (A INTER (prob_carrier p DIFF P))
@@ -80480,12 +80480,12 @@ Probability/measure quotations (568):
   P = hahn_pos_set (p:A prob_space) mu
   mu:(A->bool)->real
   p:A prob_space
-  !p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> mu A = jordan_pos p mu A - jordan_neg p mu A
-  absolutely_continuous (p:A prob_space) (mu:(A->bool)->real) <=>\n   signed_measure p mu /\\\n   (!A. A IN prob_events p /\\ prob p A = &0 ==> mu A = &0)
+  forall p:A prob_space mu A.\n     signed_measure p mu /\\ A IN prob_events p\n     ==> mu A = jordan_pos p mu A - jordan_neg p mu A
+  absolutely_continuous (p:A prob_space) (mu:(A->bool)->real) <=>\n   signed_measure p mu /\\\n   (forall A. A IN prob_events p /\\ prob p A = &0 ==> mu A = &0)
   prob (p:A prob_space) A = &0
   prob (p:A prob_space) B <= prob p A
   &0 <= prob (p:A prob_space) B
-  !p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> !B. B IN prob_events p /\\ B SUBSET A ==> mu B = &0
+  forall p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> forall B. B IN prob_events p /\\ B SUBSET A ==> mu B = &0
   prob (p:A prob_space) A = &0
   prob (p:A prob_space)\n       (A INTER (prob_carrier p DIFF hahn_pos_set p mu)) <= prob p A
   &0 <= prob (p:A prob_space)\n       (A INTER (prob_carrier p DIFF hahn_pos_set p mu))
@@ -80500,7 +80500,7 @@ Probability/measure quotations (568):
   mu:(A->bool)->real
   p:A prob_space
   (mu:(A->bool)->real)(A INTER hahn_pos_set p mu) = &0
-  !p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> jordan_pos p mu A = &0 /\\ jordan_neg p mu A = &0
+  forall p:A prob_space mu A.\n     absolutely_continuous p mu /\\ A IN prob_events p /\\ prob p A = &0\n     ==> jordan_pos p mu A = &0 /\\ jordan_neg p mu A = &0
   j:num
   i:num
   \\n:num. (A:num->A->bool) n INTER H
@@ -80509,7 +80509,7 @@ Probability/measure quotations (568):
   H = hahn_pos_set (p:A prob_space) mu
   A:num->A->bool
   {} INTER hahn_pos_set (p:A prob_space) mu = {}:A->bool
-  !p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_pos p mu)
+  forall p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_pos p mu)
   j:num
   i:num
   \\n:num. (A:num->A->bool) n INTER N
@@ -80518,18 +80518,18 @@ Probability/measure quotations (568):
   N = prob_carrier (p:A prob_space) DIFF hahn_pos_set p mu
   A:num->A->bool
   (mu:(A->bool)->real) {} = &0
-  !p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_neg p mu)
+  forall p:A prob_space mu. signed_measure p mu\n     ==> signed_measure p (jordan_neg p mu)
   prob (p:A prob_space) A = &0
   prob (p:A prob_space) (A INTER hahn_pos_set p mu)\n     <= prob p A
   &0 <= prob (p:A prob_space)\n     (A INTER hahn_pos_set p mu)
   (A:A->bool) INTER hahn_pos_set p mu IN prob_events p
-  !p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_pos p mu)
+  forall p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_pos p mu)
   prob (p:A prob_space) A = &0
   prob (p:A prob_space)\n     (A INTER (prob_carrier p DIFF hahn_pos_set p mu)) <= prob p A
   &0 <= prob (p:A prob_space)\n     (A INTER (prob_carrier p DIFF hahn_pos_set p mu))
   (A:A->bool) INTER (prob_carrier p DIFF hahn_pos_set p mu)\n     IN prob_events p
   --x = &0 <=> x = &0
-  !p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_neg p mu)
+  forall p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> absolutely_continuous p (jordan_neg p mu)
 sigma_algebra =  |- (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). ((#=:fun(bool,fun(bool,bool)) (#sigma_algebra:fun(fun(fun('A,bool),bool),bool) f:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) a:fun('A,bool))) f:fun(fun('A,bool),bool)))))) (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\s:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) s:fun(fun('A,bool),bool)) f:fun(fun('A,bool),bool))) (#COUNTABLE:fun(fun(fun('A,bool),bool),bool) s:fun(fun('A,bool),bool)))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) s:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool))))))))))
 SIGMA_ALGEBRA_SUBSET =  |- (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). (#!:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) a:fun('A,bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))))))))
 SIGMA_ALGEBRA_CARRIER =  |- (#!:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) (#sigma_algebra:fun(fun(fun('A,bool),bool),bool) f:fun(fun('A,bool),bool))) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) f:fun(fun('A,bool),bool))) f:fun(fun('A,bool),bool)))))

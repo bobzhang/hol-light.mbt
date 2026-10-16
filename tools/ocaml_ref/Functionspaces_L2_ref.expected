@@ -80232,18 +80232,18 @@ Generating HOL version of proof
 Functionspaces/L2 quotations (72):
   f complex_measurable_on s <=>  (\\x. Re (f x)) real_measurable_on s /\\\n   (\\x. Im (f x)) real_measurable_on s
   {f| f complex_measurable_on (:real) /\\\n  (\\x. norm (f x) pow 2) real_integrable_on (:real)}
-  ?s. !f. f IN s <=> f complex_measurable_on (:real) /\\ (\\x. norm (f x) pow 2)\n  real_integrable_on (:real)
+  ?s. forall f. f IN s <=> f complex_measurable_on (:real) /\\ (\\x. norm (f x) pow 2)\n  real_integrable_on (:real)
   r_inprod f g = complex(real_integral (:real) (\\x:real. Re (cnj (f x) * (g x))),\n real_integral (:real) (\\x. Im (cnj (f x) * (g x))) )
   A/\\B/\\C ==> Q <=> C ==> A /\\ B ==> Q 
   x <= i /\\ i <= x <=> i=(x:num)
   A/\\B/\\C ==> Q <=> C ==> A /\\ B ==> Q 
-  !f f' f'' x a b.\n     a < b /\\ x IN real_interval[a,b] /\\\n     (f has_real_derivative f') (atreal x within (real_interval[a,b])) /\\\n     (f has_real_derivative f'') (atreal x within (real_interval[a,b]))\n     ==> f' = f''
-  ?f.(?k. real_negligible k /\\ !x. ~(x IN k) ==> f x = Cx(&0))
-  is_almost_zero1 f = !a b. (?k. real_negligible k /\\ !x. x IN real_interval[a,b]\n  DIFF k ==> f x = Cx(&0))
+  forall f f' f'' x a b.\n     a < b /\\ x IN real_interval[a,b] /\\\n     (f has_real_derivative f') (atreal x within (real_interval[a,b])) /\\\n     (f has_real_derivative f'') (atreal x within (real_interval[a,b]))\n     ==> f' = f''
+  ?f.(?k. real_negligible k /\\ forall x. ~(x IN k) ==> f x = Cx(&0))
+  is_almost_zero1 f = forall a b. (?k. real_negligible k /\\ forall x. x IN real_interval[a,b]\n  DIFF k ==> f x = Cx(&0))
   ~(b <= a) ==> a <= b
-  !s. ~(s={}) ==> s SUBSET (:real)
+  forall s. ~(s={}) ==> s SUBSET (:real)
   x IN (:real)
-  !f. (!x. &0 <= f x) /\\ (f has_real_integral &0) (:real) ==>\n   !a b. (f has_real_integral &0) (real_interval[a,b])
+  forall f. (forall x. &0 <= f x) /\\ (f has_real_integral &0) (:real) ==>\n   forall a b. (f has_real_integral &0) (real_interval[a,b])
   &0
   &0 - &0 = &0
   &0
@@ -80253,28 +80253,28 @@ Functionspaces/L2 quotations (72):
   ~(a < b) /\\ (a <= x /\\ x <= b) /\\\n  ~(x = a) <=> F
   b:real
   a:real
-  (!a b. ?k. real_negligible k /\\\n          (!x. x IN real_interval [a,b] DIFF k\n               ==> ((\\x. &0) has_real_derivative norm ((f:real->complex) x) pow 2)\n                   (atreal x within real_interval [a,b]))) ==>\n                (!a b.\n      ?k. real_negligible k /\\\n          (!x. x IN real_interval [a,b] DIFF k ==> norm (f x) pow 2 = &0))
+  (forall a b. ?k. real_negligible k /\\\n          (forall x. x IN real_interval [a,b] DIFF k\n               ==> ((\\x. &0) has_real_derivative norm ((f:real->complex) x) pow 2)\n                   (atreal x within real_interval [a,b]))) ==>\n                (forall a b.\n      ?k. real_negligible k /\\\n          (forall x. x IN real_interval [a,b] DIFF k ==> norm (f x) pow 2 = &0))
   x IN (:real)
   P==>Q==>A <=> P/\\Q ==>A
-  !f. f IN sq_integrable ==> (r_inprod f f = Cx (&0) <=> is_almost_zero1  f)
+  forall f. f IN sq_integrable ==> (r_inprod f f = Cx (&0) <=> is_almost_zero1  f)
   s:real->bool
   s:real->bool
   x IN (:real)
-  !f g. is_almost_zero1 f ==> r_inprod g f = Cx(&0)
-  !x y. x IN sq_integrable  /\\ r_inprod x x = Cx(&0)\n     ==> r_inprod y x = Cx(&0)
+  forall f g. is_almost_zero1 f ==> r_inprod g f = Cx(&0)
+  forall x y. x IN sq_integrable  /\\ r_inprod x x = Cx(&0)\n     ==> r_inprod y x = Cx(&0)
   (a+b) pow 2 = a pow 2 + b pow 2 + &2 * a * b
   (a-b) pow 2 = a pow 2 + b pow 2 - &2 * a * b
-  !x. abs (x pow 2) = x pow 2
+  forall x. abs (x pow 2) = x pow 2
   (((a1:real)+b1)+a2+b2)-c1 = (a1+a2)+(b1+b2-c1)
   (((a1:real)+b1)+a2+b2)-c1 = (a1+a2-c1)+b1+b2
   ((a1:real)+b1+c1) + a2 + b2 + c2 = (a1+a2) + (b1+b2) + c1+ c2
   is_cfun_subspace sq_integrable
-  !f. f IN sq_integrable\n       ==> real (r_inprod f f) /\\\n                &0 <= real_of_complex (r_inprod f f)
+  forall f. f IN sq_integrable\n       ==> real (r_inprod f f) /\\\n                &0 <= real_of_complex (r_inprod f f)
   (((a1:real)+b1)+a2+b2)-c1 = (b1+a2-c1)+(b2+a1)
   x <=  inv (&2) * y <=> &2 * x  <= y
   (((a1:real)+b1)+a2+b2)-c1 = (a1+b2-c1)+(b1+a2)
   x <=  inv (&2) * y <=> &2 * x  <= y
-  !f g. f IN sq_integrable /\\ g IN sq_integrable\n    ==> cnj (r_inprod f g) = r_inprod g f
+  forall f g. f IN sq_integrable /\\ g IN sq_integrable\n    ==> cnj (r_inprod f g) = r_inprod g f
   (((a1:real)+b1)+a2+b2)-c1 = (b1+b2-c1)+(a2+a1)
   x <=  inv (&2) * y <=> &2 * x  <= y
   (((a1:real)+b1)+a2+b2)-c1 = (a1+a2-c1)+(b2+b1)
@@ -80283,7 +80283,7 @@ Functionspaces/L2 quotations (72):
   x <=  inv (&2) * y <=> &2 * x  <= y
   (((a1:real)+b1)+a2+b2)-c1 = (a1+b2-c1)+(b1+a2)
   x <=  inv (&2) * y <=> &2 * x  <= y
-  !f g a. f IN sq_integrable /\\ g IN sq_integrable\n    ==> r_inprod f (a%g) = a * r_inprod f g
+  forall f g a. f IN sq_integrable /\\ g IN sq_integrable\n    ==> r_inprod f (a%g) = a * r_inprod f g
   (((a1:real)+b1)+a2+b2)-c1 = (b1+b2-c1)+(a2+a1)
   x <=  inv (&2) * y <=> &2 * x  <= y
   (((a1:real)+b1)+a2+b2)-c1 = (a1+a2-c1)+(b2+b1)
@@ -80300,7 +80300,7 @@ Functionspaces/L2 quotations (72):
   x <=  inv (&2) * y <=> &2 * x  <= y
   (((a1:real)+b1)+a2+b2)-c1 = (a1+b2-c1)+(b1+a2)
   x <=  inv (&2) * y <=> &2 * x  <= y
-  !f g z. f IN sq_integrable /\\ g IN sq_integrable /\\ z IN sq_integrable\n    ==> r_inprod (f+g) z= r_inprod f z + r_inprod g z
+  forall f g z. f IN sq_integrable /\\ g IN sq_integrable /\\ z IN sq_integrable\n    ==> r_inprod (f+g) z= r_inprod f z + r_inprod g z
   is_inner_space (sq_integrable, r_inprod)
 complex_measurable =  |- (#!:fun(fun(fun(real,cart(real,tybit0(1))),bool),bool) (\f:fun(real,cart(real,tybit0(1))). (#!:fun(fun(fun(real,bool),bool),bool) (\s:fun(real,bool). ((#=:fun(bool,fun(bool,bool)) ((#complex_measurable_on:fun(fun(real,cart(real,tybit0(1))),fun(fun(real,bool),bool)) f:fun(real,cart(real,tybit0(1)))) s:fun(real,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#real_measurable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. (#Re:fun(cart(real,tybit0(1)),real) (f:fun(real,cart(real,tybit0(1))) x:real)))) s:fun(real,bool))) ((#real_measurable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. (#Im:fun(cart(real,tybit0(1)),real) (f:fun(real,cart(real,tybit0(1))) x:real)))) s:fun(real,bool))))))))
 sq_integrable =  |- (#!:fun(fun(fun(real,cart(real,tybit0(1))),bool),bool) (\f:fun(real,cart(real,tybit0(1))). ((#=:fun(bool,fun(bool,bool)) ((#IN:fun(fun(real,cart(real,tybit0(1))),fun(fun(fun(real,cart(real,tybit0(1))),bool),bool)) f:fun(real,cart(real,tybit0(1)))) #sq_integrable:fun(fun(real,cart(real,tybit0(1))),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#complex_measurable_on:fun(fun(real,cart(real,tybit0(1))),fun(fun(real,bool),bool)) f:fun(real,cart(real,tybit0(1)))) #UNIV:fun(real,bool))) ((#real_integrable_on:fun(fun(real,real),fun(fun(real,bool),bool)) (\x:real. ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,tybit0(1)),real) (f:fun(real,cart(real,tybit0(1))) x:real))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) #UNIV:fun(real,bool))))))

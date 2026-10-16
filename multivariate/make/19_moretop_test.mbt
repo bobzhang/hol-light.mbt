@@ -82196,7 +82196,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  d:real
       #|  x:real^1
       #|  x:real^1
-      #|  !f:real^1->real^1 s.\n        f continuous_on s /\\ is_interval s\n        ==>  ((!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) <=>\n              (!t. open t /\\ t SUBSET s ==> open(IMAGE f t)))
+      #|  forall f:real^1->real^1 s.\n        f continuous_on s /\\ is_interval s\n        ==>  ((forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) <=>\n              (forall t. open t /\\ t SUBSET s ==> open(IMAGE f t)))
       #|  x + y:real^N
       #|  y:real^N
       #|  x:real^N
@@ -82223,9 +82223,9 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  snd:real^N->real^N
       #|  fst:real^N->real^N
       #|  t:real^N->bool
-      #|  ?fst snd. linear fst /\\ linear snd /\\\n              (!z. fst(z) IN t /\\ snd z IN t' /\\ fst z + snd z = z) /\\\n              (!x y:real^N. x IN t /\\ y IN t'\n                            ==> fst(x + y) = x /\\ snd(x + y) = y)
+      #|  ?fst snd. linear fst /\\ linear snd /\\\n              (forall z. fst(z) IN t /\\ snd z IN t' /\\ fst z + snd z = z) /\\\n              (forall x y:real^N. x IN t /\\ y IN t'\n                            ==> fst(x + y) = x /\\ snd(x + y) = y)
       #|  subspace(t':real^N->bool)
-      #|  t' = {y:real^N | !x. x IN t ==> orthogonal x y}
+      #|  t' = {y:real^N | forall x. x IN t ==> orthogonal x y}
       #|  (:real^N)
       #|  t:real^N->bool
       #|  inv(norm x) % x = (f:real^N->real^N) y
@@ -82243,7 +82243,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  lift o (\\x:real^N. inv(norm x)) =\n        (lift o inv o drop) o (\\x. lift(norm x))
       #|  (g:real^N->real^N) differentiable_on s DELETE (vec 0)
       #|  (g:real^N->real^N) =\n    \\x. norm(x) % (f:real^N->real^N)(inv(norm x) % x)
-      #|  !f:real^N->real^N s t.\n      subspace s /\\ subspace t /\\ dim s < dim t /\\ s SUBSET t /\\\n      f differentiable_on sphere(vec 0,&1) INTER s\n      ==> ~(IMAGE f (sphere(vec 0,&1) INTER s) = sphere(vec 0,&1) INTER t)
+      #|  forall f:real^N->real^N s t.\n      subspace s /\\ subspace t /\\ dim s < dim t /\\ s SUBSET t /\\\n      f differentiable_on sphere(vec 0,&1) INTER s\n      ==> ~(IMAGE f (sphere(vec 0,&1) INTER s) = sphere(vec 0,&1) INTER t)
       #|  inv(norm x) % x:real^N
       #|  x:real^N
       #|  inv(norm x) % x:real^N
@@ -82260,7 +82260,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  homotopic_with (\\z. T)\n       (subtopology euclidean (sphere(vec 0:real^N,&1) INTER s),\n        subtopology euclidean (t DELETE (vec 0:real^N)))\n       h (\\x. --c)
       #|  --c:real^N
       #|  c:real^N
-      #|  ~(?x. P x /\\ x IN s /\\ x IN t) <=>\n        (!x. x IN s INTER t ==> ~(P x))
+      #|  ~(?x. P x /\\ x IN s /\\ x IN t) <=>\n        (forall x. x IN s INTER t ==> ~(P x))
       #|  t SUBSET s /\\ ~(t = s) ==> ?a. a IN s DIFF t
       #|  ?c. c IN (sphere(vec 0,&1) INTER t) DIFF\n               (IMAGE (h:real^N->real^N) (sphere(vec 0,&1) INTER s))
       #|  sphere(vec 0:real^N,&1) INTER t
@@ -82272,22 +82272,22 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  ?c. homotopic_with (\\z. T)\n             (subtopology euclidean (sphere(vec 0,&1) INTER s),\n              subtopology euclidean (sphere(vec 0,&1) INTER t))\n             (h:real^N->real^N) (\\x. c)
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  ~(z IN IMAGE f s) <=> !x. x IN s ==> ~(f x = z)
+      #|  ~(z IN IMAGE f s) <=> forall x. x IN s ==> ~(f x = z)
       #|  (\\x. lift(inv(norm((g:real^N->real^N) x)))) =\n        (lift o inv o drop) o (\\x. lift(norm x)) o (g:real^N->real^N)
       #|  (h:real^N->real^N) differentiable_on sphere(vec 0,&1) INTER s
-      #|  !x. x IN sphere(vec 0,&1) INTER s\n          ==> (h:real^N->real^N) x IN sphere(vec 0,&1) INTER t
+      #|  forall x. x IN sphere(vec 0,&1) INTER s\n          ==> (h:real^N->real^N) x IN sphere(vec 0,&1) INTER t
       #|  (h:real^N->real^N) = \\x. inv(norm(g x)) % g x
       #|  (g:real^N->real^N) differentiable_on\n                  sphere(vec 0,&1) INTER s
       #|  x:real^N
       #|  x:real^N
       #|  x:real^N
-      #|  !x. x IN sphere(vec 0,&1) INTER s ==> ~((g:real^N->real^N) x = vec 0)
+      #|  forall x. x IN sphere(vec 0,&1) INTER s ==> ~((g:real^N->real^N) x = vec 0)
       #|  g:real^N->real^N
       #|  t:real^N->bool
       #|  &1 / &2
       #|  sphere(vec 0:real^N,&1) INTER s
       #|  f:real^N->real^N
-      #|  !f:real^N->real^N s t.\n          subspace s /\\ subspace t /\\ dim s < dim t /\\ s SUBSET t /\\\n          f continuous_on sphere(vec 0,&1) INTER s /\\\n          IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER t\n          ==> ?c. homotopic_with (\\x. T)\n                    (subtopology euclidean (sphere(vec 0,&1) INTER s),\n                     subtopology euclidean (sphere(vec 0,&1) INTER t))\n                     f (\\x. c)
+      #|  forall f:real^N->real^N s t.\n          subspace s /\\ subspace t /\\ dim s < dim t /\\ s SUBSET t /\\\n          f continuous_on sphere(vec 0,&1) INTER s /\\\n          IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER t\n          ==> ?c. homotopic_with (\\x. T)\n                    (subtopology euclidean (sphere(vec 0,&1) INTER s),\n                     subtopology euclidean (sphere(vec 0,&1) INTER t))\n                     f (\\x. c)
       #|  :real
       #|  :real
       #|  :real
@@ -82306,7 +82306,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s INTER {a} = {} <=> ~(a IN s)
       #|  {vec 0:real^N}
       #|  s:real^M->bool = {}
-      #|  !s:real^M->bool u:real^N->bool.\n          bounded s /\\ convex s /\\ subspace u /\\ aff_dim s <= &(dim u)\n          ==> ?t. subspace t /\\ t SUBSET u /\\\n                  (~(s = {}) ==> aff_dim t = aff_dim s) /\\\n                  (relative_frontier s) homeomorphic\n                  (sphere(vec 0,&1) INTER t)
+      #|  forall s:real^M->bool u:real^N->bool.\n          bounded s /\\ convex s /\\ subspace u /\\ aff_dim s <= &(dim u)\n          ==> ?t. subspace t /\\ t SUBSET u /\\\n                  (~(s = {}) ==> aff_dim t = aff_dim s) /\\\n                  (relative_frontier s) homeomorphic\n                  (sphere(vec 0,&1) INTER t)
       #|  s':real^N->bool
       #|  t':real^N->bool
       #|  s:real^M->bool
@@ -82315,11 +82315,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  t:real^N->bool
       #|  t:real^N->bool = {}
       #|  s:real^M->bool = {}
-      #|  (!a b c. P a b c) <=> (!b c a. P a b c)
-      #|  !f:real^M->real^N s t.\n     convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s < aff_dim t /\\\n     f continuous_on relative_frontier s /\\\n     IMAGE f (relative_frontier s) SUBSET (relative_frontier t)\n     ==> ?c. homotopic_with (\\z. T)\n                (subtopology euclidean (relative_frontier s),\n                 subtopology euclidean (relative_frontier t)) f (\\x. c)
+      #|  (forall a b c. P a b c) <=> (forall b c a. P a b c)
+      #|  forall f:real^M->real^N s t.\n     convex s /\\ bounded s /\\ convex t /\\ bounded t /\\ aff_dim s < aff_dim t /\\\n     f continuous_on relative_frontier s /\\\n     IMAGE f (relative_frontier s) SUBSET (relative_frontier t)\n     ==> ?c. homotopic_with (\\z. T)\n                (subtopology euclidean (relative_frontier s),\n                 subtopology euclidean (relative_frontier t)) f (\\x. c)
       #|  r <= &0
       #|  s <= &0
-      #|  !f:real^M->real^N a r b s.\n        dimindex(:M) < dimindex(:N) /\\\n        f continuous_on sphere(a,r) /\\\n        IMAGE f (sphere(a,r)) SUBSET (sphere(b,s))\n        ==> ?c. homotopic_with (\\z. T)\n                 (subtopology euclidean (sphere(a,r)),\n                  subtopology euclidean (sphere(b,s))) f (\\x. c)
+      #|  forall f:real^M->real^N a r b s.\n        dimindex(:M) < dimindex(:N) /\\\n        f continuous_on sphere(a,r) /\\\n        IMAGE f (sphere(a,r)) SUBSET (sphere(b,s))\n        ==> ?c. homotopic_with (\\z. T)\n                 (subtopology euclidean (sphere(a,r)),\n                  subtopology euclidean (sphere(b,s))) f (\\x. c)
       #|  ~(sphere(a:real^M,r) = {})
       #|  m < n ==> 1 <= m ==> 2 <= n
       #|  s:real
@@ -82340,7 +82340,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  ~(sphere(a:real^M,r) = {})
       #|  ~p /\\ q ==> (p <=> q) ==> F
       #|  sphere(a:real^M,r)
-      #|  !a:real^M r b:real^N s.\n          dimindex(:M) < dimindex(:N) /\\ &0 < r /\\ &0 < s\n          ==> ~(sphere(a,r) homotopy_equivalent sphere(b,s))
+      #|  forall a:real^M r b:real^N s.\n          dimindex(:M) < dimindex(:N) /\\ &0 < r /\\ &0 < s\n          ==> ~(sphere(a,r) homotopy_equivalent sphere(b,s))
       #|  ~(m:num = n) <=> m < n \\/ n < m
       #|  &0 < r /\\ &0 < s
       #|  s = &0
@@ -82348,14 +82348,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s < &0
       #|  r < &0
       #|  (r ==> p) /\\ (q ==> r) /\\ (p ==> q) ==> (r <=> q) /\\ (p <=> q)
-      #|  (!a:real^M b:real^N r s.\n        sphere(a,r) homeomorphic sphere(b,s) <=>\n        r < &0 /\\ s < &0 \\/ r = &0 /\\ s = &0 \\/\n        &0 < r /\\ &0 < s /\\ dimindex(:M) = dimindex(:N)) /\\\n   (!a:real^M b:real^N r s.\n        sphere(a,r) homotopy_equivalent sphere(b,s) <=>\n        r < &0 /\\ s < &0 \\/ r = &0 /\\ s = &0 \\/\n        &0 < r /\\ &0 < s /\\ dimindex(:M) = dimindex(:N))
+      #|  (forall a:real^M b:real^N r s.\n        sphere(a,r) homeomorphic sphere(b,s) <=>\n        r < &0 /\\ s < &0 \\/ r = &0 /\\ s = &0 \\/\n        &0 < r /\\ &0 < s /\\ dimindex(:M) = dimindex(:N)) /\\\n   (forall a:real^M b:real^N r s.\n        sphere(a,r) homotopy_equivalent sphere(b,s) <=>\n        r < &0 /\\ s < &0 \\/ r = &0 /\\ s = &0 \\/\n        &0 < r /\\ &0 < s /\\ dimindex(:M) = dimindex(:N))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
       #|  sphere(vec 0:real^2,&1) = relative_frontier(cball(vec 0,&1))
       #|  &3:int <= x ==> ~(x = &1)
-      #|  !s. convex s /\\ bounded s /\\ &3 <= aff_dim s\n       ==> simply_connected(relative_frontier s)
+      #|  forall s. convex s /\\ bounded s /\\ &3 <= aff_dim s\n       ==> simply_connected(relative_frontier s)
       #|  cball(a:real^N,r)
       #|  r < &0 \\/ r = &0 \\/ &0 < r
-      #|  !a:real^N r. 3 <= dimindex(:N) ==> simply_connected(sphere(a,r))
+      #|  forall a:real^N r. 3 <= dimindex(:N) ==> simply_connected(sphere(a,r))
       #|  a:real^N
       #|  s SUBSET u ==> c = s ==> c DIFF i SUBSET u
       #|  a:real^N
@@ -82368,23 +82368,23 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s:real^N->bool
       #|  s:real^N->bool
       #|  (a:real^N) IN relative_interior s
-      #|  !s a:real^N.\n        convex s /\\ &3 <= aff_dim s ==> simply_connected(s DELETE a)
+      #|  forall s a:real^N.\n        convex s /\\ &3 <= aff_dim s ==> simply_connected(s DELETE a)
       #|  a:real^N
       #|  cball(a:real^N,&1)
       #|  &1
       #|  a:real^N
-      #|  !a. 3 <= dimindex(:N) ==> simply_connected((:real^N) DELETE a)
-      #|  !P. (?u v. P u /\\ P v /\\ ~(u = v)) /\\\n         (!c. P c ==> ~(s INTER {x:real^N | x$k = c} = {}))\n         ==> ?u v. u IN s INTER {x | P(x$k)} /\\ v IN s INTER {x | P(x$k)} /\\\n                   ~(u = v)
+      #|  forall a. 3 <= dimindex(:N) ==> simply_connected((:real^N) DELETE a)
+      #|  forall P. (?u v. P u /\\ P v /\\ ~(u = v)) /\\\n         (forall c. P c ==> ~(s INTER {x:real^N | x$k = c} = {}))\n         ==> ?u v. u IN s INTER {x | P(x$k)} /\\ v IN s INTER {x | P(x$k)} /\\\n                   ~(u = v)
       #|  v:real
       #|  u:real
       #|  b:real^N
       #|  a:real^N
-      #|  !x:real^N. x$k = basis k dot x
+      #|  forall x:real^N. x$k = basis k dot x
       #|  c:real
       #|  a$k + &2 / &3 * ((b:real^N)$k - (a:real^N)$k)
       #|  a$k + &1 / &3 * ((b:real^N)$k - (a:real^N)$k)
       #|  {x | P x} INTER {x | Q x} = {x | Q x /\\ P x}
-      #|  !u v. u IN s /\\ v IN s /\\ ~(u = v) ==> ~(s = {} \\/ ?z. s = {z})
+      #|  forall u v. u IN s /\\ v IN s /\\ ~(u = v) ==> ~(s = {} \\/ ?z. s = {z})
       #|  INFINITE s /\\ FINITE t ==> ~(s SUBSET t)
       #|  s DIFF t = {} <=> s SUBSET t
       #|  INFINITE s ==> ~(s = {})
@@ -82399,9 +82399,9 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  {x | x IN s /\\ P x} = s INTER {x | P x}
       #|  {x | x IN s /\\ P x} DIFF {x | x IN t /\\ P x} =\n                          (s DIFF t) INTER {x | P x}
       #|  {x | x IN s /\\ P x} DIFF {x | x IN t /\\ P x} =\n                          (s DIFF t) INTER {x | P x}
-      #|  a < b ==> !x. a < x \\/ x < b
-      #|  !s t. s DIFF t =\n          {x | x IN s /\\ x$k < (b:real^N)$k} DIFF\n          {x | x IN t /\\ x$k < b$k} UNION\n          {x:real^N | x IN s /\\ (a:real^N)$k < x$k} DIFF\n          {x | x IN t /\\ a$k < x$k}
-      #|  (!a b. R a b ==> R b a) /\\ (!a b. P a b ==> R a b)\n    ==> !a b. P a b \\/ P b a ==> R a b
+      #|  a < b ==> forall x. a < x \\/ x < b
+      #|  forall s t. s DIFF t =\n          {x | x IN s /\\ x$k < (b:real^N)$k} DIFF\n          {x | x IN t /\\ x$k < b$k} UNION\n          {x:real^N | x IN s /\\ (a:real^N)$k < x$k} DIFF\n          {x | x IN t /\\ a$k < x$k}
+      #|  (forall a b. R a b ==> R b a) /\\ (forall a b. P a b ==> R a b)\n    ==> forall a b. P a b \\/ P b a ==> R a b
       #|  a:real^N
       #|  b:real^N
       #|  ~(x = y) ==> x < y \\/ y < x
@@ -82411,7 +82411,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s DIFF t = s DIFF (s INTER t)
       #|  s:real^N->bool
       #|  CARD(t:real^N->bool)
-      #|  !s t:real^N->bool.\n        convex s /\\ &3 <= aff_dim s /\\ FINITE t\n        ==> simply_connected(s DIFF t)
+      #|  forall s t:real^N->bool.\n        convex s /\\ &3 <= aff_dim s /\\ FINITE t\n        ==> simply_connected(s DIFF t)
       #|  sphere(vec 0:real^N,&1) INTER t
       #|  \\y:real^N. inv(norm y) % y
       #|  ~(r' <= abs((p:real^N) dot x))
@@ -82439,10 +82439,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (k:real^N->real^N) x
       #|  (k:real^N->real^N) x IN t
       #|  x < r ==> max r x = r
-      #|  !x. r < r' ==> x < r ==> ~(r' <= x)
+      #|  forall x. r < r' ==> x < r ==> ~(r' <= x)
       #|  IMAGE f (p INTER t) SUBSET p INTER t /\\\n      IMAGE f (p INTER s) SUBSET s /\\ s SUBSET t\n      ==> IMAGE f (p INTER t) SUBSET p INTER t /\\\n          IMAGE f (p INTER s) SUBSET p INTER s
       #|  (j:real^N->real^N) o (k:real^N->real^N)
-      #|  !x. x IN sphere(vec 0,&1) INTER t\n        ==> (j:real^N->real^N) x IN sphere(vec 0,&1) INTER t
+      #|  forall x. x IN sphere(vec 0,&1) INTER t\n        ==> (j:real^N->real^N) x IN sphere(vec 0,&1) INTER t
       #|  (j:real^N->real^N) continuous_on sphere(vec 0,&1) INTER t
       #|  ~(abs((p:real^N) dot x) >= r')
       #|  x * abs y = &1 ==> x * y = &1 \\/ x * y = -- &1
@@ -82453,10 +82453,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  \\y:real^N. y dot x
       #|  (r' - max r (abs((p:real^N) dot x))) / (r' - r) * abs(p dot x) < &1
       #|  x:real^N
-      #|  !x. x IN sphere(vec 0,&1) INTER t ==> ~((i:real^N->real^N) x = vec 0)
+      #|  forall x. x IN sphere(vec 0,&1) INTER t ==> ~((i:real^N->real^N) x = vec 0)
       #|  --x - --a:real^N = --(x - a)
       #|  x:real^N
-      #|  !x. (i:real^N->real^N) (--x) = --(i x)
+      #|  forall x. (i:real^N->real^N) (--x) = --(i x)
       #|  r < r' ==> r' - max r r' = &0
       #|  x:real^N
       #|  (i:real^N->real^N) continuous_on sphere(vec 0,&1) INTER t
@@ -82470,29 +82470,29 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  abs((p:real^N) dot c) = &1
       #|  c IN sphere(vec 0:real^N,&1) INTER t
       #|  norm(p:real^N) * norm(c:real^N)
-      #|  !y. x <= y /\\ y = &1 /\\ ~(x = y) ==> x < &1
+      #|  forall y. x <= y /\\ y = &1 /\\ ~(x = y) ==> x < &1
       #|  abs((p:real^N) dot c) < &1
       #|  c:real^N
       #|  IMAGE (k:real^N->real^N) (sphere (vec 0,&1) INTER s)
       #|  \\x:real^N. abs(p dot x)
-      #|  ?r. &0 < r /\\ r < &1 /\\\n        !x. x IN (sphere(vec 0,&1) INTER s)\n            ==> abs(p dot (k:real^N->real^N) x) < r
+      #|  ?r. &0 < r /\\ r < &1 /\\\n        forall x. x IN (sphere(vec 0,&1) INTER s)\n            ==> abs(p dot (k:real^N->real^N) x) < r
       #|  x:real^N
       #|  r:real^N
       #|  sphere(vec 0:real^N,&1) INTER t
       #|  sphere(vec 0:real^N,&1) INTER t
       #|  h:real^N->real^N = reflect_along p o reflect_along p o h
-      #|  DISJOINT s {a,b} <=> !x. x IN s ==> ~(x = a) /\\ ~(x = b)
+      #|  DISJOINT s {a,b} <=> forall x. x IN s ==> ~(x = a) /\\ ~(x = b)
       #|  reflect_along p o reflect_along (q - p) o (h:real^N->real^N)
       #|  h:real^N->real^N
       #|  p:real^N = q \\/ p = --q
-      #|  ?k. homotopic_with (\\x. T)\n          (subtopology euclidean (sphere(vec 0,&1) INTER t),\n           subtopology euclidean (sphere(vec 0,&1) INTER t))\n          h k /\\\n        (!x. x IN (sphere(vec 0,&1) INTER t) ==> k(--x) = --(k x)) /\\\n        DISJOINT (IMAGE k (sphere(vec 0,&1) INTER s)) {p:real^N,--p}
+      #|  ?k. homotopic_with (\\x. T)\n          (subtopology euclidean (sphere(vec 0,&1) INTER t),\n           subtopology euclidean (sphere(vec 0,&1) INTER t))\n          h k /\\\n        (forall x. x IN (sphere(vec 0,&1) INTER t) ==> k(--x) = --(k x)) /\\\n        DISJOINT (IMAGE k (sphere(vec 0,&1) INTER s)) {p:real^N,--p}
       #|  inv(norm p) % p:real^N
       #|  p:real^N
       #|  ~(s + 1 = s)
       #|  t:real^N->bool
       #|  s:real^N->bool
-      #|  ?p. p IN sphere(vec 0,&1) INTER t /\\\n        !x:real^N. x IN s ==> orthogonal p x
-      #|  ~(q IN IMAGE f s)\n      ==> (!x. n(n x) = x) /\\ (!x. n x IN s <=> x IN s) /\\\n          (!x. x IN s ==> f(n x) = n(f x))\n          ==> ~(n q IN IMAGE f s)
+      #|  ?p. p IN sphere(vec 0,&1) INTER t /\\\n        forall x:real^N. x IN s ==> orthogonal p x
+      #|  ~(q IN IMAGE f s)\n      ==> (forall x. n(n x) = x) /\\ (forall x. n x IN s <=> x IN s) /\\\n          (forall x. x IN s ==> f(n x) = n(f x))\n          ==> ~(n q IN IMAGE f s)
       #|  ~((--q) IN IMAGE (h:real^N->real^N) (sphere(vec 0,&1) INTER s))
       #|  q:real^N
       #|  ~(IMAGE f s = t)\n      ==> s SUBSET t /\\ IMAGE f t SUBSET t\n          ==> ?q. q IN t /\\ ~(q IN IMAGE f s)
@@ -82502,17 +82502,17 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  h:real^N->real^N
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  ~(z IN IMAGE f s) <=> !x. x IN s ==> ~(f x = z)
+      #|  ~(z IN IMAGE f s) <=> forall x. x IN s ==> ~(f x = z)
       #|  (\\x. lift(inv(norm((g:real^N->real^N) x)))) =\n      (lift o inv o drop) o (\\x. lift(norm x)) o (g:real^N->real^N)
       #|  (h:real^N->real^N) differentiable_on sphere(vec 0,&1) INTER t
-      #|  !x. x IN sphere(vec 0,&1) INTER t ==> h(--x) = --((h:real^N->real^N) x)
-      #|  !x. x IN sphere(vec 0,&1) INTER t\n        ==> (h:real^N->real^N) x IN sphere(vec 0,&1) INTER t
+      #|  forall x. x IN sphere(vec 0,&1) INTER t ==> h(--x) = --((h:real^N->real^N) x)
+      #|  forall x. x IN sphere(vec 0,&1) INTER t\n        ==> (h:real^N->real^N) x IN sphere(vec 0,&1) INTER t
       #|  (h:real^N->real^N) = \\x. inv(norm(g x)) % g x
       #|  (g:real^N->real^N) differentiable_on\n                sphere(vec 0,&1) INTER s
       #|  x:real^N
       #|  x:real^N
       #|  x:real^N
-      #|  !x. x IN sphere(vec 0,&1) INTER t ==> ~((g:real^N->real^N) x = vec 0)
+      #|  forall x. x IN sphere(vec 0,&1) INTER t ==> ~((g:real^N->real^N) x = vec 0)
       #|  norm(f - g:real^N) < e /\\ norm(--f - g') < e\n      ==> norm(f - inv(&2) % (g - g')) < e
       #|  :real
       #|  :real
@@ -82523,10 +82523,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  &1 / &2
       #|  sphere(vec 0:real^N,&1) INTER t
       #|  f:real^N->real^N
-      #|  ?g. vector_polynomial_function g /\\\n        (!x. x IN sphere(vec 0:real^N,&1) INTER t ==> g x IN t) /\\\n        (!x. x IN sphere(vec 0,&1) INTER t ==> g(--x) = --(g x)) /\\\n        (!x. x IN sphere (vec 0,&1) INTER t ==> norm(f x - g x) < &1 / &2)
+      #|  ?g. vector_polynomial_function g /\\\n        (forall x. x IN sphere(vec 0:real^N,&1) INTER t ==> g x IN t) /\\\n        (forall x. x IN sphere(vec 0,&1) INTER t ==> g(--x) = --(g x)) /\\\n        (forall x. x IN sphere (vec 0,&1) INTER t ==> norm(f x - g x) < &1 / &2)
       #|  f:real^N->real^N
       #|  sphere(vec 0:real^N,&1) INTER s = {}
-      #|  !f:real^N->real^N s t.\n        subspace s /\\ subspace t /\\ dim s + 1 = dim t /\\ s SUBSET t /\\\n        f continuous_on (sphere(vec 0,&1) INTER t) /\\\n        IMAGE f (sphere(vec 0,&1) INTER t) SUBSET (sphere(vec 0,&1) INTER t) /\\\n        (!x. x IN (sphere(vec 0,&1) INTER t) ==> f(--x) = --(f x))\n        ==> ?g. g continuous_on (sphere(vec 0,&1) INTER t) /\\\n                IMAGE g (sphere(vec 0,&1) INTER t) SUBSET\n                sphere(vec 0,&1) INTER t /\\\n                IMAGE g (sphere(vec 0,&1) INTER s) SUBSET\n                sphere(vec 0,&1) INTER s /\\\n                (!x. x IN (sphere(vec 0,&1) INTER t) ==> g(--x) = --(g x)) /\\\n                homotopic_with (\\z. T)\n                 (subtopology euclidean (sphere(vec 0,&1) INTER t),\n                  subtopology euclidean (sphere(vec 0,&1) INTER t))\n                 f g
+      #|  forall f:real^N->real^N s t.\n        subspace s /\\ subspace t /\\ dim s + 1 = dim t /\\ s SUBSET t /\\\n        f continuous_on (sphere(vec 0,&1) INTER t) /\\\n        IMAGE f (sphere(vec 0,&1) INTER t) SUBSET (sphere(vec 0,&1) INTER t) /\\\n        (forall x. x IN (sphere(vec 0,&1) INTER t) ==> f(--x) = --(f x))\n        ==> ?g. g continuous_on (sphere(vec 0,&1) INTER t) /\\\n                IMAGE g (sphere(vec 0,&1) INTER t) SUBSET\n                sphere(vec 0,&1) INTER t /\\\n                IMAGE g (sphere(vec 0,&1) INTER s) SUBSET\n                sphere(vec 0,&1) INTER s /\\\n                (forall x. x IN (sphere(vec 0,&1) INTER t) ==> g(--x) = --(g x)) /\\\n                homotopic_with (\\z. T)\n                 (subtopology euclidean (sphere(vec 0,&1) INTER t),\n                  subtopology euclidean (sphere(vec 0,&1) INTER t))\n                 f g
       #|  :real
       #|  :real
       #|  :real
@@ -82545,11 +82545,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  1 <= i
       #|  i:num
       #|  y:real^N
-      #|  !y. y IN (sphere (vec 0,&1) INTER span (IMAGE basis (1..n)))\n          ==> (h':real^N->num->real) y = k' y
+      #|  forall y. y IN (sphere (vec 0,&1) INTER span (IMAGE basis (1..n)))\n          ==> (h':real^N->num->real) y = k' y
       #|  i:num <= n
       #|  i:num
       #|  x:num->real
-      #|  !x. x IN topspace(nsphere(n - 1)) ==> (h:(num->real)->real^N) x = k x
+      #|  forall x. x IN topspace(nsphere(n - 1)) ==> (h:(num->real)->real^N) x = k x
       #|  k':real^N->num->real = \\x i. if 1 <= i /\\ i <= n then x$i else &0
       #|  k:(num->real)->real^N =\n        \\x. lambda i. if 1 <= i /\\ i <= n then x i else &0
       #|  n:num
@@ -82559,7 +82559,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  1 <= SUC n
       #|  a:int = b ==> (a == b) (mod n)
       #|  brouwer_degree1 (SUC n) (g:real^N->real^N)
-      #|  !b. (a:int == b) (mod n) /\\ (b == c) (mod n)\n          ==> (a == c) (mod n)
+      #|  forall b. (a:int == b) (mod n) /\\ (b == c) (mod n)\n          ==> (a == c) (mod n)
       #|  (a:int == b) (mod n) ==> (b == c) (mod n) ==> (a == c) (mod n)
       #|  g:real^N->real^N
       #|  g:real^N->real^N
@@ -82574,17 +82574,17 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  brouwer_degree1 1 (reflect_along(basis 1:real^N))
       #|  a:int = b ==> (a == b) (mod n)
       #|  brouwer_degree1 1 (\\x:real^N. x)
-      #|  !b. (a:int == b) (mod n) /\\ (b == c) (mod n) ==> (a == c) (mod n)
+      #|  forall b. (a:int == b) (mod n) /\\ (b == c) (mod n) ==> (a == c) (mod n)
       #|  (f:real^N->real^N)(basis 1) = basis 1 \\/\n      (f:real^N->real^N) (basis 1) = --basis 1
-      #|  (!u. (u % b) IN s <=> u = c \\/ u = d)\n         ==> s INTER {u % b | u IN UNIV} = {c % b,d % b}
+      #|  (forall u. (u % b) IN s <=> u = c \\/ u = d)\n         ==> s INTER {u % b | u IN UNIV} = {c % b,d % b}
       #|  sphere (vec 0,&1) INTER {u % basis 1 | u IN (:real)} =\n      {-- &1 % basis 1:real^N,&1 % basis 1}
       #|  n = 0 \\/ 1 <= n
       #|  SUC n <= dimindex(:N)
       #|  SUC n <= dimindex(:N)
       #|  f:real^N->real^N
       #|  n:num
-      #|  !n (f:real^N->real^N).\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n        sphere(vec 0,&1) INTER span(IMAGE basis (1..n)) /\\\n        (!x. x IN sphere(vec 0,&1) INTER span(IMAGE basis (1..n))\n             ==> f(--x) = --(f x))\n        ==> (brouwer_degree1 n f == &1) (mod &2)
-      #|  !f:real^N->real^N.\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (!x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> (brouwer_degree f == &1) (mod &2)
+      #|  forall n (f:real^N->real^N).\n        f continuous_on (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) /\\\n        IMAGE f (sphere(vec 0,&1) INTER span(IMAGE basis (1..n))) SUBSET\n        sphere(vec 0,&1) INTER span(IMAGE basis (1..n)) /\\\n        (forall x. x IN sphere(vec 0,&1) INTER span(IMAGE basis (1..n))\n             ==> f(--x) = --(f x))\n        ==> (brouwer_degree1 n f == &1) (mod &2)
+      #|  forall f:real^N->real^N.\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (forall x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> (brouwer_degree f == &1) (mod &2)
       #|  (&0 == x) (mod n) <=> n divides x
       #|  subtopology euclidean\n        (sphere(vec 0,&1) INTER\n        span(IMAGE basis (1..dim(s:real^N->bool))):real^N->bool)
       #|  h:real^N->real^N
@@ -82592,7 +82592,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  k:real^N->real^N
       #|  IMAGE (f:real^N->real^N) (sphere(vec 0,&1) INTER s) SUBSET\n     sphere(vec 0,&1) INTER s
       #|  IMAGE (f:real^N->real^N) (sphere(vec 0,&1) INTER s) SUBSET\n     sphere(vec 0,&1) INTER s
-      #|  IMAGE f s = t ==> !x. x IN s ==> f x IN t
+      #|  IMAGE f s = t ==> forall x. x IN s ==> f x IN t
       #|  (h:real^N->real^N) o (f:real^N->real^N) o (k:real^N->real^N)
       #|  dim(s:real^N->bool)
       #|  k:real^N->real^N
@@ -82601,11 +82601,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  MAX 1 1 = 1
       #|  span(IMAGE basis (1..dim(s:real^N->bool))):real^N->bool
       #|  s:real^N->bool
-      #|  !(f:real^N->real^N) s a.\n        subspace s /\\ 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        (!x. x IN sphere(vec 0,&1) INTER s ==> f(--x) = --(f x))\n        ==> ~(homotopic_with (\\x. T)\n               (subtopology euclidean (sphere(vec 0,&1) INTER s),\n                subtopology euclidean (sphere(vec 0,&1) INTER s))\n               f (\\x. a))
+      #|  forall(f:real^N->real^N) s a.\n        subspace s /\\ 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        (forall x. x IN sphere(vec 0,&1) INTER s ==> f(--x) = --(f x))\n        ==> ~(homotopic_with (\\x. T)\n               (subtopology euclidean (sphere(vec 0,&1) INTER s),\n                subtopology euclidean (sphere(vec 0,&1) INTER s))\n               f (\\x. a))
       #|  a:real^N
       #|  (:real^N)
       #|  f:real^N->real^N
-      #|  !(f:real^N->real^N) a.\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (!x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> ~(homotopic_with (\\x. T)\n                (subtopology euclidean (sphere(vec 0,&1)),\n                 subtopology euclidean (sphere(vec 0,&1)))\n                f (\\x. a))
+      #|  forall(f:real^N->real^N) a.\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (forall x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> ~(homotopic_with (\\x. T)\n                (subtopology euclidean (sphere(vec 0,&1)),\n                 subtopology euclidean (sphere(vec 0,&1)))\n                f (\\x. a))
       #|  cball(vec 0:real^N,&1) INTER s
       #|  f:real^N->real^N
       #|  s:real^N->bool
@@ -82614,15 +82614,15 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  ~(a IN t) ==> s SUBSET {a} ==> s SUBSET UNIV DIFF t
       #|  s SUBSET (UNIV DIFF p) ==> IMAGE f (p INTER s) = p INTER s
       #|  dim(s:real^N->bool) = 0 \\/ 1 <= dim s
-      #|  !(f:real^N->real^N) s.\n        subspace s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        (!x. x IN sphere(vec 0,&1) INTER s ==> f(--x) = --(f x))\n        ==> IMAGE f (sphere(vec 0,&1) INTER s) = sphere(vec 0,&1) INTER s
+      #|  forall(f:real^N->real^N) s.\n        subspace s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        (forall x. x IN sphere(vec 0,&1) INTER s ==> f(--x) = --(f x))\n        ==> IMAGE f (sphere(vec 0,&1) INTER s) = sphere(vec 0,&1) INTER s
       #|  (:real^N)
       #|  f:real^N->real^N
-      #|  !(f:real^N->real^N).\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (!x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> IMAGE f (sphere(vec 0,&1)) = sphere(vec 0,&1)
+      #|  forall(f:real^N->real^N).\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        (forall x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> IMAGE f (sphere(vec 0,&1)) = sphere(vec 0,&1)
       #|  (%) (norm(a:real^M)) :real^M->real^M
       #|  x:real^M
       #|  inv(norm a) % a:real^M
       #|  ~(a:real^M = vec 0)
-      #|  IMAGE g t PSUBSET s ==> ?a. a IN s /\\ !x. x IN t ==> ~(g x = a)
+      #|  IMAGE g t PSUBSET s ==> ?a. a IN s /\\ forall x. x IN t ==> ~(g x = a)
       #|  a:real^M
       #|  t + 1 <= s ==> t' <= t ==> t' < s
       #|  dim t < dim s ==> ~(t = s)
@@ -82633,16 +82633,16 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  t + 1 <= s ==> t <= s
       #|  s:real^M->bool
       #|  t:real^N->bool
-      #|  (?x. P x /\\ Q x) <=> ((!x. P x ==> ~(Q x)) ==> F)
-      #|  (!s. P(span s) ==> P s) /\\ (!s. subspace s ==> P s) ==> (!s. P s)
-      #|  !(f:real^M->real^N) s t.\n        subspace s /\\ dim t + 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t /\\\n        (!x. x IN (sphere(vec 0,&1) INTER s) ==> f(--x) = --(f x))\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f x = vec 0
+      #|  (?x. P x /\\ Q x) <=> ((forall x. P x ==> ~(Q x)) ==> F)
+      #|  (forall s. P(span s) ==> P s) /\\ (forall s. subspace s ==> P s) ==> (forall s. P s)
+      #|  forall(f:real^M->real^N) s t.\n        subspace s /\\ dim t + 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t /\\\n        (forall x. x IN (sphere(vec 0,&1) INTER s) ==> f(--x) = --(f x))\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f x = vec 0
       #|  s:real^N->bool
       #|  (:real^M)
       #|  f:real^M->real^N
-      #|  !(f:real^M->real^N) s.\n        dim s < dimindex(:M) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET s /\\\n        (!x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f x = vec 0
+      #|  forall(f:real^M->real^N) s.\n        dim s < dimindex(:M) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET s /\\\n        (forall x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f x = vec 0
       #|  --(x - y):real^N = y - x
       #|  span t:real^N->bool
-      #|  !(f:real^M->real^N) s t.\n        subspace s /\\ dim t + 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f(--x) = f(x)
+      #|  forall(f:real^M->real^N) s t.\n        subspace s /\\ dim t + 1 <= dim s /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f(--x) = f(x)
       #|  vec 0 - --a:real^N = a
       #|  vec 0 IN IMAGE (\\x:real^N. --a + x) t
       #|  --a + x:real^N = --a + y <=> x = y
@@ -82655,11 +82655,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  max (&1:int) a <= s ==> ~(s = &0)
       #|  (P ==> Q ==> ?a. a IN s) ==> P /\\ Q /\\ R /\\ s = {} ==> Z
       #|  t:real^N->bool = {}
-      #|  !(f:real^M->real^N) s t.\n        subspace s /\\ max (&1) (aff_dim t + &1) <= &(dim s) /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f(--x) = f(x)
+      #|  forall(f:real^M->real^N) s t.\n        subspace s /\\ max (&1) (aff_dim t + &1) <= &(dim s) /\\\n        f continuous_on (sphere(vec 0,&1) INTER s) /\\\n        IMAGE f (sphere(vec 0,&1) INTER s) SUBSET t\n        ==> ?x. x IN (sphere(vec 0,&1) INTER s) /\\ f(--x) = f(x)
       #|  s:real^N->bool
       #|  (:real^M)
       #|  f:real^M->real^N
-      #|  !(f:real^M->real^N) s.\n        aff_dim s < &(dimindex(:M)) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET s\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f(--x) = f(x)
+      #|  forall(f:real^M->real^N) s.\n        aff_dim s < &(dimindex(:M)) /\\\n        f continuous_on sphere(vec 0,&1) /\\\n        IMAGE f (sphere(vec 0,&1)) SUBSET s\n        ==> ?x. x IN sphere(vec 0,&1) /\\ f(--x) = f(x)
       #|  sphere(vec 0:real^N,&1) INTER s
       #|  cball(vec 0:real^N,&1) INTER s
       #|  sphere(vec 0:real^N,&1) INTER s
@@ -82667,12 +82667,12 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  \\x:real^N. x
       #|  s SUBSET t ==> s INTER u SUBSET t INTER u
       #|  sphere(vec 0:real^N,&1) INTER s SUBSET cball(vec 0,&1) INTER s
-      #|  !f s:real^N->bool.\n      ~(subspace s /\\ 1 <= dim s /\\\n        f continuous_on (cball(vec 0,&1) INTER s) /\\\n        IMAGE f (cball(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        !x. x IN (sphere(vec 0,&1) INTER s) ==> f(--x) = --(f x))
+      #|  forall f s:real^N->bool.\n      ~(subspace s /\\ 1 <= dim s /\\\n        f continuous_on (cball(vec 0,&1) INTER s) /\\\n        IMAGE f (cball(vec 0,&1) INTER s) SUBSET sphere(vec 0,&1) INTER s /\\\n        forall x. x IN (sphere(vec 0,&1) INTER s) ==> f(--x) = --(f x))
       #|  (:real^N)
       #|  f:real^N->real^N
-      #|  !f:real^N->real^N.\n      ~(f continuous_on cball(vec 0,&1) /\\\n        IMAGE f (cball(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        !x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))
+      #|  forall f:real^N->real^N.\n      ~(f continuous_on cball(vec 0,&1) /\\\n        IMAGE f (cball(vec 0,&1)) SUBSET sphere(vec 0,&1) /\\\n        forall x. x IN sphere(vec 0,&1) ==> f(--x) = --(f x))
       #|  (1 <= m /\\ m <= n) /\\ ~(m = n) <=> 1 <= m /\\ m <= n - 1
-      #|  (!x. P x ==> ?n. A n /\\ x IN c n)\n        ==> P x /\\ (!n. A n /\\ ~(n = m) ==> ~(x IN c n))\n            ==> x IN c m
+      #|  (forall x. P x ==> ?n. A n /\\ x IN c n)\n        ==> P x /\\ (forall n. A n /\\ ~(n = m) ==> ~(x IN c n))\n            ==> x IN c m
       #|  dimindex(:N)
       #|  (s = {} \\/ a IN s <=> s = {}) <=> ~(a IN s)
       #|  ~(p /\\ q /\\ r) <=> p /\\ q ==> ~r
@@ -82680,7 +82680,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  k:num
       #|  k:num
       #|  ?i. 1 <= i /\\ i <= dimindex(:N) - 1 /\\ (x:real^N) IN c i
-      #|  (!i. P i /\\ Q i ==> (if R i then f i else z) = (if R i then g i else z))\n      ==> (!i. R i ==> Q i)\n          ==> (!i. P i /\\ R i ==> (f i = &0 <=> g i = &0))
+      #|  (forall i. P i /\\ Q i ==> (if R i then f i else z) = (if R i then g i else z))\n      ==> (forall i. R i ==> Q i)\n          ==> (forall i. P i /\\ R i ==> (f i = &0 <=> g i = &0))
       #|  x:real^N
       #|  i <= dimindex(:N) - 1
       #|  i:num
@@ -82692,7 +82692,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  1..dimindex(:N)
       #|  u:(real^N->bool)->bool
       #|  u:(real^N->bool)->bool = {}
-      #|  !u:(real^N->bool)->bool.\n        FINITE u /\\ CARD(u) <= dimindex(:N) /\\ (!c. c IN u ==> closed c) /\\\n        sphere(vec 0,&1) SUBSET UNIONS u\n        ==> ?c x. c IN u /\\ x IN sphere(vec 0,&1) /\\ x IN c /\\ --x IN c
+      #|  forall u:(real^N->bool)->bool.\n        FINITE u /\\ CARD(u) <= dimindex(:N) /\\ (forall c. c IN u ==> closed c) /\\\n        sphere(vec 0,&1) SUBSET UNIONS u\n        ==> ?c x. c IN u /\\ x IN sphere(vec 0,&1) /\\ x IN c /\\ --x IN c
       #|  norm(x:real^N) = &1 ==> ~(x = vec 0)
       #|  :real
       #|  :real
@@ -82708,7 +82708,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  a:real^N
       #|  a dot (x:real^N) - b = &0 <=> a dot x = b
       #|  b - a dot (x:real^N) = &0 <=> a dot x = b
-      #|  ~(vec 0 IN sphere(vec 0:real^N,&1)) /\\\n      (!x:real^N. ~(x = vec 0) ==> P x)\n      ==> (!x. x IN sphere(vec 0,&1) ==> P x)
+      #|  ~(vec 0 IN sphere(vec 0:real^N,&1)) /\\\n      (forall x:real^N. ~(x = vec 0) ==> P x)\n      ==> (forall x. x IN sphere(vec 0,&1) ==> P x)
       #|  a dot (x:real^N) - b <= &0 <=> a dot x <= b
       #|  b - a dot (x:real^N) <= &0 <=> a dot x >= b
       #|  a:real <= b <=> a - b <= &0
@@ -82720,7 +82720,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  1..dimindex(:N)
       #|  u:(real^N->bool)->bool
       #|  u:(real^N->bool)->bool = {}
-      #|  !u:(real^N->bool)->bool.\n      FINITE u /\\ CARD(u) <= dimindex(:N) /\\ (!s. s IN u ==> measurable s)\n      ==> ?a b. !s. s IN u\n                    ==> measure {x | x IN s /\\ a dot x <= b} = measure s / &2
+      #|  forall u:(real^N->bool)->bool.\n      FINITE u /\\ CARD(u) <= dimindex(:N) /\\ (forall s. s IN u ==> measurable s)\n      ==> ?a b. forall s. s IN u\n                    ==> measure {x | x IN s /\\ a dot x <= b} = measure s / &2
       #|  \\x. if x IN s then (f:real^M->real^N) x else g x
       #|  f:real^M->real^N
       #|  (s:real^M->bool) UNION UNIONS u = UNIONS u
@@ -82728,8 +82728,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  u:(real^M->bool)->bool
       #|  s:real^M->bool
       #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  !h:real^M->real^N k t f.\n          (!s. s IN f ==> ?g. g continuous_on s /\\\n                              IMAGE g s SUBSET t /\\\n                              !x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (!s. s IN f ==> closed s) /\\\n          (!s t. s IN f /\\ t IN f /\\ ~(s = t) ==> (s INTER t) SUBSET k)\n          ==> ?g. g continuous_on (UNIONS f) /\\\n                  IMAGE g (UNIONS f) SUBSET t /\\\n                  !x. x IN (UNIONS f) INTER k ==> g x = h x
-      #|  !h:real^M->real^N k t f.\n          (!s. s IN f ==> ?g. g continuous_on s /\\\n                              IMAGE g s SUBSET t /\\\n                              !x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (!s. s IN f ==> closed s) /\\\n          (!s t. s IN f /\\ t IN f /\\ ~(s SUBSET t) /\\ ~(t SUBSET s)\n                 ==> (s INTER t) SUBSET k)\n          ==> ?g. g continuous_on (UNIONS f) /\\\n                  IMAGE g (UNIONS f) SUBSET t /\\\n                  !x. x IN (UNIONS f) INTER k ==> g x = h x
+      #|  forall h:real^M->real^N k t f.\n          (forall s. s IN f ==> ?g. g continuous_on s /\\\n                              IMAGE g s SUBSET t /\\\n                              forall x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (forall s. s IN f ==> closed s) /\\\n          (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> (s INTER t) SUBSET k)\n          ==> ?g. g continuous_on (UNIONS f) /\\\n                  IMAGE g (UNIONS f) SUBSET t /\\\n                  forall x. x IN (UNIONS f) INTER k ==> g x = h x
+      #|  forall h:real^M->real^N k t f.\n          (forall s. s IN f ==> ?g. g continuous_on s /\\\n                              IMAGE g s SUBSET t /\\\n                              forall x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (forall s. s IN f ==> closed s) /\\\n          (forall s t. s IN f /\\ t IN f /\\ ~(s SUBSET t) /\\ ~(t SUBSET s)\n                 ==> (s INTER t) SUBSET k)\n          ==> ?g. g continuous_on (UNIONS f) /\\\n                  IMAGE g (UNIONS f) SUBSET t /\\\n                  forall x. x IN (UNIONS f) INTER k ==> g x = h x
       #|  aff_dim(d:real^M->bool)
       #|  d INTER e face_of (d:real^M->bool) /\\\n                  d INTER e face_of e
       #|  c:real^M->bool
@@ -82744,7 +82744,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  c:real^M->bool
       #|  (d INTER e) face_of d /\\ (d INTER e) face_of e\n          ==> (d INTER e) face_of d
       #|  e:real^M->bool
-      #|  (!x. x IN s ==> P x) ==> t SUBSET s\n                  ==> !x. x IN t ==> P x
+      #|  (forall x. x IN s ==> P x) ==> t SUBSET s\n                  ==> forall x. x IN t ==> P x
       #|  g:real^M->real^N
       #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
       #|  f:real^M->bool
@@ -82765,7 +82765,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  h:real^M->real^N
       #|  (d:real^M->bool) SUBSET UNIONS\n                 (n UNION {d | ?c. c IN m /\\ d face_of c /\\ aff_dim d < &p})
       #|  d:real^M->bool
-      #|  !d. d IN n UNION {d | ?c. c IN m /\\ d face_of c /\\ aff_dim d <= &p}\n          ==> ?g. (g:real^M->real^N) continuous_on d /\\\n                  IMAGE g d SUBSET relative_frontier t /\\\n                  !x. x IN d INTER\n                      UNIONS\n                    (n UNION {d | ?c. c IN m /\\ d face_of c /\\ aff_dim d < &p})\n                      ==> g x = h x
+      #|  forall d. d IN n UNION {d | ?c. c IN m /\\ d face_of c /\\ aff_dim d <= &p}\n          ==> ?g. (g:real^M->real^N) continuous_on d /\\\n                  IMAGE g d SUBSET relative_frontier t /\\\n                  forall x. x IN d INTER\n                      UNIONS\n                    (n UNION {d | ?c. c IN m /\\ d face_of c /\\ aff_dim d < &p})\n                      ==> g x = h x
       #|  t:real^N->bool
       #|  ~(relative_frontier t:real^N->bool = {})
       #|  ~(&p:int < --(&1))
@@ -82788,11 +82788,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  --(&1):int <= s /\\ s < t ==> &0 <= t
       #|  q /\\ (p ==> r) ==> (p <=> q) ==> r
       #|  aff_dim(t:real^N->bool)
-      #|  !i. &i <= aff_dim t\n          ==> ?g. g continuous_on\n                  (UNIONS\n                   (n UNION {d | ?c. c IN m /\\ d face_of c /\\\n                                      aff_dim d < &i})) /\\\n                  IMAGE g (UNIONS\n                   (n UNION {d | ?c. c IN m /\\ d face_of c /\\\n                                      aff_dim d < &i}))\n                  SUBSET relative_frontier t /\\\n                  (!x. x IN UNIONS n ==> g x = (f:real^M->real^N) x)
+      #|  forall i. &i <= aff_dim t\n          ==> ?g. g continuous_on\n                  (UNIONS\n                   (n UNION {d | ?c. c IN m /\\ d face_of c /\\\n                                      aff_dim d < &i})) /\\\n                  IMAGE g (UNIONS\n                   (n UNION {d | ?c. c IN m /\\ d face_of c /\\\n                                      aff_dim d < &i}))\n                  SUBSET relative_frontier t /\\\n                  (forall x. x IN UNIONS n ==> g x = (f:real^M->real^N) x)
       #|  f:real^M->real^N
       #|  (UNIONS m:real^M->bool) SUBSET UNIONS n
       #|  m DIFF n:(real^M->bool)->bool = {}
-      #|  !f:real^M->real^N m n t.\n          FINITE m /\\ (!c. c IN m ==> polytope c) /\\\n          n SUBSET m /\\ (!c. c IN m DIFF n ==> aff_dim c < aff_dim t) /\\\n          (!c1 c2. c1 IN m /\\ c2 IN m\n                   ==> (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2) /\\\n          convex t /\\ bounded t /\\\n          f continuous_on (UNIONS n) /\\\n          IMAGE f (UNIONS n) SUBSET relative_frontier t\n          ==> ?g. g continuous_on (UNIONS m) /\\\n                  IMAGE g (UNIONS m) SUBSET relative_frontier t /\\\n                  (!x. x IN UNIONS n ==> g x = f x)
+      #|  forall f:real^M->real^N m n t.\n          FINITE m /\\ (forall c. c IN m ==> polytope c) /\\\n          n SUBSET m /\\ (forall c. c IN m DIFF n ==> aff_dim c < aff_dim t) /\\\n          (forall c1 c2. c1 IN m /\\ c2 IN m\n                   ==> (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2) /\\\n          convex t /\\ bounded t /\\\n          f continuous_on (UNIONS n) /\\\n          IMAGE f (UNIONS n) SUBSET relative_frontier t\n          ==> ?g. g continuous_on (UNIONS m) /\\\n                  IMAGE g (UNIONS m) SUBSET relative_frontier t /\\\n                  (forall x. x IN UNIONS n ==> g x = f x)
       #|  UNIONS u:real^M->bool
       #|  s:real^M->bool
       #|  (s DIFF ((a:real^M) INSERT c)) UNION\n                (UNIONS u DIFF ((a:real^M) INSERT c))
@@ -82807,13 +82807,13 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  u:(real^M->bool)->bool
       #|  s:real^M->bool
       #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  !h:real^M->real^N k t u f.\n          (!s. s IN f ==> ?a g. ~(a IN u) /\\ g continuous_on (s DELETE a) /\\\n                               IMAGE g (s DELETE a) SUBSET t /\\\n                               !x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (!s. s IN f ==> closed s) /\\\n          (!s t. s IN f /\\ t IN f /\\ ~(s = t) ==> (s INTER t) SUBSET k)\n          ==> ?c g. FINITE c /\\ DISJOINT c u /\\ CARD c <= CARD f /\\\n                    g continuous_on (UNIONS f DIFF c) /\\\n                    IMAGE g (UNIONS f DIFF c) SUBSET t /\\\n                    !x. x IN (UNIONS f DIFF c) INTER k ==> g x = h x
-      #|  {t:real^M->bool | t IN f /\\\n                                      (!u. u IN f ==> ~(t PSUBSET u))}
+      #|  forall h:real^M->real^N k t u f.\n          (forall s. s IN f ==> ?a g. ~(a IN u) /\\ g continuous_on (s DELETE a) /\\\n                               IMAGE g (s DELETE a) SUBSET t /\\\n                               forall x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (forall s. s IN f ==> closed s) /\\\n          (forall s t. s IN f /\\ t IN f /\\ ~(s = t) ==> (s INTER t) SUBSET k)\n          ==> ?c g. FINITE c /\\ DISJOINT c u /\\ CARD c <= CARD f /\\\n                    g continuous_on (UNIONS f DIFF c) /\\\n                    IMAGE g (UNIONS f DIFF c) SUBSET t /\\\n                    forall x. x IN (UNIONS f DIFF c) INTER k ==> g x = h x
+      #|  {t:real^M->bool | t IN f /\\\n                                      (forall u. u IN f ==> ~(t PSUBSET u))}
       #|  u:real^M->bool
       #|  t:real^N->bool
       #|  k:real^M->bool
       #|  h:real^M->real^N
-      #|  !h:real^M->real^N k t u f.\n          (!s. s IN f ==> ?a g. ~(a IN u) /\\ g continuous_on (s DELETE a) /\\\n                                IMAGE g (s DELETE a) SUBSET t /\\\n                                !x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (!s. s IN f ==> closed s) /\\\n          (!s t. s IN f /\\ t IN f /\\  ~(s SUBSET t) /\\ ~(t SUBSET s)\n                 ==> (s INTER t) SUBSET k)\n          ==> ?c g. FINITE c /\\ DISJOINT c u /\\ CARD c <= CARD f /\\\n                    g continuous_on (UNIONS f DIFF c) /\\\n                    IMAGE g (UNIONS f DIFF c) SUBSET t /\\\n                    !x. x IN (UNIONS f DIFF c) INTER k ==> g x = h x
+      #|  forall h:real^M->real^N k t u f.\n          (forall s. s IN f ==> ?a g. ~(a IN u) /\\ g continuous_on (s DELETE a) /\\\n                                IMAGE g (s DELETE a) SUBSET t /\\\n                                forall x. x IN s INTER k ==> g x = h x) /\\\n          FINITE f /\\ (forall s. s IN f ==> closed s) /\\\n          (forall s t. s IN f /\\ t IN f /\\  ~(s SUBSET t) /\\ ~(t SUBSET s)\n                 ==> (s INTER t) SUBSET k)\n          ==> ?c g. FINITE c /\\ DISJOINT c u /\\ CARD c <= CARD f /\\\n                    g continuous_on (UNIONS f DIFF c) /\\\n                    IMAGE g (UNIONS f DIFF c) SUBSET t /\\\n                    forall x. x IN (UNIONS f DIFF c) INTER k ==> g x = h x
       #|  aff_dim(d:real^M->bool)
       #|  d INTER e:real^M->bool = d
       #|  d:real^M->bool
@@ -82826,7 +82826,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  d:real^M->bool
       #|  (d INTER e) face_of d /\\ (d INTER e) face_of e\n          ==> (d INTER e) face_of d
       #|  e:real^M->bool
-      #|  (!x. x IN s ==> r x = x) ==> t SUBSET s\n                    ==> !x. x IN t ==> h(r x) = h x
+      #|  (forall x. x IN s ==> r x = x) ==> t SUBSET s\n                    ==> forall x. x IN t ==> h(r x) = h x
       #|  IMAGE h t SUBSET u ==> s SUBSET t ==> IMAGE h s SUBSET u
       #|  s SUBSET t ==> s DELETE a SUBSET t DELETE a
       #|  d:real^M->bool
@@ -82848,7 +82848,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  ~(UNIONS n = (:real^M))
       #|  (d:real^M->bool) SUBSET\n                     UNIONS(n UNION {d | ?c. (c IN m /\\ ~(c IN n)) /\\\n                                             d face_of c /\\\n                                     aff_dim d < aff_dim(t:real^N->bool)})
       #|  d:real^M->bool
-      #|  !d. d IN m\n          ==> ?a g. ~(a IN UNIONS n) /\\\n                    (g:real^M->real^N) continuous_on (d DELETE a) /\\\n                    IMAGE g (d DELETE a) SUBSET relative_frontier t /\\\n                    !x. x IN d INTER\n                         UNIONS\n                          (n UNION {d | ?c. (c IN m /\\ ~(c IN n)) /\\\n                                            d face_of c /\\\n                                            aff_dim d < aff_dim t})\n                        ==> g x = h x
+      #|  forall d. d IN m\n          ==> ?a g. ~(a IN UNIONS n) /\\\n                    (g:real^M->real^N) continuous_on (d DELETE a) /\\\n                    IMAGE g (d DELETE a) SUBSET relative_frontier t /\\\n                    forall x. x IN d INTER\n                         UNIONS\n                          (n UNION {d | ?c. (c IN m /\\ ~(c IN n)) /\\\n                                            d face_of c /\\\n                                            aff_dim d < aff_dim t})\n                        ==> g x = h x
       #|  h:real^M->real^N
       #|  UNIONS {{d:real^M->bool | d face_of c} | c IN m}
       #|  (n UNION m) DIFF n = m DIFF n
@@ -82856,7 +82856,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  n:(real^M->bool)->bool
       #|  n UNION {d:real^M->bool | ?c. c IN m DIFF n /\\ d face_of c /\\\n                                        aff_dim d < aff_dim(t:real^N->bool)}
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N m n t.\n        FINITE m /\\ (!c. c IN m ==> polytope c) /\\\n        n SUBSET m /\\ (!c. c IN m DIFF n ==> aff_dim c <= aff_dim t) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2) /\\\n        convex t /\\ bounded t /\\\n        f continuous_on (UNIONS n) /\\\n        IMAGE f (UNIONS n) SUBSET relative_frontier t\n        ==> ?k g. FINITE k /\\ DISJOINT k (UNIONS n) /\\ CARD k <= CARD m /\\\n                  g continuous_on (UNIONS m DIFF k) /\\\n                  IMAGE g (UNIONS m DIFF k) SUBSET relative_frontier t /\\\n                  (!x. x IN UNIONS n ==> g x = f x)
+      #|  forall f:real^M->real^N m n t.\n        FINITE m /\\ (forall c. c IN m ==> polytope c) /\\\n        n SUBSET m /\\ (forall c. c IN m DIFF n ==> aff_dim c <= aff_dim t) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2) /\\\n        convex t /\\ bounded t /\\\n        f continuous_on (UNIONS n) /\\\n        IMAGE f (UNIONS n) SUBSET relative_frontier t\n        ==> ?k g. FINITE k /\\ DISJOINT k (UNIONS n) /\\ CARD k <= CARD m /\\\n                  g continuous_on (UNIONS m DIFF k) /\\\n                  IMAGE g (UNIONS m DIFF k) SUBSET relative_frontier t /\\\n                  (forall x. x IN UNIONS n ==> g x = f x)
       #|  diameter(c:real^M->bool)
       #|  x:real^M
       #|  y:real^M
@@ -82913,12 +82913,12 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s:real^M->bool
       #|  f:real^M->real^N
       #|  compact(s:real^M->bool)
-      #|  (!f:real^M->real^N m s t.\n        FINITE m /\\ (!c. c IN m ==> polytope c /\\ aff_dim c < aff_dim t) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2) /\\\n        s SUBSET UNIONS m /\\ closed s /\\ convex t /\\ bounded t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier t\n        ==> ?g. g continuous_on UNIONS m /\\\n                IMAGE g (UNIONS m) SUBSET relative_frontier t /\\\n                !x. x IN s ==> g x = f x) /\\\n   (!f:real^M->real^N m s t.\n        FINITE m /\\ (!c. c IN m ==> polytope c /\\ aff_dim c <= aff_dim t) /\\\n        (!c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2) /\\\n        s SUBSET UNIONS m /\\ closed s /\\ convex t /\\ bounded t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier t\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (UNIONS m DIFF k) /\\\n                  IMAGE g (UNIONS m DIFF k) SUBSET relative_frontier t /\\\n                  !x. x IN s ==> g x = f x)
+      #|  (forall f:real^M->real^N m s t.\n        FINITE m /\\ (forall c. c IN m ==> polytope c /\\ aff_dim c < aff_dim t) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2) /\\\n        s SUBSET UNIONS m /\\ closed s /\\ convex t /\\ bounded t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier t\n        ==> ?g. g continuous_on UNIONS m /\\\n                IMAGE g (UNIONS m) SUBSET relative_frontier t /\\\n                forall x. x IN s ==> g x = f x) /\\\n   (forall f:real^M->real^N m s t.\n        FINITE m /\\ (forall c. c IN m ==> polytope c /\\ aff_dim c <= aff_dim t) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2) /\\\n        s SUBSET UNIONS m /\\ closed s /\\ convex t /\\ bounded t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier t\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (UNIONS m DIFF k) /\\\n                  IMAGE g (UNIONS m DIFF k) SUBSET relative_frontier t /\\\n                  forall x. x IN s ==> g x = f x)
       #|  {x:A | P x}
       #|  g:A->B
       #|  g:A->B
-      #|  (?x. P x /\\ DISJOINT k (f x)) <=>\n                          ~(!x. ?y. P x ==> y IN k /\\ y IN f x)
-      #|  !f:A->B->bool P k.\n        INFINITE {x | P x} /\\ FINITE k /\\\n        (!x y. P x /\\ P y /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> ?x. P x /\\ DISJOINT k (f x)
+      #|  (?x. P x /\\ DISJOINT k (f x)) <=>\n                          ~(forall x. ?y. P x ==> y IN k /\\ y IN f x)
+      #|  forall f:A->B->bool P k.\n        INFINITE {x | P x} /\\ FINITE k /\\\n        (forall x y. P x /\\ P y /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> ?x. P x /\\ DISJOINT k (f x)
       #|  closest_point s x IN relative_frontier s /\\\n     DISJOINT k (relative_frontier s)\n     ==> ~(closest_point s x IN k)
       #|  x IN interval[--c:real^M,c]
       #|  closest_point s x IN s /\\ s SUBSET u ==> closest_point s x IN u
@@ -82954,19 +82954,19 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s:real^M->bool = {}
       #|  s SUBSET t ==> s DIFF k SUBSET t DIFF k
       #|  t:real^M->bool
-      #|  ?k g. FINITE k /\\ DISJOINT k s /\\\n            g continuous_on (affine hull t DIFF k) /\\\n            IMAGE g (affine hull t DIFF k) SUBSET relative_frontier u /\\\n            !x. x IN s ==> g x = (f:real^M->real^N) x
-      #|  !f:real^M->real^N s t u.\n        compact s /\\ s SUBSET t /\\ affine t /\\\n        convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  !x. x IN s ==> g x = f x
+      #|  ?k g. FINITE k /\\ DISJOINT k s /\\\n            g continuous_on (affine hull t DIFF k) /\\\n            IMAGE g (affine hull t DIFF k) SUBSET relative_frontier u /\\\n            forall x. x IN s ==> g x = (f:real^M->real^N) x
+      #|  forall f:real^M->real^N s t u.\n        compact s /\\ s SUBSET t /\\ affine t /\\\n        convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  forall x. x IN s ==> g x = f x
       #|  k INTER t:real^M->bool
       #|  k:real^M->bool
       #|  g:real^M->real^N
-      #|  !f:real^M->real^N s t u.\n        compact s /\\ convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        s SUBSET t /\\ f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  !x. x IN s ==> g x = f x
-      #|  !f:real^M->real^N s t u.\n        compact s /\\ convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        s SUBSET t /\\ f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  !x. x IN s ==> g x = f x
-      #|  !u t s v. closed_in (subtopology euclidean u) v /\\ t SUBSET u /\\\n               s = v INTER t\n               ==> closed_in (subtopology euclidean t) s
+      #|  forall f:real^M->real^N s t u.\n        compact s /\\ convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        s SUBSET t /\\ f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  forall x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t u.\n        compact s /\\ convex u /\\ bounded u /\\ aff_dim t <= aff_dim u /\\\n        s SUBSET t /\\ f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u\n        ==> ?k g. FINITE k /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  forall x. x IN s ==> g x = f x
+      #|  forall u t s v. closed_in (subtopology euclidean u) v /\\ t SUBSET u /\\\n               s = v INTER t\n               ==> closed_in (subtopology euclidean t) s
       #|  {x:A | P x}
       #|  g:A->B
       #|  g:A->B
-      #|  (?x. P x /\\ DISJOINT k (f x)) <=>\n                          ~(!x. ?y. P x ==> y IN k /\\ y IN f x)
-      #|  !f:A->B->bool P k.\n        INFINITE {x | P x} /\\ FINITE k /\\\n        (!x y. P x /\\ P y /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> ?x. P x /\\ DISJOINT k (f x)
+      #|  (?x. P x /\\ DISJOINT k (f x)) <=>\n                          ~(forall x. ?y. P x ==> y IN k /\\ y IN f x)
+      #|  forall f:A->B->bool P k.\n        INFINITE {x | P x} /\\ FINITE k /\\\n        (forall x y. P x /\\ P y /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n        ==> ?x. P x /\\ DISJOINT k (f x)
       #|  c:real^M->bool
       #|  x:real^M
       #|  c:real^M->bool
@@ -83106,14 +83106,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  a:real^M
       #|  c:real^M->bool
       #|  c:real^M->bool
-      #|  !c. c IN components ((u:real^M->bool) DIFF s) /\\ ~(c INTER k = {})\n          ==> ?a g. a IN c /\\ a IN p /\\\n                    g continuous_on (s UNION (c DELETE a)) /\\\n                    IMAGE g (s UNION (c DELETE a)) SUBSET t /\\\n                    !x. x IN s ==> g x = (f:real^M->real^N) x
+      #|  forall c. c IN components ((u:real^M->bool) DIFF s) /\\ ~(c INTER k = {})\n          ==> ?a g. a IN c /\\ a IN p /\\\n                    g continuous_on (s UNION (c DELETE a)) /\\\n                    IMAGE g (s UNION (c DELETE a)) SUBSET t /\\\n                    forall x. x IN s ==> g x = (f:real^M->real^N) x
       #|  locally connected (u:real^M->bool)
       #|  co:real^M->bool
       #|  ~(((u:real^M->bool) DIFF s) INTER k = {})
       #|  f:real^M->real^N
       #|  k:real^M->bool = {}
-      #|  !f:real^M->real^N s t k p u.\n          FINITE k /\\ affine u /\\\n          f continuous_on ((u:real^M->bool) DIFF k) /\\\n          IMAGE f ((u:real^M->bool) DIFF k) SUBSET t /\\\n          (!c. c IN components((u:real^M->bool) DIFF s) /\\ ~(c INTER k = {})\n               ==> ~(c INTER p = {})) /\\\n          closed_in (subtopology euclidean u) s /\\ DISJOINT k s /\\ k SUBSET u\n          ==> ?g. g continuous_on ((u:real^M->bool) DIFF p) /\\\n                  IMAGE g ((u:real^M->bool) DIFF p) SUBSET t /\\\n                  !x. x IN s ==> g x = f x
-      #|  DISJOINT s t <=> !x. x IN s ==> ~(x IN t)
+      #|  forall f:real^M->real^N s t k p u.\n          FINITE k /\\ affine u /\\\n          f continuous_on ((u:real^M->bool) DIFF k) /\\\n          IMAGE f ((u:real^M->bool) DIFF k) SUBSET t /\\\n          (forall c. c IN components((u:real^M->bool) DIFF s) /\\ ~(c INTER k = {})\n               ==> ~(c INTER p = {})) /\\\n          closed_in (subtopology euclidean u) s /\\ DISJOINT k s /\\ k SUBSET u\n          ==> ?g. g continuous_on ((u:real^M->bool) DIFF p) /\\\n                  IMAGE g ((u:real^M->bool) DIFF p) SUBSET t /\\\n                  forall x. x IN s ==> g x = f x
+      #|  DISJOINT s t <=> forall x. x IN s ==> ~(x IN t)
       #|  h:real^M->real^N
       #|  (:real^M)
       #|  c':real^M->bool = c
@@ -83134,14 +83134,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  h:real^M->real^M
       #|  (x:real^M) IN (t DIFF s)
       #|  x:real^M
-      #|  !x. ?y. x IN k\n              ==> ?c. c IN components (t DIFF s:real^M->bool) /\\\n                      x IN c /\\ y IN c /\\ y IN p
+      #|  forall x. ?y. x IN k\n              ==> ?c. c IN components (t DIFF s:real^M->bool) /\\\n                      x IN c /\\ y IN c /\\ y IN p
       #|  g:real^M->real^N
       #|  k:real^M->bool
       #|  u:real^N->bool
       #|  t:real^M->bool
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s t u p.\n          compact s /\\ convex u /\\ bounded u /\\\n          affine t /\\ aff_dim t <= aff_dim u /\\ s SUBSET t /\\\n          f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n          (!c. c IN components(t DIFF s) ==> ~(c INTER p = {}))\n          ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                    g continuous_on (t DIFF k) /\\\n                    IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                    !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t u p.\n          compact s /\\ convex u /\\ bounded u /\\\n          affine t /\\ aff_dim t <= aff_dim u /\\ s SUBSET t /\\\n          f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n          (forall c. c IN components(t DIFF s) ==> ~(c INTER p = {}))\n          ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                    g continuous_on (t DIFF k) /\\\n                    IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                    forall x. x IN s ==> g x = f x
       #|  closest_point s x IN relative_frontier s /\\\n     DISJOINT k (relative_frontier s)\n     ==> ~(closest_point s x IN k)
       #|  x IN interval[--c:real^M,c]
       #|  closest_point s x IN s /\\ s SUBSET u ==> closest_point s x IN u
@@ -83181,27 +83181,27 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  bounded(u:real^N->bool)
       #|  relative_frontier(u:real^N->bool) = {}
       #|  s:real^M->bool = {}
-      #|  !f:real^M->real^N s t u p.\n        compact s /\\ convex u /\\ bounded u /\\\n        affine t /\\ aff_dim t <= aff_dim u /\\ s SUBSET t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n        (!c. c IN components(t DIFF s) /\\ bounded c ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t u p.\n        compact s /\\ convex u /\\ bounded u /\\\n        affine t /\\ aff_dim t <= aff_dim u /\\ s SUBSET t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n        (forall c. c IN components(t DIFF s) /\\ bounded c ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET relative_frontier u /\\\n                  forall x. x IN s ==> g x = f x
       #|  r:real
       #|  a:real^N
       #|  (\\x. a):real^M->real^N
       #|  {}:real^M->bool
       #|  r = &0
-      #|  !f:real^M->real^N s t a r p.\n        compact s /\\ affine t /\\ aff_dim t <= &(dimindex(:N)) /\\ s SUBSET t /\\\n        &0 <= r /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n        (!c. c IN components(t DIFF s) /\\ bounded c ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET sphere(a,r) /\\\n                  !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t a r p.\n        compact s /\\ affine t /\\ aff_dim t <= &(dimindex(:N)) /\\ s SUBSET t /\\\n        &0 <= r /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n        (forall c. c IN components(t DIFF s) /\\ bounded c ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\ k SUBSET t /\\ DISJOINT k s /\\\n                  g continuous_on (t DIFF k) /\\\n                  IMAGE g (t DIFF k) SUBSET sphere(a,r) /\\\n                  forall x. x IN s ==> g x = f x
       #|  p:real^M->bool
       #|  r:real
       #|  a:real^N
       #|  (:real^M)
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s a r p.\n     dimindex(:M) <= dimindex(:N) /\\ &0 <= r /\\\n     compact s /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n     (!c. c IN components((:real^M) DIFF s) /\\ bounded c\n          ==> ~(c INTER p = {}))\n     ==> ?k g. FINITE k /\\ k SUBSET p /\\ DISJOINT k s /\\\n               g continuous_on ((:real^M) DIFF k) /\\\n               IMAGE g ((:real^M) DIFF k) SUBSET sphere(a,r) /\\\n               !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s a r p.\n     dimindex(:M) <= dimindex(:N) /\\ &0 <= r /\\\n     compact s /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n     (forall c. c IN components((:real^M) DIFF s) /\\ bounded c\n          ==> ~(c INTER p = {}))\n     ==> ?k g. FINITE k /\\ k SUBSET p /\\ DISJOINT k s /\\\n               g continuous_on ((:real^M) DIFF k) /\\\n               IMAGE g ((:real^M) DIFF k) SUBSET sphere(a,r) /\\\n               forall x. x IN s ==> g x = f x
       #|  p /\\ q /\\ r <=> q /\\ p /\\ r
       #|  {}:real^M->bool
       #|  r:real
       #|  a:real^N
       #|  s:real^M->bool
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N s a r.\n     dimindex(:M) <= dimindex(:N) /\\ &0 <= r /\\\n     compact s /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n     (!c. c IN components((:real^M) DIFF s) ==> ~bounded c)\n     ==> ?g. g continuous_on (:real^M) /\\\n             IMAGE g (:real^M) SUBSET sphere(a,r) /\\\n             !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s a r.\n     dimindex(:M) <= dimindex(:N) /\\ &0 <= r /\\\n     compact s /\\ f continuous_on s /\\ IMAGE f s SUBSET sphere(a,r) /\\\n     (forall c. c IN components((:real^M) DIFF s) ==> ~bounded c)\n     ==> ?g. g continuous_on (:real^M) /\\\n             IMAGE g (:real^M) SUBSET sphere(a,r) /\\\n             forall x. x IN s ==> g x = f x
       #|  (g:real^M->real^N) o (h:real^M->real^M)
       #|  g:real^M->real^N
       #|  {f:real^M->bool | f face_of p}
@@ -83214,7 +83214,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  p:real^M->bool
       #|  s:real^M->bool
       #|  ?p:real^M->bool. polytope p /\\ aff_dim p = aff_dim(s:real^M->bool)
-      #|  !f:real^M->real^N c s t.\n        closed c /\\ c SUBSET relative_frontier s /\\ convex s /\\ bounded s /\\\n        convex t /\\ bounded t /\\ aff_dim s <= aff_dim t /\\\n        f continuous_on c /\\ IMAGE f c SUBSET relative_frontier t\n         ==> ?g. g continuous_on (relative_frontier s) /\\\n                 IMAGE g (relative_frontier s) SUBSET relative_frontier t /\\\n                 !x. x IN c ==> g x = f x
+      #|  forall f:real^M->real^N c s t.\n        closed c /\\ c SUBSET relative_frontier s /\\ convex s /\\ bounded s /\\\n        convex t /\\ bounded t /\\ aff_dim s <= aff_dim t /\\\n        f continuous_on c /\\ IMAGE f c SUBSET relative_frontier t\n         ==> ?g. g continuous_on (relative_frontier s) /\\\n                 IMAGE g (relative_frontier s) SUBSET relative_frontier t /\\\n                 forall x. x IN c ==> g x = f x
       #|  cball(b:real^N,s)
       #|  cball(a:real^M,r)
       #|  c:real^M->bool
@@ -83227,8 +83227,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  r = &0
       #|  sphere(b:real^N,s) = {}
       #|  r < &0
-      #|  !f:real^M->real^N c a r b s.\n        dimindex(:M) <= dimindex(:N) /\\ closed c /\\ c SUBSET sphere(a,r) /\\\n        f continuous_on c /\\ IMAGE f c SUBSET sphere(b,s) /\\\n        (&0 <= r /\\ c = {} ==> &0 <= s)\n        ==> ?g. g continuous_on sphere(a,r) /\\\n                IMAGE g (sphere(a,r)) SUBSET sphere(b,s) /\\\n                !x. x IN c ==> g x = f x
-      #|  (!x. x IN s ==> f x = x) ==> IMAGE f s SUBSET s
+      #|  forall f:real^M->real^N c a r b s.\n        dimindex(:M) <= dimindex(:N) /\\ closed c /\\ c SUBSET sphere(a,r) /\\\n        f continuous_on c /\\ IMAGE f c SUBSET sphere(b,s) /\\\n        (&0 <= r /\\ c = {} ==> &0 <= s)\n        ==> ?g. g continuous_on sphere(a,r) /\\\n                IMAGE g (sphere(a,r)) SUBSET sphere(b,s) /\\\n                forall x. x IN c ==> g x = f x
+      #|  (forall x. x IN s ==> f x = x) ==> IMAGE f s SUBSET s
       #|  t SUBSET IMAGE h s ==> IMAGE k (IMAGE h s) SUBSET s\n            ==> IMAGE k t SUBSET s
       #|  p INTER (relative_frontier t:real^M->bool) DELETE q
       #|  a IN t /\\ s SUBSET t DELETE a ==> a INSERT s SUBSET t
@@ -83245,7 +83245,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  t'':real^1
       #|  t'':real^1
       #|  IMAGE (g:real^1->real^M) (interval[vec 0,vec 1])
-      #|  s SUBSET t DELETE q <=> s SUBSET t /\\ !x. x IN s ==> ~(x = q)
+      #|  s SUBSET t DELETE q <=> s SUBSET t /\\ forall x. x IN s ==> ~(x = q)
       #|  interval[vec 0:real^1,vec 1]
       #|  IMAGE (g:real^1->real^M) (interval[vec 0,t'])
       #|  t':real^1
@@ -83265,7 +83265,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  k(h y) = y /\\ k(h y') = y' /\\ ~(y = y')\n            ==> k(h y) = k(h y') ==> F
       #|  k:real^M->real^M
       #|  y':real^M
-      #|  ~(h y IN IMAGE h s) <=> !y'. y' IN s ==> ~(h y = h y')
+      #|  ~(h y IN IMAGE h s) <=> forall y'. y' IN s ==> ~(h y = h y')
       #|  y:real^M
       #|  af DIFF IMAGE (h:real^M->real^M) s
       #|  IMAGE (h:real^M->real^M) w SUBSET l
@@ -83278,11 +83278,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  k(h y) = y /\\ k(h y') = y' /\\ ~(y = y')\n            ==> k(h y) = k(h y') ==> F
       #|  k:real^M->real^M
       #|  y':real^M
-      #|  ~(h y IN IMAGE h s) <=> !y'. y' IN s ==> ~(h y = h y')
+      #|  ~(h y IN IMAGE h s) <=> forall y'. y' IN s ==> ~(h y = h y')
       #|  y:real^M
       #|  af DIFF IMAGE (h:real^M->real^M) s
       #|  IMAGE (h:real^M->real^M) r
-      #|  !s. x IN s /\\ s SUBSET t ==> x IN t
+      #|  forall s. x IN s /\\ s SUBSET t ==> x IN t
       #|  (h:real^M->real^M) z
       #|  (q:real^M) IN r
       #|  connected(r:real^M->bool)
@@ -83320,7 +83320,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  f:real^M->real^N
       #|  {}:real^M->bool
       #|  s = (relative_frontier t:real^M->bool)
-      #|  !f:real^M->real^N s t u p.\n        convex t /\\ bounded t /\\ convex u /\\ bounded u /\\\n        aff_dim t <= aff_dim u + &1 /\\\n        closed s /\\ s SUBSET relative_frontier t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n        (!c. c IN components(relative_frontier t DIFF s) ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\\n                  k SUBSET relative_frontier t /\\ DISJOINT k s /\\\n                  g continuous_on (relative_frontier t DIFF k) /\\\n                  IMAGE g (relative_frontier t DIFF k) SUBSET\n                  relative_frontier u /\\\n                  !x. x IN s ==> g x = f x
+      #|  forall f:real^M->real^N s t u p.\n        convex t /\\ bounded t /\\ convex u /\\ bounded u /\\\n        aff_dim t <= aff_dim u + &1 /\\\n        closed s /\\ s SUBSET relative_frontier t /\\\n        f continuous_on s /\\ IMAGE f s SUBSET relative_frontier u /\\\n        (forall c. c IN components(relative_frontier t DIFF s) ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\\n                  k SUBSET relative_frontier t /\\ DISJOINT k s /\\\n                  g continuous_on (relative_frontier t DIFF k) /\\\n                  IMAGE g (relative_frontier t DIFF k) SUBSET\n                  relative_frontier u /\\\n                  forall x. x IN s ==> g x = f x
       #|  e:real
       #|  b:real^N
       #|  d:real
@@ -83347,15 +83347,15 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  f:real^M->real^N
       #|  {}:real^M->bool
       #|  s = sphere(a:real^M,d)
-      #|  !f:real^M->real^N s a d b e p.\n        dimindex(:M) <= dimindex(:N) + 1 /\\\n        (&0 < d /\\ s = {} ==> &0 <= e) /\\\n        closed s /\\ s SUBSET sphere(a,d) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET sphere(b,e) /\\\n        (!c. c IN components(sphere(a,d) DIFF s) ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\\n                  k SUBSET sphere(a,d) /\\ DISJOINT k s /\\\n                  g continuous_on (sphere(a,d) DIFF k) /\\\n                  IMAGE g (sphere(a,d) DIFF k) SUBSET sphere(b,e) /\\\n                  !x. x IN s ==> g x = f x
-      #|  !s a:real^N.\n        ~(a IN s) ==> (\\x. inv(norm (x - a)) % (x - a)) continuous_on s
+      #|  forall f:real^M->real^N s a d b e p.\n        dimindex(:M) <= dimindex(:N) + 1 /\\\n        (&0 < d /\\ s = {} ==> &0 <= e) /\\\n        closed s /\\ s SUBSET sphere(a,d) /\\\n        f continuous_on s /\\ IMAGE f s SUBSET sphere(b,e) /\\\n        (forall c. c IN components(sphere(a,d) DIFF s) ==> ~(c INTER p = {}))\n        ==> ?k g. FINITE k /\\ k SUBSET p /\\\n                  k SUBSET sphere(a,d) /\\ DISJOINT k s /\\\n                  g continuous_on (sphere(a,d) DIFF k) /\\\n                  IMAGE g (sphere(a,d) DIFF k) SUBSET sphere(b,e) /\\\n                  forall x. x IN s ==> g x = f x
+      #|  forall s a:real^N.\n        ~(a IN s) ==> (\\x. inv(norm (x - a)) % (x - a)) continuous_on s
       #|  inv x * x = &1 <=> ~(x = &0)
-      #|  !s a:real^N.\n        IMAGE (\\x. inv(norm (x - a)) % (x - a)) s SUBSET sphere(vec 0,&1) <=>\n        ~(a IN s)
+      #|  forall s a:real^N.\n        IMAGE (\\x. inv(norm (x - a)) % (x - a)) s SUBSET sphere(vec 0,&1) <=>\n        ~(a IN s)
       #|  \\z. inv(norm(sndcart z - g(fstcart z))) %\n                  (sndcart z - (g:real^1->real^N)(fstcart z))
       #|  g:real^1->real^N
-      #|  !s a b. path_component ((:real^N) DIFF s) a b\n           ==> homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   (\\x. inv(norm(x - a)) % (x - a))\n                   (\\x. inv(norm(x - b)) % (x - b))
+      #|  forall s a b. path_component ((:real^N) DIFF s) a b\n           ==> homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   (\\x. inv(norm(x - a)) % (x - a))\n                   (\\x. inv(norm(x - b)) % (x - b))
       #|  x:real^N
-      #|  s UNION t SUBSET u ==> !x. x IN t /\\ ~(x IN u) ==> wev
+      #|  s UNION t SUBSET u ==> forall x. x IN t /\\ ~(x IN u) ==> wev
       #|  a + &1 % (x - a):real^N = x
       #|  ~(x IN connected_component ((:real^N) DIFF s) a)
       #|  inv x * x = &1 <=> ~(x = &0)
@@ -83373,7 +83373,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s UNION connected_component ((:real^N) DIFF s) a
       #|  c = connected_component ((:real^N) DIFF s) a
       #|  a:real^N
-      #|  !s c a:real^N.\n        compact s /\\ c IN components((:real^N) DIFF s) /\\ bounded c /\\ a IN c\n        ==> ~(?g. g continuous_on (s UNION c) /\\\n                  IMAGE g (s UNION c) SUBSET sphere (vec 0,&1) /\\\n                  (!x. x IN s ==> g x = inv(norm(x - a)) % (x - a)))
+      #|  forall s c a:real^N.\n        compact s /\\ c IN components((:real^N) DIFF s) /\\ bounded c /\\ a IN c\n        ==> ~(?g. g continuous_on (s UNION c) /\\\n                  IMAGE g (s UNION c) SUBSET sphere (vec 0,&1) /\\\n                  (forall x. x IN s ==> g x = inv(norm(x - a)) % (x - a)))
       #|  \\x:real^N. inv(norm (x - b)) % (x - b)
       #|  c:real^N
       #|  ?c. homotopic_with (\\x. T)\n           (subtopology euclidean (ball(vec 0:real^N,r)),\n            subtopology euclidean (sphere(vec 0,&1)))\n                         (\\x. inv (norm (x - b)) % (x - b)) (\\x. c)
@@ -83390,18 +83390,18 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s:real^N->bool
       #|  \\x:real^N. inv(norm(x - a)) % (x - a)
       #|  s:real^N->bool = {}
-      #|  !s a. compact s /\\ ~(a IN s)\n         ==> (bounded(connected_component ((:real^N) DIFF s) a) <=>\n              ~(?c. homotopic_with (\\x. T)\n                      (subtopology euclidean s,\n                       subtopology euclidean (sphere(vec 0:real^N,&1)))\n                      (\\x. inv(norm(x - a)) % (x - a)) (\\x. c)))
+      #|  forall s a. compact s /\\ ~(a IN s)\n         ==> (bounded(connected_component ((:real^N) DIFF s) a) <=>\n              ~(?c. homotopic_with (\\x. T)\n                      (subtopology euclidean s,\n                       subtopology euclidean (sphere(vec 0:real^N,&1)))\n                      (\\x. inv(norm(x - a)) % (x - a)) (\\x. c)))
       #|  \\x:real^N. inv(norm(x - b)) % (x - b)
       #|  a:real^N
       #|  connected_component ((:real^N) DIFF s) a
       #|  s:real^N->bool
-      #|  !s a b.\n        compact s /\\ ~(a IN s) /\\ ~(b IN s) /\\\n        bounded (connected_component ((:real^N) DIFF s) a) /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,\n           subtopology euclidean (sphere(vec 0,&1)))\n          (\\x. inv(norm(x - a)) % (x - a))\n          (\\x. inv(norm(x - b)) % (x - b))\n        ==> connected_component ((:real^N) DIFF s) a b
+      #|  forall s a b.\n        compact s /\\ ~(a IN s) /\\ ~(b IN s) /\\\n        bounded (connected_component ((:real^N) DIFF s) a) /\\\n        homotopic_with (\\x. T)\n          (subtopology euclidean s,\n           subtopology euclidean (sphere(vec 0,&1)))\n          (\\x. inv(norm(x - a)) % (x - a))\n          (\\x. inv(norm(x - b)) % (x - b))\n        ==> connected_component ((:real^N) DIFF s) a b
       #|  b:real^N
       #|  a:real^N
       #|  (:real^N) DIFF s
       #|  bounded(connected_component ((:real^N) DIFF s) b)
       #|  bounded(connected_component ((:real^N) DIFF s) a)
-      #|  !s a b. 2 <= dimindex(:N) /\\ compact s /\\ ~(a IN s) /\\ ~(b IN s)\n           ==> (homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   (\\x. inv(norm(x - a)) % (x - a))\n                   (\\x. inv(norm(x - b)) % (x - b)) <=>\n                connected_component ((:real^N) DIFF s) a b)
+      #|  forall s a b. 2 <= dimindex(:N) /\\ compact s /\\ ~(a IN s) /\\ ~(b IN s)\n           ==> (homotopic_with (\\x. T)\n                   (subtopology euclidean s,\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   (\\x. inv(norm(x - a)) % (x - a))\n                   (\\x. inv(norm(x - b)) % (x - b)) <=>\n                connected_component ((:real^N) DIFF s) a b)
       #|  s:real^N->bool
       #|  sphere(vec 0:real^N,&1)
       #|  (:real^N)
@@ -83414,24 +83414,24 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  f:real^N->real^N
       #|  \\x:real^N. inv(norm(x - a)) % (x - a)
       #|  a:real^N
-      #|  !s:real^N->bool.\n    compact s\n    ==> ((!c. c IN components((:real^N) DIFF s) ==> ~bounded c) <=>\n         (!f. f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0:real^N,&1)\n              ==> ?c. homotopic_with (\\x. T)\n                       (subtopology euclidean s,\n                        subtopology euclidean (sphere(vec 0,&1))) f (\\x. c)))
+      #|  forall s:real^N->bool.\n    compact s\n    ==> ((forall c. c IN components((:real^N) DIFF s) ==> ~bounded c) <=>\n         (forall f. f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0:real^N,&1)\n              ==> ?c. homotopic_with (\\x. T)\n                       (subtopology euclidean s,\n                        subtopology euclidean (sphere(vec 0,&1))) f (\\x. c)))
       #|  (:real^N) DIFF s = {}
       #|  (:real^N) DIFF s
       #|  (:real^N) DIFF s
       #|  s:real^N->bool
-      #|  !s:real^N->bool.\n      2 <= dimindex(:N) /\\ compact s\n      ==> (connected((:real^N) DIFF s) <=>\n           !f. f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0:real^N,&1)\n               ==> ?c. homotopic_with (\\x. T)\n                        (subtopology euclidean s,\n                         subtopology euclidean (sphere(vec 0,&1))) f (\\x. c))
+      #|  forall s:real^N->bool.\n      2 <= dimindex(:N) /\\ compact s\n      ==> (connected((:real^N) DIFF s) <=>\n           forall f. f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0:real^N,&1)\n               ==> ?c. homotopic_with (\\x. T)\n                        (subtopology euclidean s,\n                         subtopology euclidean (sphere(vec 0,&1))) f (\\x. c))
       #|  b:real^1
       #|  a:real^1
       #|  b:real^1
       #|  a:real^1
-      #|  !s:real^1->bool.\n          bounded s /\\ connected((:real^1) DIFF s) ==> s = {}
+      #|  forall s:real^1->bool.\n          bounded s /\\ connected((:real^1) DIFF s) ==> s = {}
       #|  (s:real^N->bool) homotopy_equivalent (t:real^N->bool)
       #|  t:real^N->bool
       #|  s:real^N->bool
       #|  dimindex(:N) = dimindex(:1)
       #|  1 <= n <=> n = 1 \\/ 2 <= n
       #|  1 <= dimindex(:N)
-      #|  !s t. compact s /\\ compact t /\\ s homotopy_equivalent t\n         ==> (connected((:real^N) DIFF s) <=> connected((:real^N) DIFF t))
+      #|  forall s t. compact s /\\ compact t /\\ s homotopy_equivalent t\n         ==> (connected((:real^N) DIFF s) <=> connected((:real^N) DIFF t))
       #|  (:real^N) DIFF s
       #|  (:real^N) DIFF t =\n    UNIONS {c UNION (s DIFF t) | c | c IN components((:real^N) DIFF s)}
       #|  UNIV DIFF s = {} <=> s = UNIV
@@ -83439,11 +83439,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  f = s ==> s DIFF t SUBSET k UNION f
       #|  c:real^N->bool
       #|  s:real^N->bool
-      #|  !c. c IN components((:real^N) DIFF s)\n        ==> path_connected(c UNION (s DIFF t))
-      #|  !s t a:real^N r.\n        2 <= dimindex(:N) /\\ s homeomorphic sphere(a,r) /\\ t PSUBSET s\n        ==> path_connected((:real^N) DIFF t)
+      #|  forall c. c IN components((:real^N) DIFF s)\n        ==> path_connected(c UNION (s DIFF t))
+      #|  forall s t a:real^N r.\n        2 <= dimindex(:N) /\\ s homeomorphic sphere(a,r) /\\ t PSUBSET s\n        ==> path_connected((:real^N) DIFF t)
       #|  x IN s ==> t = s ==> x IN t
       #|  s:real^N->bool
-      #|  !s c a:real^N r x y.\n        2 <= dimindex(:N) /\\\n        s homeomorphic sphere(a,r) /\\\n        c IN components((:real^N) DIFF s) /\\ x IN c /\\ y IN s\n        ==> ?g. arc g /\\  pathstart g = x /\\ pathfinish g = y /\\\n                IMAGE g (interval[vec 0,vec 1] DELETE (vec 1)) SUBSET c
+      #|  forall s c a:real^N r x y.\n        2 <= dimindex(:N) /\\\n        s homeomorphic sphere(a,r) /\\\n        c IN components((:real^N) DIFF s) /\\ x IN c /\\ y IN s\n        ==> ?g. arc g /\\  pathstart g = x /\\ pathfinish g = y /\\\n                IMAGE g (interval[vec 0,vec 1] DELETE (vec 1)) SUBSET c
       #|  r:real
       #|  a:real^N
       #|  s DELETE a DIFF t = (s DIFF t) DELETE a
@@ -83486,11 +83486,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  {a} = {b} <=> a = b
       #|  FINITE(s:real^N->bool) /\\ FINITE(t:real^N->bool)
       #|  FINITE(sphere(a:real^N,r))
-      #|  !s t:real^N->bool a r.\n      s SUBSET sphere(a,r) /\\ t SUBSET sphere(a,r) /\\\n      compact s /\\ compact t /\\ s homotopy_equivalent t\n      ==> (connected (sphere(a,r) DIFF s) <=> connected(sphere(a,r) DIFF t))
+      #|  forall s t:real^N->bool a r.\n      s SUBSET sphere(a,r) /\\ t SUBSET sphere(a,r) /\\\n      compact s /\\ compact t /\\ s homotopy_equivalent t\n      ==> (connected (sphere(a,r) DIFF s) <=> connected(sphere(a,r) DIFF t))
       #|  {a:real^N}
       #|  s:real^N->bool
       #|  s:real^N->bool = {}
-      #|  !s. 2 <= dimindex(:N) /\\ compact s /\\ contractible s\n       ==> connected((:real^N) DIFF s)
+      #|  forall s. 2 <= dimindex(:N) /\\ compact s /\\ contractible s\n       ==> connected((:real^N) DIFF s)
       #|  a UNION b UNION c = UNIONS {a,b,c}
       #|  3 <= n ==> 1 <= n /\\ 2 <= n
       #|  \\x:real^N. x$2
@@ -83504,7 +83504,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  path_image g:real^N->bool
       #|  3 <= n ==> 2 <= n
       #|  arc(g:real^1->real^N)
-      #|  !g. 3 <= dimindex(:N) /\\ simple_path g\n       ==> connected((:real^N) DIFF path_image g)
+      #|  forall g. 3 <= dimindex(:N) /\\ simple_path g\n       ==> connected((:real^N) DIFF path_image g)
       #|  &1
       #|  x:real^N
       #|  sphere(vec 0:real^2,&1)
@@ -83516,12 +83516,12 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  path_image g:real^N->bool
       #|  3 <= dimindex(:N)
       #|  arc(g:real^1->real^N)
-      #|  !g s:real^N->bool.\n        2 <= dimindex(:N) /\\ simple_path g /\\\n        (:real^N) DIFF path_image g PSUBSET s\n        ==> path_connected s
+      #|  forall g s:real^N->bool.\n        2 <= dimindex(:N) /\\ simple_path g /\\\n        (:real^N) DIFF path_image g PSUBSET s\n        ==> path_connected s
       #|  IMAGE lift s
       #|  lift o f o drop
-      #|  !f g s. f real_continuous_on s /\\\n           (is_realinterval s \\/ real_compact s \\/ real_open s) /\\\n           (!x. x IN s ==> g(f x) = x)\n           ==> g real_continuous_on (IMAGE f s)
-      #|  !f g s t. f real_continuous_on s /\\\n             (is_realinterval s \\/ real_compact s \\/ real_open s) /\\\n             IMAGE f s = t /\\ (!x. x IN s ==> g(f x) = x)\n           ==> g real_continuous_on t
-      #|  !a:real^M r b:real^N s.\n        dimindex(:M) = dimindex(:N)\n        ==> &0 < r /\\ &0 < s  ==> (sphere(a,r) homeomorphic sphere(b,s))
+      #|  forall f g s. f real_continuous_on s /\\\n           (is_realinterval s \\/ real_compact s \\/ real_open s) /\\\n           (forall x. x IN s ==> g(f x) = x)\n           ==> g real_continuous_on (IMAGE f s)
+      #|  forall f g s t. f real_continuous_on s /\\\n             (is_realinterval s \\/ real_compact s \\/ real_open s) /\\\n             IMAGE f s = t /\\ (forall x. x IN s ==> g(f x) = x)\n           ==> g real_continuous_on t
+      #|  forall a:real^M r b:real^N s.\n        dimindex(:M) = dimindex(:N)\n        ==> &0 < r /\\ &0 < s  ==> (sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
@@ -83533,14 +83533,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  ~(3 <= n) <=> (1 <= n ==> n = 1 \\/ n = 2)
       #|  r = &0
       #|  r < &0
-      #|  !a:real^N r.\n        simply_connected(sphere(a,r)) <=> 3 <= dimindex(:N) \\/ r <= &0
+      #|  forall a:real^N r.\n        simply_connected(sphere(a,r)) <=> 3 <= dimindex(:N) \\/ r <= &0
       #|  a:real^N
       #|  cball(a:real^N,&1)
       #|  simply_connected(sphere(a:real^N,&1))
-      #|  !a. simply_connected((:real^N) DELETE a) <=> 3 <= dimindex(:N)
-      #|  !a:real^2 r. &0 < r ==> ~simply_connected(sphere(a,r))
-      #|  (!x. x IN s ==> l(e x) = x)\n        ==> IMAGE t (IMAGE l (IMAGE e s)) = IMAGE t s
-      #|  (!x. e(f x) = e x) ==> IMAGE e (IMAGE f s) = IMAGE e s
+      #|  forall a. simply_connected((:real^N) DELETE a) <=> 3 <= dimindex(:N)
+      #|  forall a:real^2 r. &0 < r ==> ~simply_connected(sphere(a,r))
+      #|  (forall x. x IN s ==> l(e x) = x)\n        ==> IMAGE t (IMAGE l (IMAGE e s)) = IMAGE t s
+      #|  (forall x. e(f x) = e x) ==> IMAGE e (IMAGE f s) = IMAGE e s
       #|  (\\x. x + Cx(&2 * n * pi) * ii) o (l:complex->complex)
       #|  n:real
       #|  &2 * &1 * pi
@@ -83548,7 +83548,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  DISJOINT (IMAGE f s) (IMAGE g s) <=>\n      !x y. x IN s /\\ y IN s ==> ~(f x = g y)
+      #|  DISJOINT (IMAGE f s) (IMAGE g s) <=>\n      forall x y. x IN s /\\ y IN s ==> ~(f x = g y)
       #|  m:real = n
       #|  n:real
       #|  m:real
@@ -83559,9 +83559,9 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  cball(clog z,&1)
       #|  &2
       #|  norm(x - y:complex)
-      #|  !x y. x IN cball(clog z,&1) /\\ y IN cball(clog z,&1) /\\ cexp x = cexp y\n          ==> x = y
+      #|  forall x y. x IN cball(clog z,&1) /\\ y IN cball(clog z,&1) /\\ cexp x = cexp y\n          ==> x = y
       #|  clog z
-      #|  ~(z IN IMAGE f s) <=> !x. x IN s ==> ~(f x = z)
+      #|  ~(z IN IMAGE f s) <=> forall x. x IN s ==> ~(f x = z)
       #|  IMAGE cexp (ball(clog z,&1))
       #|  z:complex
       #|  s SUBSET UNIV DIFF {a} <=> ~(a IN s)
@@ -83573,19 +83573,19 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (:complex)
       #|  ?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean ((:complex) DIFF {Cx(&0)}))\n              (cexp o g) (\\x:real^N. a)
       #|  g:real^N->complex
-      #|  !f:real^N->complex s.\n      (?a. homotopic_with (\\h. T)\n             (subtopology euclidean s,\n              subtopology euclidean ((:complex) DIFF {Cx(&0)})) f (\\t. a)) <=>\n      (?g. g continuous_on s /\\ (!x. x IN s ==> f x = cexp(g x)))
+      #|  forall f:real^N->complex s.\n      (?a. homotopic_with (\\h. T)\n             (subtopology euclidean s,\n              subtopology euclidean ((:complex) DIFF {Cx(&0)})) f (\\t. a)) <=>\n      (?g. g continuous_on s /\\ (forall x. x IN s ==> f x = cexp(g x)))
       #|  a:complex
-      #|  !f:real^N->complex s.\n        (?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean (sphere(vec 0,&1))) f (\\t. a))\n        ==> ?g. g continuous_on s /\\ !x. x IN s ==> f x = cexp(g x)
+      #|  forall f:real^N->complex s.\n        (?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean (sphere(vec 0,&1))) f (\\t. a))\n        ==> ?g. g continuous_on s /\\ forall x. x IN s ==> f x = cexp(g x)
       #|  a:complex
       #|  {z | Im z = &0}
       #|  ?a. homotopic_with (\\h. T)\n            (subtopology euclidean s,\n             subtopology euclidean (sphere(vec 0,&1)))\n             ((cexp o (\\z. ii * z)) o (Cx o g)) (\\x:real^N. a)
       #|  g:real^N->real
       #|  Im o (g:real^N->complex)
       #|  g:real^N->complex
-      #|  !f:real^N->complex s.\n        (?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean (sphere(vec 0,&1))) f (\\t. a)) <=>\n        (?g. (Cx o g) continuous_on s /\\\n             !x. x IN s ==> f x = cexp(ii * Cx(g x)))
+      #|  forall f:real^N->complex s.\n        (?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean (sphere(vec 0,&1))) f (\\t. a)) <=>\n        (?g. (Cx o g) continuous_on s /\\\n             forall x. x IN s ==> f x = cexp(ii * Cx(g x)))
       #|  \\z. (k:real^(1,N)finite_sum->real^2) z * h(sndcart z)
       #|  k:real^((1,N)finite_sum)->real^2
-      #|  !f g h:real^N->real^2 s.\n          homotopic_with (\\x. T)\n            (subtopology euclidean s,\n             subtopology euclidean (sphere(vec 0,&1))) f g\n          ==> h continuous_on s /\\ (!x. x IN s ==> h(x) IN sphere(vec 0,&1))\n               ==> homotopic_with (\\x. T)\n                    (subtopology euclidean s,\n                     subtopology euclidean (sphere(vec 0,&1)))\n                    (\\x. f x * h x) (\\x. g x * h x)
+      #|  forall f g h:real^N->real^2 s.\n          homotopic_with (\\x. T)\n            (subtopology euclidean s,\n             subtopology euclidean (sphere(vec 0,&1))) f g\n          ==> h continuous_on s /\\ (forall x. x IN s ==> h(x) IN sphere(vec 0,&1))\n               ==> homotopic_with (\\x. T)\n                    (subtopology euclidean s,\n                     subtopology euclidean (sphere(vec 0,&1)))\n                    (\\x. f x * h x) (\\x. g x * h x)
       #|  g:real^N->complex
       #|  \\x. inv((g:real^N->complex) x)
       #|  &1
@@ -83595,23 +83595,23 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  Cx(&1)
       #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
       #|  (q <=> r) /\\ (p <=> r) ==> (p <=> q) /\\ (p <=> r)
-      #|  (!f g:real^N->real^2 s.\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1))) f g <=>\n    f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0,&1) /\\\n    g continuous_on s /\\ IMAGE g s SUBSET sphere(vec 0,&1) /\\\n    ?c. homotopic_with (\\x. T)\n         (subtopology euclidean s,\n          subtopology euclidean (sphere(vec 0,&1)))\n         (\\x. f x / g x) (\\x. c)) /\\\n   (!f g:real^N->real^2 s.\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1))) f g <=>\n    f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0,&1) /\\\n    g continuous_on s /\\ IMAGE g s SUBSET sphere(vec 0,&1) /\\\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1)))\n     (\\x. f x / g x) (\\x. Cx(&1)))
-      #|  !f:real^N->complex s.\n        f continuous_on s /\\ contractible s /\\\n        (!x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ !x. x IN s ==> f x = cexp(g x)
+      #|  (forall f g:real^N->real^2 s.\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1))) f g <=>\n    f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0,&1) /\\\n    g continuous_on s /\\ IMAGE g s SUBSET sphere(vec 0,&1) /\\\n    ?c. homotopic_with (\\x. T)\n         (subtopology euclidean s,\n          subtopology euclidean (sphere(vec 0,&1)))\n         (\\x. f x / g x) (\\x. c)) /\\\n   (forall f g:real^N->real^2 s.\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1))) f g <=>\n    f continuous_on s /\\ IMAGE f s SUBSET sphere(vec 0,&1) /\\\n    g continuous_on s /\\ IMAGE g s SUBSET sphere(vec 0,&1) /\\\n    homotopic_with (\\x. T)\n     (subtopology euclidean s,\n      subtopology euclidean (sphere(vec 0,&1)))\n     (\\x. f x / g x) (\\x. Cx(&1)))
+      #|  forall f:real^N->complex s.\n        f continuous_on s /\\ contractible s /\\\n        (forall x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ forall x. x IN s ==> f x = cexp(g x)
       #|  s:real^N->bool
       #|  f:real^N->complex
-      #|  !f:real^N->complex s.\n        f continuous_on s /\\ simply_connected s /\\ locally path_connected s /\\\n        (!x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ !x. x IN s ==> f x = cexp(g x)
+      #|  forall f:real^N->complex s.\n        f continuous_on s /\\ simply_connected s /\\ locally path_connected s /\\\n        (forall x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ forall x. x IN s ==> f x = cexp(g x)
       #|  cball(a:real^N,r) = {}
-      #|  !f:real^N->complex a r.\n        f continuous_on cball(a,r) /\\\n        (!z. z IN cball(a,r) ==> ~(f z = Cx(&0)))\n        ==> ?h. h continuous_on cball(a,r) /\\\n                !z. z IN cball(a,r) ==> f z = cexp(h z)
+      #|  forall f:real^N->complex a r.\n        f continuous_on cball(a,r) /\\\n        (forall z. z IN cball(a,r) ==> ~(f z = Cx(&0)))\n        ==> ?h. h continuous_on cball(a,r) /\\\n                forall z. z IN cball(a,r) ==> f z = cexp(h z)
       #|  ball(a:real^N,r) = {}
-      #|  !f:real^N->complex a r.\n        f continuous_on ball(a,r) /\\\n        (!x. x IN ball(a,r) ==> ~(f x = Cx(&0)))\n        ==> ?h. h continuous_on ball(a,r) /\\\n                !x. x IN ball(a,r) ==> f x = cexp(h x)
+      #|  forall f:real^N->complex a r.\n        f continuous_on ball(a,r) /\\\n        (forall x. x IN ball(a,r) ==> ~(f x = Cx(&0)))\n        ==> ?h. h continuous_on ball(a,r) /\\\n                forall x. x IN ball(a,r) ==> f x = cexp(h x)
       #|  Cx(&2) * z / Cx(&2) = z
       #|  \\z:real^N. cexp(g z / Cx(&2))
       #|  g:real^N->complex
-      #|  !f:real^N->complex s.\n        f continuous_on s /\\ contractible s /\\\n        (!x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ !x. x IN s ==> f x = (g x) pow 2
+      #|  forall f:real^N->complex s.\n        f continuous_on s /\\ contractible s /\\\n        (forall x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ forall x. x IN s ==> f x = (g x) pow 2
       #|  Cx(&2) * z / Cx(&2) = z
       #|  \\z:real^N. cexp(g z / Cx(&2))
       #|  g:real^N->complex
-      #|  !f:real^N->complex s.\n        f continuous_on s /\\ simply_connected s /\\ locally path_connected s /\\\n        (!x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ !x. x IN s ==> f x = (g x) pow 2
+      #|  forall f:real^N->complex s.\n        f continuous_on s /\\ simply_connected s /\\ locally path_connected s /\\\n        (forall x. x IN s ==> ~(f x = Cx(&0)))\n        ==> ?g. g continuous_on s /\\ forall x. x IN s ==> f x = (g x) pow 2
       #|  ~((g:complex->complex) w = g z)
       #|  ~(cexp(g(w:complex)) = cexp(g z))
       #|  w:complex = z
@@ -83637,14 +83637,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  f:complex->complex
       #|  s:complex->bool
       #|  f:complex->complex
-      #|  (!s:complex->bool.\n      contractible s\n      ==> !f. f holomorphic_on s /\\ (!z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\ !z. z IN s ==> f z = cexp(g z)) /\\\n   (!s:complex->bool.\n      simply_connected s /\\ locally path_connected s\n      ==> !f. f holomorphic_on s /\\ (!z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\ !z. z IN s ==> f z = cexp(g z))
+      #|  (forall s:complex->bool.\n      contractible s\n      ==> forall f. f holomorphic_on s /\\ (forall z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\ forall z. z IN s ==> f z = cexp(g z)) /\\\n   (forall s:complex->bool.\n      simply_connected s /\\ locally path_connected s\n      ==> forall f. f holomorphic_on s /\\ (forall z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\ forall z. z IN s ==> f z = cexp(g z))
       #|  f' / cexp(g(z:complex))
       #|  f' / cexp(g(z:complex))
       #|  Cx(&2) * z / Cx(&2) = z
       #|  \\z:complex. cexp(g z / Cx(&2))
       #|  g:complex->complex
       #|  f:complex->complex
-      #|  (!s:complex->bool.\n      contractible s\n      ==> !f. f holomorphic_on s /\\ (!z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\  !z. z IN s ==> f z = g z pow 2) /\\\n   (!s:complex->bool.\n      simply_connected s /\\ locally path_connected s\n      ==> !f. f holomorphic_on s /\\ (!z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\  !z. z IN s ==> f z = g z pow 2)
+      #|  (forall s:complex->bool.\n      contractible s\n      ==> forall f. f holomorphic_on s /\\ (forall z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\  forall z. z IN s ==> f z = g z pow 2) /\\\n   (forall s:complex->bool.\n      simply_connected s /\\ locally path_connected s\n      ==> forall f. f holomorphic_on s /\\ (forall z. z IN s ==> ~(f z = Cx(&0)))\n              ==> ?g. g holomorphic_on s /\\  forall z. z IN s ==> f z = g z pow 2)
       #|  --ii * --ii * z = --z
       #|  ii * --ii * z = z
       #|  a * b = Cx(&1) ==> b = inv a
@@ -83658,13 +83658,13 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  Cx(&1) - w pow 2 = z pow 2 <=>\n     (w + ii * z) * (w - ii * z) = Cx(&1)
       #|  ~(Cx(&1) - z pow 2 = Cx(&0)) <=>\n                              ~(z = Cx(&1)) /\\ ~(z = --Cx(&1))
       #|  \\z:complex. Cx(&1) - f(z) pow 2
-      #|  !f s. f holomorphic_on s /\\ contractible s /\\\n         (!z. z IN s ==> ~(f z = Cx(&1)) /\\ ~(f z = --Cx(&1)))\n         ==> ?g. g holomorphic_on s /\\ !z. z IN s ==> f z = ccos(g z)
+      #|  forall f s. f holomorphic_on s /\\ contractible s /\\\n         (forall z. z IN s ==> ~(f z = Cx(&1)) /\\ ~(f z = --Cx(&1)))\n         ==> ?g. g holomorphic_on s /\\ forall z. z IN s ==> f z = ccos(g z)
       #|  &0 <= c /\\ x <= (d / &2) pow 2 ==> x <= c + d pow 2 / &4
       #|  &0 <= b * c /\\ a <= b pow 2 + c pow 2 ==> a <= (b + c) pow 2
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  v = cacs w
       #|  cacs w
-      #|  !w. ?v. ccos(v) = w /\\ norm(v) <= pi + norm(w)
+      #|  forall w. ?v. ccos(v) = w /\\ norm(v) <= pi + norm(w)
       #|  \\z:complex. --(g z) + Cx(&2 * n * pi)
       #|  \\z:complex. g z + Cx(&2 * n * pi)
       #|  n:real
@@ -83674,7 +83674,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  g:complex->complex
       #|  s:complex->bool
       #|  f:complex->complex
-      #|  !f s a.\n        f holomorphic_on s /\\ contractible s /\\ a IN s /\\\n        (!z. z IN s ==> ~(f z = Cx(&1)) /\\ ~(f z = --Cx(&1)))\n        ==> ?g. g holomorphic_on s /\\ norm(g a) <= pi + norm(f a) /\\\n                !z. z IN s ==> f z = ccos(g z)
+      #|  forall f s a.\n        f holomorphic_on s /\\ contractible s /\\ a IN s /\\\n        (forall z. z IN s ==> ~(f z = Cx(&1)) /\\ ~(f z = --Cx(&1)))\n        ==> ?g. g holomorphic_on s /\\ norm(g a) <= pi + norm(f a) /\\\n                forall z. z IN s ==> f z = ccos(g z)
       #|  x:real^N
       #|  y:real^N
       #|  y:real^N
@@ -83730,8 +83730,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  y IN (u:real^N->real^N->bool) x
       #|  y:real^N
       #|  x:real^N
-      #|  !x:real^N y:real^N. x IN t /\\ y IN u x ==> cexp(g x y) = f y
-      #|  (!x:real^N. x IN t ==> x IN u x) /\\\n    (!x. x IN t ==> open_in (subtopology euclidean s) (u x))
+      #|  forall x:real^N y:real^N. x IN t /\\ y IN u x ==> cexp(g x y) = f y
+      #|  (forall x:real^N. x IN t ==> x IN u x) /\\\n    (forall x. x IN t ==> open_in (subtopology euclidean s) (u x))
       #|  g = \\x y. h(x:real^N) + clog(f y / f x)
       #|  u = \\x. s INTER ball(x:real^N,d x)
       #|  d:real^N->real
@@ -83744,25 +83744,25 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  &1 / &5
       #|  x:real^N
       #|  (h:real^N->complex) continuous_on t
-      #|  !x. x IN t\n        ==> ?d. &0 < d /\\\n                (!y. y IN s /\\ dist(x,y) < d\n                     ==> norm(f y / f x - Cx(&1)) < &1 / &7) /\\\n                (!z:real^N. z IN t /\\ dist(x,z) < &2 * d\n                            ==> norm(h z - h x) < &1 / &5)
+      #|  forall x. x IN t\n        ==> ?d. &0 < d /\\\n                (forall y. y IN s /\\ dist(x,y) < d\n                     ==> norm(f y / f x - Cx(&1)) < &1 / &7) /\\\n                (forall z:real^N. z IN t /\\ dist(x,z) < &2 * d\n                            ==> norm(h z - h x) < &1 / &5)
       #|  h:real^N->complex
-      #|  !f:real^N->complex s t.\n        f continuous_on s /\\ t SUBSET s /\\\n        (?g. g continuous_on t /\\ !x. x IN t ==> f x = cexp(g x))\n        ==> ?u. t SUBSET u /\\ open_in (subtopology euclidean s) u /\\\n                (?g. g continuous_on u /\\ !x. x IN u ==> f x = cexp(g x))
-      #|  borsukian(s:real^N->bool) <=>\n        !f. f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)})\n            ==> ?a. homotopic_with (\\h. T)\n                     (subtopology euclidean s,\n                      subtopology euclidean ((:real^2) DIFF {Cx(&0)}))\n                                   f (\\x. a)
+      #|  forall f:real^N->complex s t.\n        f continuous_on s /\\ t SUBSET s /\\\n        (?g. g continuous_on t /\\ forall x. x IN t ==> f x = cexp(g x))\n        ==> ?u. t SUBSET u /\\ open_in (subtopology euclidean s) u /\\\n                (?g. g continuous_on u /\\ forall x. x IN u ==> f x = cexp(g x))
+      #|  borsukian(s:real^N->bool) <=>\n        forall f. f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)})\n            ==> ?a. homotopic_with (\\h. T)\n                     (subtopology euclidean s,\n                      subtopology euclidean ((:real^2) DIFF {Cx(&0)}))\n                                   f (\\x. a)
       #|  p /\\ q <=> p /\\ q /\\ T
-      #|  !s:real^M->bool t:real^N->bool h k.\n        h continuous_on s /\\ IMAGE h s = t /\\\n        k continuous_on t /\\ IMAGE k t SUBSET s /\\\n        (!y. y IN t ==> h(k y) = y) /\\\n        borsukian s\n        ==> borsukian t
+      #|  forall s:real^M->bool t:real^N->bool h k.\n        h continuous_on s /\\ IMAGE h s = t /\\\n        k continuous_on t /\\ IMAGE k t SUBSET s /\\\n        (forall y. y IN t ==> h(k y) = y) /\\\n        borsukian s\n        ==> borsukian t
       #|  \\x:real^N. x
       #|  r:real^N->real^N
-      #|  !s t:real^N->bool. borsukian t /\\ s retract_of t ==> borsukian s
-      #|  !s:real^M->bool t:real^N->bool.\n        s homeomorphic t /\\ borsukian s ==> borsukian t
-      #|  !s:real^M->bool t:real^N->bool.\n     s homeomorphic t ==> (borsukian s <=> borsukian t)
-      #|  !a:real^N s. borsukian (IMAGE (\\x. a + x) s) <=> borsukian s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (borsukian(IMAGE f s) <=> borsukian s)
+      #|  forall s t:real^N->bool. borsukian t /\\ s retract_of t ==> borsukian s
+      #|  forall s:real^M->bool t:real^N->bool.\n        s homeomorphic t /\\ borsukian s ==> borsukian t
+      #|  forall s:real^M->bool t:real^N->bool.\n     s homeomorphic t ==> (borsukian s <=> borsukian t)
+      #|  forall a:real^N s. borsukian (IMAGE (\\x. a + x) s) <=> borsukian s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (borsukian(IMAGE f s) <=> borsukian s)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (borsukian(IMAGE f k) <=> borsukian k)
-      #|  !s:real^M->bool t:real^N->bool.\n        s homotopy_equivalent t\n        ==> (borsukian s <=> borsukian t)
-      #|  !s:real^N->bool.\n        borsukian s <=>\n        !f g:real^N->real^2.\n           f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)}) /\\\n           g continuous_on s /\\ IMAGE g s SUBSET ((:real^2) DIFF {Cx(&0)})\n           ==> homotopic_with (\\h. T)\n                (subtopology euclidean s,\n                 subtopology euclidean ((:real^2) DIFF {Cx (&0)})) f g
-      #|  !s:real^N->bool.\n        borsukian s <=>\n        !f. f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)})\n            ==> ?g. g continuous_on s /\\ (!x. x IN s ==> f(x) = cexp(g x))
+      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (borsukian(IMAGE f k) <=> borsukian k)
+      #|  forall s:real^M->bool t:real^N->bool.\n        s homotopy_equivalent t\n        ==> (borsukian s <=> borsukian t)
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n        forall f g:real^N->real^2.\n           f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)}) /\\\n           g continuous_on s /\\ IMAGE g s SUBSET ((:real^2) DIFF {Cx(&0)})\n           ==> homotopic_with (\\h. T)\n                (subtopology euclidean s,\n                 subtopology euclidean ((:real^2) DIFF {Cx (&0)})) f g
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n        forall f. f continuous_on s /\\ IMAGE f s SUBSET ((:real^2) DIFF {Cx(&0)})\n            ==> ?g. g continuous_on s /\\ (forall x. x IN s ==> f(x) = cexp(g x))
       #|  \\x. clog(Cx(norm(f x:complex))) + (g:real^N->complex)(x)
       #|  g:real^N->complex
       #|  ~(z = Cx(&0)) ==> (w / z = u <=> w = z * u)
@@ -83770,8 +83770,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  x:real^N
       #|  x:real^N
       #|  f:real^N->complex
-      #|  IMAGE f s SUBSET UNIV DIFF {a} <=> !z. z IN s ==> ~(f z = a)
-      #|  !s:real^N->bool.\n        borsukian s <=>\n           !f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n               ==> ?g. g continuous_on s /\\ (!x. x IN s ==> f(x) = cexp(g x))
+      #|  IMAGE f s SUBSET UNIV DIFF {a} <=> forall z. z IN s ==> ~(f z = a)
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n           forall f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n               ==> ?g. g continuous_on s /\\ (forall x. x IN s ==> f(x) = cexp(g x))
       #|  \\x:real^N. ii * Cx(g x)
       #|  g:real^N->real
       #|  (f:real^N->complex) x = cexp(g x)
@@ -83780,18 +83780,18 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  Im o (g:real^N->complex)
       #|  g:real^N->complex
       #|  f:real^N->complex
-      #|  !s:real^N->bool.\n        borsukian s <=>\n            !f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n            ==> ?g. (Cx o g) continuous_on s /\\\n                    (!x. x IN s ==> f x = cexp(ii * Cx(g x)))
-      #|  !s:real^N->bool.\n        borsukian s <=>\n            !f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n                ==> ?a. homotopic_with (\\h. T)\n                         (subtopology euclidean s,\n                          subtopology euclidean (sphere(Cx(&0),&1)))\n                         f (\\x. a)
-      #|  !s:real^N->bool.\n        borsukian s <=>\n        !f g:real^N->real^2.\n           f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1) /\\\n           g continuous_on s /\\ IMAGE g s SUBSET sphere(Cx(&0),&1)\n           ==> homotopic_with (\\h. T)\n                (subtopology euclidean s,\n                 subtopology euclidean (sphere(Cx(&0),&1))) f g
-      #|  !s:real^N->bool. contractible s ==> borsukian s
-      #|  !s:real^N->bool. conic s ==> borsukian s
-      #|  !s:real^N->bool.\n        simply_connected s /\\ locally path_connected s ==> borsukian s
-      #|  !s:real^N->bool. starlike s ==> borsukian s
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n            forall f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n            ==> ?g. (Cx o g) continuous_on s /\\\n                    (forall x. x IN s ==> f x = cexp(ii * Cx(g x)))
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n            forall f. f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1)\n                ==> ?a. homotopic_with (\\h. T)\n                         (subtopology euclidean s,\n                          subtopology euclidean (sphere(Cx(&0),&1)))\n                         f (\\x. a)
+      #|  forall s:real^N->bool.\n        borsukian s <=>\n        forall f g:real^N->real^2.\n           f continuous_on s /\\ IMAGE f s SUBSET sphere(Cx(&0),&1) /\\\n           g continuous_on s /\\ IMAGE g s SUBSET sphere(Cx(&0),&1)\n           ==> homotopic_with (\\h. T)\n                (subtopology euclidean s,\n                 subtopology euclidean (sphere(Cx(&0),&1))) f g
+      #|  forall s:real^N->bool. contractible s ==> borsukian s
+      #|  forall s:real^N->bool. conic s ==> borsukian s
+      #|  forall s:real^N->bool.\n        simply_connected s /\\ locally path_connected s ==> borsukian s
+      #|  forall s:real^N->bool. starlike s ==> borsukian s
       #|  borsukian({}:real^N->bool)
       #|  borsukian(:real^N)
-      #|  !s:real^N->bool. convex s ==> borsukian s
-      #|  !s:real^N->bool.\n        (dimindex(:N) = 1 \\/ ?r:real^1->bool. s homeomorphic r)\n        ==> borsukian s
-      #|  !s:real^1->bool. borsukian s
+      #|  forall s:real^N->bool. convex s ==> borsukian s
+      #|  forall s:real^N->bool.\n        (dimindex(:N) = 1 \\/ ?r:real^1->bool. s homeomorphic r)\n        ==> borsukian s
+      #|  forall s:real^1->bool. borsukian s
       #|  1 <= n /\\ ~(n = 1) /\\ ~(n = 2) ==> 3 <= n
       #|  \\z:complex. z
       #|  ~borsukian(sphere(Cx(&0),&1))
@@ -83800,7 +83800,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  &0 < r
       #|  r = &0
       #|  r < &0
-      #|  !a:real^N r. borsukian(sphere(a,r)) <=> r <= &0 \\/ ~(dimindex(:N) = 2)
+      #|  forall a:real^N r. borsukian(sphere(a,r)) <=> r <= &0 \\/ ~(dimindex(:N) = 2)
       #|  a * z = z <=> a = Cx(&1) \\/ z = Cx(&0)
       #|  cexp(a + h(y:real^N)) = cexp(h y)
       #|  ?y:real^N. y IN s /\\ y IN t
@@ -83820,7 +83820,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  g:real^N->complex
       #|  f:real^N->complex
       #|  f:real^N->complex
-      #|  !s t:real^N->bool.\n        open_in (subtopology euclidean (s UNION t)) s /\\\n        open_in (subtopology euclidean (s UNION t)) t /\\\n        borsukian s /\\ borsukian t /\\ connected(s INTER t)\n        ==> borsukian(s UNION t)
+      #|  forall s t:real^N->bool.\n        open_in (subtopology euclidean (s UNION t)) s /\\\n        open_in (subtopology euclidean (s UNION t)) t /\\\n        borsukian s /\\ borsukian t /\\ connected(s INTER t)\n        ==> borsukian(s UNION t)
       #|  a * z = z <=> a = Cx(&1) \\/ z = Cx(&0)
       #|  cexp(a + h(y:real^N)) = cexp(h y)
       #|  ?y:real^N. y IN s /\\ y IN t
@@ -83840,10 +83840,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  g:real^N->complex
       #|  f:real^N->complex
       #|  f:real^N->complex
-      #|  !s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        borsukian s /\\ borsukian t /\\ connected(s INTER t)\n        ==> borsukian(s UNION t)
-      #|  !s:real^2->bool.\n        compact s ==> (borsukian s <=> connected((:real^2) DIFF s))
-      #|  !s:real^N->bool.\n        locally connected s \\/ compact s\n        ==> (borsukian s <=> !c. c IN components s ==> borsukian c)
-      #|  !s:real^N->bool.\n        (locally connected s \\/ compact s) /\\\n        (!c. c IN components s ==> borsukian c)\n        ==> borsukian s
+      #|  forall s t:real^N->bool.\n        closed_in (subtopology euclidean (s UNION t)) s /\\\n        closed_in (subtopology euclidean (s UNION t)) t /\\\n        borsukian s /\\ borsukian t /\\ connected(s INTER t)\n        ==> borsukian(s UNION t)
+      #|  forall s:real^2->bool.\n        compact s ==> (borsukian s <=> connected((:real^2) DIFF s))
+      #|  forall s:real^N->bool.\n        locally connected s \\/ compact s\n        ==> (borsukian s <=> forall c. c IN components s ==> borsukian c)
+      #|  forall s:real^N->bool.\n        (locally connected s \\/ compact s) /\\\n        (forall c. c IN components s ==> borsukian c)\n        ==> borsukian s
       #|  (a - x) - (b - x):complex = a - b
       #|  a - x:complex = b - x <=> a = b
       #|  u:real^M
@@ -83852,7 +83852,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  v:real^M
       #|  (f':real^N->real^M) y
       #|  a:complex
-      #|  ?a. !x. x IN {x | x IN s /\\ (f:real^M->real^N) x = y}\n            ==> h x - h(f' y):complex = a
+      #|  ?a. forall x. x IN {x | x IN s /\\ (f:real^M->real^N) x = y}\n            ==> h x - h(f' y):complex = a
       #|  w:real^M
       #|  (p /\\ q) /\\ r <=> q /\\ p /\\ r
       #|  z:complex
@@ -83861,11 +83861,11 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  IMAGE (h:real^M->complex) s
       #|  (h:real^M->complex) o (f':real^N->real^M)
       #|  f':real^N->real^M
-      #|  !y. ?x. y IN t ==> x IN s /\\ (f:real^M->real^N) x = y
+      #|  forall y. ?x. y IN t ==> x IN s /\\ (f:real^M->real^N) x = y
       #|  h:real^M->complex
       #|  (g:real^N->complex) o (f:real^M->real^N)
       #|  g:real^N->complex
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (!y. y IN t ==> connected {x | x IN s /\\ f x = y}) /\\\n        borsukian s\n        ==> borsukian t
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (forall y. y IN t ==> connected {x | x IN s /\\ f x = y}) /\\\n        borsukian s\n        ==> borsukian t
       #|  (k:real^N->real^M) y
       #|  w':real^M
       #|  (k:real^N->real^M) y'
@@ -83899,12 +83899,12 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  k:real^N->real^M
       #|  x = y <=> x IN {y}
       #|  { h x:real | x IN s /\\ (f:real^M->real^N) x = y}
-      #|  !y. ?x. y IN t ==> x IN s /\\ (f:real^M->real^N) x = y /\\\n                       (!x'. x' IN s /\\ f x' = y ==> h x <= h x')
+      #|  forall y. ?x. y IN t ==> x IN s /\\ (f:real^M->real^N) x = y /\\\n                       (forall x'. x' IN s /\\ f x' = y ==> h x <= h x')
       #|  h:real^M->real
       #|  (g:real^N->complex) o (f:real^M->real^N)
       #|  g:real^N->complex
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (!u. open_in (subtopology euclidean s) u\n             ==> open_in (subtopology euclidean t) (IMAGE f u)) /\\\n        borsukian s\n        ==> borsukian t
-      #|  unicoherent(u:real^N->bool) <=>\n  !s t. connected s /\\ connected t /\\ s UNION t = u /\\\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t\n        ==> connected (s INTER t)
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (forall u. open_in (subtopology euclidean s) u\n             ==> open_in (subtopology euclidean t) (IMAGE f u)) /\\\n        borsukian s\n        ==> borsukian t
+      #|  unicoherent(u:real^N->bool) <=>\n  forall s t. connected s /\\ connected t /\\ s UNION t = u /\\\n        closed_in (subtopology euclidean u) s /\\\n        closed_in (subtopology euclidean u) t\n        ==> connected (s INTER t)
       #|  t:real^N->bool
       #|  f:real^M->real^N
       #|  p /\\ q /\\ r /\\ s <=> r /\\ (p /\\ q) /\\ s
@@ -83913,15 +83913,15 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  u:real^N->bool
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !s:real^M->bool t:real^N->bool.\n        s homeomorphic t /\\ unicoherent s ==> unicoherent t
-      #|  !s:real^M->bool t:real^N->bool.\n     s homeomorphic t ==> (unicoherent s <=> unicoherent t)
-      #|  !a:real^N s. unicoherent (IMAGE (\\x. a + x) s) <=> unicoherent s
-      #|  !f:real^M->real^N s.\n        linear f /\\ (!x y. f x = f y ==> x = y)\n        ==> (unicoherent(IMAGE f s) <=> unicoherent s)
+      #|  forall s:real^M->bool t:real^N->bool.\n        s homeomorphic t /\\ unicoherent s ==> unicoherent t
+      #|  forall s:real^M->bool t:real^N->bool.\n     s homeomorphic t ==> (unicoherent s <=> unicoherent t)
+      #|  forall a:real^N s. unicoherent (IMAGE (\\x. a + x) s) <=> unicoherent s
+      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (unicoherent(IMAGE f s) <=> unicoherent s)
       #|  g:real^N->real^M
       #|  f:real^M->real^N
-      #|  !f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (unicoherent(IMAGE f k) <=> unicoherent k)
+      #|  forall f:real^M->real^N g s t k.\n        homeomorphism (s,t) (f,g) /\\ k SUBSET s\n        ==> (unicoherent(IMAGE f k) <=> unicoherent k)
       #|  y + p = n /\\ y - p = m /\\ z + q = n /\\ z - q = m ==> q:complex = p
-      #|  (!x. x IN s ==> P x) /\\ (!x. x IN t ==> Q x)\n    ==> ~(v = {}) /\\ ~(w = {}) /\\ v UNION w SUBSET s INTER t\n         ==> ~(!y z. y IN v /\\ z IN w ==> ~(P y /\\ Q y /\\ P z /\\ Q z))
+      #|  (forall x. x IN s ==> P x) /\\ (forall x. x IN t ==> Q x)\n    ==> ~(v = {}) /\\ ~(w = {}) /\\ v UNION w SUBSET s INTER t\n         ==> ~(forall y z. y IN v /\\ z IN w ==> ~(P y /\\ Q y /\\ P z /\\ Q z))
       #|  p ==> q ==> F <=> ~(p /\\ q)
       #|  &2 * p <= &2 * a * p <=> &0 <= &2 * p * (a - &1)
       #|  y:real^N
@@ -83931,17 +83931,17 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  a - b:complex = c <=> a = b + c
       #|  a + b:complex = c <=> a = --b + c
       #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  (?x. x IN s) /\\\n      (!x. x IN s ==> ?n. P n /\\ f x = k n) /\\\n      (?a. !x. x IN s ==> f x = a)\n      ==> (?n. P n /\\ !x. x IN s ==> f x = k n)
+      #|  (?x. x IN s) /\\\n      (forall x. x IN s ==> ?n. P n /\\ f x = k n) /\\\n      (?a. forall x. x IN s ==> f x = a)\n      ==> (?n. P n /\\ forall x. x IN s ==> f x = k n)
       #|  n:real
       #|  m:real
-      #|  (?n. integer n /\\\n         !x:real^N. x IN s\n                    ==> h(x) - Cx pi * ii * Cx (drop (q x)) =\n                        Cx(&2 * n * pi) * ii) /\\\n    (?n. integer n /\\\n         !x:real^N. x IN t\n                    ==> h(x) + Cx pi * ii * Cx (drop (q x)) =\n                        Cx(&2 * n * pi) * ii)
+      #|  (?n. integer n /\\\n         forall x:real^N. x IN s\n                    ==> h(x) - Cx pi * ii * Cx (drop (q x)) =\n                        Cx(&2 * n * pi) * ii) /\\\n    (?n. integer n /\\\n         forall x:real^N. x IN t\n                    ==> h(x) + Cx pi * ii * Cx (drop (q x)) =\n                        Cx(&2 * n * pi) * ii)
       #|  h:real^N->complex
       #|  g:real^N->complex
       #|  P /\\ ~P \\/ x IN t /\\ x IN s <=> x IN s INTER t
       #|  v UNION w:real^N->bool = s INTER t
-      #|  !x:real^N.\n        x IN s INTER t\n        ==> cexp(Cx pi * ii * Cx(drop(q x))) =\n            inv(cexp(Cx pi * ii * Cx(drop (q x))))
+      #|  forall x:real^N.\n        x IN s INTER t\n        ==> cexp(Cx pi * ii * Cx(drop(q x))) =\n            inv(cexp(Cx pi * ii * Cx(drop (q x))))
       #|  \\x. if (x:real^N) IN s then cexp(Cx pi * ii * Cx(drop(q x)))\n          else inv(cexp(Cx pi * ii * Cx(drop(q x))))
-      #|  ?g:real^N->real^2.\n        g continuous_on u /\\ IMAGE g u SUBSET {x | norm x = &1} /\\\n        (!x. x IN s ==> g(x) = cexp(Cx pi * ii * Cx(drop(q x)))) /\\\n        (!x. x IN t ==> g(x) = inv(cexp(Cx pi * ii * Cx(drop(q x)))))
+      #|  ?g:real^N->real^2.\n        g continuous_on u /\\ IMAGE g u SUBSET {x | norm x = &1} /\\\n        (forall x. x IN s ==> g(x) = cexp(Cx pi * ii * Cx(drop(q x)))) /\\\n        (forall x. x IN t ==> g(x) = inv(cexp(Cx pi * ii * Cx(drop(q x)))))
       #|  q:real^N->real^1
       #|  vec 1:real^1
       #|  vec 0:real^1
@@ -83954,14 +83954,14 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s SUBSET UNIV DIFF {a} <=> ~(a IN s)
       #|  f:real^N->complex
       #|  f:real^N->complex
-      #|  !f. f continuous_on u /\\ IMAGE f u SUBSET sphere(vec 0,&1)\n             ==> ?a. homotopic_with (\\h. T)\n                      (subtopology euclidean u,\n                       subtopology euclidean ((:complex) DIFF {Cx (&0)}))\n                      (f:real^N->complex) (\\t. a)
-      #|  !u:real^N->bool. borsukian u ==> unicoherent u
+      #|  forall f. f continuous_on u /\\ IMAGE f u SUBSET sphere(vec 0,&1)\n             ==> ?a. homotopic_with (\\h. T)\n                      (subtopology euclidean u,\n                       subtopology euclidean ((:complex) DIFF {Cx (&0)}))\n                      (f:real^N->complex) (\\t. a)
+      #|  forall u:real^N->bool. borsukian u ==> unicoherent u
       #|  x:real^N
       #|  y:real^N
       #|  x:real^N
       #|  y:real^N
-      #|  !u:real^N->bool. contractible u ==> unicoherent u
-      #|  !u:real^N->bool. convex u ==> unicoherent u
+      #|  forall u:real^N->bool. contractible u ==> unicoherent u
+      #|  forall u:real^N->bool. convex u ==> unicoherent u
       #|  unicoherent(:real^N)
       #|  f:real^M->real^N
       #|  t:real^N->bool
@@ -83972,17 +83972,17 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  v:real^N->bool
       #|  u:real^N->bool
       #|  compact(t:real^N->bool)
-      #|  !f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (!y. y IN t ==> connected {x | x IN s /\\ f x = y}) /\\\n        unicoherent s\n        ==> unicoherent t
+      #|  forall f:real^M->real^N s t.\n        f continuous_on s /\\ IMAGE f s = t /\\ compact s /\\\n        (forall y. y IN t ==> connected {x | x IN s /\\ f x = y}) /\\\n        unicoherent s\n        ==> unicoherent t
       #|  s SUBSET closure s /\\ t SUBSET closure t /\\ s UNION t = UNIV\n    ==> closure s UNION closure t = UNIV
-      #|  !s. connected(s) /\\ connected((:real^N) DIFF s) ==> connected(frontier s)
+      #|  forall s. connected(s) /\\ connected((:real^N) DIFF s) ==> connected(frontier s)
       #|  s:real^N->bool
-      #|  !s c:real^N->bool.\n        connected s /\\ c IN components((:real^N) DIFF s)\n        ==> connected(frontier c)
+      #|  forall s c:real^N->bool.\n        connected s /\\ c IN components((:real^N) DIFF s)\n        ==> connected(frontier c)
       #|  u SUBSET t ==> x IN s DIFF t ==> ~(x IN u)
       #|  x:real^N
       #|  frontier s:real^N->bool = frontier c
       #|  ?c. c IN components((:real^N) DIFF s) /\\ t SUBSET c
       #|  s = (:real^N)
-      #|  !s t:real^N->bool.\n     connected s /\\ connected t /\\ DISJOINT s t /\\ frontier s SUBSET frontier t\n     ==> connected(frontier s)
+      #|  forall s t:real^N->bool.\n     connected s /\\ connected t /\\ DISJOINT s t /\\ frontier s SUBSET frontier t\n     ==> connected(frontier s)
       #|  a:real^N
       #|  b:real^N
       #|  frontier(connected_component ((:real^N) DIFF t) a) = t /\\\n    frontier(connected_component ((:real^N) DIFF t) b) = t
@@ -83995,8 +83995,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (b:real^N) IN s
       #|  connected_component s (a:real^N)
       #|  (a:real^N) IN s
-      #|  !s a b. closed s /\\ ~connected_component ((:real^N) DIFF s) a b\n           ==> ?c. c IN components s /\\\n                   ~connected_component((:real^N) DIFF c) a b
-      #|  !s. closed s /\\ ~connected((:real^N) DIFF s)\n       ==> ?c. c IN components s /\\ ~connected((:real^N) DIFF c)
+      #|  forall s a b. closed s /\\ ~connected_component ((:real^N) DIFF s) a b\n           ==> ?c. c IN components s /\\\n                   ~connected_component((:real^N) DIFF c) a b
+      #|  forall s. closed s /\\ ~connected((:real^N) DIFF s)\n       ==> ?c. c IN components s /\\ ~connected((:real^N) DIFF c)
       #|  s SUBSET t ==> s b ==> t b
       #|  connected_component ((:real^N) DIFF t) a b
       #|  connected_component ((:real^N) DIFF s) a b
@@ -84005,16 +84005,16 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (c:real^N->bool) SUBSET s \\/ c SUBSET t
       #|  c:real^N->bool
       #|  p <=> ~ ~ p
-      #|  !s t a b. closed s /\\ closed t /\\ DISJOINT s t /\\\n             connected_component ((:real^N) DIFF s) a b /\\\n             connected_component ((:real^N) DIFF t) a b\n             ==> connected_component ((:real^N) DIFF (s UNION t)) a b
-      #|  !s t:real^N->bool.\n        closed s /\\ closed t /\\ DISJOINT s t /\\\n        connected((:real^N) DIFF s) /\\\n        connected((:real^N) DIFF t)\n        ==> connected((:real^N) DIFF (s UNION t))
+      #|  forall s t a b. closed s /\\ closed t /\\ DISJOINT s t /\\\n             connected_component ((:real^N) DIFF s) a b /\\\n             connected_component ((:real^N) DIFF t) a b\n             ==> connected_component ((:real^N) DIFF (s UNION t)) a b
+      #|  forall s t:real^N->bool.\n        closed s /\\ closed t /\\ DISJOINT s t /\\\n        connected((:real^N) DIFF s) /\\\n        connected((:real^N) DIFF t)\n        ==> connected((:real^N) DIFF (s UNION t))
       #|  s INTER t = UNIV DIFF ((UNIV DIFF s) UNION (UNIV DIFF t))
-      #|  !s t. open s /\\ open t /\\ connected s /\\ connected t /\\\n         s UNION t = (:real^N)\n         ==> connected(s INTER t)
+      #|  forall s t. open s /\\ open t /\\ connected s /\\ connected t /\\\n         s UNION t = (:real^N)\n         ==> connected(s INTER t)
       #|  c SUBSET s ==> s INTER t = {} /\\ ~(c = {}) ==> ~(c SUBSET t)
       #|  c':real^N->bool = c
       #|  c':real^N->bool
       #|  c:real^N->bool
       #|  (:real^N) DIFF (s UNION t)
-      #|  (!s. s IN c ==> !t. t IN c' ==> s INTER t = {})\n          ==> DISJOINT (UNIONS c) (UNIONS c')
+      #|  (forall s. s IN c ==> forall t. t IN c' ==> s INTER t = {})\n          ==> DISJOINT (UNIONS c) (UNIONS c')
       #|  c UNION d SUBSET UNIV DIFF (s UNION t) /\\ s INTER t = {} /\\\n        DISJOINT c d\n        ==> (s UNION c) INTER (t UNION d) INTER u = {}
       #|  c SUBSET s UNION t\n          ==> c INTER s = {} \\/ c INTER t = {}\n              ==> c SUBSET s \\/ c SUBSET t
       #|  c:real^N->bool
@@ -84025,8 +84025,8 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s SUBSET t ==> s SUBSET t UNION u
       #|  t UNION\n        UNIONS {c | c IN components((:real^N) DIFF (s UNION t)) /\\\n                    frontier c SUBSET t}
       #|  s UNION\n       UNIONS {c | c IN components((:real^N) DIFF (s UNION t)) /\\\n                   frontier c SUBSET s}
-      #|  (?x. P x /\\ Q x /\\ R x) <=> ~(!x. P x /\\ Q x ==> ~R x)
-      #|  !s t u. closed s /\\ closed t /\\ s INTER t = {} /\\\n             connected u /\\ ~(u INTER s = {}) /\\ ~(u INTER t = {})\n             ==> ?c. c IN components((:real^N) DIFF (s UNION t)) /\\\n                     ~(c INTER u = {}) /\\\n                     ~(frontier c INTER s = {}) /\\\n                     ~(frontier c INTER t = {})
+      #|  (?x. P x /\\ Q x /\\ R x) <=> ~(forall x. P x /\\ Q x ==> ~R x)
+      #|  forall s t u. closed s /\\ closed t /\\ s INTER t = {} /\\\n             connected u /\\ ~(u INTER s = {}) /\\ ~(u INTER t = {})\n             ==> ?c. c IN components((:real^N) DIFF (s UNION t)) /\\\n                     ~(c INTER u = {}) /\\\n                     ~(frontier c INTER s = {}) /\\\n                     ~(frontier c INTER t = {})
       #|  u:real^N->bool
       #|  t:real^N->bool
       #|  c:real^N->bool
@@ -84036,9 +84036,9 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  t:real^N->bool
       #|  u:real^N->bool
       #|  t:real^N->bool
-      #|  !s. open s /\\ ~connected((:real^N) DIFF s)\n       ==> ?c. c IN components s /\\ ~connected((:real^N) DIFF c)
+      #|  forall s. open s /\\ ~connected((:real^N) DIFF s)\n       ==> ?c. c IN components s /\\ ~connected((:real^N) DIFF c)
       #|  UNIV DIFF (s UNION t) = (UNIV DIFF s) INTER (UNIV DIFF t)
-      #|  !s t:real^N->bool.\n        open s /\\ open t /\\ DISJOINT s t /\\\n        connected((:real^N) DIFF s) /\\\n        connected((:real^N) DIFF t)\n        ==> connected((:real^N) DIFF (s UNION t))
+      #|  forall s t:real^N->bool.\n        open s /\\ open t /\\ DISJOINT s t /\\\n        connected((:real^N) DIFF s) /\\\n        connected((:real^N) DIFF t)\n        ==> connected((:real^N) DIFF (s UNION t))
       #|  ~(f = {}) ==> s UNION UNIONS f = UNIONS {s UNION c | c IN f}
       #|  t:real^N->bool
       #|  s:real^N->bool
@@ -84047,7 +84047,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  closure s:real^N->bool
       #|  frontier d:real^N->bool
       #|  frontier c:real^N->bool
-      #|  DISJOINT s t\n      ==> !c d. c SUBSET s /\\ d SUBSET t /\\ ~(c INTER d = {}) ==> F
+      #|  DISJOINT s t\n      ==> forall c d. c SUBSET s /\\ d SUBSET t /\\ ~(c INTER d = {}) ==> F
       #|  (~p ==> F) ==> p
       #|  c:real^N->bool
       #|  d:real^N->bool
@@ -84063,7 +84063,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s SUBSET UNIV DIFF t /\\ s = UNIV ==> t = {}
       #|  frontier d:real^N->bool
       #|  frontier c:real^N->bool
-      #|  DISJOINT s t ==> !c d. ~(c = {}) /\\ c SUBSET s /\\ d SUBSET t /\\ c = d\n                               ==> p
+      #|  DISJOINT s t ==> forall c d. ~(c = {}) /\\ c SUBSET s /\\ d SUBSET t /\\ c = d\n                               ==> p
       #|  c INTER closure(t:real^N->bool) = {}
       #|  c INTER t:real^N->bool = {}
       #|  c:real^N->bool
@@ -84080,16 +84080,16 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  c INTER t:real^N->bool = {}
       #|  c:real^N->bool
       #|  x IN UNIONS(components((:real^N) DIFF closure s))
-      #|  DISJOINT s t ==> !x. ~(x IN s) \\/ ~(x IN t)
+      #|  DISJOINT s t ==> forall x. ~(x IN s) \\/ ~(x IN t)
       #|  x:real^N
       #|  (x:real^N) IN t
       #|  (x:real^N) IN s
       #|  x:real^N
       #|  t:real^N->bool
-      #|  !s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
+      #|  forall s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
       #|  (s = {} \\/ ~(s = {}) ==> connected(u UNION UNIONS s))\n        ==> connected(u UNION UNIONS s)
       #|  s:real^N->bool
-      #|  !s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
+      #|  forall s. s SUBSET t /\\ ~(s = {}) ==> ~(t = {})
       #|  (s = {} \\/ ~(s = {}) ==> connected(u UNION UNIONS s))\n        ==> connected(u UNION UNIONS s)
       #|  t UNION UNIONS {c | c IN components((:real^N) DIFF closure s) /\\\n                         ~(c INTER t = {})}
       #|  s UNION UNIONS {c | c IN components((:real^N) DIFF closure t) /\\\n                         ~(c INTER s = {})}
@@ -84098,22 +84098,22 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s = (:real^N)
       #|  t:real^N->bool = {}
       #|  s:real^N->bool = {}
-      #|  !s t:real^N->bool.\n        open s /\\ connected s /\\ open t /\\ connected t /\\\n        DISJOINT (frontier s) (frontier t)\n        ==> connected(s INTER t)
+      #|  forall s t:real^N->bool.\n        open s /\\ connected s /\\ open t /\\ connected t /\\\n        DISJOINT (frontier s) (frontier t)\n        ==> connected(s INTER t)
       #|  (:real^N) DIFF s
-      #|  !s. (open s \\/ closed s)\n       ==> ((!c. c IN components s ==> connected((:real^N) DIFF c)) <=>\n            connected((:real^N) DIFF s))
+      #|  forall s. (open s \\/ closed s)\n       ==> ((forall c. c IN components s ==> connected((:real^N) DIFF c)) <=>\n            connected((:real^N) DIFF s))
       #|  t:real^N->bool
       #|  s:real^N->bool
       #|  t:real^N->bool
       #|  s:real^N->bool
-      #|  !s t c:real^N->bool.\n        open s /\\ connected s /\\\n        open t /\\ connected t /\\\n        ~(s = t) /\\ frontier s = c /\\ frontier t = c\n        ==> connected c
+      #|  forall s t c:real^N->bool.\n        open s /\\ connected s /\\\n        open t /\\ connected t /\\\n        ~(s = t) /\\ frontier s = c /\\ frontier t = c\n        ==> connected c
       #|  r x = x /\\ x IN s ==> x IN IMAGE r s
       #|  ~(p IN s) ==> ~(p IN connected_component s r)
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  cball(p:real^N,d) SUBSET cball(p,e)
       #|  interval[vec 0:real^1,vec 1]
       #|  h:real^N->bool
-      #|  (!x. x IN s ==> f x IN t) <=> IMAGE f s SUBSET t
-      #|  !t. t IN closure(interval(vec 0,vec 1))\n          ==> (g:real^1->real^N) t IN closure h
+      #|  (forall x. x IN s ==> f x IN t) <=> IMAGE f s SUBSET t
+      #|  forall t. t IN closure(interval(vec 0,vec 1))\n          ==> (g:real^1->real^N) t IN closure h
       #|  g(lift(&1 / &2)):real^N
       #|  cball(p:real^N,e) DIFF f
       #|  r:real
@@ -84168,7 +84168,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  cball(p:real^N,d)
       #|  c:real^N->bool
       #|  s:real^N->bool
-      #|  ?g. path g /\\ pathstart g:real^N = p /\\ pathfinish g = q /\\\n        (!t. t IN interval(vec 0,vec 1) ==> g t IN c)
+      #|  ?g. path g /\\ pathstart g:real^N = p /\\ pathfinish g = q /\\\n        (forall t. t IN interval(vec 0,vec 1) ==> g t IN c)
       #|  (p:real^N) IN frontier c /\\ (q:real^N) IN frontier c
       #|  q:real^N
       #|  ~(x IN s) <=> x IN (UNIV DIFF s)
@@ -84180,13 +84180,13 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  d INTER cball(x:real^N,r) = {} ==> ball(x,r) SUBSET cball(x,r)\n                ==> ball(x,r) INTER d = {}
       #|  d:real^N->bool
       #|  (:real^N) DIFF ball(p,(k + dist(p,q)) / &2)
-      #|  !t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
+      #|  forall t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
       #|  ~q /\\ (p ==> r) ==> p \\/ q ==> r
       #|  x IN s ==> s SUBSET t ==> x IN t
       #|  s DIFF t = s INTER (UNIV DIFF t)
       #|  s SUBSET t ==> s DIFF c SUBSET t DIFF c
       #|  closure(ball(p:real^N,d) DIFF s)
-      #|  !s. s SUBSET t /\\ x IN s ==> x IN t
+      #|  forall s. s SUBSET t /\\ x IN s ==> x IN t
       #|  {x | x IN s /\\ ~P x} UNION {x | x IN s /\\ P x} = s
       #|  q IN closure\n       (UNIONS {c | c IN components (cball(p:real^N,d) DIFF s) /\\\n                    ~(closure c INTER cball(p,(k + dist (p,q)) / &2) = {})}\n        UNION\n        UNIONS {c | c IN components (cball(p,d) DIFF s) /\\\n                    closure c INTER cball(p,(k + dist (p,q)) / &2) = {}})
       #|  ?c. c IN components(cball(p:real^N,d) DIFF s) /\\ q IN closure c
@@ -84210,10 +84210,10 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  inf (k INSERT (d / &2) INSERT\n           IMAGE (\\c. setdist({p:real^N},c))\n                 {c | c IN components (cball (p,d) DIFF s) /\\\n                      ~(closure c INTER cball (p,d / &2) = {}) /\\\n                      ~(p IN closure c)})
       #|  k:real
       #|  p:real^N
-      #|  ?k. &0 < k /\\ k <= d /\\\n        (!x. ~(x IN u) ==> k <= dist(p,x)) /\\\n        (!c x. c IN components(cball(p,d) DIFF s) /\\\n               ~(p IN closure c) /\\ x IN c\n               ==> k <= dist(p:real^N,x))
+      #|  ?k. &0 < k /\\ k <= d /\\\n        (forall x. ~(x IN u) ==> k <= dist(p,x)) /\\\n        (forall c x. c IN components(cball(p,d) DIFF s) /\\\n               ~(p IN closure c) /\\ x IN c\n               ==> k <= dist(p:real^N,x))
       #|  compact(sd:real^N->bool)
       #|  (s:real^N->bool) SUBSET sd
-      #|  vec 0 IN t /\\ (!x:real^N. f x (vec 0) = x)\n        ==> s SUBSET {f x y | x IN s /\\ y IN t}
+      #|  vec 0 IN t /\\ (forall x:real^N. f x (vec 0) = x)\n        ==> s SUBSET {f x y | x IN s /\\ y IN t}
       #|  {x + l:real^N | x IN s /\\ l IN ball(vec 0,d)}
       #|  (s:real^N->bool) SUBSET interior sd
       #|  sd = {x + l:real^N | x IN s /\\ l IN cball(vec 0,d)}
@@ -84237,7 +84237,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  {f x y | x IN {} /\\ P y} SUBSET u
       #|  s:real^N->bool = {}
       #|  ?d. &0 < d /\\ {x + l:real^N | x IN s /\\ l IN cball(vec 0,d)} SUBSET u
-      #|  ?d. &0 < d /\\ d < e /\\\n        {x + l:real^N | x IN s /\\ l IN cball(vec 0,d)} SUBSET u /\\\n        !y:real^N. dist(p,y) <= d ==> dist(p,r y) <= e
+      #|  ?d. &0 < d /\\ d < e /\\\n        {x + l:real^N | x IN s /\\ l IN cball(vec 0,d)} SUBSET u /\\\n        forall y:real^N. dist(p,y) <= d ==> dist(p,r y) <= e
       #|  (p:real^N) IN s
       #|  frontier(s:real^N->bool) SUBSET s
       #|  r:real^N->real^N
@@ -84248,7 +84248,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  p:real^N
       #|  p:real^N
       #|  v:real^N->bool
-      #|  !s:real^N->bool.\n        compact s /\\ ANR s ==> locally connected (frontier s)
+      #|  forall s:real^N->bool.\n        compact s /\\ ANR s ==> locally connected (frontier s)
       #|  :real
       #|  p:real^N
       #|  q:real^N
@@ -84268,17 +84268,17 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  \\x:real^N. Cx(&1)
       #|  s:real^N->bool = {}
       #|  a:complex
-      #|  !f s.\n   closed s\n   ==> ((?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean ((:complex) DIFF {Cx(&0)}))\n              f (\\t. a)) <=>\n        (?g. g continuous_on (:real^N) /\\\n             (!x. x IN s ==> g x = f x) /\\ (!x. ~(g x = Cx(&0)))))
+      #|  forall f s.\n   closed s\n   ==> ((?a. homotopic_with (\\h. T)\n              (subtopology euclidean s,\n               subtopology euclidean ((:complex) DIFF {Cx(&0)}))\n              f (\\t. a)) <=>\n        (?g. g continuous_on (:real^N) /\\\n             (forall x. x IN s ==> g x = f x) /\\ (forall x. ~(g x = Cx(&0)))))
       #|  x:real^N
       #|  x:real^N
       #|  Im o (g:real^N->real^2)
       #|  g:real^N->real^2
-      #|  IMAGE f s SUBSET t ==> (!x. P x ==> ~(x IN t))\n          ==> !x. x IN s ==> ~P(f x)
+      #|  IMAGE f s SUBSET t ==> (forall x. P x ==> ~(x IN t))\n          ==> forall x. x IN s ==> ~P(f x)
       #|  3 <= n <=> 2 < n
       #|  sphere(a:real^N,r)
       #|  f:real^N->real^2
-      #|  !f:real^N->real^2 a r.\n          2 < dimindex(:N) /\\\n          f continuous_on sphere(a,r) /\\\n          IMAGE f (sphere(a,r)) SUBSET (sphere(vec 0,&1))\n          ==> ?c. homotopic_with (\\z. T)\n                   (subtopology euclidean (sphere(a,r)),\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   f (\\x. c)
-      #|  !a:real^M r b:real^N s.\n        dimindex(:M) = dimindex(:N) /\\ &0 < r /\\ &0 < s\n        ==> (sphere(a,r) homeomorphic sphere(b,s))
+      #|  forall f:real^N->real^2 a r.\n          2 < dimindex(:N) /\\\n          f continuous_on sphere(a,r) /\\\n          IMAGE f (sphere(a,r)) SUBSET (sphere(vec 0,&1))\n          ==> ?c. homotopic_with (\\z. T)\n                   (subtopology euclidean (sphere(a,r)),\n                    subtopology euclidean (sphere(vec 0,&1)))\n                   f (\\x. c)
+      #|  forall a:real^M r b:real^N s.\n        dimindex(:M) = dimindex(:N) /\\ &0 < r /\\ &0 < s\n        ==> (sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
       #|  ?a:real^M b:real^N. ~(sphere(a,r) homeomorphic sphere(b,s))
@@ -84292,7 +84292,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  h:real^N->real^2
       #|  (sphere(b:real^N,s)) homeomorphic (sphere(vec 0:real^2,&1))
       #|  s <= &0
-      #|  !f:real^M->real^N a r b s.\n        2 < dimindex(:M) /\\ dimindex(:N) = 2 /\\\n        f continuous_on sphere(a,r) /\\\n        IMAGE f (sphere(a,r)) SUBSET (sphere(b,s))\n        ==> ?c. homotopic_with (\\z. T)\n                  (subtopology euclidean (sphere(a,r)),\n                   subtopology euclidean (sphere(b,s))) f (\\x. c)
+      #|  forall f:real^M->real^N a r b s.\n        2 < dimindex(:M) /\\ dimindex(:N) = 2 /\\\n        f continuous_on sphere(a,r) /\\\n        IMAGE f (sphere(a,r)) SUBSET (sphere(b,s))\n        ==> ?c. homotopic_with (\\z. T)\n                  (subtopology euclidean (sphere(a,r)),\n                   subtopology euclidean (sphere(b,s))) f (\\x. c)
       #|  (k:real^2->real^N) c
       #|  a = b * a <=> a = Cx(&0) \\/ b = Cx(&1)
       #|  ?w:real^2. cexp(ii * Cx(h w)) = cexp (ii * Cx(z + h w))
@@ -84315,7 +84315,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  closed_in (subtopology euclidean (s UNION t)) s /\\\n      closed_in (subtopology euclidean (s UNION t)) (t:real^2->bool)
       #|  h:real^2->real
       #|  g:real^2->real
-      #|  !s t a b:real^2.\n          compact s /\\ compact t /\\ connected(s INTER t) /\\\n          connected_component ((:real^2) DIFF s) a b /\\\n          connected_component ((:real^2) DIFF t) a b\n          ==> connected_component ((:real^2) DIFF (s UNION t)) a b
+      #|  forall s t a b:real^2.\n          compact s /\\ compact t /\\ connected(s INTER t) /\\\n          connected_component ((:real^2) DIFF s) a b /\\\n          connected_component ((:real^2) DIFF t) a b\n          ==> connected_component ((:real^2) DIFF (s UNION t)) a b
       #|  r:real
       #|  vec 0:real^2
       #|  cball(vec 0:real^2,r)
@@ -84338,20 +84338,20 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
       #|  path_component((:real^2) DIFF t) a b
       #|  ?c:real^2->bool.\n       compact c /\\ connected c /\\ a IN c /\\ b IN c /\\ c INTER t = {}
-      #|  !s t a b:real^2.\n        compact s /\\ closed t /\\ connected(s INTER t) /\\\n        connected_component ((:real^2) DIFF s) a b /\\\n        connected_component ((:real^2) DIFF t) a b\n        ==> connected_component ((:real^2) DIFF (s UNION t)) a b
+      #|  forall s t a b:real^2.\n        compact s /\\ closed t /\\ connected(s INTER t) /\\\n        connected_component ((:real^2) DIFF s) a b /\\\n        connected_component ((:real^2) DIFF t) a b\n        ==> connected_component ((:real^2) DIFF (s UNION t)) a b
       #|  1 <= n /\\ ~(n = 1) ==> (n <= 2 <=> n = 2)
       #|  dimindex(:N) = 1
-      #|  !s t a b:real^N.\n        dimindex(:N) <= 2 /\\\n        compact s /\\ closed t /\\ connected(s INTER t) /\\\n        connected_component ((:real^N) DIFF s) a b /\\\n        connected_component ((:real^N) DIFF t) a b\n        ==> connected_component ((:real^N) DIFF (s UNION t)) a b
-      #|  !s t:real^2->bool.\n       compact s /\\ closed t /\\ connected(s INTER t) /\\\n       connected ((:real^2) DIFF s) /\\ connected ((:real^2) DIFF t)\n       ==> connected((:real^2) DIFF (s UNION t))
+      #|  forall s t a b:real^N.\n        dimindex(:N) <= 2 /\\\n        compact s /\\ closed t /\\ connected(s INTER t) /\\\n        connected_component ((:real^N) DIFF s) a b /\\\n        connected_component ((:real^N) DIFF t) a b\n        ==> connected_component ((:real^N) DIFF (s UNION t)) a b
+      #|  forall s t:real^2->bool.\n       compact s /\\ closed t /\\ connected(s INTER t) /\\\n       connected ((:real^2) DIFF s) /\\ connected ((:real^2) DIFF t)\n       ==> connected((:real^2) DIFF (s UNION t))
       #|  s UNION t:real^2->bool
-      #|  !s t:real^2->bool.\n        compact s /\\ compact t /\\ connected s /\\ connected t /\\\n        connected((:real^2) DIFF (s UNION t))\n         ==> connected(s INTER t)
+      #|  forall s t:real^2->bool.\n        compact s /\\ compact t /\\ connected s /\\ connected t /\\\n        connected((:real^2) DIFF (s UNION t))\n         ==> connected(s INTER t)
       #|  c2:real^1->real^2
       #|  frontier:(real^2->bool)->real^2->bool
       #|  (:real^2) DIFF\n                  (path_image c1 UNION path_image c2 UNION path_image c3)
       #|  i3 SUBSET UNIV DIFF c /\\\n      ~(i3 = {}) /\\ i1 INTER i3 = {} /\\ i2 INTER i3 = {}\n      ==> ~(UNIV DIFF ((i1 UNION i2) UNION c) = {}) /\\\n          i3 SUBSET UNIV DIFF ((i1 UNION i2) UNION c)
       #|  (i UNION c1 UNION c2) UNION (j UNION c2 UNION c3) =\n      (i UNION j) UNION (c1 UNION c2 UNION c3)
       #|  bounded:(real^2->bool)->bool
-      #|  R s /\\ ~(s = i) /\\ P s /\\ Q s\n      ==> (!c. P c /\\ Q c /\\ R c /\\ connected c ==> c = i)\n      ==> ~connected s
+      #|  R s /\\ ~(s = i) /\\ P s /\\ Q s\n      ==> (forall c. P c /\\ Q c /\\ R c /\\ connected c ==> c = i)\n      ==> ~connected s
       #|  inside(path_image c3 UNION path_image c1:real^2->bool) IN\n      components((:real^2) DIFF\n                 (path_image c1 UNION path_image c2 UNION path_image c3))
       #|  connected(outside(path_image c2 UNION path_image c3):real^2->bool)
       #|  connected(outside(path_image c1 UNION path_image c2):real^2->bool)
@@ -84370,7 +84370,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  c1 ++ reversepath c2:real^1->real^2
       #|  c2 ++ reversepath c3:real^1->real^2
       #|  c3 ++ reversepath c1:real^1->real^2
-      #|  !c1 c2 c3 a b:real^2.\n        arc c1 /\\ pathstart c1 = a /\\ pathfinish c1 = b /\\\n        arc c2 /\\ pathstart c2 = a /\\ pathfinish c2 = b /\\\n        arc c3 /\\ pathstart c3 = a /\\ pathfinish c3 = b /\\\n        path_image c1 INTER path_image c2 = {a,b} /\\\n        path_image c2 INTER path_image c3 = {a,b} /\\\n        path_image c3 INTER path_image c1 = {a,b}\n        ==> path_image c1 DIFF {a,b} SUBSET\n            inside(path_image c2 UNION path_image c3) \\/\n            path_image c2 DIFF {a,b} SUBSET\n            inside(path_image c3 UNION path_image c1) \\/\n            path_image c3 DIFF {a,b} SUBSET\n            inside(path_image c1 UNION path_image c2)
+      #|  forall c1 c2 c3 a b:real^2.\n        arc c1 /\\ pathstart c1 = a /\\ pathfinish c1 = b /\\\n        arc c2 /\\ pathstart c2 = a /\\ pathfinish c2 = b /\\\n        arc c3 /\\ pathstart c3 = a /\\ pathfinish c3 = b /\\\n        path_image c1 INTER path_image c2 = {a,b} /\\\n        path_image c2 INTER path_image c3 = {a,b} /\\\n        path_image c3 INTER path_image c1 = {a,b}\n        ==> path_image c1 DIFF {a,b} SUBSET\n            inside(path_image c2 UNION path_image c3) \\/\n            path_image c2 DIFF {a,b} SUBSET\n            inside(path_image c3 UNION path_image c1) \\/\n            path_image c3 DIFF {a,b} SUBSET\n            inside(path_image c1 UNION path_image c2)
       #|  connected(path_image c:real^2->bool)
       #|  UNIV DIFF ((UNIV DIFF s) UNION (UNIV DIFF t)) = s INTER t
       #|  closure(inside(path_image c2 UNION path_image c)):real^2->bool
@@ -84380,7 +84380,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  s INTER t = u <=>\n                        (UNIV DIFF s) UNION (UNIV DIFF t) = UNIV DIFF u
       #|  outside (path_image c1 UNION path_image c) INTER\n    outside (path_image c2 UNION path_image c):real^2->bool\n    SUBSET outside (path_image c1 UNION path_image c2)
       #|  outside(path_image c2 UNION path_image c):real^2->bool
-      #|  !u. s SUBSET u /\\ t INTER u = {} ==> s INTER t = {}
+      #|  forall u. s SUBSET u /\\ t INTER u = {} ==> s INTER t = {}
       #|  inside(c2 UNION c) INTER (c2 UNION c) = {} /\\\n          c1 INTER inside(c2 UNION c) = {}\n          ==> inside(c2 UNION c) SUBSET UNIV DIFF (c1 UNION c)
       #|  inside(path_image c2 UNION path_image c:real^2->bool)
       #|  s SUBSET UNIV DIFF t <=> s INTER t = {}
@@ -84439,7 +84439,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (c2 ++ reversepath c):real^1->real^2
       #|  (c1 ++ reversepath c):real^1->real^2
       #|  (c1 ++ reversepath c2):real^1->real^2
-      #|  !c1 c2 c a b:real^2.\n        ~(a = b) /\\\n        simple_path c1 /\\ pathstart c1 = a /\\ pathfinish c1 = b /\\\n        simple_path c2 /\\ pathstart c2 = a /\\ pathfinish c2 = b /\\\n        simple_path c /\\ pathstart c = a /\\ pathfinish c = b /\\\n        path_image c1 INTER path_image c2 = {a,b} /\\\n        path_image c1 INTER path_image c = {a,b} /\\\n        path_image c2 INTER path_image c = {a,b} /\\\n        ~(path_image c INTER inside(path_image c1 UNION path_image c2) = {})\n        ==> inside(path_image c1 UNION path_image c) INTER\n            inside(path_image c2 UNION path_image c) = {} /\\\n            inside(path_image c1 UNION path_image c) UNION\n            inside(path_image c2 UNION path_image c) UNION\n            (path_image c DIFF {a,b}) =\n            inside(path_image c1 UNION path_image c2)
+      #|  forall c1 c2 c a b:real^2.\n        ~(a = b) /\\\n        simple_path c1 /\\ pathstart c1 = a /\\ pathfinish c1 = b /\\\n        simple_path c2 /\\ pathstart c2 = a /\\ pathfinish c2 = b /\\\n        simple_path c /\\ pathstart c = a /\\ pathfinish c = b /\\\n        path_image c1 INTER path_image c2 = {a,b} /\\\n        path_image c1 INTER path_image c = {a,b} /\\\n        path_image c2 INTER path_image c = {a,b} /\\\n        ~(path_image c INTER inside(path_image c1 UNION path_image c2) = {})\n        ==> inside(path_image c1 UNION path_image c) INTER\n            inside(path_image c2 UNION path_image c) = {} /\\\n            inside(path_image c1 UNION path_image c) UNION\n            inside(path_image c2 UNION path_image c) UNION\n            (path_image c DIFF {a,b}) =\n            inside(path_image c1 UNION path_image c2)
       #|INJECTIVE_EQ_1D_OPEN_MAP_UNIV =  |- (#!:fun(fun(fun(cart(real,1),cart(real,1)),bool),bool) (\f:fun(cart(real,1),cart(real,1)). (#!:fun(fun(fun(cart(real,1),bool),bool),bool) (\s:fun(cart(real,1),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#continuous_on:fun(fun(cart(real,1),cart(real,1)),fun(fun(cart(real,1),bool),bool)) f:fun(cart(real,1),cart(real,1))) s:fun(cart(real,1),bool))) (#is_interval:fun(fun(cart(real,1),bool),bool) s:fun(cart(real,1),bool)))) ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,1),bool),bool) (\x:cart(real,1). (#!:fun(fun(cart(real,1),bool),bool) (\y:cart(real,1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,1),fun(fun(cart(real,1),bool),bool)) x:cart(real,1)) s:fun(cart(real,1),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,1),fun(fun(cart(real,1),bool),bool)) y:cart(real,1)) s:fun(cart(real,1),bool))) ((#=:fun(cart(real,1),fun(cart(real,1),bool)) (f:fun(cart(real,1),cart(real,1)) x:cart(real,1))) (f:fun(cart(real,1),cart(real,1)) y:cart(real,1)))))) ((#=:fun(cart(real,1),fun(cart(real,1),bool)) x:cart(real,1)) y:cart(real,1)))))))) (#!:fun(fun(fun(cart(real,1),bool),bool),bool) (\t:fun(cart(real,1),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#open:fun(fun(cart(real,1),bool),bool) t:fun(cart(real,1),bool))) ((#SUBSET:fun(fun(cart(real,1),bool),fun(fun(cart(real,1),bool),bool)) t:fun(cart(real,1),bool)) s:fun(cart(real,1),bool)))) (#open:fun(fun(cart(real,1),bool),bool) ((#IMAGE:fun(fun(cart(real,1),cart(real,1)),fun(fun(cart(real,1),bool),fun(cart(real,1),bool))) f:fun(cart(real,1),cart(real,1))) t:fun(cart(real,1),bool))))))))))))
       #|NONSURJECTIVE_DIFFERENTIABLE_SPHEREMAP_LOWDIM =  |- (#!:fun(fun(fun(cart(real,'N),cart(real,'N)),bool),bool) (\f:fun(cart(real,'N),cart(real,'N)). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#subspace:fun(fun(cart(real,'N),bool),bool) s:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#subspace:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#dim:fun(fun(cart(real,'N),bool),num) s:fun(cart(real,'N),bool))) (#dim:fun(fun(cart(real,'N),bool),num) t:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) s:fun(cart(real,'N),bool)) t:fun(cart(real,'N),bool))) ((#differentiable_on:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),bool)) f:fun(cart(real,'N),cart(real,'N))) ((#INTER:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#sphere:fun(prod(cart(real,'N),real),fun(cart(real,'N),bool)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) s:fun(cart(real,'N),bool)))))))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) f:fun(cart(real,'N),cart(real,'N))) ((#INTER:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#sphere:fun(prod(cart(real,'N),real),fun(cart(real,'N),bool)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) s:fun(cart(real,'N),bool)))) ((#INTER:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (#sphere:fun(prod(cart(real,'N),real),fun(cart(real,'N),bool)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) t:fun(cart(real,'N),bool)))))))))))
       #|INESSENTIAL_SPHEREMAP_LOWDIM_GEN =  |- (#!:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (#!:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\t:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#convex:fun(fun(cart(real,'M),bool),bool) s:fun(cart(real,'M),bool))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'M),bool),bool) s:fun(cart(real,'M),bool))) ((#/\:fun(bool,fun(bool,bool)) (#convex:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) (#bounded:fun(fun(cart(real,'N),bool),bool) t:fun(cart(real,'N),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#int_lt:fun(int,fun(int,bool)) (#aff_dim:fun(fun(cart(real,'M),bool),int) s:fun(cart(real,'M),bool))) (#aff_dim:fun(fun(cart(real,'N),bool),int) t:fun(cart(real,'N),bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#continuous_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) (#relative_frontier:fun(fun(cart(real,'M),bool),fun(cart(real,'M),bool)) s:fun(cart(real,'M),bool)))) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#IMAGE:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),fun(cart(real,'N),bool))) f:fun(cart(real,'M),cart(real,'N))) (#relative_frontier:fun(fun(cart(real,'M),bool),fun(cart(real,'M),bool)) s:fun(cart(real,'M),bool)))) (#relative_frontier:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) t:fun(cart(real,'N),bool)))))))))) (#?:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). ((((#homotopic_with:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(prod(topology(cart(real,'M)),topology(cart(real,'N))),fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),cart(real,'N)),bool)))) (\z:fun(cart(real,'M),cart(real,'N)). #T:bool)) ((#,:fun(topology(cart(real,'M)),fun(topology(cart(real,'N)),prod(topology(cart(real,'M)),topology(cart(real,'N))))) ((#subtopology:fun(topology(cart(real,'M)),fun(fun(cart(real,'M),bool),topology(cart(real,'M)))) #euclidean:topology(cart(real,'M))) (#relative_frontier:fun(fun(cart(real,'M),bool),fun(cart(real,'M),bool)) s:fun(cart(real,'M),bool)))) ((#subtopology:fun(topology(cart(real,'N)),fun(fun(cart(real,'N),bool),topology(cart(real,'N)))) #euclidean:topology(cart(real,'N))) (#relative_frontier:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) t:fun(cart(real,'N),bool))))) f:fun(cart(real,'M),cart(real,'N))) (\x:cart(real,'M). c:cart(real,'N))))))))))))

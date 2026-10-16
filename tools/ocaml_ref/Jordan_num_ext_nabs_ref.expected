@@ -5816,28 +5816,28 @@ Jordan/num_ext_nabs quotations (55):
   real_of_num:num->real
   real_abs:real->real
   u:num
-  !u. (integer (real_of_num u))
-  !u. (real_of_int (int_of_num u) = real_of_num u)
-  !(a:int). (integer (real_of_int a))
+  forall u. (integer (real_of_num u))
+  forall u. (real_of_int (int_of_num u) = real_of_num u)
+  forall(a:int). (integer (real_of_int a))
   n:num
-  !a n. ((real_of_int a = (real_of_num n)) =\n                (a = int_of_num n))
+  forall a n. ((real_of_int a = (real_of_num n)) =\n                (a = int_of_num n))
   n:num
   0
   0
   n:num
   a:int
-  !a. ?n m. (a = (int_of_num n) - (int_of_num m))
+  forall a. ?n m. (a = (int_of_num n) - (int_of_num m))
   n:num
   n:num
   a:int
-  !a. ?n. ((a = (&: n)) \\/ (a = (--: (&: n))))
+  forall a. ?n. ((a = (&: n)) \\/ (a = (--: (&: n))))
   nabs n = @u. ((n = int_of_num u) \\/ (n =\n        int_neg (int_of_num u)))
-  ! u y.(((real_of_num u) = --(real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
+  forall u y.(((real_of_num u) = --(real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
    ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) 
-  !u. (nabs (int_of_num u)) = u
-  ! u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
+  forall u. (nabs (int_of_num u)) = u
+  forall u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
    ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) 
-  !n. (nabs (-- (int_of_num n))) = n
+  forall n. (nabs (-- (int_of_num n))) = n
 INT_NUM =  |- (#!:fun(fun(num,bool),bool) (\u:num. (#integer:fun(real,bool) (#real_of_num:fun(num,real) u:num))))
 INT_NUM_REAL =  |- (#!:fun(fun(num,bool),bool) (\u:num. ((#=:fun(real,fun(real,bool)) (#real_of_int:fun(int,real) (#int_of_num:fun(num,int) u:num))) (#real_of_num:fun(num,real) u:num))))
 INT_IS_INT =  |- (#!:fun(fun(int,bool),bool) (\a:int. (#integer:fun(real,bool) (#real_of_int:fun(int,real) a:int))))

@@ -21481,41 +21481,41 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  s:A->bool
       #|  a:A->int
       #|  \\i:int. coprime(n,i)
-      #|  !s (a:A->int) n.\n        (!i. i IN s ==> coprime(n,a i)) ==> coprime(n,iproduct s a)
+      #|  forall s (a:A->int) n.\n        (forall i. i IN s ==> coprime(n,a i)) ==> coprime(n,iproduct s a)
       #|  s:A->bool
       #|  b:A->int
       #|  a:A->int
       #|  \\i j:int. (i == j) (mod n)
-      #|  !s (a:A->int) (b:A->int) n.\n        FINITE s /\\\n        (!i. i IN s ==> (a i == b i) (mod n))\n        ==> (iproduct s a == iproduct s b) (mod n)
+      #|  forall s (a:A->int) (b:A->int) n.\n        FINITE s /\\\n        (forall i. i IN s ==> (a i == b i) (mod n))\n        ==> (iproduct s a == iproduct s b) (mod n)
       #|  (jacobi:num#num->int)(a,n) =\n        if n = 0 then if a = 1 then &1 else &0\n        else iproduct {p | prime p /\\ p divides n}\n                      (\\p. (if p divides a then &0\n                            else if ?x. (x EXP 2 == a) (mod p) then &1\n                            else --(&1)) pow index p n)
       #|  p:num
-      #|  !a n. abs(jacobi(a,n)) <= &1
-      #|  !a n. jacobi(a,n) = -- &1 \\/ jacobi(a,n) = &0 \\/ jacobi(a,n) = &1
+      #|  forall a n. abs(jacobi(a,n)) <= &1
+      #|  forall a n. jacobi(a,n) = -- &1 \\/ jacobi(a,n) = &0 \\/ jacobi(a,n) = &1
       #|  p <= 1
       #|  ~(prime q ==> ~(q = p)) <=> prime p /\\ q = p
       #|  {x | P x /\\ Q x} = {x | ~(P x ==> ~Q x)}
-      #|  !a p. prime p\n         ==> jacobi(a,p) =\n             if p divides a then &0\n             else if ?x. (x EXP 2 == a) (mod p) then &1\n             else --(&1)
+      #|  forall a p. prime p\n         ==> jacobi(a,p) =\n             if p divides a then &0\n             else if ?x. (x EXP 2 == a) (mod p) then &1\n             else --(&1)
       #|  n = 0
-      #|  !a n. jacobi(a,n) =\n         if n = 0 then if a = 1 then &1 else &0\n         else iproduct {p | prime p /\\ p divides n}\n                       (\\p. jacobi(a,p) pow index p n)
+      #|  forall a n. jacobi(a,n) =\n         if n = 0 then if a = 1 then &1 else &0\n         else iproduct {p | prime p /\\ p divides n}\n                       (\\p. jacobi(a,p) pow index p n)
       #|  ~p ==> p ==> q
       #|  n = 0
-      #|  !s a n.\n        FINITE s /\\\n        {p | prime p /\\ p divides n} SUBSET s /\\\n        s SUBSET {p | prime p}\n        ==> jacobi(a,n) = iproduct s (\\p. jacobi(a,p) pow index p n)
+      #|  forall s a n.\n        FINITE s /\\\n        {p | prime p /\\ p divides n} SUBSET s /\\\n        s SUBSET {p | prime p}\n        ==> jacobi(a,n) = iproduct s (\\p. jacobi(a,p) pow index p n)
       #|  prime p ==> ~(p = 1)
       #|  (p:num) divides n
       #|  prime p
       #|  p:num
       #|  n = 0
-      #|  !a n. jacobi(a,n) = &0 <=> ~coprime(a,n)
-      #|  !a b. ~coprime(a,n) ==> jacobi(a,n) = &0
+      #|  forall a n. jacobi(a,n) = &0 <=> ~coprime(a,n)
+      #|  forall a b. ~coprime(a,n) ==> jacobi(a,n) = &0
       #|  1
       #|  ?x. (x EXP 2 == 1) (mod p)
       #|  prime p ==> ~(p = 1)
       #|  p:num
-      #|  (!n. jacobi(1,n) = &1) /\\\n   (!a. jacobi(a,1) = &1)
-      #|  (!n. jacobi(0,n) = if n = 1 then &1 else &0) /\\\n   (!a. jacobi(a,0) = if a = 1 then &1 else &0)
+      #|  (forall n. jacobi(1,n) = &1) /\\\n   (forall a. jacobi(a,1) = &1)
+      #|  (forall n. jacobi(0,n) = if n = 1 then &1 else &0) /\\\n   (forall a. jacobi(a,0) = if a = 1 then &1 else &0)
       #|  EVEN a
-      #|  !a. jacobi(a,2) = if ODD a then &1 else &0
-      #|  !a. jacobi(a,2) = &(a MOD 2)
+      #|  forall a. jacobi(a,2) = if ODD a then &1 else &0
+      #|  forall a. jacobi(a,2) = &(a MOD 2)
       #|  (a EXP ((p - 1) DIV 2) == 1) (mod p)
       #|  a EXP ((p - 1) DIV 2)
       #|  1
@@ -21525,14 +21525,14 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  a:num
       #|  ((a EXP ((p - 1) DIV 2)) EXP 2 == 1) (mod p)
       #|  (&0:int == a) (mod p) <=> p divides a
-      #|  !a p. prime p /\\ ~(p = 2)\n         ==> (jacobi(a,p) == &a pow ((p - 1) DIV 2)) (mod &p)
-      #|  !a p. prime p\n         ==> (jacobi(a,p) == &a pow (if p = 2 then 1 else (p - 1) DIV 2))\n             (mod &p)
+      #|  forall a p. prime p /\\ ~(p = 2)\n         ==> (jacobi(a,p) == &a pow ((p - 1) DIV 2)) (mod &p)
+      #|  forall a p. prime p\n         ==> (jacobi(a,p) == &a pow (if p = 2 then 1 else (p - 1) DIV 2))\n             (mod &p)
       #|  a:num
       #|  {p | prime p /\\ p divides m * n}
       #|  n = 0
       #|  m = 0
       #|  a = 1
-      #|  !a m n. jacobi(a,m * n) = jacobi(a,m) * jacobi(a,n)
+      #|  forall a m n. jacobi(a,m * n) = jacobi(a,m) * jacobi(a,n)
       #|  n:num
       #|  m:num
       #|  (a' * b':int == c') (mod p)\n        ==> (a == a') (mod p) /\\ (b == b') (mod p) /\\ (c == c') (mod p)\n            ==> (c == a * b) (mod p)
@@ -21551,25 +21551,25 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  b = 1
       #|  a = 1
       #|  n = 0
-      #|  !a b n. jacobi(a * b,n) = jacobi(a,n) * jacobi(b,n)
-      #|  !a n k. jacobi(a,n EXP k) = jacobi(a,n) pow k
-      #|  !a n k. jacobi(a EXP k,n) = jacobi(a,n) pow k
-      #|  !a k. jacobi(a,2 EXP k) = if k = 0 then &1 else &(a MOD 2)
+      #|  forall a b n. jacobi(a * b,n) = jacobi(a,n) * jacobi(b,n)
+      #|  forall a n k. jacobi(a,n EXP k) = jacobi(a,n) pow k
+      #|  forall a n k. jacobi(a EXP k,n) = jacobi(a,n) pow k
+      #|  forall a k. jacobi(a,2 EXP k) = if k = 0 then &1 else &(a MOD 2)
       #|  ODD a
-      #|  !a k. jacobi(a,2 EXP k) = if k = 0 \\/ ODD a then &1 else &0
-      #|  !a (n:A->num) k.\n        FINITE k\n        ==> jacobi(a,nproduct k n) = iproduct k (\\i. jacobi(a,n i))
-      #|  !(a:A->num) n k.\n        FINITE k\n        ==> jacobi(nproduct k a,n) = iproduct k (\\i. jacobi(a i,n))
+      #|  forall a k. jacobi(a,2 EXP k) = if k = 0 \\/ ODD a then &1 else &0
+      #|  forall a (n:A->num) k.\n        FINITE k\n        ==> jacobi(a,nproduct k n) = iproduct k (\\i. jacobi(a,n i))
+      #|  forall(a:A->num) n k.\n        FINITE k\n        ==> jacobi(nproduct k a,n) = iproduct k (\\i. jacobi(a i,n))
       #|  p divides n /\\ (a:num == b) (mod n) ==> (a == b) (mod p)
       #|  p divides a <=> (0 == a) (mod p)
       #|  p:num
       #|  n = 0
-      #|  !a b n. (a == b) (mod n) ==> jacobi(a,n) = jacobi(b,n)
+      #|  forall a b n. (a == b) (mod n) ==> jacobi(a,n) = jacobi(b,n)
       #|  (n:num) divides m ==> (x == y) (mod m) ==> (x == y) (mod n)
-      #|  !a m n. n divides m ==> jacobi(a MOD m,n) = jacobi(a,n)
-      #|  !a n. jacobi(a MOD n,n) = jacobi(a,n)
+      #|  forall a m n. n divides m ==> jacobi(a MOD m,n) = jacobi(a,n)
+      #|  forall a n. jacobi(a MOD n,n) = jacobi(a,n)
       #|  n:num
       #|  a:num
-      #|  (!a n. jacobi(a EXP 2,n) = if coprime(a,n) then &1 else &0) /\\\n   (!a n. jacobi(a,n EXP 2) = if coprime(a,n) then &1 else &0)
+      #|  (forall a n. jacobi(a EXP 2,n) = if coprime(a,n) then &1 else &0) /\\\n   (forall a n. jacobi(a,n EXP 2) = if coprime(a,n) then &1 else &0)
       #|  (2 * n) DIV 2 = n
       #|  p:num
       #|  p * n - 1
@@ -21582,11 +21582,11 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  ODD n
       #|  n:num
       #|  p:num
-      #|  !n. ODD n ==> jacobi(n - 1,n) = --(&1) pow ((n - 1) DIV 2)
+      #|  forall n. ODD n ==> jacobi(n - 1,n) = --(&1) pow ((n - 1) DIV 2)
       #|  ~(t = 0) ==> ((t * n + 1 == 1) (mod (t * t)) <=> t divides n)
       #|  4 = 2 * 2
       #|  ((2 * n + 1) - 1) DIV 2 = n
-      #|  !n. ODD n\n       ==> jacobi(n - 1,n) =\n           if (n == 1) (mod 4) then &1 else -- &1
+      #|  forall n. ODD n\n       ==> jacobi(n - 1,n) =\n           if (n == 1) (mod 4) then &1 else -- &1
       #|  (--x:int == p - a) (mod p) <=> (x == a) (mod p)
       #|  i:num
       #|  2 * r + 1 = p
@@ -21609,7 +21609,7 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  (\\i. &i):num->int
       #|  i:num
       #|  iproduct (1..r) (\\i. &i)
-      #|  !c:int. x pow 2 = &1 /\\ coprime(p,c) /\\ (a * x * c == c) (mod p)\n            ==> (a == x) (mod p)
+      #|  forall c:int. x pow 2 = &1 /\\ coprime(p,c) /\\ (a * x * c == c) (mod p)\n            ==> (a == x) (mod p)
       #|  (p - 1) DIV 2 = r
       #|  p:num
       #|  a:num
@@ -21617,16 +21617,16 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  &p:int
       #|  r:num
       #|  ODD(p)
-      #|  !a p. prime p /\\ ~(p = 2)\n         ==> jacobi(a,p) =\n             if coprime(a,p)\n             then --(&1) pow CARD {x | x IN 1 .. (p - 1) DIV 2 /\\\n                                       (p - 1) DIV 2 < (a * x) MOD p}\n             else &0
+      #|  forall a p. prime p /\\ ~(p = 2)\n         ==> jacobi(a,p) =\n             if coprime(a,p)\n             then --(&1) pow CARD {x | x IN 1 .. (p - 1) DIV 2 /\\\n                                       (p - 1) DIV 2 < (a * x) MOD p}\n             else &0
       #|  8 = 4 * 2
       #|  (2 * n + 1) EXP 2 - 1 = 4 * (n EXP 2 + n)
       #|  m:num
-      #|  !n. ODD n ==> 8 divides (n EXP 2 - 1)
+      #|  forall n. ODD n ==> 8 divides (n EXP 2 - 1)
       #|  e divides d /\\ d divides a /\\ d divides b\n        ==> d * e divides a * b
       #|  (d:num) divides a ==> (d divides (a + b) <=> d divides b)
       #|  ODD n ==> ~(n = 0)
       #|  (m * n) EXP 2 - 1 =\n      (m EXP 2 - 1) * (n EXP 2 - 1) + (m EXP 2 - 1) + (n EXP 2 - 1)
-      #|  !m n. ODD m /\\ ODD n\n           ==> (EVEN(((m * n) EXP 2 - 1) DIV 8) <=>\n                EVEN((m EXP 2 - 1) DIV 8 + (n EXP 2 - 1) DIV 8))
+      #|  forall m n. ODD m /\\ ODD n\n           ==> (EVEN(((m * n) EXP 2 - 1) DIV 8) <=>\n                EVEN((m EXP 2 - 1) DIV 8 + (n EXP 2 - 1) DIV 8))
       #|  ((2 * q + 1) EXP 2 + 2 * q + 1) DIV 2 =\n    2 * q EXP 2 + 3 * q + 1
       #|  ((2 * q) EXP 2) DIV 2 = 2 * q * q
       #|  q:num
@@ -21644,7 +21644,7 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  p:num
       #|  n:num
       #|  n:num
-      #|  !n. jacobi(2,n) = if EVEN n then &0 else --(&1) pow ((n EXP 2 - 1) DIV 8)
+      #|  forall n. jacobi(2,n) = if EVEN n then &0 else --(&1) pow ((n EXP 2 - 1) DIV 8)
       #|  k:num
       #|  p MOD 8
       #|  p MOD 8 < 8
@@ -21660,16 +21660,16 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  (n + 1 == 1) (mod p) <=> (n == 0) (mod p)
       #|  m:num
       #|  ((2 * m + 1) EXP 2 - 1) DIV 8 = (m * (m + 1)) DIV 2
-      #|  !n. jacobi(2,n) =\n       if EVEN n then &0\n       else if (n == 1) (mod 8) \\/ (n == 7) (mod 8) then &1 else --(&1)
+      #|  forall n. jacobi(2,n) =\n       if EVEN n then &0\n       else if (n == 1) (mod 8) \\/ (n == 7) (mod 8) then &1 else --(&1)
       #|  p:num
       #|  p MOD 8
       #|  p:num
       #|  p MOD 8
-      #|  !n. ODD n ==> 2 divides (n - 1)
+      #|  forall n. ODD n ==> 2 divides (n - 1)
       #|  d divides a * b /\\ a * b + a + b = c\n      ==> (d divides c <=> d divides (a + b))
-      #|  !m n. ODD m /\\ ODD n\n           ==> (EVEN((m * n - 1) DIV 2) <=>\n                EVEN((m - 1) DIV 2 + (n - 1) DIV 2))
+      #|  forall m n. ODD m /\\ ODD n\n           ==> (EVEN((m * n - 1) DIV 2) <=>\n                EVEN((m - 1) DIV 2 + (n - 1) DIV 2))
       #|  (1..r) CROSS (1..s)
-      #|  !r s p. FINITE {x,y | x IN 1..r /\\ y IN 1..s /\\ p x y}
+      #|  forall r s p. FINITE {x,y | x IN 1..r /\\ y IN 1..s /\\ p x y}
       #|  q * x:num
       #|  prime p
       #|  ((q * x) DIV p + 2) * p <= y * p
@@ -21677,7 +21677,7 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  ~(x <= y) /\\ ~(y + 2 <= x) ==> x = y + 1
       #|  (q * x) DIV p
       #|  p:num
-      #|  !p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r\n                  ==> r < m
+      #|  forall p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r\n                  ==> r < m
       #|  a /\\ (a ==> b) ==> a /\\ b
       #|  2 * r + 1 = p
       #|  q * x:num
@@ -21698,18 +21698,18 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  EVEN
       #|  p:num
       #|  q:num
-      #|  !p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n               2 * r + 1 = p /\\ 2 * s + 1 = q\n               ==> jacobi(q,p) =\n                   -- &1 pow CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                         q * x < p * y /\\ p * y <= q * x + r}
+      #|  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n               2 * r + 1 = p /\\ 2 * s + 1 = q\n               ==> jacobi(q,p) =\n                   -- &1 pow CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                         q * x < p * y /\\ p * y <= q * x + r}
       #|  \\(x:num,y:num). (y,x)
       #|  r:num
       #|  s:num
       #|  p:num
       #|  q:num
-      #|  !p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n               2 * r + 1 = p /\\ 2 * s + 1 = q\n               ==> jacobi(p,q) =\n                   -- &1 pow CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                         p * y < q * x /\\ q * x <= p * y + s}
+      #|  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n               2 * r + 1 = p /\\ 2 * s + 1 = q\n               ==> jacobi(p,q) =\n                   -- &1 pow CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                         p * y < q * x /\\ q * x <= p * y + s}
       #|  a INTER (b UNION c) = {} <=> a INTER b = {} /\\ a INTER c = {}
       #|  CARD:(num#num->bool)->num
       #|  FINITE(a:num#num->bool) /\\ FINITE(b:num#num->bool) /\\\n      FINITE(c:num#num->bool) /\\ FINITE(d:num#num->bool)
       #|  CARD(a:num#num->bool) + CARD(b:num#num->bool) +\n                  CARD(c:num#num->bool) + CARD(d:num#num->bool) = r * s
-      #|  !a b c d r s.\n          a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n          PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n          ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))
+      #|  forall a b c d r s.\n          a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n          PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n          ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))
       #|  EVEN
       #|  a + x:num < y + a <=> x < y
       #|  x <= r ==> x <= r + 1
@@ -21752,45 +21752,45 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  p:num
       #|  m:num
       #|  n:num
-      #|  !m n. ODD m /\\ ODD n\n         ==> jacobi(m,n) * jacobi(n,m) =\n             if coprime(m,n) then --(&1) pow ((m - 1) DIV 2 * (n - 1) DIV 2)\n             else &0
+      #|  forall m n. ODD m /\\ ODD n\n         ==> jacobi(m,n) * jacobi(n,m) =\n             if coprime(m,n) then --(&1) pow ((m - 1) DIV 2 * (n - 1) DIV 2)\n             else &0
       #|  (x:int = -- &1 \\/ x = &0 \\/ x = &1) /\\ ~(x = &0) ==> x pow 2 = &1
-      #|  !x y:int.\n        x pow 2 = &1 /\\ y pow 2 = &1 /\\ x * y = z\n        ==> y = z * x
-      #|  !m n. ODD m /\\ ODD n\n         ==> jacobi(n,m) =\n             if coprime(m,n)\n             then --(&1) pow ((m - 1) DIV 2 * (n - 1) DIV 2) * jacobi(m,n)\n             else &0
+      #|  forall x y:int.\n        x pow 2 = &1 /\\ y pow 2 = &1 /\\ x * y = z\n        ==> y = z * x
+      #|  forall m n. ODD m /\\ ODD n\n         ==> jacobi(n,m) =\n             if coprime(m,n)\n             then --(&1) pow ((m - 1) DIV 2 * (n - 1) DIV 2) * jacobi(m,n)\n             else &0
       #|  (a == b) (mod m) /\\ n divides m ==> (a == b) (mod n)
       #|  x:int = &1 ==> x pow n = &1
       #|  p:num
       #|  n = 0
-      #|  !n a. coprime(a,n) /\\ (?x. (x EXP 2 == a) (mod n))\n         ==> jacobi(a,n) = &1
+      #|  forall n a. coprime(a,n) /\\ (?x. (x EXP 2 == a) (mod n))\n         ==> jacobi(a,n) = &1
       #|  coprime(a:num,n)
-      #|  !n a. (?x. (x EXP 2 == a) (mod n)) ==> ~(jacobi(a,n) = -- &1)
+      #|  forall n a. (?x. (x EXP 2 == a) (mod n)) ==> ~(jacobi(a,n) = -- &1)
       #|  int_jacobi(a,n) =\n        if n = &0 then &0\n        else jacobi(num_of_int(a rem n),num_of_int(abs n))
-      #|  !a n. int_jacobi(a,--n) = int_jacobi(a,n)
-      #|  !a n. int_jacobi(a,abs n) = int_jacobi(a,n)
+      #|  forall a n. int_jacobi(a,--n) = int_jacobi(a,n)
+      #|  forall a n. int_jacobi(a,abs n) = int_jacobi(a,n)
       #|  a = 1
       #|  n = 0
-      #|  !a n. int_jacobi(&a,&n) = if n = 0 /\\ a = 1 then &0 else jacobi(a,n)
-      #|  !a n. abs(int_jacobi(a,n)) <= &1
-      #|  !a n. int_jacobi(a,n) = -- &1 \\/\n         int_jacobi(a,n) = &0 \\/\n         int_jacobi(a,n) = &1
-      #|  !a b n. (a == b) (mod n) ==> int_jacobi(a,n) = int_jacobi(b,n)
+      #|  forall a n. int_jacobi(&a,&n) = if n = 0 /\\ a = 1 then &0 else jacobi(a,n)
+      #|  forall a n. abs(int_jacobi(a,n)) <= &1
+      #|  forall a n. int_jacobi(a,n) = -- &1 \\/\n         int_jacobi(a,n) = &0 \\/\n         int_jacobi(a,n) = &1
+      #|  forall a b n. (a == b) (mod n) ==> int_jacobi(a,n) = int_jacobi(b,n)
       #|  (n:int) divides m ==> (x == y) (mod m) ==> (x == y) (mod n)
-      #|  !a m n. n divides m ==> int_jacobi(a rem m,n) = int_jacobi(a,n)
-      #|  !a n. int_jacobi(a rem n,n) = int_jacobi(a,n)
+      #|  forall a m n. n divides m ==> int_jacobi(a rem m,n) = int_jacobi(a,n)
+      #|  forall a n. int_jacobi(a rem n,n) = int_jacobi(a,n)
       #|  &1 rem n = &1
       #|  abs(n:int) = &1
       #|  n:int
-      #|  (!n. int_jacobi(&1,n) = if n = &0 then &0 else &1) /\\\n   (!a. int_jacobi(a,&1) = &1)
-      #|  (!n. int_jacobi(&0,n) = if abs n = &1 then &1 else &0) /\\\n   (!a. int_jacobi(a,&0) = &0)
+      #|  (forall n. int_jacobi(&1,n) = if n = &0 then &0 else &1) /\\\n   (forall a. int_jacobi(a,&1) = &1)
+      #|  (forall n. int_jacobi(&0,n) = if abs n = &1 then &1 else &0) /\\\n   (forall a. int_jacobi(a,&0) = &0)
       #|  n:int = &0
       #|  m:int = &0
-      #|  !a m n. int_jacobi(a,m * n) = int_jacobi(a,m) * int_jacobi(a,n)
+      #|  forall a m n. int_jacobi(a,m * n) = int_jacobi(a,m) * int_jacobi(a,n)
       #|  n:int = &0
-      #|  !a b n. int_jacobi(a * b,n) = int_jacobi(a,n) * int_jacobi(b,n)
-      #|  !a n k. int_jacobi(a,n pow k) = int_jacobi(a,n) pow k
-      #|  !a n k. int_jacobi(a pow k,n) =\n           if n = &0 then &0 else int_jacobi(a,n) pow k
+      #|  forall a b n. int_jacobi(a * b,n) = int_jacobi(a,n) * int_jacobi(b,n)
+      #|  forall a n k. int_jacobi(a,n pow k) = int_jacobi(a,n) pow k
+      #|  forall a n k. int_jacobi(a pow k,n) =\n           if n = &0 then &0 else int_jacobi(a,n) pow k
       #|  a:int
-      #|  !a. int_jacobi(a,&2) = a rem &2
+      #|  forall a. int_jacobi(a,&2) = a rem &2
       #|  a:int
-      #|  !a k. int_jacobi(a,&2 pow k) = if k = 0 then &1 else a rem &2
+      #|  forall a k. int_jacobi(a,&2 pow k) = if k = 0 then &1 else a rem &2
       #|  y:int
       #|  abs n:int
       #|  &0 <= abs(n:int) /\\ ~(abs n = &0)
@@ -21798,17 +21798,17 @@ test "Library/jacobi matches Library/jacobi.ml" {
       #|  a rem abs n
       #|  &0 <= a rem abs n
       #|  n:int = &0
-      #|  !a n. int_jacobi(a,n) = &0 <=> coprime(a,n) ==> n = &0
+      #|  forall a n. int_jacobi(a,n) = &0 <=> coprime(a,n) ==> n = &0
       #|  int_jacobi(&n - &1,&n)
       #|  n = 0
       #|  n:num
-      #|  !n. ~(&2 divides n)\n       ==> int_jacobi(--(&1),n) =\n           if (abs n == &1) (mod &4) then &1 else -- &1
-      #|  !n. int_jacobi(&2,n) =\n       if &2 divides n then &0\n       else if (abs n == &1) (mod &8) \\/ (abs n == &7) (mod &8) then &1\n       else --(&1)
-      #|  !n. ~(&2 divides n)\n       ==> int_jacobi(--a,n) =\n           if (abs n == &1) (mod &4) then int_jacobi(a,n)\n           else --(int_jacobi(a,n))
+      #|  forall n. ~(&2 divides n)\n       ==> int_jacobi(--(&1),n) =\n           if (abs n == &1) (mod &4) then &1 else -- &1
+      #|  forall n. int_jacobi(&2,n) =\n       if &2 divides n then &0\n       else if (abs n == &1) (mod &8) \\/ (abs n == &7) (mod &8) then &1\n       else --(&1)
+      #|  forall n. ~(&2 divides n)\n       ==> int_jacobi(--a,n) =\n           if (abs n == &1) (mod &4) then int_jacobi(a,n)\n           else --(int_jacobi(a,n))
       #|  (x:int = -- &1 \\/ x = &0 \\/ x = &1) /\\ ~(x = &0) ==> x pow 2 = &1
       #|  coprime(a:int,n)
       #|  n:int = &0
-      #|  (!a n. int_jacobi(a pow 2,n) =\n          if coprime(a,n) /\\ ~(n = &0) then &1 else &0) /\\\n   (!a n. int_jacobi(a,n pow 2) =\n          if coprime(a,n) /\\ ~(n = &0) then &1 else &0)
+      #|  (forall a n. int_jacobi(a pow 2,n) =\n          if coprime(a,n) /\\ ~(n = &0) then &1 else &0) /\\\n   (forall a n. int_jacobi(a,n pow 2) =\n          if coprime(a,n) /\\ ~(n = &0) then &1 else &0)
       #|COPRIME_IPRODUCT =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun(fun('A,int),bool),bool) (\a:fun('A,int). (#!:fun(fun(int,bool),bool) (\n:int. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\i:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) i:'A) s:fun('A,bool))) (#int_coprime:fun(prod(int,int),bool) ((#,:fun(int,fun(int,prod(int,int))) n:int) (a:fun('A,int) i:'A))))))) (#int_coprime:fun(prod(int,int),bool) ((#,:fun(int,fun(int,prod(int,int))) n:int) ((#iproduct:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) a:fun('A,int)))))))))))
       #|CONG_IPRODUCT =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#!:fun(fun(fun('A,int),bool),bool) (\a:fun('A,int). (#!:fun(fun(fun('A,int),bool),bool) (\b:fun('A,int). (#!:fun(fun(int,bool),bool) (\n:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) (#!:fun(fun('A,bool),bool) (\i:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) i:'A) s:fun('A,bool))) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) (a:fun('A,int) i:'A)) (b:fun('A,int) i:'A)) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int))))))) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) ((#iproduct:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) a:fun('A,int))) ((#iproduct:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) b:fun('A,int))) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int)))))))))))
       #|jacobi =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) (#jacobi:fun(prod(num,num),int) ((#,:fun(num,fun(num,prod(num,num))) a:num) n:num))) (((#COND:fun(bool,fun(int,fun(int,int))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (((#COND:fun(bool,fun(int,fun(int,int))) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) ((#iproduct:fun(fun(num,bool),fun(fun(num,int),int)) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%600:num. (#?:fun(fun(num,bool),bool) (\p:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%600:num) ((#/\:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) ((#num_divides:fun(num,fun(num,bool)) p:num) n:num))) p:num)))))) (\p:num. ((#int_pow:fun(int,fun(num,int)) (((#COND:fun(bool,fun(int,fun(int,int))) ((#num_divides:fun(num,fun(num,bool)) p:num) a:num)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) (((#COND:fun(bool,fun(int,fun(int,int))) (#?:fun(fun(num,bool),bool) (\x:num. (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) a:num) (#num_mod:fun(num,fun(num,fun(num,bool))) p:num))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#int_neg:fun(int,int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#index:fun(num,fun(num,num)) p:num) n:num))))))))))

@@ -176,7 +176,7 @@ fn step_4() -> Unit raise {
     @list.List([@realax.real_add_sym(), @realax.real_add_linv()]),
   )
   real_add_rinv_c.set(
-    @tactics.prove(@parser.parse_term("!x. x + --x = &0"), t10),
+    @tactics.prove(@parser.parse_term("forall x. x + --x = &0"), t10),
   )
 }
 
@@ -287,7 +287,7 @@ fn step_5() -> Unit raise {
   )
   real_eq_add_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y z. (x + y = x + z) <=> (y = z)"),
+      @parser.parse_term("forall x y z. (x + y = x + z) <=> (y = z)"),
       t20,
     ),
   )
@@ -312,7 +312,7 @@ fn step_6() -> Unit raise {
   )
   real_eq_add_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y z. (x + z = y + z) <=> (x = y)"),
+      @parser.parse_term("forall x y z. (x + z = y + z) <=> (x = y)"),
       t21,
     ),
   )
@@ -340,7 +340,7 @@ fn step_7() -> Unit raise {
     ]),
   )
   real_mul_rzero_c.set(
-    @tactics.prove(@parser.parse_term("!x. x * &0 = &0"), t22),
+    @tactics.prove(@parser.parse_term("forall x. x * &0 = &0"), t22),
   )
 }
 
@@ -360,7 +360,7 @@ fn step_8() -> Unit raise {
     @list.List([@realax.real_mul_sym(), real_mul_rzero()]),
   )
   real_mul_lzero_c.set(
-    @tactics.prove(@parser.parse_term("!x. &0 * x = &0"), t23),
+    @tactics.prove(@parser.parse_term("forall x. &0 * x = &0"), t23),
   )
 }
 
@@ -384,7 +384,7 @@ fn step_9() -> Unit raise {
       @realax.real_add_linv(),
     ]),
   )
-  real_neg_neg_c.set(@tactics.prove(@parser.parse_term("!x. --(--x) = x"), t24))
+  real_neg_neg_c.set(@tactics.prove(@parser.parse_term("forall x. --(--x) = x"), t24))
 }
 
 ///|
@@ -408,7 +408,7 @@ fn step_10() -> Unit raise {
     ]),
   )
   real_mul_rneg_c.set(
-    @tactics.prove(@parser.parse_term("!x y. x * (--y) = -- (x * y)"), t25),
+    @tactics.prove(@parser.parse_term("forall x y. x * (--y) = -- (x * y)"), t25),
   )
 }
 
@@ -428,7 +428,7 @@ fn step_11() -> Unit raise {
     @list.List([@realax.real_mul_sym(), real_mul_rneg()]),
   )
   real_mul_lneg_c.set(
-    @tactics.prove(@parser.parse_term("!x y. (--x) * y = -- (x * y)"), t26),
+    @tactics.prove(@parser.parse_term("forall x y. (--x) * y = -- (x * y)"), t26),
   )
 }
 
@@ -470,7 +470,7 @@ fn step_12() -> Unit raise {
     t32,
   )
   real_neg_add_c.set(
-    @tactics.prove(@parser.parse_term("!x y. --(x + y) = --x + --y"), t33),
+    @tactics.prove(@parser.parse_term("forall x y. --(x + y) = --x + --y"), t33),
   )
 }
 
@@ -489,7 +489,7 @@ fn step_13() -> Unit raise {
   let t34 = @meson.meson_tac(
     @list.List([@realax.real_add_sym(), @realax.real_add_lid()]),
   )
-  real_add_rid_c.set(@tactics.prove(@parser.parse_term("!x. x + &0 = x"), t34))
+  real_add_rid_c.set(@tactics.prove(@parser.parse_term("forall x. x + &0 = x"), t34))
 }
 
 ///|
@@ -763,7 +763,7 @@ fn step_15() -> Unit raise {
     t57,
   )
   real_le_lneg_c.set(
-    @tactics.prove(@parser.parse_term("!x y. --x <= y <=> &0 <= x + y"), t58),
+    @tactics.prove(@parser.parse_term("forall x y. --x <= y <=> &0 <= x + y"), t58),
   )
 }
 
@@ -812,7 +812,7 @@ fn step_16() -> Unit raise {
     t68,
   )
   real_le_neg2_c.set(
-    @tactics.prove(@parser.parse_term("!x y. --x <= --y <=> y <= x"), t69),
+    @tactics.prove(@parser.parse_term("forall x y. --x <= --y <=> y <= x"), t69),
   )
 }
 
@@ -888,7 +888,7 @@ fn step_17() -> Unit raise {
     t85,
   )
   real_le_rneg_c.set(
-    @tactics.prove(@parser.parse_term("!x y. x <= --y <=> x + y <= &0"), t86),
+    @tactics.prove(@parser.parse_term("forall x y. x <= --y <=> x + y <= &0"), t86),
   )
 }
 
@@ -912,7 +912,7 @@ fn step_18() -> Unit raise {
     t87,
   )
   real_of_num_pow_c.set(
-    @tactics.prove(@parser.parse_term("!x n. (&x) pow n = &(x EXP n)"), t88),
+    @tactics.prove(@parser.parse_term("forall x n. (&x) pow n = &(x EXP n)"), t88),
   )
 }
 
@@ -950,7 +950,7 @@ fn step_19() -> Unit raise {
   real_pow_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)",
+        "forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)",
       ),
       t92,
     ),
@@ -973,7 +973,7 @@ fn step_20() -> Unit raise {
     @list.List([@realax.real_abs(), @realax.real_of_num_le(), @arith.le_0()]),
   )
   real_abs_num_c.set(
-    @tactics.prove(@parser.parse_term("!n. abs(&n) = &n"), t93),
+    @tactics.prove(@parser.parse_term("forall n. abs(&n) = &n"), t93),
   )
 }
 
@@ -1008,7 +1008,7 @@ fn step_21() -> Unit raise {
     t94,
   )
   real_abs_neg_c.set(
-    @tactics.prove(@parser.parse_term("!x. abs(--x) = abs x"), t95),
+    @tactics.prove(@parser.parse_term("forall x. abs(--x) = abs x"), t95),
   )
 }
 

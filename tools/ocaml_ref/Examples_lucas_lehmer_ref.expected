@@ -39484,7 +39484,7 @@ CPU time (user): <t>
 CPU time (user): <t>
 CPU time (user): <t>
 Examples/lucas_lehmer quotations (131):
-  !x n. x pow n = ITER n (\\y. x * y) (&1)
+  forall x n. x pow n = ITER n (\\y. x * y) (&1)
   llseq p 0 = 4 MOD p /\\\n  llseq p (SUC n) = ((llseq p n) EXP 2 + (p - 2)) MOD p
   :P
   :P
@@ -39508,7 +39508,7 @@ Examples/lucas_lehmer quotations (131):
   x EXP 2 - 2
   x:num
   4
-  !p n. ~(p = 0)\n         ==> ?x. llseq p n = x MOD p /\\\n                 &x = (&2 + sqrt(&3)) pow (2 EXP n) +\n                      (&2 - sqrt(&3)) pow (2 EXP n)
+  forall p n. ~(p = 0)\n         ==> ?x. llseq p n = x MOD p /\\\n                 &x = (&2 + sqrt(&3)) pow (2 EXP n) +\n                      (&2 - sqrt(&3)) pow (2 EXP n)
   prime 3
   rational
   &2 = (a + b * x) * q\n        ==> ~(b = &0) ==> x = (&2 - a * q) / (b * q)
@@ -39532,7 +39532,7 @@ Examples/lucas_lehmer quotations (131):
   (a + b * s) - (a' + b' * s):real = (a'' + b'' * s) * q <=>\n      a + b * s = (a'' * q + a') + (b'' * q + b') * s
   &(b DIV q)
   &(a DIV q)
-  (a == b) equiv /\\\n      ((a == b) equiv ==> !x. (x == a) equiv <=> (x == b) equiv)\n      ==> !x. (x == a) equiv <=> (x == b) equiv
+  (a == b) equiv /\\\n      ((a == b) equiv ==> forall x. (x == a) equiv <=> (x == b) equiv)\n      ==> forall x. (x == a) equiv <=> (x == b) equiv
   a <= q - 1 <=> a = 0 \\/ a < q
   b MOD q
   a MOD q
@@ -39542,9 +39542,9 @@ Examples/lucas_lehmer quotations (131):
   n:num
   (0..q-1) CROSS (0..q-1)
   \\(a,b) y. (y == &a + &b * sqrt(&3)) equiv
-  !f:num#num->A t. s SUBSET IMAGE f t /\\ FINITE t /\\ CARD t <= n\n            ==> FINITE s /\\ CARD s <= n
+  forall f:num#num->A t. s SUBSET IMAGE f t /\\ FINITE t /\\ CARD t <= n\n            ==> FINITE s /\\ CARD s <= n
   \\x y:real. (x == y) equiv
-  ?k. 0 < k /\\ k <= 2 EXP p - 1 /\\\n        !n. ((&2 + sqrt(&3)) pow n == &1) equiv <=> k divides n
+  ?k. 0 < k /\\ k <= 2 EXP p - 1 /\\\n        forall n. ((&2 + sqrt(&3)) pow n == &1) equiv <=> k divides n
   &3
   &2 * a * b * &q - &2 * b
   &q * (a pow 2 + &3 * b pow 2) - &2 * a
@@ -39564,7 +39564,7 @@ Examples/lucas_lehmer quotations (131):
   r:num
   p - 2
   2 EXP p - 1
-  !x y:real. (x == y) equiv <=> (y == x) equiv
+  forall x y:real. (x == y) equiv <=> (y == x) equiv
   ((&2 + sqrt(&3)) pow (2 EXP (p - 1)) == -- &1) equiv
   &3
   &2 * v + u
@@ -39576,8 +39576,8 @@ Examples/lucas_lehmer quotations (131):
   x:real
   x:real
   x - y:real
-  !x y:real. (x == y) equiv <=> (x - y == &0) equiv
-  !x y. ((&2 + sqrt(&3)) * x == (&2 + sqrt(&3)) * y) equiv <=>\n          (x == y) equiv
+  forall x y:real. (x == y) equiv <=> (x - y == &0) equiv
+  forall x y. ((&2 + sqrt(&3)) * x == (&2 + sqrt(&3)) * y) equiv <=>\n          (x == y) equiv
   &3
   2 * b + a
   2 * a + 3 * b
@@ -39585,25 +39585,25 @@ Examples/lucas_lehmer quotations (131):
   a:num
   0
   1
-  !k. ?a b. (&2 + sqrt(&3)) pow k = &a + &b * sqrt(&3)
+  forall k. ?a b. (&2 + sqrt(&3)) pow k = &a + &b * sqrt(&3)
   x - y = (a + b * s) * q /\\\n       y - z = (a' + b' * s) * q\n       ==> x - z:real = ((a + a') + (b + b') * s) * q
-  !x y z:real. (x == y) equiv /\\ (y == z) equiv ==> (x == z) equiv
+  forall x y z:real. (x == y) equiv /\\ (y == z) equiv ==> (x == z) equiv
   x - y:real = (a + b * s) * q ==> y - x = (--a + --b * s) * q
-  (!x y. P x y ==> P y x) ==> (!x y. P x y <=> P y x)
-  !x y:real. (x == y) equiv <=> (y == x) equiv
+  (forall x y. P x y ==> P y x) ==> (forall x y. P x y <=> P y x)
+  forall x y:real. (x == y) equiv <=> (y == x) equiv
   &0
-  !x:real. (x == x) equiv
+  forall x:real. (x == x) equiv
   equiv =\n    \\x y. ?a b. integer a /\\ integer b /\\\n                x - y = (a + b * sqrt(&3)) * &q
   q:num
   p /\\ (p ==> q) ==> p /\\ q
   2 EXP 2 <= x ==> 2 <= x - 1
   2 <= 2 EXP p - 1
-  !p. 2 <= p /\\ llseq (2 EXP p - 1) (p - 2) = 0 ==> prime(2 EXP p - 1)
+  forall p. 2 <= p /\\ llseq (2 EXP p - 1) (p - 2) = 0 ==> prime(2 EXP p - 1)
   llseq (2 EXP p - 1) 0 = 4 MOD (2 EXP p - 1)
   1 <= n <=> ~(n = 0)
   x + y - 1 + w = u + v + z + r + 2 /\\ 2 EXP 2 <= y /\\ w * 1 <= v\n      ==> x + y - 1 - 2 = u + (v - w + z) + r
   q:num
-  !p:num. (x + p) + y = p + z ==> x + y = z
+  forall p:num. (x + p) + y = p + z ==> x + y = z
   q + 1
   r < 1 <=> r = 0
   p = 1

@@ -73859,19 +73859,19 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|Warning: inventing type variables
       #|0..0..1..2..5..10..solved at 17
       #|100/cayley_hamilton quotations (95):
-      #|  (!A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (!A:real^N^N n. A mpow (SUC n) = A ** A mpow n)
+      #|  (forall A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (forall A:real^N^N n. A mpow (SUC n) = A ** A mpow n)
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  !A:real^N^N m n. A mpow (m + n) = A mpow m ** A mpow n
+      #|  forall A:real^N^N m n. A mpow (m + n) = A mpow m ** A mpow n
       #|  1
       #|  1
-      #|  !A:real^N^N. A mpow 1 = A
-      #|  !A:real^N^N n. A mpow (SUC n) = A mpow n ** A
-      #|  (!x i. P i ==> !j. Q j ==> R x i j) <=>\n    (!i. P i ==> !j. Q j ==> !x. R x i j)
-      #|  !n A:num->real^N^M.\n        (!x. msum(0..n) (\\i. x pow i %% A i) = mat 0) <=>\n        (!i. i IN 0..n ==> A i = mat 0)
+      #|  forall A:real^N^N. A mpow 1 = A
+      #|  forall A:real^N^N n. A mpow (SUC n) = A mpow n ** A
+      #|  (forall x i. P i ==> forall j. Q j ==> R x i j) <=>\n    (forall i. P i ==> forall j. Q j ==> forall x. R x i j)
+      #|  forall n A:num->real^N^M.\n        (forall x. msum(0..n) (\\i. x pow i %% A i) = mat 0) <=>\n        (forall i. i IN 0..n ==> A i = mat 0)
       #|  0
       #|  n:num
       #|  n - m - 1 = n - SUC m
@@ -73882,23 +73882,23 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|  m:num
       #|  ~(SUC n <= n)
       #|  SUC n
-      #|  !i:num. B(n - i) = (mat 0:real^N^N)
+      #|  forall i:num. B(n - i) = (mat 0:real^N^N)
       #|  1
       #|  (((A:real^N^N) + --B) + B) + C = (--B + B) + A + C
       #|  (0 <= i /\\ i <= SUC n) /\\ ~(i = 0) <=>\n                  1 <= i /\\ i <= SUC n
       #|  (0 <= i /\\ i <= SUC n) /\\ i <= n <=> 0 <= i /\\ i <= n
       #|  (0 <= i /\\ i <= SUC n) /\\ i = 0 <=> i = 0
       #|  (if p then mat 0 else x) = (if ~p then x else mat 0)
-      #|  !x. msum(0..SUC n)\n         (\\i. x pow i %% (((if i = 0 then (--C:real^N^N) else mat 0) +\n                           (if i <= n then B i ** (A:real^N^N) else mat 0)) -\n                          (if i = 0 then mat 0 else B(i - 1) ** mat 1))) =\n        mat 0
-      #|  !(A:real^N^N) B (C:real^N^N) n.\n        (!x. msum (0..n) (\\i. (x pow i) %% B i) ** (A - x %% mat 1) = C)\n        ==> C = mat 0
+      #|  forall x. msum(0..SUC n)\n         (\\i. x pow i %% (((if i = 0 then (--C:real^N^N) else mat 0) +\n                           (if i <= n then B i ** (A:real^N^N) else mat 0)) -\n                          (if i = 0 then mat 0 else B(i - 1) ** mat 1))) =\n        mat 0
+      #|  forall(A:real^N^N) B (C:real^N^N) n.\n        (forall x. msum (0..n) (\\i. (x pow i) %% B i) ** (A - x %% mat 1) = C)\n        ==> C = mat 0
       #|  (0 <= i /\\ i <= n) /\\ i = 0 <=> i = 0
       #|  \\i. if i = 0 then c else &0
-      #|  !c n. ?b. !x. c = sum(0..n) (\\i. b i * x pow i)
+      #|  forall c n. ?b. forall x. c = sum(0..n) (\\i. b i * x pow i)
       #|  \\i. (b:num->real) i + c i
-      #|  !f g. (?b. !x. f(x) = sum(0..n) (\\i. b i * x pow i)) /\\\n         (?c. !x. g(x) = sum(0..n) (\\i. c i * x pow i))\n         ==> ?d. !x. f(x) + g(x) = sum(0..n) (\\i. d i * x pow i)
+      #|  forall f g. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i)) /\\\n         (?c. forall x. g(x) = sum(0..n) (\\i. c i * x pow i))\n         ==> ?d. forall x. f(x) + g(x) = sum(0..n) (\\i. d i * x pow i)
       #|  \\i. c * (b:num->real) i
-      #|  !f c. (?b. !x. f(x) = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. !x. c * f(x) = sum(0..n) (\\i. b i * x pow i)
-      #|  !f s. FINITE s /\\\n         (!a. a IN s ==> ?b. !x. f x a = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. !x. sum s (f x) = sum(0..n) (\\i. b i * x pow i)
+      #|  forall f c. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. c * f(x) = sum(0..n) (\\i. b i * x pow i)
+      #|  forall f s. FINITE s /\\\n         (forall a. a IN s ==> ?b. forall x. f x a = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. sum s (f x) = sum(0..n) (\\i. b i * x pow i)
       #|  1..SUC n = 0+1..n+1
       #|  1
       #|  ((0 <= i /\\ i <= SUC n) /\\ i <= n <=> 0 <= i /\\ i <= n) /\\\n    ((0 <= i /\\ i <= SUC n) /\\ ~(i = 0) <=> 1 <= i /\\ i <= SUC n)
@@ -73908,7 +73908,7 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|  c:real
       #|  b:num->real
       #|  n:num
-      #|  !f s n. FINITE s /\\\n           (!a:A. a IN s ==> ?c d. !x. f x a = c + d * x) /\\ CARD(s) <= n\n           ==> ?b. !x. product s (f x) = sum(0..n) (\\i. b i * x pow i)
+      #|  forall f s n. FINITE s /\\\n           (forall a:A. a IN s ==> ?c d. forall x. f x a = c + d * x) /\\ CARD(s) <= n\n           ==> ?b. forall x. product s (f x) = sum(0..n) (\\i. b i * x pow i)
       #|  a - x * d:real = a + (--d) * x
       #|  &0
       #|  (p:num->num) k = j
@@ -73916,23 +73916,23 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|  k:num
       #|  1..dimindex(:N) = i INSERT ((1..dimindex(:N)) DELETE i)
       #|  p:num->num
-      #|  !A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. !x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)
+      #|  forall A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. forall x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)
       #|  a - x * d:real = a + (--d) * x
       #|  (p:num->num) k IN 1..dimindex(:N)
       #|  k:num
       #|  p:num->num
-      #|  !A:real^N^N.\n        ?c. !x. det(A - x %% mat 1) =\n                sum(0..dimindex(:N)) (\\i. c(i) * x pow i)
+      #|  forall A:real^N^N.\n        ?c. forall x. det(A - x %% mat 1) =\n                sum(0..dimindex(:N)) (\\i. c(i) * x pow i)
       #|  j:num
       #|  i:num
       #|  x:real
       #|  (\\i. lambda j k. ((c:(num->real)^N^N)$j$k) i):num->real^N^N
       #|  c:(num->real)^N^N
       #|  A:real^N^N
-      #|  !A:real^N^N. ?C.\n      !x. cofactor(A - x %% mat 1) =\n          msum(0..dimindex(:N)-1) (\\i. x pow i %% C i)
+      #|  forall A:real^N^N. ?C.\n      forall x. cofactor(A - x %% mat 1) =\n          msum(0..dimindex(:N)-1) (\\i. x pow i %% C i)
       #|  i <= n ==> SUC n - i = SUC(n - i)
       #|  i:num
       #|  (A mpow SUC n - x pow SUC n %% mat 1) ** A +\n      (x pow (SUC n) %% mat 1 :real^N^N) ** (A - x %% mat 1:real^N^N)
-      #|  !A:real^N^N x n.\n        A mpow (SUC n) - x pow (SUC n) %% mat 1 =\n        msum (0..n) (\\i. x pow i %% A mpow (n - i)) ** (A - x %% mat 1)
+      #|  forall A:real^N^N x n.\n        A mpow (SUC n) - x pow (SUC n) %% mat 1 =\n        msum (0..n) (\\i. x pow i %% A mpow (n - i)) ** (A - x %% mat 1)
       #|  (0 <= i /\\ i <= n) /\\ i <= n - 1 <=> 0 <= i /\\ i <= n - 1
       #|  x:real
       #|  (\\i. (if i <= n - 1 then B i else mat 0) +\n                     c(SUC n) %% A mpow (n - i)):num->real^N^N
@@ -73943,7 +73943,7 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|  char_poly(A:real^N^N)
       #|  n:num
       #|  dimindex(:N)
-      #|  !A:real^N^N. ?B.\n      !x. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) -\n          sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1 =\n          msum(0..(dimindex(:N)-1)) (\\i. x pow i %% B i) ** (A - x %% mat 1)
+      #|  forall A:real^N^N. ?B.\n      forall x. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) -\n          sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1 =\n          msum(0..(dimindex(:N)-1)) (\\i. x pow i %% B i) ** (A - x %% mat 1)
       #|  dimindex(:N)-1
       #|  (\\i. B i + C i):num->real^N^N
       #|  A:real^N^N
@@ -73952,8 +73952,8 @@ test "100/cayley_hamilton matches 100/cayley_hamilton.ml" {
       #|  A:real^N^N
       #|  B:num->real^N^N
       #|  \\x. (msum(0..dimindex(:N)) (\\i. char_poly A i %% (A:real^N^N) mpow i) -\n         sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1) +\n        sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1
-      #|  !g. (!x. g x = k) /\\ (?a b c. !x. f a b c x = g x)\n        ==> ?a b c. !x. f a b c x = k
-      #|  !A:real^N^N. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) = mat 0
+      #|  forall g. (forall x. g x = k) /\\ (?a b c. forall x. f a b c x = g x)\n        ==> ?a b c. forall x. f a b c x = k
+      #|  forall A:real^N^N. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) = mat 0
       #|mpow =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) #_0:num))) (#mat:fun(num,cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#!:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#SUC:fun(num,num) n:num))) ((#matrix_mul:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) n:num))))))))
       #|MPOW_ADD =  |- (#!:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#matrix_mul:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),cart(cart(real,'N),'N))) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) m:num)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) n:num)))))))))
       #|MPOW_1 =  |- (#!:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) A:cart(cart(real,'N),'N))))

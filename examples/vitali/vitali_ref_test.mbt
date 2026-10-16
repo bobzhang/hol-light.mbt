@@ -79114,12 +79114,12 @@ test "Examples/vitali matches Examples/vitali.ml" {
       #|  z:real
       #|  y:real
       #|  x:real
-      #|  !x y. x IN V /\\ y IN V /\\ rational(x - y) ==> x = y
-      #|  !x. &0 <= x /\\ x < &1 ==> (equiv:real->real->bool) x (canonize x)
+      #|  forall x y. x IN V /\\ y IN V /\\ rational(x - y) ==> x = y
+      #|  forall x. &0 <= x /\\ x < &1 ==> (equiv:real->real->bool) x (canonize x)
       #|  x - z:real = (x - y) + (y - z)
-      #|  !x y z:real. equiv x y /\\ equiv y z ==> equiv x z
-      #|  !x y:real. equiv x y ==> equiv y x
-      #|  !x. equiv x x <=> &0 <= x /\\ x < &1
+      #|  forall x y z:real. equiv x y /\\ equiv y z ==> equiv x z
+      #|  forall x y:real. equiv x y ==> equiv y x
+      #|  forall x. equiv x x <=> &0 <= x /\\ x < &1
       #|  V = IMAGE (canonize:real->real) {x | &0 <= x /\\ x < &1}
       #|  (canonize:real->real) = \\x. @y. equiv x y
       #|  equiv = \\x y. &0 <= x /\\ x < &1 /\\ &0 <= y /\\ y < &1 /\\ rational(x - y)

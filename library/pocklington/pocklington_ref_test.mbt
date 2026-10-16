@@ -15580,101 +15580,101 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|Library/pocklington quotations (854):
       #|  x <= y ==> (y:num = x + d <=> y - x = d)
       #|  (x == y) (mod &n) <=> &n divides (x - y)
-      #|  !x y n:num. (x == y) (mod n) /\\ y <= x ==> ?q. x = y + n * q
+      #|  forall x y n:num. (x == y) (mod n) /\\ y <= x ==> ?q. x = y + n * q
       #|  x + y * 0 = x
       #|  (x:num == y) (mod n) <=> (y == x) (mod n)
       #|  a \\/ b ==> c ==> d <=> (c /\\ b) \\/ (c /\\ a) ==> d
       #|  y:num
       #|  x:num
-      #|  !x y n:num. (mod n) x y <=> ?q1 q2. x + n * q1 = y + n * q2
+      #|  forall x y n:num. (mod n) x y <=> ?q1 q2. x + n * q1 = y + n * q2
       #|  ~(n = 0)
       #|  ~(n = 0)
       #|  {m | 0 < m /\\ m < SUC n} = n INSERT {m | 0 < m /\\ m < n}
       #|  {m | 0 < m /\\ m < SUC n} = EMPTY
       #|  n = 0
       #|  {m | 0 < m /\\ m < 0} = EMPTY
-      #|  !n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)
-      #|  !x y. (x == y) (mod 0) <=> (x = y)
-      #|  !x y. (x == y) (mod 1)
+      #|  forall n. { m | 0 < m /\\ m < n } HAS_SIZE (n - 1)
+      #|  forall x y. (x == y) (mod 0) <=> (x = y)
+      #|  forall x y. (x == y) (mod 1)
       #|  EVEN b
       #|  EVEN a
-      #|  !a b. (a == b) (mod 2) <=> (EVEN a <=> EVEN b)
-      #|  !a b. (a == b) (mod 2) <=> (ODD a <=> ODD b)
-      #|  !x n. ((x == 0) (mod n) <=> n divides x)
-      #|  !x y n. (x == y) (mod n) <=>\n           if x <= y then (y - x == 0) (mod n)\n           else (x - y == 0) (mod n)
+      #|  forall a b. (a == b) (mod 2) <=> (EVEN a <=> EVEN b)
+      #|  forall a b. (a == b) (mod 2) <=> (ODD a <=> ODD b)
+      #|  forall x n. ((x == 0) (mod n) <=> n divides x)
+      #|  forall x y n. (x == y) (mod n) <=>\n           if x <= y then (y - x == 0) (mod n)\n           else (x - y == 0) (mod n)
       #|  (a == b) (mod n) <=> (a + 1 == b + 1) (mod n)
       #|  n = 0
-      #|  !a n. (a == n - 1) (mod n) <=> n = 0 /\\ a = 0 \\/ n divides (a + 1)
+      #|  forall a n. (a == n - 1) (mod n) <=> n = 0 /\\ a = 0 \\/ n divides (a + 1)
       #|  (p EXP 2 == 1 + 2 * n + 1) (mod p) <=> p divides (2 * (n + 1))
       #|  (n EXP 2 == m) (mod p) <=> ((n + 1) EXP 2 == m + 2 * n + 1) (mod p)
       #|  p = 0
-      #|  !p. ((p - 1) EXP 2 == 1) (mod p) <=> ~(p = 0)
+      #|  forall p. ((p - 1) EXP 2 == 1) (mod p) <=> ~(p = 0)
       #|  x + a = y + b ==> x = (b - a) + y \\/ y = (a - b) + x
       #|  q2:num
       #|  q1:num
-      #|  !x y n. (x == y) (mod n) <=> (?q. x = q * n + y) \\/ (?q. y = q * n + x)
-      #|  !n a x:num. a < n ==> ((x == a) (mod n) <=> ?q. x = q * n + a)
-      #|  !a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
-      #|  !a n x y. coprime(a,n) /\\ (x * a == y * a) (mod n) ==> (x == y) (mod n)
-      #|  !x n. (x == x) (mod n)
-      #|  !a b n. a = b ==> (a == b) (mod n)
-      #|  !x y n. (x == y) (mod n) <=> (y == x) (mod n)
-      #|  !x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x + y == x' + y') (mod n)
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x * y == x' * y') (mod n)
-      #|  !n x y. (x == 1) (mod n) /\\ (y == 1) (mod n) ==> (x * y == 1) (mod n)
-      #|  !n k x y. (x == y) (mod n) ==> (x EXP k == y EXP k) (mod n)
+      #|  forall x y n. (x == y) (mod n) <=> (?q. x = q * n + y) \\/ (?q. y = q * n + x)
+      #|  forall n a x:num. a < n ==> ((x == a) (mod n) <=> ?q. x = q * n + a)
+      #|  forall a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x y. coprime(a,n) /\\ (x * a == y * a) (mod n) ==> (x == y) (mod n)
+      #|  forall x n. (x == x) (mod n)
+      #|  forall a b n. a = b ==> (a == b) (mod n)
+      #|  forall x y n. (x == y) (mod n) <=> (y == x) (mod n)
+      #|  forall x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x + y == x' + y') (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x * y == x' * y') (mod n)
+      #|  forall n x y. (x == 1) (mod n) /\\ (y == 1) (mod n) ==> (x * y == 1) (mod n)
+      #|  forall n k x y. (x == y) (mod n) ==> (x EXP k == y EXP k) (mod n)
       #|  k:num
-      #|  !x n k. (x == 1) (mod n) ==> (x EXP k == 1) (mod n)
+      #|  forall x n k. (x == 1) (mod n) ==> (x EXP k == 1) (mod n)
       #|  (x + a = x' + a') /\\ (y + b = y' + b') /\\ y <= x /\\ y' <= x'\n    ==> ((x - y) + (a + b') = (x' - y') + (a' + b))
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) /\\ y <= x /\\ y' <= x'\n     ==> (x - y == x' - y') (mod n)
-      #|  !a n x y. coprime(a,n) ==> ((a * x == a * y) (mod n) <=> (x == y) (mod n))
-      #|  !a n x y. coprime(a,n) ==> ((x * a == y * a) (mod n) <=> (x == y) (mod n))
-      #|  !a n x y. (a + x == a + y) (mod n) <=> (x == y) (mod n)
-      #|  !a n x y. (x + a == y + a) (mod n) <=> (x == y) (mod n)
-      #|  !a n x y. (x + a == y + a) (mod n) ==> (x == y) (mod n)
-      #|  !a n x y. (a + x == a + y) (mod n) ==> (x == y) (mod n)
-      #|  !a n x. (a + x == a) (mod n) <=> (x == 0) (mod n)
-      #|  !a n x. (x + a == a) (mod n) <=> (x == 0) (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) /\\ y <= x /\\ y' <= x'\n     ==> (x - y == x' - y') (mod n)
+      #|  forall a n x y. coprime(a,n) ==> ((a * x == a * y) (mod n) <=> (x == y) (mod n))
+      #|  forall a n x y. coprime(a,n) ==> ((x * a == y * a) (mod n) <=> (x == y) (mod n))
+      #|  forall a n x y. (a + x == a + y) (mod n) <=> (x == y) (mod n)
+      #|  forall a n x y. (x + a == y + a) (mod n) <=> (x == y) (mod n)
+      #|  forall a n x y. (x + a == y + a) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x y. (a + x == a + y) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x. (a + x == a) (mod n) <=> (x == 0) (mod n)
+      #|  forall a n x. (x + a == a) (mod n) <=> (x == 0) (mod n)
       #|  a = 0
-      #|  !a x y n. (a * x == a * y) (mod (a * n)) <=> a = 0 \\/ (x == y) (mod n)
-      #|  !a x y n:num. (x == y) (mod n) ==> (a * x == a * y) (mod n)
-      #|  !x y a n:num. (x == y) (mod n) ==> (x * a == y * a) (mod n)
+      #|  forall a x y n. (a * x == a * y) (mod (a * n)) <=> a = 0 \\/ (x == y) (mod n)
+      #|  forall a x y n:num. (x == y) (mod n) ==> (a * x == a * y) (mod n)
+      #|  forall x y a n:num. (x == y) (mod n) ==> (x * a == y * a) (mod n)
       #|  n = 0
-      #|  !x y n. x < n /\\ y < n /\\ (x == y) (mod n) ==> x = y
-      #|  !x y m n. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
-      #|  !n x. (x == 0) (mod n) <=> n divides x
+      #|  forall x y n. x < n /\\ y < n /\\ (x == y) (mod n) ==> x = y
+      #|  forall x y m n. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
+      #|  forall n x. (x == 0) (mod n) <=> n divides x
       #|  x = 0
       #|  (x + q1 = 1 + q2) ==> ~(x = 0) ==> (x - 1 = q2 - q1)
-      #|  !n x. (x == 1) (mod n) ==> n divides (x - 1)
+      #|  forall n x. (x == 1) (mod n) ==> n divides (x - 1)
       #|  (0 == a) (mod n) <=> n divides a
       #|  x = 0
-      #|  !n x. (x == 1) (mod n) <=> (x = 0 ==> n = 1) /\\ n divides (x - 1)
-      #|  !x y n. (x == y) (mod n) ==> (n divides x <=> n divides y)
-      #|  !x y n. (x == y) (mod n) ==> (coprime(n,x) <=> coprime(n,y))
-      #|  !x y n. (x == y) (mod n) ==> gcd(n,x) = gcd(n,y)
-      #|  !x y n. (x == y) (mod n) ==> gcd(x,n) = gcd(y,n)
+      #|  forall n x. (x == 1) (mod n) <=> (x = 0 ==> n = 1) /\\ n divides (x - 1)
+      #|  forall x y n. (x == y) (mod n) ==> (n divides x <=> n divides y)
+      #|  forall x y n. (x == y) (mod n) ==> (coprime(n,x) <=> coprime(n,y))
+      #|  forall x y n. (x == y) (mod n) ==> gcd(n,x) = gcd(n,y)
+      #|  forall x y n. (x == y) (mod n) ==> gcd(x,n) = gcd(y,n)
       #|  0
       #|  a DIV n
       #|  a:num
       #|  n = 0
-      #|  !a n. (a MOD n == a) (mod n)
+      #|  forall a n. (a MOD n == a) (mod n)
       #|  a * b
       #|  (x MOD (a * b) == x) (mod a)
-      #|  !a b x y. ((x MOD (a * b) == y) (mod a) <=> (x == y) (mod a))
-      #|  !y. y < n ==> (x MOD n = y <=> (x == y) (mod n))
+      #|  forall a b x y. ((x MOD (a * b) == y) (mod a) <=> (x == y) (mod a))
+      #|  forall y. y < n ==> (x MOD n = y <=> (x == y) (mod n))
       #|  n = 0
-      #|  !m n p. m MOD n = p <=> ((n = 0 /\\ m = p) \\/ p < n) /\\ (m == p) (mod n)
-      #|  !m n a b.\n        ~(m = 0) /\\ (a == m * b) (mod (m * n)) ==> (a DIV m == b) (mod n)
+      #|  forall m n p. m MOD n = p <=> ((n = 0 /\\ m = p) \\/ p < n) /\\ (m == p) (mod n)
+      #|  forall m n a b.\n        ~(m = 0) /\\ (a == m * b) (mod (m * n)) ==> (a DIV m == b) (mod n)
       #|  m = 0
-      #|  !m n a b.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a DIV m == b) (mod n)
+      #|  forall m n a b.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a DIV m == b) (mod n)
       #|  ~(x = 0) ==> (x + 1) - (x - 1) = 2
       #|  x EXP 2 - 1 = (x - 1) * (x + 1)
       #|  x = 0
       #|  p = 1
       #|  p = 0
       #|  k = 0
-      #|  !p k x.\n        prime p /\\ ~(p = 2)\n        ==> ((x EXP 2 == 1) (mod (p EXP k)) <=>\n             (x == 1) (mod (p EXP k)) \\/ (x == p EXP k - 1) (mod (p EXP k)))
+      #|  forall p k x.\n        prime p /\\ ~(p = 2)\n        ==> ((x EXP 2 == 1) (mod (p EXP k)) <=>\n             (x == 1) (mod (p EXP k)) \\/ (x == p EXP k - 1) (mod (p EXP k)))
       #|  p:num
       #|  0
       #|  x - (x + a):int = --a
@@ -15684,14 +15684,14 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  d:int
       #|  d:int
       #|  x = m * n + y <=> x - y:int = n * m
-      #|  !x y n. y < n ==> ((x == y) (mod n) <=> ?d. x = d * n + y)
+      #|  forall x y n. y < n ==> ((x == y) (mod n) <=> ?d. x = d * n + y)
       #|  y <= x ==> (x = a + y <=> x - y = a)
-      #|  !x y n. y <= x ==> ((x == y) (mod n) <=> ?q. x = q * n + y)
+      #|  forall x y n. y <= x ==> ((x == y) (mod n) <=> ?q. x = q * n + y)
       #|  ~(0 = 1 + a)
       #|  a = 0 \\/ ~(a = 0) /\\ 1 <= a
       #|  n = 0 \\/ n = 1 + (n - 1) * 1
       #|  n = 1
-      #|  !a n. (a == 1) (mod n) <=> a = 0 /\\ n = 1 \\/ ?m. a = 1 + m * n
+      #|  forall a n. (a == 1) (mod n) <=> a = 0 /\\ n = 1 \\/ ?m. a = 1 + m * n
       #|  EVEN n <=> (n == 0) (mod 2)
       #|  ODD n <=> (n == 1) (mod 2)
       #|  (x == y) (mod n) <=>\n     if x <= y then n divides (y - x) else n divides (x - y)
@@ -15701,13 +15701,13 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  n:num
       #|  c:num
       #|  a = 0
-      #|  !n a b. (?x. (a * x == b) (mod n)) <=> gcd(a,n) divides b
+      #|  forall n a b. (?x. (a * x == b) (mod n)) <=> gcd(a,n) divides b
       #|  (x == y) (mod n) ==> (a * x == b) (mod n) ==> (a * y == b) (mod n)
       #|  x:num
-      #|  ~(n = 0) /\\ (!y. P y ==> P(y MOD n))\n    ==> ((?y. y < n /\\ P y) <=> (?y. P y))
+      #|  ~(n = 0) /\\ (forall y. P y ==> P(y MOD n))\n    ==> ((?y. y < n /\\ P y) <=> (?y. P y))
       #|  n = 0
-      #|  !n a b. (?x. x < n /\\ (a * x == b) (mod n)) <=>\n           ~(n = 0) /\\ gcd(a,n) divides b
-      #|  !a b n. coprime(a,n) ==> ?x. (a * x == b) (mod n)
+      #|  forall n a b. (?x. x < n /\\ (a * x == b) (mod n)) <=>\n           ~(n = 0) /\\ gcd(a,n) divides b
+      #|  forall a b n. coprime(a,n) ==> ?x. (a * x == b) (mod n)
       #|  a:num
       #|  y MOD n
       #|  y:num
@@ -15718,7 +15718,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  n:num
       #|  b:num
       #|  a:num
-      #|  !a b n. coprime(a,n) /\\ ~(n = 0) ==> ?!x. x < n /\\ (a * x == b) (mod n)
+      #|  forall a b n. coprime(a,n) /\\ ~(n = 0) ==> ?!x. x < n /\\ (a * x == b) (mod n)
       #|  ~(p = 0) ==> 0 < p
       #|  r = 0
       #|  0 < r <=> ~(r = 0)
@@ -15732,16 +15732,16 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  1 < p <=> ~(p = 0) /\\ ~(p = 1)
       #|  1 < p
       #|  p = 0
-      #|  !a p x. prime p /\\ coprime(p,a) /\\ 0 < x /\\ x < p\n           ==> ?!y. 0 < y /\\ y < p /\\ (x * y == a) (mod p)
-      #|  !p x. prime p /\\ 0 < x /\\ x < p\n         ==> ?!y. 0 < y /\\ y < p /\\ (x * y == 1) (mod p)
+      #|  forall a p x. prime p /\\ coprime(p,a) /\\ 0 < x /\\ x < p\n           ==> ?!y. 0 < y /\\ y < p /\\ (x * y == a) (mod p)
+      #|  forall p x. prime p /\\ 0 < x /\\ x < p\n         ==> ?!y. 0 < y /\\ y < p /\\ (x * y == 1) (mod p)
       #|  b < n /\\ (i + 1) * n <= m * n ==> i * n + b < m * n
       #|  (x * n + c:num == b) (mod n) <=> (c == b) (mod n)
       #|  i:num
       #|  x DIV n
       #|  x:num
       #|  {x | x < m * n /\\ (x == b) (mod n)} =\n    IMAGE (\\i. i * n + b MOD n) {i | i < m}
-      #|  !m n b. {x | x < m * n /\\ (x == b) (mod n)} HAS_SIZE\n           (if n = 0 then 0 else m)
-      #|  !x:num. (a * x == a * z) (mod n) <=> (x == z) (mod d)
+      #|  forall m n b. {x | x < m * n /\\ (x == b) (mod n)} HAS_SIZE\n           (if n = 0 then 0 else m)
+      #|  forall x:num. (a * x == a * z) (mod n) <=> (x == z) (mod d)
       #|  d:num
       #|  gcd(n:num,a) divides n
       #|  z:num
@@ -15751,9 +15751,9 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  {x | P x} = {} <=> ~(?x. P x)
       #|  n = 0
       #|  m = 0
-      #|  !m n a b.\n        {x | x < m * n /\\ (a * x == b) (mod n)} HAS_SIZE\n        (if ~(n = 0) /\\ gcd(n,a) divides b then m * gcd(n,a) else 0)
+      #|  forall m n a b.\n        {x | x < m * n /\\ (a * x == b) (mod n)} HAS_SIZE\n        (if ~(n = 0) /\\ gcd(n,a) divides b then m * gcd(n,a) else 0)
       #|  1
-      #|  !n a b. {x | x < n /\\ (a * x == b) (mod n)} HAS_SIZE\n           (if ~(n = 0) /\\ gcd(n,a) divides b then gcd(n,a) else 0)
+      #|  forall n a b. {x | x < n /\\ (a * x == b) (mod n)} HAS_SIZE\n           (if ~(n = 0) /\\ gcd(n,a) divides b then gcd(n,a) else 0)
       #|  coprime(a,b) /\\ (x == y) (mod a) /\\ (x == y) (mod b)\n   ==> (x == y) (mod (a * b))
       #|  a * b
       #|  x MOD (a * b)
@@ -15764,54 +15764,54 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  m:num
       #|  b:num
       #|  a:num
-      #|  !a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0)\n        ==> ?!x. x < a * b /\\ (x == m) (mod a) /\\ (x == n) (mod b)
-      #|  (!x. P(x) ==> Q(x)) ==> (?!x. P x) ==> ?!x. Q(x) /\\ P(x)
+      #|  forall a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0)\n        ==> ?!x. x < a * b /\\ (x == m) (mod a) /\\ (x == n) (mod b)
+      #|  (forall x. P(x) ==> Q(x)) ==> (?!x. P x) ==> ?!x. Q(x) /\\ P(x)
       #|  n:num
       #|  m:num
       #|  b:num
       #|  a:num
-      #|  !a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0) /\\ coprime(m,a) /\\ coprime(n,b)\n        ==> ?!x. coprime(x,a * b) /\\ x < a * b /\\\n                 (x == m) (mod a) /\\ (x == n) (mod b)
+      #|  forall a b m n.\n        coprime(a,b) /\\ ~(a = 0) /\\ ~(b = 0) /\\ coprime(m,a) /\\ coprime(n,b)\n        ==> ?!x. coprime(x,a * b) /\\ x < a * b /\\\n                 (x == m) (mod a) /\\ (x == n) (mod b)
       #|  v:num
       #|  u:num
       #|  b:num
       #|  a:num
       #|  b = 0
       #|  a = 0
-      #|  !a b u v:num. coprime(a,b) ==> ?x. (x == u) (mod a) /\\ (x == v) (mod b)
-      #|  !a b x y.\n     coprime(a,b)\n     ==> ((x == y) (mod (a * b)) <=> (x == y) (mod a) /\\ (x == y) (mod b))
+      #|  forall a b u v:num. coprime(a,b) ==> ?x. (x == u) (mod a) /\\ (x == v) (mod b)
+      #|  forall a b x y.\n     coprime(a,b)\n     ==> ((x == y) (mod (a * b)) <=> (x == y) (mod a) /\\ (x == y) (mod b))
       #|  coprime(a,b)\n       ==> ((x == y) (mod (a * b)) <=>\n            (x == y) (mod a) /\\ (x == y) (mod b))
       #|  a * b:num
       #|  x MOD b
       #|  x MOD a
       #|  x:num
       #|  \\(m,n). (f:num->num->num) m n
-      #|  !f. (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        IMAGE f s = t\n        ==> s HAS_SIZE p ==> t HAS_SIZE p
+      #|  forall f. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        IMAGE f s = t\n        ==> s HAS_SIZE p ==> t HAS_SIZE p
       #|  f:num->num->num
       #|  b:num
       #|  a:num
       #|  b = 0
       #|  a = 0
-      #|  !P Q R a b m n.\n        coprime(a,b) /\\\n        (!x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ P x} HAS_SIZE m /\\ {x | x < b /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ R x} HAS_SIZE (m * n)
+      #|  forall P Q R a b m n.\n        coprime(a,b) /\\\n        (forall x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ P x} HAS_SIZE m /\\ {x | x < b /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ R x} HAS_SIZE (m * n)
       #|  coprime(a:num,b)\n    ==> (coprime(a * b,x) <=> coprime(a,x) /\\ coprime(b,x))
       #|  \\x:num. coprime(b,x) /\\ Q x
       #|  \\x:num. coprime(a,x) /\\ P x
-      #|  !P Q R a b m n.\n        coprime(a,b) /\\\n        (!x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ coprime(a,x) /\\ P x} HAS_SIZE m /\\\n        {x | x < b /\\ coprime(b,x) /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ coprime(a * b,x) /\\ R x} HAS_SIZE (m * n)
+      #|  forall P Q R a b m n.\n        coprime(a,b) /\\\n        (forall x. x < a * b ==> (R x <=> P (x MOD a) /\\ Q (x MOD b))) /\\\n        {x | x < a /\\ coprime(a,x) /\\ P x} HAS_SIZE m /\\\n        {x | x < b /\\ coprime(b,x) /\\ Q x} HAS_SIZE n\n        ==> {x | x < a * b /\\ coprime(a * b,x) /\\ R x} HAS_SIZE (m * n)
       #|  coprime(a,b)\n       ==> ((x == y) (mod (a * b)) <=>\n            (x == y) (mod a) /\\ (x == y) (mod b))
       #|  \\x. (x EXP k == 1) (mod b)
       #|  \\x. (x EXP k == 1) (mod a)
-      #|  !a b k m n.\n        coprime(a,b) /\\\n        {x | x < a /\\ (x EXP k == 1) (mod a)} HAS_SIZE m /\\\n        {x | x < b /\\ (x EXP k == 1) (mod b)} HAS_SIZE n\n        ==> {x | x < a * b /\\ (x EXP k == 1) (mod (a * b))} HAS_SIZE (m * n)
+      #|  forall a b k m n.\n        coprime(a,b) /\\\n        {x | x < a /\\ (x EXP k == 1) (mod a)} HAS_SIZE m /\\\n        {x | x < b /\\ (x EXP k == 1) (mod b)} HAS_SIZE n\n        ==> {x | x < a * b /\\ (x EXP k == 1) (mod (a * b))} HAS_SIZE (m * n)
       #|  inverse_mod n x =\n    if n <= 1 then 1\n    else @y. y < n /\\ (x * y == gcd(n,x)) (mod n)
       #|  2 <= n <=> ~(n <= 1)
       #|  n <= 1 ==> n = 0 \\/ n = 1
       #|  n <= 1
       #|  x:num
       #|  n:num
-      #|  (!n x. inverse_mod n x < n <=> 2 <= n) /\\\n   (!n x. (x * inverse_mod n x == gcd(n,x)) (mod n))
-      #|  !n x. (inverse_mod n x * x == gcd(n,x)) (mod n)
-      #|  !n x. (x * inverse_mod n x == 1) (mod n) <=> coprime(n,x)
-      #|  !n x. (inverse_mod n x * x == 1) (mod n) <=> coprime(n,x)
-      #|  !n x. coprime(n,x) ==> (inverse_mod n x * x == 1) (mod n)
-      #|  !n x. coprime(n,x) ==> (x * inverse_mod n x == 1) (mod n)
+      #|  (forall n x. inverse_mod n x < n <=> 2 <= n) /\\\n   (forall n x. (x * inverse_mod n x == gcd(n,x)) (mod n))
+      #|  forall n x. (inverse_mod n x * x == gcd(n,x)) (mod n)
+      #|  forall n x. (x * inverse_mod n x == 1) (mod n) <=> coprime(n,x)
+      #|  forall n x. (inverse_mod n x * x == 1) (mod n) <=> coprime(n,x)
+      #|  forall n x. coprime(n,x) ==> (inverse_mod n x * x == 1) (mod n)
+      #|  forall n x. coprime(n,x) ==> (x * inverse_mod n x == 1) (mod n)
       #|  (a * x == 1) (mod n)
       #|  (a * x == 1) (mod n) /\\ (a * y == 1) (mod n) ==> (x == y) (mod n)
       #|  n:num
@@ -15819,25 +15819,25 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  (a * n == z) (mod n) <=> n divides z
       #|  x:num = n
       #|  n = 0
-      #|  !n a x.\n        (a * x == 1) (mod n) /\\ x <= n /\\ ~(n = 1 /\\ x = 0)\n        ==> inverse_mod n a = x
+      #|  forall n a x.\n        (a * x == 1) (mod n) /\\ x <= n /\\ ~(n = 1 /\\ x = 0)\n        ==> inverse_mod n a = x
       #|  ~(n <= 1) ==> 1 <= n
       #|  n <= 1
-      #|  !n. inverse_mod n 1 = 1
+      #|  forall n. inverse_mod n 1 = 1
       #|  (x:num == y) (mod n)
-      #|  !n x y. (x == y) (mod n) ==> inverse_mod n x = inverse_mod n y
+      #|  forall n x y. (x == y) (mod n) ==> inverse_mod n x = inverse_mod n y
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  inverse_mod n x
-      #|  !x'. (x * x' == 1) (mod n) /\\ (x' * x'' == 1) (mod n)\n         ==> (x'' == x) (mod n)
-      #|  !n x. coprime(n,x) ==> (inverse_mod n (inverse_mod n x) == x) (mod n)
-      #|  !n x. coprime(n,x) /\\ 1 <= x /\\ x <= n\n         ==> inverse_mod n (inverse_mod n x) = x
+      #|  forall x'. (x * x' == 1) (mod n) /\\ (x' * x'' == 1) (mod n)\n         ==> (x'' == x) (mod n)
+      #|  forall n x. coprime(n,x) ==> (inverse_mod n (inverse_mod n x) == x) (mod n)
+      #|  forall n x. coprime(n,x) /\\ 1 <= x /\\ x <= n\n         ==> inverse_mod n (inverse_mod n x) = x
       #|  (a * 0 == b) (mod n) <=> n divides b
       #|  a:num
       #|  n:num
-      #|  !n a. ~(n divides a) ==> ~(inverse_mod n a = 0)
+      #|  forall n a. ~(n divides a) ==> ~(inverse_mod n a = 0)
       #|  coprime(n,a) ==> (n divides a <=> n divides 1)
       #|  n = 1
-      #|  !n a. coprime(n,a) ==> ~(inverse_mod n a = 0)
-      #|  !n a. inverse_mod n a <= n <=> ~(n = 0)
+      #|  forall n a. coprime(n,a) ==> ~(inverse_mod n a = 0)
+      #|  forall n a. inverse_mod n a <= n <=> ~(n = 0)
       #|  m * x <= m * n /\\ n * y <= n * m /\\ 2 * m * n <= q * m * n\n    ==> m * x + n * y = 1 + q * m * n ==> u:num = v
       #|  q = 1
       #|  n = 1
@@ -15852,17 +15852,17 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  (m * inverse_mod n m + n * inverse_mod m n == 1) (mod (m * n))
       #|  n = 0
       #|  m = 0
-      #|  !m n. coprime(m,n)\n         ==> m * inverse_mod n m + n * inverse_mod m n = m * n + 1
+      #|  forall m n. coprime(m,n)\n         ==> m * inverse_mod n m + n * inverse_mod m n = m * n + 1
       #|  (inverse_mod 0 n = 1 /\\ inverse_mod 1 n = 1) /\\\n     (MAX 2 p <= n /\\ (m * p) MOD n = 1 ==> inverse_mod n m = p)
       #|  inverse_mod
       #|  m:num
       #|  n:num
       #|  p:num
-      #|  squarefree n <=> !m. m EXP 2 divides n ==> m = 1
+      #|  squarefree n <=> forall m. m EXP 2 divides n ==> m = 1
       #|  ~(1 = 0)
       #|  ~squarefree 0
       #|  squarefree 1
-      #|  !n. squarefree n ==> ~(n = 0)
+      #|  forall n. squarefree n ==> ~(n = 0)
       #|  (p:num) divides m
       #|  m EXP 2 divides n
       #|  p:num
@@ -15872,45 +15872,45 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  m:num
       #|  (q ==> r) /\\ (p ==> q) /\\ (r ==> p)\n    ==> (p <=> q) /\\ (p <=> r)
       #|  n:num
-      #|  (!n. squarefree n <=> !p. prime p ==> ~(p EXP 2 divides n)) /\\\n   (!n. squarefree n <=> !p. prime p /\\ p divides n ==> ~(p EXP 2 divides n))
+      #|  (forall n. squarefree n <=> forall p. prime p ==> ~(p EXP 2 divides n)) /\\\n   (forall n. squarefree n <=> forall p. prime p /\\ p divides n ==> ~(p EXP 2 divides n))
       #|  ~(2 <= n) <=> n <= 1
       #|  m = 1
       #|  m:num
       #|  p \\/ q ==> p <=> q ==> p
       #|  ~(1 = 0)
       #|  n = 0
-      #|  !n. squarefree n <=> ~(n = 0) /\\ !m. index m n <= 1
+      #|  forall n. squarefree n <=> ~(n = 0) /\\ forall m. index m n <= 1
       #|  ~(2 <= n) <=> n <= 1
       #|  n = 0
-      #|  !n. squarefree n <=>\n       ~(n = 0) /\\ !p. prime p ==> index p n <= 1
+      #|  forall n. squarefree n <=>\n       ~(n = 0) /\\ forall p. prime p ==> index p n <= 1
       #|  (r ==> p) /\\ (q ==> r) /\\ (p ==> q)\n    ==> (p <=> q) /\\ (p <=> r)
       #|  n:num
-      #|  (!n. squarefree n <=> !a b. a * b = n ==> coprime(a,b)) /\\\n   (!n. squarefree n <=> !a b. a * b divides n ==> coprime(a,b))
-      #|  !m n. squarefree n /\\ m divides n ==> squarefree m
-      #|  !p. prime p ==> squarefree p
+      #|  (forall n. squarefree n <=> forall a b. a * b = n ==> coprime(a,b)) /\\\n   (forall n. squarefree n <=> forall a b. a * b divides n ==> coprime(a,b))
+      #|  forall m n. squarefree n /\\ m divides n ==> squarefree m
+      #|  forall p. prime p ==> squarefree p
       #|  coprime(m:num,n)
-      #|  !m n. squarefree(m * n) <=> coprime(m,n) /\\ squarefree m /\\ squarefree n
+      #|  forall m n. squarefree(m * n) <=> coprime(m,n) /\\ squarefree m /\\ squarefree n
       #|  n:num
       #|  k = 1
       #|  k = 0
       #|  n = 1
-      #|  !n k. squarefree(n EXP k) <=> n = 1 \\/ k = 0 \\/ squarefree n /\\ k = 1
+      #|  forall n k. squarefree(n EXP k) <=> n = 1 \\/ k = 0 \\/ squarefree n /\\ k = 1
       #|  p ==> q ==> r <=> q ==> p ==> r
       #|  (if p then 1 else 0) <= x <=> p ==> 1 <= x
       #|  prime p
       #|  p:num
       #|  p:num
       #|  n = 0
-      #|  !q n. squarefree q\n         ==> (q divides n <=> !p. prime p /\\ p divides q ==> p divides n)
-      #|  !n q x. squarefree q /\\ q divides x EXP n ==> q divides x
-      #|  !n q x. squarefree q /\\ ~(n = 0) ==> (q divides x EXP n <=> q divides x)
+      #|  forall q n. squarefree q\n         ==> (q divides n <=> forall p. prime p /\\ p divides q ==> p divides n)
+      #|  forall n q x. squarefree q /\\ q divides x EXP n ==> q divides x
+      #|  forall n q x. squarefree q /\\ ~(n = 0) ==> (q divides x EXP n <=> q divides x)
       #|  r = 1 * r
       #|  p * r:num
       #|  r:num
       #|  p:num
       #|  ((p ==> q) /\\ (q ==> r)) /\\ (r ==> p) ==> (p <=> q) /\\ (p <=> r)
-      #|  (!n. squarefree n <=> ~(n = 0) /\\ !m k. n divides m EXP k ==> n divides m) /\\\n   (!n. squarefree n <=> ~(n = 0) /\\ !m. n divides m EXP 2 ==> n divides m)
-      #|  !m n. squarefree m \\/ squarefree n ==> squarefree(gcd(m,n))
+      #|  (forall n. squarefree n <=> ~(n = 0) /\\ forall m k. n divides m EXP k ==> n divides m) /\\\n   (forall n. squarefree n <=> ~(n = 0) /\\ forall m. n divides m EXP 2 ==> n divides m)
+      #|  forall m n. squarefree m \\/ squarefree n ==> squarefree(gcd(m,n))
       #|  p:num
       #|  prime p
       #|  p:num
@@ -15918,14 +15918,14 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  p \\/ q <=> ~p ==> q
       #|  2
       #|  n = 0
-      #|  !n. squarefree n <=> !x. gcd(x EXP 2,n) divides x
-      #|  !s. FINITE s\n       ==> (squarefree(nproduct s (\\n. n)) <=>\n            pairwise (\\a b. coprime(a,b)) s /\\ !n. n IN s ==> squarefree n)
+      #|  forall n. squarefree n <=> forall x. gcd(x EXP 2,n) divides x
+      #|  forall s. FINITE s\n       ==> (squarefree(nproduct s (\\n. n)) <=>\n            pairwise (\\a b. coprime(a,b)) s /\\ forall n. n IN s ==> squarefree n)
       #|  n <= 1 <=> n = 0 \\/ n = 1
       #|  p:num
       #|  p:num
-      #|  !n. squarefree n\n       ==> nproduct {p | prime p /\\ p divides n} (\\p. p) = n
+      #|  forall n. squarefree n\n       ==> nproduct {p | prime p /\\ p divides n} (\\p. p) = n
       #|  n = 0
-      #|  !n. squarefree n <=>\n       ~(n = 0) /\\ nproduct {p | prime p /\\ p divides n} (\\p. p) = n
+      #|  forall n. squarefree n <=>\n       ~(n = 0) /\\ nproduct {p | prime p /\\ p divides n} (\\p. p) = n
       #|  p EXP (k DIV 2)
       #|  p EXP (k MOD 2)
       #|  k:num
@@ -15941,14 +15941,14 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  a:num
       #|  0
       #|  1
-      #|  !n. ?m r. squarefree m /\\ m * r EXP 2 = n
+      #|  forall n. ?m r. squarefree m /\\ m * r EXP 2 = n
       #|  coprime(m:num,n)\n    ==> ((a == b) (mod (m * n)) <=>\n         (a == b) (mod m) /\\ (a == b) (mod n))
       #|  squarefree n
       #|  squarefree m
       #|  n:num
       #|  m:num
-      #|  !n a b. squarefree n /\\\n           (!p. prime p /\\ p divides n ==> (a == b) (mod p))\n           ==> (a == b) (mod n)
-      #|  !n a b. squarefree n\n           ==> ((a == b) (mod n) <=>\n               !p. prime p /\\ p divides n ==> (a == b) (mod p))
+      #|  forall n a b. squarefree n /\\\n           (forall p. prime p /\\ p divides n ==> (a == b) (mod p))\n           ==> (a == b) (mod n)
+      #|  forall n a b. squarefree n\n           ==> ((a == b) (mod n) <=>\n               forall p. prime p /\\ p divides n ==> (a == b) (mod p))
       #|  phi(n) = CARD { m | 0 < m /\\ m <= n /\\ coprime(m,n) }
       #|  m = 0
       #|  m:num
@@ -15957,19 +15957,19 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  n = 0
       #|  phi(n) = CARD { m | coprime(m,n) /\\ m < n}
       #|  0..n
-      #|  !n. FINITE {m | coprime(m,n) /\\ m < n}
-      #|  !n. ~(n = 1) ==> (phi(n) = CARD {m | 0 < m /\\ m < n /\\ coprime(m,n)})
-      #|  !n. phi(n) <= n
+      #|  forall n. FINITE {m | coprime(m,n) /\\ m < n}
+      #|  forall n. ~(n = 1) ==> (phi(n) = CARD {m | 0 < m /\\ m < n /\\ coprime(m,n)})
+      #|  forall n. phi(n) <= n
       #|  n:num
-      #|  !n. ~(n = 1) ==> phi(n) <= n - 1
+      #|  forall n. ~(n = 1) ==> phi(n) <= n - 1
       #|  0
       #|  phi 0 = 0
       #|  phi 1 = 1
       #|  {b | b <= n}
       #|  1 = CARD {1}
-      #|  !n. 1 <= n ==> 1 <= phi(n)
+      #|  forall n. 1 <= n ==> 1 <= phi(n)
       #|  1 <= 2
-      #|  !n. 2 <= n ==> 1 <= phi(n)
+      #|  forall n. 2 <= n ==> 1 <= phi(n)
       #|  {b | b <= n}
       #|  3 <= n
       #|  1 = n - (n - 1)
@@ -15978,15 +15978,15 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  3 <= n ==> 0 < n - 1 /\\ n - 1 <= n /\\ 1 <= n
       #|  3 <= n ==> ~(1 = n - 1)
       #|  2 = CARD {1,(n-1)}
-      #|  !n. 3 <= n ==> 2 <= phi(n)
+      #|  forall n. 3 <= n ==> 2 <= phi(n)
       #|  n:num
-      #|  !n. phi n = 0 <=> n = 0
+      #|  forall n. phi n = 0 <=> n = 0
       #|  {m | 0 < m /\\ m < n /\\ coprime (m,n)} = {m | 0 < m /\\ m < n}
       #|  n:num
       #|  n = 1
       #|  n = 0
-      #|  !n. (phi n = n - 1) /\\ ~(n = 0) /\\ ~(n = 1) <=> prime n
-      #|  !p. prime p ==> phi p = p - 1
+      #|  forall n. (phi n = n - 1) /\\ ~(n = 0) /\\ ~(n = 1) <=> prime n
+      #|  forall p. prime p ==> phi p = p - 1
       #|  p * n < p * p EXP k
       #|  n:num
       #|  n:num
@@ -15994,10 +15994,10 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
       #|  {m | p divides m /\\ m < p EXP (k + 1)} =\n                IMAGE (\\x. p * x) {m | m < p EXP k}
       #|  {n | ~(P n) /\\ Q n} = {n | Q n} DIFF {n | P n /\\ Q n}
-      #|  !p k. prime(p) ==> phi(p EXP (k + 1)) = p EXP (k + 1) - p EXP k
-      #|  !p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP k - p EXP (k - 1)
+      #|  forall p k. prime(p) ==> phi(p EXP (k + 1)) = p EXP (k + 1) - p EXP k
+      #|  forall p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP k - p EXP (k - 1)
       #|  ~(k = 0) ==> SUC(k - 1) = k
-      #|  !p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP (k - 1) * (p - 1)
+      #|  forall p k. prime p\n         ==> phi(p EXP k) = if k = 0 then 1 else p EXP (k - 1) * (p - 1)
       #|  phi 2 = 1
       #|  n:num
       #|  m:num
@@ -16009,14 +16009,14 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  \\p. p MOD a,p MOD b
       #|  b = 0
       #|  a = 0
-      #|  !a b. coprime(a,b) ==> phi(a * b) = phi(a) * phi(b)
+      #|  forall a b. coprime(a,b) ==> phi(a * b) = phi(a) * phi(b)
       #|  k = 1
       #|  ~(2 = 1)
       #|  3 <= n <=> 1 < n /\\ ~(n = 2)
-      #|  !n. 3 <= n ==> EVEN(phi n)
+      #|  forall n. 3 <= n ==> EVEN(phi n)
       #|  ~(n = 0 \\/ 3 <= n) <=> n = 1 \\/ n = 2
-      #|  !n. EVEN(phi n) <=> n = 0 \\/ 3 <= n
-      #|  !n. ODD(phi n) <=> n = 1 \\/ n = 2
+      #|  forall n. EVEN(phi n) <=> n = 0 \\/ 3 <= n
+      #|  forall n. ODD(phi n) <=> n = 1 \\/ n = 2
       #|  k - 1 = 0 <=> k = 0 \\/ k = 1
       #|  k - 1 <= k
       #|  p EXP k - p EXP k1 = p EXP k - 1\n      ==> ~(p EXP k = 0) /\\ p EXP k1 <= p EXP k ==> p EXP k1 = 1
@@ -16033,11 +16033,11 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  1 < p
       #|  p = 1
       #|  p = 0
-      #|  !p. phi p = p - 1 <=> p = 0 \\/ prime p
-      #|  !n. ~prime n /\\ ~(n = 0) /\\ ~(n = 1) ==> phi n < n - 1
+      #|  forall p. phi p = p - 1 <=> p = 0 \\/ prime p
+      #|  forall n. ~prime n /\\ ~(n = 0) /\\ ~(n = 1) ==> phi n < n - 1
       #|  \\x y. (x == y) (mod n)
-      #|  !s a:A->num n.\n        FINITE s /\\ ~(n = 0)\n        ==> (nproduct s (\\m. a(m) MOD n) == nproduct s a) (mod n)
-      #|  !s a c.\n        FINITE s\n        ==> nproduct s (\\m. c * a(m)) = c EXP (CARD s) * nproduct s a
+      #|  forall s a:A->num n.\n        FINITE s /\\ ~(n = 0)\n        ==> (nproduct s (\\m. a(m) MOD n) == nproduct s a) (mod n)
+      #|  forall s a c.\n        FINITE s\n        ==> nproduct s (\\m. c * a(m)) = c EXP (CARD s) * nproduct s a
       #|  ~(n = 0) ==> ((a * x MOD n == b) (mod n) <=> (a * x == b) (mod n))
       #|  (k * m == 1) (mod n)
       #|  \\x. (m * x) MOD n
@@ -16045,7 +16045,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  ?m. (k * m == 1) (mod n)
       #|  {x | F} = {}
       #|  n = 0
-      #|  !op f n k.\n        monoidal(op) /\\ coprime(k,n) /\\\n        (!x y. (x == y) (mod n) ==> f x = f y)\n        ==> iterate op {d | coprime(d,n) /\\ d < n} (\\m. f(k * m)) =\n            iterate op {d | coprime(d,n) /\\ d < n} f
+      #|  forall op f n k.\n        monoidal(op) /\\ coprime(k,n) /\\\n        (forall x y. (x == y) (mod n) ==> f x = f y)\n        ==> iterate op {d | coprime(d,n) /\\ d < n} (\\m. f(k * m)) =\n            iterate op {d | coprime(d,n) /\\ d < n} f
       #|  1 <= x <=> ~(x = 0)
       #|  d = 0
       #|  d:num
@@ -16054,7 +16054,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  n:num
       #|  \\(n:num,k). n * k,n
       #|  \\(n,d). d,n DIV d
-      #|  !op:A->A->A f x.\n        monoidal op\n        ==> iterate op (1..x) (\\n. iterate op {d | d divides n} (f n)) =\n            iterate op (1..x)\n                       (\\n. iterate op (1..(x DIV n)) (\\k. f (k * n) n))
+      #|  forall op:A->A->A f x.\n        monoidal op\n        ==> iterate op (1..x) (\\n. iterate op {d | d divides n} (f n)) =\n            iterate op (1..x)\n                       (\\n. iterate op (1..(x DIV n)) (\\k. f (k * n) n))
       #|  a:num
       #|  n:num
       #|  \\x. x MOD n
@@ -16062,8 +16062,8 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  nproduct {m | coprime(m,n) /\\ m < n} (\\m. (a * m) MOD n)
       #|  nproduct {m | coprime (m,n) /\\ m < n} (\\m. m)
       #|  n = 0
-      #|  !a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)
-      #|  !a p. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)
+      #|  forall a n. coprime(a,n) ==> (a EXP (phi n) == 1) (mod n)
+      #|  forall a p. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)
       #|  ~(m = 0)
       #|  m = SUC(m - 1)
       #|  a EXP m DIV n * n
@@ -16077,7 +16077,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  n = 1
       #|  m = 0
       #|  n = 0
-      #|  !m n a. ~(m = 0) /\\ (a EXP m == 1) (mod n) ==> coprime(a,n)
+      #|  forall m n a. ~(m = 0) /\\ (a EXP m == 1) (mod n) ==> coprime(a,n)
       #|  1 <= n ==> 0 < n
       #|  a ==> ~(a /\\ b) ==> ~b
       #|  2 <= n ==> ~(n - 1 = 0)
@@ -16085,7 +16085,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  coprime(a,n)
       #|  phi n
       #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
-      #|  !a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (!m. 0 < m /\\ m < n - 1 ==> ~(a EXP m == 1) (mod n))\n         ==> prime(n)
+      #|  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall m. 0 < m /\\ m < n - 1 ==> ~(a EXP m == 1) (mod n))\n         ==> prime(n)
       #|  (MOD)
       #|  n:num
       #|  (EXP)
@@ -16098,7 +16098,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  0
       #|  (m * r) DIV p = m * (r DIV p)
       #|  p:num
-      #|  !p. prime p /\\ p divides m * r\n                   ==> ~(a EXP ((m * r) DIV p) == 1) (mod n)
+      #|  forall p. prime p /\\ p divides m * r\n                   ==> ~(a EXP ((m * r) DIV p) == 1) (mod n)
       #|  p:num
       #|  m < m * r
       #|  ~(r = 1)
@@ -16117,40 +16117,40 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  a ==> ~b <=> ~(a /\\ b)
       #|  a:num
       #|  2 <= n ==> ~(n = 0)
-      #|  !a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (!p. prime(p) /\\ p divides (n - 1)\n              ==> ~(a EXP ((n - 1) DIV p) == 1) (mod n))\n         ==> prime(n)
-      #|  order n a = @d. !k. (a EXP k == 1) (mod n) <=> d divides k
-      #|  !x n. x EXP n = ITER n (\\y. x * y) (1)
+      #|  forall a n. 2 <= n /\\\n         (a EXP (n - 1) == 1) (mod n) /\\\n         (forall p. prime(p) /\\ p divides (n - 1)\n              ==> ~(a EXP ((n - 1) DIV p) == 1) (mod n))\n         ==> prime(n)
+      #|  order n a = @d. forall k. (a EXP k == 1) (mod n) <=> d divides k
+      #|  forall x n. x EXP n = ITER n (\\y. x * y) (1)
       #|  1
       #|  \\x:num. a * x
       #|  \\x y:num. (x == y) (mod n)
-      #|  !n a d. (a EXP d == 1) (mod n) <=> order(n) a divides d
-      #|  !n a. (a EXP (order(n) a) == 1) (mod n)
-      #|  !n a d. order n a = d <=> !k. (a EXP k == 1) (mod n) <=> d divides k
-      #|  !n a m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
-      #|  !n a. (a EXP (order(n) a) == 1) (mod n) /\\\n         !m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
-      #|  !n. order n 1 = 1
+      #|  forall n a d. (a EXP d == 1) (mod n) <=> order(n) a divides d
+      #|  forall n a. (a EXP (order(n) a) == 1) (mod n)
+      #|  forall n a d. order n a = d <=> forall k. (a EXP k == 1) (mod n) <=> d divides k
+      #|  forall n a m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
+      #|  forall n a. (a EXP (order(n) a) == 1) (mod n) /\\\n         forall m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
+      #|  forall n. order n 1 = 1
       #|  ~p ==> (q ==> p) ==> q ==> r
       #|  m:num
       #|  order n a
       #|  a:num
       #|  n:num
       #|  ~(1 = 0)
-      #|  !n a. order(n) a = 0 <=> ~coprime(n,a)
-      #|  !n a. order n a = 1 <=> (a == 1) (mod n)
+      #|  forall n a. order(n) a = 0 <=> ~coprime(n,a)
+      #|  forall n a. order n a = 1 <=> (a == 1) (mod n)
       #|  1 divides n /\\ n divides n
-      #|  !n a p.\n        prime p\n        ==> (order n a = p <=> ~((a == 1) (mod n)) /\\ (a EXP p == 1) (mod n))
-      #|  !n a b. (a == b) (mod n) ==> order n a = order n b
-      #|  !p n. order p (n MOD p) = order p n
+      #|  forall n a p.\n        prime p\n        ==> (order n a = p <=> ~((a == 1) (mod n)) /\\ (a EXP p == 1) (mod n))
+      #|  forall n a b. (a == b) (mod n) ==> order n a = order n b
+      #|  forall p n. order p (n MOD p) = order p n
       #|  n > 0 <=> ~(n = 0)
-      #|  !n a. coprime(n,a)\n         ==> order(n) a > 0 /\\\n            (a EXP (order(n) a) == 1) (mod n) /\\\n            !m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
-      #|  !a n. coprime(n,a) ==> (order n a) divides (phi n)
+      #|  forall n a. coprime(n,a)\n         ==> order(n) a > 0 /\\\n            (a EXP (order(n) a) == 1) (mod n) /\\\n            forall m. 0 < m /\\ m < order(n) a ==> ~((a EXP m == 1) (mod n))
+      #|  forall a n. coprime(n,a) ==> (order n a) divides (phi n)
       #|  order n a = 0
-      #|  !n. ~(n = 0) ==> order n a <= phi n
+      #|  forall n. ~(n = 0) ==> order n a <= phi n
       #|  (e + 0) + c = e + c
       #|  e = e + 0
       #|  c:num
-      #|  !a n d e. coprime(n,a) /\\ e <= d\n              ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
-      #|  !a n d e. coprime(n,a)\n             ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
+      #|  forall a n d e. coprime(n,a) /\\ e <= d\n              ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
+      #|  forall a n d e. coprime(n,a)\n             ==> ((a EXP d == a EXP e) (mod n) <=> (d == e) (mod (order n a)))
       #|  (a EXP k == 1) (mod n)
       #|  k:num
       #|  a:num
@@ -16160,28 +16160,28 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  a:num
       #|  n:num
       #|  order n a
-      #|  !n a k. 0 < k /\\\n           (a EXP k == 1) (mod n) /\\\n           (!m. 0 < m /\\ m < k ==> ~(a EXP m == 1) (mod n))\n           ==> order n a = k
+      #|  forall n a k. 0 < k /\\\n           (a EXP k == 1) (mod n) /\\\n           (forall m. 0 < m /\\ m < k ==> ~(a EXP m == 1) (mod n))\n           ==> order n a = k
       #|  coprime(m,n)\n    ==> ((x == y) (mod (m * n)) <=>\n         (x == y) (mod m) /\\ (x == y) (mod n))
-      #|  !m n a. coprime(m,n) ==> order (m * n) a = lcm(order m a,order n a)
+      #|  forall m n a. coprime(m,n) ==> order (m * n) a = lcm(order m a,order n a)
       #|  e:num
       #|  d = 0
       #|  d = gcd(order p a,k)
       #|  gcd(order p a,k) divides order p a
       #|  j:num
       #|  order p a = 0
-      #|  !p a k. order p (a EXP k) =\n           if k = 0 then 1 else order p a DIV gcd(order p a,k)
-      #|  !p a k. ~(k = 0) /\\ k divides order p a\n           ==> order p (a EXP k) = order p a DIV k
+      #|  forall p a k. order p (a EXP k) =\n           if k = 0 then 1 else order p a DIV gcd(order p a,k)
+      #|  forall p a k. ~(k = 0) /\\ k divides order p a\n           ==> order p (a EXP k) = order p a DIV k
       #|  (a * b == 1) (mod n) ==> ((a == 1) (mod n) <=> (b == 1) (mod n))
       #|  k:num
       #|  d:num
-      #|  !n a. coprime(n,a) ==> order n (inverse_mod n a) = order n a
-      #|  !p a b. order p (a * b) divides order p a * order p b
+      #|  forall n a. coprime(n,a) ==> order n (inverse_mod n a) = order n a
+      #|  forall p a b. order p (a * b) divides order p a * order p b
       #|  (a == 1) (mod n) ==> (b == a * b) (mod n)
       #|  (b == 1) (mod n) ==> (a == a * b) (mod n)
       #|  (a * b) EXP (order p a * order p (a * b))
       #|  (a * b) EXP (order p b * order p (a * b))
       #|  (a:num) divides (b * c) /\\ b divides (a * c) /\\ coprime(a,b)\n    ==> (a * b) divides c
-      #|  !p a b. coprime(order p a,order p b)\n           ==> order p (a * b) = order p a * order p b
+      #|  forall p a b. coprime(order p a,order p b)\n           ==> order p (a * b) = order p a * order p b
       #|  gcd(a * b:num,a) = a /\\ gcd(a * b,b) = b
       #|  order p (a EXP m') = m /\\ order p (b EXP n') = n
       #|  a EXP m' * b EXP n'
@@ -16193,7 +16193,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  order p a
       #|  order p b = 0
       #|  order p a = 0
-      #|  !p a b. ?c. order p c = lcm(order p a,order p b)
+      #|  forall p a b. ?c. order p c = lcm(order p a,order p b)
       #|  a:num <= b ==> b <= a ==> a = b
       #|  q MOD p
       #|  q:num
@@ -16207,28 +16207,28 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  IMAGE f s x <=> x IN IMAGE f s
       #|  IMAGE (order p) {k | k < p}
       #|  p = 0
-      #|  !p. ~(p = 1)\n       ==> ?n. coprime(p,n) /\\\n               !m. coprime(p,m) ==> order p m divides order p n
+      #|  forall p. ~(p = 1)\n       ==> ?n. coprime(p,n) /\\\n               forall m. coprime(p,m) ==> order p m divides order p n
       #|  a EXP l
       #|  l:num
       #|  1
-      #|  !n a k. coprime(n,a) /\\ coprime(k,phi n)\n           ==> ?x. (x EXP k == a) (mod n)
-      #|  !p a k. prime p /\\ ~(p divides a) /\\ coprime(k,p - 1)\n           ==> ?x. (x EXP k == a) (mod p)
+      #|  forall n a k. coprime(n,a) /\\ coprime(k,phi n)\n           ==> ?x. (x EXP k == a) (mod n)
+      #|  forall p a k. prime p /\\ ~(p divides a) /\\ coprime(k,p - 1)\n           ==> ?x. (x EXP k == a) (mod p)
       #|  (a:num == b) (mod d) ==> e divides d ==> (a == b) (mod e)
       #|  (a':num == a) (mod n) /\\ (b' == b) (mod n)\n    ==> (a' == b') (mod n) ==> (a == b) (mod n)
       #|  (a EXP k EXP l == b EXP k EXP l) (mod n)
       #|  ?l. (k * l == 1) (mod phi n)
-      #|  !n a b k.\n        coprime(k,phi n) /\\\n        coprime(n,a) /\\ coprime(n,b) /\\\n        (a EXP k == b EXP k) (mod n)\n        ==> (a == b) (mod n)
-      #|  !n g. order n g = phi n ==> n = 0 \\/ coprime(n,g)
+      #|  forall n a b k.\n        coprime(k,phi n) /\\\n        coprime(n,a) /\\ coprime(n,b) /\\\n        (a EXP k == b EXP k) (mod n)\n        ==> (a == b) (mod n)
+      #|  forall n g. order n g = phi n ==> n = 0 \\/ coprime(n,g)
       #|  h <= p - 1 /\\ g <= h ==> g = p - 1 ==> h = p - 1
       #|  p = 1
       #|  p = 0
-      #|  !p g. order p g = p - 1 ==> p = 0 \\/ prime p
+      #|  forall p g. order p g = p - 1 ==> p = 0 \\/ prime p
       #|  {i:num | i < n}
-      #|  t SUBSET IMAGE f s <=> !y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  t SUBSET IMAGE f s <=> forall y. y IN t ==> ?x. x IN s /\\ f x = y
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  coprime(n:num,g)
       #|  n = 0
-      #|  !n g. order n g = phi n\n         ==> IMAGE (\\i. (g EXP i) MOD n) {i | i < phi n} =\n             {a | coprime(a,n) /\\ a < n}
+      #|  forall n g. order n g = phi n\n         ==> IMAGE (\\i. (g EXP i) MOD n) {i | i < phi n} =\n             {a | coprime(a,n) /\\ a < n}
       #|  0 < a <=> ~(a = 0)
       #|  a = 0
       #|  a:num < p
@@ -16236,18 +16236,18 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  g:num
       #|  p:num
       #|  p = 0
-      #|  !p g. order p g = p - 1\n         ==> IMAGE (\\i. (g EXP i) MOD p) {i | i < p - 1} =\n             {a | 0 < a /\\ a < p}
+      #|  forall p g. order p g = p - 1\n         ==> IMAGE (\\i. (g EXP i) MOD p) {i | i < p - 1} =\n             {a | 0 < a /\\ a < p}
       #|  a MOD n
-      #|  IMAGE f s = t ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  !n g a. ~(n = 0) /\\ order n g = phi n /\\ coprime(a,n)\n           ==> ?m. m < phi n /\\ (a == g EXP m) (mod n)
+      #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  forall n g a. ~(n = 0) /\\ order n g = phi n /\\ coprime(a,n)\n           ==> ?m. m < phi n /\\ (a == g EXP m) (mod n)
       #|  n = 0
-      #|  !n g a. order n g = phi n /\\ coprime(a,n)\n           ==> ?m. (a == g EXP m) (mod n)
+      #|  forall n g a. order n g = phi n /\\ coprime(a,n)\n           ==> ?m. (a == g EXP m) (mod n)
       #|  0 < n <=> ~(n = 0)
       #|  a MOD p
-      #|  IMAGE f s = t ==> !y. y IN t ==> ?x. x IN s /\\ f x = y
-      #|  !p g a. ~(p = 0) /\\ order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. m < p - 1 /\\ (a == g EXP m) (mod p)
+      #|  IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y
+      #|  forall p g a. ~(p = 0) /\\ order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. m < p - 1 /\\ (a == g EXP m) (mod p)
       #|  p = 0
-      #|  !p g a. order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. (a == g EXP m) (mod p)
+      #|  forall p g a. order p g = p - 1 /\\ coprime(a,p)\n           ==> ?m. (a == g EXP m) (mod p)
       #|  e:num
       #|  d:num
       #|  d EXP 2 <= d * e \\/ e EXP 2 <= d * e
@@ -16264,7 +16264,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  ~a /\\ ~b ==> (a <=> b)
       #|  n = 0
       #|  n = 1
-      #|  !n. prime(n) <=> ~(n = 1) /\\ !d. d divides n /\\ d EXP 2 <= n ==> (d = 1)
+      #|  forall n. prime(n) <=> ~(n = 1) /\\ forall d. d divides n /\\ d EXP 2 <= n ==> (d = 1)
       #|  2
       #|  d EXP 2
       #|  p:num
@@ -16273,7 +16273,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  d:num
       #|  n = 0
       #|  n = 1
-      #|  !n. prime n <=>\n       ~(n = 0) /\\ ~(n = 1) /\\ ~(?p. prime p /\\ p divides n /\\ p EXP 2 <= n)
+      #|  forall n. prime n <=>\n       ~(n = 0) /\\ ~(n = 1) /\\ ~(?p. prime p /\\ p divides n /\\ p EXP 2 <= n)
       #|  1 EXP t
       #|  (d * t) * r = r * d * t
       #|  p:num
@@ -16305,7 +16305,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  phi p = p - 1
       #|  coprime(a EXP r,p)
       #|  order p (a EXP r) = q
-      #|  !a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (!p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> !p. prime p /\\ p divides n ==> (p == 1) (mod q)
+      #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> forall p. prime p /\\ p divides n ==> (p == 1) (mod q)
       #|  2
       #|  p EXP 2 <= q EXP 2
       #|  p:num
@@ -16315,7 +16315,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  a:num
       #|  p:num
       #|  2 <= n ==> ~(n = 0) /\\ ~(n = 1)
-      #|  !a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (!p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> prime(n)
+      #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> coprime(a EXP ((n - 1) DIV p) - 1,n))\n        ==> prime(n)
       #|  ~(p = 0)
       #|  p = SUC(p - 1)
       #|  ~(p = 0)
@@ -16338,8 +16338,8 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  r:num
       #|  q:num
       #|  a:num
-      #|  !a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (!p. prime(p) /\\ p divides q\n             ==> ?b. (a EXP ((n - 1) DIV p) == b) (mod n) /\\\n                     coprime(b - 1,n))\n        ==> prime(n)
-      #|  primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ !p. MEM p ps ==> prime(p)
+      #|  forall a n q r.\n        2 <= n /\\ (n - 1 = q * r) /\\ n <= q EXP 2 /\\\n        (a EXP (n - 1) == 1) (mod n) /\\\n        (forall p. prime(p) /\\ p divides q\n             ==> ?b. (a EXP ((n - 1) DIV p) == b) (mod n) /\\\n                     coprime(b - 1,n))\n        ==> prime(n)
+      #|  primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ forall p. MEM p ps ==> prime(p)
       #|  CONS (p:num) ps
       #|  ps:num list
       #|  prime p
@@ -16355,13 +16355,13 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  []:num list
       #|  n = 1
       #|  n:num
-      #|  !n. ~(n = 0) ==> ?ps. primefact ps n
+      #|  forall n. ~(n = 0) ==> ?ps. primefact ps n
       #|  ps:num list
       #|  ps:num list
-      #|  !ps n. primefact ps n ==> !p. prime p /\\ p divides n ==> MEM p ps
+      #|  forall ps n. primefact ps n ==> forall p. prime p /\\ p divides n ==> MEM p ps
       #|  ps:num list
       #|  ps:num list
-      #|  !ps n. primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ ALL prime ps
+      #|  forall ps n. primefact ps n <=> (ITLIST (*) ps 1 = n) /\\ ALL prime ps
       #|  ps:num list
       #|  ps:num list
       #|  ALL (\\p. prime p /\\ ~(a EXP ((n - 1) DIV p) == 1) (mod n)) ps

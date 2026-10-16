@@ -5540,24 +5540,24 @@ Examples/ste quotations (21):
   eval (Propform p) v = p v
   x <<= y <=> x = X \\/ y = TOP \\/ x = y
   x && y = if x <<= y then y else if y <<= x then x else TOP
-  !x. x <<= x
-  !x y z. x <<= y /\\ y <<= z ==> x <<= z
-  !x y z. x && y <<= z <=> x <<= z /\\ y <<= z
-  !x y. x <<= x && y /\\ y <<= x && y
+  forall x. x <<= x
+  forall x y z. x <<= y /\\ y <<= z ==> x <<= z
+  forall x y z. x && y <<= z <=> x <<= z /\\ y <<= z
+  forall x y. x <<= x && y /\\ y <<= x && y
   b >-> x = if b then x else X
   (b >-> x) <<= y <=> b ==> x <<= y
   (tholds (Is_0 nd) seq v <=> ZERO <<= seq 0 nd v) /\\\n   (tholds (Is_1 nd) seq v <=> ONE <<= seq 0 nd v) /\\\n   (tholds (Andj tf1 tf2) seq v <=> tholds tf1 seq v /\\ tholds tf2 seq v) /\\\n   (tholds (When tf1 p) seq v <=> eval p v ==> tholds tf1 seq v) /\\\n   (tholds (Next(tf1)) seq v <=> tholds tf1 (\\t. seq(t + 1)) v)
   (defseq (Is_0 n) t nd v = ((n = nd) /\\ (t = 0)) >-> ZERO) /\\\n   (defseq (Is_1 n) t nd v = ((n = nd) /\\ (t = 0)) >-> ONE) /\\\n   (defseq (Andj tf1 tf2) t nd v = defseq tf1 t nd v && defseq tf2 t nd v) /\\\n   (defseq (When tf1 p) t nd v =  eval p v >-> defseq tf1 t nd v) /\\\n   (defseq (Next(tf1)) t nd v = ~(t = 0) >-> defseq tf1 (t - 1) nd v)
-  (!t. P t) <=> P 0 /\\ !t. P(SUC t)
-  !tf seq v. tholds tf seq v <=> !t nd. defseq tf t nd v <<= seq t nd v
-  trajectory next seq v <=> !t nd. next(seq t) nd v <<= seq (t + 1) nd v
+  (forall t. P t) <=> P 0 /\\ forall t. P(SUC t)
+  forall tf seq v. tholds tf seq v <=> forall t nd. defseq tf t nd v <<= seq t nd v
+  trajectory next seq v <=> forall t nd. next(seq t) nd v <<= seq (t + 1) nd v
   (deftraj step tf 0 nd v = defseq tf 0 nd v) /\\\n   (deftraj step tf (SUC t) nd v =\n        defseq tf (SUC t) nd v && step(deftraj step tf t) nd v)
-  !tf t nd v. defseq tf t nd v <<= deftraj step tf t nd v
-  !step tf v. trajectory step (deftraj step tf) v
-  monotonic next v <=>\n   !s1 s2. (!nd. s1 nd v <<= s2 nd v) ==> !nd. next s1 nd v <<= next s2 nd v
-  !step v.\n      monotonic step v\n      ==> !tf seq. trajectory step seq v\n                   ==> (tholds tf seq v <=>\n                        !t nd. deftraj step tf t nd v <<= seq t nd v)
-  (A >~~> C) ckt v <=>\n      !seq. trajectory ckt seq v /\\ tholds A seq v ==> tholds C seq v
-  monotonic ckt v\n   ==> ((A >~~> C) ckt v <=> !t nd. defseq C t nd v <<= deftraj ckt A t nd v)
+  forall tf t nd v. defseq tf t nd v <<= deftraj step tf t nd v
+  forall step tf v. trajectory step (deftraj step tf) v
+  monotonic next v <=>\n   forall s1 s2. (forall nd. s1 nd v <<= s2 nd v) ==> forall nd. next s1 nd v <<= next s2 nd v
+  forall step v.\n      monotonic step v\n      ==> forall tf seq. trajectory step seq v\n                   ==> (tholds tf seq v <=>\n                        forall t nd. deftraj step tf t nd v <<= seq t nd v)
+  (A >~~> C) ckt v <=>\n      forall seq. trajectory ckt seq v /\\ tholds A seq v ==> tholds C seq v
+  monotonic ckt v\n   ==> ((A >~~> C) ckt v <=> forall t nd. defseq C t nd v <<= deftraj ckt A t nd v)
 node_INDUCT =  |- (#!:fun(fun(fun(node,bool),bool),bool) (\P:fun(node,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(node,bool) (#Node:fun(num,node) a:num))))) (#!:fun(fun(node,bool),bool) (\x:node. (P:fun(node,bool) x:node))))))
 node_RECURSION =  |- (#!:fun(fun(fun(num,'Z),bool),bool) (\f:fun(num,'Z). (#?:fun(fun(fun(node,'Z),bool),bool) (\fn:fun(node,'Z). (#!:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(node,'Z) (#Node:fun(num,node) a:num))) (f:fun(num,'Z) a:num))))))))
 propform_INDUCT =  |- (#!:fun(fun(fun(propform,bool),bool),bool) (\P:fun(propform,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(fun(num,bool),bool),bool),bool) (\a:fun(fun(num,bool),bool). (P:fun(propform,bool) (#Propform:fun(fun(fun(num,bool),bool),propform) a:fun(fun(num,bool),bool)))))) (#!:fun(fun(propform,bool),bool) (\x:propform. (P:fun(propform,bool) x:propform))))))

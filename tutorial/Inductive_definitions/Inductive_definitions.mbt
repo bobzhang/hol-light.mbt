@@ -52,7 +52,7 @@ pub fn reachable_cases() -> @kernel.Thm {
 ///|
 /// reachable_RULES, reachable_INDUCT, reachable_CASES
 fn step_3() -> Unit raise {
-  let (reachable_rules, reachable_induct, reachable_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!p. reachable p p) /\\\n   (!p q r. move p q /\\ reachable q r ==> reachable p r)"))
+  let (reachable_rules, reachable_induct, reachable_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall p. reachable p p) /\\\n   (forall p q r. move p q /\\ reachable q r ==> reachable p r)"))
   reachable_rules_c.set(reachable_rules)
   reachable_induct_c.set(reachable_induct)
   reachable_cases_c.set(reachable_cases)
@@ -78,7 +78,7 @@ pub fn oriented_area() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_rat.real_ring)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), move_(), oriented_area()])), t1)
-  move_invariant_c.set(@tactics.prove(@parser.parse_term("!p p'. move p p' ==> oriented_area p = oriented_area p'"), t2))
+  move_invariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. move p p' ==> oriented_area p = oriented_area p'"), t2))
 }
 
 ///|
@@ -95,7 +95,7 @@ pub fn move_invariant() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([move_invariant()]))
   let t4 = @tactics.then_tac(@tactics.match_mp_tac(reachable_induct()), t3)
-  reachable_invariant_c.set(@tactics.prove(@parser.parse_term("!p p'. reachable p p' ==> oriented_area p = oriented_area p'"), t4))
+  reachable_invariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. reachable p p' ==> oriented_area p = oriented_area p'"), t4))
 }
 
 ///|
@@ -199,7 +199,7 @@ fn step_12() -> Unit raise {
   let t12 = @parser.parse_term("\\s s':A. invariant s ==> invariant s'")
   let t13 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("transition:A->A->bool"), t12]), @rstc.rtc_induct()))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t14)
-  inductive_invariant_c.set(@tactics.prove(@parser.parse_term("!init invariant transition P.\n        (!s. init s ==> invariant s) /\\\n        (!s s'. invariant s /\\ transition s s' ==> invariant s') /\\\n        (!s. invariant s ==> P s)\n        ==> !s s':A. init s /\\ RTC transition s s' ==> P s'"), t15))
+  inductive_invariant_c.set(@tactics.prove(@parser.parse_term("forall init invariant transition P.\n        (forall s. init s ==> invariant s) /\\\n        (forall s s'. invariant s /\\ transition s s' ==> invariant s') /\\\n        (forall s. invariant s ==> P s)\n        ==> forall s s':A. init s /\\ RTC transition s s' ==> P s'"), t15))
 }
 
 ///|
@@ -217,7 +217,7 @@ fn step_13() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([init_(), trans(), indinv(), mutex(), @pair.forall_pair_thm(), @pair.pair_eq()]))
   let t16 = @tactics.exists_tac(@parser.parse_term("indinv"))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(inductive_invariant()), t16), t17), @int.arith_tac)
-  mutex_v1_c.set(@tactics.prove(@parser.parse_term("!s s'. init s /\\ RTC trans s s' ==> mutex s'"), t18))
+  mutex_v1_c.set(@tactics.prove(@parser.parse_term("forall s s'. init s /\\ RTC trans s s' ==> mutex s'"), t18))
 }
 
 ///|

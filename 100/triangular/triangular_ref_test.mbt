@@ -9055,13 +9055,13 @@ test "100/triangular matches 100/triangular.ml" {
       #|  &2 * x = y ==> x = y / &2
       #|  &(triangle n) = (&n * (&n + &1)) / &2
       #|  1 <= SUC n
-      #|  !n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)
+      #|  forall n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)
       #|  abs(&n + &1) = &n + &1
       #|  inv(&N)
       #|  abs(x - y - x) = abs y
       #|  2 * N + 1
       #|  N:num
-      #|  !e. &0 < e\n       ==> ?N. !n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e
+      #|  forall e. &0 < e\n       ==> ?N. forall n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e
       #|  (tends_num_real)
       #|  (\\n. sum(1..n) (\\k. &1 / &(triangle k))) --> &2
       #|triangle =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#triangle:fun(num,num) n:num)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))

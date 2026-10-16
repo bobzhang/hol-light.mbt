@@ -15920,11 +15920,11 @@ test "Examples/solovay matches Examples/solovay.ml" {
       #|Translating proof certificate to HOL
       #|Examples/solovay quotations (10566):
       #|  (--x = --(&1) % x) /\\\n   (x - y = x + --(&1) % y)
-      #|  !P t. P (norm t) = !x. &0 <= x /\\ (x pow 2 = (t:real^N) dot t) ==> P x
+      #|  forall P t. P (norm t) = forall x. &0 <= x /\\ (x pow 2 = (t:real^N) dot t) ==> P x
       #|  component (b:real^N) x = (b dot x) / (b dot b)
       #|  b = vec 0 :real^N
-      #|  !b:real^N x. orthogonal b (x - (component b x) % b)
-      #|  !cs vs.\n       ALL (orthogonal x) vs /\\ orthogonal x z /\\ (LENGTH cs = LENGTH vs)\n        ==> orthogonal x (ITLIST2 (\\a v s. a % v + s) cs vs z)
+      #|  forall b:real^N x. orthogonal b (x - (component b x) % b)
+      #|  forall cs vs.\n       ALL (orthogonal x) vs /\\ orthogonal x z /\\ (LENGTH cs = LENGTH vs)\n        ==> orthogonal x (ITLIST2 (\\a v s. a % v + s) cs vs z)
       #|  as:real list
       #|  cs:real list
       #|  vs:(real^N)list
@@ -15950,16 +15950,16 @@ test "Examples/solovay matches Examples/solovay.ml" {
       #|  []:real list
       #|  w:real^N
       #|  w:real^N
-      #|  !w:real^N vs. ?u as.\n        ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs) /\\\n        (w = ITLIST2 (\\a v s. a % v + s) as vs u)
+      #|  forall w:real^N vs. ?u as.\n        ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs) /\\\n        (w = ITLIST2 (\\a v s. a % v + s) as vs u)
       #|  v:real^N
       #|  w:real^N
       #|  vs:(real^N)list
       #|  w:real^N
       #|  w:real^N
-      #|  !P vs. (!w:real^N. P w vs) =\n          (!as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)
-      #|  ((!l. (LENGTH l = 0) ==> P l) = P []) /\\\n   ((!l. (LENGTH l = SUC n) ==> P l) =\n         (!h t. (LENGTH t = n) ==> P (CONS h t)))
+      #|  forall P vs. (forall w:real^N. P w vs) =\n          (forall as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)
+      #|  ((forall l. (LENGTH l = 0) ==> P l) = P []) /\\\n   ((forall l. (LENGTH l = SUC n) ==> P l) =\n         (forall h t. (LENGTH t = n) ==> P (CONS h t)))
       #|  orthogonal u x\n   ==> (u dot x = &0) /\\ (x dot u = &0) /\\\n       (u dot (a % x) = &0) /\\ ((a % x) dot u = &0) /\\\n       (u dot (a % x + y) = u dot y) /\\ ((a % x + y) dot u = y dot u) /\\\n       (u dot (y + a % x) = u dot y) /\\ ((y + a % x) dot u = y dot u)
-      #|  !u as vs. ITLIST2 (\\a v s. a % v + s) as vs u =\n             ITLIST2 (\\a v s. a % v + s) as vs (vec 0) + u
+      #|  forall u as vs. ITLIST2 (\\a v s. a % v + s) as vs u =\n             ITLIST2 (\\a v s. a % v + s) as vs (vec 0) + u
       #|  orthogonal (u:real^N)
       #|  (a + b = a) <=> (b = &0)
       #|  as:(real)list
@@ -15972,22 +15972,22 @@ test "Examples/solovay matches Examples/solovay.ml" {
       #|  as:(real)list
       #|  u:real^N
       #|  \\w:real^N vs.  P (MAP ((dot) w) (CONS w vs)) vs :bool
-      #|  (!w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (!u. ALL (orthogonal u) vs\n        ==> !as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)
-      #|  !P vs.\n   (!c. &0 <= c\n        ==> !as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                              (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) + c)\n                             (MAP ((dot)\n                                   (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                                  vs))\n                    vs)\n   ==> !w:real^N. P (MAP ((dot) w) (CONS w vs)) vs
+      #|  (forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (forall u. ALL (orthogonal u) vs\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)
+      #|  forall P vs.\n   (forall c. &0 <= c\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                              (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) + c)\n                             (MAP ((dot)\n                                   (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                                  vs))\n                    vs)\n   ==> forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs
       #|  v:(real^N)list
       #|  d:real list
       #|  EL:num->(real^N)list->real^N
       #|  EL:num->(real)list->real
       #|  :real^N
-      #|  !A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
-      #|  !x y:real^N. x dot y <= norm x * norm y
-      #|  !x y:real^N. a % (x + y) = a % x + a % y
-      #|  !x y z. x dot (y + z) = (x dot y) + (x dot z)
-      #|  !x y. (x dot x = &0) ==> (x dot y = &0)
-      #|  !a d:real^N.\n    ~(d = vec 0) ==> norm (a + d) > norm a \\/ norm (a - d) > norm a
-      #|  !b a d:real^N.\n    ~(d = vec 0) ==> dist(a,b + d) > dist(a,b) \\/ dist(a,b - d) > dist(a,b)
-      #|  !x. abs(norm x) = norm x
-      #|  !x:real^N y. x dot y > &0 ==> ?u. &0 < u /\\ norm(u % y - x) < norm x
+      #|  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
+      #|  forall x y:real^N. x dot y <= norm x * norm y
+      #|  forall x y:real^N. a % (x + y) = a % x + a % y
+      #|  forall x y z. x dot (y + z) = (x dot y) + (x dot z)
+      #|  forall x y. (x dot x = &0) ==> (x dot y = &0)
+      #|  forall a d:real^N.\n    ~(d = vec 0) ==> norm (a + d) > norm a \\/ norm (a - d) > norm a
+      #|  forall b a d:real^N.\n    ~(d = vec 0) ==> dist(a,b + d) > dist(a,b) \\/ dist(a,b - d) > dist(a,b)
+      #|  forall x. abs(norm x) = norm x
+      #|  forall x:real^N y. x dot y > &0 ==> ?u. &0 < u /\\ norm(u % y - x) < norm x
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
       #|  (NUMERAL m) EXP (NUMERAL n)
@@ -16820,7 +16820,7 @@ test "Examples/solovay matches Examples/solovay.ml" {
       #|  FACT(NUMERAL n)
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
-      #|  !x:real^N y.\n        x dot y > &0\n        ==> ?u. &0 < u /\\\n                !v. &0 < v /\\ v <= u ==> norm(v % y - x) < norm x
+      #|  forall x:real^N y.\n        x dot y > &0\n        ==> ?u. &0 < u /\\\n                forall v. &0 < v /\\ v <= u ==> norm(v % y - x) < norm x
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
       #|  (NUMERAL m) EXP (NUMERAL n)

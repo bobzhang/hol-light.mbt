@@ -5575,9 +5575,9 @@ test "Boyer_Moore/clausal_form matches Boyer_Moore/clausal_form.ml" {
       #|Searching with limit 2
       #|Searching with limit 3
       #|Boyer_Moore/clausal_form quotations (29):
-      #|  !t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-      #|  !t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
-      #|  !t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
+      #|  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
+      #|  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
+      #|  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
       #|  y:bool
       #|  x:bool
       #|  (x = y) = ((~x \\/ y) /\\ (~y \\/ x))

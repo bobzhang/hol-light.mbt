@@ -84204,17 +84204,17 @@ Generating HOL version of proof
 0..0..solved at 2
 0..0..1..solved at 4
 Probability/ergodic quotations (2129):
-  !f:A->A m n x. ITER (m + n) f x = ITER m f (ITER n f x)
+  forall f:A->A m n x. ITER (m + n) f x = ITER m f (ITER n f x)
   1
-  !f:A->A x. ITER 1 f x = f x
+  forall f:A->A x. ITER 1 f x = f x
   (x - y) / &2
-  !x y:real. (!e. &0 < e ==> x <= y + e) ==> x <= y
-  measure_preserving (p:A prob_space) (tt:A->A) <=>\n   (!x. x IN prob_carrier p ==> tt x IN prob_carrier p) /\\\n   (!A. A IN prob_events p ==>\n        {x | x IN prob_carrier p /\\ tt x IN A} IN prob_events p) /\\\n   (!A. A IN prob_events p ==>\n        prob p {x | x IN prob_carrier p /\\ tt x IN A} = prob p A)
+  forall x y:real. (forall e. &0 < e ==> x <= y + e) ==> x <= y
+  measure_preserving (p:A prob_space) (tt:A->A) <=>\n   (forall x. x IN prob_carrier p ==> tt x IN prob_carrier p) /\\\n   (forall A. A IN prob_events p ==>\n        {x | x IN prob_carrier p /\\ tt x IN A} IN prob_events p) /\\\n   (forall A. A IN prob_events p ==>\n        prob p {x | x IN prob_carrier p /\\ tt x IN A} = prob p A)
   invariant_event (p:A prob_space) (tt:A->A) (A:A->bool) <=>\n   A IN prob_events p /\\\n   {x | x IN prob_carrier p /\\ tt x IN A} = A
-  ergodic (p:A prob_space) (tt:A->A) <=>\n   measure_preserving p tt /\\\n   (!A. invariant_event p tt A ==> prob p A = &0 \\/ prob p A = &1)
-  !p:A prob_space tt. measure_preserving p tt\n    ==> (!x. x IN prob_carrier p ==> tt x IN prob_carrier p)
-  !p:A prob_space tt A. measure_preserving p tt /\\ A IN prob_events p\n    ==> {x | x IN prob_carrier p /\\ tt x IN A} IN prob_events p
-  !p:A prob_space tt A. measure_preserving p tt /\\ A IN prob_events p\n    ==> prob p {x | x IN prob_carrier p /\\ tt x IN A} = prob p A
+  ergodic (p:A prob_space) (tt:A->A) <=>\n   measure_preserving p tt /\\\n   (forall A. invariant_event p tt A ==> prob p A = &0 \\/ prob p A = &1)
+  forall p:A prob_space tt. measure_preserving p tt\n    ==> (forall x. x IN prob_carrier p ==> tt x IN prob_carrier p)
+  forall p:A prob_space tt A. measure_preserving p tt /\\ A IN prob_events p\n    ==> {x | x IN prob_carrier p /\\ tt x IN A} IN prob_events p
+  forall p:A prob_space tt A. measure_preserving p tt /\\ A IN prob_events p\n    ==> prob p {x | x IN prob_carrier p /\\ tt x IN A} = prob p A
   A:A->bool
   tt:A->A
   p:A prob_space
@@ -84253,19 +84253,19 @@ Probability/ergodic quotations (2129):
   A:A->bool
   p:A prob_space
   x:A
-  !A:A->bool. A IN prob_events p ==>\n     {x | x IN prob_carrier p /\\ x IN A} = A
-  !p:A prob_space tt n. measure_preserving p tt\n    ==> measure_preserving p (ITER n tt)
+  forall A:A->bool. A IN prob_events p ==>\n     {x | x IN prob_carrier p /\\ x IN A} = A
+  forall p:A prob_space tt n. measure_preserving p tt\n    ==> measure_preserving p (ITER n tt)
   a:real
   random_variable (p:A prob_space) (X:A->real)
   measure_preserving (p:A prob_space) (tt:A->A)
   x:A
   {x:A | x IN prob_carrier p /\\ X((tt:A->A) x) <= a} =\n     {x | x IN prob_carrier p /\\\n          tt x IN {y | y IN prob_carrier p /\\ X y <= a}}
   a:real
-  !p:A prob_space tt X. measure_preserving p tt /\\ random_variable p X\n    ==> random_variable p (\\x. X(tt x))
+  forall p:A prob_space tt X. measure_preserving p tt /\\ random_variable p X\n    ==> random_variable p (\\x. X(tt x))
   X:A->real
   ITER n (tt:A->A)
   p:A prob_space
-  !p:A prob_space tt X n. measure_preserving p tt /\\ random_variable p X\n    ==> random_variable p (\\x. X(ITER n tt x))
+  forall p:A prob_space tt X n. measure_preserving p tt /\\ random_variable p X\n    ==> random_variable p (\\x. X(ITER n tt x))
   m:num
   {y':A | y' IN prob_carrier p /\\\n      (h:A->real) y' <= v - inv(&m + &1)}
   m:num
@@ -84286,12 +84286,12 @@ Probability/ergodic quotations (2129):
   n:num
   {t:A->bool | ?n:num. t = {y:A | y IN prob_carrier p /\\\n      (h:A->real) y <= v - inv(&n + &1)}}
   prob_events (p:A prob_space)
-  !p:A prob_space h v. random_variable p h\n    ==> {x | x IN prob_carrier p /\\ h x < v} IN prob_events p
+  forall p:A prob_space h v. random_variable p h\n    ==> {x | x IN prob_carrier p /\\ h x < v} IN prob_events p
   random_variable (p:A prob_space) (h:A->real)
   (y:A) IN prob_carrier p
   y:A
   {x:A | x IN prob_carrier p /\\ (h:A->real) x = v} =\n    {x | x IN prob_carrier p /\\ h x <= v} DIFF\n    {x | x IN prob_carrier p /\\ h x < v}
-  !p:A prob_space h v. random_variable p h\n    ==> {x | x IN prob_carrier p /\\ h x = v} IN prob_events p
+  forall p:A prob_space h v. random_variable p h\n    ==> {x | x IN prob_carrier p /\\ h x = v} IN prob_events p
   ~(v IN IMAGE (\\x:A. (h:A->real)(tt x)) (prob_carrier p))
   x:A
   {x:A | x IN prob_carrier p /\\ (h:A->real)((tt:A->A) x) = v} = {}
@@ -84313,8 +84313,8 @@ Probability/ergodic quotations (2129):
   x:A
   {x:A | x IN prob_carrier p /\\ (h:A->real)((tt:A->A) x) = v} =\n     {x | x IN prob_carrier p /\\ tt x IN {y | y IN prob_carrier p /\\ h y = v}}
   v:real
-  !v:real. prob p {x:A | x IN prob_carrier p /\\ (h:A->real)((tt:A->A) x) = v} =\n              prob p {x | x IN prob_carrier p /\\ h x = v}
-  !p:A prob_space tt h. measure_preserving p tt /\\ simple_rv p h\n    ==> simple_expectation p (\\x. h(tt x)) = simple_expectation p h
+  forall v:real. prob p {x:A | x IN prob_carrier p /\\ (h:A->real)((tt:A->A) x) = v} =\n              prob p {x | x IN prob_carrier p /\\ h x = v}
+  forall p:A prob_space tt h. measure_preserving p tt /\\ simple_rv p h\n    ==> simple_expectation p (\\x. h(tt x)) = simple_expectation p h
   x:A
   {(h:A->real) x | x IN prob_carrier p}
   tt:A->A
@@ -84323,14 +84323,14 @@ Probability/ergodic quotations (2129):
   x:A
   v:real
   {(\\x:A. (h:A->real)(tt x)) x | x IN prob_carrier p} SUBSET\n    {h x | x IN prob_carrier p}
-  !p:A prob_space tt h. measure_preserving p tt /\\ simple_rv p h\n    ==> simple_rv p (\\x. h(tt x))
+  forall p:A prob_space tt h. measure_preserving p tt /\\ simple_rv p h\n    ==> simple_rv p (\\x. h(tt x))
   nn_expectation (p:A prob_space) (f:A->real)
   nn_expectation (p:A prob_space) (\\x:A. (f:A->real)(tt x))
   \\n:num. simple_expectation (p:A prob_space) ((fn:num->A->real) n)
   sequentially
   (\\n:num. simple_expectation p ((fn:num->A->real) n)) = (\\n. simple_expectation p (\\x:A. fn n (tt x)))
   ((\\n:num. simple_expectation p ((fn:num->A->real) n)) ---> nn_expectation p (\\x:A. (f:A->real)(tt x))) sequentially
-  !n:num. simple_expectation p (\\x:A. (fn:num->A->real) n (tt x)) = simple_expectation p (fn n)
+  forall n:num. simple_expectation p (\\x:A. (fn:num->A->real) n (tt x)) = simple_expectation p (fn n)
   x:A
   B:real
   tt:A->A
@@ -84360,10 +84360,10 @@ Probability/ergodic quotations (2129):
   x:A
   x:A
   ((\\n. simple_expectation p ((fn:num->A->real) n)) ---> nn_expectation p f) sequentially
-  !n:num. simple_rv p (\\x:A. (fn:num->A->real) n (tt x))
-  !n:num. simple_rv p ((fn:num->A->real) n)
+  forall n:num. simple_rv p (\\x:A. (fn:num->A->real) n (tt x))
+  forall n:num. simple_rv p ((fn:num->A->real) n)
   fn = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (f:A->real) n
-  !p:A prob_space tt f B.\n    measure_preserving p tt /\\\n    random_variable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (!x. x IN prob_carrier p ==> f x <= B)\n    ==> nn_expectation p (\\x. f(tt x)) = nn_expectation p f
+  forall p:A prob_space tt f B.\n    measure_preserving p tt /\\\n    random_variable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall x. x IN prob_carrier p ==> f x <= B)\n    ==> nn_expectation p (\\x. f(tt x)) = nn_expectation p f
   nn_expectation (p:A prob_space) (f:A->real)
   nn_expectation (p:A prob_space) (\\x:A. (f:A->real)(tt x))
   \\n:num. nn_expectation (p:A prob_space) ((Xn:num->A->real) n)
@@ -84380,7 +84380,7 @@ Probability/ergodic quotations (2129):
   f:A->real
   p:A prob_space
   (tt:A->A) x
-  !x:A. x IN prob_carrier p ==> ((\\n. (Xn:num->A->real) n x) ---> (f:A->real) x) sequentially
+  forall x:A. x IN prob_carrier p ==> ((\\n. (Xn:num->A->real) n x) ---> (f:A->real) x) sequentially
   tt:A->A
   p:A prob_space
   (tt:A->A) x IN prob_carrier p
@@ -84404,10 +84404,10 @@ Probability/ergodic quotations (2129):
   x:A
   (\\x:A. (Xn:num->A->real) n (tt x)) = (\\x. min ((f:A->real)(tt x)) (&n))
   &n
-  !n:num. integrable p (\\x:A. (Xn:num->A->real) n (tt x))
+  forall n:num. integrable p (\\x:A. (Xn:num->A->real) n (tt x))
   x:A
   &n
-  !n:num. nn_expectation p (\\x:A. (Xn:num->A->real) n (tt x)) = nn_expectation p (Xn n)
+  forall n:num. nn_expectation p (\\x:A. (Xn:num->A->real) n (tt x)) = nn_expectation p (Xn n)
   nn_expectation (p:A prob_space) (f:A->real)
   x:A
   f:A->real
@@ -84430,14 +84430,14 @@ Probability/ergodic quotations (2129):
   (f:A->real) x
   e:real
   x:A
-  !x:A. x IN prob_carrier p ==> ((\\n. (Xn:num->A->real) n x) ---> (f:A->real) x) sequentially
+  forall x:A. x IN prob_carrier p ==> ((\\n. (Xn:num->A->real) n x) ---> (f:A->real) x) sequentially
   a <= b ==> min x a <= min x b
-  !n:num x:A. x IN prob_carrier p ==> (Xn:num->A->real) n x <= Xn (SUC n) x
+  forall n:num x:A. x IN prob_carrier p ==> (Xn:num->A->real) n x <= Xn (SUC n) x
   &0 <= x /\\ &0 <= y ==> &0 <= min x y
-  !n:num x:A. x IN prob_carrier p ==> &0 <= (Xn:num->A->real) n x
-  !n:num. integrable p ((Xn:num->A->real) n)
+  forall n:num x:A. x IN prob_carrier p ==> &0 <= (Xn:num->A->real) n x
+  forall n:num. integrable p ((Xn:num->A->real) n)
   Xn = \\n:num. (\\x:A. min ((f:A->real) x) (&n))
-  !p:A prob_space tt f.\n    measure_preserving p tt /\\\n    random_variable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    integrable p f\n    ==> nn_expectation p (\\x. f(tt x)) = nn_expectation p f
+  forall p:A prob_space tt f.\n    measure_preserving p tt /\\\n    random_variable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    integrable p f\n    ==> nn_expectation p (\\x. f(tt x)) = nn_expectation p f
   min (abs((f:A->real) x)) M
   x:A
   h:A->real
@@ -84460,7 +84460,7 @@ Probability/ergodic quotations (2129):
   x:A
   M:real
   x:A
-  simple_rv (p:A prob_space) (g:A->real) /\\\n    (!x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n    (!x. x IN prob_carrier p ==> g x <= min (abs((f:A->real)((tt:A->A) x))) M) /\\\n    (?B'. !x. x IN prob_carrier p ==> min (abs (f(tt x))) M <= B')
+  simple_rv (p:A prob_space) (g:A->real) /\\\n    (forall x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n    (forall x. x IN prob_carrier p ==> g x <= min (abs((f:A->real)((tt:A->A) x))) M) /\\\n    (?B'. forall x. x IN prob_carrier p ==> min (abs (f(tt x))) M <= B')
   simple_expectation p (g:A->real) <= nn_expectation p (\\x:A. min (abs((f:A->real)(tt x))) M)
   x:A
   (g:A->real) x
@@ -84479,27 +84479,27 @@ Probability/ergodic quotations (2129):
   prob_carrier (p:A prob_space) = {}
   simple_rv (p:A prob_space) (g:A->real)
   M:real
-  ?M. &0 <= M /\\ !x:A. x IN prob_carrier p ==> (g:A->real) x <= M
+  ?M. &0 <= M /\\ forall x:A. x IN prob_carrier p ==> (g:A->real) x <= M
   B:real
   integrable (p:A prob_space) (f:A->real)
-  !p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(tt x))
+  forall p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(tt x))
   x:A
   (\\x:A. max (--((f:A->real)((tt:A->A) x))) (&0)) = (\\x. (\\y. max (--f y) (&0))(tt x))
   nn_expectation p (\\x:A. max (--((f:A->real)(tt x))) (&0)) = nn_expectation p (\\x. max (--f x) (&0))
   x:A
   (\\x:A. max ((f:A->real)((tt:A->A) x)) (&0)) = (\\x. (\\y. max (f y) (&0))(tt x))
   nn_expectation p (\\x:A. max ((f:A->real)(tt x)) (&0)) = nn_expectation p (\\x. max (f x) (&0))
-  !p:A prob_space tt f. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(tt x)) /\\\n        expectation p (\\x. f(tt x)) = expectation p f
+  forall p:A prob_space tt f. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(tt x)) /\\\n        expectation p (\\x. f(tt x)) = expectation p f
   f:A->real
   ITER n (tt:A->A)
   p:A prob_space
-  !p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(ITER n tt x)) /\\\n        expectation p (\\x. f(ITER n tt x)) = expectation p f
+  forall p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. f(ITER n tt x)) /\\\n        expectation p (\\x. f(ITER n tt x)) = expectation p f
   i:num
   f:A->real
   tt:A->A
   p:A prob_space
   i:num
-  !p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. sum(0..n) (\\k. f(ITER k tt x)))
+  forall p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. sum(0..n) (\\k. f(ITER k tt x)))
   i:num
   f:A->real
   tt:A->A
@@ -84514,8 +84514,8 @@ Probability/ergodic quotations (2129):
   n:num
   \\k:num. (\\x:A. (f:A->real)(ITER k tt x))
   p:A prob_space
-  !p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> expectation p (\\x. sum(0..n) (\\k. f(ITER k tt x))) =\n        &(SUC n) * expectation p f
-  !p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
+  forall p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> expectation p (\\x. sum(0..n) (\\k. f(ITER k tt x))) =\n        &(SUC n) * expectation p f
+  forall p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> integrable p (\\x. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
   &(SUC n)
   n:num
   f:A->real
@@ -84525,7 +84525,7 @@ Probability/ergodic quotations (2129):
   inv(&(SUC n))
   p:A prob_space
   integrable p (\\x:A. sum (0..n) (\\k. (f:A->real) (ITER k tt x)))
-  !p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> expectation p (\\x. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) =\n        expectation p f
+  forall p:A prob_space tt f n. measure_preserving p tt /\\ integrable p f\n    ==> expectation p (\\x. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) =\n        expectation p f
   x:A
   {x:A | x IN prob_carrier p /\\ (tt:A->A) x IN t} = t
   t:A->bool
@@ -84545,7 +84545,7 @@ Probability/ergodic quotations (2129):
   prob_events (p:A prob_space)
   s:(A->bool)->bool
   {x:A | x IN prob_carrier p /\\ tt x IN a} = a
-  !y:A. y IN prob_carrier p /\\ (tt:A->A) y IN a <=> y IN a
+  forall y:A. y IN prob_carrier p /\\ (tt:A->A) y IN a <=> y IN a
   tt:A->A
   p:A prob_space
   x:A
@@ -84564,7 +84564,7 @@ Probability/ergodic quotations (2129):
   A:A->bool
   x:A
   UNIONS {A:A->bool | invariant_event p tt A} = prob_carrier p
-  !p:A prob_space tt. measure_preserving p tt\n    ==> sub_sigma_algebra p {A | invariant_event p tt A}
+  forall p:A prob_space tt. measure_preserving p tt\n    ==> sub_sigma_algebra p {A | invariant_event p tt A}
   (ergodic_maxsum (f:A->real) (tt:A->A) 0 x = max (f x) (&0)) /\\\n   (ergodic_maxsum f tt (SUC n) x =\n      max (ergodic_maxsum f tt n x)\n          (sum(0..SUC n) (\\k. f(ITER k tt x))))
   :P
   :P
@@ -84577,7 +84577,7 @@ Probability/ergodic quotations (2129):
   \\n. n + 1
   \\n. n + 1
   x:A
-  !f:A->real tt n x. &0 <= ergodic_maxsum f tt n x
+  forall f:A->real tt n x. &0 <= ergodic_maxsum f tt n x
   k + 1 = SUC k
   x:A
   1
@@ -84592,9 +84592,9 @@ Probability/ergodic quotations (2129):
   SUC n
   0
   \\k. (f:A->real)(ITER k tt x)
-  !f:A->real tt n x.\n    sum(0..SUC n) (\\k. f(ITER k tt x)) =\n    f(x) + sum(0..n) (\\k. f(ITER k tt (tt x)))
-  !f:A->real tt n x. ergodic_maxsum f tt n x <= ergodic_maxsum f tt (SUC n) x
-  !f:A->real tt n x.\n    sum(0..n) (\\k. f(ITER k tt x)) <= ergodic_maxsum f tt n x
+  forall f:A->real tt n x.\n    sum(0..SUC n) (\\k. f(ITER k tt x)) =\n    f(x) + sum(0..n) (\\k. f(ITER k tt (tt x)))
+  forall f:A->real tt n x. ergodic_maxsum f tt n x <= ergodic_maxsum f tt (SUC n) x
+  forall f:A->real tt n x.\n    sum(0..n) (\\k. f(ITER k tt x)) <= ergodic_maxsum f tt n x
   ergodic_maxsum (f:A->real) tt (SUC n) x =\n      sum(0..SUC n) (\\k. f(ITER k tt x))
   x:A
   ergodic_maxsum (f:A->real) tt n x > &0
@@ -84606,7 +84606,7 @@ Probability/ergodic quotations (2129):
   ergodic_maxsum (f:A->real) tt (SUC n) (tt x) =\n     max (ergodic_maxsum f tt n (tt x))\n         (sum(0..SUC n) (\\k. f(ITER k tt (tt x))))
   ergodic_maxsum (f:A->real) tt (SUC n) x =\n     max (ergodic_maxsum f tt n x)\n         (sum(0..SUC n) (\\k. f(ITER k tt x)))
   x:A
-  !f:A->real tt n x.\n    ergodic_maxsum f tt n x > &0\n    ==> f x >= ergodic_maxsum f tt n x - ergodic_maxsum f tt n (tt x)
+  forall f:A->real tt n x.\n    ergodic_maxsum f tt n x > &0\n    ==> f x >= ergodic_maxsum f tt n x - ergodic_maxsum f tt n (tt x)
   i:num
   SUC n
   \\i:num. (\\x:A. (f:A->real)(ITER i tt x))
@@ -84614,18 +84614,18 @@ Probability/ergodic quotations (2129):
   ergodic_maxsum (f:A->real) tt (SUC n) =\n     (\\x. max (ergodic_maxsum f tt n x) (sum(0..SUC n) (\\k. f(ITER k tt x))))
   random_variable (p:A prob_space) (ergodic_maxsum (f:A->real) tt n)
   ergodic_maxsum (f:A->real) tt 0 = (\\x. max (f x) (&0))
-  !p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> random_variable p (ergodic_maxsum f tt n)
+  forall p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> random_variable p (ergodic_maxsum f tt n)
   ergodic_maxsum (f:A->real) tt (SUC n) =\n     (\\x. max (ergodic_maxsum f tt n x) (sum(0..SUC n) (\\k. f(ITER k tt x))))
   integrable (p:A prob_space) (ergodic_maxsum (f:A->real) tt n)
   ergodic_maxsum (f:A->real) tt 0 = (\\x. max (f x) (&0))
-  !p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> integrable p (ergodic_maxsum f tt n)
+  forall p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> integrable p (ergodic_maxsum f tt n)
   &0
   random_variable (p:A prob_space) (ergodic_maxsum (f:A->real) tt n)
   (x:A) IN prob_carrier p
   x:A
   {x:A | x IN prob_carrier p /\\ ergodic_maxsum (f:A->real) tt n x > &0} =\n    prob_carrier p DIFF {x | x IN prob_carrier p /\\ ergodic_maxsum f tt n x <= &0}
   random_variable (p:A prob_space) (ergodic_maxsum (f:A->real) tt n)
-  !p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> {x | x IN prob_carrier p /\\ ergodic_maxsum f tt n x > &0} IN prob_events p
+  forall p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> {x | x IN prob_carrier p /\\ ergodic_maxsum f tt n x > &0} IN prob_events p
   ergodic_maxsum (f:A->real) tt n
   tt:A->A
   p:A prob_space
@@ -84654,13 +84654,13 @@ Probability/ergodic quotations (2129):
   (x:A) IN A
   ergodic_maxsum (f:A->real) tt n x > &0
   x:A
-  !x:A. x IN prob_carrier p ==>\n    ergodic_maxsum (f:A->real) tt n x - ergodic_maxsum f tt n (tt x) <=\n    f x * indicator_fn A x
+  forall x:A. x IN prob_carrier p ==>\n    ergodic_maxsum (f:A->real) tt n x - ergodic_maxsum f tt n (tt x) <=\n    f x * indicator_fn A x
   integrable (p:A prob_space) (\\x. (f:A->real) x * indicator_fn A x)
   integrable (p:A prob_space) (\\x. ergodic_maxsum (f:A->real) tt n (tt x))
   integrable (p:A prob_space) (ergodic_maxsum (f:A->real) tt n)
   A IN prob_events (p:A prob_space)
   A = {x:A | x IN prob_carrier p /\\ ergodic_maxsum (f:A->real) tt n x > &0}
-  !p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> &0 <= expectation p\n               (\\x. f x * indicator_fn\n                 {x | x IN prob_carrier p /\\\n                      ergodic_maxsum f tt n x > &0} x)
+  forall p:A prob_space tt f n.\n    measure_preserving p tt /\\ integrable p f\n    ==> &0 <= expectation p\n               (\\x. f x * indicator_fn\n                 {x | x IN prob_carrier p /\\\n                      ergodic_maxsum f tt n x > &0} x)
   n:num
   0
   ((\\n.\n            expectation (p:A prob_space)\n            ((\\n x.\n                  (f:A->real) x *\n                  indicator_fn\n                  {x | x IN prob_carrier p /\\ ergodic_maxsum f tt n x > &0}\n                  x)\n            n)) --->\n       expectation p (\\x. f x * indicator_fn (Ainf:A->bool) x))\n      sequentially
@@ -84694,13 +84694,13 @@ Probability/ergodic quotations (2129):
   Ainf = UNIONS {({x:A | x IN prob_carrier p /\\ ergodic_maxsum (f:A->real) tt n x > &0}) | n IN (:num)}
   (Ainf:A->bool) IN prob_events p
   Ainf = {x:A | x IN prob_carrier p /\\ ?n. ergodic_maxsum (f:A->real) tt n x > &0}
-  !p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> &0 <= expectation p\n               (\\x. f x * indicator_fn\n                 {x | x IN prob_carrier p /\\\n                      ?n. ergodic_maxsum f tt n x > &0} x)
+  forall p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> &0 <= expectation p\n               (\\x. f x * indicator_fn\n                 {x | x IN prob_carrier p /\\\n                      ?n. ergodic_maxsum f tt n x > &0} x)
   ITER k (tt:A->A) x
   {x:A | x IN prob_carrier p /\\ tt x IN A} = A
   invariant_event (p:A prob_space) (tt:A->A) (A:A->bool)
   k:num
   k:num
-  !p:A prob_space tt (A:A->bool) x k.\n    measure_preserving p tt /\\ invariant_event p tt A /\\ x IN A\n    ==> ITER k tt x IN A
+  forall p:A prob_space tt (A:A->bool) x k.\n    measure_preserving p tt /\\ invariant_event p tt A /\\ x IN A\n    ==> ITER k tt x IN A
   (\\x:A. (g:A->real) x *\n    indicator_fn {x | x IN prob_carrier p /\\ (?n. ergodic_maxsum g tt n x > &0)} x) = g
   g:A->real
   tt:A->A
@@ -84721,16 +84721,16 @@ Probability/ergodic quotations (2129):
   n:num
   n:num
   y:A
-  !x:A. x IN A ==> (?n. sum (0..n) (\\k. (f:A->real) (ITER k tt x)) > &0)
+  forall x:A. x IN A ==> (?n. sum (0..n) (\\k. (f:A->real) (ITER k tt x)) > &0)
   A:A->bool
   p:A prob_space
   ~((y:A) IN prob_carrier p /\\ (?n. ergodic_maxsum (g:A->real) tt n y > &0))
   ~((y:A) IN A)
   y:A
-  !y:A. (g:A->real) y *\n    indicator_fn {x:A | x IN prob_carrier p /\\ (?n. ergodic_maxsum g tt n x > &0)} y = g y
+  forall y:A. (g:A->real) y *\n    indicator_fn {x:A | x IN prob_carrier p /\\ (?n. ergodic_maxsum g tt n x > &0)} y = g y
   integrable (p:A prob_space) (g:A->real)
   g = \\x:A. (f:A->real) x * indicator_fn (A:A->bool) x
-  !p:A prob_space tt f (A:A->bool).\n    measure_preserving p tt /\\ integrable p f /\\\n    A IN prob_events p /\\ invariant_event p tt A /\\\n    (!x. x IN A ==> ?n. sum(0..n) (\\k. f(ITER k tt x)) > &0)\n    ==> &0 <= expectation p (\\x. f x * indicator_fn A x)
+  forall p:A prob_space tt f (A:A->bool).\n    measure_preserving p tt /\\ integrable p f /\\\n    A IN prob_events p /\\ invariant_event p tt A /\\\n    (forall x. x IN A ==> ?n. sum(0..n) (\\k. f(ITER k tt x)) > &0)\n    ==> &0 <= expectation p (\\x. f x * indicator_fn A x)
   0
   (s:num->real) 0
   0
@@ -84743,7 +84743,7 @@ Probability/ergodic quotations (2129):
   sup {(s:num->real) k | k >= 0}
   p ==> q <=> ~q ==> ~p
   (p /\\ q /\\ r ==> s) <=> (p /\\ q ==> r ==> s)
-  !s:num->real b c B. (!n. c <= s n) /\\ (!n. s n <= B) /\\\n    real_limsup s > b ==> ?n. s n > b
+  forall s:num->real b c B. (forall n. c <= s n) /\\ (forall n. s n <= B) /\\\n    real_limsup s > b ==> ?n. s n > b
   n:num
   c:real
   (s:num->real) n
@@ -84756,7 +84756,7 @@ Probability/ergodic quotations (2129):
   {inf {(s:num->real) k | k >= n} | n IN (:num)}
   p ==> q <=> ~q ==> ~p
   (p /\\ q /\\ r ==> s) <=> (p /\\ q ==> r ==> s)
-  !s:num->real a c B. (!n. c <= s n) /\\ (!n. s n <= B) /\\\n    real_liminf s < a ==> ?n. s n < a
+  forall s:num->real a c B. (forall n. c <= s n) /\\ (forall n. s n <= B) /\\\n    real_liminf s < a ==> ?n. s n < a
   &(SUC n)
   inv(&(SUC n)) * S
   b:real
@@ -84764,7 +84764,7 @@ Probability/ergodic quotations (2129):
   ~(&(SUC n) = &0)
   &0 < &(SUC n)
   S = sum(0..n) (\\k. (f:A->real)(ITER k tt x))
-  !f:A->real tt (x:A) b n.\n    inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) > b\n    ==> sum(0..n) (\\k. f(ITER k tt x) - b) > &0
+  forall f:A->real tt (x:A) b n.\n    inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) > b\n    ==> sum(0..n) (\\k. f(ITER k tt x) - b) > &0
   &(SUC n)
   a:real
   inv(&(SUC n)) * S
@@ -84772,7 +84772,7 @@ Probability/ergodic quotations (2129):
   ~(&(SUC n) = &0)
   &0 < &(SUC n)
   S = sum(0..n) (\\k. (f:A->real)(ITER k tt x))
-  !f:A->real tt (x:A) a n.\n    inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) < a\n    ==> sum(0..n) (\\k. a - f(ITER k tt x)) > &0
+  forall f:A->real tt (x:A) a n.\n    inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) < a\n    ==> sum(0..n) (\\k. a - f(ITER k tt x)) > &0
   i:num
   sum(0..n) (\\k:num. C:real)
   sum(0..n) (\\k. abs((f:A->real)(ITER k tt x)))
@@ -84780,16 +84780,16 @@ Probability/ergodic quotations (2129):
   ~(&(SUC n) = &0)
   x:A
   measure_preserving (p:A prob_space) (ITER k tt)
-  !k:num. ITER k (tt:A->A) x IN prob_carrier p
-  !p:A prob_space tt f C n x.\n    measure_preserving p tt /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    x IN prob_carrier p\n    ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) <= C
+  forall k:num. ITER k (tt:A->A) x IN prob_carrier p
+  forall p:A prob_space tt f C n x.\n    measure_preserving p tt /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    x IN prob_carrier p\n    ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) <= C
   n:num
   n:num
   x:A
   1
   k:num
   tt:A->A
-  !k. (f:A->real)(ITER k tt (tt x)) = f(ITER (SUC k) tt x)
-  !f:A->real tt (x:A) n.\n   inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x))) -\n   inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) =\n   inv(&(SUC n)) * (f(ITER (SUC n) tt x) - f(x))
+  forall k. (f:A->real)(ITER k tt (tt x)) = f(ITER (SUC k) tt x)
+  forall f:A->real tt (x:A) n.\n   inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x))) -\n   inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) =\n   inv(&(SUC n)) * (f(ITER (SUC n) tt x) - f(x))
   {x:A | x IN prob_carrier p /\\\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))) < a /\\\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > b} =\n    {x | x IN prob_carrier p /\\\n      real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) < a} INTER\n    {x | x IN prob_carrier p /\\\n      real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > b}
   x:A
   n:num
@@ -84842,7 +84842,7 @@ Probability/ergodic quotations (2129):
   \\n (x:A). inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
   p:A prob_space
   random_variable (p:A prob_space)\n    (\\x. real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))))
-  !p:A prob_space tt f a b C.\n    measure_preserving p tt /\\ integrable p f /\\ a < b /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> {x | x IN prob_carrier p /\\\n                    real_liminf (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n                    real_limsup (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) > b} IN prob_events p
+  forall p:A prob_space tt f a b C.\n    measure_preserving p tt /\\ integrable p f /\\ a < b /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> {x | x IN prob_carrier p /\\\n                    real_liminf (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n                    real_limsup (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) > b} IN prob_events p
   0 < m ==> ~(m = 0)
   &m * c * inv(&m) = c
   &m
@@ -84857,10 +84857,10 @@ Probability/ergodic quotations (2129):
   &0 < c
   0
   c = &0
-  !c eps. &0 <= c /\\ &0 < eps ==> ?N. c * inv(&(SUC N)) < eps
+  forall c eps. &0 <= c /\\ &0 < eps ==> ?N. c * inv(&(SUC N)) < eps
   inft:real = inf {(t:num->real) k | k >= N}
   c * inv(&(SUC k)) <= c * inv(&(SUC N))
-  !n. abs((s:num->real) n - t n) <= c * inv(&(SUC n))
+  forall n. abs((s:num->real) n - t n) <= c * inv(&(SUC n))
   k:num
   k:num
   lb:real
@@ -84869,7 +84869,7 @@ Probability/ergodic quotations (2129):
   inf {(t:num->real) k | k >= N} <= t k
   k:num
   y:real
-  !s t lb ub c N.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> inf {t k | k >= N} - c * inv(&(SUC N)) <= inf {s k | k >= N}
+  forall s t lb ub c N.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> inf {t k | k >= N} - c * inv(&(SUC N)) <= inf {s k | k >= N}
   k:num
   lb:real
   (s:num->real) k
@@ -84878,23 +84878,23 @@ Probability/ergodic quotations (2129):
   s:real->bool
   {(s:num->real) k | k >= N}
   inf {(s:num->real) k | k >= M}
-  !s lb ub M N. (!n. lb <= s n) /\\ (!n. s n <= ub) /\\ M <= N\n  ==> inf {s k | k >= M} <= inf {(s:num->real) k | k >= N}
+  forall s lb ub M N. (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\ M <= N\n  ==> inf {s k | k >= M} <= inf {(s:num->real) k | k >= N}
   k:num
   ub:real
   (t:num->real) k
   {(t:num->real) k | k >= N}
   (t:num->real) k <= S'
   b <= d ==> abs(a - c) <= b ==> a <= c + d
-  !n. abs((s:num->real) n - t n) <= c * inv(&(SUC n))
+  forall n. abs((s:num->real) n - t n) <= c * inv(&(SUC n))
   k:num
   (s:num->real) k <= t k + c * inv(&(SUC N))
   k:num
   y:real
   S' = sup {(t:num->real) k | k >= N}
-  !s t lb ub c N.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> sup {s k | k >= N} <= sup {t k | k >= N} + c * inv(&(SUC N))
+  forall s t lb ub c N.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> sup {s k | k >= N} <= sup {t k | k >= N} + c * inv(&(SUC N))
   ub:real
   k:num
-  !s lb ub M N. (!n. lb <= s n) /\\ (!n. s n <= ub) /\\ M <= N\n  ==> sup {s k | k >= N} <= sup {(s:num->real) k | k >= M}
+  forall s lb ub M N. (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\ M <= N\n  ==> sup {s k | k >= N} <= sup {(s:num->real) k | k >= M}
   N:num
   ub:real
   lb:real
@@ -84902,7 +84902,7 @@ Probability/ergodic quotations (2129):
   m:num
   y:real
   lb:real
-  !s lb ub N. (!n. lb <= s n) /\\ (!n. s n <= ub)\n  ==> real_limsup s <= sup {(s:num->real) k | k >= N}
+  forall s lb ub N. (forall n. lb <= s n) /\\ (forall n. s n <= ub)\n  ==> real_limsup s <= sup {(s:num->real) k | k >= N}
   m:num
   lb:real
   (s:num->real) m
@@ -84941,7 +84941,7 @@ Probability/ergodic quotations (2129):
   eps:real
   c:real
   eps:real
-  !s t lb ub c.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_liminf t <= real_liminf s
+  forall s t lb ub c.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_liminf t <= real_liminf s
   c:real
   ub:real
   lb:real
@@ -84950,7 +84950,7 @@ Probability/ergodic quotations (2129):
   ub:real
   lb:real
   a <= b /\\ b <= a ==> a = b
-  !s t lb ub c.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_liminf s = real_liminf t
+  forall s t lb ub c.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_liminf s = real_liminf t
   d0 = c * inv(&(SUC N0))
   d = c * inv(&(SUC N))
   st1 = sup {(t:num->real) k | k >= N1}
@@ -84988,12 +84988,12 @@ Probability/ergodic quotations (2129):
   ub:real
   lb:real
   {(t:num->real) k | k >= m}
-  !m. lb <= sup {(t:num->real) k | k >= m}
+  forall m. lb <= sup {(t:num->real) k | k >= m}
   N0:num
   eps / &2
   c:real
   eps:real
-  !s t lb ub c.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_limsup s <= real_limsup t
+  forall s t lb ub c.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_limsup s <= real_limsup t
   abs(a - b) <= c ==> abs(b - a) <= c
   c:real
   ub:real
@@ -85002,7 +85002,7 @@ Probability/ergodic quotations (2129):
   ub:real
   lb:real
   a <= b /\\ b <= a ==> a = b
-  !s t lb ub c.\n  (!n. lb <= s n) /\\ (!n. s n <= ub) /\\\n  (!n. lb <= t n) /\\ (!n. t n <= ub) /\\\n  (!n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_limsup s = real_limsup t
+  forall s t lb ub c.\n  (forall n. lb <= s n) /\\ (forall n. s n <= ub) /\\\n  (forall n. lb <= t n) /\\ (forall n. t n <= ub) /\\\n  (forall n. abs(s n - t n) <= c * inv(&(SUC n))) /\\ &0 <= c\n  ==> real_limsup s = real_limsup t
   measure_preserving (p:A prob_space) tt
   SUC n
   ITER (SUC n) (tt:A->A) x IN prob_carrier p
@@ -85012,7 +85012,7 @@ Probability/ergodic quotations (2129):
   x:A
   tt:A->A
   f:A->real
-  !p:A prob_space tt f C x n. measure_preserving p tt /\\\n  (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C /\\\n  x IN prob_carrier p\n  ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x))) -\n          inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) <=\n      (&2 * C) * inv(&(SUC n))
+  forall p:A prob_space tt f C x n. measure_preserving p tt /\\\n  (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C /\\\n  x IN prob_carrier p\n  ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x))) -\n          inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) <=\n      (&2 * C) * inv(&(SUC n))
   n:num
   x:A
   C:real
@@ -85083,7 +85083,7 @@ Probability/ergodic quotations (2129):
   --C:real
   \\n:num. inv(&(SUC n)) * sum(0..n)\n     (\\k. (f:A->real)(ITER k (tt:A->A) (x:A)))
   \\n:num. inv(&(SUC n)) * sum(0..n)\n     (\\k. (f:A->real)(ITER k (tt:A->A) (tt (x:A))))
-  !p:A prob_space tt f C. measure_preserving p tt /\\\n  (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C\n  ==> !x. x IN prob_carrier p ==>\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) =\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
+  forall p:A prob_space tt f C. measure_preserving p tt /\\\n  (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C\n  ==> forall x. x IN prob_carrier p ==>\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) =\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
   n:num
   x:A
   C:real
@@ -85154,7 +85154,7 @@ Probability/ergodic quotations (2129):
   --C:real
   \\n:num. inv(&(SUC n)) * sum(0..n)\n     (\\k. (f:A->real)(ITER k (tt:A->A) (tt (x:A))))
   \\n:num. inv(&(SUC n)) * sum(0..n)\n     (\\k. (f:A->real)(ITER k (tt:A->A) (x:A)))
-  !p:A prob_space tt f C. measure_preserving p tt /\\\n  (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C\n  ==> !x. x IN prob_carrier p ==>\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) =\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
+  forall p:A prob_space tt f C. measure_preserving p tt /\\\n  (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\ &0 <= C\n  ==> forall x. x IN prob_carrier p ==>\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) =\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))
   x:A
   C:real
   f:A->real
@@ -85181,7 +85181,7 @@ Probability/ergodic quotations (2129):
   z:A
   p:A prob_space
   &0 <= C
-  !p:A prob_space tt f C a b.\n  measure_preserving p tt /\\ integrable p f /\\\n  (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\ a < b\n  ==> invariant_event p tt {x | x IN prob_carrier p /\\\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > b}
+  forall p:A prob_space tt f C a b.\n  measure_preserving p tt /\\ integrable p f /\\\n  (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\ a < b\n  ==> invariant_event p tt {x | x IN prob_carrier p /\\\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > b}
   x * y < &0 <=> &0 < (--x) * y
   (a - b) * prob (p:A prob_space) O_ab < &0
   &0 < prob (p:A prob_space) O_ab
@@ -85225,12 +85225,12 @@ Probability/ergodic quotations (2129):
   \\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
   n:num
   x:A
-  !n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) <= C
+  forall n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) <= C
   n:num
   x:A
-  !n. --(C:real) <= inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
+  forall n. --(C:real) <= inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
   x:A
-  !x:A. x IN O_ab ==>\n    ?n. sum(0..n) (\\k. (a - (f:A->real)(ITER k tt x))) > &0
+  forall x:A. x IN O_ab ==>\n    ?n. sum(0..n) (\\k. (a - (f:A->real)(ITER k tt x))) > &0
   m:num
   m:num
   C:real
@@ -85239,50 +85239,50 @@ Probability/ergodic quotations (2129):
   \\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
   n:num
   x:A
-  !n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) <= C
+  forall n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) <= C
   n:num
   x:A
-  !n. --(C:real) <= inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
+  forall n. --(C:real) <= inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))
   x:A
-  !x:A. x IN O_ab ==>\n    ?n. sum(0..n) (\\k. ((f:A->real)(ITER k tt x) - b)) > &0
+  forall x:A. x IN O_ab ==>\n    ?n. sum(0..n) (\\k. ((f:A->real)(ITER k tt x) - b)) > &0
   inv(&(SUC n)) * (&(SUC n) * C)
   sum(0..n) (\\k. abs((f:A->real)(ITER k tt x)))
   sum(0..n) (\\k:num. C:real)
   abs(sum(0..n) (\\k. (f:A->real)(ITER k tt x))) <= &(SUC n) * C
   ~(&(SUC n) = &0)
-  !k:num. abs((f:A->real)(ITER k tt x)) <= C
+  forall k:num. abs((f:A->real)(ITER k tt x)) <= C
   x:A
   measure_preserving (p:A prob_space) tt
   k:num
-  !k:num. ITER k (tt:A->A) x IN prob_carrier p
-  !x:A n. x IN prob_carrier p ==>\n    abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))) <= C
+  forall k:num. ITER k (tt:A->A) x IN prob_carrier p
+  forall x:A n. x IN prob_carrier p ==>\n    abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))) <= C
   C:real
   invariant_event (p:A prob_space) (tt:A->A) (O_ab:A->bool)
   C:real
   (O_ab:A->bool) IN prob_events p
   O_ab = {x:A | x IN prob_carrier p /\\\n    real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))) < a /\\\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > b}
-  !p:A prob_space tt f a b C.\n    measure_preserving p tt /\\ integrable p f /\\ a < b /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> prob p {x | x IN prob_carrier p /\\\n                    real_liminf (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n                    real_limsup (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) > b} = &0
+  forall p:A prob_space tt f a b C.\n    measure_preserving p tt /\\ integrable p f /\\ a < b /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> prob p {x | x IN prob_carrier p /\\\n                    real_liminf (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) < a /\\\n                    real_limsup (\\n. inv(&(SUC n)) *\n                      sum(0..n) (\\k. f(ITER k tt x))) > b} = &0
   sup {(s:num->real) k | k >= q}
   sup {(s:num->real) k | k >= N1}
   (s:num->real) q < L + e
   inf {(s:num->real) k | k >= N2}
   inf {(s:num->real) k | k >= q}
   L - e < (s:num->real) q
-  !m n:num. m <= n ==> inf {(s:num->real) k | k >= m} <= inf {s k | k >= n}
+  forall m n:num. m <= n ==> inf {(s:num->real) k | k >= m} <= inf {s k | k >= n}
   q:num
   N2:num
   inf {(s:num->real) k | k >= N2} <= inf {s k | k >= q}
-  !m n:num. m <= n ==> sup {(s:num->real) k | k >= n} <= sup {s k | k >= m}
+  forall m n:num. m <= n ==> sup {(s:num->real) k | k >= n} <= sup {s k | k >= m}
   q:num
   N1:num
   sup {(s:num->real) k | k >= q} <= sup {s k | k >= N1}
   N1 <= q /\\ N2 <= (q:num)
   q:num
   MAX N1 N2
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   p:num
   p:num
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   --C:real
   (s:num->real) p
@@ -85297,10 +85297,10 @@ Probability/ergodic quotations (2129):
   {inf {(s:num->real) k | k >= n} | n IN (:num)}
   ?N2:num. L - e < inf {(s:num->real) k | k >= N2}
   p:num
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   C:real
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   p:num
   (s:num->real) p
   p:num
@@ -85312,34 +85312,34 @@ Probability/ergodic quotations (2129):
   L + e:real
   {sup {(s:num->real) k | k >= n} | n IN (:num)}
   ?N1:num. sup {(s:num->real) k | k >= N1} < L + e
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   --C:real
   k:num
   n:num
   (s:num->real) n
-  !m n:num. m <= n ==> inf {(s:num->real) k | k >= m} <= inf {s k | k >= n}
-  !n. abs((s:num->real) n) <= C
+  forall m n:num. m <= n ==> inf {(s:num->real) k | k >= m} <= inf {s k | k >= n}
+  forall n. abs((s:num->real) n) <= C
   k:num
   C:real
   k:num
   n:num
   (s:num->real) n
-  !m n:num. m <= n ==> sup {(s:num->real) k | k >= n} <= sup {s k | k >= m}
+  forall m n:num. m <= n ==> sup {(s:num->real) k | k >= n} <= sup {s k | k >= m}
   n:num
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   --C:real
-  !n:num. inf {(s:num->real) k | k >= n} <= s n
+  forall n:num. inf {(s:num->real) k | k >= n} <= s n
   n:num
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   C:real
-  !n:num. (s:num->real) n <= sup {s k | k >= n}
+  forall n:num. (s:num->real) n <= sup {s k | k >= n}
   L = real_limsup s
   e:real
-  !s:num->real C.\n    (!n. abs(s n) <= C) /\\ real_limsup s = real_liminf s\n    ==> (s ---> real_limsup s) sequentially
-  !n. abs((s:num->real) n) <= C
+  forall s:num->real C.\n    (forall n. abs(s n) <= C) /\\ real_limsup s = real_liminf s\n    ==> (s ---> real_limsup s) sequentially
+  forall n. abs((s:num->real) n) <= C
   k:num
   MAX m p
   (s:num->real)(MAX m p)
@@ -85347,7 +85347,7 @@ Probability/ergodic quotations (2129):
   (s:num->real)(MAX m p)
   {(s:num->real) k | k >= p}
   MAX m p
-  !n. abs((s:num->real) n) <= C
+  forall n. abs((s:num->real) n) <= C
   k:num
   --C:real
   (s:num->real)(MAX m p)
@@ -85355,7 +85355,7 @@ Probability/ergodic quotations (2129):
   y:real
   m:num
   x:real
-  !s:num->real C. (!n. abs(s n) <= C)\n   ==> real_liminf s <= real_limsup s
+  forall s:num->real C. (forall n. abs(s n) <= C)\n   ==> real_liminf s <= real_limsup s
   nn:num
   {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) < FST((g:num->real#real) nn) /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. f(ITER k tt x))) > SND(g nn)}
   q2:real
@@ -85381,12 +85381,12 @@ Probability/ergodic quotations (2129):
   sum(0..n) (\\k:num. C:real)
   abs(sum(0..n) (\\k. (f:A->real)(ITER k tt x))) <= &(SUC n) * C
   ~(&(SUC n) = &0)
-  !k:num. abs((f:A->real)(ITER k tt x)) <= C
+  forall k:num. abs((f:A->real)(ITER k tt x)) <= C
   x:A
   measure_preserving (p:A prob_space) tt
   k:num
-  !k:num. ITER k (tt:A->A) x IN prob_carrier p
-  !n:num. abs((s:num->real) n) <= C
+  forall k:num. ITER k (tt:A->A) x IN prob_carrier p
+  forall n:num. abs((s:num->real) n) <= C
   s = (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x)))
   x:A
   C:real
@@ -85401,7 +85401,7 @@ Probability/ergodic quotations (2129):
   (g:num->real#real) n
   {a:real,b | rational a /\\ rational b /\\ a < b} =\n      IMAGE (g:num->real#real) (:num)
   (g:num->real#real) n IN\n     {(a,b) | rational a /\\ rational b /\\ a < b}
-  !n:num. rational(FST((g:num->real#real) n)) /\\\n    rational(SND(g n)) /\\ FST(g n) < SND(g n)
+  forall n:num. rational(FST((g:num->real#real) n)) /\\\n    rational(SND(g n)) /\\ FST(g n) < SND(g n)
   ?g:num->real#real.\n    {(a,b) | rational a /\\ rational b /\\ a < b} = IMAGE g (:num)
   &1
   &0
@@ -85410,7 +85410,7 @@ Probability/ergodic quotations (2129):
   rational CROSS (rational:real->bool)
   COUNTABLE {(a:real,b:real) | rational a /\\ rational b /\\ a < b} /\\\n    ~({(a:real,b:real) | rational a /\\ rational b /\\ a < b} = {})
   {x:A | x IN prob_carrier p /\\\n     ~(x IN {x | ?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x))) ---> L) sequentially})} =\n   {x | x IN prob_carrier p /\\\n     ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) ---> L) sequentially)}
-  !p:A prob_space tt f C.\n    measure_preserving p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> almost_surely p\n          {x | ?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                    ---> L) sequentially}
+  forall p:A prob_space tt f C.\n    measure_preserving p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> almost_surely p\n          {x | ?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                    ---> L) sequentially}
   inv lam * expectation (p:A prob_space) (f:A->real) =\n    expectation p f / lam
   &0 <= expectation (p:A prob_space) (f:A->real)
   &0 <= prob (p:A prob_space) A
@@ -85436,10 +85436,10 @@ Probability/ergodic quotations (2129):
   (A:A->bool) IN prob_events p
   A = {x:A | x IN prob_carrier p /\\\n    (?n. ergodic_maxsum (\\x. (f:A->real) x - lam) tt n x > &0)}
   integrable (p:A prob_space) (\\x. (f:A->real) x - lam)
-  !p:A prob_space tt (f:A->real) lam.\n    measure_preserving p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\ &0 < lam\n    ==> prob p {x | x IN prob_carrier p /\\\n          (?n. ergodic_maxsum (\\x. f x - lam) tt n x > &0)}\n        <= inv(lam) * expectation p f
+  forall p:A prob_space tt (f:A->real) lam.\n    measure_preserving p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\ &0 < lam\n    ==> prob p {x | x IN prob_carrier p /\\\n          (?n. ergodic_maxsum (\\x. f x - lam) tt n x > &0)}\n        <= inv(lam) * expectation p f
   (\\x:A. max (-- &M) (min (&M) ((f:A->real) x))) =\n    (\\x. max ((\\x. -- &M) x) (min ((\\x. &M) x) (f x)))
-  !p:A prob_space (f:A->real) M.\n    integrable p f ==> integrable p (\\x. max (-- &M) (min (&M) (f x)))
-  !f:A->real x M. abs(f x - max (-- &M) (min (&M) (f x))) <= abs(f x)
+  forall p:A prob_space (f:A->real) M.\n    integrable p f ==> integrable p (\\x. max (-- &M) (min (&M) (f x)))
+  forall f:A->real x M. abs(f x - max (-- &M) (min (&M) (f x))) <= abs(f x)
   max (-- &M) (min (&M) ((f:A->real) x)) = f x
   &N:real
   abs((f:A->real) x) <= &M
@@ -85448,7 +85448,7 @@ Probability/ergodic quotations (2129):
   N:num
   abs((f:A->real) x)
   e:real
-  !f:A->real x. ((\\M. f x - max(-- &M) (min (&M) (f x))) ---> &0) sequentially
+  forall f:A->real x. ((\\M. f x - max(-- &M) (min (&M) (f x))) ---> &0) sequentially
   expectation (p:A prob_space) (\\x:A. &0) = &0
   &0
   \\M:num. (f:A->real) x - max(-- &M) (min (&M) (f x))
@@ -85458,7 +85458,7 @@ Probability/ergodic quotations (2129):
   \\x:A. &0:real
   \\M (x:A). abs((f:A->real) x - max (-- &M) (min (&M) (f x)))
   p:A prob_space
-  !p:A prob_space (f:A->real).\n    integrable p f\n    ==> ((\\M. expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x)))))\n         ---> &0) sequentially
+  forall p:A prob_space (f:A->real).\n    integrable p f\n    ==> ((\\M. expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x)))))\n         ---> &0) sequentially
   &(SUC q) * lam < sum (0..q) (\\j. abs ((f:A->real) (ITER j tt x)))
   sum(0..q) (\\j. (\\y:A. abs((f:A->real) y) - lam)(ITER j tt x))
   &(SUC q) * (inv(&(SUC q)) * sum(0..q) (\\j. abs((f:A->real)(ITER j tt x)))) =\n     sum(0..q) (\\j. abs(f(ITER j tt x)))
@@ -85469,7 +85469,7 @@ Probability/ergodic quotations (2129):
   &(SUC q) * lam < sum(0..q) (\\j. abs((f:A->real)(ITER j tt x)))
   ~(&(SUC q) = &0)
   &0 < &(SUC q)
-  !f:A->real tt x q lam.\n    inv(&(SUC q)) * sum(0..q) (\\j. abs(f(ITER j tt x))) > lam /\\ &0 < lam\n    ==> ergodic_maxsum (\\y. abs(f y) - lam) tt q x > &0
+  forall f:A->real tt x q lam.\n    inv(&(SUC q)) * sum(0..q) (\\j. abs(f(ITER j tt x))) > lam /\\ &0 < lam\n    ==> ergodic_maxsum (\\y. abs(f y) - lam) tt q x > &0
   \\x:A. (f:A->real) x - max (-- &(M:num))(min (&M)(f x))
   n:num
   \\x:A. (f:A->real) x - max (-- &(M:num))(min (&M)(f x))
@@ -85483,18 +85483,18 @@ Probability/ergodic quotations (2129):
   ~(&k = &0)
   abs(inv(&(SUC m)) * sum(0..m) (\\j. max (-- &(M:num))(min (&M)((f:A->real)(ITER j tt x)))) - L) +\n      abs(L - inv(&(SUC n)) * sum(0..n) (\\j. max (-- &M)(min (&M)(f(ITER j tt x))))) +\n      abs(inv(&(SUC m)) * sum(0..m) (\\j. f(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x))))) +\n      abs(inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x)))))
   abs(inv(&(SUC m)) * sum(0..m) (\\j. (f:A->real)(ITER j tt x)) -\n      inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x))) > inv(&k)
-  !q. inv(&(SUC q)) * sum(0..q) (\\j. (f:A->real)(ITER j tt x)) =\n      inv(&(SUC q)) * sum(0..q) (\\j. max (-- &(M:num))(min (&M)(f(ITER j tt x)))) +\n      inv(&(SUC q)) * sum(0..q) (\\j. f(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x))))
+  forall q. inv(&(SUC q)) * sum(0..q) (\\j. (f:A->real)(ITER j tt x)) =\n      inv(&(SUC q)) * sum(0..q) (\\j. max (-- &(M:num))(min (&M)(f(ITER j tt x)))) +\n      inv(&(SUC q)) * sum(0..q) (\\j. f(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x))))
   inv(&(SUC n)) * sum(0..n) (\\j. abs((f:A->real)(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x)))))
   abs(inv(&(SUC n)) * sum(0..n) (\\j. (f:A->real)(ITER j tt x) - max (-- &(M:num))(min (&M)(f(ITER j tt x))))) <= inv(&(4 * k))
   inv(&(SUC m)) * sum(0..m) (\\j. abs((f:A->real)(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x)))))
   abs(inv(&(SUC m)) * sum(0..m) (\\j. (f:A->real)(ITER j tt x) - max (-- &(M:num))(min (&M)(f(ITER j tt x))))) <= inv(&(4 * k))
   (~p /\\ ~q ==> F) ==> p \\/ q
   inv(&(SUC m)) * sum(0..m) (\\j. abs((f:A->real)(ITER j tt x) - max (-- &(M:num))(min (&M)(f(ITER j tt x))))) > inv(&(4 * k)) \\/\n     inv(&(SUC n)) * sum(0..n) (\\j. abs((f:A->real)(ITER j tt x) - max (-- &M)(min (&M)(f(ITER j tt x))))) > inv(&(4 * k))
-  !n. N0 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\j. max (-- &(M:num)) (min (&M) ((f:A->real)(ITER j tt x)))) - L) < inv(&(4 * k))
+  forall n. N0 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\j. max (-- &(M:num)) (min (&M) ((f:A->real)(ITER j tt x)))) - L) < inv(&(4 * k))
   abs(inv(&(SUC n)) * sum(0..n) (\\j. max (-- &(M:num)) (min (&M) ((f:A->real)(ITER j tt x)))) - L) < inv(&(4 * k))
   abs(inv(&(SUC m)) * sum(0..m) (\\j. max (-- &(M:num)) (min (&M) ((f:A->real)(ITER j tt x)))) - L) < inv(&(4 * k))
   N0:num
-  !N. ?m n. N <= m /\\ N <= n /\\\n     abs(inv(&(SUC m)) * sum(0..m) (\\j. (f:A->real)(ITER j tt x)) -\n         inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x))) > inv(&k)
+  forall N. ?m n. N <= m /\\ N <= n /\\\n     abs(inv(&(SUC m)) * sum(0..m) (\\j. (f:A->real)(ITER j tt x)) -\n         inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x))) > inv(&k)
   N0:num
   ~(k = 0)
   inv(&(4 * k))
@@ -85502,7 +85502,7 @@ Probability/ergodic quotations (2129):
   L:real
   ?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n    (\\j. max (-- &(M:num)) (min (&M) ((f:A->real)(ITER j tt x))))) ---> L) sequentially
   x:A
-  !p:A prob_space tt (f:A->real) M k.\n    measure_preserving p tt /\\ integrable p f /\\ ~(k = 0)\n    ==> {x | x IN prob_carrier p /\\\n             (!N. ?m n. N <= m /\\ N <= n /\\\n               abs(inv(&(SUC m)) * sum(0..m) (\\j. f(ITER j tt x)) -\n                   inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x))) > inv(&k))}\n        SUBSET\n        {x | x IN prob_carrier p /\\\n             ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n               (\\j. max (-- &M) (min (&M) (f(ITER j tt x))))) ---> L) sequentially)}\n        UNION\n        {x | x IN prob_carrier p /\\\n             (?n. ergodic_maxsum\n               (\\x. abs(f x - max (-- &M) (min (&M) (f x))) - inv(&(4 * k)))\n               tt n x > &0)}
+  forall p:A prob_space tt (f:A->real) M k.\n    measure_preserving p tt /\\ integrable p f /\\ ~(k = 0)\n    ==> {x | x IN prob_carrier p /\\\n             (forall N. ?m n. N <= m /\\ N <= n /\\\n               abs(inv(&(SUC m)) * sum(0..m) (\\j. f(ITER j tt x)) -\n                   inv(&(SUC n)) * sum(0..n) (\\j. f(ITER j tt x))) > inv(&k))}\n        SUBSET\n        {x | x IN prob_carrier p /\\\n             ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n               (\\j. max (-- &M) (min (&M) (f(ITER j tt x))))) ---> L) sequentially)}\n        UNION\n        {x | x IN prob_carrier p /\\\n             (?n. ergodic_maxsum\n               (\\x. abs(f x - max (-- &M) (min (&M) (f x))) - inv(&(4 * k)))\n               tt n x > &0)}
   (a <=> b) ==> (a ==> b)
   ((\\n. lift((s:num->real) n)) --> l:real^1) sequentially
   drop l
@@ -85521,9 +85521,9 @@ Probability/ergodic quotations (2129):
   e:real
   (cauchy:((num->real^1)->bool)) (\\n. lift(s n))
   (~q ==> ~p) ==> (p ==> q)
-  !s:num->real. ~(?L. (s ---> L) sequentially)\n    ==> ?k. !N. ?m n. N <= m /\\ N <= n /\\ abs(s m - s n) > inv(&(SUC k))
+  forall s:num->real. ~(?L. (s ---> L) sequentially)\n    ==> ?k. forall N. ?m n. N <= m /\\ N <= n /\\ abs(s m - s n) > inv(&(SUC k))
   M:num
-  !M:num. null_event (p:A prob_space) ((NM:num->A->bool) M) /\\\n     {x:A | x IN prob_carrier p /\\\n       ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n         (\\k. max (-- &M) (min (&M) ((f:A->real) (ITER k tt x))))) ---> L) sequentially)} SUBSET NM M
+  forall M:num. null_event (p:A prob_space) ((NM:num->A->bool) M) /\\\n     {x:A | x IN prob_carrier p /\\\n       ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n         (\\k. max (-- &M) (min (&M) ((f:A->real) (ITER k tt x))))) ---> L) sequentially)} SUBSET NM M
   x:A
   SUC k
   M:num
@@ -85552,13 +85552,13 @@ Probability/ergodic quotations (2129):
   &0 <= x /\\ x <= &0 ==> x = &0
   INTERS (IMAGE (\\M:num. (NM:num->A->bool) M UNION\n     {x:A | x IN prob_carrier p /\\\n       (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n         inv(&(4 * SUC k))) tt n x > &0)}) (:num)) IN prob_events (p:A prob_space)
   k:num
-  !k:num. null_event (p:A prob_space)\n    (INTERS (IMAGE (\\M:num. (NM:num->A->bool) M UNION\n      {x:A | x IN prob_carrier p /\\\n        (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n          inv(&(4 * SUC k))) tt n x > &0)}) (:num)))
-  !M:num k:num. (NM:num->A->bool) M UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
+  forall k:num. null_event (p:A prob_space)\n    (INTERS (IMAGE (\\M:num. (NM:num->A->bool) M UNION\n      {x:A | x IN prob_carrier p /\\\n        (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n          inv(&(4 * SUC k))) tt n x > &0)}) (:num)))
+  forall M:num k:num. (NM:num->A->bool) M UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
   4 * SUC k = SUC(4 * k + 3)
-  !M:num k:num. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)}\n    <= &(4 * SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
+  forall M:num k:num. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)}\n    <= &(4 * SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
   {x:A | x IN prob_carrier p /\\\n     (?n:num. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n       inv(&(4 * SUC k))) tt n x > &0)} =\n     UNIONS (IMAGE (\\n:num. {x:A | x IN prob_carrier p /\\\n       ergodic_maxsum (\\x. abs(f x - max (-- &M) (min (&M) (f x))) -\n         inv(&(4 * SUC k))) tt n x > &0}) (:num))
-  !M:num k:num.\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
-  !M:num k:num. integrable (p:A prob_space)\n    (\\x:A. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) - inv(&(4 * SUC k)))
+  forall M:num k:num.\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
+  forall M:num k:num. integrable (p:A prob_space)\n    (\\x:A. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) - inv(&(4 * SUC k)))
   NM:num->A->bool
   f:A->real
   p:A prob_space
@@ -85566,15 +85566,15 @@ Probability/ergodic quotations (2129):
   \\x:A. abs((f:A->real) x - max (-- &M) (min (&M) (f x)))
   tt:A->A
   p:A prob_space
-  !M k. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)}\n    <= &(SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
+  forall M k. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)}\n    <= &(SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
   N:A->bool
   N:A->bool
   &M:real
   \\x:A. max (-- &M) (min (&M) ((f:A->real) x))
   tt:A->A
   p:A prob_space
-  !M:num. ?NM:A->bool. null_event (p:A prob_space) NM /\\\n    {x:A | x IN prob_carrier p /\\\n      ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n        (\\k. max (-- &M) (min (&M) ((f:A->real)(ITER k tt x))))) ---> L) sequentially)}\n    SUBSET NM
-  !p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> almost_surely p\n          {x | ?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                    ---> L) sequentially}
+  forall M:num. ?NM:A->bool. null_event (p:A prob_space) NM /\\\n    {x:A | x IN prob_carrier p /\\\n      ~(?L. ((\\n. inv(&(SUC n)) * sum(0..n)\n        (\\k. max (-- &M) (min (&M) ((f:A->real)(ITER k tt x))))) ---> L) sequentially)}\n    SUBSET NM
+  forall p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f\n    ==> almost_surely p\n          {x | ?L. ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                    ---> L) sequentially}
   abs(inv(&(SUC n)) * (a - (f:A->real) x)) < e / &2
   abs(a - L) < e / &2
   abs(a - (f:A->real) x) < C
@@ -85596,10 +85596,10 @@ Probability/ergodic quotations (2129):
   abs(a - L) < &1
   abs(a - (f:A->real) x) < C
   SUC n
-  !n. N3 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - L) < &1
+  forall n. N3 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - L) < &1
   abs(a - L) < &1
   SUC n
-  !n. N1 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - L) < e / &2
+  forall n. N1 <= n ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - L) < e / &2
   abs(a - L) < e / &2
   a = inv(&(SUC(SUC n))) * sum(0..SUC n) (\\k. (f:A->real)(ITER k tt x))
   x:A
@@ -85620,7 +85620,7 @@ Probability/ergodic quotations (2129):
   e / &2
   ((\\n. inv (&(SUC n)) * sum (0..n) (\\k. (f:A->real) (ITER k tt x))) ---> L) sequentially
   e:real
-  !p:A prob_space tt f x L.\n    measure_preserving p tt /\\ integrable p f /\\\n    x IN prob_carrier p /\\\n    ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) ---> L)\n      sequentially\n    ==> ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) ---> L)\n          sequentially
+  forall p:A prob_space tt f x L.\n    measure_preserving p tt /\\ integrable p f /\\\n    x IN prob_carrier p /\\\n    ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) ---> L)\n      sequentially\n    ==> ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt (tt x)))) ---> L)\n          sequentially
   c > expectation (p:A prob_space) (f:A->real)
   &0 <= expectation (p:A prob_space) (\\x. ((f:A->real) x - c) * indicator_fn A x)
   expectation (p:A prob_space) (\\x. ((f:A->real) x - c) * indicator_fn A x) +\n    expectation p (\\x. (f x - c) * indicator_fn (prob_carrier p DIFF A) x) =\n    expectation p f - c
@@ -85708,13 +85708,13 @@ Probability/ergodic quotations (2129):
   &0 <= C
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space tt f C c.\n    ergodic p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    c > expectation p f\n    ==> prob p {x | x IN prob_carrier p /\\\n      real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > c} = &0
+  forall p:A prob_space tt f C c.\n    ergodic p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    c > expectation p f\n    ==> prob p {x | x IN prob_carrier p /\\\n      real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) > c} = &0
   --sup {inf {(f:num->real) k | k >= n} | n IN (:num)}
   p:num
-  !n. abs((f:num->real) n) <= C
+  forall n. abs((f:num->real) n) <= C
   q:num
   q:num
-  !n. abs((f:num->real) n) <= C
+  forall n. abs((f:num->real) n) <= C
   r:num
   r:num
   w:real
@@ -85726,7 +85726,7 @@ Probability/ergodic quotations (2129):
   inf {(f:num->real) k | k >= p} <=\n     sup {inf {f k | k >= n} | n IN (:num)}
   p:num
   y:real
-  !a c. c <= --a ==> a <= --c
+  forall a c. c <= --a ==> a <= --c
   p:num
   --(inf {(f:num->real) k | k >= p})
   p:num
@@ -85747,7 +85747,7 @@ Probability/ergodic quotations (2129):
   inf {(f:num->real) k | k >= m} <= f j
   j:num
   y:real
-  !a c. --c <= a ==> --a <= c
+  forall a c. --c <= a ==> --a <= c
   j:num
   --((f:num->real) j)
   j:num
@@ -85756,8 +85756,8 @@ Probability/ergodic quotations (2129):
   (f:num->real) m
   --c <= inf {(f:num->real) k | k >= m}
   c:real
-  !m:num. sup {--((f:num->real) k) | k >= m} = --(inf {f k | k >= m})
-  !(f:num->real) C. (!n. abs(f n) <= C)\n   ==> real_limsup (\\n. --(f n)) = --(real_liminf f)
+  forall m:num. sup {--((f:num->real) k) | k >= m} = --(inf {f k | k >= m})
+  forall(f:num->real) C. (forall n. abs(f n) <= C)\n   ==> real_limsup (\\n. --(f n)) = --(real_liminf f)
   ergodic (p:A prob_space) (tt:A->A)
   x:A
   nn:num
@@ -85780,7 +85780,7 @@ Probability/ergodic quotations (2129):
   tt:A->A
   p:A prob_space
   prob (p:A prob_space) {x | x IN prob_carrier p /\\\n    real_limsup (\\n. inv(&(SUC n)) * sum(0..n) (\\k. --((f:A->real)(ITER k tt x)))) > --c} = &0
-  !p:A prob_space tt f C c.\n    ergodic p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    c < expectation p f\n    ==> prob p {x | x IN prob_carrier p /\\\n      real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) < c} = &0
+  forall p:A prob_space tt f C c.\n    ergodic p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C) /\\\n    c < expectation p f\n    ==> prob p {x | x IN prob_carrier p /\\\n      real_liminf (\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x))) < c} = &0
   inv(&k) < E - real_liminf (s:num->real)
   ~(k = 0)
   inv(&(SUC k)) <= inv(&k:real)
@@ -85820,15 +85820,15 @@ Probability/ergodic quotations (2129):
   f:A->real
   tt:A->A
   p:A prob_space
-  !m. abs(inv(&(SUC m)) * sum(0..m)\n    (\\k. (f:A->real)(ITER k tt x))) <= C
+  forall m. abs(inv(&(SUC m)) * sum(0..m)\n    (\\k. (f:A->real)(ITER k tt x))) <= C
   x:A
   UNIONS {(\\n. {x:A | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) >\n      E + inv(&(SUC n))}) n | n IN (:num)}\n    UNION\n    UNIONS {(\\n. {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) <\n      E - inv(&(SUC n))}) n | n IN (:num)}
   &0 < i ==> e - i < e
   C:real
-  !n. null_event (p:A prob_space) {x | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) <\n      E - inv(&(SUC n))}
+  forall n. null_event (p:A prob_space) {x | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) <\n      E - inv(&(SUC n))}
   &0 < i ==> e < e + i
   C:real
-  !n. null_event (p:A prob_space) {x | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) >\n      E + inv(&(SUC n))}
+  forall n. null_event (p:A prob_space) {x | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) >\n      E + inv(&(SUC n))}
   x:A
   m:num
   C:real
@@ -85854,12 +85854,12 @@ Probability/ergodic quotations (2129):
   (x:A) IN prob_carrier p
   x:A
   {x:A | x IN prob_carrier p /\\\n     real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) < c} =\n     {x | x IN prob_carrier p /\\\n       real_limsup (\\m. --(inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x)))) > --c}
-  !c. {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) < c}\n    IN prob_events p
+  forall c. {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) < c}\n    IN prob_events p
   c:real
   \\x:A. real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x)))
   p:A prob_space
   {x:A | x IN prob_carrier p /\\\n     c < real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x)))} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\\n       real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. f(ITER k tt x))) <= c}
-  !c. {x:A | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) > c}\n    IN prob_events p
+  forall c. {x:A | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) > c}\n    IN prob_events p
   x:A
   m:num
   C:real
@@ -85877,7 +85877,7 @@ Probability/ergodic quotations (2129):
   &0 <= C
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space tt f C.\n    ergodic p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                ---> expectation p f) sequentially}
+  forall p:A prob_space tt f C.\n    ergodic p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= C)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                ---> expectation p f) sequentially}
   &(2 * SUC K) = &(2 * (K + 1))
   &(SUC n0) * inv(&(2 * SUC K)) < &(SUC n0) *\n      (inv(&(SUC n0)) * abs(sum(0..n0) (\\k. (f:A->real)(ITER k tt x) -\n        max (-- &M) (min (&M) (f(ITER k tt x))))))
   abs\n       (inv (&(SUC n0)) * sum (0..n0) (\\k. (f:A->real) (ITER k tt x)) -\n        inv (&(SUC n0)) *\n        sum (0..n0) (\\k. max (-- &M) (min (&M) (f (ITER k tt x))))) >\n       inv (&(2 * SUC K))
@@ -85950,25 +85950,25 @@ Probability/ergodic quotations (2129):
   2 * SUC k = SUC(2 * k + 1)
   INTERS (IMAGE (\\j:num. (NM:num->A->bool) (j + M0 k) UNION\n     {x:A | x IN prob_carrier p /\\\n       (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &(j + M0 k))\n         (min (&(j + M0 k)) (f x))) - inv(&(2 * SUC k))) tt n x > &0)})\n     (:num)) IN prob_events (p:A prob_space)
   k:num
-  !k:num. null_event (p:A prob_space)\n    (INTERS (IMAGE (\\j:num. (NM:num->A->bool) (j + M0 k) UNION\n      {x:A | x IN prob_carrier p /\\\n        (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &(j + M0 k))\n          (min (&(j + M0 k)) (f x))) - inv(&(2 * SUC k))) tt n x > &0)})\n      (:num)))
+  forall k:num. null_event (p:A prob_space)\n    (INTERS (IMAGE (\\j:num. (NM:num->A->bool) (j + M0 k) UNION\n      {x:A | x IN prob_carrier p /\\\n        (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &(j + M0 k))\n          (min (&(j + M0 k)) (f x))) - inv(&(2 * SUC k))) tt n x > &0)})\n      (:num)))
   M0:num->num
   N0:num
   N0:num
   inv(&(2 * SUC k))
   ((\\M. expectation (p:A prob_space)\n     (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))))) ---> &0) sequentially
-  !k:num. ?N0:num. !M. M >= N0 ==>\n    abs(expectation (p:A prob_space)\n      (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x)))) - &0) <\n      inv(&(2 * SUC k))
+  forall k:num. ?N0:num. forall M. M >= N0 ==>\n    abs(expectation (p:A prob_space)\n      (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x)))) - &0) <\n      inv(&(2 * SUC k))
   f:A->real
   p:A prob_space
   M:num
-  !M:num k:num. (NM:num->A->bool) M UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
+  forall M:num k:num. (NM:num->A->bool) M UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
   nn:num
   {x:A | x IN prob_carrier p /\\\n     (?n:num. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n       inv(&(SUC k))) tt n x > &0)} =\n     UNIONS (IMAGE (\\n:num. {x:A | x IN prob_carrier p /\\\n       ergodic_maxsum (\\x. abs(f x - max (-- &M) (min (&M) (f x))) -\n         inv(&(SUC k))) tt n x > &0}) (:num))
-  !M:num k:num.\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
+  forall M:num k:num.\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)} IN prob_events (p:A prob_space)
   inv(&(SUC k))
   \\x:A. abs((f:A->real) x - max (-- &M) (min (&M) (f x)))
   tt:A->A
   p:A prob_space
-  !M:num k:num. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)}\n    <= &(SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
+  forall M:num k:num. prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(SUC k))) tt n x > &0)}\n    <= &(SUC k) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
   NM:num->A->bool
   N:A->bool
   N:A->bool
@@ -85976,14 +85976,14 @@ Probability/ergodic quotations (2129):
   \\x:A. max (-- &M) (min (&M) ((f:A->real) x))
   tt:A->A
   p:A prob_space
-  !M:num. ?NM:A->bool. null_event (p:A prob_space) NM /\\\n    {x:A | x IN prob_carrier p /\\\n      ~(((\\n. inv(&(SUC n)) * sum(0..n)\n        (\\k. max (-- &M) (min (&M) ((f:A->real)(ITER k tt x))))) --->\n        expectation p (\\y. max (-- &M) (min (&M) (f y)))) sequentially)}\n    SUBSET NM
+  forall M:num. ?NM:A->bool. null_event (p:A prob_space) NM /\\\n    {x:A | x IN prob_carrier p /\\\n      ~(((\\n. inv(&(SUC n)) * sum(0..n)\n        (\\k. max (-- &M) (min (&M) ((f:A->real)(ITER k tt x))))) --->\n        expectation p (\\y. max (-- &M) (min (&M) (f y)))) sequentially)}\n    SUBSET NM
   N_f:A->bool
   f:A->real
   tt:A->A
   p:A prob_space
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space tt f.\n    ergodic p tt /\\ integrable p f\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                ---> expectation p f) sequentially}
+  forall p:A prob_space tt f.\n    ergodic p tt /\\ integrable p f\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)))\n                ---> expectation p f) sequentially}
   nn:num
   nn:num
   NN:num
@@ -86006,7 +86006,7 @@ Probability/ergodic quotations (2129):
   inv(&(SUC n)) * sum(0..n) (\\k:num. B)
   x:A
   measure_preserving (p:A prob_space) (ITER k (tt:A->A))
-  !k:num. ITER k (tt:A->A) x IN prob_carrier p
+  forall k:num. ITER k (tt:A->A) x IN prob_carrier p
   abs a <= B ==> abs(a - b) <= B + abs b
   x:A
   \\x:A. B + abs(expectation (p:A prob_space) (f:A->real))
@@ -86017,10 +86017,10 @@ Probability/ergodic quotations (2129):
   f:A->real
   tt:A->A
   p:A prob_space
-  !k:num. integrable (p:A prob_space) (\\x. (f:A->real)(ITER k tt x))
+  forall k:num. integrable (p:A prob_space) (\\x. (f:A->real)(ITER k tt x))
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space tt f B.\n    ergodic p tt /\\ integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f))) ---> &0)\n         sequentially
+  forall p:A prob_space tt f B.\n    ergodic p tt /\\ integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f))) ---> &0)\n         sequentially
   abs x < e ==> x < e
   expectation (p:A prob_space)\n         (\\x:A. abs(max (-- &M) (min (&M) ((f:A->real) x)) - f x))
   expectation (p:A prob_space)\n         (\\y:A. max (-- &M) (min (&M) ((f:A->real) y))) - expectation p f =\n         expectation p (\\x. max (-- &M) (min (&M) (f x)) - f x)
@@ -86054,7 +86054,7 @@ Probability/ergodic quotations (2129):
   \\x:A. sum(0..m) (\\k. abs((f:A->real)(ITER k tt x) -\n           max (-- &M) (min (&M) (f(ITER k tt x)))))
   p:A prob_space
   SUC 0 = 1
-  !m. expectation (p:A prob_space) (\\x:A. sum(0..m)\n         (\\k. abs((f:A->real)(ITER k tt x) -\n           max (-- &M) (min (&M) (f(ITER k tt x)))))) =\n         &(SUC m) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
+  forall m. expectation (p:A prob_space) (\\x:A. sum(0..m)\n         (\\k. abs((f:A->real)(ITER k tt x) -\n           max (-- &M) (min (&M) (f(ITER k tt x)))))) =\n         &(SUC m) * expectation p (\\x. abs(f x - max (-- &M) (min (&M) (f x))))
   k:num
   \\x:A. max (-- &M) (min (&M) ((f:A->real) x))
   tt:A->A
@@ -86126,29 +86126,29 @@ Probability/ergodic quotations (2129):
   f:A->real
   tt:A->A
   p:A prob_space
-  !k:num. integrable (p:A prob_space) (\\x. (f:A->real)(ITER k tt x))
+  forall k:num. integrable (p:A prob_space) (\\x. (f:A->real)(ITER k tt x))
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space tt f.\n    ergodic p tt /\\ integrable p f\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f))) ---> &0)\n         sequentially
+  forall p:A prob_space tt f.\n    ergodic p tt /\\ integrable p f\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f))) ---> &0)\n         sequentially
   x:A
   k:num
   k:num
-  !n. sum(0..n) (\\i. (X:num->A->real) i (x:A)) =\n     sum(0..n) (\\k. X 0 (ITER k (tt:A->A) x))
+  forall n. sum(0..n) (\\i. (X:num->A->real) i (x:A)) =\n     sum(0..n) (\\k. X 0 (ITER k (tt:A->A) x))
   x:A
   mu = expectation (p:A prob_space) ((X:num->A->real) 0)
   {x:A | ((\\n. inv(&(SUC n)) * sum(0..n)\n    (\\k. (X:num->A->real) 0 (ITER k tt x))) ---> mu) sequentially}
-  !p:A prob_space tt (X:num->A->real) mu.\n    ergodic p tt /\\\n    integrable p (X 0) /\\\n    (!n x. x IN prob_carrier p ==> X n x = X 0 (ITER n tt x)) /\\\n    expectation p (X 0) = mu\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu)\n               sequentially}
+  forall p:A prob_space tt (X:num->A->real) mu.\n    ergodic p tt /\\\n    integrable p (X 0) /\\\n    (forall n x. x IN prob_carrier p ==> X n x = X 0 (ITER n tt x)) /\\\n    expectation p (X 0) = mu\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu)\n               sequentially}
   mu = expectation (p:A prob_space) ((X:num->A->real) 0)
   x:A
   k:num
   k:num
   x:A
-  !n. expectation (p:A prob_space) (\\x. abs(inv(&(SUC n)) *\n       sum(0..n) (\\i. (X:num->A->real) i x) - mu)) =\n     expectation p (\\x. abs(inv(&(SUC n)) *\n       sum(0..n) (\\k. X 0 (ITER k (tt:A->A) x)) - mu))
-  !p:A prob_space tt (X:num->A->real) mu.\n    ergodic p tt /\\\n    integrable p (X 0) /\\\n    (!n x. x IN prob_carrier p ==> X n x = X 0 (ITER n tt x)) /\\\n    expectation p (X 0) = mu\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\i. X i x) - mu))) ---> &0)\n         sequentially
+  forall n. expectation (p:A prob_space) (\\x. abs(inv(&(SUC n)) *\n       sum(0..n) (\\i. (X:num->A->real) i x) - mu)) =\n     expectation p (\\x. abs(inv(&(SUC n)) *\n       sum(0..n) (\\k. X 0 (ITER k (tt:A->A) x)) - mu))
+  forall p:A prob_space tt (X:num->A->real) mu.\n    ergodic p tt /\\\n    integrable p (X 0) /\\\n    (forall n x. x IN prob_carrier p ==> X n x = X 0 (ITER n tt x)) /\\\n    expectation p (X 0) = mu\n    ==> ((\\n. expectation p (\\x. abs(inv(&(SUC n)) *\n            sum(0..n) (\\i. X i x) - mu))) ---> &0)\n         sequentially
   C:real
   x:A
   \\x:A. abs((C:real) * C)
-  !p:A prob_space (g:A->real) C.\n    integrable p g /\\ (!x. x IN prob_carrier p ==> abs(g x) <= C)\n    ==> integrable p (\\x. g x pow 2)
+  forall p:A prob_space (g:A->real) C.\n    integrable p g /\\ (forall x. x IN prob_carrier p ==> abs(g x) <= C)\n    ==> integrable p (\\x. g x pow 2)
   (\\n:num. (&2 * M) * expectation (p:A prob_space)\n       (\\x:A. abs(inv(&(SUC n)) * sum(0..n)\n         (\\k. (f:A->real)(ITER k tt x)) - mu))) =\n      (\\n. (&2 * M) * (\\n. expectation p\n       (\\x. abs(inv(&(SUC n)) * sum(0..n)\n         (\\k. f(ITER k tt x)) - mu))) n)
   abs a * abs a <= c * abs a ==> a * a <= c * abs a
   x:A
@@ -86158,8 +86158,8 @@ Probability/ergodic quotations (2129):
   0
   \\n:num. (&2 * M) * expectation (p:A prob_space)\n    (\\x:A. abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu))
   &2 * M
-  !n. integrable (p:A prob_space)\n    (\\x:A. (inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu) pow 2)
-  !n. integrable (p:A prob_space)\n    (\\x:A. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu)
+  forall n. integrable (p:A prob_space)\n    (\\x:A. (inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu) pow 2)
+  forall n. integrable (p:A prob_space)\n    (\\x:A. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu)
   expectation (p:A prob_space) (\\x:A. M:real)
   expectation (p:A prob_space) (\\x:A. abs((f:A->real) x))
   x:A
@@ -86169,11 +86169,11 @@ Probability/ergodic quotations (2129):
   tt:A->A
   p:A prob_space
   abs a <= M /\\ abs b <= M ==> abs(a - b) <= &2 * M
-  !n x. x IN prob_carrier (p:A prob_space)\n    ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu)\n        <= &2 * M
+  forall n x. x IN prob_carrier (p:A prob_space)\n    ==> abs(inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu)\n        <= &2 * M
   ergodic (p:A prob_space) (tt:A->A)
   measure_preserving (p:A prob_space) (tt:A->A)
   mu = expectation (p:A prob_space) (f:A->real)
-  !p:A prob_space tt f M.\n    ergodic p tt /\\\n    integrable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= M)\n    ==> ((\\n. expectation p (\\x. (inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f) pow 2)) ---> &0)\n         sequentially
+  forall p:A prob_space tt f M.\n    ergodic p tt /\\\n    integrable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= M)\n    ==> ((\\n. expectation p (\\x. (inv(&(SUC n)) *\n            sum(0..n) (\\k. f(ITER k tt x)) - expectation p f) pow 2)) ---> &0)\n         sequentially
   (a - b) * (a - b) = a * a - &2 * b * a + b * b
   sum(0..n) (\\i. (f:num->real) i pow 2) -\n      &2 * f(SUC n) * sum(0..n) f + (&n + &1) * f(SUC n) pow 2 =\n      sum(0..n) (\\i. (f i - f(SUC n)) pow 2)
   S pow 2 <= (&n + &1) * Q /\\\n      &0 <= Q - &2 * a * S + (&n + &1) * a pow 2\n      ==> (S + a) pow 2 <= ((&n + &1) + &1) * (Q + a pow 2)
@@ -86181,7 +86181,7 @@ Probability/ergodic quotations (2129):
   Q = sum(0..n) (\\i. (f:num->real) i pow 2)
   S = sum(0..n) (f:num->real)
   SUC 0 = 1
-  !f:num->real n. (sum(0..n) f) pow 2 <= &(SUC n) * sum(0..n) (\\i. f i pow 2)
+  forall f:num->real n. (sum(0..n) f) pow 2 <= &(SUC n) * sum(0..n) (\\i. f i pow 2)
   &0 <= m * m ==> a - m * m <= a
   (\\x:A. ((f:A->real) x - mu) pow 2) =\n     (\\x. f x pow 2 + ((-- &2 * mu) * f x + mu pow 2))
   expectation (p:A prob_space) (\\x:A. ((f:A->real) x - mu) pow 2) =\n     expectation p (\\x. f x pow 2) - mu pow 2
@@ -86212,7 +86212,7 @@ Probability/ergodic quotations (2129):
   n:num
   \\k. (f:A->real)(ITER k (tt:A->A) x) - mu
   x:A
-  !x:A.\n    (inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu) pow 2 <=\n    inv(&(SUC n)) * sum(0..n) (\\k. (f(ITER k tt x) - mu) pow 2)
+  forall x:A.\n    (inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu) pow 2 <=\n    inv(&(SUC n)) * sum(0..n) (\\k. (f(ITER k tt x) - mu) pow 2)
   n:num
   \\x:A. ((f:A->real) x - mu) pow 2
   tt:A->A
@@ -86222,7 +86222,7 @@ Probability/ergodic quotations (2129):
   (a - b) * (a - b) = a * a - &2 * b * a + b * b
   integrable (p:A prob_space) (\\x:A. ((f:A->real) x - mu) pow 2)
   mu = expectation (p:A prob_space) (f:A->real)
-  !p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f /\\ integrable p (\\x. f x pow 2)\n    ==> !n. expectation p\n      (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) - expectation p f) pow 2)\n      <= expectation p (\\x. f x pow 2)
+  forall p:A prob_space tt f.\n    measure_preserving p tt /\\ integrable p f /\\ integrable p (\\x. f x pow 2)\n    ==> forall n. expectation p\n      (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) - expectation p f) pow 2)\n      <= expectation p (\\x. f x pow 2)
   expectation (p:A prob_space) (\\x:A. &0) = &0
   &0 = &0 pow 2
   x:A
@@ -86234,7 +86234,7 @@ Probability/ergodic quotations (2129):
   \\x:A. &0:real
   \\M (x:A). ((f:A->real) x - max (-- &M) (min (&M) (f x))) pow 2
   p:A prob_space
-  !p:A prob_space (f:A->real).\n     integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> ((\\M. expectation p (\\x. (f x - max (-- &M) (min (&M) (f x))) pow 2))\n          ---> &0) sequentially
+  forall p:A prob_space (f:A->real).\n     integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> ((\\M. expectation p (\\x. (f x - max (-- &M) (min (&M) (f x))) pow 2))\n          ---> &0) sequentially
   inv(&(SUC n)) pow 2 * &(SUC n) = inv(&(SUC n))
   n:num
   \\k. (f:A->real)(ITER k (tt:A->A) x) - mu
@@ -86262,15 +86262,15 @@ Probability/ergodic quotations (2129):
   p:A prob_space
   integrable (p:A prob_space)\n    (\\x:A. inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)))
   mu = expectation (p:A prob_space) (f:A->real)
-  !p:A prob_space (tt:A->A) (f:A->real) n.\n     measure_preserving p tt /\\\n     integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> integrable p\n       (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) -\n             expectation p f) pow 2)
+  forall p:A prob_space (tt:A->A) (f:A->real) n.\n     measure_preserving p tt /\\\n     integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> integrable p\n       (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) -\n             expectation p f) pow 2)
   a - b:real
-  !a b. (a + b) pow 2 <= &2 * a pow 2 + &2 * b pow 2
+  forall a b. (a + b) pow 2 <= &2 * a pow 2 + &2 * b pow 2
   a < e / &4 /\\ b < e / &4 ==> &2 * a + &2 * b < e
   integrable (p:A prob_space)\n     (\\x:A. (inv(&(SUC n)) * sum(0..n) (\\k. (g:A->real)(ITER k tt x)) -\n             expectation p g) pow 2)
   integrable (p:A prob_space)\n     (\\x:A. (inv(&(SUC n)) * sum(0..n) (\\k. (h:A->real)(ITER k tt x)) -\n             expectation p h) pow 2)
   (f:A->real) = (\\x:A. h x + g x)
   mu = expectation (p:A prob_space) (h:A->real) +\n      expectation p (g:A->real)
-  !k. (f:A->real)(ITER k (tt:A->A) x) =\n     (h:A->real)(ITER k tt x) + (g:A->real)(ITER k tt x)
+  forall k. (f:A->real)(ITER k (tt:A->A) x) =\n     (h:A->real)(ITER k tt x) + (g:A->real)(ITER k tt x)
   inv(&(SUC n)) * sum(0..n) (\\k. (f:A->real)(ITER k tt x)) - mu =\n     (inv(&(SUC n)) * sum(0..n) (\\k. (h:A->real)(ITER k tt x)) - expectation p h) +\n     (inv(&(SUC n)) * sum(0..n) (\\k. (g:A->real)(ITER k tt x)) - expectation p g)
   x:A
   expectation (p:A prob_space)\n    (\\x:A. &2 * (inv(&(SUC n)) * sum(0..n) (\\k. (h:A->real)(ITER k tt x)) -\n            expectation p h) pow 2 +\n      &2 * (inv(&(SUC n)) * sum(0..n) (\\k. (g:A->real)(ITER k tt x)) -\n            expectation p g) pow 2)
@@ -86316,7 +86316,7 @@ Probability/ergodic quotations (2129):
   e:real
   mu = expectation (p:A prob_space) (f:A->real)
   measure_preserving (p:A prob_space) (tt:A->A)
-  !p:A prob_space (tt:A->A) (f:A->real).\n     ergodic p tt /\\ integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> ((\\n. expectation p\n       (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) -\n             expectation p f) pow 2)) ---> &0) sequentially
+  forall p:A prob_space (tt:A->A) (f:A->real).\n     ergodic p tt /\\ integrable p f /\\ integrable p (\\x. f x pow 2)\n     ==> ((\\n. expectation p\n       (\\x. (inv(&(SUC n)) * sum(0..n) (\\k. f(ITER k tt x)) -\n             expectation p f) pow 2)) ---> &0) sequentially
   N:num
   M:num
   N:num

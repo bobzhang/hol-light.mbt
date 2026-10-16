@@ -5525,42 +5525,42 @@ test "iterate matches iterate.ml" {
       #|iterate quotations (706):
       #|  m..n = {x:num | m <= x /\\ x <= n}
       #|  {x:num | x <= n}
-      #|  !m n. FINITE(m..n)
-      #|  !m p n. m <= p + 1 /\\ p <= n ==> ((m..p) UNION ((p+1)..n) = m..n)
-      #|  !m p n. m <= p /\\ p <= n + 1 ==> ((m..(p-1)) UNION (p..n) = m..n)
-      #|  !m n. m <= n ==> (m INSERT ((m+1)..n) = m..n)
-      #|  !m n. m <= n ==> (n INSERT (m..(n-1)) = m..n)
-      #|  !m n. m <= SUC n ==> (m..SUC n = (SUC n) INSERT (m..n))
-      #|  !m n p. p IN (m..n) <=> m <= p /\\ p <= n
-      #|  !m n. m IN (0..n) <=> m <= n
-      #|  !n. n..n = {n}
-      #|  !m n. (m..n = {}) <=> n < m
-      #|  !m n. n < m ==> m..n = {}
+      #|  forall m n. FINITE(m..n)
+      #|  forall m p n. m <= p + 1 /\\ p <= n ==> ((m..p) UNION ((p+1)..n) = m..n)
+      #|  forall m p n. m <= p /\\ p <= n + 1 ==> ((m..(p-1)) UNION (p..n) = m..n)
+      #|  forall m n. m <= n ==> (m INSERT ((m+1)..n) = m..n)
+      #|  forall m n. m <= n ==> (n INSERT (m..(n-1)) = m..n)
+      #|  forall m n. m <= SUC n ==> (m..SUC n = (SUC n) INSERT (m..n))
+      #|  forall m n p. p IN (m..n) <=> m <= p /\\ p <= n
+      #|  forall m n. m IN (0..n) <=> m <= n
+      #|  forall n. n..n = {n}
+      #|  forall m n. (m..n = {}) <=> n < m
+      #|  forall m n. n < m ==> m..n = {}
       #|  s:num->bool
       #|  s:num->bool
-      #|  !s:num->bool. FINITE s <=> ?n. s SUBSET 0..n
+      #|  forall s:num->bool. FINITE s <=> ?n. s SUBSET 0..n
       #|  ~(SUC n <= n)
       #|  m <= SUC(m + d)
-      #|  !m d. CARD(m..(m+d)) = d + 1
+      #|  forall m d. CARD(m..(m+d)) = d + 1
       #|  n < m ==> ((n + 1) - m = 0)
       #|  n:num < m \\/ m <= n
-      #|  !m n. CARD(m..n) = (n + 1) - m
-      #|  !m n. (m..n) HAS_SIZE ((n + 1) - m)
-      #|  !n. CARD(1..n) = n
-      #|  !n. (1..n) HAS_SIZE n
-      #|  (!m. m..0 = if m = 0 then {0} else {}) /\\\n   (!m n. m..SUC n = if m <= SUC n then (SUC n) INSERT (m..n) else m..n)
+      #|  forall m n. CARD(m..n) = (n + 1) - m
+      #|  forall m n. (m..n) HAS_SIZE ((n + 1) - m)
+      #|  forall n. CARD(1..n) = n
+      #|  forall n. (1..n) HAS_SIZE n
+      #|  (forall m. m..0 = if m = 0 then {0} else {}) /\\\n   (forall m n. m..SUC n = if m <= SUC n then (SUC n) INSERT (m..n) else m..n)
       #|  s:A->bool
       #|  1..CARD(s:A->bool)
-      #|  !s:A->bool.\n        FINITE s <=>\n        ?f. (!i j. i IN 1..CARD s /\\ j IN 1..CARD s /\\ f i = f j ==> i = j) /\\\n            s = IMAGE f (1..CARD s)
-      #|  !s:A->bool.\n        FINITE s <=>\n        ?k:num->bool f. (!i j. i IN k /\\ j IN k /\\ f i = f j ==> i = j) /\\\n                        FINITE k /\\ s = IMAGE f k
-      #|  !m n p q. (m..n) INTER (p..q) = (MAX m p)..(MIN n q)
-      #|  !m n p q. DISJOINT (m..n) (p..q) <=> n < p \\/ q < m \\/ n < m \\/ q < p
-      #|  !m n p. m <= n + 1 ==> (m..(n+p) = (m..n) UNION (n+1..n+p))
-      #|  !m n p. (m+p..n+p) = IMAGE (\\i. i + p) (m..n)
+      #|  forall s:A->bool.\n        FINITE s <=>\n        ?f. (forall i j. i IN 1..CARD s /\\ j IN 1..CARD s /\\ f i = f j ==> i = j) /\\\n            s = IMAGE f (1..CARD s)
+      #|  forall s:A->bool.\n        FINITE s <=>\n        ?k:num->bool f. (forall i j. i IN k /\\ j IN k /\\ f i = f j ==> i = j) /\\\n                        FINITE k /\\ s = IMAGE f k
+      #|  forall m n p q. (m..n) INTER (p..q) = (MAX m p)..(MIN n q)
+      #|  forall m n p q. DISJOINT (m..n) (p..q) <=> n < p \\/ q < m \\/ n < m \\/ q < p
+      #|  forall m n p. m <= n + 1 ==> (m..(n+p) = (m..n) UNION (n+1..n+p))
+      #|  forall m n p. (m+p..n+p) = IMAGE (\\i. i + p) (m..n)
       #|  x - p:num
-      #|  !m n p q. (m..n) SUBSET (p..q) <=> n < m \\/ p <= m /\\ n <= q
-      #|  !n. {x | x <= n} = 0..n
-      #|  !n. {x | x < n} = if n = 0 then {} else 0..(n-1)
+      #|  forall m n p q. (m..n) SUBSET (p..q) <=> n < m \\/ p <= m /\\ n <= q
+      #|  forall n. {x | x <= n} = 0..n
+      #|  forall n. {x | x < n} = if n = 0 then {} else 0..(n-1)
       #|  n < m ==> m..n = {}
       #|  m..m = {m}
       #|  m <= n ==> m..n = m INSERT (SUC m..n)
@@ -5576,7 +5576,7 @@ test "iterate matches iterate.ml" {
       #|  i:num
       #|  b:A = a
       #|  b:A
-      #|  !i. i IN 1..SUC n <=> i = 1 \\/ 1 < i /\\ (i - 1) IN 1..n
+      #|  forall i. i IN 1..SUC n <=> i = 1 \\/ 1 < i /\\ (i - 1) IN 1..n
       #|  1 <= k ==> ~(SUC k = 1)
       #|  \\k. if k = 1 then a:A else f(k - 1)
       #|  f:num->A
@@ -5597,8 +5597,8 @@ test "iterate matches iterate.ml" {
       #|  a:A
       #|  s:A->bool
       #|  ~(a /\\ ~a)
-      #|  !n s. s HAS_SIZE n /\\ ~(s = {})\n                      ==> ?a:A. a IN s /\\ !b. b IN (s DELETE a) ==> ~(b << a)
-      #|  !(<<). (!x y:A. x << y /\\ y << x ==> x = y) /\\\n          (!x y z. x << y /\\ y << z ==> x << z)\n          ==> !n s. s HAS_SIZE n\n                    ==> ?f. s = IMAGE f (1..n) /\\\n                            (!j k. j IN 1..n /\\ k IN 1..n /\\ j < k\n                                   ==> ~(f k << f j))
+      #|  forall n s. s HAS_SIZE n /\\ ~(s = {})\n                      ==> ?a:A. a IN s /\\ forall b. b IN (s DELETE a) ==> ~(b << a)
+      #|  forall(<<). (forall x y:A. x << y /\\ y << x ==> x = y) /\\\n          (forall x y z. x << y /\\ y << z ==> x << z)\n          ==> forall n s. s HAS_SIZE n\n                    ==> ?f. s = IMAGE f (1..n) /\\\n                            (forall j k. j IN 1..n /\\ k IN 1..n /\\ j < k\n                                   ==> ~(f k << f j))
       #|  ~(b = a) ==> (b IN s <=> b IN (s DELETE a))
       #|  num_of_int(x - l)
       #|  x:int
@@ -5606,33 +5606,33 @@ test "iterate matches iterate.ml" {
       #|  ~(&0 <= r - l:int) ==> ~(l <= x /\\ x <= r)
       #|  &0:int <= r - l
       #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  (!l r. FINITE {x:int | l <= x /\\ x <= r}) /\\\n   (!l r. FINITE {x:int | l <= x /\\ x < r}) /\\\n   (!l r. FINITE {x:int | l < x /\\ x <= r}) /\\\n   (!l r. FINITE {x:int | l < x /\\ x < r})
-      #|  neutral op = @x:A. !y. (op x y = y) /\\ (op y x = y)
-      #|  monoidal op <=> (!x y. op x y = op y x) /\\\n                   (!x y z. op x (op y z) = op (op x y) z) /\\\n                   (!x:A. op (neutral op) x = x)
-      #|  !op. monoidal op\n        ==> (!a:A. op (neutral op) a = a) /\\\n            (!a. op a (neutral op) = a) /\\\n            (!a b. op a b = op b a) /\\\n            (!a b c. op (op a b) c = op a (op b c)) /\\\n            (!a b c. op a (op b c) = op b (op a c))
+      #|  (forall l r. FINITE {x:int | l <= x /\\ x <= r}) /\\\n   (forall l r. FINITE {x:int | l <= x /\\ x < r}) /\\\n   (forall l r. FINITE {x:int | l < x /\\ x <= r}) /\\\n   (forall l r. FINITE {x:int | l < x /\\ x < r})
+      #|  neutral op = @x:A. forall y. (op x y = y) /\\ (op y x = y)
+      #|  monoidal op <=> (forall x y. op x y = op y x) /\\\n                   (forall x y z. op x (op y z) = op (op x y) z) /\\\n                   (forall x:A. op (neutral op) x = x)
+      #|  forall op. monoidal op\n        ==> (forall a:A. op (neutral op) a = a) /\\\n            (forall a. op a (neutral op) = a) /\\\n            (forall a b. op a b = op b a) /\\\n            (forall a b c. op (op a b) c = op a (op b c)) /\\\n            (forall a b c. op a (op b c) = op b (op a c))
       #|  support op (f:A->B) s = {x | x IN s /\\ ~(f x = neutral op)}
       #|  iterate op s (f:A->B) =\n        if FINITE(support op f s)\n        then ITSET (\\x a. op (f x) a) (support op f s) (neutral op)\n        else neutral op
-      #|  !op (f:A->B) x s. x IN (support op f s) <=> x IN s /\\ ~(f x = neutral op)
-      #|  !op (f:A->B) s. support op f (support op f s) = support op f s
-      #|  !op (f:A->B) s. (!x. x IN s ==> f(x) = neutral op) <=> support op f s = {}
-      #|  !op (f:A->B) s. (support op f s) SUBSET s
-      #|  !op (f:A->B) s. FINITE s ==> FINITE(support op f s)
-      #|  (!(f:A->C). support op f {} = {}) /\\\n   (!(f:A->C) x s. support op f (x INSERT s) =\n        if f(x) = neutral op then support op f s\n        else x INSERT (support op f s)) /\\\n   (!(f:A->C) x s. support op f (s DELETE x) = (support op f s) DELETE x) /\\\n   (!(f:A->C) s t. support op f (s UNION t) =\n                   (support op f s) UNION (support op f t)) /\\\n   (!(f:A->C) s t. support op f (s INTER t) =\n                   (support op f s) INTER (support op f t)) /\\\n   (!(f:A->C) s t. support op f (s DIFF t) =\n                   (support op f s) DIFF (support op f t)) /\\\n   (!(f:A->B) (g:B->C) s.\n                   support op g (IMAGE f s) = IMAGE f (support op (g o f) s))
-      #|  !op s (f:A->B) a.\n        support op (\\x. if x = a then f(x) else neutral op) s =\n        if a IN s then support op f {a} else {}
-      #|  !op (f:A->B) a.\n        FINITE(support op (\\x. if x = a then f(x) else neutral op) s)
-      #|  !op (f:A->B) s. iterate op (support op f s) f = iterate op s f
-      #|  !op (f:A->B) s.\n        iterate op s f =\n        if FINITE(support op f s) then iterate op (support op f s) f\n        else neutral op
+      #|  forall op (f:A->B) x s. x IN (support op f s) <=> x IN s /\\ ~(f x = neutral op)
+      #|  forall op (f:A->B) s. support op f (support op f s) = support op f s
+      #|  forall op (f:A->B) s. (forall x. x IN s ==> f(x) = neutral op) <=> support op f s = {}
+      #|  forall op (f:A->B) s. (support op f s) SUBSET s
+      #|  forall op (f:A->B) s. FINITE s ==> FINITE(support op f s)
+      #|  (forall(f:A->C). support op f {} = {}) /\\\n   (forall(f:A->C) x s. support op f (x INSERT s) =\n        if f(x) = neutral op then support op f s\n        else x INSERT (support op f s)) /\\\n   (forall(f:A->C) x s. support op f (s DELETE x) = (support op f s) DELETE x) /\\\n   (forall(f:A->C) s t. support op f (s UNION t) =\n                   (support op f s) UNION (support op f t)) /\\\n   (forall(f:A->C) s t. support op f (s INTER t) =\n                   (support op f s) INTER (support op f t)) /\\\n   (forall(f:A->C) s t. support op f (s DIFF t) =\n                   (support op f s) DIFF (support op f t)) /\\\n   (forall(f:A->B) (g:B->C) s.\n                   support op g (IMAGE f s) = IMAGE f (support op (g o f) s))
+      #|  forall op s (f:A->B) a.\n        support op (\\x. if x = a then f(x) else neutral op) s =\n        if a IN s then support op f {a} else {}
+      #|  forall op (f:A->B) a.\n        FINITE(support op (\\x. if x = a then f(x) else neutral op) s)
+      #|  forall op (f:A->B) s. iterate op (support op f s) f = iterate op s f
+      #|  forall op (f:A->B) s.\n        iterate op s f =\n        if FINITE(support op f s) then iterate op (support op f s) f\n        else neutral op
       #|  (f:A->B) x = neutral op
       #|  neutral op :B
       #|  \\x a. (op:B->B->B) ((f:A->B)(x)) a
-      #|  !op. monoidal op\n        ==> (!(f:A->B). iterate op {} f = neutral op) /\\\n            (!f x s. FINITE(support op (f:A->B) s)\n                     ==> (iterate op (x INSERT s) f =\n                                if x IN s then iterate op s f\n                                else op (f x) (iterate op s f)))
-      #|  !op. monoidal op\n        ==> (!(f:A->C). iterate op {} f = neutral op) /\\\n            (!(f:B->C) x s.\n                FINITE(s)\n                ==> (iterate op (x INSERT s) f =\n                     if x IN s then iterate op s f\n                     else op (f x) (iterate op s f)))
+      #|  forall op. monoidal op\n        ==> (forall(f:A->B). iterate op {} f = neutral op) /\\\n            (forall f x s. FINITE(support op (f:A->B) s)\n                     ==> (iterate op (x INSERT s) f =\n                                if x IN s then iterate op s f\n                                else op (f x) (iterate op s f)))
+      #|  forall op. monoidal op\n        ==> (forall(f:A->C). iterate op {} f = neutral op) /\\\n            (forall(f:B->C) x s.\n                FINITE(s)\n                ==> (iterate op (x INSERT s) f =\n                     if x IN s then iterate op s f\n                     else op (f x) (iterate op s f)))
       #|  (s UNION (x INSERT t) = x INSERT (s UNION t)) /\\\n     (DISJOINT s (x INSERT t) <=> ~(x IN s) /\\ DISJOINT s t)
-      #|  !op. monoidal op\n        ==> !(f:A->B) s t.\n                FINITE s /\\ FINITE t /\\ DISJOINT s t\n                ==> (iterate op (s UNION t) f =\n                     op (iterate op s f) (iterate op t f))
-      #|  !op. monoidal op\n        ==> !(f:A->B) s t. FINITE(support op f s) /\\ FINITE(support op f t) /\\\n                           DISJOINT (support op f s) (support op f t)\n                           ==> (iterate op (s UNION t) f =\n                                op (iterate op s f) (iterate op t f))
+      #|  forall op. monoidal op\n        ==> forall(f:A->B) s t.\n                FINITE s /\\ FINITE t /\\ DISJOINT s t\n                ==> (iterate op (s UNION t) f =\n                     op (iterate op s f) (iterate op t f))
+      #|  forall op. monoidal op\n        ==> forall(f:A->B) s t. FINITE(support op f s) /\\ FINITE(support op f t) /\\\n                           DISJOINT (support op f s) (support op f t)\n                           ==> (iterate op (s UNION t) f =\n                                op (iterate op s f) (iterate op t f))
       #|  t SUBSET s ==> (s = (s DIFF t) UNION t) /\\ DISJOINT (s DIFF t) t
-      #|  !op. monoidal op\n        ==> !(f:A->B) s t.\n                FINITE s /\\ t SUBSET s\n                ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                     iterate op s f)
-      #|  !op. monoidal op\n        ==> !f:A->B s t. FINITE (support op f s) /\\\n                         (support op f t) SUBSET (support op f s)\n                         ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                              iterate op s f)
+      #|  forall op. monoidal op\n        ==> forall(f:A->B) s t.\n                FINITE s /\\ t SUBSET s\n                ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                     iterate op s f)
+      #|  forall op. monoidal op\n        ==> forall f:A->B s t. FINITE (support op f s) /\\\n                         (support op f t) SUBSET (support op f s)\n                         ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                              iterate op s f)
       #|  DISJOINT (s DIFF s') (s INTER s')
       #|  DISJOINT (s DIFF s') (s' INTER s)
       #|  DISJOINT (s DIFF s') (s' DIFF s)
@@ -5640,72 +5640,72 @@ test "iterate matches iterate.ml" {
       #|  t:A->bool = t DIFF s UNION s INTER t
       #|  s:A->bool = s DIFF t UNION s INTER t
       #|  a UNION b = ((a DIFF b) UNION (b DIFF a)) UNION (a INTER b)
-      #|  !op. monoidal op\n        ==> !s t (f:A->B).\n                FINITE s /\\ FINITE t\n                ==> op (iterate op s f) (iterate op t f) =\n                    op (iterate op (s UNION t) f)\n                       (iterate op (s INTER t) f)
+      #|  forall op. monoidal op\n        ==> forall s t (f:A->B).\n                FINITE s /\\ FINITE t\n                ==> op (iterate op s f) (iterate op t f) =\n                    op (iterate op (s UNION t) f)\n                       (iterate op (s INTER t) f)
       #|  s:A->bool
       #|  support op (f:A->B) s
-      #|  !op. monoidal op\n        ==> !P. P(neutral op) /\\ (!x y. P x /\\ P y ==> P (op x y))\n                ==> !f:A->B s. (!x. x IN s /\\ ~(f x = neutral op) ==> P(f x))\n                               ==> P(iterate op s f)
-      #|  !op. monoidal op\n        ==> !R. R (neutral op) (neutral op) /\\\n                (!x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> !f:A->B g s.\n                      FINITE s /\\\n                      (!x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)
+      #|  forall op. monoidal op\n        ==> forall P. P(neutral op) /\\ (forall x y. P x /\\ P y ==> P (op x y))\n                ==> forall f:A->B s. (forall x. x IN s /\\ ~(f x = neutral op) ==> P(f x))\n                               ==> P(iterate op s f)
+      #|  forall op. monoidal op\n        ==> forall R. R (neutral op) (neutral op) /\\\n                (forall x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> forall f:A->B g s.\n                      FINITE s /\\\n                      (forall x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)
       #|  support op (f:A->B) s = {}
-      #|  !op. monoidal op\n        ==> !f:A->B s. (!x. x IN s ==> (f(x) = neutral op))\n                       ==> (iterate op s f = neutral op)
-      #|  !op. monoidal op ==> !f:A->B x. (iterate op {x} f = f x)
+      #|  forall op. monoidal op\n        ==> forall f:A->B s. (forall x. x IN s ==> (f(x) = neutral op))\n                       ==> (iterate op s f = neutral op)
+      #|  forall op. monoidal op ==> forall f:A->B x. (iterate op {x} f = f x)
       #|  t:A->bool = {}
       #|  t:A->bool
       #|  a:A
-      #|  !op. monoidal op\n        ==> !P. (!x y. P x /\\ P y ==> P (op x y))\n                ==> !f:A->B s. FINITE s /\\ ~(s = {}) /\\\n                               (!x. x IN s ==> P(f x))\n                               ==> P(iterate op s f)
+      #|  forall op. monoidal op\n        ==> forall P. (forall x y. P x /\\ P y ==> P (op x y))\n                ==> forall f:A->B s. FINITE s /\\ ~(s = {}) /\\\n                               (forall x. x IN s ==> P(f x))\n                               ==> P(iterate op s f)
       #|  t:A->bool = {}
       #|  t:A->bool
       #|  a:A
-      #|  !op. monoidal op\n        ==> !R. (!x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> !f:A->B g s.\n                      FINITE s /\\\n                      ~(s = {}) /\\\n                      (!x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)
-      #|  !op. monoidal op\n        ==> !f:A->B s a. FINITE s /\\ a IN s\n                         ==> op (f a) (iterate op (s DELETE a) f) =\n                             iterate op s f
-      #|  !op. monoidal op\n        ==> !(f:A->B) a s.\n                iterate op s (\\x. if x = a then f(x) else neutral op) =\n                if a IN s then f(a) else neutral op
+      #|  forall op. monoidal op\n        ==> forall R. (forall x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> forall f:A->B g s.\n                      FINITE s /\\\n                      ~(s = {}) /\\\n                      (forall x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)
+      #|  forall op. monoidal op\n        ==> forall f:A->B s a. FINITE s /\\ a IN s\n                         ==> op (f a) (iterate op (s DELETE a) f) =\n                             iterate op s f
+      #|  forall op. monoidal op\n        ==> forall(f:A->B) a s.\n                iterate op s (\\x. if x = a then f(x) else neutral op) =\n                if a IN s then f(a) else neutral op
       #|  (a <=> a') /\\ (a' ==> (b = b'))\n      ==> (if a then b else c) = (if a' then b' else c)
-      #|  !s. FINITE s /\\\n        (!x y:A. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (iterate op (IMAGE f s) (g:B->C) = iterate op s (g o f))
-      #|  !op. monoidal op\n       ==> !f:A->B g:B->C s.\n                (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n                ==> (iterate op (IMAGE f s) g = iterate op s (g o f))
+      #|  forall s. FINITE s /\\\n        (forall x y:A. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (iterate op (IMAGE f s) (g:B->C) = iterate op s (g o f))
+      #|  forall op. monoidal op\n       ==> forall f:A->B g:B->C s.\n                (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n                ==> (iterate op (IMAGE f s) g = iterate op s (g o f))
       #|  iterate op (IMAGE (p:A->A) s) (f:A->B)
-      #|  !op. monoidal op\n        ==>  !f:A->B p s.\n                (!x. x IN s ==> p(x) IN s) /\\\n                (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> iterate op s f = iterate op s (f o p)
+      #|  forall op. monoidal op\n        ==>  forall f:A->B p s.\n                (forall x. x IN s ==> p(x) IN s) /\\\n                (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> iterate op s f = iterate op s (f o p)
       #|  {i,j | i IN a INSERT s /\\ j IN t i} =\n            IMAGE (\\j. a,j) (t a) UNION {i,j | i IN s /\\ j IN t i}
       #|  {a,b | F} = {}
-      #|  !op. monoidal op\n        ==> !s:A->bool t:A->B->bool x:A->B->C.\n                FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n                ==> iterate op s (\\i. iterate op (t i) (x i)) =\n                    iterate op {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
+      #|  forall op. monoidal op\n        ==> forall s:A->bool t:A->B->bool x:A->B->C.\n                FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n                ==> iterate op s (\\i. iterate op (t i) (x i)) =\n                    iterate op {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
       #|  t:A->bool
       #|  support op (f:A->B) s
-      #|  FINITE(support op (f:A->B) s) /\\\n    (!x. x IN (support op f s) ==> f x = g x)
+      #|  FINITE(support op (f:A->B) s) /\\\n    (forall x. x IN (support op f s) ==> f x = g x)
       #|  support op g s = support op (f:A->B) s
-      #|  !op. monoidal op\n        ==> !f:A->B g s.\n              (!x. x IN s ==> f x = g x) ==> iterate op s f = iterate op s g
+      #|  forall op. monoidal op\n        ==> forall f:A->B g s.\n              (forall x. x IN s ==> f x = g x) ==> iterate op s f = iterate op s g
       #|  ~((if P x then f x else a) = a) <=> P x /\\ ~(f x = a)
-      #|  !op. monoidal op\n        ==> !P s f:A->B. iterate op {x | x IN s /\\ P x} f =\n                         iterate op s (\\x. if P x then f x else neutral op)
+      #|  forall op. monoidal op\n        ==> forall P s f:A->B. iterate op {x | x IN s /\\ P x} f =\n                         iterate op s (\\x. if P x then f x else neutral op)
       #|  iterate op s ((g:B->C) o (h:A->B))
       #|  t = IMAGE (h:A->B) s
-      #|  !op. monoidal op\n        ==> !s:A->bool t:B->bool f:A->C g h.\n                (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n                (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g
+      #|  forall op. monoidal op\n        ==> forall s:A->bool t:B->bool f:A->C g h.\n                (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n                (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g
       #|  h:A->B
-      #|  !op. monoidal op\n        ==> !s:A->bool t:B->bool f:A->C g h k.\n                (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n                (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g
+      #|  forall op. monoidal op\n        ==> forall s:A->bool t:B->bool f:A->C g h k.\n                (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n                (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g
       #|  p:A->A
       #|  s:A->bool
-      #|  !op. monoidal op\n          ==> !f:A->B p:A->A s.\n                      FINITE s /\\\n                      (!x. x IN s ==> p x IN s) /\\\n                      (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n                      ==> iterate op s (f o p) = iterate op s f
-      #|  !op. monoidal op\n        ==> !f:A->B s t.\n                FINITE(s) /\\ FINITE(t) /\\\n                (!x. x IN (s INTER t) ==> f x = neutral(op))\n                ==> iterate op (s UNION t) f =\n                    op (iterate op s f) (iterate op t f)
-      #|  !op. monoidal op\n        ==> !(f:A->B) g s.\n                FINITE s\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)
-      #|  !op. monoidal op\n        ==> !f:A->B u v.\n                u SUBSET v /\\\n                (!x. x IN v /\\ ~(x IN u) ==> f(x) = neutral op)\n                ==> iterate op v f = iterate op u f
-      #|  !op. monoidal op\n        ==> !f:A->B s. support op f UNIV SUBSET s\n                  ==> iterate op s f = iterate op UNIV f
-      #|  !op. monoidal op\n        ==> !f:A->B->C s t.\n                FINITE s /\\ FINITE t\n                ==> iterate op s (\\i. iterate op t (f i)) =\n                    iterate op t (\\j. iterate op s (\\i. f i j))
+      #|  forall op. monoidal op\n          ==> forall f:A->B p:A->A s.\n                      FINITE s /\\\n                      (forall x. x IN s ==> p x IN s) /\\\n                      (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n                      ==> iterate op s (f o p) = iterate op s f
+      #|  forall op. monoidal op\n        ==> forall f:A->B s t.\n                FINITE(s) /\\ FINITE(t) /\\\n                (forall x. x IN (s INTER t) ==> f x = neutral(op))\n                ==> iterate op (s UNION t) f =\n                    op (iterate op s f) (iterate op t f)
+      #|  forall op. monoidal op\n        ==> forall(f:A->B) g s.\n                FINITE s\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)
+      #|  forall op. monoidal op\n        ==> forall f:A->B u v.\n                u SUBSET v /\\\n                (forall x. x IN v /\\ ~(x IN u) ==> f(x) = neutral op)\n                ==> iterate op v f = iterate op u f
+      #|  forall op. monoidal op\n        ==> forall f:A->B s. support op f UNIV SUBSET s\n                  ==> iterate op s f = iterate op UNIV f
+      #|  forall op. monoidal op\n        ==> forall f:A->B->C s t.\n                FINITE s /\\ FINITE t\n                ==> iterate op s (\\i. iterate op t (f i)) =\n                    iterate op t (\\j. iterate op s (\\i. f i j))
       #|  (g:B->C) ((f:A->B) a) = neutral op
       #|  iterate op s ((g:B->C) o (f:A->B)) = iterate op (IMAGE f s) g
       #|  s:A->bool
       #|  a:A
-      #|  !op. monoidal op\n        ==> !g:B->C f:A->B s.\n                    FINITE s /\\\n                    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f x = f y\n                           ==> g(f x) = neutral op)\n                    ==> iterate op (IMAGE f s) g = iterate op s (g o f)
+      #|  forall op. monoidal op\n        ==> forall g:B->C f:A->B s.\n                    FINITE s /\\\n                    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f x = f y\n                           ==> g(f x) = neutral op)\n                    ==> iterate op (IMAGE f s) g = iterate op s (g o f)
       #|  {y | y IN IMAGE (f:A->B) s /\\ f x = y} = {(f x)}
       #|  x:A
       #|  iterate op s (\\x:A. iterate op {y:B | y IN IMAGE f s /\\ (f x = y)}\n       (\\y. (g:A->C) x))
-      #|  !op. monoidal op\n        ==> !f:A->B g:A->C s.\n                FINITE s\n                ==> iterate op s g =\n                    iterate op (IMAGE f s)\n                       (\\y. iterate op {x | x IN s /\\ f x = y} g)
+      #|  forall op. monoidal op\n        ==> forall f:A->B g:A->C s.\n                FINITE s\n                ==> iterate op s g =\n                    iterate op (IMAGE f s)\n                       (\\y. iterate op {x | x IN s /\\ f x = y} g)
       #|  op (iterate op {x | x IN s /\\ P x} (\\x. if P x then f x else (g:A->B) x))\n       (iterate op {x | x IN s /\\ ~P x} (\\x. if P x then f x else g x))
-      #|  !op. monoidal op\n        ==> !s P f g:A->B.\n                FINITE s\n                ==> iterate op s (\\x. if P x then f x else g x) =\n                    op (iterate op {x | x IN s /\\ P x} f)\n                       (iterate op {x | x IN s /\\ ~P x} g)
+      #|  forall op. monoidal op\n        ==> forall s P f g:A->B.\n                FINITE s\n                ==> iterate op s (\\x. if P x then f x else g x) =\n                    op (iterate op {x | x IN s /\\ P x} f)\n                       (iterate op {x | x IN s /\\ ~P x} g)
       #|  DISJOINT {x | x IN s /\\ P x} {x | x IN s /\\ ~P x}
       #|  DISJOINT {x | x IN s /\\ P x} {x | x IN s /\\ ~P x}
       #|  iterate op (support op f s UNION support op g s)\n                         (\\x. op ((f:A->B) x) (g x))
-      #|  !op. monoidal op\n        ==> !f g:A->B s.\n                FINITE(support op f s) /\\ FINITE(support op g s)\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)
+      #|  forall op. monoidal op\n        ==> forall f g:A->B s.\n                FINITE(support op f s) /\\ FINITE(support op g s)\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)
       #|  ~(SUC n <= n)
-      #|  !op. monoidal op\n        ==> (!m. iterate op (m..0) f = if m = 0 then f(0) else neutral op) /\\\n            (!m n. iterate op (m..SUC n) f :A =\n                   if m <= SUC n then op (iterate op (m..n) f) (f(SUC n))\n                   else iterate op (m..n) f)
-      #|  !op. monoidal op\n        ==> iterate op {i | i < 0} f :A = neutral op /\\\n            (!k. iterate op {i | i < SUC k} f =\n                 op (iterate op {i | i < k} f) (f k))
+      #|  forall op. monoidal op\n        ==> (forall m. iterate op (m..0) f = if m = 0 then f(0) else neutral op) /\\\n            (forall m n. iterate op (m..SUC n) f :A =\n                   if m <= SUC n then op (iterate op (m..n) f) (f(SUC n))\n                   else iterate op (m..n) f)
+      #|  forall op. monoidal op\n        ==> iterate op {i | i < 0} f :A = neutral op /\\\n            (forall k. iterate op {i | i < SUC k} f =\n                 op (iterate op {i | i < k} f) (f k))
       #|  ~(SUC k <= k)
-      #|  !op. monoidal op\n        ==> iterate op {i | i <= 0} f :A = f 0 /\\\n            (!k. iterate op {i | i <= SUC k} f =\n                 op (iterate op {i | i <= k} f) (f(SUC k)))
+      #|  forall op. monoidal op\n        ==> iterate op {i | i <= 0} f :A = f 0 /\\\n            (forall k. iterate op {i | i <= SUC k} f =\n                 op (iterate op {i | i <= k} f) (f(SUC k)))
       #|  2 * SUC n + 1 = SUC(SUC(2 * n + 1))
       #|  2 * SUC n = SUC(2 * n + 1)
       #|  2 * m <= SUC(2 * n + 1) <=> m <= SUC n
@@ -5713,48 +5713,48 @@ test "iterate matches iterate.ml" {
       #|  2 * SUC n + 1 = SUC(SUC(2 * n + 1))
       #|  2 * m <= SUC 0 <=> m = 0
       #|  1
-      #|  !op. monoidal op\n        ==> !f m n. iterate op (2*m..2*n+1) f :A =\n                    iterate op (m..n) (\\i. op (f(2*i)) (f(2*i+1)))
+      #|  forall op. monoidal op\n        ==> forall f m n. iterate op (2*m..2*n+1) f :A =\n                    iterate op (m..n) (\\i. op (f(2*i)) (f(2*i+1)))
       #|  x = n - y /\\ 0 <= y /\\ y <= n - m <=>\n     y = n - x /\\ x <= n /\\ y <= n - m
       #|  :A
       #|  :X
       #|  0..n-m
       #|  x:num->A
       #|  \\i:num. n - i
-      #|  !op:A->A->A.\n        monoidal op\n        ==> !x m n. iterate op (m..n) x =\n                    if n < m then neutral op\n                    else iterate op (0..n-m) (\\i. x(n - i))
+      #|  forall op:A->A->A.\n        monoidal op\n        ==> forall x m n. iterate op (m..n) x =\n                    if n < m then neutral op\n                    else iterate op (0..n-m) (\\i. x(n - i))
       #|  p /\\ q /\\ ~(p /\\ ~r /\\ q) <=> r /\\ p /\\ q
       #|  {i | i IN k DIFF {a} /\\ P i} = {i | i IN k /\\ P i} DELETE a
       #|  \\k. CARD {i | i IN k /\\ (f:K->A) i IN dom DIFF {neut}}
-      #|  ?itty.\n      !dom neut op (<<=) k (f:K->A).\n         itty dom neut op (<<=) k f =\n         if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n            ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n         then let i = if ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                             !j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut}\n                                 ==> j = i\n                       then @i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                                !j. j <<= i /\\ j IN k /\\\n                                    f j IN dom DIFF {neut}\n                                    ==> j = i\n                       else @i. i IN k /\\ f i IN dom DIFF {neut} in\n              op (f i) (itty dom neut op (<<=)\n                          {j | j IN k DELETE i /\\ f j IN dom DIFF {neut}} f)\n         else neut
+      #|  ?itty.\n      forall dom neut op (<<=) k (f:K->A).\n         itty dom neut op (<<=) k f =\n         if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n            ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n         then let i = if ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                             forall j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut}\n                                 ==> j = i\n                       then @i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                                forall j. j <<= i /\\ j IN k /\\\n                                    f j IN dom DIFF {neut}\n                                    ==> j = i\n                       else @i. i IN k /\\ f i IN dom DIFF {neut} in\n              op (f i) (itty dom neut op (<<=)\n                          {j | j IN k DELETE i /\\ f j IN dom DIFF {neut}} f)\n         else neut
       #|  y IN {x | x IN s /\\ P x} /\\ P y <=>\n                        y IN {x | x IN s /\\ P x}
-      #|  !dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f =\n        iterato dom neut op (<<=) k f
-      #|  !dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}}\n        then iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f\n        else neut
+      #|  forall dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f =\n        iterato dom neut op (<<=) k f
+      #|  forall dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}}\n        then iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f\n        else neut
       #|  j:K = i
       #|  j:K
       #|  ~(i IN k) ==> (i INSERT k) DELETE i = k
-      #|  (@i'. i' IN i INSERT k /\\\n          (f:K->A) i' IN dom DIFF {neut} /\\\n          (!j. j <<= i' /\\ j IN i INSERT k /\\ f j IN dom DIFF {neut}\n               ==> j = i')) = i
+      #|  (@i'. i' IN i INSERT k /\\\n          (f:K->A) i' IN dom DIFF {neut} /\\\n          (forall j. j <<= i' /\\ j IN i INSERT k /\\ f j IN dom DIFF {neut}\n               ==> j = i')) = i
       #|  i:K
       #|  i INSERT {j | j IN k /\\ (f:K->A) j IN dom DIFF {neut}}
       #|  q /\\ p /\\ x = z ==> (if p /\\ q then x else y) = z
       #|  x IN dom ==> x = a <=> ~(x IN dom DIFF {a})
       #|  i IN k ==> i INSERT k = k
       #|  (i:K) IN k
-      #|  !dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!i k. FINITE {j | j IN k /\\ f j IN dom DIFF {neut}} /\\\n               (!j. j IN k ==> i = j \\/ i <<= j \\/ j <<= i) /\\\n               (!j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut} ==> j = i)\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))
-      #|  !dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!i k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n               (!j. j IN k ==> i <<= j /\\ ~(j <<= i))\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))
+      #|  forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall i k. FINITE {j | j IN k /\\ f j IN dom DIFF {neut}} /\\\n               (forall j. j IN k ==> i = j \\/ i <<= j \\/ j <<= i) /\\\n               (forall j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut} ==> j = i)\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))
+      #|  forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall i k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n               (forall j. j IN k ==> i <<= j /\\ ~(j <<= i))\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))
       #|  t = i ==> (t = i ==> P i) ==> ?j. P j
-      #|  !dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n             ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n             ==> ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                     iterato dom neut op (<<=) k f =\n                     op (f i) (iterato dom neut op (<<=) (k DELETE i) f))
+      #|  forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n             ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n             ==> ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                     iterato dom neut op (<<=) k f =\n                     op (f i) (iterato dom neut op (<<=) (k DELETE i) f))
       #|  {j | j IN s DELETE i /\\ P j} = {j | j IN s /\\ P j} DELETE i
       #|  (i:K) IN k
-      #|  !s i. i IN k /\\ (f:K->A) i IN s <=> i IN k /\\ g i IN s
+      #|  forall s i. i IN k /\\ (f:K->A) i IN s <=> i IN k /\\ g i IN s
       #|  k:K->bool = {}
       #|  k:K->bool
       #|  n:num
-      #|  (!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)
+      #|  (forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)
       #|  k:K->bool
       #|  {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}}
       #|  FINITE {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}}
-      #|  !i. i IN {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}} ==> f i = g i
+      #|  forall i. i IN {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}} ==> f i = g i
       #|  p /\\ q <=> ~(p ==> ~q)
-      #|  !dom neut op (<<=) k f (g:K->A).\n        (!i. i IN k ==> f i = g i)\n        ==> iterato dom neut op (<<=) k f = iterato dom neut op (<<=) k g
+      #|  forall dom neut op (<<=) k f (g:K->A).\n        (forall i. i IN k ==> f i = g i)\n        ==> iterato dom neut op (<<=) k f = iterato dom neut op (<<=) k g
       #|  n - 1 < n <=> ~(n = 0)
       #|  n - 1
       #|  i:K
@@ -5768,13 +5768,13 @@ test "iterate matches iterate.ml" {
       #|  k:K->bool = {}
       #|  k:K->bool
       #|  n:num
-      #|  (!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)
+      #|  (forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)
       #|  k:K->bool
       #|  {i | i IN k /\\ (f:K->A) i IN dom DIFF {neut}}
       #|  (a /\\ p ==> if q then r else T) <=> a ==> q ==> p ==> r
       #|  i IN k /\\ f i IN s /\\ ~(f i = z) /\\ Q <=>\n    i IN {j | j IN k /\\ f j IN s DIFF {z}} /\\ Q
-      #|  !dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (!i x. i IN k /\\ f i IN dom /\\ ~(f i = neut) /\\ P x ==> P (op (f i) x))\n        ==> P(iterato dom neut op (<<=) k f)
-      #|  !dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (!x y. P x /\\ P y ==> P(op x y)) /\\\n        (!i. i IN k /\\ f i IN dom /\\ ~(f i = neut) ==> P(f i))\n        ==> P(iterato dom neut op (<<=) k f)
+      #|  forall dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (forall i x. i IN k /\\ f i IN dom /\\ ~(f i = neut) /\\ P x ==> P (op (f i) x))\n        ==> P(iterato dom neut op (<<=) k f)
+      #|  forall dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (forall x y. P x /\\ P y ==> P(op x y)) /\\\n        (forall i. i IN k /\\ f i IN dom /\\ ~(f i = neut) ==> P(f i))\n        ==> P(iterato dom neut op (<<=) k f)
       #|  i IN k ==> i INSERT (k DELETE i) = k
       #|  k DELETE (i:K)
       #|  i:K
@@ -5793,13 +5793,13 @@ test "iterate matches iterate.ml" {
       #|  k:K->bool = {}
       #|  k:K->bool
       #|  n:num
-      #|  (!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)
+      #|  (forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)
       #|  k:K->bool
       #|  {i | i IN k /\\ ~((f:K->A) i = neutral op)}
       #|  (p ==> x = y) ==> (if p then x else z) = (if p then y else z)
       #|  f:K->A
       #|  k:K->bool
-      #|  !(op:A->A->A) ((<<=):K->K->bool).\n        monoidal op ==> iterato (:A) (neutral op) op (<<=) = iterate op
+      #|  forall(op:A->A->A) ((<<=):K->K->bool).\n        monoidal op ==> iterato (:A) (neutral op) op (<<=) = iterate op
       #|  ~(m + 1 <= m)
       #|  m+1..n
       #|  m:num
@@ -5808,161 +5808,161 @@ test "iterate matches iterate.ml" {
       #|  op:A->A->A
       #|  neut:A
       #|  dom:A->bool
-      #|  !dom neut op (f:num->A) m n.\n       iterato dom neut op (<=) (m..n) f =\n         if m <= n then\n           if f m IN dom ==> f m = neut\n           then iterato dom neut op (<=) (m+1..n) f\n           else op (f m) (iterato dom neut op (<=) (m+1..n) f)\n         else neut
+      #|  forall dom neut op (f:num->A) m n.\n       iterato dom neut op (<=) (m..n) f =\n         if m <= n then\n           if f m IN dom ==> f m = neut\n           then iterato dom neut op (<=) (m+1..n) f\n           else op (f m) (iterato dom neut op (<=) (m+1..n) f)\n         else neut
       #|  nproduct:(A->bool)->(A->num)->num = iterate(( * ):num->num->num)
       #|  neutral(( * ):num->num->num) = 1
       #|  monoidal(( * ):num->num->num)
-      #|  (!f:A->num. nproduct {} f = 1) /\\\n   (!x (f:B->num) s.\n        FINITE(s)\n        ==> (nproduct (x INSERT s) f =\n             if x IN s then nproduct s f else f(x) * nproduct s f))
+      #|  (forall f:A->num. nproduct {} f = 1) /\\\n   (forall x (f:B->num) s.\n        FINITE(s)\n        ==> (nproduct (x INSERT s) f =\n             if x IN s then nproduct s f else f(x) * nproduct s f))
       #|  iproduct:(A->bool)->(A->int)->int = iterate (( * ):int->int->int)
       #|  neutral(( * ):int->int->int) = &1
       #|  monoidal(( * ):int->int->int)
-      #|  (!f:A->int. iproduct {} f = &1) /\\\n   (!x (f:B->int) s.\n        FINITE(s)\n        ==> (iproduct (x INSERT s) f =\n             if x IN s then iproduct s f else f(x) * iproduct s f))
+      #|  (forall f:A->int. iproduct {} f = &1) /\\\n   (forall x (f:B->int) s.\n        FINITE(s)\n        ==> (iproduct (x INSERT s) f =\n             if x IN s then iproduct s f else f(x) * iproduct s f))
       #|  product:(A->bool)->(A->real)->real = iterate (( * ):real->real->real)
       #|  neutral(( * ):real->real->real) = &1
       #|  monoidal(( * ):real->real->real)
-      #|  (!f:A->real. product {} f = &1) /\\\n   (!x (f:B->real) s.\n        FINITE(s)\n        ==> (product (x INSERT s) f =\n             if x IN s then product s f else f(x) * product s f))
+      #|  (forall f:A->real. product {} f = &1) /\\\n   (forall x (f:B->real) s.\n        FINITE(s)\n        ==> (product (x INSERT s) f =\n             if x IN s then product s f else f(x) * product s f))
       #|  isum:(A->bool)->(A->int)->int = iterate((+):int->int->int)
       #|  neutral((+):int->int->int) = &0
       #|  monoidal((+):int->int->int)
-      #|  (!f:A->int. isum {} f = &0) /\\\n   (!x (f:B->int) s.\n        FINITE(s)\n        ==> (isum (x INSERT s) f =\n             if x IN s then isum s f else f(x) + isum s f))
+      #|  (forall f:A->int. isum {} f = &0) /\\\n   (forall x (f:B->int) s.\n        FINITE(s)\n        ==> (isum (x INSERT s) f =\n             if x IN s then isum s f else f(x) + isum s f))
       #|  nsum:(A->bool)->(A->num)->num = iterate (+)
       #|  neutral((+):num->num->num) = 0
       #|  monoidal((+):num->num->num)
-      #|  !f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = 0)}) ==> nsum s f = 0
-      #|  (!f:A->num. nsum {} f = 0) /\\\n   (!x (f:B->num) s.\n        FINITE(s)\n        ==> (nsum (x INSERT s) f =\n             if x IN s then nsum s f else f(x) + nsum s f))
-      #|  !f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> nsum (s UNION t) f = nsum s f + nsum t f
+      #|  forall f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = 0)}) ==> nsum s f = 0
+      #|  (forall f:A->num. nsum {} f = 0) /\\\n   (forall x (f:B->num) s.\n        FINITE(s)\n        ==> (nsum (x INSERT s) f =\n             if x IN s then nsum s f else f(x) + nsum s f))
+      #|  forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> nsum (s UNION t) f = nsum s f + nsum t f
       #|  (x + z = y:num) ==> (x = y - z)
-      #|  !f s t:A->bool.\n        FINITE s /\\ t SUBSET s\n        ==> nsum (s DIFF t) f = nsum s f - nsum t f
-      #|  !s t (f:A->num).\n     FINITE s /\\ FINITE t\n     ==> nsum s f + nsum t f = nsum (s UNION t) f + nsum (s INTER t) f
-      #|  !f s:A->bool. nsum (support (+) f s) f = nsum s f
-      #|  !f g s:A->bool.\n        FINITE s ==> (nsum s (\\x. f(x) + g(x)) = nsum s f + nsum s g)
-      #|  !f g s:A->bool.\n        FINITE {x | x IN s /\\ ~(f x = 0)} /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n        ==> nsum s (\\x. f x + g x) = nsum s f + nsum s g
-      #|  !f s:A->bool. (!x. x IN s ==> f(x) = 0) ==> nsum s f = 0
-      #|  !s:A->bool. nsum s (\\n. 0) = 0
+      #|  forall f s t:A->bool.\n        FINITE s /\\ t SUBSET s\n        ==> nsum (s DIFF t) f = nsum s f - nsum t f
+      #|  forall s t (f:A->num).\n     FINITE s /\\ FINITE t\n     ==> nsum s f + nsum t f = nsum (s UNION t) f + nsum (s INTER t) f
+      #|  forall f s:A->bool. nsum (support (+) f s) f = nsum s f
+      #|  forall f g s:A->bool.\n        FINITE s ==> (nsum s (\\x. f(x) + g(x)) = nsum s f + nsum s g)
+      #|  forall f g s:A->bool.\n        FINITE {x | x IN s /\\ ~(f x = 0)} /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n        ==> nsum s (\\x. f x + g x) = nsum s f + nsum s g
+      #|  forall f s:A->bool. (forall x. x IN s ==> f(x) = 0) ==> nsum s f = 0
+      #|  forall s:A->bool. nsum s (\\n. 0) = 0
       #|  t:A->bool
       #|  support (+) f (s:A->bool)
       #|  FINITE (support (+) f (s:A->bool))
       #|  support (+) (\\x:A. c * f(x)) s = support (+) f s
       #|  c = 0
-      #|  !f c s:A->bool. nsum s (\\x. c * f(x)) = c * nsum s f
-      #|  !f c s:A->bool. nsum s (\\x. f(x) * c) = nsum s f * c
-      #|  !f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x))\n        ==> nsum s f <= nsum s g
+      #|  forall f c s:A->bool. nsum s (\\x. c * f(x)) = c * nsum s f
+      #|  forall f c s:A->bool. nsum s (\\x. f(x) * c) = nsum s f * c
+      #|  forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x))\n        ==> nsum s f <= nsum s g
       #|  a:A IN s
       #|  s = (a:A) INSERT (s DELETE a)
       #|  a:A
-      #|  !f g s:A->bool.\n         FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) /\\\n         (?x. x IN s /\\ f(x) < g(x))\n         ==> nsum s f < nsum s g
-      #|  !f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> f(x) < g(x))\n        ==> nsum s f < nsum s g
-      #|  !f g s:A->bool. (!x. x IN s ==> f x = g x) ==> nsum s f = nsum s g
-      #|  !c s:A->bool. FINITE s ==> (nsum s (\\n. c) = (CARD s) * c)
+      #|  forall f g s:A->bool.\n         FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\\n         (?x. x IN s /\\ f(x) < g(x))\n         ==> nsum s f < nsum s g
+      #|  forall f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> f(x) < g(x))\n        ==> nsum s f < nsum s g
+      #|  forall f g s:A->bool. (forall x. x IN s ==> f x = g x) ==> nsum s f = nsum s g
+      #|  forall c s:A->bool. FINITE s ==> (nsum s (\\n. c) = (CARD s) * c)
       #|  0 <= x /\\ 0 <= y /\\ x + y <= b ==> x <= b /\\ y <= b
-      #|  !f b s:A->bool. FINITE s /\\ nsum s f <= b ==> !x:A. x IN s ==> f x <= b
+      #|  forall f b s:A->bool. FINITE s /\\ nsum s f <= b ==> forall x:A. x IN s ==> f x <= b
       #|  n = 0 <=> n <= 0
-      #|  !s:A->bool. FINITE s ==> (nsum s f = 0 <=> !x. x IN s ==> f x = 0)
+      #|  forall s:A->bool. FINITE s ==> (nsum s f = 0 <=> forall x. x IN s ==> f x = 0)
       #|  0 < n <=> ~(n = 0)
-      #|  !f s:A->bool.\n        FINITE s /\\ (?x. x IN s /\\ 0 < f x)\n        ==> 0 < nsum s f
-      #|  !s f:A->num.\n     FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> 0 < f i) ==> 0 < nsum s f
-      #|  !f s a:A. FINITE s /\\ a IN s ==> f(a) + nsum(s DELETE a) f = nsum s f
-      #|  !f x:A. nsum {x} f = f(x)
-      #|  !s a. nsum s (\\x. if x = a:A then b else 0) = if a IN s then b else 0
-      #|  !f:A->B->num s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (nsum s (\\i. nsum t (f i)) = nsum t (\\j. nsum s (\\i. f i j)))
-      #|  !(f:A->B) g s.\n        (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (nsum (IMAGE f s) g = nsum s (g o f))
-      #|  !f:A->num u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> (nsum v f = nsum u f)
-      #|  !f:A->num s. support (+) f (:A) SUBSET s ==> nsum s f = nsum (:A) f
+      #|  forall f s:A->bool.\n        FINITE s /\\ (?x. x IN s /\\ 0 < f x)\n        ==> 0 < nsum s f
+      #|  forall s f:A->num.\n     FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> 0 < f i) ==> 0 < nsum s f
+      #|  forall f s a:A. FINITE s /\\ a IN s ==> f(a) + nsum(s DELETE a) f = nsum s f
+      #|  forall f x:A. nsum {x} f = f(x)
+      #|  forall s a. nsum s (\\x. if x = a:A then b else 0) = if a IN s then b else 0
+      #|  forall f:A->B->num s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (nsum s (\\i. nsum t (f i)) = nsum t (\\j. nsum s (\\i. f i j)))
+      #|  forall(f:A->B) g s.\n        (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (nsum (IMAGE f s) g = nsum s (g o f))
+      #|  forall f:A->num u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> (nsum v f = nsum u f)
+      #|  forall f:A->num s. support (+) f (:A) SUBSET s ==> nsum s f = nsum (:A) f
       #|  u UNION v = u UNION (v DIFF u)
-      #|  !f:A->num u v.\n        FINITE u /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum u f
-      #|  !f:A->num u v.\n        FINITE v /\\ (!x. x IN u /\\ ~(x IN v) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum v f
-      #|  !f s:A->bool.\n        FINITE s ==> nsum s (\\x. if x IN s then f(x) else 0) = nsum s f
-      #|  !s f b. FINITE s /\\ (!x:A. x IN s ==> f(x) <= b)\n           ==> nsum s f <= (CARD s) * b
+      #|  forall f:A->num u v.\n        FINITE u /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum u f
+      #|  forall f:A->num u v.\n        FINITE v /\\ (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum v f
+      #|  forall f s:A->bool.\n        FINITE s ==> nsum s (\\x. if x IN s then f(x) else 0) = nsum s f
+      #|  forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f(x) <= b)\n           ==> nsum s f <= (CARD s) * b
       #|  nsum s (\\x. CARD(s:A->bool) * f x) <= CARD s * b
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) <= b DIV (CARD s))\n           ==> nsum s f <= b
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) <= b DIV (CARD s))\n           ==> nsum s f <= b
       #|  nsum s (\\x:A. b)
-      #|  !s f b. FINITE s /\\ (!x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> nsum s f < (CARD s) * b
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b)\n           ==> nsum s f < (CARD s) * b
+      #|  forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> nsum s f < (CARD s) * b
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b)\n           ==> nsum s f < (CARD s) * b
       #|  a + 1 <= b <=> a < b
       #|  nsum (s:A->bool) (\\a. f(a) + 1)
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b DIV (CARD s))\n           ==> nsum s f < b
-      #|  !s t u:A->bool.\n        FINITE u /\\ (s INTER t = {}) /\\ (s UNION t = u)\n        ==> nsum s f + nsum t f = nsum u f
-      #|  !f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (!x. x IN t ==> (f x = g x)) /\\\n        (!x. x IN s /\\ ~(x IN t) ==> (f(x) = 0))\n        ==> (nsum s f = nsum t g)
-      #|  !P s f. nsum {x:A | x IN s /\\ P x} f = nsum s (\\x. if P x then f(x) else 0)
-      #|  !(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (nsum s (\\x. nsum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             nsum t (\\y. nsum {x | x IN s /\\ R x y} (\\x. f x y)))
-      #|  !s:A->bool. FINITE s ==> ((CARD s) = nsum s (\\x. 1))
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b DIV (CARD s))\n           ==> nsum s f < b
+      #|  forall s t u:A->bool.\n        FINITE u /\\ (s INTER t = {}) /\\ (s UNION t = u)\n        ==> nsum s f + nsum t f = nsum u f
+      #|  forall f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> (f(x) = 0))\n        ==> (nsum s f = nsum t g)
+      #|  forall P s f. nsum {x:A | x IN s /\\ P x} f = nsum s (\\x. if P x then f(x) else 0)
+      #|  forall(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (nsum s (\\x. nsum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             nsum t (\\y. nsum {x | x IN s /\\ R x y} (\\x. f x y)))
+      #|  forall s:A->bool. FINITE s ==> ((CARD s) = nsum s (\\x. 1))
       #|  nsum s (\\i:A. nsum {j:B | j IN t /\\ R i j} (\\j. 1))
-      #|  !R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) =\n             nsum t (\\i. (k i)))
+      #|  forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) =\n             nsum t (\\i. (k i)))
       #|  nsum t (\\i:B. k)
-      #|  !R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) = (k * CARD t))
-      #|  !f:A->B g s.\n        FINITE s\n        ==> nsum s g =\n            nsum (IMAGE f s) (\\y. nsum {x | x IN s /\\ f x = y} g)
+      #|  forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) = (k * CARD t))
+      #|  forall f:A->B g s.\n        FINITE s\n        ==> nsum s g =\n            nsum (IMAGE f s) (\\y. nsum {x | x IN s /\\ f x = y} g)
       #|  s:A->bool
       #|  g:A->num
       #|  f:A->B
-      #|  !f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> nsum t (\\y. nsum {x | x IN s /\\ f(x) = y} g) = nsum s g
+      #|  forall f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> nsum t (\\y. nsum {x | x IN s /\\ f(x) = y} g) = nsum s g
       #|  t:B->bool
       #|  s:A->bool
       #|  g:A->num
       #|  \\x:A. @y:B. y IN t /\\ R x y
-      #|  !R:A->B->bool g s t.\n         FINITE s /\\\n         (!x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> nsum t (\\y. nsum {x | x IN s /\\ R x y} g) = nsum s g
+      #|  forall R:A->B->bool g s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> nsum t (\\y. nsum {x | x IN s /\\ R x y} g) = nsum s g
       #|  (u INTER v) UNION (v DIFF u) = v
       #|  (u INTER v) UNION (u DIFF v) = u
       #|  u INTER v :A->bool
       #|  f:A->num
-      #|  !u v f. FINITE u /\\ FINITE v /\\ (!x:A. x IN (u DIFF v) ==> f(x) = 0)\n           ==> nsum u f <= nsum v f
+      #|  forall u v f. FINITE u /\\ FINITE v /\\ (forall x:A. x IN (u DIFF v) ==> f(x) = 0)\n           ==> nsum u f <= nsum v f
       #|  u DIFF v :A->bool
       #|  v DIFF u :A->bool
-      #|  !u v f:A->num. FINITE v /\\ u SUBSET v ==> nsum u f <= nsum v f
+      #|  forall u v f:A->num. FINITE v /\\ u SUBSET v ==> nsum u f <= nsum v f
       #|  nsum {x | x IN s /\\ ~(g(x:A) = 0)} f
-      #|  !f g s. (!x:A. x IN s ==> f x <= g x) /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n           ==> nsum s f <= nsum s g
+      #|  forall f g s. (forall x:A. x IN s ==> f x <= g x) /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n           ==> nsum s f <= nsum s g
       #|  i:A
-      #|  !a b s:A->bool.\n        FINITE s\n        ==> nsum s (\\i. a i * b i) <= nsum s a * nsum s b
-      #|  !d:B->num i:A->B s.\n    FINITE s /\\\n    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = 0)\n    ==> nsum (IMAGE i s) d = nsum s (d o i)
-      #|  !f p s:A->bool.\n        (!x. x IN s ==> p(x) IN s) /\\\n        (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> nsum s f = nsum s (f o p)
-      #|  !s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> nsum s (\\i. nsum (t i) (x i)) =\n            nsum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
-      #|  !s:A->bool t:B->bool f g h.\n        (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g
-      #|  !s:A->bool t:B->bool f g h k.\n        (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g
-      #|  !f p s:A->bool.\n        FINITE s /\\\n        (!x. x IN s ==> p x IN s) /\\\n        (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n        ==> nsum s (f o p) = nsum s f
-      #|  !f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (!x. x IN s INTER t ==> f(x) = 0)\n        ==> nsum (s UNION t) f = nsum s f + nsum t f
+      #|  forall a b s:A->bool.\n        FINITE s\n        ==> nsum s (\\i. a i * b i) <= nsum s a * nsum s b
+      #|  forall d:B->num i:A->B s.\n    FINITE s /\\\n    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = 0)\n    ==> nsum (IMAGE i s) d = nsum s (d o i)
+      #|  forall f p s:A->bool.\n        (forall x. x IN s ==> p(x) IN s) /\\\n        (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> nsum s f = nsum s (f o p)
+      #|  forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> nsum s (\\i. nsum (t i) (x i)) =\n            nsum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
+      #|  forall s:A->bool t:B->bool f g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g
+      #|  forall s:A->bool t:B->bool f g h k.\n        (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g
+      #|  forall f p s:A->bool.\n        FINITE s /\\\n        (forall x. x IN s ==> p x IN s) /\\\n        (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n        ==> nsum s (f o p) = nsum s f
+      #|  forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = 0)\n        ==> nsum (s UNION t) f = nsum s f + nsum t f
       #|  s:(A->bool)->bool
       #|  t:A->bool
-      #|  !f s. FINITE s /\\ (!t:A->bool. t IN s ==> FINITE t) /\\\n         (!t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = 0)\n         ==> nsum (UNIONS s) f = nsum s (\\t. nsum t f)
-      #|  !s P f g. FINITE s\n             ==> nsum s (\\x:A. if P x then f x else g x) =\n                 nsum {x | x IN s /\\ P x} f + nsum {x | x IN s /\\ ~P x} g
+      #|  forall f s. FINITE s /\\ (forall t:A->bool. t IN s ==> FINITE t) /\\\n         (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = 0)\n         ==> nsum (UNIONS s) f = nsum s (\\t. nsum t f)
+      #|  forall s P f g. FINITE s\n             ==> nsum s (\\x:A. if P x then f x else g x) =\n                 nsum {x | x IN s /\\ P x} f + nsum {x | x IN s /\\ ~P x} g
       #|  P:num->bool
-      #|  !P f:A->num s.\n        P(0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nsum s f)
+      #|  forall P f:A->num s.\n        P(0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nsum s f)
       #|  R:num->num->bool
-      #|  !R (f:A->num) g s.\n        R 0 0 /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)
+      #|  forall R (f:A->num) g s.\n        R 0 0 /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)
       #|  P:num->bool
-      #|  !P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nsum s f)
+      #|  forall P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nsum s f)
       #|  R:num->num->bool
-      #|  !R (f:A->num) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)
-      #|  !f g m n. nsum(m..n) (\\i. f(i) + g(i)) = nsum(m..n) f + nsum(m..n) g
-      #|  !f g m n. (!i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> nsum(m..n) f <= nsum(m..n) g
-      #|  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nsum(m..n) f = nsum(m..n) g)
-      #|  !c m n. nsum(m..n) (\\n. c) = ((n + 1) - m) * c
-      #|  !f m n. (!i. m <= i /\\ i <= n ==> (f(i) = 0)) ==> (nsum(m..n) f = 0)
-      #|  !f m n. nsum (m..n) f = 0 <=> !i. m <= i /\\ i <= n ==> f i = 0
-      #|  !f m n. n < m ==> (nsum(m..n) f = 0)
-      #|  !f n. nsum(n..n) f = f(n)
-      #|  (!m. nsum(m..0) f = if m = 0 then f(0) else 0) /\\\n   (!m n. nsum(m..SUC n) f = if m <= SUC n then nsum(m..n) f + f(SUC n)\n                             else nsum(m..n) f)
-      #|  nsum {i | i < 0} f = 0 /\\\n   (!k. nsum {i | i < SUC k} f = nsum {i | i < k} f + f k)
-      #|  nsum {i | i <= 0} f = f 0 /\\\n   (!k. nsum {i | i <= SUC k} f = nsum {i | i <= k} f + f(SUC k))
-      #|  !a b c d f.\n     nsum(a..b) (\\i. nsum(c..d) (f i)) =\n     nsum(c..d) (\\j. nsum(a..b) (\\i. f i j))
+      #|  forall R (f:A->num) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)
+      #|  forall f g m n. nsum(m..n) (\\i. f(i) + g(i)) = nsum(m..n) f + nsum(m..n) g
+      #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> nsum(m..n) f <= nsum(m..n) g
+      #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nsum(m..n) f = nsum(m..n) g)
+      #|  forall c m n. nsum(m..n) (\\n. c) = ((n + 1) - m) * c
+      #|  forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = 0)) ==> (nsum(m..n) f = 0)
+      #|  forall f m n. nsum (m..n) f = 0 <=> forall i. m <= i /\\ i <= n ==> f i = 0
+      #|  forall f m n. n < m ==> (nsum(m..n) f = 0)
+      #|  forall f n. nsum(n..n) f = f(n)
+      #|  (forall m. nsum(m..0) f = if m = 0 then f(0) else 0) /\\\n   (forall m n. nsum(m..SUC n) f = if m <= SUC n then nsum(m..n) f + f(SUC n)\n                             else nsum(m..n) f)
+      #|  nsum {i | i < 0} f = 0 /\\\n   (forall k. nsum {i | i < SUC k} f = nsum {i | i < k} f + f k)
+      #|  nsum {i | i <= 0} f = f 0 /\\\n   (forall k. nsum {i | i <= SUC k} f = nsum {i | i <= k} f + f(SUC k))
+      #|  forall a b c d f.\n     nsum(a..b) (\\i. nsum(c..d) (f i)) =\n     nsum(c..d) (\\j. nsum(a..b) (\\i. f i j))
       #|  x < x + 1
-      #|  !f m n p.\n        m <= n + 1 ==> (nsum (m..(n+p)) f = nsum(m..n) f + nsum(n+1..n+p) f)
-      #|  !p f m n. nsum(m+p..n+p) f = nsum(m..n) (\\i. f(i + p))
-      #|  !f m n. m <= n ==> (nsum(m..n) f = nsum(0..n-m) (\\i. f(i + m)))
-      #|  !f m n. m <= n ==> nsum(m..n) f = f(m) + nsum(m+1..n) f
-      #|  !f m n. 0 < n /\\ m <= n ==> nsum(m..n) f = nsum(m..n-1) f + f(n)
-      #|  !f m n. nsum(2*m..2*n+1) f = nsum(m..n) (\\i. f(2*i) + f(2*i+1))
-      #|  !x m n. nsum(m..n) x = if n < m then 0 else nsum(0..n-m) (\\i. x(n - i))
+      #|  forall f m n p.\n        m <= n + 1 ==> (nsum (m..(n+p)) f = nsum(m..n) f + nsum(n+1..n+p) f)
+      #|  forall p f m n. nsum(m+p..n+p) f = nsum(m..n) (\\i. f(i + p))
+      #|  forall f m n. m <= n ==> (nsum(m..n) f = nsum(0..n-m) (\\i. f(i + m)))
+      #|  forall f m n. m <= n ==> nsum(m..n) f = f(m) + nsum(m+1..n) f
+      #|  forall f m n. 0 < n /\\ m <= n ==> nsum(m..n) f = nsum(m..n-1) f + f(n)
+      #|  forall f m n. nsum(2*m..2*n+1) f = nsum(m..n) (\\i. f(2*i) + f(2*i+1))
+      #|  forall x m n. nsum(m..n) x = if n < m then 0 else nsum(0..n-m) (\\i. x(n - i))
       #|  n = 0
-      #|  !f:A->num n s.\n        FINITE s ==> (nsum s f) MOD n = nsum s (\\i. f(i) MOD n) MOD n
-      #|  !f a b n.\n        (nsum(a..b) f) MOD n = nsum(a..b) (\\i. f i MOD n) MOD n
+      #|  forall f:A->num n s.\n        FINITE s ==> (nsum s f) MOD n = nsum s (\\i. f(i) MOD n) MOD n
+      #|  forall f a b n.\n        (nsum(a..b) f) MOD n = nsum(a..b) (\\i. f i MOD n) MOD n
       #|  s:A->bool
       #|  g:A->num
       #|  f:A->num
       #|  \\x y:num. (x == y) (mod n)
-      #|  !n (f:A->num) g s.\n        FINITE s /\\ (!x. x IN s ==> (f x == g x) (mod n))\n        ==> (nsum s f == nsum s g) (mod n)
-      #|  (!f g s:A->bool.\n        (!x. x IN s ==> f(x) = g(x))\n        ==> nsum s (\\i. f(i)) = nsum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> nsum(a..b) (\\i. f(i)) = nsum(a..b) g) /\\\n   (!f g p. (!x. p x ==> f x = g x)\n            ==> nsum {y | p y} (\\i. f(i)) = nsum {y | p y} g)
-      #|  !(f:K->A->bool) s.\n        FINITE s /\\ (!t. t IN s ==> FINITE(f t)) /\\\n        (!t u. t IN s /\\ u IN s /\\ ~(t = u) ==> f t INTER f u = {})\n        ==> CARD(UNIONS(IMAGE f s)) = nsum s (\\i. CARD(f i))
+      #|  forall n (f:A->num) g s.\n        FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n        ==> (nsum s f == nsum s g) (mod n)
+      #|  (forall f g s:A->bool.\n        (forall x. x IN s ==> f(x) = g(x))\n        ==> nsum s (\\i. f(i)) = nsum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> nsum(a..b) (\\i. f(i)) = nsum(a..b) g) /\\\n   (forall f g p. (forall x. p x ==> f x = g x)\n            ==> nsum {y | p y} (\\i. f(i)) = nsum {y | p y} g)
+      #|  forall(f:K->A->bool) s.\n        FINITE s /\\ (forall t. t IN s ==> FINITE(f t)) /\\\n        (forall t u. t IN s /\\ u IN s /\\ ~(t = u) ==> f t INTER f u = {})\n        ==> CARD(UNIONS(IMAGE f s)) = nsum s (\\i. CARD(f i))
       #|  \\x:A->bool. x
-      #|  !s:(A->bool)->bool.\n        FINITE s /\\ (!t. t IN s ==> FINITE t) /\\\n        (!t u. t IN s /\\ u IN s /\\ ~(t = u) ==> t INTER u = {})\n        ==> CARD(UNIONS s) = nsum s CARD
+      #|  forall s:(A->bool)->bool.\n        FINITE s /\\ (forall t. t IN s ==> FINITE t) /\\\n        (forall t u. t IN s /\\ u IN s /\\ ~(t = u) ==> t INTER u = {})\n        ==> CARD(UNIONS s) = nsum s CARD
       #|  (n < m ==> nsum(m..n) f = 0) /\\\n     nsum(m..m) f = f m /\\\n     (m <= n ==> nsum (m..n) f = f m + nsum (m + 1..n) f)
       #|  ..
       #|  f:num->num
@@ -5971,174 +5971,174 @@ test "iterate matches iterate.ml" {
       #|  sum:(A->bool)->(A->real)->real = iterate (+)
       #|  neutral((+):real->real->real) = &0
       #|  monoidal((+):real->real->real)
-      #|  !f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = &0)}) ==> sum s f = &0
-      #|  (!f:A->real. sum {} f = &0) /\\\n   (!x (f:B->real) s.\n        FINITE(s)\n        ==> (sum (x INSERT s) f =\n             if x IN s then sum s f else f(x) + sum s f))
-      #|  !f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> sum (s UNION t) f = sum s f + sum t f
-      #|  !f s t:A->bool. FINITE s /\\ t SUBSET s ==> (sum (s DIFF t) f = sum s f - sum t f)
-      #|  !s t (f:A->real).\n     FINITE s /\\ FINITE t\n     ==> sum s f + sum t f = sum (s UNION t) f + sum (s INTER t) f
-      #|  !f s:A->bool. sum (support (+) f s) f = sum s f
-      #|  !f g s:A->bool. FINITE s ==> (sum s (\\x. f(x) + g(x)) = sum s f + sum s g)
-      #|  !f g s:A->bool.\n       FINITE {x | x IN s /\\ ~(f x = &0)} /\\ FINITE {x | x IN s /\\ ~(g x = &0)}\n       ==> sum s (\\x. f x + g x) = sum s f + sum s g
-      #|  !f s. (!x:A. x IN s ==> (f(x) = &0)) ==> (sum s f = &0)
-      #|  !s:A->bool. sum s (\\n. &0) = &0
+      #|  forall f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = &0)}) ==> sum s f = &0
+      #|  (forall f:A->real. sum {} f = &0) /\\\n   (forall x (f:B->real) s.\n        FINITE(s)\n        ==> (sum (x INSERT s) f =\n             if x IN s then sum s f else f(x) + sum s f))
+      #|  forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> sum (s UNION t) f = sum s f + sum t f
+      #|  forall f s t:A->bool. FINITE s /\\ t SUBSET s ==> (sum (s DIFF t) f = sum s f - sum t f)
+      #|  forall s t (f:A->real).\n     FINITE s /\\ FINITE t\n     ==> sum s f + sum t f = sum (s UNION t) f + sum (s INTER t) f
+      #|  forall f s:A->bool. sum (support (+) f s) f = sum s f
+      #|  forall f g s:A->bool. FINITE s ==> (sum s (\\x. f(x) + g(x)) = sum s f + sum s g)
+      #|  forall f g s:A->bool.\n       FINITE {x | x IN s /\\ ~(f x = &0)} /\\ FINITE {x | x IN s /\\ ~(g x = &0)}\n       ==> sum s (\\x. f x + g x) = sum s f + sum s g
+      #|  forall f s. (forall x:A. x IN s ==> (f(x) = &0)) ==> (sum s f = &0)
+      #|  forall s:A->bool. sum s (\\n. &0) = &0
       #|  t:A->bool
       #|  support (+) f (s:A->bool)
       #|  FINITE (support (+) f (s:A->bool))
       #|  support (+) (\\x:A. c * f(x)) s = support (+) f s
       #|  c = &0
-      #|  !f c s:A->bool. sum s (\\x. c * f(x)) = c * sum s f
-      #|  !f c s:A->bool. sum s (\\x. f(x) * c) = sum s f * c
+      #|  forall f c s:A->bool. sum s (\\x. c * f(x)) = c * sum s f
+      #|  forall f c s:A->bool. sum s (\\x. f(x) * c) = sum s f * c
       #|  --x = --(&1) * x
-      #|  !f s:A->bool. sum s (\\x. --(f(x))) = --(sum s f)
-      #|  !f g s:A->bool. FINITE s ==> sum s (\\x. f(x) - g(x)) = sum s f - sum s g
-      #|  !f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) ==> sum s f <= sum s g
+      #|  forall f s:A->bool. sum s (\\x. --(f(x))) = --(sum s f)
+      #|  forall f g s:A->bool. FINITE s ==> sum s (\\x. f(x) - g(x)) = sum s f - sum s g
+      #|  forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) ==> sum s f <= sum s g
       #|  a:A IN s
       #|  s = (a:A) INSERT (s DELETE a)
       #|  a:A
-      #|  !f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) /\\\n        (?x. x IN s /\\ f(x) < g(x))\n         ==> sum s f < sum s g
-      #|  !f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> f(x) < g(x))\n        ==> sum s f < sum s g
+      #|  forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\\n        (?x. x IN s /\\ f(x) < g(x))\n         ==> sum s f < sum s g
+      #|  forall f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> f(x) < g(x))\n        ==> sum s f < sum s g
       #|  sum (s:A->bool) (\\i. &0)
-      #|  !f s:A->bool.\n        FINITE s /\\\n        (!x. x IN s ==> &0 <= f x) /\\\n        (?x. x IN s /\\ &0 < f x)\n        ==> &0 < sum s f
-      #|  !s f:A->real.\n     FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> &0 < f i) ==> &0 < sum s f
-      #|  !f g s:A->bool. (!x. x IN s ==> (f x = g x)) ==> (sum s f = sum s g)
+      #|  forall f s:A->bool.\n        FINITE s /\\\n        (forall x. x IN s ==> &0 <= f x) /\\\n        (?x. x IN s /\\ &0 < f x)\n        ==> &0 < sum s f
+      #|  forall s f:A->real.\n     FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> &0 < f i) ==> &0 < sum s f
+      #|  forall f g s:A->bool. (forall x. x IN s ==> (f x = g x)) ==> (sum s f = sum s g)
       #|  abs(a) <= b ==> abs(x + a) <= abs(x) + b
-      #|  !f s:A->bool. FINITE(s) ==> abs(sum s f) <= sum s (\\x. abs(f x))
+      #|  forall f s:A->bool. FINITE(s) ==> abs(sum s f) <= sum s (\\x. abs(f x))
       #|  sum s (\\x:A. abs(f x))
-      #|  !f:A->real g s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> abs(f x) <= g x)\n        ==> abs(sum s f) <= sum s g
-      #|  !c s:A->bool. FINITE s ==> (sum s (\\n. c) = &(CARD s) * c)
+      #|  forall f:A->real g s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> abs(f x) <= g x)\n        ==> abs(sum s f) <= sum s g
+      #|  forall c s:A->bool. FINITE s ==> (sum s (\\n. c) = &(CARD s) * c)
       #|  {x:A | x IN s /\\ ~(f x = &0)}
       #|  f:A->real
       #|  \\x:A. &0
       #|  FINITE {x:A | x IN s /\\ ~(f x = &0)}
-      #|  !s:A->bool. (!x. x IN s ==> &0 <= f x) ==> &0 <= sum s f
+      #|  forall s:A->bool. (forall x. x IN s ==> &0 <= f x) ==> &0 <= sum s f
       #|  &0 <= x /\\ &0 <= y /\\ x + y <= b ==> x <= b /\\ y <= b
-      #|  !f b s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> &0 <= f x) /\\ sum s f <= b\n        ==> !x:A. x IN s ==> f x <= b
-      #|  !f s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> &0 <= f x) /\\ (sum s f = &0)\n        ==> !x. x IN s ==> f x = &0
+      #|  forall f b s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> &0 <= f x) /\\ sum s f <= b\n        ==> forall x:A. x IN s ==> f x <= b
+      #|  forall f s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> &0 <= f x) /\\ (sum s f = &0)\n        ==> forall x. x IN s ==> f x = &0
       #|  x = &0 <=> --x = &0
-      #|  (?j k:A. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0) \\/\n      (!i. i IN s ==> &0 <= u i) \\/ (!i. i IN s ==> &0 <= --(u i))
+      #|  (?j k:A. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0) \\/\n      (forall i. i IN s ==> &0 <= u i) \\/ (forall i. i IN s ==> &0 <= --(u i))
       #|  (&0 <= --u <=> ~(u > &0)) /\\ (&0 <= u <=> ~(u < &0))
-      #|  !(u:A->real) s.\n         FINITE s /\\ sum s u = &0\n         ==> (!i. i IN s ==> u i = &0) \\/\n             (?j k. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0)
+      #|  forall(u:A->real) s.\n         FINITE s /\\ sum s u = &0\n         ==> (forall i. i IN s ==> u i = &0) \\/\n             (?j k. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0)
       #|  y = z - x <=> x + y = z:real
-      #|  !f s a:A. FINITE s /\\ a IN s ==> sum (s DELETE a) f = sum s f - f(a)
+      #|  forall f s a:A. FINITE s /\\ a IN s ==> sum (s DELETE a) f = sum s f - f(a)
       #|  ~(a IN s) ==> (s DELETE a = s)
-      #|  !f s a:A. FINITE s\n             ==> sum (s DELETE a) f = if a IN s then sum s f - f(a)\n                                      else sum s f
-      #|  !f x:A. sum {x} f = f(x)
-      #|  !s a. sum s (\\x. if x = a:A then b else &0) = if a IN s then b else &0
-      #|  !f:A->B->real s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (sum s (\\i. sum t (f i)) = sum t (\\j. sum s (\\i. f i j)))
-      #|  !(f:A->B) g s.\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> sum (IMAGE f s) g = sum s (g o f)
-      #|  !f:A->real u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> (sum v f = sum u f)
-      #|  !f:A->real s. support (+) f (:A) SUBSET s ==> sum s f = sum (:A) f
+      #|  forall f s a:A. FINITE s\n             ==> sum (s DELETE a) f = if a IN s then sum s f - f(a)\n                                      else sum s f
+      #|  forall f x:A. sum {x} f = f(x)
+      #|  forall s a. sum s (\\x. if x = a:A then b else &0) = if a IN s then b else &0
+      #|  forall f:A->B->real s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (sum s (\\i. sum t (f i)) = sum t (\\j. sum s (\\i. f i j)))
+      #|  forall(f:A->B) g s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> sum (IMAGE f s) g = sum s (g o f)
+      #|  forall f:A->real u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> (sum v f = sum u f)
+      #|  forall f:A->real s. support (+) f (:A) SUBSET s ==> sum s f = sum (:A) f
       #|  u UNION v = u UNION (v DIFF u)
-      #|  !f:A->real u v.\n        FINITE u /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum u f
-      #|  !f:A->real u v.\n        FINITE v /\\ (!x. x IN u /\\ ~(x IN v) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum v f
-      #|  !f s:A->bool.\n        FINITE s ==> sum s (\\x. if x IN s then f(x) else &0) = sum s f
-      #|  !s f b. FINITE s /\\ (!x:A. x IN s ==> f(x) <= b)\n           ==> sum s f <= &(CARD s) * b
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) <= b / &(CARD s))\n           ==> sum s f <= b
+      #|  forall f:A->real u v.\n        FINITE u /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum u f
+      #|  forall f:A->real u v.\n        FINITE v /\\ (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum v f
+      #|  forall f s:A->bool.\n        FINITE s ==> sum s (\\x. if x IN s then f(x) else &0) = sum s f
+      #|  forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f(x) <= b)\n           ==> sum s f <= &(CARD s) * b
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) <= b / &(CARD s))\n           ==> sum s f <= b
       #|  sum s (\\x:A. abs(f x))
-      #|  !s f b. FINITE s /\\ (!x:A. x IN s ==> abs(f(x)) <= b)\n           ==> abs(sum s f) <= &(CARD s) * b
+      #|  forall s f b. FINITE s /\\ (forall x:A. x IN s ==> abs(f(x)) <= b)\n           ==> abs(sum s f) <= &(CARD s) * b
       #|  sum s (\\x:A. b)
-      #|  !s f b. FINITE s /\\ (!x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> sum s f < &(CARD s) * b
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b)\n           ==> sum s f <  &(CARD s) * b
-      #|  !s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b / &(CARD s))\n           ==> sum s f < b
-      #|  !s t u:A->bool.\n        FINITE u /\\ s INTER t = {} /\\ s UNION t = u\n        ==> sum s f + sum t f = sum u f
-      #|  !f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (!x. x IN t ==> (f x = g x)) /\\\n        (!x. x IN s /\\ ~(x IN t) ==> (f(x) = &0))\n        ==> (sum s f = sum t g)
-      #|  !P s f. sum {x:A | x IN s /\\ P x} f = sum s (\\x. if P x then f x else &0)
-      #|  !(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (sum s (\\x. sum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             sum t (\\y. sum {x | x IN s /\\ R x y} (\\x. f x y)))
-      #|  !s:A->bool. FINITE s ==> (&(CARD s) = sum s (\\x. &1))
+      #|  forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> sum s f < &(CARD s) * b
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b)\n           ==> sum s f <  &(CARD s) * b
+      #|  forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b / &(CARD s))\n           ==> sum s f < b
+      #|  forall s t u:A->bool.\n        FINITE u /\\ s INTER t = {} /\\ s UNION t = u\n        ==> sum s f + sum t f = sum u f
+      #|  forall f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> (f(x) = &0))\n        ==> (sum s f = sum t g)
+      #|  forall P s f. sum {x:A | x IN s /\\ P x} f = sum s (\\x. if P x then f x else &0)
+      #|  forall(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (sum s (\\x. sum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             sum t (\\y. sum {x | x IN s /\\ R x y} (\\x. f x y)))
+      #|  forall s:A->bool. FINITE s ==> (&(CARD s) = sum s (\\x. &1))
       #|  sum s (\\i:A. sum {j:B | j IN t /\\ R i j} (\\j. &1))
-      #|  !R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) =\n             sum t (\\i. &(k i)))
+      #|  forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) =\n             sum t (\\i. &(k i)))
       #|  sum t (\\i:B. &k)
-      #|  !R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) = &(k * CARD t))
-      #|  !f:A->B g s.\n        FINITE s\n        ==> sum s g =\n            sum (IMAGE f s) (\\y. sum {x | x IN s /\\ f x = y} g)
+      #|  forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) = &(k * CARD t))
+      #|  forall f:A->B g s.\n        FINITE s\n        ==> sum s g =\n            sum (IMAGE f s) (\\y. sum {x | x IN s /\\ f x = y} g)
       #|  s:A->bool
       #|  g:A->real
       #|  f:A->B
-      #|  !f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> sum t (\\y. sum {x | x IN s /\\ f(x) = y} g) = sum s g
+      #|  forall f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> sum t (\\y. sum {x | x IN s /\\ f(x) = y} g) = sum s g
       #|  t:B->bool
       #|  s:A->bool
       #|  g:A->real
       #|  \\x:A. @y:B. y IN t /\\ R x y
-      #|  !R:A->B->bool g s t.\n         FINITE s /\\\n         (!x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> sum t (\\y. sum {x | x IN s /\\ R x y} g) = sum s g
-      #|  !f s:A->bool. FINITE s ==> (&(nsum s f) = sum s (\\x. &(f x)))
+      #|  forall R:A->B->bool g s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> sum t (\\y. sum {x | x IN s /\\ R x y} g) = sum s g
+      #|  forall f s:A->bool. FINITE s ==> (&(nsum s f) = sum s (\\x. &(f x)))
       #|  &0 <= --x /\\ &0 <= y ==> a + x <= a + y
       #|  (u INTER v) UNION (v DIFF u) = v
       #|  (u INTER v) UNION (u DIFF v) = u
       #|  u INTER v :A->bool
       #|  f:A->real
-      #|  !u v f. FINITE u /\\ FINITE v /\\\n           (!x. x IN (u DIFF v) ==> f(x) <= &0) /\\\n           (!x:A. x IN (v DIFF u) ==> &0 <= f(x))\n           ==> sum u f <= sum v f
+      #|  forall u v f. FINITE u /\\ FINITE v /\\\n           (forall x. x IN (u DIFF v) ==> f(x) <= &0) /\\\n           (forall x:A. x IN (v DIFF u) ==> &0 <= f(x))\n           ==> sum u f <= sum v f
       #|  u DIFF v :A->bool
       #|  v DIFF u :A->bool
-      #|  !u v f.\n        FINITE v /\\ u SUBSET v /\\ (!x:A. x IN (v DIFF u) ==> &0 <= f(x))\n        ==> sum u f <= sum v f
+      #|  forall u v f.\n        FINITE v /\\ u SUBSET v /\\ (forall x:A. x IN (v DIFF u) ==> &0 <= f(x))\n        ==> sum u f <= sum v f
       #|  i:A
-      #|  !a b s:A->bool.\n        FINITE s /\\ (!i. i IN s ==> &0 <= a i /\\ &0 <= b i)\n        ==> sum s (\\i. a i * b i) <= sum s a * sum s b
-      #|  !d:B->real i:A->B s.\n    FINITE s /\\\n    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = &0)\n    ==> sum (IMAGE i s) d = sum s (d o i)
-      #|  !f p s:A->bool.\n        (!x. x IN s ==> p(x) IN s) /\\\n        (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> sum s f = sum s (f o p)
-      #|  !s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> sum s (\\i. sum (t i) (x i)) =\n            sum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
-      #|  !s:A->bool t:B->bool f g h.\n        (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> sum s f = sum t g
-      #|  !s:A->bool t:B->bool f g h k.\n        (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> sum s f = sum t g
-      #|  !f p s:A->bool.\n           FINITE s /\\\n           (!x. x IN s ==> p x IN s) /\\\n           (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> sum s (f o p) = sum s f
-      #|  !f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (!x. x IN s INTER t ==> f(x) = &0)\n        ==> sum (s UNION t) f = sum s f + sum t f
+      #|  forall a b s:A->bool.\n        FINITE s /\\ (forall i. i IN s ==> &0 <= a i /\\ &0 <= b i)\n        ==> sum s (\\i. a i * b i) <= sum s a * sum s b
+      #|  forall d:B->real i:A->B s.\n    FINITE s /\\\n    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = &0)\n    ==> sum (IMAGE i s) d = sum s (d o i)
+      #|  forall f p s:A->bool.\n        (forall x. x IN s ==> p(x) IN s) /\\\n        (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> sum s f = sum s (f o p)
+      #|  forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> sum s (\\i. sum (t i) (x i)) =\n            sum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)
+      #|  forall s:A->bool t:B->bool f g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> sum s f = sum t g
+      #|  forall s:A->bool t:B->bool f g h k.\n        (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> sum s f = sum t g
+      #|  forall f p s:A->bool.\n           FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> sum s (f o p) = sum s f
+      #|  forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = &0)\n        ==> sum (s UNION t) f = sum s f + sum t f
       #|  s:(A->bool)->bool
       #|  t:A->bool
-      #|  !f s. FINITE s /\\ (!t:A->bool. t IN s ==> FINITE t) /\\\n         (!t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = &0)\n         ==> sum (UNIONS s) f = sum s (\\t. sum t f)
-      #|  !s P f g. FINITE s\n             ==> sum s (\\x:A. if P x then f x else g x) =\n                 sum {x | x IN s /\\ P x} f + sum {x | x IN s /\\ ~P x} g
+      #|  forall f s. FINITE s /\\ (forall t:A->bool. t IN s ==> FINITE t) /\\\n         (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = &0)\n         ==> sum (UNIONS s) f = sum s (\\t. sum t f)
+      #|  forall s P f g. FINITE s\n             ==> sum s (\\x:A. if P x then f x else g x) =\n                 sum {x | x IN s /\\ P x} f + sum {x | x IN s /\\ ~P x} g
       #|  a IN s ==> {x | x IN s /\\ x = a} = {a}
-      #|  !s a:A. FINITE s /\\ a IN s\n           ==> sum s (\\x. if x = a then y else f(x)) = sum s f + (y - f a)
+      #|  forall s a:A. FINITE s /\\ a IN s\n           ==> sum s (\\x. if x = a then y else f(x)) = sum s f + (y - f a)
       #|  sum {y:B} g
       #|  y:B
       #|  x:A
       #|  x:A
       #|  sum s (\\y. sum {x | x IN t /\\ (i:B->A) x = y} g)
       #|  sum (IMAGE (i:B->A) t) (\\y. sum {x | x IN t /\\ i x = y} g)
-      #|  !f:A->real g:B->real s t i.\n        FINITE s /\\ FINITE t /\\\n        (!y. y IN t ==> &0 <= g y) /\\\n        (!x. x IN s ==> ?y. y IN t /\\ i y = x /\\ f(x) <= g(y))\n        ==> sum s f <= sum t g
+      #|  forall f:A->real g:B->real s t i.\n        FINITE s /\\ FINITE t /\\\n        (forall y. y IN t ==> &0 <= g y) /\\\n        (forall x. x IN s ==> ?y. y IN t /\\ i y = x /\\ f(x) <= g(y))\n        ==> sum s f <= sum t g
       #|  f:A->B
-      #|  !f:A->B g s.\n        FINITE s /\\\n        (!x. x IN s ==> &0 <= g(f x))\n        ==> sum (IMAGE f s) g <= sum s (g o f)
+      #|  forall f:A->B g s.\n        FINITE s /\\\n        (forall x. x IN s ==> &0 <= g(f x))\n        ==> sum (IMAGE f s) g <= sum s (g o f)
       #|  P:real->bool
-      #|  !P f:A->real s.\n        P(&0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(sum s f)
+      #|  forall P f:A->real s.\n        P(&0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(sum s f)
       #|  R:real->real->bool
-      #|  !R (f:A->real) g s.\n        R (&0) (&0) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)
+      #|  forall R (f:A->real) g s.\n        R (&0) (&0) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)
       #|  P:real->bool
-      #|  !P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(sum s f)
+      #|  forall P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(sum s f)
       #|  R:real->real->bool
-      #|  !R (f:A->real) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)
-      #|  !f s:A->bool.\n       FINITE {i | i IN s /\\ ~(f i = 0)} ==> &(nsum s f) = sum s (\\x. &(f x))
-      #|  !f g m n. sum(m..n) (\\i. f(i) + g(i)) = sum(m..n) f + sum(m..n) g
-      #|  !f g m n. sum(m..n) (\\i. f(i) - g(i)) = sum(m..n) f - sum(m..n) g
-      #|  !f g m n. (!i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> sum(m..n) f <= sum(m..n) g
-      #|  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (sum(m..n) f = sum(m..n) g)
-      #|  !f m n. abs(sum(m..n) f) <= sum(m..n) (\\i. abs(f i))
-      #|  !c m n. sum(m..n) (\\n. c) = &((n + 1) - m) * c
-      #|  !f m n. (!i. m <= i /\\ i <= n ==> (f(i) = &0)) ==> (sum(m..n) f = &0)
-      #|  !f m n. n < m ==> (sum(m..n) f = &0)
-      #|  !m n f. (!p. m <= p /\\ p <= n ==> &0 <= f(p)) ==> &0 <= sum(m..n) f
-      #|  !f m n. (!p. m <= p /\\ p <= n ==> &0 <= f(p)) /\\ (sum(m..n) f = &0)\n           ==> !p. m <= p /\\ p <= n ==> (f(p) = &0)
-      #|  !f n. sum(n..n) f = f(n)
-      #|  (!m. sum(m..0) f = if m = 0 then f(0) else &0) /\\\n   (!m n. sum(m..SUC n) f = if m <= SUC n then sum(m..n) f + f(SUC n)\n                            else sum(m..n) f)
-      #|  sum {i | i < 0} f = &0 /\\\n   (!k. sum {i | i < SUC k} f = sum {i | i < k} f + f k)
-      #|  sum {i | i <= 0} f = f 0 /\\\n   (!k. sum {i | i <= SUC k} f = sum {i | i <= k} f + f(SUC k))
-      #|  !a b c d f.\n     sum(a..b) (\\i. sum(c..d) (f i)) = sum(c..d) (\\j. sum(a..b) (\\i. f i j))
+      #|  forall R (f:A->real) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)
+      #|  forall f s:A->bool.\n       FINITE {i | i IN s /\\ ~(f i = 0)} ==> &(nsum s f) = sum s (\\x. &(f x))
+      #|  forall f g m n. sum(m..n) (\\i. f(i) + g(i)) = sum(m..n) f + sum(m..n) g
+      #|  forall f g m n. sum(m..n) (\\i. f(i) - g(i)) = sum(m..n) f - sum(m..n) g
+      #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> sum(m..n) f <= sum(m..n) g
+      #|  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (sum(m..n) f = sum(m..n) g)
+      #|  forall f m n. abs(sum(m..n) f) <= sum(m..n) (\\i. abs(f i))
+      #|  forall c m n. sum(m..n) (\\n. c) = &((n + 1) - m) * c
+      #|  forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = &0)) ==> (sum(m..n) f = &0)
+      #|  forall f m n. n < m ==> (sum(m..n) f = &0)
+      #|  forall m n f. (forall p. m <= p /\\ p <= n ==> &0 <= f(p)) ==> &0 <= sum(m..n) f
+      #|  forall f m n. (forall p. m <= p /\\ p <= n ==> &0 <= f(p)) /\\ (sum(m..n) f = &0)\n           ==> forall p. m <= p /\\ p <= n ==> (f(p) = &0)
+      #|  forall f n. sum(n..n) f = f(n)
+      #|  (forall m. sum(m..0) f = if m = 0 then f(0) else &0) /\\\n   (forall m n. sum(m..SUC n) f = if m <= SUC n then sum(m..n) f + f(SUC n)\n                            else sum(m..n) f)
+      #|  sum {i | i < 0} f = &0 /\\\n   (forall k. sum {i | i < SUC k} f = sum {i | i < k} f + f k)
+      #|  sum {i | i <= 0} f = f 0 /\\\n   (forall k. sum {i | i <= SUC k} f = sum {i | i <= k} f + f(SUC k))
+      #|  forall a b c d f.\n     sum(a..b) (\\i. sum(c..d) (f i)) = sum(c..d) (\\j. sum(a..b) (\\i. f i j))
       #|  x < x + 1
-      #|  !f m n p.\n        m <= n + 1 ==> (sum (m..(n+p)) f = sum(m..n) f + sum(n+1..n+p) f)
-      #|  !p f m n. sum(m+p..n+p) f = sum(m..n) (\\i. f(i + p))
-      #|  !f m n. m <= n ==> (sum(m..n) f = sum(0..n-m) (\\i. f(i + m)))
-      #|  !f m n. m <= n ==> sum(m..n) f = f(m) + sum(m+1..n) f
-      #|  !f m n. 0 < n /\\ m <= n ==> sum(m..n) f = sum(m..n-1) f + f(n)
-      #|  !f m n. sum(2*m..2*n+1) f = sum(m..n) (\\i. f(2*i) + f(2*i+1))
-      #|  !x m n. sum(m..n) x = if n < m then &0 else sum(0..n-m) (\\i. x(n - i))
-      #|  !f m n. (&(nsum(m..n) f) = sum (m..n) (\\i. &(f i)))
+      #|  forall f m n p.\n        m <= n + 1 ==> (sum (m..(n+p)) f = sum(m..n) f + sum(n+1..n+p) f)
+      #|  forall p f m n. sum(m+p..n+p) f = sum(m..n) (\\i. f(i + p))
+      #|  forall f m n. m <= n ==> (sum(m..n) f = sum(0..n-m) (\\i. f(i + m)))
+      #|  forall f m n. m <= n ==> sum(m..n) f = f(m) + sum(m+1..n) f
+      #|  forall f m n. 0 < n /\\ m <= n ==> sum(m..n) f = sum(m..n-1) f + f(n)
+      #|  forall f m n. sum(2*m..2*n+1) f = sum(m..n) (\\i. f(2*i) + f(2*i+1))
+      #|  forall x m n. sum(m..n) x = if n < m then &0 else sum(0..n-m) (\\i. x(n - i))
+      #|  forall f m n. (&(nsum(m..n) f) = sum (m..n) (\\i. &(f i)))
       #|  n < SUC n
-      #|  !f g m n.\n        sum (m..n) (\\k. f(k) * (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) * g(n + 1) - f(m) * g(m) -\n                           sum (m..n) (\\k. g(k + 1) * (f(k + 1) - f(k)))\n            else &0
+      #|  forall f g m n.\n        sum (m..n) (\\k. f(k) * (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) * g(n + 1) - f(m) * g(m) -\n                           sum (m..n) (\\k. g(k + 1) * (f(k + 1) - f(k)))\n            else &0
       #|  n:num
       #|  m:num
       #|  \\k. (g:num->real)(k - 1)
       #|  f:num->real
-      #|  !f g m n.\n        sum (m..n) (\\k. f(k) * (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) * g(n) - f(m) * g(m - 1) -\n                           sum (m..n) (\\k. g k * (f(k + 1) - f(k)))\n            else &0
+      #|  forall f g m n.\n        sum (m..n) (\\k. f(k) * (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) * g(n) - f(m) * g(m - 1) -\n                           sum (m..n) (\\k. g k * (f(k + 1) - f(k)))\n            else &0
       #|  a - b = -- &1 * (b - a)
-      #|  !m n. sum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else &0
-      #|  !m n. sum(m..n) (\\k. f(k + 1) - f(k)) =\n          if m <= n then f(n + 1) - f(m) else &0
-      #|  !f m n p. m <= n + 1 /\\ n <= p\n             ==> sum(m..n) f + sum(n+1..p) f = sum(m..p) f
-      #|  !f m n p. 0 < n /\\ m <= n /\\ n <= p + 1\n             ==> sum(m..n-1) f + sum(n..p) f = sum(m..p) f
-      #|  (!f g s:A->bool.\n        (!x. x IN s ==> f(x) = g(x))\n        ==> sum s (\\i. f(i)) = sum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> sum(a..b) (\\i. f(i)) = sum(a..b) g) /\\\n   (!f g p. (!x. p x ==> f x = g x)\n            ==> sum {y | p y} (\\i. f(i)) = sum {y | p y} g)
+      #|  forall m n. sum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else &0
+      #|  forall m n. sum(m..n) (\\k. f(k + 1) - f(k)) =\n          if m <= n then f(n + 1) - f(m) else &0
+      #|  forall f m n p. m <= n + 1 /\\ n <= p\n             ==> sum(m..n) f + sum(n+1..p) f = sum(m..p) f
+      #|  forall f m n p. 0 < n /\\ m <= n /\\ n <= p + 1\n             ==> sum(m..n-1) f + sum(n..p) f = sum(m..p) f
+      #|  (forall f g s:A->bool.\n        (forall x. x IN s ==> f(x) = g(x))\n        ==> sum s (\\i. f(i)) = sum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> sum(a..b) (\\i. f(i)) = sum(a..b) g) /\\\n   (forall f g p. (forall x. p x ==> f x = g x)\n            ==> sum {y | p y} (\\i. f(i)) = sum {y | p y} g)
       #|  (n < m ==> sum(m..n) f = &0) /\\\n     sum(m..m) f = f m /\\\n     (m <= n ==> sum (m..n) f = f m + sum (m + 1..n) f)
       #|  ..
       #|  f:num->real
@@ -6146,19 +6146,19 @@ test "iterate matches iterate.ml" {
       #|  n:num
       #|  1 <= n /\\ x <= n - 1\n     ==> n - 1 - x = n - (x + 1) /\\ SUC(n - 1 - x) = n - x
       #|  (x - y) * (a * b):real = (x * a) * b - a * (y * b)
-      #|  !x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * sum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))
+      #|  forall x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * sum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))
       #|  &1
       #|  x:real
-      #|  !x n. 1 <= n ==> x pow n - &1 = (x - &1) * sum(0..n-1) (\\i. x pow i)
-      #|  !x n. 1 <= n ==> &1 - x pow n = (&1 - x) * sum(0..n-1) (\\i. x pow i)
+      #|  forall x n. 1 <= n ==> x pow n - &1 = (x - &1) * sum(0..n-1) (\\i. x pow i)
+      #|  forall x n. 1 <= n ==> &1 - x pow n = (&1 - x) * sum(0..n-1) (\\i. x pow i)
       #|  a - b - c:num = a - (b + c)
       #|  \\(x:num,y:num). (y,x)
       #|  a * x * s:real = x * a * s
-      #|  !a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)
+      #|  forall a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)
       #|  \\k. j + k + 1
       #|  \\i. i - (j + 1)
       #|  j:num
-      #|  !a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)
+      #|  forall a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)
       #|  (n + 1) - n - 1 = 0
       #|  n:num
       #|  FINITE s /\\ CARD s <= n\n         ==> FINITE(r INSERT s) /\\ CARD(r INSERT s) <= SUC n
@@ -6174,21 +6174,21 @@ test "iterate matches iterate.ml" {
       #|  {x | sum (0..SUC n) (\\i. c i * x pow i) = &0} = {}
       #|  (c:num->real) (SUC n) = &0
       #|  c:num->real
-      #|  !n c. ~(!i. i IN 0..n ==> c i = &0)\n         ==> FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} /\\\n             CARD {x | sum(0..n) (\\i. c i * x pow i) = &0} <= n
+      #|  forall n c. ~(forall i. i IN 0..n ==> c i = &0)\n         ==> FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} /\\\n             CARD {x | sum(0..n) (\\i. c i * x pow i) = &0} <= n
       #|  {x | T} = (:real)
       #|  a /\\ ~b <=> ~(a ==> b)
-      #|  !n c. FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} <=>\n         ?i. i IN 0..n /\\ ~(c i = &0)
+      #|  forall n c. FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} <=>\n         ?i. i IN 0..n /\\ ~(c i = &0)
       #|  {x | T} = (:real)
       #|  p <=> ~ ~p
-      #|  !n c. (!x. sum(0..n) (\\i. c i * x pow i) = &0) <=>\n         (!i. i IN 0..n ==> c i = &0)
-      #|  (!n. P n) <=> P 0 /\\ (!n. ~(n = 0) ==> P n)
+      #|  forall n c. (forall x. sum(0..n) (\\i. c i * x pow i) = &0) <=>\n         (forall i. i IN 0..n ==> c i = &0)
+      #|  (forall n. P n) <=> P 0 /\\ (forall n. ~(n = 0) ==> P n)
       #|  (c - k) + s = &0 <=> c + s = k
-      #|  !x. sum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) = &0
-      #|  !n c k. (!x. sum(0..n) (\\i. c i * x pow i) = k) <=>\n           c 0 = k /\\ (!i. i IN 1..n ==> c i = &0)
-      #|  polynomial_function p <=> ?m c. !x. p x = sum(0..m) (\\i. c i * x pow i)
+      #|  forall x. sum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) = &0
+      #|  forall n c k. (forall x. sum(0..n) (\\i. c i * x pow i) = k) <=>\n           c 0 = k /\\ (forall i. i IN 1..n ==> c i = &0)
+      #|  polynomial_function p <=> ?m c. forall x. p x = sum(0..m) (\\i. c i * x pow i)
       #|  (\\i. c):num->real
       #|  0
-      #|  !c. polynomial_function (\\x. c)
+      #|  forall c. polynomial_function (\\x. c)
       #|  \\i. if i = 1 then &1 else &0
       #|  SUC 0
       #|  polynomial_function (\\x. x)
@@ -6199,16 +6199,16 @@ test "iterate matches iterate.ml" {
       #|  n:num
       #|  a:num->real
       #|  m:num
-      #|  !p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x + q x)
+      #|  forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x + q x)
       #|  \\i. c * (a:num->real) i
       #|  n:num
       #|  a:num->real
       #|  n:num
-      #|  !p c. polynomial_function p ==> polynomial_function (\\x. c * p x)
-      #|  !p c. polynomial_function p ==> polynomial_function (\\x. p x * c)
+      #|  forall p c. polynomial_function p ==> polynomial_function (\\x. c * p x)
+      #|  forall p c. polynomial_function p ==> polynomial_function (\\x. p x * c)
       #|  --(&1)
-      #|  !p. polynomial_function(\\x. --(p x)) <=> polynomial_function p
-      #|  !p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x - q x)
+      #|  forall p. polynomial_function(\\x. --(p x)) <=> polynomial_function p
+      #|  forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x - q x)
       #|  1
       #|  \\i. if i = 0 then &0 else (a:num->real)(i - 1)
       #|  n + 1
@@ -6218,17 +6218,17 @@ test "iterate matches iterate.ml" {
       #|  \\i. (c:num->real)(i + 1)
       #|  1
       #|  c:num->real
-      #|  (!q m c. P q m c) <=> (!m c q. P q m c)
-      #|  !p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x * q x)
-      #|  !s:A->bool p.\n        FINITE s /\\ (!i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. sum s (p x))
-      #|  !p n. polynomial_function p ==> polynomial_function (\\x. p x pow n)
+      #|  (forall q m c. P q m c) <=> (forall m c q. P q m c)
+      #|  forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x * q x)
+      #|  forall s:A->bool p.\n        FINITE s /\\ (forall i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. sum s (p x))
+      #|  forall p n. polynomial_function p ==> polynomial_function (\\x. p x pow n)
       #|  1
-      #|  (!q m c. P q m c) <=> (!m c q. P q m c)
-      #|  !P. P (\\x. x) /\\ (!c. P (\\x. c)) /\\\n      (!p q. P p /\\ P q ==> P (\\x. p x + q x)) /\\\n      (!p q. P p /\\ P q ==> P (\\x. p x * q x))\n      ==> !p. polynomial_function p ==> P p
-      #|  !p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (p o q)
+      #|  (forall q m c. P q m c) <=> (forall m c q. P q m c)
+      #|  forall P. P (\\x. x) /\\ (forall c. P (\\x. c)) /\\\n      (forall p q. P p /\\ P q ==> P (\\x. p x + q x)) /\\\n      (forall p q. P p /\\ P q ==> P (\\x. p x * q x))\n      ==> forall p. polynomial_function p ==> P p
+      #|  forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (p o q)
       #|  ~(p /\\ ~q) <=> p ==> q
-      #|  !p. polynomial_function p ==> (FINITE {x | p x = &0} <=> ~(!x. p x = &0))
-      #|  !p a. polynomial_function p\n         ==> (FINITE {x | p x = a} <=> ~(!x. p x = a))
+      #|  forall p. polynomial_function p ==> (FINITE {x | p x = &0} <=> ~(forall x. p x = &0))
+      #|  forall p a. polynomial_function p\n         ==> (FINITE {x | p x = a} <=> ~(forall x. p x = a))
       #|numseg =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num)) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%231:num. (#?:fun(fun(num,bool),bool) (\x:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%231:num) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) x:num)) ((#<=:fun(num,fun(num,bool)) x:num) n:num))) x:num))))))))))
       #|FINITE_NUMSEG =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#FINITE:fun(fun(num,bool),bool) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num))))))
       #|NUMSEG_COMBINE_R =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#<=:fun(num,fun(num,bool)) p:num) n:num))) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) ((#UNION:fun(fun(num,bool),fun(fun(num,bool),fun(num,bool))) ((#..:fun(num,fun(num,fun(num,bool))) m:num) p:num)) ((#..:fun(num,fun(num,fun(num,bool))) ((#+:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num)))))))))

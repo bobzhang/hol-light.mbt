@@ -6924,20 +6924,20 @@ test "Rqe/signs_thms matches Rqe/signs_thms.ml" {
       #|  c > &0 ==> (p = &0) ==> (c * p = p') ==> (p' = &0)
       #|  c < &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0
       #|  c > &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0
-      #|  !p. (p = &0) \\/ (p <> &0)
+      #|  forall p. (p = &0) \\/ (p <> &0)
       #|  a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)
       #|  p2:bool
       #|  p1:bool
       #|  p0:bool
       #|  p:bool
-      #|  !a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))
-      #|  !p. p <> &0 ==> (p > &0) \\/ (p < &0)
+      #|  forall a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))
+      #|  forall p. p <> &0 ==> (p > &0) \\/ (p < &0)
       #|  a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)
       #|  p2:bool
       #|  p1:bool
       #|  p0:bool
       #|  p:bool
-      #|  !a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))
+      #|  forall a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))
       #|pth_0g =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
       #|pth_0l =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
       #|pth_gg =  |- ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_gt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))

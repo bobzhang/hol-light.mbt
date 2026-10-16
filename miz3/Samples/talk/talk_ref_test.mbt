@@ -5648,7 +5648,7 @@ test "miz3/Samples/talk matches miz3/Samples/talk.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..2..5..9..15..23..31..40..62..84..119..164..209..264..418..solved at 551
       #|miz3/Samples/talk quotations (44):
-      #|  !n. nsum(1..n) (\\i. i) = (n*(n + 1)) DIV 2
+      #|  forall n. nsum(1..n) (\\i. i) = (n*(n + 1)) DIV 2
       #|  :error
       #|  :error
       #|  :error

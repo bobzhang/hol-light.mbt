@@ -5743,7 +5743,7 @@ Generating HOL version of proof
 Generating HOL version of proof
 0..0..1..3..7..solved at 18
 Library/binomial quotations (120):
-  (!n. binom(n,0) = 1) /\\\n   (!k. binom(0,SUC(k)) = 0) /\\\n   (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
+  (forall n. binom(n,0) = 1) /\\\n   (forall k. binom(0,SUC(k)) = 0) /\\\n   (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
   :P
   :P
   :P
@@ -5751,24 +5751,24 @@ Library/binomial quotations (120):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  !n. binom(0,n) = if n = 0 then 1 else 0
+  forall n. binom(0,n) = if n = 0 then 1 else 0
   n < k ==> n < SUC(k)
-  !n k. n < k ==> binom(n,k) = 0
-  !n. binom(n,n) = 1
+  forall n k. n < k ==> binom(n,k) = 0
+  forall n. binom(n,n) = 1
   1
-  !n. binom(n,1) = n
+  forall n. binom(n,1) = n
   SUC k
-  !n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)
+  forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)
   k:num
   d:num
   d:num
-  !n k. binom(n,k) = 0 <=> n < k
+  forall n k. binom(n,k) = 0 <=> n < k
   binom(n,SUC n) = 0
-  !n. binom(SUC n,n) = SUC n
+  forall n. binom(SUC n,n) = SUC n
   ~(c = 0) ==> n <= b ==> n + 1 <= c + b
   n:num
   m = 0
-  !m n. 1 <= m /\\ m < n ==> n <= binom(n,m)
+  forall m n. 1 <= m /\\ m < n ==> n <= binom(n,m)
   k:num
   d:num
   k:num
@@ -5778,7 +5778,7 @@ Library/binomial quotations (120):
   d:num
   n < k ==> n + 1 = k \\/ n + 1 < k
   n < k:num
-  !n k. ((n + 1) - k) * binom(n + 1,k) = (n + 1) * binom(n,k)
+  forall n k. ((n + 1) - k) * binom(n + 1,k) = (n + 1) * binom(n,k)
   k:num
   d:num
   k + 1
@@ -5788,8 +5788,8 @@ Library/binomial quotations (120):
   d:num
   n < k + 1 ==> n = k \\/ n < k
   n < k + 1
-  !n k. (k + 1) * binom(n,k + 1) = (n - k) * binom(n,k)
-  !P. (!n. P n 0) /\\\n         (!k. P 0 (SUC k)) /\\\n         (!n k. P n (SUC k) /\\ P n k ==> P (SUC n) (SUC k))\n         ==> !m n. P m n
+  forall n k. (k + 1) * binom(n,k + 1) = (n - k) * binom(n,k)
+  forall P. (forall n. P n 0) /\\\n         (forall k. P 0 (SUC k)) /\\\n         (forall n k. P n (SUC k) /\\ P n k ==> P (SUC n) (SUC k))\n         ==> forall m n. P m n
   p /\\ q /\\ r <=> ~(p /\\ q ==> ~r)
   {y | y IN t UNION IMAGE f s /\\ P y} =\n      {y | y IN t /\\ P y} UNION IMAGE f {x | x IN s /\\ P(f x)}
   ~(a IN t)\n     ==> {u | u SUBSET (a:A INSERT t) /\\ u HAS_SIZE (SUC m)} =\n         {u | u SUBSET t /\\ u HAS_SIZE (SUC m)} UNION\n         IMAGE (\\u. a INSERT u) {u | u SUBSET t /\\ u HAS_SIZE m}
@@ -5800,45 +5800,45 @@ Library/binomial quotations (120):
   m:num
   n:num
   {}:A->bool
-  !n m s:A->bool.\n        s HAS_SIZE n ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)
+  forall n m s:A->bool.\n        s HAS_SIZE n ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)
   k:num
-  !s k. FINITE s ==> CARD {t | t SUBSET s /\\ t HAS_SIZE k} = binom(CARD s,k)
+  forall s k. FINITE s ==> CARD {t | t SUBSET s /\\ t HAS_SIZE k} = binom(CARD s,k)
   k <= n ==> SUC n - k = SUC(n - k)
   nsum(m+1..n+1) (\\i. f i)
   a:num = e /\\ b = c + d ==> a + b = c + d + e
   0 <= n + 1
-  !n x y.\n      (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))
+  forall n x y.\n      (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))
   k <= n ==> SUC n - k = SUC(n - k)
   sum(m+1..n+1) (\\i. f i)
   a:real = e /\\ b = c + d ==> a + b = c + d + e
   0 <= n + 1
-  !n x y.\n     (x + y) pow n = sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))
+  forall n x y.\n     (x + y) pow n = sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))
   k <= n:num
   k:num
   n:num
   ~(k = n + 1) ==> n < k /\\ n + 1 < k \\/ k <= n /\\ k <= n + 1
-  !n k. &(binom(n + 1,k)):real =\n           if k = n + 1 then &1\n           else (&n + &1) / (&n + &1 - &k) * &(binom(n,k))
+  forall n k. &(binom(n + 1,k)):real =\n           if k = n + 1 then &1\n           else (&n + &1) / (&n + &1 - &k) * &(binom(n,k))
   k:num
   n:num
   n < k ==> n < k + 1
   n:num < k \\/ k <= n
-  !n k. &(binom(n,k+1)):real = (&n - &k) / (&k + &1) * &(binom(n,k))
-  !n k. &(binom(n,k)):real =\n             if k <= n then &(FACT n) / (&(FACT(n - k)) * &(FACT k))\n             else &0
-  !p k. &(binom(p + 1,k + 1)):real = (&p + &1) / (&k + &1) * &(binom(p,k))
-  !p k. (k + 1) * binom(p + 1,k + 1) = (p + 1) * binom(p,k)
-  !p k. (k = 0 ==> p = 0) ==> k * binom(p,k) = p * binom(p - 1,k - 1)
+  forall n k. &(binom(n,k+1)):real = (&n - &k) / (&k + &1) * &(binom(n,k))
+  forall n k. &(binom(n,k)):real =\n             if k <= n then &(FACT n) / (&(FACT(n - k)) * &(FACT k))\n             else &0
+  forall p k. &(binom(p + 1,k + 1)):real = (&p + &1) / (&k + &1) * &(binom(p,k))
+  forall p k. (k + 1) * binom(p + 1,k + 1) = (p + 1) * binom(p,k)
+  forall p k. (k = 0 ==> p = 0) ==> k * binom(p,k) = p * binom(p - 1,k - 1)
   0
-  !n k. binom(n,k) =\n            if k <= n then FACT(n) DIV (FACT(n - k) * FACT(k))\n            else 0
+  forall n k. binom(n,k) =\n            if k <= n then FACT(n) DIV (FACT(n - k) * FACT(k))\n            else 0
   k = 0
-  !n k. n divides gcd(n,k) * binom(n,k)
+  forall n k. n divides gcd(n,k) * binom(n,k)
   coprime(n,k) <=> gcd(n,k) = 1
-  !n k. coprime(n,k) ==> n divides binom (n,k)
+  forall n k. coprime(n,k) ==> n divides binom (n,k)
   (p:num) divides n
-  !n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)
+  forall n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)
   k:num <= n ==> n - (n - k) = k
   n - k:num <= n
   ~(k <= n) ==> n - k = 0
-  !n k. binom(n,n-k) = if k <= n then binom(n,k) else 1
+  forall n k. binom(n,n-k) = if k <= n then binom(n,k) else 1
   m - k:num
   n - k:num
   n - m:num
@@ -5848,12 +5848,12 @@ Library/binomial quotations (120):
   F ==> p
   F ==> p
   n:num < m
-  !m n k. k <= m\n           ==> binom(n,m) * binom(m,k) = binom(n,k) * binom(n - k,m - k)
+  forall m n k. k <= m\n           ==> binom(n,m) * binom(m,k) = binom(n,k) * binom(n - k,m - k)
   c * d:real = a * b ==> a * z * b * x * y = c * (d * z * x) * y
   j:num <= k /\\ k <= n ==> (n - j) - (k - j) = n - k
   (\\(x,y). x + y,x):num#num->num#num
   (\\(x,y). y,x - y):num#num->num#num
-  !c n x y. sum (0..n)\n               (\\k.  &(binom(n,k)) *\n                     sum(0..k)\n                        (\\l. &(binom(k,l)) * c l * x pow (k - l)) *\n                     y pow (n - k)) =\n           sum (0..n) (\\k. &(binom(n,k)) * c k * (x + y) pow (n - k))
+  forall c n x y. sum (0..n)\n               (\\k.  &(binom(n,k)) *\n                     sum(0..k)\n                        (\\l. &(binom(k,l)) * c l * x pow (k - l)) *\n                     y pow (n - k)) =\n           sum (0..n) (\\k. &(binom(n,k)) * c k * (x + y) pow (n - k))
   binom(n,k) = y\n     ==> k <= n\n         ==> (SUC n) * y = ((n + 1) - k) * x ==> binom(SUC n,k) = x
   n < k ==> binom(n,k) = 0
   binom(n,n) = 1

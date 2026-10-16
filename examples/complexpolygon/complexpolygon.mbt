@@ -71,7 +71,7 @@ pub fn abelian_circle_group() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t18 = @simp.asm_rewrite_tac(@list.List([@grouptheory.group_pow(), circle_group_v1(), @complexes.complex_pow()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t18)
-  group_pow_circle_group_c.set(@tactics.prove(@parser.parse_term("!z n. group_pow circle_group z n = z pow n"), t19))
+  group_pow_circle_group_c.set(@tactics.prove(@parser.parse_term("forall z n. group_pow circle_group z n = z pow n"), t19))
 }
 
 ///|
@@ -112,7 +112,7 @@ fn step_5() -> Unit raise {
   let t21 = @simp.asm_simp_tac(@list.List([@grouptheory.cyclic_group_element_order(), @grouptheory.carrier_subgroup_generated_subgroup(), @grouptheory.abelian_subgroup_generated(), abelian_circle_group()]))
   let t20 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("subgroup_generated circle_group s"), @grouptheory.abelian_group_order_divides_maximal()))
   let t45 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t20), t21), t22), t23), t24), t26), t27), @tactics.disch_tac), t28), t29), t30), t31), @tactics.strip_tac), @tactics.conj_tac), t44)
-  finite_subgroup_of_circle_group_c.set(@tactics.prove(@parser.parse_term("!s:complex->bool.\n        FINITE s /\\ s subgroup_of circle_group\n        ==> ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)}"), t45))
+  finite_subgroup_of_circle_group_c.set(@tactics.prove(@parser.parse_term("forall s:complex->bool.\n        FINITE s /\\ s subgroup_of circle_group\n        ==> ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)}"), t45))
 }
 
 ///|
@@ -144,7 +144,7 @@ fn step_6() -> Unit raise {
   let t61 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("Cx(&0)"), t48, t47]), @convex.simplex_furthest_lt_exists())), t49), t50), t51), t52), t60])
   let t46 = @tactics.repeat_tac(@tactics.strip_tac)
   let t62 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t46), t61)
-  dario_lemma1_c.set(@tactics.prove(@parser.parse_term("!s:complex->bool.\n      (!z. z IN s ==> norm z = &1)\n      ==> ((!w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           (!w z. w IN s /\\ z IN s ==> w * z IN s))"), t62))
+  dario_lemma1_c.set(@tactics.prove(@parser.parse_term("forall s:complex->bool.\n      (forall z. z IN s ==> norm z = &1)\n      ==> ((forall w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           (forall w z. w IN s /\\ z IN s ==> w * z IN s))"), t62))
 }
 
 ///|
@@ -171,7 +171,7 @@ fn step_7() -> Unit raise {
   let t63 = @parser.parse_term("s:complex->bool")
   let t64 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("circle_group"), t63]), @grouptheory.finite_subgroup_of_setwise()))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t64), t65), t69), t70), t71)
-  dario_lemma2_c.set(@tactics.prove(@parser.parse_term("!s:complex->bool.\n        FINITE s /\\ ~(s = {}) /\\ (!z. z IN s ==> norm z = &1)\n        ==> ((!w z. w IN s /\\ z IN s ==> w * z IN s) <=>\n             s subgroup_of circle_group)"), t72))
+  dario_lemma2_c.set(@tactics.prove(@parser.parse_term("forall s:complex->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall z. z IN s ==> norm z = &1)\n        ==> ((forall w z. w IN s /\\ z IN s ==> w * z IN s) <=>\n             s subgroup_of circle_group)"), t72))
 }
 
 ///|
@@ -190,7 +190,7 @@ fn step_8() -> Unit raise {
   let t75 = @list.List([@simp.asm_simp_tac(@list.List([dario_lemma2(), finite_subgroup_of_circle_group()])), t74])
   let t73 = @simp.asm_simp_tac(@list.List([dario_lemma1()]))
   let t76 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t73), @tactics.eq_tac), t75)
-  dario_c.set(@tactics.prove(@parser.parse_term("!s:complex->bool.\n      FINITE s /\\ ~(s = {}) /\\ (!z. z IN s ==> norm z = &1)\n      ==> ((!w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)})"), t76))
+  dario_c.set(@tactics.prove(@parser.parse_term("forall s:complex->bool.\n      FINITE s /\\ ~(s = {}) /\\ (forall z. z IN s ==> norm z = &1)\n      ==> ((forall w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)})"), t76))
 }
 
 ///|

@@ -5785,17 +5785,17 @@ CPU time (user): <t>
 CPU time (user): <t>
 Examples/machin quotations (171):
   1 <= n <=> 0 < n
-  !n. &1 <= &2 pow n
+  forall n. &1 <= &2 pow n
   &2 pow 0
   n = 0
-  !n. &1 < &2 pow n <=> ~(n = 0)
+  forall n. &1 < &2 pow n <=> ~(n = 0)
   1 <= n <=> ~(n = 0)
   inv(&2 pow 1)
   n = 0
   &1 - x <= &1 <=> &0 <= x
-  (!n. &0 <= &2 pow n) /\\\n   (!n. &0 < &2 pow n) /\\\n   (!n. &0 <= inv(&2 pow n)) /\\\n   (!n. &0 < inv(&2 pow n)) /\\\n   (!n. inv(&2 pow n) <= &1) /\\\n   (!n. &1 - inv(&2 pow n) <= &1) /\\\n   (!n. &1 <= &2 pow n) /\\\n   (!n. &1 < &2 pow n <=> ~(n = 0)) /\\\n   (!n. &0 <= &1 - inv(&2 pow n)) /\\\n   (!n. &0 <= &2 pow n - &1) /\\\n   (!n. &0 < &1 - inv(&2 pow n) <=> ~(n = 0))
-  !m n. inv(&2 pow m) <= inv(&2 pow n) <=> &2 pow n <= &2 pow m
-  !m n. &2 pow m <= &2 pow n <=> m <= n
+  (forall n. &0 <= &2 pow n) /\\\n   (forall n. &0 < &2 pow n) /\\\n   (forall n. &0 <= inv(&2 pow n)) /\\\n   (forall n. &0 < inv(&2 pow n)) /\\\n   (forall n. inv(&2 pow n) <= &1) /\\\n   (forall n. &1 - inv(&2 pow n) <= &1) /\\\n   (forall n. &1 <= &2 pow n) /\\\n   (forall n. &1 < &2 pow n <=> ~(n = 0)) /\\\n   (forall n. &0 <= &1 - inv(&2 pow n)) /\\\n   (forall n. &0 <= &2 pow n - &1) /\\\n   (forall n. &0 < &1 - inv(&2 pow n) <=> ~(n = 0))
+  forall m n. inv(&2 pow m) <= inv(&2 pow n) <=> &2 pow n <= &2 pow m
+  forall m n. &2 pow m <= &2 pow n <=> m <= n
   &0 < &2 pow n /\\\n   &1 <= &2 pow n /\\\n   (&1 < &2 pow n <=> ~(n = 0)) /\\\n   (&2 pow m <= &2 pow n <=> m <= n) /\\\n   (&2 pow m < &2 pow n <=> m < n) /\\\n   (inv(&2 pow m) <= inv(&2 pow n) <=> n <= m) /\\\n   (inv(&2 pow m) < inv(&2 pow n) <=> n < m)
   abs(x1) <= b1 /\\ abs(x2) <= b2 ==> abs(x1 + x2) <= b1 + b2
   abs(x1) <= b1 /\\ abs(x2) <= b2 ==> abs(x1 - x2) <= b1 + b2
@@ -5805,22 +5805,22 @@ Examples/machin quotations (171):
   abs(x) <= b ==> abs(abs(x)) <= b
   abs(x) <= abs(x)
   n:num
-  x <= a ==> (!b. a <= b ==> x <= b) /\\\n                             (!b. a < b ==> x < b)
+  x <= a ==> (forall b. a <= b ==> x <= b) /\\\n                             (forall b. a < b ==> x < b)
   (<=):real->real->bool
   inv(&1 - abs x)
   1 <= n <=> ~(n = 0)
   0
   \\n. abs(x) pow n
-  !x. abs(x) < &1\n       ==> summable (\\n. (if EVEN n then &0\n                          else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)
+  forall x. abs(x) < &1\n       ==> summable (\\n. (if EVEN n then &0\n                          else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)
   inv(&1 - abs x)
   0
   \\n. abs(x) pow n
-  !x. abs(x) < &1\n       ==> summable (\\n. diffs (\\n. (if EVEN n then &0\n                                     else --(&1) pow ((n - 1) DIV 2) / &n)) n *\n                         x pow n)
+  forall x. abs(x) < &1\n       ==> summable (\\n. diffs (\\n. (if EVEN n then &0\n                                     else --(&1) pow ((n - 1) DIV 2) / &n)) n *\n                         x pow n)
   &1 + x = &1 - (--x)
   (\\n. --(x pow 2) pow n) sums inv (&1 + x pow 2)
   SUC n - 1 = n
   (\\n. sum (2 * n,2) (\\n. diffs\n      (\\n. (if EVEN n then &0\n            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)) =\n    (\\n. --(x pow 2) pow n)
-  !x. abs(x) < &1\n       ==> (\\n. diffs (\\n. (if EVEN n then &0\n                            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)\n           sums (inv(&1 + x pow 2))
+  forall x. abs(x) < &1\n       ==> (\\n. diffs (\\n. (if EVEN n then &0\n                            else --(&1) pow ((n - 1) DIV 2) / &n)) n * x pow n)\n           sums (inv(&1 + x pow 2))
   a <= b ==> a <= b + &1
   &1 <= x ==> x <= y ==> &1 <= y
   N:num
@@ -5830,19 +5830,19 @@ Examples/machin quotations (171):
   0
   x = &0
   N:num
-  ?N. !n. n >= N ==> &(SUC(SUC n)) * abs(x) <= &(SUC n) * c
+  ?N. forall n. n >= N ==> &(SUC(SUC n)) * abs(x) <= &(SUC n) * c
   c:real
   abs(x) < &1
   (&1 + abs(x)) / &2
   ?c. abs(x) < c /\\ c < &1
   0
   \\n. &(SUC n) * abs(x) pow n
-  !x. abs(x) < &1\n       ==> summable\n             (\\n. diffs (diffs\n                 (\\n. (if EVEN n then &0\n                       else --(&1) pow ((n - 1) DIV 2) / &n))) n * x pow n)
+  forall x. abs(x) < &1\n       ==> summable\n             (\\n. diffs (diffs\n                 (\\n. (if EVEN n then &0\n                       else --(&1) pow ((n - 1) DIV 2) / &n))) n * x pow n)
   K:real
   abs(x) < &1
   (&1 + abs(x)) / &2
   ?K. abs(x) < abs(K) /\\ abs(K) < &1
-  !x. abs(x) < &1\n       ==> ((\\x. suminf (\\n. (if EVEN n then &0\n                              else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n))\n            diffl (inv(&1 + x pow 2))) x
+  forall x. abs(x) < &1\n       ==> ((\\x. suminf (\\n. (if EVEN n then &0\n                              else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n))\n            diffl (inv(&1 + x pow 2))) x
   u:real
   abs(u) < &1
   u:real
@@ -5861,12 +5861,12 @@ Examples/machin quotations (171):
   suminf (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * &0 pow n) -\n    atn(&0) = &0
   (a = b) <=> (a - b = &0)
   suminf (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n) = atn(x)
-  !x. abs(x) < &1\n       ==> (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)\n           sums (atn x)
+  forall x. abs(x) < &1\n       ==> (\\n. (if EVEN n then &0\n                 else --(&1) pow ((n - 1) DIV 2) / &n) * x pow n)\n           sums (atn x)
   \\m. abs(x) pow (m + n)
   \\m. abs(x) pow (m + n)
   suminf (\\m. abs((if EVEN (m + n) then &0\n                     else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n                    x pow (m + n)))
   1 <= n <=> ~(n = 0)
-  !m. abs((if EVEN (m + n) then &0\n             else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n             x pow (m + n))\n        <= abs(x) pow (m + n)
+  forall m. abs((if EVEN (m + n) then &0\n             else --(&1) pow (((m + n) - 1) DIV 2) / &(m + n)) *\n             x pow (m + n))\n        <= abs(x) pow (m + n)
   ~(k = 0) ==> 1 <= k
   inv(&2 pow k)
   a <= &1 - b <=> b <= &1 - a
@@ -5879,7 +5879,7 @@ Examples/machin quotations (171):
   a < &1 <=> &0 < &1 - a
   inv(&2 pow k)
   abs(x) < &1
-  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(k = 0)\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= &2 * abs(x) pow n
+  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(k = 0)\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= &2 * abs(x) pow n
   1 <= x <=> ~(x = 0)
   &2 * abs(x) pow n
   inv(&2) + &2 * inv(&2) pow 2
@@ -5891,7 +5891,7 @@ Examples/machin quotations (171):
   2
   x:real
   n = 0
-  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(k = 0)\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= inv(&2 pow (n * k - 1))
+  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(k = 0)\n           ==> abs(atn x -\n                   sum(0,n) (\\m. (if EVEN m then &0\n                                  else --(&1) pow ((m - 1) DIV 2) / &m) *\n                                  x pow m))\n               <= inv(&2 pow (n * k - 1))
   x:real
   n:num
   k:num
@@ -5902,20 +5902,20 @@ Examples/machin quotations (171):
   (*) (inv(cos(atn y)))
   (*) (inv(cos(atn x)))
   (a - b = &0) <=> (a = b)
-  !x y. ~(x * y = &1) ==> ~(cos(atn x + atn y) = &0)
+  forall x y. ~(x * y = &1) ==> ~(cos(atn x + atn y) = &0)
   abs(x) < e ==> --e < x /\\ x < e
   tan(atn(x) + atn(y)) = (x + y) / (&1 - x * y)
-  !x y. ~(x * y = &1) /\\\n         abs(atn x + atn y) < pi / &2\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
+  forall x y. ~(x * y = &1) /\\\n         abs(atn x + atn y) < pi / &2\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
   &0 < x /\\ x < a ==> --a < a - x /\\ a - x < a
   pi / &2 - atn y = atn(tan(pi / &2 - atn y))
-  !x y. &0 < y /\\ x * y < &1\n         ==> atn(x) + atn(y) < pi / &2
+  forall x y. &0 < y /\\ x * y < &1\n         ==> atn(x) + atn(y) < pi / &2
   (y < &0 ==> z < &0) /\\ ((y = &0) ==> (z = &0))\n    ==> y <= &0 ==> z <= &0
   &0 < y ==> (z <= &0 ==> y <= &0) ==> &0 < z
   --x * -- y = x * y
   abs(x) < &1 ==> x < &1
   --a < x /\\ x < a /\\ --a < y /\\ y < a /\\\n    (&0 < y ==> x + y < a) /\\\n    (&0 < --y ==> --x + --y < a)\n    ==> abs(x + y) < a
-  !x y. abs(x * y) < &1 ==> abs(atn(x) + atn(y)) < pi / &2
-  !x y. abs(x * y) < &1\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
+  forall x y. abs(x * y) < &1 ==> abs(atn(x) + atn(y)) < pi / &2
+  forall x y. abs(x * y) < &1\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
   (&0 * atn(x) = &0) /\\\n     (&1 * atn(x) = atn(x))
   (&(NUMERAL(BIT0 n)) * atn(x) =\n      &(NUMERAL n) * atn(x) + &(NUMERAL n) * atn(x)) /\\\n     (&(NUMERAL(BIT1 n)) * atn(x) =\n      atn(x) + &(NUMERAL n) * atn(x) + &(NUMERAL n) * atn(x))
   (atn(x) - atn(y) = atn(x) + atn(--y))
@@ -5932,7 +5932,7 @@ Examples/machin quotations (171):
   &8 * atn(&1 / &10) - &1 * atn(&1 / &239) - &4 * atn(&1 / &515)
   &5 * atn(&1 / &7) + &4 * atn(&1 / &53) + &2 * atn(&1 / &4443)
   atn
-  !p. abs(atn(&0) - &0) <= inv(&2 pow p)
+  forall p. abs(atn(&0) - &0) <= inv(&2 pow p)
   atn(&1 / &8)
   atn(&1 / &57)
   atn(&1 / &239)
@@ -5949,7 +5949,7 @@ Examples/machin quotations (171):
   &0 < x ==> &0 < abs(x)
   abs(&2 pow p)
   abs(x - r) <= q ==> abs(r - r') <= p - q ==> abs(x - r') <= p
-  abs(x - r) <= inv(&2 pow (SUC p))\n     ==> !a. abs(&2 pow p * r - a) <= inv(&2)\n             ==> abs(x - a / &2 pow p) <= inv(&2 pow p)
+  abs(x - r) <= inv(&2 pow (SUC p))\n     ==> forall a. abs(&2 pow p * r - a) <= inv(&2)\n             ==> abs(x - a / &2 pow p) <= inv(&2 pow p)
   atn
   &1 / &8
   (*)

@@ -23,7 +23,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@realax.real_mul_sym()]))
   let t1 = @simp.rewrite_tac(@list.List([indep_events(), @sets.inter_comm()]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), t2), t3)
-  indep_events_sym_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b. indep_events p a b <=> indep_events p b a"), t4))
+  indep_events_sym_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b. indep_events p a b <=> indep_events p b a"), t4))
 }
 
 ///|
@@ -41,7 +41,7 @@ fn step_3() -> Unit raise {
   let t6 = @simp.asm_rewrite_tac(@list.List([@probability_measure.prob_empty_in_events(), @sets.inter_empty(), @probability_measure.prob_empty()]))
   let t5 = @simp.rewrite_tac(@list.List([indep_events()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5), t6), @calc_rat.real_arith_tac)
-  indep_events_empty_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a. a IN prob_events p ==> indep_events p a {}"), t7))
+  indep_events_empty_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a. a IN prob_events p ==> indep_events p a {}"), t7))
 }
 
 ///|
@@ -63,7 +63,7 @@ fn step_4() -> Unit raise {
   let t9 = @simp.asm_rewrite_tac(@list.List([@probability_measure.prob_carrier_in_events(), @probability_measure.prob_space(), @realarith.real_mul_rid()]))
   let t8 = @simp.rewrite_tac(@list.List([indep_events()]))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8), t9), @tactics.ap_term_tac), t11), t12), t13)
-  indep_events_space_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a. a IN prob_events p ==> indep_events p a (prob_carrier p)"), t14))
+  indep_events_space_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a. a IN prob_events p ==> indep_events p a (prob_carrier p)"), t14))
 }
 
 ///|
@@ -104,7 +104,7 @@ fn step_5() -> Unit raise {
     })(t19(x20))
   })
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t21), @tactics.strip_tac), t22), t23), t27), t31), t32), t33), @calc_rat.real_arith_tac)
-  indep_events_compl_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p a (prob_carrier p DIFF b)"), t34))
+  indep_events_compl_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p a (prob_carrier p DIFF b)"), t34))
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_6() -> Unit raise {
   let t36 = @simp.once_rewrite_tac(@list.List([indep_events_sym()]))
   let t35 = @tactics.match_mp_tac(indep_events_compl())
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t35), t36), t37), t38), t39)
-  indep_events_compl_both_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p (prob_carrier p DIFF a) (prob_carrier p DIFF b)"), t40))
+  indep_events_compl_both_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      indep_events p a b\n      ==> indep_events p (prob_carrier p DIFF a) (prob_carrier p DIFF b)"), t40))
 }
 
 ///|
@@ -150,7 +150,7 @@ fn step_7() -> Unit raise {
   let t42 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_mul_lzero()]))
   let t41 = @simp.rewrite_tac(@list.List([indep_events()]))
   let t50 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t41), t42), t43), @tactics.conj_tac), t49)
-  indep_events_prob_zero_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> indep_events p a b"), t50))
+  indep_events_prob_zero_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &0\n      ==> indep_events p a b"), t50))
 }
 
 ///|
@@ -212,7 +212,7 @@ fn step_8() -> Unit raise {
   let t52 = @simp.asm_rewrite_tac(@list.List([@realax.real_mul_lid()]))
   let t51 = @simp.rewrite_tac(@list.List([indep_events()]))
   let t87 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t51), t52), t56), t67), t71), t86)
-  indep_events_prob_one_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> indep_events p a b"), t87))
+  indep_events_prob_one_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ prob p a = &1\n      ==> indep_events p a b"), t87))
 }
 
 ///|
@@ -271,7 +271,7 @@ fn step_10() -> Unit raise {
   let t111 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.x_gen_tac(@parser.parse_term("m:num"))), t95), @tactics.ants_tac), t97), t98), t110])
   let t88 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @sets.in_univ(), @sets.in_unions()]))
   let t112 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([limsup_events(), @sets.extension(), @sets.in_inters()]))), t88), @tactics.gen_tac), @tactics.eq_tac), t111)
-  limsup_events_alt_c.set(@tactics.prove(@parser.parse_term("!A:num->A->bool. limsup_events A =\n     {x | !m. ?n. n >= m /\\ x IN A n}"), t112))
+  limsup_events_alt_c.set(@tactics.prove(@parser.parse_term("forall A:num->A->bool. limsup_events A =\n     {x | forall m. ?n. n >= m /\\ x IN A n}"), t112))
 }
 
 ///|
@@ -297,7 +297,7 @@ fn step_11() -> Unit raise {
   })
   let t113 = @simp.rewrite_tac(@list.List([@probability_measure.cond_prob()]))
   let t121 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t113), t117), t118), t119), t120)
-  cond_prob_self_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a.\n      a IN prob_events p /\\ &0 < prob p a\n      ==> cond_prob p a a = &1"), t121))
+  cond_prob_self_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a.\n      a IN prob_events p /\\ &0 < prob p a\n      ==> cond_prob p a a = &1"), t121))
 }
 
 ///|
@@ -317,7 +317,7 @@ fn step_12() -> Unit raise {
   let t123 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t122 = @simp.rewrite_tac(@list.List([@probability_measure.cond_prob()]))
   let t126 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t122), t123), t124), t125)
-  cond_prob_inter_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ ~(prob p b = &0)\n      ==> prob p (a INTER b) = cond_prob p a b * prob p b"), t126))
+  cond_prob_inter_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ ~(prob p b = &0)\n      ==> prob p (a INTER b) = cond_prob p a b * prob p b"), t126))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_13() -> Unit raise {
   let t128 = @simp.asm_rewrite_tac(@list.List([]))
   let t127 = @simp.rewrite_tac(@list.List([indep_events(), @probability_measure.cond_prob()]))
   let t143 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t127), t128), t132), t133), @tactics.eq_tac), t142)
-  indep_events_cond_prob_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> (indep_events p a b <=> cond_prob p a b = prob p a)"), t143))
+  indep_events_cond_prob_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ &0 < prob p b\n      ==> (indep_events p a b <=> cond_prob p a b = prob p a)"), t143))
 }
 
 ///|
@@ -396,7 +396,7 @@ fn step_14() -> Unit raise {
   let t145 = @tactics.match_mp_tac(@probability_measure.prob_countable_inters_in_events())
   let t144 = @simp.rewrite_tac(@list.List([limsup_events()]))
   let t169 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t144), t145), t146), t168)
-  limsup_events_in_events_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space A.\n      (!n. A n IN prob_events p)\n      ==> limsup_events A IN prob_events p"), t169))
+  limsup_events_in_events_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space A.\n      (forall n. A n IN prob_events p)\n      ==> limsup_events A IN prob_events p"), t169))
 }
 
 ///|
@@ -418,7 +418,7 @@ fn step_15() -> Unit raise {
   let t171 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inters(), @sets.in_elim_thm(), @sets.in_univ()]))
   let t170 = @simp.rewrite_tac(@list.List([limsup_events()]))
   let t176 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t170), t171), t172), t173), t174), t175)
-  limsup_subset_tail_c.set(@tactics.prove(@parser.parse_term("!A:num->A->bool m.\n      limsup_events A SUBSET UNIONS {A n | n >= m}"), t176))
+  limsup_subset_tail_c.set(@tactics.prove(@parser.parse_term("forall A:num->A->bool m.\n      limsup_events A SUBSET UNIONS {A n | n >= m}"), t176))
 }
 
 ///|
@@ -439,7 +439,7 @@ fn step_16() -> Unit raise {
   let t178 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t177 = @tactics.match_mp_tac(@sets.subset_unions())
   let t182 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t177), t178), t179), @tactics.strip_tac), t180), t181), @int.asm_arith_tac)
-  tail_union_decreasing_c.set(@tactics.prove(@parser.parse_term("!A:num->A->bool m.\n      UNIONS {A n | n >= SUC m} SUBSET UNIONS {A n | n >= m}"), t182))
+  tail_union_decreasing_c.set(@tactics.prove(@parser.parse_term("forall A:num->A->bool m.\n      UNIONS {A n | n >= SUC m} SUBSET UNIONS {A n | n >= m}"), t182))
 }
 
 ///|
@@ -458,7 +458,7 @@ fn step_17() -> Unit raise {
   let t184 = @tactics.match_mp_tac(@card.countable_image())
   let t183 = @simp.once_rewrite_tac(@list.List([@sets.simple_image_gen()]))
   let t186 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t183), t184), t185)
-  countable_gspec_num_c.set(@tactics.prove(@parser.parse_term("!(f:num->B) (P:num->bool). COUNTABLE {f n | P n}"), t186))
+  countable_gspec_num_c.set(@tactics.prove(@parser.parse_term("forall(f:num->B) (P:num->bool). COUNTABLE {f n | P n}"), t186))
 }
 
 ///|
@@ -481,7 +481,7 @@ fn step_18() -> Unit raise {
   let t193 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_gspec()])), t188), t192])
   let t187 = @tactics.match_mp_tac(@probability_measure.prob_countable_union_in_events())
   let t194 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t187), @tactics.conj_tac), t193)
-  tail_union_in_events_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) m.\n      (!n. B n IN prob_events p)\n      ==> UNIONS {B n | n >= m} IN prob_events p"), t194))
+  tail_union_in_events_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) m.\n      (forall n. B n IN prob_events p)\n      ==> UNIONS {B n | n >= m} IN prob_events p"), t194))
 }
 
 ///|
@@ -502,7 +502,7 @@ fn step_19() -> Unit raise {
   let t199 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.gen_rewrite_tac(fn(x195 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x195
   }, @list.List([@sets.extension()]))), t196), t197), t198)
-  unions_image_numseg_full_c.set(@tactics.prove(@parser.parse_term("!(B:num->A->bool).\n      UNIONS {UNIONS (IMAGE B (0..n)) | n IN (:num)} =\n      UNIONS {B n | n IN (:num)}"), t199))
+  unions_image_numseg_full_c.set(@tactics.prove(@parser.parse_term("forall(B:num->A->bool).\n      UNIONS {UNIONS (IMAGE B (0..n)) | n IN (:num)} =\n      UNIONS {B n | n IN (:num)}"), t199))
 }
 
 ///|
@@ -522,7 +522,7 @@ fn step_20() -> Unit raise {
   let t201 = @parser.parse_term("B:num->A->bool")
   let t202 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:A prob_space"), t201, t200]), @random_variables.prob_finite_subadditive()))
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t202), t203)
-  prob_finite_subadditive_p_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) k.\n      (!i. i <= k ==> B i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE B (0..k))) <= sum (0..k) (\\i. prob p (B i))"), t204))
+  prob_finite_subadditive_p_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) k.\n      (forall i. i <= k ==> B i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE B (0..k))) <= sum (0..k) (\\i. prob p (B i))"), t204))
 }
 
 ///|
@@ -541,7 +541,7 @@ fn step_21() -> Unit raise {
   let t205 = @parser.parse_term("B:num->A->bool")
   let t206 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:A prob_space"), t205]), @random_variables.prob_continuity_from_below()))
   let t208 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t206), t207)
-  prob_continuity_from_below_p_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. B n SUBSET B (SUC n))\n      ==> ((\\n. prob p (B n)) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially"), t208))
+  prob_continuity_from_below_p_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. B n SUBSET B (SUC n))\n      ==> ((\\n. prob p (B n)) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially"), t208))
 }
 
 ///|
@@ -569,7 +569,7 @@ fn step_22() -> Unit raise {
   let t212 = @tactics.mp_tac(@equal.conv_rule(@equal.depth_conv(@equal.beta_conv), t211))
   let t209 = @simp.once_rewrite_tac(@list.List([@equal.gsym(unions_image_numseg_full())]))
   let t221 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t209), t212), @tactics.ants_tac), t220)
-  finite_union_convergence_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p)\n      ==> ((\\n. prob p (UNIONS (IMAGE B (0..n)))) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially"), t221))
+  finite_union_convergence_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p)\n      ==> ((\\n. prob p (UNIONS (IMAGE B (0..n)))) --->\n           prob p (UNIONS {B n | n IN (:num)})) sequentially"), t221))
 }
 
 ///|
@@ -603,7 +603,7 @@ fn step_23() -> Unit raise {
   let t223 = @tactics.exists_tac(@parser.parse_term("sum (0..n) (\\i:num. prob (p:A prob_space) ((B:num->A->bool) i))"))
   let t222 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t240 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t222), t223), @tactics.conj_tac), t239)
-  finite_union_bounded_by_infsum_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) n.\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS (IMAGE B (0..n))) <=\n          real_infsum (from 0) (\\i. prob p (B i))"), t240))
+  finite_union_bounded_by_infsum_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) n.\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS (IMAGE B (0..n))) <=\n          real_infsum (from 0) (\\i. prob p (B i))"), t240))
 }
 
 ///|
@@ -635,7 +635,7 @@ fn step_24() -> Unit raise {
   let t243 = @parser.parse_term("\\n:num. prob (p:A prob_space) (UNIONS (IMAGE (B:num->A->bool) (0..n)))")
   let t244 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("sequentially"), t243, t242, t241]), @realanalysis.reallim_ubound()))
   let t257 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t244), t245), t246), @tactics.conj_tac), t256)
-  prob_countable_subadditive_indexed_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n IN (:num)}) <=\n          real_infsum (from 0) (\\i. prob p (B i))"), t257))
+  prob_countable_subadditive_indexed_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n IN (:num)}) <=\n          real_infsum (from 0) (\\i. prob p (B i))"), t257))
 }
 
 ///|
@@ -676,7 +676,7 @@ fn step_25() -> Unit raise {
   let t278 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:A prob_space"), t259]), prob_countable_subadditive_indexed())), @tactics.ants_tac), t274), t277])
   let t258 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_le_antisym())]))
   let t279 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t258), @tactics.conj_tac), t278)
-  prob_countable_union_zero_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. prob p (B n) = &0)\n      ==> prob p (UNIONS {B n | n IN (:num)}) = &0"), t279))
+  prob_countable_union_zero_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. prob p (B n) = &0)\n      ==> prob p (UNIONS {B n | n IN (:num)}) = &0"), t279))
 }
 
 ///|
@@ -745,7 +745,7 @@ fn step_26() -> Unit raise {
     }
   })
   let t323 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t283), t287), t291), t294), t298), t322)
-  prob_countable_inter_one_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\ (!n. prob p (B n) = &1)\n      ==> prob p (INTERS {B n | n IN (:num)}) = &1"), t323))
+  prob_countable_inter_one_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\ (forall n. prob p (B n) = &1)\n      ==> prob p (INTERS {B n | n IN (:num)}) = &1"), t323))
 }
 
 ///|
@@ -808,7 +808,7 @@ fn step_27() -> Unit raise {
   })
   let t324 = @simp.rewrite_tac(@list.List([@equal.gsym(@realarith.real_not_lt())]))
   let t359 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t324), @tactics.disch_tac), t331), t338), t339), t343), t350), t351), t358), @calc_rat.real_arith_tac)
-  real_le_sequentially_c.set(@tactics.prove(@parser.parse_term("!c f. (!n. c <= f n) /\\ (f ---> &0) sequentially ==> c <= &0"), t359))
+  real_le_sequentially_c.set(@tactics.prove(@parser.parse_term("forall c f. (forall n. c <= f n) /\\ (f ---> &0) sequentially ==> c <= &0"), t359))
 }
 
 ///|
@@ -849,7 +849,7 @@ fn step_28() -> Unit raise {
     x360
   }, @list.List([@sets.extension()]))
   let t378 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t361), t362), t363), @tactics.eq_tac), t377)
-  unions_geq_shift_c.set(@tactics.prove(@parser.parse_term("!(B:num->A->bool) m.\n      {B n | n >= m} = {B(n + m) | n IN (:num)}"), t378))
+  unions_geq_shift_c.set(@tactics.prove(@parser.parse_term("forall(B:num->A->bool) m.\n      {B n | n >= m} = {B(n + m) | n IN (:num)}"), t378))
 }
 
 ///|
@@ -914,7 +914,7 @@ fn step_29() -> Unit raise {
   })
   let t379 = @simp.once_rewrite_tac(@list.List([unions_geq_shift()]))
   let t424 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t379), t383), t398), t401), @tactics.ants_tac), t423)
-  prob_tail_subadditive_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) m.\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) <=\n          real_infsum (from m) (\\i. prob p (B i))"), t424))
+  prob_tail_subadditive_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) m.\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) <=\n          real_infsum (from m) (\\i. prob p (B i))"), t424))
 }
 
 ///|
@@ -955,7 +955,7 @@ fn step_30() -> Unit raise {
   let t438 = @parser.parse_term("L:real")
   let t439 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:num->real"), t438, t437, t436]), @realanalysis.real_sums_offset()))
   let t441 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@realanalysis.real_infsum_unique())), t439), t440), @tactics.all_tac])
-  let t435 = @tactics.subgoal_then(@parser.parse_term("!n. real_infsum (from (SUC n)) f = L - sum (0..n) f"), fn(x433 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t435 = @tactics.subgoal_then(@parser.parse_term("forall n. real_infsum (from (SUC n)) f = L - sum (0..n) f"), fn(x433 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x433
     @simp.rewrite_tac(@list.List([th]))
   })
@@ -970,7 +970,7 @@ fn step_30() -> Unit raise {
   })
   let t425 = @simp.abbrev_tac(@parser.parse_term("L = real_infsum (from 0) f"))
   let t456 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t425), t429), t432), t435), t441), t445), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t446), @tactics.conj_tac), t455)
-  tail_infsum_tends_to_zero_c.set(@tactics.prove(@parser.parse_term("!f. (!i. &0 <= f i) /\\ real_summable (from 0) f\n       ==> ((\\n. real_infsum (from (SUC n)) f) ---> &0) sequentially"), t456))
+  tail_infsum_tends_to_zero_c.set(@tactics.prove(@parser.parse_term("forall f. (forall i. &0 <= f i) /\\ real_summable (from 0) f\n       ==> ((\\n. real_infsum (from (SUC n)) f) ---> &0) sequentially"), t456))
 }
 
 ///|
@@ -1014,7 +1014,7 @@ fn step_31() -> Unit raise {
   let t460 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@probability_measure.prob_positive()), t458), t459), @tactics.all_tac])
   let t457 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("&0 <= x /\\ x <= &0 ==> x = &0")))
   let t485 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t457), @tactics.conj_tac), t460), t463), t464), @tactics.conj_tac), t484)
-  first_borel_cantelli_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      (!n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &0"), t485))
+  first_borel_cantelli_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      (forall n. B n IN prob_events p) /\\\n      real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &0"), t485))
 }
 
 ///|
@@ -1029,7 +1029,7 @@ pub fn first_borel_cantelli() -> @kernel.Thm {
 ///|
 /// indep_events_seq
 fn step_32() -> Unit raise {
-  indep_events_seq_c.set(@pair.new_definition(@parser.parse_term("indep_events_seq (p:A prob_space) (B:num->A->bool) <=>\n   (!n. B n IN prob_events p) /\\\n   (!S. FINITE S /\\ ~(S = {}) ==>\n        prob p (INTERS (IMAGE B S)) = product S (\\i. prob p (B i)))")))
+  indep_events_seq_c.set(@pair.new_definition(@parser.parse_term("indep_events_seq (p:A prob_space) (B:num->A->bool) <=>\n   (forall n. B n IN prob_events p) /\\\n   (forall S. FINITE S /\\ ~(S = {}) ==>\n        prob p (INTERS (IMAGE B S)) = product S (\\i. prob p (B i)))")))
 }
 
 ///|
@@ -1047,7 +1047,7 @@ fn step_33() -> Unit raise {
   let t487 = @simp.asm_rewrite_tac(@list.List([@sets.image_clauses(), @sets.inters_insert()]))
   let t486 = @simp.asm_simp_tac(@list.List([@iterate.numseg_clauses(), @int.arith_rule(@parser.parse_term("m <= SUC n ==> m <= SUC n"))]))
   let t488 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t486), t487)
-  inters_image_numseg_suc_c.set(@tactics.prove(@parser.parse_term("!(f:num->A->bool) m n.\n      m <= SUC n\n      ==> INTERS(IMAGE f (m..SUC n)) = f(SUC n) INTER INTERS(IMAGE f (m..n))"), t488))
+  inters_image_numseg_suc_c.set(@tactics.prove(@parser.parse_term("forall(f:num->A->bool) m n.\n      m <= SUC n\n      ==> INTERS(IMAGE f (m..SUC n)) = f(SUC n) INTER INTERS(IMAGE f (m..n))"), t488))
 }
 
 ///|
@@ -1136,7 +1136,7 @@ fn step_34() -> Unit raise {
     @tactics.strip_assume_tac(t490(x491))
   })
   let t544 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t492), t496), t500), t504), t510), t511), t515), t517), t521), t529), t533), t541), t542), t543)
-  indep_compl_single_inter_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) m (idx:num->bool).\n      indep_events_seq p B /\\ FINITE idx /\\ ~(idx = {}) /\\ ~(m IN idx)\n      ==> prob p ((prob_carrier p DIFF B m) INTER INTERS(IMAGE B idx)) =\n          (&1 - prob p (B m)) * product idx (\\j. prob p (B j))"), t544))
+  indep_compl_single_inter_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) m (idx:num->bool).\n      indep_events_seq p B /\\ FINITE idx /\\ ~(idx = {}) /\\ ~(m IN idx)\n      ==> prob p ((prob_carrier p DIFF B m) INTER INTERS(IMAGE B idx)) =\n          (&1 - prob p (B m)) * product idx (\\j. prob p (B j))"), t544))
 }
 
 ///|
@@ -1477,7 +1477,7 @@ fn step_35() -> Unit raise {
     }
   })
   let t799 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t548), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t549), t553), t554), t576])), t798]))
-  indep_compl_inters_numseg_both_c.set(@tactics.prove(@parser.parse_term("!n.\n     (!p:A prob_space (B:num->A->bool) m.\n        indep_events_seq p B /\\ m <= n\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n            product(m..n) (\\i. &1 - prob p (B i))) /\\\n     (!p:A prob_space (B:num->A->bool) m (extra:num->bool).\n        indep_events_seq p B /\\ m <= n /\\\n        FINITE extra /\\ ~(extra = {}) /\\ (!j. j IN extra ==> n < j)\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n)) INTER\n                     INTERS(IMAGE B extra)) =\n            product(m..n) (\\i. &1 - prob p (B i)) *\n            product extra (\\j. prob p (B j)))"), t799))
+  indep_compl_inters_numseg_both_c.set(@tactics.prove(@parser.parse_term("forall n.\n     (forall p:A prob_space (B:num->A->bool) m.\n        indep_events_seq p B /\\ m <= n\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n            product(m..n) (\\i. &1 - prob p (B i))) /\\\n     (forall p:A prob_space (B:num->A->bool) m (extra:num->bool).\n        indep_events_seq p B /\\ m <= n /\\\n        FINITE extra /\\ ~(extra = {}) /\\ (forall j. j IN extra ==> n < j)\n        ==> prob p (INTERS(IMAGE (\\i. prob_carrier p DIFF B i) (m..n)) INTER\n                     INTERS(IMAGE B extra)) =\n            product(m..n) (\\i. &1 - prob p (B i)) *\n            product extra (\\j. prob p (B j)))"), t799))
 }
 
 ///|
@@ -1493,7 +1493,7 @@ pub fn indep_compl_inters_numseg_both() -> @kernel.Thm {
 /// INDEP_COMPL_INTERS_NUMSEG
 fn step_36() -> Unit raise {
   let t800 = @meson.meson_tac(@list.List([indep_compl_inters_numseg_both()]))
-  indep_compl_inters_numseg_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) m n.\n      indep_events_seq p B /\\ m <= n\n      ==> prob p (INTERS (IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n          product(m..n) (\\i. &1 - prob p (B i))"), t800))
+  indep_compl_inters_numseg_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) m n.\n      indep_events_seq p B /\\ m <= n\n      ==> prob p (INTERS (IMAGE (\\i. prob_carrier p DIFF B i) (m..n))) =\n          product(m..n) (\\i. &1 - prob p (B i))"), t800))
 }
 
 ///|
@@ -1542,7 +1542,7 @@ fn step_37() -> Unit raise {
     }
   })
   let t827 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t804), t815), t819), t826)
-  product_one_minus_le_exp_neg_c.set(@tactics.prove(@parser.parse_term("!f m n. (!i. m <= i /\\ i <= n ==> &0 <= f i /\\ f i <= &1)\n            ==> product(m..n) (\\i. &1 - f i) <= exp(--(sum(m..n) f))"), t827))
+  product_one_minus_le_exp_neg_c.set(@tactics.prove(@parser.parse_term("forall f m n. (forall i. m <= i /\\ i <= n ==> &0 <= f i /\\ f i <= &1)\n            ==> product(m..n) (\\i. &1 - f i) <= exp(--(sum(m..n) f))"), t827))
 }
 
 ///|
@@ -1587,7 +1587,7 @@ fn step_38() -> Unit raise {
   let t829 = @class.asm_cases_tac(@parser.parse_term("?N:num. M <= sum(0..N) (f:num->real)"))
   let t828 = @tactics.x_gen_tac(@parser.parse_term("M:real"))
   let t853 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t828), t829), t852)
-  nonneg_partial_sums_unbounded_c.set(@tactics.prove(@parser.parse_term("!f. (!i. &0 <= f i) /\\ ~real_summable (from 0) f\n       ==> !M. ?N. M <= sum(0..N) f"), t853))
+  nonneg_partial_sums_unbounded_c.set(@tactics.prove(@parser.parse_term("forall f. (forall i. &0 <= f i) /\\ ~real_summable (from 0) f\n       ==> forall M. ?N. M <= sum(0..N) f"), t853))
 }
 
 ///|
@@ -1697,7 +1697,7 @@ fn step_39() -> Unit raise {
   let t855 = @tactics.x_gen_tac(@parser.parse_term("e:real"))
   let t854 = @simp.rewrite_tac(@list.List([@realanalysis.reallim_sequentially()]))
   let t931 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t854), t855), @tactics.disch_tac), t856), @tactics.ants_tac), t857), t864), t867), t868), t869), @tactics.disch_tac), t873), t874), t878), t879), t880), t884), t886), t887), t888), t889), @tactics.conj_tac), t892), t896), t924), t928), t929), t930), @calc_rat.real_arith_tac)
-  product_one_minus_tends_to_zero_c.set(@tactics.prove(@parser.parse_term("!f m. (!i. &0 <= f i /\\ f i <= &1) /\\\n          ~real_summable (from 0) f\n          ==> ((\\n. product(m..n) (\\i. &1 - f i)) ---> &0) sequentially"), t931))
+  product_one_minus_tends_to_zero_c.set(@tactics.prove(@parser.parse_term("forall f m. (forall i. &0 <= f i /\\ f i <= &1) /\\\n          ~real_summable (from 0) f\n          ==> ((\\n. product(m..n) (\\i. &1 - f i)) ---> &0) sequentially"), t931))
 }
 
 ///|
@@ -1784,7 +1784,7 @@ fn step_40() -> Unit raise {
     @tactics.strip_assume_tac(t933(x934))
   })
   let t994 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t935), t939), t941), t945), t950), t951), @tactics.conj_tac), t954), t956), @tactics.ants_tac), t993)
-  tail_union_prob_one_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool) m.\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) = &1"), t994))
+  tail_union_prob_one_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool) m.\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (UNIONS {B n | n >= m}) = &1"), t994))
 }
 
 ///|
@@ -1835,7 +1835,7 @@ fn step_41() -> Unit raise {
     @tactics.strip_assume_tac(t996(x997))
   })
   let t1023 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t998), t1001), @tactics.ants_tac), t1004), t1005), t1009), t1012), @tactics.disch_tac), t1016), t1017), t1022)
-  second_borel_cantelli_c.set(@tactics.prove(@parser.parse_term("!p:A prob_space (B:num->A->bool).\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &1"), t1023))
+  second_borel_cantelli_c.set(@tactics.prove(@parser.parse_term("forall p:A prob_space (B:num->A->bool).\n      indep_events_seq p B /\\\n      ~real_summable (from 0) (\\i. prob p (B i))\n      ==> prob p (limsup_events B) = &1"), t1023))
 }
 
 ///|

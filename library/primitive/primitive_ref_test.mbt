@@ -21325,13 +21325,13 @@ test "Library/primitive matches Library/primitive.ml" {
       #|Library/primitive quotations (630):
       #|  2
       #|  p = 0
-      #|  !p. int_prime(&p) <=> prime p
+      #|  forall p. int_prime(&p) <=> prime p
       #|  \\(a:num,b:num). (b,a)
       #|  a * b * c:real = b * a * c
       #|  n:num
-      #|  !n a x y.\n        sum(0..n) (\\i. a(i) * x pow i) - sum(0..n) (\\i. a(i) * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\i. sum(i+1..n) (\\j. a j * y pow (j - 1 - i)) * x pow i)
+      #|  forall n a x y.\n        sum(0..n) (\\i. a(i) * x pow i) - sum(0..n) (\\i. a(i) * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\i. sum(i+1..n) (\\j. a j * y pow (j - 1 - i)) * x pow i)
       #|  {x | P x /\\ Q x /\\ R x} = {x | x IN {x | P x /\\ Q x} /\\ R x}
-      #|  !P a b. FINITE {x:int | a <= x /\\ x <= b /\\ P x}
+      #|  forall P a b. FINITE {x:int | a <= x /\\ x <= b /\\ P x}
       #|  n - 1
       #|  n - 1 < n <=> ~(n = 0)
       #|  ~(n = 0) /\\ x <= n - 1 ==> (if p then x else SUC x) <= n
@@ -21339,7 +21339,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  p divides (u - v:int)
       #|  v:int
       #|  u:int
-      #|  P c /\\ (!x y. P x /\\ P y ==> x = y)\n                           ==> {x | P x} = {c}
+      #|  P c /\\ (forall x y. P x /\\ P y ==> x = y)\n                           ==> {x | P x} = {c}
       #|  {x:int | l <= x /\\ x <= r /\\ p divides (x - c)} = {c}
       #|  {x | q x \\/ r x} = {x | q x} UNION {x | r x}
       #|  c:int
@@ -21355,12 +21355,12 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  (p:int) divides y ==> (p divides (x + y * z) <=> p divides x)
       #|  p divides ((a:num->int) n)
       #|  p divides (isum (0..n) (\\i. a i * c pow i))
-      #|  ~(!i:num. i <= n ==> (p:int) divides (a i))
+      #|  ~(forall i:num. i <= n ==> (p:int) divides (a i))
       #|  n = 0
       #|  c:int
       #|  {}:int->bool
-      #|  !a. (~(s = a) ==> CARD s <= n) /\\ CARD a <= n ==> CARD s <= n
-      #|  !p l r.\n    int_prime p /\\ r - l < p\n    ==> !n a. ~(!i. i <= n ==> (a i == &0) (mod p))\n              ==> CARD {x | l <= x /\\ x <= r /\\\n                            (isum(0..n) (\\i. a(i) * x pow i) == &0) (mod p)}\n                  <= n
+      #|  forall a. (~(s = a) ==> CARD s <= n) /\\ CARD a <= n ==> CARD s <= n
+      #|  forall p l r.\n    int_prime p /\\ r - l < p\n    ==> forall n a. ~(forall i. i <= n ==> (a i == &0) (mod p))\n              ==> CARD {x | l <= x /\\ x <= r /\\\n                            (isum(0..n) (\\i. a(i) * x pow i) == &0) (mod p)}\n                  <= n
       #|  &n:int
       #|  n:num
       #|  num_of_int
@@ -21376,8 +21376,8 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  &(p-1):int
       #|  &1:int
       #|  &p:int
-      #|  !p d. prime p /\\ 1 <= d\n         ==> CARD {x | x IN 1..p-1 /\\ (x EXP d == 1) (mod p)} <= d
-      #|  !s f g:A->num.\n          FINITE s /\\ (!x. x IN s ==> f(x) <= g(x)) /\\ nsum s f = nsum s g\n          ==> !x. x IN s ==> f x = g x
+      #|  forall p d. prime p /\\ 1 <= d\n         ==> CARD {x | x IN 1..p-1 /\\ (x EXP d == 1) (mod p)} <= d
+      #|  forall s f g:A->num.\n          FINITE s /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\ nsum s f = nsum s g\n          ==> forall x. x IN s ==> f x = g x
       #|  e * d':num = d
       #|  e <= 1 <=> e = 0 \\/ e = 1
       #|  ~(d < e * d) <=> e * d <= 1 * d
@@ -21395,7 +21395,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  e:num
       #|  b = (a EXP m) MOD p
       #|  m:num
-      #|  s' SUBSET s /\\ (!x. x IN t /\\ f x IN s' ==> x IN t')\n      ==> s = IMAGE f t ==> s' SUBSET IMAGE f t'
+      #|  s' SUBSET s /\\ (forall x. x IN t /\\ f x IN s' ==> x IN t')\n      ==> s = IMAGE f t ==> s' SUBSET IMAGE f t'
       #|  d:num
       #|  m:num
       #|  1 <= x <=> ~(x = 0)
@@ -21410,14 +21410,14 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  d:num
       #|  x:num
       #|  ~(p - 1 = 0)
-      #|  (!x. p x ==> q x) <=> (!x. x IN {x | p x} ==> q x)
-      #|  !p d. prime p /\\ d divides (p - 1)\n         ==> CARD {x | x IN 1..p-1 /\\ order p x = d} = phi(d)
+      #|  (forall x. p x ==> q x) <=> (forall x. x IN {x | p x} ==> q x)
+      #|  forall p d. prime p /\\ d divides (p - 1)\n         ==> CARD {x | x IN 1..p-1 /\\ order p x = d} = phi(d)
       #|  p - 1
       #|  p:num
-      #|  !p. prime p ==> CARD {x | x IN 1..p-1 /\\ order p x = p - 1} = phi(p - 1)
+      #|  forall p. prime p ==> CARD {x | x IN 1..p-1 /\\ order p x = p - 1} = phi(p - 1)
       #|  1 <= p ==> ~(0 = p)
       #|  {x | x IN 1..p-1 /\\ order p x = p - 1} = {}
-      #|  !p. prime p ==> ?x. x IN 1..p-1 /\\ order p x = p - 1
+      #|  forall p. prime p ==> ?x. x IN 1..p-1 /\\ order p x = p - 1
       #|  k * 2
       #|  3 <= p ==> 2 <= p
       #|  k + 2 = SUC(k + 1)
@@ -21432,13 +21432,13 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  (p EXP (k + 2)) divides (nsum(2..p) (\\i. binom(p,i) * (z * p EXP k) EXP i))
       #|  1 <= p
       #|  1 + a * b = a * b + 1
-      #|  !p z k. prime p /\\ coprime(z,p) /\\ 3 <= p /\\ 1 <= k\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p EXP k) EXP p = 1 + w * p EXP (k + 1)
+      #|  forall p z k. prime p /\\ coprime(z,p) /\\ 3 <= p /\\ 1 <= k\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p EXP k) EXP p = 1 + w * p EXP (k + 1)
       #|  1 <= k + 1
       #|  k + 1
       #|  w:num
       #|  p:num
       #|  w:num
-      #|  !p z k. prime p /\\ coprime(z,p) /\\ 3 <= p\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p) EXP (p EXP k) = 1 + w * p EXP (k + 1)
+      #|  forall p z k. prime p /\\ coprime(z,p) /\\ 3 <= p\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p) EXP (p EXP k) = 1 + w * p EXP (k + 1)
       #|  k <= j - 1
       #|  3 <= p ==> 2 <= p
       #|  p EXP (k + 1)
@@ -21473,7 +21473,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  g + p * x:num
       #|  d:num
       #|  p EXP j
-      #|  !y. (a == 1) (mod y) /\\ x divides y ==> (a == 1) (mod x)
+      #|  forall y. (a == 1) (mod y) /\\ x divides y ==> (a == 1) (mod x)
       #|  a /\\ (b ==> c) ==> (a <=> b) ==> c
       #|  (g:num == g + p * x) (mod p)
       #|  order p (g + p * x) = p - 1
@@ -21496,7 +21496,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  g:num
       #|  p:num
       #|  g:num
-      #|  !p. prime p /\\ 3 <= p\n       ==> ?g. !j. 1 <= j ==> order(p EXP j) g = phi(p EXP j)
+      #|  forall p. prime p /\\ 3 <= p\n       ==> ?g. forall j. 1 <= j ==> order(p EXP j) g = phi(p EXP j)
       #|  order (p EXP k) x
       #|  3 <= p ==> ~(p = 0)
       #|  p EXP k
@@ -21516,7 +21516,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  k:num
       #|  x:num
       #|  p:num
-      #|  !p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(p EXP k - 1) /\\ order (p EXP k) x = phi(p EXP k)
+      #|  forall p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(p EXP k - 1) /\\ order (p EXP k) x = phi(p EXP k)
       #|  x EXP (phi(q EXP k) DIV p)
       #|  x:num
       #|  k:num
@@ -21538,26 +21538,26 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  m = 0
       #|  n:num
       #|  m:num
-      #|  (!x y. R x y <=> R y x) /\\ (!x y. P x ==> R x y)\n      ==> !x y. P x \\/ P y ==> R x y
+      #|  (forall x y. R x y <=> R y x) /\\ (forall x y. P x ==> R x y)\n      ==> forall x y. P x \\/ P y ==> R x y
       #|  prime p
       #|  p:num
-      #|  !n p. ~(n = 0) /\\ prime p /\\ p divides phi(n) ==> ?x. order n x = p
+      #|  forall n p. ~(n = 0) /\\ prime p /\\ p divides phi(n) ==> ?x. order n x = p
       #|  1
       #|  x:num
       #|  p:num
       #|  n:num
       #|  p:num
-      #|  !n k. ~(n = 0)\n         ==> ((!a b. coprime(n,a) /\\ coprime(n,b) /\\\n                     (a EXP k == b EXP k) (mod n)\n                     ==> (a == b) (mod n)) <=>\n              coprime(k,phi n))
+      #|  forall n k. ~(n = 0)\n         ==> ((forall a b. coprime(n,a) /\\ coprime(n,b) /\\\n                     (a EXP k == b EXP k) (mod n)\n                     ==> (a == b) (mod n)) <=>\n              coprime(k,phi n))
       #|  {a:num | a < n}
       #|  \\a. (a EXP k) MOD n
       #|  {a:num | a < n /\\ coprime(n,a)}
-      #|  !n k. ~(n = 0)\n         ==> ((!a. coprime(n,a)\n                   ==> ?x. coprime(n,x) /\\ (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))
+      #|  forall n k. ~(n = 0)\n         ==> ((forall a. coprime(n,a)\n                   ==> ?x. coprime(n,x) /\\ (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))
       #|  x:num
       #|  a:num
       #|  a:num
       #|  k = 0
       #|  k:num
-      #|  !n k. ~(n = 0)\n         ==> ((!a. coprime(n,a) ==> ?x. (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))
+      #|  forall n k. ~(n = 0)\n         ==> ((forall a. coprime(n,a) ==> ?x. (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))
       #|  ~(0 < m /\\ m < 1)
       #|  1
       #|  ?x. x IN 1..1 /\\ order 2 x = phi(2)
@@ -21565,7 +21565,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  4 = 2 EXP 2
       #|  3
       #|  ?x. x IN 1..3 /\\ order 4 x = phi(4)
-      #|  !n a. ODD n /\\ ODD a /\\ order n a = phi n\n         ==> order (2 * n) a = phi(2 * n)
+      #|  forall n a. ODD n /\\ ODD a /\\ order n a = phi n\n         ==> order (2 * n) a = phi(2 * n)
       #|  g:num
       #|  g <= x - 1 /\\ p EXP 1 <= x ==> g + p <= 2 * x - 1
       #|  g + p EXP k
@@ -21573,7 +21573,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  g:num
       #|  3 <= p ==> ~(p = 2)
       #|  p:num
-      #|  !p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(2 * p EXP k - 1) /\\\n                 order (2 * p EXP k) x = phi(2 * p EXP k)
+      #|  forall p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(2 * p EXP k - 1) /\\\n                 order (2 * p EXP k) x = phi(2 * p EXP k)
       #|  2
       #|  (?x. order 0 x = phi(0))
       #|  0 < m /\\ m < 1 <=> F
@@ -21584,7 +21584,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  x:num
       #|  SUC(2 * m) EXP 2 = 1 + q * 8 <=> m * (m + 1) = 2 * q
       #|  k = 0
-      #|  !k x. ODD x /\\ 1 <= k ==> (x EXP (2 EXP k) == 1) (mod (2 EXP (k + 2)))
+      #|  forall k x. ODD x /\\ 1 <= k ==> (x EXP (2 EXP k) == 1) (mod (2 EXP (k + 2)))
       #|  x + x * 2 < x * 4 <=> ~(x = 0)
       #|  a + b:num < c ==> a < c - b
       #|  0 < x <=> ~(x = 0)
@@ -21598,7 +21598,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  2 EXP k
       #|  a = b ==> 1 <= b /\\ a = 0 ==> F
       #|  x:num
-      #|  !k. 3 <= k ==> ~(?x. order (2 EXP k) x = phi(2 EXP k))
+      #|  forall k. 3 <= k ==> ~(?x. order (2 EXP k) x = phi(2 EXP k))
       #|  3 <= p ==> 1 <= p
       #|  x:num
       #|  a * b:num
@@ -21613,7 +21613,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  (phi a * phi b) DIV 2
       #|  x:num
       #|  a * b:num
-      #|  !a b. 3 <= a /\\ 3 <= b /\\ coprime(a,b)\n         ==> ~(?x. order (a * b) x = phi(a * b))
+      #|  forall a b. 3 <= a /\\ 3 <= b /\\ coprime(a,b)\n         ==> ~(?x. order (a * b) x = phi(a * b))
       #|  q EXP 1
       #|  3 <= r * 2 <=> ~(r = 0 \\/ r = 1)
       #|  q EXP j
@@ -21664,7 +21664,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  n = 4
       #|  n = 2
       #|  n = 0
-      #|  !n. (?x. order n x = phi n) <=>\n       n = 0 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)
+      #|  forall n. (?x. order n x = phi n) <=>\n       n = 0 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)
       #|  k = 0
       #|  k:num
       #|  p:num
@@ -21682,7 +21682,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  n = 1
       #|  ~a /\\ ~b ==> (a <=> b)
       #|  n = 0
-      #|  !n. (?x. x IN 1..n-1 /\\ order n x = phi n) <=>\n       n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ 1 <= k /\\ (n = p EXP k \\/ n = 2 * p EXP k)
+      #|  forall n. (?x. x IN 1..n-1 /\\ order n x = phi n) <=>\n       n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ 1 <= k /\\ (n = p EXP k \\/ n = 2 * p EXP k)
       #|  d * p = p ==> d = 1 \\/ p = 0
       #|  d = 0
       #|  d = gcd(phi n,a)
@@ -21699,9 +21699,9 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  coprime(n:num,g)
       #|  g:num
       #|  n = 0
-      #|  !n. {a | a < n /\\ coprime(n,a) /\\ order n a = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)
+      #|  forall n. {a | a < n /\\ coprime(n,a) /\\ order n a = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)
       #|  n:num
-      #|  !n. {x | x < n /\\ order n x = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)
+      #|  forall n. {x | x < n /\\ order n x = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)
       #|  gcd(k,n) = d /\\ d * p = n ==> gcd(n,k) = d
       #|  p = 0
       #|  d * p = phi n
@@ -21710,8 +21710,8 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  d = gcd(k,phi n)
       #|  gcd(k,phi(n)) divides phi(n)
       #|  i:num
-      #|  !i:num. (a EXP i == 1) (mod n) <=> (g EXP (r * i) == 1) (mod n)
-      #|  !d:num. (g EXP (d * k) == a) (mod n) <=>\n            (g EXP (d * k) == g EXP r) (mod n)
+      #|  forall i:num. (a EXP i == 1) (mod n) <=> (g EXP (r * i) == 1) (mod n)
+      #|  forall d:num. (g EXP (d * k) == a) (mod n) <=>\n            (g EXP (d * k) == g EXP r) (mod n)
       #|  a MOD n
       #|  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
       #|  \\i. (g EXP i) MOD n
@@ -21730,11 +21730,11 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  (a == 1) (mod n)
       #|  (1 == a) (mod n) <=> (a == 1) (mod n)
       #|  k = 0
-      #|  !n a k.\n        ~(n = 0) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)
+      #|  forall n a k.\n        ~(n = 0) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)
       #|  k:num
       #|  a:num
       #|  n:num
-      #|  !n a k.\n        ~(n = 0) /\\ ~(k = 0) /\\ coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)
+      #|  forall n a k.\n        ~(n = 0) /\\ ~(k = 0) /\\ coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)
       #|  x MOD n
       #|  x:num
       #|  k:num
@@ -21742,25 +21742,25 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  n:num
       #|  k = 0
       #|  n = 0
-      #|  !n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))
+      #|  forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))
       #|  k:num
       #|  a:num
       #|  p:num
-      #|  !p a k.\n        prime p /\\ ~(p divides a)\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             (a EXP ((p - 1) DIV gcd(k,p - 1)) == 1) (mod p))
-      #|  !n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             order n a divides phi n DIV gcd (k,phi n))
-      #|  !n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             gcd(k,phi n) divides phi n DIV order n a)
+      #|  forall p a k.\n        prime p /\\ ~(p divides a)\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             (a EXP ((p - 1) DIV gcd(k,p - 1)) == 1) (mod p))
+      #|  forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             order n a divides phi n DIV gcd (k,phi n))
+      #|  forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             gcd(k,phi n) divides phi n DIV order n a)
       #|  (a:num) divides b ==> gcd(a,b) = a
-      #|  !n a. coprime(n,a) /\\ 3 <= n /\\ (?x. order n x = phi n)\n         ==> ((?x. (x EXP 2 == a) (mod n)) <=> EVEN(phi n DIV order n a))
+      #|  forall n a. coprime(n,a) /\\ 3 <= n /\\ (?x. order n x = phi n)\n         ==> ((?x. (x EXP 2 == a) (mod n)) <=> EVEN(phi n DIV order n a))
       #|  n = 0
-      #|  !n g m k.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP k == g EXP m) (mod n)) <=> gcd(k,phi n) divides m)
+      #|  forall n g m k.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP k == g EXP m) (mod n)) <=> gcd(k,phi n) divides m)
       #|  3 <= n
       #|  n = 0
-      #|  !n g m.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP 2 == g EXP m) (mod n)) <=>\n             3 <= n ==> EVEN m)
+      #|  forall n g m.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP 2 == g EXP m) (mod n)) <=>\n             3 <= n ==> EVEN m)
       #|  {x | P x /\\ Q x /\\ R x} = {x | ~(P x /\\ Q x ==> ~R x)}
-      #|  !n k. ~(n = 0) /\\ (?g. order n g = phi n)\n         ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)}\n             HAS_SIZE phi n DIV gcd(k,phi n)
+      #|  forall n k. ~(n = 0) /\\ (?g. order n g = phi n)\n         ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)}\n             HAS_SIZE phi n DIV gcd(k,phi n)
       #|  2
       #|  n:num
-      #|  !n. 3 <= n /\\ (?g. order n g = phi n)\n       ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP 2 == a) (mod n)}\n           HAS_SIZE phi n DIV 2
+      #|  forall n. 3 <= n /\\ (?g. order n g = phi n)\n       ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP 2 == a) (mod n)}\n           HAS_SIZE phi n DIV 2
       #|  (x:int) pow k
       #|  m:num
       #|  &n:int
@@ -21769,7 +21769,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  --(&m):int = &n <=> &m:int = &n /\\ &n:int = &0
       #|  EVEN k
       #|  n = 0
-      #|  !n k a. (?x:num. (x EXP k == a) (mod n)) <=>\n           (?x:int. (x pow k == &a) (mod &n))
+      #|  forall n k a. (?x:num. (x EXP k == a) (mod n)) <=>\n           (?x:int. (x pow k == &a) (mod &n))
       #|  x pow 2 - a = m * z /\\\n      ((&2 * x) * y:int == --z) (mod n) /\\\n      n pow 1 divides m\n      ==> ((x + y * m) pow 2 == a) (mod (n * m))
       #|  (x:int) + y * &n pow k
       #|  y:int
@@ -21787,7 +21787,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  p EXP 1 divides q ==> (x == a) (mod q) ==> (x == a) (mod p)
       #|  x:num
       #|  k = 0
-      #|  !n a k.\n        ODD n /\\ coprime(n,a)\n        ==> ((?x. (x EXP 2 == a) (mod (n EXP k))) <=>\n             k = 0 \\/ ?x. (x EXP 2 == a) (mod n))
+      #|  forall n a k.\n        ODD n /\\ coprime(n,a)\n        ==> ((?x. (x EXP 2 == a) (mod (n EXP k))) <=>\n             k = 0 \\/ ?x. (x EXP 2 == a) (mod n))
       #|  t divides (c * x + b:int) ==> k * t divides k * b + x * c * k
       #|  3 <= k ==> SUC(k - 1) = k
       #|  ((a + b) + (d + &2 * x * c * p):int == a) (mod n) <=>\n    n divides (d + b + x * c * &2 * p)
@@ -21806,7 +21806,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  (m:num) divides n ==> (a == b) (mod n) ==> (a == b) (mod m)
       #|  p ==> (q <=> r) <=> (p ==> q ==> r) /\\ (r ==> p ==> q)
       #|  8 = 2 EXP 3
-      #|  !a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=>\n              (?x. (x EXP 2 == a) (mod 8)))
+      #|  forall a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=>\n              (?x. (x EXP 2 == a) (mod 8)))
       #|  a:num
       #|  a MOD 8
       #|  a MOD 8 < 8
@@ -21815,10 +21815,10 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  n MOD 8 < 8
       #|  ODD(a MOD 8)
       #|  n:num
-      #|  !a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=> (a == 1) (mod 8))
+      #|  forall a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=> (a == 1) (mod 8))
       #|  n = 0
       #|  n = 1
-      #|  !n a k.\n        (n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n         ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)) /\\\n        coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))
+      #|  forall n a k.\n        (n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n         ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)) /\\\n        coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))
       #|  1
       #|  p:num
       #|  p = 2
@@ -21829,7 +21829,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  0
       #|  (1 == a) (mod p) ==> p divides a ==> p = 1
       #|  k = 0
-      #|  !p a k.\n        prime p\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             if p divides a then ~(k = 0)\n             else (a EXP ((p - 1) DIV gcd(k,p-1)) == 1) (mod p))
+      #|  forall p a k.\n        prime p\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             if p divides a then ~(k = 0)\n             else (a EXP ((p - 1) DIV gcd(k,p-1)) == 1) (mod p))
       #|  gcd(2,p - 1) = 2
       #|  ~((p:num) divides a)
       #|  p = 2
@@ -21837,20 +21837,20 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  2
       #|  a:num
       #|  p:num
-      #|  !p a. prime p\n         ==> ((?x. (x EXP 2 == a) (mod p)) <=>\n              p divides a \\/ (a EXP ((p - 1) DIV 2) == 1) (mod p))
+      #|  forall p a. prime p\n         ==> ((?x. (x EXP 2 == a) (mod p)) <=>\n              p divides a \\/ (a EXP ((p - 1) DIV 2) == 1) (mod p))
       #|  2 <= p ==> ~(p <= 1)
       #|  ~(n = 0) /\\ prime p ==> (prime q /\\ q divides p EXP n <=> q = p)
       #|  j:num
       #|  p:num
       #|  s HAS_SIZE m ==> n = m ==> s HAS_SIZE n
       #|  1 < n ==> ~(n = 0)
-      #|  (!p. prime p /\\ p divides a ==> index p (a * b) = index p a) /\\\n      (!p. prime p /\\ p divides b ==> index p (a * b) = index p b)
+      #|  (forall p. prime p /\\ p divides a ==> index p (a * b) = index p a) /\\\n      (forall p. prime p /\\ p divides b ==> index p (a * b) = index p b)
       #|  coprime(a,b)\n           ==> ((x == y) (mod (a * b)) <=>\n                (x == y) (mod a) /\\ (x == y) (mod b))
       #|  \\x. (x EXP k == z) (mod b)
       #|  \\x. (x EXP k == z) (mod a)
       #|  (if p /\\ q then a * b else 0) =\n      (if p then a else 0) * (if q then b else 0)
-      #|  (!p. prime p /\\ (P p \\/ Q p) ==> R p) <=>\n      (!p. prime p /\\ P p ==> R p) /\\ (!p. prime p /\\ Q p ==> R p)
-      #|  DISJOINT s t <=> !x. ~(x IN s /\\ x IN t)
+      #|  (forall p. prime p /\\ (P p \\/ Q p) ==> R p) <=>\n      (forall p. prime p /\\ P p ==> R p) /\\ (forall p. prime p /\\ Q p ==> R p)
+      #|  DISJOINT s t <=> forall x. ~(x IN s /\\ x IN t)
       #|  1 < n ==> ~(n = 0)
       #|  FINITE {d | d divides a} /\\\n          {p | prime p /\\ p divides a} SUBSET {d | d divides a}\n          ==> FINITE {p | prime p /\\ p divides a}
       #|  {x | P x /\\ (Q x \\/ R x)} =\n      {x | P x /\\ Q x} UNION {x | P x /\\ R x}
@@ -21873,9 +21873,9 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  k:num
       #|  z:num
       #|  n:num
-      #|  !n a k.\n        ODD n /\\ coprime(n,a) /\\ ~(k = 0)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if !p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)
+      #|  forall n a k.\n        ODD n /\\ coprime(n,a) /\\ ~(k = 0)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if forall p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)
       #|  prime p ==> ~(p = 1)
-      #|  !p. (a == 1) (mod n)\n            ==> p divides a /\\ p divides n ==> p divides 1
+      #|  forall p. (a == 1) (mod n)\n            ==> p divides a /\\ p divides n ==> p divides 1
       #|  p:num
       #|  p:num
       #|  s = {} /\\ ~p ==> s HAS_SIZE (if p then n else 0)
@@ -21884,7 +21884,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  a:num
       #|  n:num
       #|  coprime(n:num,a)
-      #|  !n a k.\n        ODD n /\\ ~(k = 0)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if !p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)
+      #|  forall n a k.\n        ODD n /\\ ~(k = 0)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if forall p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)
       #|  x MOD n
       #|  x:num
       #|  s:num->bool
@@ -21893,31 +21893,31 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  k:num
       #|  a:num
       #|  n:num
-      #|  !n a k.\n        ODD n /\\ ~(k = 0) /\\ coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             !p. prime p /\\ p divides n\n                 ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                              gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                     (mod (p EXP index p n)))
+      #|  forall n a k.\n        ODD n /\\ ~(k = 0) /\\ coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             forall p. prime p /\\ p divides n\n                 ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                              gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                     (mod (p EXP index p n)))
       #|  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
       #|  k = 0
       #|  k:num
       #|  1
       #|  n:num
-      #|  !n k. ~(n = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)}\n             HAS_SIZE gcd(k,phi n)
+      #|  forall n k. ~(n = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)}\n             HAS_SIZE gcd(k,phi n)
       #|  (x == 1) (mod n) ==> coprime(x,n)
       #|  x:num
       #|  k:num
       #|  n:num
-      #|  !n k. ~(n = 0) /\\ ~(k = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE gcd(k,phi n)
+      #|  forall n k. ~(n = 0) /\\ ~(k = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE gcd(k,phi n)
       #|  k:num
       #|  1
       #|  n:num
-      #|  !n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))
+      #|  forall n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))
       #|  k:num
       #|  1
       #|  n:num
-      #|  !n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))
+      #|  forall n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))
       #|  1
       #|  1
       #|  0
       #|  n = 1
-      #|  !n k. ~(n = 0) ==> ?a. a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)
+      #|  forall n k. ~(n = 0) ==> ?a. a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)
       #|  n DIV 2 < n <=> ~(n = 0)
       #|  p EXP k
       #|  {x | P x /\\ Q x /\\ R x} PSUBSET {x | P x /\\ Q x}\n      ==> ?a. P a /\\ Q a /\\ ~R a
@@ -21952,7 +21952,7 @@ test "Library/primitive matches Library/primitive.ml" {
       #|  a < 1 <=> a = 0
       #|  ~(3 <= n) <=> n = 0 \\/ n = 1 \\/ n = 2
       #|  (p <=> q) <=> (~q ==> ~p) /\\ (q ==> p)
-      #|  !n. (?a. a < n /\\ coprime(n,a) /\\ ~(?x. (x EXP 2 == a) (mod n))) <=>\n       3 <= n
+      #|  forall n. (?a. a < n /\\ coprime(n,a) /\\ ~(?x. (x EXP 2 == a) (mod n))) <=>\n       3 <= n
       #|INT_PRIME =  |- (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) (#int_prime:fun(int,bool) (#int_of_num:fun(num,int) p:num))) (#prime:fun(num,bool) p:num))))
       #|REAL_POLY_DIFF_EXPLICIT =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#real_mul:fun(real,fun(real,real)) (a:fun(num,real) i:num)) ((#real_pow:fun(real,fun(num,real)) x:real) i:num))))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#real_mul:fun(real,fun(real,real)) (a:fun(num,real) i:num)) ((#real_pow:fun(real,fun(num,real)) y:real) i:num)))))) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) x:real) y:real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (\i:num. ((#real_mul:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (\j:num. ((#real_mul:fun(real,fun(real,real)) (a:fun(num,real) j:num)) ((#real_pow:fun(real,fun(num,real)) y:real) ((#-:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) j:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)))))) ((#real_pow:fun(real,fun(num,real)) x:real) i:num))))))))))))))
       #|INT_POLY_DIFF_EXPLICIT =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun(num,int),bool),bool) (\a:fun(num,int). (#!:fun(fun(int,bool),bool) (\x:int. (#!:fun(fun(int,bool),bool) (\y:int. ((#=:fun(int,fun(int,bool)) ((#int_sub:fun(int,fun(int,int)) ((#isum:fun(fun(num,bool),fun(fun(num,int),int)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#int_mul:fun(int,fun(int,int)) (a:fun(num,int) i:num)) ((#int_pow:fun(int,fun(num,int)) x:int) i:num))))) ((#isum:fun(fun(num,bool),fun(fun(num,int),int)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#int_mul:fun(int,fun(int,int)) (a:fun(num,int) i:num)) ((#int_pow:fun(int,fun(num,int)) y:int) i:num)))))) ((#int_mul:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) x:int) y:int)) ((#isum:fun(fun(num,bool),fun(fun(num,int),int)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (\i:num. ((#int_mul:fun(int,fun(int,int)) ((#isum:fun(fun(num,bool),fun(fun(num,int),int)) ((#..:fun(num,fun(num,fun(num,bool))) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (\j:num. ((#int_mul:fun(int,fun(int,int)) (a:fun(num,int) j:num)) ((#int_pow:fun(int,fun(num,int)) y:int) ((#-:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) j:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) i:num)))))) ((#int_pow:fun(int,fun(num,int)) x:int) i:num))))))))))))))

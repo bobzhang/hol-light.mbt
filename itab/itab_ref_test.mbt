@@ -30,7 +30,7 @@ test "itab matches itab.ml" {
   it("imp_trans", "(p ==> q) ==> (q ==> r) ==> p ==> r")
   it("triple_neg", "~ ~ ~p ==> ~p")
   it("disj_elim", "(p \\/ q) /\\ (p ==> r) /\\ (q ==> r) ==> r")
-  it("forall_inst", "(!x:A. P x) ==> P a")
+  it("forall_inst", "(forall x:A. P x) ==> P a")
   it("exists_weaken", "(?x:A. P x /\\ Q x) ==> ?x. P x")
   it("iff", "(p <=> q) ==> q ==> p")
   it("contrapos", "(p ==> q) ==> ~q ==> ~p")

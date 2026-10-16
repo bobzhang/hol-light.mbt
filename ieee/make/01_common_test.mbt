@@ -5594,7 +5594,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  ipow (x:real) (e:int) =\n  (if (&0 <= e)\n   then (x pow (num_of_int e))\n   else (inv (x pow (num_of_int (--e)))))
       #|  &0 <= --(i:int)
       #|  &0 <= (i:int)
-      #|  !(r:real) (i:int). &0 < r ==> &0 < r ipow i
+      #|  forall(r:real) (i:int). &0 < r ==> &0 < r ipow i
       #|  ~(&0 <= (i:int))
       #|  ~(&0 <= (i:int)) ==> (&0 <= --i <=> T)
       #|  &0 <= (i:int)
@@ -5605,7 +5605,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (i:int) /\\ &0 <= --i ==> i = &0
       #|  &0 <= --(i:int)
       #|  &0 <= (i:int)
-      #|  !(x:real) (i:int). ~(x = &0) ==> x ipow i = inv(x ipow -- i)
+      #|  forall(x:real) (i:int). ~(x = &0) ==> x ipow i = inv(x ipow -- i)
       #|  --((u:int) + (v:int)) = --u + --v
       #|  &0 <= (v:int)
       #|  (a:int) + (b:int) = b + a
@@ -5619,9 +5619,9 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  (u:int) + (&m:int) = &m - (--u)
       #|  &0 <= (u:int) + (v:int)
       #|  &0 <= (u:int) + (v:int)
-      #|  !(x:real) (u:int) (v:int).\n\t              ~(x = &0) /\\ u < &0 /\\ &0 <= v ==>\n                      (x ipow u) * (x ipow v) = (x ipow (u + v))
-      #|  !(x:real) (u:int) (v:int).\n\t  ~(x = &0) /\\ &0 <= u /\\ &0 <= v ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
-      #|  !(x:real) (u:int) (v:int). ~(x = &0) ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  forall(x:real) (u:int) (v:int).\n\t              ~(x = &0) /\\ u < &0 /\\ &0 <= v ==>\n                      (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  forall(x:real) (u:int) (v:int).\n\t  ~(x = &0) /\\ &0 <= u /\\ &0 <= v ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  forall(x:real) (u:int) (v:int). ~(x = &0) ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
       #|  &0 <= (u:int) /\\ &0 <= (v:int) ==> &0 <= u + v
       #|  n:num
       #|  m:num
@@ -5633,8 +5633,8 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  ~(&0 <= (u:int) + (v:int)) ==> v < --u
       #|  m < n ==> m <= n
       #|  num_of_int(i)
-      #|  !(r:num) (i:int). &0 <= i ==> ?(m:num). m = num_of_int(i) /\\\n\t    &r ipow i = &(r EXP m)
-      #|  !(r:num) (p:num). 0 < p ==> &r ipow (&p - &1) = &(r EXP (p - 1))
+      #|  forall(r:num) (i:int). &0 <= i ==> ?(m:num). m = num_of_int(i) /\\\n\t    &r ipow i = &(r EXP m)
+      #|  forall(r:num) (p:num). 0 < p ==> &r ipow (&p - &1) = &(r EXP (p - 1))
       #|  0 < p ==> 0 <= p - 1
       #|  r:num
       #|  0 < x <=> 1 <= x
@@ -5644,16 +5644,16 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  (a:real) * b = b * a
       #|  (x ipow e)
       #|  (y:num) <= z
-      #|  !(x:real) (y:num) (z:num) (e:int).\n\t  &0 < x /\\ &y * x ipow e <= &z * x ipow e /\\\n\t  &z * x ipow e <= (&y + &1) * x ipow e ==>\n\t  z = y \\/ z = y + 1
+      #|  forall(x:real) (y:num) (z:num) (e:int).\n\t  &0 < x /\\ &y * x ipow e <= &z * x ipow e /\\\n\t  &z * x ipow e <= (&y + &1) * x ipow e ==>\n\t  z = y \\/ z = y + 1
       #|  &0 <= (&1:int) <=> T
-      #|  !(x:real). x ipow &1 = x
+      #|  forall(x:real). x ipow &1 = x
       #|  &0 <= (&0:int) <=> T
-      #|  !(x:real). x ipow &0 = &1
-      #|  !(x:real) (e:int). &1 <= x /\\ &0 <= e ==> &1 <= x ipow e
+      #|  forall(x:real). x ipow &0 = &1
+      #|  forall(x:real) (e:int). &1 <= x /\\ &0 <= e ==> &1 <= x ipow e
       #|  n:num
       #|  &0 < (e:int)
       #|  &0 < (e:int) ==> ((&0 <= e) <=> T)
-      #|  !(x:real) (e:int). &1 < x /\\ &0 < e ==> &1 < x ipow e
+      #|  forall(x:real) (e:int). &1 < x /\\ &0 < e ==> &1 < x ipow e
       #|  &0 < (e:int) ==> &0 <= e
       #|  &0 < (x:real) ==> &0 <= x
       #|  (a:real) * b = b * a
@@ -5665,19 +5665,19 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 < (x:real) ==> &0 <= x
       #|  &0 <= (&0:int) <=> T
       #|  (&0):int
-      #|  !(r:num) (n:num). 2 <= r ==> ?(e:int). &0 <= e /\\ &n <= &r ipow e
+      #|  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &0 <= e /\\ &n <= &r ipow e
       #|  2 <= r ==> (?e. &0 <= e /\\ &n <= &r ipow e)
       #|  e:int
-      #|  !(r:num) (n:num). 2 <= r ==> ?(e:int). &n <= &r ipow e
+      #|  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &n <= &r ipow e
       #|  n:num
       #|  e:int
       #|  z:real
-      #|  !(r:num) (z:real). 2 <= r ==> ?(e:int). z <= &r ipow e
+      #|  forall(r:num) (z:real). 2 <= r ==> ?(e:int). z <= &r ipow e
       #|  n:num
       #|  (x:real) = &1 * x
       #|  -- -- (e:int) = e
       #|  -- (e:int)
-      #|  !(r:num) (z:real). &0 < z /\\ 2 <= r ==> ?(e:int). &r ipow e <= z
+      #|  forall(r:num) (z:real). &0 < z /\\ 2 <= r ==> ?(e:int). &r ipow e <= z
       #|  &1 / (z:real)
       #|  &2 <= &r ==> ~(&r = &0)
       #|  e1 <= (e2:int) <=> e2' <= (e1':int)
@@ -5692,7 +5692,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e2:int)
       #|  (&1:real) = (inv (&1:real))
       #|  &1:real
-      #|  !y. (x:real) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
       #|  inv (&x ipow e2') < &x ipow e1
       #|  -- e2:int
       #|  ?e2':int. &0 < e2' /\\ --e2 = e2'
@@ -5701,7 +5701,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e1:int)
       #|  &0 <= (e2:int)
       #|  &0 <= (e1:int)
-      #|  !(x:num) (e1:int) (e2:int). 2 <= x /\\ &x ipow e1 <= &x ipow e2 ==>\n             e1 <= e2
+      #|  forall(x:num) (e1:int) (e2:int). 2 <= x /\\ &x ipow e1 <= &x ipow e2 ==>\n             e1 <= e2
       #|  2 <= x ==> ((x = 0) <=> F)
       #|  2 <= x ==> ((x = 0) <=> F)
       #|  -- e2:int
@@ -5720,50 +5720,50 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e1:int)
       #|  &0 <= (e2:int)
       #|  &0 <= (e1:int)
-      #|  !(x:real) (e1:int) (e2:int). &1 <= x /\\ e1 <= e2 ==>\n                      x ipow e1 <= x ipow e2
+      #|  forall(x:real) (e1:int) (e2:int). &1 <= x /\\ e1 <= e2 ==>\n                      x ipow e1 <= x ipow e2
       #|  &1 <= (x:real) ==> &0 < x
       #|  x:real
       #|  &0 < z ==> ~(z = &0)
       #|  x * y = y * (x:real)
       #|  ~(x = &0)
-      #|  !(x:real) (i:int). &0 < x ==> x ipow i * x ipow (-- i) = &1
+      #|  forall(x:real) (i:int). &0 < x ==> x ipow i * x ipow (-- i) = &1
       #|  rerror (a:real) (b:real) = abs((b - a) / a)
       #|  closer (x:real) (y:real) (z:real) = (abs(x - z) < abs(y - z))
-      #|  !(n:num). ODD(2 * n) <=> F
+      #|  forall(n:num). ODD(2 * n) <=> F
       #|  2 * SUC(d) - 1 = SUC(2 *d)
-      #|  !(f:num). 0 < f ==> ODD(2 * f - 1)
+      #|  forall(f:num). 0 < f ==> ODD(2 * f - 1)
       #|  z = x * y /\\ ~(z = &0) ==> ~(x = &0) /\\ ~(y = &0)
       #|  1 = x EXP 0
-      #|  !(x:num) (n:num). ~(x = 0) ==> 1 <= x EXP n
+      #|  forall(x:num) (n:num). ~(x = 0) ==> 1 <= x EXP n
       #|  b = 0 \\/ 1 <= b
       #|  b = 0 \\/ 1 <= b
       #|  a = 0 \\/ 1 <= a
-      #|  !(a:num) (b:num). 1 <= a * b ==> 1 <= a
-      #|  is_sup_num (s:num->bool) (n:num) = (n IN s /\\ !n'. n' IN s ==> n' <= n)
-      #|  is_sup_int (s:int->bool) (e:int) = (e IN s /\\ !e'. e' IN s ==> e' <= e)
+      #|  forall(a:num) (b:num). 1 <= a * b ==> 1 <= a
+      #|  is_sup_num (s:num->bool) (n:num) = (n IN s /\\ forall n'. n' IN s ==> n' <= n)
+      #|  is_sup_int (s:int->bool) (e:int) = (e IN s /\\ forall e'. e' IN s ==> e' <= e)
       #|  sup_num (s:num->bool) = (@(n:num). is_sup_num s n)
       #|  sup_int (s:int->bool) = (@(e:int). is_sup_int s e)
-      #|  !x. x = SUC b ==> ~(x IN s)
+      #|  forall x. x = SUC b ==> ~(x IN s)
       #|  ~(n = SUC b) /\\ n <= (SUC b) ==> n <= b
-      #|  !n. n IN s ==> n <= (b:num)
+      #|  forall n. n IN s ==> n <= (b:num)
       #|  SUC b <= x
       #|  x <= SUC b
-      #|  !x. is_sup_num s x ==> x = SUC b
+      #|  forall x. is_sup_num s x ==> x = SUC b
       #|  is_sup_num s (SUC b)
       #|  SUC(b)
       #|  SUC(b) IN s
       #|  x <= 0 ==> x = 0
-      #|  !x. is_sup_num s x ==> x = 0
+      #|  forall x. is_sup_num s x ==> x = 0
       #|  x = 0
       #|  x <= 0 ==> x = 0
       #|  x = 0
       #|  is_sup_num s 0
       #|  0:num
-      #|  !(s:num->bool) (b:num). ~(s = {}) /\\ (!n. n IN s ==> n <= b) ==>\n\t  ?(n':num). sup_num s = n' /\\ is_sup_num s n'
+      #|  forall(s:num->bool) (b:num). ~(s = {}) /\\ (forall n. n IN s ==> n <= b) ==>\n\t  ?(n':num). sup_num s = n' /\\ is_sup_num s n'
       #|  (x:num) IN s
       #|  SUC b IN s
       #|  (n:num) IN s
-      #|  ~(s = {}) /\\ (!n. n IN s ==> n <= b)\n                       ==> (?n'. sup_num s = n' /\\ is_sup_num s n')
+      #|  ~(s = {}) /\\ (forall n. n IN s ==> n <= b)\n                       ==> (?n'. sup_num s = n' /\\ is_sup_num s n')
       #|  e':int
       #|  &0 <= (e':int) - e
       #|  (z:int) <= y <=> z - e <= y - e
@@ -5776,17 +5776,17 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= b - (e:int)
       #|  &0 <= e'' - (e:int)
       #|  num_of_int(b - e)
-      #|  ?(bn:num). !n. n IN\n                     {n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} ==> n <= bn
+      #|  ?(bn:num). forall n. n IN\n                     {n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} ==> n <= bn
       #|  e - (e:int) = &0
       #|  e:int
       #|  0:num
       #|  ~({n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} = {})
       #|  CHOICE (s:int->bool)
       #|  ?e. (e:int) IN s
-      #|  !(s:int->bool) (b:int). ~(s = {}) /\\ (!e. e IN s ==> e <= b) ==>\n\t    ?(e':int). is_sup_int s e'
+      #|  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t    ?(e':int). is_sup_int s e'
       #|  b:int
       #|  sup_int s
-      #|  !(s:int->bool) (b:int). ~(s = {}) /\\ (!e. e IN s ==> e <= b) ==>\n\t  ?(e':int). sup_int s = e' /\\ is_sup_int s e'
+      #|  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t  ?(e':int). sup_int s = e' /\\ is_sup_int s e'
       #|ipow =  |- ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) e:int)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int)) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) e:int))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) (#int_neg:fun(int,int) e:int))))))
       #|IPOW_LT_0 =  |- (#!:fun(fun(real,bool),bool) (\r:real. (#!:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) r:real) i:int)))))))
       #|IPOW_INV_NEG =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) (#real_inv:fun(real,real) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))))))))

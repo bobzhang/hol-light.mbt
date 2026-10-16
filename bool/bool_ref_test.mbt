@@ -93,23 +93,23 @@ test "bool matches bool.ml" {
   th("IMP_TRANS_bad", () => {
     @bool.imp_trans(hyp_of("a ==> b"), hyp_of("c ==> c"))
   })
-  let fa = hyp_of("!x:A. (P:A->bool) x")
+  let fa = hyp_of("forall x:A. (P:A->bool) x")
   th("SPEC", () => @bool.spec(tm("y:A"), fa))
   th("SPEC_bad", () => @bool.spec(tm("y:B"), fa))
   th("SPECL", () => {
     @bool.specl(
       @list.List([tm("u:num"), tm("v:num")]),
-      hyp_of("!x y:num. (R:num->num->bool) x y"),
+      hyp_of("forall x y:num. (R:num->num->bool) x y"),
     )
   })
   th("SPEC_ALL", () => {
-    @bool.spec_all(hyp_of("!x y:num. (R:num->num->bool) x y /\\ R y x"))
+    @bool.spec_all(hyp_of("forall x y:num. (R:num->num->bool) x y /\\ R y x"))
   })
-  th("ISPEC", () => @bool.ispec(tm("n:num"), hyp_of("!x:A. x = x")))
+  th("ISPEC", () => @bool.ispec(tm("n:num"), hyp_of("forall x:A. x = x")))
   th("ISPECL", () => {
     @bool.ispecl(
       @list.List([tm("n:num"), tm("T")]),
-      hyp_of("!(x:A) (y:B). x = x /\\ y = y"),
+      hyp_of("forall(x:A) (y:B). x = x /\\ y = y"),
     )
   })
   th("GEN", () => {
@@ -181,7 +181,7 @@ test "bool matches bool.ml" {
   log.attempt("mk_neg_bad", () => stm(@bool.mk_neg(tm("x:num"))))
   log.attempt("verbose", () => stm(tm("forall x. exists y. x = y /\\ true")))
   log.attempt("print", () => {
-    @printer.string_of_term(tm("!x. ?y. x = y /\\ (p <=> q) ==> ~r \\/ F"))
+    @printer.string_of_term(tm("forall x. ?y. x = y /\\ (p <=> q) ==> ~r \\/ F"))
   })
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_pgenvar", () => stm(tm("{x | T}")))
@@ -217,26 +217,26 @@ test "bool matches bool.ml" {
       #|  p <=> q
       #|  p ==> q
       #|  q ==> r
-      #|  (!) = \\P:A->bool. P = \\x. T
+      #|  (forall) = \\P:A->bool. P = \\x. T
       #|  P:A->bool
       #|  x:A
-      #|  (!)(P:A->bool)
+      #|  (forall)(P:A->bool)
       #|  P:A->bool
       #|  x:A
       #|  P:A->bool
-      #|  (?) = \\P:A->bool. !q. (!x. P x ==> q) ==> q
+      #|  (?) = \\P:A->bool. forall q. (forall x. P x ==> q) ==> q
       #|  P:A->bool
       #|  x:A
-      #|  !x:A. P x ==> Q
+      #|  forall x:A. P x ==> Q
       #|  x:A
       #|  (P:A->bool) x
-      #|  !x:A. P x ==> Q
+      #|  forall x:A. P x ==> Q
       #|  Q:bool
       #|  P:A->bool
       #|  Q:bool
       #|  Q:bool
       #|  (?) (P:A->bool)
-      #|  (\\/) = \\p q. !r. (p ==> r) ==> (q ==> r) ==> r
+      #|  (\\/) = \\p q. forall r. (p ==> r) ==> (q ==> r) ==> r
       #|  P:bool
       #|  Q:bool
       #|  P:bool
@@ -262,7 +262,7 @@ test "bool matches bool.ml" {
       #|  Q:bool
       #|  P \\/ Q
       #|  R:bool
-      #|  F = !p:bool. p
+      #|  F = forall p:bool. p
       #|  (~) = \\p. p ==> F
       #|  (~)
       #|  P:bool
@@ -278,11 +278,11 @@ test "bool matches bool.ml" {
       #|  P:bool
       #|  F
       #|  F
-      #|  (?!) = \\P:A->bool. ((?) P) /\\ (!x y. P x /\\ P y ==> x = y)
+      #|  (?!) = \\P:A->bool. ((?) P) /\\ (forall x y. P x /\\ P y ==> x = y)
       #|  P:A->bool
       #|  T
       #|  F
-      #|  (!):(A->bool)->bool
+      #|  (forall):(A->bool)->bool
       #|  (?):(A->bool)->bool
       #|  (?!):(A->bool)->bool
       #|constants = ?! ~ F \/ ? ! ==> /\ T =
@@ -290,7 +290,7 @@ test "bool matches bool.ml" {
       #|definitions =  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) P:fun('A,bool))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) y:'A))) ((#=:fun('A,fun('A,bool)) x:'A) y:'A))))))))) ;;  |- ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) #~:fun(bool,bool)) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) #F:bool))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #F:bool) (#!:fun(fun(bool,bool),bool) (\p:bool. p:bool))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #\/:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. (#!:fun(fun(bool,bool),bool) (\r:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool)) r:bool))))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?:fun(fun('A,bool),bool)) (\P:fun('A,bool). (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) q:bool)))) q:bool))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) P:fun('A,bool)) (\x:'A. #T:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #==>:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) p:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #/\:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(fun(fun(bool,fun(bool,bool)),bool),fun(fun(fun(bool,fun(bool,bool)),bool),bool)) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) p:bool) q:bool))) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) #T:bool) #T:bool)))))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\p:bool. p:bool)) (\p:bool. p:bool)))
       #|axioms = 0
       #|infixes = <=>/2right ==>/4right \//6right /\/8right =/12right ,/14right
-      #|binders = \ ! ? ?! forall exists existsunique
+      #|binders = \ ? ?! forall exists existsunique
       #|prefixes = ~
       #|interface = existsunique=?!:fun(fun('A,bool),bool) exists=?:fun(fun('A,bool),bool) forall=!:fun(fun('A,bool),bool) false=F:bool true=T:bool <=>==:fun(bool,fun(bool,bool))
       #|T_DEF =  |- ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\p:bool. p:bool)) (\p:bool. p:bool)))
@@ -357,14 +357,16 @@ test "bool matches bool.ml" {
       #|Warning: inventing type variables
       #|verbose = (#!:fun(fun('?482,bool),bool) (\x:'?482. (#?:fun(fun('?482,bool),bool) (\y:'?482. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?482,fun('?482,bool)) x:'?482) y:'?482)) #T:bool)))))
       #|Warning: inventing type variables
-      #|print = forall (x:?502).
-      #|    exists (y:?502). (x:?502) = (y:?502) /\ (p <=> q) ==> ~r \/ false
+      #|print = forall (x:?500).
+      #|    exists (y:?500). (x:?500) = (y:?500) /\ (p <=> q) ==> ~r \/ false
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?510
+      #|counter_tyvar = zz_counter:'?508
       #|Warning: inventing type variables
-      #|counter_pgenvar = (GSPEC:fun(fun('?521,bool),'?511) (\GEN%PVAR%0:'?521. (#?:fun(fun('?519,bool),bool) (\x:'?519. (((SETSPEC:fun('?521,fun(bool,fun('?519,bool))) GEN%PVAR%0:'?521) #T:bool) x:'?519)))))
+      #|counter_pgenvar = (GSPEC:fun(fun('?519,bool),'?509) (\GEN%PVAR%0:'?519. (#?:fun(fun('?517,bool),bool) (\x:'?517. (((SETSPEC:fun('?519,fun(bool,fun('?517,bool))) GEN%PVAR%0:'?519) #T:bool) x:'?517)))))
       #|counter_genvar = _0:bool
       #|
+
+
     ),
   )
 }

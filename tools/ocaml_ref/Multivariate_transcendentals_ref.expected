@@ -76986,13 +76986,13 @@ Multivariate/transcendentals quotations (2171):
   from 0
   \\i. Cx(R) pow i / Cx(&(FACT i))
   &1 / &2
-  !R e. &0 < e /\\ &0 < R\n         ==> ?N. !m n z. m >= N /\\ norm(z) <= R\n                         ==> norm(vsum(m..n) (\\i. z pow i / Cx(&(FACT i))))\n                                     < e
+  forall R e. &0 < e /\\ &0 < R\n         ==> ?N. forall m n z. m >= N /\\ norm(z) <= R\n                         ==> norm(vsum(m..n) (\\i. z pow i / Cx(&(FACT i))))\n                                     < e
   x <= x + &1
   &0 <= x ==> &0 < x + &1
   norm(z:complex) + &1
-  !z. ((\\n. z pow n / Cx(&(FACT n))) sums cexp(z)) (from 0)
+  forall z. ((\\n. z pow n / Cx(&(FACT n))) sums cexp(z)) (from 0)
   z:complex
-  !w z. ((\\n. z pow n / Cx(&(FACT n))) sums w) (from 0) <=> w = cexp(z)
+  forall w z. ((\\n. z pow n / Cx(&(FACT n))) sums w) (from 0) <=> w = cexp(z)
   i:num
   (n >= N ==> n + 1 >= N) /\\ M <= n + M + 1
   z:complex
@@ -77007,7 +77007,7 @@ Multivariate/transcendentals quotations (2171):
   N:num
   e / &2
   R:real
-  !R e. &0 < R /\\ &0 < e\n         ==> ?N. !n z. n >= N /\\ norm(z) < R\n                       ==> norm(vsum(0..n) (\\i. z pow i / Cx(&(FACT i))) -\n                                cexp(z)) <= e
+  forall R e. &0 < R /\\ &0 < e\n         ==> ?N. forall n z. n >= N /\\ norm(z) < R\n                       ==> norm(vsum(0..n) (\\i. z pow i / Cx(&(FACT i))) -\n                                cexp(z)) <= e
   :real
   :real
   w:complex
@@ -77042,32 +77042,32 @@ Multivariate/transcendentals quotations (2171):
   \\n z. if n = 0 then Cx(&0) else z pow (n-1) / Cx(&(FACT(n-1)))
   \\n z. z pow n / Cx(&(FACT n))
   ball(Cx(&0),norm(z:complex) + &1)
-  !z. (cexp has_complex_derivative cexp(z)) (at z)
+  forall z. (cexp has_complex_derivative cexp(z)) (at z)
   (f has_complex_derivative f') net
   :real
   :real
-  !z. cexp complex_differentiable at z
-  !s z. cexp complex_differentiable (at z within s)
-  !z. cexp continuous at z
-  !s z. cexp continuous (at z within s)
-  !s. cexp continuous_on s
-  !s. cexp holomorphic_on s
+  forall z. cexp complex_differentiable at z
+  forall s z. cexp complex_differentiable (at z within s)
+  forall z. cexp continuous at z
+  forall s z. cexp continuous (at z within s)
+  forall s. cexp continuous_on s
+  forall s. cexp holomorphic_on s
   Cx(&0)
-  (!x. P x) <=> (!x. x IN UNIV ==> P x)
-  !w z. cexp(w + z) * cexp(--z) = cexp(w)
+  (forall x. P x) <=> (forall x. x IN UNIV ==> P x)
+  forall w z. cexp(w + z) * cexp(--z) = cexp(w)
   (f has_complex_derivative f') net
   Cx(&0)
-  !z. cexp(z) * cexp(--z) = Cx(&1)
-  !z. cexp(--z) * cexp(z) = Cx(&1)
-  !z. cexp(--z) = inv(cexp z)
+  forall z. cexp(z) * cexp(--z) = Cx(&1)
+  forall z. cexp(--z) * cexp(z) = Cx(&1)
+  forall z. cexp(--z) = inv(cexp z)
   z:complex
   z:complex
   w:complex
-  !w z. cexp(w + z) = cexp(w) * cexp(z)
-  !w z. cexp(w - z) = cexp(w) / cexp(z)
-  !z. ~(cexp(z) = Cx(&0))
-  !n x. cexp(Cx(&n) * x) = cexp(x) pow n
-  !f s. FINITE s ==> cexp(vsum s f) = cproduct s (\\x. cexp(f x))
+  forall w z. cexp(w + z) = cexp(w) * cexp(z)
+  forall w z. cexp(w - z) = cexp(w) / cexp(z)
+  forall z. ~(cexp(z) = Cx(&0))
+  forall n x. cexp(Cx(&n) * x) = cexp(x) pow n
+  forall f s. FINITE s ==> cexp(vsum s f) = cproduct s (\\x. cexp(f x))
   ((\\z. cexp(z) - Cx(&1)) has_complex_derivative f') (at(Cx(&0)))
   ((\\z. (cexp(z) - Cx(&1)) / z) --> Cx(&1)) (at (Cx(&0)))
   Cx(&0)
@@ -77080,7 +77080,7 @@ Multivariate/transcendentals quotations (2171):
   cball(Cx(&0),&1 / &2)
   cexp
   cexp
-  !B. (!z. norm(z) <= &1 / &2 ==> norm(cexp z) <= B)\n       ==> !z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &1 + B / &2
+  forall B. (forall z. norm(z) <= &1 / &2 ==> norm(cexp z) <= B)\n       ==> forall z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &1 + B / &2
   :real
   :real
   :real
@@ -77090,7 +77090,7 @@ Multivariate/transcendentals quotations (2171):
   w:complex
   Cx(&0)
   IMAGE cexp (cball(Cx(&0),&1 / &2))
-  !z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &2
+  forall z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &2
   norm(y) = &1 ==> norm(x - y) <= d ==> norm(x) <= &1 + d
   :real
   :real
@@ -77100,61 +77100,61 @@ Multivariate/transcendentals quotations (2171):
   cball(Cx(&0),&1 / &2)
   cexp
   cexp
-  !z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &1 + &2 * norm(z)
+  forall z. norm(z) <= &1 / &2 ==> norm(cexp z) <= &1 + &2 * norm(z)
   ccos z = (cexp(ii * z) + cexp(--ii * z)) / Cx(&2)
   csin z = (cexp(ii * z) - cexp(--ii * z)) / (Cx(&2) * ii)
   csin(Cx(&0)) = Cx(&0)
   ccos(Cx(&0)) = Cx(&1)
   ii * z
-  !z. csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)
-  !w z. csin(w + z) = csin(w) * ccos(z) + ccos(w) * csin(z)
-  !w z. ccos(w + z) = ccos(w) * ccos(z) - csin(w) * csin(z)
-  !z. csin(--z) = --(csin(z))
-  !z. ccos(--z) = ccos(z)
+  forall z. csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)
+  forall w z. csin(w + z) = csin(w) * ccos(z) + ccos(w) * csin(z)
+  forall w z. ccos(w + z) = ccos(w) * ccos(z) - csin(w) * csin(z)
+  forall z. csin(--z) = --(csin(z))
+  forall z. ccos(--z) = ccos(z)
   Cx(&2) * x = x + x
-  !z. csin(Cx(&2) * z) = Cx(&2) * csin(z) * ccos(z)
+  forall z. csin(Cx(&2) * z) = Cx(&2) * csin(z) * ccos(z)
   Cx(&2) * x = x + x
-  !z. ccos(Cx(&2) * z) = (ccos(z) pow 2) - (csin(z) pow 2)
-  !w z. csin(w - z) = csin(w) * ccos(z) - ccos(w) * csin(z)
-  !w z. ccos(w - z) = ccos(w) * ccos(z) + csin(w) * csin(z)
-  !w z. csin(w) * csin(z) = (ccos(w - z) - ccos(w + z)) / Cx(&2)
-  !w z. csin(w) * ccos(z) = (csin(w + z) + csin(w - z)) / Cx(&2)
-  !w z. ccos(w) * csin(z) = (csin(w + z) - csin(w - z)) / Cx(&2)
-  !w z. ccos(w) * ccos(z) = (ccos(w - z) + ccos(w + z)) / Cx(&2)
+  forall z. ccos(Cx(&2) * z) = (ccos(z) pow 2) - (csin(z) pow 2)
+  forall w z. csin(w - z) = csin(w) * ccos(z) - ccos(w) * csin(z)
+  forall w z. ccos(w - z) = ccos(w) * ccos(z) + csin(w) * csin(z)
+  forall w z. csin(w) * csin(z) = (ccos(w - z) - ccos(w + z)) / Cx(&2)
+  forall w z. csin(w) * ccos(z) = (csin(w + z) + csin(w - z)) / Cx(&2)
+  forall w z. ccos(w) * csin(z) = (csin(w + z) - csin(w - z)) / Cx(&2)
+  forall w z. ccos(w) * ccos(z) = (ccos(w - z) + ccos(w + z)) / Cx(&2)
   Cx(&2) * x / Cx(&2) = x
-  !w z. csin(w) + csin(z) =\n         Cx(&2) * csin((w + z) / Cx(&2)) * ccos((w - z) / Cx(&2))
+  forall w z. csin(w) + csin(z) =\n         Cx(&2) * csin((w + z) / Cx(&2)) * ccos((w - z) / Cx(&2))
   Cx(&2) * x / Cx(&2) = x
-  !w z. csin(w) - csin(z) =\n         Cx(&2) * csin((w - z) / Cx(&2)) * ccos((w + z) / Cx(&2))
+  forall w z. csin(w) - csin(z) =\n         Cx(&2) * csin((w - z) / Cx(&2)) * ccos((w + z) / Cx(&2))
   Cx(&2) * x / Cx(&2) = x
-  !w z. ccos(w) + ccos(z) =\n         Cx(&2) * ccos((w + z) / Cx(&2)) * ccos((w - z) / Cx(&2))
+  forall w z. ccos(w) + ccos(z) =\n         Cx(&2) * ccos((w + z) / Cx(&2)) * ccos((w - z) / Cx(&2))
   Cx(&2) * x / Cx(&2) = x
-  !w z. ccos(w) - ccos(z) =\n         Cx(&2) * csin((w + z) / Cx(&2)) * csin((z - w) / Cx(&2))
+  forall w z. ccos(w) - ccos(z) =\n         Cx(&2) * csin((w + z) / Cx(&2)) * csin((z - w) / Cx(&2))
   z:complex
   Cx(&2) * x = x + x
-  !z. ccos(Cx(&2) * z) = Cx(&2) * ccos z pow 2 - Cx(&1)
+  forall z. ccos(Cx(&2) * z) = Cx(&2) * ccos z pow 2 - Cx(&1)
   z:complex
   Cx(&2) * x = x + x
-  !z. ccos(Cx(&2) * z) = Cx(&1) - Cx(&2) * csin z pow 2
-  !z. cexp(ii * z) = ccos(z) + ii * csin(z)
-  !z n. (ccos z + ii * csin z) pow n =\n         ccos(Cx(&n) * z) + ii * csin(Cx(&n) * z)
+  forall z. ccos(Cx(&2) * z) = Cx(&1) - Cx(&2) * csin z pow 2
+  forall z. cexp(ii * z) = ccos(z) + ii * csin(z)
+  forall z n. (ccos z + ii * csin z) pow n =\n         ccos(Cx(&n) * z) + ii * csin(Cx(&n) * z)
   exp(x) = Re(cexp(Cx x))
   from 0
   \\n. cnj(z pow n / Cx(&(FACT n)))
-  !z. cnj(cexp z) = cexp(cnj z)
-  !z. real z ==> real(cexp z)
-  !x. Cx(exp x) = cexp(Cx x)
-  !x y. exp(x + y) = exp(x) * exp(y)
+  forall z. cnj(cexp z) = cexp(cnj z)
+  forall z. real z ==> real(cexp z)
+  forall x. Cx(exp x) = cexp(Cx x)
+  forall x y. exp(x + y) = exp(x) * exp(y)
   exp(&0) = &1
-  !x y. exp(x + y) * exp(--x) = exp(y)
-  !x. exp(x) * exp(--x) = &1
-  !x. exp(--x) * exp(x) = &1
-  !x. exp(--x) = inv(exp(x))
-  !n x. exp(&n * x) = exp(x) pow n
-  !x y. exp(x - y) = exp(x) / exp(y)
-  !x. ~(exp(x) = &0)
+  forall x y. exp(x + y) * exp(--x) = exp(y)
+  forall x. exp(x) * exp(--x) = &1
+  forall x. exp(--x) * exp(x) = &1
+  forall x. exp(--x) = inv(exp(x))
+  forall n x. exp(&n * x) = exp(x) pow n
+  forall x y. exp(x - y) = exp(x) / exp(y)
+  forall x. ~(exp(x) = &0)
   x = x / &2 + x / &2
-  !x. &0 <= exp(x)
-  !x. &0 < exp(x)
+  forall x. &0 <= exp(x)
+  forall x. &0 < exp(x)
   SUC(2 * m + 1) = 2 * (m + 1)
   SUC(2 * n) = 2 * n + 1
   1 <= n ==> (n - 1 = d <=> n = SUC d)
@@ -77163,143 +77163,143 @@ Multivariate/transcendentals quotations (2171):
   &0 <= a + b <=> --a <= b
   ~(k = &0) /\\ ~(f = &0)\n      ==> p / f + (x * p) / (k * f) = p / f * (&1 + x / k)
   k:num
-  !n. &0 <= sum(2*1..2*n+1) (\\k. x pow k / &(FACT k))
+  forall n. &0 <= sum(2*1..2*n+1) (\\k. x pow k / &(FACT k))
   1
   Cx x
   a /\\ b /\\ c ==> d <=> b ==> a /\\ c ==> d
   x:real
   &1 + x < &0
-  !x. &1 + x <= exp(x)
-  !x. &0 < x ==> &1 < exp(x)
-  !x y. x < y ==> exp(x) < exp(y)
+  forall x. &1 + x <= exp(x)
+  forall x. &0 < x ==> &1 < exp(x)
+  forall x y. x < y ==> exp(x) < exp(y)
   (x < y ==> f < g) /\\ (x = y ==> f = g) /\\ (y < x ==> g < f)\n    ==> (f < g <=> x < y)
-  !x y. exp(x) < exp(y) <=> x < y
-  !x y. exp(x) <= exp(y) <=> x <= y
-  !x y. (exp(x) = exp(y)) <=> (x = y)
-  !x. exp(x) = &1 <=> x = &0
-  !x. abs(exp x) = exp x
-  !f s. FINITE s ==> exp(sum s f) = product s (\\x. exp(f x))
+  forall x y. exp(x) < exp(y) <=> x < y
+  forall x y. exp(x) <= exp(y) <=> x <= y
+  forall x y. (exp(x) = exp(y)) <=> (x = y)
+  forall x. exp(x) = &1 <=> x = &0
+  forall x. abs(exp x) = exp x
+  forall f s. FINITE s ==> exp(sum s f) = product s (\\x. exp(f x))
   Cx x
-  !x. &0 <= x /\\ x <= inv(&2) ==> exp(x) <= &1 + &2 * x
+  forall x. &0 <= x /\\ x <= inv(&2) ==> exp(x) <= &1 + &2 * x
   sin(x) = Re(csin(Cx x))
   cos(x) = Re(ccos(Cx x))
-  !z. cnj(csin z) = csin(cnj z)
-  !z. cnj(ccos z) = ccos(cnj z)
-  !z. real z ==> real(csin z)
-  !z. real z ==> real(ccos z)
-  !x. Cx(sin x) = csin(Cx x)
-  !x. Cx(cos x) = ccos(Cx x)
-  !z. (csin has_complex_derivative ccos z) (at z)
+  forall z. cnj(csin z) = csin(cnj z)
+  forall z. cnj(ccos z) = ccos(cnj z)
+  forall z. real z ==> real(csin z)
+  forall z. real z ==> real(ccos z)
+  forall x. Cx(sin x) = csin(Cx x)
+  forall x. Cx(cos x) = ccos(Cx x)
+  forall z. (csin has_complex_derivative ccos z) (at z)
   (f has_complex_derivative f') net
-  !z. csin complex_differentiable at z
-  !s z. csin complex_differentiable (at z within s)
-  !z. (ccos has_complex_derivative --csin z) (at z)
+  forall z. csin complex_differentiable at z
+  forall s z. csin complex_differentiable (at z within s)
+  forall z. (ccos has_complex_derivative --csin z) (at z)
   (f has_complex_derivative f') net
-  !z. ccos complex_differentiable at z
-  !s z. ccos complex_differentiable (at z within s)
-  !z. csin continuous at z
-  !s z. csin continuous (at z within s)
-  !s. csin continuous_on s
-  !s. csin holomorphic_on s
-  !z. ccos continuous at z
-  !s z. ccos continuous (at z within s)
-  !s. ccos continuous_on s
-  !s. ccos holomorphic_on s
+  forall z. ccos complex_differentiable at z
+  forall s z. ccos complex_differentiable (at z within s)
+  forall z. csin continuous at z
+  forall s z. csin continuous (at z within s)
+  forall s. csin continuous_on s
+  forall s. csin holomorphic_on s
+  forall z. ccos continuous at z
+  forall s z. ccos continuous (at z within s)
+  forall s. ccos continuous_on s
+  forall s. ccos holomorphic_on s
   sin(&0) = &0
   cos(&0) = &1
-  !x. (sin(x) pow 2) + (cos(x) pow 2) = &1
-  !x y. sin(x + y) = sin(x) * cos(y) + cos(x) * sin(y)
-  !x y. cos(x + y) = cos(x) * cos(y) - sin(x) * sin(y)
-  !x. sin(--x) = --(sin(x))
-  !x. cos(--x) = cos(x)
-  !x. sin(&2 * x) = &2 * sin(x) * cos(x)
-  !x. cos(&2 * x) = (cos(x) pow 2) - (sin(x) pow 2)
-  !x. cos(&2 * x) = &2 * cos(x) pow 2 - &1
+  forall x. (sin(x) pow 2) + (cos(x) pow 2) = &1
+  forall x y. sin(x + y) = sin(x) * cos(y) + cos(x) * sin(y)
+  forall x y. cos(x + y) = cos(x) * cos(y) - sin(x) * sin(y)
+  forall x. sin(--x) = --(sin(x))
+  forall x. cos(--x) = cos(x)
+  forall x. sin(&2 * x) = &2 * sin(x) * cos(x)
+  forall x. cos(&2 * x) = (cos(x) pow 2) - (sin(x) pow 2)
+  forall x. cos(&2 * x) = &2 * cos(x) pow 2 - &1
   cos x
   sin x
   x:real
-  (!x. abs(sin x) <= &1) /\\ (!x. abs(cos x) <= &1)
-  !x. --(&1) <= sin(x) /\\ sin(x) <= &1
-  !x. --(&1) <= cos(x) /\\ cos(x) <= &1
-  !x. cos(abs x) = cos(x)
-  !w z. sin(w - z) = sin(w) * cos(z) - cos(w) * sin(z)
-  !w z. cos(w - z) = cos(w) * cos(z) + sin(w) * sin(z)
-  !x y. sin(x) * sin(y) = (cos(x - y) - cos(x + y)) / &2
-  !x y. sin(x) * cos(y) = (sin(x + y) + sin(x - y)) / &2
-  !x y. cos(x) * sin(y) = (sin(x + y) - sin(x - y)) / &2
-  !x y. cos(x) * cos(y) = (cos(x - y) + cos(x + y)) / &2
-  !x y. sin(x) + sin(y) = &2 * sin((x + y) / &2) * cos((x - y) / &2)
-  !x y. sin(x) - sin(y) = &2 * sin((x - y) / &2) * cos((x + y) / &2)
-  !x y. cos(x) + cos(y) = &2 * cos((x + y) / &2) * cos((x - y) / &2)
-  !x y. cos(x) - cos(y) = &2 * sin((x + y) / &2) * sin((y - x) / &2)
+  (forall x. abs(sin x) <= &1) /\\ (forall x. abs(cos x) <= &1)
+  forall x. --(&1) <= sin(x) /\\ sin(x) <= &1
+  forall x. --(&1) <= cos(x) /\\ cos(x) <= &1
+  forall x. cos(abs x) = cos(x)
+  forall w z. sin(w - z) = sin(w) * cos(z) - cos(w) * sin(z)
+  forall w z. cos(w - z) = cos(w) * cos(z) + sin(w) * sin(z)
+  forall x y. sin(x) * sin(y) = (cos(x - y) - cos(x + y)) / &2
+  forall x y. sin(x) * cos(y) = (sin(x + y) + sin(x - y)) / &2
+  forall x y. cos(x) * sin(y) = (sin(x + y) - sin(x - y)) / &2
+  forall x y. cos(x) * cos(y) = (cos(x - y) + cos(x + y)) / &2
+  forall x y. sin(x) + sin(y) = &2 * sin((x + y) / &2) * cos((x - y) / &2)
+  forall x y. sin(x) - sin(y) = &2 * sin((x - y) / &2) * cos((x + y) / &2)
+  forall x y. cos(x) + cos(y) = &2 * cos((x + y) / &2) * cos((x - y) / &2)
+  forall x y. cos(x) - cos(y) = &2 * sin((x + y) / &2) * sin((y - x) / &2)
   x:real
   &2 * x = x + x
-  !x. cos(&2 * x) = &1 - &2 * sin x pow 2
-  !z. cexp(z) = Cx(exp(Re z)) * (Cx(cos(Im z)) + ii * Cx(sin(Im z)))
-  !z. Re(cexp z) = exp(Re z) * cos(Im z)
-  !z. Im(cexp z) = exp(Re z) * sin(Im z)
+  forall x. cos(&2 * x) = &1 - &2 * sin x pow 2
+  forall z. cexp(z) = Cx(exp(Re z)) * (Cx(cos(Im z)) + ii * Cx(sin(Im z)))
+  forall z. Re(cexp z) = exp(Re z) * cos(Im z)
+  forall z. Im(cexp z) = exp(Re z) * sin(Im z)
   x / (Cx(&2) * ii) = ii * --(x / Cx(&2))
-  !z. Re(csin z) = (exp(Im z) + exp(--(Im z))) / &2 * sin(Re z)
+  forall z. Re(csin z) = (exp(Im z) + exp(--(Im z))) / &2 * sin(Re z)
   x / (Cx(&2) * ii) = ii * --(x / Cx(&2))
-  !z. Im(csin z) = (exp(Im z) - exp(--(Im z))) / &2 * cos(Re z)
-  !z. Re(ccos z) = (exp(Im z) + exp(--(Im z))) / &2 * cos(Re z)
-  !z. Im(ccos z) = (exp(--(Im z)) - exp(Im z)) / &2 * sin(Re z)
+  forall z. Im(csin z) = (exp(Im z) - exp(--(Im z))) / &2 * cos(Re z)
+  forall z. Re(ccos z) = (exp(Im z) + exp(--(Im z))) / &2 * cos(Re z)
+  forall z. Im(ccos z) = (exp(--(Im z)) - exp(Im z)) / &2 * sin(Re z)
   1
   y:real
   lift b
   lift a
   (f:complex->complex) o Cx o drop
-  !f a b y.\n        a <= b /\\\n        (!x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Re(f(Cx a)) <= y /\\ y <= Re(f(Cx b))\n        ==> ?x. a <= x /\\ x <= b /\\ Re(f(Cx x)) = y
-  !f a b y.\n        a <= b /\\\n        (!x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Re(f(Cx b)) <= y /\\ y <= Re(f(Cx a))\n        ==> ?x. a <= x /\\ x <= b /\\ Re(f(Cx x)) = y
-  !f a b y.\n        a <= b /\\\n        (!x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Im(f(Cx a)) <= y /\\ y <= Im(f(Cx b))\n        ==> ?x. a <= x /\\ x <= b /\\ Im(f(Cx x)) = y
-  !f a b y.\n        a <= b /\\\n        (!x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Im(f(Cx b)) <= y /\\ y <= Im(f(Cx a))\n        ==> ?x. a <= x /\\ x <= b /\\ Im(f(Cx x)) = y
+  forall f a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Re(f(Cx a)) <= y /\\ y <= Re(f(Cx b))\n        ==> ?x. a <= x /\\ x <= b /\\ Re(f(Cx x)) = y
+  forall f a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Re(f(Cx b)) <= y /\\ y <= Re(f(Cx a))\n        ==> ?x. a <= x /\\ x <= b /\\ Re(f(Cx x)) = y
+  forall f a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Im(f(Cx a)) <= y /\\ y <= Im(f(Cx b))\n        ==> ?x. a <= x /\\ x <= b /\\ Im(f(Cx x)) = y
+  forall f a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> f continuous at (Cx x)) /\\\n        Im(f(Cx b)) <= y /\\ y <= Im(f(Cx a))\n        ==> ?x. a <= x /\\ x <= b /\\ Im(f(Cx x)) = y
   log y = @x. exp(x) = y
   &1 + x <= y ==> x <= y
   &0 < x /\\ &0 < y ==> --y <= x
   ?y. --inv(x) <= y /\\ y <= x /\\ Re(cexp(Cx y)) = x
-  !x. &0 < x ==> exp(log x) = x
-  !x. log(exp x) = x
-  !x. (exp(log x) = x) <=> &0 < x
-  !x y. &0 < x /\\ &0 < y ==> (log(x * y) = log(x) + log(y))
-  !x y. &0 < x /\\ &0 < y ==> (log(x) = log(y) <=> x = y)
+  forall x. &0 < x ==> exp(log x) = x
+  forall x. log(exp x) = x
+  forall x. (exp(log x) = x) <=> &0 < x
+  forall x y. &0 < x /\\ &0 < y ==> (log(x * y) = log(x) + log(y))
+  forall x y. &0 < x /\\ &0 < y ==> (log(x) = log(y) <=> x = y)
   log(&1) = &0
-  !x. &0 < x ==> (log(inv x) = --(log x))
-  !x y. &0 < x /\\ &0 < y ==> log(x / y) = log(x) - log(y)
-  !x y. &0 < x /\\ &0 < y ==> (log(x) < log(y) <=> x < y)
-  !x y. &0 < x /\\ x < y ==> log(x) < log(y)
-  !x y. &0 < x /\\ &0 < y /\\ log x < log y ==> x < y
-  !x y. &0 < x /\\ &0 < y ==> (log(x) <= log(y) <=> x <= y)
-  !x y. &0 < x /\\ x <= y ==> log(x) <= log(y)
-  !x y. &0 < x /\\ &0 < y /\\ log x <= log y ==> x <= y
-  !n x. &0 < x ==> (log(x pow n) = &n * log(x))
-  !x. &0 < &1 + x ==> log(&1 + x) <= x
+  forall x. &0 < x ==> (log(inv x) = --(log x))
+  forall x y. &0 < x /\\ &0 < y ==> log(x / y) = log(x) - log(y)
+  forall x y. &0 < x /\\ &0 < y ==> (log(x) < log(y) <=> x < y)
+  forall x y. &0 < x /\\ x < y ==> log(x) < log(y)
+  forall x y. &0 < x /\\ &0 < y /\\ log x < log y ==> x < y
+  forall x y. &0 < x /\\ &0 < y ==> (log(x) <= log(y) <=> x <= y)
+  forall x y. &0 < x /\\ x <= y ==> log(x) <= log(y)
+  forall x y. &0 < x /\\ &0 < y /\\ log x <= log y ==> x <= y
+  forall n x. &0 < x ==> (log(x pow n) = &n * log(x))
+  forall x. &0 < &1 + x ==> log(&1 + x) <= x
   &0 <= x ==> &0 < &1 + x
-  !x. &0 <= x ==> log(&1 + x) <= x
+  forall x. &0 <= x ==> log(&1 + x) <= x
   x:real
-  !x. &0 < x ==> log(x) < x
+  forall x. &0 < x ==> log(x) < x
   &1 <= x ==> &0 < x
-  !x. &1 <= x ==> &0 <= log(x)
+  forall x. &1 <= x ==> &0 <= log(x)
   &1 < x ==> &0 < x
-  !x. &1 < x ==> &0 < log(x)
-  !f:A->real s.\n        FINITE s /\\ (!x. x IN s ==> &0 < f x)\n        ==> log(product s f) = sum s (\\x. log(f x))
+  forall x. &1 < x ==> &0 < log(x)
+  forall f:A->real s.\n        FINITE s /\\ (forall x. x IN s ==> &0 < f x)\n        ==> log(product s f) = sum s (\\x. log(f x))
   Cx y
   y:real
   d / &2
   d:real
   Cx(&0)
   &1 / &2
-  ?x. &0 < x /\\ !y. &0 < y /\\ y <= x ==> &0 < sin(y)
+  ?x. &0 < x /\\ forall y. &0 < y /\\ y <= x ==> &0 < sin(y)
   ?x. &0 < x /\\ ~(sin x = &0)
   ?x. &0 < x /\\ ~(cos x = &1)
   &2 * (&1 - a) <= &1 - (&2 * b - &1) <=> b <= &1 * a
-  !x. &0 <= cos x ==> &2 * (&1 - cos x) <= &1 - cos(&2 * x)
+  forall x. &0 <= cos x ==> &2 * (&1 - cos x) <= &1 - cos(&2 * x)
   n:num
   n:num
   &1 / (&1 - cos(x))
   &2 * (&1 - cos(&2 pow n * x))
-  !n.  &2  pow n * (&1 - cos x) <= &1 - cos(&2 pow n * x)
+  forall n.  &2  pow n * (&1 - cos x) <= &1 - cos(&2 pow n * x)
   (~p ==> p) ==> p
-  !x. cos(x) < &1 ==> ?n. cos(&2 pow n * x) < &0
+  forall x. cos(x) < &1 ==> ?n. cos(&2 pow n * x) < &0
   &0 < &2
   x:real
   x:real
@@ -77322,9 +77322,9 @@ Multivariate/transcendentals quotations (2171):
   Cx(&0)
   {z | z IN IMAGE Cx {x | x >= e} /\\ csin z IN {Cx(&0)}}
   e:real
-  ?p. &0 < p /\\ sin p = &0 /\\ !x. &0 < x /\\ x < p ==> ~(sin x = &0)
-  pi = @p. &0 < p /\\ sin(p) = &0 /\\ !x. &0 < x /\\ x < p ==> ~(sin(x) = &0)
-  &0 < pi /\\ sin(pi) = &0 /\\ !x. &0 < x /\\ x < pi ==> ~(sin x = &0)
+  ?p. &0 < p /\\ sin p = &0 /\\ forall x. &0 < x /\\ x < p ==> ~(sin x = &0)
+  pi = @p. &0 < p /\\ sin(p) = &0 /\\ forall x. &0 < x /\\ x < p ==> ~(sin(x) = &0)
+  &0 < pi /\\ sin(pi) = &0 /\\ forall x. &0 < x /\\ x < pi ==> ~(sin x = &0)
   &0 < pi
   &0 <= pi
   ~(pi = &0)
@@ -77335,7 +77335,7 @@ Multivariate/transcendentals quotations (2171):
   e:real
   csin
   e:real
-  !x. &0 < x /\\ x < pi ==> &0 < sin(x)
+  forall x. &0 < x /\\ x < pi ==> &0 < sin(x)
   &0 < y ==> y = &0 \\/ z = &0 ==> z = &0
   pi / &2
   cos(pi / &2) = &0
@@ -77345,14 +77345,14 @@ Multivariate/transcendentals quotations (2171):
   x * x = &1 <=> x = &1 \\/ x = -- &1
   pi / &2
   sin(pi / &2) = &1
-  !x. sin(x) = cos(pi / &2 - x)
-  !x. cos(x) = sin(pi / &2 - x)
-  !x. sin(x + pi) = --(sin(x))
-  !x. cos(x + pi) = --(cos(x))
-  !x. sin(x + &2 * pi) = sin(x)
-  !x. cos(x + &2 * pi) = cos(x)
-  !n. sin(&n * pi) = &0
-  !n. cos(&n * pi) = --(&1) pow n
+  forall x. sin(x) = cos(pi / &2 - x)
+  forall x. cos(x) = sin(pi / &2 - x)
+  forall x. sin(x + pi) = --(sin(x))
+  forall x. cos(x + pi) = --(cos(x))
+  forall x. sin(x + &2 * pi) = sin(x)
+  forall x. cos(x + &2 * pi) = cos(x)
+  forall n. sin(&n * pi) = &0
+  forall n. cos(&n * pi) = --(&1) pow n
   y = &0
   y:real
   y:real
@@ -77360,25 +77360,25 @@ Multivariate/transcendentals quotations (2171):
   x:real
   &0
   ccos
-  !x. &0 < x /\\ x < pi / &2 ==> &0 < cos(x)
-  !x. &0 < x /\\ x < pi / &2 ==> &0 < sin(x)
+  forall x. &0 < x /\\ x < pi / &2 ==> &0 < cos(x)
+  forall x. &0 < x /\\ x < pi / &2 ==> &0 < sin(x)
   x = &0
   abs x
-  !x. --(pi / &2) < x /\\ x < pi / &2 ==> &0 < cos(x)
-  !x. --(pi / &2) <= x /\\ x <= pi / &2 ==> &0 <= cos(x)
-  !x. &0 <= x /\\ x <= pi ==> &0 <= sin(x)
+  forall x. --(pi / &2) < x /\\ x < pi / &2 ==> &0 < cos(x)
+  forall x. --(pi / &2) <= x /\\ x <= pi / &2 ==> &0 <= cos(x)
+  forall x. &0 <= x /\\ x <= pi ==> &0 <= sin(x)
   frac n = &0
   n:real
   frac n * pi
   n:real
-  !n. integer n ==> sin(n * pi) = &0 /\\ ~(cos(n * pi) = &0)
-  !n. sin(n * pi) = &0 <=> integer(n)
+  forall n. integer n ==> sin(n * pi) = &0 /\\ ~(cos(n * pi) = &0)
+  forall n. sin(n * pi) = &0 <=> integer(n)
   x / pi
-  !x. sin(x) = &0 <=> ?n. integer n /\\ x = n * pi
+  forall x. sin(x) = &0 <=> ?n. integer n /\\ x = n * pi
   --n:real
   n:real
-  !x. cos(x) = &0 <=> ?n. integer n /\\ x = (n + &1 / &2) * pi
-  !x. sin(x) = &0 <=> (?n. x = &n * pi) \\/ (?n. x = --(&n * pi))
+  forall x. cos(x) = &0 <=> ?n. integer n /\\ x = (n + &1 / &2) * pi
+  forall x. sin(x) = &0 <=> (?n. x = &n * pi) \\/ (?n. x = --(&n * pi))
   1 <= n <=> ~(n = 0)
   n + 1
   n:num
@@ -77387,23 +77387,23 @@ Multivariate/transcendentals quotations (2171):
   n = 0
   n:num
   n:num
-  !x. cos(x) = &0 <=>\n       (?n. x = (&n + &1 / &2) * pi) \\/ (?n. x = --((&n + &1 / &2) * pi))
+  forall x. cos(x) = &0 <=>\n       (?n. x = (&n + &1 / &2) * pi) \\/ (?n. x = --((&n + &1 / &2) * pi))
   (&2 * x) * y / &2 = x * y
-  !x. (sin(x) = &0) <=> (?n. EVEN n /\\ x = &n * (pi / &2)) \\/\n                         (?n. EVEN n /\\ x = --(&n * (pi / &2)))
+  forall x. (sin(x) = &0) <=> (?n. EVEN n /\\ x = &n * (pi / &2)) \\/\n                         (?n. EVEN n /\\ x = --(&n * (pi / &2)))
   (&2 * x + &1) * y / &2 = (x + &1 / &2) * y
-  !x. cos(x) = &0 <=> (?n. ~EVEN n /\\ (x = &n * (pi / &2))) \\/\n                       (?n. ~EVEN n /\\ (x = --(&n * (pi / &2))))
+  forall x. cos(x) = &0 <=> (?n. ~EVEN n /\\ (x = &n * (pi / &2))) \\/\n                       (?n. ~EVEN n /\\ (x = --(&n * (pi / &2))))
   n:num
-  c = &1 ==> !s. s pow 2 + c pow 2 = &1 ==> s = &0
+  c = &1 ==> forall s. s pow 2 + c pow 2 = &1 ==> s = &0
   sin(x)
-  !x. (cos(x) = &1) <=> (?n. x = &n * &2 * pi) \\/ (?n. x = --(&n * &2 * pi))
-  !x. &0 <= sin(x) ==> (sin(x) = sqrt(&1 - (cos(x) pow 2)))
+  forall x. (cos(x) = &1) <=> (?n. x = &n * &2 * pi) \\/ (?n. x = --(&n * &2 * pi))
+  forall x. &0 <= sin(x) ==> (sin(x) = sqrt(&1 - (cos(x) pow 2)))
   n:real
   --p < n * p /\\ n * p < p <=> -- &1 * p < n * p /\\ n * p < &1 * p
   n:real
-  !x. --pi < x /\\ x < pi /\\ sin(x) = &0 ==> x = &0
+  forall x. --pi < x /\\ x < pi /\\ sin(x) = &0 ==> x = &0
   x:real
   &3 * x = &2 * x + x
-  !x. cos(&3 * x) = &4 * cos(x) pow 3 - &3 * cos x
+  forall x. cos(&3 * x) = &4 * cos(x) pow 3 - &3 * cos x
   sqrt
   &0 < cos(pi / &6)
   &0 = &4 * c pow 3 - &3 * c <=>\n                         c = &0 \\/ (&2 * c) pow 2 = &3
@@ -77418,7 +77418,7 @@ Multivariate/transcendentals quotations (2171):
   x = &2 * pi
   x = pi
   x = &0
-  !x. &0 <= x /\\ x <= &2 * pi /\\ &0 < sin x ==> &0 < x /\\ x < pi
+  forall x. &0 <= x /\\ x <= &2 * pi /\\ &0 < sin x ==> &0 < x /\\ x < pi
   x / &3 = &2 * x / &6
   sin(pi / &3) = sqrt(&3) / &2
   &2 * s / &2 pow 2 - &1 = &1 / &2 <=> s = &3
@@ -77430,14 +77430,14 @@ Multivariate/transcendentals quotations (2171):
   pi / &2
   &0
   csin
-  !y. &0 <= y /\\ y <= &1\n       ==> ?x. &0 <= x /\\ x <= pi / &2 /\\ sin(x) = y
+  forall y. &0 <= y /\\ y <= &1\n       ==> ?x. &0 <= x /\\ x <= pi / &2 /\\ sin(x) = y
   t:real
   t:real
   x = cos t \\/ x = --(cos t)
   t:real
   x pow 2 + y pow 2 = &1\n      ==> (&1 < y ==> &1 pow 2 < y pow 2) /\\ &0 <= x * x\n          ==> y <= &1
   y:real
-  !x y. &0 <= x /\\ &0 <= y /\\ x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t <= pi / &2 /\\ x = cos t /\\ y = sin t
+  forall x y. &0 <= x /\\ &0 <= y /\\ x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t <= pi / &2 /\\ x = cos t /\\ y = sin t
   pi - t
   t:real
   t:real
@@ -77446,7 +77446,7 @@ Multivariate/transcendentals quotations (2171):
   y:real
   x:real
   &0 <= x \\/ &0 <= --x
-  !x y. &0 <= y /\\ x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t <= pi /\\ x = cos t /\\ y = sin t
+  forall x y. &0 <= y /\\ x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t <= pi /\\ x = cos t /\\ y = sin t
   t = &0
   &2 * pi - t
   t:real
@@ -77458,29 +77458,29 @@ Multivariate/transcendentals quotations (2171):
   &0 <= y \\/ &0 <= --y
   &0
   x = &1 /\\ y = &0
-  !x y. x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t < &2 * pi /\\ x = cos t /\\ y = sin t
-  !x y. x pow 2 + y pow 2 = &1 ==> ?t. x = cos(t) /\\ y = sin(t)
+  forall x y. x pow 2 + y pow 2 = &1\n         ==> ?t. &0 <= t /\\ t < &2 * pi /\\ x = cos t /\\ y = sin t
+  forall x y. x pow 2 + y pow 2 = &1 ==> ?t. x = cos(t) /\\ y = sin(t)
   ~(Cx pi = Cx(&0))
   t:real
   t:real
   (pow):real->num->real
   2
-  !z. (norm z = &1) ==> ?x. z = complex(cos(x),sin(x))
+  forall z. (norm z = &1) ==> ?x. z = complex(cos(x),sin(x))
   (&2 * pi) * n = (&2 * n) * pi
-  !n. integer n ==> sin((&2 * pi) * n) = &0
-  !n. integer n ==> sin (n * pi) = &0
+  forall n. integer n ==> sin((&2 * pi) * n) = &0
+  forall n. integer n ==> sin (n * pi) = &0
   (&2 * pi) * n = (&2 * n) * pi
-  !n. integer n ==> cos((&2 * pi) * n) = &1
+  forall n. integer n ==> cos((&2 * pi) * n) = &1
   a - (a - b - c):real = b + c
   p - x <= p <=> (&2 * p) * &0 <= x
   --p < p - x <=> x < (&2 * p) * &1
   pi - (&2 * pi) * frac((pi - x) / (&2 * pi))
-  !x. ?y. (--pi < y /\\ y <= pi) /\\ (sin(y) = sin(x) /\\ cos(y) = cos(x))
-  !r t. cexp(complex(r,t)) = Cx(exp r) * complex(cos t,sin t)
-  !t. norm(complex(cos t,sin t)) = &1
-  !z. norm(cexp z) = exp(Re z)
-  !t. norm (cexp (ii * Cx t)) = &1
-  !z. norm(cexp z) = &1 ==> Re(z) = &0
+  forall x. ?y. (--pi < y /\\ y <= pi) /\\ (sin(y) = sin(x) /\\ cos(y) = cos(x))
+  forall r t. cexp(complex(r,t)) = Cx(exp r) * complex(cos t,sin t)
+  forall t. norm(complex(cos t,sin t)) = &1
+  forall z. norm(cexp z) = exp(Re z)
+  forall t. norm (cexp (ii * Cx t)) = &1
+  forall z. norm(cexp z) = &1 ==> Re(z) = &0
   &2 * x * y = (&2 * y) * x
   n:real
   (&2 * x) / &2 = x
@@ -77490,16 +77490,16 @@ Multivariate/transcendentals quotations (2171):
   norm:complex->real
   y:real
   x:real
-  !z. cexp z = Cx(&1) <=> Re(z) = &0 /\\ ?n. integer n /\\ Im(z) = &2 * n * pi
+  forall z. cexp z = Cx(&1) <=> Re(z) = &0 /\\ ?n. integer n /\\ Im(z) = &2 * n * pi
   ~(z = Cx(&0)) ==> (w = z <=> w / z = Cx(&1))
-  !w z. cexp w = cexp z <=> ?n. integer n /\\ w = z + Cx(&2 * n * pi) * ii
+  forall w z. cexp w = cexp z <=> ?n. integer n /\\ w = z + Cx(&2 * n * pi) * ii
   ~(w:complex = z)
   &1 <= x ==> ~(&2 * x < &2)
   abs(Im w - Im z) < &2 * pi
   n:real
   ~(a = Cx(&0)) /\\ ~(b = Cx(&0)) ==> (a = b <=> a / b = Cx(&1))
-  !w z. abs(Im w - Im z) < &2 * pi /\\ cexp w = cexp z ==> w = z
-  !n. integer n ==> cexp(Cx(&2 * n * pi) * ii) = Cx(&1)
+  forall w z. abs(Im w - Im z) < &2 * pi /\\ cexp w = cexp z ==> w = z
+  forall n. integer n ==> cexp(Cx(&2 * n * pi) * ii) = Cx(&1)
   b:complex
   a:complex
   x:complex
@@ -77508,48 +77508,48 @@ Multivariate/transcendentals quotations (2171):
   cball(Cx(&0):complex,M)
   cexp
   cexp
-  !M a b. norm(a) <= M /\\ norm(b) <= M\n           ==> norm(cexp a - cexp b) <= exp(M) * norm(a - b)
+  forall M a b. norm(a) <= M /\\ norm(b) <= M\n           ==> norm(cexp a - cexp b) <= exp(M) * norm(a - b)
   ii * y = ii * x + z * ii <=> y = x + z
   ii * Cx x
   ii * Cx y
-  !x y. sin y = sin x /\\ cos y = cos x <=>\n         ?n. integer n /\\ y = x + &2 * n * pi
+  forall x y. sin y = sin x /\\ cos y = cos x <=>\n         ?n. integer n /\\ y = x + &2 * n * pi
   ii * x = ii * y ==> x = y
-  !x y. sin x = sin y /\\ cos x = cos y /\\ abs(x - y) < &2 * pi ==> x = y
+  forall x y. sin x = sin y /\\ cos x = cos y /\\ abs(x - y) < &2 * pi ==> x = y
   &2 * n * pi < &2 * pi ==> &0 < (&1 - n) * &2 * pi
   n:real
   n = &0
   &0 < &2 * n * pi
   n:real
-  !x. &0 < x /\\ x < &2 * pi ==> ~(cexp(ii * Cx x) = Cx(&1))
+  forall x. &0 < x /\\ x < &2 * pi ==> ~(cexp(ii * Cx x) = Cx(&1))
   ~(z = Cx(&0))\n        ==> ((z - inv z) / (Cx(&2) * ii) = Cx(&0) <=> z pow 2 = Cx(&1))
-  !z. csin z = Cx(&0) <=> ?n. integer n /\\ z = Cx(n * pi)
+  forall z. csin z = Cx(&0) <=> ?n. integer n /\\ z = Cx(n * pi)
   &1 / &2 * x = x / &2
   s * Cx(&0) - c * Cx(&1) = Cx(&0) <=> c = Cx(&0)
   z - Cx(pi / &2)
-  !z. ccos z = Cx(&0) <=> ?n. integer n /\\ z = Cx((n + &1 / &2) * pi)
+  forall z. ccos z = Cx(&0) <=> ?n. integer n /\\ z = Cx((n + &1 / &2) * pi)
   a - Cx(&2) * s pow 2 = a <=> s = Cx(&0)
   z = Cx(&2) * z / Cx(&2)
-  !z. ccos z = Cx(&1) <=> ?n. integer n /\\ z = Cx(&2 * n * pi)
+  forall z. ccos z = Cx(&1) <=> ?n. integer n /\\ z = Cx(&2 * n * pi)
   &1 / &2 * x = x / &2
   s * Cx(&0) + c * Cx(&1) = Cx(&1) <=> c = Cx(&1)
   z - Cx(pi / &2)
-  !z. csin z = Cx(&1) <=> ?n. integer n /\\ z = Cx((&2 * n + &1 / &2) * pi)
+  forall z. csin z = Cx(&1) <=> ?n. integer n /\\ z = Cx((&2 * n + &1 / &2) * pi)
   --(n + &1)
   n:real
   --z:complex = w <=> z = --w
   z:complex = --w <=> --z = w
-  !z. csin z = --Cx(&1) <=>\n       ?n. integer n /\\ z = Cx((&2 * n + &3 / &2) * pi)
+  forall z. csin z = --Cx(&1) <=>\n       ?n. integer n /\\ z = Cx((&2 * n + &3 / &2) * pi)
   s * Cx(&0) - c * Cx(&1) = Cx(&1) <=> c = --Cx(&1)
   z - Cx(pi / &2)
-  !z. ccos z = --Cx(&1) <=>\n       ?n. integer n /\\ z = Cx((&2 * n + &1) * pi)
-  !x. cos x = &1 <=> ?n. integer n /\\ x = &2 * n * pi
-  !x. sin x = &1 <=> ?n. integer n /\\ x = (&2 * n + &1 / &2) * pi
-  !x. sin x = --(&1) <=> ?n. integer n /\\ x = (&2 * n + &3 / &2) * pi
-  !x. cos x = --(&1) <=>\n       ?n. integer n /\\ x = (&2 * n + &1) * pi
+  forall z. ccos z = --Cx(&1) <=>\n       ?n. integer n /\\ z = Cx((&2 * n + &1) * pi)
+  forall x. cos x = &1 <=> ?n. integer n /\\ x = &2 * n * pi
+  forall x. sin x = &1 <=> ?n. integer n /\\ x = (&2 * n + &1 / &2) * pi
+  forall x. sin x = --(&1) <=> ?n. integer n /\\ x = (&2 * n + &3 / &2) * pi
+  forall x. cos x = --(&1) <=>\n       ?n. integer n /\\ x = (&2 * n + &1) * pi
   t:real
   &2 * t / &2 = t
   t / &2
-  !t. norm(cexp(ii * Cx t) - Cx(&1)) = &2 * abs(sin(t / &2))
+  forall t. norm(cexp(ii * Cx t) - Cx(&1)) = &2 * abs(sin(t / &2))
   --ii * ii * z = z /\\ ii * ii * z = --z
   Cx((exp x - inv(exp x)) / &2) = --ii * csin(ii * Cx x)
   --ii * ii * z = z /\\ ii * ii * z = --z
@@ -77559,30 +77559,30 @@ Multivariate/transcendentals quotations (2171):
   y:real
   x:real
   --ii * ii * z = z /\\ ii * ii * z = --z /\\\n    z / (Cx(&2) * ii) = --(ii * z / Cx(&2))
-  !z. norm(ccos z) pow 2 =\n       cos(Re z) pow 2 + (exp(Im z) - inv(exp(Im z))) pow 2 / &4
+  forall z. norm(ccos z) pow 2 =\n       cos(Re z) pow 2 + (exp(Im z) - inv(exp(Im z))) pow 2 / &4
   y:real
   x:real
   y:real
   x:real
   --ii * ii * z = z /\\ ii * ii * z = --z /\\\n    z / (Cx(&2) * ii) = --(ii * z / Cx(&2))
-  !z. norm(csin z) pow 2 =\n       (exp(&2 * Im z) + inv(exp(&2 * Im z)) - &2 * cos(&2 * Re z)) / &4
+  forall z. norm(csin z) pow 2 =\n       (exp(&2 * Im z) + inv(exp(&2 * Im z)) - &2 * cos(&2 * Re z)) / &4
   &2 * (n + &1 / &2) * pi = (&2 * n + &1) * pi
   a / Cx(&2) = b <=> a = Cx(&2) * b
   integer(n)
   n:real
-  !w z. csin w = csin z <=>\n         ?n. integer n /\\\n             (w = z + Cx(&2 * n * pi) \\/ w = --z + Cx((&2 * n + &1) * pi))
+  forall w z. csin w = csin z <=>\n         ?n. integer n /\\\n             (w = z + Cx(&2 * n * pi) \\/ w = --z + Cx((&2 * n + &1) * pi))
   integer(n)
   n:real
-  !w z. ccos(w) = ccos(z) <=>\n         ?n. integer n /\\\n             (w = z + Cx(&2 * n * pi) \\/ w = --z + Cx(&2 * n * pi))
-  !x y. sin x = sin y <=>\n         ?n. integer n /\\\n             (x = y + &2 * n * pi \\/ x = --y + (&2 * n + &1) * pi)
-  !x y. cos x = cos y <=>\n         ?n. integer n /\\\n             (x = y + &2 * n * pi \\/ x = --y + &2 * n * pi)
+  forall w z. ccos(w) = ccos(z) <=>\n         ?n. integer n /\\\n             (w = z + Cx(&2 * n * pi) \\/ w = --z + Cx(&2 * n * pi))
+  forall x y. sin x = sin y <=>\n         ?n. integer n /\\\n             (x = y + &2 * n * pi \\/ x = --y + (&2 * n + &1) * pi)
+  forall x y. cos x = cos y <=>\n         ?n. integer n /\\\n             (x = y + &2 * n * pi \\/ x = --y + &2 * n * pi)
   z:complex
   exp(&0) = &1 /\\ (exp(&0) <= w \\/ exp(&0) <= z) /\\ (w <= u /\\ z <= u)\n    ==> w + z <= &2 * u
   norm(a) + norm(b) <= d ==> norm(a + b) <= d
   :real
   :real
   x / &2 <= y <=> x <= &2 * y
-  !z. norm(ccos z) <= exp(norm z)
+  forall z. norm(ccos z) <= exp(norm z)
   z:complex
   exp(&0) = &1 /\\ (exp(&0) <= w \\/ exp(&0) <= z) /\\ (w <= u /\\ z <= u)\n    ==> &2 + w + z <= &4 * u
   norm(a) + norm(b) + norm(c) <= d ==> norm(a + b + c) <= d
@@ -77591,7 +77591,7 @@ Multivariate/transcendentals quotations (2171):
   :real
   x / &2 <= &2 * y <=> x <= &4 * y
   Cx(&1) + (z + z') / Cx(&2) = (Cx(&2) + z + z') / Cx(&2)
-  !z. norm(Cx(&1) + ccos z) <= &2 * exp(norm z)
+  forall z. norm(Cx(&1) + ccos z) <= &2 * exp(norm z)
   z:complex
   Cx(&0)
   abs x <= a ==> x <= a
@@ -77599,7 +77599,7 @@ Multivariate/transcendentals quotations (2171):
   segment[Cx(&0),z]
   n:num
   \\k:num. cexp
-  !n z. norm(cexp z - vsum(0..n) (\\k. z pow k / Cx(&(FACT k))))\n         <= exp(abs(Re z)) * (norm z) pow (n + 1) / &(FACT n)
+  forall n z. norm(cexp z - vsum(0..n) (\\k. z pow k / Cx(&(FACT k))))\n         <= exp(abs(Re z)) * (norm z) pow (n + 1) / &(FACT n)
   (f has_complex_derivative f') net
   Cx(&1)
   14
@@ -77615,7 +77615,7 @@ Multivariate/transcendentals quotations (2171):
   a / (Cx(&2) * ii) - b = (a - Cx(&2) * ii * b) / (Cx(&2) * ii)
   z:complex
   n:num
-  !n z. norm(csin z -\n              vsum(0..n) (\\k. if ODD k\n                              then --ii * (ii * z) pow k / Cx(&(FACT k))\n                              else Cx(&0)))\n         <= exp(abs(Im z)) * (norm z) pow (n + 1) / &(FACT n)
+  forall n z. norm(csin z -\n              vsum(0..n) (\\k. if ODD k\n                              then --ii * (ii * z) pow k / Cx(&(FACT k))\n                              else Cx(&0)))\n         <= exp(abs(Im z)) * (norm z) pow (n + 1) / &(FACT n)
   --ii * z
   ii * z
   k:num
@@ -77625,11 +77625,11 @@ Multivariate/transcendentals quotations (2171):
   SUC(2 * n + 1) = 2 * n + 2
   z:complex
   SUC(2 * n + 1)
-  !n z. norm(csin z -\n              vsum(0..n) (\\k. --Cx(&1) pow k *\n                              z pow (2 * k + 1) / Cx(&(FACT(2 * k + 1)))))\n         <= exp(abs(Im z)) * norm(z) pow (2 * n + 3) / &(FACT(2 * n + 2))
+  forall n z. norm(csin z -\n              vsum(0..n) (\\k. --Cx(&1) pow k *\n                              z pow (2 * k + 1) / Cx(&(FACT(2 * k + 1)))))\n         <= exp(abs(Im z)) * norm(z) pow (2 * n + 3) / &(FACT(2 * n + 2))
   z:complex
   2 * n + 3 = SUC(2 * n + 2)
   \\n. exp(abs(Im z)) * norm z pow (2 * n + 3) / &(FACT(2 * n + 2))
-  !z. ((\\n. --Cx(&1) pow n * z pow (2 * n + 1) / Cx(&(FACT(2 * n + 1))))\n        sums csin(z)) (from 0)
+  forall z. ((\\n. --Cx(&1) pow n * z pow (2 * n + 1) / Cx(&(FACT(2 * n + 1))))\n        sums csin(z)) (from 0)
   EVEN k
   k:num
   sp + sn = s2\n    ==> norm(en - sn) <= d\n        ==> norm(ep - sp) <= d ==> norm((ep + en) - s2) <= &2 * d
@@ -77640,7 +77640,7 @@ Multivariate/transcendentals quotations (2171):
   a / Cx(&2) - b = (a - Cx(&2) * b) / Cx(&2)
   z:complex
   n:num
-  !n z. norm(ccos z -\n              vsum(0..n) (\\k. if EVEN k\n                              then (ii * z) pow k / Cx(&(FACT k))\n                              else Cx(&0)))\n         <= exp(abs(Im z)) * (norm z) pow (n + 1) / &(FACT n)
+  forall n z. norm(ccos z -\n              vsum(0..n) (\\k. if EVEN k\n                              then (ii * z) pow k / Cx(&(FACT k))\n                              else Cx(&0)))\n         <= exp(abs(Im z)) * (norm z) pow (n + 1) / &(FACT n)
   --ii * z
   ii * z
   k:num
@@ -77650,11 +77650,11 @@ Multivariate/transcendentals quotations (2171):
   (2 * n + 1) + 1 = 2 * n + 2
   z:complex
   2 * n + 1
-  !n z. norm(ccos z -\n              vsum(0..n) (\\k. --Cx(&1) pow k *\n                              z pow (2 * k) / Cx(&(FACT(2 * k)))))\n         <= exp(abs(Im z)) * norm(z) pow (2 * n + 2) / &(FACT(2 * n + 1))
+  forall n z. norm(ccos z -\n              vsum(0..n) (\\k. --Cx(&1) pow k *\n                              z pow (2 * k) / Cx(&(FACT(2 * k)))))\n         <= exp(abs(Im z)) * norm(z) pow (2 * n + 2) / &(FACT(2 * n + 1))
   z:complex
   2 * n + 2 = SUC(2 * n + 1)
   \\n. exp(abs(Im z)) * norm z pow (2 * n + 2) / &(FACT(2 * n + 1))
-  !z. ((\\n. --Cx(&1) pow n * z pow (2 * n) / Cx(&(FACT(2 * n))))\n        sums ccos(z)) (from 0)
+  forall z. ((\\n. --Cx(&1) pow n * z pow (2 * n) / Cx(&(FACT(2 * n))))\n        sums ccos(z)) (from 0)
   Arg z = if z = Cx(&0) then &0\n          else @t. &0 <= t /\\ t < &2 * pi /\\\n                   z = Cx(norm(z)) * cexp(ii * Cx t)
   Arg(Cx(&0)) = &0
   ~(z = &0) ==> (x / z = y <=> x = z * y)
@@ -77662,30 +77662,30 @@ Multivariate/transcendentals quotations (2171):
   Im(z) / norm z
   Re(z) / norm z
   &0 < &2
-  !z. &0 <= Arg(z) /\\ Arg(z) < &2 * pi /\\\n       z = Cx(norm z) * cexp(ii * Cx(Arg z))
+  forall z. &0 <= Arg(z) /\\ Arg(z) < &2 * pi /\\\n       z = Cx(norm z) * cexp(ii * Cx(Arg z))
   z:complex
-  !z. norm z = &1 <=> (?t. z = cexp(ii * Cx t))
+  forall z. norm z = &1 <=> (?t. z = cexp(ii * Cx t))
   r:real
   norm(z:complex)
-  !a b. Cx a = Cx b /\\ ~(Cx b = Cx(&0)) /\\\n            Cx a * w = Cx b * z ==> w = z
+  forall a b. Cx a = Cx b /\\ ~(Cx b = Cx(&0)) /\\\n            Cx a * w = Cx b * z ==> w = z
   &0 <= x /\\ x < p /\\ &0 <= y /\\ y < p\n                             ==> abs(x - y) < p
   ii * x = ii * y ==> x = y
-  !a r z. &0 < r /\\ Cx r * cexp(ii * Cx a) = z /\\ &0 <= a /\\ a < &2 * pi\n           ==> Arg z = a
+  forall a r z. &0 < r /\\ Cx r * cexp(ii * Cx a) = z /\\ &0 <= a /\\ a < &2 * pi\n           ==> Arg z = a
   r * norm(z:complex)
   z = Cx(&0)
-  !r z. &0 < r ==> Arg(Cx r * z) = Arg(z)
-  !r z. &0 < r ==> Arg(z / Cx r) = Arg(z)
-  !z. &0 < Arg z <=> ~(Arg z = &0)
+  forall r z. &0 < r ==> Arg(Cx r * z) = Arg(z)
+  forall r z. &0 < r ==> Arg(z / Cx r) = Arg(z)
+  forall z. &0 < Arg z <=> ~(Arg z = &0)
   z:complex
   &0 < sin(&2 * pi - Arg z)
   z = Cx(&0)
-  !z. Arg z <= pi <=> &0 <= Im z
+  forall z. Arg z <= pi <=> &0 <= Im z
   z:complex
   &0 <= sin(&2 * pi - Arg z)
   ~(x = &0) ==> (&0 < x <=> &0 <= x)
   Arg z = &0
   z = Cx(&0)
-  !z. &0 < Arg z /\\ Arg z < pi <=> &0 < Im z
+  forall z. &0 < Arg z /\\ Arg z < pi <=> &0 < Im z
   x = pi <=> x - pi = &0
   ~(Arg z = pi)
   &0 <= x /\\ x < &2 * pi\n                ==> --pi < x /\\ x < pi \\/ --pi < x - pi /\\ x - pi < pi
@@ -77693,31 +77693,31 @@ Multivariate/transcendentals quotations (2171):
   Arg z = pi
   z:complex
   z = Cx(&0)
-  !z. Arg z = &0 <=> real z /\\ &0 <= Re z
-  !n. Arg(Cx(&n)) = &0
+  forall z. Arg z = &0 <=> real z /\\ &0 <= Re z
+  forall n. Arg(Cx(&n)) = &0
   &0 < pi /\\ &0 <= z\n     ==> (z = pi <=> z <= pi /\\ ~(z = &0) /\\ ~(&0 < z /\\ z < pi))
-  !z. Arg z = pi <=> real z /\\ Re z < &0
-  !z. Arg z = &0 \\/ Arg z = pi <=> real z
+  forall z. Arg z = pi <=> real z /\\ Re z < &0
+  forall z. Arg z = &0 \\/ Arg z = pi <=> real z
   z:complex
   z:complex
   Cx(&2) * Cx pi
   inv(norm(z:complex))
   z = Cx(&0)
-  !z. ~(real z /\\ &0 <= Re z) ==> Arg(inv z) = &2 * pi - Arg z
+  forall z. ~(real z /\\ &0 <= Re z) ==> Arg(inv z) = &2 * pi - Arg z
   norm(w:complex) / norm(z:complex)
   w:complex
   z:complex
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> (Arg w = Arg z <=> ?x. &0 < x /\\ w = Cx(x) * z)
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> (Arg w = Arg z <=> ?x. &0 < x /\\ w = Cx(x) * z)
   ~(x = &0) ==> x * inv(x pow 2) = inv x
   Re z = &0
   (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  !z. Arg(inv z) = &0 <=> Arg z = &0
+  forall z. Arg(inv z) = &0 <=> Arg z = &0
   (a * b) * (c * d):complex = (a * c) * (b * d)
   &0 <= a /\\ a < &2 * pi /\\ &0 <= b /\\ b <= a ==> a - b < &2 * pi
   norm(z / w)
   a:real = b + c <=> c = a - b
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) /\\ Arg(w) <= Arg(z)\n         ==> Arg(z) = Arg(w) + Arg(z / w)
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> (Arg(w) <= Arg(z) <=> Arg(z) = Arg(w) + Arg(z / w))
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) /\\ Arg(w) <= Arg(z)\n         ==> Arg(z) = Arg(w) + Arg(z / w)
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> (Arg(w) <= Arg(z) <=> Arg(z) = Arg(w) + Arg(z / w))
   z:complex
   w:complex
   x = &2 * pi - y ==> --x = y - &2 * pi
@@ -77726,7 +77726,7 @@ Multivariate/transcendentals quotations (2171):
   w:complex
   w:complex
   z:complex
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg w - Arg z = if Arg(z) <= Arg(w) then Arg(w / z)\n                             else Arg(w / z) - &2 * pi
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg w - Arg z = if Arg(z) <= Arg(w) then Arg(w / z)\n                             else Arg(w / z) - &2 * pi
   w + p < p <=> ~(&0 <= w)
   wz - z = w - &2 * pi <=> w + z = wz + &2 * pi
   Arg (w * z) = Arg z + Arg w
@@ -77735,42 +77735,42 @@ Multivariate/transcendentals quotations (2171):
   z:complex
   z:complex
   w * z:complex
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg(w) + Arg(z) =\n             if Arg w + Arg z < &2 * pi\n             then Arg(w * z)\n             else Arg(w * z) + &2 * pi
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg(w * z) = if Arg w + Arg z < &2 * pi\n                          then Arg w + Arg z\n                          else (Arg w + Arg z) - &2 * pi
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg(w) + Arg(z) =\n             if Arg w + Arg z < &2 * pi\n             then Arg(w * z)\n             else Arg(w * z) + &2 * pi
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> Arg(w * z) = if Arg w + Arg z < &2 * pi\n                          then Arg w + Arg z\n                          else (Arg w + Arg z) - &2 * pi
   Arg(inv z)
   z = Cx(&0)
-  !z. Arg(cnj z) = if real z /\\ &0 <= Re z then Arg z else &2 * pi - Arg z
-  !z. real z ==> Arg z = if &0 <= Re z then &0 else pi
+  forall z. Arg(cnj z) = if real z /\\ &0 <= Re z then Arg z else &2 * pi - Arg z
+  forall z. real z ==> Arg z = if &0 <= Re z then &0 else pi
   exp(Re z)
-  !z. &0 <= Im z /\\ Im z < &2 * pi ==> Arg(cexp(z)) = Im z
+  forall z. &0 <= Im z /\\ Im z < &2 * pi ==> Arg(cexp(z)) = Im z
   (rotate2d:real->real^2->real^2) t x =\n        vector[x$1 * cos(t) - x$2 * sin(t);\n               x$1 * sin(t) + x$2 * cos(t)]
-  !t. linear(rotate2d t)
-  !t w z. rotate2d t (w + z) = rotate2d t w + rotate2d t z
-  !t w z. rotate2d t (w - z) = rotate2d t w - rotate2d t z
+  forall t. linear(rotate2d t)
+  forall t w z. rotate2d t (w + z) = rotate2d t w + rotate2d t z
+  forall t w z. rotate2d t (w - z) = rotate2d t w - rotate2d t z
   t:real
-  !t z. norm(rotate2d t z) = norm z
-  !t. rotate2d t (Cx(&0)) = Cx(&0)
-  !t z. rotate2d t z = Cx(&0) <=> z = Cx(&0)
-  !z. rotate2d (&0) z = z
-  !t. orthogonal_transformation(rotate2d t)
-  !r t s. rotate2d t (vector[r * cos(s); r * sin(s)]) =\n                        vector[r * cos(t + s); r * sin(t + s)]
-  !t. matrix(rotate2d t) = vector[vector[cos t;--(sin t)];\n                                   vector[sin t; cos t]]
+  forall t z. norm(rotate2d t z) = norm z
+  forall t. rotate2d t (Cx(&0)) = Cx(&0)
+  forall t z. rotate2d t z = Cx(&0) <=> z = Cx(&0)
+  forall z. rotate2d (&0) z = z
+  forall t. orthogonal_transformation(rotate2d t)
+  forall r t s. rotate2d t (vector[r * cos(s); r * sin(s)]) =\n                        vector[r * cos(t + s); r * sin(t + s)]
+  forall t. matrix(rotate2d t) = vector[vector[cos t;--(sin t)];\n                                   vector[sin t; cos t]]
   t:real
-  !t. det(matrix(rotate2d t)) = &1
+  forall t. det(matrix(rotate2d t)) = &1
   (matrix f)$1$1 pow 2 + (matrix f)$2$1 pow 2 = &1 /\\\n                (matrix f)$1$2 = --((matrix f)$2$1) /\\\n                (matrix f:real^2^2)$2$2 = (matrix f)$1$1
-  !f. orthogonal_transformation f /\\ det(matrix f) = &1\n       ==> ?t. &0 <= t /\\ t < &2 * pi /\\ f = rotate2d t
-  !s t x. rotate2d (s + t) x = rotate2d s (rotate2d t x)
-  !t z. rotate2d t z = cexp(ii * Cx t) * z
-  !z. rotate2d (pi / &2) z = ii * z
-  !z. rotate2d pi z = --z
-  !n z. rotate2d (&n * pi) z = --Cx(&1) pow n * z
-  !z. rotate2d (&2 * pi) z = z
+  forall f. orthogonal_transformation f /\\ det(matrix f) = &1\n       ==> ?t. &0 <= t /\\ t < &2 * pi /\\ f = rotate2d t
+  forall s t x. rotate2d (s + t) x = rotate2d s (rotate2d t x)
+  forall t z. rotate2d t z = cexp(ii * Cx t) * z
+  forall z. rotate2d (pi / &2) z = ii * z
+  forall z. rotate2d pi z = --z
+  forall n z. rotate2d (&n * pi) z = --Cx(&1) pow n * z
+  forall z. rotate2d (&2 * pi) z = z
   norm(z:complex)
-  !t z. ~(z = Cx(&0)) /\\ &0 <= t + Arg z /\\ t + Arg z < &2 * pi\n         ==> Arg(rotate2d t z) = t + Arg z
+  forall t z. ~(z = Cx(&0)) /\\ &0 <= t + Arg z /\\ t + Arg z < &2 * pi\n         ==> Arg(rotate2d t z) = t + Arg z
   ii * t + ii * z = ii * a + n * ii <=> t = n + (a - z)
   a * z * b = z * c <=> z = Cx(&0) \\/ a * b = c
   rotate2d t z
-  !t a z. ~(z = Cx(&0)) /\\ Arg(rotate2d t z) = a\n           ==> ?n. integer n /\\ t = &2 * n * pi + (a - Arg z)
+  forall t a z. ~(z = Cx(&0)) /\\ Arg(rotate2d t z) = a\n           ==> ?n. integer n /\\ t = &2 * n * pi + (a - Arg z)
   x + az:real = (y + az) + z <=> x - y = z
   z:complex
   a:real
@@ -77779,31 +77779,31 @@ Multivariate/transcendentals quotations (2171):
   a:real
   s:real
   a = Arg(rotate2d t z)
-  !s t z. ~(z = Cx(&0)) /\\\n           &0 <= s /\\ s < &2 * pi /\\ &0 <= t /\\ t < &2 * pi /\\\n           Arg(rotate2d s z) = Arg(rotate2d t z)\n           ==> s = t
+  forall s t z. ~(z = Cx(&0)) /\\\n           &0 <= s /\\ s < &2 * pi /\\ &0 <= t /\\ t < &2 * pi /\\\n           Arg(rotate2d s z) = Arg(rotate2d t z)\n           ==> s = t
   ~(a = Cx(&0)) ==> (a * w) * (inv a * z) = w * z
   t:real
-  !f w z. orthogonal_transformation f /\\ det(matrix f) = &1\n           ==> f w / f z = w / z
-  !f w z. linear f /\\ (!x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:2) ==> det(matrix f) = &1)\n           ==> f w / f z = w / z
+  forall f w z. orthogonal_transformation f /\\ det(matrix f) = &1\n           ==> f w / f z = w / z
+  forall f w z. linear f /\\ (forall x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:2) ==> det(matrix f) = &1)\n           ==> f w / f z = w / z
   s:real
   f:complex->complex
-  !f t z. linear f /\\ (!x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:2) ==> det(matrix f) = &1)\n           ==> rotate2d t (f z) = f(rotate2d t z)
+  forall f t z. linear f /\\ (forall x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:2) ==> det(matrix f) = &1)\n           ==> rotate2d t (f z) = f(rotate2d t z)
   f:real^2->real^2
   norm(x:real^2) % y:real^2
   norm(y:real^2) % x:real^2
-  !x y. ?t. &0 <= t /\\ t < &2 * pi /\\ norm(y) % rotate2d t x = norm(x) % y
+  forall x y. ?t. &0 <= t /\\ t < &2 * pi /\\ norm(y) % rotate2d t x = norm(x) % y
   y:complex
   x:complex
   &0
   norm(y:complex) = &0
-  !x y. norm x = norm y ==> ?t. &0 <= t /\\ t < &2 * pi /\\ rotate2d t x = y
-  !e1 e2. norm(e1) = &1 /\\ norm(e2) = &1 /\\ orthogonal e1 e2\n           ==> e1 = rotate2d (pi / &2) e2 \\/ e2 = rotate2d (pi / &2) e1
+  forall x y. norm x = norm y ==> ?t. &0 <= t /\\ t < &2 * pi /\\ rotate2d t x = y
+  forall e1 e2. norm(e1) = &1 /\\ norm(e2) = &1 /\\ orthogonal e1 e2\n           ==> e1 = rotate2d (pi / &2) e2 \\/ e2 = rotate2d (pi / &2) e1
   --x * x - y * y <= &0 <=> &0 <= x * x + y * y
-  !e1 e2. norm(e1) = &1 /\\ norm(e2) = &1 /\\ orthogonal e1 e2 /\\\n           &0 < e1$1 * e2$2 - e1$2 * e2$1\n           ==> e2 = rotate2d (pi / &2) e1
-  !t x y. rotate2d t x = rotate2d t y <=> x = y
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> rotate2d(Arg w - Arg z) = rotate2d(Arg(w / z))
-  !t. rotation_matrix(matrix(rotate2d t))
-  !A:real^2^2. rotation_matrix A <=> ?t. A = matrix(rotate2d t)
-  !f:real^N->real^N.\n       orthogonal_transformation f /\\ det(matrix f) = &1\n       ==> homotopic_with orthogonal_transformation\n            (subtopology euclidean (:real^N),subtopology euclidean (:real^N))\n            f I
+  forall e1 e2. norm(e1) = &1 /\\ norm(e2) = &1 /\\ orthogonal e1 e2 /\\\n           &0 < e1$1 * e2$2 - e1$2 * e2$1\n           ==> e2 = rotate2d (pi / &2) e1
+  forall t x y. rotate2d t x = rotate2d t y <=> x = y
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> rotate2d(Arg w - Arg z) = rotate2d(Arg(w / z))
+  forall t. rotation_matrix(matrix(rotate2d t))
+  forall A:real^2^2. rotation_matrix A <=> ?t. A = matrix(rotate2d t)
+  forall f:real^N->real^N.\n       orthogonal_transformation f /\\ det(matrix f) = &1\n       ==> homotopic_with orthogonal_transformation\n            (subtopology euclidean (:real^N),subtopology euclidean (:real^N))\n            f I
   a:real^1
   orthogonal_transformation\n           ((k:real^(1,N)finite_sum->real^N) o pastecart t) /\\\n          orthogonal_transformation (k o pastecart u)
   u:real^1
@@ -77816,23 +77816,23 @@ Multivariate/transcendentals quotations (2171):
   k:real^(1,N)finite_sum->real^N
   \\f:real^N->real^N. det(matrix f)
   h:real^N->real^N
-  !k:real^N->real^N.\n          orthogonal_transformation (g o k) <=> orthogonal_transformation k
+  forall k:real^N->real^N.\n          orthogonal_transformation (g o k) <=> orthogonal_transformation k
   (:real^N)
   (f:real^N->real^N) = g o (h:real^N->real^N) o f /\\ g = g o I
   h:real^N->real^N
   g:real^N->real^N
   (u ==> s) /\\ (s ==> t) /\\ (t ==> u)\n    ==> (u <=> t) /\\ (t <=> s)
-  (!f g. homotopic_with\n            (\\h. orthogonal_transformation h /\\ det(matrix h) = det(matrix f))\n            (subtopology euclidean (:real^N),subtopology euclidean (:real^N))\n            f g <=>\n          homotopic_with\n            orthogonal_transformation\n             (subtopology euclidean (:real^N),\n              subtopology euclidean (:real^N)) f g) /\\\n   !f g. homotopic_with orthogonal_transformation\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         orthogonal_transformation f /\\ orthogonal_transformation g /\\\n         det(matrix f) = det(matrix g)
-  !f g r.\n        &0 < r\n        ==> (homotopic_with orthogonal_transformation\n              (subtopology euclidean (sphere(vec 0,r)),\n               subtopology euclidean (sphere(vec 0,r))) f g <=>\n             homotopic_with orthogonal_transformation\n              (subtopology euclidean (:real^N),\n               subtopology euclidean (:real^N)) f g)
+  (forall f g. homotopic_with\n            (\\h. orthogonal_transformation h /\\ det(matrix h) = det(matrix f))\n            (subtopology euclidean (:real^N),subtopology euclidean (:real^N))\n            f g <=>\n          homotopic_with\n            orthogonal_transformation\n             (subtopology euclidean (:real^N),\n              subtopology euclidean (:real^N)) f g) /\\\n   forall f g. homotopic_with orthogonal_transformation\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         orthogonal_transformation f /\\ orthogonal_transformation g /\\\n         det(matrix f) = det(matrix g)
+  forall f g r.\n        &0 < r\n        ==> (homotopic_with orthogonal_transformation\n              (subtopology euclidean (sphere(vec 0,r)),\n               subtopology euclidean (sphere(vec 0,r))) f g <=>\n             homotopic_with orthogonal_transformation\n              (subtopology euclidean (:real^N),\n               subtopology euclidean (:real^N)) f g)
   \\z. (&1 - drop(fstcart z)) % (f:real^M->real^N) (sndcart z) +\n                  drop(fstcart z) % (g:real^M->real^N) (sndcart z)
-  !f g. homotopic_with linear\n          (subtopology euclidean (:real^M),subtopology euclidean (:real^N))\n          f g <=>\n         linear f /\\ linear g
+  forall f g. homotopic_with linear\n          (subtopology euclidean (:real^M),subtopology euclidean (:real^N))\n          f g <=>\n         linear f /\\ linear g
   \\z. (&1 - drop(fstcart z)) % (f:real^N->real^N) (sndcart z) +\n                  drop(fstcart z) % (g:real^N->real^N) (sndcart z)
-  !f g. homotopic_with (\\f. linear f /\\ positive_semidefinite(matrix f))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           positive_semidefinite(matrix f) /\\\n           positive_semidefinite(matrix g)
+  forall f g. homotopic_with (\\f. linear f /\\ positive_semidefinite(matrix f))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           positive_semidefinite(matrix f) /\\\n           positive_semidefinite(matrix g)
   t = &1
   t = &0
   t:real
   \\z. (&1 - drop(fstcart z)) % (f:real^N->real^N) (sndcart z) +\n                  drop(fstcart z) % (g:real^N->real^N) (sndcart z)
-  !f g. homotopic_with (\\f. linear f /\\ positive_definite(matrix f))\n           (subtopology euclidean (:real^N),\n            subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           positive_definite(matrix f) /\\\n           positive_definite(matrix g)
+  forall f g. homotopic_with (\\f. linear f /\\ positive_definite(matrix f))\n           (subtopology euclidean (:real^N),\n            subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           positive_definite(matrix f) /\\\n           positive_definite(matrix g)
   x = &1 /\\ y = &1 ==> a * x = b * y ==> a = b
   real_sgn(det(matrix g:real^N^N)) = b
   real_sgn(det(matrix f:real^N^N)) = b
@@ -77841,7 +77841,7 @@ Multivariate/transcendentals quotations (2171):
   (:real^N)
   \\h. orthogonal_transformation h /\\\n                det(matrix h:real^N^N) = det (matrix fu:real^N^N)
   \\h. linear h /\\ positive_definite(matrix h:real^N^N)
-  (!M. P M ==> Q(\\x:real^N. M ** x))\n      ==> (?M. P M) ==> (?f. Q f)
+  (forall M. P M ==> Q(\\x:real^N. M ** x))\n      ==> (?M. P M) ==> (?f. Q f)
   matrix(g:real^N->real^N)
   matrix(f:real^N->real^N)
   (?fu fp. linear fu /\\ linear fp /\\\n             orthogonal_transformation fu /\\\n             positive_definite(matrix fp) /\\\n             (f:real^N->real^N) = fu o fp) /\\\n    (?gu gp. linear gu /\\ linear gp /\\\n             orthogonal_transformation gu /\\\n             positive_definite(matrix gp) /\\\n             (g:real^N->real^N) = gu o gp)
@@ -77849,12 +77849,12 @@ Multivariate/transcendentals quotations (2171):
   \\z. drop(fstcart z) % (f:real^N->real^N) (sndcart z)
   (\\x. vec 0):real^N->real^N
   b = &0
-  !f g b. homotopic_with (\\f. linear f /\\ real_sgn(det(matrix f)) = b)\n            (subtopology euclidean (:real^N),\n             subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           real_sgn(det(matrix f)) = b /\\\n           real_sgn(det(matrix g)) = b
+  forall f g b. homotopic_with (\\f. linear f /\\ real_sgn(det(matrix f)) = b)\n            (subtopology euclidean (:real^N),\n             subtopology euclidean (:real^N)) f g <=>\n           linear f /\\ linear g /\\\n           real_sgn(det(matrix f)) = b /\\\n           real_sgn(det(matrix g)) = b
   b:real
   det(matrix(f:real^N->real^N))
   a:real
   det(matrix(\\x. (h:real^(1,N)finite_sum->real^N) (pastecart t x)))
-  (!x. x IN s ==> ~(f x = vec 0)) /\\ (~P ==> vec 0 IN t)\n    ==> t SUBSET IMAGE f s ==> P
+  (forall x. x IN s ==> ~(f x = vec 0)) /\\ (~P ==> vec 0 IN t)\n    ==> t SUBSET IMAGE f s ==> P
   t:real^1
   vec 0:real^1
   j:num
@@ -77867,8 +77867,8 @@ Multivariate/transcendentals quotations (2171):
   homotopic_with (\\h. linear h /\\\n                        real_sgn(det(matrix h)) = real_sgn(det(matrix f)))\n      (subtopology euclidean (:real^N),\n       subtopology euclidean (:real^N)) f g
   ~p ==> (q ==> p) /\\ (r ==> p) ==> (q <=> r)
   linear f /\\ linear g /\\\n                 invertible(matrix(f:real^N->real^N)) /\\\n                 invertible(matrix(g:real^N->real^N))
-  !f g. homotopic_with (\\h. linear h /\\ invertible(matrix h))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         linear f /\\ linear g /\\\n         &0 < real_sgn(det(matrix f)) * real_sgn(det(matrix g))
-  !f g. homotopic_with (\\h. linear h /\\ invertible(matrix h))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         linear f /\\ linear g /\\ &0 < det(matrix f) * det(matrix g)
+  forall f g. homotopic_with (\\h. linear h /\\ invertible(matrix h))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         linear f /\\ linear g /\\\n         &0 < real_sgn(det(matrix f)) * real_sgn(det(matrix g))
+  forall f g. homotopic_with (\\h. linear h /\\ invertible(matrix h))\n          (subtopology euclidean (:real^N),\n           subtopology euclidean (:real^N)) f g <=>\n         linear f /\\ linear g /\\ &0 < det(matrix f) * det(matrix g)
   x:real^N
   k:real^N->real^N
   t:real^1
@@ -77877,94 +77877,94 @@ Multivariate/transcendentals quotations (2171):
   h:real^(1,N)finite_sum->real^N
   g:real^N->real^N
   f:real^N->real^N
-  !f g:real^N->real^N.\n        linear f /\\ linear g\n        ==> (homotopic_with (\\x. T)\n               (subtopology euclidean ((:real^N) DELETE vec 0),\n                subtopology euclidean ((:real^N) DELETE vec 0)) f g <=>\n             &0 < det(matrix f) * det(matrix g))
+  forall f g:real^N->real^N.\n        linear f /\\ linear g\n        ==> (homotopic_with (\\x. T)\n               (subtopology euclidean ((:real^N) DELETE vec 0),\n                subtopology euclidean ((:real^N) DELETE vec 0)) f g <=>\n             &0 < det(matrix f) * det(matrix g))
   orthogonal_transformation:(real^N->real^N)->bool
-  !f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean (sphere (vec 0,&1)),\n               subtopology euclidean (sphere (vec 0,&1))) f g <=>\n             det(matrix f) = det(matrix g))
+  forall f g:real^N->real^N.\n        orthogonal_transformation f /\\ orthogonal_transformation g\n        ==> (homotopic_with (\\x. T)\n              (subtopology euclidean (sphere (vec 0,&1)),\n               subtopology euclidean (sphere (vec 0,&1))) f g <=>\n             det(matrix f) = det(matrix g))
   homotopic_with (\\x. T)\n      (subtopology euclidean (sphere(vec 0,&1)),\n       subtopology euclidean (sphere(vec 0,&1)))\n                  (\\x:real^N. --x) (\\x. x) <=>\n   EVEN(dimindex(:N))
   ctan z = csin z / ccos z
   ctan(Cx(&0)) = Cx(&0)
-  !z. ctan(--z) = --(ctan z)
-  !w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0)) /\\\n         ~(ccos(w + z) = Cx(&0))\n         ==> ctan(w + z) = (ctan w + ctan z) / (Cx(&1) - ctan(w) * ctan(z))
+  forall z. ctan(--z) = --(ctan z)
+  forall w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0)) /\\\n         ~(ccos(w + z) = Cx(&0))\n         ==> ctan(w + z) = (ctan w + ctan z) / (Cx(&1) - ctan(w) * ctan(z))
   csin z pow 2 = ccos z pow 2
   ccos z = Cx(&0)
   csin z = Cx(&0)
-  !z. ctan(Cx(&2) * z) = (Cx(&2) * ctan z) / (Cx(&1) - ctan z pow 2)
+  forall z. ctan(Cx(&2) * z) = (Cx(&2) * ctan z) / (Cx(&1) - ctan z pow 2)
   ccos z = Cx(&0)
   csin z = Cx(&0)
-  !z. inv(ctan(Cx(&2) * z)) = (inv(ctan z) - ctan z) / Cx(&2)
-  !z. ctan z = Cx(&1) / ctan z - Cx(&2) / ctan(Cx(&2) * z)
-  !w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0)) /\\\n         ~(ccos(w - z) = Cx(&0))\n         ==> ctan(w - z) = (ctan w - ctan z) / (Cx(&1) + ctan(w) * ctan(z))
-  !w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0))\n         ==> ctan(w) + ctan(z) = csin(w + z) / (ccos(w) * ccos(z))
-  !w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0))\n         ==> ctan(w) - ctan(z) = csin(w - z) / (ccos(w) * ccos(z))
+  forall z. inv(ctan(Cx(&2) * z)) = (inv(ctan z) - ctan z) / Cx(&2)
+  forall z. ctan z = Cx(&1) / ctan z - Cx(&2) / ctan(Cx(&2) * z)
+  forall w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0)) /\\\n         ~(ccos(w - z) = Cx(&0))\n         ==> ctan(w - z) = (ctan w - ctan z) / (Cx(&1) + ctan(w) * ctan(z))
+  forall w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0))\n         ==> ctan(w) + ctan(z) = csin(w + z) / (ccos(w) * ccos(z))
+  forall w z. ~(ccos(w) = Cx(&0)) /\\\n         ~(ccos(z) = Cx(&0))\n         ==> ctan(w) - ctan(z) = csin(w - z) / (ccos(w) * ccos(z))
   ~(e = Cx(&0))\n    ==> x * inv e * inv(Cx(&2)) * inv ii * y * e * Cx(&2) =\n        --ii * x * y
   ~(c = Cx(&0))\n    ==> c - inv c = (c pow 2 - Cx(&1)) / c /\\\n        c + inv c = (c pow 2 + Cx(&1)) / c
-  !z. ctan z =\n       --ii * (cexp(Cx(&2) * ii * z) - Cx(&1)) /\n              (cexp(Cx(&2) * ii * z) + Cx(&1))
+  forall z. ctan z =\n       --ii * (cexp(Cx(&2) * ii * z) - Cx(&1)) /\n              (cexp(Cx(&2) * ii * z) + Cx(&1))
   z:complex
-  !z. ~(ccos z = Cx(&0))\n       ==> (ctan has_complex_derivative (inv(ccos(z) pow 2))) (at z)
+  forall z. ~(ccos z = Cx(&0))\n       ==> (ctan has_complex_derivative (inv(ccos(z) pow 2))) (at z)
   (f has_complex_derivative f') net
-  !z. ~(ccos z = Cx(&0)) ==> ctan complex_differentiable at z
-  !s z. ~(ccos z = Cx(&0))\n         ==> ctan complex_differentiable (at z within s)
-  !z. ~(ccos z = Cx(&0)) ==> ctan continuous at z
-  !s z. ~(ccos z = Cx(&0)) ==> ctan continuous (at z within s)
-  !s. (!z. z IN s ==> ~(ccos z = Cx(&0))) ==> ctan continuous_on s
-  !s. (!z. z IN s ==> ~(ccos z = Cx(&0))) ==> ctan holomorphic_on s
+  forall z. ~(ccos z = Cx(&0)) ==> ctan complex_differentiable at z
+  forall s z. ~(ccos z = Cx(&0))\n         ==> ctan complex_differentiable (at z within s)
+  forall z. ~(ccos z = Cx(&0)) ==> ctan continuous at z
+  forall s z. ~(ccos z = Cx(&0)) ==> ctan continuous (at z within s)
+  forall s. (forall z. z IN s ==> ~(ccos z = Cx(&0))) ==> ctan continuous_on s
+  forall s. (forall z. z IN s ==> ~(ccos z = Cx(&0))) ==> ctan holomorphic_on s
   tan(x) = Re(ctan(Cx x))
-  !z. cnj(ctan z) = ctan(cnj z)
-  !z. real z ==> real(ctan z)
-  !x. Cx(tan x) = ctan(Cx x)
-  !x. tan x = sin x / cos x
+  forall z. cnj(ctan z) = ctan(cnj z)
+  forall z. real z ==> real(ctan z)
+  forall x. Cx(tan x) = ctan(Cx x)
+  forall x. tan x = sin x / cos x
   tan(&0) = &0
   tan(pi) = &0
-  !n. tan(&n * pi) = &0
-  !x. tan(--x) = --(tan x)
-  !x. tan(x + pi) = tan(x)
-  !x n. tan(x + &n * pi) = tan(x)
-  !x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x + y) = &0)\n         ==> tan(x + y) = (tan(x) + tan(y)) / (&1 - tan(x) * tan(y))
-  !x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x - y) = &0)\n         ==> tan(x - y) = (tan(x) - tan(y)) / (&1 + tan(x) * tan(y))
-  !x. tan(&2 * x) = (&2 * tan x) / (&1 - tan x pow 2)
-  !z. inv(tan(&2 * z)) = (inv(tan z) - tan z) / &2
-  !z. tan z = &1 / tan z - &2 / tan(&2 * z)
-  !x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0)\n         ==> tan(x) + tan(y) = sin(x + y) / (cos(x) * cos(y))
-  !x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0)\n         ==> tan(x) - tan(y) = sin(x - y) / (cos(x) * cos(y))
+  forall n. tan(&n * pi) = &0
+  forall x. tan(--x) = --(tan x)
+  forall x. tan(x + pi) = tan(x)
+  forall x n. tan(x + &n * pi) = tan(x)
+  forall x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x + y) = &0)\n         ==> tan(x + y) = (tan(x) + tan(y)) / (&1 - tan(x) * tan(y))
+  forall x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0) /\\ ~(cos(x - y) = &0)\n         ==> tan(x - y) = (tan(x) - tan(y)) / (&1 + tan(x) * tan(y))
+  forall x. tan(&2 * x) = (&2 * tan x) / (&1 - tan x pow 2)
+  forall z. inv(tan(&2 * z)) = (inv(tan z) - tan z) / &2
+  forall z. tan z = &1 / tan z - &2 / tan(&2 * z)
+  forall x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0)\n         ==> tan(x) + tan(y) = sin(x + y) / (cos(x) * cos(y))
+  forall x y. ~(cos(x) = &0) /\\ ~(cos(y) = &0)\n         ==> tan(x) - tan(y) = sin(x - y) / (cos(x) * cos(y))
   p / &4 = (n + &1 / &2) * p <=> p = &0 \\/ n = -- &1 / &4
   p / &2 - p / &4 = p / &4
   tan(pi / &4) = &1
-  !x. &0 < x /\\ x < pi / &2 ==> &0 < tan x
-  !x. &0 <= x /\\ x < pi / &2 ==> &0 <= tan x
+  forall x. &0 < x /\\ x < pi / &2 ==> &0 < tan x
+  forall x. &0 <= x /\\ x < pi / &2 ==> &0 <= tan x
   &0 < x ==> ~(&1 + x = &0)
   s pow 2 + c pow 2 = &1 /\\ &0 < c\n      ==> c pow 2 * (&1 + (s / c) pow 2) = &1
   tan x
   &0 < &1 + tan x pow 2
   sqrt(s) pow 2 = s /\\ c pow 2 * s = &1 /\\ ~(&1 + c * sqrt s = &0)\n    ==> c = &1 / sqrt s
-  !x. abs(x) < pi / &2 ==> cos(x) = &1 / sqrt(&1 + tan(x) pow 2)
+  forall x. abs(x) < pi / &2 ==> cos(x) = &1 / sqrt(&1 + tan(x) pow 2)
   a / b = a * &1 / b
-  !x. abs(x) < pi / &2 ==> sin(x) = tan(x) / sqrt(&1 + tan(x) pow 2)
+  forall x. abs(x) < pi / &2 ==> sin(x) = tan(x) / sqrt(&1 + tan(x) pow 2)
   &0 < &2 * x <=> &0 < x
-  !x y. --(pi / &2) <= x /\\ x < y /\\ y <= pi / &2 ==> sin(x) < sin(y)
-  !x y. --(pi / &2) <= x /\\ x <= y /\\ y <= pi / &2 ==> sin(x) <= sin(y)
-  !x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\ --(pi / &2) <= y /\\ y <= pi / &2\n         ==> (sin(x) < sin(y) <=> x < y)
-  !x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\ --(pi / &2) <= y /\\ y <= pi / &2\n         ==> (sin(x) <= sin(y) <=> x <= y)
-  !x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\\n         --(pi / &2) <= y /\\ y <= pi / &2 /\\\n         sin(x) = sin(y)\n         ==> x = y
+  forall x y. --(pi / &2) <= x /\\ x < y /\\ y <= pi / &2 ==> sin(x) < sin(y)
+  forall x y. --(pi / &2) <= x /\\ x <= y /\\ y <= pi / &2 ==> sin(x) <= sin(y)
+  forall x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\ --(pi / &2) <= y /\\ y <= pi / &2\n         ==> (sin(x) < sin(y) <=> x < y)
+  forall x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\ --(pi / &2) <= y /\\ y <= pi / &2\n         ==> (sin(x) <= sin(y) <=> x <= y)
+  forall x y. --(pi / &2) <= x /\\ x <= pi / &2 /\\\n         --(pi / &2) <= y /\\ y <= pi / &2 /\\\n         sin(x) = sin(y)\n         ==> x = y
   &0 < &2 * x <=> &0 < x
-  !x y. &0 <= x /\\ x < y /\\ y <= pi ==> cos(y) < cos(x)
-  !x y. &0 <= x /\\ x <= y /\\ y <= pi ==> cos(y) <= cos(x)
-  !x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi\n         ==> (cos(x) < cos(y) <=> y < x)
-  !x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi\n         ==> (cos(x) <= cos(y) <=> y <= x)
-  !x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi /\\ cos(x) = cos(y)\n         ==> x = y
+  forall x y. &0 <= x /\\ x < y /\\ y <= pi ==> cos(y) < cos(x)
+  forall x y. &0 <= x /\\ x <= y /\\ y <= pi ==> cos(y) <= cos(x)
+  forall x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi\n         ==> (cos(x) < cos(y) <=> y < x)
+  forall x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi\n         ==> (cos(x) <= cos(y) <=> y <= x)
+  forall x y. &0 <= x /\\ x <= pi /\\ &0 <= y /\\ y <= pi /\\ cos(x) = cos(y)\n         ==> x = y
   &0 <= cos x ==> abs(cos x) = cos x
   y:real
   x:real
-  (!x. P(--x) <=> P x) /\\ (!x. &0 <= x ==> P x) ==> !x. P x
-  (!x. P(--x) <=> P x) /\\ (!x. &0 <= x ==> P x) ==> !x. P x
-  !x y. abs(x) <= pi / &2 /\\ abs(y) <= pi / &2\n         ==> (abs(cos x) <= abs(cos y) <=> abs y <= abs x)
+  (forall x. P(--x) <=> P x) /\\ (forall x. &0 <= x ==> P x) ==> forall x. P x
+  (forall x. P(--x) <=> P x) /\\ (forall x. &0 <= x ==> P x) ==> forall x. P x
+  forall x y. abs(x) <= pi / &2 /\\ abs(y) <= pi / &2\n         ==> (abs(cos x) <= abs(cos y) <=> abs y <= abs x)
   &0 < cos(x) /\\ &0 < cos(y)
-  !x y. --(pi / &2) < x /\\ x < y /\\ y < pi / &2 ==> tan(x) < tan(y)
-  !x y. --(pi / &2) < x /\\ x <= y /\\ y < pi / &2 ==> tan(x) <= tan(y)
-  !x y. --(pi / &2) < x /\\ x < pi / &2 /\\ --(pi / &2) < y /\\ y < pi / &2\n         ==> (tan(x) < tan(y) <=> x < y)
-  !x y. --(pi / &2) < x /\\ x < pi / &2 /\\ --(pi / &2) < y /\\ y < pi / &2\n         ==> (tan(x) <= tan(y) <=> x <= y)
+  forall x y. --(pi / &2) < x /\\ x < y /\\ y < pi / &2 ==> tan(x) < tan(y)
+  forall x y. --(pi / &2) < x /\\ x <= y /\\ y < pi / &2 ==> tan(x) <= tan(y)
+  forall x y. --(pi / &2) < x /\\ x < pi / &2 /\\ --(pi / &2) < y /\\ y < pi / &2\n         ==> (tan(x) < tan(y) <=> x < y)
+  forall x y. --(pi / &2) < x /\\ x < pi / &2 /\\ --(pi / &2) < y /\\ y < pi / &2\n         ==> (tan(x) <= tan(y) <=> x <= y)
   abs(x) < a <=> --a < x /\\ x < a
-  !x. abs(x) < pi / &4 ==> abs(tan x) < &1
-  !x. tan(pi / &2 - x) = inv(tan x)
+  forall x. abs(x) < pi / &4 ==> abs(tan x) < &1
+  forall x. tan(pi / &2 - x) = inv(tan x)
   &0 < x /\\ x <= y ==> x / &24 < y / &6
   &0 < y /\\ x <= y pow 1 ==> x / &6 < y
   a < x /\\ e < a ==> abs(s - (x + -- &1 * a)) <= e ==> abs s < x
@@ -77973,22 +77973,22 @@ Multivariate/transcendentals quotations (2171):
   1
   abs s <= &1 /\\ (x <= &1 ==> abs(s) < x) ==> abs s < x
   a < x ==> a < abs x
-  (!x. &0 < x ==> abs(sin x) < abs x)\n    ==> !x. ~(x = &0) ==> abs(sin x) < abs x
-  !x. ~(x = &0) ==> abs(sin x) < abs x
+  (forall x. &0 < x ==> abs(sin x) < abs x)\n    ==> forall x. ~(x = &0) ==> abs(sin x) < abs x
+  forall x. ~(x = &0) ==> abs(sin x) < abs x
   x = &0
-  !x. abs(sin x) <= abs x
+  forall x. abs(sin x) <= abs x
   pi
   (&7 / &5) pow 2
   &0 + x pow 3 / &2 < x <=> x * x pow 2 < x * &2
   e + d < a ==> abs(s - a) <= d ==> e < s
   Cx(x)
   0
-  !x. &0 < x /\\ x < &7 / &5 ==> &0 < sin x
+  forall x. &0 < x /\\ x < &7 / &5 ==> &0 < sin x
   pi / &6
   a / &6
   b / &6
   pi / &6
-  !a b. &0 <= a /\\ a <= b /\\ b <= &4 /\\\n         sin(a / &6) <= &1 / &2 /\\ &1 / &2 <= sin(b / &6)\n         ==> a <= pi /\\ pi <= b
+  forall a b. &0 <= a /\\ a <= b /\\ b <= &4 /\\\n         sin(a / &6) <= &1 / &2 /\\ &1 / &2 <= sin(b / &6)\n         ==> a <= pi /\\ pi <= b
   Cx(&6746518853 / &12884901888)
   5
   Cx(&1686629713 / &3221225472)
@@ -77997,73 +77997,73 @@ Multivariate/transcendentals quotations (2171):
   abs(pi - &13493037705 / &4294967296) <= inv(&2 pow 32)
   &0 < pi / &2 /\\ pi / &2 < &2
   clog z = @w. cexp(w) = z /\\ --pi < Im(w) /\\ Im(w) <= pi
-  !P. (?z. P (Re z) (Im z)) <=> ?x y. P x y
+  forall P. (?z. P (Re z) (Im z)) <=> ?x y. P x y
   complex(log(norm(z:complex)),y)
   y:real
   x:real
   x:real
   z / Cx(norm z)
-  !z. ~(z = Cx(&0))\n       ==> cexp(clog z) = z /\\ --pi < Im(clog z) /\\ Im(clog z) <= pi
-  !z. ~(z = Cx(&0)) ==> cexp(clog z) = z
+  forall z. ~(z = Cx(&0))\n       ==> cexp(clog z) = z /\\ --pi < Im(clog z) /\\ Im(clog z) <= pi
+  forall z. ~(z = Cx(&0)) ==> cexp(clog z) = z
   abs(n * pi) < &1 * pi
   n = &0
   n:real
   w:complex
-  !z. --pi < Im(z) /\\ Im(z) <= pi ==> clog(cexp z) = z
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) ==> (clog w = clog z <=> w = z)
-  !w z. --pi < Im(z) /\\ Im(z) <= pi /\\ cexp(z) = w ==> clog w = z
+  forall z. --pi < Im(z) /\\ Im(z) <= pi ==> clog(cexp z) = z
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) ==> (clog w = clog z <=> w = z)
+  forall w z. --pi < Im(z) /\\ Im(z) <= pi /\\ cexp(z) = w ==> clog w = z
   norm:complex->real
-  !z. ~(z = Cx(&0)) ==> Re(clog z) = log(norm z)
+  forall z. ~(z = Cx(&0)) ==> Re(clog z) = log(norm z)
   cexp(clog(a) / Cx(&n))
   Cx(&0)
   a = Cx(&0)
-  !a n. ~(n = 0) ==> ?z. z pow n = a
+  forall a n. ~(n = 0) ==> ?z. z pow n = a
   Re(clog z)
   --x < w <=> w > --x
   {x | p x /\\ q x} = {x | p x} INTER {x | q x}
   z = Cx(&0)
   {w | --pi < Im(w) /\\ Im(w) < pi}
   cexp
-  !z. (Im(z) = &0 ==> &0 < Re(z))\n       ==> (clog has_complex_derivative inv(z)) (at z)
-  !z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog complex_differentiable at z
-  !s z. (Im(z) = &0 ==> &0 < Re(z))\n         ==> clog complex_differentiable (at z within s)
-  !z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous at z
-  !s z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous (at z within s)
-  !s. (!z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous_on s
-  !s. (!z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> clog holomorphic_on s
-  !z. &0 < z ==> Cx(log z) = clog(Cx z)
+  forall z. (Im(z) = &0 ==> &0 < Re(z))\n       ==> (clog has_complex_derivative inv(z)) (at z)
+  forall z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog complex_differentiable at z
+  forall s z. (Im(z) = &0 ==> &0 < Re(z))\n         ==> clog complex_differentiable (at z within s)
+  forall z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous at z
+  forall s z. (Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous (at z within s)
+  forall s. (forall z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> clog continuous_on s
+  forall s. (forall z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> clog holomorphic_on s
+  forall z. &0 < z ==> Cx(log z) = clog(Cx z)
   --p < x /\\ x <= p\n    ==> --(p / &2) < x /\\ x < p / &2 \\/\n        --(p / &2) <= p + x /\\ p + x <= p / &2 \\/\n        --(p / &2) <= x - p /\\ x - p <= p / &2
   z:complex
   clog z
-  !z. ~(z = Cx(&0)) ==> (abs(Im(clog z)) < pi / &2 <=> &0 < Re(z))
+  forall z. ~(z = Cx(&0)) ==> (abs(Im(clog z)) < pi / &2 <=> &0 < Re(z))
   --p < x /\\ x <= p\n    ==> --(p / &2) <= x /\\ x <= p / &2 \\/\n        --(p / &2) < p + x /\\ p + x < p / &2 \\/\n        --(p / &2) < x - p /\\ x - p < p / &2
   z:complex
   clog z
-  !z. ~(z = Cx(&0)) ==> (abs(Im(clog z)) <= pi / &2 <=> &0 <= Re(z))
+  forall z. ~(z = Cx(&0)) ==> (abs(Im(clog z)) <= pi / &2 <=> &0 <= Re(z))
   --p < x /\\ x <= p\n    ==> &0 < x /\\ x < p \\/\n        &0 <= x + p /\\ x + p <= p \\/\n        &0 <= x - p /\\ x - p <= p
   z:complex
   clog z
-  !z. ~(z = Cx(&0)) ==> (&0 < Im(clog z) /\\ Im(clog z) < pi <=> &0 < Im(z))
+  forall z. ~(z = Cx(&0)) ==> (&0 < Im(clog z) /\\ Im(clog z) < pi <=> &0 < Im(z))
   --p < x /\\ x <= p\n    ==> &0 <= x /\\ x <= p \\/\n        &0 < x + p /\\ x + p < p \\/\n        &0 < p - x /\\ p - x < p
   z:complex
   clog z
-  !z. ~(z = Cx(&0)) ==> (&0 <= Im(clog z) <=> &0 <= Im(z))
+  forall z. ~(z = Cx(&0)) ==> (&0 <= Im(clog z) <=> &0 <= Im(z))
   z = Cx(&0)
-  !z. &0 < Re(z) ==> abs(Im(clog z)) < pi / &2
+  forall z. &0 < Re(z) ==> abs(Im(clog z)) < pi / &2
   z = Cx(&0)
-  !z. &0 < Im(z) ==> &0 < Im(clog z) /\\ Im(clog z) < pi
+  forall z. &0 < Im(z) ==> &0 < Im(clog z) /\\ Im(clog z) < pi
   z = &0 <=> &0 <= z /\\ ~(&0 < z)
-  !z. ~(z = Cx(&0)) ==> (Im(clog z) = &0 <=> &0 < Re(z) /\\ Im(z) = &0)
+  forall z. ~(z = Cx(&0)) ==> (Im(clog z) = &0 <=> &0 < Re(z) /\\ Im(z) = &0)
   &0 < pi ==> (x = pi <=> (&0 <= x /\\ x <= pi) /\\\n                            ~(abs x <= pi / &2) /\\ ~(&0 < x /\\ x < pi))
-  !z. ~(z = Cx(&0)) ==> (Im(clog z) = pi <=> Re(z) < &0 /\\ Im(z) = &0)
+  forall z. ~(z = Cx(&0)) ==> (Im(clog z) = pi <=> Re(z) < &0 /\\ Im(z) = &0)
   (--p < x /\\ x <= p) /\\ (--p < y /\\ y <= p) /\\\n    ~(x = p /\\ y = p)\n    ==> abs(--x - y) < &2 * p
   z = Cx(&0)
-  !z. (Im z = &0 ==> &0 < Re z) ==> cnj(clog z) = clog(cnj z)
+  forall z. (Im z = &0 ==> &0 < Re z) ==> cnj(clog z) = clog(cnj z)
   Im z = &0
   Im z = &0 ==> &0 < Re z
   --pi < x /\\ x <= pi /\\ --pi < y /\\ y <= pi /\\\n    ~(x = pi /\\ y = pi) ==> abs(x + y) < &2 * pi
   z = Cx(&0)
-  !z. (Im(z) = &0 ==> &0 < Re z) ==> clog(inv z) = --(clog z)
+  forall z. (Im(z) = &0 ==> &0 < Re z) ==> clog(inv z) = --(clog z)
   clog(Cx(&1)) = Cx(&0)
   --pi < x /\\ x <= pi ==> abs(x - pi) < &2 * pi
   ~(Cx(-- &1) = Cx(&0))
@@ -78072,16 +78072,16 @@ Multivariate/transcendentals quotations (2171):
   clog ii = ii * Cx(pi / &2)
   --ii = inv ii
   clog(--ii) = --ii * Cx(pi / &2)
-  !z. ~(z = Cx(&0)) ==> csqrt z = cexp(clog(z) / Cx(&2))
+  forall z. ~(z = Cx(&0)) ==> csqrt z = cexp(clog(z) / Cx(&2))
   Im z = &0 ==> &0 < Re(z)
   z = Cx(&0)
-  !z. (Im z = &0 ==> &0 <= Re(z)) ==> cnj(csqrt z) = csqrt(cnj z)
+  forall z. (Im z = &0 ==> &0 <= Re(z)) ==> cnj(csqrt z) = csqrt(cnj z)
   z:complex
   ~(z = Cx(&0))
   norm(z:complex)
   \\z. cexp(clog(z) / Cx(&2))
   z = Cx(&0)
-  !z. (Im z = &0 ==> &0 < Re(z))\n       ==> (csqrt has_complex_derivative inv(Cx(&2) * csqrt z)) (at z)
+  forall z. (Im z = &0 ==> &0 < Re(z))\n       ==> (csqrt has_complex_derivative inv(Cx(&2) * csqrt z)) (at z)
   :real
   :real
   :real
@@ -78089,12 +78089,12 @@ Multivariate/transcendentals quotations (2171):
   :real
   :real
   (f has_complex_derivative f') net
-  !z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt complex_differentiable at z
-  !s z. (Im z = &0 ==> &0 < Re(z))\n         ==> csqrt complex_differentiable (at z within s)
-  !z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous at z
-  !s z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous (at z within s)
-  !s. (!z. z IN s /\\ Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous_on s
-  !s. (!z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> csqrt holomorphic_on s
+  forall z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt complex_differentiable at z
+  forall s z. (Im z = &0 ==> &0 < Re(z))\n         ==> csqrt complex_differentiable (at z within s)
+  forall z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous at z
+  forall s z. (Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous (at z within s)
+  forall s. (forall z. z IN s /\\ Im z = &0 ==> &0 < Re(z)) ==> csqrt continuous_on s
+  forall s. (forall z. z IN s /\\ Im(z) = &0 ==> &0 < Re(z)) ==> csqrt holomorphic_on s
   e = sqrt(e pow 2)
   (e:real) pow 2
   e:real
@@ -78102,47 +78102,47 @@ Multivariate/transcendentals quotations (2171):
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   x <= &0 <=> x < &0 \\/ x = &0
   Im z = &0 ==> &0 < Re(z)
-  !z. csqrt continuous (at z within {w | real w /\\ &0 <= Re(w)})
+  forall z. csqrt continuous (at z within {w | real w /\\ &0 <= Re(w)})
   w cpow z = if w = Cx(&0) then Cx(&0)\n             else cexp(z * clog w)
-  !z. Cx(&0) cpow z = Cx(&0)
-  !z. z cpow (Cx(&n)) = if z = Cx(&0) then Cx(&0) else z pow n
-  !z. Cx(&1) cpow z = Cx(&1)
+  forall z. Cx(&0) cpow z = Cx(&0)
+  forall z. z cpow (Cx(&n)) = if z = Cx(&0) then Cx(&0) else z pow n
+  forall z. Cx(&1) cpow z = Cx(&1)
   w = Cx(&0)
-  !w z1 z2. w cpow (z1 + z2) = w cpow z1 * w cpow z2
-  !w z. w cpow (z + Cx(&1)) = w * w cpow z
+  forall w z1 z2. w cpow (z1 + z2) = w cpow z1 * w cpow z2
+  forall w z. w cpow (z + Cx(&1)) = w * w cpow z
   w = Cx(&0)
-  !w z. w cpow (--z) = inv(w cpow z)
-  !w z1 z2. w cpow (z1 - z2) = w cpow z1 / w cpow z2
-  !w z. --pi < Im w /\\ Im w <= pi ==> cexp(w * z) = cexp(w) cpow z
-  !w z. w cpow z = Cx(&0) <=> w = Cx(&0)
-  !w z. real w /\\ &0 < Re w ==> norm(w cpow z) = exp(Re z * log(Re w))
-  !w z. real w /\\ real z /\\ &0 < Re w\n         ==> w cpow z = Cx(exp(Re z * log(Re w)))
+  forall w z. w cpow (--z) = inv(w cpow z)
+  forall w z1 z2. w cpow (z1 - z2) = w cpow z1 / w cpow z2
+  forall w z. --pi < Im w /\\ Im w <= pi ==> cexp(w * z) = cexp(w) cpow z
+  forall w z. w cpow z = Cx(&0) <=> w = Cx(&0)
+  forall w z. real w /\\ &0 < Re w ==> norm(w cpow z) = exp(Re z * log(Re w))
+  forall w z. real w /\\ real z /\\ &0 < Re w\n         ==> w cpow z = Cx(exp(Re z * log(Re w)))
   &1 < x ==> &0 < x
-  !w z1 z2. real w /\\ &1 < Re w\n             ==> (norm(w cpow z1) <= norm(w cpow z2) <=> Re(z1) <= Re(z2))
+  forall w z1 z2. real w /\\ &1 < Re w\n             ==> (norm(w cpow z1) <= norm(w cpow z2) <=> Re(z1) <= Re(z2))
   &0 <= x <=> x = &0 \\/ &0 < x
-  !x y z. real x /\\ real y /\\ &0 <= Re x /\\ &0 <= Re y\n           ==> (x * y) cpow z = x cpow z * y cpow z
+  forall x y z. real x /\\ real y /\\ &0 <= Re x /\\ &0 <= Re y\n           ==> (x * y) cpow z = x cpow z * y cpow z
   norm(z:complex)
   \\z. cexp (s * clog z)
   z = Cx(&0)
-  !s z. (Im z = &0 ==> &0 < Re z)\n         ==> ((\\z. z cpow s) has_complex_derivative\n              (s * z cpow (s - Cx(&1)))) (at z)
+  forall s z. (Im z = &0 ==> &0 < Re z)\n         ==> ((\\z. z cpow s) has_complex_derivative\n              (s * z cpow (s - Cx(&1)))) (at z)
   (f has_complex_derivative f') net
   s:complex
   s:complex
-  !w z. ~(w = Cx(&0))\n         ==> ((\\z. w cpow z) has_complex_derivative clog(w) * w cpow z) (at z)
+  forall w z. ~(w = Cx(&0))\n         ==> ((\\z. w cpow z) has_complex_derivative clog(w) * w cpow z) (at z)
   (f has_complex_derivative f') net
   s:complex
   s:complex
   w = Cx(&0)
-  !w z. (\\z. w cpow z) complex_differentiable (at z)
-  !w f s. f holomorphic_on s\n           ==> (\\z. w cpow (f z)) holomorphic_on s
-  !w f s. f continuous_on s\n           ==> (\\z. w cpow (f z)) continuous_on s
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n                if Im(clog w + clog z) <= --pi then\n                  (clog(w) + clog(z)) + ii * Cx(&2 * pi)\n                else if Im(clog w + clog z) > pi then\n                  (clog(w) + clog(z)) - ii * Cx(&2 * pi)\n                else clog(w) + clog(z)
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) /\\\n         --pi < Im(clog(w)) + Im(clog(z)) /\\\n         Im(clog(w)) + Im(clog(z)) <= pi\n         ==> clog(w * z) = clog(w) + clog(z)
-  (!x z. &0 < x /\\ ~(z = Cx(&0)) ==> clog(Cx x * z) = Cx(log x) + clog z) /\\\n   (!x z. &0 < x /\\ ~(z = Cx(&0)) ==> clog(z * Cx x) = clog z + Cx(log x))
+  forall w z. (\\z. w cpow z) complex_differentiable (at z)
+  forall w f s. f holomorphic_on s\n           ==> (\\z. w cpow (f z)) holomorphic_on s
+  forall w f s. f continuous_on s\n           ==> (\\z. w cpow (f z)) continuous_on s
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n                if Im(clog w + clog z) <= --pi then\n                  (clog(w) + clog(z)) + ii * Cx(&2 * pi)\n                else if Im(clog w + clog z) > pi then\n                  (clog(w) + clog(z)) - ii * Cx(&2 * pi)\n                else clog(w) + clog(z)
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0)) /\\\n         --pi < Im(clog(w)) + Im(clog(z)) /\\\n         Im(clog(w)) + Im(clog(z)) <= pi\n         ==> clog(w * z) = clog(w) + clog(z)
+  (forall x z. &0 < x /\\ ~(z = Cx(&0)) ==> clog(Cx x * z) = Cx(log x) + clog z) /\\\n   (forall x z. &0 < x /\\ ~(z = Cx(&0)) ==> clog(z * Cx x) = clog z + Cx(log x))
   abs(x) < pi / &2 /\\ abs(y) < pi / &2\n     ==> --pi < x + y /\\ x + y <= pi
   (p /\\ q) /\\ (p /\\ q ==> r) ==> p /\\ q /\\ r
-  !w z. &0 < Re w /\\ &0 < Re z ==> clog(w * z) = clog w + clog z
-  !w z. &0 < Re w /\\ &0 < Re z ==> clog(w / z) = clog w - clog z
+  forall w z. &0 < Re w /\\ &0 < Re z ==> clog(w * z) = clog w + clog z
+  forall w z. &0 < Re w /\\ &0 < Re z ==> clog(w / z) = clog w - clog z
   &0 < Im(clog z)
   Im(clog z) = pi
   ~(a /\\ ~b) /\\ ~b <=> ~a /\\ ~b
@@ -78152,20 +78152,20 @@ Multivariate/transcendentals quotations (2171):
   --p < x /\\ x <= p ==> ~(p + x <= --p)
   ~(--Cx(&1) = Cx(&0))
   --z = --Cx(&1) * z
-  !z. ~(z = Cx(&0))\n       ==> clog(--z) = if Im(z) <= &0 /\\ ~(Re(z) < &0 /\\ Im(z) = &0)\n                       then clog(z) + ii * Cx(pi)\n                       else clog(z) - ii * Cx(pi)
+  forall z. ~(z = Cx(&0))\n       ==> clog(--z) = if Im(z) <= &0 /\\ ~(Re(z) < &0 /\\ Im(z) = &0)\n                       then clog(z) + ii * Cx(pi)\n                       else clog(z) - ii * Cx(pi)
   (p <=> ~q) /\\ x = a /\\ y = b\n    ==> ((if p then x else y) = (if q then b else a))
   Im z < &0 <=> ~(&0 <= Im z)
   p / &2 + x > p <=> p / &2 < x
   --p < x /\\ x <= p ==> ~(p / &2 + x <= --p)
-  !z. ~(z = Cx(&0))\n       ==> clog(ii * z) = if &0 <= Re(z) \\/ Im(z) < &0\n                          then clog(z) + ii * Cx(pi / &2)\n                          else clog(z) - ii * Cx(&3 * pi / &2)
+  forall z. ~(z = Cx(&0))\n       ==> clog(ii * z) = if &0 <= Re(z) \\/ Im(z) < &0\n                          then clog(z) + ii * Cx(pi / &2)\n                          else clog(z) - ii * Cx(&3 * pi / &2)
   unwinding(z) = (z - clog(cexp z)) / (Cx(&2 * pi) * ii)
   Cx(&2 * pi) * ii * unwinding(z) = z - clog(cexp z)
   w + z - ((w + z) - c) = c:complex
-  !w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n               clog(w) + clog(z) -\n               Cx(&2 * pi) * ii * unwinding(clog w + clog z)
+  forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n           ==> clog(w * z) =\n               clog(w) + clog(z) -\n               Cx(&2 * pi) * ii * unwinding(clog w + clog z)
   catn z = (ii / Cx(&2)) * clog((Cx(&1) - ii * z) / (Cx(&1) + ii * z))
   catn(Cx(&0)) = Cx(&0)
-  !z. Im((Cx(&1) - ii * z) / (Cx(&1) + ii * z)) = &0 <=> Re z = &0
-  !z. &0 < Re((Cx(&1) - ii * z) / (Cx(&1) + ii * z)) <=> norm(z) < &1
+  forall z. Im((Cx(&1) - ii * z) / (Cx(&1) + ii * z)) = &0 <=> Re z = &0
+  forall z. &0 < Re((Cx(&1) - ii * z) / (Cx(&1) + ii * z)) <=> norm(z) < &1
   ~(z pow 2 = --Cx(&1))
   ~(z pow 2 = --Cx(&1))\n      ==> ~((Cx(&1) - ii * z) / (Cx(&1) + ii * z) = Cx(&0))
   Cx(&2) * Cx(&1) / Cx(&2) * z = z
@@ -78179,7 +78179,7 @@ Multivariate/transcendentals quotations (2171):
   --Cx(&1) / Cx(&2) * x = --(Cx(&1) / Cx(&2) * x)
   i * i / Cx(&2) * z =  (i * i) / Cx(&2) * z
   --i * i / Cx(&2) * z = --(i * i) / Cx(&2) * z
-  !z. ~(z pow 2 = --Cx(&1)) ==> ctan(catn z) = z
+  forall z. ~(z pow 2 = --Cx(&1)) ==> ctan(catn z) = z
   ~(w = Cx(&0)) /\\ ~(w pow 2 = --Cx(&1))\n      ==> (Cx(&1) - (w - inv w) / (w + inv w)) /\n          (Cx(&1) + (w - inv w) / (w + inv w)) =\n           inv(w) pow 2
   n:real
   abs(z) < p / &2 /\\ (w = &0 \\/ abs(w) >= &2 * p)\n      ==> ~(&2 * z = p + w)
@@ -78189,7 +78189,7 @@ Multivariate/transcendentals quotations (2171):
   ~(cexp(ii * z) pow 2 = --Cx(&1))
   ii / Cx(&2) * x = y <=> x = Cx(&2) * --(ii * y)
   ii * (a / (Cx(&2) * ii)) / (b / Cx(&2)) = a / b
-  !z. abs(Re z) < pi / &2 ==> catn(ctan z) = z
+  forall z. abs(Re z) < pi / &2 ==> catn(ctan z) = z
   &0 < (&1 + Im z) / (&1 - Im z)
   Im(clog((Cx(&1) - --Cx(Im z)) / (Cx(&1) + --Cx(Im z)))) = pi
   ii * z = --Cx(Im z)
@@ -78202,16 +78202,16 @@ Multivariate/transcendentals quotations (2171):
   ~(z = ii) /\\ ~(z = --ii)
   (--p < x /\\ x <= p) /\\ ~(x = p) ==> abs x < p
   abs x < p ==> abs(--(inv(&2) * x)) < p / &2
-  !z. (Re z = &0 ==> abs(Im z) < &1) ==> abs(Re(catn z)) < pi / &2
+  forall z. (Re z = &0 ==> abs(Im z) < &1) ==> abs(Re(catn z)) < pi / &2
   ~(z = ii) /\\ ~(z = --ii)
-  !z. (Re z = &0 ==> abs(Im z) < &1)\n       ==> (catn has_complex_derivative inv(Cx(&1) + z pow 2)) (at z)
+  forall z. (Re z = &0 ==> abs(Im z) < &1)\n       ==> (catn has_complex_derivative inv(Cx(&1) + z pow 2)) (at z)
   (f has_complex_derivative f') net
-  !z. (Re z = &0 ==> abs(Im z) < &1) ==> catn complex_differentiable at z
-  !s z. (Re z = &0 ==> abs(Im z) < &1)\n         ==> catn complex_differentiable (at z within s)
-  !z. (Re z = &0 ==> abs(Im z) < &1) ==> catn continuous at z
-  !s z. (Re z = &0 ==> abs(Im z) < &1) ==> catn continuous (at z within s)
-  !s. (!z. z IN s /\\ Re z = &0 ==> abs(Im z) < &1) ==> catn continuous_on s
-  !s. (!z. z IN s /\\ Re z = &0 ==> abs(Im z) < &1) ==> catn holomorphic_on s
+  forall z. (Re z = &0 ==> abs(Im z) < &1) ==> catn complex_differentiable at z
+  forall s z. (Re z = &0 ==> abs(Im z) < &1)\n         ==> catn complex_differentiable (at z within s)
+  forall z. (Re z = &0 ==> abs(Im z) < &1) ==> catn continuous at z
+  forall s z. (Re z = &0 ==> abs(Im z) < &1) ==> catn continuous (at z within s)
+  forall s. (forall z. z IN s /\\ Re z = &0 ==> abs(Im z) < &1) ==> catn continuous_on s
+  forall s. (forall z. z IN s /\\ Re z = &0 ==> abs(Im z) < &1) ==> catn holomorphic_on s
   atn(x) = Re(catn(Cx x))
   cnj a = b ==> norm a = norm b
   ~(b = &0) /\\ a = b ==> a / b = &1
@@ -78219,50 +78219,50 @@ Multivariate/transcendentals quotations (2171):
   Re
   ~(Cx(&1) - ii * Cx(x) = Cx(&0)) /\\\n                ~(Cx(&1) + ii * Cx(x) = Cx(&0))
   inv(&2) * x = &0 <=> x = &0
-  !x. Cx(atn x) = catn(Cx x)
+  forall x. Cx(atn x) = catn(Cx x)
   Im
   ~(z = ii) /\\ ~(z = --ii) ==> ~(z pow 2 = --Cx(&1))
   Re(ctan(catn(Cx y)))
-  !y. tan(atn y) = y
-  !y. abs(atn y) < pi / &2
-  !y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2)
+  forall y. tan(atn y) = y
+  forall y. abs(atn y) < pi / &2
+  forall y. --(pi / &2) < atn(y) /\\ atn(y) < (pi / &2)
   Re(catn(ctan(Cx x)))
-  !x. --(pi / &2) < x /\\ x < pi / &2 ==> atn(tan(x)) = x
+  forall x. --(pi / &2) < x /\\ x < pi / &2 ==> atn(tan(x)) = x
   atn(&0) = &0
   atn
   atn(&1) = pi / &4
   x:real
   atn(x)
-  !x. atn(--x) = --(atn x)
-  !x y. x < y ==> atn(x) < atn(y)
-  !x y. atn(x) < atn(y) <=> x < y
-  !x y. atn(x) <= atn(y) <=> x <= y
-  !x y. (atn x = atn y) <=> (x = y)
+  forall x. atn(--x) = --(atn x)
+  forall x y. x < y ==> atn(x) < atn(y)
+  forall x y. atn(x) < atn(y) <=> x < y
+  forall x y. atn(x) <= atn(y) <=> x <= y
+  forall x y. (atn x = atn y) <=> (x = y)
   &0 < atn(x) <=> &0 < x
   &0 <= atn(x) <=> &0 <= x
-  !x. x < &1 ==> atn(x) < pi / &4
-  !x. --(&1) < x ==> --(pi / &4) < atn(x)
+  forall x. x < &1 ==> atn(x) < pi / &4
+  forall x. --(&1) < x ==> --(pi / &4) < atn(x)
   (&0 < x ==> &0 < y) /\\\n    (x < &0 ==> y < &0) /\\\n    ((x = &0) ==> (y = &0)) /\\\n    (x < a ==> y < b) /\\\n    (--a < x ==> --b < y)\n    ==> abs(x) < a ==> abs(y) < b
-  !x. abs(x) < &1 ==> abs(atn x) < pi / &4
+  forall x. abs(x) < &1 ==> abs(atn x) < pi / &4
   (abs(x) = a) ==> (x = a) \\/ (x = --a)
-  !x. abs(x) <= &1 ==> abs(atn x) <= pi / &4
-  !x. ~(cos(atn(x)) = &0)
-  !x. ~(cos(x) = &0) ==> (&1 + (tan(x) pow 2) = inv(cos x) pow 2)
-  !x. cos(atn x) = &1 / sqrt(&1 + x pow 2)
-  !x. sin(atn x) = x / sqrt(&1 + x pow 2)
-  !x. atn(abs x) = abs(atn x)
+  forall x. abs(x) <= &1 ==> abs(atn x) <= pi / &4
+  forall x. ~(cos(atn(x)) = &0)
+  forall x. ~(cos(x) = &0) ==> (&1 + (tan(x) pow 2) = inv(cos x) pow 2)
+  forall x. cos(atn x) = &1 / sqrt(&1 + x pow 2)
+  forall x. sin(atn x) = x / sqrt(&1 + x pow 2)
+  forall x. atn(abs x) = abs(atn x)
   atn((tan(atn x) + tan(atn y)) /\n                          (&1 - tan(atn x) * tan(atn y)))
-  !x y. abs(atn x + atn y) < pi / &2\n         ==> atn(x) + atn(y) = atn((x + y) / (&1 - x * y))
+  forall x y. abs(atn x + atn y) < pi / &2\n         ==> atn(x) + atn(y) = atn((x + y) / (&1 - x * y))
   x:real
   --(p / &2) < p / &2 - x /\\ p / &2 - x < p / &2 <=> &0 < x /\\ x < p
   atn(inv(tan(atn x)))
-  !x. &0 < x ==> atn(inv x) = pi / &2 - atn x
+  forall x. &0 < x ==> atn(inv x) = pi / &2 - atn x
   inv x = &1 / x
   ~(x = &0) ==> &0 < abs x
   abs(x) < p - abs(y) \\/ abs(y) < p - abs(x) ==> abs(x + y) < p
   y = &0
   x = &0
-  !x y. abs(x * y) < &1\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
+  forall x y. abs(x * y) < &1\n         ==> (atn(x) + atn(y) = atn((x + y) / (&1 - x * y)))
   (&4 * atn(&1 / &5) - atn(&1 / &239) = pi / &4) /\\\n   (&5 * atn(&1 / &7) + &2 * atn(&3 / &79) = pi / &4) /\\\n   (&12 * atn(&1 / &18) + &8 * atn(&1 / &57) - &5 * atn(&1 / &239) = pi / &4)
   ( * ):real->real->real
   ( * ):real->real->real
@@ -78376,30 +78376,30 @@ Multivariate/transcendentals quotations (2171):
   real
   \\z. inv(Cx(&1) + z pow 2)
   catn
-  !x. abs(atn x) <= abs x
-  !x. &0 <= x ==> atn(x) <= x
+  forall x. abs(atn x) <= abs x
+  forall x. &0 <= x ==> atn(x) <= x
   abs(atn(tan x))
-  !x. abs(x) < pi / &2 ==> abs(x) <= abs(tan x)
-  !y. ?!x. --(pi / &2) < x /\\ x < (pi / &2) /\\ tan(x) = y
-  !y. &0 <= y ==> ?x. &0 <= x /\\ x < pi / &2 /\\ tan(x) = y
+  forall x. abs(x) < pi / &2 ==> abs(x) <= abs(tan x)
+  forall y. ?!x. --(pi / &2) < x /\\ x < (pi / &2) /\\ tan(x) = y
+  forall y. &0 <= y ==> ?x. &0 <= x /\\ x < pi / &2 /\\ tan(x) = y
   atn(y + &1)
-  !y. &0 < y ==> ?x. &0 < x /\\ x < pi / &2 /\\ y < tan(x)
+  forall y. &0 < y ==> ?x. &0 < x /\\ x < pi / &2 /\\ y < tan(x)
   Re(z pow 2) = Re(z) pow 2 - Im(z) pow 2
   Im(z pow 2) = &2 * Re(z) * Im(z)
   casn z = --ii * clog(ii * z + csqrt(Cx(&1) - z pow 2))
   Cx(&1) - z pow 2
-  !z. ~(ii * z + csqrt(Cx(&1) - z pow 2) = Cx(&0))
+  forall z. ~(ii * z + csqrt(Cx(&1) - z pow 2) = Cx(&0))
   Cx(&1) - z pow 2
   ~(z = Cx(&0))\n      ==> ((z - inv z) / (Cx(&2) * ii) = c <=>\n           z pow 2 - Cx(&1) = Cx(&2) * ii * c * z)
-  !z. csin(casn z) = z
+  forall z. csin(casn z) = z
   --(ii * w) = z <=> w = ii * z
   ii * (a - b) / (Cx(&2) * ii) + (a + b) / Cx(&2) = a
   abs(x) = p ==> x = p \\/ x = --p
   &0 < r * inv(&2) \\/ r * inv(&2) = &0 /\\ &0 <= i * inv(&2) <=>\n      &0 < r \\/ r = &0 /\\ &0 <= i
   csqrt(((cexp(ii * z) + inv(cexp(ii * z))) / Cx(&2)) pow 2) =\n    (cexp(ii * z) + inv(cexp(ii * z))) / Cx(&2)
   ~(z = Cx(&0))\n     ==> Cx(&1) - ((z - inv z) / (Cx(&2) * ii)) pow 2 =\n         ((z + inv z) / Cx(&2)) pow 2
-  !z. abs(Re z) < pi / &2 \\/ (abs(Re z) = pi / &2 /\\ Im z = &0)\n       ==> casn(csin z) = z
-  !w z. csin(z) = w /\\\n         (abs(Re z) < pi / &2 \\/ (abs(Re z) = pi / &2 /\\ Im z = &0))\n         ==> casn w = z
+  forall z. abs(Re z) < pi / &2 \\/ (abs(Re z) = pi / &2 /\\ Im z = &0)\n       ==> casn(csin z) = z
+  forall w z. csin(z) = w /\\\n         (abs(Re z) < pi / &2 \\/ (abs(Re z) = pi / &2 /\\ Im z = &0))\n         ==> casn w = z
   casn(Cx(&0)) = Cx(&0)
   casn(Cx(&1)) = Cx(pi / &2)
   casn(--Cx(&1)) = --Cx(pi / &2)
@@ -78420,27 +78420,27 @@ Multivariate/transcendentals quotations (2171):
   ccos z = Cx(&0) ==> csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)\n                          ==> csin(z) pow 2 = Cx(&1)
   ball(z:complex,&1)
   csin
-  !z. (Im z = &0 ==> abs(Re z) < &1)\n       ==> (casn has_complex_derivative inv(ccos(casn z))) (at z)
-  !z. (Im z = &0 ==> abs(Re z) < &1) ==> casn complex_differentiable at z
-  !s z. (Im z = &0 ==> abs(Re z) < &1)\n         ==> casn complex_differentiable (at z within s)
-  !z. (Im z = &0 ==> abs(Re z) < &1) ==> casn continuous at z
-  !s z. (Im z = &0 ==> abs(Re z) < &1) ==> casn continuous (at z within s)
-  !s. (!z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> casn continuous_on s
-  !s. (!z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> casn holomorphic_on s
+  forall z. (Im z = &0 ==> abs(Re z) < &1)\n       ==> (casn has_complex_derivative inv(ccos(casn z))) (at z)
+  forall z. (Im z = &0 ==> abs(Re z) < &1) ==> casn complex_differentiable at z
+  forall s z. (Im z = &0 ==> abs(Re z) < &1)\n         ==> casn complex_differentiable (at z within s)
+  forall z. (Im z = &0 ==> abs(Re z) < &1) ==> casn continuous at z
+  forall s z. (Im z = &0 ==> abs(Re z) < &1) ==> casn continuous (at z within s)
+  forall s. (forall z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> casn continuous_on s
+  forall s. (forall z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> casn holomorphic_on s
   cacs z = --ii * clog(z + ii * csqrt(Cx(&1) - z pow 2))
   Cx(&1) - z pow 2
-  !z. ~(z + ii * csqrt(Cx(&1) - z pow 2) = Cx(&0))
+  forall z. ~(z + ii * csqrt(Cx(&1) - z pow 2) = Cx(&0))
   Cx(&1) - z pow 2
   ~(z = Cx(&0))\n      ==> ((z + inv z) / Cx(&2) = c <=>\n           z pow 2 + Cx(&1) = Cx(&2) * c * z)
-  !z. ccos(cacs z) = z
+  forall z. ccos(cacs z) = z
   --(ii * w) = z <=> w = ii * z
   (e + e') / Cx(&2) + ii * --ii * (e - e') / Cx(&2) = e
   &0 < r * inv(&2) \\/ r * inv(&2) = &0 /\\ &0 <= --(i * inv(&2)) <=>\n      &0 < r \\/ r = &0 /\\ &0 <= --i
   --(x pow 2) = (--ii * x) pow 2
   csqrt(--(((cexp(ii * z) - inv(cexp(ii * z))) / Cx(&2)) pow 2)) =\n    --ii * (cexp(ii * z) - inv(cexp(ii * z))) / Cx(&2)
   ~(z = Cx(&0))\n     ==> Cx(&1) - ((z + inv z) / Cx(&2)) pow 2 =\n         --(((z - inv z) / Cx(&2)) pow 2)
-  !z. &0 < Re z /\\ Re z < pi \\/\n       Re(z) = &0 /\\ &0 <= Im(z) \\/\n       Re(z) = pi /\\ Im(z) <= &0\n       ==> cacs(ccos z) = z
-  !w z.\n       ccos z = w /\\\n       (&0 < Re z /\\ Re z < pi \\/\n        Re(z) = &0 /\\ &0 <= Im(z) \\/\n        Re(z) = pi /\\ Im(z) <= &0)\n       ==> cacs(w) = z
+  forall z. &0 < Re z /\\ Re z < pi \\/\n       Re(z) = &0 /\\ &0 <= Im(z) \\/\n       Re(z) = pi /\\ Im(z) <= &0\n       ==> cacs(ccos z) = z
+  forall w z.\n       ccos z = w /\\\n       (&0 < Re z /\\ Re z < pi \\/\n        Re(z) = &0 /\\ &0 <= Im(z) \\/\n        Re(z) = pi /\\ Im(z) <= &0)\n       ==> cacs(w) = z
   cacs(Cx(&0)) = Cx(pi / &2)
   cacs(Cx(&1)) = Cx(&0)
   cacs(--Cx(&1)) = Cx pi
@@ -78466,13 +78466,13 @@ Multivariate/transcendentals quotations (2171):
   --(csin z) = Cx(&0) ==> csin(z) pow 2 + ccos(z) pow 2 = Cx(&1)\n                              ==> ccos(z) pow 2 = Cx(&1)
   ball(z:complex,&1)
   ccos
-  !z. (Im z = &0 ==> abs(Re z) < &1)\n       ==> (cacs has_complex_derivative --inv(csin(cacs z))) (at z)
-  !z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs complex_differentiable at z
-  !s z. (Im z = &0 ==> abs(Re z) < &1)\n         ==> cacs complex_differentiable (at z within s)
-  !z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous at z
-  !s z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous (at z within s)
-  !s. (!z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous_on s
-  !s. (!z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> cacs holomorphic_on s
+  forall z. (Im z = &0 ==> abs(Re z) < &1)\n       ==> (cacs has_complex_derivative --inv(csin(cacs z))) (at z)
+  forall z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs complex_differentiable at z
+  forall s z. (Im z = &0 ==> abs(Re z) < &1)\n         ==> cacs complex_differentiable (at z within s)
+  forall z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous at z
+  forall s z. (Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous (at z within s)
+  forall s. (forall z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> cacs continuous_on s
+  forall s. (forall z. z IN s /\\ Im z = &0 ==> abs(Re z) < &1) ==> cacs holomorphic_on s
   a < (n + &1 - (b - a)) / &2 <=> (a + b) - &1 < n
   Re(z) pow 2 < &1 pow 2
   &1 - (&0 - z) = &1 + z
@@ -78480,126 +78480,126 @@ Multivariate/transcendentals quotations (2171):
   Re z = &0
   r * i + i * r = &2 * r * i
   &0 < --i + r <=> i < r
-  !z. abs (Re z) < &1 ==> &0 < Re(ii * z + csqrt(Cx(&1) - z pow 2))
+  forall z. abs (Re z) < &1 ==> &0 < Re(ii * z + csqrt(Cx(&1) - z pow 2))
   --z:complex
-  !z. abs(Re z) < &1 ==> &0 < Im(z + ii * csqrt(Cx(&1) - z pow 2))
-  !z. Re(casn z) = Im(clog(ii * z + csqrt(Cx(&1) - z pow 2)))
-  !z. Re(cacs z) = Im(clog(z + ii * csqrt(Cx(&1) - z pow 2)))
-  !z. abs(Re z) < &1 ==> abs(Re(casn z)) < pi / &2
-  !z. abs(Re z) < &1 ==> &0 < Re(cacs z) /\\ Re(cacs z) < pi
-  !z. --pi < Re(cacs z) /\\ Re(cacs z) <= pi
-  !z. abs(Re(cacs z)) <= pi
-  !z. --pi < Re(casn z) /\\ Re(casn z) <= pi
-  !z. abs(Re(casn z)) <= pi
+  forall z. abs(Re z) < &1 ==> &0 < Im(z + ii * csqrt(Cx(&1) - z pow 2))
+  forall z. Re(casn z) = Im(clog(ii * z + csqrt(Cx(&1) - z pow 2)))
+  forall z. Re(cacs z) = Im(clog(z + ii * csqrt(Cx(&1) - z pow 2)))
+  forall z. abs(Re z) < &1 ==> abs(Re(casn z)) < pi / &2
+  forall z. abs(Re z) < &1 ==> &0 < Re(cacs z) /\\ Re(cacs z) < pi
+  forall z. --pi < Re(cacs z) /\\ Re(cacs z) <= pi
+  forall z. abs(Re(cacs z)) <= pi
+  forall z. --pi < Re(casn z) /\\ Re(casn z) <= pi
+  forall z. abs(Re(casn z)) <= pi
   Cx(&1) - z pow 2
   ~(x pow 2 + y pow 2 = Cx(&0)) ==> ~(ii * x = y)
   s pow 2 = Cx(&1) - z pow 2\n               ==> ((ii * z + s) pow 2 = --Cx(&1) <=>\n                    ii * s * z = Cx(&1) - z pow 2)
   ~(x = Cx(&0))\n                          ==> ((x + inv(x)) / Cx(&2) = Cx(&0) <=>\n                                x pow 2 = --Cx(&1))
   --ii * --ii * z = --z
   ii * --ii * z = z
-  !z. ~(z pow 2 = Cx(&1)) ==> ~(ccos(casn z) = Cx(&0))
+  forall z. ~(z pow 2 = Cx(&1)) ==> ~(ccos(casn z) = Cx(&0))
   Cx(&1) - z pow 2
   ~(x pow 2 + y pow 2 = Cx(&0)) ==> ~(ii * x = y)
   s pow 2 = Cx(&1) - z pow 2\n               ==> ((z + ii * s) pow 2 = Cx(&1) <=>\n                    ii * s * z = Cx(&1) - z pow 2)
   ~(x = Cx(&0))\n                          ==> ((x - inv(x)) / (Cx(&2) * ii) = Cx(&0) <=>\n                                x pow 2 = Cx(&1))
   --ii * --ii * z = --z
   ii * --ii * z = z
-  !z. ~(z pow 2 = Cx(&1)) ==> ~(csin(cacs z) = Cx(&0))
+  forall z. ~(z pow 2 = Cx(&1)) ==> ~(csin(cacs z) = Cx(&0))
   x / &2 = &0 <=> x = &0
   x * y <= &0 ==> &0 <= --x * y
-  !z. &0 < cos(Re z) \\/ cos(Re z) = &0 /\\ Im(z) * sin(Re z) <= &0\n       ==> ccos(z) = csqrt(Cx(&1) - csin(z) pow 2)
+  forall z. &0 < cos(Re z) \\/ cos(Re z) = &0 /\\ Im(z) * sin(Re z) <= &0\n       ==> ccos(z) = csqrt(Cx(&1) - csin(z) pow 2)
   x / &2 = &0 <=> x = &0
-  !z. &0 < sin(Re z) \\/ sin(Re z) = &0 /\\ &0 <= Im(z) * cos(Re z)\n       ==> csin(z) = csqrt(Cx(&1) - ccos(z) pow 2)
+  forall z. &0 < sin(Re z) \\/ sin(Re z) = &0 /\\ &0 <= Im(z) * cos(Re z)\n       ==> csin(z) = csqrt(Cx(&1) - ccos(z) pow 2)
   w = z ==> ii * z + s = s + ii * w
-  !z. (&0 < Re z \\/ Re z = &0 /\\ &0 <= Im z)\n       ==> casn(z) = cacs(csqrt(Cx(&1) - z pow 2))
+  forall z. (&0 < Re z \\/ Re z = &0 /\\ &0 <= Im z)\n       ==> casn(z) = cacs(csqrt(Cx(&1) - z pow 2))
   w = z ==> z + ii * s = ii * s + w
-  !z. (&0 < Re z \\/ Re z = &0 /\\ &0 <= Im z)\n       ==> cacs(z) = casn(csqrt(Cx(&1) - z pow 2))
-  !z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im z\n       ==> csin(cacs z) = csqrt(Cx(&1) - z pow 2)
-  !z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im z\n       ==> ccos(casn z) = csqrt(Cx(&1) - z pow 2)
+  forall z. (&0 < Re z \\/ Re z = &0 /\\ &0 <= Im z)\n       ==> cacs(z) = casn(csqrt(Cx(&1) - z pow 2))
+  forall z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im z\n       ==> csin(cacs z) = csqrt(Cx(&1) - z pow 2)
+  forall z. &0 < Re z \\/ Re(z) = &0 /\\ &0 <= Im z\n       ==> ccos(casn z) = csqrt(Cx(&1) - z pow 2)
   asn(x) = Re(casn(Cx x))
   x:real
   Re z
-  !z. real z /\\ abs(Re z) <= &1 ==> real(casn z)
-  !x. abs(x) <= &1 ==> Cx(asn x) = casn(Cx x)
+  forall z. real z /\\ abs(Re z) <= &1 ==> real(casn z)
+  forall x. abs(x) <= &1 ==> Cx(asn x) = casn(Cx x)
   --(&1) <= y /\\ y <= &1 <=> abs(y) <= &1
-  !y. --(&1) <= y /\\ y <= &1 ==> sin(asn(y)) = y
-  !x. --(pi / &2) <= x /\\ x <= pi / &2 ==> asn(sin(x)) = x
+  forall y. --(&1) <= y /\\ y <= &1 ==> sin(asn(y)) = y
+  forall x. --(pi / &2) <= x /\\ x <= pi / &2 ==> asn(sin(x)) = x
   Cx y
-  !y. --(&1) < y /\\ y < &1 ==> --(pi / &2) < asn(y) /\\ asn(y) < pi / &2
+  forall y. --(&1) < y /\\ y < &1 ==> --(pi / &2) < asn(y) /\\ asn(y) < pi / &2
   asn(&0) = &0
   asn(&1) = pi / &2
   asn(-- &1) = --(pi / &2)
   y:real
-  !y. --(&1) <= y /\\ y <= &1 ==> --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2
+  forall y. --(&1) <= y /\\ y <= &1 ==> --(pi / &2) <= asn(y) /\\ asn(y) <= pi / &2
   x:real
   &0 <= x ==> --(&1) <= x
   asn x
   &0
-  !x. &0 <= x /\\ x <= &1 ==> &0 <= asn x /\\ asn x <= pi / &2
+  forall x. &0 <= x /\\ x <= &1 ==> &0 <= asn x /\\ asn x <= pi / &2
   --a <= --x /\\ --x <= a <=> --a <= x /\\ x <= a
-  !x. -- &1 <= x /\\ x <= &1 ==> asn(--x) = --asn(x)
+  forall x. -- &1 <= x /\\ x <= &1 ==> asn(--x) = --asn(x)
   x pow 2 = Cx(&1) <=> x = Cx(&1) \\/ x = --Cx(&1)
   --(&1) < x /\\ x < &1 ==> abs(x) <= &1
-  !x. --(&1) < x /\\ x < &1 ==> ~(cos(asn(x)) = &0)
+  forall x. --(&1) < x /\\ x < &1 ==> ~(cos(asn(x)) = &0)
   sin(asn(x)) < sin(asn(y))
-  !x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (asn(x) < asn(y) <=> x < y)
-  !x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (asn(x) <= asn(y) <=> x <= y)
-  !x y. --(&1) <= x /\\ x < y /\\ y <= &1 ==> asn(x) < asn(y)
-  !x y. --(&1) <= x /\\ x <= y /\\ y <= &1 ==> asn(x) <= asn(y)
-  !x. --(&1) <= x /\\ x <= &1 ==> cos(asn x) = sqrt(&1 - x pow 2)
+  forall x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (asn(x) < asn(y) <=> x < y)
+  forall x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (asn(x) <= asn(y) <=> x <= y)
+  forall x y. --(&1) <= x /\\ x < y /\\ y <= &1 ==> asn(x) < asn(y)
+  forall x y. --(&1) <= x /\\ x <= y /\\ y <= &1 ==> asn(x) <= asn(y)
+  forall x. --(&1) <= x /\\ x <= &1 ==> cos(asn x) = sqrt(&1 - x pow 2)
   acs(x) = Re(cacs(Cx x))
   x:real
   Re z
-  !z. real z /\\ abs(Re z) <= &1 ==> real(cacs z)
-  !x. abs(x) <= &1 ==> Cx(acs x) = cacs(Cx x)
+  forall z. real z /\\ abs(Re z) <= &1 ==> real(cacs z)
+  forall x. abs(x) <= &1 ==> Cx(acs x) = cacs(Cx x)
   --(&1) <= y /\\ y <= &1 <=> abs(y) <= &1
-  !y. --(&1) <= y /\\ y <= &1 ==> cos(acs(y)) = y
-  !x. &0 <= x /\\ x <= pi ==> acs(cos(x)) = x
+  forall y. --(&1) <= y /\\ y <= &1 ==> cos(acs(y)) = y
+  forall x. &0 <= x /\\ x <= pi ==> acs(cos(x)) = x
   Cx y
-  !y. --(&1) < y /\\ y < &1 ==> &0 < acs(y) /\\ acs(y) < pi
+  forall y. --(&1) < y /\\ y < &1 ==> &0 < acs(y) /\\ acs(y) < pi
   acs(&0) = pi / &2
   acs(&1) = &0
   acs(-- &1) = pi
   y:real
-  !y. --(&1) <= y /\\ y <= &1 ==> &0 <= acs(y) /\\ acs(y) <= pi
+  forall y. --(&1) <= y /\\ y <= &1 ==> &0 <= acs(y) /\\ acs(y) <= pi
   &0 <= p - x /\\ p - x <= p <=> &0 <= x /\\ x <= p
   --x + y:real = y - x
-  !x. -- &1 <= x /\\ x <= &1 ==> acs(--x) = pi - acs(x)
+  forall x. -- &1 <= x /\\ x <= &1 ==> acs(--x) = pi - acs(x)
   x pow 2 = Cx(&1) <=> x = Cx(&1) \\/ x = --Cx(&1)
   --(&1) < x /\\ x < &1 ==> abs(x) <= &1
-  !x. --(&1) < x /\\ x < &1 ==> ~(sin(acs(x)) = &0)
+  forall x. --(&1) < x /\\ x < &1 ==> ~(sin(acs(x)) = &0)
   cos(acs(y)) < cos(acs(x))
-  !x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs(x) < acs(y) <=> y < x)
-  !x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs(x) <= acs(y) <=> y <= x)
+  forall x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs(x) < acs(y) <=> y < x)
+  forall x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs(x) <= acs(y) <=> y <= x)
   x:real
   y:real
-  !x y. --(&1) <= x /\\ x < y /\\ y <= &1 ==> acs(y) < acs(x)
+  forall x y. --(&1) <= x /\\ x < y /\\ y <= &1 ==> acs(y) < acs(x)
   x:real
   y:real
-  !x y. --(&1) <= x /\\ x <= y /\\ y <= &1 ==> acs(y) <= acs(x)
-  !x. --(&1) <= x /\\ x <= &1 ==> sin(acs x) = sqrt(&1 - x pow 2)
-  !x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs x = acs y <=> x = y)
+  forall x y. --(&1) <= x /\\ x <= y /\\ y <= &1 ==> acs(y) <= acs(x)
+  forall x. --(&1) <= x /\\ x <= &1 ==> sin(acs x) = sqrt(&1 - x pow 2)
+  forall x y. abs(x) <= &1 /\\ abs(y) <= &1 ==> (acs x = acs y <=> x = y)
   ~(y = &0) /\\ ~(z = &0) ==> (x / (y * z) = &0 <=> x = &0)
   tan(atn(x / sqrt(&1 - x pow 2))) = tan(pi / &2 - acs x)
   abs(x) < pi / &2 /\\ &0 <= y /\\ y <= pi\n    ==> --pi < x - (pi / &2 - y) /\\ x - (pi / &2 - y) < pi
   x:real = p - y <=> y - (p - x) = &0
-  !x. -- &1 < x /\\ x < &1 ==> acs(x) = pi / &2 - atn(x / sqrt(&1 - x pow 2))
+  forall x. -- &1 < x /\\ x < &1 ==> acs(x) = pi / &2 - atn(x / sqrt(&1 - x pow 2))
   &2 * x / &2 = x
   p - x <= p <=> &0 <= x
   --p <= p - x <=> x <= &2 * p
   x + y:real = p <=> x = p - y
-  !x. -- &1 <= x /\\ x <= &1 ==> asn(x) + acs(x) = pi / &2
-  !x. -- &1 <= x /\\ x <= &1 ==> asn(x) = pi / &2 - acs(x)
-  !x. -- &1 <= x /\\ x <= &1 ==> acs(x) = pi / &2 - asn(x)
-  !x. -- &1 < x /\\ x < &1 ==> asn(x) = atn(x / sqrt(&1 - x pow 2))
-  !x. &0 <= x /\\ x <= &1 ==> asn(x) = acs(sqrt(&1 - x pow 2))
+  forall x. -- &1 <= x /\\ x <= &1 ==> asn(x) + acs(x) = pi / &2
+  forall x. -- &1 <= x /\\ x <= &1 ==> asn(x) = pi / &2 - acs(x)
+  forall x. -- &1 <= x /\\ x <= &1 ==> acs(x) = pi / &2 - asn(x)
+  forall x. -- &1 < x /\\ x < &1 ==> asn(x) = atn(x / sqrt(&1 - x pow 2))
+  forall x. &0 <= x /\\ x <= &1 ==> asn(x) = acs(sqrt(&1 - x pow 2))
   (x:real) pow 2 = (--x) pow 2
   x <= &0 ==> x <= &1
   x = --y <=> (--x:real) = y
-  !x. -- &1 <= x /\\ x <= &0 ==> asn(x) = --acs(sqrt(&1 - x pow 2))
-  !x. &0 <= x /\\ x <= &1 ==> acs(x) = asn(sqrt(&1 - x pow 2))
+  forall x. -- &1 <= x /\\ x <= &0 ==> asn(x) = --acs(sqrt(&1 - x pow 2))
+  forall x. &0 <= x /\\ x <= &1 ==> acs(x) = asn(sqrt(&1 - x pow 2))
   --x:real
-  !x. -- &1 <= x /\\ x <= &0 ==> acs(x) = pi - asn(sqrt(&1 - x pow 2))
+  forall x. -- &1 <= x /\\ x <= &0 ==> acs(x) = pi - asn(sqrt(&1 - x pow 2))
   Cx(asn x)
   x:real
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
@@ -78610,7 +78610,7 @@ Multivariate/transcendentals quotations (2171):
   casn continuous_on {w | real w /\\ abs(Re w) <= &1}
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   z IN {w | real w /\\ abs(Re w) <= &1}
-  !z. casn continuous (at z within {w | real w /\\ abs(Re w) <= &1})
+  forall z. casn continuous (at z within {w | real w /\\ abs(Re w) <= &1})
   Cx(acs x)
   x:real
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
@@ -78621,7 +78621,7 @@ Multivariate/transcendentals quotations (2171):
   cacs continuous_on {w | real w /\\ abs(Re w) <= &1}
   {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
   z IN {w | real w /\\ abs(Re w) <= &1}
-  !z. cacs continuous (at z within {w | real w /\\ abs(Re w) <= &1})
+  forall z. cacs continuous (at z within {w | real w /\\ abs(Re w) <= &1})
   &1 <= x ==> &0 < x
   &1 <= x /\\ &1 + x / &2 <= y ==> abs x / &2 < y
   x / e < y * y <=> x / &2 * &2 / e < y * y
@@ -78654,11 +78654,11 @@ Multivariate/transcendentals quotations (2171):
   B:real
   Re s * e
   e:real
-  !s. &0 < Re s\n       ==> ((\\x. clog(Cx x) / (Cx x) cpow s) --> Cx(&0)) at_posinfinity
+  forall s. &0 < Re s\n       ==> ((\\x. clog(Cx x) / (Cx x) cpow s) --> Cx(&0)) at_posinfinity
   &1
   Cx(&1)
   ((\\x. clog(Cx x) / Cx x) --> Cx(&0)) at_posinfinity
-  !s. &0 < Re s\n       ==> ((\\n. clog(Cx(&n)) / Cx(&n) cpow s) --> Cx(&0)) sequentially
+  forall s. &0 < Re s\n       ==> ((\\n. clog(Cx(&n)) / Cx(&n) cpow s) --> Cx(&0)) sequentially
   1 <= n <=> ~(n = 0)
   1
   Cx(&1)
@@ -78670,29 +78670,29 @@ Multivariate/transcendentals quotations (2171):
   N:num
   exp(&1)
   \\n. clog(Cx(&n)) / Cx(&n) cpow s
-  !s. &0 < Re s\n       ==> ((\\n. Cx(&1) / Cx(&n) cpow s) --> Cx(&0)) sequentially
+  forall s. &0 < Re s\n       ==> ((\\n. Cx(&1) / Cx(&n) cpow s) --> Cx(&0)) sequentially
   ~(Cx(&1) + Cx(&0) * z = Cx(&0))
   Cx(&0) = Cx(&0) / (Cx(&1) + Cx(&0) * z)
   ~(w = Cx(&0)) ==> inv w + z = (Cx(&1) + w * z) / w
-  !z. ((\\w. inv(w + z)) --> Cx(&0)) at_infinity
+  forall z. ((\\w. inv(w + z)) --> Cx(&0)) at_infinity
   inv z = inv(z + Cx(&0))
   ((\\z. inv(z)) --> Cx(&0)) at_infinity
-  !z. ((\\x. inv(Cx x + z)) --> Cx(&0)) at_posinfinity
+  forall z. ((\\x. inv(Cx x + z)) --> Cx(&0)) at_posinfinity
   ((\\x. inv(Cx x)) --> Cx(&0)) at_posinfinity
-  !z. ((\\n. inv(Cx(&n) + z)) --> Cx(&0)) sequentially
+  forall z. ((\\n. inv(Cx(&n) + z)) --> Cx(&0)) sequentially
   1 <= n <=> ~(n = 0)
   1
   Cx(&1)
   ((\\n. Cx(&1) / Cx(&n)) --> Cx(&0)) sequentially
   ((\\n. inv(Cx(&n))) --> Cx(&0)) sequentially
   Cx(&0) = Cx(&0) pow n
-  !z n. 1 <= n ==> ((\\w. inv(w + z) pow n) --> Cx(&0)) at_infinity
+  forall z n. 1 <= n ==> ((\\w. inv(w + z) pow n) --> Cx(&0)) at_infinity
   Cx(&0) = Cx(&0) pow n
-  !n. 1 <= n ==> ((\\z. inv(z) pow n) --> Cx(&0)) at_infinity
-  !z n. 1 <= n ==> ((\\x. inv(Cx x + z) pow n) --> Cx(&0)) at_posinfinity
-  !n. 1 <= n ==> ((\\x. inv(Cx x) pow n) --> Cx(&0)) at_posinfinity
-  !z m. 1 <= m ==> ((\\n. inv(Cx(&n) + z) pow m) --> Cx(&0)) sequentially
-  !m. 1 <= m ==> ((\\n. inv(Cx(&n)) pow m) --> Cx(&0)) sequentially
+  forall n. 1 <= n ==> ((\\z. inv(z) pow n) --> Cx(&0)) at_infinity
+  forall z n. 1 <= n ==> ((\\x. inv(Cx x + z) pow n) --> Cx(&0)) at_posinfinity
+  forall n. 1 <= n ==> ((\\x. inv(Cx x) pow n) --> Cx(&0)) at_posinfinity
+  forall z m. 1 <= m ==> ((\\n. inv(Cx(&n) + z) pow m) --> Cx(&0)) sequentially
+  forall m. 1 <= m ==> ((\\n. inv(Cx(&n)) pow m) --> Cx(&0)) sequentially
   a < x ==> a < abs x
   0 < n
   n:num
@@ -78714,12 +78714,12 @@ Multivariate/transcendentals quotations (2171):
   N1:num
   log(inv(norm(z:complex))) / &2
   z = Cx(&0)
-  !z. norm(z) < &1 ==> ((\\n. Cx(&n) * z pow n) --> Cx(&0)) sequentially
-  !z. &1 < norm(z) ==> ((\\n. Cx(&n) / z pow n) --> Cx(&0)) sequentially
+  forall z. norm(z) < &1 ==> ((\\n. Cx(&n) * z pow n) --> Cx(&0)) sequentially
+  forall z. &1 < norm(z) ==> ((\\n. Cx(&n) / z pow n) --> Cx(&0)) sequentially
   a <= n * a <=> &0 <= (n - &1) * a
   1
   \\n. Cx(&n) * z pow n
-  !z. norm(z) < &1 ==> ((\\n. z pow n) --> Cx(&0)) sequentially
+  forall z. norm(z) < &1 ==> ((\\n. z pow n) --> Cx(&0)) sequentially
   z:complex
   0
   ~(z = Cx(&0)) ==> z * (s / z - Cx(&1)) = s - z
@@ -78729,32 +78729,32 @@ Multivariate/transcendentals quotations (2171):
   \\z. cexp(Cx(abs(Im z))) * z pow 2 / Cx(&2)
   ((\\z. csin z / z) --> Cx(&1)) (at (Cx(&0)))
   1 <= n /\\ 1 <= i /\\ i <= n - 1\n                           ==> ~(i = n)
-  !n z a.\n        1 <= n\n        ==> (z pow n = a <=>\n             vsum(0..n) (\\i. (if i = 0 then --a else if i = n then Cx(&1)\n                              else Cx(&0)) * z pow i) = Cx(&0))
+  forall n z a.\n        1 <= n\n        ==> (z pow n = a <=>\n             vsum(0..n) (\\i. (if i = 0 then --a else if i = n then Cx(&1)\n                              else Cx(&0)) * z pow i) = Cx(&0))
   ~(n = Cx(&0)) ==> n * t * p * ii * j * inv(n) = j * (ii * t * p)
-  !n j. ~(n = 0)\n         ==> cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) pow n = Cx(&1)
+  forall n j. ~(n = 0)\n         ==> cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) pow n = Cx(&1)
   ~(n = &0) ==> (j / n - k / n = m <=> j - k = n * m)
   t * p * ii * j = t * p * ii * k + (t * n * p) * ii <=>\n        (t * p * ii = Cx(&0)) \\/ j - k = n
-  !n j k. ~(n = 0)\n           ==> (cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) =\n                cexp(Cx(&2) * Cx pi * ii * Cx(&k / &n)) <=> (j == k) (mod n))
+  forall n j k. ~(n = 0)\n           ==> (cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) =\n                cexp(Cx(&2) * Cx pi * ii * Cx(&k / &n)) <=> (j == k) (mod n))
   t * p * ii = ii * t * p
   Cx(&1) = cexp(Cx(&2) * Cx pi * ii * Cx(&n / &n))
-  !n j. ~(n = 0)\n         ==> (cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) = Cx(&1) <=>\n              n divides j)
+  forall n j. ~(n = 0)\n         ==> (cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) = Cx(&1) <=>\n              n divides j)
   n:num
-  !n. 1 <= n\n       ==> FINITE {z | z pow n = Cx(&1)} /\\ CARD {z | z pow n = Cx(&1)} <= n
-  !n. ~(n = 0) ==> FINITE {z | z pow n = Cx(&1)}
+  forall n. 1 <= n\n       ==> FINITE {z | z pow n = Cx(&1)} /\\ CARD {z | z pow n = Cx(&1)} <= n
+  forall n. ~(n = 0) ==> FINITE {z | z pow n = Cx(&1)}
   &n:int = &0 \\/ &0:int < &n
   n * x:int < n <=> n * x < n * &1
   d:int
   x < y + n /\\ y < x + n <=> abs(x - y:int) < n
-  !x y n:num. (x == y) (mod n) /\\ x < y + n /\\ y < x + n ==> x = y
+  forall x y n:num. (x == y) (mod n) /\\ x < y + n /\\ y < x + n ==> x = y
   n:num
-  !n. 1 <= n\n       ==> FINITE {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n} /\\\n           CARD {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n} = n
-  !n. 1 <= n\n       ==> {z | z pow n = Cx(&1)} =\n           {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n}
-  !n. 1 <= n ==> CARD {z | z pow n = Cx(&1)} = n
-  !n. 1 <= n ==> {z | z pow n = Cx(&1)} HAS_SIZE n
+  forall n. 1 <= n\n       ==> FINITE {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n} /\\\n           CARD {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n} = n
+  forall n. 1 <= n\n       ==> {z | z pow n = Cx(&1)} =\n           {cexp(Cx(&2) * Cx pi * ii * Cx(&j / &n)) | j | j < n}
+  forall n. 1 <= n ==> CARD {z | z pow n = Cx(&1)} = n
+  forall n. 1 <= n ==> {z | z pow n = Cx(&1)} HAS_SIZE n
   ~(n = Cx(&0)) ==> n * p * i * Cx(&1) / n = i * p
   u : complex
   u = cexp (Cx pi * ii * Cx (&1 / &n))
-  !n. 1 <= n ==> ?u. norm u = &1 /\\ ~(u pow n = Cx(&1))
+  forall n. 1 <= n ==> ?u. norm u = &1 /\\ ~(u pow n = Cx(&1))
   w = z ==> --pi + x = w ==> x = z + pi
   Im
   inv(--Cx(&1)) * z / w = --z / w
@@ -78764,13 +78764,13 @@ Multivariate/transcendentals quotations (2171):
   ~(z = Cx(&0)) ==> (w = z * a <=> a = w / z)
   z:complex
   z = Cx(&0)
-  !z. &0 < Arg z ==> Arg z = Im(clog(--z)) + pi
+  forall z. &0 < Arg z ==> Arg z = Im(clog(--z)) + pi
   (\\z. Cx(Im(f z) + pi)) = (Cx o Im) o (\\z. f z + ii * Cx pi)
   {z | P z /\\ Q z} = P INTER {z | Q z}
   (:complex) DIFF {z | real z /\\ &0 <= Re z}
   \\z. Cx(Im(clog(--z)) + pi)
-  !z. ~(real z /\\ &0 <= Re z) ==> (Cx o Arg) continuous (at z)
-  !s. (!z. z IN s /\\ real z ==> Re z < &0) ==> (Cx o Arg) continuous_on s
+  forall z. ~(real z /\\ &0 <= Re z) ==> (Cx o Arg) continuous (at z)
+  forall s. (forall z. z IN s /\\ real z ==> Re z < &0) ==> (Cx o Arg) continuous_on s
   w:complex
   &0 < Arg w
   w' = p + w ==> abs(w' - p) < e ==> abs(w - &0) < e
@@ -78788,10 +78788,10 @@ Multivariate/transcendentals quotations (2171):
   ~(z = Cx(&0))
   ~(Re z = &0)
   real z /\\ &0 <= Re z
-  !z. ~(z = Cx(&0))\n       ==> (Cx o Arg) continuous (at z) within {z | &0 <= Im z}
+  forall z. ~(z = Cx(&0))\n       ==> (Cx o Arg) continuous (at z) within {z | &0 <= Im z}
   z:complex
   (Cx o Arg) continuous_on ({z | &0 <= Im z} DIFF {Cx(&0)})
-  !s. s INTER {z | &0 <= Im z} UNION s INTER {z | Im z <= &0} = s
+  forall s. s INTER {z | &0 <= Im z} UNION s INTER {z | Im z <= &0} = s
   &2 * x - x = x
   cnj z
   z:complex
@@ -78800,75 +78800,75 @@ Multivariate/transcendentals quotations (2171):
   Arg z = &0
   z:complex
   \\z. if &0 <= Im z then p(Arg z)\n        else p(&2 * pi - Arg(cnj z)):real^N
-  !s p:real->real^N.\n        (p o drop) continuous_on interval[vec 0,lift(&2 * pi)] /\\\n        p(&2 * pi) = p(&0) /\\ ~(Cx(&0) IN s)\n        ==> (\\z. p(Arg z)) continuous_on s
+  forall s p:real->real^N.\n        (p o drop) continuous_on interval[vec 0,lift(&2 * pi)] /\\\n        p(&2 * pi) = p(&0) /\\ ~(Cx(&0) IN s)\n        ==> (\\z. p(Arg z)) continuous_on s
   {z | P z /\\ Q z} = P INTER {z | Q z}
   {z | Re(z) > s} INTER {z | Re(z) < t}
   (:complex) DIFF {z | real z /\\ &0 <= Re z}
   Cx o Arg
-  !s t. &0 <= s /\\ t <= &2 * pi ==> open {z | s < Arg z /\\ Arg z < t}
+  forall s t. &0 <= s /\\ t <= &2 * pi ==> open {z | s < Arg z /\\ Arg z < t}
   &2 * pi
   t:real
   {z | t < Arg z} = (:complex)
   t < &0 \\/ &0 <= t
-  !t. open {z | t < Arg z}
-  !t. closed {z | Arg z <= t}
+  forall t. open {z | t < Arg z}
+  forall t. closed {z | Arg z <= t}
   &0 < Im z
   sqrt(&1 + (Re z / Im z) pow 2) = norm(z) / Im z
   Re z / Im z
   norm(z:complex)
   z = Cx(&0)
-  !z. &0 < Im z ==> Arg(z) = pi / &2 - atn(Re z / Im z)
+  forall z. &0 < Im z ==> Arg(z) = pi / &2 - atn(Re z / Im z)
   root(n) x = real_sgn(x) * exp(log(abs x) / &n)
-  !n. root n (&0) = &0
-  !n. root n (&1) = &1
+  forall n. root n (&0) = &0
+  forall n. root n (&1) = &1
   &0 < abs x <=> ~(x = &0)
   &2 * x / &2 = x
   x = &0
   (&0 < abs x <=> ~(x = &0)) /\\ ~(abs x < &0)
-  !x. root 2 x = sqrt x
-  !n x. root n (--x) = --(root n x)
+  forall x. root 2 x = sqrt x
+  forall n x. root n (--x) = --(root n x)
   x = &0
-  !n x. real_sgn(root n x) = real_sgn x /\\\n         (root n x) pow n = if n = 0 then &1\n                            else real_sgn(x) pow n * abs x
+  forall n x. real_sgn(root n x) = real_sgn x /\\\n         (root n x) pow n = if n = 0 then &1\n                            else real_sgn(x) pow n * abs x
   x = &0
   x = &0
   n = 0
-  !n x. ODD n \\/ ~(n = 0) /\\ &0 <= x ==> (root n x) pow n = x
-  !n x. &0 < x ==> &0 < root n x
-  !n x. &0 <= x ==> &0 <= root n x
+  forall n x. ODD n \\/ ~(n = 0) /\\ &0 <= x ==> (root n x) pow n = x
+  forall n x. &0 < x ==> &0 < root n x
+  forall n x. &0 <= x ==> &0 <= root n x
   x <= &0 <=> &0 <= --x
-  !n x. &0 < root n x <=> &0 < x
+  forall n x. &0 < root n x <=> &0 < x
   x < &0 <=> &0 < --x
-  !n x. &0 <= root n x <=> &0 <= x
-  !n x. root n x = &0 <=> x = &0
+  forall n x. &0 <= root n x <=> &0 <= x
+  forall n x. root n x = &0 <=> x = &0
   y = &0
   x = &0
-  !n x y. root n (x * y) = root n x * root n y
-  !m n x. root n (x pow m) = (root n x) pow m
-  !n x. ODD n \\/ ~(n = 0) /\\ &0 <= x ==> root n (x pow n) = x
+  forall n x y. root n (x * y) = root n x * root n y
+  forall m n x. root n (x pow m) = (root n x) pow m
+  forall n x. ODD n \\/ ~(n = 0) /\\ &0 <= x ==> root n (x pow n) = x
   (y:real) pow n = x
-  !n x y. y pow n = x /\\ (ODD n \\/ ~(n = 0) /\\ &0 <= y) ==> root n x = y
+  forall n x y. y pow n = x /\\ (ODD n \\/ ~(n = 0) /\\ &0 <= y) ==> root n x = y
   x = &0
-  !n x. root n (inv x) = inv(root n x)
-  !n x y. root n (x / y) = root n x / root n y
+  forall n x. root n (inv x) = inv(root n x)
+  forall n x y. root n (x / y) = root n x / root n y
   --x:real
   --y:real
   &0
   &0 <= y
   &0 <= x
   n:num
-  !x y. &0 <= x /\\ x < y ==> root n x < root n y
-  !n x y. ~(n = 0) /\\ x < y ==> root n x < root n y
+  forall x y. &0 <= x /\\ x < y ==> root n x < root n y
+  forall n x y. ~(n = 0) /\\ x < y ==> root n x < root n y
   n = 0
-  !n x y. x <= y ==> root n x <= root n y
-  !n x y. ~(n = 0) ==> (root n x < root n y <=> x < y)
-  !n x y. ~(n = 0) ==> (root n x <= root n y <=> x <= y)
-  !n x y. ~(n = 0) ==> (root n x = root n y <=> x = y)
-  !n x y. ~(n = 0) /\\ &0 <= y\n           ==> (root n x <= y <=> x <= y pow n)
-  !n x y. ~(n = 0) /\\ &0 <= x\n           ==> (x <= root n y <=> x pow n <= y)
-  !n x. ~(n = 0) /\\ &0 < x ==> log(root n x) = log x / &n
-  !n x. ~(n = 0) /\\ &0 < x ==> root n x = exp(log x / &n)
-  !n f s. FINITE s ==> root n (product s f) = product s (\\i. root n (f i))
-  !f s. FINITE s ==> sqrt(product s f) = product s (\\i. sqrt(f i))
+  forall n x y. x <= y ==> root n x <= root n y
+  forall n x y. ~(n = 0) ==> (root n x < root n y <=> x < y)
+  forall n x y. ~(n = 0) ==> (root n x <= root n y <=> x <= y)
+  forall n x y. ~(n = 0) ==> (root n x = root n y <=> x = y)
+  forall n x y. ~(n = 0) /\\ &0 <= y\n           ==> (root n x <= y <=> x <= y pow n)
+  forall n x y. ~(n = 0) /\\ &0 <= x\n           ==> (x <= root n y <=> x pow n <= y)
+  forall n x. ~(n = 0) /\\ &0 < x ==> log(root n x) = log x / &n
+  forall n x. ~(n = 0) /\\ &0 < x ==> root n x = exp(log x / &n)
+  forall n f s. FINITE s ==> root n (product s f) = product s (\\i. root n (f i))
+  forall f s. FINITE s ==> sqrt(product s f) = product s (\\i. sqrt(f i))
   x rpow y = if &0 < x then exp(y * log x)\n               else if x = &0 then if y = &0 then &1 else &0\n               else if ?m n. ODD(m) /\\ ODD(n) /\\ (abs y = &m / &n)\n                    then --(exp(y * log(--x)))\n                    else exp(y * log(--x))
   1
   n:num
@@ -78876,92 +78876,92 @@ Multivariate/transcendentals quotations (2171):
   q = 0
   (?p q. ODD(p) /\\ ODD(q) /\\ &n = &p / &q) <=> ODD n
   ~(&0 < x) /\\ ~(x = &0) ==> &0 < --x
-  !x n. x rpow &n = x pow n
-  !x. x rpow &0 = &1
-  !x y. x rpow (--y) = inv(x rpow y)
-  !y. &0 rpow y = if y = &0 then &1 else &0
-  !x y. &0 < x ==> &0 < x rpow y
+  forall x n. x rpow &n = x pow n
+  forall x. x rpow &0 = &1
+  forall x y. x rpow (--y) = inv(x rpow y)
+  forall y. &0 rpow y = if y = &0 then &1 else &0
+  forall x y. &0 < x ==> &0 < x rpow y
   x = &0
-  !x y. &0 <= x ==> &0 <= x rpow y
+  forall x y. &0 <= x ==> &0 <= x rpow y
   F ==> p
   &0 < x /\\ &0 < y
   x = &0
-  !x y z. &0 <= x /\\ x < y /\\ &0 < z ==> x rpow z < y rpow z
+  forall x y z. &0 <= x /\\ x < y /\\ &0 < z ==> x rpow z < y rpow z
   x:real = y
   z = &0
-  !x y z. &0 <= x /\\ x <= y /\\ &0 <= z ==> x rpow z <= y rpow z
+  forall x y z. &0 <= x /\\ x <= y /\\ &0 <= z ==> x rpow z <= y rpow z
   &0 < x ==> abs x = x
   x = &0
-  !x y. abs(x rpow y) = abs(x) rpow y
-  !z. &1 rpow z = &1
+  forall x y. abs(x rpow y) = abs(x) rpow y
+  forall z. &1 rpow z = &1
   y = &0
   x = &0
-  !x y z. &0 <= x ==> x rpow y rpow z = x rpow (y * z)
+  forall x y z. &0 <= x ==> x rpow y rpow z = x rpow (y * z)
   &0 < x
   ~(x = &0) ==> (&0 < --x <=> ~(&0 < x))
   abs(&0) = m / n <=> m * inv n = &0
   y = &0
   x = &0
-  !x y. --x rpow y =\n         if ?m n. ODD m /\\ ODD n /\\ abs y = &m / &n\n         then --(x rpow y) else x rpow y
+  forall x y. --x rpow y =\n         if ?m n. ODD m /\\ ODD n /\\ abs y = &m / &n\n         then --(x rpow y) else x rpow y
   x = &0
-  !x y. x rpow y = &0 <=> x = &0 /\\ ~(y = &0)
+  forall x y. x rpow y = &0 <=> x = &0 /\\ ~(y = &0)
   &0 <= x /\\ &0 <= y \\/ &0 <= x /\\ &0 <= --y \\/\n                  &0 <= --x /\\ &0 <= y \\/ &0 <= --x /\\ &0 <= --y
   z:real
   y = &0
   x = &0
   z = &0
-  !x y z. &0 <= x /\\ &0 <= y ==> (x * y) rpow z = x rpow z * y rpow z
-  !x y z. (x * y) rpow z = x rpow z * y rpow z
+  forall x y z. &0 <= x /\\ &0 <= y ==> (x * y) rpow z = x rpow z * y rpow z
+  forall x y z. (x * y) rpow z = x rpow z * y rpow z
   ~(&0 < x) /\\ ~(x = &0) ==> &0 < --x
-  !x y. inv(x) rpow y = inv(x rpow y)
-  !x y. inv(x rpow y) = inv(x) rpow y
-  !x y z. (x / y) rpow z = x rpow z / y rpow z
-  !s:A->bool x y.\n      FINITE s ==> (product s x) rpow y = product s (\\i. x i rpow y)
-  !x y z. &0 < x ==> x rpow (y + z) = x rpow y * x rpow z
-  !x y z. &0 < x ==> x rpow (y - z) = x rpow y / x rpow z
+  forall x y. inv(x) rpow y = inv(x rpow y)
+  forall x y. inv(x rpow y) = inv(x) rpow y
+  forall x y z. (x / y) rpow z = x rpow z / y rpow z
+  forall s:A->bool x y.\n      FINITE s ==> (product s x) rpow y = product s (\\i. x i rpow y)
+  forall x y z. &0 < x ==> x rpow (y + z) = x rpow y * x rpow z
+  forall x y z. &0 < x ==> x rpow (y - z) = x rpow y / x rpow z
   y + z = &0
   y = &0
   x = &0
-  !x y z. &0 <= x /\\ (x = &0 /\\ y + z = &0 ==> y = &0 \\/ z = &0)\n           ==> x rpow (y + z) = x rpow y * x rpow z
-  !x y z. &0 <= x /\\ (x = &0 /\\ y = z ==> y = &0 \\/ z = &0)\n           ==> x rpow (y - z) = x rpow y / x rpow z
+  forall x y z. &0 <= x /\\ (x = &0 /\\ y + z = &0 ==> y = &0 \\/ z = &0)\n           ==> x rpow (y + z) = x rpow y * x rpow z
+  forall x y z. &0 <= x /\\ (x = &0 /\\ y = z ==> y = &0 \\/ z = &0)\n           ==> x rpow (y - z) = x rpow y / x rpow z
   &0 <= x /\\ &0 <= y ==> x + y = &0 ==> x = &0 /\\ y = &0
   x pow 2 = y pow 2 /\\ (x + y = &0 ==> x = &0 /\\ y = &0)\n    ==> x = y
-  !x. &0 <= x ==> x rpow (&1 / &2) = sqrt x
+  forall x. &0 <= x ==> x rpow (&1 / &2) = sqrt x
   &1 <= x ==> &0 < x
-  !a b x. &1 <= x /\\ a <= b ==> x rpow a <= x rpow b
+  forall a b x. &1 <= x /\\ a <= b ==> x rpow a <= x rpow b
   &1 < x ==> &0 < x
-  !a b x. &1 < x /\\ a < b ==> x rpow a < x rpow b
-  !a b x. &1 < x ==> (x rpow a <= x rpow b <=> a <= b)
-  !a b x. &1 < x ==> (x rpow a < x rpow b <=> a < b)
+  forall a b x. &1 < x /\\ a < b ==> x rpow a < x rpow b
+  forall a b x. &1 < x ==> (x rpow a <= x rpow b <=> a <= b)
+  forall a b x. &1 < x ==> (x rpow a < x rpow b <=> a < b)
   x = &1 \\/ &1 < x \\/ x < &1
-  !x y z. &0 < x ==> (x rpow y = x rpow z <=> x = &1 \\/ y = z)
-  !x y. &1 <= x /\\ &0 <= y ==> &1 <= x rpow y
-  !x y. &1 < x /\\ &0 < y ==> &1 < x rpow y
-  !a b x. &0 < x /\\ x <= &1 /\\ b <= a ==> x rpow a <= x rpow b
+  forall x y z. &0 < x ==> (x rpow y = x rpow z <=> x = &1 \\/ y = z)
+  forall x y. &1 <= x /\\ &0 <= y ==> &1 <= x rpow y
+  forall x y. &1 < x /\\ &0 < y ==> &1 < x rpow y
+  forall a b x. &0 < x /\\ x <= &1 /\\ b <= a ==> x rpow a <= x rpow b
   &1 rpow a
-  !a x. &0 <= x /\\ x <= &1 /\\ &0 <= a ==> x rpow a <= &1
+  forall a x. &0 <= x /\\ x <= &1 /\\ &0 <= a ==> x rpow a <= &1
   --x:real = y <=> x = --y
   ~(n = &0) ==> n * &1 / n * x = x
   inv x = &1 / x
   &0 <= x
   x = &0
-  !n x. ~(n = 0) /\\ (&0 <= x \\/ ODD n) ==> root n x = x rpow (inv(&n))
-  !x y. &0 < x ==> log(x rpow y) = y * log x
-  !x. &0 < x ==> log(sqrt x) = log x / &2
+  forall n x. ~(n = 0) /\\ (&0 <= x \\/ ODD n) ==> root n x = x rpow (inv(&n))
+  forall x y. &0 < x ==> log(x rpow y) = y * log x
+  forall x. &0 < x ==> log(sqrt x) = log x / &2
   ~(p:num <= q) ==> q <= p
   --x + y:real = y - x
   q:num
   p:num
   x = &0
-  !x m n. integer m /\\ integer n /\\ ~(x = &0 /\\ m + n = &0 /\\ ~(n = &0))\n            ==> x rpow (m + n) = x rpow m * x rpow n
+  forall x m n. integer m /\\ integer n /\\ ~(x = &0 /\\ m + n = &0 /\\ ~(n = &0))\n            ==> x rpow (m + n) = x rpow m * x rpow n
   w = Cx(&0)
-  !w z. real w /\\ &0 < Re w ==> norm(w cpow z) = norm(w) rpow (Re z)
+  forall w z. real w /\\ &0 < Re w ==> norm(w cpow z) = norm(w) rpow (Re z)
   max x y:real = if x <= y then y else x
   max x y:real = max y x
-  !x y z. &0 <= x /\\ &0 <= y /\\ &0 <= z\n           ==> max (x rpow z) (y rpow z) = (max x y) rpow z
+  forall x y z. &0 <= x /\\ &0 <= y /\\ &0 <= z\n           ==> max (x rpow z) (y rpow z) = (max x y) rpow z
   min x y:real = if x <= y then x else y
   min x y:real = min y x
-  !x y z. &0 <= x /\\ &0 <= y /\\ &0 <= z\n           ==> min (x rpow z) (y rpow z) = (min x y) rpow z
+  forall x y z. &0 <= x /\\ &0 <= y /\\ &0 <= z\n           ==> min (x rpow z) (y rpow z) = (min x y) rpow z
   &1 - x <= &1 <=> &0 <= x
   a / b <= inv b <=> a * inv b <= &1 * inv b
   x = &1 ==> &1 <= x
@@ -78985,16 +78985,16 @@ Multivariate/transcendentals quotations (2171):
   Re z
   \\k. Cx(inv(&k rpow (Re z)))
   1
-  !n z. &1 < Re z ==> summable (from n) (\\k. inv(Cx(&k) cpow z))
+  forall n z. &1 < Re z ==> summable (from n) (\\k. inv(Cx(&k) cpow z))
   2 <= n ==> 1 < n
   Cx(&m)
   1
   1
-  !n m. 2 <= m ==> summable (from n) (\\k. inv(Cx(&k) pow m))
+  forall n m. 2 <= m ==> summable (from n) (\\k. inv(Cx(&k) pow m))
   &2 * pi * n = &2 * n * pi
   {z:complex | norm z = &1}
-  !f:complex->real^N g s.\n        homotopic_with (\\h. T)\n          (subtopology euclidean (sphere(vec 0,&1)),subtopology euclidean s)\n          f g\n        ==> homotopic_loops s (f o cexp o (\\t. Cx(&2 * pi * drop t) * ii))\n                              (g o cexp o (\\t. Cx(&2 * pi * drop t) * ii))
-  !s. s INTER (UNIV PCROSS {z | &0 <= Im z}) UNION\n         s INTER (UNIV PCROSS {z | Im z <= &0}) = s
+  forall f:complex->real^N g s.\n        homotopic_with (\\h. T)\n          (subtopology euclidean (sphere(vec 0,&1)),subtopology euclidean s)\n          f g\n        ==> homotopic_loops s (f o cexp o (\\t. Cx(&2 * pi * drop t) * ii))\n                              (g o cexp o (\\t. Cx(&2 * pi * drop t) * ii))
+  forall s. s INTER (UNIV PCROSS {z | &0 <= Im z}) UNION\n         s INTER (UNIV PCROSS {z | Im z <= &0}) = s
   &0 < &2 * x <=> &0 < x
   IMAGE h s SUBSET t ==> y IN s ==> h y IN t
   &0 < &2 * x <=> &0 < x
@@ -79016,7 +79016,7 @@ Multivariate/transcendentals quotations (2171):
   (\\z. if &0 <= Im(sndcart z)\n           then h (pastecart (fstcart z) (lift(Arg(sndcart z) / (&2 * pi))))\n           else h (pastecart (fstcart z)\n                             (vec 1 - lift(Arg(cnj(sndcart z)) / (&2 * pi)))))\n      :real^(1,2)finite_sum->real^N
   \\w. (h:real^(1,1)finite_sum->real^N)\n                  (pastecart (fstcart w)\n                             (lift(Arg(sndcart w) / (&2 * pi))))
   h:real^(1,1)finite_sum->real^N
-  !p q s:real^N->bool.\n        homotopic_loops s p q\n        ==> homotopic_with (\\h. T)\n             (subtopology euclidean (sphere(vec 0,&1)),subtopology euclidean s)\n                                   (p o (\\z. lift(Arg z / (&2 * pi))))\n                                   (q o (\\z. lift(Arg z / (&2 * pi))))
+  forall p q s:real^N->bool.\n        homotopic_loops s p q\n        ==> homotopic_with (\\h. T)\n             (subtopology euclidean (sphere(vec 0,&1)),subtopology euclidean s)\n                                   (p o (\\z. lift(Arg z / (&2 * pi))))\n                                   (q o (\\z. lift(Arg z / (&2 * pi))))
   a < &2 * pi <=> a < &2 * pi * &1
   Im(Cx (&2 * pi * t) * ii)
   &0 < pi ==> (t = x / (&2 * pi) <=> x = &2 * pi * t)
@@ -79044,8 +79044,8 @@ Multivariate/transcendentals quotations (2171):
   g:complex->real^N
   f:complex->real^N
   (p ==> q) /\\ (q ==> r) /\\ (r ==> p) ==> (p <=> q) /\\ (p <=> r)
-  (!s:real^N->bool.\n        simply_connected s <=>\n        !f g:complex->real^N.\n              f continuous_on sphere(vec 0,&1) /\\\n              IMAGE f (sphere(vec 0,&1)) SUBSET s /\\\n              g continuous_on sphere(vec 0,&1) /\\\n              IMAGE g (sphere(vec 0,&1)) SUBSET s\n              ==> homotopic_with (\\h. T)\n                   (subtopology euclidean (sphere(vec 0,&1)),\n                    subtopology euclidean s) f g) /\\\n   (!s:real^N->bool.\n      simply_connected s <=>\n      path_connected s /\\\n      !f:real^2->real^N.\n              f continuous_on sphere(vec 0,&1) /\\\n              IMAGE f (sphere(vec 0,&1)) SUBSET s\n              ==> ?a. homotopic_with (\\h. T)\n                       (subtopology euclidean (sphere(vec 0,&1)),\n                        subtopology euclidean s) f (\\x. a))
-  !s:real^M->bool t:real^N->bool.\n        s homotopy_equivalent t\n        ==> (simply_connected s <=> simply_connected t)
+  (forall s:real^N->bool.\n        simply_connected s <=>\n        forall f g:complex->real^N.\n              f continuous_on sphere(vec 0,&1) /\\\n              IMAGE f (sphere(vec 0,&1)) SUBSET s /\\\n              g continuous_on sphere(vec 0,&1) /\\\n              IMAGE g (sphere(vec 0,&1)) SUBSET s\n              ==> homotopic_with (\\h. T)\n                   (subtopology euclidean (sphere(vec 0,&1)),\n                    subtopology euclidean s) f g) /\\\n   (forall s:real^N->bool.\n      simply_connected s <=>\n      path_connected s /\\\n      forall f:real^2->real^N.\n              f continuous_on sphere(vec 0,&1) /\\\n              IMAGE f (sphere(vec 0,&1)) SUBSET s\n              ==> ?a. homotopic_with (\\h. T)\n                       (subtopology euclidean (sphere(vec 0,&1)),\n                        subtopology euclidean s) f (\\x. a))
+  forall s:real^M->bool t:real^N->bool.\n        s homotopy_equivalent t\n        ==> (simply_connected s <=> simply_connected t)
   a * e * ii * z:complex = a * ii * z * e
   h:complex
   z:complex
@@ -79060,11 +79060,11 @@ Multivariate/transcendentals quotations (2171):
   cexp
   \\z. ii * Cx(Im z)
   z:complex
-  !z. ((\\w. Cx(Re w) * cexp(ii * Cx(Im w))) has_derivative\n        (\\h. vector[vector[cos(Im z); --Re(z) * sin(Im z)];\n                    vector[sin(Im z); Re z * cos(Im z)]] ** h))\n       (at z)
+  forall z. ((\\w. Cx(Re w) * cexp(ii * Cx(Im w))) has_derivative\n        (\\h. vector[vector[cos(Im z); --Re(z) * sin(Im z)];\n                    vector[sin(Im z); Re z * cos(Im z)]] ** h))\n       (at z)
   z:complex
   {z | Re z = &0} UNION\n                  {z | Im z = &0} UNION {z | Im z = &2 * pi}
   {z | Im z = &0}
-  !s. negligible s /\\ (!x. x IN t DIFF s ==> g x = f x)\n          ==> (f absolutely_integrable_on t /\\ integral t f = b <=>\n               g absolutely_integrable_on t /\\ integral t g = b)
+  forall s. negligible s /\\ (forall x. x IN t DIFF s ==> g x = f x)\n          ==> (f absolutely_integrable_on t /\\ integral t f = b <=>\n               g absolutely_integrable_on t /\\ integral t g = b)
   (p <=> p') /\\ (q <=> q') ==> (q <=> p) ==> (p' <=> q')
   c * r * c - (--r * s) * s:real = r * (s pow 2 + c pow 2)
   b:real^N
@@ -79081,17 +79081,17 @@ Multivariate/transcendentals quotations (2171):
   \\z h. (vector[vector[cos(Im z); --Re(z) * sin(Im z)];\n                   vector[sin(Im z); Re z * cos(Im z)]]:real^2^2) ** h
   \\z. Cx(Re z) * cexp(ii * Cx(Im z))
   f:complex->real^N
-  !f:complex->real^N b.\n        f absolutely_integrable_on (:complex) /\\ integral (:complex) f = b <=>\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z))))\n        absolutely_integrable_on\n        {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi} /\\\n        integral {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi}\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z)))) = b
+  forall f:complex->real^N b.\n        f absolutely_integrable_on (:complex) /\\ integral (:complex) f = b <=>\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z))))\n        absolutely_integrable_on\n        {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi} /\\\n        integral {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi}\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z)))) = b
   \\z:complex. norm z
   Arg
-  !f:complex->real^N.\n        f absolutely_integrable_on (:complex) <=>\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z))))\n        absolutely_integrable_on\n        {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi}
+  forall f:complex->real^N.\n        f absolutely_integrable_on (:complex) <=>\n        (\\z. Re z % f(Cx(Re z) * cexp(ii * Cx(Im z))))\n        absolutely_integrable_on\n        {z | &0 <= Re z /\\ &0 <= Im z /\\ Im z <= &2 * pi}
   &0 <= drop r
   r:real^1
   &0 <= drop r
   r:real^1
   &0 <= drop r
   r:real^1
-  !x y. ((g:complex->real^N) o h) (pastecart x y) =\n          g(complex(drop x,drop y))
+  forall x y. ((g:complex->real^N) o h) (pastecart x y) =\n          g(complex(drop x,drop y))
   \\n:num. n
   (:real^(1,1)finite_sum)
   g:complex->real^N
@@ -79100,19 +79100,19 @@ Multivariate/transcendentals quotations (2171):
   g:complex->real^N
   (g:complex->real^N) o (h:real^(1,1)finite_sum->complex)
   IMAGE (h:real^(1,1)finite_sum->complex) UNIV = UNIV /\\\n                IMAGE (k:complex->real^(1,1)finite_sum) UNIV = UNIV
-  (!x:complex. h(k x) = x) /\\ (!y:real^(1,1)finite_sum. k(h y) = y)
+  (forall x:complex. h(k x) = x) /\\ (forall y:real^(1,1)finite_sum. k(h y) = y)
   k:complex->real^(1,1)finite_sum = \\x. lambda i. x$i
   h:real^(1,1)finite_sum->complex = \\x. lambda i. x$i
   g = \\x. if &0 <= Re x /\\ &0 <= Im x /\\ Im x <= &2 * pi\n            then Re x % (f:complex->real^N) (Cx(Re x) * cexp(ii * Cx(Im x)))\n            else vec 0
   integral UNIV (f:complex->real^N)
   f:complex->real^N
-  !f:complex->real^N.\n        f absolutely_integrable_on (:complex)\n        ==> negligible\n             {r | &0 <= drop r /\\\n                  ~((\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))\n                    absolutely_integrable_on interval[vec 0,lift(&2 * pi)])} /\\\n            (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                   (\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t)))))\n            absolutely_integrable_on {r | &0 <= drop r} /\\\n            integral {r | &0 <= drop r}\n             (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                    (\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))) =\n            integral (:complex) f
+  forall f:complex->real^N.\n        f absolutely_integrable_on (:complex)\n        ==> negligible\n             {r | &0 <= drop r /\\\n                  ~((\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))\n                    absolutely_integrable_on interval[vec 0,lift(&2 * pi)])} /\\\n            (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                   (\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t)))))\n            absolutely_integrable_on {r | &0 <= drop r} /\\\n            integral {r | &0 <= drop r}\n             (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                    (\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))) =\n            integral (:complex) f
   t:real^1
   &0 <= drop r
   r:real^1
   &0 <= drop r
   r:real^1
-  !x y. ((g:complex->real^N) o h) (pastecart x y) =\n            g(complex(drop x,drop y))
+  forall x y. ((g:complex->real^N) o h) (pastecart x y) =\n            g(complex(drop x,drop y))
   z:complex
   c * r * c - (--r * s) * s:real = r * (s pow 2 + c pow 2)
   \\z h. (vector[vector[cos(Im z); --Re(z) * sin(Im z)];\n                   vector[sin(Im z); Re z * cos(Im z)]]:real^2^2) ** h
@@ -79127,11 +79127,11 @@ Multivariate/transcendentals quotations (2171):
   (\\x. P x) = {x | P x}
   (g:complex->real^N) o (h:real^(1,1)finite_sum->complex)
   IMAGE (h:real^(1,1)finite_sum->complex) UNIV = UNIV /\\\n                IMAGE (k:complex->real^(1,1)finite_sum) UNIV = UNIV
-  (!x:complex. h(k x) = x) /\\ (!y:real^(1,1)finite_sum. k(h y) = y)
+  (forall x:complex. h(k x) = x) /\\ (forall y:real^(1,1)finite_sum. k(h y) = y)
   k:complex->real^(1,1)finite_sum = \\x. lambda i. x$i
   h:real^(1,1)finite_sum->complex = \\x. lambda i. x$i
   g = \\x. if &0 <= Re x /\\ &0 <= Im x /\\ Im x <= &2 * pi\n            then Re x % (f:complex->real^N) (Cx(Re x) * cexp(ii * Cx(Im x)))\n            else vec 0
-  !f:complex->real^N.\n       f measurable_on (:complex)\n       ==> (f absolutely_integrable_on (:complex) <=>\n            negligible\n             {r | &0 <= drop r /\\\n                  ~((\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))\n                    absolutely_integrable_on interval[vec 0,lift(&2 * pi)])} /\\\n            (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                  (\\t. drop r %\n                       lift(norm(f(Cx(drop r) * cexp(ii * Cx(drop t)))))))\n            integrable_on {r | &0 <= drop r})
+  forall f:complex->real^N.\n       f measurable_on (:complex)\n       ==> (f absolutely_integrable_on (:complex) <=>\n            negligible\n             {r | &0 <= drop r /\\\n                  ~((\\t. drop r % f(Cx(drop r) * cexp(ii * Cx(drop t))))\n                    absolutely_integrable_on interval[vec 0,lift(&2 * pi)])} /\\\n            (\\r. integral (interval[vec 0,lift(&2 * pi)])\n                  (\\t. drop r %\n                       lift(norm(f(Cx(drop r) * cexp(ii * Cx(drop t)))))))\n            integrable_on {r | &0 <= drop r})
 cexp =  |- (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) z:cart(real,tybit0(1)))) ((#infsum:fun(fun(num,bool),fun(fun(num,cart(real,tybit0(1))),cart(real,tybit0(1)))) (#from:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num))) (\n:num. ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_pow:fun(cart(real,tybit0(1)),fun(num,cart(real,tybit0(1)))) z:cart(real,tybit0(1))) n:num)) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) n:num)))))))))
 CEXP_0 =  |- ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))
 CEXP_CONVERGES_UNIFORMLY_CAUCHY =  |- (#!:fun(fun(real,bool),bool) (\R:real. (#!:fun(fun(real,bool),bool) (\e:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) e:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) R:real))) (#?:fun(fun(num,bool),bool) (\N:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) N:num)) ((#real_le:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) R:real))) ((#real_lt:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit0(1)),real) ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,tybit0(1))),cart(real,tybit0(1)))) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num)) (\i:num. ((#complex_div:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_pow:fun(cart(real,tybit0(1)),fun(num,cart(real,tybit0(1)))) z:cart(real,tybit0(1))) i:num)) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) i:num)))))))) e:real)))))))))))))))

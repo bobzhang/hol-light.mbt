@@ -5656,7 +5656,7 @@ test "miz3/Samples/luxury matches miz3/Samples/luxury.ml" {
       #|  :error
       #|  :error
       #|  :error
-      #|  !p. NUM_REP (IND_SUC (dest_num p))
+      #|  forall p. NUM_REP (IND_SUC (dest_num p))
       #|  :error
       #|  dest_num
       #|  :error
@@ -5679,7 +5679,7 @@ test "miz3/Samples/luxury matches miz3/Samples/luxury.ml" {
       #|  :error
       #|  :error
       #|  :error
-      #|  !p. NUM_REP (IND_SUC (dest_num p))
+      #|  forall p. NUM_REP (IND_SUC (dest_num p))
       #|  :error
       #|  :error
       #|  :error

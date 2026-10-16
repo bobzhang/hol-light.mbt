@@ -5637,40 +5637,40 @@ test "define matches define.ml" {
       #|define quotations (111):
       #|  (CASEWISE [] f x = @y. T) /\\\n  (CASEWISE (CONS h t) f x =\n        if ?y. FST h y = x then SND h f (@y. FST h y = x)\n        else CASEWISE t f x)
       #|  (CASEWISE [] f x = @y. T) /\\\n   (CASEWISE (CONS (s,t) clauses) f x =\n        if ?y. s y = x then t f (@y. s y = x) else CASEWISE clauses f x)
-      #|  !clauses c x.\n    (?s t a. MEM (s,t) clauses /\\ (s a = x) /\\\n             (CASEWISE clauses c x = t c a)) \\/\n    ~(?s t a. MEM (s,t) clauses /\\ (s a = x)) /\\\n    (CASEWISE clauses c x = @y. T)
-      #|  !clauses c:C.\n     (!s t s' t' x y. MEM (s,t) clauses /\\ MEM (s',t') clauses /\\ (s x = s' y)\n                      ==> (t c x = t' c y))\n     ==> ALL (\\(s:P->A,t). !x. CASEWISE clauses c (s x) :B = t c x) clauses
-      #|  admissible(<<) p s t <=>\n        !f g a. p f a /\\ p g a /\\ (!z. z << s(a) ==> (f z = g z))\n                ==> (t f a = t g a)
-      #|  tailadmissible(<<) p s t <=>\n        ?P G H. (!f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                (!f g a. (!z. z << s(a) ==> (f z = g z))\n                         ==> (P f a = P g a) /\\\n                             (G f a = G g a) /\\ (H f a = H g a)) /\\\n                (!f a:P. p f a ==> (t (f:A->B) a =\n                                    if P f a then f(G f a) else H f a))
+      #|  forall clauses c x.\n    (?s t a. MEM (s,t) clauses /\\ (s a = x) /\\\n             (CASEWISE clauses c x = t c a)) \\/\n    ~(?s t a. MEM (s,t) clauses /\\ (s a = x)) /\\\n    (CASEWISE clauses c x = @y. T)
+      #|  forall clauses c:C.\n     (forall s t s' t' x y. MEM (s,t) clauses /\\ MEM (s',t') clauses /\\ (s x = s' y)\n                      ==> (t c x = t' c y))\n     ==> ALL (\\(s:P->A,t). forall x. CASEWISE clauses c (s x) :B = t c x) clauses
+      #|  admissible(<<) p s t <=>\n        forall f g a. p f a /\\ p g a /\\ (forall z. z << s(a) ==> (f z = g z))\n                ==> (t f a = t g a)
+      #|  tailadmissible(<<) p s t <=>\n        ?P G H. (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                         ==> (P f a = P g a) /\\\n                             (G f a = G g a) /\\ (H f a = H g a)) /\\\n                (forall f a:P. p f a ==> (t (f:A->B) a =\n                                    if P f a then f(G f a) else H f a))
       #|  superadmissible(<<) p s t <=>\n        admissible(<<) (\\f a. T) s p ==> tailadmissible(<<) p s t
       #|  _MATCH x (_SEQPATTERN r s) =\n   if ?y. r x y then _MATCH x r else _MATCH x s
-      #|  !p s c. admissible(<<) p s (\\f. c)
-      #|  !(<<) p s t.\n        (!f a. p f a ==> t a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t x))
-      #|  !(<<) p s:P->A g:(A->B)->P->C->D y:(A->B)->P->C.\n        admissible(<<) p s g /\\ admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g f x) (y f x))
-      #|  !(<<) p s:P->A g:P->C->D y:(A->B)->P->C.\n        admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g x) (y f x))
-      #|  !(<<) p s:P->A t:(A->B)->C->P->bool.\n     admissible(<<) (\\f (u,x). p f x) (\\(u,x). s x) (\\f (u,x). t f u x)\n     ==> admissible(<<) p s (\\f x. \\u. t f u x)
-      #|  !(<<) p s t.\n        admissible(<<) p s t /\\\n        (!f a. p f a ==> t f a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t f x))
-      #|  !(<<) p P s h k.\n        admissible(<<) p s P /\\\n        admissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        admissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> admissible(<<) p s (\\f x:P. if P f x then h f x else k f x)
-      #|  !(<<) p s e c.\n        admissible(<<) p s e /\\ admissible(<<) p s (\\f x. c f x (e f x))\n        ==> admissible(<<) p s (\\f x:P. _MATCH (e f x) (c f x))
-      #|  !(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x:P. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. c1 f x (e f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. c2 f x (e f x))\n        ==> admissible(<<) p s (\\f x. _SEQPATTERN (c1 f x) (c2 f x) (e f x))
+      #|  forall p s c. admissible(<<) p s (\\f. c)
+      #|  forall(<<) p s t.\n        (forall f a. p f a ==> t a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t x))
+      #|  forall(<<) p s:P->A g:(A->B)->P->C->D y:(A->B)->P->C.\n        admissible(<<) p s g /\\ admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g f x) (y f x))
+      #|  forall(<<) p s:P->A g:P->C->D y:(A->B)->P->C.\n        admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g x) (y f x))
+      #|  forall(<<) p s:P->A t:(A->B)->C->P->bool.\n     admissible(<<) (\\f (u,x). p f x) (\\(u,x). s x) (\\f (u,x). t f u x)\n     ==> admissible(<<) p s (\\f x. \\u. t f u x)
+      #|  forall(<<) p s t.\n        admissible(<<) p s t /\\\n        (forall f a. p f a ==> t f a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t f x))
+      #|  forall(<<) p P s h k.\n        admissible(<<) p s P /\\\n        admissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        admissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> admissible(<<) p s (\\f x:P. if P f x then h f x else k f x)
+      #|  forall(<<) p s e c.\n        admissible(<<) p s e /\\ admissible(<<) p s (\\f x. c f x (e f x))\n        ==> admissible(<<) p s (\\f x:P. _MATCH (e f x) (c f x))
+      #|  forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x:P. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. c1 f x (e f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. c2 f x (e f x))\n        ==> admissible(<<) p s (\\f x. _SEQPATTERN (c1 f x) (c2 f x) (e f x))
       #|  (a <=> a') /\\ (a /\\ a' ==> (b <=> b'))\n                     ==> (a /\\ b <=> a' /\\ b')
-      #|  !(<<) p s pat e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _UNGUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                         (GEQ (t f x) (y f x)))
+      #|  forall(<<) p s pat e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _UNGUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                         (GEQ (t f x) (y f x)))
       #|  x = x' /\\ y = y' ==> (x = y <=> x' = y')
       #|  (a <=> a') /\\ (a /\\ a' ==> (b <=> b'))\n                            ==> (a /\\ b <=> a' /\\ b')
-      #|  !(<<) p s pat q e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s q /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _GUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                       (q f x)\n                                       (GEQ (t f x) (y f x)))
-      #|  !(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. nsum(a(x)..b(x)) (h f x))
-      #|  !(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. sum(a(x)..b(x)) (h f x))
+      #|  forall(<<) p s pat q e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s q /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _GUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                       (q f x)\n                                       (GEQ (t f x) (y f x)))
+      #|  forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. nsum(a(x)..b(x)) (h f x))
+      #|  forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. sum(a(x)..b(x)) (h f x))
       #|  x = y /\\ MAP f x = MAP g x ==> MAP f x = MAP g y
-      #|  !(<<) p s h l.\n        admissible(<<) p s l /\\\n        admissible (<<) (\\f (y,x). p f x /\\ MEM y (l f x))\n                        (\\(y,x). s x) (\\f (y,x). h f x y)\n   ==> admissible (<<) p s (\\f:A->B x:P. MAP (h f x) (l f x))
-      #|  !(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. _MATCH (e f x) (c2 f x))\n        ==> admissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
+      #|  forall(<<) p s h l.\n        admissible(<<) p s l /\\\n        admissible (<<) (\\f (y,x). p f x /\\ MEM y (l f x))\n                        (\\(y,x). s x) (\\f (y,x). h f x y)\n   ==> admissible (<<) p s (\\f:A->B x:P. MAP (h f x) (l f x))
+      #|  forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. _MATCH (e f x) (c2 f x))\n        ==> admissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
       #|  \\f:A->B a:P. if p f a then t f a :B else fixed
       #|  \\f:A->B. (anything:P->A)
       #|  \\f:A->B x:P. F
-      #|  !(<<) p s t:(A->B)->P->B.\n      admissible(<<) p s t ==> superadmissible(<<) p s t
-      #|  !p s c. superadmissible(<<) p s (\\f. c)
+      #|  forall(<<) p s t:(A->B)->P->B.\n      admissible(<<) p s t ==> superadmissible(<<) p s t
+      #|  forall p s c. superadmissible(<<) p s (\\f. c)
       #|  \\f:A->B. anything:P->B
       #|  \\f:A->B a:P. if p f a then t f a :A else s a
       #|  \\f:A->B x:P. T
-      #|  !(<<) p s t:(A->B)->P->A.\n      admissible(<<) p s t /\\\n      (!f a. p f a ==> !y. y << t f a ==> y << s a)\n      ==> superadmissible(<<) p s (\\f x. f(t f x))
+      #|  forall(<<) p s t:(A->B)->P->A.\n      admissible(<<) p s t /\\\n      (forall f a. p f a ==> forall y. y << t f a ==> y << s a)\n      ==> superadmissible(<<) p s (\\f x. f(t f x))
       #|  (a1 /\\ b1 /\\ c1 ==> a2 /\\ b2 /\\ c2 ==> x) <=>\n                    (a1 /\\ a2) /\\ (b1 /\\ b2) /\\ (c1 /\\ c2) ==> x
       #|  H2:(A->B)->P->B
       #|  G2:(A->B)->P->A
@@ -5678,22 +5678,22 @@ test "define matches define.ml" {
       #|  H1:(A->B)->P->B
       #|  G1:(A->B)->P->A
       #|  P1:(A->B)->P->bool
-      #|  !(<<) p P s h k:(A->B)->P->B.\n        admissible(<<) p s P /\\\n        superadmissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> superadmissible(<<) p s (\\f x. if P f x then h f x else k f x)
+      #|  forall(<<) p P s h k:(A->B)->P->B.\n        admissible(<<) p s P /\\\n        superadmissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> superadmissible(<<) p s (\\f x. if P f x then h f x else k f x)
       #|  \\f:A->B a:P. if p f a then if P f a then H2 f a else H1 f a else w:B
       #|  \\f:A->B a:P. if p f a then if P f a then G2 f a else G1 f a else z:A
       #|  \\f:A->B a:P. if p f a then if P f a then P2 f a else P1 f a else F
-      #|  !(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                            (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                            (\\f x. _MATCH (e f x) (c2 f x))\n        ==> superadmissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
+      #|  forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                            (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                            (\\f x. _MATCH (e f x) (c2 f x))\n        ==> superadmissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
       #|  \\(f:A->B) x:P. (@z:B. F)
       #|  \\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x):A
       #|  \\(f:A->B) x:P. p f x /\\ ?t:Q. pat t:D = e x
-      #|  !f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)
-      #|  !(<<) p s e:P->D pat:Q->D arg.\n      (!f a t u. p f a /\\ pat t = e a /\\ pat u = e a ==> arg a t = arg a u) /\\\n      (!f a t. p f a /\\ pat t = e a ==> !y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _UNGUARDED_PATTERN (GEQ (pat t) u)\n                                                  (GEQ (f(arg x t)) v)))
+      #|  forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)
+      #|  forall(<<) p s e:P->D pat:Q->D arg.\n      (forall f a t u. p f a /\\ pat t = e a /\\ pat u = e a ==> arg a t = arg a u) /\\\n      (forall f a t. p f a /\\ pat t = e a ==> forall y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _UNGUARDED_PATTERN (GEQ (pat t) u)\n                                                  (GEQ (f(arg x t)) v)))
       #|  \\(f:A->B) x:P. (@z:B. F)
       #|  \\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x /\\ q x t):A
       #|  \\(f:A->B) x:P. p f x /\\ ?t:Q. pat t:D = e x /\\ q x t
-      #|  !f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)
-      #|  !(<<) p s e:P->D pat:Q->D q arg.\n      (!f a t u. p f a /\\ pat t = e a /\\ q a t /\\ pat u = e a /\\ q a u\n                 ==> arg a t = arg a u) /\\\n      (!f a t. p f a /\\ q a t /\\ pat t = e a ==> !y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _GUARDED_PATTERN (GEQ (pat t) u)\n                                                (q x t)\n                                                (GEQ (f(arg x t)) v)))
-      #|  !P G H H'.\n         WF (<<) /\\\n         (!f g x. (!z. z << x ==> (f z = g z))\n                  ==> (P f x <=> P g x) /\\\n                      (G f x = G g x) /\\ (H' f x = H' g x)) /\\\n         (!f x y. P f x /\\ y << G f x ==> y << x) /\\\n         (!f x. H f x = if P f x then f(G f x) else H' f x)\n         ==> ?f. !x. f x = H f x
+      #|  forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)
+      #|  forall(<<) p s e:P->D pat:Q->D q arg.\n      (forall f a t u. p f a /\\ pat t = e a /\\ q a t /\\ pat u = e a /\\ q a u\n                 ==> arg a t = arg a u) /\\\n      (forall f a t. p f a /\\ q a t /\\ pat t = e a ==> forall y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _GUARDED_PATTERN (GEQ (pat t) u)\n                                                (q x t)\n                                                (GEQ (f(arg x t)) v)))
+      #|  forall P G H H'.\n         WF (<<) /\\\n         (forall f g x. (forall z. z << x ==> (f z = g z))\n                  ==> (P f x <=> P g x) /\\\n                      (G f x = G g x) /\\ (H' f x = H' g x)) /\\\n         (forall f x y. P f x /\\ y << G f x ==> y << x) /\\\n         (forall f x. H f x = if P f x then f(G f x) else H' f x)\n         ==> ?f. forall x. f x = H f x
       #|  \\f:A->B x:A. if ?y:P. s y = x\n                           then H2 f (@y. s y = x) else H1 f x:B
       #|  \\f:A->B x:A.\n     if ?y:P. s y = x then G2 f (@y. s y = x) else G1 f x:A
       #|  \\f:A->B x:A. if ?y:P. s y = x then P2 f (@y. s y = x) else P1 f x:bool
@@ -5711,13 +5711,13 @@ test "define matches define.ml" {
       #|  \\f:A->B x:A. F
       #|  clauses:((P->A)#((A->B)->P->B))list
       #|  clauses:((P->A)#((A->B)->P->B))list
-      #|  !(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). ?P G H.\n                     (!f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                     (!f g a. (!z. z << s(a) ==> (f z = g z))\n                              ==> (P f a = P g a) /\\\n                                  (G f a = G g a) /\\ (H f a = H g a)) /\\\n                     (!f a:P. t f a = if P f a then f(G f a) else H f a))\n            clauses\n        ==> ?f:A->B. !x. f x = CASEWISE clauses f x
-      #|  !(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses\n        ==> ?f:A->B. !x. f x = CASEWISE clauses f x
-      #|  !clauses.\n   (?(<<). WF(<<) /\\\n           ALL (\\(s:P->A,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n   (!s t s' t' f x y. MEM (s,t) clauses /\\ MEM (s',t') clauses\n                      ==> (s x = s' y) ==> (t f x = t' f y))\n   ==> ?f:A->B. ALL (\\(s,t). !x. f (s x) = t f x) clauses
-      #|  !P. (!x y. P x y ==> P y x)\n         ==> !l. (!x y. MEM x l /\\ MEM y l ==> P x y) <=>\n                 ALL (\\x. P x x) l /\\ PAIRWISE P l
+      #|  forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). ?P G H.\n                     (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                     (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                              ==> (P f a = P g a) /\\\n                                  (G f a = G g a) /\\ (H f a = H g a)) /\\\n                     (forall f a:P. t f a = if P f a then f(G f a) else H f a))\n            clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x
+      #|  forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x
+      #|  forall clauses.\n   (?(<<). WF(<<) /\\\n           ALL (\\(s:P->A,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n   (forall s t s' t' f x y. MEM (s,t) clauses /\\ MEM (s',t') clauses\n                      ==> (s x = s' y) ==> (t f x = t' f y))\n   ==> ?f:A->B. ALL (\\(s,t). forall x. f (s x) = t f x) clauses
+      #|  forall P. (forall x y. P x y ==> P y x)\n         ==> forall l. (forall x y. MEM x l /\\ MEM y l ==> P x y) <=>\n                 ALL (\\x. P x x) l /\\ PAIRWISE P l
       #|  (\\x. P x) = (\\(a,b). P (a,b))
-      #|  \\(s,t) (s',t'). !c x:A y:A. (s x = s' y) ==> (t c x = t' c y)
-      #|  !clauses.\n        (?(<<). WF (<<) /\\\n                ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n        ALL (\\(s,t). !f x y. (s x = s y) ==> (t f x = t f y)) clauses /\\\n        PAIRWISE (\\(s,t) (s',t'). !f x y. (s x = s' y) ==> (t f x = t' f y))\n                 clauses\n        ==> (?f. ALL (\\(s,t). !x. f (s x) = t f x) clauses)
+      #|  \\(s,t) (s',t'). forall c x:A y:A. (s x = s' y) ==> (t c x = t' c y)
+      #|  forall clauses.\n        (?(<<). WF (<<) /\\\n                ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n        ALL (\\(s,t). forall f x y. (s x = s y) ==> (t f x = t f y)) clauses /\\\n        PAIRWISE (\\(s,t) (s',t'). forall f x y. (s x = s' y) ==> (t f x = t' f y))\n                 clauses\n        ==> (?f. ALL (\\(s,t). forall x. f (s x) = t f x) clauses)
       #|  superadmissible(<<) (\\f x. T) s t <=> tailadmissible(<<) (\\f x. T) s t
       #|  EVEN
       #|  ((2 * m + 2 = 2 * n + 1) <=> F) /\\\n       ((2 * m + 1 = 2 * n + 2) <=> F) /\\\n       ((2 * m = 2 * n + 1) <=> F) /\\\n       ((2 * m + 1 = 2 * n) <=> F) /\\\n       ((2 * m = SUC(2 * n)) <=> F) /\\\n       ((SUC(2 * m) = 2 * n) <=> F)
@@ -5727,11 +5727,11 @@ test "define matches define.ml" {
       #|  F
       #|  (/\\)
       #|  ((?y. _UNGUARDED_PATTERN (GEQ s t) (GEQ z y)) <=> s = t) /\\\n       ((?y. _GUARDED_PATTERN (GEQ s t) g (GEQ z y)) <=> g /\\ s = t)
-      #|  ((!z. GEQ (f z) (g z)) <=> (!x y. GEQ (f(x,y)) (g(x,y)))) /\\\n       ((\\p. P p) = (\\(x,y). P(x,y)))
+      #|  ((forall z. GEQ (f z) (g z)) <=> (forall x y. GEQ (f(x,y)) (g(x,y)))) /\\\n       ((\\p. P p) = (\\(x,y). P(x,y)))
       #|  \\d c. (t:C#D->E) (c,d)
       #|  \\b d c. (t:B->C#D->E) b (c,d)
       #|  \\a b d c. (t:A->B->C#D->E) a b (c,d)
-      #|  (!P. (!t:A->B->C#D->E. P t) <=> (!t. P (\\a b (c,d). t a b d c))) /\\\n       (!P. (!t:B->C#D->E. P t) <=> (!t. P (\\b (c,d). t b d c))) /\\\n       (!P. (!t:C#D->E. P t) <=> (!t. P (\\(c,d). t d c)))
+      #|  (forall P. (forall t:A->B->C#D->E. P t) <=> (forall t. P (\\a b (c,d). t a b d c))) /\\\n       (forall P. (forall t:B->C#D->E. P t) <=> (forall t. P (\\b (c,d). t b d c))) /\\\n       (forall P. (forall t:C#D->E. P t) <=> (forall t. P (\\(c,d). t d c)))
       #|  (a /\\ x = k ==> x = y ==> d) ==> (a /\\ x = k /\\ y = k ==> d)
       #|  (a /\\ b /\\ c /\\ x = k ==> x = y ==> d)\n      ==> (a /\\ x = k /\\ b /\\ y = k /\\ c ==> d)
       #|  (ALL (\\(s,t). P s t) [a,b] <=> P a b) /\\\n         (ALL (\\(s,t). P s t) (CONS (a,b) l) <=>\n          P a b /\\ ALL (\\(s,t). P s t) l)

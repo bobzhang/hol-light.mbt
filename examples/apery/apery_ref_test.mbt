@@ -95967,31 +95967,31 @@ test "Examples/apery matches Examples/apery.ml" {
       #|0..0..1..2..5..10..18..31..solved at 48
       #|Examples/apery quotations (20894):
       #|  LCM (s:num->bool) = iterate(\\m n. lcm(m,n)) s I
-      #|  (LCM {} = 1) /\\\n   (!x s. FINITE s\n          ==> LCM (x INSERT s) = if x IN s then LCM s else lcm(x,LCM s))
+      #|  (LCM {} = 1) /\\\n   (forall x s. FINITE s\n          ==> LCM (x INSERT s) = if x IN s then LCM s else lcm(x,LCM s))
       #|  s = {} ==> LCM s = 1
       #|  ~(SUC n <= n)
-      #|  (!m. LCM(m..0) = if m = 0 then 0 else 1) /\\\n   (!m n. LCM(m..SUC n) =\n          if m <= SUC n then lcm(LCM(m..n),SUC n) else 1)
-      #|  !s. FINITE s ==> (LCM s = 0 <=> 0 IN s)
-      #|  !n. ~(LCM(1..n) = 0)
+      #|  (forall m. LCM(m..0) = if m = 0 then 0 else 1) /\\\n   (forall m n. LCM(m..SUC n) =\n          if m <= SUC n then lcm(LCM(m..n),SUC n) else 1)
+      #|  forall s. FINITE s ==> (LCM s = 0 <=> 0 IN s)
+      #|  forall n. ~(LCM(1..n) = 0)
       #|  n:num
       #|  s:num->bool
       #|  I:num->num
-      #|  !s n. FINITE s /\\ n IN s ==> n divides LCM s
-      #|  !m n. 1 <= m /\\ m <= n ==> m divides LCM(1..n)
+      #|  forall s n. FINITE s /\\ n IN s ==> n divides LCM s
+      #|  forall m n. 1 <= m /\\ m <= n ==> m divides LCM(1..n)
       #|  s:num->bool = {}
-      #|  !s p k. FINITE s /\\ prime p\n           ==> (p EXP k divides LCM(s) <=>\n                s = {} /\\ k = 0 \\/ ?n. n IN s /\\ p EXP k divides n)
+      #|  forall s p k. FINITE s /\\ prime p\n           ==> (p EXP k divides LCM(s) <=>\n                s = {} /\\ k = 0 \\/ ?n. n IN s /\\ p EXP k divides n)
       #|  n < 1 <=> n = 0
-      #|  !n p k. prime p\n           ==> (p EXP k divides LCM(1..n) <=> n = 0 /\\ k = 0 \\/\n                ?m. 1 <= m /\\ m <= n /\\ p EXP k divides m)
+      #|  forall n p k. prime p\n           ==> (p EXP k divides LCM(1..n) <=> n = 0 /\\ k = 0 \\/\n                ?m. 1 <= m /\\ m <= n /\\ p EXP k divides m)
       #|  1 <= p <=> ~(p = 0)
       #|  p EXP k
       #|  m:num
-      #|  !n p k. prime p\n           ==> (p EXP k divides LCM(1..n) <=> n = 0 /\\ k = 0 \\/ p EXP k <= n)
+      #|  forall n p k. prime p\n           ==> (p EXP k divides LCM(1..n) <=> n = 0 /\\ k = 0 \\/ p EXP k <= n)
       #|  p EXP j
       #|  m:num
       #|  p EXP j
       #|  n - m:num
       #|  m:num
-      #|  !m:num. m <= n /\\ m + (n - m) < x ==> n < x
+      #|  forall m:num. m <= n /\\ m + (n - m) < x ==> n < x
       #|  p EXP j
       #|  n - m:num
       #|  m:num <= n /\\ n - m < p ==> n < m + p
@@ -96003,14 +96003,14 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  ((if p then 1 else 0) = 0) <=> ~p
       #|  {x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}
       #|  CARD s = CARD s * 1
-      #|  a:num <= b ==> !k. k <= a ==> k <= b
+      #|  a:num <= b ==> forall k. k <= a ==> k <= b
       #|  ~(p = 0) /\\ ~(p = 1) /\\ 2 <= p /\\ ~(p <= 1)
       #|  p:num
       #|  (m * k) * x * b:num = x * k * m * b
       #|  m:num
       #|  n - m:num
       #|  FACT m * FACT(n - m)
-      #|  !m. 1 <= m /\\ m <= n ==> (m * binom(n,m)) divides LCM(1..n)
+      #|  forall m. 1 <= m /\\ m <= n ==> (m * binom(n,m)) divides LCM(1..n)
       #|  ZETA x = Re(zeta(Cx x))
       #|  cc n k = &(binom(n + k,k)) pow 2 * &(binom(n,k)) pow 2
       #|  zz n = sum(1..n) (\\k. &1 / &k pow 3)
@@ -96022,8 +96022,8 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n:num
       #|  0
       #|  f:num->real
-      #|  !n. bb n =\n       sum (0..n)\n           (\\k. &(binom(n + k,k)) pow 2 * &(binom(n,k)) pow 2 *\n                (zz n +\n                 sum (1..k)\n                     (\\m. --(&1) pow (m - 1) /\n                           (&2 * &m pow 3 *\n                            &(binom(n+m,m)) * &(binom(n,m))))))
-      #|  !s n x:A. FINITE s /\\ n divides (f x) /\\ x IN s\n             ==> n divides nproduct s f
+      #|  forall n. bb n =\n       sum (0..n)\n           (\\k. &(binom(n + k,k)) pow 2 * &(binom(n,k)) pow 2 *\n                (zz n +\n                 sum (1..k)\n                     (\\m. --(&1) pow (m - 1) /\n                           (&2 * &m pow 3 *\n                            &(binom(n+m,m)) * &(binom(n,m))))))
+      #|  forall s n x:A. FINITE s /\\ n divides (f x) /\\ x IN s\n             ==> n divides nproduct s f
       #|  1 <= n <=> ~(n = 0)
       #|  p:num
       #|  1 < n <=> 2 <= n
@@ -96041,9 +96041,9 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  k = 0
       #|  ~(n = 0) /\\ m divides n ==> m <= n
       #|  log(&(nproduct {p | p IN 1..n /\\ prime p} (\\p. p EXP (a p))))
-      #|  !p. prime p ==> floor(log(&n) / log(&p)) = &(a p)
+      #|  forall p. prime p ==> floor(log(&n) / log(&p)) = &(a p)
       #|  a = \\p. @k. floor(log(&n) / log(&p)) = &k
-      #|  !n. ~(n = 0)\n       ==> log(&(LCM(1..n))) <= log(&n) * &(CARD {p | prime p /\\ p <= n})
+      #|  forall n. ~(n = 0)\n       ==> log(&(LCM(1..n))) <= log(&n) * &(CARD {p | prime p /\\ p <= n})
       #|  abs(x - &1) < e ==> y = x ==> y < &1 + e
       #|  &0 < &n
       #|  log(&n) * &(CARD {p | prime p /\\ p <= n})
@@ -96052,18 +96052,18 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  N + 1
       #|  N:num
       #|  e:real
-      #|  !e. &0 < e\n       ==> eventually (\\n. &(LCM(1..n)) < exp((&1 + e) * &n)) sequentially
+      #|  forall e. &0 < e\n       ==> eventually (\\n. &(LCM(1..n)) < exp((&1 + e) * &n)) sequentially
       #|  Cx(&17 / &16)
       #|  8
       #|  exp(log(&3) * &n)
       #|  &1 / &16
-      #|  ?N. !n. N <= n ==> LCM(1..n) < 3 EXP n
-      #|  !n k. cc n k = &0 <=> n + 1 <= k
-      #|  !n k. k <= n ==> &0 < cc n k
+      #|  ?N. forall n. N <= n ==> LCM(1..n) < 3 EXP n
+      #|  forall n k. cc n k = &0 <=> n + 1 <= k
+      #|  forall n k. k <= n ==> &0 < cc n k
       #|  0
-      #|  !n. &0 < aa n
-      #|  !n. ~(aa n = &0)
-      #|  !k. 1 <= k ==> Re(Cx(&1) / Cx(&k) cpow Cx(&3)) = &1 / &k pow 3
+      #|  forall n. &0 < aa n
+      #|  forall n. ~(aa n = &0)
+      #|  forall k. 1 <= k ==> Re(Cx(&1) / Cx(&k) cpow Cx(&3)) = &1 / &k pow 3
       #|  &1 < &3
       #|  Cx(&3)
       #|  \\k. Re(Cx(&1) / Cx(&k) cpow Cx(&3))
@@ -96104,7 +96104,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  \\n. sum(1..n) (\\k. sum(1..k) (\\m. cc n k / (&2 * &n pow 2))) / aa n
       #|  (a * z + s) / a:real = (a / a) * z + s / a
       #|  ((\\n. bb n / aa n) ---> ZETA(&3)) sequentially
-      #|  !n. integer(aa n)
+      #|  forall n. integer(aa n)
       #|  n - m:num
       #|  n - k:num
       #|  k - m:num
@@ -96121,38 +96121,38 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  x pow 3 * y pow 3 * (z:real) pow 2 =\n       (x * y) * (x * y * z) * (x * y * z)
       #|  a * b / c:real = b * a / c
       #|  &(LCM (1..n)) pow 3 *\n    (&(binom(n,k)) * &(binom(n+k,k)) * &(binom(n-m,n-k)) * &(binom(n+k,k-m))) /\n    (&m pow 3 * &(binom(k,m)) pow 2)
-      #|  !y. integer y /\\ x = y ==> integer x
+      #|  forall y. integer y /\\ x = y ==> integer x
       #|  &2 * l * (s * inv(&2) * inv y) * c = s * l * c / y
       #|  m:num
       #|  k:num
       #|  k:num
       #|  a * b * c:real = b * a * c
-      #|  !n. integer(&2 * &(LCM(1..n)) pow 3 * bb n)
+      #|  forall n. integer(&2 * &(LCM(1..n)) pow 3 * bb n)
       #|  pp n k = -- &4 * &k pow 4 *\n          (&12 * &n + &4 * &n pow 2 + &8 + &3 * &k - &2 * &k pow 2) *\n          (&2 * &n + &3) * cc n k
       #|  qq n k = (&n + &1 - &k) pow 2 * (&n + &2 - &k) pow 2
       #|  (a / c) * (b / c):real = (a * b) * inv(c) * inv(c)
       #|  (a * b) pow 2 * (c * d:real) pow 2 =\n    (a * c) pow 2 * b pow 2 * d pow 2
-      #|  !n k. cc n (k + 1) =\n         (&n pow 2 - &k pow 2 + &n - &k) pow 2 / (&k + &1) pow 4 *\n         cc n k
+      #|  forall n k. cc n (k + 1) =\n         (&n pow 2 - &k pow 2 + &n - &k) pow 2 / (&k + &1) pow 4 *\n         cc n k
       #|  (x * b:real) pow 2 * (y * c) pow 2 =\n      (x * y) pow 2 * b pow 2 * c pow 2
       #|  n + n + 1 = 1 + 2 * n
       #|  ((&n + &n + &1) + &1) / ((&n + &n + &1) + &1 - (&n + &1)) = &2
       #|  ~(k = (n + k) + 1)
       #|  (n + 1) + k = (n + k) + 1
       #|  2 * n + 1 = 1 + 2 * n
-      #|  !n k. cc (n + 1) k =\n            if k = n + 1 then &4 * &(binom(2 * n + 1,n + 1)) pow 2\n            else (&n + &1 + &k) pow 2/ (&n + &1 - &k) pow 2 * cc n k
+      #|  forall n k. cc (n + 1) k =\n            if k = n + 1 then &4 * &(binom(2 * n + 1,n + 1)) pow 2\n            else (&n + &1 + &k) pow 2/ (&n + &1 - &k) pow 2 * cc n k
       #|  n + 2 = (n + 1) + 1
-      #|  !n k.\n   k <= n\n   ==> ((-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * cc n k +\n        (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * cc (n + 1) k +\n        (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * cc (n + 2) k) *\n       qq n k * qq n (k + 1) =\n       pp n k * qq n (k + 1) - pp n (k + 1) * qq n k
+      #|  forall n k.\n   k <= n\n   ==> ((-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * cc n k +\n        (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * cc (n + 1) k +\n        (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * cc (n + 2) k) *\n       qq n k * qq n (k + 1) =\n       pp n k * qq n (k + 1) - pp n (k + 1) * qq n k
       #|  n:num
       #|  (n + 1) + 1 = n + 2
       #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
       #|  0
       #|  (p ==> r) /\\ (q ==> r) <=> p \\/ q ==> r
-      #|  !a p q n.\n    (!k. k <= n\n         ==> a k * q k * q (k + 1) = p k * q(k + 1) - p(k + 1) * q k) /\\\n    (!k. k <= n ==> ~(p k = &0 /\\ q k = &0))\n    ==> sum(0..n) (\\k. a k) * q 0 * q (n + 1) =\n        p 0 * q (n + 1) - p(n + 1) * q 0
-      #|  !n k.\n   k < n\n   ==> ((-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * cc n k +\n        (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * cc (n + 1) k +\n        (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * cc (n + 2) k) *\n       qq n k * qq n (k + 1) =\n       pp n k * qq n (k + 1) - pp n (k + 1) * qq n k
+      #|  forall a p q n.\n    (forall k. k <= n\n         ==> a k * q k * q (k + 1) = p k * q(k + 1) - p(k + 1) * q k) /\\\n    (forall k. k <= n ==> ~(p k = &0 /\\ q k = &0))\n    ==> sum(0..n) (\\k. a k) * q 0 * q (n + 1) =\n        p 0 * q (n + 1) - p(n + 1) * q 0
+      #|  forall n k.\n   k < n\n   ==> ((-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * cc n k +\n        (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * cc (n + 1) k +\n        (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * cc (n + 2) k) *\n       qq n k * qq n (k + 1) =\n       pp n k * qq n (k + 1) - pp n (k + 1) * qq n k
       #|  ~(n = 0) ==> n - 1 + 1 = n
       #|  ~(n = 0) ==> (k < n <=> k <= n - 1)
       #|  n = 0
-      #|  !a p q n.\n    (!k. k < n\n         ==> a k * q k * q (k + 1) = p k * q(k + 1) - p(k + 1) * q k) /\\\n    (!k. k < n ==> ~(p k = &0 /\\ q k = &0))\n    ==> (sum(0..n) (\\k. a k) - a n) * q 0 * q n =\n        p 0 * q n - p n * q 0
+      #|  forall a p q n.\n    (forall k. k < n\n         ==> a k * q k * q (k + 1) = p k * q(k + 1) - p(k + 1) * q k) /\\\n    (forall k. k < n ==> ~(p k = &0 /\\ q k = &0))\n    ==> (sum(0..n) (\\k. a k) - a n) * q 0 * q n =\n        p 0 * q n - p n * q 0
       #|  ~(n = 1)
       #|  ~(n = 0)
       #|  p ==> ~p ==> q
@@ -96172,9 +96172,9 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  (n + 1) + 1 = n + 2
       #|  a * s1 + b * (s2 + x) + c * (s3 + y + z):real =\n    (a * s1 + b * s2 + c * s3) + (b * x + c * y + c * z)
       #|  n + 2 = SUC(SUC n)
-      #|  !n. (-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * aa n +\n       (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * aa (n + 1) +\n       (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * aa (n + 2) = &0
+      #|  forall n. (-- &3 * &n pow 2 - &3 * &n - &n pow 3 - &1) * aa n +\n       (&34 * &n pow 3 + &153 * &n pow 2 + &231 * &n + &117) * aa (n + 1) +\n       (-- &n pow 3 - &6 * &n pow 2 - &12 * &n - &8) * aa (n + 2) = &0
       #|  (/):real->real->real
-      #|  !n. (&n + &2) pow 3 * aa(n + 2) -\n         (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * aa(n + 1) +\n         (&n + &1) pow 3 * aa(n) = &0
+      #|  forall n. (&n + &2) pow 3 * aa(n + 2) -\n         (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * aa(n + 1) +\n         (&n + &1) pow 3 * aa(n) = &0
       #|  ss n k = sum(1..k) (\\m. --(&1) pow (m - 1) /\n                          (&2 * &m pow 3 * &(binom(n+m,m)) * &(binom(n,m))))
       #|  ww n = sum(0..n) (\\k. cc n k * ss n k)
       #|  d_term n m = --(&1) pow (m - 1) /\n               (&2 * &m pow 3 * &(binom(n+m,m)) * &(binom(n,m)))
@@ -96187,21 +96187,21 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n+m:num
       #|  (n + 1) + m = (n + m) + 1
       #|  &m <= &n /\\ &1 <= &m
-      #|  !n m. 1 <= m /\\ m <= n\n         ==> d_term (n+1) m = (&n + &1 - &m) / (&n + &1 + &m) * d_term n m
-      #|  !n k. ss n k = sum(1..k) (\\m. d_term n m)
+      #|  forall n m. 1 <= m /\\ m <= n\n         ==> d_term (n+1) m = (&n + &1 - &m) / (&n + &1 + &m) * d_term n m
+      #|  forall n k. ss n k = sum(1..k) (\\m. d_term n m)
       #|  1 <= SUC k
       #|  k + 1 = SUC k
-      #|  !n k. ss n (k+1) = ss n k + d_term n (k+1)
+      #|  forall n k. ss n (k+1) = ss n k + d_term n (k+1)
       #|  ~(&n + &2 + &k = &0)
       #|  k+1
       #|  n:num
-      #|  !n k. k < n\n         ==> ss (n+1) (k+1) =\n             (-- &n + &k) / (&n + &2 + &k) * ss n k + ss (n+1) k +\n             (&n - &k) / (&n + &2 + &k) * ss n (k+1)
+      #|  forall n k. k < n\n         ==> ss (n+1) (k+1) =\n             (-- &n + &k) / (&n + &2 + &k) * ss n k + ss (n+1) k +\n             (&n - &k) / (&n + &2 + &k) * ss n (k+1)
       #|  m:num
       #|  k:num
-      #|  !n. bb n = aa n * zz n + ww n
+      #|  forall n. bb n = aa n * zz n + ww n
       #|  1 <= SUC n
       #|  n + 1 = SUC n
-      #|  !n. zz(n + 1) = zz n + &1 / &(n + 1) pow 3
+      #|  forall n. zz(n + 1) = zz n + &1 / &(n + 1) pow 3
       #|  lop (f:num->real) n = (&n + &2) pow 3 * f(n+2) -\n       (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * f(n+1) +\n       (&n + &1) pow 3 * f(n)
       #|  pflat (f:num->real) n =\n    (&2 * &n + &7) *\n    (&928 + &1266 * &n + &643 * &n pow 2 + &144 * &n pow 3 + &12 * &n pow 4) *\n    (&n + &1) pow 6 * f n +\n    (--(&1) * (&2 * &n + &3) * (&2 * &n + &7) *\n     (&408 * &n pow 9 + &7956 * &n pow 8 + &68086 * &n pow 7 + &336284 * &n pow 6 +\n      &1058890 * &n pow 5 + &2209767 * &n pow 4 + &3063206 * &n pow 3 +\n      &2724789 * &n pow 2 + &1413006 * &n + &325664)) * f(n+1) +\n    (&2 * &n + &5) *\n    (&13896 * &n pow 10 + &347400 * &n pow 9 + &3868998 * &n pow 8 +\n     &25269960 * &n pow 7 + &107159724 * &n pow 6 + &308199360 * &n pow 5 +\n     &608681313 * &n pow 4 + &814935630 * &n pow 3 + &707785777 * &n pow 2 +\n     &360083510 * &n + &81495208) * f(n+2) +\n    (--(&1) * (&2 * &n + &3) * (&2 * &n + &7) *\n     (&408 * &n pow 9 + &10404 * &n pow 8 + &117046 * &n pow 7 + &761526 * &n pow 6 +\n      &3153520 * &n pow 5 + &8607233 * &n pow 4 + &15461616 * &n pow 3 +\n      &17602001 * &n pow 2 + &11509566 * &n + &3291016)) * f(n+3) +\n    (&2 * &n + &3) *\n    (&12 * &n pow 4 + &96 * &n pow 3 + &283 * &n pow 2 + &364 * &n + &173) *\n    (&n + &4) pow 6 * f(n+4)
       #|  m0c n = (&n + &1) pow 3 * (&2 * &n + &7) *\n          (&12 * &n pow 4 + &144 * &n pow 3 + &643 * &n pow 2 + &1266 * &n + &928)
@@ -96211,16 +96211,16 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  (n+2)+2 = n+4
       #|  (n+1)+1 = n+2
       #|  (n+1)+2 = n+3
-      #|  !f n. pflat f n = m0c n * lop f n + m1c n * lop f (n+1) + m2c n * lop f (n+2)
+      #|  forall f n. pflat f n = m0c n * lop f n + m1c n * lop f (n+1) + m2c n * lop f (n+2)
       #|  &0 <= &12 * x pow 4 /\\ &0 <= &96 * x pow 3 /\\ &0 <= &283 * x pow 2 /\\ &0 <= &364 * x\n      ==> &0 < &12 * x pow 4 + &96 * x pow 3 + &283 * x pow 2 + &364 * x + &173
       #|  &0 < x ==> ~(x = &0)
-      #|  !n. ~(m2c n = &0)
+      #|  forall n. ~(m2c n = &0)
       #|  n - 2 + 1 = n - 1 /\\ n - 2 + 2 = n
       #|  g (n - 2):real = &0 /\\ g (n - 1):real = &0
       #|  n = 1
       #|  n = 0
       #|  n:num
-      #|  !g:num->real. (!n. m0c n * g n + m1c n * g(n+1) + m2c n * g(n+2) = &0) /\\\n       g 0 = &0 /\\ g 1 = &0\n       ==> !n. g n = &0
+      #|  forall g:num->real. (forall n. m0c n * g n + m1c n * g(n+1) + m2c n * g(n+2) = &0) /\\\n       g 0 = &0 /\\ g 1 = &0\n       ==> forall n. g n = &0
       #|  n - 2
       #|  1
       #|  2
@@ -96237,10 +96237,10 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  ~(&n + &1 = &0) /\\ ~(&n + &2 = &0)
       #|  n + 2 = (n + 1) + 1
       #|  n:num
-      #|  !n. lop (\\m. aa m * zz m) n =\n       (&n + &2) pow 3 * aa(n+2) / (&n + &1) pow 3 + aa(n+2) -\n       (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * aa(n+1) / (&n + &1) pow 3
+      #|  forall n. lop (\\m. aa m * zz m) n =\n       (&n + &2) pow 3 * aa(n+2) / (&n + &1) pow 3 + aa(n+2) -\n       (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * aa(n+1) / (&n + &1) pow 3
       #|  (m+1)+1 = m+2
       #|  m:num
-      #|  !m. (&m + &2) pow 3 * aa(m+2) =\n       (&2 * &m + &3) * (&17 * &m pow 2 + &51 * &m + &39) * aa(m+1) -\n       (&m + &1) pow 3 * aa(m)
+      #|  forall m. (&m + &2) pow 3 * aa(m+2) =\n       (&2 * &m + &3) * (&17 * &m pow 2 + &51 * &m + &39) * aa(m+1) -\n       (&m + &1) pow 3 * aa(m)
       #|  ~(&n + &1 = &0) /\\ ~(&n + &2 = &0) /\\ ~(&n + &3 = &0)
       #|  (n+2)+2 = n+4
       #|  (n+2)+1 = n+3
@@ -96253,7 +96253,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  (n+1)+2 = n+3
       #|  (n+2)+1 = n+3
       #|  (n+1)+1 = n+2
-      #|  !n. pflat (\\m. aa m * zz m) n = &0
+      #|  forall n. pflat (\\m. aa m * zz m) n = &0
       #|  ~(&(binom(n+m,m)) = &0) /\\ ~(&(binom(n,m)) = &0) /\\\n    ~(&m + &1 = &0) /\\ ~(&n - &m = &0) /\\ ~(&n + &m + &1 = &0) /\\ ~(&m = &0)
       #|  (&n + &m) + &1 = &n + &m + &1
       #|  &m < &n /\\ &1 <= &m
@@ -96263,7 +96263,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n + m:num
       #|  n + m + 1 = (n + m) + 1
       #|  (m + 1) - 1 = SUC(m - 1)
-      #|  !n m. 1 <= m /\\ m + 1 <= n\n         ==> d_term n (m+1) =\n             --(&m pow 3) / ((&m + &1) * (&n + &m + &1) * (&n - &m)) * d_term n m
+      #|  forall n m. 1 <= m /\\ m + 1 <= n\n         ==> d_term n (m+1) =\n             --(&m pow 3) / ((&m + &1) * (&n + &m + &1) * (&n - &m)) * d_term n m
       #|  &k + &1 < &n
       #|  ~(&k + &2 = &0) /\\ ~(&n + &2 + &k = &0) /\\ ~(--(&n) + &k + &1 = &0) /\\\n    ~((&k + &1) + &1 = &0)
       #|  &(k + 1) = &k + &1
@@ -96271,7 +96271,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  k+1
       #|  n:num
       #|  k + 2 = (k + 1) + 1
-      #|  !n k. k + 1 < n\n         ==> ss n (k+2) =\n             (--(&1) * (&k + &1) pow 3) /\n               ((&k + &2) * (&n + &2 + &k) * (--(&n) + &k + &1)) * ss n k +\n             (&2 * &k pow 3 + &8 * &k pow 2 + &11 * &k + &5 - &k * &n - &k * &n pow 2 -\n              &2 * &n pow 2 - &2 * &n) /\n               ((&k + &2) * (&n + &2 + &k) * (--(&n) + &k + &1)) * ss n (k+1)
+      #|  forall n k. k + 1 < n\n         ==> ss n (k+2) =\n             (--(&1) * (&k + &1) pow 3) /\n               ((&k + &2) * (&n + &2 + &k) * (--(&n) + &k + &1)) * ss n k +\n             (&2 * &k pow 3 + &8 * &k pow 2 + &11 * &k + &5 - &k * &n - &k * &n pow 2 -\n              &2 * &n pow 2 - &2 * &n) /\n               ((&k + &2) * (&n + &2 + &k) * (--(&n) + &k + &1)) * ss n (k+1)
       #|  sigma_s n m = ((&4 * &n + &6) / (&n + &2) pow 3 * &m pow 3 - (&4 * &n + &6) / (&n + &2) pow 2 * &m pow 2 + (&4 * &n pow 2 + &10 * &n + &6) / (&n + &2) pow 3 * &m) / (&n + &m + &1)
       #|  &m < &n
       #|  ~(&n + &2 = &0) /\\ ~(&n + &2 + &k = &0) /\\ ~(&n + &1 + &m = &0) /\\ ~(&n + &2 + &m = &0) /\\ ~(&m + &1 = &0) /\\ ~(&n + &m + &1 = &0) /\\ ~(&n - &m = &0) /\\ ~(&n + (&m + &1) + &1 = &0)
@@ -96283,21 +96283,21 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n + 2 = (n + 1) + 1
       #|  d_term (n+2) m = (&n + &2 - &m) / (&n + &2 + &m) * ((&n + &1 - &m) / (&n + &1 + &m) * d_term n m)
       #|  d_term (n+1) m = (&n + &1 - &m) / (&n + &1 + &m) * d_term n m
-      #|  !n k m. 1 <= m /\\ m <= k /\\ k < n ==> ((((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m = sigma_s n m * d_term n m - sigma_s n (m+1) * d_term n (m+1))
+      #|  forall n k m. 1 <= m /\\ m <= k /\\ k < n ==> ((((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m = sigma_s n m * d_term n m - sigma_s n (m+1) * d_term n (m+1))
       #|  ~(&n + &2 = &0) /\\ ~(&n + &1 + &1 = &0)
-      #|  !n. sigma_s n 1 = &0
+      #|  forall n. sigma_s n 1 = &0
       #|  &0 <= &n /\\ &0 <= &k
       #|  ~(&n + &2 = &0) /\\ ~(&n + (&k + &1) + &1 = &0) /\\ ~(&n + &2 + &k = &0)
-      #|  !n k. sigma_s n (k+1) = &2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k))
-      #|  !n k. 1 <= k /\\ k < n ==> sum(1..k) (\\m. (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m) = sum(1..k) (\\m. sigma_s n m * d_term n m - sigma_s n (m+1) * d_term n (m+1))
-      #|  !n k. sum(1..k) (\\m. (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m) = (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * ss n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * ss (n+1) k - ss (n+2) k
+      #|  forall n k. sigma_s n (k+1) = &2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k))
+      #|  forall n k. 1 <= k /\\ k < n ==> sum(1..k) (\\m. (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m) = sum(1..k) (\\m. sigma_s n m * d_term n m - sigma_s n (m+1) * d_term n (m+1))
+      #|  forall n k. sum(1..k) (\\m. (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * d_term n m + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * d_term (n+1) m - d_term (n+2) m) = (((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k)))) * ss n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * ss (n+1) k - ss (n+2) k
       #|  f:num->real
       #|  \\m. sigma_s n m * d_term n m
       #|  k:num
       #|  1
       #|  k:num
       #|  n:num
-      #|  !n k. 1 <= k /\\ k < n ==> ss (n+2) k = ((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) * ss n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * ss (n+1) k + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k))) * ss n (k+1)
+      #|  forall n k. 1 <= k /\\ k < n ==> ss (n+2) k = ((--(&2) - &9 * &n pow 2 + &3 * &k * &n - &6 * &k pow 2 - &n pow 4 - &5 * &n pow 3 - &6 * &k pow 3 - &k * &n pow 3 + &k * &n pow 2 + &4 * &k pow 2 * &n pow 2 + &2 * &k pow 2 * &n - &4 * &k pow 3 * &n - &k - &7 * &n) / ((&n + &2) pow 3 * (&n + &2 + &k))) * ss n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) / (&n + &2) pow 3) * ss (n+1) k + (&2 * &k * (&2 * &n + &3) * (&k + &1) * (--(&n) + &k) / ((&n + &2) pow 3 * (&n + &2 + &k))) * ss n (k+1)
       #|  vv n k = cc n k * ss n k
       #|  (&k + &1) + &1 = &k + &2
       #|  &k + &1 < &n
@@ -96309,8 +96309,8 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  k + 2 = (k + 1) + 1
       #|  k:num
       #|  n:num
-      #|  !n k. k + 1 < n ==> vv n (k+2) = (--(&1) * (&n + &2 + &k) * (--(&n) + &k + &1) * (&n + &1 + &k) pow 2 * (--(&n) + &k) pow 2 / ((&k + &1) * (&k + &2) pow 5)) * vv n k + ((&n + &2 + &k) * (--(&n) + &k + &1) * (&2 * &k pow 3 + &8 * &k pow 2 + &11 * &k + &5 - &k * &n - &k * &n pow 2 - &2 * &n pow 2 - &2 * &n) / (&k + &2) pow 5) * vv n (k+1)
-      #|  !n k. k < n ==> cc (n+1) k = (&n + &1 + &k) pow 2 / (&n + &1 - &k) pow 2 * cc n k
+      #|  forall n k. k + 1 < n ==> vv n (k+2) = (--(&1) * (&n + &2 + &k) * (--(&n) + &k + &1) * (&n + &1 + &k) pow 2 * (--(&n) + &k) pow 2 / ((&k + &1) * (&k + &2) pow 5)) * vv n k + ((&n + &2 + &k) * (--(&n) + &k + &1) * (&2 * &k pow 3 + &8 * &k pow 2 + &11 * &k + &5 - &k * &n - &k * &n pow 2 - &2 * &n pow 2 - &2 * &n) / (&k + &2) pow 5) * vv n (k+1)
+      #|  forall n k. k < n ==> cc (n+1) k = (&n + &1 + &k) pow 2 / (&n + &1 - &k) pow 2 * cc n k
       #|  (&n + &1) + &1 - &k = &n + &2 - &k
       #|  (&n + &1) + &1 + &k = &n + &2 + &k
       #|  (&n + &1) + &1 = &n + &2
@@ -96319,14 +96319,14 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  k:num
       #|  n+1
       #|  n + 2 = (n + 1) + 1
-      #|  !n k. k < n ==> cc (n+2) k = (&n + &2 + &k) pow 2 / (&n + &2 - &k) pow 2 * ((&n + &1 + &k) pow 2 / (&n + &1 - &k) pow 2 * cc n k)
+      #|  forall n k. k < n ==> cc (n+2) k = (&n + &2 + &k) pow 2 / (&n + &2 - &k) pow 2 * ((&n + &1 + &k) pow 2 / (&n + &1 - &k) pow 2 * cc n k)
       #|  &k < &n
       #|  ~(&k + &1 = &0) /\\ ~(&n + &2 + &k = &0) /\\ ~(&n + &1 - &k = &0) /\\ ~(--(&n) + &k = &0)
       #|  k:num
       #|  n:num
       #|  k:num
       #|  n:num
-      #|  !n k. k < n ==> vv (n+1) (k+1) = ((&n + &2 + &k) * (--(&n) + &k) * (&n + &1 + &k) pow 2 / (&k + &1) pow 4) * vv n k + ((&n + &2 + &k) pow 2 * (--(&n) - &1 + &k) pow 2 / (&k + &1) pow 4) * vv (n+1) k + ((--(&n) - &2 - &k) / (--(&n) + &k)) * vv n (k+1)
+      #|  forall n k. k < n ==> vv (n+1) (k+1) = ((&n + &2 + &k) * (--(&n) + &k) * (&n + &1 + &k) pow 2 / (&k + &1) pow 4) * vv n k + ((&n + &2 + &k) pow 2 * (--(&n) - &1 + &k) pow 2 / (&k + &1) pow 4) * vv (n+1) k + ((--(&n) - &2 - &k) / (--(&n) + &k)) * vv n (k+1)
       #|  &k < &n
       #|  ~(&k + &1 = &0) /\\ ~(&n + &2 = &0) /\\ ~(&n + &2 - &k = &0) /\\ ~(&n + &1 - &k = &0) /\\ ~(&n + &2 + &k = &0) /\\ ~(--(&n) + &k = &0)
       #|  (&k - &n - &2) pow 2 = (&n + &2 - &k) pow 2
@@ -96337,7 +96337,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n:num
       #|  k:num
       #|  n:num
-      #|  !n k. 1 <= k /\\ k < n ==> vv (n+2) k = (--(&1) * (&n + &2 + &k) * (&2 + &9 * &n pow 2 - &3 * &k * &n + &6 * &k pow 2 + &n pow 4 + &5 * &n pow 3 + &6 * &k pow 3 + &k * &n pow 3 - &k * &n pow 2 - &4 * &k pow 2 * &n pow 2 - &2 * &k pow 2 * &n + &4 * &k pow 3 * &n + &k + &7 * &n) * (&n + &1 + &k) pow 2 / ((&n + &2) pow 3 * (--(&n) - &1 + &k) pow 2 * (&k - &n - &2) pow 2)) * vv n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) * (&n + &2 + &k) pow 2 / ((&n + &2) pow 3 * (&k - &n - &2) pow 2)) * vv (n+1) k + (&2 * &k * (&2 * &n + &3) * (&k + &1) pow 5 * (&n + &2 + &k) / ((&n + &2) pow 3 * (--(&n) + &k) * (--(&n) - &1 + &k) pow 2 * (&k - &n - &2) pow 2)) * vv n (k+1)
+      #|  forall n k. 1 <= k /\\ k < n ==> vv (n+2) k = (--(&1) * (&n + &2 + &k) * (&2 + &9 * &n pow 2 - &3 * &k * &n + &6 * &k pow 2 + &n pow 4 + &5 * &n pow 3 + &6 * &k pow 3 + &k * &n pow 3 - &k * &n pow 2 - &4 * &k pow 2 * &n pow 2 - &2 * &k pow 2 * &n + &4 * &k pow 3 * &n + &k + &7 * &n) * (&n + &1 + &k) pow 2 / ((&n + &2) pow 3 * (--(&n) - &1 + &k) pow 2 * (&k - &n - &2) pow 2)) * vv n k + ((&2 * &n + &3) * (&n pow 2 + &3 * &n + &3) * (&n + &2 + &k) pow 2 / ((&n + &2) pow 3 * (&k - &n - &2) pow 2)) * vv (n+1) k + (&2 * &k * (&2 * &n + &3) * (&k + &1) pow 5 * (&n + &2 + &k) / ((&n + &2) pow 3 * (--(&n) + &k) * (--(&n) - &1 + &k) pow 2 * (&k - &n - &2) pow 2)) * vv n (k+1)
       #|  qc00 n k = ( &4 * &k * ( &2 * &n + &5 ) * ( &2 * &n + &3 ) * ( &2 * &n + &7 ) * ( &1744402215 * &k pow 2 * &n pow 14 + -- &390926048 * &k * &n pow 15 + -- &1797543582 * &k * &n pow 14 + -- &27184619520 * &n pow 2 + &25107052032 * &k * &n + &2077567488 * &k pow 2 + -- &332796611328 * &n pow 4 + -- &120646983168 * &n pow 3 + -- &6189000960 * &k pow 3 + -- &3452904576 * &k pow 4 + &258088741728 * &k * &n pow 3 + &102524693760 * &k * &n pow 2 + &121546930272 * &k pow 2 * &n pow 2 + &23906184192 * &k pow 2 * &n + -- &47918897056 * &k pow 3 * &n + -- &453776761464 * &k pow 4 * &n pow 6 + -- &34208713762 * &k pow 6 * &n pow 4 + -- &29608827881 * &k pow 6 * &n pow 3 + &5592448786 * &k pow 8 * &n + &14155092397 * &k pow 8 * &n pow 2 + -- &616679187165 * &k pow 3 * &n pow 7 + &2863226880 * &k + -- &2863226880 * &n + -- &673265061944 * &k pow 3 * &n pow 4 + -- &30134039386 * &k pow 7 * &n pow 2 + -- &328103820800 * &n pow 10 + -- &859845193968 * &n pow 8 + -- &591626761600 * &n pow 9 + -- &998105211488 * &n pow 7 + -- &10833443724 * &k pow 7 * &n + -- &911577929600 * &n pow 6 + -- &639897370880 * &n pow 5 + &255690672 * &k pow 9 + -- &409497350480 * &k pow 3 * &n pow 3 + -- &176289543184 * &k pow 3 * &n pow 2 + &445980429568 * &k * &n pow 4 + &779418105800 * &k pow 2 * &n pow 4 + &372081953600 * &k pow 2 * &n pow 3 + -- &27857118128 * &k pow 4 * &n + &555594416928 * &k * &n pow 5 + -- &405743014925 * &k pow 4 * &n pow 4 + -- &247666013854 * &k pow 4 * &n pow 3 + &182888462394 * &k pow 5 * &n pow 3 + &81436213660 * &k pow 5 * &n pow 2 + -- &18444006265 * &k pow 6 * &n pow 2 + -- &7247159210 * &k pow 6 * &n + -- &105299641272 * &k pow 4 * &n pow 2 + &22679880432 * &k pow 5 * &n + -- &1333959512 * &k pow 6 + -- &1822888416 * &k pow 7 + &1023021688 * &k pow 8 + &2997847184 * &k pow 5 + &63848152 * &k pow 11 * &n + -- &1719699936 * &k pow 10 * &n pow 3 + &139771620 * &k pow 11 * &n pow 3 + &123447892 * &k pow 11 * &n pow 2 + &102640379 * &k pow 11 * &n pow 4 + &17466166 * &k pow 11 * &n pow 6 + &51093252 * &k pow 11 * &n pow 5 + -- &87428804 * &k pow 10 * &n pow 7 + -- &311211346 * &k pow 10 * &n pow 6 + -- &783589496 * &k pow 10 * &n pow 5 + -- &1394901560 * &k pow 10 * &n pow 4 + -- &674057028 * &k pow 10 * &n + -- &1397856374 * &k pow 10 * &n pow 2 + &2124 * &k pow 11 * &n pow 10 + -- &5808 * &k pow 10 * &n pow 11 + -- &900 * &k pow 9 * &n pow 12 + &14016 * &k pow 8 * &n pow 13 + -- &9660 * &k pow 7 * &n pow 14 + -- &7440 * &k pow 6 * &n pow 15 + &13044 * &k pow 5 * &n pow 16 + -- &3456 * &k pow 4 * &n pow 17 + -- &3648 * &k pow 3 * &n pow 18 + &3072 * &k pow 2 * &n pow 19 + &53916 * &k pow 11 * &n pow 9 + -- &168060 * &k pow 10 * &n pow 10 + -- &7968 * &k pow 9 * &n pow 11 + &439032 * &k pow 8 * &n pow 12 + -- &342996 * &k pow 7 * &n pow 13 + -- &234732 * &k pow 6 * &n pow 14 + &482568 * &k pow 5 * &n pow 15 + -- &147696 * &k pow 4 * &n pow 16 + -- &144048 * &k pow 3 * &n pow 17 + &128928 * &k pow 2 * &n pow 18 + -- &32256 * &k * &n pow 19 + &610071 * &k pow 11 * &n pow 8 + -- &2193376 * &k pow 10 * &n pow 9 + &154863 * &k pow 9 * &n pow 10 + &6305692 * &k pow 8 * &n pow 11 + -- &5568967 * &k pow 7 * &n pow 12 + -- &3398600 * &k pow 6 * &n pow 13 + &8280997 * &k pow 5 * &n pow 14 + -- &2912340 * &k pow 4 * &n pow 15 + -- &2673124 * &k pow 3 * &n pow 16 + &2543776 * &k pow 2 * &n pow 17 + -- &631552 * &k * &n pow 18 + &4050412 * &k pow 11 * &n pow 7 + -- &17034532 * &k pow 10 * &n pow 8 + &3467507 * &k pow 9 * &n pow 9 + &55016357 * &k pow 8 * &n pow 10 + -- &54855522 * &k pow 7 * &n pow 11 + -- &29964918 * &k pow 6 * &n pow 12 + &87494875 * &k pow 5 * &n pow 13 + -- &35252851 * &k pow 4 * &n pow 14 + -- &31003896 * &k pow 3 * &n pow 15 + &31367368 * &k pow 2 * &n pow 16 + -- &7645312 * &k * &n pow 17 + -- &252131679 * &k pow 3 * &n pow 14 + &271060288 * &k pow 2 * &n pow 15 + -- &63952392 * &k * &n pow 16 + -- &3685794720 * &n pow 14 + -- &681771968 * &n pow 15 + -- &97183888 * &n pow 16 + -- &10296800 * &n pow 17 + -- &768 * &n pow 20 + -- &35328 * &n pow 19 + -- &763360 * &n pow 18 + &325582047 * &k pow 8 * &n pow 9 + -- &366581765 * &k pow 7 * &n pow 10 + -- &180195424 * &k pow 6 * &n pow 11 + &637095193 * &k pow 5 * &n pow 12 + -- &293786083 * &k pow 4 * &n pow 13 + &1381460896 * &k pow 8 * &n pow 8 + -- &1759973356 * &k pow 7 * &n pow 9 + -- &785707110 * &k pow 6 * &n pow 10 + &3390299217 * &k pow 5 * &n pow 11 + -- &1790786379 * &k pow 4 * &n pow 12 + -- &1528641105 * &k pow 3 * &n pow 13 + &4329005311 * &k pow 8 * &n pow 7 + -- &6267925410 * &k pow 7 * &n pow 8 + -- &2584329138 * &k pow 6 * &n pow 9 + &13641244822 * &k pow 5 * &n pow 10 + -- &8275822234 * &k pow 4 * &n pow 11 + -- &7171164950 * &k pow 3 * &n pow 12 + &8671244945 * &k pow 2 * &n pow 13 + &10157899122 * &k pow 8 * &n pow 6 + -- &16846739030 * &k pow 7 * &n pow 7 + -- &6608736882 * &k pow 6 * &n pow 8 + &42343375448 * &k pow 5 * &n pow 9 + -- &29644875275 * &k pow 4 * &n pow 10 + -- &26657515127 * &k pow 3 * &n pow 11 + &34074345499 * &k pow 2 * &n pow 12 + -- &6281404994 * &k * &n pow 13 + &17873852947 * &k pow 8 * &n pow 5 + -- &34403563419 * &k pow 7 * &n pow 6 + -- &13486898969 * &k pow 6 * &n pow 7 + &102510705804 * &k pow 5 * &n pow 8 + -- &83411422057 * &k pow 4 * &n pow 9 + -- &79729894768 * &k pow 3 * &n pow 10 + &107414839637 * &k pow 2 * &n pow 11 + -- &16511136494 * &k * &n pow 12 + &23326085212 * &k pow 8 * &n pow 4 + -- &53241708152 * &k pow 7 * &n pow 5 + -- &22441935459 * &k pow 6 * &n pow 6 + &194292424443 * &k pow 5 * &n pow 7 + -- &185590186906 * &k pow 4 * &n pow 8 + -- &193594433821 * &k pow 3 * &n pow 9 + &273992904577 * &k pow 2 * &n pow 10 + -- &31057152218 * &k * &n pow 11 + -- &383034928990 * &k pow 3 * &n pow 8 + &567647259943 * &k pow 2 * &n pow 9 + -- &34242238930 * &k * &n pow 10 + -- &15710071840 * &n pow 13 + -- &147311006048 * &n pow 11 + -- &53560818048 * &n pow 12 + -- &146056688 * &k pow 10 + &954502237105 * &k pow 2 * &n pow 8 + &9342208346 * &k * &n pow 9 + -- &768 * &k * &n pow 20 + &134837704206 * &k * &n pow 8 + -- &490926362370 * &k pow 4 * &n pow 5 + &286016170951 * &k pow 5 * &n pow 4 + &506405609304 * &k * &n pow 6 + &1197029877604 * &k pow 2 * &n pow 5 + -- &802371636049 * &k pow 3 * &n pow 6 + -- &832398382758 * &k pow 3 * &n pow 5 + &329600901794 * &k * &n pow 7 + &1295827185263 * &k pow 2 * &n pow 7 + &1405464163068 * &k pow 2 * &n pow 6 + &1211927256 * &k pow 9 * &n + &3251918342 * &k pow 9 * &n pow 3 + &2579633352 * &k pow 9 * &n pow 2 + &2693929255 * &k pow 9 * &n pow 4 + &31316929 * &k pow 9 * &n pow 8 + &169665992 * &k pow 9 * &n pow 7 + &612974365 * &k pow 9 * &n pow 6 + &1536374559 * &k pow 9 * &n pow 5 + &14685520 * &k pow 11 + -- &61627367257 * &k pow 7 * &n pow 4 + -- &326900137446 * &k pow 4 * &n pow 7 + -- &51889742508 * &k pow 7 * &n pow 3 + &329102354583 * &k pow 5 * &n pow 5 + &21970944881 * &k pow 8 * &n pow 3 + &287538055025 * &k pow 5 * &n pow 6 + -- &30741445978 * &k pow 6 * &n pow 5 ) ) / ( ( ( -- &n + -- &1 + &k ) pow 2 * ( -- &n + -- &4 + &k ) pow 2 * ( &n + &3 ) pow 3 * ( &n + &2 ) pow 3 * ( &k + -- &n + -- &3 ) pow 2 * ( -- &n + -- &2 + &k ) pow 2 ) )
       #|  qc10 n k = ( -- &4 * ( &2 * &n + &5 ) * ( &2 * &n + &3 ) * ( &2 * &n + &7 ) * ( -- &768 * &k pow 2 * &n pow 14 + &3456 * &k * &n pow 15 + &128352 * &k * &n pow 14 + -- &67908067008 * &n pow 2 + &9099997808 * &k * &n + &310664672 * &k pow 2 + -- &175893838000 * &n pow 4 + -- &131207942960 * &n pow 3 + -- &169882072 * &k pow 3 + &16459280 * &k pow 4 + &52615736598 * &k * &n pow 3 + &27869086208 * &k * &n pow 2 + &4186382212 * &k pow 2 * &n pow 2 + &1686931392 * &k pow 2 * &n + -- &944024994 * &k pow 3 * &n + &114305270 * &k pow 4 * &n pow 6 + -- &693288259 * &k pow 3 * &n pow 7 + &1381092384 * &k + -- &21794233216 * &n + -- &3964985038 * &k pow 3 * &n pow 4 + -- &3448870336 * &n pow 10 + -- &34419976280 * &n pow 8 + -- &12314690524 * &n pow 9 + -- &75583675964 * &n pow 7 + -- &130014624048 * &n pow 6 + -- &173414173068 * &n pow 5 + -- &3754252403 * &k pow 3 * &n pow 3 + -- &2412870465 * &k pow 3 * &n pow 2 + &68467857071 * &k * &n pow 4 + &6286099260 * &k pow 2 * &n pow 4 + &6267688586 * &k pow 2 * &n pow 3 + &88023212 * &k pow 4 * &n + &65027372713 * &k * &n pow 5 + &316850268 * &k pow 4 * &n pow 4 + &318395514 * &k pow 4 * &n pow 3 + &215308166 * &k pow 4 * &n pow 2 + -- &1240448 * &n pow 14 + -- &63984 * &n pow 15 + -- &1536 * &n pow 16 + &768 * &k pow 4 * &n pow 12 + -- &1728 * &k pow 3 * &n pow 13 + &21912 * &k pow 4 * &n pow 11 + -- &57072 * &k pow 3 * &n pow 12 + -- &20472 * &k pow 2 * &n pow 13 + &284200 * &k pow 4 * &n pow 10 + -- &861540 * &k pow 3 * &n pow 11 + -- &229168 * &k pow 2 * &n pow 12 + &2207580 * &k * &n pow 13 + &2216476 * &k pow 4 * &n pow 9 + -- &7872580 * &k pow 3 * &n pow 10 + -- &1284268 * &k pow 2 * &n pow 11 + &23327476 * &k * &n pow 12 + &11581872 * &k pow 4 * &n pow 8 + -- &48600970 * &k pow 3 * &n pow 9 + -- &2229148 * &k pow 2 * &n pow 10 + &169390270 * &k * &n pow 11 + -- &214150124 * &k pow 3 * &n pow 8 + &19636326 * &k pow 2 * &n pow 9 + &895491960 * &k * &n pow 10 + -- &14858072 * &n pow 13 + -- &747916132 * &n pow 11 + -- &123087048 * &n pow 12 + &178983116 * &k pow 2 * &n pow 8 + &3561379481 * &k * &n pow 9 + &10853226951 * &k * &n pow 8 + &223378412 * &k pow 4 * &n pow 5 + &46548168958 * &k * &n pow 6 + &4425270962 * &k pow 2 * &n pow 5 + -- &1670758425 * &k pow 3 * &n pow 6 + -- &2999441626 * &k pow 3 * &n pow 5 + &25562116926 * &k * &n pow 7 + &780005826 * &k pow 2 * &n pow 7 + &2218767840 * &k pow 2 * &n pow 6 + -- &3268333056 + &42741626 * &k pow 4 * &n pow 7 ) * &k pow 4 ) / ( ( ( -- &n + -- &2 + &k ) pow 2 * ( -- &n + -- &4 + &k ) pow 2 * ( &n + &2 ) pow 3 * ( &n + &3 ) pow 3 * ( &k + -- &n + -- &3 ) pow 2 ) )
       #|  qc01 n k = ( -- &4 * &k * ( &2 * &n + &5 ) * ( &2 * &n + &3 ) * ( &2 * &n + &7 ) * ( &k + &1 ) pow 5 * ( &285984 * &k pow 2 * &n pow 14 + -- &157920 * &k * &n pow 15 + -- &3026048 * &k * &n pow 14 + &74867424768 * &n pow 2 + -- &44680889088 * &k * &n + &5162764032 * &k pow 2 + &241822754048 * &n pow 4 + &161603596032 * &n pow 3 + -- &1744849824 * &k pow 3 + -- &744986544 * &k pow 4 + -- &281708015936 * &k * &n pow 3 + -- &142716403296 * &k * &n pow 2 + &96887337056 * &k pow 2 * &n pow 2 + &32825580096 * &k pow 2 * &n + -- &10344114032 * &k pow 3 * &n + -- &3469900135 * &k pow 4 * &n pow 6 + -- &1842594317 * &k pow 6 * &n pow 4 + -- &2262462688 * &k pow 6 * &n pow 3 + -- &13217484828 * &k pow 3 * &n pow 7 + -- &6512113152 * &k + &21458165760 * &n + -- &54560718080 * &k pow 3 * &n pow 4 + &123447892 * &k pow 7 * &n pow 2 + &10042207744 * &n pow 10 + &75468444096 * &n pow 8 + &30900177104 * &n pow 9 + &146266755504 * &n pow 7 + &63848152 * &k pow 7 * &n + &223624806496 * &n pow 6 + &266328825472 * &n pow 5 + -- &47534432700 * &k pow 3 * &n pow 3 + -- &28334986440 * &k pow 3 * &n pow 2 + -- &384634123200 * &k * &n pow 4 + &220377639732 * &k pow 2 * &n pow 4 + &176090065112 * &k pow 2 * &n pow 3 + -- &3766672224 * &k pow 4 * &n + -- &385205224120 * &k * &n pow 5 + -- &11108830969 * &k pow 4 * &n pow 4 + -- &11977447248 * &k pow 4 * &n pow 3 + &11326819614 * &k pow 5 * &n pow 3 + &8499441560 * &k pow 5 * &n pow 2 + -- &1832048202 * &k pow 6 * &n pow 2 + -- &880287004 * &k pow 6 * &n + -- &8659675144 * &k pow 4 * &n pow 2 + &3824239688 * &k pow 5 * &n + -- &190113248 * &k pow 6 + &14685520 * &k pow 7 + &780109264 * &k pow 5 + -- &6720 * &k pow 3 * &n pow 14 + &7488 * &k pow 2 * &n pow 15 + -- &3840 * &k * &n pow 16 + &8872992 * &n pow 14 + &695008 * &n pow 15 + &33792 * &n pow 16 + &768 * &n pow 17 + &2124 * &k pow 7 * &n pow 10 + -- &7932 * &k pow 6 * &n pow 11 + &8772 * &k pow 5 * &n pow 12 + -- &372 * &k pow 4 * &n pow 13 + &53916 * &k pow 7 * &n pow 9 + -- &228348 * &k pow 6 * &n pow 10 + &285576 * &k pow 5 * &n pow 11 + -- &24444 * &k pow 4 * &n pow 12 + -- &236508 * &k pow 3 * &n pow 13 + &610071 * &k pow 7 * &n pow 8 + -- &2965195 * &k pow 6 * &n pow 9 + &4228061 * &k pow 5 * &n pow 10 + -- &563929 * &k pow 4 * &n pow 11 + -- &3845816 * &k pow 3 * &n pow 12 + &5069472 * &k pow 2 * &n pow 13 + &4050412 * &k pow 7 * &n pow 7 + -- &22915157 * &k pow 6 * &n pow 8 + &37634766 * &k pow 5 * &n pow 9 + -- &7062201 * &k pow 4 * &n pow 10 + -- &38297128 * &k pow 3 * &n pow 11 + &55326472 * &k pow 2 * &n pow 12 + -- &35860680 * &k * &n pow 13 + &17466166 * &k pow 7 * &n pow 6 + -- &117046206 * &k pow 6 * &n pow 7 + &224250307 * &k pow 5 * &n pow 8 + -- &56308591 * &k pow 4 * &n pow 9 + -- &260924075 * &k pow 3 * &n pow 10 + &415735739 * &k pow 2 * &n pow 11 + -- &294146400 * &k * &n pow 12 + &51093252 * &k pow 7 * &n pow 5 + -- &414703096 * &k pow 6 * &n pow 6 + &942042570 * &k pow 5 * &n pow 7 + -- &308693091 * &k pow 4 * &n pow 8 + -- &1286667926 * &k pow 3 * &n pow 9 + &2278300097 * &k pow 2 * &n pow 10 + -- &1770637850 * &k * &n pow 11 + -- &4735827930 * &k pow 3 * &n pow 8 + &9406632852 * &k pow 2 * &n pow 9 + -- &8090727306 * &k * &n pow 10 + &78742896 * &n pow 13 + &2576225456 * &n pow 11 + &515413184 * &n pow 12 + &29795852850 * &k pow 2 * &n pow 8 + -- &28624383652 * &k * &n pow 9 + -- &79238310868 * &k * &n pow 8 + -- &7286006265 * &k pow 4 * &n pow 5 + &10083400273 * &k pow 5 * &n pow 4 + -- &292723611810 * &k * &n pow 6 + &201162981114 * &k pow 2 * &n pow 5 + -- &28108959555 * &k pow 3 * &n pow 6 + -- &45328273270 * &k pow 3 * &n pow 5 + -- &172186812834 * &k * &n pow 7 + &73002514895 * &k pow 2 * &n pow 7 + &138352054849 * &k pow 2 * &n pow 6 + &102640379 * &k pow 7 * &n pow 4 + -- &1211427691 * &k pow 4 * &n pow 7 + &139771620 * &k pow 7 * &n pow 3 + &6319292362 * &k pow 5 * &n pow 5 + &2859841811 * &k pow 5 * &n pow 6 + -- &1039509631 * &k pow 6 * &n pow 5 + &2863226880 ) ) / ( ( ( -- &n + &k ) * ( &k + -- &n + -- &3 ) pow 2 * ( -- &n + -- &4 + &k ) pow 2 * ( -- &n + -- &1 + &k ) pow 2 * ( &n + &3 ) pow 3 * ( &n + &2 ) pow 3 * ( -- &n + -- &2 + &k ) pow 2 ) )
@@ -96358,16 +96358,16 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  k:num
       #|  n:num
       #|  (k:num) + 1 < n ==> ((&k + &1) * (&k + &2) pow 5) * vv n (k + 2) = (&n pow 6 - &3 * &n pow 4 * &k pow 2 + &3 * &n pow 2 * &k pow 4 - &k pow 6 + &3 * &n pow 5 - &5 * &n pow 4 * &k - &6 * &n pow 3 * &k pow 2 + &10 * &n pow 2 * &k pow 3 + &3 * &n * &k pow 4 - &5 * &k pow 5 + &n pow 4 - &10 * &n pow 3 * &k + &8 * &n pow 2 * &k pow 2 + &10 * &n * &k pow 3 - &9 * &k pow 4 - &3 * &n pow 3 - &n pow 2 * &k + &11 * &n * &k pow 2 - &7 * &k pow 3 - &2 * &n pow 2 + &4 * &n * &k - &2 * &k pow 2) * vv n k + (&n pow 4 * &k pow 2 - &3 * &n pow 2 * &k pow 4 + &2 * &k pow 6 + &3 * &n pow 4 * &k + &2 * &n pow 3 * &k pow 2 - &16 * &n pow 2 * &k pow 3 - &3 * &n * &k pow 4 + &16 * &k pow 5 + &2 * &n pow 4 + &6 * &n pow 3 * &k - &31 * &n pow 2 * &k pow 2 - &16 * &n * &k pow 3 + &53 * &k pow 4 + &4 * &n pow 3 - &25 * &n pow 2 * &k - &32 * &n * &k pow 2 + &93 * &k pow 3 - &7 * &n pow 2 - &28 * &n * &k + &91 * &k pow 2 - &9 * &n + &47 * &k + &10) * vv n (k + 1)
-      #|  !d a b:real. ~(d = &0) /\\ d * a = d * b ==> a = b
-      #|  !a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> a / b + c / d = (a * d + c * b) / (b * d)
-      #|  !a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> a / b - c / d = (a * d - c * b) / (b * d)
-      #|  !a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> (a / b) * (c / d) = (a * c) / (b * d)
-      #|  !a b:real. --(a / b) = (--a) / b
-      #|  !a b:real. ~(a = &0) /\\ ~(b = &0) ==> inv(a / b) = b / a
-      #|  !a b c d:real.\n        ~(b = &0) /\\ ~(c = &0) /\\ ~(d = &0)\n        ==> (a / b) / (c / d) = (a * d) / (b * c)
-      #|  !a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> (a / b = c / d <=> a * d = c * b)
-      #|  !x n. ~(x = &0) ==> ~(x pow n = &0)
-      #|  !x y. ~(x = &0) /\\ ~(y = &0) ==> ~(x * y = &0)
+      #|  forall d a b:real. ~(d = &0) /\\ d * a = d * b ==> a = b
+      #|  forall a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> a / b + c / d = (a * d + c * b) / (b * d)
+      #|  forall a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> a / b - c / d = (a * d - c * b) / (b * d)
+      #|  forall a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> (a / b) * (c / d) = (a * c) / (b * d)
+      #|  forall a b:real. --(a / b) = (--a) / b
+      #|  forall a b:real. ~(a = &0) /\\ ~(b = &0) ==> inv(a / b) = b / a
+      #|  forall a b c d:real.\n        ~(b = &0) /\\ ~(c = &0) /\\ ~(d = &0)\n        ==> (a / b) / (c / d) = (a * d) / (b * c)
+      #|  forall a b c d:real.\n        ~(b = &0) /\\ ~(d = &0)\n        ==> (a / b = c / d <=> a * d = c * b)
+      #|  forall x n. ~(x = &0) ==> ~(x pow n = &0)
+      #|  forall x y. ~(x = &0) /\\ ~(y = &0) ==> ~(x * y = &0)
       #|  (/):real->real->real
       #|  inv:real->real
       #|  ( * ):real->real->real
@@ -96408,8 +96408,8 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  vv n k
       #|  &0:real
       #|  &1:real
-      #|  !g n d:real. ~(g = &0)\n                  ==> (g * n) / (g * d) = n / d
-      #|  !d D q n:real.\n        ~(d = &0) /\\ D = q * d\n        ==> D * (n / d) = q * n
+      #|  forall g n d:real. ~(g = &0)\n                  ==> (g * n) / (g * d) = n / d
+      #|  forall d D q n:real.\n        ~(d = &0) /\\ D = q * d\n        ==> D * (n / d) = q * n
       #|  ((&k - &n) pow 2 * (&n + &2) pow 3 * (&n + &3) pow 3 *\n    (&k - &n - &4) pow 2 * (&k - &n - &3) pow 2 *\n    (&k - &n - &2) pow 2 * (&k - &n - &1) pow 2 *\n    (&k - &n + &1)):real
       #|  &0
       #|  1 <= k /\\ k + 1 < n
@@ -114464,19 +114464,19 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  &0
       #|  &0
       #|  &0
-      #|  !a b:real. a - b = &0 <=> a = b
+      #|  forall a b:real. a - b = &0 <=> a = b
       #|  k:num
       #|  n:num
       #|  binom(m,k) = 0
-      #|  !m k. m < k ==> vv m k = &0
-      #|  !m. vv m 0 = &0
+      #|  forall m k. m < k ==> vv m k = &0
+      #|  forall m. vv m 0 = &0
       #|  j:num
-      #|  !n i. i <= 4 ==> ww (n+i) = sum(0..n+4) (\\j. vv (n+i) j)
+      #|  forall n i. i <= 4 ==> ww (n+i) = sum(0..n+4) (\\j. vv (n+i) j)
       #|  (n-2)+1 = n-1
       #|  1 <= n - 2
       #|  a - b = --(b - a)
       #|  sum(1..n-2) (\\j. pflat2 vv n j) = sum(1..n-2)(\\j. qflat vv n (j+1) - qflat vv n j)
-      #|  !n. 3 <= n ==> sum(1..n-2) (\\j. pflat2 vv n j) = qflat vv n (n-1) - qflat vv n 1
+      #|  forall n. 3 <= n ==> sum(1..n-2) (\\j. pflat2 vv n j) = qflat vv n (n-1) - qflat vv n 1
       #|  4<=4
       #|  4
       #|  n:num
@@ -114492,15 +114492,15 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  0<=4
       #|  0
       #|  n:num
-      #|  !n. pflat ww n = sum(0..n+4) (\\j. pflat2 vv n j)
+      #|  forall n. pflat ww n = sum(0..n+4) (\\j. pflat2 vv n j)
       #|  0
       #|  n:num
-      #|  !n. 0 < n ==> vv (n+1) 1 = (-- &n - &2 - &0) / (-- &n + &0) * vv n 1
+      #|  forall n. 0 < n ==> vv (n+1) 1 = (-- &n - &2 - &0) / (-- &n + &0) * vv n 1
       #|  0+1 = 1
       #|  0+2 = 2
       #|  0
       #|  n:num
-      #|  !n. 0 + 1 < n ==> vv n 2 =\n      ((&n + &2 + &0) * (-- &n + &0 + &1) *\n       (&2 * &0 pow 3 + &8 * &0 pow 2 + &11 * &0 + &5 - &0 * &n - &0 * &n pow 2 - &2 * &n pow 2 - &2 * &n) /\n       (&0 + &2) pow 5) * vv n 1
+      #|  forall n. 0 + 1 < n ==> vv n 2 =\n      ((&n + &2 + &0) * (-- &n + &0 + &1) *\n       (&2 * &0 pow 3 + &8 * &0 pow 2 + &11 * &0 + &5 - &0 * &n - &0 * &n pow 2 - &2 * &n pow 2 - &2 * &n) /\n       (&0 + &2) pow 5) * vv n 1
       #|  qc00 n 1 +\n     qc10 n 1 * (-- &n - &2 - &0) / (-- &n + &0) +\n     qc01 n 1 * ((&n + &2 + &0) * (-- &n + &0 + &1) *\n        (&2 * &0 pow 3 + &8 * &0 pow 2 + &11 * &0 + &5 - &0 * &n - &0 * &n pow 2 - &2 * &n pow 2 - &2 * &n) /\n        (&0 + &2) pow 5)
       #|  3 <= n
       #|  &0
@@ -115429,11 +115429,11 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  n:num
       #|  n:num
       #|  1+1 = 2
-      #|  !n. 3 <= n ==> qflat vv n 1 = &0
-      #|  !n. pflat2 vv n 0 = &0
+      #|  forall n. 3 <= n ==> qflat vv n 1 = &0
+      #|  forall n. pflat2 vv n 0 = &0
       #|  0 + 1 = 1
       #|  0 <= n - 2
-      #|  !n. 3 <= n\n         ==> sum(0..n-2) (\\j. pflat2 vv n j) = qflat vv n (n-1)
+      #|  forall n. 3 <= n\n         ==> sum(0..n-2) (\\j. pflat2 vv n j) = qflat vv n (n-1)
       #|  &86400 * &p pow 30 * vv (p + 5) (p + 5) + &8078400 * &p pow 29 * vv (p + 5) (p + 5) + &362887200 * &p pow 28 * vv (p + 5) (p + 5) + &10428570000 * &p pow 27 * vv (p + 5) (p + 5) + &215392683600 * &p pow 26 * vv (p + 5) (p + 5) + &3405403544400 * &p pow 25 * vv (p + 5) (p + 5) + &42861452187600 * &p pow 24 * vv (p + 5) (p + 5) + &440966497496400 * &p pow 23 * vv (p + 5) (p + 5) + &3778529254779600 * &p pow 22 * vv (p + 5) (p + 5) + &27338261118368400 * &p pow 21 * vv (p + 5) (p + 5) + &168724467724827600 * &p pow 20 * vv (p + 5) (p + 5) + &895057507693364400 * &p pow 19 * vv (p + 5) (p + 5) + &4104216831896967600 * &p pow 18 * vv (p + 5) (p + 5) + &16332677083169564400 * &p pow 17 * vv (p + 5) (p + 5) + &56556428408403519600 * &p pow 16 * vv (p + 5) (p + 5) + &170659353088829228400 * &p pow 15 * vv (p + 5) (p + 5) + &448891109951332287600 * &p pow 14 * vv (p + 5) (p + 5) + &1028439709562976476400 * &p pow 13 * vv (p + 5) (p + 5) + &2048425921871487291600 * &p pow 12 * vv (p + 5) (p + 5) + &3536036211260748614400 * &p pow 11 * vv (p + 5) (p + 5) + &5266547855879921467200 * &p pow 10 * vv (p + 5) (p + 5) + &6726728254681418688000 * &p pow 9 * vv (p + 5) (p + 5) + &7308645420971257286400 * &p pow 8 * vv (p + 5) (p + 5) + &6683234045544602726400 * &p pow 7 * vv (p + 5) (p + 5) + &5070923003829241728000 * &p pow 6 * vv (p + 5) (p + 5) + &3131718550216865280000 * &p pow 5 * vv (p + 5) (p + 5) + &1532406867052032000000 * &p pow 4 * vv (p + 5) (p + 5) + &570965862021120000000 * &p pow 3 * vv (p + 5) (p + 5) + &152016410603520000000 * &p pow 2 * vv (p + 5) (p + 5) + &25730522726400000000 * &p * vv (p + 5) (p + 5) + &2078244864000000000 * vv (p + 5) (p + 5) + &86400 * &p pow 30 * vv (p + 5) (p + 4) + &8078400 * &p pow 29 * vv (p + 5) (p + 4) + &362887200 * &p pow 28 * vv (p + 5) (p + 4) + &10428570000 * &p pow 27 * vv (p + 5) (p + 4) + &215392683600 * &p pow 26 * vv (p + 5) (p + 4) + &3405403544400 * &p pow 25 * vv (p + 5) (p + 4) + &42861452187600 * &p pow 24 * vv (p + 5) (p + 4) + &440966497496400 * &p pow 23 * vv (p + 5) (p + 4) + &3778529254779600 * &p pow 22 * vv (p + 5) (p + 4) + &27338261118368400 * &p pow 21 * vv (p + 5) (p + 4) + &168724467724827600 * &p pow 20 * vv (p + 5) (p + 4) + &895057507693364400 * &p pow 19 * vv (p + 5) (p + 4) + &4104216831896967600 * &p pow 18 * vv (p + 5) (p + 4) + &16332677083169564400 * &p pow 17 * vv (p + 5) (p + 4) + &56556428408403519600 * &p pow 16 * vv (p + 5) (p + 4) + &170659353088829228400 * &p pow 15 * vv (p + 5) (p + 4) + &448891109951332287600 * &p pow 14 * vv (p + 5) (p + 4) + &1028439709562976476400 * &p pow 13 * vv (p + 5) (p + 4) + &2048425921871487291600 * &p pow 12 * vv (p + 5) (p + 4) + &3536036211260748614400 * &p pow 11 * vv (p + 5) (p + 4) + &5266547855879921467200 * &p pow 10 * vv (p + 5) (p + 4) + &6726728254681418688000 * &p pow 9 * vv (p + 5) (p + 4) + &7308645420971257286400 * &p pow 8 * vv (p + 5) (p + 4) + &6683234045544602726400 * &p pow 7 * vv (p + 5) (p + 4) + &5070923003829241728000 * &p pow 6 * vv (p + 5) (p + 4) + &3131718550216865280000 * &p pow 5 * vv (p + 5) (p + 4) + &1532406867052032000000 * &p pow 4 * vv (p + 5) (p + 4) + &570965862021120000000 * &p pow 3 * vv (p + 5) (p + 4) + &152016410603520000000 * &p pow 2 * vv (p + 5) (p + 4) + &25730522726400000000 * &p * vv (p + 5) (p + 4) + &2078244864000000000 * vv (p + 5) (p + 4) + &86400 * &p pow 30 * vv (p + 5) (p + 3) + &8078400 * &p pow 29 * vv (p + 5) (p + 3) + &362887200 * &p pow 28 * vv (p + 5) (p + 3) + &10428570000 * &p pow 27 * vv (p + 5) (p + 3) + &215392683600 * &p pow 26 * vv (p + 5) (p + 3) + &3405403544400 * &p pow 25 * vv (p + 5) (p + 3) + &42861452187600 * &p pow 24 * vv (p + 5) (p + 3) + &440966497496400 * &p pow 23 * vv (p + 5) (p + 3) + &3778529254779600 * &p pow 22 * vv (p + 5) (p + 3) + &27338261118368400 * &p pow 21 * vv (p + 5) (p + 3) + &168724467724827600 * &p pow 20 * vv (p + 5) (p + 3) + &895057507693364400 * &p pow 19 * vv (p + 5) (p + 3) + &4104216831896967600 * &p pow 18 * vv (p + 5) (p + 3) + &16332677083169564400 * &p pow 17 * vv (p + 5) (p + 3) + &56556428408403519600 * &p pow 16 * vv (p + 5) (p + 3) + &170659353088829228400 * &p pow 15 * vv (p + 5) (p + 3) + &448891109951332287600 * &p pow 14 * vv (p + 5) (p + 3) + &1028439709562976476400 * &p pow 13 * vv (p + 5) (p + 3) + &2048425921871487291600 * &p pow 12 * vv (p + 5) (p + 3) + &3536036211260748614400 * &p pow 11 * vv (p + 5) (p + 3) + &5266547855879921467200 * &p pow 10 * vv (p + 5) (p + 3) + &6726728254681418688000 * &p pow 9 * vv (p + 5) (p + 3) + &7308645420971257286400 * &p pow 8 * vv (p + 5) (p + 3) + &6683234045544602726400 * &p pow 7 * vv (p + 5) (p + 3) + &5070923003829241728000 * &p pow 6 * vv (p + 5) (p + 3) + &3131718550216865280000 * &p pow 5 * vv (p + 5) (p + 3) + &1532406867052032000000 * &p pow 4 * vv (p + 5) (p + 3) + &570965862021120000000 * &p pow 3 * vv (p + 5) (p + 3) + &152016410603520000000 * &p pow 2 * vv (p + 5) (p + 3) + &25730522726400000000 * &p * vv (p + 5) (p + 3) + &2078244864000000000 * vv (p + 5) (p + 3) + &86400 * &p pow 30 * vv (p + 5) (p + 2) + &8078400 * &p pow 29 * vv (p + 5) (p + 2) + &362887200 * &p pow 28 * vv (p + 5) (p + 2) + &10428570000 * &p pow 27 * vv (p + 5) (p + 2) + &215392683600 * &p pow 26 * vv (p + 5) (p + 2) + &3405403544400 * &p pow 25 * vv (p + 5) (p + 2) + &42861452187600 * &p pow 24 * vv (p + 5) (p + 2) + &440966497496400 * &p pow 23 * vv (p + 5) (p + 2) + &3778529254779600 * &p pow 22 * vv (p + 5) (p + 2) + &27338261118368400 * &p pow 21 * vv (p + 5) (p + 2) + &168724467724827600 * &p pow 20 * vv (p + 5) (p + 2) + &895057507693364400 * &p pow 19 * vv (p + 5) (p + 2) + &4104216831896967600 * &p pow 18 * vv (p + 5) (p + 2) + &16332677083169564400 * &p pow 17 * vv (p + 5) (p + 2) + &56556428408403519600 * &p pow 16 * vv (p + 5) (p + 2) + &170659353088829228400 * &p pow 15 * vv (p + 5) (p + 2) + &448891109951332287600 * &p pow 14 * vv (p + 5) (p + 2) + &1028439709562976476400 * &p pow 13 * vv (p + 5) (p + 2) + &2048425921871487291600 * &p pow 12 * vv (p + 5) (p + 2) + &3536036211260748614400 * &p pow 11 * vv (p + 5) (p + 2) + &5266547855879921467200 * &p pow 10 * vv (p + 5) (p + 2) + &6726728254681418688000 * &p pow 9 * vv (p + 5) (p + 2) + &7308645420971257286400 * &p pow 8 * vv (p + 5) (p + 2) + &6683234045544602726400 * &p pow 7 * vv (p + 5) (p + 2) + &5070923003829241728000 * &p pow 6 * vv (p + 5) (p + 2) + &3131718550216865280000 * &p pow 5 * vv (p + 5) (p + 2) + &1532406867052032000000 * &p pow 4 * vv (p + 5) (p + 2) + &570965862021120000000 * &p pow 3 * vv (p + 5) (p + 2) + &152016410603520000000 * &p pow 2 * vv (p + 5) (p + 2) + &25730522726400000000 * &p * vv (p + 5) (p + 2) + &2078244864000000000 * vv (p + 5) (p + 2) + &86400 * &p pow 30 * vv (p + 5) (p + 1) + &8078400 * &p pow 29 * vv (p + 5) (p + 1) + &362887200 * &p pow 28 * vv (p + 5) (p + 1) + &10428570000 * &p pow 27 * vv (p + 5) (p + 1) + &215392683600 * &p pow 26 * vv (p + 5) (p + 1) + &3405403544400 * &p pow 25 * vv (p + 5) (p + 1) + &42861452187600 * &p pow 24 * vv (p + 5) (p + 1) + &440966497496400 * &p pow 23 * vv (p + 5) (p + 1) + &3778529254779600 * &p pow 22 * vv (p + 5) (p + 1) + &27338261118368400 * &p pow 21 * vv (p + 5) (p + 1) + &168724467724827600 * &p pow 20 * vv (p + 5) (p + 1) + &895057507693364400 * &p pow 19 * vv (p + 5) (p + 1) + &4104216831896967600 * &p pow 18 * vv (p + 5) (p + 1) + &16332677083169564400 * &p pow 17 * vv (p + 5) (p + 1) + &56556428408403519600 * &p pow 16 * vv (p + 5) (p + 1) + &170659353088829228400 * &p pow 15 * vv (p + 5) (p + 1) + &448891109951332287600 * &p pow 14 * vv (p + 5) (p + 1) + &1028439709562976476400 * &p pow 13 * vv (p + 5) (p + 1) + &2048425921871487291600 * &p pow 12 * vv (p + 5) (p + 1) + &3536036211260748614400 * &p pow 11 * vv (p + 5) (p + 1) + &5266547855879921467200 * &p pow 10 * vv (p + 5) (p + 1) + &6726728254681418688000 * &p pow 9 * vv (p + 5) (p + 1) + &7308645420971257286400 * &p pow 8 * vv (p + 5) (p + 1) + &6683234045544602726400 * &p pow 7 * vv (p + 5) (p + 1) + &5070923003829241728000 * &p pow 6 * vv (p + 5) (p + 1) + &3131718550216865280000 * &p pow 5 * vv (p + 5) (p + 1) + &1532406867052032000000 * &p pow 4 * vv (p + 5) (p + 1) + &570965862021120000000 * &p pow 3 * vv (p + 5) (p + 1) + &152016410603520000000 * &p pow 2 * vv (p + 5) (p + 1) + &25730522726400000000 * &p * vv (p + 5) (p + 1) + &2078244864000000000 * vv (p + 5) (p + 1) + &86400 * &p pow 30 * vv (p + 5) p + &8078400 * &p pow 29 * vv (p + 5) p + &362887200 * &p pow 28 * vv (p + 5) p + &10428570000 * &p pow 27 * vv (p + 5) p + &215392683600 * &p pow 26 * vv (p + 5) p + &3405403544400 * &p pow 25 * vv (p + 5) p + &42861452187600 * &p pow 24 * vv (p + 5) p + &440966497496400 * &p pow 23 * vv (p + 5) p + &3778529254779600 * &p pow 22 * vv (p + 5) p + &27338261118368400 * &p pow 21 * vv (p + 5) p + &168724467724827600 * &p pow 20 * vv (p + 5) p + &895057507693364400 * &p pow 19 * vv (p + 5) p + &4104216831896967600 * &p pow 18 * vv (p + 5) p + &16332677083169564400 * &p pow 17 * vv (p + 5) p + &56556428408403519600 * &p pow 16 * vv (p + 5) p + &170659353088829228400 * &p pow 15 * vv (p + 5) p + &448891109951332287600 * &p pow 14 * vv (p + 5) p + &1028439709562976476400 * &p pow 13 * vv (p + 5) p + &2048425921871487291600 * &p pow 12 * vv (p + 5) p + &3536036211260748614400 * &p pow 11 * vv (p + 5) p + &5266547855879921467200 * &p pow 10 * vv (p + 5) p + &6726728254681418688000 * &p pow 9 * vv (p + 5) p + &7308645420971257286400 * &p pow 8 * vv (p + 5) p + &6683234045544602726400 * &p pow 7 * vv (p + 5) p + &5070923003829241728000 * &p pow 6 * vv (p + 5) p + &3131718550216865280000 * &p pow 5 * vv (p + 5) p + &1532406867052032000000 * &p pow 4 * vv (p + 5) p + &570965862021120000000 * &p pow 3 * vv (p + 5) p + &152016410603520000000 * &p pow 2 * vv (p + 5) p + &25730522726400000000 * &p * vv (p + 5) p + &2078244864000000000 * vv (p + 5) p - &5875200 * &p pow 30 * vv (p + 4) (p + 4) - &531705600 * &p pow 29 * vv (p + 4) (p + 4) - &23143161600 * &p pow 28 * vv (p + 4) (p + 4) - &645118344000 * &p pow 27 * vv (p + 4) (p + 4) - &12937723063200 * &p pow 26 * vv (p + 4) (p + 4) - &198813883658400 * &p pow 25 * vv (p + 4) (p + 4) - &2434588099596000 * &p pow 24 * vv (p + 4) (p + 4) - &24392951581460400 * &p pow 23 * vv (p + 4) (p + 4) - &203747287422438000 * &p pow 22 * vv (p + 4) (p + 4) - &1438304928191420400 * &p pow 21 * vv (p + 4) (p + 4) - &8668833730765808400 * &p pow 20 * vv (p + 4) (p + 4) - &44948837666429517600 * &p pow 19 * vv (p + 4) (p + 4) - &201630497138837870400 * &p pow 18 * vv (p + 4) (p + 4) - &785609015217746025600 * &p pow 17 * vv (p + 4) (p + 4) - &2665695137627519942400 * &p pow 16 * vv (p + 4) (p + 4) - &7888347224039849295600 * &p pow 15 * vv (p + 4) (p + 4) - &20364058389551739692400 * &p pow 14 * vv (p + 4) (p + 4) - &45824930112674566479600 * &p pow 13 * vv (p + 4) (p + 4) - &89715535994909135120400 * &p pow 12 * vv (p + 4) (p + 4) - &152337250801809675993600 * &p pow 11 * vv (p + 4) (p + 4) - &223340858390707585243200 * &p pow 10 * vv (p + 4) (p + 4) - &280997791316050973760000 * &p pow 9 * vv (p + 4) (p + 4) - &300947436653714406316800 * &p pow 8 * vv (p + 4) (p + 4) - &271448229099226849689600 * &p pow 7 * vv (p + 4) (p + 4) - &203291888645926062259200 * &p pow 6 * vv (p + 4) (p + 4) - &124002094822877552947200 * &p pow 5 * vv (p + 4) (p + 4) - &59966518938292688486400 * &p pow 4 * vv (p + 4) (p + 4) - &22095468783012475699200 * &p pow 3 * vv (p + 4) (p + 4) - &5821117997491283558400 * &p pow 2 * vv (p + 4) (p + 4) - &975542934487774003200 * &p * vv (p + 4) (p + 4) - &78060170476781568000 * vv (p + 4) (p + 4) - &5875200 * &p pow 30 * vv (p + 4) (p + 3) - &531705600 * &p pow 29 * vv (p + 4) (p + 3) - &23143161600 * &p pow 28 * vv (p + 4) (p + 3) - &645118344000 * &p pow 27 * vv (p + 4) (p + 3) - &12937723063200 * &p pow 26 * vv (p + 4) (p + 3) - &198813883658400 * &p pow 25 * vv (p + 4) (p + 3) - &2434588099596000 * &p pow 24 * vv (p + 4) (p + 3) - &24392951581460400 * &p pow 23 * vv (p + 4) (p + 3) - &203747287422438000 * &p pow 22 * vv (p + 4) (p + 3) - &1438304928191420400 * &p pow 21 * vv (p + 4) (p + 3) - &8668833730765808400 * &p pow 20 * vv (p + 4) (p + 3) - &44948837666429517600 * &p pow 19 * vv (p + 4) (p + 3) - &201630497138837870400 * &p pow 18 * vv (p + 4) (p + 3) - &785609015217746025600 * &p pow 17 * vv (p + 4) (p + 3) - &2665695137627519942400 * &p pow 16 * vv (p + 4) (p + 3) - &7888347224039849295600 * &p pow 15 * vv (p + 4) (p + 3) - &20364058389551739692400 * &p pow 14 * vv (p + 4) (p + 3) - &45824930112674566479600 * &p pow 13 * vv (p + 4) (p + 3) - &89715535994909135120400 * &p pow 12 * vv (p + 4) (p + 3) - &152337250801809675993600 * &p pow 11 * vv (p + 4) (p + 3) - &223340858390707585243200 * &p pow 10 * vv (p + 4) (p + 3) - &280997791316050973760000 * &p pow 9 * vv (p + 4) (p + 3) - &300947436653714406316800 * &p pow 8 * vv (p + 4) (p + 3) - &271448229099226849689600 * &p pow 7 * vv (p + 4) (p + 3) - &203291888645926062259200 * &p pow 6 * vv (p + 4) (p + 3) - &124002094822877552947200 * &p pow 5 * vv (p + 4) (p + 3) - &59966518938292688486400 * &p pow 4 * vv (p + 4) (p + 3) - &22095468783012475699200 * &p pow 3 * vv (p + 4) (p + 3) - &5821117997491283558400 * &p pow 2 * vv (p + 4) (p + 3) - &975542934487774003200 * &p * vv (p + 4) (p + 3) - &78060170476781568000 * vv (p + 4) (p + 3) - &5875200 * &p pow 30 * vv (p + 4) (p + 2) - &531705600 * &p pow 29 * vv (p + 4) (p + 2) - &23143161600 * &p pow 28 * vv (p + 4) (p + 2) - &645118344000 * &p pow 27 * vv (p + 4) (p + 2) - &12937723063200 * &p pow 26 * vv (p + 4) (p + 2) - &198813883658400 * &p pow 25 * vv (p + 4) (p + 2) - &2434588099596000 * &p pow 24 * vv (p + 4) (p + 2) - &24392951581460400 * &p pow 23 * vv (p + 4) (p + 2) - &203747287422438000 * &p pow 22 * vv (p + 4) (p + 2) - &1438304928191420400 * &p pow 21 * vv (p + 4) (p + 2) - &8668833730765808400 * &p pow 20 * vv (p + 4) (p + 2) - &44948837666429517600 * &p pow 19 * vv (p + 4) (p + 2) - &201630497138837870400 * &p pow 18 * vv (p + 4) (p + 2) - &785609015217746025600 * &p pow 17 * vv (p + 4) (p + 2) - &2665695137627519942400 * &p pow 16 * vv (p + 4) (p + 2) - &7888347224039849295600 * &p pow 15 * vv (p + 4) (p + 2) - &20364058389551739692400 * &p pow 14 * vv (p + 4) (p + 2) - &45824930112674566479600 * &p pow 13 * vv (p + 4) (p + 2) - &89715535994909135120400 * &p pow 12 * vv (p + 4) (p + 2) - &152337250801809675993600 * &p pow 11 * vv (p + 4) (p + 2) - &223340858390707585243200 * &p pow 10 * vv (p + 4) (p + 2) - &280997791316050973760000 * &p pow 9 * vv (p + 4) (p + 2) - &300947436653714406316800 * &p pow 8 * vv (p + 4) (p + 2) - &271448229099226849689600 * &p pow 7 * vv (p + 4) (p + 2) - &203291888645926062259200 * &p pow 6 * vv (p + 4) (p + 2) - &124002094822877552947200 * &p pow 5 * vv (p + 4) (p + 2) - &59966518938292688486400 * &p pow 4 * vv (p + 4) (p + 2) - &22095468783012475699200 * &p pow 3 * vv (p + 4) (p + 2) - &5821117997491283558400 * &p pow 2 * vv (p + 4) (p + 2) - &975542934487774003200 * &p * vv (p + 4) (p + 2) - &78060170476781568000 * vv (p + 4) (p + 2) - &5875200 * &p pow 30 * vv (p + 4) (p + 1) - &531705600 * &p pow 29 * vv (p + 4) (p + 1) - &23143161600 * &p pow 28 * vv (p + 4) (p + 1) - &645118344000 * &p pow 27 * vv (p + 4) (p + 1) - &12937723063200 * &p pow 26 * vv (p + 4) (p + 1) - &198813883658400 * &p pow 25 * vv (p + 4) (p + 1) - &2434588099596000 * &p pow 24 * vv (p + 4) (p + 1) - &24392951581460400 * &p pow 23 * vv (p + 4) (p + 1) - &203747287422438000 * &p pow 22 * vv (p + 4) (p + 1) - &1438304928191420400 * &p pow 21 * vv (p + 4) (p + 1) - &8668833730765808400 * &p pow 20 * vv (p + 4) (p + 1) - &44948837666429517600 * &p pow 19 * vv (p + 4) (p + 1) - &201630497138837870400 * &p pow 18 * vv (p + 4) (p + 1) - &785609015217746025600 * &p pow 17 * vv (p + 4) (p + 1) - &2665695137627519942400 * &p pow 16 * vv (p + 4) (p + 1) - &7888347224039849295600 * &p pow 15 * vv (p + 4) (p + 1) - &20364058389551739692400 * &p pow 14 * vv (p + 4) (p + 1) - &45824930112674566479600 * &p pow 13 * vv (p + 4) (p + 1) - &89715535994909135120400 * &p pow 12 * vv (p + 4) (p + 1) - &152337250801809675993600 * &p pow 11 * vv (p + 4) (p + 1) - &223340858390707585243200 * &p pow 10 * vv (p + 4) (p + 1) - &280997791316050973760000 * &p pow 9 * vv (p + 4) (p + 1) - &300947436653714406316800 * &p pow 8 * vv (p + 4) (p + 1) - &271448229099226849689600 * &p pow 7 * vv (p + 4) (p + 1) - &203291888645926062259200 * &p pow 6 * vv (p + 4) (p + 1) - &124002094822877552947200 * &p pow 5 * vv (p + 4) (p + 1) - &59966518938292688486400 * &p pow 4 * vv (p + 4) (p + 1) - &22095468783012475699200 * &p pow 3 * vv (p + 4) (p + 1) - &5821117997491283558400 * &p pow 2 * vv (p + 4) (p + 1) - &975542934487774003200 * &p * vv (p + 4) (p + 1) - &78060170476781568000 * vv (p + 4) (p + 1) - &5875200 * &p pow 30 * vv (p + 4) p - &531705600 * &p pow 29 * vv (p + 4) p - &23143161600 * &p pow 28 * vv (p + 4) p - &645118344000 * &p pow 27 * vv (p + 4) p - &12937723063200 * &p pow 26 * vv (p + 4) p - &198813883658400 * &p pow 25 * vv (p + 4) p - &2434588099596000 * &p pow 24 * vv (p + 4) p - &24392951581460400 * &p pow 23 * vv (p + 4) p - &203747287422438000 * &p pow 22 * vv (p + 4) p - &1438304928191420400 * &p pow 21 * vv (p + 4) p - &8668833730765808400 * &p pow 20 * vv (p + 4) p - &44948837666429517600 * &p pow 19 * vv (p + 4) p - &201630497138837870400 * &p pow 18 * vv (p + 4) p - &785609015217746025600 * &p pow 17 * vv (p + 4) p - &2665695137627519942400 * &p pow 16 * vv (p + 4) p - &7888347224039849295600 * &p pow 15 * vv (p + 4) p - &20364058389551739692400 * &p pow 14 * vv (p + 4) p - &45824930112674566479600 * &p pow 13 * vv (p + 4) p - &89715535994909135120400 * &p pow 12 * vv (p + 4) p - &152337250801809675993600 * &p pow 11 * vv (p + 4) p - &223340858390707585243200 * &p pow 10 * vv (p + 4) p - &280997791316050973760000 * &p pow 9 * vv (p + 4) p - &300947436653714406316800 * &p pow 8 * vv (p + 4) p - &271448229099226849689600 * &p pow 7 * vv (p + 4) p - &203291888645926062259200 * &p pow 6 * vv (p + 4) p - &124002094822877552947200 * &p pow 5 * vv (p + 4) p - &59966518938292688486400 * &p pow 4 * vv (p + 4) p - &22095468783012475699200 * &p pow 3 * vv (p + 4) p - &5821117997491283558400 * &p pow 2 * vv (p + 4) p - &975542934487774003200 * &p * vv (p + 4) p - &78060170476781568000 * vv (p + 4) p + &100051200 * &p pow 30 * vv (p + 3) (p + 3) + &8754480000 * &p pow 29 * vv (p + 3) (p + 3) + &368531121600 * &p pow 28 * vv (p + 3) (p + 3) + &9938659672800 * &p pow 27 * vv (p + 3) (p + 3) + &192903118509600 * &p pow 26 * vv (p + 3) (p + 3) + &2870042040460800 * &p pow 25 * vv (p + 3) (p + 3) + &34041230378229600 * &p pow 24 * vv (p + 3) (p + 3) + &330499602498906000 * &p pow 23 * vv (p + 3) (p + 3) + &2676234486822346800 * &p pow 22 * vv (p + 3) (p + 3) + &18323900138719414800 * &p pow 21 * vv (p + 3) (p + 3) + &107171867178462949200 * &p pow 20 * vv (p + 3) (p + 3) + &539535096905776272000 * &p pow 19 * vv (p + 3) (p + 3) + &2351124315094488696000 * &p pow 18 * vv (p + 3) (p + 3) + &8904095421382345428000 * &p pow 17 * vv (p + 3) (p + 3) + &29384085997286989920000 * &p pow 16 * vv (p + 3) (p + 3) + &84619170854511220746000 * &p pow 15 * vv (p + 3) (p + 3) + &212715365862162701214000 * &p pow 14 * vv (p + 3) (p + 3) + &466408774454909389074000 * &p pow 13 * vv (p + 3) (p + 3) + &890326223697581454330000 * &p pow 12 * vv (p + 3) (p + 3) + &1475020089467688277728000 * &p pow 11 * vv (p + 3) (p + 3) + &2111403896600435550244800 * &p pow 10 * vv (p + 3) (p + 3) + &2595526711983247684320000 * &p pow 9 * vv (p + 3) (p + 3) + &2717989800773944583750400 * &p pow 8 * vv (p + 3) (p + 3) + &2398836674899685209651200 * &p pow 7 * vv (p + 3) (p + 3) + &1759214135097125512934400 * &p pow 6 * vv (p + 3) (p + 3) + &1051592446215753746227200 * &p pow 5 * vv (p + 3) (p + 3) + &498755575720787082854400 * &p pow 4 * vv (p + 3) (p + 3) + &180380146074985857024000 * &p pow 3 * vv (p + 3) (p + 3) + &46681981418812126003200 * &p pow 2 * vv (p + 3) (p + 3) + &7691324341654860595200 * &p * vv (p + 3) (p + 3) + &605554271057136844800 * vv (p + 3) (p + 3) + &100051200 * &p pow 30 * vv (p + 3) (p + 2) + &8754480000 * &p pow 29 * vv (p + 3) (p + 2) + &368531121600 * &p pow 28 * vv (p + 3) (p + 2) + &9938659672800 * &p pow 27 * vv (p + 3) (p + 2) + &192903118509600 * &p pow 26 * vv (p + 3) (p + 2) + &2870042040460800 * &p pow 25 * vv (p + 3) (p + 2) + &34041230378229600 * &p pow 24 * vv (p + 3) (p + 2) + &330499602498906000 * &p pow 23 * vv (p + 3) (p + 2) + &2676234486822346800 * &p pow 22 * vv (p + 3) (p + 2) + &18323900138719414800 * &p pow 21 * vv (p + 3) (p + 2) + &107171867178462949200 * &p pow 20 * vv (p + 3) (p + 2) + &539535096905776272000 * &p pow 19 * vv (p + 3) (p + 2) + &2351124315094488696000 * &p pow 18 * vv (p + 3) (p + 2) + &8904095421382345428000 * &p pow 17 * vv (p + 3) (p + 2) + &29384085997286989920000 * &p pow 16 * vv (p + 3) (p + 2) + &84619170854511220746000 * &p pow 15 * vv (p + 3) (p + 2) + &212715365862162701214000 * &p pow 14 * vv (p + 3) (p + 2) + &466408774454909389074000 * &p pow 13 * vv (p + 3) (p + 2) + &890326223697581454330000 * &p pow 12 * vv (p + 3) (p + 2) + &1475020089467688277728000 * &p pow 11 * vv (p + 3) (p + 2) + &2111403896600435550244800 * &p pow 10 * vv (p + 3) (p + 2) + &2595526711983247684320000 * &p pow 9 * vv (p + 3) (p + 2) + &2717989800773944583750400 * &p pow 8 * vv (p + 3) (p + 2) + &2398836674899685209651200 * &p pow 7 * vv (p + 3) (p + 2) + &1759214135097125512934400 * &p pow 6 * vv (p + 3) (p + 2) + &1051592446215753746227200 * &p pow 5 * vv (p + 3) (p + 2) + &498755575720787082854400 * &p pow 4 * vv (p + 3) (p + 2) + &180380146074985857024000 * &p pow 3 * vv (p + 3) (p + 2) + &46681981418812126003200 * &p pow 2 * vv (p + 3) (p + 2) + &7691324341654860595200 * &p * vv (p + 3) (p + 2) + &605554271057136844800 * vv (p + 3) (p + 2) + &100051200 * &p pow 30 * vv (p + 3) (p + 1) + &8754480000 * &p pow 29 * vv (p + 3) (p + 1) + &368531121600 * &p pow 28 * vv (p + 3) (p + 1) + &9938659672800 * &p pow 27 * vv (p + 3) (p + 1) + &192903118509600 * &p pow 26 * vv (p + 3) (p + 1) + &2870042040460800 * &p pow 25 * vv (p + 3) (p + 1) + &34041230378229600 * &p pow 24 * vv (p + 3) (p + 1) + &330499602498906000 * &p pow 23 * vv (p + 3) (p + 1) + &2676234486822346800 * &p pow 22 * vv (p + 3) (p + 1) + &18323900138719414800 * &p pow 21 * vv (p + 3) (p + 1) + &107171867178462949200 * &p pow 20 * vv (p + 3) (p + 1) + &539535096905776272000 * &p pow 19 * vv (p + 3) (p + 1) + &2351124315094488696000 * &p pow 18 * vv (p + 3) (p + 1) + &8904095421382345428000 * &p pow 17 * vv (p + 3) (p + 1) + &29384085997286989920000 * &p pow 16 * vv (p + 3) (p + 1) + &84619170854511220746000 * &p pow 15 * vv (p + 3) (p + 1) + &212715365862162701214000 * &p pow 14 * vv (p + 3) (p + 1) + &466408774454909389074000 * &p pow 13 * vv (p + 3) (p + 1) + &890326223697581454330000 * &p pow 12 * vv (p + 3) (p + 1) + &1475020089467688277728000 * &p pow 11 * vv (p + 3) (p + 1) + &2111403896600435550244800 * &p pow 10 * vv (p + 3) (p + 1) + &2595526711983247684320000 * &p pow 9 * vv (p + 3) (p + 1) + &2717989800773944583750400 * &p pow 8 * vv (p + 3) (p + 1) + &2398836674899685209651200 * &p pow 7 * vv (p + 3) (p + 1) + &1759214135097125512934400 * &p pow 6 * vv (p + 3) (p + 1) + &1051592446215753746227200 * &p pow 5 * vv (p + 3) (p + 1) + &498755575720787082854400 * &p pow 4 * vv (p + 3) (p + 1) + &180380146074985857024000 * &p pow 3 * vv (p + 3) (p + 1) + &46681981418812126003200 * &p pow 2 * vv (p + 3) (p + 1) + &7691324341654860595200 * &p * vv (p + 3) (p + 1) + &605554271057136844800 * vv (p + 3) (p + 1) + &100051200 * &p pow 30 * vv (p + 3) p + &8754480000 * &p pow 29 * vv (p + 3) p + &368531121600 * &p pow 28 * vv (p + 3) p + &9938659672800 * &p pow 27 * vv (p + 3) p + &192903118509600 * &p pow 26 * vv (p + 3) p + &2870042040460800 * &p pow 25 * vv (p + 3) p + &34041230378229600 * &p pow 24 * vv (p + 3) p + &330499602498906000 * &p pow 23 * vv (p + 3) p + &2676234486822346800 * &p pow 22 * vv (p + 3) p + &18323900138719414800 * &p pow 21 * vv (p + 3) p + &107171867178462949200 * &p pow 20 * vv (p + 3) p + &539535096905776272000 * &p pow 19 * vv (p + 3) p + &2351124315094488696000 * &p pow 18 * vv (p + 3) p + &8904095421382345428000 * &p pow 17 * vv (p + 3) p + &29384085997286989920000 * &p pow 16 * vv (p + 3) p + &84619170854511220746000 * &p pow 15 * vv (p + 3) p + &212715365862162701214000 * &p pow 14 * vv (p + 3) p + &466408774454909389074000 * &p pow 13 * vv (p + 3) p + &890326223697581454330000 * &p pow 12 * vv (p + 3) p + &1475020089467688277728000 * &p pow 11 * vv (p + 3) p + &2111403896600435550244800 * &p pow 10 * vv (p + 3) p + &2595526711983247684320000 * &p pow 9 * vv (p + 3) p + &2717989800773944583750400 * &p pow 8 * vv (p + 3) p + &2398836674899685209651200 * &p pow 7 * vv (p + 3) p + &1759214135097125512934400 * &p pow 6 * vv (p + 3) p + &1051592446215753746227200 * &p pow 5 * vv (p + 3) p + &498755575720787082854400 * &p pow 4 * vv (p + 3) p + &180380146074985857024000 * &p pow 3 * vv (p + 3) p + &46681981418812126003200 * &p pow 2 * vv (p + 3) p + &7691324341654860595200 * &p * vv (p + 3) p + &605554271057136844800 * vv (p + 3) p - &5875200 * &p pow 30 * vv (p + 2) (p + 2) - &496454400 * &p pow 29 * vv (p + 2) (p + 2) - &20182060800 * &p pow 28 * vv (p + 2) (p + 2) - &525618187200 * &p pow 27 * vv (p + 2) (p + 2) - &9852752455200 * &p pow 26 * vv (p + 2) (p + 2) - &141586844400000 * &p pow 25 * vv (p + 2) (p + 2) - &1622232668800800 * &p pow 24 * vv (p + 2) (p + 2) - &15216881838073200 * &p pow 23 * vv (p + 2) (p + 2) - &119073794633478000 * &p pow 22 * vv (p + 2) (p + 2) - &788051854021597200 * &p pow 21 * vv (p + 2) (p + 2) - &4456431820361307600 * &p pow 20 * vv (p + 2) (p + 2) - &21698902868784314400 * &p pow 19 * vv (p + 2) (p + 2) - &91488093769366401600 * &p pow 18 * vv (p + 2) (p + 2) - &335371585401421898400 * &p pow 17 * vv (p + 2) (p + 2) - &1071741009953880273600 * &p pow 16 * vv (p + 2) (p + 2) - &2990187354937999316400 * &p pow 15 * vv (p + 2) (p + 2) - &7286317532356332927600 * &p pow 14 * vv (p + 2) (p + 2) - &15495293033114667080400 * &p pow 13 * vv (p + 2) (p + 2) - &28705606152407588235600 * &p pow 12 * vv (p + 2) (p + 2) - &46182416910666822374400 * &p pow 11 * vv (p + 2) (p + 2) - &64239717512203855070400 * &p pow 10 * vv (p + 2) (p + 2) - &76792560532261627104000 * &p pow 9 * vv (p + 2) (p + 2) - &78257413215454645036800 * &p pow 8 * vv (p + 2) (p + 2) - &67266599790575125555200 * &p pow 7 * vv (p + 2) (p + 2) - &48082785202227797222400 * &p pow 6 * vv (p + 2) (p + 2) - &28038494276947532390400 * &p pow 5 * vv (p + 2) (p + 2) - &12983983325854385356800 * &p pow 4 * vv (p + 2) (p + 2) - &4588914693828752179200 * &p pow 3 * vv (p + 2) (p + 2) - &1161635825544796569600 * &p pow 2 * vv (p + 2) (p + 2) - &187382292824929075200 * &p * vv (p + 2) (p + 2) - &14457776783228928000 * vv (p + 2) (p + 2) - &5875200 * &p pow 30 * vv (p + 2) (p + 1) - &496454400 * &p pow 29 * vv (p + 2) (p + 1) - &20182060800 * &p pow 28 * vv (p + 2) (p + 1) - &525618187200 * &p pow 27 * vv (p + 2) (p + 1) - &9852752455200 * &p pow 26 * vv (p + 2) (p + 1) - &141586844400000 * &p pow 25 * vv (p + 2) (p + 1) - &1622232668800800 * &p pow 24 * vv (p + 2) (p + 1) - &15216881838073200 * &p pow 23 * vv (p + 2) (p + 1) - &119073794633478000 * &p pow 22 * vv (p + 2) (p + 1) - &788051854021597200 * &p pow 21 * vv (p + 2) (p + 1) - &4456431820361307600 * &p pow 20 * vv (p + 2) (p + 1) - &21698902868784314400 * &p pow 19 * vv (p + 2) (p + 1) - &91488093769366401600 * &p pow 18 * vv (p + 2) (p + 1) - &335371585401421898400 * &p pow 17 * vv (p + 2) (p + 1) - &1071741009953880273600 * &p pow 16 * vv (p + 2) (p + 1) - &2990187354937999316400 * &p pow 15 * vv (p + 2) (p + 1) - &7286317532356332927600 * &p pow 14 * vv (p + 2) (p + 1) - &15495293033114667080400 * &p pow 13 * vv (p + 2) (p + 1) - &28705606152407588235600 * &p pow 12 * vv (p + 2) (p + 1) - &46182416910666822374400 * &p pow 11 * vv (p + 2) (p + 1) - &64239717512203855070400 * &p pow 10 * vv (p + 2) (p + 1) - &76792560532261627104000 * &p pow 9 * vv (p + 2) (p + 1) - &78257413215454645036800 * &p pow 8 * vv (p + 2) (p + 1) - &67266599790575125555200 * &p pow 7 * vv (p + 2) (p + 1) - &48082785202227797222400 * &p pow 6 * vv (p + 2) (p + 1) - &28038494276947532390400 * &p pow 5 * vv (p + 2) (p + 1) - &12983983325854385356800 * &p pow 4 * vv (p + 2) (p + 1) - &4588914693828752179200 * &p pow 3 * vv (p + 2) (p + 1) - &1161635825544796569600 * &p pow 2 * vv (p + 2) (p + 1) - &187382292824929075200 * &p * vv (p + 2) (p + 1) - &14457776783228928000 * vv (p + 2) (p + 1) - &6144 * &p pow 36 * vv (p + 2) p - &620544 * &p pow 35 * vv (p + 2) p - &28987904 * &p pow 34 * vv (p + 2) p - &834080512 * &p pow 33 * vv (p + 2) p - &16536232576 * &p pow 32 * vv (p + 2) p - &237992445312 * &p pow 31 * vv (p + 2) p - &2524448111840 * &p pow 30 * vv (p + 2) p - &19094043856880 * &p pow 29 * vv (p + 2) p - &84930052439712 * &p pow 28 * vv (p + 2) p + &118658072299224 * &p pow 27 * vv (p + 2) p + &6431501826725016 * &p pow 26 * vv (p + 2) p + &71678736688287948 * &p pow 25 * vv (p + 2) p + &540910526248772544 * &p pow 24 * vv (p + 2) p + &3188730795997568056 * &p pow 23 * vv (p + 2) p + &15435386921408029448 * &p pow 22 * vv (p + 2) p + &62797485945725990384 * &p pow 21 * vv (p + 2) p + &217325630001711612952 * &p pow 20 * vv (p + 2) p + &643374836522472875904 * &p pow 19 * vv (p + 2) p + &1630470160060555356048 * &p pow 18 * vv (p + 2) p + &3521020120832964747652 * &p pow 17 * vv (p + 2) p + &6398130758709710542648 * &p pow 16 * vv (p + 2) p + &9502157509633529151984 * &p pow 15 * vv (p + 2) p + &10688372791664183883728 * &p pow 14 * vv (p + 2) p + &6638329791127933431984 * &p pow 13 * vv (p + 2) p - &5554811960251988017744 * &p pow 12 * vv (p + 2) p - &25822534213178540481024 * &p pow 11 * vv (p + 2) p - &49390971012287656118464 * &p pow 10 * vv (p + 2) p - &67980001135054126118656 * &p pow 9 * vv (p + 2) p - &74113229191144003251968 * &p pow 8 * vv (p + 2) p - &65782169606130748581888 * &p pow 7 * vv (p + 2) p - &47702630539562001196032 * &p pow 6 * vv (p + 2) p - &27976556011639155793920 * &p pow 5 * vv (p + 2) p - &12979163376076643942400 * &p pow 4 * vv (p + 2) p - &4588914693828752179200 * &p pow 3 * vv (p + 2) p - &1161635825544796569600 * &p pow 2 * vv (p + 2) p - &187382292824929075200 * &p * vv (p + 2) p - &14457776783228928000 * vv (p + 2) p + &2304 * &p pow 39 * vv (p + 1) (p + 1) + &230784 * &p pow 38 * vv (p + 1) (p + 1) + &10764096 * &p pow 37 * vv (p + 1) (p + 1) + &312068384 * &p pow 36 * vv (p + 1) (p + 1) + &6317830480 * &p pow 35 * vv (p + 1) (p + 1) + &94877232680 * &p pow 34 * vv (p + 1) (p + 1) + &1092254723116 * &p pow 33 * vv (p + 1) (p + 1) + &9773469084190 * &p pow 32 * vv (p + 1) (p + 1) + &67476088586106 * &p pow 31 * vv (p + 1) (p + 1) + &342141389214020 * &p pow 30 * vv (p + 1) (p + 1) + &1027139502314288 * &p pow 29 * vv (p + 1) (p + 1) - &1297555270421814 * &p pow 28 * vv (p + 1) (p + 1) - &41263951052723926 * &p pow 27 * vv (p + 1) (p + 1) - &318826850532591560 * &p pow 26 * vv (p + 1) (p + 1) - &1656699426673743740 * &p pow 25 * vv (p + 1) (p + 1) - &6497196792270769814 * &p pow 24 * vv (p + 1) (p + 1) - &19307638051713569558 * &p pow 23 * vv (p + 1) (p + 1) - &39123357908632644740 * &p pow 22 * vv (p + 1) (p + 1) - &20955766889623745456 * &p pow 21 * vv (p + 1) (p + 1) + &241387928982110219350 * &p pow 20 * vv (p + 1) (p + 1) + &1363019725448586314998 * &p pow 19 * vv (p + 1) (p + 1) + &4717398751624442875400 * &p pow 18 * vv (p + 1) (p + 1) + &12638719031598643956984 * &p pow 17 * vv (p + 1) (p + 1) + &27968295012528167990264 * &p pow 16 * vv (p + 1) (p + 1) + &52494117416637223144140 * &p pow 15 * vv (p + 1) (p + 1) + &84600469751306467276824 * &p pow 14 * vv (p + 1) (p + 1) + &117698725049716974432472 * &p pow 13 * vv (p + 1) (p + 1) + &141520574973996777178880 * &p pow 12 * vv (p + 1) (p + 1) + &146800849357163126187680 * &p pow 11 * vv (p + 1) (p + 1) + &130798754783636058640000 * &p pow 10 * vv (p + 1) (p + 1) + &99414862782326354652800 * &p pow 9 * vv (p + 1) (p + 1) + &63832457918049064872960 * &p pow 8 * vv (p + 1) (p + 1) + &34166598062862273010176 * &p pow 7 * vv (p + 1) (p + 1) + &14971506147769068859392 * &p pow 6 * vv (p + 1) (p + 1) + &5237154433747425853440 * &p pow 5 * vv (p + 1) (p + 1) + &1410141886982406144000 * &p pow 4 * vv (p + 1) (p + 1) + &276260933972430028800 * &p pow 3 * vv (p + 1) (p + 1) + &35751560630737305600 * &p pow 2 * vv (p + 1) (p + 1) + &2501285852794060800 * &p * vv (p + 1) (p + 1) + &49418312299315200 * vv (p + 1) (p + 1) + &4608 * &p pow 38 * vv (p + 1) p + &458496 * &p pow 37 * vv (p + 1) p + &21237888 * &p pow 36 * vv (p + 1) p + &611281728 * &p pow 35 * vv (p + 1) p + &12277378592 * &p pow 34 * vv (p + 1) p + &182627316240 * &p pow 33 * vv (p + 1) p + &2075431882936 * &p pow 32 * vv (p + 1) p + &18189450912748 * &p pow 31 * vv (p + 1) p + &120558124892188 * &p pow 30 * vv (p + 1) p + &549012426950680 * &p pow 29 * vv (p + 1) p + &896051073904368 * &p pow 28 * vv (p + 1) p - &11731671400316872 * &p pow 27 * vv (p + 1) p - &148681143742913604 * &p pow 26 * vv (p + 1) p - &1072503852383283124 * &p pow 25 * vv (p + 1) p - &5880307899901461712 * &p pow 24 * vv (p + 1) p - &26499042287527473748 * &p pow 23 * vv (p + 1) p - &101680990614354132460 * &p pow 22 * vv (p + 1) p - &339237467181816330544 * &p pow 21 * vv (p + 1) p - &998716848028472920912 * &p pow 20 * vv (p + 1) p - &2624909353059633378208 * &p pow 19 * vv (p + 1) p - &6217148865380344557868 * &p pow 18 * vv (p + 1) p - &13361464334559953528740 * &p pow 17 * vv (p + 1) p - &26150214104994046450440 * &p pow 16 * vv (p + 1) p - &46596490032954618364336 * &p pow 15 * vv (p + 1) p - &75285000846286601127392 * &p pow 14 * vv (p + 1) p - &109490843962042027787744 * &p pow 13 * vv (p + 1) p - &141989074943144168196608 * &p pow 12 * vv (p + 1) p - &162431161027925879313536 * &p pow 11 * vv (p + 1) p - &162020406972445279257088 * &p pow 10 * vv (p + 1) p - &139148817967626079041024 * &p pow 9 * vv (p + 1) p - &101447522175348867205120 * &p pow 8 * vv (p + 1) p - &61737529205943750936576 * &p pow 7 * vv (p + 1) p - &30703843886562149400576 * &p pow 6 * vv (p + 1) p - &12128037469898724311040 * &p pow 5 * vv (p + 1) p - &3651112853877414297600 * &p pow 4 * vv (p + 1) p - &784342373170426675200 * &p pow 3 * vv (p + 1) p - &106346735428593254400 * &p pow 2 * vv (p + 1) p - &6631869355602739200 * &p * vv (p + 1) p + &49418312299315200 * vv (p + 1) p
       #|  &p pow 13 + &28 * &p pow 12 + &355 * &p pow 11 + &2698 * &p pow 10 + &13711 * &p pow 9 + &49192 * &p pow 8 + &128165 * &p pow 7 + &245474 * &p pow 6 + &345560 * &p pow 5 + &353072 * &p pow 4 + &254480 * &p pow 3 + &122528 * &p pow 2 + &35328 * &p + &4608
       #|  &3600 * &p pow 6 + &75600 * &p pow 5 + &658800 * &p pow 4 + &3049200 * &p pow 3 + &7905600 * &p pow 2 + &10886400 * &p + &6220800
@@ -115477,7 +115477,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  m+2<=m+5
       #|  m+1<=m+5
       #|  m<=m+5
-      #|  !f m. sum(m..m+5) f = f m + f(m+1) + f(m+2) + f(m+3) + f(m+4) + f(m+5)
+      #|  forall f m. sum(m..m+5) f = f m + f(m+1) + f(m+2) + f(m+3) + f(m+4) + f(m+5)
       #|  1 <= p
       #|  p:num
       #|  (+):num->num->num
@@ -115643,7 +115643,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  1 <= p
       #|  p:num
       #|  \\j. pflat2 vv (p+1) j
-      #|  !p. 1 <= p ==>\n     sum(p..p+5) (\\j. pflat2 vv (p+1) j) =\n     pflat2 vv (p+1) p + pflat2 vv (p+1) (p+1) +\n     pflat2 vv (p+1) (p+2) + pflat2 vv (p+1) (p+3) +\n     pflat2 vv (p+1) (p+4) + pflat2 vv (p+1) (p+5)
+      #|  forall p. 1 <= p ==>\n     sum(p..p+5) (\\j. pflat2 vv (p+1) j) =\n     pflat2 vv (p+1) p + pflat2 vv (p+1) (p+1) +\n     pflat2 vv (p+1) (p+2) + pflat2 vv (p+1) (p+3) +\n     pflat2 vv (p+1) (p+4) + pflat2 vv (p+1) (p+5)
       #|  qflat vv (p+1) p
       #|  sum(p..p+5)(\\j. pflat2 vv (p+1) j)
       #|  (p+1)+4 = p+5
@@ -116726,7 +116726,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  &3600 * (&p + &3) pow 3 * (&p + &4) pow 3
       #|  &0
       #|  1 <= p
-      #|  !p. 1 <= p\n       ==> sum(p..p+5) (\\j. pflat2 vv (p+1) j) =\n           --(qflat vv (p+1) p)
+      #|  forall p. 1 <= p\n       ==> sum(p..p+5) (\\j. pflat2 vv (p+1) j) =\n           --(qflat vv (p+1) p)
       #|  3 <= n ==> (n-1)+5 = n+4
       #|  3 <= n ==> (n-1)+1 = n
       #|  3 <= n ==> 1 <= n-1
@@ -116739,7 +116739,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  0
       #|  \\j. pflat2 vv n j
       #|  sum(0..n+4) (\\j. pflat2 vv n j) =\n                sum(0..n-2) (\\j. pflat2 vv n j) +\n                sum(n-1..n+4) (\\j. pflat2 vv n j)
-      #|  !n. 3 <= n ==> pflat ww n = &0
+      #|  forall n. 3 <= n ==> pflat ww n = &0
       #|  1
       #|  2
       #|  3
@@ -116754,27 +116754,27 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  6
       #|  n = 0 \\/ n = 1 \\/ n = 2
       #|  n < 3
-      #|  !n. pflat ww n = &0
+      #|  forall n. pflat ww n = &0
       #|  pflat bb n = pflat (\\m. aa m * zz m) n + pflat ww n
-      #|  !n. pflat bb n = &0
+      #|  forall n. pflat bb n = &0
       #|  (n + 1) + 1 = n + 2
       #|  n:num
-      #|  !n. (&n + &2) pow 3 * bb(n + 2) -\n       (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * bb(n + 1) +\n       (&n + &1) pow 3 * bb(n) = &0
+      #|  forall n. (&n + &2) pow 3 * bb(n + 2) -\n       (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) * bb(n + 1) +\n       (&n + &1) pow 3 * bb(n) = &0
       #|  dd n = aa(n) * bb(n + 1) - aa(n + 1) * bb(n)
       #|  (n + 1) + 1 = n + 2
       #|  n:num
       #|  n:num
-      #|  !n. (&n + &2) pow 3 * dd(n + 1) = (&n + &1) pow 3 * dd n
+      #|  forall n. (&n + &2) pow 3 * dd(n + 1) = (&n + &1) pow 3 * dd n
       #|  1
       #|  n:num
-      #|  !n. dd n = &6 / (&n + &1) pow 3
+      #|  forall n. dd n = &6 / (&n + &1) pow 3
       #|  k:num
       #|  x <= y ==> x < &1 + y
       #|  1
       #|  0 <= n + 1
-      #|  !n. aa n < aa(n + 1)
-      #|  !m n. m <= n ==> aa m <= aa n
-      #|  !n. aa(n + 2) = (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) /\n                   (&n + &2) pow 3 * aa(n + 1) -\n                   (&n + &1) pow 3 / (&n + &2) pow 3 * aa n
+      #|  forall n. aa n < aa(n + 1)
+      #|  forall m n. m <= n ==> aa m <= aa n
+      #|  forall n. aa(n + 2) = (&2 * &n + &3) * (&17 * &n pow 2 + &51 * &n + &39) /\n                   (&n + &2) pow 3 * aa(n + 1) -\n                   (&n + &1) pow 3 / (&n + &2) pow 3 * aa n
       #|  (&n + &1) / (&n + &2) = &1 - inv(&n + &2)
       #|  &1 = (&1 - &0) pow 3
       #|  ((\\n. (&n + &1) pow 3 / (&n + &2) pow 3) ---> &1) sequentially
@@ -116802,7 +116802,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  N2:num
       #|  N1:num
       #|  &1
-      #|  ?A N. &0 < A /\\ !n. N <= n ==> A * &31 pow n <= aa n
+      #|  ?A N. &0 < A /\\ forall n. N <= n ==> A * &31 pow n <= aa n
       #|  ZETA(&3)
       #|  real_infsum (from 1) (\\n. inv(&n pow 3))
       #|  1
@@ -116819,9 +116819,9 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  \\m. bb(m + 1) / aa(m + 1) * aa n - bb n
       #|  \\m. aa(n) * sum(n..m) (\\k. bb(k + 1) / aa(k + 1) - bb(k) / aa(k))
       #|  sequentially
-      #|  !n. ZETA(&3) * aa n - bb n <= &6 * ZETA(&3) / aa(n + 1)
+      #|  forall n. ZETA(&3) * aa n - bb n <= &6 * ZETA(&3) / aa(n + 1)
       #|  b / a * c:real = (b * c) / a
-      #|  !n. bb n / aa n < bb (n + 1) / aa (n + 1)
+      #|  forall n. bb n / aa n < bb (n + 1) / aa (n + 1)
       #|  s:num
       #|  n + 1
       #|  r:num
@@ -116832,11 +116832,11 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  MAX m (n + 2)
       #|  m:num
       #|  bb(n + 1) / aa(n + 1) - bb n / aa n
-      #|  !n. bb n / aa n < ZETA(&3)
+      #|  forall n. bb n / aa n < ZETA(&3)
       #|  b:real < a ==> ~(a = b)
       #|  &0 < a ==> (b = z * a <=> z = b / a)
       #|  MAX M N <= n <=> M <= n /\\ N <= n
-      #|  !n. MAX M N <= n\n        ==> &2 * &(LCM (1..n)) pow 3 * (bb n - ZETA (&3) * aa n) = &0
+      #|  forall n. MAX M N <= n\n        ==> &2 * &(LCM (1..n)) pow 3 * (bb n - ZETA (&3) * aa n) = &0
       #|  M:num
       #|  &1
       #|  &0 < &31
@@ -116856,7 +116856,7 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  x pow 3 * y * z:real = (x * x * z) * (x * y)
       #|  q:num
       #|  p:num
-      #|  ?N. !n. N <= n\n            ==> integer(&2 * &(LCM(1..n)) pow 3 * (bb n - ZETA(&3) * aa n))
+      #|  ?N. forall n. N <= n\n            ==> integer(&2 * &(LCM(1..n)) pow 3 * (bb n - ZETA(&3) * aa n))
       #|  ~rational(ZETA(&3))
       #|  MAX M N + 1
       #|  MAX M N

@@ -8668,14 +8668,14 @@ CPU time (user): <t>
 CPU time (user): <t>
 CPU time (user): <t>
 GL/decid quotations (1863):
-  (!V w:W. ~holds (W,R) V False w) /\\\n   (!V w. holds (W,R) V True w) /\\\n   (!V s w. holds (W,R) V (Atom s) w <=> V s w) /\\\n   (!V p w. holds (W,R) V (Not p) w <=> ~holds (W,R) V p w) /\\\n   (!p V q w.\n      holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n   (!p V q w.\n      holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (!p V q w.\n      holds (W,R) V (p --> q) w <=>\n      ~holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (!p V q w.\n      holds (W,R) V (p <-> q) w <=>\n      (holds (W,R) V p w \\/ ~holds (W,R) V q w) /\\\n      (~holds (W,R) V p w \\/ holds (W,R) V q w))
+  (forall V w:W. ~holds (W,R) V False w) /\\\n   (forall V w. holds (W,R) V True w) /\\\n   (forall V s w. holds (W,R) V (Atom s) w <=> V s w) /\\\n   (forall V p w. holds (W,R) V (Not p) w <=> ~holds (W,R) V p w) /\\\n   (forall p V q w.\n      holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p --> q) w <=>\n      ~holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p <-> q) w <=>\n      (holds (W,R) V p w \\/ ~holds (W,R) V q w) /\\\n      (~holds (W,R) V p w \\/ holds (W,R) V q w))
   :A
   :num
   w:A
   TRANSNT(W:A->bool,R)
-  !W R p w:A.\n       ITF (W,R) /\\ w IN W\n       ==> (holds (W,R) V (Box p) w <=>\n            (!y. y IN W /\\ R w y ==> holds (W,R) V (Box p --> p) y))
+  forall W R p w:A.\n       ITF (W,R) /\\ w IN W\n       ==> (holds (W,R) V (Box p) w <=>\n            (forall y. y IN W /\\ R w y ==> holds (W,R) V (Box p --> p) y))
   P /\\ (P ==> Q) ==> P /\\ Q
-  !p. (!W R V w:num.\n          (!x y z:num. R y z ==> R x y ==> R x z) /\\\n          (!p w. w IN W /\\\n                 (!y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                      ==> holds (W,R) V p y)\n                 ==> holds (W,R) V (Box p) w) /\\\n          (!Q p w. w IN W /\\\n                   (!y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                        ==> holds (W,R) V p y \\/ Q)\n                   ==> holds (W,R) V (Box p) w \\/ Q) /\\\n          (!w w'. R w w'\n                  ==> !p. holds (W,R) V (Box p) w ==> holds (W,R) V p w') /\\\n          (!p w. holds (W,R) V (Box p) w\n                 ==> !w'. R w w' ==> holds (W,R) V p w') /\\\n          w IN W\n          ==> holds (W,R) V p w)\n       ==> |-- p
+  forall p. (forall W R V w:num.\n          (forall x y z:num. R y z ==> R x y ==> R x z) /\\\n          (forall p w. w IN W /\\\n                 (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                      ==> holds (W,R) V p y)\n                 ==> holds (W,R) V (Box p) w) /\\\n          (forall Q p w. w IN W /\\\n                   (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                        ==> holds (W,R) V p y \\/ Q)\n                   ==> holds (W,R) V (Box p) w \\/ Q) /\\\n          (forall w w'. R w w'\n                  ==> forall p. holds (W,R) V (Box p) w ==> holds (W,R) V p w') /\\\n          (forall p w. holds (W,R) V (Box p) w\n                 ==> forall w'. R w w' ==> holds (W,R) V p w') /\\\n          w IN W\n          ==> holds (W,R) V p w)\n       ==> |-- p
   ~P ==> P ==> Q
   ~P ==> (P \\/ Q) ==> Q
   ((~P \\/ Q) <=> (P ==> Q)) /\\\n       (~P <=> (P ==> F))
@@ -8693,7 +8693,7 @@ GL/decid quotations (1863):
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
-  !p. |-- ((Box False) <-> Box (Diam p))
+  forall p. |-- ((Box False) <-> Box (Diam p))
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
@@ -8735,7 +8735,7 @@ GL/decid quotations (1863):
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
-  !p. |-- ( Box (p <-> Not (Box p)) && Not (Box (Box False))\n             --> Not (Box p) && Not (Box (Not p)) )
+  forall p. |-- ( Box (p <-> Not (Box p)) && Not (Box (Box False))\n             --> Not (Box p) && Not (Box (Not p)) )
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
@@ -8844,7 +8844,7 @@ GL/decid quotations (1863):
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
-  !p. |-- ( Box ((Box p --> p) --> Diam (Diam True))\n             --> (Diam (Diam True) --> (Box p --> p)) )
+  forall p. |-- ( Box ((Box p --> p) --> Diam (Diam True))\n             --> (Diam (Diam True) --> (Box p --> p)) )
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
@@ -8867,7 +8867,7 @@ GL/decid quotations (1863):
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
-  !p. |-- ( Box (p <-> Not (Box p)) <-> Box (p <-> Not (Box False)) )
+  forall p. |-- ( Box (p <-> Not (Box p)) <-> Box (p <-> Not (Box False)) )
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
@@ -9032,7 +9032,7 @@ GL/decid quotations (1863):
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
-  !p q. |-- ( Dotbox (p <-> Not (Box (q --> p))) <->\n               Dotbox (p <-> Diam q) )
+  forall p q. |-- ( Dotbox (p <-> Not (Box (q --> p))) <->\n               Dotbox (p <-> Diam q) )
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)
   (T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)

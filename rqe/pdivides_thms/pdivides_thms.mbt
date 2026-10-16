@@ -31,7 +31,7 @@ fn step_1() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("-- x + -- y = -- (x + y)"))]))
   let t24 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("-- x * y = -- (x * y)"))]))
   let t25 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t24, t23, t22, t21, t20, t19, t18, t17, t16, t15, @tactics.strip_tac, t14, t13, @tactics.strip_tac, t12, @calc_rat.real_arith_tac, t11, t10, @tactics.strip_tac, t9, t8, t7, t6])
-  neg_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((-- a) pow n * p x = (-- c x) * q x + (-- d x))"), t25))
+  neg_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((-- a) pow n * p x = (-- c x) * q x + (-- d x))"), t25))
 }
 
 ///|
@@ -55,7 +55,7 @@ fn step_2() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a * x + a *  y = a *  (x + y)"))]))
   let t31 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a * x) * y = a * (x * y)"))]))
   let t32 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t31, t30, @tactics.ap_term_tac, t29])
-  mul_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((a * a pow n) * p x = (a * c x) * q x + (a * d x))"), t32))
+  mul_odd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((a * a pow n) * p x = (a * c x) * q x + (a * d x))"), t32))
 }
 
 ///|

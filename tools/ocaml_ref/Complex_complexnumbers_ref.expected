@@ -6257,135 +6257,135 @@ Complex/complexnumbers quotations (198):
   w * z = complex(Re(w) * Re(z) - Im(w) * Im(z),\n                   Re(w) * Im(z) + Im(w) * Re(z))
   inv(z) = complex(Re(z) / (Re(z) pow 2 + Im(z) pow 2),\n                    --(Im(z)) / (Re(z) pow 2 + Im(z) pow 2))
   w / z = w * inv(z)
-  (x pow 0 = Cx(&1)) /\\\n   (!n. x pow (SUC n) = x * x pow n)
+  (x pow 0 = Cx(&1)) /\\\n   (forall n. x pow (SUC n) = x * x pow n)
   (Re(complex(x,y)) = x)
   Im(complex(x,y)) = y
   complex(Re(z),Im(z)) = z
-  !w z. (w = z) <=> (Re(w) = Re(z)) /\\ (Im(w) = Im(z))
-  !x y. x + y = y + x
-  !x y z. x + y + z = (x + y) + z
-  !x. Cx(&0) + x = x
-  !x. --x + x = Cx(&0)
-  !x y. x * y = y * x
-  !x y z. x * y * z = (x * y) * z
-  !x. Cx(&1) * x = x
-  !x y z. x * (y + z) = x * y + x * z
+  forall w z. (w = z) <=> (Re(w) = Re(z)) /\\ (Im(w) = Im(z))
+  forall x y. x + y = y + x
+  forall x y z. x + y + z = (x + y) + z
+  forall x. Cx(&0) + x = x
+  forall x. --x + x = Cx(&0)
+  forall x y. x * y = y * x
+  forall x y z. x * y * z = (x * y) * z
+  forall x. Cx(&1) * x = x
+  forall x y z. x * (y + z) = x * y + x * z
   (m + n = n + m) /\\ ((m + n) + p = m + n + p) /\\ (m + n + p = n + m + p)
   (m * n = n * m) /\\ ((m * n) * p = m * n * p) /\\ (m * n * p = n * m * p)
-  !x. x + Cx(&0) = x
-  !x. x * Cx(&1) = x
-  !x. x + --x = Cx(&0)
-  !x y z. (x + y) * z = x * z + y * z
-  !x y z. (x + y = x + z) <=> (y = z)
-  !x y z. (x + z = y + z) <=> (x = y)
-  !x. x * Cx(&0) = Cx(&0)
-  !x. Cx(&0) * x = Cx(&0)
-  !x. --(--x) = x
-  !x y. x * --y = --(x * y)
-  !x y. --x * y = --(x * y)
-  !x y. --(x + y) = --x + --y
+  forall x. x + Cx(&0) = x
+  forall x. x * Cx(&1) = x
+  forall x. x + --x = Cx(&0)
+  forall x y z. (x + y) * z = x * z + y * z
+  forall x y z. (x + y = x + z) <=> (y = z)
+  forall x y z. (x + z = y + z) <=> (x = y)
+  forall x. x * Cx(&0) = Cx(&0)
+  forall x. Cx(&0) * x = Cx(&0)
+  forall x. --(--x) = x
+  forall x y. x * --y = --(x * y)
+  forall x y. --x * y = --(x * y)
+  forall x y. --(x + y) = --x + --y
   --Cx(&0) = Cx(&0)
-  !x y. (x + y = x) <=> (y = Cx(&0))
-  !x y. (x + y = y) <=> (x = Cx(&0))
-  !x y. (x + y = Cx(&0)) <=> (x = --y)
-  !x y. (x + y = Cx(&0)) <=> (y = --x)
-  !x y. --(x * y) = --x * y
-  !x y. --(x * y) = x * --y
-  !x y. --x * --y = x * y
-  !x y. x - y + y = x
-  !x y. y + x - y = x
-  !x. x - x = Cx(&0)
-  !x y. (x - y = Cx(&0)) <=> (x = y)
-  !x. (--x = Cx(&0)) <=> (x = Cx(&0))
-  !x y. --(x - y) = y - x
-  !x y. (x + y) - x = y
-  !x y. (--x = y) <=> (x = --y)
-  !x. --x = --Cx(&1) * x
-  !x y. x - y - x = --y
-  !a b c d. (a + b) - (c + d) = a - c + b - d
-  !x. Cx(&0) - x = --x
-  !x. x - Cx(&0) = x
-  !x y. --x - y = --(x + y)
-  !x y. x - --y = x + y
-  !x y. --x - --y = y - x
-  !a b c. a - b + b - c = a - c
-  !x y z. (x = y - z) <=> (x + z = y)
-  !x y z. (x - y = z) <=> (x = z + y)
-  !x y. x - (x - y) = y
-  !x y. x - (x + y) = --y
-  !x y. (x + y) * (x - y) = x * x - y * y
-  !x y. (--x = --y) <=> (x = y)
-  !x y z. x * (y - z) = x * y - x * z
-  !x y z. (x - y) * z = x * z - y * z
-  !x. &2 * x = x + x
-  !x y. (Cx(x) = Cx(y)) <=> (x = y)
-  !x. Cx(--x) = --(Cx(x))
+  forall x y. (x + y = x) <=> (y = Cx(&0))
+  forall x y. (x + y = y) <=> (x = Cx(&0))
+  forall x y. (x + y = Cx(&0)) <=> (x = --y)
+  forall x y. (x + y = Cx(&0)) <=> (y = --x)
+  forall x y. --(x * y) = --x * y
+  forall x y. --(x * y) = x * --y
+  forall x y. --x * --y = x * y
+  forall x y. x - y + y = x
+  forall x y. y + x - y = x
+  forall x. x - x = Cx(&0)
+  forall x y. (x - y = Cx(&0)) <=> (x = y)
+  forall x. (--x = Cx(&0)) <=> (x = Cx(&0))
+  forall x y. --(x - y) = y - x
+  forall x y. (x + y) - x = y
+  forall x y. (--x = y) <=> (x = --y)
+  forall x. --x = --Cx(&1) * x
+  forall x y. x - y - x = --y
+  forall a b c d. (a + b) - (c + d) = a - c + b - d
+  forall x. Cx(&0) - x = --x
+  forall x. x - Cx(&0) = x
+  forall x y. --x - y = --(x + y)
+  forall x y. x - --y = x + y
+  forall x y. --x - --y = y - x
+  forall a b c. a - b + b - c = a - c
+  forall x y z. (x = y - z) <=> (x + z = y)
+  forall x y z. (x - y = z) <=> (x = z + y)
+  forall x y. x - (x - y) = y
+  forall x y. x - (x + y) = --y
+  forall x y. (x + y) * (x - y) = x * x - y * y
+  forall x y. (--x = --y) <=> (x = y)
+  forall x y z. x * (y - z) = x * y - x * z
+  forall x y z. (x - y) * z = x * z - y * z
+  forall x. &2 * x = x + x
+  forall x y. (Cx(x) = Cx(y)) <=> (x = y)
+  forall x. Cx(--x) = --(Cx(x))
   x = &0
-  !x. Cx(inv x) = inv(Cx x)
-  !x y. Cx(x + y) = Cx(x) + Cx(y)
-  !x y. Cx(x - y) = Cx(x) - Cx(y)
-  !x y. Cx(x * y) = Cx(x) * Cx(y)
-  !x y. Cx(x / y) = Cx(x) / Cx(y)
-  !x n. Cx(x pow n) = Cx(x) pow n
-  !x. Cx(abs x) = Cx(norm(Cx(x)))
-  !x. norm(Cx(x)) = abs(x)
-  !x y. (x * y = Cx(&0)) <=> (x = Cx(&0)) \\/ (y = Cx(&0))
-  !x m n. x pow (m + n) = x pow m * x pow n
-  !x m n. (x pow m) pow n = x pow (m * n)
+  forall x. Cx(inv x) = inv(Cx x)
+  forall x y. Cx(x + y) = Cx(x) + Cx(y)
+  forall x y. Cx(x - y) = Cx(x) - Cx(y)
+  forall x y. Cx(x * y) = Cx(x) * Cx(y)
+  forall x y. Cx(x / y) = Cx(x) / Cx(y)
+  forall x n. Cx(x pow n) = Cx(x) pow n
+  forall x. Cx(abs x) = Cx(norm(Cx(x)))
+  forall x. norm(Cx(x)) = abs(x)
+  forall x y. (x * y = Cx(&0)) <=> (x = Cx(&0)) \\/ (y = Cx(&0))
+  forall x m n. x pow (m + n) = x pow m * x pow n
+  forall x m n. (x pow m) pow n = x pow (m * n)
   1
-  !x. x pow 1 = x
+  forall x. x pow 1 = x
   2
-  !x. x pow 2 = x * x
+  forall x. x pow 2 = x * x
   EVEN n
-  !x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-  !n. Cx(&1) pow n = Cx(&1)
-  !x y n. (x * y) pow n = (x pow n) * (y pow n)
+  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
+  forall n. Cx(&1) pow n = Cx(&1)
+  forall x y n. (x * y) pow n = (x pow n) * (y pow n)
   ii pow 2 = --Cx(&1)
-  !x n. (x pow n = Cx(&0)) <=> (x = Cx(&0)) /\\ ~(n = 0)
-  !x. norm(Cx x) = abs(x)
-  !z. &0 <= norm(z)
-  !z. abs(norm z) = norm z
+  forall x n. (x pow n = Cx(&0)) <=> (x = Cx(&0)) /\\ ~(n = 0)
+  forall x. norm(Cx x) = abs(x)
+  forall z. &0 <= norm(z)
+  forall z. abs(norm z) = norm z
   &0 <= x /\\ &0 <= y ==> ((x + y = &0) <=> (x = &0) /\\ (y = &0))
-  !z. (norm z = &0) <=> (z = Cx(&0))
+  forall z. (norm z = &0) <=> (z = Cx(&0))
   norm(Cx(&n)) = &n
   norm(Cx(&0)) = &0
-  !z. &0 < norm(z) <=> ~(z = Cx(&0))
-  !z. norm(--z) = norm(z)
-  !w z. norm(w * z) = norm(w) * norm(z)
-  !z n. norm(z pow n) = norm(z) pow n
+  forall z. &0 < norm(z) <=> ~(z = Cx(&0))
+  forall z. norm(--z) = norm(z)
+  forall w z. norm(w * z) = norm(w) * norm(z)
+  forall z n. norm(z pow n) = norm(z) pow n
   a * a * b * b:real = (a * b) * (a * b)
   Re z * Re z + Im z * Im z = &0
   (r * d) * r * d + (--i * d) * --i * d =\n                          (r * r + i * i) * d * d:real
-  !z. norm(inv z) = inv(norm z)
-  !w z. norm(w / z) = norm(w) / norm(z)
+  forall z. norm(inv z) = inv(norm z)
+  forall w z. norm(w / z) = norm(w) / norm(z)
   (rw * rz + iw * iz) * (rw * rz + iw * iz) <=\n    (rw * rw + iw * iw) * (rz * rz + iz * iz) <=>\n    &0 <= (rw * iz - rz * iw) * (rw * iz - rz * iw)
   &0 <= y /\\ abs(x) <= abs(y) ==> x <= y
   (rw + rz) * (rw + rz) + (iw + iz) * (iw + iz) <=\n    (rw * rw + iw * iw) + (rz * rz + iz * iz) + &2 * other <=>\n    rw * rz + iw * iz <= other
   (a + b) * (a + b) = a * a + b * b + &2 * a * b
   &0 <= y /\\ abs(x) <= abs(y) ==> x <= y
-  !w z. norm(w + z) <= norm(w) + norm(z)
-  !w z. norm(w) <= norm(w + z) + norm(z)
+  forall w z. norm(w + z) <= norm(w) + norm(z)
+  forall w z. norm(w) <= norm(w + z) + norm(z)
   a - b <= x /\\ b - a <= x ==> abs(a - b) <= x:real
-  !w z. abs(norm w - norm z) <= norm(w - z)
+  forall w z. abs(norm w - norm z) <= norm(w - z)
   cnj(z) = complex(Re(z),--(Im(z)))
-  !w z. (cnj(w) = cnj(z)) <=> (w = z)
-  !z. cnj(cnj z) = z
-  !x. cnj(Cx x) = Cx x
-  !z. norm(cnj z) = norm(z)
-  !z. cnj(--z) = --(cnj z)
-  !z. cnj(inv z) = inv(cnj z)
-  !w z. cnj(w + z) = cnj(w) + cnj(z)
-  !w z. cnj(w - z) = cnj(w) - cnj(z)
-  !w z. cnj(w * z) = cnj(w) * cnj(z)
-  !w z. cnj(w / z) = cnj(w) / cnj(z)
-  !z n. cnj(z pow n) = cnj(z) pow n
+  forall w z. (cnj(w) = cnj(z)) <=> (w = z)
+  forall z. cnj(cnj z) = z
+  forall x. cnj(Cx x) = Cx x
+  forall z. norm(cnj z) = norm(z)
+  forall z. cnj(--z) = --(cnj z)
+  forall z. cnj(inv z) = inv(cnj z)
+  forall w z. cnj(w + z) = cnj(w) + cnj(z)
+  forall w z. cnj(w - z) = cnj(w) - cnj(z)
+  forall w z. cnj(w * z) = cnj(w) * cnj(z)
+  forall w z. cnj(w / z) = cnj(w) / cnj(z)
+  forall z n. cnj(z pow n) = cnj(z) pow n
   Cx
   Cx
   Cx
   x:real
   n:num
-  (!x y z. x + (y + z) = (x + y) + z) /\\\n   (!x y. x + y = y + x) /\\\n   (!x. Cx(&0) + x = x) /\\\n   (!x y z. x * (y * z) = (x * y) * z) /\\\n   (!x y. x * y = y * x) /\\\n   (!x. Cx(&1) * x = x) /\\\n   (!x. Cx(&0) * x = Cx(&0)) /\\\n   (!x y z. x * (y + z) = x * y + x * z) /\\\n   (!x. x pow 0 = Cx(&1)) /\\\n   (!x n. x pow (SUC n) = x * x pow n)
-  (!x. --x = Cx(-- &1) * x) /\\\n   (!x y. x - y = x + Cx(-- &1) * y)
+  (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. Cx(&0) + x = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x y. x * y = y * x) /\\\n   (forall x. Cx(&1) * x = x) /\\\n   (forall x. Cx(&0) * x = Cx(&0)) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x. x pow 0 = Cx(&1)) /\\\n   (forall x n. x pow (SUC n) = x * x pow n)
+  (forall x. --x = Cx(-- &1) * x) /\\\n   (forall x y. x - y = x + Cx(-- &1) * y)
   p:num
   q:num
   0
@@ -6397,13 +6397,13 @@ Complex/complexnumbers quotations (198):
   (*):complex->complex->complex
   (/):complex->complex->complex
   (pow):complex->num->complex
-  !z. ~(z = Cx(&0)) ==> (inv(z) * z = Cx(&1))
-  !z. ~(z = Cx(&0)) ==> (z * inv(z) = Cx(&1))
+  forall z. ~(z = Cx(&0)) ==> (inv(z) * z = Cx(&1))
+  forall z. ~(z = Cx(&0)) ==> (z * inv(z) = Cx(&1))
   (pow):complex->num->complex
   (w * y + x * z = w * z + x * y) <=>\n      (w - x) * (y - z) = Cx(&0)
-  (!x. Cx(&0) * x = Cx(&0)) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+  (forall x. Cx(&0) * x = Cx(&0)) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
   ~(Cx(&1) = Cx(&0))
-  !x y:complex. ~(x = y) <=> ?z. (x - y) * z = Cx(&1)
+  forall x y:complex. ~(x = y) <=> ?z. (x - y) * z = Cx(&1)
   (pow):complex->num->complex
   (/):complex->complex->complex
   (*):complex->complex->complex
@@ -6414,26 +6414,26 @@ Complex/complexnumbers quotations (198):
   inv(Cx(&0)) = Cx(&0)
   z = Cx(&0)
   w = Cx(&0)
-  !w z. inv(w * z) = inv(w) * inv(z)
+  forall w z. inv(w * z) = inv(w) * inv(z)
   inv(Cx(&1)) = Cx(&1)
-  !x n. (inv x) pow n = inv(x pow n)
+  forall x n. (inv x) pow n = inv(x pow n)
   inv(x):complex
   x:complex
   x = Cx(&0)
-  !x:complex. inv(inv x) = x
+  forall x:complex. inv(inv x) = x
   (/\\)
   inv:complex->complex
   (/):complex->complex->complex
-  !x. x = Cx(&0) \\/ x * inv(x) = Cx(&1)
+  forall x. x = Cx(&0) \\/ x * inv(x) = Cx(&1)
   (p \\/ q) /\\ (r \\/ s) ==> (p \\/ r) \\/ q /\\ s
-  !x y n. (x / y) pow n = (x pow n) / (y pow n)
-  !x. ~(x = Cx(&0)) ==> (x / x = Cx(&1))
-  !x y z. (x * y = x * z) <=> (x = Cx(&0)) \\/ (y = z)
-  !x y z. (x * z = y * z) <=> (x = y) \\/ (z = Cx(&0))
-  !w z. w * z = Cx(&1) ==> inv w = z
-  !w z. w * z = Cx(&1) ==> inv z = w
-  !w z. ~(z = Cx(&0)) ==> z * w / z = w
-  !w z. ~(z = Cx(&0)) ==> w / z * z = w
+  forall x y n. (x / y) pow n = (x pow n) / (y pow n)
+  forall x. ~(x = Cx(&0)) ==> (x / x = Cx(&1))
+  forall x y z. (x * y = x * z) <=> (x = Cx(&0)) \\/ (y = z)
+  forall x y z. (x * z = y * z) <=> (x = y) \\/ (z = Cx(&0))
+  forall w z. w * z = Cx(&1) ==> inv w = z
+  forall w z. w * z = Cx(&1) ==> inv z = w
+  forall w z. ~(z = Cx(&0)) ==> z * w / z = w
+  forall w z. ~(z = Cx(&0)) ==> w / z * z = w
 complex_tybij_raw =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(complex,bool),bool) (\a:complex. ((#=:fun(complex,fun(complex,bool)) (#complex:fun(prod(real,real),complex) (#coords:fun(complex,prod(real,real)) a:complex))) a:complex)))) (#!:fun(fun(prod(real,real),bool),bool) (\r:prod(real,real). ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(prod(real,real),fun(prod(real,real),bool)) (#coords:fun(complex,prod(real,real)) (#complex:fun(prod(real,real),complex) r:prod(real,real)))) r:prod(real,real))))))
 complex_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(complex,bool),bool) (\a:complex. ((#=:fun(complex,fun(complex,bool)) (#complex:fun(prod(real,real),complex) (#coords:fun(complex,prod(real,real)) a:complex))) a:complex)))) (#!:fun(fun(prod(real,real),bool),bool) (\r:prod(real,real). ((#=:fun(prod(real,real),fun(prod(real,real),bool)) (#coords:fun(complex,prod(real,real)) (#complex:fun(prod(real,real),complex) r:prod(real,real)))) r:prod(real,real)))))
 RE_DEF =  |- (#!:fun(fun(complex,bool),bool) (\z:complex. ((#=:fun(real,fun(real,bool)) (#Re:fun(complex,real) z:complex)) (#FST:fun(prod(real,real),real) (#coords:fun(complex,prod(real,real)) z:complex)))))

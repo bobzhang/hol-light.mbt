@@ -75936,31 +75936,31 @@ Tutorial/Defining_new_types quotations (28):
   ?x:real^3. ~(x = vec 0)
   x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
   x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-  ((!x. P(dest_dir x)) <=> (!x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-  (!x. x || x) /\\\n   (!x y. x || y <=> y || x) /\\\n   (!x y z. x || y /\\ y || z ==> x || z)
+  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
+  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
   p':real^3
   p:real^3
-  !p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             !l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-  !l l'. ?p. p _|_ l /\\ p _|_ l'
+  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
+  forall l l'. ?p. p _|_ l /\\ p _|_ l'
   basis 3 :real^3
   basis 2 : real^3
   basis 1 :real^3
   ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
   x cross vec 0 = vec 0 /\\ vec 0 cross x = vec 0
   orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-  !l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
+  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
   a + b:real^3
-  !x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-  !l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
+  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
+  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
   (||)
-  !x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
+  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
   ?x:line. T
   p on l <=> perpl (dest_point p) l
-  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((!p. P (dest_point p)) <=> (!l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-  !p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          !l'. p on l' /\\ p' on l' ==> (l' = l)
-  !l l'. ?p. p on l /\\ p on l'
+  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
+  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
+  forall l l'. ?p. p on l /\\ p on l'
   ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-  !l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
+  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
 direction_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(direction,bool),bool) (\a:direction. ((#=:fun(direction,fun(direction,bool)) (#mk_dir:fun(cart(real,tybit1(1)),direction) (#dest_dir:fun(direction,cart(real,tybit1(1))) a:direction))) a:direction)))) (#!:fun(fun(cart(real,tybit1(1)),bool),bool) (\r:cart(real,tybit1(1)). ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) r:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) (#mk_dir:fun(cart(real,tybit1(1)),direction) r:cart(real,tybit1(1))))) r:cart(real,tybit1(1)))))))
 perpdir =  |- (#!:fun(fun(direction,bool),bool) (\x:direction. (#!:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#_|_:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction)))))))
 pardir =  |- (#!:fun(fun(direction,bool),bool) (\x:direction. (#!:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#||:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))))))

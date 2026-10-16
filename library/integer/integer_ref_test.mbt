@@ -9814,217 +9814,217 @@ test "Library/integer matches Library/integer.ml" {
       #|0..0..solved at 2
       #|0..0..5..12..30..67..158..372..solved at 505
       #|Library/integer quotations (347):
-      #|  !d. d divides d
-      #|  !x y z. x divides y /\\ y divides z ==> x divides z
-      #|  !d a b. d divides a /\\ d divides b ==> d divides (a + b)
-      #|  !d a b. d divides a /\\ d divides b ==> d divides (a - b)
-      #|  !d. d divides &0
-      #|  !x. &0 divides x <=> x = &0
-      #|  !d x. (--d) divides x <=> d divides x
-      #|  !d x. d divides (--x) <=> d divides x
-      #|  !d x y. d divides x ==> d divides (x * y)
-      #|  !d x y. d divides y ==> d divides (x * y)
-      #|  !x. &1 divides x
-      #|  !d a b. d divides a /\\ d divides (a + b) ==> d divides b
-      #|  !d a b. d divides b /\\ d divides (a + b) ==> d divides a
-      #|  !a b c. a divides b ==> (c * a) divides (c * b)
-      #|  !a b c. a divides b ==> (a * c) divides (b * c)
-      #|  !d a x. (x * d) divides a ==> d divides a
-      #|  !d a x. (d * x) divides a ==> d divides a
-      #|  !a b c. (c * a) divides (c * b) /\\ ~(c = &0) ==> a divides b
-      #|  !a b c. ~(c = &0) ==> ((c * a) divides (c * b) <=> a divides b)
-      #|  !a b c. ~(c = &0) ==> ((a * c) divides (b * c) <=> a divides b)
-      #|  !a b c d. a divides b /\\ c divides d ==> (a * c) divides (b * d)
-      #|  !x y n. x divides y ==> (x pow n) divides (y pow n)
-      #|  !n x y. ~(n = 0) /\\ (x pow n) divides y ==> x divides y
-      #|  !x y n. x divides y /\\ ~(n = 0) ==> x divides (y pow n)
-      #|  !x y n. x divides y ==> x divides (y pow (SUC n))
-      #|  !(p:int) m n. m <= n ==> p pow m divides p pow n
-      #|  !a b:int. a divides b /\\ b divides a <=> !d. d divides a <=> d divides b
-      #|  !a b. a divides b /\\ b divides a <=> !d. a divides d <=> b divides d
+      #|  forall d. d divides d
+      #|  forall x y z. x divides y /\\ y divides z ==> x divides z
+      #|  forall d a b. d divides a /\\ d divides b ==> d divides (a + b)
+      #|  forall d a b. d divides a /\\ d divides b ==> d divides (a - b)
+      #|  forall d. d divides &0
+      #|  forall x. &0 divides x <=> x = &0
+      #|  forall d x. (--d) divides x <=> d divides x
+      #|  forall d x. d divides (--x) <=> d divides x
+      #|  forall d x y. d divides x ==> d divides (x * y)
+      #|  forall d x y. d divides y ==> d divides (x * y)
+      #|  forall x. &1 divides x
+      #|  forall d a b. d divides a /\\ d divides (a + b) ==> d divides b
+      #|  forall d a b. d divides b /\\ d divides (a + b) ==> d divides a
+      #|  forall a b c. a divides b ==> (c * a) divides (c * b)
+      #|  forall a b c. a divides b ==> (a * c) divides (b * c)
+      #|  forall d a x. (x * d) divides a ==> d divides a
+      #|  forall d a x. (d * x) divides a ==> d divides a
+      #|  forall a b c. (c * a) divides (c * b) /\\ ~(c = &0) ==> a divides b
+      #|  forall a b c. ~(c = &0) ==> ((c * a) divides (c * b) <=> a divides b)
+      #|  forall a b c. ~(c = &0) ==> ((a * c) divides (b * c) <=> a divides b)
+      #|  forall a b c d. a divides b /\\ c divides d ==> (a * c) divides (b * d)
+      #|  forall x y n. x divides y ==> (x pow n) divides (y pow n)
+      #|  forall n x y. ~(n = 0) /\\ (x pow n) divides y ==> x divides y
+      #|  forall x y n. x divides y /\\ ~(n = 0) ==> x divides (y pow n)
+      #|  forall x y n. x divides y ==> x divides (y pow (SUC n))
+      #|  forall(p:int) m n. m <= n ==> p pow m divides p pow n
+      #|  forall a b:int. a divides b /\\ b divides a <=> forall d. d divides a <=> d divides b
+      #|  forall a b. a divides b /\\ b divides a <=> forall d. a divides d <=> b divides d
       #|  abs
-      #|  !x. &0 <= x ==> (x divides &1 <=> x = &1)
-      #|  !d. d divides &1 <=> abs(d) = &1
-      #|  !d. d divides &1 <=> d = &1 \\/ d = -- &1
+      #|  forall x. &0 <= x ==> (x divides &1 <=> x = &1)
+      #|  forall d. d divides &1 <=> abs(d) = &1
+      #|  forall d. d divides &1 <=> d = &1 \\/ d = -- &1
       #|  y = x * d /\\ x = y * e /\\ ~(y = &0) ==> d divides &1
       #|  x = &0
-      #|  !x y. x divides y /\\ y divides x <=> ?u. u divides &1 /\\ x = y * u
-      #|  !x y. x divides y /\\ y divides x <=> x = y \\/ x = --y
-      #|  !x y. x divides y /\\ y divides x <=> abs(x) = abs(y)
-      #|  !x y. &0 <= x /\\ &0 <= y ==> (x divides y /\\ y divides x <=> x = y)
-      #|  !a b. &0 <= gcd(a,b)
-      #|  !a b. abs(gcd(a,b)) = gcd(a,b)
-      #|  !a b. gcd(a,b) divides a /\\ gcd(a,b) divides b
-      #|  !a b. coprime(a,b) <=> gcd(a,b) = &1
-      #|  !a b. ?x y. gcd(a,b) = a * x + b * y
-      #|  !a b d. d divides gcd(a,b) <=> d divides a /\\ d divides b
-      #|  !a b. (gcd(a,b) divides a /\\ gcd(a,b) divides b) /\\\n         (!e. e divides a /\\ e divides b ==> e divides gcd(a,b))
-      #|  !a b d. gcd(a,b) = d <=> &0 <= d /\\ d divides a /\\ d divides b /\\\n                            !e. e divides a /\\ e divides b ==> e divides d
-      #|  !a b d. gcd(a,b) = abs(d) <=>\n           d divides a /\\ d divides b /\\\n           !e. e divides a /\\ e divides b ==> e divides d
-      #|  !a. gcd(a,a) = abs(a)
-      #|  !a b. gcd(a,b) = gcd(b,a)
-      #|  !a b c. gcd(a,gcd(b,c)) = gcd(gcd(a,b),c)
-      #|  !a. gcd(a,&1) = &1 /\\ gcd(&1,a) = &1
-      #|  !a. gcd(a,&0) = abs(a) /\\ gcd(&0,a) = abs(a)
-      #|  !a b. gcd(a,b) = &0 <=> a = &0 /\\ b = &0
-      #|  !a b. gcd(abs(a),b) = gcd(a,b) /\\ gcd(a,abs(b)) = gcd(a,b)
-      #|  !a b. gcd(a,a * b) = abs(a) /\\ gcd(b,a * b) = abs(b)
-      #|  (!a b. gcd(a + b,b) = gcd(a,b)) /\\\n   (!a b. gcd(b + a,b) = gcd(a,b)) /\\\n   (!a b. gcd(a,a + b) = gcd(a,b)) /\\\n   (!a b. gcd(a,b + a) = gcd(a,b))
-      #|  (!a b. gcd(a - b,b) = gcd(a,b)) /\\\n   (!a b. gcd(b - a,b) = gcd(a,b)) /\\\n   (!a b. gcd(a,a - b) = gcd(a,b)) /\\\n   (!a b. gcd(a,b - a) = gcd(a,b))
-      #|  !m n:int. m divides n <=> gcd(m,n) = abs m
-      #|  !m n:int. n divides m <=> gcd(m,n) = abs n
-      #|  !x y u v:int.\n        (!d. d divides x /\\ d divides y <=> d divides u /\\ d divides v)\n        ==> gcd(x,y) = gcd(u,v)
-      #|  !a b:int. gcd(--a,b) = gcd(a,b)
-      #|  !a b:int. gcd(a,--b) = gcd(a,b)
-      #|  (!a b. gcd(--a,b) = gcd(a,b)) /\\\n   (!a b. gcd(a,--b) = gcd(a,b))
-      #|  !a b. gcd(abs a,b) = gcd(a,b)
-      #|  !a b. gcd(a,abs b) = gcd(a,b)
-      #|  (!a b. gcd(abs a,b) = gcd(a,b)) /\\\n   (!a b. gcd(a,abs b) = gcd(a,b))
-      #|  !a b c:int. gcd(c * a,c * b) = abs c * gcd(a,b)
-      #|  !a b c:int. gcd(a * c,b * c) = gcd(a,b) * abs c
-      #|  !a b c:int. coprime(a,b) ==> gcd(a * b,c) = gcd(a,c) * gcd(b,c)
-      #|  !a b c:int. coprime(b,c) ==> gcd(a, b * c) = gcd(a,b) * gcd(a,c)
-      #|  !a b c:int. coprime(a,b) /\\ a divides c\n                ==> gcd(a * b,c) = abs a * gcd(b,c)
-      #|  !a b c:int. coprime(b,c) /\\ b divides a\n               ==> gcd(a,b * c) = abs b * gcd(a,c)
+      #|  forall x y. x divides y /\\ y divides x <=> ?u. u divides &1 /\\ x = y * u
+      #|  forall x y. x divides y /\\ y divides x <=> x = y \\/ x = --y
+      #|  forall x y. x divides y /\\ y divides x <=> abs(x) = abs(y)
+      #|  forall x y. &0 <= x /\\ &0 <= y ==> (x divides y /\\ y divides x <=> x = y)
+      #|  forall a b. &0 <= gcd(a,b)
+      #|  forall a b. abs(gcd(a,b)) = gcd(a,b)
+      #|  forall a b. gcd(a,b) divides a /\\ gcd(a,b) divides b
+      #|  forall a b. coprime(a,b) <=> gcd(a,b) = &1
+      #|  forall a b. ?x y. gcd(a,b) = a * x + b * y
+      #|  forall a b d. d divides gcd(a,b) <=> d divides a /\\ d divides b
+      #|  forall a b. (gcd(a,b) divides a /\\ gcd(a,b) divides b) /\\\n         (forall e. e divides a /\\ e divides b ==> e divides gcd(a,b))
+      #|  forall a b d. gcd(a,b) = d <=> &0 <= d /\\ d divides a /\\ d divides b /\\\n                            forall e. e divides a /\\ e divides b ==> e divides d
+      #|  forall a b d. gcd(a,b) = abs(d) <=>\n           d divides a /\\ d divides b /\\\n           forall e. e divides a /\\ e divides b ==> e divides d
+      #|  forall a. gcd(a,a) = abs(a)
+      #|  forall a b. gcd(a,b) = gcd(b,a)
+      #|  forall a b c. gcd(a,gcd(b,c)) = gcd(gcd(a,b),c)
+      #|  forall a. gcd(a,&1) = &1 /\\ gcd(&1,a) = &1
+      #|  forall a. gcd(a,&0) = abs(a) /\\ gcd(&0,a) = abs(a)
+      #|  forall a b. gcd(a,b) = &0 <=> a = &0 /\\ b = &0
+      #|  forall a b. gcd(abs(a),b) = gcd(a,b) /\\ gcd(a,abs(b)) = gcd(a,b)
+      #|  forall a b. gcd(a,a * b) = abs(a) /\\ gcd(b,a * b) = abs(b)
+      #|  (forall a b. gcd(a + b,b) = gcd(a,b)) /\\\n   (forall a b. gcd(b + a,b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,a + b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,b + a) = gcd(a,b))
+      #|  (forall a b. gcd(a - b,b) = gcd(a,b)) /\\\n   (forall a b. gcd(b - a,b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,a - b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,b - a) = gcd(a,b))
+      #|  forall m n:int. m divides n <=> gcd(m,n) = abs m
+      #|  forall m n:int. n divides m <=> gcd(m,n) = abs n
+      #|  forall x y u v:int.\n        (forall d. d divides x /\\ d divides y <=> d divides u /\\ d divides v)\n        ==> gcd(x,y) = gcd(u,v)
+      #|  forall a b:int. gcd(--a,b) = gcd(a,b)
+      #|  forall a b:int. gcd(a,--b) = gcd(a,b)
+      #|  (forall a b. gcd(--a,b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,--b) = gcd(a,b))
+      #|  forall a b. gcd(abs a,b) = gcd(a,b)
+      #|  forall a b. gcd(a,abs b) = gcd(a,b)
+      #|  (forall a b. gcd(abs a,b) = gcd(a,b)) /\\\n   (forall a b. gcd(a,abs b) = gcd(a,b))
+      #|  forall a b c:int. gcd(c * a,c * b) = abs c * gcd(a,b)
+      #|  forall a b c:int. gcd(a * c,b * c) = gcd(a,b) * abs c
+      #|  forall a b c:int. coprime(a,b) ==> gcd(a * b,c) = gcd(a,c) * gcd(b,c)
+      #|  forall a b c:int. coprime(b,c) ==> gcd(a, b * c) = gcd(a,b) * gcd(a,c)
+      #|  forall a b c:int. coprime(a,b) /\\ a divides c\n                ==> gcd(a * b,c) = abs a * gcd(b,c)
+      #|  forall a b c:int. coprime(b,c) /\\ b divides a\n               ==> gcd(a,b * c) = abs b * gcd(a,c)
       #|  &1:int
       #|  gcd(a,b):int = &0
-      #|  !a b. ?a' b'. a = a' * gcd(a,b) /\\ b = b' * gcd(a,b) /\\ coprime(a',b')
-      #|  !a b. abs(lcm(a,b)) = lcm(a,b)
+      #|  forall a b. ?a' b'. a = a' * gcd(a,b) /\\ b = b' * gcd(a,b) /\\ coprime(a',b')
+      #|  forall a b. abs(lcm(a,b)) = lcm(a,b)
       #|  n:int = &0 <=> &0 divides n
-      #|  !m n. lcm(m,n) = &0 <=> m = &0 \\/ n = &0
-      #|  !m n r. r divides m \\/ r divides n ==> r divides lcm(m,n)
-      #|  (!n. lcm(&0,n) = &0) /\\ (!n. lcm(n,&0) = &0)
-      #|  (!n. lcm(&1,n) = abs n) /\\ (!n. lcm(n,&1) = abs n)
-      #|  !a b m.\n        lcm(a,b) = abs m <=>\n        a divides m /\\\n        b divides m /\\\n        (!n. a divides n /\\ b divides n  ==> m divides n)
+      #|  forall m n. lcm(m,n) = &0 <=> m = &0 \\/ n = &0
+      #|  forall m n r. r divides m \\/ r divides n ==> r divides lcm(m,n)
+      #|  (forall n. lcm(&0,n) = &0) /\\ (forall n. lcm(n,&0) = &0)
+      #|  (forall n. lcm(&1,n) = abs n) /\\ (forall n. lcm(n,&1) = abs n)
+      #|  forall a b m.\n        lcm(a,b) = abs m <=>\n        a divides m /\\\n        b divides m /\\\n        (forall n. a divides n /\\ b divides n  ==> m divides n)
       #|  b:int
       #|  a:int
-      #|  !a b m.\n        lcm(a,b) = m <=>\n        &0 <= m /\\\n        a divides m /\\\n        b divides m /\\\n        (!n. a divides n /\\ b divides n ==> m divides n)
-      #|  !x y u v.\n        (!m. x divides m /\\ y divides m <=> u divides m /\\ v divides m)\n        ==> lcm(x,y) = lcm(u,v)
-      #|  !n. lcm(n,n) = abs n
-      #|  !m n. lcm(m,n) = lcm(n,m)
-      #|  !m n p. lcm(m,lcm(n,p)) = lcm(lcm(m,n),p)
-      #|  !a b:int. lcm(--a,b) = lcm(a,b)
-      #|  !a b:int. lcm(a,--b) = lcm(a,b)
-      #|  (!a b. lcm(--a,b) = lcm(a,b)) /\\\n   (!a b. lcm(a,--b) = lcm(a,b))
-      #|  !a b. lcm(abs a,b) = lcm(a,b)
-      #|  !a b. lcm(a,abs b) = lcm(a,b)
-      #|  (!a b. lcm(abs a,b) = lcm(a,b)) /\\\n   (!a b. lcm(a,abs b) = lcm(a,b))
+      #|  forall a b m.\n        lcm(a,b) = m <=>\n        &0 <= m /\\\n        a divides m /\\\n        b divides m /\\\n        (forall n. a divides n /\\ b divides n ==> m divides n)
+      #|  forall x y u v.\n        (forall m. x divides m /\\ y divides m <=> u divides m /\\ v divides m)\n        ==> lcm(x,y) = lcm(u,v)
+      #|  forall n. lcm(n,n) = abs n
+      #|  forall m n. lcm(m,n) = lcm(n,m)
+      #|  forall m n p. lcm(m,lcm(n,p)) = lcm(lcm(m,n),p)
+      #|  forall a b:int. lcm(--a,b) = lcm(a,b)
+      #|  forall a b:int. lcm(a,--b) = lcm(a,b)
+      #|  (forall a b. lcm(--a,b) = lcm(a,b)) /\\\n   (forall a b. lcm(a,--b) = lcm(a,b))
+      #|  forall a b. lcm(abs a,b) = lcm(a,b)
+      #|  forall a b. lcm(a,abs b) = lcm(a,b)
+      #|  (forall a b. lcm(abs a,b) = lcm(a,b)) /\\\n   (forall a b. lcm(a,abs b) = lcm(a,b))
       #|  (x * a) * x * b:int = x * x * a * b
       #|  gcd(c * a:int,c * b)
-      #|  !x:int. ~(x = &0) /\\ a * x = b * x ==> a = b
+      #|  forall x:int. ~(x = &0) /\\ a * x = b * x ==> a = b
       #|  c:int = &0
       #|  b:int = &0
       #|  a:int = &0
-      #|  !a b c:int. lcm(c * a,c * b) = abs c * lcm(a,b)
-      #|  !a b c:int. lcm(a * c,b * c) = lcm(a,b) * abs c
-      #|  !a b. coprime(a,b) <=> !d. d divides a /\\ d divides b ==> d divides &1
-      #|  !a b. coprime(a,b) <=> !d. d divides a /\\ d divides b <=> d divides &1
-      #|  !a b. coprime(a,b) <=> coprime(b,a)
-      #|  !d a b. d divides (a * b) /\\ coprime(d,a) ==> d divides b
-      #|  !a. coprime(a,&1) /\\ coprime(&1,a)
-      #|  !a b a' b'. ~(gcd(a,b) = &0) /\\ a = a' * gcd(a,b) /\\ b = b' * gcd(a,b)\n               ==> coprime(a',b')
-      #|  (!a. coprime(a,&0) <=> a divides &1) /\\\n   (!a. coprime(&0,a) <=> a divides &1)
-      #|  !d a b. coprime(d,a) /\\ coprime(d,b) ==> coprime(d,a * b)
-      #|  !d a b. coprime(d,a * b) ==> coprime(d,b)
-      #|  !d a b.  coprime(d,a * b) ==> coprime(d,a)
-      #|  !d a b. coprime(a * b,d) <=> coprime(a,d) /\\ coprime(b,d)
-      #|  !d a b. coprime(d,a * b) <=> coprime(d,a) /\\ coprime(d,b)
-      #|  !n. coprime(n,n) <=> n divides &1
-      #|  !n. coprime(n + &1,n) /\\ coprime(n,n + &1)
-      #|  !n. coprime(n - &1,n) /\\ coprime(n,n - &1)
-      #|  !m n k. coprime(m,n pow k) <=> coprime(m,n) \\/ k = 0
-      #|  !m n k. coprime(m pow k,n) <=> coprime(m,n) \\/ k = 0
-      #|  !m n k. coprime(m pow k,n pow k) <=> coprime(m,n) \\/ k = 0
-      #|  !n a d. coprime(d,a) ==> coprime(d,a pow n)
-      #|  !n a b. coprime(a,b) ==> coprime(a pow n,b pow n)
+      #|  forall a b c:int. lcm(c * a,c * b) = abs c * lcm(a,b)
+      #|  forall a b c:int. lcm(a * c,b * c) = lcm(a,b) * abs c
+      #|  forall a b. coprime(a,b) <=> forall d. d divides a /\\ d divides b ==> d divides &1
+      #|  forall a b. coprime(a,b) <=> forall d. d divides a /\\ d divides b <=> d divides &1
+      #|  forall a b. coprime(a,b) <=> coprime(b,a)
+      #|  forall d a b. d divides (a * b) /\\ coprime(d,a) ==> d divides b
+      #|  forall a. coprime(a,&1) /\\ coprime(&1,a)
+      #|  forall a b a' b'. ~(gcd(a,b) = &0) /\\ a = a' * gcd(a,b) /\\ b = b' * gcd(a,b)\n               ==> coprime(a',b')
+      #|  (forall a. coprime(a,&0) <=> a divides &1) /\\\n   (forall a. coprime(&0,a) <=> a divides &1)
+      #|  forall d a b. coprime(d,a) /\\ coprime(d,b) ==> coprime(d,a * b)
+      #|  forall d a b. coprime(d,a * b) ==> coprime(d,b)
+      #|  forall d a b.  coprime(d,a * b) ==> coprime(d,a)
+      #|  forall d a b. coprime(a * b,d) <=> coprime(a,d) /\\ coprime(b,d)
+      #|  forall d a b. coprime(d,a * b) <=> coprime(d,a) /\\ coprime(d,b)
+      #|  forall n. coprime(n,n) <=> n divides &1
+      #|  forall n. coprime(n + &1,n) /\\ coprime(n,n + &1)
+      #|  forall n. coprime(n - &1,n) /\\ coprime(n,n - &1)
+      #|  forall m n k. coprime(m,n pow k) <=> coprime(m,n) \\/ k = 0
+      #|  forall m n k. coprime(m pow k,n) <=> coprime(m,n) \\/ k = 0
+      #|  forall m n k. coprime(m pow k,n pow k) <=> coprime(m,n) \\/ k = 0
+      #|  forall n a d. coprime(d,a) ==> coprime(d,a pow n)
+      #|  forall n a b. coprime(a,b) ==> coprime(a pow n,b pow n)
       #|  b':int
       #|  a':int
       #|  b:int
       #|  a:int
-      #|  !(a:int) b n. gcd(a pow n,b pow n) = gcd(a,b) pow n
+      #|  forall(a:int) b n. gcd(a pow n,b pow n) = gcd(a,b) pow n
       #|  gcd((a:int) pow n,b pow n)
-      #|  !x:int. ~(x = &0) /\\ a * x = b * x ==> a = b
+      #|  forall x:int. ~(x = &0) /\\ a * x = b * x ==> a = b
       #|  b:int = &0
       #|  a:int = &0
       #|  n = 0
-      #|  !(a:int) b n. lcm(a pow n,b pow n) = lcm(a,b) pow n
+      #|  forall(a:int) b n. lcm(a pow n,b pow n) = lcm(a,b) pow n
       #|  gcd(a,b) = &0
       #|  gcd(a,b)
-      #|  !a b c. a divides (b * c)\n           ==> ?b' c'. (a = b' * c') /\\ b' divides b /\\ c' divides c
-      #|  !m n r. m divides r /\\ n divides r /\\ coprime(m,n) ==> (m * n) divides r
-      #|  !a b u v. coprime(a,b) /\\ ~(a = &0) /\\ ~(b = &0)\n             ==> ?x q1 q2. (x = u + q1 * a) /\\ (x = v + q2 * b)
-      #|  !a b u v. coprime(a,b) ==> ?x. (x == u) (mod a) /\\ (x == v) (mod b)
-      #|  !a b d e. d divides a /\\ e divides b /\\ coprime(a,b) ==> coprime(d,e)
-      #|  !a b. coprime(--a,b) <=> coprime(a,b)
-      #|  !a b. coprime(a,--b) <=> coprime(a,b)
-      #|  (!a b. coprime(--a,b) <=> coprime(a,b)) /\\\n   (!a b. coprime(a,--b) <=> coprime(a,b))
-      #|  !a b. coprime(abs a,b) <=> coprime(a,b)
-      #|  !a b. coprime(a,abs b) <=> coprime(a,b)
-      #|  (!a b. coprime(abs a,b) <=> coprime(a,b)) /\\\n   (!a b. coprime(a,abs b) <=> coprime(a,b))
-      #|  !x y. (x == y) (mod &0) <=> (x = y)
-      #|  !x y. (x == y) (mod &1)
-      #|  !x y n. (x == y) (mod n) <=> n divides (x - y)
-      #|  !a b n:int. (a == b) (mod (abs n)) <=> (a == b) (mod n)
-      #|  !a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
-      #|  !a n x y. coprime(a,n) /\\ (x * a == y * a) (mod n) ==> (x == y) (mod n)
-      #|  !a x y n:int.\n      (a * x == a * y) (mod (a * n)) <=> a = &0 \\/ (x == y) (mod n)
-      #|  !a x y n:int. (x == y) (mod n) ==> (a * x == a * y) (mod n)
-      #|  !x y a n:int. (x == y) (mod n) ==> (x * a == y * a) (mod n)
-      #|  !x n. (x == x) (mod n)
-      #|  !a b n. a = b ==> (a == b) (mod n)
-      #|  !x y n. (x == y) (mod n) <=> (y == x) (mod n)
-      #|  !x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x + y == x' + y') (mod n)
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x - y == x' - y') (mod n)
-      #|  !x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x * y == x' * y') (mod n)
-      #|  !n k x y. (x == y) (mod n) ==> (x pow k == y pow k) (mod n)
-      #|  !n x y:int.\n        (x == &1) (mod n) /\\ (y == &1) (mod n)\n        ==> (x * y == &1) (mod n)
-      #|  !a k n:int. (a == &1) (mod n) ==> (a pow k == &1) (mod n)
-      #|  !a n x y. coprime(a,n) ==> ((a * x == a * y) (mod n) <=> (x == y) (mod n))
-      #|  !a n x y. coprime(a,n) ==> ((x * a == y * a) (mod n) <=> (x == y) (mod n))
-      #|  !a n x y. (a + x == a + y) (mod n) <=> (x == y) (mod n)
-      #|  !a n x y. (x + a == y + a) (mod n) <=> (x == y) (mod n)
-      #|  !a n x y. (x + a == y + a) (mod n) ==> (x == y) (mod n)
-      #|  !a n x y. (a + x == a + y) (mod n) ==> (x == y) (mod n)
-      #|  !a n x y. (a + x == a) (mod n) <=> (x == &0) (mod n)
-      #|  !a n x y. (x + a == a) (mod n) <=> (x == &0) (mod n)
-      #|  !x y m n. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
-      #|  !n x. (x == &0) (mod n) <=> n divides x
-      #|  !n x. (x == &1) (mod n) ==> n divides (x - &1)
-      #|  !x y n. (x == y) (mod n) ==> (n divides x <=> n divides y)
-      #|  !x y n. (x == y) (mod n) ==> (coprime(n,x) <=> coprime(n,y))
-      #|  !m n. coprime(m,n rem m) <=> coprime(m,n)
-      #|  !a b. coprime(a rem n,n) <=> coprime(a,n)
-      #|  !x y n. (x == y) (mod n) ==> gcd(n,x) = gcd(n,y)
-      #|  !x y n. (x == y) (mod n) ==> gcd(x,n) = gcd(y,n)
-      #|  !a n. (a == &1) (mod n) <=> ?m. a = &1 + m * n
-      #|  !a b n. coprime(a,n) ==> ?x. (a * x == b) (mod n)
-      #|  !n a b:int. (?x. (a * x == b) (mod n)) <=> gcd(a,n) divides b
-      #|  !a b n. coprime(a,n)\n           ==> !x y. (a * x == b) (mod n) /\\ (a * y == b) (mod n)\n                     ==> (x == y) (mod n)
+      #|  forall a b c. a divides (b * c)\n           ==> ?b' c'. (a = b' * c') /\\ b' divides b /\\ c' divides c
+      #|  forall m n r. m divides r /\\ n divides r /\\ coprime(m,n) ==> (m * n) divides r
+      #|  forall a b u v. coprime(a,b) /\\ ~(a = &0) /\\ ~(b = &0)\n             ==> ?x q1 q2. (x = u + q1 * a) /\\ (x = v + q2 * b)
+      #|  forall a b u v. coprime(a,b) ==> ?x. (x == u) (mod a) /\\ (x == v) (mod b)
+      #|  forall a b d e. d divides a /\\ e divides b /\\ coprime(a,b) ==> coprime(d,e)
+      #|  forall a b. coprime(--a,b) <=> coprime(a,b)
+      #|  forall a b. coprime(a,--b) <=> coprime(a,b)
+      #|  (forall a b. coprime(--a,b) <=> coprime(a,b)) /\\\n   (forall a b. coprime(a,--b) <=> coprime(a,b))
+      #|  forall a b. coprime(abs a,b) <=> coprime(a,b)
+      #|  forall a b. coprime(a,abs b) <=> coprime(a,b)
+      #|  (forall a b. coprime(abs a,b) <=> coprime(a,b)) /\\\n   (forall a b. coprime(a,abs b) <=> coprime(a,b))
+      #|  forall x y. (x == y) (mod &0) <=> (x = y)
+      #|  forall x y. (x == y) (mod &1)
+      #|  forall x y n. (x == y) (mod n) <=> n divides (x - y)
+      #|  forall a b n:int. (a == b) (mod (abs n)) <=> (a == b) (mod n)
+      #|  forall a n x y. coprime(a,n) /\\ (a * x == a * y) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x y. coprime(a,n) /\\ (x * a == y * a) (mod n) ==> (x == y) (mod n)
+      #|  forall a x y n:int.\n      (a * x == a * y) (mod (a * n)) <=> a = &0 \\/ (x == y) (mod n)
+      #|  forall a x y n:int. (x == y) (mod n) ==> (a * x == a * y) (mod n)
+      #|  forall x y a n:int. (x == y) (mod n) ==> (x * a == y * a) (mod n)
+      #|  forall x n. (x == x) (mod n)
+      #|  forall a b n. a = b ==> (a == b) (mod n)
+      #|  forall x y n. (x == y) (mod n) <=> (y == x) (mod n)
+      #|  forall x y z n. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x + y == x' + y') (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x - y == x' - y') (mod n)
+      #|  forall x x' y y'.\n     (x == x') (mod n) /\\ (y == y') (mod n) ==> (x * y == x' * y') (mod n)
+      #|  forall n k x y. (x == y) (mod n) ==> (x pow k == y pow k) (mod n)
+      #|  forall n x y:int.\n        (x == &1) (mod n) /\\ (y == &1) (mod n)\n        ==> (x * y == &1) (mod n)
+      #|  forall a k n:int. (a == &1) (mod n) ==> (a pow k == &1) (mod n)
+      #|  forall a n x y. coprime(a,n) ==> ((a * x == a * y) (mod n) <=> (x == y) (mod n))
+      #|  forall a n x y. coprime(a,n) ==> ((x * a == y * a) (mod n) <=> (x == y) (mod n))
+      #|  forall a n x y. (a + x == a + y) (mod n) <=> (x == y) (mod n)
+      #|  forall a n x y. (x + a == y + a) (mod n) <=> (x == y) (mod n)
+      #|  forall a n x y. (x + a == y + a) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x y. (a + x == a + y) (mod n) ==> (x == y) (mod n)
+      #|  forall a n x y. (a + x == a) (mod n) <=> (x == &0) (mod n)
+      #|  forall a n x y. (x + a == a) (mod n) <=> (x == &0) (mod n)
+      #|  forall x y m n. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)
+      #|  forall n x. (x == &0) (mod n) <=> n divides x
+      #|  forall n x. (x == &1) (mod n) ==> n divides (x - &1)
+      #|  forall x y n. (x == y) (mod n) ==> (n divides x <=> n divides y)
+      #|  forall x y n. (x == y) (mod n) ==> (coprime(n,x) <=> coprime(n,y))
+      #|  forall m n. coprime(m,n rem m) <=> coprime(m,n)
+      #|  forall a b. coprime(a rem n,n) <=> coprime(a,n)
+      #|  forall x y n. (x == y) (mod n) ==> gcd(n,x) = gcd(n,y)
+      #|  forall x y n. (x == y) (mod n) ==> gcd(x,n) = gcd(y,n)
+      #|  forall a n. (a == &1) (mod n) <=> ?m. a = &1 + m * n
+      #|  forall a b n. coprime(a,n) ==> ?x. (a * x == b) (mod n)
+      #|  forall n a b:int. (?x. (a * x == b) (mod n)) <=> gcd(a,n) divides b
+      #|  forall a b n. coprime(a,n)\n           ==> forall x y. (a * x == b) (mod n) /\\ (a * y == b) (mod n)\n                     ==> (x == y) (mod n)
       #|  coprime(a,b) /\\ (x == y) (mod a) /\\ (x == y) (mod b)\n   ==> (x == y) (mod (a * b))
-      #|  !a b m n.\n        coprime(a,b) /\\ ~(a = &0) /\\ ~(b = &0) /\\ coprime(m,a) /\\ coprime(n,b)\n        ==> ?x. coprime(x,a * b) /\\\n                (x == m) (mod a) /\\ (x == n) (mod b)
-      #|  !a b m n x y.\n        coprime(a,b) /\\\n        (x == m) (mod a) /\\ (x == n) (mod b) /\\\n        (y == m) (mod a) /\\ (y == n) (mod b)\n        ==> (x == y) (mod (a * b))
-      #|  !a b n. gcd(a,n) divides b ==> ?x. (a * x == b) (mod n)
+      #|  forall a b m n.\n        coprime(a,b) /\\ ~(a = &0) /\\ ~(b = &0) /\\ coprime(m,a) /\\ coprime(n,b)\n        ==> ?x. coprime(x,a * b) /\\\n                (x == m) (mod a) /\\ (x == n) (mod b)
+      #|  forall a b m n x y.\n        coprime(a,b) /\\\n        (x == m) (mod a) /\\ (x == n) (mod b) /\\\n        (y == m) (mod a) /\\ (y == n) (mod b)\n        ==> (x == y) (mod (a * b))
+      #|  forall a b n. gcd(a,n) divides b ==> ?x. (a * x == b) (mod n)
       #|  n divides y ==> (a * x:int == a * (x + y)) (mod n)
       #|  abs(x:int) * &1 <= y ==> &0 <= x + y
       #|  x + abs(x * n):int
-      #|  !n a x:int. ~(n = &0) ==> ?y. &0 <= y /\\ (a * x == a * y) (mod n)
+      #|  forall n a x:int. ~(n = &0) ==> ?y. &0 <= y /\\ (a * x == a * y) (mod n)
       #|  n:int = &0
-      #|  !a b n:int.\n        coprime(a,n) /\\ ~(n = &0 /\\ abs a = &1)\n        ==> ?x. &0 <= x /\\ (a * x == b) (mod n)
+      #|  forall a b n:int.\n        coprime(a,n) /\\ ~(n = &0 /\\ abs a = &1)\n        ==> ?x. &0 <= x /\\ (a * x == b) (mod n)
       #|  abs n * (q:int) < abs n * &1 <=> ~(&0 <= abs n * (q - &1))
       #|  abs(n * q) < n ==> abs(n * q) < abs n * &1
       #|  q:int
-      #|  !x y n:int. abs(x - y) < n /\\ (x == y) (mod n) ==> x = y
-      #|  !m n a b.\n        ~(m = &0) /\\ (a == m * b) (mod (m * n)) ==> (a div m == b) (mod n)
+      #|  forall x y n:int. abs(x - y) < n /\\ (x == y) (mod n) ==> x = y
+      #|  forall m n a b.\n        ~(m = &0) /\\ (a == m * b) (mod (m * n)) ==> (a div m == b) (mod n)
       #|  \\/
       #|  \\/
       #|  \\/
       #|  \\/
       #|  F
       #|  m:int = &0
-      #|  !m n a b:int.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a div m == b) (mod n)
-      #|  !a1 a2 n1 n2:int.\n        (a1 == a2) (mod (gcd(n1,n2)))\n        ==> ?x. (x == a1) (mod n1) /\\ (x == a2) (mod n2)
-      #|  !a1 a2 n1 n2:int.\n        (?x. (x == a1) (mod n1) /\\ (x == a2) (mod n2)) <=>\n        (a1 == a2) (mod (gcd(n1,n2)))
+      #|  forall m n a b:int.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a div m == b) (mod n)
+      #|  forall a1 a2 n1 n2:int.\n        (a1 == a2) (mod (gcd(n1,n2)))\n        ==> ?x. (x == a1) (mod n1) /\\ (x == a2) (mod n2)
+      #|  forall a1 a2 n1 n2:int.\n        (?x. (x == a1) (mod n1) /\\ (x == a2) (mod n2)) <=>\n        (a1 == a2) (mod (gcd(n1,n2)))
       #|  ((&2 * n) pow 2 == &0) (mod &4)
       #|  ((&2 * n + &1) pow 2 == &1) (mod &4)
       #|  z = &0
@@ -10033,14 +10033,14 @@ test "Library/integer matches Library/integer.ml" {
       #|  z:int
       #|  y:int
       #|  x:int
-      #|  !x y. x divides y ==> abs(x) <= abs(y) \\/ y = &0
+      #|  forall x y. x divides y ==> abs(x) <= abs(y) \\/ y = &0
       #|  &2 <= x ==> &1 < x
       #|  &2 <= abs p ==> ~(p = &0)
-      #|  !p m n. &2 <= abs p ==> ((p pow m) divides (p pow n) <=> m <= n)
-      #|  int_prime p <=> abs(p) > &1 /\\\n                  !x. x divides p ==> abs(x) = &1 \\/ abs(x) = abs(p)
-      #|  !p. int_prime(--p) <=> int_prime p
-      #|  !p. int_prime(abs p) <=> int_prime p
-      #|  !p. int_prime p ==> &2 <= abs(p)
+      #|  forall p m n. &2 <= abs p ==> ((p pow m) divides (p pow n) <=> m <= n)
+      #|  int_prime p <=> abs(p) > &1 /\\\n                  forall x. x divides p ==> abs(x) = &1 \\/ abs(x) = abs(p)
+      #|  forall p. int_prime(--p) <=> int_prime p
+      #|  forall p. int_prime(abs p) <=> int_prime p
+      #|  forall p. int_prime p ==> &2 <= abs(p)
       #|  ~(int_prime(&0))
       #|  ~(int_prime(&1))
       #|  x = &0
@@ -10056,11 +10056,11 @@ test "Library/integer matches Library/integer.ml" {
       #|  int_prime x
       #|  x:int
       #|  abs
-      #|  !x. ~(abs x = &1) ==> ?p. int_prime p /\\ p divides x
+      #|  forall x. ~(abs x = &1) ==> ?p. int_prime p /\\ p divides x
       #|  m = &0
       #|  ~(n = &0)
       #|  &0 < m * (p - &1) ==> m < p * m
-      #|  !n m p. int_prime(p) /\\ ~(n = &0) /\\ n = p * m ==> abs m < abs n
+      #|  forall n m p. int_prime(p) /\\ ~(n = &0) /\\ n = p * m ==> abs m < abs n
       #|  d:int
       #|  p:int
       #|  d:int
@@ -10070,10 +10070,10 @@ test "Library/integer matches Library/integer.ml" {
       #|  n = &0
       #|  n:int
       #|  abs
-      #|  !P. P(&0) /\\ P(&1) /\\ P(-- &1) /\\\n       (!p n. int_prime p /\\ ~(n = &0) /\\ P n ==> P(p * n))\n       ==> !n. P n
+      #|  forall P. P(&0) /\\ P(&1) /\\ P(-- &1) /\\\n       (forall p n. int_prime p /\\ ~(n = &0) /\\ P n ==> P(p * n))\n       ==> forall n. P n
       #|  x < &m + &1 <=> x <= &m
       #|  x <= &n <=> x = &n \\/ x < &n
-      #|  !n x. &1 <= abs(x) /\\ abs(x) <= &n ==> x divides &(FACT n)
+      #|  forall n x. &1 <= abs(x) /\\ abs(x) <= &n ==> x divides &(FACT n)
       #|  p divides &1
       #|  &2 <= p ==> &1 <= p
       #|  p:int
@@ -10081,55 +10081,55 @@ test "Library/integer matches Library/integer.ml" {
       #|  abs p
       #|  p:int
       #|  &(FACT n) + &1
-      #|  !n. ?p. int_prime(p) /\\ &n < p /\\ p <= &(FACT n) + &1
+      #|  forall n. ?p. int_prime(p) /\\ &n < p /\\ p <= &(FACT n) + &1
       #|  m:num
       #|  n:int
-      #|  !n. ?p. int_prime(p) /\\ p > n
+      #|  forall n. ?p. int_prime(p) /\\ p > n
       #|  {p | int_prime p}
       #|  &
       #|  INFINITE {n | int_prime(&n)}
       #|  INFINITE {p | int_prime p}
-      #|  !p a b. coprime(a,b) ==> ~(int_prime(p) /\\ p divides a /\\ p divides b)
+      #|  forall p a b. coprime(a,b) ==> ~(int_prime(p) /\\ p divides a /\\ p divides b)
       #|  p:int
       #|  p:int
       #|  d:int
-      #|  !a b. coprime(a,b) <=> !p. ~(int_prime(p) /\\ p divides a /\\ p divides b)
+      #|  forall a b. coprime(a,b) <=> forall p. ~(int_prime(p) /\\ p divides a /\\ p divides b)
       #|  d:int
       #|  d:int
       #|  (~b ==> a) ==> a \\/ b
-      #|  !x p. int_prime(p) ==> p divides x \\/ coprime(p,x)
+      #|  forall x p. int_prime(p) ==> p divides x \\/ coprime(p,x)
       #|  (b \\/ a) /\\ ~(a /\\ b) ==> (a <=> ~b)
-      #|  !p n. int_prime p ==> (coprime(p,n) <=> ~(p divides n))
-      #|  !p k m. int_prime p /\\ ~(k = 0)\n           ==> (coprime(m,p pow k) <=> ~(p divides m))
-      #|  !a b. coprime(a,b) <=> ?x y. a * x + b * y = &1
-      #|  !a b. coprime(a,b) ==> ?x y. a * x = b * y + &1
-      #|  !a p. int_prime p /\\ ~(p divides a) ==> ?x y. a * x = p * y + &1
+      #|  forall p n. int_prime p ==> (coprime(p,n) <=> ~(p divides n))
+      #|  forall p k m. int_prime p /\\ ~(k = 0)\n           ==> (coprime(m,p pow k) <=> ~(p divides m))
+      #|  forall a b. coprime(a,b) <=> ?x y. a * x + b * y = &1
+      #|  forall a b. coprime(a,b) ==> ?x y. a * x = b * y + &1
+      #|  forall a p. int_prime p /\\ ~(p divides a) ==> ?x y. a * x = p * y + &1
       #|  a /\\ b ==> c \\/ d <=> a ==> (~c /\\ ~d ==> ~b)
-      #|  !p a b. int_prime(p) /\\ p divides (a * b) ==> p divides a \\/ p divides b
-      #|  !p a b. int_prime(p)\n           ==> (p divides (a * b) <=> p divides a \\/ p divides b)
-      #|  !n p x. int_prime(p) /\\ p divides (x pow n) ==> p divides x
-      #|  !n p x. int_prime p /\\ p divides (x pow n) ==> (p pow n) divides (x pow n)
-      #|  !x y. coprime(x,y) ==> coprime(x * y,x pow 2 + y pow 2)
-      #|  !p. int_prime p ==> ~(p = &0)
-      #|  !p q. int_prime p /\\ int_prime q /\\ ~(abs p = abs q) ==> coprime(p,q)
-      #|  !x p. int_prime p /\\ &0 < abs x /\\ abs x < abs p ==> coprime(x,p)
-      #|  !p q. int_prime p /\\ int_prime q  ==> (p divides q <=> abs p = abs q)
-      #|  !d a b. (d pow n) divides (a * b) /\\ coprime(d,a) ==> (d pow n) divides b
-      #|  !p a b. int_prime p /\\ coprime(a,b) ==> coprime(p,a) \\/ coprime(p,b)
-      #|  !n p a b. int_prime(p) /\\ coprime(a,b) /\\ (p pow n) divides (a * b)\n             ==> (p pow n) divides a \\/ (p pow n) divides b
+      #|  forall p a b. int_prime(p) /\\ p divides (a * b) ==> p divides a \\/ p divides b
+      #|  forall p a b. int_prime(p)\n           ==> (p divides (a * b) <=> p divides a \\/ p divides b)
+      #|  forall n p x. int_prime(p) /\\ p divides (x pow n) ==> p divides x
+      #|  forall n p x. int_prime p /\\ p divides (x pow n) ==> (p pow n) divides (x pow n)
+      #|  forall x y. coprime(x,y) ==> coprime(x * y,x pow 2 + y pow 2)
+      #|  forall p. int_prime p ==> ~(p = &0)
+      #|  forall p q. int_prime p /\\ int_prime q /\\ ~(abs p = abs q) ==> coprime(p,q)
+      #|  forall x p. int_prime p /\\ &0 < abs x /\\ abs x < abs p ==> coprime(x,p)
+      #|  forall p q. int_prime p /\\ int_prime q  ==> (p divides q <=> abs p = abs q)
+      #|  forall d a b. (d pow n) divides (a * b) /\\ coprime(d,a) ==> (d pow n) divides b
+      #|  forall p a b. int_prime p /\\ coprime(a,b) ==> coprime(p,a) \\/ coprime(p,b)
+      #|  forall n p a b. int_prime(p) /\\ coprime(a,b) /\\ (p pow n) divides (a * b)\n             ==> (p pow n) divides a \\/ (p pow n) divides b
       #|  a divides b ==> coprime(a,b) ==> a divides &1
       #|  b:int
       #|  a:int
       #|  gcd(a,b) = &0
-      #|  !n a b. (a pow n) divides (b pow n) /\\ ~(n = 0) ==> a divides b
-      #|  !n a b. ~(n = 0) ==> ((a pow n) divides (b pow n) <=> a divides b)
+      #|  forall n a b. (a pow n) divides (b pow n) /\\ ~(n = 0) ==> a divides b
+      #|  forall n a b. ~(n = 0) ==> ((a pow n) divides (b pow n) <=> a divides b)
       #|  p:int
       #|  m:int
       #|  k:num
       #|  k = 0
-      #|  !m n p k. ~(m = &0) /\\ m pow k * n = p pow k ==> ?q. n = q pow k
+      #|  forall m n p k. ~(m = &0) /\\ m pow k * n = p pow k ==> ?q. n = q pow k
       #|  p pow n
-      #|  !p. ~(p = &0) /\\ a * p = b * p ==> a = b
+      #|  forall p. ~(p = &0) /\\ a * p = b * p ==> a = b
       #|  a:int
       #|  d:int
       #|  d:int
@@ -10139,28 +10139,28 @@ test "Library/integer matches Library/integer.ml" {
       #|  abs:int->int
       #|  abs:int->int
       #|  n = 0
-      #|  !n a b c. coprime(a,b) /\\ a * b = c pow n\n             ==> ?r s. abs a = r pow n /\\ abs b = s pow n
+      #|  forall n a b c. coprime(a,b) /\\ a * b = c pow n\n             ==> ?r s. abs a = r pow n /\\ abs b = s pow n
       #|  c:int
       #|  b:int
       #|  a:int
       #|  n:num
-      #|  !n a b c. ODD n /\\ coprime(a,b) /\\ a * b = c pow n\n             ==> ?r s. a = r pow n /\\ b = s pow n
+      #|  forall n a b c. ODD n /\\ coprime(a,b) /\\ a * b = c pow n\n             ==> ?r s. a = r pow n /\\ b = s pow n
       #|  a /\\ (a ==> b) ==> a /\\ b
       #|  m = 0
-      #|  !p q m n. int_prime p /\\ int_prime q\n             ==> ((p pow m) divides (q pow n) <=>\n                  m = 0 \\/ abs p = abs q /\\ m <= n)
+      #|  forall p q m n. int_prime p /\\ int_prime q\n             ==> ((p pow m) divides (q pow n) <=>\n                  m = 0 \\/ abs p = abs q /\\ m <= n)
       #|  abs p = abs q
-      #|  !p q m n. int_prime p /\\ int_prime q\n             ==> (abs p pow m = abs q pow n <=>\n                  m = 0 /\\ n = 0 \\/ abs p = abs q /\\ m = n)
+      #|  forall p q m n. int_prime p /\\ int_prime q\n             ==> (abs p pow m = abs q pow n <=>\n                  m = 0 /\\ n = 0 \\/ abs p = abs q /\\ m = n)
       #|  n:num
       #|  m:num
       #|  q:int
       #|  p:int
-      #|  !p q m n. int_prime p /\\ int_prime q /\\ &0 <= p /\\ &0 <= q\n             ==> (p pow m = q pow n <=>\n                  m = 0 /\\ n = 0 \\/ p = q /\\ m = n)
+      #|  forall p q m n. int_prime p /\\ int_prime q /\\ &0 <= p /\\ &0 <= q\n             ==> (p pow m = q pow n <=>\n                  m = 0 /\\ n = 0 \\/ p = q /\\ m = n)
       #|  abs(&n + &1) = &n + &1
       #|  ~(&n + &1 = &0)
       #|  p <= n + &1 ==> p <= n \\/ p = n + &1
       #|  x <= n ==> x <= n + &1
       #|  abs x <= &0 <=> x = &0
-      #|  !p. int_prime p ==> !n. p divides &(FACT n) <=> abs p <= &n
+      #|  forall p. int_prime p ==> forall n. p divides &(FACT n) <=> abs p <= &n
       #|INT_DIVIDES_REFL =  |- (#!:fun(fun(int,bool),bool) (\d:int. ((#int_divides:fun(int,fun(int,bool)) d:int) d:int)))
       #|INT_DIVIDES_TRANS =  |- (#!:fun(fun(int,bool),bool) (\x:int. (#!:fun(fun(int,bool),bool) (\y:int. (#!:fun(fun(int,bool),bool) (\z:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) x:int) y:int)) ((#int_divides:fun(int,fun(int,bool)) y:int) z:int))) ((#int_divides:fun(int,fun(int,bool)) x:int) z:int))))))))
       #|INT_DIVIDES_ADD =  |- (#!:fun(fun(int,bool),bool) (\d:int. (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) d:int) a:int)) ((#int_divides:fun(int,fun(int,bool)) d:int) b:int))) ((#int_divides:fun(int,fun(int,bool)) d:int) ((#int_add:fun(int,fun(int,int)) a:int) b:int)))))))))

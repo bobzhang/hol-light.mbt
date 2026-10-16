@@ -15212,10 +15212,10 @@ CPU time (user): <t>
 0..0..solved at 3
 100/wilson quotations (76):
   1 <= SUC n
-  !n. FACT(n) = nproduct(1..n) (\\i. i)
+  forall n. FACT(n) = nproduct(1..n) (\\i. i)
   1
   n = 0 \\/ 1 <= n
-  !n. FACT(n) = nproduct(2..n) (\\i. i)
+  forall n. FACT(n) = nproduct(2..n) (\\i. i)
   1 * 1
   FINITE(s:A->bool)
   s = (a:A) INSERT (b INSERT (s DELETE a DELETE b))
@@ -15237,9 +15237,9 @@ CPU time (user): <t>
   s:A->bool = {}
   s:A->bool
   n:num
-  !f r n s. FINITE s /\\ CARD s = n /\\\n             (!x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                    (f(x) * f(y) == 1) (mod r))\n             ==> (nproduct s f == 1) (mod r)
+  forall f r n s. FINITE s /\\ CARD s = n /\\\n             (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                    (f(x) * f(y) == 1) (mod r))\n             ==> (nproduct s f == 1) (mod r)
   CARD(s:A->bool)
-  !f r s. FINITE s /\\\n           (!x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                  (f(x) * f(y) == 1) (mod r))\n           ==> (nproduct s f == 1) (mod r)
+  forall f r s. FINITE s /\\\n           (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                  (f(x) * f(y) == 1) (mod r))\n           ==> (nproduct s f == 1) (mod r)
   2 <= x
   (x + 1) * 1 <= (x + 1) * x\n      ==> 1 + (x + 1) * x - (x + 1) * 1 = x * x
   1 + (x + 1) * (x - 1) = x * x
@@ -15275,7 +15275,7 @@ CPU time (user): <t>
   p = 2
   p = 1
   p = 0
-  !p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
+  forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
   ~(n = 0) ==> n - 1 + 1 = n
   n - 1
   p divides 1
@@ -15286,7 +15286,7 @@ CPU time (user): <t>
   n = 0
   p:num
   n:num
-  !p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
+  forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
 FACT_NPRODUCT =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) ((#nproduct:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. i:num)))))
 FACT_NPRODUCT_ALT =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) ((#nproduct:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (\i:num. i:num)))))
 NPRODUCT_PAIRUP_INDUCT =  |- (#!:fun(fun(fun('A,num),bool),bool) (\f:fun('A,num). (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun('A,bool),num) s:fun('A,bool))) n:num)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) (#?!:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#*:fun(num,fun(num,num)) (f:fun('A,num) x:'A)) (f:fun('A,num) y:'A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) r:num)))))))))))) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#nproduct:fun(fun('A,bool),fun(fun('A,num),num)) s:fun('A,bool)) f:fun('A,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) r:num)))))))))))

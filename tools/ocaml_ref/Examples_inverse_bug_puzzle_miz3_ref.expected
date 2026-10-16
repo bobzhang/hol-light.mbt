@@ -39703,15 +39703,15 @@ Examples/inverse_bug_puzzle_miz3 quotations (191):
   :error
   oriented_area (a:real^2,b:real^2,c:real^2) =\n  ((b$1 - a$1) * (c$2 - a$2) - (c$1 - a$1) * (b$2 - a$2)) / &2
   :error
-  !A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})
+  forall A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})
   :triple
   :error
   :error
   :error
   :error
   :error
-  !p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
-  !p p'. !n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (!m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
+  forall p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
+  forall p p'. forall n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))
   :error
   :error
   :triple

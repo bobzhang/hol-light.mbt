@@ -5544,7 +5544,7 @@ Warning: inventing type variables
 0..0..2..9..22..48..117..239..529..solved at 566
 0..0..2..9..22..solved at 31
 100/subsequence quotations (41):
-  !f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))
+  forall f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))
   n:num
   {y | y IN s /\\ (f:A->B) y = f x}
   ~(n <= x) ==> x <= n - 1
@@ -5554,9 +5554,9 @@ Warning: inventing type variables
   {t x | x IN s} = IMAGE t s
   s:A->bool
   f:A->B
-  !f:A->B s n.\n        FINITE s /\\ (n - 1) * CARD(IMAGE f s) < CARD s\n        ==> ?t a. t SUBSET s /\\ t HAS_SIZE n /\\ (!x. x IN t ==> f(x) = a)
-  mono_on (f:num->real) r s <=>\n    !i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)
-  !s t. t SUBSET s /\\ mono_on f r s ==> mono_on f r t
+  forall f:A->B s n.\n        FINITE s /\\ (n - 1) * CARD(IMAGE f s) < CARD s\n        ==> ?t a. t SUBSET s /\\ t HAS_SIZE n /\\ (forall x. x IN t ==> f(x) = a)
+  mono_on (f:num->real) r s <=>\n    forall i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)
+  forall s t. t SUBSET s /\\ mono_on f r s ==> mono_on f r t
   (i:num) INSERT s
   ~(k + 1 <= k)
   k + 1
@@ -5566,12 +5566,12 @@ Warning: inventing type variables
   k:num
   u:num->bool
   n * CARD(1..m)
-  ?s k:num. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\\n              !i. i IN s ==> t(i) = k
+  ?s k:num. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\\n              forall i. i IN s ==> t(i) = k
   {i:num}
   ~(m + 1 <= n) ==> n <= m
   1
   i:num
-  !i. i IN (1..m*n+1) ==> 1 <= t i /\\ t i <= m
+  forall i. i IN (1..m*n+1) ==> 1 <= t i /\\ t i <= m
   s:num->bool
   s:num->bool
   i:num
@@ -5581,8 +5581,8 @@ Warning: inventing type variables
   CARD(1..m*n+1)
   {i:num}
   1
-  !i. i IN (1..m*n+1)\n        ==> ?k. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE k /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (!j. j IN s ==> i <= j)) /\\\n                (!l. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE l /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (!j. j IN s ==> i <= j))\n                     ==> l <= k)
-  !f:num->real m n.\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (m + 1) /\\ mono_on f (<=) s) \\/\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\ mono_on f (>=) s)
+  forall i. i IN (1..m*n+1)\n        ==> ?k. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE k /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j)) /\\\n                (forall l. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE l /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j))\n                     ==> l <= k)
+  forall f:num->real m n.\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (m + 1) /\\ mono_on f (<=) s) \\/\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\ mono_on f (>=) s)
   j:num
   i:num
 lemma =  |- (#!:fun(fun(fun('?142972,'?142976),bool),bool) (\f:fun('?142972,'?142976). (#!:fun(fun(fun('?142972,bool),bool),bool) (\s:fun('?142972,bool). ((#=:fun(fun('?142972,bool),fun(fun('?142972,bool),bool)) s:fun('?142972,bool)) (#UNIONS:fun(fun(fun('?142972,bool),bool),fun('?142972,bool)) ((#IMAGE:fun(fun('?142976,fun('?142972,bool)),fun(fun('?142976,bool),fun(fun('?142972,bool),bool))) (\a:'?142976. (#GSPEC:fun(fun('?142972,bool),fun('?142972,bool)) (\GEN%PVAR%372:'?142972. (#?:fun(fun('?142972,bool),bool) (\x:'?142972. (((#SETSPEC:fun('?142972,fun(bool,fun('?142972,bool))) GEN%PVAR%372:'?142972) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?142972,fun(fun('?142972,bool),bool)) x:'?142972) s:fun('?142972,bool))) ((#=:fun('?142976,fun('?142976,bool)) (f:fun('?142972,'?142976) x:'?142972)) a:'?142976))) x:'?142972))))))) ((#IMAGE:fun(fun('?142972,'?142976),fun(fun('?142972,bool),fun('?142976,bool))) f:fun('?142972,'?142976)) s:fun('?142972,bool)))))))))

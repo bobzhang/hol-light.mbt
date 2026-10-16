@@ -52,7 +52,7 @@ fn step_4() -> Unit raise {
     t4,
   )
   finite_numseg_c.set(
-    @tactics.prove(@parser.parse_term("!m n. FINITE(m..n)"), t5),
+    @tactics.prove(@parser.parse_term("forall m n. FINITE(m..n)"), t5),
   )
 }
 
@@ -82,7 +82,7 @@ fn step_5() -> Unit raise {
   numseg_combine_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m p n. m <= p + 1 /\\ p <= n ==> ((m..p) UNION ((p+1)..n) = m..n)",
+        "forall m p n. m <= p + 1 /\\ p <= n ==> ((m..p) UNION ((p+1)..n) = m..n)",
       ),
       t6,
     ),
@@ -117,7 +117,7 @@ fn step_6() -> Unit raise {
   numseg_combine_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m p n. m <= p /\\ p <= n + 1 ==> ((m..(p-1)) UNION (p..n) = m..n)",
+        "forall m p n. m <= p /\\ p <= n + 1 ==> ((m..(p-1)) UNION (p..n) = m..n)",
       ),
       t7,
     ),
@@ -151,7 +151,7 @@ fn step_7() -> Unit raise {
   )
   numseg_lrec_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m <= n ==> (m INSERT ((m+1)..n) = m..n)"),
+      @parser.parse_term("forall m n. m <= n ==> (m INSERT ((m+1)..n) = m..n)"),
       t8,
     ),
   )
@@ -182,7 +182,7 @@ fn step_8() -> Unit raise {
   )
   numseg_rrec_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m <= n ==> (n INSERT (m..(n-1)) = m..n)"),
+      @parser.parse_term("forall m n. m <= n ==> (n INSERT (m..(n-1)) = m..n)"),
       t9,
     ),
   )
@@ -206,7 +206,7 @@ fn step_9() -> Unit raise {
   numseg_rec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. m <= SUC n ==> (m..SUC n = (SUC n) INSERT (m..n))",
+        "forall m n. m <= SUC n ==> (m..SUC n = (SUC n) INSERT (m..n))",
       ),
       t10,
     ),
@@ -228,7 +228,7 @@ fn step_10() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([numseg(), @sets.in_elim_thm()]))
   in_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. p IN (m..n) <=> m <= p /\\ p <= n"),
+      @parser.parse_term("forall m n p. p IN (m..n) <=> m <= p /\\ p <= n"),
       t11,
     ),
   )
@@ -248,7 +248,7 @@ pub fn in_numseg() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([in_numseg(), @arith.le_0()]))
   in_numseg_0_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m IN (0..n) <=> m <= n"), t12),
+    @tactics.prove(@parser.parse_term("forall m n. m IN (0..n) <=> m <= n"), t12),
   )
 }
 
@@ -270,7 +270,7 @@ fn step_12() -> Unit raise {
     ),
     @int.arith_tac,
   )
-  numseg_sing_c.set(@tactics.prove(@parser.parse_term("!n. n..n = {n}"), t13))
+  numseg_sing_c.set(@tactics.prove(@parser.parse_term("forall n. n..n = {n}"), t13))
 }
 
 ///|
@@ -295,7 +295,7 @@ fn step_13() -> Unit raise {
     t14,
   )
   numseg_empty_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m..n = {}) <=> n < m"), t15),
+    @tactics.prove(@parser.parse_term("forall m n. (m..n = {}) <=> n < m"), t15),
   )
 }
 
@@ -313,7 +313,7 @@ pub fn numseg_empty() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t16 = @simp.rewrite_tac(@list.List([numseg_empty()]))
   empty_numseg_c.set(
-    @tactics.prove(@parser.parse_term("!m n. n < m ==> m..n = {}"), t16),
+    @tactics.prove(@parser.parse_term("forall m n. n < m ==> m..n = {}"), t16),
   )
 }
 
@@ -365,7 +365,7 @@ fn step_15() -> Unit raise {
   )
   finite_subset_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!s:num->bool. FINITE s <=> ?n. s SUBSET 0..n"),
+      @parser.parse_term("forall s:num->bool. FINITE s <=> ?n. s SUBSET 0..n"),
       t24,
     ),
   )
@@ -406,7 +406,7 @@ fn step_16() -> Unit raise {
     t26,
   )
   card_numseg_lemma_c.set(
-    @tactics.prove(@parser.parse_term("!m d. CARD(m..(m+d)) = d + 1"), t27),
+    @tactics.prove(@parser.parse_term("forall m d. CARD(m..(m+d)) = d + 1"), t27),
   )
 }
 
@@ -500,7 +500,7 @@ fn step_17() -> Unit raise {
     t35,
   )
   card_numseg_c.set(
-    @tactics.prove(@parser.parse_term("!m n. CARD(m..n) = (n + 1) - m"), t36),
+    @tactics.prove(@parser.parse_term("forall m n. CARD(m..n) = (n + 1) - m"), t36),
   )
 }
 
@@ -521,7 +521,7 @@ fn step_18() -> Unit raise {
   )
   has_size_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m..n) HAS_SIZE ((n + 1) - m)"),
+      @parser.parse_term("forall m n. (m..n) HAS_SIZE ((n + 1) - m)"),
       t37,
     ),
   )
@@ -546,7 +546,7 @@ fn step_19() -> Unit raise {
     @int.arith_tac,
   )
   card_numseg_1_c.set(
-    @tactics.prove(@parser.parse_term("!n. CARD(1..n) = n"), t38),
+    @tactics.prove(@parser.parse_term("forall n. CARD(1..n) = n"), t38),
   )
 }
 
@@ -569,7 +569,7 @@ fn step_20() -> Unit raise {
     @int.arith_tac,
   )
   has_size_numseg_1_c.set(
-    @tactics.prove(@parser.parse_term("!n. (1..n) HAS_SIZE n"), t39),
+    @tactics.prove(@parser.parse_term("forall n. (1..n) HAS_SIZE n"), t39),
   )
 }
 
@@ -663,7 +663,7 @@ fn step_21() -> Unit raise {
   numseg_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m. m..0 = if m = 0 then {0} else {}) /\\\n   (!m n. m..SUC n = if m <= SUC n then (SUC n) INSERT (m..n) else m..n)",
+        "(forall m. m..0 = if m = 0 then {0} else {}) /\\\n   (forall m n. m..SUC n = if m <= SUC n then (SUC n) INSERT (m..n) else m..n)",
       ),
       t47,
     ),
@@ -717,7 +717,7 @@ fn step_22() -> Unit raise {
   finite_index_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool.\n        FINITE s <=>\n        ?f. (!i j. i IN 1..CARD s /\\ j IN 1..CARD s /\\ f i = f j ==> i = j) /\\\n            s = IMAGE f (1..CARD s)",
+        "forall s:A->bool.\n        FINITE s <=>\n        ?f. (forall i j. i IN 1..CARD s /\\ j IN 1..CARD s /\\ f i = f j ==> i = j) /\\\n            s = IMAGE f (1..CARD s)",
       ),
       t54,
     ),
@@ -744,7 +744,7 @@ fn step_23() -> Unit raise {
   finite_index_numbers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool.\n        FINITE s <=>\n        ?k:num->bool f. (!i j. i IN k /\\ j IN k /\\ f i = f j ==> i = j) /\\\n                        FINITE k /\\ s = IMAGE f k",
+        "forall s:A->bool.\n        FINITE s <=>\n        ?k:num->bool f. (forall i j. i IN k /\\ j IN k /\\ f i = f j ==> i = j) /\\\n                        FINITE k /\\ s = IMAGE f k",
       ),
       t55,
     ),
@@ -773,7 +773,7 @@ fn step_24() -> Unit raise {
   )
   inter_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. (m..n) INTER (p..q) = (MAX m p)..(MIN n q)"),
+      @parser.parse_term("forall m n p q. (m..n) INTER (p..q) = (MAX m p)..(MIN n q)"),
       t56,
     ),
   )
@@ -800,7 +800,7 @@ fn step_25() -> Unit raise {
   disjoint_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p q. DISJOINT (m..n) (p..q) <=> n < p \\/ q < m \\/ n < m \\/ q < p",
+        "forall m n p q. DISJOINT (m..n) (p..q) <=> n < p \\/ q < m \\/ n < m \\/ q < p",
       ),
       t57,
     ),
@@ -830,7 +830,7 @@ fn step_26() -> Unit raise {
   numseg_add_split_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p. m <= n + 1 ==> (m..(n+p) = (m..n) UNION (n+1..n+p))",
+        "forall m n p. m <= n + 1 ==> (m..(n+p) = (m..n) UNION (n+1..n+p))",
       ),
       t58,
     ),
@@ -900,7 +900,7 @@ fn step_27() -> Unit raise {
   )
   numseg_offset_image_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m+p..n+p) = IMAGE (\\i. i + p) (m..n)"),
+      @parser.parse_term("forall m n p. (m+p..n+p) = IMAGE (\\i. i + p) (m..n)"),
       t64,
     ),
   )
@@ -937,7 +937,7 @@ fn step_28() -> Unit raise {
   subset_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p q. (m..n) SUBSET (p..q) <=> n < m \\/ p <= m /\\ n <= q",
+        "forall m n p q. (m..n) SUBSET (p..q) <=> n < m \\/ p <= m /\\ n <= q",
       ),
       t67,
     ),
@@ -963,7 +963,7 @@ fn step_29() -> Unit raise {
     @int.arith_tac,
   )
   numseg_le_c.set(
-    @tactics.prove(@parser.parse_term("!n. {x | x <= n} = 0..n"), t68),
+    @tactics.prove(@parser.parse_term("forall n. {x | x <= n} = 0..n"), t68),
   )
 }
 
@@ -996,7 +996,7 @@ fn step_30() -> Unit raise {
   )
   numseg_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. {x | x < n} = if n = 0 then {} else 0..(n-1)"),
+      @parser.parse_term("forall n. {x | x < n} = if n = 0 then {} else 0..(n-1)"),
       t70,
     ),
   )
@@ -1220,7 +1220,7 @@ fn step_32() -> Unit raise {
   ])
   let t145 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!i. i IN 1..SUC n <=> i = 1 \\/ 1 < i /\\ (i - 1) IN 1..n",
+      "forall i. i IN 1..SUC n <=> i = 1 \\/ 1 < i /\\ (i - 1) IN 1..n",
     ),
     fn(
       x143 : @kernel.Thm,
@@ -1770,7 +1770,7 @@ fn step_32() -> Unit raise {
   ])
   let t78 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!n s. s HAS_SIZE n /\\ ~(s = {})\n                      ==> ?a:A. a IN s /\\ !b. b IN (s DELETE a) ==> ~(b << a)",
+      "forall n s. s HAS_SIZE n /\\ ~(s = {})\n                      ==> ?a:A. a IN s /\\ forall b. b IN (s DELETE a) ==> ~(b << a)",
     ),
     fn(
       x75 : @kernel.Thm,
@@ -1885,7 +1885,7 @@ fn step_32() -> Unit raise {
   topological_sort_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<). (!x y:A. x << y /\\ y << x ==> x = y) /\\\n          (!x y z. x << y /\\ y << z ==> x << z)\n          ==> !n s. s HAS_SIZE n\n                    ==> ?f. s = IMAGE f (1..n) /\\\n                            (!j k. j IN 1..n /\\ k IN 1..n /\\ j < k\n                                   ==> ~(f k << f j))",
+        "forall(<<). (forall x y:A. x << y /\\ y << x ==> x = y) /\\\n          (forall x y z. x << y /\\ y << z ==> x << z)\n          ==> forall n s. s HAS_SIZE n\n                    ==> ?f. s = IMAGE f (1..n) /\\\n                            (forall j k. j IN 1..n /\\ k IN 1..n /\\ j < k\n                                   ==> ~(f k << f j))",
       ),
       t170,
     ),
@@ -2069,7 +2069,7 @@ fn step_33() -> Unit raise {
   finite_int_seg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!l r. FINITE {x:int | l <= x /\\ x <= r}) /\\\n   (!l r. FINITE {x:int | l <= x /\\ x < r}) /\\\n   (!l r. FINITE {x:int | l < x /\\ x <= r}) /\\\n   (!l r. FINITE {x:int | l < x /\\ x < r})",
+        "(forall l r. FINITE {x:int | l <= x /\\ x <= r}) /\\\n   (forall l r. FINITE {x:int | l <= x /\\ x < r}) /\\\n   (forall l r. FINITE {x:int | l < x /\\ x <= r}) /\\\n   (forall l r. FINITE {x:int | l < x /\\ x < r})",
       ),
       t191,
     ),
@@ -2090,7 +2090,7 @@ pub fn finite_int_seg() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   neutral_c.set(
     @pair.new_definition(
-      @parser.parse_term("neutral op = @x:A. !y. (op x y = y) /\\ (op y x = y)"),
+      @parser.parse_term("neutral op = @x:A. forall y. (op x y = y) /\\ (op y x = y)"),
     ),
   )
 }
@@ -2110,7 +2110,7 @@ fn step_35() -> Unit raise {
   monoidal_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "monoidal op <=> (!x y. op x y = op y x) /\\\n                   (!x y z. op x (op y z) = op (op x y) z) /\\\n                   (!x:A. op (neutral op) x = x)",
+        "monoidal op <=> (forall x y. op x y = op y x) /\\\n                   (forall x y z. op x (op y z) = op (op x y) z) /\\\n                   (forall x:A. op (neutral op) x = x)",
       ),
     ),
   )
@@ -2136,7 +2136,7 @@ fn step_36() -> Unit raise {
   monoidal_ac_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> (!a:A. op (neutral op) a = a) /\\\n            (!a. op a (neutral op) = a) /\\\n            (!a b. op a b = op b a) /\\\n            (!a b c. op (op a b) c = op a (op b c)) /\\\n            (!a b c. op a (op b c) = op b (op a c))",
+        "forall op. monoidal op\n        ==> (forall a:A. op (neutral op) a = a) /\\\n            (forall a. op a (neutral op) = a) /\\\n            (forall a b. op a b = op b a) /\\\n            (forall a b c. op (op a b) c = op a (op b c)) /\\\n            (forall a b c. op a (op b c) = op b (op a c))",
       ),
       t193,
     ),
@@ -2201,7 +2201,7 @@ fn step_39() -> Unit raise {
   in_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) x s. x IN (support op f s) <=> x IN s /\\ ~(f x = neutral op)",
+        "forall op (f:A->B) x s. x IN (support op f s) <=> x IN s /\\ ~(f x = neutral op)",
       ),
       t194,
     ),
@@ -2230,7 +2230,7 @@ fn step_40() -> Unit raise {
   support_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) s. support op f (support op f s) = support op f s",
+        "forall op (f:A->B) s. support op f (support op f s) = support op f s",
       ),
       t196,
     ),
@@ -2266,7 +2266,7 @@ fn step_41() -> Unit raise {
   support_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) s. (!x. x IN s ==> f(x) = neutral op) <=> support op f s = {}",
+        "forall op (f:A->B) s. (forall x. x IN s ==> f(x) = neutral op) <=> support op f s = {}",
       ),
       t198,
     ),
@@ -2288,7 +2288,7 @@ fn step_42() -> Unit raise {
   let t199 = @simp.simp_tac(@list.List([@sets.subset(), in_support()]))
   support_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("!op (f:A->B) s. (support op f s) SUBSET s"),
+      @parser.parse_term("forall op (f:A->B) s. (support op f s) SUBSET s"),
       t199,
     ),
   )
@@ -2311,7 +2311,7 @@ fn step_43() -> Unit raise {
   )
   finite_support_c.set(
     @tactics.prove(
-      @parser.parse_term("!op (f:A->B) s. FINITE s ==> FINITE(support op f s)"),
+      @parser.parse_term("forall op (f:A->B) s. FINITE s ==> FINITE(support op f s)"),
       t200,
     ),
   )
@@ -2360,7 +2360,7 @@ fn step_44() -> Unit raise {
   support_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!(f:A->C). support op f {} = {}) /\\\n   (!(f:A->C) x s. support op f (x INSERT s) =\n        if f(x) = neutral op then support op f s\n        else x INSERT (support op f s)) /\\\n   (!(f:A->C) x s. support op f (s DELETE x) = (support op f s) DELETE x) /\\\n   (!(f:A->C) s t. support op f (s UNION t) =\n                   (support op f s) UNION (support op f t)) /\\\n   (!(f:A->C) s t. support op f (s INTER t) =\n                   (support op f s) INTER (support op f t)) /\\\n   (!(f:A->C) s t. support op f (s DIFF t) =\n                   (support op f s) DIFF (support op f t)) /\\\n   (!(f:A->B) (g:B->C) s.\n                   support op g (IMAGE f s) = IMAGE f (support op (g o f) s))",
+        "(forall(f:A->C). support op f {} = {}) /\\\n   (forall(f:A->C) x s. support op f (x INSERT s) =\n        if f(x) = neutral op then support op f s\n        else x INSERT (support op f s)) /\\\n   (forall(f:A->C) x s. support op f (s DELETE x) = (support op f s) DELETE x) /\\\n   (forall(f:A->C) s t. support op f (s UNION t) =\n                   (support op f s) UNION (support op f t)) /\\\n   (forall(f:A->C) s t. support op f (s INTER t) =\n                   (support op f s) INTER (support op f t)) /\\\n   (forall(f:A->C) s t. support op f (s DIFF t) =\n                   (support op f s) DIFF (support op f t)) /\\\n   (forall(f:A->B) (g:B->C) s.\n                   support op g (IMAGE f s) = IMAGE f (support op (g o f) s))",
       ),
       t204,
     ),
@@ -2406,7 +2406,7 @@ fn step_45() -> Unit raise {
   support_delta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op s (f:A->B) a.\n        support op (\\x. if x = a then f(x) else neutral op) s =\n        if a IN s then support op f {a} else {}",
+        "forall op s (f:A->B) a.\n        support op (\\x. if x = a then f(x) else neutral op) s =\n        if a IN s then support op f {a} else {}",
       ),
       t208,
     ),
@@ -2439,7 +2439,7 @@ fn step_46() -> Unit raise {
   finite_support_delta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) a.\n        FINITE(support op (\\x. if x = a then f(x) else neutral op) s)",
+        "forall op (f:A->B) a.\n        FINITE(support op (\\x. if x = a then f(x) else neutral op) s)",
       ),
       t211,
     ),
@@ -2464,7 +2464,7 @@ fn step_47() -> Unit raise {
   iterate_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) s. iterate op (support op f s) f = iterate op s f",
+        "forall op (f:A->B) s. iterate op (support op f s) f = iterate op s f",
       ),
       t212,
     ),
@@ -2489,7 +2489,7 @@ fn step_48() -> Unit raise {
   iterate_expand_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op (f:A->B) s.\n        iterate op s f =\n        if FINITE(support op f s) then iterate op (support op f s) f\n        else neutral op",
+        "forall op (f:A->B) s.\n        iterate op s f =\n        if FINITE(support op f s) then iterate op (support op f s) f\n        else neutral op",
       ),
       t213,
     ),
@@ -2611,7 +2611,7 @@ fn step_49() -> Unit raise {
   iterate_clauses_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> (!(f:A->B). iterate op {} f = neutral op) /\\\n            (!f x s. FINITE(support op (f:A->B) s)\n                     ==> (iterate op (x INSERT s) f =\n                                if x IN s then iterate op s f\n                                else op (f x) (iterate op s f)))",
+        "forall op. monoidal op\n        ==> (forall(f:A->B). iterate op {} f = neutral op) /\\\n            (forall f x s. FINITE(support op (f:A->B) s)\n                     ==> (iterate op (x INSERT s) f =\n                                if x IN s then iterate op s f\n                                else op (f x) (iterate op s f)))",
       ),
       t236,
     ),
@@ -2638,7 +2638,7 @@ fn step_50() -> Unit raise {
   iterate_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> (!(f:A->C). iterate op {} f = neutral op) /\\\n            (!(f:B->C) x s.\n                FINITE(s)\n                ==> (iterate op (x INSERT s) f =\n                     if x IN s then iterate op s f\n                     else op (f x) (iterate op s f)))",
+        "forall op. monoidal op\n        ==> (forall(f:A->C). iterate op {} f = neutral op) /\\\n            (forall(f:B->C) x s.\n                FINITE(s)\n                ==> (iterate op (x INSERT s) f =\n                     if x IN s then iterate op s f\n                     else op (f x) (iterate op s f)))",
       ),
       t237,
     ),
@@ -2707,7 +2707,7 @@ fn step_51() -> Unit raise {
   iterate_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !(f:A->B) s t.\n                FINITE s /\\ FINITE t /\\ DISJOINT s t\n                ==> (iterate op (s UNION t) f =\n                     op (iterate op s f) (iterate op t f))",
+        "forall op. monoidal op\n        ==> forall(f:A->B) s t.\n                FINITE s /\\ FINITE t /\\ DISJOINT s t\n                ==> (iterate op (s UNION t) f =\n                     op (iterate op s f) (iterate op t f))",
       ),
       t244,
     ),
@@ -2734,7 +2734,7 @@ fn step_52() -> Unit raise {
   iterate_union_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !(f:A->B) s t. FINITE(support op f s) /\\ FINITE(support op f t) /\\\n                           DISJOINT (support op f s) (support op f t)\n                           ==> (iterate op (s UNION t) f =\n                                op (iterate op s f) (iterate op t f))",
+        "forall op. monoidal op\n        ==> forall(f:A->B) s t. FINITE(support op f s) /\\ FINITE(support op f t) /\\\n                           DISJOINT (support op f s) (support op f t)\n                           ==> (iterate op (s UNION t) f =\n                                op (iterate op s f) (iterate op t f))",
       ),
       t246,
     ),
@@ -2774,7 +2774,7 @@ fn step_53() -> Unit raise {
   iterate_diff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !(f:A->B) s t.\n                FINITE s /\\ t SUBSET s\n                ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                     iterate op s f)",
+        "forall op. monoidal op\n        ==> forall(f:A->B) s t.\n                FINITE s /\\ t SUBSET s\n                ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                     iterate op s f)",
       ),
       t248,
     ),
@@ -2801,7 +2801,7 @@ fn step_54() -> Unit raise {
   iterate_diff_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B s t. FINITE (support op f s) /\\\n                         (support op f t) SUBSET (support op f s)\n                         ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                              iterate op s f)",
+        "forall op. monoidal op\n        ==> forall f:A->B s t. FINITE (support op f s) /\\\n                         (support op f t) SUBSET (support op f s)\n                         ==> (op (iterate op (s DIFF t) f) (iterate op t f) =\n                              iterate op s f)",
       ),
       t250,
     ),
@@ -2960,7 +2960,7 @@ fn step_55() -> Unit raise {
   iterate_incl_excl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !s t (f:A->B).\n                FINITE s /\\ FINITE t\n                ==> op (iterate op s f) (iterate op t f) =\n                    op (iterate op (s UNION t) f)\n                       (iterate op (s INTER t) f)",
+        "forall op. monoidal op\n        ==> forall s t (f:A->B).\n                FINITE s /\\ FINITE t\n                ==> op (iterate op s f) (iterate op t f) =\n                    op (iterate op (s UNION t) f)\n                       (iterate op (s INTER t) f)",
       ),
       t283,
     ),
@@ -3118,7 +3118,7 @@ fn step_56() -> Unit raise {
   iterate_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !P. P(neutral op) /\\ (!x y. P x /\\ P y ==> P (op x y))\n                ==> !f:A->B s. (!x. x IN s /\\ ~(f x = neutral op) ==> P(f x))\n                               ==> P(iterate op s f)",
+        "forall op. monoidal op\n        ==> forall P. P(neutral op) /\\ (forall x y. P x /\\ P y ==> P (op x y))\n                ==> forall f:A->B s. (forall x. x IN s /\\ ~(f x = neutral op) ==> P(f x))\n                               ==> P(iterate op s f)",
       ),
       t299,
     ),
@@ -3167,7 +3167,7 @@ fn step_57() -> Unit raise {
   iterate_related_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !R. R (neutral op) (neutral op) /\\\n                (!x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> !f:A->B g s.\n                      FINITE s /\\\n                      (!x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)",
+        "forall op. monoidal op\n        ==> forall R. R (neutral op) (neutral op) /\\\n                (forall x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> forall f:A->B g s.\n                      FINITE s /\\\n                      (forall x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)",
       ),
       t303,
     ),
@@ -3253,7 +3253,7 @@ fn step_58() -> Unit raise {
   iterate_eq_neutral_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B s. (!x. x IN s ==> (f(x) = neutral op))\n                       ==> (iterate op s f = neutral op)",
+        "forall op. monoidal op\n        ==> forall f:A->B s. (forall x. x IN s ==> (f(x) = neutral op))\n                       ==> (iterate op s f = neutral op)",
       ),
       t310,
     ),
@@ -3284,7 +3284,7 @@ fn step_59() -> Unit raise {
   iterate_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op ==> !f:A->B x. (iterate op {x} f = f x)",
+        "forall op. monoidal op ==> forall f:A->B x. (iterate op {x} f = f x)",
       ),
       t312,
     ),
@@ -3354,7 +3354,7 @@ fn step_60() -> Unit raise {
   iterate_closed_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !P. (!x y. P x /\\ P y ==> P (op x y))\n                ==> !f:A->B s. FINITE s /\\ ~(s = {}) /\\\n                               (!x. x IN s ==> P(f x))\n                               ==> P(iterate op s f)",
+        "forall op. monoidal op\n        ==> forall P. (forall x y. P x /\\ P y ==> P (op x y))\n                ==> forall f:A->B s. FINITE s /\\ ~(s = {}) /\\\n                               (forall x. x IN s ==> P(f x))\n                               ==> P(iterate op s f)",
       ),
       t321,
     ),
@@ -3429,7 +3429,7 @@ fn step_61() -> Unit raise {
   iterate_related_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !R. (!x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> !f:A->B g s.\n                      FINITE s /\\\n                      ~(s = {}) /\\\n                      (!x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)",
+        "forall op. monoidal op\n        ==> forall R. (forall x1 y1 x2 y2. R x1 x2 /\\ R y1 y2 ==> R (op x1 y1) (op x2 y2))\n                ==> forall f:A->B g s.\n                      FINITE s /\\\n                      ~(s = {}) /\\\n                      (forall x. x IN s ==> R (f x) (g x))\n                      ==> R (iterate op s f) (iterate op s g)",
       ),
       t330,
     ),
@@ -3461,7 +3461,7 @@ fn step_62() -> Unit raise {
   iterate_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B s a. FINITE s /\\ a IN s\n                         ==> op (f a) (iterate op (s DELETE a) f) =\n                             iterate op s f",
+        "forall op. monoidal op\n        ==> forall f:A->B s a. FINITE s /\\ a IN s\n                         ==> op (f a) (iterate op (s DELETE a) f) =\n                             iterate op s f",
       ),
       t331,
     ),
@@ -3516,7 +3516,7 @@ fn step_63() -> Unit raise {
   iterate_delta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !(f:A->B) a s.\n                iterate op s (\\x. if x = a then f(x) else neutral op) =\n                if a IN s then f(a) else neutral op",
+        "forall op. monoidal op\n        ==> forall(f:A->B) a s.\n                iterate op s (\\x. if x = a then f(x) else neutral op) =\n                if a IN s then f(a) else neutral op",
       ),
       t338,
     ),
@@ -3599,7 +3599,7 @@ fn step_64() -> Unit raise {
   ])
   let t342 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!s. FINITE s /\\\n        (!x y:A. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (iterate op (IMAGE f s) (g:B->C) = iterate op s (g o f))",
+      "forall s. FINITE s /\\\n        (forall x y:A. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (iterate op (IMAGE f s) (g:B->C) = iterate op s (g o f))",
     ),
     fn(
       x339 : @kernel.Thm,
@@ -3664,7 +3664,7 @@ fn step_64() -> Unit raise {
   iterate_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n       ==> !f:A->B g:B->C s.\n                (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n                ==> (iterate op (IMAGE f s) g = iterate op s (g o f))",
+        "forall op. monoidal op\n       ==> forall f:A->B g:B->C s.\n                (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n                ==> (iterate op (IMAGE f s) g = iterate op s (g o f))",
       ),
       t358,
     ),
@@ -3740,7 +3740,7 @@ fn step_65() -> Unit raise {
   iterate_bijection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==>  !f:A->B p s.\n                (!x. x IN s ==> p(x) IN s) /\\\n                (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> iterate op s f = iterate op s (f o p)",
+        "forall op. monoidal op\n        ==>  forall f:A->B p s.\n                (forall x. x IN s ==> p(x) IN s) /\\\n                (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> iterate op s f = iterate op s (f o p)",
       ),
       t367,
     ),
@@ -4320,7 +4320,7 @@ fn step_66() -> Unit raise {
   iterate_iterate_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !s:A->bool t:A->B->bool x:A->B->C.\n                FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n                ==> iterate op s (\\i. iterate op (t i) (x i)) =\n                    iterate op {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
+        "forall op. monoidal op\n        ==> forall s:A->bool t:A->B->bool x:A->B->C.\n                FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n                ==> iterate op s (\\i. iterate op (t i) (x i)) =\n                    iterate op {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
       ),
       t417,
     ),
@@ -4353,7 +4353,7 @@ fn step_67() -> Unit raise {
   let t431 = @list.List([@meson.asm_meson_tac(@list.List([in_support()])), t430])
   let t429 = @tactics.subgoal_then(
     @parser.parse_term(
-      "FINITE(support op (f:A->B) s) /\\\n    (!x. x IN (support op f s) ==> f x = g x)",
+      "FINITE(support op (f:A->B) s) /\\\n    (forall x. x IN (support op f s) ==> f x = g x)",
     ),
     fn(
       x426 : @kernel.Thm,
@@ -4498,7 +4498,7 @@ fn step_67() -> Unit raise {
   iterate_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B g s.\n              (!x. x IN s ==> f x = g x) ==> iterate op s f = iterate op s g",
+        "forall op. monoidal op\n        ==> forall f:A->B g s.\n              (forall x. x IN s ==> f x = g x) ==> iterate op s f = iterate op s g",
       ),
       t437,
     ),
@@ -4574,7 +4574,7 @@ fn step_68() -> Unit raise {
   iterate_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !P s f:A->B. iterate op {x | x IN s /\\ P x} f =\n                         iterate op s (\\x. if P x then f x else neutral op)",
+        "forall op. monoidal op\n        ==> forall P s f:A->B. iterate op {x | x IN s /\\ P x} f =\n                         iterate op s (\\x. if P x then f x else neutral op)",
       ),
       t446,
     ),
@@ -4705,7 +4705,7 @@ fn step_69() -> Unit raise {
   iterate_eq_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !s:A->bool t:B->bool f:A->C g h.\n                (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n                (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g",
+        "forall op. monoidal op\n        ==> forall s:A->bool t:B->bool f:A->C g h.\n                (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n                (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g",
       ),
       t461,
     ),
@@ -4762,7 +4762,7 @@ fn step_70() -> Unit raise {
   iterate_eq_general_inverses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !s:A->bool t:B->bool f:A->C g h k.\n                (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n                (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g",
+        "forall op. monoidal op\n        ==> forall s:A->bool t:B->bool f:A->C g h k.\n                (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n                (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n                ==> iterate op s f = iterate op t g",
       ),
       t467,
     ),
@@ -4835,7 +4835,7 @@ fn step_71() -> Unit raise {
   iterate_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n          ==> !f:A->B p:A->A s.\n                      FINITE s /\\\n                      (!x. x IN s ==> p x IN s) /\\\n                      (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n                      ==> iterate op s (f o p) = iterate op s f",
+        "forall op. monoidal op\n          ==> forall f:A->B p:A->A s.\n                      FINITE s /\\\n                      (forall x. x IN s ==> p x IN s) /\\\n                      (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n                      ==> iterate op s (f o p) = iterate op s f",
       ),
       t476,
     ),
@@ -4912,7 +4912,7 @@ fn step_72() -> Unit raise {
   iterate_union_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B s t.\n                FINITE(s) /\\ FINITE(t) /\\\n                (!x. x IN (s INTER t) ==> f x = neutral(op))\n                ==> iterate op (s UNION t) f =\n                    op (iterate op s f) (iterate op t f)",
+        "forall op. monoidal op\n        ==> forall f:A->B s t.\n                FINITE(s) /\\ FINITE(t) /\\\n                (forall x. x IN (s INTER t) ==> f x = neutral(op))\n                ==> iterate op (s UNION t) f =\n                    op (iterate op s f) (iterate op t f)",
       ),
       t484,
     ),
@@ -4951,7 +4951,7 @@ fn step_73() -> Unit raise {
   iterate_op_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !(f:A->B) g s.\n                FINITE s\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)",
+        "forall op. monoidal op\n        ==> forall(f:A->B) g s.\n                FINITE s\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)",
       ),
       t487,
     ),
@@ -4993,7 +4993,7 @@ fn step_74() -> Unit raise {
   iterate_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B u v.\n                u SUBSET v /\\\n                (!x. x IN v /\\ ~(x IN u) ==> f(x) = neutral op)\n                ==> iterate op v f = iterate op u f",
+        "forall op. monoidal op\n        ==> forall f:A->B u v.\n                u SUBSET v /\\\n                (forall x. x IN v /\\ ~(x IN u) ==> f(x) = neutral op)\n                ==> iterate op v f = iterate op u f",
       ),
       t491,
     ),
@@ -5059,7 +5059,7 @@ fn step_75() -> Unit raise {
   iterate_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B s. support op f UNIV SUBSET s\n                  ==> iterate op s f = iterate op UNIV f",
+        "forall op. monoidal op\n        ==> forall f:A->B s. support op f UNIV SUBSET s\n                  ==> iterate op s f = iterate op UNIV f",
       ),
       t498,
     ),
@@ -5105,7 +5105,7 @@ fn step_76() -> Unit raise {
   iterate_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B->C s t.\n                FINITE s /\\ FINITE t\n                ==> iterate op s (\\i. iterate op t (f i)) =\n                    iterate op t (\\j. iterate op s (\\i. f i j))",
+        "forall op. monoidal op\n        ==> forall f:A->B->C s t.\n                FINITE s /\\ FINITE t\n                ==> iterate op s (\\i. iterate op t (f i)) =\n                    iterate op t (\\j. iterate op s (\\i. f i j))",
       ),
       t503,
     ),
@@ -5291,7 +5291,7 @@ fn step_77() -> Unit raise {
   iterate_image_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !g:B->C f:A->B s.\n                    FINITE s /\\\n                    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f x = f y\n                           ==> g(f x) = neutral op)\n                    ==> iterate op (IMAGE f s) g = iterate op s (g o f)",
+        "forall op. monoidal op\n        ==> forall g:B->C f:A->B s.\n                    FINITE s /\\\n                    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f x = f y\n                           ==> g(f x) = neutral op)\n                    ==> iterate op (IMAGE f s) g = iterate op s (g o f)",
       ),
       t523,
     ),
@@ -5603,7 +5603,7 @@ fn step_78() -> Unit raise {
   iterate_image_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f:A->B g:A->C s.\n                FINITE s\n                ==> iterate op s g =\n                    iterate op (IMAGE f s)\n                       (\\y. iterate op {x | x IN s /\\ f x = y} g)",
+        "forall op. monoidal op\n        ==> forall f:A->B g:A->C s.\n                FINITE s\n                ==> iterate op s g =\n                    iterate op (IMAGE f s)\n                       (\\y. iterate op {x | x IN s /\\ f x = y} g)",
       ),
       t552,
     ),
@@ -5722,7 +5722,7 @@ fn step_79() -> Unit raise {
   iterate_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !s P f g:A->B.\n                FINITE s\n                ==> iterate op s (\\x. if P x then f x else g x) =\n                    op (iterate op {x | x IN s /\\ P x} f)\n                       (iterate op {x | x IN s /\\ ~P x} g)",
+        "forall op. monoidal op\n        ==> forall s P f g:A->B.\n                FINITE s\n                ==> iterate op s (\\x. if P x then f x else g x) =\n                    op (iterate op {x | x IN s /\\ P x} f)\n                       (iterate op {x | x IN s /\\ ~P x} g)",
       ),
       t564,
     ),
@@ -5813,7 +5813,7 @@ fn step_80() -> Unit raise {
   iterate_op_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f g:A->B s.\n                FINITE(support op f s) /\\ FINITE(support op g s)\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)",
+        "forall op. monoidal op\n        ==> forall f g:A->B s.\n                FINITE(support op f s) /\\ FINITE(support op g s)\n                ==> iterate op s (\\x. op (f x) (g x)) =\n                    op (iterate op s f) (iterate op s g)",
       ),
       t575,
     ),
@@ -5867,7 +5867,7 @@ fn step_81() -> Unit raise {
   iterate_clauses_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> (!m. iterate op (m..0) f = if m = 0 then f(0) else neutral op) /\\\n            (!m n. iterate op (m..SUC n) f :A =\n                   if m <= SUC n then op (iterate op (m..n) f) (f(SUC n))\n                   else iterate op (m..n) f)",
+        "forall op. monoidal op\n        ==> (forall m. iterate op (m..0) f = if m = 0 then f(0) else neutral op) /\\\n            (forall m n. iterate op (m..SUC n) f :A =\n                   if m <= SUC n then op (iterate op (m..n) f) (f(SUC n))\n                   else iterate op (m..n) f)",
       ),
       t580,
     ),
@@ -5908,7 +5908,7 @@ fn step_82() -> Unit raise {
   iterate_clauses_numseg_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> iterate op {i | i < 0} f :A = neutral op /\\\n            (!k. iterate op {i | i < SUC k} f =\n                 op (iterate op {i | i < k} f) (f k))",
+        "forall op. monoidal op\n        ==> iterate op {i | i < 0} f :A = neutral op /\\\n            (forall k. iterate op {i | i < SUC k} f =\n                 op (iterate op {i | i < k} f) (f k))",
       ),
       t583,
     ),
@@ -5954,7 +5954,7 @@ fn step_83() -> Unit raise {
   iterate_clauses_numseg_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> iterate op {i | i <= 0} f :A = f 0 /\\\n            (!k. iterate op {i | i <= SUC k} f =\n                 op (iterate op {i | i <= k} f) (f(SUC k)))",
+        "forall op. monoidal op\n        ==> iterate op {i | i <= 0} f :A = f 0 /\\\n            (forall k. iterate op {i | i <= SUC k} f =\n                 op (iterate op {i | i <= k} f) (f(SUC k)))",
       ),
       t586,
     ),
@@ -6067,7 +6067,7 @@ fn step_84() -> Unit raise {
   iterate_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op. monoidal op\n        ==> !f m n. iterate op (2*m..2*n+1) f :A =\n                    iterate op (m..n) (\\i. op (f(2*i)) (f(2*i+1)))",
+        "forall op. monoidal op\n        ==> forall f m n. iterate op (2*m..2*n+1) f :A =\n                    iterate op (m..n) (\\i. op (f(2*i)) (f(2*i+1)))",
       ),
       t599,
     ),
@@ -6321,7 +6321,7 @@ fn step_85() -> Unit raise {
   iterate_reflect_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!op:A->A->A.\n        monoidal op\n        ==> !x m n. iterate op (m..n) x =\n                    if n < m then neutral op\n                    else iterate op (0..n-m) (\\i. x(n - i))",
+        "forall op:A->A->A.\n        monoidal op\n        ==> forall x m n. iterate op (m..n) x =\n                    if n < m then neutral op\n                    else iterate op (0..n-m) (\\i. x(n - i))",
       ),
       t623,
     ),
@@ -6594,7 +6594,7 @@ fn step_86() -> Unit raise {
   )
   let t659 = (
     @parser.parse_term(
-      "?itty.\n      !dom neut op (<<=) k (f:K->A).\n         itty dom neut op (<<=) k f =\n         if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n            ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n         then let i = if ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                             !j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut}\n                                 ==> j = i\n                       then @i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                                !j. j <<= i /\\ j IN k /\\\n                                    f j IN dom DIFF {neut}\n                                    ==> j = i\n                       else @i. i IN k /\\ f i IN dom DIFF {neut} in\n              op (f i) (itty dom neut op (<<=)\n                          {j | j IN k DELETE i /\\ f j IN dom DIFF {neut}} f)\n         else neut",
+      "?itty.\n      forall dom neut op (<<=) k (f:K->A).\n         itty dom neut op (<<=) k f =\n         if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n            ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n         then let i = if ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                             forall j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut}\n                                 ==> j = i\n                       then @i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                                forall j. j <<= i /\\ j IN k /\\\n                                    f j IN dom DIFF {neut}\n                                    ==> j = i\n                       else @i. i IN k /\\ f i IN dom DIFF {neut} in\n              op (f i) (itty dom neut op (<<=)\n                          {j | j IN k DELETE i /\\ f j IN dom DIFF {neut}} f)\n         else neut",
     ),
     t658,
   )
@@ -6697,7 +6697,7 @@ fn step_87() -> Unit raise {
   iterato_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f =\n        iterato dom neut op (<<=) k f",
+        "forall dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f =\n        iterato dom neut op (<<=) k f",
       ),
       t667,
     ),
@@ -6745,7 +6745,7 @@ fn step_88() -> Unit raise {
   iterato_expand_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}}\n        then iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f\n        else neut",
+        "forall dom neut op (<<=) k (f:K->A).\n        iterato dom neut op (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN dom DIFF {neut}}\n        then iterato dom neut op (<<=) {i | i IN k /\\ f i IN dom DIFF {neut}} f\n        else neut",
       ),
       t674,
     ),
@@ -6797,7 +6797,7 @@ fn step_89() -> Unit raise {
   ])
   let t726 = @tactics.subgoal_then(
     @parser.parse_term(
-      "(@i'. i' IN i INSERT k /\\\n          (f:K->A) i' IN dom DIFF {neut} /\\\n          (!j. j <<= i' /\\ j IN i INSERT k /\\ f j IN dom DIFF {neut}\n               ==> j = i')) = i",
+      "(@i'. i' IN i INSERT k /\\\n          (f:K->A) i' IN dom DIFF {neut} /\\\n          (forall j. j <<= i' /\\ j IN i INSERT k /\\ f j IN dom DIFF {neut}\n               ==> j = i')) = i",
     ),
     fn(
       x723 : @kernel.Thm,
@@ -7253,7 +7253,7 @@ fn step_89() -> Unit raise {
   iterato_clauses_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!i k. FINITE {j | j IN k /\\ f j IN dom DIFF {neut}} /\\\n               (!j. j IN k ==> i = j \\/ i <<= j \\/ j <<= i) /\\\n               (!j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut} ==> j = i)\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))",
+        "forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall i k. FINITE {j | j IN k /\\ f j IN dom DIFF {neut}} /\\\n               (forall j. j IN k ==> i = j \\/ i <<= j \\/ j <<= i) /\\\n               (forall j. j <<= i /\\ j IN k /\\ f j IN dom DIFF {neut} ==> j = i)\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))",
       ),
       t738,
     ),
@@ -7289,7 +7289,7 @@ fn step_90() -> Unit raise {
   iterato_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!i k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n               (!j. j IN k ==> i <<= j /\\ ~(j <<= i))\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))",
+        "forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall i k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n               (forall j. j IN k ==> i <<= j /\\ ~(j <<= i))\n               ==> iterato dom neut op (<<=) (i INSERT k) f =\n                   if f i IN dom ==> f i = neut \\/ i IN k\n                   then iterato dom neut op (<<=) k f\n                   else op (f i) (iterato dom neut op (<<=) k f))",
       ),
       t742,
     ),
@@ -7548,7 +7548,7 @@ fn step_91() -> Unit raise {
   iterato_clauses_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (!k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n             ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n             ==> ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                     iterato dom neut op (<<=) k f =\n                     op (f i) (iterato dom neut op (<<=) (k DELETE i) f))",
+        "forall dom neut op (<<=) (f:K->A).\n        (iterato dom neut op (<<=) {} f = neut) /\\\n        (forall k. FINITE {i | i IN k /\\ f i IN dom DIFF {neut}} /\\\n             ~({i | i IN k /\\ f i IN dom DIFF {neut}} = {})\n             ==> ?i. i IN k /\\ f i IN dom DIFF {neut} /\\\n                     iterato dom neut op (<<=) k f =\n                     op (f i) (iterato dom neut op (<<=) (k DELETE i) f))",
       ),
       t787,
     ),
@@ -7765,7 +7765,7 @@ fn step_92() -> Unit raise {
   let t816 = @list.List([@meson.asm_meson_tac(@list.List([])), t815])
   let t814 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!s i. i IN k /\\ (f:K->A) i IN s <=> i IN k /\\ g i IN s",
+      "forall s i. i IN k /\\ (f:K->A) i IN s <=> i IN k /\\ g i IN s",
     ),
     fn(
       x811 : @kernel.Thm,
@@ -7834,7 +7834,7 @@ fn step_92() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)",
+        "(forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)",
       ),
     ),
   )
@@ -7875,7 +7875,7 @@ fn step_92() -> Unit raise {
   ])
   let t795 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!i. i IN {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}} ==> f i = g i",
+      "forall i. i IN {i | i IN k /\\ (g:K->A) i IN dom DIFF {neut}} ==> f i = g i",
     ),
     fn(
       x792 : @kernel.Thm,
@@ -8053,7 +8053,7 @@ fn step_92() -> Unit raise {
   iterato_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) k f (g:K->A).\n        (!i. i IN k ==> f i = g i)\n        ==> iterato dom neut op (<<=) k f = iterato dom neut op (<<=) k g",
+        "forall dom neut op (<<=) k f (g:K->A).\n        (forall i. i IN k ==> f i = g i)\n        ==> iterato dom neut op (<<=) k f = iterato dom neut op (<<=) k g",
       ),
       t845,
     ),
@@ -8316,7 +8316,7 @@ fn step_93() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)",
+        "(forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)",
       ),
     ),
   )
@@ -8451,7 +8451,7 @@ fn step_93() -> Unit raise {
   iterato_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (!i x. i IN k /\\ f i IN dom /\\ ~(f i = neut) /\\ P x ==> P (op (f i) x))\n        ==> P(iterato dom neut op (<<=) k f)",
+        "forall dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (forall i x. i IN k /\\ f i IN dom /\\ ~(f i = neut) /\\ P x ==> P (op (f i) x))\n        ==> P(iterato dom neut op (<<=) k f)",
       ),
       t895,
     ),
@@ -8479,7 +8479,7 @@ fn step_94() -> Unit raise {
   iterato_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (!x y. P x /\\ P y ==> P(op x y)) /\\\n        (!i. i IN k /\\ f i IN dom /\\ ~(f i = neut) ==> P(f i))\n        ==> P(iterato dom neut op (<<=) k f)",
+        "forall dom neut op (<<=) k (f:K->A) P.\n        P neut /\\\n        (forall x y. P x /\\ P y ==> P(op x y)) /\\\n        (forall i. i IN k /\\ f i IN dom /\\ ~(f i = neut) ==> P(f i))\n        ==> P(iterato dom neut op (<<=) k f)",
       ),
       t898,
     ),
@@ -8990,7 +8990,7 @@ fn step_95() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(!n k. FINITE k /\\ CARD k = n ==> P k) ==> (!k. FINITE k ==> P k)",
+        "(forall n k. FINITE k /\\ CARD k = n ==> P k) ==> (forall k. FINITE k ==> P k)",
       ),
     ),
   )
@@ -9124,7 +9124,7 @@ fn step_95() -> Unit raise {
   iterato_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(op:A->A->A) ((<<=):K->K->bool).\n        monoidal op ==> iterato (:A) (neutral op) op (<<=) = iterate op",
+        "forall(op:A->A->A) ((<<=):K->K->bool).\n        monoidal op ==> iterato (:A) (neutral op) op (<<=) = iterate op",
       ),
       t972,
     ),
@@ -9384,7 +9384,7 @@ fn step_96() -> Unit raise {
   iterato_clauses_numseg_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!dom neut op (f:num->A) m n.\n       iterato dom neut op (<=) (m..n) f =\n         if m <= n then\n           if f m IN dom ==> f m = neut\n           then iterato dom neut op (<=) (m+1..n) f\n           else op (f m) (iterato dom neut op (<=) (m+1..n) f)\n         else neut",
+        "forall dom neut op (f:num->A) m n.\n       iterato dom neut op (<=) (m..n) f =\n         if m <= n then\n           if f m IN dom ==> f m = neut\n           then iterato dom neut op (<=) (m+1..n) f\n           else op (f m) (iterato dom neut op (<=) (m+1..n) f)\n         else neut",
       ),
       t999,
     ),
@@ -9491,7 +9491,7 @@ fn step_100() -> Unit raise {
   nproduct_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->num. nproduct {} f = 1) /\\\n   (!x (f:B->num) s.\n        FINITE(s)\n        ==> (nproduct (x INSERT s) f =\n             if x IN s then nproduct s f else f(x) * nproduct s f))",
+        "(forall f:A->num. nproduct {} f = 1) /\\\n   (forall x (f:B->num) s.\n        FINITE(s)\n        ==> (nproduct (x INSERT s) f =\n             if x IN s then nproduct s f else f(x) * nproduct s f))",
       ),
       t1007,
     ),
@@ -9604,7 +9604,7 @@ fn step_104() -> Unit raise {
   iproduct_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->int. iproduct {} f = &1) /\\\n   (!x (f:B->int) s.\n        FINITE(s)\n        ==> (iproduct (x INSERT s) f =\n             if x IN s then iproduct s f else f(x) * iproduct s f))",
+        "(forall f:A->int. iproduct {} f = &1) /\\\n   (forall x (f:B->int) s.\n        FINITE(s)\n        ==> (iproduct (x INSERT s) f =\n             if x IN s then iproduct s f else f(x) * iproduct s f))",
       ),
       t1015,
     ),
@@ -9720,7 +9720,7 @@ fn step_108() -> Unit raise {
   product_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->real. product {} f = &1) /\\\n   (!x (f:B->real) s.\n        FINITE(s)\n        ==> (product (x INSERT s) f =\n             if x IN s then product s f else f(x) * product s f))",
+        "(forall f:A->real. product {} f = &1) /\\\n   (forall x (f:B->real) s.\n        FINITE(s)\n        ==> (product (x INSERT s) f =\n             if x IN s then product s f else f(x) * product s f))",
       ),
       t1023,
     ),
@@ -9828,7 +9828,7 @@ fn step_112() -> Unit raise {
   isum_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->int. isum {} f = &0) /\\\n   (!x (f:B->int) s.\n        FINITE(s)\n        ==> (isum (x INSERT s) f =\n             if x IN s then isum s f else f(x) + isum s f))",
+        "(forall f:A->int. isum {} f = &0) /\\\n   (forall x (f:B->int) s.\n        FINITE(s)\n        ==> (isum (x INSERT s) f =\n             if x IN s then isum s f else f(x) + isum s f))",
       ),
       t1031,
     ),
@@ -9925,7 +9925,7 @@ fn step_117() -> Unit raise {
   nsum_degenerate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = 0)}) ==> nsum s f = 0",
+        "forall f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = 0)}) ==> nsum s f = 0",
       ),
       t1038,
     ),
@@ -9962,7 +9962,7 @@ fn step_118() -> Unit raise {
   nsum_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->num. nsum {} f = 0) /\\\n   (!x (f:B->num) s.\n        FINITE(s)\n        ==> (nsum (x INSERT s) f =\n             if x IN s then nsum s f else f(x) + nsum s f))",
+        "(forall f:A->num. nsum {} f = 0) /\\\n   (forall x (f:B->num) s.\n        FINITE(s)\n        ==> (nsum (x INSERT s) f =\n             if x IN s then nsum s f else f(x) + nsum s f))",
       ),
       t1042,
     ),
@@ -9987,7 +9987,7 @@ fn step_119() -> Unit raise {
   nsum_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> nsum (s UNION t) f = nsum s f + nsum t f",
+        "forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> nsum (s UNION t) f = nsum s f + nsum t f",
       ),
       t1043,
     ),
@@ -10019,7 +10019,7 @@ fn step_120() -> Unit raise {
   nsum_diff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE s /\\ t SUBSET s\n        ==> nsum (s DIFF t) f = nsum s f - nsum t f",
+        "forall f s t:A->bool.\n        FINITE s /\\ t SUBSET s\n        ==> nsum (s DIFF t) f = nsum s f - nsum t f",
       ),
       t1046,
     ),
@@ -10050,7 +10050,7 @@ fn step_121() -> Unit raise {
   nsum_incl_excl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (f:A->num).\n     FINITE s /\\ FINITE t\n     ==> nsum s f + nsum t f = nsum (s UNION t) f + nsum (s INTER t) f",
+        "forall s t (f:A->num).\n     FINITE s /\\ FINITE t\n     ==> nsum s f + nsum t f = nsum (s UNION t) f + nsum (s INTER t) f",
       ),
       t1049,
     ),
@@ -10072,7 +10072,7 @@ fn step_122() -> Unit raise {
   let t1050 = @simp.simp_tac(@list.List([nsum(), iterate(), support_support()]))
   nsum_support_c.set(
     @tactics.prove(
-      @parser.parse_term("!f s:A->bool. nsum (support (+) f s) f = nsum s f"),
+      @parser.parse_term("forall f s:A->bool. nsum (support (+) f s) f = nsum s f"),
       t1050,
     ),
   )
@@ -10094,7 +10094,7 @@ fn step_123() -> Unit raise {
   nsum_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE s ==> (nsum s (\\x. f(x) + g(x)) = nsum s f + nsum s g)",
+        "forall f g s:A->bool.\n        FINITE s ==> (nsum s (\\x. f(x) + g(x)) = nsum s f + nsum s g)",
       ),
       t1051,
     ),
@@ -10126,7 +10126,7 @@ fn step_124() -> Unit raise {
   nsum_add_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE {x | x IN s /\\ ~(f x = 0)} /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n        ==> nsum s (\\x. f x + g x) = nsum s f + nsum s g",
+        "forall f g s:A->bool.\n        FINITE {x | x IN s /\\ ~(f x = 0)} /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n        ==> nsum s (\\x. f x + g x) = nsum s f + nsum s g",
       ),
       t1055,
     ),
@@ -10153,7 +10153,7 @@ fn step_125() -> Unit raise {
   nsum_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool. (!x. x IN s ==> f(x) = 0) ==> nsum s f = 0",
+        "forall f s:A->bool. (forall x. x IN s ==> f(x) = 0) ==> nsum s f = 0",
       ),
       t1057,
     ),
@@ -10174,7 +10174,7 @@ pub fn nsum_eq_0() -> @kernel.Thm {
 fn step_126() -> Unit raise {
   let t1058 = @simp.simp_tac(@list.List([nsum_eq_0()]))
   nsum_0_c.set(
-    @tactics.prove(@parser.parse_term("!s:A->bool. nsum s (\\n. 0) = 0"), t1058),
+    @tactics.prove(@parser.parse_term("forall s:A->bool. nsum s (\\n. 0) = 0"), t1058),
   )
 }
 
@@ -10314,7 +10314,7 @@ fn step_127() -> Unit raise {
   nsum_lmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f c s:A->bool. nsum s (\\x. c * f(x)) = c * nsum s f",
+        "forall f c s:A->bool. nsum s (\\x. c * f(x)) = c * nsum s f",
       ),
       t1075,
     ),
@@ -10341,7 +10341,7 @@ fn step_128() -> Unit raise {
   nsum_rmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f c s:A->bool. nsum s (\\x. f(x) * c) = nsum s f * c",
+        "forall f c s:A->bool. nsum s (\\x. f(x) * c) = nsum s f * c",
       ),
       t1077,
     ),
@@ -10385,7 +10385,7 @@ fn step_129() -> Unit raise {
   nsum_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x))\n        ==> nsum s f <= nsum s g",
+        "forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x))\n        ==> nsum s f <= nsum s g",
       ),
       t1080,
     ),
@@ -10592,7 +10592,7 @@ fn step_130() -> Unit raise {
   nsum_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n         FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) /\\\n         (?x. x IN s /\\ f(x) < g(x))\n         ==> nsum s f < nsum s g",
+        "forall f g s:A->bool.\n         FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\\n         (?x. x IN s /\\ f(x) < g(x))\n         ==> nsum s f < nsum s g",
       ),
       t1097,
     ),
@@ -10617,7 +10617,7 @@ fn step_131() -> Unit raise {
   nsum_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> f(x) < g(x))\n        ==> nsum s f < nsum s g",
+        "forall f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> f(x) < g(x))\n        ==> nsum s f < nsum s g",
       ),
       t1098,
     ),
@@ -10645,7 +10645,7 @@ fn step_132() -> Unit raise {
   nsum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool. (!x. x IN s ==> f x = g x) ==> nsum s f = nsum s g",
+        "forall f g s:A->bool. (forall x. x IN s ==> f x = g x) ==> nsum s f = nsum s g",
       ),
       t1101,
     ),
@@ -10682,7 +10682,7 @@ fn step_133() -> Unit raise {
   nsum_const_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!c s:A->bool. FINITE s ==> (nsum s (\\n. c) = (CARD s) * c)",
+        "forall c s:A->bool. FINITE s ==> (nsum s (\\n. c) = (CARD s) * c)",
       ),
       t1104,
     ),
@@ -10732,7 +10732,7 @@ fn step_134() -> Unit raise {
   nsum_pos_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f b s:A->bool. FINITE s /\\ nsum s f <= b ==> !x:A. x IN s ==> f x <= b",
+        "forall f b s:A->bool. FINITE s /\\ nsum s f <= b ==> forall x:A. x IN s ==> f x <= b",
       ),
       t1109,
     ),
@@ -10771,7 +10771,7 @@ fn step_135() -> Unit raise {
   nsum_eq_0_iff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s ==> (nsum s f = 0 <=> !x. x IN s ==> f x = 0)",
+        "forall s:A->bool. FINITE s ==> (nsum s f = 0 <=> forall x. x IN s ==> f x = 0)",
       ),
       t1112,
     ),
@@ -10803,7 +10803,7 @@ fn step_136() -> Unit raise {
   nsum_pos_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n        FINITE s /\\ (?x. x IN s /\\ 0 < f x)\n        ==> 0 < nsum s f",
+        "forall f s:A->bool.\n        FINITE s /\\ (?x. x IN s /\\ 0 < f x)\n        ==> 0 < nsum s f",
       ),
       t1114,
     ),
@@ -10833,7 +10833,7 @@ fn step_137() -> Unit raise {
   nsum_pos_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f:A->num.\n     FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> 0 < f i) ==> 0 < nsum s f",
+        "forall s f:A->num.\n     FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> 0 < f i) ==> 0 < nsum s f",
       ),
       t1117,
     ),
@@ -10860,7 +10860,7 @@ fn step_138() -> Unit raise {
   nsum_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s a:A. FINITE s /\\ a IN s ==> f(a) + nsum(s DELETE a) f = nsum s f",
+        "forall f s a:A. FINITE s /\\ a IN s ==> f(a) + nsum(s DELETE a) f = nsum s f",
       ),
       t1118,
     ),
@@ -10888,7 +10888,7 @@ fn step_139() -> Unit raise {
     ]),
   )
   nsum_sing_c.set(
-    @tactics.prove(@parser.parse_term("!f x:A. nsum {x} f = f(x)"), t1119),
+    @tactics.prove(@parser.parse_term("forall f x:A. nsum {x} f = f(x)"), t1119),
   )
 }
 
@@ -10912,7 +10912,7 @@ fn step_140() -> Unit raise {
   nsum_delta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a. nsum s (\\x. if x = a:A then b else 0) = if a IN s then b else 0",
+        "forall s a. nsum s (\\x. if x = a:A then b else 0) = if a IN s then b else 0",
       ),
       t1121,
     ),
@@ -10950,7 +10950,7 @@ fn step_141() -> Unit raise {
   nsum_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B->num s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (nsum s (\\i. nsum t (f i)) = nsum t (\\j. nsum s (\\i. f i j)))",
+        "forall f:A->B->num s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (nsum s (\\i. nsum t (f i)) = nsum t (\\j. nsum s (\\i. f i j)))",
       ),
       t1124,
     ),
@@ -10981,7 +10981,7 @@ fn step_142() -> Unit raise {
   nsum_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) g s.\n        (!x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (nsum (IMAGE f s) g = nsum s (g o f))",
+        "forall(f:A->B) g s.\n        (forall x y. x IN s /\\ y IN s /\\ (f x = f y) ==> (x = y))\n        ==> (nsum (IMAGE f s) g = nsum s (g o f))",
       ),
       t1127,
     ),
@@ -11011,7 +11011,7 @@ fn step_143() -> Unit raise {
   nsum_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->num u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> (nsum v f = nsum u f)",
+        "forall f:A->num u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> (nsum v f = nsum u f)",
       ),
       t1128,
     ),
@@ -11039,7 +11039,7 @@ fn step_144() -> Unit raise {
   nsum_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->num s. support (+) f (:A) SUBSET s ==> nsum s f = nsum (:A) f",
+        "forall f:A->num s. support (+) f (:A) SUBSET s ==> nsum s f = nsum (:A) f",
       ),
       t1131,
     ),
@@ -11078,7 +11078,7 @@ fn step_145() -> Unit raise {
   nsum_union_rzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->num u v.\n        FINITE u /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum u f",
+        "forall f:A->num u v.\n        FINITE u /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum u f",
       ),
       t1136,
     ),
@@ -11105,7 +11105,7 @@ fn step_146() -> Unit raise {
   nsum_union_lzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->num u v.\n        FINITE v /\\ (!x. x IN u /\\ ~(x IN v) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum v f",
+        "forall f:A->num u v.\n        FINITE v /\\ (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = 0))\n        ==> nsum (u UNION v) f = nsum v f",
       ),
       t1137,
     ),
@@ -11135,7 +11135,7 @@ fn step_147() -> Unit raise {
   nsum_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n        FINITE s ==> nsum s (\\x. if x IN s then f(x) else 0) = nsum s f",
+        "forall f s:A->bool.\n        FINITE s ==> nsum s (\\x. if x IN s then f(x) else 0) = nsum s f",
       ),
       t1140,
     ),
@@ -11158,7 +11158,7 @@ fn step_148() -> Unit raise {
   nsum_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ (!x:A. x IN s ==> f(x) <= b)\n           ==> nsum s f <= (CARD s) * b",
+        "forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f(x) <= b)\n           ==> nsum s f <= (CARD s) * b",
       ),
       t1141,
     ),
@@ -11250,7 +11250,7 @@ fn step_149() -> Unit raise {
   nsum_bound_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) <= b DIV (CARD s))\n           ==> nsum s f <= b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) <= b DIV (CARD s))\n           ==> nsum s f <= b",
       ),
       t1149,
     ),
@@ -11294,7 +11294,7 @@ fn step_150() -> Unit raise {
   nsum_bound_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ (!x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> nsum s f < (CARD s) * b",
+        "forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> nsum s f < (CARD s) * b",
       ),
       t1156,
     ),
@@ -11319,7 +11319,7 @@ fn step_151() -> Unit raise {
   nsum_bound_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b)\n           ==> nsum s f < (CARD s) * b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b)\n           ==> nsum s f < (CARD s) * b",
       ),
       t1157,
     ),
@@ -11369,7 +11369,7 @@ fn step_152() -> Unit raise {
   nsum_bound_lt_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b DIV (CARD s))\n           ==> nsum s f < b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b DIV (CARD s))\n           ==> nsum s f < b",
       ),
       t1164,
     ),
@@ -11401,7 +11401,7 @@ fn step_153() -> Unit raise {
   nsum_union_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t u:A->bool.\n        FINITE u /\\ (s INTER t = {}) /\\ (s UNION t = u)\n        ==> nsum s f + nsum t f = nsum u f",
+        "forall s t u:A->bool.\n        FINITE u /\\ (s INTER t = {}) /\\ (s UNION t = u)\n        ==> nsum s f + nsum t f = nsum u f",
       ),
       t1165,
     ),
@@ -11424,7 +11424,7 @@ fn step_154() -> Unit raise {
   nsum_eq_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (!x. x IN t ==> (f x = g x)) /\\\n        (!x. x IN s /\\ ~(x IN t) ==> (f(x) = 0))\n        ==> (nsum s f = nsum t g)",
+        "forall f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> (f(x) = 0))\n        ==> (nsum s f = nsum t g)",
       ),
       t1166,
     ),
@@ -11457,7 +11457,7 @@ fn step_155() -> Unit raise {
   nsum_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P s f. nsum {x:A | x IN s /\\ P x} f = nsum s (\\x. if P x then f(x) else 0)",
+        "forall P s f. nsum {x:A | x IN s /\\ P x} f = nsum s (\\x. if P x then f(x) else 0)",
       ),
       t1169,
     ),
@@ -11510,7 +11510,7 @@ fn step_156() -> Unit raise {
   nsum_nsum_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (nsum s (\\x. nsum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             nsum t (\\y. nsum {x | x IN s /\\ R x y} (\\x. f x y)))",
+        "forall(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (nsum s (\\x. nsum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             nsum t (\\y. nsum {x | x IN s /\\ R x y} (\\x. f x y)))",
       ),
       t1174,
     ),
@@ -11535,7 +11535,7 @@ fn step_157() -> Unit raise {
   card_eq_nsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s ==> ((CARD s) = nsum s (\\x. 1))",
+        "forall s:A->bool. FINITE s ==> ((CARD s) = nsum s (\\x. 1))",
       ),
       t1175,
     ),
@@ -11681,7 +11681,7 @@ fn step_158() -> Unit raise {
   nsum_multicount_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) =\n             nsum t (\\i. (k i)))",
+        "forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) =\n             nsum t (\\i. (k i)))",
       ),
       t1193,
     ),
@@ -11727,7 +11727,7 @@ fn step_159() -> Unit raise {
   nsum_multicount_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) = (k * CARD t))",
+        "forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (nsum s (\\i. (CARD {j | j IN t /\\ R i j})) = (k * CARD t))",
       ),
       t1200,
     ),
@@ -11757,7 +11757,7 @@ fn step_160() -> Unit raise {
   nsum_image_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B g s.\n        FINITE s\n        ==> nsum s g =\n            nsum (IMAGE f s) (\\y. nsum {x | x IN s /\\ f x = y} g)",
+        "forall f:A->B g s.\n        FINITE s\n        ==> nsum s g =\n            nsum (IMAGE f s) (\\y. nsum {x | x IN s /\\ f x = y} g)",
       ),
       t1203,
     ),
@@ -11864,7 +11864,7 @@ fn step_161() -> Unit raise {
   nsum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> nsum t (\\y. nsum {x | x IN s /\\ f(x) = y} g) = nsum s g",
+        "forall f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> nsum t (\\y. nsum {x | x IN s /\\ f(x) = y} g) = nsum s g",
       ),
       t1217,
     ),
@@ -12007,7 +12007,7 @@ fn step_162() -> Unit raise {
   nsum_group_relation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool g s t.\n         FINITE s /\\\n         (!x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> nsum t (\\y. nsum {x | x IN s /\\ R x y} g) = nsum s g",
+        "forall R:A->B->bool g s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> nsum t (\\y. nsum {x | x IN s /\\ R x y} g) = nsum s g",
       ),
       t1233,
     ),
@@ -12152,7 +12152,7 @@ fn step_163() -> Unit raise {
   nsum_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!u v f. FINITE u /\\ FINITE v /\\ (!x:A. x IN (u DIFF v) ==> f(x) = 0)\n           ==> nsum u f <= nsum v f",
+        "forall u v f. FINITE u /\\ FINITE v /\\ (forall x:A. x IN (u DIFF v) ==> f(x) = 0)\n           ==> nsum u f <= nsum v f",
       ),
       t1249,
     ),
@@ -12182,7 +12182,7 @@ fn step_164() -> Unit raise {
   nsum_subset_simple_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!u v f:A->num. FINITE v /\\ u SUBSET v ==> nsum u f <= nsum v f",
+        "forall u v f:A->num. FINITE v /\\ u SUBSET v ==> nsum u f <= nsum v f",
       ),
       t1252,
     ),
@@ -12283,7 +12283,7 @@ fn step_165() -> Unit raise {
   nsum_le_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s. (!x:A. x IN s ==> f x <= g x) /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n           ==> nsum s f <= nsum s g",
+        "forall f g s. (forall x:A. x IN s ==> f x <= g x) /\\ FINITE {x | x IN s /\\ ~(g x = 0)}\n           ==> nsum s f <= nsum s g",
       ),
       t1267,
     ),
@@ -12354,7 +12354,7 @@ fn step_166() -> Unit raise {
   nsum_mul_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b s:A->bool.\n        FINITE s\n        ==> nsum s (\\i. a i * b i) <= nsum s a * nsum s b",
+        "forall a b s:A->bool.\n        FINITE s\n        ==> nsum s (\\i. a i * b i) <= nsum s a * nsum s b",
       ),
       t1279,
     ),
@@ -12385,7 +12385,7 @@ fn step_167() -> Unit raise {
   nsum_image_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!d:B->num i:A->B s.\n    FINITE s /\\\n    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = 0)\n    ==> nsum (IMAGE i s) d = nsum s (d o i)",
+        "forall d:B->num i:A->B s.\n    FINITE s /\\\n    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = 0)\n    ==> nsum (IMAGE i s) d = nsum s (d o i)",
       ),
       t1282,
     ),
@@ -12415,7 +12415,7 @@ fn step_168() -> Unit raise {
   nsum_bijection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p s:A->bool.\n        (!x. x IN s ==> p(x) IN s) /\\\n        (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> nsum s f = nsum s (f o p)",
+        "forall f p s:A->bool.\n        (forall x. x IN s ==> p(x) IN s) /\\\n        (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> nsum s f = nsum s (f o p)",
       ),
       t1285,
     ),
@@ -12443,7 +12443,7 @@ fn step_169() -> Unit raise {
   nsum_nsum_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> nsum s (\\i. nsum (t i) (x i)) =\n            nsum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
+        "forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> nsum s (\\i. nsum (t i) (x i)) =\n            nsum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
       ),
       t1288,
     ),
@@ -12473,7 +12473,7 @@ fn step_170() -> Unit raise {
   nsum_eq_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:B->bool f g h.\n        (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g",
+        "forall s:A->bool t:B->bool f g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g",
       ),
       t1291,
     ),
@@ -12503,7 +12503,7 @@ fn step_171() -> Unit raise {
   nsum_eq_general_inverses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:B->bool f g h k.\n        (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g",
+        "forall s:A->bool t:B->bool f g h k.\n        (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> nsum s f = nsum t g",
       ),
       t1294,
     ),
@@ -12533,7 +12533,7 @@ fn step_172() -> Unit raise {
   nsum_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p s:A->bool.\n        FINITE s /\\\n        (!x. x IN s ==> p x IN s) /\\\n        (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n        ==> nsum s (f o p) = nsum s f",
+        "forall f p s:A->bool.\n        FINITE s /\\\n        (forall x. x IN s ==> p x IN s) /\\\n        (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n        ==> nsum s (f o p) = nsum s f",
       ),
       t1297,
     ),
@@ -12564,7 +12564,7 @@ fn step_173() -> Unit raise {
   nsum_union_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (!x. x IN s INTER t ==> f(x) = 0)\n        ==> nsum (s UNION t) f = nsum s f + nsum t f",
+        "forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = 0)\n        ==> nsum (s UNION t) f = nsum s f + nsum t f",
       ),
       t1300,
     ),
@@ -12744,7 +12744,7 @@ fn step_174() -> Unit raise {
   nsum_unions_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s. FINITE s /\\ (!t:A->bool. t IN s ==> FINITE t) /\\\n         (!t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = 0)\n         ==> nsum (UNIONS s) f = nsum s (\\t. nsum t f)",
+        "forall f s. FINITE s /\\ (forall t:A->bool. t IN s ==> FINITE t) /\\\n         (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = 0)\n         ==> nsum (UNIONS s) f = nsum s (\\t. nsum t f)",
       ),
       t1319,
     ),
@@ -12777,7 +12777,7 @@ fn step_175() -> Unit raise {
   nsum_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s P f g. FINITE s\n             ==> nsum s (\\x:A. if P x then f x else g x) =\n                 nsum {x | x IN s /\\ P x} f + nsum {x | x IN s /\\ ~P x} g",
+        "forall s P f g. FINITE s\n             ==> nsum s (\\x:A. if P x then f x else g x) =\n                 nsum {x | x IN s /\\ P x} f + nsum {x | x IN s /\\ ~P x} g",
       ),
       t1322,
     ),
@@ -12879,7 +12879,7 @@ fn step_176() -> Unit raise {
   nsum_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->num s.\n        P(0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nsum s f)",
+        "forall P f:A->num s.\n        P(0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nsum s f)",
       ),
       t1332,
     ),
@@ -12931,7 +12931,7 @@ fn step_177() -> Unit raise {
   nsum_related_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->num) g s.\n        R 0 0 /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)",
+        "forall R (f:A->num) g s.\n        R 0 0 /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)",
       ),
       t1338,
     ),
@@ -13035,7 +13035,7 @@ fn step_178() -> Unit raise {
   nsum_closed_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nsum s f)",
+        "forall P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nsum s f)",
       ),
       t1348,
     ),
@@ -13089,7 +13089,7 @@ fn step_179() -> Unit raise {
   nsum_related_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->num) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)",
+        "forall R (f:A->num) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (nsum s f) (nsum s g)",
       ),
       t1354,
     ),
@@ -13114,7 +13114,7 @@ fn step_180() -> Unit raise {
   nsum_add_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. nsum(m..n) (\\i. f(i) + g(i)) = nsum(m..n) f + nsum(m..n) g",
+        "forall f g m n. nsum(m..n) (\\i. f(i) + g(i)) = nsum(m..n) f + nsum(m..n) g",
       ),
       t1355,
     ),
@@ -13141,7 +13141,7 @@ fn step_181() -> Unit raise {
   nsum_le_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. (!i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> nsum(m..n) f <= nsum(m..n) g",
+        "forall f g m n. (forall i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> nsum(m..n) f <= nsum(m..n) g",
       ),
       t1356,
     ),
@@ -13166,7 +13166,7 @@ fn step_182() -> Unit raise {
   nsum_eq_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nsum(m..n) f = nsum(m..n) g)",
+        "forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nsum(m..n) f = nsum(m..n) g)",
       ),
       t1357,
     ),
@@ -13190,7 +13190,7 @@ fn step_183() -> Unit raise {
   )
   nsum_const_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!c m n. nsum(m..n) (\\n. c) = ((n + 1) - m) * c"),
+      @parser.parse_term("forall c m n. nsum(m..n) (\\n. c) = ((n + 1) - m) * c"),
       t1358,
     ),
   )
@@ -13214,7 +13214,7 @@ fn step_184() -> Unit raise {
   nsum_eq_0_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. (!i. m <= i /\\ i <= n ==> (f(i) = 0)) ==> (nsum(m..n) f = 0)",
+        "forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = 0)) ==> (nsum(m..n) f = 0)",
       ),
       t1359,
     ),
@@ -13241,7 +13241,7 @@ fn step_185() -> Unit raise {
   nsum_eq_0_iff_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. nsum (m..n) f = 0 <=> !i. m <= i /\\ i <= n ==> f i = 0",
+        "forall f m n. nsum (m..n) f = 0 <=> forall i. m <= i /\\ i <= n ==> f i = 0",
       ),
       t1360,
     ),
@@ -13267,7 +13267,7 @@ fn step_186() -> Unit raise {
   )
   nsum_triv_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!f m n. n < m ==> (nsum(m..n) f = 0)"),
+      @parser.parse_term("forall f m n. n < m ==> (nsum(m..n) f = 0)"),
       t1361,
     ),
   )
@@ -13289,7 +13289,7 @@ pub fn nsum_triv_numseg() -> @kernel.Thm {
 fn step_187() -> Unit raise {
   let t1362 = @simp.simp_tac(@list.List([nsum_sing(), numseg_sing()]))
   nsum_sing_numseg_c.set(
-    @tactics.prove(@parser.parse_term("!f n. nsum(n..n) f = f(n)"), t1362),
+    @tactics.prove(@parser.parse_term("forall f n. nsum(n..n) f = f(n)"), t1362),
   )
 }
 
@@ -13315,7 +13315,7 @@ fn step_188() -> Unit raise {
   nsum_clauses_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m. nsum(m..0) f = if m = 0 then f(0) else 0) /\\\n   (!m n. nsum(m..SUC n) f = if m <= SUC n then nsum(m..n) f + f(SUC n)\n                             else nsum(m..n) f)",
+        "(forall m. nsum(m..0) f = if m = 0 then f(0) else 0) /\\\n   (forall m n. nsum(m..SUC n) f = if m <= SUC n then nsum(m..n) f + f(SUC n)\n                             else nsum(m..n) f)",
       ),
       t1364,
     ),
@@ -13346,7 +13346,7 @@ fn step_189() -> Unit raise {
   nsum_clauses_numseg_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "nsum {i | i < 0} f = 0 /\\\n   (!k. nsum {i | i < SUC k} f = nsum {i | i < k} f + f k)",
+        "nsum {i | i < 0} f = 0 /\\\n   (forall k. nsum {i | i < SUC k} f = nsum {i | i < k} f + f k)",
       ),
       t1366,
     ),
@@ -13377,7 +13377,7 @@ fn step_190() -> Unit raise {
   nsum_clauses_numseg_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "nsum {i | i <= 0} f = f 0 /\\\n   (!k. nsum {i | i <= SUC k} f = nsum {i | i <= k} f + f(SUC k))",
+        "nsum {i | i <= 0} f = f 0 /\\\n   (forall k. nsum {i | i <= SUC k} f = nsum {i | i <= k} f + f(SUC k))",
       ),
       t1368,
     ),
@@ -13407,7 +13407,7 @@ fn step_191() -> Unit raise {
   nsum_swap_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d f.\n     nsum(a..b) (\\i. nsum(c..d) (f i)) =\n     nsum(c..d) (\\j. nsum(a..b) (\\i. f i j))",
+        "forall a b c d f.\n     nsum(a..b) (\\i. nsum(c..d) (f i)) =\n     nsum(c..d) (\\j. nsum(a..b) (\\i. f i j))",
       ),
       t1371,
     ),
@@ -13440,7 +13440,7 @@ fn step_192() -> Unit raise {
   nsum_add_split_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n p.\n        m <= n + 1 ==> (nsum (m..(n+p)) f = nsum(m..n) f + nsum(n+1..n+p) f)",
+        "forall f m n p.\n        m <= n + 1 ==> (nsum (m..(n+p)) f = nsum(m..n) f + nsum(n+1..n+p) f)",
       ),
       t1372,
     ),
@@ -13474,7 +13474,7 @@ fn step_193() -> Unit raise {
   nsum_offset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p f m n. nsum(m+p..n+p) f = nsum(m..n) (\\i. f(i + p))",
+        "forall p f m n. nsum(m+p..n+p) f = nsum(m..n) (\\i. f(i + p))",
       ),
       t1374,
     ),
@@ -13503,7 +13503,7 @@ fn step_194() -> Unit raise {
   nsum_offset_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. m <= n ==> (nsum(m..n) f = nsum(0..n-m) (\\i. f(i + m)))",
+        "forall f m n. m <= n ==> (nsum(m..n) f = nsum(0..n-m) (\\i. f(i + m)))",
       ),
       t1375,
     ),
@@ -13536,7 +13536,7 @@ fn step_195() -> Unit raise {
   nsum_clauses_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. m <= n ==> nsum(m..n) f = f(m) + nsum(m+1..n) f",
+        "forall f m n. m <= n ==> nsum(m..n) f = f(m) + nsum(m+1..n) f",
       ),
       t1376,
     ),
@@ -13570,7 +13570,7 @@ fn step_196() -> Unit raise {
   nsum_clauses_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. 0 < n /\\ m <= n ==> nsum(m..n) f = nsum(m..n-1) f + f(n)",
+        "forall f m n. 0 < n /\\ m <= n ==> nsum(m..n) f = nsum(m..n-1) f + f(n)",
       ),
       t1378,
     ),
@@ -13599,7 +13599,7 @@ fn step_197() -> Unit raise {
   nsum_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. nsum(2*m..2*n+1) f = nsum(m..n) (\\i. f(2*i) + f(2*i+1))",
+        "forall f m n. nsum(2*m..2*n+1) f = nsum(m..n) (\\i. f(2*i) + f(2*i+1))",
       ),
       t1380,
     ),
@@ -13639,7 +13639,7 @@ fn step_198() -> Unit raise {
   nsum_reflect_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x m n. nsum(m..n) x = if n < m then 0 else nsum(0..n-m) (\\i. x(n - i))",
+        "forall x m n. nsum(m..n) x = if n < m then 0 else nsum(0..n-m) (\\i. x(n - i))",
       ),
       t1387,
     ),
@@ -13710,7 +13710,7 @@ fn step_199() -> Unit raise {
   mod_nsum_mod_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->num n s.\n        FINITE s ==> (nsum s f) MOD n = nsum s (\\i. f(i) MOD n) MOD n",
+        "forall f:A->num n s.\n        FINITE s ==> (nsum s f) MOD n = nsum s (\\i. f(i) MOD n) MOD n",
       ),
       t1400,
     ),
@@ -13733,7 +13733,7 @@ fn step_200() -> Unit raise {
   mod_nsum_mod_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f a b n.\n        (nsum(a..b) f) MOD n = nsum(a..b) (\\i. f i MOD n) MOD n",
+        "forall f a b n.\n        (nsum(a..b) f) MOD n = nsum(a..b) (\\i. f i MOD n) MOD n",
       ),
       t1401,
     ),
@@ -13784,7 +13784,7 @@ fn step_201() -> Unit raise {
   cong_nsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n (f:A->num) g s.\n        FINITE s /\\ (!x. x IN s ==> (f x == g x) (mod n))\n        ==> (nsum s f == nsum s g) (mod n)",
+        "forall n (f:A->num) g s.\n        FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n        ==> (nsum s f == nsum s g) (mod n)",
       ),
       t1409,
     ),
@@ -13811,7 +13811,7 @@ fn step_202() -> Unit raise {
   )
   let th = @tactics.prove(
     @parser.parse_term(
-      "(!f g s:A->bool.\n        (!x. x IN s ==> f(x) = g(x))\n        ==> nsum s (\\i. f(i)) = nsum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> nsum(a..b) (\\i. f(i)) = nsum(a..b) g) /\\\n   (!f g p. (!x. p x ==> f x = g x)\n            ==> nsum {y | p y} (\\i. f(i)) = nsum {y | p y} g)",
+      "(forall f g s:A->bool.\n        (forall x. x IN s ==> f(x) = g(x))\n        ==> nsum s (\\i. f(i)) = nsum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> nsum(a..b) (\\i. f(i)) = nsum(a..b) g) /\\\n   (forall f g p. (forall x. p x ==> f x = g x)\n            ==> nsum {y | p y} (\\i. f(i)) = nsum {y | p y} g)",
     ),
     t1412,
   )
@@ -13989,7 +13989,7 @@ fn step_203() -> Unit raise {
   card_unions_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:K->A->bool) s.\n        FINITE s /\\ (!t. t IN s ==> FINITE(f t)) /\\\n        (!t u. t IN s /\\ u IN s /\\ ~(t = u) ==> f t INTER f u = {})\n        ==> CARD(UNIONS(IMAGE f s)) = nsum s (\\i. CARD(f i))",
+        "forall(f:K->A->bool) s.\n        FINITE s /\\ (forall t. t IN s ==> FINITE(f t)) /\\\n        (forall t u. t IN s /\\ u IN s /\\ ~(t = u) ==> f t INTER f u = {})\n        ==> CARD(UNIONS(IMAGE f s)) = nsum s (\\i. CARD(f i))",
       ),
       t1431,
     ),
@@ -14020,7 +14020,7 @@ fn step_204() -> Unit raise {
   card_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:(A->bool)->bool.\n        FINITE s /\\ (!t. t IN s ==> FINITE t) /\\\n        (!t u. t IN s /\\ u IN s /\\ ~(t = u) ==> t INTER u = {})\n        ==> CARD(UNIONS s) = nsum s CARD",
+        "forall s:(A->bool)->bool.\n        FINITE s /\\ (forall t. t IN s ==> FINITE t) /\\\n        (forall t u. t IN s /\\ u IN s /\\ ~(t = u) ==> t INTER u = {})\n        ==> CARD(UNIONS s) = nsum s CARD",
       ),
       t1433,
     ),
@@ -14250,7 +14250,7 @@ fn step_210() -> Unit raise {
   sum_degenerate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = &0)}) ==> sum s f = &0",
+        "forall f s:A->bool. ~(FINITE {x | x IN s /\\ ~(f x = &0)}) ==> sum s f = &0",
       ),
       t1446,
     ),
@@ -14285,7 +14285,7 @@ fn step_211() -> Unit raise {
   sum_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!f:A->real. sum {} f = &0) /\\\n   (!x (f:B->real) s.\n        FINITE(s)\n        ==> (sum (x INSERT s) f =\n             if x IN s then sum s f else f(x) + sum s f))",
+        "(forall f:A->real. sum {} f = &0) /\\\n   (forall x (f:B->real) s.\n        FINITE(s)\n        ==> (sum (x INSERT s) f =\n             if x IN s then sum s f else f(x) + sum s f))",
       ),
       t1450,
     ),
@@ -14310,7 +14310,7 @@ fn step_212() -> Unit raise {
   sum_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> sum (s UNION t) f = sum s f + sum t f",
+        "forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> sum (s UNION t) f = sum s f + sum t f",
       ),
       t1451,
     ),
@@ -14340,7 +14340,7 @@ fn step_213() -> Unit raise {
   sum_diff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool. FINITE s /\\ t SUBSET s ==> (sum (s DIFF t) f = sum s f - sum t f)",
+        "forall f s t:A->bool. FINITE s /\\ t SUBSET s ==> (sum (s DIFF t) f = sum s f - sum t f)",
       ),
       t1452,
     ),
@@ -14371,7 +14371,7 @@ fn step_214() -> Unit raise {
   sum_incl_excl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (f:A->real).\n     FINITE s /\\ FINITE t\n     ==> sum s f + sum t f = sum (s UNION t) f + sum (s INTER t) f",
+        "forall s t (f:A->real).\n     FINITE s /\\ FINITE t\n     ==> sum s f + sum t f = sum (s UNION t) f + sum (s INTER t) f",
       ),
       t1455,
     ),
@@ -14393,7 +14393,7 @@ fn step_215() -> Unit raise {
   let t1456 = @simp.simp_tac(@list.List([sum(), iterate(), support_support()]))
   sum_support_c.set(
     @tactics.prove(
-      @parser.parse_term("!f s:A->bool. sum (support (+) f s) f = sum s f"),
+      @parser.parse_term("forall f s:A->bool. sum (support (+) f s) f = sum s f"),
       t1456,
     ),
   )
@@ -14417,7 +14417,7 @@ fn step_216() -> Unit raise {
   sum_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool. FINITE s ==> (sum s (\\x. f(x) + g(x)) = sum s f + sum s g)",
+        "forall f g s:A->bool. FINITE s ==> (sum s (\\x. f(x) + g(x)) = sum s f + sum s g)",
       ),
       t1457,
     ),
@@ -14451,7 +14451,7 @@ fn step_217() -> Unit raise {
   sum_add_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n       FINITE {x | x IN s /\\ ~(f x = &0)} /\\ FINITE {x | x IN s /\\ ~(g x = &0)}\n       ==> sum s (\\x. f x + g x) = sum s f + sum s g",
+        "forall f g s:A->bool.\n       FINITE {x | x IN s /\\ ~(f x = &0)} /\\ FINITE {x | x IN s /\\ ~(g x = &0)}\n       ==> sum s (\\x. f x + g x) = sum s f + sum s g",
       ),
       t1461,
     ),
@@ -14480,7 +14480,7 @@ fn step_218() -> Unit raise {
   sum_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s. (!x:A. x IN s ==> (f(x) = &0)) ==> (sum s f = &0)",
+        "forall f s. (forall x:A. x IN s ==> (f(x) = &0)) ==> (sum s f = &0)",
       ),
       t1463,
     ),
@@ -14502,7 +14502,7 @@ fn step_219() -> Unit raise {
   let t1464 = @simp.simp_tac(@list.List([sum_eq_0()]))
   sum_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!s:A->bool. sum s (\\n. &0) = &0"),
+      @parser.parse_term("forall s:A->bool. sum s (\\n. &0) = &0"),
       t1464,
     ),
   )
@@ -14644,7 +14644,7 @@ fn step_220() -> Unit raise {
   )
   sum_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("!f c s:A->bool. sum s (\\x. c * f(x)) = c * sum s f"),
+      @parser.parse_term("forall f c s:A->bool. sum s (\\x. c * f(x)) = c * sum s f"),
       t1481,
     ),
   )
@@ -14669,7 +14669,7 @@ fn step_221() -> Unit raise {
   )
   sum_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("!f c s:A->bool. sum s (\\x. f(x) * c) = sum s f * c"),
+      @parser.parse_term("forall f c s:A->bool. sum s (\\x. f(x) * c) = sum s f * c"),
       t1483,
     ),
   )
@@ -14696,7 +14696,7 @@ fn step_222() -> Unit raise {
   )
   sum_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("!f s:A->bool. sum s (\\x. --(f(x))) = --(sum s f)"),
+      @parser.parse_term("forall f s:A->bool. sum s (\\x. --(f(x))) = --(sum s f)"),
       t1485,
     ),
   )
@@ -14722,7 +14722,7 @@ fn step_223() -> Unit raise {
   sum_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool. FINITE s ==> sum s (\\x. f(x) - g(x)) = sum s f - sum s g",
+        "forall f g s:A->bool. FINITE s ==> sum s (\\x. f(x) - g(x)) = sum s f - sum s g",
       ),
       t1487,
     ),
@@ -14766,7 +14766,7 @@ fn step_224() -> Unit raise {
   sum_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) ==> sum s f <= sum s g",
+        "forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) ==> sum s f <= sum s g",
       ),
       t1490,
     ),
@@ -14973,7 +14973,7 @@ fn step_225() -> Unit raise {
   sum_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE(s) /\\ (!x. x IN s ==> f(x) <= g(x)) /\\\n        (?x. x IN s /\\ f(x) < g(x))\n         ==> sum s f < sum s g",
+        "forall f g s:A->bool.\n        FINITE(s) /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\\n        (?x. x IN s /\\ f(x) < g(x))\n         ==> sum s f < sum s g",
       ),
       t1507,
     ),
@@ -14998,7 +14998,7 @@ fn step_226() -> Unit raise {
   sum_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> f(x) < g(x))\n        ==> sum s f < sum s g",
+        "forall f g s:A->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> f(x) < g(x))\n        ==> sum s f < sum s g",
       ),
       t1508,
     ),
@@ -15043,7 +15043,7 @@ fn step_227() -> Unit raise {
   sum_pos_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n        FINITE s /\\\n        (!x. x IN s ==> &0 <= f x) /\\\n        (?x. x IN s /\\ &0 < f x)\n        ==> &0 < sum s f",
+        "forall f s:A->bool.\n        FINITE s /\\\n        (forall x. x IN s ==> &0 <= f x) /\\\n        (?x. x IN s /\\ &0 < f x)\n        ==> &0 < sum s f",
       ),
       t1514,
     ),
@@ -15073,7 +15073,7 @@ fn step_228() -> Unit raise {
   sum_pos_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f:A->real.\n     FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> &0 < f i) ==> &0 < sum s f",
+        "forall s f:A->real.\n     FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> &0 < f i) ==> &0 < sum s f",
       ),
       t1517,
     ),
@@ -15101,7 +15101,7 @@ fn step_229() -> Unit raise {
   sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g s:A->bool. (!x. x IN s ==> (f x = g x)) ==> (sum s f = sum s g)",
+        "forall f g s:A->bool. (forall x. x IN s ==> (f x = g x)) ==> (sum s f = sum s g)",
       ),
       t1520,
     ),
@@ -15140,7 +15140,7 @@ fn step_230() -> Unit raise {
   sum_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool. FINITE(s) ==> abs(sum s f) <= sum s (\\x. abs(f x))",
+        "forall f s:A->bool. FINITE(s) ==> abs(sum s f) <= sum s (\\x. abs(f x))",
       ),
       t1522,
     ),
@@ -15180,7 +15180,7 @@ fn step_231() -> Unit raise {
   sum_abs_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real g s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> abs(f x) <= g x)\n        ==> abs(sum s f) <= sum s g",
+        "forall f:A->real g s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> abs(f x) <= g x)\n        ==> abs(sum s f) <= sum s g",
       ),
       t1528,
     ),
@@ -15223,7 +15223,7 @@ fn step_232() -> Unit raise {
   sum_const_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!c s:A->bool. FINITE s ==> (sum s (\\n. c) = &(CARD s) * c)",
+        "forall c s:A->bool. FINITE s ==> (sum s (\\n. c) = &(CARD s) * c)",
       ),
       t1531,
     ),
@@ -15278,7 +15278,7 @@ fn step_233() -> Unit raise {
   sum_pos_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. (!x. x IN s ==> &0 <= f x) ==> &0 <= sum s f",
+        "forall s:A->bool. (forall x. x IN s ==> &0 <= f x) ==> &0 <= sum s f",
       ),
       t1540,
     ),
@@ -15328,7 +15328,7 @@ fn step_234() -> Unit raise {
   sum_pos_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f b s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> &0 <= f x) /\\ sum s f <= b\n        ==> !x:A. x IN s ==> f x <= b",
+        "forall f b s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> &0 <= f x) /\\ sum s f <= b\n        ==> forall x:A. x IN s ==> f x <= b",
       ),
       t1545,
     ),
@@ -15355,7 +15355,7 @@ fn step_235() -> Unit raise {
   sum_pos_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n        FINITE s /\\ (!x. x IN s ==> &0 <= f x) /\\ (sum s f = &0)\n        ==> !x. x IN s ==> f x = &0",
+        "forall f s:A->bool.\n        FINITE s /\\ (forall x. x IN s ==> &0 <= f x) /\\ (sum s f = &0)\n        ==> forall x. x IN s ==> f x = &0",
       ),
       t1547,
     ),
@@ -15388,7 +15388,7 @@ fn step_236() -> Unit raise {
   ])
   let t1554 = @simp.asm_rewrite_tac(@list.List([]))
   let t1551 = @parser.parse_term(
-    "(?j k:A. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0) \\/\n      (!i. i IN s ==> &0 <= u i) \\/ (!i. i IN s ==> &0 <= --(u i))",
+    "(?j k:A. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0) \\/\n      (forall i. i IN s ==> &0 <= u i) \\/ (forall i. i IN s ==> &0 <= --(u i))",
   )
   let t1552 = @meson.meson(
     @list.List([
@@ -15465,7 +15465,7 @@ fn step_236() -> Unit raise {
   sum_zero_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(u:A->real) s.\n         FINITE s /\\ sum s u = &0\n         ==> (!i. i IN s ==> u i = &0) \\/\n             (?j k. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0)",
+        "forall(u:A->real) s.\n         FINITE s /\\ sum s u = &0\n         ==> (forall i. i IN s ==> u i = &0) \\/\n             (?j k. j IN s /\\ u j < &0 /\\ k IN s /\\ u k > &0)",
       ),
       t1558,
     ),
@@ -15497,7 +15497,7 @@ fn step_237() -> Unit raise {
   sum_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s a:A. FINITE s /\\ a IN s ==> sum (s DELETE a) f = sum s f - f(a)",
+        "forall f s a:A. FINITE s /\\ a IN s ==> sum (s DELETE a) f = sum s f - f(a)",
       ),
       t1559,
     ),
@@ -15532,7 +15532,7 @@ fn step_238() -> Unit raise {
   sum_delete_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s a:A. FINITE s\n             ==> sum (s DELETE a) f = if a IN s then sum s f - f(a)\n                                      else sum s f",
+        "forall f s a:A. FINITE s\n             ==> sum (s DELETE a) f = if a IN s then sum s f - f(a)\n                                      else sum s f",
       ),
       t1561,
     ),
@@ -15562,7 +15562,7 @@ fn step_239() -> Unit raise {
     ]),
   )
   sum_sing_c.set(
-    @tactics.prove(@parser.parse_term("!f x:A. sum {x} f = f(x)"), t1562),
+    @tactics.prove(@parser.parse_term("forall f x:A. sum {x} f = f(x)"), t1562),
   )
 }
 
@@ -15586,7 +15586,7 @@ fn step_240() -> Unit raise {
   sum_delta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a. sum s (\\x. if x = a:A then b else &0) = if a IN s then b else &0",
+        "forall s a. sum s (\\x. if x = a:A then b else &0) = if a IN s then b else &0",
       ),
       t1564,
     ),
@@ -15624,7 +15624,7 @@ fn step_241() -> Unit raise {
   sum_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B->real s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (sum s (\\i. sum t (f i)) = sum t (\\j. sum s (\\i. f i j)))",
+        "forall f:A->B->real s t.\n      FINITE(s) /\\ FINITE(t)\n      ==> (sum s (\\i. sum t (f i)) = sum t (\\j. sum s (\\i. f i j)))",
       ),
       t1567,
     ),
@@ -15655,7 +15655,7 @@ fn step_242() -> Unit raise {
   sum_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(f:A->B) g s.\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> sum (IMAGE f s) g = sum s (g o f)",
+        "forall(f:A->B) g s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> sum (IMAGE f s) g = sum s (g o f)",
       ),
       t1570,
     ),
@@ -15685,7 +15685,7 @@ fn step_243() -> Unit raise {
   sum_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> (sum v f = sum u f)",
+        "forall f:A->real u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> (sum v f = sum u f)",
       ),
       t1571,
     ),
@@ -15713,7 +15713,7 @@ fn step_244() -> Unit raise {
   sum_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real s. support (+) f (:A) SUBSET s ==> sum s f = sum (:A) f",
+        "forall f:A->real s. support (+) f (:A) SUBSET s ==> sum s f = sum (:A) f",
       ),
       t1574,
     ),
@@ -15752,7 +15752,7 @@ fn step_245() -> Unit raise {
   sum_union_rzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real u v.\n        FINITE u /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum u f",
+        "forall f:A->real u v.\n        FINITE u /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum u f",
       ),
       t1579,
     ),
@@ -15779,7 +15779,7 @@ fn step_246() -> Unit raise {
   sum_union_lzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real u v.\n        FINITE v /\\ (!x. x IN u /\\ ~(x IN v) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum v f",
+        "forall f:A->real u v.\n        FINITE v /\\ (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = &0))\n        ==> sum (u UNION v) f = sum v f",
       ),
       t1580,
     ),
@@ -15809,7 +15809,7 @@ fn step_247() -> Unit raise {
   sum_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n        FINITE s ==> sum s (\\x. if x IN s then f(x) else &0) = sum s f",
+        "forall f s:A->bool.\n        FINITE s ==> sum s (\\x. if x IN s then f(x) else &0) = sum s f",
       ),
       t1583,
     ),
@@ -15832,7 +15832,7 @@ fn step_248() -> Unit raise {
   sum_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ (!x:A. x IN s ==> f(x) <= b)\n           ==> sum s f <= &(CARD s) * b",
+        "forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f(x) <= b)\n           ==> sum s f <= &(CARD s) * b",
       ),
       t1584,
     ),
@@ -15863,7 +15863,7 @@ fn step_249() -> Unit raise {
   sum_bound_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) <= b / &(CARD s))\n           ==> sum s f <= b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) <= b / &(CARD s))\n           ==> sum s f <= b",
       ),
       t1585,
     ),
@@ -15895,7 +15895,7 @@ fn step_250() -> Unit raise {
   sum_abs_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ (!x:A. x IN s ==> abs(f(x)) <= b)\n           ==> abs(sum s f) <= &(CARD s) * b",
+        "forall s f b. FINITE s /\\ (forall x:A. x IN s ==> abs(f(x)) <= b)\n           ==> abs(sum s f) <= &(CARD s) * b",
       ),
       t1589,
     ),
@@ -15941,7 +15941,7 @@ fn step_251() -> Unit raise {
   sum_bound_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ (!x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> sum s f < &(CARD s) * b",
+        "forall s f b. FINITE s /\\ (forall x:A. x IN s ==> f x <= b) /\\ (?x. x IN s /\\ f x < b)\n           ==> sum s f < &(CARD s) * b",
       ),
       t1596,
     ),
@@ -15970,7 +15970,7 @@ fn step_252() -> Unit raise {
   sum_bound_lt_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b)\n           ==> sum s f <  &(CARD s) * b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b)\n           ==> sum s f <  &(CARD s) * b",
       ),
       t1597,
     ),
@@ -16003,7 +16003,7 @@ fn step_253() -> Unit raise {
   sum_bound_lt_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s f b. FINITE s /\\ ~(s = {}) /\\ (!x:A. x IN s ==> f(x) < b / &(CARD s))\n           ==> sum s f < b",
+        "forall s f b. FINITE s /\\ ~(s = {}) /\\ (forall x:A. x IN s ==> f(x) < b / &(CARD s))\n           ==> sum s f < b",
       ),
       t1598,
     ),
@@ -16035,7 +16035,7 @@ fn step_254() -> Unit raise {
   sum_union_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t u:A->bool.\n        FINITE u /\\ s INTER t = {} /\\ s UNION t = u\n        ==> sum s f + sum t f = sum u f",
+        "forall s t u:A->bool.\n        FINITE u /\\ s INTER t = {} /\\ s UNION t = u\n        ==> sum s f + sum t f = sum u f",
       ),
       t1599,
     ),
@@ -16058,7 +16058,7 @@ fn step_255() -> Unit raise {
   sum_eq_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (!x. x IN t ==> (f x = g x)) /\\\n        (!x. x IN s /\\ ~(x IN t) ==> (f(x) = &0))\n        ==> (sum s f = sum t g)",
+        "forall f s t:A->bool.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> (f(x) = &0))\n        ==> (sum s f = sum t g)",
       ),
       t1600,
     ),
@@ -16091,7 +16091,7 @@ fn step_256() -> Unit raise {
   sum_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P s f. sum {x:A | x IN s /\\ P x} f = sum s (\\x. if P x then f x else &0)",
+        "forall P s f. sum {x:A | x IN s /\\ P x} f = sum s (\\x. if P x then f x else &0)",
       ),
       t1603,
     ),
@@ -16144,7 +16144,7 @@ fn step_257() -> Unit raise {
   sum_sum_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (sum s (\\x. sum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             sum t (\\y. sum {x | x IN s /\\ R x y} (\\x. f x y)))",
+        "forall(R:A->B->bool) f s t.\n        FINITE s /\\ FINITE t\n        ==> (sum s (\\x. sum {y | y IN t /\\ R x y} (\\y. f x y)) =\n             sum t (\\y. sum {x | x IN s /\\ R x y} (\\x. f x y)))",
       ),
       t1608,
     ),
@@ -16171,7 +16171,7 @@ fn step_258() -> Unit raise {
   card_eq_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s ==> (&(CARD s) = sum s (\\x. &1))",
+        "forall s:A->bool. FINITE s ==> (&(CARD s) = sum s (\\x. &1))",
       ),
       t1609,
     ),
@@ -16317,7 +16317,7 @@ fn step_259() -> Unit raise {
   sum_multicount_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) =\n             sum t (\\i. &(k i)))",
+        "forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k(j)))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) =\n             sum t (\\i. &(k i)))",
       ),
       t1627,
     ),
@@ -16363,7 +16363,7 @@ fn step_260() -> Unit raise {
   sum_multicount_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (!j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) = &(k * CARD t))",
+        "forall R:A->B->bool s t k.\n        FINITE s /\\ FINITE t /\\\n        (forall j. j IN t ==> (CARD {i | i IN s /\\ R i j} = k))\n        ==> (sum s (\\i. &(CARD {j | j IN t /\\ R i j})) = &(k * CARD t))",
       ),
       t1634,
     ),
@@ -16391,7 +16391,7 @@ fn step_261() -> Unit raise {
   sum_image_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B g s.\n        FINITE s\n        ==> sum s g =\n            sum (IMAGE f s) (\\y. sum {x | x IN s /\\ f x = y} g)",
+        "forall f:A->B g s.\n        FINITE s\n        ==> sum s g =\n            sum (IMAGE f s) (\\y. sum {x | x IN s /\\ f x = y} g)",
       ),
       t1637,
     ),
@@ -16498,7 +16498,7 @@ fn step_262() -> Unit raise {
   sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> sum t (\\y. sum {x | x IN s /\\ f(x) = y} g) = sum s g",
+        "forall f:A->B g s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> sum t (\\y. sum {x | x IN s /\\ f(x) = y} g) = sum s g",
       ),
       t1651,
     ),
@@ -16641,7 +16641,7 @@ fn step_263() -> Unit raise {
   sum_group_relation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->B->bool g s t.\n         FINITE s /\\\n         (!x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> sum t (\\y. sum {x | x IN s /\\ R x y} g) = sum s g",
+        "forall R:A->B->bool g s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> sum t (\\y. sum {x | x IN s /\\ R x y} g) = sum s g",
       ),
       t1667,
     ),
@@ -16679,7 +16679,7 @@ fn step_264() -> Unit raise {
   real_of_num_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool. FINITE s ==> (&(nsum s f) = sum s (\\x. &(f x)))",
+        "forall f s:A->bool. FINITE s ==> (&(nsum s f) = sum s (\\x. &(f x)))",
       ),
       t1669,
     ),
@@ -16851,7 +16851,7 @@ fn step_265() -> Unit raise {
   sum_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!u v f. FINITE u /\\ FINITE v /\\\n           (!x. x IN (u DIFF v) ==> f(x) <= &0) /\\\n           (!x:A. x IN (v DIFF u) ==> &0 <= f(x))\n           ==> sum u f <= sum v f",
+        "forall u v f. FINITE u /\\ FINITE v /\\\n           (forall x. x IN (u DIFF v) ==> f(x) <= &0) /\\\n           (forall x:A. x IN (v DIFF u) ==> &0 <= f(x))\n           ==> sum u f <= sum v f",
       ),
       t1688,
     ),
@@ -16881,7 +16881,7 @@ fn step_266() -> Unit raise {
   sum_subset_simple_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!u v f.\n        FINITE v /\\ u SUBSET v /\\ (!x:A. x IN (v DIFF u) ==> &0 <= f(x))\n        ==> sum u f <= sum v f",
+        "forall u v f.\n        FINITE v /\\ u SUBSET v /\\ (forall x:A. x IN (v DIFF u) ==> &0 <= f(x))\n        ==> sum u f <= sum v f",
       ),
       t1691,
     ),
@@ -16955,7 +16955,7 @@ fn step_267() -> Unit raise {
   sum_mul_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b s:A->bool.\n        FINITE s /\\ (!i. i IN s ==> &0 <= a i /\\ &0 <= b i)\n        ==> sum s (\\i. a i * b i) <= sum s a * sum s b",
+        "forall a b s:A->bool.\n        FINITE s /\\ (forall i. i IN s ==> &0 <= a i /\\ &0 <= b i)\n        ==> sum s (\\i. a i * b i) <= sum s a * sum s b",
       ),
       t1704,
     ),
@@ -16986,7 +16986,7 @@ fn step_268() -> Unit raise {
   sum_image_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!d:B->real i:A->B s.\n    FINITE s /\\\n    (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = &0)\n    ==> sum (IMAGE i s) d = sum s (d o i)",
+        "forall d:B->real i:A->B s.\n    FINITE s /\\\n    (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = &0)\n    ==> sum (IMAGE i s) d = sum s (d o i)",
       ),
       t1707,
     ),
@@ -17016,7 +17016,7 @@ fn step_269() -> Unit raise {
   sum_bijection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p s:A->bool.\n        (!x. x IN s ==> p(x) IN s) /\\\n        (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> sum s f = sum s (f o p)",
+        "forall f p s:A->bool.\n        (forall x. x IN s ==> p(x) IN s) /\\\n        (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n        ==> sum s f = sum s (f o p)",
       ),
       t1710,
     ),
@@ -17044,7 +17044,7 @@ fn step_270() -> Unit raise {
   sum_sum_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> sum s (\\i. sum (t i) (x i)) =\n            sum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
+        "forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> sum s (\\i. sum (t i) (x i)) =\n            sum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j)",
       ),
       t1713,
     ),
@@ -17074,7 +17074,7 @@ fn step_271() -> Unit raise {
   sum_eq_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:B->bool f g h.\n        (!y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> sum s f = sum t g",
+        "forall s:A->bool t:B->bool f g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h(x) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ g(h x) = f x)\n        ==> sum s f = sum t g",
       ),
       t1716,
     ),
@@ -17102,7 +17102,7 @@ fn step_272() -> Unit raise {
   sum_eq_general_inverses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool t:B->bool f g h k.\n        (!y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (!x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> sum s f = sum t g",
+        "forall s:A->bool t:B->bool f g h k.\n        (forall y. y IN t ==> k(y) IN s /\\ h(k y) = y) /\\\n        (forall x. x IN s ==> h(x) IN t /\\ k(h x) = x /\\ g(h x) = f x)\n        ==> sum s f = sum t g",
       ),
       t1719,
     ),
@@ -17132,7 +17132,7 @@ fn step_273() -> Unit raise {
   sum_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f p s:A->bool.\n           FINITE s /\\\n           (!x. x IN s ==> p x IN s) /\\\n           (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> sum s (f o p) = sum s f",
+        "forall f p s:A->bool.\n           FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> sum s (f o p) = sum s f",
       ),
       t1722,
     ),
@@ -17163,7 +17163,7 @@ fn step_274() -> Unit raise {
   sum_union_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (!x. x IN s INTER t ==> f(x) = &0)\n        ==> sum (s UNION t) f = sum s f + sum t f",
+        "forall f s t:A->bool.\n        FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = &0)\n        ==> sum (s UNION t) f = sum s f + sum t f",
       ),
       t1725,
     ),
@@ -17343,7 +17343,7 @@ fn step_275() -> Unit raise {
   sum_unions_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s. FINITE s /\\ (!t:A->bool. t IN s ==> FINITE t) /\\\n         (!t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = &0)\n         ==> sum (UNIONS s) f = sum s (\\t. sum t f)",
+        "forall f s. FINITE s /\\ (forall t:A->bool. t IN s ==> FINITE t) /\\\n         (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                    ==> f x = &0)\n         ==> sum (UNIONS s) f = sum s (\\t. sum t f)",
       ),
       t1744,
     ),
@@ -17376,7 +17376,7 @@ fn step_276() -> Unit raise {
   sum_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s P f g. FINITE s\n             ==> sum s (\\x:A. if P x then f x else g x) =\n                 sum {x | x IN s /\\ P x} f + sum {x | x IN s /\\ ~P x} g",
+        "forall s P f g. FINITE s\n             ==> sum s (\\x:A. if P x then f x else g x) =\n                 sum {x | x IN s /\\ P x} f + sum {x | x IN s /\\ ~P x} g",
       ),
       t1747,
     ),
@@ -17423,7 +17423,7 @@ fn step_277() -> Unit raise {
   sum_cases_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a:A. FINITE s /\\ a IN s\n           ==> sum s (\\x. if x = a then y else f(x)) = sum s f + (y - f a)",
+        "forall s a:A. FINITE s /\\ a IN s\n           ==> sum s (\\x. if x = a then y else f(x)) = sum s f + (y - f a)",
       ),
       t1752,
     ),
@@ -17625,7 +17625,7 @@ fn step_278() -> Unit raise {
   sum_le_included_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->real g:B->real s t i.\n        FINITE s /\\ FINITE t /\\\n        (!y. y IN t ==> &0 <= g y) /\\\n        (!x. x IN s ==> ?y. y IN t /\\ i y = x /\\ f(x) <= g(y))\n        ==> sum s f <= sum t g",
+        "forall f:A->real g:B->real s t i.\n        FINITE s /\\ FINITE t /\\\n        (forall y. y IN t ==> &0 <= g y) /\\\n        (forall x. x IN s ==> ?y. y IN t /\\ i y = x /\\ f(x) <= g(y))\n        ==> sum s f <= sum t g",
       ),
       t1779,
     ),
@@ -17669,7 +17669,7 @@ fn step_279() -> Unit raise {
   sum_image_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f:A->B g s.\n        FINITE s /\\\n        (!x. x IN s ==> &0 <= g(f x))\n        ==> sum (IMAGE f s) g <= sum s (g o f)",
+        "forall f:A->B g s.\n        FINITE s /\\\n        (forall x. x IN s ==> &0 <= g(f x))\n        ==> sum (IMAGE f s) g <= sum s (g o f)",
       ),
       t1785,
     ),
@@ -17773,7 +17773,7 @@ fn step_280() -> Unit raise {
   sum_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->real s.\n        P(&0) /\\ (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(sum s f)",
+        "forall P f:A->real s.\n        P(&0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(sum s f)",
       ),
       t1795,
     ),
@@ -17825,7 +17825,7 @@ fn step_281() -> Unit raise {
   sum_related_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->real) g s.\n        R (&0) (&0) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)",
+        "forall R (f:A->real) g s.\n        R (&0) (&0) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)",
       ),
       t1801,
     ),
@@ -17929,7 +17929,7 @@ fn step_282() -> Unit raise {
   sum_closed_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x + y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(sum s f)",
+        "forall P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(sum s f)",
       ),
       t1811,
     ),
@@ -17983,7 +17983,7 @@ fn step_283() -> Unit raise {
   sum_related_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R (f:A->real) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)",
+        "forall R (f:A->real) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (sum s f) (sum s g)",
       ),
       t1817,
     ),
@@ -18027,7 +18027,7 @@ fn step_284() -> Unit raise {
   real_of_num_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f s:A->bool.\n       FINITE {i | i IN s /\\ ~(f i = 0)} ==> &(nsum s f) = sum s (\\x. &(f x))",
+        "forall f s:A->bool.\n       FINITE {i | i IN s /\\ ~(f i = 0)} ==> &(nsum s f) = sum s (\\x. &(f x))",
       ),
       t1822,
     ),
@@ -18052,7 +18052,7 @@ fn step_285() -> Unit raise {
   sum_add_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. sum(m..n) (\\i. f(i) + g(i)) = sum(m..n) f + sum(m..n) g",
+        "forall f g m n. sum(m..n) (\\i. f(i) + g(i)) = sum(m..n) f + sum(m..n) g",
       ),
       t1823,
     ),
@@ -18075,7 +18075,7 @@ fn step_286() -> Unit raise {
   sum_sub_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. sum(m..n) (\\i. f(i) - g(i)) = sum(m..n) f - sum(m..n) g",
+        "forall f g m n. sum(m..n) (\\i. f(i) - g(i)) = sum(m..n) f - sum(m..n) g",
       ),
       t1824,
     ),
@@ -18100,7 +18100,7 @@ fn step_287() -> Unit raise {
   sum_le_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. (!i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> sum(m..n) f <= sum(m..n) g",
+        "forall f g m n. (forall i. m <= i /\\ i <= n ==> f(i) <= g(i))\n             ==> sum(m..n) f <= sum(m..n) g",
       ),
       t1825,
     ),
@@ -18125,7 +18125,7 @@ fn step_288() -> Unit raise {
   sum_eq_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (sum(m..n) f = sum(m..n) g)",
+        "forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (sum(m..n) f = sum(m..n) g)",
       ),
       t1826,
     ),
@@ -18148,7 +18148,7 @@ fn step_289() -> Unit raise {
   sum_abs_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. abs(sum(m..n) f) <= sum(m..n) (\\i. abs(f i))",
+        "forall f m n. abs(sum(m..n) f) <= sum(m..n) (\\i. abs(f i))",
       ),
       t1827,
     ),
@@ -18172,7 +18172,7 @@ fn step_290() -> Unit raise {
   )
   sum_const_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!c m n. sum(m..n) (\\n. c) = &((n + 1) - m) * c"),
+      @parser.parse_term("forall c m n. sum(m..n) (\\n. c) = &((n + 1) - m) * c"),
       t1828,
     ),
   )
@@ -18196,7 +18196,7 @@ fn step_291() -> Unit raise {
   sum_eq_0_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. (!i. m <= i /\\ i <= n ==> (f(i) = &0)) ==> (sum(m..n) f = &0)",
+        "forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = &0)) ==> (sum(m..n) f = &0)",
       ),
       t1829,
     ),
@@ -18222,7 +18222,7 @@ fn step_292() -> Unit raise {
   )
   sum_triv_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!f m n. n < m ==> (sum(m..n) f = &0)"),
+      @parser.parse_term("forall f m n. n < m ==> (sum(m..n) f = &0)"),
       t1830,
     ),
   )
@@ -18248,7 +18248,7 @@ fn step_293() -> Unit raise {
   sum_pos_le_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n f. (!p. m <= p /\\ p <= n ==> &0 <= f(p)) ==> &0 <= sum(m..n) f",
+        "forall m n f. (forall p. m <= p /\\ p <= n ==> &0 <= f(p)) ==> &0 <= sum(m..n) f",
       ),
       t1831,
     ),
@@ -18275,7 +18275,7 @@ fn step_294() -> Unit raise {
   sum_pos_eq_0_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. (!p. m <= p /\\ p <= n ==> &0 <= f(p)) /\\ (sum(m..n) f = &0)\n           ==> !p. m <= p /\\ p <= n ==> (f(p) = &0)",
+        "forall f m n. (forall p. m <= p /\\ p <= n ==> &0 <= f(p)) /\\ (sum(m..n) f = &0)\n           ==> forall p. m <= p /\\ p <= n ==> (f(p) = &0)",
       ),
       t1832,
     ),
@@ -18298,7 +18298,7 @@ pub fn sum_pos_eq_0_numseg() -> @kernel.Thm {
 fn step_295() -> Unit raise {
   let t1833 = @simp.simp_tac(@list.List([sum_sing(), numseg_sing()]))
   sum_sing_numseg_c.set(
-    @tactics.prove(@parser.parse_term("!f n. sum(n..n) f = f(n)"), t1833),
+    @tactics.prove(@parser.parse_term("forall f n. sum(n..n) f = f(n)"), t1833),
   )
 }
 
@@ -18326,7 +18326,7 @@ fn step_296() -> Unit raise {
   sum_clauses_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m. sum(m..0) f = if m = 0 then f(0) else &0) /\\\n   (!m n. sum(m..SUC n) f = if m <= SUC n then sum(m..n) f + f(SUC n)\n                            else sum(m..n) f)",
+        "(forall m. sum(m..0) f = if m = 0 then f(0) else &0) /\\\n   (forall m n. sum(m..SUC n) f = if m <= SUC n then sum(m..n) f + f(SUC n)\n                            else sum(m..n) f)",
       ),
       t1835,
     ),
@@ -18357,7 +18357,7 @@ fn step_297() -> Unit raise {
   sum_clauses_numseg_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "sum {i | i < 0} f = &0 /\\\n   (!k. sum {i | i < SUC k} f = sum {i | i < k} f + f k)",
+        "sum {i | i < 0} f = &0 /\\\n   (forall k. sum {i | i < SUC k} f = sum {i | i < k} f + f k)",
       ),
       t1837,
     ),
@@ -18388,7 +18388,7 @@ fn step_298() -> Unit raise {
   sum_clauses_numseg_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "sum {i | i <= 0} f = f 0 /\\\n   (!k. sum {i | i <= SUC k} f = sum {i | i <= k} f + f(SUC k))",
+        "sum {i | i <= 0} f = f 0 /\\\n   (forall k. sum {i | i <= SUC k} f = sum {i | i <= k} f + f(SUC k))",
       ),
       t1839,
     ),
@@ -18418,7 +18418,7 @@ fn step_299() -> Unit raise {
   sum_swap_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d f.\n     sum(a..b) (\\i. sum(c..d) (f i)) = sum(c..d) (\\j. sum(a..b) (\\i. f i j))",
+        "forall a b c d f.\n     sum(a..b) (\\i. sum(c..d) (f i)) = sum(c..d) (\\j. sum(a..b) (\\i. f i j))",
       ),
       t1842,
     ),
@@ -18451,7 +18451,7 @@ fn step_300() -> Unit raise {
   sum_add_split_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n p.\n        m <= n + 1 ==> (sum (m..(n+p)) f = sum(m..n) f + sum(n+1..n+p) f)",
+        "forall f m n p.\n        m <= n + 1 ==> (sum (m..(n+p)) f = sum(m..n) f + sum(n+1..n+p) f)",
       ),
       t1843,
     ),
@@ -18485,7 +18485,7 @@ fn step_301() -> Unit raise {
   sum_offset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p f m n. sum(m+p..n+p) f = sum(m..n) (\\i. f(i + p))",
+        "forall p f m n. sum(m+p..n+p) f = sum(m..n) (\\i. f(i + p))",
       ),
       t1845,
     ),
@@ -18514,7 +18514,7 @@ fn step_302() -> Unit raise {
   sum_offset_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. m <= n ==> (sum(m..n) f = sum(0..n-m) (\\i. f(i + m)))",
+        "forall f m n. m <= n ==> (sum(m..n) f = sum(0..n-m) (\\i. f(i + m)))",
       ),
       t1846,
     ),
@@ -18547,7 +18547,7 @@ fn step_303() -> Unit raise {
   sum_clauses_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. m <= n ==> sum(m..n) f = f(m) + sum(m+1..n) f",
+        "forall f m n. m <= n ==> sum(m..n) f = f(m) + sum(m+1..n) f",
       ),
       t1847,
     ),
@@ -18581,7 +18581,7 @@ fn step_304() -> Unit raise {
   sum_clauses_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. 0 < n /\\ m <= n ==> sum(m..n) f = sum(m..n-1) f + f(n)",
+        "forall f m n. 0 < n /\\ m <= n ==> sum(m..n) f = sum(m..n-1) f + f(n)",
       ),
       t1849,
     ),
@@ -18610,7 +18610,7 @@ fn step_305() -> Unit raise {
   sum_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n. sum(2*m..2*n+1) f = sum(m..n) (\\i. f(2*i) + f(2*i+1))",
+        "forall f m n. sum(2*m..2*n+1) f = sum(m..n) (\\i. f(2*i) + f(2*i+1))",
       ),
       t1851,
     ),
@@ -18650,7 +18650,7 @@ fn step_306() -> Unit raise {
   sum_reflect_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x m n. sum(m..n) x = if n < m then &0 else sum(0..n-m) (\\i. x(n - i))",
+        "forall x m n. sum(m..n) x = if n < m then &0 else sum(0..n-m) (\\i. x(n - i))",
       ),
       t1858,
     ),
@@ -18672,7 +18672,7 @@ fn step_307() -> Unit raise {
   let t1859 = @simp.simp_tac(@list.List([real_of_num_sum(), finite_numseg()]))
   real_of_num_sum_numseg_c.set(
     @tactics.prove(
-      @parser.parse_term("!f m n. (&(nsum(m..n) f) = sum (m..n) (\\i. &(f i)))"),
+      @parser.parse_term("forall f m n. (&(nsum(m..n) f) = sum (m..n) (\\i. &(f i)))"),
       t1859,
     ),
   )
@@ -18922,7 +18922,7 @@ fn step_308() -> Unit raise {
   sum_partial_suc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n.\n        sum (m..n) (\\k. f(k) * (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) * g(n + 1) - f(m) * g(m) -\n                           sum (m..n) (\\k. g(k + 1) * (f(k + 1) - f(k)))\n            else &0",
+        "forall f g m n.\n        sum (m..n) (\\k. f(k) * (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) * g(n + 1) - f(m) * g(m) -\n                           sum (m..n) (\\k. g(k + 1) * (f(k + 1) - f(k)))\n            else &0",
       ),
       t1880,
     ),
@@ -19016,7 +19016,7 @@ fn step_309() -> Unit raise {
   sum_partial_pre_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f g m n.\n        sum (m..n) (\\k. f(k) * (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) * g(n) - f(m) * g(m - 1) -\n                           sum (m..n) (\\k. g k * (f(k + 1) - f(k)))\n            else &0",
+        "forall f g m n.\n        sum (m..n) (\\k. f(k) * (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) * g(n) - f(m) * g(m - 1) -\n                           sum (m..n) (\\k. g k * (f(k + 1) - f(k)))\n            else &0",
       ),
       t1891,
     ),
@@ -19058,7 +19058,7 @@ fn step_310() -> Unit raise {
   sum_diffs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. sum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else &0",
+        "forall m n. sum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else &0",
       ),
       t1894,
     ),
@@ -19097,7 +19097,7 @@ fn step_311() -> Unit raise {
   sum_diffs_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. sum(m..n) (\\k. f(k + 1) - f(k)) =\n          if m <= n then f(n + 1) - f(m) else &0",
+        "forall m n. sum(m..n) (\\k. f(k + 1) - f(k)) =\n          if m <= n then f(n + 1) - f(m) else &0",
       ),
       t1898,
     ),
@@ -19137,7 +19137,7 @@ fn step_312() -> Unit raise {
   sum_combine_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n p. m <= n + 1 /\\ n <= p\n             ==> sum(m..n) f + sum(n+1..p) f = sum(m..p) f",
+        "forall f m n p. m <= n + 1 /\\ n <= p\n             ==> sum(m..n) f + sum(n+1..p) f = sum(m..p) f",
       ),
       t1901,
     ),
@@ -19177,7 +19177,7 @@ fn step_313() -> Unit raise {
   sum_combine_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!f m n p. 0 < n /\\ m <= n /\\ n <= p + 1\n             ==> sum(m..n-1) f + sum(n..p) f = sum(m..p) f",
+        "forall f m n p. 0 < n /\\ m <= n /\\ n <= p + 1\n             ==> sum(m..n-1) f + sum(n..p) f = sum(m..p) f",
       ),
       t1904,
     ),
@@ -19204,7 +19204,7 @@ fn step_314() -> Unit raise {
   )
   let th = @tactics.prove(
     @parser.parse_term(
-      "(!f g s:A->bool.\n        (!x. x IN s ==> f(x) = g(x))\n        ==> sum s (\\i. f(i)) = sum s g) /\\\n   (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> sum(a..b) (\\i. f(i)) = sum(a..b) g) /\\\n   (!f g p. (!x. p x ==> f x = g x)\n            ==> sum {y | p y} (\\i. f(i)) = sum {y | p y} g)",
+      "(forall f g s:A->bool.\n        (forall x. x IN s ==> f(x) = g(x))\n        ==> sum s (\\i. f(i)) = sum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> sum(a..b) (\\i. f(i)) = sum(a..b) g) /\\\n   (forall f g p. (forall x. p x ==> f x = g x)\n            ==> sum {y | p y} (\\i. f(i)) = sum {y | p y} g)",
     ),
     t1907,
   )
@@ -19378,7 +19378,7 @@ fn step_316() -> Unit raise {
   real_sub_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * sum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))",
+        "forall x y n.\n        1 <= n ==> x pow n - y pow n =\n                   (x - y) * sum(0..n-1) (\\i. x pow i * y pow (n - 1 - i))",
       ),
       t1919,
     ),
@@ -19500,7 +19500,7 @@ fn step_317() -> Unit raise {
   real_sub_pow_r1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. 1 <= n ==> x pow n - &1 = (x - &1) * sum(0..n-1) (\\i. x pow i)",
+        "forall x n. 1 <= n ==> x pow n - &1 = (x - &1) * sum(0..n-1) (\\i. x pow i)",
       ),
       t1931,
     ),
@@ -19535,7 +19535,7 @@ fn step_318() -> Unit raise {
   real_sub_pow_l1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. 1 <= n ==> &1 - x pow n = (&1 - x) * sum(0..n-1) (\\i. x pow i)",
+        "forall x n. 1 <= n ==> &1 - x pow n = (&1 - x) * sum(0..n-1) (\\i. x pow i)",
       ),
       t1934,
     ),
@@ -19654,7 +19654,7 @@ fn step_319() -> Unit raise {
   real_sub_polyfun_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)",
+        "forall a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(j+1..n) (\\i. a i * y pow (i - j - 1)) * x pow j)",
       ),
       t1953,
     ),
@@ -19782,7 +19782,7 @@ fn step_320() -> Unit raise {
   real_sub_polyfun_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)",
+        "forall a x y n.\n    1 <= n\n    ==> sum(0..n) (\\i. a i * x pow i) - sum(0..n) (\\i. a i * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\j. sum(0..n-j-1) (\\k. a(j+k+1) * y pow k) * x pow j)",
       ),
       t1968,
     ),
@@ -20099,7 +20099,7 @@ fn step_321() -> Unit raise {
   real_polyfun_rootbound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n c. ~(!i. i IN 0..n ==> c i = &0)\n         ==> FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} /\\\n             CARD {x | sum(0..n) (\\i. c i * x pow i) = &0} <= n",
+        "forall n c. ~(forall i. i IN 0..n ==> c i = &0)\n         ==> FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} /\\\n             CARD {x | sum(0..n) (\\i. c i * x pow i) = &0} <= n",
       ),
       t2007,
     ),
@@ -20161,7 +20161,7 @@ fn step_322() -> Unit raise {
   real_polyfun_finite_roots_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n c. FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} <=>\n         ?i. i IN 0..n /\\ ~(c i = &0)",
+        "forall n c. FINITE {x | sum(0..n) (\\i. c i * x pow i) = &0} <=>\n         ?i. i IN 0..n /\\ ~(c i = &0)",
       ),
       t2015,
     ),
@@ -20290,7 +20290,7 @@ fn step_323() -> Unit raise {
   real_polyfun_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n c. (!x. sum(0..n) (\\i. c i * x pow i) = &0) <=>\n         (!i. i IN 0..n ==> c i = &0)",
+        "forall n c. (forall x. sum(0..n) (\\i. c i * x pow i) = &0) <=>\n         (forall i. i IN 0..n ==> c i = &0)",
       ),
       t2027,
     ),
@@ -20325,7 +20325,7 @@ fn step_324() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(!n. P n) <=> P 0 /\\ (!n. ~(n = 0) ==> P n)"),
+        @parser.parse_term("(forall n. P n) <=> P 0 /\\ (forall n. ~(n = 0) ==> P n)"),
       ),
     ]),
   )
@@ -20395,7 +20395,7 @@ fn step_324() -> Unit raise {
   ])
   let t2029 = @tactics.exists_tac(
     @parser.parse_term(
-      "!x. sum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) = &0",
+      "forall x. sum(0..n) (\\i. (if i = 0 then c 0 - k else c i) * x pow i) = &0",
     ),
   )
   let t2028 = @tactics.match_mp_tac(@theorems.eq_trans())
@@ -20412,7 +20412,7 @@ fn step_324() -> Unit raise {
   real_polyfun_eq_const_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n c k. (!x. sum(0..n) (\\i. c i * x pow i) = k) <=>\n           c 0 = k /\\ (!i. i IN 1..n ==> c i = &0)",
+        "forall n c k. (forall x. sum(0..n) (\\i. c i * x pow i) = k) <=>\n           c 0 = k /\\ (forall i. i IN 1..n ==> c i = &0)",
       ),
       t2042,
     ),
@@ -20436,7 +20436,7 @@ fn step_325() -> Unit raise {
   polynomial_function_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "polynomial_function p <=> ?m c. !x. p x = sum(0..m) (\\i. c i * x pow i)",
+        "polynomial_function p <=> ?m c. forall x. p x = sum(0..m) (\\i. c i * x pow i)",
       ),
     ),
   )
@@ -20525,7 +20525,7 @@ fn step_326() -> Unit raise {
   )
   polynomial_function_const_c.set(
     @tactics.prove(
-      @parser.parse_term("!c. polynomial_function (\\x. c)"),
+      @parser.parse_term("forall c. polynomial_function (\\x. c)"),
       t2049,
     ),
   )
@@ -20743,7 +20743,7 @@ fn step_329() -> Unit raise {
   polynomial_function_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x + q x)",
+        "forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x + q x)",
       ),
       t2071,
     ),
@@ -20845,7 +20845,7 @@ fn step_330() -> Unit raise {
   polynomial_function_lmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p c. polynomial_function p ==> polynomial_function (\\x. c * p x)",
+        "forall p c. polynomial_function p ==> polynomial_function (\\x. c * p x)",
       ),
       t2081,
     ),
@@ -20874,7 +20874,7 @@ fn step_331() -> Unit raise {
   polynomial_function_rmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p c. polynomial_function p ==> polynomial_function (\\x. p x * c)",
+        "forall p c. polynomial_function p ==> polynomial_function (\\x. p x * c)",
       ),
       t2083,
     ),
@@ -21005,7 +21005,7 @@ fn step_332() -> Unit raise {
   polynomial_function_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p. polynomial_function(\\x. --(p x)) <=> polynomial_function p",
+        "forall p. polynomial_function(\\x. --(p x)) <=> polynomial_function p",
       ),
       t2094,
     ),
@@ -21036,7 +21036,7 @@ fn step_333() -> Unit raise {
   polynomial_function_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x - q x)",
+        "forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x - q x)",
       ),
       t2095,
     ),
@@ -21194,7 +21194,7 @@ fn step_334() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(!q m c. P q m c) <=> (!m c q. P q m c)"),
+        @parser.parse_term("(forall q m c. P q m c) <=> (forall m c q. P q m c)"),
       ),
     ]),
   )
@@ -21315,7 +21315,7 @@ fn step_334() -> Unit raise {
   polynomial_function_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x * q x)",
+        "forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (\\x. p x * q x)",
       ),
       t2134,
     ),
@@ -21358,7 +21358,7 @@ fn step_335() -> Unit raise {
   polynomial_function_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool p.\n        FINITE s /\\ (!i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. sum s (p x))",
+        "forall s:A->bool p.\n        FINITE s /\\ (forall i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. sum s (p x))",
       ),
       t2138,
     ),
@@ -21402,7 +21402,7 @@ fn step_336() -> Unit raise {
   polynomial_function_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p n. polynomial_function p ==> polynomial_function (\\x. p x pow n)",
+        "forall p n. polynomial_function p ==> polynomial_function (\\x. p x pow n)",
       ),
       t2140,
     ),
@@ -21453,7 +21453,7 @@ fn step_337() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(!q m c. P q m c) <=> (!m c q. P q m c)"),
+        @parser.parse_term("(forall q m c. P q m c) <=> (forall m c q. P q m c)"),
       ),
     ]),
   )
@@ -21505,7 +21505,7 @@ fn step_337() -> Unit raise {
   polynomial_function_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P. P (\\x. x) /\\ (!c. P (\\x. c)) /\\\n      (!p q. P p /\\ P q ==> P (\\x. p x + q x)) /\\\n      (!p q. P p /\\ P q ==> P (\\x. p x * q x))\n      ==> !p. polynomial_function p ==> P p",
+        "forall P. P (\\x. x) /\\ (forall c. P (\\x. c)) /\\\n      (forall p q. P p /\\ P q ==> P (\\x. p x + q x)) /\\\n      (forall p q. P p /\\ P q ==> P (\\x. p x * q x))\n      ==> forall p. polynomial_function p ==> P p",
       ),
       t2152,
     ),
@@ -21562,7 +21562,7 @@ fn step_338() -> Unit raise {
   polynomial_function_o_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (p o q)",
+        "forall p q. polynomial_function p /\\ polynomial_function q\n         ==> polynomial_function (p o q)",
       ),
       t2157,
     ),
@@ -21615,7 +21615,7 @@ fn step_339() -> Unit raise {
   let t2161 = @simp.rewrite_tac(@list.List([polynomial_function()]))
   let t2160 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!p. polynomial_function p ==> (FINITE {x | p x = &0} <=> ~(!x. p x = &0))",
+      "forall p. polynomial_function p ==> (FINITE {x | p x = &0} <=> ~(forall x. p x = &0))",
     ),
     fn(
       x2158 : @kernel.Thm,
@@ -21671,7 +21671,7 @@ fn step_339() -> Unit raise {
   polynomial_function_finite_roots_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p a. polynomial_function p\n         ==> (FINITE {x | p x = a} <=> ~(!x. p x = a))",
+        "forall p a. polynomial_function p\n         ==> (FINITE {x | p x = a} <=> ~(forall x. p x = a))",
       ),
       t2167,
     ),

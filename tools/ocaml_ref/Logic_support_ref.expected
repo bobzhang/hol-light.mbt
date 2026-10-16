@@ -9580,24 +9580,24 @@ Warning: inventing type variables
 0..0..0..solved at 3
 0..0..solved at 2
 Logic/support quotations (345):
-  !q. literal q ==> literal(~~q)
-  !c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)
-  !hyps cl. (!c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl
-  !c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')
-  !c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)
+  forall q. literal q ==> literal(~~q)
+  forall c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)
+  forall hyps cl. (forall c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl
+  forall c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')
+  forall c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)
   (p = q) \\/ (p = ~~q)
   q:form
-  !c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)
+  forall c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)
   (p = q) \\/ (p = ~~q)
   q:form
-  !c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)
-  !c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2
-  (!cl. cl IN hyps ==> npresproof hyps cl 1) /\\\n    (!p n1 n2 cl1 cl2.\n                npresproof hyps cl1 n1 /\\\n                npresproof hyps cl2 n2 /\\\n                p IN cl1 /\\\n                ~~ p IN cl2\n                ==> npresproof hyps (resolve p cl1 cl2) (n1 + n2 + 1))
+  forall c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)
+  forall c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2
+  (forall cl. cl IN hyps ==> npresproof hyps cl 1) /\\\n    (forall p n1 n2 cl1 cl2.\n                npresproof hyps cl1 n1 /\\\n                npresproof hyps cl2 n2 /\\\n                p IN cl1 /\\\n                ~~ p IN cl2\n                ==> npresproof hyps (resolve p cl1 cl2) (n1 + n2 + 1))
   (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-  !hyps cl. presproof hyps cl <=> ?n. npresproof hyps cl n
-  !hyps cl n. (!c. c IN hyps ==> clause c) /\\ npresproof hyps cl n\n                ==> clause cl
-  (!c. c IN hyps /\\ ~(tautologous c)\n         ==> psresproof hyps sos (c IN sos) c) /\\\n    (!c1 c2 s1 s2 p.\n        psresproof hyps sos s1 c1 /\\\n        psresproof hyps sos s2 c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ (s1 \\/ s2) /\\ ~tautologous(resolve p c1 c2)\n        ==> psresproof hyps sos T (resolve p c1 c2))
-  !hyps sos. (!c. c IN hyps ==> clause(c))\n              ==> !s cl. psresproof hyps sos s cl ==> clause cl
+  forall hyps cl. presproof hyps cl <=> ?n. npresproof hyps cl n
+  forall hyps cl n. (forall c. c IN hyps ==> clause c) /\\ npresproof hyps cl n\n                ==> clause cl
+  (forall c. c IN hyps /\\ ~(tautologous c)\n         ==> psresproof hyps sos (c IN sos) c) /\\\n    (forall c1 c2 s1 s2 p.\n        psresproof hyps sos s1 c1 /\\\n        psresproof hyps sos s2 c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ (s1 \\/ s2) /\\ ~tautologous(resolve p c1 c2)\n        ==> psresproof hyps sos T (resolve p c1 c2))
+  forall hyps sos. (forall c. c IN hyps ==> clause(c))\n              ==> forall s cl. psresproof hyps sos s cl ==> clause cl
   m < ne /\\ ne < nc ==> m < nb + nc + 1
   p:form
   E:form->bool
@@ -9697,7 +9697,7 @@ Logic/support quotations (345):
   tautologous (resolve q B C)
   literal p /\\ literal q
   clause A /\\ clause B /\\ clause C
-  !hyps sos A B C p q nb nc.\n      (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      ~~p IN B /\\ ~(q = ~~p) /\\\n      (!m. m < nb + nc + 1\n              ==> (!c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)
+  forall hyps sos A B C p q nb nc.\n      (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      ~~p IN B /\\ ~(q = ~~p) /\\\n      (forall m. m < nb + nc + 1\n              ==> (forall c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)
   a + b + 1 = b + a + 1
   literal q
   clause A /\\ clause B /\\ clause C
@@ -9720,7 +9720,7 @@ Logic/support quotations (345):
   sos:(form->bool)->bool
   hyps:(form->bool)->bool
   ~~p IN (resolve q B C)
-  !hyps sos A B C p q nb nc.\n      (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      (!m. m < nb + nc + 1\n              ==> (!c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)
+  forall hyps sos A B C p q nb nc.\n      (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n      ~tautologous(resolve p A (resolve q B C)) /\\\n      psresproof hyps sos T A /\\\n      npresproof (hyps DIFF sos) B nb /\\\n      npresproof (hyps DIFF sos) C nc /\\\n      p IN A /\\ ~~p IN (resolve q B C) /\\ q IN B /\\ ~~ q IN C /\\\n      (forall m. m < nb + nc + 1\n              ==> (forall c1 c2 p.\n                       psresproof hyps sos T c1 /\\\n                       npresproof (hyps DIFF sos) c2 m /\\\n                       p IN c1 /\\\n                       ~~ p IN c2 /\\\n                       ~tautologous (resolve p c1 c2)\n                       ==> (?cl'. cl' SUBSET resolve p c1 c2 /\\\n                                  (psresproof hyps sos T cl' \\/\n                                   (?m'. m' < m /\\\n                                         npresproof (hyps DIFF sos) cl' m')))))\n      ==> ?cl'. cl' SUBSET resolve p A (resolve q B C) /\\\n                (psresproof hyps sos T cl' \\/\n                 ?m. m < nb + nc + 1 /\\ npresproof (hyps DIFF sos) cl' m)
   nc:num
   nb:num
   q:form
@@ -9746,7 +9746,7 @@ Logic/support quotations (345):
   Z:form->bool
   A:form->bool
   n:num
-  !hyps sos.\n        (!c. c IN hyps ==> clause c /\\ ~tautologous c)\n        ==> !n c1 c2 p.\n                psresproof hyps sos T c1 /\\\n                npresproof (hyps DIFF sos) c2 n /\\\n                p IN c1 /\\ ~~p IN c2 /\\\n                ~(tautologous(resolve p c1 c2))\n                ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                          (psresproof hyps sos T cl' \\/\n                           ?m. m < n /\\ npresproof (hyps DIFF sos) cl' m)
+  forall hyps sos.\n        (forall c. c IN hyps ==> clause c /\\ ~tautologous c)\n        ==> forall n c1 c2 p.\n                psresproof hyps sos T c1 /\\\n                npresproof (hyps DIFF sos) c2 n /\\\n                p IN c1 /\\ ~~p IN c2 /\\\n                ~(tautologous(resolve p c1 c2))\n                ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                          (psresproof hyps sos T cl' \\/\n                           ?m. m < n /\\ npresproof (hyps DIFF sos) cl' m)
   p:form
   c2:form->bool
   c1:form->bool
@@ -9754,7 +9754,7 @@ Logic/support quotations (345):
   n:num
   sos:(form->bool)->bool
   hyps:(form->bool)->bool
-  !hyps sos p c1 c2.\n        (!c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n        psresproof hyps sos T c1 /\\\n        presproof (hyps DIFF sos) c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ ~(tautologous(resolve p c1 c2))\n        ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                  (presproof (hyps DIFF sos) cl' \\/\n                   psresproof hyps sos T cl')
+  forall hyps sos p c1 c2.\n        (forall c. c IN hyps ==> clause c /\\ ~tautologous c) /\\\n        psresproof hyps sos T c1 /\\\n        presproof (hyps DIFF sos) c2 /\\\n        p IN c1 /\\ ~~p IN c2 /\\ ~(tautologous(resolve p c1 c2))\n        ==> ?cl'. cl' SUBSET (resolve p c1 c2) /\\\n                  (presproof (hyps DIFF sos) cl' \\/\n                   psresproof hyps sos T cl')
   T
   resolve p c1' c2'
   c2':form->bool
@@ -9788,15 +9788,15 @@ Logic/support quotations (345):
   cl:form->bool IN sos
   cl:form->bool
   cl:form->bool
-  !hyps sos.\n     (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n     ==> !cl. presproof hyps cl\n              ==> clause cl /\\\n                  (~(tautologous cl)\n                   ==> ?cl'. cl' SUBSET cl /\\\n                                 (presproof (hyps DIFF sos) cl' \\/\n                                  psresproof hyps sos T cl'))
+  forall hyps sos.\n     (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n     ==> forall cl. presproof hyps cl\n              ==> clause cl /\\\n                  (~(tautologous cl)\n                   ==> ?cl'. cl' SUBSET cl /\\\n                                 (presproof (hyps DIFF sos) cl' \\/\n                                  psresproof hyps sos T cl'))
   sos:(form->bool)->bool
   hyps:(form->bool)->bool
-  !sos hyps cl.\n     (!c. c IN hyps ==> clause c /\\ ~(tautologous c)) /\\\n     presproof hyps cl /\\ ~(tautologous cl)\n     ==> ?cl'. cl' SUBSET cl /\\\n               (presproof (hyps DIFF sos) cl' \\/ psresproof hyps sos T cl')
-  (!c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> spresproof hyps sos c) /\\\n    (!c1 c2 p.\n             spresproof hyps sos c1 /\\\n             (spresproof hyps sos c2 \\/ c2 IN hyps) /\\\n             p IN c1 /\\ ~~p IN c2 /\\\n             ~(tautologous(resolve p c1 c2))\n             ==> spresproof hyps sos (resolve p c1 c2))
+  forall sos hyps cl.\n     (forall c. c IN hyps ==> clause c /\\ ~(tautologous c)) /\\\n     presproof hyps cl /\\ ~(tautologous cl)\n     ==> ?cl'. cl' SUBSET cl /\\\n               (presproof (hyps DIFF sos) cl' \\/ psresproof hyps sos T cl')
+  (forall c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> spresproof hyps sos c) /\\\n    (forall c1 c2 p.\n             spresproof hyps sos c1 /\\\n             (spresproof hyps sos c2 \\/ c2 IN hyps) /\\\n             p IN c1 /\\ ~~p IN c2 /\\\n             ~(tautologous(resolve p c1 c2))\n             ==> spresproof hyps sos (resolve p c1 c2))
   resolve p c1 c2 = resolve (~~p) c2 c1
   s2:bool
   s1:bool
-  !s cl. psresproof hyps sos s cl\n           ==> (if s then spresproof hyps sos cl\n                else cl IN hyps /\\ ~(cl IN sos) /\\ ~(tautologous cl))
+  forall s cl. psresproof hyps sos s cl\n           ==> (if s then spresproof hyps sos cl\n                else cl IN hyps /\\ ~(cl IN sos) /\\ ~(tautologous cl))
   c2:form->bool IN sos
   T
   T
@@ -9804,15 +9804,15 @@ Logic/support quotations (345):
   sos:(form->bool)->bool
   hyps:(form->bool)->bool
   (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-  !hyps sos. (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n              ==> !cl. spresproof hyps sos cl = psresproof hyps sos T cl
+  forall hyps sos. (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n              ==> forall cl. spresproof hyps sos cl = psresproof hyps sos T cl
   T
-  !hyps sos.\n        (!c. c IN hyps ==> clause c /\\ ~(tautologous c))\n        ==> !c. spresproof hyps sos c ==> clause c /\\ ~(tautologous c)
-  !hyps sos.\n        (!c. c IN hyps ==> clause c)\n        ==> !c. spresproof hyps sos c ==> clause c
-  !hyps1 hyps2 sos cl.\n      spresproof hyps1 sos cl /\\ hyps1 SUBSET hyps2\n      ==> spresproof hyps2 sos cl
+  forall hyps sos.\n        (forall c. c IN hyps ==> clause c /\\ ~(tautologous c))\n        ==> forall c. spresproof hyps sos c ==> clause c /\\ ~(tautologous c)
+  forall hyps sos.\n        (forall c. c IN hyps ==> clause c)\n        ==> forall c. spresproof hyps sos c ==> clause c
+  forall hyps1 hyps2 sos cl.\n      spresproof hyps1 sos cl /\\ hyps1 SUBSET hyps2\n      ==> spresproof hyps2 sos cl
   a /\\ b /\\ c ==> d <=> b /\\ c ==> a ==> d
-  !hyps1 hyps2 sos1 sos2 cl.\n      spresproof hyps1 sos1 cl /\\ hyps1 SUBSET hyps2 /\\ sos1 SUBSET sos2\n      ==> spresproof hyps2 sos2 cl
-  !c d. clause c /\\ tautologous c ==> pholds d (interp c)
-  !asm. (!c. c IN asm ==> clause c) /\\ presproof asm {}\n         ==> ~psatisfiable (IMAGE interp asm)
+  forall hyps1 hyps2 sos1 sos2 cl.\n      spresproof hyps1 sos1 cl /\\ hyps1 SUBSET hyps2 /\\ sos1 SUBSET sos2\n      ==> spresproof hyps2 sos2 cl
+  forall c d. clause c /\\ tautologous c ==> pholds d (interp c)
+  forall asm. (forall c. c IN asm ==> clause c) /\\ presproof asm {}\n         ==> ~psatisfiable (IMAGE interp asm)
   (a /\\ b ==> c) <=> b ==> a ==> c
   cl:form->bool
   {}:form->bool
@@ -9830,10 +9830,10 @@ Logic/support quotations (345):
   {}:(form->bool)
   {c | c IN hyps /\\ ~(tautologous c)}
   sos:(form->bool)->bool
-  !hyps sos.\n        (!c. c IN hyps ==> clause c) /\\\n        ~(psatisfiable {interp cl | cl IN hyps}) /\\\n        psatisfiable {interp cl | cl IN (hyps DIFF sos)}\n        ==> spresproof hyps sos {}
-  (!c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> sresproof hyps sos c) /\\\n    (!cl1 cl2 cl2' ps1 ps2 i.\n       sresproof hyps sos cl1 /\\\n       (sresproof hyps sos cl2 \\/ cl2 IN hyps) /\\\n       (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n       ps1 SUBSET cl1 /\\\n       ps2 SUBSET cl2' /\\\n       ~(ps1 = {}) /\\\n       ~(ps2 = {}) /\\\n       (?i. Unifies i (ps1 UNION {~~ p | p IN ps2})) /\\\n       (mgu (ps1 UNION {~~ p | p IN ps2}) = i) /\\\n       ~(tautologous(IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))\n       ==> sresproof hyps sos\n           (IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))
-  !hyps sos.\n     (!c. c IN hyps ==> clause c)\n     ==> !c. sresproof hyps sos c ==> clause c
-  (!c. c IN s ==> clause c)\n   ==> !d. d psatisfies {formsubst v p | prop v /\\ p IN IMAGE interp s} <=>\n           d psatisfies {interp cl | cl IN\n                       {IMAGE (formsubst v) c | prop v /\\ c IN s}}
+  forall hyps sos.\n        (forall c. c IN hyps ==> clause c) /\\\n        ~(psatisfiable {interp cl | cl IN hyps}) /\\\n        psatisfiable {interp cl | cl IN (hyps DIFF sos)}\n        ==> spresproof hyps sos {}
+  (forall c. c IN hyps /\\ c IN sos /\\ ~(tautologous c)\n         ==> sresproof hyps sos c) /\\\n    (forall cl1 cl2 cl2' ps1 ps2 i.\n       sresproof hyps sos cl1 /\\\n       (sresproof hyps sos cl2 \\/ cl2 IN hyps) /\\\n       (IMAGE (formsubst (rename cl2 (FVS cl1))) cl2 = cl2') /\\\n       ps1 SUBSET cl1 /\\\n       ps2 SUBSET cl2' /\\\n       ~(ps1 = {}) /\\\n       ~(ps2 = {}) /\\\n       (?i. Unifies i (ps1 UNION {~~ p | p IN ps2})) /\\\n       (mgu (ps1 UNION {~~ p | p IN ps2}) = i) /\\\n       ~(tautologous(IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))\n       ==> sresproof hyps sos\n           (IMAGE (formsubst i) (cl1 DIFF ps1 UNION cl2' DIFF ps2)))
+  forall hyps sos.\n     (forall c. c IN hyps ==> clause c)\n     ==> forall c. sresproof hyps sos c ==> clause c
+  (forall c. c IN s ==> clause c)\n   ==> forall d. d psatisfies {formsubst v p | prop v /\\ p IN IMAGE interp s} <=>\n           d psatisfies {interp cl | cl IN\n                       {IMAGE (formsubst v) c | prop v /\\ c IN s}}
   B:form->bool
   {~~l | l IN B1} = IMAGE (~~) B1
   mgu (A1 UNION {~~ l | l IN B1})
@@ -9861,9 +9861,9 @@ Logic/support quotations (345):
   A':form->bool
   (b ==> c) ==> (a ==> b) ==> (a ==> c)
   {}:form->bool
-  !cl0. spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n           {IMAGE (formsubst v) cl | v,cl | cl IN sos} cl0\n           ==> ?cl. sresproof hyps sos cl /\\ cl0 instance_of cl
-  {IMAGE (formsubst v) c | v,c |\n         (!x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN sos}
-  {IMAGE (formsubst v) c | v,c |\n         (!x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN hyps}
+  forall cl0. spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n           {IMAGE (formsubst v) cl | v,cl | cl IN sos} cl0\n           ==> ?cl. sresproof hyps sos cl /\\ cl0 instance_of cl
+  {IMAGE (formsubst v) c | v,c |\n         (forall x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN sos}
+  {IMAGE (formsubst v) c | v,c |\n         (forall x. v x IN herbase(functions(IMAGE interp hyps))) /\\\n         c IN hyps}
   spresproof {IMAGE (formsubst v) cl | v,cl | cl IN hyps}\n               {IMAGE (formsubst v) cl | v,cl | cl IN sos} {}
   (a ==> b) ==> (b ==> c) ==> (a ==> c)
   p:form
@@ -9871,9 +9871,9 @@ Logic/support quotations (345):
   v:num->A
   a /\\ b /\\ c ==> d <=> b ==> a /\\ c ==> d
   IMAGE interp (hyps DIFF sos)
-  ?d. d psatisfies\n          {formsubst v p | v,p |\n               (!x. v x IN herbase (functions (IMAGE interp hyps))) /\\\n               p IN IMAGE interp (hyps DIFF sos)}
+  ?d. d psatisfies\n          {formsubst v p | v,p |\n               (forall x. v x IN herbase (functions (IMAGE interp hyps))) /\\\n               p IN IMAGE interp (hyps DIFF sos)}
   IMAGE interp hyps
-  (!cl. cl IN hyps ==> clause cl) /\\ sos SUBSET hyps /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps)) /\\\n   (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp (hyps DIFF sos)))\n   ==> sresproof hyps sos {}
+  (forall cl. cl IN hyps ==> clause cl) /\\ sos SUBSET hyps /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps)) /\\\n   (?M:(A->bool)#(num->A list->A)#(num->A list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp (hyps DIFF sos)))\n   ==> sresproof hyps sos {}
   cl2:form->bool
   cl1:form->bool
   r:form->bool
@@ -9922,9 +9922,9 @@ Logic/support quotations (345):
   0
   c:form->bool
   a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-  !used unused cl.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) cl\n        ==> clause cl /\\\n            ?n cl'. cl' subsumes cl /\\ cl' IN level(used,unused) n
-  !c. (c subsumes {}) = (c = {})
-  !used unused.\n        (!c. MEM c used ==> clause c) /\\\n        (!c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) {}\n        ==> ?n. {} IN level(used,unused) n
+  forall used unused cl.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) cl\n        ==> clause cl /\\\n            ?n cl'. cl' subsumes cl /\\ cl' IN level(used,unused) n
+  forall c. (c subsumes {}) = (c = {})
+  forall used unused.\n        (forall c. MEM c used ==> clause c) /\\\n        (forall c. MEM c unused ==> clause c) /\\\n        sresproof (set_of_list(used) UNION set_of_list(unused))\n                  (set_of_list unused) {}\n        ==> ?n. {} IN level(used,unused) n
 NEGATE_LITERAL =  |- (#!:fun(fun(form,bool),bool) (\q:form. ((#==>:fun(bool,fun(bool,bool)) (#literal:fun(form,bool) q:form)) (#literal:fun(form,bool) (#~~:fun(form,form) q:form)))))
 RESOLVE_CLAUSE =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#!:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). (#!:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) c1:fun(form,bool))) (#clause:fun(fun(form,bool),bool) c2:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) (((#resolve:fun(form,fun(fun(form,bool),fun(fun(form,bool),fun(form,bool)))) p:form) c1:fun(form,bool)) c2:fun(form,bool))))))))))
 PRESPROOF_CLAUSE =  |- (#!:fun(fun(fun(fun(form,bool),bool),bool),bool) (\hyps:fun(fun(form,bool),bool). (#!:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(form,bool),bool),bool) (\c:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c:fun(form,bool)) hyps:fun(fun(form,bool),bool))) (#clause:fun(fun(form,bool),bool) c:fun(form,bool)))))) ((#presproof:fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)) hyps:fun(fun(form,bool),bool)) cl:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool)))))))

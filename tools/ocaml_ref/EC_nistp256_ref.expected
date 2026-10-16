@@ -51691,7 +51691,7 @@ EC/nistp256 quotations (34):
   group_carrier p256_group =\n     weierstrass_curve\n      (integer_mod_ring p_256,ring_neg (integer_mod_ring p_256) (&3),&b_256) /\\\n   group_id p256_group =\n     NONE /\\\n   group_inv p256_group =\n     weierstrass_neg\n      (integer_mod_ring p_256,ring_neg (integer_mod_ring p_256) (&3),&b_256) /\\\n   group_mul p256_group =\n     weierstrass_add\n      (integer_mod_ring p_256,ring_neg (integer_mod_ring p_256) (&3),&b_256)
   x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
   x:int
-  !x:int. ~((x pow 3 - &3 * x + &b_256 == &0) (mod &p_256))
+  forall x:int. ~((x pow 3 - &3 * x + &b_256 == &0) (mod &p_256))
   G_256 IN group_carrier p256_group
   group_element_order p256_group G_256 = n_256
   FINITE(group_carrier p256_group)
@@ -51706,7 +51706,7 @@ EC/nistp256 quotations (34):
   G_256:(int#int)option
   group_carrier p256_group HAS_SIZE n_256
   CARD(group_carrier p256_group) = n_256
-  !P. P IN group_carrier p256_group\n       ==> group_element_order p256_group P =\n           if P = group_id p256_group then 1 else n_256
+  forall P. P IN group_carrier p256_group\n       ==> group_element_order p256_group P =\n           if P = group_id p256_group then 1 else n_256
   subgroup_generated p256_group {G_256} = p256_group
   cyclic_group p256_group
   abelian_group p256_group

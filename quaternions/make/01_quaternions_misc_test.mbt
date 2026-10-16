@@ -73775,16 +73775,16 @@ test "Quaternions/misc matches Quaternions/misc.ml" {
       #|Warning: inventing type variables
       #|0..0..1..2..6..11..solved at 17
       #|Quaternions/misc quotations (14):
-      #|  !u v:real^1. u = v <=> u$1 = v$1
-      #|  !u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2
-      #|  !u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3
-      #|  !u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4
+      #|  forall u v:real^1. u = v <=> u$1 = v$1
+      #|  forall u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2
+      #|  forall u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3
+      #|  forall u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4
       #|  j:num
       #|  sum {i} (\\j. (basis i:real^N)$j * (x:real^N)$j)
-      #|  !i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i
-      #|  !x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i
+      #|  forall i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i
+      #|  forall x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i
       #|  a pow 2 = &1 <=> (a - &1) * (a + &1) = &0
-      #|  !x:real^N. norm x pow 2 = &1 <=> norm x = &1
+      #|  forall x:real^N. norm x pow 2 = &1 <=> norm x = &1
       #|  :real
       #|  :real
       #|  :real

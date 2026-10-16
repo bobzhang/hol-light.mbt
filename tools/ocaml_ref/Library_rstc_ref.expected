@@ -5765,123 +5765,123 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..1..solved at 5
 Library/rstc quotations (145):
-  !R:A->A->bool. (!x y. R x y ==> R y x) <=> (!x y. R x y <=> R y x)
-  !(R:A->A->bool) (S:A->A->bool) U.\n        (!x z. (?y. R x y /\\ S y z) ==> U x z) <=>\n        (!x y z. R x y /\\ S y z ==> U x z)
-  (!x y. R x y ==> RC R x y) /\\\n   (!x:A. RC R x x)
-  !(R:A->A->bool) x y. R x y ==> RC R x y
-  !(R:A->A->bool) x. RC R x x
-  !(R:A->A->bool) x y. RC R x y <=> R x y \\/ (x = y)
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n            (!x y. RC R x y ==> RC S x y)
-  !R:A->A->bool. (RC R = R) <=> !x. R x x
-  !R:A->A->bool. RC(RC R) = RC R
-  !R:A->A->bool.\n        (!x y. R x y ==> R y x) ==> (!x y. RC R x y ==> RC R y x)
-  !R:A->A->bool.\n        (!x y z. R x y /\\ R y z ==> R x z) ==>\n        (!x y z. RC R x y /\\ RC R y z ==> RC R x z)
-  (!x y. R x y ==> SC R x y) /\\\n   (!x:A y. SC R x y ==> SC R y x)
-  !(R:A->A->bool) x y. R x y ==> SC R x y
-  !(R:A->A->bool) x y. SC R x y ==> SC R y x
-  !R:A->A->bool. SC(R) x y <=> R x y \\/ R y x
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. SC R x y ==> SC S x y)
-  !R:A->A->bool. (SC R = R) <=> !x y. R x y ==> R y x
-  !R:A->A->bool. SC(SC R) = SC R
-  !R:A->A->bool. (!x. R x x) ==> (!x. SC R x x)
-  (!x y. R x y ==> TC R x y) /\\\n    (!(x:A) y z. TC R x y /\\ TC R y z ==> TC R x z)
-  !(R:A->A->bool) x y. R x y ==> TC R x y
-  !(R:A->A->bool) x y z. TC R x y /\\ TC R y z ==> TC R x z
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. TC R x y ==> TC S x y)
-  !R:A->A->bool. (TC R = R) <=> !x y z. R x y /\\ R y z ==> R x z
-  !R:A->A->bool. TC(TC R) = TC R
-  !R:A->A->bool. (!x. R x x) ==> (!x. TC R x x)
-  !R:A->A->bool. (!x y. R x y ==> R y x) ==> (!x y. TC R x y ==> TC R y x)
-  !R:A->A->bool. RC(SC R) = SC(RC R)
-  !R:A->A->bool. SC(RC R) = RC(SC R)
-  !R:A->A->bool. RC(TC R) = TC(RC R)
-  !R:A->A->bool. TC(RC R) = RC(TC R)
-  !(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y
-  !(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y
-  !(R:A->A->bool) x y z. TC R x y /\\ R y z ==> TC R x z
-  !(R:A->A->bool) x y z. R x y /\\ TC R y z ==> TC R x z
-  !(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. TC R x y /\\ R y z)
-  !(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. R x y /\\ TC R y z)
-  !y:A z. TC(R) y z ==> !x:A. P x y ==> P x z
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x y z. P x y /\\ R y z ==> P x z) ==>\n            (!x y. TC R x y ==> P x y)
-  !x:A y. TC(R) x y ==> !z:A. P y z ==> P x z
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x z. (?y. R x y /\\ P y z) ==> P x z) ==>\n            (!x y. TC R x y ==> P x y)
+  forall R:A->A->bool. (forall x y. R x y ==> R y x) <=> (forall x y. R x y <=> R y x)
+  forall(R:A->A->bool) (S:A->A->bool) U.\n        (forall x z. (?y. R x y /\\ S y z) ==> U x z) <=>\n        (forall x y z. R x y /\\ S y z ==> U x z)
+  (forall x y. R x y ==> RC R x y) /\\\n   (forall x:A. RC R x x)
+  forall(R:A->A->bool) x y. R x y ==> RC R x y
+  forall(R:A->A->bool) x. RC R x x
+  forall(R:A->A->bool) x y. RC R x y <=> R x y \\/ (x = y)
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n            (forall x y. RC R x y ==> RC S x y)
+  forall R:A->A->bool. (RC R = R) <=> forall x. R x x
+  forall R:A->A->bool. RC(RC R) = RC R
+  forall R:A->A->bool.\n        (forall x y. R x y ==> R y x) ==> (forall x y. RC R x y ==> RC R y x)
+  forall R:A->A->bool.\n        (forall x y z. R x y /\\ R y z ==> R x z) ==>\n        (forall x y z. RC R x y /\\ RC R y z ==> RC R x z)
+  (forall x y. R x y ==> SC R x y) /\\\n   (forall x:A y. SC R x y ==> SC R y x)
+  forall(R:A->A->bool) x y. R x y ==> SC R x y
+  forall(R:A->A->bool) x y. SC R x y ==> SC R y x
+  forall R:A->A->bool. SC(R) x y <=> R x y \\/ R y x
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. SC R x y ==> SC S x y)
+  forall R:A->A->bool. (SC R = R) <=> forall x y. R x y ==> R y x
+  forall R:A->A->bool. SC(SC R) = SC R
+  forall R:A->A->bool. (forall x. R x x) ==> (forall x. SC R x x)
+  (forall x y. R x y ==> TC R x y) /\\\n    (forall(x:A) y z. TC R x y /\\ TC R y z ==> TC R x z)
+  forall(R:A->A->bool) x y. R x y ==> TC R x y
+  forall(R:A->A->bool) x y z. TC R x y /\\ TC R y z ==> TC R x z
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. TC R x y ==> TC S x y)
+  forall R:A->A->bool. (TC R = R) <=> forall x y z. R x y /\\ R y z ==> R x z
+  forall R:A->A->bool. TC(TC R) = TC R
+  forall R:A->A->bool. (forall x. R x x) ==> (forall x. TC R x x)
+  forall R:A->A->bool. (forall x y. R x y ==> R y x) ==> (forall x y. TC R x y ==> TC R y x)
+  forall R:A->A->bool. RC(SC R) = SC(RC R)
+  forall R:A->A->bool. SC(RC R) = RC(SC R)
+  forall R:A->A->bool. RC(TC R) = TC(RC R)
+  forall R:A->A->bool. TC(RC R) = RC(TC R)
+  forall(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y
+  forall(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y
+  forall(R:A->A->bool) x y z. TC R x y /\\ R y z ==> TC R x z
+  forall(R:A->A->bool) x y z. R x y /\\ TC R y z ==> TC R x z
+  forall(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. TC R x y /\\ R y z)
+  forall(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. R x y /\\ TC R y z)
+  forall y:A z. TC(R) y z ==> forall x:A. P x y ==> P x z
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x y z. P x y /\\ R y z ==> P x z) ==>\n            (forall x y. TC R x y ==> P x y)
+  forall x:A y. TC(R) x y ==> forall z:A. P y z ==> P x z
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x z. (?y. R x y /\\ P y z) ==> P x z) ==>\n            (forall x y. TC R x y ==> P x y)
   \\y:A. ?z. P z /\\ TC(R) z y
   P:A->bool
-  !R:A->A->bool. WF(TC R) <=> WF(R)
+  forall R:A->A->bool. WF(TC R) <=> WF(R)
   RSC(R:A->A->bool) = RC(SC R)
-  !(R:A->A->bool) x y. R x y ==> RSC R x y
-  !(R:A->A->bool) x. RSC R x x
-  !(R:A->A->bool) x y. RSC R x y ==> RSC R y x
-  !(R:A->A->bool) x y. RSC R x y <=> (x = y) \\/ R x y \\/ R y x
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y. P x y ==> P y x)\n        ==>  !x y. RSC R x y ==> P x y
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RSC R x y ==> RSC S x y)
-  !R:A->A->bool. (RSC R = R) <=> (!x. R x x) /\\ (!x y. R x y ==> R y x)
-  !R:A->A->bool. RSC(RSC R) = RSC R
+  forall(R:A->A->bool) x y. R x y ==> RSC R x y
+  forall(R:A->A->bool) x. RSC R x x
+  forall(R:A->A->bool) x y. RSC R x y ==> RSC R y x
+  forall(R:A->A->bool) x y. RSC R x y <=> (x = y) \\/ R x y \\/ R y x
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y. P x y ==> P y x)\n        ==>  forall x y. RSC R x y ==> P x y
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RSC R x y ==> RSC S x y)
+  forall R:A->A->bool. (RSC R = R) <=> (forall x. R x x) /\\ (forall x y. R x y ==> R y x)
+  forall R:A->A->bool. RSC(RSC R) = RSC R
   RTC(R:A->A->bool) = RC(TC R)
-  !(R:A->A->bool) x y. R x y ==> RTC R x y
-  !(R:A->A->bool) x. RTC R x x
-  !(R:A->A->bool) x y z. RTC R x y /\\ RTC R y z ==> RTC R x z
-  !(R:A->A->bool).\n        (!x y. R x y ==> RTC R x y) /\\\n        (!x. RTC R x x) /\\\n        (!x y z. RTC R x y /\\ RTC R y z ==> RTC R x z)
-  !(R:A->A->bool) x y z. RTC R x y /\\ R y z ==> RTC R x z
-  !(R:A->A->bool) x y z. R x y /\\ RTC R y z ==> RTC R x z
-  !(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ RTC R y z
-  !(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ R y z
-  !(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. R x y /\\ RTC R y z
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y
-  !(R:A->A->bool) P.\n        (!x. P x x) /\\\n        (!x y z. P x y /\\ R y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y
-  !(R:A->A->bool) P.\n        (!x. P x x) /\\\n        (!x y z. R x y /\\ P y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RTC R x y ==> RTC S x y)
-  !R:A->A->bool. (RTC R = R) <=> (!x. R x x) /\\\n                                  (!x y z. R x y /\\ R y z ==> R x z)
-  !R:A->A->bool. RTC(RTC R) = RTC R
-  !R:A->A->bool. (!x y. R x y ==> R y x) ==> (!x y. RTC R x y ==> RTC R y x)
+  forall(R:A->A->bool) x y. R x y ==> RTC R x y
+  forall(R:A->A->bool) x. RTC R x x
+  forall(R:A->A->bool) x y z. RTC R x y /\\ RTC R y z ==> RTC R x z
+  forall(R:A->A->bool).\n        (forall x y. R x y ==> RTC R x y) /\\\n        (forall x. RTC R x x) /\\\n        (forall x y z. RTC R x y /\\ RTC R y z ==> RTC R x z)
+  forall(R:A->A->bool) x y z. RTC R x y /\\ R y z ==> RTC R x z
+  forall(R:A->A->bool) x y z. R x y /\\ RTC R y z ==> RTC R x z
+  forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ RTC R y z
+  forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ R y z
+  forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. R x y /\\ RTC R y z
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y
+  forall(R:A->A->bool) P.\n        (forall x. P x x) /\\\n        (forall x y z. P x y /\\ R y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y
+  forall(R:A->A->bool) P.\n        (forall x. P x x) /\\\n        (forall x y z. R x y /\\ P y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RTC R x y ==> RTC S x y)
+  forall R:A->A->bool. (RTC R = R) <=> (forall x. R x x) /\\\n                                  (forall x y z. R x y /\\ R y z ==> R x z)
+  forall R:A->A->bool. RTC(RTC R) = RTC R
+  forall R:A->A->bool. (forall x y. R x y ==> R y x) ==> (forall x y. RTC R x y ==> RTC R y x)
   RTC R = RTC (\\x y. R x y /\\ ~(x = y))
   TC R x z <=> ?y. RTC R x y /\\ R y z
-  !R x z. TC R x z <=> ?y. R x y /\\ RTC R y z
-  !R x z. TC R x z <=> ?y. TC R x y /\\ RTC R y z
-  !R x z. TC R x z <=> ?y. RTC R x y /\\ TC R y z
-  !R x y. RTC R x y /\\ ~(x = y) ==> TC R x y
+  forall R x z. TC R x z <=> ?y. R x y /\\ RTC R y z
+  forall R x z. TC R x z <=> ?y. TC R x y /\\ RTC R y z
+  forall R x z. TC R x z <=> ?y. RTC R x y /\\ TC R y z
+  forall R x y. RTC R x y /\\ ~(x = y) ==> TC R x y
   STC(R:A->A->bool) = TC(SC R)
-  !(R:A->A->bool) x y. R x y ==> STC R x y
-  !(R:A->A->bool) x y. STC R x y ==> STC R y x
-  !(R:A->A->bool) x y z. STC R x y /\\ STC R y z ==> STC R x z
-  !(R:A->A->bool) x y z. STC R x y /\\ R y z ==> STC R x z
-  !(R:A->A->bool) x y z. R x y /\\ STC R y z ==> STC R x z
-  !(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ STC R y z
-  !(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ R y z
-  !(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. R x y /\\ STC R y z
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x y. P x y ==> P y x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z) ==>\n                !x y. STC R x y ==> P x y
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. STC R x y ==> STC S x y)
-  !R:A->A->bool. (STC R = R) <=> (!x y. R x y ==> R y x) /\\\n                                  (!x y z. R x y /\\ R y z ==> R x z)
-  !R:A->A->bool. STC(STC R) = STC R
-  !R:A->A->bool. (!x. R x x) ==> !x. STC R x x
+  forall(R:A->A->bool) x y. R x y ==> STC R x y
+  forall(R:A->A->bool) x y. STC R x y ==> STC R y x
+  forall(R:A->A->bool) x y z. STC R x y /\\ STC R y z ==> STC R x z
+  forall(R:A->A->bool) x y z. STC R x y /\\ R y z ==> STC R x z
+  forall(R:A->A->bool) x y z. R x y /\\ STC R y z ==> STC R x z
+  forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ STC R y z
+  forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ R y z
+  forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. R x y /\\ STC R y z
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x y. P x y ==> P y x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z) ==>\n                forall x y. STC R x y ==> P x y
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. STC R x y ==> STC S x y)
+  forall R:A->A->bool. (STC R = R) <=> (forall x y. R x y ==> R y x) /\\\n                                  (forall x y z. R x y /\\ R y z ==> R x z)
+  forall R:A->A->bool. STC(STC R) = STC R
+  forall R:A->A->bool. (forall x. R x x) ==> forall x. STC R x x
   RSTC(R:A->A->bool) = RC(TC(SC R))
-  !(R:A->A->bool) x y. R x y ==> RSTC R x y
-  !(R:A->A->bool) x. RSTC R x x
-  !(R:A->A->bool) x y. RSTC R x y ==> RSTC R y x
-  !(R:A->A->bool) x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z
-  !(R:A->A->bool).\n        (!x y. R x y ==> RSTC R x y) /\\\n        (!x. RSTC R x x) /\\\n        (!x y. RSTC R x y ==> RSTC R y x) /\\\n        (!x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z)
-  !(R:A->A->bool) x y z. RSTC R x y /\\ R y z ==> RSTC R x z
-  !(R:A->A->bool) x y z. R x y /\\ RSTC R y z ==> RSTC R x z
-  !(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. RSTC R x y /\\ RSTC R y z
-  !(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                     ?y. RSTC R x y /\\ R y z
-  !(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. R x y /\\ RSTC R y z
-  !(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y. P x y ==> P y x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z)\n        ==> !x y. RSTC R x y ==> P x y
-  !(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RSTC R x y ==> RSTC S x y)
-  !R:A->A->bool. (RSTC R = R) <=> (!x. R x x) /\\\n                                   (!x y. R x y ==> R y x) /\\\n                                   (!x y z. R x y /\\ R y z ==> R x z)
-  !R:A->A->bool. RSTC(RSTC R) = RSTC R
-  !R:A->A->bool. !x y. RC R x y ==> RSC R x y
-  !R:A->A->bool. !x y. SC R x y ==> RSC R x y
-  !R:A->A->bool. !x y. RC R x y ==> RTC R x y
-  !R:A->A->bool. !x y. TC R x y ==> RTC R x y
-  !R:A->A->bool. !x y. SC R x y ==> STC R x y
-  !R:A->A->bool. !x y. TC R x y ==> STC R x y
-  !R:A->A->bool. !x y. RC R x y ==> RSTC R x y
-  !R:A->A->bool. !x y. SC R x y ==> RSTC R x y
-  !R:A->A->bool. !x y. TC R x y ==> RSTC R x y
-  !R:A->A->bool. !x y. RSC R x y ==> RSTC R x y
-  !R:A->A->bool. !x y. RTC R x y ==> RSTC R x y
-  !R:A->A->bool. !x y. STC R x y ==> RSTC R x y
+  forall(R:A->A->bool) x y. R x y ==> RSTC R x y
+  forall(R:A->A->bool) x. RSTC R x x
+  forall(R:A->A->bool) x y. RSTC R x y ==> RSTC R y x
+  forall(R:A->A->bool) x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z
+  forall(R:A->A->bool).\n        (forall x y. R x y ==> RSTC R x y) /\\\n        (forall x. RSTC R x x) /\\\n        (forall x y. RSTC R x y ==> RSTC R y x) /\\\n        (forall x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z)
+  forall(R:A->A->bool) x y z. RSTC R x y /\\ R y z ==> RSTC R x z
+  forall(R:A->A->bool) x y z. R x y /\\ RSTC R y z ==> RSTC R x z
+  forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. RSTC R x y /\\ RSTC R y z
+  forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                     ?y. RSTC R x y /\\ R y z
+  forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. R x y /\\ RSTC R y z
+  forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y. P x y ==> P y x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z)\n        ==> forall x y. RSTC R x y ==> P x y
+  forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RSTC R x y ==> RSTC S x y)
+  forall R:A->A->bool. (RSTC R = R) <=> (forall x. R x x) /\\\n                                   (forall x y. R x y ==> R y x) /\\\n                                   (forall x y z. R x y /\\ R y z ==> R x z)
+  forall R:A->A->bool. RSTC(RSTC R) = RSTC R
+  forall R:A->A->bool. forall x y. RC R x y ==> RSC R x y
+  forall R:A->A->bool. forall x y. SC R x y ==> RSC R x y
+  forall R:A->A->bool. forall x y. RC R x y ==> RTC R x y
+  forall R:A->A->bool. forall x y. TC R x y ==> RTC R x y
+  forall R:A->A->bool. forall x y. SC R x y ==> STC R x y
+  forall R:A->A->bool. forall x y. TC R x y ==> STC R x y
+  forall R:A->A->bool. forall x y. RC R x y ==> RSTC R x y
+  forall R:A->A->bool. forall x y. SC R x y ==> RSTC R x y
+  forall R:A->A->bool. forall x y. TC R x y ==> RSTC R x y
+  forall R:A->A->bool. forall x y. RSC R x y ==> RSTC R x y
+  forall R:A->A->bool. forall x y. RTC R x y ==> RSTC R x y
+  forall R:A->A->bool. forall x y. STC R x y ==> RSTC R x y
   INV R (x:A) (y:B) <=> R y x
   RC(INV R) = INV(RC R)
   SC(INV R) = INV(SC R)
@@ -5896,11 +5896,11 @@ Library/rstc quotations (145):
   y:A
   x:A
   (RELPOW 0 (R:A->A->bool) x y <=> (x = y)) /\\\n   (RELPOW (SUC n) R x y <=> ?z. R x z /\\ RELPOW n R z y)
-  !m n x:A y. RELPOW (m + n) R x y <=> ?z. RELPOW m R x z /\\ RELPOW n R z y
+  forall m n x:A y. RELPOW (m + n) R x y <=> ?z. RELPOW m R x z /\\ RELPOW n R z y
   y:A
   y:A
-  !R (x:A) y. RTC R x y <=> ?n. RELPOW n R x y
-  !R (x:A) y. TC R x y <=> ?n. RELPOW (SUC n) R x y
+  forall R (x:A) y. RTC R x y <=> ?n. RELPOW n R x y
+  forall R (x:A) y. TC R x y <=> ?n. RELPOW (SUC n) R x y
   f:num->A
   (f:num->A) n
   ~(SUC n <= n)
@@ -5909,7 +5909,7 @@ Library/rstc quotations (145):
   \\i. if i = 0 then x else y:A
   (n = 0) \\/ 0 < n
   \\n:num. y:A
-  !R n x y. RELPOW n R x y <=> ?f. (f(0) = x:A) /\\ (f(n) = y) /\\\n                                    !i. i < n ==> R (f i) (f(SUC i))
+  forall R n x y. RELPOW n R x y <=> ?f. (f(0) = x:A) /\\ (f(n) = y) /\\\n                                    forall i. i < n ==> R (f i) (f(SUC i))
 SYM_ALT =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#=:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A)))))))))
 TRANS_ALT =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\S:fun('A,fun('A,bool)). (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\U:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((S:fun('A,fun('A,bool)) y:'A) z:'A))))) ((U:fun('A,fun('A,bool)) x:'A) z:'A))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. (#!:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((S:fun('A,fun('A,bool)) y:'A) z:'A))) ((U:fun('A,fun('A,bool)) x:'A) z:'A)))))))))))))))
 RC_RULES =  |- (#!:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) (((#RC:fun(fun('A,fun('A,bool)),fun('A,fun('A,bool))) R:fun('A,fun('A,bool))) x:'A) y:'A))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (((#RC:fun(fun('A,fun('A,bool)),fun('A,fun('A,bool))) R:fun('A,fun('A,bool))) x:'A) x:'A))))))

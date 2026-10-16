@@ -3119,10 +3119,10 @@ test "int matches int.ml" {
       #|  integer(x) <=> ?n. x = &n \\/ x = -- &n
       #|  &0
       #|  ?x. integer x
-      #|  !i. ?n. (real_of_int i = &n) \\/ (real_of_int i = --(&n))
-      #|  !x. integer(real_of_int x)
+      #|  forall i. ?n. (real_of_int i = &n) \\/ (real_of_int i = --(&n))
+      #|  forall x. integer(real_of_int x)
       #|  int_of_real
-      #|  !x y. (x = y) <=> (real_of_int x = real_of_int y)
+      #|  forall x y. (x = y) <=> (real_of_int x = real_of_int y)
       #|  int_of_num:num->int
       #|  int_min:int->int->int
       #|  int_max:int->int->int
@@ -3141,10 +3141,10 @@ test "int matches int.ml" {
       #|  x >= y <=> (real_of_int x) >= (real_of_int y)
       #|  x > y <=> (real_of_int x) > (real_of_int y)
       #|  &n = int_of_real(real_of_num n)
-      #|  !n. real_of_int(int_of_num n) = real_of_num n
+      #|  forall n. real_of_int(int_of_num n) = real_of_num n
       #|  --i = int_of_real(--(real_of_int i))
       #|  x:int
-      #|  !x. real_of_int(int_neg x) = --(real_of_int x)
+      #|  forall x. real_of_int(int_neg x) = --(real_of_int x)
       #|  x + y = int_of_real((real_of_int x) + (real_of_int y))
       #|  d:num
       #|  d:num
@@ -3154,99 +3154,99 @@ test "int matches int.ml" {
       #|  n:num
       #|  x:int
       #|  m:num
-      #|  !x y. real_of_int(x + y) = (real_of_int x) + (real_of_int y)
+      #|  forall x y. real_of_int(x + y) = (real_of_int x) + (real_of_int y)
       #|  x - y = int_of_real(real_of_int x - real_of_int y)
-      #|  !x y. real_of_int(x - y) = (real_of_int x) - (real_of_int y)
+      #|  forall x y. real_of_int(x - y) = (real_of_int x) - (real_of_int y)
       #|  x * y = int_of_real ((real_of_int x) * (real_of_int y))
       #|  y:int
       #|  n:num
       #|  x:int
       #|  m:num
-      #|  !x y. real_of_int(x * y) = (real_of_int x) * (real_of_int y)
+      #|  forall x y. real_of_int(x * y) = (real_of_int x) * (real_of_int y)
       #|  abs x = int_of_real(abs(real_of_int x))
-      #|  !x. real_of_int(abs x) = abs(real_of_int x)
+      #|  forall x. real_of_int(abs x) = abs(real_of_int x)
       #|  int_sgn x = int_of_real(real_sgn(real_of_int x))
-      #|  !x. real_of_int(int_sgn x) = real_sgn(real_of_int x)
+      #|  forall x. real_of_int(int_sgn x) = real_sgn(real_of_int x)
       #|  int_max x y = int_of_real(max (real_of_int x) (real_of_int y))
-      #|  !x y. real_of_int(max x y) = max (real_of_int x) (real_of_int y)
+      #|  forall x y. real_of_int(max x y) = max (real_of_int x) (real_of_int y)
       #|  int_min x y = int_of_real(min (real_of_int x) (real_of_int y))
-      #|  !x y. real_of_int(min x y) = min (real_of_int x) (real_of_int y)
+      #|  forall x y. real_of_int(min x y) = min (real_of_int x) (real_of_int y)
       #|  x pow n = int_of_real((real_of_int x) pow n)
-      #|  !x n. real_of_int(x pow n) = (real_of_int x) pow n
-      #|  (!x y. real_of_int x = real_of_int y <=> x = y) /\\\n   (!x y. real_of_int x >= real_of_int y <=> x >= y) /\\\n   (!x y. real_of_int x > real_of_int y <=> x > y) /\\\n   (!x y. real_of_int x <= real_of_int y <=> x <= y) /\\\n   (!x y. real_of_int x < real_of_int y <=> x < y) /\\\n   (!x y. max (real_of_int x) (real_of_int y) = real_of_int(max x y)) /\\\n   (!x y. min (real_of_int x) (real_of_int y) = real_of_int(min x y)) /\\\n   (!n. &n = real_of_int(&n)) /\\\n   (!x. --real_of_int x = real_of_int(--x)) /\\\n   (!x. abs(real_of_int x) = real_of_int(abs x)) /\\\n   (!x y. max (real_of_int x) (real_of_int y) = real_of_int(max x y)) /\\\n   (!x y. min (real_of_int x) (real_of_int y) = real_of_int(min x y)) /\\\n   (!x. real_sgn (real_of_int x) = real_of_int(int_sgn x)) /\\\n   (!x y. real_of_int x + real_of_int y = real_of_int(x + y)) /\\\n   (!x y. real_of_int x - real_of_int y = real_of_int(x - y)) /\\\n   (!x y. real_of_int x * real_of_int y = real_of_int(x * y)) /\\\n   (!x n. real_of_int x pow n = real_of_int(x pow n))
+      #|  forall x n. real_of_int(x pow n) = (real_of_int x) pow n
+      #|  (forall x y. real_of_int x = real_of_int y <=> x = y) /\\\n   (forall x y. real_of_int x >= real_of_int y <=> x >= y) /\\\n   (forall x y. real_of_int x > real_of_int y <=> x > y) /\\\n   (forall x y. real_of_int x <= real_of_int y <=> x <= y) /\\\n   (forall x y. real_of_int x < real_of_int y <=> x < y) /\\\n   (forall x y. max (real_of_int x) (real_of_int y) = real_of_int(max x y)) /\\\n   (forall x y. min (real_of_int x) (real_of_int y) = real_of_int(min x y)) /\\\n   (forall n. &n = real_of_int(&n)) /\\\n   (forall x. --real_of_int x = real_of_int(--x)) /\\\n   (forall x. abs(real_of_int x) = real_of_int(abs x)) /\\\n   (forall x y. max (real_of_int x) (real_of_int y) = real_of_int(max x y)) /\\\n   (forall x y. min (real_of_int x) (real_of_int y) = real_of_int(min x y)) /\\\n   (forall x. real_sgn (real_of_int x) = real_of_int(int_sgn x)) /\\\n   (forall x y. real_of_int x + real_of_int y = real_of_int(x + y)) /\\\n   (forall x y. real_of_int x - real_of_int y = real_of_int(x - y)) /\\\n   (forall x y. real_of_int x * real_of_int y = real_of_int(x * y)) /\\\n   (forall x n. real_of_int x pow n = real_of_int(x pow n))
       #|  n:num
       #|  int_of_real
       #|  x:int
       #|  n:num
-      #|  !x. (?n. x = &n) \\/ (?n. x = --(&n))
-      #|  !P:int->bool. (!x. P x) <=> (!n. P(&n)) /\\ (!n. P(-- &n))
-      #|  !P:int->bool. (?x. P x) <=> (?n. P(&n)) \\/ (?n. P(-- &n))
+      #|  forall x. (?n. x = &n) \\/ (?n. x = --(&n))
+      #|  forall P:int->bool. (forall x. P x) <=> (forall n. P(&n)) /\\ (forall n. P(-- &n))
+      #|  forall P:int->bool. (?x. P x) <=> (?n. P(&n)) \\/ (?n. P(-- &n))
       #|  SUC 0
       #|  y:int
       #|  n:num
       #|  x:int
       #|  m:num
-      #|  !x y. x < y <=> (x + &1) <= y
-      #|  !x y. x > y <=> x >= (y + &1)
+      #|  forall x y. x < y <=> (x + &1) <= y
+      #|  forall x y. x > y <=> x >= (y + &1)
       #|  int_of_num
       #|  int_neg
       #|  real_of_int
       #|  :real
       #|  :int
       #|  real_of_int(if b then x else y) =\n       if b then real_of_int x else real_of_int y
-      #|  (!x y:int. P x y <=> P y x) /\\ (!x y. x <= y ==> P x y) ==> !x y. P x y
-      #|  (!x:int. P x x) /\\ (!x y. P x y <=> P y x) /\\ (!x y. x < y ==> P x y)\n   ==> !x y. P x y
-      #|  !P. (!x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (!x y z:int. x <= y /\\ y <= z ==> P x y z)\n       ==> !x y z. P x y z
+      #|  (forall x y:int. P x y <=> P y x) /\\ (forall x y. x <= y ==> P x y) ==> forall x y. P x y
+      #|  (forall x:int. P x x) /\\ (forall x y. P x y <=> P y x) /\\ (forall x y. x < y ==> P x y)\n   ==> forall x y. P x y
+      #|  forall P. (forall x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (forall x y z:int. x <= y /\\ y <= z ==> P x y z)\n       ==> forall x y z. P x y z
       #|  i:int
-      #|  !P. (!n. P(&n)) <=> (!i:int. &0 <= i ==> P(i))
+      #|  forall P. (forall n. P(&n)) <=> (forall i:int. &0 <= i ==> P(i))
       #|  (p <=> q) <=> (~p <=> ~q)
-      #|  !P. (?n. P(&n)) <=> (?i:int. &0 <= i /\\ P(i))
-      #|  !P. (!n. P(&n)) <=> (!x:int. P(abs x))
+      #|  forall P. (?n. P(&n)) <=> (?i:int. &0 <= i /\\ P(i))
+      #|  forall P. (forall n. P(&n)) <=> (forall x:int. P(abs x))
       #|  (p <=> q) <=> (~p <=> ~q)
-      #|  !P. (?n. P(&n)) <=> (?x:int. P(abs x))
-      #|  (x pow 0 = &1) /\\\n   (!n. x pow (SUC n) = x * x pow n)
+      #|  forall P. (?n. P(&n)) <=> (?x:int. P(abs x))
+      #|  (x pow 0 = &1) /\\\n   (forall n. x pow (SUC n) = x * x pow n)
       #|  x:real
-      #|  !x. abs(x) = if &0 <= x then x else --x
-      #|  !x y. x >= y <=> y <= x
-      #|  !x y. x > y <=> y < x
-      #|  !x y. x < y <=> ~(y <= x)
+      #|  forall x. abs(x) = if &0 <= x then x else --x
+      #|  forall x y. x >= y <=> y <= x
+      #|  forall x y. x > y <=> y < x
+      #|  forall x y. x < y <=> ~(y <= x)
       #|  (~(x:int <= y) <=> y + &1 <= x) /\\\n        (~(x < y) <=> y <= x) /\\\n        (~(x = y) <=> x + &1 <= y \\/ y + &1 <= x) /\\\n        (x < y <=> x + &1 <= y)
       #|  (\\/)
       #|  p:bool
       #|  (~)
-      #|  !x y. x - y = x + --y
-      #|  !x y. max x y = if x <= y then y else x
-      #|  !x y. min x y = if x <= y then x else y
+      #|  forall x y. x - y = x + --y
+      #|  forall x y. max x y = if x <= y then y else x
+      #|  forall x y. min x y = if x <= y then x else y
       #|  x:int
-      #|  !x:int. (?n. x = &n) <=> &0 <= x
-      #|  !x y:int. x <= y <=> x < y + &1
-      #|  !x y:int. x <= y <=> (!z. y <= z ==> x <= z)
+      #|  forall x:int. (?n. x = &n) <=> &0 <= x
+      #|  forall x y:int. x <= y <=> x < y + &1
+      #|  forall x y:int. x <= y <=> (forall z. y <= z ==> x <= z)
       #|  y + &1:int
-      #|  !x y:int. x <= y <=> (!z. y < z ==> x < z)
+      #|  forall x y:int. x <= y <=> (forall z. y < z ==> x < z)
       #|  ~(&n:int = -- &1)
       #|  ~(--(&n:int) = &1)
       #|  y:int
       #|  x:int
-      #|  !x y:int. x * y = &1 <=> x = &1 /\\ y = &1 \\/ x = --(&1) /\\ y = --(&1)
+      #|  forall x y:int. x * y = &1 <=> x = &1 /\\ y = &1 \\/ x = --(&1) /\\ y = --(&1)
       #|  a:int
       #|  abs(x)
       #|  x:int
       #|  b:int
       #|  abs(y)
       #|  y:int
-      #|  !x y. abs(x * y) = &1 <=> abs(x) = &1 /\\ abs(y) = &1
-      #|  (?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)
-      #|  (?x. &0 <= x /\\ P x) <=>\n   (?x. &0 <= x /\\ P x /\\ !y. &0 <= y /\\ P y ==> x <= y)
+      #|  forall x y. abs(x * y) = &1 <=> abs(x) = &1 /\\ abs(y) = &1
+      #|  (?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)
+      #|  (?x. &0 <= x /\\ P x) <=>\n   (?x. &0 <= x /\\ P x /\\ forall y. &0 <= y /\\ P y ==> x <= y)
       #|  ~(d = &0) ==> &0 < d \\/ &0 < --d
       #|  --x * y = x * --y
       #|  ~(d = &0) ==> &0 < d \\/ &0 < --d
       #|  --x * y = x * --y
-      #|  !x d. ~(d = &0) ==> ?c. x < c * d
+      #|  forall x d. ~(d = &0) ==> ?c. x < c * d
       #|  x + &1 <= &n /\\ &n * &1 <= &n * d ==> x + &1 <= &n * d
-      #|  !x d. &0 < d ==> ?c. x < c * d
-      #|  !x. ?n. x <= &n
-      #|  !x. &0 <= x ==> ?n. x <= &n
-      #|  !x d. ~(d = &0) ==> ?c. x < c * d
+      #|  forall x d. &0 < d ==> ?c. x < c * d
+      #|  forall x. ?n. x <= &n
+      #|  forall x. &0 <= x ==> ?n. x <= &n
+      #|  forall x d. ~(d = &0) ==> ?c. x < c * d
       #|  if &0 <= n then q + &1 else q - &1
       #|  r - abs n
       #|  q:int
@@ -3257,20 +3257,20 @@ test "int matches int.ml" {
       #|  --m:int
       #|  ?r. &0 <= r /\\ ?q:int. m = n * q + r
       #|  n = &0
-      #|  !m n:int. ?q r. if n = &0 then q = &0 /\\ r = m\n                   else &0 <= r /\\ r < abs(n) /\\ m = q * n + r
-      #|  !m n. ~(n = &0)\n         ==> m = m div n * n + m rem n /\\ &0 <= m rem n /\\ m rem n < abs n
-      #|  !m n. m div n * n + m rem n = m
-      #|  !a b. ~(b = &0) ==> &0 <= a rem b
-      #|  !m. m div &0 = &0
-      #|  !m. m rem &0 = m
+      #|  forall m n:int. ?q r. if n = &0 then q = &0 /\\ r = m\n                   else &0 <= r /\\ r < abs(n) /\\ m = q * n + r
+      #|  forall m n. ~(n = &0)\n         ==> m = m div n * n + m rem n /\\ &0 <= m rem n /\\ m rem n < abs n
+      #|  forall m n. m div n * n + m rem n = m
+      #|  forall a b. ~(b = &0) ==> &0 <= a rem b
+      #|  forall m. m div &0 = &0
+      #|  forall m. m rem &0 = m
       #|  n:int = &0
-      #|  !m n. &0 <= m rem n <=> n = &0 ==> &0 <= m
+      #|  forall m n. &0 <= m rem n <=> n = &0 ==> &0 <= m
       #|  a:int = b - c <=> c + a = b
-      #|  !m n. m rem n = m - m div n * n
+      #|  forall m n. m rem n = m - m div n * n
       #|  &0:int < n ==> abs n = n
-      #|  !x n. &0 < n ==> x rem n < n
+      #|  forall x n. &0 < n ==> x rem n < n
       #|  n:int = &0
-      #|  !m n. m rem n < n <=> &0 < n \\/ n = &0 /\\ m < &0
+      #|  forall m n. m rem n < n <=> &0 < n \\/ n = &0 /\\ m < &0
       #|  (F /\\ F <=> F) /\\ (F /\\ T <=> F) /\\\n          (T /\\ F <=> F) /\\ (T /\\ T <=> T)
       #|  (~T <=> F) /\\ (~F <=> T)
       #|  (--(&m) <= &n <=> T) /\\\n     (&m <= &n <=> m <= n) /\\\n     (--(&m) <= --(&n) <=> n <= m) /\\\n     (&m <= --(&n) <=> (m = 0) /\\ (n = 0))
@@ -3293,13 +3293,13 @@ test "int matches int.ml" {
       #|  ((if T then x:int else y) = x) /\\ ((if F then x:int else y) = y)
       #|  (--)
       #|  (abs(--(&x)) = &x) /\\\n     (abs(&x) = &x)
-      #|  (!x y z. x + (y + z) = (x + y) + z) /\\\n     (!x y. x + y = y + x) /\\\n     (!x. &0 + x = x) /\\\n     (!x y z. x * (y * z) = (x * y) * z) /\\\n     (!x y. x * y = y * x) /\\\n     (!x. &1 * x = x) /\\\n     (!x. &0 * x = &0) /\\\n     (!x y z. x * (y + z) = x * y + x * z) /\\\n     (!x. x pow 0 = &1) /\\\n     (!x n. x pow (SUC n) = x * x pow n)
-      #|  (!x. --x = --(&1) * x) /\\\n     (!x y. x - y = x + --(&1) * y)
+      #|  (forall x y z. x + (y + z) = (x + y) + z) /\\\n     (forall x y. x + y = y + x) /\\\n     (forall x. &0 + x = x) /\\\n     (forall x y z. x * (y * z) = (x * y) * z) /\\\n     (forall x y. x * y = y * x) /\\\n     (forall x. &1 * x = x) /\\\n     (forall x. &0 * x = &0) /\\\n     (forall x y z. x * (y + z) = x * y + x * z) /\\\n     (forall x. x pow 0 = &1) /\\\n     (forall x n. x pow (SUC n) = x * x pow n)
+      #|  (forall x. --x = --(&1) * x) /\\\n     (forall x y. x - y = x + --(&1) * y)
       #|  p:num
       #|  q:num
       #|  0
       #|  1
-      #|  (!x. &0 * x = &0) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+      #|  (forall x. &0 * x = &0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
       #|  :int
       #|  (pow):int->num->int
       #|  (*):int->int->int
@@ -3318,15 +3318,15 @@ test "int matches int.ml" {
       #|  a divides b <=> ?x:int. b = a * x
       #|  x:int <= x * y <=> &0 <= x * (y - &1)
       #|  p \\/ q \\/ r <=> ~q /\\ ~r ==> p
-      #|  !x y:int. x divides y ==> abs(x) <= abs(y) \\/ y = &0
+      #|  forall x y:int. x divides y ==> abs(x) <= abs(y) \\/ y = &0
       #|  int_mod:int->int->int->bool
       #|  (mod n) x y = n divides (x - y)
-      #|  !x y n. (x == y) (mod n) <=> ?d. x - y = n * d
-      #|  !x y n:int. abs(x - y) < n /\\ (x == y) (mod n) ==> x = y
+      #|  forall x y n. (x == y) (mod n) <=> ?d. x - y = n * d
+      #|  forall x y n:int. abs(x - y) < n /\\ (x == y) (mod n) ==> x = y
       #|  int_coprime:int#int->bool
-      #|  !a b. coprime(a,b) <=> ?x y. a * x + b * y = &1
+      #|  forall a b. coprime(a,b) <=> ?x y. a * x + b * y = &1
       #|  :int
-      #|  !a x. a = &0 <=> x = x + a
+      #|  forall a x. a = &0 <=> x = x + a
       #|  &0
       #|  &1
       #|  (int_mul)
@@ -3340,20 +3340,20 @@ test "int matches int.ml" {
       #|  m div n = q
       #|  m:int
       #|  ~(n = &0)
-      #|  !m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m div n = q /\\ m rem n = r
-      #|  !m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m div n = q
-      #|  !m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m rem n = r
+      #|  forall m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m div n = q /\\ m rem n = r
+      #|  forall m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m div n = q
+      #|  forall m n q r. m = q * n + r /\\ &0 <= r /\\ r < abs n\n             ==> m rem n = r
       #|  (p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r
       #|  n:int = &0
-      #|  (!m n. (~(n = &0) ==> &0 <= m) /\\ m < n ==> m div n = &0) /\\\n   (!m n. (~(n = &0) ==> &0 <= m) /\\ m < n ==> m rem n = m)
+      #|  (forall m n. (~(n = &0) ==> &0 <= m) /\\ m < n ==> m div n = &0) /\\\n   (forall m n. (~(n = &0) ==> &0 <= m) /\\ m < n ==> m rem n = m)
       #|  n:int
       #|  m:int
       #|  n:int = &0
-      #|  (!m n. m div (--n) = --(m div n)) /\\\n   (!m n. m rem (--n) = m rem n)
-      #|  !x y. x rem (abs y) = x rem y
+      #|  (forall m n. m div (--n) = --(m div n)) /\\\n   (forall m n. m rem (--n) = m rem n)
+      #|  forall x y. x rem (abs y) = x rem y
       #|  &0:int
       #|  n:int = &0
-      #|  !m n. (m rem n) rem n = m rem n
+      #|  forall m n. (m rem n) rem n = m rem n
       #|  p:int
       #|  n:int
       #|  n div p + d
@@ -3364,48 +3364,48 @@ test "int matches int.ml" {
       #|  p:int
       #|  m:int
       #|  m div p - n div p
-      #|  !m n p. m rem p = n rem p <=> (m == n) (mod p)
+      #|  forall m n p. m rem p = n rem p <=> (m == n) (mod p)
       #|  n:int = &0
-      #|  (!n. &0 div n = &0) /\\ (!n. &0 rem n = &0)
+      #|  (forall n. &0 div n = &0) /\\ (forall n. &0 rem n = &0)
       #|  n:int
-      #|  !m n. m rem n = &0 <=> n divides m
+      #|  forall m n. m rem n = &0 <=> n divides m
       #|  n:int
       #|  m:int
-      #|  (!m n. n * m div n = m <=> n divides m) /\\\n   (!m n. m div n * n = m <=> n divides m)
-      #|  !x y n. (x rem n == y) (mod n) <=> (x == y) (mod n)
-      #|  !x y n. (x == y rem n) (mod n) <=> (x == y) (mod n)
-      #|  !m n. (m rem n == m) (mod n)
+      #|  (forall m n. n * m div n = m <=> n divides m) /\\\n   (forall m n. m div n * n = m <=> n divides m)
+      #|  forall x y n. (x rem n == y) (mod n) <=> (x == y) (mod n)
+      #|  forall x y n. (x == y rem n) (mod n) <=> (x == y) (mod n)
+      #|  forall m n. (m rem n == m) (mod n)
       #|  n * p:int
       #|  m:int
       #|  n * p:int
       #|  m:int
-      #|  (!m n p. m rem (n * p) rem n = m rem n) /\\\n   (!m n p. m rem (n * p) rem p = m rem p)
-      #|  !a n:int. ~(n = &0) ==> ?x. &0 <= x /\\ x < abs n /\\ (x == a) (mod n)
+      #|  (forall m n p. m rem (n * p) rem n = m rem n) /\\\n   (forall m n p. m rem (n * p) rem p = m rem p)
+      #|  forall a n:int. ~(n = &0) ==> ?x. &0 <= x /\\ x < abs n /\\ (x == a) (mod n)
       #|  (a:int == b) (mod n) ==> (--a == --b) (mod n)
-      #|  !n p. --(n rem p) rem p = --n rem p
+      #|  forall n p. --(n rem p) rem p = --n rem p
       #|  (x:int == x') (mod n) /\\ (y == y') (mod n)\n    ==> (x + y == x' + y') (mod n)
-      #|  !m n p. (m rem p + n rem p) rem p = (m + n) rem p
+      #|  forall m n p. (m rem p + n rem p) rem p = (m + n) rem p
       #|  (x:int == x') (mod n) /\\ (y == y') (mod n)\n    ==> (x - y == x' - y') (mod n)
-      #|  !m n p. (m rem p - n rem p) rem p = (m - n) rem p
+      #|  forall m n p. (m rem p - n rem p) rem p = (m - n) rem p
       #|  (x:int == x') (mod n) /\\ (y == y') (mod n)\n    ==> (x * y == x' * y') (mod n)
-      #|  !m n p. (m rem p * n rem p) rem p = (m * n) rem p
-      #|  !m n p. ((m rem p) pow n) rem p = (m pow n) rem p
+      #|  forall m n p. (m rem p * n rem p) rem p = (m * n) rem p
+      #|  forall m n p. ((m rem p) pow n) rem p = (m pow n) rem p
       #|  n = 0
-      #|  (!m n. &m div &n = &(m DIV n)) /\\\n   (!m n. &m rem &n = &(m MOD n))
+      #|  (forall m n. &m div &n = &(m DIV n)) /\\\n   (forall m n. &m rem &n = &(m MOD n))
       #|  n:int
-      #|  (!n. n div n = if n = &0 then &0 else &1) /\\\n   (!n. n rem n = &0)
+      #|  (forall n. n div n = if n = &0 then &0 else &1) /\\\n   (forall n. n rem n = &0)
       #|  --m:int = (--x - y) * z + w <=> m = x * z + y * z - w
       #|  m:int
       #|  n:int = &0
       #|  n:int
       #|  m:int
-      #|  (!m n. --m div n =\n          if m rem n = &0 then --(m div n) else --(m div n) - int_sgn n) /\\\n   (!m n. --m rem n =\n          if m rem n = &0 then &0 else abs n - m rem n)
-      #|  !m n. --m div --n = if m rem n = &0 then m div n else m div n + int_sgn n
-      #|  !m n. --m rem --n = if m rem n = &0 then &0 else abs n - m rem n
-      #|  (!n. n div &1 = n) /\\\n   (!n. n rem &1 = &0)
+      #|  (forall m n. --m div n =\n          if m rem n = &0 then --(m div n) else --(m div n) - int_sgn n) /\\\n   (forall m n. --m rem n =\n          if m rem n = &0 then &0 else abs n - m rem n)
+      #|  forall m n. --m div --n = if m rem n = &0 then m div n else m div n + int_sgn n
+      #|  forall m n. --m rem --n = if m rem n = &0 then &0 else abs n - m rem n
+      #|  (forall n. n div &1 = n) /\\\n   (forall n. n rem &1 = &0)
       #|  n:int = &0
       #|  ((p ==> p') /\\ (q ==> q')) /\\ p /\\ q ==> (p /\\ p') /\\ (q /\\ q')
-      #|  ((!m n. ~(n = &0) ==> (m * n) div n = m) /\\\n    (!m n. ~(m = &0) ==> (m * n) div m = n)) /\\\n   ((!m n. (m * n) rem n = &0) /\\\n    (!m n. (m * n) rem m = &0))
+      #|  ((forall m n. ~(n = &0) ==> (m * n) div n = m) /\\\n    (forall m n. ~(m = &0) ==> (m * n) div m = n)) /\\\n   ((forall m n. (m * n) rem n = &0) /\\\n    (forall m n. (m * n) rem m = &0))
       #|  (~(m:int < n * --c) <=> --m < n * c) <=> ~(m = n * --c)
       #|  --a:int <= b <=> ~(a < --b)
       #|  --(q * &n + &0:int) = &n * --q
@@ -3418,69 +3418,69 @@ test "int matches int.ml" {
       #|  p /\\ (p ==> q) ==> p /\\ q
       #|  n:num
       #|  ~(&0:int < -- &n)
-      #|  !a b c. &0 < a ==> (b div a < c <=> b < a * c)
-      #|  !a b c. &0 < a ==> (c <= b div a <=> a * c <= b)
-      #|  !a b c. &0 < a ==> (b div a <= c <=> b < a * (c + &1))
-      #|  !a b c. &0 < a ==> (c < b div a <=> a * (c + &1) <= b)
+      #|  forall a b c. &0 < a ==> (b div a < c <=> b < a * c)
+      #|  forall a b c. &0 < a ==> (c <= b div a <=> a * c <= b)
+      #|  forall a b c. &0 < a ==> (b div a <= c <=> b < a * (c + &1))
+      #|  forall a b c. &0 < a ==> (c < b div a <=> a * (c + &1) <= b)
       #|  &0:int < n /\\ abs m * &1 <= abs m * n\n    ==> n * --abs m <= m /\\ m < n * (abs m + &1)
       #|  m:int
       #|  abs(x:int) <= a <=> --a <= x /\\ x <= a
       #|  n = 0
       #|  n:num
-      #|  !m n. abs(m div n) <= abs m
+      #|  forall m n. abs(m div n) <= abs m
       #|  n * (p - &1) + n:int = n * p
       #|  n * (abs p - &1) + n:int
       #|  p:int = &0
       #|  &0:int < n
       #|  n:int = &0
-      #|  (!m n p. &0 <= n ==> (m div n) div p = m div (n * p)) /\\\n   (!m n p. &0 <= n ==> m rem (n * p) = n * (m div n) rem p + m rem n)
+      #|  (forall m n p. &0 <= n ==> (m div n) div p = m div (n * p)) /\\\n   (forall m n p. &0 <= n ==> m rem (n * p) = n * (m div n) rem p + m rem n)
       #|  n = 0
       #|  n:num
       #|  m:int
-      #|  !m n. m div n = &0 <=> n = &0 \\/ &0 <= m /\\ m < abs n
+      #|  forall m n. m div n = &0 <=> n = &0 \\/ &0 <= m /\\ m < abs n
       #|  m - x:int = m <=> x = &0
-      #|  !m n. m rem n = m <=> n = &0 \\/ &0 <= m /\\ m < abs n
+      #|  forall m n. m rem n = m <=> n = &0 \\/ &0 <= m /\\ m < abs n
       #|  n:int = &0
-      #|  !m n p. m rem n = p <=>\n           (n = &0 /\\ m = p \\/ &0 <= p /\\ p < abs n) /\\ (m == p) (mod n)
+      #|  forall m n p. m rem n = p <=>\n           (n = &0 /\\ m = p \\/ &0 <= p /\\ p < abs n) /\\ (m == p) (mod n)
       #|  m rem n
       #|  n:int = &0
-      #|  !m n p. &0 <= n ==> (m div n) rem p = (m rem (n * p)) div n
+      #|  forall m n p. &0 <= n ==> (m div n) rem p = (m rem (n * p)) div n
       #|  abs n:int
       #|  p:int = &0
-      #|  !m n p. ~(n = &0) /\\ abs n <= abs p ==> m rem n rem p = m rem n
-      #|  !m n. &0 <= m /\\ &0 <= n ==> &0 <= m div n
+      #|  forall m n p. ~(n = &0) /\\ abs n <= abs p ==> m rem n rem p = m rem n
+      #|  forall m n. &0 <= m /\\ &0 <= n ==> &0 <= m div n
       #|  &0:int < x <=> &0 <= x /\\ ~(x = &0)
-      #|  !m n. &0 < n /\\ n <= m ==> &0 < m div n
+      #|  forall m n. &0 < n /\\ n <= m ==> &0 < m div n
       #|  n:int
       #|  m:int
       #|  n:int = &0
-      #|  !m n. m rem n <= m <=> n = &0 \\/ &0 <= m
-      #|  !m n p. (n = &0 \\/ &0 <= m) /\\ m <= p ==> m rem n <= p
-      #|  (!m n p. (m * n + p) rem n = p rem n) /\\\n   (!m n p. (n * m + p) rem n = p rem n) /\\\n   (!m n p. (p + m * n) rem n = p rem n) /\\\n   (!m n p. (p + n * m) rem n = p rem n)
+      #|  forall m n. m rem n <= m <=> n = &0 \\/ &0 <= m
+      #|  forall m n p. (n = &0 \\/ &0 <= m) /\\ m <= p ==> m rem n <= p
+      #|  (forall m n p. (m * n + p) rem n = p rem n) /\\\n   (forall m n p. (n * m + p) rem n = p rem n) /\\\n   (forall m n p. (p + m * n) rem n = p rem n) /\\\n   (forall m n p. (p + n * m) rem n = p rem n)
       #|  n:int
       #|  p:int
       #|  p rem n
-      #|  (!m n p. ~(n = &0) ==> (m * n + p) div n = m + p div n) /\\\n   (!m n p. ~(n = &0) ==> (n * m + p) div n = m + p div n) /\\\n   (!m n p. ~(n = &0) ==> (p + m * n) div n = p div n + m) /\\\n   (!m n p. ~(n = &0) ==> (p + n * m) div n = p div n + m)
+      #|  (forall m n p. ~(n = &0) ==> (m * n + p) div n = m + p div n) /\\\n   (forall m n p. ~(n = &0) ==> (n * m + p) div n = m + p div n) /\\\n   (forall m n p. ~(n = &0) ==> (p + m * n) div n = p div n + m) /\\\n   (forall m n p. ~(n = &0) ==> (p + n * m) div n = p div n + m)
       #|  (a:int == b) (mod(--n)) <=> (a == b) (mod n)
       #|  (--a:int == --b) (mod n) <=> (a == b) (mod n)
-      #|  !a b m n.\n      (a == b) (mod (m * n)) ==> (a div m == b div m) (mod n)
+      #|  forall a b m n.\n      (a == b) (mod (m * n)) ==> (a div m == b div m) (mod n)
       #|  &2:int
       #|  n:int
-      #|  !n. n rem &2 = &0 \\/ n rem &2 = &1
-      #|  (!n. ~(n rem &2 = &0) <=> n rem &2 = &1) /\\\n   (!n. ~(n rem &2 = &1) <=> n rem &2 = &0)
-      #|  (!n. n rem &2 = &0 <=> &2 divides n) /\\\n   (!n. n rem &2 = &1 <=> ~(&2 divides n))
-      #|  !x. x rem &2 = if &2 divides x then &0 else &1
+      #|  forall n. n rem &2 = &0 \\/ n rem &2 = &1
+      #|  (forall n. ~(n rem &2 = &0) <=> n rem &2 = &1) /\\\n   (forall n. ~(n rem &2 = &1) <=> n rem &2 = &0)
+      #|  (forall n. n rem &2 = &0 <=> &2 divides n) /\\\n   (forall n. n rem &2 = &1 <=> ~(&2 divides n))
+      #|  forall x. x rem &2 = if &2 divides x then &0 else &1
       #|  (a:int) divides --x <=> a divides x
-      #|  !x. --x rem &2 = x rem &2
-      #|  !n d. d divides n ==> n div d divides n
+      #|  forall x. --x rem &2 = x rem &2
+      #|  forall n d. d divides n ==> n div d divides n
       #|  a * x:int = n /\\ a * y = n /\\ ~(n = &0) ==> x = y
-      #|  !m n:int. ~(n = &0) /\\ m divides n ==> n div (n div m) = m
+      #|  forall m n:int. ~(n = &0) /\\ m divides n ==> n div (n div m) = m
       #|  e:int = &0
-      #|  !n d e. d divides n /\\ (n = &0 ==> e = &0)\n           ==> (n div d divides e <=> n divides d * e)
+      #|  forall n d e. d divides n /\\ (n = &0 ==> e = &0)\n           ==> (n div d divides e <=> n divides d * e)
       #|  d:int = &0
-      #|  !n d e. d divides n ==> (e divides (n div d) <=> (d * e) divides n)
+      #|  forall n d e. d divides n ==> (e divides (n div d) <=> (d * e) divides n)
       #|  (r ==> p) /\\ (p ==> (q <=> r)) ==> (p /\\ q <=> r)
-      #|  !n d e. d divides n /\\ e divides (n div d) <=> (d * e) divides n
+      #|  forall n d e. d divides n /\\ e divides (n div d) <=> (d * e) divides n
       #|  q * n + r = m ==> &0 <= r ==> r < abs n ==> m div n = q /\\ m rem n = r
       #|  m:int
       #|  n:int
@@ -3508,58 +3508,58 @@ test "int matches int.ml" {
       #|  COND: bool -> A -> A -> A
       #|  n:int
       #|  m:int
-      #|  !m n:int. &2 divides (m + n) <=> (&2 divides m <=> &2 divides n)
+      #|  forall m n:int. &2 divides (m + n) <=> (&2 divides m <=> &2 divides n)
       #|  n:int
       #|  m:int
-      #|  !m n:int. &2 divides (m - n) <=> (&2 divides m <=> &2 divides n)
+      #|  forall m n:int. &2 divides (m - n) <=> (&2 divides m <=> &2 divides n)
       #|  n:int
       #|  m:int
-      #|  !m n:int. &2 divides (m * n) <=> &2 divides m \\/ &2 divides n
-      #|  !n k. &2 divides (n pow k) <=> &2 divides n /\\ ~(k = 0)
+      #|  forall m n:int. &2 divides (m * n) <=> &2 divides m \\/ &2 divides n
+      #|  forall n k. &2 divides (n pow k) <=> &2 divides n /\\ ~(k = 0)
       #|  ((&m pow k) rem &n = &(m EXP k MOD n) /\\\n      (&m pow k) rem (-- &n) = &(m EXP k MOD n)) /\\\n     ((-- &m pow k) rem &n =\n      if EVEN k then &(m EXP k MOD n) else (-- &(m EXP k MOD n)) rem &n) /\\\n     ((-- &m pow k) rem (-- &n) =\n      if EVEN k then &(m EXP k MOD n) else (-- &(m EXP k MOD n)) rem &n)
-      #|  !n x:A. m(x) = &n ==> P(x)
-      #|  !P m. (!x. &0 <= m(x)) /\\ (!x. (!y. m(y) < m(x) ==> P(y)) ==> P(x))\n         ==> !x:A. P(x)
-      #|  !P m. (!x y. &0 <= m x y) /\\\n         (!x y. (!x' y'. m x' y' < m x y ==> P x' y') ==> P x y)\n         ==> !x:A y:B. P x y
+      #|  forall n x:A. m(x) = &n ==> P(x)
+      #|  forall P m. (forall x. &0 <= m(x)) /\\ (forall x. (forall y. m(y) < m(x) ==> P(y)) ==> P(x))\n         ==> forall x:A. P(x)
+      #|  forall P m. (forall x y. &0 <= m x y) /\\\n         (forall x y. (forall x' y'. m x' y' < m x y ==> P x' y') ==> P x y)\n         ==> forall x:A y:B. P x y
       #|  (a = &0 \\/ b = &0) \\/\n    abs(a - b) + abs b < abs a + abs b \\/ abs(a + b) + abs b < abs a + abs b \\/\n    abs a + abs(b - a) < abs a + abs b \\/ abs a + abs(b + a) < abs a + abs b
       #|  d divides d
       #|  d divides &0
       #|  \\x y. abs(x) + abs(y)
-      #|  !a b. ?d. d divides a /\\ d divides b /\\ ?x y. d = a * x + b * y
+      #|  forall a b. ?d. d divides a /\\ d divides b /\\ ?x y. d = a * x + b * y
       #|  a * --x + b * --y = --(a * x + b * y)
       #|  (--d) divides x <=> d divides x
       #|  d:int
       #|  b:int
       #|  a:int
       #|  d:int
-      #|  !a b. ?d. &0 <= d /\\ d divides a /\\ d divides b /\\ ?x y. d = a * x + b * y
+      #|  forall a b. ?d. &0 <= d /\\ d divides a /\\ d divides b /\\ ?x y. d = a * x + b * y
       #|  int_gcd:int#int->int
       #|  int_lcm:int#int->int
       #|  int_lcm(m,n) = if m * n = &0 then &0 else abs(m * n) div gcd(m,n)
-      #|  !d n. abs(d) divides n <=> d divides n
-      #|  !d n. d divides (abs n) <=> d divides n
-      #|  (!d n. abs(d) divides n <=> d divides n) /\\\n   (!d n. d divides (abs n) <=> d divides n)
-      #|  !m n. &0 <= lcm(m,n)
+      #|  forall d n. abs(d) divides n <=> d divides n
+      #|  forall d n. d divides (abs n) <=> d divides n
+      #|  (forall d n. abs(d) divides n <=> d divides n) /\\\n   (forall d n. d divides (abs n) <=> d divides n)
+      #|  forall m n. &0 <= lcm(m,n)
       #|  d divides m ==> d divides (m * n:int) /\\ d divides --(m * n)
-      #|  !m n:int. gcd(m,n) * lcm(m,n) = abs(m * n)
-      #|  !m n:int. lcm(m,n) * gcd(m,n) = abs(m * n)
+      #|  forall m n:int. gcd(m,n) * lcm(m,n) = abs(m * n)
+      #|  forall m n:int. lcm(m,n) * gcd(m,n) = abs(m * n)
       #|  d divides m ==> d divides (m * n:int)
-      #|  !m n d:int. d divides lcm(m,n) <=> d * gcd(m,n) divides m * n
+      #|  forall m n d:int. d divides lcm(m,n) <=> d * gcd(m,n) divides m * n
       #|  n:int
       #|  m:int
       #|  d divides m ==> d divides (m * n:int)
-      #|  !m n d:int. lcm(m,n) divides d <=> m divides d /\\ n divides d
+      #|  forall m n d:int. lcm(m,n) divides d <=> m divides d /\\ n divides d
       #|  n:int
       #|  m:int
-      #|  !m n. m divides lcm(m,n) /\\\n         n divides lcm(m,n) /\\\n         (!d. m divides d /\\ n divides d ==> lcm(m,n) divides d)
+      #|  forall m n. m divides lcm(m,n) /\\\n         n divides lcm(m,n) /\\\n         (forall d. m divides d /\\ n divides d ==> lcm(m,n) divides d)
       #|  gcd:int#int->int
-      #|  !d a b:int. d divides gcd(a,b) <=> d divides a /\\ d divides b
+      #|  forall d a b:int. d divides gcd(a,b) <=> d divides a /\\ d divides b
       #|  num_of_int x = @n. &n = x
-      #|  !n. num_of_int(&n) = n
-      #|  !x. &0 <= x ==> &(num_of_int x) = x
-      #|  !x. &0 <= x <=> (&(num_of_int x) = x)
-      #|  !x y. &0 <= x /\\ &0 <= y\n         ==> num_of_int(x + y) = num_of_int x + num_of_int y
-      #|  !x y. &0 <= x /\\ &0 <= y\n         ==> num_of_int(x * y) = num_of_int x * num_of_int y
-      #|  !x n. &0 <= x ==> num_of_int(x pow n) = num_of_int x EXP n
+      #|  forall n. num_of_int(&n) = n
+      #|  forall x. &0 <= x ==> &(num_of_int x) = x
+      #|  forall x. &0 <= x <=> (&(num_of_int x) = x)
+      #|  forall x y. &0 <= x /\\ &0 <= y\n         ==> num_of_int(x + y) = num_of_int x + num_of_int y
+      #|  forall x y. &0 <= x /\\ &0 <= y\n         ==> num_of_int(x * y) = num_of_int x * num_of_int y
+      #|  forall x n. &0 <= x ==> num_of_int(x pow n) = num_of_int x EXP n
       #|  num_divides:num->num->bool
       #|  num_mod:num->num->num->bool
       #|  num_coprime:num#num->bool
@@ -3567,11 +3567,11 @@ test "int matches int.ml" {
       #|  num_lcm:num#num->num
       #|  a divides b <=> &a divides &b
       #|  (mod n) x y <=> (mod &n) (&x) (&y)
-      #|  !x y n. (x == y) (mod n) <=> (&x == &y) (mod &n)
+      #|  forall x y n. (x == y) (mod n) <=> (&x == &y) (mod &n)
       #|  coprime(a,b) <=> coprime(&a,&b)
       #|  gcd(a,b) = num_of_int(gcd(&a,&b))
       #|  lcm(a,b) = num_of_int(lcm(&a,&b))
-      #|  ((!n. P(&n)) <=> (!i. ~(&0 <= i) \\/ P i)) /\\\n     ((?n. P(&n)) <=> (?i. &0 <= i /\\ P i))
+      #|  ((forall n. P(&n)) <=> (forall i. ~(&0 <= i) \\/ P i)) /\\\n     ((?n. P(&n)) <=> (?i. &0 <= i /\\ P i))
       #|  NUMERAL k
       #|  (~(x:int <= y) <=> y + &1 <= x) /\\\n        (~(x < y) <=> y <= x) /\\\n        (~(x = y) <=> x + &1 <= y \\/ y + &1 <= x) /\\\n        (x < y <=> x + &1 <= y)
       #|  x:int
@@ -3614,78 +3614,78 @@ test "int matches int.ml" {
       #|  p:bool
       #|  (~)
       #|  n = 0 \\/ n DIV 2 < n /\\ (n = 2 * n DIV 2 \\/ n = 2 * n DIV 2 + 1)
-      #|  !P. P 0 /\\ (!n. P n ==> P(2 * n) /\\ P(2 * n + 1)) ==> !n. P n
+      #|  forall P. P 0 /\\ (forall n. P n ==> P(2 * n) /\\ P(2 * n + 1)) ==> forall n. P n
       #|  n = 2 * n DIV 2 \\/ n = 2 * n DIV 2 + 1
-      #|  !P. (!n. P n) <=> (!n. P(2 * n)) /\\ (!n. P(2 * n + 1))
+      #|  forall P. (forall n. P n) <=> (forall n. P(2 * n)) /\\ (forall n. P(2 * n + 1))
       #|  ~(m <= n) ==> n = m - 1 - (m - 1 - n)
       #|  ~(m <= p) ==> m - 1 - (m - 1 - p) = p
       #|  m - 1 - p
       #|  m:num <= p
       #|  p:num
-      #|  !i. P(m - 1 - i)
+      #|  forall i. P(m - 1 - i)
       #|  m = 0
-      #|  !P m:num.\n        (!n. m <= n ==> P n) /\\\n        (!n. n < m /\\ (!p. n < p ==> P p) ==> P n)\n        ==> (!n. P n)
+      #|  forall P m:num.\n        (forall n. m <= n ==> P n) /\\\n        (forall n. n < m /\\ (forall p. n < p ==> P p) ==> P n)\n        ==> (forall n. P n)
       #|  MIN m n = if n <= m then n else m
       #|  n = 0
       #|  m = 0
       #|  MIN a b = 0 <=> a = 0 \\/ b = 0
       #|  p:int = &0
       #|  x:int = &0
-      #|  !x p m n. x rem (p pow m) rem (p pow n) = x rem (p pow MIN m n)
-      #|  !a b. &(gcd(a,b)) = gcd(&a,&b)
-      #|  !a b. &(lcm(a,b)) = lcm(&a,&b)
-      #|  !x y n. (x == y) (mod n) <=> x MOD n = y MOD n
-      #|  !x y n. (x MOD n == y) (mod n) <=> (x == y) (mod n)
-      #|  !x y n. (x == y MOD n) (mod n) <=> (x == y) (mod n)
-      #|  !a b m n. (a == b) (mod (m * n)) ==> (a DIV m == b DIV m) (mod n)
+      #|  forall x p m n. x rem (p pow m) rem (p pow n) = x rem (p pow MIN m n)
+      #|  forall a b. &(gcd(a,b)) = gcd(&a,&b)
+      #|  forall a b. &(lcm(a,b)) = lcm(&a,&b)
+      #|  forall x y n. (x == y) (mod n) <=> x MOD n = y MOD n
+      #|  forall x y n. (x MOD n == y) (mod n) <=> (x == y) (mod n)
+      #|  forall x y n. (x == y MOD n) (mod n) <=> (x == y) (mod n)
+      #|  forall a b m n. (a == b) (mod (m * n)) ==> (a DIV m == b DIV m) (mod n)
       #|  &m:int = &n <=> abs(&m :int) = abs(&n)
       #|  num_of_int(abs x)
       #|  x:int
       #|  a divides b <=> ?x:num. b = a * x
       #|  m <= m * n <=> m * 1 <= m * n
-      #|  !m n. m <= m * n \\/ m * n = 0
-      #|  !m n. m divides n ==> m <= n \\/ n = 0
+      #|  forall m n. m <= m * n \\/ m * n = 0
+      #|  forall m n. m divides n ==> m <= n \\/ n = 0
       #|  m = 0
-      #|  !m n. m divides n ==> 1 <= m /\\ m <= n \\/ n = 0
-      #|  !m n. m divides n /\\ (n = 0 ==> m = 0) ==> m <= n
+      #|  forall m n. m divides n ==> 1 <= m /\\ m <= n \\/ n = 0
+      #|  forall m n. m divides n /\\ (n = 0 ==> m = 0) ==> m <= n
       #|  ~(m = m * d) <=> ~(m = 0) /\\ ~(d = 1)
-      #|  !m n. m divides n /\\ ~(n = 0) /\\ ~(m = n) ==> 2 * m <= n
-      #|  !m n. m divides n /\\ n divides m <=> m = n
-      #|  !n. n divides 1 <=> n = 1
+      #|  forall m n. m divides n /\\ ~(n = 0) /\\ ~(m = n) ==> 2 * m <= n
+      #|  forall m n. m divides n /\\ n divides m <=> m = n
+      #|  forall n. n divides 1 <=> n = 1
       #|  d = 0
-      #|  !d a b. d divides a \\/ d divides b\n           ==> (a + b) DIV d = a DIV d + b DIV d
-      #|  !m n. m divides n <=> n MOD m = 0
-      #|  !m n. m divides n <=> ((n DIV m) * m = n)
-      #|  !m n. ~(n = 0) /\\ m divides n ==> n DIV (n DIV m) = m
-      #|  !n d e. d divides n /\\ (n = 0 ==> e = 0)\n           ==> (n DIV d divides e <=> n divides d * e)
-      #|  !n d. d divides n ==> n DIV d divides n
-      #|  !n d e. d divides n ==> (e divides (n DIV d) <=> (d * e) divides n)
-      #|  !n d e:num. d divides n /\\ e divides n DIV d <=> d * e divides n
-      #|  !n d e. d * e divides n ==> e divides n DIV d
+      #|  forall d a b. d divides a \\/ d divides b\n           ==> (a + b) DIV d = a DIV d + b DIV d
+      #|  forall m n. m divides n <=> n MOD m = 0
+      #|  forall m n. m divides n <=> ((n DIV m) * m = n)
+      #|  forall m n. ~(n = 0) /\\ m divides n ==> n DIV (n DIV m) = m
+      #|  forall n d e. d divides n /\\ (n = 0 ==> e = 0)\n           ==> (n DIV d divides e <=> n divides d * e)
+      #|  forall n d. d divides n ==> n DIV d divides n
+      #|  forall n d e. d divides n ==> (e divides (n DIV d) <=> (d * e) divides n)
+      #|  forall n d e:num. d divides n /\\ e divides n DIV d <=> d * e divides n
+      #|  forall n d e. d * e divides n ==> e divides n DIV d
       #|  p = 0
       #|  (a ==> b) /\\ a ==> a /\\ b
-      #|  (!m n p. p divides m ==> (m * n) DIV p = m DIV p * n) /\\\n   (!m n p. p divides n ==> (m * n) DIV p = m * n DIV p)
+      #|  (forall m n p. p divides m ==> (m * n) DIV p = m DIV p * n) /\\\n   (forall m n p. p divides n ==> (m * n) DIV p = m * n DIV p)
       #|  (a <=> b) <=> (~a <=> ~b)
-      #|  ((!n. P(&n)) <=> (!i:int. &0 <= i ==> P i)) /\\\n     ((?n. P(&n)) <=> (?i:int. &0 <= i /\\ P i))
+      #|  ((forall n. P(&n)) <=> (forall i:int. &0 <= i ==> P i)) /\\\n     ((?n. P(&n)) <=> (?i:int. &0 <= i /\\ P i))
       #|  (a:num == b) (mod n) /\\ coprime(a,n) ==> coprime(b,n)
       #|  (x:num == x) (mod n)
-      #|  !a n. coprime(a MOD n,n) <=> coprime(a,n)
+      #|  forall a n. coprime(a MOD n,n) <=> coprime(a,n)
       #|  coprime(a:num,b) <=> coprime(b,a)
-      #|  !a n. coprime(n,a MOD n) <=> coprime(n,a)
+      #|  forall a n. coprime(n,a MOD n) <=> coprime(n,a)
       #|  (x + a:int == x) (mod n) <=> n divides a
       #|  abs(x) * &1:int <= y ==> &0 <= x + y
       #|  y:int = &0
       #|  num_of_int(x + abs(x * y))
-      #|  !x y:int.\n        (y = &0 ==> &0 <= x)\n        ==> ?n. (&n == x) (mod y)
-      #|  !a b. (gcd(a,b) divides a /\\ gcd(a,b) divides b) /\\\n         (!e. e divides a /\\ e divides b ==> e divides gcd(a,b))
+      #|  forall x y:int.\n        (y = &0 ==> &0 <= x)\n        ==> ?n. (&n == x) (mod y)
+      #|  forall a b. (gcd(a,b) divides a /\\ gcd(a,b) divides b) /\\\n         (forall e. e divides a /\\ e divides b ==> e divides gcd(a,b))
       #|  gcd(a,b)
-      #|  coprime(a,b) <=> !d. d divides a /\\ d divides b ==> d = 1
-      #|  prime(p) <=> ~(p = 1) /\\ !x. x divides p ==> x = 1 \\/ x = p
+      #|  coprime(a,b) <=> forall d. d divides a /\\ d divides b ==> d = 1
+      #|  prime(p) <=> ~(p = 1) /\\ forall x. x divides p ==> x = 1 \\/ x = p
       #|  p = 1
-      #|  !p. p = 1 \\/ prime p <=> !n. n divides p ==> n = 1 \\/ n = p
+      #|  forall p. p = 1 \\/ prime p <=> forall n. n divides p ==> n = 1 \\/ n = p
       #|  n:num
       #|  n:num
-      #|  !p. p = 1 \\/ prime p <=> !n. p divides n \\/ coprime(p,n)
+      #|  forall p. p = 1 \\/ prime p <=> forall n. p divides n \\/ coprime(p,n)
       #|  ~(p /\\ q) ==> q \\/ p ==> (p <=> ~q)
       #|  p \\/ ~p
       #|  p:num
@@ -3693,11 +3693,11 @@ test "int matches int.ml" {
       #|  1
       #|  p = 1
       #|  p:num
-      #|  !p. prime p <=> !n. coprime(p,n) <=> ~(p divides n)
-      #|  !d a b:num. d divides (a * b) /\\ coprime(d,a) ==> d divides b
+      #|  forall p. prime p <=> forall n. coprime(p,n) <=> ~(p divides n)
+      #|  forall d a b:num. d divides (a * b) /\\ coprime(d,a) ==> d divides b
       #|  0 divides n <=> n = 0
       #|  1 divides n
-      #|  !p a b.\n        p = 0 \\/ p = 1 \\/ prime p\n        ==> (p divides (a * b) <=> p divides a \\/ p divides b)
+      #|  forall p a b.\n        p = 0 \\/ p = 1 \\/ prime p\n        ==> (p divides (a * b) <=> p divides a \\/ p divides b)
       #|  n <= 1 <=> n = 0 \\/ n = 1
       #|  a * b <= b <=> a * b <= 1 * b
       #|  a * b <= a <=> a * b <= a * 1
@@ -3707,39 +3707,39 @@ test "int matches int.ml" {
       #|  b:num
       #|  a:num
       #|  p \\/ q <=> ~p ==> q
-      #|  !p. p = 0 \\/ p = 1 \\/ prime p <=>\n       !a b. p divides (a * b) ==> p divides a \\/ p divides b
+      #|  forall p. p = 0 \\/ p = 1 \\/ prime p <=>\n       forall a b. p divides (a * b) ==> p divides a \\/ p divides b
       #|  :A->int->A
       #|  real_zpow:real->int->real
       #|  (z:real) zpow (i:int) = if &0 <= i then z pow (num_of_int i)\n                          else inv(z pow (num_of_int(--i)))
-      #|  !x n. x pow n = x zpow (&n)
-      #|  !x n. x zpow (&n) = x pow n
-      #|  !x:real. x zpow (&0) = &1
-      #|  !x:real. x zpow (&1) = x
-      #|  !x:real. x zpow (&2) = x * x
-      #|  !n. &1 zpow n = &1
+      #|  forall x n. x pow n = x zpow (&n)
+      #|  forall x n. x zpow (&n) = x pow n
+      #|  forall x:real. x zpow (&0) = &1
+      #|  forall x:real. x zpow (&1) = x
+      #|  forall x:real. x zpow (&2) = x * x
+      #|  forall n. &1 zpow n = &1
       #|  ~(n:int = &0) ==> (&0 <= --n <=> ~(&0 <= n))
       #|  n:int = &0
-      #|  !x n. x zpow (--n) = inv(x zpow n)
-      #|  !x. x zpow --(&1) = inv x
-      #|  !n. &0 zpow n = if n = &0 then &1 else &0
-      #|  (!(x:real) n. x zpow (&n) = x pow n) /\\\n   (!(x:real) n. x zpow (-- &n) = inv(x pow n))
-      #|  !(x:real) n. inv(x zpow n) = inv(x) zpow n
-      #|  !(x:real) n. inv x zpow n = inv(x zpow n)
-      #|  !(x:real) m n. (x zpow m) zpow n = x zpow (m * n)
-      #|  !(x:real) (y:real) n. (x * y) zpow n = x zpow n * y zpow n
-      #|  !(x:real) (y:real) n. (x / y) zpow n = x zpow n / y zpow n
+      #|  forall x n. x zpow (--n) = inv(x zpow n)
+      #|  forall x. x zpow --(&1) = inv x
+      #|  forall n. &0 zpow n = if n = &0 then &1 else &0
+      #|  (forall(x:real) n. x zpow (&n) = x pow n) /\\\n   (forall(x:real) n. x zpow (-- &n) = inv(x pow n))
+      #|  forall(x:real) n. inv(x zpow n) = inv(x) zpow n
+      #|  forall(x:real) n. inv x zpow n = inv(x zpow n)
+      #|  forall(x:real) m n. (x zpow m) zpow n = x zpow (m * n)
+      #|  forall(x:real) (y:real) n. (x * y) zpow n = x zpow n * y zpow n
+      #|  forall(x:real) (y:real) n. (x / y) zpow n = x zpow n / y zpow n
       #|  --n + (n + m):int = m
       #|  p:num
       #|  n:num
       #|  --(--x + y):int = --y + x
       #|  x:real
-      #|  !(x:real) m n.\n        ~(x = &0) ==> x zpow (m + n) = x zpow m * x zpow n
-      #|  !(x:real) m n.\n        ~(x = &0) ==> x zpow (m - n) = x zpow m / x zpow n
-      #|  !x n. &0 <= x ==> &0 <= x zpow n
-      #|  !x n. &0 < x ==> &0 < x zpow n
-      #|  !x n. x zpow n = &0 <=> x = &0 /\\ ~(n = &0)
-      #|  !x n. abs(x zpow n) = abs(x) zpow n
-      #|  !x n. real_sgn(x zpow n) = real_sgn(x) zpow n
+      #|  forall(x:real) m n.\n        ~(x = &0) ==> x zpow (m + n) = x zpow m * x zpow n
+      #|  forall(x:real) m n.\n        ~(x = &0) ==> x zpow (m - n) = x zpow m / x zpow n
+      #|  forall x n. &0 <= x ==> &0 <= x zpow n
+      #|  forall x n. &0 < x ==> &0 < x zpow n
+      #|  forall x n. x zpow n = &0 <=> x = &0 /\\ ~(n = &0)
+      #|  forall x n. abs(x zpow n) = abs(x) zpow n
+      #|  forall x n. real_sgn(x zpow n) = real_sgn(x) zpow n
       #|integer =  |- (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) (#integer:fun(real,bool) x:real)) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) (#real_of_num:fun(num,real) n:num)))))))
       #|is_int =  |- ((#=:fun(bool,fun(bool,bool)) (#integer:fun(real,bool) x:real)) (#?:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) n:num))) ((#=:fun(real,fun(real,bool)) x:real) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) n:num)))))))
       #|int_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(int,bool),bool) (\a:int. ((#=:fun(int,fun(int,bool)) (#int_of_real:fun(real,int) (#real_of_int:fun(int,real) a:int))) a:int)))) (#!:fun(fun(real,bool),bool) (\r:real. ((#=:fun(bool,fun(bool,bool)) (#integer:fun(real,bool) r:real)) ((#=:fun(real,fun(real,bool)) (#real_of_int:fun(int,real) (#int_of_real:fun(real,int) r:real))) r:real)))))

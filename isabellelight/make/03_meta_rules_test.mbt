@@ -5590,7 +5590,7 @@ test "IsabelleLight/meta_rules matches IsabelleLight/meta_rules.ml" {
       #|  (p==>q)===>(p===>q)
       #|  (a===>b)===>(b===>a)===>(a<=>b)
       #|  (a<=>b)===>((a==>b) ===> (b==>a) ===> r) ===> r
-      #|  (!x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r
+      #|  (forall x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r
       #|  a:A
       #|  P (a:A)===> ?x:A. P x
       #|  (p===>F)===> ~p

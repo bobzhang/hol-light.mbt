@@ -5533,37 +5533,37 @@ Examples/hol88 quotations (70):
   x:A
   f:A->B
   g:A->B
-  (!x. (f:A->B) x = g x) ==> (f = g)
-  !P:A->bool. (?) P ==> P((GABS) P)
-  !t1 t2. t1 /\\ t2 ==> t1
-  !t1 t2. t1 /\\ t2 ==> t2
-  !t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3
-  !t1 t2. t1 ==> t2 ==> t1 /\\ t2
+  (forall x. (f:A->B) x = g x) ==> (f = g)
+  forall P:A->bool. (?) P ==> P((GABS) P)
+  forall t1 t2. t1 /\\ t2 ==> t1
+  forall t1 t2. t1 /\\ t2 ==> t2
+  forall t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3
+  forall t1 t2. t1 ==> t2 ==> t1 /\\ t2
   ~(T <=> F) /\\ ~(F <=> T)
-  !t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
-  !t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
-  !t. F ==> t
-  !t. ~t ==> t ==> F
-  !t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-  !t. (t ==> F) ==> ~t
-  !t. t ==> F <=> (t <=> F)
-  !t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
-  !t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
+  forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
+  forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
+  forall t. F ==> t
+  forall t. ~t ==> t ==> F
+  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
+  forall t. (t ==> F) ==> ~t
+  forall t. t ==> F <=> (t <=> F)
+  forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
+  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
   ~(t /\\ ~t)
-  !t. ~t ==> (t <=> F)
-  !t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
-  !t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
-  !t1 t2. t1 ==> t1 \\/ t2
-  !t1 t2. t2 ==> t1 \\/ t2
-  !t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
-  !t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
+  forall t. ~t ==> (t <=> F)
+  forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
+  forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
+  forall t1 t2. t1 ==> t1 \\/ t2
+  forall t1 t2. t2 ==> t1 \\/ t2
+  forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
+  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
   a:A = b
   b:A
   a:A
   :A
-  !t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
-  !t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
-  !t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)
+  forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
+  forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
+  forall t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)
   :bool
   b:bool
   b:bool
@@ -5574,27 +5574,27 @@ Examples/hol88 quotations (70):
   :A
   :A
   T
-  !n. n < SUC n
-  !n. n <= SUC n
-  !m n. m < n ==> m < (SUC n)
-  !m. SUC m - 1 = m
-  !m n. m < m + SUC n
-  !n m. ~(SUC n <= m) <=> m <= n
-  !m n:num. (m = n) \\/ m < n \\/ n < m
-  !b c. c <= b ==> (!a:num. a - (b - c) = (a + c) - b)
-  !m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
-  !n m:num. (n - m) <= n
-  !m n:num. (m - n = m) = (m = 0) \\/ (n = 0)
-  !m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
-  !m n p:num. m >= (n - p) <=> (m + p) >= n
-  !m. (0 = m) \\/ 0 < m
-  !m n. m < n ==> (SUC m) <= n
-  (!m. 0 - m = 0) /\\\n    (!m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
-  !m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
-  !m n p. m <= n ==> (m * p) <= (n * p)
-  !m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
-  !s. FINITE s ==> (!t. t SUBSET s ==> FINITE t)
-  !n. m <= SUC n <=> (m = SUC n) \\/ m <= n
+  forall n. n < SUC n
+  forall n. n <= SUC n
+  forall m n. m < n ==> m < (SUC n)
+  forall m. SUC m - 1 = m
+  forall m n. m < m + SUC n
+  forall n m. ~(SUC n <= m) <=> m <= n
+  forall m n:num. (m = n) \\/ m < n \\/ n < m
+  forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)
+  forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
+  forall n m:num. (n - m) <= n
+  forall m n:num. (m - n = m) = (m = 0) \\/ (n = 0)
+  forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
+  forall m n p:num. m >= (n - p) <=> (m + p) >= n
+  forall m. (0 = m) \\/ 0 < m
+  forall m n. m < n ==> (SUC m) <= n
+  (forall m. 0 - m = 0) /\\\n    (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
+  forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
+  forall m n p. m <= n ==> (m * p) <= (n * p)
+  forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
+  forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)
+  forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n
 AND1_THM =  |- (#!:fun(fun(bool,bool),bool) (\t1:bool. (#!:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t1:bool)))))
 AND2_THM =  |- (#!:fun(fun(bool,bool),bool) (\t1:bool. (#!:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t2:bool)))))
 AND_IMP_INTRO =  |- (#!:fun(fun(bool,bool),bool) (\t1:bool. (#!:fun(fun(bool,bool),bool) (\t2:bool. (#!:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))

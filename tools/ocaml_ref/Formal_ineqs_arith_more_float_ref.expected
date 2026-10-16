@@ -24,8 +24,8 @@ Formal_ineqs/arith/more_float quotations (34):
   lo <= &1 / x ==> lo <= inv x
   &1 / x = inv x
   interval_arith (&2 * x) (&1, &1) ==> inv (&2) = x
-  (!x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds
-  bounded_on_int f int f_bounds ==>\n\t\t\t(!x. interval_arith x int ==> interval_arith (f x) f_bounds)
+  (forall x. interval_arith x int ==> \n\t\t\t\t\t       interval_arith (f x) f_bounds) \n\t\t\t   ==> bounded_on_int f int f_bounds
+  bounded_on_int f int f_bounds ==>\n\t\t\t(forall x. interval_arith x int ==> interval_arith (f x) f_bounds)
   x1 <= y1 /\\ x2 <= y2 /\\ y1 + y2 <= y ==> x1 + x2 <= y
   x1 <= y1 /\\ x2 <= y2 /\\ x <= x1 + x2 ==> x <= y1 + y2
   x1 <= y1 /\\ y2 <= x2 /\\ y1 - y2 <= y ==> x1 - x2 <= y

@@ -93,11 +93,11 @@ test "tactics matches tactics.ml" {
     (w, then_tac(@tactics.disj2_tac, accept_tac(truth)))
   })
   pv("GEN_DISCH", () => {
-    let w = tm("!p:bool. p ==> p")
+    let w = tm("forall p:bool. p ==> p")
     (w, then_tac(then_tac(gen_tac, disch_tac), accept))
   })
   pv("STRIP_TAC", () => {
-    let w = tm("!p q. p /\\ q ==> q /\\ p")
+    let w = tm("forall p q. p /\\ q ==> q /\\ p")
     (w, then_tac(then_tac(repeat_tac(@tactics.strip_tac), conj_tac), accept))
   })
   pv("EXISTS_TAC", () => {
@@ -142,12 +142,12 @@ test "tactics matches tactics.ml" {
     (w, disch_then(th => @tactics.contr_tac(th)))
   })
   pv("MATCH_ACCEPT_TAC", () => {
-    let w = tm("!b:bool. b = b")
+    let w = tm("forall b:bool. b = b")
     let x = tm("x:A")
     (w, @tactics.match_accept_tac(@bool.gen(x, @kernel.refl(x))))
   })
   pv("MATCH_MP_TAC", () => {
-    let w = tm("(!x:A. P x ==> Q x) ==> P c ==> Q c")
+    let w = tm("(forall x:A. P x ==> Q x) ==> P c ==> Q c")
     (
       w,
       then_tac(
@@ -217,7 +217,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.conv_tac(_ => @kernel.refl(r)))
   })
   pv("SUBST1_TAC", () => {
-    let w = tm("!a b:bool. (a = b) ==> b ==> a")
+    let w = tm("forall a b:bool. (a = b) ==> b ==> a")
     (
       w,
       then_tac(
@@ -276,17 +276,17 @@ test "tactics matches tactics.ml" {
     (w, then_tac(then_tac(@tactics.spec_tac(a, z), gen_tac), @tactics.refl_tac))
   })
   pv("X_GEN_TAC_type", () => {
-    let w = tm("!x:bool. x = x")
+    let w = tm("forall x:bool. x = x")
     let y = tm("y:A")
     (w, @tactics.x_gen_tac(y))
   })
   pv("X_GEN_TAC_notvar", () => {
-    let w = tm("!x:bool. x = x")
+    let w = tm("forall x:bool. x = x")
     let t = tm("T")
     (w, @tactics.x_gen_tac(t))
   })
   pv("X_GEN_TAC_invalid", () => {
-    let w = tm("!x:bool. x = y")
+    let w = tm("forall x:bool. x = y")
     let y = tm("y:bool")
     (w, @tactics.x_gen_tac(y))
   })
@@ -296,7 +296,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.x_gen_tac(y))
   })
   st("GEN_TAC_primed", () => {
-    let w = tm("!x:bool. x = x \\/ x'")
+    let w = tm("forall x:bool. x = x \\/ x'")
     (w, gen_tac)
   })
   pv("SUBGOAL_THEN", () => {
@@ -450,11 +450,11 @@ test "tactics matches tactics.ml" {
     (w, @tactics.changed_tac(all_tac))
   })
   st("CHANGED_TAC_gen", () => {
-    let w = tm("!x:bool. x")
+    let w = tm("forall x:bool. x")
     (w, @tactics.changed_tac(gen_tac))
   })
   st("REPLICATE_TAC", () => {
-    let w = tm("!x y z:bool. x")
+    let w = tm("forall x y z:bool. x")
     (w, @tactics.replicate_tac(2, gen_tac))
   })
   st("FAIL_TAC", () => {
@@ -478,7 +478,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.first(@list.List([@tactics.disj1_tac, conj_tac])))
   })
   st("MAP_EVERY", () => {
-    let w = tm("!x y:bool. x")
+    let w = tm("forall x y:bool. x")
     let a = tm("a:bool")
     let b = tm("b:bool")
     (w, @tactics.map_every(@tactics.x_gen_tac, @list.List([a, b])))
@@ -597,7 +597,7 @@ test "tactics matches tactics.ml" {
     (w, disch_then(@tactics.first_tcl(@list.List([]))(th => assume_tac(th))))
   })
   st("TRANS_TAC", () => {
-    let tw = tm("!x y z:A. x = y /\\ y = z ==> x = z")
+    let tw = tm("forall x y z:A. x = y /\\ y = z ==> x = z")
     let th = @tactics.prove(
       tw,
       then_tac(
@@ -633,7 +633,7 @@ test "tactics matches tactics.ml" {
   st("META_SPEC_TAC", () => {
     let w = tm("q:bool")
     let t = tm("t:bool")
-    let a = tm("!x:bool. P x")
+    let a = tm("forall x:bool. P x")
     (w, @tactics.meta_spec_tac(t, @kernel.assume_rule(a)))
   })
   pv("CHEAT_TAC", () => {
@@ -660,8 +660,8 @@ test "tactics matches tactics.ml" {
     (w, all_tac)
   })
   pv("prove_alpha", () => {
-    let w = tm("!x:bool. x ==> x")
-    let w2 = tm("!y:bool. y ==> y")
+    let w = tm("forall x:bool. x ==> x")
+    let w2 = tm("forall y:bool. y ==> y")
     (
       w,
       @tactics.match_accept_tac(
@@ -719,7 +719,7 @@ test "tactics matches tactics.ml" {
     sgs(@tactics.g(t))
   })
   log.attempt("g", () => {
-    let t = tm("!p q:bool. p /\\ q ==> q /\\ p")
+    let t = tm("forall p q:bool. p /\\ q ==> q /\\ p")
     sgs(@tactics.g(t))
   })
   log.attempt("e1", () => sgs(@tactics.e(repeat_tac(gen_tac))))

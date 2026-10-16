@@ -5559,8 +5559,8 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 Examples/multiwf quotations (79):
-  !s. (s = EMPTY) ==> FINITE s
-  !s a. (s = {a}) ==> FINITE s
+  forall s. (s = EMPTY) ==> FINITE s
+  forall s a. (s = {a}) ==> FINITE s
   {a | ~(f a + g a = 0)} = {a | ~(f a = 0)} UNION {a | ~(g a = 0)}
   \\a:A. 0
   ?f. FINITE {a:A | ~(f a = 0)}
@@ -5569,7 +5569,7 @@ Examples/multiwf quotations (79):
   msing a = multiset (\\b. if b = a then 1 else 0)
   M munion N = multiset(\\b. multiplicity M b + multiplicity N b)
   M mdiff N = multiset(\\b. multiplicity M b - multiplicity N b)
-  (M = N) = !a. multiplicity M a = multiplicity N a
+  (M = N) = forall a. multiplicity M a = multiplicity N a
   FINITE {a | ~(f a = 0)} /\\ (f a = y) ==> (multiplicity(multiset f) a = y)
   multiplicity mempty a = 0
   a:A
@@ -5590,19 +5590,19 @@ Examples/multiwf quotations (79):
   (a:A) mmember M ==> (M = (M mdiff (msing a)) munion (msing a))
   {a:A | ~(multiplicity M a = 0)}
   SUC n - 1 = n
-  !M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M
-  !a:A M. P M ==> P (M munion msing a)
+  forall M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M
+  forall a:A M. P M ==> P (M munion msing a)
   M = (M mdiff (msing(a:A))) munion (msing a)
   {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)
-  (!M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (!a:A M. P M ==> P (M munion (msing a)))\n   ==> !n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M
+  (forall M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M
   a:A
   M:(A)multiset = mempty
-  P mempty /\\\n   (!a:A M. P M ==> P (M munion (msing a)))\n   ==> !s. FINITE s ==> !M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M
+  P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall s. FINITE s ==> forall M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M
   {a:A | ~(multiplicity M a = 0)}
-  P mempty /\\\n   (!a:A M. P M ==> P (M munion (msing a)))\n   ==> !M. P M
-  !x. (!y. y << x ==> WFP(<<) y) ==> WFP(<<) x
+  P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall M. P M
+  forall x. (forall y. y << x ==> WFP(<<) y) ==> WFP(<<) x
   a ==> b <=> a ==> a /\\ b
-  !P. (!x. x IN WFP(<<) /\\ (!y. y << x ==> P(y)) ==> P(x))\n       ==> !x:A. x IN WFP(<<) ==> P(x)
+  forall P. (forall x. x IN WFP(<<) /\\ (forall y. y << x ==> P(y)) ==> P(x))\n       ==> forall x:A. x IN WFP(<<) ==> P(x)
   WF(<<) <=> (WFP(<<) = UNIV:A->bool)
   a:A
   \\(n:num) x y. ((<<):A->A->bool) y x
@@ -5612,8 +5612,8 @@ Examples/multiwf quotations (79):
   (x:num->A) (SUC 0)
   x:num->A
   a:A
-  !(<<):A->A->bool.\n        WFP(<<) = {a | !x. (!n. x(SUC n) << x n) ==> ~(x 0 = a)}
-  morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (!b. b mmember K ==> b << a)
+  forall(<<):A->A->bool.\n        WFP(<<) = {a | forall x. (forall n. x(SUC n) << x n) ==> ~(x 0 = a)}
+  morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (forall b. b mmember K ==> b << a)
   M0 munion msing (a:A) = M1 munion msing b
   K:(A)multiset
   b:A
@@ -5629,14 +5629,14 @@ Examples/multiwf quotations (79):
   K:(A)multiset
   b:A
   M1:(A)multiset
-  morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (!b:A. b mmember K ==> b << a))
+  morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (forall b:A. b mmember K ==> b << a))
   N:(A)multiset
   N:(A)multiset
   N:(A)multiset
-  (!M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (!M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))
-  (!M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> !M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
-  WF(<<)\n   ==> !a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
-  WF(<<) ==> !M. M IN WFP(morder(<<))
+  (forall M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (forall M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))
+  (forall M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> forall M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
+  WF(<<)\n   ==> forall a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
+  WF(<<) ==> forall M. M IN WFP(morder(<<))
   WF(<<) ==> WF(morder(<<))
 EMPTY_IS_FINITE =  |- (#!:fun(fun(fun('?142942,bool),bool),bool) (\s:fun('?142942,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(fun('?142942,bool),fun(fun('?142942,bool),bool)) s:fun('?142942,bool)) #EMPTY:fun('?142942,bool))) (#FINITE:fun(fun('?142942,bool),bool) s:fun('?142942,bool)))))
 SING_IS_FINITE =  |- (#!:fun(fun(fun('?142962,bool),bool),bool) (\s:fun('?142962,bool). (#!:fun(fun('?142962,bool),bool) (\a:'?142962. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(fun('?142962,bool),fun(fun('?142962,bool),bool)) s:fun('?142962,bool)) ((#INSERT:fun('?142962,fun(fun('?142962,bool),fun('?142962,bool))) a:'?142962) #EMPTY:fun('?142962,bool)))) (#FINITE:fun(fun('?142962,bool),bool) s:fun('?142962,bool)))))))

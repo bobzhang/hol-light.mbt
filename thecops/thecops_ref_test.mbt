@@ -22,16 +22,16 @@ test "thecops matches thecops.ml" {
     log.attempt(name, () => sthm(@tactics.prove(tm(s), tac)))
   }
   let none : @list.List[@kernel.Thm] = @list.List([])
-  let trans = "(!x y:A. R x y ==> R y x) /\\ (!x y z. R x y /\\ R y z ==> R x z) /\\ (!x. ?y. R x y) ==> !x. R x x"
+  let trans = "(forall x y:A. R x y ==> R y x) /\\ (forall x y z. R x y /\\ R y z ==> R x z) /\\ (forall x. ?y. R x y) ==> forall x. R x x"
   let sym = @list.singleton(@theorems.conj_sym())
-  pv("lean_refl", "!x:A. P x ==> P x", @thecops.leancop_tac(none))
-  pv("lean_drinker", "?x:A. P x ==> !y. P y", @thecops.leancop_tac(none))
+  pv("lean_refl", "forall x:A. P x ==> P x", @thecops.leancop_tac(none))
+  pv("lean_drinker", "?x:A. P x ==> forall y. P y", @thecops.leancop_tac(none))
   pv("lean_trans", trans, @thecops.leancop_tac(none))
-  pv("lean_lemma", "!p q. p /\\ q ==> q /\\ p", @thecops.leancop_tac(sym))
-  pv("nano_refl", "!x:A. P x ==> P x", @thecops.nanocop_tac(none))
-  pv("nano_drinker", "?x:A. P x ==> !y. P y", @thecops.nanocop_tac(none))
+  pv("lean_lemma", "forall p q. p /\\ q ==> q /\\ p", @thecops.leancop_tac(sym))
+  pv("nano_refl", "forall x:A. P x ==> P x", @thecops.nanocop_tac(none))
+  pv("nano_drinker", "?x:A. P x ==> forall y. P y", @thecops.nanocop_tac(none))
   pv("nano_trans", trans, @thecops.nanocop_tac(none))
-  pv("nano_lemma", "!p q. p /\\ q ==> q /\\ p", @thecops.nanocop_tac(sym))
+  pv("nano_lemma", "forall p q. p /\\ q ==> q /\\ p", @thecops.nanocop_tac(sym))
   inspect(
     log.contents(),
     content=(

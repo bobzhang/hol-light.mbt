@@ -61716,51 +61716,51 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|0..0..solved at 2
       #|100/polyhedron quotations (764):
       #|  hyperplane_side (a,b) (x:real^N) = real_sgn (a dot x - b)
-      #|  hyperplane_equiv A x y <=>\n        !h. h IN A ==> hyperplane_side h x = hyperplane_side h y
-      #|  !A x. hyperplane_equiv A x x
-      #|  !A x y. hyperplane_equiv A x y <=> hyperplane_equiv A y x
-      #|  !A x y z.\n        hyperplane_equiv A x y /\\ hyperplane_equiv A y z\n        ==> hyperplane_equiv A x z
-      #|  !A B x y. hyperplane_equiv (A UNION B) x y <=>\n                hyperplane_equiv A x y /\\ hyperplane_equiv B x y
+      #|  hyperplane_equiv A x y <=>\n        forall h. h IN A ==> hyperplane_side h x = hyperplane_side h y
+      #|  forall A x. hyperplane_equiv A x x
+      #|  forall A x y. hyperplane_equiv A x y <=> hyperplane_equiv A y x
+      #|  forall A x y z.\n        hyperplane_equiv A x y /\\ hyperplane_equiv A y z\n        ==> hyperplane_equiv A x z
+      #|  forall A B x y. hyperplane_equiv (A UNION B) x y <=>\n                hyperplane_equiv A x y /\\ hyperplane_equiv B x y
       #|  hyperplane_cell A c <=> ?x. c = hyperplane_equiv A x
       #|  hyperplane_cell A c <=> ?x. c = {y | hyperplane_equiv A x y}
-      #|  !A. ~(hyperplane_cell A {})
-      #|  !A c. hyperplane_cell A c ==> ~(c = {})
-      #|  !A. UNIONS {c | hyperplane_cell A c} = (:real^N)
-      #|  !A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2 /\\ ~(c1 = c2)\n             ==> DISJOINT c1 c2
+      #|  forall A. ~(hyperplane_cell A {})
+      #|  forall A c. hyperplane_cell A c ==> ~(c = {})
+      #|  forall A. UNIONS {c | hyperplane_cell A c} = (:real^N)
+      #|  forall A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2 /\\ ~(c1 = c2)\n             ==> DISJOINT c1 c2
       #|  DISJOINT s s <=> s = {}
-      #|  !A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2\n             ==> (DISJOINT c1 c2 <=> ~(c1 = c2))
+      #|  forall A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2\n             ==> (DISJOINT c1 c2 <=> ~(c1 = c2))
       #|  hyperplane_cell {} c <=> c = (:real^N)
       #|  x - y < &0 <=> x < y
       #|  (a:real^N) dot y - b
       #|  y:real^N
-      #|  !a b c:real^N->bool.\n        hyperplane_cell {(a,b)} c\n        ==>  c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
+      #|  forall a b c:real^N->bool.\n        hyperplane_cell {(a,b)} c\n        ==>  c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
       #|  (b + &1) / (a dot a) % a:real^N
       #|  (b - &1) / (a dot a) % a:real^N
       #|  b / (a dot a) % a:real^N
-      #|  (?x. f x = a) ==> (?x. !y. f y = a <=> f x = f y)
+      #|  (?x. f x = a) ==> (?x. forall y. f y = a <=> f x = f y)
       #|  a < b <=> a - b < &0
       #|  a > b <=> a - b > &0
       #|  a dot x = b <=> a dot x - b = &0
-      #|  !a b c.\n        hyperplane_cell {(a,b)} c <=>\n        if a = vec 0 then c = (:real^N)\n        else c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
+      #|  forall a b c.\n        hyperplane_cell {(a,b)} c <=>\n        if a = vec 0 then c = (:real^N)\n        else c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
       #|  x:real^N
       #|  b:real^N
       #|  a:real^N
       #|  (?c1 c2. (?x. c1 = f x) /\\ (?y. c2 = g y) /\\ P c1 c2) <=>\n    (?x y. P (f x) (g y))
       #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
       #|  c:real^N->bool = {}
-      #|  !A B c:real^N->bool.\n        hyperplane_cell (A UNION B) c <=>\n        ~(c = {}) /\\\n        ?c1 c2. hyperplane_cell A c1 /\\\n                hyperplane_cell B c2 /\\\n                c = c1 INTER c2
+      #|  forall A B c:real^N->bool.\n        hyperplane_cell (A UNION B) c <=>\n        ~(c = {}) /\\\n        ?c1 c2. hyperplane_cell A c1 /\\\n                hyperplane_cell B c2 /\\\n                c = c1 INTER c2
       #|  {{x:real^N | a dot x = b},{x | a dot x < b},{x | a dot x > b}}
       #|  { c1 INTER c2:real^N->bool |\n                c1 IN {c | hyperplane_cell A c} /\\\n                c2 IN {c | hyperplane_cell {(a,b)} c}}
       #|  a INSERT s = {a} UNION s
       #|  A:(real^N#real)->bool
       #|  b:real
       #|  a:real^N
-      #|  !A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c}
+      #|  forall A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c}
       #|  {c:real^N->bool | hyperplane_cell A c}
-      #|  !P A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c /\\ P c}
+      #|  forall P A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c /\\ P c}
       #|  {c:real^N->bool | hyperplane_cell A c}
-      #|  !A C. FINITE A /\\ (!c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> FINITE C
-      #|  !A C. (!c. c IN C ==> hyperplane_cell A c)\n         ==> pairwise DISJOINT C
+      #|  forall A C. FINITE A /\\ (forall c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> FINITE C
+      #|  forall A C. (forall c. c IN C ==> hyperplane_cell A c)\n         ==> pairwise DISJOINT C
       #|  t:real^N->bool
       #|  {x:real^N | a dot x > b} INTER s
       #|  t:real^N->bool
@@ -61780,14 +61780,14 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  b:real
       #|  a:real^N
       #|  (:real^N)
-      #|  !A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> ?s t. open s /\\ affine t /\\ c = s INTER t
+      #|  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> ?s t. open s /\\ affine t /\\ c = s INTER t
       #|  affine hull t:real^N->bool
       #|  affine hull (s INTER t:real^N->bool) = t
       #|  s INTER t:real^N->bool = {}
       #|  t:real^N->bool
       #|  s:real^N->bool
-      #|  !A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> open_in (subtopology euclidean (affine hull c)) c
-      #|  !A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> relative_interior c = c
+      #|  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> open_in (subtopology euclidean (affine hull c)) c
+      #|  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> relative_interior c = c
       #|  a - b < &0 <=> a < b
       #|  a - b > &0 <=> a > b
       #|  (a:real^N) dot c - b
@@ -61795,30 +61795,30 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  a:real^N
       #|  f x = f y <=> y IN {y | f x = f y}
       #|  c:real^N
-      #|  !A c:real^N->bool. hyperplane_cell A c ==> convex c
+      #|  forall A c:real^N->bool. hyperplane_cell A c ==> convex c
       #|  c:real^N->bool
       #|  c:real^N->bool
       #|  c:real^N->bool
       #|  x:real^N
       #|  z:real^N
-      #|  !A C. (!c:real^N->bool. c IN C ==> hyperplane_cell A c) /\\\n         ~(C = {}) /\\ ~(INTERS C = {})\n         ==> hyperplane_cell A (INTERS C)
-      #|  !A s t:real^N->bool.\n        hyperplane_cell A s /\\ hyperplane_cell A t /\\ ~(s INTER t = {})\n        ==> hyperplane_cell A (s INTER t)
-      #|  hyperplane_cellcomplex A s <=>\n        ?t. (!c. c IN t ==> hyperplane_cell A c) /\\\n            s = UNIONS t
+      #|  forall A C. (forall c:real^N->bool. c IN C ==> hyperplane_cell A c) /\\\n         ~(C = {}) /\\ ~(INTERS C = {})\n         ==> hyperplane_cell A (INTERS C)
+      #|  forall A s t:real^N->bool.\n        hyperplane_cell A s /\\ hyperplane_cell A t /\\ ~(s INTER t = {})\n        ==> hyperplane_cell A (s INTER t)
+      #|  hyperplane_cellcomplex A s <=>\n        ?t. (forall c. c IN t ==> hyperplane_cell A c) /\\\n            s = UNIONS t
       #|  {}:(real^N->bool)->bool
-      #|  !A:real^N#real->bool. hyperplane_cellcomplex A {}
+      #|  forall A:real^N#real->bool. hyperplane_cellcomplex A {}
       #|  {c:real^N->bool}
-      #|  !A c:real^N->bool. hyperplane_cell A c ==> hyperplane_cellcomplex A c
+      #|  forall A c:real^N->bool. hyperplane_cell A c ==> hyperplane_cellcomplex A c
       #|  UNIONS (IMAGE (f:(real^N->bool)->(real^N->bool)->bool) C)
       #|  f:(real^N->bool)->(real^N->bool)->bool
-      #|  !A C. (!s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (UNIONS C)
-      #|  !A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s UNION t)
-      #|  !A. hyperplane_cellcomplex A (:real^N)
+      #|  forall A C. (forall s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (UNIONS C)
+      #|  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s UNION t)
+      #|  forall A. hyperplane_cellcomplex A (:real^N)
       #|  UNIONS s = UNIONS {t | t IN s /\\ ~(t = {})}
       #|  C = {UNIONS((f:(real^N->bool)->(real^N->bool)->bool) s) | s IN C}
       #|  f:(real^N->bool)->(real^N->bool)->bool
       #|  C:(real^N->bool)->bool = {}
-      #|  !A C. (!s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (INTERS C)
-      #|  !A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s INTER t)
+      #|  forall A C. (forall s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (INTERS C)
+      #|  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s INTER t)
       #|  c':real^N->bool
       #|  c:real^N->bool
       #|  A:real^N#real->bool
@@ -61828,9 +61828,9 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (:real^N) DIFF c = UNIONS {c' | hyperplane_cell A c' /\\ ~(c' = c)}
       #|  c:real^N->bool
       #|  C:(real^N->bool)->bool
-      #|  !A s. hyperplane_cellcomplex A s\n         ==> hyperplane_cellcomplex A ((:real^N) DIFF s)
+      #|  forall A s. hyperplane_cellcomplex A s\n         ==> hyperplane_cellcomplex A ((:real^N) DIFF s)
       #|  s DIFF t = s INTER (UNIV DIFF t)
-      #|  !A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s DIFF t)
+      #|  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s DIFF t)
       #|  B DIFF A:(real^N#real)->bool
       #|  x:real^N
       #|  c':real^N->bool
@@ -61841,13 +61841,13 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  c:real^N->bool
       #|  c:real^N->bool
       #|  C:(real^N->bool)->bool
-      #|  !A B s:real^N->bool.\n        hyperplane_cellcomplex A s /\\ A SUBSET B\n        ==> hyperplane_cellcomplex B s
+      #|  forall A B s:real^N->bool.\n        hyperplane_cellcomplex A s /\\ A SUBSET B\n        ==> hyperplane_cellcomplex B s
       #|  IMAGE UNIONS {t | t SUBSET {c:real^N->bool | hyperplane_cell A c}}
-      #|  !A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c}
+      #|  forall A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c}
       #|  {c:real^N->bool | hyperplane_cellcomplex A c}
-      #|  !P A. FINITE A\n         ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c /\\ P c}
+      #|  forall P A. FINITE A\n         ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c /\\ P c}
       #|  {c:real^N->bool | hyperplane_cellcomplex A c}
-      #|  !A C. FINITE A /\\ (!c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c)\n         ==> FINITE C
+      #|  forall A C. FINITE A /\\ (forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c)\n         ==> FINITE C
       #|  c IN C ==> c SUBSET UNIONS C
       #|  c':real^N->bool = c
       #|  c':real^N->bool
@@ -61857,9 +61857,9 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  x:real^N
       #|  c:real^N->bool = {}
       #|  C:(real^N->bool)->bool
-      #|  !A s c:real^N->bool.\n        hyperplane_cell A c /\\ hyperplane_cellcomplex A s\n        ==> (c SUBSET s <=> ~(DISJOINT c s))
+      #|  forall A s c:real^N->bool.\n        hyperplane_cell A c /\\ hyperplane_cellcomplex A s\n        ==> (c SUBSET s <=> ~(DISJOINT c s))
       #|  euler_characteristic A (s:real^N->bool) =\n        sum {c | hyperplane_cell A c /\\ c SUBSET s}\n            (\\c. (-- &1) pow (num_of_int(aff_dim c)))
-      #|  ~(?x. x IN s) ==> (!x. x IN s ==> P x)
+      #|  ~(?x. x IN s) ==> (forall x. x IN s ==> P x)
       #|  euler_characteristic A {} = &0
       #|  ~(DISJOINT (c:real^N->bool) c')
       #|  c':real^N->bool
@@ -61868,26 +61868,26 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  ~(c:real^N->bool = {})
       #|  c:real^N->bool
       #|  s = t ==> sum s f = sum t f
-      #|  !A C. (!c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. (-- &1) pow (num_of_int(aff_dim c)))
-      #|  !A c. hyperplane_cell A c\n         ==> euler_characteristic A c =  (-- &1) pow (num_of_int(aff_dim c))
+      #|  forall A C. (forall c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. (-- &1) pow (num_of_int(aff_dim c)))
+      #|  forall A c. hyperplane_cell A c\n         ==> euler_characteristic A c =  (-- &1) pow (num_of_int(aff_dim c))
       #|  A:(real^N#real)->bool
       #|  hyperplane_cell A (c:real^N->bool)
       #|  c:real^N->bool = {}
       #|  c:real^N->bool
-      #|  !A s t:real^N->bool.\n        FINITE A /\\\n        hyperplane_cellcomplex A s /\\\n        hyperplane_cellcomplex A t /\\\n        DISJOINT s t\n        ==> euler_characteristic A (s UNION t) =\n            euler_characteristic A s + euler_characteristic A t
+      #|  forall A s t:real^N->bool.\n        FINITE A /\\\n        hyperplane_cellcomplex A s /\\\n        hyperplane_cellcomplex A t /\\\n        DISJOINT s t\n        ==> euler_characteristic A (s UNION t) =\n            euler_characteristic A s + euler_characteristic A t
       #|  C:(real^N->bool)->bool
       #|  C:(real^N->bool)->bool
       #|  FINITE(C:(real^N->bool)->bool)
       #|  FINITE(C:(real^N->bool)->bool)
-      #|  !A C. FINITE A /\\\n         (!c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c) /\\\n         pairwise DISJOINT C\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. euler_characteristic A c)
+      #|  forall A C. FINITE A /\\\n         (forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c) /\\\n         pairwise DISJOINT C\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. euler_characteristic A c)
       #|  aff_dim(c:real^N->bool)
       #|  c:real^N->bool
       #|  IMAGE int_of_num (0..dimindex(:N))
       #|  {c:real^N->bool | hyperplane_cell A c /\\ c SUBSET s}
       #|  \\c:real^N->bool. (-- &1) pow (num_of_int(aff_dim c))
       #|  \\c:real^N->bool. aff_dim c
-      #|  !A s:real^N->bool.\n        FINITE A\n        ==> euler_characteristic A s =\n            sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {c | hyperplane_cell A c /\\ c SUBSET s /\\\n                                 aff_dim c = &d}))
-      #|  !a b. {x | a dot x = b} INTER {x | a dot x < b} = {} /\\\n         {x | a dot x = b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x < b} = {}
+      #|  forall A s:real^N->bool.\n        FINITE A\n        ==> euler_characteristic A s =\n            sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {c | hyperplane_cell A c /\\ c SUBSET s /\\\n                                 aff_dim c = &d}))
+      #|  forall a b. {x | a dot x = b} INTER {x | a dot x < b} = {} /\\\n         {x | a dot x = b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x < b} = {}
       #|  i:int
       #|  aff_dim (c INTER {x:real^N | a dot x = b})
       #|  &0 <= aff_dim (c INTER {x:real^N | a dot x = b})
@@ -61967,24 +61967,24 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  c:real^N->bool
       #|  pairwise DISJOINT (C:(real^N->bool)->bool)
       #|  A:(real^N#real)->bool
-      #|  !c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c /\\\n                                hyperplane_cellcomplex ((a,b) INSERT A) c
+      #|  forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c /\\\n                                hyperplane_cellcomplex ((a,b) INSERT A) c
       #|  C:(real^N->bool)->bool
       #|  s:real^N->bool
       #|  b:real
       #|  a:real^N
       #|  A:(real^N#real)->bool
-      #|  !A h s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> euler_characteristic (h INSERT A) s = euler_characteristic A s
+      #|  forall A h s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> euler_characteristic (h INSERT A) s = euler_characteristic A s
       #|  euler_characteristic (A UNION B) (s:real^N->bool)
       #|  A:real^N#real->bool
       #|  s UNION (x INSERT t) = x INSERT (s UNION t)
       #|  B:real^N#real->bool
       #|  h:real^N#real
-      #|  !A s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> !B. FINITE B\n                ==> euler_characteristic (A UNION B) s =\n                    euler_characteristic A s
-      #|  !A B h s:real^N->bool.\n        FINITE A /\\ FINITE B /\\\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex B s\n        ==> euler_characteristic A s = euler_characteristic B s
+      #|  forall A s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> forall B. FINITE B\n                ==> euler_characteristic (A UNION B) s =\n                    euler_characteristic A s
+      #|  forall A B h s:real^N->bool.\n        FINITE A /\\ FINITE B /\\\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex B s\n        ==> euler_characteristic A s = euler_characteristic B s
       #|  s:(real^N->bool)->bool
       #|  euler_characteristic A :(real^N->bool)->real
       #|  hyperplane_cellcomplex A :(real^N->bool)->bool
-      #|  !A s:(real^N->bool)->bool.\n        FINITE A /\\ FINITE s /\\ (!k. k IN s ==> hyperplane_cellcomplex A k)\n        ==> euler_characteristic A (UNIONS s) =\n            sum {t | t SUBSET s /\\ ~(t = {})}\n                (\\t. (-- &1) pow (CARD t + 1) *\n                     euler_characteristic A (INTERS t))
+      #|  forall A s:(real^N->bool)->bool.\n        FINITE A /\\ FINITE s /\\ (forall k. k IN s ==> hyperplane_cellcomplex A k)\n        ==> euler_characteristic A (UNIONS s) =\n            sum {t | t SUBSET s /\\ ~(t = {})}\n                (\\t. (-- &1) pow (CARD t + 1) *\n                     euler_characteristic A (INTERS t))
       #|  CARD(H:(real^N->bool)->bool) = 0
       #|  x = &0 ==> x = &1 + y ==> --y = &1
       #|  (x * --(&1) pow 1) * y = --(y * x)
@@ -62014,7 +62014,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  \\t:(real^N->bool)->bool. CARD t
       #|  s = &1 ==> s * t = t
       #|  affine hull (INTERS (IMAGE (\\t. (:real^N) DIFF t) H))
-      #|  !t. t SUBSET s /\\ t = UNIV ==> s = UNIV
+      #|  forall t. t SUBSET s /\\ t = UNIV ==> s = UNIV
       #|  i = &n ==> num_of_int i = n
       #|  B:real^N#real->bool
       #|  euler_characteristic B (INTERS (IMAGE (\\t. (:real^N) DIFF t) J))
@@ -62022,12 +62022,12 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (h:real^N->bool) IN H
       #|  (h:real^N->bool) IN J
       #|  h:real^N->bool
-      #|  (!h. P h ==> (Q h <=> R h))\n        ==> (!h. P h) ==> ((!h. Q h) <=> (!h. R h))
+      #|  (forall h. P h ==> (Q h <=> R h))\n        ==> (forall h. P h) ==> ((forall h. Q h) <=> (forall h. R h))
       #|  z:real^N
       #|  ~(INTERS (IMAGE (\\t. (:real^N) DIFF t) J) = {})
       #|  hyperplane_cell B (INTERS (IMAGE (\\t. (:real^N) DIFF t) J))
       #|  h:real^N->bool
-      #|  (!h. P h ==> (Q h <=> R h))\n          ==> ((!h. P h ==> Q h) <=> (!h. P h ==> R h))
+      #|  (forall h. P h ==> (Q h <=> R h))\n          ==> ((forall h. P h ==> Q h) <=> (forall h. P h ==> R h))
       #|  (h:real^N->bool) IN H
       #|  h:real^N->bool
       #|  (c ==> b) /\\ (a <=> c) ==> (a <=> b /\\ c)
@@ -62051,10 +62051,10 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  INTERS H:real^N->bool
       #|  A:real^N#real->bool
       #|  hyperplane_cellcomplex A (s:real^N->bool)
-      #|  !h:real^N->bool. h IN H ==> hyperplane_cellcomplex A h
+      #|  forall h:real^N->bool. h IN H ==> hyperplane_cellcomplex A h
       #|  h:real^N->bool
       #|  {((fa:(real^N->bool)->real^N) h,&0)}
-      #|  !h. h IN H ==> hyperplane_cellcomplex A ((:real^N) DIFF h)
+      #|  forall h. h IN H ==> hyperplane_cellcomplex A ((:real^N) DIFF h)
       #|  h:real^N->bool
       #|  h:real^N->bool
       #|  y:real^N
@@ -62071,7 +62071,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (y:real^N) IN s
       #|  y:real^N
       #|  INTERS {{x | fa(h:real^N->bool) dot x <= &0} | h IN J} INTER\n        INTERS {{x:real^N | fa h dot x = &0} | h IN H DIFF J} =\n        INTERS {s INTER {x | fa h dot x = &0} | h IN H DIFF J}
-      #|  (!x. x IN s ==> f x = x) ==> s = {f x | x IN s}
+      #|  (forall x. x IN s ==> f x = x) ==> s = {f x | x IN s}
       #|  {f x | x | F} = {}
       #|  J:(real^N->bool)->bool = H
       #|  closure (INTERS {{x | fa h dot x = &0} | h IN H DIFF J}) =\n       INTERS {{x | (fa:(real^N->bool)->real^N) h dot x = &0} | h IN H DIFF J}
@@ -62096,7 +62096,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  c:real^N->bool
       #|  (h:real^N->bool) IN H
       #|  h:real^N->bool
-      #|  (!h. P h ==> (Q h <=> R h))\n        ==> (!h. P h) ==> ((!h. Q h) <=> (!h. R h))
+      #|  (forall h. P h ==> (Q h <=> R h))\n        ==> (forall h. P h) ==> ((forall h. Q h) <=> (forall h. R h))
       #|  z:real^N
       #|  ~(relative_interior f:real^N->bool = {})
       #|  h:real^N->bool
@@ -62135,7 +62135,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (z:real^N) IN f /\\ z IN s
       #|  z:real^N
       #|  ~(relative_interior f:real^N->bool = {})
-      #|  !h:real^N->bool. h IN J ==> h IN H /\\ ga h:real^N = fa h
+      #|  forall h:real^N->bool. h IN J ==> h IN H /\\ ga h:real^N = fa h
       #|  \\h:real^N->bool. &0
       #|  ga:(real^N->bool)->real^N
       #|  J:(real^N->bool)->bool
@@ -62150,19 +62150,19 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (h:real^N->bool) IN J
       #|  (h:real^N->bool) IN (H UNION H')
       #|  h:real^N->bool
-      #|  !h:real^N->bool. h IN J\n          ==> ?a. {x | a dot x <= &0} = h /\\\n                  (h IN H /\\ a = fa h \\/ ?h'. h' IN H /\\ a = --(fa h'))
+      #|  forall h:real^N->bool. h IN J\n          ==> ?a. {x | a dot x <= &0} = h /\\\n                  (h IN H /\\ a = fa h \\/ ?h'. h' IN H /\\ a = --(fa h'))
       #|  s SUBSET t ==> ~(s = t) ==> s PSUBSET t
       #|  a /\\ b /\\ (~c ==> d) ==> ~(a /\\ b /\\ c) ==> d
       #|  J':(real^N->bool)->bool
       #|  CARD(J':(real^N->bool)->bool)
-      #|  !J'. J' PSUBSET J\n             ==> (f:real^N->bool) PSUBSET (affine hull f INTER INTERS J')
+      #|  forall J'. J' PSUBSET J\n             ==> (f:real^N->bool) PSUBSET (affine hull f INTER INTERS J')
       #|  J:(real^N->bool)->bool
       #|  nn:num
       #|  (?f. FINITE f /\\ P f) <=> (?n f. f HAS_SIZE n /\\ P f)
       #|  --x <= &0 <=> &0 <= x
       #|  y:real^N
-      #|  (!x. x IN s ==> f x = x) ==> {f x | x IN s} = s
-      #|  s = s' /\\ (!x. x IN s ==> (x IN t <=> x IN t'))\n            ==> s INTER t = s' INTER t'
+      #|  (forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s
+      #|  s = s' /\\ (forall x. x IN s ==> (x IN t <=> x IN t'))\n            ==> s INTER t = s' INTER t'
       #|  s SUBSET f /\\ s = t ==> s = f INTER t
       #|  H UNION IMAGE (\\h:real^N->bool.\n             {x:real^N | --(fa h) dot x <= &0}) J
       #|  J:(real^N->bool)->bool
@@ -62171,7 +62171,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  (y:real^N) IN s
       #|  y:real^N
       #|  {h:real^N->bool | h IN H /\\\n                           f SUBSET s INTER {x:real^N | fa h dot x = &0}} =\n                       {}
-      #|  (!x. x IN s ==> f x = x) ==> {f x | x IN s} = s
+      #|  (forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s
       #|  INTERS {{x:real^N | fa(h:real^N->bool) dot x <= &0} | h IN H} = s
       #|  f:real^N->bool
       #|  \\h:real^N->bool. &0
@@ -62179,7 +62179,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  H:(real^N->bool)->bool
       #|  s:real^N->bool
       #|  {h:real^N->bool | h IN H /\\\n                     f SUBSET s INTER {x:real^N | fa h dot x = &0}}
-      #|  (!x. x IN s ==> f x = x) ==> s = {f x | x IN s}
+      #|  (forall x. x IN s ==> f x = x) ==> s = {f x | x IN s}
       #|  INTERS H = (s:real^N->bool)
       #|  {f x | x | F} = {}
       #|  {}:(real^N->bool)->bool
@@ -62224,13 +62224,13 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  b:real
       #|  a:real^N
       #|  h:real^N->bool
-      #|  !h:real^N->bool. h IN H ==> ?a. ~(a = vec 0) /\\ h = {x | a dot x <= &0}
+      #|  forall h:real^N->bool. h IN H ==> ?a. ~(a = vec 0) /\\ h = {x | a dot x <= &0}
       #|  (vec 0:real^N) IN s
       #|  H:(real^N->bool)->bool
       #|  affine hull (interior s:real^N->bool)
-      #|  !s. s = UNIV /\\ s SUBSET t ==> t = UNIV
+      #|  forall s. s = UNIV /\\ s SUBSET t ==> t = UNIV
       #|  affine hull s = (:real^N)
-      #|  !s. polyhedron s /\\ conic s /\\ ~(interior s = {}) /\\ ~(s = (:real^N))\n       ==> sum (0..dimindex(:N))\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of s /\\ aff_dim f = &d })) = &0
+      #|  forall s. polyhedron s /\\ conic s /\\ ~(interior s = {}) /\\ ~(s = (:real^N))\n       ==> sum (0..dimindex(:N))\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of s /\\ aff_dim f = &d })) = &0
       #|  (h:real^N->bool) IN H
       #|  (h:real^N->bool) IN H
       #|  (h:real^N->bool) IN H
@@ -62285,7 +62285,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  aff_dim((vec 0:real^N) INSERT (affine hull f))
       #|  x IN s /\\ s SUBSET P hull s ==> x IN P hull s
       #|  affine hull p:real^N->bool
-      #|  !t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
+      #|  forall t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
       #|  ~p /\\ q ==> ~(p <=> q)
       #|  vec 0:real^N
       #|  f < a /\\ a <= f + &1 ==> a:int = f + &1
@@ -62304,7 +62304,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  &0:int < &d + &1
       #|  f INTER {x:real^N | x$1 = &1}
       #|  f:real^N->bool
-      #|  !f:real^N->bool. f face_of p /\\ ~(f = {})\n                     ==> aff_dim(conic hull f) = aff_dim f + &1
+      #|  forall f:real^N->bool. f face_of p /\\ ~(f = {})\n                     ==> aff_dim(conic hull f) = aff_dim f + &1
       #|  x:real^N
       #|  b:real^N
       #|  a:real^N
@@ -62358,7 +62358,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  a:real^N
       #|  ca:real
       #|  f:real^N->bool = {}
-      #|  !f:real^N->bool. f face_of p ==> (conic hull f) face_of s
+      #|  forall f:real^N->bool. f face_of p ==> (conic hull f) face_of s
       #|  &0:int < &d + &1
       #|  inv(x$1) % x:real^N
       #|  (x:real^N)$1
@@ -62370,11 +62370,11 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  ?y:real^N. y IN f /\\ ~(y = vec 0)
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  !f. f face_of s  /\\ &0 < aff_dim f\n        ==> conic hull (f INTER {x:real^N | x$1 = &1}) = f
+      #|  forall f. f face_of s  /\\ &0 < aff_dim f\n        ==> conic hull (f INTER {x:real^N | x$1 = &1}) = f
       #|  p = conic hull p INTER {x:real^N | x$1 = &1}
-      #|  !f:real^N->bool. f face_of s ==> f INTER {x | x$1 = &1} face_of p
+      #|  forall f:real^N->bool. f face_of s ==> f INTER {x | x$1 = &1} face_of p
       #|  affine hull p:real^N->bool
-      #|  !f:real^N->bool. f face_of p ==> conic hull f INTER {x | x$1 = &1} = f
+      #|  forall f:real^N->bool. f face_of p ==> conic hull f INTER {x | x$1 = &1} = f
       #|  {f:real^N->bool | f face_of s}
       #|  \\f:real^N->bool. conic hull f
       #|  \\f:real^N->bool. f INTER {x | x$1 = &1}
@@ -62393,11 +62393,11 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  {f | f face_of s /\\ (?a:real^N. f = {a})} = {{vec 0}}
       #|  x:real^N = vec 0
       #|  x:real^N
-      #|  !x:real^N. x IN s ==> &0 <= x$1
+      #|  forall x:real^N. x IN s ==> &0 <= x$1
       #|  (x:real^N) IN affine hull p
       #|  x:real^N
       #|  c:real
-      #|  !x:real^N. x IN s /\\ ~(x = vec 0) ==> &0 < x$1
+      #|  forall x:real^N. x IN s /\\ ~(x = vec 0) ==> &0 < x$1
       #|  vec 0:real^N
       #|  &1
       #|  basis 1:real^N
@@ -62430,24 +62430,24 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  x:real^N
       #|  x:real^N
       #|  c:real
-      #|  !f. f SUBSET {x:real^N | x$1 = &1}\n        ==> (conic hull f) INTER {x:real^N | x$1 = &1} = f
+      #|  forall f. f SUBSET {x:real^N | x$1 = &1}\n        ==> (conic hull f) INTER {x:real^N | x$1 = &1} = f
       #|  s:real^N->bool
       #|  s:real^N->bool = conic hull p
       #|  --(&1):int = x - &1 <=> x = &0
       #|  p:real^N->bool = {}
       #|  &1
       #|  basis 1:real^N
-      #|  !p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &1}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
+      #|  forall p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &1}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
       #|  {f:real^N->bool | f face_of p}
-      #|  (!x y. Q x y ==> x = y)\n        ==> (!x y. P x /\\ P y /\\ Q x y ==> x = y)
+      #|  (forall x y. Q x y ==> x = y)\n        ==> (forall x y. P x /\\ P y /\\ Q x y ==> x = y)
       #|  d:num
       #|  {y | y IN IMAGE f s /\\ P y} =\n                          {f x |x| x IN s /\\ P(f x)}
       #|  {f | f face_of s /\\ P f} =\n                          {f | f IN {f | f face_of s} /\\ P f}
       #|  a + x:real^N = y <=> x = y - a
       #|  IMAGE (\\x:real^N. basis 1 + x) p
-      #|  !p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &0}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
+      #|  forall p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &0}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
       #|  {f:real^N->bool | f face_of p}
-      #|  (!x y. Q x y ==> x = y)\n        ==> (!x y. P x /\\ P y /\\ Q x y ==> x = y)
+      #|  (forall x y. Q x y ==> x = y)\n        ==> (forall x y. P x /\\ P y /\\ Q x y ==> x = y)
       #|  {y | y IN IMAGE f s /\\ P y} =\n                              {f x |x| x IN s /\\ P(f x)}
       #|  {f | f face_of s /\\ P f} =\n                          {f | f IN {f | f face_of s} /\\ P f}
       #|  p:real^N->bool
@@ -62456,7 +62456,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  i:num
       #|  1 <= n /\\ i <= n + 1 ==> i - 1 <= n
       #|  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
-      #|  !x y. (f:real^N->real^(N,1)finite_sum) x = f y <=> x = y
+      #|  forall x y. (f:real^N->real^(N,1)finite_sum) x = f y <=> x = y
       #|  d:num
       #|  1 <= n /\\ i <= n + 1 ==> i - 1 <= n
       #|  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
@@ -62469,16 +62469,16 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  s:real^(N,1)finite_sum->bool
       #|  s = IMAGE (f:real^N->real^(N,1)finite_sum) p
       #|  f:real^N->real^(N,1)finite_sum =\n          \\x. lambda i. if i = 1 then &0 else x$(i-1)
-      #|  !p:real^N->bool.\n        polytope p /\\ aff_dim p = &(dimindex(:N))\n        ==> sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
+      #|  forall p:real^N->bool.\n        polytope p /\\ aff_dim p = &(dimindex(:N))\n        ==> sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
       #|  ((x + --y) + z) + -- &1:real = &1 <=>\n                            x + z = y + &2
       #|  p:real^3->bool
       #|  f:real^3->bool
       #|  f:real^3->bool
-      #|  P a /\\ (!x. P x ==> x = a) ==> {x | P x} = {a}
+      #|  P a /\\ (forall x. P x ==> x = a) ==> {x | P x} = {a}
       #|  {f:real^3->bool | f face_of p /\\ aff_dim f = &3} = {p}
       #|  3
       #|  p:real^3->bool
-      #|  !p:real^3->bool.\n        polytope p /\\ aff_dim p = &3\n        ==> (CARD {v | v face_of p /\\ aff_dim(v) = &0} +\n             CARD {f | f face_of p /\\ aff_dim(f) = &2}) -\n            CARD {e | e face_of p /\\ aff_dim(e) = &1} = 2
+      #|  forall p:real^3->bool.\n        polytope p /\\ aff_dim p = &3\n        ==> (CARD {v | v face_of p /\\ aff_dim(v) = &0} +\n             CARD {f | f face_of p /\\ aff_dim(f) = &2}) -\n            CARD {e | e face_of p /\\ aff_dim(e) = &1} = 2
       #|hyperplane_side =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(real,bool),bool) (\b:real. ((#=:fun(real,fun(real,bool)) ((#hyperplane_side:fun(prod(cart(real,'N),real),fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) a:cart(real,'N)) b:real)) x:cart(real,'N))) (#real_sgn:fun(real,real) ((#real_sub:fun(real,fun(real,real)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) a:cart(real,'N)) x:cart(real,'N))) b:real)))))))))
       #|hyperplane_equiv =  |- (#!:fun(fun(fun(prod(cart(real,'?1262453),real),bool),bool),bool) (\A:fun(prod(cart(real,'?1262453),real),bool). (#!:fun(fun(cart(real,'?1262453),bool),bool) (\x:cart(real,'?1262453). (#!:fun(fun(cart(real,'?1262453),bool),bool) (\y:cart(real,'?1262453). ((#=:fun(bool,fun(bool,bool)) (((#hyperplane_equiv:fun(fun(prod(cart(real,'?1262453),real),bool),fun(cart(real,'?1262453),fun(cart(real,'?1262453),bool))) A:fun(prod(cart(real,'?1262453),real),bool)) x:cart(real,'?1262453)) y:cart(real,'?1262453))) (#!:fun(fun(prod(cart(real,'?1262453),real),bool),bool) (\h:prod(cart(real,'?1262453),real). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(prod(cart(real,'?1262453),real),fun(fun(prod(cart(real,'?1262453),real),bool),bool)) h:prod(cart(real,'?1262453),real)) A:fun(prod(cart(real,'?1262453),real),bool))) ((#=:fun(real,fun(real,bool)) ((#hyperplane_side:fun(prod(cart(real,'?1262453),real),fun(cart(real,'?1262453),real)) h:prod(cart(real,'?1262453),real)) x:cart(real,'?1262453))) ((#hyperplane_side:fun(prod(cart(real,'?1262453),real),fun(cart(real,'?1262453),real)) h:prod(cart(real,'?1262453),real)) y:cart(real,'?1262453)))))))))))))
       #|HYPERPLANE_EQUIV_REFL =  |- (#!:fun(fun(fun(prod(cart(real,'?1262469),real),bool),bool),bool) (\A:fun(prod(cart(real,'?1262469),real),bool). (#!:fun(fun(cart(real,'?1262469),bool),bool) (\x:cart(real,'?1262469). (((#hyperplane_equiv:fun(fun(prod(cart(real,'?1262469),real),bool),fun(cart(real,'?1262469),fun(cart(real,'?1262469),bool))) A:fun(prod(cart(real,'?1262469),real),bool)) x:cart(real,'?1262469)) x:cart(real,'?1262469))))))

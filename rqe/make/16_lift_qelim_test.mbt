@@ -6716,7 +6716,7 @@ test "Rqe/lift_qelim matches Rqe/lift_qelim.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Rqe/lift_qelim quotations (15):
-      #|  ~(?!x. P x) <=> (!x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
+      #|  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
       #|  ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
       #|  (p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)
       #|  ~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)
@@ -6726,7 +6726,7 @@ test "Rqe/lift_qelim matches Rqe/lift_qelim.ml" {
       #|  ~(p /\\ q) <=> ~p \\/ ~q
       #|  ~(~p) <=> p
       #|  (a \\/ b) \\/ c <=> a \\/ b \\/ c
-      #|  !P. (!x. P x) <=> ~ (?x. ~ P x)
+      #|  forall P. (forall x. P x) <=> ~ (?x. ~ P x)
       #|  (~)
       #|  (\\/)
       #|  T

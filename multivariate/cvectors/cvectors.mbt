@@ -54,7 +54,7 @@ pub fn gconjuncts(x11 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
 /// COMPONENT_LE_NORM_ALT
 fn step_2() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([@real.real_abs_le(), @vectors.component_le_norm(), @realax.real_le_trans()]))
-  component_le_norm_alt_c.set(@tactics.prove(@parser.parse_term("!x:real^N i. 1 <= i /\\ i <= dimindex (:N) ==> x$i <= norm x"), t12))
+  component_le_norm_alt_c.set(@tactics.prove(@parser.parse_term("forall x:real^N i. 1 <= i /\\ i <= dimindex (:N) ==> x$i <= norm x"), t12))
 }
 
 ///|
@@ -74,7 +74,7 @@ fn step_3() -> Unit raise {
   let t16 = @tactics.orelse_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(component_le_norm_alt()), t14), @int.arith_tac), t15)
   let t13 = @tactics.repeat_tac(@tactics.conj_tac)
   let t17 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@complexes.re_def(), @complexes.im_def()])), @tactics.gen_tac), t13), t16)
-  re_im_norm_c.set(@tactics.prove(@parser.parse_term("!x. Re x <= norm x /\\ Im x <= norm x /\\ abs(Re x) <= norm x\n  /\\ abs(Im x) <= norm x"), t17))
+  re_im_norm_c.set(@tactics.prove(@parser.parse_term("forall x. Re x <= norm x /\\ Im x <= norm x /\\ abs(Re x) <= norm x\n  /\\ abs(Im x) <= norm x"), t17))
 }
 
 ///|
@@ -141,7 +141,7 @@ fn step_4() -> Unit raise {
 /// NORM_RE
 fn step_5() -> Unit raise {
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.spec_all(abs_re_norm()))), @calc_rat.real_arith_tac)
-  norm_re_c.set(@tactics.prove(@parser.parse_term("!x. &0 <= norm x + Re x /\\ &0 <= norm x - Re x"), t18))
+  norm_re_c.set(@tactics.prove(@parser.parse_term("forall x. &0 <= norm x + Re x /\\ &0 <= norm x - Re x"), t18))
 }
 
 ///|
@@ -188,7 +188,7 @@ fn step_6() -> Unit raise {
 /// NORM2_ADD_REAL
 fn step_7() -> Unit raise {
   let t19 = @simp.simp_tac(@list.List([@complexes.real(), @complexes.complex_norm(), @complexes.re_add(), @complexes.im_add(), @complexes.re_mul_ii(), @complexes.im_mul_ii(), @calc_int.real_neg_0(), @realax.real_add_lid(), @calc_int.real_add_rid(), @real.real_pow_zero(), @int.arith_rule(@parser.parse_term("~(2=0)")), @real.real_le_pow_2(), @real.sqrt_pow_2(), @realarith.real_le_add()]))
-  norm2_add_real_c.set(@tactics.prove(@parser.parse_term("!x y.\n    real x /\\ real y ==> norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2"), t19))
+  norm2_add_real_c.set(@tactics.prove(@parser.parse_term("forall x y.\n    real x /\\ real y ==> norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2"), t19))
 }
 
 ///|
@@ -232,7 +232,7 @@ fn step_9() -> Unit raise {
     @tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([x]))(t23)), t26)
   })
   let t33 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t27), t29), t32)
-  complex_balance_div_mul_c.set(@tactics.prove(@parser.parse_term("!x y z t. ~(z=Cx(&0)) ==> (x = y/z * t <=> x*z = y * t)"), t33))
+  complex_balance_div_mul_c.set(@tactics.prove(@parser.parse_term("forall x y z t. ~(z=Cx(&0)) ==> (x = y/z * t <=> x*z = y * t)"), t33))
 }
 
 ///|
@@ -417,7 +417,7 @@ fn step_10() -> Unit raise {
   let t35 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t34 = @tactics.repeat_tac(@tactics.strip_tac)
   let t166 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@complexes.csqrt(), @complexes.complex_mul(), @complexes.im(), @complexes.re(), @complexes.im_cx(), @calc_int.real_mul_lzero(), @calc_int.real_add_rid(), @complexes.re_cx(), @real.real_sub_rzero()])), t34), t35), t41), t42), t82), t85), t86), t87), t91), t92), @tactics.disch_tac), t93), t94), t96), t100), t112), t113), t117), t118), t119), t123), t126), t127), t131), t133), t134), t138), t141), t145), t147), t148), t152), t153), t154), t155), @tactics.conj_tac), t165)
-  csqrt_mul_lcx_lt_c.set(@tactics.prove(@parser.parse_term("!x y. &0 < x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y"), t166))
+  csqrt_mul_lcx_lt_c.set(@tactics.prove(@parser.parse_term("forall x y. &0 < x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y"), t166))
 }
 
 ///|
@@ -437,7 +437,7 @@ fn step_11() -> Unit raise {
   let t168 = @simp.asm_simp_tac(@list.List([csqrt_mul_lcx_lt()]))
   let t167 = @tactics.repeat_tac(@tactics.strip_tac)
   let t171 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realarith.real_le_lt()])), t167), t168), t169), t170)
-  csqrt_mul_lcx_c.set(@tactics.prove(@parser.parse_term("!x y. &0 <= x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y"), t171))
+  csqrt_mul_lcx_c.set(@tactics.prove(@parser.parse_term("forall x y. &0 <= x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y"), t171))
 }
 
 ///|
@@ -452,7 +452,7 @@ pub fn csqrt_mul_lcx() -> @kernel.Thm {
 ///|
 /// REAL_ADD_POW_2
 fn step_12() -> Unit raise {
-  real_add_pow_2_c.set(@tactics.prove(@parser.parse_term("!x y:real. (x+y) pow 2 = x pow 2 + y pow 2 + &2 * x * y"), @calc_rat.real_arith_tac))
+  real_add_pow_2_c.set(@tactics.prove(@parser.parse_term("forall x y:real. (x+y) pow 2 = x pow 2 + y pow 2 + &2 * x * y"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -468,7 +468,7 @@ pub fn real_add_pow_2() -> @kernel.Thm {
 /// COMPLEX_ADD_POW_2
 fn step_13() -> Unit raise {
   let t172 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexes.complex_pow_2()])), @complexes.simple_complex_arith_tac)
-  complex_add_pow_2_c.set(@tactics.prove(@parser.parse_term("!x y:complex. (x+y) pow 2 = x pow 2 + y pow 2 + Cx(&2) * x * y"), t172))
+  complex_add_pow_2_c.set(@tactics.prove(@parser.parse_term("forall x y:complex. (x+y) pow 2 = x pow 2 + y pow 2 + Cx(&2) * x * y"), t172))
 }
 
 ///|
@@ -490,7 +490,7 @@ fn step_14() -> Unit raise {
 /// FINITE_INTER_ENUM
 fn step_15() -> Unit raise {
   let t173 = @meson.meson_tac(@list.List([@sets.finite_inter(), @iterate.finite_numseg()]))
-  finite_inter_enum_c.set(@tactics.prove(@parser.parse_term("!s n. FINITE(s INTER (0..n))"), t173))
+  finite_inter_enum_c.set(@tactics.prove(@parser.parse_term("forall s n. FINITE(s INTER (0..n))"), t173))
 }
 
 ///|
@@ -506,7 +506,7 @@ pub fn finite_inter_enum() -> @kernel.Thm {
 /// NORM_PASTECART_GE1
 fn step_16() -> Unit raise {
   let t174 = @meson.meson_tac(@list.List([@cart.fstcart_pastecart(), @vectors.norm_fstcart()]))
-  norm_pastecart_ge1_c.set(@tactics.prove(@parser.parse_term("!x y. norm x <= norm (pastecart x y)"), t174))
+  norm_pastecart_ge1_c.set(@tactics.prove(@parser.parse_term("forall x y. norm x <= norm (pastecart x y)"), t174))
 }
 
 ///|
@@ -522,7 +522,7 @@ pub fn norm_pastecart_ge1() -> @kernel.Thm {
 /// NORM_PASTECART_GE2
 fn step_17() -> Unit raise {
   let t175 = @meson.meson_tac(@list.List([@cart.sndcart_pastecart(), @vectors.norm_sndcart()]))
-  norm_pastecart_ge2_c.set(@tactics.prove(@parser.parse_term("!x y. norm y <= norm (pastecart x y)"), t175))
+  norm_pastecart_ge2_c.set(@tactics.prove(@parser.parse_term("forall x y. norm y <= norm (pastecart x y)"), t175))
 }
 
 ///|
@@ -539,7 +539,7 @@ pub fn norm_pastecart_ge2() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t176 = @equal.gsym(@topology.lim_pastecart_eq())
   let t177 = @simp.simp_tac(@list.List([@topology.sums(), finite_inter_enum(), @equal.gsym(@vectors.pastecart_vsum()), t176]))
-  sums_pastecart_c.set(@tactics.prove(@parser.parse_term("!s f1:num->real^N f2:num->real^M l1 l2. (f1 sums l1) s /\\ (f2 sums l2) s\n    <=> ((\\x. pastecart (f1 x) (f2 x)) sums (pastecart l1 l2)) s"), t177))
+  sums_pastecart_c.set(@tactics.prove(@parser.parse_term("forall s f1:num->real^N f2:num->real^M l1 l2. (f1 sums l1) s /\\ (f2 sums l2) s\n    <=> ((\\x. pastecart (f1 x) (f2 x)) sums (pastecart l1 l2)) s"), t177))
 }
 
 ///|
@@ -556,7 +556,7 @@ pub fn sums_pastecart() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t178 = @simp.rewrite_rule(@list.List([@trivia.o_def(), @topology.continuous_at_sequentially()]))(@topology.linear_continuous_at())
   let t179 = @simp.simp_tac(@list.List([@topology.sums(), finite_inter_enum(), @equal.gsym(@vectors.linear_vsum()), t178]))
-  linear_sums_c.set(@tactics.prove(@parser.parse_term("!s f l g. linear g ==> ((f sums l) s ==> ((g o f) sums (g l)) s)"), t179))
+  linear_sums_c.set(@tactics.prove(@parser.parse_term("forall s f l g. linear g ==> ((f sums l) s ==> ((g o f) sums (g l)) s)"), t179))
 }
 
 ///|
@@ -587,7 +587,7 @@ pub fn real_of_complex() -> @kernel.Thm {
 /// REAL_OF_COMPLEX
 fn step_21() -> Unit raise {
   let t180 = @meson.meson_tac(@list.List([@complexes.real_v1(), real_of_complex()]))
-  real_of_complex_v1_c.set(@tactics.prove(@parser.parse_term("!c. real c ==> Cx(real_of_complex c) = c"), t180))
+  real_of_complex_v1_c.set(@tactics.prove(@parser.parse_term("forall c. real c ==> Cx(real_of_complex c) = c"), t180))
 }
 
 ///|
@@ -603,7 +603,7 @@ pub fn real_of_complex_v1() -> @kernel.Thm {
 /// REAL_OF_COMPLEX_RE
 fn step_22() -> Unit raise {
   let t181 = @meson.meson_tac(@list.List([@complexes.re_cx(), real_of_complex_v1()]))
-  real_of_complex_re_c.set(@tactics.prove(@parser.parse_term("!c. real c ==> real_of_complex c = Re c"), t181))
+  real_of_complex_re_c.set(@tactics.prove(@parser.parse_term("forall c. real c ==> real_of_complex c = Re c"), t181))
 }
 
 ///|
@@ -619,7 +619,7 @@ pub fn real_of_complex_re() -> @kernel.Thm {
 /// REAL_OF_COMPLEX_CX
 fn step_23() -> Unit raise {
   let t182 = @simp.simp_tac(@list.List([@complexes.real_cx(), real_of_complex_re(), @complexes.re_cx()]))
-  real_of_complex_cx_c.set(@tactics.prove(@parser.parse_term("!r. real_of_complex (Cx r) = r"), t182))
+  real_of_complex_cx_c.set(@tactics.prove(@parser.parse_term("forall r. real_of_complex (Cx r) = r"), t182))
 }
 
 ///|
@@ -635,7 +635,7 @@ pub fn real_of_complex_cx() -> @kernel.Thm {
 /// REAL_OF_COMPLEX_NORM
 fn step_24() -> Unit raise {
   let t183 = @meson.meson_tac(@list.List([@complexes.real_norm(), real_of_complex_re()]))
-  real_of_complex_norm_c.set(@tactics.prove(@parser.parse_term("!c. real c ==> norm c = abs (real_of_complex c)"), t183))
+  real_of_complex_norm_c.set(@tactics.prove(@parser.parse_term("forall c. real c ==> norm c = abs (real_of_complex c)"), t183))
 }
 
 ///|
@@ -651,7 +651,7 @@ pub fn real_of_complex_norm() -> @kernel.Thm {
 /// REAL_OF_COMPLEX_ADD
 fn step_25() -> Unit raise {
   let t184 = @meson.meson_tac(@list.List([@complexes.real_add(), real_of_complex_re(), @complexes.re_add()]))
-  real_of_complex_add_c.set(@tactics.prove(@parser.parse_term("!x y. real x /\\ real y\n    ==> real_of_complex (x+y) = real_of_complex x + real_of_complex y"), t184))
+  real_of_complex_add_c.set(@tactics.prove(@parser.parse_term("forall x y. real x /\\ real y\n    ==> real_of_complex (x+y) = real_of_complex x + real_of_complex y"), t184))
 }
 
 ///|
@@ -667,7 +667,7 @@ pub fn real_of_complex_add() -> @kernel.Thm {
 /// REAL_MUL
 fn step_26() -> Unit raise {
   let t185 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexes.real()])), @complexes.simple_complex_arith_tac)
-  real_mul_c.set(@tactics.prove(@parser.parse_term("!x y. real x /\\ real y ==> real (x*y)"), t185))
+  real_mul_c.set(@tactics.prove(@parser.parse_term("forall x y. real x /\\ real y ==> real (x*y)"), t185))
 }
 
 ///|
@@ -683,7 +683,7 @@ pub fn real_mul() -> @kernel.Thm {
 /// REAL_OF_COMPLEX_MUL
 fn step_27() -> Unit raise {
   let t186 = @meson.meson_tac(@list.List([real_mul(), real_of_complex_v1(), @complexes.cx_mul(), real_of_complex_cx()]))
-  real_of_complex_mul_c.set(@tactics.prove(@parser.parse_term("!x y. real x /\\ real y\n    ==> real_of_complex (x*y) = real_of_complex x * real_of_complex y"), t186))
+  real_of_complex_mul_c.set(@tactics.prove(@parser.parse_term("forall x y. real x /\\ real y\n    ==> real_of_complex (x*y) = real_of_complex x * real_of_complex y"), t186))
 }
 
 ///|
@@ -701,7 +701,7 @@ fn step_28() -> Unit raise {
   let t188 = @simp.asm_simp_tac(@list.List([real_of_complex_cx(), @complexes.cx_inj()]))
   let t187 = @tactics.repeat_tac(@tactics.strip_tac)
   let t189 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@complexes.real_exists()])), t187), t188)
-  real_of_complex_0_c.set(@tactics.prove(@parser.parse_term("!x. real x ==> (real_of_complex x = &0 <=> x = Cx(&0))"), t189))
+  real_of_complex_0_c.set(@tactics.prove(@parser.parse_term("forall x. real x ==> (real_of_complex x = &0 <=> x = Cx(&0))"), t189))
 }
 
 ///|
@@ -717,7 +717,7 @@ pub fn real_of_complex_0() -> @kernel.Thm {
 /// REAL_COMPLEX_ADD_CNJ
 fn step_29() -> Unit raise {
   let t190 = @simp.rewrite_tac(@list.List([@complexes.complex_add_cnj(), @complexes.real_cx()]))
-  real_complex_add_cnj_c.set(@tactics.prove(@parser.parse_term("!x. real(cnj x + x) /\\ real(x + cnj x)"), t190))
+  real_complex_add_cnj_c.set(@tactics.prove(@parser.parse_term("forall x. real(cnj x + x) /\\ real(x + cnj x)"), t190))
 }
 
 ///|
@@ -794,7 +794,7 @@ pub fn vector_map3() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t191 = @meson.meson_tac(@list.List([@cart.finite_index_works()]))
   let t192 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.finite_index()])), t191)
-  finite_index_inrange_2_c.set(@tactics.prove(@parser.parse_term("!i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ (!x:A^N. x$i = x$k)\n  /\\ (!x:B^N. x$i = x$k) /\\ (!x:C^N. x$i = x$k) /\\ (!x:D^N. x$i = x$k)"), t192))
+  finite_index_inrange_2_c.set(@tactics.prove(@parser.parse_term("forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ (forall x:A^N. x$i = x$k)\n  /\\ (forall x:B^N. x$i = x$k) /\\ (forall x:C^N. x$i = x$k) /\\ (forall x:D^N. x$i = x$k)"), t192))
 }
 
 ///|
@@ -819,7 +819,7 @@ pub fn component_tac(x193 : @kernel.Thm) -> @tactics.Tactic raise {
 /// VECTOR_CONST_COMPONENT
 fn step_35() -> Unit raise {
   let t197 = component_tac(vector_const())
-  vector_const_component_c.set(@tactics.prove(@parser.parse_term("!i k. ((vector_const k):A^N)$i = k"), t197))
+  vector_const_component_c.set(@tactics.prove(@parser.parse_term("forall i k. ((vector_const k):A^N)$i = k"), t197))
 }
 
 ///|
@@ -835,7 +835,7 @@ pub fn vector_const_component() -> @kernel.Thm {
 /// VECTOR_MAP_COMPONENT
 fn step_36() -> Unit raise {
   let t198 = component_tac(vector_map())
-  vector_map_component_c.set(@tactics.prove(@parser.parse_term("!i f:A->B v:A^N. (vector_map f v)$i = f (v$i)"), t198))
+  vector_map_component_c.set(@tactics.prove(@parser.parse_term("forall i f:A->B v:A^N. (vector_map f v)$i = f (v$i)"), t198))
 }
 
 ///|
@@ -851,7 +851,7 @@ pub fn vector_map_component() -> @kernel.Thm {
 /// VECTOR_MAP2_COMPONENT
 fn step_37() -> Unit raise {
   let t199 = component_tac(vector_map2())
-  vector_map2_component_c.set(@tactics.prove(@parser.parse_term("!i f:A->B->C v1:A^N v2. (vector_map2 f v1 v2)$i = f (v1$i) (v2$i)"), t199))
+  vector_map2_component_c.set(@tactics.prove(@parser.parse_term("forall i f:A->B->C v1:A^N v2. (vector_map2 f v1 v2)$i = f (v1$i) (v2$i)"), t199))
 }
 
 ///|
@@ -867,7 +867,7 @@ pub fn vector_map2_component() -> @kernel.Thm {
 /// VECTOR_MAP3_COMPONENT
 fn step_38() -> Unit raise {
   let t200 = component_tac(vector_map3())
-  vector_map3_component_c.set(@tactics.prove(@parser.parse_term("!i f:A->B->C->D v1:A^N v2 v3. (vector_map3 f v1 v2 v3)$i =\n    f (v1$i) (v2$i) (v3$i)"), t200))
+  vector_map3_component_c.set(@tactics.prove(@parser.parse_term("forall i f:A->B->C->D v1:A^N v2 v3. (vector_map3 f v1 v2 v3)$i =\n    f (v1$i) (v2$i) (v3$i)"), t200))
 }
 
 ///|
@@ -899,7 +899,7 @@ pub fn common_tac_v1(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// VECTOR_MAP_VECTOR_CONST
 fn step_40() -> Unit raise {
-  vector_map_vector_const_c.set(@tactics.prove(@parser.parse_term("!f:A->B k. vector_map f ((vector_const k):A^N) = vector_const (f k)"), common_tac_v1))
+  vector_map_vector_const_c.set(@tactics.prove(@parser.parse_term("forall f:A->B k. vector_map f ((vector_const k):A^N) = vector_const (f k)"), common_tac_v1))
 }
 
 ///|
@@ -914,7 +914,7 @@ pub fn vector_map_vector_const() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP_VECTOR_MAP
 fn step_41() -> Unit raise {
-  vector_map_vector_map_c.set(@tactics.prove(@parser.parse_term("!f:A->B g:C->A v:C^N.\n    vector_map f (vector_map g v) = vector_map (f o g) v"), common_tac_v1))
+  vector_map_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f:A->B g:C->A v:C^N.\n    vector_map f (vector_map g v) = vector_map (f o g) v"), common_tac_v1))
 }
 
 ///|
@@ -929,7 +929,7 @@ pub fn vector_map_vector_map() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP_VECTOR_MAP2
 fn step_42() -> Unit raise {
-  vector_map_vector_map2_c.set(@tactics.prove(@parser.parse_term("!f:A->B g:C->D->A u v:D^N.\n    vector_map f (vector_map2 g u v) = vector_map2 (\\x y. f (g x y)) u v"), common_tac_v1))
+  vector_map_vector_map2_c.set(@tactics.prove(@parser.parse_term("forall f:A->B g:C->D->A u v:D^N.\n    vector_map f (vector_map2 g u v) = vector_map2 (\\x y. f (g x y)) u v"), common_tac_v1))
 }
 
 ///|
@@ -944,7 +944,7 @@ pub fn vector_map_vector_map2() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_LVECTOR_CONST
 fn step_43() -> Unit raise {
-  vector_map2_lvector_const_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C k v:B^N.\n    vector_map2 f (vector_const k) v = vector_map (f k) v"), common_tac_v1))
+  vector_map2_lvector_const_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C k v:B^N.\n    vector_map2 f (vector_const k) v = vector_map (f k) v"), common_tac_v1))
 }
 
 ///|
@@ -959,7 +959,7 @@ pub fn vector_map2_lvector_const() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_RVECTOR_CONST
 fn step_44() -> Unit raise {
-  vector_map2_rvector_const_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C k v:A^N.\n    vector_map2 f v (vector_const k) = vector_map (\\x. f x k) v"), common_tac_v1))
+  vector_map2_rvector_const_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C k v:A^N.\n    vector_map2 f v (vector_const k) = vector_map (\\x. f x k) v"), common_tac_v1))
 }
 
 ///|
@@ -974,7 +974,7 @@ pub fn vector_map2_rvector_const() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_LVECTOR_MAP
 fn step_45() -> Unit raise {
-  vector_map2_lvector_map_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C g:D->A v1 v2:B^N.\n    vector_map2 f (vector_map g v1) v2 = vector_map2 (f o g) v1 v2"), common_tac_v1))
+  vector_map2_lvector_map_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C g:D->A v1 v2:B^N.\n    vector_map2 f (vector_map g v1) v2 = vector_map2 (f o g) v1 v2"), common_tac_v1))
 }
 
 ///|
@@ -989,7 +989,7 @@ pub fn vector_map2_lvector_map() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_RVECTOR_MAP
 fn step_46() -> Unit raise {
-  vector_map2_rvector_map_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C g:D->B v1 v2:D^N.\n    vector_map2 f v1 (vector_map g v2) = vector_map2 (\\x y. f x (g y)) v1 v2"), common_tac_v1))
+  vector_map2_rvector_map_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C g:D->B v1 v2:D^N.\n    vector_map2 f v1 (vector_map g v2) = vector_map2 (\\x y. f x (g y)) v1 v2"), common_tac_v1))
 }
 
 ///|
@@ -1004,7 +1004,7 @@ pub fn vector_map2_rvector_map() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_LVECTOR_MAP2
 fn step_47() -> Unit raise {
-  vector_map2_lvector_map2_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C g:D->E->A v1 v2 v3:B^N.\n    vector_map2 f (vector_map2 g v1 v2) v3 =\n      vector_map3 (\\x y. f (g x y)) v1 v2 v3"), common_tac_v1))
+  vector_map2_lvector_map2_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C g:D->E->A v1 v2 v3:B^N.\n    vector_map2 f (vector_map2 g v1 v2) v3 =\n      vector_map3 (\\x y. f (g x y)) v1 v2 v3"), common_tac_v1))
 }
 
 ///|
@@ -1019,7 +1019,7 @@ pub fn vector_map2_lvector_map2() -> @kernel.Thm {
 ///|
 /// VECTOR_MAP2_RVECTOR_MAP2
 fn step_48() -> Unit raise {
-  vector_map2_rvector_map2_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C g:D->E->B v1 v2 v3:E^N.\n    vector_map2 f v1 (vector_map2 g v2 v3) =\n      vector_map3 (\\x y z. f x (g y z)) v1 v2 v3"), common_tac_v1))
+  vector_map2_rvector_map2_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C g:D->E->B v1 v2 v3:E^N.\n    vector_map2 f v1 (vector_map2 g v2 v3) =\n      vector_map3 (\\x y z. f x (g y z)) v1 v2 v3"), common_tac_v1))
 }
 
 ///|
@@ -1071,7 +1071,7 @@ fn step_50() -> Unit raise {
   let t212 = @simp.asm_simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), @vectors.forall_2(), @cart.lambda_beta(), @vectors.vector_2(), @complexes.re_def(), @complexes.im_def()]))
   let t211 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.gen_tac, @tactics.eq_tac))
   let t213 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([vector_map(), @class.fun_eq_thm(), @complexes.complex()])), t211), t212)
-  complex_vector_map_c.set(@tactics.prove(@parser.parse_term("!f:complex->complex g. f = vector_map g\n    <=> !z. f z = complex (g (Re z), g (Im z))"), t213))
+  complex_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f:complex->complex g. f = vector_map g\n    <=> forall z. f z = complex (g (Re z), g (Im z))"), t213))
 }
 
 ///|
@@ -1119,7 +1119,7 @@ pub fn vector_neg_is_a_map() -> @kernel.Thm {
 /// VECTOR_MAP_VECTOR_MAP_ALT
 fn step_53() -> Unit raise {
   let t216 = @simp.simp_tac(@list.List([@trivia.o_def(), @class.fun_eq_thm(), vector_map_vector_map()]))
-  vector_map_vector_map_alt_c.set(@tactics.prove(@parser.parse_term("!f:A^N->B^N g:C^N->A^N f' g'. f = vector_map f' /\\ g = vector_map g' ==>\n    f o g = vector_map (f' o g')"), t216))
+  vector_map_vector_map_alt_c.set(@tactics.prove(@parser.parse_term("forall f:A^N->B^N g:C^N->A^N f' g'. f = vector_map f' /\\ g = vector_map g' ==>\n    f o g = vector_map (f' o g')"), t216))
 }
 
 ///|
@@ -1137,7 +1137,7 @@ fn step_54() -> Unit raise {
   let t218 = @simp.asm_simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), @vectors.forall_2(), @cart.lambda_beta(), @vectors.vector_2(), @complexes.re_def(), @complexes.im_def()]))
   let t217 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.gen_tac, @tactics.eq_tac))
   let t219 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([vector_map2(), @class.fun_eq_thm(), @complexes.complex()])), t217), t218)
-  complex_vector_map2_c.set(@tactics.prove(@parser.parse_term("!f:complex->complex->complex g. f = vector_map2 g <=>\n    !z1 z2. f z1 z2 = complex (g (Re z1) (Re z2), g (Im z1) (Im z2))"), t219))
+  complex_vector_map2_c.set(@tactics.prove(@parser.parse_term("forall f:complex->complex->complex g. f = vector_map2 g <=>\n    forall z1 z2. f z1 z2 = complex (g (Re z1) (Re z2), g (Im z1) (Im z2))"), t219))
 }
 
 ///|
@@ -1153,7 +1153,7 @@ pub fn complex_vector_map2() -> @kernel.Thm {
 /// VECTOR_MAP2_RVECTOR_MAP_ALT
 fn step_55() -> Unit raise {
   let t220 = @simp.simp_tac(@list.List([@class.fun_eq_thm(), vector_map2_rvector_map()]))
-  vector_map2_rvector_map_alt_c.set(@tactics.prove(@parser.parse_term("!f:complex->complex->complex g:complex->complex f' g'.\n    f = vector_map2 f' /\\ g = vector_map g'\n      ==> (\\x y. f x (g y)) = vector_map2 (\\x y. f' x (g' y))"), t220))
+  vector_map2_rvector_map_alt_c.set(@tactics.prove(@parser.parse_term("forall f:complex->complex->complex g:complex->complex f' g'.\n    f = vector_map2 f' /\\ g = vector_map g'\n      ==> (\\x y. f x (g y)) = vector_map2 (\\x y. f' x (g' y))"), t220))
 }
 
 ///|
@@ -1271,7 +1271,7 @@ pub fn common_tac_v2(x231 : @kernel.Thm) -> @tactics.Tactic raise {
 /// PASTECART_VECTOR_MAP
 fn step_60() -> Unit raise {
   let t251 = common_tac_v2(vector_map())
-  pastecart_vector_map_c.set(@tactics.prove(@parser.parse_term("!f:A->B x:A^N y:A^M.\n    pastecart (vector_map f x) (vector_map f y) =\n      vector_map f (pastecart x y)"), t251))
+  pastecart_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f:A->B x:A^N y:A^M.\n    pastecart (vector_map f x) (vector_map f y) =\n      vector_map f (pastecart x y)"), t251))
 }
 
 ///|
@@ -1287,7 +1287,7 @@ pub fn pastecart_vector_map() -> @kernel.Thm {
 /// PASTECART_VECTOR_MAP2
 fn step_61() -> Unit raise {
   let t252 = common_tac_v2(vector_map2())
-  pastecart_vector_map2_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C x1:A^N x2 y1:A^M y2.\n    pastecart (vector_map2 f x1 x2) (vector_map2 f y1 y2)\n      = vector_map2 f (pastecart x1 y1) (pastecart x2 y2)"), t252))
+  pastecart_vector_map2_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C x1:A^N x2 y1:A^M y2.\n    pastecart (vector_map2 f x1 x2) (vector_map2 f y1 y2)\n      = vector_map2 f (pastecart x1 y1) (pastecart x2 y2)"), t252))
 }
 
 ///|
@@ -1322,7 +1322,7 @@ fn step_63() -> Unit raise {
   let t253 = @parser.parse_type("C")
   let t255 = @tactics.choose_tac(@kernel.inst_type(@list.List([(@parser.parse_type("A#B"), t253)]), t254))
   let t257 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t255), t256)
-  vector_zip_component_c.set(@tactics.prove(@parser.parse_term("!i v1:A^N v2:B^N. (vector_zip v1 v2)$i = (v1$i,v2$i)"), t257))
+  vector_zip_component_c.set(@tactics.prove(@parser.parse_term("forall i v1:A^N v2:B^N. (vector_zip v1 v2)$i = (v1$i,v2$i)"), t257))
 }
 
 ///|
@@ -1353,7 +1353,7 @@ pub fn vector_unzip() -> @kernel.Thm {
 /// VECTOR_UNZIP_COMPONENT
 fn step_65() -> Unit raise {
   let t258 = @simp.rewrite_tac(@list.List([vector_unzip(), vector_map_component()]))
-  vector_unzip_component_c.set(@tactics.prove(@parser.parse_term("!i v:(A#B)^N. (FST (vector_unzip v))$i = FST (v$i)\n    /\\ (SND (vector_unzip v))$i = SND (v$i)"), t258))
+  vector_unzip_component_c.set(@tactics.prove(@parser.parse_term("forall i v:(A#B)^N. (FST (vector_unzip v))$i = FST (v$i)\n    /\\ (SND (vector_unzip v))$i = SND (v$i)"), t258))
 }
 
 ///|
@@ -1369,7 +1369,7 @@ pub fn vector_unzip_component() -> @kernel.Thm {
 /// VECTOR_MAP2_AS_VECTOR_MAP
 fn step_66() -> Unit raise {
   let t259 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), vector_map2_component(), vector_map_component(), vector_zip_component(), @pair.uncurry_def()]))
-  vector_map2_as_vector_map_c.set(@tactics.prove(@parser.parse_term("!f:A->B->C v1:A^N v2:B^N.\n    vector_map2 f v1 v2 = vector_map (UNCURRY f) (vector_zip v1 v2)"), t259))
+  vector_map2_as_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->C v1:A^N v2:B^N.\n    vector_map2 f v1 v2 = vector_map (UNCURRY f) (vector_zip v1 v2)"), t259))
 }
 
 ///|
@@ -1488,7 +1488,7 @@ fn step_74() -> Unit raise {
 /// CVECTOR_ZERO_COMPONENT
 fn step_75() -> Unit raise {
   let t261 = @simp.rewrite_tac(@list.List([cvector_zero(), vector_const_component()]))
-  cvector_zero_component_c.set(@tactics.prove(@parser.parse_term("!i. (cvector_zero:complex^N)$i = Cx(&0)"), t261))
+  cvector_zero_component_c.set(@tactics.prove(@parser.parse_term("forall i. (cvector_zero:complex^N)$i = Cx(&0)"), t261))
 }
 
 ///|
@@ -1518,7 +1518,7 @@ fn step_76() -> Unit raise {
       }
     })(x268))
   }, @list.List([@cart.cart_eq()]))), t269), t270)
-  cvector_non_zero_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. ~(x=cvector_zero)\n    <=> ?i. 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = Cx(&0))"), t271))
+  cvector_non_zero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. ~(x=cvector_zero)\n    <=> ?i. 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = Cx(&0))"), t271))
 }
 
 ///|
@@ -1534,7 +1534,7 @@ pub fn cvector_non_zero() -> @kernel.Thm {
 /// CVECTOR_ADD_COMPONENT
 fn step_77() -> Unit raise {
   let t272 = @simp.rewrite_tac(@list.List([cvector_add(), vector_map2_component()]))
-  cvector_add_component_c.set(@tactics.prove(@parser.parse_term("!X Y:complex^N i. ((X + Y)$i = X$i + Y$i)"), t272))
+  cvector_add_component_c.set(@tactics.prove(@parser.parse_term("forall X Y:complex^N i. ((X + Y)$i = X$i + Y$i)"), t272))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ pub fn cvector_add_component() -> @kernel.Thm {
 /// CVECTOR_SUB_COMPONENT
 fn step_78() -> Unit raise {
   let t273 = @simp.rewrite_tac(@list.List([cvector_sub(), vector_map2_component()]))
-  cvector_sub_component_c.set(@tactics.prove(@parser.parse_term("!X:complex^N Y i. ((X - Y)$i = X$i - Y$i)"), t273))
+  cvector_sub_component_c.set(@tactics.prove(@parser.parse_term("forall X:complex^N Y i. ((X - Y)$i = X$i - Y$i)"), t273))
 }
 
 ///|
@@ -1566,7 +1566,7 @@ pub fn cvector_sub_component() -> @kernel.Thm {
 /// CVECTOR_NEG_COMPONENT
 fn step_79() -> Unit raise {
   let t274 = @simp.rewrite_tac(@list.List([cvector_neg(), vector_map_component()]))
-  cvector_neg_component_c.set(@tactics.prove(@parser.parse_term("!X:complex^N i. ((--X)$i = --(X$i))"), t274))
+  cvector_neg_component_c.set(@tactics.prove(@parser.parse_term("forall X:complex^N i. ((--X)$i = --(X$i))"), t274))
 }
 
 ///|
@@ -1582,7 +1582,7 @@ pub fn cvector_neg_component() -> @kernel.Thm {
 /// CVECTOR_MUL_COMPONENT
 fn step_80() -> Unit raise {
   let t275 = @simp.rewrite_tac(@list.List([cvector_mul(), vector_map_component()]))
-  cvector_mul_component_c.set(@tactics.prove(@parser.parse_term("!c:complex X:complex^N i. ((c % X)$i = c * X$i)"), t275))
+  cvector_mul_component_c.set(@tactics.prove(@parser.parse_term("forall c:complex X:complex^N i. ((c % X)$i = c * X$i)"), t275))
 }
 
 ///|
@@ -1661,7 +1661,7 @@ pub fn cvector_map_property_v1(x299 : @kernel.Term) -> ((@kernel.Thm) -> @kernel
 ///|
 /// CVECTOR_ADD_SYM
 fn step_82() -> Unit raise {
-  cvector_add_sym_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. x + y = y + x"))(@complexes.complex_add_sym()))
+  cvector_add_sym_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. x + y = y + x"))(@complexes.complex_add_sym()))
 }
 
 ///|
@@ -1676,7 +1676,7 @@ pub fn cvector_add_sym() -> @kernel.Thm {
 ///|
 /// CVECTOR_ADD_ASSOC
 fn step_83() -> Unit raise {
-  cvector_add_assoc_c.set(cvector_map_property_v1(@parser.parse_term("!x y z:complex^N. x + (y + z) = (x + y) + z"))(@complexes.complex_add_assoc()))
+  cvector_add_assoc_c.set(cvector_map_property_v1(@parser.parse_term("forall x y z:complex^N. x + (y + z) = (x + y) + z"))(@complexes.complex_add_assoc()))
 }
 
 ///|
@@ -1692,7 +1692,7 @@ pub fn cvector_add_assoc() -> @kernel.Thm {
 /// CVECTOR_ADD_ID
 fn step_84() -> Unit raise {
   let t302 = @bool.conj(@complexes.complex_add_rid(), @complexes.complex_add_lid())
-  cvector_add_id_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. x + cvector_zero = x /\\ cvector_zero + x = x"))(t302))
+  cvector_add_id_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. x + cvector_zero = x /\\ cvector_zero + x = x"))(t302))
 }
 
 ///|
@@ -1739,7 +1739,7 @@ fn step_85() -> Unit raise {
 /// CVECTOR_ADD_INV
 fn step_86() -> Unit raise {
   let t303 = @bool.conj(@complexes.complex_add_rinv(), @complexes.complex_add_linv())
-  cvector_add_inv_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. x + -- x = cvector_zero /\\ --x + x = cvector_zero"))(t303))
+  cvector_add_inv_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. x + -- x = cvector_zero /\\ --x + x = cvector_zero"))(t303))
 }
 
 ///|
@@ -1754,7 +1754,7 @@ pub fn cvector_add_inv() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_ASSOC
 fn step_87() -> Unit raise {
-  cvector_mul_assoc_c.set(cvector_map_property_v1(@parser.parse_term("!a b x:complex^N. a % (b % x) = (a * b) % x"))(@complexes.complex_mul_assoc()))
+  cvector_mul_assoc_c.set(cvector_map_property_v1(@parser.parse_term("forall a b x:complex^N. a % (b % x) = (a * b) % x"))(@complexes.complex_mul_assoc()))
 }
 
 ///|
@@ -1769,7 +1769,7 @@ pub fn cvector_mul_assoc() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_LDISTRIB
 fn step_88() -> Unit raise {
-  cvector_sub_ldistrib_c.set(cvector_map_property_v1(@parser.parse_term("!c x y:complex^N. c % (x - y) = c % x - c % y"))(@complexes.complex_sub_ldistrib()))
+  cvector_sub_ldistrib_c.set(cvector_map_property_v1(@parser.parse_term("forall c x y:complex^N. c % (x - y) = c % x - c % y"))(@complexes.complex_sub_ldistrib()))
 }
 
 ///|
@@ -1784,7 +1784,7 @@ pub fn cvector_sub_ldistrib() -> @kernel.Thm {
 ///|
 /// CVECTOR_SCALAR_RDIST
 fn step_89() -> Unit raise {
-  cvector_scalar_rdist_c.set(cvector_map_property_v1(@parser.parse_term("!a b x:complex^N. (a + b) % x = a % x + b % x"))(@complexes.complex_add_rdistrib()))
+  cvector_scalar_rdist_c.set(cvector_map_property_v1(@parser.parse_term("forall a b x:complex^N. (a + b) % x = a % x + b % x"))(@complexes.complex_add_rdistrib()))
 }
 
 ///|
@@ -1799,7 +1799,7 @@ pub fn cvector_scalar_rdist() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_ID
 fn step_90() -> Unit raise {
-  cvector_mul_id_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. Cx(&1) % x = x"))(@complexes.complex_mul_lid()))
+  cvector_mul_id_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. Cx(&1) % x = x"))(@complexes.complex_mul_lid()))
 }
 
 ///|
@@ -1814,7 +1814,7 @@ pub fn cvector_mul_id() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_REFL
 fn step_91() -> Unit raise {
-  cvector_sub_refl_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. x - x = cvector_zero"))(@complexes.complex_sub_refl()))
+  cvector_sub_refl_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. x - x = cvector_zero"))(@complexes.complex_sub_refl()))
 }
 
 ///|
@@ -1829,7 +1829,7 @@ pub fn cvector_sub_refl() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_RADD
 fn step_92() -> Unit raise {
-  cvector_sub_radd_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. x - (x + y) = --y"))(@complexes.complex_add_sub2()))
+  cvector_sub_radd_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. x - (x + y) = --y"))(@complexes.complex_add_sub2()))
 }
 
 ///|
@@ -1844,7 +1844,7 @@ pub fn cvector_sub_radd() -> @kernel.Thm {
 ///|
 /// CVECTOR_NEG_SUB
 fn step_93() -> Unit raise {
-  cvector_neg_sub_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. --(x - y) = y - x"))(@complexes.complex_neg_sub()))
+  cvector_neg_sub_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. --(x - y) = y - x"))(@complexes.complex_neg_sub()))
 }
 
 ///|
@@ -1859,7 +1859,7 @@ pub fn cvector_neg_sub() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_EQ
 fn step_94() -> Unit raise {
-  cvector_sub_eq_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. (x - y = cvector_zero) <=> (x = y)"))(@complexes.complex_sub_0()))
+  cvector_sub_eq_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. (x - y = cvector_zero) <=> (x = y)"))(@complexes.complex_sub_0()))
 }
 
 ///|
@@ -1874,7 +1874,7 @@ pub fn cvector_sub_eq() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_LZERO
 fn step_95() -> Unit raise {
-  cvector_mul_lzero_v1_c.set(cvector_map_property_v1(@parser.parse_term("!x. Cx(&0) % x = cvector_zero"))(@complexes.complex_mul_lzero()))
+  cvector_mul_lzero_v1_c.set(cvector_map_property_v1(@parser.parse_term("forall x. Cx(&0) % x = cvector_zero"))(@complexes.complex_mul_lzero()))
 }
 
 ///|
@@ -1889,7 +1889,7 @@ pub fn cvector_mul_lzero_v1() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_ADD
 fn step_96() -> Unit raise {
-  cvector_sub_add_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. (x - y) + y = x"))(@complexes.complex_sub_add()))
+  cvector_sub_add_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. (x - y) + y = x"))(@complexes.complex_sub_add()))
 }
 
 ///|
@@ -1904,7 +1904,7 @@ pub fn cvector_sub_add() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_ADD2
 fn step_97() -> Unit raise {
-  cvector_sub_add2_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. y + (x - y) = x"))(@complexes.complex_sub_add2()))
+  cvector_sub_add2_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. y + (x - y) = x"))(@complexes.complex_sub_add2()))
 }
 
 ///|
@@ -1919,7 +1919,7 @@ pub fn cvector_sub_add2() -> @kernel.Thm {
 ///|
 /// CVECTOR_ADD_LDISTRIB
 fn step_98() -> Unit raise {
-  cvector_add_ldistrib_c.set(cvector_map_property_v1(@parser.parse_term("!c x y:complex^N. c % (x + y) = c % x + c % y"))(@complexes.complex_add_ldistrib()))
+  cvector_add_ldistrib_c.set(cvector_map_property_v1(@parser.parse_term("forall c x y:complex^N. c % (x + y) = c % x + c % y"))(@complexes.complex_add_ldistrib()))
 }
 
 ///|
@@ -1934,7 +1934,7 @@ pub fn cvector_add_ldistrib() -> @kernel.Thm {
 ///|
 /// CVECTOR_ADD_RDISTRIB
 fn step_99() -> Unit raise {
-  cvector_add_rdistrib_c.set(cvector_map_property_v1(@parser.parse_term("!a b x:complex^N. (a + b) % x = a % x + b % x"))(@complexes.complex_add_rdistrib()))
+  cvector_add_rdistrib_c.set(cvector_map_property_v1(@parser.parse_term("forall a b x:complex^N. (a + b) % x = a % x + b % x"))(@complexes.complex_add_rdistrib()))
 }
 
 ///|
@@ -1949,7 +1949,7 @@ pub fn cvector_add_rdistrib() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_RDISTRIB
 fn step_100() -> Unit raise {
-  cvector_sub_rdistrib_c.set(cvector_map_property_v1(@parser.parse_term("!a b x:complex^N. (a - b) % x = a % x - b % x"))(@complexes.complex_sub_rdistrib()))
+  cvector_sub_rdistrib_c.set(cvector_map_property_v1(@parser.parse_term("forall a b x:complex^N. (a - b) % x = a % x - b % x"))(@complexes.complex_sub_rdistrib()))
 }
 
 ///|
@@ -1964,7 +1964,7 @@ pub fn cvector_sub_rdistrib() -> @kernel.Thm {
 ///|
 /// CVECTOR_ADD_SUB
 fn step_101() -> Unit raise {
-  cvector_add_sub_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. (x + y:complex^N) - x = y"))(@complexes.complex_add_sub()))
+  cvector_add_sub_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. (x + y:complex^N) - x = y"))(@complexes.complex_add_sub()))
 }
 
 ///|
@@ -1979,7 +1979,7 @@ pub fn cvector_add_sub() -> @kernel.Thm {
 ///|
 /// CVECTOR_EQ_ADDR
 fn step_102() -> Unit raise {
-  cvector_eq_addr_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. (x + y = x) <=> (y = cvector_zero)"))(@complexes.complex_eq_add_lcancel_0()))
+  cvector_eq_addr_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. (x + y = x) <=> (y = cvector_zero)"))(@complexes.complex_eq_add_lcancel_0()))
 }
 
 ///|
@@ -1994,7 +1994,7 @@ pub fn cvector_eq_addr() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB
 fn step_103() -> Unit raise {
-  cvector_sub_v1_c.set(cvector_map_property_v1(@parser.parse_term("!x y:complex^N. x - y = x + --(y:complex^N)"))(@complexes.complex_sub()))
+  cvector_sub_v1_c.set(cvector_map_property_v1(@parser.parse_term("forall x y:complex^N. x - y = x + --(y:complex^N)"))(@complexes.complex_sub()))
 }
 
 ///|
@@ -2009,7 +2009,7 @@ pub fn cvector_sub_v1() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_RZERO
 fn step_104() -> Unit raise {
-  cvector_sub_rzero_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. x - cvector_zero = x"))(@complexes.complex_sub_rzero()))
+  cvector_sub_rzero_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. x - cvector_zero = x"))(@complexes.complex_sub_rzero()))
 }
 
 ///|
@@ -2024,7 +2024,7 @@ pub fn cvector_sub_rzero() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_RZERO
 fn step_105() -> Unit raise {
-  cvector_mul_rzero_c.set(cvector_map_property_v1(@parser.parse_term("!c:complex. c % cvector_zero = cvector_zero"))(@complexes.complex_mul_rzero()))
+  cvector_mul_rzero_c.set(cvector_map_property_v1(@parser.parse_term("forall c:complex. c % cvector_zero = cvector_zero"))(@complexes.complex_mul_rzero()))
 }
 
 ///|
@@ -2039,7 +2039,7 @@ pub fn cvector_mul_rzero() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_LZERO
 fn step_106() -> Unit raise {
-  cvector_mul_lzero_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. Cx(&0) % x = cvector_zero"))(@complexes.complex_mul_lzero()))
+  cvector_mul_lzero_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. Cx(&0) % x = cvector_zero"))(@complexes.complex_mul_lzero()))
 }
 
 ///|
@@ -2087,7 +2087,7 @@ fn step_107() -> Unit raise {
   let t322 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t321])
   let t325 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("a=Cx(&0)")), t322), t324])
   let t326 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t325)
-  cvector_mul_eq_0_c.set(@tactics.prove(@parser.parse_term("!a:complex x:complex^N.\n    (a % x = cvector_zero <=> a = Cx(&0) \\/ x = cvector_zero)"), t326))
+  cvector_mul_eq_0_c.set(@tactics.prove(@parser.parse_term("forall a:complex x:complex^N.\n    (a % x = cvector_zero <=> a = Cx(&0) \\/ x = cvector_zero)"), t326))
 }
 
 ///|
@@ -2103,7 +2103,7 @@ pub fn cvector_mul_eq_0() -> @kernel.Thm {
 /// CVECTOR_NEG_MINUS1
 fn step_108() -> Unit raise {
   let t327 = @equal.gsym(@complexes.complex_neg_minus1())
-  cvector_neg_minus1_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. --x = (--(Cx(&1))) % x"))(t327))
+  cvector_neg_minus1_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. --x = (--(Cx(&1))) % x"))(t327))
 }
 
 ///|
@@ -2118,7 +2118,7 @@ pub fn cvector_neg_minus1() -> @kernel.Thm {
 ///|
 /// CVECTOR_SUB_LZERO
 fn step_109() -> Unit raise {
-  cvector_sub_lzero_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. cvector_zero - x = --x"))(@complexes.complex_sub_lzero()))
+  cvector_sub_lzero_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. cvector_zero - x = --x"))(@complexes.complex_sub_lzero()))
 }
 
 ///|
@@ -2133,7 +2133,7 @@ pub fn cvector_sub_lzero() -> @kernel.Thm {
 ///|
 /// CVECTOR_NEG_NEG
 fn step_110() -> Unit raise {
-  cvector_neg_neg_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. --(--(x:complex^N)) = x"))(@complexes.complex_neg_neg()))
+  cvector_neg_neg_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. --(--(x:complex^N)) = x"))(@complexes.complex_neg_neg()))
 }
 
 ///|
@@ -2148,7 +2148,7 @@ pub fn cvector_neg_neg() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_LNEG
 fn step_111() -> Unit raise {
-  cvector_mul_lneg_c.set(cvector_map_property_v1(@parser.parse_term("!c x:complex^N. --c % x = --(c % x)"))(@complexes.complex_mul_lneg()))
+  cvector_mul_lneg_c.set(cvector_map_property_v1(@parser.parse_term("forall c x:complex^N. --c % x = --(c % x)"))(@complexes.complex_mul_lneg()))
 }
 
 ///|
@@ -2163,7 +2163,7 @@ pub fn cvector_mul_lneg() -> @kernel.Thm {
 ///|
 /// CVECTOR_MUL_RNEG
 fn step_112() -> Unit raise {
-  cvector_mul_rneg_c.set(cvector_map_property_v1(@parser.parse_term("!c x:complex^N. c % --x = --(c % x)"))(@complexes.complex_mul_rneg()))
+  cvector_mul_rneg_c.set(cvector_map_property_v1(@parser.parse_term("forall c x:complex^N. c % --x = --(c % x)"))(@complexes.complex_mul_rneg()))
 }
 
 ///|
@@ -2193,7 +2193,7 @@ pub fn cvector_neg_0() -> @kernel.Thm {
 ///|
 /// CVECTOR_NEG_EQ_0
 fn step_114() -> Unit raise {
-  cvector_neg_eq_0_c.set(cvector_map_property_v1(@parser.parse_term("!x:complex^N. --x = cvector_zero <=> x = cvector_zero"))(@complexes.complex_neg_eq_0()))
+  cvector_neg_eq_0_c.set(cvector_map_property_v1(@parser.parse_term("forall x:complex^N. --x = cvector_zero <=> x = cvector_zero"))(@complexes.complex_neg_eq_0()))
 }
 
 ///|
@@ -2209,7 +2209,7 @@ pub fn cvector_neg_eq_0() -> @kernel.Thm {
 /// CVECTOR_ADD_AC
 fn step_115() -> Unit raise {
   let t328 = @meson.meson_tac(@list.List([cvector_add_sym(), cvector_add_assoc()]))
-  cvector_add_ac_c.set(@tactics.prove(@parser.parse_term("!x y z:complex^N.\n    (x + y = y + x) /\\ ((x + y) + z = x + y + z) /\\ (x + y + z = y + x + z)"), t328))
+  cvector_add_ac_c.set(@tactics.prove(@parser.parse_term("forall x y z:complex^N.\n    (x + y = y + x) /\\ ((x + y) + z = x + y + z) /\\ (x + y + z = y + x + z)"), t328))
 }
 
 ///|
@@ -2225,7 +2225,7 @@ pub fn cvector_add_ac() -> @kernel.Thm {
 /// CVECTOR_MUL_LCANCEL
 fn step_116() -> Unit raise {
   let t329 = @meson.meson_tac(@list.List([cvector_mul_eq_0(), cvector_sub_ldistrib(), cvector_sub_eq()]))
-  cvector_mul_lcancel_c.set(@tactics.prove(@parser.parse_term("!a x y:complex^N. a % x = a % y <=> a = Cx(&0) \\/ x = y"), t329))
+  cvector_mul_lcancel_c.set(@tactics.prove(@parser.parse_term("forall a x y:complex^N. a % x = a % y <=> a = Cx(&0) \\/ x = y"), t329))
 }
 
 ///|
@@ -2241,7 +2241,7 @@ pub fn cvector_mul_lcancel() -> @kernel.Thm {
 /// CVECTOR_MUL_RCANCEL
 fn step_117() -> Unit raise {
   let t330 = @meson.meson_tac(@list.List([cvector_mul_eq_0(), cvector_sub_rdistrib(), @complexes.complex_sub_0(), cvector_sub_eq()]))
-  cvector_mul_rcancel_c.set(@tactics.prove(@parser.parse_term("!a b x:complex^N. a % x = b % x <=> a = b \\/ x = cvector_zero"), t330))
+  cvector_mul_rcancel_c.set(@tactics.prove(@parser.parse_term("forall a b x:complex^N. a % x = b % x <=> a = b \\/ x = cvector_zero"), t330))
 }
 
 ///|
@@ -2256,7 +2256,7 @@ pub fn cvector_mul_rcancel() -> @kernel.Thm {
 ///|
 /// clinear
 fn step_118() -> Unit raise {
-  clinear_c.set(@pair.new_definition(@parser.parse_term("clinear (f:complex^M->complex^N)\n    <=> (!x y. f(x + y) = f(x) + f(y)) /\\ (!c x. f(c % x) = c % f(x))")))
+  clinear_c.set(@pair.new_definition(@parser.parse_term("clinear (f:complex^M->complex^N)\n    <=> (forall x y. f(x + y) = f(x) + f(y)) /\\ (forall c x. f(c % x) = c % f(x))")))
 }
 
 ///|
@@ -2282,7 +2282,7 @@ pub fn common_tac(x331 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// CLINEAR_COMPOSE_CMUL
 fn step_119() -> Unit raise {
   let t336 = common_tac(@list.List([]))
-  clinear_compose_cmul_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N c. clinear f ==> clinear (\\x. c % f x)"), t336))
+  clinear_compose_cmul_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N c. clinear f ==> clinear (\\x. c % f x)"), t336))
 }
 
 ///|
@@ -2298,7 +2298,7 @@ pub fn clinear_compose_cmul() -> @kernel.Thm {
 /// CLINEAR_COMPOSE_NEG
 fn step_120() -> Unit raise {
   let t337 = common_tac(@list.List([cvector_neg_component()]))
-  clinear_compose_neg_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N. clinear f ==> clinear (\\x. --(f x))"), t337))
+  clinear_compose_neg_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N. clinear f ==> clinear (\\x. --(f x))"), t337))
 }
 
 ///|
@@ -2314,7 +2314,7 @@ pub fn clinear_compose_neg() -> @kernel.Thm {
 /// CLINEAR_COMPOSE_ADD
 fn step_121() -> Unit raise {
   let t338 = common_tac(@list.List([]))
-  clinear_compose_add_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x + g x)"), t338))
+  clinear_compose_add_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x + g x)"), t338))
 }
 
 ///|
@@ -2330,7 +2330,7 @@ pub fn clinear_compose_add() -> @kernel.Thm {
 /// CLINEAR_COMPOSE_SUB
 fn step_122() -> Unit raise {
   let t339 = common_tac(@list.List([cvector_sub_component()]))
-  clinear_compose_sub_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x - g x)"), t339))
+  clinear_compose_sub_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x - g x)"), t339))
 }
 
 ///|
@@ -2346,7 +2346,7 @@ pub fn clinear_compose_sub() -> @kernel.Thm {
 /// CLINEAR_COMPOSE
 fn step_123() -> Unit raise {
   let t340 = @simp.simp_tac(@list.List([clinear(), @trivia.o_thm()]))
-  clinear_compose_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (g o f)"), t340))
+  clinear_compose_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (g o f)"), t340))
 }
 
 ///|
@@ -2426,7 +2426,7 @@ pub fn clinear_negation() -> @kernel.Thm {
 /// CLINEAR_VMUL_COMPONENT
 fn step_128() -> Unit raise {
   let t345 = common_tac(@list.List([]))
-  clinear_vmul_component_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N v:complex^P k.\n     clinear f /\\ 1 <= k /\\ k <= dimindex(:N) ==> clinear (\\x. (f x)$k % v)"), t345))
+  clinear_vmul_component_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N v:complex^P k.\n     clinear f /\\ 1 <= k /\\ k <= dimindex(:N) ==> clinear (\\x. (f x)$k % v)"), t345))
 }
 
 ///|
@@ -2442,7 +2442,7 @@ pub fn clinear_vmul_component() -> @kernel.Thm {
 /// CLINEAR_0
 fn step_129() -> Unit raise {
   let t346 = @meson.meson_tac(@list.List([cvector_mul_lzero(), clinear()]))
-  clinear_0_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N. clinear f ==> (f cvector_zero = cvector_zero)"), t346))
+  clinear_0_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N. clinear f ==> (f cvector_zero = cvector_zero)"), t346))
 }
 
 ///|
@@ -2458,7 +2458,7 @@ pub fn clinear_0() -> @kernel.Thm {
 /// CLINEAR_CMUL
 fn step_130() -> Unit raise {
   let t347 = @simp.simp_tac(@list.List([clinear()]))
-  clinear_cmul_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N c x. clinear f ==> (f (c % x) = c % f x)"), t347))
+  clinear_cmul_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N c x. clinear f ==> (f (c % x) = c % f x)"), t347))
 }
 
 ///|
@@ -2475,7 +2475,7 @@ pub fn clinear_cmul() -> @kernel.Thm {
 fn step_131() -> Unit raise {
   let t348 = @simp.simp_tac(@list.List([clinear_cmul()]))
   let t349 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([cvector_neg_minus1()])), t348)
-  clinear_neg_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N x. clinear f ==> (f (--x) = --(f x))"), t349))
+  clinear_neg_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N x. clinear f ==> (f (--x) = --(f x))"), t349))
 }
 
 ///|
@@ -2491,7 +2491,7 @@ pub fn clinear_neg() -> @kernel.Thm {
 /// CLINEAR_ADD
 fn step_132() -> Unit raise {
   let t350 = @simp.simp_tac(@list.List([clinear()]))
-  clinear_add_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N x y. clinear f ==> (f (x + y) = f x + f y)"), t350))
+  clinear_add_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N x y. clinear f ==> (f (x + y) = f x + f y)"), t350))
 }
 
 ///|
@@ -2507,7 +2507,7 @@ pub fn clinear_add() -> @kernel.Thm {
 /// CLINEAR_SUB
 fn step_133() -> Unit raise {
   let t351 = @simp.simp_tac(@list.List([cvector_sub_v1(), clinear_add(), clinear_neg()]))
-  clinear_sub_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N x y. clinear f ==> (f(x - y) = f x - f y)"), t351))
+  clinear_sub_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N x y. clinear f ==> (f(x - y) = f x - f y)"), t351))
 }
 
 ///|
@@ -2525,7 +2525,7 @@ fn step_134() -> Unit raise {
   let t353 = @meson.meson_tac(@list.List([cvector_sub_rzero()]))
   let t352 = @simp.simp_tac(@list.List([cvector_sub_rzero(), @equal.gsym(clinear_sub())]))
   let t354 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(cvector_sub_eq())])), t352), t353)
-  clinear_injective_0_c.set(@tactics.prove(@parser.parse_term("!f:complex^M->complex^N.\n  clinear f\n   ==> ((!x y. f x = f y ==> x = y)\n    <=> (!x. f x = cvector_zero ==> x = cvector_zero))"), t354))
+  clinear_injective_0_c.set(@tactics.prove(@parser.parse_term("forall f:complex^M->complex^N.\n  clinear f\n   ==> ((forall x y. f x = f y ==> x = y)\n    <=> (forall x. f x = cvector_zero ==> x = cvector_zero))"), t354))
 }
 
 ///|
@@ -2635,7 +2635,7 @@ pub fn sndcart_cvector_zero() -> @kernel.Thm {
 /// FSTCART_SNDCART_CVECTOR_ADD
 fn step_141() -> Unit raise {
   let t359 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([clinear()]))(clinear_fstcart_sndcart())]))
-  fstcart_sndcart_cvector_add_c.set(@tactics.prove(@parser.parse_term("!x:complex^(M,N)finite_sum y.\n  fstcart(x + y) = fstcart(x) + fstcart(y)\n  /\\ sndcart(x + y) = sndcart(x) + sndcart(y)"), t359))
+  fstcart_sndcart_cvector_add_c.set(@tactics.prove(@parser.parse_term("forall x:complex^(M,N)finite_sum y.\n  fstcart(x + y) = fstcart(x) + fstcart(y)\n  /\\ sndcart(x + y) = sndcart(x) + sndcart(y)"), t359))
 }
 
 ///|
@@ -2651,7 +2651,7 @@ pub fn fstcart_sndcart_cvector_add() -> @kernel.Thm {
 /// FSTCART_SNDCART_CVECTOR_MUL
 fn step_142() -> Unit raise {
   let t360 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([clinear()]))(clinear_fstcart_sndcart())]))
-  fstcart_sndcart_cvector_mul_c.set(@tactics.prove(@parser.parse_term("!x:complex^(M,N)finite_sum c.\n  fstcart(c % x) = c % fstcart(x) /\\ sndcart(c % x) = c % sndcart(x)"), t360))
+  fstcart_sndcart_cvector_mul_c.set(@tactics.prove(@parser.parse_term("forall x:complex^(M,N)finite_sum c.\n  fstcart(c % x) = c % fstcart(x) /\\ sndcart(c % x) = c % sndcart(x)"), t360))
 }
 
 ///|
@@ -2690,7 +2690,7 @@ pub fn pastecart_cvector_zero() -> @kernel.Thm {
 /// PASTECART_EQ_CVECTOR_ZERO
 fn step_144() -> Unit raise {
   let t364 = pastecart_tac(@list.List([fstcart_sndcart_cvector_zero()]))
-  pastecart_eq_cvector_zero_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y:complex^M.\n    pastecart x y = cvector_zero <=> x = cvector_zero /\\ y = cvector_zero"), t364))
+  pastecart_eq_cvector_zero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y:complex^M.\n    pastecart x y = cvector_zero <=> x = cvector_zero /\\ y = cvector_zero"), t364))
 }
 
 ///|
@@ -2706,7 +2706,7 @@ pub fn pastecart_eq_cvector_zero() -> @kernel.Thm {
 /// PASTECART_CVECTOR_ADD
 fn step_145() -> Unit raise {
   let t365 = pastecart_tac(@list.List([fstcart_sndcart_cvector_add()]))
-  pastecart_cvector_add_c.set(@tactics.prove(@parser.parse_term("!x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)"), t365))
+  pastecart_cvector_add_c.set(@tactics.prove(@parser.parse_term("forall x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)"), t365))
 }
 
 ///|
@@ -2722,7 +2722,7 @@ pub fn pastecart_cvector_add() -> @kernel.Thm {
 /// PASTECART_CVECTOR_MUL
 fn step_146() -> Unit raise {
   let t366 = pastecart_tac(@list.List([fstcart_sndcart_cvector_mul()]))
-  pastecart_cvector_mul_c.set(@tactics.prove(@parser.parse_term("!x1 x2 c:complex.\n  pastecart (c % x1) (c % y1) = c % pastecart x1 y1"), t366))
+  pastecart_cvector_mul_c.set(@tactics.prove(@parser.parse_term("forall x1 x2 c:complex.\n  pastecart (c % x1) (c % y1) = c % pastecart x1 y1"), t366))
 }
 
 ///|
@@ -2783,7 +2783,7 @@ pub fn vector_to_cvector() -> @kernel.Thm {
 /// CVECTOR_RE_COMPONENT
 fn step_150() -> Unit raise {
   let t367 = @simp.rewrite_tac(@list.List([cvector_re(), vector_map_component()]))
-  cvector_re_component_c.set(@tactics.prove(@parser.parse_term("!x:complex^N i. (cvector_re x)$i = Re (x$i)"), t367))
+  cvector_re_component_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N i. (cvector_re x)$i = Re (x$i)"), t367))
 }
 
 ///|
@@ -2799,7 +2799,7 @@ pub fn cvector_re_component() -> @kernel.Thm {
 /// CVECTOR_IM_COMPONENT
 fn step_151() -> Unit raise {
   let t368 = @simp.rewrite_tac(@list.List([cvector_im(), vector_map_component()]))
-  cvector_im_component_c.set(@tactics.prove(@parser.parse_term("!x:complex^N i. (cvector_im x)$i = Im (x$i)"), t368))
+  cvector_im_component_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N i. (cvector_im x)$i = Im (x$i)"), t368))
 }
 
 ///|
@@ -2815,7 +2815,7 @@ pub fn cvector_im_component() -> @kernel.Thm {
 /// VECTOR_TO_CVECTOR_COMPONENT
 fn step_152() -> Unit raise {
   let t369 = @simp.rewrite_tac(@list.List([vector_to_cvector(), vector_map_component()]))
-  vector_to_cvector_component_c.set(@tactics.prove(@parser.parse_term("!x:real^N i. (vector_to_cvector x)$i = Cx(x$i)"), t369))
+  vector_to_cvector_component_c.set(@tactics.prove(@parser.parse_term("forall x:real^N i. (vector_to_cvector x)$i = Cx(x$i)"), t369))
 }
 
 ///|
@@ -2851,7 +2851,7 @@ fn step_154() -> Unit raise {
   let t373 = @simp.once_rewrite_tac(@list.List([@cart.cart_eq()]))
   let t372 = @simp.simp_tac(@list.List([vector_to_cvector_zero()]))
   let t375 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t372), t373), t374)
-  vector_to_cvector_zero_eq_c.set(@tactics.prove(@parser.parse_term("!x:real^N. vector_to_cvector x = cvector_zero <=> x = vec 0"), t375))
+  vector_to_cvector_zero_eq_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. vector_to_cvector x = cvector_zero <=> x = vec 0"), t375))
 }
 
 ///|
@@ -2869,7 +2869,7 @@ fn step_155() -> Unit raise {
   let t377 = @meson.meson_tac(@list.List([]))
   let t376 = @simp.rewrite_tac(@list.List([cvector_zero_component(), cvector_re_component(), cvector_im_component(), @vectors.vec_component(), @complexes.complex_eq(), @complexes.re_cx(), @complexes.im_cx()]))
   let t378 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t376), t377)
-  cvector_zero_vec0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. x = cvector_zero <=> cvector_re x = vec 0 /\\ cvector_im x = vec 0"), t378))
+  cvector_zero_vec0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. x = cvector_zero <=> cvector_re x = vec 0 /\\ cvector_im x = vec 0"), t378))
 }
 
 ///|
@@ -2886,7 +2886,7 @@ pub fn cvector_zero_vec0() -> @kernel.Thm {
 fn step_156() -> Unit raise {
   let t379 = @simp.rewrite_tac(@list.List([vector_to_cvector_component(), cvector_mul_component(), @vectors.vector_mul_component(), @complexes.cx_mul()]))
   let t380 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t379)
-  vector_to_cvector_mul_c.set(@tactics.prove(@parser.parse_term("!a x:real^N. vector_to_cvector (a % x) = Cx a % vector_to_cvector x"), t380))
+  vector_to_cvector_mul_c.set(@tactics.prove(@parser.parse_term("forall a x:real^N. vector_to_cvector (a % x) = Cx a % vector_to_cvector x"), t380))
 }
 
 ///|
@@ -2905,7 +2905,7 @@ fn step_157() -> Unit raise {
   let t382 = @simp.rewrite_tac(@list.List([@complexes.complex_eq(), @complexes.re_cx(), @complexes.im_cx(), @complexes.re_add(), @complexes.im_add(), @complexes.re_mul_ii(), @calc_int.real_neg_0(), @calc_int.real_add_rid(), @realax.real_add_lid(), @complexes.im_mul_ii()]))
   let t381 = @simp.rewrite_tac(@list.List([cvector_add_component(), cvector_mul_component(), cvector_re_component(), cvector_im_component(), vector_to_cvector_component()]))
   let t384 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t381), t382), t383)
-  cvector_eq_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y z.\n    x = vector_to_cvector y + ii % vector_to_cvector z\n    <=> cvector_re x = y /\\ cvector_im x = z"), t384))
+  cvector_eq_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y z.\n    x = vector_to_cvector y + ii % vector_to_cvector z\n    <=> cvector_re x = y /\\ cvector_im x = z"), t384))
 }
 
 ///|
@@ -2922,7 +2922,7 @@ pub fn cvector_eq() -> @kernel.Thm {
 fn step_158() -> Unit raise {
   let t385 = @simp.rewrite_tac(@list.List([cvector_re_component(), vector_to_cvector_component(), @complexes.re_cx()]))
   let t386 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t385)
-  cvector_re_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("!x:real^N. cvector_re (vector_to_cvector x) = x"), t386))
+  cvector_re_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. cvector_re (vector_to_cvector x) = x"), t386))
 }
 
 ///|
@@ -2939,7 +2939,7 @@ pub fn cvector_re_vector_to_cvector() -> @kernel.Thm {
 fn step_159() -> Unit raise {
   let t387 = @simp.rewrite_tac(@list.List([cvector_im_component(), vector_to_cvector_component(), @complexes.im_cx(), @vectors.vec_component()]))
   let t388 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t387)
-  cvector_im_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("!x:real^N. cvector_im (vector_to_cvector x) = vec 0"), t388))
+  cvector_im_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. cvector_im (vector_to_cvector x) = vec 0"), t388))
 }
 
 ///|
@@ -2956,7 +2956,7 @@ pub fn cvector_im_vector_to_cvector() -> @kernel.Thm {
 fn step_160() -> Unit raise {
   let t389 = @simp.rewrite_tac(@list.List([cvector_im_component(), vector_to_cvector_component(), @complexes.im_cx(), @vectors.vec_component(), cvector_mul_component(), @complexes.im_mul_ii(), @complexes.re_cx()]))
   let t390 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t389)
-  cvector_im_vector_to_cvector_im_c.set(@tactics.prove(@parser.parse_term("!x:real^N. cvector_im (ii % vector_to_cvector x) = x"), t390))
+  cvector_im_vector_to_cvector_im_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. cvector_im (ii % vector_to_cvector x) = x"), t390))
 }
 
 ///|
@@ -2973,7 +2973,7 @@ pub fn cvector_im_vector_to_cvector_im() -> @kernel.Thm {
 fn step_161() -> Unit raise {
   let t391 = @simp.rewrite_tac(@list.List([cvector_eq()]))
   let t392 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@theorems.eq_sym())), t391)
-  vector_to_cvector_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("!x:complex^N.\n    vector_to_cvector (cvector_re x) + ii % vector_to_cvector (cvector_im x)\n      = x"), t392))
+  vector_to_cvector_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N.\n    vector_to_cvector (cvector_re x) + ii % vector_to_cvector (cvector_im x)\n      = x"), t392))
 }
 
 ///|
@@ -2990,7 +2990,7 @@ pub fn vector_to_cvector_cvector_re_im() -> @kernel.Thm {
 fn step_162() -> Unit raise {
   let t393 = @simp.rewrite_tac(@list.List([cvector_im_component(), cvector_add_component(), cvector_mul_component(), vector_to_cvector_component(), @complexes.im_add(), @complexes.im_cx(), @complexes.im_mul_ii(), @complexes.re_cx(), @realax.real_add_lid()]))
   let t394 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t393)
-  cvector_im_vector_to_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. cvector_im (vector_to_cvector x + ii % vector_to_cvector y) = y"), t394))
+  cvector_im_vector_to_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. cvector_im (vector_to_cvector x + ii % vector_to_cvector y) = y"), t394))
 }
 
 ///|
@@ -3007,7 +3007,7 @@ pub fn cvector_im_vector_to_cvector_re_im() -> @kernel.Thm {
 fn step_163() -> Unit raise {
   let t395 = @simp.rewrite_tac(@list.List([cvector_re_component(), cvector_add_component(), cvector_mul_component(), @complexes.re_add(), vector_to_cvector_component(), @complexes.re_cx(), @complexes.re_mul_cx(), @complexes.re_ii(), @calc_int.real_mul_lzero(), @calc_int.real_add_rid()]))
   let t396 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t395)
-  cvector_re_vector_to_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. cvector_re (vector_to_cvector x + ii % vector_to_cvector y)= x"), t396))
+  cvector_re_vector_to_cvector_re_im_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. cvector_re (vector_to_cvector x + ii % vector_to_cvector y)= x"), t396))
 }
 
 ///|
@@ -3024,7 +3024,7 @@ pub fn cvector_re_vector_to_cvector_re_im() -> @kernel.Thm {
 fn step_164() -> Unit raise {
   let t397 = @simp.rewrite_tac(@list.List([cvector_re_component(), @vectors.vector_add_component(), cvector_add_component(), @complexes.re_add()]))
   let t398 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t397)
-  cvector_re_add_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. cvector_re (x+y) = cvector_re x + cvector_re y"), t398))
+  cvector_re_add_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. cvector_re (x+y) = cvector_re x + cvector_re y"), t398))
 }
 
 ///|
@@ -3041,7 +3041,7 @@ pub fn cvector_re_add() -> @kernel.Thm {
 fn step_165() -> Unit raise {
   let t399 = @simp.rewrite_tac(@list.List([cvector_im_component(), @vectors.vector_add_component(), cvector_add_component(), @complexes.im_add()]))
   let t400 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t399)
-  cvector_im_add_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. cvector_im (x+y) = cvector_im x + cvector_im y"), t400))
+  cvector_im_add_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. cvector_im (x+y) = cvector_im x + cvector_im y"), t400))
 }
 
 ///|
@@ -3058,7 +3058,7 @@ pub fn cvector_im_add() -> @kernel.Thm {
 fn step_166() -> Unit raise {
   let t401 = @simp.rewrite_tac(@list.List([cvector_re_component(), @vectors.vector_mul_component(), cvector_mul_component(), @complexes.re_mul_cx()]))
   let t402 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t401)
-  cvector_re_mul_c.set(@tactics.prove(@parser.parse_term("!a x:complex^N. cvector_re (Cx a % x) = a % cvector_re x"), t402))
+  cvector_re_mul_c.set(@tactics.prove(@parser.parse_term("forall a x:complex^N. cvector_re (Cx a % x) = a % cvector_re x"), t402))
 }
 
 ///|
@@ -3075,7 +3075,7 @@ pub fn cvector_re_mul() -> @kernel.Thm {
 fn step_167() -> Unit raise {
   let t403 = @simp.rewrite_tac(@list.List([cvector_im_component(), @vectors.vector_mul_component(), cvector_mul_component(), @complexes.im_mul_cx()]))
   let t404 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t403)
-  cvector_im_mul_c.set(@tactics.prove(@parser.parse_term("!a x:complex^N. cvector_im (Cx a % x) = a % cvector_im x"), t404))
+  cvector_im_mul_c.set(@tactics.prove(@parser.parse_term("forall a x:complex^N. cvector_im (Cx a % x) = a % cvector_im x"), t404))
 }
 
 ///|
@@ -3091,7 +3091,7 @@ pub fn cvector_im_mul() -> @kernel.Thm {
 /// CVECTOR_RE_VECTOR_MAP
 fn step_168() -> Unit raise {
   let t405 = @simp.rewrite_tac(@list.List([cvector_re(), vector_map_vector_map()]))
-  cvector_re_vector_map_c.set(@tactics.prove(@parser.parse_term("!f v:A^N. cvector_re (vector_map f v) = vector_map (Re o f) v"), t405))
+  cvector_re_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f v:A^N. cvector_re (vector_map f v) = vector_map (Re o f) v"), t405))
 }
 
 ///|
@@ -3107,7 +3107,7 @@ pub fn cvector_re_vector_map() -> @kernel.Thm {
 /// CVECTOR_IM_VECTOR_MAP
 fn step_169() -> Unit raise {
   let t406 = @simp.rewrite_tac(@list.List([cvector_im(), vector_map_vector_map()]))
-  cvector_im_vector_map_c.set(@tactics.prove(@parser.parse_term("!f v:A^N. cvector_im (vector_map f v) = vector_map (Im o f) v"), t406))
+  cvector_im_vector_map_c.set(@tactics.prove(@parser.parse_term("forall f v:A^N. cvector_im (vector_map f v) = vector_map (Im o f) v"), t406))
 }
 
 ///|
@@ -3123,7 +3123,7 @@ pub fn cvector_im_vector_map() -> @kernel.Thm {
 /// VECTOR_MAP_CVECTOR_RE
 fn step_170() -> Unit raise {
   let t407 = @simp.rewrite_tac(@list.List([cvector_re(), vector_map_vector_map()]))
-  vector_map_cvector_re_c.set(@tactics.prove(@parser.parse_term("!f:real->A v:complex^N.\n    vector_map f (cvector_re v) = vector_map (f o Re) v"), t407))
+  vector_map_cvector_re_c.set(@tactics.prove(@parser.parse_term("forall f:real->A v:complex^N.\n    vector_map f (cvector_re v) = vector_map (f o Re) v"), t407))
 }
 
 ///|
@@ -3139,7 +3139,7 @@ pub fn vector_map_cvector_re() -> @kernel.Thm {
 /// VECTOR_MAP_CVECTOR_IM
 fn step_171() -> Unit raise {
   let t408 = @simp.rewrite_tac(@list.List([cvector_im(), vector_map_vector_map()]))
-  vector_map_cvector_im_c.set(@tactics.prove(@parser.parse_term("!f:real->A v:complex^N.\n    vector_map f (cvector_im v) = vector_map (f o Im) v"), t408))
+  vector_map_cvector_im_c.set(@tactics.prove(@parser.parse_term("forall f:real->A v:complex^N.\n    vector_map f (cvector_im v) = vector_map (f o Im) v"), t408))
 }
 
 ///|
@@ -3155,7 +3155,7 @@ pub fn vector_map_cvector_im() -> @kernel.Thm {
 /// CVECTOR_RE_VECTOR_MAP2
 fn step_172() -> Unit raise {
   let t409 = @simp.rewrite_tac(@list.List([cvector_re(), vector_map_vector_map2()]))
-  cvector_re_vector_map2_c.set(@tactics.prove(@parser.parse_term("!f v1:A^N v2:B^N.\n    cvector_re (vector_map2 f v1 v2) = vector_map2 (\\x y. Re (f x y)) v1 v2"), t409))
+  cvector_re_vector_map2_c.set(@tactics.prove(@parser.parse_term("forall f v1:A^N v2:B^N.\n    cvector_re (vector_map2 f v1 v2) = vector_map2 (\\x y. Re (f x y)) v1 v2"), t409))
 }
 
 ///|
@@ -3171,7 +3171,7 @@ pub fn cvector_re_vector_map2() -> @kernel.Thm {
 /// CVECTOR_IM_VECTOR_MAP2
 fn step_173() -> Unit raise {
   let t410 = @simp.rewrite_tac(@list.List([cvector_im(), vector_map_vector_map2()]))
-  cvector_im_vector_map2_c.set(@tactics.prove(@parser.parse_term("!f v1:A^N v2:B^N.\n    cvector_im (vector_map2 f v1 v2) = vector_map2 (\\x y. Im (f x y)) v1 v2"), t410))
+  cvector_im_vector_map2_c.set(@tactics.prove(@parser.parse_term("forall f v1:A^N v2:B^N.\n    cvector_im (vector_map2 f v1 v2) = vector_map2 (\\x y. Im (f x y)) v1 v2"), t410))
 }
 
 ///|
@@ -3202,7 +3202,7 @@ pub fn cvector_flatten() -> @kernel.Thm {
 /// FLATTEN_RE_IM_COMPONENT
 fn step_175() -> Unit raise {
   let t411 = @simp.simp_tac(@list.List([@arith.mult_2(), @equal.gsym(@cart.dimindex_finite_sum()), cvector_flatten(), @cart.pastecart(), @cart.lambda_beta()]))
-  flatten_re_im_component_c.set(@tactics.prove(@parser.parse_term("!v:complex^N i.\n  1 <= i /\\ i <= 2 * dimindex(:N)\n    ==> (cvector_flatten v)$i =\n      if i <= dimindex(:N)\n      then (cvector_re v)$i\n      else (cvector_im v)$(i-dimindex(:N))"), t411))
+  flatten_re_im_component_c.set(@tactics.prove(@parser.parse_term("forall v:complex^N i.\n  1 <= i /\\ i <= 2 * dimindex(:N)\n    ==> (cvector_flatten v)$i =\n      if i <= dimindex(:N)\n      then (cvector_re v)$i\n      else (cvector_im v)$(i-dimindex(:N))"), t411))
 }
 
 ///|
@@ -3234,7 +3234,7 @@ pub fn complex_vector() -> @kernel.Thm {
 fn step_177() -> Unit raise {
   let t412 = @simp.simp_tac(@list.List([complex_vector(), cvector_add_component(), cvector_mul_component(), vector_to_cvector_component(), vector_map2_component()]))
   let t413 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@cart.cart_eq()])), t412)
-  complex_vector_transpose_c.set(@tactics.prove(@parser.parse_term("!v1 v2:real^N.\n  complex_vector (v1,v2) = vector_to_cvector v1 + ii % vector_to_cvector v2"), t413))
+  complex_vector_transpose_c.set(@tactics.prove(@parser.parse_term("forall v1 v2:real^N.\n  complex_vector (v1,v2) = vector_to_cvector v1 + ii % vector_to_cvector v2"), t413))
 }
 
 ///|
@@ -3305,7 +3305,7 @@ fn step_181() -> Unit raise {
   let t417 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.ap_term_tac, @tactics.mk_comb_tac))
   let t416 = @tactics.repeat_tac(@tactics.strip_tac)
   let t424 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([clinear(), @vectors.linear(), cvector_flatten(), cvector_unflatten(), @trivia.o_def(), @vectors.fstcart_add(), @vectors.sndcart_add(), @vectors.pastecart_add(), complex_vector(), @equal.gsym(@vectors.pastecart_cmul())])), t416), t417), t418), @tactics.ap_term_tac), t421), @tactics.ap_term_tac), t422), t423), @complexes.simple_complex_arith_tac)
-  flatten_clinear_c.set(@tactics.prove(@parser.parse_term("!f:complex^N->complex^M.\n    clinear f ==> linear (cvector_flatten o f o cvector_unflatten)"), t424))
+  flatten_clinear_c.set(@tactics.prove(@parser.parse_term("forall f:complex^N->complex^M.\n    clinear f ==> linear (cvector_flatten o f o cvector_unflatten)"), t424))
 }
 
 ///|
@@ -3321,7 +3321,7 @@ pub fn flatten_clinear() -> @kernel.Thm {
 /// FLATTEN_MAP
 fn step_182() -> Unit raise {
   let t425 = @simp.simp_tac(@list.List([cvector_flatten(), cvector_re_vector_map(), cvector_im_vector_map(), @equal.gsym(pastecart_vector_map()), vector_map_cvector_re(), vector_map_cvector_im(), @trivia.o_def(), @complexes.im_def(), @complexes.re_def(), vector_map_component()]))
-  flatten_map_c.set(@tactics.prove(@parser.parse_term("!f g.\n    f = vector_map g\n      ==> !x:complex^N.\n        cvector_flatten (vector_map f x) = vector_map g (cvector_flatten x)"), t425))
+  flatten_map_c.set(@tactics.prove(@parser.parse_term("forall f g.\n    f = vector_map g\n      ==> forall x:complex^N.\n        cvector_flatten (vector_map f x) = vector_map g (cvector_flatten x)"), t425))
 }
 
 ///|
@@ -3338,7 +3338,7 @@ pub fn flatten_map() -> @kernel.Thm {
 fn step_183() -> Unit raise {
   let t426 = @simp.rewrite_tac(@list.List([vector_neg_is_a_map()]))
   let t427 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cvector_neg(), @drule.match_mp(flatten_map())(complex_neg_is_a_map())])), t426)
-  flatten_neg_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cvector_flatten (--x) = --(cvector_flatten x)"), t427))
+  flatten_neg_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cvector_flatten (--x) = --(cvector_flatten x)"), t427))
 }
 
 ///|
@@ -3355,7 +3355,7 @@ pub fn flatten_neg() -> @kernel.Thm {
 fn step_184() -> Unit raise {
   let t428 = @simp.rewrite_rule(@list.List([@trivia.o_def(), @class.fun_eq_thm(), @trivia.i_def()]))(unflatten_flatten())
   let t429 = @simp.rewrite_tac(@list.List([@equal.gsym(flatten_neg()), t428]))
-  cvector_neg_alt_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. --x = cvector_unflatten (--(cvector_flatten x))"), t429))
+  cvector_neg_alt_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. --x = cvector_unflatten (--(cvector_flatten x))"), t429))
 }
 
 ///|
@@ -3374,7 +3374,7 @@ fn step_185() -> Unit raise {
   let t431 = @tactics.repeat_tac(@tactics.mk_comb_tac)
   let t430 = @simp.rewrite_tac(@list.List([cvector_re(), cvector_im(), vector_map2_lvector_map(), vector_map2_rvector_map()]))
   let t433 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([cvector_flatten(), cvector_re_vector_map2(), cvector_im_vector_map2(), cvector_re_vector_map2(), @equal.gsym(pastecart_vector_map2())])), t430), t431), t432)
-  flatten_map2_c.set(@tactics.prove(@parser.parse_term("!f g.\n    f = vector_map2 g ==>\n      !x y:complex^N.\n        cvector_flatten (vector_map2 f x y) =\n          vector_map2 g (cvector_flatten x) (cvector_flatten y)"), t433))
+  flatten_map2_c.set(@tactics.prove(@parser.parse_term("forall f g.\n    f = vector_map2 g ==>\n      forall x y:complex^N.\n        cvector_flatten (vector_map2 f x y) =\n          vector_map2 g (cvector_flatten x) (cvector_flatten y)"), t433))
 }
 
 ///|
@@ -3391,7 +3391,7 @@ pub fn flatten_map2() -> @kernel.Thm {
 fn step_186() -> Unit raise {
   let t434 = @simp.rewrite_tac(@list.List([vector_add_is_a_map()]))
   let t435 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cvector_add(), @drule.match_mp(flatten_map2())(complex_add_is_a_map())])), t434)
-  flatten_add_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    cvector_flatten (x+y) = cvector_flatten x + cvector_flatten y"), t435))
+  flatten_add_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    cvector_flatten (x+y) = cvector_flatten x + cvector_flatten y"), t435))
 }
 
 ///|
@@ -3408,7 +3408,7 @@ pub fn flatten_add() -> @kernel.Thm {
 fn step_187() -> Unit raise {
   let t436 = @simp.rewrite_rule(@list.List([@trivia.o_def(), @class.fun_eq_thm(), @trivia.i_def()]))(unflatten_flatten())
   let t437 = @simp.rewrite_tac(@list.List([@equal.gsym(flatten_add()), t436]))
-  cvector_add_alt_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    x+y = cvector_unflatten (cvector_flatten x + cvector_flatten y)"), t437))
+  cvector_add_alt_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    x+y = cvector_unflatten (cvector_flatten x + cvector_flatten y)"), t437))
 }
 
 ///|
@@ -3425,7 +3425,7 @@ pub fn cvector_add_alt() -> @kernel.Thm {
 fn step_188() -> Unit raise {
   let t438 = @simp.rewrite_tac(@list.List([vector_sub_is_a_map()]))
   let t439 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cvector_sub(), @drule.match_mp(flatten_map2())(complex_sub_is_a_map())])), t438)
-  flatten_sub_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. cvector_flatten (x-y) = cvector_flatten x - cvector_flatten y"), t439))
+  flatten_sub_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. cvector_flatten (x-y) = cvector_flatten x - cvector_flatten y"), t439))
 }
 
 ///|
@@ -3442,7 +3442,7 @@ pub fn flatten_sub() -> @kernel.Thm {
 fn step_189() -> Unit raise {
   let t440 = @simp.rewrite_rule(@list.List([@trivia.o_def(), @class.fun_eq_thm(), @trivia.i_def()]))(unflatten_flatten())
   let t441 = @simp.rewrite_tac(@list.List([@equal.gsym(flatten_sub()), t440]))
-  cvector_sub_alt_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. x-y = cvector_unflatten (cvector_flatten x - cvector_flatten y)"), t441))
+  cvector_sub_alt_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. x-y = cvector_unflatten (cvector_flatten x - cvector_flatten y)"), t441))
 }
 
 ///|
@@ -3479,7 +3479,7 @@ pub fn cvector_map_property(x442 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Th
 ///|
 /// CVECTOR_CNJ_ADD
 fn step_191() -> Unit raise {
-  cvector_cnj_add_c.set(cvector_map_property(@parser.parse_term("!x y:complex^N. cvector_cnj (x+y) = cvector_cnj x + cvector_cnj y"))(@complexes.cnj_add()))
+  cvector_cnj_add_c.set(cvector_map_property(@parser.parse_term("forall x y:complex^N. cvector_cnj (x+y) = cvector_cnj x + cvector_cnj y"))(@complexes.cnj_add()))
 }
 
 ///|
@@ -3494,7 +3494,7 @@ pub fn cvector_cnj_add() -> @kernel.Thm {
 ///|
 /// CVECTOR_CNJ_SUB
 fn step_192() -> Unit raise {
-  cvector_cnj_sub_c.set(cvector_map_property(@parser.parse_term("!x y:complex^N. cvector_cnj (x-y) = cvector_cnj x - cvector_cnj y"))(@complexes.cnj_sub()))
+  cvector_cnj_sub_c.set(cvector_map_property(@parser.parse_term("forall x y:complex^N. cvector_cnj (x-y) = cvector_cnj x - cvector_cnj y"))(@complexes.cnj_sub()))
 }
 
 ///|
@@ -3509,7 +3509,7 @@ pub fn cvector_cnj_sub() -> @kernel.Thm {
 ///|
 /// CVECTOR_CNJ_NEG
 fn step_193() -> Unit raise {
-  cvector_cnj_neg_c.set(cvector_map_property(@parser.parse_term("!x:complex^N. cvector_cnj (--x) = --(cvector_cnj x)"))(@complexes.cnj_neg()))
+  cvector_cnj_neg_c.set(cvector_map_property(@parser.parse_term("forall x:complex^N. cvector_cnj (--x) = --(cvector_cnj x)"))(@complexes.cnj_neg()))
 }
 
 ///|
@@ -3524,7 +3524,7 @@ pub fn cvector_cnj_neg() -> @kernel.Thm {
 ///|
 /// CVECTOR_RE_CNJ
 fn step_194() -> Unit raise {
-  cvector_re_cnj_c.set(cvector_map_property(@parser.parse_term("!x:complex^N. cvector_re (cvector_cnj x) = cvector_re x"))(@complexes.re_cnj()))
+  cvector_re_cnj_c.set(cvector_map_property(@parser.parse_term("forall x:complex^N. cvector_re (cvector_cnj x) = cvector_re x"))(@complexes.re_cnj()))
 }
 
 ///|
@@ -3540,7 +3540,7 @@ pub fn cvector_re_cnj() -> @kernel.Thm {
 /// CVECTOR_IM_CNJ
 fn step_195() -> Unit raise {
   let t445 = vector_map_property_tac(@list.List([cvector_im(), cvector_cnj(), vector_neg_is_a_map()]), @complexes.im_cnj())
-  cvector_im_cnj_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cvector_im (cvector_cnj x) = --(cvector_im x)"), t445))
+  cvector_im_cnj_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cvector_im (cvector_cnj x) = --(cvector_im x)"), t445))
 }
 
 ///|
@@ -3555,7 +3555,7 @@ pub fn cvector_im_cnj() -> @kernel.Thm {
 ///|
 /// CVECTOR_CNJ_CNJ
 fn step_196() -> Unit raise {
-  cvector_cnj_cnj_c.set(cvector_map_property(@parser.parse_term("!x:complex^N. cvector_cnj (cvector_cnj x) = x"))(@complexes.cnj_cnj()))
+  cvector_cnj_cnj_c.set(cvector_map_property(@parser.parse_term("forall x:complex^N. cvector_cnj (cvector_cnj x) = x"))(@complexes.cnj_cnj()))
 }
 
 ///|
@@ -3598,7 +3598,7 @@ pub fn ccross() -> @kernel.Thm {
 /// CCROSS_COMPONENT
 fn step_200() -> Unit raise {
   let t446 = @simp.rewrite_tac(@list.List([ccross(), @vectors.vector_3()]))
-  ccross_component_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3.\n  (x ccross y)$1 = x$2 * y$3 - x$3 * y$2\n  /\\ (x ccross y)$2 = x$3 * y$1 - x$1 * y$3\n  /\\ (x ccross y)$3 = x$1 * y$2 - x$2 * y$1"), t446))
+  ccross_component_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3.\n  (x ccross y)$1 = x$2 * y$3 - x$3 * y$2\n  /\\ (x ccross y)$2 = x$3 * y$1 - x$1 * y$3\n  /\\ (x ccross y)$3 = x$1 * y$2 - x$2 * y$1"), t446))
 }
 
 ///|
@@ -3620,7 +3620,7 @@ fn step_201() -> Unit raise {
       s449(x450)
     }
   }, @list.List([@cart.cart_eq()])), t451)
-  cart_eq3_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3. x = y <=> x$1 = y$1 /\\ x$2 = y$2 /\\ x$3 = y$3"), t452))
+  cart_eq3_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3. x = y <=> x$1 = y$1 /\\ x$2 = y$2 /\\ x$3 = y$3"), t452))
 }
 
 ///|
@@ -3643,7 +3643,7 @@ pub fn ccross_tac(x453 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// CCROSS_LZERO
 fn step_202() -> Unit raise {
   let t455 = ccross_tac(@list.List([cvector_zero_component()]))
-  ccross_lzero_c.set(@tactics.prove(@parser.parse_term("!x:complex^3. cvector_zero ccross x = cvector_zero"), t455))
+  ccross_lzero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^3. cvector_zero ccross x = cvector_zero"), t455))
 }
 
 ///|
@@ -3659,7 +3659,7 @@ pub fn ccross_lzero() -> @kernel.Thm {
 /// CCROSS_RZERO
 fn step_203() -> Unit raise {
   let t456 = ccross_tac(@list.List([cvector_zero_component()]))
-  ccross_rzero_c.set(@tactics.prove(@parser.parse_term("!x:complex^3. x ccross cvector_zero = cvector_zero"), t456))
+  ccross_rzero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^3. x ccross cvector_zero = cvector_zero"), t456))
 }
 
 ///|
@@ -3675,7 +3675,7 @@ pub fn ccross_rzero() -> @kernel.Thm {
 /// CCROSS_SKEW
 fn step_204() -> Unit raise {
   let t457 = ccross_tac(@list.List([cvector_neg_component()]))
-  ccross_skew_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3. (x ccross y) = --(y ccross x)"), t457))
+  ccross_skew_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3. (x ccross y) = --(y ccross x)"), t457))
 }
 
 ///|
@@ -3691,7 +3691,7 @@ pub fn ccross_skew() -> @kernel.Thm {
 /// CCROSS_REFL
 fn step_205() -> Unit raise {
   let t458 = ccross_tac(@list.List([cvector_zero_component()]))
-  ccross_refl_c.set(@tactics.prove(@parser.parse_term("!x:complex^3. x ccross x = cvector_zero"), t458))
+  ccross_refl_c.set(@tactics.prove(@parser.parse_term("forall x:complex^3. x ccross x = cvector_zero"), t458))
 }
 
 ///|
@@ -3707,7 +3707,7 @@ pub fn ccross_refl() -> @kernel.Thm {
 /// CCROSS_LADD
 fn step_206() -> Unit raise {
   let t459 = ccross_tac(@list.List([cvector_add_component()]))
-  ccross_ladd_c.set(@tactics.prove(@parser.parse_term("!x y z:complex^3. (x + y) ccross z = (x ccross z) + (y ccross z)"), t459))
+  ccross_ladd_c.set(@tactics.prove(@parser.parse_term("forall x y z:complex^3. (x + y) ccross z = (x ccross z) + (y ccross z)"), t459))
 }
 
 ///|
@@ -3723,7 +3723,7 @@ pub fn ccross_ladd() -> @kernel.Thm {
 /// CCROSS_RADD
 fn step_207() -> Unit raise {
   let t460 = ccross_tac(@list.List([cvector_add_component()]))
-  ccross_radd_c.set(@tactics.prove(@parser.parse_term("!x y z:complex^3. x ccross(y + z) = (x ccross y) + (x ccross z)"), t460))
+  ccross_radd_c.set(@tactics.prove(@parser.parse_term("forall x y z:complex^3. x ccross(y + z) = (x ccross y) + (x ccross z)"), t460))
 }
 
 ///|
@@ -3739,7 +3739,7 @@ pub fn ccross_radd() -> @kernel.Thm {
 /// CCROSS_LMUL
 fn step_208() -> Unit raise {
   let t461 = ccross_tac(@list.List([cvector_mul_component()]))
-  ccross_lmul_c.set(@tactics.prove(@parser.parse_term("!c x y:complex^3. (c % x) ccross y = c % (x ccross y)"), t461))
+  ccross_lmul_c.set(@tactics.prove(@parser.parse_term("forall c x y:complex^3. (c % x) ccross y = c % (x ccross y)"), t461))
 }
 
 ///|
@@ -3755,7 +3755,7 @@ pub fn ccross_lmul() -> @kernel.Thm {
 /// CCROSS_RMUL
 fn step_209() -> Unit raise {
   let t462 = ccross_tac(@list.List([cvector_mul_component()]))
-  ccross_rmul_c.set(@tactics.prove(@parser.parse_term("!c x y:complex^3. x ccross (c % y) = c % (x ccross y)"), t462))
+  ccross_rmul_c.set(@tactics.prove(@parser.parse_term("forall c x y:complex^3. x ccross (c % y) = c % (x ccross y)"), t462))
 }
 
 ///|
@@ -3771,7 +3771,7 @@ pub fn ccross_rmul() -> @kernel.Thm {
 /// CCROSS_LNEG
 fn step_210() -> Unit raise {
   let t463 = ccross_tac(@list.List([cvector_neg_component()]))
-  ccross_lneg_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3. (--x) ccross y = --(x ccross y)"), t463))
+  ccross_lneg_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3. (--x) ccross y = --(x ccross y)"), t463))
 }
 
 ///|
@@ -3787,7 +3787,7 @@ pub fn ccross_lneg() -> @kernel.Thm {
 /// CCROSS_RNEG
 fn step_211() -> Unit raise {
   let t464 = ccross_tac(@list.List([cvector_neg_component()]))
-  ccross_rneg_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3. x ccross (--y) = --(x ccross y)"), t464))
+  ccross_rneg_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3. x ccross (--y) = --(x ccross y)"), t464))
 }
 
 ///|
@@ -3804,7 +3804,7 @@ pub fn ccross_rneg() -> @kernel.Thm {
 fn step_212() -> Unit raise {
   let t465 = @simp.rewrite_tac(@list.List([cvector_add_component(), ccross_component(), cvector_zero_component()]))
   let t466 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cart_eq3()])), t465), @complexes.simple_complex_arith_tac)
-  ccross_jacobi_c.set(@tactics.prove(@parser.parse_term("!(x:complex^3) y z.\n    x ccross (y ccross z) + y ccross (z ccross x) + z ccross (x ccross y) =\n      cvector_zero"), t466))
+  ccross_jacobi_c.set(@tactics.prove(@parser.parse_term("forall(x:complex^3) y z.\n    x ccross (y ccross z) + y ccross (z ccross x) + z ccross (x ccross y) =\n      cvector_zero"), t466))
 }
 
 ///|
@@ -3851,7 +3851,7 @@ fn step_216() -> Unit raise {
   let t468 = @bool.spec(@parser.parse_term("dimindex (:N)"), t467)
   let t469 = @simp.rewrite_tac(@list.List([@drule.match_mp(@bool.spec_all(@complexes.cnj_vsum()))(t468)]))
   let t471 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t469), t470)
-  cdot_sym_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y. x cdot y = cnj (y cdot x)"), t471))
+  cdot_sym_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y. x cdot y = cnj (y cdot x)"), t471))
 }
 
 ///|
@@ -3867,7 +3867,7 @@ pub fn cdot_sym() -> @kernel.Thm {
 /// REAL_CDOT_SELF
 fn step_217() -> Unit raise {
   let t472 = @simp.rewrite_tac(@list.List([@complexes.real_cnj(), @equal.gsym(cdot_sym())]))
-  real_cdot_self_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. real(x cdot x)"), t472))
+  real_cdot_self_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. real(x cdot x)"), t472))
 }
 
 ///|
@@ -3894,7 +3894,7 @@ fn step_218() -> Unit raise {
   let t474 = @bool.spec(@parser.parse_term("dimindex (:N)"), t473)
   let t475 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@vectors.vsum_add()))(t474)]))
   let t484 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t475), t476), t477), @tactics.gen_tac), @tactics.disch_tac), t478), t482), t483)
-  cdot_ladd_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y z. (x + y) cdot z = (x cdot z) + (y cdot z)"), t484))
+  cdot_ladd_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y z. (x + y) cdot z = (x cdot z) + (y cdot z)"), t484))
 }
 
 ///|
@@ -3921,7 +3921,7 @@ fn step_219() -> Unit raise {
   let t486 = @bool.spec(@parser.parse_term("dimindex (:N)"), t485)
   let t487 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@vectors.vsum_add()))(t486)]))
   let t496 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t487), t488), t489), @tactics.gen_tac), @tactics.disch_tac), t490), t494), t495)
-  cdot_radd_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y z. x cdot (y + z) = (x cdot y) + (x cdot z)"), t496))
+  cdot_radd_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y z. x cdot (y + z) = (x cdot y) + (x cdot z)"), t496))
 }
 
 ///|
@@ -3948,7 +3948,7 @@ fn step_220() -> Unit raise {
   let t498 = @bool.spec(@parser.parse_term("dimindex (:N)"), t497)
   let t499 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@vectors.vsum_sub()))(t498)]))
   let t508 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t499), t500), t501), @tactics.gen_tac), @tactics.disch_tac), t502), t506), t507)
-  cdot_lsub_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y z. (x - y) cdot z = (x cdot z) - (y cdot z)"), t508))
+  cdot_lsub_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y z. (x - y) cdot z = (x cdot z) - (y cdot z)"), t508))
 }
 
 ///|
@@ -3975,7 +3975,7 @@ fn step_221() -> Unit raise {
   let t510 = @bool.spec(@parser.parse_term("dimindex (:N)"), t509)
   let t511 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@vectors.vsum_sub()))(t510)]))
   let t520 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t511), t512), t513), @tactics.gen_tac), @tactics.disch_tac), t514), t518), t519)
-  cdot_rsub_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y z. x cdot (y - z) = (x cdot y) - (x cdot z)"), t520))
+  cdot_rsub_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y z. x cdot (y - z) = (x cdot y) - (x cdot z)"), t520))
 }
 
 ///|
@@ -3995,7 +3995,7 @@ fn step_222() -> Unit raise {
   let t522 = @bool.spec(@parser.parse_term("dimindex (:N)"), t521)
   let t523 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@complexes.vsum_complex_lmul()))(t522)]))
   let t525 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t523), t524)
-  cdot_lmul_c.set(@tactics.prove(@parser.parse_term("!c:complex x:complex^N y. (c % x) cdot y = c * (x cdot y)"), t525))
+  cdot_lmul_c.set(@tactics.prove(@parser.parse_term("forall c:complex x:complex^N y. (c % x) cdot y = c * (x cdot y)"), t525))
 }
 
 ///|
@@ -4015,7 +4015,7 @@ fn step_223() -> Unit raise {
   let t527 = @bool.spec(@parser.parse_term("dimindex (:N)"), t526)
   let t528 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@complexes.vsum_complex_lmul()))(t527)]))
   let t530 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t528), t529)
-  cdot_rmul_c.set(@tactics.prove(@parser.parse_term("!c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)"), t530))
+  cdot_rmul_c.set(@tactics.prove(@parser.parse_term("forall c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)"), t530))
 }
 
 ///|
@@ -4038,7 +4038,7 @@ fn step_224() -> Unit raise {
   let t534 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@complexes.vsum_complex_lmul()))(t533)]))
   let t531 = @simp.once_rewrite_tac(@list.List([@complexes.complex_neg_minus1()]))
   let t538 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t531), t534), t535), t536), t537)
-  cdot_lneg_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y. (--x) cdot y = --(x cdot y)"), t538))
+  cdot_lneg_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y. (--x) cdot y = --(x cdot y)"), t538))
 }
 
 ///|
@@ -4060,7 +4060,7 @@ fn step_225() -> Unit raise {
   let t542 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@complexes.vsum_complex_lmul()))(t541)]))
   let t539 = @simp.once_rewrite_tac(@list.List([@complexes.complex_neg_minus1()]))
   let t545 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t539), t542), t543), t544)
-  cdot_rneg_c.set(@tactics.prove(@parser.parse_term("!x:complex^N y. x cdot (--y) = --(x cdot y)"), t545))
+  cdot_rneg_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N y. x cdot (--y) = --(x cdot y)"), t545))
 }
 
 ///|
@@ -4078,7 +4078,7 @@ fn step_226() -> Unit raise {
   let t547 = @simp.rewrite_tac(@list.List([@complexes.complex_mul_lzero(), @equal.gsym(@complexes.complex_vec_0()), @vectors.vsum_0()]))
   let t546 = @simp.rewrite_tac(@list.List([cvector_zero_component()]))
   let t548 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t546), t547)
-  cdot_lzero_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cvector_zero cdot x = Cx (&0)"), t548))
+  cdot_lzero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cvector_zero cdot x = Cx (&0)"), t548))
 }
 
 ///|
@@ -4113,7 +4113,7 @@ fn step_228() -> Unit raise {
   let t551 = @simp.rewrite_tac(@list.List([cnj_zero()]))
   let t550 = @simp.rewrite_tac(@list.List([cvector_zero_component()]))
   let t553 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t550), t551), t552)
-  cdot_rzero_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. x cdot cvector_zero = Cx (&0)"), t553))
+  cdot_rzero_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. x cdot cvector_zero = Cx (&0)"), t553))
 }
 
 ///|
@@ -4131,7 +4131,7 @@ fn step_229() -> Unit raise {
   let t555 = @simp.rewrite_tac(@list.List([@vectors.vsum_3()]))
   let t554 = @simp.simp_tac(@list.List([@cart.dimindex_3()]))
   let t556 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t554), t555)
-  cdot3_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3.\n    x cdot y = (x$1 * cnj (y$1) + x$2 * cnj (y$2) + x$3 * cnj (y$3))"), t556))
+  cdot3_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3.\n    x cdot y = (x$1 * cnj (y$1) + x$2 * cnj (y$2) + x$3 * cnj (y$3))"), t556))
 }
 
 ///|
@@ -4147,7 +4147,7 @@ pub fn cdot3() -> @kernel.Thm {
 /// ADD_CDOT_SYM
 fn step_230() -> Unit raise {
   let t557 = @meson.meson_tac(@list.List([cdot_sym(), @complexes.complex_add_cnj()]))
-  add_cdot_sym_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. x cdot y + y cdot x = Cx(&2 * Re(x cdot y))"), t557))
+  add_cdot_sym_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. x cdot y + y cdot x = Cx(&2 * Re(x cdot y))"), t557))
 }
 
 ///|
@@ -4165,7 +4165,7 @@ fn step_231() -> Unit raise {
   let t559 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t558 = @tactics.repeat_tac(@tactics.strip_tac)
   let t560 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cart_eq3(), cvector_add_component(), cvector_mul_component(), vector_to_cvector_component(), ccross_component(), @cross.cross_components(), cvector_re_component(), cvector_im_component(), @complexes.complex_mul(), @complexes.re_cx(), @complexes.im_cx(), @complexes.cx_def(), @complexes.complex_sub(), @complexes.complex_neg(), @complexes.complex_add(), @complexes.re(), @complexes.im(), @complexes.re_ii(), @complexes.im_ii()])), t558), @tactics.ap_term_tac), t559), @int.arith_tac)
-  ccross_lreal_c.set(@tactics.prove(@parser.parse_term("!r c.\n    (vector_to_cvector r) ccross c =\n      vector_to_cvector (r cross (cvector_re c))\n      + ii % (vector_to_cvector (r cross (cvector_im c)))"), t560))
+  ccross_lreal_c.set(@tactics.prove(@parser.parse_term("forall r c.\n    (vector_to_cvector r) ccross c =\n      vector_to_cvector (r cross (cvector_re c))\n      + ii % (vector_to_cvector (r cross (cvector_im c)))"), t560))
 }
 
 ///|
@@ -4183,7 +4183,7 @@ fn step_232() -> Unit raise {
   let t562 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t561 = @tactics.repeat_tac(@tactics.strip_tac)
   let t563 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cart_eq3(), cvector_add_component(), cvector_mul_component(), vector_to_cvector_component(), ccross_component(), @cross.cross_components(), cvector_re_component(), cvector_im_component(), @complexes.complex_mul(), @complexes.re_cx(), @complexes.im_cx(), @complexes.cx_def(), @complexes.complex_sub(), @complexes.complex_neg(), @complexes.complex_add(), @complexes.re(), @complexes.im(), @complexes.re_ii(), @complexes.im_ii()])), t561), @tactics.ap_term_tac), t562), @int.arith_tac)
-  ccross_rreal_c.set(@tactics.prove(@parser.parse_term("!r c.\n    c ccross (vector_to_cvector r) =\n      vector_to_cvector ((cvector_re c) cross r)\n      + ii % (vector_to_cvector ((cvector_im c) cross r))"), t563))
+  ccross_rreal_c.set(@tactics.prove(@parser.parse_term("forall r c.\n    c ccross (vector_to_cvector r) =\n      vector_to_cvector ((cvector_re c) cross r)\n      + ii % (vector_to_cvector ((cvector_im c) cross r))"), t563))
 }
 
 ///|
@@ -4227,7 +4227,7 @@ fn step_233() -> Unit raise {
   }, @list.List([@complexes.complex_expand()]))
   let t564 = @tactics.repeat_tac(@tactics.gen_tac)
   let t587 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot(), @vectors.dot(), vector_to_cvector_component(), cvector_re_component(), cvector_im_component()])), t564), t572), t575), t578), t579), t580), t581), t582), t583), t584), t586)
-  cdot_lreal_c.set(@tactics.prove(@parser.parse_term("!r c.\n    (vector_to_cvector r) cdot c =\n      Cx (r dot (cvector_re c)) - ii * Cx (r dot (cvector_im c))"), t587))
+  cdot_lreal_c.set(@tactics.prove(@parser.parse_term("forall r c.\n    (vector_to_cvector r) cdot c =\n      Cx (r dot (cvector_re c)) - ii * Cx (r dot (cvector_im c))"), t587))
 }
 
 ///|
@@ -4265,7 +4265,7 @@ fn step_234() -> Unit raise {
   }, @list.List([@complexes.complex_expand()]))
   let t588 = @tactics.repeat_tac(@tactics.gen_tac)
   let t605 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot(), @vectors.dot(), vector_to_cvector_component(), cvector_re_component(), cvector_im_component()])), t588), t596), t599), t602), t603), t604)
-  cdot_rreal_c.set(@tactics.prove(@parser.parse_term("!r c.\n    c cdot (vector_to_cvector r) =\n      Cx ((cvector_re c) dot r) + ii * Cx ((cvector_im c) dot r)"), t605))
+  cdot_rreal_c.set(@tactics.prove(@parser.parse_term("forall r c.\n    c cdot (vector_to_cvector r) =\n      Cx ((cvector_re c) dot r) + ii * Cx ((cvector_im c) dot r)"), t605))
 }
 
 ///|
@@ -4296,7 +4296,7 @@ pub fn cnorm2() -> @kernel.Thm {
 /// CX_CNORM2
 fn step_236() -> Unit raise {
   let t606 = @simp.simp_tac(@list.List([cnorm2(), real_cdot_self(), real_of_complex_v1()]))
-  cx_cnorm2_c.set(@tactics.prove(@parser.parse_term("!v:complex^N. Cx(cnorm2 v) = v cdot v"), t606))
+  cx_cnorm2_c.set(@tactics.prove(@parser.parse_term("forall v:complex^N. Cx(cnorm2 v) = v cdot v"), t606))
 }
 
 ///|
@@ -4328,7 +4328,7 @@ pub fn cnorm2_cvector_zero() -> @kernel.Thm {
 /// CNORM2_MODULUS
 fn step_238() -> Unit raise {
   let t608 = @simp.rewrite_tac(@list.List([cnorm2(), cdot(), @complexes.complex_mul_cnj(), @complexes.complex_pow_2(), @equal.gsym(@complexes.cx_mul()), @complexes.vsum_cx_numseg(), @vectors.dot(), vector_map_component(), real_of_complex_cx()]))
-  cnorm2_modulus_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cnorm2 x = (vector_map norm x) dot (vector_map norm x)"), t608))
+  cnorm2_modulus_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cnorm2 x = (vector_map norm x) dot (vector_map norm x)"), t608))
 }
 
 ///|
@@ -4372,7 +4372,7 @@ fn step_239() -> Unit raise {
     })(x615))
   }, @list.List([@cart.cart_eq()]))
   let t627 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cnorm2_modulus(), @complexes.cx_inj(), @vectors.dot_eq_0()])), @tactics.gen_tac), t616), t617), t625), t626)
-  cnorm2_eq_0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cnorm2 x = &0 <=> x = cvector_zero"), t627))
+  cnorm2_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cnorm2 x = &0 <=> x = cvector_zero"), t627))
 }
 
 ///|
@@ -4398,7 +4398,7 @@ fn step_240() -> Unit raise {
     })(t631(x632))
   })
   let t635 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@class.taut(@parser.parse_term("(p<=>q) <=> ((p==>q) /\\ (q==>p))")), cdot_lzero()])), @tactics.gen_tac), t633), t634)
-  cdot_eq_0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. x cdot x = Cx(&0) <=> x = cvector_zero"), t635))
+  cdot_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. x cdot x = Cx(&0) <=> x = cvector_zero"), t635))
 }
 
 ///|
@@ -4414,7 +4414,7 @@ pub fn cdot_eq_0() -> @kernel.Thm {
 /// CNORM2_POS
 fn step_241() -> Unit raise {
   let t636 = @simp.rewrite_tac(@list.List([cnorm2_modulus(), @vectors.dot_pos_le()]))
-  cnorm2_pos_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. &0 <= cnorm2 x"), t636))
+  cnorm2_pos_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. &0 <= cnorm2 x"), t636))
 }
 
 ///|
@@ -4430,7 +4430,7 @@ pub fn cnorm2_pos() -> @kernel.Thm {
 /// CDOT_SELF_POS
 fn step_242() -> Unit raise {
   let t637 = @simp.rewrite_tac(@list.List([@equal.gsym(cnorm2()), cnorm2_pos()]))
-  cdot_self_pos_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. &0 <= real_of_complex (x cdot x)"), t637))
+  cdot_self_pos_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. &0 <= real_of_complex (x cdot x)"), t637))
 }
 
 ///|
@@ -4447,7 +4447,7 @@ pub fn cdot_self_pos() -> @kernel.Thm {
 fn step_243() -> Unit raise {
   let t638 = @equal.gsym(@complexes.cx_pow())
   let t639 = @simp.simp_tac(@list.List([cnorm2(), cdot_lmul(), cdot_rmul(), @complexes.simple_complex_arith(@parser.parse_term("x * cnj x * y = (x * cnj x) * y")), @complexes.complex_mul_cnj(), real_of_complex_cx(), real_of_complex_mul(), @complexes.real_cx(), real_cdot_self(), t638]))
-  cnorm2_mul_c.set(@tactics.prove(@parser.parse_term("!a x:complex^N. cnorm2 (a % x) = (norm a) pow 2 * cnorm2 x"), t639))
+  cnorm2_mul_c.set(@tactics.prove(@parser.parse_term("forall a x:complex^N. cnorm2 (a % x) = (norm a) pow 2 * cnorm2 x"), t639))
 }
 
 ///|
@@ -4471,7 +4471,7 @@ fn step_244() -> Unit raise {
   let t640 = @complexes.simple_complex_arith(@parser.parse_term("x-(--Cx(&1))*y = x+y"))
   let t641 = @simp.rewrite_tac(@list.List([@equal.gsym(@complexes.complex_pow_2()), @complexes.complex_pow_ii_2(), t640]))
   let t648 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cnorm2(), @vectors.vector_norm(), cdot(), cvector_add_component(), cvector_mul_component(), vector_to_cvector_component(), @complexes.cnj_add(), @complexes.cnj_cx(), @complexes.cnj_mul(), @complexes.cnj_ii(), @complexes.complex_add_rdistrib(), @complexes.complex_add_ldistrib(), @complexes.simple_complex_arith(@parser.parse_term("(x*x+x*(--ii)*y)+(ii*y)*x+(ii*y)*(--ii)*y = x*x-(ii*ii)*y*y"))])), t641), t645), t647)
-  cnorm2_norm2_2_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n    cnorm2 (vector_to_cvector x + ii % vector_to_cvector y) =\n      norm x pow 2 + norm y pow 2"), t648))
+  cnorm2_norm2_2_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n    cnorm2 (vector_to_cvector x + ii % vector_to_cvector y) =\n      norm x pow 2 + norm y pow 2"), t648))
 }
 
 ///|
@@ -4500,7 +4500,7 @@ fn step_245() -> Unit raise {
       }
     })(x655))
   }, @list.List([@equal.gsym(vector_to_cvector_cvector_re_im())]))), t656)
-  cnorm2_norm2_c.set(@tactics.prove(@parser.parse_term("!v:complex^N.\n    cnorm2 v = norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2"), t657))
+  cnorm2_norm2_c.set(@tactics.prove(@parser.parse_term("forall v:complex^N.\n    cnorm2 v = norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2"), t657))
 }
 
 ///|
@@ -4516,7 +4516,7 @@ pub fn cnorm2_norm2() -> @kernel.Thm {
 /// CNORM2_ALT
 fn step_246() -> Unit raise {
   let t658 = @simp.simp_tac(@list.List([cnorm2(), real_of_complex_norm(), real_cdot_self(), @theorems.eq_sym_eq(), @real.real_abs_refl(), @simp.rewrite_rule(@list.List([cnorm2()]))(cnorm2_pos())]))
-  cnorm2_alt_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. cnorm2 x = norm (x cdot x)"), t658))
+  cnorm2_alt_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. cnorm2 x = norm (x cdot x)"), t658))
 }
 
 ///|
@@ -4533,7 +4533,7 @@ pub fn cnorm2_alt() -> @kernel.Thm {
 fn step_247() -> Unit raise {
   let t659 = @tactics.repeat_tac(@tactics.gen_tac)
   let t660 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cnorm2(), cdot_lsub(), cdot_rsub()])), t659), @tactics.ap_term_tac), @complexes.simple_complex_arith_tac)
-  cnorm2_sub_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. cnorm2 (x-y) = cnorm2 (y-x)"), t660))
+  cnorm2_sub_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. cnorm2 (x-y) = cnorm2 (y-x)"), t660))
 }
 
 ///|
@@ -4549,7 +4549,7 @@ pub fn cnorm2_sub() -> @kernel.Thm {
 /// CNORM2_VECTOR_TO_CVECTOR
 fn step_248() -> Unit raise {
   let t661 = @simp.rewrite_tac(@list.List([cnorm2_alt(), cdot_rreal(), cvector_re_vector_to_cvector(), cvector_im_vector_to_cvector(), @vectors.dot_lzero(), @complexes.complex_mul_rzero(), @complexes.complex_add_rid(), @vectors.dot_square_norm(), @complexes.cx_pow(), @complexes.complex_norm_pow(), @complexes.complex_norm_cx(), @real.real_pow2_abs()]))
-  cnorm2_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("!x:real^N. cnorm2 (vector_to_cvector x) = norm x pow 2"), t661))
+  cnorm2_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. cnorm2 (vector_to_cvector x) = norm x pow 2"), t661))
 }
 
 ///|
@@ -4602,7 +4602,7 @@ pub fn cnorm_cvector_zero() -> @kernel.Thm {
 /// CNORM_POW_2
 fn step_252() -> Unit raise {
   let t663 = @simp.simp_tac(@list.List([cnorm(), @trivia.o_def(), @real.sqrt_pow_2(), cnorm2_pos()]))
-  cnorm_pow_2_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. norm x pow 2 = cnorm2 x"), t663))
+  cnorm_pow_2_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. norm x pow 2 = cnorm2 x"), t663))
 }
 
 ///|
@@ -4618,7 +4618,7 @@ pub fn cnorm_pow_2() -> @kernel.Thm {
 /// CNORM_NORM_2
 fn step_253() -> Unit raise {
   let t664 = @simp.rewrite_tac(@list.List([cnorm(), @trivia.o_def(), cnorm2_norm2_2()]))
-  cnorm_norm_2_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n    norm (vector_to_cvector x + ii % vector_to_cvector y) =\n      sqrt(norm x pow 2 + norm y pow 2)"), t664))
+  cnorm_norm_2_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n    norm (vector_to_cvector x + ii % vector_to_cvector y) =\n      sqrt(norm x pow 2 + norm y pow 2)"), t664))
 }
 
 ///|
@@ -4647,7 +4647,7 @@ fn step_254() -> Unit raise {
       }
     })(x671))
   }, @list.List([@equal.gsym(vector_to_cvector_cvector_re_im())]))), t672)
-  cnorm_norm_c.set(@tactics.prove(@parser.parse_term("!v:complex^N.\n    norm v = sqrt(norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2)"), t673))
+  cnorm_norm_c.set(@tactics.prove(@parser.parse_term("forall v:complex^N.\n    norm v = sqrt(norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2)"), t673))
 }
 
 ///|
@@ -4663,7 +4663,7 @@ pub fn cnorm_norm() -> @kernel.Thm {
 /// CNORM_MUL
 fn step_255() -> Unit raise {
   let t674 = @simp.simp_tac(@list.List([cnorm(), @trivia.o_def(), cnorm2_mul(), @real.real_le_pow_2(), @real.sqrt_mul(), cnorm2_pos(), @vectors.norm_pos_le(), @real.pow_2_sqrt()]))
-  cnorm_mul_c.set(@tactics.prove(@parser.parse_term("!a x:complex^N. norm (a % x) = norm a * norm x"), t674))
+  cnorm_mul_c.set(@tactics.prove(@parser.parse_term("forall a x:complex^N. norm (a % x) = norm a * norm x"), t674))
 }
 
 ///|
@@ -4679,7 +4679,7 @@ pub fn cnorm_mul() -> @kernel.Thm {
 /// CNORM_EQ_0
 fn step_256() -> Unit raise {
   let t675 = @simp.simp_tac(@list.List([cnorm(), @trivia.o_def(), @real.sqrt_eq_0(), cnorm2_pos(), cnorm2_eq_0()]))
-  cnorm_eq_0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. norm x = &0 <=> x = cvector_zero"), t675))
+  cnorm_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. norm x = &0 <=> x = cvector_zero"), t675))
 }
 
 ///|
@@ -4695,7 +4695,7 @@ pub fn cnorm_eq_0() -> @kernel.Thm {
 /// CNORM_POS
 fn step_257() -> Unit raise {
   let t676 = @simp.simp_tac(@list.List([cnorm(), @trivia.o_def(), @real.sqrt_pos_le(), cnorm2_pos()]))
-  cnorm_pos_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. &0 <= norm x"), t676))
+  cnorm_pos_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. &0 <= norm x"), t676))
 }
 
 ///|
@@ -4711,7 +4711,7 @@ pub fn cnorm_pos() -> @kernel.Thm {
 /// CNORM_SUB
 fn step_258() -> Unit raise {
   let t677 = @simp.rewrite_tac(@list.List([cnorm(), @trivia.o_def(), cnorm2_sub()]))
-  cnorm_sub_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. norm (x-y) = norm (y-x)"), t677))
+  cnorm_sub_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. norm (x-y) = norm (y-x)"), t677))
 }
 
 ///|
@@ -4727,7 +4727,7 @@ pub fn cnorm_sub() -> @kernel.Thm {
 /// CNORM_VECTOR_TO_CVECTOR
 fn step_259() -> Unit raise {
   let t678 = @simp.simp_tac(@list.List([cnorm(), @trivia.o_def(), cnorm2_vector_to_cvector(), @real.pow_2_sqrt(), @vectors.norm_pos_le()]))
-  cnorm_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("!x:real^N. norm (vector_to_cvector x) = norm x"), t678))
+  cnorm_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. norm (vector_to_cvector x) = norm x"), t678))
 }
 
 ///|
@@ -4743,7 +4743,7 @@ pub fn cnorm_vector_to_cvector() -> @kernel.Thm {
 /// CNORM_BASIS
 fn step_260() -> Unit raise {
   let t679 = @simp.simp_tac(@list.List([@vectors.norm_basis(), cnorm_vector_to_cvector()]))
-  cnorm_basis_c.set(@tactics.prove(@parser.parse_term("!k. 1 <= k /\\ k <= dimindex(:N)\n    ==> norm (vector_to_cvector (basis k :real^N)) = &1"), t679))
+  cnorm_basis_c.set(@tactics.prove(@parser.parse_term("forall k. 1 <= k /\\ k <= dimindex(:N)\n    ==> norm (vector_to_cvector (basis k :real^N)) = &1"), t679))
 }
 
 ///|
@@ -4775,7 +4775,7 @@ pub fn cnorm_basis_1() -> @kernel.Thm {
 /// CVECTOR_CHOOSE_SIZE
 fn step_262() -> Unit raise {
   let t681 = @meson.meson_tac(@list.List([@vectors.vector_choose_size(), cnorm_vector_to_cvector()]))
-  cvector_choose_size_c.set(@tactics.prove(@parser.parse_term("!c. &0 <= c ==> ?x:complex^N. norm(x) = c"), t681))
+  cvector_choose_size_c.set(@tactics.prove(@parser.parse_term("forall c. &0 <= c ==> ?x:complex^N. norm(x) = c"), t681))
 }
 
 ///|
@@ -4828,7 +4828,7 @@ fn step_265() -> Unit raise {
   let t687 = @simp.simp_tac(@list.List([cunit(), cvector_mul_assoc(), cdot_lmul(), @complexes.simple_complex_arith(@parser.parse_term("(x*y)*x=(x*x)*y")), t686, t685, t684, cnorm(), @trivia.o_def(), cnorm2_pos(), @real.sqrt_pow_2()]))
   let t683 = @simp.asm_rewrite_tac(@list.List([cunit_cvector_zero(), cdot_lzero(), cvector_mul_lzero()]))
   let t689 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("x = cvector_zero:complex^N"))), t683), t687), t688)
-  cdot_cunit_mul_cunit_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. (cunit x cdot x) % cunit x = x"), t689))
+  cdot_cunit_mul_cunit_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. (cunit x cdot x) % cunit x = x"), t689))
 }
 
 ///|
@@ -4860,7 +4860,7 @@ pub fn collinear_cvectors() -> @kernel.Thm {
 fn step_267() -> Unit raise {
   let t690 = @meson.meson_tac(@list.List([]))
   let t691 = @tactics.then_tac(@simp.rewrite_tac(@list.List([collinear_cvectors()])), t690)
-  collinear_cvectors_sym_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. collinear_cvectors x y <=> collinear_cvectors y x"), t691))
+  collinear_cvectors_sym_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. collinear_cvectors x y <=> collinear_cvectors y x"), t691))
 }
 
 ///|
@@ -4878,7 +4878,7 @@ fn step_268() -> Unit raise {
   let t693 = @simp.rewrite_tac(@list.List([cvector_mul_lzero()]))
   let t692 = @tactics.exists_tac(@parser.parse_term("Cx(&0)"))
   let t694 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([collinear_cvectors()])), @tactics.gen_tac), t692), t693)
-  collinear_cvectors_0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. collinear_cvectors x cvector_zero"), t694))
+  collinear_cvectors_0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. collinear_cvectors x cvector_zero"), t694))
 }
 
 ///|
@@ -4906,7 +4906,7 @@ fn step_269() -> Unit raise {
   let t704 = @list.List([@meson.asm_meson_tac(@list.List([cvector_mul_lzero()])), t703])
   let t695 = @tactics.repeat_tac(@tactics.strip_tac)
   let t705 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([collinear_cvectors()])), t695), t704)
-  non_null_collinears_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ?a. ~(a=Cx(&0)) /\\ y = a % x"), t705))
+  non_null_collinears_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ?a. ~(a=Cx(&0)) /\\ y = a % x"), t705))
 }
 
 ///|
@@ -4927,7 +4927,7 @@ fn step_270() -> Unit raise {
   let t710 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t707), t708), t709])
   let t706 = @class.asm_cases_tac(@parser.parse_term("y=cvector_zero:complex^N"))
   let t711 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t706), t710)
-  collinear_lnonnull_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) ==> ?a. y = a % x"), t711))
+  collinear_lnonnull_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) ==> ?a. y = a % x"), t711))
 }
 
 ///|
@@ -4943,7 +4943,7 @@ pub fn collinear_lnonnull() -> @kernel.Thm {
 /// COLLINEAR_RNONNULL
 fn step_271() -> Unit raise {
   let t712 = @meson.meson_tac(@list.List([collinear_lnonnull(), collinear_cvectors_sym()]))
-  collinear_rnonnull_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    collinear_cvectors x y /\\ ~(y=cvector_zero) ==> ?a. x = a % y"), t712))
+  collinear_rnonnull_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(y=cvector_zero) ==> ?a. x = a % y"), t712))
 }
 
 ///|
@@ -4975,7 +4975,7 @@ fn step_272() -> Unit raise {
       @tactics.choose_then((x729 : @kernel.Thm) => single(@simp.once_rewrite_tac, x729))(t731)
     })
   })
-  let t721 = @drule.match_mp(@calc_rat.real_arith(@parser.parse_term("!x. x= &1 ==> ~(x= &0)")))
+  let t721 = @drule.match_mp(@calc_rat.real_arith(@parser.parse_term("forall x. x= &1 ==> ~(x= &0)")))
   let t719 = @simp.rewrite_rule(@list.List([@vectors.norm_eq_0(), @equal.gsym(vector_to_cvector_zero_eq())]))
   let t724 = @tactics.pop_assum((x723 : @kernel.Thm) => distrib_v1(@list.List([fn(x713 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s714 = @tactics.assume_tac(x713)
@@ -4993,7 +4993,7 @@ fn step_272() -> Unit raise {
     })(t721(x722))
   }]), x723))
   let t739 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t724), t732), t733), t738)
-  collinear_runitreal_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n    collinear_cvectors x (vector_to_cvector y) /\\ norm y = &1\n      ==> x = (x cdot (vector_to_cvector y)) % vector_to_cvector y"), t739))
+  collinear_runitreal_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n    collinear_cvectors x (vector_to_cvector y) /\\ norm y = &1\n      ==> x = (x cdot (vector_to_cvector y)) % vector_to_cvector y"), t739))
 }
 
 ///|
@@ -5034,7 +5034,7 @@ fn step_273() -> Unit raise {
   })), t744), t761), @complexes.simple_complex_arith_tac])
   let t740 = @tactics.repeat_tac(@tactics.gen_tac)
   let t763 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ccross(), collinear_cvectors(), cart_eq3(), @vectors.vector_3(), cvector_zero_component(), @complexes.complex_sub_0(), cvector_mul_component()])), t740), @tactics.eq_tac), t762)
-  ccross_collinear_cvectors_c.set(@tactics.prove(@parser.parse_term("!x y:complex^3. x ccross y = cvector_zero <=> collinear_cvectors x y"), t763))
+  ccross_collinear_cvectors_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^3. x ccross y = cvector_zero <=> collinear_cvectors x y"), t763))
 }
 
 ///|
@@ -5051,7 +5051,7 @@ pub fn ccross_collinear_cvectors() -> @kernel.Thm {
 fn step_274() -> Unit raise {
   let t764 = @simp.asm_simp_tac(@list.List([cvector_mul_assoc(), @meson.meson(@list.List([]), @parser.parse_term("(p\\/q) <=> (~p ==> q)")), @complexes.complex_mul_linv(), cvector_mul_id()]))
   let t765 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t764)
-  cvector_mul_inv_c.set(@tactics.prove(@parser.parse_term("!a x y:complex^N. ~(a = Cx(&0)) /\\ x = a % y ==> y = inv a % x"), t765))
+  cvector_mul_inv_c.set(@tactics.prove(@parser.parse_term("forall a x y:complex^N. ~(a = Cx(&0)) /\\ x = a % y ==> y = inv a % x"), t765))
 }
 
 ///|
@@ -5069,7 +5069,7 @@ fn step_275() -> Unit raise {
   let t767 = @meson.asm_meson_tac(@list.List([cvector_mul_lzero(), cvector_mul_inv()]))
   let t766 = @class.asm_cases_tac(@parser.parse_term("a=Cx(&0)"))
   let t768 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t766), t767)
-  cvector_mul_inv2_c.set(@tactics.prove(@parser.parse_term("!a x y:complex^N. ~(x = cvector_zero) /\\ x = a % y ==> y = inv a % x"), t768))
+  cvector_mul_inv2_c.set(@tactics.prove(@parser.parse_term("forall a x y:complex^N. ~(x = cvector_zero) /\\ x = a % y ==> y = inv a % x"), t768))
 }
 
 ///|
@@ -5117,7 +5117,7 @@ fn step_276() -> Unit raise {
   }), t773), t774), t775), @tactics.disj2_tac), t776), t777), t795, t794, t793])
   let t769 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.strip_tac, @tactics.eq_tac))
   let t797 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.collinear_lemma_alt(), collinear_cvectors()])), t769), t796)
-  collinear_cvectors_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n    collinear_cvectors (vector_to_cvector x) (vector_to_cvector y)\n      <=> collinear {vec 0,x,y}"), t797))
+  collinear_cvectors_vector_to_cvector_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n    collinear_cvectors (vector_to_cvector x) (vector_to_cvector y)\n      <=> collinear {vec 0,x,y}"), t797))
 }
 
 ///|
@@ -5148,7 +5148,7 @@ pub fn corthogonal() -> @kernel.Thm {
 /// CORTHOGONAL_SYM
 fn step_278() -> Unit raise {
   let t798 = @meson.meson_tac(@list.List([corthogonal(), cdot_sym(), cnj_zero()]))
-  corthogonal_sym_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. corthogonal x y <=> corthogonal y x"), t798))
+  corthogonal_sym_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. corthogonal x y <=> corthogonal y x"), t798))
 }
 
 ///|
@@ -5164,7 +5164,7 @@ pub fn corthogonal_sym() -> @kernel.Thm {
 /// CORTHOGONAL_0
 fn step_279() -> Unit raise {
   let t799 = @simp.rewrite_tac(@list.List([corthogonal(), cdot_lzero(), cdot_rzero()]))
-  corthogonal_0_c.set(@tactics.prove(@parser.parse_term("!x:complex^N. corthogonal cvector_zero x /\\ corthogonal x cvector_zero"), t799))
+  corthogonal_0_c.set(@tactics.prove(@parser.parse_term("forall x:complex^N. corthogonal cvector_zero x /\\ corthogonal x cvector_zero"), t799))
 }
 
 ///|
@@ -5220,7 +5220,7 @@ fn step_281() -> Unit raise {
   })
   let t800 = @tactics.repeat_tac(@tactics.strip_tac)
   let t807 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([collinear_cvectors(), corthogonal()])), t800), t804), t805), t806)
-  corthogonal_collinear_cvectors_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ~(corthogonal x y)"), t807))
+  corthogonal_collinear_cvectors_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ~(corthogonal x y)"), t807))
 }
 
 ///|
@@ -5237,7 +5237,7 @@ pub fn corthogonal_collinear_cvectors() -> @kernel.Thm {
 fn step_282() -> Unit raise {
   let t808 = @meson.meson_tac(@list.List([]))
   let t809 = @tactics.then_tac(@simp.simp_tac(@list.List([corthogonal(), cdot_rmul(), cdot_lmul(), @complexes.complex_entire(), @complexes.cnj_eq_0()])), t808)
-  corthogonal_mul_clauses_c.set(@tactics.prove(@parser.parse_term("!x y a.\n    (corthogonal x y ==> corthogonal x (a%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal x (a%y))\n    /\\ (corthogonal x y ==> corthogonal (a%x) y)\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal (a%x) y)"), t809))
+  corthogonal_mul_clauses_c.set(@tactics.prove(@parser.parse_term("forall x y a.\n    (corthogonal x y ==> corthogonal x (a%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal x (a%y))\n    /\\ (corthogonal x y ==> corthogonal (a%x) y)\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal (a%x) y)"), t809))
 }
 
 ///|
@@ -5304,7 +5304,7 @@ fn step_283() -> Unit raise {
 /// CORTHOGONAL_LRMUL_CLAUSES
 fn step_284() -> Unit raise {
   let t810 = @meson.meson_tac(@list.List([corthogonal_mul_clauses()]))
-  corthogonal_lrmul_clauses_c.set(@tactics.prove(@parser.parse_term("!x y a b.\n    (corthogonal x y ==> corthogonal (a%x) (b%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) \\/ b = Cx(&0)\n      <=> corthogonal (a%x) (b%y))"), t810))
+  corthogonal_lrmul_clauses_c.set(@tactics.prove(@parser.parse_term("forall x y a b.\n    (corthogonal x y ==> corthogonal (a%x) (b%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) \\/ b = Cx(&0)\n      <=> corthogonal (a%x) (b%y))"), t810))
 }
 
 ///|
@@ -5353,7 +5353,7 @@ fn step_286() -> Unit raise {
   let t812 = @tactics.conv_tac(@calc_rat.real_field)
   let t811 = @simp.rewrite_tac(@list.List([@complexes.re_def(), @complexes.cx_def(), @complexes.im_def(), @complexes.complex(), @complexes.complex_mul(), @vectors.vector_2(), @complexes.ii()]))
   let t813 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([corthogonal(), @vectors.orthogonal(), cdot_lreal(), cdot_rreal(), @complexes.complex_sub_0(), @complexes.complex_eq(), @complexes.re_cx(), @complexes.im_cx(), @complexes.re_sub(), @complexes.im_sub(), @complexes.re_add(), @complexes.im_add()])), t811), t812)
-  corthogonal_real_clauses_c.set(@tactics.prove(@parser.parse_term("!r c.\n    (corthogonal c (vector_to_cvector r)\n      <=> orthogonal (cvector_re c) r /\\ orthogonal (cvector_im c) r)\n    /\\ (corthogonal (vector_to_cvector r) c\n      <=> orthogonal r (cvector_re c) /\\ orthogonal r (cvector_im c))"), t813))
+  corthogonal_real_clauses_c.set(@tactics.prove(@parser.parse_term("forall r c.\n    (corthogonal c (vector_to_cvector r)\n      <=> orthogonal (cvector_re c) r /\\ orthogonal (cvector_im c) r)\n    /\\ (corthogonal (vector_to_cvector r) c\n      <=> orthogonal r (cvector_re c) /\\ orthogonal r (cvector_im c))"), t813))
 }
 
 ///|
@@ -5401,7 +5401,7 @@ fn step_287() -> Unit raise {
 fn step_288() -> Unit raise {
   let t814 = @meson.meson_tac(@list.List([corthogonal_0()]))
   let t815 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cunit(), @equal.gsym(corthogonal_mul_clauses()), @complexes.complex_inv_eq_0(), @complexes.cx_inj(), cnorm_eq_0()])), t814)
-  corthogonal_unit_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    (corthogonal x (cunit y) <=> corthogonal x y)\n    /\\ (corthogonal (cunit x) y <=> corthogonal x y)"), t815))
+  corthogonal_unit_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    (corthogonal x (cunit y) <=> corthogonal x y)\n    /\\ (corthogonal (cunit x) y <=> corthogonal x y)"), t815))
 }
 
 ///|
@@ -5458,7 +5458,7 @@ fn step_290() -> Unit raise {
   let t817 = @simp.asm_rewrite_tac(@list.List([corthogonal(), cdot_rzero()]))
   let t816 = @class.asm_cases_tac(@parser.parse_term("y=cvector_zero:complex^N"))
   let t826 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t816), t817), t821), t823), t824), t825)
-  corthogonal_projection_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. corthogonal (x - (x cdot cunit y) % cunit y) y"), t826))
+  corthogonal_projection_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. corthogonal (x - (x cdot cunit y) % cunit y) y"), t826))
 }
 
 ///|
@@ -5474,7 +5474,7 @@ pub fn corthogonal_projection() -> @kernel.Thm {
 /// CDOT_PYTHAGOREAN
 fn step_291() -> Unit raise {
   let t827 = @simp.simp_tac(@list.List([corthogonal(), cnorm2(), cdot_ladd(), cdot_radd(), @complexes.complex_add_rid(), @complexes.complex_add_lid(), real_of_complex_add(), real_cdot_self(), @meson.meson(@list.List([cdot_sym(), cnj_zero()]), @parser.parse_term("x cdot y = Cx (&0) ==> y cdot x = Cx(&0)"))]))
-  cdot_pythagorean_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. corthogonal x y ==> cnorm2 (x+y) = cnorm2 x + cnorm2 y"), t827))
+  cdot_pythagorean_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. corthogonal x y ==> cnorm2 (x+y) = cnorm2 x + cnorm2 y"), t827))
 }
 
 ///|
@@ -5514,12 +5514,12 @@ fn step_292() -> Unit raise {
   let t833 = @equal.gsym(real_of_complex_mul())
   let t834 = @simp.simp_tac(@list.List([cnorm2(), @equal.gsym(real_of_complex_add()), real_cdot_self(), @complexes.real_add(), t833]))
   let t832 = @simp.rewrite_tac(@list.List([@equal.gsym(corthogonal_mul_clauses()), corthogonal_runit(), corthogonal_projection()]))
-  let t831 = @tactics.match_mp_tac(@bool.gen_all(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(!x y. P x y ==> f x y = (g x y:real))\n    ==> P x y /\\ a <= g x y * b ==> a <= f x y * b")))(cdot_pythagorean())))
-  let t830 = @simp.once_rewrite_tac(@list.List([@drule.match_mp(@meson.meson(@list.List([cvector_sub_add()]), @parser.parse_term("(!x:complex^N y. p (x - f x y) y)\n      ==> cnorm2 x * z = cnorm2 (x - f x y + f x y) * z")))(corthogonal_projection())]))
+  let t831 = @tactics.match_mp_tac(@bool.gen_all(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. P x y ==> f x y = (g x y:real))\n    ==> P x y /\\ a <= g x y * b ==> a <= f x y * b")))(cdot_pythagorean())))
+  let t830 = @simp.once_rewrite_tac(@list.List([@drule.match_mp(@meson.meson(@list.List([cvector_sub_add()]), @parser.parse_term("(forall x:complex^N y. p (x - f x y) y)\n      ==> cnorm2 x * z = cnorm2 (x - f x y + f x y) * z")))(corthogonal_projection())]))
   let t829 = @simp.asm_rewrite_tac(@list.List([cnorm2_cvector_zero(), cdot_rzero(), @complexes.complex_norm_0(), @realarith.real_pow_2(), @calc_int.real_mul_rzero(), real_of_complex_cx(), @realax.real_le_refl()]))
   let t828 = @class.asm_cases_tac(@parser.parse_term("y = cvector_zero:complex^N"))
   let t857 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t828), t829), t830), t831), t832), t834), t843), t844), t845), t846), t848), t854), t856)
-  cdot_cauchy_schwarz_pow_2_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. norm (x cdot y) pow 2 <= cnorm2 x * cnorm2 y"), t857))
+  cdot_cauchy_schwarz_pow_2_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. norm (x cdot y) pow 2 <= cnorm2 x * cnorm2 y"), t857))
 }
 
 ///|
@@ -5538,7 +5538,7 @@ fn step_293() -> Unit raise {
   let t858 = @calc_rat.real_arith(@parser.parse_term("&0 <= x /\\ &0 <= y /\\ abs x <= abs y ==> x <= y"))
   let t859 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@real.real_le_square_abs()]))(t858))
   let t861 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t859), t860)
-  cdot_cauchy_schwarz_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. norm (x cdot y) <= norm x * norm y"), t861))
+  cdot_cauchy_schwarz_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. norm (x cdot y) <= norm x * norm y"), t861))
 }
 
 ///|
@@ -5586,12 +5586,12 @@ fn step_294() -> Unit raise {
   let t866 = @equal.gsym(real_of_complex_mul())
   let t867 = @simp.simp_tac(@list.List([cnorm2(), @equal.gsym(real_of_complex_add()), real_cdot_self(), @complexes.real_add(), t866]))
   let t865 = @simp.rewrite_tac(@list.List([@equal.gsym(corthogonal_mul_clauses()), corthogonal_runit(), corthogonal_projection()]))
-  let t864 = @tactics.match_mp_tac(@bool.gen_all(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(!x y. P x y ==> g x y = (f x y:real)) ==>\n        P x y /\\ (a = f x y * z ==> R) ==> (a = g x y * z ==> R)")))(cdot_pythagorean())))
-  let t898 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@drule.match_mp(@meson.meson(@list.List([cvector_sub_add()]), @parser.parse_term("(!x:complex^N y. p (x - f x y) y) ==>\n      cnorm2 x * z = cnorm2 (x - f x y + f x y) * z")))(corthogonal_projection())])), t864), t865), t867), t876), t877), t878), t880), t886), t890), t891), t897])
+  let t864 = @tactics.match_mp_tac(@bool.gen_all(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. P x y ==> g x y = (f x y:real)) ==>\n        P x y /\\ (a = f x y * z ==> R) ==> (a = g x y * z ==> R)")))(cdot_pythagorean())))
+  let t898 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@drule.match_mp(@meson.meson(@list.List([cvector_sub_add()]), @parser.parse_term("(forall x:complex^N y. p (x - f x y) y) ==>\n      cnorm2 x * z = cnorm2 (x - f x y + f x y) * z")))(corthogonal_projection())])), t864), t865), t867), t876), t877), t878), t880), t886), t890), t891), t897])
   let t863 = @simp.asm_rewrite_tac(@list.List([cnorm2_cvector_zero(), cdot_rzero(), @complexes.complex_norm_0(), @realarith.real_pow_2(), @calc_int.real_mul_rzero(), real_of_complex_cx(), collinear_cvectors_0()]))
   let t862 = @class.asm_cases_tac(@parser.parse_term("y = cvector_zero:complex^N"))
   let t899 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t862), t863), @tactics.eq_tac), t898)
-  cdot_cauchy_schwarz_pow_2_equal_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n    norm (x cdot y) pow 2 = cnorm2 x * cnorm2 y <=> collinear_cvectors x y"), t899))
+  cdot_cauchy_schwarz_pow_2_equal_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n    norm (x cdot y) pow 2 = cnorm2 x * cnorm2 y <=> collinear_cvectors x y"), t899))
 }
 
 ///|
@@ -5609,7 +5609,7 @@ fn step_295() -> Unit raise {
   let t901 = @simp.simp_tac(@list.List([@vectors.norm_pos_le(), cnorm_pos(), @realax.real_le_mul(), @real.real_pow_mul(), cnorm_pow_2(), cdot_cauchy_schwarz_pow_2_equal()]))
   let t900 = @calc_rat.real_arith(@parser.parse_term("x=y <=> abs x = abs y /\\ (&0 <= x /\\ &0 <= y \\/ x < &0 /\\ y < &0)"))
   let t902 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@real.real_eq_square_abs()]))(t900)])), t901)
-  cdot_cauchy_schwarz_equal_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N.\n  norm (x cdot y) = norm x * norm y <=> collinear_cvectors x y"), t902))
+  cdot_cauchy_schwarz_equal_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N.\n  norm (x cdot y) = norm x * norm y <=> collinear_cvectors x y"), t902))
 }
 
 ///|
@@ -5630,7 +5630,7 @@ fn step_296() -> Unit raise {
   let t903 = @calc_rat.real_arith(@parser.parse_term("abs x <= abs y /\\ &0 <= x /\\ &0 <= y ==> x <= y"))
   let t904 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@real.real_le_square_abs()]))(t903))
   let t908 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t904), t906), t907)
-  cnorm_triangle_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. norm (x+y) <= norm x + norm y"), t908))
+  cnorm_triangle_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. norm (x+y) <= norm x + norm y"), t908))
 }
 
 ///|
@@ -5651,9 +5651,9 @@ fn step_297() -> Unit raise {
   let t914 = @simp.rewrite_tac(@list.List([lemma, @simp.once_rewrite_rule(@list.List([cnorm_sub()]))(lemma)]))
   let t913 = @simp.rewrite_tac(@list.List([@realarith.real_neg_sub()]))
   let t912 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("--x <= y <=>  --y <= x"))]))
-  let t911 = @tactics.match_mp_tac(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(!x y. P x y <=> Q x y) ==> Q x y ==> P x y")))(@real.real_abs_bounds()))
+  let t911 = @tactics.match_mp_tac(@drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. P x y <=> Q x y) ==> Q x y ==> P x y")))(@real.real_abs_bounds()))
   let t915 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t911), t912), t913), t914)
-  real_abs_sub_cnorm_c.set(@tactics.prove(@parser.parse_term("!x y:complex^N. abs (norm x - norm y) <= norm (x-y)"), t915))
+  real_abs_sub_cnorm_c.set(@tactics.prove(@parser.parse_term("forall x y:complex^N. abs (norm x - norm y) <= norm (x-y)"), t915))
 }
 
 ///|
@@ -5733,7 +5733,7 @@ fn step_301() -> Unit raise {
   let t934 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("pastecart (l:real^N) (l':real^N)")), t917), t933, t932])
   let t916 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.strip_tac, @tactics.eq_tac))
   let t935 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([csummable(), @topology.summable(), cvector_flatten(), @trivia.o_def()])), t916), t934)
-  csummable_flatten_cvector_c.set(@tactics.prove(@parser.parse_term("!s (f:num->complex^N). csummable s f <=> summable s (cvector_flatten o f)"), t935))
+  csummable_flatten_cvector_c.set(@tactics.prove(@parser.parse_term("forall s (f:num->complex^N). csummable s f <=> summable s (cvector_flatten o f)"), t935))
 }
 
 ///|
@@ -5749,7 +5749,7 @@ pub fn csummable_flatten_cvector() -> @kernel.Thm {
 /// FLATTEN_CINFSUM
 fn step_302() -> Unit raise {
   let t936 = @simp.simp_tac(@list.List([cinfsum(), cvector_unflatten(), complex_vector_transpose(), @vectors.linear_fstcart(), @vectors.linear_sndcart(), csummable_flatten_cvector(), @equal.gsym(@topology.infsum_linear()), @trivia.o_def(), cvector_flatten(), @cart.fstcart_pastecart(), @cart.sndcart_pastecart()]))
-  flatten_cinfsum_c.set(@tactics.prove(@parser.parse_term("!s f.\n    csummable s f ==>\n      ((cinfsum s f):complex^N) =\n        cvector_unflatten (infsum s (cvector_flatten o f))"), t936))
+  flatten_cinfsum_c.set(@tactics.prove(@parser.parse_term("forall s f.\n    csummable s f ==>\n      ((cinfsum s f):complex^N) =\n        cvector_unflatten (infsum s (cvector_flatten o f))"), t936))
 }
 
 ///|
@@ -5781,7 +5781,7 @@ fn step_303() -> Unit raise {
   })
   let t937 = @tactics.repeat_tac(@tactics.strip_tac)
   let t951 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([csummable_flatten_cvector()])), t937), t943), t945), t950)
-  csummable_linear_c.set(@tactics.prove(@parser.parse_term("!f h:complex^N->complex^M s.\n    csummable s f /\\ clinear h ==> csummable s (h o f)"), t951))
+  csummable_linear_c.set(@tactics.prove(@parser.parse_term("forall f h:complex^N->complex^M s.\n    csummable s f /\\ clinear h ==> csummable s (h o f)"), t951))
 }
 
 ///|
@@ -5824,7 +5824,7 @@ fn step_304() -> Unit raise {
     @tactics.mp_tac(@bool.conj(@drule.match_mp(csummable_linear())(x), x))
   })
   let t974 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t954), t955), t956), t962), t964), t973)
-  cinfsum_linear_c.set(@tactics.prove(@parser.parse_term("!f (h:complex^M->complex^N) s.\n    csummable s f /\\ clinear h ==> cinfsum s (h o f) = h (cinfsum s f)"), t974))
+  cinfsum_linear_c.set(@tactics.prove(@parser.parse_term("forall f (h:complex^M->complex^N) s.\n    csummable s f /\\ clinear h ==> cinfsum s (h o f) = h (cinfsum s f)"), t974))
 }
 
 ///|

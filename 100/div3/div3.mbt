@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
   let t2 = @tactics.exists_tac(@parser.parse_term("10 * 1"))
   let t1 = @tactics.match_mp_tac(@pocklington.cong_trans())
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.exp(), @pocklington.cong_refl()]))), t1), t2), @tactics.conj_tac), t3), t4), t5)
-  exp_10_cong_3_c.set(@tactics.prove(@parser.parse_term("!n. (10 EXP n == 1) (mod 3)"), t6))
+  exp_10_cong_3_c.set(@tactics.prove(@parser.parse_term("forall n. (10 EXP n == 1) (mod 3)"), t6))
 }
 
 ///|
@@ -39,7 +39,7 @@ fn step_2() -> Unit raise {
   let t8 = @list.List([@simp.rewrite_tac(@list.List([@arith.exp(), @arith.mult_clauses(), @pocklington.cong_refl()])), @tactics.all_tac])
   let t7 = @simp.rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t7), t8), t9), t10), t11), t15), t16), t17)
-  sum_cong_3_c.set(@tactics.prove(@parser.parse_term("!d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)"), t18))
+  sum_cong_3_c.set(@tactics.prove(@parser.parse_term("forall d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)"), t18))
 }
 
 ///|

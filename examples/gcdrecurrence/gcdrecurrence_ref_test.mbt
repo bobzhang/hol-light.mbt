@@ -16877,61 +16877,61 @@ test "Examples/gcdrecurrence matches Examples/gcdrecurrence.ml" {
       #|0..0..4..solved at 9
       #|0..0..4..solved at 10
       #|Examples/gcdrecurrence quotations (96):
-      #|  !m n:num. P m n ==> P n (m + n)
+      #|  forall m n:num. P m n ==> P n (m + n)
       #|  p:num
       #|  m <= n:num \\/ n <= m
       #|  n = 0
       #|  m = 0
       #|  m + n:num
-      #|  !P. (!n. P 0 n) /\\\n       (!m n. P m n <=> P n m) /\\\n       (!m n. P m n ==> P n (m + n))\n       ==> !m n. P m n
-      #|  !n. coprime(G(n + 1),G n)
+      #|  forall P. (forall n. P 0 n) /\\\n       (forall m n. P m n <=> P n m) /\\\n       (forall m n. P m n ==> P n (m + n))\n       ==> forall m n. P m n
+      #|  forall n. coprime(G(n + 1),G n)
       #|  m:num
-      #|  !n. coprime(G(n + 1),b)
+      #|  forall n. coprime(G(n + 1),b)
       #|  m:num
       #|  (m + p) + 1 = m + 1 + p
-      #|  !m p:num. gcd(G(m + p),G m) = gcd(G m,G p)
+      #|  forall m p:num. gcd(G(m + p),G m) = gcd(G m,G p)
       #|  SUC(m + 1) = m + 2
       #|  SUC(m + p) = m + 1 + p
       #|  (m + p) + 1 = m + 1 + p
       #|  SUC m + 1 = m + 2
       #|  SUC m + 1 + p = (m + p) + 2
-      #|  !m p. G(m + 1 + p) = G(m + 1) * G(p + 1) + b * G(m) * G(p)
+      #|  forall m p. G(m + 1 + p) = G(m + 1) * G(p + 1) + b * G(m) * G(p)
       #|  (n + 1) + 1 = n + 2
       #|  n:num
-      #|  !n. coprime(G(n + 1),G n)
+      #|  forall n. coprime(G(n + 1),G n)
       #|  SUC n + 1 = n + 2
-      #|  !n. coprime(G(n + 1),b)
-      #|  !G a b. G(0) = &0 /\\ G(1) = &1 /\\\n           coprime(a,b) /\\ (!n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> !d m n. d divides (G m) /\\ d divides (G n) <=>\n                       d divides G(gcd(m,n))
-      #|  !G a b. G(0) = &0 /\\ G(1) = &1 /\\\n           coprime(a,b) /\\ (!n. G(n + 2) = a * G(n + 1) + b * G(n)) /\\\n           (!n. &0 <= G n)\n           ==> !m n. gcd(G m,G n) = G(gcd(m,n))
+      #|  forall n. coprime(G(n + 1),b)
+      #|  forall G a b. G(0) = &0 /\\ G(1) = &1 /\\\n           coprime(a,b) /\\ (forall n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> forall d m n. d divides (G m) /\\ d divides (G n) <=>\n                       d divides G(gcd(m,n))
+      #|  forall G a b. G(0) = &0 /\\ G(1) = &1 /\\\n           coprime(a,b) /\\ (forall n. G(n + 2) = a * G(n + 1) + b * G(n)) /\\\n           (forall n. &0 <= G n)\n           ==> forall m n. gcd(G m,G n) = G(gcd(m,n))
       #|  &b:int
       #|  &a:int
       #|  & o (G:num->num)
-      #|  !G a b. G(0) = 0 /\\ G(1) = 1 /\\\n           coprime(a,b) /\\ (!n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> !m n. gcd(G m,G n) = G(gcd(m,n))
-      #|  !G a b. G(0) = 0 /\\ G(1) = 1 /\\\n           coprime(a,b) /\\ (!n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> !d m n. d divides (G m) /\\ d divides (G n) <=>\n                       d divides G(gcd(m,n))
+      #|  forall G a b. G(0) = 0 /\\ G(1) = 1 /\\\n           coprime(a,b) /\\ (forall n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> forall m n. gcd(G m,G n) = G(gcd(m,n))
+      #|  forall G a b. G(0) = 0 /\\ G(1) = 1 /\\\n           coprime(a,b) /\\ (forall n. G(n + 2) = a * G(n + 1) + b * G(n))\n           ==> forall d m n. d divides (G m) /\\ d divides (G n) <=>\n                       d divides G(gcd(m,n))
       #|  t:int
       #|  &2
       #|  &2 * &2 - &1
       #|  -- &2
       #|  &3
       #|  1 <= n <=> 0 < n
-      #|  !m n. gcd(2 EXP m - 1,2 EXP n - 1) = 2 EXP (gcd(m,n)) - 1
+      #|  forall m n. gcd(2 EXP m - 1,2 EXP n - 1) = 2 EXP (gcd(m,n)) - 1
       #|  ~(x = 0) /\\ ~(y = 0) ==> (x - 1 = y - 1 <=> x = y)
-      #|  !m n. (2 EXP m - 1) divides (2 EXP n - 1) <=> m divides n
-      #|  fib 0 = 0 /\\ fib 1 = 1 /\\ !n. fib(n + 2) = fib(n + 1) + fib(n)
+      #|  forall m n. (2 EXP m - 1) divides (2 EXP n - 1) <=> m divides n
+      #|  fib 0 = 0 /\\ fib 1 = 1 /\\ forall n. fib(n + 2) = fib(n + 1) + fib(n)
       #|  \\n. n + 1
       #|  1
-      #|  !m n. gcd(fib m,fib n) = fib(gcd(m,n))
+      #|  forall m n. gcd(fib m,fib n) = fib(gcd(m,n))
       #|  SUC(SUC n) = n + 2
-      #|  !n. fib n = 0 <=> n = 0
+      #|  forall n. fib n = 0 <=> n = 0
       #|  (n + 1) + 1 = n + 2
-      #|  !m n. m <= n ==> fib m <= fib n
+      #|  forall m n. m <= n ==> fib m <= fib n
       #|  m < m + n <=> ~(n = 0)
       #|  m + 2 <= n <=> SUC m < n
       #|  fib(m + 2)
-      #|  !m n. 2 <= m /\\ m < n ==> fib m < fib n
+      #|  forall m n. 2 <= m /\\ m < n ==> fib m < fib n
       #|  m + n = 1 <=> m = 0 /\\ n = 1 \\/ m = 1 /\\ n = 0
       #|  SUC(SUC n) = n + 2
-      #|  !n. fib n = 1 <=> n = 1 \\/ n = 2
+      #|  forall n. fib n = 1 <=> n = 1 \\/ n = 2
       #|  gcd(m,n) = 1
       #|  m:num
       #|  gcd(m:num,n)
@@ -16943,8 +16943,8 @@ test "Examples/gcdrecurrence matches Examples/gcdrecurrence.ml" {
       #|  m = 0
       #|  m:num
       #|  gcd(m:num,n)
-      #|  !m n. (fib m) divides (fib n) <=> m divides n \\/ n = 0 \\/ m = 2
-      #|  (!a. pellx a 0 = 1) /\\\n   (!a. pellx a 1 = a) /\\\n   (!a n. pellx a (n + 2) = 2 * a * pellx a (n + 1) - pellx a n)
+      #|  forall m n. (fib m) divides (fib n) <=> m divides n \\/ n = 0 \\/ m = 2
+      #|  (forall a. pellx a 0 = 1) /\\\n   (forall a. pellx a 1 = a) /\\\n   (forall a n. pellx a (n + 2) = 2 * a * pellx a (n + 1) - pellx a n)
       #|  :P
       #|  :P
       #|  :P
@@ -16954,7 +16954,7 @@ test "Examples/gcdrecurrence matches Examples/gcdrecurrence.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  (!a. pelly a 0 = 0) /\\\n   (!a. pelly a 1 = 1) /\\\n   (!a n. pelly a (n + 2) = 2 * a * pelly a (n + 1) - pelly a (n))
+      #|  (forall a. pelly a 0 = 0) /\\\n   (forall a. pelly a 1 = 1) /\\\n   (forall a n. pelly a (n + 2) = 2 * a * pelly a (n + 1) - pelly a (n))
       #|  :P
       #|  :P
       #|  :P
@@ -16967,12 +16967,12 @@ test "Examples/gcdrecurrence matches Examples/gcdrecurrence.ml" {
       #|  a:num <= b ==> a - c <= b - c
       #|  2 * pelly a (n + 1) - pelly a n
       #|  (n + 1) + 1 = n + 2
-      #|  !a n. ~(a = 0) ==> pelly a n <= pelly a (n + 1)
+      #|  forall a n. ~(a = 0) ==> pelly a n <= pelly a (n + 1)
       #|  1 * pelly a (n + 1)
       #|  a + -- &1 * b:int = a - b
       #|  -- &1:int
       #|  &2 * &a:int
-      #|  !a m n. ~(a = 0) ==> gcd(pelly a m,pelly a n) = pelly a (gcd(m,n))
+      #|  forall a m n. ~(a = 0) ==> gcd(pelly a m,pelly a n) = pelly a (gcd(m,n))
       #|INDUCT_SPECIAL =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\P:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) m:num))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num)))))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(num,bool)) m:num) n:num))))))))
       #|INT_DIVISORS_RECURRENCE =  |- (#!:fun(fun(fun(num,int),bool),bool) (\G:fun(num,int). (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (G:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (G:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#int_coprime:fun(prod(int,int),bool) ((#,:fun(int,fun(int,prod(int,int))) a:int) b:int))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) (G:fun(num,int) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) a:int) (G:fun(num,int) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_mul:fun(int,fun(int,int)) b:int) (G:fun(num,int) n:num)))))))))) (#!:fun(fun(int,bool),bool) (\d:int. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_divides:fun(int,fun(int,bool)) d:int) (G:fun(num,int) m:num))) ((#int_divides:fun(int,fun(int,bool)) d:int) (G:fun(num,int) n:num)))) ((#int_divides:fun(int,fun(int,bool)) d:int) (G:fun(num,int) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))))))))))))))))))
       #|INT_GCD_RECURRENCE =  |- (#!:fun(fun(fun(num,int),bool),bool) (\G:fun(num,int). (#!:fun(fun(int,bool),bool) (\a:int. (#!:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (G:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (G:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#int_coprime:fun(prod(int,int),bool) ((#,:fun(int,fun(int,prod(int,int))) a:int) b:int))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) (G:fun(num,int) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) a:int) (G:fun(num,int) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#int_mul:fun(int,fun(int,int)) b:int) (G:fun(num,int) n:num))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) (G:fun(num,int) n:num))))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(int,fun(int,bool)) (#int_gcd:fun(prod(int,int),int) ((#,:fun(int,fun(int,prod(int,int))) (G:fun(num,int) m:num)) (G:fun(num,int) n:num)))) (G:fun(num,int) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))))))))))))))

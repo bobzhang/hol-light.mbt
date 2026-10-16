@@ -201327,12 +201327,12 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  jacobian_0 (f:A ring,a:A,b:A) = (ring_1 f,ring_1 f,ring_0 f)
       #|  jacobian_neg (f,a:A,b:A) (x,y,z) = (x:A,ring_neg f y:A,z:A)
       #|  jacobian_add (f:A ring,a,b) (x1,y1,z1) (x2,y2,z2) =\n   if z1 = ring_0 f then (x2,y2,z2)\n   else if z2 = ring_0 f then (x1,y1,z1)\n   else if jacobian_eq f (x1,y1,z1) (x2,y2,z2) then\n     let v = ring_mul f (ring_of_num f 4) (ring_mul f x1 (ring_pow f y1 2))\n     and w =\n       ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n       (ring_mul f a (ring_pow f z1 4)) in\n     let x3 =\n       ring_add f (ring_mul f (ring_neg f (ring_of_num f 2)) v)\n       (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f (ring_of_num f 8)) (ring_pow f y1 4))\n     (ring_mul f (ring_sub f v x3) w),\n     ring_mul f (ring_of_num f 2) (ring_mul f y1 z1)\n    else if jacobian_eq f (jacobian_neg (f,a,b) (x1,y1,z1)) (x2,y2,z2) then\n      jacobian_0 (f,a,b)\n    else\n     let r = ring_mul f x1 (ring_pow f z2 2)\n     and s = ring_mul f x2 (ring_pow f z1 2)\n     and t = ring_mul f y1 (ring_pow f z2 3)\n     and u = ring_mul f y2 (ring_pow f z1 3) in\n     let v = ring_sub f s r\n     and w = ring_sub f u t in\n     let x3 =\n         ring_add f\n         (ring_sub f (ring_neg f (ring_pow f v 3))\n         (ring_mul f (ring_of_num f 2) (ring_mul f r (ring_pow f v 2))))\n         (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f t) (ring_pow f v 3))\n     (ring_mul f (ring_sub f (ring_mul f r (ring_pow f v 2)) x3) w),\n     ring_mul f v (ring_mul f z1 z2)
-      #|  !f a b p. jacobian_curve(f,a,b) p ==> jacobian_point f p
-      #|  !(f:A ring) p.\n        jacobian_point f (jacobian_of_weierstrass f p) <=>\n        weierstrass_point f p
-      #|  !(f:A ring) p.\n        weierstrass_point f p\n        ==> jacobian_point f (jacobian_of_weierstrass f p)
-      #|  !(f:A ring) p.\n        jacobian_point f p\n        ==> weierstrass_point f (weierstrass_of_jacobian f p)
-      #|  !(f:A ring) p q.\n        field f\n        ==> (jacobian_of_weierstrass f p = jacobian_of_weierstrass f q <=>\n             p = q)
-      #|  !(f:A ring) p q.\n        field f /\\ jacobian_point f p /\\ jacobian_point f q\n        ==> (weierstrass_of_jacobian f p = weierstrass_of_jacobian f q <=>\n             jacobian_eq f p q)
+      #|  forall f a b p. jacobian_curve(f,a,b) p ==> jacobian_point f p
+      #|  forall(f:A ring) p.\n        jacobian_point f (jacobian_of_weierstrass f p) <=>\n        weierstrass_point f p
+      #|  forall(f:A ring) p.\n        weierstrass_point f p\n        ==> jacobian_point f (jacobian_of_weierstrass f p)
+      #|  forall(f:A ring) p.\n        jacobian_point f p\n        ==> weierstrass_point f (weierstrass_of_jacobian f p)
+      #|  forall(f:A ring) p q.\n        field f\n        ==> (jacobian_of_weierstrass f p = jacobian_of_weierstrass f q <=>\n             p = q)
+      #|  forall(f:A ring) p q.\n        field f /\\ jacobian_point f p /\\ jacobian_point f q\n        ==> (weierstrass_of_jacobian f p = weierstrass_of_jacobian f q <=>\n             jacobian_eq f p q)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -201372,11 +201372,11 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !(f:A ring) p.\n        field f /\\ weierstrass_point f p\n        ==> weierstrass_of_jacobian f (jacobian_of_weierstrass f p) = p
-      #|  !(f:A ring) p.\n        field f /\\ jacobian_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_of_jacobian f p)) p
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> (jacobian_curve (f,a,b) (jacobian_of_weierstrass f p) <=>\n             weierstrass_curve (f,a,b) p)
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_of_weierstrass f p)
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> weierstrass_curve (f,a,b) (weierstrass_of_jacobian f p)
+      #|  forall(f:A ring) p.\n        field f /\\ weierstrass_point f p\n        ==> weierstrass_of_jacobian f (jacobian_of_weierstrass f p) = p
+      #|  forall(f:A ring) p.\n        field f /\\ jacobian_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_of_jacobian f p)) p
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> (jacobian_curve (f,a,b) (jacobian_of_weierstrass f p) <=>\n             weierstrass_curve (f,a,b) p)
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_of_weierstrass f p)
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> weierstrass_curve (f,a,b) (weierstrass_of_jacobian f p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -201388,9 +201388,9 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> jacobian_point f (jacobian_neg (f,a,b) p)
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_neg (f,a,b) p)
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> weierstrass_of_jacobian f (jacobian_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_jacobian f p)
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> jacobian_point f (jacobian_neg (f,a,b) p)
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_neg (f,a,b) p)
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> weierstrass_of_jacobian f (jacobian_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_jacobian f p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -201402,11 +201402,11 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\ jacobian_eq f p p'\n        ==> jacobian_eq f\n              (jacobian_neg (f,a,b) p) (jacobian_neg (f,a,b) p')
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_jacobian f\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p
-      #|  !(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p))
-      #|  !(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> jacobian_point f (jacobian_add (f,a,b) p q)
-      #|  !(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p /\\ jacobian_curve (f,a,b) q\n        ==> jacobian_curve (f,a,b) (jacobian_add (f,a,b) p q)
+      #|  forall(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\ jacobian_eq f p p'\n        ==> jacobian_eq f\n              (jacobian_neg (f,a,b) p) (jacobian_neg (f,a,b) p')
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_jacobian f\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p
+      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p))
+      #|  forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> jacobian_point f (jacobian_add (f,a,b) p q)
+      #|  forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p /\\ jacobian_curve (f,a,b) q\n        ==> jacobian_curve (f,a,b) (jacobian_add (f,a,b) p q)
       #|  z2:A = ring_0 f
       #|  z1:A = ring_0 f
       #|  z2:A
@@ -201418,7 +201418,7 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  b:A
       #|  a:A
       #|  f:A ring
-      #|  !(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> weierstrass_of_jacobian f (jacobian_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)
+      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> weierstrass_of_jacobian f (jacobian_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -202167,9 +202167,9 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  !(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\\n        jacobian_point f q /\\ jacobian_point f q' /\\\n        jacobian_eq f p p' /\\ jacobian_eq f q q'\n        ==> jacobian_eq f\n              (jacobian_add (f,a,b) p q) (jacobian_add (f,a,b) p' q')
-      #|  !(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_jacobian f\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q
-      #|  !(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q))
+      #|  forall(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\\n        jacobian_point f q /\\ jacobian_point f q' /\\\n        jacobian_eq f p p' /\\ jacobian_eq f q q'\n        ==> jacobian_eq f\n              (jacobian_add (f,a,b) p q) (jacobian_add (f,a,b) p' q')
+      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_jacobian f\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q
+      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q))
       #|  jacobian_add_unexceptional (f:A ring,a:A,b:A) (x1,y1,z1) (x2,y2,z2) =\n   if z1 = ring_0 f then (x2,y2,z2)\n   else if z2 = ring_0 f then (x1,y1,z1)\n   else\n     let r = ring_mul f x1 (ring_pow f z2 2)\n     and s = ring_mul f x2 (ring_pow f z1 2)\n     and t = ring_mul f y1 (ring_pow f z2 3)\n     and u = ring_mul f y2 (ring_pow f z1 3) in\n     let v = ring_sub f s r\n     and w = ring_sub f u t in\n     let x3 =\n         ring_add f\n         (ring_sub f (ring_neg f (ring_pow f v 3))\n         (ring_mul f (ring_of_num f 2) (ring_mul f r (ring_pow f v 2))))\n         (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f t) (ring_pow f v 3))\n     (ring_mul f (ring_sub f (ring_mul f r (ring_pow f v 2)) x3) w),\n     ring_mul f v (ring_mul f z1 z2)
       #|  z2:A = ring_0 f
       #|  z1:A = ring_0 f
@@ -202182,7 +202182,7 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  b:A
       #|  a:A
       #|  f:A ring
-      #|  !(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q /\\\n        ~(jacobian_eq f p q)\n        ==> weierstrass_of_jacobian f (jacobian_add_unexceptional (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)
+      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q /\\\n        ~(jacobian_eq f p q)\n        ==> weierstrass_of_jacobian f (jacobian_add_unexceptional (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -202463,7 +202463,7 @@ test "EC/jacobian matches EC/jacobian.ml" {
       #|  b:A
       #|  a:A
       #|  f:A ring
-      #|  !(f:A ring) a b p.\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      jacobian_point f p\n      ==> weierstrass_of_jacobian f (jacobian_double_unexceptional (f,a,b) p) =\n          weierstrass_add (f,a,b)\n           (weierstrass_of_jacobian f p)\n           (weierstrass_of_jacobian f p)
+      #|  forall(f:A ring) a b p.\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      jacobian_point f p\n      ==> weierstrass_of_jacobian f (jacobian_double_unexceptional (f,a,b) p) =\n          weierstrass_add (f,a,b)\n           (weierstrass_of_jacobian f p)\n           (weierstrass_of_jacobian f p)
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A

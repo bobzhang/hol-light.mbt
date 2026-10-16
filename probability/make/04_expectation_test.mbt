@@ -82191,7 +82191,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < inv(&n + &1)
       #|  n:num
       #|  t:A->bool
-      #|  !X:A->real v carrier y.\n      (?t. (?n. t = {x | x IN carrier /\\ X x <= v - inv(&n + &1)}) /\\ y IN t)\n      ==> y IN carrier /\\ X y < v
+      #|  forall X:A->real v carrier y.\n      (?t. (?n. t = {x | x IN carrier /\\ X x <= v - inv(&n + &1)}) /\\ y IN t)\n      ==> y IN carrier /\\ X y < v
       #|  inv(&j + &1) < v - (X:A->real) y
       #|  j:num
       #|  {x:A | x IN carrier /\\ X x <= v - inv(&j + &1)}
@@ -82200,7 +82200,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ?j:num. k = SUC j
       #|  k:num
       #|  &0 < v - (X:A->real) y
-      #|  !X:A->real v carrier y.\n      y IN carrier /\\ X y < v\n      ==> ?t. (?n. t = {x | x IN carrier /\\ X x <= v - inv(&n + &1)}) /\\ y IN t
+      #|  forall X:A->real v carrier y.\n      y IN carrier /\\ X y < v\n      ==> ?t. (?n. t = {x | x IN carrier /\\ X x <= v - inv(&n + &1)}) /\\ y IN t
       #|  y:A
       #|  carrier:A->bool
       #|  v:real
@@ -82210,16 +82210,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  v:real
       #|  X:A->real
       #|  y:A
-      #|  !X:A->real v carrier.\n      {x | x IN carrier /\\ X x < v} =\n      UNIONS {({x | x IN carrier /\\ X x <= v - inv(&n + &1)}) | n IN (:num)}
-      #|  !x v:real. x = v <=> x <= v /\\ ~(x < v)
+      #|  forall X:A->real v carrier.\n      {x | x IN carrier /\\ X x < v} =\n      UNIONS {({x | x IN carrier /\\ X x <= v - inv(&n + &1)}) | n IN (:num)}
+      #|  forall x v:real. x = v <=> x <= v /\\ ~(x < v)
       #|  {x:A | x IN prob_carrier p /\\ X x = v} =\n      {x | x IN prob_carrier p /\\ X x <= v} DIFF\n      {x | x IN prob_carrier p /\\ X x < v}
-      #|  !p:A prob_space X v.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ X x = v} IN prob_events p
-      #|  !x a:real. x > a <=> a < x
+      #|  forall p:A prob_space X v.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ X x = v} IN prob_events p
+      #|  forall x a:real. x > a <=> a < x
       #|  {x:A | x IN prob_carrier p /\\ a < X x /\\ X x < b} =\n      {x | x IN prob_carrier p /\\ X x < b} INTER\n      {x | x IN prob_carrier p /\\ X x > a}
-      #|  !p:A prob_space X a b.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ a < X x /\\ X x < b} IN prob_events p
+      #|  forall p:A prob_space X a b.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ a < X x /\\ X x < b} IN prob_events p
       #|  b - t:real
       #|  t:real
-      #|  !b. real_open {t | t < b}
+      #|  forall b. real_open {t | t < b}
       #|  s:real
       #|  r:real
       #|  s:real
@@ -82245,28 +82245,28 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  eps:real
       #|  (X:A->real) z
       #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ X x IN U} =\n      UNIONS {{x | x IN prob_carrier p /\\ r < X x /\\ X x < s} |\n              r,s | rational r /\\ rational s /\\ (!t. r < t /\\ t < s ==> t IN U)}
-      #|  !p:A prob_space X U. random_variable p X /\\ real_open U\n      ==> {x | x IN prob_carrier p /\\ X x IN U} IN prob_events p
+      #|  {x:A | x IN prob_carrier p /\\ X x IN U} =\n      UNIONS {{x | x IN prob_carrier p /\\ r < X x /\\ X x < s} |\n              r,s | rational r /\\ rational s /\\ (forall t. r < t /\\ t < s ==> t IN U)}
+      #|  forall p:A prob_space X U. random_variable p X /\\ real_open U\n      ==> {x | x IN prob_carrier p /\\ X x IN U} IN prob_events p
       #|  abs(y - x) = abs(x - y)
-      #|  !f. continuous_map (euclideanreal,euclideanreal) f <=>\n       f real_continuous_on (:real)
-      #|  !p:A prob_space X f.\n      random_variable p X /\\ f real_continuous_on (:real)\n      ==> random_variable p (\\x. f(X x))
-      #|  !x y a:real. max x y <= a <=> x <= a /\\ y <= a
+      #|  forall f. continuous_map (euclideanreal,euclideanreal) f <=>\n       f real_continuous_on (:real)
+      #|  forall p:A prob_space X f.\n      random_variable p X /\\ f real_continuous_on (:real)\n      ==> random_variable p (\\x. f(X x))
+      #|  forall x y a:real. max x y <= a <=> x <= a /\\ y <= a
       #|  {x:A | x IN prob_carrier p /\\ max (X x) (Y x) <= a} =\n      {x | x IN prob_carrier p /\\ X x <= a} INTER\n      {x | x IN prob_carrier p /\\ Y x <= a}
       #|  a:real
-      #|  !p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. max (X x) (Y x))
-      #|  !x y a:real. min x y <= a <=> x <= a \\/ y <= a
+      #|  forall p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. max (X x) (Y x))
+      #|  forall x y a:real. min x y <= a <=> x <= a \\/ y <= a
       #|  {x:A | x IN prob_carrier p /\\ min (X x) (Y x) <= a} =\n      {x | x IN prob_carrier p /\\ X x <= a} UNION\n      {x | x IN prob_carrier p /\\ Y x <= a}
       #|  a:real
-      #|  !p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. min (X x) (Y x))
+      #|  forall p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. min (X x) (Y x))
       #|  (:real)
       #|  \\x:real. x
       #|  abs:real->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. abs(X x))
+      #|  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. abs(X x))
       #|  simple_rv (p:A prob_space) X <=>\n   random_variable p X /\\\n   FINITE {X x | x IN prob_carrier p}
       #|  {(\\x:A. c) x | x IN prob_carrier p} SUBSET {c:real}
-      #|  !p:A prob_space c. simple_rv p (\\x. c)
+      #|  forall p:A prob_space c. simple_rv p (\\x. c)
       #|  {indicator_fn a x | x:A IN prob_carrier p} SUBSET {&0, &1}
       #|  (z:A) IN prob_carrier p
       #|  z:A
@@ -82280,29 +82280,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x:A | x IN prob_carrier p /\\ (if x IN a then &1 else &0) <= v} = {}
       #|  v < &0
       #|  v:real
-      #|  !p:A prob_space a.\n      a IN prob_events p ==> simple_rv p (indicator_fn a)
+      #|  forall p:A prob_space a.\n      a IN prob_events p ==> simple_rv p (indicator_fn a)
       #|  a - c:real
       #|  (z:A) IN prob_carrier p
       #|  z:A
       #|  {x:A | x IN prob_carrier p /\\ X x + c <= a} =\n      {x | x IN prob_carrier p /\\ X x <= a - c}
       #|  a:real
-      #|  !p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. X x + c)
+      #|  forall p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. X x + c)
       #|  --c:real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. X x - c)
-      #|  !p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. max (X x) (&0))
-      #|  !p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. max (--(X x)) (&0))
+      #|  forall p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. X x - c)
+      #|  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. max (X x) (&0))
+      #|  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. max (--(X x)) (&0))
       #|  (:real)
       #|  2
       #|  \\x:real. x
       #|  \\y:real. y pow 2
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. (X x) pow 2)
-      #|  !(a:real) c. --a / --c = a / c
+      #|  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. (X x) pow 2)
+      #|  forall(a:real) c. --a / --c = a / c
       #|  &0 < --c
-      #|  !c x a. c < &0 ==> (c * x <= a <=> x >= a / c)
+      #|  forall c x a. c < &0 ==> (c * x <= a <=> x >= a / c)
       #|  (z:A) IN prob_carrier p
       #|  z:A
       #|  {x:A | x IN prob_carrier p /\\ c * X x <= a} =\n        {x | x IN prob_carrier p /\\ X x >= a / c}
@@ -82310,11 +82310,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  c < &0
       #|  &0 < c
       #|  c = &0
-      #|  !p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. c * X x)
+      #|  forall p:A prob_space X c.\n      random_variable p X ==> random_variable p (\\x. c * X x)
       #|  inv(&n)
       #|  n:num
       #|  n:num
-      #|  !x. &0 < x ==> ?n. inv(&n + &1) < x
+      #|  forall x. &0 < x ==> ?n. inv(&n + &1) < x
       #|  (z:A) IN s
       #|  r:real
       #|  s:A->bool
@@ -82324,9 +82324,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a - (Y:A->real) z
       #|  (X:A->real) z
       #|  z:A
-      #|  !(X:A->real) Y a carrier.\n      {x | x IN carrier /\\ X x + Y x < a} =\n      UNIONS {{x | x IN carrier /\\ X x < r} INTER {x | x IN carrier /\\ Y x < a - r} |\n              rational r}
+      #|  forall(X:A->real) Y a carrier.\n      {x | x IN carrier /\\ X x + Y x < a} =\n      UNIONS {{x | x IN carrier /\\ X x < r} INTER {x | x IN carrier /\\ Y x < a - r} |\n              rational r}
       #|  {x | rational x} = rational
-      #|  !f:(real->A->bool). COUNTABLE {f r | rational r}
+      #|  forall f:(real->A->bool). COUNTABLE {f r | rational r}
       #|  r:real
       #|  s:A->bool
       #|  {x:A | x IN prob_carrier p /\\ X x + Y x < a + inv(&n + &1)} =\n      UNIONS {{x | x IN prob_carrier p /\\ X x < r} INTER\n              {x | x IN prob_carrier p /\\ Y x < (a + inv(&n + &1)) - r} | rational r}
@@ -82344,20 +82344,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  z:A
       #|  {x:A | x IN prob_carrier p /\\ X x + Y x <= a} =\n      INTERS {{x | x IN prob_carrier p /\\ X x + Y x < a + inv(&n + &1)} | n IN (:num)}
       #|  a:real
-      #|  !p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. X x + Y x)
-      #|  !p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. X x - Y x)
+      #|  forall p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. X x + Y x)
+      #|  forall p:A prob_space X Y.\n      random_variable p X /\\ random_variable p Y\n      ==> random_variable p (\\x. X x - Y x)
       #|  &0
       #|  {x:A | x IN prob_carrier p /\\ f x <= g x} =\n     {x | x IN prob_carrier p /\\ f x - g x <= &0}
       #|  random_variable p (\\x:A. f x - g x)
-      #|  !p:A prob_space f g.\n     random_variable p f /\\ random_variable p g\n     ==> {x | x IN prob_carrier p /\\ f x <= g x} IN prob_events p
+      #|  forall p:A prob_space f g.\n     random_variable p f /\\ random_variable p g\n     ==> {x | x IN prob_carrier p /\\ f x <= g x} IN prob_events p
       #|  p:A prob_space
-      #|  !p:A prob_space. ~(prob_carrier p = {})
+      #|  forall p:A prob_space. ~(prob_carrier p = {})
       #|  simple_expectation (p:A prob_space) (X:A->real) =\n   sum {v | v IN IMAGE X (prob_carrier p)}\n       (\\v. v * prob p {x | x IN prob_carrier p /\\ X x = v})
       #|  {x:A | x IN s} = s
       #|  {v | v = c} = {c:real}
       #|  p:A prob_space
-      #|  !p:A prob_space (c:real). simple_expectation p (\\x. c) = c
-      #|  !a:A->bool. indicator_fn a = (\\x. if x IN a then &1 else &0)
+      #|  forall p:A prob_space (c:real). simple_expectation p (\\x. c) = c
+      #|  forall a:A->bool. indicator_fn a = (\\x. if x IN a then &1 else &0)
       #|  (a:A->bool) SUBSET s ==> a INTER s = a
       #|  (a:A->bool) INTER prob_carrier p = a
       #|  (if (x:A) IN a then &1 else &0) = &1
@@ -82401,20 +82401,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  FINITE (IMAGE (\\x:A. if x IN a then &1 else &0) (prob_carrier p))
       #|  y:real
       #|  IMAGE (\\x:A. if x IN a then &1 else &0) (prob_carrier p) SUBSET {&0, &1}
-      #|  !p:A prob_space a.\n      a IN prob_events p\n      ==> simple_expectation p (indicator_fn a) = prob p a
+      #|  forall p:A prob_space a.\n      a IN prob_events p\n      ==> simple_expectation p (indicator_fn a) = prob p a
       #|  w:A
       #|  w:A
       #|  v:real
-      #|  !p:A prob_space X.\n      simple_rv p X /\\ (!x. x IN prob_carrier p ==> &0 <= X x)\n      ==> &0 <= simple_expectation p X
-      #|  !w:A. c * (X:A->real) w = c * v <=> X w = v
+      #|  forall p:A prob_space X.\n      simple_rv p X /\\ (forall x. x IN prob_carrier p ==> &0 <= X x)\n      ==> &0 <= simple_expectation p X
+      #|  forall w:A. c * (X:A->real) w = c * v <=> X w = v
       #|  v:real
-      #|  !g:real->real.\n        sum (IMAGE (\\v. c * v) (IMAGE (X:A->real) (prob_carrier p))) g =\n        sum (IMAGE X (prob_carrier p)) (g o (\\v. c * v))
+      #|  forall g:real->real.\n        sum (IMAGE (\\v. c * v) (IMAGE (X:A->real) (prob_carrier p))) g =\n        sum (IMAGE X (prob_carrier p)) (g o (\\v. c * v))
       #|  FINITE (IMAGE (X:A->real) (prob_carrier p))
       #|  IMAGE (\\x:A. c * X x) (prob_carrier p) =\n      IMAGE (\\v. c * v) (IMAGE (X:A->real) (prob_carrier p))
       #|  {v | v = c} = {c:real}
       #|  p:A prob_space
       #|  c = &0
-      #|  !p:A prob_space X c.\n      simple_rv p X\n      ==> simple_expectation p (\\x. c * X x) = c * simple_expectation p X
+      #|  forall p:A prob_space X c.\n      simple_rv p X\n      ==> simple_expectation p (\\x. c * X x) = c * simple_expectation p X
       #|  (Y:A->real) x
       #|  (X:A->real) x
       #|  x:A
@@ -82422,39 +82422,39 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\u:real. IMAGE (Y:A->real) (prob_carrier p)
       #|  IMAGE (X:A->real) (prob_carrier p)
       #|  (+):real->real->real
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x + Y x)
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x + Y x)
       #|  null_event (p:A prob_space) a <=>\n   a IN prob_events p /\\ prob p a = &0
       #|  almost_surely (p:A prob_space) (P:A->bool) <=>\n   ?n. null_event p n /\\ {x | x IN prob_carrier p /\\ ~(x IN P)} SUBSET n
-      #|  !p:A prob_space. null_event p {}
+      #|  forall p:A prob_space. null_event p {}
       #|  a:A->bool
       #|  p:A prob_space
       #|  b:A->bool
       #|  a:A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space a b.\n      null_event p b /\\ a IN prob_events p /\\ a SUBSET b\n      ==> null_event p a
+      #|  forall p:A prob_space a b.\n      null_event p b /\\ a IN prob_events p /\\ a SUBSET b\n      ==> null_event p a
       #|  a UNION b:A->bool
       #|  p:A prob_space
       #|  b:A->bool
       #|  a:A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space a b.\n      null_event p a /\\ null_event p b\n      ==> null_event p (a UNION b)
+      #|  forall p:A prob_space a b.\n      null_event p a /\\ null_event p b\n      ==> null_event p (a UNION b)
       #|  (\\i. prob (p:A prob_space) ((B:num->A->bool) i)) = (\\i. &0)
       #|  real_infsum (from 0) (\\i. prob (p:A prob_space) ((B:num->A->bool) i)) = &0
       #|  (\\i. prob (p:A prob_space) ((B:num->A->bool) i)) = (\\i. &0)
       #|  B:num->A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space (B:num->A->bool).\n      (!n. null_event p (B n))\n      ==> null_event p (UNIONS {B n | n IN (:num)})
-      #|  !p:A prob_space a.\n      a IN prob_events p /\\ prob p a = &1\n      ==> null_event p (prob_carrier p DIFF a)
+      #|  forall p:A prob_space (B:num->A->bool).\n      (forall n. null_event p (B n))\n      ==> null_event p (UNIONS {B n | n IN (:num)})
+      #|  forall p:A prob_space a.\n      a IN prob_events p /\\ prob p a = &1\n      ==> null_event p (prob_carrier p DIFF a)
       #|  a:A->bool
-      #|  !p:A prob_space a b.\n      null_event p a /\\ null_event p b ==> null_event p (a INTER b)
+      #|  forall p:A prob_space a b.\n      null_event p a /\\ null_event p b ==> null_event p (a INTER b)
       #|  a:A->bool
-      #|  !p:A prob_space a b.\n      null_event p a /\\ b IN prob_events p ==> null_event p (a DIFF b)
-      #|  !p:A prob_space a.\n      null_event p a ==> prob p (prob_carrier p DIFF a) = &1
-      #|  !p:A prob_space a.\n      a IN prob_events p ==> (null_event p a <=> prob p a = &0)
+      #|  forall p:A prob_space a b.\n      null_event p a /\\ b IN prob_events p ==> null_event p (a DIFF b)
+      #|  forall p:A prob_space a.\n      null_event p a ==> prob p (prob_carrier p DIFF a) = &1
+      #|  forall p:A prob_space a.\n      a IN prob_events p ==> (null_event p a <=> prob p a = &0)
       #|  n1 UNION n2:A->bool
       #|  n2:A->bool
       #|  n1:A->bool
-      #|  !p:A prob_space P Q.\n      almost_surely p P /\\ almost_surely p Q\n      ==> almost_surely p (P INTER Q)
+      #|  forall p:A prob_space P Q.\n      almost_surely p P /\\ almost_surely p Q\n      ==> almost_surely p (P INTER Q)
       #|  b = &1 - a ==> a = &1 - b
       #|  prob p (E:A->bool) = &1 - prob p (prob_carrier p DIFF E)
       #|  n:A->bool
@@ -82462,9 +82462,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  prob p (prob_carrier p DIFF E:A->bool) = &0
       #|  prob_carrier p DIFF E SUBSET n:A->bool
       #|  n:A->bool
-      #|  !p:A prob_space E.\n      E IN prob_events p /\\ almost_surely p E\n      ==> prob p E = &1
+      #|  forall p:A prob_space E.\n      E IN prob_events p /\\ almost_surely p E\n      ==> prob p E = &1
       #|  prob_carrier p DIFF E:A->bool
-      #|  !p:A prob_space E.\n      E IN prob_events p /\\ prob p E = &1\n      ==> almost_surely p E
+      #|  forall p:A prob_space E.\n      E IN prob_events p /\\ prob p E = &1\n      ==> almost_surely p E
       #|  x:A
       #|  n:num
       #|  n:num
@@ -82472,16 +82472,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  UNIONS {(N:num->A->bool) n | n IN (:num)}
       #|  N:num->A->bool
-      #|  !p:A prob_space (P:num->A->bool).\n      (!n. almost_surely p (P n))\n      ==> almost_surely p (INTERS {P n | n IN (:num)})
+      #|  forall p:A prob_space (P:num->A->bool).\n      (forall n. almost_surely p (P n))\n      ==> almost_surely p (INTERS {P n | n IN (:num)})
       #|  n1 INTER n2:A->bool
       #|  n2:A->bool
       #|  n1:A->bool
-      #|  !p:A prob_space P Q.\n      almost_surely p P /\\ almost_surely p Q\n      ==> almost_surely p (P UNION Q)
+      #|  forall p:A prob_space P Q.\n      almost_surely p P /\\ almost_surely p Q\n      ==> almost_surely p (P UNION Q)
       #|  {}:A->bool
-      #|  !p:A prob_space. almost_surely p (prob_carrier p)
+      #|  forall p:A prob_space. almost_surely p (prob_carrier p)
       #|  n:A->bool
       #|  n:A->bool
-      #|  !p:A prob_space P Q.\n      almost_surely p P /\\\n      (!x. x IN prob_carrier p ==> (x IN P <=> x IN Q))\n      ==> almost_surely p Q
+      #|  forall p:A prob_space P Q.\n      almost_surely p P /\\\n      (forall x. x IN prob_carrier p ==> (x IN P <=> x IN Q))\n      ==> almost_surely p Q
       #|  liminf_events (A:num->A->bool) =\n   UNIONS {INTERS {A n | n >= m} | m IN (:num)}
       #|  n:num
       #|  s:A->bool
@@ -82494,46 +82494,46 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  m:num
       #|  t:A->bool
       #|  x:A
-      #|  !A:num->A->bool. liminf_events A =\n     {x | ?m. !n. n >= m ==> x IN A n}
+      #|  forall A:num->A->bool. liminf_events A =\n     {x | ?m. forall n. n >= m ==> x IN A n}
       #|  m + k:num
       #|  k:num
       #|  m:num
-      #|  !A:num->A->bool. liminf_events A SUBSET limsup_events A
+      #|  forall A:num->A->bool. liminf_events A SUBSET limsup_events A
       #|  m:num
       #|  (A:num->A->bool) m
-      #|  !m. INTERS {(A:num->A->bool) n | n >= m} IN prob_events p
-      #|  !p:A prob_space A.\n      (!n. A n IN prob_events p)\n      ==> liminf_events A IN prob_events p
+      #|  forall m. INTERS {(A:num->A->bool) n | n >= m} IN prob_events p
+      #|  forall p:A prob_space A.\n      (forall n. A n IN prob_events p)\n      ==> liminf_events A IN prob_events p
       #|  distribution_fn (p:A prob_space) (X:A->real) (c:real) =\n   prob p {x | x IN prob_carrier p /\\ X x <= c}
-      #|  !p:A prob_space X c.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ X x <= c} IN prob_events p
-      #|  !p:A prob_space X c.\n      random_variable p X ==> &0 <= distribution_fn p X c
-      #|  !p:A prob_space X c.\n      random_variable p X ==> distribution_fn p X c <= &1
-      #|  !p:A prob_space X a b.\n      random_variable p X /\\ a <= b\n      ==> distribution_fn p X a <= distribution_fn p X b
-      #|  indep_rv (p:A prob_space) (X:A->real) (Y:A->real) <=>\n   random_variable p X /\\ random_variable p Y /\\\n   !a b. prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n         prob p {x | x IN prob_carrier p /\\ X x <= a} *\n         prob p {x | x IN prob_carrier p /\\ Y x <= b}
+      #|  forall p:A prob_space X c.\n      random_variable p X\n      ==> {x | x IN prob_carrier p /\\ X x <= c} IN prob_events p
+      #|  forall p:A prob_space X c.\n      random_variable p X ==> &0 <= distribution_fn p X c
+      #|  forall p:A prob_space X c.\n      random_variable p X ==> distribution_fn p X c <= &1
+      #|  forall p:A prob_space X a b.\n      random_variable p X /\\ a <= b\n      ==> distribution_fn p X a <= distribution_fn p X b
+      #|  indep_rv (p:A prob_space) (X:A->real) (Y:A->real) <=>\n   random_variable p X /\\ random_variable p Y /\\\n   forall a b. prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n         prob p {x | x IN prob_carrier p /\\ X x <= a} *\n         prob p {x | x IN prob_carrier p /\\ Y x <= b}
       #|  {x:A | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n       {x | x IN prob_carrier p /\\ Y x <= b /\\ X x <= a}
       #|  b:real
       #|  a:real
       #|  {x:A | x IN prob_carrier p /\\ Y x <= a /\\ X x <= b} =\n       {x | x IN prob_carrier p /\\ X x <= b /\\ Y x <= a}
       #|  b:real
       #|  a:real
-      #|  !p:A prob_space X Y. indep_rv p X Y <=> indep_rv p Y X
-      #|  !p:A prob_space X Y.\n      indep_rv p X Y ==> random_variable p X /\\ random_variable p Y
-      #|  !p:A prob_space X Y.\n      indep_rv p X Y <=>\n      random_variable p X /\\ random_variable p Y /\\\n      !a b. prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n            distribution_fn p X a * distribution_fn p Y b
-      #|  !p (X:A->real) c.\n     distribution p X {y | y <= c} = distribution_fn p X c
-      #|  !p (X:A->real) Y a b.\n     random_variable p X /\\ random_variable p Y\n     ==> joint_distribution_fn p X Y a b <= distribution_fn p X a
-      #|  !p (X:A->real) Y.\n     random_variable p X /\\ random_variable p Y\n     ==> (indep_rv p X Y <=>\n          !a b. joint_distribution_fn p X Y a b =\n                distribution_fn p X a * distribution_fn p Y b)
-      #|  !U:A->bool. sigma_algebra {s | s SUBSET U}
+      #|  forall p:A prob_space X Y. indep_rv p X Y <=> indep_rv p Y X
+      #|  forall p:A prob_space X Y.\n      indep_rv p X Y ==> random_variable p X /\\ random_variable p Y
+      #|  forall p:A prob_space X Y.\n      indep_rv p X Y <=>\n      random_variable p X /\\ random_variable p Y /\\\n      forall a b. prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n            distribution_fn p X a * distribution_fn p Y b
+      #|  forall p (X:A->real) c.\n     distribution p X {y | y <= c} = distribution_fn p X c
+      #|  forall p (X:A->real) Y a b.\n     random_variable p X /\\ random_variable p Y\n     ==> joint_distribution_fn p X Y a b <= distribution_fn p X a
+      #|  forall p (X:A->real) Y.\n     random_variable p X /\\ random_variable p Y\n     ==> (indep_rv p X Y <=>\n          forall a b. joint_distribution_fn p X Y a b =\n                distribution_fn p X a * distribution_fn p Y b)
+      #|  forall U:A->bool. sigma_algebra {s | s SUBSET U}
       #|  U:A->bool
       #|  s:A->bool
-      #|  !U:A->bool. UNIONS {s | s SUBSET U} = U
+      #|  forall U:A->bool. UNIONS {s | s SUBSET U} = U
       #|  sigma_generated (U:A->bool) (C:(A->bool)->bool) =\n   INTERS {f | sigma_algebra f /\\ C SUBSET f /\\ UNIONS f = U}
-      #|  !U:A->bool C.\n      (!a. a IN C ==> a SUBSET U)\n      ==> C SUBSET sigma_generated U C
+      #|  forall U:A->bool C.\n      (forall a. a IN C ==> a SUBSET U)\n      ==> C SUBSET sigma_generated U C
       #|  C:(A->bool)->bool
       #|  U:A->bool
-      #|  !U C a:A->bool.\n      (!x. x IN C ==> x SUBSET U) /\\ a IN C\n      ==> a IN sigma_generated U C
+      #|  forall U C a:A->bool.\n      (forall x. x IN C ==> x SUBSET U) /\\ a IN C\n      ==> a IN sigma_generated U C
       #|  t:(A->bool)->bool
       #|  g:(A->bool)->bool
       #|  g:(A->bool)->bool
-      #|  !U:A->bool C a.\n      a IN sigma_generated U C <=>\n      !f. sigma_algebra f /\\ C SUBSET f /\\ UNIONS f = U ==> a IN f
+      #|  forall U:A->bool C a.\n      a IN sigma_generated U C <=>\n      forall f. sigma_algebra f /\\ C SUBSET f /\\ UNIONS f = U ==> a IN f
       #|  f:(A->bool)->bool
       #|  U:A->bool
       #|  {t:A->bool | t SUBSET U}
@@ -82541,7 +82541,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (s:A->bool) SUBSET U
       #|  s:A->bool
       #|  x:A
-      #|  !U:A->bool C.\n      (!a. a IN C ==> a SUBSET U)\n      ==> UNIONS (sigma_generated U C) = U
+      #|  forall U:A->bool C.\n      (forall a. a IN C ==> a SUBSET U)\n      ==> UNIONS (sigma_generated U C) = U
       #|  (a:A->bool) IN sigma_generated U C
       #|  a:A->bool
       #|  s SUBSET (f:(A->bool)->bool)
@@ -82554,20 +82554,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A->bool
       #|  f:(A->bool)->bool
       #|  UNIONS (sigma_generated U (C:(A->bool)->bool)) = U
-      #|  !U:A->bool C.\n      (!a. a IN C ==> a SUBSET U)\n      ==> sigma_algebra (sigma_generated U C)
+      #|  forall U:A->bool C.\n      (forall a. a IN C ==> a SUBSET U)\n      ==> sigma_algebra (sigma_generated U C)
       #|  a:A->bool
-      #|  !U:A->bool C f.\n      sigma_algebra f /\\ C SUBSET f /\\ UNIONS f = U\n      ==> sigma_generated U C SUBSET f
-      #|  pi_system (C:(A->bool)->bool) <=>\n   ~(C = {}) /\\ (!a b. a IN C /\\ b IN C ==> (a INTER b) IN C)
+      #|  forall U:A->bool C f.\n      sigma_algebra f /\\ C SUBSET f /\\ UNIONS f = U\n      ==> sigma_generated U C SUBSET f
+      #|  pi_system (C:(A->bool)->bool) <=>\n   ~(C = {}) /\\ (forall a b. a IN C /\\ b IN C ==> (a INTER b) IN C)
       #|  (UNIONS f DIFF a) UNION (UNIONS f DIFF b) = UNIONS {UNIONS f DIFF a, UNIONS f DIFF b}:A->bool
       #|  b:A->bool
       #|  f:(A->bool)->bool
       #|  a:A->bool
       #|  f:(A->bool)->bool
       #|  a INTER b = UNIONS f DIFF ((UNIONS f DIFF a) UNION (UNIONS f DIFF b)):A->bool
-      #|  !f:(A->bool)->bool. sigma_algebra f ==> pi_system f
-      #|  lambda_system (U:A->bool) (L:(A->bool)->bool) <=>\n   U IN L /\\\n   (!a. a IN L ==> (U DIFF a) IN L) /\\\n   (!B:num->A->bool. (!n. B n IN L) /\\\n     (!m n. ~(m = n) ==> DISJOINT (B m) (B n))\n     ==> UNIONS {B n | n IN (:num)} IN L)
+      #|  forall f:(A->bool)->bool. sigma_algebra f ==> pi_system f
+      #|  lambda_system (U:A->bool) (L:(A->bool)->bool) <=>\n   U IN L /\\\n   (forall a. a IN L ==> (U DIFF a) IN L) /\\\n   (forall B:num->A->bool. (forall n. B n IN L) /\\\n     (forall m n. ~(m = n) ==> DISJOINT (B m) (B n))\n     ==> UNIONS {B n | n IN (:num)} IN L)
       #|  ({}:A->bool) = U DIFF U
-      #|  !U:A->bool L. lambda_system U L ==> {} IN L
+      #|  forall U:A->bool L. lambda_system U L ==> {} IN L
       #|  1
       #|  0
       #|  n:num
@@ -82577,10 +82577,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ({}:A->bool) = U DIFF U
       #|  ({}:A->bool) IN L
       #|  \\n:num. if n = 0 then a:A->bool else if n = 1 then b else {}
-      #|  !U:A->bool L a b.\n     lambda_system U L /\\ a IN L /\\ b IN L /\\ DISJOINT a b\n     ==> (a UNION b) IN L
+      #|  forall U:A->bool L a b.\n     lambda_system U L /\\ a IN L /\\ b IN L /\\ DISJOINT a b\n     ==> (a UNION b) IN L
       #|  U:A->bool
       #|  a DIFF b = U DIFF ((U DIFF a) UNION b):A->bool
-      #|  !U:A->bool L a b.\n     lambda_system U L /\\ a IN L /\\ b IN L /\\ b SUBSET a /\\ a SUBSET U\n     ==> (a DIFF b) IN L
+      #|  forall U:A->bool L a b.\n     lambda_system U L /\\ a IN L /\\ b IN L /\\ b SUBSET a /\\ a SUBSET U\n     ==> (a DIFF b) IN L
       #|  n:num
       #|  m:num
       #|  m:num
@@ -82588,11 +82588,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k:num
       #|  \\n:num. (x:A) IN f n
       #|  x:A
-      #|  !f:num->A->bool.\n     UNIONS (IMAGE f (:num)) =\n     UNIONS (IMAGE (\\n. f n DIFF UNIONS (IMAGE f {m | m < n})) (:num))
+      #|  forall f:num->A->bool.\n     UNIONS (IMAGE f (:num)) =\n     UNIONS (IMAGE (\\n. f n DIFF UNIONS (IMAGE f {m | m < n})) (:num))
       #|  (n:num) < m
       #|  (m:num) < n
       #|  x:A
-      #|  !f:num->A->bool m n.\n     ~(m = n)\n     ==> DISJOINT (f m DIFF UNIONS (IMAGE f {k | k < m}))\n                   (f n DIFF UNIONS (IMAGE f {k | k < n}))
+      #|  forall f:num->A->bool m n.\n     ~(m = n)\n     ==> DISJOINT (f m DIFF UNIONS (IMAGE f {k | k < m}))\n                   (f n DIFF UNIONS (IMAGE f {k | k < n}))
       #|  (p:num) < m
       #|  (m:num) < p
       #|  y:A
@@ -82601,9 +82601,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (f:num->A->bool) n DIFF UNIONS (IMAGE f {m | m < n}) =\n     f n INTER (U DIFF UNIONS (IMAGE f {m | m < n}))
       #|  {m:num | m < SUC j} = j INSERT {m | m < j}
       #|  {m:num | m < 0} = {}
-      #|  !j:num. UNIONS (IMAGE (f:num->A->bool) {m | m < j}) IN L
+      #|  forall j:num. UNIONS (IMAGE (f:num->A->bool) {m | m < j}) IN L
       #|  {y:A | ?x:num. x IN {m | m < n} /\\ y IN (f:num->A->bool) x} =\n      UNIONS (IMAGE f {m | m < n})
-      #|  !n:num. (f:num->A->bool) n IN L
+      #|  forall n:num. (f:num->A->bool) n IN L
       #|  \\n:num. (f:num->A->bool) n DIFF UNIONS (IMAGE f {m | m < n})
       #|  lambda_system (U:A->bool) L
       #|  f:num->A->bool
@@ -82615,31 +82615,31 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  UNIONS (L:(A->bool)->bool) = U
       #|  (x:A) IN U
       #|  (a:A->bool) UNION b = U DIFF ((U DIFF a) INTER (U DIFF b))
-      #|  !a b:A->bool. a IN L /\\ b IN L ==> (a UNION b) IN L
+      #|  forall a b:A->bool. a IN L /\\ b IN L ==> (a UNION b) IN L
       #|  ({}:A->bool) = U DIFF U
       #|  ({}:A->bool) IN L
-      #|  !a:A->bool. a IN L ==> U DIFF a IN L
+      #|  forall a:A->bool. a IN L ==> U DIFF a IN L
       #|  (U:A->bool) IN L
-      #|  !U:A->bool L.\n     lambda_system U L /\\\n     (!a b. a IN L /\\ b IN L ==> (a INTER b) IN L) /\\\n     (!a. a IN L ==> a SUBSET U)\n     ==> sigma_algebra L /\\ UNIONS L = U
+      #|  forall U:A->bool L.\n     lambda_system U L /\\\n     (forall a b. a IN L /\\ b IN L ==> (a INTER b) IN L) /\\\n     (forall a. a IN L ==> a SUBSET U)\n     ==> sigma_algebra L /\\ UNIONS L = U
       #|  lambda_generated (U:A->bool) (C:(A->bool)->bool) =\n   INTERS {L | lambda_system U L /\\ C SUBSET L}
-      #|  !U:A->bool C a.\n     a IN lambda_generated U C <=>\n     (!L. lambda_system U L /\\ C SUBSET L ==> a IN L)
-      #|  !n:num. (B n:A->bool) IN L
+      #|  forall U:A->bool C a.\n     a IN lambda_generated U C <=>\n     (forall L. lambda_system U L /\\ C SUBSET L ==> a IN L)
+      #|  forall n:num. (B n:A->bool) IN L
       #|  L:(A->bool)->bool
       #|  B:num->A->bool
       #|  L:(A->bool)->bool
       #|  a:A->bool
-      #|  !U:A->bool C.\n     (!a. a IN C ==> a SUBSET U)\n     ==> lambda_system U (lambda_generated U C)
+      #|  forall U:A->bool C.\n     (forall a. a IN C ==> a SUBSET U)\n     ==> lambda_system U (lambda_generated U C)
       #|  L:(A->bool)->bool
       #|  a:A->bool
-      #|  !U:A->bool C.\n     (!a. a IN C ==> a SUBSET U) ==> C SUBSET lambda_generated U C
+      #|  forall U:A->bool C.\n     (forall a. a IN C ==> a SUBSET U) ==> C SUBSET lambda_generated U C
       #|  L:(A->bool)->bool
       #|  a:A->bool
-      #|  !U:A->bool C L.\n     lambda_system U L /\\ C SUBSET L ==> lambda_generated U C SUBSET L
+      #|  forall U:A->bool C L.\n     lambda_system U L /\\ C SUBSET L ==> lambda_generated U C SUBSET L
       #|  n:num
       #|  n:num
       #|  x:A
       #|  {s:A->bool | s SUBSET U}
-      #|  !U:A->bool C a.\n     (!c. c IN C ==> c SUBSET U) /\\ a IN lambda_generated U C\n     ==> a SUBSET U
+      #|  forall U:A->bool C a.\n     (forall c. c IN C ==> c SUBSET U) /\\ a IN lambda_generated U C\n     ==> a SUBSET U
       #|  n:num
       #|  m:num
       #|  n:num
@@ -82650,8 +82650,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:num->A->bool
       #|  lambda_system (U:A->bool) LL
       #|  UNIONS {(B:num->A->bool) n | n IN (:num)} IN LL
-      #|  !n:num. (A:A->bool) INTER B n IN LL
-      #|  !n:num. (B n:A->bool) IN LL
+      #|  forall n:num. (A:A->bool) INTER B n IN LL
+      #|  forall n:num. (B n:A->bool) IN LL
       #|  B:num->A->bool
       #|  (A:A->bool) INTER B
       #|  A:A->bool
@@ -82665,7 +82665,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  lambda_system (U:A->bool) LL
       #|  LL = lambda_generated (U:A->bool) C
       #|  (A:A->bool) SUBSET U
-      #|  !(U:A->bool) C A.\n     (!c. c IN C ==> c SUBSET U) /\\\n     A IN lambda_generated U C\n     ==> lambda_system U\n           {B | B IN lambda_generated U C /\\ A INTER B IN lambda_generated U C}
+      #|  forall(U:A->bool) C A.\n     (forall c. c IN C ==> c SUBSET U) /\\\n     A IN lambda_generated U C\n     ==> lambda_system U\n           {B | B IN lambda_generated U C /\\ A INTER B IN lambda_generated U C}
       #|  {B:A->bool | B IN lambda_generated U C /\\ A INTER B IN lambda_generated U C}
       #|  C:(A->bool)->bool
       #|  U:A->bool
@@ -82676,7 +82676,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  C:(A->bool)->bool
       #|  U:A->bool
       #|  A IN lambda_generated (U:A->bool) C
-      #|  !(U:A->bool) C.\n     pi_system C /\\ (!c. c IN C ==> c SUBSET U)\n     ==> !A B. A IN C /\\ B IN lambda_generated U C\n               ==> A INTER B IN lambda_generated U C
+      #|  forall(U:A->bool) C.\n     pi_system C /\\ (forall c. c IN C ==> c SUBSET U)\n     ==> forall A B. A IN C /\\ B IN lambda_generated U C\n               ==> A INTER B IN lambda_generated U C
       #|  {B:A->bool | B IN lambda_generated U C /\\ A INTER B IN lambda_generated U C}
       #|  C:(A->bool)->bool
       #|  U:A->bool
@@ -82690,29 +82690,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  A:A->bool
       #|  C:(A->bool)->bool
       #|  U:A->bool
-      #|  !(U:A->bool) C.\n     pi_system C /\\ (!c. c IN C ==> c SUBSET U)\n     ==> !A B. A IN lambda_generated U C /\\ B IN lambda_generated U C\n               ==> A INTER B IN lambda_generated U C
+      #|  forall(U:A->bool) C.\n     pi_system C /\\ (forall c. c IN C ==> c SUBSET U)\n     ==> forall A B. A IN lambda_generated U C /\\ B IN lambda_generated U C\n               ==> A INTER B IN lambda_generated U C
       #|  lambda_generated (U:A->bool) C SUBSET L
       #|  sigma_generated (U:A->bool) C SUBSET lambda_generated U C
       #|  sigma_algebra (lambda_generated (U:A->bool) C) /\\\n    UNIONS (lambda_generated U C) = U
       #|  lambda_system (U:A->bool) (lambda_generated U C)
-      #|  !a:A->bool. a IN lambda_generated U C ==> a SUBSET U
-      #|  !A B:A->bool. A IN lambda_generated U C /\\\n    B IN lambda_generated U C ==> A INTER B IN lambda_generated U C
-      #|  !c:A->bool. c IN C ==> c SUBSET U
-      #|  !(U:A->bool) C L.\n     pi_system C /\\ UNIONS C = U /\\\n     lambda_system U L /\\ C SUBSET L\n     ==> sigma_generated U C SUBSET L
+      #|  forall a:A->bool. a IN lambda_generated U C ==> a SUBSET U
+      #|  forall A B:A->bool. A IN lambda_generated U C /\\\n    B IN lambda_generated U C ==> A INTER B IN lambda_generated U C
+      #|  forall c:A->bool. c IN C ==> c SUBSET U
+      #|  forall(U:A->bool) C L.\n     pi_system C /\\ UNIONS C = U /\\\n     lambda_system U L /\\ C SUBSET L\n     ==> sigma_generated U C SUBSET L
       #|  prob p ((f:B->A->bool) a UNION UNIONS (IMAGE f t)) =\n                  prob p (f a) + prob p (UNIONS (IMAGE f t))
-      #|  DISJOINT (a:A->bool) (UNIONS s) <=> !x:A->bool. x IN s ==> DISJOINT a x
+      #|  DISJOINT (a:A->bool) (UNIONS s) <=> forall x:A->bool. x IN s ==> DISJOINT a x
       #|  DISJOINT ((f:B->A->bool) a) (UNIONS (IMAGE f t))
       #|  UNIONS (IMAGE (f:B->A->bool) t) IN prob_events p
       #|  prob p (UNIONS (IMAGE (f:B->A->bool) t)) =\n                  sum t (\\x:B. prob p (f x))
-      #|  !x:B y:B. x IN t /\\ y IN t /\\ ~(x = y)\n                  ==> DISJOINT ((f:B->A->bool) x) (f y)
-      #|  !x:B. x IN t ==> (f:B->A->bool) x IN prob_events p
+      #|  forall x:B y:B. x IN t /\\ y IN t /\\ ~(x = y)\n                  ==> DISJOINT ((f:B->A->bool) x) (f y)
+      #|  forall x:B. x IN t ==> (f:B->A->bool) x IN prob_events p
       #|  (f:B->A->bool) a IN prob_events p
       #|  t:B->bool
       #|  a:B
-      #|  !p:A prob_space (f:B->A->bool) s.\n      FINITE s /\\\n      (!x. x IN s ==> f x IN prob_events p) /\\\n      (!x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n      ==> prob p (UNIONS (IMAGE f s)) = sum s (\\x. prob p (f x))
-      #|  !p:A prob_space. !X:A->real. !Y:A->real. !u:real. !v1:real. !v2:real.\n      ~(v1 = v2)\n      ==> DISJOINT {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v1}\n                    {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v2}
+      #|  forall p:A prob_space (f:B->A->bool) s.\n      FINITE s /\\\n      (forall x. x IN s ==> f x IN prob_events p) /\\\n      (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> DISJOINT (f x) (f y))\n      ==> prob p (UNIONS (IMAGE f s)) = sum s (\\x. prob p (f x))
+      #|  forall p:A prob_space. forall X:A->real. forall Y:A->real. forall u:real. forall v1:real. forall v2:real.\n      ~(v1 = v2)\n      ==> DISJOINT {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v1}\n                    {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v2}
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = v} =\n       {x:A | x IN prob_carrier p /\\ X x = u} INTER\n       {x:A | x IN prob_carrier p /\\ Y x = v}
-      #|  !v:real. {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = v} IN prob_events p
+      #|  forall v:real. {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = v} IN prob_events p
       #|  FINITE (IMAGE (Y:A->real) (prob_carrier p))
       #|  x:A IN s
       #|  v:real
@@ -82723,12 +82723,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x':A | x' IN prob_carrier p /\\ (X:A->real) x' = u /\\ (Y:A->real) x' = Y x}
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u} =\n      UNIONS (IMAGE (\\v:real. {x:A | x IN prob_carrier p /\\ X x = u /\\ (Y:A->real) x = v})\n                    (IMAGE (Y:A->real) (prob_carrier p)))
-      #|  !p:A prob_space. !X:A->real. !Y:A->real. !u:real.\n      simple_rv p X /\\ simple_rv p Y /\\\n      u IN IMAGE X (prob_carrier p)\n      ==> prob p {x | x IN prob_carrier p /\\ X x = u} =\n          sum (IMAGE Y (prob_carrier p))\n              (\\v. prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v})
+      #|  forall p:A prob_space. forall X:A->real. forall Y:A->real. forall u:real.\n      simple_rv p X /\\ simple_rv p Y /\\\n      u IN IMAGE X (prob_carrier p)\n      ==> prob p {x | x IN prob_carrier p /\\ X x = u} =\n          sum (IMAGE Y (prob_carrier p))\n              (\\v. prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v})
       #|  u:real
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p X =\n          sum (IMAGE X (prob_carrier p))\n              (\\u. sum (IMAGE Y (prob_carrier p))\n                       (\\v. u * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v}))
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p X =\n          sum (IMAGE X (prob_carrier p))\n              (\\u. sum (IMAGE Y (prob_carrier p))\n                       (\\v. u * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v}))
       #|  sum (s UNION t:A->bool) f = sum t (f:A->real)
       #|  sum (s UNION t:A->bool) f = sum s (f:A->real)
-      #|  !f:A->real s t.\n        FINITE s /\\ FINITE t /\\\n        (!x. x IN s /\\ ~(x IN t) ==> f x = &0) /\\\n        (!x. x IN t /\\ ~(x IN s) ==> f x = &0)\n        ==> sum s f = sum t f
+      #|  forall f:A->real s t.\n        FINITE s /\\ FINITE t /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> f x = &0) /\\\n        (forall x. x IN t /\\ ~(x IN s) ==> f x = &0)\n        ==> sum s f = sum t f
       #|  w:real
       #|  a:A
       #|  w IN IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier (p:A prob_space))
@@ -82738,12 +82738,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = w - u} = {}
       #|  w:real
-      #|  !w:real. ~(w IN IMAGE (\\v:real. u + v) (IMAGE (Y:A->real) (prob_carrier p)) /\\\n                 w IN IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p))\n      ==> w * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = w - u} = &0
+      #|  forall w:real. ~(w IN IMAGE (\\v:real. u + v) (IMAGE (Y:A->real) (prob_carrier p)) /\\\n                 w IN IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p))\n      ==> w * prob (p:A prob_space)\n              {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = w - u} = &0
       #|  IMAGE (Y:A->real) (prob_carrier p)
       #|  \\w:real. w * prob (p:A prob_space)\n                        {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x = w - u}
       #|  \\v:real. u + v
       #|  sum (IMAGE (Y:A->real) (prob_carrier p))\n          (\\v. (u + v) * prob p {x | x IN prob_carrier p /\\ (X:A->real) x = u /\\ Y x = v}) =\n      sum (IMAGE (\\v:real. u + v) (IMAGE (Y:A->real) (prob_carrier p)))\n          (\\w. w * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = w - u})
-      #|  !p:A prob_space (X:A->real) (Y:A->real) u:real.\n      FINITE (IMAGE (Y:A->real) (prob_carrier p)) /\\\n      FINITE (IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p))\n      ==> sum (IMAGE (\\x. X x + Y x) (prob_carrier p))\n              (\\w. w * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = w - u}) =\n          sum (IMAGE Y (prob_carrier p))\n              (\\v. (u + v) * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v})
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) u:real.\n      FINITE (IMAGE (Y:A->real) (prob_carrier p)) /\\\n      FINITE (IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p))\n      ==> sum (IMAGE (\\x. X x + Y x) (prob_carrier p))\n              (\\w. w * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = w - u}) =\n          sum (IMAGE Y (prob_carrier p))\n              (\\v. (u + v) * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v})
       #|  u:real
       #|  IMAGE (X:A->real) (prob_carrier p)
       #|  IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p)
@@ -82767,7 +82767,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x + (Y:A->real) x = w} =\n       UNIONS (IMAGE (\\u. {x | x IN prob_carrier p /\\ X x = u /\\ Y x = w - u})\n                     (IMAGE X (prob_carrier p)))
       #|  w:real
-      #|  !w:real. w IN IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p)\n      ==> prob (p:A prob_space) {x | x IN prob_carrier p /\\ X x + Y x = w} =\n          sum (IMAGE (X:A->real) (prob_carrier p))\n              (\\u. prob p {x | x IN prob_carrier p /\\ X x = u /\\ (Y:A->real) x = w - u})
+      #|  forall w:real. w IN IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p)\n      ==> prob (p:A prob_space) {x | x IN prob_carrier p /\\ X x + Y x = w} =\n          sum (IMAGE (X:A->real) (prob_carrier p))\n              (\\u. prob p {x | x IN prob_carrier p /\\ X x = u /\\ (Y:A->real) x = w - u})
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x + (Y:A->real) x)
       #|  FINITE (IMAGE (\\x:A. (X:A->real) x + (Y:A->real) x) (prob_carrier p))
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x + (Y:A->real) x)
@@ -82789,15 +82789,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  simple_expectation p (Y:A->real) =\n      sum (IMAGE Y (prob_carrier p))\n          (\\v. sum (IMAGE (X:A->real) (prob_carrier p))\n                   (\\u. v * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v}))
       #|  simple_expectation p (X:A->real) =\n      sum (IMAGE X (prob_carrier p))\n          (\\u. sum (IMAGE (Y:A->real) (prob_carrier p))\n                   (\\v. u * prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v}))
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p (\\x. X x + Y x) =\n          simple_expectation p X + simple_expectation p Y
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p (\\x. X x + Y x) =\n          simple_expectation p X + simple_expectation p Y
       #|  (\\x:A. c * (X:A->real) x) = (\\v:real. c * v) o X
-      #|  !p:A prob_space X c.\n      simple_rv p X ==> simple_rv p (\\x. c * X x)
+      #|  forall p:A prob_space X c.\n      simple_rv p X ==> simple_rv p (\\x. c * X x)
       #|  (\\x:A. --((X:A->real) x)) = (\\x. (--(&1)) * X x)
-      #|  !p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. --(X x))
+      #|  forall p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. --(X x))
       #|  (\\x:A. (X:A->real) x - (Y:A->real) x) =\n                 (\\x. X x + (--(&1)) * Y x)
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x - Y x)
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x - Y x)
       #|  (\\x:A. abs((X:A->real) x)) = abs o X
-      #|  !p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. abs(X x))
+      #|  forall p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. abs(X x))
       #|  (Y:A->real) x
       #|  (X:A->real) x
       #|  x:A
@@ -82807,26 +82807,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ( * ):real->real->real
       #|  a:A
       #|  (\\x:A. (X:A->real) x * (Y:A->real) x) =\n                  (\\x. inv(&2) * ((X x + Y x) pow 2 - X x pow 2 - Y x pow 2))
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x * Y x)
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_rv p (\\x. X x * Y x)
       #|  (\\x:A. (X:A->real) x pow 2) = (\\x. X x * X x)
-      #|  !p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. X x pow 2)
+      #|  forall p:A prob_space X.\n      simple_rv p X ==> simple_rv p (\\x. X x pow 2)
       #|  --(&1)
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X.\n      simple_rv p X\n      ==> simple_expectation p (\\x. --(X x)) = --(simple_expectation p X)
+      #|  forall p:A prob_space X.\n      simple_rv p X\n      ==> simple_expectation p (\\x. --(X x)) = --(simple_expectation p X)
       #|  simple_rv (p:A prob_space) (\\x:A. (--(&1)) * (Y:A->real) x)
       #|  (\\x:A. (X:A->real) x - (Y:A->real) x) =\n                 (\\x. X x + (--(&1)) * Y x)
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p (\\x. X x - Y x) =\n          simple_expectation p X - simple_expectation p Y
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_expectation p (\\x. X x - Y x) =\n          simple_expectation p X - simple_expectation p Y
       #|  a:A
       #|  a:A
       #|  &0 <= simple_expectation (p:A prob_space)\n                        (\\x:A. (Y:A->real) x - (X:A->real) x)
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y /\\\n      (!x. x IN prob_carrier p ==> X x <= Y x)\n      ==> simple_expectation p X <= simple_expectation p Y
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y /\\\n      (forall x. x IN prob_carrier p ==> X x <= Y x)\n      ==> simple_expectation p X <= simple_expectation p Y
       #|  a:A
       #|  a:A
       #|  --(simple_expectation (p:A prob_space) (\\x:A. abs((X:A->real) x))) =\n                   simple_expectation p (\\x. --(abs(X x)))
       #|  simple_rv (p:A prob_space) (\\x:A. abs((X:A->real) x))
       #|  --(simple_expectation (p:A prob_space) (\\x:A. abs((X:A->real) x))) <=\n                   simple_expectation p X
-      #|  !p:A prob_space X.\n      simple_rv p X\n      ==> abs(simple_expectation p X) <= simple_expectation p (\\x. abs(X x))
+      #|  forall p:A prob_space X.\n      simple_rv p X\n      ==> abs(simple_expectation p X) <= simple_expectation p (\\x. abs(X x))
       #|  a * prob (p:A prob_space) (S:A->bool) <=\n                 simple_expectation p (X:A->real)
       #|  a:real
       #|  indicator_fn (S:A->bool)
@@ -82839,7 +82839,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_rv (p:A prob_space) (\\x:A. a * indicator_fn (S:A->bool) x)
       #|  (S:A->bool) IN prob_events p
       #|  S = {x:A | x IN prob_carrier p /\\ (X:A->real) x >= a}
-      #|  !p:A prob_space X a.\n      simple_rv p X /\\\n      (!x. x IN prob_carrier p ==> &0 <= X x) /\\\n      &0 < a\n      ==> prob p {x | x IN prob_carrier p /\\ X x >= a} <=\n          simple_expectation p X / a
+      #|  forall p:A prob_space X a.\n      simple_rv p X /\\\n      (forall x. x IN prob_carrier p ==> &0 <= X x) /\\\n      &0 < a\n      ==> prob p {x | x IN prob_carrier p /\\ X x >= a} <=\n          simple_expectation p X / a
       #|  (t:real) pow 2
       #|  \\x:A. (Y:A->real) x pow 2
       #|  p:A prob_space
@@ -82858,11 +82858,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_rv (p:A prob_space) (\\x:A. (Y:A->real) x pow 2)
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x pow 2)
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x * (Y:A->real) x)
-      #|  !p:A prob_space (X:A->real) (Y:A->real) (t:real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_expectation p (\\x. (X x - t * Y x) pow 2) =\n         simple_expectation p (\\x. X x pow 2) -\n         &2 * t * simple_expectation p (\\x. X x * Y x) +\n         (t pow 2) * simple_expectation p (\\x. Y x pow 2)
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) (t:real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_expectation p (\\x. (X x - t * Y x) pow 2) =\n         simple_expectation p (\\x. X x pow 2) -\n         &2 * t * simple_expectation p (\\x. X x * Y x) +\n         (t pow 2) * simple_expectation p (\\x. Y x pow 2)
       #|  (exy:real) pow 2 / ey2 <= ex2
       #|  ~(ey2 = &0)
       #|  ex2 - &2 * ((exy:real) / ey2) * exy +\n                ((exy:real) / ey2) pow 2 * ey2 = ex2 - exy pow 2 / ey2
-      #|  !t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
+      #|  forall t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
       #|  &0 <= ex2 - &2 * ((exy:real) / ey2) * exy +\n                ((exy:real) / ey2) pow 2 * ey2
       #|  ~(ey2 = &0)
       #|  &0 <= ey2
@@ -82870,7 +82870,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &2 * ((ex2 + &1) * inv (&2 * exy)) * exy =\n        (ex2 + &1) * (inv (&2 * exy) * (&2 * exy))
       #|  &2 * ((ex2 + &1) / (&2 * exy)) * exy = ex2 + &1
       #|  ((ex2 + &1) / (&2 * exy)) pow 2 * ey2 = &0
-      #|  !t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
+      #|  forall t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
       #|  &0 <= ex2 - &2 * ((ex2 + &1) / (&2 * exy)) * exy +\n                  ((ex2 + &1) / (&2 * exy)) pow 2 * ey2
       #|  ~(&2 * exy = &0)
       #|  exy = &0
@@ -82882,16 +82882,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  ex2 - &2 * t * exy + t pow 2 * ey2 =\n      simple_expectation (p:A prob_space)\n        (\\x:A. ((X:A->real) x - t * (Y:A->real) x) pow 2)
       #|  t:real
-      #|  !t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
+      #|  forall t:real. &0 <= ex2 - &2 * t * exy + t pow 2 * ey2
       #|  ey2 = simple_expectation (p:A prob_space)\n    (\\x:A. (Y:A->real) x pow 2)
       #|  ex2 = simple_expectation (p:A prob_space)\n    (\\x:A. (X:A->real) x pow 2)
       #|  exy = simple_expectation (p:A prob_space)\n    (\\x:A. (X:A->real) x * (Y:A->real) x)
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> (simple_expectation p (\\x. X x * Y x):real) pow 2 <=\n         simple_expectation p (\\x. X x pow 2) *\n         simple_expectation p (\\x. Y x pow 2)
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> (simple_expectation p (\\x. X x * Y x):real) pow 2 <=\n         simple_expectation p (\\x. X x pow 2) *\n         simple_expectation p (\\x. Y x pow 2)
       #|  (ex2 + &1) / (&2 * exy)
       #|  (exy:real) / ey2
       #|  simple_variance (p:A prob_space) (X:A->real) =\n   simple_expectation p (\\x. (X x - simple_expectation p X) pow 2)
       #|  a:A
-      #|  !p:A prob_space X.\n      simple_rv p X ==> &0 <= simple_variance p X
+      #|  forall p:A prob_space X.\n      simple_rv p X ==> &0 <= simple_variance p X
       #|  simple_expectation (p:A prob_space) (\\x:A. mu * mu) = mu * mu
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x * X x + (--(&2) * mu) * X x)
       #|  (\\x:A. (X:A->real) x * X x + (--(&2) * mu) * X x + mu * mu) =\n                 (\\x. (X x * X x + (--(&2) * mu) * X x) + mu * mu)
@@ -82900,7 +82900,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  (\\x:A. ((X:A->real) x - mu) * (X x - mu)) =\n                 (\\x. X x * X x + (--(&2) * mu) * X x + mu * mu)
       #|  mu = simple_expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X.\n      simple_rv p X\n      ==> simple_variance p X =\n          simple_expectation p (\\x. X x pow 2) -\n          (simple_expectation p X) pow 2
+      #|  forall p:A prob_space X.\n      simple_rv p X\n      ==> simple_variance p X =\n          simple_expectation p (\\x. X x pow 2) -\n          (simple_expectation p X) pow 2
       #|  a:A
       #|  simple_rv (p:A prob_space) (\\x:A. ((X:A->real) x - mu) pow 2)
       #|  &0 < t ==> abs t = t
@@ -82908,11 +82908,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  {x:A | x IN prob_carrier p /\\ abs((X:A->real) x - mu) >= t} =\n                 {x | x IN prob_carrier p /\\ (X x - mu) pow 2 >= t pow 2}
       #|  mu = simple_expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X t.\n      simple_rv p X /\\ &0 < t\n      ==> prob p {x | x IN prob_carrier p /\\\n                      abs(X x - simple_expectation p X) >= t} <=\n          simple_variance p X / t pow 2
+      #|  forall p:A prob_space X t.\n      simple_rv p X /\\ &0 < t\n      ==> prob p {x | x IN prob_carrier p /\\\n                      abs(X x - simple_expectation p X) >= t} <=\n          simple_variance p X / t pow 2
       #|  a:A
       #|  (\\x:A. (c * (X:A->real) x - c * simple_expectation p X) pow 2) =\n                 (\\x. c pow 2 * (X x - simple_expectation p X) pow 2)
-      #|  !p:A prob_space X c.\n      simple_rv p X\n      ==> simple_variance p (\\x. c * X x) = c pow 2 * simple_variance p X
-      #|  converges_in_prob (p:A prob_space) (X:num->A->real) (L:A->real) <=>\n   !e. &0 < e ==>\n     ((\\n. prob p {x | x IN prob_carrier p /\\ abs(X n x - L x) >= e})\n      ---> &0) sequentially
+      #|  forall p:A prob_space X c.\n      simple_rv p X\n      ==> simple_variance p (\\x. c * X x) = c pow 2 * simple_variance p X
+      #|  converges_in_prob (p:A prob_space) (X:num->A->real) (L:A->real) <=>\n   forall e. &0 < e ==>\n     ((\\n. prob p {x | x IN prob_carrier p /\\ abs(X n x - L x) >= e})\n      ---> &0) sequentially
       #|  converges_as (p:A prob_space) (X:num->A->real) (L:A->real) <=>\n   prob p {x | x IN prob_carrier p /\\\n               ((\\n. X n x) ---> L x) sequentially} = &1
       #|  converges_in_prob_const (p:A prob_space) (X:num->A->real) (c:real) <=>\n   converges_in_prob p X (\\x. c)
       #|  simple_converges_L2 (p:A prob_space) (X:num->A->real) (L:A->real) <=>\n   ((\\n. simple_expectation p (\\x. (X n x - L x) pow 2)) ---> &0) sequentially
@@ -82934,7 +82934,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ((\\n. simple_variance (p:A prob_space) ((X:num->A->real) n))\n     ---> &0) sequentially
       #|  eps:real
       #|  e:real
-      #|  !p:A prob_space X mu.\n      (!n. simple_rv p (X n)) /\\\n      (!n. simple_expectation p (X n) = mu) /\\\n      ((\\n. simple_variance p (X n)) ---> &0) sequentially\n      ==> converges_in_prob_const p X mu
+      #|  forall p:A prob_space X mu.\n      (forall n. simple_rv p (X n)) /\\\n      (forall n. simple_expectation p (X n) = mu) /\\\n      ((\\n. simple_variance p (X n)) ---> &0) sequentially\n      ==> converges_in_prob_const p X mu
       #|  simple_covariance (p:A prob_space) (X:A->real) (Y:A->real) =\n   simple_expectation p (\\x. (X x - simple_expectation p X) *\n                              (Y x - simple_expectation p Y))
       #|  &2
       #|  \\x:A. ((X:A->real) x - mx) * ((Y:A->real) x - my)
@@ -82954,28 +82954,28 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_expectation (p:A prob_space)\n     (\\x:A. ((X:A->real) x - mx) pow 2 + ((Y:A->real) x - my) pow 2 +\n            &2 * (((X:A->real) x - mx) * ((Y:A->real) x - my)))
       #|  my = simple_expectation (p:A prob_space) (Y:A->real)
       #|  mx = simple_expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_variance p (\\x. X x + Y x) =\n          simple_variance p X + simple_variance p Y +\n          &2 * simple_covariance p X Y
-      #|  !p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y /\\\n      simple_covariance p X Y = &0\n      ==> simple_variance p (\\x. X x + Y x) =\n          simple_variance p X + simple_variance p Y
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y\n      ==> simple_variance p (\\x. X x + Y x) =\n          simple_variance p X + simple_variance p Y +\n          &2 * simple_covariance p X Y
+      #|  forall p:A prob_space X Y.\n      simple_rv p X /\\ simple_rv p Y /\\\n      simple_covariance p X Y = &0\n      ==> simple_variance p (\\x. X x + Y x) =\n          simple_variance p X + simple_variance p Y
       #|  0
-      #|  !p:A prob_space (X:num->A->real) n.\n     (!i. i <= n ==> simple_rv p (X i))\n     ==> simple_rv p (\\x. sum(0..n) (\\i. X i x))
+      #|  forall p:A prob_space (X:num->A->real) n.\n     (forall i. i <= n ==> simple_rv p (X i))\n     ==> simple_rv p (\\x. sum(0..n) (\\i. X i x))
       #|  (X:num->A->real) (SUC n)
       #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
       #|  0
-      #|  !p:A prob_space (X:num->A->real) n.\n     (!i. i <= n ==> simple_rv p (X i))\n     ==> simple_expectation p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. simple_expectation p (X i))
+      #|  forall p:A prob_space (X:num->A->real) n.\n     (forall i. i <= n ==> simple_rv p (X i))\n     ==> simple_expectation p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. simple_expectation p (X i))
       #|  \\x:A. ((Y:A->real) x - simple_expectation p Y) * ((Z:A->real) x - simple_expectation p Z)
       #|  \\x:A. ((X:A->real) x - simple_expectation p X) * ((Z:A->real) x - simple_expectation p Z)
       #|  p:A prob_space
       #|  simple_expectation (p:A prob_space) (\\x. ((X:A->real) x - simple_expectation p X) *\n     ((Z:A->real) x - simple_expectation p Z) + ((Y:A->real) x - simple_expectation p Y) *\n     (Z x - simple_expectation p Z))
       #|  simple_expectation (p:A prob_space) (\\x. (X:A->real) x + (Y:A->real) x) =\n     simple_expectation p X + simple_expectation p Y
-      #|  !p:A prob_space X Y Z.\n     simple_rv p X /\\ simple_rv p Y /\\ simple_rv p Z\n     ==> simple_covariance p (\\x. X x + Y x) Z =\n         simple_covariance p X Z + simple_covariance p Y Z
+      #|  forall p:A prob_space X Y Z.\n     simple_rv p X /\\ simple_rv p Y /\\ simple_rv p Z\n     ==> simple_covariance p (\\x. X x + Y x) Z =\n         simple_covariance p X Z + simple_covariance p Y Z
       #|  (Y:A->real)
       #|  \\x:A. (X:num->A->real) (SUC n) x
       #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
       #|  0
       #|  simple_rv (p:A prob_space) ((X:num->A->real) 0)
-      #|  !p:A prob_space (X:num->A->real) Y n.\n     (!i. i <= n ==> simple_rv p (X i)) /\\ simple_rv p Y\n     ==> simple_covariance p (\\x. sum(0..n) (\\i. X i x)) Y =\n         sum(0..n) (\\i. simple_covariance p (X i) Y)
+      #|  forall p:A prob_space (X:num->A->real) Y n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\ simple_rv p Y\n     ==> simple_covariance p (\\x. sum(0..n) (\\i. X i x)) Y =\n         sum(0..n) (\\i. simple_covariance p (X i) Y)
       #|  n:num
       #|  (X:num->A->real) (SUC n)
       #|  X:num->A->real
@@ -82984,22 +82984,22 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\x:A. (X:num->A->real) (SUC n) x
       #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) n.\n     (!i. i <= n ==> simple_rv p (X i)) /\\\n     (!i j. i <= n /\\ j <= n /\\ ~(i = j)\n            ==> simple_covariance p (X i) (X j) = &0)\n     ==> simple_variance p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. simple_variance p (X i))
+      #|  forall p:A prob_space (X:num->A->real) n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i j. i <= n /\\ j <= n /\\ ~(i = j)\n            ==> simple_covariance p (X i) (X j) = &0)\n     ==> simple_variance p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. simple_variance p (X i))
       #|  inv((c:real) pow 2)
       #|  \\x:A. (X:A->real) x pow 2
       #|  p:A prob_space
       #|  (\\x:A. ((X:A->real) x / c) pow 2) = (\\x. inv((c:real) pow 2) * (X x pow 2))
       #|  simple_rv (p:A prob_space) (\\x:A. (X:A->real) x pow 2)
-      #|  !p:A prob_space (X:A->real) (c:real).\n     simple_rv p X /\\ ~(c = &0)\n     ==> simple_expectation p (\\x. (X x / c) pow 2) =\n         simple_expectation p (\\x. X x pow 2) / c pow 2
+      #|  forall p:A prob_space (X:A->real) (c:real).\n     simple_rv p X /\\ ~(c = &0)\n     ==> simple_expectation p (\\x. (X x / c) pow 2) =\n         simple_expectation p (\\x. X x pow 2) / c pow 2
       #|  n:num
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) n.\n     (!i. i <= n ==> simple_rv p (X i)) /\\\n     (!i. i <= n ==> simple_expectation p (X i) = &0)\n     ==> simple_expectation p (\\x. sum(0..n) (\\i. X i x)) = &0
+      #|  forall p:A prob_space (X:num->A->real) n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i. i <= n ==> simple_expectation p (X i) = &0)\n     ==> simple_expectation p (\\x. sum(0..n) (\\i. X i x)) = &0
       #|  sum(0..n) (\\i. simple_variance (p:A prob_space) ((X:num->A->real) i)) =\n     sum(0..n) (\\i:num. simple_variance p (X 0))
       #|  n:num
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) n.\n     (!i. i <= n ==> simple_rv p (X i)) /\\\n     (!i j. i <= n /\\ j <= n /\\ ~(i = j)\n            ==> simple_covariance p (X i) (X j) = &0) /\\\n     (!i. i <= n ==> simple_variance p (X i) = simple_variance p (X 0))\n     ==> simple_variance p (\\x. sum(0..n) (\\i. X i x)) =\n         &(SUC n) * simple_variance p (X 0)
+      #|  forall p:A prob_space (X:num->A->real) n.\n     (forall i. i <= n ==> simple_rv p (X i)) /\\\n     (forall i j. i <= n /\\ j <= n /\\ ~(i = j)\n            ==> simple_covariance p (X i) (X j) = &0) /\\\n     (forall i. i <= n ==> simple_variance p (X i) = simple_variance p (X 0))\n     ==> simple_variance p (\\x. sum(0..n) (\\i. X i x)) =\n         &(SUC n) * simple_variance p (X 0)
       #|  (n + 1) - 0 = SUC n
       #|  sum(0..n) (\\i. simple_variance (p:A prob_space) ((X:num->A->real) i)) =\n        sum(0..n) (\\i:num. sigma_sq:real)
       #|  n:num
@@ -83008,7 +83008,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  inv(&(SUC n))
       #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
-      #|  !n. simple_variance (p:A prob_space)\n             (\\x. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) =\n           sigma_sq * inv(&(SUC n))
+      #|  forall n. simple_variance (p:A prob_space)\n             (\\x. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) =\n           sigma_sq * inv(&(SUC n))
       #|  (n + 1) - 0 = SUC n
       #|  sum(0..n) (\\i. simple_expectation (p:A prob_space) ((X:num->A->real) i)) =\n       sum(0..n) (\\i:num. mu:real)
       #|  n:num
@@ -83020,7 +83020,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  mu:real
       #|  \\n:num. \\x:A. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n     (!n. simple_rv p (X n)) /\\\n     (!n. simple_expectation p (X n) = mu) /\\\n     (!n. simple_variance p (X n) = sigma_sq) /\\\n     (!i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0)\n     ==> converges_in_prob_const p\n           (\\n x. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) mu
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n     (forall n. simple_rv p (X n)) /\\\n     (forall n. simple_expectation p (X n) = mu) /\\\n     (forall n. simple_variance p (X n) = sigma_sq) /\\\n     (forall i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0)\n     ==> converges_in_prob_const p\n           (\\n x. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) mu
       #|  n:num = (k + 1) * (k + 1)
       #|  k + 1
       #|  k:num
@@ -83030,7 +83030,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  n = 0
       #|  n:num
-      #|  !n. ?k. k * k <= n /\\ n < (k + 1) * (k + 1)
+      #|  forall n. ?k. k * k <= n /\\ n < (k + 1) * (k + 1)
       #|  x <= SUC x
       #|  0 < x <=> ~(x = 0)
       #|  inv(&k pow 2) = inv(&(k * k))
@@ -83057,7 +83057,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  K2:num
       #|  e / &2
       #|  e:real
-      #|  !f c g.\n     ((\\k. f(k * k)) ---> c) sequentially /\\\n     (!k n. k * k <= n /\\ n <= (k + 1) * (k + 1) ==> abs(f n - f(k * k)) <= g k) /\\\n     (g ---> &0) sequentially\n     ==> (f ---> c) sequentially
+      #|  forall f c g.\n     ((\\k. f(k * k)) ---> c) sequentially /\\\n     (forall k n. k * k <= n /\\ n <= (k + 1) * (k + 1) ==> abs(f n - f(k * k)) <= g k) /\\\n     (g ---> &0) sequentially\n     ==> (f ---> c) sequentially
       #|  eps:real
       #|  nn:num
       #|  nn:num
@@ -83080,9 +83080,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k:num
       #|  k:num
       #|  n:num
-      #|  !k n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))}\n           IN prob_events p
+      #|  forall k n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))}\n           IN prob_events p
       #|  UNIONS {limsup_events\n    (\\n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))})\n    | k IN (:num)}
-      #|  !p:A prob_space (Y:num->A->real) c.\n     (!n. simple_rv p (Y n)) /\\\n     (!eps. &0 < eps ==>\n        real_summable (from 0) (\\n. prob p {x | x IN prob_carrier p /\\ abs(Y n x - c) >= eps}))\n     ==> almost_surely p {x | ((\\n. Y n x) ---> c) sequentially}
+      #|  forall p:A prob_space (Y:num->A->real) c.\n     (forall n. simple_rv p (Y n)) /\\\n     (forall eps. &0 < eps ==>\n        real_summable (from 0) (\\n. prob p {x | x IN prob_carrier p /\\ abs(Y n x - c) >= eps}))\n     ==> almost_surely p {x | ((\\n. Y n x) ---> c) sequentially}
       #|  a = b ==> a <= b
       #|  (n + 1) - 0 = SUC n
       #|  sum(0..k * k) (\\i. simple_variance (p:A prob_space) ((X:num->A->real) i)) =\n      sum(0..k * k) (\\i:num. sigma_sq:real)
@@ -83112,11 +83112,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  \\k:num. sigma_sq / eps pow 2 * inv(&(SUC(k * k)))
       #|  eps:real
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. simple_rv p (X n)) /\\\n    (!n. simple_expectation p (X n) = mu) /\\\n    (!n. simple_variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. simple_rv p (X n)) /\\\n    (forall n. simple_expectation p (X n) = mu) /\\\n    (forall n. simple_variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
       #|  x:A
       #|  n:A->bool
       #|  n:A->bool
-      #|  !p:A prob_space P Q.\n    almost_surely p P /\\\n    (!x. x IN prob_carrier p ==> x IN P ==> x IN Q)\n    ==> almost_surely p Q
+      #|  forall p:A prob_space P Q.\n    almost_surely p P /\\\n    (forall x. x IN prob_carrier p ==> x IN P ==> x IN Q)\n    ==> almost_surely p Q
       #|  &2 * M * &(2 * k + 1) * inv(&(SUC(k * k))) =\n      (&2 * &(2 * k + 1)) * (M * inv(&(SUC(k * k))))
       #|  &(n - k * k) * M * inv(&(SUC(k * k))) +\n      &(n - k * k) * M * inv(&(SUC(k * k))) =\n      (&2 * &(n - k * k)) * (M * inv(&(SUC(k * k))))
       #|  &(n - k * k) * M * inv(&(SUC(k * k))) +\n              &(n - k * k) * M * inv(&(SUC(k * k)))
@@ -83147,40 +83147,40 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  inv(&(SUC n)) * (sum(0..k * k) f + sum(k * k + 1..n) f) -\n     inv(&(SUC(k * k))) * sum(0..k * k) f =\n     inv(&(SUC n)) * sum(k * k + 1..n) f +\n     (inv(&(SUC n)) - inv(&(SUC(k * k)))) * sum(0..k * k) f
       #|  n = k * k + (n - k * k):num
       #|  sum(0..n) f = sum(0..k * k) f + sum(k * k + 1..n) f
-      #|  !f:num->real M k n.\n    &0 <= M /\\\n    (!i. abs(f i) <= M) /\\ k * k <= n /\\ n <= (k + 1) * (k + 1)\n    ==> abs(inv(&(SUC n)) * sum(0..n) f -\n            inv(&(SUC(k * k))) * sum(0..k * k) f)\n        <= &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))
+      #|  forall f:num->real M k n.\n    &0 <= M /\\\n    (forall i. abs(f i) <= M) /\\ k * k <= n /\\ n <= (k + 1) * (k + 1)\n    ==> abs(inv(&(SUC n)) * sum(0..n) f -\n            inv(&(SUC(k * k))) * sum(0..k * k) f)\n        <= &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))
       #|  3 * k <= k * k
       #|  3 <= k
       #|  k = 2
       #|  k = 1
       #|  k = 0
-      #|  !k. (2 * k + 1) * SUC k <= 3 * SUC(k * k)
+      #|  forall k. (2 * k + 1) * SUC k <= 3 * SUC(k * k)
       #|  (c:real) / b * d = (c * d) / b
-      #|  !a b c d:real. &0 < b /\\ &0 < d /\\ a * b <= c * d\n   ==> a * inv d <= c * inv b
+      #|  forall a b c d:real. &0 < b /\\ &0 < d /\\ a * b <= c * d\n   ==> a * inv d <= c * inv b
       #|  0 < SUC n
       #|  &0 <= x /\\ x <= y ==> abs x <= y
       #|  k:num
       #|  0
       #|  \\k. &2 * M * &3 * inv(&(SUC k))
-      #|  !M. &0 <= M ==>\n   ((\\k. &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))) ---> &0) sequentially
+      #|  forall M. &0 <= M ==>\n   ((\\k. &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))) ---> &0) sequentially
       #|  \\k. &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))
-      #|  !i:num. abs((X:num->A->real) i x) <= M
+      #|  forall i:num. abs((X:num->A->real) i x) <= M
       #|  abs((X:num->A->real) 0 x)
       #|  &0 <= M
       #|  x:A
       #|  sigma_sq:real
       #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq M.\n    (!n. simple_rv p (X n)) /\\\n    (!n. simple_expectation p (X n) = mu) /\\\n    (!n. simple_variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0) /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq M.\n    (forall n. simple_rv p (X n)) /\\\n    (forall n. simple_expectation p (X n) = mu) /\\\n    (forall n. simple_variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0) /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
       #|  nonneg_simple_fn_approx (p:A prob_space) (f:A->real) (n:num) (x:A) =\n   if x IN prob_carrier p /\\ &0 <= f x\n   then sup (IMAGE (\\k. &k / &(2 EXP n))\n                    {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x})\n   else &0
       #|  {k | k <= n * 2 EXP n}
-      #|  !n:num (f:A->real) (x:A). FINITE {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
-      #|  !n:num (f:A->real) (x:A). FINITE (IMAGE (\\k. &k / &(2 EXP n))\n                              {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x})
-      #|  !n:num (f:A->real) (x:A). &0 <= f x ==> 0 IN {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
+      #|  forall n:num (f:A->real) (x:A). FINITE {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
+      #|  forall n:num (f:A->real) (x:A). FINITE (IMAGE (\\k. &k / &(2 EXP n))\n                              {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x})
+      #|  forall n:num (f:A->real) (x:A). &0 <= f x ==> 0 IN {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
       #|  0
       #|  &0 / &(2 EXP n) IN IMAGE (\\k. &k / &(2 EXP n))\n                {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}
       #|  x:A
       #|  f:A->real
       #|  n:num
-      #|  !n:num (f:A->real) (x:A). &0 <= f x\n   ==> ~(IMAGE (\\k. &k / &(2 EXP n))\n               {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x} = {})
+      #|  forall n:num (f:A->real) (x:A). &0 <= f x\n   ==> ~(IMAGE (\\k. &k / &(2 EXP n))\n               {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x} = {})
       #|  sup (IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}) IN\n      IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
       #|  IMAGE (\\k. &k / &(2 EXP n))\n                {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}
       #|  x:A
@@ -83189,7 +83189,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  f:A->real
       #|  n:num
-      #|  !p:A prob_space f n x.\n     &0 <= nonneg_simple_fn_approx p f n x
+      #|  forall p:A prob_space f n x.\n     &0 <= nonneg_simple_fn_approx p f n x
       #|  sup (IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}) IN\n      IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
       #|  IMAGE (\\k. &k / &(2 EXP n))\n                {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}
       #|  x:A
@@ -83198,7 +83198,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  f:A->real
       #|  n:num
-      #|  !p:A prob_space f n x.\n     x IN prob_carrier p /\\ &0 <= f x\n     ==> nonneg_simple_fn_approx p f n x <= f x
+      #|  forall p:A prob_space f n x.\n     x IN prob_carrier p /\\ &0 <= f x\n     ==> nonneg_simple_fn_approx p f n x <= f x
       #|  m:num
       #|  m:num
       #|  sup (IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f (x:A)}) IN\n      IMAGE (\\k. &k / &(2 EXP n))\n      {k | k <= n * 2 EXP n /\\ &k / &(2 EXP n) <= f x}
@@ -83209,7 +83209,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  f:A->real
       #|  n:num
-      #|  !p:A prob_space f n x.\n    x IN prob_carrier p /\\ &0 <= f x\n    ==> ?k. k <= n * 2 EXP n /\\\n            nonneg_simple_fn_approx p f n x = &k / &(2 EXP n)
+      #|  forall p:A prob_space f n x.\n    x IN prob_carrier p /\\ &0 <= f x\n    ==> ?k. k <= n * 2 EXP n /\\\n            nonneg_simple_fn_approx p f n x = &k / &(2 EXP n)
       #|  {j:num | j <= n * 2 EXP n}
       #|  {j:num | j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)} = {}
       #|  j:num
@@ -83218,7 +83218,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (j:num) IN {j | j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)}
       #|  j:num
       #|  t:(A->bool)
-      #|  {x:A | x IN prob_carrier p /\\\n            (!j. j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)\n                 ==> f x < &j / &(2 EXP n))} =\n     prob_carrier p INTER\n     INTERS (IMAGE (\\j. {x | x IN prob_carrier p /\\ f x < &j / &(2 EXP n)})\n                   {j | j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)})
+      #|  {x:A | x IN prob_carrier p /\\\n            (forall j. j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)\n                 ==> f x < &j / &(2 EXP n))} =\n     prob_carrier p INTER\n     INTERS (IMAGE (\\j. {x | x IN prob_carrier p /\\ f x < &j / &(2 EXP n)})\n                   {j | j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)})
       #|  m:num
       #|  &m / &(2 EXP n) <= a
       #|  m:num
@@ -83245,7 +83245,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  j:num
       #|  (z:A) IN prob_carrier p
       #|  z:A
-      #|  {x:A | x IN prob_carrier p /\\ nonneg_simple_fn_approx p f n x <= a} =\n     {x | x IN prob_carrier p /\\\n          !j. j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)\n              ==> f x < &j / &(2 EXP n)}
+      #|  {x:A | x IN prob_carrier p /\\ nonneg_simple_fn_approx p f n x <= a} =\n     {x | x IN prob_carrier p /\\\n          forall j. j <= n * 2 EXP n /\\ ~(&j / &(2 EXP n) <= a)\n              ==> f x < &j / &(2 EXP n)}
       #|  z:A
       #|  n:num
       #|  f:A->real
@@ -83254,7 +83254,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x:A | x IN prob_carrier p /\\ nonneg_simple_fn_approx p f n x <= a} = {}
       #|  a < &0
       #|  a:real
-      #|  !p:A prob_space f n.\n    random_variable p f /\\ (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> random_variable p (nonneg_simple_fn_approx p f n)
+      #|  forall p:A prob_space f n.\n    random_variable p f /\\ (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> random_variable p (nonneg_simple_fn_approx p f n)
       #|  IMAGE (\\k. &k / &(2 EXP n)) {k | k <= n * 2 EXP n} UNION {&0:real}
       #|  k:num
       #|  k:num
@@ -83265,7 +83265,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 <= (f:A->real) z
       #|  z:A
       #|  {nonneg_simple_fn_approx (p:A prob_space) f n x | x | x IN prob_carrier p} SUBSET\n     IMAGE (\\k. &k / &(2 EXP n)) {k | k <= n * 2 EXP n} UNION {&0:real}
-      #|  !p:A prob_space f n.\n    random_variable p f /\\ (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> simple_rv p (nonneg_simple_fn_approx p f n)
+      #|  forall p:A prob_space f n.\n    random_variable p f /\\ (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> simple_rv p (nonneg_simple_fn_approx p f n)
       #|  (f:A->real) x
       #|  &km / &(2 EXP m) = &(km * 2 EXP (n - m)) / &(2 EXP n)
       #|  y2:real
@@ -83295,7 +83295,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  f:A->real
       #|  m:num
-      #|  !p:A prob_space f m n x.\n    m <= n /\\ x IN prob_carrier p /\\ &0 <= f x\n    ==> nonneg_simple_fn_approx p f m x <= nonneg_simple_fn_approx p f n x
+      #|  forall p:A prob_space f m n x.\n    m <= n /\\ x IN prob_carrier p /\\ &0 <= f x\n    ==> nonneg_simple_fn_approx p f m x <= nonneg_simple_fn_approx p f n x
       #|  &(km + 1) / &(2 EXP n) = &km / &(2 EXP n) + &1 / &(2 EXP n)
       #|  &0 < &1 / &(2 EXP n)
       #|  &(km + 1) / &(2 EXP n)
@@ -83317,7 +83317,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  f:A->real
       #|  n:num
-      #|  !p:A prob_space f n x.\n    x IN prob_carrier p /\\ &0 <= f x /\\ f x <= &n\n    ==> f x - nonneg_simple_fn_approx p f n x <= &1 / &(2 EXP n)
+      #|  forall p:A prob_space f n x.\n    x IN prob_carrier p /\\ &0 <= f x /\\ f x <= &n\n    ==> f x - nonneg_simple_fn_approx p f n x <= &1 / &(2 EXP n)
       #|  &1 / &(2 EXP nn) = (&1 / &2) pow nn
       #|  (&1 / &2) pow N1
       #|  &N2
@@ -83332,18 +83332,18 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  &1 / &2
       #|  e:real
-      #|  !p:A prob_space f x.\n    x IN prob_carrier p /\\ &0 <= f x\n    ==> ((\\n. nonneg_simple_fn_approx p f n x) ---> f x) sequentially
-      #|  nn_expectation (p:A prob_space) (f:A->real) =\n   sup {simple_expectation p g | g |\n        simple_rv p g /\\\n        (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n        (!x. x IN prob_carrier p ==> g x <= f x)}
+      #|  forall p:A prob_space f x.\n    x IN prob_carrier p /\\ &0 <= f x\n    ==> ((\\n. nonneg_simple_fn_approx p f n x) ---> f x) sequentially
+      #|  nn_expectation (p:A prob_space) (f:A->real) =\n   sup {simple_expectation p g | g |\n        simple_rv p g /\\\n        (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n        (forall x. x IN prob_carrier p ==> g x <= f x)}
       #|  \\x:A. &0
       #|  simple_expectation p (\\x:A. &0)
-      #|  !p:A prob_space f.\n    (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> ~({simple_expectation p g | g |\n           simple_rv p g /\\\n           (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n           (!x. x IN prob_carrier p ==> g x <= f x)} = {})
+      #|  forall p:A prob_space f.\n    (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> ~({simple_expectation p g | g |\n           simple_rv p g /\\\n           (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n           (forall x. x IN prob_carrier p ==> g x <= f x)} = {})
       #|  v:real
       #|  v:real
       #|  f:A->real
       #|  simple_expectation p (f:A->real)
       #|  simple_expectation p (f:A->real)
       #|  a <= b /\\ b <= a ==> b = a
-      #|  !p:A prob_space f.\n    simple_rv p f /\\ (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> nn_expectation p f = simple_expectation p f
+      #|  forall p:A prob_space f.\n    simple_rv p f /\\ (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> nn_expectation p f = simple_expectation p f
       #|  simple_expectation (p:A prob_space) g' <=\n                  simple_expectation p (\\x:A. B)
       #|  v:real
       #|  B:real
@@ -83352,7 +83352,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  h:A->real
       #|  h:A->real
       #|  v:real
-      #|  !p:A prob_space f g.\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n    (!x. x IN prob_carrier p ==> f x <= g x) /\\\n    (?B. !x. x IN prob_carrier p ==> g x <= B)\n    ==> nn_expectation p f <= nn_expectation p g
+      #|  forall p:A prob_space f g.\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n    (forall x. x IN prob_carrier p ==> f x <= g x) /\\\n    (?B. forall x. x IN prob_carrier p ==> g x <= B)\n    ==> nn_expectation p f <= nn_expectation p g
       #|  x:A
       #|  (g:A->real) x
       #|  {(g:A->real) x | x IN prob_carrier p}
@@ -83361,58 +83361,58 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ~({(g:A->real) x | x IN prob_carrier p} = {})
       #|  &0
       #|  prob_carrier (p:A prob_space) = {}
-      #|  !p:A prob_space g. simple_rv p g\n     ==> ?Bg. !x. x IN prob_carrier p ==> g x <= Bg
-      #|  !x c:real. x >= c <=> ~(x < c)
+      #|  forall p:A prob_space g. simple_rv p g\n     ==> ?Bg. forall x. x IN prob_carrier p ==> g x <= Bg
+      #|  forall x c:real. x >= c <=> ~(x < c)
       #|  {x:A | x IN prob_carrier p /\\ (h:A->real) x >= c} =\n                prob_carrier p DIFF {x | x IN prob_carrier p /\\ h x < c}
-      #|  !p:A prob_space h c. simple_rv p h\n     ==> {x | x IN prob_carrier p /\\ h x >= c} IN prob_events p
+      #|  forall p:A prob_space h c. simple_rv p h\n     ==> {x | x IN prob_carrier p /\\ h x >= c} IN prob_events p
       #|  x:A
-      #|  !x:A. x IN a ==> (f:A->real) x >= g x
+      #|  forall x:A. x IN a ==> (f:A->real) x >= g x
       #|  x:A
-      #|  !p:A prob_space f g a.\n     simple_rv p f /\\ simple_rv p g /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     a IN prob_events p /\\\n     (!x. x IN a ==> f x >= g x)\n     ==> simple_expectation p f >=\n         simple_expectation p (\\x. g x * indicator_fn a x)
+      #|  forall p:A prob_space f g a.\n     simple_rv p f /\\ simple_rv p g /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     a IN prob_events p /\\\n     (forall x. x IN a ==> f x >= g x)\n     ==> simple_expectation p f >=\n         simple_expectation p (\\x. g x * indicator_fn a x)
       #|  simple_expectation (p:A prob_space) h' <=\n                 simple_expectation p (\\x:A. B:real)
       #|  h':A->real
       #|  h:A->real
       #|  simple_expectation p (h:A->real)
       #|  B:real
-      #|  !p:A prob_space h f.\n     simple_rv p h /\\\n     (!x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (!x. x IN prob_carrier p ==> h x <= f x) /\\\n     (?B. !x. x IN prob_carrier p ==> f x <= B)\n     ==> simple_expectation p h <= nn_expectation p f
+      #|  forall p:A prob_space h f.\n     simple_rv p h /\\\n     (forall x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (forall x. x IN prob_carrier p ==> h x <= f x) /\\\n     (?B. forall x. x IN prob_carrier p ==> f x <= B)\n     ==> simple_expectation p h <= nn_expectation p f
       #|  simple_expectation (p:A prob_space) g' <=\n                 simple_expectation p (\\x:A. B:real)
       #|  g':A->real
       #|  v:real
-      #|  !p:A prob_space f B.\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> f x <= B)\n     ==> nn_expectation p f <= B
+      #|  forall p:A prob_space f B.\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> f x <= B)\n     ==> nn_expectation p f <= B
       #|  g:A->real
       #|  v:real
-      #|  !p:A prob_space f c.\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!h. simple_rv p h /\\\n          (!x. x IN prob_carrier p ==> &0 <= h x) /\\\n          (!x. x IN prob_carrier p ==> h x <= f x)\n          ==> simple_expectation p h <= c)\n     ==> nn_expectation p f <= c
+      #|  forall p:A prob_space f c.\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall h. simple_rv p h /\\\n          (forall x. x IN prob_carrier p ==> &0 <= h x) /\\\n          (forall x. x IN prob_carrier p ==> h x <= f x)\n          ==> simple_expectation p h <= c)\n     ==> nn_expectation p f <= c
       #|  Bf + Bg:real
       #|  simple_expectation (p:A prob_space) h +\n    simple_expectation p k =\n    simple_expectation p (\\x:A. (h:A->real) x + (k:A->real) x)
       #|  h:A->real
       #|  nn_expectation (p:A prob_space) f <=\n    nn_expectation p (\\x. (f:A->real) x + g x) -\n    simple_expectation p (k:A->real)
       #|  k:A->real
       #|  nn_expectation (p:A prob_space) g <=\n    nn_expectation p (\\x. (f:A->real) x + g x) - nn_expectation p f
-      #|  !p:A prob_space f g.\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (?Bf. !x. x IN prob_carrier p ==> f x <= Bf) /\\\n     (?Bg. !x. x IN prob_carrier p ==> g x <= Bg)\n     ==> nn_expectation p f + nn_expectation p g <=\n         nn_expectation p (\\x. f x + g x)
+      #|  forall p:A prob_space f g.\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (?Bf. forall x. x IN prob_carrier p ==> f x <= Bf) /\\\n     (?Bg. forall x. x IN prob_carrier p ==> g x <= Bg)\n     ==> nn_expectation p f + nn_expectation p g <=\n         nn_expectation p (\\x. f x + g x)
       #|  (\\x:A. max ((X:A->real) x) ((Y:A->real) x)) =\n                (\\x. inv(&2) * ((X x + Y x) + abs(X x - Y x)))
-      #|  !p:A prob_space X Y.\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_rv p (\\x. max (X x) (Y x))
-      #|  integrable (p:A prob_space) (f:A->real) <=>\n   random_variable p f /\\\n   (?B. !g. simple_rv p g /\\\n            (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n            (!x. x IN prob_carrier p ==> g x <= abs(f x))\n            ==> simple_expectation p g <= B)
+      #|  forall p:A prob_space X Y.\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_rv p (\\x. max (X x) (Y x))
+      #|  integrable (p:A prob_space) (f:A->real) <=>\n   random_variable p f /\\\n   (?B. forall g. simple_rv p g /\\\n            (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n            (forall x. x IN prob_carrier p ==> g x <= abs(f x))\n            ==> simple_expectation p g <= B)
       #|  expectation (p:A prob_space) (f:A->real) =\n   nn_expectation p (\\x. max (f x) (&0)) -\n   nn_expectation p (\\x. max (--(f x)) (&0))
       #|  simple_expectation p (\\x:A. abs(f x))
-      #|  !p:A prob_space f. simple_rv p f ==> integrable p f
+      #|  forall p:A prob_space f. simple_rv p f ==> integrable p f
       #|  simple_expectation p (\\x:A. max (f x) (&0) - max (--(f x)) (&0))
-      #|  !x:A. max (f x) (&0) - max (--(f x)) (&0) = f x
+      #|  forall x:A. max (f x) (&0) - max (--(f x)) (&0) = f x
       #|  nn_expectation p (\\x:A. max (--(f x)) (&0)) =\n                simple_expectation p (\\x. max (--(f x)) (&0))
       #|  nn_expectation p (\\x:A. max (f x) (&0)) =\n                simple_expectation p (\\x. max (f x) (&0))
       #|  simple_rv p (\\x:A. max (--(f x)) (&0))
       #|  simple_rv p (\\x:A. max (f x) (&0))
-      #|  !p:A prob_space f.\n    simple_rv p f\n    ==> expectation p f = simple_expectation p f
+      #|  forall p:A prob_space f.\n    simple_rv p f\n    ==> expectation p f = simple_expectation p f
       #|  v:real
       #|  x':A
       #|  IMAGE (f:A->real) (prob_carrier p) = IMAGE g (prob_carrier p)
-      #|  !p:A prob_space f g.\n     (!x. x IN prob_carrier p ==> f x = g x)\n     ==> simple_expectation p f = simple_expectation p g
+      #|  forall p:A prob_space f g.\n     (forall x. x IN prob_carrier p ==> f x = g x)\n     ==> simple_expectation p f = simple_expectation p g
       #|  x:A
-      #|  !p:A prob_space X.\n     simple_expectation p (\\x. X x * indicator_fn (prob_carrier p) x) =\n     simple_expectation p X
+      #|  forall p:A prob_space X.\n     simple_expectation p (\\x. X x * indicator_fn (prob_carrier p) x) =\n     simple_expectation p X
       #|  ~(c = &0) ==> (c + L) / (&2 * c) * c = (c + L) / &2
       #|  (c + L) / (&2 * c)
       #|  &0 < &2 * c
       #|  &1 / &2 * c <= L
-      #|  !c L:real. &0 < c /\\ (!a. &0 < a /\\ a < &1 ==> a * c <= L) ==> c <= L
+      #|  forall c L:real. &0 < c /\\ (forall a. &0 < a /\\ a < &1 ==> a * c <= L) ==> c <= L
       #|  0
       #|  &0
       #|  simple_expectation (p:A prob_space) g
@@ -83420,7 +83420,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\n:num. simple_expectation (p:A prob_space) g)
       #|  sequentially
       #|  &0 <= prob (p:A prob_space) (prob_carrier p DIFF (An:num->A->bool) n)
-      #|  !n:num. &0 <= simple_expectation (p:A prob_space)\n       (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) /\\\n       simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) <=\n       Bg * prob p (prob_carrier p DIFF An n)
+      #|  forall n:num. &0 <= simple_expectation (p:A prob_space)\n       (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) /\\\n       simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) <=\n       Bg * prob p (prob_carrier p DIFF An n)
       #|  n:num
       #|  n:num
       #|  n:num
@@ -83444,14 +83444,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  indicator_fn (prob_carrier (p:A prob_space) DIFF (An:num->A->bool) n)
       #|  g:A->real
       #|  p:A prob_space
-      #|  !n:num. &0 <= simple_expectation (p:A prob_space)\n         (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) /\\\n        simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) <=\n        Bg * prob p (prob_carrier p DIFF An n)
+      #|  forall n:num. &0 <= simple_expectation (p:A prob_space)\n         (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) /\\\n        simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) <=\n        Bg * prob p (prob_carrier p DIFF An n)
       #|  &0 = &1 - &1
       #|  (An:num->A->bool) x
       #|  p:A prob_space
       #|  (\\n:num. prob (p:A prob_space) (prob_carrier p DIFF An n)) =\n       (\\n. &1 - prob p (An n))
       #|  ((\\n:num. prob (p:A prob_space) (prob_carrier p DIFF An n)) ---> &0) sequentially
       #|  ((\\n:num. simple_expectation (p:A prob_space)\n        (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x)) ---> &0) sequentially
-      #|  !n:num. simple_expectation (p:A prob_space) g =\n      simple_expectation p (\\x. g x * indicator_fn (An n) x) +\n      simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x)
+      #|  forall n:num. simple_expectation (p:A prob_space) g =\n      simple_expectation p (\\x. g x * indicator_fn (An n) x) +\n      simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x)
       #|  x:num
       #|  (\\n:num. simple_expectation (p:A prob_space) (\\x. g x * indicator_fn (An n) x)) =\n       (\\n. simple_expectation p g - simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x))
       #|  (x:A) IN An (n:num)
@@ -83463,8 +83463,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  g:A->real
       #|  p:A prob_space
       #|  simple_expectation (p:A prob_space) (\\x. g x * indicator_fn (An (n:num)) x) +\n        simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x) =\n        simple_expectation p (\\x. g x * indicator_fn (An n) x + g x * indicator_fn (prob_carrier p DIFF An n) x)
-      #|  !n:num. simple_expectation (p:A prob_space) g =\n       simple_expectation p (\\x. g x * indicator_fn (An n) x) +\n       simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x)
-      #|  ?Bg:real. !x:A. x IN prob_carrier p ==> g x <= Bg
+      #|  forall n:num. simple_expectation (p:A prob_space) g =\n       simple_expectation p (\\x. g x * indicator_fn (An n) x) +\n       simple_expectation p (\\x. g x * indicator_fn (prob_carrier p DIFF An n) x)
+      #|  ?Bg:real. forall x:A. x IN prob_carrier p ==> g x <= Bg
       #|  \\n:num. simple_expectation (p:A prob_space) ((fn:num->A->real) n)
       #|  \\n:num. a * simple_expectation (p:A prob_space) (\\x. g x * indicator_fn ((An:num->A->bool) n) x)
       #|  sequentially
@@ -83478,7 +83478,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  g:A->real
       #|  p:A prob_space
       #|  simple_rv (p:A prob_space) (\\x. g x * indicator_fn ((An:num->A->bool) n) x)
-      #|  !n:num. a * simple_expectation (p:A prob_space) (\\x. g x * indicator_fn (An n) x) <=\n              simple_expectation p (fn n)
+      #|  forall n:num. a * simple_expectation (p:A prob_space) (\\x. g x * indicator_fn (An n) x) <=\n              simple_expectation p (fn n)
       #|  p:A prob_space
       #|  ((\\n:num. prob (p:A prob_space) (An n)) ---> prob p (UNIONS {An n | n IN (:num)})) sequentially
       #|  ((\\n:num. prob (p:A prob_space) (An n)) ---> &1) sequentially
@@ -83488,7 +83488,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  N:num
       #|  (f:A->real) x - a * (g:A->real) x
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==> ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
+      #|  forall x:A. x IN prob_carrier p ==> ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
       #|  &1 * (g:A->real) x
       #|  a * (g:A->real) x < f x
       #|  &0 < (g:A->real) x
@@ -83498,10 +83498,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  UNIONS {(An:num->A->bool) n | n IN (:num)} = prob_carrier p
       #|  (\\n:num. {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x >= a * (g:A->real) x}) = (An:num->A->bool)
-      #|  !n (x:A). x IN (An:num->A->bool) n ==> x IN prob_carrier p
+      #|  forall n (x:A). x IN (An:num->A->bool) n ==> x IN prob_carrier p
       #|  (fn:num->A->real) n x
       #|  (\\n:num. {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x >= a * (g:A->real) x}) = (An:num->A->bool)
-      #|  !n. (An:num->A->bool) n SUBSET An (SUC n)
+      #|  forall n. (An:num->A->bool) n SUBSET An (SUC n)
       #|  a:real
       #|  g:A->real
       #|  p:A prob_space
@@ -83510,7 +83510,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  p:A prob_space
       #|  {x:A | x IN prob_carrier p /\\ (fn:num->A->real) (n:num) x >= a * (g:A->real) x} =\n      {x | x IN prob_carrier p /\\ (\\x. fn n x - a * g x) x >= &0}
-      #|  !n:num. (An:num->A->bool) n IN prob_events p
+      #|  forall n:num. (An:num->A->bool) n IN prob_events p
       #|  An = \\n:num. {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x >= a * (g:A->real) x}
       #|  a:real
       #|  &0 <= simple_expectation (p:A prob_space) g
@@ -83531,20 +83531,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space) f
       #|  simple_expectation (p:A prob_space) ((fn:num->A->real) n) <= B
       #|  &0 <= simple_expectation (p:A prob_space) ((fn:num->A->real) n)
-      #|  !n. abs(simple_expectation (p:A prob_space) ((fn:num->A->real) n)) <= B
-      #|  !n. simple_expectation (p:A prob_space) (fn n) <=\n                    simple_expectation p (fn (SUC n))
+      #|  forall n. abs(simple_expectation (p:A prob_space) ((fn:num->A->real) n)) <= B
+      #|  forall n. simple_expectation (p:A prob_space) (fn n) <=\n                    simple_expectation p (fn (SUC n))
       #|  n:num
       #|  \\m:num. (fn:num->A->real) m x
       #|  sequentially
-      #|  !n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= (f:A->real) x
+      #|  forall n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= (f:A->real) x
       #|  (fn:num->A->real) n x
-      #|  !m n x:A. m <= n /\\ x IN prob_carrier p ==> fn m x <= (fn:num->A->real) n x
+      #|  forall m n x:A. m <= n /\\ x IN prob_carrier p ==> fn m x <= (fn:num->A->real) n x
       #|  0
       #|  \\n:num. (fn:num->A->real) n x
       #|  sequentially
-      #|  !x:A. x IN prob_carrier p ==> &0 <= f x
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= f x
       #|  B:real
-      #|  !p:A prob_space fn f.\n    (!n. simple_rv p (fn n)) /\\\n    (!n x. x IN prob_carrier p ==> &0 <= fn n x) /\\\n    (!n x. x IN prob_carrier p ==> fn n x <= fn (SUC n) x) /\\\n    (!x. x IN prob_carrier p ==> ((\\n. fn n x) ---> f x) sequentially) /\\\n    (?B. !x. x IN prob_carrier p ==> f x <= B)\n    ==> ((\\n. simple_expectation p (fn n)) ---> nn_expectation p f) sequentially
+      #|  forall p:A prob_space fn f.\n    (forall n. simple_rv p (fn n)) /\\\n    (forall n x. x IN prob_carrier p ==> &0 <= fn n x) /\\\n    (forall n x. x IN prob_carrier p ==> fn n x <= fn (SUC n) x) /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. fn n x) ---> f x) sequentially) /\\\n    (?B. forall x. x IN prob_carrier p ==> f x <= B)\n    ==> ((\\n. simple_expectation p (fn n)) ---> nn_expectation p f) sequentially
       #|  n:num
       #|  SUC n
       #|  n:num
@@ -83561,29 +83561,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sequentially
       #|  ((\\n. simple_expectation (p:A prob_space) ((fn:num->A->real) n) +\n    simple_expectation p ((gn:num->A->real) n))\n    ---> nn_expectation p f + nn_expectation p g) sequentially
       #|  (hn:num->A->real) n = (\\x:A. fn n x + gn n x)
-      #|  !n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) =\n    simple_expectation p ((fn:num->A->real) n) + simple_expectation p ((gn:num->A->real) n)
+      #|  forall n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) =\n    simple_expectation p ((fn:num->A->real) n) + simple_expectation p ((gn:num->A->real) n)
       #|  x:A
       #|  Bf + Bg:real
       #|  ((\\n. simple_expectation (p:A prob_space) ((hn:num->A->real) n))\n    ---> nn_expectation p (\\x. f x + g x)) sequentially
       #|  ((\\n. simple_expectation (p:A prob_space) ((gn:num->A->real) n))\n    ---> nn_expectation p g) sequentially
       #|  ((\\n. simple_expectation (p:A prob_space) ((fn:num->A->real) n))\n    ---> nn_expectation p f) sequentially
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. (hn:num->A->real) n x) ---> (f:A->real) x + (g:A->real) x) sequentially
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. (gn:num->A->real) n x) ---> (g:A->real) x) sequentially
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
-      #|  !n x:A. x IN prob_carrier p ==> (hn:num->A->real) n x <= hn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= gn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= fn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (hn:num->A->real) n x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (fn:num->A->real) n x
-      #|  !n. simple_rv (p:A prob_space) ((hn:num->A->real) n)
-      #|  !n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
-      #|  !n. simple_rv (p:A prob_space) ((fn:num->A->real) n)
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. (hn:num->A->real) n x) ---> (f:A->real) x + (g:A->real) x) sequentially
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. (gn:num->A->real) n x) ---> (g:A->real) x) sequentially
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
+      #|  forall n x:A. x IN prob_carrier p ==> (hn:num->A->real) n x <= hn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= gn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= fn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (hn:num->A->real) n x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (fn:num->A->real) n x
+      #|  forall n. simple_rv (p:A prob_space) ((hn:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
+      #|  forall n. simple_rv (p:A prob_space) ((fn:num->A->real) n)
       #|  hn = \\n:num. (\\x:A. (fn:num->A->real) n x + (gn:num->A->real) n x)
       #|  gn = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (g:A->real) n
       #|  fn = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (f:A->real) n
-      #|  !p:A prob_space f g.\n    random_variable p f /\\\n    random_variable p g /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n    (?Bf. !x. x IN prob_carrier p ==> f x <= Bf) /\\\n    (?Bg. !x. x IN prob_carrier p ==> g x <= Bg)\n    ==> nn_expectation p (\\x. f x + g x) =\n        nn_expectation p f + nn_expectation p g
-      #|  !a b c d:real.\n     a * c - b * c - (a * d - b * d) = (a - b) * (c - d)
+      #|  forall p:A prob_space f g.\n    random_variable p f /\\\n    random_variable p g /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n    (?Bf. forall x. x IN prob_carrier p ==> f x <= Bf) /\\\n    (?Bg. forall x. x IN prob_carrier p ==> g x <= Bg)\n    ==> nn_expectation p (\\x. f x + g x) =\n        nn_expectation p f + nn_expectation p g
+      #|  forall a b c d:real.\n     a * c - b * c - (a * d - b * d) = (a - b) * (c - d)
       #|  sup {v:real | v IN IMAGE (X:A->real) (prob_carrier p) /\\ v < u}
       #|  {v:real | v IN IMAGE (X:A->real) (prob_carrier p) /\\ v < u}
       #|  z:A
@@ -83600,9 +83600,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  IMAGE (X:A->real) (prob_carrier p)
       #|  FINITE {v:real | v IN IMAGE (X:A->real) (prob_carrier p) /\\ v < u}
       #|  FINITE (IMAGE (X:A->real) (prob_carrier p))
-      #|  !p:A prob_space (X:A->real) u.\n     simple_rv p X\n     ==> ?a. !x. x IN prob_carrier p ==> (X x <= a <=> X x < u)
+      #|  forall p:A prob_space (X:A->real) u.\n     simple_rv p X\n     ==> ?a. forall x. x IN prob_carrier p ==> (X x <= a <=> X x < u)
       #|  indep_rv (p:A prob_space) (X:A->real) (Y:A->real)
-      #|  !a b. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n             (X:A->real) x <= a /\\ (Y:A->real) x <= b} =\n           prob p {x | x IN prob_carrier p /\\ X x <= a} *\n           prob p {x | x IN prob_carrier p /\\ Y x <= b}
+      #|  forall a b. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n             (X:A->real) x <= a /\\ (Y:A->real) x <= b} =\n           prob p {x | x IN prob_carrier p /\\ X x <= a} *\n           prob p {x | x IN prob_carrier p /\\ Y x <= b}
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x <= v}
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x <= aY}
       #|  p:A prob_space
@@ -83625,9 +83625,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x <= aX /\\ (Y:A->real) x <= v}\n     SUBSET {x | x IN prob_carrier p /\\ X x <= u /\\ Y x <= v}
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u /\\ (Y:A->real) x <= b} =\n      {x | x IN prob_carrier p /\\ X x = u} INTER\n      {x | x IN prob_carrier p /\\ Y x <= b}
-      #|  !b. {x:A | x IN prob_carrier p /\\\n                 (X:A->real) x = u /\\ (Y:A->real) x <= b} IN prob_events p
+      #|  forall b. {x:A | x IN prob_carrier p /\\\n                 (X:A->real) x = u /\\ (Y:A->real) x <= b} IN prob_events p
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x <= a /\\ (Y:A->real) x <= b} =\n      {x | x IN prob_carrier p /\\ X x <= a} INTER\n      {x | x IN prob_carrier p /\\ Y x <= b}
-      #|  !a b. {x:A | x IN prob_carrier p /\\\n                   (X:A->real) x <= a /\\ (Y:A->real) x <= b} IN prob_events p
+      #|  forall a b. {x:A | x IN prob_carrier p /\\\n                   (X:A->real) x <= a /\\ (Y:A->real) x <= b} IN prob_events p
       #|  x:A
       #|  (x:A) IN prob_carrier p
       #|  x:A
@@ -83656,8 +83656,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  prob p {x:A | x IN prob_carrier p /\\ (X:A->real) x = u} =\n     prob p {x | x IN prob_carrier p /\\ X x <= u} -\n     prob p {x | x IN prob_carrier p /\\ X x <= aX}
       #|  {x:A | x IN prob_carrier p /\\ (Y:A->real) x = v} IN prob_events p
       #|  {x:A | x IN prob_carrier p /\\ (X:A->real) x = u} IN prob_events p
-      #|  !b. {x:A | x IN prob_carrier p /\\ (Y:A->real) x <= b} IN prob_events p
-      #|  !a. {x:A | x IN prob_carrier p /\\ (X:A->real) x <= a} IN prob_events p
+      #|  forall b. {x:A | x IN prob_carrier p /\\ (Y:A->real) x <= b} IN prob_events p
+      #|  forall a. {x:A | x IN prob_carrier p /\\ (X:A->real) x <= a} IN prob_events p
       #|  random_variable (p:A prob_space) (Y:A->real)
       #|  random_variable (p:A prob_space) (X:A->real)
       #|  {x:A | x IN prob_carrier p /\\ (Y:A->real) x <= aY} =\n     {x | x IN prob_carrier p /\\ Y x < v}
@@ -83670,16 +83670,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  u:real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (X:A->real) (Y:A->real) u v.\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v} =\n         prob p {x | x IN prob_carrier p /\\ X x = u} *\n         prob p {x | x IN prob_carrier p /\\ Y x = v}
-      #|  !a:real b c d. a * b * (c * d) = (a * c) * (b * d)
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) u v.\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> prob p {x | x IN prob_carrier p /\\ X x = u /\\ Y x = v} =\n         prob p {x | x IN prob_carrier p /\\ X x = u} *\n         prob p {x | x IN prob_carrier p /\\ Y x = v}
+      #|  forall a:real b c d. a * b * (c * d) = (a * c) * (b * d)
       #|  {z:A | z IN prob_carrier p /\\ (X:A->real) z = (u:real) /\\ (Y:A->real) z = (v:real)} =\n     {z | z IN prob_carrier p /\\ X z = u} INTER\n     {z | z IN prob_carrier p /\\ Y z = v}
-      #|  !p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} IN prob_events p
-      #|  !p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> simple_rv p (\\x. u * v *\n          indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x)
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} IN prob_events p
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> simple_rv p (\\x. u * v *\n          indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x)
       #|  simple_expectation (p:A prob_space) (\\x. (u * v) *\n       indicator_fn {z | z IN prob_carrier p /\\ (X:A->real) z = u /\\\n         (Y:A->real) z = v} x) =\n     (u * v) * simple_expectation p\n       (indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v})
       #|  x:A
       #|  simple_expectation (p:A prob_space) (\\x. u * v *\n       indicator_fn {z | z IN prob_carrier p /\\ (X:A->real) z = u /\\\n         (Y:A->real) z = v} x) =\n     simple_expectation p (\\x. (u * v) *\n       indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x)
       #|  {z:A | z IN prob_carrier p /\\ (X:A->real) z = (u:real) /\\\n     (Y:A->real) z = (v:real)} IN prob_events p
-      #|  !p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> simple_expectation p (\\x. u * v *\n          indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x) =\n        u * v * prob p {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v}
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) (u:real) (v:real).\n    simple_rv p X /\\ simple_rv p Y\n    ==> simple_expectation p (\\x. u * v *\n          indicator_fn {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x) =\n        u * v * prob p {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v}
       #|  ~(u:real = (X:A->real) x)
       #|  (X:A->real) x = u
       #|  u:real
@@ -83690,15 +83690,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sum (IMAGE (Y:A->real) (prob_carrier p))\n                    (\\v. if v = Y x then u * Y x else &0)
       #|  (X:A->real) x = u
       #|  u:real
-      #|  !u:real. sum (IMAGE (Y:A->real) (prob_carrier p))\n        (\\v. if (X:A->real) x = u /\\ Y x = v then u * v else &0) =\n      if X x = u then u * Y x else &0
-      #|  !u v. u * v * indicator_fn\n        {z:A | z IN prob_carrier p /\\ (X:A->real) z = u /\\ (Y:A->real) z = v} x =\n      if X x = u /\\ Y x = v then u * v else &0
+      #|  forall u:real. sum (IMAGE (Y:A->real) (prob_carrier p))\n        (\\v. if (X:A->real) x = u /\\ Y x = v then u * v else &0) =\n      if X x = u then u * Y x else &0
+      #|  forall u v. u * v * indicator_fn\n        {z:A | z IN prob_carrier p /\\ (X:A->real) z = u /\\ (Y:A->real) z = v} x =\n      if X x = u /\\ Y x = v then u * v else &0
       #|  x:A
       #|  (Y:A->real) x IN IMAGE Y (prob_carrier p)
       #|  x:A
       #|  (X:A->real) x IN IMAGE X (prob_carrier p)
       #|  FINITE (IMAGE (Y:A->real) (prob_carrier p))
       #|  FINITE (IMAGE (X:A->real) (prob_carrier p))
-      #|  !p:A prob_space (X:A->real) (Y:A->real) x.\n     simple_rv p X /\\ simple_rv p Y /\\ x IN prob_carrier p\n     ==> X x * Y x =\n         sum (IMAGE X (prob_carrier p)) (\\u.\n           sum (IMAGE Y (prob_carrier p)) (\\v.\n             u * v * indicator_fn\n               {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x))
+      #|  forall p:A prob_space (X:A->real) (Y:A->real) x.\n     simple_rv p X /\\ simple_rv p Y /\\ x IN prob_carrier p\n     ==> X x * Y x =\n         sum (IMAGE X (prob_carrier p)) (\\u.\n           sum (IMAGE Y (prob_carrier p)) (\\v.\n             u * v * indicator_fn\n               {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v} x))
       #|  \\x:A. sum t (\\i. (f:B->A->real) i x)
       #|  (f:B->A->real) a
       #|  p:A prob_space
@@ -83706,7 +83706,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_rv (p:A prob_space) (\\x:A. sum t (\\i. (f:B->A->real) i x))
       #|  t:B->bool
       #|  a:B
-      #|  !p:A prob_space (f:B->A->real) s.\n    FINITE s /\\ (!i. i IN s ==> simple_rv p (f i))\n    ==> simple_rv p (\\x. sum s (\\i. f i x))
+      #|  forall p:A prob_space (f:B->A->real) s.\n    FINITE s /\\ (forall i. i IN s ==> simple_rv p (f i))\n    ==> simple_rv p (\\x. sum s (\\i. f i x))
       #|  \\x:A. sum t (\\i. (f:B->A->real) i x)
       #|  (f:B->A->real) a
       #|  p:A prob_space
@@ -83714,7 +83714,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_rv (p:A prob_space) (\\x:A. sum t (\\i. (f:B->A->real) i x))
       #|  t:B->bool
       #|  a:B
-      #|  !p:A prob_space (f:B->A->real) s.\n    FINITE s /\\ (!i. i IN s ==> simple_rv p (f i))\n    ==> simple_expectation p (\\x. sum s (\\i. f i x)) =\n        sum s (\\i. simple_expectation p (f i))
+      #|  forall p:A prob_space (f:B->A->real) s.\n    FINITE s /\\ (forall i. i IN s ==> simple_rv p (f i))\n    ==> simple_expectation p (\\x. sum s (\\i. f i x)) =\n        sum s (\\i. simple_expectation p (f i))
       #|  v:real
       #|  v:real
       #|  RY:real->bool
@@ -83735,9 +83735,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  FINITE (RX:real->bool)
       #|  RY = IMAGE (Y:A->real) (prob_carrier p)
       #|  RX = IMAGE (X:A->real) (prob_carrier p)
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_expectation p (\\x. X x * Y x) =\n         sum (IMAGE X (prob_carrier p)) (\\u.\n           sum (IMAGE Y (prob_carrier p)) (\\v.\n             u * v * prob p {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v}))
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_expectation p (\\x. X x * Y x) =\n         sum (IMAGE X (prob_carrier p)) (\\u.\n           sum (IMAGE Y (prob_carrier p)) (\\v.\n             u * v * prob p {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v}))
       #|  (\\v:real. (u:real) * v *\n        prob (p:A prob_space) {z | z IN prob_carrier p /\\ X z = u} *\n        prob p {z | z IN prob_carrier p /\\ Y z = v}) =\n      (\\v. (u * prob p {z | z IN prob_carrier p /\\ X z = u}) *\n           (v * prob p {z | z IN prob_carrier p /\\ Y z = v}))
-      #|  !u:real. sum (RY:real->bool) (\\v:real. u * v *\n       prob (p:A prob_space) {z | z IN prob_carrier p /\\ X z = u} *\n       prob p {z | z IN prob_carrier p /\\ Y z = v}) =\n     (u * prob p {z | z IN prob_carrier p /\\ X z = u}) *\n     sum RY (\\v. v * prob p {z | z IN prob_carrier p /\\ Y z = v})
+      #|  forall u:real. sum (RY:real->bool) (\\v:real. u * v *\n       prob (p:A prob_space) {z | z IN prob_carrier p /\\ X z = u} *\n       prob p {z | z IN prob_carrier p /\\ Y z = v}) =\n     (u * prob p {z | z IN prob_carrier p /\\ X z = u}) *\n     sum RY (\\v. v * prob p {z | z IN prob_carrier p /\\ Y z = v})
       #|  v:real
       #|  u:real
       #|  sum (RX:real->bool) (\\u:real. sum (RY:real->bool) (\\v:real. u * v *\n       prob (p:A prob_space) {z | z IN prob_carrier p /\\ X z = u /\\ Y z = v})) =\n     sum RX (\\u. sum RY (\\v. u * v *\n       (prob p {z | z IN prob_carrier p /\\ X z = u} *\n        prob p {z | z IN prob_carrier p /\\ Y z = v})))
@@ -83746,7 +83746,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  FINITE (RX:real->bool)
       #|  RY = IMAGE (Y:A->real) (prob_carrier p)
       #|  RX = IMAGE (X:A->real) (prob_carrier p)
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n    simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> simple_expectation p (\\x. X x * Y x) =\n        simple_expectation p X * simple_expectation p Y
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n    simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> simple_expectation p (\\x. X x * Y x) =\n        simple_expectation p X * simple_expectation p Y
       #|  --(my:real)
       #|  X:A->real
       #|  p:A prob_space
@@ -83765,8 +83765,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. ((X:A->real) x - mx) * ((Y:A->real) x - my)) =\n     (\\x. X x * Y x + (-- mx) * Y x + (-- my) * X x + mx * my)
       #|  my = simple_expectation (p:A prob_space) (Y:A->real)
       #|  mx = simple_expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_covariance p X Y =\n         simple_expectation p (\\x. X x * Y x) -\n         simple_expectation p X * simple_expectation p Y
-      #|  !p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_covariance p X Y = &0
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_covariance p X Y =\n         simple_expectation p (\\x. X x * Y x) -\n         simple_expectation p X * simple_expectation p Y
+      #|  forall p:A prob_space (X:A->real) (Y:A->real).\n     simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n     ==> simple_covariance p X Y = &0
       #|  variance (p:A prob_space) (X:A->real) =\n   expectation p (\\x. (X x - expectation p X) pow 2)
       #|  char_fn_re (p:A prob_space) (X:A->real) (t:real) =\n   expectation p (\\x. cos(t * X x))
       #|  char_fn_im (p:A prob_space) (X:A->real) (t:real) =\n   expectation p (\\x. sin(t * X x))
@@ -83775,26 +83775,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  z:A
       #|  simple_expectation (p:A prob_space) g <=\n                simple_expectation p (\\x:A. M)
       #|  M:real
-      #|  !p:A prob_space f M.\n      random_variable p f /\\ (!x. x IN prob_carrier p ==> abs(f x) <= M)\n      ==> integrable p f
+      #|  forall p:A prob_space f M.\n      random_variable p f /\\ (forall x. x IN prob_carrier p ==> abs(f x) <= M)\n      ==> integrable p f
       #|  expectation (p:A prob_space) (\\x:A. ((X:A->real) x - expectation p X) pow 2) =\n                simple_expectation p (\\x. (X x - expectation p X) pow 2)
-      #|  !p:A prob_space X. simple_rv p X ==> variance p X = simple_variance p X
+      #|  forall p:A prob_space X. simple_rv p X ==> variance p X = simple_variance p X
       #|  (g':A->real) x' <= (g:A->real) x'
       #|  (f:A->real) x' = (g:A->real) x'
       #|  (g':A->real) x' <= (f:A->real) x'
       #|  (f:A->real) x' = (g:A->real) x'
       #|  g':A->real
-      #|  !p:A prob_space f g.\n    (!x. x IN prob_carrier p ==> f x = g x)\n    ==> nn_expectation p f = nn_expectation p g
+      #|  forall p:A prob_space f g.\n    (forall x. x IN prob_carrier p ==> f x = g x)\n    ==> nn_expectation p f = nn_expectation p g
       #|  nn_expectation (p:A prob_space) (\\x:A. &0) =\n    simple_expectation p (\\x:A. &0)
       #|  nn_expectation (p:A prob_space) (\\x:A. &0) = &0
       #|  B:real
       #|  nn_expectation (p:A prob_space) (\\x:A. &0) <= nn_expectation p f
-      #|  !p:A prob_space f.\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. !x. x IN prob_carrier p ==> f x <= B)\n    ==> &0 <= nn_expectation p f
+      #|  forall p:A prob_space f.\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. forall x. x IN prob_carrier p ==> f x <= B)\n    ==> &0 <= nn_expectation p f
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) =\n                nn_expectation p (\\x. max (--(g x)) (&0))
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x) (&0)) =\n                nn_expectation p (\\x. max (g x) (&0))
-      #|  !p:A prob_space f g.\n    (!x. x IN prob_carrier p ==> f x = g x)\n    ==> expectation p f = expectation p g
+      #|  forall p:A prob_space f g.\n    (forall x. x IN prob_carrier p ==> f x = g x)\n    ==> expectation p f = expectation p g
       #|  expectation (p:A prob_space) (\\x:A. c:real) =\n    simple_expectation p (\\x. c)
       #|  simple_rv (p:A prob_space) (\\x:A. c:real)
-      #|  !p:A prob_space c. expectation p (\\x. c) = c
+      #|  forall p:A prob_space c. expectation p (\\x. c) = c
       #|  (f:A->real) x
       #|  (f:A->real) x <= B /\\ &0 <= B
       #|  &0 <= (f:A->real) x
@@ -83807,61 +83807,61 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (g:A->real) z <= max (--((f:A->real) z)) (&0)
       #|  &0 <= (g:A->real) z
       #|  z:A
-      #|  !z:A. z IN prob_carrier p ==> (g:A->real) z = &0
+      #|  forall z:A. z IN prob_carrier p ==> (g:A->real) z = &0
       #|  v:real
-      #|  {simple_expectation (p:A prob_space) g | g |\n     simple_rv p g /\\\n     (!x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n     (!x. x IN prob_carrier p ==> g x <= max (--((f:A->real) x)) (&0))} = {&0}
+      #|  {simple_expectation (p:A prob_space) g | g |\n     simple_rv p g /\\\n     (forall x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n     (forall x. x IN prob_carrier p ==> g x <= max (--((f:A->real) x)) (&0))} = {&0}
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) = &0
-      #|  !p:A prob_space f.\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. !x. x IN prob_carrier p ==> f x <= B)\n    ==> &0 <= expectation p f
+      #|  forall p:A prob_space f.\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. forall x. x IN prob_carrier p ==> f x <= B)\n    ==> &0 <= expectation p f
       #|  variance (p:A prob_space) (X:A->real) = simple_variance p X
       #|  expectation (p:A prob_space) (X:A->real) = simple_expectation p X
-      #|  !p:A prob_space X t.\n    simple_rv p X /\\ &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\ abs(X x - expectation p X) >= t}\n        <= variance p X / t pow 2
+      #|  forall p:A prob_space X t.\n    simple_rv p X /\\ &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\ abs(X x - expectation p X) >= t}\n        <= variance p X / t pow 2
       #|  variance (p:A prob_space) ((X:num->A->real) n) =\n     simple_variance p (X n)
       #|  expectation (p:A prob_space) ((X:num->A->real) n) =\n     simple_expectation p (X n)
       #|  M:real
       #|  sigma_sq:real
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq M.\n    (!n. simple_rv p (X n)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0) /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq M.\n    (forall n. simple_rv p (X n)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> simple_covariance p (X i) (X j) = &0) /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
       #|  covariance (p:A prob_space) (X:A->real) (Y:A->real) =\n  expectation p (\\x. (X x - expectation p X) * (Y x - expectation p Y))
       #|  \\x:A. ((X:A->real) x - simple_expectation p X) *\n           ((Y:A->real) x - simple_expectation p Y)
       #|  p:A prob_space
       #|  expectation (p:A prob_space) Y = simple_expectation p Y
       #|  expectation (p:A prob_space) X = simple_expectation p X
-      #|  !p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y\n    ==> covariance p X Y = simple_covariance p X Y
+      #|  forall p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y\n    ==> covariance p X Y = simple_covariance p X Y
       #|  expectation (p:A prob_space) (\\x:A. X x * Y x) =\n    simple_expectation p (\\x. X x * Y x)
-      #|  !p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> expectation p (\\x. X x * Y x) =\n        expectation p X * expectation p Y
-      #|  !p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> covariance p X Y = &0
+      #|  forall p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> expectation p (\\x. X x * Y x) =\n        expectation p X * expectation p Y
+      #|  forall p:A prob_space X Y. simple_rv p X /\\ simple_rv p Y /\\ indep_rv p X Y\n    ==> covariance p X Y = &0
       #|  simple_rv (p:A prob_space) ((X:num->A->real) i) /\\\n                 simple_rv p (X j)
-      #|  !i j. i <= n /\\ j <= n /\\ ~(i = j)\n    ==> simple_covariance (p:A prob_space) ((X:num->A->real) i) (X j) = &0
+      #|  forall i j. i <= n /\\ j <= n /\\ ~(i = j)\n    ==> simple_covariance (p:A prob_space) ((X:num->A->real) i) (X j) = &0
       #|  variance (p:A prob_space) (\\x. sum (0..n) (\\i. X i x)) =\n                simple_variance p (\\x:A. sum (0..n) (\\i. X i x))
-      #|  !p:A prob_space X n.\n    (!(i:num). i <= n ==> simple_rv p (X i)) /\\\n    (!i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> variance p (\\x. sum (0..n) (\\i. X i x)) =\n        sum (0..n) (\\i. variance p (X i))
-      #|  !p:A prob_space X n.\n    (!(i:num). i <= n ==> simple_rv p (X i)) /\\\n    (!i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (!i. i <= n ==> variance p (X i) = variance p (X 0))\n    ==> variance p (\\x. sum (0..n) (\\i. X i x)) = &(SUC n) * variance p (X 0)
+      #|  forall p:A prob_space X n.\n    (forall(i:num). i <= n ==> simple_rv p (X i)) /\\\n    (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> variance p (\\x. sum (0..n) (\\i. X i x)) =\n        sum (0..n) (\\i. variance p (X i))
+      #|  forall p:A prob_space X n.\n    (forall(i:num). i <= n ==> simple_rv p (X i)) /\\\n    (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (forall i. i <= n ==> variance p (X i) = variance p (X 0))\n    ==> variance p (\\x. sum (0..n) (\\i. X i x)) = &(SUC n) * variance p (X 0)
       #|  converges_L2 (p:A prob_space) (X:num->A->real) (L:A->real) <=>\n   ((\\n. expectation p (\\x. (X n x - L x) pow 2)) ---> &0) sequentially
       #|  n:num
-      #|  !p:A prob_space X L. (!n. simple_rv p (X n)) /\\ simple_rv p L\n    ==> (converges_L2 p X L <=> simple_converges_L2 p X L)
+      #|  forall p:A prob_space X L. (forall n. simple_rv p (X n)) /\\ simple_rv p L\n    ==> (converges_L2 p X L <=> simple_converges_L2 p X L)
       #|  a <= &0 <=> &0 <= --a
       #|  c * x <= &0
       #|  &0 <= c * x
-      #|  !c x. &0 <= c ==> max (c * x) (&0) = c * max x (&0)
+      #|  forall c x. &0 <= c ==> max (c * x) (&0) = c * max x (&0)
       #|  \\n:num. simple_expectation (p:A prob_space) ((gn:num->A->real) n)
       #|  sequentially
       #|  ((\\n. c * simple_expectation (p:A prob_space) ((fn:num->A->real) n))\n    ---> c * nn_expectation p f) sequentially
       #|  (gn:num->A->real) n = (\\x:A. c * (fn:num->A->real) n x)
-      #|  !n. simple_expectation (p:A prob_space) ((gn:num->A->real) n) =\n    c * simple_expectation p ((fn:num->A->real) n)
+      #|  forall n. simple_expectation (p:A prob_space) ((gn:num->A->real) n) =\n    c * simple_expectation p ((fn:num->A->real) n)
       #|  x:A
       #|  c * B:real
       #|  ((\\n. simple_expectation (p:A prob_space) ((gn:num->A->real) n))\n    ---> nn_expectation p (\\x. c * f x)) sequentially
       #|  ((\\n. simple_expectation (p:A prob_space) ((fn:num->A->real) n))\n    ---> nn_expectation p f) sequentially
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. (gn:num->A->real) n x) ---> c * (f:A->real) x) sequentially
-      #|  !n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= gn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
-      #|  !n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
-      #|  !n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= fn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (fn:num->A->real) n x
-      #|  !n. simple_rv (p:A prob_space) ((fn:num->A->real) n)
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. (gn:num->A->real) n x) ---> c * (f:A->real) x) sequentially
+      #|  forall n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= gn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
+      #|  forall n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. (fn:num->A->real) n x) ---> (f:A->real) x) sequentially
+      #|  forall n x:A. x IN prob_carrier p ==> (fn:num->A->real) n x <= fn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (fn:num->A->real) n x
+      #|  forall n. simple_rv (p:A prob_space) ((fn:num->A->real) n)
       #|  gn = \\n:num. (\\x:A. c * (fn:num->A->real) n x)
       #|  fn = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (f:A->real) n
-      #|  !p:A prob_space c f.\n    &0 <= c /\\\n    random_variable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. !x. x IN prob_carrier p ==> f x <= B)\n    ==> nn_expectation p (\\x. c * f x) = c * nn_expectation p f
-      #|  !p:A prob_space f.\n    random_variable p f\n    ==> expectation p (\\x. --(f x)) = --(expectation p f)
+      #|  forall p:A prob_space c f.\n    &0 <= c /\\\n    random_variable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (?B. forall x. x IN prob_carrier p ==> f x <= B)\n    ==> nn_expectation p (\\x. c * f x) = c * nn_expectation p f
+      #|  forall p:A prob_space f.\n    random_variable p f\n    ==> expectation p (\\x. --(f x)) = --(expectation p f)
       #|  x:A
       #|  B:real
       #|  random_variable (p:A prob_space) (\\x:A. --((f:A->real) x))
@@ -83873,12 +83873,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space) (\\x. max (--(c * f x)) (&0)) =\n    nn_expectation p (\\x. c * max (--(f x)) (&0))
       #|  x:A
       #|  nn_expectation (p:A prob_space) (\\x. max (c * f x) (&0)) =\n    nn_expectation p (\\x. c * max (f x) (&0))
-      #|  !p:A prob_space c f.\n    &0 <= c /\\\n    random_variable p f /\\\n    (?B. !x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> expectation p (\\x. c * f x) = c * expectation p f
+      #|  forall p:A prob_space c f.\n    &0 <= c /\\\n    random_variable p f /\\\n    (?B. forall x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> expectation p (\\x. c * f x) = c * expectation p f
       #|  B:real
       #|  expectation (p:A prob_space) (\\x. --c * --((f:A->real) x)) =\n    --c * expectation p (\\x. --(f x))
       #|  expectation (p:A prob_space) (\\x. c * (f:A->real) x) =\n    expectation p (\\x. --c * --((f:A->real) x))
       #|  &0 <= c
-      #|  !p:A prob_space c f.\n    random_variable p f /\\\n    (?B. !x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> expectation p (\\x. c * f x) = c * expectation p f
+      #|  forall p:A prob_space c f.\n    random_variable p f /\\\n    (?B. forall x. x IN prob_carrier p ==> abs(f x) <= B)\n    ==> expectation p (\\x. c * f x) = c * expectation p f
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x + (g:A->real) x) (&0) +\n      (max (--((f:A->real) x)) (&0) + max (--((g:A->real) x)) (&0))) =\n     nn_expectation p (\\x. max (--((f:A->real) x + (g:A->real) x)) (&0) +\n      (max ((f:A->real) x) (&0) + max ((g:A->real) x) (&0)))
       #|  abs((g:A->real) x) <= Bg
       #|  abs((f:A->real) x) <= Bf
@@ -83904,7 +83904,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  abs((f:A->real) x) <= Bf
       #|  Bf:real
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) +\n     nn_expectation p (\\x. max (--((g:A->real) x)) (&0)) =\n     nn_expectation p (\\x. max (--(f x)) (&0) + max (--(g x)) (&0))
-      #|  !p:A prob_space f g.\n    random_variable p f /\\ random_variable p g /\\\n    (?Bf. !x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n    (?Bg. !x. x IN prob_carrier p ==> abs(g x) <= Bg)\n    ==> expectation p (\\x. f x + g x) = expectation p f + expectation p g
+      #|  forall p:A prob_space f g.\n    random_variable p f /\\ random_variable p g /\\\n    (?Bf. forall x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n    (?Bg. forall x. x IN prob_carrier p ==> abs(g x) <= Bg)\n    ==> expectation p (\\x. f x + g x) = expectation p f + expectation p g
       #|  abs((f:A->real) x) <= Bf
       #|  abs((g:A->real) x) <= Bg
       #|  Bg + Bf:real
@@ -83920,7 +83920,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  Bf:real
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x) (&0)) +\n     nn_expectation p (\\x. max (--((g:A->real) x)) (&0)) =\n     nn_expectation p (\\x. max (f x) (&0) + max (--(g x)) (&0))
       #|  a + d <= c + b ==> a - b <= c - d
-      #|  !p:A prob_space f g.\n    random_variable p f /\\ random_variable p g /\\\n    (?Bf. !x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n    (?Bg. !x. x IN prob_carrier p ==> abs(g x) <= Bg) /\\\n    (!x. x IN prob_carrier p ==> f x <= g x)\n    ==> expectation p f <= expectation p g
+      #|  forall p:A prob_space f g.\n    random_variable p f /\\ random_variable p g /\\\n    (?Bf. forall x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n    (?Bg. forall x. x IN prob_carrier p ==> abs(g x) <= Bg) /\\\n    (forall x. x IN prob_carrier p ==> f x <= g x)\n    ==> expectation p f <= expectation p g
       #|  abs((f:A->real) x) <= B
       #|  abs(B):real
       #|  B:real
@@ -83929,12 +83929,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  abs(B):real
       #|  expectation (p:A prob_space) (\\x:A. --B) <= expectation p f
-      #|  !p:A prob_space f B.\n   random_variable p f /\\\n   (!x. x IN prob_carrier p ==> abs(f x) <= B)\n   ==> abs(expectation p f) <= B
+      #|  forall p:A prob_space f B.\n   random_variable p f /\\\n   (forall x. x IN prob_carrier p ==> abs(f x) <= B)\n   ==> abs(expectation p f) <= B
       #|  Bg:real
       #|  Bf:real
       #|  expectation (p:A prob_space) (\\x:A. (f:A->real) x +\n    --((g:A->real) x)) = expectation p f + expectation p (\\x. --(g x))
       #|  (\\x:A. (f:A->real) x - (g:A->real) x) =\n    (\\x. f x + (--(g x)))
-      #|  !p:A prob_space f g.\n   random_variable p f /\\ random_variable p g /\\\n   (?Bf. !x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n   (?Bg. !x. x IN prob_carrier p ==> abs(g x) <= Bg)\n   ==> expectation p (\\x. f x - g x) = expectation p f - expectation p g
+      #|  forall p:A prob_space f g.\n   random_variable p f /\\ random_variable p g /\\\n   (?Bf. forall x. x IN prob_carrier p ==> abs(f x) <= Bf) /\\\n   (?Bg. forall x. x IN prob_carrier p ==> abs(g x) <= Bg)\n   ==> expectation p (\\x. f x - g x) = expectation p f - expectation p g
       #|  B:real
       #|  expectation (p:A prob_space) (\\x:A. c1 * (f:A->real) x) =\n    c1 * expectation p f
       #|  abs(c2)
@@ -83942,7 +83942,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  (\\x:A. c1 * (f:A->real) x)
       #|  (\\x:A. c2:real)
-      #|  !p:A prob_space c1 c2 f.\n   random_variable p f /\\\n   (?B. !x. x IN prob_carrier p ==> abs(f x) <= B)\n   ==> expectation p (\\x. c1 * f x + c2) = c1 * expectation p f + c2
+      #|  forall p:A prob_space c1 c2 f.\n   random_variable p f /\\\n   (?B. forall x. x IN prob_carrier p ==> abs(f x) <= B)\n   ==> expectation p (\\x. c1 * f x + c2) = c1 * expectation p f + c2
       #|  p:A prob_space
       #|  (\\x:A. -- inv(&2) * (X:A->real) x pow 2)
       #|  (\\x:A. -- inv(&2) * (Y:A->real) x pow 2)
@@ -83953,9 +83953,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. inv(&2) * ((X:A->real) x + (Y:A->real) x) pow 2)
       #|  (\\x:A. -- inv(&2) * (X:A->real) x pow 2 +\n                       -- inv(&2) * (Y:A->real) x pow 2)
       #|  (\\x:A. (X:A->real) x * (Y:A->real) x) =\n    (\\x. inv(&2) * (X x + Y x) pow 2 +\n         (-- inv(&2) * X x pow 2 + -- inv(&2) * Y x pow 2))
-      #|  !p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y\n   ==> random_variable p (\\x. X x * Y x)
-      #|  !p:A prob_space X Y. covariance p X Y = covariance p Y X
-      #|  !p:A prob_space X. covariance p X X = variance p X
+      #|  forall p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y\n   ==> random_variable p (\\x. X x * Y x)
+      #|  forall p:A prob_space X Y. covariance p X Y = covariance p Y X
+      #|  forall p:A prob_space X. covariance p X X = variance p X
       #|  Bx:real
       #|  expectation (p:A prob_space) (\\x:A. b' * (X:A->real) x) =\n    b' * expectation p X
       #|  abs(a) * abs(b')
@@ -83999,7 +83999,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  abs(a:real) <= Bx
       #|  b' = expectation (p:A prob_space) (Y:A->real)
       #|  a = expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. !x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. !x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> covariance p X Y =\n       expectation p (\\x. X x * Y x) - expectation p X * expectation p Y
+      #|  forall p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. forall x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. forall x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> covariance p X Y =\n       expectation p (\\x. X x * Y x) - expectation p X * expectation p Y
       #|  abs(u:real) <= B /\\ abs(v) <= B ==> abs(u - v) <= &2 * B
       #|  abs((Y:A->real) x) <= By
       #|  abs((X:A->real) x) <= Bx
@@ -84009,7 +84009,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. (a * (X:A->real) x - a * expectation p X) *\n    ((Y:A->real) x - expectation p Y)) =\n    (\\x. a * ((X x - expectation p X) * (Y x - expectation p Y)))
       #|  Bx:real
       #|  expectation (p:A prob_space) (\\x:A. a * (X:A->real) x) =\n    a * expectation p X
-      #|  !p:A prob_space X Y a.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. !x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. !x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> covariance p (\\x. a * X x) Y = a * covariance p X Y
+      #|  forall p:A prob_space X Y a.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. forall x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. forall x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> covariance p (\\x. a * X x) Y = a * covariance p X Y
       #|  (&2 * Bx) * (&2 * By)
       #|  &2 * (&2 * Bx) * (&2 * By)
       #|  (&2 * By) * (&2 * By)
@@ -84032,13 +84032,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. ((X:A->real) x - a) pow 2)
       #|  (\\x:A. ((Y:A->real) x - b') pow 2 +\n      &2 * ((X:A->real) x - a) * ((Y:A->real) x - b'))
       #|  abs(u:real) <= B /\\ abs(v) <= B ==> abs(u - v) <= &2 * B
-      #|  !x:A. x IN prob_carrier p ==>\n    abs(((X:A->real) x - a) * ((Y:A->real) x - b')) <=\n    (&2 * Bx) * (&2 * By)
+      #|  forall x:A. x IN prob_carrier p ==>\n    abs(((X:A->real) x - a) * ((Y:A->real) x - b')) <=\n    (&2 * Bx) * (&2 * By)
       #|  abs(u:real) <= B /\\ abs(v) <= B ==> abs(u - v) <= &2 * B
       #|  abs((Y:A->real) x - b') <= &2 * By
-      #|  !x:A. x IN prob_carrier p ==>\n    abs(((Y:A->real) x - b') pow 2) <= (&2 * By) * (&2 * By)
+      #|  forall x:A. x IN prob_carrier p ==>\n    abs(((Y:A->real) x - b') pow 2) <= (&2 * By) * (&2 * By)
       #|  abs(u:real) <= B /\\ abs(v) <= B ==> abs(u - v) <= &2 * B
       #|  abs((X:A->real) x - a) <= &2 * Bx
-      #|  !x:A. x IN prob_carrier p ==>\n    abs(((X:A->real) x - a) pow 2) <= (&2 * Bx) * (&2 * Bx)
+      #|  forall x:A. x IN prob_carrier p ==>\n    abs(((X:A->real) x - a) pow 2) <= (&2 * Bx) * (&2 * Bx)
       #|  random_variable (p:A prob_space)\n    (\\x:A. ((X:A->real) x - a) * ((Y:A->real) x - b'))
       #|  random_variable (p:A prob_space) (\\x:A. ((Y:A->real) x - b') pow 2)
       #|  random_variable (p:A prob_space) (\\x:A. ((X:A->real) x - a) pow 2)
@@ -84050,19 +84050,19 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  abs(a:real) <= Bx
       #|  b' = expectation (p:A prob_space) (Y:A->real)
       #|  a = expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. !x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. !x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> variance p (\\x. X x + Y x) =\n       variance p X + variance p Y + &2 * covariance p X Y
+      #|  forall p:A prob_space X Y.\n   random_variable p X /\\ random_variable p Y /\\\n   (?Bx. forall x. x IN prob_carrier p ==> abs(X x) <= Bx) /\\\n   (?By. forall x. x IN prob_carrier p ==> abs(Y x) <= By)\n   ==> variance p (\\x. X x + Y x) =\n       variance p X + variance p Y + &2 * covariance p X Y
       #|  (\\x:A. min ((X:A->real) x) ((Y:A->real) x)) =\n                (\\x. inv(&2) * ((X x + Y x) - abs(X x - Y x)))
-      #|  !p:A prob_space X Y.\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_rv p (\\x. min (X x) (Y x))
+      #|  forall p:A prob_space X Y.\n     simple_rv p X /\\ simple_rv p Y\n     ==> simple_rv p (\\x. min (X x) (Y x))
       #|  &0 <= x ==> x <= abs x
       #|  (f:A->real) z
       #|  z:A
       #|  B:real
-      #|  !p:A prob_space f.\n     integrable p f /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x)\n     ==> ?B. !g. simple_rv p g /\\\n                  (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n                  (!x. x IN prob_carrier p ==> g x <= f x)\n                  ==> simple_expectation p g <= B
+      #|  forall p:A prob_space f.\n     integrable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x)\n     ==> ?B. forall g. simple_rv p g /\\\n                  (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n                  (forall x. x IN prob_carrier p ==> g x <= f x)\n                  ==> simple_expectation p g <= B
       #|  B:real
       #|  B:real
       #|  f:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space f.\n     integrable p f /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x)\n     ==> ?B. nn_expectation p f <= B
+      #|  forall p:A prob_space f.\n     integrable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x)\n     ==> ?B. nn_expectation p f <= B
       #|  h':A->real
       #|  v:real
       #|  h:A->real
@@ -84071,7 +84071,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  f:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space h f.\n     simple_rv p h /\\\n     (!x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (!x. x IN prob_carrier p ==> h x <= f x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> simple_expectation p h <= nn_expectation p f
+      #|  forall p:A prob_space h f.\n     simple_rv p h /\\\n     (forall x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (forall x. x IN prob_carrier p ==> h x <= f x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> simple_expectation p h <= nn_expectation p f
       #|  h:A->real
       #|  v:real
       #|  B:real
@@ -84083,7 +84083,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  h:A->real
       #|  h:A->real
       #|  v:real
-      #|  !p:A prob_space f g.\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (!x. x IN prob_carrier p ==> f x <= g x) /\\\n     integrable p g\n     ==> nn_expectation p f <= nn_expectation p g
+      #|  forall p:A prob_space f g.\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (forall x. x IN prob_carrier p ==> f x <= g x) /\\\n     integrable p g\n     ==> nn_expectation p f <= nn_expectation p g
       #|  a + b <= c ==> a <= c - b
       #|  h1:A->real
       #|  nn_expectation (p:A prob_space) (f:A->real) <=\n     nn_expectation p (fg:A->real) - nn_expectation p g
@@ -84096,7 +84096,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  h2:A->real
       #|  nn_expectation (p:A prob_space) (g:A->real) <=\n      nn_expectation p (fg:A->real) -\n      simple_expectation p (h1:A->real)
       #|  h1:A->real
-      #|  !h1:A->real. simple_rv p h1 /\\\n     (!x. x IN prob_carrier p ==> &0 <= h1 x) /\\\n     (!x. x IN prob_carrier p ==> h1 x <= (f:A->real) x)\n     ==> simple_expectation p h1 + nn_expectation p g <=\n         nn_expectation p (fg:A->real)
+      #|  forall h1:A->real. simple_rv p h1 /\\\n     (forall x. x IN prob_carrier p ==> &0 <= h1 x) /\\\n     (forall x. x IN prob_carrier p ==> h1 x <= (f:A->real) x)\n     ==> simple_expectation p h1 + nn_expectation p g <=\n         nn_expectation p (fg:A->real)
       #|  a <= b /\\ b <= a ==> a = b
       #|  nn_expectation (p:A prob_space) (\\x. min ((f:A->real) x) M) +\n     nn_expectation p (\\x. min ((g:A->real) x) M)
       #|  M:real
@@ -84106,38 +84106,38 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (h:A->real) x <= M /\\\n       (h:A->real) x <= (f:A->real) x + (g:A->real) x /\\\n       &0 <= (f:A->real) x /\\ &0 <= (g:A->real) x
       #|  simple_expectation (p:A prob_space) h <=\n     nn_expectation p (\\x:A. min ((f:A->real) x) M + min ((g:A->real) x) M)
       #|  x <= M0 ==> x <= max M0 (&0)
-      #|  !x:A. x IN prob_carrier p ==> (h:A->real) x <= M
+      #|  forall x:A. x IN prob_carrier p ==> (h:A->real) x <= M
       #|  &0 <= M
       #|  M = max (M0:real) (&0)
       #|  M0:real
       #|  h:A->real
       #|  p:A prob_space
       #|  (h:A->real) x <= (fg:A->real) x
-      #|  !x:A. x IN prob_carrier p ==>\n     (h:A->real) x <= (f:A->real) x + (g:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==>\n     (h:A->real) x <= (f:A->real) x + (g:A->real) x
       #|  h:A->real
-      #|  !h:A->real. simple_rv p h /\\\n     (!x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (!x. x IN prob_carrier p ==> h x <= (fg:A->real) x)\n     ==> simple_expectation p h <=\n         nn_expectation p f + nn_expectation p g
+      #|  forall h:A->real. simple_rv p h /\\\n     (forall x. x IN prob_carrier p ==> &0 <= h x) /\\\n     (forall x. x IN prob_carrier p ==> h x <= (fg:A->real) x)\n     ==> simple_expectation p h <=\n         nn_expectation p f + nn_expectation p g
       #|  fg = \\x:A. (f:A->real) x + (g:A->real) x
-      #|  !p:A prob_space f g.\n     random_variable p f /\\\n     random_variable p g /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     integrable p f /\\\n     integrable p g\n     ==> nn_expectation p (\\x. f x + g x) =\n         nn_expectation p f + nn_expectation p g
+      #|  forall p:A prob_space f g.\n     random_variable p f /\\\n     random_variable p g /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     integrable p f /\\\n     integrable p g\n     ==> nn_expectation p (\\x. f x + g x) =\n         nn_expectation p f + nn_expectation p g
       #|  (g':A->real) z <= abs((\\x:A. abs((f:A->real) x)) z)
       #|  z:A
       #|  g':A->real
       #|  B:real
-      #|  !p:A prob_space f.\n     integrable p f ==> integrable p (\\x. abs(f x))
+      #|  forall p:A prob_space f.\n     integrable p f ==> integrable p (\\x. abs(f x))
       #|  (g':A->real) z <= abs((\\x:A. --((f:A->real) x)) z)
       #|  z:A
       #|  g':A->real
       #|  B:real
-      #|  !p:A prob_space f.\n     integrable p f ==> integrable p (\\x. --(f x))
+      #|  forall p:A prob_space f.\n     integrable p f ==> integrable p (\\x. --(f x))
       #|  (g':A->real) z <= abs((\\x:A. max ((f:A->real) x) (&0)) z)
       #|  z:A
       #|  g':A->real
       #|  B:real
-      #|  !p:A prob_space f.\n     integrable p f ==> integrable p (\\x. max (f x) (&0))
+      #|  forall p:A prob_space f.\n     integrable p f ==> integrable p (\\x. max (f x) (&0))
       #|  (g':A->real) z <= abs((\\x:A. max (--((f:A->real) x)) (&0)) z)
       #|  z:A
       #|  g':A->real
       #|  B:real
-      #|  !p:A prob_space f.\n     integrable p f ==> integrable p (\\x. max (--(f x)) (&0))
+      #|  forall p:A prob_space f.\n     integrable p f ==> integrable p (\\x. max (--(f x)) (&0))
       #|  inv(abs(c:real)) * abs c = &1
       #|  inv(abs(c:real)) * (abs c * abs((f:A->real) z)) = abs(f z)
       #|  inv(abs c) * (g':A->real) z <= inv(abs c) * (abs c * abs((f:A->real) z))
@@ -84151,7 +84151,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  abs(c) * B
       #|  ~(abs(c:real) = &0)
       #|  c = &0
-      #|  !p:A prob_space c f.\n     integrable p f ==> integrable p (\\x. c * f x)
+      #|  forall p:A prob_space c f.\n     integrable p f ==> integrable p (\\x. c * f x)
       #|  nn_expectation (p:A prob_space) (gM:A->real) <=\n    nn_expectation p (\\x:A. abs((g:A->real) x))
       #|  nn_expectation (p:A prob_space) (fM:A->real) <=\n    nn_expectation p (\\x:A. abs((f:A->real) x))
       #|  M:real
@@ -84161,18 +84161,18 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_expectation (p:A prob_space) (h:A->real) <=\n    nn_expectation p (\\x:A. (fM:A->real) x + (gM:A->real) x)
       #|  random_variable (p:A prob_space) (gM:A->real)
       #|  random_variable (p:A prob_space) (fM:A->real)
-      #|  !x:A. x IN prob_carrier p ==> (gM:A->real) x <= M
-      #|  !x:A. x IN prob_carrier p ==> (fM:A->real) x <= M
-      #|  !x:A. x IN prob_carrier p ==> &0 <= (gM:A->real) x
-      #|  !x:A. x IN prob_carrier p ==> &0 <= (fM:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> (gM:A->real) x <= M
+      #|  forall x:A. x IN prob_carrier p ==> (fM:A->real) x <= M
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= (gM:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= (fM:A->real) x
       #|  (h:A->real) x <= M
       #|  (h:A->real) x <= abs((f:A->real) x + (g:A->real) x)
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n    (h:A->real) x <= (fM:A->real) x + (gM:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==>\n    (h:A->real) x <= (fM:A->real) x + (gM:A->real) x
       #|  gM = \\x:A. min (abs((g:A->real) x)) M
       #|  fM = \\x:A. min (abs((f:A->real) x)) M
       #|  x <= M0 ==> x <= max M0 (&0)
-      #|  !x:A. x IN prob_carrier p ==> (h:A->real) x <= M
+      #|  forall x:A. x IN prob_carrier p ==> (h:A->real) x <= M
       #|  &0 <= M
       #|  M = max M0 (&0)
       #|  M0:real
@@ -84188,7 +84188,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  integrable (p:A prob_space) (\\x. abs((g:A->real) x))
       #|  integrable (p:A prob_space) (\\x. abs((f:A->real) x))
-      #|  !p:A prob_space f g.\n     integrable p f /\\ integrable p g\n     ==> integrable p (\\x. f x + g x)
+      #|  forall p:A prob_space f g.\n     integrable p f /\\ integrable p g\n     ==> integrable p (\\x. f x + g x)
       #|  simple_expectation (p:A prob_space) g
       #|  B:real
       #|  simple_expectation (p:A prob_space) g
@@ -84196,11 +84196,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 <= f ==> f <= abs f
       #|  (f:A->real) x
       #|  y:real
-      #|  !y:real. y IN S ==> y <= B
-      #|  S = {simple_expectation (p:A prob_space) g' | g' |\n    simple_rv p g' /\\ (!x. x IN prob_carrier p ==> &0 <= g' x) /\\\n    (!x. x IN prob_carrier p ==> g' x <= (f:A->real) x)}
+      #|  forall y:real. y IN S ==> y <= B
+      #|  S = {simple_expectation (p:A prob_space) g' | g' |\n    simple_rv p g' /\\ (forall x. x IN prob_carrier p ==> &0 <= g' x) /\\\n    (forall x. x IN prob_carrier p ==> g' x <= (f:A->real) x)}
       #|  g:A->real
-      #|  simple_expectation (p:A prob_space) (g:A->real) IN\n    {simple_expectation p g' | g' | simple_rv p g' /\\\n     (!x. x IN prob_carrier p ==> &0 <= g' x) /\\\n     (!x. x IN prob_carrier p ==> g' x <= (f:A->real) x)}
-      #|  !p:A prob_space g f.\n   simple_rv p g /\\\n   (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n   (!x. x IN prob_carrier p ==> g x <= f x) /\\\n   integrable p f /\\\n   (!x. x IN prob_carrier p ==> &0 <= f x)\n   ==> simple_expectation p g <= nn_expectation p f
+      #|  simple_expectation (p:A prob_space) (g:A->real) IN\n    {simple_expectation p g' | g' | simple_rv p g' /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g' x) /\\\n     (forall x. x IN prob_carrier p ==> g' x <= (f:A->real) x)}
+      #|  forall p:A prob_space g f.\n   simple_rv p g /\\\n   (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n   (forall x. x IN prob_carrier p ==> g x <= f x) /\\\n   integrable p f /\\\n   (forall x. x IN prob_carrier p ==> &0 <= f x)\n   ==> simple_expectation p g <= nn_expectation p f
       #|  c * inv(c:real) = &1
       #|  c * nn_expectation (p:A prob_space) (f:A->real) <=\n      c * (inv(c) * nn_expectation p (\\x:A. c * f x))
       #|  inv(c:real) * c = &1
@@ -84222,7 +84222,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < c
       #|  nn_expectation (p:A prob_space) (\\x:A. &0) =\n     simple_expectation p (\\x:A. &0)
       #|  c = &0
-      #|  !p:A prob_space c f.\n     &0 <= c /\\\n     integrable p f /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x)\n     ==> nn_expectation p (\\x. c * f x) = c * nn_expectation p f
+      #|  forall p:A prob_space c f.\n     &0 <= c /\\\n     integrable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x)\n     ==> nn_expectation p (\\x. c * f x) = c * nn_expectation p f
       #|  (\\x:A. c * (f:A->real) x) = (\\x. --(--c * f x))
       #|  random_variable (p:A prob_space) (\\x:A. --c * (f:A->real) x)
       #|  &0 <= --c
@@ -84246,13 +84246,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  nn_expectation (p:A prob_space) (\\x. max (d * (f:A->real) x) (&0)) =\n     nn_expectation p (\\x. d * max (f x) (&0))
       #|  d:real
-      #|  !d. &0 <= d ==>\n    expectation (p:A prob_space) (\\x:A. d * (f:A->real) x) = d * expectation p f
-      #|  !p:A prob_space c f. integrable p f\n    ==> expectation p (\\x. c * f x) = c * expectation p f
+      #|  forall d. &0 <= d ==>\n    expectation (p:A prob_space) (\\x:A. d * (f:A->real) x) = d * expectation p f
+      #|  forall p:A prob_space c f. integrable p f\n    ==> expectation p (\\x. c * f x) = c * expectation p f
       #|  -- &1 * x = --x
       #|  f:A->real
       #|  -- &1
       #|  p:A prob_space
-      #|  !p:A prob_space f.\n    integrable p f\n    ==> expectation p (\\x. --(f x)) = --(expectation p f)
+      #|  forall p:A prob_space f.\n    integrable p f\n    ==> expectation p (\\x. --(f x)) = --(expectation p f)
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x + (g:A->real) x) (&0) +\n      max (--((f:A->real) x)) (&0) + max (--((g:A->real) x)) (&0)) =\n     nn_expectation p (\\x. max (--((f:A->real) x + (g:A->real) x)) (&0) +\n      max ((f:A->real) x) (&0) + max ((g:A->real) x) (&0))
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x + (g:A->real) x)) (&0)) +\n     nn_expectation p (\\x. max (f x) (&0) + max (g x) (&0)) =\n     nn_expectation p (\\x. max (--(f x + g x)) (&0) + (max (f x) (&0) + max (g x) (&0)))
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x + (g:A->real) x) (&0)) +\n     nn_expectation p (\\x. max (--(f x)) (&0) + max (--(g x)) (&0)) =\n     nn_expectation p (\\x. max (f x + g x) (&0) + (max (--(f x)) (&0) + max (--(g x)) (&0)))
@@ -84267,7 +84267,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space) (\\x:A. max (--((f:A->real) x)) (&0))
       #|  integrable (p:A prob_space) (\\x:A. max ((f:A->real) x) (&0))
       #|  integrable (p:A prob_space) (\\x:A. (f:A->real) x + (g:A->real) x)
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> expectation p (\\x. f x + g x) = expectation p f + expectation p g
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> expectation p (\\x. f x + g x) = expectation p f + expectation p g
       #|  simple_expectation (p:A prob_space) (\\x:A. &0) <= nn_expectation p (f:A->real)
       #|  &0 <= f ==> max f (&0) = f
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x) (&0)) =\n    nn_expectation p f
@@ -84276,7 +84276,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 <= f ==> max (--f) (&0) = &0
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) =\n    nn_expectation p (\\x:A. &0)
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) =\n    &0
-      #|  !p:A prob_space f.\n    integrable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> &0 <= expectation p f
+      #|  forall p:A prob_space f.\n    integrable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> &0 <= expectation p f
       #|  \\x:A. --((f:A->real) x)
       #|  g:A->real
       #|  p:A prob_space
@@ -84285,36 +84285,36 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (f:A->real) x <= (g:A->real) x
       #|  (\\x:A. (g:A->real) x - (f:A->real) x) = (\\x. g x + --(f x))
       #|  &0 <= expectation (p:A prob_space) (\\x:A. (g:A->real) x - (f:A->real) x)
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g /\\\n    (!x. x IN prob_carrier p ==> f x <= g x)\n    ==> expectation p f <= expectation p g
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g /\\\n    (forall x. x IN prob_carrier p ==> f x <= g x)\n    ==> expectation p f <= expectation p g
       #|  \\x:A. --((g:A->real) x)
       #|  f:A->real
       #|  p:A prob_space
       #|  (\\x:A. (f:A->real) x - (g:A->real) x) = (\\x. f x + --(g x))
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> expectation p (\\x. f x - g x) = expectation p f - expectation p g
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> expectation p (\\x. f x - g x) = expectation p f - expectation p g
       #|  expectation (p:A prob_space) (\\x:A. --(abs((f:A->real) x))) <=\n     expectation p f
-      #|  !p:A prob_space f.\n    integrable p f\n    ==> abs(expectation p f) <= expectation p (\\x. abs(f x))
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. f x - g x)
+      #|  forall p:A prob_space f.\n    integrable p f\n    ==> abs(expectation p f) <= expectation p (\\x. abs(f x))
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. f x - g x)
       #|  x:A
       #|  abs c
-      #|  !p:A prob_space c. integrable p (\\x:A. c)
+      #|  forall p:A prob_space c. integrable p (\\x:A. c)
       #|  (x:A) IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ (f:A->real) x > a} =\n    prob_carrier p DIFF {x | x IN prob_carrier p /\\ f x <= a}
-      #|  !p:A prob_space f a.\n    random_variable p f\n    ==> {x | x IN prob_carrier p /\\ f x > a} IN prob_events p
-      #|  !x a:real. x < a <=> --x > --a
+      #|  forall p:A prob_space f a.\n    random_variable p f\n    ==> {x | x IN prob_carrier p /\\ f x > a} IN prob_events p
+      #|  forall x a:real. x < a <=> --x > --a
       #|  {x:A | x IN prob_carrier p /\\ (f:A->real) x < a} =\n     {x | x IN prob_carrier p /\\ (\\x. --(f x)) x > --a}
-      #|  !x a:real. x >= a <=> ~(x < a)
+      #|  forall x a:real. x >= a <=> ~(x < a)
       #|  {x:A | x IN prob_carrier p /\\ f x >= a} =\n    prob_carrier p DIFF {x | x IN prob_carrier p /\\ (f:A->real) x < a}
-      #|  !p:A prob_space f a.\n    random_variable p f\n    ==> {x | x IN prob_carrier p /\\ f x >= a} IN prob_events p
+      #|  forall p:A prob_space f a.\n    random_variable p f\n    ==> {x | x IN prob_carrier p /\\ f x >= a} IN prob_events p
       #|  a:A->bool
       #|  p:A prob_space
       #|  &1
-      #|  !p:A prob_space a. a IN prob_events p ==> integrable p (indicator_fn a)
+      #|  forall p:A prob_space a. a IN prob_events p ==> integrable p (indicator_fn a)
       #|  expectation (p:A prob_space) (indicator_fn (a:A->bool)) =\n    simple_expectation p (indicator_fn a)
-      #|  !p:A prob_space a. a IN prob_events p\n    ==> expectation p (indicator_fn a) = prob p a
-      #|  !p:A prob_space c. variance p (\\x:A. c) = &0
+      #|  forall p:A prob_space a. a IN prob_events p\n    ==> expectation p (indicator_fn a) = prob p a
+      #|  forall p:A prob_space c. variance p (\\x:A. c) = &0
       #|  simple_variance (p:A prob_space) (\\x:A. c:real) =\n                variance p (\\x. c)
-      #|  !p:A prob_space c. simple_variance p (\\x. c) = &0
-      #|  !p:A prob_space f. integrable p (\\x. (f x - expectation p f) pow 2)\n    ==> &0 <= variance p f
+      #|  forall p:A prob_space c. simple_variance p (\\x. c) = &0
+      #|  forall p:A prob_space f. integrable p (\\x. (f x - expectation p f) pow 2)\n    ==> &0 <= variance p f
       #|  expectation (p:A prob_space) (\\x:A. (&2 * mu) * (f:A->real) x) = (&2 * mu) * expectation p f
       #|  (\\x:A. &2 * mu * (f:A->real) x) = (\\x. (&2 * mu) * f x)
       #|  expectation (p:A prob_space) (\\x:A. &2 * mu * (f:A->real) x) =\n    &2 * mu * expectation p f
@@ -84329,7 +84329,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space) (\\x:A. &2 * mu * (f:A->real) x)
       #|  (\\x:A. ((f:A->real) x - mu) pow 2) = (\\x. f x pow 2 - &2 * mu * f x + mu pow 2)
       #|  mu = expectation (p:A prob_space) f
-      #|  !p:A prob_space f.\n    integrable p f /\\ integrable p (\\x. (f x) pow 2)\n    ==> variance p f = expectation p (\\x. (f x) pow 2) - (expectation p f) pow 2
+      #|  forall p:A prob_space f.\n    integrable p f /\\ integrable p (\\x. (f x) pow 2)\n    ==> variance p f = expectation p (\\x. (f x) pow 2) - (expectation p f) pow 2
       #|  expectation (p:A prob_space) (\\x:A. c pow 2 * ((f:A->real) x - mu) pow 2) =\n    c pow 2 * expectation p (\\x. (f x - mu) pow 2)
       #|  (\\x:A. ((f:A->real) x - mu) pow 2) =\n    (\\x. f x pow 2 + (--(&2 * mu) * f x + mu pow 2))
       #|  integrable (p:A prob_space) (\\x:A. ((f:A->real) x - mu) pow 2)
@@ -84337,23 +84337,23 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  expectation (p:A prob_space) (\\x:A. c * (f:A->real) x) = c * expectation p f
       #|  expectation (p:A prob_space) (\\x:A. c * (f:A->real) x) = c * mu
       #|  mu = expectation (p:A prob_space) f
-      #|  !p:A prob_space c f.\n    integrable p f /\\ integrable p (\\x. (f x) pow 2)\n    ==> variance p (\\x. c * f x) = c pow 2 * variance p f
+      #|  forall p:A prob_space c f.\n    integrable p f /\\ integrable p (\\x. (f x) pow 2)\n    ==> variance p (\\x. c * f x) = c pow 2 * variance p f
       #|  x:A
       #|  (\\x:A. (((f:A->real) x + c) - (expectation p f + c)) pow 2) =\n    (\\x. (f x - expectation p f) pow 2)
       #|  expectation (p:A prob_space) (\\x:A. (f:A->real) x + (\\x:A. c) x) =\n     expectation p f + expectation p (\\x:A. c)
       #|  (\\x:A. (f:A->real) x + c) = (\\x. f x + (\\x:A. c) x)
       #|  expectation (p:A prob_space) (\\x:A. (f:A->real) x + c) =\n    expectation p f + c
-      #|  !p:A prob_space c f.\n    integrable p f\n    ==> variance p (\\x. f x + c) = variance p f
+      #|  forall p:A prob_space c f.\n    integrable p f\n    ==> variance p (\\x. f x + c) = variance p f
       #|  expectation (p:A prob_space) (\\x:A. a * indicator_fn S x) = a * expectation p (indicator_fn S)
       #|  a * prob p (S:A->bool) = expectation (p:A prob_space) (\\x. a * indicator_fn S x)
       #|  x IN (S:A->bool)
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==> a * indicator_fn S x <= (f:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> a * indicator_fn S x <= (f:A->real) x
       #|  integrable (p:A prob_space) (indicator_fn S)
       #|  integrable (p:A prob_space) f
       #|  (S:A->bool) IN prob_events p
       #|  S = {x:A | x IN prob_carrier p /\\ f x > a}
-      #|  !p:A prob_space f a.\n    integrable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    &0 < a\n    ==> prob p {x | x IN prob_carrier p /\\ f x > a} <=\n        expectation p f / a
+      #|  forall p:A prob_space f a.\n    integrable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    &0 < a\n    ==> prob p {x | x IN prob_carrier p /\\ f x > a} <=\n        expectation p f / a
       #|  &0 < t pow 2
       #|  &0 < t
       #|  abs((X:A->real) x - mu) >= t
@@ -84368,22 +84368,22 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  variance (p:A prob_space) X / t pow 2 =\n    expectation p (\\x:A. ((X x - mu) pow 2) / t pow 2)
       #|  prob p (S:A->bool) = expectation (p:A prob_space) (indicator_fn S)
       #|  integrable (p:A prob_space) (indicator_fn S)
-      #|  !x t:real. abs x >= t <=> x >= t \\/ --x >= t
+      #|  forall x t:real. abs x >= t <=> x >= t \\/ --x >= t
       #|  {x:A | x IN prob_carrier p /\\ abs((X:A->real) x - mu) >= t} =\n     {x | x IN prob_carrier p /\\ X x - mu >= t} UNION\n     {x | x IN prob_carrier p /\\ --(X x - mu) >= t}
       #|  (S:A->bool) IN prob_events p
       #|  integrable (p:A prob_space) X
       #|  random_variable (p:A prob_space) X
       #|  S = {x:A | x IN prob_carrier p /\\ abs(X x - mu) >= t}
       #|  mu = expectation (p:A prob_space) X
-      #|  !p:A prob_space X t.\n    integrable p X /\\\n    integrable p (\\x. (X x - expectation p X) pow 2) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\ abs(X x - expectation p X) >= t} <=\n        variance p X / t pow 2
+      #|  forall p:A prob_space X t.\n    integrable p X /\\\n    integrable p (\\x. (X x - expectation p X) pow 2) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\ abs(X x - expectation p X) >= t} <=\n        variance p X / t pow 2
       #|  (\\x:A. (X:num->A->real) (SUC n) x) = X (SUC n)
       #|  (\\x:A. sum(0..SUC n) (\\i. (X:num->A->real) i x)) =\n     (\\x. sum(0..n) (\\i. X i x) + X (SUC n) x)
       #|  0
-      #|  !p:A prob_space X n.\n    (!i. i <= n ==> simple_rv p (X i))\n    ==> simple_rv p (\\x. sum(0..n) (\\i. X i x))
+      #|  forall p:A prob_space X n.\n    (forall i. i <= n ==> simple_rv p (X i))\n    ==> simple_rv p (\\x. sum(0..n) (\\i. X i x))
       #|  (\\x:A. (X:num->A->real) (SUC n) x) = X (SUC n)
       #|  (\\x:A. sum(0..SUC n) (\\i. (X:num->A->real) i x)) =\n     (\\x. sum(0..n) (\\i. X i x) + X (SUC n) x)
       #|  0
-      #|  !p:A prob_space X n.\n    (!i. i <= n ==> integrable p (X i))\n    ==> integrable p (\\x. sum(0..n) (\\i. X i x))
+      #|  forall p:A prob_space X n.\n    (forall i. i <= n ==> integrable p (X i))\n    ==> integrable p (\\x. sum(0..n) (\\i. X i x))
       #|  expectation (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) =\n     sum(0..n) (\\i. expectation p (X i))
       #|  (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) + X (SUC n) x) =\n     (\\x. (\\x. sum(0..n) (\\i. X i x)) x + (X (SUC n)) x)
       #|  expectation (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) + X (SUC n) x) =\n     expectation p (\\x. sum(0..n) (\\i. X i x)) + expectation p (X (SUC n))
@@ -84392,26 +84392,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. sum(0..SUC n) (\\i. (X:num->A->real) i x)) =\n     (\\x. sum(0..n) (\\i. X i x) + X (SUC n) x)
       #|  (\\x:A. (X:num->A->real) 0 x) = X 0
       #|  0
-      #|  !p:A prob_space X n.\n    (!i. i <= n ==> integrable p (X i))\n    ==> expectation p (\\x. sum(0..n) (\\i. X i x)) =\n        sum(0..n) (\\i. expectation p (X i))
+      #|  forall p:A prob_space X n.\n    (forall i. i <= n ==> integrable p (X i))\n    ==> expectation p (\\x. sum(0..n) (\\i. X i x)) =\n        sum(0..n) (\\i. expectation p (X i))
       #|  abs y * abs y = y pow 2
       #|  abs x * abs x = x pow 2
       #|  &0 <= (abs x - abs y) pow 2
-      #|  !x y:real. abs(x * y) <= inv(&2) * (x pow 2 + y pow 2)
+      #|  forall x y:real. abs(x * y) <= inv(&2) * (x pow 2 + y pow 2)
       #|  abs((f:A->real) z)
       #|  z:A
       #|  B:real
-      #|  !p:A prob_space f h.\n     random_variable p f /\\ integrable p h /\\\n     (!x. x IN prob_carrier p ==> abs(f x) <= abs(h x))\n     ==> integrable p f
+      #|  forall p:A prob_space f h.\n     random_variable p f /\\ integrable p h /\\\n     (forall x. x IN prob_carrier p ==> abs(f x) <= abs(h x))\n     ==> integrable p f
       #|  &0 <= x ==> x <= abs x
       #|  inv(&2) * ((X:A->real) x pow 2 + (Y:A->real) x pow 2)
       #|  x:A
       #|  \\x:A. inv(&2) * ((X:A->real) x pow 2 + (Y:A->real) x pow 2)
-      #|  !p:A prob_space X Y.\n     random_variable p X /\\ random_variable p Y /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2)\n     ==> integrable p (\\x. X x * Y x)
+      #|  forall p:A prob_space X Y.\n     random_variable p X /\\ random_variable p Y /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2)\n     ==> integrable p (\\x. X x * Y x)
       #|  (\\x:A. ((X:A->real) x - a) * ((Y:A->real) x - b)) =\n    (\\x. X x * Y x + ((--a) * Y x + ((--b) * X x + a * b)))
       #|  integrable (p:A prob_space)\n    (\\x:A. (--a) * (Y:A->real) x + ((--b) * (X:A->real) x + a * b))
       #|  integrable (p:A prob_space) (\\x:A. (--b) * (X:A->real) x + a * b)
       #|  b = expectation (p:A prob_space) (Y:A->real)
       #|  a = expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X Y.\n     integrable p X /\\ integrable p Y /\\ integrable p (\\x. X x * Y x)\n     ==> covariance p X Y =\n         expectation p (\\x. X x * Y x) - expectation p X * expectation p Y
+      #|  forall p:A prob_space X Y.\n     integrable p X /\\ integrable p Y /\\ integrable p (\\x. X x * Y x)\n     ==> covariance p X Y =\n         expectation p (\\x. X x * Y x) - expectation p X * expectation p Y
       #|  (\\x:A. ((X:A->real) x + (Y:A->real) x) * (Z:A->real) x) =\n    (\\x. X x * Z x + Y x * Z x)
       #|  expectation (p:A prob_space) (\\x:A. ((X:A->real) x + (Y:A->real) x) * (Z:A->real) x) =\n    expectation p (\\x. X x * Z x) + expectation p (\\x. Y x * Z x)
       #|  (\\x:A. ((X:A->real) x + (Y:A->real) x) * (Z:A->real) x) =\n    (\\x. X x * Z x + Y x * Z x)
@@ -84419,7 +84419,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space) (\\x:A. (X:A->real) x + (Y:A->real) x)
       #|  integrable (p:A prob_space) (\\x:A. (Y:A->real) x * (Z:A->real) x)
       #|  integrable (p:A prob_space) (\\x:A. (X:A->real) x * (Z:A->real) x)
-      #|  !p:A prob_space X Y Z.\n     integrable p X /\\ integrable p Y /\\ integrable p Z /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2) /\\\n     integrable p (\\x. Z x pow 2)\n     ==> covariance p (\\x. X x + Y x) Z =\n         covariance p X Z + covariance p Y Z
+      #|  forall p:A prob_space X Y Z.\n     integrable p X /\\ integrable p Y /\\ integrable p Z /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2) /\\\n     integrable p (\\x. Z x pow 2)\n     ==> covariance p (\\x. X x + Y x) Z =\n         covariance p X Z + covariance p Y Z
       #|  integrable (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) * X (SUC n) x)
       #|  integrable (p:A prob_space) ((X:num->A->real) (SUC n))
       #|  random_variable (p:A prob_space) (\\x:A. (X:num->A->real) (SUC n) x)
@@ -84434,36 +84434,36 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space) (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x)) pow 2)
       #|  (\\x:A. (sum(0..SUC n) (\\i. (X:num->A->real) i x)) pow 2) =\n    (\\x. (sum(0..n) (\\i. X i x)) pow 2 +\n         (&2 * (sum(0..n) (\\i. X i x) * X (SUC n) x) +\n          X (SUC n) x pow 2))
       #|  (\\x:A. (sum(0..0) (\\i. (X:num->A->real) i x)) pow 2) =\n     (\\x. X 0 x pow 2)
-      #|  !p:A prob_space X n.\n     (!i. i <= n ==> integrable p (X i)) /\\\n     (!i. i <= n ==> integrable p (\\x. X i x pow 2))\n     ==> integrable p (\\x. (sum(0..n) (\\i. X i x)) pow 2)
+      #|  forall p:A prob_space X n.\n     (forall i. i <= n ==> integrable p (X i)) /\\\n     (forall i. i <= n ==> integrable p (\\x. X i x pow 2))\n     ==> integrable p (\\x. (sum(0..n) (\\i. X i x)) pow 2)
       #|  i:num
       #|  covariance (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) + X (SUC n) x) Y =\n    covariance p (\\x. sum(0..n) (\\i. X i x)) Y + covariance p (X (SUC n)) Y
       #|  SUC n
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) (\\x:A. (X:num->A->real) i x pow 2)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) (\\x:A. (X:num->A->real) i x pow 2)
       #|  integrable (p:A prob_space) (\\x:A. (X:num->A->real) (SUC n) x pow 2)
       #|  SUC n
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
       #|  integrable (p:A prob_space) ((X:num->A->real) (SUC n))
       #|  i:num
       #|  integrable (p:A prob_space) (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x)) pow 2)
       #|  a ==> (a ==> b) ==> b
       #|  i:num
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
       #|  i:num
       #|  integrable (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
-      #|  !p:A prob_space X Y n.\n     (!i. i <= n ==> integrable p (X i)) /\\\n     (!i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n     integrable p Y /\\ integrable p (\\x. Y x pow 2)\n     ==> covariance p (\\x. sum(0..n) (\\i. X i x)) Y =\n         sum(0..n) (\\i. covariance p (X i) Y)
+      #|  forall p:A prob_space X Y n.\n     (forall i. i <= n ==> integrable p (X i)) /\\\n     (forall i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n     integrable p Y /\\ integrable p (\\x. Y x pow 2)\n     ==> covariance p (\\x. sum(0..n) (\\i. X i x)) Y =\n         sum(0..n) (\\i. covariance p (X i) Y)
       #|  (\\x:A. ((X:A->real) x + (Y:A->real) x) pow 2) =\n    (\\x. X x pow 2 + (&2 * (X x * Y x) + Y x pow 2))
       #|  expectation (p:A prob_space) (\\x:A. ((X:A->real) x + (Y:A->real) x) pow 2) =\n    expectation p (\\x. X x pow 2) + &2 * expectation p (\\x. X x * Y x) + expectation p (\\x. Y x pow 2)
       #|  (\\x:A. ((X:A->real) x + (Y:A->real) x) pow 2) =\n    (\\x. X x pow 2 + (&2 * (X x * Y x) + Y x pow 2))
       #|  integrable (p:A prob_space) (\\x:A. ((X:A->real) x + (Y:A->real) x) pow 2)
       #|  integrable (p:A prob_space) (\\x:A. (X:A->real) x + (Y:A->real) x)
       #|  integrable (p:A prob_space) (\\x:A. (X:A->real) x * (Y:A->real) x)
-      #|  !p:A prob_space X Y.\n     integrable p X /\\ integrable p Y /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2)\n     ==> variance p (\\x. X x + Y x) =\n         variance p X + variance p Y + &2 * covariance p X Y
+      #|  forall p:A prob_space X Y.\n     integrable p X /\\ integrable p Y /\\\n     integrable p (\\x. X x pow 2) /\\ integrable p (\\x. Y x pow 2)\n     ==> variance p (\\x. X x + Y x) =\n         variance p X + variance p Y + &2 * covariance p X Y
       #|  (\\x:A. (a * (X:A->real) x) * (Y:A->real) x) =\n    (\\x. a * (X x * Y x))
       #|  expectation (p:A prob_space) (\\x:A. (a * (X:A->real) x) * (Y:A->real) x) =\n    a * expectation p (\\x. X x * Y x)
       #|  (\\x:A. (a * (X:A->real) x) * (Y:A->real) x) =\n    (\\x. a * (X x * Y x))
       #|  integrable (p:A prob_space) (\\x:A. (a * (X:A->real) x) * (Y:A->real) x)
       #|  integrable (p:A prob_space) (\\x:A. a * (X:A->real) x)
-      #|  !p:A prob_space X Y a.\n     integrable p X /\\ integrable p Y /\\ integrable p (\\x. X x * Y x)\n     ==> covariance p (\\x. a * X x) Y = a * covariance p X Y
+      #|  forall p:A prob_space X Y a.\n     integrable p X /\\ integrable p Y /\\ integrable p (\\x. X x * Y x)\n     ==> covariance p (\\x. a * X x) Y = a * covariance p X Y
       #|  variance (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) =\n    sum(0..n) (\\i. variance p (X i))
       #|  i:num
       #|  sum(0..n) (\\i:num. covariance (p:A prob_space) ((X:num->A->real) i) (X (SUC n))) = &0
@@ -84471,19 +84471,19 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  covariance (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x)) (X (SUC n)) =\n    sum(0..n) (\\i. covariance p (X i) (X (SUC n)))
       #|  variance (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) + X (SUC n) x) =\n    variance p (\\x. sum(0..n) (\\i. X i x)) + variance p (X (SUC n)) +\n    &2 * covariance p (\\x. sum(0..n) (\\i. X i x)) (X (SUC n))
       #|  SUC n
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) (\\x:A. (X:num->A->real) i x pow 2)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) (\\x:A. (X:num->A->real) i x pow 2)
       #|  integrable (p:A prob_space) (\\x:A. (X:num->A->real) (SUC n) x pow 2)
       #|  SUC n
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
       #|  integrable (p:A prob_space) ((X:num->A->real) (SUC n))
       #|  i:num
       #|  integrable (p:A prob_space) (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x)) pow 2)
       #|  a ==> (a ==> b) ==> b
       #|  i:num
-      #|  !i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
+      #|  forall i:num. i <= SUC n ==> integrable (p:A prob_space) ((X:num->A->real) i)
       #|  i:num
       #|  integrable (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
-      #|  !p:A prob_space X n.\n     (!i. i <= n ==> integrable p (X i)) /\\\n     (!i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n     (!i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0)\n     ==> variance p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. variance p (X i))
+      #|  forall p:A prob_space X n.\n     (forall i. i <= n ==> integrable p (X i)) /\\\n     (forall i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n     (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0)\n     ==> variance p (\\x. sum(0..n) (\\i. X i x)) =\n         sum(0..n) (\\i. variance p (X i))
       #|  prob p {x:A | x IN prob_carrier p /\\ abs (Xbar x - expectation (p:A prob_space) Xbar) >= epsilon} <=\n    variance p Xbar / epsilon pow 2
       #|  integrable (p:A prob_space) (\\x:A. (Xbar x - expectation (p:A prob_space) Xbar) pow 2)
       #|  {x:A | x IN prob_carrier p /\\ abs (Xbar x - mu) >= epsilon} =\n    {x | x IN prob_carrier p /\\ abs (Xbar x - expectation (p:A prob_space) Xbar) >= epsilon}
@@ -84500,13 +84500,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  expectation (p:A prob_space) Xbar = mu
       #|  (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x) / &(n + 1)) pow 2) =\n     (\\x. inv(&(n + 1)) pow 2 * (sum(0..n) (\\i. X i x)) pow 2)
       #|  integrable (p:A prob_space) (\\x:A. Xbar x pow 2)
-      #|  !x:A. sum (0..n) (\\i. (X:num->A->real) i x) / &(n + 1) = Xbar x
+      #|  forall x:A. sum (0..n) (\\i. (X:num->A->real) i x) / &(n + 1) = Xbar x
       #|  (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) / &(n + 1)) =\n     (\\x. inv(&(n + 1)) * sum(0..n) (\\i. X i x))
       #|  integrable (p:A prob_space) Xbar
       #|  Xbar = \\x:A. sum(0..n) (\\i. (X:num->A->real) i x) / &(n + 1)
-      #|  !p:A prob_space X n mu sigma2 epsilon.\n    (!i. i <= n ==> integrable p (X i)) /\\\n    (!i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n    (!i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (!i. i <= n ==> expectation p (X i) = mu) /\\\n    (!i. i <= n ==> variance p (X i) = sigma2) /\\\n    &0 < epsilon\n    ==> prob p {x | x IN prob_carrier p /\\\n          abs(sum(0..n) (\\i. X i x) / &(n + 1) - mu) >= epsilon} <=\n        sigma2 / (&(n + 1) * epsilon pow 2)
+      #|  forall p:A prob_space X n mu sigma2 epsilon.\n    (forall i. i <= n ==> integrable p (X i)) /\\\n    (forall i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n    (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (forall i. i <= n ==> expectation p (X i) = mu) /\\\n    (forall i. i <= n ==> variance p (X i) = sigma2) /\\\n    &0 < epsilon\n    ==> prob p {x | x IN prob_carrier p /\\\n          abs(sum(0..n) (\\i. X i x) / &(n + 1) - mu) >= epsilon} <=\n        sigma2 / (&(n + 1) * epsilon pow 2)
       #|  --expectation (p:A prob_space) (\\x:A. abs((f:A->real) x)) =\n     expectation p (\\x. --(abs(f x)))
-      #|  !p:A prob_space f.\n     integrable p f\n     ==> abs(expectation p f) <= expectation p (\\x. abs(f x))
+      #|  forall p:A prob_space f.\n     integrable p f\n     ==> abs(expectation p f) <= expectation p (\\x. abs(f x))
       #|  s:real
       #|  s:real
       #|  sup S <= ((f:real->real)(y) - f(x0)) / (y - x0)
@@ -84518,7 +84518,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < x0 - z
       #|  z:real
       #|  s:real
-      #|  !s. s IN S ==> s * (y - x0) <= (f:real->real)(y) - f(x0)
+      #|  forall s. s IN S ==> s * (y - x0) <= (f:real->real)(y) - f(x0)
       #|  &0 < y - x0
       #|  x0 < y
       #|  ((f:real->real)(x0) - f(y)) / (x0 - y)
@@ -84534,7 +84534,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  z:real
       #|  z:real
       #|  s:real
-      #|  !s:real. s IN S ==> s <= r
+      #|  forall s:real. s IN S ==> s <= r
       #|  x0 - &1
       #|  ((f:real->real)(x0) - f(x0 - &1)) / (x0 - (x0 - &1))
       #|  ~(S:real->bool = {})
@@ -84543,15 +84543,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x0 + &1
       #|  z:real
       #|  z:real
-      #|  !z. z < x0 ==> ((f:real->real)(x0) - f(z)) <= r * (x0 - z)
+      #|  forall z. z < x0 ==> ((f:real->real)(x0) - f(z)) <= r * (x0 - z)
       #|  r = (f:real->real)(x0 + &1) - f(x0)
       #|  abs(x0 - a) = x0 - a
       #|  abs(b - a) = b - a
       #|  x0:real
       #|  b:real
       #|  a:real
-      #|  !a b:real. a < x0 /\\ x0 < b\n     ==> ((f:real->real)(x0) - f(a)) * (b - x0) <= (f(b) - f(x0)) * (x0 - a)
-      #|  !f:real->real x0. f real_convex_on (:real)\n    ==> ?c. !y. f(x0) + c * (y - x0) <= f(y)
+      #|  forall a b:real. a < x0 /\\ x0 < b\n     ==> ((f:real->real)(x0) - f(a)) * (b - x0) <= (f(b) - f(x0)) * (x0 - a)
+      #|  forall f:real->real x0. f real_convex_on (:real)\n    ==> ?c. forall y. f(x0) + c * (y - x0) <= f(y)
       #|  expectation (p:A prob_space) (\\a:A. c * (X:A->real) a) =\n     c * expectation p X
       #|  expectation (p:A prob_space) (\\a:A. c * (X:A->real) a) =\n     c * mu
       #|  (\\a:A. c * (X:A->real) a)
@@ -84567,7 +84567,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  mu:real
       #|  f:real->real
       #|  mu = expectation (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space (X:A->real) (f:real->real).\n     integrable p X /\\ integrable p (\\a. f(X a)) /\\ f real_convex_on (:real)\n     ==> f(expectation p X) <= expectation p (\\a. f(X a))
+      #|  forall p:A prob_space (X:A->real) (f:real->real).\n     integrable p X /\\ integrable p (\\a. f(X a)) /\\ f real_convex_on (:real)\n     ==> f(expectation p X) <= expectation p (\\a. f(X a))
       #|  eps:real
       #|  nn:num
       #|  nn:num
@@ -84589,9 +84589,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  k:num
       #|  k:num
-      #|  !k n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))}\n           IN prob_events p
+      #|  forall k n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))}\n           IN prob_events p
       #|  UNIONS {limsup_events\n    (\\n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))})\n    | k IN (:num)}
-      #|  !p:A prob_space (Y:num->A->real) c.\n     (!n. random_variable p (Y n)) /\\\n     (!eps. &0 < eps ==>\n        real_summable (from 0) (\\n. prob p {x | x IN prob_carrier p /\\ abs(Y n x - c) >= eps}))\n     ==> almost_surely p {x | ((\\n. Y n x) ---> c) sequentially}
+      #|  forall p:A prob_space (Y:num->A->real) c.\n     (forall n. random_variable p (Y n)) /\\\n     (forall eps. &0 < eps ==>\n        real_summable (from 0) (\\n. prob p {x | x IN prob_carrier p /\\ abs(Y n x - c) >= eps}))\n     ==> almost_surely p {x | ((\\n. Y n x) ---> c) sequentially}
       #|  variance (p:A prob_space) (\\x:A. inv(&nn) * sum(0..k * k) (\\i. (X:num->A->real) i x)) / eps pow 2
       #|  eps:real
       #|  \\x:A. inv(&nn) * sum(0..k * k) (\\i. (X:num->A->real) i x)
@@ -84621,7 +84621,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k * k:num
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
       #|  &0 < e pow 2
       #|  &0 <= variance (p:A prob_space) ((X:num->A->real) n)
       #|  e:real
@@ -84640,7 +84640,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ((\\n. variance (p:A prob_space) ((X:num->A->real) n))\n    ---> &0) sequentially
       #|  eps:real
       #|  e:real
-      #|  !p:A prob_space X mu.\n      (!n. integrable p (X n)) /\\\n      (!n. integrable p (\\x. (X n x - expectation p (X n)) pow 2)) /\\\n      (!n. expectation p (X n) = mu) /\\\n      ((\\n. variance p (X n)) ---> &0) sequentially\n      ==> converges_in_prob_const p X mu
+      #|  forall p:A prob_space X mu.\n      (forall n. integrable p (X n)) /\\\n      (forall n. integrable p (\\x. (X n x - expectation p (X n)) pow 2)) /\\\n      (forall n. expectation p (X n) = mu) /\\\n      ((\\n. variance p (X n)) ---> &0) sequentially\n      ==> converges_in_prob_const p X mu
       #|  (\\x:A. (sum(0..n) (\\i. (X:num->A->real) i x) -\n     expectation p (\\x. sum(0..n) (\\i. X i x))) pow 2) =\n     (\\x. (sum(0..n) (\\i. X i x)) pow 2 +\n       (--(&2 * expectation p (\\x. sum(0..n) (\\i. X i x))) * sum(0..n) (\\i. X i x) +\n        (expectation p (\\x. sum(0..n) (\\i. X i x))) pow 2))
       #|  (\\x:A. (inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x) -\n     inv(&(SUC n)) * expectation p (\\x. sum(0..n) (\\i. X i x))) pow 2) =\n     (\\x. inv(&(SUC n)) pow 2 * (sum(0..n) (\\i. X i x) - expectation p (\\x. sum(0..n) (\\i. X i x))) pow 2)
       #|  expectation (p:A prob_space) (\\x:A. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) =\n     inv(&(SUC n)) * expectation p (\\x. sum(0..n) (\\i. X i x))
@@ -84662,7 +84662,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
       #|  ~(&nn = &0)
       #|  nn = SUC n
-      #|  !n. variance (p:A prob_space) (\\x:A. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) <=\n         sigma_sq * inv(&(SUC n))
+      #|  forall n. variance (p:A prob_space) (\\x:A. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) <=\n         sigma_sq * inv(&(SUC n))
       #|  ~(&(SUC n) = &0)
       #|  n + 1 = SUC n
       #|  integrable (p:A prob_space) (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x))
@@ -84677,15 +84677,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  mu:real
       #|  \\n:num. \\x:A. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) <= sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> converges_in_prob_const p\n          (\\n x. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) mu
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) <= sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> converges_in_prob_const p\n          (\\n x. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) mu
       #|  \\k. &2 * M * &(2 * k + 1) * inv(&(SUC(k * k)))
-      #|  !i:num. abs((X:num->A->real) i x) <= M
+      #|  forall i:num. abs((X:num->A->real) i x) <= M
       #|  abs((X:num->A->real) 0 x)
       #|  &0 <= M
       #|  x:A
       #|  sigma_sq:real
       #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x)) ---> mu) sequentially}
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (?M. !n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (?M. forall n x. x IN prob_carrier p ==> abs(X n x) <= M)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
       #|  a - x <= a - y <=> y <= x
       #|  c - inv(&m)
       #|  m:num
@@ -84698,16 +84698,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  c - &1 / &(SUC n)
       #|  \\n:num. {x:A | x IN prob_carrier p /\\ (Z:A->real) x <= c - &1 / &(SUC n)}
       #|  p:A prob_space
-      #|  !p:A prob_space Z c.\n    random_variable p Z\n    ==> ((\\n. prob p {x | x IN prob_carrier p /\\ Z x <= c - &1 / &(SUC n)})\n         ---> prob p {x | x IN prob_carrier p /\\ Z x < c}) sequentially
+      #|  forall p:A prob_space Z c.\n    random_variable p Z\n    ==> ((\\n. prob p {x | x IN prob_carrier p /\\ Z x <= c - &1 / &(SUC n)})\n         ---> prob p {x | x IN prob_carrier p /\\ Z x < c}) sequentially
       #|  (:real)
       #|  n:num
       #|  \\x:real. x
       #|  \\y:real. y pow n
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X n. random_variable p X\n     ==> random_variable p (\\x. X x pow n)
+      #|  forall p:A prob_space X n. random_variable p X\n     ==> random_variable p (\\x. X x pow n)
       #|  0
-      #|  !p:A prob_space X n. (!i. i <= n ==> random_variable p (X i))\n     ==> random_variable p (\\x. sum(0..n) (\\i. X i x))
+      #|  forall p:A prob_space X n. (forall i. i <= n ==> random_variable p (X i))\n     ==> random_variable p (\\x. sum(0..n) (\\i. X i x))
       #|  0
       #|  N:num
       #|  (:num)
@@ -84742,7 +84742,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ Y x <= a} =\n     INTERS (IMAGE (\\m. UNIONS (IMAGE (\\N.\n       INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\\n         Y_seq n x < a + inv(&(SUC m))}) {n | n >= N})) (:num))) (:num))
       #|  a:real
-      #|  !p:A prob_space Y Y_seq.\n     (!n. random_variable p (Y_seq n)) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. Y_seq n x) ---> Y x) sequentially)\n     ==> random_variable p Y
+      #|  forall p:A prob_space Y Y_seq.\n     (forall n. random_variable p (Y_seq n)) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. Y_seq n x) ---> Y x) sequentially)\n     ==> random_variable p Y
       #|  N1:num
       #|  mm:num
       #|  N1:num
@@ -84760,28 +84760,28 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  cos:real->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X. random_variable p X\n     ==> random_variable p (\\x. cos(X x))
+      #|  forall p:A prob_space X. random_variable p X\n     ==> random_variable p (\\x. cos(X x))
       #|  sin:real->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X. random_variable p X\n     ==> random_variable p (\\x. sin(X x))
+      #|  forall p:A prob_space X. random_variable p X\n     ==> random_variable p (\\x. sin(X x))
       #|  &1
-      #|  !p:A prob_space X t. random_variable p X\n     ==> integrable p (\\x. cos(t * X x))
+      #|  forall p:A prob_space X t. random_variable p X\n     ==> integrable p (\\x. cos(t * X x))
       #|  &1
-      #|  !p:A prob_space X t. random_variable p X\n     ==> integrable p (\\x. sin(t * X x))
+      #|  forall p:A prob_space X t. random_variable p X\n     ==> integrable p (\\x. sin(t * X x))
       #|  &1
       #|  (\\x:A. cos(t * (X:A->real) x))
       #|  p:A prob_space
-      #|  !p:A prob_space X t. random_variable p X\n     ==> abs(char_fn_re p X t) <= &1
+      #|  forall p:A prob_space X t. random_variable p X\n     ==> abs(char_fn_re p X t) <= &1
       #|  &1
       #|  (\\x:A. sin(t * (X:A->real) x))
       #|  p:A prob_space
-      #|  !p:A prob_space X t. random_variable p X\n     ==> abs(char_fn_im p X t) <= &1
-      #|  !p:A prob_space X. random_variable p X\n     ==> char_fn_re p X (&0) = &1
+      #|  forall p:A prob_space X t. random_variable p X\n     ==> abs(char_fn_im p X t) <= &1
+      #|  forall p:A prob_space X. random_variable p X\n     ==> char_fn_re p X (&0) = &1
       #|  1 <= 2 EXP n
-      #|  !n. n <= 2 EXP n
+      #|  forall n. n <= 2 EXP n
       #|  (gn:num->A->real) n x
-      #|  !(gn:num->A->real) (s:A->bool).\n     (!n x. x IN s ==> gn n x <= gn (SUC n) x)\n     ==> !m n x. m <= n /\\ x IN s ==> gn m x <= gn n x
+      #|  forall(gn:num->A->real) (s:A->bool).\n     (forall n x. x IN s ==> gn n x <= gn (SUC n) x)\n     ==> forall m n x. m <= n /\\ x IN s ==> gn m x <= gn n x
       #|  B:real
       #|  0
       #|  B:real
@@ -84809,21 +84809,21 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  \\n:num. (f:A->real) x
       #|  \\n. (gn:num->A->real) n x - &1 / &(2 EXP n)
-      #|  !(x:A). x IN prob_carrier p\n                ==> ((\\n. (tn:num->A->real) n x) ---> (f:A->real) x) sequentially
+      #|  forall(x:A). x IN prob_carrier p\n                ==> ((\\n. (tn:num->A->real) n x) ---> (f:A->real) x) sequentially
       #|  (gn:num->A->real) n x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= (f:A->real) x
-      #|  !(n:num) (x:A). (sn:num->A->real) n x\n                <= (tn:num->A->real) n x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= (f:A->real) x
+      #|  forall(n:num) (x:A). (sn:num->A->real) n x\n                <= (tn:num->A->real) n x
       #|  (gn:num->A->real) n x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= (gn:num->A->real) n x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= tn (SUC n) x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> &0 <= (tn:num->A->real) n x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> (sn:num->A->real) n x <= gn n x
-      #|  !(n:num) (x:A). x IN prob_carrier p\n                ==> &0 <= (sn:num->A->real) n x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= (gn:num->A->real) n x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> (tn:num->A->real) n x <= tn (SUC n) x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> &0 <= (tn:num->A->real) n x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> (sn:num->A->real) n x <= gn n x
+      #|  forall(n:num) (x:A). x IN prob_carrier p\n                ==> &0 <= (sn:num->A->real) n x
       #|  (\\x:A. (sn:num->A->real) (SUC n) x) = sn (SUC n)
       #|  (\\x:A. (tn:num->A->real) n x) = tn n
-      #|  !n. simple_rv p ((tn:num->A->real) n)
-      #|  !n. simple_rv p ((sn:num->A->real) n)
-      #|  !n (x:A). (tn:num->A->real) (SUC n) x =\n                max (tn n x) ((sn:num->A->real) (SUC n) x)
+      #|  forall n. simple_rv p ((tn:num->A->real) n)
+      #|  forall n. simple_rv p ((sn:num->A->real) n)
+      #|  forall n (x:A). (tn:num->A->real) (SUC n) x =\n                max (tn n x) ((sn:num->A->real) (SUC n) x)
       #|  tn:num->A->real
       #|  \\(prev:A->real) (n:num) (x:A). max (prev x) ((sn:num->A->real) (SUC n) x)
       #|  (sn:num->A->real) 0
@@ -84833,8 +84833,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  \\n. (gn:num->A->real) n x
       #|  sequentially
-      #|  !n (x:A). x IN prob_carrier p ==> (gn:num->A->real) n x <= f x
-      #|  !p:A prob_space gn f B.\n     (!n. random_variable p (gn n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= gn n x) /\\\n     (!n x. x IN prob_carrier p ==> gn n x <= gn (SUC n) x) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. gn n x) ---> f x) sequentially) /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> f x <= B)\n     ==> ((\\n. nn_expectation p (gn n)) ---> nn_expectation p f) sequentially
+      #|  forall n (x:A). x IN prob_carrier p ==> (gn:num->A->real) n x <= f x
+      #|  forall p:A prob_space gn f B.\n     (forall n. random_variable p (gn n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= gn n x) /\\\n     (forall n x. x IN prob_carrier p ==> gn n x <= gn (SUC n) x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. gn n x) ---> f x) sequentially) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> f x <= B)\n     ==> ((\\n. nn_expectation p (gn n)) ---> nn_expectation p f) sequentially
       #|  nn_expectation p (f:A->real) = L
       #|  0
       #|  nn_expectation p (f:A->real)
@@ -84842,7 +84842,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. nn_expectation p ((X:num->A->real) n)
       #|  sequentially
       #|  L <= nn_expectation p (f:A->real)
-      #|  !n:num. nn_expectation p ((X:num->A->real) n)\n                        <= nn_expectation p f
+      #|  forall n:num. nn_expectation p ((X:num->A->real) n)\n                        <= nn_expectation p f
       #|  nn_expectation p ((X:num->A->real) n)
       #|  n:num
       #|  0
@@ -84864,7 +84864,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  &0 <= x ==> abs x <= x
       #|  abs((f:A->real) x)
-      #|  !x:A. x IN prob_carrier p ==> g x <= (f:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> g x <= (f:A->real) x
       #|  L:real
       #|  integrable p (f:A->real)
       #|  X:num->A->real
@@ -84892,38 +84892,38 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  \\m:num. nn_expectation p ((X:num->A->real) m)
       #|  sequentially
-      #|  !n:num. nn_expectation p ((X:num->A->real) n) <= L
+      #|  forall n:num. nn_expectation p ((X:num->A->real) n) <= L
       #|  L:real
       #|  a <= x /\\ x <= B ==> abs(x) <= abs(a) + abs(B)
       #|  m:num
       #|  abs(nn_expectation p ((X:num->A->real) 0)) + abs(B)
       #|  \\n:num. nn_expectation p ((X:num->A->real) n)
-      #|  !m n:num. m <= n ==>\n    nn_expectation p ((X:num->A->real) m) <= nn_expectation p (X n)
-      #|  !n:num. nn_expectation p ((X:num->A->real) n)\n                        <= nn_expectation p (X (SUC n))
-      #|  !n:num. random_variable p ((X:num->A->real) n)
+      #|  forall m n:num. m <= n ==>\n    nn_expectation p ((X:num->A->real) m) <= nn_expectation p (X n)
+      #|  forall n:num. nn_expectation p ((X:num->A->real) n)\n                        <= nn_expectation p (X (SUC n))
+      #|  forall n:num. random_variable p ((X:num->A->real) n)
       #|  prob_carrier (p:A prob_space)
       #|  X:num->A->real
       #|  n:num
       #|  \\n:num. (X:num->A->real) n x
       #|  sequentially
-      #|  !n (x:A). x IN prob_carrier p ==> (X:num->A->real) n x <= f x
+      #|  forall n (x:A). x IN prob_carrier p ==> (X:num->A->real) n x <= f x
       #|  0
       #|  \\n:num. (X:num->A->real) n x
       #|  sequentially
-      #|  !x:A. x IN prob_carrier p ==> &0 <= f x
-      #|  !p:A prob_space X f.\n     (!n. integrable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n     (?B. !n. nn_expectation p (X n) <= B)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= f x
+      #|  forall p:A prob_space X f.\n     (forall n. integrable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n     (?B. forall n. nn_expectation p (X n) <= B)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially
       #|  nn_expectation p (f:A->real)
       #|  &0 <= a /\\ a <= b /\\ &0 <= b ==> abs a <= abs b
       #|  x:A
       #|  f:A->real
-      #|  !n. integrable p ((X:num->A->real) n)
+      #|  forall n. integrable p ((X:num->A->real) n)
       #|  prob_carrier (p:A prob_space)
       #|  X:num->A->real
       #|  n:num
       #|  \\n. (X:num->A->real) n x
       #|  sequentially
-      #|  !n (x:A). x IN prob_carrier p ==>\n    (X:num->A->real) n x <= f x
-      #|  !p:A prob_space X f.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially
+      #|  forall n (x:A). x IN prob_carrier p ==>\n    (X:num->A->real) n x <= f x
+      #|  forall p:A prob_space X f.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= X (SUC n) x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially
       #|  real_liminf (f:num->real) =\n   sup {inf {f k | k >= n} | n IN (:num)}
       #|  n:num
       #|  b:real
@@ -84933,13 +84933,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  inf {(f:num->real) k | k >= 0:num}
       #|  B:real
-      #|  !f b B. (!n. b <= f n) /\\ (!n. f n <= B)\n           ==> b <= real_liminf f
+      #|  forall f b B. (forall n. b <= f n) /\\ (forall n. f n <= B)\n           ==> b <= real_liminf f
       #|  n:num
       #|  b:real
       #|  (f:num->real) n
       #|  0
       #|  inf {(f:num->real) k | k >= 0:num}
-      #|  !f b B. (!n. b <= f n) /\\ (!n. f n <= B)\n           ==> real_liminf f <= B
+      #|  forall f b B. (forall n. b <= f n) /\\ (forall n. f n <= B)\n           ==> real_liminf f <= B
       #|  n':num
       #|  (f:num->real) k
       #|  b:real
@@ -84955,7 +84955,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  0
       #|  inf {(f:num->real) k | k >= 0:num}
-      #|  !f g b B. (!n. f n <= g n) /\\ (!n. b <= f n) /\\ (!n. g n <= B)\n             ==> real_liminf f <= real_liminf g
+      #|  forall f g b B. (forall n. f n <= g n) /\\ (forall n. b <= f n) /\\ (forall n. g n <= B)\n             ==> real_liminf f <= real_liminf g
       #|  k:num
       #|  N:num
       #|  (f:num->real) N
@@ -84968,7 +84968,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  f:num->real
       #|  sequentially
-      #|  !f l b B. (f ---> l) sequentially /\\ (!n. b <= f n) /\\ (!n. f n <= B)\n             ==> real_liminf f = l
+      #|  forall f l b B. (f ---> l) sequentially /\\ (forall n. b <= f n) /\\ (forall n. f n <= B)\n             ==> real_liminf f = l
       #|  (iter_min (X:num->real) (N:num) 0 = X N) /\\\n   (iter_min X N (SUC j) = min (X (N + SUC j)) (iter_min X N j))
       #|  :P
       #|  :P
@@ -84977,14 +84977,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  !X N j. iter_min X N (SUC j) <= iter_min X N j
+      #|  forall X N j. iter_min X N (SUC j) <= iter_min X N j
       #|  b <= c ==> min a b <= c
       #|  k = N + SUC j
       #|  k:num = N
-      #|  !X N j k. N <= k /\\ k <= N + j ==> iter_min X N j <= X k
+      #|  forall X N j k. N <= k /\\ k <= N + j ==> iter_min X N j <= X k
       #|  &0 <= a /\\ &0 <= b ==> &0 <= min a b
-      #|  !X N j. (!n. &0 <= X n) ==> &0 <= iter_min X N j
-      #|  !p:A prob_space X N j.\n     (!n. random_variable p (X n))\n     ==> random_variable p (\\x. iter_min (\\n. X n x) N j)
+      #|  forall X N j. (forall n. &0 <= X n) ==> &0 <= iter_min X N j
+      #|  forall p:A prob_space X N j.\n     (forall n. random_variable p (X n))\n     ==> random_variable p (\\x. iter_min (\\n. X n x) N j)
       #|  j:num
       #|  k - N:num <= j
       #|  k:num >= N
@@ -85007,19 +85007,19 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  N + SUC j
       #|  a <= b /\\ a <= c ==> a <= min b c
       #|  N:num
-      #|  !j. inf {(X:num->A->real) k x | k >= N} <= iter_min (\\n. X n x) N j
+      #|  forall j. inf {(X:num->A->real) k x | k >= N} <= iter_min (\\n. X n x) N j
       #|  k:num
       #|  &0
-      #|  !k. k >= N ==> inf {(X:num->A->real) k x | k >= N} <= X k x
+      #|  forall k. k >= N ==> inf {(X:num->A->real) k x | k >= N} <= X k x
       #|  x:A
       #|  n:num
-      #|  !j. &0 <= iter_min (\\n. (X:num->A->real) n x) N j
+      #|  forall j. &0 <= iter_min (\\n. (X:num->A->real) n x) N j
       #|  e:real
       #|  x:A
       #|  \\j x:A. iter_min (\\n. X n x) N j
-      #|  !p:A prob_space (X:num->A->real) N.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x)\n     ==> random_variable p (\\x. inf {X k x | k >= N})
+      #|  forall p:A prob_space (X:num->A->real) N.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x)\n     ==> random_variable p (\\x. inf {X k x | k >= N})
       #|  \\m n:num. (s:num->real) m <= s n
-      #|  !s:num->real. (!n. s n <= s (SUC n))\n                 ==> (!m n. m <= n ==> s m <= s n)
+      #|  forall s:num->real. (forall n. s n <= s (SUC n))\n                 ==> (forall m n. m <= n ==> s m <= s n)
       #|  l:real = S
       #|  S = sup {(s:num->real) n | n IN (:num)}
       #|  n:num
@@ -85035,58 +85035,58 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  s:num->real
       #|  sequentially
-      #|  !n:num. (s:num->real) n <= l
+      #|  forall n:num. (s:num->real) n <= l
       #|  l:real
       #|  b <= x /\\ x <= B ==> abs x <= abs b + abs B
       #|  abs b + abs B
       #|  s:num->real
-      #|  !m n. m <= n ==> (s:num->real) m <= s n
-      #|  !s:num->real b B. (!n. b <= s n) /\\ (!n. s n <= B) /\\\n                     (!n. s n <= s (SUC n))\n    ==> (s ---> sup {s n | n IN (:num)}) sequentially
+      #|  forall m n. m <= n ==> (s:num->real) m <= s n
+      #|  forall s:num->real b B. (forall n. b <= s n) /\\ (forall n. s n <= B) /\\\n                     (forall n. s n <= s (SUC n))\n    ==> (s ---> sup {s n | n IN (:num)}) sequentially
       #|  B:real
       #|  &0
       #|  B:real
       #|  &0
       #|  nn_expectation p (\\x:A. real_liminf (\\n. X n x)) =\n     real_liminf (\\n. nn_expectation p ((gn:num->A->real) n))
       #|  nn_expectation p ((X:num->A->real) n)
-      #|  !n. nn_expectation p ((gn:num->A->real) n) <= B
-      #|  !n. nn_expectation p ((X:num->A->real) n) <= B
+      #|  forall n. nn_expectation p ((gn:num->A->real) n) <= B
+      #|  forall n. nn_expectation p ((X:num->A->real) n) <= B
       #|  B:real
-      #|  !n. &0 <= nn_expectation p ((gn:num->A->real) n)
+      #|  forall n. &0 <= nn_expectation p ((gn:num->A->real) n)
       #|  B:real
-      #|  !n. nn_expectation p ((gn:num->A->real) n) <=\n                    nn_expectation p ((X:num->A->real) n)
+      #|  forall n. nn_expectation p ((gn:num->A->real) n) <=\n                    nn_expectation p ((X:num->A->real) n)
       #|  B:real
       #|  ((\\n. nn_expectation p ((gn:num->A->real) n)) --->\n      nn_expectation p (\\x. real_liminf (\\n. X n x))) sequentially
       #|  0
       #|  (gn:num->A->real) 0 x
       #|  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
-      #|  !x:A. x IN prob_carrier p\n    ==> real_liminf (\\n. (X:num->A->real) n x) <= B
+      #|  forall x:A. x IN prob_carrier p\n    ==> real_liminf (\\n. (X:num->A->real) n x) <= B
       #|  0
       #|  (gn:num->A->real) 0 x
       #|  B:real
       #|  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
-      #|  !x:A. x IN prob_carrier p\n    ==> &0 <= real_liminf (\\n. (X:num->A->real) n x)
+      #|  forall x:A. x IN prob_carrier p\n    ==> &0 <= real_liminf (\\n. (X:num->A->real) n x)
       #|  B:real
       #|  &0
       #|  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
-      #|  !x:A. x IN prob_carrier p\n    ==> ((\\n. (gn:num->A->real) n x) --->\n         real_liminf (\\n. (X:num->A->real) n x)) sequentially
+      #|  forall x:A. x IN prob_carrier p\n    ==> ((\\n. (gn:num->A->real) n x) --->\n         real_liminf (\\n. (X:num->A->real) n x)) sequentially
       #|  n:num
       #|  &0
-      #|  !n x:A. x IN prob_carrier p\n                         ==> (gn:num->A->real) n x <= X n x
+      #|  forall n x:A. x IN prob_carrier p\n                         ==> (gn:num->A->real) n x <= X n x
       #|  k:num
       #|  &0
       #|  SUC n
       #|  (X:num->A->real) (SUC n) x
-      #|  !n x:A. x IN prob_carrier p\n                         ==> (gn:num->A->real) n x <= gn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p\n                         ==> (gn:num->A->real) n x <= gn (SUC n) x
       #|  n:num
       #|  &0
       #|  (X:num->A->real) n x
-      #|  !n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= B
+      #|  forall n x:A. x IN prob_carrier p ==> (gn:num->A->real) n x <= B
       #|  n:num
       #|  (X:num->A->real) n x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
-      #|  !n. random_variable p ((gn:num->A->real) n)
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
+      #|  forall n. random_variable p ((gn:num->A->real) n)
       #|  gn = \\n x:A. inf {(X:num->A->real) k x | k >= n}
-      #|  !p:A prob_space X B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
+      #|  forall p:A prob_space X B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
       #|  real_limsup (f:num->real) =\n   inf {sup {f k | k >= n} | n IN (:num)}
       #|  n:num
       #|  b:real
@@ -85106,9 +85106,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  L - e:real
       #|  {inf {(f:num->real) k | k >= n} | n IN (:num)}
       #|  L - e < real_liminf (f:num->real)
-      #|  !f b B L.\n     (!n. b <= f n) /\\ (!n. f n <= B) /\\ L <= real_liminf f\n     ==> !e. &0 < e ==> ?N. !n. N <= n ==> L - e < f n
+      #|  forall f b B L.\n     (forall n. b <= f n) /\\ (forall n. f n <= B) /\\ L <= real_liminf f\n     ==> forall e. &0 < e ==> ?N. forall n. N <= n ==> L - e < f n
       #|  n:num
-      #|  !n. N2 <= n ==> c - L - e < c - (f:num->real) n
+      #|  forall n. N2 <= n ==> c - L - e < c - (f:num->real) n
       #|  (f:num->real) n < L + e
       #|  L - e < (f:num->real) n
       #|  MAX N1 N2 <= n
@@ -85123,28 +85123,28 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  c - B:real
       #|  \\n:num. c - (f:num->real) n
       #|  n:num
-      #|  !n. b <= (f:num->real) n
-      #|  !n:num. (\\n. c - (f:num->real) n) n <= c - b
+      #|  forall n. b <= (f:num->real) n
+      #|  forall n:num. (\\n. c - (f:num->real) n) n <= c - b
       #|  n:num
-      #|  !n. (f:num->real) n <= B
-      #|  !n:num. c - B <= (\\n. c - (f:num->real) n) n
+      #|  forall n. (f:num->real) n <= B
+      #|  forall n:num. c - B <= (\\n. c - (f:num->real) n) n
       #|  N1:num
       #|  e:real
       #|  L:real
       #|  B:real
       #|  b:real
       #|  f:num->real
-      #|  !f b B L c.\n     (!n. b <= f n) /\\ (!n. f n <= B) /\\\n     L <= real_liminf f /\\\n     c - L <= real_liminf (\\n. c - f n)\n     ==> (f ---> L) sequentially
+      #|  forall f b B L c.\n     (forall n. b <= f n) /\\ (forall n. f n <= B) /\\\n     L <= real_liminf f /\\\n     c - L <= real_liminf (\\n. c - f n)\n     ==> (f ---> L) sequentially
       #|  nn_expectation p (\\x:A. B) = simple_expectation p (\\x. B)
-      #|  !p:A prob_space B. &0 <= B ==> nn_expectation p (\\x. B) = B
+      #|  forall p:A prob_space B. &0 <= B ==> nn_expectation p (\\x. B) = B
       #|  nn_expectation p (\\x:A. B) = B
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==> &0 <= f x
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= f x
       #|  x:A
       #|  B:real
       #|  B:real
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==> f x <= B
+      #|  forall x:A. x IN prob_carrier p ==> f x <= B
       #|  x:A
       #|  nn_expectation p (\\x:A. B) =\n      nn_expectation p (\\x. f x + (B - f x))
       #|  nn_expectation p f + nn_expectation p (\\x:A. B - f x) =\n     nn_expectation p (\\x. B)
@@ -85152,15 +85152,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  p:A prob_space
       #|  &0 <= B:real
-      #|  !p:A prob_space f B.\n     random_variable p f /\\\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (!x. x IN prob_carrier p ==> f x <= B)\n     ==> nn_expectation p (\\x. B - f x) = B - nn_expectation p f
+      #|  forall p:A prob_space f B.\n     random_variable p f /\\\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     (forall x. x IN prob_carrier p ==> f x <= B)\n     ==> nn_expectation p (\\x. B - f x) = B - nn_expectation p f
       #|  (\\n:num. nn_expectation p (\\x:A. B - (X:num->A->real) n x)) =\n     (\\n. B - nn_expectation p (X n))
-      #|  !n:num. nn_expectation p (\\x:A. B - (X:num->A->real) n x) =\n             B - nn_expectation p (X n)
+      #|  forall n:num. nn_expectation p (\\x:A. B - (X:num->A->real) n x) =\n             B - nn_expectation p (X n)
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B:real
       #|  \\n:num. \\x:A. B - (X:num->A->real) n x
@@ -85169,42 +85169,42 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation p (\\x:A. B - Y x) =\n     nn_expectation p (\\x. real_liminf (\\n. B - (X:num->A->real) n x))
       #|  x:A
       #|  m:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
       #|  m:num
       #|  x:A
       #|  m:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  m:num
       #|  B:real
       #|  &0
-      #|  !x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. B - (X:num->A->real) n x) = B - Y x
+      #|  forall x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. B - (X:num->A->real) n x) = B - Y x
       #|  B - nn_expectation p (Y:A->real) =\n    nn_expectation p (\\x. B - Y x)
       #|  B:real
       #|  nn_expectation p (Y:A->real) =\n      nn_expectation p (\\x. real_liminf (\\n. (X:num->A->real) n x))
       #|  nn_expectation p (Y:A->real) <=\n    real_liminf (\\n. nn_expectation p ((X:num->A->real) n))
       #|  B:real
       #|  &0
-      #|  !x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. (X:num->A->real) n x) = Y x
-      #|  !n:num. nn_expectation (p:A prob_space)\n    ((X:num->A->real) n) <= B
+      #|  forall x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. (X:num->A->real) n x) = Y x
+      #|  forall n:num. nn_expectation (p:A prob_space)\n    ((X:num->A->real) n) <= B
       #|  B:real
-      #|  !n:num. &0 <= nn_expectation (p:A prob_space)\n    ((X:num->A->real) n)
+      #|  forall n:num. &0 <= nn_expectation (p:A prob_space)\n    ((X:num->A->real) n)
       #|  B:real
       #|  B:real
       #|  &0
       #|  \\n:num. nn_expectation (p:A prob_space)\n    ((X:num->A->real) n)
-      #|  !p:A prob_space (X:num->A->real) Y B.\n     (!n. random_variable p (X n)) /\\\n     random_variable p Y /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= Y x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B) /\\\n     (!x. x IN prob_carrier p ==> Y x <= B) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> Y x) sequentially)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p Y) sequentially
+      #|  forall p:A prob_space (X:num->A->real) Y B.\n     (forall n. random_variable p (X n)) /\\\n     random_variable p Y /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= Y x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B) /\\\n     (forall x. x IN prob_carrier p ==> Y x <= B) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> Y x) sequentially)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p Y) sequentially
       #|  M:real
       #|  B:real
       #|  &0
       #|  \\n. nn_expectation (p:A prob_space) ((X:num->A->real) n)
       #|  \\n. nn_expectation (p:A prob_space)\n              (\\x:A. min ((X:num->A->real) n x) M)
       #|  n:num
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  M:real
       #|  \\n:num. \\x:A. min ((X:num->A->real) n x) M
       #|  p:A prob_space
       #|  real_liminf (\\n. nn_expectation (p:A prob_space)\n        (\\x. min ((X:num->A->real) n x) M))
-      #|  !p:A prob_space X M.\n      (!n. integrable p (X n)) /\\\n      (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n      &0 < M /\\\n      (?B. !n. nn_expectation p (X n) <= B)\n      ==> nn_expectation p (\\x. real_liminf (\\n. min (X n x) M))\n          <= real_liminf (\\n. nn_expectation p (X n))
+      #|  forall p:A prob_space X M.\n      (forall n. integrable p (X n)) /\\\n      (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n      &0 < M /\\\n      (?B. forall n. nn_expectation p (X n) <= B)\n      ==> nn_expectation p (\\x. real_liminf (\\n. min (X n x) M))\n          <= real_liminf (\\n. nn_expectation p (X n))
       #|  min ((an:num->real) N) M
       #|  N:num
       #|  (bn:num->real) N
@@ -85224,48 +85224,48 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  (an:num->real) 0
       #|  sup {(an:num->real) n | n IN (:num)} <= M
-      #|  !n:num. (an:num->real) n <= M
+      #|  forall n:num. (an:num->real) n <= M
       #|  n:num
       #|  &0
       #|  min ((f:num->real) n) M
       #|  n:num
       #|  min ((f:num->real) n) M
-      #|  !n:num. &0 <= (bn:num->real) n /\\ bn n <= M
+      #|  forall n:num. &0 <= (bn:num->real) n /\\ bn n <= M
       #|  k:num
       #|  &0
       #|  (an:num->real) n
       #|  n:num
       #|  min ((f:num->real) n) M
-      #|  !n:num. min ((an:num->real) n) M <= (bn:num->real) n
+      #|  forall n:num. min ((an:num->real) n) M <= (bn:num->real) n
       #|  real_liminf (\\n. min ((f:num->real) n) M) =\n    sup {(bn:num->real) n | n IN (:num)}
       #|  real_liminf f = sup {(an:num->real) n | n IN (:num)}
       #|  bn = \\n. inf {min ((f:num->real) k) M | k >= n}
       #|  an = \\n. inf {(f:num->real) k | k >= n}
-      #|  !f M. (!n. &0 <= f n) /\\ &0 <= M\n         ==> min (real_liminf f) M <= real_liminf (\\n. min (f n) M)
+      #|  forall f M. (forall n. &0 <= f n) /\\ &0 <= M\n         ==> min (real_liminf f) M <= real_liminf (\\n. min (f n) M)
       #|  B:real
       #|  &0
       #|  M:real
       #|  nn_expectation p (\\x:A. real_liminf (\\n. min ((X:num->A->real) n x) M))
       #|  min (real_liminf (\\n. (X:num->A->real) n x)) M
-      #|  !x:A. x IN prob_carrier p\n      ==> (h:A->real) x <= real_liminf (\\n. min ((X:num->A->real) n x) M)
+      #|  forall x:A. x IN prob_carrier p\n      ==> (h:A->real) x <= real_liminf (\\n. min ((X:num->A->real) n x) M)
       #|  Bg:real
-      #|  !x:A. x IN prob_carrier p ==> (h:A->real) x <= M
+      #|  forall x:A. x IN prob_carrier p ==> (h:A->real) x <= M
       #|  &0 < M
       #|  M = max Bg (&1)
       #|  Bg:real
-      #|  ?Bg. !x:A. x IN prob_carrier p ==> (h:A->real) x <= Bg
+      #|  ?Bg. forall x:A. x IN prob_carrier p ==> (h:A->real) x <= Bg
       #|  h:A->real
-      #|  !p:A prob_space X.\n     (!n. integrable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= real_liminf (\\n. X n x)) /\\\n     (?B. !n. nn_expectation p (X n) <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
+      #|  forall p:A prob_space X.\n     (forall n. integrable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= real_liminf (\\n. X n x)) /\\\n     (?B. forall n. nn_expectation p (X n) <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
       #|  B:real
       #|  0
       #|  (X:num->A->real) 0 x
       #|  0
       #|  inf {(X:num->A->real) k x | k >= 0:num}
       #|  C:real
-      #|  !p:A prob_space X C.\n     (!n. integrable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> inf {X k x | k >= n} <= C) /\\\n     (?B. !n. nn_expectation p (X n) <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
+      #|  forall p:A prob_space X C.\n     (forall n. integrable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> inf {X k x | k >= n} <= C) /\\\n     (?B. forall n. nn_expectation p (X n) <= B)\n     ==> nn_expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. nn_expectation p (X n))
       #|  tail_sigma (p:A prob_space) (B:num->A->bool) =\n   INTERS {sigma_generated (prob_carrier p) (IMAGE B (from n)) | n IN (:num)}
       #|  fin_inters (p:A prob_space) (B:num->A->bool) S =\n   {prob_carrier p} UNION\n   {INTERS (IMAGE B s) | FINITE s /\\ s SUBSET S /\\ ~(s = {})}
-      #|  !p:A prob_space B (s:num->bool).\n    FINITE s /\\ ~(s = {}) /\\\n    (!n. n IN s ==> B n IN prob_events p)\n    ==> INTERS (IMAGE B s) IN prob_events p
+      #|  forall p:A prob_space B (s:num->bool).\n    FINITE s /\\ ~(s = {}) /\\\n    (forall n. n IN s ==> B n IN prob_events p)\n    ==> INTERS (IMAGE B s) IN prob_events p
       #|  (s:num->bool) UNION s'
       #|  INTERS (IMAGE (B:num->A->bool) s) IN prob_events p
       #|  INTERS (IMAGE (B:num->A->bool) s) SUBSET prob_carrier p
@@ -85273,8 +85273,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  INTERS (IMAGE (B:num->A->bool) s) IN prob_events p
       #|  INTERS (IMAGE (B:num->A->bool) s) SUBSET prob_carrier p
       #|  s:num->bool
-      #|  !p:A prob_space B S.\n    (!n. n IN S ==> B n IN prob_events p)\n    ==> pi_system (fin_inters p B S)
-      #|  !p:A prob_space P.\n    P SUBSET prob_events p\n    ==> sigma_generated (prob_carrier p) P SUBSET prob_events p
+      #|  forall p:A prob_space B S.\n    (forall n. n IN S ==> B n IN prob_events p)\n    ==> pi_system (fin_inters p B S)
+      #|  forall p:A prob_space P.\n    P SUBSET prob_events p\n    ==> sigma_generated (prob_carrier p) P SUBSET prob_events p
       #|  prob p (A:A->bool) * prob p (UNIONS {(B:num->A->bool) k | k IN (:num)})
       #|  prob p (UNIONS {(A:A->bool) INTER (B:num->A->bool) n | n IN (:num)})
       #|  \\n:num. sum (from 0 INTER (0..n))\n       (\\k. prob p (A:A->bool) * prob p ((B:num->A->bool) k))
@@ -85283,7 +85283,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ((\\n. sum (from 0 INTER (0..n))\n       (\\k:num. prob p (A:A->bool) * prob p ((B:num->A->bool) k))) --->\n       prob p (UNIONS {A INTER B n | n IN (:num)})) sequentially
       #|  (\\n. sum (from 0 INTER (0..n))\n       (\\k:num. prob p (A:A->bool) * prob p ((B:num->A->bool) k))) =\n     (\\n. prob p A * sum (from 0 INTER (0..n)) (\\k. prob p (B k)))
       #|  ((\\n. sum (from 0 INTER (0..n))\n       (\\k:num. prob p (A:A->bool) * prob p ((B:num->A->bool) k))) --->\n       prob p A * prob p (UNIONS {B k | k IN (:num)})) sequentially
-      #|  !k:num. prob p ((A:A->bool) INTER B k) =\n     prob p A * prob p (B k)
+      #|  forall k:num. prob p ((A:A->bool) INTER B k) =\n     prob p A * prob p (B k)
       #|  B:num->A->bool
       #|  p:A prob_space
       #|  k:num
@@ -85306,17 +85306,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  C:A->bool
       #|  p:A prob_space
       #|  (A:A->bool) INTER prob_carrier p = A
-      #|  !p:A prob_space A.\n    A IN prob_events p ==>\n    lambda_system (prob_carrier p)\n      {C | C IN prob_events p /\\\n           prob p (A INTER C) = prob p A * prob p C}
+      #|  forall p:A prob_space A.\n    A IN prob_events p ==>\n    lambda_system (prob_carrier p)\n      {C | C IN prob_events p /\\\n           prob p (A INTER C) = prob p A * prob p C}
       #|  {C:A->bool | C IN prob_events p /\\\n     prob p (A INTER C) = prob p A * prob p C}
       #|  P:(A->bool)->bool
       #|  prob_carrier (p:A prob_space)
       #|  sigma_generated (prob_carrier p) P SUBSET\n    {C:A->bool | C IN prob_events p /\\\n     prob p (A INTER C) = prob p A * prob p C}
       #|  C:A->bool IN prob_events p
-      #|  !p:A prob_space A P.\n    A IN prob_events p /\\\n    pi_system P /\\ UNIONS P = prob_carrier p /\\\n    P SUBSET prob_events p /\\\n    (!C. C IN P ==> prob p (A INTER C) = prob p A * prob p C)\n    ==> !C. C IN sigma_generated (prob_carrier p) P\n            ==> prob p (A INTER C) = prob p A * prob p C
+      #|  forall p:A prob_space A P.\n    A IN prob_events p /\\\n    pi_system P /\\ UNIONS P = prob_carrier p /\\\n    P SUBSET prob_events p /\\\n    (forall C. C IN P ==> prob p (A INTER C) = prob p A * prob p C)\n    ==> forall C. C IN sigma_generated (prob_carrier p) P\n            ==> prob p (A INTER C) = prob p A * prob p C
       #|  (\\n. prob p ((B:num->A->bool) n)) = (\\n. mu (B n))
       #|  from 0
       #|  \\n. prob p ((B:num->A->bool) n)
-      #|  !n. (B:num->A->bool) n IN prob_events p
+      #|  forall n. (B:num->A->bool) n IN prob_events p
       #|  B:num->A->bool
       #|  a:A->bool
       #|  prob_carrier (p:A prob_space)
@@ -85324,28 +85324,28 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  (a:A->bool) SUBSET prob_carrier p
       #|  a:A->bool
-      #|  !p:A prob_space mu.\n     signed_measure p mu /\\ mu (prob_carrier p) = &1\n     ==> lambda_system (prob_carrier p)\n           {a | a IN prob_events p /\\ mu a = prob p a}
+      #|  forall p:A prob_space mu.\n     signed_measure p mu /\\ mu (prob_carrier p) = &1\n     ==> lambda_system (prob_carrier p)\n           {a | a IN prob_events p /\\ mu a = prob p a}
       #|  sigma_generated (prob_carrier p) P SUBSET\n     {a:A->bool | a IN prob_events p /\\ mu a = prob p a}
-      #|  !p:A prob_space mu P.\n     signed_measure p mu /\\ mu (prob_carrier p) = &1 /\\\n     pi_system P /\\ UNIONS P = prob_carrier p /\\\n     P SUBSET prob_events p /\\\n     (!c. c IN P ==> mu c = prob p c)\n     ==> !c. c IN sigma_generated (prob_carrier p) P ==> mu c = prob p c
+      #|  forall p:A prob_space mu P.\n     signed_measure p mu /\\ mu (prob_carrier p) = &1 /\\\n     pi_system P /\\ UNIONS P = prob_carrier p /\\\n     P SUBSET prob_events p /\\\n     (forall c. c IN P ==> mu c = prob p c)\n     ==> forall c. c IN sigma_generated (prob_carrier p) P ==> mu c = prob p c
       #|  C2:(A->bool)->bool
-      #|  !(U:A->bool) C1 C2.\n    C1 SUBSET C2 /\\ (!a. a IN C2 ==> a SUBSET U)\n    ==> sigma_generated U C1 SUBSET sigma_generated U C2
+      #|  forall(U:A->bool) C1 C2.\n    C1 SUBSET C2 /\\ (forall a. a IN C2 ==> a SUBSET U)\n    ==> sigma_generated U C1 SUBSET sigma_generated U C2
       #|  real_halflines = {{x:real | x <= a} | a IN (:real)}
-      #|  !s. s IN real_halflines ==> s SUBSET (:real)
+      #|  forall s. s IN real_halflines ==> s SUBSET (:real)
       #|  sigma_algebra (sigma_generated (:real) real_halflines)
       #|  UNIONS (sigma_generated (:real) real_halflines) = (:real)
       #|  a:real
-      #|  !a. {x:real | x <= a} IN sigma_generated (:real) real_halflines
+      #|  forall a. {x:real | x <= a} IN sigma_generated (:real) real_halflines
       #|  (:real)
       #|  b:real
       #|  \\x:real. x
       #|  {x:real | x < b} = UNIONS {{x:real | x <= b - inv(&n + &1)} | n IN (:num)}
-      #|  !b. {x:real | x < b} IN sigma_generated (:real) real_halflines
+      #|  forall b. {x:real | x < b} IN sigma_generated (:real) real_halflines
       #|  real_interval(a,b) = {x:real | x < b} DIFF {x:real | x <= a}
-      #|  !a b. real_interval(a,b) IN sigma_generated (:real) real_halflines
+      #|  forall a b. real_interval(a,b) IN sigma_generated (:real) real_halflines
       #|  i:real->bool
       #|  i:real->bool
       #|  D:(real->bool)->bool
-      #|  !s. real_open s ==> s IN sigma_generated (:real) real_halflines
+      #|  forall s. real_open s ==> s IN sigma_generated (:real) real_halflines
       #|  euclideanreal
       #|  (x:real->bool) IN s ==> x SUBSET UNIONS s
       #|  a:real
@@ -85374,7 +85374,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  INTERS (IMAGE (B:num->A->bool) S1) INTER prob_carrier p =\n      INTERS (IMAGE B S1)
       #|  C:A->bool
-      #|  !C:A->bool. C IN FI\n    ==> prob p (INTERS (IMAGE (B:num->A->bool) S1) INTER C) =\n        prob p (INTERS (IMAGE B S1)) * prob p C
+      #|  forall C:A->bool. C IN FI\n    ==> prob p (INTERS (IMAGE (B:num->A->bool) S1) INTER C) =\n        prob p (INTERS (IMAGE B S1)) * prob p C
       #|  INTERS (IMAGE (B:num->A->bool) S1) IN prob_events p
       #|  FI SUBSET prob_events (p:A prob_space)
       #|  INTERS (IMAGE (B:num->A->bool) s) IN prob_events p
@@ -85389,8 +85389,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  s:num->bool
       #|  pi_system (FI:(A->bool)->bool)
       #|  FI = {prob_carrier (p:A prob_space)} UNION\n    {INTERS (IMAGE (B:num->A->bool) s) |\n     FINITE s /\\ s SUBSET from N /\\ ~(s = {})}
-      #|  !n:num. (B:num->A->bool) n IN prob_events p
-      #|  !p:A prob_space (B:num->A->bool) (S1:num->bool) N.\n    indep_events_seq p B /\\\n    FINITE S1 /\\ ~(S1 = {}) /\\ S1 SUBSET {m | m < N}\n    ==> !D. D IN sigma_generated (prob_carrier p) (IMAGE B (from N))\n            ==> prob p (INTERS (IMAGE B S1) INTER D) =\n                prob p (INTERS (IMAGE B S1)) * prob p D
+      #|  forall n:num. (B:num->A->bool) n IN prob_events p
+      #|  forall p:A prob_space (B:num->A->bool) (S1:num->bool) N.\n    indep_events_seq p B /\\\n    FINITE S1 /\\ ~(S1 = {}) /\\ S1 SUBSET {m | m < N}\n    ==> forall D. D IN sigma_generated (prob_carrier p) (IMAGE B (from N))\n            ==> prob p (INTERS (IMAGE B S1) INTER D) =\n                prob p (INTERS (IMAGE B S1)) * prob p D
       #|  prob (p:A prob_space) E = prob p E * prob p E
       #|  prob (p:A prob_space) E * (&1 - prob p E) = &0
       #|  (E:A->bool) INTER E = E
@@ -85432,14 +85432,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  (E:A->bool) INTER prob_carrier p = E
       #|  C:A->bool
-      #|  !C:A->bool. C IN fin_inters p B (:num)\n    ==> prob p (E INTER C) = prob p E * prob p C
-      #|  !n:num. (B:num->A->bool) n IN prob_events p
-      #|  !p:A prob_space (B:num->A->bool) E.\n    indep_events_seq p B /\\\n    E IN tail_sigma p B /\\ E IN prob_events p\n    ==> prob p E = &0 \\/ prob p E = &1
+      #|  forall C:A->bool. C IN fin_inters p B (:num)\n    ==> prob p (E INTER C) = prob p E * prob p C
+      #|  forall n:num. (B:num->A->bool) n IN prob_events p
+      #|  forall p:A prob_space (B:num->A->bool) E.\n    indep_events_seq p B /\\\n    E IN tail_sigma p B /\\ E IN prob_events p\n    ==> prob p E = &0 \\/ prob p E = &1
       #|  n:num
-      #|  !A:num->A->bool m.\n     INTERS {A n | n >= m} SUBSET INTERS {A n | n >= SUC m}
+      #|  forall A:num->A->bool m.\n     INTERS {A n | n >= m} SUBSET INTERS {A n | n >= SUC m}
       #|  m:num
       #|  (A:num->A->bool) m
-      #|  !p:A prob_space A (m:num).\n     (!n. A n IN prob_events p)\n     ==> INTERS {A n | n >= m} IN prob_events p
+      #|  forall p:A prob_space A (m:num).\n     (forall n. A n IN prob_events p)\n     ==> INTERS {A n | n >= m} IN prob_events p
       #|  n':num
       #|  &0
       #|  {prob p ((A:num->A->bool) k) | k >= n'}
@@ -85454,15 +85454,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sequentially
       #|  m:num
       #|  prob p ((A:num->A->bool) m)
-      #|  !m. prob p ((C:num->A->bool) m) <=\n    inf {prob p ((A:num->A->bool) n) | n >= m}
+      #|  forall m. prob p ((C:num->A->bool) m) <=\n    inf {prob p ((A:num->A->bool) n) | n >= m}
       #|  n:num
-      #|  !m n. n >= m ==> (C:num->A->bool) m SUBSET (A:num->A->bool) n
+      #|  forall m n. n >= m ==> (C:num->A->bool) m SUBSET (A:num->A->bool) n
       #|  ((\\m. prob p ((C:num->A->bool) m)) --->\n      prob p (UNIONS {C m | m IN (:num)})) sequentially
       #|  liminf_events (A:num->A->bool) = UNIONS {C m | m IN (:num)}
-      #|  !m. (C:num->A->bool) m IN prob_events p
-      #|  !m. (C:num->A->bool) m SUBSET C (SUC m)
+      #|  forall m. (C:num->A->bool) m IN prob_events p
+      #|  forall m. (C:num->A->bool) m SUBSET C (SUC m)
       #|  C = \\m:num. INTERS {(A:num->A->bool) n | n >= m}
-      #|  !p:A prob_space A.\n     (!n. A n IN prob_events p)\n     ==> prob p (liminf_events A) <=\n         real_liminf (\\n. prob p (A n))
+      #|  forall p:A prob_space A.\n     (forall n. A n IN prob_events p)\n     ==> prob p (liminf_events A) <=\n         real_liminf (\\n. prob p (A n))
       #|  n:num
       #|  n':num
       #|  prob p ((A:num->A->bool) n')
@@ -85476,17 +85476,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sequentially
       #|  m:num
       #|  prob p ((A:num->A->bool) m)
-      #|  !m. sup {prob p ((A:num->A->bool) n) | n >= m} <=\n    prob p ((D:num->A->bool) m)
+      #|  forall m. sup {prob p ((A:num->A->bool) n) | n >= m} <=\n    prob p ((D:num->A->bool) m)
       #|  n:num
       #|  (A:num->A->bool) n
       #|  x:A
-      #|  !m (n:num). n >= m ==> prob p ((A:num->A->bool) n) <=\n    prob p ((D:num->A->bool) m)
+      #|  forall m (n:num). n >= m ==> prob p ((A:num->A->bool) n) <=\n    prob p ((D:num->A->bool) m)
       #|  ((\\m. prob p ((D:num->A->bool) m)) --->\n      prob p (INTERS {D m | m IN (:num)})) sequentially
       #|  limsup_events (A:num->A->bool) = INTERS {D m | m IN (:num)}
-      #|  !m. (D:num->A->bool) m IN prob_events p
-      #|  !m. (D:num->A->bool) (SUC m) SUBSET D m
+      #|  forall m. (D:num->A->bool) m IN prob_events p
+      #|  forall m. (D:num->A->bool) (SUC m) SUBSET D m
       #|  D = \\m:num. UNIONS {(A:num->A->bool) n | n >= m}
-      #|  !p:A prob_space A.\n     (!n. A n IN prob_events p)\n     ==> real_limsup (\\n. prob p (A n)) <=\n         prob p (limsup_events A)
+      #|  forall p:A prob_space A.\n     (forall n. A n IN prob_events p)\n     ==> real_limsup (\\n. prob p (A n)) <=\n         prob p (limsup_events A)
       #|  0
       #|  sup {(f:num->real) k | k >= 0}
       #|  0
@@ -85497,8 +85497,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  MAX m n
       #|  b:real
       #|  (f:num->real) (MAX m n)
-      #|  !m n. inf {(f:num->real) k | k >= m} <=\n      sup {f k | k >= n}
-      #|  !f b B. (!n. b <= f n) /\\ (!n. f n <= B)\n           ==> real_liminf f <= real_limsup f
+      #|  forall m n. inf {(f:num->real) k | k >= m} <=\n      sup {f k | k >= n}
+      #|  forall f b B. (forall n. b <= f n) /\\ (forall n. f n <= B)\n           ==> real_liminf f <= real_limsup f
       #|  n':num
       #|  (f:num->real) n'
       #|  B:real
@@ -85515,7 +85515,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  L + e:real
       #|  {sup {(f:num->real) k | k >= n} | n IN (:num)}
       #|  real_limsup (f:num->real) < L + e
-      #|  !f b B L.\n     (!n. b <= f n) /\\ (!n. f n <= B) /\\ real_limsup f <= L\n     ==> !e. &0 < e ==> ?N. !n. N <= n ==> f n < L + e
+      #|  forall f b B L.\n     (forall n. b <= f n) /\\ (forall n. f n <= B) /\\ real_limsup f <= L\n     ==> forall e. &0 < e ==> ?N. forall n. N <= n ==> f n < L + e
       #|  (f:num->real) m < L + e
       #|  L - e < (f:num->real) m
       #|  N1:num <= m /\\ N2 <= m
@@ -85534,14 +85534,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  b:real
       #|  f:num->real
       #|  e:real
-      #|  !f b B L.\n     (!n. b <= f n) /\\ (!n. f n <= B) /\\\n     L <= real_liminf f /\\ real_limsup f <= L\n     ==> (f ---> L) sequentially
+      #|  forall f b B L.\n     (forall n. b <= f n) /\\ (forall n. f n <= B) /\\\n     L <= real_liminf f /\\ real_limsup f <= L\n     ==> (f ---> L) sequentially
       #|  n:num
       #|  (f:num->real) n
       #|  B:real
       #|  (f:num->real) n
       #|  0
       #|  sup {(f:num->real) k | k >= 0:num}
-      #|  !f (b:real) B. (!n. b <= f n) /\\ (!n. f n <= B)\n                  ==> b <= real_limsup f
+      #|  forall f (b:real) B. (forall n. b <= f n) /\\ (forall n. f n <= B)\n                  ==> b <= real_limsup f
       #|  0
       #|  (f:num->real) 0
       #|  0
@@ -85551,7 +85551,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (f:num->real) n
       #|  b:real
       #|  sup {(f:num->real) k | k >= 0:num}
-      #|  !f (b:real) B. (!n. b <= f n) /\\ (!n. f n <= B)\n                  ==> real_limsup f <= B
+      #|  forall f (b:real) B. (forall n. b <= f n) /\\ (forall n. f n <= B)\n                  ==> real_limsup f <= B
       #|  k:num
       #|  (g:num->real) k
       #|  B:real
@@ -85567,8 +85567,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sup {(f:num->real) k | k >= n}
       #|  0
       #|  sup {(g:num->real) k | k >= 0:num}
-      #|  !f g (b:real) B. (!n. f n <= g n) /\\ (!n. b <= f n) /\\ (!n. g n <= B)\n                    ==> real_limsup f <= real_limsup g
-      #|  !s c bprime:real. c - s < bprime ==> c - bprime < s
+      #|  forall f g (b:real) B. (forall n. f n <= g n) /\\ (forall n. b <= f n) /\\ (forall n. g n <= B)\n                    ==> real_limsup f <= real_limsup g
+      #|  forall s c bprime:real. c - s < bprime ==> c - bprime < s
       #|  s < c - bprime2 ==> bprime2 < c - s
       #|  p:num
       #|  c - sup {(f:num->real) k | k >= p}
@@ -85616,12 +85616,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  c - s <= c - fj <=> fj <= s
       #|  j:num
       #|  y:real
-      #|  !m:num. inf {c - (f:num->real) k | k >= m} = c - sup {f k | k >= m}
-      #|  !f (b:real) B c. (!n. b <= f n) /\\ (!n. f n <= B)\n     ==> real_liminf (\\n. c - f n) = c - real_limsup f
+      #|  forall m:num. inf {c - (f:num->real) k | k >= m} = c - sup {f k | k >= m}
+      #|  forall f (b:real) B c. (forall n. b <= f n) /\\ (forall n. f n <= B)\n     ==> real_liminf (\\n. c - f n) = c - real_limsup f
       #|  nn_expectation (p:A prob_space)\n       (\\x:A. B - real_limsup\n                     (\\n. (X:num->A->real) n x)) =\n     B - nn_expectation p\n           (\\x. real_limsup (\\n. X n x))
       #|  random_variable (p:A prob_space)\n     (\\x. B - real_liminf (\\n. B - (X:num->A->real) n x))
       #|  w:A
-      #|  !x:A. x IN prob_carrier p ==>\n     real_liminf (\\n. B - (X:num->A->real) n x) =\n     B - real_limsup (\\n. X n x)
+      #|  forall x:A. x IN prob_carrier p ==>\n     real_liminf (\\n. B - (X:num->A->real) n x) =\n     B - real_limsup (\\n. X n x)
       #|  (w:A) IN prob_carrier p
       #|  w:A
       #|  {x:A | x IN prob_carrier p /\\\n      real_limsup (\\n. (X:num->A->real) n x) <= a} =\n     {x | x IN prob_carrier p /\\\n      B - real_liminf (\\n. B - X n x) <= a}
@@ -85629,22 +85629,22 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k:num
       #|  x:A
       #|  k':num
-      #|  !n:num (x:A). x IN prob_carrier p\n         ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n         ==> (X:num->A->real) n x <= B
       #|  &0
       #|  SUC n
       #|  B - (X:num->A->real) (SUC n) x
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n        ==> &0 <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n        ==> &0 <= (X:num->A->real) n x
       #|  n:num
       #|  x:A
       #|  k:num
-      #|  !n:num (x:A). x IN prob_carrier p\n         ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n         ==> (X:num->A->real) n x <= B
       #|  &0
       #|  B - (X:num->A->real) n x
       #|  x:A
       #|  k:num
-      #|  !n:num (x:A). x IN prob_carrier p\n        ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n        ==> (X:num->A->real) n x <= B
       #|  n:num
       #|  B - (X:num->A->real) n x
       #|  B:real
@@ -85661,7 +85661,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  real_liminf (\\n. (X:num->A->real) n x)
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n       &0 <= real_limsup (\\n. (X:num->A->real) n x) /\\\n       real_limsup (\\n. X n x) <= B
+      #|  forall x:A. x IN prob_carrier p ==>\n       &0 <= real_limsup (\\n. (X:num->A->real) n x) /\\\n       real_limsup (\\n. X n x) <= B
       #|  real_liminf (\\n:num. nn_expectation (p:A prob_space)\n        (\\x:A. B - (X:num->A->real) n x)) =\n       real_liminf (\\n. B - nn_expectation p (X n))
       #|  real_liminf (\\n:num. nn_expectation (p:A prob_space)\n      (\\x:A. B - (X:num->A->real) n x))
       #|  x:A
@@ -85674,26 +85674,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  real_liminf (\\n:num.\n       B - nn_expectation (p:A prob_space)\n             ((X:num->A->real) n)) =\n     B - real_limsup (\\n. nn_expectation p (X n))
       #|  B:real
       #|  &0
-      #|  !x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. B - (X:num->A->real) n x) =\n       B - real_limsup (\\n. X n x)
-      #|  !n:num. nn_expectation (p:A prob_space)\n       (\\x. B - (X:num->A->real) n x) =\n       B - nn_expectation p (X n)
+      #|  forall x:A. x IN prob_carrier p ==>\n       real_liminf (\\n. B - (X:num->A->real) n x) =\n       B - real_limsup (\\n. X n x)
+      #|  forall n:num. nn_expectation (p:A prob_space)\n       (\\x. B - (X:num->A->real) n x) =\n       B - nn_expectation p (X n)
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B:real
       #|  \\n:num. \\x:A. B - (X:num->A->real) n x
       #|  p:A prob_space
       #|  nn_expectation (p:A prob_space)\n       (\\x. real_liminf (\\n. B - (X:num->A->real) n x))\n       <= real_liminf\n            (\\n. nn_expectation p (\\x. B - X n x))
-      #|  !n:num. nn_expectation (p:A prob_space)\n    ((X:num->A->real) n) <= B
+      #|  forall n:num. nn_expectation (p:A prob_space)\n    ((X:num->A->real) n) <= B
       #|  B:real
-      #|  !n:num. &0 <= nn_expectation (p:A prob_space)\n    ((X:num->A->real) n)
+      #|  forall n:num. &0 <= nn_expectation (p:A prob_space)\n    ((X:num->A->real) n)
       #|  a:A
       #|  p:A prob_space
       #|  &0 <= B:real
-      #|  !p:A prob_space X B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> real_limsup (\\n. nn_expectation p (X n))\n         <= nn_expectation p (\\x. real_limsup (\\n. X n x))
+      #|  forall p:A prob_space X B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> real_limsup (\\n. nn_expectation p (X n))\n         <= nn_expectation p (\\x. real_limsup (\\n. X n x))
       #|  a:real
       #|  k:num >= SUC n
       #|  k:num
@@ -85712,7 +85712,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  p:A prob_space
       #|  &0 <= B:real
-      #|  !p:A prob_space X B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> random_variable p (\\x. real_liminf (\\n. X n x))
+      #|  forall p:A prob_space X B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> random_variable p (\\x. real_liminf (\\n. X n x))
       #|  random_variable (p:A prob_space)\n     (\\x. B - real_liminf (\\n. B - (X:num->A->real) n x))
       #|  B:real
       #|  &0
@@ -85722,10 +85722,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x:A | x IN prob_carrier p /\\\n      real_limsup (\\n. (X:num->A->real) n x) <= a} =\n     {x | x IN prob_carrier p /\\\n      B - real_liminf (\\n. B - X n x) <= a}
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> &0 <= (X:num->A->real) n x
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B:real
       #|  \\n:num. \\x:A. B - (X:num->A->real) n x
@@ -85734,13 +85734,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:A
       #|  p:A prob_space
       #|  &0 <= B:real
-      #|  !p:A prob_space X B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> random_variable p (\\x. real_limsup (\\n. X n x))
+      #|  forall p:A prob_space X B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> random_variable p (\\x. real_limsup (\\n. X n x))
       #|  a:real
       #|  (\\n. d - (\\n. (f:num->real) n - d) n) =\n      (\\n. &2 * d - f n)
       #|  n:num
-      #|  !n. (f:num->real) n <= B
+      #|  forall n. (f:num->real) n <= B
       #|  n:num
-      #|  !n. b <= (f:num->real) n
+      #|  forall n. b <= (f:num->real) n
       #|  d:real
       #|  B - d:real
       #|  b - d:real
@@ -85750,26 +85750,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B:real
       #|  b:real
       #|  f:num->real
-      #|  !f b B d. (!n. b <= f n) /\\ (!n. f n <= B)\n     ==> real_limsup (\\n. f n - d) = real_limsup f - d
+      #|  forall f b B d. (forall n. b <= f n) /\\ (forall n. f n <= B)\n     ==> real_limsup (\\n. f n - d) = real_limsup f - d
       #|  (\\n. &0 - (\\n. --((f:num->real) n)) n) = f
       #|  n:num
-      #|  !n. b <= (f:num->real) n
+      #|  forall n. b <= (f:num->real) n
       #|  n:num
-      #|  !n. (f:num->real) n <= B
+      #|  forall n. (f:num->real) n <= B
       #|  &0:real
       #|  --b:real
       #|  --B:real
       #|  \\n:num. --((f:num->real) n)
       #|  (\\n. --d - (\\n. --((f:num->real) n)) n) =\n    (\\n. f n - d)
       #|  n:num
-      #|  !n. b <= (f:num->real) n
+      #|  forall n. b <= (f:num->real) n
       #|  n:num
-      #|  !n. (f:num->real) n <= B
+      #|  forall n. (f:num->real) n <= B
       #|  --d:real
       #|  --b:real
       #|  --B:real
       #|  \\n:num. --((f:num->real) n)
-      #|  !f b B d. (!n. b <= f n) /\\ (!n. f n <= B)\n     ==> real_liminf (\\n. f n - d) = real_liminf f - d
+      #|  forall f b B d. (forall n. b <= f n) /\\ (forall n. f n <= B)\n     ==> real_liminf (\\n. f n - d) = real_liminf f - d
       #|  (\\x:A. &0):A->real
       #|  p:A prob_space
       #|  &0 <= f ==> max (--f) (&0) = &0
@@ -85777,7 +85777,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space) (\\x. max (--((f:A->real) x)) (&0)) = &0
       #|  &0 <= f ==> max f (&0) = f
       #|  nn_expectation (p:A prob_space) (\\x. max ((f:A->real) x) (&0)) =\n    nn_expectation p f
-      #|  !p:A prob_space (f:A->real).\n    integrable p f /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x)\n    ==> expectation p f = nn_expectation p f
+      #|  forall p:A prob_space (f:A->real).\n    integrable p f /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x)\n    ==> expectation p f = nn_expectation p f
       #|  B:real
       #|  A:real
       #|  B:real
@@ -85790,7 +85790,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space)\n      (\\x. real_limsup (\\n. (X:num->A->real) n x - A)) =\n    expectation p (\\x. real_limsup (\\n. X n x)) - A
       #|  B:real
       #|  A:real
-      #|  !w:A. w IN prob_carrier p ==>\n      real_limsup (\\n. (X:num->A->real) n w - A) =\n      real_limsup (\\n. X n w) - A
+      #|  forall w:A. w IN prob_carrier p ==>\n      real_limsup (\\n. (X:num->A->real) n w - A) =\n      real_limsup (\\n. X n w) - A
       #|  A:real
       #|  B:real
       #|  A:real
@@ -85809,10 +85809,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x:A | x IN prob_carrier p /\\\n       real_limsup (\\n. (X:num->A->real) n x) <= a} =\n      {x | x IN prob_carrier p /\\\n       real_limsup (\\n. X n x - A) <= a - A}
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> (X:num->A->real) n x <= B
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B - A:real
       #|  \\n:num. \\x:A. (X:num->A->real) n x - A
@@ -85827,23 +85827,23 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B = expectation (p:A prob_space) (\\x:A. B:real)
       #|  x:A
       #|  A = expectation (p:A prob_space) (\\x:A. A:real)
-      #|  !n:num. A <= expectation (p:A prob_space)\n      ((X:num->A->real) n) /\\ expectation p (X n) <= B
+      #|  forall n:num. A <= expectation (p:A prob_space)\n      ((X:num->A->real) n) /\\ expectation p (X n) <= B
       #|  \\x:A. A:real
       #|  (X:num->A->real) n
       #|  p:A prob_space
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
       #|  x:A
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  nn_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n x - A) =\n       expectation p (\\x. X n x - A)
-      #|  !n:num. nn_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) n x - A) = expectation p (X n) - A
+      #|  forall n:num. nn_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) n x - A) = expectation p (X n) - A
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> A <= (X:num->A->real) n x
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B - A:real
       #|  \\n:num. \\x:A. (X:num->A->real) n x - A
@@ -85852,17 +85852,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  A <= f /\\ f <= B ==> abs f <= max (abs A) (abs B)
       #|  x:A
       #|  max (abs A) (abs B)
-      #|  !n:num. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n:num. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  (X:num->A->real) 0 a
       #|  a:A
       #|  p:A prob_space
       #|  A <= B:real
-      #|  !p:A prob_space X A B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> A <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> real_limsup (\\n. expectation p (X n))\n         <= expectation p (\\x. real_limsup (\\n. X n x))
+      #|  forall p:A prob_space X A B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> A <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> real_limsup (\\n. expectation p (X n))\n         <= expectation p (\\x. real_limsup (\\n. X n x))
       #|  a - A:real
       #|  &N:real
       #|  (g:A->real) x
       #|  abs f <= m ==> max (min f m) (--m) = f
-      #|  !n:num. max (min ((X:num->A->real) n x) (&M)) (--(&M)) = X n x
+      #|  forall n:num. max (min ((X:num->A->real) n x) (&M)) (--(&M)) = X n x
       #|  M:num
       #|  N:num
       #|  N:num
@@ -85870,7 +85870,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  x:A
       #|  &2 * &M
-      #|  !a:real m:real. (a + m) - m = a
+      #|  forall a:real m:real. (a + m) - m = a
       #|  &M
       #|  &2 * &M
       #|  &0
@@ -85879,8 +85879,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. real_limsup (\\n. max (min ((X:num->A->real) n x) (&M)) (--(&M)))) = (\\x. real_limsup (\\n. max (min (X n x) (&M)) (--(&M)) + &M) - &M)
       #|  M:num
       #|  \\M x:A. real_limsup (\\n. max (min ((X:num->A->real) n x) (&M)) (--(&M)))
-      #|  !p:A prob_space X g.\n     (!n. random_variable p (X n)) /\\\n     random_variable p g /\\\n     (!n x. x IN prob_carrier p ==> abs(X n x) <= g x)\n     ==> random_variable p (\\x. real_limsup (\\n. X n x))
-      #|  !p:A prob_space (f:A->real). integrable p f ==> random_variable p f
+      #|  forall p:A prob_space X g.\n     (forall n. random_variable p (X n)) /\\\n     random_variable p g /\\\n     (forall n x. x IN prob_carrier p ==> abs(X n x) <= g x)\n     ==> random_variable p (\\x. real_limsup (\\n. X n x))
+      #|  forall p:A prob_space (f:A->real). integrable p f ==> random_variable p f
       #|  \\x:A. real_limsup (\\n. (X:num->A->real) n x)
       #|  h:A->real
       #|  p:A prob_space
@@ -85900,7 +85900,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space) (\\x. real_liminf (\\n. (h:A->real) x - (X:num->A->real) n x)) = nn_expectation p (\\x. h x - real_limsup (\\n. X n x))
       #|  (h:A->real) x
       #|  --(h:A->real) x
-      #|  !x:A. x IN prob_carrier p ==> real_liminf (\\n. (h:A->real) x - (X:num->A->real) n x) = h x - real_limsup (\\n. X n x)
+      #|  forall x:A. x IN prob_carrier p ==> real_liminf (\\n. (h:A->real) x - (X:num->A->real) n x) = h x - real_limsup (\\n. X n x)
       #|  expectation (p:A prob_space) h
       #|  --expectation (p:A prob_space) h
       #|  (\\n. nn_expectation (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x)) = (\\n. expectation p h - expectation p (X n))
@@ -85908,14 +85908,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  --d <= f ==> &0 <= f + d
       #|  expectation (p:A prob_space) ((X:num->A->real) n) + expectation p h = expectation p (\\x. X n x + h x)
       #|  &0 <= e + g ==> --g <= e
-      #|  !n:num. --expectation (p:A prob_space) h <= expectation p ((X:num->A->real) n)
-      #|  !n:num. expectation (p:A prob_space) ((X:num->A->real) n) <= expectation p h
+      #|  forall n:num. --expectation (p:A prob_space) h <= expectation p ((X:num->A->real) n)
+      #|  forall n:num. expectation (p:A prob_space) ((X:num->A->real) n) <= expectation p h
       #|  (X:num->A->real) n
       #|  h:A->real
       #|  p:A prob_space
       #|  f <= g ==> &0 <= g - f
       #|  nn_expectation (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x) = expectation p (\\x. h x - X n x)
-      #|  !n:num. nn_expectation (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x) = expectation p h - expectation p (X n)
+      #|  forall n:num. nn_expectation (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x) = expectation p h - expectation p (X n)
       #|  --d <= f ==> &0 <= f + d
       #|  expectation (p:A prob_space) ((X:num->A->real) n) + expectation p h = expectation p (\\x. X n x + h x)
       #|  &0 <= e + g ==> --g <= e
@@ -85933,14 +85933,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. \\x:A. (h:A->real) x - (X:num->A->real) n x
       #|  p:A prob_space
       #|  nn_expectation (p:A prob_space) (\\x. real_liminf (\\n. (h:A->real) x - (X:num->A->real) n x))\n     <= real_liminf (\\n. nn_expectation p (\\x. h x - X n x))
-      #|  !n:num. integrable (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x)
+      #|  forall n:num. integrable (p:A prob_space) (\\x. (h:A->real) x - (X:num->A->real) n x)
       #|  abs f <= b ==> --b <= f
-      #|  !n x:A. x IN prob_carrier p ==> --(h:A->real) x <= (X:num->A->real) n x
+      #|  forall n x:A. x IN prob_carrier p ==> --(h:A->real) x <= (X:num->A->real) n x
       #|  abs f <= b ==> f <= b
-      #|  !n x:A. x IN prob_carrier p ==> (X:num->A->real) n x <= (h:A->real) x
+      #|  forall n x:A. x IN prob_carrier p ==> (X:num->A->real) n x <= (h:A->real) x
       #|  abs((X:num->A->real) 0 x)
-      #|  !x:A. x IN prob_carrier p ==> &0 <= (h:A->real) x
-      #|  !p:A prob_space X h.\n    (!n. integrable p (X n)) /\\\n    integrable p h /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= h x)\n    ==> real_limsup (\\n. expectation p (X n))\n        <= expectation p (\\x. real_limsup (\\n. X n x))
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= (h:A->real) x
+      #|  forall p:A prob_space X h.\n    (forall n. integrable p (X n)) /\\\n    integrable p h /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= h x)\n    ==> real_limsup (\\n. expectation p (X n))\n        <= expectation p (\\x. real_limsup (\\n. X n x))
       #|  nn_expectation (p:A prob_space)\n       (\\x. real_liminf (\\n. (X:num->A->real) n x - A)) =\n     expectation p (\\x. real_liminf (\\n. X n x)) - A
       #|  real_liminf (\\n. nn_expectation (p:A prob_space)\n    (\\x. (X:num->A->real) n x - A))
       #|  expectation (p:A prob_space) (\\x. real_liminf (\\n. (X:num->A->real) n x)) - A\n       <= real_liminf (\\n. expectation p (X n)) - A
@@ -85953,7 +85953,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn_expectation (p:A prob_space)\n      (\\x. real_liminf (\\n. (X:num->A->real) n x - A)) =\n    expectation p (\\x. real_liminf (\\n. X n x)) - A
       #|  B:real
       #|  A:real
-      #|  !w:A. w IN prob_carrier p ==>\n      real_liminf (\\n. (X:num->A->real) n w - A) =\n      real_liminf (\\n. X n w) - A
+      #|  forall w:A. w IN prob_carrier p ==>\n      real_liminf (\\n. (X:num->A->real) n w - A) =\n      real_liminf (\\n. X n w) - A
       #|  A:real
       #|  B:real
       #|  A:real
@@ -85972,10 +85972,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {x:A | x IN prob_carrier p /\\\n       real_liminf (\\n. (X:num->A->real) n x) <= a} =\n      {x | x IN prob_carrier p /\\\n       real_liminf (\\n. X n x - A) <= a - A}
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> (X:num->A->real) n x <= B
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B - A:real
       #|  \\n:num. \\x:A. (X:num->A->real) n x - A
@@ -85990,23 +85990,23 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  B = expectation (p:A prob_space) (\\x:A. B:real)
       #|  x:A
       #|  A = expectation (p:A prob_space) (\\x:A. A:real)
-      #|  !n:num. A <= expectation (p:A prob_space)\n      ((X:num->A->real) n) /\\ expectation p (X n) <= B
+      #|  forall n:num. A <= expectation (p:A prob_space)\n      ((X:num->A->real) n) /\\ expectation p (X n) <= B
       #|  \\x:A. A:real
       #|  (X:num->A->real) n
       #|  p:A prob_space
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n       ==> A <= (X:num->A->real) n x
       #|  x:A
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  nn_expectation (p:A prob_space)\n       (\\x. (X:num->A->real) n x - A) =\n       expectation p (\\x. X n x - A)
-      #|  !n:num. nn_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) n x - A) = expectation p (X n) - A
+      #|  forall n:num. nn_expectation (p:A prob_space)\n      (\\x. (X:num->A->real) n x - A) = expectation p (X n) - A
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> (X:num->A->real) n x <= B
       #|  x:A
       #|  n:num
-      #|  !n:num (x:A). x IN prob_carrier p\n      ==> A <= (X:num->A->real) n x
+      #|  forall n:num (x:A). x IN prob_carrier p\n      ==> A <= (X:num->A->real) n x
       #|  (\\x:A. (X:num->A->real) n x) = X n
       #|  B - A:real
       #|  \\n:num. \\x:A. (X:num->A->real) n x - A
@@ -86015,12 +86015,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  A <= f /\\ f <= B ==> abs f <= max (abs A) (abs B)
       #|  x:A
       #|  max (abs A) (abs B)
-      #|  !n:num. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n:num. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  (X:num->A->real) 0 a
       #|  a:A
       #|  p:A prob_space
       #|  A <= B:real
-      #|  !p:A prob_space X A B.\n     (!n. random_variable p (X n)) /\\\n     (!n x. x IN prob_carrier p ==> A <= X n x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= B)\n     ==> expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. expectation p (X n))
+      #|  forall p:A prob_space X A B.\n     (forall n. random_variable p (X n)) /\\\n     (forall n x. x IN prob_carrier p ==> A <= X n x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= B)\n     ==> expectation p (\\x. real_liminf (\\n. X n x))\n         <= real_liminf (\\n. expectation p (X n))
       #|  a - A:real
       #|  A:num->A->bool
       #|  p:A prob_space
@@ -86030,17 +86030,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &1
       #|  &0
       #|  \\n:num. prob (p:A prob_space) ((A:num->A->bool) n)
-      #|  !p:A prob_space A E.\n     (!n. A n IN prob_events p) /\\\n     liminf_events A = E /\\ limsup_events A = E\n     ==> ((\\n. prob p (A n)) ---> prob p E) sequentially
+      #|  forall p:A prob_space A E.\n     (forall n. A n IN prob_events p) /\\\n     liminf_events A = E /\\ limsup_events A = E\n     ==> ((\\n. prob p (A n)) ---> prob p E) sequentially
       #|  n:num >= N
       #|  abs((X:num->A->real) n w - (L:A->real) w) < e
       #|  n:num
       #|  N:num
-      #|  !m. ?n. n >= m /\\ (w:A) IN prob_carrier p /\\\n     abs((X:num->A->real) n w - (L:A->real) w) >= e
+      #|  forall m. ?n. n >= m /\\ (w:A) IN prob_carrier p /\\\n     abs((X:num->A->real) n w - (L:A->real) w) >= e
       #|  N:num
       #|  e:real
       #|  0
       #|  w:A
-      #|  !p:A prob_space (X:num->A->real) (L:A->real) e.\n     &0 < e ==>\n     limsup_events\n       (\\n. {x:A | x IN prob_carrier p /\\ abs(X n x - L x) >= e})\n     SUBSET\n     prob_carrier p DIFF\n       {x | x IN prob_carrier p /\\\n            ((\\n. X n x) ---> L x) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) (L:A->real) e.\n     &0 < e ==>\n     limsup_events\n       (\\n. {x:A | x IN prob_carrier p /\\ abs(X n x - L x) >= e})\n     SUBSET\n     prob_carrier p DIFF\n       {x | x IN prob_carrier p /\\\n            ((\\n. X n x) ---> L x) sequentially}
       #|  n:num
       #|  (B:num->A->bool) n
       #|  x:A
@@ -86058,13 +86058,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 <= x /\\ x <= &0 ==> x = &0
       #|  prob p (limsup_events (B:num->A->bool)) = &0
       #|  limsup_events (B:num->A->bool) =\n    INTERS {DD m | m IN (:num)}
-      #|  !m. (DD:num->A->bool) (SUC m) SUBSET DD m
-      #|  !m. (DD:num->A->bool) m IN prob_events p
+      #|  forall m. (DD:num->A->bool) (SUC m) SUBSET DD m
+      #|  forall m. (DD:num->A->bool) m IN prob_events p
       #|  DD = \\m:num. UNIONS {(B:num->A->bool) n | n >= m}
-      #|  !n. (B:num->A->bool) n IN prob_events p
+      #|  forall n. (B:num->A->bool) n IN prob_events p
       #|  B = \\n:num.\n    {x:A | x IN prob_carrier p /\\ abs(X n x - L x) >= e}
       #|  e:real
-      #|  !p:A prob_space (X:num->A->real) (L:A->real).\n     (!n:num e. &0 < e ==>\n       {x:A | x IN prob_carrier p /\\ abs(X n x - L x) >= e}\n         IN prob_events p) /\\\n     {x:A | x IN prob_carrier p /\\\n            ((\\n. X n x) ---> L x) sequentially} IN prob_events p /\\\n     converges_as p X L\n     ==> converges_in_prob p X L
+      #|  forall p:A prob_space (X:num->A->real) (L:A->real).\n     (forall n:num e. &0 < e ==>\n       {x:A | x IN prob_carrier p /\\ abs(X n x - L x) >= e}\n         IN prob_events p) /\\\n     {x:A | x IN prob_carrier p /\\\n            ((\\n. X n x) ---> L x) sequentially} IN prob_events p /\\\n     converges_as p X L\n     ==> converges_in_prob p X L
       #|  &0 = inv(e pow 2) * &0
       #|  (\\n. simple_expectation (p:A prob_space)\n     (\\x:A. ((X:num->A->real) n x - (L:A->real) x) pow 2) / e pow 2) =\n     (\\n. inv(e pow 2) * simple_expectation p\n       (\\x. (X n x - L x) pow 2))
       #|  0
@@ -86080,9 +86080,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (a:A) IN prob_carrier p
       #|  a:A
       #|  {x:A | x IN prob_carrier p /\\\n     abs((X:num->A->real) n x - (L:A->real) x) >= e} =\n     {x | x IN prob_carrier p /\\ (X n x - L x) pow 2 >= e pow 2}
-      #|  !n. prob p {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e} <=\n    simple_expectation p (\\x. (X n x - L x) pow 2) / e pow 2
+      #|  forall n. prob p {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e} <=\n    simple_expectation p (\\x. (X n x - L x) pow 2) / e pow 2
       #|  e:real
-      #|  !p:A prob_space (X:num->A->real) (L:A->real).\n     (!n. simple_rv p (X n)) /\\ simple_rv p L /\\\n     simple_converges_L2 p X L\n     ==> converges_in_prob p X L
+      #|  forall p:A prob_space (X:num->A->real) (L:A->real).\n     (forall n. simple_rv p (X n)) /\\ simple_rv p L /\\\n     simple_converges_L2 p X L\n     ==> converges_in_prob p X L
       #|  &0 = inv((e / &2) pow 2) * &0
       #|  (\\n:num. expectation (p:A prob_space)\n     (\\x:A. ((X:num->A->real) n x - (L:A->real) x) pow 2) /\n     (e / &2) pow 2) =\n     (\\n. inv((e / &2) pow 2) * expectation p\n       (\\x. (X n x - L x) pow 2))
       #|  0
@@ -86100,10 +86100,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  integrable (p:A prob_space)\n       (\\x:A. ((X:num->A->real) n x - (L:A->real) x) pow 2)
       #|  prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n     ((X:num->A->real) n x - (L:A->real) x) pow 2 >\n     (e / &2) pow 2}
-      #|  !n:num. prob p {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e} <=\n    expectation p (\\x. (X n x - L x) pow 2) / (e / &2) pow 2
-      #|  !n. {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e}\n    IN prob_events p
+      #|  forall n:num. prob p {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e} <=\n    expectation p (\\x. (X n x - L x) pow 2) / (e / &2) pow 2
+      #|  forall n. {x:A | x IN prob_carrier p /\\\n    abs((X:num->A->real) n x - (L:A->real) x) >= e}\n    IN prob_events p
       #|  e:real
-      #|  !p:A prob_space (X:num->A->real) (L:A->real).\n     (!n. random_variable p (X n)) /\\\n     random_variable p L /\\\n     (!n. integrable p (\\x. (X n x - L x) pow 2)) /\\\n     converges_L2 p X L\n     ==> converges_in_prob p X L
+      #|  forall p:A prob_space (X:num->A->real) (L:A->real).\n     (forall n. random_variable p (X n)) /\\\n     random_variable p L /\\\n     (forall n. integrable p (\\x. (X n x - L x) pow 2)) /\\\n     converges_L2 p X L\n     ==> converges_in_prob p X L
       #|  &0 = &0 + &0
       #|  &0 <= c ==> a + b - c <= a + b
       #|  {x:A | x IN prob_carrier p /\\\n        abs((Y:num->A->real) n x - LY x) >= e / &2}
@@ -86119,18 +86119,18 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. &0
       #|  abs((a + b) - (c + d)) >= e /\\\n      abs((a + b) - (c + d)) <= abs(a - c) + abs(b - d)\n      ==> abs(a - c) >= e / &2 \\/ abs(b - d) >= e / &2
       #|  x:A
-      #|  !n. {x:A | x IN prob_carrier p /\\\n       abs(((X:num->A->real) n x + Y n x) - (LX x + LY x)) >= e} SUBSET\n     {x | x IN prob_carrier p /\\ abs(X n x - LX x) >= e / &2} UNION\n     {x | x IN prob_carrier p /\\ abs(Y n x - LY x) >= e / &2}
-      #|  !n. {x:A | x IN prob_carrier p /\\\n      abs((Y:num->A->real) n x - LY x) >= e / &2} IN prob_events p
-      #|  !n. {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - LX x) >= e / &2} IN prob_events p
-      #|  !n. {x:A | x IN prob_carrier p /\\\n      abs(((X:num->A->real) n x + (Y:num->A->real) n x) -\n          (LX x + LY x)) >= e} IN prob_events p
+      #|  forall n. {x:A | x IN prob_carrier p /\\\n       abs(((X:num->A->real) n x + Y n x) - (LX x + LY x)) >= e} SUBSET\n     {x | x IN prob_carrier p /\\ abs(X n x - LX x) >= e / &2} UNION\n     {x | x IN prob_carrier p /\\ abs(Y n x - LY x) >= e / &2}
+      #|  forall n. {x:A | x IN prob_carrier p /\\\n      abs((Y:num->A->real) n x - LY x) >= e / &2} IN prob_events p
+      #|  forall n. {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - LX x) >= e / &2} IN prob_events p
+      #|  forall n. {x:A | x IN prob_carrier p /\\\n      abs(((X:num->A->real) n x + (Y:num->A->real) n x) -\n          (LX x + LY x)) >= e} IN prob_events p
       #|  e:real
-      #|  !p:A prob_space X Y LX LY.\n     (!n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (!n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\\n     converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x + Y n x) (\\x. LX x + LY x)
+      #|  forall p:A prob_space X Y LX LY.\n     (forall n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (forall n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\\n     converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x + Y n x) (\\x. LX x + LY x)
       #|  abs(--a - --b) = abs(a - b)
       #|  0
       #|  e:real
       #|  e:real
-      #|  !p:A prob_space X L.\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. --(X n x)) (\\x. --(L x))
-      #|  !p:A prob_space X Y LX LY.\n     (!n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (!n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\\n     converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x - Y n x) (\\x. LX x - LY x)
+      #|  forall p:A prob_space X L.\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. --(X n x)) (\\x. --(L x))
+      #|  forall p:A prob_space X Y LX LY.\n     (forall n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (forall n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\\n     converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x - Y n x) (\\x. LX x - LY x)
       #|  &0 < c ==> &0 < abs c
       #|  (x:A) IN prob_carrier p
       #|  x:A
@@ -86140,17 +86140,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < e ==> ~(&0 >= e)
       #|  c = &0
       #|  e:real
-      #|  !p:A prob_space X L c.\n     (!n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. c * X n x) (\\x. c * L x)
-      #|  !n:num. {x:A | x IN prob_carrier p /\\ abs(c - c) >= e} = {}
+      #|  forall p:A prob_space X L c.\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. c * X n x) (\\x. c * L x)
+      #|  forall n:num. {x:A | x IN prob_carrier p /\\ abs(c - c) >= e} = {}
       #|  e:real
-      #|  !p:A prob_space c.\n     converges_in_prob p (\\n:num x:A. c) (\\x. c)
+      #|  forall p:A prob_space c.\n     converges_in_prob p (\\n:num x:A. c) (\\x. c)
       #|  (N2:num) <= N1 + N2
       #|  N1 + N2:num
-      #|  !n:num. N2 <= n ==>\n    abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - M x) >= e / &2} - &0) < p0 / &4
+      #|  forall n:num. N2 <= n ==>\n    abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - M x) >= e / &2} - &0) < p0 / &4
       #|  abs(pM - &0) < p0 / &4
       #|  (N1:num) <= N1 + N2
       #|  N1 + N2:num
-      #|  !n:num. N1 <= n ==>\n    abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - L x) >= e / &2} - &0) < p0 / &4
+      #|  forall n:num. N1 <= n ==>\n    abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - L x) >= e / &2} - &0) < p0 / &4
       #|  abs(pL - &0) < p0 / &4
       #|  &0 <= c ==> a + b - c <= a + b
       #|  {x:A | x IN prob_carrier p /\\\n        abs((X:num->A->real) (N1+N2) x - M x) >= e / &2}
@@ -86165,17 +86165,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\ abs(L x - M x) >= e} SUBSET\n     {x | x IN prob_carrier p /\\\n       abs((X:num->A->real) (N1 + N2) x - L x) >= e / &2} UNION\n     {x | x IN prob_carrier p /\\\n       abs(X (N1 + N2) x - M x) >= e / &2}
       #|  e / &2
-      #|  !e. &0 < e ==>\n    ((\\n. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - M x) >= e}) ---> &0) sequentially
+      #|  forall e. &0 < e ==>\n    ((\\n. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - M x) >= e}) ---> &0) sequentially
       #|  N2:num
-      #|  ?N2:num. !n. N2 <= n ==>\n      abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n        abs((X:num->A->real) n x - M x) >= e / &2} - &0) < p0 / &4
+      #|  ?N2:num. forall n. N2 <= n ==>\n      abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n        abs((X:num->A->real) n x - M x) >= e / &2} - &0) < p0 / &4
       #|  e / &2
-      #|  !e. &0 < e ==>\n    ((\\n. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - L x) >= e}) ---> &0) sequentially
+      #|  forall e. &0 < e ==>\n    ((\\n. prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n      abs((X:num->A->real) n x - L x) >= e}) ---> &0) sequentially
       #|  N1:num
-      #|  ?N1:num. !n. N1 <= n ==>\n      abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n        abs((X:num->A->real) n x - L x) >= e / &2} - &0) < p0 / &4
+      #|  ?N1:num. forall n. N1 <= n ==>\n      abs(prob (p:A prob_space) {x:A | x IN prob_carrier p /\\\n        abs((X:num->A->real) n x - L x) >= e / &2} - &0) < p0 / &4
       #|  p0 = prob (p:A prob_space)\n    {x:A | x IN prob_carrier p /\\ abs(L x - M x) >= e}
       #|  &0 <= x /\\ x <= &0 ==> x = &0
       #|  e:real
-      #|  !p:A prob_space X L M.\n     (!n. random_variable p (X n)) /\\\n     random_variable p L /\\ random_variable p M /\\\n     converges_in_prob p X L /\\\n     converges_in_prob p X M\n     ==> !e. &0 < e ==>\n         prob p {x | x IN prob_carrier p /\\\n                     abs(L x - M x) >= e} = &0
+      #|  forall p:A prob_space X L M.\n     (forall n. random_variable p (X n)) /\\\n     random_variable p L /\\ random_variable p M /\\\n     converges_in_prob p X L /\\\n     converges_in_prob p X M\n     ==> forall e. &0 < e ==>\n         prob p {x | x IN prob_carrier p /\\\n                     abs(L x - M x) >= e} = &0
       #|  abs(abs a - abs b) <= abs(a - b)\n       ==> abs(abs a - abs b) >= e ==> abs(a - b) >= e
       #|  x:A
       #|  n:num
@@ -86187,7 +86187,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. &0
       #|  e:real
       #|  e:real
-      #|  !p:A prob_space X L.\n     (!n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. abs(X n x)) (\\x. abs(L x))
+      #|  forall p:A prob_space X L.\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. abs(X n x)) (\\x. abs(L x))
       #|  &0 = &0 + &0
       #|  abs(max a b - max c d) <= abs(a - c) + abs(b - d)
       #|  abs(max a b - max c d) <= abs(a - c) + abs(b - d)\n        ==> abs(max a b - max c d) >= e\n            ==> abs(a - c) >= e / &2 \\/ abs(b - d) >= e / &2
@@ -86203,7 +86203,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e / &2
       #|  e / &2
       #|  e:real
-      #|  !p:A prob_space X Y LX LY.\n     (!n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (!n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. max (X n x) (Y n x))\n                               (\\x. max (LX x) (LY x))
+      #|  forall p:A prob_space X Y LX LY.\n     (forall n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (forall n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. max (X n x) (Y n x))\n                               (\\x. max (LX x) (LY x))
       #|  &0 = &0 + &0
       #|  abs(min a b - min c d) <= abs(a - c) + abs(b - d)
       #|  abs(min a b - min c d) <= abs(a - c) + abs(b - d)\n        ==> abs(min a b - min c d) >= e\n            ==> abs(a - c) >= e / &2 \\/ abs(b - d) >= e / &2
@@ -86219,7 +86219,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e / &2
       #|  e / &2
       #|  e:real
-      #|  !p:A prob_space X Y LX LY.\n     (!n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (!n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. min (X n x) (Y n x))\n                               (\\x. min (LX x) (LY x))
+      #|  forall p:A prob_space X Y LX LY.\n     (forall n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (forall n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. min (X n x) (Y n x))\n                               (\\x. min (LX x) (LY x))
       #|  0
       #|  n:num
       #|  n:num
@@ -86230,13 +86230,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  \\n:num. {x:A | x IN prob_carrier p /\\ abs((Z:A->real) x) >= &n + &1}
       #|  p:A prob_space
-      #|  !p:A prob_space Z.\n     random_variable p Z\n     ==> ((\\n. prob p {x | x IN prob_carrier p /\\ abs(Z x) >= &n + &1}) ---> &0)\n         sequentially
+      #|  forall p:A prob_space Z.\n     random_variable p Z\n     ==> ((\\n. prob p {x | x IN prob_carrier p /\\ abs(Z x) >= &n + &1}) ---> &0)\n         sequentially
       #|  e = sqrt e * sqrt e
-      #|  !e a b:real. &0 < e /\\ abs a < sqrt e /\\ abs b < sqrt e ==> abs(a * b) < e
+      #|  forall e a b:real. &0 < e /\\ abs a < sqrt e /\\ abs b < sqrt e ==> abs(a * b) < e
       #|  b:real
       #|  a:real
       #|  e:real
-      #|  !e a b:real. &0 < e /\\ abs(a * b) >= e ==> abs a >= sqrt e \\/ abs b >= sqrt e
+      #|  forall e a b:real. &0 < e /\\ abs(a * b) >= e ==> abs a >= sqrt e \\/ abs b >= sqrt e
       #|  (Y:num->A->real) n x
       #|  (X:num->A->real) n x
       #|  e:real
@@ -86249,13 +86249,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sqrt e
       #|  sqrt e
       #|  e:real
-      #|  !p:A prob_space X Y.\n     (!n. random_variable p (X n)) /\\ (!n. random_variable p (Y n)) /\\\n     converges_in_prob p X (\\x. &0) /\\ converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. X n x * Y n x) (\\x. &0)
+      #|  forall p:A prob_space X Y.\n     (forall n. random_variable p (X n)) /\\ (forall n. random_variable p (Y n)) /\\\n     converges_in_prob p X (\\x. &0) /\\ converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. X n x * Y n x) (\\x. &0)
       #|  ~(abs(z:real) >= &n + &1)
       #|  abs(z * y:real) >= e
       #|  abs(z:real) * abs(y:real)
       #|  abs(z:real) >= &n + &1
       #|  &0 < &n + &1
-      #|  !e z y:real n. &0 < e /\\ abs(z * y) >= e\n                  ==> abs z >= &n + &1 \\/ abs y >= e / (&n + &1)
+      #|  forall e z y:real n. &0 < e /\\ abs(z * y) >= e\n                  ==> abs z >= &n + &1 \\/ abs y >= e / (&n + &1)
       #|  q <= a + b\n    ==> &0 <= q /\\ &0 <= b /\\ abs a < eta / &2 /\\ abs b < eta / &2\n        ==> abs q < eta
       #|  &0 <= prob p {x:A | x IN prob_carrier p /\\ abs((Z:A->real) x * (Y:num->A->real) n x) >= e}
       #|  &0 <= prob p {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x) >= e / (&M + &1)}
@@ -86279,21 +86279,21 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  eta:real
       #|  e:real
-      #|  !p:A prob_space Z Y.\n     random_variable p Z /\\ (!n. random_variable p (Y n)) /\\\n     converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. Z x * Y n x) (\\x. &0)
-      #|  !p:A prob_space X L.\n     converges_in_prob p X L <=>\n     converges_in_prob p (\\n x. X n x - L x) (\\x. &0)
+      #|  forall p:A prob_space Z Y.\n     random_variable p Z /\\ (forall n. random_variable p (Y n)) /\\\n     converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. Z x * Y n x) (\\x. &0)
+      #|  forall p:A prob_space X L.\n     converges_in_prob p X L <=>\n     converges_in_prob p (\\n x. X n x - L x) (\\x. &0)
       #|  (\\x. &0):A->real
       #|  (\\x. &0):A->real
       #|  Y:num->A->real
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X Y.\n     (!n. random_variable p (X n)) /\\ (!n. random_variable p (Y n)) /\\\n     converges_in_prob p X (\\x. &0) /\\ converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. X n x + Y n x) (\\x. &0)
+      #|  forall p:A prob_space X Y.\n     (forall n. random_variable p (X n)) /\\ (forall n. random_variable p (Y n)) /\\\n     converges_in_prob p X (\\x. &0) /\\ converges_in_prob p Y (\\x. &0)\n     ==> converges_in_prob p (\\n x. X n x + Y n x) (\\x. &0)
       #|  (\\n x:A. (X:num->A->real) n x * (Y:num->A->real) n x - LX x * LY x) =\n    (\\n x. ((X n x - LX x) * (Y n x - LY x)) +\n           (((Y n x - LY x) * LX x) + ((X n x - LX x) * LY x)))
-      #|  (!n. random_variable p\n          (\\x:A. ((X:num->A->real) n x - LX x) * ((Y:num->A->real) n x - LY x))) /\\\n    (!n. random_variable p (\\x:A. ((Y:num->A->real) n x - LY x) * LX x)) /\\\n    (!n. random_variable p (\\x:A. ((X:num->A->real) n x - LX x) * LY x))
+      #|  (forall n. random_variable p\n          (\\x:A. ((X:num->A->real) n x - LX x) * ((Y:num->A->real) n x - LY x))) /\\\n    (forall n. random_variable p (\\x:A. ((Y:num->A->real) n x - LY x) * LX x)) /\\\n    (forall n. random_variable p (\\x:A. ((X:num->A->real) n x - LX x) * LY x))
       #|  \\n x:A. (Y:num->A->real) n x - LY x
       #|  \\n x:A. (X:num->A->real) n x - LX x
       #|  p:A prob_space
       #|  converges_in_prob p\n      (\\n x:A. ((X:num->A->real) n x - LX x) * ((Y:num->A->real) n x - LY x))\n      (\\x. &0) /\\\n    converges_in_prob p\n      (\\n x:A. ((Y:num->A->real) n x - LY x) * LX x) (\\x. &0) /\\\n    converges_in_prob p\n      (\\n x:A. ((X:num->A->real) n x - LX x) * LY x) (\\x. &0)
-      #|  !p:A prob_space X Y LX LY.\n     (!n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (!n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x * Y n x) (\\x. LX x * LY x)
+      #|  forall p:A prob_space X Y LX LY.\n     (forall n. random_variable p (X n)) /\\ random_variable p LX /\\\n     (forall n. random_variable p (Y n)) /\\ random_variable p LY /\\\n     converges_in_prob p X LX /\\ converges_in_prob p Y LY\n     ==> converges_in_prob p (\\n x. X n x * Y n x) (\\x. LX x * LY x)
       #|  q <= a + b\n    ==> &0 <= q /\\ &0 <= b /\\ abs a < eta / &2 /\\ abs b < eta / &2\n        ==> abs q < eta
       #|  &0 <= prob p {x:A | x IN prob_carrier p /\\ abs(g((X:num->A->real) n x) - g((L:A->real) x)) >= e} /\\\n    &0 <= prob p {x:A | x IN prob_carrier p /\\ abs((X:num->A->real) n x - L x) >= d}
       #|  (X:num->A->real) n x
@@ -86324,13 +86324,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  eta:real
       #|  e:real
-      #|  !p:A prob_space X L g.\n     (!n. random_variable p (X n)) /\\ random_variable p L /\\\n     g real_continuous_on (:real) /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. g(X n x)) (\\x. g(L x))
+      #|  forall p:A prob_space X L g.\n     (forall n. random_variable p (X n)) /\\ random_variable p L /\\\n     g real_continuous_on (:real) /\\\n     converges_in_prob p X L\n     ==> converges_in_prob p (\\n x. g(X n x)) (\\x. g(L x))
       #|  k:num
       #|  rr:num->num
-      #|  !k:num. (rr:num->num) k < (@n. rr k < n /\\ Q k n) /\\ Q k (@n. rr k < n /\\ Q k n)
+      #|  forall k:num. (rr:num->num) k < (@n. rr k < n /\\ Q k n) /\\ Q k (@n. rr k < n /\\ Q k n)
       #|  rr:num->num
-      #|  (rr 0 = 0) /\\ (!k. rr(SUC k) = @n. rr k < n /\\ (Q:num->num->bool) k n)
-      #|  !(Q:num->num->bool). (!k m. ?n. m < n /\\ Q k n)\n     ==> ?r:num->num. (!k. r k < r (SUC k)) /\\ (!k. Q k (r(SUC k)))
+      #|  (rr 0 = 0) /\\ (forall k. rr(SUC k) = @n. rr k < n /\\ (Q:num->num->bool) k n)
+      #|  forall(Q:num->num->bool). (forall k m. ?n. m < n /\\ Q k n)\n     ==> ?r:num->num. (forall k. r k < r (SUC k)) /\\ (forall k. Q k (r(SUC k)))
       #|  inv(&2) pow j
       #|  k - 1
       #|  inv(&2 pow (k - 1))
@@ -86342,13 +86342,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  inv(&2)
       #|  e:real
       #|  n:num
-      #|  !n:num. n >= m ==> abs((X:num->A->real) (r(SUC n)) x - L x) < inv(&2 pow n)
+      #|  forall n:num. n >= m ==> abs((X:num->A->real) (r(SUC n)) x - L x) < inv(&2 pow n)
       #|  m:num
-      #|  !(X:num->A->real) L (r:num->num) x B (p:A prob_space).\n     (!k. B k = {y:A | y IN prob_carrier p /\\\n                       abs(X (r(SUC k)) y - L y) >= inv(&2 pow k)}) /\\\n     x IN prob_carrier p /\\ ~(x IN limsup_events B)\n     ==> ((\\k. X (r k) x) ---> L x) sequentially
+      #|  forall(X:num->A->real) L (r:num->num) x B (p:A prob_space).\n     (forall k. B k = {y:A | y IN prob_carrier p /\\\n                       abs(X (r(SUC k)) y - L y) >= inv(&2 pow k)}) /\\\n     x IN prob_carrier p /\\ ~(x IN limsup_events B)\n     ==> ((\\k. X (r k) x) ---> L x) sequentially
       #|  0 <= SUC 0
       #|  0 <= 0
-      #|  !b c n.\n      sum (0..SUC n) (\\k. b k * c k) =\n      b (SUC n) * sum (0..SUC n) c -\n      sum (0..n) (\\k. sum (0..k) c * (b (SUC k) - b k))
-      #|  !x y. abs(x - y) <= abs x + abs y
+      #|  forall b c n.\n      sum (0..SUC n) (\\k. b k * c k) =\n      b (SUC n) * sum (0..SUC n) c -\n      sum (0..n) (\\k. sum (0..k) c * (b (SUC k) - b k))
+      #|  forall x y. abs(x - y) <= abs x + abs y
       #|  &0 < t ==> x < x + t
       #|  ~(e = &0) ==>\n      (e / &3) * ((&3 / e) * x + &1) = x + e / &3
       #|  (e / &3) * D = X + e / &3
@@ -86358,7 +86358,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < D
       #|  N2 <= SUC j
       #|  SUC j
-      #|  !n:num. N2 <= n ==> D <= b n
+      #|  forall n:num. N2 <= n ==> D <= b n
       #|  D <= b(SUC j)
       #|  abs(sum(0..0) (c:num->real))
       #|  &0 <= a /\\ &0 <= b ==> &0 <= a + b
@@ -86400,7 +86400,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  abs(x - S) < e ==> abs(S - x) <= e
       #|  sum(0..j) (\\k. e / &3 * (b(SUC k) - b(k:num)))
       #|  N1 = 0
-      #|  !k:num. abs(b(SUC k) - b k) = b(SUC k) - b k
+      #|  forall k:num. abs(b(SUC k) - b k) = b(SUC k) - b k
       #|  sum(0..j) (\\k. abs((S - sum(0..k) (c:num->real)) *\n                  (b(SUC k) - b(k:num))))
       #|  abs(R:real) <=\n       (Cs + abs S) * b(SUC N1) + e / &3 * b(SUC j)
       #|  &0 < x ==> abs x = x
@@ -86414,9 +86414,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  inv(b(SUC j)) * b(SUC j) = &1
       #|  R = sum(0..j) (\\k. (S - sum(0..k) (c:num->real)) *\n                    (b(SUC k) - b(k)))
       #|  sum(0..j) (\\k. b(SUC k) - b(k:num)) = b(SUC j) - b(0)
-      #|  !j. sum(0..j) (\\k. sum(0..k) (c:num->real) * (b(SUC k) - b k)) =\n          sum(0..j) (\\k. S * (b(SUC k) - b k)) -\n          sum(0..j) (\\k. (S - sum(0..k) c) * (b(SUC k) - b k))
+      #|  forall j. sum(0..j) (\\k. sum(0..k) (c:num->real) * (b(SUC k) - b k)) =\n          sum(0..j) (\\k. S * (b(SUC k) - b k)) -\n          sum(0..j) (\\k. (S - sum(0..k) c) * (b(SUC k) - b k))
       #|  SUC j
-      #|  !n:num. N1 <= n ==> abs(sum(0..n) (c:num->real) - S) < e / &3
+      #|  forall n:num. N1 <= n ==> abs(sum(0..n) (c:num->real) - S) < e / &3
       #|  abs(s - S) < e / &3 /\\ abs(S - w) <= &2 * e / &3\n      ==> abs(s - w) < e
       #|  inv(b(SUC j)) * (b(SUC j) * sum(0..SUC j) (c:num->real)) =\n      sum(0..SUC j) c
       #|  sum(0..SUC j) a = sum(0..SUC j) (\\k. b(k) * c(k))
@@ -86426,11 +86426,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  SUC(MAX N1 N2)
       #|  N2:num
       #|  D:real
-      #|  !M. ?N. !n:num. N <= n ==> M <= b n
+      #|  forall M. ?N. forall n:num. N <= n ==> M <= b n
       #|  D = (&3 / e) * ((Cs + abs(S:real)) * b(SUC N1) +\n                abs S * b(0:num)) + &1
       #|  k:num
-      #|  !n. b n <= b(n + 1)
-      #|  !k:num. &0 <= b(SUC k) - b(k)
+      #|  forall n. b n <= b(n + 1)
+      #|  forall k:num. &0 <= b(SUC k) - b(k)
       #|  &0 <= y ==> a + &1 <= y + a + &1
       #|  abs(x - S) < &1 ==> abs x <= abs S + &1
       #|  abs(S:real) + &1
@@ -86442,10 +86442,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  N0:num
       #|  &1
       #|  Cs:real
-      #|  ?Cs. !k:num. abs(sum(0..k) (c:num->real)) <= Cs
+      #|  ?Cs. forall k:num. abs(sum(0..k) (c:num->real)) <= Cs
       #|  (b * a) * c = a * (b * c):real
-      #|  !k:num. (a(k):real) = b(k) * c(k)
-      #|  !n. ~(b(n:num) = &0)
+      #|  forall k:num. (a(k):real) = b(k) * c(k)
+      #|  forall n. ~(b(n:num) = &0)
       #|  N1:num
       #|  e / &3
       #|  real_infsum (from 0) (c:num->real) = S
@@ -86454,20 +86454,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  S = real_infsum (from 0) (c:num->real)
       #|  c = \\k:num. (a(k):real) / b(k)
       #|  e:real
-      #|  !a b.\n      (!n. &0 < b(n)) /\\\n      (!n. b(n) <= b(n + 1)) /\\\n      (!M. ?N. !n. N <= n ==> M <= b(n)) /\\\n      real_summable (from 0) (\\k. a(k) / b(k))\n      ==> ((\\n. inv(b(n)) * sum(0..n) a) ---> &0) sequentially
-      #|  !x. min x x = x
+      #|  forall a b.\n      (forall n. &0 < b(n)) /\\\n      (forall n. b(n) <= b(n + 1)) /\\\n      (forall M. ?N. forall n. N <= n ==> M <= b(n)) /\\\n      real_summable (from 0) (\\k. a(k) / b(k))\n      ==> ((\\n. inv(b(n)) * sum(0..n) a) ---> &0) sequentially
+      #|  forall x. min x x = x
       #|  n:num
       #|  n:num
       #|  N:num
       #|  N:num
       #|  e:real
       #|  e:real
-      #|  !f L c. (f ---> L) sequentially\n           ==> ((\\n. min (f n) c) ---> min L c) sequentially
+      #|  forall f L c. (f ---> L) sequentially\n           ==> ((\\n. min (f n) c) ---> min L c) sequentially
       #|  abs x <= M ==> x <= M
       #|  M:real
       #|  f:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space f. simple_rv p f ==>\n   ?M. !x. x IN prob_carrier p ==> f x <= M
+      #|  forall p:A prob_space f. simple_rv p f ==>\n   ?M. forall x. x IN prob_carrier p ==> f x <= M
       #|  v = simple_expectation (p:A prob_space) (g:A->real)
       #|  n:num
       #|  &n
@@ -86486,27 +86486,27 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  h:A->real
       #|  Bf:real
       #|  nn_expectation (p:A prob_space) (f:A->real) - e
-      #|  {simple_expectation (p:A prob_space) g | g |\n     simple_rv p g /\\ (!x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n     (!x. x IN prob_carrier p ==> g x <= (f:A->real) x)}
+      #|  {simple_expectation (p:A prob_space) g | g |\n     simple_rv p g /\\ (forall x:A. x IN prob_carrier p ==> &0 <= g x) /\\\n     (forall x. x IN prob_carrier p ==> g x <= (f:A->real) x)}
       #|  nn_expectation (p:A prob_space) (f:A->real) - e <\n    nn_expectation p f
       #|  Bf:real
       #|  f:A->real
       #|  p:A prob_space
       #|  &0 <= a /\\ &0 <= b ==> &0 <= min a b
-      #|  !n. nn_expectation (p:A prob_space) (\\x:A. min ((f:A->real) x) (&n)) <=\n                    nn_expectation p f
+      #|  forall n. nn_expectation (p:A prob_space) (\\x:A. min ((f:A->real) x) (&n)) <=\n                    nn_expectation p f
       #|  &n
       #|  a <= b ==> min x a <= min x b
       #|  &0 <= a /\\ &0 <= b ==> &0 <= min a b
       #|  &0 <= a /\\ &0 <= b ==> &0 <= min a b
-      #|  !m n. m <= n ==>\n    nn_expectation (p:A prob_space) (\\x:A. min ((f:A->real) x) (&m)) <=\n    nn_expectation p (\\x. min (f x) (&n))
+      #|  forall m n. m <= n ==>\n    nn_expectation (p:A prob_space) (\\x:A. min ((f:A->real) x) (&m)) <=\n    nn_expectation p (\\x. min (f x) (&n))
       #|  e:real
-      #|  !p:A prob_space f.\n     (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> ((\\n. nn_expectation p (\\x. min (f x) (&n))) --->\n          nn_expectation p f) sequentially
+      #|  forall p:A prob_space f.\n     (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n     integrable p f\n     ==> ((\\n. nn_expectation p (\\x. min (f x) (&n))) --->\n          nn_expectation p f) sequentially
       #|  abs(nn_expectation (p:A prob_space)\n           (\\x. min ((f:A->real) x) (&M)) -\n         nn_expectation p f) < e / &6
       #|  abs(nn_expectation (p:A prob_space)\n           (\\x. min (min ((X:num->A->real) n x) ((f:A->real) x)) (&M)) -\n         nn_expectation p (\\x. min (f x) (&M))) < e / &6
       #|  abs(nn_expectation (p:A prob_space) ((X:num->A->real) n) -\n         nn_expectation p (f:A->real)) < e / &3
       #|  nn_expectation (p:A prob_space)\n       (\\x. min (min ((X:num->A->real) n x) ((f:A->real) x)) (&M)) <=\n     nn_expectation p (\\x. min (X n x) (f x))
       #|  nn_expectation (p:A prob_space)\n       (\\x. min ((X:num->A->real) n x) ((f:A->real) x)) <=\n     nn_expectation p f
       #|  M:num
-      #|  !n. M <= n ==>\n         abs(nn_expectation (p:A prob_space)\n               (\\x. min ((f:A->real) x) (&n)) -\n             nn_expectation p f) < e / &6
+      #|  forall n. M <= n ==>\n         abs(nn_expectation (p:A prob_space)\n               (\\x. min ((f:A->real) x) (&n)) -\n             nn_expectation p f) < e / &6
       #|  n:num
       #|  n:num
       #|  MAX N1 N2 <= n
@@ -86533,33 +86533,33 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  f:A->real
       #|  p:A prob_space
       #|  n:num
-      #|  !n:num. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n:num. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  integrable (p:A prob_space) (f:A->real)
-      #|  random_variable (p:A prob_space) (f:A->real) /\\\n     (!n:num. random_variable p ((X:num->A->real) n))
+      #|  random_variable (p:A prob_space) (f:A->real) /\\\n     (forall n:num. random_variable p ((X:num->A->real) n))
       #|  integrable (p:A prob_space)\n        (\\x. (X:num->A->real) n x + (f:A->real) x)
       #|  (\\x. &2 * min ((X:num->A->real) n x) ((f:A->real) x)) =\n       (\\x. min (X n x) (f x) + min (X n x) (f x))
       #|  integrable (p:A prob_space)\n        (\\x. &2 * min ((X:num->A->real) n x) ((f:A->real) x))
       #|  &0 <= (X:num->A->real) n x /\\ &0 <= (f:A->real) x
       #|  expectation (p:A prob_space)\n        (\\x. abs((X:num->A->real) n x - (f:A->real) x)) =\n      expectation p (\\x. (X n x + f x) - &2 * min (X n x) (f x))
-      #|  !x:A. x IN prob_carrier p\n            ==> &0 <= min ((X:num->A->real) n x) ((f:A->real) x)
+      #|  forall x:A. x IN prob_carrier p\n            ==> &0 <= min ((X:num->A->real) n x) ((f:A->real) x)
       #|  integrable (p:A prob_space) (f:A->real)
       #|  n:num
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  \\x:A. abs((X:num->A->real) n x) + abs((f:A->real) x)
       #|  integrable (p:A prob_space)\n        (\\x. abs((X:num->A->real) n x - (f:A->real) x))
-      #|  !n:num. nn_expectation (p:A prob_space)\n               (\\x. abs((X:num->A->real) n x - (f:A->real) x)) =\n             nn_expectation p (X n) + nn_expectation p f -\n             &2 * nn_expectation p (\\x. min (X n x) (f x))
+      #|  forall n:num. nn_expectation (p:A prob_space)\n               (\\x. abs((X:num->A->real) n x - (f:A->real) x)) =\n             nn_expectation p (X n) + nn_expectation p f -\n             &2 * nn_expectation p (\\x. min (X n x) (f x))
       #|  &0 <= (X:num->A->real) n x /\\ &0 <= (f:A->real) x
       #|  integrable (p:A prob_space) (f:A->real)
       #|  n:num
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  (f:A->real)
-      #|  !n:num. integrable (p:A prob_space)\n               (\\x. min ((X:num->A->real) n x) ((f:A->real) x))
+      #|  forall n:num. integrable (p:A prob_space)\n               (\\x. min ((X:num->A->real) n x) ((f:A->real) x))
       #|  e:real
-      #|  !p:A prob_space X f.\n    (!n. integrable p (X n)) /\\\n    integrable p f /\\\n    (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n    (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n    ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially\n    ==> ((\\n. nn_expectation p (\\x. abs(X n x - f x))) ---> &0) sequentially
+      #|  forall p:A prob_space X f.\n    (forall n. integrable p (X n)) /\\\n    integrable p f /\\\n    (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n    (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially) /\\\n    ((\\n. nn_expectation p (X n)) ---> nn_expectation p f) sequentially\n    ==> ((\\n. nn_expectation p (\\x. abs(X n x - f x))) ---> &0) sequentially
       #|  \\x:A. abs((f:A->real) x) + abs((g:A->real) x)
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. max (f x) (g x))
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. max (f x) (g x))
       #|  \\x:A. abs((f:A->real) x) + abs((g:A->real) x)
-      #|  !p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. min (f x) (g x))
+      #|  forall p:A prob_space f g.\n    integrable p f /\\ integrable p g\n    ==> integrable p (\\x. min (f x) (g x))
       #|  x:num
       #|  t:A->bool
       #|  (B:num->A->bool) N = UNIONS (IMAGE (\\k. {x:A | x IN\n     prob_carrier p /\\ abs((f:num->A->real) k x - (g:A->real) x) >= d})\n     {k:num | N <= k})
@@ -86578,9 +86578,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  (B:num->A->bool) (SUC n) = UNIONS (IMAGE (\\k. {x:A | x IN\n     prob_carrier p /\\ abs((f:num->A->real) k x - (g:A->real) x) >= d})\n     {k:num | SUC n <= k})
       #|  (B:num->A->bool) n = UNIONS (IMAGE (\\k. {x:A | x IN\n     prob_carrier p /\\ abs((f:num->A->real) k x - (g:A->real) x) >= d})\n     {k:num | n <= k})
-      #|  !n. (B:num->A->bool) (SUC n) SUBSET B n
+      #|  forall n. (B:num->A->bool) (SUC n) SUBSET B n
       #|  k:num
-      #|  !n. (B:num->A->bool) n IN prob_events (p:A prob_space)
+      #|  forall n. (B:num->A->bool) n IN prob_events (p:A prob_space)
       #|  (\\n. prob (p:A prob_space)\n    (UNIONS (IMAGE (\\k. {x:A | x IN prob_carrier p /\\\n       abs((f:num->A->real) k x - (g:A->real) x) >= d})\n     {k:num | n <= k}))) = (\\n. prob p (B n))
       #|  B = \\n:num. UNIONS (IMAGE (\\k. {x:A | x IN prob_carrier p /\\\n    abs((f:num->A->real) k x - (g:A->real) x) >= d}) {k:num | n <= k})
       #|  n:num
@@ -86593,7 +86593,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  n:num
       #|  0
       #|  \\n:num. prob (p:A prob_space)\n    (UNIONS (IMAGE (\\k. {x:A | x IN prob_carrier p /\\\n       abs((f:num->A->real) k x - (g:A->real) x) >= d}) {k:num | n <= k}))
-      #|  !p:A prob_space (f:num->A->real) (g:A->real) M d.\n    (!n. random_variable p (f n)) /\\\n    random_variable p g /\\\n    (!n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n    (!x. x IN prob_carrier p ==> abs(g x) <= M) /\\\n    (!x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially) /\\\n    &0 < d\n    ==> ((\\n. prob p {x | x IN prob_carrier p /\\ abs(f n x - g x) >= d})\n         ---> &0) sequentially
+      #|  forall p:A prob_space (f:num->A->real) (g:A->real) M d.\n    (forall n. random_variable p (f n)) /\\\n    random_variable p g /\\\n    (forall n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n    (forall x. x IN prob_carrier p ==> abs(g x) <= M) /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially) /\\\n    &0 < d\n    ==> ((\\n. prob p {x | x IN prob_carrier p /\\ abs(f n x - g x) >= d})\n         ---> &0) sequentially
       #|  &4 * abs M * prob (p:A prob_space) (S_n:A->bool) +\n     &2 * prob p S_n =\n     prob p S_n * (&4 * abs M + &2)
       #|  &4 * Q + &2 * prob (p:A prob_space) (S_n:A->bool) < e
       #|  Q = abs M * prob (p:A prob_space) (S_n:A->bool)
@@ -86661,19 +86661,19 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  \\n. (f:num->A->real) n x
       #|  sequentially
-      #|  !x:A. x IN prob_carrier p ==> abs((g:A->real) x) <= M
+      #|  forall x:A. x IN prob_carrier p ==> abs((g:A->real) x) <= M
       #|  f:num->A->real
       #|  random_variable p (g:A->real)
       #|  abs((f:num->A->real) 0 a)
       #|  a:A
       #|  p:A prob_space
       #|  &0 <= M
-      #|  !p:A prob_space (f:num->A->real) (g:A->real) M.\n     (!n. random_variable p (f n)) /\\\n     (!n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially)\n     ==> integrable p g /\\\n         ((\\n. expectation p (f n)) ---> expectation p g) sequentially
+      #|  forall p:A prob_space (f:num->A->real) (g:A->real) M.\n     (forall n. random_variable p (f n)) /\\\n     (forall n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially)\n     ==> integrable p g /\\\n         ((\\n. expectation p (f n)) ---> expectation p g) sequentially
       #|  M:real
       #|  g:A->real
       #|  f:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (f:num->A->real) (g:A->real) M.\n    (!n. random_variable p (f n)) /\\\n    random_variable p g /\\\n    (!n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n    (!x. x IN prob_carrier p ==> abs(g x) <= M) /\\\n    (!x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially)\n    ==> ((\\n. expectation p (f n)) ---> expectation p g) sequentially
+      #|  forall p:A prob_space (f:num->A->real) (g:A->real) M.\n    (forall n. random_variable p (f n)) /\\\n    random_variable p g /\\\n    (forall n x. x IN prob_carrier p ==> abs(f n x) <= M) /\\\n    (forall x. x IN prob_carrier p ==> abs(g x) <= M) /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. f n x) ---> g x) sequentially)\n    ==> ((\\n. expectation p (f n)) ---> expectation p g) sequentially
       #|  expectation (p:A prob_space) h -\n    expectation p (\\x:A. min (h x) K) < e / &2
       #|  &0 <= h /\\ &0 <= K ==> &0 <= min h K
       #|  expectation (p:A prob_space) (\\x:A. min (h x) K) =\n    nn_expectation p (\\x. min (h x) K)
@@ -86708,7 +86708,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  &0 <= x /\\ x <= y ==> abs x <= abs y
       #|  h:A->real
-      #|  !n. integrable (p:A prob_space) ((f:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((f:num->A->real) n)
       #|  expectation (p:A prob_space) h =\n    nn_expectation p h
       #|  K0:num
       #|  nn_expectation (p:A prob_space) h - e / &2 <\n    nn_expectation p (\\x. min (h x) K)
@@ -86719,9 +86719,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  h:A->real
       #|  p:A prob_space
       #|  (f:num->A->real) 0 x
-      #|  !x:A. x IN prob_carrier p ==> &0 <= h x
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= h x
       #|  e:real
-      #|  !p:A prob_space (f:num->A->real) h.\n     (!n. random_variable p (f n)) /\\\n     random_variable p h /\\\n     integrable p h /\\\n     (!n x. x IN prob_carrier p ==> &0 <= f n x /\\ f n x <= h x) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. f n x) ---> &0) sequentially)\n     ==> ((\\n. expectation p (f n)) ---> &0) sequentially
+      #|  forall p:A prob_space (f:num->A->real) h.\n     (forall n. random_variable p (f n)) /\\\n     random_variable p h /\\\n     integrable p h /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= f n x /\\ f n x <= h x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. f n x) ---> &0) sequentially)\n     ==> ((\\n. expectation p (f n)) ---> &0) sequentially
       #|  n:num
       #|  f:A->real
       #|  (X:num->A->real) n
@@ -86769,29 +86769,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. (X:num->A->real) n x
       #|  sequentially
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==> abs((f:A->real) x) <= (g:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> abs((f:A->real) x) <= (g:A->real) x
       #|  n:num
-      #|  !n:num. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !n:num. random_variable (p:A prob_space) ((X:num->A->real) n)
-      #|  !p:A prob_space X f g.\n    (!n. integrable p (X n)) /\\\n    integrable p g /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= g x) /\\\n    (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f /\\\n        ((\\n. expectation p (X n)) ---> expectation p f) sequentially
+      #|  forall n:num. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n:num. random_variable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall p:A prob_space X f g.\n    (forall n. integrable p (X n)) /\\\n    integrable p g /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= g x) /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f /\\\n        ((\\n. expectation p (X n)) ---> expectation p f) sequentially
       #|  (\\n. expectation p ((X:num->A->real) n)) =\n    (\\n. nn_expectation p (X n))
       #|  expectation p (Y:A->real) = nn_expectation p Y
-      #|  !n. expectation p ((X:num->A->real) n) =\n    nn_expectation p (X n)
+      #|  forall n. expectation p ((X:num->A->real) n) =\n    nn_expectation p (X n)
       #|  0
       #|  \\n. (X:num->A->real) n x
       #|  sequentially
-      #|  !x:A. x IN prob_carrier p ==> &0 <= (Y:A->real) x
+      #|  forall x:A. x IN prob_carrier p ==> &0 <= (Y:A->real) x
       #|  g:A->real
       #|  Y:A->real
       #|  X:num->A->real
       #|  p:A prob_space
       #|  &0 <= a /\\ a <= b ==> abs a <= b
-      #|  !n (x:A). x IN prob_carrier p ==>\n    abs((X:num->A->real) n x) <= (g:A->real) x
+      #|  forall n (x:A). x IN prob_carrier p ==>\n    abs((X:num->A->real) n x) <= (g:A->real) x
       #|  &0 <= a /\\ a <= b /\\ &0 <= b ==> abs a <= abs b
       #|  x:A
       #|  g:A->real
-      #|  !n. integrable p ((X:num->A->real) n)
-      #|  !p:A prob_space (X:num->A->real) Y g.\n     (!n. random_variable p (X n)) /\\\n     integrable p g /\\\n     (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (!n x. x IN prob_carrier p ==> X n x <= g x) /\\\n     (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> Y x) sequentially)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p Y) sequentially
+      #|  forall n. integrable p ((X:num->A->real) n)
+      #|  forall p:A prob_space (X:num->A->real) Y g.\n     (forall n. random_variable p (X n)) /\\\n     integrable p g /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (forall n x. x IN prob_carrier p ==> X n x <= g x) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> Y x) sequentially)\n     ==> ((\\n. nn_expectation p (X n)) ---> nn_expectation p Y) sequentially
       #|  variance (p:A prob_space) (f:A->real) / t pow 2
       #|  (\\x:A. sum (0..j) (\\i. (X:num->A->real) (a + i) x - mu)) =\n     (f:A->real)
       #|  {x:A | x IN prob_carrier p /\\\n    abs(sum(0..j) (\\i. (X:num->A->real) (a + i) x - mu)) >= t} =\n    {x | x IN prob_carrier p /\\ abs(f x - expectation p f) >= t}
@@ -86818,7 +86818,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  f = (\\x:A. (g:A->real) x + (-- &(SUC j) * mu))
       #|  g = \\x:A. sum(0..j) (\\i. (X:num->A->real) (a + i) x)
       #|  f = \\x:A. sum(0..j) (\\i. (X:num->A->real) (a + i) x - mu)
-      #|  !p:A prob_space X mu sigma_sq a j t.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n         abs (sum (0..j) (\\i. X (a + i) x - mu)) >= t}\n        <= &(SUC j) * sigma_sq * inv (t pow 2)
+      #|  forall p:A prob_space X mu sigma_sq a j t.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n         abs (sum (0..j) (\\i. X (a + i) x - mu)) >= t}\n        <= &(SUC j) * sigma_sq * inv (t pow 2)
       #|  n:num
       #|  kk:num
       #|  kk:num
@@ -86827,9 +86827,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  ~(n = &0) ==>\n       (&5 * n) * s * m * inv(n pow 2) = &5 * s * m * inv n
       #|  a = b ==> a <= b
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  0
-      #|  !n. integrable p (\\x:A. (X:num->A->real) n x pow 2)
+      #|  forall n. integrable p (\\x:A. (X:num->A->real) n x pow 2)
       #|  0
       #|  (\\x:A. ((X:num->A->real) 0 x - mu) pow 2) =\n         (\\x. X 0 x pow 2 - &2 * mu * X 0 x + mu pow 2)
       #|  expectation p ((X:num->A->real) 0) = mu
@@ -86855,30 +86855,30 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k * k + 1
       #|  \\i:num. (X:num->A->real) i x - mu
       #|  sum (0..nn - (k * k + 1))\n         (\\i:num. (X:num->A->real) ((k * k + 1) + i) x - mu) =\n        sum (k * k + 1..nn) (\\i. X i x - mu)
-      #|  !i:num. k * k + 1 + i = (k * k + 1) + i
+      #|  forall i:num. k * k + 1 + i = (k * k + 1) + i
       #|  nn - (k * k + 1) <= 2 * k
       #|  nn - (k * k + 1):num
       #|  x:A
       #|  k:num
-      #|  !k. (B:num->A->bool) k SUBSET\n      UNIONS(IMAGE ((A:num->num->A->bool) k) (0..2 * k))
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall k. (B:num->A->bool) k SUBSET\n      UNIONS(IMAGE ((A:num->num->A->bool) k) (0..2 * k))
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  k * k + 1 + i:num
       #|  j:num
       #|  \\(i:num) (x:A). (X:num->A->real) (k * k + 1 + i) x - mu
       #|  p:A prob_space
-      #|  !k j. (A:num->num->A->bool) k j IN prob_events p
+      #|  forall k j. (A:num->num->A->bool) k j IN prob_events p
       #|  A = \\k j. {x:A | x IN prob_carrier p /\\\n      abs(sum(0..j) (\\i. (X:num->A->real) (k * k + 1 + i) x - mu)) >=\n      &(SUC(k * k)) * inv(&(SUC m))}
       #|  0..(k + 1) * (k + 1):num
-      #|  !a b c:real. a + b = c ==> b = c - a
+      #|  forall a b c:real. a + b = c ==> b = c - a
       #|  (\\x:A. sum(k * k + 1..nn) (\\i. (X:num->A->real) i x - mu)) =\n      (\\x. sum(0..nn) (\\i. X i x - mu) - sum(0..k * k) (\\i. X i x - mu))
       #|  nn:num
       #|  {x:A | x IN prob_carrier p /\\\n     (?nn. k * k < nn /\\ nn <= (k + 1) * (k + 1) /\\\n       abs (sum (k * k + 1..nn) (\\i. X i x - mu)) >=\n       &(SUC (k * k)) * inv (&(SUC m)))} =\n     UNIONS (IMAGE (\\nn. {x:A | x IN prob_carrier p /\\\n       abs (sum (k * k + 1..nn) (\\i. X i x - mu)) >=\n       &(SUC (k * k)) * inv (&(SUC m))})\n       {nn | k * k < nn /\\ nn <= (k + 1) * (k + 1)})
       #|  k:num
-      #|  !k. (B:num->A->bool) k IN prob_events p
+      #|  forall k. (B:num->A->bool) k IN prob_events p
       #|  limsup_events (B:num->A->bool)
       #|  B = \\k. {x:A | x IN prob_carrier p /\\\n    ?nn:num. k * k < nn /\\ nn <= (k + 1) * (k + 1) /\\\n      abs(sum(k * k + 1..nn) (\\i. (X:num->A->real) i x - mu)) >=\n      &(SUC(k * k)) * inv(&(SUC m))}
       #|  m:num
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> !m:num. almost_surely p\n          {x:A | ?N:num. !k. N <= k ==>\n            !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n              abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n              &(SUC(k * k)) * inv(&(SUC m))}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> forall m:num. almost_surely p\n          {x:A | ?N:num. forall k. N <= k ==>\n            forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n              abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n              &(SUC(k * k)) * inv(&(SUC m))}
       #|  &0 <= x ==> abs x = x
       #|  inv(&(SUC(k * k))) * &(SUC(k * k)) = &1
       #|  inv(&(SUC(k * k))) * (&(SUC(k * k)) * inv(&(SUC m)))
@@ -86924,15 +86924,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ?m:num. inv(&(SUC m)) < e / &2
       #|  e:real
       #|  x:A
-      #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (X:num->A->real) i x)) ---> mu) sequentially} INTER\n       {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
-      #|  almost_surely (p:A prob_space)\n      ({x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (X:num->A->real) i x)) ---> mu) sequentially} INTER\n       {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))})
-      #|  INTERS {(\\m. {x:A | ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
-      #|  almost_surely (p:A prob_space)\n      {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (X:num->A->real) i x)) ---> mu) sequentially} INTER\n       {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  almost_surely (p:A prob_space)\n      ({x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (X:num->A->real) i x)) ---> mu) sequentially} INTER\n       {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. X i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))})
+      #|  INTERS {(\\m. {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
+      #|  almost_surely (p:A prob_space)\n      {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
       #|  sigma_sq:real
-      #|  !m:num. almost_surely (p:A prob_space)\n      {x:A | ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  forall m:num. almost_surely (p:A prob_space)\n      {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
       #|  sigma_sq:real
       #|  almost_surely (p:A prob_space)\n      {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (X:num->A->real) i x)) ---> mu) sequentially}
-      #|  !p:A prob_space (X:num->A->real) mu sigma_sq.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!n. variance p (X n) = sigma_sq) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu sigma_sq.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall n. variance p (X n) = sigma_sq) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu) sequentially}
       #|  K_subseq:num
       #|  K_subseq:num
       #|  K_subseq:num
@@ -86980,7 +86980,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  integrable (p:A prob_space) (f:A->real)
       #|  f = \\x:A. sum(0..j) (\\i. (X:num->A->real) (a + i) x)
-      #|  !p:A prob_space X a j t C.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!n. variance p (X n) <= C) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n         abs (sum (0..j) (\\i. X (a + i) x)) >= t}\n        <= &(SUC j) * C * inv (t pow 2)
+      #|  forall p:A prob_space X a j t C.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall n. variance p (X n) <= C) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n         abs (sum (0..j) (\\i. X (a + i) x)) >= t}\n        <= &(SUC j) * C * inv (t pow 2)
       #|  expectation p ((X:num->A->real) 0) = &0
       #|  variance p ((X:num->A->real) 0)
       #|  &0 <= x ==> x <= &2 * x
@@ -87013,7 +87013,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k * k:num
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space (X:num->A->real) C.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!n. variance p (X n) <= C) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x))\n                ---> &0) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) C.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall n. variance p (X n) <= C) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. X i x))\n                ---> &0) sequentially}
       #|  n:num
       #|  kk:num
       #|  kk:num
@@ -87044,34 +87044,34 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k * k + 1
       #|  \\i:num. (X:num->A->real) i x
       #|  sum (0..nn - (k * k + 1))\n         (\\i:num. (X:num->A->real) ((k * k + 1) + i) x) =\n        sum (k * k + 1..nn) (\\i. X i x)
-      #|  !i:num. k * k + 1 + i = (k * k + 1) + i
+      #|  forall i:num. k * k + 1 + i = (k * k + 1) + i
       #|  nn - (k * k + 1) <= 2 * k
       #|  nn - (k * k + 1):num
       #|  x:A
       #|  k:num
-      #|  !k. (B:num->A->bool) k SUBSET\n      UNIONS(IMAGE ((A:num->num->A->bool) k) (0..2 * k))
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall k. (B:num->A->bool) k SUBSET\n      UNIONS(IMAGE ((A:num->num->A->bool) k) (0..2 * k))
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
       #|  k * k + 1 + i:num
       #|  j:num
       #|  \\(i:num) (x:A). (X:num->A->real) (k * k + 1 + i) x
       #|  p:A prob_space
-      #|  !k j. (A:num->num->A->bool) k j IN prob_events p
+      #|  forall k j. (A:num->num->A->bool) k j IN prob_events p
       #|  A = \\k j. {x:A | x IN prob_carrier p /\\\n      abs(sum(0..j) (\\i. (X:num->A->real) (k * k + 1 + i) x)) >=\n      &(SUC(k * k)) * inv(&(SUC m))}
       #|  0..(k + 1) * (k + 1):num
-      #|  !a b c:real. a + b = c ==> b = c - a
+      #|  forall a b c:real. a + b = c ==> b = c - a
       #|  (\\x:A. sum(k * k + 1..nn) (\\i. (X:num->A->real) i x)) =\n      (\\x. sum(0..nn) (\\i. X i x) - sum(0..k * k) (\\i. X i x))
       #|  nn:num
       #|  {x:A | x IN prob_carrier p /\\\n     (?nn. k * k < nn /\\ nn <= (k + 1) * (k + 1) /\\\n       abs (sum (k * k + 1..nn) (\\i. X i x)) >=\n       &(SUC (k * k)) * inv (&(SUC m)))} =\n     UNIONS (IMAGE (\\nn. {x:A | x IN prob_carrier p /\\\n       abs (sum (k * k + 1..nn) (\\i. X i x)) >=\n       &(SUC (k * k)) * inv (&(SUC m))})\n       {nn | k * k < nn /\\ nn <= (k + 1) * (k + 1)})
       #|  k:num
-      #|  !k. (B:num->A->bool) k IN prob_events p
+      #|  forall k. (B:num->A->bool) k IN prob_events p
       #|  limsup_events (B:num->A->bool)
       #|  B = \\k. {x:A | x IN prob_carrier p /\\\n    ?nn:num. k * k < nn /\\ nn <= (k + 1) * (k + 1) /\\\n      abs(sum(k * k + 1..nn) (\\i. (X:num->A->real) i x)) >=\n      &(SUC(k * k)) * inv(&(SUC m))}
       #|  m:num
-      #|  !p:A prob_space (X:num->A->real) C.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!n. variance p (X n) <= C) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> !m:num. almost_surely p\n          {x:A | ?N:num. !k. N <= k ==>\n            !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n              abs(sum(k * k + 1..n) (\\i. X i x)) <\n              &(SUC(k * k)) * inv(&(SUC m))}
+      #|  forall p:A prob_space (X:num->A->real) C.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall n. variance p (X n) <= C) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> forall m:num. almost_surely p\n          {x:A | ?N:num. forall k. N <= k ==>\n            forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n              abs(sum(k * k + 1..n) (\\i. X i x)) <\n              &(SUC(k * k)) * inv(&(SUC m))}
       #|  &0 <= x ==> abs x = x
       #|  expectation (p:A prob_space) (\\x:A. (g:A->real) x - d) =\n    expectation p g - d
       #|  expectation (p:A prob_space) (\\x:A. (f:A->real) x - c) =\n    expectation p f - c
-      #|  !p:A prob_space f g c d.\n    integrable p f /\\ integrable p g\n    ==> covariance p (\\x. f x - c) (\\x. g x - d) = covariance p f g
+      #|  forall p:A prob_space f g c d.\n    integrable p f /\\ integrable p g\n    ==> covariance p (\\x. f x - c) (\\x. g x - d) = covariance p f g
       #|  inv(&(SUC(k * k))) * &(SUC(k * k)) = &1
       #|  inv(&(SUC(k * k))) * (&(SUC(k * k)) * inv(&(SUC m)))
       #|  inv(&(SUC m))
@@ -87109,25 +87109,25 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ?m:num. inv(&(SUC m)) < e / &2
       #|  e:real
       #|  x:A
-      #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (Y:num->A->real) i x)) ---> &0) sequentially} INTER\n       {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. Y i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
-      #|  almost_surely (p:A prob_space)\n      ({x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (Y:num->A->real) i x)) ---> &0) sequentially} INTER\n       {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. Y i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))})
-      #|  INTERS {(\\m. {x:A | ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
-      #|  almost_surely (p:A prob_space)\n      {x:A | !m. ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  {x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (Y:num->A->real) i x)) ---> &0) sequentially} INTER\n       {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. Y i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  almost_surely (p:A prob_space)\n      ({x:A | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (Y:num->A->real) i x)) ---> &0) sequentially} INTER\n       {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. Y i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))})
+      #|  INTERS {(\\m. {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
+      #|  almost_surely (p:A prob_space)\n      {x:A | forall m. ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
       #|  C:real
-      #|  !m:num. almost_surely (p:A prob_space)\n      {x:A | ?N:num. !k. N <= k ==>\n        !n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
+      #|  forall m:num. almost_surely (p:A prob_space)\n      {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}
       #|  C:real
       #|  almost_surely (p:A prob_space)\n      {x | ((\\k. inv(&(SUC(k * k))) * sum(0..k * k) (\\i. (Y:num->A->real) i x))\n            ---> &0) sequentially}
-      #|  !n x:A. sum(0..n) (\\i. (Y:num->A->real) i x) =\n             sum(0..n) (\\i. (X:num->A->real) i x - mu i)
+      #|  forall n x:A. sum(0..n) (\\i. (Y:num->A->real) i x) =\n             sum(0..n) (\\i. (X:num->A->real) i x - mu i)
       #|  covariance p (\\x:A. (X:num->A->real) i x - mu i)\n                   (\\x. X j x - mu j) =\n      covariance p (X i) (X j)
-      #|  !i j. ~(i = j) ==>\n    covariance (p:A prob_space) ((Y:num->A->real) i) (Y j) = &0
-      #|  !n. variance (p:A prob_space) ((Y:num->A->real) n) <= C
-      #|  !n. variance (p:A prob_space) ((Y:num->A->real) n) =\n    variance p ((X:num->A->real) n)
+      #|  forall i j. ~(i = j) ==>\n    covariance (p:A prob_space) ((Y:num->A->real) i) (Y j) = &0
+      #|  forall n. variance (p:A prob_space) ((Y:num->A->real) n) <= C
+      #|  forall n. variance (p:A prob_space) ((Y:num->A->real) n) =\n    variance p ((X:num->A->real) n)
       #|  (\\x:A. ((X:num->A->real) n x - mu n) pow 2) =\n     (\\x. X n x pow 2 + (--(&2 * mu n) * X n x + (mu n) pow 2))
-      #|  !n. integrable (p:A prob_space)\n    (\\x:A. (Y:num->A->real) n x pow 2)
-      #|  !n. integrable (p:A prob_space) ((Y:num->A->real) n)
-      #|  !n. expectation (p:A prob_space) ((Y:num->A->real) n) = &0
+      #|  forall n. integrable (p:A prob_space)\n    (\\x:A. (Y:num->A->real) n x pow 2)
+      #|  forall n. integrable (p:A prob_space) ((Y:num->A->real) n)
+      #|  forall n. expectation (p:A prob_space) ((Y:num->A->real) n) = &0
       #|  Y = \\n (x:A). (X:num->A->real) n x - (mu:num->real) n
-      #|  !p:A prob_space (X:num->A->real) mu C.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu n) /\\\n    (!n. variance p (X n) <= C) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) *\n                 sum(0..n) (\\i. X i x - mu i)) ---> &0) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu C.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu n) /\\\n    (forall n. variance p (X n) <= C) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0)\n    ==> almost_surely p\n          {x | ((\\n. inv(&(SUC n)) *\n                 sum(0..n) (\\i. X i x - mu i)) ---> &0) sequentially}
       #|  K_subseq:num
       #|  K_subseq:num
       #|  K_subseq:num
@@ -87155,17 +87155,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  2 EXP SUC (SUC N) = 2 * 2 EXP (SUC N)
       #|  0 < 2 EXP SUC (SUC N)
       #|  0 < 2 EXP (SUC N)
-      #|  !h N. sum(0..N) (\\j. sum(2 EXP j..2 EXP (SUC j) - 1) h) =\n         sum(1..2 EXP (SUC N) - 1) h
+      #|  forall h N. sum(0..N) (\\j. sum(2 EXP j..2 EXP (SUC j) - 1) h) =\n         sum(1..2 EXP (SUC N) - 1) h
       #|  a * &4 <= &4 * b <=> a <= b
       #|  &(2 EXP (SUC j)) = &2 * &(2 EXP j)
       #|  inv(&(2 EXP (SUC j)) pow 2) * &4
-      #|  !j k. 2 EXP j <= k /\\ k < 2 EXP (SUC j)\n         ==> inv(&(2 EXP j) pow 2) <= &4 * inv(&(SUC k) pow 2)
+      #|  forall j k. 2 EXP j <= k /\\ k < 2 EXP (SUC j)\n         ==> inv(&(2 EXP j) pow 2) <= &4 * inv(&(SUC k) pow 2)
       #|  &0 <= x ==> a <= a + x
       #|  &0 <= s /\\ s <= B ==> abs s <= abs B
       #|  n:num
       #|  y:real
       #|  abs B
-      #|  !f B. (!n. &0 <= f n) /\\ (!N. sum(0..N) f <= B)\n         ==> real_summable (from 0) f
+      #|  forall f B. (forall n. &0 <= f n) /\\ (forall N. sum(0..N) f <= B)\n         ==> real_summable (from 0) f
       #|  &0 <= x /\\ x <= y ==> abs x <= y
       #|  0
       #|  \\j. &4 * sum(2 EXP j..2 EXP (SUC j) - 1) (h:num->real)
@@ -87180,10 +87180,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  V (i:num) * (&4 * inv(&(SUC i) pow 2))
       #|  sum(2 EXP j..2 EXP (SUC j) - 1) (\\k. &4 * h k)
       #|  sum(2 EXP j..2 EXP (SUC j) - 1) V * inv(&(2 EXP j) pow 2) =\n      sum(2 EXP j..2 EXP (SUC j) - 1) (\\k. V k * inv(&(2 EXP j) pow 2))
-      #|  !j. sum(2 EXP j..2 EXP (SUC j) - 1) V / &(2 EXP j) pow 2 <=\n         &4 * sum(2 EXP j..2 EXP (SUC j) - 1) h
-      #|  !k:num. &0 <= (h:num->real) k
+      #|  forall j. sum(2 EXP j..2 EXP (SUC j) - 1) V / &(2 EXP j) pow 2 <=\n         &4 * sum(2 EXP j..2 EXP (SUC j) - 1) h
+      #|  forall k:num. &0 <= (h:num->real) k
       #|  h = \\k:num. (V:num->real) k / &(SUC k) pow 2
-      #|  !V. (!n. &0 <= V n) /\\\n       real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n       ==> real_summable (from 0)\n             (\\j. sum(2 EXP j..2 EXP (SUC j) - 1) V /\n                  &(2 EXP j) pow 2)
+      #|  forall V. (forall n. &0 <= V n) /\\\n       real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n       ==> real_summable (from 0)\n             (\\j. sum(2 EXP j..2 EXP (SUC j) - 1) V /\n                  &(2 EXP j) pow 2)
       #|  &0 <= inv(&4)
       #|  M:num
       #|  from 0
@@ -87215,13 +87215,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  V:num->real
       #|  sum(0..2 EXP (SUC j) - 1) V =\n     sum(0..2 EXP j - 1) (V:num->real) + sum(2 EXP j..2 EXP (SUC j) - 1) V
-      #|  !j. (a:num->real) (SUC j) = inv(&4) * a j + inv(&4) * c j
-      #|  !j. &0 <= (c:num->real) j
-      #|  !j. &0 <= (a:num->real) j
+      #|  forall j. (a:num->real) (SUC j) = inv(&4) * a j + inv(&4) * c j
+      #|  forall j. &0 <= (c:num->real) j
+      #|  forall j. &0 <= (a:num->real) j
       #|  real_summable (from 0) (c:num->real)
       #|  c = \\j. sum(2 EXP j..2 EXP (SUC j) - 1) (V:num->real) / &(2 EXP j) pow 2
       #|  a = \\j. sum(0..2 EXP j - 1) (V:num->real) / &(2 EXP j) pow 2
-      #|  !V. (!n. &0 <= V n) /\\\n       real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n       ==> real_summable (from 0)\n             (\\j. sum(0..2 EXP j - 1) V / &(2 EXP j) pow 2)
+      #|  forall V. (forall n. &0 <= V n) /\\\n       real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n       ==> real_summable (from 0)\n             (\\j. sum(0..2 EXP j - 1) V / &(2 EXP j) pow 2)
       #|  variance (p:A prob_space)\n    (\\x:A. sum(0..nn - 1) (\\i. (X:num->A->real) i x)) =\n    sum(0..nn - 1) (\\i. variance p (X i))
       #|  {x:A | x IN prob_carrier p /\\\n        abs(inv(&nn) * sum(0..nn - 1)\n          (\\i. (X:num->A->real) i x)) >= eps} =\n     {x | x IN prob_carrier p /\\\n        abs((\\x. inv(&nn) * sum(0..nn - 1)\n          (\\i. (X:num->A->real) i x)) x -\n          expectation p (\\x. inv(&nn) * sum(0..nn - 1)\n            (\\i. X i x))) >= eps}
       #|  variance (p:A prob_space)\n    (\\x:A. inv(&nn) * sum(0..nn - 1)\n      (\\i. (X:num->A->real) i x)) / eps pow 2
@@ -87244,43 +87244,43 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  2 EXP j - 1
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n          {x | ((\\j. inv(&(2 EXP j)) * sum(0..2 EXP j - 1) (\\i. X i x))\n                ---> &0) sequentially}
+      #|  forall p:A prob_space X.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n          {x | ((\\j. inv(&(2 EXP j)) * sum(0..2 EXP j - 1) (\\i. X i x))\n                ---> &0) sequentially}
       #|  i:num
-      #|  !i. i <= n ==> integrable (p:A prob_space)\n       ((X:num->A->real) i)
+      #|  forall i. i <= n ==> integrable (p:A prob_space)\n       ((X:num->A->real) i)
       #|  k:num
-      #|  {x:A | x IN prob_carrier p /\\\n    (!j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t) /\\\n    abs(sum(0..k) (\\i. X i x)) >= t} =\n    {x | x IN prob_carrier p /\\\n      (!j. j < k ==> abs(sum(0..j) (\\i. X i x)) < t)} INTER\n    {x | x IN prob_carrier p /\\ abs(sum(0..k) (\\i. X i x)) >= t}
+      #|  {x:A | x IN prob_carrier p /\\\n    (forall j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t) /\\\n    abs(sum(0..k) (\\i. X i x)) >= t} =\n    {x | x IN prob_carrier p /\\\n      (forall j. j < k ==> abs(sum(0..j) (\\i. X i x)) < t)} INTER\n    {x | x IN prob_carrier p /\\ abs(sum(0..k) (\\i. X i x)) >= t}
       #|  i:num
-      #|  !i. i <= n ==> integrable (p:A prob_space)\n          ((X:num->A->real) i)
+      #|  forall i. i <= n ==> integrable (p:A prob_space)\n          ((X:num->A->real) i)
       #|  j:num
       #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n      (!j. j < SUC k' ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t)} =\n      {x | x IN prob_carrier p /\\\n        (!j. j < k' ==> abs(sum(0..j) (\\i. X i x)) < t)} INTER\n      {x | x IN prob_carrier p /\\ abs(sum(0..k') (\\i. X i x)) < t}
+      #|  {x:A | x IN prob_carrier p /\\\n      (forall j. j < SUC k' ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t)} =\n      {x | x IN prob_carrier p /\\\n        (forall j. j < k' ==> abs(sum(0..j) (\\i. X i x)) < t)} INTER\n      {x | x IN prob_carrier p /\\ abs(sum(0..k') (\\i. X i x)) < t}
       #|  {x:A | x IN prob_carrier p} = prob_carrier p
-      #|  !k'. k' <= k ==>\n    {x:A | x IN prob_carrier p /\\\n      (!j. j < k' ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t)} IN\n    prob_events p
-      #|  !p X (k:num) (n:num) (t:real).\n    (!i. i <= n ==> integrable (p:A prob_space) ((X:num->A->real) i)) /\\\n    k <= n /\\ &0 < t\n    ==> {x:A | x IN prob_carrier p /\\\n         (!j. j < k ==> abs(sum(0..j) (\\i. X i x)) < t) /\\\n         abs(sum(0..k) (\\i. X i x)) >= t} IN prob_events p
+      #|  forall k'. k' <= k ==>\n    {x:A | x IN prob_carrier p /\\\n      (forall j. j < k' ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t)} IN\n    prob_events p
+      #|  forall p X (k:num) (n:num) (t:real).\n    (forall i. i <= n ==> integrable (p:A prob_space) ((X:num->A->real) i)) /\\\n    k <= n /\\ &0 < t\n    ==> {x:A | x IN prob_carrier p /\\\n         (forall j. j < k ==> abs(sum(0..j) (\\i. X i x)) < t) /\\\n         abs(sum(0..k) (\\i. X i x)) >= t} IN prob_events p
       #|  j:num
       #|  x:A
-      #|  !p X (n:num) (t:real).\n    !j k. j < k /\\ k <= n\n    ==> DISJOINT\n      {x:A | x IN prob_carrier p /\\\n           (!i. i < j ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n           abs(sum(0..j) (\\m. X m x)) >= t}\n      {x | x IN prob_carrier p /\\\n           (!i. i < k ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n           abs(sum(0..k) (\\m. X m x)) >= t}
+      #|  forall p X (n:num) (t:real).\n    forall j k. j < k /\\ k <= n\n    ==> DISJOINT\n      {x:A | x IN prob_carrier p /\\\n           (forall i. i < j ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n           abs(sum(0..j) (\\m. X m x)) >= t}\n      {x | x IN prob_carrier p /\\\n           (forall i. i < k ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n           abs(sum(0..k) (\\m. X m x)) >= t}
       #|  j:num
       #|  j:num
       #|  n':num
       #|  \\k. k <= n /\\ abs(sum(0..k) (\\m. (X:num->A->real) m x)) >= t
       #|  x:A
-      #|  !p X (n:num) (t:real).\n    UNIONS (IMAGE (\\k. {x:A | x IN prob_carrier p /\\\n         (!i. i < k ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n         abs(sum(0..k) (\\m. X m x)) >= t}) (0..n)) =\n    {x | x IN prob_carrier p /\\ ?k. k <= n /\\ abs(sum(0..k) (\\m. X m x)) >= t}
+      #|  forall p X (n:num) (t:real).\n    UNIONS (IMAGE (\\k. {x:A | x IN prob_carrier p /\\\n         (forall i. i < k ==> abs(sum(0..i) (\\m. X m x)) < t) /\\\n         abs(sum(0..k) (\\m. X m x)) >= t}) (0..n)) =\n    {x | x IN prob_carrier p /\\ ?k. k <= n /\\ abs(sum(0..k) (\\m. X m x)) >= t}
       #|  x:A
       #|  random_variable (p:A prob_space) f /\\\n     random_variable p (indicator_fn (a:A->bool))
       #|  f:A->real
-      #|  !p f (a:A->bool). integrable p f /\\ a IN prob_events p\n   ==> integrable p (\\x. f x * indicator_fn a x)
+      #|  forall p f (a:A->bool). integrable p f /\\ a IN prob_events p\n   ==> integrable p (\\x. f x * indicator_fn a x)
       #|  f:A->real
       #|  c:real
       #|  p:A prob_space
-      #|  !p c (f:A->real). integrable p f ==> integrable p (\\x. c * f x)
+      #|  forall p c (f:A->real). integrable p f ==> integrable p (\\x. c * f x)
       #|  indicator_fn ((A:num->A->bool) k) (x:A) = &0
       #|  k:num
       #|  sum(0..n) (\\k. sum(0..k) (\\i. (X:num->A->real) i x) *\n     sum(SUC k..n) (\\i. X i x) *\n     indicator_fn ((A:num->A->bool) k) (x:A)) = &0
       #|  (x:A) IN A (k:num)
       #|  ~((x:A) IN EV)
       #|  k:num
-      #|  !k:num. k <= n ==> ~((x:A) IN A k)
+      #|  forall k:num. k <= n ==> ~((x:A) IN A k)
       #|  indicator_fn (EV:A->bool) x = &0
       #|  real_pow s 2
       #|  (s + d) pow 2 - &2 * s * d = s pow 2 + d pow 2
@@ -87298,15 +87298,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sum(0..n) (\\k:num.\n      if k = j then sum(0..j) (\\i. (X:num->A->real) i x) *\n        sum(SUC j..n) (\\i. X i x) else &0)
       #|  sum(0..n) (\\k. sum(0..k) (\\i. (X:num->A->real) i x) *\n     sum(SUC k..n) (\\i. X i x) * indicator_fn ((A:num->A->bool) k) (x:A)) =\n     sum(0..j) (\\i. X i x) * sum(SUC j..n) (\\i. X i x)
       #|  j:num
-      #|  !j':num. j' < k ==>\n       abs(sum(0..j') (\\i. (X:num->A->real) i x)) < t
+      #|  forall j':num. j' < k ==>\n       abs(sum(0..j') (\\i. (X:num->A->real) i x)) < t
       #|  j:num < k
       #|  k:num
-      #|  !m:num. m < j ==>\n       abs(sum(0..m) (\\i. (X:num->A->real) i x)) < t
+      #|  forall m:num. m < j ==>\n       abs(sum(0..m) (\\i. (X:num->A->real) i x)) < t
       #|  k:num < j
       #|  k:num
-      #|  !k:num. k <= n /\\ ~(k = j) ==>\n     indicator_fn ((A:num->A->bool) k) (x:A) = &0
+      #|  forall k:num. k <= n /\\ ~(k = j) ==>\n     indicator_fn ((A:num->A->bool) k) (x:A) = &0
       #|  (x:A) IN A (j:num)
-      #|  abs(sum(0..j) (\\i. (X:num->A->real) i x)) >= t /\\\n     (!m:num. m < j ==> abs(sum(0..m) (\\i. X i x)) < t)
+      #|  abs(sum(0..j) (\\i. (X:num->A->real) i x)) >= t /\\\n     (forall m:num. m < j ==> abs(sum(0..m) (\\i. X i x)) < t)
       #|  j':num <= n
       #|  j':num
       #|  j':num
@@ -87332,7 +87332,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  y:A
       #|  (\\x:A. sum(0..n) (\\i. (X:num->A->real) i x) *\n      sum(SUC n..n) (\\i. X i x) *\n      indicator_fn ((A:num->A->bool) n) x) = (\\x. &0)
       #|  k:num = n
-      #|  (A:num->A->bool) k = {y:A | y IN prob_carrier p /\\\n      (!j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i y)) < t) /\\\n      abs(sum(0..k) (\\i. X i y)) >= t}
+      #|  (A:num->A->bool) k = {y:A | y IN prob_carrier p /\\\n      (forall j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i y)) < t) /\\\n      abs(sum(0..k) (\\i. X i y)) >= t}
       #|  k:num < n
       #|  k:num
       #|  n:num
@@ -87364,26 +87364,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < t pow 2
       #|  (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n     sum(SUC k..n) (\\i. X i x) * indicator_fn ((A:num->A->bool) k) x) =\n     (\\x. (sum(0..k) (\\i. X i x) * sum(SUC k..n) (\\i. X i x)) *\n          indicator_fn (A k) x)
       #|  k:num
-      #|  !k. k <= n ==> integrable p\n    (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n           sum(SUC k..n) (\\i. X i x) *\n           indicator_fn ((A:num->A->bool) k) x)
+      #|  forall k. k <= n ==> integrable p\n    (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n           sum(SUC k..n) (\\i. X i x) *\n           indicator_fn ((A:num->A->bool) k) x)
       #|  x:A
       #|  k:num
       #|  sum(0..k) (\\i. (X:num->A->real) i x) +\n      sum(SUC k..n) (\\i. X i x) = sum(0..n) (\\i. X i x)
       #|  x:A
       #|  (\\x:A. sum(0..k) (\\i. (X:num->A->real) i x) *\n     sum(SUC k..n) (\\i. X i x)) =\n     (\\x. sum(0..k) (\\i. X i x) * sum(0..n) (\\i. X i x) -\n          sum(0..k) (\\i. X i x) pow 2)
       #|  k:num
-      #|  !k. k <= n ==> integrable p\n    (\\x. sum(0..k) (\\i. (X:num->A->real) i x) *\n         sum(SUC k..n) (\\i. X i x))
+      #|  forall k. k <= n ==> integrable p\n    (\\x. sum(0..k) (\\i. (X:num->A->real) i x) *\n         sum(SUC k..n) (\\i. X i x))
       #|  n:num
       #|  k:num
       #|  0
       #|  \\i. (X:num->A->real) i x
-      #|  !k (x:A). k <= n ==>\n    sum(0..k) (\\i. (X:num->A->real) i x) + sum(SUC k..n) (\\i. X i x) =\n    sum(0..n) (\\i. X i x)
+      #|  forall k (x:A). k <= n ==>\n    sum(0..k) (\\i. (X:num->A->real) i x) + sum(SUC k..n) (\\i. X i x) =\n    sum(0..n) (\\i. X i x)
       #|  \\x:A. sum(0..n) (\\i. (X:num->A->real) i x)
       #|  \\x:A. sum(0..k) (\\i. (X:num->A->real) i x)
       #|  p:A prob_space
       #|  k:num
-      #|  !k. k <= n ==> integrable p\n    (\\x. sum(0..k) (\\i. (X:num->A->real) i x) * sum(0..n) (\\i. X i x))
-      #|  !k. k <= n ==>\n    random_variable p (\\x. sum(0..k) (\\i. (X:num->A->real) i x))
-      #|  !k. k <= n ==>\n    integrable p (\\x. sum(0..k) (\\i. (X:num->A->real) i x) pow 2)
+      #|  forall k. k <= n ==> integrable p\n    (\\x. sum(0..k) (\\i. (X:num->A->real) i x) * sum(0..n) (\\i. X i x))
+      #|  forall k. k <= n ==>\n    random_variable p (\\x. sum(0..k) (\\i. (X:num->A->real) i x))
+      #|  forall k. k <= n ==>\n    integrable p (\\x. sum(0..k) (\\i. (X:num->A->real) i x) pow 2)
       #|  (EV:A->bool) IN prob_events p
       #|  EV:A->bool = UNIONS(IMAGE A (0..n))
       #|  t:real
@@ -87392,25 +87392,25 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  X:num->A->real
       #|  p:A prob_space
       #|  k:num
-      #|  !k. k <= n ==> (A:num->A->bool) k IN prob_events p
-      #|  A = \\k. {x:A | x IN prob_carrier p /\\\n    (!j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t) /\\\n    abs(sum(0..k) (\\i. X i x)) >= t}
+      #|  forall k. k <= n ==> (A:num->A->bool) k IN prob_events p
+      #|  A = \\k. {x:A | x IN prob_carrier p /\\\n    (forall j. j < k ==> abs(sum(0..j) (\\i. (X:num->A->real) i x)) < t) /\\\n    abs(sum(0..k) (\\i. X i x)) >= t}
       #|  EV = {x:A | x IN prob_carrier p /\\\n    (?k. k <= n /\\ abs(sum(0..k) (\\i. (X:num->A->real) i x)) >= t)}
-      #|  !p X (n:num) (t:real).\n    (!i. i <= n ==> integrable (p:A prob_space) ((X:num->A->real) i)) /\\\n    (!i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n    (!i. i <= n ==> expectation p (X i) = &0) /\\\n    (!i j. i <= n /\\ j <= n /\\ ~(i = j)\n           ==> covariance p (X i) (X j) = &0) /\\\n    (!k. k < n ==>\n      expectation p (\\x. sum(0..k) (\\i. X i x) *\n        sum(SUC k..n) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (!j. j < k ==> abs(sum(0..j) (\\i. X i y)) < t) /\\\n            abs(sum(0..k) (\\i. X i y)) >= t} x) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n          ?k. k <= n /\\ abs(sum(0..k) (\\i. X i x)) >= t}\n        <= sum(0..n) (\\i. variance p (X i)) / t pow 2
+      #|  forall p X (n:num) (t:real).\n    (forall i. i <= n ==> integrable (p:A prob_space) ((X:num->A->real) i)) /\\\n    (forall i. i <= n ==> integrable p (\\x. X i x pow 2)) /\\\n    (forall i. i <= n ==> expectation p (X i) = &0) /\\\n    (forall i j. i <= n /\\ j <= n /\\ ~(i = j)\n           ==> covariance p (X i) (X j) = &0) /\\\n    (forall k. k < n ==>\n      expectation p (\\x. sum(0..k) (\\i. X i x) *\n        sum(SUC k..n) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (forall j. j < k ==> abs(sum(0..j) (\\i. X i y)) < t) /\\\n            abs(sum(0..k) (\\i. X i y)) >= t} x) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n          ?k. k <= n /\\ abs(sum(0..k) (\\i. X i x)) >= t}\n        <= sum(0..n) (\\i. variance p (X i)) / t pow 2
       #|  a + j:num
       #|  a + i:num
-      #|  !i:num j:num. a <= i /\\ i <= a + n /\\ a <= j /\\\n      j <= a + n /\\ ~(i = j) ==>\n      covariance (p:A prob_space) ((X:num->A->real) i) (X j) = &0
+      #|  forall i:num j:num. a <= i /\\ i <= a + n /\\ a <= j /\\\n      j <= a + n /\\ ~(i = j) ==>\n      covariance (p:A prob_space) ((X:num->A->real) i) (X j) = &0
       #|  a + i:num
-      #|  !i:num. a <= i /\\ i <= a + n ==>\n      expectation (p:A prob_space) ((X:num->A->real) i) = &0
+      #|  forall i:num. a <= i /\\ i <= a + n ==>\n      expectation (p:A prob_space) ((X:num->A->real) i) = &0
       #|  a + i:num
-      #|  !i:num. a <= i /\\ i <= a + n ==>\n      integrable (p:A prob_space) (\\x. (X:num->A->real) i x pow 2)
+      #|  forall i:num. a <= i /\\ i <= a + n ==>\n      integrable (p:A prob_space) (\\x. (X:num->A->real) i x pow 2)
       #|  a + i:num
-      #|  !i:num. a <= i /\\ i <= a + n ==>\n      integrable (p:A prob_space) ((X:num->A->real) i)
+      #|  forall i:num. a <= i /\\ i <= a + n ==>\n      integrable (p:A prob_space) ((X:num->A->real) i)
       #|  nn:num
       #|  m:num
       #|  f:num->real
       #|  a:num
-      #|  !f:num->real m (nn:num).\n    sum(m..nn) (\\i. f(a + i)) = sum(a + m..a + nn) f
-      #|  !k (x:A). sum(a..a + k)\n    (\\i. (X:num->A->real) i x) = sum(0..k) (\\i. X(a + i) x)
+      #|  forall f:num->real m (nn:num).\n    sum(m..nn) (\\i. f(a + i)) = sum(a + m..a + nn) f
+      #|  forall k (x:A). sum(a..a + k)\n    (\\i. (X:num->A->real) i x) = sum(0..k) (\\i. X(a + i) x)
       #|  t:real
       #|  n:num
       #|  \\i (x:A). (X:num->A->real) (a + i) x
@@ -87419,8 +87419,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  0
       #|  \\i. (X:num->A->real) i (x:A)
       #|  a:num
-      #|  !k (x:A). sum(a..a + k) (\\i. (X:num->A->real) i x) =\n    sum(0..k) (\\i. X(a + i) x)
-      #|  !p X (a:num) (n:num) (t:real).\n    (!i. a <= i /\\ i <= a + n ==> integrable (p:A prob_space)\n      ((X:num->A->real) i)) /\\\n    (!i. a <= i /\\ i <= a + n ==> integrable p (\\x. X i x pow 2)) /\\\n    (!i. a <= i /\\ i <= a + n ==> expectation p (X i) = &0) /\\\n    (!i j. a <= i /\\ i <= a + n /\\ a <= j /\\ j <= a + n /\\ ~(i = j)\n           ==> covariance p (X i) (X j) = &0) /\\\n    (!k. k < n ==>\n      expectation p (\\x. sum(a..a + k) (\\i. X i x) *\n        sum(a + k + 1..a + n) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (!j. j < k ==> abs(sum(a..a + j) (\\i. X i y)) < t) /\\\n            abs(sum(a..a + k) (\\i. X i y)) >= t} x) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n          ?k. k <= n /\\ abs(sum(a..a + k) (\\i. X i x)) >= t}\n        <= sum(a..a + n) (\\i. variance p (X i)) / t pow 2
+      #|  forall k (x:A). sum(a..a + k) (\\i. (X:num->A->real) i x) =\n    sum(0..k) (\\i. X(a + i) x)
+      #|  forall p X (a:num) (n:num) (t:real).\n    (forall i. a <= i /\\ i <= a + n ==> integrable (p:A prob_space)\n      ((X:num->A->real) i)) /\\\n    (forall i. a <= i /\\ i <= a + n ==> integrable p (\\x. X i x pow 2)) /\\\n    (forall i. a <= i /\\ i <= a + n ==> expectation p (X i) = &0) /\\\n    (forall i j. a <= i /\\ i <= a + n /\\ a <= j /\\ j <= a + n /\\ ~(i = j)\n           ==> covariance p (X i) (X j) = &0) /\\\n    (forall k. k < n ==>\n      expectation p (\\x. sum(a..a + k) (\\i. X i x) *\n        sum(a + k + 1..a + n) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (forall j. j < k ==> abs(sum(a..a + j) (\\i. X i y)) < t) /\\\n            abs(sum(a..a + k) (\\i. X i y)) >= t} x) = &0) /\\\n    &0 < t\n    ==> prob p {x | x IN prob_carrier p /\\\n          ?k. k <= n /\\ abs(sum(a..a + k) (\\i. X i x)) >= t}\n        <= sum(a..a + n) (\\i. variance p (X i)) / t pow 2
       #|  nn:num
       #|  j:num
       #|  mm:num
@@ -87437,7 +87437,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n. variance (p:A prob_space) ((X:num->A->real) n)
       #|  ~(&(2 EXP j) = &0)
       #|  ~(&(SUC m) = &0)
-      #|  !j. sum(2 EXP j..2 EXP (SUC j) - 1)\n       (\\i. variance (p:A prob_space) ((X:num->A->real) i)) /\n       (&(2 EXP j) * inv(&(SUC m))) pow 2 =\n       &(SUC m) pow 2 *\n         (sum(2 EXP j..2 EXP (SUC j) - 1)\n           (\\i. variance p (X i)) / &(2 EXP j) pow 2)
+      #|  forall j. sum(2 EXP j..2 EXP (SUC j) - 1)\n       (\\i. variance (p:A prob_space) ((X:num->A->real) i)) /\n       (&(2 EXP j) * inv(&(SUC m))) pow 2 =\n       &(SUC m) pow 2 *\n         (sum(2 EXP j..2 EXP (SUC j) - 1)\n           (\\i. variance p (X i)) / &(2 EXP j) pow 2)
       #|  \\j. sum(2 EXP j..2 EXP (SUC j) - 1)\n      (\\i. variance (p:A prob_space) ((X:num->A->real) i)) /\n      (&(2 EXP j) * inv(&(SUC m))) pow 2
       #|  1 <= 2 EXP j
       #|  k' < 2 EXP j - 1
@@ -87445,7 +87445,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  2 EXP j + k'
       #|  2 EXP (SUC j) - 1
       #|  2 EXP j
-      #|  !a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n        expectation (p:A prob_space)\n          (\\x. sum(a..k) (\\i. (X:num->A->real) i x) *\n            sum(SUC k..b) (\\i. X i x) *\n            indicator_fn {y | y IN prob_carrier p /\\\n              (!j. a <= j /\\ j < k ==>\n                abs(sum(a..j) (\\i. X i y)) < t) /\\\n              abs(sum(a..k) (\\i. X i y)) >= t} x) = &0
+      #|  forall a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n        expectation (p:A prob_space)\n          (\\x. sum(a..k) (\\i. (X:num->A->real) i x) *\n            sum(SUC k..b) (\\i. X i x) *\n            indicator_fn {y | y IN prob_carrier p /\\\n              (forall j. a <= j /\\ j < k ==>\n                abs(sum(a..j) (\\i. X i y)) < t) /\\\n              abs(sum(a..k) (\\i. X i y)) >= t} x) = &0
       #|  a + k' + 1 = SUC(a + k')
       #|  j'' < k':num
       #|  2 EXP j + j''
@@ -87457,9 +87457,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  j'' - 2 EXP j
       #|  j'':num
       #|  y:A
-      #|  {y:A | y IN prob_carrier p /\\\n          (!j'. j' < k' ==>\n            abs(sum(2 EXP j..2 EXP j + j')\n              (\\i. (X:num->A->real) i y)) <\n              &(2 EXP j) * inv(&(SUC m))) /\\\n          abs(sum(2 EXP j..2 EXP j + k') (\\i. X i y)) >=\n            &(2 EXP j) * inv(&(SUC m))} =\n         {y:A | y IN prob_carrier p /\\\n          (!j'. 2 EXP j <= j' /\\ j' < 2 EXP j + k' ==>\n            abs(sum(2 EXP j..j') (\\i. X i y)) <\n              &(2 EXP j) * inv(&(SUC m))) /\\\n          abs(sum(2 EXP j..2 EXP j + k') (\\i. X i y)) >=\n            &(2 EXP j) * inv(&(SUC m))}
+      #|  {y:A | y IN prob_carrier p /\\\n          (forall j'. j' < k' ==>\n            abs(sum(2 EXP j..2 EXP j + j')\n              (\\i. (X:num->A->real) i y)) <\n              &(2 EXP j) * inv(&(SUC m))) /\\\n          abs(sum(2 EXP j..2 EXP j + k') (\\i. X i y)) >=\n            &(2 EXP j) * inv(&(SUC m))} =\n         {y:A | y IN prob_carrier p /\\\n          (forall j'. 2 EXP j <= j' /\\ j' < 2 EXP j + k' ==>\n            abs(sum(2 EXP j..j') (\\i. X i y)) <\n              &(2 EXP j) * inv(&(SUC m))) /\\\n          abs(sum(2 EXP j..2 EXP j + k') (\\i. X i y)) >=\n            &(2 EXP j) * inv(&(SUC m))}
       #|  k':num
-      #|  !i j. ~(i = j) ==> covariance (p:A prob_space)\n        ((X:num->A->real) i) (X j) = &0
+      #|  forall i j. ~(i = j) ==> covariance (p:A prob_space)\n        ((X:num->A->real) i) (X j) = &0
       #|  1 <= 2 EXP j
       #|  2 EXP j + (2 EXP j - 1) = 2 EXP (SUC j) - 1
       #|  &(2 EXP j) * inv(&(SUC m))
@@ -87480,10 +87480,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  1 <= n <=> 0 < n
       #|  1 <= 2 EXP j
       #|  j:num
-      #|  !j. prob (p:A prob_space) ((B:num->A->bool) j) <=\n      sum(2 EXP j..2 EXP (SUC j) - 1)\n        (\\i. variance p ((X:num->A->real) i)) /\n      (&(2 EXP j) * inv(&(SUC m))) pow 2
+      #|  forall j. prob (p:A prob_space) ((B:num->A->bool) j) <=\n      sum(2 EXP j..2 EXP (SUC j) - 1)\n        (\\i. variance p ((X:num->A->real) i)) /\n      (&(2 EXP j) * inv(&(SUC m))) pow 2
       #|  limsup_events (B:num->A->bool)
       #|  0..2 EXP (SUC j):num
-      #|  !n. integrable (p:A prob_space)\n         ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space)\n         ((X:num->A->real) n)
       #|  i:num
       #|  nn:num
       #|  2 EXP j - 1
@@ -87497,10 +87497,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  nn:num
       #|  {x:A | x IN prob_carrier p /\\\n     (?nn. 2 EXP j <= nn /\\ nn < 2 EXP (SUC j) /\\\n       abs(sum(2 EXP j..nn) (\\i. (X:num->A->real) i x)) >=\n       &(2 EXP j) * inv(&(SUC m)))} =\n     UNIONS(IMAGE (\\nn. {x:A | x IN prob_carrier p /\\\n       abs(sum(2 EXP j..nn) (\\i. X i x)) >=\n       &(2 EXP j) * inv(&(SUC m))})\n       {nn | 2 EXP j <= nn /\\ nn < 2 EXP (SUC j)})
       #|  j:num
-      #|  !j. (B:num->A->bool) j IN prob_events p
+      #|  forall j. (B:num->A->bool) j IN prob_events p
       #|  B = \\j. {x:A | x IN prob_carrier p /\\\n    ?nn:num. 2 EXP j <= nn /\\ nn < 2 EXP (SUC j) /\\\n      abs(sum(2 EXP j..nn) (\\i. (X:num->A->real) i x)) >=\n      &(2 EXP j) * inv(&(SUC m))}
       #|  m:num
-      #|  !p:A prob_space (X:num->A->real).\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (!a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n      expectation p (\\x. sum(a..k) (\\i. X i x) *\n        sum(SUC k..b) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (!j. a <= j /\\ j < k ==>\n              abs(sum(a..j) (\\i. X i y)) < t) /\\\n            abs(sum(a..k) (\\i. X i y)) >= t} x) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> !m:num. almost_surely p\n      {x:A | ?N:num. !j. N <= j ==>\n        !nn. 2 EXP j <= nn /\\ nn < 2 EXP (SUC j) ==>\n          abs(sum(2 EXP j..nn) (\\i. X i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
+      #|  forall p:A prob_space (X:num->A->real).\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (forall a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n      expectation p (\\x. sum(a..k) (\\i. X i x) *\n        sum(SUC k..b) (\\i. X i x) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (forall j. a <= j /\\ j < k ==>\n              abs(sum(a..j) (\\i. X i y)) < t) /\\\n            abs(sum(a..k) (\\i. X i y)) >= t} x) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> forall m:num. almost_surely p\n      {x:A | ?N:num. forall j. N <= j ==>\n        forall nn. 2 EXP j <= nn /\\ nn < 2 EXP (SUC j) ==>\n          abs(sum(2 EXP j..nn) (\\i. X i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
       #|  ~(m = 0)
       #|  inv(&m)
       #|  2 EXP j <= n
@@ -87546,49 +87546,49 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e / &2
       #|  e:real
       #|  x:A
-      #|  {x:A | ((\\j. inv(&(2 EXP j)) *\n      sum(0..2 EXP j - 1) (\\i. (Y:num->A->real) i x))\n      ---> &0) sequentially} INTER\n     {x | !m. ?N. !j. N <= j ==>\n       !nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n         abs(sum(2 EXP j..nn) (\\i. Y i x)) <\n         &(2 EXP j) * inv(&(SUC m))}
-      #|  INTERS {(\\m. {x:A | ?N. !j. N <= j ==>\n     !nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n       abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n       &(2 EXP j) * inv(&(SUC m))}) m | m IN (:num)}
-      #|  almost_surely p\n      {x:A | !m. ?N. !j. N <= j ==>\n        !nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n          abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
-      #|  !m. almost_surely p\n      {x:A | ?N. !j. N <= j ==>\n        !nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n          abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
+      #|  {x:A | ((\\j. inv(&(2 EXP j)) *\n      sum(0..2 EXP j - 1) (\\i. (Y:num->A->real) i x))\n      ---> &0) sequentially} INTER\n     {x | forall m. ?N. forall j. N <= j ==>\n       forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n         abs(sum(2 EXP j..nn) (\\i. Y i x)) <\n         &(2 EXP j) * inv(&(SUC m))}
+      #|  INTERS {(\\m. {x:A | ?N. forall j. N <= j ==>\n     forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n       abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n       &(2 EXP j) * inv(&(SUC m))}) m | m IN (:num)}
+      #|  almost_surely p\n      {x:A | forall m. ?N. forall j. N <= j ==>\n        forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n          abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
+      #|  forall m. almost_surely p\n      {x:A | ?N. forall j. N <= j ==>\n        forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n          abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n          &(2 EXP j) * inv(&(SUC m))}
       #|  \\n. variance p ((X:num->A->real) n) / &(SUC n) pow 2
       #|  almost_surely p\n      {x:A | ((\\j. inv(&(2 EXP j)) *\n        sum(0..2 EXP j - 1) (\\i. (Y:num->A->real) i x))\n        ---> &0) sequentially}
-      #|  !n (x:A). sum(0..n) (\\i. (Y:num->A->real) i x) =\n               sum(0..n) (\\i. X i x - (mu:num->real) i)
+      #|  forall n (x:A). sum(0..n) (\\i. (Y:num->A->real) i x) =\n               sum(0..n) (\\i. X i x - (mu:num->real) i)
       #|  covariance p (\\x:A. (X:num->A->real) i x - (mu:num->real) i)\n                   (\\x. X j x - mu j) =\n      covariance p (X i) (X j)
-      #|  !i j. ~(i = j) ==> covariance p ((Y:num->A->real) i) (Y j) = &0
-      #|  !n. variance p ((Y:num->A->real) n) = variance p (X n)
+      #|  forall i j. ~(i = j) ==> covariance p ((Y:num->A->real) i) (Y j) = &0
+      #|  forall n. variance p ((Y:num->A->real) n) = variance p (X n)
       #|  (\\x:A. ((X:num->A->real) n x - (mu:num->real) n) pow 2) =\n     (\\x. X n x pow 2 + (--(&2 * mu n) * X n x + (mu n) pow 2))
-      #|  !n. integrable p (\\x:A. (Y:num->A->real) n x pow 2)
-      #|  !n. integrable p ((Y:num->A->real) n)
-      #|  !n. expectation p ((Y:num->A->real) n) = &0
+      #|  forall n. integrable p (\\x:A. (Y:num->A->real) n x pow 2)
+      #|  forall n. integrable p ((Y:num->A->real) n)
+      #|  forall n. expectation p ((Y:num->A->real) n) = &0
       #|  Y = \\n (x:A). (X:num->A->real) n x - (mu:num->real) n
-      #|  !p:A prob_space (X:num->A->real) mu.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = mu n) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (!a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n      expectation p (\\x. sum(a..k) (\\i. X i x - mu i) *\n        sum(SUC k..b) (\\i. X i x - mu i) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (!j. a <= j /\\ j < k ==>\n              abs(sum(a..j) (\\i. X i y - mu i)) < t) /\\\n            abs(sum(a..k) (\\i. X i y - mu i)) >= t} x) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n      {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x - mu i))\n            ---> &0) sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = mu n) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    (forall a b k t. a <= k /\\ k < b /\\ &0 < t ==>\n      expectation p (\\x. sum(a..k) (\\i. X i x - mu i) *\n        sum(SUC k..b) (\\i. X i x - mu i) *\n        indicator_fn\n          {y:A | y IN prob_carrier p /\\\n            (forall j. a <= j /\\ j < k ==>\n              abs(sum(a..j) (\\i. X i y - mu i)) < t) /\\\n            abs(sum(a..k) (\\i. X i y - mu i)) >= t} x) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n      {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x - mu i))\n            ---> &0) sequentially}
       #|  \\j:num. n < 2 EXP SUC j
-      #|  !j. K_gap <= j\n               ==> (!nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j\n                    ==> abs(sum(2 EXP j..nn)\n                      (\\i. (Y:num->A->real) i (x:A))) <\n                        &(2 EXP j) * inv(&(SUC m)))
+      #|  forall j. K_gap <= j\n               ==> (forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j\n                    ==> abs(sum(2 EXP j..nn)\n                      (\\i. (Y:num->A->real) i (x:A))) <\n                        &(2 EXP j) * inv(&(SUC m)))
       #|  n:num
       #|  0
       #|  &1
       #|  0
       #|  lift l:real^1
       #|  \\n. lift((a:num->real) n)
-      #|  !a l. (a ---> l) sequentially\n   ==> ((\\n. inv(&(SUC n)) * sum(0..n) a) ---> l) sequentially
+      #|  forall a l. (a ---> l) sequentially\n   ==> ((\\n. inv(&(SUC n)) * sum(0..n) a) ---> l) sequentially
       #|  x >= &(SUC n + 1)
       #|  sum(0..n) (\\k. if x >= &(k + 1) then &1 else &0) =\n        sum(0..n) (\\k:num. &1)
       #|  sum(0..n) (\\k. if x >= &(k + 1) then &1 else &0) = &(n + 1)
       #|  a <= b ==> b <= x ==> a <= x
       #|  x >= &(SUC n + 1)
       #|  k:num
-      #|  !k. k <= n ==> x >= &(k + 1)
-      #|  !x:real n. &0 <= x\n     ==> sum(0..n) (\\k. if x >= &(k + 1) then &1 else &0) <= x
+      #|  forall k. k <= n ==> x >= &(k + 1)
+      #|  forall x:real n. &0 <= x\n     ==> sum(0..n) (\\k. if x >= &(k + 1) then &1 else &0) <= x
       #|  w:A
       #|  n:num
       #|  \\k. indicator_fn {x:A | x IN prob_carrier p /\\ (X:A->real) x >= &(k + 1)}
       #|  p:A prob_space
-      #|  !k. prob p {x:A | x IN prob_carrier p /\\ X x >= &(k + 1)} =\n         expectation p (indicator_fn {x | x IN prob_carrier p /\\ X x >= &(k + 1)})
-      #|  !k. {x:A | x IN prob_carrier p /\\ X x >= &(k + 1)} IN prob_events p
+      #|  forall k. prob p {x:A | x IN prob_carrier p /\\ X x >= &(k + 1)} =\n         expectation p (indicator_fn {x | x IN prob_carrier p /\\ X x >= &(k + 1)})
+      #|  forall k. {x:A | x IN prob_carrier p /\\ X x >= &(k + 1)} IN prob_events p
       #|  random_variable (p:A prob_space) (X:A->real)
-      #|  !p:A prob_space X n.\n     integrable p X /\\\n     (!x. x IN prob_carrier p ==> &0 <= X x)\n     ==> sum(0..n) (\\k. prob p {x | x IN prob_carrier p /\\ X x >= &(k + 1)})\n         <= expectation p X
+      #|  forall p:A prob_space X n.\n     integrable p X /\\\n     (forall x. x IN prob_carrier p ==> &0 <= X x)\n     ==> sum(0..n) (\\k. prob p {x | x IN prob_carrier p /\\ X x >= &(k + 1)})\n         <= expectation p X
       #|  expectation p (X:A->real)
-      #|  !p:A prob_space X.\n     integrable p X /\\\n     (!x. x IN prob_carrier p ==> &0 <= X x)\n     ==> real_summable (from 0)\n           (\\k. prob p {x | x IN prob_carrier p /\\ X x >= &(k + 1)})
+      #|  forall p:A prob_space X.\n     integrable p X /\\\n     (forall x. x IN prob_carrier p ==> &0 <= X x)\n     ==> real_summable (from 0)\n           (\\k. prob p {x | x IN prob_carrier p /\\ X x >= &(k + 1)})
       #|  real_of_num
       #|  m = SUC n + 1
       #|  &m >= &(SUC n + 1)
@@ -87598,16 +87598,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ~(&m >= &(SUC n + 1))
       #|  m <= n + 1
       #|  m <= 1 <=> m = 0 \\/ m = 1
-      #|  !m n:num. m <= n + 1\n     ==> sum(0..n) (\\k. if &m >= &(k + 1) then &1 else &0) = &m
+      #|  forall m n:num. m <= n + 1\n     ==> sum(0..n) (\\k. if &m >= &(k + 1) then &1 else &0) = &m
       #|  n:num
       #|  \\k. indicator_fn {y:A | y IN prob_carrier p /\\ (X:A->real) y >= &(k + 1)}
       #|  p:A prob_space
       #|  expectation p\n       (\\x:A. sum(0..n) (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x)) =\n     nn_expectation p\n       (\\x:A. sum(0..n) (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x))
-      #|  !p:A prob_space X n.\n     random_variable p X /\\\n     (!k. {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} IN prob_events p)\n     ==> nn_expectation p\n           (\\x. sum(0..n) (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x)) =\n         sum(0..n) (\\k. prob p {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)})
+      #|  forall p:A prob_space X n.\n     random_variable p X /\\\n     (forall k. {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} IN prob_events p)\n     ==> nn_expectation p\n           (\\x. sum(0..n) (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x)) =\n         sum(0..n) (\\k. prob p {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)})
       #|  expectation p (X:A->real)
       #|  n:num
       #|  m:num
-      #|  !k. (if x IN prob_carrier p /\\ (X:A->real) x >= &(k + 1) then &1 else &0) =\n          (if X x >= &(k + 1) then &1 else &0)
+      #|  forall k. (if x IN prob_carrier p /\\ (X:A->real) x >= &(k + 1) then &1 else &0) =\n          (if X x >= &(k + 1) then &1 else &0)
       #|  m:num
       #|  x:A
       #|  &0 <= a ==> s <= s + a
@@ -87615,10 +87615,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n:num. \\x:A. sum(0..n) (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k+1)} x)
       #|  p:A prob_space
       #|  expectation p (X:A->real) = nn_expectation p X
-      #|  !n:num. sum(0..n) (\\k. prob p {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)}) =\n            nn_expectation p\n              (\\x. sum(0..n)\n                (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x))
-      #|  !k. {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} IN prob_events p
+      #|  forall n:num. sum(0..n) (\\k. prob p {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)}) =\n            nn_expectation p\n              (\\x. sum(0..n)\n                (\\k. indicator_fn {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} x))
+      #|  forall k. {y:A | y IN prob_carrier p /\\ X y >= &(k + 1)} IN prob_events p
       #|  random_variable (p:A prob_space) X
-      #|  !p:A prob_space X.\n     integrable p X /\\\n     (!x. x IN prob_carrier p ==> &0 <= X x) /\\\n     (!x. x IN prob_carrier p ==> ?m:num. X x = &m)\n     ==> ((\\n. sum(0..n) (\\k. prob p {y | y IN prob_carrier p /\\ X y >= &(k + 1)}))\n          ---> expectation p X) sequentially
+      #|  forall p:A prob_space X.\n     integrable p X /\\\n     (forall x. x IN prob_carrier p ==> &0 <= X x) /\\\n     (forall x. x IN prob_carrier p ==> ?m:num. X x = &m)\n     ==> ((\\n. sum(0..n) (\\k. prob p {y | y IN prob_carrier p /\\ X y >= &(k + 1)}))\n          ---> expectation p X) sequentially
       #|  x:A
       #|  x:A
       #|  x:A
@@ -87628,7 +87628,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sum(m..n) (\\k. inv(&k) - inv(&(k + 1))) =\n                  inv(&m) - inv(&(n + 1))
       #|  m <= SUC n
       #|  m = 1
-      #|  !m n. 1 <= m /\\ m <= n + 1\n     ==> sum(m..n) (\\k. inv(&k) - inv(&(k + 1))) = inv(&m) - inv(&(n + 1))
+      #|  forall m n. 1 <= m /\\ m <= n + 1\n     ==> sum(m..n) (\\k. inv(&k) - inv(&(k + 1))) = inv(&m) - inv(&(n + 1))
       #|  &0 <= b ==> a - b <= a
       #|  ~(n < m) ==> m <= n + 1
       #|  (x + &1) - x = &1
@@ -87640,20 +87640,20 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k:num
       #|  sum(m..n) (\\k. inv(&k) - inv(&(k + 1)))
       #|  n:num < m
-      #|  !m n. 1 <= m ==> sum(m..n) (\\k. inv(&(k + 1)) pow 2) <= inv(&m)
+      #|  forall m n. 1 <= m ==> sum(m..n) (\\k. inv(&(k + 1)) pow 2) <= inv(&m)
       #|  inv(&1)
       #|  s <= &1 ==> &1 + s <= &2
       #|  &1 / x = inv x
       #|  \\k. inv(&(k + 1)) pow 2
       #|  0 <= n:num
       #|  n = 0
-      #|  !n. sum(0..n) (\\k. inv(&(k + 1)) pow 2) <= &2
+      #|  forall n. sum(0..n) (\\k. inv(&(k + 1)) pow 2) <= &2
       #|  ~(x <= c) ==> x > c
       #|  ~(x <= c) ==> min x c = c
       #|  x <= c ==> ~(x > c)
       #|  x <= c ==> min x c = x
       #|  x <= c:real
-      #|  !x c. &0 <= x /\\ &0 <= c\n     ==> min x c pow 2 =\n         x pow 2 * (if x <= c then &1 else &0) +\n         c pow 2 * (if x > c then &1 else &0)
+      #|  forall x c. &0 <= x /\\ &0 <= c\n     ==> min x c pow 2 =\n         x pow 2 * (if x <= c then &1 else &0) +\n         c pow 2 * (if x > c then &1 else &0)
       #|  ~(m = 0) ==> (m - 1) + 1 = m
       #|  ~(m = 0) ==> m - 1 < m
       #|  m - 1
@@ -87664,10 +87664,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  m:num
       #|  x:real
       #|  \\n. x < &n
-      #|  !x:real. &0 <= x ==> ?n. &n <= x /\\ x < &(n + 1)
-      #|  !x y:real. x <= y ==> min x y = x
+      #|  forall x:real. &0 <= x ==> ?n. &n <= x /\\ x < &(n + 1)
+      #|  forall x y:real. x <= y ==> min x y = x
       #|  0 < k + 1
-      #|  !x:real k. &0 <= x ==> min x (&(k + 1)) pow 2 / &(k + 1) pow 2 <= &1
+      #|  forall x:real k. &0 <= x ==> min x (&(k + 1)) pow 2 / &(k + 1) pow 2 <= &1
       #|  &(J + 1)
       #|  &0 <= x /\\ a <= x + &1 ==> a <= &2 * x + &2
       #|  sum(0..n) (\\k:num. &1)
@@ -87685,29 +87685,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  J:num <= n
       #|  J:num
       #|  x:real
-      #|  !x:real n. &0 <= x\n    ==> sum(0..n) (\\k. min x (&(k + 1)) pow 2 / &(k + 1) pow 2)\n        <= &2 * x + &2
+      #|  forall x:real n. &0 <= x\n    ==> sum(0..n) (\\k. min x (&(k + 1)) pow 2 / &(k + 1) pow 2)\n        <= &2 * x + &2
       #|  N:num
       #|  \\k. (\\x:A. inv(&(SUC k) pow 2) *\n              min ((X:A->real) x) (&(SUC k)) pow 2)
       #|  p:A prob_space
       #|  (\\x:A. sum(0..N)\n         (\\k. min ((X:A->real) x) (&(k + 1)) pow 2 / &(k + 1) pow 2)) =\n        (\\x. sum(0..N)\n         (\\k. inv(&(SUC k) pow 2) * min (X x) (&(SUC k)) pow 2))
       #|  expectation p (\\x:A. &2 * (X:A->real) x + &2)
-      #|  !x:A. sum(0..N)\n              (\\i. inv(&(SUC i) pow 2) * min ((X:A->real) x) (&(SUC i)) pow 2) =\n            sum(0..N) (\\k. min (X x) (&(k + 1)) pow 2 / &(k + 1) pow 2)
+      #|  forall x:A. sum(0..N)\n              (\\i. inv(&(SUC i) pow 2) * min ((X:A->real) x) (&(SUC i)) pow 2) =\n            sum(0..N) (\\k. min (X x) (&(k + 1)) pow 2 / &(k + 1) pow 2)
       #|  N:num
       #|  \\k. (\\x:A. inv(&(SUC k) pow 2) * min ((X:A->real) x) (&(SUC k)) pow 2)
       #|  p:A prob_space
       #|  k:num
       #|  sum(0..N) (\\k. expectation p (\\x. min ((X:A->real) x) (&(SUC k)) pow 2) /\n                     &(SUC k) pow 2) =\n      sum(0..N) (\\k. expectation p\n                   (\\x. inv(&(SUC k) pow 2) * min (X x) (&(SUC k)) pow 2))
-      #|  !k. integrable p\n       (\\x:A. inv(&(SUC k) pow 2) * min ((X:A->real) x) (&(SUC k)) pow 2)
+      #|  forall k. integrable p\n       (\\x:A. inv(&(SUC k) pow 2) * min ((X:A->real) x) (&(SUC k)) pow 2)
       #|  &0
       #|  abs(min x c) <= c <=> min x c <= c /\\ --c <= min x c
       #|  &(SUC k) pow 2
-      #|  !k. integrable p (\\x:A. min ((X:A->real) x) (&(SUC k)) pow 2)
+      #|  forall k. integrable p (\\x:A. min ((X:A->real) x) (&(SUC k)) pow 2)
       #|  N:num
       #|  &0
       #|  abs(min x c) <= c <=> min x c <= c /\\ --c <= min x c
       #|  &(SUC n) pow 2
       #|  &2 * expectation p (X:A->real) + &2
-      #|  !p:A prob_space (X:A->real).\n     integrable p X /\\ (!x. x IN prob_carrier p ==> &0 <= X x)\n     ==> real_summable (from 0)\n           (\\k. expectation p (\\x. min (X x) (&(SUC k)) pow 2) /\n                &(SUC k) pow 2)
+      #|  forall p:A prob_space (X:A->real).\n     integrable p X /\\ (forall x. x IN prob_carrier p ==> &0 <= X x)\n     ==> real_summable (from 0)\n           (\\k. expectation p (\\x. min (X x) (&(SUC k)) pow 2) /\n                &(SUC k) pow 2)
       #|  gseq b 0 = 1 /\\\n  gseq b (SUC k) = gseq b k + gseq b k DIV (b + 1) + 1
       #|  :P
       #|  :P
@@ -87720,49 +87720,49 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  !b k. gseq b k < gseq b (SUC k)
-      #|  !b k. 1 <= gseq b k
-      #|  !b k. k + 1 <= gseq b k
+      #|  forall b k. gseq b k < gseq b (SUC k)
+      #|  forall b k. 1 <= gseq b k
+      #|  forall b k. k + 1 <= gseq b k
       #|  k:num
       #|  b:num
-      #|  !b k. ~(gseq b k = 0)
+      #|  forall b k. ~(gseq b k = 0)
       #|  gseq b k
-      #|  !b j k. j <= k ==> gseq b j <= gseq b k
+      #|  forall b j k. j <= k ==> gseq b j <= gseq b k
       #|  SUC N
       #|  b:num
       #|  SUC N
-      #|  !b N. ?k. N < gseq b k
+      #|  forall b N. ?k. N < gseq b k
       #|  &(m DIV n * n) <= &m
       #|  &0 < &n
-      #|  !m n. 0 < n ==> &(m DIV n) <= &m / &n
+      #|  forall m n. 0 < n ==> &(m DIV n) <= &m / &n
       #|  &(b + 2) = &(b + 1) + &1
       #|  ~(&(b + 1) = &0)
-      #|  !b k. &(b + 2) / &(b + 1) * &(gseq b k) =\n         &(gseq b k) + &(gseq b k) / &(b + 1)
+      #|  forall b k. &(b + 2) / &(b + 1) * &(gseq b k) =\n         &(gseq b k) + &(gseq b k) / &(b + 1)
       #|  ~(&(b + 1) = &0)
       #|  inv(&(b + 1))
       #|  &(gseq b (SUC k)) * &(b + 1)
       #|  &(gseq b k) * &(b + 2)
       #|  gseq b k DIV (b + 1) * (b + 1) <= gseq b k
       #|  gseq b k * (b + 2) <= gseq b (SUC k) * (b + 1)
-      #|  !b k. (&(b + 2) / &(b + 1)) * &(gseq b k) <= &(gseq b (SUC k))
+      #|  forall b k. (&(b + 2) / &(b + 1)) * &(gseq b k) <= &(gseq b (SUC k))
       #|  gseq b k DIV (b + 1) * (b + 1) <= gseq b k
-      #|  !b k. gseq b (SUC k) * (b + 1) <= gseq b k * (b + 2) + (b + 1)
+      #|  forall b k. gseq b (SUC k) * (b + 1) <= gseq b k * (b + 2) + (b + 1)
       #|  0 < b + 1
       #|  b + 1
       #|  gseq b k
       #|  &(gseq b k DIV (b + 1)) <= &(gseq b k) / &(b + 1)
-      #|  !b k. &(gseq b (SUC k)) <= &(b + 2) / &(b + 1) * &(gseq b k) + &1
+      #|  forall b k. &(gseq b (SUC k)) <= &(b + 2) / &(b + 1) * &(gseq b k) + &1
       #|  &(b + 2) / &(b + 1) * &(gseq b (k + m))
-      #|  !b m k. (&(b + 2) / &(b + 1)) pow m * &(gseq b k) <= &(gseq b (k + m))
+      #|  forall b m k. (&(b + 2) / &(b + 1)) pow m * &(gseq b k) <= &(gseq b (k + m))
       #|  (&(b + 2) / &(b + 1)) * &(gseq b k)
-      #|  !b k. (&(b + 2) / &(b + 1)) pow k <= &(gseq b k)
+      #|  forall b k. (&(b + 2) / &(b + 1)) pow k <= &(gseq b k)
       #|  k:num
       #|  b:num
       #|  0 < b + 1
       #|  0 < b + 2
       #|  inv(&(gseq b (SUC k)) pow 2) <=\n    inv((&(b + 2) / &(b + 1) * &(gseq b k)) pow 2)
       #|  (&(b + 2) / &(b + 1) * &(gseq b k)) pow 2 <=\n    &(gseq b (SUC k)) pow 2
-      #|  !b k. inv(&(gseq b (SUC k)) pow 2) <=\n         (&(b + 1) / &(b + 2)) pow 2 * inv(&(gseq b k) pow 2)
+      #|  forall b k. inv(&(gseq b (SUC k)) pow 2) <=\n         (&(b + 1) / &(b + 2)) pow 2 * inv(&(gseq b k) pow 2)
       #|  1 <= n ==> n - 1 + 1 = n
       #|  k:num
       #|  b:num
@@ -87774,7 +87774,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  gseq b k
       #|  0
       #|  V:num->real
-      #|  !b V k. sum(0..gseq b (SUC k) - 1) V =\n   sum(0..gseq b k - 1) (V:num->real) +\n   sum(gseq b k..gseq b (SUC k) - 1) V
+      #|  forall b V k. sum(0..gseq b (SUC k) - 1) V =\n   sum(0..gseq b k - 1) (V:num->real) +\n   sum(gseq b k..gseq b (SUC k) - 1) V
       #|  M:num
       #|  from 0
       #|  c:num->real
@@ -87814,12 +87814,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sum(0..gseq b k - 1) (V:num->real)
       #|  inv(&(gseq b (SUC k)) pow 2) <=\n     rho * inv(&(gseq b k) pow 2)
       #|  x <= y ==> x + z <= y + z
-      #|  !k. (a:num->real) (SUC k) <= rho * a k + (c:num->real) k
+      #|  forall k. (a:num->real) (SUC k) <= rho * a k + (c:num->real) k
       #|  0 < b + 2
       #|  &0 <= rho /\\ rho < &1
       #|  rho = (&(b + 1) / &(b + 2)) pow 2
-      #|  !k. &0 <= (c:num->real) k
-      #|  !k. &0 <= (a:num->real) k
+      #|  forall k. &0 <= (c:num->real) k
+      #|  forall k. &0 <= (a:num->real) k
       #|  SUC n
       #|  b:num
       #|  &0 <= x /\\ x <= y ==> abs x <= y
@@ -87840,13 +87840,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  gseq b 0
       #|  \\i. (V:num->real) i / &(SUC i) pow 2
       #|  sum(gseq b 0..gseq b (SUC N) - 1)\n         (\\i. (V:num->real) i / &(SUC i) pow 2) +\n         sum(gseq b (SUC N)..gseq b (SUC (SUC N)) - 1)\n           (\\i. V i / &(SUC i) pow 2)
-      #|  !N. sum(0..N) (\\k. sum(gseq b k..gseq b (SUC k) - 1)\n         (\\i. (V:num->real) i / &(SUC i) pow 2)) <=\n         sum(gseq b 0..gseq b (SUC N) - 1)\n           (\\i. V i / &(SUC i) pow 2)
+      #|  forall N. sum(0..N) (\\k. sum(gseq b k..gseq b (SUC k) - 1)\n         (\\i. (V:num->real) i / &(SUC i) pow 2)) <=\n         sum(gseq b 0..gseq b (SUC N) - 1)\n           (\\i. V i / &(SUC i) pow 2)
       #|  real_infsum (from 0) (\\n. (V:num->real) n / &(SUC n) pow 2)
       #|  \\k. sum(gseq b k..gseq b (SUC k) - 1)\n     (\\i. (V:num->real) i / &(SUC i) pow 2)
       #|  real_summable (from 0) (c:num->real)
       #|  c = \\k. sum(gseq b k..gseq b (SUC k) - 1) (V:num->real) /\n    &(gseq b (SUC k)) pow 2
       #|  a = \\k. sum(0..gseq b k - 1) (V:num->real) /\n    &(gseq b k) pow 2
-      #|  !b V. (!n. &0 <= V n) /\\\n      real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n      ==> real_summable (from 0)\n            (\\k. sum(0..gseq b k - 1) V / &(gseq b k) pow 2)
+      #|  forall b V. (forall n. &0 <= V n) /\\\n      real_summable (from 0) (\\n. V n / &(SUC n) pow 2)\n      ==> real_summable (from 0)\n            (\\k. sum(0..gseq b k - 1) V / &(gseq b k) pow 2)
       #|  variance (p:A prob_space)\n    (\\x:A. sum(0..nn - 1) (\\i. (X:num->A->real) i x)) =\n    sum(0..nn - 1) (\\i. variance p (X i))
       #|  {x:A | x IN prob_carrier p /\\\n        abs(inv(&nn) * sum(0..nn - 1)\n          (\\i. (X:num->A->real) i x)) >= eps} =\n     {x | x IN prob_carrier p /\\\n        abs((\\x. inv(&nn) * sum(0..nn - 1)\n          (\\i. (X:num->A->real) i x)) x -\n          expectation p (\\x. inv(&nn) * sum(0..nn - 1)\n            (\\i. X i x))) >= eps}
       #|  variance (p:A prob_space)\n    (\\x:A. inv(&nn) * sum(0..nn - 1)\n      (\\i. (X:num->A->real) i x)) / eps pow 2
@@ -87869,10 +87869,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  gseq b k - 1
       #|  X:num->A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X b.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (X n) = &0) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(gseq b k)) * sum(0..gseq b k - 1) (\\i. X i x))\n                ---> &0) sequentially}
+      #|  forall p:A prob_space X b.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (X n) = &0) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n          {x | ((\\k. inv(&(gseq b k)) * sum(0..gseq b k - 1) (\\i. X i x))\n                ---> &0) sequentially}
       #|  a2 / d2:real
       #|  &0 < d2
-      #|  !a1 a2 d1 d2:real. &0 < d1 /\\ d1 <= d2 /\\ &0 <= a1 /\\ a1 <= a2\n              ==> a1 / d2 <= a2 / d1
+      #|  forall a1 a2 d1 d2:real. &0 < d1 /\\ d1 <= d2 /\\ &0 <= a1 /\\ a1 <= a2\n              ==> a1 / d2 <= a2 / d1
       #|  j:num
       #|  j:num
       #|  j:num
@@ -87887,8 +87887,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  SUC n
       #|  b:num
       #|  ?k:num. SUC n < gseq b k
-      #|  !b n. ?k. gseq b k <= SUC n /\\ SUC n < gseq b (SUC k)
-      #|  !b k. gseq b (SUC k) - gseq b k <= gseq b k DIV (b + 1) + 1
+      #|  forall b n. ?k. gseq b k <= SUC n /\\ SUC n < gseq b (SUC k)
+      #|  forall b k. gseq b (SUC k) - gseq b k <= gseq b k DIV (b + 1) + 1
       #|  &0 < x ==> ~(x = &0)
       #|  &(gseq b k) * inv (&(b + 1)) * inv (&(gseq b k)) =\n    inv(&(b + 1))
       #|  b + 1
@@ -87899,7 +87899,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  b:num
       #|  &0 < &(gseq b k)
       #|  gseq b (SUC k) - gseq b k = gseq b k DIV (b + 1) + 1
-      #|  !b k. &(gseq b (SUC k) - gseq b k) / &(gseq b k) <=\n         inv(&(b + 1)) + inv(&(gseq b k))
+      #|  forall b k. &(gseq b (SUC k) - gseq b k) / &(gseq b k) <=\n         inv(&(b + 1)) + inv(&(gseq b k))
       #|  L - f n / &(SUC n) < e
       #|  f n / &(SUC n) - L < e
       #|  &0 < e
@@ -87997,7 +87997,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  &0 < C
       #|  C = L + e + &1
       #|  e:real
-      #|  !f L.\n    (!m n:num. m <= n ==> f m <= f n) /\\\n    (!n. &0 <= f n) /\\\n    &0 <= L /\\\n    (!b. ((\\k. f(gseq b k - 1) / &(gseq b k)) ---> L) sequentially)\n    ==> ((\\n. f n / &(SUC n)) ---> L) sequentially
+      #|  forall f L.\n    (forall m n:num. m <= n ==> f m <= f n) /\\\n    (forall n. &0 <= f n) /\\\n    &0 <= L /\\\n    (forall b. ((\\k. f(gseq b k - 1) / &(gseq b k)) ---> L) sequentially)\n    ==> ((\\n. f n / &(SUC n)) ---> L) sequentially
       #|  (\\n. inv(&(SUC n)) * sum(0..n) (\\i. (X:num->A->real) i x)) =\n      (\\n. sum(0..n) (\\i. X i x) / &(SUC n))
       #|  &(gseq b k) * mu * inv(&(gseq b k)) = mu
       #|  k:num
@@ -88006,7 +88006,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  k:num
       #|  b:num
       #|  &((gseq b k - 1 + 1) - 0) = &(gseq b k)
-      #|  !k. inv(&(gseq b k)) *\n      sum(0..gseq b k - 1) (\\i. (X:num->A->real) i x - mu) =\n      sum(0..gseq b k - 1) (\\i. X i x) / &(gseq b k) - mu
+      #|  forall k. inv(&(gseq b k)) *\n      sum(0..gseq b k - 1) (\\i. (X:num->A->real) i x - mu) =\n      sum(0..gseq b k - 1) (\\i. X i x) / &(gseq b k) - mu
       #|  b:num
       #|  mu:real
       #|  \\n. sum(0..n) (\\i. (X:num->A->real) i x)
@@ -88021,29 +88021,29 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  INTERS\n      {(\\b:num. {x:A |\n         ((\\k. inv(&(gseq b k)) *\n           sum(0..gseq b k - 1) (\\i. (X:num->A->real) i x - mu))\n           ---> &0) sequentially}) b | b IN (:num)}
       #|  mu = expectation p ((X:num->A->real) 0)
       #|  &0 <= mu
-      #|  !p:A prob_space (X:num->A->real) mu.\n    (!n. integrable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n    (!n. expectation p (X n) = mu) /\\\n    (!i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n      {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu)\n           sequentially}
+      #|  forall p:A prob_space (X:num->A->real) mu.\n    (forall n. integrable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n x. x IN prob_carrier p ==> &0 <= X n x) /\\\n    (forall n. expectation p (X n) = mu) /\\\n    (forall i j. ~(i = j) ==> covariance p (X i) (X j) = &0) /\\\n    real_summable (from 0) (\\n. variance p (X n) / &(SUC n) pow 2)\n    ==> almost_surely p\n      {x | ((\\n. inv(&(SUC n)) * sum(0..n) (\\i. X i x)) ---> mu)\n           sequentially}
       #|  e:real
       #|  e:real
-      #|  uniformly_integrable (p:A prob_space) (X:num->A->real) <=>\n   (!n. integrable p (X n)) /\\\n   !e. &0 < e ==>\n     ?K. !n. expectation p (\\x. max (abs(X n x) - K) (&0)) < e
-      #|  !a b K. &0 <= K\n           ==> max (abs(a - b) - &2 * K) (&0) <=\n               max (abs a - K) (&0) + max (abs b - K) (&0)
-      #|  !p:A prob_space f K.\n    integrable p f\n    ==> integrable p (\\x. max (abs(f x) - K) (&0))
-      #|  !p:A prob_space f K.\n    integrable p f /\\ &0 <= K\n    ==> expectation p (\\x. max (abs(f x) - K) (&0)) <=\n        expectation p (\\x. abs(f x))
-      #|  !p:A prob_space f K.\n    integrable p f\n    ==> &0 <= expectation p (\\x. max (abs(f x) - K) (&0))
-      #|  !n. nn_expectation (p:A prob_space)\n    (\\x:A. min (abs((f:A->real) x)) (&n)) =\n    expectation p (\\x. min (abs(f x)) (&n))
+      #|  uniformly_integrable (p:A prob_space) (X:num->A->real) <=>\n   (forall n. integrable p (X n)) /\\\n   forall e. &0 < e ==>\n     ?K. forall n. expectation p (\\x. max (abs(X n x) - K) (&0)) < e
+      #|  forall a b K. &0 <= K\n           ==> max (abs(a - b) - &2 * K) (&0) <=\n               max (abs a - K) (&0) + max (abs b - K) (&0)
+      #|  forall p:A prob_space f K.\n    integrable p f\n    ==> integrable p (\\x. max (abs(f x) - K) (&0))
+      #|  forall p:A prob_space f K.\n    integrable p f /\\ &0 <= K\n    ==> expectation p (\\x. max (abs(f x) - K) (&0)) <=\n        expectation p (\\x. abs(f x))
+      #|  forall p:A prob_space f K.\n    integrable p f\n    ==> &0 <= expectation p (\\x. max (abs(f x) - K) (&0))
+      #|  forall n. nn_expectation (p:A prob_space)\n    (\\x:A. min (abs((f:A->real) x)) (&n)) =\n    expectation p (\\x. min (abs(f x)) (&n))
       #|  nn_expectation (p:A prob_space) (\\x:A. abs((f:A->real) x)) =\n    expectation p (\\x. abs(f x))
       #|  \\x:A. abs((f:A->real) x)
       #|  p:A prob_space
       #|  integrable (p:A prob_space) (\\x. abs((f:A->real) x))
-      #|  !p:A prob_space f.\n    integrable p f\n    ==> ((\\n. expectation p (\\x. min (abs(f x)) (&n))) --->\n         expectation p (\\x. abs(f x))) sequentially
+      #|  forall p:A prob_space f.\n    integrable p f\n    ==> ((\\n. expectation p (\\x. min (abs(f x)) (&n))) --->\n         expectation p (\\x. abs(f x))) sequentially
       #|  expectation (p:A prob_space) (\\x:A. abs((f:A->real) x)) =\n    expectation p (\\x. min (abs(f x)) (&n) + max (abs(f x) - &n) (&0))
       #|  expectation (p:A prob_space) (\\x:A. abs((f:A->real) x)) =\n    expectation p (\\x. min (abs(f x)) (&n)) +\n    expectation p (\\x. max (abs(f x) - &n) (&0))
       #|  integrable (p:A prob_space) (\\x. abs((f:A->real) x))
-      #|  !p:A prob_space f n.\n    integrable p f\n    ==> expectation p (\\x. max (abs(f x) - &n) (&0)) =\n        expectation p (\\x. abs(f x)) -\n        expectation p (\\x. min (abs(f x)) (&n))
+      #|  forall p:A prob_space f n.\n    integrable p f\n    ==> expectation p (\\x. max (abs(f x) - &n) (&0)) =\n        expectation p (\\x. abs(f x)) -\n        expectation p (\\x. min (abs(f x)) (&n))
       #|  &0 = expectation (p:A prob_space) (\\x:A. abs((f:A->real) x)) -\n    expectation p (\\x. abs(f x))
       #|  (\\n. expectation (p:A prob_space)\n      (\\x:A. max (abs((f:A->real) x) - &n) (&0))) =\n     (\\n. expectation p (\\x. abs(f x)) -\n          expectation p (\\x. min (abs(f x)) (&n)))
-      #|  !n. expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - &n) (&0)) =\n    expectation p (\\x. abs(f x)) -\n    expectation p (\\x. min (abs(f x)) (&n))
+      #|  forall n. expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - &n) (&0)) =\n    expectation p (\\x. abs(f x)) -\n    expectation p (\\x. min (abs(f x)) (&n))
       #|  ((\\n. expectation (p:A prob_space)\n    (\\x:A. min (abs((f:A->real) x)) (&n))) --->\n    expectation p (\\x. abs(f x))) sequentially
-      #|  !p:A prob_space f.\n    integrable p f\n    ==> ((\\n. expectation p (\\x. max (abs(f x) - &n) (&0))) ---> &0)\n        sequentially
+      #|  forall p:A prob_space f.\n    integrable p f\n    ==> ((\\n. expectation p (\\x. max (abs(f x) - &n) (&0))) ---> &0)\n        sequentially
       #|  \\x:A. max (abs((X:num->A->real) n x) - K) (&0)
       #|  \\x:A. min (abs((X:num->A->real) n x)) K
       #|  p:A prob_space
@@ -88057,7 +88057,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  K + &1
       #|  K:real
       #|  &1
-      #|  !p:A prob_space (X:num->A->real).\n    uniformly_integrable p X\n    ==> ?B. !n. expectation p (\\x. abs(X n x)) <= B
+      #|  forall p:A prob_space (X:num->A->real).\n    uniformly_integrable p X\n    ==> ?B. forall n. expectation p (\\x. abs(X n x)) <= B
       #|  n:num
       #|  n:num
       #|  n:num
@@ -88073,7 +88073,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  ((\\n. expectation (p:A prob_space)\n      (\\x:A. max (abs((g:A->real) x) - &n) (&0))) ---> &0) sequentially
       #|  e:real
-      #|  !p:A prob_space (X:num->A->real) g.\n    (!n. integrable p (X n)) /\\\n    integrable p g /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= g x)\n    ==> uniformly_integrable p X
+      #|  forall p:A prob_space (X:num->A->real) g.\n    (forall n. integrable p (X n)) /\\\n    integrable p g /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= g x)\n    ==> uniformly_integrable p X
       #|  expectation (p:A prob_space)\n      (\\x:A. abs((X:num->A->real) n x))
       #|  0
       #|  x:A
@@ -88094,7 +88094,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  integrable (p:A prob_space)\n    (\\x:A. min (abs((f:A->real) x)) M)
       #|  M0:real
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n    (g:A->real) x <= min (abs((f:A->real) x)) M
+      #|  forall x:A. x IN prob_carrier p ==>\n    (g:A->real) x <= min (abs((f:A->real) x)) M
       #|  &0 <= M
       #|  M = max M0 (&0)
       #|  M0:real
@@ -88108,15 +88108,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  X:num->A->real
       #|  random_variable (p:A prob_space) (f:A->real)
       #|  n:num
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !n. random_variable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. random_variable (p:A prob_space) ((X:num->A->real) n)
       #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !p:A prob_space (X:num->A->real) f.\n    uniformly_integrable p X /\\\n    (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall p:A prob_space (X:num->A->real) f.\n    uniformly_integrable p X /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f
       #|  expectation (p:A prob_space)\n     (\\x:A. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)) <\n     e / &3
       #|  expectation (p:A prob_space)\n       (\\x:A. max (abs((f:A->real) x) - K) (&0)) < e / &3
       #|  n:num
-      #|  !n:num. expectation (p:A prob_space)\n       (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
+      #|  forall n:num. expectation (p:A prob_space)\n       (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
       #|  \\x:A. max (abs((f:A->real) x) - K) (&0)
       #|  \\x:A. max (abs((X:num->A->real) n x) - K) (&0)
       #|  p:A prob_space
@@ -88156,17 +88156,17 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ((\\n:num. abs((X:num->A->real) n x - (f:A->real) x)) ---> &0)\n     sequentially
       #|  ((\\n. (X:num->A->real) n x - (f:A->real) x) ---> &0)\n     sequentially
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n    ((\\n. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)) ---> &0)\n    sequentially
+      #|  forall x:A. x IN prob_carrier p ==>\n    ((\\n. min (abs((X:num->A->real) n x - (f:A->real) x)) (&2 * K)) ---> &0)\n    sequentially
       #|  &N1 <= K
       #|  expectation (p:A prob_space)\n     (\\x:A. max (abs((f:A->real) x) - &N1) (&0))
       #|  expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - K) (&0)) < e / &3
       #|  N1:num
-      #|  !n:num. N1 <= n ==>\n     abs(expectation (p:A prob_space)\n       (\\x:A. max (abs((f:A->real) x) - &n) (&0)) - &0) < e / &3
+      #|  forall n:num. N1 <= n ==>\n     abs(expectation (p:A prob_space)\n       (\\x:A. max (abs((f:A->real) x) - &n) (&0)) - &0) < e / &3
       #|  &0 <= expectation (p:A prob_space)\n     (\\x:A. max (abs((f:A->real) x) - &N1) (&0))
       #|  expectation (p:A prob_space)\n    (\\x:A. max (abs((f:A->real) x) - &N1) (&0)) < e / &3
       #|  K1 <= K
       #|  expectation (p:A prob_space)\n     (\\x:A. max (abs((X:num->A->real) n x) - K1) (&0))
-      #|  !n:num. expectation (p:A prob_space)\n    (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
+      #|  forall n:num. expectation (p:A prob_space)\n    (\\x:A. max (abs((X:num->A->real) n x) - K) (&0)) < e / &3
       #|  &0 <= K
       #|  K = max K1 (&N1)
       #|  N1:num
@@ -88177,8 +88177,8 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e / &3
       #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
       #|  &0 <= x ==> abs x = x
-      #|  !n:num. abs(expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))) =\n    expectation p (\\x. abs(X n x - f x))
-      #|  !n:num. &0 <= expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
+      #|  forall n:num. abs(expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))) =\n    expectation p (\\x. abs(X n x - f x))
+      #|  forall n:num. &0 <= expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
       #|  &0 < e / &3
       #|  e:real
       #|  X:num->A->real
@@ -88186,11 +88186,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  X:num->A->real
       #|  random_variable (p:A prob_space) (f:A->real)
       #|  n:num
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !n. random_variable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall n. random_variable (p:A prob_space) ((X:num->A->real) n)
       #|  uniformly_integrable (p:A prob_space) (X:num->A->real)
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !p:A prob_space (X:num->A->real) f.\n    uniformly_integrable p X /\\\n    (!x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f /\\\n        ((\\n. expectation p (\\x. abs(X n x - f x))) ---> &0) sequentially
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall p:A prob_space (X:num->A->real) f.\n    uniformly_integrable p X /\\\n    (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> f x) sequentially)\n    ==> integrable p f /\\\n        ((\\n. expectation p (\\x. abs(X n x - f x))) ---> &0) sequentially
       #|  &0 <= K pow 2
       #|  abs a * K <= abs a * abs a
       #|  a pow 2 = abs a * abs a
@@ -88198,13 +88198,13 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  max (abs a - K) (&0) = abs a - K
       #|  max (abs a - K) (&0) = &0
       #|  abs a <= K
-      #|  !a K. &0 < K ==> max (abs a - K) (&0) * K <= a pow 2
-      #|  !a K. &0 < K ==> max (abs a - K) (&0) <= a pow 2 / K
+      #|  forall a K. &0 < K ==> max (abs a - K) (&0) * K <= a pow 2
+      #|  forall a K. &0 < K ==> max (abs a - K) (&0) <= a pow 2 / K
       #|  abs((f:A->real) x) - &1
       #|  abs a <= &1 + a pow 2 /\\ &0 <= a pow 2\n      ==> abs a <= abs(&1 + a pow 2)
       #|  x:A
       #|  \\x:A. &1 + (f:A->real) x pow 2
-      #|  !p:A prob_space f.\n    random_variable p f /\\ integrable p (\\x. f x pow 2)\n    ==> integrable p f
+      #|  forall p:A prob_space f.\n    random_variable p f /\\ integrable p (\\x. f x pow 2)\n    ==> integrable p f
       #|  (C:real) = e * (C / e)
       #|  K * max (abs((X:num->A->real) n x) - K) (&0) =\n        max (abs(X n x) - K) (&0) * K
       #|  x:A
@@ -88217,15 +88217,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  K = max ((C:real) / e) (&0) + &1
       #|  max ((C:real) / e) (&0) + &1
       #|  e:real
-      #|  !n. integrable (p:A prob_space) ((X:num->A->real) n)
-      #|  !p:A prob_space (X:num->A->real) C.\n    (!n. random_variable p (X n)) /\\\n    (!n. integrable p (\\x. X n x pow 2)) /\\\n    (!n. expectation p (\\x. X n x pow 2) <= C)\n    ==> uniformly_integrable p X
+      #|  forall n. integrable (p:A prob_space) ((X:num->A->real) n)
+      #|  forall p:A prob_space (X:num->A->real) C.\n    (forall n. random_variable p (X n)) /\\\n    (forall n. integrable p (\\x. X n x pow 2)) /\\\n    (forall n. expectation p (\\x. X n x pow 2) <= C)\n    ==> uniformly_integrable p X
       #|  A:num->A->bool
       #|  signed_measure (p:A prob_space) nu
       #|  A:num->A->bool
       #|  signed_measure (p:A prob_space) mu
       #|  A:num->A->bool
       #|  (mu:(A->bool)->real) {} = &0 /\\ (nu:(A->bool)->real) {} = &0
-      #|  !p:A prob_space mu nu.\n     signed_measure p mu /\\ signed_measure p nu\n     ==> signed_measure p (\\A. mu A - nu A)
+      #|  forall p:A prob_space mu nu.\n     signed_measure p mu /\\ signed_measure p nu\n     ==> signed_measure p (\\A. mu A - nu A)
       #|  &0 <= q
       #|  q <= prob (p:A prob_space) A
       #|  q = prob (p:A prob_space) {x:A | x IN prob_carrier p /\\ (h:A->real) x = v}
@@ -88248,7 +88248,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (\\x:A. abs(f x * indicator_fn A x)) = (\\x. abs(f x) * indicator_fn A x)
       #|  expectation (p:A prob_space) (\\x:A. abs(f x * indicator_fn A x))
       #|  abs(x) <= &0 ==> x = &0
-      #|  !p:A prob_space f A.\n     integrable p f /\\ A IN prob_events p /\\ prob p A = &0\n     ==> expectation p (\\x. f x * indicator_fn A x) = &0
+      #|  forall p:A prob_space f A.\n     integrable p f /\\ A IN prob_events p /\\ prob p A = &0\n     ==> expectation p (\\x. f x * indicator_fn A x) = &0
       #|  n:num
       #|  f:A->real
       #|  (X:num->A->real) n
@@ -88262,7 +88262,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  n:num
       #|  n:num
-      #|  !n:num. expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) n x - (f:A->real) x)) <=\n     expectation p (\\x. abs(X n x - f x) *\n       indicator_fn (prob_carrier p DIFF N) x)
+      #|  forall n:num. expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) n x - (f:A->real) x)) <=\n     expectation p (\\x. abs(X n x - f x) *\n       indicator_fn (prob_carrier p DIFF N) x)
       #|  &0 <= expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
       #|  n:num
       #|  M:num
@@ -88279,7 +88279,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  expectation (p:A prob_space)\n     (\\x:A. abs((X:num->A->real) m x - (f:A->real) x) *\n       indicator_fn (prob_carrier p DIFF N) x) +\n     expectation p (\\x. abs(X m x - f x) * indicator_fn N x)
       #|  m:num
-      #|  !n:num. expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x)) <=\n    expectation p (\\x. abs(X n x - f x) *\n      indicator_fn (prob_carrier p DIFF N) x)
+      #|  forall n:num. expectation (p:A prob_space)\n    (\\x:A. abs((X:num->A->real) n x - (f:A->real) x)) <=\n    expectation p (\\x. abs(X n x - f x) *\n      indicator_fn (prob_carrier p DIFF N) x)
       #|  ((\\n. (X:num->A->real) n x - (f:A->real) x) ---> &0) sequentially
       #|  indicator_fn (prob_carrier (p:A prob_space) DIFF (N:A->bool)) (x:A) = &1
       #|  indicator_fn (prob_carrier (p:A prob_space) DIFF (N:A->bool)) (x:A) = &0
@@ -88293,11 +88293,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  \\x:A. &2 * (g:A->real) x
       #|  ((\\n. expectation p (\\x:A. abs((X:num->A->real) n x - (f:A->real) x) *\n        indicator_fn (prob_carrier p DIFF N) x))\n      ---> &0) sequentially
-      #|  !n:num. integrable (p:A prob_space)\n      (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
+      #|  forall n:num. integrable (p:A prob_space)\n      (\\x:A. abs((X:num->A->real) n x - (f:A->real) x))
       #|  x:A
       #|  {x:A | x IN prob_carrier p /\\\n     ~((\\n. (X:num->A->real) n x) ---> (f:A->real) x) sequentially}\n     SUBSET N
       #|  x:A
-      #|  !x:A. x IN prob_carrier p /\\ ~(x IN N)\n    ==> ((\\n. (X:num->A->real) n x) ---> (f:A->real) x) sequentially
+      #|  forall x:A. x IN prob_carrier p /\\ ~(x IN N)\n    ==> ((\\n. (X:num->A->real) n x) ---> (f:A->real) x) sequentially
       #|  (N:A->bool) SUBSET prob_carrier (p:A prob_space)
       #|  prob_carrier (p:A prob_space) DIFF (N:A->bool) IN prob_events p
       #|  N:A->bool
@@ -88307,7 +88307,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  (g:A->real)
       #|  integrable (p:A prob_space) (f:A->real)
-      #|  !p:A prob_space X f g.\n    (!n. integrable p (X n)) /\\\n    integrable p g /\\\n    (!n x. x IN prob_carrier p ==> abs(X n x) <= g x) /\\\n    random_variable p f /\\\n    (!x. x IN prob_carrier p ==> abs(f x) <= g x) /\\\n    almost_surely p {x | ((\\n. X n x) ---> f x) sequentially}\n    ==> integrable p f /\\\n        ((\\n. expectation p (X n)) ---> expectation p f) sequentially
+      #|  forall p:A prob_space X f g.\n    (forall n. integrable p (X n)) /\\\n    integrable p g /\\\n    (forall n x. x IN prob_carrier p ==> abs(X n x) <= g x) /\\\n    random_variable p f /\\\n    (forall x. x IN prob_carrier p ==> abs(f x) <= g x) /\\\n    almost_surely p {x | ((\\n. X n x) ---> f x) sequentially}\n    ==> integrable p f /\\\n        ((\\n. expectation p (X n)) ---> expectation p f) sequentially
       #|  ~(x:A IN U)
       #|  ~(x:A IN UNIONS (IMAGE (A:num->A->bool) (0..m)))
       #|  m:num
@@ -88339,15 +88339,15 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  (\\x:A. f x * indicator_fn (UNIONS (IMAGE A (0..n)) UNION A (SUC n)) x) =\n      (\\x. f x * indicator_fn (UNIONS (IMAGE A (0..n))) x +\n           f x * indicator_fn (A (SUC n)) x)
       #|  UNIONS (IMAGE (A:num->A->bool) (0..SUC n)) =\n      UNIONS (IMAGE A (0..n)) UNION A(SUC n)
-      #|  !n. sum (0..n) (\\k. expectation (p:A prob_space)\n    (\\x. f x * indicator_fn ((A:num->A->bool) k) x)) =\n    expectation p (\\x. f x * indicator_fn (UNIONS (IMAGE A (0..n))) x)
+      #|  forall n. sum (0..n) (\\k. expectation (p:A prob_space)\n    (\\x. f x * indicator_fn ((A:num->A->bool) k) x)) =\n    expectation p (\\x. f x * indicator_fn (UNIONS (IMAGE A (0..n))) x)
       #|  U = UNIONS {(A:num->A->bool) n | n IN (:num)}
       #|  A:num->A->bool
       #|  (\\x:A. f x * indicator_fn {} x) = (\\x. &0)
-      #|  !p:A prob_space f.\n     integrable p f\n     ==> signed_measure p (\\A. expectation p (\\x. f x * indicator_fn A x))
+      #|  forall p:A prob_space f.\n     integrable p f\n     ==> signed_measure p (\\A. expectation p (\\x. f x * indicator_fn A x))
       #|  A:num->A->bool
       #|  A:num->A->bool
       #|  (mu:(A->bool)->real) {} = &0
-      #|  !p:A prob_space mu c.\n     signed_measure p mu ==> signed_measure p (\\A. c * mu A)
+      #|  forall p:A prob_space mu c.\n     signed_measure p mu ==> signed_measure p (\\A. c * mu A)
       #|  DISJOINT (B:A->bool) (A DIFF B)
       #|  A DIFF B:A->bool
       #|  B:A->bool
@@ -88373,19 +88373,19 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A IN B
       #|  x:A IN A
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n      max ((g1:A->real) x) (g2 x) * indicator_fn A x =\n      g1 x * indicator_fn B x + g2 x * indicator_fn (A DIFF B) x
+      #|  forall x:A. x IN prob_carrier p ==>\n      max ((g1:A->real) x) (g2 x) * indicator_fn A x =\n      g1 x * indicator_fn B x + g2 x * indicator_fn (A DIFF B) x
       #|  A DIFF B:A->bool IN prob_events p
       #|  x:A IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ (g1:A->real) x >= g2 x} =\n      {x | x IN prob_carrier p /\\ g1 x - g2 x >= &0}
       #|  B:A->bool IN prob_events p
       #|  B = A INTER {x:A | x IN prob_carrier p /\\\n          (g1:A->real) x >= (g2:A->real) x}
       #|  A:A->bool
-      #|  !p:A prob_space mu g1 g2.\n     signed_measure p mu /\\\n     simple_rv p g1 /\\ simple_rv p g2 /\\\n     (!x. x IN prob_carrier p ==> &0 <= g1 x) /\\\n     (!x. x IN prob_carrier p ==> &0 <= g2 x) /\\\n     (!A. A IN prob_events p ==>\n       simple_expectation p (\\x. g1 x * indicator_fn A x) <= mu A) /\\\n     (!A. A IN prob_events p ==>\n       simple_expectation p (\\x. g2 x * indicator_fn A x) <= mu A)\n     ==> (!A. A IN prob_events p ==>\n       simple_expectation p (\\x. max (g1 x) (g2 x) * indicator_fn A x) <= mu A)
-      #|  !p:A prob_space f.\n     integrable p f\n     ==> absolutely_continuous p\n         (\\A. expectation p (\\x. f x * indicator_fn A x))
+      #|  forall p:A prob_space mu g1 g2.\n     signed_measure p mu /\\\n     simple_rv p g1 /\\ simple_rv p g2 /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g1 x) /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g2 x) /\\\n     (forall A. A IN prob_events p ==>\n       simple_expectation p (\\x. g1 x * indicator_fn A x) <= mu A) /\\\n     (forall A. A IN prob_events p ==>\n       simple_expectation p (\\x. g2 x * indicator_fn A x) <= mu A)\n     ==> (forall A. A IN prob_events p ==>\n       simple_expectation p (\\x. max (g1 x) (g2 x) * indicator_fn A x) <= mu A)
+      #|  forall p:A prob_space f.\n     integrable p f\n     ==> absolutely_continuous p\n         (\\A. expectation p (\\x. f x * indicator_fn A x))
       #|  simple_expectation (p:A prob_space) (\\x:A. &0)
-      #|  !p:A prob_space A. A IN prob_events p\n     ==> simple_expectation p (\\x:A. &0 * indicator_fn A x) = &0
-      #|  !p:A prob_space g.\n     simple_expectation p (\\x. g x * indicator_fn (prob_carrier p) x) =\n     simple_expectation p g
-      #|  !x b:real. abs x <= b ==> x <= b
+      #|  forall p:A prob_space A. A IN prob_events p\n     ==> simple_expectation p (\\x:A. &0 * indicator_fn A x) = &0
+      #|  forall p:A prob_space g.\n     simple_expectation p (\\x. g x * indicator_fn (prob_carrier p) x) =\n     simple_expectation p g
+      #|  forall x b:real. abs x <= b ==> x <= b
       #|  x:A
       #|  simple_expectation (p:A prob_space)\n    (\\x:A. Bg * indicator_fn (A:A->bool) x)
       #|  Bg:real
@@ -88393,7 +88393,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  x:A
       #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  !p:A prob_space g A.\n     simple_rv p g /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     A IN prob_events p /\\ prob p A = &0\n     ==> simple_expectation p (\\x. g x * indicator_fn A x) = &0
+      #|  forall p:A prob_space g A.\n     simple_rv p g /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     A IN prob_events p /\\ prob p A = &0\n     ==> simple_expectation p (\\x. g x * indicator_fn A x) = &0
       #|  x:A
       #|  \\x:A. (if x IN bdd_set\n      then sup {(fn:num->A->real) k x | k IN (:num)} else &0) *\n      indicator_fn A x
       #|  p:A prob_space
@@ -88453,30 +88453,30 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (x:A) IN A /\\ x IN bdd_set
       #|  x:A
       #|  simple_expectation (p:A prob_space) ((fn:num->A->real) n)
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    B
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    B
       #|  x:A
-      #|  !n. &0 <= simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x)
+      #|  forall n. &0 <= simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x)
       #|  (x:A) IN A /\\ x IN bdd_set
       #|  x:A
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    simple_expectation p\n      (\\x. fn (SUC n) x * indicator_fn (A INTER bdd_set) x)
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    simple_expectation p\n      (\\x. fn (SUC n) x * indicator_fn (A INTER bdd_set) x)
       #|  x:A
       #|  (x:A) IN bdd_set
       #|  (x:A) IN A
       #|  x:A
       #|  x:A
       #|  p:A prob_space
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    nn_expectation p (\\x. (if x IN bdd_set\n      then sup {fn k x | k IN (:num)} else &0) * indicator_fn A x)
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A INTER bdd_set) x) <=\n    nn_expectation p (\\x. (if x IN bdd_set\n      then sup {fn k x | k IN (:num)} else &0) * indicator_fn A x)
       #|  n:num
       #|  n:num
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn A x) =\n    simple_expectation p (\\x. fn n x * indicator_fn (A INTER bdd_set) x)
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn A x) =\n    simple_expectation p (\\x. fn n x * indicator_fn (A INTER bdd_set) x)
       #|  prob (p:A prob_space)\n     (prob_carrier p DIFF bdd_set:A->bool)
       #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A DIFF bdd_set) x) = &0
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn (A DIFF bdd_set) x) = &0
       #|  (x:A) IN bdd_set
       #|  (x:A) IN A
       #|  x:A
       #|  simple_expectation (p:A prob_space)\n     (\\x:A. (fn:num->A->real) n x * indicator_fn A x) =\n     simple_expectation p\n     (\\x. fn n x * indicator_fn (A INTER bdd_set) x +\n          fn n x * indicator_fn (A DIFF bdd_set) x)
-      #|  !n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn A x) =\n    simple_expectation p (\\x. fn n x * indicator_fn (A INTER bdd_set) x) +\n    simple_expectation p (\\x. fn n x * indicator_fn (A DIFF bdd_set) x)
+      #|  forall n. simple_expectation (p:A prob_space)\n    (\\x:A. (fn:num->A->real) n x * indicator_fn A x) =\n    simple_expectation p (\\x. fn n x * indicator_fn (A INTER bdd_set) x) +\n    simple_expectation p (\\x. fn n x * indicator_fn (A DIFF bdd_set) x)
       #|  A:A->bool
       #|  simple_expectation (p:A prob_space) ((fn:num->A->real) n)
       #|  0
@@ -88486,7 +88486,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sequentially
       #|  g:A->real
       #|  p:A prob_space
-      #|  !n. simple_expectation (p:A prob_space)\n     (\\x:A. min ((g:A->real) x) ((fn:num->A->real) n x)) <=\n     simple_expectation p (fn n)
+      #|  forall n. simple_expectation (p:A prob_space)\n     (\\x:A. min ((g:A->real) x) ((fn:num->A->real) n x)) <=\n     simple_expectation p (fn n)
       #|  Bg:real
       #|  Bg:real
       #|  g:A->real
@@ -88520,7 +88520,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  g:A->real
       #|  B:real
       #|  integrable (p:A prob_space)\n    (\\x:A. if x IN bdd_set\n      then sup {(fn:num->A->real) n x | n IN (:num)} else &0)
-      #|  {x:A | x IN prob_carrier p /\\ !n. (fn:num->A->real) n x <= a} =\n     INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\ fn n x <= a}) (:num))
+      #|  {x:A | x IN prob_carrier p /\\ forall n. (fn:num->A->real) n x <= a} =\n     INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\ fn n x <= a}) (:num))
       #|  (x:A) IN bdd_set
       #|  M:real
       #|  {(fn:num->A->real) n' x | n' IN (:num)}
@@ -88530,7 +88530,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  sup {(fn:num->A->real) n' x | n' IN (:num)}
       #|  (x:A) IN bdd_set
       #|  x:A
-      #|  {x:A | x IN prob_carrier p /\\\n     (if x IN bdd_set then sup {(fn:num->A->real) n x | n IN (:num)}\n      else &0) <= a} =\n     {x | x IN prob_carrier p /\\ !n. fn n x <= a} UNION\n     (prob_carrier p DIFF bdd_set)
+      #|  {x:A | x IN prob_carrier p /\\\n     (if x IN bdd_set then sup {(fn:num->A->real) n x | n IN (:num)}\n      else &0) <= a} =\n     {x | x IN prob_carrier p /\\ forall n. fn n x <= a} UNION\n     (prob_carrier p DIFF bdd_set)
       #|  &0 <= a
       #|  &0 <= a ==> a < &0 ==> F
       #|  &0 <= s ==> s <= a ==> a < &0 ==> F
@@ -88541,16 +88541,16 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  a:real
       #|  random_variable (p:A prob_space)\n    (\\x:A. if x IN bdd_set\n      then sup {(fn:num->A->real) n x | n IN (:num)} else &0)
       #|  x:A
-      #|  !x:A. x IN prob_carrier p ==>\n    &0 <= (if x IN bdd_set\n      then sup {(fn:num->A->real) n x | n IN (:num)} else &0)
-      #|  !x:A. x IN prob_carrier p ==>\n    (if x IN bdd_set then sup {(fn:num->A->real) n x | n IN (:num)} else &0) *\n    indicator_fn bdd_set x =\n    (if x IN bdd_set then sup {fn n x | n IN (:num)} else &0)
+      #|  forall x:A. x IN prob_carrier p ==>\n    &0 <= (if x IN bdd_set\n      then sup {(fn:num->A->real) n x | n IN (:num)} else &0)
+      #|  forall x:A. x IN prob_carrier p ==>\n    (if x IN bdd_set then sup {(fn:num->A->real) n x | n IN (:num)} else &0) *\n    indicator_fn bdd_set x =\n    (if x IN bdd_set then sup {fn n x | n IN (:num)} else &0)
       #|  bdd_set SUBSET prob_carrier (p:A prob_space)
       #|  n:num
       #|  (fn:num->A->real) n x
       #|  M:real
       #|  {(fn:num->A->real) k x | k IN (:num)}
       #|  (x:A) IN bdd_set
-      #|  x:A IN prob_carrier p /\\\n     ?M:real. !n. (fn:num->A->real) n x <= M
-      #|  !n x:A. x IN bdd_set\n    ==> (fn:num->A->real) n x <=\n        sup {fn k x | k IN (:num)}
+      #|  x:A IN prob_carrier p /\\\n     ?M:real. forall n. (fn:num->A->real) n x <= M
+      #|  forall n x:A. x IN bdd_set\n    ==> (fn:num->A->real) n x <=\n        sup {fn k x | k IN (:num)}
       #|  \\x:A. if x IN bdd_set\n    then sup {(fn:num->A->real) n x | n IN (:num)} else &0
       #|  0
       #|  (fn:num->A->real) 0 x
@@ -88560,11 +88560,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  {(fn:num->A->real) n x | n IN (:num)}
       #|  (fn:num->A->real) 0 x
       #|  x:A
-      #|  !x:A. x IN bdd_set\n    ==> &0 <= sup {(fn:num->A->real) n x | n IN (:num)}
+      #|  forall x:A. x IN bdd_set\n    ==> &0 <= sup {(fn:num->A->real) n x | n IN (:num)}
       #|  M:real
       #|  &0
       #|  x:A
-      #|  !x:A. x IN bdd_set\n    ==> ((\\n. (fn:num->A->real) n x) --->\n         sup {fn n x | n IN (:num)}) sequentially
+      #|  forall x:A. x IN bdd_set\n    ==> ((\\n. (fn:num->A->real) n x) --->\n         sup {fn n x | n IN (:num)}) sequentially
       #|  &C'
       #|  B / e < &C
       #|  a < e ==> x <= a ==> x < e
@@ -88585,7 +88585,7 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  ~((x:A) IN prob_carrier p /\\ (fn:num->A->real) n x <= &C)
       #|  prob (p:A prob_space)\n       {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x >= &C}
       #|  prob p (prob_carrier (p:A prob_space) DIFF\n      {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x <= &C}) <=\n      simple_expectation p (fn n) / &C
-      #|  !n. prob p (prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x <= &C}) <= B / &C
+      #|  forall n. prob p (prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ (fn:num->A->real) n x <= &C}) <= B / &C
       #|  (fn:num->A->real) n x
       #|  ~((x:A) IN prob_carrier p /\\ (fn:num->A->real) n x <= &C)
       #|  x:A
@@ -88593,10 +88593,10 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  p:A prob_space
       #|  nn:num
       #|  nn:num
-      #|  ~(!n. (fn:num->A->real) n x <= &C)
+      #|  ~(forall n. (fn:num->A->real) n x <= &C)
       #|  x:A
-      #|  prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ !n. (fn:num->A->real) n x <= &C} =\n     UNIONS {prob_carrier p DIFF {x | x IN prob_carrier p /\\ fn n x <= &C} |\n       n IN (:num)}
-      #|  prob p (prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ !n. (fn:num->A->real) n x <= &C})
+      #|  prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ forall n. (fn:num->A->real) n x <= &C} =\n     UNIONS {prob_carrier p DIFF {x | x IN prob_carrier p /\\ fn n x <= &C} |\n       n IN (:num)}
+      #|  prob p (prob_carrier (p:A prob_space) DIFF\n     {x:A | x IN prob_carrier p /\\ forall n. (fn:num->A->real) n x <= &C})
       #|  &0 < &C
       #|  &C'
       #|  B / e <= &C
@@ -88608,26 +88608,26 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  x:real
       #|  x = &0:real
-      #|  !x:real. &0 <= x /\\ (!e. &0 < e ==> x < e) ==> x = &0
+      #|  forall x:real. &0 <= x /\\ (forall e. &0 < e ==> x < e) ==> x = &0
       #|  prob p (prob_carrier (p:A prob_space) DIFF bdd_set:A->bool) = &0
       #|  M:real
       #|  k0:num
       #|  k0:num
       #|  M:real
       #|  y:A
-      #|  {x:A | x IN prob_carrier p /\\\n     ?M:real. !n. (fn:num->A->real) n x <= M} =\n     UNIONS (IMAGE (\\k:num. {x | x IN prob_carrier p /\\ !n. fn n x <= &k})\n       (:num))
+      #|  {x:A | x IN prob_carrier p /\\\n     ?M:real. forall n. (fn:num->A->real) n x <= M} =\n     UNIONS (IMAGE (\\k:num. {x | x IN prob_carrier p /\\ forall n. fn n x <= &k})\n       (:num))
       #|  (bdd_set:A->bool) IN prob_events p
-      #|  {x:A | x IN prob_carrier p /\\\n     !n. (fn:num->A->real) n x <= &k} =\n     INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\ fn n x <= &k})\n       (:num))
-      #|  !k:num. {x:A | x IN prob_carrier p /\\\n    !n. (fn:num->A->real) n x <= &k} IN prob_events p
-      #|  bdd_set = {x:A | x IN prob_carrier p /\\\n    ?M:real. !n:num. (fn:num->A->real) n x <= M}
+      #|  {x:A | x IN prob_carrier p /\\\n     forall n. (fn:num->A->real) n x <= &k} =\n     INTERS (IMAGE (\\n. {x | x IN prob_carrier p /\\ fn n x <= &k})\n       (:num))
+      #|  forall k:num. {x:A | x IN prob_carrier p /\\\n    forall n. (fn:num->A->real) n x <= &k} IN prob_events p
+      #|  bdd_set = {x:A | x IN prob_carrier p /\\\n    ?M:real. forall n:num. (fn:num->A->real) n x <= M}
       #|  a:real
       #|  n:num
-      #|  !n:num. random_variable (p:A prob_space) ((fn:num->A->real) n)
-      #|  !n a. {x:A | x IN prob_carrier p /\\\n    (fn:num->A->real) n x <= a} IN prob_events p
-      #|  !n. random_variable p ((fn:num->A->real) n)
+      #|  forall n:num. random_variable (p:A prob_space) ((fn:num->A->real) n)
+      #|  forall n a. {x:A | x IN prob_carrier p /\\\n    (fn:num->A->real) n x <= a} IN prob_events p
+      #|  forall n. random_variable p ((fn:num->A->real) n)
       #|  (fn:num->A->real) n x
-      #|  !m n x:A. m <= n /\\ x IN prob_carrier p\n    ==> (fn:num->A->real) m x <= fn n x
-      #|  !p:A prob_space fn.\n     (!n. simple_rv p (fn n)) /\\\n     (!n x. x IN prob_carrier p ==> &0 <= fn n x) /\\\n     (!n x. x IN prob_carrier p ==> fn n x <= fn (SUC n) x) /\\\n     (?B. !n. simple_expectation p (fn n) <= B)\n     ==> ?f. integrable p f /\\\n             (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n             (!A. A IN prob_events p ==>\n               ((\\n. simple_expectation p\n                  (\\x. fn n x * indicator_fn A x)) --->\n                expectation p (\\x. f x * indicator_fn A x)) sequentially)
+      #|  forall m n x:A. m <= n /\\ x IN prob_carrier p\n    ==> (fn:num->A->real) m x <= fn n x
+      #|  forall p:A prob_space fn.\n     (forall n. simple_rv p (fn n)) /\\\n     (forall n x. x IN prob_carrier p ==> &0 <= fn n x) /\\\n     (forall n x. x IN prob_carrier p ==> fn n x <= fn (SUC n) x) /\\\n     (?B. forall n. simple_expectation p (fn n) <= B)\n     ==> ?f. integrable p f /\\\n             (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n             (forall A. A IN prob_events p ==>\n               ((\\n. simple_expectation p\n                  (\\x. fn n x * indicator_fn A x)) --->\n                expectation p (\\x. f x * indicator_fn A x)) sequentially)
       #|  L:real
       #|  &0 <= x /\\ x <= B ==> abs x <= abs B
       #|  simple_expectation (p:A prob_space) (\\x. g x * indicator_fn (A INTER H) x) +\n    eps * prob p (A INTER H:A->bool) <= mu (A INTER H)
@@ -88653,14 +88653,14 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  x:A
       #|  (\\x:A. (g x + eps * indicator_fn H x) * indicator_fn A x) =\n    (\\x. g x * indicator_fn A x + eps * indicator_fn (A INTER H) x)
       #|  A:A->bool
-      #|  !p:A prob_space mu g eps H.\n     signed_measure p mu /\\\n     simple_rv p g /\\\n     (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (!A. A IN prob_events p ==>\n       simple_expectation p (\\x. g x * indicator_fn A x) <= mu A) /\\\n     H IN prob_events p /\\ &0 < eps /\\\n     (!B. B IN prob_events p /\\ B SUBSET H ==>\n       mu B - simple_expectation p (\\x. g x * indicator_fn B x) >=\n       eps * prob p B)\n     ==> !A. A IN prob_events p ==>\n       simple_expectation p\n         (\\x. (g x + eps * indicator_fn H x) * indicator_fn A x) <= mu A
+      #|  forall p:A prob_space mu g eps H.\n     signed_measure p mu /\\\n     simple_rv p g /\\\n     (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n     (forall A. A IN prob_events p ==>\n       simple_expectation p (\\x. g x * indicator_fn A x) <= mu A) /\\\n     H IN prob_events p /\\ &0 < eps /\\\n     (forall B. B IN prob_events p /\\ B SUBSET H ==>\n       mu B - simple_expectation p (\\x. g x * indicator_fn B x) >=\n       eps * prob p B)\n     ==> forall A. A IN prob_events p ==>\n       simple_expectation p\n         (\\x. (g x + eps * indicator_fn H x) * indicator_fn A x) <= mu A
       #|  inv (&N) < eps0 * prob (p:A prob_space) H
       #|  SUC (N - 1) = N
-      #|  !(n:num). simple_expectation (p:A prob_space) (gn n) <=\n                       simple_expectation p (hn n)
+      #|  forall(n:num). simple_expectation (p:A prob_space) (gn n) <=\n                       simple_expectation p (hn n)
       #|  N - 1
-      #|  !(n:num). M - inv (&(SUC n)) <\n                       simple_expectation (p:A prob_space) (gn n)
+      #|  forall(n:num). M - inv (&(SUC n)) <\n                       simple_expectation (p:A prob_space) (gn n)
       #|  N - 1
-      #|  !(n:num). simple_expectation (p:A prob_space) (hn n) +\n                       eps0 * prob p H <= M
+      #|  forall(n:num). simple_expectation (p:A prob_space) (hn n) +\n                       eps0 * prob p H <= M
       #|  N - 1
       #|  N:num
       #|  eps0 * prob (p:A prob_space) H
@@ -88673,9 +88673,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  simple_expectation (p:A prob_space)\n        (\\x. eps0 * indicator_fn (H:A->bool) x) =\n       eps0 * simple_expectation p (indicator_fn H)
       #|  simple_expectation (p:A prob_space)\n       (\\x. eps0 * indicator_fn (H:A->bool) x) = eps0 * prob p H
       #|  \\x:A. (hn:num->A->real) n0 x + eps0 * indicator_fn (H:A->bool) x
-      #|  {simple_expectation (p:A prob_space) g | g |\n       simple_rv p g /\\\n       (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n       (!A. A IN prob_events p ==>\n         simple_expectation p (\\x. g x * indicator_fn A x) <= mu A)} =\n      Fset
+      #|  {simple_expectation (p:A prob_space) g | g |\n       simple_rv p g /\\\n       (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n       (forall A. A IN prob_events p ==>\n         simple_expectation p (\\x. g x * indicator_fn A x) <= mu A)} =\n      Fset
       #|  simple_expectation (p:A prob_space)\n       (\\x. (hn:num->A->real) n0 x + eps0 * indicator_fn H x) IN Fset
-      #|  !x:A. x IN prob_carrier p ==>\n       &0 <= (hn:num->A->real) n0 x + eps0 * indicator_fn H x
+      #|  forall x:A. x IN prob_carrier p ==>\n       &0 <= (hn:num->A->real) n0 x + eps0 * indicator_fn H x
       #|  \\x:A. eps0 * indicator_fn (H:A->bool) x
       #|  (hn:num->A->real) n0
       #|  p:A prob_space
@@ -88686,11 +88686,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  mu:(A->bool)->real
       #|  p:A prob_space
       #|  n0:num
-      #|  !(n:num). simple_expectation (p:A prob_space) (hn n) +\n               eps0 * prob p H <= M
+      #|  forall(n:num). simple_expectation (p:A prob_space) (hn n) +\n               eps0 * prob p H <= M
       #|  simple_expectation (p:A prob_space)\n       (\\x. (hn:num->A->real) n x * indicator_fn B x) <=\n      expectation p (\\x. (f:A->real) x * indicator_fn B x)
       #|  mu (B:A->bool) - expectation (p:A prob_space)\n       (\\x. (f:A->real) x * indicator_fn B x) >= eps0 * prob p B
-      #|  !(n:num) (B:A->bool). B IN prob_events p /\\ B SUBSET H\n     ==> mu B - simple_expectation (p:A prob_space)\n           (\\x. (hn:num->A->real) n x * indicator_fn B x) >=\n         eps0 * prob p B
-      #|  !i j. i <= j ==> (hn:num->A->real) i (x:A) <= hn j x
+      #|  forall(n:num) (B:A->bool). B IN prob_events p /\\ B SUBSET H\n     ==> mu B - simple_expectation (p:A prob_space)\n           (\\x. (hn:num->A->real) n x * indicator_fn B x) >=\n         eps0 * prob p B
+      #|  forall i j. i <= j ==> (hn:num->A->real) i (x:A) <= hn j x
       #|  x:A
       #|  m:num
       #|  n:num
@@ -88698,11 +88698,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  expectation (p:A prob_space) (\\x. (f:A->real) x * indicator_fn B x)
       #|  \\m:num. simple_expectation (p:A prob_space)\n     (\\x. (hn:num->A->real) m x * indicator_fn B x)
       #|  sequentially
-      #|  !n (B:A->bool). B IN prob_events p\n     ==> simple_expectation (p:A prob_space)\n           (\\x. (hn:num->A->real) n x * indicator_fn B x) <=\n         expectation p (\\x. (f:A->real) x * indicator_fn B x)
+      #|  forall n (B:A->bool). B IN prob_events p\n     ==> simple_expectation (p:A prob_space)\n           (\\x. (hn:num->A->real) n x * indicator_fn B x) <=\n         expectation p (\\x. (f:A->real) x * indicator_fn B x)
       #|  B:A->bool
       #|  positive_set (p:A prob_space) sigma (H:A->bool)
       #|  B:A->bool
-      #|  !B:A->bool. B IN prob_events p /\\ B SUBSET H\n     ==> mu B - expectation (p:A prob_space)\n           (\\x. (f:A->real) x * indicator_fn B x) >= eps0 * prob p B
+      #|  forall B:A->bool. B IN prob_events p /\\ B SUBSET H\n     ==> mu B - expectation (p:A prob_space)\n           (\\x. (f:A->real) x * indicator_fn B x) >= eps0 * prob p B
       #|  expectation (p:A prob_space) (\\x. (f:A->real) x * indicator_fn H x) =\n        &0
       #|  H:A->bool
       #|  absolutely_continuous (p:A prob_space) mu
@@ -88753,12 +88753,12 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (mu:(A->bool)->real) A
       #|  \\n:num. simple_expectation (p:A prob_space)\n         (\\x. (hn:num->A->real) n x * indicator_fn A x)
       #|  A:A->bool
-      #|  !A. A IN prob_events p ==>\n      ?L. ((\\n. simple_expectation (p:A prob_space)\n             (\\x. (hn:num->A->real) n x * indicator_fn A x)) ---> L)\n          sequentially /\\ &0 <= L /\\ L <= mu A
+      #|  forall A. A IN prob_events p ==>\n      ?L. ((\\n. simple_expectation (p:A prob_space)\n             (\\x. (hn:num->A->real) n x * indicator_fn A x)) ---> L)\n          sequentially /\\ &0 <= L /\\ L <= mu A
       #|  x:A
-      #|  !n A. A IN prob_events p ==>\n      &0 <= simple_expectation (p:A prob_space)\n        (\\x. (hn:num->A->real) n x * indicator_fn A x)
+      #|  forall n A. A IN prob_events p ==>\n      &0 <= simple_expectation (p:A prob_space)\n        (\\x. (hn:num->A->real) n x * indicator_fn A x)
       #|  x:A
-      #|  !A n. A IN prob_events p ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (hn:num->A->real) n x * indicator_fn A x) <=\n        simple_expectation p (\\x. hn (SUC n) x * indicator_fn A x)
-      #|  !n A:A->bool. A IN prob_events p ==>\n      simple_rv (p:A prob_space) (\\x. (hn:num->A->real) n x * indicator_fn A x)
+      #|  forall A n. A IN prob_events p ==>\n        simple_expectation (p:A prob_space)\n          (\\x. (hn:num->A->real) n x * indicator_fn A x) <=\n        simple_expectation p (\\x. hn (SUC n) x * indicator_fn A x)
+      #|  forall n A:A->bool. A IN prob_events p ==>\n      simple_rv (p:A prob_space) (\\x. (hn:num->A->real) n x * indicator_fn A x)
       #|  inv(&N)
       #|  b <= a ==> x - a <= x - b
       #|  M - inv(&(SUC n))
@@ -88770,27 +88770,27 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  e:real
       #|  e:real
       #|  ((\\n. simple_expectation (p:A prob_space) ((hn:num->A->real) n)) ---> M)\n     sequentially
-      #|  !n. simple_expectation (p:A prob_space) ((gn:num->A->real) n) <=\n         simple_expectation p ((hn:num->A->real) n)
-      #|  !n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) <= M
+      #|  forall n. simple_expectation (p:A prob_space) ((gn:num->A->real) n) <=\n         simple_expectation p ((hn:num->A->real) n)
+      #|  forall n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) <= M
       #|  (hn:num->A->real) n
-      #|  !n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) IN Fset
+      #|  forall n. simple_expectation (p:A prob_space) ((hn:num->A->real) n) IN Fset
       #|  A:A->bool
       #|  (gn:num->A->real) (SUC n)
       #|  (hn:num->A->real) n
       #|  mu:(A->bool)->real
       #|  p:A prob_space
       #|  simple_expectation (p:A prob_space)\n        (\\x. (hn:num->A->real) (SUC n) x * indicator_fn A x) =\n       simple_expectation p\n        (\\x. max (hn n x) ((gn:num->A->real) (SUC n) x) * indicator_fn A x)
-      #|  !n A. A IN prob_events p ==>\n      simple_expectation (p:A prob_space)\n        (\\x. (hn:num->A->real) n x * indicator_fn A x) <= mu A
-      #|  !n x:A. x IN prob_carrier p ==>\n       (gn:num->A->real) n x <= (hn:num->A->real) n x
-      #|  !n x:A. x IN prob_carrier p ==>\n       (hn:num->A->real) n x <= hn (SUC n) x
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (hn:num->A->real) n x
-      #|  !n. simple_rv (p:A prob_space) ((hn:num->A->real) n)
+      #|  forall n A. A IN prob_events p ==>\n      simple_expectation (p:A prob_space)\n        (\\x. (hn:num->A->real) n x * indicator_fn A x) <= mu A
+      #|  forall n x:A. x IN prob_carrier p ==>\n       (gn:num->A->real) n x <= (hn:num->A->real) n x
+      #|  forall n x:A. x IN prob_carrier p ==>\n       (hn:num->A->real) n x <= hn (SUC n) x
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (hn:num->A->real) n x
+      #|  forall n. simple_rv (p:A prob_space) ((hn:num->A->real) n)
       #|  hn:num->A->real
-      #|  ((hn:num->A->real) 0 = (gn:num->A->real) 0) /\\\n     (!n. hn (SUC n) = (\\x:A. max (hn n x) (gn (SUC n) x)))
-      #|  !n. M - inv(&(SUC n)) < simple_expectation (p:A prob_space) ((gn:num->A->real) n)
-      #|  !n A. A IN prob_events p ==>\n       simple_expectation (p:A prob_space)\n         (\\x. (gn:num->A->real) n x * indicator_fn A x) <= mu A
-      #|  !n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
-      #|  !n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
+      #|  ((hn:num->A->real) 0 = (gn:num->A->real) 0) /\\\n     (forall n. hn (SUC n) = (\\x:A. max (hn n x) (gn (SUC n) x)))
+      #|  forall n. M - inv(&(SUC n)) < simple_expectation (p:A prob_space) ((gn:num->A->real) n)
+      #|  forall n A. A IN prob_events p ==>\n       simple_expectation (p:A prob_space)\n         (\\x. (gn:num->A->real) n x * indicator_fn A x) <= mu A
+      #|  forall n x:A. x IN prob_carrier p ==> &0 <= (gn:num->A->real) n x
+      #|  forall n. simple_rv (p:A prob_space) ((gn:num->A->real) n)
       #|  g:A->real
       #|  g:A->real
       #|  (yy:real) IN Fset
@@ -88799,35 +88799,35 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  M - inv(&(SUC n)) < M
       #|  n:num
       #|  gn:num->A->real
-      #|  ?gn:num->A->real. !n.\n       simple_rv p (gn n) /\\\n       (!x. x IN prob_carrier p ==> &0 <= gn n x) /\\\n       (!A. A IN prob_events p ==>\n         simple_expectation p (\\x. gn n x * indicator_fn A x) <= mu A) /\\\n       M - inv(&(SUC n)) < simple_expectation p (gn n)
+      #|  ?gn:num->A->real. forall n.\n       simple_rv p (gn n) /\\\n       (forall x. x IN prob_carrier p ==> &0 <= gn n x) /\\\n       (forall A. A IN prob_events p ==>\n         simple_expectation p (\\x. gn n x * indicator_fn A x) <= mu A) /\\\n       M - inv(&(SUC n)) < simple_expectation p (gn n)
       #|  (\\x:A. &0)
       #|  &0 IN Fset
       #|  &0 <= M
-      #|  !c:real. c < M ==> ?y. y IN Fset /\\ c < y
-      #|  !y:real. y IN Fset ==> y <= M
+      #|  forall c:real. c < M ==> ?y. y IN Fset /\\ c < y
+      #|  forall y:real. y IN Fset ==> y <= M
       #|  M = sup Fset
       #|  prob_carrier (p:A prob_space)
       #|  y:real
-      #|  !y:real. y IN Fset ==> y <= mu(prob_carrier (p:A prob_space))
+      #|  forall y:real. y IN Fset ==> y <= mu(prob_carrier (p:A prob_space))
       #|  (\\x:A. &0)
       #|  &0
       #|  ~(Fset:real->bool = {})
-      #|  Fset = {simple_expectation (p:A prob_space) g | g:A->real |\n       simple_rv p g /\\\n       (!x. x IN prob_carrier p ==> &0 <= g x) /\\\n       (!A. A IN prob_events p ==>\n         simple_expectation p (\\x. g x * indicator_fn A x) <= mu A)}
+      #|  Fset = {simple_expectation (p:A prob_space) g | g:A->real |\n       simple_rv p g /\\\n       (forall x. x IN prob_carrier p ==> &0 <= g x) /\\\n       (forall A. A IN prob_events p ==>\n         simple_expectation p (\\x. g x * indicator_fn A x) <= mu A)}
       #|  prob_carrier (p:A prob_space) IN prob_events p
       #|  signed_measure (p:A prob_space) mu
-      #|  !p:A prob_space mu.\n     absolutely_continuous p mu /\\\n     (!A. A IN prob_events p ==> &0 <= mu A)\n     ==> ?f. integrable p f /\\\n             (!x. x IN prob_carrier p ==> &0 <= f x) /\\\n             (!A. A IN prob_events p\n                  ==> expectation p (\\x. f x * indicator_fn A x) = mu A)
+      #|  forall p:A prob_space mu.\n     absolutely_continuous p mu /\\\n     (forall A. A IN prob_events p ==> &0 <= mu A)\n     ==> ?f. integrable p f /\\\n             (forall x. x IN prob_carrier p ==> &0 <= f x) /\\\n             (forall A. A IN prob_events p\n                  ==> expectation p (\\x. f x * indicator_fn A x) = mu A)
       #|  M - inv(&(SUC n)) < M
       #|  M - inv(&(SUC n)) < M
       #|  M - inv(&(SUC n)) < M
       #|  (\\x:A. (f_pos x - f_neg x) * indicator_fn A x) =\n    (\\x. f_pos x * indicator_fn A x - f_neg x * indicator_fn A x)
       #|  A:A->bool
       #|  \\x:A. (f_pos:A->real) x - f_neg x
-      #|  ?f_neg. integrable (p:A prob_space) f_neg /\\\n            (!x. x IN prob_carrier p ==> &0 <= f_neg x) /\\\n            (!A. A IN prob_events p\n                 ==> expectation p (\\x. f_neg x * indicator_fn A x) =\n                     jordan_neg p mu A)
-      #|  ?f_pos. integrable (p:A prob_space) f_pos /\\\n            (!x. x IN prob_carrier p ==> &0 <= f_pos x) /\\\n            (!A. A IN prob_events p\n                 ==> expectation p (\\x. f_pos x * indicator_fn A x) =\n                     jordan_pos p mu A)
-      #|  absolutely_continuous (p:A prob_space) (jordan_neg p mu) /\\\n    (!A. A IN prob_events p ==> &0 <= jordan_neg p mu A)
-      #|  absolutely_continuous (p:A prob_space) (jordan_pos p mu) /\\\n    (!A. A IN prob_events p ==> &0 <= jordan_pos p mu A)
+      #|  ?f_neg. integrable (p:A prob_space) f_neg /\\\n            (forall x. x IN prob_carrier p ==> &0 <= f_neg x) /\\\n            (forall A. A IN prob_events p\n                 ==> expectation p (\\x. f_neg x * indicator_fn A x) =\n                     jordan_neg p mu A)
+      #|  ?f_pos. integrable (p:A prob_space) f_pos /\\\n            (forall x. x IN prob_carrier p ==> &0 <= f_pos x) /\\\n            (forall A. A IN prob_events p\n                 ==> expectation p (\\x. f_pos x * indicator_fn A x) =\n                     jordan_pos p mu A)
+      #|  absolutely_continuous (p:A prob_space) (jordan_neg p mu) /\\\n    (forall A. A IN prob_events p ==> &0 <= jordan_neg p mu A)
+      #|  absolutely_continuous (p:A prob_space) (jordan_pos p mu) /\\\n    (forall A. A IN prob_events p ==> &0 <= jordan_pos p mu A)
       #|  signed_measure (p:A prob_space) mu
-      #|  !p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> ?f. integrable p f /\\\n             (!A. A IN prob_events p\n                  ==> expectation p (\\x. f x * indicator_fn A x) = mu A)
+      #|  forall p:A prob_space mu.\n     absolutely_continuous p mu\n     ==> ?f. integrable p f /\\\n             (forall A. A IN prob_events p\n                  ==> expectation p (\\x. f x * indicator_fn A x) = mu A)
       #|OPEN_HALFLINE_AS_UNION_BACKWARD =  |- (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\v:real. (#!:fun(fun(fun('A,bool),bool),bool) (\carrier:fun('A,bool). (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) t:fun('A,bool)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%9247:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%9247:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) carrier:fun('A,bool))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) ((#real_sub:fun(real,fun(real,real)) v:real) (#real_inv:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) x:'A))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) t:fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) carrier:fun('A,bool))) ((#real_lt:fun(real,fun(real,bool)) (X:fun('A,real) y:'A)) v:real)))))))))))
       #|OPEN_HALFLINE_AS_UNION_FORWARD =  |- (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\v:real. (#!:fun(fun(fun('A,bool),bool),bool) (\carrier:fun('A,bool). (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) carrier:fun('A,bool))) ((#real_lt:fun(real,fun(real,bool)) (X:fun('A,real) y:'A)) v:real))) (#?:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) t:fun('A,bool)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%9249:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%9249:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) carrier:fun('A,bool))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) ((#real_sub:fun(real,fun(real,real)) v:real) (#real_inv:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) x:'A))))))))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) t:fun('A,bool))))))))))))))
       #|OPEN_HALFLINE_AS_UNION =  |- (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\v:real. (#!:fun(fun(fun('A,bool),bool),bool) (\carrier:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%9250:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%9250:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) carrier:fun('A,bool))) ((#real_lt:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) v:real))) x:'A)))))) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) (#GSPEC:fun(fun(fun('A,bool),bool),fun(fun('A,bool),bool)) (\GEN%PVAR%9253:fun('A,bool). (#?:fun(fun(num,bool),bool) (\n:num. (((#SETSPEC:fun(fun('A,bool),fun(bool,fun(fun('A,bool),bool))) GEN%PVAR%9253:fun('A,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) #UNIV:fun(num,bool))) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%9252:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%9252:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) carrier:fun('A,bool))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) ((#real_sub:fun(real,fun(real,real)) v:real) (#real_inv:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) x:'A))))))))))))))))))

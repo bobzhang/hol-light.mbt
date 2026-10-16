@@ -81667,14 +81667,14 @@ Warning: inventing type variables
 0..0..10..20..58..179..379..820..1479..2357..3698..solved at 5983
 100/morley quotations (116):
   reflect2d t = rotate2d t o cnj o rotate2d(--t)
-  !s t. reflect2d s o reflect2d t = rotate2d (&2 * (s - t))
+  forall s t. reflect2d s o reflect2d t = rotate2d (&2 * (s - t))
   rotate_about a t x = a + rotate2d t (x - a)
   reflect_across (a,b) x = a + reflect2d (Arg(b - a)) (x - a)
   x:complex
   (a + x) - a:real^N = x
-  !a b c.\n        ~(b = a) /\\ ~(c = a)\n        ==> reflect_across(a,b) o reflect_across(a,c) =\n            rotate_about a (&2 * Arg((b - a) / (c - a)))
-  !a b c.\n        ~(b = a) /\\ ~(c = a) /\\ &0 <= Im((c - a) / (b - a))\n        ==> reflect_across(a,c) o reflect_across(a,b) =\n            rotate_about a (&2 * angle(c,a,b))
-  !a b. ~(a = b) ==> reflect_across(a,b) o reflect_across(a,b) = I
+  forall a b c.\n        ~(b = a) /\\ ~(c = a)\n        ==> reflect_across(a,b) o reflect_across(a,c) =\n            rotate_about a (&2 * Arg((b - a) / (c - a)))
+  forall a b c.\n        ~(b = a) /\\ ~(c = a) /\\ &0 <= Im((c - a) / (b - a))\n        ==> reflect_across(a,c) o reflect_across(a,b) =\n            rotate_about a (&2 * angle(c,a,b))
+  forall a b. ~(a = b) ==> reflect_across(a,b) o reflect_across(a,b) = I
   (b' - a') * (b - a) = n pow 2 /\\ ~(n = Cx(&0))\n      ==> b - a = ((b - a) * inv n) pow 2 * (b' - a')
   (z - a) - (z - b):complex = b - a
   b - a = ((b - a) * n) pow 2 * (cnj za - cnj zb)\n      ==> a + ((b - a) * n) pow 2 * cnj za =\n          b + ((a - b) * n) pow 2 * cnj zb
@@ -81686,12 +81686,12 @@ Warning: inventing type variables
   cexp(ii * Cx(Arg(b - a))) = (b - a) / Cx(norm(b - a)) /\\\n                cexp(ii * Cx(Arg(a - b))) = (a - b) / Cx(norm(a - b))
   --ii * --z = ii * z
   a:complex = b
-  !a b. reflect_across(a,b) = reflect_across(b,a)
+  forall a b. reflect_across(a,b) = reflect_across(b,a)
   a + x - a:real^N = x
   a + b:real^N = a + c <=> b = c
-  !n a t. ITER n (rotate_about a t) = rotate_about a (&n * t)
-  !a b c. &0 <= Im ((c - a) / (b - a)) <=> &0 <= Im((a - b) / (c - b))
-  (!x. f(g x) = x) /\\ (!y. g(f y) = y)\n    ==> (f x = y <=> x = g y)
+  forall n a t. ITER n (rotate_about a t) = rotate_about a (&n * t)
+  forall a b c. &0 <= Im ((c - a) / (b - a)) <=> &0 <= Im((a - b) / (c - b))
+  (forall x. f(g x) = x) /\\ (forall y. g(f y) = y)\n    ==> (f x = y <=> x = g y)
   rotate_about a t w = z <=> w = rotate_about a (--t) z
   &2
   &0
@@ -81702,26 +81702,26 @@ Warning: inventing type variables
   ~(z = a)\n    ==> c * (z - a) pow 2 = b * cnj (z - a) * (z - a)\n        ==> c * (z - a) = b * cnj(z - a)
   z:complex = a
   ii * a + ii * a = ii * Cx(&2) * a
-  !a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = t\n        ==> rotate_about a t z = reflect_across (a,b) z
+  forall a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = t\n        ==> rotate_about a t z = reflect_across (a,b) z
   rotate_about a (&2 * Arg((b - a) / (z - a))) z
   a = &4 * pi + t <=> t = a + --(&4 * pi)
-  !a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = &4 * pi + t\n        ==> rotate_about a t z = reflect_across (a,b) z
+  forall a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = &4 * pi + t\n        ==> rotate_about a t z = reflect_across (a,b) z
   norm(j pow 3) = &1
   C - A:complex = j * (B - C) /\\ A - B = j pow 2 * (B - C)
-  !A B C j.\n        j pow 3 = Cx(&1) /\\ ~(j = Cx(&1)) /\\\n        A + j * B + j pow 2 * C = Cx(&0)\n        ==> dist(A,B) = dist(B,C) /\\ dist(C,A) = dist(B,C)
+  forall A B C j.\n        j pow 3 = Cx(&1) /\\ ~(j = Cx(&1)) /\\\n        A + j * B + j pow 2 * C = Cx(&0)\n        ==> dist(A,B) = dist(B,C) /\\ dist(C,A) = dist(B,C)
   3
   ITER 3 (\\z. a * z + b) = (\\z. a pow 3 * z + b * (Cx(&1) + a + a pow 2))
   (\\z. a1 * z + b1) o (\\z. a2 * z + b2) =\n   (\\z. (a1 * a2) * z + (b1 + a1 * b2))
   I = (\\z. Cx(&1) * z + Cx(&0))
   Cx(&1)
   Cx(&0)
-  !a b a' b. (\\z. a * z + b) = (\\z. a' * z + b') <=> a = a' /\\ b = b'
-  !a t. rotate_about a t =\n         (\\z. cexp(ii * Cx(t)) * z + (Cx(&1) - cexp(ii * Cx(t))) * a)
+  forall a b a' b. (\\z. a * z + b) = (\\z. a' * z + b') <=> a = a' /\\ b = b'
+  forall a t. rotate_about a t =\n         (\\z. cexp(ii * Cx(t)) * z + (Cx(&1) - cexp(ii * Cx(t))) * a)
   s = Cx(&0) ==> s + t = Cx(&0) ==> t = Cx(&0)
   a3 * (a1 * B + b1) + b3 = B\n      ==> ~(a1 * a3 = Cx(&1))\n          ==> B = (a3 * b1 + b3) / (Cx(&1) - a1 * a3)
   (a1 * a2 * a3) * a1 pow 2 * a2 *\n    (a1 - a1 * a2 * a3) * (a2 - a1 * a2 * a3) * (a3 - a1 * a2 * a3) *\n    (C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B) = Cx(&0)
-  !a1 a2 a3 b1 b2 b3 A B C.\n        (\\z. a3 * z + b3) ((\\z. a1 * z + b1) B) = B /\\\n        (\\z. a1 * z + b1) ((\\z. a2 * z + b2) C) = C /\\\n        (\\z. a2 * z + b2) ((\\z. a3 * z + b3) A) = A /\\\n        ITER 3 (\\z. a1 * z + b1) o ITER 3 (\\z. a2 * z + b2) o\n        ITER 3 (\\z. a3 * z + b3) = I /\\\n        ~(a1 * a2 * a3 = Cx(&1)) /\\\n        ~(a1 * a2 = Cx(&1)) /\\\n        ~(a2 * a3 = Cx(&1)) /\\\n        ~(a3 * a1 = Cx(&1))\n        ==> (a1 * a2 * a3) pow 3 = Cx (&1) /\\\n            ~(a1 * a2 * a3 = Cx (&1)) /\\\n            C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B = Cx(&0)
-  (!A B C P Q R a b c g1 g2 g3.\n       Ant A B C P Q R a b c g1 g2 g3 ==> Cns A B C P Q R a b c g1 g2 g3)\n    ==> (!A B C P Q R a b c g1 g2 g3.\n           Ant A B C P Q R a b c g1 g2 g3\n           ==> Ant B C A Q R P b c a g2 g3 g1)\n        ==> (!A B C P Q R a b c g1 g2 g3.\n                   Ant A B C P Q R a b c g1 g2 g3\n                   ==> Cns A B C P Q R a b c g1 g2 g3 /\\\n                       Cns B C A Q R P b c a g2 g3 g1 /\\\n                       Cns C A B R P Q c a b g3 g1 g2)
+  forall a1 a2 a3 b1 b2 b3 A B C.\n        (\\z. a3 * z + b3) ((\\z. a1 * z + b1) B) = B /\\\n        (\\z. a1 * z + b1) ((\\z. a2 * z + b2) C) = C /\\\n        (\\z. a2 * z + b2) ((\\z. a3 * z + b3) A) = A /\\\n        ITER 3 (\\z. a1 * z + b1) o ITER 3 (\\z. a2 * z + b2) o\n        ITER 3 (\\z. a3 * z + b3) = I /\\\n        ~(a1 * a2 * a3 = Cx(&1)) /\\\n        ~(a1 * a2 = Cx(&1)) /\\\n        ~(a2 * a3 = Cx(&1)) /\\\n        ~(a3 * a1 = Cx(&1))\n        ==> (a1 * a2 * a3) pow 3 = Cx (&1) /\\\n            ~(a1 * a2 * a3 = Cx (&1)) /\\\n            C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B = Cx(&0)
+  (forall A B C P Q R a b c g1 g2 g3.\n       Ant A B C P Q R a b c g1 g2 g3 ==> Cns A B C P Q R a b c g1 g2 g3)\n    ==> (forall A B C P Q R a b c g1 g2 g3.\n           Ant A B C P Q R a b c g1 g2 g3\n           ==> Ant B C A Q R P b c a g2 g3 g1)\n        ==> (forall A B C P Q R a b c g1 g2 g3.\n                   Ant A B C P Q R a b c g1 g2 g3\n                   ==> Cns A B C P Q R a b c g1 g2 g3 /\\\n                       Cns B C A Q R P b c a g2 g3 g1 /\\\n                       Cns C A B R P Q c a b g3 g1 g2)
   g3:complex->complex
   g2:complex->complex
   g1:complex->complex
@@ -81755,7 +81755,7 @@ Warning: inventing type variables
   reflect_across(A,C) Q
   (g3:complex->complex)(g1(Q)) = Q
   a <= pi /\\ &0 < pi ==> ~(a / &3 = pi / &2)
-  !x y z. ~(angle(x:real^2,y,z) / &3 = pi / &2)
+  forall x y z. ~(angle(x:real^2,y,z) / &3 = pi / &2)
   ~(P:real^2 = B) /\\ ~(P = C)
   &0 <= --x <=> x <= &0
   &0 <= u * --a ==> u * a <= &0
@@ -81780,8 +81780,8 @@ Warning: inventing type variables
   R:real^2
   Q:real^2
   P:real^2
-  (!A B C. &0 <= Im((C - A) / (B - A)) \\/\n              &0 <= Im((B - A) / (C - A))) /\\\n     (!A B C. Property A B C ==> Property A C B) /\\\n     (!A B C. &0 <= Im((C - A) / (B - A)) ==> Property A B C)\n     ==> !A B C. Property A B C
-  !A B C:real^2 P Q R.\n     ~collinear{A,B,C} /\\ {P,Q,R} SUBSET convex hull {A,B,C} /\\\n     angle(A,B,R) = angle(A,B,C) / &3 /\\\n     angle(B,A,R) = angle(B,A,C) / &3 /\\\n     angle(B,C,P) = angle(B,C,A) / &3 /\\\n     angle(C,B,P) = angle(C,B,A) / &3 /\\\n     angle(C,A,Q) = angle(C,A,B) / &3 /\\\n     angle(A,C,Q) = angle(A,C,B) / &3\n     ==> dist(R,P) = dist(P,Q) /\\ dist(Q,R) = dist(P,Q)
+  (forall A B C. &0 <= Im((C - A) / (B - A)) \\/\n              &0 <= Im((B - A) / (C - A))) /\\\n     (forall A B C. Property A B C ==> Property A C B) /\\\n     (forall A B C. &0 <= Im((C - A) / (B - A)) ==> Property A B C)\n     ==> forall A B C. Property A B C
+  forall A B C:real^2 P Q R.\n     ~collinear{A,B,C} /\\ {P,Q,R} SUBSET convex hull {A,B,C} /\\\n     angle(A,B,R) = angle(A,B,C) / &3 /\\\n     angle(B,A,R) = angle(B,A,C) / &3 /\\\n     angle(B,C,P) = angle(B,C,A) / &3 /\\\n     angle(C,B,P) = angle(C,B,A) / &3 /\\\n     angle(C,A,Q) = angle(C,A,B) / &3 /\\\n     angle(A,C,Q) = angle(A,C,B) / &3\n     ==> dist(R,P) = dist(P,Q) /\\ dist(Q,R) = dist(P,Q)
 reflect2d =  |- (#!:fun(fun(real,bool),bool) (\t:real. ((#=:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) #cnj:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#real_neg:fun(real,real) t:real)))))))
 REFLECT2D_COMPOSE =  |- (#!:fun(fun(real,bool),bool) (\s:real. (#!:fun(fun(real,bool),bool) (\t:real. ((#=:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) s:real)) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_sub:fun(real,fun(real,real)) s:real) t:real))))))))
 rotate_about =  |- (#!:fun(fun(real,bool),bool) (\t:real. (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). (#!:fun(fun(cart(real,tybit0(1)),bool),bool) (\a:cart(real,tybit0(1)). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (((#rotate_about:fun(cart(real,tybit0(1)),fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) a:cart(real,tybit0(1))) t:real) x:cart(real,tybit0(1)))) ((#vector_add:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) a:cart(real,tybit0(1))) ((#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real) ((#vector_sub:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) x:cart(real,tybit0(1))) a:cart(real,tybit0(1))))))))))))

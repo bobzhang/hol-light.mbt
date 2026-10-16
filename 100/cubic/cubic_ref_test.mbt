@@ -8411,9 +8411,9 @@ test "100/cubic matches 100/cubic.ml" {
       #|  ccbrt(z) = if z = Cx(&0) then Cx(&0) else cexp(clog(z) / Cx(&3))
       #|  z / Cx(&3) + z / Cx(&3) + z / Cx(&3) = z
       #|  z pow 3 = z * z * z:complex
-      #|  !z. ccbrt(z) pow 3 = z
+      #|  forall z. ccbrt(z) pow 3 = z
       #|  ~(a = Cx(&0)) /\\\n   x = y - b / (Cx(&3) * a) /\\\n   p = (Cx(&3) * a * c - b pow 2) / (Cx(&9) * a pow 2) /\\\n   q = (Cx(&9) * a * b * c - Cx(&2) * b pow 3 - Cx(&27) * a pow 2 * d) /\n       (Cx(&54) * a pow 3)\n   ==> (a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n        y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0))
-      #|  !i t s.\n    s pow 2 = q pow 2 + p pow 3 /\\\n    (s1 pow 3 = if p = Cx(&0) then Cx(&2) * q else q + s) /\\\n    s2 = --s1 * (Cx(&1) + i * t) / Cx(&2) /\\\n    s3 = --s1 * (Cx(&1) - i * t) / Cx(&2) /\\\n    i pow 2 + Cx(&1) = Cx(&0) /\\\n    t pow 2 = Cx(&3)\n    ==> if p = Cx(&0) then\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n           y = s1 \\/ y = s2 \\/ y = s3)\n        else\n          ~(s1 = Cx(&0)) /\\\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n               (y = s1 - p / s1 \\/ y = s2 - p / s2 \\/ y = s3 - p / s3))
+      #|  forall i t s.\n    s pow 2 = q pow 2 + p pow 3 /\\\n    (s1 pow 3 = if p = Cx(&0) then Cx(&2) * q else q + s) /\\\n    s2 = --s1 * (Cx(&1) + i * t) / Cx(&2) /\\\n    s3 = --s1 * (Cx(&1) - i * t) / Cx(&2) /\\\n    i pow 2 + Cx(&1) = Cx(&0) /\\\n    t pow 2 = Cx(&3)\n    ==> if p = Cx(&0) then\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n           y = s1 \\/ y = s2 \\/ y = s3)\n        else\n          ~(s1 = Cx(&0)) /\\\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n               (y = s1 - p / s1 \\/ y = s2 - p / s2 \\/ y = s3 - p / s3))
       #|  csqrt (q pow 2 + p pow 3)
       #|  csqrt(Cx(&3))
       #|  ii

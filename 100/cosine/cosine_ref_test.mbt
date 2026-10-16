@@ -77590,36 +77590,36 @@ test "100/cosine matches 100/cosine.ml" {
       #|  a * b * c:real = c * a * b
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N. x dot y = norm(x) * norm(y) * cos(vangle x y)
+      #|  forall x y:real^N. x dot y = norm(x) * norm(y) * cos(vangle x y)
       #|  abs(x) <= a ==> -- &1 * a <= x /\\ x <= &1 * a
-      #|  !x y:real^N. &0 <= vangle x y /\\ vangle x y <= pi
+      #|  forall x y:real^N. &0 <= vangle x y /\\ vangle x y <= pi
       #|  cos
       #|  y:real^N
       #|  x:real^N
       #|  y:real^N = vec 0
       #|  x:real^N = vec 0
-      #|  !x y:real^N. orthogonal x y <=> vangle x y = pi / &2
+      #|  forall x y:real^N. orthogonal x y <=> vangle x y = pi / &2
       #|  --y:real^N
       #|  x:real^N
       #|  y:real^N
       #|  x:real^N
-      #|  !x y:real^N. vangle x y = pi ==> norm(x) % y + norm(y) % x = vec 0
+      #|  forall x y:real^N. vangle x y = pi ==> norm(x) % y + norm(y) % x = vec 0
       #|  (B - A) + (C - B):real^N = C - A
       #|  a + x % (b - c) = vec 0 <=> a = x % (c - b)
-      #|  !A B C:real^N. angle(A,B,C) = pi ==> dist(A,C) = dist(A,B) + dist(B,C)
-      #|  !A B C. &0 <= sin(angle(A,B,C))
-      #|  !A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))
-      #|  !A B. angle(A,A,B) = pi / &2 /\\\n         angle(B,A,A) = pi / &2
-      #|  !A B. ~(A = B) ==> angle(A,B,A) = &0
-      #|  !A B C. angle(A,B,C) = angle(C,B,A)
-      #|  !A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi
-      #|  !A B C:real^N.\n     dist(B,C) pow 2 = dist(A,B) pow 2 + dist(A,C) pow 2 -\n                         &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))
+      #|  forall A B C:real^N. angle(A,B,C) = pi ==> dist(A,C) = dist(A,B) + dist(B,C)
+      #|  forall A B C. &0 <= sin(angle(A,B,C))
+      #|  forall A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))
+      #|  forall A B. angle(A,A,B) = pi / &2 /\\\n         angle(B,A,A) = pi / &2
+      #|  forall A B. ~(A = B) ==> angle(A,B,A) = &0
+      #|  forall A B C. angle(A,B,C) = angle(C,B,A)
+      #|  forall A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi
+      #|  forall A B C:real^N.\n     dist(B,C) pow 2 = dist(A,B) pow 2 + dist(A,C) pow 2 -\n                         &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))
       #|  a * (&1 - x) * b = c * (&1 - y) * d <=>\n    a * b - a * b * x = c * d - c * d * y
       #|  ~(a = &0) ==> a pow 2 * x = a pow 2 * y ==> x = y
       #|  A:real^N = B
       #|  x + y = &1 ==> x = &1 - y
       #|  2
-      #|  !A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)
+      #|  forall A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)
       #|  angle(B:real^N,C,A)
       #|  angle(A:real^N,B,C)
       #|  angle(B:real^N,A,C)
@@ -77641,7 +77641,7 @@ test "100/cosine matches 100/cosine.ml" {
       #|  C:real^N
       #|  B:real^N
       #|  A:real^N
-      #|  !A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1
+      #|  forall A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1
       #|  n < 3 /\\ ~(n = 0) /\\ ~(n = 2) ==> n = 1
       #|  n = &1 ==> n * p = p
       #|  &0 < p ==> ~(p < &0) /\\ ~(p = &0)
@@ -77650,9 +77650,9 @@ test "100/cosine matches 100/cosine.ml" {
       #|  x:real
       #|  nn:real
       #|  ?n. integer n /\\ x = n * pi
-      #|  !x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi
+      #|  forall x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi
       #|  &0 <= x /\\ x <= p /\\ &0 <= y /\\ y <= p /\\ &0 <= z /\\ z <= p /\\\n    ~(x = p /\\ y = p /\\ z = p)\n    ==> x + y + z < &3 * p
-      #|  !A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi
+      #|  forall A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi
       #|vangle =  |- (#!:fun(fun(cart(real,'?1734476),bool),bool) (\x:cart(real,'?1734476). (#!:fun(fun(cart(real,'?1734476),bool),bool) (\y:cart(real,'?1734476). ((#=:fun(real,fun(real,bool)) ((#vangle:fun(cart(real,'?1734476),fun(cart(real,'?1734476),real)) x:cart(real,'?1734476)) y:cart(real,'?1734476))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'?1734476),fun(cart(real,'?1734476),bool)) x:cart(real,'?1734476)) (#vec:fun(num,cart(real,'?1734476)) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,'?1734476),fun(cart(real,'?1734476),bool)) y:cart(real,'?1734476)) (#vec:fun(num,cart(real,'?1734476)) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#acs:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?1734476),fun(cart(real,'?1734476),real)) x:cart(real,'?1734476)) y:cart(real,'?1734476))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?1734476),real) x:cart(real,'?1734476))) (#vector_norm:fun(cart(real,'?1734476),real) y:cart(real,'?1734476)))))))))))
       #|angle =  |- (#!:fun(fun(cart(real,'?1734523),bool),bool) (\a:cart(real,'?1734523). (#!:fun(fun(cart(real,'?1734523),bool),bool) (\c:cart(real,'?1734523). (#!:fun(fun(cart(real,'?1734523),bool),bool) (\b:cart(real,'?1734523). ((#=:fun(real,fun(real,bool)) (#angle:fun(prod(cart(real,'?1734523),prod(cart(real,'?1734523),cart(real,'?1734523))),real) ((#,:fun(cart(real,'?1734523),fun(prod(cart(real,'?1734523),cart(real,'?1734523)),prod(cart(real,'?1734523),prod(cart(real,'?1734523),cart(real,'?1734523))))) a:cart(real,'?1734523)) ((#,:fun(cart(real,'?1734523),fun(cart(real,'?1734523),prod(cart(real,'?1734523),cart(real,'?1734523)))) b:cart(real,'?1734523)) c:cart(real,'?1734523))))) ((#vangle:fun(cart(real,'?1734523),fun(cart(real,'?1734523),real)) ((#vector_sub:fun(cart(real,'?1734523),fun(cart(real,'?1734523),cart(real,'?1734523))) a:cart(real,'?1734523)) b:cart(real,'?1734523))) ((#vector_sub:fun(cart(real,'?1734523),fun(cart(real,'?1734523),cart(real,'?1734523))) c:cart(real,'?1734523)) b:cart(real,'?1734523))))))))))
       #|VANGLE =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#=:fun(real,fun(real,bool)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) x:cart(real,'N)) y:cart(real,'N))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) y:cart(real,'N))) (#cos:fun(real,real) ((#vangle:fun(cart(real,'N),fun(cart(real,'N),real)) x:cart(real,'N)) y:cart(real,'N))))))))))

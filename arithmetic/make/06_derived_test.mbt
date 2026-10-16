@@ -13756,85 +13756,85 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|Arithmetic/derived quotations (221):
       #|  negativef p = ?q. p = q --> False
       #|  negatef p = if negativef p then @q. p = q --> False else p --> False
-      #|  !A p q. A |-- p --> (q --> p)
-      #|  !A p q r. A |-- (p --> q --> r) --> (p --> q) --> (p --> r)
-      #|  !A p. A |-- ((p --> False) --> False) --> p
-      #|  !A x p q. A |-- (!!x (p --> q)) --> (!!x p) --> (!!x q)
-      #|  !A x p. ~(x IN FV p) ==> A |-- p --> !!x p
-      #|  !A x t. ~(x IN FVT t) ==> A |-- ??x (V x === t)
-      #|  !A t. A |-- t === t
-      #|  (!A s t. A |-- s === t --> Suc s === Suc t) /\\\n   (!A s t u v. A |-- s === t --> u === v --> s ++ u === t ++ v) /\\\n   (!A s t u v. A |-- s === t --> u === v --> s ** u === t ** v)
-      #|  (!A s t u v. A |-- s === t --> u === v --> s === u --> t === v) /\\\n   (!A s t u v. A |-- s === t --> u === v --> s << u --> t << v) /\\\n   (!A s t u v. A |-- s === t --> u === v --> s <<= u --> t <<= v)
-      #|  !A p q. A |-- (p <-> q) --> p --> q
-      #|  !A p q. A |-- (p <-> q) --> q --> p
-      #|  !A p q. A |-- (p --> q) --> (q --> p) --> (p <-> q)
+      #|  forall A p q. A |-- p --> (q --> p)
+      #|  forall A p q r. A |-- (p --> q --> r) --> (p --> q) --> (p --> r)
+      #|  forall A p. A |-- ((p --> False) --> False) --> p
+      #|  forall A x p q. A |-- (!!x (p --> q)) --> (!!x p) --> (!!x q)
+      #|  forall A x p. ~(x IN FV p) ==> A |-- p --> !!x p
+      #|  forall A x t. ~(x IN FVT t) ==> A |-- ??x (V x === t)
+      #|  forall A t. A |-- t === t
+      #|  (forall A s t. A |-- s === t --> Suc s === Suc t) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ++ u === t ++ v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ** u === t ** v)
+      #|  (forall A s t u v. A |-- s === t --> u === v --> s === u --> t === v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s << u --> t << v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s <<= u --> t <<= v)
+      #|  forall A p q. A |-- (p <-> q) --> p --> q
+      #|  forall A p q. A |-- (p <-> q) --> q --> p
+      #|  forall A p q. A |-- (p --> q) --> (q --> p) --> (p <-> q)
       #|  A |-- True <-> (False --> False)
-      #|  !A p. A |-- Not p <-> (p --> False)
-      #|  !A p q. A |-- (p && q) <-> (p --> q --> False) --> False
-      #|  !A p q. A |-- (p || q) <-> Not(Not p && Not q)
-      #|  !A x p. A |-- (??x p) <-> Not(!!x (Not p))
-      #|  !A p. p IN A ==> A |-- p
-      #|  !A p. A |-- (p --> q) /\\ A |-- p ==> A |-- q
-      #|  !A p x. A |-- p ==> A |-- !!x p
-      #|  !A p q. A |-- p <-> q ==> A |-- p --> q
-      #|  !A p q. A |-- p <-> q ==> A |-- q --> p
-      #|  !A p q. A |-- p --> q /\\ A |-- q --> p ==> A |-- p <-> q
-      #|  !A p q. A |-- q ==> A |-- p --> q
-      #|  !A p. A |-- p --> p
-      #|  !A p q r. A |-- q --> r ==> A |-- (p --> q) --> (p --> r)
-      #|  !A p q. A |-- p --> p --> q ==> A |-- p --> q
-      #|  !A p q. A |-- p --> q /\\ A |-- q --> r ==> A |-- p --> r
-      #|  !A p q r. A |-- p --> q --> r ==> A |-- q --> p --> r
-      #|  !A p q1 q2 r. A |-- p --> q1 /\\ A |-- p --> q2 /\\ A |-- q1 --> q2 --> r\n                 ==> A |-- p --> r
-      #|  !A p q r. A |-- (q --> r) --> (p --> q) --> (p --> r)
-      #|  !A p q r. A |-- p --> q ==> A |-- (q --> r) --> (p --> r)
-      #|  !A p q r s. A |-- p --> q --> r /\\ A |-- r --> s ==> A |-- p --> q --> s
-      #|  !A p q r. A |-- (p --> q --> r) --> (q --> p --> r)
-      #|  !A p q. A |-- p --> q ==> A |-- Not q --> Not p
-      #|  !p q. A |-- (q --> False) --> p --> (p --> q) --> False
-      #|  !A p q r. A |-- p --> r ==> A |-- p --> q --> r
+      #|  forall A p. A |-- Not p <-> (p --> False)
+      #|  forall A p q. A |-- (p && q) <-> (p --> q --> False) --> False
+      #|  forall A p q. A |-- (p || q) <-> Not(Not p && Not q)
+      #|  forall A x p. A |-- (??x p) <-> Not(!!x (Not p))
+      #|  forall A p. p IN A ==> A |-- p
+      #|  forall A p. A |-- (p --> q) /\\ A |-- p ==> A |-- q
+      #|  forall A p x. A |-- p ==> A |-- !!x p
+      #|  forall A p q. A |-- p <-> q ==> A |-- p --> q
+      #|  forall A p q. A |-- p <-> q ==> A |-- q --> p
+      #|  forall A p q. A |-- p --> q /\\ A |-- q --> p ==> A |-- p <-> q
+      #|  forall A p q. A |-- q ==> A |-- p --> q
+      #|  forall A p. A |-- p --> p
+      #|  forall A p q r. A |-- q --> r ==> A |-- (p --> q) --> (p --> r)
+      #|  forall A p q. A |-- p --> p --> q ==> A |-- p --> q
+      #|  forall A p q. A |-- p --> q /\\ A |-- q --> r ==> A |-- p --> r
+      #|  forall A p q r. A |-- p --> q --> r ==> A |-- q --> p --> r
+      #|  forall A p q1 q2 r. A |-- p --> q1 /\\ A |-- p --> q2 /\\ A |-- q1 --> q2 --> r\n                 ==> A |-- p --> r
+      #|  forall A p q r. A |-- (q --> r) --> (p --> q) --> (p --> r)
+      #|  forall A p q r. A |-- p --> q ==> A |-- (q --> r) --> (p --> r)
+      #|  forall A p q r s. A |-- p --> q --> r /\\ A |-- r --> s ==> A |-- p --> q --> s
+      #|  forall A p q r. A |-- (p --> q --> r) --> (q --> p --> r)
+      #|  forall A p q. A |-- p --> q ==> A |-- Not q --> Not p
+      #|  forall p q. A |-- (q --> False) --> p --> (p --> q) --> False
+      #|  forall A p q r. A |-- p --> r ==> A |-- p --> q --> r
       #|  A |-- (p' --> p) --> (q --> q') --> (p --> q) --> (p' --> q')
-      #|  !A p. A |-- False --> p
-      #|  !A p q. A |-- (p --> False) --> (p --> r)
-      #|  !A p r. A |-- p --> negatef p --> r
-      #|  !A p. A |-- (p --> False) --> p ==> A |-- p
-      #|  !p q. A |-- p --> q /\\ A |-- (p --> False) --> q ==> A |-- q
-      #|  !p q r. A |-- (q --> False) --> p --> r\n           ==> A |-- ((p --> q) --> False) --> r
-      #|  !A p q r. A |-- (p --> False) --> r /\\ A |-- q --> r\n             ==> A |-- (p --> q) --> r
-      #|  !A. A |-- True
-      #|  !A p q. A |-- p && q --> p
-      #|  !A p q. A |-- p && q --> q
-      #|  !A p q. A |-- p --> q --> p && q
-      #|  !A p q. A |-- p && q <=> A |-- p /\\ A |-- q
-      #|  !A p q r. A |-- p && q --> r ==> A |-- p --> q --> r
-      #|  !A p q r. A |-- p --> q --> r ==> A |-- p && q --> r
-      #|  !A p. A |-- (p --> False) --> False <-> p
-      #|  !A p q. A |-- p <-> q <=> A |-- q <-> p
-      #|  !A p q r. A |-- p <-> q /\\ A |-- q <-> r ==> A |-- p <-> r
-      #|  !A p. A |-- Not(Not p) <-> p
-      #|  !A p q. A |-- Not p --> Not q <=> A |-- q --> p
-      #|  !A p q. A |-- q --> p || q
-      #|  !A p q. A |-- p --> p || q
-      #|  !A p q r. A |-- p --> r /\\ A |-- q --> r\n             ==> A |-- p || q --> r
-      #|  !A p q. A |-- (p <-> q) <-> (p --> q) && (q --> p)
-      #|  !A p. A |-- p <-> p
-      #|  !A s t. A |-- s === t --> t === s
-      #|  !A p x s t tm.\n     A |-- s === t -->\n           termsubst ((x |-> s) v) tm === termsubst ((x |-> t) v) tm
-      #|  !A x s t tm.\n     A |-- s === t --> termsubst (x |=> s) tm === termsubst (x |=> t) tm
-      #|  !A x t tm.\n     A |-- V x === t --> tm === termsubst (x |=> t) tm
-      #|  !A x p q. ~(x IN FV(p)) /\\ A |-- p --> q\n             ==> A |-- p --> !!x q
-      #|  !x p q. A |-- p --> q ==> A |-- (!!x p) --> (!!x q)
-      #|  !x p q. A |-- p --> q ==> A |-- (??x p) --> (??x q)
+      #|  forall A p. A |-- False --> p
+      #|  forall A p q. A |-- (p --> False) --> (p --> r)
+      #|  forall A p r. A |-- p --> negatef p --> r
+      #|  forall A p. A |-- (p --> False) --> p ==> A |-- p
+      #|  forall p q. A |-- p --> q /\\ A |-- (p --> False) --> q ==> A |-- q
+      #|  forall p q r. A |-- (q --> False) --> p --> r\n           ==> A |-- ((p --> q) --> False) --> r
+      #|  forall A p q r. A |-- (p --> False) --> r /\\ A |-- q --> r\n             ==> A |-- (p --> q) --> r
+      #|  forall A. A |-- True
+      #|  forall A p q. A |-- p && q --> p
+      #|  forall A p q. A |-- p && q --> q
+      #|  forall A p q. A |-- p --> q --> p && q
+      #|  forall A p q. A |-- p && q <=> A |-- p /\\ A |-- q
+      #|  forall A p q r. A |-- p && q --> r ==> A |-- p --> q --> r
+      #|  forall A p q r. A |-- p --> q --> r ==> A |-- p && q --> r
+      #|  forall A p. A |-- (p --> False) --> False <-> p
+      #|  forall A p q. A |-- p <-> q <=> A |-- q <-> p
+      #|  forall A p q r. A |-- p <-> q /\\ A |-- q <-> r ==> A |-- p <-> r
+      #|  forall A p. A |-- Not(Not p) <-> p
+      #|  forall A p q. A |-- Not p --> Not q <=> A |-- q --> p
+      #|  forall A p q. A |-- q --> p || q
+      #|  forall A p q. A |-- p --> p || q
+      #|  forall A p q r. A |-- p --> r /\\ A |-- q --> r\n             ==> A |-- p || q --> r
+      #|  forall A p q. A |-- (p <-> q) <-> (p --> q) && (q --> p)
+      #|  forall A p. A |-- p <-> p
+      #|  forall A s t. A |-- s === t --> t === s
+      #|  forall A p x s t tm.\n     A |-- s === t -->\n           termsubst ((x |-> s) v) tm === termsubst ((x |-> t) v) tm
+      #|  forall A x s t tm.\n     A |-- s === t --> termsubst (x |=> s) tm === termsubst (x |=> t) tm
+      #|  forall A x t tm.\n     A |-- V x === t --> tm === termsubst (x |=> t) tm
+      #|  forall A x p q. ~(x IN FV(p)) /\\ A |-- p --> q\n             ==> A |-- p --> !!x q
+      #|  forall x p q. A |-- p --> q ==> A |-- (!!x p) --> (!!x q)
+      #|  forall x p q. A |-- p --> q ==> A |-- (??x p) --> (??x q)
       #|  A |-- ((q --> False) --> !!x (Not(p --> q)))\n                      --> (q --> False) --> False
       #|  A |-- (q --> False) --> !!x p --> !!x (Not(p --> q))
       #|  A |-- (q --> False) --> !!x (p --> Not(p --> q))
-      #|  !A x p q. A |-- ??x (p --> q) /\\ ~(x IN FV(q)) ==> A |-- (!!x p) --> q
-      #|  !A x t p q. ~(x IN FVT(t)) /\\ ~(x IN FV(q)) /\\ A |-- V x === t --> p --> q\n               ==> A |-- (!!x p) --> q
+      #|  forall A x p q. A |-- ??x (p --> q) /\\ ~(x IN FV(q)) ==> A |-- (!!x p) --> q
+      #|  forall A x t p q. ~(x IN FVT(t)) /\\ ~(x IN FV(q)) /\\ A |-- V x === t --> p --> q\n               ==> A |-- (!!x p) --> q
       #|  V y
       #|  x = y:num
-      #|  !A x y p q. ((x = y) \\/ ~(x IN FV(q)) /\\ ~(y IN FV(p))) /\\\n               A |-- V x === V y --> p --> q\n               ==> A |-- (!!x p) --> (!!y q)
-      #|  (complexity False = 1) /\\\n   (complexity True = 1) /\\\n   (!s t. complexity (s === t) = 1) /\\\n   (!s t. complexity (s << t) = 1) /\\\n   (!s t. complexity (s <<= t) = 1) /\\\n   (!p. complexity (Not p) = complexity p + 3) /\\\n   (!p q. complexity (p && q) = complexity p + complexity q + 6) /\\\n   (!p q. complexity (p || q) = complexity p + complexity q + 16) /\\\n   (!p q. complexity (p --> q) = complexity p + complexity q + 1) /\\\n   (!p q. complexity (p <-> q) = 2 * (complexity p + complexity q) + 9) /\\\n   (!x p. complexity (!!x p) = complexity p + 1) /\\\n   (!x p. complexity (??x p) = complexity p + 8)
-      #|  !p i. complexity(formsubst i p) = complexity p
+      #|  forall A x y p q. ((x = y) \\/ ~(x IN FV(q)) /\\ ~(y IN FV(p))) /\\\n               A |-- V x === V y --> p --> q\n               ==> A |-- (!!x p) --> (!!y q)
+      #|  (complexity False = 1) /\\\n   (complexity True = 1) /\\\n   (forall s t. complexity (s === t) = 1) /\\\n   (forall s t. complexity (s << t) = 1) /\\\n   (forall s t. complexity (s <<= t) = 1) /\\\n   (forall p. complexity (Not p) = complexity p + 3) /\\\n   (forall p q. complexity (p && q) = complexity p + complexity q + 6) /\\\n   (forall p q. complexity (p || q) = complexity p + complexity q + 16) /\\\n   (forall p q. complexity (p --> q) = complexity p + complexity q + 1) /\\\n   (forall p q. complexity (p <-> q) = 2 * (complexity p + complexity q) + 9) /\\\n   (forall x p. complexity (!!x p) = complexity p + 1) /\\\n   (forall x p. complexity (??x p) = complexity p + 8)
+      #|  forall p i. complexity(formsubst i p) = complexity p
       #|  w:num = u
       #|  w:num
       #|  ~(y IN FV (formsubst ((v |-> t) i) (!! u p)))
@@ -13883,18 +13883,18 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|  p:form
       #|  p:form
       #|  complexity p
-      #|  !A p x v s t. A |-- s === t\n                       --> formsubst ((x |-> s) v) p\n                           --> formsubst ((x |-> t) v) p
+      #|  forall A p x v s t. A |-- s === t\n                       --> formsubst ((x |-> s) v) p\n                           --> formsubst ((x |-> t) v) p
       #|  q:form
       #|  p:form
       #|  (=) (z:num)
-      #|  !A p x s t. A |-- s === t\n                     --> formsubst (x |=> s) p --> formsubst (x |=> t) p
-      #|  !A p x t. A |-- V x === t --> p --> formsubst (x |=> t) p
-      #|  !A x z p. ~(z IN FV p) ==> A |-- (!!x p) --> !!z (formsubst (x |=> V z) p)
+      #|  forall A p x s t. A |-- s === t\n                     --> formsubst (x |=> s) p --> formsubst (x |=> t) p
+      #|  forall A p x t. A |-- V x === t --> p --> formsubst (x |=> t) p
+      #|  forall A x z p. ~(z IN FV p) ==> A |-- (!!x p) --> !!z (formsubst (x |=> V z) p)
       #|  (VARS False = {}) /\\\n  (VARS True = {}) /\\\n  (VARS (s === t) = FVT s UNION FVT t) /\\\n  (VARS (s << t) = FVT s UNION FVT t) /\\\n  (VARS (s <<= t) = FVT s UNION FVT t) /\\\n  (VARS (Not p) = VARS p) /\\\n  (VARS (p && q) = VARS p UNION VARS q) /\\\n  (VARS (p || q) = VARS p UNION VARS q) /\\\n  (VARS (p --> q) = VARS p UNION VARS q) /\\\n  (VARS (p <-> q) = VARS p UNION VARS q) /\\\n  (VARS (!! x p) = x INSERT VARS p) /\\\n  (VARS (?? x p) = x INSERT VARS p)
-      #|  !p. FINITE(VARS p)
-      #|  !p. FV(p) SUBSET VARS(p)
-      #|  !x z t v s. ~(z IN FVT s)\n               ==> (termsubst ((x |-> t) v) s =\n                    termsubst ((z |-> t) v) (termsubst (x |=> V z) s))
-      #|  !x z t s. ~(z IN FVT s)\n             ==> (termsubst (x |=> t) s =\n                  termsubst (z |=> t) (termsubst (x |=> V z) s))
+      #|  forall p. FINITE(VARS p)
+      #|  forall p. FV(p) SUBSET VARS(p)
+      #|  forall x z t v s. ~(z IN FVT s)\n               ==> (termsubst ((x |-> t) v) s =\n                    termsubst ((z |-> t) v) (termsubst (x |=> V z) s))
+      #|  forall x z t s. ~(z IN FVT s)\n             ==> (termsubst (x |=> t) s =\n                  termsubst (z |=> t) (termsubst (x |=> V z) s))
       #|  w:num
       #|  y:num
       #|  z = VARIANT\n       {x' | ?y. y IN FV p /\\ x' IN FVT ((x |-> V x) (termsubst j o i) y)}
@@ -13914,18 +13914,18 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|  p:form
       #|  x:num
       #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
-      #|  !p i j.\n        (!x. x IN VARS p ==> safe_for x i)\n        ==> formsubst j (formsubst i p) = formsubst (termsubst j o i) p
-      #|  !z p x t. ~(z IN VARS p)\n             ==> (formsubst (z |=> t) (formsubst (x |=> V z) p) =\n                  formsubst (x |=> t) p)
+      #|  forall p i j.\n        (forall x. x IN VARS p ==> safe_for x i)\n        ==> formsubst j (formsubst i p) = formsubst (termsubst j o i) p
+      #|  forall z p x t. ~(z IN VARS p)\n             ==> (formsubst (z |=> t) (formsubst (x |=> V z) p) =\n                  formsubst (x |=> t) p)
       #|  t:term
-      #|  !A x p t. ~(x IN FVT(t)) ==> A |-- !!x p --> formsubst (x |=> t) p
+      #|  forall A x p t. ~(x IN FVT(t)) ==> A |-- !!x p --> formsubst (x |=> t) p
       #|  formsubst (x |=> t) p =\n      formsubst (z |=> t) (formsubst (x |=> V z) p)
       #|  !!z (formsubst (x |=> V z) p)
       #|  z = VARIANT (FVT t UNION VARS p)
       #|  x IN FVT(t)
-      #|  !A x p t. A |-- !!x p --> formsubst (x |=> t) p
-      #|  !A x p t. A |-- !!x p ==> A |-- formsubst (x |=> t) p
+      #|  forall A x p t. A |-- !!x p --> formsubst (x |=> t) p
+      #|  forall A x p t. A |-- !!x p ==> A |-- formsubst (x |=> t) p
       #|  V x
-      #|  !A x p. A |-- !!x p ==> A |-- p
+      #|  forall A x p. A |-- !!x p ==> A |-- p
       #|  ??x (V x === v x)
       #|  x:num
       #|  formsubst v p = formsubst ((x |-> v x) v) p
@@ -13933,9 +13933,9 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|  (x |-> V x) v
       #|  p:form
       #|  x:num
-      #|  !x. x IN FV p ==> v x = V x
+      #|  forall x. x IN FV p ==> v x = V x
       #|  CARD {x | x IN FV(p) /\\ ~(v x = V x)}
-      #|  !A p v. (!x y. x IN FV p /\\ y IN FV p /\\ x IN FVT(v y)\n                    ==> x = y /\\ v x = V x) /\\\n             A |-- p\n             ==> A |-- formsubst v p
+      #|  forall A p v. (forall x y. x IN FV p /\\ y IN FV p /\\ x IN FVT(v y)\n                    ==> x = y /\\ v x = V x) /\\\n             A |-- p\n             ==> A |-- formsubst v p
       #|  x < n /\\ y < n ==> ~(x = y + n)
       #|  ~p /\\ q ==> (r \\/ q ==> p) ==> s
       #|  x + n:num
@@ -13945,36 +13945,36 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|  ~(x + n:num < n)
       #|  formsubst v p =\n    formsubst (\\i. v(i - n)) (formsubst (\\i. V(i + n)) p)
       #|  SUC(SETMAX(VARS p UNION FV(formsubst v p)))
-      #|  ?n. !x. x IN VARS p \\/ x IN FV(formsubst v p) ==> x < n
-      #|  !A v p. A |-- p ==> A |-- formsubst v p
-      #|  !A B p. A SUBSET B /\\ A |-- p ==> B |-- p
+      #|  ?n. forall x. x IN VARS p \\/ x IN FV(formsubst v p) ==> x < n
+      #|  forall A v p. A |-- p ==> A |-- formsubst v p
+      #|  forall A B p. A SUBSET B /\\ A |-- p ==> B |-- p
       #|  r:form
-      #|  !A p q. p INSERT A |-- q /\\ closed p ==> A |-- p --> q
-      #|  !A p q. closed p ==> (A |-- p --> q <=> p INSERT A |-- q)
-      #|  !A s t u. A |-- s === t --> t === u --> s === u
-      #|  !A p q x. A |-- p --> !!x q ==> A |-- p --> formsubst (x |=> t) q
-      #|  !A s t u. A |-- s === t /\\ A |-- t === u ==> A |-- s === u
-      #|  !A s t. A |-- s === t <=> A |-- t === s
-      #|  !A x p q. A |-- p --> q ==> A |-- !!x p --> !!x q
-      #|  !A x p q. A |-- p <-> q ==> A |-- !!x p <-> !!x q
-      #|  !A x p q. A |-- p <-> q ==> A |-- ??x p <-> ??x q
-      #|  !A s t. A |-- s === t ==> A |-- Suc s === Suc t
-      #|  !A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ++ u === t ++ v
-      #|  !A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ** u === t ** v
-      #|  !A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s === u <-> t === v
-      #|  !A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s <<= u <-> t <<= v
-      #|  !A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s << u <-> t << v
+      #|  forall A p q. p INSERT A |-- q /\\ closed p ==> A |-- p --> q
+      #|  forall A p q. closed p ==> (A |-- p --> q <=> p INSERT A |-- q)
+      #|  forall A s t u. A |-- s === t --> t === u --> s === u
+      #|  forall A p q x. A |-- p --> !!x q ==> A |-- p --> formsubst (x |=> t) q
+      #|  forall A s t u. A |-- s === t /\\ A |-- t === u ==> A |-- s === u
+      #|  forall A s t. A |-- s === t <=> A |-- t === s
+      #|  forall A x p q. A |-- p --> q ==> A |-- !!x p --> !!x q
+      #|  forall A x p q. A |-- p <-> q ==> A |-- !!x p <-> !!x q
+      #|  forall A x p q. A |-- p <-> q ==> A |-- ??x p <-> ??x q
+      #|  forall A s t. A |-- s === t ==> A |-- Suc s === Suc t
+      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ++ u === t ++ v
+      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ** u === t ** v
+      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s === u <-> t === v
+      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s <<= u <-> t <<= v
+      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s << u <-> t << v
       #|  Not(formsubst (x |=> t) (Not p))
       #|  Not(!!x (Not p))
-      #|  !A x t p. A |-- formsubst (x |=> t) p --> ??x p
-      #|  !A x t p. A |-- formsubst (x |=> t) p ==> A |-- ??x p
+      #|  forall A x t p. A |-- formsubst (x |=> t) p --> ??x p
+      #|  forall A x t p. A |-- formsubst (x |=> t) p ==> A |-- ??x p
       #|  Not(!!x (Not p))
       #|  Not(Not p)
-      #|  !A x p. ~(x IN FV p) ==> A |-- (??x p) --> p
+      #|  forall A x p. ~(x IN FV p) ==> A |-- (??x p) --> p
       #|  x:num
-      #|  !A x p q. A |-- !!x (p --> q) /\\ ~(x IN FV q) ==> A |-- (??x p) --> q
+      #|  forall A x p q. A |-- !!x (p --> q) /\\ ~(x IN FV q) ==> A |-- (??x p) --> q
       #|  A |-- s === s' /\\ A |-- t === t' ==> A |-- s === t --> s' === t'
-      #|  !v n. termsubst v (numeral n) = numeral n
+      #|  forall v n. termsubst v (numeral n) = numeral n
       #|negativef =  |- (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#negativef:fun(form,bool) p:form)) (#?:fun(fun(form,bool),bool) (\q:form. ((#=:fun(form,fun(form,bool)) p:form) ((#-->:fun(form,fun(form,form)) q:form) #False:form)))))))
       #|negatef =  |- (#!:fun(fun(form,bool),bool) (\p:form. ((#=:fun(form,fun(form,bool)) (#negatef:fun(form,form) p:form)) (((#COND:fun(bool,fun(form,fun(form,form))) (#negativef:fun(form,bool) p:form)) (#@:fun(fun(form,bool),form) (\q:form. ((#=:fun(form,fun(form,bool)) p:form) ((#-->:fun(form,fun(form,form)) q:form) #False:form))))) ((#-->:fun(form,fun(form,form)) p:form) #False:form)))))
       #|axiom_addimp =  |- (#!:fun(fun(fun(form,bool),bool),bool) (\A:fun(form,bool). (#!:fun(fun(form,bool),bool) (\p:form. (#!:fun(fun(form,bool),bool) (\q:form. ((#|--:fun(fun(form,bool),fun(form,bool)) A:fun(form,bool)) ((#-->:fun(form,fun(form,form)) p:form) ((#-->:fun(form,fun(form,form)) q:form) p:form)))))))))

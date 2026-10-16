@@ -5642,60 +5642,60 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 Library/products quotations (197):
-  !f s. nproduct (support ( * ) f s) f = nproduct s f
-  !f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (nproduct (s UNION t) f = nproduct s f * nproduct t f)
-  !f g s. (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (nproduct (IMAGE f s) g = nproduct s (g o f))
-  !f p s. FINITE s /\\\n           (!x. x IN s ==> p x IN s) /\\\n           (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> nproduct s (f o p) = nproduct s f
+  forall f s. nproduct (support ( * ) f s) f = nproduct s f
+  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (nproduct (s UNION t) f = nproduct s f * nproduct t f)
+  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (nproduct (IMAGE f s) g = nproduct s (g o f))
+  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> nproduct s (f o p) = nproduct s f
   x < x + 1
-  !f m n p.\n        m <= n + 1\n        ==> (nproduct (m..(n+p)) f = nproduct(m..n) f * nproduct(n+1..n+p) f)
-  !f s. FINITE s /\\ (!x. x IN s ==> 0 < f x) ==> 0 < nproduct s f
-  !f m n. (!x. m <= x /\\ x <= n ==> 0 < f x) ==> 0 < nproduct(m..n) f
-  !f m p. nproduct(m+p..n+p) f = nproduct(m..n) (\\i. f(i + p))
-  !f x. nproduct {x} f = f(x)
-  !f n. nproduct(n..n) f = f(n)
+  forall f m n p.\n        m <= n + 1\n        ==> (nproduct (m..(n+p)) f = nproduct(m..n) f * nproduct(n+1..n+p) f)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> 0 < f x) ==> 0 < nproduct s f
+  forall f m n. (forall x. m <= x /\\ x <= n ==> 0 < f x) ==> 0 < nproduct(m..n) f
+  forall f m p. nproduct(m+p..n+p) f = nproduct(m..n) (\\i. f(i + p))
+  forall f x. nproduct {x} f = f(x)
+  forall f n. nproduct(n..n) f = f(n)
   ~(SUC n <= n)
-  (!m. nproduct(m..0) f = if m = 0 then f(0) else 1) /\\\n   (!m n. nproduct(m..SUC n) f = if m <= SUC n then nproduct(m..n) f * f(SUC n)\n                                else nproduct(m..n) f)
-  !f g s. (!x. x IN s ==> (f x = g x)) ==> nproduct s f = nproduct s g
-  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nproduct(m..n) f = nproduct(m..n) g)
-  !f s. FINITE s ==> (nproduct s f = 0 <=> ?x. x IN s /\\ f(x) = 0)
-  !f m n. nproduct(m..n) f = 0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = 0
-  !f s. FINITE s\n         ==> nproduct s (\\i. if i IN s then f i else 1) = nproduct s f
-  !P s f. nproduct {i:A | i IN s /\\ P i} f =\n           nproduct s (\\i. if P i then f i else 1)
-  !f s. FINITE s /\\ (!x. x IN s ==> f(x) <= g(x))\n         ==> nproduct s f <= nproduct s g
-  !f m n. (!i. m <= i /\\ i <= n ==> f(i) <= g(i))\n           ==> nproduct(m..n) f <= nproduct(m..n) g
-  !f s. (!x:A. x IN s ==> f(x) = 1) ==> nproduct s f = 1
-  !f m n. (!i. m <= i /\\ i <= n ==> f(i) = 1) ==> nproduct(m..n) f = 1
-  !f g s.\n       FINITE {x | x IN s /\\ ~(f x = 1)} /\\ FINITE {x | x IN s /\\ ~(g x = 1)}\n       ==> nproduct s (\\x. f x * g x) = nproduct s f * nproduct s g
-  !f g s. FINITE s\n           ==> nproduct s (\\x. f x * g x) = nproduct s f * nproduct s g
-  !f g m n.\n     nproduct(m..n) (\\x. f x * g x) = nproduct(m..n) f * nproduct(m..n) g
-  !c s. FINITE s ==> nproduct s (\\x. c) = c EXP (CARD s)
-  !c m n. nproduct (m..n) (\\x. c) = c EXP ((n + 1) - m)
-  !c n. nproduct(1..n) (\\x. c) = c EXP n
-  !s. nproduct s (\\n. 1) = 1
+  (forall m. nproduct(m..0) f = if m = 0 then f(0) else 1) /\\\n   (forall m n. nproduct(m..SUC n) f = if m <= SUC n then nproduct(m..n) f * f(SUC n)\n                                else nproduct(m..n) f)
+  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> nproduct s f = nproduct s g
+  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (nproduct(m..n) f = nproduct(m..n) g)
+  forall f s. FINITE s ==> (nproduct s f = 0 <=> ?x. x IN s /\\ f(x) = 0)
+  forall f m n. nproduct(m..n) f = 0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = 0
+  forall f s. FINITE s\n         ==> nproduct s (\\i. if i IN s then f i else 1) = nproduct s f
+  forall P s f. nproduct {i:A | i IN s /\\ P i} f =\n           nproduct s (\\i. if P i then f i else 1)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> f(x) <= g(x))\n         ==> nproduct s f <= nproduct s g
+  forall f m n. (forall i. m <= i /\\ i <= n ==> f(i) <= g(i))\n           ==> nproduct(m..n) f <= nproduct(m..n) g
+  forall f s. (forall x:A. x IN s ==> f(x) = 1) ==> nproduct s f = 1
+  forall f m n. (forall i. m <= i /\\ i <= n ==> f(i) = 1) ==> nproduct(m..n) f = 1
+  forall f g s.\n       FINITE {x | x IN s /\\ ~(f x = 1)} /\\ FINITE {x | x IN s /\\ ~(g x = 1)}\n       ==> nproduct s (\\x. f x * g x) = nproduct s f * nproduct s g
+  forall f g s. FINITE s\n           ==> nproduct s (\\x. f x * g x) = nproduct s f * nproduct s g
+  forall f g m n.\n     nproduct(m..n) (\\x. f x * g x) = nproduct(m..n) f * nproduct(m..n) g
+  forall c s. FINITE s ==> nproduct s (\\x. c) = c EXP (CARD s)
+  forall c m n. nproduct (m..n) (\\x. c) = c EXP ((n + 1) - m)
+  forall c n. nproduct(1..n) (\\x. c) = c EXP n
+  forall s. nproduct s (\\n. 1) = 1
   P:num->bool
-  !P f:A->num s.\n        P(1) /\\ (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
+  forall P f:A->num s.\n        P(1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
   R:num->num->bool
-  !R (f:A->num) g s.\n        R 1 1 /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
+  forall R (f:A->num) g s.\n        R 1 1 /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
   P:num->bool
-  !P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
+  forall P f:A->num s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(nproduct s f)
   R:num->num->bool
-  !R (f:A->num) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
+  forall R (f:A->num) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (nproduct s f) (nproduct s g)
   s:A->bool
   g:A->num
   f:A->num
   \\x y:num. (x == y) (mod n)
-  !n f g s:A->bool.\n         FINITE s /\\ (!x. x IN s ==> (f x == g x) (mod n))\n         ==> (nproduct s f == nproduct s g) (mod n)
-  !f m n. m <= n ==> nproduct(m..n) f = f(m) * nproduct(m+1..n) f
-  !f m n. 0 < n /\\ m <= n ==> nproduct(m..n) f = nproduct(m..n-1) f * f(n)
-  !f:A->num u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> f(x) = 1)\n        ==> nproduct v f = nproduct u f
-  !f:A->num s.\n        support ( * ) f (:A) SUBSET s ==> nproduct s f = nproduct (:A) f
-  !f m n. nproduct(2*m..2*n+1) f = nproduct(m..n) (\\i. f(2*i) * f(2*i+1))
-  !x m n. nproduct(m..n) x =\n           if n < m then 1 else nproduct(0..n-m) (\\i. x(n - i))
-  !f s a. FINITE s /\\ a IN s\n           ==> f(a) * nproduct(s DELETE a) f = nproduct s f
+  forall n f g s:A->bool.\n         FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n         ==> (nproduct s f == nproduct s g) (mod n)
+  forall f m n. m <= n ==> nproduct(m..n) f = f(m) * nproduct(m+1..n) f
+  forall f m n. 0 < n /\\ m <= n ==> nproduct(m..n) f = nproduct(m..n-1) f * f(n)
+  forall f:A->num u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f(x) = 1)\n        ==> nproduct v f = nproduct u f
+  forall f:A->num s.\n        support ( * ) f (:A) SUBSET s ==> nproduct s f = nproduct (:A) f
+  forall f m n. nproduct(2*m..2*n+1) f = nproduct(m..n) (\\i. f(2*i) * f(2*i+1))
+  forall x m n. nproduct(m..n) x =\n           if n < m then 1 else nproduct(0..n-m) (\\i. x(n - i))
+  forall f s a. FINITE s /\\ a IN s\n           ==> f(a) * nproduct(s DELETE a) f = nproduct s f
   1 <= SUC n
-  !n. nproduct(1..n) (\\m. m) = FACT n
-  !s a. nproduct s (\\x. if x = a then b else 1) =\n         (if a IN s then b else 1)
-  !m n s:A->bool.\n        FINITE s ==> m EXP (nsum s n) = nproduct s (\\i. m EXP n i)
+  forall n. nproduct(1..n) (\\m. m) = FACT n
+  forall s a. nproduct s (\\x. if x = a then b else 1) =\n         (if a IN s then b else 1)
+  forall m n s:A->bool.\n        FINITE s ==> m EXP (nsum s n) = nproduct s (\\i. m EXP n i)
   1 <= SUC n
   (n:num) < i
   i:num
@@ -5712,133 +5712,133 @@ Library/products quotations (197):
   (lambda i. if i = SUC n then @x. F else (v:A^N)$i):A^N
   (v:A^N)$(SUC n)
   v:A^N
-  IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (!i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (!i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}
-  !t. t = s /\\ t HAS_SIZE n ==> s HAS_SIZE n
-  {v | !i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}
+  IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (forall i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}
+  forall t. t = s /\\ t HAS_SIZE n ==> s HAS_SIZE n
+  {v | forall i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}
   1 <= i /\\ i <= n /\\ 0 < i <=> 1 <= i /\\ i <= n
   1 <= i /\\ i <= n /\\ i <= 0 <=> F
   dimindex(:N)
-  !n. n <= dimindex(:N)\n        ==> {v:A^N | (!i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                          ==> P i (v$i)) /\\\n                     (!i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                          ==> v$i = @x. F)}\n            HAS_SIZE nproduct(1..n) m
-  !P m. (!i. 1 <= i /\\ i <= dimindex(:N) ==> {x | P i x} HAS_SIZE m i)\n         ==> {v:A^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}\n             HAS_SIZE nproduct (1..dimindex(:N)) m
+  forall n. n <= dimindex(:N)\n        ==> {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                          ==> P i (v$i)) /\\\n                     (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                          ==> v$i = @x. F)}\n            HAS_SIZE nproduct(1..n) m
+  forall P m. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> {x | P i x} HAS_SIZE m i)\n         ==> {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}\n             HAS_SIZE nproduct (1..dimindex(:N)) m
   s HAS_SIZE n ==> CARD s = n
-  !P. (!i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> CARD {v:A^N | !i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)} =\n           nproduct (1..dimindex(:N)) (\\i. CARD {x | P i x})
-  (!f g s.   (!x. x IN s ==> f(x) = g(x))\n                ==> nproduct s (\\i. f(i)) = nproduct s g) /\\\n     (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> nproduct(a..b) (\\i. f(i)) = nproduct(a..b) g) /\\\n     (!f g p.   (!x. p x ==> f x = g x)\n                ==> nproduct {y | p y} (\\i. f(i)) = nproduct {y | p y} g)
-  !f s. iproduct (support ( * ) f s) f = iproduct s f
-  !f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (iproduct (s UNION t) f = iproduct s f * iproduct t f)
-  !f g s. (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (iproduct (IMAGE f s) g = iproduct s (g o f))
-  !f p s. FINITE s /\\\n           (!x. x IN s ==> p x IN s) /\\\n           (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> iproduct s (f o p) = iproduct s f
+  forall P. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> CARD {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)} =\n           nproduct (1..dimindex(:N)) (\\i. CARD {x | P i x})
+  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n                ==> nproduct s (\\i. f(i)) = nproduct s g) /\\\n     (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> nproduct(a..b) (\\i. f(i)) = nproduct(a..b) g) /\\\n     (forall f g p.   (forall x. p x ==> f x = g x)\n                ==> nproduct {y | p y} (\\i. f(i)) = nproduct {y | p y} g)
+  forall f s. iproduct (support ( * ) f s) f = iproduct s f
+  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (iproduct (s UNION t) f = iproduct s f * iproduct t f)
+  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (iproduct (IMAGE f s) g = iproduct s (g o f))
+  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> iproduct s (f o p) = iproduct s f
   x < x + 1
-  !f m n p.\n        m <= n + 1\n        ==> (iproduct (m..(n+p)) f = iproduct(m..n) f * iproduct(n+1..n+p) f)
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f x) ==> &0 <= iproduct s f
-  !f m n. (!x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= iproduct(m..n) f
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 < f x) ==> &0 < iproduct s f
-  !f m n. (!x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < iproduct(m..n) f
-  !f m p. iproduct(m+p..n+p) f = iproduct(m..n) (\\i. f(i + p))
-  !f x. iproduct {x} f = f(x)
-  !f n. iproduct(n..n) f = f(n)
+  forall f m n p.\n        m <= n + 1\n        ==> (iproduct (m..(n+p)) f = iproduct(m..n) f * iproduct(n+1..n+p) f)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x) ==> &0 <= iproduct s f
+  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= iproduct(m..n) f
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 < f x) ==> &0 < iproduct s f
+  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < iproduct(m..n) f
+  forall f m p. iproduct(m+p..n+p) f = iproduct(m..n) (\\i. f(i + p))
+  forall f x. iproduct {x} f = f(x)
+  forall f n. iproduct(n..n) f = f(n)
   ~(SUC n <= n)
-  (!m. iproduct(m..0) f = if m = 0 then f(0) else &1) /\\\n   (!m n. iproduct(m..SUC n) f = if m <= SUC n then iproduct(m..n) f * f(SUC n)\n                                else iproduct(m..n) f)
-  !f g s. (!x. x IN s ==> (f x = g x)) ==> iproduct s f = iproduct s g
-  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (iproduct(m..n) f = iproduct(m..n) g)
-  !f s. FINITE s ==> (iproduct s f = &0 <=> ?x. x IN s /\\ f(x) = &0)
-  !f m n. iproduct(m..n) f = &0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = &0
-  !f s. FINITE s\n         ==> iproduct s (\\i. if i IN s then f i else &1) = iproduct s f
-  !P s f. iproduct {i:A | i IN s /\\ P i} f =\n           iproduct s (\\i. if P i then f i else &1)
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f(x) /\\ f(x) <= g(x))\n         ==> iproduct s f <= iproduct s g
-  !f m n. (!i. m <= i /\\ i <= n ==> &0 <= f(i) /\\ f(i) <= g(i))\n           ==> iproduct(m..n) f <= iproduct(m..n) g
-  !f s. (!x:A. x IN s ==> (f(x) = &1)) ==> (iproduct s f = &1)
-  !f m n. (!i. m <= i /\\ i <= n ==> (f(i) = &1)) ==> (iproduct(m..n) f = &1)
-  !f g s.\n       FINITE {x | x IN s /\\ ~(f x = &1)} /\\ FINITE {x | x IN s /\\ ~(g x = &1)}\n       ==> iproduct s (\\x. f x * g x) = iproduct s f * iproduct s g
-  !f g s. FINITE s\n           ==> iproduct s (\\x. f x * g x) = iproduct s f * iproduct s g
-  !f g m n.\n     iproduct(m..n) (\\x. f x * g x) = iproduct(m..n) f * iproduct(m..n) g
-  !c s. FINITE s ==> iproduct s (\\x. c) = c pow (CARD s)
-  !c m n. iproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
-  !c n. iproduct(1..n) (\\x. c) = c pow n
-  !f s:A->bool.\n     FINITE s\n     ==> iproduct s (\\i. --(f i)) = --(&1) pow (CARD s) * iproduct s f
-  !f m n. iproduct(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * iproduct(m..n) f
-  !f n. iproduct(1..n) (\\i. --(f i)) = --(&1) pow n * iproduct(1..n) f
-  !s. iproduct s (\\n. &1) = &1
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> iproduct s f <= &1
-  !f s. FINITE s ==> iproduct s (\\x. abs(f x)) = abs(iproduct s f)
+  (forall m. iproduct(m..0) f = if m = 0 then f(0) else &1) /\\\n   (forall m n. iproduct(m..SUC n) f = if m <= SUC n then iproduct(m..n) f * f(SUC n)\n                                else iproduct(m..n) f)
+  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> iproduct s f = iproduct s g
+  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (iproduct(m..n) f = iproduct(m..n) g)
+  forall f s. FINITE s ==> (iproduct s f = &0 <=> ?x. x IN s /\\ f(x) = &0)
+  forall f m n. iproduct(m..n) f = &0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = &0
+  forall f s. FINITE s\n         ==> iproduct s (\\i. if i IN s then f i else &1) = iproduct s f
+  forall P s f. iproduct {i:A | i IN s /\\ P i} f =\n           iproduct s (\\i. if P i then f i else &1)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f(x) /\\ f(x) <= g(x))\n         ==> iproduct s f <= iproduct s g
+  forall f m n. (forall i. m <= i /\\ i <= n ==> &0 <= f(i) /\\ f(i) <= g(i))\n           ==> iproduct(m..n) f <= iproduct(m..n) g
+  forall f s. (forall x:A. x IN s ==> (f(x) = &1)) ==> (iproduct s f = &1)
+  forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = &1)) ==> (iproduct(m..n) f = &1)
+  forall f g s.\n       FINITE {x | x IN s /\\ ~(f x = &1)} /\\ FINITE {x | x IN s /\\ ~(g x = &1)}\n       ==> iproduct s (\\x. f x * g x) = iproduct s f * iproduct s g
+  forall f g s. FINITE s\n           ==> iproduct s (\\x. f x * g x) = iproduct s f * iproduct s g
+  forall f g m n.\n     iproduct(m..n) (\\x. f x * g x) = iproduct(m..n) f * iproduct(m..n) g
+  forall c s. FINITE s ==> iproduct s (\\x. c) = c pow (CARD s)
+  forall c m n. iproduct (m..n) (\\x. c) = c pow ((n + 1) - m)
+  forall c n. iproduct(1..n) (\\x. c) = c pow n
+  forall f s:A->bool.\n     FINITE s\n     ==> iproduct s (\\i. --(f i)) = --(&1) pow (CARD s) * iproduct s f
+  forall f m n. iproduct(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * iproduct(m..n) f
+  forall f n. iproduct(1..n) (\\i. --(f i)) = --(&1) pow n * iproduct(1..n) f
+  forall s. iproduct s (\\n. &1) = &1
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> iproduct s f <= &1
+  forall f s. FINITE s ==> iproduct s (\\x. abs(f x)) = abs(iproduct s f)
   P:int->bool
-  !P f:A->int s.\n        P(&1) /\\ (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
+  forall P f:A->int s.\n        P(&1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
   R:int->int->bool
-  !R (f:A->int) g s.\n        R (&1) (&1) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
+  forall R (f:A->int) g s.\n        R (&1) (&1) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
   P:int->bool
-  !P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
+  forall P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(iproduct s f)
   R:int->int->bool
-  !R (f:A->int) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
-  !f m n. m <= n ==> iproduct(m..n) f = f(m) * iproduct(m+1..n) f
-  !f m n. 0 < n /\\ m <= n ==> iproduct(m..n) f = iproduct(m..n-1) f * f(n)
-  !f:A->num s. FINITE s ==> &(nproduct s f) = iproduct s (\\x. &(f x))
-  !f:A->int u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> f(x) = &1)\n        ==> iproduct v f = iproduct u f
-  !f:A->int s.\n        support ( * ) f (:A) SUBSET s ==> iproduct s f = iproduct (:A) f
-  !f m n. iproduct(2*m..2*n+1) f = iproduct(m..n) (\\i. f(2*i) * f(2*i+1))
-  !x m n. iproduct(m..n) x =\n           if n < m then &1 else iproduct(0..n-m) (\\i. x(n - i))
-  !f s a.\n    FINITE s /\\ a IN s ==> f(a) * iproduct(s DELETE a) f = iproduct s f
-  !s a. iproduct s (\\x. if x = a then b else &1) =\n         (if a IN s then b else &1)
-  !x n s:A->bool.\n        FINITE s ==> x pow (nsum s n) = iproduct s (\\i. x pow n i)
-  (!f g s.   (!x. x IN s ==> f(x) = g(x))\n                ==> iproduct s (\\i. f(i)) = iproduct s g) /\\\n     (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> iproduct(a..b) (\\i. f(i)) = iproduct(a..b) g) /\\\n     (!f g p.   (!x. p x ==> f x = g x)\n                ==> iproduct {y | p y} (\\i. f(i)) = iproduct {y | p y} g)
-  !f s. product (support ( * ) f s) f = product s f
-  !f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (product (s UNION t) f = product s f * product t f)
-  !f g s. (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (product (IMAGE f s) g = product s (g o f))
-  !f p s. FINITE s /\\\n           (!x. x IN s ==> p x IN s) /\\\n           (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> product s (f o p) = product s f
+  forall R (f:A->int) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (iproduct s f) (iproduct s g)
+  forall f m n. m <= n ==> iproduct(m..n) f = f(m) * iproduct(m+1..n) f
+  forall f m n. 0 < n /\\ m <= n ==> iproduct(m..n) f = iproduct(m..n-1) f * f(n)
+  forall f:A->num s. FINITE s ==> &(nproduct s f) = iproduct s (\\x. &(f x))
+  forall f:A->int u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f(x) = &1)\n        ==> iproduct v f = iproduct u f
+  forall f:A->int s.\n        support ( * ) f (:A) SUBSET s ==> iproduct s f = iproduct (:A) f
+  forall f m n. iproduct(2*m..2*n+1) f = iproduct(m..n) (\\i. f(2*i) * f(2*i+1))
+  forall x m n. iproduct(m..n) x =\n           if n < m then &1 else iproduct(0..n-m) (\\i. x(n - i))
+  forall f s a.\n    FINITE s /\\ a IN s ==> f(a) * iproduct(s DELETE a) f = iproduct s f
+  forall s a. iproduct s (\\x. if x = a then b else &1) =\n         (if a IN s then b else &1)
+  forall x n s:A->bool.\n        FINITE s ==> x pow (nsum s n) = iproduct s (\\i. x pow n i)
+  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n                ==> iproduct s (\\i. f(i)) = iproduct s g) /\\\n     (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> iproduct(a..b) (\\i. f(i)) = iproduct(a..b) g) /\\\n     (forall f g p.   (forall x. p x ==> f x = g x)\n                ==> iproduct {y | p y} (\\i. f(i)) = iproduct {y | p y} g)
+  forall f s. product (support ( * ) f s) f = product s f
+  forall f s t. FINITE s /\\ FINITE t /\\ DISJOINT s t\n           ==> (product (s UNION t) f = product s f * product t f)
+  forall f g s. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n           ==> (product (IMAGE f s) g = product s (g o f))
+  forall f p s. FINITE s /\\\n           (forall x. x IN s ==> p x IN s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n           ==> product s (f o p) = product s f
   x < x + 1
-  !f m n p.\n        m <= n + 1\n        ==> (product (m..(n+p)) f = product(m..n) f * product(n+1..n+p) f)
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f x) ==> &0 <= product s f
-  !f m n. (!x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= product(m..n) f
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 < f x) ==> &0 < product s f
-  !f m n. (!x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < product(m..n) f
-  !f m p. product(m+p..n+p) f = product(m..n) (\\i. f(i + p))
-  !f x. product {x} f = f(x)
-  !f n. product(n..n) f = f(n)
+  forall f m n p.\n        m <= n + 1\n        ==> (product (m..(n+p)) f = product(m..n) f * product(n+1..n+p) f)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x) ==> &0 <= product s f
+  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 <= f x) ==> &0 <= product(m..n) f
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 < f x) ==> &0 < product s f
+  forall f m n. (forall x. m <= x /\\ x <= n ==> &0 < f x) ==> &0 < product(m..n) f
+  forall f m p. product(m+p..n+p) f = product(m..n) (\\i. f(i + p))
+  forall f x. product {x} f = f(x)
+  forall f n. product(n..n) f = f(n)
   ~(SUC n <= n)
-  (!m. product(m..0) f = if m = 0 then f(0) else &1) /\\\n   (!m n. product(m..SUC n) f = if m <= SUC n then product(m..n) f * f(SUC n)\n                                else product(m..n) f)
-  !f g s. (!x. x IN s ==> (f x = g x)) ==> product s f = product s g
-  !f g m n. (!i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (product(m..n) f = product(m..n) g)
-  !f s. FINITE s ==> (product s f = &0 <=> ?x. x IN s /\\ f(x) = &0)
-  !f m n. product(m..n) f = &0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = &0
-  !f s. FINITE s\n         ==> product s (\\i. if i IN s then f i else &1) = product s f
-  !P s f. product {i:A | i IN s /\\ P i} f =\n           product s (\\i. if P i then f i else &1)
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f(x) /\\ f(x) <= g(x))\n         ==> product s f <= product s g
-  !f m n. (!i. m <= i /\\ i <= n ==> &0 <= f(i) /\\ f(i) <= g(i))\n           ==> product(m..n) f <= product(m..n) g
-  !f s. (!x:A. x IN s ==> (f(x) = &1)) ==> (product s f = &1)
-  !f m n. (!i. m <= i /\\ i <= n ==> (f(i) = &1)) ==> (product(m..n) f = &1)
-  !f g s.\n       FINITE {x | x IN s /\\ ~(f x = &1)} /\\ FINITE {x | x IN s /\\ ~(g x = &1)}\n       ==> product s (\\x. f x * g x) = product s f * product s g
-  !f g s. FINITE s ==> product s (\\x. f x * g x) = product s f * product s g
-  !f g m n.\n     product(m..n) (\\x. f x * g x) = product(m..n) f * product(m..n) g
-  !c s. FINITE s ==> product s (\\x. c) = c pow (CARD s)
-  !c m n. product (m..n) (\\x. c) = c pow ((n + 1) - m)
-  !c n. product(1..n) (\\x. c) = c pow n
-  !f s:A->bool.\n     FINITE s ==> product s (\\i. --(f i)) = --(&1) pow (CARD s) * product s f
-  !f m n. product(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * product(m..n) f
-  !f n. product(1..n) (\\i. --(f i)) = --(&1) pow n * product(1..n) f
-  !f s. FINITE s ==> product s (\\x. inv(f x)) = inv(product s f)
-  !f g s. FINITE s ==> product s (\\x. f x / g x) = product s f / product s g
-  !f g m n.\n         product(m..n) (\\x. f x / g x) = product(m..n) f / product(m..n) g
-  !s. product s (\\n. &1) = &1
-  !f s. FINITE s /\\ (!x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> product s f <= &1
-  !f s. FINITE s ==> product s (\\x. abs(f x)) = abs(product s f)
+  (forall m. product(m..0) f = if m = 0 then f(0) else &1) /\\\n   (forall m n. product(m..SUC n) f = if m <= SUC n then product(m..n) f * f(SUC n)\n                                else product(m..n) f)
+  forall f g s. (forall x. x IN s ==> (f x = g x)) ==> product s f = product s g
+  forall f g m n. (forall i. m <= i /\\ i <= n ==> (f(i) = g(i)))\n             ==> (product(m..n) f = product(m..n) g)
+  forall f s. FINITE s ==> (product s f = &0 <=> ?x. x IN s /\\ f(x) = &0)
+  forall f m n. product(m..n) f = &0 <=> ?x. m <= x /\\ x <= n /\\ f(x) = &0
+  forall f s. FINITE s\n         ==> product s (\\i. if i IN s then f i else &1) = product s f
+  forall P s f. product {i:A | i IN s /\\ P i} f =\n           product s (\\i. if P i then f i else &1)
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f(x) /\\ f(x) <= g(x))\n         ==> product s f <= product s g
+  forall f m n. (forall i. m <= i /\\ i <= n ==> &0 <= f(i) /\\ f(i) <= g(i))\n           ==> product(m..n) f <= product(m..n) g
+  forall f s. (forall x:A. x IN s ==> (f(x) = &1)) ==> (product s f = &1)
+  forall f m n. (forall i. m <= i /\\ i <= n ==> (f(i) = &1)) ==> (product(m..n) f = &1)
+  forall f g s.\n       FINITE {x | x IN s /\\ ~(f x = &1)} /\\ FINITE {x | x IN s /\\ ~(g x = &1)}\n       ==> product s (\\x. f x * g x) = product s f * product s g
+  forall f g s. FINITE s ==> product s (\\x. f x * g x) = product s f * product s g
+  forall f g m n.\n     product(m..n) (\\x. f x * g x) = product(m..n) f * product(m..n) g
+  forall c s. FINITE s ==> product s (\\x. c) = c pow (CARD s)
+  forall c m n. product (m..n) (\\x. c) = c pow ((n + 1) - m)
+  forall c n. product(1..n) (\\x. c) = c pow n
+  forall f s:A->bool.\n     FINITE s ==> product s (\\i. --(f i)) = --(&1) pow (CARD s) * product s f
+  forall f m n. product(m..n) (\\i. --(f i)) =\n           --(&1) pow ((n + 1) - m) * product(m..n) f
+  forall f n. product(1..n) (\\i. --(f i)) = --(&1) pow n * product(1..n) f
+  forall f s. FINITE s ==> product s (\\x. inv(f x)) = inv(product s f)
+  forall f g s. FINITE s ==> product s (\\x. f x / g x) = product s f / product s g
+  forall f g m n.\n         product(m..n) (\\x. f x / g x) = product(m..n) f / product(m..n) g
+  forall s. product s (\\n. &1) = &1
+  forall f s. FINITE s /\\ (forall x. x IN s ==> &0 <= f x /\\ f x <= &1)\n         ==> product s f <= &1
+  forall f s. FINITE s ==> product s (\\x. abs(f x)) = abs(product s f)
   P:real->bool
-  !P f:A->real s.\n        P(&1) /\\ (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(product s f)
+  forall P f:A->real s.\n        P(&1) /\\ (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(product s f)
   R:real->real->bool
-  !R (f:A->real) g s.\n        R (&1) (&1) /\\\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
+  forall R (f:A->real) g s.\n        R (&1) (&1) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
   P:real->bool
-  !P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (!x y. P x /\\ P y ==> P(x * y)) /\\ (!a. a IN s ==> P(f a))\n        ==> P(product s f)
+  forall P f:A->real s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x * y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(product s f)
   R:real->real->bool
-  !R (f:A->real) g s.\n        (!m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (!i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
-  !f m n. m <= n ==> product(m..n) f = f(m) * product(m+1..n) f
-  !f m n. 0 < n /\\ m <= n ==> product(m..n) f = product(m..n-1) f * f(n)
-  !f:A->num s. FINITE s ==> &(nproduct s f) = product s (\\x. &(f x))
-  !f:A->real u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> f(x) = &1)\n        ==> product v f = product u f
-  !f:A->real s.\n        support ( * ) f (:A) SUBSET s ==> product s f = product (:A) f
-  !f m n. product(2*m..2*n+1) f = product(m..n) (\\i. f(2*i) * f(2*i+1))
-  !x m n. product(m..n) x =\n           if n < m then &1 else product(0..n-m) (\\i. x(n - i))
-  !f s a. FINITE s /\\ a IN s ==> f(a) * product(s DELETE a) f = product s f
-  !s a. product s (\\x. if x = a then b else &1) =\n         (if a IN s then b else &1)
-  !x n s:A->bool.\n        FINITE s ==> x pow (nsum s n) = product s (\\i. x pow n i)
-  !s:A->bool p.\n        FINITE s /\\ (!i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. product s (p x))
-  (!f g s.   (!x. x IN s ==> f(x) = g(x))\n                ==> product s (\\i. f(i)) = product s g) /\\\n     (!f g a b. (!i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> product(a..b) (\\i. f(i)) = product(a..b) g) /\\\n     (!f g p.   (!x. p x ==> f x = g x)\n                ==> product {y | p y} (\\i. f(i)) = product {y | p y} g)
+  forall R (f:A->real) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m * m') (n * n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall i. i IN s ==> R (f i) (g i))\n        ==> R (product s f) (product s g)
+  forall f m n. m <= n ==> product(m..n) f = f(m) * product(m+1..n) f
+  forall f m n. 0 < n /\\ m <= n ==> product(m..n) f = product(m..n-1) f * f(n)
+  forall f:A->num s. FINITE s ==> &(nproduct s f) = product s (\\x. &(f x))
+  forall f:A->real u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> f(x) = &1)\n        ==> product v f = product u f
+  forall f:A->real s.\n        support ( * ) f (:A) SUBSET s ==> product s f = product (:A) f
+  forall f m n. product(2*m..2*n+1) f = product(m..n) (\\i. f(2*i) * f(2*i+1))
+  forall x m n. product(m..n) x =\n           if n < m then &1 else product(0..n-m) (\\i. x(n - i))
+  forall f s a. FINITE s /\\ a IN s ==> f(a) * product(s DELETE a) f = product s f
+  forall s a. product s (\\x. if x = a then b else &1) =\n         (if a IN s then b else &1)
+  forall x n s:A->bool.\n        FINITE s ==> x pow (nsum s n) = product s (\\i. x pow n i)
+  forall s:A->bool p.\n        FINITE s /\\ (forall i. i IN s ==> polynomial_function(\\x. p x i))\n        ==> polynomial_function (\\x. product s (p x))
+  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n                ==> product s (\\i. f(i)) = product s g) /\\\n     (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n                ==> product(a..b) (\\i. f(i)) = product(a..b) g) /\\\n     (forall f g p.   (forall x. p x ==> f x = g x)\n                ==> product {y | p y} (\\i. f(i)) = product {y | p y} g)
 NPRODUCT_SUPPORT =  |- (#!:fun(fun(fun('?142951,num),bool),bool) (\f:fun('?142951,num). (#!:fun(fun(fun('?142951,bool),bool),bool) (\s:fun('?142951,bool). ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?142951,bool),fun(fun('?142951,num),num)) (((#support:fun(fun(num,fun(num,num)),fun(fun('?142951,num),fun(fun('?142951,bool),fun('?142951,bool)))) #*:fun(num,fun(num,num))) f:fun('?142951,num)) s:fun('?142951,bool))) f:fun('?142951,num))) ((#nproduct:fun(fun('?142951,bool),fun(fun('?142951,num),num)) s:fun('?142951,bool)) f:fun('?142951,num)))))))
 NPRODUCT_UNION =  |- (#!:fun(fun(fun('?142978,num),bool),bool) (\f:fun('?142978,num). (#!:fun(fun(fun('?142978,bool),bool),bool) (\s:fun('?142978,bool). (#!:fun(fun(fun('?142978,bool),bool),bool) (\t:fun('?142978,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?142978,bool),bool) s:fun('?142978,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?142978,bool),bool) t:fun('?142978,bool))) ((#DISJOINT:fun(fun('?142978,bool),fun(fun('?142978,bool),bool)) s:fun('?142978,bool)) t:fun('?142978,bool))))) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?142978,bool),fun(fun('?142978,num),num)) ((#UNION:fun(fun('?142978,bool),fun(fun('?142978,bool),fun('?142978,bool))) s:fun('?142978,bool)) t:fun('?142978,bool))) f:fun('?142978,num))) ((#*:fun(num,fun(num,num)) ((#nproduct:fun(fun('?142978,bool),fun(fun('?142978,num),num)) s:fun('?142978,bool)) f:fun('?142978,num))) ((#nproduct:fun(fun('?142978,bool),fun(fun('?142978,num),num)) t:fun('?142978,bool)) f:fun('?142978,num)))))))))))
 NPRODUCT_IMAGE =  |- (#!:fun(fun(fun('?143059,'?143035),bool),bool) (\f:fun('?143059,'?143035). (#!:fun(fun(fun('?143035,num),bool),bool) (\g:fun('?143035,num). (#!:fun(fun(fun('?143059,bool),bool),bool) (\s:fun('?143059,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('?143059,bool),bool) (\x:'?143059. (#!:fun(fun('?143059,bool),bool) (\y:'?143059. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?143059,fun(fun('?143059,bool),bool)) x:'?143059) s:fun('?143059,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?143059,fun(fun('?143059,bool),bool)) y:'?143059) s:fun('?143059,bool))) ((#=:fun('?143035,fun('?143035,bool)) (f:fun('?143059,'?143035) x:'?143059)) (f:fun('?143059,'?143035) y:'?143059))))) ((#=:fun('?143059,fun('?143059,bool)) x:'?143059) y:'?143059))))))) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?143035,bool),fun(fun('?143035,num),num)) ((#IMAGE:fun(fun('?143059,'?143035),fun(fun('?143059,bool),fun('?143035,bool))) f:fun('?143059,'?143035)) s:fun('?143059,bool))) g:fun('?143035,num))) ((#nproduct:fun(fun('?143059,bool),fun(fun('?143059,num),num)) s:fun('?143059,bool)) ((#o:fun(fun('?143035,num),fun(fun('?143059,'?143035),fun('?143059,num))) g:fun('?143035,num)) f:fun('?143059,'?143035)))))))))))

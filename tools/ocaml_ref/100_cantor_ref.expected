@@ -5534,29 +5534,29 @@ Warning: inventing type variables
   \\x:A. ~(g x x)
   g:A->(A->bool)
   f:(A->bool)->A
-  ~(?f:(A->bool)->A. (!x y. f(x) = f(y) ==> x = y))
+  ~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))
   \\x:A. ~(g x x)
   f:(A->bool)->A
   g:A->(A->bool)
-  ~(?f:A->(A->bool). !s. ?x. f x = s)
+  ~(?f:A->(A->bool). forall s. ?x. f x = s)
   \\x:A. s(x) /\\ ~(g x x)
   g:A->(A->bool)
   (=):A->A->bool
-  !s:A->bool. s <_c {t | t SUBSET s}
+  forall s:A->bool. s <_c {t | t SUBSET s}
   g:A->A->bool
-  (g:A->A->bool) = \\a. { b | !s. f(s) = a ==> b IN s}
-  ~(?f:(A->bool)->A. (!x y. f(x) = f(y) ==> x = y))
+  (g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}
+  ~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))
   g:A->B = \\a. (n:B->B) (h a a)
-  !h:A->(A->B).\n        (!f:A->B. ?x:A. h(x) = f) ==> !n:B->B. ?x. n(x) = x
+  forall h:A->(A->B).\n        (forall f:A->B. ?x:A. h(x) = f) ==> forall n:B->B. ?x. n(x) = x
   (~)
-  !f:A->(A->bool). ~(!s. ?x. f x = s)
-  \\a:A.  { b:A | !s. f(s) = a ==> b IN s}
-  !f:(A->bool)->A. ~(!x y. f(x) = f(y) ==> x = y)
-  (!y. ?x. f(x) = y) /\\ (!z. ?y. g(y) = z)\n   ==> (!z. ?x. (g o f) x = z)
+  forall f:A->(A->bool). ~(forall s. ?x. f x = s)
+  \\a:A.  { b:A | forall s. f(s) = a ==> b IN s}
+  forall f:(A->bool)->A. ~(forall x y. f(x) = f(y) ==> x = y)
+  (forall y. ?x. f(x) = y) /\\ (forall z. ?y. g(y) = z)\n   ==> (forall z. ?x. (g o f) x = z)
   IMAGE (f:A->B) t
-  !f:A->B. (!x y. f(x) = f(y) ==> x = y) ==> !t. ?s. {x | f(x) IN s} = t
+  forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t
   (IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})
-  !i:B->S f:B->S->bool.\n        ~((!x y. i(x) = i(y) ==> x = y) /\\ (!s. ?z. f(z) = s))
+  forall i:B->S f:B->S->bool.\n        ~((forall x y. i(x) = i(y) ==> x = y) /\\ (forall s. ?z. f(z) = s))
 CANTOR_THM_INJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun(fun('A,bool),'A),bool),bool) (\f:fun(fun('A,bool),'A). (#!:fun(fun(fun('A,bool),bool),bool) (\x:fun('A,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\y:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(fun('A,bool),'A) x:fun('A,bool))) (f:fun(fun('A,bool),'A) y:fun('A,bool)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) x:fun('A,bool)) y:fun('A,bool))))))))))
 CANTOR_THM_SURJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun('A,fun('A,bool)),bool),bool) (\f:fun('A,fun('A,bool)). (#!:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (f:fun('A,fun('A,bool)) x:'A)) s:fun('A,bool)))))))))
 CANTOR_THM_INJ' =  |- (#~:fun(bool,bool) (#?:fun(fun(fun(fun('A,bool),'A),bool),bool) (\f:fun(fun('A,bool),'A). (#!:fun(fun(fun('A,bool),bool),bool) (\x:fun('A,bool). (#!:fun(fun(fun('A,bool),bool),bool) (\y:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(fun('A,bool),'A) x:fun('A,bool))) (f:fun(fun('A,bool),'A) y:fun('A,bool)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) x:fun('A,bool)) y:fun('A,bool))))))))))

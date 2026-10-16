@@ -51768,7 +51768,7 @@ test "EC/nistp224 matches EC/nistp224.ml" {
       #|  group_carrier p224_group =\n     weierstrass_curve\n      (integer_mod_ring p_224,ring_neg (integer_mod_ring p_224) (&3),&b_224) /\\\n   group_id p224_group =\n     NONE /\\\n   group_inv p224_group =\n     weierstrass_neg\n      (integer_mod_ring p_224,ring_neg (integer_mod_ring p_224) (&3),&b_224) /\\\n   group_mul p224_group =\n     weierstrass_add\n      (integer_mod_ring p_224,ring_neg (integer_mod_ring p_224) (&3),&b_224)
       #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
       #|  x:int
-      #|  !x:int. ~((x pow 3 - &3 * x + &b_224 == &0) (mod &p_224))
+      #|  forall x:int. ~((x pow 3 - &3 * x + &b_224 == &0) (mod &p_224))
       #|  G_224 IN group_carrier p224_group
       #|  group_element_order p224_group G_224 = n_224
       #|  FINITE(group_carrier p224_group)
@@ -51783,7 +51783,7 @@ test "EC/nistp224 matches EC/nistp224.ml" {
       #|  G_224:(int#int)option
       #|  group_carrier p224_group HAS_SIZE n_224
       #|  CARD(group_carrier p224_group) = n_224
-      #|  !P. P IN group_carrier p224_group\n       ==> group_element_order p224_group P =\n           if P = group_id p224_group then 1 else n_224
+      #|  forall P. P IN group_carrier p224_group\n       ==> group_element_order p224_group P =\n           if P = group_id p224_group then 1 else n_224
       #|  subgroup_generated p224_group {G_224} = p224_group
       #|  cyclic_group p224_group
       #|  abelian_group p224_group

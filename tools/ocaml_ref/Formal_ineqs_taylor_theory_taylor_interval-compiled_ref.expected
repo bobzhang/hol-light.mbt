@@ -101,17 +101,17 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  nth_differentiable_on n s f <=>\n\t!x. x IN s ==> nth_differentiable n f x
-  nth_differentiable_on_int n int f <=>\n\t!x. interval_arith x int ==> nth_differentiable n f x
-  nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ !i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)
+  nth_differentiable_on n s f <=>\n\tforall x. x IN s ==> nth_differentiable n f x
+  nth_differentiable_on_int n int f <=>\n\tforall x. interval_arith x int ==> nth_differentiable n f x
+  nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ forall i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)
   nth_diff_strong n f x <=> \n\t?s. real_open s /\\ x IN s /\\ nth_differentiable_on n s f
-  nth_diff_strong_int n int f <=>\n\t!x. interval_arith x int ==> nth_diff_strong n f x
+  nth_diff_strong_int n int f <=>\n\tforall x. interval_arith x int ==> nth_diff_strong n f x
   derivative = real_derivative
   derivative f x = d
   (?d. (f has_real_derivative d) (atreal x)) ==>\n\t(f has_real_derivative (derivative f x)) (atreal x)
   f real_differentiable atreal x ==>\n\t(f has_real_derivative (derivative f x)) (atreal x)
   (f has_real_derivative f') (atreal x) ==> derivative f x = f'
-  (!x. x IN s ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(!x. x IN s ==> f' x = derivative f x)
+  (forall x. x IN s ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(forall x. x IN s ==> f' x = derivative f x)
   f' x
   f real_differentiable atreal x /\\\n\tderivative f x = f' ==>\n\t(f has_real_derivative f') (atreal x)
   nth_derivative 0 f = f
@@ -122,14 +122,14 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_derivative 2 f = derivative (derivative f)
   nth_derivative n (nth_derivative m f) = nth_derivative (n + m) f
   nth_differentiable n f x ==>\n\tf real_continuous atreal x
-  nth_differentiable n f x ==>\n   !i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
-  nth_differentiable_on n s f ==>\n !x. x IN s ==> \n  !i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
+  nth_differentiable n f x ==>\n   forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
+  nth_differentiable_on n s f ==>\n forall x. x IN s ==> \n  forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
   nth_derivative (SUC n) f x
-  nth_differentiable n f x <=>\n  f real_continuous atreal x /\\\n  !i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
+  nth_differentiable n f x <=>\n  f real_continuous atreal x /\\\n  forall i. i < n ==> (nth_derivative i f has_real_derivative (nth_derivative (SUC i) f x)) (atreal x)
   2 = SUC 1
   nth_derivative 2 f
   derivative f
-  nth_differentiable_on_int 2 int f ==>\n\t?f' f''. f' = derivative f /\\ f'' = nth_derivative 2 f /\\\n\t\t!x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n\t\t\t\t\t(f' has_real_derivative f'' x) (atreal x)
+  nth_differentiable_on_int 2 int f ==>\n\t?f' f''. f' = derivative f /\\ f'' = nth_derivative 2 f /\\\n\t\tforall x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n\t\t\t\t\t(f' has_real_derivative f'' x) (atreal x)
   2
   2
   2
@@ -225,21 +225,21 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   derivative (\\x. f x * g x) x = f x * derivative g x + derivative f x * g x
   derivative (\\x. f x - g x) x = derivative f x - derivative g x
   ~(g x = &0) ==> \n  derivative (\\x. f x / g x) x = (derivative f x * g x - f x * derivative g x) / (g x * g x)
-  (!i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\t(\\x. sum (n..m) (\\i. G i x)) real_differentiable atreal x
+  (forall i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\t(\\x. sum (n..m) (\\i. G i x)) real_differentiable atreal x
   n = 0
   n <= SUC m
   n = 0
-  (!i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\tderivative (\\x. sum (n..m) (\\i. G i x)) x = sum (n..m) (\\i. derivative (G i) x)
+  (forall i. i IN n..m ==> G i real_differentiable atreal x) ==>\n\tderivative (\\x. sum (n..m) (\\i. G i x)) x = sum (n..m) (\\i. derivative (G i) x)
   n <= SUC m
   &1
-  (g has_real_derivative g') (atreal x) /\\\n\t(?s. real_open s /\\ x IN s /\\ (!y. y IN s ==> f y = g y))\n\t==> (f has_real_derivative g') (atreal x)
+  (g has_real_derivative g') (atreal x) /\\\n\t(?s. real_open s /\\ x IN s /\\ (forall y. y IN s ==> f y = g y))\n\t==> (f has_real_derivative g') (atreal x)
   T
   T
   T
   T
   T
   T
-  g real_differentiable atreal x /\\ real_open s /\\ x IN s /\\\n\t(!y. y IN s ==> f y = g y) ==> f real_differentiable atreal x
+  g real_differentiable atreal x /\\ real_open s /\\ x IN s /\\\n\t(forall y. y IN s ==> f y = g y) ==> f real_differentiable atreal x
   :real->real
   :real->real
   :real#real
@@ -248,11 +248,11 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   s INTER t
   \\y. c * nth_derivative i f y
   s INTER t
-  interval_arith x int ==> i <= n ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t!y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
+  interval_arith x int ==> i <= n ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
   INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-  !i. i <= n:num ==> P i ((@) (P i))
-  \\i s. real_open s /\\ x IN s /\\ \n\t(!y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y)
-  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t!i y. i <= n /\\ y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
+  forall i. i <= n:num ==> P i ((@) (P i))
+  \\i s. real_open s /\\ x IN s /\\ \n\t(forall y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y)
+  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
   (@) (P i)
   interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. c * f x) x = c * nth_derivative i f x
   (\\y. c * nth_derivative i f y)
@@ -262,11 +262,11 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   sf INTER sg INTER t
   (\\y. nth_derivative i f y + nth_derivative i g y)
   sf INTER sg INTER t
-  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      !y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
+  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
   INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-  !i. i <= n:num ==> P i ((@) (P i))
-  \\i s. real_open s /\\ x IN s /\\ \n   (!y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y)
-  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t!i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
+  forall i. i <= n:num ==> P i ((@) (P i))
+  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y)
+  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
   (@) (P i)
   interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x + g x) x = nth_derivative i f x + nth_derivative i g x
   (\\y. nth_derivative i f y + nth_derivative i g y)
@@ -275,11 +275,11 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   sf INTER sg INTER t
   (\\y. nth_derivative i f y - nth_derivative i g y)
   sf INTER sg INTER t
-  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      !y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
+  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
   INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-  !i. i <= n:num ==> P i ((@) (P i))
-  \\i s. real_open s /\\ x IN s /\\ \n   (!y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y)
-  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t!i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
+  forall i. i <= n:num ==> P i ((@) (P i))
+  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y)
+  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
   (@) (P i)
   interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x - g x) x = nth_derivative i f x - nth_derivative i g x
   (\\y. nth_derivative i f y - nth_derivative i g y)
@@ -292,18 +292,18 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   sum (0..i + 1) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (SUC i - k) g y)
   sum (0 + 1..i + 1) (\\k. &(binom (i, k - 1)) * nth_derivative k f y * nth_derivative (SUC i - k) g y)
   sum (0..i) _
-  !k. k IN 0..i ==> \n\t(\\y. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)\n\t\treal_differentiable atreal y
+  forall k. k IN 0..i ==> \n\t(\\y. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)\n\t\treal_differentiable atreal y
   nth_derivative (SUC (i - k)) g y
   nth_derivative (SUC k) f y
-  !k. k IN 0..i ==>\n\tnth_derivative k f real_differentiable atreal y /\\\n\tnth_derivative (i - k) g real_differentiable atreal y
+  forall k. k IN 0..i ==>\n\tnth_derivative k f real_differentiable atreal y /\\\n\tnth_derivative (i - k) g real_differentiable atreal y
   sf INTER sg INTER t
   \\y. sum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
   sf INTER sg INTER t
-  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      !y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
+  interval_arith x int ==> i <= n ==>\n   ?s. real_open s /\\ x IN s /\\ \n      forall y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
   INTERS (IMAGE (\\i. (@) (P i)) (0..n))
-  !i. i <= n:num ==> P i ((@) (P i))
-  \\i s. real_open s /\\ x IN s /\\ \n   (!y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y))
-  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t!i y. i <= n /\\ y IN s ==> \n\t  nth_derivative i (\\y. f y * g y) y = \n\t\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
+  forall i. i <= n:num ==> P i ((@) (P i))
+  \\i s. real_open s /\\ x IN s /\\ \n   (forall y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y))
+  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t  nth_derivative i (\\y. f y * g y) y = \n\t\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
   (@) (P i)
   interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x * g x) x = \n  \t  sum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f x * nth_derivative (i - k) g x)
   nth_derivative (SUC (i - k)) g y
@@ -315,19 +315,19 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   has_bounded_second_derivative f int dd_bounds <=>\n\tnth_diff_strong_int 2 int f /\\ \n\tbounded_on_int (nth_derivative 2 f) int dd_bounds
   taylor_interval f x y z w f_bounds df_bounds ddf_bounds <=>\n\tx <= y /\\ y <= z /\\ y - x <= w /\\ z - y <= w /\\\n\tlin_approx f y f_bounds df_bounds /\\\n\thas_bounded_second_derivative f (x, z) ddf_bounds
   nth_diff_strong_int n int f ==>\n\tnth_differentiable_on_int n int f
-  has_bounded_second_derivative f int dd_bounds ==>\n\t?f' f''. (!x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n       \t\t(f' has_real_derivative f'' x) (atreal x) /\\\tinterval_arith (f'' x) dd_bounds)
+  has_bounded_second_derivative f int dd_bounds ==>\n\t?f' f''. (forall x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n       \t\t(f' has_real_derivative f'' x) (atreal x) /\\\tinterval_arith (f'' x) dd_bounds)
   (?x. P x /\\ Q x) ==> (?x. P x)
   (a - b) / &2
-  (!e. &0 < e ==> a <= b + e) <=> (a <= b)
+  (forall e. &0 < e ==> a <= b + e) <=> (a <= b)
   a + min (b - a) d / &2
-  (?b. a < b /\\ !x. x IN real_interval (a, b) ==> f x <= c) /\\\n\tf real_continuous atreal a ==> f a <= c
+  (?b. a < b /\\ forall x. x IN real_interval (a, b) ==> f x <= c) /\\\n\tf real_continuous atreal a ==> f a <= c
   f real_continuous atreal x <=>\n\t(\\x. f (--x)) real_continuous atreal (--x)
   --y
   --a
-  !x. f x = g (--x)
+  forall x. f x = g (--x)
   \\x. f (--x)
-  !a b. a <= b <=> (a = b \\/ a < b)
-  a < b ==> f real_continuous atreal a ==> f real_continuous atreal b ==>\n\t(!x. x IN real_interval (a, b) ==> f x <= c) ==>\n\t(!x. x IN real_interval [a, b] ==> f x <= c)
+  forall a b. a <= b <=> (a = b \\/ a < b)
+  a < b ==> f real_continuous atreal a ==> f real_continuous atreal b ==>\n\t(forall x. x IN real_interval (a, b) ==> f x <= c) ==>\n\t(forall x. x IN real_interval [a, b] ==> f x <= c)
   --y
   p = (FST p, SND p)
   interval_arith a (lo, hi) ==> iabs (lo, hi) = max (abs lo) (abs hi)
@@ -344,7 +344,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   dd_bound = iabs ddf_bounds
   taylor_interval f x y z w f_bounds df_bounds ddf_bounds
   f' t
-  !t. t IN real_interval [x, z] ==> f real_continuous atreal t
+  forall t. t IN real_interval [x, z] ==> f real_continuous atreal t
   FACT 1 = 1 /\\ FACT (1 + 1) = 2
   0 <= 1 /\\ ~(1 = 0)
   i <= 1 <=> i = 0 \\/ i = 1
@@ -352,12 +352,12 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   \\i. if i = 0 then f else if i = 1 then f' else if i = 2 then f'' else I
   1 + 1 = 2
   ff = f' y
-  !a b. a - b = (a - (b + b1)) + b1
+  forall a b. a - b = (a - (b + b1)) + b1
   abs (f t - (f y + b1)) + abs b1
   dd_bound * _
   f' y * _
   abs (f t - (f y + f' y * (t - y) pow 1)) <= dd_bound * abs (t - y) pow (1 + 1) / &2
-  &0 <= dd_bound /\\ !p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
+  &0 <= dd_bound /\\ forall p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
   interval_arith y (x, z)
   abs (t - y) <= w
   x <= t /\\ t <= z ==> \n\tabs (f t - f y) <= w * iabs df_bounds + w * w * dd_bound / &2
@@ -414,17 +414,17 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  !t. x <= t /\\ t <= z ==>\n\tf t <= SND f_bounds + (w * iabs df_bounds + w * w * dd_bound / &2)
-  !t. x <= t /\\ t <= z ==>\n\tFST f_bounds - (w * iabs df_bounds + w * w * dd_bound / &2) <= f t
+  forall t. x <= t /\\ t <= z ==>\n\tf t <= SND f_bounds + (w * iabs df_bounds + w * w * dd_bound / &2)
+  forall t. x <= t /\\ t <= z ==>\n\tFST f_bounds - (w * iabs df_bounds + w * w * dd_bound / &2) <= f t
   dd_bound * abs (t - y)
   FACT 1 = 1
   i <= 0 <=> i = 0
   0 + 1 = 1 /\\ ~(1 = 0) /\\ 1 + 1 = 2 /\\ \n\t~(2 = 1) /\\ ~(2 = 1) /\\ ~(2 = 0)
   \\i. if i = 0 then f' else if i = 1 then f'' else I
-  &0 <= dd_bound /\\ !p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
-  !p. x <= p /\\ p <= z ==> derivative f p = f' p
+  &0 <= dd_bound /\\ forall p. p IN real_interval [x, z] ==> abs (f'' p) <= dd_bound
+  forall p. x <= p /\\ p <= z ==> derivative f p = f' p
   abs (t - y) <= w
-  !t. x <= t /\\ t <= z ==> \n\tabs (derivative f t - derivative f y) <= w * dd_bound
+  forall t. x <= t /\\ t <= z ==> \n\tabs (derivative f t - derivative f y) <= w * dd_bound
   0
   real_interval [x, z]
   ~P <=> (P <=> F)
@@ -461,8 +461,8 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   ~P <=> (P <=> F)
   derivative f y = g
   FST df_bounds <= derivative f y /\\ derivative f y <= SND df_bounds
-  !t. x <= t /\\ t <= z ==>\n\tderivative f t <= SND df_bounds + w * dd_bound
-  !t. x <= t /\\ t <= z ==>\n\tFST df_bounds - w * dd_bound <= derivative f t
+  forall t. x <= t /\\ t <= z ==>\n\tderivative f t <= SND df_bounds + w * dd_bound
+  forall t. x <= t /\\ t <= z ==>\n\tFST df_bounds - w * dd_bound <= derivative f t
   :real->real
   :real#real
   :real#real
@@ -535,10 +535,10 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   :real#real
   derivative f y
   i < 2 <=> i = 0 \\/ i = 1
-  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\t!y. y IN s ==> (f has_real_derivative derivative f y) (atreal y) /\\\n\t(derivative f has_real_derivative nth_derivative 2 f y) (atreal y)
+  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> (f has_real_derivative derivative f y) (atreal y) /\\\n\t(derivative f has_real_derivative nth_derivative 2 f y) (atreal y)
   1
   0
-  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\t!y. y IN s ==> f real_differentiable atreal y /\\ derivative f real_differentiable atreal y
+  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> f real_differentiable atreal y /\\ derivative f real_differentiable atreal y
   f real_differentiable atreal (g y)
   nth_diff_strong_int 2 g_bounds f ==>\n\t  g real_differentiable atreal y ==>\n\t  interval_arith (g y) g_bounds ==>\n\t  bounded_on_int f g_bounds f_bounds ==>\n\t  interval_arith (derivative g y * derivative f (g y)) d_bounds ==>\n\t  lin_approx (\\x. f (g x)) y f_bounds d_bounds
   \\x. &1
@@ -582,7 +582,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   (:real)
   nth_diff_strong 2 exp x
   real_interval (x - abs x, x + abs x)
-  !a. -- &1 * a = --a
+  forall a. -- &1 * a = --a
   &0 < x ==> ~(x = &0)
   ((\\x. inv x) has_real_derivative f) (atreal x)
   (\\x. inv x)
@@ -593,7 +593,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   real_interval (x - abs x, x + abs x)
   &0 < x ==> nth_diff_strong 2 log x
   real_interval (x - abs x, x + abs x)
-  !a. (&2 * x) * inv x * a = &2 * (x * inv x) * a
+  forall a. (&2 * x) * inv x * a = &2 * (x * inv x) * a
   (x * x) pow 2 = x * x pow 3
   ((\\x. -- inv(x * x)) has_real_derivative f) (atreal x)
   (\\x. -- inv (x * x))
@@ -620,7 +620,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   real_interval (x - e, x + e)
   &1 - abs x
   SUC 2 = 3
-  !a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
+  forall a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
   &1 - x * x = (&1 - x) * (&1 + x)
   &0 < &1 - x * x
   &0 < &1 - x * x /\\ ~(sqrt(&1 - x * x) = &0)
@@ -643,7 +643,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   real_interval (x - e, x + e)
   &1 - abs x
   SUC 2 = 3
-  !a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
+  forall a. (&2 * x) * inv (&2) * a = (&2 * inv (&2)) * x * a
   &1 - x * x = (&1 - x) * (&1 + x)
   &0 < &1 - x * x
   &0 < &1 - x * x /\\ ~(sqrt(&1 - x * x) = &0)
@@ -690,13 +690,13 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_diff_strong 2 g x ==> nth_diff_strong 2 f (g x) ==>\n\tnth_diff_strong 2 (\\x. f (g x)) x
   derivative f
   real_interval (x - d, x + d)
-  ~(f x = &0) ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ !y. y IN s ==> ~(f y = &0)
+  ~(f x = &0) ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> ~(f y = &0)
   abs (f x)
   real_interval (x - d, x + d)
-  a < f x ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ !y. y IN s ==> a < f y
+  a < f x ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> a < f y
   f x - a
   real_interval (x - d, x + d)
-  f x < a ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ !y. y IN s ==> f y < a
+  f x < a ==> f real_continuous atreal x ==>\n\t?s. real_open s /\\ x IN s /\\ forall y. y IN s ==> f y < a
   a - f x
   :real->real
   :real
@@ -710,7 +710,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_derivative 2 (\\x. f x pow 2) x =\n\t\t &2 * (nth_derivative 2 f x * f x + derivative f x pow 2)
   3 - 1 = 2 /\\ 3 - 2 = 1
   nth_derivative 2 (\\x. f x pow 3) x =\n\t\t &3 * (nth_derivative 2 f x * f x pow 2 + &2 * f x * derivative f x pow 2)
-  !a b c d. a * b * c * d = a * (b * c) * d
+  forall a b c d. a * b * c * d = a * (b * c) * d
   _1 * _2 pow 2
   lhs1 = rhs1 /\\ lhs2 = rhs2 ==> lhs1 - lhs2 = rhs1 - rhs2
   _1 * _2
@@ -723,34 +723,34 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_derivative 2 (\\x. sin (f x)) x = \n\tnth_derivative 2 f x * cos (f x) - sin (f x) * derivative f x pow 2
   nth_derivative 2 (\\x. exp (f x)) x = \n\tnth_derivative 2 f x * exp (f x) + exp (f x) * derivative f x pow 2
   &0 < f x ==>\n\tnth_derivative 2 (\\x. log (f x)) x =\n\tnth_derivative 2 f x / f x - (derivative f x / f x) pow 2
-  !a b c d. (a * b) * c * d = a * (b * c) * d
+  forall a b c d. (a * b) * c * d = a * (b * c) * d
   3 = SUC 2
-  !a b c d. a = c /\\ b = d ==> a - b = c - d
+  forall a b c d. a = c /\\ b = d ==> a - b = c - d
   ~(f x = &0) ==>\n\tnth_derivative 2 (\\x. inv (f x)) x =\n\t(&2 * derivative f x pow 2 - nth_derivative 2 f x * f x) / (f x pow 3)
-  !a b c d. (&2 * a * b) * inv (&4) * c * d = (inv (&2) * c) * a * (b * d)
+  forall a b c d. (&2 * a * b) * inv (&4) * c * d = (inv (&2) * c) * a * (b * d)
   3 = SUC 2
   sqrt (f x pow 3) = sqrt (f x) * f x
-  !a b c d. a = c /\\ b = d ==> a - b = c - d
+  forall a b c d. a = c /\\ b = d ==> a - b = c - d
   &0 < f x ==>\n\tnth_derivative 2 (\\x. sqrt (f x)) x =\n\t(&2 * nth_derivative 2 f x * f x - derivative f x pow 2) / (&4 * sqrt (f x pow 3))
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  !a b c d. (a * b) * c * d = c * a * (b * d)
+  forall a b c d. (a * b) * c * d = c * a * (b * d)
   3 = SUC 2
   sqrt (y pow 3) = sqrt y * y
-  !a. &1 - a * a = (&1 - a) * (&1 + a)
+  forall a. &1 - a * a = (&1 - a) * (&1 + a)
   &0 <= y /\\ &0 < y /\\ ~(y = &0)
   &1 - f x * f x
-  !a b c d. a = c /\\ b = d ==> a + b = c + d
+  forall a b c d. a = c /\\ b = d ==> a + b = c + d
   abs (f x) < &1 ==>\n\tnth_derivative 2 (\\x. acs (f x)) x =\n\t-- ((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) / \n\tsqrt ((&1 - f x * f x) pow 3))
-  !a b c d. (a * b) * c * d = c * a * (b * d)
+  forall a b c d. (a * b) * c * d = c * a * (b * d)
   3 = SUC 2
   sqrt (y pow 3) = sqrt y * y
-  !a. &1 - a * a = (&1 - a) * (&1 + a)
+  forall a. &1 - a * a = (&1 - a) * (&1 + a)
   &0 <= y /\\ &0 < y /\\ ~(y = &0)
   &1 - f x * f x
-  !a b c d. a = c /\\ b = d ==> a + b = c + d
+  forall a b c d. a = c /\\ b = d ==> a + b = c + d
   abs (f x) < &1 ==>\n\tnth_derivative 2 (\\x. asn (f x)) x =\n\t((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) / \n\tsqrt ((&1 - f x * f x) pow 3))
   -- &1 < f x ==>\n\tnth_derivative 2 (\\x. matan (f x)) x =\n\tnth_derivative 2 f x * dmatan (f x) + derivative f x pow 2 * ddmatan (f x)
   &0 < f x ==> nth_diff_strong 2 (\\x. abs (f x)) x
@@ -769,7 +769,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   abs (f x) < &1 ==> nth_diff_strong 2 (\\x. asn (f x)) x
   -- &1 < f x ==> nth_diff_strong 2 (\\x. matan (f x)) x
   2 - 1 = 1
-  !n. 0 <= SUC n
+  forall n. 0 <= SUC n
   interval_arith x int /\\ nth_diff_strong_int 2 int f /\\ nth_diff_strong_int 2 int g
   (x,x)
   nth_diff_strong 2 f x ==>\n  nth_diff_strong 2 g x ==>\n  nth_derivative 2 (\\x. f x * g x) x =\n  f x * nth_derivative 2 g x + &2 * derivative f x * derivative g x + nth_derivative 2 f x * g x
@@ -777,7 +777,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   g x * inv (g x pow 2) = inv (g x)
   3 = SUC 2
   g x * inv (g x pow 3) = inv (g x pow 2)
-  !f g x. ((ddf * g x - f x * ddg) * g x - &2 * dg * (df * g x - f x * dg)) * \n\t\t\t\t\t\tinv (g x pow 3) =\n\t\t\tf x * (&2 * dg pow 2 - ddg * g x) * inv (g x pow 3) +\n\t\t\t&2 * df * --(g x * inv (g x pow 3)) * dg +\n\t\t\tddf * (g x * g x * inv (g x pow 3))
+  forall f g x. ((ddf * g x - f x * ddg) * g x - &2 * dg * (df * g x - f x * dg)) * \n\t\t\t\t\t\tinv (g x pow 3) =\n\t\t\tf x * (&2 * dg pow 2 - ddg * g x) * inv (g x pow 3) +\n\t\t\t&2 * df * --(g x * inv (g x pow 3)) * dg +\n\t\t\tddf * (g x * g x * inv (g x pow 3))
   _1 + _2
   nth_derivative 2 f x
   nth_derivative 2 g x
@@ -805,10 +805,10 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_diff_strong_int 2 int g ==>\n\tbounded_on_int g int g_bounds ==>\n\tnth_diff_strong_int 2 g_bounds f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f (g x) * derivative g x pow 2 + \n\t\t\tderivative f (g x) * nth_derivative 2 g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f (g x)) int dd_bounds
   interval_pos int ==>\n\tbounded_on_int (\\x. &0) int dd_bounds ==>\n\thas_bounded_second_derivative abs int dd_bounds
   interval_neg int ==>\n\tbounded_on_int (\\x. &0) int dd_bounds ==>\n\thas_bounded_second_derivative abs int dd_bounds
-  !x. interval_arith x int ==> &0 < f x
+  forall x. interval_arith x int ==> &0 < f x
   bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. abs (f x)) int dd_bounds
   f x
-  !x. interval_arith x int ==> f x < &0
+  forall x. interval_arith x int ==> f x < &0
   bounded_on_int f int f_bounds ==> interval_neg f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. --nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. abs (f x)) int dd_bounds
   f x
   bounded_on_int (\\x. &(n * (n - 1)) * x pow (n - 2)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. x pow n) int dd_bounds
@@ -830,7 +830,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   bounded_on_int exp int dd_bounds ==>\n\thas_bounded_second_derivative exp int dd_bounds
   nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x * exp (f x) \n\t\t+ exp (f x) * derivative f x pow 2) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. exp (f x)) int dd_bounds
   interval_pos int ==>\n\tbounded_on_int (\\x. --inv (x pow 2)) int dd_bounds ==>\n\thas_bounded_second_derivative log int dd_bounds
-  !x. interval_arith x int ==> &0 < f x
+  forall x. interval_arith x int ==> &0 < f x
   bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x / f x - (derivative f x / f x) pow 2)\n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. log (f x)) int dd_bounds
   f x
   interval_not_zero int ==>\n\tbounded_on_int (\\x. &2 * inv (x pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative inv int dd_bounds
@@ -839,7 +839,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  !x. interval_arith x int ==> ~(f x = &0)
+  forall x. interval_arith x int ==> ~(f x = &0)
   bounded_on_int f int f_bounds ==> interval_not_zero f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (&2 * derivative f x pow 2 - nth_derivative 2 f x * f x) / f x pow 3) \n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. inv (f x)) int dd_bounds
   f x
   ~P <=> (P <=> F)
@@ -850,20 +850,20 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   interval_pos int ==>\n\tbounded_on_int (\\x. --inv (&4 * sqrt (x pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative sqrt int dd_bounds
-  !x. interval_arith x int ==> &0 < f x
+  forall x. interval_arith x int ==> &0 < f x
   bounded_on_int f int f_bounds ==> interval_pos f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (&2 * nth_derivative 2 f x * f x - derivative f x pow 2) /\n\t\t\t(&4 * sqrt (f x pow 3))) \n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. sqrt (f x)) int dd_bounds
   f x
   iabs int < &1 ==>\n\tbounded_on_int (\\x. --(x / sqrt ((&1 - x * x) pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative acs int dd_bounds
-  !x. interval_arith x int ==> abs (f x) < &1
+  forall x. interval_arith x int ==> abs (f x) < &1
   bounded_on_int f int f_bounds ==> iabs f_bounds < &1 ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. --((nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) /\n\t\t\t\tsqrt ((&1 - f x * f x) pow 3))) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. acs (f x)) int dd_bounds
   f x
   iabs int < &1 ==>\n\tbounded_on_int (\\x. x / sqrt ((&1 - x * x) pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative asn int dd_bounds
-  !x. interval_arith x int ==> abs (f x) < &1
+  forall x. interval_arith x int ==> abs (f x) < &1
   bounded_on_int f int f_bounds ==> iabs f_bounds < &1 ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. (nth_derivative 2 f x * (&1 - f x * f x) + f x * derivative f x pow 2) /\n\t\t\t\tsqrt ((&1 - f x * f x) pow 3)) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. asn (f x)) int dd_bounds
   f x
   interval_arith x int /\\ interval_gt f int ==> f < x
   interval_gt (-- &1) int ==>\n\tbounded_on_int ddmatan int dd_bounds ==>\n\thas_bounded_second_derivative matan int dd_bounds
-  !x. interval_arith x int ==> -- &1 < f x
+  forall x. interval_arith x int ==> -- &1 < f x
   bounded_on_int f int f_bounds ==> interval_gt (-- &1) f_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x * dmatan (f x) + derivative f x pow 2 * ddmatan (f x))\n\t\t\tint dd_bounds ==>\n\thas_bounded_second_derivative (\\x. matan (f x)) int dd_bounds
   f x
   nth_diff_strong_int 2 int f ==>\n\tbounded_on_int (\\x. c * nth_derivative 2 f x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. c * f x) int dd_bounds
@@ -871,7 +871,7 @@ Formal_ineqs/taylor/theory/taylor_interval-compiled quotations (812):
   nth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. nth_derivative 2 f x - nth_derivative 2 g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x - g x) int dd_bounds
   nth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. f x * nth_derivative 2 g x + &2 * derivative f x * derivative g x +\n\t\t\tnth_derivative 2 f x * g x) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x * g x) int dd_bounds
   g_bounds
-  !x. interval_arith x int ==> ~(g x = &0)
+  forall x. interval_arith x int ==> ~(g x = &0)
   bounded_on_int g int g_bounds ==> interval_not_zero g_bounds ==>\n\tnth_diff_strong_int 2 int f ==>\n\tnth_diff_strong_int 2 int g ==>\n\tbounded_on_int (\\x. ((nth_derivative 2 f x * g x - f x * nth_derivative 2 g x) * g x -\n\t  &2 * derivative g x * (derivative f x * g x - f x * derivative g x)) / g x pow 3) int dd_bounds ==>\n\thas_bounded_second_derivative (\\x. f x / g x) int dd_bounds
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)

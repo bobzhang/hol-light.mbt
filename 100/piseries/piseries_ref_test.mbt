@@ -6386,16 +6386,16 @@ test "100/piseries matches 100/piseries.ml" {
       #|0..0..2..7..17..75..322..1823..solved at 6787
       #|100/piseries quotations (936):
       #|  1 <= n <=> 0 < n
-      #|  !n. &1 <= &2 pow n
+      #|  forall n. &1 <= &2 pow n
       #|  &2 pow 0
       #|  n = 0
-      #|  !n. &1 < &2 pow n <=> ~(n = 0)
+      #|  forall n. &1 < &2 pow n <=> ~(n = 0)
       #|  1 <= n <=> ~(n = 0)
       #|  inv(&2 pow 1)
       #|  n = 0
       #|  &1 - x <= &1 <=> &0 <= x
-      #|  (!n. &0 <= &2 pow n) /\\\n   (!n. &0 < &2 pow n) /\\\n   (!n. &0 <= inv(&2 pow n)) /\\\n   (!n. &0 < inv(&2 pow n)) /\\\n   (!n. inv(&2 pow n) <= &1) /\\\n   (!n. &1 - inv(&2 pow n) <= &1) /\\\n   (!n. &1 <= &2 pow n) /\\\n   (!n. &1 < &2 pow n <=> ~(n = 0)) /\\\n   (!n. &0 <= &1 - inv(&2 pow n)) /\\\n   (!n. &0 <= &2 pow n - &1) /\\\n   (!n. &0 < &1 - inv(&2 pow n) <=> ~(n = 0))
-      #|  (!n. ?p. abs(&n) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x + y) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x - y) = &p) /\\\n   (!x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x * y) = &p) /\\\n   (!x r. (?n. abs(x) = &n) ==> ?p. abs(x pow r) = &p) /\\\n   (!x. (?n. abs(x) = &n) ==> ?p. abs(--x) = &p) /\\\n   (!x. (?n. abs(x) = &n) ==> ?p. abs(abs x) = &p)
+      #|  (forall n. &0 <= &2 pow n) /\\\n   (forall n. &0 < &2 pow n) /\\\n   (forall n. &0 <= inv(&2 pow n)) /\\\n   (forall n. &0 < inv(&2 pow n)) /\\\n   (forall n. inv(&2 pow n) <= &1) /\\\n   (forall n. &1 - inv(&2 pow n) <= &1) /\\\n   (forall n. &1 <= &2 pow n) /\\\n   (forall n. &1 < &2 pow n <=> ~(n = 0)) /\\\n   (forall n. &0 <= &1 - inv(&2 pow n)) /\\\n   (forall n. &0 <= &2 pow n - &1) /\\\n   (forall n. &0 < &1 - inv(&2 pow n) <=> ~(n = 0))
+      #|  (forall n. ?p. abs(&n) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x + y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x - y) = &p) /\\\n   (forall x y. (?m. abs(x) = &m) /\\ (?n. abs(y) = &n) ==> ?p. abs(x * y) = &p) /\\\n   (forall x r. (?n. abs(x) = &n) ==> ?p. abs(x pow r) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(--x) = &p) /\\\n   (forall x. (?n. abs(x) = &n) ==> ?p. abs(abs x) = &p)
       #|  a = poly [a] x
       #|  x * poly p x = poly (CONS (&0) p) x
       #|  (+):real->real->real
@@ -6417,10 +6417,10 @@ test "100/piseries matches 100/piseries.ml" {
       #|  if x1 < k then x1 else SUC x1
       #|  y < n:num
       #|  y:num
-      #|  !y. y < (SUC n) ==>\n                          ?!x. x < (SUC n) /\\ (p x = y)
+      #|  forall y. y < (SUC n) ==>\n                          ?!x. x < (SUC n) /\\ (p x = y)
       #|  x2:num
       #|  x1:num
-      #|  !z. q z :num = p(if z < k then z else SUC z)
+      #|  forall z. q z :num = p(if z < k then z else SUC z)
       #|  y < n:num
       #|  (p:num->num) x = n
       #|  (k + d) < k:num
@@ -6436,20 +6436,20 @@ test "100/piseries matches 100/piseries.ml" {
       #|  x:num
       #|  n:num
       #|  y:num
-      #|  !y. y < (SUC n) ==> ?!x. x < (SUC n) /\\ (p x = y)
+      #|  forall y. y < (SUC n) ==> ?!x. x < (SUC n) /\\ (p x = y)
       #|  y:num
-      #|  !y:num. y < n ==> ?!x. x < n /\\ (q x = y)
+      #|  forall y:num. y < n ==> ?!x. x < n /\\ (q x = y)
       #|  q:num->num = \\r. if r < k then p(r) else p(SUC r)
       #|  k:num
       #|  n:num
-      #|  !n p. (!y. y < n ==> ?!x. x < n /\\ (p(x) = y))\n        ==> !f. sum(0,n)(\\n. f(p n)) = sum(0,n) f
+      #|  forall n p. (forall y. y < n ==> ?!x. x < n /\\ (p(x) = y))\n        ==> forall f. sum(0,n)(\\n. f(p n)) = sum(0,n) f
       #|  n - 1 - m
       #|  m:num
       #|  \\x. (n - 1) - x
       #|  n:num
-      #|  !n f. sum(0,n) f = sum(0,n) (\\k. f((n - 1) - k))
+      #|  forall n f. sum(0,n) f = sum(0,n) (\\k. f((n - 1) - k))
       #|  m = 0 + m
-      #|  !n m f. sum(m,n) f = sum(m,n) (\\k. f(((n + 2 * m) - 1) - k))
+      #|  forall n m f. sum(m,n) f = sum(m,n) (\\k. f(((n + 2 * m) - 1) - k))
       #|  x * 4 = 2 * 2 * x
       #|  x * 4 + 2 = 2 * (2 * x + 1)
       #|  (x + 3) - 1 = x + 2
@@ -6473,7 +6473,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  m:num
       #|  \\n x. if n MOD 4 = 0 then sin(x)\n                              else if n MOD 4 = 1 then cos(x)\n                              else if n MOD 4 = 2 then --sin(x)\n                              else --cos(x)
       #|  sin
-      #|  !x n. abs(sin x -\n             sum(0,n) (\\m. (if EVEN m then &0\n                            else -- &1 pow ((m - 1) DIV 2) / &(FACT m)) *\n                            x pow m))\n         <= inv(&(FACT n)) * abs(x) pow n
+      #|  forall x n. abs(sin x -\n             sum(0,n) (\\m. (if EVEN m then &0\n                            else -- &1 pow ((m - 1) DIV 2) / &(FACT m)) *\n                            x pow m))\n         <= inv(&(FACT n)) * abs(x) pow n
       #|  (h * (c * s' - s * c')) * t * s * c =\n     (t * h) * (c * c * s * s' - s * s * c * c')
       #|  &2 * sin y * cos y
       #|  ~(integer x)
@@ -6501,9 +6501,9 @@ test "100/piseries matches 100/piseries.ml" {
       #|  ~(integer x)\n   ==> (cot(pi * x) = &1 / &2 * (cot(pi * x / &2) + cot(pi * (x - &1) / &2)))
       #|  j:num
       #|  &2 pow n
-      #|  !k. (x - &k) / &2 pow n - &1 = (x - &(2 EXP n + k)) / &2 pow n
+      #|  forall k. (x - &k) / &2 pow n - &1 = (x - &(2 EXP n + k)) / &2 pow n
       #|  &2 pow n
-      #|  !k. (x + &k) / &2 pow n + &1 = (x + &(2 EXP n + k)) / &2 pow n
+      #|  forall k. (x + &k) / &2 pow n + &1 = (x + &(2 EXP n + k)) / &2 pow n
       #|  x = &2 pow n * (x - &k) / &2 pow n + &k
       #|  ~a ==> ~b <=> b ==> a
       #|  ~(integer x)
@@ -6513,9 +6513,9 @@ test "100/piseries matches 100/piseries.ml" {
       #|  k:num
       #|  sum(0,2 EXP n)\n       (\\k. &1 / &2 * (cot (pi * (x + &k) / &2 pow n / &2) +\n                       cot (pi * ((x + &k) / &2 pow n + &1) / &2)) +\n            &1 / &2 * (cot (pi * (x - &k) / &2 pow n / &2) +\n                       cot (pi * ((x - &k) / &2 pow n - &1) / &2))) /\n    &2 pow (n + 1)
       #|  (a * b) * c = b * a * c
-      #|  ~(integer x)\n   ==> !n. cot(pi * x) =\n           sum(0,2 EXP n)\n             (\\k. cot(pi * (x + &k) / &2 pow n) +\n                  cot(pi * (x - &k) / &2 pow n)) / &2 pow (n + 1)
-      #|  !x. x / &2 pow n / &2 = x / &2 pow (n + 1)
-      #|  !x. (x / &2 pow n + &1 = (x + &2 pow n) / &2 pow n) /\\\n                    (x / &2 pow n - &1 = (x - &2 pow n) / &2 pow n)
+      #|  ~(integer x)\n   ==> forall n. cot(pi * x) =\n           sum(0,2 EXP n)\n             (\\k. cot(pi * (x + &k) / &2 pow n) +\n                  cot(pi * (x - &k) / &2 pow n)) / &2 pow (n + 1)
+      #|  forall x. x / &2 pow n / &2 = x / &2 pow (n + 1)
+      #|  forall x. (x / &2 pow n + &1 = (x + &2 pow n) / &2 pow n) /\\\n                    (x / &2 pow n - &1 = (x - &2 pow n) / &2 pow n)
       #|  ~(p = 0) ==> (k < p - 1 + 1 <=> k < p)
       #|  k < 2 EXP n - 1 + 1
       #|  (a = e) /\\ (d = e) /\\ (b = f) /\\ (c = f)\n    ==> ((a + b) + (c + d) = (e + f) * &2)
@@ -6535,18 +6535,18 @@ test "100/piseries matches 100/piseries.ml" {
       #|  (&2 * cot (pi * x / &2 pow n)) / &2 pow (n + 1) +\n    sum(1,2 EXP n - 1)\n       (\\k. &1 / &2 * (cot (pi * (x + &k) / &2 pow n / &2) +\n                       cot (pi * ((x + &k) / &2 pow n - &1) / &2)) +\n            &1 / &2 * (cot (pi * (x - &k) / &2 pow n / &2) +\n                       cot (pi * ((x - &k) / &2 pow n + &1) / &2))) /\n    &2 pow (n + 1)
       #|  ~(x = 0) ==> (1 + (x - 1) = x)
       #|  2 EXP n = 1 + (2 EXP n - 1)
-      #|  !f. sum(0,2 EXP n) f = f 0 + sum(1,2 EXP n - 1) f
+      #|  forall f. sum(0,2 EXP n) f = f 0 + sum(1,2 EXP n - 1) f
       #|  n:num
-      #|  ~(integer x)\n   ==> !n. cot(pi * x) =\n           cot(pi * x / &2 pow n) / &2 pow n +\n           sum(1,2 EXP n - 1)\n             (\\k. cot(pi * (x + &k) / &2 pow (n + 1)) +\n                  cot(pi * (x - &k) / &2 pow (n + 1))) / &2 pow (n + 1)
+      #|  ~(integer x)\n   ==> forall n. cot(pi * x) =\n           cot(pi * x / &2 pow n) / &2 pow n +\n           sum(1,2 EXP n - 1)\n             (\\k. cot(pi * (x + &k) / &2 pow (n + 1)) +\n                  cot(pi * (x - &k) / &2 pow (n + 1))) / &2 pow (n + 1)
       #|  (sx * cy * sx * cy + --(cx * sy * cx * sy)) + sy * sy + --(sx * sx) =\n    (sy * sy + (sx * sx + cx * cx) * (cy * cy)) -\n    (sx * sx + (sy * sy + cy * cy) * (cx * cx))
       #|  a + --(sx * cy * cx * sy) + cx * sy * sx * cy + b = a + b
       #|  (a = sx * sx + --(sy * sy)) <=> (a + sy * sy + --(sx * sx) = &0)
       #|  (x + y) * (x - y) = x * x - y * y
-      #|  !x y. sin(x + y) * sin(x - y) = (sin x + sin y) * (sin x - sin y)
+      #|  forall x y. sin(x + y) * sin(x - y) = (sin x + sin y) * (sin x - sin y)
       #|  (abs(x) = a) <=> &0 <= a /\\ ((x = a) \\/ (x = --a))
       #|  (a * b) * c * d = c * b * a * d
       #|  a /\\ b <=> ~(a ==> ~b)
-      #|  !x. (sin(pi * x) = &0) <=> integer(x)
+      #|  forall x. (sin(pi * x) = &0) <=> integer(x)
       #|  ~(x = &0) /\\ abs(x) < &1 ==> ~(integer x)
       #|  x = &2 pow n * x / &2 pow n
       #|  ~a ==> ~b <=> b ==> a
@@ -6556,7 +6556,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  &0 < sin x
       #|  &0 <= x
       #|  x = &0
-      #|  !x. abs(x) < pi ==> (abs(sin x) = sin(abs x))
+      #|  forall x. abs(x) < pi ==> (abs(sin x) = sin(abs x))
       #|  &0 < --x ==> ~(&0 <= x)
       #|  x < a + x <=> &0 < a
       #|  z:real
@@ -6565,8 +6565,8 @@ test "100/piseries matches 100/piseries.ml" {
       #|  cos
       #|  sin
       #|  ~(x = y) <=> x < y \\/ y < x
-      #|  !x y. &0 <= x /\\ x < pi / &2 /\\ &0 <= y /\\ y < pi / &2 /\\ x < y\n          ==> sin x < sin y
-      #|  !x y. &0 <= x /\\ x < pi / &2 /\\ &0 <= y /\\ y < pi / &2\n         ==> ((sin x = sin y) <=> (x = y))
+      #|  forall x y. &0 <= x /\\ x < pi / &2 /\\ &0 <= y /\\ y < pi / &2 /\\ x < y\n          ==> sin x < sin y
+      #|  forall x y. &0 <= x /\\ x < pi / &2 /\\ &0 <= y /\\ y < pi / &2\n         ==> ((sin x = sin y) <=> (x = y))
       #|  x:real
       #|  ~(x = &0) /\\ (x * a = b) ==> (a = b / x)
       #|  sa * samb * sapb * &2 * ca = (&2 * sa * ca) * samb * sapb
@@ -6602,11 +6602,11 @@ test "100/piseries matches 100/piseries.ml" {
       #|  abs(a) <= abs(x) ==> abs(s - x) <= a ==> abs(s) <= &2 * abs(x)
       #|  2
       #|  x:real
-      #|  !x. abs(x) < &1 ==> abs(sin x) <= &2 * abs(x)
+      #|  forall x. abs(x) < &1 ==> abs(sin x) <= &2 * abs(x)
       #|  &3 * abs(a) <= &2 * abs(x)\n    ==> abs(s - x) <= a ==> abs(x) <= abs(s) * &3
       #|  3
       #|  x:real
-      #|  !x. abs(x) < &2 ==> abs(sin x) >= abs(x) / &3
+      #|  forall x. abs(x) < &2 ==> abs(sin x) >= abs(x) / &3
       #|  abs(p - y) <= e ==> abs y + e <= a ==> abs p <= a
       #|  abs(&2 pow n * pi)
       #|  &0 < x ==> &0 < abs x
@@ -6641,7 +6641,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  SUC(n + 1) = n + 2
       #|  ~(n + 1 = 0)
       #|  (&1 - a + b = &1 - c) <=> (b + c = a)
-      #|  !n. sum(0,n) (\\m. inv(&(m + 1) * &(m + 2))) = &1 - inv(&(n + 1))
+      #|  forall n. sum(0,n) (\\m. inv(&(m + 1) * &(m + 2))) = &1 - inv(&(n + 1))
       #|  (\\n. inv(&(n + 1) * &(n + 2))) sums &1
       #|  n:num
       #|  0
@@ -6654,7 +6654,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  n:num
       #|  0
       #|  \\m. inv (&(m + 1) pow 2)
-      #|  !m. 2 <= m ==> summable (\\n. inv(&(n + 1) pow m))
+      #|  forall m. 2 <= m ==> summable (\\n. inv(&(n + 1) pow m))
       #|  &N pow 2
       #|  &N
       #|  &2 * abs(x) + &1 <= a ==> a <= &2 * abs(a - x)
@@ -6671,12 +6671,12 @@ test "100/piseries matches 100/piseries.ml" {
       #|  &2 * abs x + &1
       #|  &2 * suminf (\\n. inv(&n pow 2))
       #|  \\n. &2 / &n pow 2
-      #|  !x. ~(integer x) ==> summable (\\n. inv(&n pow 2 - x))
+      #|  forall x. ~(integer x) ==> summable (\\n. inv(&n pow 2 - x))
       #|  2
       #|  x:real
-      #|  !x. abs(sin(x) - x) <= abs(x) pow 2 / &2
+      #|  forall x. abs(sin(x) - x) <= abs(x) pow 2 / &2
       #|  abs(x)
-      #|  !x. ~(x = &0) ==> abs(sin(x) / x - &1) <= abs(x) / &2
+      #|  forall x. ~(x = &0) ==> abs(sin(x) / x - &1) <= abs(x) / &2
       #|  abs(x) < e
       #|  abs(x) / &2
       #|  x:real
@@ -6695,7 +6695,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  d:real
       #|  e:real
       #|  e:real
-      #|  !x. ~(x = &0)\n       ==> (\\n. (x / &2 pow n) * cot(x / &2 pow n)) tends_num_real &1
+      #|  forall x. ~(x = &0)\n       ==> (\\n. (x / &2 pow n) * cot(x / &2 pow n)) tends_num_real &1
       #|  x * p * q * c = x * (p * q) * c
       #|  p * x * a * b * c = x * (p * (a * b)) * c
       #|  pi * x * inv(&2)
@@ -6722,13 +6722,13 @@ test "100/piseries matches 100/piseries.ml" {
       #|  \\x. x * cot(x)
       #|  d:real
       #|  &1
-      #|  ?M. !x. &0 < x /\\ abs(x) <= &1 ==> abs(x * cot(x)) <= M
+      #|  ?M. forall x. &0 < x /\\ abs(x) <= &1 ==> abs(x * cot(x)) <= M
       #|  x * cot(x) = --x * cot(--x)
       #|  ~(x = &0) ==> &0 < x \\/ &0 < --x
       #|  x:real
       #|  M:real
       #|  M:real
-      #|  ?M. !x. ~(x = &0) /\\ abs(x) <= &1 ==> abs(x * cot(x)) <= M
+      #|  ?M. forall x. ~(x = &0) /\\ abs(x) <= &1 ==> abs(x * cot(x)) <= M
       #|  (a = &2) ==> ((x + a) - &1 = &1 + x)
       #|  N1 + 1 <= n
       #|  n = 1 + (n - 1)
@@ -6737,7 +6737,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  abs(b) < e /\\ abs((s - &1) - a) < e\n    ==> abs(s - ((a + b) + &1)) < e + e
       #|  n - 1
       #|  m:num
-      #|  !n k. k < 2 EXP n ==> ((pi * x) * cot (pi * x) = A n k + B n k)
+      #|  forall n k. k < 2 EXP n ==> ((pi * x) * cot (pi * x) = A n k + B n k)
       #|  e / &2 + e / &2
       #|  m:num
       #|  1
@@ -6760,18 +6760,18 @@ test "100/piseries matches 100/piseries.ml" {
       #|  N2:num
       #|  e / &2
       #|  n - 1
-      #|  !k. (\\n. A n k) tends_num_real\n           &1 + sum (1,k) (\\n. (&2 * x pow 2) / (x pow 2 - &n pow 2))
+      #|  forall k. (\\n. A n k) tends_num_real\n           &1 + sum (1,k) (\\n. (&2 * x pow 2) / (x pow 2 - &n pow 2))
       #|  n:num
       #|  N1 + 1
       #|  N1:num
       #|  e / &2
-      #|  !e. &0 < e\n        ==> ?N. !n k:num. N <= k /\\ pi * abs(x) <= &2 pow (n + 1)\n                          ==> abs (B n k) < e
+      #|  forall e. &0 < e\n        ==> ?N. forall n k:num. N <= k /\\ pi * abs(x) <= &2 pow (n + 1)\n                          ==> abs (B n k) < e
       #|  e:real
       #|  x = 0 + x
       #|  n < p ==> (n + p - 1 - n = p - 1)
       #|  (a = b - c) <=> (c + a = b)
       #|  x = 0 + x
-      #|  !n k. k < 2 EXP n\n          ==> ((pi * x) *\n               (cot (pi * x / &2 pow n) / &2 pow n +\n                sum (1,2 EXP n - 1)\n                    (\\k. cot(pi * (x + &k) / &2 pow (n + 1)) +\n                         cot(pi * (x - &k) / &2 pow (n + 1))) /\n                &2 pow (n + 1)) = A n k + B n k)
+      #|  forall n k. k < 2 EXP n\n          ==> ((pi * x) *\n               (cot (pi * x / &2 pow n) / &2 pow n +\n                sum (1,2 EXP n - 1)\n                    (\\k. cot(pi * (x + &k) / &2 pow (n + 1)) +\n                         cot(pi * (x - &k) / &2 pow (n + 1))) /\n                &2 pow (n + 1)) = A n k + B n k)
       #|  &9 * abs x + &1 <= &N
       #|  &N:real
       #|  abs(x) <= a ==> x <= a
@@ -6803,7 +6803,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  &(d + n + 1) * &(d + n + 2)
       #|  SUC(d + n + 1) = d + n + 2
       #|  ((a - x) + y = a - z) <=> (y + z = x)
-      #|  !n. sum(d,n) (\\r. inv (&(r + 1) * &(r + 2))) =\n            inv(&(d + 1)) - inv(&(d + n + 1))
+      #|  forall n. sum(d,n) (\\r. inv (&(r + 1) * &(r + 2))) =\n            inv(&(d + 1)) - inv(&(d + n + 1))
       #|  0 < n + 2
       #|  sum(d,n) (\\r. inv(&(r + 1) * &(r + 2)))
       #|  (r + 1) + 1 = r + 2
@@ -6829,9 +6829,9 @@ test "100/piseries matches 100/piseries.ml" {
       #|  a <= b ==> x <= a ==> x <= b
       #|  &2 * sum(k + 1,2 EXP n - 1 - k) (\\m. inv(&m * &m))
       #|  &144 * x * y = &72 * x * &2 * y
-      #|  !k n. &9 * abs x < &k\n            ==> abs(sum(k + 1,2 EXP n - 1 - k)\n                       (\\m. (&72 * x pow 2) / (&m pow 2 - &36 * x pow 2)))\n                <= &144 * x pow 2 / &k
+      #|  forall k n. &9 * abs x < &k\n            ==> abs(sum(k + 1,2 EXP n - 1 - k)\n                       (\\m. (&72 * x pow 2) / (&m pow 2 - &36 * x pow 2)))\n                <= &144 * x pow 2 / &k
       #|  Bd:real
-      #|  !e. &0 < e\n        ==> ?N. !n k:num. N <= k /\\ pi * abs(x) <= &2 pow (n + 1)\n                          ==> abs(B n k) < e
+      #|  forall e. &0 < e\n        ==> ?N. forall n k:num. N <= k /\\ pi * abs(x) <= &2 pow (n + 1)\n                          ==> abs(B n k) < e
       #|  a * b * c * d * e = b * c * d * a * e
       #|  &k
       #|  abs(cot (pi * x / &2 pow (n + 1)) / &2 pow n) *\n      (&36 * x pow 2) / (&r pow 2 - &36 * x pow 2)
@@ -6840,29 +6840,29 @@ test "100/piseries matches 100/piseries.ml" {
       #|  k + 1 <= r /\\ r < (p - 1 - k) + k + 1 <=> k < r /\\ r < p
       #|  r:num
       #|  a <= b ==> x <= a ==> x <= b
-      #|  !k n. &6 * abs(x) < &k\n          ==> abs(B n k)\n              <= abs((pi * x / &2 pow (n + 1)) *\n                     cot(pi * x / &2 pow (n + 1))) *\n                 sum(k + 1,2 EXP n - 1 - k)\n                    (\\m. (&72 * x pow 2) / (&m pow 2 - &36 * x pow 2))
+      #|  forall k n. &6 * abs(x) < &k\n          ==> abs(B n k)\n              <= abs((pi * x / &2 pow (n + 1)) *\n                     cot(pi * x / &2 pow (n + 1))) *\n                 sum(k + 1,2 EXP n - 1 - k)\n                    (\\m. (&72 * x pow 2) / (&m pow 2 - &36 * x pow 2))
       #|  (p * x * d) * cc = x * (p * d) * cc
       #|  (&2 * x * x) * d = x * (&2 * x) * d
       #|  r:num
       #|  k:num
-      #|  !k. (\\n. A n k) tends_num_real\n                    (&1 + sum(1,k) (\\n. (&2 * x pow 2) / (x pow 2 - &n pow 2)))
+      #|  forall k. (\\n. A n k) tends_num_real\n                    (&1 + sum(1,k) (\\n. (&2 * x pow 2) / (x pow 2 - &n pow 2)))
       #|  (p * m) * p' + (p * m) * m' = m * p * p' + p * m * m'
       #|  a * a - b * b = (a + b) * (a - b)
       #|  x pow 2 - &n pow 2
       #|  n:num
-      #|  !n. (&2 * x) / (x pow 2 - &n pow 2) = inv(x + &n) + inv(x - &n)
+      #|  forall n. (&2 * x) / (x pow 2 - &n pow 2) = inv(x + &n) + inv(x - &n)
       #|  a * a - b * b = (a + b) * (a - b)
-      #|  !n. ~(x pow 2 - &n pow 2 = &0)
+      #|  forall n. ~(x pow 2 - &n pow 2 = &0)
       #|  x = (x + &n) - &n
       #|  ~a ==> ~b <=> b ==> a
       #|  ~(integer x)
       #|  n:num
-      #|  !n. ~(x + &n = &0)
+      #|  forall n. ~(x + &n = &0)
       #|  x = (x - &n) + &n
       #|  ~a ==> ~b <=> b ==> a
       #|  ~(integer x)
       #|  n:num
-      #|  !n. ~(x - &n = &0)
+      #|  forall n. ~(x - &n = &0)
       #|  B = \\n k. (pi * x / &2 pow (n + 1)) *\n              sum(k + 1,2 EXP n - 1 - k)\n                 (\\m. cot(pi * (x + &m) / &2 pow (n + 1)) +\n                      cot(pi * (x - &m) / &2 pow (n + 1)))
       #|  A = \\n k. (pi * x / &2 pow n) * cot(pi * x / &2 pow n) +\n              (pi * x / &2 pow (n + 1)) *\n              sum(1,k) (\\m. cot (pi * (x + &m) / &2 pow (n + 1)) +\n                            cot (pi * (x - &m) / &2 pow (n + 1)))
       #|  (~b ==> ~a) <=> (a ==> b)
@@ -6876,21 +6876,21 @@ test "100/piseries matches 100/piseries.ml" {
       #|  abs(x) < &n\n   ==> (\\k. --(&2) * (x pow 2 / &n pow 2) pow (k + 1))\n       sums ((&2 * x pow 2) / (x pow 2 - &n pow 2))
       #|  \\n:num. a:real
       #|  x:num->real
-      #|  !a x l N. (!n. n >= N ==> x(n) <= a) /\\ x tends_num_real l ==> l <= a
+      #|  forall a x l N. (forall n. n >= N ==> x(n) <= a) /\\ x tends_num_real l ==> l <= a
       #|  x:num->real
       #|  \\n:num. a:real
-      #|  !a x l N. (!n. n >= N ==> a <= x(n)) /\\ x tends_num_real l ==> a <= l
-      #|  !m n. sum(0,m) (\\i. sum(0,n) (\\j. a i j)) =\n         sum(0,n) (\\j. sum(0,m) (\\i. a i j))
+      #|  forall a x l N. (forall n. n >= N ==> a <= x(n)) /\\ x tends_num_real l ==> a <= l
+      #|  forall m n. sum(0,m) (\\i. sum(0,n) (\\j. a i j)) =\n         sum(0,n) (\\j. sum(0,m) (\\i. a i j))
       #|  m = 0 + m
       #|  m = 0 + m
       #|  m = 0 + m
       #|  m = 0 + m
-      #|  !m1 m2 n1 n2.\n        sum(m1,m2) (\\i. sum(n1,n2) (\\j. a i j)) =\n        sum(n1,n2) (\\j. sum(m1,m2) (\\i. a i j))
+      #|  forall m1 m2 n1 n2.\n        sum(m1,m2) (\\i. sum(n1,n2) (\\j. a i j)) =\n        sum(n1,n2) (\\j. sum(m1,m2) (\\i. a i j))
       #|  &0 < e
       #|  d < e ==> l - d <= x /\\ x <= l ==> abs(x - l) < e
       #|  (a ==> b ==> c) ==> (a ==> b) ==> (a ==> c)
       #|  e / &2
-      #|  !e. &0 < e\n        ==> (?N. !n. N <= n ==> l - e <= sum (0,n) s /\\ sum (0,n) s <= l)
+      #|  forall e. &0 < e\n        ==> (?N. forall n. N <= n ==> l - e <= sum (0,n) s /\\ sum (0,n) s <= l)
       #|  e:real
       #|  m:num
       #|  sum(0,m) z
@@ -6901,18 +6901,18 @@ test "100/piseries matches 100/piseries.ml" {
       #|  \\m. sum(0,m) (\\m. a m (r:num))
       #|  r:num
       #|  sum (0,n) (\\j. sum (0,M) (\\i. a i j))
-      #|  !s0. l - e <= s0 /\\ s0 <= s ==> l - e <= s
+      #|  forall s0. l - e <= s0 /\\ s0 <= s ==> l - e <= s
       #|  n:num
       #|  N:num
       #|  N:num
       #|  M:num
       #|  e:real
       #|  e:real
-      #|  !e. &0 < e\n        ==> ?N. !n. N <= n\n                    ==> l - e <= sum (0,n) s /\\ sum(0,n) s <= l
+      #|  forall e. &0 < e\n        ==> ?N. forall n. N <= n\n                    ==> l - e <= sum (0,n) s /\\ sum(0,n) s <= l
       #|  s:num->real
       #|  l:real
       #|  &0
-      #|  !n:num. ?s. (\\m. a m n) sums s
+      #|  forall n:num. ?s. (\\m. a m n) sums s
       #|  n = 0 + n
       #|  sum(n,1) (\\j. a (r:num) j)
       #|  x <= y /\\ &0 <= z ==> x <= y + z
@@ -6922,19 +6922,19 @@ test "100/piseries matches 100/piseries.ml" {
       #|  N:num
       #|  M:num
       #|  &1
-      #|  !m n. sum(0,m) (\\i. (a:num->num->real) i n) <= l
+      #|  forall m n. sum(0,m) (\\i. (a:num->num->real) i n) <= l
       #|  sum(0,M) (\\n. e / (&2 * &(M + 1)))
       #|  a <= b ==> x <= a ==> x <= b
       #|  0 < n + 1
       #|  a * b * c * d = (b * c) * a * d
       #|  &M * e / (&2 * &(M + 1))
       #|  sum(0,M) z
-      #|  !z. abs(x - z) <= e /\\ abs(z - y) < e ==> abs(x - y) < e + e
+      #|  forall z. abs(x - z) <= e /\\ abs(z - y) < e ==> abs(x - y) < e + e
       #|  e / &2 + e / &2
       #|  sum (0,m) z
       #|  M <= m:num
       #|  sum(0,M) (\\i. sum (0,n) (\\j. a i j))
-      #|  !s0. s0 <= s /\\ s <= l /\\ abs(s0 - l) < e\n           ==> l - e <= s /\\ s <= l
+      #|  forall s0. s0 <= s /\\ s <= l /\\ abs(s0 - l) < e\n           ==> l - e <= s /\\ s <= l
       #|  n:num
       #|  m:num
       #|  N:num
@@ -6948,32 +6948,32 @@ test "100/piseries matches 100/piseries.ml" {
       #|  N0:num
       #|  d:real
       #|  n:num
-      #|  !m:num. (a m) sums (z m)
+      #|  forall m:num. (a m) sums (z m)
       #|  n:num
       #|  M:num
       #|  d:real
       #|  e / (&2 * &(M + 1))
       #|  0 < n + 1
       #|  &0 < e / (&2 * &(M + 1))
-      #|  ?N. !m n. m < M /\\ n >= N\n                ==> abs(sum (0,n) (a m) - z m) < e / (&2 * &(M + 1))
+      #|  ?N. forall m n. m < M /\\ n >= N\n                ==> abs(sum (0,n) (a m) - z m) < e / (&2 * &(M + 1))
       #|  M:num
       #|  e / &2
       #|  z sums l
       #|  e:real
-      #|  !e. &0 < e\n        ==> ?M N. !m n. M <= m /\\ N <= n ==>\n                        l - e <= sum(0,m) (\\i. sum(0,n) (\\j. a i j)) /\\\n                        sum(0,m) (\\i. sum(0,n) (\\j. a i j)) <= l
+      #|  forall e. &0 < e\n        ==> ?M N. forall m n. M <= m /\\ N <= n ==>\n                        l - e <= sum(0,m) (\\i. sum(0,n) (\\j. a i j)) /\\\n                        sum(0,m) (\\i. sum(0,n) (\\j. a i j)) <= l
       #|  sum(0,n) z
       #|  &0 <= l
       #|  p:num
       #|  n:num
       #|  \\n. sum(0,n) z
-      #|  !n. sum(0,n) z <= l
+      #|  forall n. sum(0,n) z <= l
       #|  sum(0,n) (a(m:num))
-      #|  !m:num. &0 <= z m
+      #|  forall m:num. &0 <= z m
       #|  p:num
       #|  n:num
       #|  \\n. sum(0,n) (a(m:num))
-      #|  !m:num n. sum(0,n) (a m) <= z m
-      #|  !z a l. (!m n. &0 <= a m n) /\\ (!m. (a m) sums (z m)) /\\ z sums l\n           ==> ?s. (!n. (\\m. a m n) sums (s n)) /\\ s sums l
+      #|  forall m:num n. sum(0,n) (a m) <= z m
+      #|  forall z a l. (forall m n. &0 <= a m n) /\\ (forall m. (a m) sums (z m)) /\\ z sums l\n           ==> ?s. (forall n. (\\m. a m n) sums (s n)) /\\ s sums l
       #|  (a * b * b) * c = a * (b * b) * c
       #|  1
       #|  (~b ==> ~a) <=> (a ==> b)
@@ -6986,7 +6986,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  &1
       #|  m:num
       #|  \\n. (--(&2) * x pow 2) / (x pow 2 - &(n + 1) pow 2)
-      #|  !x. &0 < abs(x) /\\ abs(x) < &1\n       ==> ?s. (!n. (\\m. &2 * (x pow 2 / &(m + 1) pow 2) pow (n + 1))\n                    sums s n) /\\\n               s sums --((pi * x) * cot(pi * x) - &1)
+      #|  forall x. &0 < abs(x) /\\ abs(x) < &1\n       ==> ?s. (forall n. (\\m. &2 * (x pow 2 / &(m + 1) pow 2) pow (n + 1))\n                    sums s n) /\\\n               s sums --((pi * x) * cot(pi * x) - &1)
       #|  2 * N <= SUC(2 * m)
       #|  0 + 2 * m = 2 * (0 + m)
       #|  m:num
@@ -7009,18 +7009,18 @@ test "100/piseries matches 100/piseries.ml" {
       #|  s sums --(x * cot(x) - &1)
       #|  s:num->real
       #|  x / pi
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. &2 * (x / pi) pow (2 * (n + 1)) *\n                suminf (\\m. inv (&(m + 1) pow (2 * (n + 1)))))\n           sums --(x * cot x - &1)
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. &2 * (x / pi) pow (2 * (n + 1)) *\n                suminf (\\m. inv (&(m + 1) pow (2 * (n + 1)))))\n           sums --(x * cot x - &1)
       #|  n:num
       #|  &1 + x - &1 = x
       #|  ~(n + 1 = 0)
       #|  x * cot(x) - &1
       #|  ~(n + 1 = 0)
       #|  (\\n. if n = 0 then &1 else\n         --(&2 * (x / pi) pow (2 * n) *\n                 suminf (\\m. inv (&(m + 1) pow (2 * n)))))\n    sums (sum(0,1) (\\n. if n = 0 then &1 else\n                        --(&2 * (x / pi) pow (2 * n) *\n                           suminf (\\m. inv (&(m + 1) pow (2 * n))))) +\n          suminf (\\n. if n + 1 = 0 then &1 else\n                        --(&2 * (x / pi) pow (2 * (n + 1)) *\n                           suminf (\\m. inv (&(m + 1) pow (2 * (n + 1)))))))
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1\n                 else --(&2) *\n                      suminf (\\m. inv (&(m + 1) pow (2 * n))) /\n                      pi pow (2 * n)) *\n                x pow (2 * n))\n           sums (x * cot(x))
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1\n                 else --(&2) *\n                      suminf (\\m. inv (&(m + 1) pow (2 * n))) /\n                      pi pow (2 * n)) *\n                x pow (2 * n))\n           sums (x * cot(x))
       #|  n = 0
       #|  n:num
       #|  (n = 0) <=> (2 * n = 0)
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1 else if ODD n then &0 else\n                 --(&2) * suminf (\\m. inv (&(m + 1) pow n)) / pi pow n) *\n                x pow n)\n           sums (x * cot(x))
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1 else if ODD n then &0 else\n                 --(&2) * suminf (\\m. inv (&(m + 1) pow n)) / pi pow n) *\n                x pow n)\n           sums (x * cot(x))
       #|  ((&2 * s * c) * c - &2 * (c * c - s * s) * s) * c =\n    &2 * c * s * s * s
       #|  cos(x)
       #|  a * b * c * d = a * c * d * b
@@ -7054,7 +7054,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  n:num
       #|  a /\\ b \\/ a /\\ c <=> a /\\ (b \\/ c)
       #|  ~(sin x = &0)
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi / &2\n        ==> (tan(x) = cot(x) - &2 * cot(&2 * x))
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi / &2\n        ==> (tan(x) = cot(x) - &2 * cot(&2 * x))
       #|  x' * m2 * s * xp * x - x' * m2 * s * pn * t * xp * x =\n    (x' * x) * --m2 * (t * pn - &1) * s * xp
       #|  n:num
       #|  1
@@ -7065,12 +7065,12 @@ test "100/piseries matches 100/piseries.ml" {
       #|  inv(x)
       #|  pi / &2
       #|  x:real
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi / &2\n       ==> (\\n. (if EVEN n then &0 else\n                 &2 * (&2 pow (n + 1) - &1) *\n                 suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1)) *\n                x pow n)\n           sums (tan x)
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi / &2\n       ==> (\\n. (if EVEN n then &0 else\n                 &2 * (&2 pow (n + 1) - &1) *\n                 suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1)) *\n                x pow n)\n           sums (tan x)
       #|  ~(EVEN n)
       #|  EVEN n
       #|  n:num
       #|  &0 < abs(x)
-      #|  !x. abs(x) < pi / &2\n       ==> (\\n. (if EVEN n then &0 else\n                 &2 * (&2 pow (n + 1) - &1) *\n                 suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1)) *\n                x pow n)\n           sums (tan x)
+      #|  forall x. abs(x) < pi / &2\n       ==> (\\n. (if EVEN n then &0 else\n                 &2 * (&2 pow (n + 1) - &1) *\n                 suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1)) *\n                x pow n)\n           sums (tan x)
       #|  0
       #|  x:real
       #|  l:real
@@ -7081,7 +7081,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  a - --s * s = (s * s + a)
       #|  x:real
       #|  ~(cos x = &0)\n   ==> ((\\x. poly p (tan x)) diffl\n        (poly ([&1; &0; &1] ** poly_diff p) (tan x))) (x)
-      #|  (tanpoly 0 = [&0; &1]) /\\\n   (!n. tanpoly (SUC n) = [&1; &0; &1] ** poly_diff(tanpoly n))
+      #|  (tanpoly 0 = [&0; &1]) /\\\n   (forall n. tanpoly (SUC n) = [&1; &0; &1] ** poly_diff(tanpoly n))
       #|  poly_diff
       #|  ( ** ) [&1; &0; &1]
       #|  tanpoly
@@ -7111,23 +7111,23 @@ test "100/piseries matches 100/piseries.ml" {
       #|  x:real
       #|  abs(x) < k
       #|  summable (\\n. diffs c n * x pow n) /\\\n    (f'(x) = suminf (\\n. diffs c n * x pow n))
-      #|  !f f' c k.\n        (!x. abs(x) < k ==> (\\n. c(n) * x pow n) sums f(x))\n        ==> (!x. abs(x) < k ==> (f diffl f'(x))(x))\n            ==> (!x. abs(x) < k ==> (\\n. (diffs c)(n) * x pow n) sums f'(x))
+      #|  forall f f' c k.\n        (forall x. abs(x) < k ==> (\\n. c(n) * x pow n) sums f(x))\n        ==> (forall x. abs(x) < k ==> (f diffl f'(x))(x))\n            ==> (forall x. abs(x) < k ==> (\\n. (diffs c)(n) * x pow n) sums f'(x))
       #|  x = &1 * x
       #|  (x = a) \\/ (x = --a) ==> &0 <= a ==> (abs(x) = a)
       #|  a /\\ b \\/ a /\\ c <=> a /\\ (b \\/ c)
       #|  abs x < pi / &2
       #|  x:real
-      #|  !n x. abs(x) < pi / &2\n         ==> (\\m. ITER n diffs\n                   (\\i. if EVEN i\n                        then &0\n                        else &2 *\n                             (&2 pow (i + 1) - &1) *\n                             suminf (\\m. inv (&(m + 1) pow (i + 1))) /\n                             pi pow (i + 1)) m *\n                  x pow m)\n             sums (poly (tanpoly n) (tan x))
-      #|  !n c. ITER n diffs c 0 = &(FACT n) * c(n)
+      #|  forall n x. abs(x) < pi / &2\n         ==> (\\m. ITER n diffs\n                   (\\i. if EVEN i\n                        then &0\n                        else &2 *\n                             (&2 pow (i + 1) - &1) *\n                             suminf (\\m. inv (&(m + 1) pow (i + 1))) /\n                             pi pow (i + 1)) m *\n                  x pow m)\n             sums (poly (tanpoly n) (tan x))
+      #|  forall n c. ITER n diffs c 0 = &(FACT n) * c(n)
       #|  1 <= n ==> ~(n = 0)
       #|  1
       #|  \\m. ITER n diffs\n      (\\i. if EVEN i\n           then &0\n           else &2 *\n                (&2 pow (i + 1) - &1) *\n                suminf (\\m. inv (&(m + 1) pow (i + 1))) / pi pow (i + 1))\n      m *\n      &0 pow m
       #|  &0
       #|  n:num
-      #|  !n. ODD n\n       ==> (&2 * (&2 pow (n + 1) - &1) * &(FACT n) *\n            suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1) =\n            tannumber n)
+      #|  forall n. ODD n\n       ==> (&2 * (&2 pow (n + 1) - &1) * &(FACT n) *\n            suminf (\\m. inv (&(m + 1) pow (n + 1))) / pi pow (n + 1) =\n            tannumber n)
       #|  (a * b * c) * d = a * (b * c) * d
       #|  a * b * c * d = (a * c * b) * d
-      #|  !n. EVEN n /\\ ~(n = 0)\n       ==> (suminf (\\m. inv (&(m + 1) pow n)) / pi pow n =\n            tannumber(n - 1) / (&2 * &(FACT(n - 1)) * (&2 pow n - &1)))
+      #|  forall n. EVEN n /\\ ~(n = 0)\n       ==> (suminf (\\m. inv (&(m + 1) pow n)) / pi pow n =\n            tannumber(n - 1) / (&2 * &(FACT(n - 1)) * (&2 pow n - &1)))
       #|  --x
       #|  --x
       #|  --(&1)
@@ -7136,7 +7136,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  \\x. poly p x
       #|  --x
       #|  \\x. poly p (--x)
-      #|  (!x. poly p (--x) = poly p x)\n   ==> (!x. poly (poly_diff p) (--x) = --(poly(poly_diff p) x))
+      #|  (forall x. poly p (--x) = poly p x)\n   ==> (forall x. poly (poly_diff p) (--x) = --(poly(poly_diff p) x))
       #|  --x
       #|  --x
       #|  --(&1)
@@ -7146,15 +7146,15 @@ test "100/piseries matches 100/piseries.ml" {
       #|  (a = --b) <=> (--a = b)
       #|  --x
       #|  \\x. poly p x
-      #|  (!x. poly p (--x) = --(poly p x))\n   ==> (!x. poly (poly_diff p) (--x) = poly(poly_diff p) x)
+      #|  (forall x. poly p (--x) = --(poly p x))\n   ==> (forall x. poly (poly_diff p) (--x) = poly(poly_diff p) x)
       #|  EVEN n
-      #|  !n x. (poly (tanpoly n) (--x) =\n          if EVEN n then --(poly (tanpoly n) x) else poly (tanpoly n) x)
+      #|  forall n x. (poly (tanpoly n) (--x) =\n          if EVEN n then --(poly (tanpoly n) x) else poly (tanpoly n) x)
       #|  (x = --x) ==> (x = &0)
-      #|  !n. EVEN n ==> (tannumber n = &0)
+      #|  forall n. EVEN n ==> (tannumber n = &0)
       #|  &1 < x ==> ~(x - &1 = &0)
       #|  a * b * c * a' * d * b' * e = (c * d * e) * ((a * a') * (b * b'))
       #|  n:num
-      #|  !x. abs(x) < pi / &2\n       ==> (\\n. tannumber n / &(FACT n) * x pow n) sums (tan x)
+      #|  forall x. abs(x) < pi / &2\n       ==> (\\n. tannumber n / &(FACT n) * x pow n) sums (tan x)
       #|  --(&2) * x * y * z * a = (&2 * y) * x * --a * z
       #|  ~(n = 0)
       #|  n = SUC(n - 1)
@@ -7163,7 +7163,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  ODD n
       #|  n = 0
       #|  n:num
-      #|  !x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1 else\n                 tannumber (n - 1) / ((&1 - &2 pow n) * &(FACT(n - 1)))) *\n                x pow n)\n           sums (x * cot(x))
+      #|  forall x. &0 < abs(x) /\\ abs(x) < pi\n       ==> (\\n. (if n = 0 then &1 else\n                 tannumber (n - 1) / ((&1 - &2 pow n) * &(FACT(n - 1)))) *\n                x pow n)\n           sums (x * cot(x))
       #|  &1 <= x ==> abs(x - &1) <= x
       #|  &1
       #|  suminf (\\n. inv(&(n + 1) pow 2)) -\n       sum(0,1) (\\n. inv(&(n + 1) pow 2))
@@ -7183,11 +7183,11 @@ test "100/piseries matches 100/piseries.ml" {
       #|  &2 * x <= &4 <=> x <= &2
       #|  a * b * c * d * e = (a * d) * c * b * e
       #|  n:num
-      #|  !n. abs(tannumber n) <= &4 * &(FACT n) * (&2 / pi) pow (n + 1)
+      #|  forall n. abs(tannumber n) <= &4 * &(FACT n) * (&2 / pi) pow (n + 1)
       #|  a * b * c = a * c * b
       #|  2 * n + 1 = 2 * (n + 1) - 1
       #|  summable (\\m. inv (&(m + 1) pow (2 * (n + 1))))
-      #|  !n. (\\m. inv (&(m + 1) pow (2 * (n + 1))))\n       sums (pi pow (2 * (n + 1)) *\n             tannumber(2 * n + 1) /\n             (&2 * (&2 pow (2 * (n + 1)) - &1) * &(FACT(2 * n + 1))))
+      #|  forall n. (\\m. inv (&(m + 1) pow (2 * (n + 1))))\n       sums (pi pow (2 * (n + 1)) *\n             tannumber(2 * n + 1) /\n             (&2 * (&2 pow (2 * (n + 1)) - &1) * &(FACT(2 * n + 1))))
       #|  x * &1 / n = x / n
       #|  b + e <= a ==> abs(p - a) <= e ==> b <= p
       #|  x <= (&1 - a) * &1 ==> a <= abs(&1 - x)
@@ -7216,11 +7216,11 @@ test "100/piseries matches 100/piseries.ml" {
       #|  b + e < a ==> abs(p - a) <= e ==> b < p
       #|  &1
       #|  abs(x) < pi / &2
-      #|  !x n. abs(x) <= &1\n         ==> abs(tan x - sum (0,n) (\\m. tannumber m / &(FACT m) * x pow m))\n             <= &12 * (&2 / &3) pow (n + 1) * abs(x) pow n
+      #|  forall x n. abs(x) <= &1\n         ==> abs(tan x - sum (0,n) (\\m. tannumber m / &(FACT m) * x pow m))\n             <= &12 * (&2 / &3) pow (n + 1) * abs(x) pow n
       #|  inv(&2 pow 0)
       #|  inv(&2 pow k)
       #|  &12 * (&2 / &3) pow (n + 1) * abs(x) pow n
-      #|  !x n k. abs(x) <= inv(&2 pow k)\n           ==> abs(tan x -\n                   sum (0,n) (\\m. tannumber(m) / &(FACT(m)) * x pow m))\n               <= &12 * (&2 / &3) pow (n + 1) * inv(&2 pow (k * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k)\n           ==> abs(tan x -\n                   sum (0,n) (\\m. tannumber(m) / &(FACT(m)) * x pow m))\n               <= &12 * (&2 / &3) pow (n + 1) * inv(&2 pow (k * n))
       #|  (a * b * c) * d = (a * b * d) * c
       #|  (n + 1) + 1 = n + 2
       #|  inv(&2 pow 0)
@@ -7231,7 +7231,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  f:num->real
       #|  a * b * c = b * (a * c)
       #|  abs(x)
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs(tan x / x -\n                   sum (0,n) (\\m. tannumber(m+1) / &(FACT(m+1)) * x pow m))\n               <= &12 * (&2 / &3) pow (n + 2) * inv(&2 pow (k * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs(tan x / x -\n                   sum (0,n) (\\m. tannumber(m+1) / &(FACT(m+1)) * x pow m))\n               <= &12 * (&2 / &3) pow (n + 2) * inv(&2 pow (k * n))
       #|  2 = 0
       #|  inv(&2 pow k)
       #|  abs(x) <= a ==> x <= a
@@ -7239,7 +7239,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  k DIV 2
       #|  2 * n
       #|  sqrt x
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ &0 < x\n           ==> abs(tan (sqrt x) / sqrt(x) -\n                   sum(0,n) (\\m. tannumber(2 * m + 1) / &(FACT(2 * m + 1)) *\n                                 x pow m))\n               <= &12 * (&2 / &3) pow (2 * n + 2) *\n                  inv(&2 pow (k DIV 2 * 2 * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ &0 < x\n           ==> abs(tan (sqrt x) / sqrt(x) -\n                   sum(0,n) (\\m. tannumber(2 * m + 1) / &(FACT(2 * m + 1)) *\n                                 x pow m))\n               <= &12 * (&2 / &3) pow (2 * n + 2) *\n                  inv(&2 pow (k DIV 2 * 2 * n))
       #|  x < a ==> b <= &1 - a ==> b <= abs(&1 - x)
       #|  b + e <= a ==> abs(p - a) <= e ==> b <= &1 * p
       #|  &1
@@ -7277,14 +7277,14 @@ test "100/piseries matches 100/piseries.ml" {
       #|  abs(x) < pi
       #|  x * a * y = a * x * y
       #|  abs(x)
-      #|  !x n. abs(x) <= &1 /\\ ~(x = &0)\n         ==> abs((&1 / x - cot x) -\n                 sum (0,n) (\\m. (tannumber m /\n                                 ((&2 pow (m+1) - &1) * &(FACT(m)))) *\n                                x pow m))\n             <= &4 * (abs(x) / &3) pow n
+      #|  forall x n. abs(x) <= &1 /\\ ~(x = &0)\n         ==> abs((&1 / x - cot x) -\n                 sum (0,n) (\\m. (tannumber m /\n                                 ((&2 pow (m+1) - &1) * &(FACT(m)))) *\n                                x pow m))\n             <= &4 * (abs(x) / &3) pow n
       #|  0
       #|  a <= b ==> x <= a ==> x <= b
       #|  n:num
       #|  inv(&2 pow 0)
       #|  inv(&2 pow k)
       #|  abs(x) <= &1 /\\ ~(x = &0)
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 / x - cot x) -\n                   sum (0,n) (\\m. (tannumber m /\n                                   ((&2 pow (m+1) - &1) * &(FACT(m)))) *\n                                  x pow m))\n               <= &4 / &3 pow n * inv(&2 pow (k * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 / x - cot x) -\n                   sum (0,n) (\\m. (tannumber m /\n                                   ((&2 pow (m+1) - &1) * &(FACT(m)))) *\n                                  x pow m))\n               <= &4 / &3 pow n * inv(&2 pow (k * n))
       #|  a * b * c * d = ((a * d) * b) * c
       #|  a <= b ==> x <= a ==> x <= b
       #|  n + 1
@@ -7297,7 +7297,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  n + 2 = (n + 1) + 1
       #|  a * b * c = b * (a * c)
       #|  abs(x)
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 / x - cot x) / x -\n                   sum (0,n) (\\m. (tannumber(m+1) /\n                                   ((&2 pow (m+2) - &1) * &(FACT(m+1)))) *\n                                  x pow m))\n               <= (&4 / &3) / &3 pow n * inv(&2 pow (k * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 / x - cot x) / x -\n                   sum (0,n) (\\m. (tannumber(m+1) /\n                                   ((&2 pow (m+2) - &1) * &(FACT(m+1)))) *\n                                  x pow m))\n               <= (&4 / &3) / &3 pow n * inv(&2 pow (k * n))
       #|  (s1 = s2) /\\ a <= b ==> s1 <= a ==> s2 <= b
       #|  ~(n = 0)
       #|  n = (n - 1) + 1
@@ -7311,8 +7311,8 @@ test "100/piseries matches 100/piseries.ml" {
       #|  abs(x) <= &1 /\\ ~(x = &0)
       #|  (a * b) * c = b * a * c
       #|  abs(inv x)
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 - x * cot(x)) -\n                   sum(0,n) (\\m. (tannumber (m-1) /\n                                  ((&2 pow m - &1) * &(FACT(m-1)))) *\n                                 x pow m))\n               <= &12 / &3 pow n * inv(&2 pow (k * n))
-      #|  !n. EVEN(((n * 2) + 1) - 1)
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ ~(x = &0)\n           ==> abs((&1 - x * cot(x)) -\n                   sum(0,n) (\\m. (tannumber (m-1) /\n                                  ((&2 pow m - &1) * &(FACT(m-1)))) *\n                                 x pow m))\n               <= &12 / &3 pow n * inv(&2 pow (k * n))
+      #|  forall n. EVEN(((n * 2) + 1) - 1)
       #|  2 = 0
       #|  inv(&2 pow k)
       #|  abs(x) <= a ==> x <= a
@@ -7320,7 +7320,7 @@ test "100/piseries matches 100/piseries.ml" {
       #|  k DIV 2
       #|  2 * n
       #|  sqrt x
-      #|  !x n k. abs(x) <= inv(&2 pow k) /\\ &0 < x\n           ==> abs((&1 - sqrt(x) * cot(sqrt(x))) -\n                   sum(0,n) (\\m. (tannumber (2*m-1) /\n                                  ((&2 pow (2*m) - &1) * &(FACT(2*m-1)))) *\n                                 x pow m))\n               <= &12 / &3 pow (2 * n) * inv(&2 pow (k DIV 2 * 2 * n))
+      #|  forall x n k. abs(x) <= inv(&2 pow k) /\\ &0 < x\n           ==> abs((&1 - sqrt(x) * cot(sqrt(x))) -\n                   sum(0,n) (\\m. (tannumber (2*m-1) /\n                                  ((&2 pow (2*m) - &1) * &(FACT(2*m-1)))) *\n                                 x pow m))\n               <= &12 / &3 pow (2 * n) * inv(&2 pow (k DIV 2 * 2 * n))
       #|REAL_LE_1_POW2 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))
       #|REAL_LT_1_POW2 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))
       #|REAL_POW2_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))

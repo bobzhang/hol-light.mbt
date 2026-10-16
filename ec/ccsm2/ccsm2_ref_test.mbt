@@ -51762,7 +51762,7 @@ test "EC/ccsm2 matches EC/ccsm2.ml" {
       #|  group_carrier sm2_group =\n     weierstrass_curve\n      (integer_mod_ring p_sm2,ring_neg (integer_mod_ring p_sm2) (&3),&b_sm2) /\\\n   group_id sm2_group =\n     NONE /\\\n   group_inv sm2_group =\n     weierstrass_neg\n      (integer_mod_ring p_sm2,ring_neg (integer_mod_ring p_sm2) (&3),&b_sm2) /\\\n   group_mul sm2_group =\n     weierstrass_add\n      (integer_mod_ring p_sm2,ring_neg (integer_mod_ring p_sm2) (&3),&b_sm2)
       #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
       #|  x:int
-      #|  !x:int. ~((x pow 3 - &3 * x + &b_sm2 == &0) (mod &p_sm2))
+      #|  forall x:int. ~((x pow 3 - &3 * x + &b_sm2 == &0) (mod &p_sm2))
       #|  g_sm2 IN group_carrier sm2_group
       #|  group_element_order sm2_group g_sm2 = n_sm2
       #|  FINITE(group_carrier sm2_group)
@@ -51777,7 +51777,7 @@ test "EC/ccsm2 matches EC/ccsm2.ml" {
       #|  g_sm2:(int#int)option
       #|  group_carrier sm2_group HAS_SIZE n_sm2
       #|  CARD(group_carrier sm2_group) = n_sm2
-      #|  !P. P IN group_carrier sm2_group\n       ==> group_element_order sm2_group P =\n           if P = group_id sm2_group then 1 else n_sm2
+      #|  forall P. P IN group_carrier sm2_group\n       ==> group_element_order sm2_group P =\n           if P = group_id sm2_group then 1 else n_sm2
       #|  subgroup_generated sm2_group {g_sm2} = sm2_group
       #|  cyclic_group sm2_group
       #|  abelian_group sm2_group

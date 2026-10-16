@@ -5736,34 +5736,34 @@ Rqe/rqe_real quotations (87):
   y:real
   e + x
   &0 < y - x
-  !x y. x < y ==> ?z. x < z /\\ z < y
+  forall x y. x < y ==> ?z. x < z /\\ z < y
   x + &1
-  !x. ?y. x < y
+  forall x. ?y. x < y
   x - &1
-  !x. ?y. y < x
-  !x y z. x / (y * z) = (x / y) * (&1 / z)
-  !x y z. x / (y * z) = (&1 / y) * (x / z)
-  !x y z. (x * w) / (y * z) = (x / y) * (w / z)
-  !x y z. (x + y) / z = (x / z) + (y / z)
-  !x. ~(x = &0) ==> (x / x = &1)
-  !c x. &0 < c /\\ &0 < x ==> &0 < c * x pow k
-  !c n. 0 < n /\\ &0 < c ==> &0 < c * &n pow k
-  !n. &0 <= (&n)
+  forall x. ?y. y < x
+  forall x y z. x / (y * z) = (x / y) * (&1 / z)
+  forall x y z. x / (y * z) = (&1 / y) * (x / z)
+  forall x y z. (x * w) / (y * z) = (x / y) * (w / z)
+  forall x y z. (x + y) / z = (x / z) + (y / z)
+  forall x. ~(x = &0) ==> (x / x = &1)
+  forall c x. &0 < c /\\ &0 < x ==> &0 < c * x pow k
+  forall c n. 0 < n /\\ &0 < c ==> &0 < c * &n pow k
+  forall n. &0 <= (&n)
   SUC n
   x:real
-  !x. ?n. x < &n
+  forall x. ?n. x < &n
   x < y ==> x <= y
   &0 <= y ==> x <= y + x
   &0 <= y ==> x <= x + y
   (x + y) * (x pow n + y pow n)
   0 < n
   n = 0
-  !x y. &0 < x /\\ &0 < y\n           ==> !n. 0 < n ==> x pow n + y pow n <= (x + y) pow n
+  forall x y. &0 < x /\\ &0 < y\n           ==> forall n. 0 < n ==> x pow n + y pow n <= (x + y) pow n
   n = SUC (PRE n)
   n = SUC (PRE n)
   (x = &0) \\/ (y = &0)
-  !x y. &0 <= x /\\ &0 <= y\n           ==> !n. 0 < n ==> x pow n + y pow n <= (x + y) pow n
-  !x. -- (abs x) <= &0
+  forall x y. &0 <= x /\\ &0 <= y\n           ==> forall n. 0 < n ==> x pow n + y pow n <= (x + y) pow n
+  forall x. -- (abs x) <= &0
   x * --y = --(x * y)
   &0 * &0 < x * --y
   &0 < --y
@@ -5774,26 +5774,26 @@ Rqe/rqe_real quotations (87):
   &0 * &0 <= --x * --y
   &0 * &0 <= x * y
   x = &0
-  !x y. x * y < &0 <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)
+  forall x y. x * y < &0 <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)
   &0 = &0 * &0
   &0 = &0 * &0
   x * y = --x * --y
   -- &0 = &0
   x < y <=> -- y < -- x
-  !x y. &0 < x * y <=> (x < &0 /\\ y < &0) \\/ (&0 < x /\\ &0 < y)
-  !y z. &0 < y /\\ y < z ==> &1 / z < &1 / y
+  forall x y. &0 < x * y <=> (x < &0 /\\ y < &0) \\/ (&0 < x /\\ &0 < y)
+  forall y z. &0 < y /\\ y < z ==> &1 / z < &1 / y
   inv x
-  !x y z. &0 < x /\\ &0 < y /\\ y < z ==> x / z < x / y
+  forall x y z. &0 < x /\\ &0 < y /\\ y < z ==> x / z < x / y
   inv x
   x = &0
-  !x y z. &0 <= x /\\ &0 < y /\\ y <= z ==> x / z <= x / y
-  !x y. -- x / -- y = x / y
-  !x. x < &0 ==> ~(x = &0)
-  !x. x < &0 ==> ~(x = &0)
+  forall x y z. &0 <= x /\\ &0 < y /\\ y <= z ==> x / z <= x / y
+  forall x y. -- x / -- y = x / y
+  forall x. x < &0 ==> ~(x = &0)
+  forall x. x < &0 ==> ~(x = &0)
   n:num
-  !a n. a < &0 ==> (EVEN n ==> a pow n > &0) /\\ (ODD n ==> a pow n < &0)
+  forall a n. a < &0 ==> (EVEN n ==> a pow n > &0) /\\ (ODD n ==> a pow n < &0)
   a < &0 \\/ a > &0 \\/ (a = &0)
-  !a n.  a <> &0 ==>\n          (EVEN n ==> a pow n > &0) /\\\n          (ODD n ==> a < &0 ==> a pow n < &0) /\\\n          (ODD n ==> a > &0 ==> a pow n > &0)
+  forall a n.  a <> &0 ==>\n          (EVEN n ==> a pow n > &0) /\\\n          (ODD n ==> a < &0 ==> a pow n < &0) /\\\n          (ODD n ==> a > &0 ==> a pow n > &0)
 REAL_DENSE =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real)))))))))
 REAL_LT_EXISTS =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)))))
 REAL_GT_EXISTS =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) y:real) x:real)))))

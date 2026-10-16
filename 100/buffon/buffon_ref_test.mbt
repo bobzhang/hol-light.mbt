@@ -80722,19 +80722,19 @@ test "100/buffon matches 100/buffon.ml" {
       #|3 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/buffon quotations (689):
-      #|  uniform_rv (p:A prob_space) (X:A->real) (a:real) (b:real) <=>\n   random_variable p X /\\\n   a < b /\\\n   !t. distribution_fn p X t =\n     if t < a then &0\n     else if b <= t then &1\n     else (t - a) / (b - a)
-      #|  !p:A prob_space X a b. uniform_rv p X a b ==> random_variable p X
-      #|  !p:A prob_space X a b. uniform_rv p X a b ==> a < b
-      #|  !p:A prob_space X a b t.\n      uniform_rv p X a b /\\ a <= t /\\ t < b\n      ==> distribution_fn p X t = (t - a) / (b - a)
-      #|  !p:A prob_space X a b t.\n      uniform_rv p X a b /\\ b <= t\n      ==> distribution_fn p X t = &1
-      #|  !p:A prob_space X a b t.\n      uniform_rv p X a b /\\ t < a\n      ==> distribution_fn p X t = &0
+      #|  uniform_rv (p:A prob_space) (X:A->real) (a:real) (b:real) <=>\n   random_variable p X /\\\n   a < b /\\\n   forall t. distribution_fn p X t =\n     if t < a then &0\n     else if b <= t then &1\n     else (t - a) / (b - a)
+      #|  forall p:A prob_space X a b. uniform_rv p X a b ==> random_variable p X
+      #|  forall p:A prob_space X a b. uniform_rv p X a b ==> a < b
+      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ a <= t /\\ t < b\n      ==> distribution_fn p X t = (t - a) / (b - a)
+      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ b <= t\n      ==> distribution_fn p X t = &1
+      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ t < a\n      ==> distribution_fn p X t = &0
       #|  &0 < b
       #|  t:real
       #|  b:real
       #|  &0
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X b t.\n      uniform_rv p X (&0) b /\\ &0 <= t /\\ t < b\n      ==> distribution_fn p X t = t / b
+      #|  forall p:A prob_space X b t.\n      uniform_rv p X (&0) b /\\ &0 <= t /\\ t < b\n      ==> distribution_fn p X t = t / b
       #|  b:real
       #|  &0:real
       #|  &0 < b ==> ~(b = &0)
@@ -80742,12 +80742,12 @@ test "100/buffon matches 100/buffon.ml" {
       #|  &0 < b
       #|  c = b:real
       #|  c < b:real
-      #|  !p:A prob_space X b c. uniform_rv p X (&0) b /\\ &0 <= c /\\ c <= b\n   ==> distribution_fn p X c = c / b
+      #|  forall p:A prob_space X b c. uniform_rv p X (&0) b /\\ &0 <= c /\\ c <= b\n   ==> distribution_fn p X c = c / b
       #|  x:real
       #|  &2 = --(cos pi) - (--(cos(&0)))
       #|  (sin has_real_integral (&2)) (real_interval [&0, pi])
       #|  c:real
-      #|  !c. ((\\t. c * sin t) has_real_integral (&2 * c))\n        (real_interval [&0, pi])
+      #|  forall c. ((\\t. c * sin t) has_real_integral (&2 * c))\n        (real_interval [&0, pi])
       #|  x:real
       #|  x:real
       #|  a:real
@@ -80763,25 +80763,25 @@ test "100/buffon matches 100/buffon.ml" {
       #|  sin
       #|  a:real < b
       #|  a:real = b
-      #|  !a b. abs(sin b - sin a) <= abs(b - a)
+      #|  forall a b. abs(sin b - sin a) <= abs(b - a)
       #|  abs(x - y:real)
       #|  ~(&0 < abs(x - y)) ==> x = y
-      #|  !x y:real. (!e. &0 < e ==> abs(x - y) < e) ==> x = y
-      #|  !a b l r. l <= a /\\ a <= r /\\ l <= b /\\ b <= r\n              ==> abs(a - b) <= r - l
-      #|  !p:A prob_space X Y a b.\n      indep_rv p X Y\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n          distribution_fn p X a * distribution_fn p Y b
+      #|  forall x y:real. (forall e. &0 < e ==> abs(x - y) < e) ==> x = y
+      #|  forall a b l r. l <= a /\\ a <= r /\\ l <= b /\\ b <= r\n              ==> abs(a - b) <= r - l
+      #|  forall p:A prob_space X Y a b.\n      indep_rv p X Y\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n          distribution_fn p X a * distribution_fn p Y b
       #|  b:A->bool
       #|  a:A->bool
       #|  p:A prob_space
-      #|  !p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n      ==> prob p (a DIFF b) = prob p a - prob p b
+      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n      ==> prob p (a DIFF b) = prob p a - prob p b
       #|  {x:A | x IN prob_carrier p /\\ X x <= c} INTER\n       {x | x IN prob_carrier p /\\ Theta x <= t} =\n       {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= t}
-      #|  !t. prob p ({x:A | x IN prob_carrier p /\\ X x <= c} INTER\n                  {x | x IN prob_carrier p /\\ Theta x <= t}) =\n          distribution_fn p X c * distribution_fn p Theta t
+      #|  forall t. prob p ({x:A | x IN prob_carrier p /\\ X x <= c} INTER\n                  {x | x IN prob_carrier p /\\ Theta x <= t}) =\n          distribution_fn p X c * distribution_fn p Theta t
       #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'} SUBSET\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'}
       #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'} IN prob_events p /\\\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'} IN prob_events p
-      #|  !t. {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= t} =\n          {x | x IN prob_carrier p /\\ X x <= c} INTER\n          {x | x IN prob_carrier p /\\ Theta x <= t}
+      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= t} =\n          {x | x IN prob_carrier p /\\ X x <= c} INTER\n          {x | x IN prob_carrier p /\\ Theta x <= t}
       #|  (x:A) IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ a' < Theta x /\\ Theta x <= b'} =\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'} DIFF\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'}
       #|  random_variable p (X:A->real) /\\ random_variable p (Theta:A->real)
-      #|  !p:A prob_space X Theta c a' b'.\n      indep_rv p X Theta /\\ a' <= b'\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                      a' < Theta x /\\ Theta x <= b'} =\n          distribution_fn p X c *\n          (distribution_fn p Theta b' - distribution_fn p Theta a')
+      #|  forall p:A prob_space X Theta c a' b'.\n      indep_rv p X Theta /\\ a' <= b'\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                      a' < Theta x /\\ Theta x <= b'} =\n          distribution_fn p X c *\n          (distribution_fn p Theta b' - distribution_fn p Theta a')
       #|  ~(p = &0) ==> b / p - a / p = (b - a) / p
       #|  ~(pi = &0)
       #|  distribution_fn p (Theta:A->real) a' = a' / pi
@@ -80793,7 +80793,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  Theta:A->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X Theta d c a' b'.\n       uniform_rv p X (&0) (d / &2) /\\\n       uniform_rv p Theta (&0) pi /\\\n       indep_rv p X Theta /\\\n       &0 <= c /\\ c <= d / &2 /\\\n       &0 <= a' /\\ a' <= b' /\\ b' <= pi\n       ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                       a' < Theta x /\\ Theta x <= b'} =\n           c / (d / &2) * ((b' - a') / pi)
+      #|  forall p:A prob_space X Theta d c a' b'.\n       uniform_rv p X (&0) (d / &2) /\\\n       uniform_rv p Theta (&0) pi /\\\n       indep_rv p X Theta /\\\n       &0 <= c /\\ c <= d / &2 /\\\n       &0 <= a' /\\ a' <= b' /\\ b' <= pi\n       ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                       a' < Theta x /\\ Theta x <= b'} =\n           c / (d / &2) * ((b' - a') / pi)
       #|  (A:num->A->bool) (SUC n)
       #|  UNIONS (IMAGE (A:num->A->bool) (0..n))
       #|  p:A prob_space
@@ -80810,7 +80810,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  w:A
       #|  DISJOINT (UNIONS (IMAGE (A:num->A->bool) (0..n))) (A (SUC n))
       #|  0..SUC n = (0..n) UNION {SUC n}
-      #|  !p:A prob_space A.\n      !n. (!k. k <= n ==> A k IN prob_events p) /\\\n          (!i j. i <= n /\\ j <= n /\\ ~(i = j) ==> DISJOINT (A i) (A j))\n          ==> prob p (UNIONS (IMAGE A (0..n))) =\n              sum (0..n) (\\k. prob p (A k))
+      #|  forall p:A prob_space A.\n      forall n. (forall k. k <= n ==> A k IN prob_events p) /\\\n          (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> DISJOINT (A i) (A j))\n          ==> prob p (UNIONS (IMAGE A (0..n))) =\n              sum (0..n) (\\k. prob p (A k))
       #|  (g:A->C) x
       #|  (f:A->B) x
       #|  x:A
@@ -80819,9 +80819,9 @@ test "100/buffon matches 100/buffon.ml" {
       #|  h:A->B#C
       #|  (a:B),(b:C)
       #|  x:A
-      #|  !x:A. ?(p:B#C). P x (FST p) (SND p)
-      #|  (!x:A. ?a:B b:C. P x a b) <=> (?f g. !x. P x (f x) (g x))
-      #|  !c x y. x <= y ==> min c y - min c x <= y - x
+      #|  forall x:A. ?(p:B#C). P x (FST p) (SND p)
+      #|  (forall x:A. ?a:B b:C. P x a b) <=> (?f g. forall x. P x (f x) (g x))
+      #|  forall c x y. x <= y ==> min c y - min c x <= y - x
       #|  y:real
       #|  c:real
       #|  x:real
@@ -80833,7 +80833,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  x:real
       #|  c:real
       #|  x <= y \\/ y <= x
-      #|  !c x y. abs(min c x - min c y) <= abs(x - y)
+      #|  forall c x y. abs(min c x - min c y) <= abs(x - y)
       #|  t_min IN real_interval[a,b]
       #|  t_max IN real_interval[a,b]
       #|  t_min IN real_interval[a,b]
@@ -80850,7 +80850,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  t_max:real
       #|  real_interval[a:real,b]
       #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  !l d a b. &0 < l /\\ &0 < d /\\ a <= b /\\ &0 <= a /\\ b <= pi\n    ==> ?m M. (!t. t IN real_interval[a,b]\n                 ==> m <= min (d / &2) (l / &2 * sin t) /\\\n                     min (d / &2) (l / &2 * sin t) <= M) /\\\n              M - m <= l / &2 * (b - a) /\\\n              &0 <= m /\\ m <= d / &2 /\\ M <= d / &2
+      #|  forall l d a b. &0 < l /\\ &0 < d /\\ a <= b /\\ &0 <= a /\\ b <= pi\n    ==> ?m M. (forall t. t IN real_interval[a,b]\n                 ==> m <= min (d / &2) (l / &2 * sin t) /\\\n                     min (d / &2) (l / &2 * sin t) <= M) /\\\n              M - m <= l / &2 * (b - a) /\\\n              &0 <= m /\\ m <= d / &2 /\\ M <= d / &2
       #|  ~(d = &0)
       #|  ~(&N = &0)
       #|  a:real = b ==> a <= b
@@ -80972,7 +80972,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  1 <= N /\\ k <= N - 1 ==> k < N
       #|  (k:num) < N
       #|  k:num
-      #|  !k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * M k
+      #|  forall k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * M k
       #|  ~(i:num = j)
       #|  ~(i:num < j)
       #|  &(j+1) <= &i
@@ -80985,13 +80985,13 @@ test "100/buffon matches 100/buffon.ml" {
       #|  &i * pi / &N < &(j+1) * pi / &N /\\\n                      &j * pi / &N < &(i+1) * pi / &N
       #|  (w:A) IN prob_carrier p
       #|  w:A
-      #|  !i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (M:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= M j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
+      #|  forall i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (M:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= M j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
       #|  UNIONS (IMAGE (\\k.\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n          (0..N-1)) IN prob_events p
-      #|  !t. {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= M k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
+      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= M k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
       #|  (x:A) IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= M k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= M k /\\\n               Theta x <= &k * pi / &N}
       #|  k:num
-      #|  !k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
+      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
       #|  Theta(w:A):real
       #|  1 <= N
       #|  k <= N - 1
@@ -81001,11 +81001,11 @@ test "100/buffon matches 100/buffon.ml" {
       #|  k:num
       #|  w:A
       #|  x:num
-      #|  !t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
+      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
       #|  (x:A) IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &k * pi / &N}
       #|  k:num
-      #|  !k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
+      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
       #|  a:real = b ==> a <= b
       #|  N - 1
       #|  \\k. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n          &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}
@@ -81022,12 +81022,12 @@ test "100/buffon matches 100/buffon.ml" {
       #|  &i * pi / &N < &(j+1) * pi / &N /\\\n                      &j * pi / &N < &(i+1) * pi / &N
       #|  (w:A) IN prob_carrier p
       #|  w:A
-      #|  !i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (m:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= m j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
-      #|  !t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
+      #|  forall i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (m:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= m j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
+      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
       #|  (x:A) IN prob_carrier p
       #|  {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &k * pi / &N}
       #|  k:num
-      #|  !k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
+      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
       #|  ~(d = &0) /\\ ~(pi = &0) /\\ ~(&N = &0) ==>\n           mk / (d / &2) * (pi / &N) / pi = &2 / (d * &N) * mk
       #|  &(k+1) * pi / &N - &k * pi / &N = pi / &N
       #|  &(k+1) * pi / &N
@@ -81040,7 +81040,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  1 <= N /\\ k <= N - 1 ==> k < N
       #|  (k:num) < N
       #|  k:num
-      #|  !k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * m k
+      #|  forall k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * m k
       #|  prob p (UNIONS (IMAGE (\\k.\n       {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n              &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n       (0..N-1)))
       #|  sum(0..N-1) (\\k. &2 / (d * &N) * (M:num->real) k) -\n               sum(0..N-1) (\\k. &2 / (d * &N) * m k)
       #|  &(SUC n) * pi / &N
@@ -81051,7 +81051,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  SUC(SUC n) <= N
       #|  SUC n <= N
       #|  0 + 1 = 1
-      #|  !n. SUC n <= N ==>\n       sum(0..n) (\\k. real_integral\n         (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n           (\\t. min (d / &2) (l / &2 * sin t))) =\n       real_integral (real_interval [&0, &(SUC n) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
+      #|  forall n. SUC n <= N ==>\n       sum(0..n) (\\k. real_integral\n         (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n           (\\t. min (d / &2) (l / &2 * sin t))) =\n       real_integral (real_interval [&0, &(SUC n) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
       #|  x:real
       #|  k:num
       #|  (M:num->real) k * (&(k+1) * pi / &N - &k * pi / &N)
@@ -81061,7 +81061,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  \\t. min (d / &2) (l / &2 * sin t)
       #|  (M:num->real) k * pi / &N =\n       M k * (&(k+1) * pi / &N - &k * pi / &N)
       #|  k:num
-      #|  !k. k < N ==>\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t)) <=\n       (M:num->real) k * pi / &N
+      #|  forall k. k < N ==>\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t)) <=\n       (M:num->real) k * pi / &N
       #|  x:real
       #|  k:num
       #|  real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
@@ -81071,14 +81071,14 @@ test "100/buffon matches 100/buffon.ml" {
       #|  \\t:real. (m:num->real) k
       #|  (m:num->real) k * pi / &N =\n       m k * (&(k+1) * pi / &N - &k * pi / &N)
       #|  k:num
-      #|  !k. k < N ==>\n       (m:num->real) k * pi / &N <=\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
+      #|  forall k. k < N ==>\n       (m:num->real) k * pi / &N <=\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
       #|  (\\t. min (d / &2) (l / &2 * sin t))\n     real_integrable_on real_interval[&0, pi]
       #|  (k:num) < N
       #|  &(k+1) * pi / &N = &(k+1) / &N * pi
-      #|  !k:num. k < N ==> &(k+1) * pi / &N <= pi
-      #|  !k:num. k < N ==> &0 <= &k * pi / &N
-      #|  !k:num. k < N ==> &(k+1) * pi / &N - &k * pi / &N = pi / &N
-      #|  !k. k < N ==> &k * pi / &N <= &(k+1) * pi / &N
+      #|  forall k:num. k < N ==> &(k+1) * pi / &N <= pi
+      #|  forall k:num. k < N ==> &0 <= &k * pi / &N
+      #|  forall k:num. k < N ==> &(k+1) * pi / &N - &k * pi / &N = pi / &N
+      #|  forall k. k < N ==> &k * pi / &N <= &(k+1) * pi / &N
       #|  &0
       #|  &0
       #|  a:real = b ==> a <= b
@@ -81099,8 +81099,8 @@ test "100/buffon matches 100/buffon.ml" {
       #|  &k * pi / &N <= &(k+1) * pi / &N
       #|  (k:num) < N
       #|  k:num
-      #|  !k. ?a b. (k:num) < N ==>\n         (!t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n              a <= min (d / &2) (l / &2 * sin t) /\\\n              min (d / &2) (l / &2 * sin t) <= b) /\\\n         b - a <= l / &2 * pi / &N /\\\n         &0 <= a /\\ a <= d / &2 /\\ b <= d / &2
-      #|  ?m M. !k. (k:num) < N ==>\n        (!t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n             (m:num->real) k <= min (d / &2) (l / &2 * sin t) /\\\n             min (d / &2) (l / &2 * sin t) <= M k) /\\\n        M k - m k <= l / &2 * pi / &N /\\\n        &0 <= m k /\\ m k <= d / &2 /\\ M k <= d / &2
+      #|  forall k. ?a b. (k:num) < N ==>\n         (forall t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n              a <= min (d / &2) (l / &2 * sin t) /\\\n              min (d / &2) (l / &2 * sin t) <= b) /\\\n         b - a <= l / &2 * pi / &N /\\\n         &0 <= a /\\ a <= d / &2 /\\ b <= d / &2
+      #|  ?m M. forall k. (k:num) < N ==>\n        (forall t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n             (m:num->real) k <= min (d / &2) (l / &2 * sin t) /\\\n             min (d / &2) (l / &2 * sin t) <= M k) /\\\n        M k - m k <= l / &2 * pi / &N /\\\n        &0 <= m k /\\ m k <= d / &2 /\\ M k <= d / &2
       #|  {x:A | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)}\n        IN prob_events p
       #|  random_variable p (Theta:A->real)
       #|  random_variable p (X:A->real)
@@ -81110,7 +81110,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  1 <= N
       #|  &0 < &N
       #|  &0 < pi
-      #|  !p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> !N. 1 <= N\n          ==> abs(prob p {x:A | x IN prob_carrier p /\\\n                     X x <= l / &2 * sin(Theta x)} -\n                  &2 / (d * pi) *\n                  real_integral (real_interval [&0,pi])\n                    (\\t. min (d / &2) (l / &2 * sin t)))\n              <= l * pi / (d * &N)
+      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> forall N. 1 <= N\n          ==> abs(prob p {x:A | x IN prob_carrier p /\\\n                     X x <= l / &2 * sin(Theta x)} -\n                  &2 / (d * pi) *\n                  real_integral (real_interval [&0,pi])\n                    (\\t. min (d / &2) (l / &2 * sin t)))\n              <= l * pi / (d * &N)
       #|  (m:num->real)
       #|  (m:num->real)
       #|  (m:num->real)
@@ -81267,21 +81267,21 @@ test "100/buffon matches 100/buffon.ml" {
       #|  &0 < d * pi
       #|  &0 < pi
       #|  e:real
-      #|  !p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (d * pi)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
+      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (d * pi)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
       #|  d:real
       #|  l:real
       #|  Theta:A->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
+      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
       #|  l / &2
       #|  real_integral (real_interval [&0, pi])\n        (\\t. min (d / &2) (l / &2 * sin t)) =\n      real_integral (real_interval [&0, pi])\n        (\\t. l / &2 * sin t)
       #|  t:real
       #|  l / &2 * &1
       #|  l / &2 * sin t <= d / &2
       #|  t:real
-      #|  !t. t IN real_interval [&0, pi]\n       ==> min (d / &2) (l / &2 * sin t) = l / &2 * sin t
-      #|  !l d. &0 < l /\\ &0 < d /\\ l <= d\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) = l
+      #|  forall t. t IN real_interval [&0, pi]\n       ==> min (d / &2) (l / &2 * sin t) = l / &2 * sin t
+      #|  forall l d. &0 < l /\\ &0 < d /\\ l <= d\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) = l
       #|  ~(d = &0) /\\ ~(pi = &0)
       #|  d:real
       #|  l:real
@@ -81290,16 +81290,16 @@ test "100/buffon matches 100/buffon.ml" {
       #|  Theta:A->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X Theta l d.\n      &0 < l /\\ l <= d /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 * l) / (pi * d)
-      #|  !x. sin(pi - x) = sin(x)
-      #|  !x. cos(pi - x) = --(cos(x))
+      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ l <= d /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 * l) / (pi * d)
+      #|  forall x. sin(pi - x) = sin(x)
+      #|  forall x. cos(pi - x) = --(cos(x))
       #|  x:real
       #|  cos a - cos b = (--(cos b)) - (--(cos a))
-      #|  !a b. a <= b\n     ==> (sin has_real_integral (cos(a) - cos(b))) (real_interval [a, b])
+      #|  forall a b. a <= b\n     ==> (sin has_real_integral (cos(a) - cos(b))) (real_interval [a, b])
       #|  c:real
       #|  b:real
       #|  a:real
-      #|  !c a b. a <= b\n     ==> ((\\t. c * sin t) has_real_integral (c * (cos a - cos b)))\n          (real_interval [a, b])
+      #|  forall c a b. a <= b\n     ==> ((\\t. c * sin t) has_real_integral (c * (cos a - cos b)))\n          (real_interval [a, b])
       #|  ~(l = &0)
       #|  ~(l = &0)
       #|  &1 - (d / l) pow 2 = (l pow 2 - d pow 2) / l pow 2
@@ -81402,7 +81402,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  alpha = asn(d / l)
       #|  ~(l = &0)
       #|  &0 < pi
-      #|  !l d. &0 < l /\\ &0 < d /\\ d <= l\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) =\n          l - sqrt(l pow 2 - d pow 2) + d * acs(d / l)
+      #|  forall l d. &0 < l /\\ &0 < d /\\ d <= l\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) =\n          l - sqrt(l pow 2 - d pow 2) + d * acs(d / l)
       #|  d:real
       #|  l:real
       #|  d:real
@@ -81410,7 +81410,7 @@ test "100/buffon matches 100/buffon.ml" {
       #|  Theta:A->real
       #|  X:A->real
       #|  p:A prob_space
-      #|  !p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\ d <= l /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          (l - sqrt(l pow 2 - d pow 2) + d * acs(d / l))
+      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\ d <= l /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          (l - sqrt(l pow 2 - d pow 2) + d * acs(d / l))
       #|uniform_rv =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\b:real. (#!:fun(fun(real,bool),bool) (\a:real. ((#=:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) b:real)) (#!:fun(fun(real,bool),bool) (\t:real. ((#=:fun(real,fun(real,bool)) (((#distribution_fn:fun(prob_space('A),fun(fun('A,real),fun(real,real))) p:prob_space('A)) X:fun('A,real)) t:real)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_lt:fun(real,fun(real,bool)) t:real) a:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_le:fun(real,fun(real,bool)) b:real) t:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) t:real) a:real)) ((#real_sub:fun(real,fun(real,real)) b:real) a:real))))))))))))))))))
       #|UNIFORM_RV_IMP_RV =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real)))))))))))
       #|UNIFORM_RV_BOUNDS =  |- (#!:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#!:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#real_lt:fun(real,fun(real,bool)) a:real) b:real))))))))))

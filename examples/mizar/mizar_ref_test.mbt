@@ -5576,7 +5576,7 @@ test "Examples/mizar matches Examples/mizar.ml" {
       #|Examples/mizar quotations (17):
       #|  P:A->bool
       #|  Q:bool
-      #|  (!x:A. P x ==> Q) ==> ((?) P ==> Q)
+      #|  (forall x:A. P x ==> Q) ==> ((?) P ==> Q)
       #|  thesis = F
       #|  antecedent = F
       #|  contradiction = F
@@ -5590,7 +5590,7 @@ test "Examples/mizar matches Examples/mizar.ml" {
       #|  (~p ==> F) <=> p
       #|  F ==> p
       #|  p:bool
-      #|  !f. (!x y. x <= y /\\ y <= x ==> (x = y)) /\\\n     (!x y z. x <= y /\\ y <= z ==> x <= z) /\\\n     (!x y. x <= y ==> f x <= f y) /\\\n     (!X. ?s:A. (!x. x IN X ==> s <= x) /\\\n                (!s'. (!x. x IN X ==> s' <= x) ==> s' <= s))\n     ==> ?x. f x = x
+      #|  forall f. (forall x y. x <= y /\\ y <= x ==> (x = y)) /\\\n     (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n     (forall x y. x <= y ==> f x <= f y) /\\\n     (forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n                (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s))\n     ==> ?x. f x = x
       #|thesis =  |- ((#=:fun(bool,fun(bool,bool)) #thesis:bool) #F:bool)
       #|antecedent =  |- ((#=:fun(bool,fun(bool,bool)) #antecedent:bool) #F:bool)
       #|contradiction =  |- ((#=:fun(bool,fun(bool,bool)) #contradiction:bool) #F:bool)

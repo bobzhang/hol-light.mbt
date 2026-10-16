@@ -79193,9 +79193,9 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  (PSI:num->real#real->real) i (V,abs(Tl i))
       #|  abs(x) <= a ==> abs(&1 + x) <= &1 + a
       #|  (p /\\ q ==> r) /\\ p /\\ q ==> p /\\ q /\\ r
-      #|  !i:num. &0 < B i
-      #|  !(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 <= V /\\\n        (!i. i >= 0 ==> beta i > &0) /\\\n        (!i. i >= 1 ==> (!x. abs (x - DSF i x) <= omega i)) /\\\n        (!i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (!i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (!u. tau 0 u = u) /\\\n        (!i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (!i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (!i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (!i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (!i. B (i + 1) = beta (i + 1) * B i) /\\\n        (!i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (!i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1))\n\n        // Conclude loop invariant and bounds.\n        ==> (!i. V = H i + Tl i / B i) /\\\n            (!i. i >= 0 ==> abs(Tl i) <= tau i V) /\\\n            (!i. i >= 0 ==> abs(Tp i) <= taup i V)
-      #|  posynomial p <=>\n  ?c (n:num->real) k.\n        (!i. 1 <= i /\\ i <= k ==> c i > &0 /\\ integer(n i)) /\\\n        (!v. &0 < v ==> sum (1..k) (\\i. c i * v rpow (n i)) = p v)
+      #|  forall i:num. &0 < B i
+      #|  forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 <= V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1))\n\n        // Conclude loop invariant and bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. i >= 0 ==> abs(Tl i) <= tau i V) /\\\n            (forall i. i >= 0 ==> abs(Tp i) <= taup i V)
+      #|  posynomial p <=>\n  ?c (n:num->real) k.\n        (forall i. 1 <= i /\\ i <= k ==> c i > &0 /\\ integer(n i)) /\\\n        (forall v. &0 < v ==> sum (1..k) (\\i. c i * v rpow (n i)) = p v)
       #|  0
       #|  (\\i. &0):num->real
       #|  (\\i. &1):num->real
@@ -79205,21 +79205,21 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  (\\i. &1):num->real
       #|  posynomial (\\v. &1)
       #|  d:num->real
-      #|  !p c. posynomial p /\\ &0 < c ==> posynomial(\\v. c * p(v))
+      #|  forall p c. posynomial p /\\ &0 < c ==> posynomial(\\v. c * p(v))
       #|  (\\i. c * d i):num->real
       #|  &0 <= c <=> c = &0 \\/ &0 < c
-      #|  !c. &0 <= c ==> posynomial (\\v. c)
+      #|  forall c. &0 <= c ==> posynomial (\\v. c)
       #|  (\\i. nn i + n):num->real
       #|  nn:num->real
       #|  k:num
       #|  c:num->real
-      #|  !p n. posynomial p /\\ integer n ==> posynomial(\\v. p(v) * v rpow n)
+      #|  forall p n. posynomial p /\\ integer n ==> posynomial(\\v. p(v) * v rpow n)
       #|  &1:real
       #|  p:real->real
-      #|  !p. posynomial p ==> posynomial(\\v. p(v) * v)
+      #|  forall p. posynomial p ==> posynomial(\\v. p(v) * v)
       #|  -- &1:real
       #|  p:real->real
-      #|  !p. posynomial p ==> posynomial(\\v. p(v) / v)
+      #|  forall p. posynomial p ==> posynomial(\\v. p(v) / v)
       #|  posynomial(\\v. v)
       #|  (1 <= i /\\ i <= m + n) /\\ ~(i <= m) <=>\n                  1 + m <= i /\\ i <= n + m
       #|  (1 <= i /\\ i <= m + n) /\\ i <= m <=> 1 <= i /\\ i <= m
@@ -79234,21 +79234,21 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  m:num
       #|  n1:num->real
       #|  c1:num->real
-      #|  !p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v + q v)
-      #|  !k:A->bool p.\n        FINITE k /\\ (!i. i IN k ==> posynomial(\\v. p v i))\n        ==> posynomial (\\v. sum k (p v))
+      #|  forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v + q v)
+      #|  forall k:A->bool p.\n        FINITE k /\\ (forall i. i IN k ==> posynomial(\\v. p v i))\n        ==> posynomial (\\v. sum k (p v))
       #|  (c * x) * (d * y):real = (c * d) * (x * y)
-      #|  !p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v * q v)
+      #|  forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v * q v)
       #|  i:num
-      #|  is_realinterval s /\\ f real_convex_on s\n    ==> (!x. x IN s ==> f x = g x) ==> g real_convex_on s
+      #|  is_realinterval s /\\ f real_convex_on s\n    ==> (forall x. x IN s ==> f x = g x) ==> g real_convex_on s
       #|  &0 < v <=> v IN {x | &0 < x}
       #|  m:num
       #|  n:num->real
       #|  c:num->real
-      #|  !p. posynomial p ==> p real_convex_on {x | x > &0}
-      #|  !i:num. posynomial (taup i)
+      #|  forall p. posynomial p ==> p real_convex_on {x | x > &0}
+      #|  forall i:num. posynomial (taup i)
       #|  1 <= i + 1
-      #|  !i:num. posynomial (tau i)
-      #|  !(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 < V /\\\n        (!i. i >= 0 ==> beta i > &0) /\\\n        (!i. i >= 1 ==> (!x. abs (x - DSF i x) <= omega i)) /\\\n        (!i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (!i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (!u. tau 0 u = u) /\\\n        (!i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (!i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (!i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (!i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (!i. B (i + 1) = beta (i + 1) * B i) /\\\n        (!i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (!i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (!i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude our bounds\n        ==> !a b. real_interval[a,b] SUBSET {x | x > &0}\n                  ==> !i u. u IN real_interval[a,b]\n                            ==> tau i u <= max (tau i a) (tau i b) /\\\n                                taup i u <= max (taup i a) (taup i b)
+      #|  forall i:num. posynomial (tau i)
+      #|  forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 < V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude our bounds\n        ==> forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                  ==> forall i u. u IN real_interval[a,b]\n                            ==> tau i u <= max (tau i a) (tau i b) /\\\n                                taup i u <= max (taup i a) (taup i b)
       #|  psi:num->real#real->real
       #|  PSI:num->real#real->real
       #|  Tp:num->real
@@ -79267,7 +79267,7 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  omega:num->real
       #|  beta:num->real
       #|  p /\\ q /\\ r /\\ s <=> (p /\\ q /\\ r) /\\ s
-      #|  !(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Not stated explicitly in the theorem itself but higher up.\n        &0 < V /\\\n\n        // Environmental assumptions including nondecreasing property\n        (!i. i >= 0 ==> beta i > &0) /\\\n        (!i. i >= 1 ==> (!x. abs (x - DSF i x) <= omega i)) /\\\n        (!i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (!i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (!u. tau 0 u = u) /\\\n        (!i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (!i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (!i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (!i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (!i. B (i + 1) = beta (i + 1) * B i) /\\\n        (!i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (!i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (!i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude invariant and all bounds.\n        ==> (!i. V = H i + Tl i / B i) /\\\n            (!i. abs(Tl i) <= tau i V) /\\\n            (!i. abs(Tp i) <= taup i V) /\\\n            (!a b. real_interval[a,b] SUBSET {x | x > &0}\n                   ==> !i u. u IN real_interval[a,b]\n                             ==> tau i u <= max (tau i a) (tau i b) /\\\n                                 taup i u <= max (taup i a) (taup i b))
+      #|  forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Not stated explicitly in the theorem itself but higher up.\n        &0 < V /\\\n\n        // Environmental assumptions including nondecreasing property\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude invariant and all bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. abs(Tl i) <= tau i V) /\\\n            (forall i. abs(Tp i) <= taup i V) /\\\n            (forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                   ==> forall i u. u IN real_interval[a,b]\n                             ==> tau i u <= max (tau i a) (tau i b) /\\\n                                 taup i u <= max (taup i a) (taup i b))
       #|  &1 / &4 <= X / Y /\\ X / Y <= &1 <=>\n      &1 / &2 * inv(&2) <= X * inv Y /\\ X * inv Y <= &1 * inv(&1)
       #|  X / Y:real
       #|  i:num
@@ -79295,18 +79295,18 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  beta:num->real
       #|  X / Y:real
       #|  taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u
-      #|  Tl 0 :real = X / Y /\\\n    !i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
+      #|  Tl 0 :real = X / Y /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
       #|  Tl:num->real
-      #|  (!u:real. tau 0 u = u) /\\\n     (!i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
+      #|  (forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
       #|  tau:num->real->real
       #|  psi:num->real#real->real = \\i (u,t). sigma(Y:real)
       #|  PSI:num->real#real->real = \\i (u,t). Sigma
       #|  &0 < X / Y
       #|  &0 < X /\\ &0 < Y
-      #|  !i. &0 < (B:num->real) i
+      #|  forall i. &0 < (B:num->real) i
       #|  &1:real
       #|  &0 <= Sigma
-      #|  !beta Sigma omega B DSF H R Tp X Y g sigma v.\n        (!i. i >= 0 ==> beta i > &0) /\\\n        &1 / &2 <= X /\\ X < &1 /\\\n        &1 <= Y /\\ Y < &2 /\\\n        (!y. &1 <= y /\\ y < &2\n             ==> g y = (&1 + sigma y) / y /\\ abs(sigma y) <= Sigma) /\\\n        (!i. i >= 1 ==> (!x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X /\\\n        (!i. Tp i = g(Y) * R i) /\\\n        (!i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (!i. B (i + 1) = beta (i + 1) * B i) /\\\n        (!i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (!i. R (i + 1) = beta (i + 1) * R i -  v(i + 1) * Y)\n        ==> ?tau. (!u. tau 0 u = u) /\\\n                  (!i u. tau (i + 1) u =\n                         beta (i + 1) * Sigma * tau i u + omega (i + 1)) /\\\n                  (!i. abs(X / Y - H i)\n                       <= max (tau i (&1 / &4)) (tau i (&1)) / B i)
+      #|  forall beta Sigma omega B DSF H R Tp X Y g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &2 <= X /\\ X < &1 /\\\n        &1 <= Y /\\ Y < &2 /\\\n        (forall y. &1 <= y /\\ y < &2\n             ==> g y = (&1 + sigma y) / y /\\ abs(sigma y) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X /\\\n        (forall i. Tp i = g(Y) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) = beta (i + 1) * R i -  v(i + 1) * Y)\n        ==> ?tau. (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) * Sigma * tau i u + omega (i + 1)) /\\\n                  (forall i. abs(X / Y - H i)\n                       <= max (tau i (&1 / &4)) (tau i (&1)) / B i)
       #|  sqrt X
       #|  i:num
       #|  &1
@@ -79321,19 +79321,19 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  p:real->real
       #|  i:num
       #|  &0 < beta(j + 1) /\\ &0 < B j
-      #|  !i. B (i + 1):real = beta (i + 1) * B i
-      #|  !i. H (i + 1):real = H i + v (i + 1) / B (i + 1)
+      #|  forall i. B (i + 1):real = beta (i + 1) * B i
+      #|  forall i. H (i + 1):real = H i + v (i + 1) / B (i + 1)
       #|  j:num
-      #|  !i. R (i + 1) =\n           beta (i + 1) * R i - v (i + 1) * (H (i + 1) + H i) / &2
+      #|  forall i. R (i + 1) =\n           beta (i + 1) * R i - v (i + 1) * (H (i + 1) + H i) / &2
       #|  j:num
       #|  i:num
       #|  (x + h) / &2 * (x - h) = (x pow 2 - h pow 2) / &2
       #|  (B:num->real) i
-      #|  !b. &0 < b /\\ x / b = y / &2 * z / b ==> x = y / &2 * z
+      #|  forall b. &0 < b /\\ x / b = y / &2 * z / b ==> x = y / &2 * z
       #|  s - (s - h) / &2 = (s + h) / &2
       #|  &0 < beta(j + 1) /\\ &0 < B j
       #|  Tl(j:num) / B j = sqrt X - H j
-      #|  !j:num. Tl j / B j = sqrt X - H j
+      #|  forall j:num. Tl j / B j = sqrt X - H j
       #|  &0 < b /\\ &0 < s /\\ r = (s - t / b / &2) * t\n        ==> inv s * r = (&1 - t * inv(&2 * s * b)) * t
       #|  &1 + x - &1 = x
       #|  &2 * c / s * x / &2 = c * x / s
@@ -79363,20 +79363,20 @@ test "Examples/digit_serial_methods matches Examples/digit_serial_methods.ml" {
       #|  beta:num->real
       #|  sqrt X
       #|  taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u
-      #|  Tl 0 = sqrt(X) /\\\n    !i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
+      #|  Tl 0 = sqrt(X) /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
       #|  Tl:num->real
-      #|  (!u:real. tau 0 u = u) /\\\n     (!i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
+      #|  (forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
       #|  tau:num->real->real
       #|  psi:num->real#real->real = \\i (u,t).\n        if i = 0 then sigma(X)\n        else (&1 + sigma(X:real)) * (&1 - t / (&2 * u * B i)) - &1
       #|  PSI:num->real#real->real = \\i (u,t).\n        if i = 0 then Sigma\n        else Sigma + (&1 + Sigma) * t / (&2 * u * B i)
       #|  &0 < sqrt X
       #|  &0 < X
-      #|  !i. &0 < (B:num->real) i
+      #|  forall i. &0 < (B:num->real) i
       #|  &1 / &2
       #|  &0 <= Sigma
-      #|  !beta Sigma omega B DSF H R Tp X g sigma v.\n        (!i. i >= 0 ==> beta i > &0) /\\\n        &1 / &4 <= X /\\ X < &1 /\\\n        (!x. &1 / &4 <= x /\\ x < &1\n             ==> g x = (&1 + sigma x) / sqrt x /\\\n                 abs(sigma x) <= Sigma) /\\\n        (!i. i >= 1 ==> (!x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X / &2 /\\\n        (!i. Tp i = (if i = 0 then &2 else &1) * g(X) * R i) /\\\n        (!i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (!i. B (i + 1) = beta (i + 1) * B i) /\\\n        (!i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (!i. R (i + 1) =\n             beta (i + 1) * R i -  v(i + 1) * (H(i + 1) + H i) / &2)\n        ==> ?tau.\n                  (!u. tau 0 u = u) /\\\n                  (!i u. tau (i + 1) u =\n                         beta (i + 1) *\n                         (if i = 0 then Sigma\n                          else Sigma + (&1 + Sigma) * tau i u / (&2 * u * B i))\n                          * tau i u +\n                         omega (i + 1)) /\\\n                  (!i. abs(sqrt X - H i)\n                       <= max (tau i (&1 / &2)) (tau i (&1)) / B i)
+      #|  forall beta Sigma omega B DSF H R Tp X g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &4 <= X /\\ X < &1 /\\\n        (forall x. &1 / &4 <= x /\\ x < &1\n             ==> g x = (&1 + sigma x) / sqrt x /\\\n                 abs(sigma x) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X / &2 /\\\n        (forall i. Tp i = (if i = 0 then &2 else &1) * g(X) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) =\n             beta (i + 1) * R i -  v(i + 1) * (H(i + 1) + H i) / &2)\n        ==> ?tau.\n                  (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) *\n                         (if i = 0 then Sigma\n                          else Sigma + (&1 + Sigma) * tau i u / (&2 * u * B i))\n                          * tau i u +\n                         omega (i + 1)) /\\\n                  (forall i. abs(sqrt X - H i)\n                       <= max (tau i (&1 / &2)) (tau i (&1)) / B i)
       #|  a / b:real
-      #|  x <= a / b ==> &0 <= b ==> !a'. a <= a' ==> x <= a' / b
+      #|  x <= a / b ==> &0 <= b ==> forall a'. a <= a' ==> x <= a' / b
       #|  (\\i. if i = 0 then &1 / &2 else &9 / &16):num->real
       #|  inv(&2 pow 8):real
       #|  (\\i. if i = 2 then &32 else if i = 5 then &64 else &128):num->real

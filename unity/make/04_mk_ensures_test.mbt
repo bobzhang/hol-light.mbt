@@ -5838,55 +5838,55 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|0..0..4..8..solved at 13
       #|0..0..solved at 2
       #|Unity/mk_ensures quotations (182):
-      #|  (!p q. EXIST_TRANSITION (p:'a->bool) q []         <=> F) /\\\n    (!p q. EXIST_TRANSITION p q (CONS (st:'a->'a) Pr) <=>\n\t  ((!s. (p s /\\ ~q s) ==> q (st s)) \\/ (EXIST_TRANSITION p q Pr)))
-      #|  !(p:'a->bool) q (Pr:('a->'a)list).\n       ENSURES p q Pr = (((p UNLESS q) Pr) /\\ ((p EXIST_TRANSITION q) Pr))
-      #|  !(p:'a->bool) q (st:'a->'a).\n        ENSURES_STMT p q st = (\\s. p s /\\ ~(q s) ==> q (st s))
-      #|  !s:'a. q s ==> r s
+      #|  (forall p q. EXIST_TRANSITION (p:'a->bool) q []         <=> F) /\\\n    (forall p q. EXIST_TRANSITION p q (CONS (st:'a->'a) Pr) <=>\n\t  ((forall s. (p s /\\ ~q s) ==> q (st s)) \\/ (EXIST_TRANSITION p q Pr)))
+      #|  forall(p:'a->bool) q (Pr:('a->'a)list).\n       ENSURES p q Pr = (((p UNLESS q) Pr) /\\ ((p EXIST_TRANSITION q) Pr))
+      #|  forall(p:'a->bool) q (st:'a->'a).\n        ENSURES_STMT p q st = (\\s. p s /\\ ~(q s) ==> q (st s))
+      #|  forall s:'a. q s ==> r s
       #|  (st:'a->'a) s
-      #|  !s:'a. q s ==> r s
-      #|  !(p:'a->bool) q r st.\n          ((!s. p s /\\ ~q s ==> q (st s)) /\\ (!s. q s ==> r s)) ==>\n           (!s. p s /\\ ~r s ==> r (st s))
-      #|  !(p:'a->bool) p' q q' h.\n     (!s. (p  UNLESS_STMT q)  h s)     ==>\n     (!s. (p' UNLESS_STMT q') h s)     ==>\n     (!s. p' s /\\ ~q' s ==> q' (h s))  ==>\n     (!s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s) ==>\n     (((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))
-      #|  !(p:'a->bool) p' q q' h.\n      (!s. (p  UNLESS_STMT q)  h s)     ==>\n      (!s. (p' UNLESS_STMT q') h s)     ==>\n      (!s. p' s /\\ ~q' s ==> q' (h s))  ==>\n      (!s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s\n               ==> ((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))
-      #|  !(p:'a->bool) q r st.\n       (!s. p s /\\ ~q s ==> q (st s)) ==>\n         (!s. (p s \\/ r s) /\\ ~(q s \\/ r s) ==> q (st s) \\/ r (st s))
-      #|  !(p:'a->bool) q r Pr. (p ENSURES (q \\/* r)) Pr ==>\n              (((p /\\* (Not q)) \\/* (p /\\* q)) ENSURES (q \\/* r)) Pr
-      #|  !(p:'a->bool) q r (st:'a->'a).\n         (!s. p s /\\ ~q s ==> q (st s)) ==>\n            (!s. (p \\/* r) s /\\ ~(q \\/* r) s ==> (q \\/* r) (st s))
+      #|  forall s:'a. q s ==> r s
+      #|  forall(p:'a->bool) q r st.\n          ((forall s. p s /\\ ~q s ==> q (st s)) /\\ (forall s. q s ==> r s)) ==>\n           (forall s. p s /\\ ~r s ==> r (st s))
+      #|  forall(p:'a->bool) p' q q' h.\n     (forall s. (p  UNLESS_STMT q)  h s)     ==>\n     (forall s. (p' UNLESS_STMT q') h s)     ==>\n     (forall s. p' s /\\ ~q' s ==> q' (h s))  ==>\n     (forall s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s) ==>\n     (((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))
+      #|  forall(p:'a->bool) p' q q' h.\n      (forall s. (p  UNLESS_STMT q)  h s)     ==>\n      (forall s. (p' UNLESS_STMT q') h s)     ==>\n      (forall s. p' s /\\ ~q' s ==> q' (h s))  ==>\n      (forall s. (p /\\* p') s /\\ ~((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') s\n               ==> ((p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') (h s))
+      #|  forall(p:'a->bool) q r st.\n       (forall s. p s /\\ ~q s ==> q (st s)) ==>\n         (forall s. (p s \\/ r s) /\\ ~(q s \\/ r s) ==> q (st s) \\/ r (st s))
+      #|  forall(p:'a->bool) q r Pr. (p ENSURES (q \\/* r)) Pr ==>\n              (((p /\\* (Not q)) \\/* (p /\\* q)) ENSURES (q \\/* r)) Pr
+      #|  forall(p:'a->bool) q r (st:'a->'a).\n         (forall s. p s /\\ ~q s ==> q (st s)) ==>\n            (forall s. (p \\/* r) s /\\ ~(q \\/* r) s ==> (q \\/* r) (st s))
       #|  h:'a->'a
       #|  r:'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. q s ==> r s
-      #|  !s:'a. p s /\\ ~q s ==> q (h s)
-      #|  !(p:'a->bool) q r Pr.\n     ((p EXIST_TRANSITION q) Pr /\\ (!s. (q s) ==> (r s))) ==>\n       ((p EXIST_TRANSITION r) Pr)
-      #|  !s:'a. (Not (p:'a->bool)) s
-      #|  !s:'a. ((p:'a->bool) s) /\\ ~(False s)\n                          ==> (False ((h:'a->'a) s))
-      #|  !(p:'a->bool) Pr.\n     ((p EXIST_TRANSITION False) Pr) ==> !s. (Not p) s
-      #|  !(p:'a->bool) st Pr. (False EXIST_TRANSITION p) (CONS st Pr)
+      #|  forall s:'a. q s ==> r s
+      #|  forall s:'a. p s /\\ ~q s ==> q (h s)
+      #|  forall(p:'a->bool) q r Pr.\n     ((p EXIST_TRANSITION q) Pr /\\ (forall s. (q s) ==> (r s))) ==>\n       ((p EXIST_TRANSITION r) Pr)
+      #|  forall s:'a. (Not (p:'a->bool)) s
+      #|  forall s:'a. ((p:'a->bool) s) /\\ ~(False s)\n                          ==> (False ((h:'a->'a) s))
+      #|  forall(p:'a->bool) Pr.\n     ((p EXIST_TRANSITION False) Pr) ==> forall s. (Not p) s
+      #|  forall(p:'a->bool) st Pr. (False EXIST_TRANSITION p) (CONS st Pr)
       #|  h:'a->'a
       #|  r:'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)
-      #|  !(p:'a->bool) q r Pr.\n         (p EXIST_TRANSITION q) Pr ==>\n            ((p \\/* r) EXIST_TRANSITION (q \\/* r)) Pr
-      #|  !(l:('a)list). (APPEND l []) = l
-      #|  !(p:'a->bool) q st Pr.\n       (!s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (CONS st Pr)
-      #|  !st (l:('a)list).  (APPEND [st] l) = (CONS st l)
-      #|  !st (l1:('a)list) l2.\n       (APPEND (APPEND l1 [st]) l2) = (APPEND l1 (CONS st l2))
+      #|  forall s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)
+      #|  forall(p:'a->bool) q r Pr.\n         (p EXIST_TRANSITION q) Pr ==>\n            ((p \\/* r) EXIST_TRANSITION (q \\/* r)) Pr
+      #|  forall(l:('a)list). (APPEND l []) = l
+      #|  forall(p:'a->bool) q st Pr.\n       (forall s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (CONS st Pr)
+      #|  forall st (l:('a)list).  (APPEND [st] l) = (CONS st l)
+      #|  forall st (l1:('a)list) l2.\n       (APPEND (APPEND l1 [st]) l2) = (APPEND l1 (CONS st l2))
       #|  :bool
       #|  :bool
       #|  :bool
-      #|  !st (l1:('a)list) l2.\n       (APPEND (CONS st l1) l2) = (CONS st (APPEND l1 l2))
-      #|  !(p:'a->bool) q st Pr1 Pr2.\n       (!s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (APPEND Pr1 (CONS st Pr2))
-      #|  !(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND FPr GPr)
-      #|  !GPr:('a->'a)list. (p EXIST_TRANSITION q) (APPEND GPr t)
+      #|  forall st (l1:('a)list) l2.\n       (APPEND (CONS st l1) l2) = (CONS st (APPEND l1 l2))
+      #|  forall(p:'a->bool) q st Pr1 Pr2.\n       (forall s. p s /\\ ~q s ==> q (st s))\n            ==> (p EXIST_TRANSITION q) (APPEND Pr1 (CONS st Pr2))
+      #|  forall(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND FPr GPr)
+      #|  forall GPr:('a->'a)list. (p EXIST_TRANSITION q) (APPEND GPr t)
       #|  (APPEND (t':('a->'a)list) [h])
       #|  t:('a->'a)list
       #|  t':('a->'a)list
       #|  h:'a->'a
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND GPr FPr)
-      #|  !(p:'a->bool) q st FPr GPr.\n     (p EXIST_TRANSITION q) (APPEND FPr GPr)\n              ==> (p EXIST_TRANSITION q) (APPEND FPr (CONS st GPr))
-      #|  !(p:'a->bool) q st Pr.\n       (p EXIST_TRANSITION q) Pr ==> (p EXIST_TRANSITION q) (CONS st Pr)
+      #|  forall(p:'a->bool) q FPr GPr.\n     (p EXIST_TRANSITION q) FPr\n              ==> (p EXIST_TRANSITION q) (APPEND GPr FPr)
+      #|  forall(p:'a->bool) q st FPr GPr.\n     (p EXIST_TRANSITION q) (APPEND FPr GPr)\n              ==> (p EXIST_TRANSITION q) (APPEND FPr (CONS st GPr))
+      #|  forall(p:'a->bool) q st Pr.\n       (p EXIST_TRANSITION q) Pr ==> (p EXIST_TRANSITION q) (CONS st Pr)
       #|  ((p:'a->bool) EXIST_TRANSITION q) (APPEND [st] t)
       #|  t:('a->'a)list
       #|  st:'a->'a
@@ -5894,7 +5894,7 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  p:'a->bool
       #|  (((p:'a->bool) EXIST_TRANSITION q) (APPEND [st] t)) <=>\n           ((p EXIST_TRANSITION q) (APPEND t [st]))
       #|  (((p:'a->bool) EXIST_TRANSITION q) (APPEND [st] t)) <=>\n           ((p EXIST_TRANSITION q) (APPEND t [st]))
-      #|  !(p:'a->bool) q st Pr.\n      (p EXIST_TRANSITION q) (APPEND [st] Pr) =\n      (p EXIST_TRANSITION q) (APPEND  Pr [st])
+      #|  forall(p:'a->bool) q st Pr.\n      (p EXIST_TRANSITION q) (APPEND [st] Pr) =\n      (p EXIST_TRANSITION q) (APPEND  Pr [st])
       #|  :bool
       #|  :bool
       #|  :bool
@@ -5910,7 +5910,7 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  h:'a->'a
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND FPr GPr) ==>\n      (p EXIST_TRANSITION q) (APPEND GPr FPr)
+      #|  forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND FPr GPr) ==>\n      (p EXIST_TRANSITION q) (APPEND GPr FPr)
       #|  t:('a->'a)list
       #|  FPr:('a->'a)list
       #|  h:'a->'a
@@ -5921,18 +5921,18 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  h:'a->'a
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) ==>\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)
-      #|  !(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) =\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)
-      #|  !(p:'a->bool) q. (p ENSURES q) [] = F
+      #|  forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) ==>\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)
+      #|  forall(p:'a->bool) q FPr GPr.\n      (p EXIST_TRANSITION q) (APPEND GPr FPr) =\n      (p EXIST_TRANSITION q) (APPEND FPr GPr)
+      #|  forall(p:'a->bool) q. (p ENSURES q) [] = F
       #|  (\\s:'a. (p s /\\ ~p s) ==> p (st s))s
-      #|  !(p:'a->bool) st Pr. (p ENSURES p) (CONS st Pr)
+      #|  forall(p:'a->bool) st Pr. (p ENSURES p) (CONS st Pr)
       #|  ((p:'a->bool) EXIST_TRANSITION q) Pr
-      #|  !s:'a. q s ==> r s
+      #|  forall s:'a. q s ==> r s
       #|  ((p:'a->bool) UNLESS q) Pr
-      #|  !s:'a. q s ==> r s
-      #|  !(p:'a->bool) q r Pr.\n         ((p ENSURES q) Pr /\\ (!s:'a. (q s) ==> (r s)))\n        ==>\n\t ((p ENSURES r) Pr)
-      #|  !s:'a. (p:'a->bool) s /\\ ~(False s) ==> False ((h:'a->'a) s)
-      #|  !(p:'a->bool) Pr. ((p ENSURES False) Pr) ==> !s. (Not p)s
+      #|  forall s:'a. q s ==> r s
+      #|  forall(p:'a->bool) q r Pr.\n         ((p ENSURES q) Pr /\\ (forall s:'a. (q s) ==> (r s)))\n        ==>\n\t ((p ENSURES r) Pr)
+      #|  forall s:'a. (p:'a->bool) s /\\ ~(False s) ==> False ((h:'a->'a) s)
+      #|  forall(p:'a->bool) Pr. ((p ENSURES False) Pr) ==> forall s. (Not p)s
       #|  ((p:'a->bool) UNLESS q) t /\\ (p' ENSURES q') (t:('a->'a)list)\n       ==> (p /\\* p' ENSURES (p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') t
       #|  ((p:'a->bool) UNLESS q) t /\\ (p' ENSURES q') (t:('a->'a)list)\n       ==> (p /\\* p' ENSURES (p /\\* q' \\/* p' /\\* q) \\/* q /\\* q') t
       #|  h:'a->'a
@@ -5940,11 +5940,11 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  p':'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
-      #|  !s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s
-      #|  !s:'a. (p':'a->bool) s /\\ ~(q' s) ==> q' ((h:'a->'a) s)
-      #|  !s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
-      #|  !s:'a. ((p:'a->bool) UNLESS_STMT q) (h:'a->'a) s
+      #|  forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
+      #|  forall s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s
+      #|  forall s:'a. (p':'a->bool) s /\\ ~(q' s) ==> q' ((h:'a->'a) s)
+      #|  forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
+      #|  forall s:'a. ((p:'a->bool) UNLESS_STMT q) (h:'a->'a) s
       #|  t:('a->'a)list
       #|  q':'a->bool
       #|  p':'a->bool
@@ -5957,28 +5957,28 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  p':'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
-      #|  !s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s
-      #|  !(p:'a->bool) q p' q' Pr.\n    (p UNLESS q) Pr /\\ (p' ENSURES q') Pr ==>\n      ((p /\\* p') ENSURES (((p /\\* q') \\/*  (p' /\\* q)) \\/*  (q /\\* q')))\n        Pr
+      #|  forall s:'a. ((p':'a->bool) UNLESS_STMT q') (h:'a->'a) s
+      #|  forall s:'a. ((p:'a->bool) UNLESS_STMT q)   (h:'a->'a) s
+      #|  forall(p:'a->bool) q p' q' Pr.\n    (p UNLESS q) Pr /\\ (p' ENSURES q') Pr ==>\n      ((p /\\* p') ENSURES (((p /\\* q') \\/*  (p' /\\* q)) \\/*  (q /\\* q')))\n        Pr
       #|  h:'a->'a
       #|  r:'a->bool
       #|  q:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)
-      #|  !(p:'a->bool) q r Pr.\n      ((p ENSURES q) Pr) ==> (((p \\/* r) ENSURES (q \\/* r)) Pr)
+      #|  forall s:'a. (p:'a->bool) s /\\ ~q s ==> q (h s)
+      #|  forall(p:'a->bool) q r Pr.\n      ((p ENSURES q) Pr) ==> (((p \\/* r) ENSURES (q \\/* r)) Pr)
       #|  CONS (st:'a->'a) Pr
       #|  q:'a->bool
       #|  p:'a->bool
       #|  p:'a->bool
-      #|  !s:'a. p s ==> q s
+      #|  forall s:'a. p s ==> q s
       #|  ((p:'a->bool) ENSURES p)(CONS st Pr)
-      #|  !(p:'a->bool) q st Pr.\n    (!s. p s ==> q s) ==> (p ENSURES q) (CONS st Pr)
-      #|  !(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p UNLESS q) Pr
+      #|  forall(p:'a->bool) q st Pr.\n    (forall s. p s ==> q s) ==> (p ENSURES q) (CONS st Pr)
+      #|  forall(p:'a->bool) q Pr. (p ENSURES q) Pr ==> (p UNLESS q) Pr
       #|  Pr:('a->'a)list
       #|  ((q:'a->bool) \\/*  r)
       #|  (((p:'a->bool) /\\* r) \\/* (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))
       #|  p:'a->bool
-      #|  !s:'a. ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))s ==>\n\t (q \\/*  r)s
+      #|  forall s:'a. ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/* r))s ==>\n\t (q \\/*  r)s
       #|  ((p:'a->bool) ENSURES\n      ((p /\\* r) \\/*  (((p \\/*  q) /\\* (q \\/*  r)) \\/*  r)))Pr
       #|  r:'a->bool
       #|  q:'a->bool
@@ -6000,26 +6000,26 @@ test "Unity/mk_ensures matches Unity/mk_ensures.ml" {
       #|  Pr:('a->'a)list
       #|  r:'a->bool
       #|  ((p:'a->bool) \\/*  q)
-      #|  !(p:'a->bool) q r Pr.\n        ((p \\/*  q) ENSURES r)Pr ==> (p ENSURES (q \\/*  r))Pr
+      #|  forall(p:'a->bool) q r Pr.\n        ((p \\/*  q) ENSURES r)Pr ==> (p ENSURES (q \\/*  r))Pr
       #|  (((p:'a->bool) /\\* (Not  q)) ENSURES\n\t  ((p /\\* q) \\/* (q \\/* r)))Pr
       #|  Pr:('a->'a)list
       #|  ((q:'a->bool) \\/* r)
       #|  ((p:'a->bool) /\\* q)
       #|  ((p:'a->bool) /\\* (Not  q))
-      #|  !(p:'a->bool) q r Pr. (p ENSURES (q \\/*  r)) Pr ==>\n              ((p /\\* (Not  q)) ENSURES (q \\/*  r)) Pr
+      #|  forall(p:'a->bool) q r Pr. (p ENSURES (q \\/*  r)) Pr ==>\n              ((p /\\* (Not  q)) ENSURES (q \\/*  r)) Pr
       #|  (q:'a->bool) \\/* r
       #|  q:'a->bool
       #|  p:'a->bool
       #|  r:'a->bool
       #|  q:'a->bool
-      #|  !(p:'a->bool) q r Pr.\n         (p ENSURES q) Pr ==> (p ENSURES (q \\/*  r)) Pr
-      #|  !(p:'a->bool) st Pr. (False ENSURES p) (CONS st Pr)
+      #|  forall(p:'a->bool) q r Pr.\n         (p ENSURES q) Pr ==> (p ENSURES (q \\/*  r)) Pr
+      #|  forall(p:'a->bool) st Pr. (False ENSURES p) (CONS st Pr)
       #|  Pr:('a->'a)list
       #|  q:'a->bool
       #|  p:'a->bool
       #|  False:'a->bool
       #|  r:'a->bool
-      #|  !(p:'a->bool) q r Pr.\n        (p ENSURES q) Pr /\\ (r STABLE Pr)\n       ==>\n\t((p /\\* r) ENSURES (q /\\*\n r))Pr
+      #|  forall(p:'a->bool) q r Pr.\n        (p ENSURES q) Pr /\\ (r STABLE Pr)\n       ==>\n\t((p /\\* r) ENSURES (q /\\*\n r))Pr
       #|EXIST_TRANSITION =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#EXIST_TRANSITION:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) #NIL:list(fun(''a,''a)))) #F:bool)))))) (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#EXIST_TRANSITION:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#CONS:fun(fun(''a,''a),fun(list(fun(''a,''a)),list(fun(''a,''a)))) st:fun(''a,''a)) Pr:list(fun(''a,''a))))) ((#\/:fun(bool,fun(bool,bool)) (#!:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) (q:fun(''a,bool) (st:fun(''a,''a) s:''a)))))) (((#EXIST_TRANSITION:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
       #|ENSURES =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) (((#ENSURES:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#EXIST_TRANSITION:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))))))))
       #|ENSURES_STMT =  |- (#!:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#!:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#!:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (((#ENSURES_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a))) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) (q:fun(''a,bool) (st:fun(''a,''a) s:''a)))))))))))
