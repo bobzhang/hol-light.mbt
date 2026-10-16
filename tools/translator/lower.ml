@@ -954,6 +954,14 @@ module Lower = struct
   (* Whether a value of type `have` must be eta-expanded to be used at type
      `want`: different grouping, or a non-raising function where a raising
      one is expected (MoonBit does not convert function values). *)
+  let rec sequence_boundary have want =
+    match have, want with
+    | M.Named (("Array" | "ArrayView" | "@list.List") as h, [ _ ]),
+      M.Named (("Array" | "ArrayView" | "@list.List") as w, [ _ ]) -> h <> w
+    | M.Tuple hs, M.Tuple ws when List.length hs = List.length ws ->
+        List.exists2 sequence_boundary hs ws
+    | _ -> false
+
   let rec needs_eta have want =
     match have, want with
     | M.Named (("Array" | "ArrayView" | "@list.List") as h, [ _ ]),
@@ -990,7 +998,7 @@ module Lower = struct
     | M.Named ("Array", [ _ ]), M.Named ("ArrayView", [ _ ]) ->
         (stmts, Call (Atom "Array::exact_view", [ e ]))
     | M.Named (("Array" | "ArrayView"), [ _ ]), M.Named ("@list.List", [ _ ]) ->
-        (stmts, Call (Atom "@list.List::from_array", [ e ]))
+        (stmts, Call (Atom "@list.List", [ e ]))
     | M.Named ("@list.List", [ _ ]), M.Named ("Array", [ _ ]) ->
         (stmts, Call (Atom "@list.List::to_array", [ e ]))
     | M.Named ("@list.List", [ _ ]), M.Named ("ArrayView", [ _ ]) ->
@@ -1401,6 +1409,10 @@ module Lower = struct
     in
     match t, want with
     | M.Named (("Int" | "Int64") as a, []), Some (M.Named (("Int" | "Int64") as b, []) as w) when a <> b ->
+        let ss, x = adapt (ss, x) t w in
+        (ss, x, w)
+    | M.Named (("Array" | "ArrayView" | "@list.List") as a, [ _ ]),
+      Some (M.Named (("Array" | "ArrayView" | "@list.List") as b, [ _ ]) as w) when a <> b ->
         let ss, x = adapt (ss, x) t w in
         (ss, x, w)
     | _ -> (ss, x, t)
@@ -1927,7 +1939,9 @@ module Lower = struct
       match expect, result_mty with
       | Some _, _ -> expect
       | None, M.Fun _ -> Option.map mty_of res
-      | None, _ -> None
+      | None, _ -> Option.bind res (fun ty ->
+          let canon = mty_of ty in
+          if sequence_boundary result_mty canon then Some canon else None)
     in
     adapt_to ?expect (stmts @ ss, e, result_mty)
 

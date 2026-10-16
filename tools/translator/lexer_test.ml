@@ -15,6 +15,10 @@ let prelude = {|
   let lex (_ : string list) : lexcode list = []
   let explode (s : string) = [s]
   let o f g x = f (g x)
+  type pretype = Utv of string
+  let parse_pretype (xs : lexcode list) = (Utv "", xs)
+  let a x xs = match xs with h :: t when h = x -> (h, t) | _ -> failwith "no parse"
+  let finished xs = if xs = [] then (0, xs) else failwith "unparsed"
 |};;
 let lower source =
   let ast = Parse.implementation (Lexing.from_string (prelude ^ "\nlet result = (" ^ source ^ ");;")) in
@@ -26,7 +30,7 @@ let lower source =
           let name = Ident.name id in
           if name = "result" then result := Some vb.Typedtree.vb_expr
           else Hashtbl.replace Prov.table (Ident.unique_name id)
-            ((if name = "lex" then "parser.ml" else "lib.ml"), name))
+            ((if List.mem name ["lex"; "parse_pretype"; "a"; "finished"] then "parser.ml" else "lib.ml"), name))
           (Typedtree.pat_bound_idents vb.Typedtree.vb_pat)
     | _ -> ()) items;
   let ss, e, _ = Lower.lower (Option.get !result) in
@@ -70,4 +74,16 @@ ignore (check "let explode s = [s; s] in lex (explode \"a\")"
   ["@lexer.lex"; "@lib.implode"] []);
 ignore (check "let o f g s = f (g (s ^ s)) in o lex explode \"a\""
   ["@lib.explode"; "@lib.implode"] []);
+(* Source lists still work at the hand-ported array/view API boundaries.
+   In particular, literals and callback tuple remainders need conversion. *)
+ignore (check "parse_pretype (lex (explode \"A\"))"
+  ["@parser.parse_pretype"; "Array::exact_view"] ["@lib.explode"]);
+ignore (check "(fun p -> p (lex (explode \"A\"))) parse_pretype"
+  ["@list.List::to_array"; "@list.List("] []);
+ignore (check "a \"x\" [\"x\"; \"y\"]"
+  ["Array::exact_view"; "@list.List::to_array"] []);
+ignore (check "finished ([] : string list)"
+  ["Array::exact_view"; "@list.List::to_array"] []);
+ignore (check "match snd (parse_pretype (lex (explode \"A\"))) with [] -> true | _ -> false"
+  ["@list.List("] []);
 print_endline "Lexer translator regression tests passed.";;
