@@ -10,6 +10,15 @@ class NotationTests(unittest.TestCase):
             '∀ x. ?!y. !! x !* y !_x x_! ∃!z. P x y')
         self.assertEqual(universal_notation('(!) ! x. P x'), '(∀) ∀ x. P x')
 
+    def test_word_spelling_and_unicode_boundaries(self):
+        self.assertEqual(universal_notation('forall x. forall_x x'), '∀ x. forall_x x')
+        self.assertEqual(universal_notation('"forall" // forall\nforall x. P x'),
+                         '"forall" // forall\n∀ x. P x')
+        self.assertEqual(upstream_notation('∀x.∀y.P x y'), '!x. !y.P x y')
+        self.assertEqual(upstream_notation('∀∀x'), '! !x')
+        self.assertEqual(rewrite_moonbit('@parser.parse_term("forall x. P x")'),
+                         '@parser.parse_term("∀ x. P x")')
+
     def test_strings_and_comments(self):
         text = '!x. "!y. \\"quoted\\"" // !z. comment\n!y. P'
         self.assertEqual(universal_notation(text),

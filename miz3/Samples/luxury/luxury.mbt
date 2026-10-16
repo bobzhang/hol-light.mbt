@@ -161,7 +161,7 @@ pub fn exec_phrase_8(x14 : Unit) -> Unit raise {
 }
 
 ///|
-/// the phrase exec_tactic_out := ((SUBGOAL_THEN (parse_term \"!p. NUM_REP (IND_SUC (dest_num p))\")\n              MP_TAC) : tactic);;
+/// the phrase exec_tactic_out := ((SUBGOAL_THEN (parse_term \"∀p. NUM_REP (IND_SUC (dest_num p))\")\n              MP_TAC) : tactic);;
 fn step_10() -> Unit raise {
   @lib.register_phrase("exec_tactic_out := ((SUBGOAL_THEN (parse_term \"∀ p. NUM_REP (IND_SUC (dest_num p))\")\n              MP_TAC) : tactic);;", exec_phrase_8)
 }
@@ -285,7 +285,7 @@ pub fn exec_phrase_14(x29 : Unit) -> Unit raise {
 }
 
 ///|
-/// the phrase exec_tactic_out := ((SUBGOAL_THEN (parse_term \"!p. NUM_REP (IND_SUC (dest_num p))\")\n          MP_TAC) : tactic);;
+/// the phrase exec_tactic_out := ((SUBGOAL_THEN (parse_term \"∀p. NUM_REP (IND_SUC (dest_num p))\")\n          MP_TAC) : tactic);;
 fn step_17() -> Unit raise {
   @lib.register_phrase("exec_tactic_out := ((SUBGOAL_THEN (parse_term \"∀ p. NUM_REP (IND_SUC (dest_num p))\")\n          MP_TAC) : tactic);;", exec_phrase_14)
 }

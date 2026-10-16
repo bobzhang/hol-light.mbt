@@ -516,7 +516,7 @@ let spec_x : Cell[Term] = tm_cell("SPEC")
 let spec_pth : Cell[Thm] = th_cell("SPEC")
 
 ///|
-/// `SPEC`: from `|- !x. t` derive `|- t[tm/x]`.
+/// `SPEC`: from `|- ∀x. t` derive `|- t[tm/x]`.
 pub fn spec(tm : Term, th : Thm) -> Thm raise {
   let result = try {
     let abs = @kernel.rand(@kernel.concl(th))
@@ -625,7 +625,7 @@ pub fn ispecl(tms : List[Term], th : Thm) -> Thm raise {
 let gen_pth : Cell[Thm] = th_cell("GEN")
 
 ///|
-/// `GEN`: from `A |- t` derive `A |- !x. t` (x not free in A).
+/// `GEN`: from `A |- t` derive `A |- ∀x. t` (x not free in A).
 pub fn gen(x : Term, th : Thm) -> Thm raise {
   let qth = @kernel.inst_type(
     @list.singleton((@kernel.dest_var(x).1, @kernel.aty)),
@@ -1288,7 +1288,7 @@ fn load_steps() -> Unit raise {
   {
     let p = q("P:A->bool")
     let x = q("x:A")
-    // `EQ_MP (AP_THM FORALL_DEF `P`) (ASSUME `(!)P`)`: right to left.
+    // `EQ_MP (AP_THM FORALL_DEF `P`) (ASSUME `(∀)P`)`: right to left.
     let a = @kernel.assume_rule(q("(∀)(P:A->bool)"))
     let th1 = @kernel.eq_mp(@equal.ap_thm(forall_def(), q("P:A->bool")), a)
     let xv = q("x:A")
@@ -1307,10 +1307,10 @@ fn load_steps() -> Unit raise {
     let p = q("P:A->bool")
     let x = q("x:A")
     let th1 = rand_beta(@equal.ap_thm(exists_def(), p))
-    // `SPEC `x:A` (ASSUME `!x:A. P x ==> Q`)`: right to left.
+    // `SPEC `x:A` (ASSUME `∀x:A. P x ==> Q`)`: right to left.
     let a = @kernel.assume_rule(q("∀ x:A. P x ==> Q"))
     let th2 = spec(q("x:A"), a)
-    // `DISCH `!x. ...` (MP th2 (ASSUME `(P:A->bool) x`))`: right to left.
+    // `DISCH `∀x. ...` (MP th2 (ASSUME `(P:A->bool) x`))`: right to left.
     let m = mp(th2, @kernel.assume_rule(q("(P:A->bool) x")))
     let th3 = disch(q("∀ x:A. P x ==> Q"), m)
     // `EQ_MP (SYM th1) (GEN `Q:bool` th3)`: right to left.
