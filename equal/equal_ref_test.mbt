@@ -187,7 +187,7 @@ test "equal matches equal.ml" {
       #|ALPHA = |- (\x. x + c) = (\y. y + c)
       #|ALPHA_bad ! ALPHA
       #|ALPHA_CONV = |- (\x. x + c) = (\z. z + c)
-      #|GEN_ALPHA_CONV = |- (∀ x. x + c = c) = (∀ z. z + c = c)
+      #|GEN_ALPHA_CONV = |- (∀x. x + c = c) = (∀z. z + c = c)
       #|MK_BINOP = a = b, c' = d
       #||- a + c' = b + d
       #|THENC = |- (\x. (\y. y + x) c) c = c + c
@@ -224,8 +224,8 @@ test "equal matches equal.ml" {
       #||- b + b = c
       #|BETA_RULE = (\x. (\y. y) x) c = c
       #||- c = c
-      #|GSYM = ∀ x. x = c
-      #||- ∀ x. c = x
+      #|GSYM = ∀x. x = c
+      #||- ∀x. c = x
       #|CACHE_CONV1 = |- (\x. x + x) c = c + c
       #|CACHE_CONV2 = |- (\y. y + y) c = c + c
       #|CACHE_CONV3 = |- (\x. x + x) c = c + c
@@ -238,7 +238,6 @@ test "equal matches equal.ml" {
       #|BINOP2_CONV_order ! right
       #|COMB_CONV_genvar ! _8
       #|
-
     ),
   )
 }

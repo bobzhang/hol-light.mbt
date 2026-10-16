@@ -356,7 +356,7 @@ test "bool matches bool.ml" {
       #|Warning: inventing type variables
       #|verbose = (#∀:fun(fun('?480,bool),bool) (\x:'?480. (#?:fun(fun('?480,bool),bool) (\y:'?480. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?480,fun('?480,bool)) x:'?480) y:'?480)) #T:bool)))))
       #|Warning: inventing type variables
-      #|print = ∀ (x:?498).
+      #|print = ∀(x:?498).
       #|    exists (y:?498). (x:?498) = (y:?498) /\ (p <=> q) ==> ~r \/ false
       #|Warning: inventing type variables
       #|counter_tyvar = zz_counter:'?506
@@ -364,9 +364,6 @@ test "bool matches bool.ml" {
       #|counter_pgenvar = (GSPEC:fun(fun('?517,bool),'?507) (\GEN%PVAR%0:'?517. (#?:fun(fun('?515,bool),bool) (\x:'?515. (((SETSPEC:fun('?517,fun(bool,fun('?515,bool))) GEN%PVAR%0:'?517) #T:bool) x:'?515)))))
       #|counter_genvar = _0:bool
       #|
-
-
-
     ),
   )
 }

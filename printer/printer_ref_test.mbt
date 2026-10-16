@@ -332,7 +332,7 @@ test "printer matches printer.ml" {
       #|neg = ~ ~(p /\ q)
       #|neg_atom = ~p
       #|eq = x + y = 42
-      #|∀ = ∀ x y. x = y
+      #|∀ = ∀x y. x = y
       #|exists = ?p. p \/ ~p
       #|lambda = \x y. x + y
       #|app_lambda = (\x. x + x) 3
@@ -413,7 +413,6 @@ test "printer matches printer.ml" {
       #|long_variable_name_1 * y +
       #|x
       #|
-
     ),
   )
 }

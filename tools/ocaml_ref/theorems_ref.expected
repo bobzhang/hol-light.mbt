@@ -345,7 +345,7 @@ INTRO_disj = [\n  0 [`q`] (hq)\n\n`r`\n]
 INTRO_zero ! Garbage after intro pattern
 INTRO_garbage ! Garbage after intro pattern
 Warning: inventing type variables
-FIX_vars = [\n`∀ z. (P:?1997->?1996->A->bool) (x:?1997) (y:?1996) z`\n]
+FIX_vars = [\n`\226\136\128z. (P:?1997->?1996->A->bool) (x:?1997) (y:?1996) z`\n]
 Warning: inventing type variables
 FIX_rename = [\n`(P:?2008->A->bool) (x:?2008) a`\n]
 Warning: inventing type variables

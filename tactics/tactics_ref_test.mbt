@@ -858,7 +858,7 @@ test "tactics matches tactics.ml" {
       #|CHANGED_TAC_all ! CHANGED_TAC
       #|CHANGED_TAC_gen = [\n`x`\n]
       #|Warning: inventing type variables
-      #|REPLICATE_TAC = [\n`∀ z. x`\n]
+      #|REPLICATE_TAC = [\n`\226\136\128z. x`\n]
       #|FAIL_TAC ! boom
       #|NO_TAC ! NO_TAC
       #|FIRST_empty ! end_itlist
@@ -899,7 +899,7 @@ test "tactics matches tactics.ml" {
       #|inst_goal = \n  0 [`a`] (h)\n\n`a`\n
       #|Warning: Free variables in goal: x, y
       #|g_free = 1 subgoal (1 total)\n\n`x /\\ y ==> y`\n
-      #|g = 1 subgoal (1 total)\n\n`∀ p q. p /\\ q ==> q /\\ p`\n
+      #|g = 1 subgoal (1 total)\n\n`\226\136\128p q. p /\\ q ==> q /\\ p`\n
       #|e1 = 1 subgoal (1 total)\n\n`p /\\ q ==> q /\\ p`\n
       #|e2 = 1 subgoal (1 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q /\\ p`\n
       #|top_goal = [q:bool; p:bool] ?- ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool)
@@ -934,7 +934,6 @@ test "tactics matches tactics.ml" {
       #|counter_tyvar = zz_counter:'?878
       #|counter_genvar = _22:bool
       #|
-
     ),
   )
 }
